@@ -10,9 +10,9 @@ los otros capitulos.
 
 - Aprobado, costo y sobrecosto: los campos de la obra, con su estado
   (estado_campos) y, si es rango, su minimo y su maximo.
-- Gana o pierde: el resultado del año mas reciente publicado de la obra
-  (cuenta, renglon resultado_anual_mdp), el mismo que suma «La cuenta de
-  cada obra» (mo_pulso._resultados). Si la obra no lo publica, el renglon
+- Gana o pierde: la medida unica de la herramienta (mo_base.resultado):
+  el resultado del año mas reciente publicado, sin el apoyo del
+  presupuesto cuando se publica asi. Si la obra no lo publica, el renglon
   dice por que y a quien le toca (pendiente); si no opera, «no aplica».
 - El contador: el resultado del año entre los 31,536,000 segundos de un
   año de 365 dias, proyectado sobre el tiempo que llevas mirando. No es un
@@ -24,6 +24,7 @@ la herramienta usa portada().
 import html
 
 from presupuesto_modulos import chip
+import mo_base
 import mo_capitulos
 import mo_pulso
 from mo_sexenios import SEXENIOS, obras_de
@@ -58,24 +59,6 @@ def _sin_signo(v):
     return mdp(abs(v))
 
 
-def resultado(o, filas):
-    """Lo que dice la tabla en la columna «gana o pierde»."""
-    con = [f for f in filas if f['c'] == 'resultado_anual_mdp' and 'v' in f]
-    if con:
-        f = max(con, key=lambda x: x.get('anio') or 0)
-        return {'tipo': 'dato', 'v': f['v'], 'anio': f.get('anio'), 'e': f['e'], 'op': f.get('op') or '',
-                'nota': f.get('nota') or '', 'fu': mo_pulso._fuentes_fila(f), 'et': f['et']}
-    f = next((x for x in filas if x['c'] == 'resultado_anual_mdp'), None)
-    if f and f['e'] == 'no_aplica':
-        return {'tipo': 'no_aplica', 'txt': f.get('op') or 'No aplica.'}
-    if f and f['e'] == 'pendiente':
-        return {'tipo': 'pendiente', 'txt': f.get('resp') or ''}
-    # Sin renglon de resultado: se dice lo que la cuenta si trae sobre su
-    # operacion (el Bunker: la SSPC no publica el gasto del edificio).
-    g = next((x for x in filas if x['c'] == 'costo_operativo_anual_mdp' and x['e'] == 'pendiente'), None)
-    return {'tipo': 'pendiente', 'txt': (g.get('resp') if g else '') or 'Su cuenta no trae renglón de ganancia o pérdida.'}
-
-
 def _cifra(o, campo, fmt):
     e = (o.get('estado_campos') or {}).get(campo) or 'pendiente'
     rango = mo_pulso._rango_txt(o, campo, fmt)
@@ -93,14 +76,17 @@ def _vivo(v, clase=''):
             % (_signo(v), (' ' + clase) if clase else '', _tasa(v), '−' if v < 0 else '+'))
 
 
+BASE = {'sin_apoyo': 'antes del apoyo del presupuesto', 'ejercicio': 'resultado del ejercicio publicado'}
+
+
 def _celda_res(r, oid):
     if r['tipo'] == 'dato':
         v = r['v']
         verbo = 'Gana' if v > 0 else ('Pierde' if v < 0 else 'Sin ganancia ni pérdida')
         return ('<p class="mt-res %s"><span class="mt-res-ico" aria-hidden="true">%s</span> <b>%s %s al año</b> '
-                '<small>(%s)</small> %s</p>'
+                '<small>(%s, %s)</small> %s</p>'
                 '<p class="mt-res-vivo">Desde que abriste esta página: %s</p>'
-                % (_signo(v), '▲' if v > 0 else '▼', verbo, _sin_signo(v), r['anio'], chip(r['e']), _vivo(v)))
+                % (_signo(v), '▲' if v > 0 else '▼', verbo, _sin_signo(v), r['anio'], BASE[r['base']], chip(r['e']), _vivo(v)))
     if r['tipo'] == 'no_aplica':
         return ('<p class="mt-res mt-cero"><span class="mt-res-ico" aria-hidden="true">●</span> <b>No aplica</b> '
                 '<small>%s</small></p>' % esc(r['txt']))
@@ -114,7 +100,7 @@ def _fila_obra(o, sectores, r):
     como = ''
     if r['tipo'] == 'dato':
         como = ('<details class="mt-como"><summary>De dónde sale</summary><p>%s%s</p><p>Fuente: %s</p></details>'
-                % (esc(r['op']), (' ' + esc(r['nota'])) if r['nota'] else '', r['fu']))
+                % (esc(r['op']), (' ' + esc(r['nota'])) if r['nota'] else '', mo_pulso._fuentes_fila(r)))
     return (
         '<li class="mt-obra%s" id="mt-%s">'
         '<div class="mt-obra-cab"><span class="mt-obra-ico" aria-hidden="true">%s</span>'
@@ -138,9 +124,8 @@ def _fila_obra(o, sectores, r):
 
 def _datos(base):
     sm = base['simulador_megaobras']
-    cu = (sm.get('cuenta') or {}).get('obras') or {}
     sectores = {s['id']: s for s in sm['sectores']}
-    res = {o['id']: resultado(o, cu.get(o['id']) or []) for o in sm['obras']}
+    res = mo_base.resultados(sm)
     grupos = []
     for clave, apellido, corto, nombre, a0, a1, color in SEXENIOS:
         ob = obras_de(sm['obras'], apellido)
@@ -248,7 +233,8 @@ def construir(base, ref):
   </section>
 
   <aside class="mt-nota">
-    <p><b>Cómo leer la tabla.</b> «Gana o pierde» es el resultado del año que publica la empresa o el fondo que opera la obra, el mismo de <a href="{cuenta}">La cuenta de cada obra</a>: no descuenta lo que costó construirla. Por eso una obra puede ganar en el año y haber costado mucho más de lo aprobado. Los años no son iguales para todas ({anios}) y las cifras son nominales, sin deflactar.</p>
+    <p>{medida}</p>
+    <p><b>Cómo leer la tabla.</b> «Gana o pierde» no descuenta lo que costó construir la obra: una obra puede ganar en el año y haber costado mucho más de lo aprobado. Los años no son iguales para todas ({anios}) y las cifras son nominales, sin deflactar. Cada renglón está completo en <a href="{cuenta}">La cuenta de cada obra</a>.</p>
     <p><b>Los rescates.</b> El FOBAPROA y el FARAC son deudas que el Estado asumió, no obras: su «costo» es lo pagado y lo debido, y su crecimiento no se compara con el sobrecosto de una obra. En la tabla general su costo se suma con el de las obras solo como referencia.</p>
     <p><b>Cómo se calcula.</b> Costo del sexenio = suma del costo registrado de sus obras {chip_der}; donde una obra tiene rango, entra su punto medio. Gana o pierde al año = suma de los resultados publicados {chip_der}. Por segundo = resultado anual × 1,000,000 ÷ 31,536,000. Lo que falta está en el <a href="pendientes.html#tema-megaobras">Registro de pendientes</a>.</p>
   </aside>
@@ -257,7 +243,8 @@ def construir(base, ref):
         n_gana=len(gana), gana=_sin_signo(sum(r['v'] for r in gana)), n_pierde=len(pierde), pierde=_sin_signo(sum(r['v'] for r in pierde)),
         n_sin=len(sin), n_na=len(na), tot=mdp(tot), chip_der=chip('derivado'), anios=', '.join(str(a) for a in anios),
         controles=CONTROLES, resumen=_resumen(grupos, todos, n_obras),
-        grupos='\n    '.join(_grupo(g, sectores, res) for g in grupos), cuenta=CUENTA)
+        grupos='\n    '.join(_grupo(g, sectores, res) for g in grupos), cuenta=CUENTA,
+        medida=mo_base.medida_txt(sm))
 
 
 def cifras(base, ref):

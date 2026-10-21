@@ -20,7 +20,8 @@
   try {
     var g = JSON.parse(localStorage.getItem(CLAVE) || '{}');
     if (g.med === 'n' || g.med === 'real') est.med = g.med;
-    if (g.sec && (g.sec === 'todos' || D.sec[g.sec])) est.sec = g.sec;
+    /* Sin filtro de industria desde el 21-10-2026: el único de la
+       herramienta está en Sector e industria. */
   } catch (e) { /* sin almacenamiento: valores de fábrica */ }
   function guardar() {
     try { localStorage.setItem(CLAVE, JSON.stringify({ med: est.med, sec: est.sec })); } catch (e) { /* nada */ }

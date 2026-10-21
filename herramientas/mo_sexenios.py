@@ -230,10 +230,6 @@ def construir(base, ref):
                esc(nom), ini, fin, r['real'], 'sin obras aquí' if n == 0 else sim_mdp(r['real']),
                '' if r['npen'] else ' hidden'))
 
-    filtros = ['<button type="button" class="mx-filtro" data-sec="todos" aria-pressed="true">🌐 Todas las industrias</button>']
-    for sid, s in sectores.items():
-        filtros.append('<button type="button" class="mx-filtro" data-sec="%s" aria-pressed="false"><span aria-hidden="true">%s</span> %s</button>'
-                       % (esc(sid), esc(s.get('icono')), esc(corto_sector(s['nombre']))))
 
     # Ficha de cada sexenio (y la de todo el periodo).
     paneles = []
@@ -287,9 +283,7 @@ def construir(base, ref):
   <section class="mx-bloque" id="mxLinea" aria-labelledby="mxLinTit">
     <h2 class="mx-tit" id="mxLinTit"><span aria-hidden="true">🕰️</span> La línea del tiempo, de 1988 a 2024</h2>
     <p class="mx-txt">La altura de cada bloque es el número de obras evaluadas en ese periodo, o su costo registrado si cambias la medida. Todos arrancan en cero: pulsa «Evaluar» para verlos levantarse a su escala real.</p>
-    <div class="mx-filtros" role="group" aria-label="Industria">
-      {filtros}
-    </div>
+    <p class="mx-txt">Aquí cuentan todas las industrias. Para ver una sola, usa el filtro de <a href="herramienta-megaobras-sector.html">Obra por obra, por industria</a>: es el único de la herramienta.</p>
     <div class="mx-controles">
       <div class="mx-medida" role="group" aria-label="Qué mide la altura">
         <button type="button" class="mx-med" data-med="n" aria-pressed="true">🔢 Por número de obras</button>
@@ -343,7 +337,7 @@ def construir(base, ref):
   <script type="application/json" id="mxDatos">{datos}</script>
 </div>'''.format(
         kicker=mo_capitulos.kicker('herramienta-megaobras-sexenios.html'),
-        n=total_n, s=suma_reparto, filtros='\n      '.join(filtros), torres='\n      '.join(torres),
+        n=total_n, s=suma_reparto, torres='\n      '.join(torres),
         chips='\n      '.join('<a class="mx-chip" href="#sexenio-%s" data-sx="%s" style="--mx-c:%s">%s</a>' % (k, k, c, esc(nom))
                                for k, _, nom, _, _, _, c in SEXENIOS),
         paneles='\n    '.join(paneles), res_todos=res_html(_resumen(obras), nombres), opts=opts, nota=nota_farac, chip_d=chip('derivado'), chip_p=chip('pendiente'), datos=_json(datos))

@@ -5,8 +5,11 @@
    sumar cuando el lector recorta por industria o mandato.
    Hace cuatro cosas: recorrer cada mesa renglón por renglón (con la
    operación de cada renglón a la vista), decir de qué documento sale cada
-   número al pulsar una obra, rehacer la cuenta con el filtro y descargar
-   cada mesa en CSV. Sin el motor. Preferencias en localStorage
+   número al pulsar una obra, rehacer la cuenta en otro orden y descargar
+   cada mesa en CSV. Sin el motor. Desde el 21-10-2026 no hay filtro de
+   industria ni de mandato (el único de la herramienta está en Sector e
+   industria) y la mesa 2 usa la medida única de ganancia o pérdida
+   (res: + gana, − pierde; perd = −res). Preferencias en localStorage
    (av-mo-cero). */
 (function () {
   'use strict';
@@ -23,25 +26,24 @@
   var pendObra = {};
   D.pendObra.forEach(function (id) { pendObra[id] = true; });
   var ORDENES = {
-    perdida: function (a, b) { return b.perd - a.perd; },
+    perdida: function (a, b) {
+      /* Las que no publican su resultado o no operan, al final. */
+      if ((a.res == null) !== (b.res == null)) return a.res == null ? 1 : -1;
+      return b.perd - a.perd;
+    },
     sobrecosto: function (a, b) { return b.sob - a.sob; },
     inversion: function (a, b) { return b.real - a.real; },
     brecha: function (a, b) { return (b.real - b.presu) - (a.real - a.presu); },
     cronologia: function (a, b) { return String(a.per).localeCompare(String(b.per)); }
   };
-  var DEF = { sector: 'todos', sexenio: 'todos', orden: 'perdida', solo: false };
+  var DEF = { orden: 'perdida' };
   var est = leer();
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function leer() {
     var o = {};
     try { o = JSON.parse(localStorage.getItem(CLAVE) || '{}') || {}; } catch (e) { o = {}; }
-    return {
-      sector: D.sectores[o.sector] ? o.sector : DEF.sector,
-      sexenio: D.sexenios.indexOf(o.sexenio) >= 0 ? o.sexenio : DEF.sexenio,
-      orden: ORDENES[o.orden] ? o.orden : DEF.orden,
-      solo: o.solo === true
-    };
+    return { orden: ORDENES[o.orden] ? o.orden : DEF.orden };
   }
   function guardar() { try { localStorage.setItem(CLAVE, JSON.stringify(est)); } catch (e) { /* sin almacenamiento */ } }
 
@@ -72,14 +74,7 @@
 
   /* ---------- Las obras que entran ---------- */
   function filtradas() {
-    var l = D.obras.slice();
-    if (est.sector !== 'todos') l = l.filter(function (o) { return o.s === est.sector; });
-    if (est.sexenio !== 'todos') {
-      var k = est.sexenio.toLowerCase();
-      l = l.filter(function (o) { return o.p.toLowerCase().indexOf(k) >= 0; });
-    }
-    if (est.solo) l = l.filter(function (o) { return !pendDoc(o); });
-    return l.sort(ORDENES[est.orden]);
+    return D.obras.slice().sort(ORDENES[est.orden]);
   }
   function ag(l) {
     var real = l.reduce(function (a, o) { return a + o.real; }, 0);
@@ -113,25 +108,23 @@
     }).join('\n');
   }
 
+  function celdaRes(o) {
+    if (o.pe === 'pendiente') return 'no lo publica ' + chip('pendiente', 'cuenta-' + o.id);
+    if (o.pe === 'no_aplica') return 'no opera';
+    return '<span class="' + (o.res > 0 ? 'mc-gana' : 'mc-pierde') + '">' + sg(o.res) + fnum(o.res) + '</span> ' + chip(o.pe);
+  }
+
   function filas2(l) {
     var acum = 0;
     pasos[2] = [{ acum: 0 }];
     return l.map(function (o, k) {
-      var i = k + 1, antes = acum, ing, costo, perd;
-      acum += o.perd;
+      var i = k + 1, antes = acum;
+      acum += o.res || 0;
       pasos[2].push({ id: o.id, antes: antes, acum: acum });
-      if (o.pe === 'pendiente') {
-        ing = costo = '—';
-        perd = chip('pendiente', 'reloj-megaobras');
-      } else {
-        ing = o.ing == null ? 'no aplica' : fnum(o.ing) + ' ' + chip('oficial');
-        costo = fnum(o.costo) + ' ' + chip('oficial');
-        perd = o.perd ? fnum(o.perd) + ' ' + chip(o.pe) : '0 <small>sin déficit</small> ' + chip('derivado');
-      }
-      return '<tr class="mc-fila' + (o.pe === 'pendiente' ? ' mc-nula' : '') + '" data-i="' + i + '" data-id="' + esc(o.id) + '"><td class="mc-n" data-et="#">' + i + '</td><td class="mc-nom">' + nom(o, 2) + '</td>' +
-        '<td class="mc-num" data-et="Ingresos del año (mdp)" data-k="ing">' + ing + '</td>' +
-        '<td class="mc-num" data-et="Costo de operar (mdp)" data-k="costo">' + costo + '</td>' +
-        '<td class="mc-num mc-dif" data-et="Pérdida anual" data-k="perd">' + perd + '</td>' +
+      var nula = o.pe === 'pendiente' || o.pe === 'no_aplica';
+      return '<tr class="mc-fila' + (nula ? ' mc-nula' : '') + '" data-i="' + i + '" data-id="' + esc(o.id) + '"><td class="mc-n" data-et="#">' + i + '</td><td class="mc-nom">' + nom(o, 2) + '</td>' +
+        '<td class="mc-num" data-et="Año del dato" data-k="anio">' + (o.anio || '—') + '</td>' +
+        '<td class="mc-num mc-dif" data-et="Gana o pierde (mdp)" data-k="res">' + celdaRes(o) + '</td>' +
         '<td class="mc-num mc-acum" data-et="Acumulado" data-k="acum">' + fnum(Math.round(acum * 10) / 10) + '</td></tr>';
     }).join('\n');
   }
@@ -143,7 +136,7 @@
         '<td class="mc-op" data-et="Operación">resultado de la mesa 1</td><td class="mc-num mc-acum" data-et="Resultado">' + smdp(a.brecha) + '</td></tr>\n' +
       '<tr class="mc-fila mc-div" data-i="2"><td class="mc-n" data-et="Paso">2</td><td class="mc-nom">Entre cada contribuyente con RFC activo</td>' +
         '<td class="mc-op" data-et="Operación">' + fnum(Math.round(a.brecha * 10) / 10) + ' mdp × 1,000,000 ÷ ' + fnum(pad) + '</td><td class="mc-num mc-acum" data-et="Resultado">' + pesos(bc) + ' <small>por contribuyente</small></td></tr>\n' +
-      '<tr class="mc-fila" data-i="3"><td class="mc-n" data-et="Paso">3</td><td class="mc-nom">Pérdida operativa documentada de un año <small>(flujo de 2024)</small></td>' +
+      '<tr class="mc-fila" data-i="3"><td class="mc-n" data-et="Paso">3</td><td class="mc-nom">Pérdida neta de un año <small>(cada obra con su año más reciente publicado)</small></td>' +
         '<td class="mc-op" data-et="Operación">resultado de la mesa 2</td><td class="mc-num mc-acum" data-et="Resultado">' + smdp(a.anual) + '</td></tr>\n' +
       '<tr class="mc-fila mc-div" data-i="4"><td class="mc-n" data-et="Paso">4</td><td class="mc-nom">Entre cada contribuyente con RFC activo</td>' +
         '<td class="mc-op" data-et="Operación">' + fnum(Math.round(a.anual * 10) / 10) + ' mdp × 1,000,000 ÷ ' + fnum(pad) + '</td><td class="mc-num mc-acum" data-et="Resultado">' + pesos(pc) + ' <small>por contribuyente, cada año</small></td></tr>';
@@ -159,24 +152,19 @@
       smdp(a.brecha) + '</strong>, un <strong>' + sg(a.sob) + a.sob.toFixed(1) + '%</strong> sobre lo autorizado ' + chip('derivado') + '.';
     if (p.length) {
       t += ' <span class="mc-ojo">Ojo: <strong>' + smdp(dp) + '</strong> de esa diferencia salen de ' + p.length + (p.length === 1 ? ' obra' : ' obras') +
-        ' con alguna cifra pendiente (' + esc(p.map(function (o) { return corto(o.n); }).join(', ')) + '). Pulsa «Solo lo documentado» para rehacer la cuenta sin ellas.</span>';
+        ' con alguna cifra pendiente (' + esc(p.map(function (o) { return corto(o.n); }).join(', ')) + '). Cuentan en el inventario, no como dato auditado.</span>';
     } else {
       t += ' <span class="mc-ojo mc-ojo-ok">Todas las cifras de esta cuenta tienen documento.</span>';
     }
     return t;
   }
 
-  function vacio(t, cols, msg) {
-    t.tBodies[0].innerHTML = '<tr class="mc-vacia"><td colspan="' + cols + '">' + msg + '</td></tr>';
-  }
-
   function render() {
     vista = filtradas();
     A = ag(vista);
-    /* La mesa 1 mide las obras; los rescates van aparte salvo que se elija
-       su industria (decisión del autor, 17-10-2026). La mesa 2 sí suma el
-       rescate bancario, como el contador del pulso. */
-    var vista1 = est.sector === 'rescates' ? vista : vista.filter(function (o) { return !o.resc; });
+    /* La mesa 1 mide las obras; los rescates van aparte (decisión del
+       autor, 17-10-2026). La mesa 2 sí suma los rescates. */
+    var vista1 = vista.filter(function (o) { return !o.resc; });
     var A1 = ag(vista1);
     var A3 = { brecha: A1.brecha, anual: A.anual };
     var t1 = $('mcT1'), t2 = $('mcT2'), t3 = $('mcT3');
@@ -185,32 +173,14 @@
     var cero3 = t3.tBodies[0].rows[0] && t3.tBodies[0].rows[0].classList.contains('mc-cero') ? t3.tBodies[0].rows[0].outerHTML : '';
     render.ceros = render.ceros || [cero1, cero2, cero3];
     var c = render.ceros;
-    var n = A.n;
-    $('mcCuenta').textContent = n === 0 ? 'Ninguna obra cumple esa combinación: cambia la industria o el mandato.'
-      : (n === D.obras.length ? 'Entran las ' + n + ' obras.' : 'Entran ' + n + ' de ' + D.obras.length + (n === 1 ? ' obra.' : ' obras.')) +
-        (est.sector !== 'rescates' && vista1.length < n ? ' Los rescates entran solo en la mesa 2, la pérdida de un año.' : '') +
-        (est.solo ? ' Solo las que tienen documento en su presupuesto y en su costo; por eso también salen de la mesa 2 las obras cuyo costo de construcción no lo tiene, aunque su operación sí.' : '');
-    if (n === 0) {
-      [t1, t2, t3].forEach(function (t) { vacio(t, t === t3 ? 4 : 6, 'Sin obras en el filtro no hay cuenta que hacer. Elige otra combinación de industria y mandato.'); });
-      pasos = { 1: [{ acum: 0 }], 2: [{ acum: 0 }], 3: [{ v: '$0' }] };
-      $('mcPie1').hidden = $('mcPie2').hidden = true;
-      $('mcCierre1').innerHTML = '';
-      $('mcCadena').innerHTML = '';
-      $('mcBolsillo').innerHTML = '';
-      $('mcSeg').textContent = '$0.00';
-      [1, 2, 3].forEach(function (m) { st[m] = 0; pintar(m); });
-      return;
-    }
-    $('mcPie1').hidden = $('mcPie2').hidden = false;
     t1.tBodies[0].innerHTML = c[0] + '\n' + filas1(vista1);
-    $('mcPie1').innerHTML = '<tr><td></td><td class="mc-nom">Total del filtro</td><td class="mc-num" data-et="Aprobado (mdp)">' + fnum(A1.presu) +
+    $('mcPie1').innerHTML = '<tr><td></td><td class="mc-nom">Total de las obras</td><td class="mc-num" data-et="Aprobado (mdp)">' + fnum(A1.presu) +
       '</td><td class="mc-num" data-et="Erogado (mdp)">' + fnum(A1.real) + '</td><td class="mc-num mc-dif" data-et="Diferencia">' + sg(A1.brecha) + fnum(A1.brecha) +
       '</td><td class="mc-num mc-acum" data-et="Acumulado">' + fnum(A1.brecha) + '</td></tr>';
-    $('mcCierre1').innerHTML = vista1.length ? cierre1(vista1, A1)
-      : 'En este filtro solo hay rescates, que no entran en esta mesa: son deudas asumidas, no obras. Elige la industria «Rescates» para ver su cuenta.';
+    $('mcCierre1').innerHTML = cierre1(vista1, A1);
     t2.tBodies[0].innerHTML = c[1] + '\n' + filas2(vista);
-    var an = fnum(Math.round(A.anual * 10) / 10);
-    $('mcPie2').innerHTML = '<tr><td></td><td class="mc-nom">Pérdida anual del filtro</td><td></td><td></td><td class="mc-num mc-dif" data-et="Pérdida anual">' + an +
+    var an = fnum(Math.round(-A.anual * 10) / 10);
+    $('mcPie2').innerHTML = '<tr><td></td><td class="mc-nom">Ganancia o pérdida neta del año</td><td></td><td class="mc-num mc-dif" data-et="Gana o pierde (mdp)">' + an +
       '</td><td class="mc-num mc-acum" data-et="Acumulado">' + an + '</td></tr>';
     $('mcCadena').innerHTML = CADENA.map(function (x) {
       var v = A.anual / x[1];
@@ -225,8 +195,8 @@
         '<span class="mc-bol-sub">acumulado de 2000 a 2024 (inversión de capital en exceso) ' + chip('derivado') + '</span></div>' +
       '<div class="mc-bol mc-bol-alto"><span class="mc-bol-et">Conciliación temporal de cuentas</span><b class="mc-bol-v">No se suman</b>' +
         '<span class="mc-bol-sub">un sobrecosto de varias décadas no se suma a un flujo de un año</span></div>' +
-      '<div class="mc-bol"><span class="mc-bol-et">Pérdida operativa anual por contribuyente</span><b class="mc-bol-v">' + pesos(A.anual * 1000000 / pad) + '</b>' +
-        '<span class="mc-bol-sub">cada año (gasto corriente documentado de 2024) ' + chip('derivado') + '</span></div>';
+      '<div class="mc-bol"><span class="mc-bol-et">Pérdida neta anual por contribuyente</span><b class="mc-bol-v">' + pesos(A.anual * 1000000 / pad) + '</b>' +
+        '<span class="mc-bol-sub">cada año (el resultado publicado más reciente de cada obra) ' + chip('derivado') + '</span></div>';
     [1, 2, 3].forEach(function (m) { st[m] = total(m); pintar(m); });
     vivoReinicia();
   }
@@ -276,7 +246,7 @@
 
   function finTexto(m) {
     if (m === 1) return '<b>Cuenta completa.</b> La última celda del acumulado, <b>' + fnum(A.brecha) + ' mdp</b>, es el sobrecosto del conjunto: erogado total (' + fnum(A.real) + ') menos aprobado total (' + fnum(A.presu) + '). Pulsa una obra para ver su documento.';
-    if (m === 2) return '<b>Cuenta completa.</b> Solo entran las obras con documento: la pérdida documentada de un año es de <b>' + fnum(Math.round(A.anual * 10) / 10) + ' mdp</b>. Abajo, la misma cifra partida en el tiempo.';
+    if (m === 2) return '<b>Cuenta completa.</b> Solo entran las obras que publican su resultado: lo que pierden menos lo que ganan da una pérdida neta de <b>' + fnum(Math.round(A.anual * 10) / 10) + ' mdp</b> al año. Abajo, la misma cifra partida en el tiempo.';
     return '<b>Cuenta completa.</b> Dos divisiones separadas, con el mismo divisor oficial. No se suman: una es un saldo de décadas y la otra el flujo de un año.';
   }
 
@@ -295,7 +265,7 @@
     var t = $('mcT' + m);
     limpiaFuentes(t);
     if (m === 1) { marca(celda(t, i, 'presu'), 'mc-fuente'); marca(celda(t, i, 'real'), 'mc-fuente'); marca(celda(t, i, 'dif'), 'mc-fuente'); marca(celda(t, i - 1), 'mc-fuente'); marca(celda(t, i, 'acum'), 'mc-res'); }
-    else if (m === 2) { marca(celda(t, i, 'ing'), 'mc-fuente'); marca(celda(t, i, 'costo'), 'mc-fuente'); marca(celda(t, i, 'perd'), 'mc-fuente'); marca(celda(t, i - 1), 'mc-fuente'); marca(celda(t, i, 'acum'), 'mc-res'); }
+    else if (m === 2) { marca(celda(t, i, 'anio'), 'mc-fuente'); marca(celda(t, i, 'res'), 'mc-fuente'); marca(celda(t, i - 1), 'mc-fuente'); marca(celda(t, i, 'acum'), 'mc-res'); }
     else {
       if (i === 2 || i === 4) marca(celda(t, i - 1), 'mc-fuente');
       marca(celda(t, i), 'mc-res');
@@ -322,7 +292,7 @@
       var tx = {
         1: 'Se toma el resultado de la mesa 1: <b>' + smdp(a.brecha) + '</b> pagados de más sobre lo aprobado. Es un saldo: se acumuló a lo largo de décadas.',
         2: 'Ese saldo, en pesos (' + fnum(Math.round(a.brecha * 10) / 10) + ' mdp × 1,000,000), entre <b>' + pad + '</b> contribuyentes con RFC activo = <b>' + pasos[3][2].v + '</b> por contribuyente ' + chip('derivado') + '.',
-        3: 'Aparte, el resultado de la mesa 2: <b>' + smdp(a.anual) + '</b> de pérdida operativa documentada en un año. Es un flujo: se repite cada año mientras las obras operen igual.',
+        3: 'Aparte, el resultado de la mesa 2: <b>' + smdp(a.anual) + '</b> de pérdida neta en un año. Es un flujo: se repite cada año mientras las obras operen igual.',
         4: 'Ese flujo, en pesos, entre los mismos <b>' + pad + '</b> contribuyentes = <b>' + pasos[3][4].v + '</b> por contribuyente, cada año ' + chip('derivado') + '.'
       };
       box.innerHTML = '<b>Paso ' + i + '.</b> ' + tx[i];
@@ -341,12 +311,10 @@
   function op2(o, p) {
     var acum = ' El acumulado queda en <b>' + fnum(Math.round(p.acum * 10) / 10) + ' mdp</b>.';
     var doc = o.op && o.op.u ? ' Documento: <a href="' + esc(o.op.u) + '" target="_blank" rel="noopener noreferrer">' + esc(o.op.d) + ' ↗</a>.' : '';
-    if (o.pe === 'pendiente') return chip('pendiente', 'reloj-megaobras') + ' Ningún documento oficial cotejado dice cuánto cuesta operar esta obra ni cuánto ingresa. No se estima: no entra en la suma.' + acum;
-    if (o.r34) return 'Lo que el Fondo FOBAPROA pierde en ' + o.anio + ' antes del apoyo del presupuesto: su déficit (' + fnum(o.deficit) + ' mdp) ' + chip('oficial') +
-      ' más el Ramo 34 que recibió (' + fnum(o.r34) + ' mdp) ' + chip('oficial') + ' = <b>' + fnum(o.costo) + ' mdp</b> ' + chip('derivado') + '. El Ramo 34 solo es el apoyo, no la pérdida.' + acum + doc;
-    if (!o.perd) return 'Ingresos por sus servicios ' + fnum(o.ing) + ' − gasto total ' + fnum(o.costo) + ' = ' + fnum(Math.round((o.ing - o.costo) * 10) / 10) + ' mdp a favor: <b>no tuvo déficit</b> antes de transferencias en ' + o.anio + ', así que entra con 0 ' + chip('derivado') + '.' + acum + doc;
-    return 'Gasto total ' + fnum(o.costo) + ' − ingresos por sus servicios ' + fnum(o.ing) + ' = <b>' + fnum(o.perd) + ' mdp</b> de pérdida ' + chip('derivado') +
-      '. No cuenta las transferencias federales (' + fnum(o.tr) + ' mdp) ni otros ingresos (' + fnum(o.otros) + ' mdp); con ellas cerró ' + o.anio + ' con un resultado contable de ' + fnum(o.resul) + ' mdp.' + acum + doc;
+    if (o.pe === 'pendiente') return chip('pendiente', 'cuenta-' + o.id) + ' No publica su ganancia o pérdida del año: ' + esc(o.por) + ' No se estima: no entra en la suma.' + acum;
+    if (o.pe === 'no_aplica') return 'No aplica: ' + esc(o.por) + ' No entra en la suma.' + acum;
+    return (o.res > 0 ? '<b>Gana ' : '<b>Pierde ') + fnum(Math.abs(o.res)) + ' mdp</b> en ' + o.anio + ' ' + chip(o.pe) + ', ' +
+      (o.base === 'sin_apoyo' ? 'antes del apoyo del presupuesto' : 'resultado del ejercicio publicado') + '. ' + esc(o.opx) + acum + doc;
   }
 
   /* La lupa: todo lo que se sabe de una obra, con su documento. */
@@ -410,10 +378,7 @@
     a.href = url; a.download = nombre; document.body.appendChild(a); a.click();
     setTimeout(function () { URL.revokeObjectURL(url); a.remove(); }, 500);
   }
-  function filtroTxt() {
-    return 'Industria: ' + (est.sector === 'todos' ? 'todas' : D.sectores[est.sector].n) + '; mandato: ' + (est.sexenio === 'todos' ? 'todos' : est.sexenio) +
-      (est.solo ? '; solo lo documentado' : '');
-  }
+  function filtroTxt() { return 'las ' + D.obras.length + ' obras; orden: ' + est.orden; }
   function descarga(k) {
     var pie = ['Fuente', 'Auditavisión, De cero al resultado (herramienta-megaobras-cero.html), con AUDIT_DB.simulador_megaobras; ' + filtroTxt()];
     var e = function (o, c) { return (o.ec || {})[c] || 'pendiente'; };
@@ -424,19 +389,18 @@
         .concat([['', 'Total del filtro', Math.round(A.presu * 10) / 10, 'derivado', Math.round(A.real * 10) / 10, 'derivado', Math.round(A.brecha * 10) / 10, Math.round(A.brecha * 10) / 10], pie]));
     } else if (k === '2') {
       var ac = 0;
-      csv('mesa-2-perdida-de-un-ano.csv', [['#', 'Obra', 'Ingresos del año (mdp)', 'Costo de operar (mdp)', 'Pérdida anual (mdp)', 'Estado pérdida', 'Acumulado (mdp)', 'Documento']]
+      csv('mesa-2-gana-o-pierde-en-un-ano.csv', [['#', 'Obra', 'Año del dato', 'Gana (+) o pierde (−) (mdp)', 'Estado', 'Acumulado (mdp)', 'Documento o por qué falta']]
         .concat(vista.map(function (o, i) {
-          ac += o.perd;
-          var pe = o.pe === 'pendiente';
-          return [i + 1, o.n, pe ? '' : (o.ing == null ? 'no aplica' : o.ing), pe ? '' : o.costo, pe ? '' : o.perd, o.pe, Math.round(ac * 10) / 10, o.op ? o.op.d + ' ' + o.op.u : ''];
+          ac += o.res || 0;
+          return [i + 1, o.n, o.anio || '', o.res == null ? '' : o.res, o.pe, Math.round(ac * 10) / 10, o.op ? o.op.d + ' ' + o.op.u : (o.por || '')];
         }))
-        .concat([['', 'Pérdida anual del filtro', '', '', Math.round(A.anual * 10) / 10, 'derivado', Math.round(A.anual * 10) / 10, ''], pie]));
+        .concat([['', 'Ganancia o pérdida neta del año', '', Math.round(-A.anual * 10) / 10, 'derivado', Math.round(-A.anual * 10) / 10, ''], pie]));
     } else if (k === '3') {
       var pad = D.padron.n;
       csv('mesa-3-por-contribuyente.csv', [['Paso', 'Concepto', 'Operación', 'Resultado', 'Estado'],
         [1, 'Pesos pagados de más sobre lo aprobado (mdp)', 'resultado de la mesa 1', Math.round(A.brecha * 10) / 10, 'derivado'],
         [2, 'Por contribuyente con RFC activo (pesos)', 'mesa 1 × 1,000,000 ÷ ' + pad, Math.round(A.brecha * 1000000 / pad), 'derivado'],
-        [3, 'Pérdida operativa documentada de un año (mdp)', 'resultado de la mesa 2', Math.round(A.anual * 10) / 10, 'derivado'],
+        [3, 'Pérdida neta de un año (mdp)', 'resultado de la mesa 2', Math.round(A.anual * 10) / 10, 'derivado'],
         [4, 'Por contribuyente con RFC activo, cada año (pesos)', 'mesa 2 × 1,000,000 ÷ ' + pad, Math.round(A.anual * 1000000 / pad), 'derivado'],
         ['Divisor', D.padron.d, D.padron.u, pad, 'oficial'], pie]);
     } else {
@@ -471,18 +435,10 @@
   });
 
   /* ---------- Controles ---------- */
-  var selS = $('mcSector'), selX = $('mcSexenio'), selO = $('mcOrden');
-  function sincroniza() {
-    selS.value = est.sector; selX.value = est.sexenio; selO.value = est.orden;
-    $('mcTodas').setAttribute('aria-pressed', est.solo ? 'false' : 'true');
-    $('mcSolo').setAttribute('aria-pressed', est.solo ? 'true' : 'false');
-  }
+  var selO = $('mcOrden');
+  function sincroniza() { selO.value = est.orden; }
   function cambia() { [1, 2, 3].forEach(para); guardar(); sincroniza(); render(); }
-  selS.addEventListener('change', function () { est.sector = selS.value; cambia(); });
-  selX.addEventListener('change', function () { est.sexenio = selX.value; cambia(); });
   selO.addEventListener('change', function () { est.orden = selO.value; cambia(); });
-  $('mcTodas').addEventListener('click', function () { est.solo = false; cambia(); });
-  $('mcSolo').addEventListener('click', function () { est.solo = true; cambia(); });
 
   raiz.addEventListener('click', function (ev) {
     var b = ev.target.closest ? ev.target.closest('button') : null;
@@ -491,11 +447,6 @@
     if (b.classList.contains('mc-lupa')) { lupa(b.getAttribute('data-id'), m); return; }
     if (b.hasAttribute('data-csv')) { descarga(b.getAttribute('data-csv')); return; }
     if (b.hasAttribute('data-cerrar')) { var x = $('mcExpinv'); x.innerHTML = ''; x.classList.remove('mc-exp-on'); [].forEach.call(raiz.querySelectorAll('.mc-t-sec tr.mc-sel'), function (r) { r.classList.remove('mc-sel'); }); return; }
-    if (b.classList.contains('mc-sec-ver')) {
-      est.sector = b.getAttribute('data-sector'); est.sexenio = 'todos'; cambia();
-      $('mcMesa1').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-      return;
-    }
     var acc = b.getAttribute('data-acc');
     if (!acc || !m) return;
     m = Number(m);
@@ -511,10 +462,10 @@
     setTimeout(function () { var b = raiz.querySelector('.mc-b[data-acc="sig"][data-mesa="1"]'); if (b) b.focus({ preventScroll: true }); }, reduce ? 0 : 450);
   });
 
-  /* Arranque: si el lector dejó un filtro, se rehace la cuenta; si no, se
+  /* Arranque: si el lector dejó otro orden, se rehace la cuenta; si no, se
      leen los pasos de lo que ya escribió Python y se deja la cuenta completa. */
   sincroniza();
-  if (est.sector !== DEF.sector || est.sexenio !== DEF.sexenio || est.orden !== DEF.orden || est.solo !== DEF.solo) render();
+  if (est.orden !== DEF.orden) render();
   else { leerPasos(); [1, 2, 3].forEach(function (m) { st[m] = total(m); pintar(m); }); }
   vivoArranca();
 })();

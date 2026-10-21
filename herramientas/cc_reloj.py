@@ -71,56 +71,40 @@ def sim_mdp(n):
 
 
 def megaobras(base):
-    """Replica de megaobrasOficialBase() del motor: en el auditor el reloj
-    de las megaobras deja de ser la suma sin documento (pendiente) y pasa a
-    ser lo documentado: el deficit antes de transferencias de las empresas
-    con estado de actividades oficial mas lo que el Fondo FOBAPROA pierde
-    antes del apoyo del presupuesto (deficit + Ramo 34 que recibio; decision
-    del autor, 17-10-2026: el Ramo 34 solo es el apoyo, no la perdida).
-    Las obras sin documento no entran, no se suponen cero en el texto y
-    conservan su ficha del Registro (reloj-megaobras)."""
+    """El reloj de las megaobras con la medida unica de Inversion y
+    Megaobras (mo_base.balance; pedido del autor, 21-10-2026): la perdida
+    neta del año de las obras que publican su resultado, cada una con su
+    año mas reciente y antes del apoyo del presupuesto cuando se publica
+    asi; las ganancias restan. Antes era la de megaobrasOficialBase() del
+    motor (Tren Maya, AIFA en cero y el FOBAPROA de 2024: 87,461.9). Las
+    obras sin resultado no entran, no se suponen cero y conservan su ficha
+    del Registro (reloj-megaobras)."""
+    import mo_base
     sm = base.get('simulador_megaobras') or {}
-    of = sm.get('operacion_oficial') or {}
-    ob = of.get('obras') or {}
-    if not ob:
+    if not sm.get('obras'):
         return None
-    nombres = {o['id']: o['nombre'] for o in sm.get('obras') or []}
-    total = len(sm.get('obras') or [])
-    vfu = ((sm.get('verificacion') or {}).get('fuentes') or {})
-    empresas, partes, urls = 0.0, [], []
-    fobaproa, fb = 0.0, {}
-    for oid, d in ob.items():
-        if oid == 'fobaproa':
-            fb = d
-            fobaproa = -d['resultado_sin_transferencias']
-            continue
-        res = d.get('resultado_sin_transferencias')
-        perd = -res if isinstance(res, (int, float)) and res < 0 else 0
-        empresas += perd
-        partes.append('%s %s' % (nombres.get(oid, oid), ('$' + format(perd, ',.1f') + ' mdp') if perd else 'sin déficit'))
-        f = (of.get('fuentes') or {}).get(d.get('fuente')) or {}
-        if f.get('url'):
-            urls.append(f['url'])
-    anual = round(empresas + fobaproa, 1)
-    doc = len(ob)
-    cp = vfu.get('cp') or {}
+    res = mo_base.resultados(sm)
+    b = mo_base.balance(sm)
+    nombres = {o['id']: o['nombre'].split(' (')[0] for o in sm['obras']}
+    total = len(sm['obras'])
+    cp = ((sm.get('verificacion') or {}).get('fuentes') or {}).get('cp') or {}
+    partes = ['%s %s $%s mdp (%s)' % (nombres[k], 'gana' if r['v'] > 0 else 'pierde', format(abs(r['v']), ',.1f'), r['anio'])
+              for k, r in sorted(res.items(), key=lambda x: x[1].get('v') or 0) if r['tipo'] == 'dato']
+    anual = round(-b['neto'], 1)
     return {
-        'nombre': 'Pérdida anual documentada de las megaobras y del rescate bancario',
+        'nombre': 'Pérdida neta del año de las megaobras',
         'anual': anual, 'estado': 'derivado',
-        'fuente': ('Estados de actividades de 2024 en la Cuenta Pública (Tomo VII) y estados financieros dictaminados del IPAB '
-                   '(Fondo FOBAPROA, 2024). Cubre %d de los %d expedientes.' % (doc, total)),
-        'url': cp.get('url') or (urls[0] if urls else ''),
-        'op': ('Déficit antes de transferencias de las empresas con estado de actividades oficial (%s; suma $%s mdp) '
-               'más lo que el Fondo FOBAPROA pierde antes del apoyo del presupuesto: déficit de 2024 ($%s mdp) más el Ramo 34 '
-               'que recibió ese año ($%s mdp) = $%s mdp.'
-               % ('; '.join(partes), format(empresas, ',.1f'), format(-fb.get('deficit_ejercicio', 0), ',.1f'),
-                  format(fb.get('ramo34_ejercido', 0), ',.1f'), format(fobaproa, ',.1f'))),
-        'que': ('Lo que cuesta cada año mantener andando obras que ingresan menos de lo que gastan, más lo que el rescate '
-                'bancario pierde cada año antes de que el presupuesto lo cubra. No es el sobrecosto de construirlas: es el déficit de tenerlas abiertas.'),
+        'fuente': ('El resultado del año más reciente que publica cada obra (%s): estados financieros en la Cuenta Pública, '
+                   'del IPAB y de Pemex, e informes de la ASF. Cubre %d de los %d expedientes. Es la misma cifra de Inversión y Megaobras.'
+                   % (', '.join(str(a) for a in b['anios']), b['n_dato'], total)),
+        'url': cp.get('url') or '',
+        'op': ('Lo que pierden menos lo que ganan: %s. Pierden $%s mdp y ganan $%s mdp: pérdida neta de $%s mdp.'
+               % ('; '.join(partes), format(-b['pierde'], ',.1f'), format(b['gana'], ',.1f'), format(anual, ',.1f'))),
+        'que': ('Lo que pierden cada año, antes del apoyo del presupuesto, las megaobras y los rescates que publican su resultado, '
+                'menos lo que ganan las que operan a favor. No es el sobrecosto de construirlas: es lo que cuesta tenerlas abiertas.'),
         'pend': 'reloj-megaobras',
-        'motivo': ('Las otras %d obras no entran en este reloj: no hay un estado de actividades oficial de su operación, '
-                   'y las dependencias que las operan (Sedena, Pemex, Fonatur) no han transparentado obra por obra su costo '
-                   'de operación ni sus ingresos. No se suponen en cero: siguen pendientes.' % (total - doc)),
+        'motivo': ('Las otras %d obras no entran en este reloj: %d no publican su resultado del año (quien las opera no lo ha '
+                   'transparentado obra por obra) y %d no operan. No se suponen en cero.' % (total - b['n_dato'], b['n_pend'], b['n_na'])),
     }
 
 

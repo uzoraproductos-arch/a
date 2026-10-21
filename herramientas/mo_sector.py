@@ -33,6 +33,7 @@ import json
 import math
 
 from presupuesto_modulos import chip
+import mo_base
 import mo_capitulos
 from mo_base import nota_base
 
@@ -115,8 +116,13 @@ def obras_oficiales(base):
     of = sm.get('operacion_oficial') or {}
     ver_obras = (sm.get('verificacion') or {}).get('obras') or {}
     obras = copy.deepcopy(sm['obras'])
+    # La medida unica de ganancia o perdida (mo_base.resultado, 21-10-2026).
+    medida = mo_base.resultados(sm)
+    cu = (sm.get('cuenta') or {}).get('obras') or {}
     for o in obras:
         d = (of.get('obras') or {}).get(o['id'])
+        r = medida[o['id']]
+        o['res'] = r
         ver = ver_obras.get(o['id'])
         o['estado_campos'] = dict(o.get('estado_campos') or {})
         ec = o['estado_campos']
@@ -129,31 +135,36 @@ def obras_oficiales(base):
         if d and o['id'] == 'fobaproa':
             # Decision del autor (17-10-2026): la perdida antes del apoyo del
             # presupuesto (deficit del Fondo FOBAPROA + Ramo 34 que recibio).
-            perd = -d['resultado_sin_transferencias']
+            # Desde el 21-10-2026, con el año de la medida unica (2025):
+            # deficit del ejercicio mas el Ramo 34 que recibio ese año.
+            perd = -r['v']
+            filas = cu.get(o['id']) or []
+            def_r = next(f for f in filas if f['c'] == 'resultado_anual_mdp' and f.get('anio') == r['anio'])
+            r34 = next(f for f in filas if f['c'] == 'transferencias_ramo34_paab_anuales_mdp' and f.get('anio') == r['anio'])
             o['ingresos_anuales_mdp'] = 0
             o['costo_operativo_anual_mdp'] = perd
             o['perdida_anual_mdp'] = perd
-            ec['perdida_anual_mdp'] = 'derivado'
+            ec['perdida_anual_mdp'] = r['e']
             ec['desglose'] = 'oficial'
-            o['desglose_titulo'] = 'De qué está hecha su pérdida de %s, antes del apoyo del presupuesto' % d['anio']
+            o['desglose_titulo'] = 'De qué está hecha su pérdida de %s, antes del apoyo del presupuesto' % r['anio']
             o['desglose_costos_operacion'] = [
-                {'rubro': 'Déficit del Fondo FOBAPROA en %s, después de las transferencias (IPAB, estados financieros dictaminados)' % d['anio'],
-                 'monto_anual_mdp': -d['deficit_ejercicio'], 'icono': '📉'},
-                {'rubro': 'Ramo 34 que recibió ese año, apoyo a ahorradores y deudores de la banca', 'monto_anual_mdp': d['ramo34_ejercido'], 'icono': '🏛️'}]
+                {'rubro': 'Déficit del Fondo FOBAPROA en %s, después de las transferencias (IPAB, estados financieros dictaminados)' % r['anio'],
+                 'monto_anual_mdp': -def_r['v'], 'icono': '📉'},
+                {'rubro': 'Ramo 34 que recibió ese año, apoyo a ahorradores y deudores de la banca', 'monto_anual_mdp': r34['v'], 'icono': '🏛️'}]
             o['proy_titulo'] = 'Lo que dicen los documentos: una deuda que sigue viva'
             o['proyeccion_resumen'] = (
                 'Al 31 de diciembre de 2025 el IPAB debía %s en bonos (%s a corto plazo y %s a largo), según sus estados financieros. '
                 'Del Ramo 34 salieron %s en %s y %s de 2014 a 2025 (suma de la Cuenta Pública). '
                 'Cuánto se pagó de 1998 a 2013 y hasta qué año se pagará siguen pendientes de documento.'
                 % (mdp1(d['saldo_bonos_2025']), mdp1(d['saldo_bonos_corto']), mdp1(d['saldo_bonos_largo']),
-                   mdp1(d['ramo34_ejercido']), d['anio'], mdp1(d['ramo34_2014_2025'])))
+                   mdp1(r34['v']), r['anio'], mdp1(d['ramo34_2014_2025'])))
             o['fuente_operacion'] = 'cp'
         elif d:
             res = d['resultado_sin_transferencias']
             o['ingresos_anuales_mdp'] = d['ingresos_gestion']
             o['costo_operativo_anual_mdp'] = d['gastos_totales']
-            o['perdida_anual_mdp'] = -res if res < 0 else 0
-            ec['perdida_anual_mdp'] = 'derivado'
+            o['perdida_anual_mdp'] = -r['v']
+            ec['perdida_anual_mdp'] = r['e']
             ec['desglose'] = 'oficial'
             o['desglose_costos_operacion'] = [{'rubro': '%s (%s)' % (g['rubro'], d['anio']), 'monto_anual_mdp': g['mdp'], 'icono': '📄'}
                                               for g in d['gastos']]
@@ -172,13 +183,22 @@ def obras_oficiales(base):
                    'Lo que pesa es lo que costó construirla, que se mide aparte.' % mdp1(res)))
             o['fuente_operacion'] = d['fuente']
         else:
-            o['perdida_pendiente'] = True
+            o['perdida_pendiente'] = r['tipo'] != 'dato'
             o['ingresos_anuales_mdp'] = 0
             o['costo_operativo_anual_mdp'] = 0
-            o['perdida_anual_mdp'] = 0
+            o['perdida_anual_mdp'] = -r['v'] if r['tipo'] == 'dato' else 0
             o['desglose_costos_operacion'] = []
-            o['proy_titulo'] = 'Lo que falta documentar'
-            o['proyeccion_resumen'] = PEND_TXT
+            if r['tipo'] == 'dato':
+                ec['perdida_anual_mdp'] = r['e']
+                o['proy_titulo'] = 'Lo que dice su resultado publicado de %s' % r['anio']
+                o['proyeccion_resumen'] = '%s %s en %s (resultado del ejercicio). %s %s' % (
+                    'Ganó' if r['v'] > 0 else 'Perdió', mdp1(abs(r['v'])), r['anio'], r['op'], r['nota'])
+            elif r['tipo'] == 'no_aplica':
+                o['proy_titulo'] = 'No opera'
+                o['proyeccion_resumen'] = r['txt']
+            else:
+                o['proy_titulo'] = 'Lo que falta documentar'
+                o['proyeccion_resumen'] = PEND_TXT
             cx = (of.get('contexto_entidad') or {}).get(o['id'])
             if cx and cx.get('texto'):
                 o['proyeccion_resumen'] += ' ' + cx['texto']
@@ -198,17 +218,6 @@ def obras_oficiales(base):
                 ec['desglose'] = cx.get('desglose_estado') or 'oficial'
         o['perdida_segundo'] = o['perdida_anual_mdp'] * 1e6 / 31536000
 
-    cv = base.get('costo_vivo_megaobras') or {}
-    if cv.get('obras'):
-        tasa = cv['tasa']['pct'] / 100
-        for o in obras:
-            d = cv['obras'].get(o['id'])
-            if not d:
-                continue
-            comps = [dict(c, mdp=_r(c['base_mdp'] * tasa * 10) / 10) if c['tipo'] == 'intereses' else dict(c)
-                     for c in d.get('componentes') or []]
-            o['vivo'] = {'anual': _r(sum(c['mdp'] for c in comps) * 10) / 10, 'comps': comps, 'falta': d.get('falta') or [],
-                         'contexto': d.get('contexto'), 'contexto_fuente': d.get('contexto_fuente')}
     return obras
 
 
@@ -309,67 +318,37 @@ def verificado(o, ver, fuentes):
             '<div class="ms-plegable-cuerpo">%s</div></details>' % ''.join(h))
 
 
-def caja_vivo(o, cv, fuentes):
-    """simVivoCaja() del motor. La cifra del periodo la ajusta el JS."""
-    v = o.get('vivo')
-    lim = cv.get('limitaciones') or {}
-
-    def lim_et(k):
-        return (lim.get(k) or '').split(':')[0] or 'Limitación'
-    if not v:
-        # Sin costo en vivo: la caja de la perdida de operacion del motor.
-        pend = o['perdida_pendiente']
-        e = o['estado_campos'].get('perdida_anual_mdp') or 'pendiente'
-        return ('<div class="ms-vivo-caja%s" data-anual="%s"><div class="ms-vivo-et">⏱️ Pérdida de operación <span class="ms-per-et">al día</span> %s</div>'
-                '<div class="ms-vivo-monto ms-num">%s</div></div>'
-                % (' ms-parado' if pend else '', '' if pend else jsnum(o['perdida_anual_mdp']),
-                   chip(e, PEND_PERDIDA if e == 'pendiente' else None), 'Sin documento' if pend else sim_mdp(o['perdida_anual_mdp'] / 365) + '/día'))
-    if not v['comps']:
-        falta = ''.join('<li><strong>%s.</strong> %s%s</li>' % (esc(lim_et(f['limitacion'])), esc(f['texto']),
-                        ('<ul class="ms-fuentes">%s</ul>' % _fuente_link(f['fuente'], fuentes)) if f.get('fuente') else '') for f in v['falta'])
-        return ('<div class="ms-vivo-caja ms-parado"><div class="ms-vivo-et">⏸️ Lo que nos cuesta %s</div>'
-                '<div class="ms-vivo-monto">No corre</div><p class="ms-vivo-nota">No hay información pública suficiente para calcularlo sin inventar. '
-                'Esto es lo que lo impide:</p><ul class="ms-vivo-falta">%s</ul></div>' % (chip('pendiente'), falta))
-    por_seg = v['anual'] * 1e6 / 31536000
-    propia = any(c.get('estimacion_propia') for c in v['comps'])
-    tasa = cv['tasa']
-    comps = []
-    for c in v['comps']:
-        inter = c['tipo'] == 'intereses'
-        comps.append(
-            '<li><strong>%s:</strong> <span class="ms-num">%s</span> al año %s%s<br><small>%s%s.%s</small><ul class="ms-fuentes">%s</ul></li>'
-            % (esc(c['et']), mdp1(c['mdp']), chip('derivado' if inter else c['estado']),
-               ' <span class="ms-tag">estimación propia</span>' if c.get('estimacion_propia') else '',
-               esc(c['como']), ('. Base: %s × %s %% de tasa implícita de la deuda = %s al año' % (mdp1(c['base_mdp']), jsnum(tasa['pct']), mdp1(c['mdp']))) if inter else '',
-               (' ' + esc(c['supuesto'])) if c.get('supuesto') else '', _fuente_link(c.get('fuente'), fuentes)))
-    detalle = (
-        '<p class="ms-ver-p">Cálculo de Auditavisión con cifras oficiales. Suma lo que el erario le pone a la obra este año y lo que sigue costando '
-        'el dinero que ya se perdió en ella. Pasarlo a «por segundo» solo cambia la unidad: lo que se justifica es el monto anual, renglón por renglón.</p>'
-        '<ul class="ms-vivo-comps">%s</ul>'
-        '<p class="ms-ver-p"><strong>Total: %s al año</strong> ÷ 31,536,000 segundos = $%s por segundo.</p>'
-        % (''.join(comps), mdp1(v['anual']), format(por_seg, '.2f')))
-    if v.get('contexto'):
-        detalle += '<p class="ms-ver-p">%s</p><ul class="ms-fuentes">%s</ul>' % (esc(v['contexto']), _fuente_link(v.get('contexto_fuente'), fuentes))
-    detalle += ('<p class="ms-ver-p"><strong>La tasa.</strong> %s Resultado: %s %% al año %s</p><ul class="ms-fuentes">%s%s</ul>'
-                '<p class="ms-ver-p"><strong>Límites.</strong> No es una cifra que el gobierno publique como «pérdida»: es nuestra lectura de sus documentos. '
-                'Mezcla un flujo de 2026 con dinero de años anteriores sin deflactar, y los renglones de estimación propia dependen del supuesto que cada uno declara.</p>'
-                % (esc(tasa['como']), jsnum(tasa['pct']), chip('derivado'), _fuente_link('pef26dof', fuentes), _fuente_link('cgpe27', fuentes)))
-    detalle += ''.join('<p class="ms-ver-p"><strong>%s.</strong> %s</p>' % (esc(lim_et(f['limitacion'])), esc(f['texto'])) for f in v['falta'])
+def caja_vivo(o):
+    """La caja de cada ficha: lo que la obra gana o pierde al año con la
+    medida unica de la herramienta (mo_base.resultado, 21-10-2026). Antes
+    corria el «costo vivo» (lo que el PEF 2026 le asigna mas intereses a la
+    tasa implicita de la deuda, una estimacion propia): el autor pidio una
+    sola medida. La cifra del periodo la ajusta el JS."""
+    r = o['res']
+    if r['tipo'] != 'dato':
+        na = r['tipo'] == 'no_aplica'
+        return ('<div class="ms-vivo-caja ms-parado"><div class="ms-vivo-et">⏸️ Gana o pierde al año %s</div>'
+                '<div class="ms-vivo-monto">%s</div><p class="ms-vivo-nota">%s%s</p></div>'
+                % ('' if na else chip('pendiente', 'cuenta-' + o['id']), 'No opera' if na else 'No publica su resultado',
+                   '' if na else '<b>Por qué falta:</b> ', esc(r['txt'])))
+    v = r['v']
+    seg = v * 1e6 / 31536000
+    signo = '+' if v > 0 else '−'
     return (
-        '<div class="ms-vivo-caja" data-anual="%s">'
-        '<div class="ms-vivo-izq"><div class="ms-vivo-et"><span class="ms-punto" aria-hidden="true"></span> Lo que nos cuesta <span class="ms-per-et">al día</span> %s</div>'
-        '<div class="ms-vivo-monto ms-num">%s/día</div>'
-        '<p class="ms-vivo-nota">Cálculo de Auditavisión con cifras oficiales: %s al año.%s</p></div>'
+        '<div class="ms-vivo-caja %s" data-anual="%s">'
+        '<div class="ms-vivo-izq"><div class="ms-vivo-et"><span class="ms-punto" aria-hidden="true"></span> %s <span class="ms-per-et">al día</span> %s</div>'
+        '<div class="ms-vivo-monto ms-num">%s %s/día</div>'
+        '<p class="ms-vivo-nota">%s %s en %s, %s. <a href="herramienta-megaobras-pulso-cuenta.html#cuenta-%s">De dónde sale</a></p></div>'
         '<div class="ms-vivo-der"><span class="ms-vivo-et">⏱️ Mientras miras</span>'
-        '<span class="ms-tic ms-num" data-rate="%s">+$0.00</span><small class="ms-num">(+ $%s/seg)</small></div>'
+        '<span class="ms-tic ms-num" data-rate="%r">%s$0.00</span><small class="ms-num">(%s$%s/seg)</small></div>'
         '</div>'
-        '<details class="ms-plegable"><summary><span aria-hidden="true">🧮</span> Cómo se calcula lo que nos cuesta</summary>'
-        '<div class="ms-plegable-cuerpo">%s</div></details>'
-        % (jsnum(v['anual']), chip('derivado'), sim_mdp(v['anual'] / 365), mdp1(v['anual']),
-           ' <span class="ms-tag">incluye estimación propia</span>' if propia else '', repr(por_seg), format(por_seg, '.2f'), detalle))
+        % ('ms-gana' if v > 0 else 'ms-pierde', jsnum(v), 'Gana' if v > 0 else 'Pierde', chip(r['e']),
+           'Gana' if v > 0 else 'Pierde', sim_mdp(abs(v) / 365), 'Ganó' if v > 0 else 'Perdió', mdp1(abs(v)), r['anio'],
+           'antes del apoyo del presupuesto' if r['base'] == 'sin_apoyo' else 'resultado del ejercicio publicado', esc(o['id']),
+           seg, signo, signo, format(abs(seg), ',.2f')))
 
 
-def ficha(o, ver, cv, fuentes, sectores, cuenta):
+def ficha(o, ver, fuentes, sectores, cuenta):
     ec = o['estado_campos']
     pend_obra = 'obra-' + o['id'] if ver and any(x == 'pendiente' for x in (ver.get('campos') or {}).values()) else None
 
@@ -427,7 +406,7 @@ def ficha(o, ver, cv, fuentes, sectores, cuenta):
 </article>'''.format(
         id=esc(o['id']), color=esc(o.get('badge_color') or 'var(--gold)'), ico=o['icono'], nombre=esc(o['nombre']),
         pres=esc(o['presidente']), per=esc(o['periodo_sexenal']), sico=sec.get('icono', ''), snom=esc(sec.get('nombre', '')),
-        estatus=esc(o['estatus']), vivo=caja_vivo(o, cv, fuentes),
+        estatus=esc(o['estatus']), vivo=caja_vivo(o),
         c_presu=chip_campo('inversion_presupuestada_mdp', pend_obra), presu=num(o['inversion_presupuestada_mdp']),
         c_real=chip_campo('inversion_real_mdp', pend_obra), real=num(o['inversion_real_mdp']),
         et_sob=esc(o.get('sobrecosto_etiqueta') or 'Sobrecosto'),
@@ -451,7 +430,7 @@ def construir(base, ref):
     sm = base['simulador_megaobras']
     obras = obras_oficiales(base)
     ver_obras = (sm.get('verificacion') or {}).get('obras') or {}
-    cv = base.get('costo_vivo_megaobras') or {'tasa': {'pct': 0, 'como': ''}}
+    cv = base.get('costo_vivo_megaobras') or {}
     fuentes = dict(((cv.get('fuentes') or {})))
     fuentes.update((sm.get('verificacion') or {}).get('fuentes') or {})
     sectores = [s for s in sm['sectores'] if s['id'] != 'todos']
@@ -498,15 +477,17 @@ def construir(base, ref):
     cadencias = ''.join('<button type="button" class="ms-cad" data-per="%s" aria-pressed="%s">%s</button>'
                         % (k, 'true' if k == 'dia' else 'false', esc(p['label'])) for k, p in periodos.items())
 
-    # Contador conjunto: tabla de todas las obras que corren (el JS oculta las que no estan en el filtro).
-    corren = sorted([o for o in obras if o.get('vivo') and o['vivo']['comps']], key=lambda o: -o['vivo']['anual'])
-    tasa = cv['tasa']
-    tabla_vivo = ''.join('<tr data-id="%s"><td>%s</td><td class="ms-num">%s</td><td class="ms-num">$%s</td></tr>'
-                         % (esc(o['id']), esc(o['nombre']), sim_mdp(o['vivo']['anual']), num(_r(o['vivo']['anual'] * 1e6 / 31536000)))
+    # Contador conjunto: las obras que publican su resultado (el JS oculta
+    # las que no estan en el filtro).
+    corren = sorted([o for o in obras if o['res']['tipo'] == 'dato'], key=lambda o: o['res']['v'])
+    tabla_vivo = ''.join('<tr data-id="%s"><td>%s</td><td class="ms-num %s">%s %s</td><td class="ms-num">%s$%s</td></tr>'
+                         % (esc(o['id']), esc(o['nombre']), 'ms-gana' if o['res']['v'] > 0 else 'ms-pierde',
+                            'Gana' if o['res']['v'] > 0 else 'Pierde', sim_mdp(abs(o['res']['v'])),
+                            '+' if o['res']['v'] > 0 else '−', num(_r(abs(o['res']['v']) * 1e6 / 31536000)))
                          for o in corren)
 
     cuenta = (sm.get('cuenta') or {}).get('obras') or {}
-    fichas = '\n'.join(ficha(o, ver_obras.get(o['id']), cv, fuentes, sec_por, cuenta) for o in obras)
+    fichas = '\n'.join(ficha(o, ver_obras.get(o['id']), fuentes, sec_por, cuenta) for o in obras)
 
     escala = ''.join(
         '<li class="ms-esc-fila" data-v="{v}"><span class="ms-esc-veces ms-num">—</span>'
@@ -523,8 +504,9 @@ def construir(base, ref):
         'obras': [{'id': o['id'], 'n': o['nombre'], 'ico': o['icono'], 's': o['sector_id'], 'p': o['presidente'], 'per': o['periodo_sexenal'],
                    'real': o['inversion_real_mdp'], 'presu': o['inversion_presupuestada_mdp'], 'sob': o['sobrecosto_pct'],
                    'perd': o['perdida_anual_mdp'], 'pend': o['perdida_pendiente'], 'color': o.get('badge_color') or '',
-                   'vivo': (o['vivo']['anual'] if o.get('vivo') and o['vivo']['comps'] else None),
-                   'parada': bool(o.get('vivo') and not o['vivo']['comps']),
+                   'na': o['res']['tipo'] == 'no_aplica',
+                   'vivo': o['res']['v'] if o['res']['tipo'] == 'dato' else None,
+                   'parada': o['res']['tipo'] != 'dato',
                    'pendReal': o['id'] in pend_real, 'resc': o.get('tipo') == 'rescate'} for o in obras],
         'sectores': [{'id': s['id'], 'nom': s['nombre'], 'ico': s['icono']} for s in sectores],
         'sexenios': SEXENIOS,
@@ -536,7 +518,7 @@ def construir(base, ref):
   <section class="ms-arranque" aria-labelledby="msArrTit">
     <p class="ms-kicker">{kicker}</p>
     <h2 class="ms-grande" id="msArrTit">{n} megaobras, obra por obra. Elige una industria y un mandato.</h2>
-    <p class="ms-lead">Las {n} obras emblemáticas de 2000 a 2024 costaron <b class="ms-num">{treal}</b> {c_der} frente a <b class="ms-num">{tpresu}</b> aprobados. Los {n_resc} rescates, bancario y carretero, van aparte (<b class="ms-num">{rreal}</b> pagados y debidos {c_der}): son deudas que el Estado asumió, no obras, y los ves en la industria «Rescates». Filtra por industria y por presidente, compara las que queden, mira lo que cada una nos sigue costando mientras lees y ponlo junto a cifras que conoces.</p>
+    <p class="ms-lead">Las {n} obras emblemáticas de 2000 a 2024 costaron <b class="ms-num">{treal}</b> {c_der} frente a <b class="ms-num">{tpresu}</b> aprobados. Los {n_resc} rescates, bancario y carretero, van aparte (<b class="ms-num">{rreal}</b> pagados y debidos {c_der}): son deudas que el Estado asumió, no obras, y los ves en la industria «Rescates». Este es <b>el único filtro de la herramienta</b>: elige industria y presidente, compara las que queden, mira si cada una gana o pierde mientras lees y ponlo junto a cifras que conoces.</p>
     <div class="ms-resumen" id="msResumen" aria-live="polite"></div>
     <ol class="ms-indice" aria-label="Lo que hay en esta página">
       <li><a href="#ms-industria"><span class="ms-n">1</span> Industria</a></li>
@@ -582,12 +564,12 @@ def construir(base, ref):
       <div class="ms-cifra"><span class="ms-cifra-l">Aprobado frente a erogado {c_der}</span>
         <span class="ms-cifra-v ms-num" id="msCPresu">—</span>
         <span class="ms-cifra-s"><span class="ms-num" id="msCBrecha">—</span> de más, un <span class="ms-num" id="msCSob">—</span></span></div>
-      <div class="ms-cifra ms-cifra-roja"><span class="ms-cifra-l">Pérdida operativa anual {c_der}</span>
+      <div class="ms-cifra ms-cifra-roja" id="msCPerdCaja"><span class="ms-cifra-l"><span id="msCPerdEt">Pérdida neta del año</span> {c_der}</span>
         <span class="ms-cifra-v ms-num" id="msCPerd">—</span>
         <span class="ms-cifra-s">equivale a <span class="ms-num" id="msCSeg">—</span> por segundo</span></div>
     </div>
     <p class="ms-nota" id="msNotaFiltro"></p>
-    <p class="ms-nota">Las tres son sumas de las obras del filtro (<span class="ms-op">costo real = suma de lo erogado; sobrecosto = erogado ÷ aprobado − 1, de modo que cada obra pesa según su tamaño; por segundo = pérdida anual ÷ 31,536,000</span>). La pérdida solo suma lo que tiene documento: Tren Maya y AIFA por sus estados de actividades de la Cuenta Pública 2024, el rescate bancario por lo que pierde antes del apoyo del presupuesto (su déficit de 2024 más el Ramo 34 que recibió, según el IPAB); las demás entran con cero y dicen {c_pend_perd}.</p>
+    <p class="ms-nota">Las tres son sumas de las obras del filtro (<span class="ms-op">costo real = suma de lo erogado; sobrecosto = erogado ÷ aprobado − 1, de modo que cada obra pesa según su tamaño; por segundo = pérdida neta ÷ 31,536,000</span>). La pérdida neta es la misma medida de toda la herramienta: lo que pierden menos lo que ganan, en el año más reciente que publica cada obra; las que no lo publican no se estiman y dicen {c_pend_perd}.</p>
   </section>
 
   <aside class="ms-aviso">
@@ -620,9 +602,9 @@ def construir(base, ref):
 
   <section class="ms-bloque" id="ms-vivo" aria-labelledby="msVivoTit">
     <h2 class="ms-tit" id="msVivoTit"><span aria-hidden="true">⏱️</span> Simulación en vivo: <span id="msVivoTitTx">las fichas del filtro</span></h2>
-    <p class="ms-txt">Cada ficha corre con lo que esa obra nos cuesta: lo que el erario le pone este año más lo que sigue costando el dinero que ya se perdió en ella. Es un cálculo nuestro con cifras oficiales; en cada ficha está la operación.</p>
+    <p class="ms-txt">Cada ficha corre con lo que esa obra gana (en verde) o pierde (en rojo) en un año, la misma medida de toda la herramienta. Las que no publican su resultado no corren y dicen por qué.</p>
     <div class="ms-vivo-total">
-      <p class="ms-vivo-total-l"><span class="ms-punto" aria-hidden="true"></span> <span id="msVivoTotEt">Lo que estas obras nos cuestan</span> mientras miras {c_der}</p>
+      <p class="ms-vivo-total-l"><span class="ms-punto" aria-hidden="true"></span> <span id="msVivoTotEt">Lo que estas obras ganan o pierden</span> mientras miras {c_der}</p>
       <p class="ms-vivo-total-v ms-num" id="msVivoTot">+$0.00</p>
       <p class="ms-vivo-total-s" id="msVivoTotSub"></p>
       <div class="ms-ctl ms-ctl-claro">
@@ -632,9 +614,9 @@ def construir(base, ref):
       <p class="ms-vivo-total-s">Por <span id="msCadEt">día</span>: <b class="ms-num" id="msVivoPer">—</b>. Pasarlo a otra cadencia solo cambia la unidad.</p>
       <details class="ms-plegable ms-plegable-claro"><summary><span aria-hidden="true">🧮</span> Cómo se calcula y qué no entra</summary>
         <div class="ms-plegable-cuerpo">
-          <div class="ms-tabla-marco"><table class="ms-ver-tabla" id="msVivoTabla"><thead><tr><th>Obra</th><th>Al año</th><th>Por segundo</th></tr></thead><tbody>{tabla_vivo}</tbody></table></div>
-          <p class="ms-ver-p">Método: cada obra suma lo que el PEF 2026 le asigna y, sobre el dinero que la ASF o Hacienda documentan como perdido (sobrecosto, cancelación, gasto sin obra o pagos que la ASF observó sin soporte), los intereses a la tasa implícita de la deuda pública: {tasa} % {c_der}. {tasa_como}</p>
-          <p class="ms-ver-p">Los intereses son <strong>estimación propia</strong>: suponen que ese dinero se financió con deuda al costo promedio. El rescate carretero reparte en partes iguales el pago que la ASF estimó para 2018-2033. Ninguna cifra es una «pérdida» que el gobierno publique con ese nombre.</p>
+          <div class="ms-tabla-marco"><table class="ms-ver-tabla" id="msVivoTabla"><thead><tr><th>Obra</th><th>Gana o pierde al año</th><th>Por segundo</th></tr></thead><tbody>{tabla_vivo}</tbody></table></div>
+          <p class="ms-ver-p">{medida}</p>
+          <p class="ms-ver-p">Por segundo = resultado del año × 1,000,000 ÷ 31,536,000 segundos {c_der}. No es dinero que se mueva en este instante: proyecta el resultado de un año sobre el tiempo que llevas mirando.</p>
           <p class="ms-ver-p" id="msVivoParadas" hidden></p>
         </div></details>
     </div>
@@ -663,6 +645,6 @@ def construir(base, ref):
         losetas='\n      '.join(losetas), mandatos='\n      '.join(mandatos), ordenes=ordenes, cadencias=cadencias,
         tm_fecha=esc(tm.get('fecha', '10-10-2026')), tm_motivo=esc(tm.get('motivo', '')), tm_alt=esc(tm.get('alternativa', 'expedientes.html#exp-tren-maya')),
         c_tm=chip('pendiente', PEND_FICHA_TM),
-        tabla_vivo=tabla_vivo, tasa=jsnum(tasa['pct']), tasa_como=esc(tasa.get('como', '')),
+        tabla_vivo=tabla_vivo, medida=mo_base.medida_txt(sm),
         fichas=fichas, escala=escala, datos=_json(datos),
         r_pef=ref('ref-pef2026'), r_asf=ref('ref-asf-cp'))

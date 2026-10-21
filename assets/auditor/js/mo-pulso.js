@@ -1,9 +1,8 @@
 /* Auditavisión · Inversión y Megaobras › El pulso del gasto (aplicación 1,
    13-10-2026). La página la escribe herramientas/mo_pulso.py con las cifras
    ya puestas y, en JSON (#mpDatos), los mismos agregados con su estado:
-   aquí no se inventa ninguna cifra, solo se reparte en la cadencia elegida,
-   se cambia entre «todo lo registrado» y «solo con documento», se ordenan
-   las obras y corre el contador. No carga el motor. Prefijo: mp-. */
+   aquí no se inventa ninguna cifra, solo se reparte en la cadencia elegida
+   y se ordenan las obras. No carga el motor. Prefijo: mp-. */
 (function () {
   'use strict';
 
@@ -62,8 +61,10 @@
     pon('mpCompsEt', 'textContent', p.sufijo);
     pon('mpFactorTx', 'textContent', FACTOR_TX[periodo] || String(p.factor));
     pon('mpCompsTot', 'textContent', simMdp(v) + p.sufijo);
+    /* La medida única (21-10-2026): v > 0 pierde, v < 0 gana. */
     filasComp.forEach(function (tr) {
-      tr.querySelector('.mp-c-v').textContent = simMdp(Number(tr.dataset.v) * p.factor) + p.sufijo;
+      var v = Number(tr.dataset.v);
+      tr.querySelector('.mp-c-v').textContent = (v > 0 ? 'Pierde ' : 'Gana ') + simMdp(Math.abs(v) * p.factor) + p.sufijo;
     });
     var hora = D.anual * 1e6 / (365 * 24), minuto = hora / 60;
     if ($('mpEquiv')) $('mpEquiv').innerHTML = 'Lo leas como lo leas, el ritmo es el mismo: <b class="mp-num">' + esc(pesos2(Math.round(hora * 100) / 100)) +
@@ -74,35 +75,9 @@
     b.addEventListener('click', function () { periodo = b.dataset.per; guarda('periodo', periodo); pintaPeriodo(); });
   });
 
-  /* ---------- 2. Todo lo registrado o solo con documento ---------- */
-  var modo = lee('modo', 'todo') === 'doc' ? 'doc' : 'todo';
-  var modoBs = [].slice.call(raiz.querySelectorAll('.mp-modo-b'));
-  function pintaModo() {
-    var m = D.modos[modo];
-    if (!$('mpKReal')) return;
-    modoBs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.modo === modo ? 'true' : 'false'); });
-    var realPar = m.realPar != null ? m.realPar : m.real;
-    $('mpKReal').textContent = simMdp(m.real);
-    $('mpKRealMdp').textContent = mdp(m.real);
-    $('mpKSobre').textContent = (m.sobre > 0 ? '+' : '') + m.sobre.toFixed(1) + '%';
-    $('mpKBrecha').textContent = simMdp(m.brecha);
-    $('mpKBrechaMdp').textContent = mdp(m.brecha);
-    if (modo === 'todo') {
-      $('mpKRealSub').textContent = 'Suma de las ' + m.n + ' obras evaluadas entre 2000 y 2024, sin los rescates';
-      $('mpKSobreSub').textContent = simMdp(m.presu) + ' aprobados frente a ' + simMdp(m.real) + ' erogados';
-      $('mpKBrechaSub').textContent = 'Erogado menos aprobado, sumando las ' + m.n + ' obras';
-      $('mpModoTx').innerHTML = 'Miden <b>siempre el universo completo</b> de las obras evaluadas: es la cifra contra la que se lee todo lo demás. Con «Solo con documento» dejas fuera las cifras que siguen pendientes.';
-    } else {
-      $('mpKRealSub').textContent = 'Suma de las ' + m.nReal + ' obras cuyo costo tiene documento oficial';
-      $('mpKSobreSub').textContent = 'Solo las ' + m.nPar + ' obras con aprobado y erogado documentados: ' + simMdp(m.presu) + ' frente a ' + simMdp(realPar);
-      $('mpKBrechaSub').textContent = 'Erogado menos aprobado en esas ' + m.nPar + ' obras';
-      $('mpModoTx').innerHTML = 'Ahora ves <b>solo las cifras con documento</b> (oficiales o derivadas de ellas). Lo que queda fuera no es cero: sigue pendiente, y cada obra dice por qué.';
-    }
-    $('mpAvisoPend').hidden = modo === 'doc';
-  }
-  modoBs.forEach(function (b) {
-    b.addEventListener('click', function () { modo = b.dataset.modo; guarda('modo', modo); pintaModo(); });
-  });
+  /* ---------- 2. Todo lo registrado o solo con documento ----------
+     Se quitó el 21-10-2026 (pedido del autor: un solo filtro en toda la
+     herramienta); las cuatro cifras miden siempre el universo completo. */
 
   /* ---------- 3. Las obras, ordenadas ---------- */
   var ORDENES = {
@@ -118,7 +93,11 @@
   function cifra(o) {
     if (orden === 'sobre') return { t: (o.sobre > 0 ? '+' : '') + o.sobre + '%', e: o.es };
     if (orden === 'brecha') { var b = o.real - o.presu; return { t: (b > 0 ? '+' : '') + mdp(b), e: o.er === 'pendiente' || o.ep === 'pendiente' ? 'pendiente' : 'derivado' }; }
-    if (orden === 'perd') return o.epd === 'pendiente' ? { t: 'sin documento', e: 'pendiente', pend: 'reloj-megaobras' } : { t: mdp(o.perd) + '/año', e: o.epd };
+    if (orden === 'perd') {
+      if (o.epd === 'pendiente') return { t: 'no lo publica', e: 'pendiente', pend: 'cuenta-' + o.id };
+      if (o.epd === 'no_aplica') return { t: 'no opera', e: 'na' };
+      return { t: (o.perd > 0 ? 'pierde ' : 'gana ') + mdp(Math.abs(o.perd)) + '/año', e: o.epd };
+    }
     return { t: mdp(o.real), e: o.er };
   }
   function pintaObras() {
@@ -126,7 +105,7 @@
     ordenBs.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.orden === orden ? 'true' : 'false'); });
     var f = ORDENES[orden];
     var obras = D.obras.slice().sort(function (a, b) {
-      var pa = orden === 'perd' && a.epd === 'pendiente', pb = orden === 'perd' && b.epd === 'pendiente';
+      var pa = orden === 'perd' && (a.epd === 'pendiente' || a.epd === 'no_aplica'), pb = orden === 'perd' && (b.epd === 'pendiente' || b.epd === 'no_aplica');
       if (pa !== pb) return pa ? 1 : -1;
       return f(b) - f(a);
     });
@@ -138,7 +117,7 @@
       return '<li class="mp-obra mp-obra-' + c.e + '">' +
         '<div class="mp-obra-cab"><span class="mp-obra-ico" aria-hidden="true">' + esc(o.ico) + '</span>' +
           '<span class="mp-obra-n">' + esc(o.n) + '<small>' + esc(o.pres) + ' · ' + esc(o.per) + '</small></span>' +
-          '<span class="mp-obra-v"><b class="mp-num">' + esc(c.t) + '</b> ' + chip(c.e, pend) + '</span></div>' +
+          '<span class="mp-obra-v"><b class="mp-num">' + esc(c.t) + '</b> ' + (c.e === 'na' ? '' : chip(c.e, pend)) + '</span></div>' +
         '<span class="mp-riel" aria-hidden="true"><span class="mp-barra" style="width:' + ancho.toFixed(1) + '%"></span></span>' +
         '<p class="mp-obra-pie">Aprobado ' + esc(mdp(o.presu)) + ' ' + chip(o.ep, o.ep === 'pendiente' ? 'obra-' + o.id : '') +
           ' · erogado ' + esc(mdp(o.real)) + ' ' + chip(o.er, o.er === 'pendiente' ? 'obra-' + o.id : '') +
@@ -154,9 +133,10 @@
   if ($('mpCsv')) $('mpCsv').addEventListener('click', function () {
     var q = function (v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; };
     var filas = [['obra', 'presidente', 'periodo', 'aprobado_mdp', 'estado_aprobado', 'erogado_mdp', 'estado_erogado',
-      'sobrecosto_pct', 'estado_sobrecosto', 'perdida_anual_documentada_mdp', 'estado_perdida', 'fuente', 'url']];
+      'sobrecosto_pct', 'estado_sobrecosto', 'ganancia_o_perdida_anual_mdp', 'estado_ganancia_o_perdida', 'fuente', 'url']];
     D.obras.forEach(function (o) {
-      filas.push([o.n, o.pres, o.per, o.presu, o.ep, o.real, o.er, o.sobre, o.es, o.epd === 'pendiente' ? '' : o.perd, o.epd, o.f, o.u]);
+      var sin = o.epd === 'pendiente' || o.epd === 'no_aplica';
+      filas.push([o.n, o.pres, o.per, o.presu, o.ep, o.real, o.er, o.sobre, o.es, sin ? '' : -o.perd, o.epd, o.f, o.u]);
     });
     var csv = '﻿' + filas.map(function (r) { return r.map(q).join(','); }).join('\r\n');
     var a = document.createElement('a');
@@ -168,7 +148,7 @@
 
   /* ---------- 5. El contador en vivo ---------- */
   var vivo = $('mpVivo'), pausaB = $('mpPausa');
-  if (!vivo || !pausaB) { pintaPeriodo(); pintaModo(); pintaObras(); return; }
+  if (!vivo || !pausaB) { pintaPeriodo(); pintaObras(); return; }
   var acumulado = 0, desde = Date.now(), pausado = false;
   var flota = document.createElement('a');
   flota.className = 'mp-flota';
@@ -209,6 +189,5 @@
   }
 
   pintaPeriodo();
-  pintaModo();
   pintaObras();
 })();

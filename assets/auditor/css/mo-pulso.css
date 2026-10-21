@@ -145,6 +145,7 @@
 
 /* La cuenta de cada obra (17-10-2026) */
 .mp-neg { color: var(--mp-rojo); }
+.mp-gana, .mp-tabla td.mp-gana { color: var(--mp-of); }
 .mp-tabla td.mp-neg { color: var(--mp-rojo); }
 .mp-na { display: inline-block; padding: 2px 8px; border: 1px dashed var(--mp-borde); border-radius: 999px; font-size: 14px; color: var(--mp-gris); white-space: nowrap; }
 .mp-cta-indice ol { list-style: none; margin: 0 0 18px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }

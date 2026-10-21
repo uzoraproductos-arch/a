@@ -5,7 +5,10 @@
    escribe ninguna cifra nueva, solo se suman las obras que deja el filtro.
    Industria y mandato filtran a la vez; la comparativa se ordena por cinco
    criterios; las fichas corren en vivo; la escala divide el costo real del
-   filtro entre cifras conocidas. El filtro vive en la dirección
+   filtro entre cifras conocidas. Desde el 21-10-2026 es el único filtro
+   de Inversión y Megaobras, y la pérdida es la medida única de la
+   herramienta: perd > 0 pierde, perd < 0 gana; vivo es el resultado con
+   signo (+ gana, − pierde) o null si la obra no lo publica. El filtro vive en la dirección
    (?industria=&mandato=&orden=) con replaceState, para no llenar el
    historial; cada obra tiene su ancla #obra-<id>. */
 (function () {
@@ -41,7 +44,9 @@
   function fmt(v, f) {
     if (f === 'pct') return v.toFixed(1) + '%';
     if (f === 'pctS') return (v > 0 ? '+' : '') + v.toFixed(1) + '%';
-    if (f === 'pesos') return '$' + n(Math.round(v * 100) / 100);
+    if (f === 'pesos') return '$' + n(Math.round(Math.abs(v) * 100) / 100);
+    if (f === 'gp') return (v < 0 ? 'gana ' : 'pierde ') + simMdp(Math.abs(v));
+    if (f === 'abs') return simMdp(Math.abs(v));
     return simMdp(v);
   }
   function esc(v) {
@@ -57,7 +62,11 @@
 
   /* ---------- filtro y agregados (simObrasDe, simFiltradas, simAgregados) ---------- */
   var ORDEN_F = {
-    perdida: function (a, b) { return b.perd - a.perd; },
+    perdida: function (a, b) {
+      /* Las que no publican su resultado o no operan, al final. */
+      if (a.pend !== b.pend) return a.pend ? 1 : -1;
+      return b.perd - a.perd;
+    },
     sobrecosto: function (a, b) { return b.sob - a.sob; },
     inversion: function (a, b) { return b.real - a.real; },
     brecha: function (a, b) { return (b.real - b.presu) - (a.real - a.presu); },
@@ -150,13 +159,17 @@
       '<span class="ms-fa-n">' + cuantas + '</span>';
     $('msQuitar').hidden = !(sec || sx);
     var pares = [['msCReal', ag.real, 'mdp'], ['msCCuota', cuota, 'pct'], ['msCPresu', ag.presu, 'mdp'], ['msCBrecha', ag.brecha, 'mdp'],
-      ['msCSob', ag.sobrecosto, 'pctS'], ['msCPerd', ag.perdidaAnual, 'mdp'], ['msCSeg', ag.perdidaSegundo, 'pesos']];
+      ['msCSob', ag.sobrecosto, 'pctS'], ['msCPerd', ag.perdidaAnual, 'abs'], ['msCSeg', ag.perdidaSegundo, 'pesos']];
+    var gana = ag.perdidaAnual < 0;
+    $('msCPerdEt').textContent = gana ? 'Ganancia neta del año' : 'Pérdida neta del año';
+    $('msCPerdCaja').classList.toggle('ms-cifra-roja', !gana);
+    $('msCPerdCaja').classList.toggle('ms-cifra-verde', gana);
     var els = pares.map(function (p) { var el = $(p[0]); el.dataset.v = p[1]; el.dataset.f = p[2]; return el; });
     animar('cab', els, [], animado ? 900 : 0);
     var pr = obras.filter(function (o) { return o.pendReal; });
     var doc = obras.filter(function (o) { return !o.pend; }).length;
     $('msNotaFiltro').innerHTML = !obras.length ? '' :
-      'La pérdida tiene documento en <b>' + doc + '</b> de ' + obras.length + (obras.length === 1 ? ' obra.' : ' obras.') +
+      '<b>' + doc + '</b> de ' + obras.length + (obras.length === 1 ? ' obra publica' : ' obras publican') + ' su ganancia o pérdida del año.' +
       (pr.length ? ' ' + (pr.length === 1 ? 'Una obra del filtro tiene' : pr.length + ' obras del filtro tienen') +
         ' su costo real ' + chip('pendiente', 'obra-' + pr[0].id) + ' de documento y entra con la cifra que registra el simulador: ' +
         pr.map(function (o) { return '<a href="pendientes.html#obra-' + esc(o.id) + '">' + esc(o.n) + '</a>'; }).join(', ') + '.' : '');
@@ -194,7 +207,7 @@
     var todoCero = !todoPend && obras.every(function (o) { return !valor(o, est.orden); });
     var sobre = sola ? OBRAS : obras;
     var maximo = Math.max.apply(null, sobre.map(function (o) { return Math.abs(valor(o, est.orden)); })) || 1;
-    var f = est.orden === 'sobrecosto' ? 'pctS' : 'mdp';
+    var f = est.orden === 'sobrecosto' ? 'pctS' : (est.orden === 'perdida' ? 'gp' : 'mdp');
     var marcadas = obras.filter(function (o) { return dentro[o.id]; }).length;
     $('msCompTitTx').textContent = sola ? 'La única obra del filtro, medida por ' + rotulo
       : (est.universo ? 'Las ' + obras.length + ' obras, comparadas por ' + rotulo : 'Las ' + obras.length + ' obras del filtro, comparadas por ' + rotulo);
@@ -211,7 +224,7 @@
       var cuerpo = '<span class="ms-fila-n">' + (i + 1) + '</span><span class="ms-fila-ico" aria-hidden="true">' + o.ico + '</span>' +
         '<span class="ms-fila-nom">' + esc(o.n) + '<small>' + esc(o.p) + ' · ' + esc(o.per) + '</small></span>' +
         '<span class="ms-fila-riel"><span class="ms-fila-barra" data-w="' + (Math.abs(v) / maximo * 100).toFixed(2) + '" style="width:0%;--ms-c:' + esc(o.color) + '"></span></span>' +
-        (est.orden === 'perdida' && o.pend ? '<span class="ms-fila-val">' + chip('pendiente', 'reloj-megaobras') + '</span>'
+        (est.orden === 'perdida' && o.pend ? '<span class="ms-fila-val">' + (o.na ? 'no opera' : chip('pendiente', 'cuenta-' + o.id)) + '</span>'
           : '<span class="ms-fila-val ms-num" data-v="' + v + '" data-f="' + f + '">' + fmt(0, f) + '</span>');
       return '<li class="ms-fila' + (fuera ? ' ms-fuera' : '') + '">' +
         (fuera ? '<button type="button" class="ms-fila-b" data-ir="' + esc(o.id) + '" title="Poner esta obra en el filtro e ir a su ficha">' + cuerpo + '</button>'
@@ -219,7 +232,7 @@
     }).join('');
     aviso.innerHTML =
       (todoPend ? '<p class="ms-aviso-in"><strong>Sin documento todavía.</strong> ' + (sola ? 'Esta obra no tiene' : 'Ninguna de estas obras tiene') +
-        ' un estado financiero o informe oficial publicado que diga cuánto pierde al operar: es falta de transparencia de quien la opera, y la cifra no se estima. ' +
+        ' un resultado del año publicado (o no opera): donde debería publicarse, es falta de transparencia de quien la opera, y la cifra no se estima. ' +
         '<button type="button" class="ms-enlace" data-accion="inversion">Mide por costo real</button>.</p>' : '') +
       (todoCero ? '<p class="ms-aviso-in"><strong>Sin cifra bajo este criterio, y no por falta de datos.</strong> ' + (sola ? 'Esta obra no registra ' : 'Ninguna de estas obras registra ') +
         rotulo + ': el registro es cero, no un hueco. Lo que sí costaron se ve <button type="button" class="ms-enlace" data-accion="inversion">midiendo por costo real</button>.</p>' : '');
@@ -277,14 +290,17 @@
     var tot = $('msVivoTot');
     tot.dataset.rate = seg;
     tot.dataset.anual = anual;
-    $('msVivoTotEt').textContent = corren.length === 1 ? 'Lo que esta obra nos cuesta' : 'Lo que estas ' + corren.length + ' obras nos cuestan';
-    $('msVivoTotSub').textContent = simMdp(anual) + ' al año · $' + seg.toLocaleString('es-MX', { maximumFractionDigits: 0 }) + ' por segundo' +
-      (paradas.length ? ' · ' + paradas.length + ' sin datos públicos suficientes no entran' : '');
+    tot.classList.toggle('ms-gana', anual > 0);
+    tot.classList.toggle('ms-pierde', anual < 0);
+    $('msVivoTotEt').textContent = corren.length === 1 ? 'Lo que esta obra gana o pierde' : 'Lo que estas ' + corren.length + ' obras ganan o pierden';
+    $('msVivoTotSub').textContent = (anual > 0 ? 'Ganan ' : 'Pierden ') + simMdp(Math.abs(anual)) + ' al año, neto · $' +
+      Math.abs(seg).toLocaleString('es-MX', { maximumFractionDigits: 0 }) + ' por segundo' +
+      (paradas.length ? ' · ' + paradas.length + ' no publican su resultado o no operan' : '');
     qsa('#msVivoTabla tbody tr').forEach(function (tr) { tr.hidden = !dentro[tr.dataset.id]; });
     var pp = $('msVivoParadas');
     pp.hidden = !paradas.length;
     pp.innerHTML = paradas.length ? '<strong>No corren (' + paradas.length + '):</strong> ' + paradas.map(function (o) { return esc(o.n); }).join(', ') +
-      '. Sin información pública suficiente; cada ficha dice qué lo impide.' : '';
+      '. No publican su resultado del año o no operan; cada ficha dice por qué.' : '';
     pintaCadencia();
     tic();
   }
@@ -293,16 +309,18 @@
     qsa('.ms-cad').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.per === est.per ? 'true' : 'false'); });
     qsa('.ms-vivo-caja[data-anual]').forEach(function (c) {
       if (c.dataset.anual === '') return;
-      c.querySelector('.ms-vivo-monto').textContent = simMdp(parseFloat(c.dataset.anual) * p.factor) + p.sufijo;
+      var a = parseFloat(c.dataset.anual);
+      c.querySelector('.ms-vivo-monto').textContent = (a > 0 ? 'Gana ' : 'Pierde ') + simMdp(Math.abs(a) * p.factor) + p.sufijo;
       var et = c.querySelector('.ms-per-et');
       if (et) et.textContent = PER_ET[est.per] || '';
     });
     $('msCadEt').textContent = PER_NOM[est.per] || est.per;
-    $('msVivoPer').textContent = simMdp(parseFloat($('msVivoTot').dataset.anual || 0) * p.factor) + p.sufijo;
+    var an = parseFloat($('msVivoTot').dataset.anual || 0);
+    $('msVivoPer').textContent = (an > 0 ? 'ganan ' : 'pierden ') + simMdp(Math.abs(an) * p.factor) + p.sufijo;
   }
   function tic() {
     var s = (Date.now() - inicio) / 1000;
-    var txt = function (rate) { return '+$' + (s * rate).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+    var txt = function (rate) { return (rate < 0 ? '−' : '+') + '$' + Math.abs(s * rate).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
     qsa('.ms-ficha:not([hidden]) .ms-tic').forEach(function (el) { el.textContent = txt(parseFloat(el.dataset.rate) || 0); });
     var t = $('msVivoTot');
     t.textContent = txt(parseFloat(t.dataset.rate) || 0);

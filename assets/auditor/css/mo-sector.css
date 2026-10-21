@@ -73,6 +73,7 @@
 .ms-cifra-l { font-size: 16px; font-weight: 700; color: var(--ms-gris); }
 .ms-cifra-v { font-size: 26px; font-weight: 800; line-height: 1.15; color: var(--ms-osc); }
 .ms-cifra-roja .ms-cifra-v { color: var(--ms-rojo); }
+.ms-cifra-verde .ms-cifra-v { color: var(--ms-verde); }
 .ms-cifra-s { font-size: 16px; line-height: 1.45; color: var(--ms-tinta); }
 
 /* Aviso de la ficha retirada */
@@ -152,6 +153,13 @@
 .ms-vivo-nota { margin: 0; font-size: 16px; line-height: 1.45; }
 .ms-vivo-der small { font-size: 16px; color: #f3c9c2; }
 .ms-tic { font-size: 20px; font-weight: 800; color: #ffd36b; }
+/* La medida única (21-10-2026): verde si gana, rojo si pierde. */
+.ms-vivo-caja.ms-gana { background: #0b2a19; color: #e6f6ec; }
+.ms-vivo-caja a { color: #ffffff; }
+.ms-vivo-caja.ms-gana .ms-tic, .ms-vivo-total-v.ms-gana { color: #7ee2ad; }
+.ms-vivo-caja.ms-pierde .ms-tic, .ms-vivo-total-v.ms-pierde { color: #ff9c8f; }
+.ms-plegable-claro .ms-ver-tabla td.ms-gana { color: #7ee2ad; }
+.ms-plegable-claro .ms-ver-tabla td.ms-pierde { color: #ff9c8f; }
 .ms-tag { display: inline-block; padding: 1px 8px; border-radius: 999px; background: #fff3c4; color: #5a4100; font-size: 13px; font-weight: 700; }
 .ms-vivo-comps, .ms-vivo-falta { margin: 6px 0; padding-left: 20px; display: grid; gap: 8px; }
 .ms-vivo-comps small { font-size: 16px; color: var(--ms-gris); }

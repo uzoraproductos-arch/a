@@ -1018,6 +1018,10 @@ def megaobras_pulso(h, n, base, ref):
     lema y el pie de capitulo."""
     tema = ('pulso', '📊', 'El pulso del gasto', 'Costo y sobrecosto', '')
     m = herramienta_modulo(h[:7] + ([tema],), n, 0)
+    # Sus estilos y su codigo (mo-pulso.css y .js), como insp_nativa().
+    nat = importlib.import_module(INSP_NATIVAS['pulso'])
+    m['estilos'] = list(nat.ESTILOS)
+    m['scripts'] = list(nat.SCRIPTS)
     out = []
     for sp in insp_subpaginas(m, 'pulso', base, ref):
         cap = mo_capitulos.CAPITULOS[mo_capitulos.numero(sp['archivo']) - 1]
@@ -2263,10 +2267,20 @@ RADAR_HOY_FILAS = [
 ]
 RADAR_HOY_VIVO = ('''<div class="rd-hoy-vivo" id="rdHoyVivo" role="status"><div class="rd-hoy-candado" id="rdCandado" hidden>🔒 Se desbloquea al presionar «Contar»</div><span>⏱️ Durante tu visita (<span id="rdHoyT">0:00</span>), al ritmo de 2026:</span>
           <span>intereses de la deuda <b data-tasa="49850.12">+$0.00</b></span>
-          <span>pérdida documentada de las megaobras <b data-tasa="2062.75">+$0.00</b></span>
-          <small>Equivalencias: la cifra anual entre los 31,536,000 segundos del año ($1,572,073.3 mdp y $65,050.8 mdp, este último un piso derivado
-          con la Cuenta Pública 2024). No son pagos que ocurran en este instante. <a href="auditoria-deuda-soberana.html">El reloj de los intereses ➔</a></small>
+          <span>pérdida neta de las megaobras <b data-tasa="{mo_tasa}">+$0.00</b></span>
+          <small>Equivalencias: la cifra anual entre los 31,536,000 segundos del año ($1,572,073.3 mdp y {mo_anual}, este último la pérdida neta del año de las megaobras que publican su resultado,
+          la misma de <a href="herramienta-megaobras-tabla.html">Inversión y Megaobras</a>, derivado). No son pagos que ocurran en este instante. <a href="auditoria-deuda-soberana.html">El reloj de los intereses ➔</a></small>
         </div>''')
+
+
+def radar_hoy_vivo(base):
+    """El contador de «Hoy» con la perdida neta de las megaobras: la medida
+    unica de Inversion y Megaobras (mo_base.balance, 21-10-2026). Antes
+    decia 65,050.8 mdp, un piso de la Cuenta Publica 2024."""
+    import mo_base
+    b = mo_base.balance(base['simulador_megaobras'])
+    perd = -b['neto']
+    return RADAR_HOY_VIVO.format(mo_tasa=repr(round(perd * 1e6 / 31536000, 2)), mo_anual='$' + format(perd, ',.1f') + ' mdp')
 
 
 # El Radar en paginas (decision del autor, 10-10-2026): radar-hacendario.html
@@ -4413,7 +4427,7 @@ def numeros_preparar():
         return nota_ref(rid, r['num'], re.sub('<[^>]+>', '', r['cita_apa'])[:160].replace('"', '&quot;'))
     # «Cuanto dinero es» lleva dentro las dos barras de «El peso de 2026».
     propios = {'eb-cuanto': lambda: pm.cuanto(base, ref, numeros_peso(d),
-                                              (RADAR_HOY_CUENTA, RADAR_HOY_FILAS[2:], RADAR_HOY_VIVO)),
+                                              (RADAR_HOY_CUENTA, RADAR_HOY_FILAS[2:], radar_hoy_vivo(base))),
                'eb-equivale': lambda: pm.equivale(base, ref),
                'eb-arquitectura': lambda: pm.camino(base, ref),
                # El titulo del bloque ya es el de la pagina: queda solo para lectores de pantalla.

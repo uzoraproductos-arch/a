@@ -84,6 +84,10 @@
 .mc-op { color: #44526b; font-size: 16px; }
 .mc-cero td { background: #f6f8fc; color: var(--mc-gris); }
 .mc-nula td { color: #6b7590; }
+.mc-gana { color: #157347; font-weight: 700; }
+.mc-pierde { color: #b3261e; font-weight: 700; }
+[data-theme="dark"] .mc-gana { color: #5fd39a; }
+[data-theme="dark"] .mc-pierde { color: #ff8a7a; }
 .mc-t tfoot td { padding: 10px 8px; border-top: 2px solid var(--mc-osc); border-bottom: 0; font-weight: 800; background: var(--mc-claro); }
 .mc-t tr.mc-oculta, .mc-t tfoot.mc-oculta, .mc-oculta { display: none; }
 .mc-t tr.mc-actual td { animation: mc-entra .45s ease; }

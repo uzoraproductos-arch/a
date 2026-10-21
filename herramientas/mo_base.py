@@ -58,3 +58,80 @@ def nota_base(o, filas, clase):
                      chip('derivado'), _fuentes(f)))
     return ('<details class="%s"><summary><span aria-hidden="true">📏</span> ¿Con qué presupuesto se mide?</summary>%s</details>'
             % (clase, cuerpo))
+
+
+# ---- Una sola medida de ganancia o perdida (pedido del autor, 21-10-2026) ----
+# Habia tres: la «perdida anual» del pulso y de la mesa 2 (operacion_oficial:
+# Tren Maya y AIFA en 2024, el AIFA en cero, y el FOBAPROA en 2024 antes del
+# Ramo 34: 87,461.9), el «resultado del año» de la cuenta de cada obra
+# (-25,429.2) y el «costo vivo» de Sector (PEF 2026 mas intereses
+# estimados). Ahora todas las paginas de Inversion y Megaobras usan esta:
+# para cada obra, el renglon de la cuenta del año mas reciente publicado y,
+# si ese año trae los dos, el resultado sin el apoyo del presupuesto
+# (resultado_sin_transferencias_anual_mdp) antes que el del ejercicio. Las
+# ganancias restan: un AIFA a favor ya no se cuenta como cero.
+RES_CAMPOS = ('resultado_sin_transferencias_anual_mdp', 'resultado_anual_mdp')
+
+
+def resultado(o, filas):
+    """Ganancia (+) o perdida (-) del año de una obra, en mdp.
+
+    tipo 'dato': v, anio, e, op, nota, f (fuentes), base ('sin_apoyo' si
+    excluye el apoyo del presupuesto o la operacion lo hace por si misma;
+    'ejercicio' si es el resultado publicado del ejercicio).
+    tipo 'pendiente' o 'no_aplica': txt con el porque."""
+    con = [f for f in filas or [] if f['c'] in RES_CAMPOS and 'v' in f]
+    if con:
+        anio = max(f.get('anio') or 0 for f in con)
+        del_anio = [f for f in con if (f.get('anio') or 0) == anio]
+        f = next((x for x in del_anio if x['c'] == RES_CAMPOS[0]), del_anio[0])
+        sin_apoyo = f['c'] == RES_CAMPOS[0] or 'antes de transferencias' in (f.get('op') or '') or \
+            'gastos totales' in (f.get('op') or '')
+        return {'tipo': 'dato', 'v': f['v'], 'anio': f.get('anio'), 'e': f['e'], 'op': f.get('op') or '',
+                'nota': f.get('nota') or '', 'f': f.get('f') or [], 'et': f['et'],
+                'base': 'sin_apoyo' if sin_apoyo else 'ejercicio'}
+    f = next((x for x in filas or [] if x['c'] == 'resultado_anual_mdp'), None)
+    if f and f['e'] == 'no_aplica':
+        return {'tipo': 'no_aplica', 'txt': f.get('op') or 'No aplica.'}
+    if f and f['e'] == 'pendiente':
+        return {'tipo': 'pendiente', 'txt': f.get('resp') or ''}
+    # Sin renglon de resultado: lo que la cuenta si dice de su operacion (el
+    # Bunker: la SSPC no publica el gasto del edificio por separado).
+    g = next((x for x in filas or [] if x['c'] == 'costo_operativo_anual_mdp' and x['e'] == 'pendiente'), None)
+    return {'tipo': 'pendiente', 'txt': (g.get('resp') if g else '') or 'Su cuenta no trae renglón de ganancia o pérdida.'}
+
+
+def resultados(sm):
+    """{id de obra: resultado()} para todas las obras."""
+    cu = (sm.get('cuenta') or {}).get('obras') or {}
+    return {o['id']: resultado(o, cu.get(o['id'])) for o in sm['obras']}
+
+
+def balance(sm, ids=None):
+    """Suma de la medida: neto (ganancias menos perdidas, con signo), lo
+    que pierden, lo que ganan y cuantas obras hay de cada tipo."""
+    res = resultados(sm)
+    sel = [res[o['id']] for o in sm['obras'] if ids is None or o['id'] in ids]
+    dat = [r for r in sel if r['tipo'] == 'dato']
+    return {'neto': sum(r['v'] for r in dat), 'pierde': sum(r['v'] for r in dat if r['v'] < 0),
+            'gana': sum(r['v'] for r in dat if r['v'] > 0), 'n_dato': len(dat),
+            'n_pierde': sum(1 for r in dat if r['v'] < 0), 'n_gana': sum(1 for r in dat if r['v'] > 0),
+            'n_pend': sum(1 for r in sel if r['tipo'] == 'pendiente'),
+            'n_na': sum(1 for r in sel if r['tipo'] == 'no_aplica'),
+            'anios': sorted({r['anio'] for r in dat if r['anio']})}
+
+
+def medida_txt(sm):
+    """La explicacion de la medida, la misma en todas las paginas."""
+    res = resultados(sm)
+    nom = {o['id']: o['nombre'].split(' (')[0] for o in sm['obras']}
+    ej = [nom[k] for k, r in res.items() if r['tipo'] == 'dato' and r['base'] == 'ejercicio']
+    b = balance(sm)
+    return ('<b>Una sola medida en toda la herramienta.</b> Lo que cada obra gana o pierde en un año por sí misma, '
+            '<b>antes del apoyo del presupuesto</b>: lo que ingresa por su operación menos lo que gasta, sin las transferencias '
+            'federales. Cada obra entra con el año más reciente que publica (%s). %s Las ganancias restan a las pérdidas. '
+            'Las %d obras que no publican su resultado no se estiman: quedan fuera de la suma, con su porqué, y las %d que no '
+            'operan dicen «no aplica».'
+            % (', '.join(str(a) for a in b['anios']),
+               ('Donde solo se publica el resultado del ejercicio (%s), entra ese, y la obra lo dice.' % ', '.join(ej)) if ej else '',
+               b['n_pend'], b['n_na']))
