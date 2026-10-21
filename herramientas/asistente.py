@@ -50,10 +50,13 @@ def _fichas(d):
         out.append({'t': 'expediente', 'tit': limpio(f['titulo']), 'txt': limpio(f['hallazgo']),
                     'ci': [{'v': c['valor'], 'etq': c['etq'], 'e': c['estado']} for c in f.get('cifras', [])],
                     'fu': [{'tx': limpio(f['fuente']), 'url': ASF_INFORMES}], 'nota': limpio(f.get('alcance')),
-                    'ir': ['expedientes.html#exp-' + f['id'], 'Expedientes de casos'],
+                    'ir': ['expedientes.html#exp-' + f['id'], 'Expedientes de casos de la ASF'],
                     'k': limpio(f.get('ente')) + ' ' + f['id'].replace('-', ' ')})
 
-    # 3. Las 32 entidades: deuda (SHCP) y lo que la ASF dejo por aclarar.
+    # 3. Las 32 entidades: deuda (SHCP), lo que la ASF dejo por aclarar y su
+    # radar (21-10-2026): por cada $100 revisados y su lugar entre los 32.
+    import insp_radar
+    rad = insp_radar.datos(d['cuenta_publica_asf'])
     for e in d['estados']:
         ci, fu = [], []
         if e.get('deuda') is not None and e.get('deudaFuente'):
@@ -68,14 +71,18 @@ def _fichas(d):
             if e.get('asfAuditorias') is not None:
                 ci.append({'v': str(e['asfAuditorias']), 'etq': 'auditorías de la ASF', 'e': 'oficial'})
             fu.append({'tx': limpio(e['asfFuente']), 'url': d['cuenta_publica_asf']['fuentes']['MDB2024']['url']})
+        r = rad['est'].get(e['abbr'])
+        if r:
+            ci.append({'v': '$%.2f de cada $100 revisados (lugar %d de 32; promedio nacional $%.2f)' % (r['v'][0], r['l'][0], rad['prom']),
+                       'etq': 'por aclarar en proporción a lo auditado: %s' % rad['sem'][r['s']][1].lower(), 'e': 'derivado'})
         if not ci:
             continue
         out.append({'t': 'entidad', 'tit': e['name'],
-                    'txt': ('Lo que la plataforma tiene verificado de %s: su deuda pública según el Sistema de Alertas de Hacienda '
-                            'y lo que la Auditoría Superior dejó por aclarar del dinero federal que recibió en 2024. '
+                    'txt': ('Lo que la plataforma tiene verificado de %s: su deuda pública según el Sistema de Alertas de Hacienda, '
+                            'lo que la Auditoría Superior dejó por aclarar del dinero federal que recibió en 2024 y su lugar en el radar de los 32 estados. '
                             'Un monto por aclarar no es un desfalco comprobado: es lo que carecía de documentación al cierre de la auditoría.') % e['name'],
                     'ci': ci, 'fu': fu, 'ir': ['herramienta-inspector-entes.html#ente=estatal:' + e['abbr'], 'el Auditor de entes públicos'],
-                    'k': '%s %s estado entidad deuda asf' % (e['abbr'], e.get('capital', ''))})
+                    'k': '%s %s estado entidad deuda asf radar bandera roja ficha tecnica' % (e['abbr'], e.get('capital', ''))})
 
     # 4. Lo que gana cada cargo (Tu contra ellos): neto mensual y anual, con
     #    su estado; el derivado dice su operacion.
@@ -92,6 +99,41 @@ def _fichas(d):
                     'ci': ci, 'fu': [{'tx': limpio(fx.get('corto', c['fuente'])) + ' · ' + limpio(c.get('pagina')), 'url': fx.get('url')}],
                     'ir': ['herramienta-calculadora-compara.html', 'Tú contra ellos'],
                     'k': 'sueldo salario gana remuneracion ' + c['id'].replace('_', ' ') + ' ' + c['grupo']})
+
+    # 6. Quien fiscaliza (21-10-2026): las diez autoridades de «Expedientes de
+    # casos de la ASF», con su fundamento y su expediente oficial.
+    import fiscalizadores as fz
+    for a in fz.AUTORIDADES:
+        clave, grupo, ico, nom, fund, que, exp, url, rid, integ, plat = a
+        g = next(x for x in fz.GRUPOS if x[0] == grupo)
+        out.append({'t': 'autoridad', 'tit': nom, 'txt': '%s Su expediente oficial: %s En Auditavisión: %s' % (que, exp, limpio(plat)),
+                    'fu': [{'tx': fund + (' · portal oficial' if url else ''), 'url': url}],
+                    'nota': limpio(plat),
+                    'ir': ['herramienta-inspector-asf-autoridades.html#fz-' + clave, 'Quién fiscaliza'],
+                    'k': '%s %s fiscaliza fiscalizacion autoridad sanciona investiga corrupcion %s' % (g[2], limpio(g[3]), fund)})
+
+    # 7. El seguimiento de 2024 a 2027: lo que vio el agente en su ultima vuelta.
+    rep = fz.reporte() or {}
+    hoy = rep.get('fecha') or ''
+    for cp in (2024, 2025, 2026, 2027):
+        filas = []
+        for e in (x for x in fz.ENTREGAS if x[1] == cp):
+            st = fz.estado_entrega(e, rep.get('entregas', {}), hoy) if hoy else 'esperada'
+            filas.append('%s (%s): %s' % (e[3], fz.fecha(e[4]), fz.ESTADOS[st][2].lower()))
+        out.append({'t': 'entrega', 'tit': 'Cuenta Pública %d: el seguimiento de su fiscalización' % cp,
+                    'txt': '. '.join(filas) + '.' + ((' Lo revisó el agente de seguimiento el %s; las cifras de una entrega nueva entran a la plataforma solo al extraerlas de su documento oficial.' % fz.fecha(hoy)) if hoy else ''),
+                    'fu': [{'tx': 'LFRCF, art. 35, y CPEUM, art. 74, fr. VI', 'url': None}],
+                    'nota': ('Revisado por el agente de seguimiento el %s.' % fz.fecha(hoy)) if hoy else '',
+                    'ir': ['herramienta-inspector-asf-calendario.html#ia-seguimiento', 'El seguimiento 2024–2027'],
+                    'k': 'cuenta publica %d entrega entregas asf informe calendario seguimiento agente' % cp})
+    prox = next((e for e in fz.ENTREGAS if e[4] > (hoy or '0') and e[6]), None)
+    if prox:
+        out.append({'t': 'entrega', 'tit': 'La próxima entrega de la Auditoría Superior',
+                    'txt': ('La próxima es la %s de la Cuenta Pública %d: la ley la fija para el %s. En cuanto aparezca, el agente de seguimiento la marca '
+                            'y sus cifras entran a la plataforma al extraerlas de su documento oficial.') % (prox[3][0].lower() + prox[3][1:], prox[1], fz.fecha(prox[4])),
+                    'fu': [{'tx': prox[5], 'url': None}],
+                    'ir': ['herramienta-inspector-asf-calendario.html#ia-seguimiento', 'El seguimiento 2024–2027'],
+                    'k': 'proxima siguiente cuando sale saldra publica entrega asf auditoria superior informe fecha'})
 
     # 5. Las fuentes oficiales (leyes, informes, decretos).
     for r in d['referencias_legales']:
@@ -180,6 +222,8 @@ EJEMPLOS = [
     ('¿Cuánto gana la presidenta?', '💰'),
     ('¿Qué falta saber del huracán Otis?', '⏳'),
     ('¿Dónde veo la lista negra del SAT?', '🧾'),
+    ('¿Quién sanciona la corrupción?', '⚖️'),
+    ('¿Cuándo sale la próxima entrega de la ASF?', '📡'),
 ]
 
 
