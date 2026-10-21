@@ -28,14 +28,6 @@
 .ie-kicker { margin: 0 0 6px; font: 700 14px/1.2 Inter, system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #f2c94c; }
 .ie-grande { margin: 0 0 10px; font-size: 30px; line-height: 1.2; color: #ffffff; max-width: 860px; }
 .ie-arranque .ie-txt { color: #dbe5f7; }
-.ie-cifras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 0 20px; }
-.ie-cifra { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 12px 14px; border-radius: 14px; background: rgba(255, 255, 255, .1);
-  border: 1px solid rgba(255, 255, 255, .22); color: #ffffff !important; text-decoration: none; }
-.ie-cifra:hover { background: rgba(255, 255, 255, .18); }
-.ie-cifra b { font: 800 30px/1 'JetBrains Mono', ui-monospace, monospace; color: #f2c94c; }
-.ie-cifra span { font-size: 16px; font-weight: 600; line-height: 1.3; }
-.ie-cifra small { display: block; font-size: 14px; font-weight: 400; color: #c9d6ee; }
-
 .ie-busca { position: relative; margin: 0 0 16px; }
 .ie-busca-et { display: block; margin: 0 0 8px; font-size: 16px; font-weight: 600; color: #ffffff; }
 .ie-busca-caja { position: relative; display: flex; align-items: center; }
@@ -107,16 +99,30 @@
 .ie-pt { display: inline-block; flex: 0 0 14px; width: 14px; height: 14px; border-radius: 50%; background: currentColor; }
 .ie-pt.s-sin { background: transparent; border: 2px solid currentColor; }
 
-/* El botón «Directorio» (21-10-2026): abre el directorio en su propia página */
-.ie-dir-btn { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; min-height: 64px; margin: 0 0 20px; padding: 12px 18px;
-  border-radius: 14px; background: #f2c94c; color: var(--ie-azul) !important; text-decoration: none; box-shadow: 0 6px 18px rgba(0, 0, 0, .18); transition: background .15s; }
-.ie-dir-btn:hover { background: #f7d872; }
-.ie-dir-btn-ico { font-size: 30px; line-height: 1; }
-.ie-dir-btn-tx b { display: block; font-size: 21px; line-height: 1.2; }
-.ie-dir-btn-tx small { display: block; font-size: 15px; line-height: 1.35; color: #24324f; }
-.ie-dir-btn-ir { font-size: 30px; font-weight: 800; }
 .ie-salva a { color: #ffffff; }
-.ie-arranque-dir .ie-busca { margin-bottom: 16px; }
+/* Un solo navegador (21-10-2026): los tres niveles son la primera fila del
+   recuadro azul, cada uno con su número grande; el buscador filtra la lista. */
+.ie-arranque .ie-niveles { margin: 4px 0 18px; }
+.ie-arranque .ie-nivel { border: 1px solid rgba(255, 255, 255, .24); background: rgba(255, 255, 255, .08); color: #ffffff; min-height: 76px; }
+.ie-arranque .ie-nivel:hover { background: rgba(255, 255, 255, .16); border-color: rgba(255, 255, 255, .5); }
+.ie-arranque .ie-nivel.activo { background: #ffffff; border-color: #f2c94c; box-shadow: inset 0 -5px 0 #f2c94c; color: var(--ie-tinta); }
+.ie-arranque .ie-nivel-tx b { color: inherit; }
+.ie-arranque .ie-nivel-tx small { color: #c9d6ee; }
+.ie-arranque .ie-nivel.activo .ie-nivel-tx b { color: var(--ie-azul); }
+.ie-arranque .ie-nivel.activo .ie-nivel-tx small { color: var(--ie-suave); }
+.ie-arranque .ie-nivel-n { font-size: 24px; color: #f2c94c; }
+.ie-arranque .ie-nivel.activo .ie-nivel-n { color: var(--ie-azul); }
+/* El método, a un clic: abre la ventana lateral (como Contrasta una nota). */
+.ie-como { margin: -14px 0 28px; }
+.ie-cajon-btn { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 52px; padding: 10px 16px; border: 1px solid #c9d2e3; border-radius: 12px;
+  background: #ffffff; color: var(--ie-azul); cursor: pointer; text-align: left; font: 700 17px/1.35 Inter, system-ui, sans-serif; }
+.ie-cajon-btn > span:last-child { margin-left: auto; font-size: 22px; color: var(--ie-acento); }
+.ie-cajon-btn:hover, .ie-cajon-btn:focus-visible { border-color: var(--ie-acento); background: #eaf1fd; }
+.ie.ie-cajon { padding-top: 6px; }
+.ie-cajon .ie-sec { margin-bottom: 26px; }
+.ie-cajon .ie-tit { font-size: 21px; }
+.ie-cajon .ie-sem-ley { grid-template-columns: 1fr; }
+.ie-dir .ie-tit { scroll-margin-top: 90px; }
 /* El resultado de verificar un folio AV-FT */
 .ie-ver { margin: 0 0 24px; }
 .ie-ver > p, .ie-ver > div { margin: 0; padding: 14px 16px; border-radius: 14px; font-size: 16px; line-height: 1.55; }
@@ -265,11 +271,11 @@
 @media (max-width: 760px) {
   .ie-arranque { padding: 20px 16px 18px; border-radius: 14px; }
   .ie-grande { font-size: 25px; }
-  .ie-cifras { grid-template-columns: 1fr; gap: 8px; }
-  .ie-cifra b { font-size: 24px; min-width: 64px; }
   .ie-pasos { grid-template-columns: 1fr 1fr; }
   .ie-niveles { grid-template-columns: 1fr; gap: 8px; }
   .ie-nivel { min-height: 56px; }
+  .ie-arranque .ie-nivel { min-height: 60px; }
+  .ie-arranque .ie-nivel-n { font-size: 20px; }
   .ie-exp-marco { padding: 16px 14px; border-radius: 14px; }
   .ie-exp-nom { font-size: 24px; }
   .ie-exp-ico { font-size: 26px; }

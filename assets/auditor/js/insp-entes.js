@@ -551,11 +551,8 @@
   function idxOrden(x, s) { var i = idxDe(x); return i === null ? (s > 0 ? 1e9 : -1e9) : i; }
 
   var st = { nivel: 'federal', q: '', vista: 'todos', orden: 'catalogo', tope: 60, sel: null };
-  /* El directorio vive en su propia página (pedido del autor, 21-10-2026).
-     Este guion sirve a las dos: en la del auditor no hay lista que pintar, y
-     el buscador manda al directorio cuando se piden todos los resultados. */
-  var ES_DIR = !!document.getElementById('ieLista');
-  var DIRP = raiz.getAttribute('data-directorio') || 'herramienta-inspector-entes-directorio.html';
+  /* Un solo navegador (pedido del autor, 21-10-2026): los niveles, el
+     buscador, los filtros y el directorio están en la misma página. */
 
   /* ---------------- El directorio ---------------- */
   function tarjeta(x) {
@@ -596,7 +593,6 @@
   }
 
   function pintarNiveles() {
-    if (!ES_DIR) return;
     [].forEach.call(raiz.querySelectorAll('.ie-nivel'), function (b) {
       var k = b.getAttribute('data-nivel'), act = k === st.nivel;
       b.classList.toggle('activo', act);
@@ -630,7 +626,6 @@
   }
 
   function pintarLista() {
-    if (!ES_DIR) return;
     var lista = document.getElementById('ieLista'), conteo = document.getElementById('ieConteo'), mas = document.getElementById('ieMas');
     if (st.nivel === 'municipal' && !window.AUDIT_MUNICIPIOS) {
       document.getElementById('ieCtl').innerHTML = '';
@@ -657,7 +652,7 @@
     }
     var vis = l.slice(0, st.tope);
     conteo.innerHTML = fmt(l.length) + (l.length === 1 ? ' ente' : ' entes') + (st.q ? ' coinciden con «' + esc(st.q) + '»' : '') +
-      '. Pulsa uno para abrir su expediente.' + (l.length > vis.length ? ' Se muestran ' + fmt(vis.length) + '; escribe en el buscador para encontrar el tuyo.' : '') +
+      '. Pulsa uno para abrir su ficha técnica.' + (l.length > vis.length ? ' Se muestran ' + fmt(vis.length) + '; escribe en el buscador para encontrar el tuyo.' : '') +
       (st.q ? ' <button type="button" class="ie-enlace" data-limpiar="1">Quitar la búsqueda</button>' : '');
     lista.innerHTML = vis.map(tarjeta).join('');
     mas.innerHTML = l.length > vis.length
@@ -1128,7 +1123,7 @@
         }).join('');
     });
     if (!html) html = '<li class="ie-sug-g" role="presentation">Sin coincidencias' + (window.AUDIT_MUNICIPIOS ? '' : ' (aún cargando municipios…)') + '</li>';
-    html += '<li class="ie-sug-pie" role="presentation">Enter: ver todos los resultados en el directorio</li>';
+    html += '<li class="ie-sug-pie" role="presentation">Enter: ver todos los resultados en la lista</li>';
     sug.innerHTML = html;
     sug.hidden = false;
     q.setAttribute('aria-expanded', 'true');
@@ -1166,7 +1161,6 @@
       var op = sug.querySelectorAll('[role="option"]')[sugSel];
       if (op) { location.hash = op.querySelector('a').getAttribute('href').slice(1); cerrarSug(); }
       else {
-        if (!ES_DIR) { location.href = DIRP + (q.value.trim() ? '?q=' + encodeURIComponent(q.value.trim()) : ''); return; }
         aplicarBusqueda(); cerrarSug();
         irA(document.getElementById('ie-dir'));
       }
@@ -1191,16 +1185,23 @@
     if (b.hasAttribute('data-pdf')) { window.print(); return; }
     if (b.getAttribute('data-copiar') === 'ficha') { copiar(textoFicha(), '✓ Ficha del expediente copiada. Pégala donde quieras.'); return; }
     if (b.getAttribute('data-copiar') === 'enlace') { copiar(location.href, '✓ Enlace copiado: abre directo este expediente.'); return; }
-    if (b.hasAttribute('data-abre-det')) {
-      var det = document.querySelector(b.getAttribute('href'));
-      if (det) det.open = true;
-    }
+  });
+  /* El método vive en la ventana lateral (botón 📖): los enlaces #ie-metodo
+     de la ficha la abren y, si apuntan a un apartado, lo despliegan. */
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest('a[href^="#ie-metodo"]'), btn = document.getElementById('ieComoBtn');
+    if (!a || !btn) return;
+    ev.preventDefault();
+    btn.click();
+    var id = a.getAttribute('href').slice(1);
+    var det = id !== 'ie-metodo' && document.querySelector('.glos-drawer #' + id);
+    if (det) { det.open = true; setTimeout(function () { det.scrollIntoView({ block: 'start' }); }, 60); }
   });
   raiz.addEventListener('change', function (ev) {
     if (ev.target.id === 'ieOrden') { st.orden = ev.target.value; st.tope = 60; pintarLista(); }
   });
   /* Flechas entre las pestañas de nivel. */
-  if (ES_DIR) raiz.querySelector('.ie-niveles').addEventListener('keydown', function (ev) {
+  raiz.querySelector('.ie-niveles').addEventListener('keydown', function (ev) {
     var orden = ['federal', 'estatal', 'municipal'], i = orden.indexOf(st.nivel);
     if (ev.key === 'ArrowRight') { ev.preventDefault(); ponerNivel(orden[(i + 1) % 3], true); }
     else if (ev.key === 'ArrowLeft') { ev.preventDefault(); ponerNivel(orden[(i + 2) % 3], true); }
@@ -1231,7 +1232,7 @@
         ? '<div class="ie-ver-si"><b>✅ Auténtica.</b> El folio corresponde a la ficha técnica de <b>' + esc(hit.x.nombre) + '</b>, y sus cifras coinciden con los datos vigentes de la plataforma.' +
           '<br><small>Huella: <code>' + hit.h + '</code></small><br><a class="ie-btn ie-btn-p" href="#ente=' + hit.x.nivel + ':' + encodeURIComponent(hit.x.id) + '">Ver la ficha</a></div>'
         : '<div class="ie-ver-no"><b>❌ No coincide</b> con ninguna ficha técnica de los datos vigentes. O la ficha se alteró, o se expidió con datos anteriores: ábrela de nuevo desde el ' +
-          '<a href="' + esc(DIRP) + '">directorio</a> y compara las cifras.</div>';
+          '<a href="#ie-dir">directorio</a> y compara las cifras.</div>';
     }, function (e) {
       out.innerHTML = '<div class="ie-ver-no">' + (e && e.message === 'sin-sha'
         ? 'Este navegador no puede calcular huellas SHA-256. Ábrelo en uno actualizado.'
@@ -1239,15 +1240,15 @@
     });
   }
 
-  /* El directorio llega con ?q= (lo buscado en la página del auditor) o ?nivel= (sus tres cifras). */
+  /* ?nivel= y ?q= (los enlaces del antiguo directorio, que redirige aquí). */
   var params = new URLSearchParams(location.search);
-  if (ES_DIR) {
+  {
     var pn = params.get('nivel'), pq = params.get('q');
     if (pn && VISTAS.todos.niv.indexOf(pn) > -1) { st.nivel = pn; if (pn === 'municipal') cargarMun().catch(function () {}); }
     if (pq) { q.value = pq; qx.hidden = false; st.q = pq.trim(); }
   }
   avisoMun('');
-  if (ES_DIR && st.q) aplicarBusqueda(); else pintarTodo();
+  if (st.q) aplicarBusqueda(); else pintarTodo();
   if (/^#ente=/.test(location.hash)) leerHash();
   if (params.get('verifica')) verificar(params.get('verifica'));
 })();

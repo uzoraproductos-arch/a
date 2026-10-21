@@ -57,11 +57,11 @@ CDMX_AVISO = (
 
 MUN_ARCHIVOS = ['municipios-efipem.js', 'municipios-rendicion.js']
 
-# El directorio en su propia pagina (pedido del autor, 21-10-2026): la del
-# auditor lleva un boton «Directorio» que la abre. Mismo contenido, mismos
-# niveles, filtros y orden; el expediente se abre en la pagina donde se pide.
+# Un solo navegador (pedido del autor, 21-10-2026): el buscador, los tres
+# niveles, los filtros y el directorio van juntos en esta pagina; la del
+# directorio, que vivio aparte unas horas, redirige aqui con su ?nivel=, su
+# ?q= y su #ente= (apartados.REDIRECCIONES).
 PAGINA = 'herramienta-inspector-entes.html'
-DIRECTORIO = 'herramienta-inspector-entes-directorio.html'
 
 
 def _banda():
@@ -320,8 +320,10 @@ def _paginas(base, ref):
     args = dict(datos=_json(D), banda=_banda(),
         nfed=_num(nfed), nraiz=nfed - norg, norg=norg, nest=nest, nmun=_num(nmun) if nmun else 'los',
         pest=pest, tarjetas=tarjetas, metodo=metodo, fuentes=fuentes,
-        fgasto=esc(fe['gasto'].get('fuente', '')), rgasto=ref(fe['gasto']['ref']) if fe['gasto'].get('ref') else '', dirp=DIRECTORIO, pag=PAGINA)
-    return {'principal': '''<div class="ie" id="ie" data-directorio="{dirp}" data-auditor="{pag}">
+        fgasto=esc(fe['gasto'].get('fuente', '')), rgasto=ref(fe['gasto']['ref']) if fe['gasto'].get('ref') else '', pag=PAGINA)
+    cajon = _cajon(metodo, fuentes, args)
+    args['cajon'] = cajon
+    return {'principal': """<div class="ie" id="ie" data-auditor="{pag}">
       <script type="application/json" id="ieDatos">{datos}</script>
 
       <div class="ie-ver" id="ieVer" aria-live="polite" hidden></div>
@@ -329,6 +331,10 @@ def _paginas(base, ref):
       <section class="ie-arranque" aria-labelledby="ieArrTit">
         <p class="ie-kicker">Busca y verifica</p>
         <h2 class="ie-grande" id="ieArrTit">¿De quién quieres ver las cuentas?</h2>
+        <p class="ie-txt">Un solo navegador para los tres niveles de gobierno: elige el nivel, escribe un nombre o filtra la lista. Cada ente abre su <b>ficha técnica de Auditavisión</b>.</p>
+        <div class="ie-niveles" role="tablist" aria-label="Nivel de gobierno">
+{pest}
+        </div>
         <div class="ie-busca" role="search">
           <label class="ie-busca-et" for="ieQ">Busca por nombre: dependencia, ramo, estado, municipio o quien lo gobierna</label>
           <div class="ie-busca-caja">
@@ -340,34 +346,29 @@ def _paginas(base, ref):
           <ul class="ie-sug" id="ieSug" role="listbox" aria-label="Sugerencias" hidden></ul>
           <p class="ie-busca-nota" id="ieQnota" aria-live="polite">Los municipios se cargan al buscar o al abrir su nivel (son {nmun}; tarda un instante).</p>
         </div>
-
-        <a class="ie-dir-btn" href="{dirp}"><span class="ie-dir-btn-ico" aria-hidden="true">🗂️</span><span class="ie-dir-btn-tx"><b>Directorio</b><small>Federal, estatal y municipal: todos los entes, con sus filtros y su orden</small></span><span class="ie-dir-btn-ir" aria-hidden="true">›</span></a>
-
-        <div class="ie-cifras" role="list">
-          <a class="ie-cifra" role="listitem" href="{dirp}?nivel=federal"><b>{nfed}</b><span>entes federales<small>{nraiz} con ramo propio y {norg} órganos de los poderes</small></span></a>
-          <a class="ie-cifra" role="listitem" href="{dirp}?nivel=estatal"><b>{nest}</b><span>entidades<small>gobierno del estado y sus tres poderes</small></span></a>
-          <a class="ie-cifra" role="listitem" href="{dirp}?nivel=municipal"><b>{nmun}</b><span>municipios y alcaldías<small>del catálogo del INEGI</small></span></a>
-        </div>
-
         <ol class="ie-pasos">
-          <li><b>1</b> Búscalo aquí o ábrelo desde el directorio.</li>
-          <li><b>2</b> Lee la respuesta corta y sus semáforos.</li>
-          <li><b>3</b> Abre cada pregunta: cifra, explicación y documento.</li>
-          <li><b>4</b> Descarga su ficha técnica en PDF, cópiala o comparte el enlace.</li>
+          <li><b>1</b> Elige el nivel o escribe un nombre.</li>
+          <li><b>2</b> Filtra y ordena la lista.</li>
+          <li><b>3</b> Abre su ficha técnica: semáforos, cifras y documentos.</li>
+          <li><b>4</b> Descárgala en PDF, cópiala o comparte el enlace.</li>
         </ol>
         <p class="ie-salva">⚖️ <b>Una señal no es una acusación</b>: es algo que la autoridad debe explicar. Y <b>«por aclarar» no es «robado»</b>: es dinero cuyo destino no quedó acreditado ante la Auditoría Superior.</p>
       </section>
 
-      <section class="ie-exp" id="ieExp" aria-label="Expediente abierto"{banda} hidden></section>
+{cajon}
 
-      {metodo}
+      <section class="ie-exp" id="ieExp" aria-label="Ficha técnica abierta"{banda} hidden></section>
 
-      <section class="ie-sec" aria-labelledby="ieFuTit">
-        <h2 class="ie-tit" id="ieFuTit"><span aria-hidden="true">🔗</span> De dónde sale cada cifra</h2>
-        <ul class="ie-fuentes">
-{fuentes}
-        </ul>
-        <p class="ie-nota">Los datos del Ramo 28 y 33 por entidad: {fgasto}{rgasto}. Cada expediente repite sus fuentes al pie, con su llamada a la lista de <a href="fuentes-oficiales.html">fuentes oficiales</a>. Lo que no tiene documento está en el <a href="pendientes.html">Registro de pendientes</a>, con el nombre de quien debe publicarlo.</p>
+      <section class="ie-sec ie-dir" id="ie-dir" aria-labelledby="ieDirTit">
+        <h2 class="ie-tit" id="ieDirTit"><span aria-hidden="true">🗂️</span> El directorio</h2>
+        <div class="ie-dir-ctl" id="ieCtl"></div>
+        <div id="ieDir" role="tabpanel" aria-labelledby="ieTab-federal">
+          <p class="ie-conteo" id="ieConteo">{nfed} entes federales. Pulsa uno para abrir su ficha técnica.</p>
+          <ul class="ie-tarjetas" id="ieLista">
+{tarjetas}
+          </ul>
+          <div id="ieMas"></div>
+        </div>
       </section>
 
       <nav class="ie-sec ie-hermanas" aria-label="Para seguir el hilo">
@@ -382,56 +383,29 @@ def _paginas(base, ref):
         </div>
       </nav>
       <div class="ie-aviso" id="ieAviso" role="status" aria-live="polite"></div>
-    </div>'''.format(**args),
-            'directorio': '''<div class="ie" id="ie" data-directorio="{dirp}" data-auditor="{pag}">
-      <script type="application/json" id="ieDatos">{datos}</script>
+    </div>""".format(**args)}
 
-      <section class="ie-arranque ie-arranque-dir" aria-labelledby="ieArrTit">
-        <p class="ie-kicker">Auditor de entes públicos</p>
-        <h2 class="ie-grande" id="ieArrTit">El directorio: elige de quién quieres ver las cuentas</h2>
-        <div class="ie-busca" role="search">
-          <label class="ie-busca-et" for="ieQ">Busca por nombre: dependencia, ramo, estado, municipio o quien lo gobierna</label>
-          <div class="ie-busca-caja">
-            <span class="ie-busca-lupa" aria-hidden="true">🔎</span>
-            <input id="ieQ" class="ie-busca-in" type="search" autocomplete="off" spellcheck="false"
-              placeholder="Ej.: Salud, Pemex, Jalisco, Ecatepec…" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="ieSug">
-            <button type="button" class="ie-busca-x" id="ieQx" aria-label="Borrar la búsqueda" hidden>✕</button>
-          </div>
-          <ul class="ie-sug" id="ieSug" role="listbox" aria-label="Sugerencias" hidden></ul>
-          <p class="ie-busca-nota" id="ieQnota" aria-live="polite">Los municipios se cargan al buscar o al abrir su nivel (son {nmun}; tarda un instante).</p>
-        </div>
 
-        <p class="ie-salva">⚖️ <b>Una señal no es una acusación</b>: es algo que la autoridad debe explicar. <a href="{pag}#ie-metodo">Cómo se lee un expediente</a>.</p>
-      </section>
-
-      <section class="ie-exp" id="ieExp" aria-label="Expediente abierto"{banda} hidden></section>
-
-      <section class="ie-sec ie-dir" id="ie-dir" aria-labelledby="ieDirTit">
-        <h2 class="ie-tit" id="ieDirTit"><span aria-hidden="true">🗂️</span> El directorio</h2>
-        <div class="ie-niveles" role="tablist" aria-label="Nivel de gobierno">
-{pest}
-        </div>
-        <div class="ie-dir-ctl" id="ieCtl"></div>
-        <div id="ieDir" role="tabpanel" aria-labelledby="ieTab-federal">
-          <p class="ie-conteo" id="ieConteo">{nfed} entes federales. Pulsa uno para abrir su expediente.</p>
-          <ul class="ie-tarjetas" id="ieLista">
-{tarjetas}
-          </ul>
-          <div id="ieMas"></div>
-        </div>
-      </section>
-
-      <div class="ie-aviso" id="ieAviso" role="status" aria-live="polite"></div>
-    </div>'''.format(**args)}
+def _cajon(metodo, fuentes, args):
+    """Como se lee un expediente y de donde sale cada cifra: un boton que
+    abre la ventana lateral de la plataforma, como el de Contrasta una nota
+    (pedido del autor, 21-10-2026: un solo navegador arriba, el metodo a un
+    clic). Con #ie-metodo en la direccion se abre al cargar; los enlaces
+    #ie-metodo-fed y #ie-metodo-local de la ficha lo abren en su apartado."""
+    cuerpo = ('<div class="ie ie-cajon">' + metodo +
+              '<section class="ie-sec" aria-labelledby="ieFuTit"><h2 class="ie-tit" id="ieFuTit"><span aria-hidden="true">🔗</span> De dónde sale cada cifra</h2>'
+              '<ul class="ie-fuentes">' + fuentes + '</ul>'
+              '<p class="ie-nota-p">Los datos del Ramo 28 y 33 por entidad: ' + args['fgasto'] + args['rgasto'] + '. Cada ficha repite sus fuentes al pie, con su llamada a la lista de '
+              '<a href="fuentes-oficiales.html">fuentes oficiales</a>. Lo que no tiene documento está en el <a href="pendientes.html">Registro de pendientes</a>, '
+              'con el nombre de quien debe publicarlo.</p></section></div>')
+    tpl = ('<template id="tplIeComo"><header class="glos-drawer-cab"><span class="glos-drawer-marca"><span aria-hidden="true">📖</span> Auditor de entes públicos</span>'
+           '<button type="button" class="glos-drawer-x" aria-label="Cerrar">✕</button></header><div class="glos-drawer-cuerpo">'
+           '<span class="glos-drawer-cat">Ficha técnica · Método y fuentes</span>'
+           '<h3 id="ieComoTit" class="glos-drawer-tit">Cómo se lee una ficha técnica y de dónde sale cada cifra</h3>%s</div></template>' % cuerpo)
+    return ('      <p class="ie-como"><button type="button" class="ie-cajon-btn" id="ieComoBtn" data-cajon="tplIeComo" data-cajon-hash="ie-metodo" '
+            'data-cajon-tit="ieComoTit" aria-haspopup="dialog"><span aria-hidden="true">📖</span> Cómo se lee una ficha técnica y de dónde sale cada cifra '
+            '<span aria-hidden="true">›</span></button></p>\n      ' + tpl)
 
 
 def construir(base, ref):
     return _paginas(base, ref)['principal']
-
-
-def subpaginas(base, ref):
-    """Para apartados.insp_subpaginas(): el directorio en su propia pagina."""
-    return [{'archivo': DIRECTORIO, 'icono': '🗂️', 'menu': 'Directorio', 'titulo': 'Directorio de entes públicos',
-             'lema': 'Auditor de entes públicos · el directorio',
-             'entrada': 'Los entes públicos de los tres niveles de gobierno, federal, estatal y municipal, con sus filtros y su orden. Pulsa uno para abrir su ficha técnica.',
-             'bloque': _paginas(base, ref)['directorio']}]

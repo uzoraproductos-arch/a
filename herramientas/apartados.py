@@ -4881,6 +4881,11 @@ REDIRECCIONES = {
     # pagina propia; sus cinco partes son capitulos.
     'herramienta-megaobras-pulso.html': ('herramienta-megaobras.html', 'El pulso del gasto',
                                          'Sus cinco partes son ahora capítulos de Inversión y Megaobras, y su contador está en la portada.'),
+    # El directorio del Auditor de entes publicos volvio a su pagina el
+    # 21-10-2026 (pedido del autor): un solo navegador con el buscador, los
+    # niveles y los filtros. ?nivel=, ?q= y #ente= viajan con la redireccion.
+    'herramienta-inspector-entes-directorio.html': ('herramienta-inspector-entes.html', 'Directorio de entes públicos',
+                                                    'El directorio, el buscador y los filtros están ahora juntos en el Auditor de entes públicos.'),
     # Los tres pasos de Contrasta una nota se juntaron en una sola pagina el
     # 21-10-2026 (pedido del autor); la ?liga= de un veredicto compartido
     # viaja con la redireccion.
