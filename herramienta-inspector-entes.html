@@ -20,12 +20,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261021l">
-  <script src="assets/auditor/js/iconos.js?v=20261021l"></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261021l">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261021l">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261021l">
-  <link rel="stylesheet" href="assets/auditor/css/insp-entes.css?v=20261021l">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261021m">
+  <script src="assets/auditor/js/iconos.js?v=20261021m"></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261021m">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261021m">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261021m">
+  <link rel="stylesheet" href="assets/auditor/css/insp-entes.css?v=20261021m">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -170,10 +170,10 @@
         <p class="ie-kicker">Busca y verifica</p>
         <h2 class="ie-grande" id="ieArrTit">¿De quién quieres ver las cuentas?</h2>
         <p class="ie-txt">Un solo navegador para los tres niveles de gobierno: elige el nivel, escribe un nombre o filtra la lista. Cada ente abre su <b>ficha técnica de Auditavisión</b>.</p>
-        <div class="ie-niveles" role="tablist" aria-label="Nivel de gobierno">
-          <button type="button" class="ie-nivel activo" role="tab" id="ieTab-federal" aria-controls="ieDir" aria-selected="true" data-nivel="federal"><span class="ie-nivel-ico" aria-hidden="true">🇲🇽</span><span class="ie-nivel-tx"><b>Federal</b><small>Los tres poderes, los autónomos y las empresas del Estado</small></span><span class="ie-nivel-n" data-n="federal">48</span></button>
-          <button type="button" class="ie-nivel" role="tab" id="ieTab-estatal" aria-controls="ieDir" aria-selected="false" data-nivel="estatal"><span class="ie-nivel-ico" aria-hidden="true">🗺️</span><span class="ie-nivel-tx"><b>Estatal</b><small>Las 32 entidades federativas</small></span><span class="ie-nivel-n" data-n="estatal">32</span></button>
-          <button type="button" class="ie-nivel" role="tab" id="ieTab-municipal" aria-controls="ieDir" aria-selected="false" data-nivel="municipal"><span class="ie-nivel-ico" aria-hidden="true">🏙️</span><span class="ie-nivel-tx"><b>Municipal</b><small>Los municipios y alcaldías del catálogo del INEGI</small></span><span class="ie-nivel-n" data-n="municipal">2,479</span></button>
+        <div class="ie-niveles" role="group" aria-label="Nivel de gobierno: pulsa uno para desplegar su directorio">
+          <button type="button" class="ie-nivel" id="ieTab-federal" aria-controls="ie-dir" aria-expanded="false" data-nivel="federal"><span class="ie-nivel-ico" aria-hidden="true">🇲🇽</span><span class="ie-nivel-tx"><b>Federal</b><small>Los tres poderes, los autónomos y las empresas del Estado</small></span><span class="ie-nivel-n" data-n="federal">48</span></button>
+          <button type="button" class="ie-nivel" id="ieTab-estatal" aria-controls="ie-dir" aria-expanded="false" data-nivel="estatal"><span class="ie-nivel-ico" aria-hidden="true">🗺️</span><span class="ie-nivel-tx"><b>Estatal</b><small>Las 32 entidades federativas</small></span><span class="ie-nivel-n" data-n="estatal">32</span></button>
+          <button type="button" class="ie-nivel" id="ieTab-municipal" aria-controls="ie-dir" aria-expanded="false" data-nivel="municipal"><span class="ie-nivel-ico" aria-hidden="true">🏙️</span><span class="ie-nivel-tx"><b>Municipal</b><small>Los municipios y alcaldías del catálogo del INEGI</small></span><span class="ie-nivel-n" data-n="municipal">2,479</span></button>
         </div>
         <div class="ie-busca" role="search">
           <label class="ie-busca-et" for="ieQ">Busca por nombre: dependencia, ramo, estado, municipio o quien lo gobierna</label>
@@ -187,7 +187,7 @@
           <p class="ie-busca-nota" id="ieQnota" aria-live="polite">Los municipios se cargan al buscar o al abrir su nivel (son 2,479; tarda un instante).</p>
         </div>
         <ol class="ie-pasos">
-          <li><b>1</b> Elige el nivel o escribe un nombre.</li>
+          <li><b>1</b> Pulsa un nivel para desplegar su directorio, o escribe un nombre.</li>
           <li><b>2</b> Filtra y ordena la lista.</li>
           <li><b>3</b> Abre su ficha técnica: semáforos, cifras y documentos.</li>
           <li><b>4</b> Descárgala en PDF, cópiala o comparte el enlace.</li>
@@ -250,7 +250,7 @@
 
       <section class="ie-exp" id="ieExp" aria-label="Ficha técnica abierta" data-cabecera="assets/auditor/img/encabezado-estado-de-cuenta.jpg" hidden></section>
 
-      <section class="ie-sec ie-dir" id="ie-dir" aria-labelledby="ieDirTit">
+      <section class="ie-sec ie-dir" id="ie-dir" aria-labelledby="ieDirTit" hidden>
         <h2 class="ie-tit" id="ieDirTit"><span aria-hidden="true">🗂️</span> El directorio</h2>
         <div class="ie-dir-ctl" id="ieCtl"></div>
         <div id="ieDir" role="tabpanel" aria-labelledby="ieTab-federal">
@@ -335,12 +335,12 @@
 
   <footer class="apartado-pie">
     <div class="apartado-ancho">
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261021l</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261021m</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261021l"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261021l"></script>
-  <script src="assets/auditor/js/insp-entes.js?v=20261021l"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261021m"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261021m"></script>
+  <script src="assets/auditor/js/insp-entes.js?v=20261021m"></script>
 </body>
 </html>

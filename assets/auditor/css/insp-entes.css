@@ -112,6 +112,10 @@
 .ie-arranque .ie-nivel.activo .ie-nivel-tx small { color: var(--ie-suave); }
 .ie-arranque .ie-nivel-n { font-size: 24px; color: #f2c94c; }
 .ie-arranque .ie-nivel.activo .ie-nivel-n { color: var(--ie-azul); }
+/* Cada nivel despliega su directorio al pulsarlo (21-10-2026): la flecha lo dice. */
+.ie-arranque .ie-nivel { position: relative; padding-bottom: 18px; }
+.ie-arranque .ie-nivel::after { content: '▾'; position: absolute; left: 50%; bottom: 2px; transform: translateX(-50%); font-size: 16px; line-height: 1; opacity: .85; transition: transform .2s; }
+.ie-arranque .ie-nivel.activo::after { transform: translateX(-50%) rotate(180deg); }
 /* El método, a un clic: abre la ventana lateral (como Contrasta una nota). */
 .ie-como { margin: -14px 0 28px; }
 .ie-cajon-btn { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 52px; padding: 10px 16px; border: 1px solid #c9d2e3; border-radius: 12px;

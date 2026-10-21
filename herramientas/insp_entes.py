@@ -259,10 +259,10 @@ def _paginas(base, ref):
         ('municipal', '🏙️', 'Municipal', nmun, 'Los municipios y alcaldías del catálogo del INEGI'),
     ]
     pest = '\n'.join(
-        '          <button type="button" class="ie-nivel%s" role="tab" id="ieTab-%s" aria-controls="ieDir" aria-selected="%s" data-nivel="%s">'
+        '          <button type="button" class="ie-nivel" id="ieTab-%s" aria-controls="ie-dir" aria-expanded="false" data-nivel="%s">'
         '<span class="ie-nivel-ico" aria-hidden="true">%s</span><span class="ie-nivel-tx"><b>%s</b><small>%s</small></span>'
         '<span class="ie-nivel-n" data-n="%s">%s</span></button>'
-        % (' activo' if k == 'federal' else '', k, 'true' if k == 'federal' else 'false', k, ico, et, d, k,
+        % (k, k, ico, et, d, k,
            _num(n) if n else '—')
         for k, ico, et, n, d in niveles)
 
@@ -337,7 +337,7 @@ def _paginas(base, ref):
         <p class="ie-kicker">Busca y verifica</p>
         <h2 class="ie-grande" id="ieArrTit">¿De quién quieres ver las cuentas?</h2>
         <p class="ie-txt">Un solo navegador para los tres niveles de gobierno: elige el nivel, escribe un nombre o filtra la lista. Cada ente abre su <b>ficha técnica de Auditavisión</b>.</p>
-        <div class="ie-niveles" role="tablist" aria-label="Nivel de gobierno">
+        <div class="ie-niveles" role="group" aria-label="Nivel de gobierno: pulsa uno para desplegar su directorio">
 {pest}
         </div>
         <div class="ie-busca" role="search">
@@ -352,7 +352,7 @@ def _paginas(base, ref):
           <p class="ie-busca-nota" id="ieQnota" aria-live="polite">Los municipios se cargan al buscar o al abrir su nivel (son {nmun}; tarda un instante).</p>
         </div>
         <ol class="ie-pasos">
-          <li><b>1</b> Elige el nivel o escribe un nombre.</li>
+          <li><b>1</b> Pulsa un nivel para desplegar su directorio, o escribe un nombre.</li>
           <li><b>2</b> Filtra y ordena la lista.</li>
           <li><b>3</b> Abre su ficha técnica: semáforos, cifras y documentos.</li>
           <li><b>4</b> Descárgala en PDF, cópiala o comparte el enlace.</li>
@@ -364,7 +364,7 @@ def _paginas(base, ref):
 
       <section class="ie-exp" id="ieExp" aria-label="Ficha técnica abierta"{banda} hidden></section>
 
-      <section class="ie-sec ie-dir" id="ie-dir" aria-labelledby="ieDirTit">
+      <section class="ie-sec ie-dir" id="ie-dir" aria-labelledby="ieDirTit" hidden>
         <h2 class="ie-tit" id="ieDirTit"><span aria-hidden="true">🗂️</span> El directorio</h2>
         <div class="ie-dir-ctl" id="ieCtl"></div>
         <div id="ieDir" role="tabpanel" aria-labelledby="ieTab-federal">

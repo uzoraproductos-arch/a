@@ -621,7 +621,7 @@
   /* Los que no tienen índice van al final en los dos sentidos. */
   function idxOrden(x, s) { var i = idxDe(x); return i === null ? (s > 0 ? 1e9 : -1e9) : i; }
 
-  var st = { nivel: 'federal', q: '', vista: 'todos', orden: 'catalogo', tope: 60, sel: null };
+  var st = { nivel: null, q: '', vista: 'todos', orden: 'catalogo', tope: 60, sel: null };
   /* Un solo navegador (pedido del autor, 21-10-2026): los niveles, el
      buscador, los filtros y el directorio están en la misma página. */
 
@@ -670,15 +670,18 @@
     [].forEach.call(raiz.querySelectorAll('.ie-nivel'), function (b) {
       var k = b.getAttribute('data-nivel'), act = k === st.nivel;
       b.classList.toggle('activo', act);
-      b.setAttribute('aria-selected', act ? 'true' : 'false');
-      b.tabIndex = act ? 0 : -1;
+      b.setAttribute('aria-expanded', act ? 'true' : 'false');
       var n = b.querySelector('.ie-nivel-n');
       var listo = k !== 'municipal' || window.AUDIT_MUNICIPIOS;
       if (st.q && listo) n.textContent = fmt(filtrar(k, st.q).length) + ' de ' + fmt(entes(k).length);
       else n.textContent = k === 'municipal' && !listo ? (D.mun.n ? fmt(D.mun.n) : '—') : fmt(entes(k).length);
     });
-    var panel = document.getElementById('ieDir');
-    if (panel) panel.setAttribute('aria-labelledby', 'ieTab-' + st.nivel);
+    /* Los tres niveles empiezan cerrados (pedido del autor, 21-10-2026): el
+       directorio solo se despliega al pulsar uno, y se pliega al pulsarlo
+       otra vez. */
+    var dir = document.getElementById('ie-dir');
+    dir.hidden = !st.nivel;
+    if (st.nivel) document.getElementById('ieDir').setAttribute('aria-labelledby', 'ieTab-' + st.nivel);
   }
 
   function pintarControles(todos) {
@@ -702,6 +705,7 @@
   }
 
   function pintarLista() {
+    if (!st.nivel) return;
     var lista = document.getElementById('ieLista'), conteo = document.getElementById('ieConteo'), mas = document.getElementById('ieMas');
     if (st.nivel === 'municipal' && !window.AUDIT_MUNICIPIOS) {
       document.getElementById('ieCtl').innerHTML = '';
@@ -737,8 +741,9 @@
 
   function pintarTodo() { pintarNiveles(); pintarLista(); }
 
-  function ponerNivel(k, enfocar) {
+  function ponerNivel(k, enfocar, plegable) {
     if (!VISTAS.todos.niv.includes(k)) return;
+    if (plegable && st.nivel === k) { st.nivel = null; pintarTodo(); return; }
     st.nivel = k; st.tope = 60;
     if (k === 'municipal' && !window.AUDIT_MUNICIPIOS) cargarMun().catch(function () {});
     pintarTodo();
@@ -1070,7 +1075,8 @@
       return;
     }
     st.sel = { nivel: nivel, id: id };
-    if (st.nivel !== nivel) { st.nivel = nivel; st.tope = 60; }
+    /* Abrir una ficha no despliega el directorio si ningún nivel está abierto. */
+    if (st.nivel && st.nivel !== nivel) { st.nivel = nivel; st.tope = 60; }
     st.folio = st.huella = null;
     cont.innerHTML = acciones() + '<article class="ie-exp-marco">' + (nivel === 'federal' ? expFederal(ente) : expLocal(ente)) + '</article>';
     cont.hidden = false;
@@ -1103,7 +1109,8 @@
     if (/^#ente=/.test(location.hash)) history.pushState(null, '', location.pathname + location.search);
     pintarLista();
     var vuelta = sel && document.querySelector('#ieLista a[href="#ente=' + sel.nivel + ':' + encodeURIComponent(sel.id) + '"]');
-    irA(vuelta || document.getElementById('ie-dir') || raiz);
+    var dir = document.getElementById('ie-dir');
+    irA(vuelta || (dir.hidden ? raiz : dir));
     if (vuelta) vuelta.focus({ preventScroll: true });
   }
 
@@ -1143,6 +1150,17 @@
       t += '\n';
     }
     dg.forEach(function (x) { t += '• ' + x.q + ' ' + SEM[x.e].t + ': ' + limpio(x.v) + '\n  ' + limpio(x.d) + '\n'; });
+    /* El radar de la ASF también lo firma el sello (21-10-2026). */
+    var r = ente.nivel === 'estatal' && RAD.est[ente.id];
+    if (r) {
+      t += '\nRADAR DE LA AUDITORÍA SUPERIOR (Cuenta Pública 2024)\n• ' + RAD.sem[r.s][1] + ': por cada $100 revisados quedó ' + RAD.sem[r.s][2] +
+        '. Por aclarar ' + mdpF(r.t[7] / 1e6) + '; $' + r.v[0].toFixed(2) + ' de cada $100 revisados (promedio nacional $' + RAD.prom.toFixed(2) + '); ' +
+        fmt(r.t[0]) + ' auditorías y ' + fmt(r.t[3]) + ' acciones.\n';
+      t += '• Lugar entre los 32: ' + RAD.crit.map(function (c, k) { return c[1].toLowerCase() + ' ' + r.l[k] + '.º (' + radValor(r, k) + ')'; }).join('; ') + '.\n';
+      t += '• Quién tiene que aclararlo: ' + r.d.map(function (d) { return d[0] + ' ' + mdpF(d[3] / 1e6); }).join('; ') + '.\n';
+      t += '• Universo ' + mdpF(r.t[1] / 1e6) + '; muestra ' + mdpF(r.t[2] / 1e6) + '; ' + fmt(r.t[4]) + ' pliegos de observaciones; ' + fmt(r.t[5]) +
+        ' promociones de responsabilidad; recuperado ' + mdpF(r.t[6] / 1e6) + '.\n';
+    }
     var ej = ejes(ente), i = indice(ej);
     if (i !== null) {
       t += '\nÍndice de salud financiera: ' + Math.round(i) + '/100 — ' + veredicto(i).t + '\n';
@@ -1218,8 +1236,8 @@
   }
   function aplicarBusqueda() {
     st.q = q.value.trim(); st.tope = 60;
-    /* Si en el nivel actual nadie coincide, se pasa al primero que sí. */
-    if (st.q && !filtrar(st.nivel, st.q).length) {
+    /* Si en el nivel abierto nadie coincide, se pasa al primero que sí. */
+    if (st.q && st.nivel && !filtrar(st.nivel, st.q).length) {
       var otro = ['federal', 'estatal', 'municipal'].filter(function (k) { return (k !== 'municipal' || window.AUDIT_MUNICIPIOS) && filtrar(k, st.q).length; })[0];
       if (otro) st.nivel = otro;
     }
@@ -1238,6 +1256,9 @@
       var op = sug.querySelectorAll('[role="option"]')[sugSel];
       if (op) { location.hash = op.querySelector('a').getAttribute('href').slice(1); cerrarSug(); }
       else {
+        /* Enter sin sugerencia: despliega el primer nivel con resultados. */
+        if (!st.nivel) st.nivel = ['federal', 'estatal', 'municipal'].filter(function (k) {
+          return (k !== 'municipal' || window.AUDIT_MUNICIPIOS) && filtrar(k, q.value.trim()).length; })[0] || 'federal';
         aplicarBusqueda(); cerrarSug();
         irA(document.getElementById('ie-dir'));
       }
@@ -1252,7 +1273,11 @@
   raiz.addEventListener('click', function (ev) {
     var b = ev.target.closest('button, a');
     if (!b || !raiz.contains(b)) return;
-    if (b.classList.contains('ie-nivel')) { ponerNivel(b.getAttribute('data-nivel')); return; }
+    if (b.classList.contains('ie-nivel')) {
+      ponerNivel(b.getAttribute('data-nivel'), false, true);
+      if (st.nivel) irA(document.getElementById('ie-dir'));
+      return;
+    }
     if (b.hasAttribute('data-ir-nivel')) { ev.preventDefault(); ponerNivel(b.getAttribute('data-ir-nivel')); irA(document.getElementById('ie-dir')); return; }
     if (b.hasAttribute('data-vista')) { st.vista = b.getAttribute('data-vista'); st.tope = 60; pintarLista(); return; }
     if (b.hasAttribute('data-mas')) { st.tope += 120; pintarLista(); return; }
@@ -1276,12 +1301,6 @@
   });
   raiz.addEventListener('change', function (ev) {
     if (ev.target.id === 'ieOrden') { st.orden = ev.target.value; st.tope = 60; pintarLista(); }
-  });
-  /* Flechas entre las pestañas de nivel. */
-  raiz.querySelector('.ie-niveles').addEventListener('keydown', function (ev) {
-    var orden = ['federal', 'estatal', 'municipal'], i = orden.indexOf(st.nivel);
-    if (ev.key === 'ArrowRight') { ev.preventDefault(); ponerNivel(orden[(i + 1) % 3], true); }
-    else if (ev.key === 'ArrowLeft') { ev.preventDefault(); ponerNivel(orden[(i + 2) % 3], true); }
   });
   window.addEventListener('hashchange', leerHash);
 
