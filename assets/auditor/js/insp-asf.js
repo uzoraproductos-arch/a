@@ -5,10 +5,14 @@
    ranking y descarga CSV desde el JSON embebido. Sin dependencias. */
 (function () {
   'use strict';
+  /* Cada capítulo vive en su página (21-10-2026). Un enlace viejo a la
+     portada con #ia-estado (o #ia-estado-t) se va a la página del capítulo. */
+  var viejo = /^#(ia-[a-z0-9]+?)(-t)?$/.exec(location.hash);
+  var dest = viejo && document.querySelector('.ia-indice a[data-ia-ancla="' + viejo[1] + '"]');
+  if (dest) { location.replace(dest.href); return; }
   var nodo = document.getElementById('iaDatos');
-  if (!nodo) return;
-  var D;
-  try { D = JSON.parse(nodo.textContent); } catch (e) { return; }
+  var D = null;
+  if (nodo) { try { D = JSON.parse(nodo.textContent); } catch (e) { D = null; } }
   var CLAVE = 'auditavision.inspasf.estado';
 
   function esc(t) {
@@ -65,6 +69,9 @@
     }
   }
 
+  /* Lo que sigue necesita los datos embebidos (serie, estado, CSV) */
+  if (!D) return;
+
   /* 2. La serie: cambiar la cifra que se compara */
   var met = document.getElementById('iaMetricas'), serie = document.getElementById('iaSerie');
   if (met && serie && D.serie.length) {
@@ -83,7 +90,28 @@
     });
   }
 
-  /* 3. Tu estado */
+  /* 3. Descarga CSV, generada aquí mismo */
+  var csv = document.getElementById('iaCSV');
+  if (csv) {
+    csv.hidden = false;
+    csv.addEventListener('click', function () {
+      var celda = function (v) { var s = String(v); return /[",\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+      var lineas = ['entidad,ente,auditorias,acciones,recuperado,por_aclarar'];
+      D.ent.forEach(function (e) {
+        e.d.forEach(function (d) { lineas.push([e.e, d.ente, d.auditorias, d.acciones, d.recuperaciones, d.porAclarar].map(celda).join(',')); });
+      });
+      lineas.push('');
+      lineas.push(celda('Fuente: ' + D.csvFuente + '. Descargado de Auditavisión el ' + new Date().toLocaleDateString('es-MX') + '.'));
+      var blob = new Blob(['﻿' + lineas.join('\r\n')], { type: 'text/csv;charset=utf-8' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'auditavision-asf-cp2024.csv';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+    });
+  }
+
+  /* 4. Tu estado */
   var sel = document.getElementById('iaEntSel'), panel = document.getElementById('iaEntidad'), rank = document.getElementById('iaRanking');
   var ordenBox = document.getElementById('iaOrden');
   if (!sel || !panel || !rank) return;
@@ -170,25 +198,4 @@
   }
   Array.prototype.forEach.call(document.querySelectorAll('.ia-solojs'), function (x) { x.hidden = false; });
   if (estado.ent !== E[0].e) elegir(estado.ent, false);
-
-  /* 4. Descarga CSV, generada aquí mismo */
-  var csv = document.getElementById('iaCSV');
-  if (csv) {
-    csv.hidden = false;
-    csv.addEventListener('click', function () {
-      var celda = function (v) { var s = String(v); return /[",\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
-      var lineas = ['entidad,ente,auditorias,acciones,recuperado,por_aclarar'];
-      E.forEach(function (e) {
-        e.d.forEach(function (d) { lineas.push([e.e, d.ente, d.auditorias, d.acciones, d.recuperaciones, d.porAclarar].map(celda).join(',')); });
-      });
-      lineas.push('');
-      lineas.push(celda('Fuente: ' + D.csvFuente + '. Descargado de Auditavisión el ' + new Date().toLocaleDateString('es-MX') + '.'));
-      var blob = new Blob(['﻿' + lineas.join('\r\n')], { type: 'text/csv;charset=utf-8' });
-      var a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'auditavision-asf-cp2024.csv';
-      document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
-    });
-  }
 })();

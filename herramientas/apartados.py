@@ -757,7 +757,9 @@ def insp_subpaginas(m, clave, base, ref):
     """Paginas hijas de una aplicacion nativa (17-10-2026): si su modulo
     trae subpaginas(), cada parte sale en su propia pagina, debajo de la
     aplicacion en las migas. Hoy: las cuatro partes de El pulso del gasto y
-    el catalogo de cifras oficiales de Que encontro la ASF (con sus propios estilos y scripts)."""
+    los nueve capitulos de Que encontro la ASF (21-10-2026; el catalogo de
+    cifras oficiales es el octavo, con sus propios estilos y scripts). Si la
+    subpagina trae cap_nav, su pie va de capitulo en capitulo."""
     nat = importlib.import_module(INSP_NATIVAS[clave])
     if not hasattr(nat, 'subpaginas'):
         return []
@@ -769,6 +771,8 @@ def insp_subpaginas(m, clave, base, ref):
                   'lema': sp.get('lema') or '%s · parte %d' % (m['titulo'], k),
                   'icono_cab': sp['icono'] if m.get('icono_cab') else '',
                   'secciones': [dict(m['secciones'][0], bloque=sp['bloque'])]})
+        if 'cap_nav' in sp:
+            h['cap_nav'] = sp['cap_nav']
         for k2 in ('estilos', 'scripts'):
             if k2 in sp:
                 h[k2] = list(sp[k2])
@@ -1021,7 +1025,21 @@ def nav_compacta(h, i, padre=None):
             % '\n'.join(f for f in filas if f))
 
 
-def nav_de_pagina(archivo, padre3=None):
+def nav_capitulos(padre, cap):
+    """Pie de un capitulo con pagina propia (pedido del autor, 21-10-2026):
+    capitulo anterior, todos los capitulos (la portada de la aplicacion),
+    capitulo siguiente e indice general. cap = (anterior, siguiente, total),
+    cada vecino (archivo, nombre) o None."""
+    ant, sig, total = cap
+    filas = ['        <a class="herr-min ant" href="%s"><span>← Capítulo anterior</span><small>%s</small></a>' % ant if ant else '',
+             '        <a class="herr-min" href="%s"><span>Los %d capítulos</span><small>%s</small></a>' % (padre[0], total, padre[1]),
+             '        <a class="herr-min sig" href="%s"><span>Capítulo siguiente →</span><small>%s</small></a>' % sig if sig else '',
+             '        <a class="herr-min" href="indice.html"><span>Índice</span><small>Todo Auditavisión</small></a>']
+    return ('<nav class="herr-nav-min" aria-label="Moverte entre capítulos">\n%s\n      </nav>'
+            % '\n'.join(f for f in filas if f))
+
+
+def nav_de_pagina(archivo, padre3=None, cap=None):
     """La fila compacta que le toca a una pagina, o None si no es una
     aplicacion de las cuatro herramientas (ni subpagina de una, ni el bot
     del Modo Inspector)."""
@@ -1031,6 +1049,8 @@ def nav_de_pagina(archivo, padre3=None):
             apps[modulo_archivo(h[0], t[0])] = (h, i)
     if archivo in apps:
         return nav_compacta(*apps[archivo])
+    if padre3 and cap:
+        return nav_capitulos(padre3, cap)
     if padre3 and padre3[0] in apps:
         return nav_compacta(*apps[padre3[0]], padre=padre3)
     if archivo == ASISTENTE[0]:
@@ -4424,7 +4444,7 @@ def numeros_preparar():
 
 
 def pagina(a, sello):
-    nav = nav_de_pagina(a['archivo'], a.get('padre3'))
+    nav = nav_de_pagina(a['archivo'], a.get('padre3'), a.get('cap_nav'))
     if nav:
         a = dict(a, pie_extra=nav, pie_corto=True)
     secciones = []

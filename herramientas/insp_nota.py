@@ -584,7 +584,7 @@ def catalogo_pagina(base, ref):
              'pasos': {'cifra': CATALOGO + '#inPaso2', 'contraste': CATALOGO + '#inPaso3'}}
     return '''<div class="in" id="inRaiz" data-paso="manual">
   <nav class="in-subnav" aria-label="De dónde viene esta página">
-    <a class="in-subnav-volver" href="herramienta-inspector-asf.html#ia-catalogo"><span aria-hidden="true">←</span> Volver a Qué encontró la ASF</a>
+    <a class="in-subnav-volver" href="herramienta-inspector-asf.html"><span aria-hidden="true">←</span> Volver a los capítulos de Qué encontró la ASF</a>
   </nav>
   <section class="in-arranque" aria-labelledby="inArrTit">
     <p class="in-kicker">Qué encontró la ASF · catálogo</p>

@@ -127,8 +127,8 @@ def arranque(C, ref, prox):
         <p class="ia-arr-nota">%s Porcentaje: por aclarar del gasto federalizado (%s) ÷ total por aclarar (%s).</p>
         %s
         <div class="ia-arr-acc">
-          <a class="ia-boton ia-boton-pri" href="#ia-estado">🗺️ Ver lo de tu estado</a>
-          <a class="ia-boton" href="#ia-acciones">⚖️ Qué pasa después</a>
+          <a class="ia-boton ia-boton-pri" href="herramienta-inspector-asf-estado.html">🗺️ Ver lo de tu estado</a>
+          <a class="ia-boton" href="herramienta-inspector-asf-acciones.html">⚖️ Qué pasa después</a>
           <a class="ia-boton" href="expedientes.html">📂 Casos por aclarar</a>
         </div>
       </section>''' % (
@@ -139,20 +139,26 @@ def arranque(C, ref, prox):
         chip('derivado'), mdp(F['porAclarar']), mdp(T['porAclarar']), cuenta)
 
 
+def cap_archivo(slug):
+    """Cada capitulo vive en su pagina (pedido del autor, 21-10-2026): la
+    portada de la aplicacion queda con el arranque y el indice."""
+    return insp_nota.CATALOGO if slug == 'catalogo' else 'herramienta-inspector-asf-%s.html' % slug
+
+
 def indice(caps):
-    return ('<nav class="ia-indice" aria-label="Capítulos de esta aplicación"><p class="ia-indice-tit">%d capítulos · elige por dónde empezar</p><ol>%s</ol></nav>'
+    return ('<nav class="ia-indice" aria-label="Capítulos de esta aplicación"><p class="ia-indice-tit">%d capítulos · cada uno abre su página</p><ol>%s</ol></nav>'
             % (len(caps), ''.join(
-                '<li><a href="#%s"><span class="ia-i-num">%02d</span><span class="ia-i-ico" aria-hidden="true">%s</span>'
+                '<li><a href="%s" data-ia-ancla="%s"><span class="ia-i-num">%02d</span><span class="ia-i-ico" aria-hidden="true">%s</span>'
                 '<span class="ia-i-tit">%s</span><span class="ia-i-cifra">%s</span></a></li>'
-                % (a, k, ico, esc(t), c) for k, (a, ico, t, c) in enumerate(caps, 1))))
+                % (cap_archivo(c['slug']), c['ancla'], k, c['ico'], esc(c['corto']), c['cifra']) for k, c in enumerate(caps, 1))))
 
 
 def sec(ancla, ico, tit, cuerpo):
-    return '''<section class="ia-sec" id="%s" aria-labelledby="%s-t">
-        <h2 class="ia-tit" id="%s-t"><span aria-hidden="true">%s</span> %s</h2>
+    """Un capitulo. El titulo lo pone la cabecera de su pagina (h1), asi que
+    aqui solo queda como nombre de la region."""
+    return '''<section class="ia-sec" id="%s" aria-label="%s">
         %s
-        <p class="ia-arriba"><a href="#ia-indice">↑ Volver a los capítulos</a></p>
-      </section>''' % (ancla, ancla, ancla, ico, tit, cuerpo)
+      </section>''' % (ancla, esc(tit), cuerpo)
 
 
 # ---------------------------------------------------------------- capitulos
@@ -357,34 +363,12 @@ def nueva(C, ref, prox):
         ('Lo que viene: la %s, el %s.' % (esc(minus(prox['titulo'])), fecha(prox['fecha']))) if prox else ''))
 
 
-def catalogo_cap(base):
-    """El catalogo de cifras oficiales y las frases de prueba, que venian de
-    Contrasta una nota (pedido del autor, 21-10-2026): viven en su pagina."""
-    cat = insp_nota.catalogo(base)
-    grupos = ', '.join('%s (%d)' % (nom.lower() if g != 'nacional' else 'nacionales', sum(1 for o in cat if o['g'] == g))
-                       for g, _i, nom in insp_nota.GRUPOS if g != 'municipios')
-    return sec('ia-catalogo', '📋', 'Catálogo de cifras oficiales', '''
-        <p class="ia-txt">Las <b>%s cifras oficiales</b> con las que contrastamos las notas, cada una con su documento y su estado: %s, más los ingresos de cada municipio del INEGI. Elige una, escribe la cifra que leíste y mide cuánto se aleja; trae frases de prueba para ver cada veredicto.</p>
-        <div class="ia-arr-acc">
-          <a class="ia-boton ia-boton-pri" href="%s">Abrir el catálogo <span aria-hidden="true">→</span></a>
-          <a class="ia-boton" href="%s">📰 Contrasta una nota con su liga</a>
-        </div>''' % (format(len(cat), ','), grupos, insp_nota.CATALOGO, insp_nota.PAGINA))
-
-
-def subpaginas(base, ref):
-    """Para apartados.insp_subpaginas(): la pagina del catalogo."""
-    return [{'archivo': insp_nota.CATALOGO, 'icono': '📋', 'menu': 'Catálogo de cifras oficiales',
-             'titulo': 'Catálogo de cifras oficiales', 'lema': 'Qué encontró la ASF · catálogo',
-             'entrada': '<b>Catálogo de cifras oficiales.</b> Elige una cifra con su documento, escribe la que leíste en una nota y mide cuánto se aleja.',
-             'bloque': insp_nota.catalogo_pagina(base, ref), 'estilos': ['insp-nota.css'], 'scripts': ['insp-nota.js']}]
-
-
 def documentos(C, ref):
     docs = ''.join('<li><a href="%s" target="_blank" rel="noopener">%s ↗</a>%s</li>'
                    % (esc(f['url']), esc(f['doc']), ('<code title="Huella SHA-256 del PDF">%s…</code>' % f['sha256'][:16]) if f.get('sha256') else '')
                    for f in C['fuentes'].values())
     return sec('ia-docs', '📚', 'Documentos y descarga', '''
-        <p class="ia-txt">Cada cifra de esta página sale de estos documentos. Puedes bajarlos y comprobarlos, o descargar la base por estado para abrirla en Excel.</p>
+        <p class="ia-txt">Cada cifra de los nueve capítulos sale de estos documentos. Puedes bajarlos y comprobarlos, o descargar la base por estado para abrirla en Excel.</p>
         <div class="ia-arr-acc">
           <button type="button" class="ia-boton ia-boton-pri" id="iaCSV" hidden>⬇️ Descargar CSV por estado</button>
           <a class="ia-boton" href="%s" target="_blank" rel="noopener">🔎 Buscar una auditoría en ASF Datos ↗</a>
@@ -397,26 +381,10 @@ def documentos(C, ref):
         esc(C['nota']), esc(C['consulta']), ref('ref-asf-mdb2024')))
 
 
-def construir(base, ref):
-    C = base['cuenta_publica_asf']
-    T = C['cp2024']['total']
-    N = C['cp2025']
+def _datos(C):
     S = C.get('serie') or []
-    prox = next((c for c in C['calendario'] if not c.get('hecho')), None)
-    fed = C['cp2024']['federalizado']['porAclarar'] / T['porAclarar'] * 100
     E = C['cp2024']['entidades']
-    caps = [
-        ('ia-calendario', '🗓️', 'Qué es y cuándo se revisa', fecha(prox['fecha']) if prox else ''),
-        ('ia-cifras', '🔎', 'La Cuenta Pública 2024 en cifras', num(T['auditorias']) + ' auditorías'),
-        ('ia-serie', '📈', 'Seis años de revisiones', '%d a %d' % (S[0]['cp'], S[-1]['cp']) if S else ''),
-        ('ia-donde', '🏛️', 'Dónde se concentra', pct(fed, 0) + ' en estados y municipios'),
-        ('ia-estado', '🗺️', 'Tu estado', '32 estados comparados'),
-        ('ia-acciones', '⚖️', 'Qué significa cada acción', num(T['PO']) + ' pliegos'),
-        ('ia-2025', '🆕', 'La Cuenta Pública 2025', num(N['auditorias']) + ' auditorías en la 1.ª entrega'),
-        ('ia-catalogo', '📋', 'Catálogo de cifras oficiales', format(len(insp_nota.catalogo(base)), ',') + ' cifras con documento'),
-        ('ia-docs', '📚', 'Documentos y descarga', 'CSV por estado'),
-    ]
-    datos = {
+    return {
         'ent': [{'e': e['entidad'], 'n': nombre(e['entidad']), 't': e['total'], 'd': e['desglose']} for e in E],
         'serie': [{k: r.get(k) for k in ('cp', 'porAclarar', 'observado', 'observadoEstado', 'recuperaciones', 'auditorias', 'PO', 'fuente', 'pagina')} for r in S],
         'met': [{'k': k, 'et': et, 'mdp': m} for k, et, m in METRICAS],
@@ -425,18 +393,87 @@ def construir(base, ref):
         'csvFuente': 'ASF, Matriz de Datos Básicos del Informe del Resultado de la Cuenta Pública 2024, tres entregas (consolidado), corte %s, pp. %s'
                      % (C['cp2024']['corte'], C['cp2024']['paginaEntidades']),
     }
+
+
+def capitulos(base, ref):
+    """Los nueve capitulos, en orden: slug de su pagina, ancla vieja (para
+    los enlaces que aun traen #ia-...), icono, nombre corto del indice, cifra
+    de la tarjeta, titulo de la pagina, entrada y cuerpo (None en el
+    catalogo, que arma insp_nota)."""
+    C = base['cuenta_publica_asf']
+    T = C['cp2024']['total']
+    N = C['cp2025']
+    S = C.get('serie') or []
+    prox = next((c for c in C['calendario'] if not c.get('hecho')), None)
+    fed = C['cp2024']['federalizado']['porAclarar'] / T['porAclarar'] * 100
+    def c(slug, ancla, ico, corto, cifra, titulo, entrada, cuerpo, con_datos=False):
+        return {'slug': slug, 'ancla': ancla, 'ico': ico, 'corto': corto, 'cifra': cifra, 'titulo': titulo,
+                'entrada': entrada, 'cuerpo': cuerpo, 'datos': con_datos}
+    return [
+        c('calendario', 'ia-calendario', '🗓️', 'Qué es y cuándo se revisa', fecha(prox['fecha']) if prox else '',
+          'Qué es la Cuenta Pública y cuándo se revisa',
+          'El presupuesto dice cuánto se <b>puede</b> gastar; la Cuenta Pública, cuánto se gastó de verdad. Aquí ves quién la revisa y en qué fechas.',
+          lambda: calendario(C, prox)),
+        c('cifras', 'ia-cifras', '🔎', 'La Cuenta Pública 2024 en cifras', num(T['auditorias']) + ' auditorías',
+          'Lo que encontró la ASF en la Cuenta Pública 2024',
+          'Cuántas auditorías hizo, cuánto revisó y qué acciones promovió en el ejercicio más reciente con sus tres entregas completas.',
+          lambda: cifras(C)),
+        c('serie', 'ia-serie', '📈', 'Seis años de revisiones', '%d a %d' % (S[0]['cp'], S[-1]['cp']) if S else '',
+          'Seis años de revisiones: %d a %d' % (S[0]['cp'], S[-1]['cp']) if S else 'Seis años de revisiones',
+          'Cada Cuenta Pública revisada, renglón por renglón, con su documento: elige qué cifra comparar.',
+          lambda: serie(C), True),
+        c('donde', 'ia-donde', '🏛️', 'Dónde se concentra', pct(fed, 0) + ' en estados y municipios',
+          'Dónde se concentra lo que falta aclarar',
+          'Por grupo de gasto y en los diez renglones con más monto por aclarar.',
+          lambda: donde(C)),
+        c('estado', 'ia-estado', '🗺️', 'Tu estado', '32 estados comparados',
+          'Lo que la ASF le observó a tu estado',
+          'Elige tu estado: cuántas auditorías tuvo, cuánto quedó por aclarar, quién gastó el dinero y en qué lugar queda de los 32.',
+          lambda: estado(C), True),
+        c('acciones', 'ia-acciones', '⚖️', 'Qué significa cada acción', num(T['PO']) + ' pliegos',
+          'Qué significa cada acción y qué pasa después',
+          'Una observación no es una sentencia. Cada acción abre un camino distinto, con los plazos que marca la ley.',
+          lambda: acciones(C)),
+        c('2025', 'ia-2025', '🆕', 'La Cuenta Pública 2025', num(N['auditorias']) + ' auditorías en la 1.ª entrega',
+          'La Cuenta Pública 2025: lo que ya salió',
+          'Lo que trae la primera entrega de la ASF sobre el gasto de 2025 y lo que viene después.',
+          lambda: nueva(C, ref, prox)),
+        c('catalogo', 'ia-catalogo', '📋', 'Catálogo de cifras oficiales', format(len(insp_nota.catalogo(base)), ',') + ' cifras con documento',
+          'Catálogo de cifras oficiales',
+          '<b>Catálogo de cifras oficiales.</b> Elige una cifra con su documento, escribe la que leíste en una nota y mide cuánto se aleja.',
+          None),
+        c('documentos', 'ia-docs', '📚', 'Documentos y descarga', 'CSV por estado',
+          'Documentos y descarga',
+          'Los documentos oficiales de donde sale cada cifra de esta aplicación, y la base por estado para abrirla en Excel.',
+          lambda: documentos(C, ref), True),
+    ]
+
+
+def construir(base, ref):
+    """La portada de la aplicacion: el arranque y el indice de capitulos."""
+    C = base['cuenta_publica_asf']
+    prox = next((c for c in C['calendario'] if not c.get('hecho')), None)
     return '\n      '.join([
         '<div class="ia">',
         arranque(C, ref, prox),
-        '<div id="ia-indice">' + indice(caps) + '</div>',
-        calendario(C, prox),
-        cifras(C),
-        serie(C),
-        donde(C),
-        estado(C),
-        acciones(C),
-        nueva(C, ref, prox),
-        catalogo_cap(base),
-        documentos(C, ref),
-        '<script type="application/json" id="iaDatos">%s</script>' % _json(datos),
+        '<div id="ia-indice">' + indice(capitulos(base, ref)) + '</div>',
         '</div>'])
+
+
+def subpaginas(base, ref):
+    """Para apartados.insp_subpaginas(): una pagina por capitulo, con
+    anterior y siguiente entre capitulos (cap_nav)."""
+    caps = capitulos(base, ref)
+    datos = '<script type="application/json" id="iaDatos">%s</script>' % _json(_datos(base['cuenta_publica_asf']))
+    out = []
+    for k, cp in enumerate(caps):
+        p = {'archivo': cap_archivo(cp['slug']), 'icono': cp['ico'], 'menu': cp['corto'], 'titulo': cp['titulo'],
+             'lema': 'Qué encontró la ASF · capítulo %d de %d' % (k + 1, len(caps)), 'entrada': cp['entrada'],
+             'cap_nav': tuple((cap_archivo(x['slug']), x['corto']) if x else None
+                              for x in (caps[k - 1] if k else None, caps[k + 1] if k + 1 < len(caps) else None)) + (len(caps),)}
+        if cp['cuerpo'] is None:
+            p.update({'bloque': insp_nota.catalogo_pagina(base, ref), 'estilos': ['insp-nota.css'], 'scripts': ['insp-nota.js']})
+        else:
+            p['bloque'] = '\n      '.join(['<div class="ia ia-cap">', cp['cuerpo'](), datos if cp['datos'] else '', '</div>'])
+        out.append(p)
+    return out
