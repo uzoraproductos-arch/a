@@ -28,6 +28,7 @@ Lo llama apartados.insp_nativa() (INSP_NATIVAS['ccticket']).
 """
 import html
 import json
+import re
 
 from presupuesto_modulos import chip
 
@@ -114,7 +115,7 @@ def _resico_tabla(rs):
                      for r in rs['renglones'])
 
 
-def construir(base, ref):
+def _completo(base, ref):
     c = base['calculadora_civica']
     p = c['parametros']
     P = base['panoramaErario']
@@ -383,3 +384,92 @@ def construir(base, ref):
         iva=p['iva']['tasa'], rubros='\n'.join(rubros),
         ciego_ico=ciego['icono'], ciego_tit=esc(tu(ciego['titulo'])), ciego_tx=esc(tu(ciego['texto'])) + (' ' + esc(tu(ciego['excepcion'])) if ciego.get('excepcion') else ''),
         total='$' + format(total, ',.1f'), poderes_txt=poderes_txt, datos=_json(D))
+
+
+# Las cuatro cuentas en paginas propias (pedido del autor, 22-10-2026): la
+# aplicacion 1 solo presenta las cuatro tarjetas, y cada una abre su pagina
+# con su parte de la calculadora. El ingreso viaja de una pagina a otra en
+# el almacenamiento del navegador (cc-ticket.js), nunca en el servidor.
+PORTADA = 'herramienta-calculadora-ticket.html'
+PASOS = [
+    # (n, slug, icono, nombre, frase, que hace)
+    (1, 'ingreso', '💵', 'Tu ingreso', 'Escribe lo que ganas',
+     'Cuánto ganas, cada cuándo, si es antes o después de descuentos y en qué régimen tributas. Con eso la calculadora saca la cuenta.'),
+    (2, 'retienen', '💸', 'Lo que te retienen', 'Renglón por renglón',
+     'El ISR con la tarifa del artículo 96, las cuotas obreras al IMSS y el IVA como escenario, cada uno con la regla y el documento que lo sostienen.'),
+    (3, 'reparto', '🧭', 'A dónde va cada peso', 'Según el Presupuesto 2026',
+     'Tu impuesto sobre la renta repartido con las mismas proporciones del Presupuesto de Egresos aprobado para 2026, rubro por rubro.'),
+    (4, 'estado', '📄', 'Tu estado de cuenta', 'Con folio y huella',
+     'Lo que ganaste, lo que te retuvieron y a dónde fue tu impuesto en un solo documento, con folio y huella para comprobarlo, listo para descargar o compartir.'),
+]
+
+
+def paso_archivo(slug):
+    return PORTADA[:-5] + '-' + slug + '.html'
+
+
+def _corta(completo, inicio, fin='\n  </section>'):
+    i = completo.index(inicio)
+    return completo[i:completo.index(fin, i) + len(fin)]
+
+
+def construir(base, ref):
+    """La aplicacion 1: la presentacion y las cuatro tarjetas."""
+    c = _completo(base, ref)
+    arr = _corta(c, '  <section class="ct-arranque"')
+    arr = re.sub(r'\n    <ol class="ct-indice".*?</ol>', '', arr, flags=re.S)
+    arr = arr.replace('la página saca cuatro cuentas', 'la calculadora saca cuatro cuentas, cada una en su página')
+    tarjetas = '\n'.join(
+        '      <li><a class="herr-paso rubro-calculadora" href="%s">\n'
+        '        <span class="herr-paso-num" aria-hidden="true">%d</span>\n'
+        '        <span class="herr-paso-ico" aria-hidden="true">%s</span>\n'
+        '        <span class="herr-paso-tx"><span class="herr-paso-frase">%s</span>'
+        '<span class="herr-paso-nombre">%s</span><span class="herr-paso-desc">%s</span></span>\n'
+        '        <span class="herr-paso-accion">Abrir ➔</span>\n'
+        '      </a></li>' % (paso_archivo(slug), n, ico, frase, nombre, desc)
+        for n, slug, ico, nombre, frase, desc in PASOS)
+    rutas = ' '.join('data-paso%d="%s"' % (n, paso_archivo(slug)) for n, slug, _, _, _, _ in PASOS)
+    return ('<div class="ct ct-portada" id="ctPortada" %s>\n%s\n'
+            '  <section class="ct-cuentas" aria-labelledby="ctCuentasTit">\n'
+            '    <h2 class="ct-cuentas-tit" id="ctCuentasTit">Las cuatro cuentas</h2>\n'
+            '    <p class="ct-cuentas-tx">Empieza por tu ingreso: las otras tres usan esa cifra. Cada tarjeta abre su propia página.</p>\n'
+            '    <ol class="herr-ruta">\n%s\n    </ol>\n  </section>\n\n%s\n</div>'
+            % (rutas, arr, tarjetas, _corta(c, '  <aside class="ct-pie">', '\n  </aside>')))
+
+
+def subpaginas(base, ref):
+    """Para apartados.insp_subpaginas(): una pagina por cuenta. Cada una
+    lleva la calculadora entera (el JS la necesita) con solo su parte a la
+    vista."""
+    c = _completo(base, ref)
+    sm = base['calculadora_civica']['parametros']['salario_minimo']['mensual_general']
+    out = []
+    for k, (n, slug, ico, nombre, frase, desc) in enumerate(PASOS):
+        pag = c.replace('<div class="ct" id="ctRaiz">', '<div class="ct ct-sola" id="ctRaiz" data-paso="%d">' % n, 1)
+        pag = pag.replace(_corta(c, '  <section class="ct-arranque"'), '', 1)
+        for m in range(1, 5):
+            if m != n:
+                pag = pag.replace('<section class="ct-paso" id="ctPaso%d"' % m, '<section class="ct-paso" id="ctPaso%d" hidden' % m, 1)
+        aviso = ''
+        if n > 1:
+            aviso = ('  <div class="ct-falta" id="ctFalta" hidden>\n'
+                     '    <p><b>Todavía no escribes tu ingreso.</b> Esta cuenta sale de esa cifra: escríbela en '
+                     '<a href="%s">1 · Tu ingreso</a> o prueba con el salario mínimo general de 2026, %s al mes %s.</p>\n'
+                     '    <div class="ct-acciones"><a class="ct-boton" href="%s"><span aria-hidden="true">💵</span> Escribir mi ingreso</a>'
+                     '<button type="button" class="ct-boton ct-sec" data-monto="%s" data-oficial="1"><span aria-hidden="true">📄</span> Usar el salario mínimo</button></div>\n'
+                     '  </div>\n'
+                     '  <p class="ct-tuing" id="ctTuIng" hidden></p>\n'
+                     % (paso_archivo('ingreso'), pesos2(sm), chip('oficial'), paso_archivo('ingreso'), sm))
+        sig = PASOS[k + 1] if k + 1 < len(PASOS) else None
+        sigue = ('  <p class="ct-sigue" id="ctSigue"><a class="ct-boton" href="%s">Sigue con %d · %s <span aria-hidden="true">→</span></a></p>\n'
+                 % (paso_archivo(sig[1]), sig[0], sig[3])) if sig else ''
+        i = pag.index('  <section class="ct-paso" id="ctPaso%d"' % n)
+        pag = pag[:i] + aviso + pag[i:]
+        j = pag.index('\n  </section>', pag.index('id="ctPaso%d"' % n)) + len('\n  </section>')
+        pag = pag[:j] + '\n' + sigue + pag[j:]
+        out.append({'archivo': paso_archivo(slug), 'icono': ico, 'menu': nombre, 'titulo': nombre,
+                    'lema': 'Tu estado de cuenta · cuenta %d de %d' % (n, len(PASOS)),
+                    'entrada': '<b>%s.</b> %s' % (frase, desc), 'bloque': pag,
+                    'cap_nav': tuple((paso_archivo(x[1]), x[3]) if x else None
+                                     for x in (PASOS[k - 1] if k else None, sig)) + (len(PASOS), ('Cuenta', 'cuentas'))})
+    return out

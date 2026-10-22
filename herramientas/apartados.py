@@ -641,7 +641,7 @@ HERRAMIENTAS = [
      'estado y tu municipio con los 2,479 del padrón nacional.',
      'calculadora', [
          ('ccticket', '🧾', 'Tu estado de cuenta', 'Lo que pagas y a dónde va',
-          'Escribe lo que ganas y la página saca cuatro cuentas: tu ingreso, lo que te retienen, a dónde va cada peso de tu impuesto y tu estado de cuenta.'),
+          'Cuatro cuentas, cada una en su página: tu ingreso, lo que te retienen, a dónde va cada peso de tu impuesto y tu estado de cuenta.'),
          ('cccompara', '⚡', 'Tú contra ellos', 'Cargo por cargo',
           'Tu ingreso neto frente al de quienes legislan, juzgan y gobiernan, y sus prestaciones de ley contra las tuyas, con el documento de cada cifra.'),
          ('ccreloj', '⏱️', 'El reloj de la deuda', 'Y de lo perdido',
@@ -1076,8 +1076,10 @@ def nav_capitulos(padre, cap, palabra=('Capítulo', 'capítulos')):
     capitulo anterior, todos los capitulos (la portada de la aplicacion),
     capitulo siguiente e indice general. cap = (anterior, siguiente, total),
     cada vecino (archivo, nombre) o None."""
-    ant, sig, total = cap
-    art = 'Las' if palabra[1].endswith('ones') else 'Los'
+    ant, sig, total = cap[:3]
+    if len(cap) > 3:
+        palabra = cap[3]
+    art = 'Las' if palabra[1].endswith(('ones', 'as')) else 'Los'
     filas = ['        <a class="herr-min ant" href="%s"><span>← %s anterior</span><small>%s</small></a>' % (ant[0], palabra[0], ant[1]) if ant else '',
              '        <a class="herr-min" href="%s"><span>%s %d %s</span><small>%s</small></a>' % (padre[0], art, total, palabra[1], padre[1]),
              '        <a class="herr-min sig" href="%s"><span>%s siguiente →</span><small>%s</small></a>' % (sig[0], palabra[0], sig[1]) if sig else '',

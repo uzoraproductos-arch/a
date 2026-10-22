@@ -13,6 +13,16 @@
 (function () {
   'use strict';
 
+  /* La aplicacion 1 solo presenta las cuatro cuentas (22-10-2026): una liga
+     de verificacion o un ancla vieja (#ctPaso3) va a la pagina de su cuenta. */
+  var portada = document.getElementById('ctPortada');
+  if (portada) {
+    var ancla = /^#ctPaso([1-4])$/.exec(location.hash);
+    if (/[?&]verifica=/.test(location.search)) location.replace(portada.getAttribute('data-paso4') + location.search);
+    else if (ancla) location.replace(portada.getAttribute('data-paso' + ancla[1]));
+    return;
+  }
+
   var D;
   try { D = JSON.parse(document.getElementById('ctDatos').textContent); } catch (e) { return; }
   var $ = function (id) { return document.getElementById(id); };
@@ -844,16 +854,33 @@
     est.res = resultado();
     est.calculado = true;
     $('ctVacio2').hidden = true; $('ctRet').hidden = false;
-    pintarControles(); pintarVivo(); pintarRetencion(); pintarReparto(); pintarDoc();
+    pintarControles(); pintarVivo(); pintarRetencion(); pintarReparto(); pintarDoc(); pintarFalta();
     guardar();
-    if (desplazar) $('ctPaso2').scrollIntoView({ behavior: reducido ? 'auto' : 'smooth', block: 'start' });
+    /* En la pagina de tu ingreso, la cuenta 2 vive en otra pagina: se baja al
+       boton que lleva a ella. */
+    var dest = $('ctPaso2').hidden ? $('ctSigue') : $('ctPaso2');
+    if (desplazar && dest) dest.scrollIntoView({ behavior: reducido ? 'auto' : 'smooth', block: 'start' });
   }
 
   function ceros(borrar) {
     est.calculado = false; est.res = null;
     $('ctVacio2').hidden = false; $('ctRet').hidden = true;
-    pintarControles(); pintarVivo(); pintarReparto(); pintarDoc();
+    pintarControles(); pintarVivo(); pintarReparto(); pintarDoc(); pintarFalta();
     if (borrar) guardar();
+  }
+
+  /* Cuentas 2 a 4 en su pagina: sin ingreso, el aviso para escribirlo; con
+     ingreso, la cifra que usa la cuenta y la liga para cambiarla. */
+  function pintarFalta() {
+    var falta = $('ctFalta'), tuya = $('ctTuIng');
+    if (!falta || !tuya) return;
+    falta.hidden = est.calculado;
+    tuya.hidden = !est.calculado;
+    if (!est.calculado) return;
+    var a = falta.querySelector('a');
+    tuya.innerHTML = 'Esta cuenta usa tu ingreso de <b>' + pesos2(est.m) + (est.per === 'ano' ? ' al año' : ' al mes') + '</b>, ' +
+      (est.nat === 'neto' ? 'después de descuentos' : 'antes de descuentos') + ', en <b>' + esc(regimen().nombre) + '</b>. ' +
+      '<a href="' + a.getAttribute('href') + '">Cámbialo en 1 · Tu ingreso</a>';
   }
 
   /* ---------------- arranque ---------------- */

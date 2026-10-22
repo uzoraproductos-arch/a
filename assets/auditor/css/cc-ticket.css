@@ -257,3 +257,15 @@
   #ctDoc { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none; animation: none; }
   #ctDoc .ct-mov { animation: none; }
 }
+/* Las cuatro cuentas en paginas propias (22-10-2026). */
+.ct-paso[hidden], .ct-falta[hidden], .ct-tuing[hidden] { display: none; }
+.ct-cuentas { margin: 0 0 24px; }
+.ct-cuentas-tit { margin: 0 0 6px; font: 800 26px/1.2 'Playfair Display', Georgia, serif; color: var(--ct); }
+.ct-cuentas-tx { margin: 0 0 16px; font-size: 17px; line-height: 1.55; color: var(--ct-tx2); }
+.ct-falta { margin: 0 0 24px; padding: 18px 20px; border-radius: 14px; border-left: 5px solid var(--ct-acento); background: var(--ct-claro); font-size: 17px; line-height: 1.55; color: var(--ct-tx); }
+.ct-falta p { margin: 0; }
+.ct-falta .ct-acciones { margin-top: 14px; }
+.ct-tuing { margin: 0 0 18px; padding: 12px 16px; border-radius: 12px; background: #f3f6fb; border: 1px solid var(--ct-linea); font-size: 16px; line-height: 1.55; color: var(--ct-tx); }
+.ct-tuing a { display: inline-block; min-height: 44px; line-height: 44px; font-weight: 700; color: var(--ct); }
+.ct-sigue { margin: 0 0 24px; text-align: right; scroll-margin-top: 80px; }
+@media (max-width: 600px) { .ct-sigue { text-align: left; } .ct-sigue .ct-boton { width: 100%; } }
