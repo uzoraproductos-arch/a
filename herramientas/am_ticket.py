@@ -172,7 +172,7 @@ def construir(base, ref):
 
     return '''<div class="at" id="atRaiz">
   <section class="at-arranque" aria-labelledby="atArrTit">
-    <p class="at-kicker">Costo Ambiental · aplicación 2</p>
+    <p class="at-kicker">Costo Ambiental · aplicación 1</p>
     <h2 class="at-grande" id="atArrTit"><span aria-hidden="true">🧾</span> Tu ticket en negativo</h2>
     <p class="at-txt">Tu estado de cuenta de la Calculadora te dice a dónde va lo que pagas. Este ticket te dice lo contrario: <b>lo que ya te cargaron a tu nombre sin preguntarte</b>. Tu parte de la deuda del gobierno, de los intereses que esa deuda cobra cada año y del daño ambiental del país, medida contra lo que ganas.</p>
     <p class="at-privado"><span aria-hidden="true">🔒</span> Lo que escribes se queda en tu navegador: no se envía a ningún lado.</p>
@@ -240,7 +240,7 @@ def construir(base, ref):
       <div class="at-kg-c at-kg-anio"><b>{kg_anio} kg</b><span>al año (× 365)</span></div>
     </div>
     <p class="at-txt" id="atKgHoy"></p>
-    <p class="at-txt">Ese servicio lo pagan los municipios, que son el orden de gobierno con menos ingreso propio. La basura mal gestionada le costó al país <b>{basura_mdp}</b> en 2024 {chip_b} {ceem}: <b>{basura_hab}</b> por persona {chip_d}. Más en <a href="herramienta-ambiente-basura.html">🗑️ Basura y protección</a>.</p>
+    <p class="at-txt">Ese servicio lo pagan los municipios, que son el orden de gobierno con menos ingreso propio. La basura mal gestionada le costó al país <b>{basura_mdp}</b> en 2024 {chip_b} {ceem}: <b>{basura_hab}</b> por persona {chip_d}. Más en <a href="datos-ambiente-basura.html">Datos → Medio ambiente → 🗑️ La basura</a>.</p>
   </section>
 
   <section class="at-sec" id="atOrigen" aria-labelledby="atOrTit">
@@ -257,7 +257,7 @@ def construir(base, ref):
     <p>Los cargos del año juntan cifras de años distintos: los intereses son los aprobados para 2026 y el daño ambiental es el último que publicó el INEGI, el de 2024. Se suman para darte un orden de magnitud, y cada renglón dice su año.</p>
     <p>Si escribes un bruto, tu neto se calcula como el de quien trabaja en nómina (sueldos y salarios): la tarifa mensual del ISR ({r_isr}) menos el subsidio para el empleo ({r_sub}) y las cuotas obreras del IMSS ({r_imss}). El salario mínimo no paga ISR ni cuota obrera: su neto es igual a su bruto. Si cobras por honorarios, RESICO u otro régimen, escribe tu neto.</p>
     <p>Lo que todavía nos deben las dependencias está en el <a href="pendientes.html">Registro de pendientes</a>. Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>.</p>
-    <p class="at-hermanas">Sigue con Costo Ambiental: <a href="herramienta-ambiente-reloj.html">⏱️ El reloj y el año</a> · <a href="herramienta-ambiente-basura.html">🗑️ Basura y protección</a> · <a href="herramienta-ambiente-pib.html">📉 El PIB no alcanza</a> · <a href="herramienta-ambiente-crisis.html">🌀 Crisis ambientales</a></p>
+    <p class="at-hermanas">Sigue con Costo Ambiental: <a href="herramienta-ambiente-reloj.html">⏱️ El reloj y el año</a> · <a href="herramienta-ambiente-pib.html">📈 ¿Cuánto del crecimiento es real?</a> · <a href="herramienta-ambiente-inversion.html">🌱 Simulador de inversión ambiental</a> · <a href="herramienta-ambiente-auditor.html">🔍 Auditor ambiental</a> · <a href="herramienta-ambiente-crisis.html">🌀 Crisis ambientales</a></p>
     <p class="at-hermanas">Y con la Calculadora: <a href="herramienta-calculadora-ticket.html">🧾 Tu estado de cuenta</a> · <a href="herramienta-calculadora-reloj.html">⏱️ El reloj de la deuda</a></p>
   </aside>
   <script type="application/json" id="atDatos">{datos}</script>

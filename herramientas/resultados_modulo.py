@@ -212,7 +212,7 @@ def construir(base, ref, glos):
             <div class="er-eco-c er-eco-costo"><span>Costo por agotamiento y degradación ambiental %s</span><b>%s</b><small>%s%% del PIB de 2024</small></div>
             <div class="er-eco-c er-eco-prot"><span>Gasto público en protección ambiental %s</span><b>%s</b><small>%s%% del PIB de 2024</small></div>
           </div>
-          <p class="er-pie">Por cada peso que el sector público destinó a proteger el ambiente, el capital natural resintió <b>$%.2f</b> de deterioro %s (%s ÷ %s). %s %s Es contexto nacional: no se resta del presupuesto. <a href="herramienta-ambiente-pib.html">Las cuentas ecológicas completas: Herramientas › Costo ambiental › El PIB no alcanza ➔</a></p>''' % (
+          <p class="er-pie">Por cada peso que el sector público destinó a proteger el ambiente, el capital natural resintió <b>$%.2f</b> de deterioro %s (%s ÷ %s). %s %s Es contexto nacional: no se resta del presupuesto. <a href="datos-ambiente-pib.html">Las cuentas ecológicas completas: Datos › Medio ambiente › El PIB que no alcanza ➔</a></p>''' % (
         chip(ct['estado']), mdp(ct['total_mdp'], 0), ct['pct_pib'], chip(gpa['estado']), mdp(gpa['monto_mdp'], 0), gpa['pct_pib'],
         gpa['ratio_dano_sobre_gasto'], chip(gpa['ratio_estado']), mdp(ct['total_mdp'], 0), mdp(gpa['monto_mdp'], 0),
         'INEGI, Cuentas Económicas y Ecológicas de México 2024 (1 de diciembre de 2025).', ref('ref-ceem-2024'))

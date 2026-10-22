@@ -39,7 +39,7 @@ TABLA = 'herramienta-megaobras-tabla.html'
 SECTOR = 'herramienta-megaobras-sector.html'
 CIFRAS = 'herramienta-megaobras-cero.html'
 CUENTA = 'herramienta-megaobras-pulso-cuenta.html'
-AMBIENTE = 'herramienta-ambiente-basura.html#abMegaobras'
+AMBIENTE = 'datos-ambiente-megaobras.html'
 
 # (clave, icono, pregunta)
 PREGUNTAS = [
@@ -180,7 +180,7 @@ def _ambiente(obs, sectores):
         return None
     if not fis:
         return ('<p class="mi-res-lead">Ninguna de estas obras es obra de construcción: los rescates, las compras de empresas y los programas no piden '
-                'permiso ambiental. La huella de las que sí lo piden está en Costo Ambiental.</p>%s' % _ir(AMBIENTE, 'Abre «La huella de las megaobras»'))
+                'permiso ambiental. La huella de las que sí lo piden está en Datos → Medio ambiente.</p>%s' % _ir(AMBIENTE, 'Abre «La huella de las megaobras»'))
     filas = ''.join('<li class="mi-o">%s<p class="mi-o-pie">Costo registrado: %s</p></li>'
                     % (_obra_cab(o, sectores), mo_tabla._cifra(o, 'inversion_real_mdp', mdp)) for o in fis)
     return ('<p class="mi-res-lead">%d obra%s de construcción: necesitaba%s una Manifestación de Impacto Ambiental aprobada por la SEMARNAT antes de empezar '

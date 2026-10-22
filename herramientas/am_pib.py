@@ -28,8 +28,14 @@ prensa 150/25 del INEGI (CEEM 2024, 1 de diciembre de 2025):
 4. «Las emisiones al aire [son] casi dos terceras partes de toda la cuenta
    ambiental» -> son 60.3 % (832,799.4 / 1,382,214): «seis de cada diez».
 
+Desde el 22-10-2026 (pedido del autor) la aplicacion es solo el simulador
+(«¿Cuanto del crecimiento es real?»): la cascada, el desglose y los puntos
+ciegos son informacion y viven en Datos → Medio ambiente (datos_ambiente.py).
+_completo() sigue armando la pagina entera y cada quien toma sus bloques.
+
 Lo llama apartados.insp_nativa() (INSP_NATIVAS['ampib']).
 """
+import am_cortes
 import html
 import json
 
@@ -90,7 +96,9 @@ def _op(texto):
     return '<span class="ap-op"><b>Operación:</b> %s</span>' % texto
 
 
-def construir(base, ref):
+def _completo(base, ref):
+    """La pagina completa de antes del 22-10-2026: de ella toman sus bloques
+    la aplicacion (construir) y Datos → Medio ambiente (datos_ambiente.py)."""
     c = base['cuentas_ecologicas']
     pib = float(c['pib_mdp'])
     casc = {p['id']: p for p in c['cascada']}
@@ -337,6 +345,25 @@ def construir(base, ref):
         ciegos=ciegos, jur=jur, nota_met=esc(c['nota_metodologica']), publicacion=esc(c['publicacion']),
         r_ceem=ref(c['ref_fuente']), r_prog=ref(c['ref_programa']), r_pib=ref(c['ref_pib']), f_doc=_fuente(DOC_CEEM),
         datos=_json(datos))
+
+
+def construir(base, ref):
+    """La aplicacion 3 de Costo Ambiental: el arranque con las tres cifras de
+    partida y el simulador del crecimiento real."""
+    html = _completo(base, ref)
+    arranque = am_cortes.bloque(html, clase='ap-arranque')
+    i = arranque.index('\n    <ol class="ap-indice"')
+    arranque = arranque[:i] + arranque[arranque.index('</ol>', i) + 5:]
+    arranque = (arranque.replace('Costo ambiental · aplicación 4', 'Costo Ambiental · aplicación 3')
+                .replace('<p class="ap-txt">', '<p class="ap-txt">Si el PIB crece, ¿crece también la riqueza que de verdad queda? '
+                         'Pruébalo con el simulador, partiendo de las cifras oficiales. ', 1))
+    sim = am_cortes.sin_numeros(am_cortes.bloque(html, id_='apSim'), 'ap-n')
+    aviso = '''
+  <aside class="ap-aviso">
+    <p><b>De dónde salen los puntos de partida.</b> Del INEGI, Cuentas Económicas y Ecológicas de México %s: el PIB, el costo del daño ambiental y el Producto Interno Neto Ecológico. La resta completa, paso a paso, y qué se acabó y qué se ensució están en <a href="datos-ambiente-pib.html">Datos → Medio ambiente</a>. Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>.</p>
+    <p class="ap-hermanas">Sigue en Costo Ambiental: <a href="herramienta-ambiente-ticket.html">🧾 Tu ticket en negativo</a> · <a href="herramienta-ambiente-reloj.html">⏱️ El reloj y el año</a> · <a href="herramienta-ambiente-inversion.html">🌱 Simulador de inversión ambiental</a> · <a href="herramienta-ambiente-auditor.html">🔍 Auditor ambiental</a></p>
+  </aside>''' % base['cuentas_ecologicas']['ejercicio']
+    return '<div class="ap" id="apRaiz">' + arranque + sim + aviso + am_cortes.guion(html, 'apDatos') + '\n</div>'
 
 
 def _mando(id_, etiqueta, mn, mx, valor, unidad, ico):

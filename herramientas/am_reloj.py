@@ -310,7 +310,7 @@ def construir(base, ref):
 
     return '''<div class="ar" id="arRaiz">
   <section class="ar-arranque" aria-labelledby="arArrTit">
-    <p class="ar-kicker">Costo Ambiental · aplicación 1</p>
+    <p class="ar-kicker">Costo Ambiental · aplicación 2</p>
     <h2 class="ar-grande" id="arArrTit">Mientras lees, el país pierde dinero. Mira cuánto, y cómo se ve un año entero.</h2>
     <p class="ar-txt">Dos piezas: un <b>reloj</b> que reparte por segundo el costo del daño ambiental que calcula el INEGI y la basura que cuenta la SEMARNAT, y una <b>simulación</b> que acumula, día por día, las grandes cifras del erario en veinte segundos.</p>
     <ol class="ar-indice" aria-label="En esta página">
@@ -370,7 +370,7 @@ def construir(base, ref):
       <li>Huachicol fiscal: {ig2}</li>
     </ul>
     <p class="ar-nota">Las cifras con chip <b>derivado</b> son cuentas sobre cifras oficiales, con la operación dicha. Lo que todavía nos deben las dependencias está en el <a href="pendientes.html">Registro de pendientes</a>. Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>.</p>
-    <p class="ar-hermanas">Sigue en Costo Ambiental: <a href="herramienta-ambiente-ticket.html">🧾 Tu ticket en negativo</a> · <a href="herramienta-ambiente-basura.html">🗑️ Basura y protección</a> · <a href="herramienta-ambiente-pib.html">📉 El PIB no alcanza</a> · <a href="herramienta-ambiente-crisis.html">🌀 Crisis ambientales</a></p>
+    <p class="ar-hermanas">Sigue en Costo Ambiental: <a href="herramienta-ambiente-ticket.html">🧾 Tu ticket en negativo</a> · <a href="herramienta-ambiente-pib.html">📈 ¿Cuánto del crecimiento es real?</a> · <a href="herramienta-ambiente-inversion.html">🌱 Simulador de inversión ambiental</a> · <a href="herramienta-ambiente-auditor.html">🔍 Auditor ambiental</a> · <a href="herramienta-ambiente-crisis.html">🌀 Crisis ambientales</a></p>
     <p class="ar-hermanas">Otros relojes y cuentas: <a href="herramienta-calculadora-reloj.html">⏱️ El reloj de la deuda</a> · <a href="numeros-lo-que-cuestan-los-poderes.html">🏛️ Lo que cuestan los Poderes</a> · <a href="herramienta-megaobras-sector.html">🏗️ Megaobras por sector</a> · <a href="auditoria-huachicol-fiscal.html">⛽ Huachicol fiscal</a></p>
   </section>
   <script type="application/json" id="arDatos">{datos}</script>

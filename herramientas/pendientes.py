@@ -271,7 +271,8 @@ def recolectar():
         url = (amb['fuentes'].get('CNGMD') or {}).get('url') if 'Censo' in t else (
             'https://www.inegi.org.mx/temas/ee/' if 'Cuentas' in t else 'https://www.gob.mx/semarnat')
         out.append(e('ambiente-%d' % i, 'Ambiente', t.split(':')[0], t, quien, url, 'Fuente oficial',
-                     [('herramienta-ambiente-basura.html', 'Basura y protección')]))
+                     [('datos-ambiente-quien-lo-mide.html', 'Medio ambiente · Quién lo mide')] +
+                     ([('datos-ambiente-megaobras.html', 'Medio ambiente · La huella de las megaobras')] if i == 0 else [])))
     # 9. Entidades sin fuente (CDMX en la estadistica del INEGI).
     fe = d['fiscalEntidades']['campos']
     sin = sorted({(tuple(v['sinFuente']), v['motivo']) for v in fe.values() if isinstance(v, dict) and v.get('sinFuente')})

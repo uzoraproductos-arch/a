@@ -473,7 +473,7 @@ APARTADOS = [
         'hash_a_pagina': {'radar': 'radar-hacendario.html', 'rc-megaobras': 'numeros-cuanto-dinero-es.html',
                           'rc-deuda': 'numeros-cuanto-dinero-es.html', 'rc-asf': 'numeros-cuanto-dinero-es.html',
                           'rc-huachicol': 'numeros-cuanto-dinero-es.html',
-                          'estado-de-cuenta': 'radar-estado-de-cuenta.html', **DATOS_ANCLAS},
+                          'estado-de-cuenta': 'radar-estado-de-cuenta.html', 'ambiente': 'datos-medio-ambiente.html', **DATOS_ANCLAS},
         # Desde el 09-10-2026 las secciones son pestanas y cada ficha se
         # despliega aqui mismo, con su contenido (decision del autor):
         # datos.js las arma. Ya no abren la portada.
@@ -497,6 +497,13 @@ APARTADOS = [
                 'id': 'informes',
                 'pagina': 'informes-oficiales.html',
                 'pestana': ('📑', 'Informes oficiales', 'Cuenta Pública y diccionario: abre su página'),
+            },
+            {
+                # Cuarta tarjeta de Datos desde el 22-10-2026 (pedido del
+                # autor): la parte informativa de Costo Ambiental.
+                'id': 'ambiente',
+                'pagina': 'datos-medio-ambiente.html',
+                'pestana': ('🌎', 'Medio ambiente', 'El daño, la basura, el dinero y las leyes: abre su página'),
             },
             # El Estado de cuenta administrativo fue la cuarta tarjeta de Datos
             # del 12-10-2026 al 22-10-2026; desde entonces (pedido del autor)
@@ -676,22 +683,30 @@ HERRAMIENTAS = [
          ('servicios.html', '🔎', 'Servicios de investigación', 'Investigación a la medida',
           'Cuando necesites ir más a fondo en un caso: revisión documental, expediente, seguimiento, capacitación o licencia, con la misma regla de la plataforma y su política de independencia. Incluye el Pase del Auditor Cívico. Tiene su propia página.'),
      ]),
+    # Reestructurada el 22-10-2026 (pedido del autor): la herramienta se
+    # queda con lo que el lector calcula y audita; la parte informativa
+    # (la basura, el presupuesto, las leyes, la cascada del PIB...) vive en
+    # Datos → Medio ambiente (herramientas/datos_ambiente.py).
     ('herramienta-ambiente.html', 'ambiente', '🌎', 'Costo Ambiental',
      'El gasto que no aparece en el recibo',
-     'El deterioro del ambiente también es gasto: lo pagamos en agua, aire, suelo y basura. Aquí se mide en pesos con cifras oficiales '
-     '(INEGI, SEMARNAT y Hacienda), se calcula tu parte y se compara con el presupuesto ambiental 2026-2027 y las leyes que aplican.',
+     'El deterioro del ambiente también es gasto: lo pagamos en agua, aire, suelo y basura. Aquí haces tus cuentas con cifras oficiales '
+     '(INEGI, SEMARNAT, Hacienda y la Auditoría Superior): tu ticket en negativo, el reloj del daño, los simuladores del crecimiento real y de la '
+     'inversión, el auditor del sector y las investigaciones de las crisis. Las cifras de referencia viven en '
+     '<a href="datos-medio-ambiente.html">Datos → Medio ambiente</a>.',
      'ambiente', [
+         ('amticket', '🧾', 'Tu ticket en negativo', 'Tu estado de cuenta ambiental',
+          'Escribe lo que ganas y ve lo que ya te cargaron a tu nombre: tu parte de la deuda, de sus intereses y del daño ambiental, con tu basura en kilos.'),
          ('amreloj', '⏱️', 'El reloj y el año', 'Un año en veinte segundos',
           'El daño ambiental que corre mientras lees y una simulación que acumula, día por día, cinco comparaciones de un año entero.'),
-         ('amticket', '🧾', 'Tu ticket en negativo', 'Lo que ya te cargaron',
-          'Escribe lo que ganas y ve lo que ya te cargaron a tu nombre: tu parte de la deuda, de sus intereses y del daño ambiental, con tu basura en kilos.'),
-         ('ambasura', '🗑️', 'Basura y protección', 'Lo que se gasta en proteger',
-          'Un servicio municipal sin partida federal, el presupuesto ambiental 2026 y 2027, la huella de las megaobras y las leyes que aplican.'),
-         ('ampib', '📉', 'El PIB no alcanza', 'Lo que se acabó y se ensució',
-          'La cascada animada del PIB, el simulador del crecimiento real y el desglose de lo que se acabó y lo que se ensució.'),
-         # Quinta aplicacion (pedido del autor, 11-10-2026): la arma
+         ('ampib', '📈', '¿Cuánto del crecimiento es real?', 'El simulador del PIB verde',
+          'Mueve el crecimiento, el costo ambiental y el desgaste de la maquinaria, y ve si la riqueza que de verdad queda crece o se encoge.'),
+         ('aminversion', '🌱', 'Simulador de inversión ambiental', 'Si se invirtiera en el ambiente',
+          'En cuántos años alcanzaría el gasto en proteger al costo del daño, y cuánto pesan los intereses de la deuda frente a cada órgano del sector.'),
+         ('amauditor', '🔍', 'Auditor ambiental', 'Órgano por órgano',
+          'Elige la SEMARNAT, la Conagua, la CONAFOR, la PROFEPA u otro órgano: lo aprobado, lo pagado, lo que se propone para 2027, lo que observó la Auditoría Superior y las preguntas que deja.'),
+         # Sexta aplicacion (pedido del autor, 11-10-2026): la arma
          # herramientas/crisis_ambientales.py.
-         ('herramienta-ambiente-crisis.html', '🌀', 'Crisis ambientales', 'Desastres y crisis que cuestan',
+         ('herramienta-ambiente-crisis.html', '🌀', 'Crisis ambientales', 'Investigaciones',
           'Huracanes, inundaciones y crisis del agua: cuánto cubre el fondo, cuánto se anunció, cuánto se comprobó y lo que cuesta esperar. Con Otis, Simón y el agua de Guadalajara.'),
      ]),
 ]
@@ -739,7 +754,10 @@ INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspentes': 'insp_entes',
                 'pulso': 'mo_pulso', 'sector': 'mo_sector', 'sexenios': 'mo_sexenios', 'cero': 'mo_cero',
                 'tabla': 'mo_tabla', 'investiga': 'mo_investiga',
                 # Costo Ambiental (pedido del autor, 16-10-2026).
-                'amreloj': 'am_reloj', 'amticket': 'am_ticket', 'ambasura': 'am_basura', 'ampib': 'am_pib'}
+                'amreloj': 'am_reloj', 'amticket': 'am_ticket', 'ampib': 'am_pib',
+                # Las dos nuevas de la reestructura (22-10-2026); am_basura dejo
+                # de ser aplicacion: sus bloques viven en Datos → Medio ambiente.
+                'aminversion': 'am_inversion', 'amauditor': 'am_auditor'}
 
 
 def insp_nativa(m, clave, base, ref):
@@ -4944,6 +4962,11 @@ REDIRECCIONES = {
                        'Las cifras de 2026 viven ahora en Números → Presupuesto → Cuánto dinero es; el estado de cuenta se expide desde el tablero del Radar hacendario.'),
     'radar-presupuesto-en-curso.html': ('numeros-cuanto-dinero-es.html', 'Hoy: el presupuesto en curso',
                                         'Las cifras de 2026, con su contador, viven ahora en Números → Presupuesto → Cuánto dinero es.'),
+    # «Basura y proteccion» dejo de ser aplicacion de Costo Ambiental el
+    # 22-10-2026 (pedido del autor): sus bloques viven en Datos → Medio
+    # ambiente, y sus anclas (#abBasura, #abLeyes...) llevan a su pagina.
+    'herramienta-ambiente-basura.html': ('datos-medio-ambiente.html', 'Basura y protección',
+                                         'Ahora vive en Datos → Medio ambiente, una página por tema.'),
     'busca-y-verifica.html': ('herramienta-inspector-entes.html', 'Busca y verifica',
                               'Ahora vive dentro del Modo Inspector, en la parte «Busca y verifica».'),
     # Los dos estantes del Diccionario se fundieron en la Biblioteca del
@@ -5029,7 +5052,8 @@ def generar(sello=None):
     m.update({'archivo': ca.ARCHIVO, 'estilos': ['crisis.css'], 'scripts': ['crisis.js']})
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
-    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + garantias() + comunidad() + radar() + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    import datos_ambiente
+    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

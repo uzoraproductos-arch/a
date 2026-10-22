@@ -1,0 +1,83 @@
+/* Auditavisión · Costo Ambiental › Simulador de inversión ambiental
+   (aplicación 4, 22-10-2026). La página la escribe
+   herramientas/am_inversion.py; la interacción,
+   assets/auditor/js/am-inversion.js. Prefijo de clases: ai-. */
+.ai { padding-top: 26px; --ai: #1b7f4c; --ai-osc: #0f3d2a; --ai-claro: #eaf6ef; --ai-tinta: #2c3b33; --ai-gris: #5a6a62;
+  --ai-borde: #cfe0d6; --ai-rojo: #b3261e; --ai-rojo-claro: #fdf1f0; }
+.ai-tit { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font-size: 22px; line-height: 1.25; color: var(--ai-osc); }
+.ai-n { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--ai); color: #ffffff; font-size: 17px; }
+.ai-txt { margin: 0 0 14px; max-width: 820px; font-size: 17px; line-height: 1.6; color: var(--ai-tinta); }
+.ai-sec { margin: 0 0 34px; scroll-margin-top: 80px; }
+.ai .est-chip { font-size: 12px; }
+.ai-num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+.ai-fu { color: #1d5fd6; overflow-wrap: anywhere; }
+
+/* Arranque */
+.ai-arranque { margin: 0 0 28px; padding: 22px; border-radius: 16px; background: linear-gradient(135deg, #0f3d2a, #1b7f4c 60%, #4c8a2b); color: #ffffff; }
+.ai-kicker { margin: 0 0 6px; font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #cdebd8; }
+.ai-grande { margin: 0 0 12px; font-family: 'Playfair Display', Georgia, serif; font-size: 32px; line-height: 1.15; color: #ffffff; }
+.ai-arranque .ai-txt { color: #e8f5ec; }
+.ai-arranque .ai-txt b { color: #ffffff; }
+.ai-par { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 0 0 12px; }
+.ai-par-d { display: flex; flex-direction: column; gap: 6px; padding: 14px 16px; border-radius: 14px; background: rgba(255, 255, 255, .14); }
+.ai-par-k { font-size: 16px; color: #e8f5ec; }
+.ai-par-d b { font-size: 24px; color: #ffffff; overflow-wrap: anywhere; }
+.ai-par-mal { background: rgba(179, 38, 30, .35); }
+.ai-fuente { margin: 0; font-size: 16px; line-height: 1.5; color: #e8f5ec; }
+.ai-fuente .ai-fu { color: #ffffff; }
+
+/* Mandos */
+.ai-mandos { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 0 0 14px; }
+.ai-mando { display: grid; gap: 8px; padding: 14px 16px; border: 1px solid var(--ai-borde); border-radius: 14px; background: #ffffff; }
+.ai-mando-et { display: block; margin: 0 0 8px; font-size: 16px; font-weight: 700; color: var(--ai-osc); }
+.ai-mando .ai-mando-et { margin: 0; }
+.ai-rango { width: 100%; min-height: 44px; accent-color: var(--ai); }
+.ai-mando-val { font: 700 20px/1.2 'JetBrains Mono', ui-monospace, monospace; color: var(--ai-osc); }
+.ai-atajos { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+.ai-op { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 14px; border: 1px solid var(--ai-borde); border-radius: 999px; background: #f5faf7; color: var(--ai-tinta); cursor: pointer; font: 600 15px/1.2 Inter, system-ui, sans-serif; box-sizing: border-box; text-align: left; }
+.ai-op:hover { border-color: var(--ai); }
+.ai-op[aria-pressed="true"] { background: var(--ai); border-color: var(--ai); color: #ffffff; }
+
+/* Resultado y gráfica */
+.ai-res { margin: 0 0 14px; padding: 16px 18px; border-radius: 14px; background: var(--ai-claro); }
+.ai-res .ai-txt { margin: 0; }
+.ai-grande-res { margin: 0 0 6px; font-size: 30px; line-height: 1.15; color: var(--ai-osc); }
+.ai-graf { margin: 0 0 14px; padding: 14px 16px; overflow: hidden; border: 1px solid var(--ai-borde); border-radius: 14px; background: #ffffff; }
+.ai-ley { display: flex; flex-wrap: wrap; gap: 16px; margin: 0 0 10px; font-size: 15px; color: var(--ai-tinta); }
+.ai-ley span::before { content: ''; display: inline-block; width: 14px; height: 14px; margin-right: 6px; border-radius: 4px; vertical-align: -2px; }
+.ai-ley-g::before { background: #1b7f4c; }
+.ai-ley-d::before { background: #c0392b; }
+.ai-fila { display: grid; grid-template-columns: 52px 1fr; gap: 10px; align-items: center; padding: 4px 0; }
+.ai-anio { font: 700 15px/1 'JetBrains Mono', ui-monospace, monospace; color: var(--ai-gris); }
+.ai-barras { display: grid; gap: 3px; min-width: 0; }
+.ai-b { position: relative; display: block; height: 18px; width: calc(var(--ai-w, 0) * 72%); min-width: 2px; border-radius: 0 6px 6px 0; }
+.ai-b i { position: absolute; left: calc(100% + 6px); top: 0; font: 600 13px/18px 'JetBrains Mono', ui-monospace, monospace; font-style: normal; white-space: nowrap; color: var(--ai-gris); }
+.ai-b-g { background: #1b7f4c; }
+.ai-b-d { background: #c0392b; }
+.ai-honesto { margin: 0 0 12px; padding: 14px 16px; border-left: 5px solid #c58a00; border-radius: 10px; background: #fff6e0; font-size: 16px; line-height: 1.55; color: var(--ai-tinta); }
+
+/* Equivalencias */
+.ai-entrada { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 14px; padding: 0 14px; min-height: 52px; border: 2px solid var(--ai-borde); border-radius: 12px; background: #ffffff; font-size: 18px; color: var(--ai-tinta); }
+.ai-input { width: 12ch; min-height: 48px; border: 0; background: transparent; font: 700 20px/1 'JetBrains Mono', ui-monospace, monospace; color: var(--ai-osc); }
+.ai-input:focus { outline: none; }
+.ai-entrada:focus-within { border-color: var(--ai); }
+.ai-orgs { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 8px; }
+.ai-org { display: grid; grid-template-columns: minmax(120px, 170px) 1fr auto; gap: 10px; align-items: center; padding: 8px 12px; border: 1px solid var(--ai-borde); border-radius: 12px; background: #ffffff; }
+.ai-org-n { font-size: 16px; font-weight: 700; color: var(--ai-osc); }
+.ai-org-riel { height: 14px; border-radius: 999px; background: #eef3f0; overflow: hidden; }
+.ai-org-b { display: block; height: 100%; width: calc(var(--ai-w, 0) * 100%); border-radius: 999px; background: linear-gradient(90deg, #1b7f4c, #6bbf8a); }
+.ai-org-v { font-size: 16px; color: var(--ai-tinta); white-space: nowrap; }
+.ai-origen { margin: 0 0 14px; padding-left: 20px; font-size: 16px; line-height: 1.55; color: var(--ai-gris); }
+.ai-origen li + li { margin-top: 6px; }
+
+/* Aviso */
+.ai-aviso { margin: 10px 0 0; padding: 16px 18px; border-radius: 14px; background: #f3f6f4; font-size: 16px; line-height: 1.55; color: var(--ai-tinta); }
+.ai-aviso p { margin: 0 0 10px; }
+.ai-aviso p:last-child { margin: 0; }
+
+@media (max-width: 720px) {
+  .ai-grande { font-size: 26px; }
+  .ai-org { grid-template-columns: 1fr auto; }
+  .ai-org-riel { grid-column: 1 / -1; grid-row: 2; }
+  .ai-b i { display: none; }
+}
