@@ -269,3 +269,32 @@
 .ct-tuing a { display: inline-block; min-height: 44px; line-height: 44px; font-weight: 700; color: var(--ct); }
 .ct-sigue { margin: 0 0 24px; text-align: right; scroll-margin-top: 80px; }
 @media (max-width: 600px) { .ct-sigue { text-align: left; } .ct-sigue .ct-boton { width: 100%; } }
+/* Las cuatro cuentas en fila, con flechas (22-10-2026): en escritorio, una
+   fila de cuatro; en tableta y celular, dos por renglon. */
+.ct-flujo { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 30px; counter-reset: cuenta; }
+.ct-flujo > li { position: relative; margin: 0; }
+.ct-flujo > li:not(:last-child)::after { content: '→'; position: absolute; top: 34px; right: -27px; width: 24px; height: 24px; border-radius: 50%; background: var(--ct-acento); color: #ffffff; font: 800 16px/24px Inter, system-ui, sans-serif; text-align: center; z-index: 1; }
+.ct-flujo-p { display: flex; flex-direction: column; gap: 6px; height: 100%; box-sizing: border-box; padding: 0 0 16px; border: 1px solid var(--ct-linea); border-radius: 16px; overflow: hidden; background: #ffffff; color: var(--ct-tx); text-decoration: none; box-shadow: 0 4px 14px rgba(11, 33, 64, .07); transition: transform .15s ease, box-shadow .15s ease; }
+.ct-flujo-p:hover, .ct-flujo-p:focus-visible { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(11, 33, 64, .16); }
+.ct-flujo-cab { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; margin-bottom: 4px; background: var(--ct); color: #ffffff; }
+.ct-flujo-n { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--ct-acento); color: #ffffff; font: 800 20px/1 Inter, system-ui, sans-serif; }
+.ct-flujo-ico { font-size: 26px; line-height: 1; }
+.ct-flujo-et, .ct-flujo-nom, .ct-flujo-frase, .ct-flujo-desc, .ct-flujo-ir { padding: 0 16px; }
+.ct-flujo-et { font-size: 14px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--ct-oro); }
+.ct-flujo-nom { font: 800 20px/1.25 Inter, system-ui, sans-serif; color: var(--ct); }
+.ct-flujo-frase { font-size: 16px; font-weight: 700; color: var(--ct-tx2); }
+.ct-flujo-desc { font-size: 16px; line-height: 1.5; color: var(--ct-tx2); }
+.ct-flujo-ir { margin-top: auto; padding-top: 6px; font-size: 16px; font-weight: 700; color: var(--ct); }
+@media (max-width: 1000px) {
+  .ct-flujo { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; }
+  .ct-flujo > li:nth-child(2)::after { content: '↙'; top: auto; bottom: -27px; right: auto; left: -27px; }
+}
+@media (max-width: 600px) {
+  .ct-flujo { gap: 24px 22px; }
+  .ct-flujo > li:not(:last-child)::after { right: -22px; width: 22px; height: 22px; font-size: 16px; line-height: 22px; }
+  .ct-flujo > li:nth-child(2)::after { right: auto; left: -22px; bottom: -23px; }
+  .ct-flujo-desc { display: none; }
+  .ct-flujo-cab { padding: 10px 12px; }
+  .ct-flujo-et, .ct-flujo-nom, .ct-flujo-frase, .ct-flujo-ir { padding: 0 12px; }
+  .ct-flujo-nom { font-size: 18px; }
+}

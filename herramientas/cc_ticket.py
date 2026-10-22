@@ -419,21 +419,25 @@ def construir(base, ref):
     arr = _corta(c, '  <section class="ct-arranque"')
     arr = re.sub(r'\n    <ol class="ct-indice".*?</ol>', '', arr, flags=re.S)
     arr = arr.replace('la página saca cuatro cuentas', 'la calculadora saca cuatro cuentas, cada una en su página')
+    # Las cuentas van en fila, con flechas de una a otra (pedido del autor,
+    # 22-10-2026): que no se confundan con la lista de las aplicaciones.
     tarjetas = '\n'.join(
-        '      <li><a class="herr-paso rubro-calculadora" href="%s">\n'
-        '        <span class="herr-paso-num" aria-hidden="true">%d</span>\n'
-        '        <span class="herr-paso-ico" aria-hidden="true">%s</span>\n'
-        '        <span class="herr-paso-tx"><span class="herr-paso-frase">%s</span>'
-        '<span class="herr-paso-nombre">%s</span><span class="herr-paso-desc">%s</span></span>\n'
-        '        <span class="herr-paso-accion">Abrir ➔</span>\n'
-        '      </a></li>' % (paso_archivo(slug), n, ico, frase, nombre, desc)
+        '      <li><a class="ct-flujo-p" href="%s">\n'
+        '        <span class="ct-flujo-cab"><span class="ct-flujo-n" aria-hidden="true">%d</span>'
+        '<span class="ct-flujo-ico" aria-hidden="true">%s</span></span>\n'
+        '        <span class="ct-flujo-et">Cuenta %d de %d</span>\n'
+        '        <span class="ct-flujo-nom">%s</span>\n'
+        '        <span class="ct-flujo-frase">%s</span>\n'
+        '        <span class="ct-flujo-desc">%s</span>\n'
+        '        <span class="ct-flujo-ir">Abrir <span aria-hidden="true">→</span></span>\n'
+        '      </a></li>' % (paso_archivo(slug), n, ico, n, len(PASOS), nombre, frase, desc)
         for n, slug, ico, nombre, frase, desc in PASOS)
     rutas = ' '.join('data-paso%d="%s"' % (n, paso_archivo(slug)) for n, slug, _, _, _, _ in PASOS)
     return ('<div class="ct ct-portada" id="ctPortada" %s>\n%s\n'
             '  <section class="ct-cuentas" aria-labelledby="ctCuentasTit">\n'
             '    <h2 class="ct-cuentas-tit" id="ctCuentasTit">Las cuatro cuentas</h2>\n'
-            '    <p class="ct-cuentas-tx">Empieza por tu ingreso: las otras tres usan esa cifra. Cada tarjeta abre su propia página.</p>\n'
-            '    <ol class="herr-ruta">\n%s\n    </ol>\n  </section>\n\n%s\n</div>'
+            '    <p class="ct-cuentas-tx">Van en orden, de izquierda a derecha: empieza por tu ingreso, porque las otras tres usan esa cifra. Cada una abre su propia página.</p>\n'
+            '    <ol class="ct-flujo">\n%s\n    </ol>\n  </section>\n\n%s\n</div>'
             % (rutas, arr, tarjetas, _corta(c, '  <aside class="ct-pie">', '\n  </aside>')))
 
 

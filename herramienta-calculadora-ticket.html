@@ -20,12 +20,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261022b">
-  <script src="assets/auditor/js/iconos.js?v=20261022b"></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261022b">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261022b">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261022b">
-  <link rel="stylesheet" href="assets/auditor/css/cc-ticket.css?v=20261022b">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261022c">
+  <script src="assets/auditor/js/iconos.js?v=20261022c"></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261022c">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261022c">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261022c">
+  <link rel="stylesheet" href="assets/auditor/css/cc-ticket.css?v=20261022c">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -170,31 +170,39 @@
   </section>
   <section class="ct-cuentas" aria-labelledby="ctCuentasTit">
     <h2 class="ct-cuentas-tit" id="ctCuentasTit">Las cuatro cuentas</h2>
-    <p class="ct-cuentas-tx">Empieza por tu ingreso: las otras tres usan esa cifra. Cada tarjeta abre su propia página.</p>
-    <ol class="herr-ruta">
-      <li><a class="herr-paso rubro-calculadora" href="herramienta-calculadora-ticket-ingreso.html">
-        <span class="herr-paso-num" aria-hidden="true">1</span>
-        <span class="herr-paso-ico" aria-hidden="true">💵</span>
-        <span class="herr-paso-tx"><span class="herr-paso-frase">Escribe lo que ganas</span><span class="herr-paso-nombre">Tu ingreso</span><span class="herr-paso-desc">Cuánto ganas, cada cuándo, si es antes o después de descuentos y en qué régimen tributas. Con eso la calculadora saca la cuenta.</span></span>
-        <span class="herr-paso-accion">Abrir ➔</span>
+    <p class="ct-cuentas-tx">Van en orden, de izquierda a derecha: empieza por tu ingreso, porque las otras tres usan esa cifra. Cada una abre su propia página.</p>
+    <ol class="ct-flujo">
+      <li><a class="ct-flujo-p" href="herramienta-calculadora-ticket-ingreso.html">
+        <span class="ct-flujo-cab"><span class="ct-flujo-n" aria-hidden="true">1</span><span class="ct-flujo-ico" aria-hidden="true">💵</span></span>
+        <span class="ct-flujo-et">Cuenta 1 de 4</span>
+        <span class="ct-flujo-nom">Tu ingreso</span>
+        <span class="ct-flujo-frase">Escribe lo que ganas</span>
+        <span class="ct-flujo-desc">Cuánto ganas, cada cuándo, si es antes o después de descuentos y en qué régimen tributas. Con eso la calculadora saca la cuenta.</span>
+        <span class="ct-flujo-ir">Abrir <span aria-hidden="true">→</span></span>
       </a></li>
-      <li><a class="herr-paso rubro-calculadora" href="herramienta-calculadora-ticket-retienen.html">
-        <span class="herr-paso-num" aria-hidden="true">2</span>
-        <span class="herr-paso-ico" aria-hidden="true">💸</span>
-        <span class="herr-paso-tx"><span class="herr-paso-frase">Renglón por renglón</span><span class="herr-paso-nombre">Lo que te retienen</span><span class="herr-paso-desc">El ISR con la tarifa del artículo 96, las cuotas obreras al IMSS y el IVA como escenario, cada uno con la regla y el documento que lo sostienen.</span></span>
-        <span class="herr-paso-accion">Abrir ➔</span>
+      <li><a class="ct-flujo-p" href="herramienta-calculadora-ticket-retienen.html">
+        <span class="ct-flujo-cab"><span class="ct-flujo-n" aria-hidden="true">2</span><span class="ct-flujo-ico" aria-hidden="true">💸</span></span>
+        <span class="ct-flujo-et">Cuenta 2 de 4</span>
+        <span class="ct-flujo-nom">Lo que te retienen</span>
+        <span class="ct-flujo-frase">Renglón por renglón</span>
+        <span class="ct-flujo-desc">El ISR con la tarifa del artículo 96, las cuotas obreras al IMSS y el IVA como escenario, cada uno con la regla y el documento que lo sostienen.</span>
+        <span class="ct-flujo-ir">Abrir <span aria-hidden="true">→</span></span>
       </a></li>
-      <li><a class="herr-paso rubro-calculadora" href="herramienta-calculadora-ticket-reparto.html">
-        <span class="herr-paso-num" aria-hidden="true">3</span>
-        <span class="herr-paso-ico" aria-hidden="true">🧭</span>
-        <span class="herr-paso-tx"><span class="herr-paso-frase">Según el Presupuesto 2026</span><span class="herr-paso-nombre">A dónde va cada peso</span><span class="herr-paso-desc">Tu impuesto sobre la renta repartido con las mismas proporciones del Presupuesto de Egresos aprobado para 2026, rubro por rubro.</span></span>
-        <span class="herr-paso-accion">Abrir ➔</span>
+      <li><a class="ct-flujo-p" href="herramienta-calculadora-ticket-reparto.html">
+        <span class="ct-flujo-cab"><span class="ct-flujo-n" aria-hidden="true">3</span><span class="ct-flujo-ico" aria-hidden="true">🧭</span></span>
+        <span class="ct-flujo-et">Cuenta 3 de 4</span>
+        <span class="ct-flujo-nom">A dónde va cada peso</span>
+        <span class="ct-flujo-frase">Según el Presupuesto 2026</span>
+        <span class="ct-flujo-desc">Tu impuesto sobre la renta repartido con las mismas proporciones del Presupuesto de Egresos aprobado para 2026, rubro por rubro.</span>
+        <span class="ct-flujo-ir">Abrir <span aria-hidden="true">→</span></span>
       </a></li>
-      <li><a class="herr-paso rubro-calculadora" href="herramienta-calculadora-ticket-estado.html">
-        <span class="herr-paso-num" aria-hidden="true">4</span>
-        <span class="herr-paso-ico" aria-hidden="true">📄</span>
-        <span class="herr-paso-tx"><span class="herr-paso-frase">Con folio y huella</span><span class="herr-paso-nombre">Tu estado de cuenta</span><span class="herr-paso-desc">Lo que ganaste, lo que te retuvieron y a dónde fue tu impuesto en un solo documento, con folio y huella para comprobarlo, listo para descargar o compartir.</span></span>
-        <span class="herr-paso-accion">Abrir ➔</span>
+      <li><a class="ct-flujo-p" href="herramienta-calculadora-ticket-estado.html">
+        <span class="ct-flujo-cab"><span class="ct-flujo-n" aria-hidden="true">4</span><span class="ct-flujo-ico" aria-hidden="true">📄</span></span>
+        <span class="ct-flujo-et">Cuenta 4 de 4</span>
+        <span class="ct-flujo-nom">Tu estado de cuenta</span>
+        <span class="ct-flujo-frase">Con folio y huella</span>
+        <span class="ct-flujo-desc">Lo que ganaste, lo que te retuvieron y a dónde fue tu impuesto en un solo documento, con folio y huella para comprobarlo, listo para descargar o compartir.</span>
+        <span class="ct-flujo-ir">Abrir <span aria-hidden="true">→</span></span>
       </a></li>
     </ol>
   </section>
@@ -218,12 +226,12 @@
 
   <footer class="apartado-pie">
     <div class="apartado-ancho">
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261022b</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261022c</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261022b"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261022b"></script>
-  <script src="assets/auditor/js/cc-ticket.js?v=20261022b"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261022c"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261022c"></script>
+  <script src="assets/auditor/js/cc-ticket.js?v=20261022c"></script>
 </body>
 </html>
