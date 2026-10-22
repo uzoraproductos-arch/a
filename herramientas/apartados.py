@@ -818,28 +818,22 @@ def herr_otras(archivo):
 
 
 def apps_rejilla(h, cifras=None):
-    """Las aplicaciones de una herramienta en tarjetas, con el formato de
-    Inversion y Megaobras (pedido del autor, 21-10-2026: «replica el formato
-    en las otras herramientas»): «Aplicacion k», icono y nombre, que hace,
-    su cifra (o, si no la tiene, su frase) y «Abrir». cifras: {clave: texto}."""
+    """Las aplicaciones de una herramienta, numeradas y en vertical, como el
+    Modo Inspector (pedido del autor, 22-10-2026: «enumeradas de forma
+    vertical como estaban antes»). cifras ya no se usa: se queda el
+    parametro para no romper a quien lo llame."""
     archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
-    pal = herr_palabra(rubro)
-    tarjetas = []
-    frases = [t[3] for t in temas]
+    pasos = []
     for i, (clave, ico, nombre, frase, desc) in enumerate(temas, 1):
-        cif = (cifras or {}).get(clave)
-        # Una frase que comparten varias (las «Busca y verifica» del Modo
-        # Inspector) no distingue a ninguna: no se repite.
-        if not cif and frases.count(frase) > 1:
-            frase = ''
-        tarjetas.append(
-            '          <li><a class="herr-app rubro-%s" href="%s"><span class="herr-app-num">%s %d</span>'
-            '<span class="herr-app-tit"><span aria-hidden="true">%s</span> %s</span>'
-            '<span class="herr-app-desc">%s</span>%s'
-            '<span class="herr-app-ir">Abrir <span aria-hidden="true">→</span></span></a></li>'
-            % (rubro, modulo_archivo(archivo, clave), pal[0].capitalize(), i, ico, nombre, desc,
-               ('<span class="herr-app-cif%s">%s</span>' % (' herr-app-cif-num' if cif else '', cif or frase)) if (cif or frase) else ''))
-    return '<ol class="herr-apps">\n%s\n        </ol>' % '\n'.join(tarjetas)
+        pasos.append(
+            '          <li><a class="herr-paso rubro-%s" href="%s">\n'
+            '            <span class="herr-paso-num" aria-hidden="true">%d</span>\n'
+            '            <span class="herr-paso-ico" aria-hidden="true">%s</span>\n'
+            '            <span class="herr-paso-tx"><span class="herr-paso-frase">%s</span>'
+            '<span class="herr-paso-nombre">%s</span><span class="herr-paso-desc">%s</span></span>\n'
+            '            <span class="herr-paso-accion">Abrir ➔</span>\n'
+            '          </a></li>' % (rubro, modulo_archivo(archivo, clave), i, ico, frase, nombre, desc))
+    return '<ol class="herr-ruta">\n%s\n        </ol>' % '\n'.join(pasos)
 
 
 def herramienta(h, n):
@@ -870,8 +864,10 @@ def herramienta(h, n):
         'hash_a_pagina': dict((t[0][:-5] if t[0].endswith('.html') else t[0], modulo_archivo(archivo, t[0])) for t in temas),
         'secciones': [{
             'id': 'modulos', 'titulo': ('%s · %s %d %s' % (division[0], pal[2].lower(), len(temas), pal[1])) if division else
-                                       '%d %s · cada una abre su página' % (len(temas), pal[1]), 'sin_cab': False,
-            'texto': division[1] if division else 'Recórrelas en orden o entra directo a la que te interese.',
+                                       '%s %d %s' % (pal[2], len(temas), pal[1]), 'sin_cab': False,
+            'texto': division[1] if division else
+                     ('Recórrelas en orden o entra directo a la que te interesa. Cada una abre su propia página.' if pal[2] == 'Las' else
+                      'Recórrelos en orden o entra directo al que te interesa. Cada uno abre su propia página.'),
             'tarjetas': [], 'bloque': ruta,
         }],
         'pie_extra': herr_otras(archivo),
@@ -938,8 +934,8 @@ def herramienta_divisiones(h, n, ruta):
         'icono_cab': icono,
         'entrada': '<b>Recorre una investigación.</b> ' + division[1],
         'secciones': [{
-            'id': 'modulos', 'titulo': '%d aplicaciones · cada una abre su página' % len(temas), 'sin_cab': False,
-            'texto': 'Recórrelas en orden o entra directo a la que te interese.',
+            'id': 'modulos', 'titulo': 'Las %d aplicaciones' % len(temas), 'sin_cab': False,
+            'texto': 'Recórrelas en orden o entra directo a la que te interesa. Cada una abre su propia página.',
             'tarjetas': [], 'bloque': ruta,
         }],
         'pie_extra': nav + '\n\n      ' + herr_otras(archivo),
@@ -1013,15 +1009,12 @@ def herramienta_modulo(h, n, i, bloque=None):
 
 def megaobras_portada(hp, base, ref):
     """Inversion y Megaobras en cinco aplicaciones (pedidos del autor,
-    21-10-2026): la portada lleva las tarjetas de sus aplicaciones, cada una
-    con su cifra, y el boton de «¿Como se calcula?». El cuadro «Haz tu
+    21-10-2026): la portada lleva la lista de sus aplicaciones, numerada y
+    en vertical (22-10-2026), y el boton de «¿Como se calcula?». El cuadro «Haz tu
     propia investigacion» es ahora la aplicacion 1 (mo_investiga.py)."""
-    import mo_tabla
     import mo_pulso
     h = next(x for x in HERRAMIENTAS if x[1] == 'obras')
-    cif = mo_tabla.cifras(base, ref)
-    cif = {t[0]: cif[c[5]] for t, c in zip(h[7], mo_capitulos.CAPITULOS)}
-    hp['secciones'][0]['bloque'] = mo_pulso.cajon_calculo(base, ref) + apps_rejilla(h, cif)
+    hp['secciones'][0]['bloque'] = mo_pulso.cajon_calculo(base, ref) + apps_rejilla(h)
     hp['estilos'] = ['mo-pulso.css']
     # La aplicacion «El pulso del gasto» ya no tiene pagina: su pestana vieja
     # lleva a sus cuatro cifras.
