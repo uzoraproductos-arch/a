@@ -278,60 +278,14 @@ def _sexenios(base, ref):
 
 
 def cifras(base, ref):
-    """La cifra de cada tarjeta de aplicacion en la portada."""
+    """La cifra de cada tarjeta de aplicacion en la portada (apartados.apps_rejilla)."""
     c = mo_pulso._contexto(base, ref)
     _sm, _s, _r, grupos, todos = _datos(base)
     tot = sum(r['v'] for r in todos)
     return {
+        'investiga': '7 opciones × 6 preguntas · cada respuesta con su documento',
         'tabla': '6 presidentes · %d obras · %s%s al año, en vivo' % (sum(len(g['obras']) for g in grupos), '−' if tot < 0 else '+', _sin_signo(tot)),
         'sector': '%d obras y %d rescates en 6 industrias' % (c['n'], c['n_resc']),
         'cifras': '%s de costo real · %s de sobrecosto' % (c['real'], c['sobre']),
         'cuenta': '%d obras publican su ganancia o pérdida' % len(todos),
     }
-
-
-# Lo que la herramienta permite investigar, para la portada (pedido del
-# autor, 21-10-2026: «que el usuario pueda llevar a cabo una investigacion
-# propia»). Cada renglon lleva a donde esta.
-INVESTIGA = [
-    ('🏛️', 'Qué invirtió cada sexenio', 'herramienta-megaobras-tabla.html#mtResTit'),
-    ('🚦', 'Si cada obra gana o pierde hoy', 'herramienta-megaobras-tabla.html#mtObTit'),
-    ('📒', 'El estado de resultados de cada obra', 'herramienta-megaobras-pulso-cuenta.html#mpCuenta'),
-    ('⏱️', 'Lo que nos sigue costando, al ritmo que elijas', 'herramienta-megaobras-pulso-cuenta.html#mpRitmo'),
-    ('🏦', 'Los rescates bancario y carretero', 'herramienta-megaobras-cero.html#mpRescates'),
-    ('🌎', 'La huella ambiental de las megaobras', 'herramienta-ambiente-basura.html#abMegaobras'),
-]
-
-
-def portada(base, ref):
-    """Bloque de la portada de la herramienta: para que sirve y las cuatro
-    aplicaciones, cada una con su cifra; el contador que tenia esta portada
-    vive desde el 21-10-2026 en la aplicacion 1 (pedido del autor)."""
-    c = mo_pulso._contexto(base, ref)
-    cif = cifras(base, ref)
-    _sm, _s, _r, _g, todos = _datos(base)
-    tot = sum(r['v'] for r in todos)
-    tarjetas = []
-    for k, (b, archivo, ico, corto, desc, ck) in enumerate(mo_capitulos.CAPITULOS, 1):
-        neg = ' mt-pierde' if ck == 'tabla' and tot < 0 else ''
-        tarjetas.append(
-            '<li><a class="mt-cap" href="%s"><span class="mt-cap-num">Aplicación %d</span>'
-            '<span class="mt-cap-tit"><span aria-hidden="true">%s</span> %s</span>'
-            '<span class="mt-cap-desc">%s</span><span class="mt-cap-cif mt-num%s">%s</span>'
-            '<span class="mt-cap-ir">Abrir <span aria-hidden="true">→</span></span></a></li>'
-            % (archivo, k, ico, esc(corto), esc(desc), neg, esc(cif[ck])))
-    investiga = ''.join('<li><a href="%s"><span aria-hidden="true">%s</span> %s</a></li>' % (u, ico, esc(t)) for ico, t, u in INVESTIGA)
-    return '''<div class="mt mt-portada" id="mtRaiz">
-  <section class="mt-arranque" aria-labelledby="mtArrTit">
-    <h2 class="mt-grande" id="mtArrTit">Haz tu propia investigación de las megaobras</h2>
-    <p class="mt-lead">Con filtros, contadores, simuladores y tablas, recorre lo que invirtió cada presidente de 1988 a 2024, cuánto costó cada obra frente a lo aprobado, si hoy gana o pierde, su estado de resultados, lo que nos sigue costando y los dos rescates. Cada cifra trae su documento oficial y su estado: {chip_of}, {chip_der} o {chip_pend}.</p>
-    <ul class="mt-investiga" aria-label="Lo que puedes investigar">{investiga}</ul>
-  </section>
-  <nav class="mt-indice" aria-labelledby="mtIndTit">
-    <h2 class="mt-tit" id="mtIndTit">{n_cap} aplicaciones · cada una abre su página</h2>
-    <p class="mt-txt">Recórrelas en orden o entra directo a la que te interese.</p>
-    <ol class="mt-caps">{tarjetas}</ol>
-  </nav>
-</div>'''.format(
-        chip_of=chip('oficial'), chip_der=chip('derivado'), chip_pend=chip('pendiente'), investiga=investiga,
-        n_cap=len(mo_capitulos.CAPITULOS), tarjetas=''.join(tarjetas)) + '\n' + mo_pulso.cajon_calculo(base, ref, c)

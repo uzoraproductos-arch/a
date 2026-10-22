@@ -735,7 +735,7 @@ INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspentes': 'insp_entes',
                 'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj',
                 # Inversion y Megaobras (pedido del autor, 13-10-2026).
                 'pulso': 'mo_pulso', 'sector': 'mo_sector', 'sexenios': 'mo_sexenios', 'cero': 'mo_cero',
-                'tabla': 'mo_tabla',
+                'tabla': 'mo_tabla', 'investiga': 'mo_investiga',
                 # Costo Ambiental (pedido del autor, 16-10-2026).
                 'amreloj': 'am_reloj', 'amticket': 'am_ticket', 'ambasura': 'am_basura', 'ampib': 'am_pib'}
 
@@ -817,6 +817,31 @@ def herr_otras(archivo):
             '        <div class="herr-otras-fila">\n%s\n        </div>\n      </nav>' % otras)
 
 
+def apps_rejilla(h, cifras=None):
+    """Las aplicaciones de una herramienta en tarjetas, con el formato de
+    Inversion y Megaobras (pedido del autor, 21-10-2026: «replica el formato
+    en las otras herramientas»): «Aplicacion k», icono y nombre, que hace,
+    su cifra (o, si no la tiene, su frase) y «Abrir». cifras: {clave: texto}."""
+    archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
+    pal = herr_palabra(rubro)
+    tarjetas = []
+    frases = [t[3] for t in temas]
+    for i, (clave, ico, nombre, frase, desc) in enumerate(temas, 1):
+        cif = (cifras or {}).get(clave)
+        # Una frase que comparten varias (las «Busca y verifica» del Modo
+        # Inspector) no distingue a ninguna: no se repite.
+        if not cif and frases.count(frase) > 1:
+            frase = ''
+        tarjetas.append(
+            '          <li><a class="herr-app rubro-%s" href="%s"><span class="herr-app-num">%s %d</span>'
+            '<span class="herr-app-tit"><span aria-hidden="true">%s</span> %s</span>'
+            '<span class="herr-app-desc">%s</span>%s'
+            '<span class="herr-app-ir">Abrir <span aria-hidden="true">→</span></span></a></li>'
+            % (rubro, modulo_archivo(archivo, clave), pal[0].capitalize(), i, ico, nombre, desc,
+               ('<span class="herr-app-cif%s">%s</span>' % (' herr-app-cif-num' if cif else '', cif or frase)) if (cif or frase) else ''))
+    return '<ol class="herr-apps">\n%s\n        </ol>' % '\n'.join(tarjetas)
+
+
 def herramienta(h, n):
     """Pagina de una herramienta (10-10-2026): ya no despliega nada. Es la
     ruta de sus modulos, numerados, y cada uno abre su propia pagina
@@ -824,17 +849,7 @@ def herramienta(h, n):
     marco debajo de la tarjeta."""
     archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
     pal = herr_palabra(rubro)
-    pasos = []
-    for i, (clave, ico, nombre, frase, desc) in enumerate(temas, 1):
-        pasos.append(
-            '          <li><a class="herr-paso rubro-%s" href="%s">\n'
-            '            <span class="herr-paso-num" aria-hidden="true">%d</span>\n'
-            '            <span class="herr-paso-ico" aria-hidden="true">%s</span>\n'
-            '            <span class="herr-paso-tx"><span class="herr-paso-frase">%s</span>'
-            '<span class="herr-paso-nombre">%s</span><span class="herr-paso-desc">%s</span></span>\n'
-            '            <span class="herr-paso-accion">Abrir ➔</span>\n'
-            '          </a></li>' % (rubro, modulo_archivo(archivo, clave), i, ico, frase, nombre, desc))
-    ruta = ('<ol class="herr-ruta">\n%s\n        </ol>' % '\n'.join(pasos))
+    ruta = apps_rejilla(h)
     division = HERR_DIVISION.get(rubro)
     if rubro == 'inspector':
         return herramienta_divisiones(h, n, ruta)
@@ -855,10 +870,8 @@ def herramienta(h, n):
         'hash_a_pagina': dict((t[0][:-5] if t[0].endswith('.html') else t[0], modulo_archivo(archivo, t[0])) for t in temas),
         'secciones': [{
             'id': 'modulos', 'titulo': ('%s · %s %d %s' % (division[0], pal[2].lower(), len(temas), pal[1])) if division else
-                                       '%s %d %s' % (pal[2], len(temas), pal[1]), 'sin_cab': False,
-            'texto': division[1] if division else
-                     ('Recórrelas en orden o entra directo a la que te interesa. Cada una abre su propia página.' if pal[2] == 'Las' else
-                      'Recórrelos en orden o entra directo al que te interesa. Cada uno abre su propia página.'),
+                                       '%d %s · cada una abre su página' % (len(temas), pal[1]), 'sin_cab': False,
+            'texto': division[1] if division else 'Recórrelas en orden o entra directo a la que te interese.',
             'tarjetas': [], 'bloque': ruta,
         }],
         'pie_extra': herr_otras(archivo),
@@ -925,8 +938,8 @@ def herramienta_divisiones(h, n, ruta):
         'icono_cab': icono,
         'entrada': '<b>Recorre una investigación.</b> ' + division[1],
         'secciones': [{
-            'id': 'modulos', 'titulo': 'Las %d aplicaciones' % len(temas), 'sin_cab': False,
-            'texto': 'Recórrelas en orden o entra directo a la que te interesa. Cada una abre su propia página.',
+            'id': 'modulos', 'titulo': '%d aplicaciones · cada una abre su página' % len(temas), 'sin_cab': False,
+            'texto': 'Recórrelas en orden o entra directo a la que te interese.',
             'tarjetas': [], 'bloque': ruta,
         }],
         'pie_extra': nav + '\n\n      ' + herr_otras(archivo),
@@ -999,17 +1012,19 @@ def herramienta_modulo(h, n, i, bloque=None):
 
 
 def megaobras_portada(hp, base, ref):
-    """Inversion y Megaobras en cuatro aplicaciones (pedidos del autor,
-    21-10-2026): la portada dice que puedes investigar con la herramienta y
-    abre sus cuatro aplicaciones; el contador de la balanza vive en la
-    primera (herramientas/mo_tabla.py)."""
+    """Inversion y Megaobras en cinco aplicaciones (pedidos del autor,
+    21-10-2026): la portada lleva las tarjetas de sus aplicaciones, cada una
+    con su cifra, y el boton de «¿Como se calcula?». El cuadro «Haz tu
+    propia investigacion» es ahora la aplicacion 1 (mo_investiga.py)."""
     import mo_tabla
-    hp['secciones'] = [{'id': 'capitulos', 'titulo': '', 'texto': '', 'sin_cab': True, 'tarjetas': [],
-                        'bloque': mo_tabla.portada(base, ref)}]
-    hp['estilos'] = list(mo_tabla.ESTILOS)
-    hp['scripts'] = ['mo-tabla.js']
+    import mo_pulso
+    h = next(x for x in HERRAMIENTAS if x[1] == 'obras')
+    cif = mo_tabla.cifras(base, ref)
+    cif = {t[0]: cif[c[5]] for t, c in zip(h[7], mo_capitulos.CAPITULOS)}
+    hp['secciones'][0]['bloque'] = mo_pulso.cajon_calculo(base, ref) + apps_rejilla(h, cif)
+    hp['estilos'] = ['mo-pulso.css']
     # La aplicacion «El pulso del gasto» ya no tiene pagina: su pestana vieja
-    # lleva a sus cuatro cifras (aplicacion 3 desde el 21-10-2026).
+    # lleva a sus cuatro cifras.
     hp['hash_a_pagina'] = dict(hp.get('hash_a_pagina') or {}, pulso='herramienta-megaobras-cero.html#mpCifras')
     return hp
 
@@ -1047,15 +1062,17 @@ def nav_compacta(h, i, padre=None):
     todas = INVESTIGACIONES if rubro == 'inspector' else archivo
     ant = temas[i - 1] if i > 0 and not padre else None
     sig = temas[i + 1] if i + 1 < len(temas) and not padre else None
+    # Los rotulos de Inversion y Megaobras (21-10-2026): «Aplicacion
+    # anterior», «Las N aplicaciones», «Aplicacion siguiente».
     def boton(t, clase, rotulo):
-        return ('        <a class="herr-min %s" href="%s"><span>%s</span><small>%s</small></a>'
-                % (clase, modulo_archivo(archivo, t[0]), rotulo, t[2]))
+        return ('        <a class="herr-min %s" href="%s"><span>%s</span><small>%s %s</small></a>'
+                % (clase, modulo_archivo(archivo, t[0]), rotulo, t[1], t[2]))
     filas = ['        <a class="herr-min ant" href="%s"><span>← Volver</span><small>%s</small></a>' % padre if padre else '',
-             boton(ant, 'ant', '← Anterior') if ant else '',
-             '        <a class="herr-min" href="%s"><span>%s %s</span><small>%s</small></a>' % (
-                 todas, 'Todas las' if pal[2] == 'Las' else 'Todos los', pal[1],
+             boton(ant, 'ant', '← %s anterior' % pal[0].capitalize()) if ant else '',
+             '        <a class="herr-min" href="%s"><span>%s %d %s</span><small>%s</small></a>' % (
+                 todas, pal[2], len(temas), pal[1],
                  HERR_DIVISION[rubro][0] if rubro == 'inspector' else titulo),
-             boton(sig, 'sig', 'Siguiente →') if sig else '',
+             boton(sig, 'sig', '%s siguiente →' % pal[0].capitalize()) if sig else '',
              '        <a class="herr-min" href="indice.html"><span>Índice</span><small>Todo Auditavisión</small></a>']
     return ('<nav class="herr-nav-min" aria-label="Moverte desde aquí">\n%s\n      </nav>'
             % '\n'.join(f for f in filas if f))

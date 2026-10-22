@@ -337,7 +337,7 @@ def construir(base, ref):
         tarj_obras.append(
             '<li class="ab-obra"><a class="ab-obra-a" href="herramienta-megaobras-sector.html#obra-%s">'
             '<span class="ab-obra-ico" aria-hidden="true">%s</span><span class="ab-obra-n">%s</span>'
-            '<span class="ab-obra-ir">Su ficha en Sector e industria ➔</span></a>'
+            '<span class="ab-obra-ir">Su ficha en Obra por obra, por industria ➔</span></a>'
             '<dl class="ab-obra-dl"><div><dt>Costo registrado</dt><dd><b class="ab-num">%s</b> %s</dd></div>'
             '<div><dt>Lo que su permiso ambiental autorizó</dt><dd>%s</dd></div></dl></li>'
             % (esc(oid), esc(o.get('icono', '')), esc(o['nombre']), '$' + format(o['inversion_real_mdp'], ',.1f') + ' mdp',

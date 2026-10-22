@@ -1,0 +1,51 @@
+/* Auditavisión · Inversión y Megaobras › Haz tu propia investigación
+   (aplicación 1, 21-10-2026). Usa las variables y el arranque de mo-tabla.css. Prefijo: mi-. */
+.mi-pasos { margin: 0 0 26px; }
+.mi-paso { margin: 0 0 18px; }
+.mi-paso-et { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; font-size: 18px; font-weight: 800; color: var(--mt-osc); }
+.mi-n { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--mt); color: #ffffff; font-size: 17px; flex: none; }
+[data-theme="dark"] .mi-n { color: #07162c; }
+.mi-bs { display: flex; flex-wrap: wrap; gap: 8px; }
+.mi-b { --sx: var(--mt); display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 8px 14px; border: 1px solid var(--mt-borde); border-left: 5px solid var(--sx);
+  border-radius: 12px; background: var(--mt-fondo); color: var(--mt-tinta); font: 600 16px/1.3 Inter, system-ui, sans-serif; cursor: pointer; text-align: left; }
+.mi-b small { font-size: 14px; font-weight: 500; color: var(--mt-gris); }
+.mi-b-q { border-left-width: 1px; }
+.mi-b:hover, .mi-b:focus-visible { border-color: var(--mt); }
+.mi-b[aria-pressed="true"] { background: var(--mt); border-color: var(--mt); color: #ffffff; }
+.mi-b[aria-pressed="true"] small { color: #dbe8fb; }
+[data-theme="dark"] .mi-b[aria-pressed="true"] { color: #07162c; }
+[data-theme="dark"] .mi-b[aria-pressed="true"] small { color: #1c2a44; }
+.mi-res { scroll-margin-top: 90px; }
+.mi-panel { --sx: var(--mt); padding: 18px; border: 1px solid var(--mt-borde); border-top: 5px solid var(--sx); border-radius: 14px; background: var(--mt-fondo); scroll-margin-top: 90px; }
+.mi-panel:focus { outline: none; }
+.mi-panel-tit { margin: 0 0 10px; font-size: 21px; line-height: 1.3; color: var(--mt-osc); }
+.mi-panel-tit small { display: block; font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--mt-gris); }
+.mi-res-lead { margin: 0 0 12px; font-size: 17px; line-height: 1.55; color: var(--mt-tinta); }
+.mi-res-lead small { color: var(--mt-gris); font-size: 16px; }
+.mi-obras { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 10px; }
+.mi-o { padding: 12px 14px; border: 1px solid var(--mt-borde); border-radius: 12px; background: var(--mt-suave); }
+.mi-o-ico { font-size: 24px; margin-right: 8px; vertical-align: top; }
+.mi-o-n { display: inline-flex; flex-direction: column; gap: 2px; font-size: 17px; color: var(--mt-osc); }
+.mi-o-n small { font-size: 15px; color: var(--mt-gris); }
+.mi-o-res { margin: 8px 0 0; font-size: 16px; font-weight: 700; }
+.mi-o-pie { margin: 8px 0 0; font-size: 16px; line-height: 1.5; color: var(--mt-tinta); }
+.mi-dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 10px 0 0; }
+.mi-dl div { margin: 0; }
+.mi-dl dt { font-size: 14px; color: var(--mt-gris); }
+.mi-dl dd { margin: 2px 0 0; font-size: 16px; }
+.mi-ritmo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0 0 12px; }
+.mi-ritmo p { display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 12px; border: 1px solid var(--mt-borde); border-radius: 12px; background: var(--mt-suave); font-size: 16px; }
+.mi-ritmo b { font-size: 20px; }
+.mi-ritmo small { color: var(--mt-gris); font-size: 14px; }
+.mi-nota { margin: 0 0 10px; font-size: 16px; line-height: 1.55; color: var(--mt-gris); }
+.mi-ir { margin: 12px 0 0; }
+.mi-ir-a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 17px; font-weight: 700; color: var(--mt); }
+.mi-acc { margin: 12px 0 0; }
+.mi .mi-copiar { border-color: var(--mt-borde); background: var(--mt-fondo); color: var(--mt); }
+.mi .mi-copiar:hover, .mi .mi-copiar:focus-visible { border-color: var(--mt); background: var(--mt-suave); }
+.mi-copiado { font-size: 16px; color: var(--mt-gris); overflow-wrap: anywhere; }
+@media (max-width: 640px) {
+  .mi-dl, .mi-ritmo { grid-template-columns: minmax(0, 1fr); }
+  .mi-b { width: 100%; }
+  .mi-panel { padding: 14px; }
+}

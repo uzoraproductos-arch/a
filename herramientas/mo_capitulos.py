@@ -23,6 +23,8 @@ PALABRA = 'aplicación'
 # capitulos se funden en cuatro aplicaciones, para que el lector haga su
 # propia investigacion con filtros, contadores, simuladores y tablas:
 #
+# (Despues, el mismo dia, el cuadro de la portada se volvio la aplicacion
+# 1 y estas pasaron a ser de la 2 a la 5.)
 # 1. Los seis sexenios + la tabla general en vivo + el contador de la
 #    portada (el «simulador inicial»): en que invirtio cada presidente,
 #    cuanto costo y que se gana.
@@ -38,6 +40,12 @@ PALABRA = 'aplicación'
 # (clave, archivo, icono, nombre corto, descripcion, clave de la cifra)
 # La cifra la llena apartados con los datos (mo_tabla.cifras()).
 CAPITULOS = [
+    # El cuadro «Haz tu propia investigacion» de la portada se volvio la
+    # aplicacion 1, con pagina propia (pedido del autor, 21-10-2026):
+    # herramientas/mo_investiga.py.
+    ('investiga', 'herramienta-megaobras-investiga.html', '🔍', 'Haz tu propia investigación',
+     'Elige un presidente y una pregunta (en qué invirtió, si gana o pierde, su estado de resultados, cuánto nos sigue costando, los rescates y la huella ambiental) y lee la respuesta con su documento.',
+     'investiga'),
     ('que', 'herramienta-megaobras-tabla.html', '🏛️', 'En qué invirtió cada presidente',
      'El contador en vivo, la tabla general de los seis sexenios con cada obra en verde si gana o en rojo si pierde, la línea del tiempo de 1988 a 2024 y dos sexenios frente a frente.',
      'tabla'),
@@ -78,7 +86,7 @@ def vecinos(archivo):
             (sig[1], sig[2] + ' ' + sig[3]) if sig else None, len(CAPITULOS))
 
 
-FRASE = {'que': 'Cuánto costó y qué se gana', 'obra': 'Filtros y fichas', 'cifras': 'Desde cero',
+FRASE = {'investiga': 'Paso a paso', 'que': 'Cuánto costó y qué se gana', 'obra': 'Filtros y fichas', 'cifras': 'Desde cero',
          'cuenta': 'Estados de resultados'}
 
 
