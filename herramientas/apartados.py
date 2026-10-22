@@ -472,7 +472,8 @@ APARTADOS = [
         # El radar y sus anclas viejas (#rc-*) llevan a su pagina.
         'hash_a_pagina': {'radar': 'radar-hacendario.html', 'rc-megaobras': 'numeros-cuanto-dinero-es.html',
                           'rc-deuda': 'numeros-cuanto-dinero-es.html', 'rc-asf': 'numeros-cuanto-dinero-es.html',
-                          'rc-huachicol': 'numeros-cuanto-dinero-es.html', **DATOS_ANCLAS},
+                          'rc-huachicol': 'numeros-cuanto-dinero-es.html',
+                          'estado-de-cuenta': 'radar-estado-de-cuenta.html', **DATOS_ANCLAS},
         # Desde el 09-10-2026 las secciones son pestanas y cada ficha se
         # despliega aqui mismo, con su contenido (decision del autor):
         # datos.js las arma. Ya no abren la portada.
@@ -497,13 +498,10 @@ APARTADOS = [
                 'pagina': 'informes-oficiales.html',
                 'pestana': ('📑', 'Informes oficiales', 'Cuenta Pública y diccionario: abre su página'),
             },
-            {
-                # Cuarta tarjeta de Datos desde el 12-10-2026 (pedido del
-                # autor). La direccion no cambia: va impresa en los sellos.
-                'id': 'estado-de-cuenta',
-                'pagina': 'radar-estado-de-cuenta.html',
-                'pestana': ('🧾', 'Estado de cuenta administrativo', 'Gobiernos, Congreso y Corte, con folio y sello: abre su página'),
-            },
+            # El Estado de cuenta administrativo fue la cuarta tarjeta de Datos
+            # del 12-10-2026 al 22-10-2026; desde entonces (pedido del autor)
+            # es la quinta aplicacion de la Calculadora Civica. Su ancla vieja
+            # lleva a su pagina, que no cambia de direccion.
         ],
     },
     {
@@ -648,6 +646,10 @@ HERRAMIENTAS = [
           'Lo que el país se endeuda, paga de intereses y pierde por segundo, repartido entre habitantes o entre contribuyentes, con su contador en vivo.'),
          ('simulador-presupuesto.html', '🧮', 'Reparte el presupuesto', 'Desde cero',
           'Empieza en $0: agrega lo que entra, reparte a dónde va, carga el ejemplo oficial de 2026 o 2027, compara dos escenarios y descarga la cuenta. Tiene su propia página.'),
+         # Quinta aplicacion desde el 22-10-2026 (pedido del autor): venia de
+         # la pestana Datos. La direccion no cambia: va impresa en los sellos.
+         ('radar-estado-de-cuenta.html', '🏛️', 'Estado de cuenta administrativo', 'Gobiernos, Congreso y Corte',
+          'Elige de quién: una administración presidencial, la diputación federal, la senaduría, un congreso local o la Suprema Corte. Genera su estado de cuenta con su semáforo y descárgalo en PDF con folio y sello de verificación.'),
      ]),
     ('herramienta-inspector.html', 'inspector', '🔍', 'Modo Inspector',
      'Dónde quedó el dinero que nadie ha podido explicar',
@@ -2314,7 +2316,8 @@ RADAR_PARTES = [
     # ahi y radar-estado-de-cuenta.html?verifica= redirige.
     # Desde el 12-10-2026 (pedido del autor) ya no hay tarjeta «Hoy y los
     # estados de cuenta»: el presupuesto en curso se fundio en Numeros →
-    # «Cuanto dinero es», y el estado de cuenta es la cuarta tarjeta de Datos
+    # «Cuanto dinero es», y el estado de cuenta fue la cuarta tarjeta de Datos
+    # hasta el 22-10-2026, cuando paso a ser la quinta aplicacion de la Calculadora
     # (desde el 12-10-2026 el tablero ya no lleva sus botones). radar-hoy.html y
     # radar-presupuesto-en-curso.html redirigen (REDIRECCIONES).
     ('tablero', 'radar-tablero.html', '📡', 'El tablero', 'Cada administración, tarjeta por tarjeta, comparada con las demás'),
@@ -3346,11 +3349,14 @@ def radar():
         })
     # «Expide un estado de cuenta», en su propia pagina (pedido del autor, 10-10-2026).
     paginas.append({
-        'archivo': 'radar-estado-de-cuenta.html', 'menu': 'Expide un estado de cuenta', 'menu_archivo': 'descarga-los-datos.html',
-        # Desde el 12-10-2026 (pedido del autor) es la cuarta tarjeta de
-        # Datos; el tablero del radar sigue llevando aqui con sus botones.
-        'padre': ('descarga-los-datos.html', 'Datos'),
-        'icono': '🧾', 'titulo': 'Expide un estado de cuenta', 'lema': 'Administraciones, Congreso y la Corte',
+        'archivo': 'radar-estado-de-cuenta.html', 'menu': 'Estado de cuenta administrativo', 'menu_archivo': 'herramientas.html',
+        # Del 12-10-2026 al 22-10-2026 fue la cuarta tarjeta de Datos; desde
+        # entonces (pedido del autor) es la quinta aplicacion de la
+        # Calculadora Civica, con sus migas y su pie (nav_de_pagina).
+        'padre': ('herramientas.html', 'Herramientas'),
+        'padre2': ('herramienta-calculadora.html', 'Calculadora Cívica'),
+        'icono': '🏛️', 'titulo': 'Estado de cuenta administrativo', 'lema': 'Calculadora Cívica · aplicación 5 de 5',
+        'sin_icono_lema': True, 'icono_cab': '🏛️', 'fondo': HERR_IMG['calculadora'], 'rubro': 'calculadora',
         'entrada': EXPIDE_TEXTO + ' Cualquiera puede comprobar que no se alteró.',
         'estilos': ['radar.css', 'estado-administracion.css'], 'scripts': ['radar.js', 'estado-administracion.js'],
         'secciones': [{'id': 'expide', 'titulo': 'Expide un estado de cuenta', 'texto': '', 'sin_cab': True, 'tarjetas': [],

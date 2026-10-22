@@ -368,7 +368,7 @@ def _completo(base, ref):
   <aside class="ct-pie">
     <p><b>Lo que esta herramienta no hace:</b> no sustituye tu constancia de retenciones ni tu declaración. Usa la tarifa mensual con un ingreso parejo todo el año; aguinaldo, horas extra, prestaciones exentas y deducciones personales cambian la cuenta final.</p>
     <p>Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>. Lo que todavía nos deben las dependencias está en el <a href="pendientes.html">Registro de pendientes</a>.</p>
-    <p class="ct-hermanas">Sigue con la calculadora: <a href="herramienta-calculadora-compara.html">⚡ Tú contra ellos</a> · <a href="herramienta-calculadora-reloj.html">⏱️ El reloj de la deuda</a> · <a href="simulador-presupuesto.html">🧮 Reparte el presupuesto</a></p>
+    <p class="ct-hermanas">Sigue con la calculadora: <a href="herramienta-calculadora-compara.html">⚡ Tú contra ellos</a> · <a href="herramienta-calculadora-reloj.html">⏱️ El reloj de la deuda</a> · <a href="simulador-presupuesto.html">🧮 Reparte el presupuesto</a> · <a href="radar-estado-de-cuenta.html">🏛️ Estado de cuenta administrativo</a></p>
   </aside>
   <script type="application/json" id="ctDatos">{datos}</script>
 </div>'''.format(
