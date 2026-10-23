@@ -126,6 +126,8 @@
 .pa-burbuja a.pa-boton { color: #1c2a44; }
 .pa-genera { background: var(--pa); border-color: var(--pa); color: #ffffff; }
 .pa-genera:hover, .pa-genera:focus-visible { background: #343a43; color: #ffffff; }
+.pa-burbuja a.pa-primario { background: var(--pa); border-color: var(--pa); color: #ffffff; }
+.pa-burbuja a.pa-primario:hover, .pa-burbuja a.pa-primario:focus-visible { background: #343a43; }
 .pa-genera:disabled { background: #e9ecf1; border-color: #c9d2e3; color: #33415c; cursor: default; }
 .pa-mas-t { margin: 12px 0 0; font-size: 14px; font-weight: 700; color: #44526b; }
 .pa-ficha { margin-top: 14px; }

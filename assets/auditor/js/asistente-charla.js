@@ -51,7 +51,11 @@
         vistos[k] = 1;
         li.push('<li>' + chip(x.e, x.p) + ' <b>' + esc(x.que) + '.</b> ' + (x.op ? 'Cuenta: ' + esc(x.op) + '. ' : '') + (x.fu && x.fu.tx ? liga(x.fu) : '') + '</li>');
       });
-      return '<details class="pa-dedonde"><summary><span>📎 De dónde sale</span> ' +
+      var prim = lista.filter(function (x) { return x && x.fu && x.fu.tx; }), nf = {};
+      prim.forEach(function (x) { nf[x.fu.tx] = 1; });
+      var cuantas = Object.keys(nf).length, tx0 = prim.length ? prim[0].fu.tx.split(' (')[0] : '';
+      if (tx0.length > 60) tx0 = tx0.slice(0, 58).replace(/[\s,;:]+\S*$/, '') + '…';
+      return '<details class="pa-dedonde"><summary><span>📎 ' + (tx0 ? 'Fuente: ' + esc(tx0) + (cuantas > 1 ? ' y ' + (cuantas - 1) + ' más' : '') : 'De dónde sale') + '</span> ' +
         ['oficial', 'derivado', 'pendiente'].filter(function (e) { return est[e]; }).map(function (e) { return chip(e); }).join(' ') +
         '</summary><ul>' + li.join('') + '</ul></details>';
     }
@@ -211,7 +215,7 @@
         h = '<p>Si repartimos ' + esc(m.n) + ' de <b>' + esc(e.n) + '</b> entre sus habitantes, salen <b>$' + n(ph) + ' por persona</b>.' +
           (lu ? ' Es el lugar <b>' + lu + ' de ' + todos.length + '</b> de mayor a menor.' : '') + '</p>';
         fu.push(fuenteDe('pob', e), { que: 'Por habitante', e: 'derivado', op: m.n + ' (' + fmt(v, m.u) + ') ÷ ' + n(e.pob) + ' habitantes' }, LUGAR);
-        return { html: h, fu: fu, ci: [{ v: '$' + n(ph), etq: m.n + ' por habitante', e: 'derivado', op: fmt(v, m.u) + ' ÷ ' + n(e.pob) + ' habitantes' }], tit: e.n + ': ' + m.n + ' por habitante' };
+        return { html: h, fu: fu, val: { v: ph, u: 'pesos' }, ci: [{ v: '$' + n(ph), etq: m.n + ' por habitante', e: 'derivado', op: fmt(v, m.u) + ' ÷ ' + n(e.pob) + ' habitantes' }], tit: e.n + ': ' + m.n + ' por habitante' };
       }
       var V = '<b>' + fmt(v, m.u) + '</b>';
       if (k === 'deuda' && v === 0) {
@@ -262,7 +266,7 @@
         h = '<p><b>' + esc(e.n) + '</b> tiene ' + V + ' a mitad de 2026, según el CONAPO.' + lugarTxt('pob', e, 'de mayor a menor') + '</p>';
         fu.push(LUGAR);
       }
-      return { html: h, fu: fu, ci: [{ v: fmt(v, m.u) || e.sem, etq: m.n, e: m.e, op: m.op }], tit: e.n + ': ' + m.n };
+      return { html: h, fu: fu, val: k === 'sem' ? null : { v: v, u: m.u }, ci: [{ v: fmt(v, m.u) || e.sem, etq: m.n, e: m.e, op: m.op }], tit: e.n + ': ' + m.n };
     }
 
     function edoResumen(e) {
@@ -370,7 +374,7 @@
           (L.de > 1 ? ' Lugar <b>' + L.l + ' de ' + L.de + '</b> en ' + esc(m.en) + '.' : '') + '</p>';
         fu.push({ que: 'Porcentaje y lugar', e: 'derivado', op: 'cifra ÷ ingresos totales × 100; lugar entre los municipios del estado con cifra' });
       }
-      return { html: h + mas, fu: fu, tit: m.n + ', ' + m.en + ': ' + MUN_NOM[k || 'ing'], ci: [{ v: grande(mv(m, k || 'ing'), 1), etq: MUN_NOM[k || 'ing'], e: 'oficial' }] };
+      return { html: h + mas, fu: fu, val: k === 'dep' ? { v: mv(m, 'dep'), u: 'pct' } : { v: mv(m, k || 'ing'), u: 'pesos' }, tit: m.n + ', ' + m.en + ': ' + MUN_NOM[k || 'ing'], ci: [{ v: grande(mv(m, k || 'ing'), 1), etq: MUN_NOM[k || 'ing'], e: 'oficial' }] };
     }
     function munRanking(k, dir, cuantos, e) {
       k = k || 'ing';
@@ -408,7 +412,7 @@
         (veces ? '<p>Para darte una idea: eso es <b>' + n(veces, 1) + ' veces</b> el salario mínimo general de un mes ($' + n(sm.mes, 2) + ').</p>' : '');
       var fu = [{ que: 'Sueldo mensual', e: c.e, fu: c.fu }, { que: 'Sueldo anual', e: c.ea, fu: c.fu, op: c.op }];
       if (veces) fu.push({ que: 'Salario mínimo general 2026', e: 'oficial', fu: sm.fu, op: '$' + n(sm.dia, 2) + ' diarios × 30' }, { que: 'Veces el salario mínimo', e: 'derivado', op: 'sueldo mensual neto ÷ salario mínimo mensual. El sueldo del cargo es neto y el mínimo es bruto: la comparación se queda corta' });
-      return { html: h, fu: fu, tit: 'Cuánto gana: ' + c.n, ci: [{ v: '$' + n(c.max), etq: 'al mes, neto', e: c.e }, { v: '$' + n(c.anual), etq: 'al año, neto', e: c.ea, op: c.op }] };
+      return { html: h, fu: fu, val: { v: c.max, u: 'pesos', min: c.min, anual: c.anual }, tit: 'Cuánto gana: ' + c.n, ci: [{ v: '$' + n(c.max), etq: 'al mes, neto', e: c.e }, { v: '$' + n(c.anual), etq: 'al año, neto', e: c.ea, op: c.op }] };
     }
     function art(nom) {
       var t = nom.split(' (')[0];
@@ -547,7 +551,7 @@
         if (!a) return null;
         h = '<p>Para 2026 se aprobó un gasto de <b>' + mdp(a.v) + '</b> (gasto neto pagado).' + (b ? ' Para 2027, el Paquete Económico propone <b>' + mdp(b.v) + '</b>.' : '') + '</p>';
       } else return null;
-      return { html: h, fu: fu, tit: 'El país: ' + tema, ficha: a.f, ir: a.f.ir,
+      return { html: h, fu: fu, val: { v: a.v, u: 'mdp', dia: dia }, tit: 'El país: ' + tema, ficha: a.f, ir: a.f.ir,
         sug: ['¿Cuánto se paga de intereses al día?', '¿Cuánta deuda dejó AMLO?', '¿Qué estado debe más?'] };
     }
 
@@ -588,7 +592,7 @@
       return { html: '<p>Para 2026, ' + art_ + ' <b>' + esc(nom) + '</b> le aprobaron <b>' + mdp(v) + '</b>. Son unos <b>' + mdp(v / 365) + ' al día</b>.' +
           ' Entre las ' + l.length + ' instituciones de mi catálogo, es la <b>número ' + (l.indexOf(v) + 1) + '</b> con más presupuesto.</p>',
         fu: [{ que: 'Presupuesto aprobado 2026', e: f.ci[0].e, fu: (f.fu || [])[0] }, { que: 'Al día y lugar', e: 'derivado', op: 'aprobado ÷ 365; orden entre las instituciones del catálogo de cifras oficiales' }],
-        tit: nom + ': presupuesto 2026', ficha: f, ir: fed ? fed.ir : f.ir };
+        val: { v: v, u: 'mdp' }, tit: nom + ': presupuesto 2026', ficha: f, ir: fed ? fed.ir : f.ir };
     }
 
     /* ---------- Cuántos municipios tiene cada estado ---------- */
@@ -600,6 +604,86 @@
       var l = Object.keys(MU.ent).map(function (x) { return { n: (porA[x] || {}).n || x, c: MU.ent[x].n }; }).sort(function (a, b) { return dir === 'min' ? a.c - b.c : b.c - a.c; });
       return { html: '<p>En México hay <b>' + n(MU.catalogo) + ' municipios</b>. Los estados con ' + (dir === 'min' ? 'menos' : 'más') + ':</p><ol class="pa-lista">' + l.slice(0, 5).map(function (x) { return '<li><b>' + esc(x.n) + '</b>: ' + n(x.c) + '</li>'; }).join('') + '</ol>',
         fu: fu.concat([{ que: 'Orden', e: 'derivado', op: 'ordenamos los estados por número de municipios' }]), tit: 'Municipios por estado' };
+    }
+
+    /* ---------- ¿Es cierto que…? El verificador de cifras (verificador.js) ---------- */
+    var VER = window.AuditorVerifica && D.nota ? window.AuditorVerifica(D.nota) : null;
+    var PIDE_VER = /^\s*(es cierto|es verdad|sera cierto|sera verdad|neta que|en serio que|dicen que|verifica|verificame|verificar|checa|checame|confirma|confirmame|desmiente|lei que|vi que|escuche que|me dijeron que|me contaron que|segun|es falso|es mentira|fake)\b/;
+    var LIGA = /https?:\/\/[^\s]+\.[^\s]+/i;
+    var VEMO = { verde: '✅', ambar: '⚠️', rojo: '❌' };
+    /* La cifra que trae una afirmación, en pesos (o en %). */
+    function cifraDicha(t) {
+      var re = /(\$\s*)?(\d[\d,]*(?:\.\d+)?)\s*(billones|billon|mil millones|millones|millon|mdp|mil pesos|mil|pesos|%|por ciento)?/g, m, mejor = null;
+      while ((m = re.exec(t))) {
+        var u = m[3] || '', num = m[2].replace(/,/g, '');
+        if (!u && !m[1]) continue;
+        if (/^(19|20)\d\d$/.test(num) && !m[1] && u !== 'pesos') continue;
+        var f = /^billon/.test(u) ? 1e12 : u === 'mil millones' ? 1e9 : /^millon|mdp/.test(u) ? 1e6 : /^mil/.test(u) ? 1e3 : 1;
+        var dec = (num.split('.')[1] || '').length, antes = t.slice(Math.max(0, m.index - 26), m.index);
+        var q = /(mas|cerca|alrededor|casi|aproximadamente|unos|menos|hasta|superior a|inferior a)( de)?\s*$/.exec(antes);
+        mejor = { v: parseFloat(num) * f, pct: u === '%' || u === 'por ciento', tol: 0.5 * Math.pow(10, -dec) * f, bruto: m[0].trim(), calif: q ? q[1] : '' };
+        break;
+      }
+      return mejor;
+    }
+    /* El mismo criterio de «Contrasta una nota» (verificador.js, juzga). */
+    function juzgaDicho(c, val) {
+      var ref = val.u === 'mdp' ? val.v * 1e6 : val.v, dicho = c.v;
+      if (val.u === 'pct' !== c.pct) return null;
+      if (val.min != null && val.min !== val.v && dicho >= val.min * 0.99 && dicho <= val.v * 1.01) return { tipo: 'verde', tit: 'Coincide con el documento', porque: 'Está dentro del rango oficial.' };
+      var dif = dicho - ref, pct = ref ? dif / ref * 100 : 0, r = ref ? dicho / ref : 0, aprox = /cerca|alrededor|casi|aproximadamente|unos/.test(c.calif);
+      var pt = function (x) { return Math.abs(x).toLocaleString('es-MX', { maximumFractionDigits: 1 }) + ' %'; };
+      if (Math.abs(dif) <= c.tol || Math.abs(pct) <= 1) return { tipo: 'verde', tit: 'Coincide con el documento', porque: Math.abs(pct) <= 0.05 ? 'Es la misma cifra.' : 'Es un redondeo correcto (diferencia de ' + pt(pct) + ').' };
+      if (/mas|superior/.test(c.calif) && ref >= dicho && ref <= dicho * 1.5) return { tipo: 'verde', tit: 'Coincide: dices «más de»', porque: 'El dato oficial sí es mayor.' };
+      if (/menos|inferior|hasta/.test(c.calif) && ref <= dicho && ref >= dicho / 1.5) return { tipo: 'verde', tit: 'Coincide: pones un tope', porque: 'El dato oficial no lo rebasa.' };
+      if (aprox && Math.abs(pct) <= 10) return { tipo: 'verde', tit: 'Coincide como aproximación', porque: 'Se aleja ' + pt(pct) + ' del dato oficial.' };
+      if (!c.pct && (Math.abs(r / 1000 - 1) < 0.05 || Math.abs(r * 1000 - 1) < 0.05)) return { tipo: 'rojo', tit: 'Error de unidades: mil veces ' + (r > 1 ? 'más' : 'menos'), porque: 'Parece una confusión entre millones y miles de millones (o el «billion» del inglés).' };
+      if (Math.abs(pct) <= 10) return { tipo: 'ambar', tit: 'Se acerca, pero no es la misma cifra', porque: 'Se aleja ' + pt(pct) + '. Suele ser otro año, otra etapa (aprobado contra ejercido) o un redondeo grueso.' };
+      return { tipo: 'rojo', tit: 'No coincide con el documento', porque: 'Lo que dices es ' + pt(pct) + (dif > 0 ? ' mayor' : ' menor') + ' que el dato oficial.' };
+    }
+    function verifica(q, t) {
+      var url = (LIGA.exec(q) || [])[0];
+      if (url) return { html: '<p>Para revisar una nota completa, la leo con el verificador de notas: encuentra cada cifra en pesos, la empata con su documento oficial y te da un veredicto con semáforo.</p>' +
+          '<p><a class="pa-boton pa-primario" href="' + esc(D.nota.pagina + '?liga=' + encodeURIComponent(url)) + '">🔎 Verificar esta nota</a></p>' +
+          '<p class="pa-chico">Si solo quieres revisar un dato, pégame la frase: «¿es cierto que…?».</p>', fu: [], tit: '', plat: 1 };
+      var claim = q.replace(/^\s*[¿¡]?\s*/, '').replace(/^(es cierto|es verdad|sera cierto|sera verdad|neta|en serio|dicen|verifica(me)?|verificar|checa(me)?|confirma(me)?|desmiente|le[ií]|vi|escuch[eé]|me dijeron|me contaron|seg[uú]n|es falso|es mentira|fake)\s*(que|si|lo de|esto|esta)?\s*[:,]?\s*/i, '').replace(/[?¿]/g, '').trim();
+      var ext = VER ? VER.analiza({ texto: claim, titulo: '' }) : { cifras: [] }, r = VER ? VER.conjunto(ext) : null;
+      var juzgadas = ext.cifras.filter(function (c) { return c.v && c.v.tipo !== 'gris'; });
+      if (juzgadas.length) {
+        var fu = [], ci = [];
+        var h = '<p>' + (r.clase === 'in-v-verde' ? '✅' : r.clase === 'in-v-ambar' ? '⚠️' : '❌') + ' <b>' + esc(r.tit.replace('de la nota', 'de lo que dices').replace('Las cifras', 'Las cifras')) + '.</b></p><ul class="pa-lista">' +
+          juzgadas.map(function (c) {
+            var o = VER.porId[c.sel];
+            fu.push({ que: o.n, e: o.e, fu: { tx: o.f || 'documento', url: o.u } });
+            ci.push({ v: VER.fmt(o.v), etq: o.n + (o.a ? ' (' + o.a + ')' : ''), e: o.e });
+            return '<li>' + VEMO[c.v.tipo] + ' <b>' + esc(c.v.tit) + '.</b> Tú dices «' + esc(c.bruto) + '»; el documento dice <b>' + esc(VER.fmt(o.v)) + '</b> (' + esc(o.n) + (o.a ? ', ' + esc(o.a) : '') + '). ' + esc(corto(c.v.porque.replace(/La nota/g, 'Tu cifra').replace(/la nota/g, 'tu cifra'), 260)) + '</li>';
+          }).join('') + '</ul>';
+        var sin = ext.cifras.length - juzgadas.length;
+        if (sin) h += '<p class="pa-chico">' + sin + ' cifra' + (sin > 1 ? 's' : '') + ' no tuvo con qué documento contrastarse: queda sin calificar, no cuenta como falsa.</p>';
+        fu.push({ que: 'Veredicto', e: 'derivado', op: 'diferencia entre la cifra que dices y la del documento; se acepta el redondeo' });
+        return { html: h, fu: fu, ci: ci, tit: 'Verificación: ' + claim.slice(0, 80), ir: [D.nota.pagina, 'el verificador de notas'] };
+      }
+      /* Sin cifra que contrastar: lo que dicen los datos sobre lo mismo. */
+      var dentro = claim && plano(claim) !== t ? contesta(claim, true) : null;
+      var dicho = cifraDicha(norm(claim).replace(/[¿?¡!]/g, ' ')), val = dentro && dentro.val;
+      if (val && val.dia && /diari|al dia|por dia|cada dia/.test(t)) val = { v: val.dia, u: 'mdp' };
+      if (val && val.anual && /al ano|anual|por ano|cada ano/.test(t)) val = { v: val.anual, u: 'pesos' };
+      var jz = val && dicho ? juzgaDicho(dicho, val) : null;
+      if (jz) {
+        dentro.listo = 1;
+        dentro.html = '<p>' + VEMO[jz.tipo] + ' <b>' + esc(jz.tit) + '.</b> Dices «' + esc(dicho.bruto) + '». ' + esc(jz.porque) + ' Esto es lo que dice el dato oficial:</p>' + dentro.html;
+        dentro.html = dentro.html.replace('<details class="pa-dedonde">', '<p class="pa-chico">Veredicto ' + chip('derivado') + ': diferencia entre la cifra que dices y la oficial; se acepta el redondeo.</p><details class="pa-dedonde">');
+        return dentro;
+      }
+      if (dentro) {
+        dentro.listo = 1;
+        dentro.html = '<p>' + (ext.cifras.length ? 'No encontré con qué documento contrastar esa cifra' : 'No hay una cifra que contrastar') + ', pero esto es lo que dicen los datos oficiales para que lo juzgues:</p>' + dentro.html;
+        return dentro;
+      }
+      var rel = VER ? VER.relevancia({ texto: claim, titulo: '' }) : { pts: 1 };
+      return { pasa: 1, claim: claim, html: '<p>Todavía no tengo un documento con qué verificar eso. No te digo que sea falso: te digo que no lo puedo comprobar.</p>' +
+          (rel.pts < 2 ? '<p>Por ahora verifico cifras de finanzas públicas (presupuestos, deuda, impuestos, sueldos, auditorías) contra su documento oficial. Las noticias de otros temas entrarán cuando pueda consultar portales externos.</p>' : '') +
+          '<p class="pa-chico">Lo anoté en «Lo que aún no sé» para buscar su fuente.</p>', fu: [], tit: '', sinDato: 1 };
     }
 
     /* ---------- Plática ---------- */
@@ -626,11 +710,16 @@
 
     /* ---------- Responder ---------- */
     var ultima = '';
-    function contesta(q) {
+    function contesta(q, crudo) {
       var t = plano(q);
-      ultima = q;
-      var r = platica(t);
+      if (!crudo) ultima = q;
+      var r = !crudo && platica(t);
       if (r) { r.plat = 1; return fin(r, { tipo: '' }); }
+      /* «¿Es cierto que…?», una liga o un párrafo con montos: se verifica. */
+      if (!crudo && (PIDE_VER.test(t) || LIGA.test(q) || (q.length > 160 && /\d/.test(q) && /peso|millon|billon|mdp/.test(t)))) {
+        var vr = verifica(q, t);
+        return vr.listo ? vr : fin(vr, { tipo: vr.plat || vr.sinDato || vr.pasa ? '' : 'ver' });
+      }
       var sigue = /^\s*(y|e|ahora|tambien|y que tal|y en|y de|y el|y la|y los|y las|y si)\b/.test(t) || t.trim().split(/\s+/).length <= 3;
 
       var ES = estados(t), es = ES.e, resto = ES.resto;
@@ -739,7 +828,7 @@
         fu: r.fu.filter(function (x) { return x && x.fu && x.fu.tx; }).map(function (x) { return x.fu; }).filter(function (f, i, a) { return a.map(function (z) { return z.tx; }).indexOf(f.tx) === i; }),
         ir: r.ir || ['indice.html', 'el índice general']
       } : null);
-      return { html: html, ficha: ficha, ir: r.ir, plat: r.plat, sug: (r.sug || sugerir(ctx)).filter(function (x) { return plano(x) !== plano(ultima); }) };
+      return { html: html, ficha: ficha, ir: r.ir, plat: r.plat, tit: r.tit, anota: r.sinDato, val: r.val, pasa: r.pasa, claim: r.claim, sug: (r.sug || sugerir(ctx)).filter(function (x) { return plano(x) !== plano(ultima); }) };
     }
     function sugerir(c) {
       if (c.tipo === 'edo' && c.es && c.es.length === 1) {
@@ -759,6 +848,14 @@
       if (f.t === 'glosario') {
         h = '<p><b>' + esc(f.tit) + ':</b> ' + esc(corto(f.txt, 320)) + '</p>' + (f.fu && f.fu[0] ? '<p class="pa-chico">📖 Lo dice: ' + esc(f.fu[0].tx) + '</p>' : '');
         return { html: h, ficha: f, ir: f.ir, sug: [] };
+      }
+      if (f.t === 'ley') {
+        h = '<p><b>' + esc(f.tit) + '.</b> ' + esc(corto(f.txt, 380)) + '</p>' + (f.nota ? '<p class="pa-chico">' + esc(f.nota) + '</p>' : '');
+        return { html: h + deDonde([{ que: 'Texto de la ley', e: 'oficial', fu: (f.fu || [])[0] }]), ficha: f, ir: f.ir, sug: [] };
+      }
+      if (f.t === 'faq') {
+        h = '<p>' + esc(corto(f.txt, 460)) + '</p>';
+        return { html: h + (f.fu && f.fu.length ? deDonde(f.fu.map(function (x) { return { que: 'Referencia', e: 'oficial', fu: x }; })) : ''), ficha: f, ir: f.ir, sug: [] };
       }
       if (f.t === 'pendiente') {
         h = '<p>Ese dato todavía no tiene documento oficial: <b>' + esc(f.tit) + '</b>.</p><p><b>Por qué falta:</b> ' + esc(corto(f.pend.pq, 260)) + '</p><p><b>Le toca publicarlo a:</b> ' + esc(f.pend.quien) + '. ' +

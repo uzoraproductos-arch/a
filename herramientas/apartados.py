@@ -1152,7 +1152,7 @@ def herramienta_asistente(bloque):
         'entrada': '<b>%s.</b> %s' % (ASISTENTE[2], ASISTENTE[3]),
         'fondo': HERR_IMG[rubro], 'rubro': rubro,
         'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
-        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'asistente-base.js', 'asistente-charla.js', 'asistente.js'],
+        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
         'pie_extra': nav + '\n\n      ' + herr_otras(archivo),
     }
 

@@ -33,7 +33,7 @@ import math
 from presupuesto_modulos import chip, mdp
 
 ESTILOS = ['insp-nota.css']
-SCRIPTS = ['insp-nota-lee.js']
+SCRIPTS = ['verificador.js', 'insp-nota-lee.js']
 
 GRUPOS = [
     ('nacional', '🇲🇽', 'Nacional'),

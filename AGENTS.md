@@ -259,6 +259,39 @@ mudando a su página; no se agregan desgloses nuevos.
 
 ---
 
+## 5 ter. El bot es el auditor de la plataforma
+
+**Decisión del autor, 23-10-2026.** «Pregúntale al Auditor»
+(`herramienta-inspector-pregunta.html`) no es una herramienta más: es **el
+auditor** de Auditavisión. Su encargo es **localizar, interpretar, verificar
+y mostrar** al lector, en sencillo, todo lo que la plataforma sabe: datos,
+estadísticas, estados de cuenta, sueldos, márgenes, porcentajes,
+presupuestos, impuestos, glosario, leyes, referencias y las herramientas
+mismas. La plataforma es extensa; el bot es la puerta corta a todo.
+
+- **Todo lo nuevo entra al bot.** Una cifra, página o herramienta que se
+  agrega a la plataforma no está terminada hasta que el bot la encuentra:
+  las páginas y secciones se indexan solas al regenerar; las cifras
+  estructuradas entran al bloque `dat` de `herramientas/asistente.py`
+  (`_charla()`) o al catálogo de cifras (`insp_nota.catalogo()`), y se prueba
+  con una pregunta en el chat.
+- **Responde como chat:** claro, corto y contundente, con la cifra, qué
+  quiere decir y su fuente a la vista. La ficha técnica sellada solo se
+  arma si el lector toca «Generar ficha técnica».
+- **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
+  compara contra el documento oficial con el mismo criterio de «Contrasta
+  una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).
+- **La regla editorial (§2) también lo manda.** No escribe cifras propias;
+  todo cálculo va como `derivado` con su operación; lo que no tiene lo dice
+  y lo anota en «Lo que aún no sé».
+- **Hacia dónde va:** consultar portales externos y tener una capa de
+  inteligencia artificial que aprenda de las preguntas. Las dos necesitan
+  servidor y llaves que GitHub Pages no tiene: son decisión del autor (plan
+  en CONTEXT.md). Cuando llegue la IA, solo redacta con lo que le entregan
+  las fichas; nunca pone una cifra que no venga de un documento.
+
+---
+
 ## 6. Tono al escribir de cara al lector
 
 Formal, cálido y llano, sin renunciar al rigor técnico. El lector no es

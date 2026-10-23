@@ -159,6 +159,24 @@ def _fichas(d):
                     'ir': [insp_nota.CATALOGO, 'Catálogo de cifras oficiales'],
                     'k': '%s %s cifra dato monto' % (c['g'], c['a'])})
 
+    # 11. Los artículos de ley que la plataforma cotejó (23-10-2026): qué
+    # dicen, en corto, con su texto vigente.
+    for p in d.get('preceptos_legales', []):
+        out.append({'t': 'ley', 'tit': '%s · %s' % (limpio(p['precepto']), limpio(p['denominacion'])),
+                    'txt': limpio(p.get('precepto_resumen')), 'nota': limpio(p.get('vigencia')),
+                    'fu': [{'tx': limpio(p['ley']) + ', ' + limpio(p['precepto']), 'url': p.get('url_oficial')}],
+                    'ir': ['fuentes-oficiales.html#' + p['ref'] if p.get('ref') else p.get('url_oficial'), 'la ley en Fuentes oficiales'],
+                    'k': '%s %s ley articulo que dice %s' % (limpio(p['ley']), limpio(p['precepto']), limpio(p.get('analisis_civico'))[:300])})
+
+    # 12. Las preguntas del Diccionario, con su respuesta y sus referencias.
+    refs = {r['id']: r for r in d['referencias_legales']}
+    for c in d.get('preguntas_casillas', []):
+        for it in c['items']:
+            fu = [{'tx': limpio(refs[r]['cita_apa'])[:160], 'url': refs[r].get('url')} for r in it.get('refs', []) if r in refs]
+            out.append({'t': 'faq', 'tit': limpio(it['q']), 'txt': limpio(it['a']), 'fu': fu[:4],
+                        'ir': ['fuentes-oficiales.html#' + it['refs'][0] if it.get('refs') else 'diccionario.html', 'sus fuentes oficiales'],
+                        'k': limpio(c.get('bloque')) + ' pregunta'})
+
     # 5. Las fuentes oficiales (leyes, informes, decretos).
     for r in d['referencias_legales']:
         out.append({'t': 'fuente', 'tit': limpio(r['cita_apa'])[:180], 'txt': limpio(r.get('descripcion')),
@@ -399,7 +417,9 @@ def _charla(d):
                 v[k] = {'v': x['v'], 'e': x.get('est') or 'oficial', 'op': limpio(x.get('op')), 'fu': {'tx': g.get('corto', ''), 'url': g.get('url')}}
         adm.append({'id': a['id'], 'n': a['n'], 'c': a['c'], 'ini': a['ini'], 'a': a['a'], 'curso': a.get('curso'), 'aviso': limpio(a.get('aviso')), 'v': v})
     admet = {k: {'n': D['metricas'][k]['tit'], 'u': D['metricas'][k]['u']} for k in claves}
-    return {'met': met, 'edo': edo, 'cargos': cargos, 'smin': smin, 'adm': adm, 'admet': admet, 'expide': EXPIDE,
+    import insp_nota
+    nota = {'cat': insp_nota.catalogo_lector(d), 'fiscal': insp_nota.FISCAL, 'temas': insp_nota._temas(), 'pagina': insp_nota.PAGINA}
+    return {'nota': nota, 'met': met, 'edo': edo, 'cargos': cargos, 'smin': smin, 'adm': adm, 'admet': admet, 'expide': EXPIDE,
             'mapa': 'numeros-mapa-del-gasto-federalizado.html'}
 
 
@@ -429,6 +449,7 @@ EJEMPLOS = [
     ('¿Cuánta deuda dejó AMLO?', '🧾'),
     ('¿Qué es un pliego de observaciones?', '📘'),
     ('¿Cuánto es el 16 % de 2,500 millones?', '🧮'),
+    ('¿Es cierto que Jalisco debe 50 mil millones?', '🔎'),
 ]
 
 
@@ -456,7 +477,7 @@ def pagina(cuenta, canal=''):
           </div>
           <form class="pa-form" id="paForm" autocomplete="off">
             <label class="sr-only" for="paPregunta">Tu pregunta</label>
-            <input id="paPregunta" type="text" maxlength="200" placeholder="Pregúntame lo que quieras…" required>
+            <input id="paPregunta" type="text" maxlength="600" placeholder="Pregúntame lo que quieras…" required>
             <button type="submit">Enviar ➔</button>
           </form>
         </div>
@@ -466,7 +487,8 @@ def pagina(cuenta, canal=''):
             <li><b>Escríbeme como hablas.</b> Entiendo «lana», «varo», «¿cuánto se clavaron?», siglas como CDMX o Edomex, y preguntas que siguen a la anterior: «¿y Nuevo León?», «¿y por habitante?», «¿y el que menos?».</li>
             <li><b>Te contesto en corto:</b> la cifra, qué quiere decir y en qué lugar queda. Sé de los 32 estados, de los municipios, de los sueldos de los cargos públicos, de cada sexenio desde 1989, de %s términos del glosario y de las páginas de la plataforma.</li>
             <li><b>Saco cuentas:</b> ordeno, comparo, sumo y saco porcentajes y márgenes. Cuando hago una cuenta, te digo cuál fue.</li>
-            <li><b>Toca «📎 De dónde sale»</b> para ver la fuente de cada cifra y su estado: <span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">derivado</span> <span class="est-chip est-pendiente">pendiente</span>.</li>
+            <li><b>Verifico lo que oyes:</b> «¿es cierto que…?», «dicen que…» o la liga de una nota. Comparo la cifra con su documento oficial y te digo si coincide, si se acerca o si no cuadra.</li>
+            <li><b>Toca «📎 Fuente»</b> para ver la fuente de cada cifra y su estado: <span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">derivado</span> <span class="est-chip est-pendiente">pendiente</span>.</li>
             <li><b>¿Necesitas el respaldo?</b> «🧾 Generar ficha técnica» arma la nota técnica con folio y huella digital (SHA-256), como el Estado de Cuenta.</li>
           </ol>
           <p class="pa-beta"><b>🛠️ En mejora continua.</b> Cada dato que integra la plataforma me vuelve más preciso. Si algo no lo sé, <a href="comunidad.html">cuéntanos</a> y lo agregamos.</p>

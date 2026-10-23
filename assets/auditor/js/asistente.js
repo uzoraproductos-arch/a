@@ -37,7 +37,8 @@
     cargo: ['💼', 'Remuneración de un cargo'], seccion: ['📍', 'Sección de la plataforma'],
     autoridad: ['🏛️', 'Autoridad fiscalizadora'], entrega: ['📡', 'Seguimiento de la fiscalización'],
     estado: ['🧾', 'Estado de cuenta'], ficha: ['🏢', 'Ficha técnica de un ente'], municipio: ['🏙️', 'Ficha técnica de un municipio'],
-    cifra: ['📋', 'Cifra oficial del catálogo'], calculo: ['🧮', 'Respuesta con datos de la plataforma']
+    cifra: ['📋', 'Cifra oficial del catálogo'], calculo: ['🧮', 'Respuesta con datos de la plataforma'],
+    ley: ['⚖️', 'Artículo de ley'], faq: ['❓', 'Pregunta del Diccionario']
   };
   var VACIAS = ('a al ante bajo con contra de del desde donde dónde cual cuál cuales cuáles como cómo el en entre es esta este esto ' +
     'ha hay la las le lo los me mi mas más muy no nos o para pero por porque que qué quien quién se sea ser si sí sin sobre son su sus ' +
@@ -289,6 +290,18 @@
 
   function respuesta(q) {
     var r = charla && charla.contesta(q);
+    /* Una afirmación sin dato con qué verificarla: se busca algo relacionado. */
+    if (r && r.pasa) {
+      var rel = buscar(r.claim);
+      if (rel.length && rel[0].s >= 8 && charla) {
+        var d = charla.deFicha(rel[0].f);
+        d.html = '<p>No puedo comprobar eso directamente con un documento, pero esto es lo que la plataforma tiene relacionado:</p>' + d.html;
+        d.sug = [];
+        return d;
+      }
+      r.sug = [];
+      return r;
+    }
     if (r) return r;
     var res = buscar(q);
     if (!res.length || res[0].s < 3) return { sin: res.slice(0, 3).map(function (x) { return x.f; }) };
@@ -299,7 +312,7 @@
       if (alt) f = alt.f;
     }
     /* «¿Qué es…?» lo contesta el glosario si tiene el término. */
-    if (f.t !== 'glosario' && intencion(q) === 'glosario') {
+    if (f.t !== 'glosario' && f.t !== 'faq' && intencion(q) === 'glosario') {
       var gl = res.slice(0, 8).filter(function (x) { return x.f.t === 'glosario' && x.s >= res[0].s * 0.4; })[0];
       if (gl) f = gl.f;
     }
@@ -312,7 +325,7 @@
   }
 
   function responde(q, quieto, ya) {
-    q = String(q || '').trim().slice(0, 200);
+    q = String(q || '').trim().slice(0, 600);
     if (!q) return;
     /* Ya empezó la plática: los ejemplos del arranque se guardan, como en cualquier chat. */
     var ejs = document.querySelector('.pa-ejs');
@@ -325,6 +338,7 @@
         if (!ya) anota(q, 'sin');
         return;
       }
+      if (r.anota && !ya) anota(q, 'sin');
       li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r) +
         (r.sug && r.sug.length ? (r.tambien ? '<p class="pa-mas-t">También te puede servir:</p>' : '') + chips(r.sug) : '');
     };
