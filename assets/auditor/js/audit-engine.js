@@ -28299,7 +28299,7 @@
       var nav = document.querySelector('.site-top-nav.nav-abierta');
       if (nav && e.target.closest) {
         if (!e.target.closest('.site-top-nav')) toggleMenuMovil(false);
-        else if (e.target.closest('a.mega-link-item, .explorer-card-btn, .nav-right-actions .nav-action-btn, .nav-movil-ayuda-btn, .search-results-dropdown')) toggleMenuMovil(false);
+        else if (e.target.closest('a.mega-link-item, .explorer-card-btn, .nav-right-actions .nav-action-btn, .nav-cuentanos, .search-results-dropdown')) toggleMenuMovil(false);
       }
     });
     window.addEventListener('resize', function () {

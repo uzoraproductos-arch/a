@@ -3630,6 +3630,10 @@ def cabecera(actual, sello):
         cur = ' aria-current="page"' if actual in marcan else ''
         items.append('      <div class="nav-menu-item"><a class="mega-menu-trigger" href="%s"%s>%s</a></div>'
                      % (archivo, cur, nombre))
+    # Cuarta pestaña, solo en pantalla angosta (pedido del autor, 23-10-2026):
+    # sustituye al recuadro que cerraba el menú plegado.
+    items.append('      <div class="nav-menu-item nav-menu-cuentanos"><a class="mega-menu-trigger nav-cuentanos" '
+                 'href="comunidad.html" data-puerta>📢 Cuéntanos lo que viste</a></div>')
     return '''  <nav class="site-top-nav" aria-label="Navegación principal">
     <div class="nav-brand-group">
       <button type="button" class="brand-logo-btn" id="apartadoPresentacion" title="Quiénes somos: qué es Auditavisión" aria-label="Quiénes somos: abrir la presentación de Auditavisión"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="72" height="56"></button>
@@ -3663,11 +3667,6 @@ def cabecera(actual, sello):
           <span>🪐</span>
           <span>Inspector Meteoro</span>
         </a>
-      </div>
-      <div class="nav-movil-ayuda">
-        <p class="nav-movil-ayuda-tit">¿Viste algo raro con el dinero público?</p>
-        <p class="nav-movil-ayuda-txt">Cuéntanos qué, dónde y cuándo. Te ayudamos a ordenarlo y a llevarlo al canal oficial que corresponde.</p>
-        <a class="nav-movil-ayuda-btn" href="comunidad.html" data-puerta>📢 Cuéntanos lo que viste</a>
       </div>
     </div>
     </div>

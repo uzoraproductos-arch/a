@@ -371,11 +371,13 @@ body { background-color: #0f1218; }
    MENÚ DE TRES RAYAS (08-10-2026)
    En pantallas angostas el índice no se amontona: queda plegado tras el
    botón ☰ y se despliega completo, menú por menú, con el buscador y las
-   acciones. Al final, el recuadro para reportar lo que viste.
+   acciones. Desde el 23-10-2026 (pedido del autor) «Cuéntanos lo que
+   viste» es la cuarta pestaña del menú plegado, y al final solo quedan
+   Compartir e Inspector Meteoro. En pantalla ancha no cambia nada.
    ========================================================================== */
 .nav-indice { display: contents; }
 .nav-hamburguesa,
-.nav-movil-ayuda { display: none; }
+.nav-menu-cuentanos { display: none; }
 
 @media (max-width: 1100px) {
   .site-top-nav { flex-wrap: wrap; align-items: center; row-gap: 0; }
@@ -456,34 +458,18 @@ body { background-color: #0f1218; }
   .nav-right-actions { justify-content: flex-start; gap: 8px; }
   .nav-right-actions .nav-action-btn,
   .nav-right-actions #themeBtn { min-height: 44px; font-size: 14px; padding: 8px 14px; }
-  /* «Cuéntanos lo que viste» pasa al recuadro de abajo */
+  /* «Cuéntanos lo que viste» pasa a ser la cuarta pestaña */
   .nav-right-actions .nav-feedback-btn { display: none; }
-
-  /* El recuadro final para reportar */
-  .nav-movil-ayuda {
-    display: block;
-    padding: 16px 18px;
-    border-radius: 6px;
-    border-left: 6px solid var(--rubro-inspector);
-    background: var(--bg-card-alt);
-    color: var(--text-main);
-  }
-  [data-theme="light"] .nav-movil-ayuda { background: #ffffff; }
-  .nav-movil-ayuda-tit { font-family: var(--font-serif); font-size: 18px; font-weight: 700; margin: 0 0 6px; color: var(--text-main); }
-  .nav-movil-ayuda-txt { font-family: var(--font-sans); font-size: 14.5px; line-height: 1.5; margin: 0 0 12px; color: var(--text-secondary); }
-  .nav-movil-ayuda-btn {
-    width: 100%;
-    min-height: 48px;
-    border-radius: 6px;
-    border: 0;
-    background: var(--rubro-inspector);
-    color: #ffffff;
+  .nav-menu-cuentanos { display: block; }
+  .mega-menu-trigger.nav-cuentanos {
+    justify-content: flex-start;
+    gap: 10px;
+    text-align: left;
+    text-decoration: none;
     font-family: var(--font-sans);
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
+    font-weight: 600;
+    color: #ffffff;
   }
-  .nav-movil-ayuda-btn:hover { background: color-mix(in srgb, var(--rubro-inspector) 85%, #000000); }
 
   /* Con el menú abierto, el botón flotante estorba */
   body.menu-movil-abierto .floating-feedback-container { display: none; }

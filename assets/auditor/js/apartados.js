@@ -16,6 +16,11 @@
   }
   if (btn) btn.addEventListener('click', function () { menu(!nav.classList.contains('nav-abierta')); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') menu(false); });
+  /* «Cuéntanos lo que viste», la cuarta pestaña en celular: al abrir su
+     cajón, el menú se pliega para no quedar detrás. */
+  document.addEventListener('click', function (e) {
+    if (e.target.closest && e.target.closest('.nav-cuentanos')) menu(false);
+  });
 
   var compartir = document.getElementById('apartadoCompartir');
   if (compartir) compartir.addEventListener('click', function () {
