@@ -488,6 +488,7 @@ def pagina(cuenta, canal=''):
           <div class="pa-chat-cab">
             <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="52" height="40">
             <div><b>Pregúntale al Auditor</b><small>El chat de Auditavisión · contesta con datos oficiales</small></div>
+            <button type="button" class="pa-como-abre" id="paComoAbre" aria-controls="paComo" aria-expanded="false"><span aria-hidden="true">❓</span> Cómo platicar conmigo</button>
           </div>
           <ol class="pa-hilo" id="paHilo" aria-live="polite">
             <li class="pa-msg pa-bot">
@@ -507,8 +508,12 @@ def pagina(cuenta, canal=''):
             <button type="submit">Enviar ➔</button>
           </form>
         </div>
-        <aside class="pa-como">
-          <h3>Cómo platicar conmigo</h3>
+        <div class="glos-drawer-overlay" id="paComoOv"></div>
+        <aside class="pa-como glos-drawer" id="paComo" role="dialog" aria-modal="true" aria-labelledby="paComoT">
+          <header class="glos-drawer-cab"><span class="glos-drawer-marca"><span aria-hidden="true">❓</span> Guía del chat</span>
+            <button type="button" class="glos-drawer-x" id="paComoX" aria-label="Cerrar la guía">✕</button></header>
+          <div class="glos-drawer-cuerpo">
+          <h3 id="paComoT">Cómo platicar conmigo</h3>
           <ol>
             <li><b>Escríbeme como hablas.</b> Entiendo «lana», «varo», «¿cuánto se clavaron?», siglas como CDMX o Edomex, y preguntas que siguen a la anterior: «¿y Nuevo León?», «¿y por habitante?», «¿y el que menos?».</li>
             <li><b>Te contesto en corto:</b> la cifra, qué quiere decir y en qué lugar queda. Sé de los 32 estados, de los municipios, de los sueldos de los cargos públicos, de cada sexenio desde 1989, de %s términos del glosario y de las páginas de la plataforma.</li>
@@ -531,6 +536,7 @@ def pagina(cuenta, canal=''):
             <p class="pa-chico" id="paSinRespNota">La lista se guarda solo en tu navegador: nadie más la ve y no se envía sola. Para hacérnosla llegar, cópiala y pégala en <a href="comunidad-tema.html">Comunidad › Un tema que deberíamos investigar</a>.</p>
           </section>
           <p class="pa-aviso"><b>Platico como chat, pero no invento.</b> No soy una inteligencia artificial que redacta: entiendo tu pregunta y contesto solo con cifras que la plataforma ya publicó con su documento (%s fichas y %s municipios). Si no lo tengo, te lo digo. Tu pregunta no sale de tu navegador.</p>
+          </div>
         </aside>
       </div>''' % (html.escape(canal, quote=True), ej, format(cuenta.get('glosario', 0), ','),
                  format(total - cuenta.get('municipio', 0), ','), format(cuenta.get('municipio', 0), ','))

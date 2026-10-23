@@ -20,12 +20,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261023d">
-  <script src="assets/auditor/js/iconos.js?v=20261023d"></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261023d">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261023d">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261023d">
-  <link rel="stylesheet" href="assets/auditor/css/asistente.css?v=20261023d">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261023e">
+  <script src="assets/auditor/js/iconos.js?v=20261023e"></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261023e">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261023e">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261023e">
+  <link rel="stylesheet" href="assets/auditor/css/asistente.css?v=20261023e">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -166,6 +166,7 @@
           <div class="pa-chat-cab">
             <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="52" height="40">
             <div><b>Pregúntale al Auditor</b><small>El chat de Auditavisión · contesta con datos oficiales</small></div>
+            <button type="button" class="pa-como-abre" id="paComoAbre" aria-controls="paComo" aria-expanded="false"><span aria-hidden="true">❓</span> Cómo platicar conmigo</button>
           </div>
           <ol class="pa-hilo" id="paHilo" aria-live="polite">
             <li class="pa-msg pa-bot">
@@ -197,8 +198,12 @@
             <button type="submit">Enviar ➔</button>
           </form>
         </div>
-        <aside class="pa-como">
-          <h3>Cómo platicar conmigo</h3>
+        <div class="glos-drawer-overlay" id="paComoOv"></div>
+        <aside class="pa-como glos-drawer" id="paComo" role="dialog" aria-modal="true" aria-labelledby="paComoT">
+          <header class="glos-drawer-cab"><span class="glos-drawer-marca"><span aria-hidden="true">❓</span> Guía del chat</span>
+            <button type="button" class="glos-drawer-x" id="paComoX" aria-label="Cerrar la guía">✕</button></header>
+          <div class="glos-drawer-cuerpo">
+          <h3 id="paComoT">Cómo platicar conmigo</h3>
           <ol>
             <li><b>Escríbeme como hablas.</b> Entiendo «lana», «varo», «¿cuánto se clavaron?», siglas como CDMX o Edomex, y preguntas que siguen a la anterior: «¿y Nuevo León?», «¿y por habitante?», «¿y el que menos?».</li>
             <li><b>Te contesto en corto:</b> la cifra, qué quiere decir y en qué lugar queda. Sé de los 32 estados, de los municipios, de los sueldos de los cargos públicos, de cada sexenio desde 1989, de 246 términos del glosario y de las páginas de la plataforma.</li>
@@ -221,6 +226,7 @@
             <p class="pa-chico" id="paSinRespNota">La lista se guarda solo en tu navegador: nadie más la ve y no se envía sola. Para hacérnosla llegar, cópiala y pégala en <a href="comunidad-tema.html">Comunidad › Un tema que deberíamos investigar</a>.</p>
           </section>
           <p class="pa-aviso"><b>Platico como chat, pero no invento.</b> No soy una inteligencia artificial que redacta: entiendo tu pregunta y contesto solo con cifras que la plataforma ya publicó con su documento (1,317 fichas y 2,479 municipios). Si no lo tengo, te lo digo. Tu pregunta no sale de tu navegador.</p>
+          </div>
         </aside>
       </div>
         </div>
@@ -236,16 +242,16 @@
 
   <footer class="apartado-pie">
     <div class="apartado-ancho">
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261023d</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261023e</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261023d"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261023d"></script>
-  <script src="assets/auditor/js/municipios-efipem.js?v=20261023d"></script>
-  <script src="assets/auditor/js/asistente-base.js?v=20261023d"></script>
-  <script src="assets/auditor/js/verificador.js?v=20261023d"></script>
-  <script src="assets/auditor/js/asistente-charla.js?v=20261023d"></script>
-  <script src="assets/auditor/js/asistente.js?v=20261023d"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261023e"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261023e"></script>
+  <script src="assets/auditor/js/municipios-efipem.js?v=20261023e"></script>
+  <script src="assets/auditor/js/asistente-base.js?v=20261023e"></script>
+  <script src="assets/auditor/js/verificador.js?v=20261023e"></script>
+  <script src="assets/auditor/js/asistente-charla.js?v=20261023e"></script>
+  <script src="assets/auditor/js/asistente.js?v=20261023e"></script>
 </body>
 </html>

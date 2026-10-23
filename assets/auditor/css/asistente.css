@@ -149,3 +149,18 @@
 @media (min-width: 901px) {
   .pa-hilo { max-height: 68vh; overflow-y: auto; overscroll-behavior: contain; }
 }
+/* «Cómo platicar conmigo» en cajón (23-10-2026): la guía sale del costado
+   con un botón y el chat ocupa todo el ancho. Reutiliza .glos-drawer. */
+.pa { grid-template-columns: minmax(0, 1fr); }
+.pa-chat-cab { flex-wrap: wrap; }
+.pa-chat-cab > div { flex: 1; min-width: 0; }
+.pa-como-abre { flex: none; font: 700 14px/1.2 Inter, system-ui, sans-serif; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 16px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .7); background: transparent; color: #ffffff; }
+.pa-como-abre:hover, .pa-como-abre:focus-visible { background: #ffffff; color: var(--pa); }
+.pa-como.glos-drawer { width: min(540px, 100vw); padding: 0; border: 0; border-left: 5px solid var(--pa); border-radius: 0; background: #ffffff; font-size: 16px; color: #33415c; }
+.pa-como .glos-drawer-cab { background: var(--pa-claro); }
+.pa-como .glos-drawer-marca { color: #0b2a63; }
+.pa-como .glos-drawer-cuerpo > h3 { font-size: 20px; }
+.pa-como .pa-beta, .pa-como .pa-aviso, .pa-como .pa-pendq p, .pa-como .pa-pendq ol { font-size: 15px; }
+@media (max-width: 560px) {
+  .pa-como-abre { width: 100%; justify-content: center; }
+}

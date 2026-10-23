@@ -404,6 +404,37 @@
       }, function () { c.textContent = 'Selecciónala y cópiala a mano'; });
     }
   });
+  /* «Cómo platicar conmigo» vive en un cajón lateral (23-10-2026). */
+  var como = document.getElementById('paComo'), comoOv = document.getElementById('paComoOv');
+  var comoBt = document.getElementById('paComoAbre'), comoDe = null;
+  function abreComo(ancla) {
+    comoDe = document.activeElement;
+    comoOv.classList.add('abierto');
+    void como.offsetWidth;
+    como.classList.add('abierto');
+    comoBt.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('glos-drawer-bloqueo');
+    var cu = como.querySelector('.glos-drawer-cuerpo'), dest = ancla && document.getElementById(ancla);
+    cu.scrollTop = dest ? dest.offsetTop - cu.offsetTop - 12 : 0;
+    setTimeout(function () { document.getElementById('paComoX').focus({ preventScroll: true }); }, 30);
+  }
+  function cierraComo() {
+    if (!como.classList.contains('abierto')) return;
+    como.classList.remove('abierto');
+    comoOv.classList.remove('abierto');
+    comoBt.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('glos-drawer-bloqueo');
+    if (comoDe && comoDe.focus) comoDe.focus({ preventScroll: true });
+  }
+  comoBt.addEventListener('click', function () { abreComo(); });
+  comoOv.addEventListener('click', cierraComo);
+  document.getElementById('paComoX').addEventListener('click', cierraComo);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cierraComo(); });
+  /* La liga «Lo que aún no sé» de las respuestas abre el cajón en esa sección. */
+  hilo.addEventListener('click', function (ev) {
+    var a = ev.target.closest ? ev.target.closest('a[href="#paSinResp"]') : null;
+    if (a) { ev.preventDefault(); abreComo('paSinResp'); }
+  });
   /* Para revisar cómo puntúa una pregunta desde la consola. */
   window.AuditorBot = { buscar: buscar, charla: charla };
   pintaLista();
