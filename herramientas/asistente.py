@@ -405,16 +405,31 @@ def _charla(d):
     s = open(os.path.join(RAIZ, EXPIDE), encoding='utf-8').read()
     D = json.loads(re.search(r'id="rdDatos">(.*?)</script>', s, re.S).group(1))
     claves = ('ingresos_pib', 'gasto_pib', 'inversion_pib', 'costo_financiero_pib', 'costo_financiero_mdp', 'deuda_ini', 'deuda_fin',
-              'deuda_cambio', 'asf_aud', 'asf_acl', 'asf_rec')
+              'deuda_cambio', 'asf_aud', 'asf_acl', 'asf_rec', 'ingresos_mdp', 'inversion_mdp', 'gasto_mdp', 'deuda_seg')
     adm = []
     for a in D['admins']:
         V = D['valores'].get(a['id'], {})
         v = {}
         for k in claves:
             x = V.get(k)
+            # Sin cifra completa: lo que falta y por qué (y la suma parcial, si la hay).
+            if x and x.get('v') is None and (x.get('pend') or x.get('na')):
+                v[k] = {'v': None, 'na': limpio(x.get('pend') or x.get('na')), 'pid': x.get('pid')}
+                x = x.get('parcial')
+                if x and x.get('v') is not None:
+                    g = D['fuentes'].get((x.get('f') or [None])[0]) or {}
+                    v[k]['parcial'] = {'v': x['v'], 'e': x.get('est') or 'derivado', 'op': limpio(x.get('op')), 'ys': x.get('ys'), 'fu': {'tx': g.get('corto', ''), 'url': g.get('url')},
+                                       'hoy': {'v': x['alt']['hoy']['v'], 'op': limpio(x['alt']['hoy'].get('op'))} if (x.get('alt') or {}).get('hoy') else None}
+                continue
             if x and x.get('v') is not None:
                 g = D['fuentes'].get((x.get('f') or [None])[0]) or {}
                 v[k] = {'v': x['v'], 'e': x.get('est') or 'oficial', 'op': limpio(x.get('op')), 'fu': {'tx': g.get('corto', ''), 'url': g.get('url')}}
+                if x.get('nota'):
+                    v[k]['nota'] = limpio(x['nota'])
+                # La misma suma en pesos de hoy, en dólares y en euros (el Radar).
+                for m, z in (x.get('alt') or {}).items():
+                    if isinstance(z, dict) and z.get('v') is not None:
+                        v[k][m] = {'v': z['v'], 'op': limpio(z.get('op'))}
         adm.append({'id': a['id'], 'n': a['n'], 'c': a['c'], 'ini': a['ini'], 'a': a['a'], 'curso': a.get('curso'), 'aviso': limpio(a.get('aviso')), 'v': v})
     admet = {k: {'n': D['metricas'][k]['tit'], 'u': D['metricas'][k]['u']} for k in claves}
     import insp_nota
@@ -422,8 +437,12 @@ def _charla(d):
     # Las cifras de la pestaña Números (23-10-2026): ingresos, gasto, ramos,
     # gasto federalizado, Poderes, Paquete 2027 y Cuenta Pública.
     import asistente_numeros
+    num = asistente_numeros.datos(d)
+    # Las de la pestaña Datos (23-10-2026): medio ambiente, basura, Ramo 16,
+    # la ASF en la Cuenta Pública, el peso en el tiempo y las descargas.
+    import asistente_datos
     return {'nota': nota, 'met': met, 'edo': edo, 'cargos': cargos, 'smin': smin, 'adm': adm, 'admet': admet, 'expide': EXPIDE,
-            'mapa': 'numeros-mapa-del-gasto-federalizado.html', 'num': asistente_numeros.datos(d)}
+            'mapa': 'numeros-mapa-del-gasto-federalizado.html', 'num': num, 'datos': asistente_datos.datos(d, num, D)}
 
 
 def escribir_base():
@@ -452,6 +471,8 @@ EJEMPLOS = [
     ('¿Cuánto se recauda de IVA?', '🧾'),
     ('¿En qué se gasta el presupuesto?', '🏛️'),
     ('¿Cuánta deuda dejó AMLO?', '🧾'),
+    ('¿Cuánto cuesta el daño ambiental?', '🌎'),
+    ('¿Cuánto valen 1,000 pesos de 2000 hoy?', '💱'),
     ('¿Qué es un pliego de observaciones?', '📘'),
     ('¿Cuánto es el 16 % de 2,500 millones?', '🧮'),
     ('¿Es cierto que Jalisco debe 50 mil millones?', '🔎'),

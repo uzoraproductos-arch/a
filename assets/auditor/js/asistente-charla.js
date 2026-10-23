@@ -438,9 +438,9 @@
       ADM_RE.forEach(function (x) { var i = t.search(x[1]); if (i >= 0 && ADM[x[0]]) out.push({ a: ADM[x[0]], i: i }); });
       return out.sort(function (a, b) { return a.i - b.i; }).map(function (x) { return x.a; });
     }
-    function av(a, k) { return a.v[k]; }
+    function av(a, k) { var x = a.v[k]; return x && x.v != null ? x : null; }
     function admFu(a, k) { var x = av(a, k); return x ? { que: D.admet[k].n, e: x.e, fu: x.fu, op: x.op } : null; }
-    function admResp(a, tema) {
+    function admResp(a, tema, sub, mon) {
       var nom = '<b>' + esc(a.n) + '</b> (' + a.a[0] + '–' + a.a[1] + ')', h = '', fu = [], ci = [];
       function v(k) { var x = av(a, k); if (!x) return null; fu.push(admFu(a, k)); ci.push({ v: fmt(x.v, D.admet[k].u), etq: D.admet[k].n, e: x.e, op: x.op }); return '<b>' + fmt(x.v, D.admet[k].u) + '</b>'; }
       if (tema === 'deuda' || !tema) {
@@ -451,11 +451,18 @@
         var ip = v('costo_financiero_pib'), im = v('costo_financiero_mdp');
         if (ip) h += '<p>Con ' + nom + ', en intereses de la deuda (el costo financiero) se fue en promedio ' + ip + ' al año' + (im ? '; sumados, ' + im + ' en pesos de cada año' : '') + '.</p>';
       }
-      if (tema === 'gasto' || !tema) { var g = v('gasto_pib'); if (g) h += '<p>El gasto neto total promedió ' + g + ' al año.</p>'; }
+      if (tema === 'gasto' || !tema) { var g = v('gasto_pib'); if (g) h += '<p>' + (tema ? 'Con ' + nom + ', el' : 'El') + ' gasto neto total promedió ' + g + ' al año.</p>'; }
       if (tema === 'ingresos') { var ig = v('ingresos_pib'); if (ig) h += '<p>Con ' + nom + ', los ingresos del sector público promediaron ' + ig + ' al año.</p>'; }
       if (tema === 'inversion') { var iv = v('inversion_pib'); if (iv) h += '<p>Con ' + nom + ', la inversión física promedió ' + iv + ' al año.</p>'; }
+      /* La suma del sexenio, en pesos de cada año y en pesos de hoy (o en dólares o euros). */
+      var SUMA = { gasto: 'gasto_mdp', ingresos: 'ingresos_mdp', inversion: 'inversion_mdp' }[tema];
+      if (SUMA) h += admSuma(a, SUMA, mon, fu, ci);
+      if (tema === 'intereses' && mon) h += admSuma(a, 'costo_financiero_mdp', mon, fu, ci, 1);
+      if (tema === 'seg') h += admRitmo(a, sub, fu, ci);
+      if (tema === 'peso') h += admPeso(a, fu, ci);
       if (tema === 'asf' || !tema) {
         var au = v('asf_aud'), ac = v('asf_acl'), re = tema === 'asf' ? v('asf_rec') : null;
+        if (re && a.v.asf_rec.nota) fu[fu.length - 1].op += ' ' + a.v.asf_rec.nota;
         if (au || ac) h += '<p>La ASF le practicó ' + (au || 'varias') + ' auditorías' + (ac ? ' y dejó ' + ac + ' por aclarar' : '') + (re ? '; se recuperaron ' + re : '') + '.</p>' +
           (tema === 'asf' ? '<p class="pa-ojo">Ojo: «por aclarar» no es daño comprobado; es lo que, al corte, no tenía documentos que acreditaran el gasto.</p>' : '');
       }
@@ -463,13 +470,66 @@
       if (a.curso && a.aviso) h += '<p class="pa-chico">' + esc(a.aviso) + '</p>';
       return { html: h, fu: fu, ci: ci, tit: 'Estado de cuenta de ' + a.n + (tema ? ': ' + tema : '') };
     }
+    /* La suma de un sexenio: pesos de cada año, de hoy, dólares o euros (el Radar). */
+    function admSuma(a, k, mon, fu, ci, ya) {
+      var x = a.v[k], m = D.admet[k];
+      if (!x) return '';
+      if (x.v == null) {
+        var p = x.parcial, h = '<p class="pa-chico">' + esc(x.na) + '</p>';
+        if (p) {
+          h += '<p>Con los ' + (p.ys[1] - p.ys[0] + 1) + ' años con dato (' + p.ys[0] + ' a ' + p.ys[1] + ') suman <b>' + mdp(p.v) + '</b> en pesos de cada año' +
+            (p.hoy ? ' (<b>' + mdp(p.hoy.v) + '</b> en pesos de ' + esc(PSO ? PSO.ref.mes : 'hoy') + ')' : '') + '.</p>';
+          fu.push({ que: m.n + ' (años con dato)', e: p.e, fu: p.fu, op: p.op });
+          if (p.hoy) fu.push({ que: 'En pesos de hoy', e: 'derivado', op: p.hoy.op });
+        }
+        return h;
+      }
+      var alt = mon && x[mon] ? x[mon] : x.hoy, et = alt === x.usd ? 'millones de dólares' : alt === x.eur ? 'millones de euros' : null;
+      fu.push({ que: m.n, e: x.e, fu: x.fu, op: x.op });
+      ci.push({ v: mdp(x.v), etq: m.n, e: x.e });
+      var h2 = '<p>' + (ya ? 'En pesos de cada año suman' : 'Sumados, son') + ' <b>' + mdp(x.v) + '</b>' + (ya ? '' : ' en pesos de cada año');
+      if (alt) {
+        h2 += et ? ': unos <b>' + n(alt.v / 1e3, 1) + ' mil ' + et + '</b>' : ', que en pesos de ' + esc(PSO ? PSO.ref.mes : 'hoy') + ' equivalen a <b>' + mdp(alt.v) + '</b>';
+        fu.push({ que: m.n + (et ? ', en ' + et.replace('millones de ', '') : ', en pesos de hoy'), e: 'derivado', op: alt.op });
+      }
+      return h2 + '.</p>';
+    }
+    /* El reloj: lo de un sexenio repartido entre sus segundos. */
+    function admRitmo(a, sub, fu, ci) {
+      var k = sub || 'deuda_seg', x = a.v[k], m = D.admet[k];
+      if (!x) return '';
+      if (x.v == null) return '<p>' + esc(x.na) + '</p>';
+      var ys = [a.a[0], a.a[1]];
+      var dias = 0; for (var y = ys[0]; y <= ys[1]; y++) dias += (y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0)) ? 366 : 365;
+      var seg = k === 'deuda_seg' ? x.v : x.v * 1e6 / (dias * 86400);
+      var que = { deuda_seg: 'la deuda creció', costo_financiero_mdp: 'se pagaron de intereses', inversion_mdp: 'se invirtieron', ingresos_mdp: 'entraron', gasto_mdp: 'se gastaron' }[k];
+      fu.push({ que: m.n + ', por segundo', e: 'derivado', fu: x.fu, op: k === 'deuda_seg' ? x.op : x.op + ' Luego, entre los ' + n(dias * 86400) + ' segundos de esos años.' });
+      ci.push({ v: '$' + n(seg), etq: 'Por segundo', e: 'derivado' });
+      return '<p>Al ritmo de ' + esc(a.n) + ', ' + que + ' <b>$' + n(seg) + ' por segundo</b>: ' + mdp(seg * 3600 / 1e6) + ' por hora y ' + mdp(seg * 86400 / 1e6) + ' al día.</p>' +
+        '<p class="pa-chico">Es una equivalencia en pesos de cada año (lo del sexenio entre sus segundos), no dinero que se mueva hoy.</p>';
+    }
+    /* El peso en el sexenio: inflación acumulada, dólar y euro. */
+    function admPeso(a, fu, ci) {
+      var x = PSO && PSO.adm[a.id];
+      if (!x) return '';
+      var h = '<p>Con ' + esc(a.n) + ' (' + esc(x.rec) + ' → ' + esc(x.ent) + (x.curso ? ', en curso' : '') + '), los precios subieron <b>' + n(x.infl.v, 1) + ' %</b>: $100 al recibir compraban al final lo que <b>$' + n(x.cien.v, 2) + '</b>.';
+      fu.push({ que: 'Inflación acumulada', e: 'derivado', fu: PSO.fx.BX_INPC, op: x.infl.op + ' ' + x.cien.op });
+      ci.push({ v: n(x.infl.v, 1) + ' %', etq: 'Inflación acumulada', e: 'derivado' });
+      if (x.usd) { h += ' El dólar pasó de $' + n(x.usd.rec, 2) + ' a $' + n(x.usd.ent, 2) + ' (' + (x.usd.v > 0 ? '+' : '') + n(x.usd.v, 1) + ' %)'; fu.push({ que: 'El dólar', e: 'derivado', fu: PSO.fx.BX_USD, op: x.usd.op }); }
+      if (x.eur && x.eur.rec != null) { h += ' y el euro, de $' + n(x.eur.rec, 2) + ' a $' + n(x.eur.ent, 2) + ' (' + (x.eur.v > 0 ? '+' : '') + n(x.eur.v, 1) + ' %)'; fu.push({ que: 'El euro', e: 'derivado', fu: PSO.fx.BX_EUR, op: x.eur.op }); }
+      h += x.usd ? '.</p>' : '</p>';
+      if (!x.eur || x.eur.rec == null) h += '<p class="pa-chico">Del euro no hay serie: ' + esc(PSO.eur_antes) + '</p>';
+      return h;
+    }
     function admTema(t) {
+      if (/por segundo|por hora|cada segundo|ritmo|reloj|al dia|por dia/.test(t)) return 'seg';
       if (/interes|costo financiero/.test(t)) return 'intereses';
       if (/deud|debe|endeud|prest/.test(t)) return 'deuda';
-      if (/inversion|obra/.test(t)) return 'inversion';
+      if (/inversion|\bobras?\b/.test(t)) return 'inversion';
       if (/ingres|recaud|cobr/.test(t)) return 'ingresos';
       if (/gast/.test(t)) return 'gasto';
-      if (/asf|aclarar|rob|auditor|corrup|desvi|transa|chingaron|clavaron/.test(t)) return 'asf';
+      if (/inflacion|dolar|euro|tipo de cambio|precios|poder adquisitivo|devalu|el peso\b/.test(t)) return 'peso';
+      if (/asf|aclarar|rob|auditor|corrup|desvi|transa|chingaron|clavaron|recuper/.test(t)) return 'asf';
       return '';
     }
 
@@ -608,7 +668,9 @@
 
     /* ---------- La pestaña Números: ingresos, gasto, ramos, Paquete 2027 (asistente_numeros.py) ---------- */
     var NU = D.num || {}, NF = NU.filas || [], NG = NU.grupos || {}, NPAR = {};
-    var NORD = ['ing26', 'egr26', 'mun26', 'fed26', 'munp', 'ramo26', 'func27', 'pq27', 'soc27', 'inv27', 'colchon', 'cf24', 'cp25'];
+    /* La pestaña Datos (asistente_datos.py) suma sus renglones a los mismos: ambiente, basura, Ramo 16 y la ASF. */
+    var DT = D.datos || {}, PSO = DT.peso;
+    var NORD = ['ing26', 'egr26', 'mun26', 'fed26', 'munp', 'ramo26', 'func27', 'pq27', 'soc27', 'inv27', 'colchon', 'cf24', 'cp25', 'r16', 'amb24', 'basura', 'asf', 'asfg', 'asfs'];
     NF.forEach(function (f) { f.alp = (f.al || []).map(function (a) { return ' ' + a + ' '; }); if (f.par) (NPAR[f.par] = NPAR[f.par] || []).push(f); });
     var NQUIERE = /cuant|monto|cifra|presupuest|recaud|cobr|gast|cuesta|cuestan|costo|asign|aprob|toca|lana|dinero|varo|porcentaje|parte|de cada|que tanto|propon|recibe|reciben|tiene|vale|suma|ingres|deja|aporta|sale|entra|billon|millon|dime|dato|ejerc|reparte|da |dan |le dan|se va|se van|va a|van a/;
     var NLISTA = /\b(cuales|lista|desglose|desglosa|reparte|se divide|se compone|en que se (gasta|va|van)|a donde va|de donde (sale|viene|vienen|entra)|renglones|rubros|todos los|todas las)\b/;
@@ -622,14 +684,16 @@
         });
       });
       if (!mejor) return null;
-      var anio = (/\b(202[4-7])\b/.exec(t) || [])[1];
+      var anio = (/\b(19[89]\d|20[0-3]\d)\b/.exec(t) || [])[1];
       /* «El presupuesto de 2027» todavía es propuesta: su cifra es la del Paquete Económico. */
       if (anio === '2027' && (mejor.id === 'egr-total' || mejor.id === 'ing-total')) return NF.filter(function (x) { return x.id === (mejor.id === 'egr-total' ? 'pq-f-gasto' : 'pq-f-ing'); })[0] || mejor;
       if (anio && mejor.y !== anio && mejor.par) { var otro = (NPAR[mejor.par] || []).filter(function (x) { return x.y === anio; })[0]; if (otro) mejor = otro; }
       return mejor;
     }
     function nv(f, v) {
+      if (f.vt && (v == null || v === f.v)) return f.vt;
       v = v == null ? f.v : v;
+      if (f.un) return n(v, f.dec || 0) + (f.un === '%' ? ' %' : ' ' + f.un);
       if (f.u === 'mdd') return '$' + n(Math.abs(v), 1) + ' millones de dólares';
       return (v < 0 ? '−' : '') + mdp(Math.abs(v));
     }
@@ -642,6 +706,7 @@
     }
     function del(s) { return s.replace(/^el /, 'del ').replace(/^(?!del )/, 'de '); }
     function numFrase(f, V) {
+      if (f.fr) return esc(f.fr).replace('{V}', '<b>' + V + '</b>');
       var N = '<b>' + esc(f.n) + '</b>', C = '<b>' + esc(f.c || f.n) + '</b>';
       switch (f.g) {
         case 'ing26': return f.tot ? 'Para 2026, la Ley de Ingresos autoriza a la Federación a recibir <b>' + V + '</b> en total.' :
@@ -666,16 +731,17 @@
       var PAD = f.pad ? NF.filter(function (x) { return x.id === f.pad; })[0] : null;
       var G = PAD ? { n: 'lo que deja ' + (PAD.c || PAD.n), tot: PAD.v } : NG[f.g] || {}, V = nv(f), fu = [{ que: f.n + ' (' + f.y + ')', e: f.e, fu: f.fu, op: f.op }], h = '', ops = [];
       var pide = PCT.test(t) || /de cada (peso|\$? ?100|cien)/.test(t);
-      var p = !f.tot && G.tot && f.u !== 'mdd' && !f.st && f.v > 0 && f.v <= G.tot ? f.v / G.tot * 100 : null;
+      if (PAD && PAD.gn) G = { n: PAD.gn, tot: PAD.v };
+      var p = !f.tot && G.tot && f.u !== 'mdd' && !f.un && !f.st && f.v > 0 && f.v <= G.tot ? f.v / G.tot * 100 : null;
       if (PAD && f.g === 'egr26') G.n = 'el ' + PAD.n.charAt(0).toLowerCase() + PAD.n.slice(1);
       if (PAD && f.g === 'fed26') G.n = 'el ' + (PAD.c || PAD.n);
       if (p != null && pide) h += '<p>De cada $100 ' + esc(del(G.n)) + ', <b>$' + n(p, 2) + '</b> son ' + esc(f.c || f.n) + '.</p>';
       h += '<p>' + numFrase(f, V);
       if (p != null && !pide) h += ' Es el <b>' + n(p, p < 1 ? 2 : 1) + ' %</b> ' + esc(del(G.n)) + ' (' + mdp(G.tot) + ').';
       if (p != null) ops.push(mdp(f.v) + ' ÷ ' + mdp(G.tot) + ' × 100');
-      var dia = !f.st && f.u !== 'mdd' && f.v > 365 ? f.v / 365 : null;
+      var dia = !f.st && !f.un && f.u !== 'mdd' && f.v > 365 ? f.v / 365 : null;
       if (dia && !porHab) { h += ' Son unos <b>' + mdp(dia) + ' al día</b>.'; ops.push(mdp(f.v) + ' ÷ 365'); }
-      if (porHab && NU.pob && f.u !== 'mdd' && f.v > 0) {
+      if (porHab && NU.pob && f.u !== 'mdd' && !f.un && f.v > 0) {
         var ph = f.v * 1e6 / NU.pob.v;
         h += ' Repartido entre los ' + n(NU.pob.v) + ' habitantes, son <b>$' + n(ph, ph < 100 ? 2 : 0) + ' por persona</b>.';
         ops.push(mdp(f.v) + ' ÷ ' + n(NU.pob.v) + ' habitantes (CONAPO)');
@@ -693,13 +759,15 @@
         if (cx || /capitulo|en que (gasta|se va|se le va)|desglose|en que lo gasta/.test(t)) { fu.push({ que: 'Por capítulo de gasto (' + f.caps.y + ')', e: 'oficial', fu: f.caps.fu }); ops.push('cada capítulo ÷ ' + mdp(tc) + ' × 100'); }
       }
       if (f.av) {
-        h += '<p>Al ' + esc(f.av.corte) + ' había pagado <b>' + mdp(f.av.v) + '</b>, el ' + n(f.av.v / f.v * 100, 1) + ' % de lo aprobado.</p>';
-        fu.push({ que: 'Pagado al ' + f.av.corte, e: 'oficial', fu: f.av.fu }); ops.push(mdp(f.av.v) + ' ÷ ' + mdp(f.v) + ' × 100');
+        var ab = f.av.mod || f.v;
+        h += '<p>Al ' + esc(f.av.corte) + ' había pagado <b>' + mdp(f.av.v) + '</b>, el ' + n(f.av.v / ab * 100, 1) + ' % de lo ' + (f.av.mod ? 'modificado (' + mdp(f.av.mod) + ')' : 'aprobado') + '.</p>';
+        fu.push({ que: 'Pagado al ' + f.av.corte, e: 'oficial', fu: f.av.fu }); ops.push(mdp(f.av.v) + ' ÷ ' + mdp(ab) + ' × 100');
       }
       /* El mismo dinero en otro año: lo aprobado, lo propuesto o lo ejercido. */
-      var her = (NPAR[f.par] || []).filter(function (x) { return x !== f && x.y !== f.y && x.g !== 'func27'; });
+      var her = f.sx ? [] : (NPAR[f.par] || []).filter(function (x) { return x !== f && x.y !== f.y && x.g !== 'func27'; });
       var fn = f.g === 'egr26' ? (NPAR[f.id] || []).filter(function (x) { return x.g === 'func27'; })[0] : null;
       her.forEach(function (x) {
+        if (x.fr) { h += '<p>' + numFrase(x, nv(x)) + '</p>'; fu.push({ que: x.n + ' (' + x.y + ')', e: x.e, fu: x.fu }); if (x.op) ops.push(x.op); return; }
         h += '<p>' + (x.y === '2025' ? 'En 2025 ejerció <b>' + nv(x) + '</b> (Cuenta Pública).' : x.y === '2027' ? 'Para 2027, el Paquete Económico propone <b>' + nv(x) + '</b>' + (x.pib != null ? ' (' + n(x.pib, 1) + ' % del PIB)' : '') + '.' :
           x.y === '2026' && x.g === 'ramo26' ? 'Para 2026 le aprobaron <b>' + nv(x) + '</b>.' : 'En lo aprobado para 2026: <b>' + nv(x) + '</b>' + (x.pib != null ? ' (' + n(x.pib, 1) + ' % del PIB)' : '') + '.') + '</p>';
         fu.push({ que: x.n + ' (' + x.y + ')', e: x.e, fu: x.fu });
@@ -717,16 +785,26 @@
         h += '<p class="pa-chico">Sin la deuda, los <b>ingresos presupuestarios</b> de 2026 son ' + mdp(cg.ing.m26) + '; para 2027 se proponen ' + mdp(cg.ing.m) + '.</p>';
         fu.push({ que: 'Ingresos presupuestarios', e: 'oficial', fu: CGPE_FU() });
       }
-      if (f.d) h += '<p class="pa-chico">' + esc(corto(f.d, 260)) + (f.ley ? ' 📖 ' + esc(f.ley) + '.' : '') + '</p>';
+      if (f.d) h += '<p class="pa-chico">' + esc(corto(f.d, 320)) + (f.ley ? ' 📖 ' + esc(f.ley) + '.' : '') + '</p>';
+      if (f.op && f.e === 'derivado') fu[0].op = f.op;
       if (ops.length) fu.push({ que: 'Porcentaje, al día o por persona', e: 'derivado', op: ops.join('; ') });
       var otros = NF.filter(function (x) { return x.g === f.g && x !== f && !x.tot && x.alp.length && (f.pad ? x.pad === f.pad : f.sub ? x.sub && !x.pad && x.d === f.d : !x.sub); }).sort(function (a, b) { return b.v - a.v; }).slice(0, 2);
-      var sug = otros.map(function (x) { return '¿Y ' + (x.c || x.n) + '?'; });
-      if (G.lista) sug.push(f.g === 'ing26' ? '¿Qué impuesto deja más?' : f.g === 'ramo26' ? '¿Qué dependencias tienen más presupuesto?' : f.g === 'egr26' ? '¿En qué se gasta el presupuesto?' : '¿Cuáles son todos?');
-      return { html: h, fu: fu, ci: [{ v: V, etq: f.n + ' (' + f.y + ')', e: f.e }], val: f.u === 'mdd' ? null : { v: f.v, u: 'mdp', dia: dia },
+      var sug = otros.map(function (x) { return '¿Y ' + (x.c || x.n).replace(/ \((Cuenta Pública )?\d{4}\)$/, '') + '?'; });
+      if (f.sx && f.par) {
+        var ya = (NPAR[f.par] || []).map(function (x) { return x.y; }).filter(function (y) { return y < f.y; }).sort();
+        if (ya.length) sug.unshift('¿Y en ' + ya[ya.length - 1] + '?');
+      }
+      if ((NG[f.g] || {}).sug) sug = NG[f.g].sug.filter(function (x) { return plano(x) !== plano(t); }).slice(0, 3);
+      else if (G.lista) sug.push(f.g === 'ing26' ? '¿Qué impuesto deja más?' : f.g === 'ramo26' ? '¿Qué dependencias tienen más presupuesto?' : f.g === 'egr26' ? '¿En qué se gasta el presupuesto?' : '¿Cuáles son todos?');
+      return { html: h, fu: fu, ci: [{ v: V, etq: f.n + ' (' + f.y + ')', e: f.e }], val: f.u === 'mdd' || f.un || f.vt ? null : { v: f.v, u: 'mdp', dia: dia },
         tit: f.n + ' (' + f.y + ')', ir: f.ir, sug: sug };
     }
     function CGPE_FU() { var x = NF.filter(function (z) { return z.g === 'pq27'; })[0]; return x ? x.fu : null; }
     function numGrupo(t) {
+      if (/ramo 16|presupuesto ambiental|sector ambiental|organos? (del sector )?ambiental|organos? de (la )?semarnat/.test(t)) return ['r16'];
+      if (/costo ambiental|dano ambiental|ctada|deterioro ambiental|cuenta ambiental|costos ambientales/.test(t)) return ['amb24'];
+      if (/aclarar|asf|auditoria superior/.test(t) && /renglones|dependencias|temas|diez/.test(t)) return ['asfs'];
+      if (/aclarar|asf|auditoria superior/.test(t) && /concentra|grupo|sector|rubro/.test(t)) return ['asfg'];
       if (/programas? sociales?|apoyos sociales|programas del bienestar|becas y pensiones/.test(t)) return ['soc27'];
       if (/\b(obras|proyectos|inversion)\b/.test(t) && /2027|prioritari|paquete|propon/.test(t)) return ['inv27'];
       if (/finalidad|funcional/.test(t)) return ['func27'];
@@ -739,7 +817,7 @@
     }
     function numLista(gr, dir, cuantos) {
       var G = NG[gr[0]] || {};
-      var l = NF.filter(function (x) { return x.g === gr[0] && !x.sub && !x.tot && (!gr[1] || x.sg === gr[1]); }).sort(function (a, b) { return dir === 'min' ? a.v - b.v : b.v - a.v; });
+      var l = NF.filter(function (x) { return x.g === gr[0] && (G.li ? x.li : !x.sub && !x.tot) && (!gr[1] || x.sg === gr[1]); }).sort(function (a, b) { return dir === 'min' ? a.v - b.v : b.v - a.v; });
       if (!l.length) return null;
       var top = cuantos > 1 ? l.slice(0, cuantos) : l.length > 12 ? l.slice(0, 10) : l;
       var tot = G.tot || null, sumaGr = gr[1] ? l.reduce(function (s, x) { return s + x.v; }, 0) : null;
@@ -790,6 +868,110 @@
           (m.nota ? '<p class="pa-chico">' + esc(m.nota) + '</p>' : '') + '<p class="pa-chico">Es un supuesto de Hacienda para calcular el presupuesto, no un pronóstico garantizado.</p>',
         fu: [{ que: 'Marco macroeconómico 2027', e: 'oficial', fu: CGPE_FU() }], ci: [{ v: m.p27 + ' ' + m.u, etq: m.n + ' (supuesto 2027)', e: 'oficial' }],
         tit: m.n + ': supuesto 2027', ir: ['numeros-paquete-2027-cifras.html', 'Las cifras del Paquete 2027'] };
+    }
+
+    /* ---------- La pestaña Datos: el peso en el tiempo, las descargas, los plazos y la lista 69-B ---------- */
+    function pesoResp(t, q) {
+      if (!PSO) return null;
+      var R = PSO.ref, F = PSO.fx, yrs = (t.match(/\b(19[89]\d|20[0-3]\d)\b/g) || []).map(Number);
+      var pasado = yrs.filter(function (y) { return PSO.inpc[y]; })[0], futuro = yrs.filter(function (y) { return y > 2027 && y <= 2032; })[0];
+      var dolar = /\b(dolar|dolares|tipo de cambio)\b/.test(t), euro = /\beuros?\b/.test(t), infl = /inflacion|carestia|suben los precios|subieron los precios/.test(t);
+      var maquina = (/\b(hoy|ahora|actualmente|actuales)\b/.test(t) && /\b(valen|vale|valdrian|valdria|equivalen?|serian|seria|son|alcanzan?|alcanzaria)\b/.test(t)) || /pesos (de|del) (19[89]\d|20[0-3]\d)|de (19[89]\d|20[0-3]\d) (a|en) pesos de hoy|(valen|vale|valdrian|valdria|equivalen?|serian|seria|alcanzan?) (hoy|ahora|actualmente)|en pesos de hoy|a pesos de hoy|hoy (valen|vale|equivalen?)|poder adquisitivo/.test(t);
+      if (maquina && pasado) {
+        var nums = (q.replace(/\b(19[89]\d|20[0-3]\d)\b/g, ' ').match(/\$?\s*\d[\d,]*(\.\d+)?\s*(mil millones|millones|millon|mil)?/g) || []).filter(function (x) { return /\d/.test(x); });
+        var m = nums.length ? valor(nums[0].replace(/[$\s]/g, '').replace(/(mil millones|millones|millon|mil)$/, ''), (/(mil millones|millones|millon|mil)\s*$/.exec(nums[0]) || [])[1]) : 100;
+        var hoy = m * R.inpc / PSO.inpc[pasado], usd = PSO.usd[pasado] ? m / PSO.usd[pasado] : null;
+        var mm = function (v) { return v >= 1e6 ? grande(v, true) : '$' + n(v, 2); };
+        return { html: '<p><b>' + mm(m) + '</b> de ' + pasado + ' equivalen hoy a <b>' + mm(hoy) + '</b> (pesos de ' + esc(R.mes) + ').' +
+            (usd ? ' En dólares de ese año eran <b>US' + mm(usd) + '</b>.' : '') + '</p><p class="pa-chico">Es la misma capacidad de compra: a la cifra se le quita la inflación con el INPC. No cuenta intereses ni rendimientos.</p>',
+          fu: [{ que: 'En pesos de hoy', e: 'derivado', fu: F.BX_INPC, op: mm(m) + ' × INPC de ' + R.mes + ' (' + n(R.inpc, 3) + ') ÷ INPC promedio de ' + pasado + ' (' + n(PSO.inpc[pasado], 3) + ')' }]
+            .concat(usd ? [{ que: 'En dólares de ' + pasado, e: 'derivado', fu: F.BX_USD, op: mm(m) + ' ÷ ' + n(PSO.usd[pasado], 4) + ', el dólar promedio de ' + pasado }] : []),
+          ci: [{ v: mm(hoy), etq: mm(m) + ' de ' + pasado + ' en pesos de hoy', e: 'derivado' }], tit: 'El peso de ' + pasado + ' en pesos de hoy',
+          ir: [PSO.ir.maquina, 'La máquina del tiempo del peso'], sug: ['¿A cuánto estaba el dólar en ' + pasado + '?', '¿Cuál es la inflación?', '¿Cuánta inflación hubo con AMLO?'] };
+      }
+      if (/supuesto|paquete|presupuesto/.test(t)) return null;
+      if (futuro && (dolar || infl)) {
+        var pr = PSO.proy.filter(function (x) { return x.y === futuro; })[0];
+        if (!pr) return null;
+        return { html: '<p>Para ' + futuro + ', Hacienda proyecta ' + (dolar ? 'un dólar promedio de <b>$' + n(pr.usd, 1) + '</b>' : '') + (dolar && infl ? ' y ' : '') + (infl ? 'una inflación de <b>' + n(pr.infl, 1) + ' %</b> de diciembre a diciembre' : '') + '.</p>' +
+            '<p class="pa-chico">' + esc(PSO.proy_aviso) + (euro ? ' ' + esc(PSO.proy_eur) : '') + '</p>',
+          fu: [{ que: 'Proyección ' + futuro, e: 'oficial', fu: F.CGPE2027_MACRO }], ci: [{ v: dolar ? '$' + n(pr.usd, 1) : n(pr.infl, 1) + ' %', etq: (dolar ? 'Dólar' : 'Inflación') + ' proyectado ' + futuro, e: 'oficial' }],
+          tit: 'Proyección de Hacienda para ' + futuro, ir: [PSO.ir.monedas, 'El peso frente al dólar, el euro y la inflación'] };
+      }
+      if (yrs.some(function (y) { return y >= 2026; })) return null;
+      if ((dolar || euro) && pasado) {
+        var eu = euro && PSO.eur[pasado], du = PSO.usd[pasado];
+        if (euro && !eu) return { html: '<p>De ' + pasado + ' no hay cotización del euro. ' + esc(PSO.eur_antes) + '</p>', fu: [], tit: '' };
+        return { html: '<p>En ' + pasado + ', ' + (euro ? 'el euro costó en promedio <b>$' + n(eu, 4) + '</b>' : 'el dólar costó en promedio <b>$' + n(du, 4) + '</b>') + ' pesos.</p>' +
+            '<p class="pa-chico">Es el promedio de los doce meses de ese año que publica el Banco de México. Hoy cuesta $' + n(euro ? PSO.hoy.eur : PSO.hoy.usd, 4) + '.</p>',
+          fu: [{ que: (euro ? 'Euro' : 'Dólar') + ' promedio ' + pasado, e: 'derivado', fu: euro ? F.BX_EUR : F.BX_USD, op: 'promedio de los 12 meses de ' + pasado }], tit: (euro ? 'El euro' : 'El dólar') + ' en ' + pasado,
+          ci: [{ v: '$' + n(euro ? eu : du, 4), etq: (euro ? 'Euro' : 'Dólar') + ' promedio ' + pasado, e: 'derivado' }], ir: [PSO.ir.monedas, 'El peso frente al dólar, el euro y la inflación'] };
+      }
+      if (infl && pasado && PSO.infl[pasado] != null) {
+        return { html: '<p>En ' + pasado + ', los precios subieron <b>' + n(PSO.infl[pasado], 1) + ' %</b> de diciembre a diciembre.</p>',
+          fu: [{ que: 'Inflación ' + pasado, e: 'derivado', fu: F.BX_INPC, op: 'INPC de diciembre de ' + pasado + ' ÷ INPC de diciembre de ' + (pasado - 1) + ' − 1' }], tit: 'La inflación de ' + pasado,
+          ci: [{ v: n(PSO.infl[pasado], 1) + ' %', etq: 'Inflación ' + pasado, e: 'derivado' }], ir: [PSO.ir.monedas, 'El peso frente al dólar, el euro y la inflación'], sug: ['¿Cuánta inflación hubo con AMLO?', '¿Cuánto valen 100 pesos de ' + pasado + ' hoy?'] };
+      }
+      if ((dolar || euro) && !/2027|va a estar|estar[aá]|estimad|pronostic|proyec/.test(t)) {
+        return { html: '<p>Hoy (' + esc(PSO.hoy.fecha) + ') ' + (euro && !dolar ? 'un <b>euro</b> cuesta <b>$' + n(PSO.hoy.eur, 4) + '</b> y un <b>dólar</b>, <b>$' + n(PSO.hoy.usd, 4) + '</b>.' :
+            'un <b>dólar</b> cuesta <b>$' + n(PSO.hoy.usd, 4) + '</b> y un <b>euro</b>, <b>$' + n(PSO.hoy.eur, 4) + '</b>.') + '</p>' +
+            '<p class="pa-chico">El del dólar es el FIX que publica el Banco de México.</p>',
+          fu: [{ que: 'Dólar y euro de hoy', e: 'oficial', fu: F.BX_DIARIO }], tit: 'El dólar y el euro hoy',
+          ci: [{ v: '$' + n(PSO.hoy.usd, 4), etq: 'Dólar (FIX)', e: 'oficial' }, { v: '$' + n(PSO.hoy.eur, 4), etq: 'Euro', e: 'oficial' }],
+          ir: [PSO.ir.monedas, 'El peso frente al dólar, el euro y la inflación'], sug: ['¿A cuánto estaba el dólar en 2000?', '¿Cuánto subió el dólar con Peña Nieto?', '¿A cuánto va a estar el dólar en 2027?'] };
+      }
+      if (infl && !/2027|va a estar|estimad|esperad|pronostic|proyec|supuesto/.test(t)) {
+        var p26 = PSO.proy.filter(function (x) { return x.y === 2026; })[0], p27 = PSO.proy.filter(function (x) { return x.y === 2027; })[0];
+        return { html: '<p>En los últimos 12 meses (a ' + esc(R.mes) + '), los precios subieron <b>' + n(R.infl12, 1) + ' %</b>.</p>' +
+            (p26 ? '<p>Para todo 2026, Hacienda estima ' + n(p26.infl, 1) + ' % de diciembre a diciembre' + (p27 ? ', y ' + n(p27.infl, 1) + ' % al año desde 2027' : '') + '.</p>' : '') +
+            '<p class="pa-chico">' + esc(PSO.proy_aviso) + '</p>',
+          fu: [{ que: 'Inflación de 12 meses', e: 'derivado', fu: F.BX_INPC, op: 'INPC de ' + R.mes + ' (' + n(R.inpc, 3) + ') ÷ INPC de un año antes (' + n(R.inpc12, 3) + ') − 1' },
+            { que: 'Lo que proyecta Hacienda', e: 'oficial', fu: F.CGPE2027_MACRO }], tit: 'La inflación hoy',
+          ci: [{ v: n(R.infl12, 1) + ' %', etq: 'Inflación de 12 meses', e: 'derivado' }], ir: [PSO.ir.monedas, 'El peso frente al dólar, el euro y la inflación'],
+          sug: ['¿Cuánta inflación hubo con Zedillo?', '¿Cuánto valen 1,000 pesos de 2000 hoy?', '¿Cuánto vale hoy el dólar?'] };
+      }
+      return null;
+    }
+    function leyesAmb(t) {
+      var L = DT.leyes, num = (/articulo (\d+)/.exec(t) || [])[1];
+      var l = num ? L.l.filter(function (x) { return new RegExp('art[ií]culo ' + num + '\\b|art[ií]culo ' + num + 'º').test(x.n); }) : [];
+      if (!l.length) l = L.l;
+      return { html: (l.length === 1 ? '<p><b>' + esc(l[0].n) + ':</b> ' + esc(l[0].d) + '</p>' : '<p>Las normas que aplican al medio ambiente, con su texto vigente:</p><ul class="pa-lista">' +
+          l.map(function (x) { return '<li><b>' + esc(x.n) + ':</b> ' + esc(x.d) + '</li>'; }).join('') + '</ul>'),
+        fu: l.slice(0, 3).map(function (x) { return { que: x.n, e: 'oficial', fu: x.fu }; }), tit: l.length === 1 ? l[0].n : 'Las leyes que aplican al medio ambiente', ir: L.ir,
+        sug: ['¿Quién recoge la basura?', '¿Cuánto cuesta el daño ambiental?'] };
+    }
+    function quienMide(t) {
+      var M = DT.mide, cl = [[/ecolog|dano|costo ambiental|pib/, 0], [/genera|residuo|manejo/, 1], [/municipio|servicio de basura|basura/, 2], [/impacto ambiental|permiso|obra|mia\b/, 3], [/presupuesto/, 4], [/transparencia|informacion|inai/, 5], [/compras|contrataciones|compranet/, 6]];
+      var k = cl.filter(function (x) { return x[0].test(t); }).map(function (x) { return x[1]; })[0];
+      var l = k != null ? [M.l[k]] : M.l;
+      return { html: (l.length === 1 ? '<p><b>' + esc(l[0].d) + '</b>: lo mide ' + esc(l[0].q) + (l[0].e === 'cambió' ? ' (cambió con las reformas)' : '') + '. ' + esc(l[0].n) + '</p>' :
+          '<p>Quién mide cada dato del medio ambiente, tras las reformas de 2024 y 2025:</p><ul class="pa-lista">' + l.map(function (x) { return '<li><b>' + esc(x.d) + ':</b> ' + esc(x.q) + (x.n ? ' <span class="pa-chico">(' + esc(x.n) + ')</span>' : '') + '</li>'; }).join('') + '</ul>') +
+          (k === 0 ? '<p class="pa-chico">' + esc(M.falta[2]) + '</p>' : ''),
+        fu: [], tit: 'Quién mide cada dato del medio ambiente', ir: M.ir };
+    }
+    function descargas(t) {
+      var mun = /municipi/.test(t), l = DT.desc || [];
+      return { html: '<p>' + (mun ? 'La base de los municipios (EFIPEM del INEGI, 2024) se descarga en CSV en <a href="datos-municipios.html">Base de Datos Municipal</a>; ahí mismo puedes consultar un estado sin descargar nada. ' : '') +
+          'En <a href="datos-descargas.html"><b>Datos abiertos</b></a> hay ' + l.length + ' bases que se descargan en CSV y abren directo en Excel, cada una con su fuente al final del archivo:</p><ul class="pa-lista">' +
+          l.map(function (x) { return '<li><b>' + esc(x.n) + '</b> <span class="pa-chico">(' + esc(x.fu) + ')</span></li>'; }).join('') + '</ul>' +
+          '<p class="pa-chico">En el <a href="informes-diccionario.html">Diccionario de Datos</a> está qué significa cada columna.</p>',
+        fu: [], tit: 'Las bases que puedes descargar', ir: mun ? ['datos-municipios.html', 'la Base de Datos Municipal'] : ['datos-descargas.html', 'Descarga en CSV'] };
+    }
+    function plazosAsf() {
+      var P = DT.plazos || { l: [] };
+      return { html: '<p>Los plazos que fija la ley después de que la ASF entrega sus informes:</p><ul class="pa-lista">' +
+          P.l.map(function (x) { return '<li><b>' + esc(x.p) + '</b> ' + esc(x.q) + ' <span class="pa-chico">(' + esc(x.f) + ')</span></li>'; }).join('') + '</ul>',
+        fu: [{ que: 'Plazos de la fiscalización', e: 'oficial', fu: P.fu }], tit: 'Los plazos de la ASF', ir: ['informes-cuenta-publica.html', 'Informes de la Cuenta Pública (ASF)'],
+        sug: ['¿Cuándo sale la siguiente entrega de la ASF?', '¿Cuántos pliegos de observaciones hubo en 2024?'] };
+    }
+    function lista69(t) {
+      var pag = B.fichas.filter(function (f) { return f.t === 'pagina' && f.ir && f.ir[0] === 'herramienta-inspector-efos.html'; })[0];
+      var d = (DT.desc || []).filter(function (x) { return /69-B/.test(x.n); })[0];
+      return { html: '<p>La <b>lista 69-B</b> es el listado que publica el SAT de contribuyentes que facturaron operaciones que no existieron (las llamadas «empresas fantasma» o EFOS), según el artículo 69-B del Código Fiscal de la Federación. ' +
+          'Cada uno aparece como presunto, definitivo, desvirtuado o con sentencia favorable.</p><p><b>Estar en la lista no es una condena penal.</b> Puedes buscar a un proveedor en <a href="herramienta-inspector-efos.html">Lista negra del SAT</a> y descargar la lista completa en <a href="datos-descargas.html">Datos abiertos</a>.</p>',
+        fu: d ? [{ que: 'Lista 69-B', e: 'oficial', fu: { tx: d.fu } }] : [], tit: 'La lista 69-B del SAT', ficha: pag, ir: ['herramienta-inspector-efos.html', 'Lista negra del SAT'],
+        sug: ['¿Dónde descargo los datos?', '¿Qué es un pliego de observaciones?'] };
     }
 
     /* ---------- ¿Es cierto que…? El verificador de cifras (verificador.js) ---------- */
@@ -886,6 +1068,7 @@
           '<li><b>Municipios:</b> sus ingresos de 2024, predial, FORTAMUN, FAIS y qué tanto dependen de la Federación.</li>' +
           '<li><b>Sueldos:</b> cuánto ganan la presidenta, un diputado, un ministro o un juez.</li>' +
           '<li><b>Números:</b> lo que entra (ISR, IVA, IEPS…), en qué se gasta, cada ramo y dependencia, el gasto federalizado, lo que cuestan los Poderes, el Paquete 2027 y las series desde 1990.</li>' +
+          '<li><b>Datos:</b> el peso frente al dólar y la inflación, cada sexenio por segundo, lo que revisó la ASF de 2019 a 2025, el daño ambiental, la basura, el presupuesto ambiental y las bases que se descargan.</li>' +
           '<li><b>Sexenios:</b> la deuda, el gasto y las auditorías de cada administración desde 1989.</li>' +
           '<li><b>Cuentas:</b> porcentajes, diferencias y márgenes («¿cuánto es el 16 % de 2,500 millones?»).</li>' +
           '<li><b>Términos y leyes:</b> qué es un pliego de observaciones, qué es el Ramo 33, dónde encuentro algo.</li></ul>' +
@@ -931,21 +1114,39 @@
       }
 
       /* Cuántos municipios. */
-      if (/cuantos municipios|mas municipios|menos municipios|numero de municipios/.test(t)) { var cm = cuentaMun(es[0], /menos/.test(t) ? 'min' : 'max'); if (cm) return fin(cm, { tipo: '' }); }
+      if (/cuantos municipios|mas municipios|menos municipios|numero de municipios/.test(t) && !/basura|recoleccion|servicio|agua|predial|aclarar/.test(t)) { var cm = cuentaMun(es[0], /menos/.test(t) ? 'min' : 'max'); if (cm) return fin(cm, { tipo: '' }); }
 
       /* Las administraciones. */
       var ads = admsDe(t);
       if (ads.length && !es.length && !(cg && GANA.test(t))) {
         var tema = admTema(t) || (sigue && ctx.tipo === 'adm' ? ctx.tema : '');
+        var aSub = tema === 'seg' ? (/interes/.test(t) ? 'costo_financiero_mdp' : /invers|obra/.test(t) ? 'inversion_mdp' : /ingres|entr/.test(t) ? 'ingresos_mdp' : /gast/.test(t) ? 'gasto_mdp' : 'deuda_seg') : null;
+        var aMon = /dolar/.test(t) ? 'usd' : /euro/.test(t) ? 'eur' : /pesos de hoy|de hoy|sin inflacion|reales|sumad|en total|todo el sexenio|en el sexenio|cuanto dinero/.test(t) ? 'hoy' : null;
         if (ads.length > 1) {
-          var dos = ads.slice(0, 3).map(function (a) { return admResp(a, tema || 'deuda'); });
+          var dos = ads.slice(0, 3).map(function (a) { return admResp(a, tema || 'deuda', aSub, aMon); });
           return fin({ html: dos.map(function (x) { return x.html; }).join(''), fu: [].concat.apply([], dos.map(function (x) { return x.fu; })), ci: [].concat.apply([], dos.map(function (x) { return x.ci; })),
             tit: 'Comparación de administraciones', ir: [D.expide, 'el Estado de cuenta administrativo'] }, { tipo: 'adm', tema: tema || 'deuda', adm: ads[0] });
         }
-        var ra = admResp(ads[0], tema);
+        var ra = admResp(ads[0], tema, aSub, aMon);
         ra.ir = [D.expide + '?adm=' + ads[0].id, 'su estado de cuenta completo'];
         ra.ficha = B.fichas.filter(function (f) { return f.t === 'estado' && f.tit.indexOf(ads[0].n) >= 0; })[0];
+        if (tema === 'peso') ra.ir = ['radar-peso-sexenios.html', 'El peso en cada sexenio'];
+        if (tema === 'seg') ra.ir = ['radar-reloj.html', 'El reloj de cada administración'];
         return fin(ra, { tipo: 'adm', tema: tema, adm: ads[0] });
+      }
+
+      /* La pestaña Datos: la lista 69-B, las descargas, los plazos de la ASF y el peso. */
+      if (/\b69 ?b\b|\befos\b|lista negra del sat|empresas fantasma|factureras|operaciones (simuladas|inexistentes)/.test(t) && !/\bdonde\b/.test(t)) { var r69 = lista69(t); if (r69) return fin(r69, { tipo: '' }); }
+      if (/descarg|\bcsv\b|excel|datos abiertos|bases? de datos|bajar (los )?datos/.test(t) && !es.length) return fin(descargas(t), { tipo: '' });
+      if (/plazo|cuanto tiempo|cuantos dias/.test(t) && /asf|auditoria|observac|pliego|solvent|respond|aclarar|informe individual/.test(t)) return fin(plazosAsf(), { tipo: '' });
+      if (!es.length) { var rp = pesoResp(t, q); if (rp) return fin(rp, { tipo: 'peso' }); }
+      if (DT.leyes && /articulo|\bley\b|leyes|norma|constitucion|derecho a/.test(t) && /ambient|basura|residuo|clima|impacto ambiental|ecolog|carbono|medio ambiente/.test(t)) return fin(leyesAmb(t), { tipo: '' });
+      if (DT.mide && /quien (mide|calcula|publica|lleva|cuenta)|de donde salen? (los|las|el|la) (dato|cifra)/.test(t) && /ambient|basura|residuo|ecolog|pib ecologico|presupuesto ambiental|transparencia|compras|contrataciones|impacto ambiental/.test(t)) return fin(quienMide(t), { tipo: '' });
+      /* Lo que revisó la ASF en todo el país, Cuenta Pública por Cuenta Pública. */
+      if (!es.length && !/\b(estados?|entidad(es)?|municipios?|alcaldias?)\b/.test(t) && !define0(t) && !municipio(resto, MUN_KW.test(t), es, false)) {
+        var nfA = numFila(t);
+        if (/aclarar|asf|auditoria superior/.test(t) && /donde se concentra|concentra|por grupo|por sector|en que (grupo|sector|rubro)|renglones|que dependencias|diez/.test(t)) { var gA = numGrupo(t) || ['asfg'], lA = numLista(gA, 'max', 0); if (lA) return fin(lA, { tipo: 'num', g: gA[0] }); }
+        if (nfA && /^asf/.test(nfA.g) && !/^\s*(quien|como|por que|porque|para que)\b/.test(t)) return fin(numResp(nfA, t, false), { tipo: 'num', f: nfA });
       }
 
       /* Una dependencia federal: lo que le aprobaron. */
@@ -966,6 +1167,9 @@
       var munN = MUN_KW.test(t) && municipio(resto, true, es, false);
       if (!hayEdo && !munN && !noCifra && !/por aclarar|observac|pliego|recuper|irregular|cuantas veces/.test(t) && !define0(t)) {
         var nfila = numFila(t), anioS = (/\b(199\d|20[01]\d|202[0-5])\b/.exec(t) || [])[1], anioN = (/\b(202[4-7])\b/.exec(t) || [])[1];
+        /* «¿Y en 2021?» después de una cifra con serie (la ASF, la basura). */
+        var anioY = (/\b(19[89]\d|20[0-3]\d)\b/.exec(t) || [])[1], sibY = !nfila && sigue && ctx.tipo === 'num' && ctx.f && anioY ? (NPAR[ctx.f.par] || []).filter(function (x) { return x.y === anioY; })[0] : null;
+        if (sibY) return fin(numResp(sibY, t, porHab), { tipo: 'num', f: sibY });
         if (!nfila && sigue && ctx.tipo === 'num' && ctx.f && (anioN || porHab || pideParte || /al dia|diario|por dia/.test(t))) {
           nfila = ctx.f;
           if (anioS && !(NPAR[nfila.par] || []).some(function (x) { return x.y === anioS; })) { var sr1 = serieResp(t + ' ' + (nfila.al || [''])[0], anioS); if (sr1) return fin(sr1, { tipo: 'num' }); }
@@ -982,7 +1186,7 @@
         var listaQ = NLISTA.test(t) || (RANK.test(t) && /\b(cual|cuales|que|quien|quienes)\b/.test(t)) || /\bcuant[oa]s (obras|proyectos|programas|impuestos|ramos|dependencias|secretarias)\b/.test(t) || (RANK.test(t) && (!nfila || nfila.tot || nfila.sub) && nCuantos > 0);
         if (listaQ && (!nfila || nfila.tot || nfila.sub)) { var gr = numGrupo(t); if (gr) { var nl = numLista(gr, dir, nCuantos); if (nl) return fin(nl, { tipo: 'num', g: gr[0] }); } }
         if (nfila && anioS && nfila.y !== anioS && !(NPAR[nfila.par] || []).some(function (x) { return x.y === anioS; })) { var sr0 = serieResp(t, anioS); if (sr0) return fin(sr0, { tipo: 'num' }); }
-        if (nfila && !nfila.tot && (NQUIERE.test(t) || pideParte || porHab || (sigue && ctx.tipo === 'num'))) return fin(numResp(nfila, t, porHab), { tipo: 'num', f: nfila });
+        if (nfila && !nfila.tot && (NQUIERE.test(t) || pideParte || porHab || (sigue && ctx.tipo === 'num') || (nfila.fr && /\bcual (es|fue|era)\b/.test(t)))) return fin(numResp(nfila, t, porHab), { tipo: 'num', f: nfila });
         if (anioS && !admsDe(t).length) {
           var sk = sigue && (ctx.serie || { intereses: 'interes', gasto: 'gasto', ingresos: 'ingresos' }[ctx.tema]) || '';
           var sr = serieResp(t, anioS) || (sk ? serieResp(t + ' ' + sk.replace('costo_financiero', 'interes'), anioS) : null);

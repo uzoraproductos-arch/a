@@ -27077,9 +27077,36 @@
   // ==========================================================================
   state.treemap = {
     currentParentId: 'raiz',
-    breadcrumbs: [{ id: 'raiz', nombre: 'PEF 2026 ($10.19B)' }],
+    breadcrumbs: [{ id: 'raiz', nombre: 'Gasto 2026 ($10.19 billones)' }],
     vista: 'treemap'
   };
+
+  /* El arbol se arma con los mismos renglones de la lista (panoramaErario.
+     egresos) y su desglose oficial (componentes). Hasta el 23-10-2026 leia
+     panoramaErario.treemapPEF, con montos redondos sin documento (Sedena
+     259,400 contra 170,753 del decreto): se retiro por pedido del autor. */
+  const TREEMAP_COLOR = { 'egr-social': 'social', 'egr-economico': 'econ', 'egr-gobierno': 'gob', 'egr-poderes': 'autonomos',
+    'egr-fondos': 'adefas', 'egr-costofin': 'deuda', 'egr-participaciones': 'fed', 'egr-adefas': 'adefas' };
+  const TREEMAP_PAGINA = { social: 'desarrollo-social', economico: 'desarrollo-economico', poderes: 'poderes-y-organos-autonomos',
+    fondos: 'fondos-de-estabilizacion', costofin: 'costo-financiero' };
+  function treemapDatos() {
+    if (!PANORAMA || !PANORAMA.egresos) return null;
+    const sinEtiquetas = t => String(t || '').replace(/<[^>]+>/g, '');
+    const nodos = [];
+    PANORAMA.egresos.forEach(e => {
+      const corto = e.id.slice(4);
+      nodos.push({ id: e.id, parentId: 'raiz', nivel: 1, nombre: e.nombre, montoMdp: e.montoMdp, estado: e.estado || 'oficial',
+        clasificacion: e.grupo + ' · ' + e.clave, descripcion: sinEtiquetas(e.queCubre), icono: e.icono,
+        color: TREEMAP_COLOR[e.id] || 'gob', refKey: e.refKey,
+        pagina: 'numeros-egreso-' + (TREEMAP_PAGINA[corto] || corto) + '.html' });
+      (e.componentes || []).filter(c => c.m > 0).forEach((c, i) => {
+        nodos.push({ id: e.id + '-c' + i, parentId: e.id, nivel: 2, nombre: c.n, montoMdp: c.m, estado: e.estado || 'oficial',
+          clasificacion: e.clave, descripcion: sinEtiquetas(c.d), icono: e.icono, color: TREEMAP_COLOR[e.id] || 'gob', refKey: e.refKey });
+      });
+    });
+    return { totalMdp: PANORAMA.totalPEF, nodos: nodos,
+      fuente: 'Presupuesto de Egresos de la Federación 2026 (DOF), Anexos 1 y 8 · SHCP, Criterios Generales de Política Económica 2027 (clasificación funcional)' };
+  }
 
   function setVistaEgresos(tipo) {
     state.treemap.vista = tipo;
@@ -27112,20 +27139,19 @@
     const backBtn = document.getElementById('treemapBackBtn');
     const summaryBanner = document.getElementById('treemapSummaryBanner');
 
-    if (!grid || !window.AUDIT_DB || !window.AUDIT_DB.panoramaErario || !window.AUDIT_DB.panoramaErario.treemapPEF) {
+    const treemapData = treemapDatos();
+    if (!grid || !treemapData) {
       return;
     }
 
-    const treemapData = window.AUDIT_DB.panoramaErario.treemapPEF;
     const allNodes = treemapData.nodos || [];
     const visibleNodes = allNodes.filter(n => n.parentId === parentId);
 
     // Determinar nivel actual
     const currentLevel = visibleNodes.length > 0 ? visibleNodes[0].nivel : 1;
     const levelNames = {
-      1: 'Nivel 1: 7 Funciones Macro',
-      2: 'Nivel 2: Ramos y Dependencias',
-      3: 'Nivel 3: Programas Insignia'
+      1: 'Nivel 1: los 8 renglones del gasto',
+      2: 'Nivel 2: su desglose oficial'
     };
     if (levelBadge) {
       levelBadge.innerText = levelNames[currentLevel] || `Nivel ${currentLevel}`;
@@ -27168,12 +27194,9 @@
       // Calcular span proporcional
       let spanClass = 'treemap-span-4';
       if (node.nivel === 1) {
-        if (node.id === 'fn-social') spanClass = 'treemap-span-7';
-        else if (node.id === 'fn-economico') spanClass = 'treemap-span-5';
-        else if (node.id === 'fn-deuda' || node.id === 'fn-ramo28') spanClass = 'treemap-span-6';
-        else if (node.id === 'fn-gobierno') spanClass = 'treemap-span-5';
-        else if (node.id === 'fn-adefas') spanClass = 'treemap-span-4';
-        else spanClass = 'treemap-span-3';
+        if (shareOfPef >= 40) spanClass = 'treemap-span-7';
+        else if (shareOfPef >= 16) spanClass = 'treemap-span-5';
+        else spanClass = 'treemap-span-4';
       } else {
         if (shareOfLevel >= 35) spanClass = 'treemap-span-8';
         else if (shareOfLevel >= 20) spanClass = 'treemap-span-6';
@@ -27188,7 +27211,7 @@
       // Formato de monto
       let montoTxt = '';
       if (node.montoMdp >= 1000000) {
-        montoTxt = `$${(node.montoMdp / 1000000).toFixed(2)} Billones`;
+        montoTxt = `$${(node.montoMdp / 1000000).toFixed(2)} billones`;
       } else {
         montoTxt = `$${Math.round(node.montoMdp).toLocaleString('es-MX')} mdp`;
       }
@@ -27218,14 +27241,14 @@
           <div class="treemap-node-bottom">
             ${hasChildren ? `
               <span class="treemap-drill-cue">
-                🔍 Ver ${node.nivel === 1 ? 'dependencias' : 'programas'} ➔
+                🔍 Ver su desglose ➔
               </span>
-            ` : `
-              <span style="font-family:var(--font-mono); font-size:10.5px; color:var(--text-dim);">Programa clave auditado</span>
-            `}
+            ` : (node.pagina ? `
+              <a class="treemap-drill-cue" href="${node.pagina}">Ver en Números ➔</a>
+            ` : '')}
             ${node.refKey ? `
-              <span class="treemap-ref-link" onclick="event.stopPropagation(); window.AuditEngine.goToRef('${node.refKey}')" title="Ver fundamento oficial">
-                Ver ley ↗
+              <span class="treemap-ref-link" onclick="event.stopPropagation(); window.AuditEngine.goToRef('${node.refKey}')" title="Ver la fuente oficial">
+                Ver fuente ↗
               </span>
             ` : ''}
           </div>
@@ -27250,12 +27273,12 @@
 
   function treemapNavegar(nodeId, fromCrumb) {
     if (nodeId === 'raiz') {
-      state.treemap.breadcrumbs = [{ id: 'raiz', nombre: 'PEF 2026 ($10.19B)' }];
+      state.treemap.breadcrumbs = [{ id: 'raiz', nombre: 'Gasto 2026 ($10.19 billones)' }];
       renderTreemapPEF('raiz');
       return;
     }
 
-    const treemapData = window.AUDIT_DB && window.AUDIT_DB.panoramaErario && window.AUDIT_DB.panoramaErario.treemapPEF;
+    const treemapData = treemapDatos();
     if (!treemapData) return;
 
     const targetNode = treemapData.nodos.find(n => n.id === nodeId);

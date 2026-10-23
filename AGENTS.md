@@ -276,7 +276,9 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   (`_charla()`) o al catálogo de cifras (`insp_nota.catalogo()`), y se prueba
   con una pregunta en el chat. Las cifras de la pestaña Números entran por
   `herramientas/asistente_numeros.py`: un renglón por cifra, con su estado,
-  su documento y la página donde se lee (y debe leerse igual ahí).
+  su documento y la página donde se lee (y debe leerse igual ahí). Las de la
+  pestaña Datos, por `herramientas/asistente_datos.py`, igual; las que no
+  son millones de pesos llevan su unidad (`un`) y su frase (`fr`).
 - **Responde como chat:** claro, corto y contundente, con la cifra, qué
   quiere decir y su fuente a la vista. La ficha técnica sellada solo se
   arma si el lector toca «Generar ficha técnica».
