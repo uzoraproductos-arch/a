@@ -441,8 +441,12 @@ def _charla(d):
     # Las de la pestaña Datos (23-10-2026): medio ambiente, basura, Ramo 16,
     # la ASF en la Cuenta Pública, el peso en el tiempo y las descargas.
     import asistente_datos
+    # El Poder Legislativo y las elecciones (23-10-2026), cotejados contra la
+    # Constitución, la LGIPE, el INE y el INEGI; la Enciclopedia solo guió los temas.
+    import asistente_legislativo
     return {'nota': nota, 'met': met, 'edo': edo, 'cargos': cargos, 'smin': smin, 'adm': adm, 'admet': admet, 'expide': EXPIDE,
-            'mapa': 'numeros-mapa-del-gasto-federalizado.html', 'num': num, 'datos': asistente_datos.datos(d, num, D)}
+            'mapa': 'numeros-mapa-del-gasto-federalizado.html', 'num': num, 'datos': asistente_datos.datos(d, num, D),
+            'leg': asistente_legislativo.legislativo()}
 
 
 def escribir_base():

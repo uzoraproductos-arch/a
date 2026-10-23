@@ -965,6 +965,67 @@
         fu: [{ que: 'Plazos de la fiscalización', e: 'oficial', fu: P.fu }], tit: 'Los plazos de la ASF', ir: ['informes-cuenta-publica.html', 'Informes de la Cuenta Pública (ASF)'],
         sug: ['¿Cuándo sale la siguiente entrega de la ASF?', '¿Cuántos pliegos de observaciones hubo en 2024?'] };
     }
+    /* ---------- El Poder Legislativo y las elecciones (23-10-2026) ---------- */
+    var LEG = D.leg || null;
+    var DINERO = /gasta|gastan|cuesta|cuestan|costo|presupuesto|gana|ganan|sueldo|dieta|dinero|lana|varo|millones|pesos|aprobaron|ejerci/;
+    function legTema(k, extra) {
+      var x = LEG.t[k];
+      return { html: x.h + (extra || ''), fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug };
+    }
+    /* Si hoy el Congreso está en periodo ordinario o en receso: la fecha del navegador contra los arts. 65 y 66. */
+    function hoySesion() {
+      var d = new Date(), m = d.getMonth() + 1, dia = d.getDate(), md = m * 100 + dia;
+      var p = md >= 901 && md <= 1215 ? 'en su <b>primer periodo ordinario</b>, que termina a más tardar el 15 de diciembre' :
+        md >= 201 && md <= 430 ? 'en su <b>segundo periodo ordinario</b>, que termina a más tardar el 30 de abril' :
+        'en <b>receso</b>: trabaja la Comisión Permanente';
+      return '<p>Hoy, ' + d.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) + ', el Congreso está ' + p + '.</p>';
+    }
+    function congresoLocal(e) {
+      var v = LEG.cong[e.a], l = Object.keys(LEG.cong).sort(function (a, b) { return LEG.cong[b] - LEG.cong[a]; });
+      var lu = l.filter(function (a) { return LEG.cong[a] > v; }).length + 1;
+      return { html: '<p>El Congreso de <b>' + esc(e.n) + '</b> tenía <b>' + v + ' personas legisladoras en activo</b>, según el último censo del INEGI. ' +
+          (lu === 1 ? 'Es el más grande del país.' : 'Es el lugar <b>' + lu + ' de 32</b> por tamaño.') + '</p>' +
+          (e.a === 'CDMX' ? '<p class="pa-chico">El INEGI aclara que el Congreso de la Ciudad de México debe tener 66: una persona suplente tomó protesta después del corte.</p>' : ''),
+        fu: [{ que: 'Personas legisladoras en activo (tabla 8)', e: 'oficial', fu: LEG.cnple }, { que: 'Lugar entre los 32 congresos', e: 'derivado', op: 'ordenamos los 32 congresos de mayor a menor', fu: LEG.cnple }],
+        ci: [{ v: String(v), etq: 'legisladores del Congreso de ' + e.n, e: 'oficial' }], tit: 'Congreso de ' + e.n,
+        sug: ['¿Cuánto gasta el Congreso de ' + e.n + '?', '¿Cuál es el congreso más grande?', '¿Cuántos diputados hay?'] };
+    }
+    function congresosLista(dir, cuantos) {
+      var l = EDO.filter(function (e) { return LEG.cong[e.a] != null; }).sort(function (a, b) { return dir === 'min' ? LEG.cong[a.a] - LEG.cong[b.a] : LEG.cong[b.a] - LEG.cong[a.a]; }).slice(0, Math.max(cuantos, 5));
+      return { html: '<p>Los congresos locales ' + (dir === 'min' ? 'más chicos' : 'más grandes') + ', por personas legisladoras en activo:</p><ol class="pa-lista">' +
+          l.map(function (e) { return '<li><b>' + esc(e.n) + '</b>: ' + LEG.cong[e.a] + '</li>'; }).join('') + '</ol><p class="pa-chico">Entre los 32 suman ' + n(LEG.congTot) + '.</p>',
+        fu: [{ que: 'Personas legisladoras en activo por congreso (tabla 8)', e: 'oficial', fu: LEG.cnple }], tit: 'El tamaño de los congresos locales',
+        sug: [dir === 'min' ? '¿Cuál es el congreso más grande?' : '¿Cuál es el congreso más chico?', '¿Cuántos diputados hay?'] };
+    }
+    function legResp(t, es, dir, cuantos) {
+      if (!LEG) return null;
+      if (/cuando se (aprueba|vota|entrega|presenta|discute)|fecha (limite|para)|a mas tardar|calendario/.test(t) && /presupuesto|paquete|ley de ingresos|\bpef\b|\blif\b/.test(t)) return legTema('paquete');
+      if (DINERO.test(t)) return null;
+      var cuenta = /cuant[oa]s|numero de|integrantes|integra|tamano|grande|chico|pequeno|\bmas (diputad|legislador)|\bmenos (diputad|legislador)/;
+      var local = /congresos? (local|locales|estatal|estatales|de los estados)|diputad[oa]s? locales?|legislaturas? (local|locales|estatal|estatales)|legisladores locales/.test(t);
+      if (!local && !/union|federal|camara|senado/.test(t) && /congreso|legislatura/.test(t) && /mas grande|mas chico|mas pequeno|mas diputados|menos diputados/.test(t)) local = true;
+      if ((local || (es.length && /congreso|diputad|legislador|legislatura|curul/.test(t))) && cuenta.test(t)) {
+        if (es.length === 1) return congresoLocal(es[0]);
+        if (/grande|chico|pequeno|\bmas\b|\bmenos\b|ranking|cuales/.test(t)) return congresosLista(/chico|pequeno|\bmenos\b/.test(t) ? 'min' : dir, cuantos);
+        return legTema('locales');
+      }
+      if (/judicial|juezas?|jueces|magistrad|ministr[oa]s? de la corte/.test(t) && /eleccion|elegir|votar|vota|eligen|elige|2027|2028|cuando/.test(t)) return legTema('judicial');
+      if (/reele[cg]|reelig|reelij|nepotismo/.test(t)) return legTema('reeleccion');
+      if (/comision permanente/.test(t)) return legTema('permanente');
+      if (/plan b|reformas? (electoral|recientes?|a la constitucion)|que cambio en la constitucion|nacionalidad unica/.test(t)) return legTema('reformas');
+      if (/regidur|regidor|sindicatura|sindic[oa]s?\b|cabildo|como se integra (un|el) ayuntamiento|integracion del ayuntamiento/.test(t)) return legTema('ayuntamientos');
+      if (/periodos? (ordinario|de sesiones)|cuando sesiona|sesiones del congreso|receso|esta sesionando|en sesiones|sesiona el congreso/.test(t)) return legTema('sesiones', hoySesion());
+      if (/elecci|votacion|votar|vota\b|votamos|votan\b|jornada electoral|comicios|proceso electoral|precampa|campanas? electoral|veda electoral|urnas/.test(t) &&
+          /proxim|cuando|2027|que se (elige|vota)|que vamos a votar|cuales|fecha|siguiente|viene/.test(t)) return legTema('elecciones');
+      if (/plurinominal|pluris\b|representacion proporcional|mayoria relativa|primera minoria/.test(t)) return legTema('pluris');
+      if (/distritos? (electoral|electorales|uninominal|uninominales|federal|federales)|cuantos distritos/.test(t) && !/local|locales/.test(t)) return legTema('diputados');
+      var fed = cuenta.test(t) || /curul|escan|como se (integra|compone|forma)|integracion|composicion/.test(t);
+      if (fed && /senad|camara alta/.test(t)) return legTema('senado');
+      if (fed && /diputad|camara de diputados|san lazaro|camara baja|curul/.test(t)) return legTema('diputados');
+      if (fed && /congreso|legislador|legislativo/.test(t)) return legTema('congreso');
+      return null;
+    }
+
     function lista69(t) {
       var pag = B.fichas.filter(function (f) { return f.t === 'pagina' && f.ir && f.ir[0] === 'herramienta-inspector-efos.html'; })[0];
       var d = (DT.desc || []).filter(function (x) { return /69-B/.test(x.n); })[0];
@@ -1069,6 +1130,7 @@
           '<li><b>Sueldos:</b> cuánto ganan la presidenta, un diputado, un ministro o un juez.</li>' +
           '<li><b>Números:</b> lo que entra (ISR, IVA, IEPS…), en qué se gasta, cada ramo y dependencia, el gasto federalizado, lo que cuestan los Poderes, el Paquete 2027 y las series desde 1990.</li>' +
           '<li><b>Datos:</b> el peso frente al dólar y la inflación, cada sexenio por segundo, lo que revisó la ASF de 2019 a 2025, el daño ambiental, la basura, el presupuesto ambiental y las bases que se descargan.</li>' +
+          '<li><b>El Congreso y las elecciones:</b> cuántas curules hay, los plurinominales, los periodos de sesiones, las fechas del presupuesto, las elecciones de 2027, la elección judicial, la reelección y los 32 congresos locales.</li>' +
           '<li><b>Sexenios:</b> la deuda, el gasto y las auditorías de cada administración desde 1989.</li>' +
           '<li><b>Cuentas:</b> porcentajes, diferencias y márgenes («¿cuánto es el 16 % de 2,500 millones?»).</li>' +
           '<li><b>Términos y leyes:</b> qué es un pliego de observaciones, qué es el Ramo 33, dónde encuentro algo.</li></ul>' +
@@ -1098,6 +1160,11 @@
       var dir = /\b(menos|menor|minimo|ultimo|ultimos)\b/.test(t) ? 'min' : 'max';
       var cuantos = (/\btop ?(\d+)|\blos (\d+)|\b(\d+) (estados|municipios|que)/.exec(t) || []).slice(1).filter(Boolean)[0];
       cuantos = cuantos ? Math.min(+cuantos, 32) : (/\b(los|cuales|que estados|estados que|municipios que|lista|ranking|top)\b/.test(t) ? 5 : 1);
+
+      /* El Poder Legislativo y las elecciones: curules, sesiones, fechas y reformas. */
+      if (LEG && sigue && ctx.tipo === 'legcong' && es.length === 1 && !DINERO.test(t)) return fin(congresoLocal(es[0]), { tipo: 'legcong' });
+      var rl = legResp(t, es, dir, cuantos);
+      if (rl) return fin(rl, { tipo: rl.tit && rl.tit.indexOf('Congreso de ') === 0 ? 'legcong' : 'leg' });
 
       /* Los sueldos. */
       var cg = cargoDe(t);

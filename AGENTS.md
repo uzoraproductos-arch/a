@@ -278,7 +278,10 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   `herramientas/asistente_numeros.py`: un renglón por cifra, con su estado,
   su documento y la página donde se lee (y debe leerse igual ahí). Las de la
   pestaña Datos, por `herramientas/asistente_datos.py`, igual; las que no
-  son millones de pesos llevan su unidad (`un`) y su frase (`fr`).
+  son millones de pesos llevan su unidad (`un`) y su frase (`fr`). El Poder Legislativo
+  y las elecciones, por `herramientas/asistente_legislativo.py`, cotejado
+  contra la Constitución, la LGIPE, el INE y el INEGI (nunca contra la
+  Enciclopedia, que solo sirve de guía de temas).
 - **Responde como chat:** claro, corto y contundente, con la cifra, qué
   quiere decir y su fuente a la vista. La ficha técnica sellada solo se
   arma si el lector toca «Generar ficha técnica».

@@ -133,6 +133,13 @@ PROPIOS = [
     ('fonden-2021-2025', 'Desastres', 'Fondo de Desastres Naturales aprobado en los Presupuestos 2021 a 2025',
      'Los Presupuestos de esos años están publicados; la plataforma aún no integra el renglón del Ramo 23.',
      PLATAFORMA, 'https://www.diputados.gob.mx/LeyesBiblio/', 'Leyes federales (Cámara de Diputados)', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
+    # El Poder Legislativo en el bot (23-10-2026).
+    ('elecciones-2027-cargos', 'Elecciones', 'Cuáles son las 17 gubernaturas de 2027 y cuántos cargos locales se eligen (diputaciones locales por principio y ayuntamientos)',
+     'El INE confirma en un acuerdo publicado en el Diario Oficial (INE/CG469/2026) que en 2027 habrá elecciones en las 32 entidades y 17 gubernaturas, pero la lista por estado y el conteo de cargos '
+     'están en su calendario de coordinación con los institutos locales (INE/CG480/2026), que la plataforma aún no integra: el portal del INE no se pudo abrir con conexión verificada. '
+     'Las cifras que circulan («más de 19,600 cargos», «1,098 diputaciones locales») no se publican mientras no se cotejen con ese documento.',
+     PLATAFORMA, 'https://ine.mx/voto-y-elecciones/elecciones-2027/', 'Proceso Electoral Federal 2026-2027 (INE)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor')]),
     ('predial-ocde', 'Estados y municipios', 'El predial como parte del PIB: 0.16% en México y 1.0% en la OCDE',
      'Las dos cifras vienen de las Estadísticas Tributarias de la OCDE, pero la plataforma no guardó el cuadro ni la edición de donde salieron y no pudo volver a abrirlo para cotejarlas. '
      'Quedan como pendientes hasta integrar el documento.',
