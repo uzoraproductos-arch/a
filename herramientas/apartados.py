@@ -275,10 +275,22 @@ def bib_nav(actual):
                 % (b[0], ' aria-current="page"' if b[0] == actual else '', b[1], b[2], b[3]) for b in BIBLIOTECA)))
 
 
+ENCICLOPEDIA = 'enciclopedia-auditavision.html'
+
+# Las pestañas del menú (decisión del autor, 23-10-2026): eran cinco y son
+# tres. Cada una: (archivo, nombre, páginas que la marcan como actual).
+MENU = [
+    ('herramientas.html', 'Auditor Virtual', ('herramientas.html',)),
+    (ENCICLOPEDIA, 'Enciclopedia', (ENCICLOPEDIA, 'sigue-el-dinero.html', 'descarga-los-datos.html', 'aprende.html')),
+    ('participa.html', 'Comunidad', ('participa.html',)),
+]
+
 APARTADOS = [
     {
         'archivo': 'herramientas.html',
-        'menu': 'Herramientas',
+        # Desde el 23-10-2026 la pestaña se llama «Auditor Virtual» (decisión
+        # del autor); el archivo conserva su nombre para no romper enlaces.
+        'menu': 'Auditor Virtual',
         'icono': '🧰',
         'titulo': 'Herramientas para seguir el dinero público',
         'lema': 'El gasto público, a la vista',
@@ -304,6 +316,28 @@ APARTADOS = [
                     ('🌎', 'Costo Ambiental', '', 'herramienta-ambiente.html', None, 'ambiente'),
                 ],
             },
+        ],
+    },
+    {
+        # La Enciclopedia (decisión del autor, 23-10-2026): la segunda de las
+        # tres pestañas junta Números, Datos y Aprende. No es enciclopedia.html,
+        # que es el proyecto congelado: aquí solo hay tres tarjetas.
+        'archivo': ENCICLOPEDIA,
+        'menu': 'Enciclopedia',
+        'icono': '📚',
+        'titulo': 'Enciclopedia',
+        'lema': 'La obra de consulta del auditor',
+        'entrada': ('Aquí está la parte de consulta de la plataforma: los números del dinero público, los datos para descargar '
+                    'y lo que hace falta para leerlos. Cada tarjeta abre su propia página, y toda cifra lleva su fuente oficial.'),
+        'pestanas': True,
+        'pista': 'Cada tarjeta abre su propia página.',
+        'secciones': [
+            {'id': 'numeros', 'pagina': 'sigue-el-dinero.html',
+             'pestana': ('💰', 'Números', 'El recorrido del dinero, del impuesto a la rendición de cuentas: abre su página')},
+            {'id': 'datos', 'pagina': 'descarga-los-datos.html',
+             'pestana': ('💾', 'Datos', 'El radar, las descargas, el ambiente y los Poderes: abre su página')},
+            {'id': 'aprende', 'pagina': 'aprende.html',
+             'pestana': ('📖', 'Aprende', 'La trivia, la Biblioteca del Erario Público y las noticias: abre su página')},
         ],
     },
     {
@@ -454,8 +488,8 @@ APARTADOS = [
                 'tarjetas': [
                     ('📒', 'El estado de resultados del Gobierno', 'La Cuenta Pública 2024 leída como un negocio: actividades, flujos, situación financiera y gasto social.', 'numeros-estado-de-resultados.html', None, 'dinero'),
                     ('🧭', 'Contexto dimensional', 'El balance de todo el recorrido: lo que entró, lo que se gastó, lo que se debe y lo que se perdió, 2024 frente a 2026 y 2027.', 'estado-de-cuenta.html', None, 'dinero'),
-                    ('🔍', 'Expedientes de casos de la ASF', 'Los casos que la Auditoría Superior dejó abiertos, lo que encontró en la Cuenta Pública 2024 sector por sector y quién más fiscaliza. Es una herramienta: abre en Herramientas.', 'herramienta-inspector-asf.html', None, 'inspector'),
-                    ('⏱️', 'El reloj de la deuda', 'Lo que el país se endeuda, paga de intereses y pierde por segundo, con su contador en vivo. Es una herramienta: abre en Herramientas.', 'herramienta-calculadora-reloj.html', None, 'inspector'),
+                    ('🔍', 'Expedientes de casos de la ASF', 'Los casos que la Auditoría Superior dejó abiertos, lo que encontró en la Cuenta Pública 2024 sector por sector y quién más fiscaliza. Es una herramienta: abre en el Auditor Virtual.', 'herramienta-inspector-asf.html', None, 'inspector'),
+                    ('⏱️', 'El reloj de la deuda', 'Lo que el país se endeuda, paga de intereses y pierde por segundo, con su contador en vivo. Es una herramienta: abre en el Auditor Virtual.', 'herramienta-calculadora-reloj.html', None, 'inspector'),
                 ],
             },
         ],
@@ -577,9 +611,12 @@ APARTADOS = [
     },
     {
         'archivo': 'participa.html',
-        'menu': 'Participa',
+        # Desde el 23-10-2026 la pestaña se llama «Comunidad» y su tarjeta
+        # «Comunidad» pasa a llamarse «Participa» (decisión del autor). Los
+        # archivos se quedan como estaban para no romper enlaces.
+        'menu': 'Comunidad',
         'icono': '💬',
-        'titulo': 'Participa',
+        'titulo': 'Comunidad',
         'lema': 'Ágora cívica y canales oficiales',
         'entrada': ('Contrasta posturas con fuentes, publica tu argumento y, si viste algo raro con el dinero público, '
                     'llévalo al canal oficial que corresponde. Sin correos, teléfonos ni rastreo.'),
@@ -623,7 +660,7 @@ APARTADOS = [
                 # comunidad.html, y cada una de sus cinco tarjetas, su pagina.
                 'id': 'comunidad',
                 'pagina': 'comunidad.html',
-                'pestana': ('🤝', 'Comunidad', 'Cuéntanos lo que viste, corrígenos, comparte: abre su página'),
+                'pestana': ('🤝', 'Participa', 'Cuéntanos lo que viste, corrígenos, comparte: abre su página'),
             },
         ],
     },
@@ -887,7 +924,7 @@ def herramienta(h, n):
         'archivo': archivo,
         'menu': titulo,
         'menu_archivo': 'herramientas.html',
-        'padre': ('herramientas.html', 'Herramientas'),
+        'padre': ('herramientas.html', 'Auditor Virtual'),
         'icono': icono,
         'titulo': titulo,
         'lema': 'Herramienta %d de %d' % (n, len(HERRAMIENTAS)),
@@ -935,7 +972,7 @@ def herramienta_divisiones(h, n, ruta):
                        '', 'Preguntar')))
     base = {
         'menu_archivo': 'herramientas.html',
-        'padre': ('herramientas.html', 'Herramientas'),
+        'padre': ('herramientas.html', 'Auditor Virtual'),
         'fondo': HERR_IMG[rubro],
         'rubro': rubro,
         'sin_icono_lema': True,
@@ -1024,7 +1061,7 @@ def herramienta_modulo(h, n, i, bloque=None):
         'archivo': modulo_archivo(archivo, clave),
         'menu': nombre,
         'menu_archivo': 'herramientas.html',
-        'padre': ('herramientas.html', 'Herramientas'),
+        'padre': ('herramientas.html', 'Auditor Virtual'),
         'padre2': (archivo, titulo),
         'padre3': (INVESTIGACIONES, HERR_DIVISION[rubro][0]) if rubro == 'inspector' else None,
         'icono': ico,
@@ -1162,7 +1199,7 @@ def herramienta_asistente(bloque):
            '        </div>\n      </nav>' % (archivo, icono, titulo, INVESTIGACIONES, icono, HERR_DIVISION[rubro][0]))
     return {
         'archivo': ASISTENTE[0], 'menu': ASISTENTE[1], 'menu_archivo': 'herramientas.html',
-        'padre': ('herramientas.html', 'Herramientas'), 'padre2': (archivo, titulo),
+        'padre': ('herramientas.html', 'Auditor Virtual'), 'padre2': (archivo, titulo),
         'icono': '💬', 'titulo': ASISTENTE[1],
         'lema': '%s · el bot interno' % titulo, 'sin_icono_lema': True, 'icono_cab': LOGO_IMG,
         'entrada': '<b>%s.</b> %s' % (ASISTENTE[2], ASISTENTE[3]),
@@ -1180,7 +1217,7 @@ def herramienta_dictamen(bloque):
     import asistente
     return {
         'archivo': asistente.DICTAMEN, 'menu': 'Dictamen pericial', 'menu_archivo': 'herramientas.html',
-        'padre': ('herramientas.html', 'Herramientas'), 'padre2': (ASISTENTE[0], ASISTENTE[1]),
+        'padre': ('herramientas.html', 'Auditor Virtual'), 'padre2': (ASISTENTE[0], ASISTENTE[1]),
         'icono': '🧾', 'titulo': 'Dictamen pericial de Auditavisión',
         'lema': '%s · el respaldo de una respuesta' % ASISTENTE[1], 'sin_icono_lema': True, 'icono_cab': LOGO_IMG,
         'entrada': ('<b>El respaldo de una respuesta del Auditor.</b> Tu pregunta, lo que se contestó, cada cifra con su estado, '
@@ -1304,7 +1341,7 @@ def simulador():
     datos = json.dumps(ej, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     return {
         'archivo': 'simulador-presupuesto.html', 'menu': 'Reparte el presupuesto', 'menu_archivo': 'herramientas.html',
-        'padre': ('herramientas.html', 'Herramientas'),
+        'padre': ('herramientas.html', 'Auditor Virtual'),
         'padre2': ('herramienta-calculadora.html', 'Calculadora Cívica'),
         'icono': '🧮', 'titulo': 'Reparte el presupuesto, desde cero', 'lema': 'Tú pones las cifras; el ejemplo oficial, Hacienda',
         'entrada': ('Un simulador que empieza en $0. Agrega lo que entra y a dónde va, reparte, compara dos escenarios y descarga la cuenta. '
@@ -1448,7 +1485,7 @@ def servicios():
     return {
         'archivo': 'servicios.html', 'menu': 'Servicios de investigación', 'menu_archivo': 'herramientas.html',
         # Desde el 11-10-2026 es un modulo del Modo Inspector (pedido del autor).
-        'padre': ('herramientas.html', 'Herramientas'),
+        'padre': ('herramientas.html', 'Auditor Virtual'),
         'padre2': ('herramienta-inspector.html', 'Modo Inspector'),
         'padre3': (INVESTIGACIONES, 'Grandes investigaciones'),
         'icono': '🔎', 'titulo': 'Servicios de investigación', 'lema': 'La consulta es gratuita; la investigación a la medida se cotiza',
@@ -1812,7 +1849,7 @@ def agora():
         opciones=opciones, preguntas=preguntas, servidor=servidor)
     return {
         'archivo': 'agora.html', 'menu': 'Ágora cívica', 'menu_archivo': 'participa.html',
-        'padre': ('participa.html', 'Participa'),
+        'padre': ('participa.html', 'Comunidad'),
         'icono': '💬', 'titulo': 'Ágora cívica', 'lema': 'La red de réplica y diálogo',
         'entrada': ('Pon a debate lo que viste en los números, sostenlo con su fuente y replica a quien piense distinto. '
                     'Firmas con seudónimo: sin correo, sin teléfono y sin rastreo.'),
@@ -1882,7 +1919,7 @@ def partes_nav(nombre, portada, icono, partes, actual):
 
 def comunidad_nav(actual):
     """Barra al pie de cada pagina de Comunidad, con sus cinco partes."""
-    return partes_nav('Comunidad', 'comunidad.html', '🤝', COMUNIDAD_PARTES, actual)
+    return partes_nav('Participa', 'comunidad.html', '🤝', COMUNIDAD_PARTES, actual)
 
 
 def comunidad():
@@ -1909,22 +1946,22 @@ def comunidad():
         'erratas': '<div class="sv-politica">\n          <ol class="cm-erratas">\n%s\n          </ol>\n        </div>' % erratas,
     }
     portada = {
-        'archivo': 'comunidad.html', 'menu': 'Comunidad', 'menu_archivo': 'participa.html',
-        'padre': ('participa.html', 'Participa'),
-        'icono': '🤝', 'titulo': 'Comunidad', 'lema': 'Cuéntanos lo que viste',
+        'archivo': 'comunidad.html', 'menu': 'Participa', 'menu_archivo': 'participa.html',
+        'padre': ('participa.html', 'Comunidad'),
+        'icono': '🤝', 'titulo': 'Participa', 'lema': 'Cuéntanos lo que viste',
         'entrada': ('La plataforma mejora con quien la lee. Repórtanos algo raro con el dinero público, señala un dato que esté mal '
                     '(con su documento) o propón un tema para investigar. Son las mismas tres rutas del botón «📢 Cuéntanos lo que viste» '
                     'de la cabecera, más el botón para compartir y la fe de erratas. Cada tarjeta abre su propia página.'),
         'hash_a_pagina': COMUNIDAD_ARCHIVO,
-        'secciones': [{'id': 'partes', 'titulo': 'Las cinco puertas de la Comunidad', 'texto': '', 'sin_cab': True,
+        'secciones': [{'id': 'partes', 'titulo': 'Las cinco puertas para participar', 'texto': '', 'sin_cab': True,
                        'tarjetas': [(c[2], c[3], c[4], c[1], None, None) for c in COMUNIDAD_PARTES]}],
     }
     partes = []
     for id_, archivo, ico, tit, frase, texto in COMUNIDAD_PARTES:
         partes.append({
             'archivo': archivo, 'menu': tit, 'menu_archivo': 'participa.html',
-            'padre': ('participa.html', 'Participa'), 'padre2': ('comunidad.html', 'Comunidad'),
-            'icono': ico, 'titulo': tit, 'lema': 'Comunidad', 'entrada': texto,
+            'padre': ('participa.html', 'Comunidad'), 'padre2': ('comunidad.html', 'Participa'),
+            'icono': ico, 'titulo': tit, 'lema': 'Participa', 'entrada': texto,
             'estilos': ['servicios.css'],
             'antes': AVISO_ENVIO if id_ in ('reporta', 'error', 'tema') else '',
             'pie_extra': comunidad_nav(archivo),
@@ -2067,7 +2104,7 @@ def donaciones():
 
     return {
         'archivo': 'donaciones.html', 'menu': 'Donaciones', 'menu_archivo': 'participa.html',
-        'padre': ('participa.html', 'Participa'),
+        'padre': ('participa.html', 'Comunidad'),
         'icono': '🐷', 'titulo': 'Donaciones', 'lema': 'Exigimos transparencia, y empezamos por casa',
         'entrada': ('Auditavisión no tiene publicidad y su consulta es gratuita. Si quieres ayudar a sostenerla, puedes donar lo que quieras. '
                     'Te ofrecemos lo mismo que le pedimos al gobierno: <b>cuentas claras</b>. Cada peso que entre se ve en la alcancía, '
@@ -2276,7 +2313,7 @@ def garantias():
     anclas.update(('puerta-' + c['id'], 'garantias-puertas.html#puerta-' + c['id']) for c in canales)
     portada = {
         'archivo': 'garantias.html', 'menu': 'Garantías cívicas', 'menu_archivo': 'participa.html',
-        'padre': ('participa.html', 'Participa'),
+        'padre': ('participa.html', 'Comunidad'),
         'icono': '🛡️', 'titulo': 'Garantías cívicas', 'lema': 'A qué puerta tocar y qué te protege',
         'entrada': ('Viste algo raro con el dinero público. Estas páginas responden tres preguntas: <b>a qué puerta oficial tocar</b>, '
                     '<b>qué derechos te protegen</b> y <b>qué llevar</b>. Empieza por la brújula: en tres clics te dice cuál de las '
@@ -2291,7 +2328,7 @@ def garantias():
     for id_, archivo, ico, tit, frase, texto in GARANTIAS_PARTES:
         partes.append({
             'archivo': archivo, 'menu': tit, 'menu_archivo': 'participa.html',
-            'padre': ('participa.html', 'Participa'), 'padre2': ('garantias.html', 'Garantías cívicas'),
+            'padre': ('participa.html', 'Comunidad'), 'padre2': ('garantias.html', 'Garantías cívicas'),
             'icono': ico, 'titulo': tit, 'lema': 'Garantías cívicas', 'entrada': texto,
             'estilos': ['servicios.css', 'garantias.css'],
             'scripts': ['garantias.js'],
@@ -3450,7 +3487,7 @@ def radar():
         # Del 12-10-2026 al 22-10-2026 fue la cuarta tarjeta de Datos; desde
         # entonces (pedido del autor) es la quinta aplicacion de la
         # Calculadora Civica, con sus migas y su pie (nav_de_pagina).
-        'padre': ('herramientas.html', 'Herramientas'),
+        'padre': ('herramientas.html', 'Auditor Virtual'),
         'padre2': ('herramienta-calculadora.html', 'Calculadora Cívica'),
         'icono': '🏛️', 'titulo': 'Estado de cuenta administrativo', 'lema': 'Calculadora Cívica · aplicación 5 de 5',
         'sin_icono_lema': True, 'icono_cab': '🏛️', 'fondo': HERR_IMG['calculadora'], 'rubro': 'calculadora',
@@ -3502,7 +3539,7 @@ def pagina_biblioteca(archivo, titulo, lema, entrada, raiz, carga, scripts=('aud
     b = [x for x in BIBLIOTECA + [PASE] if x[0] == archivo][0]
     if b is PASE:
         # El Pase vive en Participa desde el 11-10-2026.
-        migas = {'menu_archivo': 'participa.html', 'padre': ('participa.html', 'Participa'),
+        migas = {'menu_archivo': 'participa.html', 'padre': ('participa.html', 'Comunidad'),
                  'pie_extra': '<p class="bib-sello">¿Necesitas una investigación a la medida? Mira los '
                               '<a href="servicios.html">Servicios de investigación</a> del Modo Inspector.</p>'}
     else:
@@ -3589,10 +3626,10 @@ def esc_attr(s):
 
 def cabecera(actual, sello):
     items = []
-    for a in APARTADOS:
-        cur = ' aria-current="page"' if a['archivo'] == actual else ''
+    for archivo, nombre, marcan in MENU:
+        cur = ' aria-current="page"' if actual in marcan else ''
         items.append('      <div class="nav-menu-item"><a class="mega-menu-trigger" href="%s"%s>%s</a></div>'
-                     % (a['archivo'], cur, a['menu']))
+                     % (archivo, cur, nombre))
     return '''  <nav class="site-top-nav" aria-label="Navegación principal">
     <div class="nav-brand-group">
       <button type="button" class="brand-logo-btn" id="apartadoPresentacion" title="Quiénes somos: qué es Auditavisión" aria-label="Quiénes somos: abrir la presentación de Auditavisión"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="72" height="56"></button>
@@ -4735,6 +4772,9 @@ def pagina(a, sello):
     titulo_doc = '%s · Auditavisión' % re.sub('<[^>]+>', '', a['menu'])
     descripcion = re.sub('<[^>]+>', '', a['entrada'])
     padre = ('<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a['padre']) if a.get('padre') else ''
+    if (a.get('menu_archivo', a['archivo']) in MENU[1][2] and a['archivo'] != ENCICLOPEDIA
+            and (a.get('padre') or (None,))[0] != ENCICLOPEDIA):
+        padre = '<a href="%s">Enciclopedia</a> <span aria-hidden="true">›</span> %s' % (ENCICLOPEDIA, padre)
     for nivel in ('padre2', 'padre3'):
         if a.get(nivel):
             padre += '<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a[nivel]
@@ -4837,6 +4877,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('23-10-2026', 'El menú queda en tres pestañas: Auditor Virtual, con las herramientas; Enciclopedia, que junta Números, Datos y Aprende; y Comunidad, la antigua Participa, donde la tarjeta Comunidad se llama ahora Participa. Ningún enlace cambia de dirección.'),
     ('23-10-2026', 'El Poder Judicial y el Poder Legislativo viven en Datos, cada uno con su portada y una página por tema: quién es quién, la Suprema Corte, los sueldos, el presupuesto, la elección judicial y cómo decide; las Cámaras, el calendario, las elecciones y los congresos de los estados. Pregúntale al Auditor contesta sobre los dos.'),
     ('23-10-2026', 'Cada respuesta de Pregúntale al Auditor trae «Saber más», que abre la página donde está el dato, y «Generar dictamen», que abre el dictamen pericial sellado en su propia página.'),
     ('23-10-2026', 'Pregúntale al Auditor es el auditor de toda la plataforma: contesta como chat con las cifras de Números y de Datos, cada una con su fuente, y verifica lo que «dicen» o la liga de una nota contra el documento oficial.'),
@@ -4986,7 +5027,11 @@ def indice(base, ref):
                             ([(ASISTENTE[0], ASISTENTE[1], ASISTENTE[2])] if h[1] == 'inspector' else []),
                             h[0])
                      for h in HERRAMIENTAS])
-    otros = []
+    otros = [_grupo('📚', 'Enciclopedia', [
+        (ENCICLOPEDIA, 'Enciclopedia', 'Números, Datos y Aprende en una sola puerta'),
+        ('sigue-el-dinero.html', 'Números', 'El recorrido del dinero público'),
+        ('descarga-los-datos.html', 'Datos', 'El radar, las descargas, el ambiente y los Poderes'),
+        ('aprende.html', 'Aprende', 'La trivia, la Biblioteca y las noticias')])]
     for archivo in ('descarga-los-datos.html', 'aprende.html', 'participa.html'):
         a = ap[archivo]
         enl = [(x.get('pagina') or archivo + '#' + x['id'], x['pestana'][1], x['pestana'][2]) for x in a['secciones']]
@@ -5002,7 +5047,7 @@ def indice(base, ref):
             k = [e[0] for e in enl].index('garantias.html') + 1
             enl[k:k] = [(g[1], '· ' + g[3], '') for g in GARANTIAS_PARTES]
             enl += [('expedientes.html', 'Expedientes de casos de la ASF', 'Los casos por aclarar'),
-                    ('comunidad.html', 'Comunidad', 'Propón temas, señala errores, comparte y fe de erratas')] + [
+                    ('comunidad.html', 'Participa', 'Propón temas, señala errores, comparte y fe de erratas')] + [
                     (c[1], '· ' + c[3], '') for c in COMUNIDAD_PARTES]
         otros.append(grupo(a['icono'], a['menu'], enl, archivo))
     otros.append(_grupo('🏛️', 'Los Poderes', [
@@ -5025,9 +5070,9 @@ def indice(base, ref):
         '        </div>') % '\n'.join('            <li><b>%s</b> %s</li>' % n for n in NOVEDADES)
     secc = [
         ('investigaciones', '🖼️ Investigaciones, por tema', 'Las auditorías en imágenes. Cada una explica el caso y lleva a sus números y a su evidencia.', investigaciones),
-        ('numeros', '💰 Números', 'El recorrido del dinero público, del impuesto a la rendición de cuentas, cada parte en su propia página.', numeros),
-        ('herramientas', '🧰 Herramientas', 'Cada herramienta y sus módulos, con página propia.', herr),
-        ('mas', '📚 Datos, Aprende, Participa y los Poderes', 'Descargas, la Biblioteca del Erario Público, las noticias, la participación ciudadana y los Poderes de la Unión.', _rejilla(otros)),
+        ('numeros', '💰 Enciclopedia · Números', 'El recorrido del dinero público, del impuesto a la rendición de cuentas, cada parte en su propia página.', numeros),
+        ('herramientas', '🧰 Auditor Virtual', 'Cada herramienta y sus módulos, con página propia.', herr),
+        ('mas', '📚 Enciclopedia · Datos y Aprende, Comunidad y los Poderes', 'Descargas, la Biblioteca del Erario Público, las noticias, la participación ciudadana y los Poderes de la Unión.', _rejilla(otros)),
         ('metodologia', '🔎 Cómo verificamos', 'La regla que sigue cada cifra y lo último que cambió.', metodologia),
     ]
     return {

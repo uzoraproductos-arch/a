@@ -252,10 +252,20 @@ mudando a su página; no se agregan desgloses nuevos.
   índice general.
 - El menú «Busca y verifica» se fusionó con el Modo Inspector (09-10-2026):
   es su parte B, y `busca-y-verifica.html` solo redirige ahí.
-- **El menú tiene cinco pestañas, ni una más** (decisión del autor,
-  09-10-2026): Herramientas, Números, Datos, Aprende y Participa.
+- **El menú tiene tres pestañas, ni una más** (decisión del autor,
+  23-10-2026, que reemplaza la de cinco del 09-10-2026): **Auditor
+  Virtual** (`herramientas.html`, las herramientas), **Enciclopedia**
+  (`enciclopedia-auditavision.html`, con tres tarjetas: Números, Datos y
+  Aprende, que conservan sus páginas) y **Comunidad** (`participa.html`, la
+  antigua Participa; su tarjeta «Comunidad», `comunidad.html`, se llama
+  ahora «Participa»). Ningún archivo cambió de nombre, para no romper
+  enlaces. Las pestañas viven en `MENU` de `herramientas/apartados.py`, y
+  la portada (`index.html`) tiene su copia a mano. Lo que cuelga de
+  Números, Datos o Aprende muestra «Enciclopedia» en sus migas.
+  **Ojo:** la página de la pestaña Enciclopedia no es `enciclopedia.html`,
+  que sigue congelada (§1).
   «Números» es la antigua «Sigue el dinero»; su archivo sigue siendo
-  `sigue-el-dinero.html` para no romper enlaces.
+  `sigue-el-dinero.html`.
 
 ---
 
