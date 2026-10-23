@@ -529,7 +529,7 @@ def pagina(cuenta, canal='', herramientas=()):
         <div class="pa-chat">
           <div class="pa-chat-cab">
             <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="52" height="40">
-            <div><b>Pregúntale al Auditor</b><small>El chat de Auditavisión · contesta con datos oficiales</small></div>
+            <div><b>Pregúntale al Auditor</b><small><span class="pa-enlinea" aria-hidden="true"></span> En línea · contesta con datos oficiales</small></div>
             <span class="pa-cab-acc">
             <button type="button" class="pa-como-abre pa-herr-abre" id="paHerrAbre" aria-controls="paHerr" aria-expanded="false"><span aria-hidden="true">🧰</span> Herramientas <span class="pa-herr-flecha" aria-hidden="true">▾</span></button>
             <button type="button" class="pa-como-abre" id="paComoAbre" aria-controls="paComo" aria-expanded="false"><span aria-hidden="true">❓</span> Cómo platicar conmigo</button>
@@ -542,8 +542,7 @@ def pagina(cuenta, canal='', herramientas=()):
             </nav>
           </div>
           <ol class="pa-hilo" id="paHilo" aria-live="polite">
-            <li class="pa-msg pa-bot">
-              <img class="pa-ava" src="assets/auditor/img/logo-auditavision.svg" alt="" width="36" height="28">
+            <li class="pa-msg pa-bot pa-hola">
               <div class="pa-burbuja">
                 <p>¡Hola! Soy el Auditor. Pregúntame lo que quieras del dinero público, como se lo preguntarías a un amigo: <b>cuánto debe tu estado</b>, <b>cuánta lana le llega a tu municipio</b>, <b>cuánto gana un diputado</b> o <b>qué significa</b> algún término.</p>
                 <p>Te contesto en corto y con datos oficiales. Si quieres ir a fondo, toca <b>«Saber más»</b> y te llevo a la página donde está la información; si necesitas el respaldo, <b>«Generar dictamen»</b>.</p>
@@ -556,13 +555,19 @@ def pagina(cuenta, canal='', herramientas=()):
             <div class="pa-ejs-lista" id="paEjsLista">
 %s
             </div>
-            <div class="pa-ejs-barra" id="paEjsBarra" aria-hidden="true" hidden><i></i></div>
           </div>
-          <form class="pa-form" id="paForm" autocomplete="off">
-            <label class="sr-only" for="paPregunta">Tu pregunta</label>
-            <input id="paPregunta" type="text" maxlength="600" placeholder="Pregúntame lo que quieras…" required>
-            <button type="submit">Enviar ➔</button>
-          </form>
+          <div class="pa-pie">
+            <form class="pa-form" id="paForm" autocomplete="off">
+              <label class="sr-only" for="paPregunta">Tu pregunta</label>
+              <input id="paPregunta" type="text" maxlength="600" placeholder="Pregúntame lo que quieras…" required>
+              <button type="submit">Enviar ➔</button>
+            </form>
+            <div class="pa-control" role="group" aria-label="Controles de la plática">
+              <button type="button" class="pa-ctl" id="paRegresa" disabled><span aria-hidden="true">↩️</span> Regresar</button>
+              <button type="button" class="pa-ctl" id="paLimpia" disabled><span aria-hidden="true">🗑️</span> Limpiar</button>
+              <span class="pa-control-nota">Tu plática se guarda mientras navegas por la plataforma.</span>
+            </div>
+          </div>
         </div>
         <div class="glos-drawer-overlay" id="paComoOv"></div>
         <aside class="pa-como glos-drawer" id="paComo" role="dialog" aria-modal="true" aria-labelledby="paComoT">

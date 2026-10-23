@@ -997,17 +997,21 @@ def herramienta_divisiones(h, n, ruta):
                               [('modulos', INVESTIGACIONES), ('pregunta', ASISTENTE[0]),
                                ('inspradar', 'herramienta-inspector-entes.html?nivel=estatal&orden=radInt#ie-dir'),
                                ('expedientes', 'expedientes.html')]),
+        # Desde el 24-10-2026 (decisión del autor) el Modo Inspector es solo
+        # las Grandes investigaciones: el chat es la portada del Auditor
+        # Virtual y ya no se presenta como su otra división.
         'secciones': [{
-            'id': 'divisiones', 'titulo': 'Dos maneras de entrarle', 'sin_cab': False,
-            'texto': 'Elige cómo: recorre una investigación completa o pregúntale directo al Auditor. Cada tarjeta abre su propia página.',
-            'tarjetas': [], 'bloque': dos,
+            'id': 'apps', 'titulo': '%s: las %d aplicaciones' % (division[0], len(temas)), 'sin_cab': False,
+            'texto': 'Recórrelas en orden o entra directo a la que te interesa. Cada una abre su propia página. '
+                     '¿Prefieres preguntar? <a href="%s">Pregúntale al Auditor</a>.' % ASISTENTE[0],
+            'tarjetas': [], 'bloque': ruta,
         }],
         'pie_extra': herr_otras(archivo),
     })
     nav = ('<nav class="herr-mod-nav" aria-label="Más del Modo Inspector">\n'
            '        <div class="herr-mod-pasos">\n'
            '          <a class="herr-mod-paso ant" href="%s"><small>← Volver a</small><b>%s %s</b></a>\n'
-           '          <a class="herr-mod-paso sig" href="%s"><small>La otra división</small><b>💬 %s</b></a>\n'
+           '          <a class="herr-mod-paso sig" href="%s"><small>Tu Auditor Virtual</small><b>💬 %s</b></a>\n'
            '        </div>\n      </nav>' % (archivo, icono, titulo, ASISTENTE[0], ASISTENTE[1]))
     investigaciones = dict(base, **{
         'archivo': INVESTIGACIONES, 'menu': division[0], 'icono': icono, 'titulo': division[0],
@@ -1187,12 +1191,14 @@ def nav_de_pagina(archivo, padre3=None, cap=None):
     if padre3 and padre3[0] in apps:
         return nav_compacta(*apps[padre3[0]], padre=padre3)
     if archivo == ASISTENTE[0]:
-        h = next(x for x in HERRAMIENTAS if x[1] == 'inspector')
+        # El chat es la portada del Auditor Virtual (24-10-2026): ya no es una
+        # «división» del Modo Inspector; desde aquí se va a las herramientas,
+        # a las Grandes investigaciones y a la Enciclopedia.
         return ('<nav class="herr-nav-min" aria-label="Moverte desde aquí">\n'
-                '        <a class="herr-min ant" href="%s"><span>← Volver</span><small>%s</small></a>\n'
-                '        <a class="herr-min" href="%s"><span>La otra división</span><small>%s</small></a>\n'
-                '        <a class="herr-min" href="indice.html"><span>Índice</span><small>Todo Auditavisión</small></a>\n'
-                '      </nav>' % (h[0], h[3], INVESTIGACIONES, HERR_DIVISION['inspector'][0]))
+                '        <a class="herr-min" href="herramientas.html"><span>🧰 Herramientas</span><small>Las cuatro, en una página</small></a>\n'
+                '        <a class="herr-min" href="%s"><span>🔍 Grandes investigaciones</span><small>Modo Inspector</small></a>\n'
+                '        <a class="herr-min" href="%s"><span>📚 Enciclopedia</span><small>Números, Datos y Aprende</small></a>\n'
+                '      </nav>' % (INVESTIGACIONES, ENCICLOPEDIA))
     return None
 
 
@@ -1210,7 +1216,7 @@ def herramienta_asistente(bloque):
         # Es la portada de la pestaña Auditor Virtual (23-10-2026): sin padres.
         'archivo': ASISTENTE[0], 'menu': ASISTENTE[1], 'menu_archivo': 'herramientas.html',
         'icono': '💬', 'titulo': ASISTENTE[1],
-        'lema': 'Auditor Virtual · el chat de Auditavisión', 'sin_icono_lema': True, 'icono_cab': LOGO_IMG,
+        'lema': 'Auditor Virtual · el chat de Auditavisión', 'sin_icono_lema': True, 'icono_cab': '💬',
         'entrada': '<b>%s.</b> %s' % (ASISTENTE[2], ASISTENTE[3]),
         'fondo': HERR_IMG[rubro], 'rubro': rubro,
         'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
@@ -4833,6 +4839,7 @@ def pagina(a, sello):
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v={sello}">
   <script src="assets/auditor/js/iconos.js?v={sello}"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v={sello}" defer></script>
   <link rel="stylesheet" href="assets/auditor/css/civico.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/puerta.css?v={sello}">{estilos}{redirige}
@@ -4885,6 +4892,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('24-10-2026', 'El Auditor Virtual se rediseña: un solo logo, respuestas con más aire y la fuente en su panel, preguntas de ejemplo que cambian solo cuando tú quieres, y los botones Regresar y Limpiar. Tu plática se guarda mientras navegas, y desde la página a la que te llevó una respuesta puedes volver al Auditor. El Modo Inspector queda con sus Grandes investigaciones.'),
     ('23-10-2026', 'Las imágenes de la portada abren el chat del Auditor con la pregunta de cada investigación escrita: al enviarla, te contesta y te lleva a su página. Las nueve investigaciones tienen además su capítulo, «Auditoría en imágenes», en los Expedientes de casos de la ASF del Modo Inspector.'),
     ('23-10-2026', 'La pestaña Auditor Virtual abre directo en Pregúntale al Auditor. Junto a «Cómo platicar conmigo» está el botón «Herramientas», con las cuatro: Modo Inspector, que lleva a las Grandes investigaciones, Costo Ambiental, Calculadora Cívica e Inversión y Megaobras.'),
     ('23-10-2026', 'El menú queda en tres pestañas: Auditor Virtual, con las herramientas; Enciclopedia, que junta Números, Datos y Aprende; y Comunidad, la antigua Participa, donde la tarjeta Comunidad se llama ahora Participa. Ningún enlace cambia de dirección.'),

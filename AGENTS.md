@@ -9,6 +9,26 @@ antes de tocar código.
 
 ---
 
+## 0. El objetivo: la plataforma tiene dos partes
+
+**Decisión del autor, 24-10-2026.** Todo cambio se mide contra esta estructura:
+
+| Parte | Pestaña | Qué es |
+|---|---|---|
+| **La de consulta** (dogmática, teórica, de aprendizaje) | **Enciclopedia** (`enciclopedia-auditavision.html`: Números, Datos y Aprende) | La fuente de información de todo: cifras, leyes, glosario, Poderes, ambiente. |
+| **La de uso** | **Auditor Virtual** (abre `herramienta-inspector-pregunta.html`) | El producto estrella. **Le resuelve al usuario todo lo que se le ofrezca**: cualquier dato, municipio, salud financiera, investigación o auditoría en imágenes. Encuentra, explica y lleva a la página de la Enciclopedia o de la herramienta donde está el detalle. |
+
+- Las cuatro herramientas cuelgan del Auditor Virtual (botón «Herramientas»).
+  **El Modo Inspector es solo las Grandes investigaciones** (sus seis
+  aplicaciones): `herramienta-inspector.html` las muestra directo y ya no
+  presenta al chat como su «otra división».
+- El Auditor Virtual tiene que funcionar y verse como lo mejor de la
+  plataforma: un dato que la plataforma tiene y el chat no encuentra es un
+  error (ver §5 ter).
+- Comunidad queda aparte, como la tercera pestaña.
+
+---
+
 ## 1. Se trabaja en la rama, `main` es la versión entregada
 
 **Todo el trabajo se hace en la rama `claude/funny-turing-imtm54`.**
@@ -312,6 +332,15 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   la página vuelve a contestarla con la misma base, así que no se puede
   fabricar un dictamen con cifras ajenas. El dictamen dice que no es un
   documento oficial ni un peritaje con validez ante autoridad.
+- **Se ve y se usa como el mejor producto** (rediseño del 24-10-2026): un
+  solo logo (el de la cabecera del chat; las burbujas no llevan avatar), cada
+  respuesta en cuatro capas (texto, panel de fuente, acciones, «Sigue
+  preguntando»), preguntas de ejemplo quietas que solo cambian con «Otras
+  preguntas», y «↩️ Regresar» y «🗑️ Limpiar» bajo la caja. La plática se
+  guarda en la pestaña (`sessionStorage`, clave `av-chat`); un enlace de una
+  respuesta deja la seña `av-volver`, y la página a la que llega muestra
+  «Volver al Auditor» (`assets/auditor/js/volver-auditor.js`, cargado en
+  todas las páginas junto a `iconos.js`; su estilo vive en `civico.css`).
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).

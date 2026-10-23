@@ -20,11 +20,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261023o">
-  <script src="assets/auditor/js/iconos.js?v=20261023o"></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261023o">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261023o">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261023o">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261024a">
+  <script src="assets/auditor/js/iconos.js?v=20261024a"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261024a" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261024a">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261024a">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261024a">
   <script>(function () { var m = {"inspasf": "herramienta-inspector-asf.html", "inspentes": "herramienta-inspector-entes.html", "inspnota": "herramienta-inspector-nota.html", "inspefos": "herramienta-inspector-efos.html", "inspverifica": "herramienta-inspector-verifica.html", "servicios": "servicios.html", "modulos": "herramienta-inspector-investigaciones.html", "pregunta": "herramienta-inspector-pregunta.html", "inspradar": "herramienta-inspector-entes.html?nivel=estatal&orden=radInt#ie-dir", "expedientes": "expedientes.html"}, h = location.hash.slice(1); if (m[h]) { location.replace(m[h] + (/[?#]/.test(m[h]) ? '' : location.search)); return; } for (var k in m) if (k.slice(-1) === '*' && h && h.indexOf(k.slice(0, -1)) === 0) { location.replace(m[k] + '#' + h); return; } })();</script>
 </head>
 <body data-pagina="apartado">
@@ -152,24 +153,50 @@
     <div class="apartado-ancho apartado-cuerpo">
 
       
-      <section class="apartado-seccion" id="divisiones" aria-labelledby="divisiones-tit">
+      <section class="apartado-seccion" id="apps" aria-labelledby="apps-tit">
         <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="divisiones-tit"><span class="sr-only"></span>Dos maneras de entrarle</h2>
-          <p class="apartado-seccion-texto">Elige cómo: recorre una investigación completa o pregúntale directo al Auditor. Cada tarjeta abre su propia página.</p>
+          <h2 class="apartado-seccion-titulo" id="apps-tit"><span class="sr-only"></span>Grandes investigaciones: las 6 aplicaciones</h2>
+          <p class="apartado-seccion-texto">Recórrelas en orden o entra directo a la que te interesa. Cada una abre su propia página. ¿Prefieres preguntar? <a href="herramienta-inspector-pregunta.html">Pregúntale al Auditor</a>.</p>
         </div>
         <div class="apartado-bloque">
-        <ul class="herr-dos">
-        <li><a class="herr-bot herr-div" href="herramienta-inspector-investigaciones.html">
-          <span class="herr-bot-logo herr-div-ico" aria-hidden="true">🔍</span>
-          <span class="herr-bot-tx"><span class="herr-paso-frase">Recorre una investigación</span><span class="herr-paso-nombre">Grandes investigaciones</span><span class="herr-paso-desc">Las 6 aplicaciones del Modo Inspector: de lo que encontró la ASF a las empresas que facturan operaciones simuladas, con cada cifra y su documento.</span><span class="herr-div-lista">Expedientes de casos de la ASF · Auditor de entes públicos · Contrasta una nota · Lista negra del SAT · Verifica un estado de cuenta · Servicios de investigación</span></span>
-          <span class="herr-paso-accion">Ver las 6 aplicaciones ➔</span>
-        </a></li>
-        <li><a class="herr-bot herr-div" href="herramienta-inspector-pregunta.html">
-          <span class="herr-bot-logo herr-div-ico" aria-hidden="true"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62" height="48"></span>
-          <span class="herr-bot-tx"><span class="herr-paso-frase">Pregunta fácil, respuesta fácil</span><span class="herr-paso-nombre">Pregúntale al Auditor</span><span class="herr-paso-desc">El bot interno: le preguntas lo que quieras y te contesta con una nota técnica sellada, armada solo con datos verificados.</span></span>
-          <span class="herr-paso-accion">Preguntar ➔</span>
-        </a></li>
-        </ul>
+        <ol class="herr-ruta">
+          <li><a class="herr-paso rubro-inspector" href="herramienta-inspector-asf.html">
+            <span class="herr-paso-num" aria-hidden="true">1</span>
+            <span class="herr-paso-ico" aria-hidden="true">🏛️</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Los expedientes oficiales</span><span class="herr-paso-nombre">Expedientes de casos de la ASF</span><span class="herr-paso-desc">Los casos por aclarar, lo que la Auditoría Superior encontró en el gasto de 2024 y 2025 y lo que publicará de 2026 y 2027, y todas las autoridades que fiscalizan, cada una con su expediente oficial.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+          <li><a class="herr-paso rubro-inspector" href="herramienta-inspector-entes.html">
+            <span class="herr-paso-num" aria-hidden="true">2</span>
+            <span class="herr-paso-ico" aria-hidden="true">🏢</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Busca y verifica</span><span class="herr-paso-nombre">Auditor de entes públicos</span><span class="herr-paso-desc">Elige una autoridad federal, estatal o municipal y ve su diagnóstico: si gastó lo que aprobó la Cámara, si rindió cuentas y qué quedó por aclarar. Cada estado trae su radar de la Auditoría Superior: su lugar entre los 32.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+          <li><a class="herr-paso rubro-inspector" href="herramienta-inspector-nota.html">
+            <span class="herr-paso-num" aria-hidden="true">3</span>
+            <span class="herr-paso-ico" aria-hidden="true">📰</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Busca y verifica</span><span class="herr-paso-nombre">Contrasta una nota</span><span class="herr-paso-desc">Pega la liga de una noticia, una revista o una publicación en redes: leemos sus cifras, las ponemos junto al documento oficial y te damos un veredicto, cifra por cifra.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+          <li><a class="herr-paso rubro-inspector" href="herramienta-inspector-efos.html">
+            <span class="herr-paso-num" aria-hidden="true">4</span>
+            <span class="herr-paso-ico" aria-hidden="true">🧾</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Busca y verifica</span><span class="herr-paso-nombre">Lista negra del SAT</span><span class="herr-paso-desc">Busca por RFC o por nombre en el listado del artículo 69-B del Código Fiscal: a quienes el SAT presume o declara emisores de facturas por operaciones inexistentes.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+          <li><a class="herr-paso rubro-inspector" href="herramienta-inspector-verifica.html">
+            <span class="herr-paso-num" aria-hidden="true">5</span>
+            <span class="herr-paso-ico" aria-hidden="true">🔏</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Busca y verifica</span><span class="herr-paso-nombre">Verifica un estado de cuenta</span><span class="herr-paso-desc">¿Te compartieron un estado de cuenta de Auditavisión? Escribe su folio o su huella digital y comprueba, cifra por cifra, que no se alteró.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+          <li><a class="herr-paso rubro-inspector" href="servicios.html">
+            <span class="herr-paso-num" aria-hidden="true">6</span>
+            <span class="herr-paso-ico" aria-hidden="true">🔎</span>
+            <span class="herr-paso-tx"><span class="herr-paso-frase">Investigación a la medida</span><span class="herr-paso-nombre">Servicios de investigación</span><span class="herr-paso-desc">Cuando necesites ir más a fondo en un caso: revisión documental, expediente, seguimiento, capacitación o licencia, con la misma regla de la plataforma y su política de independencia. Incluye el Pase del Auditor Cívico. Tiene su propia página.</span></span>
+            <span class="herr-paso-accion">Abrir ➔</span>
+          </a></li>
+        </ol>
         </div>
       </section>
 
@@ -188,11 +215,11 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261023o</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261024a</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261023o"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261023o"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261024a"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261024a"></script>
 </body>
 </html>

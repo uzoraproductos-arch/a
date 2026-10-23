@@ -121,7 +121,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-pregunta.html` | Pregúntale al Auditor · Auditavisión | apartados.py | 26 | 0 | 1 | 1 | 1 |
 | `herramienta-inspector-radar.html` | Radar por entidad · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-verifica.html` | Verifica un estado de cuenta · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector.html` | Modo Inspector · Auditavisión | apartados.py | 24 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector.html` | Modo Inspector · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `herramienta-megaobras-cero.html` | Las cuatro cifras y los rescates · Auditavisión | apartados.py | 35 | 0 | 35 | 55 | 7 |
 | `herramienta-megaobras-investiga.html` | Haz tu propia investigación · Auditavisión | apartados.py | 96 | 0 | 59 | 94 | 22 |
 | `herramienta-megaobras-pulso-calculo.html` | Cómo se calcula · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |

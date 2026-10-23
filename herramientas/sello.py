@@ -41,6 +41,7 @@ ARCHIVOS = [
     ('src', 'assets/auditor/js/audit-engine.js'),
     ('src', 'assets/auditor/js/comunidad.js'),
     ('src', 'assets/auditor/js/iconos.js'),
+    ('src', 'assets/auditor/js/volver-auditor.js'),
 ]
 
 VISIBLE = re.compile(r'<span class="footer-sello">[\s\S]*?</span>')

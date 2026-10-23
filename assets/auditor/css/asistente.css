@@ -265,3 +265,71 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .leg-tabla tfoot th, .leg-tabla tfoot td { font-weight: 800; border-bottom: 0; }
 .leg-fuentes { font-size: 16px; }
 .leg-mas a, .leg-pregunta a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; }
+
+/* ===== Rediseño del Auditor Virtual (24-10-2026, pedido del autor) =====
+   Un solo logo (el de la cabecera), respuestas con aire: el texto, luego la
+   fuente en su panel, luego las acciones y al final «Sigue preguntando».
+   Las preguntas de ejemplo quedan quietas y abajo del chat van «Regresar» y
+   «Limpiar». */
+.pa { --pa: #3b424d; --pa-osc: #252b33; --pa-claro: #f3f5f8; }
+.pa-chat { border: 0; border-radius: 24px; box-shadow: 0 18px 50px rgba(11, 42, 99, .14), 0 2px 6px rgba(11, 42, 99, .06); }
+.pa-chat-cab { padding: 16px 22px; background: linear-gradient(120deg, var(--pa-osc), var(--pa) 70%); }
+.pa-chat-cab img { width: 56px; height: 56px; box-shadow: 0 0 0 3px rgba(255, 255, 255, .22); }
+.pa-chat-cab b { font-size: 20px; letter-spacing: -.01em; }
+.pa-chat-cab small { display: flex; align-items: center; gap: 7px; margin-top: 2px; font-size: 14px; }
+.pa-enlinea { flex: none; width: 9px; height: 9px; border-radius: 50%; background: #3ddc84; box-shadow: 0 0 0 3px rgba(61, 220, 132, .25); }
+.pa-hilo { padding: 24px 22px; gap: 18px; background: linear-gradient(#f6f8fb, #eef1f6); }
+.pa-msg { gap: 0; }
+.pa-bot .pa-burbuja { flex: 0 1 auto; max-width: min(880px, 100%); border: 0; border-radius: 6px 20px 20px 20px; padding: 18px 22px; box-shadow: 0 2px 12px rgba(11, 42, 99, .07); line-height: 1.65; }
+.pa-bot .pa-burbuja::before { content: 'Auditor'; display: block; margin-bottom: 8px; font: 800 13px/1 Inter, system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #6b7588; }
+.pa-escribe .pa-burbuja::before { display: none; }
+.pa-yo .pa-burbuja { max-width: min(640px, 85%); border-radius: 20px 6px 20px 20px; padding: 12px 18px; box-shadow: 0 2px 10px rgba(37, 43, 51, .18); }
+.pa-resp > p { margin: 0 0 12px; }
+.pa-resp > p:last-child { margin-bottom: 0; }
+.pa-resp ul.pa-lista, .pa-resp ol.pa-lista { margin: 4px 0 14px; gap: 8px; }
+.pa-dedonde { margin: 16px 0 0; padding: 2px 16px; border: 1px solid #e3e8f1; border-radius: 14px; background: #f8fafc; font-size: 15px; }
+.pa-dedonde[open] { padding-bottom: 14px; }
+.pa-dedonde summary { font-size: 15px; }
+.pa-dedonde ul { gap: 10px; }
+.pa-acc { margin: 18px 0 0; gap: 10px; align-items: center; }
+.pa-burbuja a.pa-ver { background: var(--pa); border-color: var(--pa); color: #ffffff; }
+.pa-burbuja a.pa-ver:hover, .pa-burbuja a.pa-ver:focus-visible { background: var(--pa-osc); color: #ffffff; }
+.pa-burbuja a.pa-ver .pa-ver-donde { color: #d6dbe4; font-weight: 500; }
+.pa-burbuja a.pa-genera { background: #ffffff; border-color: var(--pa); color: var(--pa); }
+.pa-burbuja a.pa-genera:hover, .pa-burbuja a.pa-genera:focus-visible { background: var(--pa-claro); color: var(--pa-osc); }
+.pa-noera { margin-left: auto; border-color: transparent; background: transparent; color: #5a6782; font-weight: 600; }
+.pa-noera:hover, .pa-noera:focus-visible { border-color: #dfe5f0; background: var(--pa-claro); }
+.pa-mas-t { margin: 20px 0 8px; padding-top: 14px; border-top: 1px solid #eef1f6; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: #6b7588; }
+.pa-burbuja .pa-mas { margin-top: 0; }
+.pa-burbuja .pa-ej { background: var(--pa-claro); border-color: transparent; }
+.pa-burbuja .pa-ej:hover, .pa-burbuja .pa-ej:focus-visible { border-color: var(--pa); background: #ffffff; }
+.pa-ejs { padding: 18px 22px 0; border-top: 1px solid #eef1f6; }
+.pa-ejs-otras { border-style: solid; }
+.pa-pie { padding: 14px 22px 18px; background: #ffffff; }
+.pa-pie .pa-form { padding: 0; }
+.pa-form input { min-height: 54px; padding: 14px 20px; font-size: 17px; background: var(--pa-claro); border-color: transparent; }
+.pa-form input:focus { background: #ffffff; }
+.pa-form button { min-height: 54px; padding: 0 26px; font-size: 16px; }
+.pa-control { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; }
+.pa-ctl { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 16px; border: 1px solid #dfe5f0; border-radius: 999px; background: #ffffff; color: #33415c; font: 600 14px/1 Inter, system-ui, sans-serif; cursor: pointer; }
+.pa-ctl:hover:not(:disabled), .pa-ctl:focus-visible { border-color: var(--pa); background: var(--pa-claro); }
+.pa-ctl:disabled { opacity: .45; cursor: default; }
+.pa-control-nota { margin-left: auto; font-size: 13px; color: #6b7588; }
+@media (min-width: 901px) {
+  .pa-hilo { max-height: 62vh; }
+}
+@media (max-width: 560px) {
+  .pa-chat { border-radius: 18px; }
+  .pa-chat-cab { padding: 14px; }
+  .pa-chat-cab > .pa-cab-acc { display: grid; grid-template-columns: 1fr 1fr; }
+  .pa-cab-acc .pa-como-abre { width: 100%; padding: 8px 10px; }
+  .pa-hilo { padding: 16px 12px; gap: 14px; }
+  .pa-bot .pa-burbuja { padding: 14px 16px; }
+  .pa-acc .pa-boton { flex: 1 1 100%; justify-content: center; }
+  .pa-noera { margin-left: 0; }
+  .pa-ejs { padding: 14px 12px 0; }
+  .pa-pie { padding: 12px; }
+  .pa-form { flex-direction: row; }
+  .pa-form button { padding: 0 16px; }
+  .pa-control-nota { margin-left: 0; width: 100%; }
+}

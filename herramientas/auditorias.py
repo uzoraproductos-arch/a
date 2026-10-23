@@ -274,6 +274,7 @@ def pagina(a, sello):
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v={sello}">
   <script src="assets/auditor/js/iconos.js?v={sello}"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v={sello}" defer></script>
   <link rel="stylesheet" href="assets/auditor/css/civico.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/puerta.css?v={sello}">

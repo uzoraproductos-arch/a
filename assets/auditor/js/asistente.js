@@ -285,7 +285,8 @@
   function agrega(clase, html, quieto) {
     var li = document.createElement('li');
     li.className = 'pa-msg ' + clase;
-    li.innerHTML = (clase.indexOf('pa-bot') === 0 ? '<img class="pa-ava" src="' + LOGO + '" alt="" width="36" height="28">' : '') + '<div class="pa-burbuja">' + html + '</div>';
+    /* Sin avatar (24-10-2026): el logo ya está en la cabecera del chat. */
+    li.innerHTML = '<div class="pa-burbuja">' + html + '</div>';
     hilo.appendChild(li);
     if (!quieto) li.scrollIntoView({ behavior: QUIETO ? 'auto' : 'smooth', block: 'nearest' });
     return li;
@@ -383,6 +384,7 @@
     agrega('pa-yo', '<p>' + esc(q) + '</p>', quieto);
     var previas = historial.slice(-4);
     historial.push(q);
+    controles();
     var r = respuesta(q);
     var pinta = function (li) {
       if (r.sin) {
@@ -392,7 +394,8 @@
       }
       if (r.anota && !ya) anota(q, 'sin');
       li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r, previas) +
-        (r.sug && r.sug.length ? (r.tambien ? '<p class="pa-mas-t">También te puede servir:</p>' : '') + chips(r.sug) : '');
+        (r.sug && r.sug.length ? '<p class="pa-mas-t">' + (r.tambien ? 'También te puede servir' : 'Sigue preguntando') + '</p>' + chips(r.sug) : '');
+      guarda();
     };
     if (quieto || QUIETO) { pinta(agrega('pa-bot', '', quieto)); return; }
     var li = agrega('pa-bot pa-escribe', '<span class="pa-puntos" role="img" aria-label="Escribiendo"><i></i><i></i><i></i></span>');
@@ -514,16 +517,14 @@
     var a = ev.target.closest ? ev.target.closest('a[href="#paSinResp"]') : null;
     if (a) { ev.preventDefault(); abreComo('paSinResp'); }
   });
-  /* Las preguntas de ejemplo rotan por tandas (pedido del autor, 23-10-2026):
-     se quedan unos segundos, se desvanecen y salen otras. La barra marca el
-     tiempo; se detiene si pasas el cursor o el foco por ellas, y con
-     «Reducir movimiento» no rota sola: cambia con «Otras preguntas». */
+  /* Las preguntas de ejemplo van por tandas (24-10-2026, pedido del autor:
+     sin la barra de tiempo): se quedan quietas y cambian solo con
+     «Otras preguntas». */
   (function () {
-    var caja = document.getElementById('paEjs'), lista = document.getElementById('paEjsLista');
-    if (!caja || !lista) return;
+    var lista = document.getElementById('paEjsLista');
+    if (!lista) return;
     var bts = Array.prototype.slice.call(lista.querySelectorAll('.pa-ej'));
-    var otras = document.getElementById('paEjsOtras'), barra = document.getElementById('paEjsBarra');
-    var quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var otras = document.getElementById('paEjsOtras');
     var tanda = 0, n = 0;
     function porTanda() { return window.innerWidth < 640 ? 4 : 6; }
     function muestra(k) {
@@ -534,44 +535,86 @@
         b.style.setProperty('--pa-i', pos);
       });
     }
-    function mide() {
-      n = Math.min(porTanda(), bts.length);
-      lista.style.minHeight = '';
-      var alto = 0, total = Math.ceil(bts.length / n);
-      for (var k = 0; k < total; k++) { muestra(k); alto = Math.max(alto, lista.offsetHeight); }
-      lista.style.minHeight = alto + 'px';
-      muestra(tanda);
-    }
-    function reinicia() {
-      if (quieto) return;
-      var i = barra.firstChild;
-      i.style.animation = 'none';
-      void i.offsetWidth;
-      i.style.animation = '';
-    }
-    function siguiente() {
-      lista.classList.add('pa-sale');
-      setTimeout(function () {
-        tanda++;
-        muestra(tanda);
-        lista.classList.remove('pa-sale');
-        lista.classList.remove('pa-entra');
-        void lista.offsetWidth;
-        lista.classList.add('pa-entra');
-        reinicia();
-      }, quieto ? 0 : 350);
-    }
+    function mide() { n = Math.min(porTanda(), bts.length); muestra(tanda); }
     if (bts.length <= porTanda()) return;
     otras.hidden = false;
     mide();
-    otras.addEventListener('click', siguiente);
-    if (!quieto) {
-      barra.hidden = false;
-      barra.firstChild.addEventListener('animationend', siguiente);
-    }
+    otras.addEventListener('click', function () {
+      tanda++;
+      muestra(tanda);
+      lista.classList.remove('pa-entra');
+      void lista.offsetWidth;
+      lista.classList.add('pa-entra');
+    });
     var espera;
     window.addEventListener('resize', function () { clearTimeout(espera); espera = setTimeout(mide, 200); });
   })();
+
+  /* La plática se guarda en la pestaña (sessionStorage, 24-10-2026): si el
+     lector abre «Saber más» y vuelve, la encuentra como la dejó. «Regresar»
+     quita la última pregunta con su respuesta y la deja escrita para
+     corregirla; «Limpiar» empieza de cero. */
+  var CLAVE = 'av-chat', btReg = document.getElementById('paRegresa'), btLim = document.getElementById('paLimpia');
+  function guarda() {
+    try {
+      var lis = Array.prototype.slice.call(hilo.children, 1).filter(function (li) { return !li.classList.contains('pa-escribe'); });
+      if (!historial.length) sessionStorage.removeItem(CLAVE);
+      else sessionStorage.setItem(CLAVE, JSON.stringify({ h: historial, li: lis.map(function (li) { return li.outerHTML; }) }));
+    } catch (e) { /* sin almacenamiento: la plática vive solo en esta vista */ }
+  }
+  function controles() {
+    if (btReg) btReg.disabled = !historial.length;
+    if (btLim) btLim.disabled = !historial.length;
+  }
+  function rehaceContexto() {
+    if (!charla) return;
+    charla.olvida();
+    historial.forEach(function (x) { respuesta(x); });
+  }
+  function ejemplos(ver) { var e = document.getElementById('paEjs'); if (e) e.hidden = !ver; }
+  function regresa() {
+    var yo = hilo.querySelectorAll('.pa-yo');
+    if (!yo.length || !historial.length) return;
+    var ult = yo[yo.length - 1];
+    while (ult.nextSibling) hilo.removeChild(ult.nextSibling);
+    hilo.removeChild(ult);
+    campo.value = historial.pop();
+    rehaceContexto();
+    if (!historial.length) ejemplos(true);
+    guarda(); controles();
+    campo.focus();
+  }
+  function limpia() {
+    while (hilo.children.length > 1) hilo.removeChild(hilo.lastChild);
+    historial = [];
+    if (charla) charla.olvida();
+    ejemplos(true);
+    guarda(); controles();
+    campo.value = '';
+    campo.focus();
+  }
+  if (btReg) btReg.addEventListener('click', regresa);
+  if (btLim) btLim.addEventListener('click', limpia);
+  /* Un enlace de una respuesta que lleva a otra página de la plataforma deja
+     la seña para que esa página ofrezca volver al Auditor (volver-auditor.js). */
+  hilo.addEventListener('click', function (ev) {
+    var a = ev.target.closest ? ev.target.closest('a[href]') : null;
+    if (!a || a.target === '_blank' || a.origin !== location.origin || a.getAttribute('href').charAt(0) === '#') return;
+    try { sessionStorage.setItem('av-volver', '1'); } catch (e) { /* nada */ }
+  });
+  (function () {
+    var g = null;
+    try { g = JSON.parse(sessionStorage.getItem(CLAVE) || 'null'); } catch (e) { g = null; }
+    if (!g || !g.h || !g.h.length || !g.li) return;
+    g.li.forEach(function (h) { hilo.insertAdjacentHTML('beforeend', h); });
+    historial = g.h.slice();
+    rehaceContexto();
+    ejemplos(false);
+    controles();
+    var u = hilo.lastElementChild;
+    if (u && hilo.scrollHeight > hilo.clientHeight) hilo.scrollTop = hilo.scrollHeight;
+  })();
+
   /* Para revisar cómo puntúa una pregunta desde la consola. */
   window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta };
   pintaLista();
