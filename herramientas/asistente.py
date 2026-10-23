@@ -26,6 +26,8 @@ import re
 from apartados import RAIZ, glosario_ancla
 
 ARCHIVO = 'herramienta-inspector-pregunta.html'
+# El dictamen de cada respuesta, en su propia pagina (pedido del autor, 23-10-2026).
+DICTAMEN = 'herramienta-inspector-dictamen.html'
 ASF_INFORMES = 'https://www.asf.gob.mx/Section/58_Informes_de_auditoria'
 ALERTAS = 'https://www.disciplinafinanciera.hacienda.gob.mx/'
 BASE_JS = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'asistente-base.js')
@@ -293,7 +295,7 @@ def _paginas():
     out = []
     for p in sorted(glob.glob(os.path.join(RAIZ, '*.html'))):
         n = os.path.basename(p)
-        if n in ('enciclopedia.html', ARCHIVO):
+        if n in ('enciclopedia.html', ARCHIVO, DICTAMEN):
             continue
         s = open(p, encoding='utf-8').read()
         if 'http-equiv="refresh"' in s:
@@ -499,7 +501,7 @@ def pagina(cuenta, canal=''):
               <img class="pa-ava" src="assets/auditor/img/logo-auditavision.svg" alt="" width="36" height="28">
               <div class="pa-burbuja">
                 <p>¡Hola! Soy el Auditor. Pregúntame lo que quieras del dinero público, como se lo preguntarías a un amigo: <b>cuánto debe tu estado</b>, <b>cuánta lana le llega a tu municipio</b>, <b>cuánto gana un diputado</b> o <b>qué significa</b> algún término.</p>
-                <p>Te contesto en corto y con datos oficiales. Si necesitas el respaldo completo, toca <b>«Generar ficha técnica»</b> en mi respuesta.</p>
+                <p>Te contesto en corto y con datos oficiales. Si quieres ir a fondo, toca <b>«Saber más»</b> y te llevo a la página donde está la información; si necesitas el respaldo, <b>«Generar dictamen»</b>.</p>
               </div>
             </li>
           </ol>
@@ -524,7 +526,8 @@ def pagina(cuenta, canal=''):
             <li><b>Saco cuentas:</b> ordeno, comparo, sumo y saco porcentajes y márgenes. Cuando hago una cuenta, te digo cuál fue.</li>
             <li><b>Verifico lo que oyes:</b> «¿es cierto que…?», «dicen que…» o la liga de una nota. Comparo la cifra con su documento oficial y te digo si coincide, si se acerca o si no cuadra.</li>
             <li><b>Toca «📎 Fuente»</b> para ver la fuente de cada cifra y su estado: <span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">derivado</span> <span class="est-chip est-pendiente">pendiente</span>.</li>
-            <li><b>¿Necesitas el respaldo?</b> «🧾 Generar ficha técnica» arma la nota técnica con folio y huella digital (SHA-256), como el Estado de Cuenta.</li>
+            <li><b>¿Quieres ir a fondo?</b> «📖 Saber más» te lleva a la página de la plataforma donde está la información completa.</li>
+            <li><b>¿Necesitas el respaldo?</b> «🧾 Generar dictamen» abre, en otra pestaña, el dictamen pericial de Auditavisión: tu pregunta, la respuesta, sus cifras, sus fuentes y el método, con folio, sello y huella digital (SHA-256).</li>
           </ol>
           <p class="pa-beta"><b>🛠️ En mejora continua.</b> Cada dato que integra la plataforma me vuelve más preciso. Si algo no lo sé, <a href="comunidad.html">cuéntanos</a> y lo agregamos.</p>
           <section class="pa-pendq" id="paSinResp" aria-labelledby="paSinRespT">
@@ -544,3 +547,22 @@ def pagina(cuenta, canal=''):
         </aside>
       </div>''' % (html.escape(canal, quote=True), ej, format(cuenta.get('glosario', 0), ','),
                  format(total - cuenta.get('municipio', 0), ','), format(cuenta.get('municipio', 0), ','))
+
+
+def dictamen_pagina():
+    """La pagina del dictamen (pedido del autor, 23-10-2026): «Generar
+    dictamen» la abre con la pregunta en la direccion (?q=, y las preguntas
+    previas en &c= para seguir la platica). asistente.js vuelve a contestar
+    con la misma base y arma el dictamen: nada de lo que se ve viaja en el
+    enlace, asi que nadie puede fabricar un dictamen con cifras propias."""
+    return '''<div class="dic" id="dicApp">
+        <p class="dic-acc dic-no-imprime">
+          <a class="pa-boton" href="%s">← Volver al chat</a>
+          <button type="button" class="pa-boton" id="dicImprime" hidden>🖨️ Imprimir o guardar en PDF</button>
+          <button type="button" class="pa-boton" id="dicEnlace" hidden>🔗 Copiar el enlace</button>
+        </p>
+        <div id="dicDoc" aria-live="polite">
+          <p>Armando el dictamen…</p>
+          <noscript><p>El dictamen se arma en tu navegador y necesita JavaScript.</p></noscript>
+        </div>
+      </div>''' % ARCHIVO

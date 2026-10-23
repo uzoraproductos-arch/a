@@ -32,8 +32,12 @@ de «gestión social» de los congresos, «1,098 curules locales» (el INEGI
 cuenta 1,122 en activo) y la distritación «INE/CG130/2023» (ese acuerdo es
 el de las circunscripciones; los distritos son del INE/CG875/2022).
 
-asistente-charla.js lo lee como D.leg.
+asistente-charla.js lo lee como D.leg; la pagina congreso-y-elecciones.html
+(apartados.py) se arma con secciones().
 """
+
+import html
+from urllib.parse import quote
 
 CPEUM = {'tx': 'Constitución Política de los Estados Unidos Mexicanos, texto vigente (Cámara de Diputados, última reforma DOF 07-10-2026)',
          'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf',
@@ -66,6 +70,13 @@ CONGRESOS = {'MÉX': 75, 'CDMX': 65, 'VER': 50, 'GRO': 46, 'NL': 42, 'OAX': 42, 
              'HGO': 30, 'NAY': 30, 'ZAC': 30, 'AGS': 27, 'SLP': 27, 'BC': 25, 'COAH': 25, 'COL': 25, 'DGO': 25,
              'QRO': 25, 'QROO': 25, 'TLAX': 25, 'BCS': 21, 'MOR': 20}
 CONGRESOS_TOTAL = 1122  # «EUM» de la misma tabla
+
+# La pagina donde se lee todo esto (pedido del autor, 23-10-2026: cada
+# respuesta del bot lleva «Saber mas» a la pagina donde esta la informacion).
+PAGINA = 'congreso-y-elecciones.html'
+PAGINA_TIT = 'El Congreso y las elecciones'
+ORDEN = ['elecciones', 'diputados', 'senado', 'congreso', 'pluris', 'reeleccion', 'judicial',
+         'sesiones', 'permanente', 'paquete', 'locales', 'ayuntamientos', 'reformas']
 
 
 def _o(que, fu, op=None):
@@ -203,4 +214,57 @@ def legislativo():
              '<p class="pa-chico">Los 500 diputados (300 + 200) y los 128 senadores no cambiaron: los artículos 52 y 56 siguen igual.</p>',
         'fu': [_o('Decretos de reforma DOF 01-04-2025, 23-04-2026, 02-06-2026 y 07-10-2026', CPEUM)],
         'sug': ['¿Se pueden reelegir los diputados?', '¿Cuándo es la elección judicial?', '¿Cuántos diputados tiene el congreso de Jalisco?']}
-    return {'t': t, 'cong': CONGRESOS, 'congTot': CONGRESOS_TOTAL, 'cnple': CNPLE, 'cpeum': CPEUM}
+    assert sorted(ORDEN) == sorted(t)
+    for k, x in t.items():
+        x.setdefault('ir', [PAGINA + '#leg-' + k, PAGINA_TIT])
+    return {'t': t, 'cong': CONGRESOS, 'congTot': CONGRESOS_TOTAL, 'cnple': CNPLE, 'cpeum': CPEUM,
+            'pag': [PAGINA + '#leg-locales', PAGINA_TIT]}
+
+
+def _chip(e, p=None):
+    return '<span class="est-chip est-%s"%s>%s</span>' % (e, ' data-pend="%s"' % p if p else '', e)
+
+
+def _fuentes(fu):
+    li = []
+    for x in fu:
+        f = x.get('fu') or {}
+        liga = ('<a href="%s" target="_blank" rel="noopener noreferrer">%s ↗</a>' % (html.escape(f['url'], quote=True), html.escape(f['tx']))
+                if f.get('url') else html.escape(f.get('tx', '')))
+        li.append('<li>%s <b>%s.</b> %s%s</li>' % (_chip(x['e'], x.get('p')), html.escape(x['que']),
+                                                   'Cuenta: %s. ' % html.escape(x['op']) if x.get('op') else '', liga))
+    return '<details class="pa-dedonde leg-fuentes" open><summary><span>📎 De dónde sale</span></summary><ul>%s</ul></details>' % ''.join(li)
+
+
+def secciones(estados):
+    """Las secciones de la pagina «El Congreso y las elecciones»: el mismo
+    texto con que contesta el bot, tema por tema, con sus fuentes a la vista.
+    `estados` es la lista de la base (abbr y name) para nombrar los congresos."""
+    L = legislativo()
+    nombre = {e['abbr']: e['name'] for e in estados}
+    out = []
+    for k in ORDEN:
+        x = L['t'][k]
+        cifras = ''.join('<li><b>%s</b> <span>%s</span> %s%s</li>' % (html.escape(c['v']), html.escape(c['etq']), _chip(c['e']),
+                                                                    ' <small>(%s)</small>' % html.escape(c['op']) if c.get('op') else '')
+                         for c in x.get('ci', []))
+        extra = ''
+        if k == 'locales':
+            filas = sorted(CONGRESOS.items(), key=lambda a: (-a[1], nombre[a[0]]))
+            extra = ('<div class="leg-tabla-caja"><table class="leg-tabla"><caption>Personas legisladoras en activo en cada congreso local %s</caption>'
+                     '<thead><tr><th scope="col">Lugar</th><th scope="col">Congreso</th><th scope="col">Legisladores</th></tr></thead><tbody>%s</tbody>'
+                     '<tfoot><tr><th scope="row" colspan="2">Los 32 congresos</th><td>%s</td></tr></tfoot></table></div>'
+                     '<p class="pa-chico">Fuente: %s. El lugar es derivado: ordenamos los 32 congresos de mayor a menor. '
+                     'El INEGI aclara que el Congreso de la Ciudad de México debe tener 66: una persona suplente tomó protesta después del corte.</p>') % (
+                _chip('oficial'),
+                ''.join('<tr><td>%d</td><th scope="row">%s</th><td>%d</td></tr>' % (1 + sum(1 for v in CONGRESOS.values() if v > n), html.escape(nombre[a]), n)
+                        for a, n in filas),
+                format(CONGRESOS_TOTAL, ','), '<a href="%s" target="_blank" rel="noopener noreferrer">%s ↗</a>' % (CNPLE['url'], html.escape(CNPLE['tx'])))
+        if x['ir'][0].split('#')[0] != PAGINA:
+            extra += '<p class="leg-mas"><a href="%s">📖 Saber más en «%s» ➔</a></p>' % (x['ir'][0], html.escape(x['ir'][1]))
+        q = (x.get('sug') or [''])[0]
+        bloque = '<div class="leg-tema">%s%s%s%s%s</div>' % (
+            x['h'], '<ul class="leg-cifras">%s</ul>' % cifras if cifras else '', extra, _fuentes(x['fu']),
+            '<p class="leg-pregunta"><a href="herramienta-inspector-pregunta.html?q=%s">💬 Pregúntale al Auditor: «%s»</a></p>' % (quote(q), html.escape(q)) if q else '')
+        out.append({'id': 'leg-' + k, 'titulo': html.escape(x['tit']), 'texto': '', 'tarjetas': [], 'bloque': bloque})
+    return out

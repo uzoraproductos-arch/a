@@ -283,8 +283,15 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   contra la Constitución, la LGIPE, el INE y el INEGI (nunca contra la
   Enciclopedia, que solo sirve de guía de temas).
 - **Responde como chat:** claro, corto y contundente, con la cifra, qué
-  quiere decir y su fuente a la vista. La ficha técnica sellada solo se
-  arma si el lector toca «Generar ficha técnica».
+  quiere decir y su fuente a la vista. Cada respuesta con datos lleva
+  **«Saber más»**, que abre la página de la plataforma donde está la
+  información (el campo `ir` de la respuesta: una respuesta nueva sin `ir`
+  no está terminada), y **«Generar dictamen»**, que abre en otra pestaña el
+  dictamen pericial sellado (`herramienta-inspector-dictamen.html`). El
+  enlace del dictamen solo lleva la pregunta (`?q=`, y las previas en `&c=`):
+  la página vuelve a contestarla con la misma base, así que no se puede
+  fabricar un dictamen con cifras ajenas. El dictamen dice que no es un
+  documento oficial ni un peritaje con validez ante autoridad.
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).

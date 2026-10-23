@@ -557,6 +557,12 @@ APARTADOS = [
                 'pagina': 'noticias-relevantes.html',
                 'pestana': ('📰', 'Noticias relevantes', 'La Columna del Erario: abre su página'),
             },
+            {
+                # El Poder Legislativo y las elecciones (23-10-2026): congreso_pagina().
+                'id': 'congreso',
+                'pagina': 'congreso-y-elecciones.html',
+                'pestana': ('🏛️', 'El Congreso y las elecciones', 'Curules, sesiones y el calendario de 2027: abre su página'),
+            },
         ],
     },
     {
@@ -725,7 +731,7 @@ HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las'), 'inspector':
 # (herramientas/asistente.py).
 HERR_DIVISION = {'inspector': ('Grandes investigaciones', 'Las seis aplicaciones del Modo Inspector. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
 ASISTENTE = ('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor', 'Pregunta fácil, respuesta fácil',
-             'El chat de Auditavisión. Pregúntale lo que quieras del dinero público, como lo dirías platicando: cuánto debe un estado, cuánto le llega a un municipio, cuánto gana un cargo o qué significa un término. Te contesta en corto y con datos oficiales, y si quieres el respaldo, te arma la ficha técnica.')
+             'El chat de Auditavisión. Pregúntale lo que quieras del dinero público, como lo dirías platicando: cuánto debe un estado, cuánto le llega a un municipio, cuánto gana un cargo o qué significa un término. Te contesta en corto y con datos oficiales, y si quieres el respaldo, te lleva a la página donde está la información y te arma el dictamen con su respaldo.')
 LOGO_IMG = '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62" height="48">'
 # Desde el 11-10-2026 (pedido del autor) las dos divisiones del Modo Inspector
 # son tarjetas autonomas: la pagina de la herramienta solo las presenta y cada
@@ -1154,6 +1160,42 @@ def herramienta_asistente(bloque):
         'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
         'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
         'pie_extra': nav + '\n\n      ' + herr_otras(archivo),
+    }
+
+
+def herramienta_dictamen(bloque):
+    """Pagina del dictamen de una respuesta del bot (pedido del autor,
+    23-10-2026): la abre «Generar dictamen» con la pregunta en la direccion."""
+    h = next(x for x in HERRAMIENTAS if x[1] == 'inspector')
+    import asistente
+    return {
+        'archivo': asistente.DICTAMEN, 'menu': 'Dictamen pericial', 'menu_archivo': 'herramientas.html',
+        'padre': ('herramientas.html', 'Herramientas'), 'padre2': (ASISTENTE[0], ASISTENTE[1]),
+        'icono': '🧾', 'titulo': 'Dictamen pericial de Auditavisión',
+        'lema': '%s · el respaldo de una respuesta' % ASISTENTE[1], 'sin_icono_lema': True, 'icono_cab': LOGO_IMG,
+        'entrada': ('<b>El respaldo de una respuesta del Auditor.</b> Tu pregunta, lo que se contestó, cada cifra con su estado, '
+                    'sus fuentes oficiales y el método, con folio, sello y huella digital. Se arma de nuevo con los datos de la plataforma cada vez que se abre el enlace.'),
+        'fondo': HERR_IMG[h[1]], 'rubro': h[1],
+        'secciones': [{'id': 'dictamen', 'titulo': 'Dictamen pericial de Auditavisión', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
+        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
+    }
+
+
+def congreso_pagina(base):
+    """«El Congreso y las elecciones» (pedido del autor, 23-10-2026): lo que
+    el bot sabe del Poder Legislativo, tema por tema, para que su «Saber mas»
+    tenga a donde llevar. Todo sale de herramientas/asistente_legislativo.py."""
+    import asistente_legislativo as al
+    return {
+        'archivo': al.PAGINA, 'menu': al.PAGINA_TIT, 'menu_archivo': 'aprende.html',
+        'padre': ('aprende.html', 'Aprende'),
+        'icono': '🏛️', 'titulo': al.PAGINA_TIT,
+        'lema': 'Curules, escaños, periodos de sesiones y el calendario electoral de 2027',
+        'entrada': ('Cuántas personas legisladoras hay, cómo se eligen, cuándo sesionan, qué se vota el 6 de junio de 2027 y qué cambió con las reformas recientes. '
+                    'Cotejado con la Constitución vigente, la LGIPE, los acuerdos del INE publicados en el Diario Oficial y el censo del INEGI. '
+                    'Es la misma información con que contesta <a href="%s">Pregúntale al Auditor</a>.' % ASISTENTE[0]),
+        'estilos': ['asistente.css'],
+        'secciones': al.secciones(base['estados']),
     }
 
 
@@ -5053,7 +5095,7 @@ def generar(sello=None):
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     import datos_ambiente
-    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, congreso_pagina(base), indice(), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
@@ -5074,6 +5116,8 @@ def generar(sello=None):
     cuenta = asistente.escribir_base()
     texto = pagina(herramienta_asistente(asistente.pagina(cuenta, CANAL_COMUNIDAD)), sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, asistente.ARCHIVO), 'wb').write(texto.encode('utf-8'))
+    texto = pagina(herramienta_dictamen(asistente.dictamen_pagina()), sello).replace('\r\n', '\n').replace('\n', '\r\n')
+    open(os.path.join(RAIZ, asistente.DICTAMEN), 'wb').write(texto.encode('utf-8'))
     print('asistente: %s con %d fichas %s' % (asistente.ARCHIVO, sum(cuenta.values()), cuenta))
     import sitemap
     return sitemap.generar(sello)

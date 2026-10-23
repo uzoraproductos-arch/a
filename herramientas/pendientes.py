@@ -139,7 +139,7 @@ PROPIOS = [
      'están en su calendario de coordinación con los institutos locales (INE/CG480/2026), que la plataforma aún no integra: el portal del INE no se pudo abrir con conexión verificada. '
      'Las cifras que circulan («más de 19,600 cargos», «1,098 diputaciones locales») no se publican mientras no se cotejen con ese documento.',
      PLATAFORMA, 'https://ine.mx/voto-y-elecciones/elecciones-2027/', 'Proceso Electoral Federal 2026-2027 (INE)',
-     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor')]),
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('congreso-y-elecciones.html', 'Aprende · El Congreso y las elecciones')]),
     ('predial-ocde', 'Estados y municipios', 'El predial como parte del PIB: 0.16% en México y 1.0% en la OCDE',
      'Las dos cifras vienen de las Estadísticas Tributarias de la OCDE, pero la plataforma no guardó el cuadro ni la edición de donde salieron y no pudo volver a abrirlo para cotejarlas. '
      'Quedan como pendientes hasta integrar el documento.',

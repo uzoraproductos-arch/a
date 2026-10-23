@@ -6,7 +6,13 @@
    corto; si no puede, este archivo busca la ficha que mejor responde y la
    dice en corto. La nota técnica sellada (folio + huella SHA-256, como el
    Estado de Cuenta) solo se arma si el lector toca «Generar ficha técnica».
-   Si ninguna ficha responde, lo dice. */
+   Si ninguna ficha responde, lo dice. Desde el 23-10-2026 (pedido del autor)
+   esa nota es el «Dictamen pericial de Auditavisión» y vive en su propia
+   página (herramienta-inspector-dictamen.html, que carga este mismo archivo):
+   el enlace lleva solo la pregunta y la página vuelve a contestarla con la
+   misma base, así que nadie puede fabricar un dictamen con cifras propias.
+   Cada respuesta trae también «Saber más», que lleva a la página donde está
+   la información. */
 (function () {
   'use strict';
 
@@ -14,7 +20,8 @@
   var hilo = document.getElementById('paHilo');
   var form = document.getElementById('paForm');
   var campo = document.getElementById('paPregunta');
-  if (!B || !hilo || !form || !campo) return;
+  var dic = document.getElementById('dicApp');
+  if (!B || (!dic && (!hilo || !form || !campo))) return;
   /* Los municipios salen del padrón del INEGI (municipios-efipem.js, que la
      página carga): aquí se arma la ficha de cada uno. */
   var MU = window.AUDIT_MUNICIPIOS, NOMBRE = {};
@@ -137,13 +144,13 @@
     var d = new Date();
     return d.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) + ', ' + d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
   }
-  function sello(fol) {
+  function sello(fol, rotulo) {
     var id = 'paArco' + Math.random().toString(36).slice(2, 7);
-    return '<svg class="pa-sello-svg" viewBox="0 0 120 120" role="img" aria-label="Nota técnica de Auditavisión">' +
+    return '<svg class="pa-sello-svg" viewBox="0 0 120 120" role="img" aria-label="Sello de Auditavisión">' +
       '<defs><path id="' + id + '" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>' +
       '<circle cx="60" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="2.5"/>' +
       '<circle cx="60" cy="60" r="35" fill="none" stroke="currentColor" stroke-width="1.2"/>' +
-      '<text font-size="9.4" font-weight="800" letter-spacing="3.6" fill="currentColor"><textPath href="#' + id + '">AUDITAVISIÓN · NOTA TÉCNICA ·</textPath></text>' +
+      '<text font-size="9.4" font-weight="800" letter-spacing="3.6" fill="currentColor"><textPath href="#' + id + '">AUDITAVISIÓN · ' + (rotulo || 'NOTA TÉCNICA') + ' ·</textPath></text>' +
       '<text x="60" y="58" text-anchor="middle" font-size="22" font-weight="900" fill="currentColor">✓</text>' +
       '<text x="60" y="74" text-anchor="middle" font-size="7.5" font-weight="800" fill="currentColor">' + esc(fol ? fol.split('-').slice(-1)[0] : '········') + '</text></svg>';
   }
@@ -155,13 +162,17 @@
       return Array.prototype.map.call(new Uint8Array(b), function (x) { return ('0' + x.toString(16)).slice(-2); }).join('');
     }).catch(function () { return null; });
   }
-  function folioDe(hx) {
+  function folioDe(hx, pre) {
     var d = new Date(), f = d.getFullYear() + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + d.getDate()).slice(-2);
-    return 'NT-' + f + '-' + hx.slice(0, 8).toUpperCase();
+    return (pre || 'NT') + '-' + f + '-' + hx.slice(0, 8).toUpperCase();
   }
 
-  function nota(q, f, otras) {
-    var t = TIPO[f.t] || ['📄', 'Ficha'];
+  /* El dictamen pericial (pedido del autor, 23-10-2026): la respuesta del
+     Auditor con su respaldo completo. Encabezado y pie llevan el sello. */
+  var ROMANO = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+  function dictamenHtml(q, r, f, antes) {
+    var t = TIPO[f.t] || ['📄', 'Ficha'], k = 0;
+    function cap(tit) { return '<h3 class="dic-cap"><span>' + ROMANO[k++] + '.</span> ' + tit + '</h3>'; }
     var ci = (f.ci || []).map(function (c) {
       return '<li><b>' + esc(c.v) + '</b><span>' + esc(c.etq) + '</span>' + chip(c) +
         (c.op ? '<small class="pa-op"><b>Operación:</b> ' + esc(c.op) + '</small>' : '') + '</li>';
@@ -172,38 +183,50 @@
     /* La clasificación de la información: por qué cada cifra está como está. */
     var est = {};
     (f.ci || []).forEach(function (c) { est[c.e] = 1; });
+    (r.html.match(/est-(oficial|derivado|pendiente)/g) || []).forEach(function (m) { est[m.slice(4)] = 1; });
     if (f.pend) est.pendiente = 1;
     var clas = [];
-    if (est.oficial) clas.push('<li>' + chip({ e: 'oficial' }) + ' Tomada tal cual de su documento: la fuente va abajo, con su enlace directo.</li>');
+    if (est.oficial) clas.push('<li>' + chip({ e: 'oficial' }) + ' Tomada tal cual de su documento: la fuente va citada, con su enlace directo.</li>');
     if (est.derivado) clas.push('<li>' + chip({ e: 'derivado' }) + ' Calculada con cifras oficiales; la operación va junto a la cifra. Cuando solo hay aproximación, la plataforma da un rango: mínimo y máximo, cada uno de un documento oficial, y su punto medio.</li>');
     if (est.pendiente) clas.push('<li>' + chip({ e: 'pendiente', p: f.pend && f.pend.id }) + ' No hay documento oficial que lo sostenga: no se estima ni se rellena. Se dice por qué falta, a quién le toca publicarlo y dónde debería estar.</li>');
     var pend = f.pend ? '<div class="pa-pend">' +
       '<p><b>Por qué falta:</b> ' + esc(f.pend.pq) + '</p>' +
       '<p><b>A quién le toca:</b> ' + esc(f.pend.quien) + '</p>' +
       '<p><b>Dónde debería estar:</b> <a href="' + esc(f.pend.donde) + '" target="_blank" rel="noopener noreferrer">' + esc(f.pend.donde_tx) + ' ↗</a></p></div>' : '';
-    var mas = otras.length ? '<div class="pa-mas"><span>También te puede servir:</span>' + otras.map(function (o) {
-      return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc(o.tit.split(' (')[0]) + '"><span aria-hidden="true">' + (TIPO[o.t] || ['📄'])[0] + '</span> ' + esc(o.tit.length > 70 ? o.tit.slice(0, 68) + '…' : o.tit) + '</button>';
-    }).join('') + '</div>' : '';
-    return '<article class="pa-nota">' +
-      '<header class="pa-nota-cab"><img src="' + LOGO + '" alt="" width="52" height="40">' +
-      '<div><span class="pa-nota-tipo">Nota técnica · ' + esc(t[1]) + '</span><b>Auditavisión</b></div>' +
-      '<dl><div><dt>Folio</dt><dd class="pa-folio">calculando…</dd></div><div><dt>Expedida</dt><dd>' + esc(hoy()) + '</dd></div></dl></header>' +
-      '<p class="pa-nota-q"><span>Tu pregunta</span> «' + esc(q) + '»</p>' +
-      '<h4><span aria-hidden="true">' + t[0] + '</span> ' + esc(f.tit) + '</h4>' +
-      (f.txt ? '<p class="pa-nota-tx">' + esc(f.txt) + '</p>' : '') +
-      (ci ? '<ul class="pa-cifras">' + ci + '</ul>' : '') + pend +
-      (clas.length ? '<div class="pa-clas"><b>Cómo leer estas cifras</b><ul>' + clas.join('') + '</ul></div>' : '') +
-      (f.nota ? '<p class="pa-nota-al"><b>Alcance:</b> ' + esc(f.nota) + '</p>' : '') +
-      (fu ? '<div class="pa-fuentes"><b>Fuentes</b><ol>' + fu + '</ol></div>' : '') +
-      '<p class="pa-ir"><a href="' + esc(f.ir[0]) + '">Ver completo en ' + esc(f.ir[1]) + ' ➔</a></p>' +
-      '<footer class="pa-sello"><div class="pa-sello-img">' + sello(null) + '</div><div>' +
-      '<b>Nota técnica de Auditavisión</b>' +
+    var ir = r.ir || f.ir;
+    var resp = r.html.replace(/<details class="pa-dedonde"/g, '<details class="pa-dedonde" open');
+    return '<article class="pa-nota dic-doc">' +
+      '<header class="dic-cab"><div class="dic-cab-marca"><img src="' + LOGO + '" alt="" width="62" height="48">' +
+      '<div><b>Auditavisión</b><small>Plataforma ciudadana de fiscalización del gasto público</small></div></div>' +
+      '<div class="dic-sello">' + sello(null, 'DICTAMEN') + '</div>' +
+      '<div class="dic-cab-tx"><span class="pa-nota-tipo">Dictamen pericial · ' + esc(t[1]) + '</span>' +
+      '<dl><div><dt>Folio</dt><dd class="pa-folio">calculando…</dd></div><div><dt>Expedido</dt><dd>' + esc(hoy()) + '</dd></div>' +
+      '<div><dt>Versión de la plataforma</dt><dd>' + esc(selloSitio()) + '</dd></div></dl></div></header>' +
+      '<h2 class="dic-tit"><span aria-hidden="true">' + t[0] + '</span> ' + esc(f.tit) + '</h2>' +
+      cap('Planteamiento') + '<p class="pa-nota-q"><span>La pregunta</span> «' + esc(q) + '»</p>' +
+      (antes.length ? '<p class="dic-chico">Se hizo en la plática después de: ' + antes.map(function (x) { return '«' + esc(x) + '»'; }).join(' → ') + '.</p>' : '') +
+      cap('Respuesta del Auditor') + '<div class="dic-resp">' + resp + '</div>' +
+      (f.txt && f.t !== 'calculo' ? '<p class="pa-nota-tx"><b>La ficha completa:</b> ' + esc(f.txt) + '</p>' : '') +
+      (ci ? cap('Hallazgos: las cifras') + '<ul class="pa-cifras">' + ci + '</ul>' : '') +
+      (pend ? cap('Lo que falta') + pend : '') +
+      cap('Fundamento documental') + (fu ? '<ol class="dic-fuentes">' + fu + '</ol>' : '<p>Esta respuesta no cita cifras: lleva a una página de la plataforma, donde cada dato trae su fuente.</p>') +
+      cap('Método') + '<ol class="dic-metodo">' +
+      '<li><b>Localización.</b> El Auditor buscó la respuesta en la base de la plataforma (' + B.fichas.length.toLocaleString('es-MX') + ' fichas), que solo guarda datos ya publicados con su documento.</li>' +
+      '<li><b>Verificación.</b> Cada cifra se toma del documento oficial que se cita, sin estimar ni redondear a ojo. Las cuentas se hacen con cifras oficiales y se dice la operación.</li>' +
+      (clas.length ? '<li><b>Clasificación.</b> Cada dato lleva su estado:<ul class="dic-clas">' + clas.join('') + '</ul></li>' : '') +
+      '<li><b>Integridad.</b> La huella digital (SHA-256) se calcula sobre la ficha y la versión de la plataforma: si cambia una letra, cambia la huella.</li></ol>' +
+      cap('Alcance y limitaciones') + (f.nota ? '<p>' + esc(f.nota) + '</p>' : '') +
+      '<p>Este dictamen lo arma el bot de la plataforma solo con datos ya publicados; no lo redacta una inteligencia artificial. ' +
+      '<b>No es un documento oficial ni un peritaje con validez ante una autoridad:</b> es el respaldo documental de una respuesta, para que cualquiera revise de dónde sale cada dato. ' +
+      'Vale para la versión de la plataforma que indica: si un documento oficial cambia, el dictamen se actualiza y su huella también.</p>' +
+      (ir ? '<p class="pa-ir dic-no-imprime"><a href="' + esc(ir[0]) + '">📖 Saber más en «' + esc(ir[1]) + '» ➔</a></p>' : '') +
+      '<footer class="pa-sello"><div class="pa-sello-img dic-sello">' + sello(null, 'DICTAMEN') + '</div><div>' +
+      '<b>Dictamen pericial de Auditavisión</b>' +
       '<p>Folio <b class="pa-folio">calculando…</b> · Versión de la plataforma <b>' + esc(selloSitio()) + '</b></p>' +
       '<p class="pa-huella">Huella digital (SHA-256 de la ficha): <code>calculando…</code></p>' +
-      '<p class="pa-leyenda">La arma el bot interno solo con datos ya publicados en la plataforma; no la redacta una inteligencia artificial. ' +
-      '<b>No es un documento oficial.</b> El sello certifica que el contenido viene de la ficha citada y que no se ha alterado: si cambia una letra, la huella ya no coincide.</p>' +
-      '<p class="pa-acciones"><button type="button" class="pa-copiar">📋 Copiar la nota</button></p>' +
-      '</div></footer></article>' + mas;
+      '<p class="pa-leyenda">Para comprobarlo, abre el enlace de este dictamen: la plataforma lo vuelve a armar con sus datos y la huella debe coincidir. ' +
+      'Enlace: <span class="dic-url">' + esc(location.href) + '</span></p>' +
+      '</div></footer></article>';
   }
 
   function sinRespuesta(q, cerca) {
@@ -221,7 +244,7 @@
      copia o, cuando la página traiga canal (CANAL_COMUNIDAD), las manda. */
   var CLAVE = 'auditavision.bot.sinRespuesta', MAX = 50;
   var app = document.getElementById('paApp');
-  var canal = app.getAttribute('data-canal') || '';
+  var canal = app ? app.getAttribute('data-canal') || '' : '';
   function leeLista() {
     try { var v = JSON.parse(localStorage.getItem(CLAVE) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; }
   }
@@ -271,7 +294,13 @@
      pedir como nota técnica. */
   var charla = window.AuditorCharla ? window.AuditorCharla(B, { esc: esc, norm: norm }) : null;
   var QUIETO = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var guardadas = [];
+  /* «Generar dictamen» abre su página en otra pestaña, para no perder la
+     plática: lleva la pregunta y las cuatro anteriores (las que siguen a otra,
+     como «¿y Morelos?», necesitan su contexto). */
+  var DICTAMEN = 'herramienta-inspector-dictamen.html', historial = [];
+  function enlaceDictamen(q, previas) {
+    return DICTAMEN + '?q=' + encodeURIComponent(q) + previas.map(function (c) { return '&c=' + encodeURIComponent(c); }).join('');
+  }
   function chips(lista) {
     return lista && lista.length ? '<div class="pa-mas">' + lista.map(function (o) {
       var q = typeof o === 'string' ? o : o.tit.split(' (')[0], ico = typeof o === 'string' ? '' : '<span aria-hidden="true">' + (TIPO[o.t] || ['📄'])[0] + '</span> ';
@@ -279,12 +308,12 @@
       return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc(q) + '">' + ico + esc(tx) + '</button>';
     }).join('') + '</div>' : '';
   }
-  function acciones(q, r) {
+  function acciones(q, r, previas) {
     if (r.plat) return '';
-    var i = guardadas.push({ q: q, f: r.ficha }) - 1;
+    var ir = r.ir || (r.ficha && r.ficha.ir);
     return '<p class="pa-acc">' +
-      (r.ficha ? '<button type="button" class="pa-boton pa-genera" data-pa-ficha="' + i + '">🧾 Generar ficha técnica</button>' : '') +
-      (r.ir ? '<a class="pa-boton pa-ver" href="' + esc(r.ir[0]) + '">Ver ' + esc(r.ir[1]) + ' ➔</a>' : '') +
+      (ir ? '<a class="pa-boton pa-ver" href="' + esc(ir[0]) + '">📖 Saber más <span class="pa-ver-donde">· ' + esc(ir[1]) + '</span> ➔</a>' : '') +
+      (r.ficha ? '<a class="pa-boton pa-genera" href="' + esc(enlaceDictamen(q, previas || [])) + '" target="_blank" rel="noopener">🧾 Generar dictamen</a>' : '') +
       '<button type="button" class="pa-boton pa-noera" data-pa-q="' + esc(q) + '" data-pa-tit="' + esc(r.ficha ? r.ficha.tit : '') + '">🤔 No era lo que buscaba</button></p>';
   }
 
@@ -331,6 +360,8 @@
     var ejs = document.querySelector('.pa-ejs');
     if (ejs) ejs.hidden = true;
     agrega('pa-yo', '<p>' + esc(q) + '</p>', quieto);
+    var previas = historial.slice(-4);
+    historial.push(q);
     var r = respuesta(q);
     var pinta = function (li) {
       if (r.sin) {
@@ -339,7 +370,7 @@
         return;
       }
       if (r.anota && !ya) anota(q, 'sin');
-      li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r) +
+      li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r, previas) +
         (r.sug && r.sug.length ? (r.tambien ? '<p class="pa-mas-t">También te puede servir:</p>' : '') + chips(r.sug) : '');
     };
     if (quieto || QUIETO) { pinta(agrega('pa-bot', '', quieto)); return; }
@@ -347,23 +378,44 @@
     setTimeout(function () { li.classList.remove('pa-escribe'); pinta(li); li.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 420);
   }
 
-  /* «Generar ficha técnica»: la nota sellada, dentro de la misma respuesta. */
-  function generaFicha(b) {
-    var g = guardadas[+b.getAttribute('data-pa-ficha')];
-    if (!g || !g.f) return;
-    var cont = document.createElement('div');
-    cont.className = 'pa-ficha';
-    cont.innerHTML = nota(g.q, g.f, []);
-    b.closest('.pa-burbuja').appendChild(cont);
-    b.disabled = true;
-    b.textContent = '✅ Ficha técnica generada';
-    huella(g.f).then(function (hx) {
-      var fol = hx ? folioDe(hx) : null;
-      Array.prototype.forEach.call(cont.querySelectorAll('.pa-folio'), function (el) { el.textContent = fol || 'no disponible en este navegador'; });
-      cont.querySelector('.pa-huella code').textContent = hx ? hx.replace(/(.{16})/g, '$1 ').trim() : 'no disponible en este navegador';
-      cont.querySelector('.pa-sello-img').innerHTML = sello(fol);
+  /* La página del dictamen: vuelve a contestar la pregunta del enlace (y las
+     previas, para el contexto) con la misma base y arma el dictamen. */
+  function armaDictamen() {
+    var ps = new URLSearchParams(location.search), q = (ps.get('q') || '').trim().slice(0, 600);
+    var antes = ps.getAll('c').map(function (x) { return x.trim().slice(0, 600); }).filter(Boolean).slice(-4);
+    var doc = document.getElementById('dicDoc'), chat = 'herramienta-inspector-pregunta.html';
+    if (!q) {
+      doc.innerHTML = '<p>El dictamen respalda una respuesta del Auditor. <a href="' + chat + '">Hazle una pregunta</a> y, en su respuesta, toca <b>«🧾 Generar dictamen»</b>.</p>';
+      return;
+    }
+    antes.forEach(function (x) { respuesta(x); });
+    var r = respuesta(q), f = r && !r.sin ? r.ficha : null;
+    if (!f) {
+      doc.innerHTML = '<p>No pude armar el dictamen de «' + esc(q) + '»: esa respuesta no cita cifras ni fuentes que respaldar, o la plataforma ya no la contesta igual.</p>' +
+        '<p><a href="' + chat + '?q=' + encodeURIComponent(q) + '">Pregúntasela de nuevo al Auditor ➔</a></p>';
+      return;
+    }
+    doc.innerHTML = dictamenHtml(q, r, f, antes);
+    document.title = 'Dictamen: ' + f.tit + ' · Auditavisión';
+    huella(f).then(function (hx) {
+      var fol = hx ? folioDe(hx, 'DP') : null;
+      Array.prototype.forEach.call(doc.querySelectorAll('.pa-folio'), function (el) { el.textContent = fol || 'no disponible en este navegador'; });
+      doc.querySelector('.pa-huella code').textContent = hx ? hx.replace(/(.{16})/g, '$1 ').trim() : 'no disponible en este navegador';
+      Array.prototype.forEach.call(doc.querySelectorAll('.dic-sello'), function (el) { el.innerHTML = sello(fol, 'DICTAMEN'); });
     });
-    cont.scrollIntoView({ behavior: QUIETO ? 'auto' : 'smooth', block: 'start' });
+    var im = document.getElementById('dicImprime'), en = document.getElementById('dicEnlace');
+    im.hidden = en.hidden = false;
+    im.addEventListener('click', function () { window.print(); });
+    en.addEventListener('click', function () {
+      (navigator.clipboard ? navigator.clipboard.writeText(location.href) : Promise.reject()).then(function () {
+        en.textContent = '✅ Enlace copiado';
+      }, function () { en.textContent = 'Copia la dirección de tu navegador'; });
+    });
+  }
+  if (dic) {
+    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta };
+    armaDictamen();
+    return;
   }
 
   form.addEventListener('submit', function (ev) {
@@ -374,8 +426,6 @@
   document.getElementById('paApp').addEventListener('click', function (ev) {
     var b = ev.target.closest ? ev.target.closest('[data-pa-pregunta]') : null;
     if (b) { responde(b.getAttribute('data-pa-pregunta'), false, b.hasAttribute('data-pa-ya')); return; }
-    var gf = ev.target.closest ? ev.target.closest('.pa-genera') : null;
-    if (gf) { if (!gf.disabled) generaFicha(gf); return; }
     var ne = ev.target.closest ? ev.target.closest('.pa-noera') : null;
     if (ne) {
       if (!ne.disabled) anota(ne.getAttribute('data-pa-q'), 'noera', ne.getAttribute('data-pa-tit'));
@@ -393,15 +443,6 @@
     if (ev.target.id === 'paSinRespBorrar') {
       if (window.confirm('¿Borrar las preguntas anotadas en este navegador?')) { guardaLista([]); pintaLista(); }
       return;
-    }
-    var c = ev.target.closest ? ev.target.closest('.pa-copiar') : null;
-    if (c && c.id) return;
-    if (c) {
-      var art = c.closest('.pa-nota');
-      var tx = art.innerText.replace(/(?:📋 ?)?Copiar la nota|(?:✅ ?)?Copiada/g, '').trim() + '\n' + location.href.split('?')[0];
-      (navigator.clipboard ? navigator.clipboard.writeText(tx) : Promise.reject()).then(function () {
-        c.textContent = '✅ Copiada';
-      }, function () { c.textContent = 'Selecciónala y cópiala a mano'; });
     }
   });
   /* «Cómo platicar conmigo» vive en un cajón lateral (23-10-2026). */
@@ -436,7 +477,7 @@
     if (a) { ev.preventDefault(); abreComo('paSinResp'); }
   });
   /* Para revisar cómo puntúa una pregunta desde la consola. */
-  window.AuditorBot = { buscar: buscar, charla: charla };
+  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta };
   pintaLista();
   if (canal) document.getElementById('paSinRespNota').innerHTML = 'La lista se guarda solo en tu navegador y no se envía sola: con «Enviarlas a Auditavisión» nos la haces llegar tú.';
   var pre = new URLSearchParams(location.search).get('q');

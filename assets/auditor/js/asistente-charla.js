@@ -412,7 +412,7 @@
         (veces ? '<p>Para darte una idea: eso es <b>' + n(veces, 1) + ' veces</b> el salario mínimo general de un mes ($' + n(sm.mes, 2) + ').</p>' : '');
       var fu = [{ que: 'Sueldo mensual', e: c.e, fu: c.fu }, { que: 'Sueldo anual', e: c.ea, fu: c.fu, op: c.op }];
       if (veces) fu.push({ que: 'Salario mínimo general 2026', e: 'oficial', fu: sm.fu, op: '$' + n(sm.dia, 2) + ' diarios × 30' }, { que: 'Veces el salario mínimo', e: 'derivado', op: 'sueldo mensual neto ÷ salario mínimo mensual. El sueldo del cargo es neto y el mínimo es bruto: la comparación se queda corta' });
-      return { html: h, fu: fu, val: { v: c.max, u: 'pesos', min: c.min, anual: c.anual }, tit: 'Cuánto gana: ' + c.n, ci: [{ v: '$' + n(c.max), etq: 'al mes, neto', e: c.e }, { v: '$' + n(c.anual), etq: 'al año, neto', e: c.ea, op: c.op }] };
+      return { html: h, fu: fu, val: { v: c.max, u: 'pesos', min: c.min, anual: c.anual }, tit: 'Cuánto gana: ' + c.n, ir: SUELDOS, ci: [{ v: '$' + n(c.max), etq: 'al mes, neto', e: c.e }, { v: '$' + n(c.anual), etq: 'al año, neto', e: c.ea, op: c.op }] };
     }
     function art(nom) {
       var t = nom.split(' (')[0];
@@ -420,11 +420,13 @@
       if (/^(Presidenta|Ministra|Senadora|Diputada|Jueza|Magistrada)/.test(t)) return 'Una ' + t.charAt(0).toLowerCase() + t.slice(1).replace(/^presidenta de la república/i, 'presidenta de la República');
       return (/^(Las |Los |La |El )/.test(t) ? t : 'Un ' + t.charAt(0).toLowerCase() + t.slice(1)).replace(/^Una presidenta/, 'La presidenta');
     }
+    /* «Saber más» de los sueldos: Tú contra ellos, donde están todos los cargos. */
+    var SUELDOS = ['herramienta-calculadora-compara.html', 'Tú contra ellos'];
     function cargosRanking() {
       var l = (D.cargos || []).slice().sort(function (a, b) { return b.max - a.max; });
       return { html: '<p>Así quedan los sueldos mensuales netos de 2026, de mayor a menor:</p><ol class="pa-lista">' + l.map(function (c) { return '<li><b>' + esc(c.n) + '</b>: $' + n(c.max) + '</li>'; }).join('') + '</ol>',
         fu: [{ que: 'Sueldos', e: 'oficial', fu: l[0].fu }, { que: 'Orden', e: 'derivado', op: 'de mayor a menor sueldo mensual' }], tit: 'Quién gana más',
-        ci: l.slice(0, 6).map(function (c) { return { v: '$' + n(c.max), etq: c.n, e: c.e }; }) };
+        ci: l.slice(0, 6).map(function (c) { return { v: '$' + n(c.max), etq: c.n, e: c.e }; }), ir: SUELDOS };
     }
 
     /* ---------- Las administraciones ---------- */
@@ -656,14 +658,15 @@
     }
 
     /* ---------- Cuántos municipios tiene cada estado ---------- */
+    var MUNIS = ['numeros-los-municipios.html', 'Los municipios, en Números'];
     function cuentaMun(e, dir) {
       if (!MU) return null;
       var ab = e ? Object.keys(MU.ent).filter(function (x) { return (porA[x] || porA[x.replace('É', 'E')] || {}).a === e.a || x === e.a; })[0] : null;
       var fu = [{ que: 'Municipios', e: 'oficial', fu: { tx: 'INEGI, Catálogo Único de Claves de Áreas Geoestadísticas', url: MU.url } }];
-      if (e && ab) return { html: '<p><b>' + esc(e.n) + '</b> tiene <b>' + n(MU.ent[ab].n) + ' municipios</b>' + (e.a === 'CDMX' ? ' (en la Ciudad de México se llaman alcaldías)' : '') + '. En todo el país hay ' + n(MU.catalogo) + '.</p>', fu: fu, tit: e.n + ': municipios' };
+      if (e && ab) return { html: '<p><b>' + esc(e.n) + '</b> tiene <b>' + n(MU.ent[ab].n) + ' municipios</b>' + (e.a === 'CDMX' ? ' (en la Ciudad de México se llaman alcaldías)' : '') + '. En todo el país hay ' + n(MU.catalogo) + '.</p>', fu: fu, tit: e.n + ': municipios', ir: MUNIS };
       var l = Object.keys(MU.ent).map(function (x) { return { n: (porA[x] || {}).n || x, c: MU.ent[x].n }; }).sort(function (a, b) { return dir === 'min' ? a.c - b.c : b.c - a.c; });
       return { html: '<p>En México hay <b>' + n(MU.catalogo) + ' municipios</b>. Los estados con ' + (dir === 'min' ? 'menos' : 'más') + ':</p><ol class="pa-lista">' + l.slice(0, 5).map(function (x) { return '<li><b>' + esc(x.n) + '</b>: ' + n(x.c) + '</li>'; }).join('') + '</ol>',
-        fu: fu.concat([{ que: 'Orden', e: 'derivado', op: 'ordenamos los estados por número de municipios' }]), tit: 'Municipios por estado' };
+        fu: fu.concat([{ que: 'Orden', e: 'derivado', op: 'ordenamos los estados por número de municipios' }]), tit: 'Municipios por estado', ir: MUNIS };
     }
 
     /* ---------- La pestaña Números: ingresos, gasto, ramos, Paquete 2027 (asistente_numeros.py) ---------- */
@@ -987,14 +990,14 @@
           (lu === 1 ? 'Es el más grande del país.' : 'Es el lugar <b>' + lu + ' de 32</b> por tamaño.') + '</p>' +
           (e.a === 'CDMX' ? '<p class="pa-chico">El INEGI aclara que el Congreso de la Ciudad de México debe tener 66: una persona suplente tomó protesta después del corte.</p>' : ''),
         fu: [{ que: 'Personas legisladoras en activo (tabla 8)', e: 'oficial', fu: LEG.cnple }, { que: 'Lugar entre los 32 congresos', e: 'derivado', op: 'ordenamos los 32 congresos de mayor a menor', fu: LEG.cnple }],
-        ci: [{ v: String(v), etq: 'legisladores del Congreso de ' + e.n, e: 'oficial' }], tit: 'Congreso de ' + e.n,
+        ci: [{ v: String(v), etq: 'legisladores del Congreso de ' + e.n, e: 'oficial' }], tit: 'Congreso de ' + e.n, ir: LEG.pag,
         sug: ['¿Cuánto gasta el Congreso de ' + e.n + '?', '¿Cuál es el congreso más grande?', '¿Cuántos diputados hay?'] };
     }
     function congresosLista(dir, cuantos) {
       var l = EDO.filter(function (e) { return LEG.cong[e.a] != null; }).sort(function (a, b) { return dir === 'min' ? LEG.cong[a.a] - LEG.cong[b.a] : LEG.cong[b.a] - LEG.cong[a.a]; }).slice(0, Math.max(cuantos, 5));
       return { html: '<p>Los congresos locales ' + (dir === 'min' ? 'más chicos' : 'más grandes') + ', por personas legisladoras en activo:</p><ol class="pa-lista">' +
           l.map(function (e) { return '<li><b>' + esc(e.n) + '</b>: ' + LEG.cong[e.a] + '</li>'; }).join('') + '</ol><p class="pa-chico">Entre los 32 suman ' + n(LEG.congTot) + '.</p>',
-        fu: [{ que: 'Personas legisladoras en activo por congreso (tabla 8)', e: 'oficial', fu: LEG.cnple }], tit: 'El tamaño de los congresos locales',
+        fu: [{ que: 'Personas legisladoras en activo por congreso (tabla 8)', e: 'oficial', fu: LEG.cnple }], tit: 'El tamaño de los congresos locales', ir: LEG.pag,
         sug: [dir === 'min' ? '¿Cuál es el congreso más grande?' : '¿Cuál es el congreso más chico?', '¿Cuántos diputados hay?'] };
     }
     function legResp(t, es, dir, cuantos) {
