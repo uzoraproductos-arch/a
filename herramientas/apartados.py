@@ -505,6 +505,18 @@ APARTADOS = [
                 'pagina': 'datos-medio-ambiente.html',
                 'pestana': ('🌎', 'Medio ambiente', 'El daño, la basura, el dinero y las leyes: abre su página'),
             },
+            {
+                # Los Poderes Legislativo y Judicial (23-10-2026, pedido del
+                # autor): poderes_paginas(), una pagina por grupo de temas.
+                'id': 'legislativo',
+                'pagina': 'datos-poder-legislativo.html',
+                'pestana': ('🏛️', 'Poder Legislativo', 'Curules, sesiones, presupuesto y elecciones: abre su página'),
+            },
+            {
+                'id': 'judicial',
+                'pagina': 'datos-poder-judicial.html',
+                'pestana': ('⚖️', 'Poder Judicial', 'La Corte, los circuitos, los sueldos y la elección: abre su página'),
+            },
             # El Estado de cuenta administrativo fue la cuarta tarjeta de Datos
             # del 12-10-2026 al 22-10-2026; desde entonces (pedido del autor)
             # es la quinta aplicacion de la Calculadora Civica. Su ancla vieja
@@ -521,7 +533,8 @@ APARTADOS = [
         # Noticias relevantes es su propia pagina desde el 11-10-2026; los
         # enlaces a una columna (#col-<id>) llegan a ella con su ancla.
         'hash_a_pagina': {'biblioteca': 'diccionario.html', 'kit': 'diccionario.html',
-                          'noticias': 'noticias-relevantes.html', 'col-*': 'noticias-relevantes.html'},
+                          'noticias': 'noticias-relevantes.html', 'col-*': 'noticias-relevantes.html',
+                          'congreso': 'datos-poder-legislativo.html'},
         'entrada': ('Las palabras del presupuesto, las leyes que lo rigen y las fuentes donde se publica, '
                     'explicadas en lenguaje llano. Para leer una cifra oficial no hace falta ser especialista. '
                     'Para ponerte a prueba, una trivia con el estado de cuenta de cada presidente; y para leer con calma, columnas con datos curiosos de personajes y hechos.'),
@@ -557,12 +570,9 @@ APARTADOS = [
                 'pagina': 'noticias-relevantes.html',
                 'pestana': ('📰', 'Noticias relevantes', 'La Columna del Erario: abre su página'),
             },
-            {
-                # El Poder Legislativo y las elecciones (23-10-2026): congreso_pagina().
-                'id': 'congreso',
-                'pagina': 'congreso-y-elecciones.html',
-                'pestana': ('🏛️', 'El Congreso y las elecciones', 'Curules, sesiones y el calendario de 2027: abre su página'),
-            },
+            # «El Congreso y las elecciones» fue la cuarta pestaña de Aprende la
+            # mañana del 23-10-2026; esa tarde (pedido del autor) se mudó a
+            # Datos, como «Poder Legislativo» (poderes_paginas()).
         ],
     },
     {
@@ -1181,22 +1191,49 @@ def herramienta_dictamen(bloque):
     }
 
 
-def congreso_pagina(base):
-    """«El Congreso y las elecciones» (pedido del autor, 23-10-2026): lo que
-    el bot sabe del Poder Legislativo, tema por tema, para que su «Saber mas»
-    tenga a donde llevar. Todo sale de herramientas/asistente_legislativo.py."""
+def poderes_paginas(base):
+    """Los Poderes Legislativo y Judicial en la pestaña Datos (pedido del
+    autor, 23-10-2026: «que esa pestaña este replicada en Datos, asi como la
+    del Poder Legislativo, y que cada subpestaña se quede en su propia
+    pagina»). Cada Poder tiene su portada con tarjetas y una pagina por grupo
+    de temas: el mismo texto con que contesta el bot, sus tablas y sus
+    fuentes. Todo sale de asistente_legislativo.py y asistente_judicial.py."""
     import asistente_legislativo as al
-    return {
-        'archivo': al.PAGINA, 'menu': al.PAGINA_TIT, 'menu_archivo': 'aprende.html',
-        'padre': ('aprende.html', 'Aprende'),
-        'icono': '🏛️', 'titulo': al.PAGINA_TIT,
-        'lema': 'Curules, escaños, periodos de sesiones y el calendario electoral de 2027',
-        'entrada': ('Cuántas personas legisladoras hay, cómo se eligen, cuándo sesionan, qué se vota el 6 de junio de 2027 y qué cambió con las reformas recientes. '
-                    'Cotejado con la Constitución vigente, la LGIPE, los acuerdos del INE publicados en el Diario Oficial y el censo del INEGI. '
-                    'Es la misma información con que contesta <a href="%s">Pregúntale al Auditor</a>.' % ASISTENTE[0]),
-        'estilos': ['asistente.css'],
-        'secciones': al.secciones(base['estados']),
-    }
+    import asistente_judicial as aj
+    paginas = []
+    poderes = [
+        (al, '🏛️', 'Curules, escaños, sesiones, el calendario del presupuesto y las elecciones de 2027',
+         'Cuántas personas legisladoras hay, cómo se eligen, cuándo sesionan, qué se vota el 6 de junio de 2027 y qué cambió con las reformas recientes. '
+         'Cotejado con la Constitución vigente, la LGIPE, los acuerdos del INE publicados en el Diario Oficial y el censo del INEGI. Cada tarjeta abre su propia página.',
+         lambda temas: al.secciones(base['estados'], temas), 'leg-'),
+        (aj, '⚖️', 'Quién juzga, cuánto cuesta, cuánto ganan y cómo decide',
+         'La estructura del Poder Judicial de la Federación tras la reforma de 2024, la Suprema Corte electa en 2025, el tabulador de sueldos, '
+         'el presupuesto 2026, la elección judicial y cómo decide un juez. Cotejado con la Constitución vigente, los acuerdos del INE, el Manual de '
+         'remuneraciones y el Presupuesto de Egresos. Cada tarjeta abre su propia página.',
+         lambda temas: aj.secciones(base, temas), 'jud-'),
+    ]
+    for mod, ico, lema, entrada, secc, pre in poderes:
+        partes = [(x[0], x[0], x[1], x[2]) for x in mod.PAGINAS]
+        paginas.append({
+            'archivo': mod.PORTADA, 'menu': mod.PORTADA_TIT, 'menu_archivo': 'descarga-los-datos.html',
+            'padre': ('descarga-los-datos.html', 'Datos'),
+            'icono': ico, 'titulo': mod.PORTADA_TIT, 'lema': lema,
+            'entrada': entrada + ' Es la misma información con que contesta <a href="%s">Pregúntale al Auditor</a>.' % ASISTENTE[0],
+            # Las anclas de cada tema llevan a su pagina.
+            'hash_a_pagina': {pre + k: p[0] + '#' + pre + k for p in mod.PAGINAS for k in p[5]},
+            'secciones': [{'id': 'partes', 'titulo': mod.PORTADA_TIT, 'texto': '', 'sin_cab': True,
+                           'tarjetas': [(x[1], x[2], x[3], x[0], None, None) for x in mod.PAGINAS]}],
+        })
+        for archivo, pico, titulo, frase, pentrada, temas in mod.PAGINAS:
+            paginas.append({
+                'archivo': archivo, 'menu': titulo, 'menu_archivo': 'descarga-los-datos.html',
+                'padre': ('descarga-los-datos.html', 'Datos'), 'padre2': (mod.PORTADA, mod.PORTADA_TIT),
+                'icono': pico, 'titulo': titulo, 'lema': frase, 'entrada': pentrada,
+                'estilos': ['asistente.css'],
+                'pie_extra': partes_nav(mod.PORTADA_TIT, mod.PORTADA, ico, partes, archivo),
+                'secciones': secc(temas),
+            })
+    return paginas
 
 
 # Diccionario del Gasto Publico (decision del autor, 09-10-2026; el 11-10-2026
@@ -4959,6 +4996,10 @@ def indice():
 # Paginas que dejaron de existir y redirigen a donde se mudo su contenido.
 # Busca y verifica se fusiono con el Modo Inspector el 09-10-2026.
 REDIRECCIONES = {
+    # «El Congreso y las elecciones» se mudó a Datos el 23-10-2026 (pedido del
+    # autor): su ancla (#leg-<tema>) viaja y la portada la manda a su página.
+    'congreso-y-elecciones.html': ('datos-poder-legislativo.html', 'El Congreso y las elecciones',
+                                   'Está ahora en la pestaña Datos, como «Poder Legislativo», con una página por tema.'),
     # Las cuatro aplicaciones de Inversion y Megaobras se fundieron en
     # capitulos el 21-10-2026 (pedido del autor): el pulso ya no tiene
     # pagina propia; sus cinco partes son capitulos.
@@ -5095,7 +5136,7 @@ def generar(sello=None):
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     import datos_ambiente
-    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, congreso_pagina(base), indice(), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

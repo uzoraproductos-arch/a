@@ -32,8 +32,9 @@ de «gestión social» de los congresos, «1,098 curules locales» (el INEGI
 cuenta 1,122 en activo) y la distritación «INE/CG130/2023» (ese acuerdo es
 el de las circunscripciones; los distritos son del INE/CG875/2022).
 
-asistente-charla.js lo lee como D.leg; la pagina congreso-y-elecciones.html
-(apartados.py) se arma con secciones().
+asistente-charla.js lo lee como D.leg; las paginas del Poder Legislativo en
+la pestaña Datos (apartados.poderes_paginas()) se arman con secciones().
+congreso-y-elecciones.html, su primera pagina, redirige ahi con su ancla.
 """
 
 import html
@@ -71,12 +72,31 @@ CONGRESOS = {'MÉX': 75, 'CDMX': 65, 'VER': 50, 'GRO': 46, 'NL': 42, 'OAX': 42, 
              'QRO': 25, 'QROO': 25, 'TLAX': 25, 'BCS': 21, 'MOR': 20}
 CONGRESOS_TOTAL = 1122  # «EUM» de la misma tabla
 
-# La pagina donde se lee todo esto (pedido del autor, 23-10-2026: cada
-# respuesta del bot lleva «Saber mas» a la pagina donde esta la informacion).
-PAGINA = 'congreso-y-elecciones.html'
-PAGINA_TIT = 'El Congreso y las elecciones'
-ORDEN = ['elecciones', 'diputados', 'senado', 'congreso', 'pluris', 'reeleccion', 'judicial',
-         'sesiones', 'permanente', 'paquete', 'locales', 'ayuntamientos', 'reformas']
+# Donde se lee todo esto (pedido del autor, 23-10-2026: cada respuesta del bot
+# lleva «Saber mas» a la pagina donde esta la informacion). Desde la tarde del
+# mismo dia (pedido del autor) vive en la pestaña Datos, una pagina por grupo
+# de temas; congreso-y-elecciones.html redirige con su ancla.
+PORTADA = 'datos-poder-legislativo.html'
+PORTADA_TIT = 'Poder Legislativo'
+PAGINA_VIEJA = 'congreso-y-elecciones.html'
+PAGINAS = [
+    ('datos-legislativo-camaras.html', '🏛️', 'Las Cámaras', 'Diputados, Senado, plurinominales y la Comisión Permanente',
+     'Cuántas personas legisladoras hay en el Congreso de la Unión, cómo se eligen y quién trabaja cuando las Cámaras están en receso.',
+     ['diputados', 'senado', 'congreso', 'pluris', 'permanente']),
+    ('datos-legislativo-calendario.html', '📅', 'Sesiones, presupuesto y reformas', 'Cuándo sesiona el Congreso, las fechas del presupuesto y lo que cambió',
+     'Cuándo sesiona el Congreso, en qué fechas se entrega y se aprueba el dinero público de cada año y qué reformas recientes tocan al Congreso y a las elecciones.',
+     ['sesiones', 'paquete', 'reformas']),
+    ('datos-legislativo-elecciones.html', '🗳️', 'Las elecciones', 'El 6 de junio de 2027, la reelección y la elección judicial',
+     'Qué se vota el 6 de junio de 2027, quién puede reelegirse y por qué la elección de juezas y jueces se movió a 2028.',
+     ['elecciones', 'reeleccion', 'judicial']),
+    ('datos-legislativo-estados.html', '📍', 'Congresos locales y ayuntamientos', 'Los 32 congresos y cómo se integra un ayuntamiento',
+     'Cuántas personas legisladoras tiene cada uno de los 32 congresos locales y cómo se integra el ayuntamiento que gobierna tu municipio.',
+     ['locales', 'ayuntamientos']),
+]
+ORDEN = [k for p in PAGINAS for k in p[5]]
+PAGINA_DE = {k: (p[0], p[2]) for p in PAGINAS for k in p[5]}
+# Compatibilidad: la pagina de los congresos locales.
+PAGINA, PAGINA_TIT = PAGINA_DE['locales']
 
 
 def _o(que, fu, op=None):
@@ -179,6 +199,7 @@ def legislativo():
              '<p>Quienes debían dejar el cargo en 2027 siguen hasta que tomen protesta los electos, el <b>1 de septiembre de 2028</b>. '
              'Las magistraturas de circuito y los juzgados de distrito que se elijan en 2028 durarán ocho años, hasta 2036.</p>',
         'fu': [_o('Elección judicial en 2028 (decreto DOF 02-06-2026, transitorios segundo, tercero y séptimo)', CPEUM)],
+        'ir': ['datos-judicial-eleccion.html#jud-eleccion2028', 'La elección judicial'],
         'sug': ['¿Cuándo son las próximas elecciones?', '¿Cuánto gana un ministro de la Corte?']}
     t['reeleccion'] = {
         'tit': '¿Se pueden reelegir?',
@@ -216,7 +237,8 @@ def legislativo():
         'sug': ['¿Se pueden reelegir los diputados?', '¿Cuándo es la elección judicial?', '¿Cuántos diputados tiene el congreso de Jalisco?']}
     assert sorted(ORDEN) == sorted(t)
     for k, x in t.items():
-        x.setdefault('ir', [PAGINA + '#leg-' + k, PAGINA_TIT])
+        x.setdefault('ir', [PAGINA_DE[k][0] + '#leg-' + k, PAGINA_DE[k][1]])
+        x['aqui'] = [PAGINA_DE[k][0] + '#leg-' + k, PAGINA_DE[k][1]]
     return {'t': t, 'cong': CONGRESOS, 'congTot': CONGRESOS_TOTAL, 'cnple': CNPLE, 'cpeum': CPEUM,
             'pag': [PAGINA + '#leg-locales', PAGINA_TIT]}
 
@@ -236,18 +258,30 @@ def _fuentes(fu):
     return '<details class="pa-dedonde leg-fuentes" open><summary><span>📎 De dónde sale</span></summary><ul>%s</ul></details>' % ''.join(li)
 
 
-def secciones(estados):
-    """Las secciones de la pagina «El Congreso y las elecciones»: el mismo
+def bloque_tema(x, extra, pagina_actual):
+    """El bloque de un tema en su pagina: el texto del bot, sus cifras, lo
+    propio de la pagina (`extra`), «Saber mas» si `ir` lleva a otra pagina,
+    sus fuentes y una pregunta para el Auditor. Lo comparte el Poder Judicial."""
+    cifras = ''.join('<li><b>%s</b> <span>%s</span> %s%s</li>' % (html.escape(c['v']), html.escape(c['etq']), _chip(c['e']),
+                                                                ' <small>(%s)</small>' % html.escape(c['op']) if c.get('op') else '')
+                     for c in x.get('ci', []))
+    if x['ir'][0].split('#')[0] != pagina_actual:
+        extra += '<p class="leg-mas"><a href="%s">📖 Saber más en «%s» ➔</a></p>' % (x['ir'][0], html.escape(x['ir'][1]))
+    q = (x.get('sug') or [''])[0]
+    return '<div class="leg-tema">%s%s%s%s%s</div>' % (
+        x['h'], '<ul class="leg-cifras">%s</ul>' % cifras if cifras else '', extra, _fuentes(x['fu']),
+        '<p class="leg-pregunta"><a href="herramienta-inspector-pregunta.html?q=%s">💬 Pregúntale al Auditor: «%s»</a></p>' % (quote(q), html.escape(q)) if q else '')
+
+
+def secciones(estados, temas=None):
+    """Las secciones de una pagina del Poder Legislativo en Datos: el mismo
     texto con que contesta el bot, tema por tema, con sus fuentes a la vista.
     `estados` es la lista de la base (abbr y name) para nombrar los congresos."""
     L = legislativo()
     nombre = {e['abbr']: e['name'] for e in estados}
     out = []
-    for k in ORDEN:
+    for k in temas or ORDEN:
         x = L['t'][k]
-        cifras = ''.join('<li><b>%s</b> <span>%s</span> %s%s</li>' % (html.escape(c['v']), html.escape(c['etq']), _chip(c['e']),
-                                                                    ' <small>(%s)</small>' % html.escape(c['op']) if c.get('op') else '')
-                         for c in x.get('ci', []))
         extra = ''
         if k == 'locales':
             filas = sorted(CONGRESOS.items(), key=lambda a: (-a[1], nombre[a[0]]))
@@ -260,11 +294,6 @@ def secciones(estados):
                 ''.join('<tr><td>%d</td><th scope="row">%s</th><td>%d</td></tr>' % (1 + sum(1 for v in CONGRESOS.values() if v > n), html.escape(nombre[a]), n)
                         for a, n in filas),
                 format(CONGRESOS_TOTAL, ','), '<a href="%s" target="_blank" rel="noopener noreferrer">%s ↗</a>' % (CNPLE['url'], html.escape(CNPLE['tx'])))
-        if x['ir'][0].split('#')[0] != PAGINA:
-            extra += '<p class="leg-mas"><a href="%s">📖 Saber más en «%s» ➔</a></p>' % (x['ir'][0], html.escape(x['ir'][1]))
-        q = (x.get('sug') or [''])[0]
-        bloque = '<div class="leg-tema">%s%s%s%s%s</div>' % (
-            x['h'], '<ul class="leg-cifras">%s</ul>' % cifras if cifras else '', extra, _fuentes(x['fu']),
-            '<p class="leg-pregunta"><a href="herramienta-inspector-pregunta.html?q=%s">💬 Pregúntale al Auditor: «%s»</a></p>' % (quote(q), html.escape(q)) if q else '')
-        out.append({'id': 'leg-' + k, 'titulo': html.escape(x['tit']), 'texto': '', 'tarjetas': [], 'bloque': bloque})
+        out.append({'id': 'leg-' + k, 'titulo': html.escape(x['tit']), 'texto': '', 'tarjetas': [],
+                    'bloque': bloque_tema(x, extra, PAGINA_DE[k][0])})
     return out

@@ -139,7 +139,23 @@ PROPIOS = [
      'están en su calendario de coordinación con los institutos locales (INE/CG480/2026), que la plataforma aún no integra: el portal del INE no se pudo abrir con conexión verificada. '
      'Las cifras que circulan («más de 19,600 cargos», «1,098 diputaciones locales») no se publican mientras no se cotejen con ese documento.',
      PLATAFORMA, 'https://ine.mx/voto-y-elecciones/elecciones-2027/', 'Proceso Electoral Federal 2026-2027 (INE)',
-     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('congreso-y-elecciones.html', 'Aprende · El Congreso y las elecciones')]),
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-legislativo-elecciones.html', 'Datos · Poder Legislativo · Las elecciones')]),
+    # El Poder Judicial en el bot y en Datos (23-10-2026).
+    ('judicial-2025-participacion', 'Elecciones', 'Cuánta gente votó en la elección judicial del 1 de junio de 2025 (participación ciudadana final)',
+     'El INE publica la participación en su sitio de cómputos de la elección judicial, pero la plataforma no lo pudo abrir con conexión verificada y sus acuerdos '
+     'de validez (INE/CG563/2025 e INE/CG564/2025) no traen el porcentaje. Las cifras de prensa («12.7 %», «13 %») no se publican mientras no se cotejen con el INE.',
+     PLATAFORMA, 'https://computospj2025.ine.mx/', 'Cómputos Distritales Judiciales 2025 (INE)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-eleccion.html', 'Datos · Poder Judicial · La elección judicial')]),
+    ('judicial-2025-costo', 'Elecciones', 'Cuánto costó al final la elección judicial de 2025',
+     'El acuerdo INE/CG563/2025 cita el presupuesto precautorio que el INE aprobó para organizarla ($13,205.1 millones, con una eventual consulta popular incluida), '
+     'pero eso es lo que pidió, no lo que gastó. El informe del gasto ejercido existe en los reportes del INE y la plataforma aún no lo integra.',
+     PLATAFORMA, 'https://www.ine.mx/transparencia/', 'Transparencia del INE',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-eleccion.html', 'Datos · Poder Judicial · La elección judicial')]),
+    ('judicial-fideicomisos-monto', 'Poderes', 'Cuánto dinero devolvieron a la Tesorería los fideicomisos extinguidos del Poder Judicial',
+     'La reforma judicial (transitorio décimo, DOF 15-09-2024) ordenó extinguirlos y enterar sus recursos a la Tesorería en 90 días, sin decir cuánto había. '
+     'Las cifras que circulan («$15,434 millones en 13 fideicomisos») no aparecen en el decreto, y la plataforma aún no ha cotejado el informe oficial del entero.',
+     PLATAFORMA, 'https://www.gob.mx/tesofe', 'Tesorería de la Federación',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-presupuesto.html', 'Datos · Poder Judicial · El presupuesto')]),
     ('predial-ocde', 'Estados y municipios', 'El predial como parte del PIB: 0.16% en México y 1.0% en la OCDE',
      'Las dos cifras vienen de las Estadísticas Tributarias de la OCDE, pero la plataforma no guardó el cuadro ni la edición de donde salieron y no pudo volver a abrirlo para cotejarlas. '
      'Quedan como pendientes hasta integrar el documento.',

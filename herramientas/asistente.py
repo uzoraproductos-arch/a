@@ -446,9 +446,12 @@ def _charla(d):
     # El Poder Legislativo y las elecciones (23-10-2026), cotejados contra la
     # Constitución, la LGIPE, el INE y el INEGI; la Enciclopedia solo guió los temas.
     import asistente_legislativo
+    # El Poder Judicial (23-10-2026), cotejado contra la Constitución, los
+    # acuerdos del INE, el Manual de remuneraciones y el PEF 2026.
+    import asistente_judicial
     return {'nota': nota, 'met': met, 'edo': edo, 'cargos': cargos, 'smin': smin, 'adm': adm, 'admet': admet, 'expide': EXPIDE,
             'mapa': 'numeros-mapa-del-gasto-federalizado.html', 'num': num, 'datos': asistente_datos.datos(d, num, D),
-            'leg': asistente_legislativo.legislativo()}
+            'leg': asistente_legislativo.legislativo(), 'jud': asistente_judicial.judicial(d)}
 
 
 def escribir_base():

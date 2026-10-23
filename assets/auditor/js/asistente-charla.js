@@ -1029,6 +1029,42 @@
       return null;
     }
 
+    /* ---------- El Poder Judicial de la Federación (23-10-2026) ---------- */
+    var JUD = D.jud || null;
+    function judTema(k, antes) {
+      var x = JUD.t[k];
+      return { html: (antes || '') + x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug };
+    }
+    function judResp(t) {
+      if (!JUD) return null;
+      var pj = /judicial|judicatura|\bpjf\b|suprema corte|\bscjn\b|la corte\b|\bjuez|\bjueces|juezas?\b|magistrad|ministr[oa]s?\b/;
+      if (/fideicomis/.test(t) && pj.test(t)) return judTema('fideicomisos');
+      if (/haber(es)? de retiro|pension(es)? (vitalicia|de (los )?ministr)|liquidacion(es)? de (los )?(jueces|ministr|magistrad)/.test(t)) return judTema('retiro');
+      if (/eleccion|elegir|elegimos|votar|vota\b|votamos|votaron|eligen|elige|eligieron|votacion|comicios|urnas/.test(t) &&
+          /judicial|juez|jueces|juezas|magistrad|ministr|la corte|suprema corte/.test(t)) {
+        if (/2028|proxim|siguiente|segunda|2027|cuando (sera|es|toca|va a ser|vuelve)|falta/.test(t)) return judTema('eleccion2028');
+        return judTema('eleccion2025');
+      }
+      if (/(cuanto|cuantos).*(lleva|ha|han|llevan) (gastado|ejercido)|avance del gasto/.test(t) && /corte|scjn/.test(t)) return judTema('scjn_gasto');
+      if (/en que se (va|gasta|usa)|como se reparte|a donde va/.test(t) && /poder judicial|judicatura|ramo 03/.test(t)) return judTema('presupuesto');
+      if (/(gana|ganan|sueldo|sueldos).*(mas que|arriba de|tope).*(president|127)|tope (del|de los) (sueldos|127)|articulo 127|sueldos del poder judicial|tabulador del poder judicial/.test(t)) return judTema('sueldos');
+      if (DINERO.test(t)) return null;
+      if (/quien(es)? (preside|encabeza|dirige)|president[ea] de la (suprema )?corte|quien es (el|la) president[ea]/.test(t) && /corte|scjn|ministr/.test(t)) return judTema('corte', JUD.t.corte.lider);
+      if (/quienes son (los|las) ministr|quienes (integran|forman|estan en) la (suprema )?corte|nombres? de (los|las) ministr|ministr[oa]s (actuales|electos|electas)|quien(es)? (gano|ganaron) .*corte/.test(t)) return judTema('ministros');
+      if (/requisitos?|que se necesita|como (llego|llegar|puedo ser)|para ser/.test(t) && /ministr|juez|jueza|magistrad/.test(t)) return judTema('requisitos');
+      if (/cuant[oa]s (ministr|integrantes)|ministr[oa]s (tiene|hay)|como (esta|se) (integra|compone|forma) la (suprema )?corte|como funciona la (suprema )?corte|salas de la corte|cuanto dura(n)? (un|una|el|la|los|las) ministr|integracion de la (suprema )?corte/.test(t)) return judTema('corte');
+      if (/cuant[oa]s circuitos|circuitos judiciales|que es un circuito judicial|mapa judicial/.test(t)) return judTema('circuitos');
+      if (/tribunal de disciplina|denunci\w* a (un|una|los) (juez|jueza|jueces|magistrad|ministr)|queja contra (un|una) (juez|jueza|magistrad)|quien (castiga|sanciona) a (los )?(jueces|juezas|magistrad|ministr)/.test(t)) return judTema('disciplina');
+      if (/organo de administracion judicial|\boaj\b/.test(t)) return judTema('oaj');
+      if (/tribunal electoral|\btepjf\b|sala superior/.test(t)) return judTema('tepjf');
+      if (/consejo de la judicatura|\bcjf\b|reforma judicial|(quien|como) .*(forma|integra|compone|estructura).*poder judicial|estructura del poder judicial|organos? del poder judicial|organigrama del poder judicial|que es el poder judicial/.test(t)) return judTema('estructura');
+      if (/(que es|en que consiste|como funciona|como (pido|presento|promuevo)) (el |un )?(juicio de )?amparo|amparo (directo|indirecto)|juicio de amparo|ampararme|me puedo amparar/.test(t)) return judTema('amparo');
+      if (/acci(on|ones) de inconstitucionalidad|controversias? constitucional/.test(t)) return judTema('controversias');
+      if (/jurisprudencia|declaratoria general|obliga a (todos )?los (jueces|tribunales)/.test(t)) return judTema('jurisprudencia');
+      if (/(cuanto|cuando) (tarda|dura|debe tardar)|plazo (para|de)/.test(t) && /juicio|sentencia|amparo|jueces|juez/.test(t)) return judTema('plazos');
+      return null;
+    }
+
     function lista69(t) {
       var pag = B.fichas.filter(function (f) { return f.t === 'pagina' && f.ir && f.ir[0] === 'herramienta-inspector-efos.html'; })[0];
       var d = (DT.desc || []).filter(function (x) { return /69-B/.test(x.n); })[0];
@@ -1165,6 +1201,9 @@
       cuantos = cuantos ? Math.min(+cuantos, 32) : (/\b(los|cuales|que estados|estados que|municipios que|lista|ranking|top)\b/.test(t) ? 5 : 1);
 
       /* El Poder Legislativo y las elecciones: curules, sesiones, fechas y reformas. */
+      /* El Poder Judicial: la Corte, los circuitos, la elección, el amparo. */
+      var rj = judResp(t);
+      if (rj) return fin(rj, { tipo: 'jud' });
       if (LEG && sigue && ctx.tipo === 'legcong' && es.length === 1 && !DINERO.test(t)) return fin(congresoLocal(es[0]), { tipo: 'legcong' });
       var rl = legResp(t, es, dir, cuantos);
       if (rl) return fin(rl, { tipo: rl.tit && rl.tit.indexOf('Congreso de ') === 0 ? 'legcong' : 'leg' });

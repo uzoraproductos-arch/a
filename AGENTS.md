@@ -281,7 +281,13 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   son millones de pesos llevan su unidad (`un`) y su frase (`fr`). El Poder Legislativo
   y las elecciones, por `herramientas/asistente_legislativo.py`, cotejado
   contra la Constitución, la LGIPE, el INE y el INEGI (nunca contra la
-  Enciclopedia, que solo sirve de guía de temas).
+  Enciclopedia, que solo sirve de guía de temas). El Poder Judicial, por
+  `herramientas/asistente_judicial.py`, cotejado contra la Constitución, los
+  acuerdos del INE (INE/CG563/2025 e INE/CG564/2025), el Manual de
+  remuneraciones del PJF y el PEF 2026. Los dos Poderes viven además en la
+  pestaña Datos (`datos-poder-legislativo.html`, `datos-poder-judicial.html`),
+  una página por grupo de temas, armadas con el mismo texto del bot
+  (`PAGINAS` de cada módulo).
 - **Responde como chat:** claro, corto y contundente, con la cifra, qué
   quiere decir y su fuente a la vista. Cada respuesta con datos lleva
   **«Saber más»**, que abre la página de la plataforma donde está la
