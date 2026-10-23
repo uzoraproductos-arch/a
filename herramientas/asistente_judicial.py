@@ -314,7 +314,7 @@ def judicial(d):
                _o('Jornada el primer domingo de junio de 2025 y protesta el 1 de septiembre (transitorio segundo)', {'tx': TRANS, 'url': CPEUM['url']}, 'el primer domingo de junio de 2025 cayó en día 1'),
                _o('Campañas sin financiamiento ni precampañas (art. 96)', CPEUM),
                _o('Presupuesto precautorio del INE, acuerdo INE/CG2321/2024 (antecedente XIV)', INE563),
-               {'que': 'Participación ciudadana final', 'e': 'pendiente', 'p': 'judicial-2025-participacion', 'fu': {'tx': 'INE, Cómputos Distritales Judiciales 2025', 'url': 'https://computospj2025.ine.mx/'}},
+               {'que': 'Participación ciudadana final', 'e': 'pendiente', 'p': 'judicial-2025-participacion', 'fu': {'tx': 'INE, cómputos distritales', 'url': 'https://www.ine.mx/voto-y-elecciones/computos-distritales/'}},
                {'que': 'Cuánto costó al final', 'e': 'pendiente', 'p': 'judicial-2025-costo', 'fu': {'tx': 'INE, transparencia', 'url': 'https://www.ine.mx/transparencia/'}}],
         'ci': [{'v': '881', 'etq': 'cargos elegidos en 2025', 'e': 'oficial'}, {'v': '1 de junio de 2025', 'etq': 'jornada', 'e': 'derivado'}],
         'sug': ['¿Cuándo es la próxima elección judicial?', '¿Quiénes son los ministros de la Corte?', '¿Cuántos circuitos judiciales hay?']}

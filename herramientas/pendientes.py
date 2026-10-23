@@ -142,9 +142,10 @@ PROPIOS = [
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-legislativo-elecciones.html', 'Datos · Poder Legislativo · Las elecciones')]),
     # El Poder Judicial en el bot y en Datos (23-10-2026).
     ('judicial-2025-participacion', 'Elecciones', 'Cuánta gente votó en la elección judicial del 1 de junio de 2025 (participación ciudadana final)',
-     'El INE publica la participación en su sitio de cómputos de la elección judicial, pero la plataforma no lo pudo abrir con conexión verificada y sus acuerdos '
-     'de validez (INE/CG563/2025 e INE/CG564/2025) no traen el porcentaje. Las cifras de prensa («12.7 %», «13 %») no se publican mientras no se cotejen con el INE.',
-     PLATAFORMA, 'https://computospj2025.ine.mx/', 'Cómputos Distritales Judiciales 2025 (INE)',
+     'El INE publica la participación en su página de cómputos distritales, pero el entorno donde se arma la plataforma no puede abrir los sitios del INE, '
+     'y los acuerdos del INE que sí publica el Diario Oficial (INE/CG563/2025, INE/CG564/2025, INE/CG568/2025, INE/CG574/2025 e INE/CG1529/2025) no traen el porcentaje nacional. '
+     'Las cifras de prensa («12.7 %», «13 %») no se publican mientras no se cotejen con el INE.',
+     PLATAFORMA, 'https://www.ine.mx/voto-y-elecciones/computos-distritales/', 'Cómputos distritales (INE)',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-eleccion.html', 'Datos · Poder Judicial · La elección judicial')]),
     ('judicial-2025-costo', 'Elecciones', 'Cuánto costó al final la elección judicial de 2025',
      'El acuerdo INE/CG563/2025 cita el presupuesto precautorio que el INE aprobó para organizarla ($13,205.1 millones, con una eventual consulta popular incluida), '
