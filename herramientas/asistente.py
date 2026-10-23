@@ -419,8 +419,11 @@ def _charla(d):
     admet = {k: {'n': D['metricas'][k]['tit'], 'u': D['metricas'][k]['u']} for k in claves}
     import insp_nota
     nota = {'cat': insp_nota.catalogo_lector(d), 'fiscal': insp_nota.FISCAL, 'temas': insp_nota._temas(), 'pagina': insp_nota.PAGINA}
+    # Las cifras de la pestaña Números (23-10-2026): ingresos, gasto, ramos,
+    # gasto federalizado, Poderes, Paquete 2027 y Cuenta Pública.
+    import asistente_numeros
     return {'nota': nota, 'met': met, 'edo': edo, 'cargos': cargos, 'smin': smin, 'adm': adm, 'admet': admet, 'expide': EXPIDE,
-            'mapa': 'numeros-mapa-del-gasto-federalizado.html'}
+            'mapa': 'numeros-mapa-del-gasto-federalizado.html', 'num': asistente_numeros.datos(d)}
 
 
 def escribir_base():
@@ -446,6 +449,8 @@ EJEMPLOS = [
     ('¿Cuánta lana le llega a Zapopan?', '🏙️'),
     ('Compara Nuevo León con Jalisco', '⚖️'),
     ('¿Cuánto gana un diputado?', '💰'),
+    ('¿Cuánto se recauda de IVA?', '🧾'),
+    ('¿En qué se gasta el presupuesto?', '🏛️'),
     ('¿Cuánta deuda dejó AMLO?', '🧾'),
     ('¿Qué es un pliego de observaciones?', '📘'),
     ('¿Cuánto es el 16 % de 2,500 millones?', '🧮'),

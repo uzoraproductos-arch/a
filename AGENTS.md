@@ -274,13 +274,16 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   las páginas y secciones se indexan solas al regenerar; las cifras
   estructuradas entran al bloque `dat` de `herramientas/asistente.py`
   (`_charla()`) o al catálogo de cifras (`insp_nota.catalogo()`), y se prueba
-  con una pregunta en el chat.
+  con una pregunta en el chat. Las cifras de la pestaña Números entran por
+  `herramientas/asistente_numeros.py`: un renglón por cifra, con su estado,
+  su documento y la página donde se lee (y debe leerse igual ahí).
 - **Responde como chat:** claro, corto y contundente, con la cifra, qué
   quiere decir y su fuente a la vista. La ficha técnica sellada solo se
   arma si el lector toca «Generar ficha técnica».
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).
+  Un redondeo solo coincide si no se aleja más de 10 % del documento.
 - **La regla editorial (§2) también lo manda.** No escribe cifras propias;
   todo cálculo va como `derivado` con su operación; lo que no tiene lo dice
   y lo anota en «Lo que aún no sé».

@@ -152,7 +152,8 @@
       return v;
     }
     var aprox = /cerca|alrededor|casi|aproximadamente|unos/.test(c.calif);
-    if (Math.abs(dif) <= c.tol || Math.abs(pct) <= 1) {
+    /* Un redondeo solo coincide si no esconde más de 10 % (23-10-2026: «2 billones» por 1.59 es redondeo, pero engaña). */
+    if ((Math.abs(dif) <= c.tol && Math.abs(pct) <= 10) || Math.abs(pct) <= 1) {
       v.tipo = 'verde'; v.tit = 'Coincide con el documento';
       v.porque = Math.abs(pct) <= 0.05 ? 'Es la misma cifra que publica el documento.'
         : 'La nota redondea ' + fmt(ref) + ' a «' + c.bruto + '»: el redondeo es correcto (diferencia de ' + Math.abs(pct).toFixed(2) + ' %).';
@@ -170,6 +171,10 @@
       v.porque = r > 1 && /billon/.test(plano(c.bruto))
         ? 'Parece el «billion» del inglés (mil millones) traducido como billón (un millón de millones). Con la unidad corregida, la cifra coincidiría.'
         : 'Parece que la nota confunde millones con miles de millones. Con la unidad corregida, la cifra se acercaría al documento.';
+      v.tips = ['unidad'];
+    } else if (Math.abs(dif) <= c.tol) {
+      v.tipo = 'ambar'; v.tit = 'Redondeo demasiado grueso';
+      v.porque = 'La nota redondea ' + fmt(ref) + ' a «' + c.bruto + '»: el redondeo es válido, pero se aleja ' + pctTx(pct) + ' del documento.';
       v.tips = ['unidad'];
     } else if (Math.abs(pct) <= 10) {
       v.tipo = 'ambar'; v.tit = 'Se acerca, pero no es la misma cifra';
