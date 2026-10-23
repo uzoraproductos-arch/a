@@ -314,32 +314,121 @@ def _paginas():
     return out
 
 
+def _charla(d):
+    """Los datos con que el bot conversa (pedido del autor, 23-10-2026: «que
+    funcione literalmente como un chat»): cada cifra en numero, con su estado
+    y su fuente, para que asistente-charla.js pueda ordenar, comparar y
+    sacar porcentajes sin escribir ninguna cifra propia. Los municipios no
+    van aqui: la pagina carga municipios-efipem.js."""
+    refs = {r['id']: r for r in d['referencias_legales']}
+    FE = d['fiscalEntidades']
+    C = FE['campos']
+    E = d['estados']
+
+    def fu(tx, rid=None, url=None):
+        return {'tx': limpio(tx), 'url': url or (refs.get(rid) or {}).get('url')}
+    sin = C['dep'].get('sinFuente', [])
+    import insp_radar
+    rad = insp_radar.datos(d['cuenta_publica_asf'])
+    # m: metrica -> nombre, unidad, estado, fuente, si se suma entre estados,
+    # y si «mas» es peor (para «el peor» y «el mejor»).
+    met = {
+        'deuda': {'n': 'deuda pública', 'u': 'mdp', 'e': 'oficial', 'suma': 1, 'peor': 'max',
+                  'fu': fu(sorted(set(e['deudaFuente'] for e in E), key=len)[0], 'ref-shcp-alertas')},
+        'ild': {'n': 'deuda entre ingresos de libre disposición', 'u': 'pct', 'e': 'oficial', 'peor': 'max',
+                'fu': fu(sorted(set(e['deudaFuente'] for e in E), key=len)[0], 'ref-shcp-alertas')},
+        'asf': {'n': 'monto por aclarar ante la ASF (Cuenta Pública 2024)', 'u': 'mdp', 'e': 'oficial', 'suma': 1, 'peor': 'max',
+                'fu': fu(E[0]['asfFuente'], 'ref-asf-mdb2024')},
+        'aud': {'n': 'auditorías de la ASF (Cuenta Pública 2024)', 'u': 'ent', 'e': 'oficial', 'suma': 1,
+                'fu': fu(E[0]['asfFuente'], 'ref-asf-mdb2024')},
+        'radar': {'n': 'pesos por aclarar de cada $100 que revisó la ASF (gobierno, municipios y otros entes del estado)', 'u': 'pesos2', 'e': 'derivado', 'peor': 'max',
+                  'fu': fu(E[0]['asfFuente'], 'ref-asf-mdb2024'), 'op': 'monto por aclarar ÷ monto auditado × 100', 'prom': round(rad['prom'], 2)},
+        'gasto': {'n': 'lo que recibe en 2026 por los Ramos 28 y 33', 'u': 'mdp', 'e': 'derivado', 'suma': 1,
+                  'fu': fu('Acuerdos de distribución de los Ramos 28 y 33 (DOF 12-12-2025 y 09-07-2026)', 'ref-dof-distribucion-2026'),
+                  'op': 'Ramo 28 + Ramo 33 de la entidad'},
+        'r28': {'n': 'participaciones (Ramo 28) de 2026', 'u': 'mdp', 'e': 'oficial', 'suma': 1, 'fu': fu(C['ramo28']['fuente'], C['ramo28']['ref'])},
+        'r33': {'n': 'aportaciones (Ramo 33) de 2026', 'u': 'mdp', 'e': 'oficial', 'suma': 1, 'fu': fu(C['ramo33']['fuente'], C['ramo33']['ref'])},
+        'pc': {'n': 'Ramos 28 y 33 por habitante en 2026', 'u': 'pesos', 'e': 'derivado',
+               'fu': fu('Acuerdos de distribución (DOF) y población del CONAPO a mitad de 2026', url=C['pc']['url']),
+               'op': '(Ramo 28 + Ramo 33) ÷ población del CONAPO'},
+        'dep': {'n': 'dependencia de la Federación en 2024', 'u': 'pct', 'e': 'derivado', 'peor': 'max',
+                'fu': fu('INEGI, Estadística de Finanzas Públicas Estatales (EFIPEM) 2024', C['dep']['ref']),
+                'op': '(participaciones + aportaciones) ÷ ingresos de 2024 sin deuda × 100', 'sin': sin, 'pend': 'entidades-' + '-'.join(sin).lower()},
+        'propia': {'n': 'lo que recaudó por su cuenta en 2024', 'u': 'mdp', 'e': 'derivado', 'suma': 1, 'peor': 'min',
+                   'fu': fu('INEGI, Estadística de Finanzas Públicas Estatales (EFIPEM) 2024', C['recaudacionPropia']['ref']),
+                   'op': 'impuestos + cuotas de seguridad social + contribuciones de mejoras + derechos + productos + aprovechamientos', 'sin': sin,
+                   'pend': 'entidades-' + '-'.join(sin).lower()},
+        'pob': {'n': 'habitantes a mitad de 2026', 'u': 'gente', 'e': 'derivado', 'suma': 1,
+                'fu': fu('CONAPO, proyecciones de población 2020-2070', url=C['pob']['url'])},
+    }
+    edo = []
+    for e in E:
+        r = rad['est'].get(e['abbr'])
+        x = {'a': e['abbr'], 'n': e['name'], 'deuda': e.get('deuda'), 'ild': e.get('deudaIld'), 'sem': e.get('semaforoDeuda'),
+             'asf': e.get('asfMontoObservado'), 'aud': e.get('asfAuditorias'), 'radar': round(r['v'][0], 2) if r else None,
+             'gasto': e['gasto'], 'r28': e['ramo28'], 'r33': e['ramo33'], 'pc': e['pc'], 'pob': e.get('pobPersonas')}
+        for k in ('dep', 'propia'):
+            x[k] = None if e['abbr'] in sin else e[{'dep': 'dep', 'propia': 'recaudacionPropia'}[k]]
+        edo.append(x)
+
+    # Lo que gana cada cargo, contra el salario minimo.
+    cs = d['comparador_salarial']
+    cargos = []
+    for c in cs['cargos']:
+        fx = cs['fuentes'].get(c['fuente'], {})
+        cargos.append({'id': c['id'], 'n': c['cargo'], 'min': c['mensual'].get('min'), 'max': c['mensual']['max'], 'e': c['mensualEstado'],
+                       'anual': c['anual'], 'ea': c['anualEstado'], 'op': limpio(c.get('anualOperacion')),
+                       'fu': {'tx': limpio(fx.get('corto', c['fuente'])), 'url': fx.get('url')}})
+    sm = d['calculadora_civica']['parametros']['salario_minimo']
+    smin = {'dia': sm['general'], 'mes': sm['mensual_general'], 'fu': fu(sm['fuente'], 'ref-conasami2026')}
+
+    # Las administraciones, de 1989 a la fecha (las mismas cifras con que se
+    # expide su estado de cuenta).
+    s = open(os.path.join(RAIZ, EXPIDE), encoding='utf-8').read()
+    D = json.loads(re.search(r'id="rdDatos">(.*?)</script>', s, re.S).group(1))
+    claves = ('ingresos_pib', 'gasto_pib', 'inversion_pib', 'costo_financiero_pib', 'costo_financiero_mdp', 'deuda_ini', 'deuda_fin',
+              'deuda_cambio', 'asf_aud', 'asf_acl', 'asf_rec')
+    adm = []
+    for a in D['admins']:
+        V = D['valores'].get(a['id'], {})
+        v = {}
+        for k in claves:
+            x = V.get(k)
+            if x and x.get('v') is not None:
+                g = D['fuentes'].get((x.get('f') or [None])[0]) or {}
+                v[k] = {'v': x['v'], 'e': x.get('est') or 'oficial', 'op': limpio(x.get('op')), 'fu': {'tx': g.get('corto', ''), 'url': g.get('url')}}
+        adm.append({'id': a['id'], 'n': a['n'], 'c': a['c'], 'ini': a['ini'], 'a': a['a'], 'curso': a.get('curso'), 'aviso': limpio(a.get('aviso')), 'v': v})
+    admet = {k: {'n': D['metricas'][k]['tit'], 'u': D['metricas'][k]['u']} for k in claves}
+    return {'met': met, 'edo': edo, 'cargos': cargos, 'smin': smin, 'adm': adm, 'admet': admet, 'expide': EXPIDE,
+            'mapa': 'numeros-mapa-del-gasto-federalizado.html'}
+
+
 def escribir_base():
     import pendientes
     d = pendientes.db()
     fichas = _fichas(d) + _pendientes() + _paginas()
-    mun = _fichas_tecnicas(d)[1]
     cuenta = {}
     for f in fichas:
         cuenta[f['t']] = cuenta.get(f['t'], 0) + 1
-    cuenta['municipio'] = len(mun)
+    cuenta['municipio'] = len(_fichas_tecnicas(d)[1])
     js = ('/* Auditavisión · Base de fichas de «Pregúntale al Auditor». La escribe\r\n'
           '   herramientas/asistente.py desde window.AUDIT_DB, el Registro de\r\n'
           '   pendientes y las páginas generadas: no se edita a mano. */\r\n'
-          'window.AUDITOR_BASE = ' + json.dumps({'fichas': fichas, 'mun': mun, 'munFuente': 'INEGI, Estadística de Finanzas Públicas Estatales y Municipales (EFIPEM), ejercicio 2024', 'cuenta': cuenta}, ensure_ascii=False, separators=(',', ':')) + ';\r\n')
+          'window.AUDITOR_BASE = ' + json.dumps({'fichas': fichas, 'dat': _charla(d), 'cuenta': cuenta}, ensure_ascii=False, separators=(',', ':')) + ';\r\n')
     open(BASE_JS, 'wb').write(js.encode('utf-8'))
     return cuenta
 
 
+# Preguntas de ejemplo, dichas como se habla (23-10-2026).
 EJEMPLOS = [
-    ('¿Qué es un pliego de observaciones?', '📘'),
     ('¿Cuánto debe Jalisco?', '🗺️'),
-    ('Tren Maya', '🚅'),
-    ('¿Cuánto gana la presidenta?', '💰'),
-    ('¿Qué falta saber del huracán Otis?', '⏳'),
-    ('¿Dónde veo la lista negra del SAT?', '🧾'),
-    ('¿Quién sanciona la corrupción?', '⚖️'),
-    ('¿Cuándo sale la próxima entrega de la ASF?', '📡'),
+    ('¿Qué estado debe más?', '📊'),
+    ('¿Cuánta lana le llega a Zapopan?', '🏙️'),
+    ('Compara Nuevo León con Jalisco', '⚖️'),
+    ('¿Cuánto gana un diputado?', '💰'),
+    ('¿Cuánta deuda dejó AMLO?', '🧾'),
+    ('¿Qué es un pliego de observaciones?', '📘'),
+    ('¿Cuánto es el 16 % de 2,500 millones?', '🧮'),
 ]
 
 
@@ -351,14 +440,14 @@ def pagina(cuenta, canal=''):
         <div class="pa-chat">
           <div class="pa-chat-cab">
             <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="52" height="40">
-            <div><b>Pregúntale al Auditor</b><small>Bot interno de Auditavisión · responde con %s fichas verificadas</small></div>
+            <div><b>Pregúntale al Auditor</b><small>El chat de Auditavisión · contesta con datos oficiales</small></div>
           </div>
           <ol class="pa-hilo" id="paHilo" aria-live="polite">
             <li class="pa-msg pa-bot">
               <img class="pa-ava" src="assets/auditor/img/logo-auditavision.svg" alt="" width="36" height="28">
               <div class="pa-burbuja">
-                <p>¡Hola! Pregúntame lo que quieras sobre el dinero público: <b>un término</b>, <b>un estado</b>, <b>un caso</b>, <b>una ley</b> o <b>dónde encontrar algo</b> en la plataforma.</p>
-                <p>Te contesto con una <b>nota técnica sellada</b>, armada solo con datos que ya verificamos, con su fuente y su estado. Si no lo tengo, te lo digo: aquí no se inventa nada.</p>
+                <p>¡Hola! Soy el Auditor. Pregúntame lo que quieras del dinero público, como se lo preguntarías a un amigo: <b>cuánto debe tu estado</b>, <b>cuánta lana le llega a tu municipio</b>, <b>cuánto gana un diputado</b> o <b>qué significa</b> algún término.</p>
+                <p>Te contesto en corto y con datos oficiales. Si necesitas el respaldo completo, toca <b>«Generar ficha técnica»</b> en mi respuesta.</p>
               </div>
             </li>
           </ol>
@@ -367,22 +456,23 @@ def pagina(cuenta, canal=''):
           </div>
           <form class="pa-form" id="paForm" autocomplete="off">
             <label class="sr-only" for="paPregunta">Tu pregunta</label>
-            <input id="paPregunta" type="text" maxlength="200" placeholder="Escribe tu pregunta…" required>
-            <button type="submit">Preguntar ➔</button>
+            <input id="paPregunta" type="text" maxlength="200" placeholder="Pregúntame lo que quieras…" required>
+            <button type="submit">Enviar ➔</button>
           </form>
         </div>
         <aside class="pa-como">
-          <p class="pa-beta"><b>🛠️ En mejora continua.</b> El bot crece con la plataforma: cada ficha, cifra y página que integramos la vuelve más precisa. Si algo no lo encuentra, <a href="comunidad.html">cuéntanos</a> y lo agregamos.</p>
-          <h3>Cómo responde</h3>
+          <h3>Cómo platicar conmigo</h3>
           <ol>
-            <li><b>Busca</b> tu pregunta entre %s fichas de la plataforma: %d términos del glosario, %d expedientes, %d entidades, %d sueldos de cargos públicos, %d fuentes oficiales, %d pendientes, %d páginas y %d secciones.</li>
-            <li><b>Arma la nota técnica</b> con la ficha que mejor responde: el texto, las cifras con su estado (<span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">derivado</span> <span class="est-chip est-pendiente">pendiente</span>) y sus fuentes.</li>
-            <li><b>Justifica cada cifra</b> por su clasificación: si es <b>oficial</b>, de qué documento sale; si es <b>derivada</b>, con qué operación (y, cuando solo hay aproximación, el rango: mínimo, máximo y punto medio, cada cota con su fuente); si está <b>pendiente</b>, por qué falta, a quién le toca publicarla y el enlace donde debería estar.</li>
-            <li><b>La sella</b> con un folio y una huella digital (SHA-256), como el Estado de Cuenta: si alguien cambia una letra, la huella ya no coincide.</li>
+            <li><b>Escríbeme como hablas.</b> Entiendo «lana», «varo», «¿cuánto se clavaron?», siglas como CDMX o Edomex, y preguntas que siguen a la anterior: «¿y Nuevo León?», «¿y por habitante?», «¿y el que menos?».</li>
+            <li><b>Te contesto en corto:</b> la cifra, qué quiere decir y en qué lugar queda. Sé de los 32 estados, de los municipios, de los sueldos de los cargos públicos, de cada sexenio desde 1989, de %s términos del glosario y de las páginas de la plataforma.</li>
+            <li><b>Saco cuentas:</b> ordeno, comparo, sumo y saco porcentajes y márgenes. Cuando hago una cuenta, te digo cuál fue.</li>
+            <li><b>Toca «📎 De dónde sale»</b> para ver la fuente de cada cifra y su estado: <span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">derivado</span> <span class="est-chip est-pendiente">pendiente</span>.</li>
+            <li><b>¿Necesitas el respaldo?</b> «🧾 Generar ficha técnica» arma la nota técnica con folio y huella digital (SHA-256), como el Estado de Cuenta.</li>
           </ol>
+          <p class="pa-beta"><b>🛠️ En mejora continua.</b> Cada dato que integra la plataforma me vuelve más preciso. Si algo no lo sé, <a href="comunidad.html">cuéntanos</a> y lo agregamos.</p>
           <section class="pa-pendq" id="paSinResp" aria-labelledby="paSinRespT">
             <h3 id="paSinRespT">Lo que aún no sé</h3>
-            <p>Cuando no encuentro respuesta, o me dices que la nota no era lo que buscabas, anoto tu pregunta aquí. Esa lista nos dice qué fichas agregar primero.</p>
+            <p>Cuando no encuentro respuesta, o me dices que no era lo que buscabas, anoto tu pregunta aquí. Esa lista nos dice qué agregar primero.</p>
             <p class="pa-chico" id="paSinRespVacio">Todavía no hay preguntas anotadas en este navegador.</p>
             <ol id="paSinRespLista" hidden></ol>
             <p class="pa-pendq-acc" id="paSinRespAcc" hidden>
@@ -392,8 +482,7 @@ def pagina(cuenta, canal=''):
             </p>
             <p class="pa-chico" id="paSinRespNota">La lista se guarda solo en tu navegador: nadie más la ve y no se envía sola. Para hacérnosla llegar, cópiala y pégala en <a href="comunidad-tema.html">Comunidad › Un tema que deberíamos investigar</a>.</p>
           </section>
-          <p class="pa-aviso"><b>Es un bot interno, no una inteligencia artificial generativa.</b> No escribe cifras por su cuenta ni consulta servicios de fuera: tu pregunta no sale de tu navegador. Solo encuentra y ordena lo que la plataforma ya publicó con su documento.</p>
+          <p class="pa-aviso"><b>Platico como chat, pero no invento.</b> No soy una inteligencia artificial que redacta: entiendo tu pregunta y contesto solo con cifras que la plataforma ya publicó con su documento (%s fichas y %s municipios). Si no lo tengo, te lo digo. Tu pregunta no sale de tu navegador.</p>
         </aside>
-      </div>''' % (html.escape(canal, quote=True), format(total, ','), ej, format(total, ','), cuenta.get('glosario', 0), cuenta.get('expediente', 0),
-                   cuenta.get('entidad', 0), cuenta.get('cargo', 0), cuenta.get('fuente', 0), cuenta.get('pendiente', 0),
-                   cuenta.get('pagina', 0), cuenta.get('seccion', 0))
+      </div>''' % (html.escape(canal, quote=True), ej, format(cuenta.get('glosario', 0), ','),
+                 format(total - cuenta.get('municipio', 0), ','), format(cuenta.get('municipio', 0), ','))

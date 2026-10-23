@@ -1,9 +1,12 @@
 /* Auditavisión · Herramientas › Modo Inspector › «Pregúntale al Auditor»
    (bot interno, 11-10-2026). La página la escribe herramientas/asistente.py
    y las fichas llegan en window.AUDITOR_BASE (asistente-base.js): aquí no se
-   escribe ninguna cifra. Este archivo solo busca la ficha que mejor responde
-   la pregunta y la entrega como nota técnica sellada (folio + huella
-   SHA-256, como el Estado de Cuenta). Si ninguna ficha responde, lo dice. */
+   escribe ninguna cifra. Desde el 23-10-2026 (pedido del autor) contesta
+   como un chat: asistente-charla.js entiende la pregunta y responde en
+   corto; si no puede, este archivo busca la ficha que mejor responde y la
+   dice en corto. La nota técnica sellada (folio + huella SHA-256, como el
+   Estado de Cuenta) solo se arma si el lector toca «Generar ficha técnica».
+   Si ninguna ficha responde, lo dice. */
 (function () {
   'use strict';
 
@@ -12,13 +15,19 @@
   var form = document.getElementById('paForm');
   var campo = document.getElementById('paPregunta');
   if (!B || !hilo || !form || !campo) return;
-  /* Los municipios llegan compactos (asistente.py, 21-10-2026): aquí se arma su ficha. */
-  (B.mun || []).forEach(function (m) {
-    B.fichas.push({ t: 'municipio', tit: m[1] + ', ' + m[2],
-      txt: 'Su ficha técnica: cuentas de 2024 ante el INEGI, FAIS y FORTAMUN ante Hacienda, quién gobernó y lo que observó la ASF.',
-      ci: m[3] === null ? [] : [{ v: '$' + m[3].toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp', etq: 'ingresos 2024 (INEGI)', e: 'oficial' }],
-      fu: m[3] === null ? [] : [{ tx: B.munFuente, url: 'https://www.inegi.org.mx/programas/finanzas/' }],
-      ir: ['herramienta-inspector-entes.html#ente=municipal:' + m[0], 'su ficha técnica'], k: 'municipio alcaldia ayuntamiento ' + m[2] });
+  /* Los municipios salen del padrón del INEGI (municipios-efipem.js, que la
+     página carga): aquí se arma la ficha de cada uno. */
+  var MU = window.AUDIT_MUNICIPIOS, NOMBRE = {};
+  ((B.dat && B.dat.edo) || []).forEach(function (e) { NOMBRE[e.a] = e.n; });
+  if (MU && MU.ent) Object.keys(MU.ent).forEach(function (ab) {
+    MU.ent[ab].lista.forEach(function (r) {
+      var ing = r.length > 2 ? r[2] / 1e6 : null, en = NOMBRE[ab] || ab;
+      B.fichas.push({ t: 'municipio', tit: r[1] + ', ' + en,
+        txt: 'Su ficha técnica: cuentas de 2024 ante el INEGI, FAIS y FORTAMUN ante Hacienda, quién gobernó y lo que observó la ASF.',
+        ci: ing === null ? [] : [{ v: '$' + ing.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp', etq: 'ingresos 2024 (INEGI)', e: 'oficial' }],
+        fu: ing === null ? [] : [{ tx: MU.fuente, url: MU.url }],
+        ir: ['herramienta-inspector-entes.html#ente=municipal:' + MU.ent[ab].cve + r[0], 'su ficha técnica'], k: 'municipio alcaldia ayuntamiento ' + en });
+    });
   });
 
   var LOGO = 'assets/auditor/img/logo-auditavision.svg';
@@ -28,7 +37,7 @@
     cargo: ['💼', 'Remuneración de un cargo'], seccion: ['📍', 'Sección de la plataforma'],
     autoridad: ['🏛️', 'Autoridad fiscalizadora'], entrega: ['📡', 'Seguimiento de la fiscalización'],
     estado: ['🧾', 'Estado de cuenta'], ficha: ['🏢', 'Ficha técnica de un ente'], municipio: ['🏙️', 'Ficha técnica de un municipio'],
-    cifra: ['📋', 'Cifra oficial del catálogo']
+    cifra: ['📋', 'Cifra oficial del catálogo'], calculo: ['🧮', 'Respuesta con datos de la plataforma']
   };
   var VACIAS = ('a al ante bajo con contra de del desde donde dónde cual cuál cuales cuáles como cómo el en entre es esta este esto ' +
     'ha hay la las le lo los me mi mas más muy no nos o para pero por porque que qué quien quién se sea ser si sí sin sobre son su sus ' +
@@ -72,7 +81,7 @@
   function idf(w) { return Math.log((F.length + 1) / ((df[w] || 0) + 1)) + 0.5; }
 
   function intencion(q) {
-    var n = norm(q);
+    var n = norm(q).replace(/[¿¡?!.,;:]/g, ' ');
     if (/^\s*(que|quien|cual)\s+(es|son|significa|era)\b|definicion|significa/.test(n)) return 'glosario';
     if (/\b(donde|en que pagina|como llego)\b/.test(n)) return 'pagina';
     if (/\b(falta|faltan|pendiente|no hay|por que no|no han publicado|no se sabe)\b/.test(n)) return 'pendiente';
@@ -190,10 +199,9 @@
       '<b>Nota técnica de Auditavisión</b>' +
       '<p>Folio <b class="pa-folio">calculando…</b> · Versión de la plataforma <b>' + esc(selloSitio()) + '</b></p>' +
       '<p class="pa-huella">Huella digital (SHA-256 de la ficha): <code>calculando…</code></p>' +
-      '<p class="pa-leyenda">La arma el bot interno con una ficha ya publicada en la plataforma; no la redacta una inteligencia artificial. ' +
+      '<p class="pa-leyenda">La arma el bot interno solo con datos ya publicados en la plataforma; no la redacta una inteligencia artificial. ' +
       '<b>No es un documento oficial.</b> El sello certifica que el contenido viene de la ficha citada y que no se ha alterado: si cambia una letra, la huella ya no coincide.</p>' +
-      '<p class="pa-acciones"><button type="button" class="pa-copiar">📋 Copiar la nota</button> ' +
-      '<button type="button" class="pa-copiar pa-noera" data-pa-q="' + esc(q) + '" data-pa-tit="' + esc(f.tit) + '">🤔 No era lo que buscaba</button></p>' +
+      '<p class="pa-acciones"><button type="button" class="pa-copiar">📋 Copiar la nota</button></p>' +
       '</div></footer></article>' + mas;
   }
 
@@ -252,32 +260,96 @@
   function agrega(clase, html, quieto) {
     var li = document.createElement('li');
     li.className = 'pa-msg ' + clase;
-    li.innerHTML = (clase === 'pa-bot' ? '<img class="pa-ava" src="' + LOGO + '" alt="" width="36" height="28">' : '') + '<div class="pa-burbuja">' + html + '</div>';
+    li.innerHTML = (clase.indexOf('pa-bot') === 0 ? '<img class="pa-ava" src="' + LOGO + '" alt="" width="36" height="28">' : '') + '<div class="pa-burbuja">' + html + '</div>';
     hilo.appendChild(li);
-    if (!quieto) li.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!quieto) li.scrollIntoView({ behavior: QUIETO ? 'auto' : 'smooth', block: 'nearest' });
     return li;
+  }
+
+  /* La conversación (asistente-charla.js) y las fichas que el lector puede
+     pedir como nota técnica. */
+  var charla = window.AuditorCharla ? window.AuditorCharla(B, { esc: esc, norm: norm }) : null;
+  var QUIETO = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var guardadas = [];
+  function chips(lista) {
+    return lista && lista.length ? '<div class="pa-mas">' + lista.map(function (o) {
+      var q = typeof o === 'string' ? o : o.tit.split(' (')[0], ico = typeof o === 'string' ? '' : '<span aria-hidden="true">' + (TIPO[o.t] || ['📄'])[0] + '</span> ';
+      var tx = typeof o === 'string' ? o : (o.tit.length > 70 ? o.tit.slice(0, 68) + '…' : o.tit);
+      return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc(q) + '">' + ico + esc(tx) + '</button>';
+    }).join('') + '</div>' : '';
+  }
+  function acciones(q, r) {
+    if (r.plat) return '';
+    var i = guardadas.push({ q: q, f: r.ficha }) - 1;
+    return '<p class="pa-acc">' +
+      (r.ficha ? '<button type="button" class="pa-boton pa-genera" data-pa-ficha="' + i + '">🧾 Generar ficha técnica</button>' : '') +
+      (r.ir ? '<a class="pa-boton pa-ver" href="' + esc(r.ir[0]) + '">Ver ' + esc(r.ir[1]) + ' ➔</a>' : '') +
+      '<button type="button" class="pa-boton pa-noera" data-pa-q="' + esc(q) + '" data-pa-tit="' + esc(r.ficha ? r.ficha.tit : '') + '">🤔 No era lo que buscaba</button></p>';
+  }
+
+  function respuesta(q) {
+    var r = charla && charla.contesta(q);
+    if (r) return r;
+    var res = buscar(q);
+    if (!res.length || res[0].s < 3) return { sin: res.slice(0, 3).map(function (x) { return x.f; }) };
+    var f = res[0].f, vistos = {}, otras = [];
+    /* Un nombre a secas («Tren Maya») pide el caso, no lo que falta de él. */
+    if (f.t === 'pendiente' && intencion(q) !== 'pendiente') {
+      var alt = res.slice(1, 6).filter(function (x) { return x.f.t !== 'pendiente' && x.s >= res[0].s * 0.8; })[0];
+      if (alt) f = alt.f;
+    }
+    /* «¿Qué es…?» lo contesta el glosario si tiene el término. */
+    if (f.t !== 'glosario' && intencion(q) === 'glosario') {
+      var gl = res.slice(0, 8).filter(function (x) { return x.f.t === 'glosario' && x.s >= res[0].s * 0.4; })[0];
+      if (gl) f = gl.f;
+    }
+    vistos[f.tit] = 1;
+    res.slice(1).forEach(function (x) { if (otras.length < 3 && !vistos[x.f.tit] && x.s > res[0].s * 0.35) { vistos[x.f.tit] = 1; otras.push(x.f); } });
+    r = charla ? charla.deFicha(f) : { html: '<p><b>' + esc(f.tit) + '.</b> ' + esc(f.txt) + '</p>', ficha: f, ir: f.ir };
+    r.sug = otras;
+    r.tambien = true;
+    return r;
   }
 
   function responde(q, quieto, ya) {
     q = String(q || '').trim().slice(0, 200);
     if (!q) return;
+    /* Ya empezó la plática: los ejemplos del arranque se guardan, como en cualquier chat. */
+    var ejs = document.querySelector('.pa-ejs');
+    if (ejs) ejs.hidden = true;
     agrega('pa-yo', '<p>' + esc(q) + '</p>', quieto);
-    var r = buscar(q);
-    if (!r.length || r[0].s < 3) {
-      agrega('pa-bot', sinRespuesta(q, r.slice(0, 3).map(function (x) { return x.f; })), quieto);
-      if (!ya) anota(q, 'sin');
-      return;
-    }
-    var f = r[0].f, vistos = {}, otras = [];
-    vistos[f.tit] = 1;
-    r.slice(1).forEach(function (x) { if (otras.length < 3 && !vistos[x.f.tit] && x.s > r[0].s * 0.35) { vistos[x.f.tit] = 1; otras.push(x.f); } });
-    var li = agrega('pa-bot pa-con-nota', nota(q, f, otras), quieto);
-    huella(f).then(function (hx) {
+    var r = respuesta(q);
+    var pinta = function (li) {
+      if (r.sin) {
+        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin);
+        if (!ya) anota(q, 'sin');
+        return;
+      }
+      li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r) +
+        (r.sug && r.sug.length ? (r.tambien ? '<p class="pa-mas-t">También te puede servir:</p>' : '') + chips(r.sug) : '');
+    };
+    if (quieto || QUIETO) { pinta(agrega('pa-bot', '', quieto)); return; }
+    var li = agrega('pa-bot pa-escribe', '<span class="pa-puntos" role="img" aria-label="Escribiendo"><i></i><i></i><i></i></span>');
+    setTimeout(function () { li.classList.remove('pa-escribe'); pinta(li); li.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 420);
+  }
+
+  /* «Generar ficha técnica»: la nota sellada, dentro de la misma respuesta. */
+  function generaFicha(b) {
+    var g = guardadas[+b.getAttribute('data-pa-ficha')];
+    if (!g || !g.f) return;
+    var cont = document.createElement('div');
+    cont.className = 'pa-ficha';
+    cont.innerHTML = nota(g.q, g.f, []);
+    b.closest('.pa-burbuja').appendChild(cont);
+    b.disabled = true;
+    b.textContent = '✅ Ficha técnica generada';
+    huella(g.f).then(function (hx) {
       var fol = hx ? folioDe(hx) : null;
-      Array.prototype.forEach.call(li.querySelectorAll('.pa-folio'), function (el) { el.textContent = fol || 'no disponible en este navegador'; });
-      li.querySelector('.pa-huella code').textContent = hx ? hx.replace(/(.{16})/g, '$1 ').trim() : 'no disponible en este navegador';
-      li.querySelector('.pa-sello-img').innerHTML = sello(fol);
+      Array.prototype.forEach.call(cont.querySelectorAll('.pa-folio'), function (el) { el.textContent = fol || 'no disponible en este navegador'; });
+      cont.querySelector('.pa-huella code').textContent = hx ? hx.replace(/(.{16})/g, '$1 ').trim() : 'no disponible en este navegador';
+      cont.querySelector('.pa-sello-img').innerHTML = sello(fol);
     });
+    cont.scrollIntoView({ behavior: QUIETO ? 'auto' : 'smooth', block: 'start' });
   }
 
   form.addEventListener('submit', function (ev) {
@@ -288,6 +360,8 @@
   document.getElementById('paApp').addEventListener('click', function (ev) {
     var b = ev.target.closest ? ev.target.closest('[data-pa-pregunta]') : null;
     if (b) { responde(b.getAttribute('data-pa-pregunta'), false, b.hasAttribute('data-pa-ya')); return; }
+    var gf = ev.target.closest ? ev.target.closest('.pa-genera') : null;
+    if (gf) { if (!gf.disabled) generaFicha(gf); return; }
     var ne = ev.target.closest ? ev.target.closest('.pa-noera') : null;
     if (ne) {
       if (!ne.disabled) anota(ne.getAttribute('data-pa-q'), 'noera', ne.getAttribute('data-pa-tit'));
@@ -317,7 +391,7 @@
     }
   });
   /* Para revisar cómo puntúa una pregunta desde la consola. */
-  window.AuditorBot = { buscar: buscar };
+  window.AuditorBot = { buscar: buscar, charla: charla };
   pintaLista();
   if (canal) document.getElementById('paSinRespNota').innerHTML = 'La lista se guarda solo en tu navegador y no se envía sola: con «Enviarlas a Auditavisión» nos la haces llegar tú.';
   var pre = new URLSearchParams(location.search).get('q');

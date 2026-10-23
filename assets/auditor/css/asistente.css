@@ -14,7 +14,7 @@
 .pa-hilo { list-style: none; margin: 0; padding: 18px; display: grid; gap: 14px; background: var(--pa-claro); min-height: 260px; }
 .pa-msg { display: flex; gap: 10px; align-items: flex-start; scroll-margin-top: 90px; }
 .pa-ava { flex: none; width: 40px; height: 40px; border-radius: 50%; background: #ffffff; padding: 5px 3px; object-fit: contain; box-sizing: border-box; box-shadow: 0 2px 8px rgba(0, 0, 0, .12); }
-.pa-burbuja { min-width: 0; max-width: 100%; background: #ffffff; border: 1px solid #dfe5f0; border-radius: 4px 16px 16px 16px; padding: 12px 16px; font-size: 15px; line-height: 1.55; color: #1c2a44; }
+.pa-burbuja { min-width: 0; max-width: 100%; background: #ffffff; border: 1px solid #dfe5f0; border-radius: 4px 16px 16px 16px; padding: 12px 16px; font-size: 16px; line-height: 1.55; color: #1c2a44; }
 .pa-burbuja p { margin: 0 0 8px; }
 .pa-burbuja p:last-child { margin-bottom: 0; }
 .pa-burbuja a { color: #1a56b8; }
@@ -25,9 +25,10 @@
 
 .pa-ejs, .pa-mas { display: flex; flex-wrap: wrap; gap: 8px; }
 .pa-ejs { padding: 12px 18px 0; }
+.pa-ejs[hidden] { display: none; }
 .pa-mas { margin-top: 10px; align-items: center; }
 .pa-mas > span { width: 100%; font-size: 13px; font-weight: 700; color: #44526b; }
-.pa-ej { font: 600 13.5px/1.3 Inter, system-ui, sans-serif; text-align: left; cursor: pointer; border: 1px solid #c9d2e3; background: #ffffff; color: #1c2a44; border-radius: 999px; padding: 8px 14px; min-height: 38px; }
+.pa-ej { font: 600 13.5px/1.3 Inter, system-ui, sans-serif; text-align: left; cursor: pointer; border: 1px solid #c9d2e3; background: #ffffff; color: #1c2a44; border-radius: 999px; padding: 8px 14px; min-height: 44px; }
 .pa-ej:hover, .pa-ej:focus-visible { border-color: var(--pa); background: #e9ecf1; }
 .pa-form { display: flex; gap: 10px; padding: 14px 18px 18px; }
 .pa-form input { flex: 1; min-width: 0; font: 500 16px/1.3 Inter, system-ui, sans-serif; padding: 12px 16px; border: 1px solid #c9d2e3; border-radius: 999px; }
@@ -106,4 +107,43 @@
   .pa-form { flex-direction: column; }
   .pa-sello { grid-template-columns: 1fr; justify-items: center; text-align: center; }
   .pa-nota { padding: 14px; }
+}
+
+/* La conversación (23-10-2026): respuestas en corto, «De dónde sale», el
+   botón «Generar ficha técnica» y el aviso de que el bot escribe. */
+.pa-bot .pa-burbuja { flex: 1; }
+.pa-resp ul.pa-lista, .pa-resp ol.pa-lista { margin: 0 0 8px; padding-left: 22px; display: grid; gap: 4px; }
+.pa-ojo { padding: 8px 12px; border-radius: 10px; background: #fff7ec; border: 1px solid #f0d9b5; color: #4a3a12; font-size: 15px; }
+.pa-dedonde { margin: 10px 0 0; border-top: 1px dashed #dfe5f0; padding-top: 6px; font-size: 14px; color: #33415c; }
+.pa-dedonde summary { cursor: pointer; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-height: 44px; font-weight: 700; color: #33415c; }
+.pa-dedonde summary span:first-child { margin-right: 4px; }
+.pa-dedonde ul { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 6px; line-height: 1.5; }
+.pa-dedonde a { overflow-wrap: anywhere; }
+.pa-acc { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; }
+.pa-dedonde[open] { padding-bottom: 6px; }
+.pa-boton { font: 700 14px/1.2 Inter, system-ui, sans-serif; cursor: pointer; border: 1px solid #c9d2e3; background: #ffffff; color: #1c2a44; border-radius: 999px; padding: 10px 16px; min-height: 44px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
+.pa-boton:hover, .pa-boton:focus-visible { border-color: var(--pa); background: #e9ecf1; }
+.pa-burbuja a.pa-boton { color: #1c2a44; }
+.pa-genera { background: var(--pa); border-color: var(--pa); color: #ffffff; }
+.pa-genera:hover, .pa-genera:focus-visible { background: #343a43; color: #ffffff; }
+.pa-genera:disabled { background: #e9ecf1; border-color: #c9d2e3; color: #33415c; cursor: default; }
+.pa-mas-t { margin: 12px 0 0; font-size: 14px; font-weight: 700; color: #44526b; }
+.pa-ficha { margin-top: 14px; }
+.pa-tabla { overflow-x: auto; margin: 0 0 8px; }
+.pa-tabla table { border-collapse: collapse; min-width: 100%; font-size: 15px; }
+.pa-tabla th, .pa-tabla td { padding: 8px 10px; border-bottom: 1px solid #e3e8f1; text-align: left; vertical-align: top; }
+.pa-tabla thead th { background: var(--pa-claro); color: #0b2a63; }
+.pa-tabla tbody th { font-weight: 600; color: #44526b; }
+.pa-tabla td { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pa-enlace { font: inherit; cursor: pointer; border: 0; background: none; padding: 0; color: #1a56b8; text-decoration: underline; min-height: 0; }
+.pa-escribe .pa-burbuja { flex: none; }
+.pa-puntos { display: inline-flex; gap: 5px; padding: 6px 2px; }
+.pa-puntos i { width: 8px; height: 8px; border-radius: 50%; background: #8a94a6; animation: pa-punto 1s infinite ease-in-out; }
+.pa-puntos i:nth-child(2) { animation-delay: .15s; }
+.pa-puntos i:nth-child(3) { animation-delay: .3s; }
+@keyframes pa-punto { 0%, 80%, 100% { opacity: .3; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { .pa-puntos i { animation: none; } }
+/* En escritorio el hilo corre por dentro, como en cualquier chat. */
+@media (min-width: 901px) {
+  .pa-hilo { max-height: 68vh; overflow-y: auto; overscroll-behavior: contain; }
 }
