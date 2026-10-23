@@ -1214,9 +1214,11 @@ def herramienta_asistente(bloque):
            '        </div>\n      </nav>' % (archivo, icono, titulo, INVESTIGACIONES, icono, HERR_DIVISION[rubro][0]))
     return {
         # Es la portada de la pestaña Auditor Virtual (23-10-2026): sin padres.
-        'archivo': ASISTENTE[0], 'menu': ASISTENTE[1], 'menu_archivo': 'herramientas.html',
-        'icono': '💬', 'titulo': ASISTENTE[1],
-        'lema': 'Auditor Virtual · el chat de Auditavisión', 'sin_icono_lema': True, 'icono_cab': '💬',
+        # Título «Auditor Virtual» (pedido del autor, 24-10-2026); el chat de
+        # adentro conserva su nombre, «Pregúntale al Auditor».
+        'archivo': ASISTENTE[0], 'menu': 'Auditor Virtual', 'menu_archivo': 'herramientas.html',
+        'icono': '💬', 'titulo': 'Auditor Virtual',
+        'lema': 'Pregúntale al Auditor · el chat de Auditavisión', 'sin_icono_lema': True, 'icono_cab': '💬',
         'entrada': '<b>%s.</b> %s' % (ASISTENTE[2], ASISTENTE[3]),
         'fondo': HERR_IMG[rubro], 'rubro': rubro,
         'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
