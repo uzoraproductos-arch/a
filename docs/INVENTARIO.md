@@ -10,7 +10,7 @@ La Enciclopedia queda fuera porque está congelada.
 | Páginas revisadas | 207 |
 | Páginas que solo redirigen | 25 |
 | Enlaces internos a archivos que no existen | 0 |
-| Módulos del motor que se abren desde páginas (`?ir=`) | 2 destinos |
+| Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
 
 ## Páginas
 
@@ -134,7 +134,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 33 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 25 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 36 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 152 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 214 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `informes-oficiales.html` | Informes oficiales · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
@@ -267,7 +267,6 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 | Destino | Veces enlazado |
 |---|---:|
 | `nota` | 1 |
-| `poderes` | 1 |
 
 ## Registro de pendientes
 

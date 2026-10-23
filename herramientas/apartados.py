@@ -4837,6 +4837,17 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('23-10-2026', 'El Poder Judicial y el Poder Legislativo viven en Datos, cada uno con su portada y una página por tema: quién es quién, la Suprema Corte, los sueldos, el presupuesto, la elección judicial y cómo decide; las Cámaras, el calendario, las elecciones y los congresos de los estados. Pregúntale al Auditor contesta sobre los dos.'),
+    ('23-10-2026', 'Cada respuesta de Pregúntale al Auditor trae «Saber más», que abre la página donde está el dato, y «Generar dictamen», que abre el dictamen pericial sellado en su propia página.'),
+    ('23-10-2026', 'Pregúntale al Auditor es el auditor de toda la plataforma: contesta como chat con las cifras de Números y de Datos, cada una con su fuente, y verifica lo que «dicen» o la liga de una nota contra el documento oficial.'),
+    ('22-10-2026', 'Costo Ambiental se reestructura: la parte informativa pasa a Datos → Medio ambiente, en nueve páginas, y la herramienta se queda con sus aplicaciones.'),
+    ('22-10-2026', 'Calculadora Cívica: Tu estado de cuenta se abre en cuatro páginas (tu ingreso, lo que te retienen, a dónde va cada peso y tu estado de cuenta), y el Estado de cuenta administrativo pasa a ser su quinta aplicación.'),
+    ('21-10-2026', 'Expedientes de casos de la ASF reúne lo que encontró la Auditoría Superior: cada capítulo abre su propia página, del monto por aclarar a quién más fiscaliza.'),
+    ('21-10-2026', 'Inversión y Megaobras queda en cuatro aplicaciones, y Contrasta una nota lee la liga, da un veredicto con semáforo y lo sella.'),
+    ('20-10-2026', 'Los emojis se ven ahora como íconos de trazo de un solo color en toda la plataforma.'),
+    ('16-10-2026', 'Costo Ambiental e Inversión y Megaobras abren cada aplicación en su propia página.'),
+    ('13-10-2026', 'Calculadora Cívica: Tú contra ellos y El reloj de la deuda en su propia página.'),
+    ('12-10-2026', 'Números: el Paquete Económico 2027 se abre en diez páginas, el Estado de Cuenta Cívico se llama Contexto dimensional y se abre en seis, y «El peso en el tiempo» del Radar se parte en tres.'),
     ('11-10-2026', 'Datos abiertos e Informes oficiales abren su propia página, y cada tarjeta, la suya: las descargas en CSV, la base municipal del INEGI, los informes de la Cuenta Pública y el diccionario de datos.'),
     ('11-10-2026', 'Nueva página de Donaciones en Participa: una alcancía que se llena a la vista de todos con cada donativo, y unas cuentas claras de lo que entra y lo que sale. El canal para donar se abre con el lanzamiento.'),
     ('11-10-2026', 'Garantías cívicas se parte en cuatro páginas, como Comunidad: la brújula que te dice a qué puerta tocar, las seis puertas oficiales, tus diez garantías y el reto ¿Mito o realidad?'),
@@ -4895,7 +4906,16 @@ NOVEDADES = [
 ]
 
 
-def _grupo(icono, titulo, enlaces, href=None):
+def _grupo(icono, titulo, enlaces, href=None, hijas=None):
+    if hijas:
+        # Debajo de cada enlace, sus subpaginas, si no estan ya en el grupo.
+        # Se sacan del diccionario al ponerlas: una pagina que se enlaza en
+        # dos grupos despliega sus subpaginas solo en el primero.
+        vistos, todo = set(e[0] for e in enlaces), []
+        for e in enlaces:
+            todo.append(e)
+            todo += [(h, '· ' + t, '') for h, t in hijas.pop(e[0], []) if h not in vistos]
+        enlaces = todo
     cab = ('<a href="%s">%s %s</a>' % (href, icono, titulo)) if href else '%s %s' % (icono, titulo)
     filas = '\n'.join('              <li><a href="%s">%s</a>%s</li>' % (h, t, ('<span>%s</span>' % d) if d else '')
                       for h, t, d in enlaces)
@@ -4912,16 +4932,41 @@ def _a_numeros(destino):
     return NUMEROS_ABRIR.get(m.group(1), 'sigue-el-dinero.html?abrir=' + m.group(1)) if m else destino
 
 
-def indice():
+def _hijas(base, ref):
+    """Las subpaginas de cada pagina del indice (pedido del autor,
+    23-10-2026): sin ellas, el indice se quedaba en las portadas. Salen de las
+    mismas listas que arman cada pagina, asi que una nueva aparece sola."""
+    import estado_cuenta, presupuesto_modulos, cc_ticket, insp_asf, datos_ambiente, asistente
+    import asistente_legislativo as al, asistente_judicial as aj
+    limpio = lambda t: re.sub('<[^>]+>', '', t)
+    return {
+        estado_cuenta.ARCHIVO: [(p['archivo'], limpio(p.get('menu') or p['titulo'])) for p in estado_cuenta.construir()[0]
+                                if p['archivo'] != estado_cuenta.ARCHIVO],
+        'numeros-paquete-2027.html': [(x[2], x[3]) for x in presupuesto_modulos.PE_PARTES],
+        cc_ticket.PORTADA: [(cc_ticket.paso_archivo(x[1]), x[3]) for x in cc_ticket.PASOS],
+        'herramienta-inspector-asf.html': [(p['archivo'], limpio(p['menu'])) for p in insp_asf.subpaginas(base, ref)],
+        ASISTENTE[0]: [(asistente.DICTAMEN, 'El dictamen pericial')],
+        'radar-peso.html': [(x[1], x[2]) for x in RADAR_PESO_PARTES],
+        datos_ambiente.PORTADA: [(x[1], x[3]) for x in datos_ambiente.PARTES],
+        al.PORTADA: [(x[0], x[2]) for x in al.PAGINAS],
+        aj.PORTADA: [(x[0], x[2]) for x in aj.PAGINAS],
+    }
+
+
+def indice(base, ref):
     import auditorias
+    import asistente_legislativo as al, asistente_judicial as aj
+    hijas = _hijas(base, ref)
+    def grupo(*a):
+        return _grupo(*a, hijas=hijas)
     au = {a[0]: a for a in auditorias.AUDITORIAS}
     ap = {a['archivo']: a for a in APARTADOS}
-    investigaciones = _rejilla([_grupo(ico, tit, [(auditorias.archivo(i), au[i][5], au[i][6]) for i in ids])
+    investigaciones = _rejilla([grupo(ico, tit, [(auditorias.archivo(i), au[i][5], au[i][6]) for i in ids])
                                 for ico, tit, ids in auditorias.TEMAS])
-    numeros = _rejilla([_grupo('🧾', 'El balance', [
+    numeros = _rejilla([grupo('🧾', 'El balance', [
         ('estado-de-cuenta.html', 'Contexto dimensional', '2024, 2026 y 2027 en cuatro dimensiones'),
         ('estado-de-cuenta-2024-2027.csv', 'Descarga el contexto dimensional en CSV', 'Con periodo, fuente y estado de cada renglón')])] +
-                       [_grupo(p['icono'], p['titulo'],
+                       [grupo(p['icono'], p['titulo'],
                                ([(ingreso_archivo(x), '· ' + x['nombre'], '') for x in auditorias.db()['panoramaErario']['ingresos']]
                                 if p['archivo'] == 'numeros-presupuesto.html' else []) +
                                ([(x[2], x[3], '') for x in GASTO_PARTES[:4]] +
@@ -4934,7 +4979,7 @@ def indice():
                         for p in NUMEROS_PAGINAS if p['archivo'] in [r[1] for r in NUMEROS_PARTES]])
     # El Modo Inspector se abre en dos tarjetas (11-10-2026): sus ocho
     # aplicaciones cuelgan de «Grandes investigaciones», y el bot va aparte.
-    herr = _rejilla([_grupo(h[2], h[3],
+    herr = _rejilla([grupo(h[2], h[3],
                             ([(INVESTIGACIONES, 'Grandes investigaciones', 'Las seis aplicaciones del inspector')]
                              if h[1] == 'inspector' else []) +
                             [(modulo_archivo(h[0], t[0]), ('· ' if h[1] == 'inspector' else '') + t[2], t[3]) for t in h[7]] +
@@ -4959,9 +5004,11 @@ def indice():
             enl += [('expedientes.html', 'Expedientes de casos de la ASF', 'Los casos por aclarar'),
                     ('comunidad.html', 'Comunidad', 'Propón temas, señala errores, comparte y fe de erratas')] + [
                     (c[1], '· ' + c[3], '') for c in COMUNIDAD_PARTES]
-        otros.append(_grupo(a['icono'], a['menu'], enl, archivo))
+        otros.append(grupo(a['icono'], a['menu'], enl, archivo))
     otros.append(_grupo('🏛️', 'Los Poderes', [
-        ('index.html?ir=poderes', 'Lo que cuestan el Congreso y el Poder Judicial', 'Presupuesto 2026 y Cuenta Pública 2024')]))
+        (al.PORTADA, 'Poder Legislativo', 'Las Cámaras, el calendario, las elecciones y los estados'),
+        (aj.PORTADA, 'Poder Judicial', 'La Corte, los sueldos, el presupuesto y la elección judicial'),
+        ('numeros-lo-que-cuestan-los-poderes.html', 'Lo que cuestan el Congreso y la Judicatura', 'Presupuesto 2026 y Cuenta Pública 2024')]))
     metodologia = (
         '<div class="indice-metodo">\n'
         '          <p>Toda cifra de la plataforma lleva su fuente oficial y uno de tres estados:</p>\n'
@@ -4980,7 +5027,7 @@ def indice():
         ('investigaciones', '🖼️ Investigaciones, por tema', 'Las auditorías en imágenes. Cada una explica el caso y lleva a sus números y a su evidencia.', investigaciones),
         ('numeros', '💰 Números', 'El recorrido del dinero público, del impuesto a la rendición de cuentas, cada parte en su propia página.', numeros),
         ('herramientas', '🧰 Herramientas', 'Cada herramienta y sus módulos, con página propia.', herr),
-        ('mas', '📚 Datos, Aprende, Participa y los Poderes', 'Descargas, la Biblioteca del Erario Público, las noticias, la participación ciudadana y el costo de los Poderes.', _rejilla(otros)),
+        ('mas', '📚 Datos, Aprende, Participa y los Poderes', 'Descargas, la Biblioteca del Erario Público, las noticias, la participación ciudadana y los Poderes de la Unión.', _rejilla(otros)),
         ('metodologia', '🔎 Cómo verificamos', 'La regla que sigue cada cifra y lo último que cambió.', metodologia),
     ]
     return {
@@ -5136,7 +5183,7 @@ def generar(sello=None):
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     import datos_ambiente
-    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
