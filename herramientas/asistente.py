@@ -470,27 +470,49 @@ def escribir_base():
     return cuenta
 
 
-# Preguntas de ejemplo, dichas como se habla (23-10-2026).
+# Preguntas de ejemplo, dichas como se habla (23-10-2026). Se muestran por
+# tandas que van rotando (pedido del autor, 23-10-2026): el orden alterna
+# temas para que cada tanda mezcle estados, sueldos, impuestos, Poderes,
+# conceptos y verificacion. Cada una se probo en el chat: solo entran las
+# que el Auditor contesta con su dato y su fuente.
 EJEMPLOS = [
     ('¿Cuánto debe Jalisco?', '🗺️'),
-    ('¿Qué estado debe más?', '📊'),
-    ('¿Cuánta lana le llega a Zapopan?', '🏙️'),
-    ('Compara Nuevo León con Jalisco', '⚖️'),
     ('¿Cuánto gana un diputado?', '💰'),
+    ('¿Quién preside la Suprema Corte?', '⚖️'),
     ('¿Cuánto se recauda de IVA?', '🧾'),
-    ('¿En qué se gasta el presupuesto?', '🏛️'),
-    ('¿Cuánta deuda dejó AMLO?', '🧾'),
-    ('¿Cuánto cuesta el daño ambiental?', '🌎'),
-    ('¿Cuánto valen 1,000 pesos de 2000 hoy?', '💱'),
     ('¿Qué es un pliego de observaciones?', '📘'),
-    ('¿Cuánto es el 16 % de 2,500 millones?', '🧮'),
     ('¿Es cierto que Jalisco debe 50 mil millones?', '🔎'),
+    ('¿Cuánta lana le llega a Zapopan?', '🏙️'),
+    ('¿Cuántos diputados hay?', '🏛️'),
+    ('¿Cuánto vale hoy el dólar?', '💱'),
+    ('¿Cuánto dejó por aclarar la ASF?', '🔎'),
+    ('¿Qué es un amparo?', '📘'),
+    ('¿Cuánta basura se genera en México?', '🗑️'),
+    ('¿Qué estado debe más?', '📊'),
+    ('¿Cuánto gana un ministro de la Corte?', '💰'),
+    ('¿En qué se gasta el presupuesto?', '🏛️'),
+    ('¿Cuándo es la próxima elección judicial?', '🗳️'),
+    ('¿Qué es el Ramo 33?', '📘'),
+    ('¿Cuánto valen 1,000 pesos de 2000 hoy?', '💱'),
+    ('Compara Nuevo León con Jalisco', '⚖️'),
+    ('¿Cuánto gana la presidenta?', '💰'),
+    ('¿Cuánto se recauda de ISR?', '🧾'),
+    ('¿Cuántos senadores hay?', '🏛️'),
+    ('¿Cuánto cuesta el daño ambiental?', '🌎'),
+    ('¿Cuánto es el 16 % de 2,500 millones?', '🧮'),
+    ('¿Qué municipio recibe más?', '🏙️'),
+    ('¿Cuánto le cuesta al país la Suprema Corte?', '⚖️'),
+    ('¿Cuánta deuda dejó AMLO?', '🧾'),
+    ('¿Cuándo es la elección de 2027?', '🗳️'),
+    ('¿Cuántos circuitos judiciales hay?', '🗺️'),
+    ('¿Qué es el Paquete Económico 2027?', '📘'),
+    ('¿Cuánto gana un senador?', '💰'),
 ]
 
 
 def pagina(cuenta, canal=''):
     total = sum(cuenta.values())
-    ej = '\n'.join('            <button type="button" class="pa-ej" data-pa-pregunta="%s"><span aria-hidden="true">%s</span> %s</button>'
+    ej = '\n'.join('              <button type="button" class="pa-ej" data-pa-pregunta="%s"><span aria-hidden="true">%s</span> %s</button>'
                    % (html.escape(q, quote=True), i, html.escape(q)) for q, i in EJEMPLOS)
     return '''<div class="pa" id="paApp" data-canal="%s">
         <div class="pa-chat">
@@ -508,8 +530,13 @@ def pagina(cuenta, canal=''):
               </div>
             </li>
           </ol>
-          <div class="pa-ejs" aria-label="Preguntas de ejemplo">
+          <div class="pa-ejs" id="paEjs" role="group" aria-label="Preguntas de ejemplo">
+            <div class="pa-ejs-cab"><span>💡 Prueba con:</span>
+              <button type="button" class="pa-ejs-otras" id="paEjsOtras" hidden>🔄 Otras preguntas</button></div>
+            <div class="pa-ejs-lista" id="paEjsLista">
 %s
+            </div>
+            <div class="pa-ejs-barra" id="paEjsBarra" aria-hidden="true" hidden><i></i></div>
           </div>
           <form class="pa-form" id="paForm" autocomplete="off">
             <label class="sr-only" for="paPregunta">Tu pregunta</label>

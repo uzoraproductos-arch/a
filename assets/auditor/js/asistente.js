@@ -476,6 +476,64 @@
     var a = ev.target.closest ? ev.target.closest('a[href="#paSinResp"]') : null;
     if (a) { ev.preventDefault(); abreComo('paSinResp'); }
   });
+  /* Las preguntas de ejemplo rotan por tandas (pedido del autor, 23-10-2026):
+     se quedan unos segundos, se desvanecen y salen otras. La barra marca el
+     tiempo; se detiene si pasas el cursor o el foco por ellas, y con
+     «Reducir movimiento» no rota sola: cambia con «Otras preguntas». */
+  (function () {
+    var caja = document.getElementById('paEjs'), lista = document.getElementById('paEjsLista');
+    if (!caja || !lista) return;
+    var bts = Array.prototype.slice.call(lista.querySelectorAll('.pa-ej'));
+    var otras = document.getElementById('paEjsOtras'), barra = document.getElementById('paEjsBarra');
+    var quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var tanda = 0, n = 0;
+    function porTanda() { return window.innerWidth < 640 ? 4 : 6; }
+    function muestra(k) {
+      var ini = (k * n) % bts.length;
+      bts.forEach(function (b, i) {
+        var pos = (i - ini + bts.length) % bts.length;
+        b.hidden = pos >= n;
+        b.style.setProperty('--pa-i', pos);
+      });
+    }
+    function mide() {
+      n = Math.min(porTanda(), bts.length);
+      lista.style.minHeight = '';
+      var alto = 0, total = Math.ceil(bts.length / n);
+      for (var k = 0; k < total; k++) { muestra(k); alto = Math.max(alto, lista.offsetHeight); }
+      lista.style.minHeight = alto + 'px';
+      muestra(tanda);
+    }
+    function reinicia() {
+      if (quieto) return;
+      var i = barra.firstChild;
+      i.style.animation = 'none';
+      void i.offsetWidth;
+      i.style.animation = '';
+    }
+    function siguiente() {
+      lista.classList.add('pa-sale');
+      setTimeout(function () {
+        tanda++;
+        muestra(tanda);
+        lista.classList.remove('pa-sale');
+        lista.classList.remove('pa-entra');
+        void lista.offsetWidth;
+        lista.classList.add('pa-entra');
+        reinicia();
+      }, quieto ? 0 : 350);
+    }
+    if (bts.length <= porTanda()) return;
+    otras.hidden = false;
+    mide();
+    otras.addEventListener('click', siguiente);
+    if (!quieto) {
+      barra.hidden = false;
+      barra.firstChild.addEventListener('animationend', siguiente);
+    }
+    var espera;
+    window.addEventListener('resize', function () { clearTimeout(espera); espera = setTimeout(mide, 200); });
+  })();
   /* Para revisar cómo puntúa una pregunta desde la consola. */
   window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta };
   pintaLista();

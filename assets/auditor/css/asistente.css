@@ -26,6 +26,23 @@
 .pa-ejs, .pa-mas { display: flex; flex-wrap: wrap; gap: 8px; }
 .pa-ejs { padding: 12px 18px 0; }
 .pa-ejs[hidden] { display: none; }
+/* Las preguntas de ejemplo rotan por tandas (23-10-2026). */
+.pa-ejs { display: block; }
+.pa-ejs-cab { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; font: 700 14px/1.3 Inter, system-ui, sans-serif; color: #44526b; }
+.pa-ejs-otras { font: 700 13.5px/1 Inter, system-ui, sans-serif; color: #1c2a44; background: transparent; border: 1px dashed #c9d2e3; border-radius: 999px; padding: 0 14px; min-height: 44px; cursor: pointer; white-space: nowrap; }
+.pa-ejs-otras:hover, .pa-ejs-otras:focus-visible { border-style: solid; border-color: var(--pa); background: #e9ecf1; }
+.pa-ejs-lista { display: flex; flex-wrap: wrap; align-content: flex-start; gap: 8px; transition: opacity .35s ease, transform .35s ease; }
+.pa-ejs-lista.pa-sale { opacity: 0; transform: translateY(-6px); }
+.pa-ejs-lista.pa-entra .pa-ej { animation: pa-ej-entra .45s ease both; animation-delay: calc(var(--pa-i, 0) * 70ms); }
+@keyframes pa-ej-entra { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: none; } }
+.pa-ejs-barra { height: 3px; margin-top: 10px; border-radius: 3px; background: #e9ecf1; overflow: hidden; }
+.pa-ejs-barra[hidden] { display: none; }
+.pa-ejs-barra i { display: block; height: 100%; width: 100%; background: var(--pa); transform-origin: left; animation: pa-ejs-tiempo 8s linear both; }
+@keyframes pa-ejs-tiempo { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.pa-ejs:hover .pa-ejs-barra i, .pa-ejs:focus-within .pa-ejs-barra i { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .pa-ejs-lista, .pa-ejs-lista.pa-entra .pa-ej { transition: none; animation: none; }
+}
 .pa-mas { margin-top: 10px; align-items: center; }
 .pa-mas > span { width: 100%; font-size: 13px; font-weight: 700; color: #44526b; }
 .pa-ej { font: 600 13.5px/1.3 Inter, system-ui, sans-serif; text-align: left; cursor: pointer; border: 1px solid #c9d2e3; background: #ffffff; color: #1c2a44; border-radius: 999px; padding: 8px 14px; min-height: 44px; }
