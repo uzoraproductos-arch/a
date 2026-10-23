@@ -462,10 +462,15 @@ def escribir_base():
     for f in fichas:
         cuenta[f['t']] = cuenta.get(f['t'], 0) + 1
     cuenta['municipio'] = len(_fichas_tecnicas(d)[1])
+    # Las investigaciones de Auditoría en imágenes (23-10-2026): aparte de la
+    # búsqueda, para contestar la pregunta con que la portada abre el chat.
+    import auditorias
+    inv = auditorias.bot_fichas()
+    cuenta['investigacion'] = len(inv)
     js = ('/* Auditavisión · Base de fichas de «Pregúntale al Auditor». La escribe\r\n'
           '   herramientas/asistente.py desde window.AUDIT_DB, el Registro de\r\n'
           '   pendientes y las páginas generadas: no se edita a mano. */\r\n'
-          'window.AUDITOR_BASE = ' + json.dumps({'fichas': fichas, 'dat': _charla(d), 'cuenta': cuenta}, ensure_ascii=False, separators=(',', ':')) + ';\r\n')
+          'window.AUDITOR_BASE = ' + json.dumps({'fichas': fichas, 'inv': inv, 'dat': _charla(d), 'cuenta': cuenta}, ensure_ascii=False, separators=(',', ':')) + ';\r\n')
     open(BASE_JS, 'wb').write(js.encode('utf-8'))
     return cuenta
 

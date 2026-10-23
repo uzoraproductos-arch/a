@@ -27028,7 +27028,7 @@
     if (slide && barra && slide.dataset) {
       var nombre = document.getElementById('showcaseAccNombre');
       if (nombre && slide.dataset.nombre) nombre.textContent = slide.dataset.nombre;
-      var destinos = { caso: slide.getAttribute('href'), numeros: slide.dataset.numeros, evidencia: slide.dataset.evidencia };
+      var destinos = { caso: slide.dataset.caso || slide.getAttribute('href'), numeros: slide.dataset.numeros, evidencia: slide.dataset.evidencia };
       barra.querySelectorAll('[data-acc]').forEach(function(a) {
         var h = destinos[a.getAttribute('data-acc')];
         if (h) a.setAttribute('href', h);

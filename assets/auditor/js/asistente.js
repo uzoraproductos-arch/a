@@ -45,7 +45,8 @@
     autoridad: ['🏛️', 'Autoridad fiscalizadora'], entrega: ['📡', 'Seguimiento de la fiscalización'],
     estado: ['🧾', 'Estado de cuenta'], ficha: ['🏢', 'Ficha técnica de un ente'], municipio: ['🏙️', 'Ficha técnica de un municipio'],
     cifra: ['📋', 'Cifra oficial del catálogo'], calculo: ['🧮', 'Respuesta con datos de la plataforma'],
-    ley: ['⚖️', 'Artículo de ley'], faq: ['❓', 'Pregunta del Diccionario']
+    ley: ['⚖️', 'Artículo de ley'], faq: ['❓', 'Pregunta del Diccionario'],
+    investigacion: ['🖼️', 'Investigación de Auditoría en imágenes']
   };
   var VACIAS = ('a al ante bajo con contra de del desde donde dónde cual cuál cuales cuáles como cómo el en entre es esta este esto ' +
     'ha hay la las le lo los me mi mas más muy no nos o para pero por porque que qué quien quién se sea ser si sí sin sobre son su sus ' +
@@ -317,7 +318,27 @@
       '<button type="button" class="pa-boton pa-noera" data-pa-q="' + esc(q) + '" data-pa-tit="' + esc(r.ficha ? r.ficha.tit : '') + '">🤔 No era lo que buscaba</button></p>';
   }
 
+  /* La pregunta de una imagen de la portada (23-10-2026): si coincide con la
+     de una investigación de Auditoría en imágenes, se contesta con ella. Se
+     tolera que el lector la retoque: basta que comparta 3 de cada 4 palabras. */
+  var INV = B.inv || [];
+  INV.forEach(function (f) { f._qs = (f.qs || []).map(function (x) { return fichas(x); }); });
+  function investigacion(q) {
+    var ws = fichas(q), mejor = null, ms = 0;
+    if (ws.length < 3 || !charla) return null;
+    INV.forEach(function (f) {
+      f._qs.forEach(function (t) {
+        var comun = t.filter(function (w, i) { return t.indexOf(w) === i && ws.indexOf(w) >= 0; }).length;
+        var s = comun / Math.max(t.length, ws.length);
+        if (s > ms) { ms = s; mejor = f; }
+      });
+    });
+    return ms >= 0.75 ? charla.deFicha(mejor) : null;
+  }
+
   function respuesta(q) {
+    var inv = investigacion(q);
+    if (inv) return inv;
     var r = charla && charla.contesta(q);
     /* Una afirmación sin dato con qué verificarla: se busca algo relacionado. */
     if (r && r.pasa) {
@@ -555,6 +576,15 @@
   window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta };
   pintaLista();
   if (canal) document.getElementById('paSinRespNota').innerHTML = 'La lista se guarda solo en tu navegador y no se envía sola: con «Enviarlas a Auditavisión» nos la haces llegar tú.';
-  var pre = new URLSearchParams(location.search).get('q');
+  var ps = new URLSearchParams(location.search), pre = ps.get('q'), lista = ps.get('p');
   if (pre) responde(pre, true);
+  /* ?p= (las imágenes de la portada, 23-10-2026): la pregunta queda escrita
+     y el lector decide cuándo enviarla. */
+  else if (lista) {
+    campo.value = lista.trim().slice(0, 600);
+    campo.classList.add('pa-lista-q');
+    campo.focus({ preventScroll: true });
+    form.scrollIntoView({ block: 'center' });
+    campo.addEventListener('input', function () { campo.classList.remove('pa-lista-q'); }, { once: true });
+  }
 })();

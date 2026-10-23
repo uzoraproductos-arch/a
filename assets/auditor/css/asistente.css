@@ -181,6 +181,8 @@
 @media (max-width: 560px) {
   .pa-como-abre { width: 100%; justify-content: center; }
 }
+/* La pregunta que trae una imagen de la portada, lista para enviarse. */
+.pa-form input.pa-lista-q { box-shadow: 0 0 0 3px #f5b301; }
 /* El menú «Herramientas» de la cabecera del chat (23-10-2026): se despliega
    debajo de los botones con las cuatro herramientas, cada una a su página. */
 .pa-chat-cab > .pa-cab-acc { flex: none; display: flex; flex-wrap: wrap; gap: 8px; }

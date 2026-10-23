@@ -1414,6 +1414,15 @@
           '<a href="' + esc(f.pend.donde) + '" target="_blank" rel="noopener noreferrer">Ahí debería estar ↗</a></p>';
         return { html: h + deDonde([{ que: f.tit, e: 'pendiente', p: f.pend.id, fu: { tx: f.pend.donde_tx, url: f.pend.donde } }]), ficha: f, ir: f.ir, sug: [] };
       }
+      if (f.t === 'investigacion') {
+        var cv = (f.ci || []).slice(0, 4);
+        h = '<p>Es una de las investigaciones de <b>Auditoría en imágenes</b>: <b>' + esc(f.tit) + '</b>.</p><p>' + esc(corto(f.txt, 360)) + '</p>' +
+          (cv.length ? '<ul class="pa-lista">' + cv.map(function (c) { return '<li><b>' + esc(c.v) + '</b> · ' + esc(c.etq) + '</li>'; }).join('') + '</ul>' : '') +
+          '<p>Toca <b>«Saber más»</b> y te llevo a su página: el dinero paso a paso, quién interviene y qué falta saber, con cada cifra y su fuente.' +
+          (f.exp ? ' Los documentos de la Auditoría Superior están en <a href="' + esc(f.exp) + '">su expediente</a>.' : '') + '</p>';
+        cv.forEach(function (c) { fu.push({ que: c.etq, e: c.e, p: c.p, fu: (f.fu || [])[0] }); });
+        return { html: h + deDonde(fu), ficha: f, ir: f.ir, sug: [] };
+      }
       if (f.t === 'pagina' || f.t === 'seccion') {
         h = '<p>Eso lo encuentras en <a href="' + esc(f.ir[0]) + '"><b>' + esc(f.tit) + '</b></a>' + (f.t === 'seccion' ? ' (en ' + esc(f.ir[1]) + ')' : '') + '.' + (f.txt ? ' ' + esc(corto(f.txt, 240)) : '') + '</p>';
         return { html: h, ficha: f, ir: f.ir, sug: [] };

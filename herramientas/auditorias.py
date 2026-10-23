@@ -348,6 +348,85 @@ def servicio(titulo):
             '        <a class="camino-ir" href="servicios.html?tema=%s#solicitud">Solicita una investigación ➔</a>\n'
             '      </aside>') % quote(tema)
 
+# Desde el 23-10-2026 (pedido del autor) cada imagen de la portada abre el
+# chat del Auditor con la pregunta de la diapositiva escrita: el lector la
+# envía y el Auditor contesta con la investigación y su «Saber más».
+CHAT = 'herramienta-inspector-pregunta.html'
+
+
+def _bloques_portada(d):
+    """[(id, pregunta visible)] de cada diapositiva de la portada, en orden."""
+    out = []
+    for blk in d.split('<a class="showcase-slide" ')[1:]:
+        m = re.search(r'data-caso="auditoria-([\w-]+)\.html"', blk) or re.match(r'href="auditoria-([\w-]+)\.html"', blk)
+        q = re.search(r'class="showcase-slide-q">([^<]*)<', blk)
+        out.append((m.group(1), html.unescape(q.group(1)).strip()))
+    return out
+
+
+def preguntas_portada():
+    return dict(_bloques_portada(open(os.path.join(RAIZ, 'index.html'), 'rb').read().decode('utf-8')))
+
+
+def chat_url(pregunta):
+    from urllib.parse import quote
+    return '%s?p=%s' % (CHAT, quote(pregunta))
+
+
+def _docs_planos(docs):
+    """Los documentos de la lectura breve, como fuentes del bot {tx, url}."""
+    out = []
+    for x in docs:
+        m = re.search(r'<a href="([^"]+)"[^>]*>(.*?) ↗</a>', x)
+        if m:
+            out.append({'tx': html.unescape(m.group(2)), 'url': html.unescape(m.group(1))})
+        else:
+            out.append({'tx': html.unescape(re.sub('<[^>]+>', '', x)).rstrip('.')})
+    return out
+
+
+def bot_fichas():
+    """Una ficha por investigación para «Pregúntale al Auditor» (23-10-2026):
+    la contesta cuando le llega la pregunta de su diapositiva. Las cifras
+    son las mismas de la lectura breve (window.AUDIT_DB), con su estado."""
+    pq = preguntas_portada()
+    out = []
+    for a in AUDITORIAS:
+        id_ = a[0]
+        d = _datos(id_)
+        out.append({'t': 'investigacion', 'tit': re.sub('<[^>]+>', '', a[5]), 'txt': d['que'],
+                    'ci': [dict({'v': v, 'etq': etq, 'e': e}, **({'p': pend} if pend else {})) for v, etq, e, pend in d['cuanto']],
+                    'fu': _docs_planos(d['docs']), 'qs': [q for q in (pq.get(id_), a[6]) if q],
+                    'ir': [archivo(id_), 'la investigación en imágenes'],
+                    'exp': ('expedientes.html#exp-' + EXPEDIENTE[id_]) if id_ in EXPEDIENTE else ''})
+    return out
+
+
+def capitulo_inspector():
+    """El capítulo «Auditoría en imágenes» del Modo Inspector, aplicación 1
+    (pedido del autor, 23-10-2026). No repite cifras: es la puerta a cada
+    investigación, a su expediente de la ASF, si lo tiene, y al chat."""
+    pq = preguntas_portada()
+    filas = []
+    for a in AUDITORIAS:
+        id_, img, nota_img, alt, etq, tit, preg = a
+        q = pq.get(id_) or preg
+        acc = ['<a class="ia-boton ia-boton-pri" href="%s">📖 Ver la investigación</a>' % archivo(id_)]
+        if id_ in EXPEDIENTE:
+            acc.append('<a class="ia-boton" href="expedientes.html#exp-%s">📂 Su expediente de la ASF</a>' % EXPEDIENTE[id_])
+        acc.append('<a class="ia-boton" href="%s">💬 Pregúntale al Auditor</a>' % esc_attr(chat_url(q)))
+        filas.append('<li class="ia-au"><a class="ia-au-img" href="%s"><img src="%s" alt="%s" loading="lazy" width="480" height="270">'
+                     '<span class="ia-au-nota">%s</span></a><div class="ia-au-tx"><span class="ia-au-etq">%s</span>'
+                     '<h3><a href="%s">%s</a></h3><p>%s</p><p class="ia-au-acc">%s</p></div></li>'
+                     % (archivo(id_), img, esc_attr(alt), html.escape(nota_img), html.escape(etq), archivo(id_), tit,
+                        html.escape(q), ' '.join(acc)))
+    n_exp = sum(1 for a in AUDITORIAS if a[0] in EXPEDIENTE)
+    return ('<p class="ia-txt">Las %d investigaciones de la portada, cada una con su página: el dinero paso a paso, quién interviene '
+            'y qué falta saber, con cada cifra y su documento. %d de ellas tienen expediente de la Auditoría Superior en el capítulo anterior; '
+            'las otras se arman con el Presupuesto, la Ley de Ingresos y la Cuenta Pública.</p>\n        <ul class="ia-aus">%s</ul>'
+            % (len(AUDITORIAS), n_exp, ''.join(filas)))
+
+
 def portada():
     """Escribe en index.html lo que la portada toma de aqui: los enlaces de
     las tres acciones de cada diapositiva (data-*). La lista de
@@ -358,12 +437,15 @@ def portada():
     d = open(ruta_idx, 'rb').read().decode('utf-8')
     au = {a[0]: a for a in AUDITORIAS}
 
+    orden = iter(_bloques_portada(d))
+
     def attrs(m):
-        id_ = m.group(2)
+        id_, q = next(orden)
         ancla, _, insp, _ = RUTAS[id_]
-        return '%s data-nombre="%s" data-numeros="sigue-el-dinero.html?abrir=%s" data-evidencia="%s"' % (
-            m.group(1), esc_attr(re.sub('<[^>]+>', '', au[id_][5])), ancla, insp)
-    d, n = re.subn(r'(<a class="showcase-slide" href="auditoria-([\w-]+)\.html")(?: data-nombre="[^"]*" data-numeros="[^"]*" data-evidencia="[^"]*")?',
+        nom = esc_attr(re.sub('<[^>]+>', '', au[id_][5]))
+        return ('<a class="showcase-slide" href="%s" data-caso="%s" data-nombre="%s" data-numeros="sigue-el-dinero.html?abrir=%s" '
+                'data-evidencia="%s" title="Pregúntale al Auditor: %s"') % (esc_attr(chat_url(q)), archivo(id_), nom, ancla, insp, nom)
+    d, n = re.subn(r'<a class="showcase-slide" href="[^"]*"(?: data-caso="[^"]*")?(?: data-nombre="[^"]*" data-numeros="[^"]*" data-evidencia="[^"]*")?(?: title="[^"]*")?',
                    attrs, d)
     if n != len(AUDITORIAS):
         print('ERROR: la portada no tiene las %d diapositivas (%d)' % (len(AUDITORIAS), n))

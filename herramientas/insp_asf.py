@@ -416,8 +416,13 @@ def _datos(C):
     }
 
 
+def _au():
+    import auditorias
+    return auditorias
+
+
 def capitulos(base, ref):
-    """Los once capitulos, en orden: slug de su pagina, ancla vieja (para
+    """Los doce capitulos, en orden: slug de su pagina, ancla vieja (para
     los enlaces que aun traen #ia-...), icono, nombre corto del indice, cifra
     de la tarjeta, titulo de la pagina, entrada y cuerpo (None en el
     catalogo, que arma insp_nota)."""
@@ -436,6 +441,12 @@ def capitulos(base, ref):
           'Expedientes de casos por aclarar',
           'Casos de alto impacto, contados con los informes de la Auditoría Superior de la Federación y el Sistema de Alertas de Hacienda: <b>cuánto dinero no se pudo comprobar, quién lo manejó y qué acciones se promovieron.</b>',
           None),
+        # Pedido del autor, 23-10-2026: las investigaciones de la portada,
+        # capítulo propio junto a los casos (auditorias.capitulo_inspector()).
+        c('imagenes', 'ia-imagenes', '🖼️', 'Auditoría en imágenes', '%d investigaciones' % len(_au().AUDITORIAS),
+          'Auditoría en imágenes',
+          'Las investigaciones de la portada, contadas con imágenes: <b>cada una abre su página</b> y, si la Auditoría Superior la revisó, su expediente.',
+          lambda: sec('ia-imagenes', '🖼️', 'Auditoría en imágenes', _au().capitulo_inspector())),
         c('autoridades', 'ia-autoridades', '🏛️', 'Quién fiscaliza', '%d autoridades' % len(fiscalizadores.AUTORIDADES),
           'Quién fiscaliza el dinero público',
           'La Auditoría Superior, la Secretaría Anticorrupción, los tribunales, la Fiscalía y las demás: qué revisa cada una y qué expediente oficial publica.',

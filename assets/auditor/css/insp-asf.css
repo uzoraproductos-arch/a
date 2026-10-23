@@ -203,3 +203,16 @@
 .fz-espera { border-left-color: #c9d2e3; }
 .fz-tarde { border-left-color: #b8423a; }
 .fz-nada { border-left-color: #d99a00; }
+/* Capítulo «Auditoría en imágenes» (23-10-2026): las investigaciones de la portada. */
+.ia-aus { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.ia-au { display: flex; flex-direction: column; border: 1px solid #dfe5f0; border-radius: 14px; overflow: hidden; background: #ffffff; }
+.ia-au-img { position: relative; display: block; aspect-ratio: 16 / 9; background: #0b2a63; }
+.ia-au-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ia-au-nota { position: absolute; right: 8px; bottom: 8px; padding: 2px 8px; border-radius: 6px; background: rgba(0, 0, 0, .65); color: #ffffff; font-size: 13px; }
+.ia-au-tx { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.ia-au-etq { font-size: 14px; font-weight: 600; color: #44526b; }
+.ia-au h3 { margin: 0; font-size: 19px; line-height: 1.3; }
+.ia-au h3 a { color: #0b2a63; text-decoration: none; }
+.ia-au h3 a:hover, .ia-au h3 a:focus-visible { text-decoration: underline; }
+.ia-au p { margin: 0; font-size: 16px; line-height: 1.5; color: #33415c; }
+.ia-au .ia-au-acc { margin-top: auto; padding-top: 8px; display: flex; flex-wrap: wrap; gap: 8px; }

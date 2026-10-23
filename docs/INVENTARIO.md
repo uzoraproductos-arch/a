@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 208 |
+| Páginas revisadas | 209 |
 | Páginas que solo redirigen | 25 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -106,8 +106,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-asf-documentos.html` | Documentos y descarga · Auditavisión | apartados.py | 25 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-asf-donde.html` | Dónde se concentra · Auditavisión | apartados.py | 25 | 0 | 1 | 2 | 0 |
 | `herramienta-inspector-asf-estado.html` | Tu estado · Auditavisión | apartados.py | 25 | 0 | 1 | 8 | 0 |
+| `herramienta-inspector-asf-imagenes.html` | Auditoría en imágenes · Auditavisión | apartados.py | 66 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-asf-serie.html` | Seis años de revisiones · Auditavisión | apartados.py | 24 | 0 | 10 | 4 | 1 |
-| `herramienta-inspector-asf.html` | Expedientes de casos de la ASF · Auditavisión | apartados.py | 38 | 0 | 3 | 3 | 0 |
+| `herramienta-inspector-asf.html` | Expedientes de casos de la ASF · Auditavisión | apartados.py | 39 | 0 | 3 | 3 | 0 |
 | `herramienta-inspector-dictamen.html` | Dictamen pericial · Auditavisión | apartados.py | 21 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-efos.html` | Lista negra del SAT · Auditavisión | apartados.py | 32 | 0 | 2 | 7 | 0 |
 | `herramienta-inspector-entes-directorio.html` | Directorio de entes públicos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
@@ -135,7 +136,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 31 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 24 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 34 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 210 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 211 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 24 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 24 | 0 | 0 | 0 | 0 |
 | `informes-oficiales.html` | Informes oficiales · Auditavisión | apartados.py | 22 | 0 | 0 | 0 | 0 |
