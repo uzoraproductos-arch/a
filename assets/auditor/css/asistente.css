@@ -181,6 +181,26 @@
 @media (max-width: 560px) {
   .pa-como-abre { width: 100%; justify-content: center; }
 }
+/* El menú «Herramientas» de la cabecera del chat (23-10-2026): se despliega
+   debajo de los botones con las cuatro herramientas, cada una a su página. */
+.pa-chat-cab > .pa-cab-acc { flex: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.pa-herr-abre[aria-expanded="true"] { background: #ffffff; color: var(--pa); }
+.pa-herr-flecha { display: inline-block; transition: transform .2s; }
+.pa-herr-abre[aria-expanded="true"] .pa-herr-flecha { transform: rotate(180deg); }
+.pa-herr { flex: 1 1 100%; margin-top: 4px; padding: 14px; border-radius: 12px; background: #ffffff; color: #33415c; }
+.pa-herr[hidden] { display: none; }
+.pa-herr p { margin: 0 0 10px; font-size: 16px; }
+.pa-herr ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.pa-herr-tj { display: flex; align-items: center; gap: 12px; min-height: 44px; height: 100%; box-sizing: border-box; padding: 8px; border: 1px solid #dfe5f0; border-radius: 10px; background: var(--pa-claro); color: #0b2a63; text-decoration: none; }
+.pa-herr-tj:hover, .pa-herr-tj:focus-visible { border-color: var(--pa); background: #ffffff; }
+.pa-chat-cab .pa-herr-tj img { width: 72px; height: 54px; padding: 0; border-radius: 8px; background: none; object-fit: cover; }
+.pa-chat-cab .pa-herr-tj b { font-size: 16px; color: #0b2a63; }
+.pa-chat-cab .pa-herr-tj small { font-size: 14px; color: #44526b; margin-top: 2px; }
+@media (max-width: 560px) {
+  .pa-chat-cab > .pa-cab-acc { width: 100%; }
+  .pa-cab-acc .pa-como-abre { flex: 1 1 100%; }
+  .pa-herr ul { grid-template-columns: minmax(0, 1fr); }
+}
 /* «Saber más» y «Generar dictamen» (23-10-2026): el dictamen abre su página. */
 .pa-burbuja a.pa-genera { background: var(--pa); border-color: var(--pa); color: #ffffff; }
 .pa-burbuja a.pa-genera:hover, .pa-burbuja a.pa-genera:focus-visible { background: #343a43; color: #ffffff; }

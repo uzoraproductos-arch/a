@@ -108,7 +108,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-asf-estado.html` | Tu estado · Auditavisión | apartados.py | 25 | 0 | 1 | 8 | 0 |
 | `herramienta-inspector-asf-serie.html` | Seis años de revisiones · Auditavisión | apartados.py | 24 | 0 | 10 | 4 | 1 |
 | `herramienta-inspector-asf.html` | Expedientes de casos de la ASF · Auditavisión | apartados.py | 38 | 0 | 3 | 3 | 0 |
-| `herramienta-inspector-dictamen.html` | Dictamen pericial · Auditavisión | apartados.py | 22 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector-dictamen.html` | Dictamen pericial · Auditavisión | apartados.py | 21 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-efos.html` | Lista negra del SAT · Auditavisión | apartados.py | 32 | 0 | 2 | 7 | 0 |
 | `herramienta-inspector-entes-directorio.html` | Directorio de entes públicos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-entes.html` | Auditor de entes públicos · Auditavisión | apartados.py | 40 | 0 | 49 | 3 | 0 |
@@ -117,7 +117,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-nota-liga.html` | Contrasta una nota · la nota · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-nota-veredicto.html` | Contrasta una nota · el veredicto · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-nota.html` | Contrasta una nota · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-pregunta.html` | Pregúntale al Auditor · Auditavisión | apartados.py | 24 | 0 | 1 | 1 | 1 |
+| `herramienta-inspector-pregunta.html` | Pregúntale al Auditor · Auditavisión | apartados.py | 26 | 0 | 1 | 1 | 1 |
 | `herramienta-inspector-radar.html` | Radar por entidad · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-verifica.html` | Verifica un estado de cuenta · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector.html` | Modo Inspector · Auditavisión | apartados.py | 24 | 0 | 0 | 0 | 0 |
@@ -133,7 +133,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras-sexenios.html` | Los seis sexenios · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-megaobras-tabla.html` | En qué invirtió cada presidente · Auditavisión | apartados.py | 60 | 0 | 19 | 38 | 6 |
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 31 | 0 | 0 | 2 | 1 |
-| `herramientas.html` | Auditor Virtual · Auditavisión | apartados.py | 23 | 0 | 1 | 1 | 1 |
+| `herramientas.html` | Herramientas · Auditavisión | apartados.py | 24 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 34 | 0 | 3 | 6 | 1 |
 | `indice.html` | Índice general · Auditavisión | apartados.py | 210 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 24 | 0 | 0 | 0 | 0 |

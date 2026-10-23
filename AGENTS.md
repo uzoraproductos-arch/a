@@ -254,7 +254,11 @@ mudando a su página; no se agregan desgloses nuevos.
   es su parte B, y `busca-y-verifica.html` solo redirige ahí.
 - **El menú tiene tres pestañas, ni una más** (decisión del autor,
   23-10-2026, que reemplaza la de cinco del 09-10-2026): **Auditor
-  Virtual** (`herramientas.html`, las herramientas), **Enciclopedia**
+  Virtual** (abre `herramienta-inspector-pregunta.html`, «Pregúntale al
+  Auditor»; desde el 23-10-2026 las cuatro herramientas cuelgan de su botón
+  «Herramientas», junto a «Cómo platicar conmigo», y `herramientas.html`
+  sigue como su índice; el Modo Inspector de ese menú lleva directo a las
+  Grandes investigaciones), **Enciclopedia**
   (`enciclopedia-auditavision.html`, con tres tarjetas: Números, Datos y
   Aprende, que conservan sus páginas) y **Comunidad** (`participa.html`, la
   antigua Participa; su tarjeta «Comunidad», `comunidad.html`, se llama

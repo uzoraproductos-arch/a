@@ -445,6 +445,23 @@
       return;
     }
   });
+  /* El botón «Herramientas» despliega las cuatro herramientas (23-10-2026);
+     se cierra con Escape o al tocar fuera. */
+  (function () {
+    var bt = document.getElementById('paHerrAbre'), menu = document.getElementById('paHerr');
+    if (!bt || !menu) return;
+    function pon(abierto, foco) {
+      menu.hidden = !abierto;
+      bt.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+      if (abierto) { var a = menu.querySelector('a'); if (a) a.focus({ preventScroll: true }); }
+      else if (foco) bt.focus({ preventScroll: true });
+    }
+    bt.addEventListener('click', function () { pon(menu.hidden); });
+    document.addEventListener('click', function (ev) {
+      if (!menu.hidden && !menu.contains(ev.target) && !bt.contains(ev.target)) pon(false);
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !menu.hidden) pon(false, true); });
+  })();
   /* «Cómo platicar conmigo» vive en un cajón lateral (23-10-2026). */
   var como = document.getElementById('paComo'), comoOv = document.getElementById('paComoOv');
   var comoBt = document.getElementById('paComoAbre'), comoDe = null;

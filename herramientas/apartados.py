@@ -279,8 +279,12 @@ ENCICLOPEDIA = 'enciclopedia-auditavision.html'
 
 # Las pestañas del menú (decisión del autor, 23-10-2026): eran cinco y son
 # tres. Cada una: (archivo, nombre, páginas que la marcan como actual).
+# La pestaña «Auditor Virtual» abre primero «Pregúntale al Auditor» (pedido del
+# autor, 23-10-2026); las cuatro herramientas cuelgan del botón «Herramientas»
+# de su cabecera, y herramientas.html sigue como su índice.
+AUDITOR_VIRTUAL = 'herramienta-inspector-pregunta.html'
 MENU = [
-    ('herramientas.html', 'Auditor Virtual', ('herramientas.html',)),
+    (AUDITOR_VIRTUAL, 'Auditor Virtual', ('herramientas.html',)),
     (ENCICLOPEDIA, 'Enciclopedia', (ENCICLOPEDIA, 'sigue-el-dinero.html', 'descarga-los-datos.html', 'aprende.html')),
     ('participa.html', 'Comunidad', ('participa.html',)),
 ]
@@ -290,7 +294,8 @@ APARTADOS = [
         'archivo': 'herramientas.html',
         # Desde el 23-10-2026 la pestaña se llama «Auditor Virtual» (decisión
         # del autor); el archivo conserva su nombre para no romper enlaces.
-        'menu': 'Auditor Virtual',
+        'menu': 'Herramientas',
+        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
         'icono': '🧰',
         'titulo': 'Herramientas para seguir el dinero público',
         'lema': 'El gasto público, a la vista',
@@ -784,6 +789,10 @@ LOGO_IMG = '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62
 # son tarjetas autonomas: la pagina de la herramienta solo las presenta y cada
 # una abre su propia pagina.
 INVESTIGACIONES = 'herramienta-inspector-investigaciones.html'
+# El menú «Herramientas» del chat (pedido del autor, 23-10-2026), en el orden
+# que pidió. El Modo Inspector lleva directo a sus Grandes investigaciones.
+HERR_MENU = [(INVESTIGACIONES if h[1] == 'inspector' else h[0], h[2], h[3], h[4], HERR_IMG[h[1]])
+             for r in ('inspector', 'ambiente', 'calculadora', 'obras') for h in HERRAMIENTAS if h[1] == r]
 HERR_ICONO_CAB = {'ambiente', 'obras', 'calculadora', 'inspector'}
 
 
@@ -924,7 +933,7 @@ def herramienta(h, n):
         'archivo': archivo,
         'menu': titulo,
         'menu_archivo': 'herramientas.html',
-        'padre': ('herramientas.html', 'Auditor Virtual'),
+        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
         'icono': icono,
         'titulo': titulo,
         'lema': 'Herramienta %d de %d' % (n, len(HERRAMIENTAS)),
@@ -972,7 +981,7 @@ def herramienta_divisiones(h, n, ruta):
                        '', 'Preguntar')))
     base = {
         'menu_archivo': 'herramientas.html',
-        'padre': ('herramientas.html', 'Auditor Virtual'),
+        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
         'fondo': HERR_IMG[rubro],
         'rubro': rubro,
         'sin_icono_lema': True,
@@ -1061,7 +1070,7 @@ def herramienta_modulo(h, n, i, bloque=None):
         'archivo': modulo_archivo(archivo, clave),
         'menu': nombre,
         'menu_archivo': 'herramientas.html',
-        'padre': ('herramientas.html', 'Auditor Virtual'),
+        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
         'padre2': (archivo, titulo),
         'padre3': (INVESTIGACIONES, HERR_DIVISION[rubro][0]) if rubro == 'inspector' else None,
         'icono': ico,
@@ -1198,10 +1207,10 @@ def herramienta_asistente(bloque):
            '          <a class="herr-mod-paso sig" href="%s"><small>La otra división</small><b>%s %s</b></a>\n'
            '        </div>\n      </nav>' % (archivo, icono, titulo, INVESTIGACIONES, icono, HERR_DIVISION[rubro][0]))
     return {
+        # Es la portada de la pestaña Auditor Virtual (23-10-2026): sin padres.
         'archivo': ASISTENTE[0], 'menu': ASISTENTE[1], 'menu_archivo': 'herramientas.html',
-        'padre': ('herramientas.html', 'Auditor Virtual'), 'padre2': (archivo, titulo),
         'icono': '💬', 'titulo': ASISTENTE[1],
-        'lema': '%s · el bot interno' % titulo, 'sin_icono_lema': True, 'icono_cab': LOGO_IMG,
+        'lema': 'Auditor Virtual · el chat de Auditavisión', 'sin_icono_lema': True, 'icono_cab': LOGO_IMG,
         'entrada': '<b>%s.</b> %s' % (ASISTENTE[2], ASISTENTE[3]),
         'fondo': HERR_IMG[rubro], 'rubro': rubro,
         'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
@@ -1217,7 +1226,7 @@ def herramienta_dictamen(bloque):
     import asistente
     return {
         'archivo': asistente.DICTAMEN, 'menu': 'Dictamen pericial', 'menu_archivo': 'herramientas.html',
-        'padre': ('herramientas.html', 'Auditor Virtual'), 'padre2': (ASISTENTE[0], ASISTENTE[1]),
+        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
         'icono': '🧾', 'titulo': 'Dictamen pericial de Auditavisión',
         'lema': '%s · el respaldo de una respuesta' % ASISTENTE[1], 'sin_icono_lema': True, 'icono_cab': LOGO_IMG,
         'entrada': ('<b>El respaldo de una respuesta del Auditor.</b> Tu pregunta, lo que se contestó, cada cifra con su estado, '
@@ -1341,7 +1350,7 @@ def simulador():
     datos = json.dumps(ej, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     return {
         'archivo': 'simulador-presupuesto.html', 'menu': 'Reparte el presupuesto', 'menu_archivo': 'herramientas.html',
-        'padre': ('herramientas.html', 'Auditor Virtual'),
+        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
         'padre2': ('herramienta-calculadora.html', 'Calculadora Cívica'),
         'icono': '🧮', 'titulo': 'Reparte el presupuesto, desde cero', 'lema': 'Tú pones las cifras; el ejemplo oficial, Hacienda',
         'entrada': ('Un simulador que empieza en $0. Agrega lo que entra y a dónde va, reparte, compara dos escenarios y descarga la cuenta. '
@@ -1485,7 +1494,7 @@ def servicios():
     return {
         'archivo': 'servicios.html', 'menu': 'Servicios de investigación', 'menu_archivo': 'herramientas.html',
         # Desde el 11-10-2026 es un modulo del Modo Inspector (pedido del autor).
-        'padre': ('herramientas.html', 'Auditor Virtual'),
+        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
         'padre2': ('herramienta-inspector.html', 'Modo Inspector'),
         'padre3': (INVESTIGACIONES, 'Grandes investigaciones'),
         'icono': '🔎', 'titulo': 'Servicios de investigación', 'lema': 'La consulta es gratuita; la investigación a la medida se cotiza',
@@ -3487,7 +3496,7 @@ def radar():
         # Del 12-10-2026 al 22-10-2026 fue la cuarta tarjeta de Datos; desde
         # entonces (pedido del autor) es la quinta aplicacion de la
         # Calculadora Civica, con sus migas y su pie (nav_de_pagina).
-        'padre': ('herramientas.html', 'Auditor Virtual'),
+        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
         'padre2': ('herramienta-calculadora.html', 'Calculadora Cívica'),
         'icono': '🏛️', 'titulo': 'Estado de cuenta administrativo', 'lema': 'Calculadora Cívica · aplicación 5 de 5',
         'sin_icono_lema': True, 'icono_cab': '🏛️', 'fondo': HERR_IMG['calculadora'], 'rubro': 'calculadora',
@@ -4876,6 +4885,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('23-10-2026', 'La pestaña Auditor Virtual abre directo en Pregúntale al Auditor. Junto a «Cómo platicar conmigo» está el botón «Herramientas», con las cuatro: Modo Inspector, que lleva a las Grandes investigaciones, Costo Ambiental, Calculadora Cívica e Inversión y Megaobras.'),
     ('23-10-2026', 'El menú queda en tres pestañas: Auditor Virtual, con las herramientas; Enciclopedia, que junta Números, Datos y Aprende; y Comunidad, la antigua Participa, donde la tarjeta Comunidad se llama ahora Participa. Ningún enlace cambia de dirección.'),
     ('23-10-2026', 'El Poder Judicial y el Poder Legislativo viven en Datos, cada uno con su portada y una página por tema: quién es quién, la Suprema Corte, los sueldos, el presupuesto, la elección judicial y cómo decide; las Cámaras, el calendario, las elecciones y los congresos de los estados. Pregúntale al Auditor contesta sobre los dos.'),
     ('23-10-2026', 'Cada respuesta de Pregúntale al Auditor trae «Saber más», que abre la página donde está el dato, y «Generar dictamen», que abre el dictamen pericial sellado en su propia página.'),
@@ -5246,7 +5256,7 @@ def generar(sello=None):
     # escritas (herramientas/asistente.py, 11-10-2026).
     import asistente
     cuenta = asistente.escribir_base()
-    texto = pagina(herramienta_asistente(asistente.pagina(cuenta, CANAL_COMUNIDAD)), sello).replace('\r\n', '\n').replace('\n', '\r\n')
+    texto = pagina(herramienta_asistente(asistente.pagina(cuenta, CANAL_COMUNIDAD, HERR_MENU)), sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, asistente.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     texto = pagina(herramienta_dictamen(asistente.dictamen_pagina()), sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, asistente.DICTAMEN), 'wb').write(texto.encode('utf-8'))

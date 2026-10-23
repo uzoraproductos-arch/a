@@ -510,8 +510,14 @@ EJEMPLOS = [
 ]
 
 
-def pagina(cuenta, canal=''):
+def pagina(cuenta, canal='', herramientas=()):
+    """herramientas: (archivo, icono, nombre, frase, imagen) de cada tarjeta
+    del menú «Herramientas» de la cabecera (pedido del autor, 23-10-2026)."""
     total = sum(cuenta.values())
+    herr = '\n'.join('              <li><a class="pa-herr-tj" href="%s"><img src="%s" alt="" width="96" height="64" loading="lazy">'
+                     '<span><b><span aria-hidden="true">%s</span> %s</b><small>%s</small></span></a></li>'
+                     % (html.escape(a, quote=True), html.escape(im, quote=True), i, html.escape(n), html.escape(f))
+                     for a, i, n, f, im in herramientas)
     ej = '\n'.join('              <button type="button" class="pa-ej" data-pa-pregunta="%s"><span aria-hidden="true">%s</span> %s</button>'
                    % (html.escape(q, quote=True), i, html.escape(q)) for q, i in EJEMPLOS)
     return '''<div class="pa" id="paApp" data-canal="%s">
@@ -519,7 +525,16 @@ def pagina(cuenta, canal=''):
           <div class="pa-chat-cab">
             <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="52" height="40">
             <div><b>Pregúntale al Auditor</b><small>El chat de Auditavisión · contesta con datos oficiales</small></div>
+            <span class="pa-cab-acc">
+            <button type="button" class="pa-como-abre pa-herr-abre" id="paHerrAbre" aria-controls="paHerr" aria-expanded="false"><span aria-hidden="true">🧰</span> Herramientas <span class="pa-herr-flecha" aria-hidden="true">▾</span></button>
             <button type="button" class="pa-como-abre" id="paComoAbre" aria-controls="paComo" aria-expanded="false"><span aria-hidden="true">❓</span> Cómo platicar conmigo</button>
+            </span>
+            <nav class="pa-herr" id="paHerr" aria-label="Herramientas del Auditor Virtual" hidden>
+              <p>Las cuatro herramientas del auditor. Cada una abre su propia página.</p>
+              <ul>
+%s
+              </ul>
+            </nav>
           </div>
           <ol class="pa-hilo" id="paHilo" aria-live="polite">
             <li class="pa-msg pa-bot">
@@ -575,7 +590,7 @@ def pagina(cuenta, canal=''):
           <p class="pa-aviso"><b>Platico como chat, pero no invento.</b> No soy una inteligencia artificial que redacta: entiendo tu pregunta y contesto solo con cifras que la plataforma ya publicó con su documento (%s fichas y %s municipios). Si no lo tengo, te lo digo. Tu pregunta no sale de tu navegador.</p>
           </div>
         </aside>
-      </div>''' % (html.escape(canal, quote=True), ej, format(cuenta.get('glosario', 0), ','),
+      </div>''' % (html.escape(canal, quote=True), herr, ej, format(cuenta.get('glosario', 0), ','),
                  format(total - cuenta.get('municipio', 0), ','), format(cuenta.get('municipio', 0), ','))
 
 
