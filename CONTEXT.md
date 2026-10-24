@@ -163,6 +163,10 @@ La pestaña 4 tiene cinco subpestañas (4.1 a 4.5), y la 4.1 a su vez tiene tres
 subvistas: organigrama de la SCJN, estructura general del PJF y mapa territorial
 de los 32 circuitos.
 
+## Plan de lanzamiento (`docs/LANZAMIENTO.md`)
+
+Pedido del autor, 24-10-2026: todos los pendientes para salir en línea (dominio, hospedaje, base de datos, correo, aviso de privacidad, canales, datos que se actualizan solos y difusión), por tipo y en siete fases. Nada de la fase 1 en adelante empieza sin las decisiones de la fase 0.
+
 ## Siguiente tarea: legibilidad en celular (`docs/ux/PLAN.md`)
 
 Condición del dueño: **la plataforma debe ser fácil de leer y de entender,
