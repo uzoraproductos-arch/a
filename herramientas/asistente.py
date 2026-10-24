@@ -576,7 +576,9 @@ def _fuentes_app(url, refs, salto=True):
 def escribir_base():
     import pendientes
     d = pendientes.db()
-    fichas = _fichas(d) + _pendientes() + _paginas()
+    # Las columnas de Noticias relevantes (24-10-2026), con sus documentos.
+    import asistente_personajes
+    fichas = _fichas(d) + asistente_personajes.fichas() + _pendientes() + _paginas()
     cuenta = {}
     for f in fichas:
         cuenta[f['t']] = cuenta.get(f['t'], 0) + 1
@@ -602,6 +604,8 @@ def escribir_base():
     # sexenios, sus cifras y sus cinco aplicaciones.
     import asistente_megaobras
     dat['mo'] = asistente_megaobras.datos(d, dat['datos']['peso'])
+    # Los personajes de Noticias relevantes y las búsquedas en internet.
+    dat['per'] = asistente_personajes.datos()
     # Las fuentes de cada aplicacion, para su dictamen cuando se usa en el chat.
     refs = {r['id']: r for r in d['referencias_legales']}
     for k in ('insp', 'mo', 'amb', 'calc'):
@@ -684,6 +688,10 @@ for _i, _e in enumerate([('¿Cuánto costó el Tren Maya?', '🚆'), ('¿En qué
                          ('Compara el AIFA con el Tren Maya', '⚖️'), ('¿Cuánto han costado las megaobras?', '🏗️'),
                          ('¿Cuánto nos cuesta el FOBAPROA?', '🏦')]):
     EJEMPLOS.insert(12 + _i * 8, _e)
+# Noticias relevantes desde el chat (24-10-2026): sus personajes, al final
+# de la tercera y la quinta tanda.
+for _i, _e in enumerate([('¿Quién es Genaro García Luna?', '📰'), ('Noticias de Elba Esther Gordillo', '📰')]):
+    EJEMPLOS.insert(17 + _i * 16, _e)
 
 
 

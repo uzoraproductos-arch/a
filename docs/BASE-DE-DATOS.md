@@ -25,7 +25,8 @@ probada. Falta solo lo que toca al autor: crear la cuenta y poner las llaves.
    ├─ recibir-formulario ──▶ envios          (antispam + 5 envíos / 10 min)
    ├─ pregunta-bot ────────▶ preguntas_bot   («Lo que aún no sé»)
    ├─ portales ────────────▶ portales_cache  (Banxico SIE; INEGI por verificar)
-   └─ auditor-ia ──────────▶ consultas_ia    (Claude, con cuatro candados)
+   ├─ auditor-ia ──────────▶ consultas_ia    (Claude, con cuatro candados)
+   └─ buscar-web ──────────▶ busquedas_web   (internet: solo enlaces)
                                   │
                     lee las fichas del sitio publicado
                     (assets/auditor/js/asistente-base.js)
@@ -34,9 +35,11 @@ probada. Falta solo lo que toca al autor: crear la cuenta y poner las llaves.
 | Archivo | Qué es |
 |---|---|
 | `supabase/migrations/20261024000001_auditavision.sql` | Las 14 tablas y vistas, con seguridad por renglón en todas |
-| `supabase/functions/*/index.ts` | Las cuatro funciones (Deno) y lo que comparten (`_comun/`) |
-| `supabase/pruebas/permisos.sql` | 26 pruebas de permisos: qué ve y qué escribe el público, una persona con cuenta y la administración |
+| `supabase/migrations/20261024000002_busquedas_web.sql` | La tabla de las búsquedas en internet (pública: solo enlaces) |
+| `supabase/functions/*/index.ts` | Las cinco funciones (Deno) y lo que comparten (`_comun/`) |
+| `supabase/pruebas/permisos.sql` | 30 pruebas de permisos: qué ve y qué escribe el público, una persona con cuenta y la administración |
 | `supabase/pruebas/cotejo_test.ts` | Pruebas del candado de cifras de la IA |
+| `supabase/pruebas/web_test.ts` | Pruebas de lo que puede devolver la búsqueda en internet |
 | `herramientas/prueba_base_datos.py` | Corre la migración y las pruebas en un PostgreSQL local, sin cuenta ni red |
 
 ## Los cuatro candados de la IA (AGENTS.md §5 ter)
@@ -56,6 +59,24 @@ bajo, salida en JSON con esquema, y si el modelo se niega, la API reintenta
 con otro (`fallbacks: "default"`). Tope: 10 preguntas por minuto y 100 por
 día por persona.
 
+## La búsqueda en internet (`buscar-web`, 24-10-2026)
+
+Cuando el lector pregunta por un personaje, el chat ya ofrece búsquedas
+armadas (no necesitan la base). Con la llave puesta, `buscar-web` las hace por
+él con la búsqueda web de Claude:
+
+1. **Solo en sitios de una lista cerrada** (`_comun/web.ts`): los oficiales
+   (gob.mx y sus subdominios, INE, SCJN, Congreso, ASF, DOF, INEGI, Banxico,
+   TEPJF y la justicia de EE.UU.) y una **lista editorial de prensa**, que
+   decide el autor. Nada de redes, foros ni blogs.
+2. **Solo enlaces**: título, dirección, sitio, si es oficial o prensa, y la
+   fecha de la página. Lo que el modelo escriba se tira; la plataforma no
+   publica un texto redactado por IA sobre una persona.
+3. **Todo queda en `busquedas_web`**, pública, con modelo y tokens; la misma
+   búsqueda se reusa un día. Tope: 5 por minuto y 30 por día por persona.
+
+Usa la misma `ANTHROPIC_API_KEY` que `auditor-ia`.
+
 ## Lo que le toca al autor (decisiones 0.1 a 0.5 de LANZAMIENTO.md)
 
 | Paso | Qué | Costo |
@@ -68,7 +89,7 @@ día por persona.
 | 6 | `ANTHROPIC_API_KEY`, solo si quieres la capa de IA | Por pregunta, según el modelo |
 
 Con eso, el agente corre `supabase db push` y `supabase functions deploy`, y
-conecta los botones «Enviar» y «Lo que aún no sé» de la página.
+conecta los botones «Enviar», «Lo que aún no sé» y «Búscalo en internet» de la página.
 
 ## Pendiente, y por qué
 
@@ -82,11 +103,14 @@ conecta los botones «Enviar» y «Lo que aún no sé» de la página.
   dirección. Los formularios siguen armando el texto y «Lo que aún no sé»
   sigue en el navegador hasta que se configure.
 - **La IA no se probó contra la API real**: falta la llave. El candado de
-  cifras sí está probado sin red.
+  cifras y el filtro de enlaces de `buscar-web` sí están probados sin red.
+- **La lista de prensa es editorial**: la escogió el agente como punto de
+  partida (diarios nacionales con hemeroteca en línea); el autor la confirma
+  o la cambia en `_comun/web.ts`.
 
 Para comprobar la base en cualquier momento:
 
 ```bash
 python3 herramientas/prueba_base_datos.py
-deno test supabase/pruebas/cotejo_test.ts
+deno test supabase/pruebas/
 ```

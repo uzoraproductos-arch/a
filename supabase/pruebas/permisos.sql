@@ -35,6 +35,9 @@ insert into public.preguntas_bot (pregunta, motivo, version) values ('¿cuánto 
 select pg_temp.debe_fallar($$insert into public.envios (tipo, asunto, texto, correo) values ('tema','Hola','Texto suficiente aquí','x@y.mx')$$, 'un correo sin aceptar el aviso de privacidad');
 select pg_temp.debe_fallar($$insert into public.envios (tipo, asunto, texto, pagina) values ('tema','Hola','Texto suficiente aquí','https://otro.sitio/x')$$, 'una página que no es de la plataforma');
 select pg_temp.debe_fallar($$insert into public.consultas_ia (pregunta, fichas, version, verificada, rechazo) values ('x?', '{1}', '20261024r', true, 'formato')$$, 'una consulta verificada y rechazada a la vez');
+insert into public.busquedas_web (clave, nombre, enlaces, vence) values ('fulana perez', 'Fulana Pérez', '[]', now() + interval '1 day');
+select pg_temp.debe_fallar($$insert into public.busquedas_web (clave, nombre, enlaces, vence) values ('<script>', 'Fulana Pérez', '[]', now())$$, 'una búsqueda con la clave mal escrita');
+select pg_temp.debe_fallar($$insert into public.busquedas_web (clave, nombre, enlaces, vence) values ('fulana perez', 'Fulana Pérez', '{"texto": "redactado"}', now())$$, 'una búsqueda que guarda texto en vez de enlaces');
 reset role;
 
 -- 2. El público (anon): no lee lo privado ni escribe directo.
@@ -47,6 +50,8 @@ select pg_temp.debe_fallar($$insert into public.envios (tipo, asunto, texto) val
 select pg_temp.debe_fallar($$insert into public.donaciones (monto, comprobante) values (100, 'falso')$$, 'que el público invente una donación');
 select pg_temp.debe_fallar($$insert into public.portales_cache (fuente, url, clave, sha256, cuerpo, bytes, vence) values ('banxico-sie','https://x','k',repeat('a',64),'{}',2,now())$$, 'que el público altere la copia de un portal');
 select pg_temp.debe_fallar($$select public.limite_ok('h','r',1,60)$$, 'que el público use el límite por minuto');
+select pg_temp.igual((select count(*) from public.busquedas_web), 1, 'búsquedas en internet que ve el público');
+select pg_temp.debe_fallar($$insert into public.busquedas_web (clave, nombre, enlaces, vence) values ('falsa busca', 'Falsa Busca', '[]', now())$$, 'que el público plante una búsqueda');
 select pg_temp.debe_fallar($$insert into public.foro_hilos (titulo) values ('Sin cuenta no se puede')$$, 'abrir un hilo sin cuenta');
 reset role;
 

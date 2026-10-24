@@ -420,6 +420,16 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   huachicol, Ramo 33…), «Explóralo a fondo» abre con «📖 Ver la
   investigación». **Una investigación nueva necesita sus frases en
   `TEMA_BOT`** de `herramientas/auditorias.py`, o la generación se detiene.
+- **Noticias relevantes vive también en el chat** (24-10-2026): el nombre
+  de un personaje abre sus columnas (con sus cifras y documentos) y lo que
+  circula sin pruebas, con el motivo (`DESCARTADO` de `columnas.js`). Lo
+  escribe `herramientas/asistente_personajes.py`: **una columna nueva entra
+  sola**; **un personaje nuevo necesita su renglón en `PERSONAJES`**, y si su
+  nombre no aparece en ninguna columna ni en lo descartado, la generación se
+  detiene. De internet el chat **solo ofrece búsquedas armadas** en portales
+  oficiales y noticias, rotuladas «sin verificar», y lleva a Contrasta una
+  nota; la función `buscar-web` devuelve solo enlaces, nunca un texto
+  redactado por la IA sobre una persona.
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).
@@ -433,7 +443,8 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   `docs/BASE-DE-DATOS.md`); falta que el autor cree la cuenta y ponga las
   llaves. La IA (`auditor-ia`) solo redacta con lo que le entregan las
   fichas, y cada cifra de su respuesta se coteja contra ellas: si una no
-  aparece, se tira. **Ninguna cifra fiscal vive en la base.** Todo cambio a
+  aparece, se tira; `buscar-web` solo devuelve enlaces de sitios oficiales y
+  de una lista editorial de prensa. **Ninguna cifra fiscal vive en la base.** Todo cambio a
   `supabase/` pasa `python3 herramientas/prueba_base_datos.py` y, si toca
   las funciones, `deno check` y `deno test supabase/pruebas/`.
 

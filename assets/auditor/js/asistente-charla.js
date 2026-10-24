@@ -1435,6 +1435,17 @@
         cv.forEach(function (c) { fu.push({ que: c.etq, e: c.e, p: c.p, fu: (f.fu || [])[0] }); });
         return { html: h + deDonde(fu), ficha: f, ir: f.ir, sug: [] };
       }
+      if (f.t === 'columna') {
+        var cc = (f.ci || []).slice(0, 3);
+        h = '<p>📰 En <b>Noticias relevantes</b>: <b>' + esc(f.tit) + '</b>.</p><p>' + esc(corto(f.txt, 360)) + '</p>' +
+          (cc.length ? '<ul class="pa-lista">' + cc.map(function (c) { return '<li><b>' + esc(c.v) + '</b> · ' + esc(c.etq) + ' ' + chip(c.e) + '</li>'; }).join('') + '</ul>' : '') +
+          (f.dc ? '<p class="pa-col-dc"><b>💡 Dato curioso:</b> ' + esc(f.dc) + '</p>' : '') +
+          (f.nota ? '<p class="pa-chico">⚖️ ' + esc(f.nota) + '</p>' : '') +
+          '<p>Toca <b>«Saber más»</b> y te abro la columna completa, con cada documento que la sostiene.</p>';
+        cc.forEach(function (c) { fu.push({ que: c.etq, e: c.e, fu: c.fu || (f.fu || [])[0] }); });
+        if (!cc.length && f.fu && f.fu[0]) fu.push({ que: 'Documento', e: 'oficial', fu: f.fu[0] });
+        return { html: h + (fu.length ? deDonde(fu) : ''), ficha: f, ir: f.ir, sug: [] };
+      }
       if (f.t === 'pagina' || f.t === 'seccion') {
         h = '<p>Eso lo encuentras en <a href="' + esc(f.ir[0]) + '"><b>' + esc(f.tit) + '</b></a>' + (f.t === 'seccion' ? ' (en ' + esc(f.ir[1]) + ')' : '') + '.' + (f.txt ? ' ' + esc(corto(f.txt, 240)) : '') + '</p>';
         return { html: h, ficha: f, ir: f.ir, sug: [] };

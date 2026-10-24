@@ -46,7 +46,8 @@
     estado: ['🧾', 'Estado de cuenta'], ficha: ['🏢', 'Ficha técnica de un ente'], municipio: ['🏙️', 'Ficha técnica de un municipio'],
     cifra: ['📋', 'Cifra oficial del catálogo'], calculo: ['🧮', 'Respuesta con datos de la plataforma'],
     ley: ['⚖️', 'Artículo de ley'], faq: ['❓', 'Pregunta del Diccionario'],
-    investigacion: ['🖼️', 'Investigación de Auditoría en imágenes'], app: ['🧩', 'Aplicación de la plataforma']
+    investigacion: ['🖼️', 'Investigación de Auditoría en imágenes'], app: ['🧩', 'Aplicación de la plataforma'],
+    columna: ['📰', 'Columna de Noticias relevantes']
   };
   var VACIAS = ('a al ante bajo con contra de del desde donde dónde cual cuál cuales cuáles como cómo el en entre es esta este esto ' +
     'ha hay la las le lo los me mi mas más muy no nos o para pero por porque que qué quien quién se sea ser si sí sin sobre son su sus ' +
@@ -1202,9 +1203,129 @@
     return null;
   }
 
+  /* ============ Noticias relevantes y personajes, dentro del chat ===========
+     (24-10-2026, pedido del autor): el nombre de un personaje abre lo que la
+     plataforma pudo sostener de él (las columnas de Noticias relevantes, con
+     sus documentos) y lo menos evidente: lo que circula y no se pudo probar,
+     con el motivo. Lo que hay en internet no lo afirma el chat: ofrece las
+     búsquedas ya armadas en los portales oficiales y en las noticias, como
+     «sin verificar», y lleva a Contrasta una nota. El índice lo escribe
+     herramientas/asistente_personajes.py. */
+  var PE = (B.dat && B.dat.per) || { per: [], web: [] }, COLF = {};
+  F.forEach(function (f) { if (f.t === 'columna') COLF[f.col] = f; });
+  var PER_CTX = /\b(quien es|quien fue|quienes son|quien era|noticias?|que se sabe|que paso con|que hizo|que hay de|que dicen de|datos? curiosos?|columnas?|historia de|biografia|trayectoria|procesos?|juicios?|sentencias?|sentenciad\w*|condena\w*|denuncia\w*|acusa\w*|investigad\w*|escandalos?|polemica\w*|corrupcion|carpetas?|detenid\w*|preso|presa|carcel|prision|rumor\w*|chismes?)\b/;
+  var NOTICIAS_RE = /^\s*(las |unas |dame |muestrame |ver |quiero |que )*(noticias( relevantes)?|columnas?( del erario)?|la columna del erario|datos curiosos)\s*$/;
+  var PARTICULA = { de: 1, del: 1, la: 1, las: 1, los: 1, y: 1 };
+  function personaDe(p) {
+    var hay = null, largo = 0;
+    PE.per.forEach(function (x) { x.al.forEach(function (a) { if (p.indexOf(' ' + a + ' ') >= 0 && a.length > largo) { hay = x; largo = a.length; } }); });
+    return hay;
+  }
+  /* Lo que queda de la pregunta sin el nombre ni las palabras vacías. */
+  function sobra(p, quita, nombre) {
+    var suyo = plano(nombre);
+    quita.forEach(function (a) { p = p.split(' ' + a + ' ').join(' '); });
+    return p.trim().split(/\s+/).filter(function (w) { return w && suyo.indexOf(' ' + w + ' ') < 0 && !vacia[w] && !PARTICULA[w] && !/^(sobre|acerca|algo|cosas?|todo|informacion|info|dato|datos)$/.test(w); });
+  }
+  /* Un nombre que la plataforma no tiene («¿quién es Fulana Pérez?»): se toma
+     tal como lo escribió el lector, para buscarlo fuera. */
+  function nombreDe(q) {
+    var t = String(q).replace(/[¿?¡!.,;:«»"]/g, ' ').replace(/\s+/g, ' ').trim();
+    var m = /^(?:dime |dame |busca |investiga )?(?:quien es|quién es|quien fue|quién fue|noticias de|noticias sobre|que se sabe de|qué se sabe de|que hizo|qué hizo|que hay de|qué hay de|que dicen de|qué dicen de|que paso con|qué pasó con)\s+(.+)$/i.exec(t);
+    var n = (m ? m[1] : t).replace(/^(el|la|los|las)\s+/i, '').trim(), ws = n.split(' ');
+    if (ws.length < 2 || ws.length > 6 || n.length > 70 || /\d/.test(n)) return null;
+    var propias = ws.filter(function (w) { return /^[A-ZÁÉÍÓÚÑ]/.test(w); }).length;
+    var todas = ws.every(function (w) { return /^[A-ZÁÉÍÓÚÑ]/.test(w) || PARTICULA[norm(w)]; });
+    /* Sin «quién es…», solo si cada palabra va con mayúscula: «Rocío Nahle». */
+    if (!m && (!todas || propias < 2)) return null;
+    if (m && propias < 1 && ws.length > 4) return null;
+    return n;
+  }
+  function webHtml(nombre) {
+    var q = '"' + nombre + '"';
+    return '<div class="pa-rec pa-web"><p class="pa-mas-t">Búscalo en internet</p>' +
+      '<p class="pa-chico">Esto ya no es la plataforma: son búsquedas ya armadas con el nombre, primero en portales oficiales y al final en las noticias. ' +
+      '<b>Lo que encuentres ahí no lo verificó Auditavisión</b>: una nota de prensa no es un documento oficial, y un proceso no es una condena.</p>' +
+      '<div class="pa-rec-lista">' + PE.web.map(function (w) {
+        var u = w.site ? 'https://www.google.com/search?q=' + encodeURIComponent(q + ' ' + w.site)
+          : 'https://news.google.com/search?q=' + encodeURIComponent(q) + '&hl=es-419&gl=MX&ceid=MX:es-419';
+        return '<a class="pa-rec-a" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer"><span class="pa-rec-ico" aria-hidden="true">' + w.ico + '</span>' +
+          '<span><b>' + esc(w.n) + '</b><small>' + (w.e === 'oficial' ? 'Fuente oficial · se abre en otra pestaña ↗' : 'Prensa: sin verificar · se abre en otra pestaña ↗') + '</small></span></a>';
+      }).join('') + '</div>' +
+      '<p class="pa-chico">¿Encontraste una nota con cifras? Pégame aquí su liga y la cotejo contra los documentos oficiales, con <a href="herramienta-inspector-nota.html">Contrasta una nota</a>.</p></div>';
+  }
+  function colHtml(f, grande) {
+    var ci = (f.ci || []).slice(0, grande ? 3 : 2);
+    return '<div class="pa-col"><p class="pa-col-t">📰 <a href="' + esc(f.ir[0]) + '"><b>' + esc(f.tit) + '</b></a></p>' +
+      (f.txt ? '<p>' + esc(f.txt) + '</p>' : '') +
+      (ci.length ? '<ul class="pa-lista">' + ci.map(function (c) { return '<li><b>' + esc(c.v) + '</b> · ' + esc(c.etq) + ' ' + chip(c) + '</li>'; }).join('') + '</ul>' : '') +
+      (grande && f.dc ? '<p class="pa-col-dc"><b>💡 Dato curioso:</b> ' + esc(f.dc) + '</p>' : '') + '</div>';
+  }
+  function descHtml(per, abierto) {
+    if (!per.desc.length) return '';
+    return '<details class="pa-desc"' + (abierto ? ' open' : '') + '><summary>🧺 Lo que circula y no pudimos sostener <small>(' + per.descn + ')</small></summary>' +
+      '<p class="pa-chico">Esto se dice en prensa o en redes, pero la plataforma no encontró el documento oficial que lo pruebe. No lo afirmamos ni lo negamos: te decimos por qué se quedó fuera.</p><ul>' +
+      per.desc.map(function (d) { return '<li><b>' + esc(d.tema) + '.</b> ' + esc(d.af) + ' <span class="pa-desc-mo"><b>Por qué no:</b> ' + esc(d.mo) + '</span></li>'; }).join('') +
+      '</ul>' + (per.descn > per.desc.length ? '<p class="pa-chico">Y ' + (per.descn - per.desc.length) + ' más en <a href="' + esc(PE.pag) + '">Noticias relevantes</a>, al pie: «Lo que dejamos fuera y por qué».</p>' : '') + '</details>';
+  }
+  function respPersona(per) {
+    var cols = per.col.map(function (id) { return COLF[id]; }).filter(Boolean), f = cols[0];
+    var a = admDe(per.n), h, fu = [];
+    if (f) {
+      h = '<p>Sobre <b>' + esc(per.n) + '</b>, esto es lo que la plataforma pudo sostener con documentos, en ' +
+        (cols.length > 1 ? 'sus ' + cols.length + ' columnas' : 'su columna') + ' de <b>Noticias relevantes</b>:</p>' +
+        cols.slice(0, 3).map(function (c, i) { return colHtml(c, i === 0); }).join('');
+      (f.ci || []).slice(0, 4).forEach(function (c) { fu.push({ que: c.etq, e: c.e, fu: c.fu || (f.fu || [])[0] }); });
+    } else {
+      h = '<p>Sobre <b>' + esc(per.n) + '</b>, la plataforma todavía no tiene una columna verificada. Lo que sí tengo es lo que circula y no se pudo sostener con un documento oficial, y por qué:</p>';
+    }
+    h += descHtml(per, !f);
+    if (a) h += '<p>' + esc(a.n) + ' también tiene el <a href="radar-estado-de-cuenta.html?adm=' + encodeURIComponent(a.id) + '"><b>estado de cuenta de su administración</b></a>: deuda, gasto y lo que observó la ASF.</p>';
+    h += '<p class="pa-chico">⚖️ ' + esc((f && f.nota) || 'Un proceso no es una condena: aquí solo va lo que consta en documentos, con presunción de inocencia.') + '</p>';
+    if (f && charla) h += charla.deDonde(fu.length ? fu : (f.fu || []).slice(0, 3).map(function (x) { return { que: 'Documento', e: 'oficial', fu: x }; }));
+    h += webHtml(per.n);
+    /* Lo que la plataforma tiene de esa persona fuera de las columnas. */
+    var vistos = {}, sug = [];
+    cols.slice(3).forEach(function (c) { sug.push(c); vistos[c.tit] = 1; });
+    buscar(per.n).slice(0, 25).forEach(function (x) {
+      var t = plano(x.f.tit + ' ' + (x.f.k || '') + ' ' + (x.f.txt || ''));
+      if (sug.length < 4 && x.f.t !== 'columna' && x.f.t !== 'fuente' && !vistos[x.f.tit] && per.al.some(function (w) { return t.indexOf(' ' + w + ' ') >= 0; })) { vistos[x.f.tit] = 1; sug.push(x.f); }
+    });
+    PE.per.forEach(function (o) {
+      if (sug.length < 5 && o !== per && o.col.some(function (id) { return per.col.indexOf(id) >= 0; })) sug.push('¿Quién es ' + o.n + '?');
+    });
+    return {
+      html: h, ficha: f || null, tit: per.n,
+      ir: f ? (cols.length === 1 ? f.ir : [PE.pag, 'Noticias relevantes']) : [PE.pag, 'Noticias relevantes'],
+      sug: sug, rec: []
+    };
+  }
+  function personaje(q) {
+    if (!PE.per.length) return null;
+    var p = plano(q), n = ' ' + norm(q).replace(/[^a-z0-9ñ]+/g, ' ') + ' ';
+    if (NOTICIAS_RE.test(n.trim())) {
+      var conCol = PE.per.filter(function (x) { return x.col.length; });
+      return {
+        html: '<p>📰 <b>Noticias relevantes</b> reúne ' + PE.n + ' columnas con datos poco conocidos de personajes y hechos del dinero público. Solo entra lo que se pudo verificar con un documento oficial, y cada columna cita los suyos.</p>' +
+          '<p>Pregúntame por un personaje y te digo lo que consta y lo que circula sin pruebas. Tengo columnas de:</p><p>' +
+          conCol.map(function (x) { return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc('¿Quién es ' + x.n + '?') + '">' + esc(x.n) + '</button>'; }).join(' ') + '</p>',
+        ir: [PE.pag, 'Noticias relevantes'], sug: [], rec: []
+      };
+    }
+    var per = personaDe(p);
+    if (!per) return null;
+    var ctx = PER_CTX.test(n), nada = !sobra(p, per.al, per.n).length;
+    /* Un presidente a secas lo sigue contestando su estado de cuenta, y un
+       nombre que también es lugar (Benito Juárez) solo si se habla de personas. */
+    if ((per.pres || per.lugar) ? !ctx : !(ctx || nada)) return null;
+    return respPersona(per);
+  }
+
   function respuesta(q, previas) {
     var inv = investigacion(q);
     if (inv) return inv;
+    var pe = personaje(q);
+    if (pe) return pe;
     var ins = conApp(inspector(q, previas));
     if (ins) return ins;
     var mo = conApp(megaobras(q, previas));
@@ -1231,8 +1352,16 @@
     }
     if (r) return r;
     var res = buscar(q);
-    if (!res.length || res[0].s < 3) return { sin: res.slice(0, 3).map(function (x) { return x.f; }) };
+    if (!res.length || res[0].s < 3) return { sin: res.slice(0, 3).map(function (x) { return x.f; }), web: nombreDe(q) };
     var f = res[0].f, vistos = {}, otras = [];
+    /* Un nombre propio que la plataforma no tiene («Ricardo Monreal Ávila»)
+       no se contesta con lo que se le parece (un municipio «de Ávila»): se
+       dice que no está y se ofrece buscarlo fuera. */
+    var nom = nombreDe(q);
+    if (nom) {
+      var nws = fichas(nom), tt = plano(f.tit);
+      if (nws.filter(function (w) { return tt.indexOf(' ' + w + ' ') >= 0; }).length * 2 < nws.length) return { sin: res.slice(0, 3).map(function (x) { return x.f; }), web: nom };
+    }
     /* Un nombre a secas («Tren Maya») pide el caso, no lo que falta de él. */
     if (f.t === 'pendiente' && intencion(q) !== 'pendiente') {
       var alt = res.slice(1, 6).filter(function (x) { return x.f.t !== 'pendiente' && x.s >= res[0].s * 0.8; })[0];
@@ -1248,6 +1377,9 @@
     r = charla ? charla.deFicha(f) : { html: '<p><b>' + esc(f.tit) + '.</b> ' + esc(f.txt) + '</p>', ficha: f, ir: f.ir };
     r.sug = otras;
     r.tambien = true;
+    /* Un nombre que la plataforma no tiene: lo que encontró se queda, y se
+       ofrece buscarlo fuera, si lo encontrado no lo nombra. */
+    if (nom && plano(f.tit + ' ' + (f.txt || '')).indexOf(plano(nom)) < 0) r.web = nom;
     return r;
   }
 
@@ -1266,7 +1398,7 @@
     var espera = r.espera ? r.espera.then(function (x) { r = x; }) : null;
     var pinta = function (li) {
       if (r.sin) {
-        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin);
+        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + (r.web ? webHtml(r.web) : '');
         if (!ya) anota(q, 'sin');
         return;
       }
@@ -1274,6 +1406,7 @@
       li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r, previas) +
         appDe(r) +
         (r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r)))) +
+        (r.web ? webHtml(r.web) : '') +
         (r.sug && r.sug.length ? '<p class="pa-mas-t">' + (r.tambien ? 'También te puede servir' : 'Sigue preguntando') + '</p>' + chips(r.sug) : '');
       var caja = li.querySelector('.pa-app[data-pa-abre]');
       if (caja) montaApp(caja);
