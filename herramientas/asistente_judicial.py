@@ -13,6 +13,11 @@ contra su documento oficial al 23-10-2026:
 - Constitución (texto vigente de la Cámara de Diputados, última reforma
   DOF 07-10-2026): arts. 17, 94 a 100, 103, 105 y 107, y los transitorios de
   la reforma judicial (DOF 15-09-2024), con los cambios del 02-06-2026.
+- Ley de Amparo (texto vigente, última reforma DOF 16-10-2025): los cuatro
+  recursos y sus plazos (arts. 80 a 105, 201 y 202), y quién conoce de la
+  revisión (83 y 84). Entraron el 24-10-2026, cuando el autor pidió
+  rescatar de la Enciclopedia antigua «los cuatro instrumentos», «los
+  recursos» y «cuándo llega un caso a la Corte».
 - INE, Acuerdo INE/CG563/2025 (sumatoria nacional y asignación de la SCJN)
   e INE/CG564/2025 (declaración de validez; considerando 25: los 881 cargos
   de 2025 en 32 circuitos). Copias con su huella SHA-256.
@@ -46,6 +51,9 @@ INE563 = {'tx': 'INE, Acuerdo INE/CG563/2025: sumatoria nacional y asignación d
 INE564 = {'tx': 'INE, Acuerdo INE/CG564/2025: declaración de validez de la elección de la SCJN; considerando 25, cargos a elegir en 2025 (15-06-2025)',
           'url': 'https://dof.gob.mx/2025/INE/CGext202506_15_ap_2_2.pdf',
           'sha256': '3271e1d79a96349ea654d717f6156c29d3e0e200e6003643cf4244f8f5769ade'}
+LAMP = {'tx': 'Ley de Amparo, Reglamentaria de los artículos 103 y 107 de la Constitución, texto vigente (Cámara de Diputados, última reforma DOF 16-10-2025)',
+        'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LAmp.pdf',
+        'sha256': '05560493ac2b17b9e77eeb9741843176ee0fde76f05e75f853465b13621be78d'}
 TRANS = 'Transitorios de la reforma judicial (DOF 15-09-2024), en el texto vigente de la Constitución'
 
 # Las nueve personas que asignó el INE (acuerdo INE/CG563/2025, punto
@@ -101,10 +109,10 @@ PAGINAS = [
     ('datos-judicial-eleccion.html', '🗳️', 'La elección judicial', 'Los 881 cargos de 2025 y la segunda elección, en 2028',
      'Cómo se eligen las juezas, los jueces, las magistraturas y la Corte: lo que se votó el 1 de junio de 2025 y lo que falta por votar en 2028.',
      ['eleccion2025', 'eleccion2028']),
-    ('datos-judicial-como-decide.html', '🧭', 'Cómo decide un juez', 'El amparo, la Corte como tribunal constitucional y la jurisprudencia',
-     'Qué puedes pedirle a un juez federal, por dónde pasa un juicio de amparo, cuándo llega un caso a la Suprema Corte y cuándo lo que '
-     'decide obliga a todos los tribunales del país.',
-     ['amparo', 'controversias', 'jurisprudencia', 'plazos']),
+    ('datos-judicial-como-decide.html', '🧭', 'Cómo decide un juez', 'El amparo y sus recursos, cuándo llega un caso a la Corte y la jurisprudencia',
+     'Los cuatro caminos para defender la Constitución, por dónde pasa un juicio de amparo y qué recursos proceden, cuándo llega un caso '
+     'a la Suprema Corte y cuándo lo que decide obliga a todos los tribunales del país.',
+     ['medios', 'amparo', 'recursos', 'controversias', 'llegar_corte', 'jurisprudencia', 'plazos']),
 ]
 PAGINA_DE = {k: (p[0], p[2]) for p in PAGINAS for k in p[5]}
 
@@ -327,6 +335,52 @@ def judicial(d):
              '<p>Quienes debían dejar el cargo en 2027 siguen hasta que tomen protesta los electos, el <b>1 de septiembre de 2028</b>.</p>',
         'fu': [_o('Elección judicial en 2028 (decreto DOF 02-06-2026; transitorios segundo, cuarto y octavo reformados)', CPEUM)],
         'sug': ['¿Cuántos cargos se votaron en la elección judicial?', '¿Cuándo son las próximas elecciones?']}
+    # Rescatados de la Enciclopedia antigua (pedido del autor, 24-10-2026):
+    # «los cuatro instrumentos», «los recursos» y «cuándo llega un caso a la
+    # Corte». Solo el tema: cada línea se cotejó contra la Constitución y la
+    # Ley de Amparo vigentes.
+    t['medios'] = {
+        'tit': 'Los cuatro caminos para defender la Constitución',
+        'h': '<p>Hay cuatro caminos para que un tribunal diga que una ley o un acto viola la Constitución. <b>No todos los puede usar cualquiera:</b></p><ul class="pa-lista">'
+             '<li><b>Juicio de amparo:</b> lo promueves tú, si una autoridad viola tus derechos. Si ganas, te protege <b>solo a ti</b>. Lo resuelven juzgados y tribunales federales y, a veces, la Corte.</li>'
+             '<li><b>Controversia constitucional:</b> es un pleito <b>entre autoridades</b> (la Federación, un estado, un municipio, un poder contra otro). Solo la resuelve la Corte.</li>'
+             '<li><b>Acción de inconstitucionalidad:</b> ataca una ley <b>en abstracto</b>, sin un caso concreto. La presentan, entre otros, legisladores, partidos, comisiones de derechos humanos o la Fiscalía, '
+             'dentro de los <b>30 días naturales</b> siguientes a que se publica la ley. Solo la resuelve la Corte.</li>'
+             '<li><b>Declaratoria general de inconstitucionalidad:</b> convierte amparos repetidos en una regla <b>para todos</b>: si en <b>90 días</b> no se corrige la ley, la Corte la declara inválida con seis votos. No aplica a impuestos.</li></ul>',
+        'fu': [_o('Amparo: quién lo promueve y para quién vale (arts. 103 y 107, frs. I y II)', CPEUM),
+               _o('Controversias constitucionales y acciones de inconstitucionalidad, con su plazo de 30 días naturales (art. 105, frs. I y II)', CPEUM),
+               _o('Declaratoria general de inconstitucionalidad: 90 días, seis votos y excepción de impuestos (art. 107, fr. II)', CPEUM)],
+        'sug': ['¿Qué recursos hay en el amparo?', '¿Cuándo llega un caso a la Suprema Corte?', '¿Qué es el amparo?']}
+    t['recursos'] = {
+        'tit': 'Los recursos del amparo: qué procede contra qué',
+        'h': '<p>En el amparo <b>no hay apelación</b>. La Ley de Amparo solo admite <b>cuatro recursos</b>, cada uno con su plazo:</p><ul class="pa-lista">'
+             '<li><b>Revisión (10 días):</b> contra la sentencia del juzgado en el amparo indirecto, lo que decide sobre la suspensión definitiva o el sobreseimiento. '
+             'En el amparo directo, solo si hay un tema de constitucionalidad que la Corte considere de interés excepcional.</li>'
+             '<li><b>Queja (5 días):</b> contra lo que admite o desecha la demanda, la suspensión provisional y otras decisiones del trámite. Son <b>2 días hábiles</b> si se trata de la suspensión '
+             'provisional o de plano, y se puede presentar <b>en cualquier tiempo</b> si la autoridad no tramita la demanda.</li>'
+             '<li><b>Reclamación (3 días):</b> contra los acuerdos de trámite de quien preside la Corte o un tribunal colegiado. Se resuelve en un máximo de <b>10 días</b>.</li>'
+             '<li><b>Inconformidad (15 días):</b> ya en el cumplimiento, contra lo que da por cumplida la sentencia, dice que no se puede cumplir o desecha la denuncia de que la autoridad repitió el acto. '
+             'Si está en juego la vida, la libertad o una desaparición forzada, se presenta <b>en cualquier tiempo</b>.</li></ul>'
+             '<p class="pa-chico">Esto es para que entiendas el camino, no es asesoría legal: un caso concreto lo revisa una abogada o un abogado.</p>',
+        'fu': [_o('Solo revisión, queja, reclamación e inconformidad (art. 80)', LAMP),
+               _o('Revisión: contra qué procede y su plazo de diez días (arts. 81 y 86)', LAMP),
+               _o('Queja: contra qué procede y sus plazos de cinco días, dos días hábiles o en cualquier tiempo (arts. 97 y 98)', LAMP),
+               _o('Reclamación: tres días para presentarla y diez para resolverla (arts. 104 y 105)', LAMP),
+               _o('Inconformidad: contra qué procede y su plazo de quince días (arts. 201 y 202)', LAMP)],
+        'sug': ['¿Cuándo llega un caso a la Suprema Corte?', '¿Qué es el amparo?']}
+    t['llegar_corte'] = {
+        'tit': '¿Cuándo llega un caso a la Suprema Corte?',
+        'h': '<p>La Corte <b>no revisa todo</b> lo que se litiga en el país. La Constitución le abre estas puertas:</p><ul class="pa-lista">'
+             '<li><b>Directo a la Corte:</b> las controversias constitucionales y las acciones de inconstitucionalidad.</li>'
+             '<li><b>Amparo en revisión:</b> cuando, contra la sentencia de un juzgado de distrito o un tribunal colegiado de apelación, sigue en juego si una ley es inconstitucional.</li>'
+             '<li><b>Amparo directo en revisión:</b> solo si el caso tiene un tema constitucional y la Corte decide que es de <b>interés excepcional</b>. Si lo desecha, ya no hay recurso.</li>'
+             '<li><b>Atracción:</b> la Corte puede quedarse, por su cuenta o a petición, con un amparo o una apelación que por su interés y trascendencia lo amerite.</li>'
+             '<li><b>Contradicción de criterios:</b> si los Plenos Regionales resuelven distinto, la Corte decide qué criterio vale. Eso fija jurisprudencia, pero no cambia los casos ya resueltos.</li></ul>'
+             '<p>En todo lo demás, la última palabra es de un <b>tribunal colegiado</b>: sus sentencias de revisión no admiten recurso.</p>',
+        'fu': [_o('Controversias, acciones y apelaciones atraídas (art. 105, frs. I a III)', CPEUM),
+               _o('Amparo en revisión, amparo directo en revisión, atracción y contradicción de criterios (art. 107, frs. V, VIII, IX y XIII)', CPEUM),
+               _o('Competencia de la Corte y de los tribunales colegiados en la revisión (arts. 83 y 84)', LAMP)],
+        'sug': ['¿Qué recursos hay en el amparo?', '¿Qué es la jurisprudencia?']}
     t['amparo'] = {
         'tit': 'El juicio de amparo, paso a paso',
         'h': '<p>El <b>amparo</b> es el juicio con el que te defiendes cuando una ley, un acto o una omisión de una autoridad viola tus derechos. Lo promueve la persona afectada, '

@@ -22,6 +22,12 @@ vigente al 23-10-2026, y lo que no cuadró se quedó fuera:
   17 gubernaturas y concurrencia en las 32 entidades), fechas homologadas
   (INE/CG478/2026), precampañas (DOF 16-10-2026) e inicio del proceso
   (DOF 13-10-2026).
+- Para el proceso etapa por etapa y la guía para evaluar candidaturas
+  (rescatados de la Enciclopedia antigua el 24-10-2026): LGIPE arts. 208,
+  225, 243, 251, 310 y 312; Constitución arts. 38, fr. VII, 41, fr. VI, y 55;
+  Ley General de Partidos Políticos art. 79; Ley General de
+  Responsabilidades Administrativas arts. 29 y 32, y la Gaceta
+  Parlamentaria (votaciones).
 - INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, tabla 8:
   las personas legisladoras en activo de cada congreso local.
 
@@ -63,6 +69,14 @@ CNPLE = {'tx': 'INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, re
          'url': 'https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/cnple/CNPLE_2025_RR.pdf',
          'sha256': '04305b1e81ec07b93d19ecb5ceb8d9da17aa45062d4c17ba00a8d3335a6c2524'}
 INE_PEF = 'https://ine.mx/voto-y-elecciones/elecciones-2027/'
+LGPP = {'tx': 'Ley General de Partidos Políticos, art. 79 (última reforma DOF 02-03-2023)',
+        'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGPP.pdf',
+        'sha256': '9163f0826f44c965b6d478e69c2bf0deb8795108104c3d7dddf6d11e511199b3'}
+LGRA = {'tx': 'Ley General de Responsabilidades Administrativas, arts. 29 y 32 (última reforma DOF 15-12-2025)',
+        'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGRA.pdf',
+        'sha256': '1289ec6964e48c84990572ca6080ca05c9d6210e5b0ff5af6d8c9d935fc5fcc8'}
+GACETA_VOT = {'tx': 'Gaceta Parlamentaria de la Cámara de Diputados: votaciones de la LXVI Legislatura',
+              'url': 'https://gaceta.diputados.gob.mx/gp_votaciones.html'}
 
 # Tabla 8 del CNPLE 2025: personas legisladoras en activo al cierre del
 # último periodo que reportó cada congreso (clave de entidad de D.edo).
@@ -86,9 +100,10 @@ PAGINAS = [
     ('datos-legislativo-calendario.html', '📅', 'Sesiones, presupuesto y reformas', 'Cuándo sesiona el Congreso, las fechas del presupuesto y lo que cambió',
      'Cuándo sesiona el Congreso, en qué fechas se entrega y se aprueba el dinero público de cada año y qué reformas recientes tocan al Congreso y a las elecciones.',
      ['sesiones', 'paquete', 'reformas']),
-    ('datos-legislativo-elecciones.html', '🗳️', 'Las elecciones', 'El 6 de junio de 2027, la reelección y la elección judicial',
-     'Qué se vota el 6 de junio de 2027, quién puede reelegirse y por qué la elección de juezas y jueces se movió a 2028.',
-     ['elecciones', 'reeleccion', 'judicial']),
+    ('datos-legislativo-elecciones.html', '🗳️', 'Las elecciones', 'El 6 de junio de 2027, sus etapas, cómo evaluar candidaturas y la reelección',
+     'Qué se vota el 6 de junio de 2027, por qué etapas pasa el proceso, cómo evaluar a una candidata o candidato, quién puede reelegirse '
+     'y por qué la elección de juezas y jueces se movió a 2028.',
+     ['elecciones', 'ruta', 'candidatos', 'reeleccion', 'judicial']),
     ('datos-legislativo-estados.html', '📍', 'Congresos locales y ayuntamientos', 'Los 32 congresos y cómo se integra un ayuntamiento',
      'Cuántas personas legisladoras tiene cada uno de los 32 congresos locales y cómo se integra el ayuntamiento que gobierna tu municipio.',
      ['locales', 'ayuntamientos']),
@@ -192,6 +207,45 @@ def legislativo():
         'ci': [{'v': '6 de junio de 2027', 'etq': 'jornada electoral', 'e': 'derivado'}, {'v': '500', 'etq': 'diputaciones federales en juego', 'e': 'oficial'},
                {'v': '17', 'etq': 'gubernaturas', 'e': 'oficial'}],
         'sug': ['¿Cuándo es la elección judicial?', '¿Se pueden reelegir los diputados?', '¿Cuántos diputados hay?']}
+    # Rescatados de la Enciclopedia antigua (pedido del autor, 24-10-2026):
+    # «la ruta crítica del proceso electoral» y «cómo evaluar a una candidata
+    # o candidato». Solo el tema: cada línea se cotejó contra la ley vigente.
+    t['ruta'] = {
+        'tit': 'El proceso electoral, etapa por etapa',
+        'h': '<p>La ley divide el proceso electoral en <b>cuatro etapas</b>. Así se ven en el de 2026-2027:</p><ol class="pa-lista">'
+             '<li><b>Preparación de la elección:</b> arrancó el <b>10 de septiembre de 2026</b> y dura hasta que abren las casillas. Aquí caben el registro de candidaturas, '
+             'las precampañas (del <b>4 de enero al 12 de febrero de 2027</b>) y las campañas (60 días, hasta el <b>2 de junio</b>).</li>'
+             '<li><b>Jornada electoral:</b> el <b>domingo 6 de junio de 2027</b>, desde las 8:00 horas hasta que se cierra la casilla.</li>'
+             '<li><b>Resultados y declaraciones de validez:</b> los consejos distritales del INE hacen el cómputo desde el <b>miércoles 9 de junio</b>, declaran válida la elección de su distrito '
+             'y entregan la constancia de mayoría a quien ganó.</li>'
+             '<li><b>Dictamen de la elección presidencial:</b> en 2027 <b>no aplica</b>, porque no se elige Presidencia.</li></ol>'
+             '<p>El proceso termina cuando el <b>Tribunal Electoral</b> resuelve la última impugnación, o cuando consta que no se presentó ninguna.</p>',
+        'fu': [_o('Las cuatro etapas y cuándo termina el proceso (art. 225, numerales 1 y 2)', LGIPE),
+               _o('Inicio del Proceso Electoral Federal 2026-2027: 10 de septiembre de 2026', INECL),
+               _o('Precampañas del 4 de enero al 12 de febrero de 2027', INEPRE),
+               _o('Campañas de 60 días que terminan el 2 de junio', LGIPE, 'el art. 251 da 60 días a las campañas cuando solo se elige la Cámara y las cierra tres días antes de la jornada'),
+               _o('Jornada: primer domingo de junio, de las 8:00 horas al cierre de la casilla', LGIPE, 'el art. 208, numeral 2, fija el primer domingo de junio; en 2027 cae el día 6'),
+               _o('Cómputos distritales desde el miércoles 9 de junio, declaración de validez y constancia de mayoría', LGIPE, 'el art. 310 fija el miércoles siguiente a la jornada: el 6 de junio es domingo, así que es el día 9; la constancia, art. 312')],
+        'sug': ['¿Cuándo son las próximas elecciones?', '¿Cómo evalúo a un candidato?']}
+    t['candidatos'] = {
+        'tit': 'Cómo evaluar a una candidata o candidato',
+        'h': '<p>Antes de votar, puedes revisar cuatro cosas, cada una con la ley en la mano:</p><ol class="pa-lista">'
+             '<li><b>¿Puede ser candidato?</b> Para una diputación federal se necesitan, entre otras cosas, <b>18 años</b> cumplidos el día de la elección y ser originario del estado o vecino '
+             'con más de <b>seis meses</b> de residencia. Y no puede registrarse nadie con sentencia firme por delitos contra la vida, sexuales, violencia familiar o violencia política contra las mujeres, '
+             'ni quien esté declarado <b>deudor alimentario moroso</b>.</li>'
+             '<li><b>¿Cuánto gasta y quién lo paga?</b> El INE fija un <b>tope de gasto</b> para cada campaña, y los partidos le reportan lo que gasta cada candidatura; la persona candidata responde '
+             'junto con su partido. Si una campaña rebasa su tope en un <b>5 %</b>, la elección se puede anular, siempre que la violación sea grave, dolosa y determinante.</li>'
+             '<li><b>¿Ya es servidor público?</b> Si ya ocupa un cargo (por ejemplo, si busca reelegirse), está obligado a presentar sus <b>declaraciones patrimonial y de intereses</b>, y esas son públicas, '
+             'salvo los datos personales.</li>'
+             '<li><b>Si busca reelegirse, ¿qué votó?</b> La Gaceta Parlamentaria publica las votaciones de la Cámara de Diputados, una por una.</li></ol>',
+        'fu': [_o('Requisitos para ser diputada o diputado (art. 55, frs. I a III)', CPEUM),
+               _o('No puede registrarse quien tenga esas sentencias o sea deudor alimentario moroso (art. 38, fr. VII)', CPEUM),
+               _o('Topes de gasto de campaña que acuerda el Consejo General (art. 243)', LGIPE),
+               _o('Informes de campaña de cada candidatura; la persona candidata es responsable solidaria (art. 79)', LGPP),
+               _o('Nulidad si se rebasa el tope en 5 %, con violaciones graves, dolosas y determinantes (art. 41, fr. VI)', CPEUM),
+               _o('Todo servidor público declara patrimonio e intereses, y las declaraciones son públicas salvo datos personales (arts. 29 y 32)', LGRA),
+               _o('Votaciones de cada sesión', GACETA_VOT)],
+        'sug': ['¿Se pueden reelegir los diputados?', '¿Cuándo son las próximas elecciones?', '¿Cómo es el proceso electoral?']}
     t['judicial'] = {
         'tit': 'La elección judicial pasó a 2028',
         'h': '<p>La segunda elección del Poder Judicial <b>ya no será en 2027</b>. La reforma publicada el <b>2 de junio de 2026</b> la movió al '

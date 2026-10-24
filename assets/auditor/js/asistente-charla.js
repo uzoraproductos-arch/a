@@ -1008,6 +1008,7 @@
     function legResp(t, es, dir, cuantos) {
       if (!LEG) return null;
       if (/cuando se (aprueba|vota|entrega|presenta|discute)|fecha (limite|para)|a mas tardar|calendario/.test(t) && /presupuesto|paquete|ley de ingresos|\bpef\b|\blif\b/.test(t)) return legTema('paquete');
+      if (/(evaluar|evaluo|conocer|investigar|revisar|reviso|checar|checo|en que me fijo|como (escojo|elijo|saber)).*(candidat|aspirante)|(candidat|aspirante)s?.*(confiable|evaluar|puede ser|declaracion)|requisitos para ser (diputad|candidat)|(puede|pueden) ser candidat|deudor(es)? alimentari|topes? de (gasto|campana)/.test(t)) return legTema('candidatos');
       if (DINERO.test(t)) return null;
       var cuenta = /cuant[oa]s|numero de|integrantes|integra|tamano|grande|chico|pequeno|\bmas (diputad|legislador)|\bmenos (diputad|legislador)/;
       var local = /congresos? (local|locales|estatal|estatales|de los estados)|diputad[oa]s? locales?|legislaturas? (local|locales|estatal|estatales)|legisladores locales/.test(t);
@@ -1023,6 +1024,7 @@
       if (/plan b|reformas? (electoral|recientes?|a la constitucion)|que cambio en la constitucion|nacionalidad unica/.test(t)) return legTema('reformas');
       if (/regidur|regidor|sindicatura|sindic[oa]s?\b|cabildo|como se integra (un|el) ayuntamiento|integracion del ayuntamiento/.test(t)) return legTema('ayuntamientos');
       if (/periodos? (ordinario|de sesiones)|cuando sesiona|sesiones del congreso|receso|esta sesionando|en sesiones|sesiona el congreso/.test(t)) return legTema('sesiones', hoySesion());
+      if (/etapas? del proceso electoral|proceso electoral (paso a paso|por etapas)|como es el proceso electoral|ruta (critica|del proceso)|computos? distrital|cuando (se cuentan|cuentan) los votos|constancia de mayoria|cuando termina el proceso electoral/.test(t)) return legTema('ruta');
       if (/elecci|votacion|votar|vota\b|votamos|votan\b|jornada electoral|comicios|proceso electoral|precampa|campanas? electoral|veda electoral|urnas/.test(t) &&
           /proxim|cuando|2027|que se (elige|vota)|que vamos a votar|cuales|fecha|siguiente|viene/.test(t)) return legTema('elecciones');
       if (/plurinominal|pluris\b|representacion proporcional|mayoria relativa|primera minoria/.test(t)) return legTema('pluris');
@@ -1063,6 +1065,9 @@
       if (/organo de administracion judicial|\boaj\b/.test(t)) return judTema('oaj');
       if (/tribunal electoral|\btepjf\b|sala superior/.test(t)) return judTema('tepjf');
       if (/consejo de la judicatura|\bcjf\b|reforma judicial|(quien|como) .*(forma|integra|compone|estructura).*poder judicial|estructura del poder judicial|organos? del poder judicial|organigrama del poder judicial|que es el poder judicial/.test(t)) return judTema('estructura');
+      if (/recursos? (de|del|en el) (juicio de )?amparo|recurso de (revision|queja|reclamacion|inconformidad)|que recursos? (hay|procede|existe)|que procede contra|\b(queja|reclamacion|inconformidad) en (el )?amparo|como (impugno|recurro|apelo) (una|la|un|el) (sentencia|resolucion|suspension)/.test(t)) return judTema('recursos');
+      if (/(cuando|como) (llega|sube|llego|se llega|puedo llegar|puede llegar) .*corte|facultad de atraccion|atrae (un|el|los) caso|amparo directo en revision|contradiccion de (criterios|tesis)|que casos (ve|revisa|resuelve|atiende) la (suprema )?corte/.test(t)) return judTema('llegar_corte');
+      if (/medios de control|defender la constitucion|defiende la constitucion|instrumentos (para|de) (defensa|control)|control (constitucional|de (la )?constitucionalidad)/.test(t)) return judTema('medios');
       if (/(que es|en que consiste|como funciona|como (pido|presento|promuevo)) (el |un )?(juicio de )?amparo|amparo (directo|indirecto)|juicio de amparo|ampararme|me puedo amparar/.test(t)) return judTema('amparo');
       if (/acci(on|ones) de inconstitucionalidad|controversias? constitucional/.test(t)) return judTema('controversias');
       if (/jurisprudencia|declaratoria general|obliga a (todos )?los (jueces|tribunales)/.test(t)) return judTema('jurisprudencia');

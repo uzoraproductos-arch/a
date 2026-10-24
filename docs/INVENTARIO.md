@@ -53,7 +53,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-ambiente-puntos-ciegos.html` | Puntos ciegos y consecuencias · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
 | `datos-ambiente-quien-lo-mide.html` | Quién lo mide y de dónde sale · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 3 |
 | `datos-descargas.html` | Descarga en CSV (abre en Excel) · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
-| `datos-judicial-como-decide.html` | Cómo decide un juez · Auditavisión | apartados.py | 41 | 0 | 5 | 0 | 0 |
+| `datos-judicial-como-decide.html` | Cómo decide un juez · Auditavisión | apartados.py | 44 | 0 | 16 | 0 | 0 |
 | `datos-judicial-eleccion.html` | La elección judicial · Auditavisión | apartados.py | 37 | 0 | 6 | 2 | 2 |
 | `datos-judicial-estructura.html` | Quién es quién y los 32 circuitos · Auditavisión | apartados.py | 40 | 0 | 19 | 3 | 2 |
 | `datos-judicial-presupuesto.html` | El presupuesto · Auditavisión | apartados.py | 40 | 0 | 6 | 5 | 1 |
@@ -61,7 +61,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-judicial-suprema-corte.html` | La Suprema Corte · Auditavisión | apartados.py | 38 | 0 | 10 | 1 | 0 |
 | `datos-legislativo-calendario.html` | Sesiones, presupuesto y reformas · Auditavisión | apartados.py | 37 | 0 | 5 | 0 | 0 |
 | `datos-legislativo-camaras.html` | Las Cámaras · Auditavisión | apartados.py | 38 | 0 | 13 | 5 | 0 |
-| `datos-legislativo-elecciones.html` | Las elecciones · Auditavisión | apartados.py | 37 | 0 | 9 | 3 | 1 |
+| `datos-legislativo-elecciones.html` | Las elecciones · Auditavisión | apartados.py | 39 | 0 | 19 | 6 | 1 |
 | `datos-legislativo-estados.html` | Congresos locales y ayuntamientos · Auditavisión | apartados.py | 35 | 0 | 5 | 0 | 0 |
 | `datos-medio-ambiente.html` | Medio ambiente · Auditavisión | apartados.py | 37 | 0 | 0 | 0 | 0 |
 | `datos-municipios.html` | Base de Datos Municipal EFIPEM (INEGI) · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |

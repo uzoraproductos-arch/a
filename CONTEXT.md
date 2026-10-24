@@ -108,17 +108,22 @@ Inventario de lo que traía, contra lo que ya tiene Auditavisión:
 | 6 Verificador, 7 Diccionario, 8 Referencias | Modo Inspector, `diccionario.html`, `fuentes-oficiales.html` | Nada nuevo |
 | 9 Comunidad | `participa.html` y el cajón «Cuéntanos lo que viste» | El Pase del Auditor (ya retirado) |
 
-**Lo que se podría rescatar** (no está en Auditavisión y es materia de ley,
-no de cifras; entraría solo cotejado contra su documento oficial):
-1. Los cuatro medios de control constitucional (amparo, controversia
-   constitucional, acción de inconstitucionalidad y declaratoria general),
-   los recursos del amparo (revisión, queja, reclamación, inconformidad) y
-   las vías por las que un caso llega a la Corte: Ley de Amparo y arts. 103
-   a 107 de la Constitución → `datos-judicial-como-decide.html`.
-2. La guía para evaluar a una candidata o candidato (Conóceles del INE,
-   declaraciones 3 de 3) → `datos-legislativo-elecciones.html`.
-3. La ruta del proceso electoral, etapa por etapa (LGIPE).
-Queda a decisión del autor.
+**Lo que se rescató** (pedido del autor, 24-10-2026, sello 20261024p). Solo el
+tema: cada línea se cotejó contra el texto vigente, con su huella SHA-256.
+- En `datos-judicial-como-decide.html` (y en el chat, `D.jud`): «Los cuatro
+  caminos para defender la Constitución» (`medios`, arts. 103, 105 y 107),
+  «Los recursos del amparo» (`recursos`, Ley de Amparo arts. 80 a 105, 201 y
+  202, última reforma DOF 16-10-2025) y «¿Cuándo llega un caso a la Suprema
+  Corte?» (`llegar_corte`, arts. 105 y 107; Ley de Amparo 83 y 84).
+- En `datos-legislativo-elecciones.html` (y en el chat, `D.leg`): «El proceso
+  electoral, etapa por etapa» (`ruta`, LGIPE 208, 225, 251, 310 y 312) y
+  «Cómo evaluar a una candidata o candidato» (`candidatos`, Constitución 38,
+  41 y 55; LGIPE 243; LGPP 79; LGRA 29 y 32; votaciones de la Gaceta
+  Parlamentaria).
+- No entró lo que no se pudo sostener: la cuenta de «seis puertas» a la
+  Corte (la Constitución da las vías, no un número) y el sistema
+  «Conóceles» del INE para 2027 (el portal del INE no se pudo consultar desde
+  aquí; queda por cotejar cuando lo publique).
 
 ## Qué es el proyecto
 
