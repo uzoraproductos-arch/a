@@ -274,6 +274,7 @@
     ['datos', '🗂️', 'Portales y datos abiertos', ['fuentes_oficiales']],
     ['estadistica', '📈', 'Estadística oficial', ['estadistica_oficial']],
     ['judicial', '🏛️', 'Poder Judicial', ['judicial']],
+    ['electoral', '🗳️', 'Elecciones e INE', ['electoral']],
     ['otras', '📚', 'Investigación, doctrina y otras', ['investigacion_civica', 'doctrina', 'internacional']]
   ];
   var FAM_DE = {};

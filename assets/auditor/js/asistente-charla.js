@@ -546,6 +546,8 @@
     function calcula(q) {
       var t = norm(q).replace(/por ?ciento/g, '%').replace(/[¿?¡!]/g, ' ').replace(/\s+/g, ' ');
       var peso = /\$|peso|millon|mdp|billon/.test(t), m, a, b, r, op, h;
+      /* Un folio o una fecha no son una división: INE/CG564/2025, 15/06/2025. */
+      if (/[a-z]\d+\/\d|\b\d{1,2}\/\d{1,2}\/\d{2,4}\b/.test(t)) return null;
       if ((m = new RegExp('(\\d[\\d,]*(?:\\.\\d+)?)\\s*%\\s*(?:de|del|sobre)\\s*' + NUM).exec(t))) {
         a = parseFloat(m[1].replace(/,/g, '')); b = valor(m[2], m[3]); r = b * a / 100;
         h = '<b>El ' + n(a, a % 1 ? 2 : 0) + ' % de ' + grande(b, peso) + ' es ' + grande(r, peso) + '.</b>'; op = grande(b, peso) + ' × ' + a + ' ÷ 100';

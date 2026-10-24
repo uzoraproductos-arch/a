@@ -6310,6 +6310,36 @@ window.AUDIT_DB = {
   ],
   "glosario": [
     {
+      "termino": "Los tres presupuestos (del Estado, nacional y social)",
+      "categoria": "🏛️ Presupuesto & ASF",
+      "definicion": "Una forma de leer el gasto que propone la doctrina del derecho económico: el presupuesto del Estado (lo que el poder público necesita para funcionar: gobierno, justicia, seguridad, el Congreso, los tribunales y los órganos autónomos), el nacional (lo que mueve al país: energía, combustibles, carreteras, campo, ciencia y las empresas públicas) y el social (lo que se invierte en las personas: educación, salud, seguridad social y vivienda). Hacienda no los publica con esos nombres, pero cada uno corresponde a una finalidad de su clasificación funcional, así que se pueden sumar con la operación a la vista. Para 2026: social $4.93 billones, nacional $1.70 billones y del Estado $463,000 millones.",
+      "ley": "Gómez Granillo y Gutiérrez Rosas, Introducción al derecho económico (1995) · SHCP, Criterios Generales de Política Económica 2027, clasificación funcional del PEF 2026"
+    },
+    {
+      "termino": "Clasificación Funcional del Gasto",
+      "categoria": "🏛️ Presupuesto & ASF",
+      "definicion": "Ordena el gasto programable según para qué sirve, no según quién lo gasta: gobierno, desarrollo social y desarrollo económico, cada una partida en funciones (educación, salud, combustibles y energía, comunicaciones y transportes…). Permite comparar años y países aunque cambien las secretarías. La frontera no siempre coincide con el sentido común: el agua potable y la urbanización entran en «vivienda y servicios a la comunidad», dentro del desarrollo social.",
+      "ley": "Clasificador Funcional del Gasto del CONAC, con base en la Ley General de Contabilidad Gubernamental · SHCP, Criterios Generales de Política Económica 2027"
+    },
+    {
+      "termino": "Pasivo Contingente",
+      "categoria": "💰 Hacendario & Deuda",
+      "definicion": "Un compromiso que no cuenta como deuda pública pero puede volverse gasto si ocurre algo: que quiebre un banco, que se ejerzan las garantías de la banca de desarrollo, que llegue un desastre natural o que haya que pagar las pensiones del viejo sistema de reparto. El Paquete Económico 2027 los enumera; el mayor es el pasivo pensionario del sector público, 37.4 % del PIB con cifras de 2025, que no está dentro del 55.0 % del PIB de deuda.",
+      "ley": "SHCP, Criterios Generales de Política Económica 2027, riesgos fiscales y pasivos contingentes"
+    },
+    {
+      "termino": "Proceso Electoral Federal 2026-2027",
+      "categoria": "🗳️ Poder Legislativo & Elecciones",
+      "definicion": "El conjunto de actos con que se renueva la Cámara de Diputados en 2027. Arrancó el 10 de septiembre de 2026; las precampañas van del 4 de enero al 12 de febrero de 2027, y la jornada electoral es el 6 de junio de 2027, primer domingo de junio. Es concurrente: las 32 entidades eligen cargos locales el mismo día, 17 de ellas gubernatura, por lo que se vota en casilla única.",
+      "ley": "LGIPE, art. 22 · INE, Acuerdo de designación de los Consejos Locales (DOF 13-10-2026) · INE, Acuerdo de criterios de precampañas (DOF 16-10-2026) · INE/CG469/2026 (DOF 19-08-2026)"
+    },
+    {
+      "termino": "Estado de Actividades",
+      "categoria": "🔍 Fiscalización Superior",
+      "definicion": "El estado financiero que muestra lo que un ente público o una empresa del Estado ingresó y gastó en el año, y su resultado: ahorro o desahorro, ganancia o pérdida. Es el que se lee para saber si una obra como el Tren Maya o el AIFA cubre su operación con lo que cobra. Cada entidad lo publica en la Cuenta Pública.",
+      "ley": "Ley General de Contabilidad Gubernamental, art. 46 · SHCP, Cuenta Pública (Tomos II, VII y VIII)"
+    },
+    {
       "termino": "Remuneración Total Anual Neta",
       "definicion": "Lo que una persona servidora pública recibe en un año después del impuesto sobre la renta: su sueldo, sus prestaciones y los pagos que se cubren una vez al año, como el aguinaldo. El Presupuesto de Egresos la publica para los cargos de mayor rango en su Anexo 23. Es la medida que permite comparar cargos entre sí, porque todos se cuentan igual: en neto y por año.",
       "ley": "Art. 127 CPEUM · Ley Federal de Remuneraciones de los Servidores Públicos · PEF 2026, Anexo 23",
@@ -9889,7 +9919,7 @@ window.AUDIT_DB = {
       "id": "ref-pef2026",
       "categoria": "leyes_anuales",
       "categoria_nombre": "Paquete Económico Anual",
-      "cita_apa": "Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026 [PEF 2026]. Diario Oficial de la Federación, 28 de noviembre de 2025 (México). Cámara de Diputados.",
+      "cita_apa": "Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2026 [PEF 2026]. Diario Oficial de la Federación, 21 de noviembre de 2025 (México). Cámara de Diputados.",
       "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf",
       "descripcion": "Decreto emitido en exclusiva por la Cámara de Diputados que aprueba el gasto público de $10.19 billones de pesos, asignando partidas por ramo, programas de trabajo y gasto federalizado."
     },
@@ -10288,6 +10318,258 @@ window.AUDIT_DB = {
       "cita_apa": "Gobierno de México. (2023, 1 de noviembre). Inicia plan de reconstrucción en Guerrero por 61 mil 313 mdp: presidente AMLO [Comunicado]. Archivo de la Presidencia 2018-2024, gob.mx.",
       "url": "https://www.gob.mx/amlo/prensa/inicia-plan-de-reconstruccion-en-guerrero-por-61-mil-313-mdp-presidente-amlo",
       "descripcion": "El secretario de Hacienda presenta el costo del Plan General de Reconstrucción de Acapulco y Coyuca de Benítez: «61 mil 313 millones de pesos», en 20 renglones, dos de ellos «por determinar». El plan firmado el 31 de octubre de 2023 no trae el total."
+    },
+    {
+      "num": 126,
+      "id": "ref-ine-cg563-2025",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Instituto Nacional Electoral. (2025, 15 de junio). Acuerdo INE/CG563/2025 del Consejo General: sumatoria nacional de la elección de ministras y ministros de la Suprema Corte de Justicia de la Nación y asignación de cargos. Diario Oficial de la Federación (México).",
+      "url": "https://dof.gob.mx/2025/INE/CGext202506_15_ap_2_1.pdf",
+      "descripcion": "Sostiene los resultados de la primera elección judicial: la sumatoria nacional y quiénes ocupan la Suprema Corte. Lo usan las páginas del Poder Judicial en Datos (la elección y la Suprema Corte) y el Auditor."
+    },
+    {
+      "num": 127,
+      "id": "ref-ine-cg564-2025",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Instituto Nacional Electoral. (2025, 15 de junio). Acuerdo INE/CG564/2025 del Consejo General: declaración de validez de la elección de ministras y ministros de la Suprema Corte de Justicia de la Nación. Diario Oficial de la Federación (México).",
+      "url": "https://dof.gob.mx/2025/INE/CGext202506_15_ap_2_2.pdf",
+      "descripcion": "Declara válida la elección de la Corte y, en su considerando 25, enumera los 881 cargos que se eligieron en 2025 por circuito. De ahí salen las cifras de la estructura del Poder Judicial."
+    },
+    {
+      "num": 128,
+      "id": "ref-ine-cg469-2026",
+      "categoria": "electoral",
+      "categoria_nombre": "Elecciones e Instituto Nacional Electoral",
+      "cita_apa": "Instituto Nacional Electoral. (2026, 19 de agosto). Acuerdo INE/CG469/2026 del Consejo General: modelo de casilla única para el Proceso Electoral 2026-2027. Diario Oficial de la Federación (México).",
+      "url": "https://dof.gob.mx/nota_detalle.php?codigo=5796656&fecha=19/08/2026",
+      "descripcion": "Sus considerandos 25 y 29 confirman que en 2027 hay elecciones concurrentes en las 32 entidades, 17 de ellas con gubernatura. Lo cita la página de las elecciones del Poder Legislativo."
+    },
+    {
+      "num": 129,
+      "id": "ref-ine-consejos-2027",
+      "categoria": "electoral",
+      "categoria_nombre": "Elecciones e Instituto Nacional Electoral",
+      "cita_apa": "Instituto Nacional Electoral. (2026, 13 de octubre). Acuerdo del Consejo General por el que se designa a las consejeras y consejeros de los Consejos Locales para el Proceso Electoral Federal 2026-2027. Diario Oficial de la Federación (México).",
+      "url": "https://dof.gob.mx/nota_detalle.php?codigo=5801000&fecha=13/10/2026",
+      "descripcion": "Fija el arranque del Proceso Electoral Federal 2026-2027: el 10 de septiembre de 2026. La jornada electoral, el 6 de junio de 2027, se deriva del artículo 22 de la LGIPE."
+    },
+    {
+      "num": 130,
+      "id": "ref-ine-precampanas-2027",
+      "categoria": "electoral",
+      "categoria_nombre": "Elecciones e Instituto Nacional Electoral",
+      "cita_apa": "Instituto Nacional Electoral. (2026, 16 de octubre). Acuerdo del Consejo General por el que se establecen los criterios y plazos de las precampañas del Proceso Electoral Federal 2026-2027. Diario Oficial de la Federación (México).",
+      "url": "https://dof.gob.mx/nota_detalle.php?codigo=5801398&fecha=16/10/2026",
+      "descripcion": "Su punto cuarto fija las precampañas del 4 de enero al 12 de febrero de 2027."
+    },
+    {
+      "num": 131,
+      "id": "ref-dof-reforma-electoral-2014",
+      "categoria": "constitucional",
+      "categoria_nombre": "Constitución Política de los Estados Unidos Mexicanos",
+      "cita_apa": "Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Constitución Política de los Estados Unidos Mexicanos, en materia política-electoral. Diario Oficial de la Federación, 10 de febrero de 2014 (México).",
+      "url": "https://dof.gob.mx/nota_detalle.php?codigo=5332025&fecha=10/02/2014",
+      "descripcion": "La reforma que permitió la reelección consecutiva de legisladores (artículo 59 y transitorio décimo primero). Es el antecedente de la regla de no reelección y nepotismo publicada el 1 de abril de 2025."
+    },
+    {
+      "num": 132,
+      "id": "ref-ipab-ef2025",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Instituto para la Protección al Ahorro Bancario. (2026). Estados financieros dictaminados al 31 de diciembre de 2025. IPAB, Gobierno de México.",
+      "url": "https://www.gob.mx/cms/uploads/attachment/file/1068974/Estados-Financieros_diciembre-2025.pdf",
+      "descripcion": "El estado de actividades del Fondo FOBAPROA (columnas 2025 y 2024): lo que pierde el rescate bancario antes del apoyo del presupuesto. Lo usan Megaobras y el catálogo de cifras de Contrasta una nota."
+    },
+    {
+      "num": 133,
+      "id": "ref-ipab-notas-mar2026",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Instituto para la Protección al Ahorro Bancario. (2026). Estados financieros al 31 de marzo de 2026 y al 31 de diciembre de 2025 (Notas cortas). IPAB, Gobierno de México.",
+      "url": "https://www.gob.mx/cms/uploads/attachment/file/1073775/IPAB_Notas-Cortas_Marzo_2026-DEF.pdf",
+      "descripcion": "Su estado analítico de la deuda y otros pasivos (p. 3) da la deuda en bonos del IPAB al cierre de 2025."
+    },
+    {
+      "num": 134,
+      "id": "ref-ipab-paf2026",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Instituto para la Protección al Ahorro Bancario. (2026). Plan Anual de Financiamiento 2026. IPAB, Gobierno de México.",
+      "url": "https://www.gob.mx/cms/uploads/attachment/file/1043973/Plan-Anual-De-Financiamiento_2026.pdf",
+      "descripcion": "El punto de partida con que el propio IPAB mide su deuda: la deuda neta al 31 de diciembre de 1999, en porcentaje del PIB, y las transferencias que recibe del presupuesto."
+    },
+    {
+      "num": 135,
+      "id": "ref-shcp-cp2024-ea-gf",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2025). Cuenta Pública 2024, Tomo II: Estado de Actividades del Gobierno Federal. SHCP.",
+      "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EA_GF.pdf",
+      "descripcion": "La contabilidad del Gobierno Federal en 2024: ingresos de la gestión, gastos y resultado del ejercicio. Lo usan el estado de resultados de Números y el contexto dimensional. Las ligas de la Cuenta Pública no se pueden abrir desde el entorno donde se genera la plataforma (certificado del portal de Hacienda); la cifra se tomó del documento al integrarla."
+    },
+    {
+      "num": 136,
+      "id": "ref-shcp-cp2024-tren-maya",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2025). Cuenta Pública 2024, Tomo VII, Defensa Nacional: Tren Maya, S.A. de C.V. (H0M), Estado de Actividades del 1 de enero al 31 de diciembre de 2024. SHCP.",
+      "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/7H0M.02.01.xls",
+      "descripcion": "Ingresos, gastos y resultado del Tren Maya en 2024, tal como los reporta la empresa. Sostiene la medida de pérdida de Megaobras. Las ligas de la Cuenta Pública no se pueden abrir desde el entorno donde se genera la plataforma (certificado del portal de Hacienda); la cifra se tomó del documento al integrarla."
+    },
+    {
+      "num": 137,
+      "id": "ref-shcp-cp2024-aifa",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2025). Cuenta Pública 2024, Tomo VII, Defensa Nacional: Aeropuerto Internacional Felipe Ángeles, S.A. de C.V. (HZI), Estado de Actividades del 1 de enero al 31 de diciembre de 2024. SHCP.",
+      "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/7HZI.02.01.xls",
+      "descripcion": "Ingresos, gastos y resultado del AIFA en 2024. Sostiene la medida de pérdida de Megaobras. Las ligas de la Cuenta Pública no se pueden abrir desde el entorno donde se genera la plataforma (certificado del portal de Hacienda); la cifra se tomó del documento al integrarla."
+    },
+    {
+      "num": 138,
+      "id": "ref-shcp-cp2024-birmex",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2025). Cuenta Pública 2024, Tomo VII, Salud: Laboratorios de Biológicos y Reactivos de México, S.A. de C.V. (NEF), Estado de Actividades del 1 de enero al 31 de diciembre de 2024. SHCP.",
+      "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/12NEF.02.01.xls",
+      "descripcion": "El resultado de Birmex, la empresa que opera la Megafarmacia, en 2024. Las ligas de la Cuenta Pública no se pueden abrir desde el entorno donde se genera la plataforma (certificado del portal de Hacienda); la cifra se tomó del documento al integrarla."
+    },
+    {
+      "num": 139,
+      "id": "ref-pti-cp2024",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Pemex Transformación Industrial. (2025). Estados financieros separados dictaminados 2024. Cuenta Pública 2024, Tomo VIII. SHCP.",
+      "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VIII/52T9M.05.DAR.pdf",
+      "descripcion": "El resultado de la subsidiaria de Pemex que tiene las refinerías, incluida Dos Bocas, en 2024. Las ligas de la Cuenta Pública no se pueden abrir desde el entorno donde se genera la plataforma (certificado del portal de Hacienda); la cifra se tomó del documento al integrarla."
+    },
+    {
+      "num": 140,
+      "id": "ref-pemex-cp2025",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Petróleos Mexicanos. (2026). Estados financieros consolidados 2025 y notas presupuestarias. Cuenta Pública 2025, Tomo VIII. SHCP.",
+      "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2025/tomo/VIII/52TYY.05.DAR.pdf",
+      "descripcion": "Los estados consolidados de Pemex en 2025. Muestran también lo que ya no publica: desde 2025 no separa ventas, costos ni resultado de la refinería de Dos Bocas. Las ligas de la Cuenta Pública no se pueden abrir desde el entorno donde se genera la plataforma (certificado del portal de Hacienda); la cifra se tomó del documento al integrarla."
+    },
+    {
+      "num": 141,
+      "id": "ref-shcp-obra-publica-abierta",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (s. f.). Cartera de programas y proyectos de inversión («Obra Pública Abierta»), cortes trimestrales 2019-2026. Transparencia Presupuestaria.",
+      "url": "https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta",
+      "descripcion": "El registro de cada obra en la cartera de inversión de Hacienda: monto total, avance y clave. Con él se mide el sobrecosto de cada megaobra contra su primer monto documentado. Las ligas de la Cuenta Pública no se pueden abrir desde el entorno donde se genera la plataforma (certificado del portal de Hacienda); la cifra se tomó del documento al integrarla."
+    },
+    {
+      "num": 142,
+      "id": "ref-shcp-pef2026-datos",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2026). Presupuesto de Egresos de la Federación 2026, datos abiertos (PEF_2026.csv). Transparencia Presupuestaria.",
+      "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/CSV/PEF_2026.csv",
+      "descripcion": "El presupuesto aprobado de 2026 renglón por renglón (columna MONTO_PEF_2026). Lo usan los relojes y Megaobras para sumar por programa o por ramo. Las ligas de la Cuenta Pública no se pueden abrir desde el entorno donde se genera la plataforma (certificado del portal de Hacienda); la cifra se tomó del documento al integrarla."
+    },
+    {
+      "num": 143,
+      "id": "ref-shcp-ppef2027-datos",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2026). Proyecto de Presupuesto de Egresos de la Federación 2027, datos abiertos (PPEF_2027.xlsx). Transparencia Presupuestaria.",
+      "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/XLSX/PPEF_2027.xlsx",
+      "descripcion": "La base de datos del proyecto de 2027, con la que se comparan los ramos y el gasto ambiental contra lo aprobado para 2026. Las ligas de la Cuenta Pública no se pueden abrir desde el entorno donde se genera la plataforma (certificado del portal de Hacienda); la cifra se tomó del documento al integrarla."
+    },
+    {
+      "num": 144,
+      "id": "ref-shcp-ramo03-ur",
+      "categoria": "judicial",
+      "categoria_nombre": "Poder Judicial & SCJN",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2026, enero). Presupuesto de Egresos de la Federación 2026, Ramo 03: distribución por unidad responsable, capítulo y concepto. SHCP.",
+      "url": "https://www.comunicacionpef.hacienda.gob.mx/work/models/COMUNICACION_DEL_PEF/Documentos/2026/distribucion_gasto_UR/r03_apurog.pdf",
+      "descripcion": "Cuánto del presupuesto del Poder Judicial va a servicios personales (capítulo 1000) y a cada unidad. Lo usan Datos › Poder Judicial y «Lo que cuestan el Congreso y la Judicatura». Las ligas de la Cuenta Pública no se pueden abrir desde el entorno donde se genera la plataforma (certificado del portal de Hacienda); la cifra se tomó del documento al integrarla."
+    },
+    {
+      "num": 145,
+      "id": "ref-shcp-informe-4t2025",
+      "categoria": "hacendario_fiscal",
+      "categoria_nombre": "Hacendario y Fiscal",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público. (2026). Informes sobre la Situación Económica, las Finanzas Públicas y la Deuda Pública, cuarto trimestre de 2025. SHCP.",
+      "url": "https://www.finanzaspublicas.hacienda.gob.mx/work/models/Finanzas_Publicas/docs/congreso/infotrim/2025/ivt/05adp/itandpdc_202504.pdf",
+      "descripcion": "El informe trimestral que Hacienda entrega al Congreso: deuda pública, pasivos del IPAB y del FARAC. Hay copia en investigaciones/entregas/SHCP_IPAB_DeudaPublica_4T2025.pdf. Las ligas de la Cuenta Pública no se pueden abrir desde el entorno donde se genera la plataforma (certificado del portal de Hacienda); la cifra se tomó del documento al integrarla."
+    },
+    {
+      "num": 146,
+      "id": "ref-presidencia-2ig",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estadística y Documentos Oficiales",
+      "cita_apa": "Presidencia de la República. (2026, 1 de septiembre). Segundo Informe de Gobierno 2025-2026. Gobierno de México.",
+      "url": "https://www.segundoinformedegobierno.gob.mx/gmx_media/2-ig-informe-consolidado-final_01_09_2026",
+      "descripcion": "El informe anual de la Presidencia. La plataforma toma de él cifras puntuales con su página, como la recaudación asociada al acompañamiento técnico de la Administración Pública Federal (p. 260)."
+    },
+    {
+      "num": 147,
+      "id": "ref-conapo-proyecciones",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estadística y Documentos Oficiales",
+      "cita_apa": "Consejo Nacional de Población. (s. f.). Proyecciones de la población de México: población a mitad de año, 1950-2070 [datos abiertos]. Agencia de Transformación Digital y Telecomunicaciones.",
+      "url": "https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv",
+      "descripcion": "La población a mitad de 2026, entre la que se reparten las cifras «por persona» de las calculadoras y del estado de cuenta ambiental."
+    },
+    {
+      "num": 148,
+      "id": "ref-sat-padron-rfc",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Servicio de Administración Tributaria. (2026). Padrón de contribuyentes por situación del RFC [datos abiertos, corte de abril de 2026]. Agencia de Transformación Digital y Telecomunicaciones.",
+      "url": "https://repodatos.atdt.gob.mx/api_update/sat/padron/porsitrfc21.csv",
+      "descripcion": "Cuántas personas tienen RFC activo y cuántas son asalariadas. Es el número de inscritos, no el de quienes pagaron impuestos; se usa para repartir entre quienes tienen obligaciones con el SAT."
+    },
+    {
+      "num": 149,
+      "id": "ref-afac-estadistica",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estadística y Documentos Oficiales",
+      "cita_apa": "Agencia Federal de Aviación Civil. (2026). Estadística Operativa de Aeropuertos 2006-2026 (agosto de 2026) [libro Excel]. Gobierno de México.",
+      "url": "https://www.gob.mx/cms/uploads/attachment/file/1105543/producto-aeropuertos-2006-2026-ago-28092026.xlsx",
+      "descripcion": "Pasajeros y operaciones de cada aeropuerto. Con ella se calcula lo que cuesta cada pasajero del AIFA."
+    },
+    {
+      "num": 150,
+      "id": "ref-banxico-fix",
+      "categoria": "banca_central",
+      "categoria_nombre": "Banca Central y Mercado de Dinero",
+      "cita_apa": "Banco de México. (2026). Tipo de cambio FIX (determinación), serie diaria. Banxico.",
+      "url": "https://www.banxico.org.mx/tipcamb/tipCamIHAction.do?idioma=sp&fechaInicial=01/01/2013&fechaFinal=16/10/2026&salida=HTML",
+      "descripcion": "El tipo de cambio oficial de cada día. La plataforma calcula con él promedios anuales (derivados, con su operación) para pasar a pesos las cifras que los documentos dan en dólares."
+    },
+    {
+      "num": 151,
+      "id": "ref-asf-naicm",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalización Superior y Auditoría",
+      "cita_apa": "Auditoría Superior de la Federación. (2021, marzo). Costo del esquema de financiamiento, construcción y terminación anticipada de contratos del NAICM al 31 de diciembre de 2019. ASF.",
+      "url": "https://www.asf.gob.mx/uploads/5210_NAICM/NAICM.pdf",
+      "descripcion": "El costo de cancelar el aeropuerto de Texcoco según la Auditoría Superior (pp. 12 y 46-48)."
+    },
+    {
+      "num": 152,
+      "id": "ref-asf-estela-luz",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalización Superior y Auditoría",
+      "cita_apa": "Auditoría Superior de la Federación. (s. f.). Informe especial sobre la fiscalización superior del monumento Estela de Luz, 2009-2011. ASF.",
+      "url": "https://www.asf.gob.mx/uploads/56_Informes_especiales_de_auditoria/Estela_Luz_Nv.pdf",
+      "descripcion": "El primer monto autorizado de la obra (contrato del 18-12-2009) y su costo final: la base del sobrecosto de la Estela de Luz."
+    },
+    {
+      "num": 153,
+      "id": "ref-pef2024",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2024 [PEF 2024]. Diario Oficial de la Federación (México).",
+      "url": "https://dof.gob.mx/2023/SHCP/PEF_2024.html",
+      "descripcion": "El decreto de 2024: un gasto neto total de $9,066,045.8 millones (artículo 1). Lo usan el contexto dimensional y el estado de resultados para distinguir lo autorizado de lo pagado."
     }
   ],
   "preguntas_casillas": [

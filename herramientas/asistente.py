@@ -40,7 +40,7 @@ def limpio(t):
 def _fichas(d):
     out = []
 
-    # 1. El glosario (246 terminos, cada uno con su ley).
+    # 1. El glosario (251 terminos, cada uno con su ley).
     for g in d['glosario']:
         out.append({'t': 'glosario', 'tit': limpio(g['termino']), 'txt': limpio(g['definicion']),
                     'fu': [{'tx': limpio(g['ley'])}] if g.get('ley') else [],

@@ -248,7 +248,7 @@ BIBLIOTECA = [
     ('glosario.html', '📖', 'Diccionario', 'Glosario de términos hacendarios',
      'Los términos del presupuesto, la deuda y la fiscalización, en lenguaje llano, con su fundamento y con buscador.'),
     ('fuentes-oficiales.html', '📑', 'Referencias', 'Compendio de fuentes oficiales',
-     'El catálogo de referencias: todas las fichas que sostienen las cifras de la plataforma, numeradas y con su liga directa al DOF, Hacienda, la Auditoría Superior, Banxico, el INEGI y Transparencia Presupuestaria. Cada nota [n] de la plataforma lleva a su ficha.'),
+     'El catálogo de referencias: las leyes, decretos, acuerdos, informes y bases de datos que sostienen las cifras de la plataforma, numerados y con su liga directa al DOF, Hacienda, la Auditoría Superior, el INE, Banxico, el INEGI y Transparencia Presupuestaria. Cada nota [n] de la plataforma lleva a su ficha.'),
     ('marco-legal.html', '⚖️', 'Marco Legal Hacendario', 'El texto vigente',
      'El ciclo del dinero público artículo por artículo: Constitución, Ley de Ingresos 2026, LFPRH, Coordinación Fiscal, Disciplina Financiera y Poder Judicial, con el texto vigente cotejado.'),
     ('preguntas-frecuentes.html', '💡', 'Preguntas Frecuentes', 'En casillas didácticas',
@@ -1510,6 +1510,10 @@ CANAL_COMUNIDAD = ''
 # de independencia, compromiso «De que respondemos»: se corrige en publico
 # diciendo que cambio. (fecha, donde, que estaba mal, que se hizo, enlace)
 ERRATAS = [
+    ('24-10-2026', 'Referencias y Gasto público',
+     'La ficha [11] del Presupuesto de Egresos 2026 y la página «¿Quién lo aprueba?» decían que se publicó en el DOF el 28 de noviembre de 2025.',
+     'Se publicó el 21 de noviembre de 2025: así lo dice el propio documento de la Cámara de Diputados. Se corrigieron las dos.',
+     'fuentes-oficiales.html#ref-pef2026'),
     ('10-10-2026', 'Calculadora Cívica',
      'El comparador «Tú contra ellos» usaba un ingreso de referencia de $15,000 que no salía de ningún documento.',
      'Se retiró. Ahora, si no escribes tu ingreso, usa el salario mínimo general mensual de 2026 ($9,451.20, CONASAMI), rotulado como ejemplo oficial.',
@@ -4120,7 +4124,7 @@ GP_CICLO = [
     ('gasto', '🗳️', 'Aprueba el gasto', 'A más tardar el 15 de noviembre', 'La Cámara de Diputados, sola',
      'Examina, discute y, en su caso, modifica el proyecto, y lo aprueba. Es su facultad exclusiva: el Senado no vota el Presupuesto de Egresos. No puede haber partidas secretas, y todo gasto que se agregue debe traer de dónde pagarse.',
      ['cpeum_art_74_iv', 'lfprh_art_17_18'],
-     'El Presupuesto de Egresos 2026 se publicó en el DOF el 28 de noviembre de 2025, por %s. %s'),
+     'El Presupuesto de Egresos 2026 se publicó en el DOF el 21 de noviembre de 2025, por %s. %s'),
     ('ejerce', '⚙️', 'Lo ejerce', 'Del 1 de enero al 31 de diciembre', 'El Ejecutivo, los Poderes Legislativo y Judicial y los órganos autónomos',
      'Gastan lo aprobado y nada más: ningún pago puede salir del presupuesto. El dinero se administra con eficiencia, eficacia, economía, transparencia y honradez, y las compras y obras se licitan por regla general.',
      ['cpeum_art_126', 'cpeum_art_134'],
@@ -4830,6 +4834,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('24-10-2026', 'La Biblioteca del Erario Público, al día. Referencias suma 28 fichas, de la [126] a la [153]: los acuerdos del INE de la elección judicial y del Proceso Electoral 2026-2027, en una familia nueva «Elecciones e INE»; los estados financieros del IPAB; los estados de actividades de la Cuenta Pública del Tren Maya, el AIFA, Birmex y el Gobierno Federal; las bases de datos abiertas del PEF 2026 y del proyecto 2027, la cartera de Obra Pública Abierta, CONAPO, el padrón del SAT, la AFAC, el FIX de Banxico y los informes de la ASF sobre el NAICM y la Estela de Luz. El Diccionario suma cinco términos: los tres presupuestos, la clasificación funcional del gasto, el pasivo contingente, el Proceso Electoral Federal 2026-2027 y el estado de actividades. Fe de erratas: el Presupuesto de Egresos 2026 se publicó en el DOF el 21 de noviembre de 2025, no el 28.'),
     ('24-10-2026', 'En Números, Presupuesto queda en seis tarjetas: la primera es Los tres presupuestos (del Estado, nacional y social), que se mudó desde Gasto público, y le siguen Cuánto dinero es, Los 16 orígenes del ingreso, ¿A qué equivale?, El camino del dinero y el Paquete Económico 2027. Su página y sus cifras no cambian.'),
     ('24-10-2026', 'Comunidad queda en tres tarjetas: Ágora cívica, Garantías cívicas y Donaciones. La antigua Participa se fundió con el botón «📢 Cuéntanos lo que viste» de la cabecera, que abre su cajón con las cinco rutas: algo raro con el dinero público, un dato mal, un tema para investigar, compartir el Estado de Cuenta y la fe de erratas. El Pase del Auditor Cívico se retira: la plataforma se sostendrá con donaciones o con los Servicios de investigación.'),
     ('24-10-2026', 'Cada estado y cada municipio tiene sus cuatro documentos en su ficha técnica: estado de cuenta, salud financiera, dictamen y un contador en vivo de lo que le llega al día, por hora y por segundo, con su operación a la vista. Y al Auditor ya le puedes preguntar «Zapopan, Jalisco».'),
