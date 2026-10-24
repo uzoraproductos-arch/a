@@ -7,8 +7,8 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 209 |
-| Páginas que solo redirigen | 27 |
+| Páginas revisadas | 210 |
+| Páginas que solo redirigen | 28 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
 
@@ -71,6 +71,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `donaciones.html` | Donaciones · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `enciclopedia-auditavision.html` | Enciclopedia · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
+| `enciclopedia.html` | La Enciclopedia antigua · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `estado-de-cuenta.html` | Contexto dimensional · Auditavisión | apartados.py | 37 | 0 | 0 | 0 | 0 |
 | `expedientes.html` | Los casos por aclarar · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `fuentes-del-auditor.html` | Fuentes del auditor · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
@@ -235,6 +236,7 @@ Los chips que pinta el motor al abrir un módulo no se cuentan aquí: solo los e
 | `biblioteca-hacendaria.html` | `diccionario.html` |
 | `busca-y-verifica.html` | `herramienta-inspector-entes.html` |
 | `congreso-y-elecciones.html` | `datos-poder-legislativo.html` |
+| `enciclopedia.html` | `enciclopedia-auditavision.html` |
 | `fuentes-del-auditor.html` | `diccionario.html` |
 | `herramienta-ambiente-basura.html` | `datos-medio-ambiente.html` |
 | `herramienta-inspector-entes-directorio.html` | `herramienta-inspector-entes.html` |

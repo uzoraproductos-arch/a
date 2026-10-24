@@ -80,15 +80,45 @@ regla de espacio de trabajo (`.agents/rules/`); en otras, pégalo al inicio de l
 conversación. Dos frases bastan para arrancar: «lee AGENTS.md y CONTEXT.md antes
 de tocar nada» y «trabajamos en la rama claude/funny-turing-imtm54».
 
-## Dos «Enciclopedias»: la pestaña manda (decisión del autor, 24-10-2026)
+## Una sola plataforma: la Enciclopedia antigua se retiró (decisión del autor, 24-10-2026)
 
-Una cosa es **la plataforma Enciclopedia** (`enciclopedia.html`, la antigua de
-9 pestañas, con `assets/css`, `assets/js` y `assets/data`) y otra **la pestaña
-Enciclopedia** de Auditavisión (`enciclopedia-auditavision.html`: Números,
-Datos y Aprende). En palabras del autor, la plataforma «se va a quedar, por el
-momento, en el olvido»: sigue congelada y no recibe trabajo. **Lo importante
-ahora es la pestaña.** Cuando un pedido diga «la Enciclopedia» sin más, es la
-pestaña. Detalle en AGENTS.md §0 bis.
+Primero el autor dijo que la plataforma Enciclopedia antigua (`enciclopedia.html`,
+de 9 pestañas, con `assets/css`, `assets/js` y `assets/data`) quedaba «en el
+olvido»; el mismo día decidió **fusionarla**: que quede una sola plataforma y
+se depure lo que ya no sirve «por cuestiones de fuente o contenido, porque ya
+obra en Auditavisión». Se hizo así:
+
+- **Se retiraron** `enciclopedia.html` (351 KB) y sus tres carpetas (5.9 MB:
+  motor, base de datos, geometría, padrones, lista 69-B y estilos). Nada de
+  Auditavisión los cargaba: el auditor usa sus copias de `assets/auditor/`.
+- `enciclopedia.html` **redirige** a `enciclopedia-auditavision.html`
+  (`REDIRECCIONES` de `apartados.py`), para que ningún enlace viejo muera.
+- **El código queda en el historial**: `git show 490233d:enciclopedia.html`
+  (y `490233d:assets/js/...`) lo recupera, por si un día se retoma.
+
+Inventario de lo que traía, contra lo que ya tiene Auditavisión:
+
+| Pestaña antigua | Dónde vive ya | Qué se depuró |
+|---|---|---|
+| 1 Presupuesto (circuito, 32 entidades, municipios, Paquete 2027) | Números: `numeros-camino-del-dinero`, `-las-32-entidades`, `-los-municipios`, `-paquete-2027*` | Nada nuevo: ya decía «se mudó a la plataforma» |
+| 2 Acción financiera (deuda y Banxico, megaobras, PIB, calculadora, bitácora, costo de los Poderes) | `numeros-cuentas-*`, Inversión y Megaobras, `datos-ambiente-pib`, Calculadora Cívica, `numeros-lo-que-cuestan-los-poderes` | La bitácora (notas sin fuente) |
+| 3 Legislativo (cámaras, periodos, elecciones, congresos estatales, remuneraciones) | `datos-poder-legislativo` y sus 4 subpáginas, cotejadas con la Constitución, la LGIPE y el INE | Simuladores de «austeridad» de San Lázaro y el Senado, costo por legislador (IMCO), los «14 niveles» de sueldos: cifras sin documento oficial |
+| 4 Judicial (Pleno, sueldos, elección, amparo, jurisprudencia) | `datos-poder-judicial` y sus 6 subpáginas | Cálculos de ponencias y asesores sin documento |
+| 5 Políticos (mandatarios, Porfirio Díaz) | Ya retirados el 27-09-2026; la balanza de Porfirio vive como trivia en Aprende | Todo |
+| 6 Verificador, 7 Diccionario, 8 Referencias | Modo Inspector, `diccionario.html`, `fuentes-oficiales.html` | Nada nuevo |
+| 9 Comunidad | `participa.html` y el cajón «Cuéntanos lo que viste» | El Pase del Auditor (ya retirado) |
+
+**Lo que se podría rescatar** (no está en Auditavisión y es materia de ley,
+no de cifras; entraría solo cotejado contra su documento oficial):
+1. Los cuatro medios de control constitucional (amparo, controversia
+   constitucional, acción de inconstitucionalidad y declaratoria general),
+   los recursos del amparo (revisión, queja, reclamación, inconformidad) y
+   las vías por las que un caso llega a la Corte: Ley de Amparo y arts. 103
+   a 107 de la Constitución → `datos-judicial-como-decide.html`.
+2. La guía para evaluar a una candidata o candidato (Conóceles del INE,
+   declaraciones 3 de 3) → `datos-legislativo-elecciones.html`.
+3. La ruta del proceso electoral, etapa por etapa (LGIPE).
+Queda a decisión del autor.
 
 ## Qué es el proyecto
 
@@ -110,7 +140,6 @@ assets/auditor/css/auditavision.css     Diseño: temas claro y oscuro
 assets/auditor/js/mexico-states-geo.js  Geometría de las 32 entidades (window.MEXICO_GEOJSON)
 assets/auditor/js/audit-database.js     Datos fiscales (window.AUDIT_DB)
 assets/auditor/js/audit-engine.js       Motor y controlador (window.AuditEngine)
-assets/css, assets/js, assets/data      Congelados con la Enciclopedia: no se tocan
 herramientas/sello.py            Sube el sello de versión de las cinco hojas
 AGENTS.md                        Reglas para agentes de IA (rama, criterio, límites)
 ```

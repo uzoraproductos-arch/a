@@ -321,8 +321,8 @@ APARTADOS = [
     },
     {
         # La Enciclopedia (decisión del autor, 23-10-2026): la segunda de las
-        # tres pestañas junta Números, Datos y Aprende. No es enciclopedia.html,
-        # que es el proyecto congelado: aquí solo hay tres tarjetas.
+        # tres pestañas junta Números, Datos y Aprende. No es la plataforma antigua
+        # (enciclopedia.html, retirada el 24-10-2026): aquí solo hay tres tarjetas.
         'archivo': ENCICLOPEDIA,
         'menu': 'Enciclopedia',
         'icono': '📚',
@@ -5119,6 +5119,12 @@ REDIRECCIONES = {
                                          'Ahora vive en Datos → Medio ambiente, una página por tema.'),
     INVESTIGACIONES: (MODO_INSPECTOR, 'Grandes investigaciones',
                       'Desde el 24-10-2026 las Grandes investigaciones son el Modo Inspector: sus seis aplicaciones están en su página.'),
+    # La plataforma Enciclopedia antigua (9 pestañas, con assets/css, js y
+    # data) se retiró el 24-10-2026 por decisión del autor: lo que servía ya
+    # vive en Auditavisión. Su dirección lleva a la pestaña Enciclopedia; el
+    # código original queda en el historial (commit 490233d).
+    'enciclopedia.html': ('enciclopedia-auditavision.html', 'La Enciclopedia antigua',
+                          'Lo que servía de ella ya vive en la pestaña Enciclopedia de Auditavisión: Números, Datos y Aprende.'),
     'busca-y-verifica.html': ('herramienta-inspector-entes.html', 'Busca y verifica',
                               'Ahora vive dentro del Modo Inspector, en la parte «Busca y verifica».'),
     # Los dos estantes del Diccionario se fundieron en la Biblioteca del

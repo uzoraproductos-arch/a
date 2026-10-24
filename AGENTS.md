@@ -30,19 +30,23 @@ antes de tocar código.
   error (ver §5 ter).
 - Comunidad queda aparte, como la tercera pestaña.
 
-### 0 bis. Dos «Enciclopedias»: no son la misma cosa
+### 0 bis. Una sola plataforma: la Enciclopedia antigua se retiró
 
-**Decisión del autor, 24-10-2026.** Cuando el autor (o un pedido) dice
-«Enciclopedia», se refiere a **la pestaña Enciclopedia**, salvo que diga
-expresamente lo contrario.
+**Decisión del autor, 24-10-2026.** Antes había dos «Enciclopedias». La
+**plataforma antigua** (`enciclopedia.html`, de 9 pestañas, con su propio
+`assets/css`, `assets/js` y `assets/data`) se fusionó con Auditavisión: lo que
+servía ya vivía aquí con su fuente, y lo demás se depuró. Se retiró del sitio
+y del repositorio; su dirección redirige a la pestaña, y el código queda en el
+historial (último commit que la trae: `490233d`) por si un día se retoma.
 
-| Nombre | Archivo | Estado |
-|---|---|---|
-| **La pestaña Enciclopedia** (Números, Datos y Aprende) | `enciclopedia-auditavision.html` y las páginas que cuelgan de sus tres tarjetas | **La que importa.** Aquí va todo el trabajo de consulta, y alimenta al Auditor Virtual. |
-| **La plataforma Enciclopedia** (la antigua, de 9 pestañas) | `enciclopedia.html`, con `assets/css`, `assets/js` y `assets/data` | **Queda en el olvido por ahora.** Congelada (§1): no se modifica, no se abre en las pruebas, no se le agregan funciones ni enlaces nuevos. Solo sirve, si acaso, de guía de temas, nunca de fuente de cifras. |
+| Ahora | Archivo |
+|---|---|
+| **La Enciclopedia** = la pestaña de Auditavisión (Números, Datos y Aprende) | `enciclopedia-auditavision.html` y las páginas de sus tres tarjetas |
+| `enciclopedia.html` | Solo redirige a la pestaña (`REDIRECCIONES` de `apartados.py`) |
 
-Si una tarea no deja claro a cuál se refiere, se trabaja en la pestaña. Tocar
-la plataforma antigua requiere que el autor lo pida con su nombre de archivo.
+Si se rescata algo de la antigua, se trata como dato nuevo: se coteja contra
+el documento oficial (§2) y entra a su página de Auditavisión y al bot
+(§5 ter). La antigua nunca es fuente de cifras.
 
 ---
 
@@ -75,14 +79,10 @@ acaban los créditos, lo único que se pierde es lo que no se empujó.
 
 **Nunca empujes a `main` sin permiso expreso del autor.**
 
-**La Enciclopedia (`enciclopedia.html`) está congelada** por decisión del autor:
-no se modifica, ni siquiera su sello, ni se abre en las pruebas. Es un
-proyecto aparte que sirve solo de fuente de consulta; todo el trabajo va a
-`index.html`, la plataforma del auditor. **Desde el 27-09-2026 ya no
-comparten archivos:** el auditor carga sus copias de `assets/auditor/` y la
-Enciclopedia se quedó con `assets/css`, `assets/js` y `assets/data`, que
-**no se tocan** salvo que el autor lo pida. Solo `assets/img/` (fotografías)
-sigue compartida.
+**Hay una sola plataforma** (§0 bis). La Enciclopedia antigua
+(`enciclopedia.html` con `assets/css`, `assets/js` y `assets/data`) se retiró
+el 24-10-2026; `enciclopedia.html` solo redirige a la pestaña Enciclopedia.
+Todo el código vive en `assets/auditor/`, y las fotografías en `assets/img/`.
 
 Para saber si una copia está al día:
 
@@ -308,8 +308,8 @@ mudando a su página; no se agregan desgloses nuevos.
   enlaces. Las pestañas viven en `MENU` de `herramientas/apartados.py`, y
   la portada (`index.html`) tiene su copia a mano. Lo que cuelga de
   Números, Datos o Aprende muestra «Enciclopedia» en sus migas.
-  **Ojo:** la página de la pestaña Enciclopedia no es `enciclopedia.html`,
-  que sigue congelada (§1).
+  **Ojo:** la página de la pestaña Enciclopedia es
+  `enciclopedia-auditavision.html`; `enciclopedia.html` solo redirige ahí (§0 bis).
   «Números» es la antigua «Sigue el dinero»; su archivo sigue siendo
   `sigue-el-dinero.html`.
 
@@ -426,5 +426,5 @@ sostiene.
 plataforma le habla a una persona, no a un trámite. Las citas textuales de
 leyes y documentos se dejan como están. En el motor, que comparte la
 Enciclopedia, los textos van en `tuUd('versión usted', 'versión tú')`: el
-auditor muestra la de tú. (Heredado de cuando compartían motor; la copia
-congelada de la Enciclopedia conserva el usted.)
+auditor muestra la de tú. (Heredado de cuando compartía motor con la
+Enciclopedia antigua, ya retirada.)

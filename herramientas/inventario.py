@@ -15,7 +15,7 @@ import re
 from collections import Counter
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-EXCLUIR = {'enciclopedia.html'}
+EXCLUIR = set()
 
 
 def leer(nombre):

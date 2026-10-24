@@ -305,7 +305,7 @@ def _paginas():
     out = []
     for p in sorted(glob.glob(os.path.join(RAIZ, '*.html'))):
         n = os.path.basename(p)
-        if n in ('enciclopedia.html', ARCHIVO, DICTAMEN):
+        if n in (ARCHIVO, DICTAMEN):
             continue
         s = open(p, encoding='utf-8').read()
         if 'http-equiv="refresh"' in s:

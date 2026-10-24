@@ -18,7 +18,7 @@ import re
 
 from apartados import RAIZ, SITIO
 
-EXCLUIR = {'enciclopedia.html'}
+EXCLUIR = set()
 
 
 def redirige(texto):

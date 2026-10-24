@@ -13,8 +13,8 @@ Hay tres fuentes de verdad, y cada una manda sobre lo suyo:
 | Esta guía | `DESIGN.md` |
 | Brand book interactivo | `brand/` (se abre en `/brand/`; su contenido sale de esta guía) |
 
-La Enciclopedia (`enciclopedia.html` y `assets/css`) está congelada y **no se
-migra** a esta guía.
+La Enciclopedia antigua (`enciclopedia.html` y `assets/css`) se retiró el
+24-10-2026; esta guía solo cubre Auditavisión.
 
 **Cómo leer las etiquetas de este documento.** Lo marcado **vigente** es lo
 que el CSS del auditor ya hace hoy. Lo marcado **propuesta** es una regla nueva
