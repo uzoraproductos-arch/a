@@ -683,7 +683,7 @@ HERR_IMG = {
     'calculadora': 'assets/auditor/img/herr-calculadora-monedas-amplia.jpg',
     # Imagen del Modo Inspector desde el 24-10-2026 (la eligió el autor); el
     # foróptero se queda en el Auditor Virtual (foto_clase 'foto-auditor').
-    'inspector': 'assets/auditor/img/herr-inspector-rostros.jpg',
+    'inspector': 'assets/auditor/img/herr-inspector-camaras.jpg',
     'ambiente': 'assets/auditor/img/herr-ambiente-refineria-amplia.jpg',
 }
 
