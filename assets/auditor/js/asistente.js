@@ -56,7 +56,7 @@
   var SINON = { gana: 'sueldo remuneracion', ganan: 'sueldo remuneracion', sueldo: 'remuneracion salario', salario: 'remuneracion sueldo',
     presidente: 'presidencia ejecutivo', diputado: 'diputados camara', senador: 'senadores senado', robo: 'aclarar observaciones',
     huachicol: 'combustible contrabando', amlo: 'lopez obrador estado cuenta administracion', epn: 'pena nieto estado cuenta administracion',
-    peña: 'pena nieto', fox: 'fox quesada', calderon: 'calderon hinojosa', zedillo: 'zedillo ponce', investigaciones: 'modo inspector', investigacion: 'modo inspector', fantasma: 'efos', factureras: 'efos', impuestos: 'tributarios recaudacion', deuda: 'deuda' };
+    peña: 'pena nieto', fox: 'fox quesada', calderon: 'calderon hinojosa', zedillo: 'zedillo ponce', investigaciones: 'modo inspector', investigacion: 'modo inspector', contratar: 'servicios encargo', fantasma: 'efos', factureras: 'efos', impuestos: 'tributarios recaudacion', deuda: 'deuda' };
   var vacia = {};
   VACIAS.forEach(function (w) { vacia[norm(w)] = 1; });
 
@@ -102,7 +102,9 @@
 
   function buscar(q) {
     var ws = fichas(q), pq = plano(q), quiere = intencion(q);
-    ws = ws.concat.apply(ws, ws.map(function (w) { return SINON[w] ? fichas(SINON[w]) : []; })).filter(function (w, i, a) { return a.indexOf(w) === i; });
+    /* «Investigación» lleva al Modo Inspector, salvo que se quiera contratar una: eso es Servicios (24-10-2026). */
+    var encargo = /servicio|contrat|encarg|a la medida|cotiz/.test(norm(q));
+    ws = ws.concat.apply(ws, ws.map(function (w) { return SINON[w] && !(encargo && w === 'investigacion') ? fichas(SINON[w]) : []; })).filter(function (w, i, a) { return a.indexOf(w) === i; });
     if (!ws.length) return [];
     var res = [];
     F.forEach(function (f) {

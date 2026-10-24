@@ -289,6 +289,16 @@ def _pendientes():
     return out
 
 
+# Palabras con que la gente pide una pagina sin decir su nombre (24-10-2026:
+# «¿cómo apoyo a la plataforma?» debe llevar a Donaciones y a Servicios, que
+# son las dos vias para sostenerla desde que se retiro el Pase).
+PAGINA_K = {
+    'donaciones.html': ' apoyar apoyo sostener sostenerla donar donativo aportar ayudar plataforma pase civico auditor',
+    'servicios.html': ' contratar contrato medida servicio servicios investigacion encargo cotizacion suscripcion creditos sostener plataforma',
+    'comunidad.html': ' participa participar reportar denunciar error corregir proponer tema',
+}
+
+
 def _paginas():
     """Cada pagina de la plataforma, por su titulo y su descripcion: para las
     preguntas de «¿donde encuentro...?»."""
@@ -305,7 +315,8 @@ def _paginas():
         if not t or not m:
             continue
         tit = limpio(t.group(1)).split(' · ')[0].split(' | ')[0]
-        out.append({'t': 'pagina', 'tit': tit, 'txt': limpio(m.group(1)), 'ir': [n, tit], 'k': n[:-5].replace('-', ' ')})
+        out.append({'t': 'pagina', 'tit': tit, 'txt': limpio(m.group(1)), 'ir': [n, tit],
+                    'k': n[:-5].replace('-', ' ') + PAGINA_K.get(n, '')})
         # Cada seccion con titulo propio: lleva al lugar exacto de la pagina.
         vistos = set()
         for h in re.finditer(r'<h([23])[^>]*\bid="([^"]+)"[^>]*>(.*?)</h\1>', s, re.S):

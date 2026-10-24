@@ -8,7 +8,7 @@ La Enciclopedia queda fuera porque está congelada.
 | Concepto | Cantidad |
 |---|---|
 | Páginas revisadas | 209 |
-| Páginas que solo redirigen | 26 |
+| Páginas que solo redirigen | 27 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
 
@@ -34,7 +34,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `comunidad-error.html` | Un dato mal en esta plataforma · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `comunidad-reporta.html` | Algo raro con el dinero público · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `comunidad-tema.html` | Un tema que deberíamos investigar · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
-| `comunidad.html` | Participa · Auditavisión | apartados.py | 24 | 0 | 0 | 0 | 0 |
+| `comunidad.html` | Cuéntanos lo que viste · Auditavisión | apartados.py | 24 | 0 | 0 | 0 | 0 |
 | `congreso-y-elecciones.html` | El Congreso y las elecciones · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `contexto-dimensional-ambiental.html` | Dimensión ambiental · Auditavisión | apartados.py | 25 | 0 | 4 | 1 | 0 |
 | `contexto-dimensional-descarga.html` | Descarga y metodología · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
@@ -136,7 +136,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 31 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 24 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 34 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 208 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 207 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 24 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 24 | 0 | 0 | 0 | 0 |
 | `informes-oficiales.html` | Informes oficiales · Auditavisión | apartados.py | 22 | 0 | 0 | 0 | 0 |
@@ -206,8 +206,8 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-gasta.html` | Se gasta: los tres presupuestos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `numeros-se-recauda.html` | Se recauda · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `participa.html` | Comunidad · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
-| `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 21 | 0 | 0 | 0 | 0 |
+| `participa.html` | Comunidad · Auditavisión | apartados.py | 22 | 0 | 0 | 0 | 0 |
+| `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 108 | 0 | 0 | 0 | 58 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
@@ -255,6 +255,7 @@ Los chips que pinta el motor al abrir un módulo no se cuentan aquí: solo los e
 | `numeros-se-gasta.html` | `numeros-gasto-publico.html` |
 | `numeros-se-recauda.html` | `numeros-presupuesto.html` |
 | `numeros-se-revisa.html` | `numeros-cuentas-claras.html` |
+| `pase-del-auditor.html` | `donaciones.html` |
 | `radar-como-leer.html` | `radar-hacendario.html#lectura` |
 | `radar-hoy.html` | `numeros-cuanto-dinero-es.html` |
 | `radar-presupuesto-en-curso.html` | `numeros-cuanto-dinero-es.html` |

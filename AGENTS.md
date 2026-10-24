@@ -284,8 +284,11 @@ mudando a su página; no se agregan desgloses nuevos.
   Grandes investigaciones), **Enciclopedia**
   (`enciclopedia-auditavision.html`, con tres tarjetas: Números, Datos y
   Aprende, que conservan sus páginas) y **Comunidad** (`participa.html`, la
-  antigua Participa; su tarjeta «Comunidad», `comunidad.html`, se llama
-  ahora «Participa»). Ningún archivo cambió de nombre, para no romper
+  antigua Participa, con cuatro tarjetas desde el 24-10-2026: Ágora cívica,
+  Garantías cívicas, «Cuéntanos lo que viste» —`comunidad.html`, que antes
+  se llamó «Comunidad» y luego «Participa», fundida con el botón de la
+  cabecera— y Donaciones; el Pase del Auditor Cívico se retiró y
+  `pase-del-auditor.html` redirige a Donaciones). Ningún archivo cambió de nombre, para no romper
   enlaces. Las pestañas viven en `MENU` de `herramientas/apartados.py`, y
   la portada (`index.html`) tiene su copia a mano. Lo que cuelga de
   Números, Datos o Aprende muestra «Enciclopedia» en sus migas.

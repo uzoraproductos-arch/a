@@ -350,7 +350,7 @@ def _completo(base, ref):
       <button type="button" class="ct-boton ct-sec" id="ctCopiar"><span aria-hidden="true">📋</span> Copiar como texto</button>
       <button type="button" class="ct-boton ct-sec" id="ctImprimir"><span aria-hidden="true">🖨️</span> Imprimir o guardar en PDF</button>
       <button type="button" class="ct-boton ct-sec" id="ctLiga"><span aria-hidden="true">🔏</span> Copiar la liga de verificación</button>
-      <a class="ct-boton ct-sec" href="pase-del-auditor.html"><span aria-hidden="true">🍺</span> Pase Cívico</a>
+      <a class="ct-boton ct-sec" href="donaciones.html"><span aria-hidden="true">🐷</span> Sostén la plataforma</a>
       <label class="ct-noche"><input type="checkbox" id="ctNoche"> Imagen de noche</label>
     </div>
     <p class="ct-copiado" id="ctCopiado" aria-live="polite"></p>

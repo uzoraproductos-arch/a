@@ -294,7 +294,7 @@ def construir(base, ref):
       <button type="button" class="cv-boton" id="cvCompartir"><span aria-hidden="true">📣</span> Compartir este cara a cara</button>
       <button type="button" class="cv-boton cv-sec-b" id="cvCopiarTodo"><span aria-hidden="true">📋</span> Copiar la comparativa para redes</button>
       <button type="button" class="cv-boton cv-sec-b" id="cvEnlace"><span aria-hidden="true">🔗</span> Copiar el enlace a este cargo</button>
-      <a class="cv-boton cv-sec-b" href="pase-del-auditor.html"><span aria-hidden="true">🍺</span> Descargar Reporte Salarial ($79)</a>
+      <a class="cv-boton cv-sec-b" href="donaciones.html"><span aria-hidden="true">🐷</span> Sostén la plataforma</a>
     </div>
     <p class="cv-copiado" id="cvCopiado" aria-live="polite"></p>
     <textarea class="cv-texto" id="cvTexto" rows="8" readonly hidden aria-label="Texto para copiar"></textarea>

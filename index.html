@@ -73,11 +73,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
   
   <!-- Estilos Maestros de Auditavisión -->
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261024g">
-  <script src="assets/auditor/js/iconos.js?v=20261024g"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261024g" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261024g">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261024g">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261024h">
+  <script src="assets/auditor/js/iconos.js?v=20261024h"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261024h" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261024h">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261024h">
 </head>
 <body data-pagina="auditor">
 
@@ -2509,7 +2509,7 @@
 
     <div class="footer-bottom">
       <span>Auditavisión © 2026 · Información Pública Gubernamental bajo la Ley General de Transparencia y Acceso a la Información Pública</span>
-      <span class="footer-sello">Versión publicada: <b id="selloVersion">20261024g</b></span>
+      <span class="footer-sello">Versión publicada: <b id="selloVersion">20261024h</b></span>
     </div>
 
   <!-- ==========================================================================
@@ -2586,64 +2586,6 @@
     </div>
   </aside>
 
-  <div id="modalPaseCivico"  class="civic-modal-backdrop" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="paseCivicoTit">
-    <div class="civic-modal-card">
-      <button type="button" class="civic-modal-close" onclick="window.AuditEngine.closePaseCivicoModal()" aria-label="Cerrar modal">✕</button>
-      
-      <div style="font-family:var(--font-mono); font-size:11px; color:var(--gold); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">
-        ⚡ Independencia Cívica · Abierta a todos; nadie compra lo que publicamos
-      </div>
-      
-      <h2 id="paseCivicoTit" style="font-family:var(--font-serif); font-size:24px; color:var(--text-main); margin-bottom:6px; line-height:1.2;">
-        Pase de Auditor Ciudadano
-      </h2>
-      
-      <p style="font-size:13.5px; color:var(--text-secondary); margin-bottom:14px; line-height:1.5;">
-        El erario se financia exclusivamente con tu trabajo e impuestos. Para auditarlo sin censura y mantener esta plataforma independiente de partidos políticos, te invitamos a sumarte:
-      </p>
-
-      <div class="civic-caguama-badge">
-        🍺 Menos de lo que te gastas en dos caguamas al mes
-      </div>
-
-      <div class="civic-price-grid">
-        <div class="civic-plan-card">
-          <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); text-transform:uppercase;">Plan Mensual</div>
-          <div style="font-size:26px; font-weight:800; color:var(--gold-bright); margin:6px 0 2px;">$79 <span style="font-size:13px; font-weight:400; color:var(--text-secondary);">MXN/mes</span></div>
-          <div style="font-size:11px; color:var(--text-dim); margin-bottom:12px;">Cancela cuando quieras</div>
-          <button type="button" class="hero-pillar-btn hero-pillar-calc" style="width:100%; justify-content:center; font-size:12px; padding:8px 12px;" onclick="alert('¡Gracias por tu interés en sumarte a la red de auditores cívicos! La pasarela segura de suscripción estará activa en el lanzamiento electoral.')">
-            Elegir Mensual
-          </button>
-        </div>
-
-        <div class="civic-plan-card civic-plan-popular">
-          <div style="font-family:var(--font-mono); font-size:11px; color:var(--gold-bright); text-transform:uppercase; font-weight:700;">★ Plan Anual Cívico</div>
-          <div style="font-size:26px; font-weight:800; color:var(--text-main); margin:6px 0 2px;">$699 <span style="font-size:13px; font-weight:400; color:var(--text-secondary);">MXN/año</span></div>
-          <div style="font-size:11px; color:var(--gold); margin-bottom:12px;">Equivale a $58/mes (Ahorras 3 meses)</div>
-          <button type="button" class="hero-pillar-btn hero-pase-btn" style="width:100%; justify-content:center; font-size:12px; padding:8px 12px;" onclick="alert('¡Gracias por tu interés en sumarte a la red de auditores cívicos! La pasarela segura de suscripción estará activa en el lanzamiento electoral.')">
-            Elegir Anual
-          </button>
-        </div>
-      </div>
-
-      <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border-subtle); border-radius:10px; padding:14px 16px; margin-bottom:16px;">
-        <div style="font-family:var(--font-mono); font-size:11px; color:var(--gold); font-weight:700; text-transform:uppercase; margin-bottom:8px;">¿Qué obtienes como Auditor Cívico?</div>
-        <ul style="list-style:none; padding:0; margin:0; font-size:12.5px; line-height:1.8; color:var(--text-secondary);">
-          <li>✓ <b>Expedientes Municipales en PDF (30 págs)</b>: Expediente ejecutivo de tu estado y municipio con deuda, obras y anomalías de la ASF listo para imprimir antes de votar.</li>
-          <li>✓ <b>Ticket Cívico de tu Quincena</b>: Descarga en alta resolución el desglose del rastro de tus impuestos para compartir en WhatsApp y redes.</li>
-          <li>✓ <b>Radar de Alertas ASF</b>: Notificaciones prioritarias de nuevas observaciones o contratos auditados en tu localidad.</li>
-          <li>✓ <b>100% Cívico e Independiente</b>: Cero publicidad, y ningún cliente, donante, gobierno ni partido decide lo que publicamos.</li>
-        </ul>
-      </div>
-
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-        <button type="button" style="background:none; border:none; color:var(--text-dim); font-size:12px; cursor:pointer; text-decoration:underline;" onclick="window.AuditEngine.closePaseCivicoModal()">
-          Continuar navegando en versión libre gratuita
-        </button>
-        <span style="font-family:var(--font-mono); font-size:11px; color:var(--gold);">⚖️ Auditavisión México</span>
-      </div>
-    </div>
-  </div>
   </footer>
 
   <!-- ==========================================================================
@@ -2653,17 +2595,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   
   <!-- Base de datos de geometrías de los 32 estados de México -->
-  <script src="assets/auditor/js/mexico-states-geo.js?v=20261024g"></script>
+  <script src="assets/auditor/js/mexico-states-geo.js?v=20261024h"></script>
   
   <!-- Base de datos estructurada de PEF, estados, municipios, finanzas públicas, personajes políticos, referencias y glosario -->
-  <script src="assets/auditor/js/audit-database.js?v=20261024g"></script>
+  <script src="assets/auditor/js/audit-database.js?v=20261024h"></script>
   
   <!-- Padrón completo de los 2,479 municipios con sus finanzas oficiales (INEGI, EFIPEM 2024) -->
-  <script src="assets/auditor/js/municipios-efipem.js?v=20261024g"></script>
-  <script src="assets/auditor/js/municipios-rendicion.js?v=20261024g"></script>
+  <script src="assets/auditor/js/municipios-efipem.js?v=20261024h"></script>
+  <script src="assets/auditor/js/municipios-rendicion.js?v=20261024h"></script>
   
   <!-- Motor interactivo de visualización y controladores -->
-  <script src="assets/auditor/js/audit-engine.js?v=20261024g"></script>
+  <script src="assets/auditor/js/audit-engine.js?v=20261024h"></script>
 
     <!-- Botón Flotante de Retroalimentación Cívica: Ayúdanos a fiscalizar -->
   <div class="floating-feedback-container">
@@ -2775,11 +2717,11 @@
         <div class="sv-resumen cm-resumen" hidden></div>
         </div>
       </details>
-      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Comunidad</a> · <a href="comunidad-erratas.html">Fe de erratas</a> · <a href="garantias.html">Garantías cívicas: a qué puerta tocar</a></p>
+      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Cuéntanos lo que viste</a> · <a href="comunidad-erratas.html">Fe de erratas</a> · <a href="garantias.html">Garantías cívicas: a qué puerta tocar</a></p>
     </div>
   </aside>
   <!-- puerta:fin -->
-  <script src="assets/auditor/js/comunidad.js?v=20261024g"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261024h"></script>
 
   <!-- Modal / Ficha Flotante de Referencia Legal Oficial (APA 7) -->
   <div id="modalFichaReferencia" class="modal-ref-backdrop" style="display:none;" onclick="if(event.target === this) window.AuditEngine.cerrarModalReferencia();" role="dialog" aria-modal="true" aria-labelledby="modalRefTitulo">

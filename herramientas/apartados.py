@@ -241,8 +241,7 @@ CAMINO_NUMEROS = (
 # (diccionario.html, el archivo no cambia para no romper enlaces) con cuatro
 # tarjetas y cada una abre su pagina:
 #   Aprende › Biblioteca del Erario Publico › Apartado.
-# Las paginas de los estantes redirigen aqui (REDIRECCIONES) y el Pase del
-# Auditor Civico se mudo a Participa (PASE). Cada entrada:
+# Las paginas de los estantes redirigen aqui (REDIRECCIONES). Cada entrada:
 # (archivo, icono, nombre, frase, descripcion).
 BIB_NOMBRE = 'Biblioteca del Erario Público'
 BIBLIOTECA = [
@@ -255,9 +254,6 @@ BIBLIOTECA = [
     ('preguntas-frecuentes.html', '💡', 'Preguntas Frecuentes', 'En casillas didácticas',
      'Cómo funciona el gasto público, la deuda, el dinero de estados y municipios, qué revisa la Auditoría Superior y cuánto cuesta el Poder Judicial. Cada respuesta con sus fuentes.'),
 ]
-PASE = ('pase-del-auditor.html', '🍺', 'Pase del Auditor Cívico', 'Sostén la plataforma',
-        'Herramientas independientes de fiscalización ciudadana: $79 al mes, menos que dos caguamas.')
-
 DIC_ENLACE = ('<p class="bib-sello">📚 Forma parte de la <a href="diccionario.html">%s</a>, '
               'la obra de consulta de la plataforma.</p>' % BIB_NOMBRE)
 
@@ -628,7 +624,7 @@ APARTADOS = [
         'pestanas': True,
         # «Servicios» paso al Modo Inspector (pedido del autor, 11-10-2026).
         'hash_a_pagina': {'agora': 'agora.html', 'garantias': 'garantias.html', 'servicios': 'servicios.html',
-                          'pase': PASE[0], 'comunidad': 'comunidad.html', 'donaciones': 'donaciones.html'},
+                          'pase': 'donaciones.html', 'comunidad': 'comunidad.html', 'donaciones': 'donaciones.html'},
         'secciones': [
             {
                 # Desde el 10-10-2026 el Agora es su propia pagina (agora()):
@@ -646,26 +642,27 @@ APARTADOS = [
                 'pestana': ('🛡️', 'Garantías cívicas', 'A qué puerta tocar y qué te protege: abre su página'),
             },
             {
-                # El Pase del Auditor Civico vivia en «Fuentes del auditor»;
-                # desde el 11-10-2026 es parte de Participa (decision del autor).
-                'id': 'pase',
-                'pagina': PASE[0],
-                'pestana': (PASE[1], PASE[2], 'Sostén la plataforma: abre su página'),
+                # Entrega 7 de la propuesta de Astra (10-10-2026). Desde el
+                # 11-10-2026 (pedido del autor) no se despliega: abre
+                # comunidad.html, y cada una de sus cinco tarjetas, su pagina.
+                # El 24-10-2026 (pedido del autor) «Participa» se fundio con
+                # «Cuéntanos lo que viste», el boton de la cabecera: eran la
+                # misma puerta con dos nombres.
+                'id': 'comunidad',
+                'pagina': 'comunidad.html',
+                'pestana': ('📢', 'Cuéntanos lo que viste', 'Reporta, corrige, propón y comparte: abre su página'),
             },
             {
                 # Pedido del autor, 11-10-2026: una via mas para sostener la
                 # plataforma, con su alcancia a la vista (donaciones()).
+                # El Pase del Auditor Civico se retiro el 24-10-2026 (decision
+                # del autor): sostener la plataforma tiene dos vias en
+                # evaluacion, las donaciones y los Servicios del Auditor
+                # Virtual (docs/LANZAMIENTO.md §4.4). pase-del-auditor.html
+                # redirige aqui.
                 'id': 'donaciones',
                 'pagina': 'donaciones.html',
                 'pestana': ('🐷', 'Donaciones', 'Ayuda a sostener la plataforma, a la vista de todos: abre su página'),
-            },
-            {
-                # Entrega 7 de la propuesta de Astra (10-10-2026). Desde el
-                # 11-10-2026 (pedido del autor) no se despliega: abre
-                # comunidad.html, y cada una de sus cinco tarjetas, su pagina.
-                'id': 'comunidad',
-                'pagina': 'comunidad.html',
-                'pestana': ('🤝', 'Participa', 'Cuéntanos lo que viste, corrígenos, comparte: abre su página'),
             },
         ],
     },
@@ -741,7 +738,7 @@ HERRAMIENTAS = [
           '¿Te compartieron un estado de cuenta de Auditavisión? Escribe su folio o su huella digital y comprueba, cifra por cifra, que no se alteró.'),
          # Venia de la pestana «Servicios» de Participa (pedido del autor, 11-10-2026).
          ('servicios.html', '🔎', 'Servicios de investigación', 'Investigación a la medida',
-          'Cuando necesites ir más a fondo en un caso: revisión documental, expediente, seguimiento, capacitación o licencia, con la misma regla de la plataforma y su política de independencia. Incluye el Pase del Auditor Cívico. Tiene su propia página.'),
+          'Cuando necesites ir más a fondo en un caso: revisión documental, expediente, seguimiento, capacitación o licencia, con la misma regla de la plataforma y su política de independencia. Tiene su propia página.'),
      ]),
     # Reestructurada el 22-10-2026 (pedido del autor): la herramienta se
     # queda con lo que el lector calcula y audita; la parte informativa
@@ -1301,7 +1298,7 @@ DICCIONARIO = {
                 'texto vigente y las <b>Preguntas Frecuentes</b> en casillas didácticas. Cada tarjeta abre su propia página.'),
     'hash_a_pagina': {'preguntas': 'preguntas-frecuentes.html', 'glosario': 'glosario.html',
                       'marco-legal': 'marco-legal.html', 'fuentes': 'fuentes-oficiales.html',
-                      'referencias': 'fuentes-oficiales.html', 'pase': PASE[0]},
+                      'referencias': 'fuentes-oficiales.html', 'pase': 'donaciones.html'},
     'secciones': [{
         'id': 'apartados', 'titulo': 'Los cuatro apartados',
         'texto': 'Elige uno: cada tarjeta abre su página.',
@@ -1341,9 +1338,9 @@ def simulador():
 
 
 # Servicios de investigacion (propuesta de Astra, puntos 9 a 11; entrega 6,
-# 10-10-2026). Decision del autor: el Pase del Auditor convive con los
-# Servicios. El Pase sostiene la consulta gratuita; los Servicios son trabajo
-# a la medida que se cotiza. La pagina queda lista para el lanzamiento: el
+# 10-10-2026). Los Servicios son trabajo a la medida que se cotiza; el Pase
+# del Auditor que convivia con ellos se retiro el 24-10-2026 (decision del
+# autor). La pagina queda lista para el lanzamiento: el
 # formulario arma la solicitud en el navegador (servicios.js) y no envia ni
 # guarda nada mientras no haya canal. Para abrirlo, pon aqui la direccion
 # (por ejemplo 'mailto:investigaciones@tu-dominio.mx') y corre sello.py.
@@ -1379,7 +1376,7 @@ PROCESO = [
 
 INDEPENDENCIA = [
     ('La consulta cívica es gratuita y lo seguirá siendo.',
-     'Ningún dato publicado en la plataforma se esconde detrás de un pago. El Pase del Auditor, los Servicios, las licencias y las donaciones sostienen el trabajo; no compran acceso a la información pública.'),
+     'Ningún dato publicado en la plataforma se esconde detrás de un pago. Los Servicios, las licencias y las donaciones sostienen el trabajo; no compran acceso a la información pública.'),
     ('Abierta a todos, con las mismas reglas para todos.',
      'Pueden usarla, contratar un servicio o licenciar sus herramientas la ciudadanía, organizaciones, medios, empresas, universidades públicas y privadas y también gobiernos y dependencias. Nadie queda excluido; nadie tiene trato especial.'),
     ('Lo que no está en venta: las conclusiones y lo que publicamos.',
@@ -1403,7 +1400,7 @@ INDEPENDENCIA = [
     ('Tus datos y tu encargo son confidenciales.',
      'No publicamos quién encargó qué sin su permiso, y lo que la plataforma publique después sale solo de fuentes públicas.'),
     ('Rendimos cuentas de cómo nos sostenemos.',
-     'Cada año publicaremos cuántos encargos recibimos, por tipo de cliente (incluidos los gobiernos), y cuánto entró por cada vía: Pase, Servicios, licencias y donaciones. Si el gobierno falla en transparentar, nosotros ponemos el ejemplo.'),
+     'Cada año publicaremos cuántos encargos recibimos, por tipo de cliente (incluidos los gobiernos), y cuánto entró por cada vía: Servicios, licencias y donaciones. Si el gobierno falla en transparentar, nosotros ponemos el ejemplo.'),
 ]
 
 
@@ -1471,9 +1468,8 @@ def servicios():
         'icono': '🔎', 'titulo': 'Servicios de investigación', 'lema': 'La consulta es gratuita; la investigación a la medida se cotiza',
         'entrada': ('Todo lo que publica Auditavisión es libre y lo seguirá siendo. Cuando necesites ir más a fondo en un caso, '
                     'podemos hacer por encargo una investigación documental con la misma regla de la plataforma: cada cifra con '
-                    'su documento y su etiqueta. Convive con el <a href="pase-del-auditor.html">Pase del Auditor</a>: el Pase '
-                    'sostiene la consulta gratuita, los Servicios son trabajo a la medida y, cuando se abran, las donaciones '
-                    'también ayudan. Ninguna de las tres vías compra lo que publicamos.'),
+                    'su documento y su etiqueta. Los Servicios son trabajo a la medida y, cuando se abran, las '
+                    '<a href="donaciones.html">donaciones</a> también ayudan. Ninguna de las dos vías compra lo que publicamos.'),
         'estilos': ['servicios.css'],
         'scripts': ['servicios.js'],
         'antes': ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> Los Servicios se abren con el lanzamiento de la '
@@ -1496,9 +1492,9 @@ def servicios():
                                        '          <p class="sv-version">Versión 2 · 10 de octubre de 2026.</p>\n        </div>' % politica},
             {'id': 'solicitud', 'titulo': 'Solicita una investigación', 'texto': 'Cuéntanos qué quieres saber. Te mostramos tu solicitud antes de mandarla.',
              'tarjetas': [], 'bloque': formulario},
-            # La otra tarjeta de la antigua pestana de Participa.
-            {'id': 'pase', 'titulo': 'Pase del Auditor Cívico', 'texto': 'Si lo que quieres es sostener la consulta gratuita, súmate con el Pase. Se abre con el lanzamiento.',
-             'tarjetas': [('🍺', 'Pase del Auditor Cívico', 'Sostén la plataforma independiente: plan mensual o anual.', 'pase-del-auditor.html', None, None)]},
+            # Hasta el 24-10-2026 aqui iba el Pase del Auditor Civico.
+            {'id': 'pase', 'titulo': 'Donaciones', 'texto': 'Si lo que quieres es sostener la consulta gratuita, puedes donar. Se abre con el lanzamiento.',
+             'tarjetas': [('🐷', 'Donaciones', 'Ayuda a sostener la plataforma, a la vista de todos.', 'donaciones.html', None, None)]},
         ],
         'pie_extra': herr_otras('herramienta-inspector.html'),
     }
@@ -1638,7 +1634,7 @@ PUERTA_HTML = '''  <div class="pt-velo" id="ptVelo" hidden></div>
     </div>
     <div class="pt-cuerpo">
 {rutas}
-      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Comunidad</a> · <a href="comunidad-erratas.html">Fe de erratas</a> · <a href="garantias.html">Garantías cívicas: a qué puerta tocar</a></p>
+      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Cuéntanos lo que viste</a> · <a href="comunidad-erratas.html">Fe de erratas</a> · <a href="garantias.html">Garantías cívicas: a qué puerta tocar</a></p>
     </div>
   </aside>'''
 
@@ -1899,7 +1895,7 @@ def partes_nav(nombre, portada, icono, partes, actual):
 
 def comunidad_nav(actual):
     """Barra al pie de cada pagina de Comunidad, con sus cinco partes."""
-    return partes_nav('Participa', 'comunidad.html', '🤝', COMUNIDAD_PARTES, actual)
+    return partes_nav('Cuéntanos lo que viste', 'comunidad.html', '📢', COMUNIDAD_PARTES, actual)
 
 
 def comunidad():
@@ -1926,12 +1922,12 @@ def comunidad():
         'erratas': '<div class="sv-politica">\n          <ol class="cm-erratas">\n%s\n          </ol>\n        </div>' % erratas,
     }
     portada = {
-        'archivo': 'comunidad.html', 'menu': 'Participa', 'menu_archivo': 'participa.html',
+        'archivo': 'comunidad.html', 'menu': 'Cuéntanos lo que viste', 'menu_archivo': 'participa.html',
         'padre': ('participa.html', 'Comunidad'),
-        'icono': '🤝', 'titulo': 'Participa', 'lema': 'Cuéntanos lo que viste',
+        'icono': '📢', 'titulo': 'Cuéntanos lo que viste', 'lema': 'Participa: reporta, corrige y comparte',
         'entrada': ('La plataforma mejora con quien la lee. Repórtanos algo raro con el dinero público, señala un dato que esté mal '
-                    '(con su documento) o propón un tema para investigar. Son las mismas tres rutas del botón «📢 Cuéntanos lo que viste» '
-                    'de la cabecera, más el botón para compartir y la fe de erratas. Cada tarjeta abre su propia página.'),
+                    '(con su documento) o propón un tema para investigar: son las tres rutas del botón «📢 Cuéntanos lo que viste» '
+                    'de la cabecera. Aquí están también el botón para compartir y la fe de erratas. Cada tarjeta abre su propia página.'),
         'hash_a_pagina': COMUNIDAD_ARCHIVO,
         'secciones': [{'id': 'partes', 'titulo': 'Las cinco puertas para participar', 'texto': '', 'sin_cab': True,
                        'tarjetas': [(c[2], c[3], c[4], c[1], None, None) for c in COMUNIDAD_PARTES]}],
@@ -1940,8 +1936,8 @@ def comunidad():
     for id_, archivo, ico, tit, frase, texto in COMUNIDAD_PARTES:
         partes.append({
             'archivo': archivo, 'menu': tit, 'menu_archivo': 'participa.html',
-            'padre': ('participa.html', 'Comunidad'), 'padre2': ('comunidad.html', 'Participa'),
-            'icono': ico, 'titulo': tit, 'lema': 'Participa', 'entrada': texto,
+            'padre': ('participa.html', 'Comunidad'), 'padre2': ('comunidad.html', 'Cuéntanos lo que viste'),
+            'icono': ico, 'titulo': tit, 'lema': 'Cuéntanos lo que viste', 'entrada': texto,
             'estilos': ['servicios.css'],
             'antes': AVISO_ENVIO if id_ in ('reporta', 'error', 'tema') else '',
             'pie_extra': comunidad_nav(archivo),
@@ -2069,10 +2065,9 @@ def donaciones():
             Donas como apoyo cívico, sin beneficio fiscal.</div></li>
         </ul>
         <p class="dn-nota">Estas reglas vienen de la <a href="servicios.html#independencia">política de independencia</a> de la plataforma, que vale igual para cada donante.
-          ¿Prefieres un apoyo fijo cada mes? Mira el <a href="{pase}">{pase_nombre}</a>.</p>'''.format(
+          ¿Necesitas una investigación a la medida? Esa es la otra vía para sostener la plataforma: los <a href="servicios.html">Servicios de investigación</a>.</p>'''.format(
         items='\n'.join('          <li><span class="dn-regla-ico" aria-hidden="true">%s</span><div><b>%s</b> %s</div></li>' % (i, t, pol[t])
-                        for i, t in reglas_items),
-        pase=PASE[0], pase_nombre=PASE[2])
+                        for i, t in reglas_items))
 
     if CANAL_DONACION:
         boton = '<a class="sz-btn sz-btn-of dn-donar" href="%s" target="_blank" rel="noopener noreferrer">🐷 Donar ahora ↗</a>' % CANAL_DONACION
@@ -3516,15 +3511,9 @@ GLOSARIO = {
 
 
 def pagina_biblioteca(archivo, titulo, lema, entrada, raiz, carga, scripts=('audit-database.js', 'biblioteca.js'), bloque=None):
-    b = [x for x in BIBLIOTECA + [PASE] if x[0] == archivo][0]
-    if b is PASE:
-        # El Pase vive en Participa desde el 11-10-2026.
-        migas = {'menu_archivo': 'participa.html', 'padre': ('participa.html', 'Comunidad'),
-                 'pie_extra': '<p class="bib-sello">¿Necesitas una investigación a la medida? Mira los '
-                              '<a href="servicios.html">Servicios de investigación</a> del Modo Inspector.</p>'}
-    else:
-        migas = {'menu_archivo': 'aprende.html', 'padre': ('aprende.html', 'Aprende'),
-                 'padre2': ('diccionario.html', BIB_NOMBRE), 'pie_extra': bib_nav(archivo)}
+    b = [x for x in BIBLIOTECA if x[0] == archivo][0]
+    migas = {'menu_archivo': 'aprende.html', 'padre': ('aprende.html', 'Aprende'),
+             'padre2': ('diccionario.html', BIB_NOMBRE), 'pie_extra': bib_nav(archivo)}
     return dict(migas, **{
         'archivo': archivo, 'menu': b[2],
         'icono': b[1], 'titulo': titulo, 'lema': lema, 'entrada': entrada,
@@ -3537,35 +3526,6 @@ def pagina_biblioteca(archivo, titulo, lema, entrada, raiz, carga, scripts=('aud
                                  '        </div>' % (raiz, carga)),
         }],
     })
-
-
-PASE_HTML = """<div class="pase">
-          <p class="pase-badge">⚡ Independencia cívica · Abierta a todos; nadie compra lo que publicamos</p>
-          <p>El erario se financia con tu trabajo y tus impuestos. Para auditarlo sin censura y mantener esta plataforma independiente de partidos políticos, te invitamos a sumarte. Menos de lo que te gastas en dos caguamas al mes.</p>
-          <div class="pase-precios">
-            <div class="pase-plan">
-              <div class="pase-plan-tit">Plan mensual</div>
-              <div class="pase-precio">$79 <small>MXN al mes</small></div>
-              <p>Cancela cuando quieras.</p>
-              <span class="pase-pronto">Disponible en el lanzamiento</span>
-            </div>
-            <div class="pase-plan pase-plan-pop">
-              <div class="pase-plan-tit">★ Plan anual cívico</div>
-              <div class="pase-precio">$699 <small>MXN al año</small></div>
-              <p>Equivale a $58.25 al mes: ahorras más de tres meses frente al plan mensual.</p>
-              <span class="pase-pronto">Disponible en el lanzamiento</span>
-            </div>
-          </div>
-          <p><b>La suscripción todavía no está activa.</b> La pasarela segura de pago se abrirá con el lanzamiento; mientras tanto, todo lo que ves en la plataforma es libre y gratuito.</p>
-          <h2 class="bib-bloque-tit">Qué obtendrás como auditor cívico</h2>
-          <ul class="pase-lista">
-            <li>✓ <b>Expediente de tu estado y tu municipio en PDF:</b> deuda, obras y observaciones de la Auditoría Superior, listo para imprimir antes de votar.</li>
-            <li>✓ <b>Ticket cívico de tu quincena:</b> el rastro de tus impuestos en alta resolución, para compartir.</li>
-            <li>✓ <b>Radar de alertas de la Auditoría Superior:</b> avisos de nuevas observaciones o contratos auditados en tu localidad.</li>
-            <li>✓ <b>100 % cívico e independiente:</b> cero publicidad, y ningún cliente, donante, gobierno ni partido decide lo que publicamos.</li>
-          </ul>
-          <p>¿Necesitas una investigación a la medida de un caso? Eso va aparte del Pase: mira los <a href="servicios.html">Servicios de investigación</a> y su política de independencia.</p>
-        </div>"""
 
 
 PAGINAS_BIBLIOTECA = [
@@ -3584,10 +3544,8 @@ PAGINAS_BIBLIOTECA = [
         'Las fichas numeradas que citan las cifras de la plataforma, con su liga al documento. Si llegaste desde una nota '
         'como [11], la ficha aparece iluminada.',
         'bibFuentes', 'Cargando el catálogo…'),
-    pagina_biblioteca(
-        'pase-del-auditor.html', 'Pase del Auditor Cívico', 'Sostén una plataforma independiente',
-        'Herramientas independientes de fiscalización ciudadana: abiertas a todos, y nadie compra lo que publicamos.',
-        None, None, scripts=(), bloque=PASE_HTML),
+    # El Pase del Auditor Civico se retiro el 24-10-2026 (decision del
+    # autor): pase-del-auditor.html redirige a Donaciones (REDIRECCIONES).
 ]
 
 GUIA = '''<section class="apartado-guia" aria-labelledby="guiaTitulo">
@@ -4857,6 +4815,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('24-10-2026', 'Comunidad queda en cuatro tarjetas: Ágora cívica, Garantías cívicas, «📢 Cuéntanos lo que viste» (la antigua Participa, fundida con el botón de la cabecera) y Donaciones. El Pase del Auditor Cívico se retira: la plataforma se sostendrá con donaciones o con los Servicios de investigación.'),
     ('24-10-2026', 'Cada estado y cada municipio tiene sus cuatro documentos en su ficha técnica: estado de cuenta, salud financiera, dictamen y un contador en vivo de lo que le llega al día, por hora y por segundo, con su operación a la vista. Y al Auditor ya le puedes preguntar «Zapopan, Jalisco».'),
     ('24-10-2026', 'El Auditor Virtual abre cualquier estado de cuenta: el tuyo cívico, el ambiental (antes «Tu ticket en negativo»), el de cada presidente, la diputación federal y local, la senaduría, la Corte, tu estado y tu municipio. Y al pie de cada respuesta te ofrece el mapa, el reloj, el tablero o la fiscalización que vienen al caso, ya con tu estado elegido.'),
     ('24-10-2026', 'Las Grandes investigaciones son el Modo Inspector: una sola página con sus seis aplicaciones y una imagen nueva. Las migas de cada aplicación llevan directo a ella.'),
@@ -5030,7 +4989,7 @@ def indice(base, ref):
             k = [e[0] for e in enl].index('garantias.html') + 1
             enl[k:k] = [(g[1], '· ' + g[3], '') for g in GARANTIAS_PARTES]
             enl += [('expedientes.html', 'Expedientes de casos de la ASF', 'Los casos por aclarar'),
-                    ('comunidad.html', 'Participa', 'Propón temas, señala errores, comparte y fe de erratas')] + [
+                    ('comunidad.html', 'Cuéntanos lo que viste', 'Reporta, señala errores, propón temas, comparte y fe de erratas')] + [
                     (c[1], '· ' + c[3], '') for c in COMUNIDAD_PARTES]
         otros.append(grupo(a['icono'], a['menu'], enl, archivo))
     otros.append(_grupo('🏛️', 'Los Poderes', [
@@ -5071,6 +5030,9 @@ def indice(base, ref):
 # Paginas que dejaron de existir y redirigen a donde se mudo su contenido.
 # Busca y verifica se fusiono con el Modo Inspector el 09-10-2026.
 REDIRECCIONES = {
+    # El Pase del Auditor Civico se retiro el 24-10-2026 (decision del autor).
+    'pase-del-auditor.html': ('donaciones.html', 'Pase del Auditor Cívico',
+                              'El Pase se retiró. Para sostener la plataforma están las donaciones y los Servicios de investigación.'),
     # «El Congreso y las elecciones» se mudó a Datos el 23-10-2026 (pedido del
     # autor): su ancla (#leg-<tema>) viaja y la portada la manda a su página.
     'congreso-y-elecciones.html': ('datos-poder-legislativo.html', 'El Congreso y las elecciones',
@@ -5134,7 +5096,7 @@ REDIRECCIONES = {
     'biblioteca-hacendaria.html': ('diccionario.html', 'Biblioteca hacendaria',
                                    'Sus apartados (Diccionario, Marco Legal y Preguntas Frecuentes) viven ahora en la Biblioteca del Erario Público.'),
     'fuentes-del-auditor.html': ('diccionario.html', 'Fuentes del auditor',
-                                 'Las Referencias viven ahora en la Biblioteca del Erario Público; el Pase del Auditor Cívico, en Participa.'),
+                                 'Las Referencias viven ahora en la Biblioteca del Erario Público.'),
 }
 
 

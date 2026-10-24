@@ -1801,7 +1801,7 @@
             <span>📋</span> Copiar comparativa para redes
           </button>
           <button type="button" class="hero-pillar-btn hero-pase-btn" onclick="window.AuditEngine.openPaseCivicoModal()" style="font-size:12px; padding:8px 14px;">
-            <span>🍺</span> Descargar Reporte Salarial ($79)
+            <span>🐷</span> Sostén la plataforma
           </button>
         </div>
       `;
@@ -3662,7 +3662,7 @@
               <span>📋</span> Copiar como texto
             </button>
             <button type="button" class="hero-pillar-btn hero-pase-btn" onclick="window.AuditEngine.openPaseCivicoModal()" style="font-size:12.5px; padding:8px 16px;">
-              <span>🍺</span> Pase Cívico
+              <span>🐷</span> Sostén la plataforma
             </button>
           </div>
         </article>
@@ -26554,7 +26554,7 @@
      hace que position:fixed se mida contra el pie y no contra la pantalla, y
      el Pase aparecia hasta abajo. Se cuelga directo del body al abrirla. */
   function openPaseCivicoModal() {
-    irBiblioteca('pase-del-auditor.html');
+    irBiblioteca('donaciones.html');
   }
   function closePaseCivicoModal() {
     const m = document.getElementById('modalPaseCivico');
@@ -26780,7 +26780,7 @@
     'faq-marco-legal': function(a) { irBiblioteca('marco-legal.html' + (a && /^precepto-/.test(a) ? '#' + a : ''), true); },
     'faq-preguntas': function() { irBiblioteca('preguntas-frecuentes.html', true); },
     fuentes: function(a) { irBiblioteca('fuentes-oficiales.html' + (a && /^ref-/.test(a) ? '#' + a : ''), true); },
-    pase: function() { irBiblioteca('pase-del-auditor.html', true); },
+    pase: function() { irBiblioteca('donaciones.html', true); },
     reporta: function() { openAyudanosFiscalizar(); },
     nota: function() { abrirNotaPortada(null); },
     /* Destinos de las paginas de Auditoria en imagenes: el ancla dice

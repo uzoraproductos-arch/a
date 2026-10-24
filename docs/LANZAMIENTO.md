@@ -21,7 +21,7 @@ primera versión:
 
 | Pendiente | Primera versión | Verificado |
 |---|---|---|
-| Pase de $79 | «Se ve y no se puede pagar» | **Ya dice «Disponible en el lanzamiento»** (`pase-del-auditor.html`): no engaña. El problema real es otro (siguiente renglón) |
+| Pase de $79 (retirado el 24-10-2026, ver §4.4) | «Se ve y no se puede pagar» | **Ya dice «Disponible en el lanzamiento»** (`pase-del-auditor.html`): no engaña. El problema real es otro (siguiente renglón) |
 | Lo que promete el Pase | — | **Punto ciego nuevo:** promete el expediente del estado y del municipio en PDF y el ticket cívico, que **ya son gratis** (ficha técnica con «Descargar en PDF» y estado de cuenta cívico). Y promete un radar de alertas que **no existe**: necesita cuentas y correo. Hoy el Pase cobra por lo gratuito y por lo que aún no hay |
 | Donaciones | Canal vacío | Confirmado: `CANAL_DONACION = ''` y la alcancía en $0, que solo muestra dinero que de verdad entró |
 | Servicios | Canal vacío | Confirmado: `CANAL_SOLICITUD = ''`, el formulario arma el texto y no envía |
@@ -70,7 +70,7 @@ primera versión:
 
 **Las letras chiquitas (verificar al contratar; no se anotan precios porque cambian):**
 1. **Vercel Hobby (gratis) es solo para uso no comercial.** Mientras no se
-   cobre nada sirve para probar; antes del primer peso (Pase, Servicios,
+   cobre nada sirve para probar; antes del primer peso (Servicios,
    donaciones) hay que pasar al plan **Pro**.
 2. **Supabase gratis pausa el proyecto tras días sin actividad** y tiene topes
    de base y de correos. Para producción: plan **Pro** y un servidor de correo
@@ -89,7 +89,7 @@ sin las decisiones de la fase 0.**
 | 0.2 | Forma jurídica | Asociación civil (permite donaciones y, si quieres, ser donataria autorizada) o persona física con actividad empresarial | Con RFC: lo pide la pasarela de pago |
 | 0.3 | Qué se publica de `investigaciones/` | (a) nada, solo ligas a la fuente oficial; (b) todo, en el almacén de Supabase; (c) solo lo que ya no está en línea en su fuente | Elegido |
 | 0.4 | Imagen del Modo Inspector | Confirmar autor y licencia de las cámaras, o reemplazar por una propia | Resuelto |
-| 0.5 | **Qué da el Pase** (ver §4.4) | Rehacer su oferta antes de cobrar | Aprobada la nueva oferta |
+| 0.5 | **Cómo se sostiene la plataforma** (ver §4.4). El Pase se retiró el 24-10-2026 | (A) donaciones; (B) Servicios del Auditor Virtual; (C) las dos, por etapas (recomendada) | Elegida la vía y, si es B o C, el primer piloto |
 | 0.6 | Enciclopedia congelada | Publicarla tal cual o dejarla fuera | Elegido |
 | 0.7 | Perfil del creador (§3 bis) | ~~Liga del canal~~ ✅ `https://www.youtube.com/@meteorarecords` (dada por el autor, 24-10-2026). Faltan: semblanza, imagen con licencia y una línea de Fortovisión y de Cosmovisión | Entregado por el autor |
 
@@ -255,7 +255,7 @@ refleja**, **qué falta** y **qué se hace**. Columna «Estado»: ✅ se refleja
 |---|---|---|---|
 | «¿Qué tengo que dar?» · «Aprender a ganar es el juego del valor» | Todo lo que publica es gratis y con fuente: 210 páginas, 2,479 municipios, 32 estados, el Auditor Virtual | ✅ | — |
 | «Generar proximidad es poder» | El lector ve **su** estado, **su** municipio y **su** estado de cuenta cívico; el Auditor le habla de tú | 🟡 | Falta que la plataforma **lo recuerde**: cuenta, «mi municipio», alertas cuando cambia un dato (fase 5). Hoy cada visita empieza de cero |
-| «Construye tu gallina de los huevos de oro a partir del valor de tu transformación» | La transformación que vende Auditavisión: **de ciudadano que no entiende el presupuesto a auditor ciudadano que verifica una cifra en un minuto** | 🟡 | Decirla así, en una frase, en la portada y en el Pase; hoy está implícita |
+| «Construye tu gallina de los huevos de oro a partir del valor de tu transformación» | La transformación que vende Auditavisión: **de ciudadano que no entiende el presupuesto a auditor ciudadano que verifica una cifra en un minuto** | 🟡 | Decirla así, en una frase, en la portada y en la página de Servicios; hoy está implícita |
 | «Crear soluciones estratégicas» | El Auditor, los estados de cuenta, el contraste de notas, el dictamen sellado | ✅ | — |
 
 ### 4.3 El negocio digital
@@ -264,8 +264,8 @@ refleja**, **qué falta** y **qué se hace**. Columna «Estado»: ✅ se refleja
 |---|---|---|
 | **Producto** | La plataforma y el Auditor Virtual, gratis | ✅ |
 | **Servicio** | Servicios de investigación (cinco, con política de independencia) | ✅ escrito, ❌ sin canal |
-| **Modelo de negocio** | Gratis para todos; ingresos por Pase, Servicios, licencias y donaciones | ✅ |
-| **Modelo de monetización** | Pase $79/mes o $699/año; Servicios por cotización; licencias; donaciones | 🟡 sin pasarela ni tarifas de Servicios (salen de los pilotos) |
+| **Modelo de negocio** | Gratis para todos; ingresos por donaciones o por Servicios (§4.4) | 🟡 en decisión |
+| **Modelo de monetización** | Donaciones; Servicios por cotización, créditos o suscripción (§4.4); licencias | 🟡 sin pasarela ni tarifas de Servicios (salen de los pilotos) |
 | **Clientes** | Ciudadanía, periodistas, organizaciones, universidades, despachos, gobiernos (la política los admite a todos con las mismas reglas) | 🟡 no hay un cliente prioritario elegido |
 
 **Qué se hace:** elegir **un** cliente para los primeros 90 días. Recomendación:
@@ -273,28 +273,90 @@ refleja**, **qué falta** y **qué se hace**. Columna «Estado»: ✅ se refleja
 la plataforma da (cifra + documento + folio verificable) y pagan por ahorrar
 horas. La ciudadanía llega por ellos.
 
-### 4.4 La oferta irresistible (el punto ciego más importante)
+### 4.4 Cómo se sostiene la plataforma: donaciones o servicios
 
-«Aprender a crear una oferta irresistible, rentable, escalable» · «Construir
-ofertas, elegir por inteligencia».
+Decisión del autor, 24-10-2026: **el Pase del Auditor Cívico se retira**
+(`pase-del-auditor.html` redirige a Donaciones). Quedan dos vertientes en
+evaluación: **donaciones** y **servicios que da la plataforma a través del
+Auditor Virtual**, con la idea de cobrarlos por suscripción o por créditos.
+La decisión es del autor (0.5); aquí va la evaluación.
 
-**Hoy el Pase no es irresistible:** dos de sus tres promesas ya son gratis y la
-tercera no existe. Propuesta para que el autor decida (0.5):
+**La regla que vale para las dos:** la información pública nunca se cobra.
+Se paga el **trabajo** (una investigación), la **memoria** (seguir un ente en
+el tiempo), el **aviso** (que te llegue cuando cambia) o el **cómputo**
+(una consulta con inteligencia artificial). Consultar, el chat, las fichas,
+el PDF de cada ficha, el estado de cuenta cívico y el dictamen se quedan
+gratis.
 
-| Lo gratis (se queda gratis) | Lo que da el Pase (nuevo) |
-|---|---|
-| Consultar todo, el Auditor, las fichas, el PDF de cada ficha, el estado de cuenta cívico | **Alertas**: un correo cuando la ASF, Hacienda o el INEGI publican algo de los entes que sigues |
-| | **Mi expediente**: guardar y comparar fichas en el tiempo (antes y después de cada entrega) |
-| | **Resumen mensual** de tu estado y tu municipio, con lo que cambió |
-| | **Prioridad** en las preguntas que el Auditor aún no sabe |
-| | Insignia de auditor cívico y el informe anual de en qué se gastó cada peso |
+#### Las dos vertientes, frente a frente
 
-Regla que no cambia: **el Pase nunca compra contenido ni oculta una cifra**.
-Lo que se paga es comodidad, memoria y aviso; la información pública sigue
-pública.
+| | A · Donaciones | B · Servicios del Auditor Virtual |
+|---|---|---|
+| Qué se ofrece | Sostener una plataforma independiente | Una transformación concreta: «de no entender el presupuesto a verificar una cifra en un minuto», y trabajo a la medida |
+| Quién paga | Ciudadanía que comparte el propósito | Periodistas, organizaciones civiles, despachos, universidades, regidurías y equipos de campaña que quieren votar o vigilar informados |
+| Ingreso | Irregular: depende de campañas y de coyunturas | Recurrente si es suscripción; por encargo si es investigación |
+| Lo que exige | Forma jurídica clara, alcancía a la vista (ya existe) y rendir cuentas | Cuentas, pasarela, alertas, «Mi Auditavisión», atención a clientes y tarifas |
+| Riesgo para la credibilidad | Bajo, si nadie compra contenido (ya es regla) | Medio: un cliente grande puede presionar. Lo cubre la política de independencia (13 compromisos) |
+| Lo fiscal | Sin donataria autorizada, el donativo **no es deducible** (LISR art. 151, fr. III; la página ya lo dice) | Se factura cada cobro (CFDI); necesita régimen fiscal y contador |
+| Cuándo puede empezar | Al lanzar (fase 2), con una liga de pago | Los encargos a la medida, al lanzar; las suscripciones, en la fase 5 |
 
-Para organizaciones y medios, un **Pase institucional** (varias cuentas,
-alertas por tema, descargas en CSV con su folio) es lo escalable.
+#### Qué vendería el Auditor Virtual (vertiente B)
+
+Cada servicio sale de algo que la plataforma ya hace; lo nuevo es la memoria,
+el aviso y el trabajo humano.
+
+| Servicio | Qué recibe la persona | Ya existe | Falta |
+|---|---|---|---|
+| **Alertas** | Un correo cuando la ASF, Hacienda o el INEGI publican algo de su estado, su municipio o un ente que sigue | Las fichas y los folios | Cuentas, tabla `alertas`, función de avisos (fase 5) |
+| **Mi expediente** | Guardar fichas y compararlas antes y después de cada entrega | La ficha sellada con folio y SHA-256 | Cuentas y almacén |
+| **Resumen mensual** | Lo que cambió de su estado y su municipio, en una página | El estado de cuenta y la salud financiera | La tarea programada |
+| **Consultas a fondo con IA** (fase 7) | Respuestas redactadas con las fichas, más largas, con su dictamen | El Auditor y el dictamen | La capa de IA; cada consulta tiene costo de cómputo, por eso se puede cobrar |
+| **Investigación a la medida** | Un expediente documental sobre un caso | `servicios.html`: cinco servicios, siete pasos, política de independencia | El canal de envío y las tarifas (de los pilotos) |
+| **Plan institucional / licencia** | Varias cuentas, alertas por tema, descargas CSV con folio, capacitación | La base y las descargas | Cuentas por organización |
+
+#### Cómo cobrarlo: suscripción, créditos o «tokens»
+
+| Forma | Cómo funciona | A favor | En contra |
+|---|---|---|---|
+| **Suscripción** | Una cuota al mes o al año por alertas, expediente y resumen | Ingreso recurrente y predecible | Solo funciona si lo que se recibe cada mes es real; si no, se cancela (le pasó al Pase) |
+| **Créditos de servicio** («tokens» de la plataforma) | Se compran por adelantado y se gastan en lo que cuesta: una consulta con IA, un expediente comparativo, una descarga institucional | Se paga por uso; sirve igual a quien usa poco y a quien usa mucho; encaja con el costo real de la IA | Hay que explicar cuánto vale cada crédito; no caducan sin aviso |
+| **Por encargo** | Cotización escrita antes de empezar | Ya está diseñado en Servicios | No escala: depende de horas de trabajo |
+| **Tokens en cadena de bloques** (criptoactivos) | Una moneda propia de la plataforma | — | **No se recomienda.** En México los activos virtuales los regula la Ley Fintech (2018) y el Banco de México restringe su uso a las instituciones financieras; un token que se venda al público esperando que suba de valor puede considerarse oferta de valores. Además, para una plataforma de cuentas claras, una moneda especulativa es un riesgo de imagen. Si el autor lo quiere explorar, primero va la revisión legal |
+
+**Lectura con «Contexto millonario»:**
+- «Construye tu gallina de los huevos de oro a partir del valor de tu
+  transformación»: lo que se cobra no son datos, es **la transformación**
+  (verificar en un minuto, enterarse a tiempo, llegar a la sesión de cabildo
+  con el expediente listo).
+- «Oferta irresistible, rentable, escalable»: irresistible = alertas y memoria
+  que nadie más da con folio verificable; rentable = créditos que cubren el
+  costo de la IA; escalable = la licencia institucional.
+- «Generar proximidad es poder»: la suscripción es lo que hace que la
+  plataforma **recuerde** a la persona (su municipio, sus alertas).
+- «Clientes»: empezar con **periodistas y organizaciones civiles** (90 días).
+
+#### Recomendación: C, las dos por etapas
+
+```
+ Etapa 1 · al lanzar        Etapa 2 · fase 5             Etapa 3 · fase 7
+ ─────────────────────      ──────────────────────       ─────────────────────
+ Donaciones (alcancía)  ─▶  Suscripción: alertas,    ─▶  Créditos para consultas
+ Investigación a la         expediente y resumen         con IA y licencias
+ medida (3 a 5 pilotos)     Plan institucional           institucionales
+```
+
+1. **Al lanzar:** abrir donaciones (ya está la página y la alcancía) y
+   tomar de 3 a 5 encargos piloto de investigación. De ahí salen las tarifas
+   reales (hoy `servicios.html` no publica tarifa, para no inventarla).
+2. **Fase 5:** suscripción con lo que de verdad se entrega cada mes
+   (alertas, expediente, resumen). El precio se fija con el costo fijo
+   (§5 bis) y con lo que pagaron los pilotos, no antes.
+3. **Fase 7:** créditos para lo que tiene costo variable (la IA).
+4. Cada año, el informe de cuánto entró por cada vía (compromiso de la
+   política de independencia).
+
+**Qué decide el autor:** A, B o C; la forma jurídica (0.2), que cambia si
+las donaciones pueden ser deducibles; y si los primeros pilotos se buscan ya.
 
 ### 4.5 Las cuatro páginas del embudo
 
@@ -311,7 +373,7 @@ página de entrega».
 
 | Página | Qué tiene | Qué le falta |
 |---|---|---|
-| Aprendizaje | Lo mejor de la plataforma | Una invitación suave al Pase al final de cada respuesta útil, sin interrumpir (por ejemplo: «¿Quieres que te avise cuando cambie?») |
+| Aprendizaje | Lo mejor de la plataforma | Una invitación suave al final de cada respuesta útil, sin interrumpir (por ejemplo: «¿Quieres que te avise cuando cambie?») |
 | Ventas | Precio, promesas y política | La transformación en una frase, la oferta nueva (§4.4), pruebas (cifras de uso cuando las haya, testimonios reales, nunca inventados) y preguntas frecuentes |
 | Compra | — | Cobro seguro con tarjeta y OXXO, recibo, aviso de privacidad |
 | Entrega | — | Bienvenida, «sigue tu municipio» en un clic, primera alerta de prueba |
@@ -371,7 +433,7 @@ convierten para no inventar una cifra.
 
 **Total: el dominio, más el correo si lo eliges de pago.**
 
-### Etapa 2 · Cobrar (Pase, Servicios, donaciones)
+### Etapa 2 · Cobrar (Servicios o donaciones)
 
 | Concepto | Servicio | Costo | Periodicidad |
 |---|---|---|---|
@@ -385,15 +447,11 @@ convierten para no inventar una cifra.
 **Fijo:** US$45 al mes (US$65 con Resend Pro) + $140 MXN al mes + el dominio al
 año. **Al año:** US$540 (US$780 con Resend Pro) + $1,680 MXN + el dominio.
 
-**Lo que deja cada Pase** (derivado; comisión de Stripe antes de IVA):
+**Lo que deja cada cobro** (derivado; comisión de Stripe antes de IVA): de un
+cobro de P pesos quedan P − (P × 3.6 % + $3). Por ejemplo, de $100 quedan $93.40.
 
-| Plan | Precio | Comisión: precio × 3.6 % + $3 | Queda |
-|---|---|---|---|
-| Mensual | $79 | $5.84 | $73.16 |
-| Anual | $699 | $28.16 | $670.84 |
-
-**Cuántos Pases mensuales cubren el fijo:**
-(US$45 × tipo de cambio del día + $140) ÷ $73.16.
+**Cuántos cobros al mes cubren el fijo:**
+(US$45 × tipo de cambio del día + $140) ÷ lo que deja cada cobro.
 
 ### Costos que no son de servicios en línea (se cotizan, no se estiman)
 
@@ -431,8 +489,9 @@ Siguen en su lugar y no se mueven con el lanzamiento:
    dependencia.
 2. **Con datos de personas llegan obligaciones:** aviso de privacidad,
    derechos ARCO y qué hacer ante una fuga. Pedir lo mínimo, como ya está.
-3. **El Pase no puede cobrar por lo gratuito** (§4.4): sería el primer
-   reclamo público, y en una plataforma de cuentas claras pesa doble.
+3. **Nada de lo gratuito se cobra** (§4.4): el Pase lo hacía y se retiró. Un
+   cobro por información pública sería el primer reclamo, y en una
+   plataforma de cuentas claras pesa doble.
 4. **Marketing contra regla editorial:** las técnicas del curso funcionan,
    pero aquí la credibilidad es el producto. Ningún mensaje de venta puede
    llevar una cifra sin fuente ni una acusación.
