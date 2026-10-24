@@ -467,10 +467,14 @@ def escribir_base():
     import auditorias
     inv = auditorias.bot_fichas()
     cuenta['investigacion'] = len(inv)
+    # Los estados de cuenta y los mapas, relojes y simuladores (24-10-2026).
+    import asistente_recursos
+    dat = _charla(d)
+    rec = asistente_recursos.base([(e['a'], e['n']) for e in dat['edo']])
     js = ('/* Auditavisión · Base de fichas de «Pregúntale al Auditor». La escribe\r\n'
           '   herramientas/asistente.py desde window.AUDIT_DB, el Registro de\r\n'
           '   pendientes y las páginas generadas: no se edita a mano. */\r\n'
-          'window.AUDITOR_BASE = ' + json.dumps({'fichas': fichas, 'inv': inv, 'dat': _charla(d), 'cuenta': cuenta}, ensure_ascii=False, separators=(',', ':')) + ';\r\n')
+          'window.AUDITOR_BASE = ' + json.dumps({'fichas': fichas, 'inv': inv, 'dat': dat, 'rec': rec, 'cuenta': cuenta}, ensure_ascii=False, separators=(',', ':')) + ';\r\n')
     open(BASE_JS, 'wb').write(js.encode('utf-8'))
     return cuenta
 
@@ -478,32 +482,46 @@ def escribir_base():
 # Preguntas de ejemplo, dichas como se habla (23-10-2026). Se muestran por
 # tandas que van rotando (pedido del autor, 23-10-2026): el orden alterna
 # temas para que cada tanda mezcle estados, sueldos, impuestos, Poderes,
-# conceptos y verificacion. Cada una se probo en el chat: solo entran las
+# conceptos y verificacion. Desde el 24-10-2026 la primera tanda abre con los
+# estados de cuenta y entran los mapas y relojes. Cada una se probo en el chat: solo entran las
 # que el Auditor contesta con su dato y su fuente.
 EJEMPLOS = [
+    ('Dame mi estado de cuenta cívico', '🧾'),
     ('¿Cuánto debe Jalisco?', '🗺️'),
+    ('Mi estado de cuenta ambiental', '🌎'),
+    ('Estado de cuenta de AMLO', '🏛️'),
+    ('¿Cuánta lana le llega a Zapopan?', '🏙️'),
+    ('Muéstrame el mapa de la deuda de los estados', '🗺️'),
+    ('Estado de cuenta de un diputado', '🏛️'),
     ('¿Cuánto gana un diputado?', '💰'),
     ('¿Quién preside la Suprema Corte?', '⚖️'),
     ('¿Cuánto se recauda de IVA?', '🧾'),
+    ('El reloj de la deuda', '⏱️'),
     ('¿Qué es un pliego de observaciones?', '📘'),
+    ('Estado de cuenta de un senador', '🏛️'),
     ('¿Es cierto que Jalisco debe 50 mil millones?', '🔎'),
-    ('¿Cuánta lana le llega a Zapopan?', '🏙️'),
+    ('Estado de cuenta de Jalisco', '🗺️'),
     ('¿Cuántos diputados hay?', '🏛️'),
     ('¿Cuánto vale hoy el dólar?', '💱'),
     ('¿Cuánto dejó por aclarar la ASF?', '🔎'),
+    ('Estado de cuenta de Zapopan', '🏙️'),
     ('¿Qué es un amparo?', '📘'),
     ('¿Cuánta basura se genera en México?', '🗑️'),
+    ('¿Qué estados de cuenta hay?', '🧾'),
     ('¿Qué estado debe más?', '📊'),
     ('¿Cuánto gana un ministro de la Corte?', '💰'),
+    ('Estado de cuenta de la Suprema Corte', '⚖️'),
     ('¿En qué se gasta el presupuesto?', '🏛️'),
     ('¿Cuándo es la próxima elección judicial?', '🗳️'),
     ('¿Qué es el Ramo 33?', '📘'),
+    ('Estado de cuenta de los presidentes', '🏛️'),
     ('¿Cuánto valen 1,000 pesos de 2000 hoy?', '💱'),
     ('Compara Nuevo León con Jalisco', '⚖️'),
     ('¿Cuánto gana la presidenta?', '💰'),
     ('¿Cuánto se recauda de ISR?', '🧾'),
     ('¿Cuántos senadores hay?', '🏛️'),
     ('¿Cuánto cuesta el daño ambiental?', '🌎'),
+    ('El reloj del daño ambiental', '⏱️'),
     ('¿Cuánto es el 16 % de 2,500 millones?', '🧮'),
     ('¿Qué municipio recibe más?', '🏙️'),
     ('¿Cuánto le cuesta al país la Suprema Corte?', '⚖️'),

@@ -1,4 +1,4 @@
-/* Auditavisión · Costo Ambiental › Tu ticket en negativo (aplicación 2,
+/* Auditavisión · Costo Ambiental › Tu estado de cuenta ambiental (aplicación 2,
    16-10-2026). La página la escribe herramientas/am_ticket.py con las
    cifras oficiales y, en JSON (#atDatos), lo que toca a cada habitante
    (mismas cuentas que amTkCuentas() del motor) y los parámetros con que se
@@ -243,7 +243,7 @@
 
     salida.innerHTML =
       '<div class="at-tk' + (animar && !quieto ? ' at-tk-anim' : '') + '" id="atTk">' +
-        '<div class="at-tk-cab" style="--i:' + (n++) + '"><b>AUDITAVISIÓN</b><span>Ticket ciudadano en negativo</span><small>Emitido el ' + esc(folio) + ' · por habitante · ' + num(D.pob, 1) + ' millones de personas (CONAPO 2026)</small></div>' +
+        '<div class="at-tk-cab" style="--i:' + (n++) + '"><b>AUDITAVISIÓN</b><span>Estado de cuenta ambiental</span><small>Emitido el ' + esc(folio) + ' · por habitante · ' + num(D.pob, 1) + ' millones de personas (CONAPO 2026)</small></div>' +
         lin('Tu ingreso neto de referencia', v, 'pesos', 'al mes · ' + pesos(c.anual) + ' al año', 'at-ref') +
         sec('Cargos de este año a tu nombre') +
         lin('Intereses de la deuda pública', -c.intereses, 'neg', '2026 · ' + dias(c, c.intereses)) +
@@ -377,7 +377,7 @@
     if (!(mesNeto() > 0)) return;
     var u = liga();
     if (navigator.share) {
-      navigator.share({ title: 'Mi ticket en negativo · Auditavisión', text: 'Lo que ya me cargaron a mi nombre, con cifras oficiales:', url: u })
+      navigator.share({ title: 'Mi estado de cuenta ambiental · Auditavisión', text: 'Lo que ya me cargaron a mi nombre, con cifras oficiales:', url: u })
         .catch(function () { /* el lector cerró el menú */ });
     } else alPortapapeles(u, 'Liga copiada: quien la abra verá el mismo ticket.');
   }

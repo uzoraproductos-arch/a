@@ -450,7 +450,7 @@ def construir(base, ref):
     aviso = '''
   <aside class="ab-aviso">
     <p><b>De dónde sale cada cifra.</b> De la SEMARNAT (diagnóstico de residuos de abril de 2026), del INEGI (censo municipal 2023 y Cuentas Económicas y Ecológicas 2024) y de Hacienda (PEF 2026, avance al 30 de junio y proyecto 2027). Cada una lleva su documento y su página; las que hacemos nosotros dicen «derivado» y su operación. Lo que todavía falta está en el <a href="pendientes.html#tema-ambiente">Registro de pendientes</a>. Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>.</p>
-    <p class="ab-hermanas">Sigue en Costo Ambiental: <a href="herramienta-ambiente-reloj.html">⏱️ El reloj y el año</a> · <a href="herramienta-ambiente-ticket.html">🧾 Tu ticket en negativo</a> · <a href="herramienta-ambiente-pib.html">📉 El PIB no alcanza</a> · <a href="herramienta-ambiente-crisis.html">🌀 Crisis ambientales</a></p>
+    <p class="ab-hermanas">Sigue en Costo Ambiental: <a href="herramienta-ambiente-reloj.html">⏱️ El reloj y el año</a> · <a href="herramienta-ambiente-ticket.html">🧾 Tu estado de cuenta ambiental</a> · <a href="herramienta-ambiente-pib.html">📉 El PIB no alcanza</a> · <a href="herramienta-ambiente-crisis.html">🌀 Crisis ambientales</a></p>
   </aside>'''
 
     return ('<div class="ab" id="abRaiz">' + arranque + basura + proteger + presupuesto + megaobras + leyes_html + quien_html + aviso +

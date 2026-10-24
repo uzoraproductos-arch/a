@@ -344,6 +344,16 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   respuesta deja la seña `av-volver`, y la página a la que llega muestra
   «Volver al Auditor» (`assets/auditor/js/volver-auditor.js`, cargado en
   todas las páginas junto a `iconos.js`; su estilo vive en `civico.css`).
+- **Abre los estados de cuenta y los recursos de la Enciclopedia**
+  (24-10-2026). «Estado de cuenta de…» lleva directo al documento (cívico,
+  ambiental, cada presidente, diputación federal y local, senaduría, Corte,
+  estado, municipio), y al pie de cada respuesta van, en «Explóralo a fondo»,
+  los mapas, relojes, tableros, simuladores y páginas de fiscalización que
+  vienen al caso («Ver mapa», «Ver fiscalización»…), con el estado ya
+  elegido. Los dos catálogos viven en `herramientas/asistente_recursos.py`:
+  **un mapa, reloj, contador o simulador nuevo no está terminado hasta que
+  tiene ahí su renglón**, y si un enlace o un ancla deja de existir, la
+  generación se detiene. Así la Enciclopedia alimenta al Auditor.
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).

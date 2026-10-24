@@ -337,10 +337,112 @@
     return ms >= 0.75 ? charla.deFicha(mejor) : null;
   }
 
+  /* Los estados de cuenta y los mapas, relojes, tableros y simuladores
+     (24-10-2026, pedido del autor): el catálogo lo escribe
+     herramientas/asistente_recursos.py y comprueba que cada enlace exista.
+     «Estado de cuenta de…» lleva directo al documento; «el mapa de…» abre el
+     mapa; y al pie de cada respuesta van los que vienen al caso. */
+  var REC = (B.rec && B.rec.rec) || [], EC = (B.rec && B.rec.ec) || [], ADM = (B.dat && B.dat.adm) || [];
+  REC.forEach(function (x) { x._k = fichas(x.k + ' ' + x.n); });
+  EC.forEach(function (x) { x._k = fichas(x.k); });
+  function conSinon(t) {
+    var ws = fichas(t);
+    return ws.concat.apply(ws, ws.map(function (w) { return SINON[w] ? fichas(SINON[w]) : []; }));
+  }
+  function comunes(k, ws) { return k.filter(function (w, i) { return k.indexOf(w) === i && ws.indexOf(w) >= 0; }).length; }
+  function entidadDe(t) {
+    var p = plano(t), ab = null, largo = 0;
+    Object.keys(NOMBRE).forEach(function (a) { var n = plano(NOMBRE[a]); if (p.indexOf(n) >= 0 && n.length > largo) { ab = a; largo = n.length; } });
+    return ab;
+  }
+  function admDe(t) {
+    var p = ' ' + conSinon(t).join(' ') + ' ', hay = null;
+    ADM.forEach(function (a) { if (!hay && (p.indexOf(' ' + fichas(a.c).join(' ') + ' ') >= 0 || p.indexOf(' ' + fichas(a.n).join(' ') + ' ') >= 0)) hay = a; });
+    return hay;
+  }
+  function sinParam(u) { return String(u).split('#')[0].split('?')[0]; }
+  function ligaRec(x, ab) { return ab && x.ire ? x.ire.replace('%s', encodeURIComponent(ab)) : x.ir; }
+  function recursosPara(q, r) {
+    var tit = (r.ficha && r.ficha.tit) || r.tit || '', ir = r.ir || (r.ficha && r.ficha.ir);
+    var t = (q + ' ' + tit).replace(/estados? de cuenta/gi, ' '), ws = conSinon(t), ab = entidadDe(t), base = ir ? sinParam(ir[0]) : '';
+    var out = [];
+    /* Con un estado de por medio, sus mapas y su circuito ya vienen al caso. */
+    REC.forEach(function (x) {
+      if (sinParam(x.ir) === base) return;
+      var s = comunes(x._k, ws) + (ab && x.ire ? 2 : 0);
+      if (s >= 2) out.push({ x: x, s: s });
+    });
+    out.sort(function (a, b) { return b.s - a.s; });
+    return out.slice(0, 3).map(function (o) { return { x: o.x, ab: ab }; });
+  }
+  function recursosHtml(lista) {
+    return lista && lista.length ? '<div class="pa-rec"><p class="pa-mas-t">Explóralo a fondo</p><div class="pa-rec-lista">' + lista.map(function (o) {
+      return '<a class="pa-rec-a" href="' + esc(ligaRec(o.x, o.ab)) + '"><span class="pa-rec-ico" aria-hidden="true">' + o.x.ico + '</span>' +
+        '<span><b>' + esc(o.x.v) + '</b><small>' + esc(o.x.n) + (o.ab && o.x.ire ? ' · ' + esc(NOMBRE[o.ab]) : '') + '</small></span></a>';
+    }).join('') + '</div></div>' : '';
+  }
+  var TIPOS_REC = { mapa: 'mapa', mapas: 'mapa', reloj: 'reloj', relojes: 'reloj', contador: 'reloj', contadores: 'reloj', simulador: 'simulador', simuladores: 'simulador', tablero: 'tablero' };
+  function pideRecurso(q) {
+    var p = plano(q), tipo = null;
+    Object.keys(TIPOS_REC).forEach(function (w) { if (p.indexOf(' ' + w + ' ') >= 0) tipo = TIPOS_REC[w]; });
+    if (!tipo || / estados? de cuenta /.test(p)) return null;
+    var ws = conSinon(q), ab = entidadDe(q), mejor = null, ms = 0, delTipo = REC.filter(function (x) { return x.tipo === tipo; });
+    var tema = ws.filter(function (w) { return !TIPOS_REC[w] && !(ab && plano(NOMBRE[ab]).indexOf(' ' + w + ' ') >= 0); });
+    delTipo.forEach(function (x) { var s = comunes(x._k, tema); if (s > ms) { ms = s; mejor = x; } });
+    if (!mejor && tema.length > 1) return null;
+    var lista = function (xs) { return '<ul class="pa-lista">' + xs.map(function (x) { return '<li><a href="' + esc(ligaRec(x, ab)) + '">' + x.ico + ' <b>' + esc(x.n) + '</b></a></li>'; }).join('') + '</ul>'; };
+    if (!mejor) return { html: '<p>Estos son los que tengo:</p>' + lista(delTipo) + '<p>Cada uno se abre en su página. Dime el tema y te llevo al que es.</p>', ir: [delTipo[0].ir, delTipo[0].n], sug: [], rec: [] };
+    var otros = delTipo.filter(function (x) { return x !== mejor; });
+    return {
+      html: '<p>' + mejor.ico + ' Aquí está: <b>' + esc(mejor.n) + '</b>' + (ab && mejor.ire ? ', ya con ' + esc(NOMBRE[ab]) + ' elegido' : '') + '. Toca <b>«Saber más»</b> y se abre en su página.</p>' +
+        (otros.length ? '<p class="pa-chico">También tengo:</p>' + lista(otros) : ''),
+      ir: [ligaRec(mejor, ab), mejor.n], sug: [], rec: []
+    };
+  }
+  function estadoDeCuenta(q, r) {
+    var p = plano(q);
+    if (!EC.length || !/ estados? de cuenta /.test(p)) return null;
+    /* Si la plática ya lo resolvió con datos (un estado, un municipio, un
+       cargo) y lleva a su documento, se queda esa respuesta. */
+    var resto = q.replace(/estados? de cuenta/gi, ' '), ws = fichas(resto), ab = entidadDe(resto), a = admDe(resto);
+    var mejor = null, ms = 0, porId = {};
+    EC.forEach(function (x) { porId[x.id] = x; var s = comunes(x._k, ws); if (s > ms) { ms = s; mejor = x; } });
+    /* Un cargo («diputado local de Tamaulipas») manda sobre el estado. */
+    var cargo = mejor && /^(dip-loc|dip-fed|senado|scjn|civico|ambiental)$/.test(mejor.id);
+    var ir = r && !r.pasa && r.html ? (r.ir || (r.ficha && r.ficha.ir)) : null;
+    if (!cargo && ir && /radar-estado-de-cuenta|herramienta-inspector-entes/.test(ir[0])) return null;
+    if (a) mejor = porId.presidentes;
+    else if (ab && (!mejor || mejor.id === 'estado' || mejor.id === 'presidentes')) mejor = porId.estado;
+    if (!mejor && /(^| )(mi|mio)( |$)/.test(plano(resto))) mejor = porId.civico;
+    var otras = function (x) { return EC.filter(function (y) { return y !== x; }).slice(0, 3).map(function (y) { return y.q; }); };
+    if (!mejor) {
+      return {
+        html: '<p>Te puedo abrir <b>' + EC.length + ' estados de cuenta</b>, cada uno con sus cifras oficiales, su fuente y su folio:</p><ul class="pa-lista">' +
+          EC.map(function (x) { return '<li><a href="' + esc(x.ir.indexOf('%s') >= 0 ? sinParam(x.ir) : x.ir) + '">' + x.ico + ' <b>' + esc(x.tit) + '</b></a></li>'; }).join('') +
+          '</ul><p>Dime de quién lo quieres, por ejemplo «estado de cuenta de Jalisco» o «de un senador».</p>',
+        ir: ['radar-estado-de-cuenta.html', 'el Estado de cuenta administrativo'], sug: [], rec: []
+      };
+    }
+    var pide = mejor.ir.indexOf('%s') >= 0, liga = mejor.ir, quien = '';
+    if (mejor.id === 'presidentes' && a) { liga = mejor.ir + '?adm=' + encodeURIComponent(a.id); quien = a.n; }
+    else if (pide && ab) { liga = mejor.ir.replace('%s', mejor.id === 'dip-loc' ? (B.rec.dl || {})[ab] : ab); quien = NOMBRE[ab]; }
+    else if (pide) liga = sinParam(mejor.ir);
+    var elige = { presidentes: 'la administración', 'dip-loc': 'el congreso', estado: 'el estado', municipio: 'el municipio' }[mejor.id];
+    return {
+      html: '<p>' + mejor.ico + ' <b>' + esc(mejor.tit) + (quien ? ' · ' + esc(quien) : '') + '.</b> ' + esc(mejor.txt) + '</p>' +
+        '<p>Toca <b>«Saber más»</b> y te llevo directo a él' + (!quien && elige ? '; ahí eliges ' + elige : '') + '.</p>',
+      ir: [liga, quien ? 'el de ' + quien : 'su estado de cuenta'], sug: otras(mejor), tit: mejor.tit + (quien ? ' ' + quien : '')
+    };
+  }
+
   function respuesta(q) {
     var inv = investigacion(q);
     if (inv) return inv;
+    var rc = pideRecurso(q);
+    if (rc) return rc;
     var r = charla && charla.contesta(q);
+    var ec = estadoDeCuenta(q, r);
+    if (ec) return ec;
     /* Una afirmación sin dato con qué verificarla: se busca algo relacionado. */
     if (r && r.pasa) {
       var rel = buscar(r.claim);
@@ -394,6 +496,7 @@
       }
       if (r.anota && !ya) anota(q, 'sin');
       li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r, previas) +
+        (r.plat ? '' : recursosHtml(r.rec || recursosPara(q, r))) +
         (r.sug && r.sug.length ? '<p class="pa-mas-t">' + (r.tambien ? 'También te puede servir' : 'Sigue preguntando') + '</p>' + chips(r.sug) : '');
       guarda();
     };

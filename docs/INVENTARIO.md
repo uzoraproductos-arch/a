@@ -87,7 +87,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-ambiente-inversion.html` | Simulador de inversión ambiental · Auditavisión | apartados.py | 28 | 0 | 5 | 6 | 0 |
 | `herramienta-ambiente-pib.html` | ¿Cuánto del crecimiento es real? · Auditavisión | apartados.py | 29 | 0 | 3 | 0 | 0 |
 | `herramienta-ambiente-reloj.html` | El reloj y el año · Auditavisión | apartados.py | 37 | 0 | 38 | 57 | 8 |
-| `herramienta-ambiente-ticket.html` | Tu ticket en negativo · Auditavisión | apartados.py | 35 | 0 | 9 | 12 | 0 |
+| `herramienta-ambiente-ticket.html` | Tu estado de cuenta ambiental · Auditavisión | apartados.py | 35 | 0 | 9 | 12 | 0 |
 | `herramienta-ambiente.html` | Costo Ambiental · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `herramienta-calculadora-compara.html` | Tú contra ellos · Auditavisión | apartados.py | 33 | 0 | 46 | 19 | 9 |
 | `herramienta-calculadora-reloj.html` | El reloj de la deuda · Auditavisión | apartados.py | 37 | 0 | 6 | 8 | 1 |

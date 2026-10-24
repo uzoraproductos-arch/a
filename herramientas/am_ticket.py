@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Segunda aplicacion de Costo Ambiental: «Tu ticket en negativo» en pagina
+"""Segunda aplicacion de Costo Ambiental: «Tu estado de cuenta ambiental» (antes «Tu ticket en negativo») en pagina
 propia (16-10-2026). Sustituye al marco que cargaba la portada entera
 (index.html?ir=ambiente&ancla=eb-amticket&visor=1).
 
@@ -173,7 +173,7 @@ def construir(base, ref):
     return '''<div class="at" id="atRaiz">
   <section class="at-arranque" aria-labelledby="atArrTit">
     <p class="at-kicker">Costo Ambiental · aplicación 1</p>
-    <h2 class="at-grande" id="atArrTit"><span aria-hidden="true">🧾</span> Tu ticket en negativo</h2>
+    <h2 class="at-grande" id="atArrTit"><span aria-hidden="true">🧾</span> Tu estado de cuenta ambiental</h2>
     <p class="at-txt">Tu estado de cuenta de la Calculadora te dice a dónde va lo que pagas. Este ticket te dice lo contrario: <b>lo que ya te cargaron a tu nombre sin preguntarte</b>. Tu parte de la deuda del gobierno, de los intereses que esa deuda cobra cada año y del daño ambiental del país, medida contra lo que ganas.</p>
     <p class="at-privado"><span aria-hidden="true">🔒</span> Lo que escribes se queda en tu navegador: no se envía a ningún lado.</p>
     <ol class="at-indice" aria-label="Lo que hay en esta página">
@@ -202,7 +202,7 @@ def construir(base, ref):
     <input type="range" id="atRango" class="at-rango" min="0" max="200000" step="500" value="0" aria-label="Ajusta tu ingreso mensual">
     <p class="at-neto" id="atNeto" aria-live="polite"></p>
     <div class="at-acciones">
-      <button type="button" class="at-boton" id="atEmitir"><span aria-hidden="true">🧾</span> Emitir mi ticket en negativo</button>
+      <button type="button" class="at-boton" id="atEmitir"><span aria-hidden="true">🧾</span> Emitir mi estado de cuenta ambiental</button>
       <button type="button" class="at-btn" data-ej="general" title="Salario mínimo general 2026: CONASAMI, DOF 9 de diciembre de 2025"><span aria-hidden="true">📄</span> Ejemplo oficial: salario mínimo ({sm_g})</button>
       <button type="button" class="at-btn" data-ej="frontera" title="Salario mínimo de la Zona Libre de la Frontera Norte 2026: CONASAMI, DOF 9 de diciembre de 2025"><span aria-hidden="true">🌵</span> Mínimo de la frontera norte ({sm_f})</button>
       <button type="button" class="at-btn" id="atReiniciar"><span aria-hidden="true">↺</span> Reiniciar en cero</button>

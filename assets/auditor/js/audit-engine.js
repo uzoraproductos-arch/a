@@ -2363,7 +2363,7 @@
           tuUd('<label class="am-tk-campo" for="amTkIngreso"><span>Su ingreso neto al mes</span>', '<label class="am-tk-campo" for="amTkIngreso"><span>Tu ingreso neto al mes</span>') +
             '<span class="am-tk-input"><b>$</b><input type="number" id="amTkIngreso" inputmode="decimal" min="0" step="100" placeholder="0" value="' + (amTk.ingreso || '') + '" ' +
             'onkeydown="if(event.key===\'Enter\') window.AuditEngine.amTicketEmitir()"></span></label>' +
-          '<button type="button" class="hero-pillar-btn hero-pillar-calc" onclick="window.AuditEngine.amTicketEmitir()">🧾 Emitir mi ticket en negativo</button>' +
+          '<button type="button" class="hero-pillar-btn hero-pillar-calc" onclick="window.AuditEngine.amTicketEmitir()">🧾 Emitir mi estado de cuenta ambiental</button>' +
           '<span class="am-tk-acciones">' +
             '<button type="button" class="pd-btn" onclick="window.AuditEngine.amTicketEjemplo()" title="Salario m\u00ednimo general 2026: CONASAMI, DOF 9 de diciembre de 2025">📄 Cargar ejemplo oficial</button>' +
             '<button type="button" class="pd-btn" onclick="window.AuditEngine.amTicketReiniciar()">↺ Reiniciar en cero</button>' +
@@ -2509,7 +2509,7 @@
 
     salida.innerHTML =
       '<div class="am-tk" id="amTkImprimible" data-no-autolink>' +
-        '<div class="am-tk-cab" style="--i:' + (n++) + '"><b>AUDITAVISIÓN</b><span>Ticket ciudadano en negativo</span><small>Emitido el ' + folio + ' · por habitante · ' + amNum(c.pob.millones, 1) + ' millones de personas (CONAPO 2026)</small></div>' +
+        '<div class="am-tk-cab" style="--i:' + (n++) + '"><b>AUDITAVISIÓN</b><span>Estado de cuenta ambiental</span><small>Emitido el ' + folio + ' · por habitante · ' + amNum(c.pob.millones, 1) + ' millones de personas (CONAPO 2026)</small></div>' +
         lin(tuUd('Su ingreso neto de referencia', 'Tu ingreso neto de referencia'), v, 'pesos', 'al mes · ' + ccPesos(c.anual) + ' al año', 'am-tk-ref') +
         sec(tuUd('Cargos de este año a su nombre', 'Cargos de este año a tu nombre')) +
         lin('Intereses de la deuda pública', -c.intereses, 'neg', '2026 · ' + dias(c.intereses)) +
@@ -5594,7 +5594,7 @@
       n: 5, icono: '🌎', titulo: 'Costo Ambiental',
       subtitulo: 'El gasto que no aparece en el recibo',
       texto: 'El deterioro del ambiente también es gasto: lo pagamos en agua, aire, suelo y basura. Aquí se mide en pesos con cifras oficiales (INEGI, SEMARNAT y Hacienda), se calcula tu parte y se compara con el presupuesto ambiental 2026-2027 y las leyes que aplican.',
-      temas: [['⏱️ 1 · El reloj y el año', 'amreloj'], ['🧾 2 · Su ticket en negativo', 'amticket'], ['🗑️ 3 · Basura y protección', 'ambasura'], ['📉 4 · El PIB no alcanza', 'ampib']]
+      temas: [['⏱️ 1 · El reloj y el año', 'amreloj'], ['🧾 2 · Su estado de cuenta ambiental', 'amticket'], ['🗑️ 3 · Basura y protección', 'ambasura'], ['📉 4 · El PIB no alcanza', 'ampib']]
     }
   };
 

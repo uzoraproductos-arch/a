@@ -750,11 +750,11 @@ HERRAMIENTAS = [
     ('herramienta-ambiente.html', 'ambiente', '🌎', 'Costo Ambiental',
      'El gasto que no aparece en el recibo',
      'El deterioro del ambiente también es gasto: lo pagamos en agua, aire, suelo y basura. Aquí haces tus cuentas con cifras oficiales '
-     '(INEGI, SEMARNAT, Hacienda y la Auditoría Superior): tu ticket en negativo, el reloj del daño, los simuladores del crecimiento real y de la '
+     '(INEGI, SEMARNAT, Hacienda y la Auditoría Superior): tu estado de cuenta ambiental, el reloj del daño, los simuladores del crecimiento real y de la '
      'inversión, el auditor del sector y las investigaciones de las crisis. Las cifras de referencia viven en '
      '<a href="datos-medio-ambiente.html">Datos → Medio ambiente</a>.',
      'ambiente', [
-         ('amticket', '🧾', 'Tu ticket en negativo', 'Tu estado de cuenta ambiental',
+         ('amticket', '🧾', 'Tu estado de cuenta ambiental', 'Lo que ya te cargaron a tu nombre',
           'Escribe lo que ganas y ve lo que ya te cargaron a tu nombre: tu parte de la deuda, de sus intereses y del daño ambiental, con tu basura en kilos.'),
          ('amreloj', '⏱️', 'El reloj y el año', 'Un año en veinte segundos',
           'El daño ambiental que corre mientras lees y una simulación que acumula, día por día, cinco comparaciones de un año entero.'),
@@ -4857,6 +4857,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('24-10-2026', 'El Auditor Virtual abre cualquier estado de cuenta: el tuyo cívico, el ambiental (antes «Tu ticket en negativo»), el de cada presidente, la diputación federal y local, la senaduría, la Corte, tu estado y tu municipio. Y al pie de cada respuesta te ofrece el mapa, el reloj, el tablero o la fiscalización que vienen al caso, ya con tu estado elegido.'),
     ('24-10-2026', 'Las Grandes investigaciones son el Modo Inspector: una sola página con sus seis aplicaciones y una imagen nueva. Las migas de cada aplicación llevan directo a ella.'),
     ('24-10-2026', 'El Auditor Virtual se rediseña: un solo logo, respuestas con más aire y la fuente en su panel, preguntas de ejemplo que cambian solo cuando tú quieres, y los botones Regresar y Limpiar. Tu plática se guarda mientras navegas, y desde la página a la que te llevó una respuesta puedes volver al Auditor. El Modo Inspector queda con sus Grandes investigaciones.'),
     ('23-10-2026', 'Las imágenes de la portada abren el chat del Auditor con la pregunta de cada investigación escrita: al enviarla, te contesta y te lleva a su página. Las nueve investigaciones tienen además su capítulo, «Auditoría en imágenes», en los Expedientes de casos de la ASF del Modo Inspector.'),

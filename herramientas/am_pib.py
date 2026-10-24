@@ -322,7 +322,7 @@ def _completo(base, ref):
       <li>Producto Interno Bruto nacional a precios de mercado de {ej}. {r_pib}</li>
     </ul>
     <p>Cotejamos esta página con el comunicado del INEGI: los montos del agotamiento por componente son los de su Tabla 1, y el consumo de capital fijo y el Producto Interno Neto se dan como rango porque se derivan de un PINE que el INEGI publica redondeado. Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>. Lo que todavía nos deben las dependencias está en el <a href="pendientes.html">Registro de pendientes</a>.</p>
-    <p class="ap-hermanas">Sigue en Costo ambiental: <a href="herramienta-ambiente-reloj.html">⏱️ El reloj y el año</a> · <a href="herramienta-ambiente-ticket.html">🧾 Tu ticket en negativo</a> · <a href="herramienta-ambiente-basura.html">🗑️ Basura y protección</a> · <a href="herramienta-ambiente-crisis.html">🔥 Crisis ambientales</a></p>
+    <p class="ap-hermanas">Sigue en Costo ambiental: <a href="herramienta-ambiente-reloj.html">⏱️ El reloj y el año</a> · <a href="herramienta-ambiente-ticket.html">🧾 Tu estado de cuenta ambiental</a> · <a href="herramienta-ambiente-basura.html">🗑️ Basura y protección</a> · <a href="herramienta-ambiente-crisis.html">🔥 Crisis ambientales</a></p>
   </aside>
   <script type="application/json" id="apDatos">{datos}</script>
 </div>'''.format(
@@ -361,7 +361,7 @@ def construir(base, ref):
     aviso = '''
   <aside class="ap-aviso">
     <p><b>De dónde salen los puntos de partida.</b> Del INEGI, Cuentas Económicas y Ecológicas de México %s: el PIB, el costo del daño ambiental y el Producto Interno Neto Ecológico. La resta completa, paso a paso, y qué se acabó y qué se ensució están en <a href="datos-ambiente-pib.html">Datos → Medio ambiente</a>. Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>.</p>
-    <p class="ap-hermanas">Sigue en Costo Ambiental: <a href="herramienta-ambiente-ticket.html">🧾 Tu ticket en negativo</a> · <a href="herramienta-ambiente-reloj.html">⏱️ El reloj y el año</a> · <a href="herramienta-ambiente-inversion.html">🌱 Simulador de inversión ambiental</a> · <a href="herramienta-ambiente-auditor.html">🔍 Auditor ambiental</a></p>
+    <p class="ap-hermanas">Sigue en Costo Ambiental: <a href="herramienta-ambiente-ticket.html">🧾 Tu estado de cuenta ambiental</a> · <a href="herramienta-ambiente-reloj.html">⏱️ El reloj y el año</a> · <a href="herramienta-ambiente-inversion.html">🌱 Simulador de inversión ambiental</a> · <a href="herramienta-ambiente-auditor.html">🔍 Auditor ambiental</a></p>
   </aside>''' % base['cuentas_ecologicas']['ejercicio']
     return '<div class="ap" id="apRaiz">' + arranque + sim + aviso + am_cortes.guion(html, 'apDatos') + '\n</div>'
 

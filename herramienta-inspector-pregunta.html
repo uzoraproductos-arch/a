@@ -20,13 +20,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261024e">
-  <script src="assets/auditor/js/iconos.js?v=20261024e"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261024e" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261024e">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261024e">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261024e">
-  <link rel="stylesheet" href="assets/auditor/css/asistente.css?v=20261024e">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261024f">
+  <script src="assets/auditor/js/iconos.js?v=20261024f"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261024f" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261024f">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261024f">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261024f">
+  <link rel="stylesheet" href="assets/auditor/css/asistente.css?v=20261024f">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -187,29 +187,42 @@
             <div class="pa-ejs-cab"><span>💡 Prueba con:</span>
               <button type="button" class="pa-ejs-otras" id="paEjsOtras" hidden>🔄 Otras preguntas</button></div>
             <div class="pa-ejs-lista" id="paEjsLista">
+              <button type="button" class="pa-ej" data-pa-pregunta="Dame mi estado de cuenta cívico"><span aria-hidden="true">🧾</span> Dame mi estado de cuenta cívico</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto debe Jalisco?"><span aria-hidden="true">🗺️</span> ¿Cuánto debe Jalisco?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Mi estado de cuenta ambiental"><span aria-hidden="true">🌎</span> Mi estado de cuenta ambiental</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de AMLO"><span aria-hidden="true">🏛️</span> Estado de cuenta de AMLO</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánta lana le llega a Zapopan?"><span aria-hidden="true">🏙️</span> ¿Cuánta lana le llega a Zapopan?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Muéstrame el mapa de la deuda de los estados"><span aria-hidden="true">🗺️</span> Muéstrame el mapa de la deuda de los estados</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de un diputado"><span aria-hidden="true">🏛️</span> Estado de cuenta de un diputado</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto gana un diputado?"><span aria-hidden="true">💰</span> ¿Cuánto gana un diputado?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Quién preside la Suprema Corte?"><span aria-hidden="true">⚖️</span> ¿Quién preside la Suprema Corte?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto se recauda de IVA?"><span aria-hidden="true">🧾</span> ¿Cuánto se recauda de IVA?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="El reloj de la deuda"><span aria-hidden="true">⏱️</span> El reloj de la deuda</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Qué es un pliego de observaciones?"><span aria-hidden="true">📘</span> ¿Qué es un pliego de observaciones?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de un senador"><span aria-hidden="true">🏛️</span> Estado de cuenta de un senador</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Es cierto que Jalisco debe 50 mil millones?"><span aria-hidden="true">🔎</span> ¿Es cierto que Jalisco debe 50 mil millones?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánta lana le llega a Zapopan?"><span aria-hidden="true">🏙️</span> ¿Cuánta lana le llega a Zapopan?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de Jalisco"><span aria-hidden="true">🗺️</span> Estado de cuenta de Jalisco</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántos diputados hay?"><span aria-hidden="true">🏛️</span> ¿Cuántos diputados hay?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto vale hoy el dólar?"><span aria-hidden="true">💱</span> ¿Cuánto vale hoy el dólar?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto dejó por aclarar la ASF?"><span aria-hidden="true">🔎</span> ¿Cuánto dejó por aclarar la ASF?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de Zapopan"><span aria-hidden="true">🏙️</span> Estado de cuenta de Zapopan</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Qué es un amparo?"><span aria-hidden="true">📘</span> ¿Qué es un amparo?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánta basura se genera en México?"><span aria-hidden="true">🗑️</span> ¿Cuánta basura se genera en México?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué estados de cuenta hay?"><span aria-hidden="true">🧾</span> ¿Qué estados de cuenta hay?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Qué estado debe más?"><span aria-hidden="true">📊</span> ¿Qué estado debe más?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto gana un ministro de la Corte?"><span aria-hidden="true">💰</span> ¿Cuánto gana un ministro de la Corte?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de la Suprema Corte"><span aria-hidden="true">⚖️</span> Estado de cuenta de la Suprema Corte</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿En qué se gasta el presupuesto?"><span aria-hidden="true">🏛️</span> ¿En qué se gasta el presupuesto?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuándo es la próxima elección judicial?"><span aria-hidden="true">🗳️</span> ¿Cuándo es la próxima elección judicial?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Qué es el Ramo 33?"><span aria-hidden="true">📘</span> ¿Qué es el Ramo 33?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de los presidentes"><span aria-hidden="true">🏛️</span> Estado de cuenta de los presidentes</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto valen 1,000 pesos de 2000 hoy?"><span aria-hidden="true">💱</span> ¿Cuánto valen 1,000 pesos de 2000 hoy?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="Compara Nuevo León con Jalisco"><span aria-hidden="true">⚖️</span> Compara Nuevo León con Jalisco</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto gana la presidenta?"><span aria-hidden="true">💰</span> ¿Cuánto gana la presidenta?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto se recauda de ISR?"><span aria-hidden="true">🧾</span> ¿Cuánto se recauda de ISR?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántos senadores hay?"><span aria-hidden="true">🏛️</span> ¿Cuántos senadores hay?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto cuesta el daño ambiental?"><span aria-hidden="true">🌎</span> ¿Cuánto cuesta el daño ambiental?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="El reloj del daño ambiental"><span aria-hidden="true">⏱️</span> El reloj del daño ambiental</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto es el 16 % de 2,500 millones?"><span aria-hidden="true">🧮</span> ¿Cuánto es el 16 % de 2,500 millones?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Qué municipio recibe más?"><span aria-hidden="true">🏙️</span> ¿Qué municipio recibe más?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto le cuesta al país la Suprema Corte?"><span aria-hidden="true">⚖️</span> ¿Cuánto le cuesta al país la Suprema Corte?</button>
@@ -278,16 +291,16 @@
 
   <footer class="apartado-pie">
     <div class="apartado-ancho">
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261024e</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261024f</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261024e"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261024e"></script>
-  <script src="assets/auditor/js/municipios-efipem.js?v=20261024e"></script>
-  <script src="assets/auditor/js/asistente-base.js?v=20261024e"></script>
-  <script src="assets/auditor/js/verificador.js?v=20261024e"></script>
-  <script src="assets/auditor/js/asistente-charla.js?v=20261024e"></script>
-  <script src="assets/auditor/js/asistente.js?v=20261024e"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261024f"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261024f"></script>
+  <script src="assets/auditor/js/municipios-efipem.js?v=20261024f"></script>
+  <script src="assets/auditor/js/asistente-base.js?v=20261024f"></script>
+  <script src="assets/auditor/js/verificador.js?v=20261024f"></script>
+  <script src="assets/auditor/js/asistente-charla.js?v=20261024f"></script>
+  <script src="assets/auditor/js/asistente.js?v=20261024f"></script>
 </body>
 </html>

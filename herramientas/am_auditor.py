@@ -237,7 +237,7 @@ def construir(base, ref):
 
   <aside class="aa-aviso">
     <p><b>De dónde sale cada cifra.</b> El presupuesto, del Decreto de PEF 2026, del avance del gasto al 30 de junio de 2026 y del proyecto de PEF 2027 (Hacienda); la Cuenta Pública 2025 y el calendario, de los datos abiertos de Hacienda; lo de la Auditoría Superior, de su Matriz de Datos Básicos de la Cuenta Pública 2024. Lo que dice «derivado» lo calculamos nosotros y trae su operación. La tabla de todos los órganos lado a lado está en <a href="datos-ambiente-presupuesto.html">Datos → Medio ambiente</a>. Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>.</p>
-    <p class="aa-hermanas">Sigue en Costo Ambiental: <a href="herramienta-ambiente-ticket.html">🧾 Tu ticket en negativo</a> · <a href="herramienta-ambiente-inversion.html">🌱 Simulador de inversión ambiental</a> · <a href="herramienta-ambiente-crisis.html">🌀 Crisis ambientales</a> · <a href="herramienta-inspector-entes.html">🏢 Auditor de entes públicos</a></p>
+    <p class="aa-hermanas">Sigue en Costo Ambiental: <a href="herramienta-ambiente-ticket.html">🧾 Tu estado de cuenta ambiental</a> · <a href="herramienta-ambiente-inversion.html">🌱 Simulador de inversión ambiental</a> · <a href="herramienta-ambiente-crisis.html">🌀 Crisis ambientales</a> · <a href="herramienta-inspector-entes.html">🏢 Auditor de entes públicos</a></p>
   </aside>
   <script type="application/json" id="aaDatos">%(datos)s</script>
 </div>''' % {'botones': ''.join(botones), 'fichas': ''.join(fichas), 'datos': _json(csv)}

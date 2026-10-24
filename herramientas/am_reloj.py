@@ -370,7 +370,7 @@ def construir(base, ref):
       <li>Huachicol fiscal: {ig2}</li>
     </ul>
     <p class="ar-nota">Las cifras con chip <b>derivado</b> son cuentas sobre cifras oficiales, con la operación dicha. Lo que todavía nos deben las dependencias está en el <a href="pendientes.html">Registro de pendientes</a>. Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>.</p>
-    <p class="ar-hermanas">Sigue en Costo Ambiental: <a href="herramienta-ambiente-ticket.html">🧾 Tu ticket en negativo</a> · <a href="herramienta-ambiente-pib.html">📈 ¿Cuánto del crecimiento es real?</a> · <a href="herramienta-ambiente-inversion.html">🌱 Simulador de inversión ambiental</a> · <a href="herramienta-ambiente-auditor.html">🔍 Auditor ambiental</a> · <a href="herramienta-ambiente-crisis.html">🌀 Crisis ambientales</a></p>
+    <p class="ar-hermanas">Sigue en Costo Ambiental: <a href="herramienta-ambiente-ticket.html">🧾 Tu estado de cuenta ambiental</a> · <a href="herramienta-ambiente-pib.html">📈 ¿Cuánto del crecimiento es real?</a> · <a href="herramienta-ambiente-inversion.html">🌱 Simulador de inversión ambiental</a> · <a href="herramienta-ambiente-auditor.html">🔍 Auditor ambiental</a> · <a href="herramienta-ambiente-crisis.html">🌀 Crisis ambientales</a></p>
     <p class="ar-hermanas">Otros relojes y cuentas: <a href="herramienta-calculadora-reloj.html">⏱️ El reloj de la deuda</a> · <a href="numeros-lo-que-cuestan-los-poderes.html">🏛️ Lo que cuestan los Poderes</a> · <a href="herramienta-megaobras-sector.html">🏗️ Megaobras por sector</a> · <a href="auditoria-huachicol-fiscal.html">⛽ Huachicol fiscal</a></p>
   </section>
   <script type="application/json" id="arDatos">{datos}</script>

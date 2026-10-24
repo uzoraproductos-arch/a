@@ -71,7 +71,7 @@ ENTRADA = ('El deterioro del ambiente también es gasto público: lo pagamos en 
            've a la herramienta <a href="%s">Costo Ambiental</a>.' % HERRAMIENTA)
 
 HACER = ('<p class="apartado-nota">🧮 ¿Quieres hacer tus cuentas? En la herramienta <a href="%s">Costo Ambiental</a> '
-         'sacas tu ticket en negativo, simulas el crecimiento real y la inversión ambiental, y auditas a cada órgano del sector.</p>' % HERRAMIENTA)
+         'sacas tu estado de cuenta ambiental, simulas el crecimiento real y la inversión ambiental, y auditas a cada órgano del sector.</p>' % HERRAMIENTA)
 
 
 def _archivo(id_):
