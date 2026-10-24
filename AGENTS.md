@@ -19,9 +19,12 @@ antes de tocar código.
 | **La de uso** | **Auditor Virtual** (abre `herramienta-inspector-pregunta.html`) | El producto estrella. **Le resuelve al usuario todo lo que se le ofrezca**: cualquier dato, municipio, salud financiera, investigación o auditoría en imágenes. Encuentra, explica y lleva a la página de la Enciclopedia o de la herramienta donde está el detalle. |
 
 - Las cuatro herramientas cuelgan del Auditor Virtual (botón «Herramientas»).
-  **El Modo Inspector es solo las Grandes investigaciones** (sus seis
-  aplicaciones): `herramienta-inspector.html` las muestra directo y ya no
-  presenta al chat como su «otra división».
+  **El Modo Inspector es las Grandes investigaciones** («realizar grandes
+  investigaciones a través de seis aplicaciones»): una sola página,
+  `herramienta-inspector.html`, con las seis aplicaciones. Ya no presenta al
+  chat como su «otra división», y `herramienta-inspector-investigaciones.html`
+  solo redirige ahí. Su imagen es `herr-inspector-rostros.jpg` (elegida por el
+  autor); el chat conserva el foróptero (`foto_clase: 'foto-auditor'`).
 - El Auditor Virtual tiene que funcionar y verse como lo mejor de la
   plataforma: un dato que la plataforma tiene y el chat no encuentra es un
   error (ver §5 ter).

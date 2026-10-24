@@ -681,7 +681,9 @@ APARTADOS = [
 HERR_IMG = {
     'obras': 'assets/auditor/img/herr-megaobras-plataformas-amplia.jpg',
     'calculadora': 'assets/auditor/img/herr-calculadora-monedas-amplia.jpg',
-    'inspector': 'assets/auditor/img/herr-inspector-foroptero-amplia.jpg',
+    # Imagen del Modo Inspector desde el 24-10-2026 (la eligió el autor); el
+    # foróptero se queda en el Auditor Virtual (foto_clase 'foto-auditor').
+    'inspector': 'assets/auditor/img/herr-inspector-rostros.jpg',
     'ambiente': 'assets/auditor/img/herr-ambiente-refineria-amplia.jpg',
 }
 
@@ -781,7 +783,10 @@ HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las'), 'inspector':
 # 11-10-2026): el Modo Inspector tiene «Grandes investigaciones» (sus seis
 # aplicaciones) y, aparte, el bot interno «Preguntale al Auditor»
 # (herramientas/asistente.py).
-HERR_DIVISION = {'inspector': ('Grandes investigaciones', 'Las seis aplicaciones del Modo Inspector. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
+# Desde el 24-10-2026 (decisión del autor) «Grandes investigaciones» ES el
+# Modo Inspector: una sola página, herramienta-inspector.html, con las seis
+# aplicaciones. La vieja página de las investigaciones redirige ahí.
+HERR_DIVISION = {'inspector': ('Modo Inspector', 'Grandes investigaciones a través de seis aplicaciones. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
 ASISTENTE = ('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor', 'Pregunta fácil, respuesta fácil',
              'El chat de Auditavisión. Pregúntale lo que quieras del dinero público, como lo dirías platicando: cuánto debe un estado, cuánto le llega a un municipio, cuánto gana un cargo o qué significa un término. Te contesta en corto y con datos oficiales, y si quieres el respaldo, te lleva a la página donde está la información y te arma el dictamen con su respaldo.')
 LOGO_IMG = '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62" height="48">'
@@ -789,9 +794,11 @@ LOGO_IMG = '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62
 # son tarjetas autonomas: la pagina de la herramienta solo las presenta y cada
 # una abre su propia pagina.
 INVESTIGACIONES = 'herramienta-inspector-investigaciones.html'
+FOTO_AUDITOR = 'assets/auditor/img/herr-inspector-foroptero-amplia.jpg'
+MODO_INSPECTOR = 'herramienta-inspector.html'
 # El menú «Herramientas» del chat (pedido del autor, 23-10-2026), en el orden
-# que pidió. El Modo Inspector lleva directo a sus Grandes investigaciones.
-HERR_MENU = [(INVESTIGACIONES if h[1] == 'inspector' else h[0], h[2], h[3], h[4], HERR_IMG[h[1]])
+# que pidió.
+HERR_MENU = [(h[0], h[2], h[3], h[4], HERR_IMG[h[1]])
              for r in ('inspector', 'ambiente', 'calculadora', 'obras') for h in HERRAMIENTAS if h[1] == r]
 HERR_ICONO_CAB = {'ambiente', 'obras', 'calculadora', 'inspector'}
 
@@ -957,76 +964,34 @@ def herramienta(h, n):
 
 
 def herramienta_divisiones(h, n, ruta):
-    """Modo Inspector (11-10-2026, pedido del autor): la pagina de la
-    herramienta ya no despliega las seis aplicaciones ni el bot. Presenta dos
-    tarjetas autonomas y cada una abre su pagina: «Grandes investigaciones»
-    (INVESTIGACIONES, con las seis aplicaciones) y «Pregúntale al Auditor»
-    (ASISTENTE). Devuelve la pagina de la herramienta y la de las
-    investigaciones."""
+    """Modo Inspector. Desde el 24-10-2026 (decisión del autor) es las Grandes
+    investigaciones: su página muestra directo las seis aplicaciones. El chat
+    ya no es su «otra división»: es la portada del Auditor Virtual."""
     archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
     division = HERR_DIVISION[rubro]
-    nombres = ' · '.join(t[2] for t in temas)
-    tarjeta_div = ('<li><a class="herr-bot herr-div" href="%s">\n'
-                   '          <span class="herr-bot-logo herr-div-ico" aria-hidden="true">%s</span>\n'
-                   '          <span class="herr-bot-tx"><span class="herr-paso-frase">%s</span><span class="herr-paso-nombre">%s</span>'
-                   '<span class="herr-paso-desc">%s</span>%s</span>\n'
-                   '          <span class="herr-paso-accion">%s ➔</span>\n'
-                   '        </a></li>')
-    dos = ('<ul class="herr-dos">\n        %s\n        %s\n        </ul>' % (
-        tarjeta_div % (INVESTIGACIONES, icono, 'Recorre una investigación', division[0],
-                       'Las %d aplicaciones del Modo Inspector: de lo que encontró la ASF a las empresas que facturan operaciones simuladas, con cada cifra y su documento.' % len(temas),
-                       '<span class="herr-div-lista">%s</span>' % nombres, 'Ver las %d aplicaciones' % len(temas)),
-        tarjeta_div % (ASISTENTE[0], LOGO_IMG, ASISTENTE[2], ASISTENTE[1],
-                       'El bot interno: le preguntas lo que quieras y te contesta con una nota técnica sellada, armada solo con datos verificados.',
-                       '', 'Preguntar')))
-    base = {
+    principal = {
         'menu_archivo': 'herramientas.html',
         'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
         'fondo': HERR_IMG[rubro],
         'rubro': rubro,
         'sin_icono_lema': True,
-    }
-    principal = dict(base, **{
         'archivo': archivo, 'menu': titulo, 'icono': icono, 'titulo': titulo,
-        'lema': 'Herramienta %d de %d' % (n, len(HERRAMIENTAS)),
+        'lema': 'Grandes investigaciones · %d aplicaciones' % len(temas),
         'icono_cab': icono,
-        'entrada': '<b>%s.</b> %s' % (sub, texto),
+        'entrada': '<b>%s</b> %s' % (division[1].split('. ')[0] + '.', texto),
         # Las pestanas viejas (#pulso, #inspentes...) y las secciones que
-        # vivian aqui (#modulos, #pregunta) llevan a su pagina.
+        # vivian aqui (#pregunta...) llevan a su pagina.
         'hash_a_pagina': dict([(t[0][:-5] if t[0].endswith('.html') else t[0], modulo_archivo(archivo, t[0])) for t in temas] +
-                              [('modulos', INVESTIGACIONES), ('pregunta', ASISTENTE[0]),
+                              [('pregunta', ASISTENTE[0]),
                                ('inspradar', 'herramienta-inspector-entes.html?nivel=estatal&orden=radInt#ie-dir'),
                                ('expedientes', 'expedientes.html')]),
-        # Desde el 24-10-2026 (decisión del autor) el Modo Inspector es solo
-        # las Grandes investigaciones: el chat es la portada del Auditor
-        # Virtual y ya no se presenta como su otra división.
         'secciones': [{
-            'id': 'apps', 'titulo': '%s: las %d aplicaciones' % (division[0], len(temas)), 'sin_cab': False,
-            'texto': 'Recórrelas en orden o entra directo a la que te interesa. Cada una abre su propia página. '
-                     '¿Prefieres preguntar? <a href="%s">Pregúntale al Auditor</a>.' % ASISTENTE[0],
-            'tarjetas': [], 'bloque': ruta,
-        }],
-        'pie_extra': herr_otras(archivo),
-    })
-    nav = ('<nav class="herr-mod-nav" aria-label="Más del Modo Inspector">\n'
-           '        <div class="herr-mod-pasos">\n'
-           '          <a class="herr-mod-paso ant" href="%s"><small>← Volver a</small><b>%s %s</b></a>\n'
-           '          <a class="herr-mod-paso sig" href="%s"><small>Tu Auditor Virtual</small><b>💬 %s</b></a>\n'
-           '        </div>\n      </nav>' % (archivo, icono, titulo, ASISTENTE[0], ASISTENTE[1]))
-    investigaciones = dict(base, **{
-        'archivo': INVESTIGACIONES, 'menu': division[0], 'icono': icono, 'titulo': division[0],
-        'padre2': (archivo, titulo),
-        'lema': '%s · %d aplicaciones' % (titulo, len(temas)),
-        'icono_cab': icono,
-        'entrada': '<b>Recorre una investigación.</b> ' + division[1],
-        'secciones': [{
-            'id': 'modulos', 'titulo': 'Las %d aplicaciones' % len(temas), 'sin_cab': False,
+            'id': 'apps', 'titulo': 'Las %d aplicaciones' % len(temas), 'sin_cab': False,
             'texto': 'Recórrelas en orden o entra directo a la que te interesa. Cada una abre su propia página.',
             'tarjetas': [], 'bloque': ruta,
         }],
-        'pie_extra': nav + '\n\n      ' + herr_otras(archivo),
-    })
-    principal['_extra'] = [investigaciones]
+        'pie_extra': herr_otras(archivo),
+    }
     return principal
 
 
@@ -1047,7 +1012,7 @@ def herramienta_modulo(h, n, i, bloque=None):
     def paso(t, k, rotulo, clase):
         if not t and rubro == 'inspector':
             return ('          <a class="herr-mod-paso %s" href="%s"><small>%s</small><b>%s %s</b></a>'
-                    % (clase, INVESTIGACIONES, rotulo, icono, HERR_DIVISION[rubro][0]))
+                    % (clase, MODO_INSPECTOR, rotulo, icono, HERR_DIVISION[rubro][0]))
         if not t:
             return ('          <a class="herr-mod-paso %s" href="%s"><small>%s</small><b>%s %s</b></a>'
                     % (clase, archivo, rotulo, icono, titulo))
@@ -1076,7 +1041,6 @@ def herramienta_modulo(h, n, i, bloque=None):
         'menu_archivo': 'herramientas.html',
         'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
         'padre2': (archivo, titulo),
-        'padre3': (INVESTIGACIONES, HERR_DIVISION[rubro][0]) if rubro == 'inspector' else None,
         'icono': ico,
         'titulo': nombre,
         'lema': ('%s · %s %d de %d' % (titulo, pal[0], i + 1, len(temas)) if rubro in HERR_ICONO_CAB else
@@ -1138,7 +1102,7 @@ def nav_compacta(h, i, padre=None):
     vuelve a su aplicacion y no hay anterior ni siguiente."""
     archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
     pal = herr_palabra(rubro)
-    todas = INVESTIGACIONES if rubro == 'inspector' else archivo
+    todas = archivo
     ant = temas[i - 1] if i > 0 and not padre else None
     sig = temas[i + 1] if i + 1 < len(temas) and not padre else None
     # Los rotulos de Inversion y Megaobras (21-10-2026): «Aplicacion
@@ -1193,12 +1157,12 @@ def nav_de_pagina(archivo, padre3=None, cap=None):
     if archivo == ASISTENTE[0]:
         # El chat es la portada del Auditor Virtual (24-10-2026): ya no es una
         # «división» del Modo Inspector; desde aquí se va a las herramientas,
-        # a las Grandes investigaciones y a la Enciclopedia.
+        # al Modo Inspector (las Grandes investigaciones) y a la Enciclopedia.
         return ('<nav class="herr-nav-min" aria-label="Moverte desde aquí">\n'
                 '        <a class="herr-min" href="herramientas.html"><span>🧰 Herramientas</span><small>Las cuatro, en una página</small></a>\n'
-                '        <a class="herr-min" href="%s"><span>🔍 Grandes investigaciones</span><small>Modo Inspector</small></a>\n'
+                '        <a class="herr-min" href="%s"><span>🔍 Modo Inspector</span><small>Grandes investigaciones en seis aplicaciones</small></a>\n'
                 '        <a class="herr-min" href="%s"><span>📚 Enciclopedia</span><small>Números, Datos y Aprende</small></a>\n'
-                '      </nav>' % (INVESTIGACIONES, ENCICLOPEDIA))
+                '      </nav>' % (MODO_INSPECTOR, ENCICLOPEDIA))
     return None
 
 
@@ -1211,7 +1175,7 @@ def herramienta_asistente(bloque):
            '        <div class="herr-mod-pasos">\n'
            '          <a class="herr-mod-paso ant" href="%s"><small>← Volver al índice de</small><b>%s %s</b></a>\n'
            '          <a class="herr-mod-paso sig" href="%s"><small>La otra división</small><b>%s %s</b></a>\n'
-           '        </div>\n      </nav>' % (archivo, icono, titulo, INVESTIGACIONES, icono, HERR_DIVISION[rubro][0]))
+           '        </div>\n      </nav>' % (archivo, icono, titulo, MODO_INSPECTOR, icono, HERR_DIVISION[rubro][0]))
     return {
         # Es la portada de la pestaña Auditor Virtual (23-10-2026): sin padres.
         # Título «Auditor Virtual» (pedido del autor, 24-10-2026); el chat de
@@ -1220,7 +1184,7 @@ def herramienta_asistente(bloque):
         'icono': '💬', 'titulo': 'Auditor Virtual',
         'lema': 'Pregúntale al Auditor · el chat de Auditavisión', 'sin_icono_lema': True, 'icono_cab': '💬',
         'entrada': '<b>%s.</b> %s' % (ASISTENTE[2], ASISTENTE[3]),
-        'fondo': HERR_IMG[rubro], 'rubro': rubro,
+        'fondo': FOTO_AUDITOR, 'rubro': rubro, 'foto_clase': 'foto-auditor',
         'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
         'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
         'pie_extra': nav + '\n\n      ' + herr_otras(archivo),
@@ -1239,7 +1203,7 @@ def herramienta_dictamen(bloque):
         'lema': '%s · el respaldo de una respuesta' % ASISTENTE[1], 'sin_icono_lema': True, 'icono_cab': LOGO_IMG,
         'entrada': ('<b>El respaldo de una respuesta del Auditor.</b> Tu pregunta, lo que se contestó, cada cifra con su estado, '
                     'sus fuentes oficiales y el método, con folio, sello y huella digital. Se arma de nuevo con los datos de la plataforma cada vez que se abre el enlace.'),
-        'fondo': HERR_IMG[h[1]], 'rubro': h[1],
+        'fondo': FOTO_AUDITOR, 'rubro': h[1], 'foto_clase': 'foto-auditor',
         'secciones': [{'id': 'dictamen', 'titulo': 'Dictamen pericial de Auditavisión', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
         'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
     }
@@ -1504,7 +1468,6 @@ def servicios():
         # Desde el 11-10-2026 es un modulo del Modo Inspector (pedido del autor).
         'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
         'padre2': ('herramienta-inspector.html', 'Modo Inspector'),
-        'padre3': (INVESTIGACIONES, 'Grandes investigaciones'),
         'icono': '🔎', 'titulo': 'Servicios de investigación', 'lema': 'La consulta es gratuita; la investigación a la medida se cotiza',
         'entrada': ('Todo lo que publica Auditavisión es libre y lo seguirá siendo. Cuando necesites ir más a fondo en un caso, '
                     'podemos hacer por encargo una investigación documental con la misma regla de la plataforma: cada cifra con '
@@ -4796,7 +4759,7 @@ def pagina(a, sello):
             padre += '<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a[nivel]
     cab_clase, cab_estilo = 'apartado-cab', ''
     if a.get('fondo'):
-        cab_clase += ' herr-cab herr-foto rubro-%s' % a['rubro']
+        cab_clase += ' herr-cab herr-foto rubro-%s' % a['rubro'] + (' ' + a['foto_clase'] if a.get('foto_clase') else '')
         nota = '<span class="herr-cab-credito">Imagen ilustrativa</span>' + nota
     pie_extra = ('\n\n      ' + a['pie_extra']) if a.get('pie_extra') else ''
     entrada = a['entrada']
@@ -4894,6 +4857,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('24-10-2026', 'Las Grandes investigaciones son el Modo Inspector: una sola página con sus seis aplicaciones y una imagen nueva. Las migas de cada aplicación llevan directo a ella.'),
     ('24-10-2026', 'El Auditor Virtual se rediseña: un solo logo, respuestas con más aire y la fuente en su panel, preguntas de ejemplo que cambian solo cuando tú quieres, y los botones Regresar y Limpiar. Tu plática se guarda mientras navegas, y desde la página a la que te llevó una respuesta puedes volver al Auditor. El Modo Inspector queda con sus Grandes investigaciones.'),
     ('23-10-2026', 'Las imágenes de la portada abren el chat del Auditor con la pregunta de cada investigación escrita: al enviarla, te contesta y te lleva a su página. Las nueve investigaciones tienen además su capítulo, «Auditoría en imágenes», en los Expedientes de casos de la ASF del Modo Inspector.'),
     ('23-10-2026', 'La pestaña Auditor Virtual abre directo en Pregúntale al Auditor. Junto a «Cómo platicar conmigo» está el botón «Herramientas», con las cuatro: Modo Inspector, que lleva a las Grandes investigaciones, Costo Ambiental, Calculadora Cívica e Inversión y Megaobras.'),
@@ -5041,10 +5005,7 @@ def indice(base, ref):
     # El Modo Inspector se abre en dos tarjetas (11-10-2026): sus ocho
     # aplicaciones cuelgan de «Grandes investigaciones», y el bot va aparte.
     herr = _rejilla([grupo(h[2], h[3],
-                            ([(INVESTIGACIONES, 'Grandes investigaciones', 'Las seis aplicaciones del inspector')]
-                             if h[1] == 'inspector' else []) +
-                            [(modulo_archivo(h[0], t[0]), ('· ' if h[1] == 'inspector' else '') + t[2], t[3]) for t in h[7]] +
-                            ([(ASISTENTE[0], ASISTENTE[1], ASISTENTE[2])] if h[1] == 'inspector' else []),
+                            [(modulo_archivo(h[0], t[0]), t[2], t[3]) for t in h[7]],
                             h[0])
                      for h in HERRAMIENTAS])
     otros = [_grupo('📚', 'Enciclopedia', [
@@ -5162,6 +5123,8 @@ REDIRECCIONES = {
     # ambiente, y sus anclas (#abBasura, #abLeyes...) llevan a su pagina.
     'herramienta-ambiente-basura.html': ('datos-medio-ambiente.html', 'Basura y protección',
                                          'Ahora vive en Datos → Medio ambiente, una página por tema.'),
+    INVESTIGACIONES: (MODO_INSPECTOR, 'Grandes investigaciones',
+                      'Desde el 24-10-2026 las Grandes investigaciones son el Modo Inspector: sus seis aplicaciones están en su página.'),
     'busca-y-verifica.html': ('herramienta-inspector-entes.html', 'Busca y verifica',
                               'Ahora vive dentro del Modo Inspector, en la parte «Busca y verifica».'),
     # Los dos estantes del Diccionario se fundieron en la Biblioteca del

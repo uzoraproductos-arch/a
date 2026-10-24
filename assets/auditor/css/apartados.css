@@ -708,7 +708,12 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 /* Las fotografías, por rubro (la ruta es relativa a esta hoja) */
 .herr-foto.rubro-obras::before { background-image: url('../img/herr-megaobras-plataformas-amplia.jpg'); }
 .herr-foto.rubro-calculadora::before { background-image: url('../img/herr-calculadora-monedas-amplia.jpg'); }
-.herr-foto.rubro-inspector::before { background-image: url('../img/herr-inspector-foroptero-amplia.jpg'); }
+.herr-foto.rubro-inspector::before { background-image: url('../img/herr-inspector-rostros.jpg'); }
+/* El Auditor Virtual conserva el foróptero (24-10-2026). */
+.herr-foto.rubro-inspector.foto-auditor::before { background-image: url('../img/herr-inspector-foroptero-amplia.jpg'); }
+/* La imagen del Modo Inspector es muy contrastada: en celular, el velo se
+   extiende a todo el ancho para que el texto se lea. */
+@media (max-width: 700px) { .herr-cab.rubro-inspector:not(.foto-auditor)::after { background: rgba(74, 81, 92, 0.88); } }
 .herr-foto.rubro-ambiente::before { background-image: url('../img/herr-ambiente-refineria-amplia.jpg'); }
 
 /* Encabezado de la página de herramienta */
