@@ -91,7 +91,7 @@ sin las decisiones de la fase 0.**
 | 0.4 | Imagen del Modo Inspector | Confirmar autor y licencia de las cámaras, o reemplazar por una propia | Resuelto |
 | 0.5 | **Qué da el Pase** (ver §4.4) | Rehacer su oferta antes de cobrar | Aprobada la nueva oferta |
 | 0.6 | Enciclopedia congelada | Publicarla tal cual o dejarla fuera | Elegido |
-| 0.7 | Perfil del creador (§3 bis) | Liga del canal de YouTube «Radio Meteora Records», semblanza, imagen con licencia y una línea de Fortovisión y de Cosmovisión | Entregado por el autor |
+| 0.7 | Perfil del creador (§3 bis) | ~~Liga del canal~~ ✅ `https://www.youtube.com/@meteorarecords` (dada por el autor, 24-10-2026). Faltan: semblanza, imagen con licencia y una línea de Fortovisión y de Cosmovisión | Entregado por el autor |
 
 ### Fase 1. La casa nueva en Vercel (semana 1-2)
 
@@ -197,7 +197,7 @@ lleva a `diccionario.html`. Debe llevar a **una página propia del creador**.
 | Sus creaciones | **Auditavisión**: en línea, con liga a la portada | Listo |
 | | **Fortovisión** | «En desarrollo», sin fecha ni promesas hasta que el autor la defina |
 | | **Cosmovisión** | «En desarrollo», igual |
-| Su canal | **Radio Meteora Records** en YouTube: botón al canal y, si el autor quiere, el último video incrustado en modo de privacidad reforzada (`youtube-nocookie.com`, sin cookies hasta que se reproduce) | Espera la liga exacta del canal |
+| Su canal | **Radio Meteora Records** en YouTube: botón al canal (`https://www.youtube.com/@meteorarecords`) y, si el autor quiere, el último video incrustado en modo de privacidad reforzada (`youtube-nocookie.com`, sin cookies hasta que se reproduce) | Liga lista (24-10-2026). Falta abrirla en un navegador y confirmar que el nombre visible del canal es «Radio Meteora Records»: desde este entorno YouTube no responde |
 | Contacto | Correo del dominio (fase 2) | Espera el dominio |
 
 **Cómo queda todo vinculado:**
@@ -211,7 +211,7 @@ lleva a `diccionario.html`. Debe llevar a **una página propia del creador**.
 ```
 
 - **Para Google:** la página lleva datos estructurados de persona
-  (`schema.org/Person`) con `sameAs` al canal de YouTube, y cada creación los
+  (`schema.org/Person`) con `sameAs` al canal de YouTube (`https://www.youtube.com/@meteorarecords`), y cada creación los
   suyos (`creator`). Así los buscadores entienden que el sitio, el canal y las
   tres creaciones son del mismo autor. `index.html` ya declara
   `"creator": "Inspector Meteoro"`.
