@@ -154,6 +154,8 @@
 .pa-tabla thead th { background: var(--pa-claro); color: #0b2a63; }
 .pa-tabla tbody th { font-weight: 600; color: #44526b; }
 .pa-tabla td { font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* Las tablas de Inversión y Megaobras: sus cifras traen rangos largos, así que se acomodan en renglones. */
+.pa-tabla-ajusta td { white-space: normal; min-width: 7.5em; }
 .pa-enlace { font: inherit; cursor: pointer; border: 0; background: none; padding: 0; color: #1a56b8; text-decoration: underline; min-height: 0; }
 .pa-escribe .pa-burbuja { flex: none; }
 .pa-puntos { display: inline-flex; gap: 5px; padding: 6px 2px; }

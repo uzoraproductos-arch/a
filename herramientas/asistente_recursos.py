@@ -99,6 +99,16 @@ RECURSOS = [
      'diputado diputados diputada senador senadores senadora ministro ministros corte cargo dieta legislador legisladores presidente presidenta sexenio administracion'),
     ('obras', '🏗️', 'Ver obras', 'La cuenta de cada megaobra', 'herramienta-megaobras-pulso-cuenta.html', None, 'tablero',
      'obra obras megaobra megaobras tren maya dos bocas refineria aifa aeropuerto interoceanico inversion'),
+    # Inversión y Megaobras (24-10-2026): el contador en vivo, la línea del
+    # tiempo, el duelo de sexenios y la huella ambiental de las obras.
+    ('obras-vivo', '🚦', 'Ver contador', 'Lo que gana o pierde cada obra, en vivo', 'herramienta-megaobras-tabla.html', None, 'reloj',
+     'obra obras megaobra megaobras gana pierde perdida ganancia contador vivo presidente sexenio invirtio'),
+    ('obras-linea', '🕰️', 'Ver línea del tiempo', 'Las megaobras de 1988 a 2024', 'herramienta-megaobras-tabla.html#mxLinea', None, 'tablero',
+     'obra obras megaobra megaobras sexenio sexenios presidente presidentes linea tiempo historia invirtio construyo'),
+    ('obras-duelo', '⚖️', 'Comparar', 'Dos sexenios frente a frente, por sus obras', 'herramienta-megaobras-tabla.html#mxComparar', None, 'tablero',
+     'obra obras megaobra megaobras compara comparar contra versus sexenio sexenios presidente'),
+    ('obras-huella', '🌳', 'Ver huella', 'La huella ambiental de las megaobras', 'datos-ambiente-megaobras.html', None, 'tablero',
+     'obra obras megaobra megaobras tren maya dos bocas ambiental ambiente huella impacto selva deforestacion manifestacion'),
 ]
 
 

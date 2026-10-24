@@ -133,7 +133,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras-sector.html` | Obra por obra, por industria · Auditavisión | apartados.py | 51 | 0 | 110 | 47 | 30 |
 | `herramienta-megaobras-sexenios.html` | Los seis sexenios · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-megaobras-tabla.html` | En qué invirtió cada presidente · Auditavisión | apartados.py | 66 | 0 | 19 | 38 | 6 |
-| `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 37 | 0 | 0 | 2 | 1 |
+| `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 38 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 30 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 40 | 0 | 3 | 6 | 1 |
 | `indice.html` | Índice general · Auditavisión | apartados.py | 213 | 0 | 1 | 1 | 1 |

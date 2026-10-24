@@ -502,6 +502,10 @@ def escribir_base():
     dat = _charla(d)
     rec = asistente_recursos.base([(e['a'], e['n']) for e in dat['edo']])
     dat['insp'] = _inspector()
+    # Inversión y Megaobras, dentro del chat (24-10-2026): sus obras, sus
+    # sexenios, sus cifras y sus cinco aplicaciones.
+    import asistente_megaobras
+    dat['mo'] = asistente_megaobras.datos(d)
 
     js = ('/* Auditavisión · Base de fichas de «Pregúntale al Auditor». La escribe\r\n'
           '   herramientas/asistente.py desde window.AUDIT_DB, el Registro de\r\n'
@@ -571,6 +575,13 @@ for _i, _e in enumerate([('¿Mi proveedor está en la lista negra del SAT?', '�
                          ('Verifica un estado de cuenta', '🔏'), ('¿Qué puedo investigar en el Modo Inspector?', '🔍'),
                          ('Quiero pedir una investigación', '🔎')]):
     EJEMPLOS.insert(7 + _i * 7, _e)
+# Inversión y Megaobras desde el chat (24-10-2026): también intercaladas,
+# desde la segunda tanda, a la mitad de cada una.
+for _i, _e in enumerate([('¿Cuánto costó el Tren Maya?', '🚆'), ('¿En qué obras invirtió AMLO?', '🏗️'),
+                         ('¿Qué megaobra tiene más sobrecosto?', '📈'), ('¿Cuánto pierde Dos Bocas al año?', '🛢️'),
+                         ('Compara el AIFA con el Tren Maya', '⚖️'), ('¿Cuánto han costado las megaobras?', '🏗️'),
+                         ('¿Cuánto nos cuesta el FOBAPROA?', '🏦')]):
+    EJEMPLOS.insert(12 + _i * 8, _e)
 
 
 
@@ -605,7 +616,7 @@ def pagina(cuenta, canal='', herramientas=()):
               <div class="pa-burbuja">
                 <p>¡Hola! Soy el Auditor. Pregúntame lo que quieras del dinero público, como se lo preguntarías a un amigo: <b>cuánto debe tu estado</b>, <b>cuánta lana le llega a tu municipio</b>, <b>cuánto gana un diputado</b> o <b>qué significa</b> algún término.</p>
                 <p>Te contesto en corto y con datos oficiales. Si quieres ir a fondo, toca <b>«Saber más»</b> y te llevo a la página donde está la información; si necesitas el respaldo, <b>«Generar dictamen»</b>.</p>
-                <p>Y aquí mismo investigas con las seis aplicaciones del <b>Modo Inspector</b>: pégame un RFC, un folio o la liga de una nota, o pídeme el diagnóstico de un ente.</p>
+                <p>Y aquí mismo investigas con las seis aplicaciones del <b>Modo Inspector</b>: pégame un RFC, un folio o la liga de una nota, o pídeme el diagnóstico de un ente. Y te cuento cada <b>megaobra</b>: lo que costó, lo que pierde y quién la hizo.</p>
               </div>
             </li>
           </ol>
@@ -641,6 +652,7 @@ def pagina(cuenta, canal='', herramientas=()):
             <li><b>Saco cuentas:</b> ordeno, comparo, sumo y saco porcentajes y márgenes. Cuando hago una cuenta, te digo cuál fue.</li>
             <li><b>Verifico lo que oyes:</b> «¿es cierto que…?», «dicen que…» o la liga de una nota. Comparo la cifra con su documento oficial y te digo si coincide, si se acerca o si no cuadra.</li>
             <li><b>Investigo contigo, sin salir del chat.</b> Las seis aplicaciones del Modo Inspector se usan desde aquí: pégame un <b>RFC</b> o un nombre y te digo si está en la lista negra del SAT; un <b>folio</b> (AV-…) y compruebo el estado de cuenta; la <b>liga de una nota</b> y la contrasto; pídeme el <b>diagnóstico de un ente</b> («diagnóstico de Pemex»), un <b>expediente de la ASF</b> («expediente de Segalmex») o una <b>investigación a la medida</b>. La aplicación se abre en la respuesta con «▶️ Úsala aquí».</li>
+            <li><b>Sigo cada megaobra.</b> Pregúntame por el <b>Tren Maya</b>, <b>Dos Bocas</b>, el <b>AIFA</b> o el <b>FOBAPROA</b>: cuánto se aprobó, cuánto costó, su sobrecosto, si gana o pierde al año y qué dijo la ASF. También <b>en qué invirtió cada presidente</b> («obras de Calderón»), cuál tiene <b>más sobrecosto</b> y las cinco aplicaciones de Inversión y Megaobras, que también se abren aquí.</li>
             <li><b>Toca «📎 Fuente»</b> para ver la fuente de cada cifra y su estado: <span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">derivado</span> <span class="est-chip est-pendiente">pendiente</span>.</li>
             <li><b>¿Quieres ir a fondo?</b> «📖 Saber más» te lleva a la página de la plataforma donde está la información completa.</li>
             <li><b>¿Necesitas el respaldo?</b> «🧾 Generar dictamen» abre, en otra pestaña, el dictamen pericial de Auditavisión: tu pregunta, la respuesta, sus cifras, sus fuentes y el método, con folio, sello y huella digital (SHA-256).</li>

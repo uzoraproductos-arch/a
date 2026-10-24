@@ -689,7 +689,8 @@ HERRAMIENTAS = [
     ('herramienta-megaobras.html', 'obras', '🏗️', 'Inversión y Megaobras',
      'Lo que se prometió, lo que se pagó y la diferencia',
      'Seguimiento a costos, sobrecostos y subsidios de las obras que definieron cada sexenio: Tren Maya, Dos Bocas, AIFA y los demás '
-     'proyectos estratégicos de la nación, desde 1988 a la fecha. Cada cifra remite al documento que la sostiene.',
+     'proyectos estratégicos de la nación, desde 1988 a la fecha. Cada cifra remite al documento que la sostiene.'
+     ' Todo también lo preguntas en el chat del <a href="herramienta-inspector-pregunta.html">Auditor</a>: cada obra, cada presidente y las cinco aplicaciones.',
      'megaobras',
      # Desde el 21-10-2026 (pedido del autor) las cuatro aplicaciones son una
      # sola herramienta en capitulos y, el mismo dia, cuatro aplicaciones
@@ -4836,6 +4837,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('24-10-2026', 'Inversión y Megaobras entra al chat del Auditor Virtual. Pregúntale por el Tren Maya, Dos Bocas, el AIFA, el FOBAPROA o cualquiera de las 13 obras y rescates: cuánto se aprobó, cuánto costó, su sobrecosto, si gana o pierde al año y qué dijo la ASF, cada cifra con su chip y su documento. También en qué invirtió cada presidente, cuál tiene más sobrecosto o pierde más, dos obras o dos sexenios frente a frente y las cuatro cifras del total. Cada respuesta lleva a la ficha y la cuenta de la obra, al estado de cuenta de su presidente, a la salud financiera de la dependencia a cargo y a los portales oficiales, y sus cinco aplicaciones se abren ahí mismo con «▶️ Úsala aquí».'),
     ('24-10-2026', 'El Modo Inspector entra al chat del Auditor Virtual. Sus seis aplicaciones se usan sin salir de la plática: escríbele un RFC o un nombre y te dice si está en la lista negra del SAT; pégale un folio y comprueba el estado de cuenta; la liga de una nota y la contrasta; pídele el diagnóstico de un ente («diagnóstico de Pemex»), un expediente de la ASF («expediente de Segalmex») o una investigación a la medida. La aplicación se abre dentro de la respuesta con «Úsala aquí», y cada respuesta que lleva a una de ellas trae su tarjeta.'),
     ('24-10-2026', 'La Biblioteca del Erario Público, al día. Referencias suma 28 fichas, de la [126] a la [153]: los acuerdos del INE de la elección judicial y del Proceso Electoral 2026-2027, en una familia nueva «Elecciones e INE»; los estados financieros del IPAB; los estados de actividades de la Cuenta Pública del Tren Maya, el AIFA, Birmex y el Gobierno Federal; las bases de datos abiertas del PEF 2026 y del proyecto 2027, la cartera de Obra Pública Abierta, CONAPO, el padrón del SAT, la AFAC, el FIX de Banxico y los informes de la ASF sobre el NAICM y la Estela de Luz. El Diccionario suma cinco términos: los tres presupuestos, la clasificación funcional del gasto, el pasivo contingente, el Proceso Electoral Federal 2026-2027 y el estado de actividades. Fe de erratas: el Presupuesto de Egresos 2026 se publicó en el DOF el 21 de noviembre de 2025, no el 28.'),
     ('24-10-2026', 'En Números, Presupuesto queda en seis tarjetas: la primera es Los tres presupuestos (del Estado, nacional y social), que se mudó desde Gasto público, y le siguen Cuánto dinero es, Los 16 orígenes del ingreso, ¿A qué equivale?, El camino del dinero y el Paquete Económico 2027. Su página y sus cifras no cambian.'),

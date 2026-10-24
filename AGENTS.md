@@ -375,6 +375,14 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   `asistente.py`), pero su página debe aceptar lo que el lector trae por la
   dirección (`?q=`, `?liga=`, `?verifica=`, `#ente=`) y su intención se
   agrega en `inspector()` de `asistente.js`.
+- **Inversión y Megaobras vive también en el chat** (24-10-2026): cada obra,
+  cada presidente, los rankings y las cuatro cifras los contesta
+  `megaobras()` de `asistente.js` con lo que escribe
+  `herramientas/asistente_megaobras.py` (las mismas funciones que pintan la
+  herramienta). **Una obra nueva necesita su renglón en `ALIAS`** (cómo se
+  dice en la calle) y, si tiene dependencia a cargo en el Auditor de entes,
+  en `ENTE`; sus cinco aplicaciones se abren en el marco del chat como las
+  del Modo Inspector.
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).
