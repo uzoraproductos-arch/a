@@ -641,17 +641,10 @@ APARTADOS = [
                 'pagina': 'garantias.html',
                 'pestana': ('🛡️', 'Garantías cívicas', 'A qué puerta tocar y qué te protege: abre su página'),
             },
-            {
-                # Entrega 7 de la propuesta de Astra (10-10-2026). Desde el
-                # 11-10-2026 (pedido del autor) no se despliega: abre
-                # comunidad.html, y cada una de sus cinco tarjetas, su pagina.
-                # El 24-10-2026 (pedido del autor) «Participa» se fundio con
-                # «Cuéntanos lo que viste», el boton de la cabecera: eran la
-                # misma puerta con dos nombres.
-                'id': 'comunidad',
-                'pagina': 'comunidad.html',
-                'pestana': ('📢', 'Cuéntanos lo que viste', 'Reporta, corrige, propón y comparte: abre su página'),
-            },
+            # «Cuéntanos lo que viste» (comunidad.html) fue tarjeta de esta
+            # pestana hasta el 24-10-2026: ese dia (pedido del autor) se fundio
+            # con el boton «Cuéntanos lo que viste» de la cabecera, que es su
+            # unica puerta. Comunidad queda con tres tarjetas.
             {
                 # Pedido del autor, 11-10-2026: una via mas para sostener la
                 # plataforma, con su alcancia a la vista (donaciones()).
@@ -1922,8 +1915,8 @@ def comunidad():
         'erratas': '<div class="sv-politica">\n          <ol class="cm-erratas">\n%s\n          </ol>\n        </div>' % erratas,
     }
     portada = {
-        'archivo': 'comunidad.html', 'menu': 'Cuéntanos lo que viste', 'menu_archivo': 'participa.html',
-        'padre': ('participa.html', 'Comunidad'),
+        # Cuelga del boton de la cabecera, no de una pestana (24-10-2026).
+        'archivo': 'comunidad.html', 'menu': 'Cuéntanos lo que viste', 'menu_archivo': 'comunidad.html',
         'icono': '📢', 'titulo': 'Cuéntanos lo que viste', 'lema': 'Participa: reporta, corrige y comparte',
         'entrada': ('La plataforma mejora con quien la lee. Repórtanos algo raro con el dinero público, señala un dato que esté mal '
                     '(con su documento) o propón un tema para investigar: son las tres rutas del botón «📢 Cuéntanos lo que viste» '
@@ -1935,8 +1928,8 @@ def comunidad():
     partes = []
     for id_, archivo, ico, tit, frase, texto in COMUNIDAD_PARTES:
         partes.append({
-            'archivo': archivo, 'menu': tit, 'menu_archivo': 'participa.html',
-            'padre': ('participa.html', 'Comunidad'), 'padre2': ('comunidad.html', 'Cuéntanos lo que viste'),
+            'archivo': archivo, 'menu': tit, 'menu_archivo': 'comunidad.html',
+            'padre': ('comunidad.html', 'Cuéntanos lo que viste'),
             'icono': ico, 'titulo': tit, 'lema': 'Cuéntanos lo que viste', 'entrada': texto,
             'estilos': ['servicios.css'],
             'antes': AVISO_ENVIO if id_ in ('reporta', 'error', 'tema') else '',
@@ -4815,7 +4808,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
-    ('24-10-2026', 'Comunidad queda en cuatro tarjetas: Ágora cívica, Garantías cívicas, «📢 Cuéntanos lo que viste» (la antigua Participa, fundida con el botón de la cabecera) y Donaciones. El Pase del Auditor Cívico se retira: la plataforma se sostendrá con donaciones o con los Servicios de investigación.'),
+    ('24-10-2026', 'Comunidad queda en tres tarjetas: Ágora cívica, Garantías cívicas y Donaciones. La antigua Participa se fundió con el botón «📢 Cuéntanos lo que viste» de la cabecera, que abre su página con sus cinco puertas. El Pase del Auditor Cívico se retira: la plataforma se sostendrá con donaciones o con los Servicios de investigación.'),
     ('24-10-2026', 'Cada estado y cada municipio tiene sus cuatro documentos en su ficha técnica: estado de cuenta, salud financiera, dictamen y un contador en vivo de lo que le llega al día, por hora y por segundo, con su operación a la vista. Y al Auditor ya le puedes preguntar «Zapopan, Jalisco».'),
     ('24-10-2026', 'El Auditor Virtual abre cualquier estado de cuenta: el tuyo cívico, el ambiental (antes «Tu ticket en negativo»), el de cada presidente, la diputación federal y local, la senaduría, la Corte, tu estado y tu municipio. Y al pie de cada respuesta te ofrece el mapa, el reloj, el tablero o la fiscalización que vienen al caso, ya con tu estado elegido.'),
     ('24-10-2026', 'Las Grandes investigaciones son el Modo Inspector: una sola página con sus seis aplicaciones y una imagen nueva. Las migas de cada aplicación llevan directo a ella.'),
@@ -4988,10 +4981,13 @@ def indice(base, ref):
             enl = [e for e in enl if e[0] != 'comunidad.html']
             k = [e[0] for e in enl].index('garantias.html') + 1
             enl[k:k] = [(g[1], '· ' + g[3], '') for g in GARANTIAS_PARTES]
-            enl += [('expedientes.html', 'Expedientes de casos de la ASF', 'Los casos por aclarar'),
-                    ('comunidad.html', 'Cuéntanos lo que viste', 'Reporta, señala errores, propón temas, comparte y fe de erratas')] + [
-                    (c[1], '· ' + c[3], '') for c in COMUNIDAD_PARTES]
+            enl += [('expedientes.html', 'Expedientes de casos de la ASF', 'Los casos por aclarar')]
         otros.append(grupo(a['icono'], a['menu'], enl, archivo))
+        if archivo == 'participa.html':
+            # El boton de la cabecera, con sus cinco paginas (24-10-2026).
+            otros.append(_grupo('📢', 'Cuéntanos lo que viste', [
+                ('comunidad.html', 'Cuéntanos lo que viste', 'Reporta, señala errores, propón temas, comparte y fe de erratas')] + [
+                (c[1], '· ' + c[3], '') for c in COMUNIDAD_PARTES]))
     otros.append(_grupo('🏛️', 'Los Poderes', [
         (al.PORTADA, 'Poder Legislativo', 'Las Cámaras, el calendario, las elecciones y los estados'),
         (aj.PORTADA, 'Poder Judicial', 'La Corte, los sueldos, el presupuesto y la elección judicial'),

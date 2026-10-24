@@ -29,12 +29,12 @@ La Enciclopedia queda fuera porque está congelada.
 | `auditoria-tren-toluca.html` | Tren Interurbano México-Toluca «El Insurgente» · Auditoría en imágenes · Auditavisión | auditorias.py | 40 | 0 | 2 | 4 | 1 |
 | `biblioteca-hacendaria.html` | Biblioteca hacendaria · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `busca-y-verifica.html` | Busca y verifica · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `comunidad-compartir.html` | Comparte el Estado de Cuenta · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
-| `comunidad-erratas.html` | Fe de erratas · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
-| `comunidad-error.html` | Un dato mal en esta plataforma · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
-| `comunidad-reporta.html` | Algo raro con el dinero público · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
-| `comunidad-tema.html` | Un tema que deberíamos investigar · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
-| `comunidad.html` | Cuéntanos lo que viste · Auditavisión | apartados.py | 24 | 0 | 0 | 0 | 0 |
+| `comunidad-compartir.html` | Comparte el Estado de Cuenta · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
+| `comunidad-erratas.html` | Fe de erratas · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
+| `comunidad-error.html` | Un dato mal en esta plataforma · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
+| `comunidad-reporta.html` | Algo raro con el dinero público · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
+| `comunidad-tema.html` | Un tema que deberíamos investigar · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
+| `comunidad.html` | Cuéntanos lo que viste · Auditavisión | apartados.py | 23 | 0 | 0 | 0 | 0 |
 | `congreso-y-elecciones.html` | El Congreso y las elecciones · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `contexto-dimensional-ambiental.html` | Dimensión ambiental · Auditavisión | apartados.py | 25 | 0 | 4 | 1 | 0 |
 | `contexto-dimensional-descarga.html` | Descarga y metodología · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
@@ -206,7 +206,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-gasta.html` | Se gasta: los tres presupuestos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `numeros-se-recauda.html` | Se recauda · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `participa.html` | Comunidad · Auditavisión | apartados.py | 22 | 0 | 0 | 0 | 0 |
+| `participa.html` | Comunidad · Auditavisión | apartados.py | 21 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 108 | 0 | 0 | 0 | 58 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 26 | 0 | 0 | 0 | 0 |
