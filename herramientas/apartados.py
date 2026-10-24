@@ -717,7 +717,9 @@ HERRAMIENTAS = [
      'Dónde quedó el dinero que nadie ha podido explicar',
      'Expedientes de la Auditoría Superior de la Federación (ASF), adjudicaciones directas, empresas que facturan operaciones simuladas '
      '(EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.'
-     ' Y si un caso necesita ir más a fondo, en la aplicación de Servicios puedes pedir una investigación a la medida: cada cifra con su documento y bajo una política de independencia.',
+     ' Y si un caso necesita ir más a fondo, en la aplicación de Servicios puedes pedir una investigación a la medida: cada cifra con su documento y bajo una política de independencia.'
+     ' Las seis también las usas desde el chat del <a href="herramienta-inspector-pregunta.html">Auditor</a>, sin salir de la plática.',
+
      'verificador', [
          # «Que encontro la ASF» y «Expedientes de casos» se fusionaron el
          # 21-10-2026 (pedido del autor) en una sola aplicacion, con todas las
@@ -4834,6 +4836,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('24-10-2026', 'El Modo Inspector entra al chat del Auditor Virtual. Sus seis aplicaciones se usan sin salir de la plática: escríbele un RFC o un nombre y te dice si está en la lista negra del SAT; pégale un folio y comprueba el estado de cuenta; la liga de una nota y la contrasta; pídele el diagnóstico de un ente («diagnóstico de Pemex»), un expediente de la ASF («expediente de Segalmex») o una investigación a la medida. La aplicación se abre dentro de la respuesta con «Úsala aquí», y cada respuesta que lleva a una de ellas trae su tarjeta.'),
     ('24-10-2026', 'La Biblioteca del Erario Público, al día. Referencias suma 28 fichas, de la [126] a la [153]: los acuerdos del INE de la elección judicial y del Proceso Electoral 2026-2027, en una familia nueva «Elecciones e INE»; los estados financieros del IPAB; los estados de actividades de la Cuenta Pública del Tren Maya, el AIFA, Birmex y el Gobierno Federal; las bases de datos abiertas del PEF 2026 y del proyecto 2027, la cartera de Obra Pública Abierta, CONAPO, el padrón del SAT, la AFAC, el FIX de Banxico y los informes de la ASF sobre el NAICM y la Estela de Luz. El Diccionario suma cinco términos: los tres presupuestos, la clasificación funcional del gasto, el pasivo contingente, el Proceso Electoral Federal 2026-2027 y el estado de actividades. Fe de erratas: el Presupuesto de Egresos 2026 se publicó en el DOF el 21 de noviembre de 2025, no el 28.'),
     ('24-10-2026', 'En Números, Presupuesto queda en seis tarjetas: la primera es Los tres presupuestos (del Estado, nacional y social), que se mudó desde Gasto público, y le siguen Cuánto dinero es, Los 16 orígenes del ingreso, ¿A qué equivale?, El camino del dinero y el Paquete Económico 2027. Su página y sus cifras no cambian.'),
     ('24-10-2026', 'Comunidad queda en tres tarjetas: Ágora cívica, Garantías cívicas y Donaciones. La antigua Participa se fundió con el botón «📢 Cuéntanos lo que viste» de la cabecera, que abre su cajón con las cinco rutas: algo raro con el dinero público, un dato mal, un tema para investigar, compartir el Estado de Cuenta y la fe de erratas. El Pase del Auditor Cívico se retira: la plataforma se sostendrá con donaciones o con los Servicios de investigación.'),

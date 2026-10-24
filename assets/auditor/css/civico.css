@@ -1186,6 +1186,13 @@ a.nav-brand-text:focus-visible { outline: 3px solid var(--civ-celeste); outline-
 .av-volver-x:hover, .av-volver-x:focus-visible { background: #3d4652; color: #ffffff; }
 @keyframes av-volver-entra { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .av-volver { animation: none; } }
+/* Dentro del chat del Auditor (24-10-2026): la aplicación se ve sola, en el
+   marco de la respuesta; volver-auditor.js pone la clase. */
+html.av-en-chat, html.av-en-chat body { background: #ffffff; }
+html.av-en-chat .site-top-nav, html.av-en-chat .apartado-cab, html.av-en-chat .apartado-pie, html.av-en-chat .herr-nav-min,
+html.av-en-chat .herr-mod-nav, html.av-en-chat .apartado-subir, html.av-en-chat .av-volver { display: none !important; }
+html.av-en-chat .apartado-cuerpo { padding-top: 4px; padding-bottom: 8px; }
+
 @media print { .av-volver { display: none; } }
 /* En celular, encima del botón flotante «Cuéntanos lo que viste». */
 @media (max-width: 600px) { .av-volver { left: 12px; bottom: 80px; } }

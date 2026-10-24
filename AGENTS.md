@@ -365,6 +365,16 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   repartida entre los 31,536,000 segundos del año: va como `derivado`, con
   su operación y con lo que no dice; nunca se presenta como dinero que se
   mueve en tiempo real.
+- **El Modo Inspector vive también en el chat** (24-10-2026): sus seis
+  aplicaciones se usan desde la plática. La lista negra del SAT la contesta
+  el chat (RFC o nombre); un folio, una liga, un ente federal, un expediente
+  o «quiero pedir una investigación» abren la aplicación en un marco de la
+  respuesta (`iframe` `av-en-chat`, que `volver-auditor.js` muestra sin
+  cabecera ni pie). Las aplicaciones no se copian: **una aplicación nueva
+  del Modo Inspector entra sola** al catálogo (`_inspector()` de
+  `asistente.py`), pero su página debe aceptar lo que el lector trae por la
+  dirección (`?q=`, `?liga=`, `?verifica=`, `#ente=`) y su intención se
+  agrega en `inspector()` de `asistente.js`.
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).

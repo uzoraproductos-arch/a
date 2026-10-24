@@ -8,7 +8,26 @@
   'use strict';
   var CHAT = 'herramienta-inspector-pregunta.html', SENA = 'av-volver';
   var aqui = location.pathname.split('/').pop();
+  /* Dentro del chat (24-10-2026, pedido del autor): el Auditor abre las seis
+     aplicaciones del Modo Inspector en un marco de su respuesta. La página se
+     muestra sola, sin cabecera, menú ni pie, y sus enlaces a otras páginas
+     salen a la pestaña entera (con la seña para volver). El marco se llama
+     «av-en-chat»: el nombre sobrevive a las navegaciones dentro de él. */
+  var enChat = false;
+  try { enChat = window.self !== window.top && window.top.location.origin === location.origin && window.name === 'av-en-chat'; } catch (e) { enChat = false; }
+  if (enChat) {
+    document.documentElement.classList.add('av-en-chat');
+    document.addEventListener('click', function (ev) {
+      var a = ev.target.closest ? ev.target.closest('a[href]') : null;
+      if (!a || ev.defaultPrevented || a.target) return;
+      if (a.origin === location.origin && a.pathname === location.pathname) return;
+      a.target = '_top';
+      try { sessionStorage.setItem(SENA, '1'); } catch (e) { /* nada */ }
+    });
+    return;
+  }
   try {
+
     if (aqui === CHAT) { sessionStorage.removeItem(SENA); return; }
     if (!sessionStorage.getItem(SENA)) return;
   } catch (e) { return; }

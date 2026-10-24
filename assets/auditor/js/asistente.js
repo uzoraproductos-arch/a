@@ -437,9 +437,302 @@
     };
   }
 
-  function respuesta(q) {
+  /* ================= El Modo Inspector, dentro del chat =================
+     (24-10-2026, pedido del autor): sus seis aplicaciones se usan desde la
+     plática. La lista negra del SAT la contesta el chat mismo; las demás se
+     abren en un marco de la respuesta con lo que el lector ya trae (la liga,
+     el folio, el ente, el caso, el tema) y siguen siendo la misma página:
+     una sola fuente para las dos puertas. El catálogo lo escribe
+     herramientas/asistente.py (_inspector). */
+  var IN = (B.dat && B.dat.insp) || { apps: [], sat: {} }, APP = {};
+  IN.apps.forEach(function (a) { APP[a.id] = a; a._p = plano(a.n); a._base = sinParam(a.url).replace(/\.html$/, ''); });
+  /* La aplicación a la que lleva una liga de la plataforma (para «Úsala aquí»). */
+  function appDeLiga(u) {
+    var b = sinParam(u || '').replace(/\.html$/, ''), hit = null;
+    if (b === 'expedientes') return APP.inspasf;
+    IN.apps.forEach(function (a) { if (!hit && (b === a._base || b.indexOf(a._base + '-') === 0)) hit = a; });
+    return hit;
+  }
+  function appHtml(o) {
+    var a = APP[o.id];
+    if (!a) return '';
+    return '<div class="pa-app" data-pa-app="' + esc(o.url) + '"' + (o.abre ? ' data-pa-abre="1"' : '') + '>' +
+      '<div class="pa-app-cab"><span class="pa-app-ico" aria-hidden="true">' + a.ico + '</span><span><b>' + esc(a.n) + '</b>' +
+      '<small>Modo Inspector · aplicación ' + a.k + ' de ' + IN.apps.length + '</small></span></div>' +
+      '<p class="pa-app-acc"><button type="button" class="pa-boton pa-primario pa-app-usa">▶️ Úsala aquí, sin salir del chat</button></p></div>';
+  }
+  /* El marco: crece con la aplicación hasta tres cuartos de la pantalla (lo
+     demás se recorre dentro); «Verla completa» lo deja crecer entero. */
+  function montaApp(caja) {
+    if (!caja || caja.querySelector('.pa-app-marco')) return;
+    var a = appDeLiga(caja.getAttribute('data-pa-app')) || {};
+    var m = document.createElement('div');
+    m.className = 'pa-app-marco';
+    m.innerHTML = '<iframe name="av-en-chat" title="' + esc(a.n || 'Aplicación del Modo Inspector') + ', dentro del chat" src="' + esc(caja.getAttribute('data-pa-app')) + '"></iframe>' +
+      '<p class="pa-app-acc"><button type="button" class="pa-boton pa-app-crece" aria-pressed="false">⤢ Verla completa</button>' +
+      '<button type="button" class="pa-boton pa-app-cierra">✕ Cerrar la aplicación</button></p>';
+    caja.appendChild(m);
+    caja.classList.add('pa-app-abierta');
+    var fr = m.querySelector('iframe'), ro = null;
+    function mide() {
+      try {
+        /* Si la plática se recorre en su propio recuadro (en computadora), el marco cabe en él. */
+        var d = fr.contentDocument, alto = d ? d.documentElement.scrollHeight : 0, tope = Math.round(window.innerHeight * 0.75);
+        if (hilo && getComputedStyle(hilo).overflowY !== 'visible') tope = Math.min(tope, hilo.clientHeight - 40);
+
+        if (alto) fr.style.height = Math.max(280, caja.classList.contains('pa-app-completa') ? alto : Math.min(alto, tope)) + 'px';
+      } catch (e) { /* nada */ }
+    }
+    fr.addEventListener('load', function () {
+      caja.classList.add('pa-app-lista');
+      mide();
+      try {
+        if (ro) ro.disconnect();
+        if (window.ResizeObserver) { ro = new ResizeObserver(mide); ro.observe(fr.contentDocument.body); }
+      } catch (e) { /* nada */ }
+    });
+    m._mide = mide;
+    caja.querySelector('.pa-app-usa').hidden = true;
+  }
+  function cierraApp(caja) {
+    var m = caja.querySelector('.pa-app-marco');
+    if (m) m.parentNode.removeChild(m);
+    caja.classList.remove('pa-app-abierta', 'pa-app-lista', 'pa-app-completa');
+    caja.querySelector('.pa-app-usa').hidden = false;
+    caja.querySelector('.pa-app-usa').focus({ preventScroll: true });
+  }
+  function respApp(id, liga, html, extra) {
+    var a = APP[id], r = { html: html, ir: [liga, a.n], app: { id: id, url: liga, abre: true }, sug: [], rec: [] };
+    Object.keys(extra || {}).forEach(function (k) { r[k] = extra[k]; });
+    return r;
+  }
+
+  /* --- La lista negra del SAT, en el chat (los 14 mil registros del 69-B se
+     descargan la primera vez que se pregunta: 1.5 MB). --- */
+  var SAT = { p: null }, ultimaSat = null;
+  function cargaSat() {
+    if (window.SAT_69B) return Promise.resolve(window.SAT_69B);
+    if (SAT.p) return SAT.p;
+    SAT.p = new Promise(function (ok, mal) {
+      var s = document.querySelector('script[src*="asistente.js"]'), v = s && /\?v=[\w.-]+/.exec(s.getAttribute('src'));
+      var sc = document.createElement('script');
+      sc.src = 'assets/auditor/data/sat-69b.js' + (v ? v[0] : '');
+      sc.onload = function () { if (window.SAT_69B) ok(window.SAT_69B); else { SAT.p = null; mal(); } };
+      sc.onerror = function () { SAT.p = null; mal(); };
+      document.head.appendChild(sc);
+    });
+    return SAT.p;
+  }
+  function satNorm(s) { return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase().replace(/[^A-Z0-9& ]/g, ' ').replace(/\s+/g, ' ').trim(); }
+  var RFC_RE = /\b[a-zñ&]{3,4}\d{6}[a-z0-9]{3}\b/gi;
+  var SAT_PAL = /\b(lista negra|listas negras|69 ?-? ?b|efos|edos|empresas? fantasmas?|factureras?|facturas? (falsas|apocrifas)|operaciones (inexistentes|simuladas))\b/;
+  var SAT_FUERA = ('esta estan en la el los las lista listas negra negras del de sat 69 b 69b efos edos empresa empresas fantasma fantasmas facturera factureras ' +
+    'proveedor proveedores mi mis es son una un unos busca buscar buscame revisa revisar checa checar aparece aparecen salio sale si que con rfc y o ' +
+    'persona contribuyente contribuyentes listado articulo factura facturas falsas apocrifas operaciones inexistentes simuladas me puedes dime quiero saber ver ' +
+    'cual cuales quien quienes hay cuantas cuantos tiene tienen la le lo al por para su sus nombre esta? ').split(' ');
+  function listaNegra(q) {
+    var p = plano(q), rfcs = (q.match(RFC_RE) || []).map(function (x) { return x.toUpperCase(); }).filter(function (x, i, l) { return l.indexOf(x) === i; });
+    if (!rfcs.length && !SAT_PAL.test(p)) return null;
+    var nombre = '';
+    if (!rfcs.length) {
+      nombre = p.trim().split(' ').filter(function (w) { return w.length > 1 && SAT_FUERA.indexOf(w) < 0; }).join(' ');
+      /* «¿Qué es la lista negra?» lo contesta el glosario; una pregunta sin nombre, la aplicación. */
+      if (/^(que|q) (es|son|significa)\b|^que quiere decir/.test(p.trim()) && !nombre) return null;
+      if (satNorm(nombre).length < 3) {
+        return respApp('inspefos', APP.inspefos.url,
+          '<p>🧾 Te busco en la <b>lista negra del SAT</b>: el listado del artículo 69-B del Código Fiscal, con quienes el SAT presume o declara que facturaron operaciones que no existieron.</p>' +
+          '<p>Escríbeme el <b>RFC</b> o el <b>nombre</b> de la empresa o persona (por ejemplo, «¿está en la lista negra la empresa …?») y te contesto aquí mismo. Si traes varios RFC, pégalos juntos en un mensaje, o usa la aplicación aquí abajo.</p>');
+      }
+    }
+    var termino = rfcs.length ? rfcs.join(' ') : nombre;
+    var liga = APP.inspefos.url + '?q=' + encodeURIComponent(rfcs.length ? rfcs[0] : nombre);
+    return { espera: cargaSat().then(function (S) { return respSat(S, rfcs, nombre, liga); }, function () {
+      return respApp('inspefos', liga, '<p>No pude descargar ahora la lista oficial del SAT (1.5 MB). Revisa tu conexión y vuelve a preguntarme, o búscalo en la aplicación aquí abajo.</p>');
+    }), tit: 'Lista negra del SAT: ' + termino };
+  }
+  function respSat(S, rfcs, nombre, liga) {
+    var R = S.r, sit = IN.sat || {}, corte = S.meta.corte, hits = [], MAX = 5;
+    if (rfcs.length) {
+      rfcs.slice(0, 50).forEach(function (rf) {
+        var h = R.filter(function (r) { return satNorm(r[0]).replace(/ /g, '') === rf; });
+        hits.push({ rfc: rf, rs: h });
+      });
+    } else {
+      var ps = satNorm(nombre).split(' ');
+      hits.push({ rs: R.filter(function (r) { var n = satNorm(r[1]); return ps.every(function (w) { return n.indexOf(w) !== -1; }); }) });
+    }
+    function linea(r) {
+      var s = sit[r[2]] || { t: r[2], i: '', corto: '', txt: '' };
+      return '<li><span aria-hidden="true">' + s.i + '</span> <b>' + esc(r[1]) + '</b> (<code>' + esc(r[0]) + '</code>): <b>' + esc(s.t) + '</b>' +
+        (s.corto ? ', ' + esc(s.corto.toLowerCase()) : '') + '. <span class="pa-chico">Oficio ' + esc(r[3]) + ', publicado en ' + (r[5] === 'DOF' ? 'el DOF' : 'la página del SAT') + ' el ' + esc(r[4]) + '.</span></li>';
+    }
+    var h = '', ci = [], todos = [];
+    hits.forEach(function (x) { todos = todos.concat(x.rs); });
+    if (rfcs.length === 1) {
+      var r0 = hits[0].rs;
+      if (!r0.length) h = '<p>◻️ <b>No aparece</b> el RFC <code>' + esc(rfcs[0]) + '</b></code> en la lista negra del SAT (listado del artículo 69-B, corte al ' + esc(corte) + ').</p>' +
+        '<p>Eso no certifica a nadie: solo significa que el SAT no lo ha incluido al corte.' + (/^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$/.test(rfcs[0]) ? '' : ' Revisa que el RFC esté completo.') + '</p>';
+      else {
+        var s0 = sit[r0[0][2]] || {};
+        h = '<p>' + (r0[0][2] === 'F' ? '⛔' : r0[0][2] === 'P' ? '⚠️' : '✅') + ' <b>Sí aparece</b> en la lista negra del SAT (corte al ' + esc(corte) + '):</p><ul class="pa-lista">' + r0.map(linea).join('') + '</ul>' +
+          (s0.txt ? '<p>' + esc(s0.txt) + '</p>' : '');
+      }
+    } else if (rfcs.length) {
+      var no = hits.filter(function (x) { return !x.rs.length; }).map(function (x) { return x.rfc; });
+      h = '<p>Revisé <b>' + rfcs.length + ' RFC</b> en la lista negra del SAT (corte al ' + esc(corte) + '): <b>' + (rfcs.length - no.length) + '</b> aparece' + (rfcs.length - no.length === 1 ? '' : 'n') + ' y <b>' + no.length + '</b> no.</p>' +
+        (todos.length ? '<ul class="pa-lista">' + todos.slice(0, 12).map(linea).join('') + '</ul>' : '') +
+        (no.length ? '<p class="pa-chico">No aparecen: <code>' + no.map(esc).join('</code>, <code>') + '</code>. No aparecer no certifica a nadie.</p>' : '') +
+        (rfcs.length > 50 ? '<p class="pa-chico">Revisé solo los primeros 50; para más, usa la aplicación aquí abajo (acepta hasta 500).</p>' : '');
+      liga = APP.inspefos.url;
+    } else if (!todos.length) {
+      h = '<p>◻️ <b>Nadie con «' + esc(nombre) + '» en el nombre</b> aparece en la lista negra del SAT (listado del artículo 69-B, corte al ' + esc(corte) + ').</p>' +
+        '<p>Eso no certifica a nadie: el nombre puede estar escrito distinto en el listado. Con el <b>RFC</b> la búsqueda es exacta.</p>';
+    } else {
+      var cuenta = {};
+      todos.forEach(function (r) { cuenta[r[2]] = (cuenta[r[2]] || 0) + 1; });
+      h = '<p>Encontré <b>' + todos.length.toLocaleString('es-MX') + '</b> registro' + (todos.length === 1 ? '' : 's') + ' con «' + esc(nombre) + '» en el nombre, en la lista negra del SAT (corte al ' + esc(corte) + ')' +
+        (todos.length > 1 ? ': ' + ['F', 'P', 'D', 'S'].filter(function (k) { return cuenta[k]; }).map(function (k) { return cuenta[k] + ' ' + esc((sit[k] || { t: k }).t.toLowerCase()); }).join(', ') : '') + '.</p>' +
+        '<ul class="pa-lista">' + todos.slice(0, MAX).map(linea).join('') + '</ul>' +
+        (todos.length > MAX ? '<p class="pa-chico">Te muestro ' + MAX + '. Los ' + todos.length.toLocaleString('es-MX') + ' están en la aplicación aquí abajo; con el RFC la búsqueda es exacta.</p>' : '');
+    }
+    h += '<p class="pa-chico">⚖️ Aparecer en la lista es una determinación administrativa del SAT, no una condena penal. «Desvirtuado» y «sentencia favorable» significan que salió de la presunción.</p>';
+    todos.slice(0, 12).forEach(function (r) { ci.push({ v: (sit[r[2]] || { t: r[2] }).t, etq: r[1] + ' · RFC ' + r[0] + ' · oficio ' + r[3] + ' (' + r[4] + ')', e: 'oficial' }); });
+    var fuente = { tx: S.meta.fuente + ', corte al ' + corte, url: S.meta.url };
+    var tit = 'Lista negra del SAT: ' + (rfcs.length ? rfcs.slice(0, 3).join(', ') + (rfcs.length > 3 ? '…' : '') : nombre);
+    h += charla && charla.deDonde ? charla.deDonde([{ que: 'Listado del artículo 69-B del Código Fiscal', e: 'oficial', fu: fuente }]) : '';
+    ultimaSat = tit;
+    return {
+      html: h, ir: [liga, 'la Lista negra del SAT'], app: { id: 'inspefos', url: liga }, rec: [],
+      ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: [fuente], ir: [liga, 'Lista negra del SAT'] },
+      sug: ['¿Qué es una EFOS?', 'Expedientes de casos de la ASF', 'Auditor de entes públicos']
+    };
+  }
+  function texto(h) { var d = document.createElement('div'); d.innerHTML = h; return d.textContent.replace(/\s+/g, ' ').trim().slice(0, 600); }
+
+  /* --- Las demás: qué pide el lector y con qué la abrimos. --- */
+  var FOLIO_RE = /\bAV-[A-Z0-9]{2,8}-[0-9A-F]{6,}\b|\b[0-9A-F]{64}\b/i, DICT_RE = /\b(DP|NT)-\d{8}-[0-9A-F]{8}\b/i;
+  function enteFederal(t) {
+    var p = plano(t), hit = null;
+    B.fichas.forEach(function (f) {
+      if (hit || f.t !== 'ficha') return;
+      var id = f.ir[0].split(':').pop().replace(/-/g, ' ');
+      if (p.indexOf(' ' + id + ' ') >= 0 && id.length > 2 || p.indexOf(plano(f.tit.split(' (')[0])) >= 0) hit = f;
+    });
+    return hit;
+  }
+  function inspector(q, previas) {
+    if (!IN.apps.length) return null;
+    var p = plano(q), t = String(q).trim(), m;
+    var liga = (/https?:\/\/[^\s<>"']+/i.exec(t) || [])[0];
+    /* 1. Un folio, una huella o la liga de verificación de un documento de la plataforma. */
+    if (liga && /[?&]verifica=/.test(liga) && liga.indexOf(location.host || '#') >= 0 || liga && /uzoraproductos-arch\.github\.io/.test(liga) && /[?&]verifica=/.test(liga)) {
+      var pag = liga.split('?')[0].split('/').pop() || APP.inspverifica.url;
+      return respApp('inspverifica', pag + '?' + liga.split('?')[1],
+        '<p>🔏 Es la liga de verificación de un documento de Auditavisión. La abro aquí mismo y comparo, cifra por cifra, su huella digital con los datos vigentes de la plataforma: el resultado sale en el recuadro de abajo.</p>');
+    }
+    if (DICT_RE.test(t) && !FOLIO_RE.test(t)) {
+      return { html: '<p>🧾 Ese es el folio de un <b>dictamen</b> del Auditor. El dictamen no se guarda en ningún servidor: se comprueba abriendo su enlace, y el Auditor vuelve a contestar la pregunta con la base vigente. Si las cifras cambiaron, el folio cambia.</p>' +
+        '<p>Para los estados de cuenta y las fichas técnicas, que sí se comprueban por folio, escríbeme el folio que empieza con <code>AV-</code>.</p>', ir: [APP.inspverifica.url, APP.inspverifica.n], sug: [], rec: [] };
+    }
+    if ((m = FOLIO_RE.exec(t))) {
+      var fo = m[0].toUpperCase();
+      if (/^AV-EC-/.test(fo)) return { html: '<p>🧾 <code>' + esc(fo) + '</code> es el folio de un <b>estado de cuenta personal</b> de la Calculadora Cívica. Su huella sale de los datos que escribió quien lo expidió, así que se comprueba con su <b>liga de verificación completa</b>, la que viene impresa en el documento. Pégamela aquí y lo compruebo.</p>',
+        ir: ['herramienta-calculadora-ticket.html', 'Tu estado de cuenta'], sug: [], rec: [] };
+      var ft = /^AV-FT-/.test(fo);
+      return respApp('inspverifica', (ft ? APP.inspentes.url : APP.inspverifica.url) + '?verifica=' + encodeURIComponent(fo),
+        '<p>🔏 Compruebo ' + (/^[0-9A-F]{64}$/.test(fo) ? 'la huella digital' : 'el folio <code>' + esc(fo) + '</code>') + ' aquí mismo: recalculo la huella de ' + (ft ? 'las fichas técnicas del Auditor de entes públicos' : 'cada estado de cuenta') +
+        ' con los datos vigentes de la plataforma y te digo si coincide. El resultado sale en el recuadro de abajo.</p>' +
+        '<p class="pa-chico">Si no coincide, o el documento se alteró, o se expidió con datos anteriores.</p>');
+    }
+    /* 2. La liga de una nota: «Contrasta una nota» la lee aquí mismo. */
+    if (liga) {
+      return respApp('inspnota', APP.inspnota.url + '?liga=' + encodeURIComponent(liga),
+        '<p>📰 Leo la nota aquí mismo con <b>Contrasta una nota</b>: busco sus cifras en pesos, las pongo junto a su documento oficial y te doy el veredicto, cifra por cifra, con su semáforo. Puede tardar unos segundos.</p>' +
+        '<p class="pa-chico">Lo que no empata con un documento queda «sin contrastar» y no cuenta como falso. Si la página no se deja leer, ahí mismo puedes pegar el texto.</p>');
+    }
+    /* 3. La lista negra del SAT. */
+    var sat = listaNegra(q);
+    if (sat) return sat;
+    /* 4. Un ente: «diagnóstico de Pemex», «auditor de entes: CFE». */
+    var pideEnte = /\b(auditor de entes|diagnostico|ficha tecnica|salud financiera|audita|auditame|revisa)\b/.test(p);
+    /* Un estado o un municipio lo contesta la plática con su ficha; aquí, los entes federales. */
+    var fe = entidadDe(q) ? null : enteFederal(q.replace(/salud financiera|diagn[oó]stico|ficha t[eé]cnica|auditor de entes( p[uú]blicos)?/gi, ' '));
+    if (fe && (pideEnte || /\b(dependencia|ente|entes)\b/.test(p))) {
+      var rf = charla ? charla.deFicha(fe) : { html: '<p><b>' + esc(fe.tit) + '</b></p>', ficha: fe };
+      rf.ir = fe.ir; rf.app = { id: 'inspentes', url: fe.ir[0], abre: true }; rf.sug = []; rf.rec = [];
+      rf.html = '<p>🏢 Abro su diagnóstico en el <b>Auditor de entes públicos</b>, aquí abajo: si gastó lo que aprobó la Cámara, si rindió cuentas y qué quedó por aclarar.</p>' + rf.html;
+      return rf;
+    }
+    if (pideEnte && /\bentes?\b|auditor de entes/.test(p) && !entidadDe(q)) {
+      var resto = t.replace(/^.*?\b(auditor de entes( p[uú]blicos)?|diagn[oó]stico|ficha t[eé]cnica|salud financiera)\b\s*(de(l| la| los| las)?\s*)?/i, '').replace(/[?¿!¡.]/g, '').trim();
+      if (resto.length > 2) return respApp('inspentes', APP.inspentes.url + '?q=' + encodeURIComponent(resto),
+        '<p>🏢 Busco «' + esc(resto) + '» en el <b>Auditor de entes públicos</b>, aquí abajo. Elige el ente y ve su diagnóstico.</p>');
+    }
+    /* 5. Un caso de la ASF: «expediente de Segalmex», «casos por aclarar del AIFA». */
+    if (/\b(expedientes?|casos?( por aclarar)?|pliegos?)\b/.test(p) && charla) {
+      var ex = null;
+      B.fichas.forEach(function (f) {
+        if (ex || f.t !== 'expediente') return;
+        var clave = plano(f.k.split(' ').slice(-2).join(' ')).trim(), id = f.ir[0].split('#exp-').pop().replace(/-/g, ' ');
+        if (p.indexOf(' ' + id + ' ') >= 0 || (clave && p.indexOf(' ' + clave + ' ') >= 0) || p.indexOf(plano(f.tit.split(':')[0])) >= 0) ex = f;
+      });
+      if (ex) {
+        var re = charla.deFicha(ex);
+        re.app = { id: 'inspasf', url: ex.ir[0], abre: true }; re.rec = []; re.sug = ['Expedientes de casos de la ASF', '¿Qué es un pliego de observaciones?'];
+        re.html = '<p>📂 Es uno de los <b>expedientes de casos de la ASF</b>. Te lo abro aquí abajo con sus documentos.</p>' + re.html;
+        return re;
+      }
+    }
+    /* 6. Las aplicaciones por su nombre o por lo que hacen. */
+    var id = null;
+    IN.apps.forEach(function (a) { if (!id && p.indexOf(' ' + a._p.trim() + ' ') >= 0) id = a.id; });
+    if (!id) {
+      if (/\bcontrast(a|ar|ame)\b.*\b(nota|noticia)|\b(verifica|verificar|checa|checar|revisa|revisar)(me)? (una|esta|la|esa) (nota|noticia|publicacion)\b/.test(p) && !/\d/.test(p)) id = 'inspnota';
+      else if (/\b(verific|comprob|valid)\w* (un |una |el |la |mi |este |esta )?(estado de cuenta|folio|ficha tecnica|documento)\b|\bes (autentico|original|falso)\b.*\b(estado de cuenta|documento)\b/.test(p)) id = 'inspverifica';
+      else if (/\b(servicios? de investigacion|investigacion a la medida|(contratar|solicitar|pedir|encargar|encargarles|cotizar)( una| un)? (investigacion|servicio|revision|expediente)|quiero que investiguen|investiguen (esto|un caso|a))\b/.test(p)) id = 'servicios.html';
+      else if (/\b(que encontro la asf|expedientes de (la )?asf|casos de la asf|expedientes de casos)\b/.test(p)) id = 'inspasf';
+      else if (/\b(modo inspector|grandes investigaciones|(seis|6) aplicaciones|que (puedo|puedes) investigar|como investigo)\b/.test(p)) id = '*';
+    }
+    if (!id) return null;
+    /* «¿Qué es…?» lo contesta el glosario o la página; aquí, quien quiere usarla. */
+    if (/^\s*(que|q) (es|son|significa|hace)\b/.test(p) && id !== '*') return null;
+    if (id === '*') {
+      return {
+        html: '<p>🔍 El <b>Modo Inspector</b> son seis aplicaciones para grandes investigaciones, y todas las usas desde aquí, sin salir del chat. Dime cuál, o pásame directo lo que traes:</p><ul class="pa-lista">' +
+          IN.apps.map(function (a) { return '<li><span aria-hidden="true">' + a.ico + '</span> <b>' + esc(a.n) + '.</b> ' + esc(a.frase) + '. <span class="pa-chico">' + esc(EJ_APP[a.id] || '') + '</span></li>'; }).join('') + '</ul>',
+        ir: [IN.pagina, 'el Modo Inspector'], sug: IN.apps.map(function (a) { return a.n; }), rec: []
+      };
+    }
+    /* El tema de una investigación: lo que el lector dijo después de pedirla
+       («…sobre el Tren Maya») o, si dice «esto», su pregunta anterior. */
+    var tema = id !== 'servicios.html' ? '' : (/\b(sobre|de|del|acerca de|para)\s+(.{3,})$/i.exec(t.replace(/^.*?investigaci[oó]n\b/i, '').replace(/[?¿!¡.]+$/, '')) || [])[2] || '';
+    if (/^(esto|eso|este caso|ese caso|lo anterior|lo mismo)$/i.test(tema.trim())) tema = '';
+    if (id === 'servicios.html' && !tema && /\b(esto|eso|este caso|ese caso|lo anterior|lo mismo)\b/.test(p) && previas && previas.length) tema = previas[previas.length - 1];
+
+    var a = APP[id];
+
+    var url = a.url + (id === 'servicios.html' && tema ? '?tema=' + encodeURIComponent(tema.slice(0, 160)) : '');
+    return respApp(id, url, '<p><span aria-hidden="true">' + a.ico + '</span> <b>' + esc(a.n) + '.</b> ' + esc(a.desc.replace(/\s*Tiene su propia página\./, '')) + '</p>' +
+      '<p>' + (tema ? 'Te abro el formulario aquí abajo, ya con el tema: «' + esc(tema.slice(0, 120)) + '». Revísalo y completa lo demás.' :
+        (EJ_APP[id] ? esc(EJ_APP[id]) + ' ' : '') + 'O úsala aquí abajo, sin salir del chat.') + '</p>');
+
+  }
+  /* Lo que el lector puede escribirme para cada aplicación. */
+  var EJ_APP = {
+    inspasf: 'Pregúntame por un caso: «expediente de Segalmex», «casos por aclarar del AIFA».',
+    inspentes: 'Pídeme un diagnóstico: «diagnóstico de Pemex», «salud financiera de Jalisco», «Zapopan».',
+    inspnota: 'Pégame la liga de la nota, o «¿es cierto que…?» con la cifra que oíste.',
+    inspefos: 'Escríbeme un RFC o un nombre: «¿está en la lista negra la empresa…?».',
+    inspverifica: 'Pégame el folio (AV-…) o la huella digital del documento.',
+    'servicios.html': 'Cuéntame el caso y te llevo al formulario, con el tema ya escrito.'
+  };
+
+  function respuesta(q, previas) {
     var inv = investigacion(q);
     if (inv) return inv;
+    var ins = inspector(q, previas);
+    if (ins) return ins;
+
     var rc = pideRecurso(q);
     if (rc) return rc;
     var r = charla && charla.contesta(q);
@@ -489,7 +782,9 @@
     var previas = historial.slice(-4);
     historial.push(q);
     controles();
-    var r = respuesta(q);
+    var r = respuesta(q, previas);
+    /* La lista negra del SAT contesta cuando termina de descargar la lista. */
+    var espera = r.espera ? r.espera.then(function (x) { r = x; }) : null;
     var pinta = function (li) {
       if (r.sin) {
         li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin);
@@ -498,13 +793,30 @@
       }
       if (r.anota && !ya) anota(q, 'sin');
       li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r, previas) +
+        appDe(r) +
         (r.plat ? '' : recursosHtml(r.rec || recursosPara(q, r))) +
         (r.sug && r.sug.length ? '<p class="pa-mas-t">' + (r.tambien ? 'También te puede servir' : 'Sigue preguntando') + '</p>' + chips(r.sug) : '');
+      var caja = li.querySelector('.pa-app[data-pa-abre]');
+      if (caja) montaApp(caja);
       guarda();
     };
-    if (quieto || QUIETO) { pinta(agrega('pa-bot', '', quieto)); return; }
+    if (quieto || QUIETO) {
+      var l0 = agrega('pa-bot', '', quieto);
+      if (espera) espera.then(function () { pinta(l0); }); else pinta(l0);
+      return;
+    }
     var li = agrega('pa-bot pa-escribe', '<span class="pa-puntos" role="img" aria-label="Escribiendo"><i></i><i></i><i></i></span>');
-    setTimeout(function () { li.classList.remove('pa-escribe'); pinta(li); li.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 420);
+    Promise.all([new Promise(function (ok) { setTimeout(ok, 420); }), espera]).then(function () {
+      li.classList.remove('pa-escribe'); pinta(li); li.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }
+  /* La tarjeta de la aplicación del Modo Inspector que viene al caso: la que
+     pidió el lector (abierta) o la de la página a la que lleva «Saber más». */
+  function appDe(r) {
+    if (r.sin || r.plat) return '';
+    if (r.app) return appHtml(r.app);
+    var ir = r.ir || (r.ficha && r.ficha.ir), a = ir && appDeLiga(ir[0]);
+    return a ? appHtml({ id: a.id, url: ir[0] }) : '';
   }
 
   /* La página del dictamen: vuelve a contestar la pregunta del enlace (y las
@@ -518,7 +830,10 @@
       return;
     }
     antes.forEach(function (x) { respuesta(x); });
-    var r = respuesta(q), f = r && !r.sin ? r.ficha : null;
+    var r = respuesta(q, antes);
+    if (r && r.espera) r.espera.then(function (x) { arma(x); }); else arma(r);
+    function arma(r) {
+    var f = r && !r.sin ? r.ficha : null;
     if (!f) {
       doc.innerHTML = '<p>No pude armar el dictamen de «' + esc(q) + '»: esa respuesta no cita cifras ni fuentes que respaldar, o la plataforma ya no la contesta igual.</p>' +
         '<p><a href="' + chat + '?q=' + encodeURIComponent(q) + '">Pregúntasela de nuevo al Auditor ➔</a></p>';
@@ -540,6 +855,7 @@
         en.textContent = '✅ Enlace copiado';
       }, function () { en.textContent = 'Copia la dirección de tu navegador'; });
     });
+    }
   }
   if (dic) {
     window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta };
@@ -555,6 +871,19 @@
   document.getElementById('paApp').addEventListener('click', function (ev) {
     var b = ev.target.closest ? ev.target.closest('[data-pa-pregunta]') : null;
     if (b) { responde(b.getAttribute('data-pa-pregunta'), false, b.hasAttribute('data-pa-ya')); return; }
+    /* La aplicación del Modo Inspector, en el marco de la respuesta. */
+    var ap = ev.target.closest ? ev.target.closest('.pa-app') : null;
+    if (ap && ev.target.closest('.pa-app-usa')) { montaApp(ap); return; }
+    if (ap && ev.target.closest('.pa-app-cierra')) { cierraApp(ap); return; }
+    var cr = ap && ev.target.closest('.pa-app-crece');
+    if (cr) {
+      var toda = ap.classList.toggle('pa-app-completa');
+      cr.setAttribute('aria-pressed', toda ? 'true' : 'false');
+      cr.textContent = toda ? '⤡ Verla en recuadro' : '⤢ Verla completa';
+      var mm = ap.querySelector('.pa-app-marco');
+      if (mm && mm._mide) mm._mide();
+      return;
+    }
     var ne = ev.target.closest ? ev.target.closest('.pa-noera') : null;
     if (ne) {
       if (!ne.disabled) anota(ne.getAttribute('data-pa-q'), 'noera', ne.getAttribute('data-pa-tit'));
@@ -664,7 +993,17 @@
     try {
       var lis = Array.prototype.slice.call(hilo.children, 1).filter(function (li) { return !li.classList.contains('pa-escribe'); });
       if (!historial.length) sessionStorage.removeItem(CLAVE);
-      else sessionStorage.setItem(CLAVE, JSON.stringify({ h: historial, li: lis.map(function (li) { return li.outerHTML; }) }));
+      else sessionStorage.setItem(CLAVE, JSON.stringify({ h: historial, li: lis.map(function (li) {
+        /* Las aplicaciones abiertas se guardan cerradas: al volver, se abren con «Úsala aquí». */
+        var c = li.cloneNode(true);
+        Array.prototype.forEach.call(c.querySelectorAll('.pa-app-marco'), function (m) { m.parentNode.removeChild(m); });
+        Array.prototype.forEach.call(c.querySelectorAll('.pa-app'), function (x) {
+          x.removeAttribute('data-pa-abre'); x.className = 'pa-app';
+          var u = x.querySelector('.pa-app-usa'); if (u) u.hidden = false;
+        });
+        return c.outerHTML;
+      }) }));
+
     } catch (e) { /* sin almacenamiento: la plática vive solo en esta vista */ }
   }
   function controles() {

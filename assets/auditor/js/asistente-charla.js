@@ -1446,7 +1446,8 @@
 
     return {
       contesta: function (q) { try { return contesta(q); } catch (e) { if (window.console) console.warn('AuditorCharla', e); return null; } },
-      deFicha: deFicha, olvida: function () { ctx = {}; }, ctx: function () { return ctx; }
+      deFicha: deFicha, deDonde: deDonde, olvida: function () { ctx = {}; }, ctx: function () { return ctx; }
+
     };
   };
 })();
