@@ -81,6 +81,38 @@ CONTEXT.md registró de su origen y una revisión visual.
   imágenes que el autor debe confirmar.
 - El resto está en verde.
 
+## Respuesta del autor (24-10-2026)
+
+«Algunas eran propias y otras fueron sacadas de Pinterest.» Sin el detalle de
+cuál es cuál, **toda imagen sin prueba de origen se trata como de Pinterest y
+se reemplaza**. Solo se quedan las que traen la credencial de IA (C2PA) o
+las que el autor confirme una por una como propias (hechas por él o
+generadas por él con IA).
+
+### Las que se reemplazan, con su descripción para generarlas
+
+Descripciones originales para la misma herramienta de IA que hizo las demás.
+No copian ninguna imagen de Pinterest ni el estilo de un artista. Se guarda
+la descripción usada junto a la imagen, en el registro de créditos.
+
+| Archivo nuevo (nombre nuevo por la caché) | Medida | Descripción para generarla |
+|---|---|---|
+| `portada/cabecera-avenida.webp` | 736 × 760, borde izquierdo desvanecido | Avenida peatonal de una ciudad mexicana al amanecer, con un edificio de gobierno de cantera al fondo, dos personas caminando de espaldas, piso mojado que refleja la luz, paleta azul marino y gris claro, estilo de acuarela arquitectónica con trazos de dibujo técnico, sin texto ni logotipos |
+| `portada/pie-ciudad.jpg` | 1472 × 660 | Panorama nocturno de una ciudad latinoamericana con edificios de distintas alturas y ventanas iluminadas, cielo nublado violeta, ilustración digital sobria de tonos fríos, sin letreros legibles ni marcas |
+| `herr-inspector-vigilancia.jpg` | 736 × 1308, vertical | Collage de papel recortado: un poste con varias cámaras de seguridad que miran en distintas direcciones, en lugar del lente una lupa, fondo carbón con renglones de cifras y tablas presupuestales desenfocadas, tonos sepia y crema |
+| `encabezado-sesion.jpg` | 736 × 240, franja | Ilustración estilo cartel de los años cincuenta: una mesa redonda de sesión con personas de traje revisando documentos, al centro una gráfica de pastel, paleta rojo, verde y crema, sin texto |
+| `herr-inspector-lente.jpg` | 1200 × 670 | Fotografía de estudio en blanco y negro de un foróptero de optometría visto de frente, sin persona, fondo gris desenfocado, iluminación lateral suave |
+| `herr-calculadora-pesos.jpg` | 1200 × 670 | Primer plano de una pila de monedas de pesos mexicanos genéricas (sin reproducir una moneda real con detalle) sobre una mesa de madera, luz cálida, fondo desenfocado |
+| `herr-megaobras-plataforma.jpg` | 1200 × 670 | Plataforma petrolera marina en el Golfo de México con oleaje y grúas, vista aérea, cielo gris, fotografía realista, sin logotipos |
+| `herr-ambiente-humo.jpg` | 1200 × 670 | Refinería al atardecer con chimeneas humeantes reflejadas en un humedal, una persona con mascarilla de espaldas, aves volando, tonos verdes oscuros, ilustración cinematográfica |
+
+`pie-planos.jpg` se borra sin reemplazo (no se usa).
+
+**Por confirmar del autor:** `showcase_lego_expansion`, `showcase_megafarmacia`
+y `showcase_tren_toluca`. Si las generó él con IA, se quedan (la de LEGO,
+regenerada sin la marca «HUSKY»); si salieron de Pinterest, se regeneran con
+el mismo procedimiento.
+
 ## Cómo se reemplazan (sin costo)
 
 1. **Generarlas con IA** en la misma herramienta que las de Auditoría en
