@@ -40,12 +40,12 @@ CONTEXT.md registró de su origen y una revisión visual.
 | `herr-inspector-camaras.jpg` | Modo Inspector | Circula en Pinterest, sin autor ni licencia (CONTEXT.md, 24-10-2026). Por su estilo parece ilustración editorial de una publicación | 🔴 | Reemplazar |
 | `encabezado-estado-de-cuenta.jpg` | Los 42 estados de cuenta | La envió el autor; **se recortó una marca de agua** de la esquina (CONTEXT.md, 10-10-2026) | 🔴 | Reemplazar. Quitar la marca de agua no la vuelve libre: la marca es la firma de quien la hizo, y quitarla agrava el reclamo |
 | `herr-inspector-foroptero-amplia.jpg` | Chat del Auditor Virtual | La entregó el autor (09-10-2026); origen no registrado. Parece fotografía de estudio con una modelo: si es foto de banco de imágenes, además de la licencia de la foto entra el **uso de la imagen de una persona** (art. 231, fr. II) | 🔴 | El autor confirma el origen; si no, reemplazar |
-| `herr-calculadora-monedas-amplia.jpg` | Calculadora Cívica | La entregó el autor; origen no registrado | 🟡 | El autor confirma el origen |
-| `herr-megaobras-plataformas-amplia.jpg` | Megaobras | Igual | 🟡 | Igual |
-| `herr-ambiente-refineria-amplia.jpg` | Costo Ambiental | Igual; por su estilo parece generada con IA | 🟡 | Igual |
+| `herr-calculadora-monedas-amplia.jpg` | Calculadora Cívica | **Pinterest** (confirmado por el autor, 24-10-2026) | 🔴 | Reemplazar |
+| `herr-megaobras-plataformas-amplia.jpg` | Megaobras | **Pinterest** (confirmado por el autor) | 🔴 | Reemplazar |
+| `herr-ambiente-refineria-amplia.jpg` | Costo Ambiental | **Pinterest** (confirmado por el autor) | 🔴 | Reemplazar |
 | `city_day.jpg`, `city_night.jpg` | Fondos | **Generadas con IA de Google**: traen su credencial C2PA (`trainedAlgorithmicMedia`) | 🟢 | Elegidas a propósito por el autor para evitar problemas de derechos |
 | `showcase_tren_maya`, `_dos_bocas`, `_deuda_soberana`, `_aifa`, `_ramo33` | Auditoría en imágenes | Generadas con IA de Google (C2PA), rotuladas «Ilustración generada con IA» | 🟢 | — |
-| `showcase_lego_expansion`, `_megafarmacia`, `_tren_toluca` | Auditoría en imágenes | Sin metadatos; mismo tamaño que las de Google (1376 × 768), muy probablemente de la misma herramienta. Rotuladas «Imagen ilustrativa» | 🟡 | El autor confirma. La de LEGO muestra la marca «HUSKY» en una máquina: es una marca real; conviene una versión sin marcas |
+| `showcase_lego_expansion`, `_megafarmacia`, `_tren_toluca` | Auditoría en imágenes | **Generadas con IA** (confirmado por el autor, 24-10-2026); sin metadatos. Rotuladas «Imagen ilustrativa» | 🟢 | Rotularlas «Ilustración generada con IA» como las otras. La de LEGO muestra la marca «HUSKY» en una máquina: conviene regenerarla sin marcas |
 | `showcase_huachicol.jpg` | Auditoría en imágenes | Ilustración vectorial propia (CONTEXT.md) | 🟢 | — |
 | `logo-auditavision.svg` y `assets/brand/` | Toda la plataforma | Marca propia | 🟢 | Ver «Marca» abajo |
 
@@ -75,10 +75,11 @@ CONTEXT.md registró de su origen y una revisión visual.
 
 ## Resultado
 
-- **7 en rojo:** cabecera, pie (dos archivos), Modo Inspector, encabezado del
-  estado de cuenta, foróptero y los mapas sin crédito (y su uso comercial).
-- **6 en amarillo:** tres imágenes de herramientas y tres de Auditoría en
-  imágenes que el autor debe confirmar.
+- **10 en rojo:** cabecera, pie (dos archivos), las cinco imágenes de las
+  herramientas (cámaras, foróptero, monedas, plataformas y refinería), el
+  encabezado del estado de cuenta y los mapas sin crédito (y su uso
+  comercial). Las nueve imágenes salieron de Pinterest (autor, 24-10-2026).
+- **0 en amarillo:** las tres de Auditoría en imágenes por confirmar son de IA.
 - El resto está en verde.
 
 ## Respuesta del autor (24-10-2026)
@@ -108,10 +109,9 @@ la descripción usada junto a la imagen, en el registro de créditos.
 
 `pie-planos.jpg` se borra sin reemplazo (no se usa).
 
-**Por confirmar del autor:** `showcase_lego_expansion`, `showcase_megafarmacia`
-y `showcase_tren_toluca`. Si las generó él con IA, se quedan (la de LEGO,
-regenerada sin la marca «HUSKY»); si salieron de Pinterest, se regeneran con
-el mismo procedimiento.
+**Confirmado por el autor (24-10-2026):** las nueve de Auditoría en imágenes
+son generadas con IA y se quedan; las del encabezado, los estados de cuenta y
+las herramientas salieron de Pinterest y se reemplazan todas.
 
 ## Cómo se reemplazan (sin costo)
 
