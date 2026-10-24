@@ -287,7 +287,9 @@ mudando a su página; no se agregan desgloses nuevos.
   antigua Participa, con tres tarjetas desde el 24-10-2026: Ágora cívica,
   Garantías cívicas y Donaciones. `comunidad.html`, que antes se llamó
   «Comunidad» y luego «Participa», ya no es tarjeta: se fundió con el botón
-  «Cuéntanos lo que viste» de la cabecera, su única puerta; el Pase del Auditor Cívico se retiró y
+  «Cuéntanos lo que viste» de la cabecera, su única puerta: ese botón abre
+  el cajón con las cinco rutas (algo raro con el dinero público, un dato mal,
+  un tema para investigar, compartir el Estado de Cuenta y fe de erratas); el Pase del Auditor Cívico se retiró y
   `pase-del-auditor.html` redirige a Donaciones). Ningún archivo cambió de nombre, para no romper
   enlaces. Las pestañas viven en `MENU` de `herramientas/apartados.py`, y
   la portada (`index.html`) tiene su copia a mano. Lo que cuelga de

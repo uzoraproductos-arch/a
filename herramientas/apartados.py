@@ -1595,7 +1595,29 @@ def formas(pre):
     return {'reporta': reporte, 'tema': tema, 'error': error}
 
 
-# Las tres rutas de «Cuéntanos lo que viste» (id, icono, titulo, para que).
+def erratas_html():
+    """La lista de la fe de erratas (comunidad-erratas.html y el cajon)."""
+    lista = '\n'.join(
+        '            <li class="cm-errata"><span class="cm-errata-fecha">%s</span><b>%s</b>'
+        '<span><span class="cm-errata-et">Estaba mal:</span> %s</span><span><span class="cm-errata-et">Qué hicimos:</span> %s</span>%s</li>'
+        % (e[0], e[1], e[2], e[3], (' <a href="%s">Ver la página ➔</a>' % e[4]) if e[4] else '') for e in ERRATAS)
+    return '<ol class="cm-erratas">\n%s\n          </ol>' % lista
+
+
+def compartir_html():
+    """El bloque para compartir el Estado de Cuenta (pagina y cajon)."""
+    return ('<div class="cm-compartir" data-url="%sestado-de-cuenta.html" '
+            'data-texto="El contexto dimensional de las cuentas de México: de dónde sale el dinero público y en qué se gasta, con fuentes oficiales.">\n'
+            '          <p>El <a href="estado-de-cuenta.html">Contexto dimensional</a> resume 2024, 2026 y 2027 en cuatro dimensiones, '
+            'cada cifra con su fuente. Compártelo: entre más gente lo lea, más difícil es que el dinero público pase sin que nadie lo vea.</p>\n'
+            '          <div class="sv-acciones cm-redes"></div>\n'
+            '          <p class="cm-nota">Si sacaste tu cuenta personal en la <a href="herramienta-calculadora-ticket.html">Calculadora Cívica</a>, '
+            'compartimos solo el enlace: tu ingreso nunca sale de tu navegador.</p>\n'
+            '          <noscript><p>Para compartir, copia esta dirección: %sestado-de-cuenta.html</p></noscript>\n'
+            '        </div>') % (SITIO, SITIO)
+
+
+# Las cinco rutas de «Cuéntanos lo que viste» (id, icono, titulo, para que).
 RUTAS = [
     ('reporta', '🏗️', 'Algo raro con el dinero público',
      'Una obra que no cuadra, un contrato o una compra sospechosa, un programa social usado en campaña, un cobro indebido.'),
@@ -1603,6 +1625,12 @@ RUTAS = [
      'Una cifra que no coincide con su documento oficial. Si tienes razón, se corrige y entra a la fe de erratas.'),
     ('tema', '💡', 'Un tema que deberíamos investigar',
      'Lo que te gustaría que revisáramos, con los documentos que conozcas.'),
+    # Compartir y la fe de erratas entraron al cajon el 24-10-2026 (pedido del
+    # autor): las cinco partes de comunidad.html se abren desde la cabecera.
+    ('compartir', '📣', 'Comparte el Estado de Cuenta',
+     'Un enlace para que más gente vea de dónde sale el dinero público y en qué se gasta.'),
+    ('erratas', '📋', 'Fe de erratas',
+     'Cada corrección que hemos hecho: qué estaba mal y qué cambió.'),
 ]
 DENUNCIA = ('Esto ordena tu reporte, pero <b>no es una denuncia</b>. La única vía con efecto jurídico es un canal oficial: '
             '<a href="garantias-brujula.html">la brújula de las seis puertas</a> te dice cuál toca, si admite anonimato '
@@ -1621,13 +1649,13 @@ PUERTA_HTML = '''  <div class="pt-velo" id="ptVelo" hidden></div>
       <div>
         <span class="pt-kicker">📢 Cuéntanos lo que viste</span>
         <h2 class="pt-tit" id="ptTit">¿Qué viste?</h2>
-        <p class="pt-sub">Elige una ruta. Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador y tú decides si lo copias, lo descargas o nos lo mandas.</p>
+        <p class="pt-sub">Elige una de las cinco rutas. Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador y tú decides si lo copias, lo descargas o nos lo mandas.</p>
       </div>
       <button type="button" class="pt-cerrar" data-pt-cerrar aria-label="Cerrar">✕</button>
     </div>
     <div class="pt-cuerpo">
 {rutas}
-      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Cuéntanos lo que viste</a> · <a href="comunidad-erratas.html">Fe de erratas</a> · <a href="garantias.html">Garantías cívicas: a qué puerta tocar</a></p>
+      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Cuéntanos lo que viste</a> · <a href="garantias.html">Garantías cívicas: a qué puerta tocar</a></p>
     </div>
   </aside>'''
 
@@ -1639,6 +1667,8 @@ def puerta():
     comunidad.html. Lo abre y lo cierra comunidad.js. index.html recibe la
     misma copia entre marcas (poner_puerta)."""
     f = formas('pt')
+    f['compartir'] = compartir_html()
+    f['erratas'] = erratas_html()
     rutas = [RUTA_HTML.format(id=id_, ico=ico, tit=tit, que=que, form=f[id_],
                               extra=('\n          <p class="pt-nota">%s</p>' % DENUNCIA) if id_ == 'reporta' else '')
              for id_, ico, tit, que in RUTAS]
@@ -1894,25 +1924,12 @@ def comunidad_nav(actual):
 def comunidad():
     """La portada de Comunidad y sus cinco paginas: [portada, parte, ...]."""
     f = formas('cm')
-    erratas = '\n'.join(
-        '            <li class="cm-errata"><span class="cm-errata-fecha">%s</span><b>%s</b>'
-        '<span><span class="cm-errata-et">Estaba mal:</span> %s</span><span><span class="cm-errata-et">Qué hicimos:</span> %s</span>%s</li>'
-        % (e[0], e[1], e[2], e[3], (' <a href="%s">Ver la página ➔</a>' % e[4]) if e[4] else '') for e in ERRATAS)
-    compartir = ('<div class="cm-compartir" data-url="%sestado-de-cuenta.html" '
-                 'data-texto="El contexto dimensional de las cuentas de México: de dónde sale el dinero público y en qué se gasta, con fuentes oficiales.">\n'
-                 '          <p>El <a href="estado-de-cuenta.html">Contexto dimensional</a> resume 2024, 2026 y 2027 en cuatro dimensiones, '
-                 'cada cifra con su fuente. Compártelo: entre más gente lo lea, más difícil es que el dinero público pase sin que nadie lo vea.</p>\n'
-                 '          <div class="sv-acciones cm-redes"></div>\n'
-                 '          <p class="cm-nota">Si sacaste tu cuenta personal en la <a href="herramienta-calculadora-ticket.html">Calculadora Cívica</a>, '
-                 'compartimos solo el enlace: tu ingreso nunca sale de tu navegador.</p>\n'
-                 '          <noscript><p>Para compartir, copia esta dirección: %sestado-de-cuenta.html</p></noscript>\n'
-                 '        </div>') % (SITIO, SITIO)
     bloques = {
         'reporta': f['reporta'] + '\n        <p class="pt-nota">%s</p>' % DENUNCIA,
         'error': f['error'],
         'tema': f['tema'],
-        'compartir': compartir,
-        'erratas': '<div class="sv-politica">\n          <ol class="cm-erratas">\n%s\n          </ol>\n        </div>' % erratas,
+        'compartir': compartir_html(),
+        'erratas': '<div class="sv-politica">\n          %s\n        </div>' % erratas_html(),
     }
     portada = {
         # Cuelga del boton de la cabecera, no de una pestana (24-10-2026).
@@ -3586,7 +3603,7 @@ def cabecera(actual, sello):
 
     <div class="nav-right-container">
       <div class="nav-right-actions">
-        <a class="nav-action-btn nav-feedback-btn" href="comunidad.html" data-puerta title="Cuéntanos lo que viste: algo raro con el dinero público, un dato mal o un tema para investigar">
+        <a class="nav-action-btn nav-feedback-btn" href="comunidad.html" data-puerta title="Cuéntanos lo que viste: algo raro con el dinero público, un dato mal, un tema para investigar, compartir y fe de erratas">
           <span>📢</span>
           <span>Cuéntanos lo que viste</span>
         </a>
@@ -4808,7 +4825,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
-    ('24-10-2026', 'Comunidad queda en tres tarjetas: Ágora cívica, Garantías cívicas y Donaciones. La antigua Participa se fundió con el botón «📢 Cuéntanos lo que viste» de la cabecera, que abre su página con sus cinco puertas. El Pase del Auditor Cívico se retira: la plataforma se sostendrá con donaciones o con los Servicios de investigación.'),
+    ('24-10-2026', 'Comunidad queda en tres tarjetas: Ágora cívica, Garantías cívicas y Donaciones. La antigua Participa se fundió con el botón «📢 Cuéntanos lo que viste» de la cabecera, que abre su cajón con las cinco rutas: algo raro con el dinero público, un dato mal, un tema para investigar, compartir el Estado de Cuenta y la fe de erratas. El Pase del Auditor Cívico se retira: la plataforma se sostendrá con donaciones o con los Servicios de investigación.'),
     ('24-10-2026', 'Cada estado y cada municipio tiene sus cuatro documentos en su ficha técnica: estado de cuenta, salud financiera, dictamen y un contador en vivo de lo que le llega al día, por hora y por segundo, con su operación a la vista. Y al Auditor ya le puedes preguntar «Zapopan, Jalisco».'),
     ('24-10-2026', 'El Auditor Virtual abre cualquier estado de cuenta: el tuyo cívico, el ambiental (antes «Tu ticket en negativo»), el de cada presidente, la diputación federal y local, la senaduría, la Corte, tu estado y tu municipio. Y al pie de cada respuesta te ofrece el mapa, el reloj, el tablero o la fiscalización que vienen al caso, ya con tu estado elegido.'),
     ('24-10-2026', 'Las Grandes investigaciones son el Modo Inspector: una sola página con sus seis aplicaciones y una imagen nueva. Las migas de cada aplicación llevan directo a ella.'),

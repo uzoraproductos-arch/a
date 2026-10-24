@@ -20,12 +20,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261024i">
-  <script src="assets/auditor/js/iconos.js?v=20261024i"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261024i" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261024i">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261024i">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261024i">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261024j">
+  <script src="assets/auditor/js/iconos.js?v=20261024j"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261024j" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261024j">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261024j">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261024j">
   <script>(function () { var m = {"presupuestaria": "contexto-dimensional-presupuestaria.html", "financiera": "contexto-dimensional-financiera.html", "social": "contexto-dimensional-social.html", "ambiental": "contexto-dimensional-ambiental.html", "renglones": "contexto-dimensional-renglones.html", "descarga": "contexto-dimensional-descarga.html", "presupuestariaTit": "contexto-dimensional-presupuestaria.html", "financieraTit": "contexto-dimensional-financiera.html", "socialTit": "contexto-dimensional-social.html", "ambientalTit": "contexto-dimensional-ambiental.html", "renglonesTit": "contexto-dimensional-renglones.html", "descargaTit": "contexto-dimensional-descarga.html"}, h = location.hash.slice(1); if (m[h]) { location.replace(m[h] + (/[?#]/.test(m[h]) ? '' : location.search)); return; } for (var k in m) if (k.slice(-1) === '*' && h && h.indexOf(k.slice(0, -1)) === 0) { location.replace(m[k] + '#' + h); return; } })();</script>
 </head>
 <body data-pagina="apartado">
@@ -53,7 +53,7 @@
 
     <div class="nav-right-container">
       <div class="nav-right-actions">
-        <a class="nav-action-btn nav-feedback-btn" href="comunidad.html" data-puerta title="Cuéntanos lo que viste: algo raro con el dinero público, un dato mal o un tema para investigar">
+        <a class="nav-action-btn nav-feedback-btn" href="comunidad.html" data-puerta title="Cuéntanos lo que viste: algo raro con el dinero público, un dato mal, un tema para investigar, compartir y fe de erratas">
           <span>📢</span>
           <span>Cuéntanos lo que viste</span>
         </a>
@@ -75,7 +75,7 @@
       <div>
         <span class="pt-kicker">📢 Cuéntanos lo que viste</span>
         <h2 class="pt-tit" id="ptTit">¿Qué viste?</h2>
-        <p class="pt-sub">Elige una ruta. Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador y tú decides si lo copias, lo descargas o nos lo mandas.</p>
+        <p class="pt-sub">Elige una de las cinco rutas. Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador y tú decides si lo copias, lo descargas o nos lo mandas.</p>
       </div>
       <button type="button" class="pt-cerrar" data-pt-cerrar aria-label="Cerrar">✕</button>
     </div>
@@ -135,7 +135,30 @@
         <div class="sv-resumen cm-resumen" hidden></div>
         </div>
       </details>
-      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Cuéntanos lo que viste</a> · <a href="comunidad-erratas.html">Fe de erratas</a> · <a href="garantias.html">Garantías cívicas: a qué puerta tocar</a></p>
+      <details class="pt-ruta" name="pt-ruta" data-ruta="compartir">
+        <summary><span class="pt-ico" aria-hidden="true">📣</span><span class="pt-sum"><b>Comparte el Estado de Cuenta</b><span>Un enlace para que más gente vea de dónde sale el dinero público y en qué se gasta.</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        <div class="cm-compartir" data-url="https://uzoraproductos-arch.github.io/a/estado-de-cuenta.html" data-texto="El contexto dimensional de las cuentas de México: de dónde sale el dinero público y en qué se gasta, con fuentes oficiales.">
+          <p>El <a href="estado-de-cuenta.html">Contexto dimensional</a> resume 2024, 2026 y 2027 en cuatro dimensiones, cada cifra con su fuente. Compártelo: entre más gente lo lea, más difícil es que el dinero público pase sin que nadie lo vea.</p>
+          <div class="sv-acciones cm-redes"></div>
+          <p class="cm-nota">Si sacaste tu cuenta personal en la <a href="herramienta-calculadora-ticket.html">Calculadora Cívica</a>, compartimos solo el enlace: tu ingreso nunca sale de tu navegador.</p>
+          <noscript><p>Para compartir, copia esta dirección: https://uzoraproductos-arch.github.io/a/estado-de-cuenta.html</p></noscript>
+        </div>
+        </div>
+      </details>
+      <details class="pt-ruta" name="pt-ruta" data-ruta="erratas">
+        <summary><span class="pt-ico" aria-hidden="true">📋</span><span class="pt-sum"><b>Fe de erratas</b><span>Cada corrección que hemos hecho: qué estaba mal y qué cambió.</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        <ol class="cm-erratas">
+            <li class="cm-errata"><span class="cm-errata-fecha">10-10-2026</span><b>Calculadora Cívica</b><span><span class="cm-errata-et">Estaba mal:</span> El comparador «Tú contra ellos» usaba un ingreso de referencia de $15,000 que no salía de ningún documento.</span><span><span class="cm-errata-et">Qué hicimos:</span> Se retiró. Ahora, si no escribes tu ingreso, usa el salario mínimo general mensual de 2026 ($9,451.20, CONASAMI), rotulado como ejemplo oficial.</span> <a href="herramienta-calculadora.html">Ver la página ➔</a></li>
+            <li class="cm-errata"><span class="cm-errata-fecha">10-10-2026</span><b>Tren Maya</b><span><span class="cm-errata-et">Estaba mal:</span> El recuadro del peritaje mostraba 515,487 mdp sin cotejo contra su documento.</span><span><span class="cm-errata-et">Qué hicimos:</span> Se retiró la cifra; el dato quedó como retirado, con su motivo y el enlace al expediente de la Auditoría Superior.</span> <a href="auditoria-tren-maya.html">Ver la página ➔</a></li>
+            <li class="cm-errata"><span class="cm-errata-fecha">10-10-2026</span><b>Programas sociales</b><span><span class="cm-errata-et">Estaba mal:</span> La pensión (S176) mostraba 465,048 mdp como devengado, cuando es el aprobado; IMSS-Bienestar traía 128,900 mdp sin documento; las becas eran un solo renglón de 87,540 mdp sin documento.</span><span><span class="cm-errata-et">Qué hicimos:</span> Se retiraron las tres. Las becas se separaron en S072 y S311 con aprobado y devengado de la Cuenta Pública 2024; la pensión e IMSS-Bienestar quedaron pendientes.</span> <a href="pendientes.html">Ver la página ➔</a></li>
+            <li class="cm-errata"><span class="cm-errata-fecha">09-10-2026</span><b>Marco legal hacendario</b><span><span class="cm-errata-et">Estaba mal:</span> Había dos «preceptos» de la Ley de Ingresos que no existen, y la extinción de los fideicomisos judiciales se atribuía al transitorio Cuarto, con «13 fideicomisos» y «$15,434 mdp» que el decreto no menciona.</span><span><span class="cm-errata-et">Qué hicimos:</span> Se retiraron los dos preceptos, se corrigió el transitorio (es el Décimo) y se quitaron las cifras. Cada precepto se cotejó palabra por palabra con su texto vigente.</span> <a href="marco-legal.html">Ver la página ➔</a></li>
+            <li class="cm-errata"><span class="cm-errata-fecha">27-09-2026</span><b>Personajes relevantes</b><span><span class="cm-errata-et">Estaba mal:</span> Las fichas de personajes de la antigua Enciclopedia no citaban fuentes.</span><span><span class="cm-errata-et">Qué hicimos:</span> Se retiraron. Lo que se rescató después se verificó afirmación por afirmación contra documentos oficiales.</span></li>
+          </ol>
+        </div>
+      </details>
+      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Cuéntanos lo que viste</a> · <a href="garantias.html">Garantías cívicas: a qué puerta tocar</a></p>
     </div>
   </aside>
 
@@ -179,11 +202,11 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html">← Volver al auditor</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261024i</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261024j</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261024i"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261024i"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261024j"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261024j"></script>
 </body>
 </html>

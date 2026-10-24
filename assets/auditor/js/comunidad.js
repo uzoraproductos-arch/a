@@ -178,7 +178,7 @@
   /* «Cuéntanos lo que viste», la puerta unica (fusion del 10-10-2026 con
      «¿Viste un error?», que estaba al pie). Todo [data-puerta] abre el cajon
      #ptCajon (lo escribe herramientas/apartados.py, puerta()); su valor
-     (reporta, error, tema) despliega esa ruta. Sin JavaScript, el enlace
+     (reporta, error, tema, compartir, erratas) despliega esa ruta. Sin JavaScript, el enlace
      lleva a comunidad.html. En index.html lo abre tambien el motor
      (openAyudanosFiscalizar llama a window.Puerta). */
   var cajon = document.getElementById('ptCajon');
