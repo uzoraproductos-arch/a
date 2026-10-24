@@ -428,10 +428,14 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   todo cálculo va como `derivado` con su operación; lo que no tiene lo dice
   y lo anota en «Lo que aún no sé».
 - **Hacia dónde va:** consultar portales externos y tener una capa de
-  inteligencia artificial que aprenda de las preguntas. Las dos necesitan
-  servidor y llaves que GitHub Pages no tiene: son decisión del autor (plan
-  en CONTEXT.md). Cuando llegue la IA, solo redacta con lo que le entregan
-  las fichas; nunca pone una cifra que no venga de un documento.
+  inteligencia artificial que aprenda de las preguntas. **La base de datos y
+  sus funciones ya están construidas** (24-10-2026, `supabase/`, explicadas en
+  `docs/BASE-DE-DATOS.md`); falta que el autor cree la cuenta y ponga las
+  llaves. La IA (`auditor-ia`) solo redacta con lo que le entregan las
+  fichas, y cada cifra de su respuesta se coteja contra ellas: si una no
+  aparece, se tira. **Ninguna cifra fiscal vive en la base.** Todo cambio a
+  `supabase/` pasa `python3 herramientas/prueba_base_datos.py` y, si toca
+  las funciones, `deno check` y `deno test supabase/pruebas/`.
 
 ---
 

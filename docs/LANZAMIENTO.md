@@ -121,6 +121,14 @@ rama funciona y la guardia no marca errores.
 
 ### Fase 3. La base de datos en Supabase (semana 3-4)
 
+> **Construida el 24-10-2026** (pedido del autor): migración, cuatro funciones y
+> pruebas en `supabase/`, explicadas en [BASE-DE-DATOS.md](BASE-DE-DATOS.md).
+> Cambios frente a esta tabla: `solicitudes`, `erratas`, `temas` y `reportes`
+> son una sola tabla, `envios`, con su tipo (se modera en un solo lugar), y se
+> agregaron `administradores`, `limites` (antispam y tope de costo),
+> `portales_cache` (fase 7: portales externos) y `consultas_ia` (fase 7: la
+> bitácora de la IA). Falta el paso 3.1 (crear la cuenta) y poner las llaves.
+
 | Paso | Qué | Quién |
 |---|---|---|
 | 3.1 | Proyecto Supabase en la región más cercana a México; llaves guardadas en sus *secrets* (la llave pública puede ir en la página; la de servicio **nunca**) | Tú creas la cuenta, agente configura |
