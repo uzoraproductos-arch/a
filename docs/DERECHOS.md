@@ -75,7 +75,7 @@ CONTEXT.md registró de su origen y una revisión visual.
 
 ## Resultado
 
-- **8 en rojo:** cabecera, pie (dos archivos), Modo Inspector, encabezado del
+- **7 en rojo:** cabecera, pie (dos archivos), Modo Inspector, encabezado del
   estado de cuenta, foróptero y los mapas sin crédito (y su uso comercial).
 - **6 en amarillo:** tres imágenes de herramientas y tres de Auditoría en
   imágenes que el autor debe confirmar.
