@@ -209,7 +209,7 @@ de los 32 circuitos.
 
 ## Plan de lanzamiento (`docs/LANZAMIENTO.md`)
 
-Pedido del autor, 24-10-2026: todos los pendientes para salir en línea (dominio, hospedaje, base de datos, correo, aviso de privacidad, canales, datos que se actualizan solos y difusión), por tipo y en siete fases. Nada de la fase 1 en adelante empieza sin las decisiones de la fase 0. El 24-10-2026 se retiró el Pase del Auditor Cívico: §4.4 evalúa las dos vertientes para sostener la plataforma (donaciones y Servicios del Auditor Virtual, por suscripción o créditos) y recomienda las dos por etapas.
+Pedido del autor, 24-10-2026: todos los pendientes para salir en línea (dominio, hospedaje, base de datos, correo, aviso de privacidad, canales, datos que se actualizan solos y difusión), por tipo y en siete fases. Nada de la fase 1 en adelante empieza sin las decisiones de la fase 0. El 24-10-2026 se retiró el Pase del Auditor Cívico: §4.4 evalúa las dos vertientes para sostener la plataforma (donaciones y Servicios del Auditor Virtual, por suscripción o créditos) y recomienda las dos por etapas. Tercera revisión (24-10-2026, §1 bis y §4.8): dominio `auditavision.mx`, publicación en Cloudflare Pages (gratis y permite cobrar; Vercel Hobby no), formularios externos al lanzar y Supabase Pro al abrir cuentas y cobros; la prueba de «producto vendible» concluye que el producto está listo y falta la oferta (piloto: «Expediente de tu municipio»).
 
 ## Siguiente tarea: legibilidad en celular (`docs/ux/PLAN.md`)
 

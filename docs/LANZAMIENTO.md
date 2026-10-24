@@ -33,7 +33,124 @@ primera versión:
 | Registro de pendientes | 57 | Confirmado: 57, todos con porqué, responsable y enlace |
 | Datos con fecha | ASF 30-10-2026 | Confirmado en CONTEXT.md; es en seis días |
 
+## 1 bis. Tercera revisión: lo más sencillo, práctico y barato (24-10-2026)
+
+Pedido del autor: «dime cuál sería la solución más sencilla, más práctica,
+más barata; dame las opciones y evaluaciones» para el dominio, la base de
+datos y el bot. Esta revisión **cambia la recomendación de publicación**:
+Vercel sale caro en cuanto se cobra un peso; Cloudflare no.
+
+### A. El dominio
+
+| | `auditavision.mx` | `auditavision.com.mx` |
+|---|---|---|
+| Cómo se lee | Corto: «auditavisión punto eme equis» | Largo; el `.com` sugiere empresa |
+| Imagen | Moderna, nacional, de proyecto público | Comercial |
+| Precio | Más caro: GoDaddy lo anuncia **desde $349.99 MXN el primer año** (guía de GoDaddy, 2025). La **renovación** es la que cuenta y se ve al pagar | Suele ser más barato; ninguna fuente consultada da su precio: se ve en el registrador |
+| Uso en México | Creciendo | Sigue siendo el espacio más usado |
+
+**Recomendación:** comprar **`auditavision.mx`** como dirección oficial.
+Comprar también `auditavision.com.mx` **solo si cuesta poco**, para que nadie
+lo tome y para redirigirlo al principal. Son dos dominios distintos: comprar
+uno no aparta el otro.
+
+**El «www»** no se compra aparte: `www.auditavision.mx` y `auditavision.mx`
+abren lo mismo con un registro DNS (se configura en el paso 1.5).
+
+**Dónde comprarlo, paso a paso:**
+
+1. Revisar que esté libre en **Akky** (`akky.mx`, el registrador de NIC
+   México) o en el buscador de cualquier registrador acreditado. Desde el
+   entorno del agente no se puede consultar: el autor lo revisa.
+2. Comparar el precio **de renovación** (no el de promoción) en dos o tres
+   registradores: Akky, Neubox, GoDaddy.
+3. Registrar **a nombre del autor** (o de la asociación cuando exista), con
+   su correo personal, **renovación automática** y **verificación en dos
+   pasos**. Quien tiene la cuenta del registrador es dueño del sitio.
+4. Pagar de 2 a 3 años si la diferencia es pequeña: un dominio que vence por
+   olvido se lo puede quedar otro.
+5. Cambiar los servidores DNS a **Cloudflare** (gratis; abajo). Cloudflare
+   no vende `.mx`, pero sí lo administra.
+
+### B. Dónde se publica el sitio
+
+Las 210 páginas pesan 336 MB y 677 archivos; 287 MB son los PDF de
+`investigaciones/` (decisión 0.3). El más grande pesa 23.3 MB.
+
+| Opción | Costo | ¿Se puede cobrar? | Esfuerzo | Lectura |
+|---|---|---|---|---|
+| **GitHub Pages** (lo de hoy) + dominio | $0 | GitHub no lo permite para sitios cuyo fin principal son transacciones comerciales o SaaS, ni para datos sensibles; tope de 1 GB y 100 GB de tráfico al mes | Mínimo: un archivo `CNAME` | Sirve para **salir ya**, con donaciones por liga externa. Para cuentas y cobros, no |
+| **Cloudflare Pages** | $0 | Su plan gratuito **no prohíbe el uso comercial** (según comparativas de terceros; confirmar en sus términos) y no cobra por tráfico | Bajo: se conecta al repositorio, sin compilación | **Recomendada**: mismo lugar para DNS, antispam (Turnstile) y funciones (Workers). Tope de 25 MiB por archivo: hoy cabe todo |
+| **Vercel** | Hobby $0, **solo uso no comercial**; Pro US$20 al mes | Solo en Pro | Bajo | Muy buena, pero cobra desde el primer peso que entre |
+| **Netlify** | Gratis con límites; luego de pago | Sí | Bajo | Parecida a Cloudflare, con menos herramientas juntas |
+
+**Ojo:** hoy GitHub Pages publica desde la rama de trabajo
+(`claude/funny-turing-imtm54`), no desde `main`. En la casa nueva,
+**producción = `main`** (lo que aprueba el autor) y cada rama tiene su vista
+previa. Se decide al conectar (paso 1.2).
+
+### C. La base de datos (lo que escriben las personas)
+
+Ninguna cifra fiscal entra a la base (regla de arriba). Lo que se guarda:
+formularios, foro, preguntas del bot, cuentas, alertas, pagos.
+
+| Opción | Costo | Sencillez | Qué resuelve | Qué no |
+|---|---|---|---|---|
+| **1 · Formulario externo** (Tally o Google Forms → hoja de cálculo) | $0 | Altísima: un día, sin código | Solicitudes, erratas, temas, reportes, «Lo que aún no sé» | Foro, cuentas, alertas, pagos. Los datos quedan en un tercero: va en el aviso de privacidad |
+| **2 · Supabase** | $0; Pro US$25 al mes | Media | Todo: base PostgreSQL con permisos por renglón, cuentas por correo, archivos, funciones | Gratis **se pausa tras 7 días sin actividad**, sin respaldos y con 2 proyectos activos (página oficial de precios): no sirve para producción |
+| **3 · Cloudflare D1 + Workers** | Gratis con topes diarios; luego de pago por uso | Media-baja | Base y funciones en el mismo lugar que el sitio | Cuentas de usuario: hay que construirlas o sumar otro servicio |
+| **4 · Firebase** (Google) | Gratis con topes; luego por uso | Media | Base y cuentas | Base no relacional, más difícil de auditar; amarra a Google |
+
+**Recomendación por etapas** (la más barata que no se tira después):
+
+```
+ AL LANZAR (semana 1-2)            CON CUENTAS Y COBROS (fase 5)
+ ─────────────────────────         ──────────────────────────────
+ Cloudflare Pages  $0              Cloudflare Pages  $0
+ Dominio .mx       anual           Dominio .mx       anual
+ Formularios       Opción 1, $0 ─▶ Supabase Pro      US$25 al mes
+ Correo            reenvío, $0     Correo del dominio
+ Donaciones        liga de pago    Stripe / Mercado Pago, por cobro
+```
+
+Los formularios ya arman su texto (`CANAL_SOLICITUD`, `CANAL_COMUNIDAD`):
+cambiar de la opción 1 a Supabase es cambiar a dónde apunta el botón
+«Enviar», no rehacerlos.
+
+### D. El bot y la inteligencia artificial
+
+Hoy el Auditor Virtual contesta **en el navegador**, con el índice que genera
+`herramientas/asistente.py`. No necesita base de datos ni servidor, y por eso
+es gratis y no se cae. Vincularlo es sumar dos piezas, en este orden:
+
+| Paso | Qué | Necesita | Cuándo |
+|---|---|---|---|
+| D.1 | «Lo que aún no sé» y «No era lo que buscaba» se guardan en la base (hoy en el navegador de cada quien) | Opción 1 o Supabase | Al lanzar |
+| D.2 | Las preguntas sin respuesta se revisan cada mes y se vuelven fichas nuevas | El autor y el agente | Mensual |
+| D.3 | Capa de IA: una función (Cloudflare Worker o Supabase Edge Function) guarda la llave de la API de Claude y **solo redacta con las fichas que le entrega el índice**; nunca pone una cifra propia (AGENTS.md §5 ter) | Llave de la API, tope de gasto mensual, antispam y límite por persona | Fase 7 |
+
+La IA se paga por uso: por eso entra como **créditos** (§4.4) y nunca
+en el chat gratuito sin tope. El modelo y su precio se eligen al construirla.
+
+### E. Lo que sigue, en una lista
+
+```
+ [ ] 1. Autor: revisar que auditavision.mx esté libre y comprarlo (A)
+ [ ] 2. Autor: crear cuenta de Cloudflare y pasarle el dominio (A.5)
+ [ ] 3. Agente: conectar el repositorio a Cloudflare Pages, rama main (B)
+ [ ] 4. Agente: SITIO = 'https://auditavision.mx/', sello, sitemap, robots
+ [ ] 5. Autor: decidir 0.3 (PDF de investigaciones) y 0.2 (forma jurídica)
+ [ ] 6. Agente: formularios a la opción 1 y aviso de privacidad (fase 2)
+ [ ] 7. Autor: liga de donación (Mercado Pago o Stripe) → CANAL_DONACION
+ [ ] 8. Lanzamiento gratis. Después: Supabase Pro, cuentas, alertas, IA
+```
+
 ## 2. Por qué Vercel + Supabase, y sus dos letras chiquitas
+
+> **Actualizado por §1 bis:** la recomendación de publicación cambió a
+> Cloudflare Pages, que no cobra por uso comercial. Lo de esta sección sigue
+> valiendo para Supabase y para el diagrama; donde dice Vercel, léase
+> Cloudflare Pages (con sus Workers en lugar de las funciones de Vercel).
 
 ```
                  ┌─────────────────────────────────────────────┐
@@ -85,7 +202,7 @@ sin las decisiones de la fase 0.**
 
 | # | Decisión | Opciones | Listo cuando |
 |---|---|---|---|
-| 0.1 | Dominio | `auditavision.mx`, `.org.mx` o `.com.mx`; se compra en un registrador acreditado ante NIC México (Vercel no vende `.mx`) | Comprado a tu nombre o al de la asociación |
+| 0.1 | Dominio | **Recomendado `auditavision.mx`** (y `.com.mx` solo si cuesta poco, para redirigirlo); se compra en un registrador acreditado ante NIC México, con los DNS en Cloudflare (§1 bis A) | Comprado a tu nombre o al de la asociación |
 | 0.2 | Forma jurídica | Asociación civil (permite donaciones y, si quieres, ser donataria autorizada) o persona física con actividad empresarial | Con RFC: lo pide la pasarela de pago |
 | 0.3 | Qué se publica de `investigaciones/` | (a) nada, solo ligas a la fuente oficial; (b) todo, en el almacén de Supabase; (c) solo lo que ya no está en línea en su fuente | Elegido |
 | 0.4 | Imagen del Modo Inspector | Confirmar autor y licencia de las cámaras, o reemplazar por una propia | Resuelto |
@@ -393,6 +510,82 @@ página de entrega».
 | **Optimización** | Medir: qué preguntan al Auditor, dónde se van las personas, qué formulario no se termina (analítica sin cookies, `preguntas_bot`) |
 | **Multiplicación** | Los municipios son 2,479 páginas posibles: una ficha por municipio que Google encuentre; licencias a universidades y medios; contenido que se comparte con folio |
 | **Automatización** | La tarea programada de datos (fase 4), las alertas (fase 5.5) y la respuesta automática a cada formulario |
+
+### 4.8 ¿Es un producto vendible? La prueba completa (24-10-2026)
+
+Pedido del autor: ver si cumple con «la solución a un problema», «la oferta
+irresistible» y las características de un producto vendible, y cuáles son
+sus capacidades. La fórmula de valor de la tabla es de Alex Hormozi
+(*$100M Offers*), no del curso: se usa porque mide lo mismo que piden las
+notas.
+
+**1. El problema (¿duele, y a quién?)**
+
+| Quién | Su dolor | ¿Paga por quitárselo? |
+|---|---|---|
+| Ciudadanía | «No sé en qué se va mi dinero ni a quién creerle» | Poco: dona, no compra |
+| Periodistas y medios | Horas buscando la cifra en PDF de la ASF y Hacienda, con riesgo de citar mal | **Sí**: ahorra horas y desmentidos |
+| Organizaciones civiles | Vigilar un municipio o un programa en el tiempo | **Sí**: con fondos de proyecto |
+| Regidurías, cabildos, equipos de campaña | Llegar a la sesión o al debate con el expediente listo | **Sí** |
+| Universidades | Material docente y datos con folio | Por licencia |
+
+**Veredicto: ✅ resuelve un problema real**, pero el que paga no es el
+ciudadano: es quien trabaja con la cifra.
+
+**2. Las capacidades que ya tiene (lo que se puede vender sin construir)**
+
+| Capacidad | Qué hace hoy |
+|---|---|
+| Auditor Virtual (chat) | Contesta cifras, leyes, glosario, sueldos y presupuestos con fuente, «Saber más» y dictamen sellado |
+| Verificación de notas | «¿Es cierto que…?» contra el documento oficial (tolerancia de 10 %) |
+| Estados de cuenta | Cívico, ambiental, por presidente, diputación, senaduría, Corte, estado y municipio |
+| Auditor de entes | 32 estados y 2,479 municipios, cada uno con estado de cuenta, salud financiera, dictamen y ritmo en vivo |
+| Modo Inspector | Seis aplicaciones de investigación, también dentro del chat; lista negra del SAT por RFC o nombre |
+| Inversión y Megaobras | Cada obra con su estado de resultados en pesos de su año y de hoy, y simulador |
+| Auditoría en imágenes y Expedientes | Nueve investigaciones visuales y casos por aclarar |
+| Enciclopedia | Números, Datos y Aprende: 210 páginas, Poderes, ambiente, glosario |
+| Registro de pendientes | 57 datos faltantes, cada uno con responsable y liga oficial |
+| Folio y huella SHA-256 | Cada dictamen se puede comprobar: nadie puede fabricar uno con cifras ajenas |
+
+**3. La oferta, medida con la fórmula de valor**
+
+> Valor = (resultado soñado × probabilidad de lograrlo) ÷ (tiempo × esfuerzo)
+
+| Factor | Auditavisión | Calificación |
+|---|---|---|
+| Resultado soñado | «Saber en qué se va el dinero de mi municipio y poder demostrarlo» | ✅ fuerte |
+| Probabilidad | Cada cifra con su documento y su folio: la credibilidad es el producto | ✅ fuerte |
+| Tiempo | Un minuto en el chat contra horas en la ASF | ✅ fuerte |
+| Esfuerzo | Se pregunta en lenguaje de calle | ✅ fuerte |
+| **Lo que falta** | Que **recuerde** a la persona y le **avise** (memoria y alertas) | ❌ sin cuentas |
+
+**4. Las características de un producto vendible**
+
+| Característica | Estado | Qué falta |
+|---|---|---|
+| Resuelve un dolor concreto | ✅ | — |
+| Cliente elegido | 🟡 | Elegir periodistas y organizaciones civiles para los primeros 90 días (§4.3) |
+| Diferenciador que nadie más da | ✅ | Cifra + documento + folio verificable, en un chat |
+| Promesa en una frase | 🟡 | Ponerla en la portada: «Verifica cualquier cifra del gasto público en un minuto, con su documento oficial» |
+| Algo que se paga | ❌ | Hoy todo es gratis (y lo público debe seguir gratis). Se paga memoria, aviso, trabajo y cómputo (§4.4) |
+| Precio | ❌ | Sale de 3 a 5 pilotos, no se inventa |
+| Pruebas | ❌ | Testimonios y casos reales de los pilotos; nunca inventados |
+| Garantía | ❌ | Propuesta: «si una cifra del dictamen no coincide con su documento, se corrige en la fe de erratas y se devuelve el cobro» |
+| Canal de compra y entrega | ❌ | Fases 5.1 a 5.4 |
+| Escala | ✅ | Licencia institucional y 2,479 fichas municipales indexables |
+
+**Veredicto:** el **producto** está listo y es fuerte; la **oferta** todavía
+no existe, porque lo que se cobraría (alertas, expediente, resumen,
+investigación a la medida) necesita cuentas o un canal de pedido. La oferta
+irresistible propuesta para los pilotos, sin construir nada nuevo:
+
+> **«Expediente de tu municipio, listo para la sesión de cabildo»**: estado
+> de cuenta, salud financiera, dictamen sellado y observaciones de la ASF,
+> revisado por una persona, con la garantía de erratas. Se entrega por
+> correo; se cobra con una liga de pago y una cotización escrita.
+
+Sirve para probar el precio con 3 a 5 clientes antes de construir
+suscripciones.
 
 ## 5. Calendario resumido
 
