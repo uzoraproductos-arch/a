@@ -383,9 +383,9 @@ APARTADOS = [
                 'pestana': ('💵', '1 · Presupuesto', 'Cuánto es y de dónde sale'),
                 'num': 1,
                 'titulo': 'Presupuesto: cuánto dinero es y de dónde sale',
-                'texto': ('Todo el dinero federal de 2026, en cinco tarjetas: cuánto es, de dónde viene y a dónde va; los 16 '
-                          'orígenes que autoriza la Ley de Ingresos; a qué equivale; el camino que recorre, y lo que propone el '
-                          'Paquete Económico 2027. Cada tarjeta abre su propia página.'),
+                'texto': ('Todo el dinero federal de 2026, en seis tarjetas: los tres presupuestos (del Estado, nacional y social); '
+                          'cuánto es, de dónde viene y a dónde va; los 16 orígenes que autoriza la Ley de Ingresos; a qué equivale; '
+                          'el camino que recorre, y lo que propone el Paquete Económico 2027. Cada tarjeta abre su propia página.'),
                 # Sin franja «Ayer y hoy» ni nota del libro desde el
                 # 11-10-2026 (pedido del autor): viven en el Diccionario,
                 # en la pregunta frecuente de la accion financiera del
@@ -398,7 +398,12 @@ APARTADOS = [
                 # rubro, descripcion breve de la tarjeta)
                 'mosaico': 'np-mosaico',
                 'bloque': '',
+                # «Los tres presupuestos» paso de «Gasto publico» a ser la
+                # primera de aqui (pedido del autor, 24-10-2026): seis tarjetas.
                 'tarjetas': [
+                    ('🧭', 'Los tres presupuestos', 'El gasto de 2026 leído en tres renglones, del Estado, nacional y social, más lo que ya está comprometido antes de empezar, con la operación a la vista.',
+                     'numeros-gasto-tres-presupuestos.html', None, 'dinero',
+                     'Del Estado, nacional y social: hacia dónde va'),
                     ('💰', 'Cuánto dinero es', 'Los $10.19 billones de 2026 de un vistazo: de dónde viene y a dónde va cada peso, en dos barras que se pueden tocar, y lo que baja al territorio.',
                      'numeros-cuanto-dinero-es.html', 'Ley de Ingresos y Presupuesto de Egresos de la Federación 2026', 'dinero',
                      'El total de 2026: de dónde viene y a dónde va'),
@@ -423,8 +428,8 @@ APARTADOS = [
                 'titulo': 'Gasto público: quién lo aprueba y en qué se va',
                 'texto': ('La Cámara de Diputados aprueba cada año el Presupuesto de Egresos y, con él, en qué se va cada peso. '
                           'Aquí está quién tiene la facultad de aprobarlo, parada por parada, y cómo se reparte el dinero que sostiene '
-                          'al país: un simulador contable que lo parte del total a sus ocho renglones, los tres grandes presupuestos '
-                          'y, al final, cada desglose en su propia página.'),
+                          'al país: un simulador contable que lo parte del total a sus ocho renglones y, al final, cada desglose '
+                          'en su propia página.'),
                 # Su «Ayer y hoy» vive en las Preguntas frecuentes (12-10-2026).
                 'bloque': '',
                 # Las vistas del motor abren su pagina de modulo
@@ -3815,7 +3820,7 @@ def numeros_tres(d):
 NUMEROS_PARTES = [
     # (id de la seccion, archivo, icono, nombre de la tarjeta, descripcion)
     ('origen', 'numeros-presupuesto.html', '💵', 'Presupuesto', 'Cuánto dinero hay en 2026 y de dónde sale cada peso'),
-    ('gasta', 'numeros-gasto-publico.html', '🏛️', 'Gasto público', 'Quién lo aprueba y en qué se va: los tres presupuestos'),
+    ('gasta', 'numeros-gasto-publico.html', '🏛️', 'Gasto público', 'Quién lo aprueba, cómo se reparte y en qué se va'),
     ('baja', 'numeros-baja-al-territorio.html', '📍', 'Baja al territorio', 'Lo que llega a los 32 estados y a los 2,479 municipios'),
     ('cuentas', 'numeros-cuentas-claras.html', '⚖️', 'Cuentas claras', 'Lo que se debe, sexenio por sexenio, y quién revisa cómo se gastó'),
 ]
@@ -3841,6 +3846,8 @@ NUMEROS_ABRIR = {}
 # publico» y ahora tienen su pagina de modulo (11-10-2026):
 # (ancla, archivo, icono, nombre, destino, parte).
 NUMEROS_MODULOS = [
+    # Abre «Presupuesto» desde el 24-10-2026 (vivia en «Gasto publico»).
+    ('gp-tres', 'numeros-gasto-tres-presupuestos.html', '🧭', 'Los tres presupuestos', None, 'origen'),
     ('eb-cuanto', 'numeros-cuanto-dinero-es.html', '💰', 'Cuánto dinero es', ir('presupuesto', 'eb-cuanto'), 'origen'),
     ('nr-origenes', 'numeros-los-16-origenes.html', '🧾', 'Los 16 orígenes del ingreso', None, 'origen'),
     ('eb-equivale', 'numeros-a-que-equivale.html', '📏', '¿A qué equivale?', ir('presupuesto', 'eb-equivale'), 'origen'),
@@ -4024,7 +4031,7 @@ def numeros_modulo(m, tarjetas, bloque=None, script='presupuesto.js'):
         'secciones': [{'id': ancla, 'titulo': nombre, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque or marco}],
     }
     if parte in ('origen', 'baja'):
-        cuantas = {3: 'tres', 4: 'cuatro', 5: 'cinco'}.get(len(hermanos), str(len(hermanos)))
+        cuantas = {3: 'tres', 4: 'cuatro', 5: 'cinco', 6: 'seis'}.get(len(hermanos), str(len(hermanos)))
         p['pie_extra'] = presupuesto_pie(
             (ant[1], '← Anterior', ant[2], ant[3]) if ant else (parch, '← Volver a', pico, pnom),
             (sig[1], 'Siguiente →', sig[2], sig[3]) if sig else presupuesto_siguiente_parte(parte),
@@ -4282,9 +4289,7 @@ GASTO_PARTES = [
     ('gpFuera', '🪙', 'numeros-gasto-si-fuera-de.html', 'Si el presupuesto fuera de…', 'Escribe una cantidad y mírala repartirse igual',
      'Si el presupuesto fuera de…',
      'Una cantidad cualquiera, repartida en la misma proporción que el presupuesto aprobado: la forma del gasto, en pequeño.', 'como'),
-    ('gpTres', '🧭', 'numeros-gasto-tres-presupuestos.html', 'Los tres presupuestos', 'Del Estado, nacional y social: hacia dónde va',
-     '¿Hacia dónde va? Los tres presupuestos',
-     'El gasto leído en tres renglones, del Estado, nacional y social, más lo que ya está comprometido antes de empezar, con la operación a la vista.', 'como'),
+    # «Los tres presupuestos» se mudo a «Presupuesto» (24-10-2026): NUMEROS_MODULOS.
     ('reparte', '🎛️', 'simulador-presupuesto.html', 'Reparte tú el presupuesto', 'Arranca en $0, reparte los $10.19 billones y compáralo', None, None, 'desg'),
     ('poderes', '⚖️', 'numeros-lo-que-cuestan-los-poderes.html', 'Lo que cuestan el Congreso y la Judicatura', 'Presupuesto 2026, gasto auditado 2024 y sueldos netos', None, None, 'desg'),
     ('eb-egresos', '🏢', 'numeros-ramos-y-dependencias.html', 'En qué se va: ramos y dependencias', 'Cuánto recibe cada Secretaría, ramo por ramo', None, None, 'desg'),
@@ -4465,9 +4470,7 @@ def numeros_preparar():
     a = next(x for x in APARTADOS if x['archivo'] == 'sigue-el-dinero.html')
     pasos = {sec['id']: sec for sec in a['secciones']}
     contable, fuera = gasto_reparte(base, d)
-    gasto_html = {'gpAprueba': gasto_ciclo(base), 'gpReparte': contable, 'gpFuera': fuera,
-                  'gpTres': '<section class="gp gp-tres" id="gpTres" aria-labelledby="gpTresTit"><h2 class="gp-tit sr-only" id="gpTresTit">¿Hacia dónde va? Los tres presupuestos</h2>\n        '
-                            + numeros_tres(d) + '</section>'}
+    gasto_html = {'gpAprueba': gasto_ciclo(base), 'gpReparte': contable, 'gpFuera': fuera}
     # La nota del libro va al pie de cada paso, no en la portada.
     comun = {k: a.pop(k) for k in ('libro', 'libro_ref', 'libro_glosario')}
     for pid, archivo, ico, nombre, desc in NUMEROS_PARTES:
@@ -4503,7 +4506,8 @@ def numeros_preparar():
             partes_portada(p, GASTO_PARTES, GASTO_GRUPOS,
                            'La Cámara de Diputados aprueba cada año el Presupuesto de Egresos y, con él, en qué se va cada peso. '
                            'Arriba, cómo se aprueba y cómo se reparte; abajo, cada desglose. Cada tarjeta abre su propia página.',
-                           [('gpContar', GASTO_PARTES[1][2]), ('gpMonto', GASTO_PARTES[2][2]), ('gpRep', GASTO_PARTES[2][2])])
+                           [('gpContar', GASTO_PARTES[1][2]), ('gpMonto', GASTO_PARTES[2][2]), ('gpRep', GASTO_PARTES[2][2]),
+                            ('gpTres', 'numeros-gasto-tres-presupuestos.html'), ('gpTresTit', 'numeros-gasto-tres-presupuestos.html')])
             p['cierre'] = ('<p class="gp-pie-herr">🧰 ¿Buscas la inversión pública y las megaobras, o el costo ambiental? Son herramientas y viven en '
                            '<a href="herramienta-megaobras.html">Herramientas · Megaobras</a> y <a href="herramienta-ambiente.html">Herramientas · Costo ambiental</a>.</p>')
         if pid == 'cuentas':
@@ -4531,7 +4535,8 @@ def numeros_preparar():
         r = refs[rid]
         return nota_ref(rid, r['num'], re.sub('<[^>]+>', '', r['cita_apa'])[:160].replace('"', '&quot;'))
     # «Cuanto dinero es» lleva dentro las dos barras de «El peso de 2026».
-    propios = {'eb-cuanto': lambda: pm.cuanto(base, ref, numeros_peso(d),
+    propios = {'gp-tres': lambda: '<section class="gp gp-tres" id="gpTres" aria-labelledby="gpTresTit"><h2 class="gp-tit sr-only" id="gpTresTit">¿Hacia dónde va? Los tres presupuestos</h2>\n        ' + numeros_tres(d) + '</section>',
+               'eb-cuanto': lambda: pm.cuanto(base, ref, numeros_peso(d),
                                               (RADAR_HOY_CUENTA, RADAR_HOY_FILAS[2:], radar_hoy_vivo(base))),
                'eb-equivale': lambda: pm.equivale(base, ref),
                'eb-arquitectura': lambda: pm.camino(base, ref),
@@ -4552,7 +4557,7 @@ def numeros_preparar():
     import resultados_modulo as rm
     import gasto_modulos as gm
     import poderes_modulo as pdm
-    guion = {'eb-cuenta-federal': 'resultados.js', 'eb-salud': [], 'eb-egresos': [], 'eb-ciegos': [], 'poderes': [], 'eb-cuanto': ['numeros.js', 'radar.js'], 'nr-origenes': 'numeros.js', 'eb-mapa': 'territorio.js', 'territorio': 'territorio.js',
+    guion = {'gp-tres': [], 'eb-cuenta-federal': 'resultados.js', 'eb-salud': [], 'eb-egresos': [], 'eb-ciegos': [], 'poderes': [], 'eb-cuanto': ['numeros.js', 'radar.js'], 'nr-origenes': 'numeros.js', 'eb-mapa': 'territorio.js', 'territorio': 'territorio.js',
              'municipios': ['municipios-efipem.js', 'territorio.js']}
     for m in NUMEROS_MODULOS:
         NUMEROS_ABRIR[m[0]] = m[1]
@@ -4825,6 +4830,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('24-10-2026', 'En Números, Presupuesto queda en seis tarjetas: la primera es Los tres presupuestos (del Estado, nacional y social), que se mudó desde Gasto público, y le siguen Cuánto dinero es, Los 16 orígenes del ingreso, ¿A qué equivale?, El camino del dinero y el Paquete Económico 2027. Su página y sus cifras no cambian.'),
     ('24-10-2026', 'Comunidad queda en tres tarjetas: Ágora cívica, Garantías cívicas y Donaciones. La antigua Participa se fundió con el botón «📢 Cuéntanos lo que viste» de la cabecera, que abre su cajón con las cinco rutas: algo raro con el dinero público, un dato mal, un tema para investigar, compartir el Estado de Cuenta y la fe de erratas. El Pase del Auditor Cívico se retira: la plataforma se sostendrá con donaciones o con los Servicios de investigación.'),
     ('24-10-2026', 'Cada estado y cada municipio tiene sus cuatro documentos en su ficha técnica: estado de cuenta, salud financiera, dictamen y un contador en vivo de lo que le llega al día, por hora y por segundo, con su operación a la vista. Y al Auditor ya le puedes preguntar «Zapopan, Jalisco».'),
     ('24-10-2026', 'El Auditor Virtual abre cualquier estado de cuenta: el tuyo cívico, el ambiental (antes «Tu ticket en negativo»), el de cada presidente, la diputación federal y local, la senaduría, la Corte, tu estado y tu municipio. Y al pie de cada respuesta te ofrece el mapa, el reloj, el tablero o la fiscalización que vienen al caso, ya con tu estado elegido.'),
@@ -4965,9 +4971,9 @@ def indice(base, ref):
                        [grupo(p['icono'], p['titulo'],
                                ([(ingreso_archivo(x), '· ' + x['nombre'], '') for x in auditorias.db()['panoramaErario']['ingresos']]
                                 if p['archivo'] == 'numeros-presupuesto.html' else []) +
-                               ([(x[2], x[3], '') for x in GASTO_PARTES[:4]] +
+                               ([(x[2], x[3], '') for x in GASTO_PARTES if x[7] == 'como'] +
                                 [(egreso_archivo(x), '· ' + x['nombre'], '') for x in auditorias.db()['panoramaErario']['egresos']] +
-                                [(x[2], x[3], '') for x in GASTO_PARTES[4:]]
+                                [(x[2], x[3], '') for x in GASTO_PARTES if x[7] != 'como']
                                 if p['archivo'] == 'numeros-gasto-publico.html' else []) +
                                ([(x[2], x[3], '') for x in CUENTAS_PARTES] if p['archivo'] == 'numeros-cuentas-claras.html' else []) +
                                [(_a_numeros(t[3]), re.sub('<[^>]+>', '', t[1]), '') for s in p['secciones'] for t in s.get('tarjetas', [])],

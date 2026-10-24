@@ -673,7 +673,7 @@
     var NU = D.num || {}, NF = NU.filas || [], NG = NU.grupos || {}, NPAR = {};
     /* La pestaña Datos (asistente_datos.py) suma sus renglones a los mismos: ambiente, basura, Ramo 16 y la ASF. */
     var DT = D.datos || {}, PSO = DT.peso;
-    var NORD = ['ing26', 'egr26', 'mun26', 'fed26', 'munp', 'ramo26', 'func27', 'pq27', 'soc27', 'inv27', 'colchon', 'cf24', 'cp25', 'r16', 'amb24', 'basura', 'asf', 'asfg', 'asfs'];
+    var NORD = ['ing26', 'egr26', 'tres26', 'mun26', 'fed26', 'munp', 'ramo26', 'func27', 'pq27', 'soc27', 'inv27', 'colchon', 'cf24', 'cp25', 'r16', 'amb24', 'basura', 'asf', 'asfg', 'asfs'];
     NF.forEach(function (f) { f.alp = (f.al || []).map(function (a) { return ' ' + a + ' '; }); if (f.par) (NPAR[f.par] = NPAR[f.par] || []).push(f); });
     var NQUIERE = /cuant|monto|cifra|presupuest|recaud|cobr|gast|cuesta|cuestan|costo|asign|aprob|toca|lana|dinero|varo|porcentaje|parte|de cada|que tanto|propon|recibe|reciben|tiene|vale|suma|ingres|deja|aporta|sale|entra|billon|millon|dime|dato|ejerc|reparte|da |dan |le dan|se va|se van|va a|van a/;
     var NLISTA = /\b(cuales|lista|desglose|desglosa|reparte|se divide|se compone|en que se (gasta|va|van)|a donde va|de donde (sale|viene|vienen|entra)|renglones|rubros|todos los|todas las)\b/;
@@ -810,6 +810,7 @@
       if (/aclarar|asf|auditoria superior/.test(t) && /concentra|grupo|sector|rubro/.test(t)) return ['asfg'];
       if (/programas? sociales?|apoyos sociales|programas del bienestar|becas y pensiones/.test(t)) return ['soc27'];
       if (/\b(obras|proyectos|inversion)\b/.test(t) && /2027|prioritari|paquete|propon/.test(t)) return ['inv27'];
+      if (/tres (grandes )?presupuestos|presupuesto (social|nacional)\b.*presupuesto/.test(t)) return ['tres26'];
       if (/finalidad|funcional/.test(t)) return ['func27'];
       if (/federalizado/.test(t)) return ['fed26'];
       if (/\bimpuestos?\b/.test(t)) return ['ing26', 'Impuestos'];

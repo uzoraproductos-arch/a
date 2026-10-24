@@ -145,7 +145,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 44 | 0 | 0 | 5 | 1 |
 | `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 41 | 0 | 4 | 0 | 0 |
-| `numeros-cuanto-dinero-es.html` | Cuánto dinero es · Auditavisión | apartados.py | 45 | 0 | 8 | 7 | 1 |
+| `numeros-cuanto-dinero-es.html` | Cuánto dinero es · Auditavisión | apartados.py | 46 | 0 | 8 | 7 | 1 |
 | `numeros-cuentas-antes-de-1994.html` | Antes de 1994 · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `numeros-cuentas-claras.html` | Cuentas claras · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `numeros-cuentas-deuda-en-el-tiempo.html` | La deuda en el tiempo · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
@@ -160,11 +160,11 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-egreso-poderes-y-organos-autonomos.html` | Poderes y órganos autónomos · Auditavisión | apartados.py | 44 | 0 | 1 | 1 | 0 |
 | `numeros-el-peso-de-2026.html` | El peso de 2026 · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `numeros-estado-de-resultados.html` | El estado de resultados del Gobierno · Auditavisión | apartados.py | 44 | 0 | 11 | 7 | 22 |
-| `numeros-gasto-publico.html` | Gasto público · Auditavisión | apartados.py | 37 | 0 | 0 | 0 | 0 |
+| `numeros-gasto-publico.html` | Gasto público · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `numeros-gasto-quien-lo-aprueba.html` | ¿Quién lo aprueba? · Auditavisión | apartados.py | 47 | 0 | 11 | 0 | 0 |
 | `numeros-gasto-si-fuera-de.html` | Si el presupuesto fuera de… · Auditavisión | apartados.py | 41 | 0 | 0 | 1 | 0 |
 | `numeros-gasto-simulador-contable.html` | El simulador contable · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
-| `numeros-gasto-tres-presupuestos.html` | Los tres presupuestos · Auditavisión | apartados.py | 40 | 0 | 2 | 2 | 0 |
+| `numeros-gasto-tres-presupuestos.html` | Los tres presupuestos · Auditavisión | apartados.py | 39 | 0 | 2 | 2 | 0 |
 | `numeros-ingreso-accesorios.html` | Accesorios de impuestos · Auditavisión | apartados.py | 34 | 0 | 1 | 1 | 0 |
 | `numeros-ingreso-aprovechamientos.html` | Aprovechamientos · Auditavisión | apartados.py | 34 | 0 | 1 | 1 | 0 |
 | `numeros-ingreso-comercio-exterior.html` | Comercio exterior · Auditavisión | apartados.py | 34 | 0 | 1 | 1 | 0 |
@@ -200,7 +200,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-paquete-2027-ruta-2032.html` | Ruta a 2032 · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `numeros-paquete-2027-simulador.html` | Simulador · Auditavisión | apartados.py | 32 | 0 | 0 | 1 | 0 |
 | `numeros-paquete-2027.html` | Paquete Económico 2027 · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
-| `numeros-presupuesto.html` | Presupuesto · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
+| `numeros-presupuesto.html` | Presupuesto · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `numeros-ramos-y-dependencias.html` | En qué se va: ramos y dependencias · Auditavisión | apartados.py | 44 | 0 | 3 | 3 | 0 |
 | `numeros-se-aprueba.html` | Se aprueba · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `numeros-se-gasta.html` | Se gasta: los tres presupuestos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |

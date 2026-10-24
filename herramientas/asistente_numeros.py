@@ -30,7 +30,7 @@ Lo usa asistente._charla(); asistente-charla.js lo lee como B.dat.num.
 import html
 import re
 
-from apartados import ingreso_archivo
+from apartados import ingreso_archivo, numeros_datos
 from gasto_modulos import egreso_archivo
 import insp_nota
 
@@ -191,6 +191,17 @@ def datos(d):
          al=['presupuesto de egresos', 'presupuesto 2026', 'presupuesto federal', 'presupuesto del gobierno', 'gasto total', 'gasto neto total',
              'cuanto gasta el gobierno', 'cuanto se gasta', 'presupuesto de este ano', 'presupuesto', 'gasto publico', 'va a gastar', 'van a gastar', 'gastara'],
          ir=[NUM + 'gasto-publico.html', 'Gasto público'])
+
+    # 2 bis. Los tres presupuestos (del Estado, nacional y social), las mismas
+    # cifras de su tarjeta en «Presupuesto» (numeros_datos(), 24-10-2026).
+    sale = {x['id']: x for x in numeros_datos(d)['sale']}
+    grupos['tres26'] = {'n': 'todo el gasto de 2026', 'tot': tpef, 'ir': [NUM + 'gasto-tres-presupuestos.html', 'Los tres presupuestos'],
+                        'fu': CGPE, 'lista': 'Los tres presupuestos de 2026'}
+    for k, ali in (('estado', ['presupuesto del estado']), ('nacional', ['presupuesto nacional']), ('social', ['presupuesto social'])):
+        x = sale[k]
+        fila(id='tres-' + k, g='tres26', n=x['nom'], y='2026', v=x['v'], e=x['est'], fu=CGPE, op=x['op'] if x['est'] == 'derivado' else None,
+             d=x['que'], al=ali, fr='Para 2026, el ' + x['nom'][0].lower() + x['nom'][1:] + ' suma {V}.',
+             ir=[NUM + 'gasto-tres-presupuestos.html', 'Los tres presupuestos'])
 
     # 3. Los gastos obligatorios (Anexo 3).
     go = P['gastosObligatoriosPEF2026']

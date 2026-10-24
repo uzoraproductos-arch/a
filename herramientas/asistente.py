@@ -624,7 +624,7 @@ def pagina(cuenta, canal='', herramientas=()):
               <button type="button" class="pa-copiar" id="paSinRespCopiar">📋 Copiar la lista</button>
               <button type="button" class="pa-copiar" id="paSinRespBorrar">🗑️ Borrar</button>
             </p>
-            <p class="pa-chico" id="paSinRespNota">La lista se guarda solo en tu navegador: nadie más la ve y no se envía sola. Para hacérnosla llegar, cópiala y pégala en <a href="comunidad-tema.html">Comunidad › Un tema que deberíamos investigar</a>.</p>
+            <p class="pa-chico" id="paSinRespNota">La lista se guarda solo en tu navegador: nadie más la ve y no se envía sola. Para hacérnosla llegar, cópiala y pégala en <a href="comunidad-tema.html" data-puerta="tema">📢 Cuéntanos lo que viste › Un tema que deberíamos investigar</a>, el botón de arriba a la izquierda.</p>
           </section>
           <p class="pa-aviso"><b>Platico como chat, pero no invento.</b> No soy una inteligencia artificial que redacta: entiendo tu pregunta y contesto solo con cifras que la plataforma ya publicó con su documento (%s fichas y %s municipios). Si no lo tengo, te lo digo. Tu pregunta no sale de tu navegador.</p>
           </div>
