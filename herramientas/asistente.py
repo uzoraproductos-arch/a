@@ -484,6 +484,39 @@ def _inspector():
     return {'apps': apps, 'pagina': h[0], 'sat': sit}
 
 
+# Cómo se dice en la calle cada aplicación de Costo Ambiental y de la
+# Calculadora Cívica (24-10-2026): el chat la reconoce por su nombre o por
+# estas frases, sin acentos. Las que no traen frase solo entran por su nombre.
+ALIAS_APPS = {
+    'amticket': ['estado de cuenta ambiental', 'ticket ambiental'],
+    'amreloj': ['reloj del dano ambiental', 'reloj ambiental', 'reloj y el ano'],
+    'ampib': ['crecimiento es real', 'pib que no alcanza', 'pib ecologico', 'pib verde'],
+    'aminversion': ['simulador de inversion ambiental', 'inversion ambiental'],
+    'amauditor': ['auditor ambiental', 'organo por organo'],
+    'herramienta-ambiente-crisis.html': ['crisis ambientales', 'crisis ambiental'],
+    'ccticket': ['estado de cuenta civico', 'ticket civico', 'calcula mi isr', 'calcular mi isr'],
+    'cccompara': ['tu contra ellos', 'yo contra ellos'],
+    'ccreloj': ['reloj de la deuda'],
+    'simulador-presupuesto.html': ['reparte el presupuesto', 'simulador del presupuesto'],
+    'radar-estado-de-cuenta.html': ['estado de cuenta administrativo'],
+}
+
+
+def _apps_de(clave):
+    """Las aplicaciones de Costo Ambiental o de la Calculadora Cívica, para
+    usarlas desde el chat como las del Modo Inspector y las de Inversión y
+    Megaobras (pedido del autor, 24-10-2026). No llevan cifras: solo dicen
+    qué hay y dónde, y el chat las abre en un marco de la respuesta."""
+    import apartados
+    h = next(x for x in apartados.HERRAMIENTAS if x[1] == clave)
+    apps = [{'id': t[0], 'k': i + 1, 'ico': t[1], 'n': t[2], 'frase': t[3], 'desc': limpio(t[4]),
+             'url': apartados.modulo_archivo(h[0], t[0]), 'al': ALIAS_APPS.get(t[0], [])} for i, t in enumerate(h[7])]
+    for a in apps:
+        if not os.path.exists(os.path.join(RAIZ, a['url'])):
+            raise SystemExit('asistente.py: la aplicacion %s no tiene pagina (%s)' % (a['id'], a['url']))
+    return {'apps': apps, 'pagina': h[0], 'nombre': h[3], 'ico': h[2]}
+
+
 def escribir_base():
     import pendientes
     d = pendientes.db()
@@ -502,6 +535,9 @@ def escribir_base():
     dat = _charla(d)
     rec = asistente_recursos.base([(e['a'], e['n']) for e in dat['edo']])
     dat['insp'] = _inspector()
+    # Costo Ambiental y la Calculadora Cívica, dentro del chat (24-10-2026).
+    dat['amb'] = _apps_de('ambiente')
+    dat['calc'] = _apps_de('calculadora')
     # Inversión y Megaobras, dentro del chat (24-10-2026): sus obras, sus
     # sexenios, sus cifras y sus cinco aplicaciones.
     import asistente_megaobras

@@ -400,6 +400,21 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   básico (verde suma, rojo resta), en pesos de su año y de hoy con el INPC
   de la máquina del tiempo del peso; y donde la plataforma no tiene mapa,
   el chat lleva al **simulador** de la herramienta, ya filtrado.
+- **Las cuatro herramientas viven en el chat** (24-10-2026): además del Modo
+  Inspector y de Inversión y Megaobras, las seis aplicaciones de **Costo
+  Ambiental** y las cinco de la **Calculadora Cívica** se reconocen por su
+  nombre o por cómo se dicen en la calle (`ALIAS_APPS` de
+  `herramientas/asistente.py`) y se abren en el marco del chat
+  (`herramienta()` de `asistente.js`). «Gano 15 mil al mes, ¿cuánto me
+  retienen?» abre la Calculadora con el ingreso ya puesto (`?m=&p=&n=`): la
+  cuenta la hace la calculadora, nunca el chat. **Una aplicación nueva de
+  esas dos herramientas entra sola** al catálogo, y si la gente la llama de
+  otro modo, su frase va en `ALIAS_APPS`.
+- **Las investigaciones de Auditoría en imágenes salen al frente**
+  (24-10-2026): cuando la plática toca su tema (Tren Maya, Dos Bocas,
+  huachicol, Ramo 33…), «Explóralo a fondo» abre con «📖 Ver la
+  investigación». **Una investigación nueva necesita sus frases en
+  `TEMA_BOT`** de `herramientas/auditorias.py`, o la generación se detiene.
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).

@@ -386,6 +386,22 @@ def _docs_planos(docs):
     return out
 
 
+# Las frases con que se nombra el tema de cada investigación (sin acentos),
+# para que el chat ofrezca «Ver la investigación» cuando la plática lo toca,
+# aunque la pregunta no sea la de su diapositiva (24-10-2026).
+TEMA_BOT = {
+    'tren-maya': ['tren maya'],
+    'dos-bocas': ['dos bocas', 'refineria olmeca'],
+    'deuda-soberana': ['intereses de la deuda', 'costo financiero', 'deuda soberana', 'deuda publica'],
+    'aifa': ['aifa', 'felipe angeles'],
+    'ramo-33': ['ramo 33', 'aportaciones federales', 'fais', 'fortamun'],
+    'lego-cienega': ['lego', 'cienega de flores'],
+    'tren-toluca': ['tren interurbano', 'tren a toluca', 'mexico toluca', 'el insurgente'],
+    'megafarmacia': ['megafarmacia', 'huehuetoca', 'birmex'],
+    'huachicol-fiscal': ['huachicol'],
+}
+
+
 def bot_fichas():
     """Una ficha por investigación para «Pregúntale al Auditor» (23-10-2026):
     la contesta cuando le llega la pregunta de su diapositiva. Las cifras
@@ -394,12 +410,15 @@ def bot_fichas():
     out = []
     for a in AUDITORIAS:
         id_ = a[0]
+        if not TEMA_BOT.get(id_):
+            raise SystemExit('auditorias.py: la investigacion %s no tiene sus frases en TEMA_BOT' % id_)
         d = _datos(id_)
         out.append({'t': 'investigacion', 'tit': re.sub('<[^>]+>', '', a[5]), 'txt': d['que'],
                     'ci': [dict({'v': v, 'etq': etq, 'e': e}, **({'p': pend} if pend else {})) for v, etq, e, pend in d['cuanto']],
                     'fu': _docs_planos(d['docs']), 'qs': [q for q in (pq.get(id_), a[6]) if q],
                     'ir': [archivo(id_), 'la investigación en imágenes'],
-                    'exp': ('expedientes.html#exp-' + EXPEDIENTE[id_]) if id_ in EXPEDIENTE else ''})
+                    'exp': ('expedientes.html#exp-' + EXPEDIENTE[id_]) if id_ in EXPEDIENTE else '',
+                    'k': TEMA_BOT.get(id_, [])})
     return out
 
 

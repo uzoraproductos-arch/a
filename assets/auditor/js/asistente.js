@@ -377,6 +377,11 @@
     out.sort(function (a, b) { return b.s - a.s; });
     return out.slice(0, 3).map(function (o) { return { x: o.x, ab: ab }; });
   }
+  function conInv(q, r, lista) {
+    var iv = r.sin ? null : invDe(q, r);
+    if (!iv || lista.some(function (o) { return sinParam(o.x.ir) === iv.x.ir; })) return lista;
+    return [iv].concat(lista).slice(0, 5);
+  }
   function recursosHtml(lista) {
     return lista && lista.length ? '<div class="pa-rec"><p class="pa-mas-t">Explóralo a fondo</p><div class="pa-rec-lista">' + lista.map(function (o) {
       return '<a class="pa-rec-a" href="' + esc(ligaRec(o.x, o.ab)) + '"><span class="pa-rec-ico" aria-hidden="true">' + o.x.ico + '</span>' +
@@ -450,7 +455,7 @@
   function appDeLiga(u) {
     var b = sinParam(u || '').replace(/\.html$/, ''), hit = null;
     if (b === 'expedientes') return APP.inspasf;
-    IN.apps.concat(MO.apps).forEach(function (a) { if (!hit && (b === a._base || b.indexOf(a._base + '-') === 0)) hit = a; });
+    IN.apps.concat(MO.apps, HA.apps).forEach(function (a) { if (!hit && (b === a._base || b.indexOf(a._base + '-') === 0)) hit = a; });
     return hit;
   }
   function appHtml(o) {
@@ -737,6 +742,65 @@
   var MO = (B.dat && B.dat.mo) || { obras: [], sx: [], apps: [], tot: {}, portales: [], sims: {} }, OB = {};
   var PESO_FU = ((B.dat && B.dat.datos && B.dat.datos.peso && B.dat.datos.peso.fx) || {}).BX_INPC;
   MO.apps.forEach(function (a) { a.grupo = MO.nombre; a.tot = MO.apps.length; a._p = plano(a.n); a._c = plano(a.n.split(/,| y /)[0]); a._base = sinParam(a.url).replace(/\.html$/, ''); APP[a.id] = a; });
+  /* Costo Ambiental y la Calculadora Cívica, dentro del chat (24-10-2026,
+     pedido del autor): sus aplicaciones se reconocen por su nombre o por como
+     se dicen en la calle (ALIAS_APPS de herramientas/asistente.py) y se abren
+     en el marco de la respuesta, como las del Modo Inspector. */
+  var HA = { apps: [], de: {} };
+  [(B.dat && B.dat.amb), (B.dat && B.dat.calc)].forEach(function (h) {
+    if (!h) return;
+    h._p = plano(h.nombre);
+    h.apps.forEach(function (a) { a.grupo = h.nombre; a.tot = h.apps.length; a.h = h; a._al = [plano(a.n)].concat((a.al || []).map(plano)); a._base = sinParam(a.url).replace(/\.html$/, ''); APP[a.id] = a; HA.apps.push(a); });
+    HA.de[h.pagina] = h;
+  });
+  function respHerr(h) {
+    return {
+      html: '<p><span aria-hidden="true">' + h.ico + '</span> <b>' + esc(h.nombre) + '</b> son ' + h.apps.length + ' aplicaciones, y todas las usas desde aquí, sin salir del chat:</p><ul class="pa-lista">' +
+        h.apps.map(function (a) { return '<li><span aria-hidden="true">' + a.ico + '</span> <b>' + esc(a.n) + '.</b> ' + esc(a.frase) + '.</li>'; }).join('') + '</ul>' +
+        '<p>Dime cuál quieres y la abro aquí abajo. Empiezo por la primera:</p>',
+      ir: [h.pagina, h.nombre], app: { id: h.apps[0].id, url: h.apps[0].url }, rec: [],
+      sug: h.apps.slice(1, 4).map(function (a) { return a.n; })
+    };
+  }
+  /* «Gano 15 mil al mes, ¿cuánto me retienen?»: la Calculadora Cívica hace la
+     cuenta con la tarifa oficial del ISR; el chat no pone cifras propias. */
+  var SUELDO = /\b(gano|ganamos|mi sueldo|mi salario|mi ingreso|mis ingresos|me pagan|cobro|percibo)\b/;
+  function sueldoDe(p) {
+    var m = /(\d[\d,]*(?:\.\d+)?)\s*(mil)?\b/.exec(p.replace(/(\d) (?=\d{3}\b)/g, '$1'));
+    if (!m) return 0;
+    var v = parseFloat(m[1].replace(/,/g, '')) * (m[2] ? 1000 : 1);
+    return v >= 100 && v < 1e9 ? Math.round(v) : 0;
+  }
+  function herramienta(q) {
+    if (!HA.apps.length) return null;
+    var p = plano(q), cc = APP.ccticket;
+    if (cc && SUELDO.test(p) && !/\b(diputad|senador|ministr|president|gobernador|alcalde|funcionari)\w*/.test(p)) {
+      var m = sueldoDe(p), per = /\b(al ano|anual|anuales|por ano)\b/.test(p) ? 'ano' : 'mes', nat = /\b(neto|netos|libres?|en mano|ya sin impuestos)\b/.test(p) ? 'neto' : 'bruto';
+      var liga = 'herramienta-calculadora-ticket-retienen.html' + (m ? '?m=' + m + '&p=' + per + '&n=' + nat : '');
+      return respApp('ccticket', liga, '<p><span aria-hidden="true">🧾</span> Esa cuenta la hace <b>' + esc(cc.n) + '</b>, de la ' + esc(cc.grupo) + ': ' +
+        (m ? 'ya le puse tu ingreso de <b>$' + m.toLocaleString('es-MX') + (per === 'ano' ? ' al año' : ' al mes') + '</b>, ' + (nat === 'neto' ? 'después' : 'antes') + ' de descuentos. ' : 'escribe lo que ganas. ') +
+        'Te dice cuánto te retienen, con la tarifa oficial del ISR, y a dónde va cada peso de tu impuesto, en un documento con folio y huella.</p>' +
+        '<p class="pa-chico">La cuenta la hace la calculadora con las tarifas publicadas; si tu caso tiene deducciones o un régimen distinto, cámbialo ahí mismo.</p>',
+        { sug: ['¿A dónde va cada peso de mis impuestos?', '¿Cuánto gana un diputado comparado conmigo?', 'Mi estado de cuenta ambiental'] });
+    }
+    if (/^\s*(que|q) (es|son|significa)\b/.test(p)) return null;
+    var hit = null;
+    HA.apps.forEach(function (a) { if (!hit && a._al.some(function (x) { return x.trim().split(' ').length > 1 && p.indexOf(x) >= 0; })) hit = a; });
+    if (hit) return respApp(hit.id, hit.url, '<p><span aria-hidden="true">' + hit.ico + '</span> <b>' + esc(hit.n) + '</b> es la aplicación ' + hit.k + ' de ' + esc(hit.grupo) + '. ' + esc(hit.desc) + '</p><p>Úsala aquí abajo, sin salir del chat, o abre su página con «Saber más».</p>',
+      { sug: hit.h.apps.filter(function (a) { return a !== hit; }).slice(0, 3).map(function (a) { return a.n; }) });
+    var h = null;
+    Object.keys(HA.de).forEach(function (k) { if (!h && p.indexOf(HA.de[k]._p) >= 0) h = HA.de[k]; });
+    return h ? respHerr(h) : null;
+  }
+  /* La investigación de Auditoría en imágenes que viene al caso, al frente de
+     «Explóralo a fondo» (las frases las escribe herramientas/auditorias.py). */
+  INV.forEach(function (f) { f._k = (f.k || []).map(plano); });
+  function invDe(q, r) {
+    var p = plano(q + ' ' + ((r.ficha && r.ficha.tit) || r.tit || '')), hit = null, ir = r.ir || (r.ficha && r.ficha.ir);
+    INV.forEach(function (f) { if (!hit && f._k.some(function (x) { return p.indexOf(x) >= 0; })) hit = f; });
+    if (!hit || (ir && sinParam(ir[0]) === hit.ir[0])) return null;
+    return { x: { ico: '📖', v: 'Ver la investigación', n: hit.tit, ir: hit.ir[0] } };
+  }
   MO.obras.forEach(function (o) { OB[o.id] = o; o._al = o.al.map(function (x) { return plano(x); }); });
   /* Nombres que también son de un municipio o de otra cosa: piden contexto de obra. */
   var MO_DEBIL = { ' tula ': 1, ' olmeca ': 1, ' texcoco ': 1, ' santa lucia ': 1, ' bunker ': 1, ' naim ': 1, ' ipab ': 1 };
@@ -1093,6 +1157,8 @@
     if (ins) return ins;
     var mo = megaobras(q, previas);
     if (mo) return mo;
+    var he = herramienta(q);
+    if (he) return he;
 
     var rc = pideRecurso(q);
     if (rc) return rc;
@@ -1155,7 +1221,7 @@
       if (r.anota && !ya) anota(q, 'sin');
       li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r, previas) +
         appDe(r) +
-        (r.plat ? '' : recursosHtml(r.rec || recursosPara(q, r))) +
+        (r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r)))) +
         (r.sug && r.sug.length ? '<p class="pa-mas-t">' + (r.tambien ? 'También te puede servir' : 'Sigue preguntando') + '</p>' + chips(r.sug) : '');
       var caja = li.querySelector('.pa-app[data-pa-abre]');
       if (caja) montaApp(caja);
