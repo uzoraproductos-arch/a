@@ -46,7 +46,8 @@
     estado: ['🧾', 'Estado de cuenta'], ficha: ['🏢', 'Ficha técnica de un ente'], municipio: ['🏙️', 'Ficha técnica de un municipio'],
     cifra: ['📋', 'Cifra oficial del catálogo'], calculo: ['🧮', 'Respuesta con datos de la plataforma'],
     ley: ['⚖️', 'Artículo de ley'], faq: ['❓', 'Pregunta del Diccionario'],
-    investigacion: ['🖼️', 'Investigación de Auditoría en imágenes']
+    investigacion: ['🖼️', 'Investigación de Auditoría en imágenes'], app: ['🧩', 'Aplicación de la plataforma'],
+    columna: ['📰', 'Columna de Noticias relevantes']
   };
   var VACIAS = ('a al ante bajo con contra de del desde donde dónde cual cuál cuales cuáles como cómo el en entre es esta este esto ' +
     'ha hay la las le lo los me mi mas más muy no nos o para pero por porque que qué quien quién se sea ser si sí sin sobre son su sus ' +
@@ -211,8 +212,11 @@
       cap('Respuesta del Auditor') + '<div class="dic-resp">' + resp + '</div>' +
       (f.txt && f.t !== 'calculo' ? '<p class="pa-nota-tx"><b>La ficha completa:</b> ' + esc(f.txt) + '</p>' : '') +
       (ci ? cap('Hallazgos: las cifras') + '<ul class="pa-cifras">' + ci + '</ul>' : '') +
+      (f.app ? cap('La aplicación y tu resultado') + '<p>La cuenta la hace <b>«' + esc(f.app.n) + '»</b>' + (f.app.par ? ', con lo que escribiste en la plática' : '') + '. ' +
+        'Para ver el resultado, o para que otra persona lo compruebe, abre la aplicación desde este enlace: <a href="' + esc(f.app.url) + '">' + esc(f.app.pag) + (f.app.par ? ' con tus datos' : '') + ' ➔</a>.</p>' +
+        '<p class="dic-chico">La aplicación calcula con la base de la plataforma vigente, así que con el mismo enlace y la misma versión da el mismo resultado.</p>' : '') +
       (pend ? cap('Lo que falta') + pend : '') +
-      cap('Fundamento documental') + (fu ? '<ol class="dic-fuentes">' + fu + '</ol>' : '<p>Esta respuesta no cita cifras: lleva a una página de la plataforma, donde cada dato trae su fuente.</p>') +
+      cap('Fundamento documental') + (fu ? '<ol class="dic-fuentes">' + fu + '</ol>' + (f.app && f.app.mas ? '<p class="dic-chico">Y ' + f.app.mas + ' documentos más, citados en la página de la aplicación.</p>' : '') : '<p>Esta respuesta no cita cifras: lleva a una página de la plataforma, donde cada dato trae su fuente.</p>') +
       cap('Método') + '<ol class="dic-metodo">' +
       '<li><b>Localización.</b> El Auditor buscó la respuesta en la base de la plataforma (' + B.fichas.length.toLocaleString('es-MX') + ' fichas), que solo guarda datos ya publicados con su documento.</li>' +
       '<li><b>Verificación.</b> Cada cifra se toma del documento oficial que se cita, sin estimar ni redondear a ojo. Las cuentas se hacen con cifras oficiales y se dice la operación.</li>' +
@@ -377,6 +381,11 @@
     out.sort(function (a, b) { return b.s - a.s; });
     return out.slice(0, 3).map(function (o) { return { x: o.x, ab: ab }; });
   }
+  function conInv(q, r, lista) {
+    var iv = r.sin ? null : invDe(q, r);
+    if (!iv || lista.some(function (o) { return sinParam(o.x.ir) === iv.x.ir; })) return lista;
+    return [iv].concat(lista).slice(0, 5);
+  }
   function recursosHtml(lista) {
     return lista && lista.length ? '<div class="pa-rec"><p class="pa-mas-t">Explóralo a fondo</p><div class="pa-rec-lista">' + lista.map(function (o) {
       return '<a class="pa-rec-a" href="' + esc(ligaRec(o.x, o.ab)) + '"><span class="pa-rec-ico" aria-hidden="true">' + o.x.ico + '</span>' +
@@ -450,7 +459,7 @@
   function appDeLiga(u) {
     var b = sinParam(u || '').replace(/\.html$/, ''), hit = null;
     if (b === 'expedientes') return APP.inspasf;
-    IN.apps.concat(MO.apps).forEach(function (a) { if (!hit && (b === a._base || b.indexOf(a._base + '-') === 0)) hit = a; });
+    IN.apps.concat(MO.apps, HA.apps).forEach(function (a) { if (!hit && (b === a._base || b.indexOf(a._base + '-') === 0)) hit = a; });
     return hit;
   }
   function appHtml(o) {
@@ -500,6 +509,22 @@
     caja.classList.remove('pa-app-abierta', 'pa-app-lista', 'pa-app-completa');
     caja.querySelector('.pa-app-usa').hidden = false;
     caja.querySelector('.pa-app-usa').focus({ preventScroll: true });
+  }
+  /* El dictamen de una aplicación usada en el chat (24-10-2026): la cuenta
+     de tu caso la hace la aplicación al abrir su enlace; el dictamen respalda
+     qué hace, con qué datos y de qué documentos salen (las fuentes las junta
+     herramientas/asistente.py de su página). El chat no pone cifras. */
+  function conApp(r) {
+    if (!r) return r;
+    if (r.espera) { r.espera = r.espera.then(conApp); return r; }
+    var a = r.app && APP[r.app.id];
+    if (a && !r.ficha) {
+      var liga = r.app.url || a.url, par = liga.indexOf('?') >= 0;
+      r.ficha = { t: 'app', tit: a.n + ' · ' + (a.grupo || 'Modo Inspector'), txt: a.desc || a.frase || '', fu: a.fu || [], ir: r.ir || [liga, a.n],
+        app: { n: a.n, url: liga, par: par, mas: Math.max(0, (a.fun || 0) - (a.fu || []).length), pag: sinParam(liga) },
+        nota: 'La aplicación hace la cuenta en tu navegador, con sus propios datos publicados' + (par ? ' y con lo que escribiste, que va en su enlace' : '') + ': el resultado se lee en ella. Este dictamen no repite ese resultado; respalda el método y los documentos.' };
+    }
+    return r;
   }
   function respApp(id, liga, html, extra) {
     var a = APP[id], r = { html: html, ir: [liga, a.n], app: { id: id, url: liga, abre: true }, sug: [], rec: [] };
@@ -737,6 +762,98 @@
   var MO = (B.dat && B.dat.mo) || { obras: [], sx: [], apps: [], tot: {}, portales: [], sims: {} }, OB = {};
   var PESO_FU = ((B.dat && B.dat.datos && B.dat.datos.peso && B.dat.datos.peso.fx) || {}).BX_INPC;
   MO.apps.forEach(function (a) { a.grupo = MO.nombre; a.tot = MO.apps.length; a._p = plano(a.n); a._c = plano(a.n.split(/,| y /)[0]); a._base = sinParam(a.url).replace(/\.html$/, ''); APP[a.id] = a; });
+  /* Costo Ambiental y la Calculadora Cívica, dentro del chat (24-10-2026,
+     pedido del autor): sus aplicaciones se reconocen por su nombre o por como
+     se dicen en la calle (ALIAS_APPS de herramientas/asistente.py) y se abren
+     en el marco de la respuesta, como las del Modo Inspector. */
+  var HA = { apps: [], de: {} };
+  [(B.dat && B.dat.amb), (B.dat && B.dat.calc)].forEach(function (h) {
+    if (!h) return;
+    h._p = plano(h.nombre);
+    h.apps.forEach(function (a) { a.grupo = h.nombre; a.tot = h.apps.length; a.h = h; a._al = [plano(a.n)].concat((a.al || []).map(plano)); a._base = sinParam(a.url).replace(/\.html$/, ''); APP[a.id] = a; HA.apps.push(a); });
+    HA.de[h.pagina] = h;
+  });
+  function respHerr(h) {
+    return {
+      html: '<p><span aria-hidden="true">' + h.ico + '</span> <b>' + esc(h.nombre) + '</b> son ' + h.apps.length + ' aplicaciones, y todas las usas desde aquí, sin salir del chat:</p><ul class="pa-lista">' +
+        h.apps.map(function (a) { return '<li><span aria-hidden="true">' + a.ico + '</span> <b>' + esc(a.n) + '.</b> ' + esc(a.frase) + '.</li>'; }).join('') + '</ul>' +
+        '<p>Dime cuál quieres y la abro aquí abajo. Empiezo por la primera:</p>',
+      ir: [h.pagina, h.nombre], app: { id: h.apps[0].id, url: h.apps[0].url }, rec: [],
+      sug: h.apps.slice(1, 4).map(function (a) { return a.n; })
+    };
+  }
+  /* «Gano 15 mil al mes, ¿cuánto me retienen?»: la Calculadora Cívica hace la
+     cuenta con la tarifa oficial del ISR; el chat no pone cifras propias. */
+  var SUELDO = /\b(gano|ganamos|mi sueldo|mi salario|mi ingreso|mis ingresos|me pagan|cobro|percibo|facturo)\b/;
+  /* La cifra que se lee es la del ingreso: la primera después de «gano»,
+     «me pagan»…, y nunca la que cuenta hijos, años o días («gano 15 mil y
+     tengo 2 hijos» usa 15,000; «tengo 2 hijos y gano 15 mil», también). */
+  var NO_ES_INGRESO = /^\s*(hijos?|hijas?|ninos?|ninas?|dependientes?|personas?|anos?|meses|semanas?|dias?|horas?|empleados?|trabajadores?|cuartos?|casas?|departamentos?|locales?|veces|%|por ciento)\b/;
+  function sueldoDe(p) {
+    var t = p.replace(/(\d) (?=\d{3}\b)/g, '$1'), re = /(\d[\d,]*(?:\.\d+)?)\s*(mil\b|k\b)?/g, m, cand = [], s = SUELDO.exec(t), desde = s ? s.index : 0;
+    while ((m = re.exec(t))) {
+      if (NO_ES_INGRESO.test(t.slice(m.index + m[0].length))) continue;
+      var v = parseFloat(m[1].replace(/,/g, '')) * (m[2] ? 1000 : 1);
+      if (v >= 100 && v < 1e9) cand.push({ v: Math.round(v * 100) / 100, i: m.index });
+    }
+    var tras = cand.filter(function (c) { return c.i >= desde; });
+    return (tras[0] || cand[0] || { v: 0 }).v;
+  }
+  /* El régimen, si el lector lo dice; si no, sueldos y salarios (lo que la
+     calculadora supone y deja cambiar). */
+  var REGIMEN = [
+    ['plataformas', /\b(uber|didi|rappi|cabify|indrive|airbnb|booking|mercado libre|amazon|plataformas? (digitales?|tecnologicas?)|por (una )?app)\b/],
+    ['resico', /\b(resico|simplificado de confianza)\b/],
+    ['arrendamiento', /\b(rento (mi|una|un)|renta de (mi|mis)|cobro (la |de )?renta|me pagan (la |de )?renta|arrendamiento|arrendador)\b/],
+    ['honorarios', /\b(honorarios|freelance|independiente|por mi cuenta|negocio propio|mi negocio|actividad empresarial|profesionista)\b/],
+    ['sueldos', /\b(sueldos? y salarios?|nomina|asalariad[oa]|mi patron|mi empresa me paga|empleado de)\b/]
+  ];
+  var PLATA = [['hospedaje', /\b(airbnb|booking|hospedaje)\b/], ['bienes', /\b(mercado libre|amazon|vendo|ventas?)\b/], ['transporte', /./]];
+  function regimenDe(p) {
+    var r = REGIMEN.filter(function (x) { return x[1].test(p); })[0], pl = null;
+    if (r && r[0] === 'plataformas') pl = PLATA.filter(function (x) { return x[1].test(p); })[0][0];
+    return { r: r ? r[0] : '', pl: pl };
+  }
+  function herramienta(q) {
+    if (!HA.apps.length) return null;
+    var p = plano(q), cc = APP.ccticket, CR = B.dat.calc || {};
+    if (cc && SUELDO.test(p) && !/\b(diputad|senador|ministr|president|gobernador|alcalde|funcionari)\w*/.test(p)) {
+      var m = sueldoDe(p), per = /\b(al ano|anual|anuales|por ano)\b/.test(p) ? 'ano' : 'mes', nat = /\b(neto|netos|libres?|en mano|ya sin impuestos)\b/.test(p) ? 'neto' : 'bruto';
+      var rg = regimenDe(p), quin = m && /\b(quincena|quincenal|quincenales)\b/.test(p), sem = m && /\b(semana|semanal|semanales)\b/.test(p), m0 = m;
+      /* Por quincena: la calculadora trabaja por mes, y un mes son dos quincenas (derivado, se dice la operación). */
+      if (quin) { m = Math.round(m * 2 * 100) / 100; per = 'mes'; }
+      if (sem) m = 0;
+      var liga = 'herramienta-calculadora-ticket-retienen.html' + (m ? '?m=' + m + '&p=' + per + '&n=' + nat + (rg.r ? '&r=' + rg.r : '') + (rg.pl ? '&pl=' + rg.pl : '') : '');
+      var regN = rg.r && CR.reg ? CR.reg[rg.r] : '', plN = rg.pl && CR.plat ? CR.plat[rg.pl] : '';
+      var hijos = /\b(hijos?|hijas?|dependientes?|esposa|esposo|familia)\b/.test(p);
+      return respApp('ccticket', liga, '<p><span aria-hidden="true">🧾</span> Esa cuenta la hace <b>' + esc(cc.n) + '</b>, de la ' + esc(cc.grupo) + ': ' +
+        (m ? 'ya le puse tu ingreso de <b>$' + m.toLocaleString('es-MX') + (per === 'ano' ? ' al año' : ' al mes') + '</b>, ' + (nat === 'neto' ? 'después' : 'antes') + ' de descuentos' +
+          (regN ? ', en <b>' + esc(regN) + '</b>' + (plN ? ' (' + esc(plN.toLowerCase()) + ')' : '') : '') + '. ' :
+          sem ? 'la calculadora trabaja por mes o por año, así que escribe ahí lo que juntas al mes (no convierto semanas: los meses no tienen semanas exactas). ' : 'escribe lo que ganas. ') +
+        'Te dice cuánto te retienen, con la tarifa oficial del ISR, y a dónde va cada peso de tu impuesto, en un documento con folio y huella.</p>' +
+        (quin ? '<p class="pa-chico">' + chip({ e: 'derivado' }) + ' <b>Operación:</b> $' + m0.toLocaleString('es-MX') + ' a la quincena × 2 quincenas = $' + m.toLocaleString('es-MX') + ' al mes.</p>' : '') +
+        (hijos ? '<p class="pa-chico">Tus hijos o tu familia no cambian lo que te retienen cada mes: la tarifa del artículo 96 de la Ley del ISR no tiene descuento por dependientes. Algunos gastos de la familia, como los médicos y hospitalarios, se deducen en la declaración anual (artículo 151), que esta cuenta no hace.</p>' : '') +
+        '<p class="pa-chico">La cuenta la hace la calculadora con las tarifas publicadas. ' + (regN ? 'Si tu régimen es otro, cámbialo ahí mismo, en «1 · Tu ingreso».' : /\bfacturo\b/.test(p) ? 'Como facturas, elige en «1 · Tu ingreso» si estás en el RESICO o en actividad empresarial, porque cambia mucho lo que pagas; mientras, supuse sueldos y salarios.' : 'Supuse que trabajas con un patrón (sueldos y salarios); si no es así, cámbialo ahí mismo, en «1 · Tu ingreso».') + '</p>',
+        { sug: ['¿A dónde va cada peso de mis impuestos?', '¿Cuánto gana un diputado comparado conmigo?', 'Mi estado de cuenta ambiental'] });
+    }
+    if (/^\s*(que|q) (es|son|significa)\b/.test(p)) return null;
+    var hit = null;
+    HA.apps.forEach(function (a) { if (!hit && a._al.some(function (x) { return x.trim().split(' ').length > 1 && p.indexOf(x) >= 0; })) hit = a; });
+    if (hit) return respApp(hit.id, hit.url, '<p><span aria-hidden="true">' + hit.ico + '</span> <b>' + esc(hit.n) + '</b> es la aplicación ' + hit.k + ' de ' + esc(hit.grupo) + '. ' + esc(hit.desc) + '</p><p>Úsala aquí abajo, sin salir del chat, o abre su página con «Saber más».</p>',
+      { sug: hit.h.apps.filter(function (a) { return a !== hit; }).slice(0, 3).map(function (a) { return a.n; }) });
+    var h = null;
+    Object.keys(HA.de).forEach(function (k) { if (!h && p.indexOf(HA.de[k]._p) >= 0) h = HA.de[k]; });
+    return h ? respHerr(h) : null;
+  }
+  /* La investigación de Auditoría en imágenes que viene al caso, al frente de
+     «Explóralo a fondo» (las frases las escribe herramientas/auditorias.py). */
+  INV.forEach(function (f) { f._k = (f.k || []).map(plano); });
+  function invDe(q, r) {
+    var p = plano(q + ' ' + ((r.ficha && r.ficha.tit) || r.tit || '')), hit = null, ir = r.ir || (r.ficha && r.ficha.ir);
+    INV.forEach(function (f) { if (!hit && f._k.some(function (x) { return p.indexOf(x) >= 0; })) hit = f; });
+    if (!hit || (ir && sinParam(ir[0]) === hit.ir[0])) return null;
+    return { x: { ico: '📖', v: 'Ver la investigación', n: hit.tit, ir: hit.ir[0] } };
+  }
   MO.obras.forEach(function (o) { OB[o.id] = o; o._al = o.al.map(function (x) { return plano(x); }); });
   /* Nombres que también son de un municipio o de otra cosa: piden contexto de obra. */
   var MO_DEBIL = { ' tula ': 1, ' olmeca ': 1, ' texcoco ': 1, ' santa lucia ': 1, ' bunker ': 1, ' naim ': 1, ' ipab ': 1 };
@@ -1086,13 +1203,135 @@
     return null;
   }
 
+  /* ============ Noticias relevantes y personajes, dentro del chat ===========
+     (24-10-2026, pedido del autor): el nombre de un personaje abre lo que la
+     plataforma pudo sostener de él (las columnas de Noticias relevantes, con
+     sus documentos) y lo menos evidente: lo que circula y no se pudo probar,
+     con el motivo. Lo que hay en internet no lo afirma el chat: ofrece las
+     búsquedas ya armadas en los portales oficiales y en las noticias, como
+     «sin verificar», y lleva a Contrasta una nota. El índice lo escribe
+     herramientas/asistente_personajes.py. */
+  var PE = (B.dat && B.dat.per) || { per: [], web: [] }, COLF = {};
+  F.forEach(function (f) { if (f.t === 'columna') COLF[f.col] = f; });
+  var PER_CTX = /\b(quien es|quien fue|quienes son|quien era|noticias?|que se sabe|que paso con|que hizo|que hay de|que dicen de|datos? curiosos?|columnas?|historia de|biografia|trayectoria|procesos?|juicios?|sentencias?|sentenciad\w*|condena\w*|denuncia\w*|acusa\w*|investigad\w*|escandalos?|polemica\w*|corrupcion|carpetas?|detenid\w*|preso|presa|carcel|prision|rumor\w*|chismes?)\b/;
+  var NOTICIAS_RE = /^\s*(las |unas |dame |muestrame |ver |quiero |que )*(noticias( relevantes)?|columnas?( del erario)?|la columna del erario|datos curiosos)\s*$/;
+  var PARTICULA = { de: 1, del: 1, la: 1, las: 1, los: 1, y: 1 };
+  function personaDe(p) {
+    var hay = null, largo = 0;
+    PE.per.forEach(function (x) { x.al.forEach(function (a) { if (p.indexOf(' ' + a + ' ') >= 0 && a.length > largo) { hay = x; largo = a.length; } }); });
+    return hay;
+  }
+  /* Lo que queda de la pregunta sin el nombre ni las palabras vacías. */
+  function sobra(p, quita, nombre) {
+    var suyo = plano(nombre);
+    quita.forEach(function (a) { p = p.split(' ' + a + ' ').join(' '); });
+    return p.trim().split(/\s+/).filter(function (w) { return w && suyo.indexOf(' ' + w + ' ') < 0 && !vacia[w] && !PARTICULA[w] && !/^(sobre|acerca|algo|cosas?|todo|informacion|info|dato|datos)$/.test(w); });
+  }
+  /* Un nombre que la plataforma no tiene («¿quién es Fulana Pérez?»): se toma
+     tal como lo escribió el lector, para buscarlo fuera. */
+  function nombreDe(q) {
+    var t = String(q).replace(/[¿?¡!.,;:«»"]/g, ' ').replace(/\s+/g, ' ').trim();
+    var m = /^(?:dime |dame |busca |investiga )?(?:quien es|quién es|quien fue|quién fue|noticias de|noticias sobre|que se sabe de|qué se sabe de|que hizo|qué hizo|que hay de|qué hay de|que dicen de|qué dicen de|que paso con|qué pasó con)\s+(.+)$/i.exec(t);
+    var n = (m ? m[1] : t).replace(/^(el|la|los|las)\s+/i, '').trim(), ws = n.split(' ');
+    if (ws.length < 2 || ws.length > 6 || n.length > 70 || /\d/.test(n)) return null;
+    var propias = ws.filter(function (w) { return /^[A-ZÁÉÍÓÚÑ]/.test(w); }).length;
+    var todas = ws.every(function (w) { return /^[A-ZÁÉÍÓÚÑ]/.test(w) || PARTICULA[norm(w)]; });
+    /* Sin «quién es…», solo si cada palabra va con mayúscula: «Rocío Nahle». */
+    if (!m && (!todas || propias < 2)) return null;
+    if (m && propias < 1 && ws.length > 4) return null;
+    return n;
+  }
+  function webHtml(nombre) {
+    var q = '"' + nombre + '"';
+    return '<div class="pa-rec pa-web"><p class="pa-mas-t">Búscalo en internet</p>' +
+      '<p class="pa-chico">Esto ya no es la plataforma: son búsquedas ya armadas con el nombre, primero en portales oficiales y al final en las noticias. ' +
+      '<b>Lo que encuentres ahí no lo verificó Auditavisión</b>: una nota de prensa no es un documento oficial, y un proceso no es una condena.</p>' +
+      '<div class="pa-rec-lista">' + PE.web.map(function (w) {
+        var u = w.site ? 'https://www.google.com/search?q=' + encodeURIComponent(q + ' ' + w.site)
+          : 'https://news.google.com/search?q=' + encodeURIComponent(q) + '&hl=es-419&gl=MX&ceid=MX:es-419';
+        return '<a class="pa-rec-a" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer"><span class="pa-rec-ico" aria-hidden="true">' + w.ico + '</span>' +
+          '<span><b>' + esc(w.n) + '</b><small>' + (w.e === 'oficial' ? 'Fuente oficial · se abre en otra pestaña ↗' : 'Prensa: sin verificar · se abre en otra pestaña ↗') + '</small></span></a>';
+      }).join('') + '</div>' +
+      '<p class="pa-chico">¿Encontraste una nota con cifras? Pégame aquí su liga y la cotejo contra los documentos oficiales, con <a href="herramienta-inspector-nota.html">Contrasta una nota</a>.</p></div>';
+  }
+  function colHtml(f, grande) {
+    var ci = (f.ci || []).slice(0, grande ? 3 : 2);
+    return '<div class="pa-col"><p class="pa-col-t">📰 <a href="' + esc(f.ir[0]) + '"><b>' + esc(f.tit) + '</b></a></p>' +
+      (f.txt ? '<p>' + esc(f.txt) + '</p>' : '') +
+      (ci.length ? '<ul class="pa-lista">' + ci.map(function (c) { return '<li><b>' + esc(c.v) + '</b> · ' + esc(c.etq) + ' ' + chip(c) + '</li>'; }).join('') + '</ul>' : '') +
+      (grande && f.dc ? '<p class="pa-col-dc"><b>💡 Dato curioso:</b> ' + esc(f.dc) + '</p>' : '') + '</div>';
+  }
+  function descHtml(per, abierto) {
+    if (!per.desc.length) return '';
+    return '<details class="pa-desc"' + (abierto ? ' open' : '') + '><summary>🧺 Lo que circula y no pudimos sostener <small>(' + per.descn + ')</small></summary>' +
+      '<p class="pa-chico">Esto se dice en prensa o en redes, pero la plataforma no encontró el documento oficial que lo pruebe. No lo afirmamos ni lo negamos: te decimos por qué se quedó fuera.</p><ul>' +
+      per.desc.map(function (d) { return '<li><b>' + esc(d.tema) + '.</b> ' + esc(d.af) + ' <span class="pa-desc-mo"><b>Por qué no:</b> ' + esc(d.mo) + '</span></li>'; }).join('') +
+      '</ul>' + (per.descn > per.desc.length ? '<p class="pa-chico">Y ' + (per.descn - per.desc.length) + ' más en <a href="' + esc(PE.pag) + '">Noticias relevantes</a>, al pie: «Lo que dejamos fuera y por qué».</p>' : '') + '</details>';
+  }
+  function respPersona(per) {
+    var cols = per.col.map(function (id) { return COLF[id]; }).filter(Boolean), f = cols[0];
+    var a = admDe(per.n), h, fu = [];
+    if (f) {
+      h = '<p>Sobre <b>' + esc(per.n) + '</b>, esto es lo que la plataforma pudo sostener con documentos, en ' +
+        (cols.length > 1 ? 'sus ' + cols.length + ' columnas' : 'su columna') + ' de <b>Noticias relevantes</b>:</p>' +
+        cols.slice(0, 3).map(function (c, i) { return colHtml(c, i === 0); }).join('');
+      (f.ci || []).slice(0, 4).forEach(function (c) { fu.push({ que: c.etq, e: c.e, fu: c.fu || (f.fu || [])[0] }); });
+    } else {
+      h = '<p>Sobre <b>' + esc(per.n) + '</b>, la plataforma todavía no tiene una columna verificada. Lo que sí tengo es lo que circula y no se pudo sostener con un documento oficial, y por qué:</p>';
+    }
+    h += descHtml(per, !f);
+    if (a) h += '<p>' + esc(a.n) + ' también tiene el <a href="radar-estado-de-cuenta.html?adm=' + encodeURIComponent(a.id) + '"><b>estado de cuenta de su administración</b></a>: deuda, gasto y lo que observó la ASF.</p>';
+    h += '<p class="pa-chico">⚖️ ' + esc((f && f.nota) || 'Un proceso no es una condena: aquí solo va lo que consta en documentos, con presunción de inocencia.') + '</p>';
+    if (f && charla) h += charla.deDonde(fu.length ? fu : (f.fu || []).slice(0, 3).map(function (x) { return { que: 'Documento', e: 'oficial', fu: x }; }));
+    h += webHtml(per.n);
+    /* Lo que la plataforma tiene de esa persona fuera de las columnas. */
+    var vistos = {}, sug = [];
+    cols.slice(3).forEach(function (c) { sug.push(c); vistos[c.tit] = 1; });
+    buscar(per.n).slice(0, 25).forEach(function (x) {
+      var t = plano(x.f.tit + ' ' + (x.f.k || '') + ' ' + (x.f.txt || ''));
+      if (sug.length < 4 && x.f.t !== 'columna' && x.f.t !== 'fuente' && !vistos[x.f.tit] && per.al.some(function (w) { return t.indexOf(' ' + w + ' ') >= 0; })) { vistos[x.f.tit] = 1; sug.push(x.f); }
+    });
+    PE.per.forEach(function (o) {
+      if (sug.length < 5 && o !== per && o.col.some(function (id) { return per.col.indexOf(id) >= 0; })) sug.push('¿Quién es ' + o.n + '?');
+    });
+    return {
+      html: h, ficha: f || null, tit: per.n,
+      ir: f ? (cols.length === 1 ? f.ir : [PE.pag, 'Noticias relevantes']) : [PE.pag, 'Noticias relevantes'],
+      sug: sug, rec: []
+    };
+  }
+  function personaje(q) {
+    if (!PE.per.length) return null;
+    var p = plano(q), n = ' ' + norm(q).replace(/[^a-z0-9ñ]+/g, ' ') + ' ';
+    if (NOTICIAS_RE.test(n.trim())) {
+      var conCol = PE.per.filter(function (x) { return x.col.length; });
+      return {
+        html: '<p>📰 <b>Noticias relevantes</b> reúne ' + PE.n + ' columnas con datos poco conocidos de personajes y hechos del dinero público. Solo entra lo que se pudo verificar con un documento oficial, y cada columna cita los suyos.</p>' +
+          '<p>Pregúntame por un personaje y te digo lo que consta y lo que circula sin pruebas. Tengo columnas de:</p><p>' +
+          conCol.map(function (x) { return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc('¿Quién es ' + x.n + '?') + '">' + esc(x.n) + '</button>'; }).join(' ') + '</p>',
+        ir: [PE.pag, 'Noticias relevantes'], sug: [], rec: []
+      };
+    }
+    var per = personaDe(p);
+    if (!per) return null;
+    var ctx = PER_CTX.test(n), nada = !sobra(p, per.al, per.n).length;
+    /* Un presidente a secas lo sigue contestando su estado de cuenta, y un
+       nombre que también es lugar (Benito Juárez) solo si se habla de personas. */
+    if ((per.pres || per.lugar) ? !ctx : !(ctx || nada)) return null;
+    return respPersona(per);
+  }
+
   function respuesta(q, previas) {
     var inv = investigacion(q);
     if (inv) return inv;
-    var ins = inspector(q, previas);
+    var pe = personaje(q);
+    if (pe) return pe;
+    var ins = conApp(inspector(q, previas));
     if (ins) return ins;
-    var mo = megaobras(q, previas);
+    var mo = conApp(megaobras(q, previas));
     if (mo) return mo;
+    var he = conApp(herramienta(q));
+    if (he) return he;
 
     var rc = pideRecurso(q);
     if (rc) return rc;
@@ -1113,8 +1352,16 @@
     }
     if (r) return r;
     var res = buscar(q);
-    if (!res.length || res[0].s < 3) return { sin: res.slice(0, 3).map(function (x) { return x.f; }) };
+    if (!res.length || res[0].s < 3) return { sin: res.slice(0, 3).map(function (x) { return x.f; }), web: nombreDe(q) };
     var f = res[0].f, vistos = {}, otras = [];
+    /* Un nombre propio que la plataforma no tiene («Ricardo Monreal Ávila»)
+       no se contesta con lo que se le parece (un municipio «de Ávila»): se
+       dice que no está y se ofrece buscarlo fuera. */
+    var nom = nombreDe(q);
+    if (nom) {
+      var nws = fichas(nom), tt = plano(f.tit);
+      if (nws.filter(function (w) { return tt.indexOf(' ' + w + ' ') >= 0; }).length * 2 < nws.length) return { sin: res.slice(0, 3).map(function (x) { return x.f; }), web: nom };
+    }
     /* Un nombre a secas («Tren Maya») pide el caso, no lo que falta de él. */
     if (f.t === 'pendiente' && intencion(q) !== 'pendiente') {
       var alt = res.slice(1, 6).filter(function (x) { return x.f.t !== 'pendiente' && x.s >= res[0].s * 0.8; })[0];
@@ -1130,6 +1377,9 @@
     r = charla ? charla.deFicha(f) : { html: '<p><b>' + esc(f.tit) + '.</b> ' + esc(f.txt) + '</p>', ficha: f, ir: f.ir };
     r.sug = otras;
     r.tambien = true;
+    /* Un nombre que la plataforma no tiene: lo que encontró se queda, y se
+       ofrece buscarlo fuera, si lo encontrado no lo nombra. */
+    if (nom && plano(f.tit + ' ' + (f.txt || '')).indexOf(plano(nom)) < 0) r.web = nom;
     return r;
   }
 
@@ -1148,14 +1398,15 @@
     var espera = r.espera ? r.espera.then(function (x) { r = x; }) : null;
     var pinta = function (li) {
       if (r.sin) {
-        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin);
+        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + (r.web ? webHtml(r.web) : '');
         if (!ya) anota(q, 'sin');
         return;
       }
       if (r.anota && !ya) anota(q, 'sin');
       li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r, previas) +
         appDe(r) +
-        (r.plat ? '' : recursosHtml(r.rec || recursosPara(q, r))) +
+        (r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r)))) +
+        (r.web ? webHtml(r.web) : '') +
         (r.sug && r.sug.length ? '<p class="pa-mas-t">' + (r.tambien ? 'También te puede servir' : 'Sigue preguntando') + '</p>' + chips(r.sug) : '');
       var caja = li.querySelector('.pa-app[data-pa-abre]');
       if (caja) montaApp(caja);

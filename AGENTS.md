@@ -400,6 +400,36 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   básico (verde suma, rojo resta), en pesos de su año y de hoy con el INPC
   de la máquina del tiempo del peso; y donde la plataforma no tiene mapa,
   el chat lleva al **simulador** de la herramienta, ya filtrado.
+- **Las cuatro herramientas viven en el chat** (24-10-2026): además del Modo
+  Inspector y de Inversión y Megaobras, las seis aplicaciones de **Costo
+  Ambiental** y las cinco de la **Calculadora Cívica** se reconocen por su
+  nombre o por cómo se dicen en la calle (`ALIAS_APPS` de
+  `herramientas/asistente.py`) y se abren en el marco del chat
+  (`herramienta()` de `asistente.js`). «Gano 15 mil al mes, ¿cuánto me
+  retienen?» abre la Calculadora con el ingreso ya puesto (`?m=&p=&n=`): la
+  cuenta la hace la calculadora, nunca el chat. **Una aplicación nueva de
+  esas dos herramientas entra sola** al catálogo, y si la gente la llama de
+  otro modo, su frase va en `ALIAS_APPS`.
+  El régimen también se lee («manejo Uber», «rento mi depa», RESICO: `&r=&pl=`).
+  Toda aplicación abierta en el chat trae **«Generar dictamen»** (`conApp()`):
+  respalda qué hace y de qué documentos salen sus datos (`_fuentes_app()`
+  los toma de su página), con el enlace que repite la cuenta; nunca copia el
+  resultado.
+- **Las investigaciones de Auditoría en imágenes salen al frente**
+  (24-10-2026): cuando la plática toca su tema (Tren Maya, Dos Bocas,
+  huachicol, Ramo 33…), «Explóralo a fondo» abre con «📖 Ver la
+  investigación». **Una investigación nueva necesita sus frases en
+  `TEMA_BOT`** de `herramientas/auditorias.py`, o la generación se detiene.
+- **Noticias relevantes vive también en el chat** (24-10-2026): el nombre
+  de un personaje abre sus columnas (con sus cifras y documentos) y lo que
+  circula sin pruebas, con el motivo (`DESCARTADO` de `columnas.js`). Lo
+  escribe `herramientas/asistente_personajes.py`: **una columna nueva entra
+  sola**; **un personaje nuevo necesita su renglón en `PERSONAJES`**, y si su
+  nombre no aparece en ninguna columna ni en lo descartado, la generación se
+  detiene. De internet el chat **solo ofrece búsquedas armadas** en portales
+  oficiales y noticias, rotuladas «sin verificar», y lleva a Contrasta una
+  nota; la función `buscar-web` devuelve solo enlaces, nunca un texto
+  redactado por la IA sobre una persona.
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).
@@ -408,10 +438,15 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   todo cálculo va como `derivado` con su operación; lo que no tiene lo dice
   y lo anota en «Lo que aún no sé».
 - **Hacia dónde va:** consultar portales externos y tener una capa de
-  inteligencia artificial que aprenda de las preguntas. Las dos necesitan
-  servidor y llaves que GitHub Pages no tiene: son decisión del autor (plan
-  en CONTEXT.md). Cuando llegue la IA, solo redacta con lo que le entregan
-  las fichas; nunca pone una cifra que no venga de un documento.
+  inteligencia artificial que aprenda de las preguntas. **La base de datos y
+  sus funciones ya están construidas** (24-10-2026, `supabase/`, explicadas en
+  `docs/BASE-DE-DATOS.md`); falta que el autor cree la cuenta y ponga las
+  llaves. La IA (`auditor-ia`) solo redacta con lo que le entregan las
+  fichas, y cada cifra de su respuesta se coteja contra ellas: si una no
+  aparece, se tira; `buscar-web` solo devuelve enlaces de sitios oficiales y
+  de una lista editorial de prensa. **Ninguna cifra fiscal vive en la base.** Todo cambio a
+  `supabase/` pasa `python3 herramientas/prueba_base_datos.py` y, si toca
+  las funciones, `deno check` y `deno test supabase/pruebas/`.
 
 ---
 

@@ -380,3 +380,17 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
   .pa-app-acc .pa-boton { flex: 1 1 100%; justify-content: center; }
 }
 @media (prefers-reduced-motion: reduce) { .pa-app-marco iframe { transition: none; } }
+/* Noticias relevantes dentro del chat (24-10-2026): las columnas de un
+   personaje, lo que circula sin pruebas y las búsquedas en internet. */
+.pa-col { margin: 10px 0; padding: 10px 14px; border-left: 4px solid #8a6d3b; border-radius: 0 12px 12px 0; background: #fbf8f2; }
+.pa-col p { margin: 0 0 6px; }
+.pa-col-t { font-size: 16px; line-height: 1.35; }
+.pa-col-t a { color: #3b2f1a; }
+.pa-col-dc { font-size: 15px; color: #4a3d22; }
+.pa-desc { margin: 12px 0 0; border: 1px dashed #c9b48a; border-radius: 12px; background: #fffdf8; padding: 2px 14px; }
+.pa-desc[open] { padding-bottom: 10px; }
+.pa-desc summary { cursor: pointer; display: flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 700; color: #4a3d22; }
+.pa-desc ul { margin: 6px 0 0; padding-left: 20px; display: grid; gap: 8px; line-height: 1.5; }
+.pa-desc-mo { display: block; color: #5a6782; }
+.pa-web { margin: 14px 0 0; padding: 10px 14px 12px; border: 1px solid #dfe5f0; border-radius: 14px; background: #f8fafc; }
+.pa-web .pa-mas-t { margin-top: 0; }

@@ -484,10 +484,101 @@ def _inspector():
     return {'apps': apps, 'pagina': h[0], 'sat': sit}
 
 
+# Cómo se dice en la calle cada aplicación de Costo Ambiental y de la
+# Calculadora Cívica (24-10-2026): el chat la reconoce por su nombre o por
+# estas frases, sin acentos. Las que no traen frase solo entran por su nombre.
+ALIAS_APPS = {
+    'amticket': ['estado de cuenta ambiental', 'ticket ambiental'],
+    'amreloj': ['reloj del dano ambiental', 'reloj ambiental', 'reloj y el ano'],
+    'ampib': ['crecimiento es real', 'pib que no alcanza', 'pib ecologico', 'pib verde'],
+    'aminversion': ['simulador de inversion ambiental', 'inversion ambiental'],
+    'amauditor': ['auditor ambiental', 'organo por organo'],
+    'herramienta-ambiente-crisis.html': ['crisis ambientales', 'crisis ambiental'],
+    'ccticket': ['estado de cuenta civico', 'ticket civico', 'calcula mi isr', 'calcular mi isr'],
+    'cccompara': ['tu contra ellos', 'yo contra ellos'],
+    'ccreloj': ['reloj de la deuda'],
+    'simulador-presupuesto.html': ['reparte el presupuesto', 'simulador del presupuesto'],
+    'radar-estado-de-cuenta.html': ['estado de cuenta administrativo'],
+}
+
+
+def _apps_de(clave):
+    """Las aplicaciones de Costo Ambiental o de la Calculadora Cívica, para
+    usarlas desde el chat como las del Modo Inspector y las de Inversión y
+    Megaobras (pedido del autor, 24-10-2026). No llevan cifras: solo dicen
+    qué hay y dónde, y el chat las abre en un marco de la respuesta."""
+    import apartados
+    h = next(x for x in apartados.HERRAMIENTAS if x[1] == clave)
+    apps = [{'id': t[0], 'k': i + 1, 'ico': t[1], 'n': t[2], 'frase': t[3], 'desc': limpio(t[4]),
+             'url': apartados.modulo_archivo(h[0], t[0]), 'al': ALIAS_APPS.get(t[0], [])} for i, t in enumerate(h[7])]
+    for a in apps:
+        if not os.path.exists(os.path.join(RAIZ, a['url'])):
+            raise SystemExit('asistente.py: la aplicacion %s no tiene pagina (%s)' % (a['id'], a['url']))
+    return {'apps': apps, 'pagina': h[0], 'nombre': h[3], 'ico': h[2]}
+
+
+OFICIAL = re.compile(r'https?://([\w-]+\.)*(gob\.mx|inegi\.org\.mx|banxico\.org\.mx|ine\.mx|scjn\.gob\.mx|coneval\.org\.mx)/')
+
+
+def _fuentes_app(url, refs, salto=True):
+    """Las fuentes que cita una aplicacion en su pagina y en sus subpaginas
+    (pedido del autor, 24-10-2026: el dictamen de lo que se usa en el chat).
+    Solo documentos oficiales: las referencias de fuentes-oficiales.html, los
+    enlaces a dominios de gobierno y los que trae en sus datos; el dictamen no
+    agrega ninguna. Si la pagina remite sus fuentes a una de la Enciclopedia
+    («De donde salen… estan en datos-…»), se toman de ahi."""
+    raiz = url.split('?')[0].split('#')[0]
+    tallo = raiz[:-5]
+    pags = [raiz] + sorted(os.path.basename(x) for x in glob.glob(os.path.join(RAIZ, tallo + '-*.html')))
+    vistos, fu, remite = set(), [], []
+
+    def suma(tx, href):
+        if href in vistos:
+            return
+        vistos.add(href)
+        fu.append({'tx': tx, 'url': href})
+
+    for pg in pags:
+        s = open(os.path.join(RAIZ, pg), encoding='utf-8').read()
+        s = re.sub(r'<(header|footer|nav)\b.*?</\1>', '', s, flags=re.S)
+        for href, tx in re.findall(r'<a [^>]*href="([^"]+)"[^>]*>(.*?)</a>', s, re.S):
+            href = html.unescape(href)
+            tx = limpio(html.unescape(re.sub(r'<[^>]+>', '', tx)).replace('↗', '').replace('➔', '').strip())
+            if tx.startswith('Ver la página'):
+                continue  # la fe de erratas del cajon de Comunidad, en todas las paginas
+            generico = not tx or re.match(r'^(\[\d+\]|ver\b|aqu[ií]\b|archivo\b|pdf\b)', tx, re.I)
+            m = re.match(r'fuentes-oficiales\.html#(ref-[\w-]+)$', href)
+            if m and m.group(1) in refs:
+                r = refs[m.group(1)]
+                cita = limpio(r['cita_apa'])
+                if r.get('url'):
+                    suma(cita[:117] + '…' if generico and len(cita) > 120 else (cita if generico else tx[:120]), r['url'])
+            elif OFICIAL.match(href):
+                suma(re.sub(r'^www\.', '', href.split('/')[2]) if generico else (tx if len(tx) <= 120 else tx[:117] + '…'), href)
+            elif re.match(r'(datos|numeros|aprende)-[\w-]+\.html$', href.split('#')[0]):
+                remite.append(href.split('#')[0])
+        for js in re.findall(r'<script type="application/json"[^>]*>(.*?)</script>', s, re.S):
+            for tx, href in re.findall(r'"fuente"\s*:\s*"([^"]{4,200})"[^{}]*?"url"\s*:\s*"(https?://[^"]+)"', js):
+                if OFICIAL.match(href):
+                    suma(limpio(tx)[:120], href)
+            for href in re.findall(r'"(https?://[^"]+)"', js):
+                host = re.sub(r'^www\.', '', href.split('/')[2])
+                if OFICIAL.match(href) and not any(x['tx'] == host for x in fu):
+                    suma(host, href)
+    if not fu and salto:
+        for pg in dict.fromkeys(remite):
+            if os.path.exists(os.path.join(RAIZ, pg)):
+                for x in _fuentes_app(pg, refs, False):
+                    suma(x['tx'], x['url'])
+    return fu
+
+
 def escribir_base():
     import pendientes
     d = pendientes.db()
-    fichas = _fichas(d) + _pendientes() + _paginas()
+    # Las columnas de Noticias relevantes (24-10-2026), con sus documentos.
+    import asistente_personajes
+    fichas = _fichas(d) + asistente_personajes.fichas() + _pendientes() + _paginas()
     cuenta = {}
     for f in fichas:
         cuenta[f['t']] = cuenta.get(f['t'], 0) + 1
@@ -502,10 +593,25 @@ def escribir_base():
     dat = _charla(d)
     rec = asistente_recursos.base([(e['a'], e['n']) for e in dat['edo']])
     dat['insp'] = _inspector()
+    # Costo Ambiental y la Calculadora Cívica, dentro del chat (24-10-2026).
+    dat['amb'] = _apps_de('ambiente')
+    dat['calc'] = _apps_de('calculadora')
+    # Los regimenes que el chat reconoce en «gano…» (lo calcula la calculadora).
+    regs = d['calculadora_civica']['regimenes']
+    dat['calc']['reg'] = {r['id']: r['nombre'] for r in regs if not r.get('hereda')}
+    dat['calc']['plat'] = {t['id']: t['nombre'] for r in regs for t in r.get('tasas', [])}
     # Inversión y Megaobras, dentro del chat (24-10-2026): sus obras, sus
     # sexenios, sus cifras y sus cinco aplicaciones.
     import asistente_megaobras
     dat['mo'] = asistente_megaobras.datos(d, dat['datos']['peso'])
+    # Los personajes de Noticias relevantes y las búsquedas en internet.
+    dat['per'] = asistente_personajes.datos()
+    # Las fuentes de cada aplicacion, para su dictamen cuando se usa en el chat.
+    refs = {r['id']: r for r in d['referencias_legales']}
+    for k in ('insp', 'mo', 'amb', 'calc'):
+        for a in dat[k]['apps']:
+            fu = _fuentes_app(a['url'], refs)
+            a['fu'], a['fun'] = fu[:15], len(fu)
 
     js = ('/* Auditavisión · Base de fichas de «Pregúntale al Auditor». La escribe\r\n'
           '   herramientas/asistente.py desde window.AUDIT_DB, el Registro de\r\n'
@@ -582,6 +688,10 @@ for _i, _e in enumerate([('¿Cuánto costó el Tren Maya?', '🚆'), ('¿En qué
                          ('Compara el AIFA con el Tren Maya', '⚖️'), ('¿Cuánto han costado las megaobras?', '🏗️'),
                          ('¿Cuánto nos cuesta el FOBAPROA?', '🏦')]):
     EJEMPLOS.insert(12 + _i * 8, _e)
+# Noticias relevantes desde el chat (24-10-2026): sus personajes, al final
+# de la tercera y la quinta tanda.
+for _i, _e in enumerate([('¿Quién es Genaro García Luna?', '📰'), ('Noticias de Elba Esther Gordillo', '📰')]):
+    EJEMPLOS.insert(17 + _i * 16, _e)
 
 
 
