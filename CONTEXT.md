@@ -80,6 +80,16 @@ regla de espacio de trabajo (`.agents/rules/`); en otras, pégalo al inicio de l
 conversación. Dos frases bastan para arrancar: «lee AGENTS.md y CONTEXT.md antes
 de tocar nada» y «trabajamos en la rama claude/funny-turing-imtm54».
 
+## Dos «Enciclopedias»: la pestaña manda (decisión del autor, 24-10-2026)
+
+Una cosa es **la plataforma Enciclopedia** (`enciclopedia.html`, la antigua de
+9 pestañas, con `assets/css`, `assets/js` y `assets/data`) y otra **la pestaña
+Enciclopedia** de Auditavisión (`enciclopedia-auditavision.html`: Números,
+Datos y Aprende). En palabras del autor, la plataforma «se va a quedar, por el
+momento, en el olvido»: sigue congelada y no recibe trabajo. **Lo importante
+ahora es la pestaña.** Cuando un pedido diga «la Enciclopedia» sin más, es la
+pestaña. Detalle en AGENTS.md §0 bis.
+
 ## Qué es el proyecto
 
 Auditavisión es una plataforma web de fiscalización ciudadana del gasto público

@@ -30,6 +30,20 @@ antes de tocar código.
   error (ver §5 ter).
 - Comunidad queda aparte, como la tercera pestaña.
 
+### 0 bis. Dos «Enciclopedias»: no son la misma cosa
+
+**Decisión del autor, 24-10-2026.** Cuando el autor (o un pedido) dice
+«Enciclopedia», se refiere a **la pestaña Enciclopedia**, salvo que diga
+expresamente lo contrario.
+
+| Nombre | Archivo | Estado |
+|---|---|---|
+| **La pestaña Enciclopedia** (Números, Datos y Aprende) | `enciclopedia-auditavision.html` y las páginas que cuelgan de sus tres tarjetas | **La que importa.** Aquí va todo el trabajo de consulta, y alimenta al Auditor Virtual. |
+| **La plataforma Enciclopedia** (la antigua, de 9 pestañas) | `enciclopedia.html`, con `assets/css`, `assets/js` y `assets/data` | **Queda en el olvido por ahora.** Congelada (§1): no se modifica, no se abre en las pruebas, no se le agregan funciones ni enlaces nuevos. Solo sirve, si acaso, de guía de temas, nunca de fuente de cifras. |
+
+Si una tarea no deja claro a cuál se refiere, se trabaja en la pestaña. Tocar
+la plataforma antigua requiere que el autor lo pida con su nombre de archivo.
+
 ---
 
 ## 1. Se trabaja en la rama, `main` es la versión entregada
