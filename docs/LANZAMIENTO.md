@@ -91,6 +91,7 @@ sin las decisiones de la fase 0.**
 | 0.4 | Imagen del Modo Inspector | Confirmar autor y licencia de las cámaras, o reemplazar por una propia | Resuelto |
 | 0.5 | **Qué da el Pase** (ver §4.4) | Rehacer su oferta antes de cobrar | Aprobada la nueva oferta |
 | 0.6 | Enciclopedia congelada | Publicarla tal cual o dejarla fuera | Elegido |
+| 0.7 | Perfil del creador (§3 bis) | Liga del canal de YouTube «Radio Meteora Records», semblanza, imagen con licencia y una línea de Fortovisión y de Cosmovisión | Entregado por el autor |
 
 ### Fase 1. La casa nueva en Vercel (semana 1-2)
 
@@ -103,6 +104,7 @@ sin las decisiones de la fase 0.**
 | 1.5 | Apuntar el dominio a Vercel (registros DNS que Vercel indica) y HTTPS automático | Tú en el registrador, agente te dice qué poner |
 | 1.6 | `SITIO = 'https://auditavision.mx/'`, `sello.py`: se actualizan `canonical`, Open Graph y `sitemap.xml`; agregar `robots.txt` | Agente |
 | 1.7 | La dirección vieja (`uzoraproductos-arch.github.io/a/`) manda a la nueva página por página | Agente |
+| 1.7 bis | Página del creador «Inspector Meteoro» y la insignia de la cabecera apuntando a ella (§3 bis) | Agente |
 | 1.8 | Corregir el error de consola y la letra chica de la vista «portal» (guardia) | Agente |
 
 **Listo cuando:** `auditavision.mx` abre igual que hoy, la vista previa de la
@@ -179,6 +181,56 @@ Capa de inteligencia artificial que redacte solo con las fichas (la llave
 del modelo en una función, nunca en el navegador), consulta de portales
 externos, licencias para universidades y medios, informe anual de
 transparencia de ingresos (compromiso de la política de independencia).
+
+## 3 bis. El perfil del creador: Inspector Meteoro
+
+Pedido del autor, 24-10-2026. Hoy la insignia «🪐 Inspector Meteoro» de la
+cabecera (en las 183 páginas generadas y en la copia a mano de `index.html`)
+lleva a `diccionario.html`. Debe llevar a **una página propia del creador**.
+
+**Qué lleva la página** (`inspector-meteoro.html`, generada por
+`herramientas/apartados.py` como las demás):
+
+| Bloque | Contenido | Estado |
+|---|---|---|
+| Presentación | Quién es Inspector Meteoro, en la voz del autor | Espera la semblanza (0.7) |
+| Sus creaciones | **Auditavisión**: en línea, con liga a la portada | Listo |
+| | **Fortovisión** | «En desarrollo», sin fecha ni promesas hasta que el autor la defina |
+| | **Cosmovisión** | «En desarrollo», igual |
+| Su canal | **Radio Meteora Records** en YouTube: botón al canal y, si el autor quiere, el último video incrustado en modo de privacidad reforzada (`youtube-nocookie.com`, sin cookies hasta que se reproduce) | Espera la liga exacta del canal |
+| Contacto | Correo del dominio (fase 2) | Espera el dominio |
+
+**Cómo queda todo vinculado:**
+
+```
+ Inspector Meteoro (inspector-meteoro.html) ◀── insignia en todas las páginas
+   ├── Auditavisión  ✅  (este sitio)
+   ├── Fortovisión   🟡  en desarrollo
+   ├── Cosmovisión   🟡  en desarrollo
+   └── YouTube: Radio Meteora Records ◀──▶ «Sitio web» del canal = la página del creador
+```
+
+- **Para Google:** la página lleva datos estructurados de persona
+  (`schema.org/Person`) con `sameAs` al canal de YouTube, y cada creación los
+  suyos (`creator`). Así los buscadores entienden que el sitio, el canal y las
+  tres creaciones son del mismo autor. `index.html` ya declara
+  `"creator": "Inspector Meteoro"`.
+- **En YouTube:** agregar la liga del sitio en el canal y asociarlo como sitio
+  oficial desde YouTube Studio (se verifica con la misma cuenta de Google de
+  Search Console, fase 6).
+- **El bot:** la página entra al índice del Auditor Virtual como las demás
+  («¿quién creó Auditavisión?» la encuentra).
+- **Dominios:** Fortovisión y Cosmovisión tendrán, cuando existan, su propio
+  dominio o un subdominio; la página del creador puede vivir en el dominio de
+  Auditavisión mientras tanto. Si el autor quiere un sitio de creador aparte
+  (por ejemplo, un dominio con su nombre), se mueve sin romper enlaces con una
+  redirección.
+
+**Puntos ciegos:** (1) no se escribe nada de Fortovisión ni de Cosmovisión que
+el autor no haya dicho: mostrar «en desarrollo» es honesto, inventar de qué
+tratan no; (2) la imagen del creador necesita origen y licencia, igual que las
+demás; (3) incrustar un video de YouTube trae contenido de un tercero: con
+`youtube-nocookie.com` y el aviso de privacidad (fase 2) queda cubierto.
 
 ## 4. La plataforma leída con «Contexto millonario»
 
