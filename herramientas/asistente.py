@@ -505,7 +505,7 @@ def escribir_base():
     # Inversión y Megaobras, dentro del chat (24-10-2026): sus obras, sus
     # sexenios, sus cifras y sus cinco aplicaciones.
     import asistente_megaobras
-    dat['mo'] = asistente_megaobras.datos(d)
+    dat['mo'] = asistente_megaobras.datos(d, dat['datos']['peso'])
 
     js = ('/* Auditavisión · Base de fichas de «Pregúntale al Auditor». La escribe\r\n'
           '   herramientas/asistente.py desde window.AUDIT_DB, el Registro de\r\n'

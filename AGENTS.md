@@ -382,7 +382,10 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   herramienta). **Una obra nueva necesita su renglón en `ALIAS`** (cómo se
   dice en la calle) y, si tiene dependencia a cargo en el Auditor de entes,
   en `ENTE`; sus cinco aplicaciones se abren en el marco del chat como las
-  del Modo Inspector.
+  del Modo Inspector. Su salud financiera es su **estado de resultados**
+  básico (verde suma, rojo resta), en pesos de su año y de hoy con el INPC
+  de la máquina del tiempo del peso; y donde la plataforma no tiene mapa,
+  el chat lleva al **simulador** de la herramienta, ya filtrado.
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).

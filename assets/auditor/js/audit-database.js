@@ -15972,7 +15972,7 @@ window.AUDIT_DB = {
           "min": 123.7,
           "max": 132.2,
           "medio": 128.0,
-          "op": "(357,887.3 ÷ 160,000.0 − 1) × 100 = 123.7 % y (357,887.3 ÷ 154,098.4 − 1) × 100 = 132.3 %; punto medio (123.7 + 132.3) ÷ 2 = 128.0 %. Compara pesos nominales y llega solo a 2024: la obra seguía en proceso, así que es una cota inferior del sobrecosto final."
+          "op": "(357,887.3 ÷ 160,000.0 − 1) × 100 = 123.7 % y (357,887.3 ÷ 154,098.4 − 1) × 100 = 132.2 %; punto medio (123.7 + 132.2) ÷ 2 = 128.0 % (127.96 con todos los decimales). Compara pesos nominales y llega solo a 2024: la obra seguía en proceso, así que es una cota inferior del sobrecosto final."
         }
       }
     },
@@ -17293,7 +17293,7 @@ window.AUDIT_DB = {
         "definiciones": {
           "inversion_presupuestada_mdp": "Entre $154,098.4 y $160,000.0 mdp; punto medio $157,049.2 mdp. El 9-05-2019, en la presentación de la obra (versión estenográfica de Presidencia), la Sener habló de una «inversión máxima de ocho mil millones de dólares» y el presidente de «160 mil millones de pesos en tres años, no más». El mínimo convierte los dólares al FIX de ese día (19.2623). El presupuesto que aprobó el consejo de Pemex sigue sin publicarse: falta de transparencia de Pemex.",
           "inversion_real_mdp": "Obra en proceso que PTI Infraestructura de Desarrollo, la filial de Pemex que construye la refinería, registró al 31-12-2024: $357,887,290.0 miles de pesos, que según la ASF «corresponde a lo registrado para construcción» de la refinería, en 6 paquetes y 17 plantas (CP 2024, auditoría 247, p. 8). Es lo acumulado en libros, sin IVA, hasta ese día: no incluye lo gastado desde 2025.",
-          "sobrecosto_pct": "Entre 123.7 % y 132.3 %; punto medio 128.0 %, con el costo registrado al 31-12-2024 ($357,887.3 mdp, ASF CP 2024, aud. 247, p. 8). La obra seguía en proceso: es una cota inferior."
+          "sobrecosto_pct": "Entre 123.7 % y 132.2 %; punto medio 128.0 %, con el costo registrado al 31-12-2024 ($357,887.3 mdp, ASF CP 2024, aud. 247, p. 8). La obra seguía en proceso: es una cota inferior."
         },
         "asfHist": [
           {

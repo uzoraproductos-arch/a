@@ -131,8 +131,8 @@ def valores():
                     'de pesos en tres años, no más» que dijo el presidente el mismo día. Punto medio (154,098.4 + 160,000.0) ÷ 2 = 157,049.2.')
     dmin, dmax = (357887.3 / db_pmax - 1) * 100, (357887.3 / db_pmin - 1) * 100
     db_sobre = {'min': r1(dmin), 'max': r1(dmax), 'medio': r1((dmin + dmax) / 2),
-                'op': '(357,887.3 ÷ 160,000.0 − 1) × 100 = 123.7 % y (357,887.3 ÷ 154,098.4 − 1) × 100 = 132.3 %; punto medio '
-                      '(123.7 + 132.3) ÷ 2 = 128.0 %. Compara pesos nominales y llega solo a 2024: la obra seguía en proceso, '
+                'op': '(357,887.3 ÷ 160,000.0 − 1) × 100 = 123.7 % y (357,887.3 ÷ 154,098.4 − 1) × 100 = 132.2 %; punto medio '
+                      '(123.7 + 132.2) ÷ 2 = 128.0 % (127.96 con todos los decimales). Compara pesos nominales y llega solo a 2024: la obra seguía en proceso, '
                       'así que es una cota inferior del sobrecosto final.'}
     bk = rango(236.9, 289.1,
                'Solo el contrato de obra civil del edificio. Mínimo: lo pagado a agosto de 2010, 206,027.9 miles más 15 % de '
@@ -175,7 +175,7 @@ def valores():
                     'máxima de ocho mil millones de dólares» y el presidente de «160 mil millones de pesos en tres años, no '
                     'más». El mínimo convierte los dólares al FIX de ese día (19.2623). El presupuesto que aprobó el consejo '
                     'de Pemex sigue sin publicarse: falta de transparencia de Pemex.',
-                'sobrecosto_pct': 'Entre 123.7 % y 132.3 %; punto medio 128.0 %, con el costo registrado al 31-12-2024 '
+                'sobrecosto_pct': 'Entre 123.7 % y 132.2 %; punto medio 128.0 %, con el costo registrado al 31-12-2024 '
                     '($357,887.3 mdp, ASF CP 2024, aud. 247, p. 8). La obra seguía en proceso: es una cota inferior.',
             },
         },

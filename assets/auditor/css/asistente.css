@@ -156,6 +156,21 @@
 .pa-tabla td { font-variant-numeric: tabular-nums; white-space: nowrap; }
 /* Las tablas de Inversión y Megaobras: sus cifras traen rangos largos, así que se acomodan en renglones. */
 .pa-tabla-ajusta td { white-space: normal; min-width: 7.5em; }
+/* La salud financiera de una obra: verde suma, rojo resta (siempre con ▲ o ▼, no solo el color). */
+.pa-verde { color: #137a3a; }
+.pa-rojo { color: #b3261e; }
+.pa-nw { white-space: nowrap; }
+.pa-er-t { margin: 14px 0 6px; }
+.pa-er td { min-width: 0; } .pa-er th, .pa-er td { padding: 8px 6px; }
+/* En celular, cada renglón del estado de resultados se lee de arriba abajo. */
+@media (max-width: 600px) {
+  .pa-er table, .pa-er tbody, .pa-er tr, .pa-er th, .pa-er td { display: block; }
+  .pa-er thead { display: none; }
+  .pa-er tr { padding: 8px 0; border-bottom: 1px solid #e3e8f1; }
+  .pa-er th, .pa-er td { border: 0; padding: 2px 4px; }
+  .pa-er td::before { content: attr(data-l) ": "; color: #44526b; font-size: 14px; }
+}
+.pa-er .pa-er-tot th, .pa-er .pa-er-tot td { background: #f6f8fb; }
 .pa-enlace { font: inherit; cursor: pointer; border: 0; background: none; padding: 0; color: #1a56b8; text-decoration: underline; min-height: 0; }
 .pa-escribe .pa-burbuja { flex: none; }
 .pa-puntos { display: inline-flex; gap: 5px; padding: 6px 2px; }

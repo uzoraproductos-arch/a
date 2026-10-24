@@ -107,6 +107,14 @@ RECURSOS = [
      'obra obras megaobra megaobras sexenio sexenios presidente presidentes linea tiempo historia invirtio construyo'),
     ('obras-duelo', '⚖️', 'Comparar', 'Dos sexenios frente a frente, por sus obras', 'herramienta-megaobras-tabla.html#mxComparar', None, 'tablero',
      'obra obras megaobra megaobras compara comparar contra versus sexenio sexenios presidente'),
+    # Sus simuladores (pedido del autor, 24-10-2026: «no hay mapas pero sí
+    # simuladores»): la simulación en vivo, el ritmo y el bolsillo.
+    ('obras-sim', '⏱️', 'Ver simulador', 'Simulación en vivo de las megaobras', 'herramienta-megaobras-sector.html#ms-vivo', None, 'simulador',
+     'obra obras megaobra megaobras simulador simulacion vivo industria sector mandato presidente pierde gana tren maya dos bocas aifa'),
+    ('obras-ritmo', '📆', 'Ver simulador', 'El ritmo de la pérdida de las megaobras', 'herramienta-megaobras-pulso-cuenta.html#mpRitmo', None, 'simulador',
+     'obra obras megaobra megaobras ritmo perdida pierden dia mes trimestre semestre ano simulador'),
+    ('obras-bolsillo', '👛', 'Ver simulador', 'Las megaobras, de la cifra a tu bolsillo', 'herramienta-megaobras-cero.html#mcMesa3', None, 'simulador',
+     'obra obras megaobra megaobras bolsillo contribuyente cada uno me toca te toca sobrecosto simulador'),
     ('obras-huella', '🌳', 'Ver huella', 'La huella ambiental de las megaobras', 'datos-ambiente-megaobras.html', None, 'tablero',
      'obra obras megaobra megaobras tren maya dos bocas ambiental ambiente huella impacto selva deforestacion manifestacion'),
 ]

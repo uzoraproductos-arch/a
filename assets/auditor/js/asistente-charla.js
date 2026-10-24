@@ -111,6 +111,8 @@
       dep: 'dependencia de la Federación' };
     /* Nombres de municipio que también son palabras comunes: solo cuentan si se dice «municipio». */
     var COMUN = ' centro reforma progreso victoria solidaridad libres union la union paz la paz general nacional independencia hidalgo morelos guerrero juarez allende zaragoza madero obregon mexico tabasco colima durango aguascalientes campeche chihuahua oaxaca puebla queretaro tlaxcala zacatecas tepic jalisco nuevo nombre jesus maria santiago san pedro trinidad libertad ';
+    /* Nombres cortos que la gente dice sin su apellido («Tula» por Tula de Allende). */
+    var MUN_CORTO = { tula: 1 };
     if (MU && MU.ent) {
       (MU.campos || []).forEach(function (c, i) { MCAMPO[c] = i - 1; });
       Object.keys(MU.ent).forEach(function (ab) {
@@ -119,7 +121,7 @@
           var m = { cve: MU.ent[ab].cve + r[0], n: r[1], a: est.a, en: est.n, v: r.length > 2 ? r.slice(1) : null };
           MUN.push(m);
           var k = plano(r[1]).trim(), ks = [k];
-          if (/ de /.test(k) && k.split(' de ')[0].length >= 6) ks.push(k.split(' de ')[0]);
+          if (/ de /.test(k) && (k.split(' de ')[0].length >= 6 || MUN_CORTO[k.split(' de ')[0]])) ks.push(k.split(' de ')[0]);
           if (k === 'juarez' && ab === 'CHIH') ks.push('ciudad juarez');
           ks.forEach(function (x) { (MIDX[x] = MIDX[x] || []).push(m); });
         });
@@ -136,7 +138,7 @@
         for (var i = 0; i + l <= ws.length; i++) {
           var k = ws.slice(i, i + l).join(' ');
           if (!MIDX[k] || k.length < 4) continue;
-          if (!quiere && (COMUN.indexOf(' ' + k.replace(/^(la|el|los|las|san|santa) /, '') + ' ') >= 0 || k.length < 5)) continue;
+          if (!quiere && (COMUN.indexOf(' ' + k.replace(/^(la|el|los|las|san|santa) /, '') + ' ') >= 0 || k.length < 5 && !MUN_CORTO[k])) continue;
           mejor = k;
           break;
         }

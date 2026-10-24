@@ -734,7 +734,8 @@
      que se abren en la respuesta como las del Modo Inspector. Las cifras y
      sus textos los escribe herramientas/asistente_megaobras.py con los
      mismos formatos de las páginas: aquí no se calcula ninguna. */
-  var MO = (B.dat && B.dat.mo) || { obras: [], sx: [], apps: [], tot: {}, portales: [] }, OB = {};
+  var MO = (B.dat && B.dat.mo) || { obras: [], sx: [], apps: [], tot: {}, portales: [], sims: {} }, OB = {};
+  var PESO_FU = ((B.dat && B.dat.datos && B.dat.datos.peso && B.dat.datos.peso.fx) || {}).BX_INPC;
   MO.apps.forEach(function (a) { a.grupo = MO.nombre; a.tot = MO.apps.length; a._p = plano(a.n); a._c = plano(a.n.split(/,| y /)[0]); a._base = sinParam(a.url).replace(/\.html$/, ''); APP[a.id] = a; });
   MO.obras.forEach(function (o) { OB[o.id] = o; o._al = o.al.map(function (x) { return plano(x); }); });
   /* Nombres que también son de un municipio o de otra cosa: piden contexto de obra. */
@@ -782,12 +783,38 @@
     });
     return f;
   }
+  function sinNA(t) { return String(t || '').replace(/^No aplica( como [^:.]*)?[:.]\s*/i, ''); }
   function chipE(c) { return chip({ e: c.e, p: c.p }); }
   function resTxt(r, corto) {
-    if (r.tipo === 'dato') return (r.v > 0 ? '▲ <b>Gana ' : r.v < 0 ? '▼ <b>Pierde ' : '<b>Sin ganancia ni pérdida ') + (r.v ? esc(r.vt) : '') + ' al año</b> ' +
+    if (r.tipo === 'dato') return (r.v > 0 ? '<b class="pa-verde">▲ Gana ' : r.v < 0 ? '<b class="pa-rojo">▼ Pierde ' : '<b>Sin ganancia ni pérdida ') + (r.v ? esc(r.vt) : '') + ' al año</b> ' +
       (corto ? '(' + r.anio + ')' : '(' + r.anio + ', ' + esc(r.base) + ')') + ' ' + chipE(r);
-    if (r.tipo === 'no_aplica') return '● <b>No aplica</b>' + (corto ? '' : ': ' + esc(r.txt));
+    if (r.tipo === 'no_aplica') return '● <b>No aplica</b>' + (corto ? '' : ': ' + esc(sinNA(r.txt)));
     return '● <b>Sin resultado publicado</b> ' + chipE({ e: 'pendiente', p: r.p }) + (corto ? '' : ' ' + esc(r.txt));
+  }
+  /* La salud financiera de la obra: su estado de resultados básico (pedido
+     del autor, 24-10-2026), en verde lo que suma y en rojo lo que resta, con
+     cada renglón en pesos de su año y en pesos de hoy (el INPC de la máquina
+     del tiempo del peso). Lo que falta dice por qué. */
+  function erHtml(o) {
+    if (!o.er || !o.er.length) return '';
+    var sig = function (v) { return v > 0 ? 'pa-verde' : v < 0 ? 'pa-rojo' : ''; };
+    var nb = function (t) { return esc(t).replace(/ mdp$/, '&nbsp;mdp'); };
+    var fila = function (x) {
+      var celda, hoy = '';
+      if (x.k === 'cob') celda = '<b>' + x.pct.toLocaleString('es-MX', { maximumFractionDigits: 1 }) + ' %</b> ' + chipE(x) + ' <small>(' + x.anio + ')</small>';
+      else if (x.v != null) {
+        celda = '<b class="pa-nw ' + sig(x.v) + '">' + (x.v > 0 ? '▲&nbsp;+' : x.v < 0 ? '▼&nbsp;−' : '') + nb(x.vt) + '</b> ' + chipE(x) + ' <small>(' + x.anio + ')</small>';
+        if (x.hoyt) hoy = '<b class="pa-nw ' + sig(x.v) + '">' + (x.v > 0 ? '+' : x.v < 0 ? '−' : '') + nb(x.hoyt) + '</b>';
+      } else celda = x.e === 'pendiente' ? chipE(x) + ' <small>' + esc(x.txt || '') + '</small>' : '<small>No aplica. ' + esc(sinNA(x.txt)) + '</small>';
+      return '<tr' + (x.k === 'bruta' || x.k === 'neta' ? ' class="pa-er-tot"' : '') + '><th scope="row">' + esc(x.et) + '</th><td data-l="En pesos de su año">' + celda + '</td><td data-l="En pesos de ' + esc(MO.mes) + '">' + (hoy || '—') + '</td></tr>';
+    };
+    return '<p class="pa-er-t">📊 <b>Su salud financiera</b>: el estado de resultados básico de la obra.</p>' +
+      '<div class="pa-tabla pa-tabla-ajusta pa-er"><table><thead><tr><th scope="col">Renglón</th><th scope="col">En pesos de su año</th><th scope="col">En pesos de ' + esc(MO.mes) + ' ' + chip({ e: 'derivado' }) + '</th></tr></thead><tbody>' +
+      o.er.map(fila).join('') +
+      '<tr><th scope="row">' + (o.resc ? 'Pagado y debido' : 'Inversión: lo que costó construirla') + '</th><td data-l="En pesos de su año"><b>' + esc(o.c.real.vt) + '</b> ' + chipE(o.c.real) + '</td><td data-l="En pesos de ' + esc(MO.mes) + '">' +
+      (o.chy ? '<b>' + esc(o.chy.vt) + '</b>' : '<small>Suma pagos de varios años: no se ajusta como un solo monto.</small>') + '</td></tr>' +
+      '</tbody></table></div><p class="pa-chico">▲ verde suma, ▼ rojo resta. Cada renglón trae su año: no todos son del mismo. La ganancia bruta solo se calcula si ingresos y gasto son del mismo año, y el resultado neto es el que publica la obra (o el de la medida de la herramienta), no una resta nuestra. ' +
+      'A pesos de hoy se lleva con el INPC, igual que en <a href="' + esc(MO.maquina) + '">la máquina del tiempo del peso</a>.</p>';
   }
   function moFuentes(o) {
     var c = o.c, l = [
@@ -795,6 +822,11 @@
       { que: (o.resc ? 'Pagado y debido' : 'Costo real') + ': ' + c.real.vt, e: c.real.e, p: c.real.p, op: c.real.op || c.real.d },
       { que: c.sob.et + ': ' + c.sob.vt, e: c.sob.e, p: c.sob.p, op: c.sob.op || c.sob.d }];
     if (o.res.tipo === 'dato') l.push({ que: 'Lo que ' + (o.res.v < 0 ? 'pierde' : 'gana') + ' al año (' + o.res.anio + ')', e: o.res.e, op: o.res.op, fu: o.res.fu[0] });
+    (o.er || []).forEach(function (x) {
+      if (x.v != null || x.pct != null) l.push({ que: x.et + ' (' + x.anio + ')', e: x.e, op: x.op, fu: (x.fu || [])[0] });
+      if (x.hoyt) l.push({ que: x.et + ' en pesos de ' + MO.mes, e: 'derivado', op: x.hop, fu: PESO_FU });
+    });
+    if (o.chy) l.push({ que: 'Costo real en pesos de ' + MO.mes, e: 'derivado', op: o.chy.op, fu: PESO_FU });
     o.fu.forEach(function (f) { l.push({ que: 'Documento de la obra', e: 'oficial', fu: f }); });
     return l;
   }
@@ -806,10 +838,12 @@
   function moRec(o) {
     var s = sxDe(o), out = [], ex = expDe(o), en = o.ente && enteDe(o.ente);
     out.push({ x: { ico: '🏭', v: 'Ver su ficha', n: 'Obra por obra, por industria', ir: o.ir.ficha } });
-    out.push({ x: { ico: '📒', v: 'Ver su cuenta', n: 'Su estado de resultados', ir: o.ir.cuenta } });
+    out.push({ x: { ico: '⏱️', v: 'Ver simulador', n: 'Simulación en vivo de su industria y su sexenio', ir: o.sim } });
+    out.push({ x: { ico: '📒', v: 'Ver su cuenta', n: 'Su estado de resultados completo', ir: o.ir.cuenta } });
     if (s && s.adm) out.push({ x: { ico: '🧾', v: 'Ver estado de cuenta', n: 'De ' + s.nom, ir: MO.expide + '?adm=' + s.adm } });
     if (en) out.push({ x: { ico: '🏢', v: 'Ver salud financiera', n: en.tit.split(' (')[0], ir: en.ir[0] } });
     if (ex) out.push({ x: { ico: '📂', v: 'Ver expediente', n: 'Su caso en la ASF', ir: ex.ir[0] } });
+    out.push({ x: { ico: '💱', v: 'Usar la máquina del tiempo', n: 'Lleva cualquier cifra a pesos de hoy', ir: MO.maquina } });
     return out;
   }
   function portalesHtml(fu) {
@@ -818,7 +852,9 @@
       return '<a href="' + esc(f.url) + '" target="_blank" rel="noopener noreferrer">' + esc(f.tx.length > 70 ? f.tx.slice(0, 68).replace(/[\s,;:]+\S*$/, '') + '…' : f.tx) + ' ↗</a>';
     }).join(' · ') + '</p>' : '';
   }
+  var MO_SIM = /\b(simulador\w*|simula\w*|en vivo|ritmo|contador|mientras miro|por segundo)\b/;
   var MO_FOCO = [
+    ['salud', /\b(salud financiera|estado de resultados|finanzas|rentab\w*|ganancia bruta|ganancia neta|utilidad\w*|numeros de la obra)\b/],
     ['sob', /\b(sobrecostos?|de mas|se paso|se excedio|desfase|encarecio|cuanto mas)\b/],
     ['res', /\b(pierde|pierden|perdio|perdida|perdidas|gana|ganan|gano|ganancia|deficit|rentable|negocio|subsidio|al ano|cada ano|nos cuesta|sigue costando)\b/],
     ['asf', /\b(asf|auditoria|auditorias|auditor|irregularidad\w*|aclarar|hallazgos?|observaciones)\b/],
@@ -826,14 +862,18 @@
     ['real', /\b(costo|costaron|cuesta|cuestan|cuanto se gasto|gastaron|pagaron|valio|cuanto salio)\b/]
   ];
   function focoDe(p) { var f = null; MO_FOCO.forEach(function (x) { if (!f && x[1].test(p)) f = x[0]; }); return f; }
-  function respObra(o, foco) {
+  function netaHoy(o) { var x = (o.er || []).filter(function (y) { return y.k === 'neta'; })[0]; return x && x.hoyt; }
+  function respObra(o, foco, sim) {
     var c = o.c, s = sxDe(o), lead = '';
     var nomP = o.resc ? 'Presentado en su momento' : 'Aprobado', nomR = o.resc ? 'Pagado y debido' : 'Costo real';
     if (foco === 'sob') lead = o.resc ? 'Es un rescate, no una obra: su «sobrecosto» es lo que creció la deuda frente a lo que se presentó, <b>' + esc(c.sob.vt) + '</b> ' + chipE(c.sob) + '.' :
       'Su sobrecosto es de <b>' + esc(c.sob.vt) + '</b> ' + chipE(c.sob) + ': se aprobaron ' + esc(c.pres.vt) + ' y costó ' + esc(c.real.vt) + '.';
-    else if (foco === 'res') lead = o.res.tipo === 'dato' ? 'Al año, ' + (o.res.v < 0 ? '<b>pierde ' : '<b>gana ') + esc(o.res.vt) + '</b> por sí misma (' + o.res.anio + ', ' + esc(o.res.base) + ') ' + chipE(o.res) + '.' :
+    else if (foco === 'res') lead = o.res.tipo === 'dato' ? 'Al año, ' + (o.res.v < 0 ? '<b class="pa-rojo">pierde ' : '<b class="pa-verde">gana ') + esc(o.res.vt) + '</b> por sí misma (' + o.res.anio + ', ' + esc(o.res.base) + ') ' + chipE(o.res) + '.' +
+      (netaHoy(o) ? ' En pesos de ' + esc(MO.mes) + ' son ' + esc(netaHoy(o)) + ' ' + chip({ e: 'derivado' }) + '.' : '') :
       o.res.tipo === 'no_aplica' ? 'No opera, así que no tiene ganancia ni pérdida del año: ' + esc(o.res.txt) : 'No publica lo que gana o pierde al año ' + chipE({ e: 'pendiente', p: o.res.p }) + ': ' + esc(o.res.txt);
     else if (foco === 'pres') lead = (o.resc ? 'Se presentó en su momento con ' : 'Se aprobó con ') + '<b>' + esc(c.pres.vt) + '</b> ' + chipE(c.pres) + '.';
+    else if (foco === 'salud') lead = 'Su salud financiera, en su estado de resultados básico: lo que ingresa, lo que gasta en operar, lo que paga de intereses y su resultado del año.' +
+      (o.res.tipo === 'dato' ? ' Cierra con ' + (o.res.v < 0 ? '<b class="pa-rojo">▼ pérdida de ' : '<b class="pa-verde">▲ ganancia de ') + esc(o.res.vt) + '</b> (' + o.res.anio + ').' : '');
     else if (foco === 'asf') lead = o.asf ? '<b>Lo que dijo la ASF:</b> ' + esc(o.asf) : 'La plataforma todavía no integra un documento de la ASF sobre esta obra ' + chip({ e: 'pendiente', p: 'obra-' + o.id }) + '.';
     else lead = (o.resc ? 'Lo pagado y lo que se sigue debiendo suma ' : 'Costó ') + '<b>' + esc(c.real.vt) + '</b> ' + chipE(c.real) + (o.resc ? '' : ', contra lo aprobado: ' + esc(c.pres.vt)) + '.';
     var h = '<p><span aria-hidden="true">' + o.ico + '</span> <b>' + esc(o.n) + '</b> · ' + esc(o.pres) + ' (' + esc(o.per) + ')' + (o.resc ? ' · <b>rescate: deuda, no obra</b>' : '') + '</p>' +
@@ -841,7 +881,7 @@
       '<li>' + nomP + ': <b>' + esc(c.pres.vt) + '</b> ' + chipE(c.pres) + '</li>' +
       '<li>' + nomR + ': <b>' + esc(c.real.vt) + '</b> ' + chipE(c.real) + '</li>' +
       '<li>' + esc(c.sob.et) + ': <b>' + esc(c.sob.vt) + '</b> ' + chipE(c.sob) + '</li>' +
-      '<li>' + resTxt(o.res) + '</li></ul>' +
+      '<li>' + resTxt(o.res) + '</li></ul>' + erHtml(o) +
       (o.asf && foco !== 'asf' ? '<p>🔍 <b>Lo que dijo la ASF:</b> ' + esc(o.asf) + '</p>' : '') +
       '<p class="pa-chico">' + o.sico + ' ' + esc(o.sec) + ' · Estatus: ' + esc(o.est) + '. «Gana o pierde» no descuenta lo que costó construirla.</p>' +
       portalesHtml(o.fu) + (charla && charla.deDonde ? charla.deDonde(moFuentes(o)) : '');
@@ -849,7 +889,7 @@
     if (o.res.tipo === 'dato') ci.push({ v: (o.res.v < 0 ? '−' : '+') + o.res.vt, etq: 'Gana o pierde al año (' + o.res.anio + ')', e: o.res.e });
     var otras = MO.obras.filter(function (x) { return x !== o && !x.resc === !o.resc; });
     return {
-      html: h, ir: [o.ir.ficha, 'su ficha en Inversión y Megaobras'], app: { id: 'mosector', url: o.ir.ficha }, rec: moRec(o),
+      html: h, ir: [o.ir.ficha, 'su ficha en Inversión y Megaobras'], app: sim ? { id: 'mosector', url: o.sim, abre: true } : foco === 'salud' ? { id: 'mocuenta', url: o.ir.cuenta } : { id: 'mosector', url: o.ir.ficha }, rec: moRec(o),
       ficha: moFicha(o.n + ': lo que costó y lo que deja', h, ci, o.fu.concat(o.res.fu || []), [o.ir.ficha, 'Inversión y Megaobras']),
       sug: [foco !== 'sob' ? '¿Y su sobrecosto?' : '¿Y cuánto pierde al año?', s && s.ids.length > 1 ? 'Obras de ' + s.n : '¿Qué megaobra tiene más sobrecosto?',
         otras.length ? 'Compara ' + o.n.split(' (')[0] + ' con ' + otras[0].n : '¿Cuánto han costado las megaobras?']
@@ -889,6 +929,7 @@
     if (charla && charla.deDonde && ob.length) h += charla.deDonde([{ que: 'Costo registrado de las obras de ' + s.n, e: 'derivado', op: 'suma del costo registrado de ' + ob.map(function (o) { return o.n; }).join(', ') }]
       .concat(ob.map(function (o) { return { que: o.n + ': costo real', e: o.c.real.e, p: o.c.real.p, op: o.c.real.op || o.c.real.d, fu: o.fu[0] }; })));
     var rec = [{ x: { ico: '🏛️', v: 'Ver sus obras', n: 'En qué invirtió cada presidente', ir: s.ir } }];
+    if (ob.length) rec.push({ x: { ico: '⏱️', v: 'Ver simulador', n: 'Sus obras en vivo, filtradas por su sexenio', ir: s.sim } });
     if (s.adm) rec.push({ x: { ico: '🧾', v: 'Ver estado de cuenta', n: 'De ' + s.nom, ir: MO.expide + '?adm=' + s.adm } });
     rec.push({ x: { ico: '🕰️', v: 'Ver línea del tiempo', n: 'Las megaobras de 1988 a 2024', ir: APP.motabla.url + '#mxLinea' } });
     var otro = MO.sx.filter(function (x) { return x !== s && x.ids.length; }).slice(-1)[0];
@@ -955,7 +996,8 @@
       })) : '');
     var app = cual === 'pierde' || cual === 'gana' ? 'mocuenta' : 'mosector';
     return {
-      html: h, ir: [APP[app].url, APP[app].n], app: { id: app, url: APP[app].url }, rec: moRec(top).slice(0, 2),
+      html: h, ir: [APP[app].url, APP[app].n], app: { id: app, url: APP[app].url },
+      rec: [{ x: { ico: '📊', v: 'Ver simulador', n: 'La comparativa, ordenada así', ir: MO.sims.orden.replace('%s', { sob: 'sobrecosto', real: 'inversion', pierde: 'perdida', gana: 'perdida' }[cual]) } }].concat(moRec(top).slice(0, 1)),
       ficha: moFicha('Megaobras ordenadas por ' + et, h, l.slice(0, 6).map(function (o) { return { v: cual === 'sob' || cual === 'real' ? o.c[cual].vt : o.res.vt, etq: o.n + ': ' + et, e: (cual === 'sob' || cual === 'real' ? o.c[cual] : o.res).e }; }),
         [].concat.apply([], l.slice(0, 6).map(function (o) { return o.fu.slice(0, 1); })), [APP[app].url, 'Inversión y Megaobras']),
       sug: ['¿Cuánto costó ' + top.n.split(' (')[0] + '?', cual !== 'pierde' ? '¿Qué megaobra pierde más?' : '¿Qué megaobra tiene más sobrecosto?', '¿En qué invirtió cada presidente?']
@@ -978,9 +1020,11 @@
         { que: 'Lo que pierden al año', e: 'derivado', op: 'suma del resultado del año más reciente de cada obra que lo publica (' + T.anios.join(', ') + ')' }].concat(MO.portales.map(function (f) { return { que: 'Portal oficial', e: 'oficial', fu: f }; }))) : '');
     return {
       html: h, ir: [MO.pagina, MO.nombre], app: { id: 'mocero', url: APP.mocero.url }, rec: [
+        { x: { ico: '⏱️', v: 'Ver simulador', n: 'Simulación en vivo, obra por obra', ir: MO.sims.vivo } },
+        { x: { ico: '📆', v: 'Ver simulador', n: 'El ritmo de la pérdida: por día, mes o año', ir: MO.sims.ritmo } },
+        { x: { ico: '👛', v: 'Ver simulador', n: 'De la cifra agregada a tu bolsillo', ir: MO.sims.bolsillo } },
         { x: { ico: '🚦', v: 'Ver contador', n: 'Lo que gana o pierde cada obra, en vivo', ir: APP.motabla.url } },
-        { x: { ico: '🕰️', v: 'Ver línea del tiempo', n: 'Las megaobras de 1988 a 2024', ir: APP.motabla.url + '#mxLinea' } },
-        { x: { ico: '🌳', v: 'Ver huella', n: 'La huella ambiental de las megaobras', ir: 'datos-ambiente-megaobras.html' } }],
+        { x: { ico: '💱', v: 'Usar la máquina del tiempo', n: 'Lleva cualquier cifra a pesos de hoy', ir: MO.maquina } }],
       ficha: moFicha('Las cuatro cifras de las megaobras', h, [{ v: T.realt, etq: 'Costo real de las obras', e: 'derivado' }, { v: T.brechat, etq: 'Pagado de más', e: 'derivado' },
         { v: (T.neto < 0 ? '−' : '+') + T.netot, etq: 'Ganancia o pérdida del año', e: 'derivado' }], MO.portales, [MO.pagina, MO.nombre]),
       sug: ['¿En qué invirtió cada presidente?', '¿Qué megaobra tiene más sobrecosto?', '¿Cuánto costó el Tren Maya?']
@@ -1012,7 +1056,7 @@
       /* «¿Qué es el FOBAPROA?» lo contesta el glosario. */
       if (defin && obs[0].resc) return null;
       if (obs.length > 1) return respDuelo(obs[0], obs[1]);
-      return respObra(obs[0], foco);
+      return respObra(obs[0], foco, MO_SIM.test(p));
     }
     /* 3. En qué invirtió un presidente (o dos, frente a frente). */
     if (/\b(obras?|megaobras?|invirti\w*|construy\w*|proyectos?|inversiones)\b/.test(p) && !/\binversion fisica\b/.test(p)) {
@@ -1032,6 +1076,12 @@
       if (/\b(cara|caras|costosa|costosas|costo|costaron|cuesta)\b/.test(p)) return respRank('real', asc);
     }
     /* 5. Las megaobras en conjunto. */
+    if ((pideTodo || /\bobras?\b/.test(p)) && MO_SIM.test(p) && !defin) {
+      var rs = respMoTodo(false);
+      rs.app = { id: 'mosector', url: MO.sims.vivo, abre: true };
+      rs.html = '<p>⏱️ Te abro aquí abajo la <b>simulación en vivo</b> de «Obra por obra»: lo que cada megaobra gana o pierde mientras miras, filtrable por industria y por presidente. También tienes el ritmo de la pérdida (por día, mes o año) y «de la cifra a tu bolsillo», en «Explóralo a fondo».</p>' + rs.html;
+      return rs;
+    }
     if (pideTodo && !defin) return respMoTodo(/\b(que puedo|aplicaciones|que hay|como uso|que hace)\b/.test(p) || /^\s*(inversion y megaobras|megaobras)\s*$/.test(p));
     return null;
   }
