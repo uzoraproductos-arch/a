@@ -354,6 +354,12 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   **un mapa, reloj, contador o simulador nuevo no está terminado hasta que
   tiene ahí su renglón**, y si un enlace o un ancla deja de existir, la
   generación se detiene. Así la Enciclopedia alimenta al Auditor.
+- **Cada estado y cada municipio tiene sus cuatro documentos** (24-10-2026):
+  estado de cuenta, salud financiera, dictamen y ritmo en vivo, en su ficha
+  del Auditor de entes. El contador «en vivo» es la cifra anual oficial
+  repartida entre los 31,536,000 segundos del año: va como `derivado`, con
+  su operación y con lo que no dice; nunca se presenta como dinero que se
+  mueve en tiempo real.
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).

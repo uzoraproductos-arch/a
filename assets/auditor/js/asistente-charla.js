@@ -1318,6 +1318,8 @@
       var quiereMun = MUN_KW.test(t);
       var mm = !define && (quiereMun || !es.length) ? municipio(resto, quiereMun, es, pideOrden || /cuales|que municipios/.test(t)) : null;
       if (!mm && !es.length && ctx.tipo === 'mun' && ctx.mun && sigue && !pideOrden && metrica(t, MET_MUN)) mm = { m: ctx.mun, otros: [] };
+      /* «Zapopan, Jalisco»: un municipio de ese mismo estado cuenta aunque no se diga «municipio» (24-10-2026). */
+      if (!mm && !define && !quiereMun && es.length === 1 && !pideOrden) { var me = municipio(resto, false, es, false); if (me && me.m.a === es[0].a) mm = me; }
       if (mm || (quiereMun && (pideOrden || /cuales|que municipios|municipios (de|del) .* (mas|menos)/.test(t)))) {
         var km = metrica(t, MET_MUN) || (sigue && ctx.tipo === 'mun' ? ctx.met : '');
         if (!mm) return fin(conLiga(munRanking(km, dir, cuantos, es[0]), 'numeros-baja-al-territorio.html', 'Baja al territorio'), { tipo: 'mun', met: km });

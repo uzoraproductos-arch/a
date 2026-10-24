@@ -52,11 +52,11 @@ ESTADOS_CUENTA = [
      'El cargo de ministra o ministro: su remuneración, su ponencia y sus asesores.',
      'corte suprema ministro ministros ministra ministras scjn judicial'),
     ('estado', 'Estado de cuenta de mi estado', '🗺️', 'El estado de cuenta de tu estado', 'herramienta-inspector-entes.html#ente=estatal:%s',
-     'La ficha técnica de cada uno de los 32 gobiernos estatales: si gastó lo que aprobó, si rindió cuentas y qué dejó por aclarar.',
-     'estado estados entidad entidades estatal gobierno'),
+     'La ficha técnica de cada uno de los 32 gobiernos estatales: si gastó lo que aprobó, si rindió cuentas, qué dejó por aclarar, su salud financiera, su dictamen y su ritmo en vivo.',
+     'estado estados entidad entidades estatal gobierno salud financiera dictamen'),
     ('municipio', 'Estado de cuenta de mi municipio', '🏙️', 'El estado de cuenta de tu municipio', 'herramienta-inspector-entes.html?nivel=municipal',
-     'La ficha técnica de cada uno de los 2,479 municipios: sus cuentas ante el INEGI, sus fondos federales y lo que observó la ASF.',
-     'municipio municipios municipal alcaldia ayuntamiento'),
+     'La ficha técnica de cada uno de los 2,479 municipios: sus cuentas ante el INEGI, sus fondos federales, lo que observó la ASF, su salud financiera, su dictamen y su ritmo en vivo.',
+     'municipio municipios municipal alcaldia ayuntamiento salud financiera dictamen'),
 ]
 
 # (id, icono, verbo del boton, nombre, enlace, enlace con estado o None,

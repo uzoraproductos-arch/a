@@ -288,6 +288,16 @@
 .ie-chipa { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 14px; border-radius: 999px; background: #ffffff; border: 1px solid #c9d2e3;
   color: var(--ie-azul) !important; font-weight: 600; font-size: 15px; text-decoration: none; }
 .ie-chipa:hover { border-color: var(--ie-acento); }
+/* Sus documentos y el ritmo, en vivo (24-10-2026). */
+.ie-docs { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 14px 0 0; }
+.ie-docs-et { font-size: 15px; color: var(--ie-suave); }
+.ie-docs .ie-chipas { margin-top: 0; }
+button.ie-chipa { cursor: pointer; font-family: inherit; }
+.ie-h3[tabindex] { scroll-margin-top: 90px; }
+.ie-h3[tabindex]:focus { outline: none; }
+.ie-vivo { margin: 0; padding: 16px; border-radius: 14px; background: var(--ie-fondo); border: 1px solid var(--ie-borde); }
+.ie-vivo-et { margin: 0; font-size: 16px; font-weight: 600; line-height: 1.45; }
+.ie-vivo-num { margin: 6px 0 10px; font: 800 34px/1.15 'JetBrains Mono', ui-monospace, monospace; color: var(--ie-azul); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
 .ie-exp-pie { margin: 22px 0 0; padding-top: 12px; border-top: 1px solid var(--ie-borde); }
 
 /* --- Método --- */
@@ -338,6 +348,7 @@
   .ie-mini-v { white-space: normal; }
   .ie-inc { padding: 12px; }
   .ie-inc-par { grid-template-columns: 1fr; }
+  .ie-vivo-num { font-size: 26px; }
 }
 /* Descargar en PDF: solo la hoja de la ficha técnica, sin botones ni página alrededor. */
 @media print {
@@ -353,6 +364,7 @@
   .ie-ft-sello { grid-template-columns: 96px 1fr; justify-items: start; text-align: left; }
   .ie-ft-sello-svg { width: 92px; height: 92px; }
   .ie-exp-marco details { break-inside: avoid; }
+  .ie-docs { display: none !important; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ie-circ-aro, .ie-eje-barra, .ie-tarj, .ie-aviso { transition: none; }

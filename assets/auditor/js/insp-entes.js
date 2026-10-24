@@ -1008,6 +1008,77 @@
         usadas.map(function (k) { return ' · ' + esc(D.fP[k].corto) + refFed(k); }).join('') + '.', ente);
   }
 
+  /* ---------------- Sus documentos y el ritmo, en vivo ---------------- */
+  /* Pedido del autor (24-10-2026): cada estado y cada municipio con su estado
+     de cuenta, su salud financiera, su dictamen y un contador «en vivo». No
+     hay dato al segundo: el contador reparte la cifra anual oficial en partes
+     iguales entre los 31,536,000 segundos de un año de 365 días, la misma
+     base del reloj de la deuda (cc_reloj.py). Es un ritmo promedio y va como
+     derivado, con su operación; no entra en la huella de la ficha, que firma
+     las cifras y no el reloj. */
+  var SEG_ANO = 31536000, DICTAMEN = 'herramienta-inspector-dictamen.html', vivoT = null;
+  /* 1 de enero a las 0:00 del centro de México (UTC−6, sin horario de verano desde 2022). */
+  function inicioAnio(a) { return Date.UTC(a, 0, 1, 6); }
+  function ritmo(ente) {
+    if (ente.nivel === 'estatal') {
+      var e = ente.est;
+      return e.gasto > 0 ? { anual: e.gasto, anio: 2026, base: 'Ramos 28 y 33 de 2026', corre: true } : null;
+    }
+    var c = munCifras(ente);
+    return c && c.ing > 0 ? { anual: c.ing, anio: 2024, base: 'ingresos totales de 2024 (INEGI)', corre: false } : null;
+  }
+  function pesosVivo(v, dec) { return '$' + v.toLocaleString('es-MX', { minimumFractionDigits: dec, maximumFractionDigits: dec }); }
+  function preguntaDictamen(ente) {
+    return ente.nivel === 'estatal' ? 'Estado de cuenta de ' + ente.nombre
+      : 'Estado de cuenta del municipio ' + ente.nombre + ', ' + (ente.est ? ente.est.name : ente.abbr);
+  }
+  function docsHtml(ente) {
+    return '<nav class="ie-docs" aria-label="Sus documentos"><b class="ie-docs-et">Sus documentos</b><span class="ie-chipas">' +
+      '<button type="button" class="ie-chipa" data-salta="ieSecCuenta"><span aria-hidden="true">🧾</span> Estado de cuenta</button>' +
+      '<button type="button" class="ie-chipa" data-salta="ieSecSalud"><span aria-hidden="true">🩺</span> Salud financiera</button>' +
+      '<button type="button" class="ie-chipa" data-salta="ieSecVivo"><span aria-hidden="true">⏱️</span> En vivo</button>' +
+      '<a class="ie-chipa" href="' + DICTAMEN + '?q=' + encodeURIComponent(preguntaDictamen(ente)) + '" target="_blank" rel="noopener"><span aria-hidden="true">📜</span> Generar dictamen</a>' +
+      '</span></nav>';
+  }
+  function vivoHtml(ente) {
+    var r = ritmo(ente);
+    var tit = '<h3 class="ie-h3" id="ieSecVivo" tabindex="-1">El ritmo, en vivo</h3>';
+    if (!r) return tit + '<div class="ie-nota"><b>Sin contador.</b> Hace falta su cifra anual oficial, y ' +
+      (ente.abbr === 'CDMX' ? 'las alcaldías no rinden cuenta municipal ante el INEGI.' : 'este municipio no entregó su cuenta de 2024 al INEGI.') + '</div>';
+    var pesos = r.anual * 1e6, dia = pesos / 365, hora = dia / 24, min = hora / 60, seg = pesos / SEG_ANO;
+    var desde = r.corre ? inicioAnio(r.anio) : 0, hasta = r.corre ? inicioAnio(r.anio + 1) : 0, cerrado = r.corre && Date.now() >= hasta;
+    var et = ente.nivel === 'estatal'
+      ? (cerrado ? 'Lo que le llegó de la Federación en todo ' + r.anio : 'Lo que le ha llegado de la Federación en lo que va de ' + r.anio + ', al ritmo promedio')
+      : 'Lo que ingresa al ritmo de ' + r.anio + ', mientras lees esta ficha';
+    return tit +
+      '<section class="ie-vivo" aria-label="El ritmo, en vivo" data-seg="' + seg + '" data-desde="' + desde + '" data-hasta="' + hasta + '">' +
+      '<p class="ie-vivo-et">' + et + ' ' + chip('derivado') + '</p>' +
+      '<p class="ie-vivo-num"><span class="ie-vivo-v">' + pesosVivo(0, r.corre ? 0 : 2) + '</span></p>' +
+      celdas([['Al día ' + chip('derivado'), pesosVivo(dia, 0)], ['Por hora ' + chip('derivado'), pesosVivo(hora, 0)],
+        ['Por minuto ' + chip('derivado'), pesosVivo(min, 0)], ['Por segundo ' + chip('derivado'), pesosVivo(seg, 2)]]) +
+      '<p class="ie-formula"><b>Operación:</b> ' + r.base + ' (' + simMdp(r.anual) + ', oficial) ÷ 365 días = al día; ÷ 24 = por hora; ÷ 60 = por minuto; ÷ 60 = por segundo. ' +
+      (r.corre ? 'El contador multiplica lo de un segundo por los segundos que van desde el 1 de enero de ' + r.anio + ' a las 0:00, hora del centro de México.'
+        : 'El contador multiplica lo de un segundo por los segundos que llevas en esta ficha: no corre desde el 1 de enero porque la cifra es de ' + r.anio + ', no de este año.') + '</p>' +
+      '<p class="ie-formula"><b>Lo que este contador no dice.</b> Es un promedio parejo, no el movimiento real de la cuenta: ' +
+      (ente.nivel === 'estatal'
+        ? 'Hacienda no transfiere al segundo. Las participaciones se pagan cada mes y las aportaciones según los calendarios que publica en el Diario Oficial; lo efectivamente pagado se lee en sus informes trimestrales.'
+        : 'el ayuntamiento reportó al INEGI el total del año, no cuándo entró cada peso. Los cobros propios y las transferencias llegan en fechas distintas a lo largo del año.') + '</p>' +
+      '</section>';
+  }
+  function arrancarVivo(cont) {
+    clearInterval(vivoT);
+    var s = cont.querySelector('.ie-vivo');
+    if (!s) return;
+    var seg = +s.getAttribute('data-seg'), desde = +s.getAttribute('data-desde'), hasta = +s.getAttribute('data-hasta'), t0 = Date.now(), v = s.querySelector('.ie-vivo-v');
+    var paso = function () {
+      if (!s.isConnected) { clearInterval(vivoT); return; }
+      var ahora = Date.now(), t = desde ? (Math.min(ahora, hasta) - desde) / 1000 : (ahora - t0) / 1000;
+      v.textContent = pesosVivo(Math.max(0, seg * t), desde ? 0 : 2);
+    };
+    paso();
+    vivoT = setInterval(paso, reducido ? 1000 : 100);
+  }
+
   function expLocal(ente) {
     var esEstado = ente.nivel === 'estatal', e = ente.est, dg = diag(ente), ej = ejes(ente), i = indice(ej);
     var ident;
@@ -1038,13 +1109,15 @@
       : '<div class="ie-nota"><b>Para seguir:</b> <span class="ie-chipas">' + (e ? '<a class="ie-chipa" href="#ente=estatal:' + e.abbr + '">🗺️ El gobierno de ' + esc(e.name) + '</a>' : '') +
         '<a class="ie-chipa" href="numeros-los-municipios.html">🏙️ Los municipios, en Números</a></span></div>';
     return cabecera(ente, 'Expediente ' + (esEstado ? 'estatal' : 'municipal'), ente.sub) +
+      docsHtml(ente) +
       resumenHtml(dg) +
       incHtml(dg, esEstado ? 'el gobierno del estado y a Hacienda, que deben conciliar sus registros' : 'el ayuntamiento, que firmó los dos reportes') +
-      '<h3 class="ie-h3">Ficha</h3>' + celdas(ident) +
+      '<h3 class="ie-h3" id="ieSecCuenta" tabindex="-1">Su estado de cuenta</h3>' + celdas(ident) +
       (esEstado ? estPoderes(e) : '') +
       '<h3 class="ie-h3">Las preguntas, una por una</h3>' + senalesHtml(dg) +
       (esEstado ? radarHtml(e) : '') +
-      '<h3 class="ie-h3">El círculo de salud financiera</h3>' + circuloHtml(ej, i, esEstado) +
+      '<h3 class="ie-h3" id="ieSecSalud" tabindex="-1">El círculo de salud financiera</h3>' + circuloHtml(ej, i, esEstado) +
+      vivoHtml(ente) +
       verMas + pie(fuentes, ente);
   }
 
@@ -1082,6 +1155,7 @@
     cont.hidden = false;
     firma(cont.querySelector('.ie-exp-marco'));
     animar(cont);
+    arrancarVivo(cont);
     pintarTodo();
     document.title = ente.nombre + ' · Auditor de entes públicos · Auditavisión';
     var t = document.getElementById('ieExpTit');
@@ -1285,6 +1359,7 @@
     if (b.hasAttribute('data-reintentar')) { pintarLista(); return; }
     if (b.hasAttribute('data-cerrar')) { cerrar(); return; }
     if (b.hasAttribute('data-pdf')) { window.print(); return; }
+    if (b.hasAttribute('data-salta')) { var d = document.getElementById(b.getAttribute('data-salta')); if (d) { irA(d); d.focus({ preventScroll: true }); } return; }
     if (b.getAttribute('data-copiar') === 'ficha') { copiar(textoFicha(), '✓ Ficha del expediente copiada. Pégala donde quieras.'); return; }
     if (b.getAttribute('data-copiar') === 'enlace') { copiar(location.href, '✓ Enlace copiado: abre directo este expediente.'); return; }
   });
