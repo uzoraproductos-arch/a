@@ -46,7 +46,7 @@
     estado: ['🧾', 'Estado de cuenta'], ficha: ['🏢', 'Ficha técnica de un ente'], municipio: ['🏙️', 'Ficha técnica de un municipio'],
     cifra: ['📋', 'Cifra oficial del catálogo'], calculo: ['🧮', 'Respuesta con datos de la plataforma'],
     ley: ['⚖️', 'Artículo de ley'], faq: ['❓', 'Pregunta del Diccionario'],
-    investigacion: ['🖼️', 'Investigación de Auditoría en imágenes']
+    investigacion: ['🖼️', 'Investigación de Auditoría en imágenes'], app: ['🧩', 'Aplicación de la plataforma']
   };
   var VACIAS = ('a al ante bajo con contra de del desde donde dónde cual cuál cuales cuáles como cómo el en entre es esta este esto ' +
     'ha hay la las le lo los me mi mas más muy no nos o para pero por porque que qué quien quién se sea ser si sí sin sobre son su sus ' +
@@ -211,8 +211,11 @@
       cap('Respuesta del Auditor') + '<div class="dic-resp">' + resp + '</div>' +
       (f.txt && f.t !== 'calculo' ? '<p class="pa-nota-tx"><b>La ficha completa:</b> ' + esc(f.txt) + '</p>' : '') +
       (ci ? cap('Hallazgos: las cifras') + '<ul class="pa-cifras">' + ci + '</ul>' : '') +
+      (f.app ? cap('La aplicación y tu resultado') + '<p>La cuenta la hace <b>«' + esc(f.app.n) + '»</b>' + (f.app.par ? ', con lo que escribiste en la plática' : '') + '. ' +
+        'Para ver el resultado, o para que otra persona lo compruebe, abre la aplicación desde este enlace: <a href="' + esc(f.app.url) + '">' + esc(f.app.pag) + (f.app.par ? ' con tus datos' : '') + ' ➔</a>.</p>' +
+        '<p class="dic-chico">La aplicación calcula con la base de la plataforma vigente, así que con el mismo enlace y la misma versión da el mismo resultado.</p>' : '') +
       (pend ? cap('Lo que falta') + pend : '') +
-      cap('Fundamento documental') + (fu ? '<ol class="dic-fuentes">' + fu + '</ol>' : '<p>Esta respuesta no cita cifras: lleva a una página de la plataforma, donde cada dato trae su fuente.</p>') +
+      cap('Fundamento documental') + (fu ? '<ol class="dic-fuentes">' + fu + '</ol>' + (f.app && f.app.mas ? '<p class="dic-chico">Y ' + f.app.mas + ' documentos más, citados en la página de la aplicación.</p>' : '') : '<p>Esta respuesta no cita cifras: lleva a una página de la plataforma, donde cada dato trae su fuente.</p>') +
       cap('Método') + '<ol class="dic-metodo">' +
       '<li><b>Localización.</b> El Auditor buscó la respuesta en la base de la plataforma (' + B.fichas.length.toLocaleString('es-MX') + ' fichas), que solo guarda datos ya publicados con su documento.</li>' +
       '<li><b>Verificación.</b> Cada cifra se toma del documento oficial que se cita, sin estimar ni redondear a ojo. Las cuentas se hacen con cifras oficiales y se dice la operación.</li>' +
@@ -506,6 +509,22 @@
     caja.querySelector('.pa-app-usa').hidden = false;
     caja.querySelector('.pa-app-usa').focus({ preventScroll: true });
   }
+  /* El dictamen de una aplicación usada en el chat (24-10-2026): la cuenta
+     de tu caso la hace la aplicación al abrir su enlace; el dictamen respalda
+     qué hace, con qué datos y de qué documentos salen (las fuentes las junta
+     herramientas/asistente.py de su página). El chat no pone cifras. */
+  function conApp(r) {
+    if (!r) return r;
+    if (r.espera) { r.espera = r.espera.then(conApp); return r; }
+    var a = r.app && APP[r.app.id];
+    if (a && !r.ficha) {
+      var liga = r.app.url || a.url, par = liga.indexOf('?') >= 0;
+      r.ficha = { t: 'app', tit: a.n + ' · ' + (a.grupo || 'Modo Inspector'), txt: a.desc || a.frase || '', fu: a.fu || [], ir: r.ir || [liga, a.n],
+        app: { n: a.n, url: liga, par: par, mas: Math.max(0, (a.fun || 0) - (a.fu || []).length), pag: sinParam(liga) },
+        nota: 'La aplicación hace la cuenta en tu navegador, con sus propios datos publicados' + (par ? ' y con lo que escribiste, que va en su enlace' : '') + ': el resultado se lee en ella. Este dictamen no repite ese resultado; respalda el método y los documentos.' };
+    }
+    return r;
+  }
   function respApp(id, liga, html, extra) {
     var a = APP[id], r = { html: html, ir: [liga, a.n], app: { id: id, url: liga, abre: true }, sug: [], rec: [] };
     Object.keys(extra || {}).forEach(function (k) { r[k] = extra[k]; });
@@ -764,23 +783,56 @@
   }
   /* «Gano 15 mil al mes, ¿cuánto me retienen?»: la Calculadora Cívica hace la
      cuenta con la tarifa oficial del ISR; el chat no pone cifras propias. */
-  var SUELDO = /\b(gano|ganamos|mi sueldo|mi salario|mi ingreso|mis ingresos|me pagan|cobro|percibo)\b/;
+  var SUELDO = /\b(gano|ganamos|mi sueldo|mi salario|mi ingreso|mis ingresos|me pagan|cobro|percibo|facturo)\b/;
+  /* La cifra que se lee es la del ingreso: la primera después de «gano»,
+     «me pagan»…, y nunca la que cuenta hijos, años o días («gano 15 mil y
+     tengo 2 hijos» usa 15,000; «tengo 2 hijos y gano 15 mil», también). */
+  var NO_ES_INGRESO = /^\s*(hijos?|hijas?|ninos?|ninas?|dependientes?|personas?|anos?|meses|semanas?|dias?|horas?|empleados?|trabajadores?|cuartos?|casas?|departamentos?|locales?|veces|%|por ciento)\b/;
   function sueldoDe(p) {
-    var m = /(\d[\d,]*(?:\.\d+)?)\s*(mil)?\b/.exec(p.replace(/(\d) (?=\d{3}\b)/g, '$1'));
-    if (!m) return 0;
-    var v = parseFloat(m[1].replace(/,/g, '')) * (m[2] ? 1000 : 1);
-    return v >= 100 && v < 1e9 ? Math.round(v) : 0;
+    var t = p.replace(/(\d) (?=\d{3}\b)/g, '$1'), re = /(\d[\d,]*(?:\.\d+)?)\s*(mil\b|k\b)?/g, m, cand = [], s = SUELDO.exec(t), desde = s ? s.index : 0;
+    while ((m = re.exec(t))) {
+      if (NO_ES_INGRESO.test(t.slice(m.index + m[0].length))) continue;
+      var v = parseFloat(m[1].replace(/,/g, '')) * (m[2] ? 1000 : 1);
+      if (v >= 100 && v < 1e9) cand.push({ v: Math.round(v * 100) / 100, i: m.index });
+    }
+    var tras = cand.filter(function (c) { return c.i >= desde; });
+    return (tras[0] || cand[0] || { v: 0 }).v;
+  }
+  /* El régimen, si el lector lo dice; si no, sueldos y salarios (lo que la
+     calculadora supone y deja cambiar). */
+  var REGIMEN = [
+    ['plataformas', /\b(uber|didi|rappi|cabify|indrive|airbnb|booking|mercado libre|amazon|plataformas? (digitales?|tecnologicas?)|por (una )?app)\b/],
+    ['resico', /\b(resico|simplificado de confianza)\b/],
+    ['arrendamiento', /\b(rento (mi|una|un)|renta de (mi|mis)|cobro (la |de )?renta|me pagan (la |de )?renta|arrendamiento|arrendador)\b/],
+    ['honorarios', /\b(honorarios|freelance|independiente|por mi cuenta|negocio propio|mi negocio|actividad empresarial|profesionista)\b/],
+    ['sueldos', /\b(sueldos? y salarios?|nomina|asalariad[oa]|mi patron|mi empresa me paga|empleado de)\b/]
+  ];
+  var PLATA = [['hospedaje', /\b(airbnb|booking|hospedaje)\b/], ['bienes', /\b(mercado libre|amazon|vendo|ventas?)\b/], ['transporte', /./]];
+  function regimenDe(p) {
+    var r = REGIMEN.filter(function (x) { return x[1].test(p); })[0], pl = null;
+    if (r && r[0] === 'plataformas') pl = PLATA.filter(function (x) { return x[1].test(p); })[0][0];
+    return { r: r ? r[0] : '', pl: pl };
   }
   function herramienta(q) {
     if (!HA.apps.length) return null;
-    var p = plano(q), cc = APP.ccticket;
+    var p = plano(q), cc = APP.ccticket, CR = B.dat.calc || {};
     if (cc && SUELDO.test(p) && !/\b(diputad|senador|ministr|president|gobernador|alcalde|funcionari)\w*/.test(p)) {
       var m = sueldoDe(p), per = /\b(al ano|anual|anuales|por ano)\b/.test(p) ? 'ano' : 'mes', nat = /\b(neto|netos|libres?|en mano|ya sin impuestos)\b/.test(p) ? 'neto' : 'bruto';
-      var liga = 'herramienta-calculadora-ticket-retienen.html' + (m ? '?m=' + m + '&p=' + per + '&n=' + nat : '');
+      var rg = regimenDe(p), quin = m && /\b(quincena|quincenal|quincenales)\b/.test(p), sem = m && /\b(semana|semanal|semanales)\b/.test(p), m0 = m;
+      /* Por quincena: la calculadora trabaja por mes, y un mes son dos quincenas (derivado, se dice la operación). */
+      if (quin) { m = Math.round(m * 2 * 100) / 100; per = 'mes'; }
+      if (sem) m = 0;
+      var liga = 'herramienta-calculadora-ticket-retienen.html' + (m ? '?m=' + m + '&p=' + per + '&n=' + nat + (rg.r ? '&r=' + rg.r : '') + (rg.pl ? '&pl=' + rg.pl : '') : '');
+      var regN = rg.r && CR.reg ? CR.reg[rg.r] : '', plN = rg.pl && CR.plat ? CR.plat[rg.pl] : '';
+      var hijos = /\b(hijos?|hijas?|dependientes?|esposa|esposo|familia)\b/.test(p);
       return respApp('ccticket', liga, '<p><span aria-hidden="true">🧾</span> Esa cuenta la hace <b>' + esc(cc.n) + '</b>, de la ' + esc(cc.grupo) + ': ' +
-        (m ? 'ya le puse tu ingreso de <b>$' + m.toLocaleString('es-MX') + (per === 'ano' ? ' al año' : ' al mes') + '</b>, ' + (nat === 'neto' ? 'después' : 'antes') + ' de descuentos. ' : 'escribe lo que ganas. ') +
+        (m ? 'ya le puse tu ingreso de <b>$' + m.toLocaleString('es-MX') + (per === 'ano' ? ' al año' : ' al mes') + '</b>, ' + (nat === 'neto' ? 'después' : 'antes') + ' de descuentos' +
+          (regN ? ', en <b>' + esc(regN) + '</b>' + (plN ? ' (' + esc(plN.toLowerCase()) + ')' : '') : '') + '. ' :
+          sem ? 'la calculadora trabaja por mes o por año, así que escribe ahí lo que juntas al mes (no convierto semanas: los meses no tienen semanas exactas). ' : 'escribe lo que ganas. ') +
         'Te dice cuánto te retienen, con la tarifa oficial del ISR, y a dónde va cada peso de tu impuesto, en un documento con folio y huella.</p>' +
-        '<p class="pa-chico">La cuenta la hace la calculadora con las tarifas publicadas; si tu caso tiene deducciones o un régimen distinto, cámbialo ahí mismo.</p>',
+        (quin ? '<p class="pa-chico">' + chip({ e: 'derivado' }) + ' <b>Operación:</b> $' + m0.toLocaleString('es-MX') + ' a la quincena × 2 quincenas = $' + m.toLocaleString('es-MX') + ' al mes.</p>' : '') +
+        (hijos ? '<p class="pa-chico">Tus hijos o tu familia no cambian lo que te retienen cada mes: la tarifa del artículo 96 de la Ley del ISR no tiene descuento por dependientes. Algunos gastos de la familia, como los médicos y hospitalarios, se deducen en la declaración anual (artículo 151), que esta cuenta no hace.</p>' : '') +
+        '<p class="pa-chico">La cuenta la hace la calculadora con las tarifas publicadas. ' + (regN ? 'Si tu régimen es otro, cámbialo ahí mismo, en «1 · Tu ingreso».' : /\bfacturo\b/.test(p) ? 'Como facturas, elige en «1 · Tu ingreso» si estás en el RESICO o en actividad empresarial, porque cambia mucho lo que pagas; mientras, supuse sueldos y salarios.' : 'Supuse que trabajas con un patrón (sueldos y salarios); si no es así, cámbialo ahí mismo, en «1 · Tu ingreso».') + '</p>',
         { sug: ['¿A dónde va cada peso de mis impuestos?', '¿Cuánto gana un diputado comparado conmigo?', 'Mi estado de cuenta ambiental'] });
     }
     if (/^\s*(que|q) (es|son|significa)\b/.test(p)) return null;
@@ -1153,11 +1205,11 @@
   function respuesta(q, previas) {
     var inv = investigacion(q);
     if (inv) return inv;
-    var ins = inspector(q, previas);
+    var ins = conApp(inspector(q, previas));
     if (ins) return ins;
-    var mo = megaobras(q, previas);
+    var mo = conApp(megaobras(q, previas));
     if (mo) return mo;
-    var he = herramienta(q);
+    var he = conApp(herramienta(q));
     if (he) return he;
 
     var rc = pideRecurso(q);

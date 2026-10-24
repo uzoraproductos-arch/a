@@ -410,6 +410,11 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   cuenta la hace la calculadora, nunca el chat. **Una aplicación nueva de
   esas dos herramientas entra sola** al catálogo, y si la gente la llama de
   otro modo, su frase va en `ALIAS_APPS`.
+  El régimen también se lee («manejo Uber», «rento mi depa», RESICO: `&r=&pl=`).
+  Toda aplicación abierta en el chat trae **«Generar dictamen»** (`conApp()`):
+  respalda qué hace y de qué documentos salen sus datos (`_fuentes_app()`
+  los toma de su página), con el enlace que repite la cuenta; nunca copia el
+  resultado.
 - **Las investigaciones de Auditoría en imágenes salen al frente**
   (24-10-2026): cuando la plática toca su tema (Tren Maya, Dos Bocas,
   huachicol, Ramo 33…), «Explóralo a fondo» abre con «📖 Ver la

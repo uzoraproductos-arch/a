@@ -889,8 +889,8 @@
     est.verifica = q.get('verifica').trim();
     aplicar({ m: q.get('m'), per: q.get('p'), nat: q.get('n'), reg: q.get('r'), plat: q.get('pl'), ded: q.get('d') });
   } else if (q.get('m')) {
-    /* El Auditor Virtual trae el ingreso que le dijeron (?m=&p=&n=, 24-10-2026). */
-    aplicar({ m: q.get('m'), per: q.get('p'), nat: q.get('n') });
+    /* El Auditor Virtual trae el ingreso que le dijeron, y el régimen si lo dijo (?m=&p=&n=&r=&pl=, 24-10-2026). */
+    aplicar({ m: q.get('m'), per: q.get('p'), nat: q.get('n'), reg: q.get('r'), plat: q.get('pl') });
   } else {
     recuperar();
   }
