@@ -226,7 +226,11 @@ python3 -m http.server 8000    # y abrir http://localhost:8000
 
   ```bash
   python3 herramientas/sello.py 20260923a
+  python3 herramientas/sello.py --siguiente   # el que sigue al publicado
   ```
+
+  Rechaza un sello igual o anterior al publicado (26-10-2026: un plan de otro
+  agente propuso uno ya rebasado). Si falla, `git pull` y `--siguiente`.
 
   Cambia las referencias `?v=` y el sello visible al pie de `index.html` (solo ahí). Si no tocaste
   `assets/`, no lo subas.
