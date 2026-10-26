@@ -45,13 +45,14 @@
   function fmt(v, f) {
     if (f === 'entero') return miles(Math.round(v).toFixed(0));
     if (f === 'pct') return v.toFixed(1) + '%';
+    if (f === 'ha1') return miles(v.toFixed(1)) + ' ha';
     if (f === 'pesos2') return '$' + miles((Math.round(v * 100) / 100).toFixed(2));
     return '$' + miles(v.toFixed(1)) + ' mdp';
   }
   function mdpPesos(p) { return fmt(p / 1e6, 'mdp1'); }
-  function chip(e) {
+  function chip(e, pend) {
     var t = (e === 'oficial' || e === 'pendiente') ? e : 'derivado';
-    return '<span class="est-chip est-' + t + '">' + t + '</span>';
+    return '<span class="est-chip est-' + t + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + t + '</span>';
   }
   function suma(l, c) { return l.reduce(function (a, x) { return a + (x[c] || 0); }, 0); }
   function acc(l, c) { return l.reduce(function (a, x) { return a + ((x.acciones && x.acciones[c]) || 0); }, 0); }
@@ -280,6 +281,143 @@
     };
   }
 
+  function ineContratos() {
+    var A = DB.auditorias_actuales && DB.auditorias_actuales['ine-contratos'];
+    if (!A) return null;
+    var c = A.cifras, f = A.fuentes;
+    return {
+      cont: [
+        { ico: '🗳️', tit: 'Ejercido en 2025', v: c.ejercido_2025_mdp, f: 'mdp1', etq: 'Cuenta Pública 2025, Ramo 22 (con elección judicial)', est: 'oficial' },
+        { ico: '📅', tit: 'Aprobado en 2026', v: c.aprobado_2026_mdp, f: 'mdp1', etq: 'Presupuesto de Egresos 2026, Ramo 22', est: 'oficial' },
+        { ico: '💸', tit: 'Pagado al 2T 2026', v: c.pagado_2t_2026_mdp, f: 'mdp1', etq: 'Informe Trimestral de Hacienda al segundo trimestre', est: 'oficial' },
+        { ico: '🔍', tit: 'Por aclarar (CP 2024)', v: c.asf_cp2024_por_aclarar_mdp, f: 'mdp1', etq: 'en ' + c.asf_cp2024_auditorias + ' auditorías y ' + c.asf_cp2024_po + ' pliegos de la ASF', est: 'oficial' },
+        { ico: '⏳', tit: 'Contratos señalados', txt: 'En revisión (ASF y OIC)', etq: 'los contratos que la prensa suma siguen pendientes de cotejo oficial', est: 'pendiente', pend: A.pendiente_id }
+      ],
+      rastroTit: 'El presupuesto y la fiscalización del INE en cifras oficiales', rastroEst: 'oficial',
+      rastro: [
+        { k: 'Gasto ejercido por el INE en 2025', sub: 'Cuenta Pública 2025, Tomo VI, Ramo 22 (año de la elección judicial)', v: c.ejercido_2025_mdp, url: f[0].url, est: 'oficial' },
+        { k: 'Presupuesto aprobado para el INE en 2026', sub: 'Presupuesto de Egresos de la Federación 2026, Anexo 1, Ramo 22', v: c.aprobado_2026_mdp, url: f[0].url, est: 'oficial' },
+        { k: 'Presupuesto calendarizado al 2.º trimestre de 2026', sub: 'Avance financiero al corte del primer semestre de 2026', v: c.calendario_2t_2026_mdp, url: f[0].url, est: 'oficial' },
+        { k: 'Gasto pagado al 2.º trimestre de 2026', sub: 'Informes sobre la Situación Económica y las Finanzas Públicas 2T 2026', v: c.pagado_2t_2026_mdp, url: f[0].url, est: 'oficial' },
+        { k: 'Monto por aclarar en la Cuenta Pública 2024', sub: c.asf_cp2024_auditorias + ' auditorías de la ASF al INE (' + c.asf_cp2024_po + ' pliegos de observaciones)', v: c.asf_cp2024_por_aclarar_mdp, url: f[1].url, est: 'oficial' }
+      ],
+      escena: { tipo: 'reparto', tit: 'La escala presupuestaria del INE (Ramo 22)', caja: 'Ramo 22 · INE', unidad: 'mdp' },
+      hallazgo: A.que,
+      pendiente: A.falta,
+      pendienteId: A.pendiente_id,
+      fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
+      acciones: [
+        { txt: '🏢 Ver la ficha técnica del INE en el Auditor de entes públicos', href: 'herramienta-inspector-entes.html#ente=federal:ine' },
+        { txt: '🔍 Leer el cotejo completo de lo que circula en Verificamos', href: 'noticias-relevantes.html#col-taddei-renuncia-ine-contratos' },
+        { txt: '📄 Fallo público de la licitación LP-INE-001/2025', url: f[4].url }
+      ]
+    };
+  }
+
+  function guaymasGas() {
+    var A = DB.auditorias_actuales && DB.auditorias_actuales['guaymas-gas'];
+    if (!A) return null;
+    var c = A.cifras, f = A.fuentes;
+    return {
+      cont: [
+        { ico: '📐', tit: 'Superficie según SENER', v: c.superficie_sener_ha, f: 'ha1', etq: 'Parque Industrial Pesquero «Rodolfo Sánchez Taboada» (21-10-2026)', est: 'oficial' },
+        { ico: '➖', tit: 'Diferencia en disputa', v: c.diferencia_ha, f: 'ha1', etq: 'frente a las ' + c.superficie_tribuna_ha + ' ha señaladas en tribuna (' + c.superficie_tribuna_ha + ' − ' + c.superficie_sener_ha + ')', est: 'derivado' },
+        { ico: '🚢', tit: 'Buques metaneros al año', v: c.buques_anuales, f: 'entero', etq: 'máximo (5 al mes, 4 % del tránsito de la zona) y ' + c.almacenamiento_mil_m3 + ' mil m³ de gas', est: 'oficial' },
+        { ico: '🛡️', tit: 'Presupuesto ASEA 2026', v: c.asea_2026_mdp, f: 'mdp1', etq: 'Ramo 16, unidad G00, agencia que revisa el impacto ambiental', est: 'oficial' },
+        { ico: '⏳', tit: 'Contrato de comodato', txt: 'Sin publicar', etq: 'el comodato y el resolutivo ambiental siguen pendientes', est: 'pendiente', pend: A.pendiente_id }
+      ],
+      rastroTit: 'Presupuesto 2026 de las autoridades ambientales exhortadas en la Gaceta Parlamentaria', rastroEst: 'oficial',
+      rastro: [
+        { k: 'CONANP · Comisión Nacional de Áreas Naturales Protegidas (F00)', sub: 'Presupuesto aprobado 2026 en el Ramo 16 para áreas naturales y marinas protegidas', v: c.conanp_2026_mdp, url: f[3].url, est: 'oficial' },
+        { k: 'PROFEPA · Procuraduría Federal de Protección al Ambiente (E00)', sub: 'Presupuesto aprobado 2026 en el Ramo 16 para inspección y vigilancia ambiental', v: c.profepa_2026_mdp, url: f[3].url, est: 'oficial' },
+        { k: 'ASEA · Proyecto de presupuesto 2027 (G00)', sub: 'Agencia Nacional de Seguridad Industrial y de Protección al Medio Ambiente del Sector Hidrocarburos (PPEF 2027)', v: c.asea_2027_mdp, url: f[3].url, est: 'oficial' },
+        { k: 'ASEA · Presupuesto aprobado 2026 (G00)', sub: 'Autoridad exhortada por el Congreso de Sonora para revisar los proyectos de gas del Golfo de California', v: c.asea_2026_mdp, url: f[3].url, est: 'oficial' },
+        { k: 'INECC · Instituto Nacional de Ecología y Cambio Climático (RJJ)', sub: 'Autoridad exhortada en la Gaceta Parlamentaria No. 2104 (aprobado 2026, Ramo 16)', v: c.inecc_2026_mdp, url: f[3].url, est: 'oficial' }
+      ],
+      escena: { tipo: 'reparto', tit: 'Con qué recursos cuentan las agencias ambientales del Ramo 16', caja: 'Ramo 16 · Ambiente', unidad: 'mdp' },
+      hallazgo: A.que,
+      pendiente: A.falta,
+      pendienteId: A.pendiente_id,
+      fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
+      acciones: [
+        { txt: '🌳 Ver la ficha del Golfo de California en Crisis ambientales', href: 'herramienta-ambiente-crisis.html' },
+        { txt: '🛡️ Revisar el presupuesto de la ASEA en el Auditor ambiental', href: 'herramienta-ambiente-auditor.html#aa-G00' },
+        { txt: '🔍 Leer el cotejo completo de Guaymas en Verificamos', href: 'noticias-relevantes.html#col-guaymas-comodato-amigo-gnl' },
+        { txt: '📜 Gaceta Parlamentaria No. 2104 del Congreso de Sonora', url: f[1].url }
+      ]
+    };
+  }
+
+  function medicamentosImss() {
+    var A = DB.auditorias_actuales && DB.auditorias_actuales['medicamentos-imss'];
+    if (!A) return null;
+    var c = A.cifras, f = A.fuentes, prov = A.proveedores_imss || [];
+    return {
+      cont: [
+        { ico: '🏥', tit: 'Contratos del IMSS', v: c.imss_monto_mdp, f: 'mdp1', etq: miles(c.imss_contratos) + ' contratos en ComprasMX (2025 y 2026)', est: 'oficial' },
+        { ico: '⚡', tit: 'Adjudicación directa IMSS', v: c.imss_adj_directa_pct, f: 'pct', etq: fmt(c.imss_adj_directa_mdp, 'mdp1') + ' en ' + miles(c.imss_adj_directa_contratos) + ' contratos directos', est: 'derivado' },
+        { ico: '🩺', tit: 'IMSS-Bienestar', v: c.imss_bienestar_monto_mdp, f: 'mdp1', etq: miles(c.imss_bienestar_contratos) + ' contratos (' + c.imss_bienestar_adj_directa_pct + '% por adjudicación directa)', est: 'oficial' },
+        { ico: '💊', tit: 'Birmex (2025-2026)', v: c.birmex_monto_mdp, f: 'mdp1', etq: miles(c.birmex_contratos) + ' contratos (' + c.birmex_adj_directa_pct + '% por adjudicación directa)', est: 'oficial' },
+        { ico: '⏳', tit: 'Señalamientos en redes', txt: 'Sin contrato oficial', etq: 'los >$800 mdp atribuidos en prensa (2023-2024) siguen pendientes', est: 'pendiente', pend: A.pendiente_id }
+      ],
+      rastroTit: 'Principales proveedores del IMSS en ComprasMX (2025 y 2026)', rastroEst: 'oficial',
+      rastro: prov.map(function (p) {
+        return {
+          k: p.nombre,
+          sub: 'RFC ' + p.rfc + ' · ' + miles(p.contratos) + ' contratos con el IMSS en 2025 y 2026 (importe antes de impuestos)',
+          v: p.monto_mdp,
+          url: f[0].url,
+          est: 'oficial'
+        };
+      }),
+      escena: { tipo: 'reparto', tit: 'El reparto entre los principales proveedores del IMSS', caja: 'IMSS · ComprasMX', unidad: 'mdp' },
+      hallazgo: A.que,
+      pendiente: A.falta,
+      pendienteId: A.pendiente_id,
+      fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
+      acciones: [
+        { txt: '📋 Explorar los contratos del IMSS en Contratos públicos', href: 'contratos-publicos.html?i=050GYR' },
+        { txt: '🏥 Ver los contratos de IMSS-Bienestar en Contratos públicos', href: 'contratos-publicos.html?i=056AYO' },
+        { txt: '🔍 Leer el cotejo de medicinas y ventiladores en Verificamos', href: 'noticias-relevantes.html#col-salud-ventiladores-y-medicinas' },
+        { txt: '📜 Circular 11/2020 en el Diario Oficial de la Federación', url: f[2].url }
+      ]
+    };
+  }
+
+  function deudaCongreso2027() {
+    var A = DB.auditorias_actuales && DB.auditorias_actuales['deuda-congreso-2027'];
+    if (!A) return null;
+    var c = A.cifras, f = A.fuentes;
+    return {
+      cont: [
+        { ico: '🧾', tit: 'Ingresos totales 2027', v: c.ingresos_totales_2027_mdp, f: 'mdp1', etq: 'estimados en la Ley de Ingresos aprobada por Diputados (15-10-2026)', est: 'oficial' },
+        { ico: '🏛️', tit: 'Techo de deuda interna', v: c.techo_deuda_interna_2027_mdp, f: 'mdp1', etq: 'endeudamiento interno neto máximo autorizado (' + c.votos_diputados_favor + ' votos a favor)', est: 'oficial' },
+        { ico: '💸', tit: 'Costo financiero 2027', v: c.costo_financiero_2027_mdp, f: 'mdp1', etq: 'intereses y comisiones propuestos en el Paquete Económico 2027', est: 'oficial' },
+        { ico: '📉', tit: 'Nota soberana HR Ratings', txt: 'BBB+ → BBB', etq: 'ajuste con perspectiva estable reconocido en el Comunicado 82 de Hacienda', est: 'oficial' },
+        { ico: '⏳', tit: 'Reporte de HR Ratings', txt: 'Por cotejar', etq: 'las proyecciones de 4.6% de déficit y 61.2% de deuda siguen pendientes', est: 'pendiente', pend: A.pendiente_id }
+      ],
+      rastroTit: 'Las grandes cifras del Paquete Económico y la Ley de Ingresos 2027', rastroEst: 'oficial',
+      rastro: [
+        { k: 'Ingresos presupuestarios estimados para 2027', sub: 'Impuestos, cuotas, derechos, productos y aprovechamientos (Criterios Generales 2027)', v: c.ingresos_presupuestarios_2027_mdp, url: f[4].url, est: 'oficial' },
+        { k: 'Techo de endeudamiento interno neto autorizado para 2027', sub: 'Aprobado por la Cámara de Diputados el 15-10-2026 (331 votos a favor y 118 en contra)', v: c.techo_deuda_interna_2027_mdp, url: f[0].url, est: 'oficial' },
+        { k: 'Costo financiero de la deuda propuesto para 2027', sub: 'Lo que se destinará a pagar intereses y servicio de la deuda en 2027', v: c.costo_financiero_2027_mdp, url: f[4].url, est: 'oficial' },
+        { k: 'Requerimientos Financieros del Sector Público (déficit ampliado 2027)', sub: 'Equivalente a 3.9 % del PIB en los Criterios Generales de Política Económica 2027', v: c.rfsp_2027_mdp, url: f[4].url, est: 'oficial' },
+        { k: 'Ingresos por financiamiento en la Ley de Ingresos 2027', sub: 'Diferencia entre ingresos totales ($10,636,488.0 mdp) e ingresos presupuestarios ($9,156,528.9 mdp)', v: c.financiamiento_2027_mdp, url: f[0].url, est: 'derivado' }
+      ],
+      escena: { tipo: 'reparto', tit: 'Ingresos, techo de deuda y costo financiero en 2027', caja: 'Paquete 2027', unidad: 'mdp' },
+      hallazgo: A.que,
+      pendiente: A.falta,
+      pendienteId: A.pendiente_id,
+      fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
+      acciones: [
+        { txt: '📈 Explorar el Paquete Económico 2027 paso a paso', href: 'numeros-paquete-2027.html' },
+        { txt: '🔍 Leer el cotejo de la Ley de Ingresos 2027 y las multas en Verificamos', href: 'noticias-relevantes.html#col-lif-2027-deuda-y-multas' },
+        { txt: '📉 Leer el cotejo sobre la calificación BBB de HR Ratings', href: 'noticias-relevantes.html#col-hr-ratings-baja-mexico-bbb' },
+        { txt: '📜 Nota oficial del Canal del Congreso (15-10-2026)', url: f[0].url }
+      ]
+    };
+  }
+
   var ARMA = {
     'tren-maya': function () { return desdeExpediente('tren-maya'); },
     'dos-bocas': function () { return desdeExpediente('dos-bocas'); },
@@ -289,7 +427,11 @@
     'lego-cienega': lego,
     'tren-toluca': function () { return desdeExpediente('tren-toluca'); },
     'megafarmacia': megafarmacia,
-    'huachicol-fiscal': huachicol
+    'huachicol-fiscal': huachicol,
+    'ine-contratos': ineContratos,
+    'guaymas-gas': guaymasGas,
+    'medicamentos-imss': medicamentosImss,
+    'deuda-congreso-2027': deudaCongreso2027
   };
 
   // --- Animacion de cifras --------------------------------------------------
@@ -322,7 +464,7 @@
           '<span class="au-paso-ico" aria-hidden="true">' + c.ico + '</span>' +
           '<span class="au-paso-tit">' + esc(c.tit) + '</span>' + cifra +
           (c.etq ? '<span class="au-paso-etq">' + esc(c.etq) + '</span>' : '') +
-          (c.est ? '<span class="au-paso-chip">' + chip(c.est) + '</span>' : '') +
+          (c.est ? '<span class="au-paso-chip">' + chip(c.est, c.pend) + '</span>' : '') +
         '</div>';
     }).join('');
     return '<section class="au-sec" aria-labelledby="auMapaTit">' +
@@ -642,7 +784,7 @@
     return '<section class="au-sec" aria-labelledby="auHallTit">' +
       '<div class="au-sec-cab"><h2 class="au-sec-tit" id="auHallTit"><span class="au-num" aria-hidden="true">4</span> Lo que se encontró</h2></div>' +
       '<div class="au-hallazgo"><span class="au-hallazgo-ico" aria-hidden="true">🔎</span><p>' + esc(p.hallazgo) + '</p></div>' +
-      (p.pendiente ? '<p class="au-pendiente">' + chip('pendiente') + ' ' + esc(p.pendiente) + '</p>' : '') +
+      (p.pendiente ? '<p class="au-pendiente">' + chip('pendiente', p.pendienteId) + ' ' + esc(p.pendiente) + '</p>' : '') +
       '<p class="au-fuente"><b>Fuente:</b> ' + esc(p.fuente) + '</p></section>' +
       '<section class="au-sec" aria-labelledby="auSigTit">' +
       '<div class="au-sec-cab"><h2 class="au-sec-tit" id="auSigTit"><span class="au-num" aria-hidden="true">5</span> Sigue investigando</h2></div>' +

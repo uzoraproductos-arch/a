@@ -55,15 +55,32 @@ AUDITORIAS = [
      'Ilustración de pipas de combustible frente a una aduana portuaria al atardecer',
      '⛽ Evasión en combustibles · IEPS, aduanas y SAT', 'Huachicol fiscal: el impuesto que no entra',
      '¿Cuánto IEPS de gasolinas y diésel está en juego, y qué se sabe de lo que se evade?'),
+    ('ine-contratos', 'assets/auditor/img/showcase_ine_contratos.jpg', 'Ilustración provisional',
+     'Ilustración del edificio del Instituto Nacional Electoral, urnas y carpetas de licitación bajo revisión',
+     '🗳️ Órgano autónomo · Ramo 22, ASF y licitaciones', 'El INE: su presupuesto, lo auditado y los contratos en revisión',
+     '¿Cuánto presupuesto maneja el INE, qué le observó la ASF y qué consta de los contratos bajo revisión?'),
+    ('guaymas-gas', 'assets/auditor/img/showcase_guaymas_gas.jpg', 'Ilustración provisional',
+     'Ilustración de tanques de gas y un buque metanero frente a la costa de Guaymas y la Gaceta Parlamentaria de Sonora',
+     '🚢 Energía y medio ambiente · Guaymas, Sonora y Golfo de California', 'Guaymas y la Gaceta Parlamentaria: el proyecto de gas y su revisión ambiental',
+     '¿Qué consta en la Gaceta Parlamentaria y en documentos oficiales sobre el proyecto de gas en Guaymas y su impacto ambiental?'),
+    ('medicamentos-imss', 'assets/auditor/img/showcase_medicamentos_imss.jpg', 'Ilustración provisional',
+     'Ilustración de un almacén de medicamentos y expedientes de contratos de salud bajo revisión',
+     '💊 Contratos de salud · IMSS, IMSS-Bienestar y Birmex', 'Compras de medicamentos y contratos del sector salud',
+     '¿Cuánto contratan en medicinas e insumos el IMSS, IMSS-Bienestar y Birmex, y qué parte se da por adjudicación directa?'),
+    ('deuda-congreso-2027', 'assets/auditor/img/showcase_deuda_2027.jpg', 'Ilustración provisional',
+     'Ilustración del tablero de votación en el Congreso con el techo de deuda 2027 y la nota soberana BBB',
+     '🧾 Paquete Económico 2027 · Congreso, deuda y calificación BBB', 'El Congreso aprobó más deuda: Ley de Ingresos 2027 y nota soberana',
+     '¿Cuánta deuda autorizó la Cámara de Diputados para 2027, qué cambió en las multas fiscales y qué dijo Hacienda sobre la nota BBB?'),
 ]
 
 
 # Investigaciones agrupadas por tema (entrega 2 de Astra, 10-10-2026). Las
 # usan el indice general (apartados.py) y el pie de cada investigacion.
 TEMAS = [
-    ('🏗️', 'Megaobras e infraestructura', ['tren-maya', 'dos-bocas', 'aifa', 'tren-toluca', 'megafarmacia']),
+    ('🏗️', 'Megaobras e infraestructura', ['tren-maya', 'dos-bocas', 'aifa', 'tren-toluca', 'megafarmacia', 'guaymas-gas']),
     ('🗺️', 'Dinero para estados y municipios', ['ramo-33', 'lego-cienega']),
-    ('💸', 'Deuda e ingresos del gobierno', ['deuda-soberana', 'huachicol-fiscal']),
+    ('💸', 'Deuda e ingresos del gobierno', ['deuda-soberana', 'huachicol-fiscal', 'deuda-congreso-2027']),
+    ('🔍', 'Contratos, salud y órganos autónomos', ['ine-contratos', 'medicamentos-imss']),
 ]
 
 
@@ -90,6 +107,14 @@ RUTAS = {
                      'herramienta-inspector-asf.html', 'Lo que auditó la ASF, ente por ente'),
     'huachicol-fiscal': ('eb-ingresos', 'De dónde sale el dinero: el IEPS en la Ley de Ingresos',
                          'herramienta-inspector-efos.html', 'La lista negra del SAT'),
+    'ine-contratos': ('eb-egresos', 'Cuánto recibe cada ramo, el INE incluido (Ramo 22)',
+                      'herramienta-inspector-entes.html#ente=federal:ine', 'La ficha técnica del INE en el Auditor de entes públicos'),
+    'guaymas-gas': ('eb-egresos', 'Cuánto recibe cada ramo, Medio Ambiente y Energía incluidos',
+                    'herramienta-ambiente-crisis.html', 'Crisis ambientales y el presupuesto de la ASEA'),
+    'medicamentos-imss': ('eb-egresos', 'Cuánto recibe cada ramo, el IMSS y Salud incluidos',
+                          'contratos-publicos.html?i=050GYR', 'Los contratos del IMSS en ComprasMX 2025 y 2026'),
+    'deuda-congreso-2027': ('proyeccion2027', 'El Paquete Económico 2027 y la Ley de Ingresos',
+                            'noticias-relevantes.html#col-lif-2027-deuda-y-multas', 'El cotejo documento por documento en Verificamos'),
 }
 
 
@@ -198,6 +223,43 @@ def _datos(id_):
                 'quien': 'El SAT cobra el IEPS y la Agencia Nacional de Aduanas revisa lo que entra al país; Hacienda propone la Ley de Ingresos y la Cámara de Diputados la aprueba.',
                 'docs': [_doc(il['doc'], il['url'])],
                 'falta': 'Ni el SAT ni Hacienda han publicado cuánto se pierde: el dato sigue pendiente por falta de transparencia de esas dependencias. ' + H['estudios']['texto']}
+    A = D.get('auditorias_actuales') or {}
+    if id_ in A:
+        x = A[id_]
+        c = x['cifras']
+        docs = [_doc(f['doc'], f['url']) for f in x['fuentes']]
+        if id_ == 'ine-contratos':
+            cuanto = [
+                (_mdp(c['ejercido_2025_mdp']), 'ejercidos por el INE en la Cuenta Pública 2025 (Ramo 22)', 'oficial', None),
+                (_mdp(c['aprobado_2026_mdp']), 'aprobados para el INE en el Presupuesto de Egresos 2026', 'oficial', None),
+                (_mdp(c['asf_cp2024_por_aclarar_mdp']), 'quedaron por aclarar en %d auditorías de la ASF (Cuenta Pública 2024)' % c['asf_cp2024_auditorias'], 'oficial', None),
+                ('En revisión', 'contratos de Cajas Graf señalados en prensa (INE e IEE Sonora)', 'pendiente', x['pendiente_id']),
+            ]
+        elif id_ == 'guaymas-gas':
+            cuanto = [
+                ('%s ha' % c['superficie_sener_ha'], 'superficie del proyecto en Guaymas según la Secretaría de Energía (21-10-2026)', 'oficial', None),
+                ('%s ha' % c['diferencia_ha'], 'diferencia frente a las %s ha señaladas en tribuna (%s − %s)' % (int(c['superficie_tribuna_ha']), int(c['superficie_tribuna_ha']), c['superficie_sener_ha']), 'derivado', None),
+                ('%s buques al año' % c['buques_anuales'], 'máximo de buques metaneros (4 %% del tránsito de la zona) y %s mil m³ de almacenamiento' % c['almacenamiento_mil_m3'], 'oficial', None),
+                (_mdp(c['asea_2026_mdp']), 'presupuesto 2026 de la ASEA (Ramo 16, unidad G00), la agencia que revisa el impacto ambiental', 'oficial', None),
+                ('Sin publicar', 'contrato de comodato sobre el predio en Guaymas y resolutivo ambiental', 'pendiente', x['pendiente_id']),
+            ]
+        elif id_ == 'medicamentos-imss':
+            cuanto = [
+                (_mdp(c['imss_monto_mdp']), 'en %s contratos del IMSS registrados en ComprasMX (2025 y 2026)' % format(c['imss_contratos'], ','), 'oficial', None),
+                ('%s %% (%s)' % (c['imss_adj_directa_pct'], _mdp(c['imss_adj_directa_mdp'])), 'del monto del IMSS asignado por adjudicación directa (%s ÷ %s)' % (_mdp(c['imss_adj_directa_mdp']), _mdp(c['imss_monto_mdp'])), 'derivado', None),
+                (_mdp(c['imss_bienestar_monto_mdp']), 'en %s contratos de IMSS-Bienestar (%s %% por adjudicación directa)' % (format(c['imss_bienestar_contratos'], ','), c['imss_bienestar_adj_directa_pct']), 'oficial', None),
+                (_mdp(c['birmex_monto_mdp']), 'en %s contratos de Birmex (%s %% por adjudicación directa)' % (format(c['birmex_contratos'], ','), c['birmex_adj_directa_pct']), 'oficial', None),
+                ('Sin contrato oficial', 'señalamientos en prensa por más de $800 mdp en medicinas (2023-2024)', 'pendiente', x['pendiente_id']),
+            ]
+        elif id_ == 'deuda-congreso-2027':
+            cuanto = [
+                (_mdp(c['ingresos_totales_2027_mdp']), 'ingresos totales estimados en la Ley de Ingresos 2027 aprobada por Diputados (15-10-2026)', 'oficial', None),
+                (_mdp(c['techo_deuda_interna_2027_mdp']), 'techo de endeudamiento interno neto autorizado para 2027 (%d votos a favor y %d en contra)' % (c['votos_diputados_favor'], c['votos_diputados_contra']), 'oficial', None),
+                (_mdp(c['costo_financiero_2027_mdp']), 'costo financiero de la deuda propuesto para 2027 en el Paquete Económico', 'oficial', None),
+                ('BBB+ → BBB', 'ajuste de HR Ratings a la nota soberana de largo plazo reconocido por Hacienda (Comunicado 82)', 'oficial', None),
+                ('Por cotejar', 'proyecciones del reporte de HR Ratings (déficit de 4.6 % del PIB y deuda a 2030)', 'pendiente', x['pendiente_id']),
+            ]
+        return {'que': x['que'], 'cuanto': cuanto, 'quien': x['quien'], 'docs': docs, 'falta': x['falta']}
     raise SystemExit('Sin lectura breve para %s' % id_)
 
 
@@ -400,6 +462,10 @@ TEMA_BOT = {
     'tren-toluca': ['tren interurbano', 'tren a toluca', 'mexico toluca', 'el insurgente'],
     'megafarmacia': ['megafarmacia', 'huehuetoca', 'birmex'],
     'huachicol-fiscal': ['huachicol'],
+    'ine-contratos': ['contratos del ine', 'investigacion de la asf al ine', 'cajas graf', 'taddei', 'presupuesto del ine'],
+    'guaymas-gas': ['guaymas', 'amigo lng', 'epcilon', 'sanchez taboada', 'gas de texas', 'gaceta de sonora'],
+    'medicamentos-imss': ['medicamentos del imss', 'compra de medicamentos', 'compras de medicinas', 'ventiladores del imss', 'cyber robotic'],
+    'deuda-congreso-2027': ['ley de ingresos 2027', 'aprobo mas deuda', 'techo de deuda 2027', 'perdon de multas', 'hr ratings'],
 }
 
 

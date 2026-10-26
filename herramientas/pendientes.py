@@ -311,13 +311,21 @@ def recolectar():
         out.append(e(*p))
     # 10. Lo que circula en redes y quedó pendiente en su cotejo (Noticias
     # relevantes · Verificamos, 26-10-2026).
+    au_red = {
+        'taddei-renuncia-ine-contratos': ('auditoria-ine-contratos.html', 'Auditoría en imágenes · El INE y contratos en revisión'),
+        'guaymas-comodato-amigo-gnl': ('auditoria-guaymas-gas.html', 'Auditoría en imágenes · Guaymas y la Gaceta Parlamentaria'),
+        'salud-ventiladores-y-medicinas': ('auditoria-medicamentos-imss.html', 'Auditoría en imágenes · Compras de medicamentos y contratos del IMSS'),
+        'hr-ratings-baja-mexico-bbb': ('auditoria-deuda-congreso-2027.html', 'Auditoría en imágenes · Ley de Ingresos 2027 y nota soberana'),
+    }
     import asistente_personajes
     for c in asistente_personajes.columnas()[0]:
         for n, x in enumerate(c.get('cotejo', []), 1):
             if x['res'] == 'pendiente':
+                ap = [('noticias-relevantes.html#col-' + c['id'], 'Noticias relevantes · ' + c['titulo'])]
+                if c['id'] in au_red:
+                    ap.append(au_red[c['id']])
                 out.append(e('red-%s-%d' % (c['id'], n), 'Lo que circula en redes', x['dice'], x['explica'],
-                             x.get('quien'), x.get('donde'), x['fuente'],
-                             [('noticias-relevantes.html#col-' + c['id'], 'Noticias relevantes · ' + c['titulo'])]))
+                             x.get('quien'), x.get('donde'), x['fuente'], ap))
     # El estado de cuenta de diputados y de la Corte (Radar) los muestra.
     ec = ('radar-estado-de-cuenta.html#expide', 'Radar · Estado de cuenta')
     for x in out:
