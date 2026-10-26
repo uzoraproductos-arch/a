@@ -466,6 +466,20 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   las tiene. El protocolo completo, con dónde buscar cada cosa, está en
   [docs/VERIFICAMOS.md](docs/VERIFICAMOS.md): **quien retome el proyecto
   empieza por los «Lo que sigue»**.
+- **Contratos públicos de ComprasMX** (decisión del autor, 26-10-2026: «integra
+  los contratos de ComprasMX»). `herramientas/actualizar_comprasmx.py` lee los
+  archivos de Datos Abiertos de ComprasMX (se bajan con su botón en
+  `comprasmx.buengobierno.gob.mx/datos-abiertos`; el servidor no los sirve a
+  una descarga directa) y escribe `assets/auditor/data/comprasmx/`: índice de
+  proveedores, una ficha por proveedor (por las dos primeras letras del RFC),
+  las instituciones y el cruce con la lista 69-B del SAT. El chat lo contesta
+  (`contratosCmx()` y `cruceSat()` de `asistente.js`, que cargan los
+  catálogos solo al preguntar) y `contratos-publicos.html` es su buscador. El
+  importe de cada contrato es `oficial` (antes de impuestos, como lo reportó la
+  institución); las sumas, `derivado`; no se convierten monedas, y en un
+  contrato abierto el importe suele ser el máximo, no lo pagado. **Las personas
+  físicas no se publican** (su RFC es un dato personal), y tener contratos no
+  es una irregularidad: así se dice en cada respuesta.
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).

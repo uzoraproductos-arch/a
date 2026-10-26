@@ -48,7 +48,7 @@ qué falta, con cada fuente, y el dictamen lo respalda.
 |---|---|
 | Leyes, decretos, circulares de inhabilitación | Diario Oficial de la Federación (dof.gob.mx) |
 | Auditorías y denuncias | Auditoría Superior de la Federación (asf.gob.mx) |
-| Contratos del gobierno federal | ComprasMX (comprasmx.buengobierno.gob.mx) y CompraNet histórico |
+| Contratos del gobierno federal | **Ya integrados (2025 y 2026):** `contratos-publicos.html` y el chat («contratos de…», «¿a quién le compra…?»). Se actualizan con `herramientas/actualizar_comprasmx.py`. Los de 2023 y 2024 están en el CompraNet histórico, aún sin integrar |
 | Empresas sancionadas o inhabilitadas | Directorio de proveedores y contratistas sancionados (directoriosancionados.buengobierno.gob.mx) |
 | Empresas que facturan operaciones simuladas | Listado del artículo 69-B del SAT (ya está en la plataforma: Modo Inspector y el chat) |
 | Lavado de dinero y redes financieras | Comunicados de la UIF (en gob.mx/shcp/prensa). La Lista de Personas Bloqueadas de la UIF **no es pública**: no se puede integrar. |

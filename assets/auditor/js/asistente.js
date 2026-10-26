@@ -636,10 +636,166 @@
     return {
       html: h, ir: [liga, 'la Lista negra del SAT'], app: { id: 'inspefos', url: liga }, rec: [],
       ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: [fuente], ir: [liga, 'Lista negra del SAT'] },
-      sug: ['¿Qué es una EFOS?', 'Expedientes de casos de la ASF', 'Auditor de entes públicos']
+      sug: [(rfcs.length === 1 || nombre) ? 'Contratos de ' + (rfcs.length === 1 ? rfcs[0] : nombre) + ' en ComprasMX' : '¿Qué contratistas están en la lista negra del SAT?', '¿Qué es una EFOS?', 'Expedientes de casos de la ASF']
     };
   }
   function texto(h) { var d = document.createElement('div'); d.innerHTML = h; return d.textContent.replace(/\s+/g, ' ').trim().slice(0, 600); }
+
+  /* --- Contratos públicos de ComprasMX, en el chat (pedido del autor,
+     26-10-2026: «integrar los contratos de ComprasMX» para seguir el dinero).
+     Los catálogos los escribe herramientas/actualizar_comprasmx.py y se
+     descargan solo cuando se pregunta: el índice de proveedores (1 MB), las
+     instituciones (0.6 MB) y la ficha de cada proveedor, por las dos
+     primeras letras de su RFC. Cada importe es «oficial» (lo reportó la
+     institución, antes de impuestos); las sumas y porcentajes, «derivado».
+     Las personas físicas no se publican: su RFC es un dato personal. --- */
+  var CMX_DIR = 'assets/auditor/data/comprasmx/', CMX_PAG = 'contratos-publicos.html', CMXP = {};
+  function cargaJs(ruta, listo) {
+    var ya = listo();
+    if (ya) return Promise.resolve(ya);
+    if (CMXP[ruta]) return CMXP[ruta];
+    CMXP[ruta] = new Promise(function (ok, mal) {
+      var s = document.querySelector('script[src*="asistente.js"]'), v = s && /\?v=[\w.-]+/.exec(s.getAttribute('src'));
+      var sc = document.createElement('script');
+      sc.src = ruta + (v ? v[0] : '');
+      sc.onload = function () { var d = listo(); if (d) ok(d); else { CMXP[ruta] = null; mal(); } };
+      sc.onerror = function () { CMXP[ruta] = null; mal(); };
+      document.head.appendChild(sc);
+    });
+    return CMXP[ruta];
+  }
+  function cmxIdx() { return cargaJs(CMX_DIR + 'indice.js', function () { return window.CMX_IDX; }); }
+  function cmxInst() { return cargaJs(CMX_DIR + 'inst.js', function () { return window.CMX_INST; }); }
+  function cmxProv(rfc) {
+    var pre = rfc.slice(0, 2);
+    return cargaJs(CMX_DIR + 'p-' + pre.replace(/[^A-Z0-9]/g, '_') + '.js', function () { return window.CMX_P && window.CMX_P[pre]; })
+      .then(function (L) { return L[rfc] || null; });
+  }
+  function pesosCmx(v) {
+    if (Math.abs(v) >= 1e6) return '$' + (v / 1e6).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp';
+    return '$' + Math.round(v).toLocaleString('es-MX');
+  }
+  var TIPO_CMX = { AD: 'adjudicación directa', LP: 'licitación pública', I3: 'invitación a cuando menos tres', OT: 'otro procedimiento' };
+  var CMX_RE = /\b(contratos?|contratistas?|proveedor(es)?|proveedora|licitacion(es)?|adjudicacion(es)?|comprasmx|compras mx|compranet|a quien(es)? le compra|le (ha )?(pagado|comprado)|cuanto le paga\w*)\b/;
+  var CMX_FUERA = ('que cuales cual cuantos cuantas cuanto contrato contratos tiene tienen tuvo la el los las de del en a al y o con por para su sus le les ha han ' +
+    'compras mx comprasmx compranet gobierno empresa empresas proveedor proveedores proveedora contratista contratistas quien quienes son es ' +
+    'compra compro comprado vende vendio pagado paga pago pagan licitacion licitaciones adjudicacion adjudicaciones directa directas publica publicas ' +
+    'dame dime ver muestra muestrame busca buscame revisa sabes hay me puedes quiero saber lista mayores principales grandes mas federal').split(' ');
+  function contratosCmx(q) {
+    var p = plano(q);
+    if (!CMX_RE.test(p) || SAT_PAL.test(p) || /^ (que|q) (es|son|significa)\b/.test(p)) return null;
+    var rfcs = (q.match(RFC_RE) || []).map(function (x) { return x.toUpperCase(); });
+    var nombre = p.trim().split(' ').filter(function (w) { return w.length > 1 && CMX_FUERA.indexOf(w) < 0; }).join(' ');
+    if (rfcs.length && rfcs[0].length === 13) {
+      return { html: '<p>🔒 <code>' + esc(rfcs[0]) + '</code> es el RFC de una <b>persona física</b>. La plataforma no publica a las personas físicas que le venden al gobierno: su RFC es un dato personal. Solo cuentan en los totales de cada institución.</p>' +
+        '<p>Si necesitas revisarlo, la fuente oficial es el sitio público de ComprasMX.</p>', ir: [CMX_PAG, 'Contratos públicos'], sug: [], rec: [] };
+    }
+    if (!rfcs.length && satNorm(nombre).length < 2) {
+      return { html: '<p>🧾 Tengo los <b>contratos públicos de ComprasMX</b>: los que reportaron las dependencias federales y los gobiernos que usan la plataforma, en los expedientes de 2025 y 2026. Dime una <b>empresa</b> («contratos de Laboratorios Pisa»), su <b>RFC</b> o una <b>institución</b> («¿a quién le compra el IMSS?») y te digo cuántos contratos, por cuánto, por qué procedimiento y la liga de cada uno.</p>',
+        ir: [CMX_PAG, 'Contratos públicos'], sug: ['¿A quién le compra el IMSS?', 'Contratos del Tren Maya', '¿Qué contratistas están en la lista negra del SAT?'], rec: [] };
+    }
+    var termino = rfcs.length ? rfcs[0] : nombre;
+    var prom = Promise.all([cmxIdx(), cmxInst()]).then(function (D) {
+      var I = D[0], T = D[1];
+      if (rfcs.length) return cmxProv(rfcs[0]).then(function (d) { return respProv(rfcs[0], d, I.meta); });
+      var ws = satNorm(nombre).split(' ');
+      /* Una institución por sus siglas («IMSS», «CFE») o por su nombre. */
+      var claves = Object.keys(T.i), sig = null;
+      if (ws.length <= 3) claves.forEach(function (k) { var s = satNorm(T.i[k].s).replace(/ /g, ''); if (!sig && s.length > 1 && ws.join('') === s) sig = k; });
+      var porNom = claves.filter(function (k) { var n = satNorm(T.i[k].n); return ws.every(function (w) { return (' ' + n + ' ').indexOf(' ' + w + ' ') >= 0; }); });
+      var provs = I.r.filter(function (r) { var n = ' ' + satNorm(r[1]) + ' '; return ws.every(function (w) { return n.indexOf(' ' + w + ' ') >= 0; }); });
+      var pideInst = /\b(a quien(es)? le compra|proveedores (de|del)|contratistas (de|del)|le compra)\b/.test(p);
+      if (sig || (porNom.length && (pideInst || !provs.length))) {
+        var k = sig || porNom.sort(function (a, b) { return T.i[b].m - T.i[a].m; })[0];
+        return respInst(k, T.i[k], T.meta, porNom.length > 1 && !sig ? porNom.length : 0);
+      }
+      if (!provs.length) return { html: '<p>◻️ No encontré «' + esc(nombre) + '» entre los <b>' + I.meta.proveedores.toLocaleString('es-MX') + '</b> proveedores (personas morales) ni entre las <b>' + I.meta.instituciones.toLocaleString('es-MX') + '</b> instituciones con contratos en ComprasMX, en los expedientes de 2025 y 2026.</p>' +
+        '<p>Eso no quiere decir que no tenga contratos: el nombre puede estar escrito distinto, sus contratos pueden ser de otros años, o la institución puede no reportar en ComprasMX. Varios órganos autónomos, como el INE, y los gobiernos que no usan la plataforma publican sus contratos en sus propios portales y en la Plataforma Nacional de Transparencia. Con el <b>RFC</b> la búsqueda es exacta.</p>',
+        ir: [CMX_PAG + '?q=' + encodeURIComponent(nombre), 'Contratos públicos'], sug: [], rec: [], web: nombre };
+      var exacto = provs.filter(function (r) { return satNorm(r[1]).replace(/\b(S ?A|DE|C ?V|S ?A ?P ?I|R ?L|S ?C)\b/g, '').replace(/ +/g, ' ').trim() === ws.join(' '); });
+      if (provs.length === 1 || exacto.length === 1) { var r1 = provs.length === 1 ? provs[0] : exacto[0]; return cmxProv(r1[0]).then(function (d) { return respProv(r1[0], d, I.meta); }); }
+      return { html: '<p>Encontré <b>' + provs.length.toLocaleString('es-MX') + '</b> proveedores con «' + esc(nombre) + '» en el nombre. ¿Cuál buscas?</p><p>' +
+        provs.slice(0, 8).map(function (r) { return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc('Contratos de ' + r[0]) + '">' + esc(r[1]) + '</button>'; }).join(' ') + '</p>' +
+        (provs.length > 8 ? '<p class="pa-chico">Te muestro 8. Con el RFC la búsqueda es exacta.</p>' : ''),
+        ir: [CMX_PAG + '?q=' + encodeURIComponent(nombre), 'Contratos públicos'], sug: [], rec: [] };
+    }, function () {
+      return { html: '<p>No pude descargar ahora el catálogo de contratos de ComprasMX. Revisa tu conexión y vuelve a preguntarme.</p>', ir: [CMX_PAG, 'Contratos públicos'], sug: [], rec: [] };
+    });
+    return { espera: prom, tit: 'Contratos en ComprasMX: ' + termino };
+  }
+  function cmxFuente(M) {
+    return { tx: M.fuente + ' (archivos ' + M.archivos.map(function (a) { return a.anio; }).join(' y ') + ', descargados el ' + M.descarga + ')', url: M.url };
+  }
+  function cmxCaveat() {
+    return '<p class="pa-chico">⚖️ Tener contratos con el gobierno no es una irregularidad. El importe es el que reportó cada institución, antes de impuestos; en un contrato abierto suele ser el máximo, no lo pagado. ComprasMX no publica pagos: lo pagado se rinde en la Cuenta Pública.</p>';
+  }
+  function respProv(rfc, d, M) {
+    if (!d) return { html: '<p>◻️ El RFC <code>' + esc(rfc) + '</code> no tiene contratos en los expedientes de 2025 y 2026 de ComprasMX.</p><p>Puede tenerlos en otros años o con gobiernos que no usan ComprasMX. Eso no certifica nada.</p>',
+      ir: [CMX_PAG + '?q=' + rfc, 'Contratos públicos'], sug: ['¿Está en la lista negra del SAT el RFC ' + rfc + '?'], rec: [] };
+    var tp = d.tp || {}, mtp = d.mtp || {}, fuente = cmxFuente(M), ci = [];
+    var partes = ['AD', 'LP', 'I3', 'OT'].filter(function (k) { return tp[k]; }).map(function (k) {
+      return '<b>' + tp[k].toLocaleString('es-MX') + '</b> por ' + TIPO_CMX[k] + (mtp[k] ? ' (' + pesosCmx(mtp[k]) + ')' : '');
+    });
+    var pctAd = d.m ? Math.round((mtp.AD || 0) / d.m * 1000) / 10 : 0;
+    var h = '<p>🏢 <b>' + esc(d.n) + '</b> (<code>' + esc(rfc) + '</code>) tiene <b>' + d.c.toLocaleString('es-MX') + ' contrato' + (d.c === 1 ? '' : 's') + '</b> en ComprasMX, en los expedientes de 2025 y 2026, por <b>' + pesosCmx(d.m) + '</b> antes de impuestos ' + chip({ e: 'derivado' }) + '.</p>' +
+      '<p>Por procedimiento: ' + partes.join('; ') + '.' + (d.m && mtp.AD ? ' La adjudicación directa es el ' + pctAd.toLocaleString('es-MX') + ' % de su importe ' + chip({ e: 'derivado' }) + '.' : '') + '</p>' +
+      (d.o ? '<p class="pa-chico">Además, en otras monedas (no se convierten): ' + Object.keys(d.o).map(function (k) { return d.o[k].toLocaleString('es-MX', { maximumFractionDigits: 0 }) + ' ' + esc(k); }).join(', ') + '.</p>' : '') +
+      '<p>Le vende a <b>' + d.ni + '</b> institucion' + (d.ni === 1 ? '' : 'es') + (d.ni > 1 ? '; las principales:' : ':') + '</p><ul class="pa-lista">' + d.i.map(function (x) {
+        return '<li><b>' + esc(x[1]) + '</b>: ' + x[3].toLocaleString('es-MX') + ' contrato' + (x[3] === 1 ? '' : 's') + ', ' + pesosCmx(x[4]) + '</li>';
+      }).join('') + '</ul>' +
+      '<p>Sus contratos mayores ' + chip({ e: 'oficial' }) + ':</p><ul class="pa-lista">' + d.k.map(function (k) {
+        return '<li>' + pesosCmx(k[3]) + (k[4] !== 'MXN' ? ' ' + esc(k[4]) : '') + ' · <b>' + esc(k[1]) + '</b> · ' + esc(TIPO_CMX[k[5]] || '') + (k[6] ? ' · ' + esc(k[6]) : '') + '<br><span class="pa-chico">' + esc(k[2]) + '</span>' +
+          (k[7] ? ' <a href="' + esc(M.detalle.replace('%s', k[7])) + '" target="_blank" rel="noopener">Ver en ComprasMX ↗</a>' : '') + '</li>';
+      }).join('') + '</ul>';
+    if (d.sat) {
+      var s = (IN.sat || {})[d.sat[0]] || { t: d.sat[0], txt: '' };
+      h += '<p>' + (d.sat[0] === 'F' ? '⛔' : d.sat[0] === 'P' ? '⚠️' : 'ℹ️') + ' <b>Aparece en la lista 69-B del SAT</b> como <b>' + esc(s.t) + '</b> (oficio ' + esc(d.sat[1]) + ', ' + esc(d.sat[2]) + '). ' + esc(s.txt || '') + '</p>';
+    }
+    var emp = PE.per.filter(function (x) { return x.emp; }).filter(function (x) { return x.al.some(function (a) { return plano(d.n).indexOf(' ' + a + ' ') >= 0; }); })[0];
+    if (emp) h += '<p>📰 La plataforma también tiene a <b>' + esc(corta(emp.n)) + '</b> en Noticias relevantes: <button type="button" class="pa-ej" data-pa-pregunta="' + esc(corta(emp.n)) + '">Ver lo que sabemos</button></p>';
+    h += cmxCaveat();
+    ci.push({ v: d.c.toLocaleString('es-MX') + ' contratos', etq: d.n + ' · RFC ' + rfc + ' · expedientes 2025 y 2026', e: 'oficial' });
+    ci.push({ v: pesosCmx(d.m), etq: 'Importe antes de impuestos, suma de sus contratos en pesos', e: 'derivado' });
+    d.k.forEach(function (k) { ci.push({ v: pesosCmx(k[3]) + (k[4] !== 'MXN' ? ' ' + k[4] : ''), etq: k[0] + ' · ' + k[1] + ' · ' + k[2], e: 'oficial' }); });
+    var tit = 'Contratos en ComprasMX: ' + d.n;
+    h += charla && charla.deDonde ? charla.deDonde([{ que: 'Datos relevantes de los contratos de ComprasMX', e: 'oficial', fu: fuente }]) : '';
+    return { html: h, ir: [CMX_PAG + '?q=' + rfc, 'Contratos públicos'], rec: [],
+      ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: [fuente], ir: [CMX_PAG + '?q=' + rfc, 'Contratos públicos'] },
+      sug: ['¿Está en la lista negra del SAT el RFC ' + rfc + '?'].concat(d.i.slice(0, 2).map(function (x) { return '¿A quién le compra ' + x[1] + '?'; })) };
+  }
+  function respInst(k, d, M, otras) {
+    var fuente = cmxFuente(M), ci = [];
+    var pc = d.c ? Math.round(d.ad / d.c * 1000) / 10 : 0, pm = d.m ? Math.round(d.mad / d.m * 1000) / 10 : 0;
+    var h = '<p>🏛️ <b>' + esc(d.n) + '</b>' + (d.s && d.s !== d.n ? ' (' + esc(d.s) + ')' : '') + ' reportó <b>' + d.c.toLocaleString('es-MX') + ' contratos</b> en ComprasMX, en los expedientes de 2025 y 2026, por <b>' + pesosCmx(d.m) + '</b> antes de impuestos ' + chip({ e: 'derivado' }) + '.</p>' +
+      '<p>Por <b>adjudicación directa</b>: ' + d.ad.toLocaleString('es-MX') + ' contratos (' + pc.toLocaleString('es-MX') + ' % del total) y ' + pesosCmx(d.mad) + ' (' + pm.toLocaleString('es-MX') + ' % del importe) ' + chip({ e: 'derivado' }) + '.</p>' +
+      (d.ot ? '<p class="pa-chico">Además, en otras monedas (no se convierten): ' + Object.keys(d.ot).map(function (x) { return d.ot[x].toLocaleString('es-MX', { maximumFractionDigits: 0 }) + ' ' + esc(x); }).join(', ') + '.</p>' : '') +
+      '<p>Le compró a <b>' + d.np.toLocaleString('es-MX') + '</b> empresas' + (d.pf ? ' y a personas físicas (' + d.pf.toLocaleString('es-MX') + ' contratos, ' + pesosCmx(d.mpf) + '; no se publican sus nombres)' : '') + '. Sus 10 proveedores mayores:</p><ol class="pa-lista">' +
+      d.p.map(function (x) { return '<li><button type="button" class="pa-ej" data-pa-pregunta="' + esc('Contratos de ' + x[0]) + '">' + esc(x[1]) + '</button> ' + pesosCmx(x[3]) + ' · ' + x[2].toLocaleString('es-MX') + ' contrato' + (x[2] === 1 ? '' : 's') + '</li>'; }).join('') + '</ol>' +
+      (otras ? '<p class="pa-chico">Hay ' + otras + ' instituciones con ese nombre; te muestro la de mayor importe. Escribe sus siglas para elegir otra.</p>' : '') + cmxCaveat();
+    ci.push({ v: d.c.toLocaleString('es-MX') + ' contratos', etq: d.n + ' · expedientes 2025 y 2026', e: 'oficial' });
+    ci.push({ v: pesosCmx(d.m), etq: 'Importe antes de impuestos, suma de sus contratos en pesos', e: 'derivado' });
+    ci.push({ v: pm.toLocaleString('es-MX') + ' %', etq: 'Del importe, por adjudicación directa (' + pesosCmx(d.mad) + ' ÷ ' + pesosCmx(d.m) + ')', e: 'derivado' });
+    d.p.forEach(function (x) { ci.push({ v: pesosCmx(x[3]), etq: x[1] + ' · ' + x[2] + ' contratos', e: 'derivado' }); });
+    var tit = 'Contratos de ' + d.n + ' en ComprasMX';
+    h += charla && charla.deDonde ? charla.deDonde([{ que: 'Datos relevantes de los contratos de ComprasMX', e: 'oficial', fu: fuente }]) : '';
+    return { html: h, ir: [CMX_PAG + '?i=' + encodeURIComponent(k), 'Contratos públicos'], rec: [],
+      ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: [fuente], ir: [CMX_PAG + '?i=' + encodeURIComponent(k), 'Contratos públicos'] },
+      sug: d.p.slice(0, 2).map(function (x) { return 'Contratos de ' + x[1]; }) };
+  }
+  /* Contratistas que también están en la lista 69-B del SAT. */
+  var CRUCE_RE = /\b(contratistas?|proveedor(es)?|empresas? con contratos?)\b.*\b(lista negra|69 ?b|efos|sat)\b|\b(lista negra|69 ?b|efos)\b.*\b(contratistas?|proveedor(es)?|contratos?)\b/;
+  function cruceSat(q) {
+    if (!CRUCE_RE.test(plano(q)) || (q.match(RFC_RE) || []).length) return null;
+    return { espera: cmxInst().then(function (T) {
+      var sit = IN.sat || {}, L = T.sat;
+      var h = '<p>Crucé los <b>' + T.meta.proveedores.toLocaleString('es-MX') + '</b> proveedores con contratos en ComprasMX (expedientes 2025 y 2026) contra la lista 69-B del SAT, por RFC: <b>' + L.length + '</b> aparecen ' + chip({ e: 'derivado' }) + '.</p>' +
+        '<ul class="pa-lista">' + L.map(function (r) { var s = sit[r[2]] || { t: r[2], i: '' }; return '<li>' + (s.i || '') + ' <button type="button" class="pa-ej" data-pa-pregunta="' + esc('Contratos de ' + r[0]) + '">' + esc(r[1]) + '</button> · <b>' + esc(s.t) + '</b> · ' + r[3] + ' contrato' + (r[3] === 1 ? '' : 's') + ', ' + pesosCmx(r[4]) + '</li>'; }).join('') + '</ul>' +
+        '<p>«Desvirtuado» y «sentencia favorable» quieren decir que salió de la presunción; solo «definitivo» es una determinación firme del SAT, y «presunto» es un proceso abierto.</p>' + cmxCaveat();
+      var fuentes = [cmxFuente(T.meta)];
+      return { html: h, ir: [CMX_PAG + '#cruce', 'Contratos públicos'], rec: [], sug: [],
+        ficha: { t: 'calculo', tit: 'Contratistas de ComprasMX en la lista 69-B del SAT', txt: texto(h), ci: L.map(function (r) { return { v: (sit[r[2]] || { t: r[2] }).t, etq: r[1] + ' · RFC ' + r[0], e: 'oficial' }; }), fu: fuentes, ir: [CMX_PAG + '#cruce', 'Contratos públicos'] } };
+    }, function () { return { html: '<p>No pude descargar ahora el catálogo de contratos.</p>', ir: [CMX_PAG, 'Contratos públicos'], sug: [], rec: [] }; }), tit: 'Contratistas en la lista 69-B' };
+  }
 
   /* --- Las demás: qué pide el lector y con qué la abrimos. --- */
   var FOLIO_RE = /\bAV-[A-Z0-9]{2,8}-[0-9A-F]{6,}\b|\b[0-9A-F]{64}\b/i, DICT_RE = /\b(DP|NT)-\d{8}-[0-9A-F]{8}\b/i;
@@ -1305,6 +1461,7 @@
       if (sug.length < 4 && x.f.t !== 'columna' && x.f.t !== 'fuente' && !vistos[x.f.tit] && per.al.some(function (w) { return t.indexOf(' ' + w + ' ') >= 0; })) { vistos[x.f.tit] = 1; sug.push(x.f); }
     });
     if (per.emp) sug.unshift('¿Está en la lista negra del SAT la empresa ' + corta(per.n) + '?');
+    if (per.emp) sug.unshift('Contratos de ' + corta(per.n) + ' en ComprasMX');
     PE.per.forEach(function (o) {
       if (sug.length < 5 && o !== per && o.col.some(function (id) { return per.col.indexOf(id) >= 0; })) sug.push(o.emp ? corta(o.n) : '¿Quién es ' + o.n + '?');
     });
@@ -1370,6 +1527,8 @@
     if (inv) return inv;
     var al = alarma(q);
     if (al) return al;
+    var cx = cruceSat(q) || contratosCmx(q);
+    if (cx) return cx;
     var pe = personaje(q);
     if (pe) return pe;
     var ins = conApp(inspector(q, previas));

@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 211 |
+| Páginas revisadas | 212 |
 | Páginas que solo redirigen | 28 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -42,6 +42,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `contexto-dimensional-presupuestaria.html` | Dimensión presupuestaria · Auditavisión | apartados.py | 30 | 0 | 3 | 1 | 0 |
 | `contexto-dimensional-renglones.html` | Renglones que no se suman · Auditavisión | apartados.py | 31 | 0 | 3 | 0 | 1 |
 | `contexto-dimensional-social.html` | Dimensión social · Auditavisión | apartados.py | 31 | 0 | 6 | 0 | 1 |
+| `contratos-publicos.html` | Contratos públicos · Auditavisión | apartados.py | 30 | 0 | 1 | 1 | 0 |
 | `datos-abiertos.html` | Datos abiertos · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `datos-ambiente-basura.html` | La basura · Auditavisión | apartados.py | 38 | 0 | 14 | 9 | 1 |
 | `datos-ambiente-desglose.html` | Qué se acabó y qué se ensució · Auditavisión | apartados.py | 38 | 0 | 11 | 1 | 0 |
@@ -210,7 +211,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 121 | 0 | 0 | 0 | 65 |
-| `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 31 | 0 | 1 | 0 | 0 |
+| `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 32 | 0 | 1 | 0 | 0 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |

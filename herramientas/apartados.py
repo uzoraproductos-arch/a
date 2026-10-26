@@ -1357,12 +1357,73 @@ PILARES = {
          'tarjetas': [
              ('🤖', 'Pregúntale al Auditor', 'El periodista virtual: busca, coteja, explica y genera el dictamen.', AUDITOR_VIRTUAL, None, None),
              ('🔍', 'Verificamos', 'Lo que circula en redes, cotejado afirmación por afirmación, y los casos que puedes seguir.', 'noticias-relevantes.html#seguimientos', None, None),
+             ('🧾', 'Contratos públicos', 'Sigue el dinero: a quién le paga el gobierno, cuánto y por qué procedimiento (ComprasMX).', 'contratos-publicos.html', None, None),
              ('⏳', 'Registro de pendientes', 'Lo que falta publicar, por qué falta y a quién le toca.', 'pendientes.html', None, None),
              ('🌿', 'Crisis ambientales', 'Las crisis y los proyectos con costo ambiental, ficha por ficha.', 'herramienta-ambiente-crisis.html', None, None),
              ('📥', 'Descarga los datos', 'Las cifras de la plataforma, para que las revises por tu cuenta.', 'descarga-los-datos.html', None, None),
          ]},
     ],
 }
+
+
+
+def _cmx_meta():
+    """Lo que dice el catalogo de ComprasMX de si mismo (actualizar_comprasmx.py)."""
+    ruta = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets', 'auditor', 'data', 'comprasmx', 'inst.js')
+    t = open(ruta, encoding='utf-8').read()
+    d = json.loads(t[t.index('{'):t.rindex('}') + 1])
+    return d['meta'], len(d['sat'])
+
+
+def contratos_publicos():
+    """Contratos publicos de ComprasMX (pedido del autor, 26-10-2026: «integra
+    los contratos de ComprasMX» para seguir el dinero). El buscador y el
+    cruce los pinta contratos.js con los catalogos de actualizar_comprasmx.py."""
+    m, cruce = _cmx_meta()
+    arch = ''.join('<li><b>%s</b>: %s contratos <small>(sha256 %s…)</small></li>' % (a['archivo'], format(a['contratos'], ','), a['sha256'][:12])
+                   for a in m['archivos'])
+    return {
+        'archivo': 'contratos-publicos.html', 'menu': 'Contratos públicos', 'menu_archivo': 'herramientas.html',
+        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+        'padre2': ('herramienta-inspector.html', 'Modo Inspector'),
+        'icono': '🧾', 'titulo': 'Contratos públicos', 'lema': 'Sigue el dinero: a quién le paga el gobierno',
+        'entrada': ('Los contratos que las dependencias federales y los gobiernos que usan ComprasMX reportaron en los expedientes de 2025 y 2026: '
+                    '%s empresas y %s instituciones. Busca una empresa, su RFC o una institución, y ve cuántos contratos tiene, por cuánto, '
+                    'por qué procedimiento y la liga de cada uno a ComprasMX. También puedes preguntárselo al Auditor: «contratos de Laboratorios Pisa», '
+                    '«¿a quién le compra el IMSS?».' % (format(m['proveedores'], ','), format(m['instituciones'], ','))),
+        'estilos': ['contratos.css'],
+        'scripts': ['contratos.js'],
+        'secciones': [
+            {'id': 'buscar', 'titulo': 'Busca una empresa o una institución', 'texto': 'Nombre, RFC o siglas: «Pisa», «IMSS», «Tren Maya».', 'tarjetas': [],
+             'bloque': ('<div class="cmx-app" id="cmxApp">\n'
+                        '          <form class="cmx-forma" id="cmxForma" role="search"><label for="cmxQ">Empresa, RFC o institución</label>'
+                        '<div class="cmx-fila"><input id="cmxQ" type="search" autocomplete="off" placeholder="Ej. Laboratorios Pisa, IMSS…">'
+                        '<button type="submit">Buscar</button></div></form>\n'
+                        '          <div class="cmx-sal" id="cmxSal" aria-live="polite"></div>\n'
+                        '          <noscript><p>El buscador necesita JavaScript.</p></noscript>\n'
+                        '        </div>')},
+            {'id': 'cruce', 'titulo': 'Contratistas en la lista negra del SAT',
+             'texto': ('Cruzamos, por RFC, a cada proveedor con contratos contra el listado del artículo 69-B del SAT (empresas que facturan '
+                       'operaciones inexistentes). Al corte de esta versión aparecen %d. Aparecer no es una condena: cada uno lleva su situación.' % cruce),
+             'tarjetas': [], 'bloque': '<div class="cmx-cruce" id="cmxCruce"><p>Cargando el cruce…</p></div>'},
+            {'id': 'metodo', 'titulo': 'De dónde salen los datos', 'texto': 'Lo que dice el documento y lo que no.', 'tarjetas': [],
+             'bloque': ('<div class="cmx-metodo">\n'
+                        '          <p>Fuente: <a href="%s" target="_blank" rel="noopener">ComprasMX, Datos Abiertos ↗</a>, «Datos relevantes de los contratos ingresados a la plataforma», '
+                        'de la Secretaría Anticorrupción y Buen Gobierno. Descargados el %s:</p>\n          <ul>%s</ul>\n'
+                        '          <ul>\n'
+                        '            <li><b>El importe de cada contrato es oficial</b> <span class="est-chip est-oficial">oficial</span>: el «Importe DRC», antes de impuestos, tal como lo reportó la institución. '
+                        'Las sumas y los porcentajes son <span class="est-chip est-derivado">derivado</span>: se suman solo los contratos en pesos; los de otras monedas se muestran aparte, sin convertir.</li>\n'
+                        '            <li><b>No es lo pagado.</b> En un contrato abierto el importe suele ser el máximo. ComprasMX no publica pagos: lo pagado se rinde en la Cuenta Pública.</li>\n'
+                        '            <li><b>El año es el del expediente</b>, no el del pago: el archivo de 2025 trae contratos firmados en 2026.</li>\n'
+                        '            <li><b>Solo lo que se reporta en ComprasMX.</b> Los estados y municipios que no la usan no aparecen, y los años anteriores a 2025 están en el CompraNet histórico, que aún no integramos.</li>\n'
+                        '            <li><b>Las personas físicas no se publican</b> con nombre ni RFC: su RFC es un dato personal. Solo cuentan en los totales de cada institución.</li>\n'
+                        '            <li><b>Tener contratos no es una irregularidad.</b> La plataforma no califica a nadie: muestra lo reportado y la liga al documento.</li>\n'
+                        '          </ul>\n'
+                        '          <p>Para actualizarlo: <code>python3 herramientas/actualizar_comprasmx.py</code> con los archivos descargados de la misma página.</p>\n'
+                        '        </div>') % (m['url'], m['descarga'], arch)},
+        ],
+        'pie_extra': herr_otras('herramienta-inspector.html'),
+    }
 
 
 DICCIONARIO = {
@@ -4916,6 +4977,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('26-10-2026', 'Contratos públicos: los 215 mil contratos que el gobierno federal y los gobiernos que usan ComprasMX reportaron en los expedientes de 2025 y 2026. Pregúntale al Auditor «contratos de Laboratorios Pisa» o «¿a quién le compra el IMSS?» y te dice cuántos contratos, por cuánto, cuánto fue por adjudicación directa y la liga de cada uno. Y cruzamos a todos los proveedores con la lista negra del SAT.'),
     ('26-10-2026', 'Nuestros pilares: la nueva página dice en nueve puntos qué es Auditavisión, el periodista virtual del gasto público: que la verdad sea incómoda no la vuelve falsa, evidencia con folio, contrapeso y no propaganda, y reconocimiento a quienes hacen periodismo. Y ya puedes seguir un caso: en cada columna de Noticias relevantes, «🔔 Seguir este caso» te avisa cuando la actualizamos con un documento nuevo.'),
     ('26-10-2026', 'Verificamos Guaymas: el terreno del proyecto de gas AMIGO, cotejado. La Secretaría de Energía habla de 41.7 hectáreas, no de 54; el contrato de comodato no está publicado y queda pendiente a cargo del Gobierno de Sonora; la obra está detenida por amparos. El caso también entra a Crisis ambientales, con el presupuesto de la ASEA en el Auditor ambiental.'),
     ('26-10-2026', 'Verificamos sigue el dinero: cada caso trae «Lo que sigue» (el voto, el Diario Oficial o el informe que falta revisar), y el Auditor ya reconoce a las empresas contratistas. Escribe «Cyber Robotic Solutions» o «Cajas Graf» y te dice qué consta en documentos, y dónde ver sus contratos, si está sancionada o si la autoridad la ha señalado. Nueva columna: medicinas y ventiladores del IMSS.'),
@@ -5298,7 +5360,7 @@ def generar(sello=None):
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     import datos_ambiente
-    for extra in [DICCIONARIO, NOTICIAS, PILARES, GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, NOTICIAS, PILARES, contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

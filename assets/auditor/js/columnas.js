@@ -271,11 +271,11 @@
    {
     "dice": "Amílcar Olán tiene contratos de adjudicación directa de medicinas a sobreprecio por más de 800 millones de pesos en IMSS-Bienestar de Tabasco y Quintana Roo y en el IMSS.",
     "res": "pendiente",
-    "explica": "Es la suma de un medio. Para sostenerla hacen falta los contratos, con su empresa, su monto y su precio por pieza, que no pudimos abrir. Hasta hoy ningún documento oficial abierto por la plataforma liga a Olán con un contrato público.",
-    "fuente": "ComprasMX",
-    "url": "https://comprasmx.buengobierno.gob.mx/",
-    "quien": "Falta de la plataforma: los contratos del IMSS y de IMSS-Bienestar son públicos en ComprasMX y aún no los integramos",
-    "donde": "https://comprasmx.buengobierno.gob.mx/"
+    "explica": "Es la suma de un medio. Los contratos de 2025 y 2026 del IMSS y de IMSS-Bienestar ya están en Contratos públicos, pero ningún documento oficial dice qué empresas serían de Olán, y sin eso no se le puede atribuir un monto. Los de 2023 y 2024 están en el CompraNet histórico, que aún no integramos.",
+    "fuente": "ComprasMX, Datos Abiertos",
+    "url": "https://comprasmx.buengobierno.gob.mx/datos-abiertos",
+    "quien": "Falta de la plataforma: los contratos de 2023 y 2024 del CompraNet histórico aún no los integramos, y ningún documento oficial abierto liga a Olán con una empresa contratista",
+    "donde": "https://comprasmx.buengobierno.gob.mx/datos-abiertos"
    },
    {
     "dice": "Es amigo de Andy López Beltrán y socio de una marca de camisas de moda.",
@@ -287,8 +287,12 @@
   ],
   "sigue": [
    {
-    "que": "Integrar los contratos de medicinas del IMSS y de IMSS-Bienestar de 2023 a 2026 desde ComprasMX y cotejar los que se atribuyen a empresas ligadas a Olán",
-    "url": "https://comprasmx.buengobierno.gob.mx/"
+    "que": "Los contratos del IMSS en ComprasMX (2025 y 2026), ya integrados: sus proveedores mayores y cuánto fue por adjudicación directa",
+    "url": "contratos-publicos.html?i=050GYR"
+   },
+   {
+    "que": "Integrar los contratos de 2023 y 2024 del CompraNet histórico y cotejar los que se atribuyen a empresas ligadas a Olán, cuando un documento oficial las nombre",
+    "url": "https://comprasmx.buengobierno.gob.mx/datos-abiertos"
    },
    {
     "que": "Buscar la sentencia del Tribunal Federal de Justicia Administrativa sobre la sanción a Cyber Robotic Solutions",
