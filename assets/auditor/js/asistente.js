@@ -624,6 +624,9 @@
         '<ul class="pa-lista">' + todos.slice(0, MAX).map(linea).join('') + '</ul>' +
         (todos.length > MAX ? '<p class="pa-chico">Te muestro ' + MAX + '. Los ' + todos.length.toLocaleString('es-MX') + ' están en la aplicación aquí abajo; con el RFC la búsqueda es exacta.</p>' : '');
     }
+    /* Si la plataforma tiene a esa empresa en Noticias relevantes, lo dice. */
+    var emp = nombre && PE.per.filter(function (x) { return x.emp; }).filter(function (x) { return x.al.some(function (a) { return plano(nombre).indexOf(' ' + a + ' ') >= 0; }); })[0];
+    if (emp) h += '<p>📰 Además, la plataforma tiene a <b>' + esc(emp.n) + '</b> en Noticias relevantes, con lo que consta en documentos: <button type="button" class="pa-ej" data-pa-pregunta="' + esc(corta(emp.n)) + '">Ver lo que sabemos</button></p>';
     h += '<p class="pa-chico">⚖️ Aparecer en la lista es una determinación administrativa del SAT, no una condena penal. «Desvirtuado» y «sentencia favorable» significan que salió de la presunción.</p>';
     todos.slice(0, 12).forEach(function (r) { ci.push({ v: (sit[r[2]] || { t: r[2] }).t, etq: r[1] + ' · RFC ' + r[0] + ' · oficio ' + r[3] + ' (' + r[4] + ')', e: 'oficial' }); });
     var fuente = { tx: S.meta.fuente + ', corte al ' + corte, url: S.meta.url };
@@ -1217,7 +1220,7 @@
      herramientas/asistente_personajes.py. */
   var PE = (B.dat && B.dat.per) || { per: [], web: [] }, COLF = {};
   F.forEach(function (f) { if (f.t === 'columna') COLF[f.col] = f; });
-  var PER_CTX = /\b(quien es|quien fue|quienes son|quien era|noticias?|que se sabe|que paso con|que hizo|que hay de|que dicen de|datos? curiosos?|columnas?|historia de|biografia|trayectoria|procesos?|juicios?|sentencias?|sentenciad\w*|condena\w*|denuncia\w*|acusa\w*|investigad\w*|escandalos?|polemica\w*|corrupcion|carpetas?|detenid\w*|preso|presa|carcel|prision|rumor\w*|chismes?)\b/;
+  var PER_CTX = /\b(quien es|quien fue|quienes son|quien era|noticias?|que se sabe|que paso con|que hizo|que hay de|que dicen de|datos? curiosos?|columnas?|historia de|biografia|trayectoria|procesos?|juicios?|sentencias?|sentenciad\w*|condena\w*|denuncia\w*|acusa\w*|investigad\w*|escandalos?|polemica\w*|corrupcion|carpetas?|detenid\w*|preso|presa|carcel|prision|rumor\w*|chismes?|contratos?|contratista\w*|proveedor\w*|empresa)\b/;
   var NOTICIAS_RE = /^\s*(las |unas |dame |muestrame |ver |quiero |que )*(noticias( relevantes)?|columnas?( del erario)?|la columna del erario|datos curiosos)\s*$/;
   var PARTICULA = { de: 1, del: 1, la: 1, las: 1, los: 1, y: 1 };
   function personaDe(p) {
@@ -1245,16 +1248,19 @@
     if (m && propias < 1 && ws.length > 4) return null;
     return n;
   }
-  function webHtml(nombre) {
-    var q = '"' + nombre + '"';
+  /* El nombre corto de una empresa: sin «, S.A. de C.V.» y parecidos. */
+  function corta(n) { return String(n).replace(/,?\s+(S\.?\s?A\.?|S\.?\s?de\s?R\.?\s?L\.?|S\.?\s?C\.?|S\.?\s?A\.?\s?P\.?\s?I\.?).*$/i, '').trim(); }
+  function webHtml(nombre, emp) {
+    var q = '"' + (emp ? corta(nombre) : nombre) + '"';
     return '<div class="pa-rec pa-web"><p class="pa-mas-t">Búscalo en internet</p>' +
       '<p class="pa-chico">Esto ya no es la plataforma: son búsquedas ya armadas con el nombre, primero en portales oficiales y al final en las noticias. ' +
       '<b>Lo que encuentres ahí no lo verificó Auditavisión</b>: una nota de prensa no es un documento oficial, y un proceso no es una condena.</p>' +
-      '<div class="pa-rec-lista">' + PE.web.map(function (w) {
-        var u = w.site ? 'https://www.google.com/search?q=' + encodeURIComponent(q + ' ' + w.site)
+      '<div class="pa-rec-lista">' + (emp ? PE.webEmp : PE.web).map(function (w) {
+        var portal = w.site && w.site.indexOf('https://') === 0;
+        var u = portal ? w.site : w.site ? 'https://www.google.com/search?q=' + encodeURIComponent(q + ' ' + w.site)
           : 'https://news.google.com/search?q=' + encodeURIComponent(q) + '&hl=es-419&gl=MX&ceid=MX:es-419';
         return '<a class="pa-rec-a" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer"><span class="pa-rec-ico" aria-hidden="true">' + w.ico + '</span>' +
-          '<span><b>' + esc(w.n) + '</b><small>' + (w.e === 'oficial' ? 'Fuente oficial · se abre en otra pestaña ↗' : 'Prensa: sin verificar · se abre en otra pestaña ↗') + '</small></span></a>';
+          '<span><b>' + esc(w.n) + '</b><small>' + (portal ? 'Portal oficial · escribe ahí ' + esc(q) + ' ↗' : w.e === 'oficial' ? 'Fuente oficial · se abre en otra pestaña ↗' : 'Prensa: sin verificar · se abre en otra pestaña ↗') + '</small></span></a>';
       }).join('') + '</div>' +
       '<p class="pa-chico">¿Encontraste una nota con cifras? Pégame aquí su liga y la cotejo contra los documentos oficiales, con <a href="herramienta-inspector-nota.html">Contrasta una nota</a>.</p></div>';
   }
@@ -1277,8 +1283,9 @@
     var cols = per.col.map(function (id) { return COLF[id]; }).filter(Boolean), f = cols[0];
     var a = admDe(per.n), h, fu = [];
     if (f) {
-      h = '<p>Sobre <b>' + esc(per.n) + '</b>, esto es lo que la plataforma pudo sostener con documentos, en ' +
-        (cols.length > 1 ? 'sus ' + cols.length + ' columnas' : 'su columna') + ' de <b>Noticias relevantes</b>:</p>' +
+      h = '<p>Sobre ' + (per.emp ? 'la empresa ' : '') + '<b>' + esc(per.n) + '</b>, ' + (cols.every(function (c) { return c.cot && c.cot.length; })
+          ? 'esto es lo que la plataforma cotejó contra documentos oficiales de lo que circula, en ' + (cols.length > 1 ? cols.length + ' columnas' : 'la columna') + ' de <b>Verificamos</b>:</p>'
+          : 'esto es lo que la plataforma pudo sostener con documentos, en ' + (cols.length > 1 ? 'sus ' + cols.length + ' columnas' : 'su columna') + ' de <b>Noticias relevantes</b>:</p>') +
         cols.slice(0, 3).map(function (c, i) { return colHtml(c, i === 0); }).join('');
       (f.ci || []).slice(0, 4).forEach(function (c) { fu.push({ que: c.etq, e: c.e, fu: c.fu || (f.fu || [])[0] }); });
     } else {
@@ -1288,7 +1295,8 @@
     if (a) h += '<p>' + esc(a.n) + ' también tiene el <a href="radar-estado-de-cuenta.html?adm=' + encodeURIComponent(a.id) + '"><b>estado de cuenta de su administración</b></a>: deuda, gasto y lo que observó la ASF.</p>';
     h += '<p class="pa-chico">⚖️ ' + esc((f && f.nota) || 'Un proceso no es una condena: aquí solo va lo que consta en documentos, con presunción de inocencia.') + '</p>';
     if (f && charla) h += charla.deDonde(fu.length ? fu : (f.fu || []).slice(0, 3).map(function (x) { return { que: 'Documento', e: 'oficial', fu: x }; }));
-    h += webHtml(per.n);
+    if (per.emp) h += '<p>🏢 Es una empresa que contrata o contrató con el gobierno. Abajo te dejo dónde ver sus contratos, si está sancionada o inhabilitada y si la autoridad la ha señalado; y pregúntame si está en la <b>lista negra del SAT</b>.</p>';
+    h += webHtml(per.n, per.emp);
     /* Lo que la plataforma tiene de esa persona fuera de las columnas. */
     var vistos = {}, sug = [];
     cols.slice(3).forEach(function (c) { sug.push(c); vistos[c.tit] = 1; });
@@ -1296,8 +1304,9 @@
       var t = plano(x.f.tit + ' ' + (x.f.k || '') + ' ' + (x.f.txt || ''));
       if (sug.length < 4 && x.f.t !== 'columna' && x.f.t !== 'fuente' && !vistos[x.f.tit] && per.al.some(function (w) { return t.indexOf(' ' + w + ' ') >= 0; })) { vistos[x.f.tit] = 1; sug.push(x.f); }
     });
+    if (per.emp) sug.unshift('¿Está en la lista negra del SAT la empresa ' + corta(per.n) + '?');
     PE.per.forEach(function (o) {
-      if (sug.length < 5 && o !== per && o.col.some(function (id) { return per.col.indexOf(id) >= 0; })) sug.push('¿Quién es ' + o.n + '?');
+      if (sug.length < 5 && o !== per && o.col.some(function (id) { return per.col.indexOf(id) >= 0; })) sug.push(o.emp ? corta(o.n) : '¿Quién es ' + o.n + '?');
     });
     return {
       html: h, ficha: f || null, tit: per.n,
@@ -1319,6 +1328,7 @@
     }
     var per = personaDe(p);
     if (!per) return null;
+    if (SAT_PAL.test(n)) return null;  // «¿está en la lista negra…?» lo contesta el SAT
     var ctx = PER_CTX.test(n), nada = !sobra(p, per.al, per.n).length;
     /* Un presidente a secas lo sigue contestando su estado de cuenta, y un
        nombre que también es lugar (Benito Juárez) solo si se habla de personas. */

@@ -408,3 +408,6 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .pa-cot-consta .pa-cot-r { background: #dcefdc; color: #1d5b24; }
 .pa-cot-matiz .pa-cot-r { background: #fbecc8; color: #6b4a00; }
 .pa-cot-no-consta .pa-cot-r { background: #f6dcda; color: #8a1f17; }
+.pa-sigue ul { margin: 4px 0 10px; padding-left: 20px; }
+.pa-sigue li { margin-bottom: 6px; }
+.pa-sigue a { display: inline-block; min-height: 24px; }

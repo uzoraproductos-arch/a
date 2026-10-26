@@ -28,12 +28,129 @@
      actualizado, icono?, imagen?{src, alt, credito}}.
      La sección «Verificado» (26-10-2026) coteja lo que circula en redes y
      trae además circula{red, cuenta, fecha, texto} y cotejo[{dice, res,
-     explica, fuente, url, quien?, donde?}], con res: consta, matiz,
+     explica, fuente, url, quien?, donde?}] y sigue[{que, url}] (qué falta
+     revisar para seguir el dinero), con res: consta, matiz,
      no consta o pendiente. Un cotejo pendiente lleva quien y donde, y
      herramientas/pendientes.py lo anota en el Registro de pendientes
      (id red-<columna>-<n>). */
   var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
+ {
+  "id": "salud-ventiladores-y-medicinas",
+  "seccion": "Verificado",
+  "icono": "💊",
+  "titulo": "Medicinas y ventiladores del IMSS: lo que consta del robo, de los ventiladores de 2020 y de los contratos que circulan",
+  "balazo": "Los ventiladores que el IMSS compró en Hidalgo en 2020 no cumplieron el contrato, se devolvieron sin pagarse y la empresa quedó inhabilitada 27 meses, según el IMSS y el Diario Oficial. Los 800 millones en medicinas que se atribuyen a Amílcar Olán todavía no tienen un contrato oficial detrás.",
+  "circula": {
+   "red": "Transcripción de un video",
+   "cuenta": "Comentario en redes (autor no indicado)",
+   "fecha": "Octubre de 2026",
+   "texto": "Cuando hablan del robo de medicamentos en los almacenes y las farmacias de los hospitales, me da la sensación de que el gobierno le quiere echar la culpa al personal del IMSS (…). En 2020, a una empresa de un hijo de Bartlett le asignaron mediante adjudicación directa un contrato de 31 millones de pesos para comprar ventiladores respiratorios que ni siquiera cumplían con las especificaciones técnicas. Amílcar Olán (…) tiene contratos de adjudicación directa de medicamentos a sobreprecio por más de 800 millones de pesos en IMSS-Bienestar de Tabasco y Quintana Roo y en el IMSS."
+  },
+  "cuerpo": [
+   "Los ventiladores. El 4 de mayo de 2020 la Secretaría de la Función Pública informó que, desde el 1 de mayo, su Órgano Interno de Control en el IMSS investigaba la compra de ventiladores de la delegación de Hidalgo; después habló de 20 equipos. El 13 de mayo el IMSS informó que, tras la revisión técnica, los equipos «no reúnen los requerimientos y características técnicas-funcionales acordadas en el contrato», que el 8 de mayo levantó el acta para devolverlos al proveedor y que «al momento no se ha erogado ningún recurso por este contrato».",
+   "La sanción. El 6 de julio de 2020 el Diario Oficial publicó la circular 11/2020 de la Función Pública: dependencias, entidades, estados y municipios debían abstenerse de contratar con Cyber Robotic Solutions, S.A. de C.V. durante 27 meses (expediente SAN/032/2020, resolución del 2 de julio de 2020), plazo que se alarga si la empresa no paga la multa. La circular no dice el monto de la multa ni menciona al IMSS. La empresa impugnó la sanción ante el Tribunal Federal de Justicia Administrativa, y el Diario Oficial publicó después una medida cautelar.",
+   "Lo que no dicen esos documentos: que el contrato fuera por 31 millones de pesos, que se diera por adjudicación directa y que la empresa sea de un hijo de Manuel Bartlett. Eso viene de la investigación periodística de 2020; la circular solo nombra a la empresa.",
+   "Los contratos de medicinas. Lo que se dice de Amílcar Olán y de las compras de medicinas a sobreprecio viene de Latinus y de otros medios. La plataforma ya lo había buscado y no encontró un contrato, un informe de la Auditoría Superior ni una resolución que lo nombre: está en «Lo que dejamos fuera y por qué». La cifra nueva de más de 800 millones de pesos tampoco tiene un contrato que la sostenga. Los contratos del IMSS y de IMSS-Bienestar son públicos en ComprasMX; cuando los integremos, esta columna se actualiza.",
+   "El robo hormiga. No encontramos un documento oficial reciente en el que el gobierno atribuya el desabasto al robo del personal. Lo que sí hay es un comunicado del IMSS de mayo de 2019 que denunció el robo de medicamentos controlados de una farmacia y aseguró que el abasto estaba garantizado."
+  ],
+  "dato_curioso": "El IMSS nunca pagó esos ventiladores: los devolvió el 8 de mayo de 2020. Aun así, la empresa quedó inhabilitada, porque la sanción castiga lo que se ofreció y no cumplió, no solo el dinero que salió.",
+  "cifras": [
+   {
+    "valor": "20",
+    "etq": "Ventiladores de la compra del IMSS en Hidalgo que investigó la Función Pública",
+    "estado": "oficial",
+    "fuente": "SFP, comunicado sobre los procedimientos sancionatorios (2020)",
+    "url": "https://www.gob.mx/sfp/articulos/funcion-publica-avanza-con-los-procedimientos-sancionatorios-por-la-compra-de-20-ventiladores-del-imss-en-hidalgo-242591"
+   },
+   {
+    "valor": "$0",
+    "etq": "Lo que el IMSS había pagado por ese contrato al devolver los equipos",
+    "estado": "oficial",
+    "fuente": "IMSS, comunicado del 13-05-2020",
+    "url": "https://www.gob.mx/imss/prensa/respecto-a-la-informacion-sobre-la-compra-de-ventiladores-por-el-organo-de-operacion-administrativa-desconcentrada-hidalgo-el-imss-informa"
+   },
+   {
+    "valor": "27 meses",
+    "etq": "Inhabilitación de Cyber Robotic Solutions para contratar con el gobierno (circular 11/2020)",
+    "estado": "oficial",
+    "fuente": "DOF, 06-07-2020",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5596199&fecha=06/07/2020"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "El gobierno le quiere echar la culpa del desabasto al robo hormiga del personal del IMSS.",
+    "res": "no consta",
+    "explica": "Es una impresión de quien habla. No encontramos un documento oficial reciente que culpe del desabasto al personal. El IMSS sí denunció en 2019 el robo de medicamentos controlados en una farmacia y dijo que el abasto estaba garantizado.",
+    "fuente": "IMSS, comunicado 106 (mayo de 2019)",
+    "url": "https://www.gob.mx/imss/prensa/com-106-imss-denuncia-robo-de-medicamentos-controlados"
+   },
+   {
+    "dice": "En 2020 le asignaron a una empresa de un hijo de Bartlett, por adjudicación directa, un contrato de 31 millones de pesos para ventiladores.",
+    "res": "matiz",
+    "explica": "Consta que el IMSS en Hidalgo compró ventiladores, que no los pagó y que la Función Pública inhabilitó a Cyber Robotic Solutions. El monto de 31 millones, la adjudicación directa y quién es el dueño solo están en la prensa.",
+    "fuente": "DOF, circular 11/2020 (06-07-2020)",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5596199&fecha=06/07/2020"
+   },
+   {
+    "dice": "Los ventiladores ni siquiera cumplían las especificaciones técnicas.",
+    "res": "consta",
+    "explica": "El IMSS lo dijo: no reunían los requerimientos y características técnico-funcionales del contrato, y los devolvió.",
+    "fuente": "IMSS, comunicado del 13-05-2020",
+    "url": "https://www.gob.mx/imss/prensa/respecto-a-la-informacion-sobre-la-compra-de-ventiladores-por-el-organo-de-operacion-administrativa-desconcentrada-hidalgo-el-imss-informa"
+   },
+   {
+    "dice": "Amílcar Olán tiene contratos de adjudicación directa de medicinas a sobreprecio por más de 800 millones de pesos en IMSS-Bienestar de Tabasco y Quintana Roo y en el IMSS.",
+    "res": "pendiente",
+    "explica": "Es la suma de un medio. Para sostenerla hacen falta los contratos, con su empresa, su monto y su precio por pieza, que no pudimos abrir. Hasta hoy ningún documento oficial abierto por la plataforma liga a Olán con un contrato público.",
+    "fuente": "ComprasMX",
+    "url": "https://comprasmx.buengobierno.gob.mx/",
+    "quien": "Falta de la plataforma: los contratos del IMSS y de IMSS-Bienestar son públicos en ComprasMX y aún no los integramos",
+    "donde": "https://comprasmx.buengobierno.gob.mx/"
+   },
+   {
+    "dice": "Es amigo de Andy López Beltrán y socio de una marca de camisas de moda.",
+    "res": "no consta",
+    "explica": "Solo está en la prensa y en redes; ningún documento oficial lo dice. Una amistad o una sociedad privada no es, por sí sola, un delito.",
+    "fuente": "Solo en prensa",
+    "url": ""
+   }
+  ],
+  "sigue": [
+   {
+    "que": "Integrar los contratos de medicinas del IMSS y de IMSS-Bienestar de 2023 a 2026 desde ComprasMX y cotejar los que se atribuyen a empresas ligadas a Olán",
+    "url": "https://comprasmx.buengobierno.gob.mx/"
+   },
+   {
+    "que": "Buscar la sentencia del Tribunal Federal de Justicia Administrativa sobre la sanción a Cyber Robotic Solutions",
+    "url": "https://www.tfja.gob.mx/"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "IMSS: Respecto a la compra de ventiladores por el Órgano de Operación Administrativa Desconcentrada Hidalgo (13-05-2020)",
+    "url": "https://www.gob.mx/imss/prensa/respecto-a-la-informacion-sobre-la-compra-de-ventiladores-por-el-organo-de-operacion-administrativa-desconcentrada-hidalgo-el-imss-informa"
+   },
+   {
+    "nombre": "SFP: Función Pública investiga desde el 1 de mayo la adquisición de ventiladores en el IMSS (04-05-2020)",
+    "url": "https://www.gob.mx/sfp/prensa/funcion-publica-investiga-desde-el-1-de-mayo-adquisicion-de-ventiladores-en-el-imss-secretaria-sandoval-ballesteros"
+   },
+   {
+    "nombre": "SFP: Avanzan los procedimientos sancionatorios por la compra de 20 ventiladores del IMSS en Hidalgo (2020)",
+    "url": "https://www.gob.mx/sfp/articulos/funcion-publica-avanza-con-los-procedimientos-sancionatorios-por-la-compra-de-20-ventiladores-del-imss-en-hidalgo-242591"
+   },
+   {
+    "nombre": "DOF: Circular 11/2020 sobre Cyber Robotic Solutions, S.A. de C.V. (06-07-2020)",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5596199&fecha=06/07/2020"
+   },
+   {
+    "nombre": "IMSS, comunicado 106: IMSS denuncia robo de medicamentos controlados (mayo de 2019)",
+    "url": "https://www.gob.mx/imss/prensa/com-106-imss-denuncia-robo-de-medicamentos-controlados"
+   }
+  ],
+  "actualizado": "26 de octubre de 2026"
+ },
  {
   "id": "taddei-renuncia-ine-contratos",
   "seccion": "Verificado",
@@ -113,6 +230,20 @@
     "explica": "Solo aparece en prensa. Lo que sí consta es que el 22 de octubre, en el Consejo General, un partido le pidió separarse del cargo mientras se investigaba.",
     "fuente": "INE, versión estenográfica del Consejo General, 22-10-2026",
     "url": "https://centralelectoral.ine.mx/2026/10/22/version-estenografica-de-la-sesion-extraordinaria-del-consejo-general-del-ine-22-de-octubre-de-2026"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "Resultados de la investigación de la Auditoría Superior sobre las contrataciones del INE y de los institutos locales",
+    "url": "https://www.asf.gob.mx/"
+   },
+   {
+    "que": "Micrositio del INE con sus contrataciones, montos, proveedores y documentos, anunciado el 24-10-2026",
+    "url": "https://www.ine.mx/"
+   },
+   {
+    "que": "Quién ocupa la presidencia del INE y cómo la nombra la Cámara de Diputados",
+    "url": "https://www.diputados.gob.mx/"
    }
   ],
   "fuentes": [
@@ -212,6 +343,16 @@
     "explica": "La presidenta lo anunció el 13 de octubre en el 50 aniversario del CCE como una propuesta suya a Hacienda: «sin ninguna multa, sin ningún recargo, a cualquier monto». Que sea un «acuerdo» con el CCE lo dicen los medios.",
     "fuente": "Presidencia, versión estenográfica del 50 aniversario del CCE (13-10-2026)",
     "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-50-aniversario-del-consejo-coordinador-empresarial"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "Votación del pleno del Senado (prevista para la última semana de octubre de 2026)",
+    "url": "https://www.senado.gob.mx/"
+   },
+   {
+    "que": "Publicación de la Ley de Ingresos 2027 en el Diario Oficial: el texto final del artículo vigésimo primero transitorio y el porcentaje exacto",
+    "url": "https://www.dof.gob.mx/"
    }
   ],
   "fuentes": [
@@ -328,6 +469,12 @@
     "url": "https://www.gob.mx/shcp",
     "quien": "Falta de la plataforma: el nombramiento es público y aún no lo integramos",
     "donde": "https://www.gob.mx/shcp"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "Abrir el reporte de HR Ratings para cotejar sus razones y sus proyecciones de déficit y deuda",
+    "url": "https://www.hrratings.com/"
    }
   ],
   "fuentes": [
@@ -1926,6 +2073,9 @@
             '<p><span class="col-res' + (x.res === 'pendiente' ? ' est-chip est-pendiente" data-pend="red-' + esc(c.id) + '-' + (k + 1) + '"' : '"') + '>' + r[0] + ' ' + r[1] + '</span> ' + esc(x.explica) + '</p>' +
             '<small>' + (x.url ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.fuente) + ' ↗</a>' : esc(x.fuente)) + '</small></li>';
         }).join('') + '</ol></div>' : '') +
+        (c.sigue ? '<div class="col-sigue"><b>🗓️ Lo que sigue</b><ul>' + c.sigue.map(function (x) {
+          return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.que) + ' ↗</a></li>';
+        }).join('') + '</ul></div>' : '') +
         (c.dato_curioso ? '<aside class="col-dato"><b>💡 Dato curioso</b><p>' + esc(c.dato_curioso) + '</p></aside>' : '') +
         (cifras ? '<ul class="col-cifras" aria-label="Cifras de la columna">' + cifras + '</ul>' : '') +
         '<div class="col-fuentes"><b>📎 Documentos que la sostienen</b><ol>' + fuentes + '</ol>' +

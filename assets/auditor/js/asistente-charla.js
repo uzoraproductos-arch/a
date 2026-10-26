@@ -1481,7 +1481,10 @@
           return '<li class="pa-cot-' + esc(x.r.replace(' ', '-')) + '"><p class="pa-cot-d">«' + esc(x.d) + '»</p>' +
             '<p>' + (x.r === 'pendiente' ? chip('pendiente', x.p) : '<span class="pa-cot-r">' + r[0] + ' ' + r[1] + '</span>') + ' ' + esc(x.x) + '</p>' +
             '<small>' + (x.fu.url ? '<a href="' + esc(x.fu.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.fu.tx) + ' ↗</a>' : esc(x.fu.tx)) + '</small></li>';
-        }).join('') + '</ol></details>';
+        }).join('') + '</ol></details>' +
+        (f.sigue && f.sigue.length ? '<div class="pa-sigue"><p class="pa-mas-t">🗓️ Lo que sigue para seguir el dinero</p><ul>' + f.sigue.map(function (x) {
+          return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.tx) + ' ↗</a></li>';
+        }).join('') + '</ul></div>' : '');
     }
 
     return {

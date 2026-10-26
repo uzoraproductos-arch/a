@@ -59,6 +59,7 @@ PERSONAJES = [
     ('lopez-beltran', 'Andrés López Beltrán', ['lopez beltran', 'andy lopez'], False),
     ('amilcar-olan', 'Amílcar Olán', ['amilcar olan', 'olan aparicio'], False),
     ('taddei', 'Guadalupe Taddei Zavala', ['taddei', 'guadalupe taddei'], False),
+    ('bartlett', 'Manuel Bartlett Díaz', ['bartlett'], False),
     ('pablo-gomez', 'Pablo Gómez Álvarez', ['pablo gomez'], False),
     ('santa-anna', 'Antonio López de Santa Anna', ['santa anna', 'santanna'], False),
     ('benito-juarez', 'Benito Juárez', ['benito juarez'], False, ['juarez-suspension-de-pagos-1861']),
@@ -71,6 +72,20 @@ PERSONAJES = [
     ('lopez-obrador', 'Andrés Manuel López Obrador', ['lopez obrador', 'amlo'], True),
     ('sheinbaum', 'Claudia Sheinbaum Pardo', ['sheinbaum'], True),
     ('vicente-fox', 'Vicente Fox Quesada', ['amigos de fox', 'vicente fox'], True),
+]
+
+# Las empresas contratistas que nombra un documento oficial citado en una
+# columna (pedido del autor, 26-10-2026: «integrar esas empresas, esas
+# contratistas, dentro de nuestro portal de búsquedas del SAT o de la UIF»).
+# Mismo formato que PERSONAJES; el chat las contesta igual, con sus
+# columnas, y con búsquedas armadas en los registros oficiales de
+# contratistas (WEB_EMPRESA). Una empresa nueva necesita su renglón aquí, y
+# si no aparece en ninguna columna ni en lo descartado, la generación se
+# detiene. A los particulares (dueños, apoderados, familiares) no se les
+# agrega: la empresa es la que contrata con el gobierno.
+EMPRESAS = [
+    ('cyber-robotic', 'Cyber Robotic Solutions, S.A. de C.V.', ['cyber robotic', 'cyber robotics'], False),
+    ('cajas-graf', 'Cajas Graf, S.A. de C.V.', ['cajas graf', 'cajas graff'], False),
 ]
 
 # Lo descartado se encuentra por el nombre; cuando el renglón no lo trae
@@ -102,6 +117,19 @@ WEB = [
     ('⚖️', 'Suprema Corte y Poder Judicial', 'oficial', 'site:scjn.gob.mx OR site:cjf.gob.mx'),
     ('🏛️', 'Cámara de Diputados y Senado', 'oficial', 'site:diputados.gob.mx OR site:senado.gob.mx'),
     ('🗳️', 'Instituto Nacional Electoral', 'oficial', 'site:ine.mx'),
+    ('📰', 'Noticias (prensa, sin verificar)', 'prensa', None),
+]
+
+# Para una empresa: dónde se ve si contrató con el gobierno, si la
+# sancionaron o si la autoridad la señaló. Las que empiezan con https se
+# abren tal cual (el portal no acepta búsqueda por enlace).
+WEB_EMPRESA = [
+    ('🧾', 'Sus contratos con el gobierno (ComprasMX)', 'oficial', 'https://comprasmx.buengobierno.gob.mx/'),
+    ('⛔', 'Directorio de proveedores y contratistas sancionados', 'oficial', 'https://directoriosancionados.buengobierno.gob.mx/'),
+    ('📜', 'Diario Oficial: circulares de inhabilitación', 'oficial', 'site:dof.gob.mx'),
+    ('🔎', 'Auditoría Superior de la Federación', 'oficial', 'site:asf.gob.mx'),
+    ('💸', 'Unidad de Inteligencia Financiera (comunicados de Hacienda)', 'oficial', 'site:gob.mx/shcp UIF'),
+    ('🇺🇸', 'Lista de sancionados del Tesoro de EE. UU. (OFAC)', 'oficial', 'https://sanctionssearch.ofac.treas.gov/'),
     ('📰', 'Noticias (prensa, sin verificar)', 'prensa', None),
 ]
 
@@ -172,7 +200,7 @@ def fichas():
         cir = c.get('circula')
         out.append({'t': 'columna', 'tit': c['titulo'], 'txt': c.get('balazo', ''),
                     'cir': cir and {'tx': cir['texto'], 'q': '%s · %s · %s' % (cir['cuenta'], cir['red'], cir['fecha'])},
-                    'cot': cot,
+                    'cot': cot, 'sigue': [{'tx': x['que'], 'url': x['url']} for x in c.get('sigue', [])],
                     'dc': c.get('dato_curioso', ''), 'act': c.get('actualizado', ''),
                     'ci': ci, 'fu': fu, 'col': c['id'], 'nota': NOTA,
                     'ir': [PAGINA + '#col-' + c['id'], 'Noticias relevantes'],
@@ -188,7 +216,7 @@ def datos():
     textos = [(c, plano(_texto(c)), plano(c['titulo'])) for c in cols]
     out = []
     ids = {c['id'] for c in cols}
-    for renglon in PERSONAJES:
+    for renglon in PERSONAJES + EMPRESAS:
         pid, nombre, al, pres = renglon[:4]
         cs = [(0, i) for i in (renglon[4] if len(renglon) > 4 else [])]
         for _, i in cs:
@@ -214,6 +242,7 @@ def datos():
             raise SystemExit('asistente_personajes: «%s» no aparece en ninguna columna ni en lo descartado: '
                              'un nombre sin documento detrás no entra al chat.' % nombre)
         out.append({'id': pid, 'n': nombre, 'al': al, 'pres': pres, 'lugar': pid in TAMBIEN_LUGAR,
+                    'emp': renglon in EMPRESAS,
                     'col': [i for _, i in sorted(cs)], 'desc': ds[:10], 'descn': len(ds)})
     # Ningún personaje repetido: dos renglones con la misma palabra se pisan.
     vistas = {}
@@ -223,4 +252,5 @@ def datos():
                 raise SystemExit('asistente_personajes: «%s» está en %s y en %s' % (a, vistas[a], p['id']))
             vistas[a] = p['id']
     return {'per': out, 'web': [{'ico': i, 'n': n, 'e': e, 'site': s} for i, n, e, s in WEB],
+            'webEmp': [{'ico': i, 'n': n, 'e': e, 'site': s} for i, n, e, s in WEB_EMPRESA],
             'pag': PAGINA, 'n': len(cols)}

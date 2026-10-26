@@ -444,6 +444,15 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   dictamen lo trae en su capítulo «Cotejo de lo que circula», y si nombra a
   una persona de la vida pública se le agrega su renglón en `PERSONAJES`. A
   los particulares (familiares, empleados de una empresa) no se les nombra.
+  Cada columna trae además `sigue`: lo que falta revisar para **seguir el
+  dinero** (un voto, el DOF, un informe de la ASF, contratos por integrar).
+  **Las empresas contratistas** que nombra un documento oficial van en
+  `EMPRESAS` (mismo módulo): el chat las contesta por su nombre, con
+  búsquedas armadas en ComprasMX, el directorio de sancionados, el DOF, la
+  ASF, la UIF y la OFAC, y la lista negra del SAT avisa si la plataforma ya
+  las tiene. El protocolo completo, con dónde buscar cada cosa, está en
+  [docs/VERIFICAMOS.md](docs/VERIFICAMOS.md): **quien retome el proyecto
+  empieza por los «Lo que sigue»**.
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).
