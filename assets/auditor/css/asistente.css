@@ -394,3 +394,17 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .pa-desc-mo { display: block; color: #5a6782; }
 .pa-web { margin: 14px 0 0; padding: 10px 14px 12px; border: 1px solid #dfe5f0; border-radius: 14px; background: #f8fafc; }
 .pa-web .pa-mas-t { margin-top: 0; }
+/* Verificamos (26-10-2026): lo que circula en redes y su cotejo. */
+.pa-cir { margin: 10px 0; padding: 10px 14px; background: #eef1f6; border-left: 4px solid #44526b; border-radius: 0 8px 8px 0; }
+.pa-cir p { margin: 6px 0 4px; font-style: italic; }
+.pa-cir small, .pa-cot small { font-size: 13px; color: #44526b; }
+.pa-cot { margin: 10px 0; }
+.pa-cot summary { cursor: pointer; font-weight: 700; min-height: 44px; display: flex; align-items: center; gap: 6px; }
+.pa-cot ol { margin: 6px 0 0; padding-left: 20px; }
+.pa-cot li { margin-bottom: 10px; }
+.pa-cot li p { margin: 0 0 4px; }
+.pa-cot-d { font-weight: 600; }
+.pa-cot-r { display: inline-block; font-size: 13px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: #e8e8e8; color: #1f2937; }
+.pa-cot-consta .pa-cot-r { background: #dcefdc; color: #1d5b24; }
+.pa-cot-matiz .pa-cot-r { background: #fbecc8; color: #6b4a00; }
+.pa-cot-no-consta .pa-cot-r { background: #f6dcda; color: #8a1f17; }

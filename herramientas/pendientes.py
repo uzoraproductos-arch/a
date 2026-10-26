@@ -309,6 +309,15 @@ def recolectar():
                       ('numeros-mapa-del-gasto-federalizado.html', 'Números · El mapa del gasto federalizado')]))
     for p in PROPIOS:
         out.append(e(*p))
+    # 10. Lo que circula en redes y quedó pendiente en su cotejo (Noticias
+    # relevantes · Verificamos, 26-10-2026).
+    import asistente_personajes
+    for c in asistente_personajes.columnas()[0]:
+        for n, x in enumerate(c.get('cotejo', []), 1):
+            if x['res'] == 'pendiente':
+                out.append(e('red-%s-%d' % (c['id'], n), 'Lo que circula en redes', x['dice'], x['explica'],
+                             x.get('quien'), x.get('donde'), x['fuente'],
+                             [('noticias-relevantes.html#col-' + c['id'], 'Noticias relevantes · ' + c['titulo'])]))
     # El estado de cuenta de diputados y de la Corte (Radar) los muestra.
     ec = ('radar-estado-de-cuenta.html#expide', 'Radar · Estado de cuenta')
     for x in out:

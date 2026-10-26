@@ -1435,6 +1435,13 @@
         cv.forEach(function (c) { fu.push({ que: c.etq, e: c.e, p: c.p, fu: (f.fu || [])[0] }); });
         return { html: h + deDonde(fu), ficha: f, ir: f.ir, sug: [] };
       }
+      if (f.t === 'columna' && f.cot && f.cot.length) {
+        h = '<p>🔍 Lo verificamos en <b>Noticias relevantes</b>: <b>' + esc(f.tit) + '</b>.</p><p>' + esc(corto(f.txt, 360)) + '</p>' + cotejo(f, true) +
+          (f.nota ? '<p class="pa-chico">⚖️ ' + esc(f.nota) + '</p>' : '') +
+          '<p>Toca <b>«Saber más»</b> y te abro la columna completa; con <b>«Generar dictamen»</b> te llevas el cotejo con cada documento.</p>';
+        f.cot.forEach(function (x) { fu.push({ que: x.d, e: x.r === 'pendiente' ? 'pendiente' : (x.r === 'no consta' ? 'pendiente' : 'oficial'), p: x.p, fu: x.fu }); });
+        return { html: h + deDonde(fu.filter(function (x) { return x.fu && x.fu.url; })), ficha: f, ir: f.ir, sug: [] };
+      }
       if (f.t === 'columna') {
         var cc = (f.ci || []).slice(0, 3);
         h = '<p>📰 En <b>Noticias relevantes</b>: <b>' + esc(f.tit) + '</b>.</p><p>' + esc(corto(f.txt, 360)) + '</p>' +
@@ -1462,7 +1469,23 @@
       return { html: h + (fu.length ? deDonde(fu) : ''), ficha: f, ir: f.ir, sug: [] };
     }
 
+    /* Verificamos (26-10-2026): lo que circula en redes y su cotejo contra
+       el documento oficial, afirmación por afirmación. */
+    var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
+    function cotejo(f, abierto) {
+      if (!f.cot || !f.cot.length) return '';
+      return (f.cir ? '<blockquote class="pa-cir"><b>📣 Lo que circula</b><p>«' + esc(f.cir.tx) + '»</p><small>' + esc(f.cir.q) + '</small></blockquote>' : '') +
+        '<details class="pa-cot"' + (abierto ? ' open' : '') + '><summary>🔍 Cotejo, afirmación por afirmación <small>(' + f.cot.length + ')</small></summary><ol>' +
+        f.cot.map(function (x) {
+          var r = RES[x.r] || RES.pendiente;
+          return '<li class="pa-cot-' + esc(x.r.replace(' ', '-')) + '"><p class="pa-cot-d">«' + esc(x.d) + '»</p>' +
+            '<p>' + (x.r === 'pendiente' ? chip('pendiente', x.p) : '<span class="pa-cot-r">' + r[0] + ' ' + r[1] + '</span>') + ' ' + esc(x.x) + '</p>' +
+            '<small>' + (x.fu.url ? '<a href="' + esc(x.fu.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.fu.tx) + ' ↗</a>' : esc(x.fu.tx)) + '</small></li>';
+        }).join('') + '</ol></details>';
+    }
+
     return {
+      cotejo: cotejo,
       contesta: function (q) { try { return contesta(q); } catch (e) { if (window.console) console.warn('AuditorCharla', e); return null; } },
       deFicha: deFicha, deDonde: deDonde, olvida: function () { ctx = {}; }, ctx: function () { return ctx; }
 

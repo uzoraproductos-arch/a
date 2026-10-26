@@ -58,6 +58,7 @@ PERSONAJES = [
     ('raul-salinas', 'Raúl Salinas de Gortari', ['raul salinas'], False),
     ('lopez-beltran', 'Andrés López Beltrán', ['lopez beltran', 'andy lopez'], False),
     ('amilcar-olan', 'Amílcar Olán', ['amilcar olan', 'olan aparicio'], False),
+    ('taddei', 'Guadalupe Taddei Zavala', ['taddei', 'guadalupe taddei'], False),
     ('pablo-gomez', 'Pablo Gómez Álvarez', ['pablo gomez'], False),
     ('santa-anna', 'Antonio López de Santa Anna', ['santa anna', 'santanna'], False),
     ('benito-juarez', 'Benito Juárez', ['benito juarez'], False, ['juarez-suspension-de-pagos-1861']),
@@ -137,7 +138,26 @@ def columnas():
 
 
 def _texto(c):
-    return ' '.join([c['titulo'], c.get('balazo', '')] + c.get('cuerpo', []) + [c.get('dato_curioso', '')])
+    return ' '.join([c['titulo'], c.get('balazo', '')] + c.get('cuerpo', []) + [c.get('dato_curioso', '')]
+                    + [x['dice'] for x in c.get('cotejo', [])])
+
+
+# Verificamos (26-10-2026): cómo se dice cada resultado del cotejo.
+RES = {'consta': 'Consta', 'matiz': 'Consta, con matices', 'no consta': 'Sin documento oficial', 'pendiente': 'Pendiente'}
+
+
+def _cotejo(c):
+    """El cotejo de lo que circula en redes, para el chat y el dictamen."""
+    out = []
+    for n, x in enumerate(c.get('cotejo', []), 1):
+        if x['res'] not in RES:
+            raise SystemExit('asistente_personajes: «%s» trae un resultado desconocido: %s' % (c['id'], x['res']))
+        if x['res'] == 'pendiente' and not (x.get('quien') and x.get('donde')):
+            raise SystemExit('asistente_personajes: un pendiente del cotejo de «%s» no dice a quién le toca ni dónde '
+                             'debería estar (AGENTS.md §2).' % c['id'])
+        out.append({'d': x['dice'], 'r': x['res'], 'x': x['explica'], 'fu': {'tx': x['fuente'], 'url': x.get('url') or None},
+                    'p': 'red-%s-%d' % (c['id'], n) if x['res'] == 'pendiente' else None})
+    return out
 
 
 def fichas():
@@ -148,11 +168,17 @@ def fichas():
         ci = [{'v': x['valor'], 'etq': x['etq'], 'e': x['estado'], 'fu': {'tx': x['fuente'], 'url': x.get('url')}}
               for x in c.get('cifras', [])]
         fu = [{'tx': x['nombre'], 'url': x.get('url')} for x in c.get('fuentes', [])]
+        cot = _cotejo(c)
+        cir = c.get('circula')
         out.append({'t': 'columna', 'tit': c['titulo'], 'txt': c.get('balazo', ''),
+                    'cir': cir and {'tx': cir['texto'], 'q': '%s · %s · %s' % (cir['cuenta'], cir['red'], cir['fecha'])},
+                    'cot': cot,
                     'dc': c.get('dato_curioso', ''), 'act': c.get('actualizado', ''),
                     'ci': ci, 'fu': fu, 'col': c['id'], 'nota': NOTA,
                     'ir': [PAGINA + '#col-' + c['id'], 'Noticias relevantes'],
-                    'k': 'noticias columna %s %s' % (c['seccion'], ' '.join(c.get('cuerpo', []))[:900])})
+                    'k': 'noticias columna %s %s %s' % (
+                        c['seccion'] + (' verificamos redes es cierto circula' if cot else ''),
+                        cir['texto'] if cir else '', ' '.join(c.get('cuerpo', []))[:900])})
     return out
 
 
@@ -179,6 +205,11 @@ def datos():
         ds = [{'tema': d['tema'], 'af': d['afirmacion'], 'mo': d['motivo']} for d in desc
               if any(' %s ' % a in plano(d['tema'] + ' ' + d['afirmacion']) for a in al)
               or any(' %s ' % t in plano(d['tema']) for t in temas)]
+        # Lo que circula en redes sobre él y no tiene documento (Verificamos).
+        for c, t, _ in textos:
+            if any(' %s ' % a in t for a in al):
+                ds += [{'tema': c['titulo'], 'af': x['dice'], 'mo': x['explica']} for x in c.get('cotejo', [])
+                       if x['res'] in ('no consta', 'pendiente')]
         if not cs and not ds:
             raise SystemExit('asistente_personajes: «%s» no aparece en ninguna columna ni en lo descartado: '
                              'un nombre sin documento detrás no entra al chat.' % nombre)

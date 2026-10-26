@@ -12,20 +12,336 @@
 (function () {
   'use strict';
 
-  var EDICION = '9 de octubre de 2026';
+  var EDICION = '26 de octubre de 2026';
   var SECCIONES = [
     ['todas', 'Todas'],
     ['Personajes', 'Personajes'],
     ['Hechos', 'Hechos'],
-    ['Historia', 'Historia']
+    ['Historia', 'Historia'],
+    ['Verificado', 'Verificamos']
   ];
   /* Ilustración de cada sección cuando la columna no trae retrato. */
-  var ILUS = { Personajes: ['🧑‍⚖️', 'tinta'], Hechos: ['🗂️', 'sepia'], Historia: ['📜', 'oliva'] };
+  var ILUS = { Personajes: ['🧑‍⚖️', 'tinta'], Hechos: ['🗂️', 'sepia'], Historia: ['📜', 'oliva'], Verificado: ['🔍', 'sepia'] };
 
   /* Cada columna: {id, seccion, titulo, balazo, cuerpo[], dato_curioso,
      cifras[{valor, etq, estado, fuente, url}], fuentes[{nombre, url}],
-     actualizado, icono?, imagen?{src, alt, credito}} */
+     actualizado, icono?, imagen?{src, alt, credito}}.
+     La sección «Verificado» (26-10-2026) coteja lo que circula en redes y
+     trae además circula{red, cuenta, fecha, texto} y cotejo[{dice, res,
+     explica, fuente, url, quien?, donde?}], con res: consta, matiz,
+     no consta o pendiente. Un cotejo pendiente lleva quien y donde, y
+     herramientas/pendientes.py lo anota en el Registro de pendientes
+     (id red-<columna>-<n>). */
+  var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
+ {
+  "id": "taddei-renuncia-ine-contratos",
+  "seccion": "Verificado",
+  "icono": "🗳️",
+  "titulo": "La renuncia de Guadalupe Taddei al INE: lo que consta en documentos y lo que solo dice la prensa",
+  "balazo": "El INE publicó que su consejera presidenta entregaría su renuncia el 26 de octubre y que respalda la investigación de la Auditoría Superior. El video, los montos y las frases que circulan vienen de medios y aún no tienen documento oficial.",
+  "circula": {
+   "red": "Redes sociales",
+   "cuenta": "Publicación que resume un reportaje de Latinus",
+   "fecha": "25 y 26 de octubre de 2026",
+   "texto": "Renuncia la presidenta del INE tras salir un video de su hijo brindando en París con un contratista, apoderado de Cajas Graf, proveedora de material electoral del instituto. Latinus suma al menos 245 millones de pesos en contratos para Cajas Graf bajo Taddei en Sonora y en el INE. La ASF abrió una investigación al instituto y a sus proveedores. Taddei habría dicho «No me voy» y al día siguiente anunció su renuncia ante la Cámara de Diputados."
+  },
+  "cuerpo": [
+   "El 25 de octubre de 2026, en un mensaje publicado en Central Electoral, el sitio oficial del INE, Guadalupe Taddei Zavala anunció que el 26 de octubre presentaría ante la Cámara de Diputados su renuncia como consejera presidenta, cargo que ocupaba desde abril de 2023. Según ese mensaje, lo hace para proteger al Instituto, y la decisión no releva a nadie del deber de esclarecer los hechos que deban investigarse.",
+   "Un día antes, el 24 de octubre, la Presidencia del INE publicó que respalda la investigación que la Auditoría Superior de la Federación abrió de oficio, que colaborará con ella, que ya envió los antecedentes a su Órgano Interno de Control y que abrirá un micrositio con las contrataciones, sus montos, sus proveedores y sus documentos. El 22 de octubre, en el Consejo General, un partido le pidió separarse del cargo mientras se investigaban las contrataciones señaladas por la prensa; consta en la versión estenográfica de esa sesión.",
+   "Lo que todavía no tiene documento oficial: el video de París, quién lo grabó, quién pagó el viaje, la frase «No me voy» y la suma de 245 millones de pesos en contratos. Todo eso viene de Latinus y de otros medios. Tampoco encontramos el comunicado de la propia Auditoría Superior: lo citan los medios, pero no lo pudimos abrir. El único documento del INE que nombra a Cajas Graf que pudimos consultar es el fallo de la licitación LP-INE-001/2025, de febrero de 2025, para urnas y mamparas de la elección judicial: ahí Cajas Graf, en participación conjunta con TOL Producciones, no cumplió las especificaciones técnicas. Ese fallo no dice si la empresa ganó otros contratos.",
+   "Una nota de método: las páginas del INE no abrieron desde la plataforma; sus textos se tomaron de los comunicados de Central Electoral tal como los muestra el buscador. Ninguna autoridad ha resuelto que haya delito o falta administrativa: una investigación abierta no es una conclusión."
+  ],
+  "dato_curioso": "El único documento del INE que encontramos con el nombre de Cajas Graf la deja fuera: en febrero de 2025 su propuesta para urnas y mamparas de la elección judicial no cumplió las especificaciones técnicas.",
+  "cifras": [
+   {
+    "valor": "26/10/2026",
+    "etq": "Día en que anunció que entregaría su renuncia ante la Cámara de Diputados",
+    "estado": "oficial",
+    "fuente": "INE, Central Electoral, mensaje del 25-10-2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/25/mensaje-de-la-consejera-presidenta-del-instituto-nacional-electoral-guadalupe-taddei-zavala/"
+   },
+   {
+    "valor": "Abril de 2023",
+    "etq": "Inicio de su encargo como consejera presidenta",
+    "estado": "oficial",
+    "fuente": "INE, Central Electoral, mensaje del 25-10-2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/25/mensaje-de-la-consejera-presidenta-del-instituto-nacional-electoral-guadalupe-taddei-zavala/"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "Renuncia la presidenta del INE y entrega su renuncia el lunes ante la Cámara de Diputados.",
+    "res": "consta",
+    "explica": "El INE publicó su mensaje del 25 de octubre de 2026: presentaría su renuncia el 26 de octubre ante la Cámara de Diputados. La aceptación de la Cámara aún no la vimos en un documento.",
+    "fuente": "INE, Central Electoral, 25-10-2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/25/mensaje-de-la-consejera-presidenta-del-instituto-nacional-electoral-guadalupe-taddei-zavala/"
+   },
+   {
+    "dice": "La Auditoría Superior de la Federación abrió una investigación al instituto y sus proveedores.",
+    "res": "matiz",
+    "explica": "El INE lo confirma: el 24 de octubre publicó que respalda la investigación que la ASF abrió de oficio. El comunicado de la ASF, con su alcance exacto, lo citan los medios pero no lo pudimos abrir: falta de la plataforma.",
+    "fuente": "INE, Central Electoral, 24-10-2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/24/la-presidencia-del-ine-respalda-la-investigacion-de-la-asf-y-reafirma-su-compromiso-con-el-estado-de-derecho/"
+   },
+   {
+    "dice": "Cajas Graf es proveedora de material electoral del INE.",
+    "res": "matiz",
+    "explica": "Consta que participó en la licitación LP-INE-001/2025 (urnas y mamparas de la elección judicial) y que no cumplió las especificaciones técnicas. Que el INE le haya pagado otros contratos solo lo dice la prensa: el contrato no lo pudimos abrir.",
+    "fuente": "INE, fallo de la licitación LP-INE-001/2025 (06-02-2025)",
+    "url": "https://ine.mx/wp-content/uploads/2025/02/lp-ine-001-2025-fallo.pdf"
+   },
+   {
+    "dice": "Latinus suma al menos 245 millones de pesos en contratos para Cajas Graf bajo Taddei en Sonora y en el INE.",
+    "res": "pendiente",
+    "explica": "Es la suma de un medio. Para sostenerla hacen falta los contratos firmados por el INE y por el Instituto Estatal Electoral de Sonora, que no pudimos abrir: falta de la plataforma. Otros medios dan cifras distintas.",
+    "fuente": "Plataforma Nacional de Transparencia",
+    "url": "https://www.plataformadetransparencia.org.mx/",
+    "quien": "Falta de la plataforma: los contratos del INE y del IEE Sonora son públicos y aún no los integramos",
+    "donde": "https://www.plataformadetransparencia.org.mx/"
+   },
+   {
+    "dice": "Un video muestra al hijo de Taddei brindando en París con el apoderado de Cajas Graf («París a tus pies, chamaquito»), y lo grabó el propio empresario.",
+    "res": "no consta",
+    "explica": "Es un video difundido por Latinus. No hay documento oficial sobre su contenido, su autoría ni quién pagó el viaje, y un video por sí solo no prueba un acto de corrupción. No lo afirmamos ni lo negamos.",
+    "fuente": "Solo en prensa (Latinus)",
+    "url": ""
+   },
+   {
+    "dice": "Un día antes, Taddei dijo a los consejeros «No me voy» y llamó «golpeteo político» a los señalamientos.",
+    "res": "no consta",
+    "explica": "Solo aparece en prensa. Lo que sí consta es que el 22 de octubre, en el Consejo General, un partido le pidió separarse del cargo mientras se investigaba.",
+    "fuente": "INE, versión estenográfica del Consejo General, 22-10-2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/22/version-estenografica-de-la-sesion-extraordinaria-del-consejo-general-del-ine-22-de-octubre-de-2026"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "INE, Central Electoral: Mensaje de la Consejera Presidenta, Guadalupe Taddei Zavala (25-10-2026)",
+    "url": "https://centralelectoral.ine.mx/2026/10/25/mensaje-de-la-consejera-presidenta-del-instituto-nacional-electoral-guadalupe-taddei-zavala/"
+   },
+   {
+    "nombre": "INE, Central Electoral: La Presidencia del INE respalda la investigación de la ASF (24-10-2026)",
+    "url": "https://centralelectoral.ine.mx/2026/10/24/la-presidencia-del-ine-respalda-la-investigacion-de-la-asf-y-reafirma-su-compromiso-con-el-estado-de-derecho/"
+   },
+   {
+    "nombre": "INE, versión estenográfica de la sesión extraordinaria del Consejo General (22-10-2026)",
+    "url": "https://centralelectoral.ine.mx/2026/10/22/version-estenografica-de-la-sesion-extraordinaria-del-consejo-general-del-ine-22-de-octubre-de-2026"
+   },
+   {
+    "nombre": "INE, Dirección Ejecutiva de Administración: fallo de la licitación LP-INE-001/2025 (06-02-2025)",
+    "url": "https://ine.mx/wp-content/uploads/2025/02/lp-ine-001-2025-fallo.pdf"
+   }
+  ],
+  "actualizado": "26 de octubre de 2026"
+ },
+ {
+  "id": "lif-2027-deuda-y-multas",
+  "seccion": "Verificado",
+  "icono": "🧾",
+  "titulo": "Ley de Ingresos 2027: el techo de deuda y el perdón de multas, en sus documentos",
+  "balazo": "La Cámara de Diputados la aprobó el 15 de octubre con un techo de deuda interna de 1.7 billones de pesos y con un cambio para que las grandes empresas también paguen sus adeudos sin multas ni recargos. El Senado todavía no la vota en el pleno.",
+  "circula": {
+   "red": "Instagram",
+   "cuenta": "@pajaropolitico (Animal Político)",
+   "fecha": "Octubre de 2026",
+   "texto": "Morena y aliados aprobaron la Ley de Ingresos 2027: avala 1.7 billones de pesos en deuda interna y elimina el 100% de multas y recargos fiscales a grandes contribuyentes tras acuerdo de Sheinbaum con el CCE."
+  },
+  "cuerpo": [
+   "El 15 de octubre de 2026 el pleno de la Cámara de Diputados aprobó la Ley de Ingresos de la Federación para 2027: 331 votos a favor y 118 en contra en lo general, y 340 contra 109 en lo particular, según el Canal del Congreso. Estima ingresos por 10 billones 636 mil 488 millones de pesos y autoriza endeudamiento interno neto hasta por un billón 700 mil millones. Ojo: es un techo, lo máximo que el gobierno puede pedir prestado en el año, no deuda ya contratada.",
+   "En la discusión, el diputado Ricardo Monreal presentó una reserva al artículo vigésimo primero transitorio, que se aprobó: amplía el programa de regularización fiscal, quita el tope de 300 millones de pesos de ingresos anuales y deja entrar a los contribuyentes que atiende la Administración General de Grandes Contribuyentes del SAT, con créditos firmes o consentidos. No es una condonación del impuesto: para obtener la reducción de multas, recargos y gastos de ejecución hay que pagar completo el adeudo.",
+   "El origen está a la vista. El 13 de octubre, en el 50 aniversario del Consejo Coordinador Empresarial, la presidenta Sheinbaum dijo, según la versión estenográfica oficial: «le propuse a la Secretaría de Hacienda que el próximo año a todos, sin tener límite, quienes tengan deudas con el fisco pueden pagar sin recargos» y «sin ninguna multa, sin ningún recargo, a cualquier monto». Lo dijo como propuesta suya; la palabra «acuerdo» la usan los medios.",
+   "En el Senado, el 21 de octubre las comisiones unidas de Hacienda y de Estudios Legislativos Primera aprobaron el paquete: 10 a 5 en la primera y 8 a 6 en la segunda. Falta el voto del pleno y su publicación en el Diario Oficial: hasta entonces no es ley."
+  ],
+  "dato_curioso": "El perdón de multas no es nuevo: la Ley de Ingresos 2026 ya daba un estímulo del 100 % de multas y recargos por adeudos de 2024 y anteriores, pero dejaba fuera a quien ganara más de 300 millones de pesos al año. Lo que cambió para 2027 es ese tope.",
+  "cifras": [
+   {
+    "valor": "$1,700,000 millones",
+    "etq": "Techo de endeudamiento interno neto del Gobierno Federal para 2027 (aprobado por Diputados)",
+    "estado": "oficial",
+    "fuente": "Canal del Congreso, 15-10-2026",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"
+   },
+   {
+    "valor": "$10,636,488 millones",
+    "etq": "Ingresos totales estimados para 2027",
+    "estado": "oficial",
+    "fuente": "Canal del Congreso, 15-10-2026",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"
+   },
+   {
+    "valor": "331 a 118",
+    "etq": "Votación en lo general en la Cámara de Diputados (340 a 109 en lo particular)",
+    "estado": "oficial",
+    "fuente": "Canal del Congreso, 15-10-2026",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"
+   },
+   {
+    "valor": "18 a 11",
+    "etq": "Votos en las comisiones unidas del Senado (10 + 8 a favor; 5 + 6 en contra)",
+    "estado": "derivado",
+    "fuente": "Canal del Congreso, 21-10-2026; suma de las dos comisiones",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10329"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "Morena y aliados aprobaron la Ley de Ingresos 2027.",
+    "res": "matiz",
+    "explica": "La aprobó la Cámara de Diputados (331 a 118 en lo general) y la avalaron las comisiones del Senado, pero falta el voto del pleno del Senado y su publicación en el DOF. El voto por partido no viene en la nota oficial que consultamos.",
+    "fuente": "Canal del Congreso, 15 y 21-10-2026",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"
+   },
+   {
+    "dice": "Avala 1.7 billones de pesos en deuda interna.",
+    "res": "consta",
+    "explica": "Autoriza endeudamiento interno neto hasta por 1 billón 700 mil millones de pesos. Es el máximo permitido para el año, no deuda ya contratada.",
+    "fuente": "Canal del Congreso, 15-10-2026",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"
+   },
+   {
+    "dice": "Elimina el 100 % de multas y recargos fiscales a grandes contribuyentes.",
+    "res": "matiz",
+    "explica": "Es una reducción de multas, recargos y gastos de ejecución, no una condonación del impuesto: hay que pagar completo el adeudo. La reserva aprobada quita el tope de 300 millones de pesos y deja entrar a los grandes contribuyentes. El porcentaje exacto para 2027 no viene en la nota oficial; lo confirmará el texto publicado en el DOF.",
+    "fuente": "Canal del Congreso, 16-10-2026",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10322"
+   },
+   {
+    "dice": "Fue tras un acuerdo de Sheinbaum con el CCE.",
+    "res": "matiz",
+    "explica": "La presidenta lo anunció el 13 de octubre en el 50 aniversario del CCE como una propuesta suya a Hacienda: «sin ninguna multa, sin ningún recargo, a cualquier monto». Que sea un «acuerdo» con el CCE lo dicen los medios.",
+    "fuente": "Presidencia, versión estenográfica del 50 aniversario del CCE (13-10-2026)",
+    "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-50-aniversario-del-consejo-coordinador-empresarial"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Canal del Congreso: Aprueban en San Lázaro Ley de Ingresos 2027 (15-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"
+   },
+   {
+    "nombre": "Canal del Congreso: Modificación a Ley de Ingresos busca ampliar beneficios (16-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10322"
+   },
+   {
+    "nombre": "Canal del Congreso: Comisiones del Senado aprueban Ley de Ingresos 2027 (21-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10329"
+   },
+   {
+    "nombre": "Presidencia de la República: versión estenográfica del 50 aniversario del Consejo Coordinador Empresarial (13-10-2026)",
+    "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-50-aniversario-del-consejo-coordinador-empresarial"
+   },
+   {
+    "nombre": "Cámara de Diputados: Ley de Ingresos de la Federación para el Ejercicio Fiscal 2026",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf"
+   }
+  ],
+  "actualizado": "26 de octubre de 2026"
+ },
+ {
+  "id": "hr-ratings-baja-mexico-bbb",
+  "seccion": "Verificado",
+  "icono": "📉",
+  "titulo": "HR Ratings baja la nota de la deuda de México a BBB: lo que reconoce Hacienda",
+  "balazo": "El 15 de octubre de 2026 Hacienda informó que HR Ratings bajó la calificación de largo plazo de México de BBB+ a BBB, con perspectiva estable. México sigue con grado de inversión ante las ocho agencias que lo califican.",
+  "circula": {
+   "red": "Redes sociales",
+   "cuenta": "Publicación que menciona a @shcp_mx",
+   "fecha": "Octubre de 2026",
+   "texto": "HR Ratings redujo la calificación crediticia de largo plazo de la deuda soberana de México de BBB+ a BBB por deterioro fiscal, bajo crecimiento y rigidez del gasto. Estima un déficit de los RFSP de 4.6% del PIB para 2026 y prevé deuda de 61.2% del PIB en 2030. La SHCP, encabezada por Édgar Amador, destacó un ajuste fiscal previo de 1.3 puntos del PIB, la deuda en moneda nacional a tasa fija y las reservas internacionales."
+  },
+  "cuerpo": [
+   "Según el comunicado 82 de la Secretaría de Hacienda, del 15 de octubre de 2026, HR Ratings bajó la calificación de largo plazo de la deuda soberana de México de BBB+ a BBB, mantuvo la perspectiva estable y ratificó la de corto plazo en HR3. Hacienda subraya que México conserva el grado de inversión con las ocho agencias que califican su deuda.",
+   "En su respuesta, Hacienda recuerda que en 2025 hizo un ajuste fiscal de 1.3 puntos del PIB, el mayor desde 1990; que cerca del 80 % de la deuda del Gobierno Federal está en moneda nacional y a tasa fija; que las reservas internacionales superan los 256 mil millones de dólares, y que existe una Línea de Crédito Flexible del FMI por 24 mil millones de dólares.",
+   "Las razones y las proyecciones de la propia calificadora, un déficit de 4.6 % del PIB en 2026 y una deuda de 61.2 % del PIB en 2030, están en el reporte de HR Ratings, que no pudimos abrir desde la plataforma. Hasta cotejarlas, van como pendientes. Algunos medios citan otra proyección (65.6 % en 2033), y por eso no conviene repetir ninguna sin el reporte.",
+   "Qué quiere decir: BBB sigue siendo grado de inversión, el escalón más bajo antes de dejar de serlo es BBB-. Una calificación más baja suele encarecer lo que paga el país por pedir prestado, pero cuánto lo encarece no lo dice ningún documento oficial."
+  ],
+  "dato_curioso": "En octubre de 2025, HR Ratings había ratificado a México en BBB+ y mejorado su perspectiva de negativa a estable. Un año después, mantuvo la perspectiva estable pero bajó un escalón la nota.",
+  "cifras": [
+   {
+    "valor": "BBB+ → BBB",
+    "etq": "Calificación de largo plazo de la deuda soberana, según HR Ratings (perspectiva estable)",
+    "estado": "oficial",
+    "fuente": "SHCP, comunicado 82 (15-10-2026)",
+    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+   },
+   {
+    "valor": "1.3 pp del PIB",
+    "etq": "Ajuste fiscal de 2025, el mayor desde 1990, según Hacienda",
+    "estado": "oficial",
+    "fuente": "SHCP, comunicado 82 (15-10-2026)",
+    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+   },
+   {
+    "valor": "≈ 80 %",
+    "etq": "Deuda del Gobierno Federal en moneda nacional y a tasa fija",
+    "estado": "oficial",
+    "fuente": "SHCP, comunicado 82 (15-10-2026)",
+    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+   },
+   {
+    "valor": "> 256 mil mdd",
+    "etq": "Reservas internacionales",
+    "estado": "oficial",
+    "fuente": "SHCP, comunicado 82 (15-10-2026)",
+    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "HR Ratings redujo la calificación de largo plazo de México de BBB+ a BBB.",
+    "res": "consta",
+    "explica": "Lo informa la propia Secretaría de Hacienda: de BBB+ a BBB, con perspectiva estable; la de corto plazo se ratificó en HR3.",
+    "fuente": "SHCP, comunicado 82 (15-10-2026)",
+    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+   },
+   {
+    "dice": "Fue por deterioro fiscal, bajo crecimiento económico y rigidez del gasto.",
+    "res": "pendiente",
+    "explica": "Son las razones de la calificadora; están en su reporte, que no pudimos abrir: falta de la plataforma.",
+    "fuente": "HR Ratings",
+    "url": "https://www.hrratings.com/",
+    "quien": "Falta de la plataforma: el reporte de HR Ratings existe y aún no lo integramos",
+    "donde": "https://www.hrratings.com/"
+   },
+   {
+    "dice": "Estima un déficit de los RFSP de 4.6 % del PIB para 2026 y deuda de 61.2 % del PIB en 2030.",
+    "res": "pendiente",
+    "explica": "Son proyecciones de HR Ratings, no de Hacienda. Los medios citan cifras distintas y el reporte no lo pudimos abrir: falta de la plataforma.",
+    "fuente": "HR Ratings",
+    "url": "https://www.hrratings.com/",
+    "quien": "Falta de la plataforma: el reporte de HR Ratings existe y aún no lo integramos",
+    "donde": "https://www.hrratings.com/"
+   },
+   {
+    "dice": "Hacienda destacó un ajuste fiscal previo de 1.3 puntos del PIB, la deuda en moneda nacional a tasa fija y las reservas internacionales.",
+    "res": "consta",
+    "explica": "Las tres cosas están en el comunicado: ajuste de 1.3 puntos del PIB en 2025, cerca del 80 % de la deuda federal en moneda nacional y a tasa fija, y reservas por más de 256 mil millones de dólares.",
+    "fuente": "SHCP, comunicado 82 (15-10-2026)",
+    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+   },
+   {
+    "dice": "La SHCP está encabezada por Édgar Amador.",
+    "res": "pendiente",
+    "explica": "El comunicado 82 no nombra al secretario, y no cotejamos su nombramiento en un documento oficial: falta de la plataforma.",
+    "fuente": "Secretaría de Hacienda",
+    "url": "https://www.gob.mx/shcp",
+    "quien": "Falta de la plataforma: el nombramiento es público y aún no lo integramos",
+    "donde": "https://www.gob.mx/shcp"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "SHCP, comunicado No. 82: HR Ratings ratificó la calificación soberana de corto plazo de México en HR3 (15-10-2026)",
+    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+   },
+   {
+    "nombre": "SHCP, comunicado No. 50: HR Ratings ratificó la calificación de México en BBB+ y cambió su perspectiva a estable (28-10-2025)",
+    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-50-hr-ratings-ratifico-la-calificacion-crediticia-de-mexico-en-bbb-modificando-su-perspectiva-de-negativa-a-estable"
+   }
+  ],
+  "actualizado": "26 de octubre de 2026"
+ },
  {
   "id": "garcia-luna-las-dos-cortes",
   "seccion": "Personajes",
@@ -1602,6 +1918,14 @@
       '</div>' +
       '<div class="col-cuerpo" id="col-cuerpo-' + esc(c.id) + '" hidden>' +
         (c.cuerpo || []).map(function (p, k) { return '<p' + (k === 0 ? ' class="col-capitular"' : '') + '>' + esc(p) + '</p>'; }).join('') +
+        (c.circula ? '<aside class="col-circula"><b>📣 Lo que circula</b><p>«' + esc(c.circula.texto) + '»</p>' +
+          '<small>' + esc(c.circula.cuenta) + ' · ' + esc(c.circula.red) + ' · ' + esc(c.circula.fecha) + '</small></aside>' : '') +
+        (c.cotejo ? '<div class="col-cotejo"><b>🔍 Cotejo, afirmación por afirmación</b><ol>' + c.cotejo.map(function (x, k) {
+          var r = RES[x.res] || RES.pendiente;
+          return '<li class="col-res-' + esc(x.res.replace(' ', '-')) + '"><p class="col-dice">«' + esc(x.dice) + '»</p>' +
+            '<p><span class="col-res' + (x.res === 'pendiente' ? ' est-chip est-pendiente" data-pend="red-' + esc(c.id) + '-' + (k + 1) + '"' : '"') + '>' + r[0] + ' ' + r[1] + '</span> ' + esc(x.explica) + '</p>' +
+            '<small>' + (x.url ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.fuente) + ' ↗</a>' : esc(x.fuente)) + '</small></li>';
+        }).join('') + '</ol></div>' : '') +
         (c.dato_curioso ? '<aside class="col-dato"><b>💡 Dato curioso</b><p>' + esc(c.dato_curioso) + '</p></aside>' : '') +
         (cifras ? '<ul class="col-cifras" aria-label="Cifras de la columna">' + cifras + '</ul>' : '') +
         '<div class="col-fuentes"><b>📎 Documentos que la sostienen</b><ol>' + fuentes + '</ol>' +
@@ -1632,7 +1956,8 @@
       '</header>' +
       '<p class="col-aviso">Estas columnas sustituyen las fichas de personajes de la Enciclopedia, retiradas en septiembre de 2026 porque no citaban fuentes. ' +
         'Aquí solo entra lo que sostiene un documento oficial: una sentencia, una resolución, un informe de la Auditoría Superior o el Diario Oficial. ' +
-        'Un proceso abierto no es una condena, y una cifra «por aclarar» no es un robo probado.</p>' +
+        'Un proceso abierto no es una condena, y una cifra «por aclarar» no es un robo probado. ' +
+        'En «Verificamos» cotejamos, afirmación por afirmación, lo que circula en redes contra el documento oficial.</p>' +
       (lista.length ? '<div class="col-rejilla">' + lista.map(articulo).join('') + '</div>'
                     : '<p class="col-vacio">Todavía no hay columnas verificadas en esta sección.</p>') +
       '<details class="col-fuera"><summary>🧺 Lo que dejamos fuera y por qué <small>(' + DESCARTADO.length + ')</small></summary>' +

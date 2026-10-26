@@ -430,6 +430,20 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   oficiales y noticias, rotuladas «sin verificar», y lleva a Contrasta una
   nota; la función `buscar-web` devuelve solo enlaces, nunca un texto
   redactado por la IA sobre una persona.
+- **Verificamos: lo que circula en redes entra a la Enciclopedia**
+  (decisión del autor, 26-10-2026: «que el auditor tenga ese contenido en la
+  enciclopedia y que al momento de preguntar cuente con esa información y sus
+  fuentes para interpretarla y plasmarla en nuestro dictamen»). Cuando el
+  autor pasa un video, una publicación o una nota de redes, se vuelve una
+  columna de la sección **Verificado** de `columnas.js`, con `circula` (qué
+  dice, quién, dónde y cuándo) y `cotejo`: cada afirmación con su resultado
+  (`consta`, `matiz`, `no consta`, `pendiente`), su explicación y su
+  documento. **Un video o una nota nunca es fuente**: es lo que se coteja.
+  Un `pendiente` del cotejo lleva `quien` y `donde`, y entra solo al
+  Registro de pendientes (`red-<columna>-<n>`). El chat lo contesta, el
+  dictamen lo trae en su capítulo «Cotejo de lo que circula», y si nombra a
+  una persona de la vida pública se le agrega su renglón en `PERSONAJES`. A
+  los particulares (familiares, empleados de una empresa) no se les nombra.
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).

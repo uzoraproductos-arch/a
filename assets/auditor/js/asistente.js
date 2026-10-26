@@ -187,6 +187,7 @@
     /* La clasificación de la información: por qué cada cifra está como está. */
     var est = {};
     (f.ci || []).forEach(function (c) { est[c.e] = 1; });
+    (f.cot || []).forEach(function (c) { if (c.r === 'pendiente') est.pendiente = 1; });
     (r.html.match(/est-(oficial|derivado|pendiente)/g) || []).forEach(function (m) { est[m.slice(4)] = 1; });
     if (f.pend) est.pendiente = 1;
     var clas = [];
@@ -212,6 +213,9 @@
       cap('Respuesta del Auditor') + '<div class="dic-resp">' + resp + '</div>' +
       (f.txt && f.t !== 'calculo' ? '<p class="pa-nota-tx"><b>La ficha completa:</b> ' + esc(f.txt) + '</p>' : '') +
       (ci ? cap('Hallazgos: las cifras') + '<ul class="pa-cifras">' + ci + '</ul>' : '') +
+      (f.cot && f.cot.length && charla ? cap('Cotejo de lo que circula') +
+        '<p class="dic-chico">Cada afirmación que circula se comparó con el documento oficial. «Consta» quiere decir que el documento la sostiene; «con matices», que la sostiene en parte; «sin documento oficial», que solo la dice la prensa o las redes, y no la afirmamos ni la negamos.</p>' +
+        charla.cotejo(f, true) : '') +
       (f.app ? cap('La aplicación y tu resultado') + '<p>La cuenta la hace <b>«' + esc(f.app.n) + '»</b>' + (f.app.par ? ', con lo que escribiste en la plática' : '') + '. ' +
         'Para ver el resultado, o para que otra persona lo compruebe, abre la aplicación desde este enlace: <a href="' + esc(f.app.url) + '">' + esc(f.app.pag) + (f.app.par ? ' con tus datos' : '') + ' ➔</a>.</p>' +
         '<p class="dic-chico">La aplicación calcula con la base de la plataforma vigente, así que con el mismo enlace y la misma versión da el mismo resultado.</p>' : '') +
@@ -1259,7 +1263,8 @@
     return '<div class="pa-col"><p class="pa-col-t">📰 <a href="' + esc(f.ir[0]) + '"><b>' + esc(f.tit) + '</b></a></p>' +
       (f.txt ? '<p>' + esc(f.txt) + '</p>' : '') +
       (ci.length ? '<ul class="pa-lista">' + ci.map(function (c) { return '<li><b>' + esc(c.v) + '</b> · ' + esc(c.etq) + ' ' + chip(c) + '</li>'; }).join('') + '</ul>' : '') +
-      (grande && f.dc ? '<p class="pa-col-dc"><b>💡 Dato curioso:</b> ' + esc(f.dc) + '</p>' : '') + '</div>';
+      (grande && f.dc ? '<p class="pa-col-dc"><b>💡 Dato curioso:</b> ' + esc(f.dc) + '</p>' : '') +
+      (grande && charla && f.cot ? charla.cotejo(f, false) : '') + '</div>';
   }
   function descHtml(per, abierto) {
     if (!per.desc.length) return '';
