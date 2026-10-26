@@ -1249,7 +1249,7 @@
     return n;
   }
   /* El nombre corto de una empresa: sin «, S.A. de C.V.» y parecidos. */
-  function corta(n) { return String(n).replace(/,?\s+(S\.?\s?A\.?|S\.?\s?de\s?R\.?\s?L\.?|S\.?\s?C\.?|S\.?\s?A\.?\s?P\.?\s?I\.?).*$/i, '').trim(); }
+  function corta(n) { return String(n).replace(/\s*\([^)]*\)\s*$/, '').replace(/,?\s+(S\.?\s?A\.?|S\.?\s?de\s?R\.?\s?L\.?|S\.?\s?C\.?|S\.?\s?A\.?\s?P\.?\s?I\.?).*$/i, '').trim(); }
   function webHtml(nombre, emp) {
     var q = '"' + (emp ? corta(nombre) : nombre) + '"';
     return '<div class="pa-rec pa-web"><p class="pa-mas-t">Búscalo en internet</p>' +
@@ -1336,9 +1336,40 @@
     return respPersona(per);
   }
 
+  /* Lo que circula y ya cotejamos en Verificamos gana sobre la ficha de un
+     lugar cuando la pregunta trae varias palabras de la columna: «¿es cierto
+     que prestaron 54 hectáreas en Guaymas?» pide el cotejo, no las finanzas
+     del municipio (26-10-2026). */
+  var GENERICAS = { cierto: 1, verdad: 1, dicen: 1, circula: 1, redes: 1, gobierno: 1, mexico: 1 };
+  function verificado(q) {
+    var col = buscar(q).slice(0, 12).filter(function (x) { return x.f.t === 'columna' && x.f.cot; })[0];
+    if (!col || !charla) return null;
+    var f = col.f, t = plano(f.tit + ' ' + (f.k || '') + ' ' + (f.txt || '') + ' ' + (f.cir ? f.cir.tx : ''));
+    var ws = norm(q).replace(/[^a-z0-9ñ]+/g, ' ').split(' ').filter(function (w) { return w.length > 3 && !vacia[w] && !GENERICAS[w]; });
+    var hits = ws.filter(function (w) { return t.indexOf(' ' + w + ' ') >= 0; }).length;
+    if (hits < 3 || hits * 2 < ws.length) return null;
+    return charla.deFicha(f);
+  }
+
+  /* Alarmas: seguir un caso (26-10-2026). El seguimiento vive en las
+     columnas de Noticias relevantes y se guarda en el navegador. */
+  var ALARMA_RE = /\b(alarmas?|avisame|avisarme|notificac\w*|sigo (un|el|este) caso|seguir (un|el|este|los) casos?|mis seguimientos|seguir casos)\b/;
+  function alarma(q) {
+    if (!ALARMA_RE.test(norm(q))) return null;
+    return {
+      html: '<p>🔔 <b>Sí: puedes seguir un caso.</b> Abre su columna en Noticias relevantes y toca «🔔 Seguir este caso». ' +
+        'Cuando la actualicemos con un documento nuevo (el voto, el informe, el contrato o la sentencia de «🗓️ Lo que sigue»), ' +
+        'al volver verás el aviso «🆕 Novedades» y la lista de «Tus seguimientos» al inicio del diario.</p>' +
+        '<p>Se guarda solo en este navegador: no pedimos correo ni cuenta, y nadie más lo ve. Los avisos por correo o al celular todavía no existen.</p>',
+      ir: [PE.pag + '#seguimientos', 'Tus seguimientos'], sug: ['Noticias relevantes', 'Nuestros pilares'], rec: []
+    };
+  }
+
   function respuesta(q, previas) {
     var inv = investigacion(q);
     if (inv) return inv;
+    var al = alarma(q);
+    if (al) return al;
     var pe = personaje(q);
     if (pe) return pe;
     var ins = conApp(inspector(q, previas));
@@ -1350,6 +1381,8 @@
 
     var rc = pideRecurso(q);
     if (rc) return rc;
+    var vf = verificado(q);
+    if (vf) return vf;
     var r = charla && charla.contesta(q);
     var ec = estadoDeCuenta(q, r);
     if (ec) return ec;

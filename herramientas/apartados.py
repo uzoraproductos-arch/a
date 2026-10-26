@@ -765,7 +765,7 @@ HERRAMIENTAS = [
          # Sexta aplicacion (pedido del autor, 11-10-2026): la arma
          # herramientas/crisis_ambientales.py.
          ('herramienta-ambiente-crisis.html', '🌀', 'Crisis ambientales', 'Investigaciones',
-          'Huracanes, inundaciones y crisis del agua: cuánto cubre el fondo, cuánto se anunció, cuánto se comprobó y lo que cuesta esperar. Con Otis, Simón y el agua de Guadalajara.'),
+          'Huracanes, inundaciones, crisis del agua y proyectos en litigio ambiental: cuánto cubre el fondo, cuánto se anunció, cuánto se comprobó y lo que cuesta esperar. Con Otis, Simón, el agua de Guadalajara y el gas de Guaymas.'),
      ]),
 ]
 
@@ -1282,7 +1282,86 @@ NOTICIAS = {
         'bloque': ('<div class="col-diario" id="columnasDiario">\n'
                    '          <noscript><p>Las columnas necesitan JavaScript.</p></noscript>\n'
                    '        </div>'),
+    }, {
+        # Seguir un caso (26-10-2026). El panel «Tus seguimientos» lo pinta
+        # columnas.js al inicio del diario; esta seccion lo explica y deja que
+        # el Auditor la encuentre («¿cómo sigo un caso?», «alarmas»).
+        'id': 'seguir', 'titulo': '🔔 Sigue un caso',
+        'texto': ('Alarmas de seguimiento: toca «🔔 Seguir este caso» en cualquier columna y, cuando la actualicemos con un documento '
+                  'nuevo (el voto, el informe, el contrato o la sentencia de «Lo que sigue»), verás el aviso de novedades al volver. '
+                  'Tus seguimientos aparecen al inicio del diario. Se guardan solo en este navegador: no pedimos correo ni cuenta.'),
+        'tarjetas': [],
     }],
+}
+
+
+
+# Los pilares de la plataforma (decision del autor, 26-10-2026, a partir de
+# un discurso en la tribuna del Congreso de Sonora: «que queden como soporte
+# de nuestros pilares»). Son las reglas de AGENTS.md dichas al lector. La
+# unica cifra legal (la Ley de proteccion de 2012) lleva su documento.
+PILARES_LISTA = [
+    ('🗞️', 'Somos el periodista virtual del gasto público',
+     'El Auditor Virtual sigue el dinero público como lo haría una reportera de datos: busca en los documentos oficiales, '
+     'coteja lo que circula en redes, explica en sencillo y te lleva al documento. Lo hace con una ventaja: no se le puede '
+     'amenazar para que deje de buscar, y todo lo que encuentra queda a la vista de cualquiera.'),
+    ('🔥', 'Que la verdad sea incómoda no la vuelve falsa',
+     'Lo que tiene documento se publica, guste o no, sea del gobierno que sea. Y lo que no tiene documento no se publica como '
+     'hecho, por más que convenga: se dice que no consta.'),
+    ('📎', 'Evidencia con folio',
+     'Cada cifra lleva su documento, su página o su folio y su enlace, para que cualquiera lo pueda obtener y comprobar. '
+     'No es «porque un reportero dijo»: es porque ahí está el documento.'),
+    ('⚖️', 'Contrapeso, no propaganda',
+     'No protegemos a ningún gobierno ni a ningún partido. Lo que estuvo mal antes sigue estando mal ahora, con otro logo en la '
+     'camiseta: las mismas reglas valen para todos los gobiernos, los de antes y los de ahora.'),
+    ('📰', 'Reconocemos a quienes hacen periodismo',
+     'Muchas veces nos enteramos de un caso porque una periodista o un periodista lo sacó a la luz, arriesgando su trabajo y, '
+     'en México, a veces su vida. Su nota es el punto de partida: la citamos con su nombre y la cotejamos contra el documento '
+     'oficial. Nunca es la fuente de una cifra, pero sin su trabajo muchas veces no sabríamos dónde buscar.'),
+    ('⏳', 'Lo que falta, se señala con nombre',
+     'Cuando un dato no está publicado, no lo inventamos ni lo estimamos a ojo: lo marcamos «pendiente», decimos por qué falta y '
+     'quién debe publicarlo, y lo anotamos en el Registro de pendientes.'),
+    ('🗺️', 'Que se entienda de un vistazo',
+     'Mapas, contadores, simuladores y estados de cuenta para leer el dinero público de forma gráfica y sencilla, y siempre un '
+     'camino a los canales oficiales y a descargar los datos.'),
+    ('🌿', 'El ambiente también es gasto público',
+     'Las grandes obras y las inversiones del gobierno federal se pagan con dinero público, y su costo ambiental también se '
+     'cuenta: Costo Ambiental sigue las crisis ambientales y el presupuesto de quien las vigila.'),
+    ('🔔', 'Seguimiento: el caso no se olvida',
+     'Cada caso de Verificamos trae «Lo que sigue»: el voto, el informe, el contrato o la sentencia que falta. Puedes seguir un '
+     'caso y la plataforma te avisa cuando lo actualizamos con un documento nuevo.'),
+]
+
+LEY_PERIODISTAS = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LPPDDHP.pdf'
+
+PILARES = {
+    'archivo': 'pilares.html',
+    'menu': 'Nuestros pilares',
+    'menu_archivo': AUDITOR_VIRTUAL,
+    'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+    'icono': '🏛️',
+    'titulo': 'Nuestros pilares',
+    'lema': 'El periodista virtual del gasto público',
+    'estilos': ['pilares.css'],
+    'entrada': ('Auditavisión existe para seguir el dinero público y contarlo con documentos. Estos son los nueve pilares que sostienen '
+                'cada página, cada respuesta del Auditor Virtual y cada dictamen. Ejercer el periodismo en México tiene riesgos que el '
+                'propio Estado reconoce: por eso existe, desde 2012, una ley para proteger a periodistas y a personas defensoras de '
+                'derechos humanos (<a href="%s" target="_blank" rel="noopener">Ley para la Protección de Personas Defensoras de Derechos '
+                'Humanos y Periodistas, DOF 25-06-2012 ↗</a>) %s.' % (LEY_PERIODISTAS, '<span class="est-chip est-oficial">oficial</span>')),
+    'secciones': [
+        {'id': 'pilares', 'titulo': 'Los nueve pilares', 'texto': 'Lo que hacemos, y lo que nunca hacemos, con el dinero público y con la verdad.',
+         'tarjetas': [],
+         'bloque': '<ol class="pil-lista">\n%s\n        </ol>' % '\n'.join(
+             '          <li><span class="pil-ico" aria-hidden="true">%s</span><div><h3>%s</h3><p>%s</p></div></li>' % x for x in PILARES_LISTA)},
+        {'id': 'donde', 'titulo': 'Dónde se ven', 'texto': 'Cada pilar tiene su herramienta.',
+         'tarjetas': [
+             ('🤖', 'Pregúntale al Auditor', 'El periodista virtual: busca, coteja, explica y genera el dictamen.', AUDITOR_VIRTUAL, None, None),
+             ('🔍', 'Verificamos', 'Lo que circula en redes, cotejado afirmación por afirmación, y los casos que puedes seguir.', 'noticias-relevantes.html#seguimientos', None, None),
+             ('⏳', 'Registro de pendientes', 'Lo que falta publicar, por qué falta y a quién le toca.', 'pendientes.html', None, None),
+             ('🌿', 'Crisis ambientales', 'Las crisis y los proyectos con costo ambiental, ficha por ficha.', 'herramienta-ambiente-crisis.html', None, None),
+             ('📥', 'Descarga los datos', 'Las cifras de la plataforma, para que las revises por tu cuenta.', 'descarga-los-datos.html', None, None),
+         ]},
+    ],
 }
 
 
@@ -4837,6 +4916,8 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('26-10-2026', 'Nuestros pilares: la nueva página dice en nueve puntos qué es Auditavisión, el periodista virtual del gasto público: que la verdad sea incómoda no la vuelve falsa, evidencia con folio, contrapeso y no propaganda, y reconocimiento a quienes hacen periodismo. Y ya puedes seguir un caso: en cada columna de Noticias relevantes, «🔔 Seguir este caso» te avisa cuando la actualizamos con un documento nuevo.'),
+    ('26-10-2026', 'Verificamos Guaymas: el terreno del proyecto de gas AMIGO, cotejado. La Secretaría de Energía habla de 41.7 hectáreas, no de 54; el contrato de comodato no está publicado y queda pendiente a cargo del Gobierno de Sonora; la obra está detenida por amparos. El caso también entra a Crisis ambientales, con el presupuesto de la ASEA en el Auditor ambiental.'),
     ('26-10-2026', 'Verificamos sigue el dinero: cada caso trae «Lo que sigue» (el voto, el Diario Oficial o el informe que falta revisar), y el Auditor ya reconoce a las empresas contratistas. Escribe «Cyber Robotic Solutions» o «Cajas Graf» y te dice qué consta en documentos, y dónde ver sus contratos, si está sancionada o si la autoridad la ha señalado. Nueva columna: medicinas y ventiladores del IMSS.'),
     ('26-10-2026', 'Verificamos, en Noticias relevantes: lo que circula en redes, cotejado afirmación por afirmación contra el documento oficial. Tres primeras: la Ley de Ingresos 2027 (deuda y perdón de multas), la baja de la calificación de México por HR Ratings y la renuncia de la presidenta del INE. Pregúntale al Auditor «¿es cierto que perdonaron multas a grandes contribuyentes?» y te muestra qué consta, qué tiene matices y qué solo dice la prensa; el dictamen trae el cotejo completo.'),
     ('24-10-2026', 'Noticias relevantes, en el chat del Auditor Virtual. Escribe el nombre de un personaje («García Luna», «¿quién es Omar García Harfuch?», «noticias de Elba Esther Gordillo») y te muestra lo que la plataforma pudo sostener con documentos, con sus cifras y su fuente, y también lo que circula sin pruebas y por qué se quedó fuera. Para buscar más, te deja las búsquedas listas en portales oficiales y en las noticias, marcadas como sin verificar, y la liga a Contrasta una nota.'),
@@ -5217,7 +5298,7 @@ def generar(sello=None):
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     import datos_ambiente
-    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, NOTICIAS, PILARES, GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

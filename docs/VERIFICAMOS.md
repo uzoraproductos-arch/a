@@ -67,3 +67,23 @@ contratos por integrar). **Quien retome el proyecto empieza por ahí:** abre
 sigue», actualiza la columna (`actualizado`, `cotejo`, `cifras`) y quita lo
 que ya se cumplió. Los `pendiente` del cotejo están además en
 `pendientes.html` (ids `red-<columna>-<n>`).
+
+**Al actualizar una columna, cambia su `actualizado`.** Es lo que dispara el
+aviso «🆕 Novedades» a quien sigue el caso («🔔 Seguir este caso», panel «Tus
+seguimientos» de `noticias-relevantes.html#seguimientos`). Si cambias el texto
+y no la fecha, nadie se entera. Y no reordenes el `cotejo`: el número de cada
+afirmación es el id de su ficha de pendientes, y otras páginas lo citan (la
+ficha de Guaymas en Crisis ambientales usa `red-guaymas-comodato-amigo-gnl-1`
+y `-8`).
+
+**Si el caso tiene costo ambiental**, además de la columna va una ficha en
+Crisis ambientales (`herramientas/crisis_ambientales.py`, función `casos`),
+con enlace a la dependencia que lo vigila en el Auditor ambiental
+(`herramienta-ambiente-auditor.html#aa-<clave>`; la ASEA es `G00`).
+
+## Los pilares
+
+Este protocolo es la forma práctica de los pilares de la plataforma
+(`pilares.html`, AGENTS.md §0 ter): que la verdad sea incómoda no la vuelve
+falsa, evidencia con folio, contrapeso y no propaganda, y reconocimiento a
+quienes hacen periodismo, cuya nota es el punto de partida del cotejo.

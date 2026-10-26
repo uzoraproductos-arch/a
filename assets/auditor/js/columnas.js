@@ -36,6 +36,174 @@
   var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
  {
+  "id": "guaymas-comodato-amigo-gnl",
+  "seccion": "Verificado",
+  "icono": "🚢",
+  "titulo": "Guaymas, 54 hectáreas y el gas de Texas: lo que consta del proyecto AMIGO",
+  "balazo": "Circula que el Gobierno de Sonora prestó gratis 54 hectáreas a una empresa para licuar gas y mandarlo a Asia. La Secretaría de Energía habla de 41.7 hectáreas, el contrato no está publicado y la obra está detenida por amparos.",
+  "circula": {
+   "red": "Redes sociales y tribuna del Congreso de Sonora",
+   "cuenta": "Publicación en redes y discurso en tribuna (la transcripción no dice quién habla)",
+   "fecha": "Octubre de 2026",
+   "texto": "El Gobierno del Estado le entregó a una empresa privada un contrato de comodato (el uso 100 % gratuito) de 54 hectáreas de suelo público, terrenos costeros del Parque Industrial Pesquero «Rodolfo Sánchez Taboada», en Guaymas, para procesar gas que viene de Texas y mandarlo a Asia. Las ganancias se van fuera y a Sonora le dejan la basura. En tribuna se agregó: los buques desorientarán a las ballenas, un derrame dejaría sin trabajo a pescadores, se pidió información de más de 100 millones de pesos del Puente Colorado sin respuesta, y se borró la información de la megafarmacia. «Que la verdad sea incómoda no la vuelve falsa»."
+  },
+  "cuerpo": [
+   "El proyecto se llama AMIGO (American Mexican Integrated Gas Operations): una planta para licuar gas natural en Guaymas. Así lo nombra el Congreso de Sonora en su Gaceta, y la Presidencia lo llama «Proyecto LNG Amigo».",
+   "En la conferencia del 21 de octubre de 2026, la Secretaría de Energía lo ubicó en el Parque Industrial Pesquero «General Rodolfo Sánchez Taboada», un área ya ocupada por la industria, el cabotaje y la pesca, con 41.7 hectáreas, el 0.005 % del territorio del municipio. Habló de un máximo de 5 buques al mes (60 al año), el 4 % de las embarcaciones que ya cruzan la zona, y de almacenamiento para 290 mil metros cúbicos de gas. La Presidenta dijo que parte del gas vendría de Texas, que una porción se exportaría y otra se quedaría en el mercado interno, y que hay un amparo que impide avanzar mientras se revisan otra vez los impactos ambientales: «no vamos a cometer una irresponsabilidad».",
+   "El 16 de octubre, la Presidenta había dicho que «no hay ningún daño ambiental», que se hizo el estudio de impacto ambiental, que el sitio no está en el ecosistema de la vaquita marina y que la obra «se paró» por los amparos.",
+   "Lo que no consta en ningún documento oficial que pudimos abrir es el contrato de comodato. Lo reportó la prensa (N+ Focus), con fecha del 30 de septiembre de 2022 y la Comisión Estatal de Bienes y Concesiones como firmante; según esa misma prensa, el Gobierno del Estado, que encabeza Alfonso Durazo, lo ha negado o lo da por «sin efectos». Un contrato así es información que debe publicarse (Ley General de Transparencia, obligaciones sobre contratos, concesiones y permisos), y no lo encontramos publicado.",
+   "El Congreso ya lo había tocado: el 12 de febrero de 2026, diputados del PAN y de MC presentaron un exhorto a la ASEA, al INECC, a la Semarnat, a Turismo, al IMIPAS y al INPI para revisar el impacto ambiental de los tres proyectos de gas del Golfo de California (Saguaro, AMIGO y Vista Pacífico). No se aprobó como urgente y se turnó a comisión. Las demás afirmaciones del discurso (Puente Colorado, megafarmacia) no tienen todavía un documento oficial que podamos citar."
+  ],
+  "dato_curioso": "La Secretaría de Energía comparó los 60 buques al año con el tráfico que ya existe: serían el 4 % de las embarcaciones de la zona. Cuántas ballenas cruzan esa ruta y en qué meses no lo dice la conferencia; está en el estudio de impacto ambiental, que es justo lo que se litiga.",
+  "cifras": [
+   {
+    "valor": "41.7 ha",
+    "etq": "Superficie del proyecto según la Secretaría de Energía (0.005 % del municipio de Guaymas)",
+    "estado": "oficial",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "valor": "60 buques al año",
+    "etq": "Máximo de buques metaneros (5 al mes), el 4 % del tránsito actual de la zona",
+    "estado": "oficial",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "valor": "290 mil m³",
+    "etq": "Capacidad de almacenamiento de gas que presentó la Secretaría de Energía",
+    "estado": "oficial",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "valor": "12.3 ha",
+    "etq": "Diferencia entre las 54 hectáreas que circulan y las 41.7 de la Secretaría de Energía (54 − 41.7)",
+    "estado": "derivado",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "El Gobierno del Estado le entregó a una empresa privada un contrato de comodato, de uso gratuito.",
+    "res": "pendiente",
+    "explica": "El contrato no está en ningún documento oficial que pudimos abrir. Lo reporta la prensa (N+ Focus: firmado el 30-09-2022 por la Comisión Estatal de Bienes y Concesiones) y, según la prensa, el Gobierno de Sonora lo niega. Los contratos y concesiones sobre bienes públicos deben publicarse por ley de transparencia.",
+    "fuente": "Plataforma Nacional de Transparencia",
+    "url": "https://www.plataformadetransparencia.org.mx/",
+    "quien": "Gobierno de Sonora (Comisión Estatal de Bienes y Concesiones): no ha transparentado el contrato ni su estado jurídico, que también le pidieron diputados del Congreso local",
+    "donde": "https://www.plataformadetransparencia.org.mx/"
+   },
+   {
+    "dice": "Son 54 hectáreas de suelo público.",
+    "res": "matiz",
+    "explica": "La Secretaría de Energía dio otra cifra: 41.7 hectáreas, 12.3 menos (derivado: 54 − 41.7). Las 54 hectáreas vienen de la prensa y, según la prensa, de los reportes de la empresa ante el Departamento de Energía de EE. UU., que no pudimos abrir.",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "dice": "Son terrenos costeros del Parque Industrial Pesquero «Rodolfo Sánchez Taboada», en Guaymas.",
+    "res": "consta",
+    "explica": "La Secretaría de Energía lo ubicó ahí, en un área ya ocupada por la industria, el cabotaje y la pesca.",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "dice": "El negocio es procesar gas que viene de Texas para mandarlo a Asia; el gas ni siquiera se queda aquí.",
+    "res": "matiz",
+    "explica": "La Presidenta dijo que parte del gas vendría de Texas, que una porción se exportaría y otra iría al mercado interno. En esa conferencia no se nombró a Asia como destino.",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "dice": "La Presidenta habló de soberanía energética y de si tenemos o no suficiente gas.",
+    "res": "consta",
+    "explica": "Lo justificó por el almacenamiento: dijo que México tiene alrededor de tres días de capacidad.",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "dice": "Las ganancias se van fuera y a Sonora solo le dejan la basura y la contaminación.",
+    "res": "no consta",
+    "explica": "Es una valoración. Ningún documento oficial que pudimos abrir dice cuánto pagaría el proyecto en impuestos y derechos, ni cuánto dejaría en Sonora; la conferencia de la Secretaría de Energía no dio esas cifras.",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "dice": "Los buques grandes desorientarán a las ballenas, y un derrame dejaría sin trabajo a pescadores.",
+    "res": "matiz",
+    "explica": "El Gobierno federal dice lo contrario: «no hay ningún daño ambiental», hasta 60 buques al año con ruta definida. Pero la obra está detenida por amparos y la propia Presidenta dijo que se revisan otra vez los impactos. El riesgo no está probado ni descartado: se decide en el estudio de impacto ambiental, que se litiga.",
+    "fuente": "Presidencia, versión estenográfica del 16-10-2026",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-16-de-octubre-de-2026"
+   },
+   {
+    "dice": "El proyecto ya tiene su autorización de impacto ambiental.",
+    "res": "pendiente",
+    "explica": "La Presidenta dijo que se hizo el estudio; la prensa reporta fechas y versiones distintas sobre la autorización de la ASEA, y hay suspensiones judiciales. El resolutivo no lo pudimos abrir: falta de la plataforma.",
+    "fuente": "Agencia de Seguridad, Energía y Ambiente (ASEA)",
+    "url": "https://www.gob.mx/asea",
+    "quien": "Falta de la plataforma: el expediente de impacto ambiental está en la ASEA y aún no lo integramos",
+    "donde": "https://www.gob.mx/asea"
+   },
+   {
+    "dice": "Pedimos información sobre más de 100 millones de pesos gastados en el Puente Colorado y no han contestado.",
+    "res": "no consta",
+    "explica": "No encontramos el monto ni las solicitudes en un documento oficial. El puente está en San Luis Río Colorado; según la prensa, la renovación de su concesión la revisa la SICT.",
+    "fuente": "Plataforma Nacional de Transparencia",
+    "url": "https://www.plataformadetransparencia.org.mx/"
+   },
+   {
+    "dice": "Ya borraron toda la información de la megafarmacia, y este gobierno ha reservado mucha información.",
+    "res": "no consta",
+    "explica": "Son afirmaciones generales que no pudimos cotejar con un índice de información reservada ni con una página retirada.",
+    "fuente": "Plataforma Nacional de Transparencia",
+    "url": "https://www.plataformadetransparencia.org.mx/"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "Pedir el contrato de comodato y su estado jurídico a la Comisión Estatal de Bienes y Concesiones de Sonora",
+    "url": "https://www.plataformadetransparencia.org.mx/"
+   },
+   {
+    "que": "El dictamen del exhorto del 12-02-2026 sobre los tres proyectos de gas, turnado a comisión en el Congreso de Sonora",
+    "url": "https://congresoson.gob.mx/"
+   },
+   {
+    "que": "El resolutivo de impacto ambiental y lo que diga la ASEA en la nueva revisión",
+    "url": "https://www.gob.mx/asea"
+   },
+   {
+    "que": "La resolución de los amparos que detienen la obra",
+    "url": "https://www.pjf.gob.mx/"
+   },
+   {
+    "que": "Cuánto pagaría el proyecto en impuestos y derechos, y cuánto se queda en Sonora: no lo ha presentado la Secretaría de Energía",
+    "url": "https://www.gob.mx/sener"
+   },
+   {
+    "que": "La ficha del caso en Crisis ambientales (Costo Ambiental), con el presupuesto de la ASEA en el Auditor ambiental",
+    "url": "herramienta-ambiente-crisis.html"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Presidencia: versión estenográfica de la conferencia del 21 de octubre de 2026 (Secretaría de Energía, proyecto en Guaymas)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "nombre": "Presidencia: versión estenográfica de la conferencia del 16 de octubre de 2026 (amparo e impacto ambiental)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-16-de-octubre-de-2026"
+   },
+   {
+    "nombre": "Congreso del Estado de Sonora: Gaceta Parlamentaria No. 2104, acta de la sesión del 12 de febrero de 2026 (exhorto sobre los proyectos Saguaro, AMIGO y Vista Pacífico)",
+    "url": "https://gestion.api.congresoson.gob.mx/publico/descarga?uuid=f8cf663d-4257-4f5d-8b08-b05b80a83e72"
+   }
+  ],
+  "actualizado": "26 de octubre de 2026"
+ },
+ {
   "id": "salud-ventiladores-y-medicinas",
   "seccion": "Verificado",
   "icono": "💊",
@@ -2046,6 +2214,41 @@
     return '<figure class="col-fig col-ilus col-ilus-' + il[1] + '" aria-hidden="true"><span>' + (c.icono || il[0]) + '</span></figure>';
   }
 
+  /* Seguir un caso (pedido del autor, 26-10-2026: «activar una herramienta
+     de alarmas, programar cierto tipo de noticias o seguimiento»). Se guarda
+     solo en este navegador (localStorage av-sigo: {id: actualizado}); no
+     pide correo ni cuenta. Cuando una columna cambia su «actualizado», quien
+     la sigue ve el aviso de novedades hasta que la vuelve a abrir. */
+  var SIGO_K = 'av-sigo';
+  var sigo = (function () { try { return JSON.parse(localStorage.getItem(SIGO_K) || '{}') || {}; } catch (e) { return {}; } })();
+  function sigoGuardar() { try { localStorage.setItem(SIGO_K, JSON.stringify(sigo)); } catch (e) { /* sin almacenamiento: se olvida al cerrar */ } }
+  function sigue(c) { return Object.prototype.hasOwnProperty.call(sigo, c.id); }
+  function novedad(c) { return sigue(c) && sigo[c.id] !== (c.actualizado || ''); }
+  function porId(id) { for (var k = 0; k < COLUMNAS.length; k++) if (COLUMNAS[k].id === id) return COLUMNAS[k]; return null; }
+  function btnSeguir(c) {
+    return '<button type="button" class="col-seguir" data-id="' + esc(c.id) + '" aria-pressed="' + sigue(c) + '">' +
+      (sigue(c) ? '🔕 Dejar de seguir este caso' : '🔔 Seguir este caso') + '</button>';
+  }
+  function panelSigo() {
+    var ids = Object.keys(sigo).filter(porId);
+    var nuevos = ids.filter(function (id) { return novedad(porId(id)); }).length;
+    return '<section class="col-sigo" id="seguimientos" aria-labelledby="colSigoTit">' +
+      '<h4 class="col-sigo-tit" id="colSigoTit">🔔 Tus seguimientos' + (nuevos ? ' <span class="col-nuevo">' + nuevos + ' con novedades</span>' : '') + '</h4>' +
+      (ids.length ? '<ul>' + ids.map(function (id) {
+        var c = porId(id), nov = novedad(c);
+        return '<li' + (nov ? ' class="col-sigo-nuevo"' : '') + '><a href="#col-' + esc(id) + '">' + esc(c.titulo) + '</a> <small>' +
+          (nov ? '🆕 Actualizada al ' + esc(c.actualizado) + '; la seguías desde la versión del ' + esc(sigo[id] || 'sin fecha') : 'Sin cambios desde el ' + esc(sigo[id] || 'sin fecha')) +
+          '</small></li>';
+      }).join('') + '</ul>'
+        : '<p>Todavía no sigues ningún caso. Abre una columna y toca «🔔 Seguir este caso»: cuando la actualicemos con un documento nuevo, aquí verás el aviso.</p>') +
+      '<p class="col-sigo-nota">Se guarda solo en este navegador: no pedimos correo ni cuenta, y nadie más lo ve. Si borras los datos del navegador, se borra la lista.</p>' +
+    '</section>';
+  }
+  function repintarSigo() {
+    var viejo = document.getElementById('seguimientos');
+    if (viejo) viejo.outerHTML = panelSigo();
+  }
+
   function articulo(c, i) {
     var cifras = (c.cifras || []).map(function (x) {
       return '<li><strong>' + esc(x.valor) + '</strong><span>' + esc(x.etq) + '</span>' +
@@ -2058,6 +2261,7 @@
       figura(c, i === 0) +
       '<div class="col-art-tx">' +
         '<span class="col-kicker">' + esc(c.seccion) + '</span>' +
+        (novedad(c) ? '<span class="col-nuevo">🆕 Novedades desde que lo sigues</span>' : '') +
         '<h4 class="col-titular">' + esc(c.titulo) + '</h4>' +
         '<p class="col-balazo">' + esc(c.balazo) + '</p>' +
         '<p class="col-firma">Redacción Auditavisión · Con documentos oficiales</p>' +
@@ -2082,6 +2286,7 @@
           (c.actualizado ? '<p class="col-act">Verificado al ' + esc(c.actualizado) + '.</p>' : '') +
         '</div>' +
         '<div class="col-acciones">' +
+          btnSeguir(c) +
           '<button type="button" class="col-copiar" data-id="' + esc(c.id) + '">🔗 Copiar enlace a esta columna</button>' +
           '<button type="button" class="col-cerrar">Cerrar la columna ▴</button>' +
         '</div>' +
@@ -2108,6 +2313,7 @@
         'Aquí solo entra lo que sostiene un documento oficial: una sentencia, una resolución, un informe de la Auditoría Superior o el Diario Oficial. ' +
         'Un proceso abierto no es una condena, y una cifra «por aclarar» no es un robo probado. ' +
         'En «Verificamos» cotejamos, afirmación por afirmación, lo que circula en redes contra el documento oficial.</p>' +
+      panelSigo() +
       (lista.length ? '<div class="col-rejilla">' + lista.map(articulo).join('') + '</div>'
                     : '<p class="col-vacio">Todavía no hay columnas verificadas en esta sección.</p>') +
       '<details class="col-fuera"><summary>🧺 Lo que dejamos fuera y por qué <small>(' + DESCARTADO.length + ')</small></summary>' +
@@ -2124,6 +2330,14 @@
     btn.setAttribute('aria-expanded', abrirla ? 'true' : 'false');
     btn.textContent = abrirla ? 'Leyendo la columna ▾' : 'Leer la columna ➔';
     cuerpo.hidden = !abrirla;
+    var c = porId(art.id.slice(4));
+    if (abrirla && c && novedad(c)) {
+      sigo[c.id] = c.actualizado || '';
+      sigoGuardar();
+      var nv = art.querySelector('.col-art-tx .col-nuevo');
+      if (nv) nv.remove();
+      repintarSigo();
+    }
     art.classList.toggle('col-abierta', abrirla);
     if (desplazar) {
       var nav = document.querySelector('.site-top-nav');
@@ -2144,6 +2358,15 @@
     }
     var cerrar = e.target.closest('.col-cerrar');
     if (cerrar) { abrir(cerrar.closest('.col-art'), false, true); return; }
+    var seg = e.target.closest('.col-seguir');
+    if (seg) {
+      var cs = porId(seg.getAttribute('data-id'));
+      if (sigue(cs)) delete sigo[cs.id]; else sigo[cs.id] = cs.actualizado || '';
+      sigoGuardar();
+      seg.outerHTML = btnSeguir(cs);
+      repintarSigo();
+      return;
+    }
     var copiar = e.target.closest('.col-copiar');
     if (copiar) {
       var url = location.href.split('#')[0] + '#col-' + copiar.getAttribute('data-id');

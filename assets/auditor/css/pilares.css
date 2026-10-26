@@ -1,0 +1,7 @@
+/* Nuestros pilares (pilares.html, 26-10-2026). Generada por apartados.py. */
+.pil-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: pil; }
+.pil-lista li { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--borde, #d8dee8); background: var(--superficie, #ffffff); counter-increment: pil; }
+.pil-ico { flex: 0 0 auto; font-size: 28px; line-height: 1; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 10px; background: var(--fondo-suave, #eef1f6); }
+.pil-lista h3 { margin: 0 0 4px; font-size: 18px; line-height: 1.3; }
+.pil-lista h3::before { content: counter(pil) ". "; color: var(--texto-tenue, #5b6577); }
+.pil-lista p { margin: 0; font-size: 16px; line-height: 1.55; }

@@ -48,6 +48,19 @@ Si se rescata algo de la antigua, se trata como dato nuevo: se coteja contra
 el documento oficial (§2) y entra a su página de Auditavisión y al bot
 (§5 ter). La antigua nunca es fuente de cifras.
 
+### 0 ter. Los pilares: el periodista virtual del gasto público
+
+**Decisión del autor, 26-10-2026.** Auditavisión es el periodista virtual que
+sigue el gasto público. Sus nueve pilares están dichos al lector en
+`pilares.html` (`PILARES_LISTA` de `herramientas/apartados.py`) y valen para
+todo cambio: que la verdad sea incómoda no la vuelve falsa; evidencia con
+folio; contrapeso, no propaganda (las mismas reglas para todos los gobiernos);
+se reconoce a quienes hacen periodismo, pero su nota es punto de partida, no
+fuente de cifras; lo que falta se señala con nombre; que se entienda de un
+vistazo; el ambiente también es gasto público; y el caso no se olvida (cada
+columna de Verificamos trae «Lo que sigue» y se puede seguir: al cambiar su
+`actualizado`, quien la sigue ve el aviso). Un pilar nuevo se agrega ahí.
+
 ---
 
 ## 1. Se trabaja en la rama, `main` es la versión entregada

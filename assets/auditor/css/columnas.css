@@ -92,12 +92,12 @@
 }
 .col-balazo { margin: 0 0 8px; font-size: 15.5px; line-height: 1.5; color: #333333; }
 .col-firma { margin: 0 0 10px; font: 11.5px 'Inter', system-ui, sans-serif; color: var(--col-gris); text-transform: uppercase; letter-spacing: 0.05em; }
-.col-leer, .col-copiar, .col-cerrar {
+.col-leer, .col-copiar, .col-cerrar, .col-seguir {
   font: 700 13px 'Inter', system-ui, sans-serif; cursor: pointer;
   background: none; border: 1px solid var(--col-tinta); border-radius: 999px; padding: 7px 14px; color: var(--col-tinta);
 }
-.col-leer:hover, .col-copiar:hover, .col-cerrar:hover { background: var(--col-tinta); color: #ffffff; }
-.col-leer:focus-visible, .col-copiar:focus-visible, .col-cerrar:focus-visible { outline: 2px solid #1f5fa8; outline-offset: 2px; }
+.col-leer:hover, .col-copiar:hover, .col-cerrar:hover, .col-seguir:hover { background: var(--col-tinta); color: #ffffff; }
+.col-leer:focus-visible, .col-copiar:focus-visible, .col-cerrar:focus-visible, .col-seguir:focus-visible { outline: 2px solid #1f5fa8; outline-offset: 2px; }
 
 /* Columna abierta: ocupa todo el ancho y se lee a dos columnas. */
 .col-abierta { grid-column: 1 / -1; border-left: 0 !important; padding-left: 0 !important; }
@@ -167,3 +167,16 @@
 .col-fuera ul { margin: 0; padding-left: 20px; columns: 2 320px; column-gap: 28px; }
 .col-fuera li { break-inside: avoid; margin-bottom: 10px; line-height: 1.45; }
 .col-fuera li span { color: var(--col-gris); font-size: 13px; }
+/* Seguir un caso (26-10-2026): el aviso de novedades se guarda en el navegador. */
+.col-seguir { min-height: 44px; }
+.col-seguir[aria-pressed="true"] { background: #8a5a00; border-color: #8a5a00; color: #ffffff; }
+.col-nuevo { display: inline-block; margin: 0 0 0 8px; padding: 2px 10px; border-radius: 999px; background: #8a5a00; color: #ffffff; font: 700 12px 'Inter', system-ui, sans-serif; vertical-align: middle; }
+.col-sigo { border: 1px solid var(--col-tinta); border-radius: 8px; padding: 12px 16px; margin: 0 0 18px; background: #fffaf0; }
+.col-sigo-tit { margin: 0 0 6px; font: 700 16px 'Inter', system-ui, sans-serif; color: var(--col-tinta); }
+.col-sigo ul { margin: 6px 0; padding-left: 20px; }
+.col-sigo li { margin-bottom: 8px; line-height: 1.45; font-size: 16px; }
+.col-sigo li a { color: var(--col-tinta); font-weight: 700; display: inline-block; min-height: 44px; padding-top: 10px; }
+.col-sigo li small { display: block; color: var(--col-gris); font-size: 13px; }
+.col-sigo-nuevo small { color: #8a5a00; font-weight: 700; }
+.col-sigo p { margin: 4px 0; font-size: 16px; }
+.col-sigo .col-sigo-nota { font-size: 13px; color: var(--col-gris); }

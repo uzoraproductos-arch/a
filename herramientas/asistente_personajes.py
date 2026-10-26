@@ -60,6 +60,7 @@ PERSONAJES = [
     ('amilcar-olan', 'Amílcar Olán', ['amilcar olan', 'olan aparicio'], False),
     ('taddei', 'Guadalupe Taddei Zavala', ['taddei', 'guadalupe taddei'], False),
     ('bartlett', 'Manuel Bartlett Díaz', ['bartlett'], False),
+    ('alfonso-durazo', 'Alfonso Durazo Montaño', ['durazo'], False),
     ('pablo-gomez', 'Pablo Gómez Álvarez', ['pablo gomez'], False),
     ('santa-anna', 'Antonio López de Santa Anna', ['santa anna', 'santanna'], False),
     ('benito-juarez', 'Benito Juárez', ['benito juarez'], False, ['juarez-suspension-de-pagos-1861']),
@@ -86,6 +87,7 @@ PERSONAJES = [
 EMPRESAS = [
     ('cyber-robotic', 'Cyber Robotic Solutions, S.A. de C.V.', ['cyber robotic', 'cyber robotics'], False),
     ('cajas-graf', 'Cajas Graf, S.A. de C.V.', ['cajas graf', 'cajas graff'], False),
+    ('amigo-gnl', 'AMIGO LNG (American Mexican Integrated Gas Operations)', ['amigo lng', 'amigo gnl', 'american mexican integrated', 'proyecto amigo'], False),
 ]
 
 # Lo descartado se encuentra por el nombre; cuando el renglón no lo trae

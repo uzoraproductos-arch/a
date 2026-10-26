@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 210 |
+| Páginas revisadas | 211 |
 | Páginas que solo redirigen | 28 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -84,7 +84,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `glosario.html` | Diccionario · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `herramienta-ambiente-auditor.html` | Auditor ambiental · Auditavisión | apartados.py | 37 | 0 | 73 | 41 | 0 |
 | `herramienta-ambiente-basura.html` | Basura y protección · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `herramienta-ambiente-crisis.html` | Crisis ambientales · Auditavisión | apartados.py | 46 | 0 | 18 | 7 | 19 |
+| `herramienta-ambiente-crisis.html` | Crisis ambientales · Auditavisión | apartados.py | 48 | 0 | 22 | 7 | 21 |
 | `herramienta-ambiente-inversion.html` | Simulador de inversión ambiental · Auditavisión | apartados.py | 34 | 0 | 5 | 6 | 0 |
 | `herramienta-ambiente-pib.html` | ¿Cuánto del crecimiento es real? · Auditavisión | apartados.py | 35 | 0 | 3 | 0 | 0 |
 | `herramienta-ambiente-reloj.html` | El reloj y el año · Auditavisión | apartados.py | 43 | 0 | 38 | 57 | 8 |
@@ -209,7 +209,8 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 27 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 119 | 0 | 0 | 0 | 63 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 121 | 0 | 0 | 0 | 65 |
+| `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 31 | 0 | 1 | 0 | 0 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
@@ -276,4 +277,4 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-62 fichas, cada una con su porqué, su responsable y su enlace oficial.
+64 fichas, cada una con su porqué, su responsable y su enlace oficial.
