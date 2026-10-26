@@ -19,6 +19,9 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DB = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'audit-database.js')
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from integrar_costo_vivo_megaobras import bloque_json  # noqa: E402
+import mo_base  # noqa: E402
+import mo_sector  # noqa: E402
+import mo_tabla  # noqa: E402
 
 
 def _cargar_inst():
@@ -40,6 +43,25 @@ def construir(d):
 
     amb_p = d['ambiente']['presupuesto']
     unidades = {u['ur']: u for u in amb_p['unidades']}
+
+    sm = d['simulador_megaobras']
+    obras_mo = mo_sector.obras_oficiales(d)
+    solo_obras = [o for o in obras_mo if o.get('tipo') != 'rescate']
+    rescates = [o for o in obras_mo if o.get('tipo') == 'rescate']
+    bal = mo_base.balance(sm)
+    _sm, _sec, _res, grupos_sx, _todos = mo_tabla._datos(d)
+    obras_presu = round(sum(o['inversion_presupuestada_mdp'] for o in solo_obras), 1)
+    obras_real = round(sum(o['inversion_real_mdp'] for o in solo_obras), 1)
+    obras_sob = round((obras_real - obras_presu) / obras_presu * 100, 1)
+    resc_presu = round(sum(o['inversion_presupuestada_mdp'] for o in rescates), 1)
+    resc_real = round(sum(o['inversion_real_mdp'] for o in rescates), 1)
+    aud_propia = {
+        'tren-maya': 'auditoria-tren-maya.html',
+        'dos-bocas': 'auditoria-dos-bocas.html',
+        'aifa-texcoco': 'auditoria-aifa.html',
+        'tren-toluca': 'auditoria-tren-toluca.html',
+        'megafarmacia': 'auditoria-megafarmacia.html',
+    }
 
     return {
         'ine-contratos': {
@@ -248,7 +270,275 @@ def construir(d):
                 },
             ],
         },
+        'inversion-megaobras': {
+            'ente': 'Secretaría de la Defensa Nacional, Pemex, SICT, Salud, SEP, SSPC, IPAB y BANOBRAS (1988–2024)',
+            'quien': 'Las dependencias y empresas públicas ejecutan y operan las obras (Defensa, Pemex, SICT, Birmex, SEP, SSPC, IPAB y BANOBRAS); la Secretaría de Hacienda reporta la Cuenta Pública y la Cartera de Inversión; la Auditoría Superior de la Federación fiscaliza los contratos y estados financieros.',
+            'que': (
+                'El registro de Inversión y Megaobras sigue 13 proyectos de seis sexenios (1988–2024), separados por método en 11 obras '
+                'físicas o de equipamiento y 2 rescates financieros (FOBAPROA-IPAB y FARAC carretero). Las 11 obras pasaron de '
+                '$529,936.6 millones de pesos presupuestados a $1,176,646.8 millones de costo real documentado (+122.0 % de sobrecosto, '
+                '$646,710.2 millones por encima de lo aprobado). Los 2 rescates suman aparte $1,888,345.8 millones frente a los '
+                '$610,056.6 millones reconocidos al inicio. En operación anual, de los 13 proyectos solo 6 publican su resultado financiero '
+                '(5 pierden $78,171.3 millones y 1 gana $290.2 millones, con una pérdida neta anual documentada de $77,881.1 millones), '
+                '4 no publican estados financieros individualizados y 3 no operan como empresa.'
+            ),
+            'falta': (
+                'Cuatro obras en operación o en proceso (Megafarmacia de Huehuetoca, Tren Interurbano México-Toluca, Agronitrogenados y el '
+                'Búnker de Seguridad) no publican estados financieros dictaminados individualizados que permitan conocer cuánto cuesta '
+                'operarlas al año ni cuánto ingresan: quedan en el Registro de pendientes (ficha reloj-megaobras).'
+            ),
+            'pendiente_id': 'reloj-megaobras',
+            'cifras': {
+                'obras_n': len(solo_obras),
+                'rescates_n': len(rescates),
+                'obras_presu_mdp': obras_presu,
+                'obras_real_mdp': obras_real,
+                'obras_brecha_mdp': round(obras_real - obras_presu, 1),
+                'obras_sobrecosto_pct': obras_sob,
+                'rescates_presu_mdp': resc_presu,
+                'rescates_real_mdp': resc_real,
+                'total_con_rescates_mdp': round(obras_real + resc_real, 1),
+                'balance_neto_anual_mdp': round(abs(bal['neto']), 1),
+                'balance_pierde_mdp': round(abs(bal['pierde']), 1),
+                'balance_gana_mdp': round(bal['gana'], 1),
+                'n_con_dato_anual': bal['n_dato'],
+                'n_pendiente_anual': bal['n_pend'],
+                'n_no_aplica_anual': bal['n_na'],
+            },
+            'obras': [
+                {
+                    'id': o['id'],
+                    'nombre': o['nombre'],
+                    'presidente': o['presidente'],
+                    'periodo': o['periodo_sexenal'],
+                    'tipo': o.get('tipo') or 'obra',
+                    'presu_mdp': round(o['inversion_presupuestada_mdp'], 1),
+                    'real_mdp': round(o['inversion_real_mdp'], 1),
+                    'sobrecosto_pct': round(o['sobrecosto_pct'], 1),
+                    'estado_real': (o.get('estado_campos') or {}).get('inversion_real_mdp') or 'derivado',
+                    'res_tipo': o['res']['tipo'],
+                    'res_mdp': round(o['res']['v'], 1) if o['res']['tipo'] == 'dato' else None,
+                    'ficha_href': 'herramienta-megaobras-sector.html#obra-' + o['id'],
+                    'cuenta_href': 'herramienta-megaobras-pulso-cuenta.html#cuenta-' + o['id'],
+                    'auditoria_href': aud_propia.get(o['id']),
+                }
+                for o in obras_mo
+            ],
+            'sexenios': [
+                {
+                    'clave': g['clave'],
+                    'nombre': g['nombre'],
+                    'obras_n': len(g['obras']),
+                    'rescates_n': g['rescates'],
+                    'costo_mdp': round(g['costo'], 1),
+                    'res_mdp': round(g['res'], 1),
+                    'href': 'herramienta-megaobras-tabla.html#mt-sx-' + g['clave'],
+                }
+                for g in grupos_sx
+            ],
+            'fuentes': [
+                {
+                    'doc': 'SHCP: Cuenta Pública 2024 y 2025, Tomo VII Sector Paraestatal (Tren Maya, AIFA, Pemex, Birmex)',
+                    'url': 'https://www.cuentapublica.hacienda.gob.mx/',
+                },
+                {
+                    'doc': 'Auditoría Superior de la Federación: Informes Individuales de las Cuentas Públicas 2015 a 2024 (Tren Maya, Dos Bocas, AIFA, Tren Interurbano, Birmex, Estela de Luz, Búnker, FARAC)',
+                    'url': 'https://informe.asf.gob.mx/',
+                },
+                {
+                    'doc': 'IPAB: Estados Financieros Dictaminados 2024 y 2025 y Presupuesto de Egresos Ramo 34 (FOBAPROA-IPAB)',
+                    'url': 'https://www.gob.mx/ipab/documentos/estados-financieros-del-ipab',
+                },
+                {
+                    'doc': 'SHCP, Transparencia Presupuestaria: Obra Pública Abierta y Cartera de Programas y Proyectos de Inversión',
+                    'url': 'https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta',
+                },
+            ],
+        },
     }
+
+
+def actualizar_js():
+    p = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'auditoria-imagen.js')
+    raw = open(p, 'rb').read().decode('utf-8')
+    nl = '\r\n'
+    if 'inversionMegaobras' in raw:
+        return
+    t1 = (
+        "      acciones: [\n"
+        "        { txt: '📂 Abrir el expediente completo', href: 'expedientes.html#exp-' + id },\n"
+        "        { txt: '🏛️ Leer el informe principal de la ASF', url: principal.url }\n"
+        "      ]"
+    ).replace('\n', nl)
+    r1 = (
+        "      acciones: [\n"
+        "        { txt: '📂 Abrir el expediente completo', href: 'expedientes.html#exp-' + id },\n"
+        "        { txt: '🏗️ Ver su ficha y simulador en Inversión y Megaobras', href: 'herramienta-megaobras-sector.html#obra-' + (id === 'aifa' ? 'aifa-texcoco' : id) },\n"
+        "        { txt: '📊 Ver su estado de resultados (gana o pierde)', href: 'herramienta-megaobras-pulso-cuenta.html#cuenta-' + (id === 'aifa' ? 'aifa-texcoco' : id) },\n"
+        "        { txt: '🖼️ Panorama de las 11 megaobras y 2 rescates', href: 'auditoria-inversion-megaobras.html' },\n"
+        "        { txt: '🏛️ Leer el informe principal de la ASF', url: principal.url }\n"
+        "      ]"
+    ).replace('\n', nl)
+    assert t1 in raw, 't1 not found in auditoria-imagen.js'
+    raw = raw.replace(t1, r1, 1)
+
+    t2 = (
+        "      acciones: [\n"
+        "        { txt: '📂 Abrir el expediente de Birmex', href: 'expedientes.html#exp-birmex' },\n"
+        "        { txt: '🏛️ Leer el informe de la ASF', url: a.url }\n"
+        "      ]"
+    ).replace('\n', nl)
+    r2 = (
+        "      acciones: [\n"
+        "        { txt: '📂 Abrir el expediente de Birmex', href: 'expedientes.html#exp-birmex' },\n"
+        "        { txt: '🏗️ Ver la ficha de la Megafarmacia en Inversión y Megaobras', href: 'herramienta-megaobras-sector.html#obra-megafarmacia' },\n"
+        "        { txt: '📊 Ver su cuenta en Inversión y Megaobras', href: 'herramienta-megaobras-pulso-cuenta.html#cuenta-megafarmacia' },\n"
+        "        { txt: '🖼️ Panorama de las 11 megaobras y 2 rescates', href: 'auditoria-inversion-megaobras.html' },\n"
+        "        { txt: '🏛️ Leer el informe de la ASF', url: a.url }\n"
+        "      ]"
+    ).replace('\n', nl)
+    assert t2 in raw, 't2 not found in auditoria-imagen.js'
+    raw = raw.replace(t2, r2, 1)
+
+    t3 = (
+        "  var ARMA = {\n"
+        "    'tren-maya': function () { return desdeExpediente('tren-maya'); },\n"
+        "    'dos-bocas': function () { return desdeExpediente('dos-bocas'); },\n"
+        "    'deuda-soberana': deuda,\n"
+        "    'aifa': function () { return desdeExpediente('aifa'); },\n"
+        "    'ramo-33': ramo33,\n"
+        "    'lego-cienega': lego,\n"
+        "    'tren-toluca': function () { return desdeExpediente('tren-toluca'); },\n"
+        "    'megafarmacia': megafarmacia,\n"
+        "    'huachicol-fiscal': huachicol,\n"
+        "    'ine-contratos': ineContratos,\n"
+        "    'guaymas-gas': guaymasGas,\n"
+        "    'medicamentos-imss': medicamentosImss,\n"
+        "    'deuda-congreso-2027': deudaCongreso2027\n"
+        "  };"
+    ).replace('\n', nl)
+    r3 = (
+        "  function inversionMegaobras() {\n"
+        "    var A = DB.auditorias_actuales && DB.auditorias_actuales['inversion-megaobras'];\n"
+        "    if (!A) return null;\n"
+        "    var c = A.cifras, f = A.fuentes, obras = A.obras || [];\n"
+        "    return {\n"
+        "      cont: [\n"
+        "        { ico: '📐', tit: 'Presupuesto inicial (11 obras)', v: c.obras_presu_mdp, f: 'mdp1', etq: 'monto aprobado originalmente en documentos oficiales (1988–2024)', est: 'derivado' },\n"
+        "        { ico: '🏗️', tit: 'Costo real (11 obras)', v: c.obras_real_mdp, f: 'mdp1', etq: '+' + c.obras_sobrecosto_pct + '% de sobrecosto (' + fmt(c.obras_brecha_mdp, 'mdp1') + ' por encima de lo aprobado)', est: 'derivado' },\n"
+        "        { ico: '🏦', tit: 'Los 2 rescates (aparte)', v: c.rescates_real_mdp, f: 'mdp1', etq: 'FOBAPROA-IPAB (1998) y FARAC carretero (1997)', est: 'derivado' },\n"
+        "        { ico: '📉', tit: 'Pérdida neta anual', v: c.balance_neto_anual_mdp, f: 'mdp1', etq: 'en los ' + c.n_con_dato_anual + ' proyectos con dato anual (5 pierden ' + fmt(c.balance_pierde_mdp, 'mdp1') + ' y el AIFA gana ' + fmt(c.balance_gana_mdp, 'mdp1') + ')', est: 'derivado' },\n"
+        "        { ico: '⏳', tit: 'Operación sin publicar', txt: c.n_pendiente_anual + ' obras sin dato', etq: 'Megafarmacia, Tren Interurbano, Agronitrogenados y Búnker no publican estado de resultados propio', est: 'pendiente', pend: A.pendiente_id }\n"
+        "      ],\n"
+        "      rastroTit: 'Las 11 megaobras y los 2 rescates de seis sexenios: costo real, sobrecosto y resultado anual', rastroEst: 'derivado',\n"
+        "      rastro: obras.slice().sort(function (a, b) { return b.real_mdp - a.real_mdp; }).map(function (o) {\n"
+        "        var resTxt = o.res_tipo === 'dato'\n"
+        "          ? (o.res_mdp >= 0 ? 'Gana ' + fmt(o.res_mdp, 'mdp1') + ' al año' : 'Pierde ' + fmt(Math.abs(o.res_mdp), 'mdp1') + ' al año')\n"
+        "          : (o.res_tipo === 'pendiente' ? 'Resultado anual pendiente de publicación oficial' : 'No opera como empresa');\n"
+        "        var sobTxt = (o.sobrecosto_pct >= 0 ? '+' : '') + o.sobrecosto_pct.toFixed(1) + '%';\n"
+        "        return {\n"
+        "          k: o.nombre + (o.tipo === 'rescate' ? ' [Rescate]' : ''),\n"
+        "          sub: o.presidente + ' (' + o.periodo + ') · Presupuestado: ' + fmt(o.presu_mdp, 'mdp1') + ' · Variación: ' + sobTxt + ' · ' + resTxt,\n"
+        "          v: o.real_mdp,\n"
+        "          href: o.ficha_href,\n"
+        "          est: o.estado_real\n"
+        "        };\n"
+        "      }),\n"
+        "      escena: { tipo: 'reparto', tit: 'El peso de cada obra y rescate dentro del costo total', caja: '6 sexenios', unidad: 'mdp' },\n"
+        "      hallazgo: A.que,\n"
+        "      pendiente: A.falta,\n"
+        "      pendienteId: A.pendiente_id,\n"
+        "      fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',\n"
+        "      acciones: [\n"
+        "        { txt: '🔎 Aplicación 1 · Haz tu propia investigación por presidente y pregunta', href: 'herramienta-megaobras-investiga.html' },\n"
+        "        { txt: '🏛️ Aplicación 2 · En qué invirtió cada presidente (tabla general en vivo)', href: 'herramienta-megaobras-tabla.html' },\n"
+        "        { txt: '🏗️ Aplicación 3 · Obra por obra, por industria y simulador en vivo', href: 'herramienta-megaobras-sector.html' },\n"
+        "        { txt: '🧮 Aplicación 4 · Las cuatro cifras, los rescates y de cero al resultado', href: 'herramienta-megaobras-cero.html' },\n"
+        "        { txt: '📊 Aplicación 5 · La cuenta de cada obra (estados de resultados) y el ritmo', href: 'herramienta-megaobras-pulso-cuenta.html' },\n"
+        "        { txt: '🌳 Ver la huella ambiental de las megaobras en la Enciclopedia', href: 'datos-ambiente-megaobras.html' }\n"
+        "      ]\n"
+        "    };\n"
+        "  }\n\n"
+        "  var ARMA = {\n"
+        "    'tren-maya': function () { return desdeExpediente('tren-maya'); },\n"
+        "    'dos-bocas': function () { return desdeExpediente('dos-bocas'); },\n"
+        "    'deuda-soberana': deuda,\n"
+        "    'aifa': function () { return desdeExpediente('aifa'); },\n"
+        "    'ramo-33': ramo33,\n"
+        "    'lego-cienega': lego,\n"
+        "    'tren-toluca': function () { return desdeExpediente('tren-toluca'); },\n"
+        "    'megafarmacia': megafarmacia,\n"
+        "    'huachicol-fiscal': huachicol,\n"
+        "    'ine-contratos': ineContratos,\n"
+        "    'guaymas-gas': guaymasGas,\n"
+        "    'medicamentos-imss': medicamentosImss,\n"
+        "    'deuda-congreso-2027': deudaCongreso2027,\n"
+        "    'inversion-megaobras': inversionMegaobras\n"
+        "  };"
+    ).replace('\n', nl)
+    assert t3 in raw, 't3 not found in auditoria-imagen.js'
+    raw = raw.replace(t3, r3, 1)
+
+    t4 = "var k = r.url ? '<a href=\"' + esc(r.url) + '\" target=\"_blank\" rel=\"noopener noreferrer\">' + esc(r.k) + ' ↗</a>' : esc(r.k);"
+    r4 = "var k = r.url ? '<a href=\"' + esc(r.url) + '\" target=\"_blank\" rel=\"noopener noreferrer\">' + esc(r.k) + ' ↗</a>' : (r.href ? '<a href=\"' + esc(r.href) + '\">' + esc(r.k) + ' ➔</a>' : esc(r.k));"
+    assert t4 in raw, 't4 not found in auditoria-imagen.js'
+    raw = raw.replace(t4, r4, 1)
+
+    open(p, 'wb').write(raw.encode('utf-8'))
+    print('auditoria-imagen.js actualizado con inversionMegaobras y enlaces cruzados')
+
+
+def actualizar_index():
+    p = os.path.join(RAIZ, 'index.html')
+    raw = open(p, 'rb').read().decode('utf-8')
+    nl = '\r\n'
+    if 'auditoria-inversion-megaobras.html' in raw:
+        return
+    t_slide = (
+        '              <div class="showcase-click-cue">\n'
+        '                <span>💬 Pregúntale al Auditor</span> ➔\n'
+        '              </div>\n'
+        '            </div>\n'
+        '          </a>\n'
+        '        </div>\n'
+        '\n'
+        '        <!-- Flechas de navegación del carrusel -->'
+    ).replace('\n', nl)
+    r_slide = (
+        '              <div class="showcase-click-cue">\n'
+        '                <span>💬 Pregúntale al Auditor</span> ➔\n'
+        '              </div>\n'
+        '            </div>\n'
+        '          </a>\n'
+        '\n'
+        '          <!-- Slide 14: Inversión en megaobras y rescates -->\n'
+        '          <a class="showcase-slide" href="auditoria-inversion-megaobras.html" data-caso="auditoria-inversion-megaobras.html">\n'
+        '            <img src="assets/auditor/img/showcase_inversion_megaobras.jpg" alt="Ilustración panorámica de grandes obras de infraestructura, trenes, refinerías y el balance financiero de seis sexenios" loading="lazy">\n'
+        '            <span class="showcase-ia">Ilustración provisional</span>\n'
+        '            <div class="showcase-slide-gradient"></div>\n'
+        '            <div class="showcase-slide-content">\n'
+        '              <span class="showcase-slide-badge">🏗️ Inversión pública y rescates · 11 obras, 2 rescates y 6 sexenios</span>\n'
+        '              <h3 class="showcase-slide-q">¿Cuánto costaron las 11 megaobras y los 2 rescates de seis sexenios, cuánto pierden al año y dónde se consulta cada obra?</h3>\n'
+        '              <div class="showcase-click-cue">\n'
+        '                <span>💬 Pregúntale al Auditor</span> ➔\n'
+        '              </div>\n'
+        '            </div>\n'
+        '          </a>\n'
+        '        </div>\n'
+        '\n'
+        '        <!-- Flechas de navegación del carrusel -->'
+    ).replace('\n', nl)
+    assert t_slide in raw, 't_slide not found in index.html'
+    raw = raw.replace(t_slide, r_slide, 1)
+
+    t_dot = '        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(12)" aria-label="Ir a Ley de Ingresos 2027 y techo de deuda"></button>'
+    r_dot = t_dot + nl + '        <button type="button" class="showcase-dot" onclick="window.AuditEngine.showcaseGoTo(13)" aria-label="Ir a Inversión en megaobras y rescates"></button>'
+    assert t_dot in raw, 't_dot not found in index.html'
+    raw = raw.replace(t_dot, r_dot, 1)
+
+    open(p, 'wb').write(raw.encode('utf-8'))
+    b_raw = open(p, 'rb').read()
+    print('index.html actualizado con slide 14 (lone CRs: %d)' % (b_raw.count(b'\r') - b_raw.count(b'\r\n')))
 
 
 def main():
@@ -269,6 +559,8 @@ def main():
     b_raw = open(DB, 'rb').read()
     lone_cr = b_raw.count(b'\r') - b_raw.count(b'\r\n')
     print('auditorias_actuales integradas en audit-database.js (%d casos, lone CRs: %d)' % (len(datos), lone_cr))
+    actualizar_js()
+    actualizar_index()
 
 
 if __name__ == '__main__':

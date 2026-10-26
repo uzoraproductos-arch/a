@@ -1062,7 +1062,11 @@ def megaobras_portada(hp, base, ref):
     propia investigacion» es ahora la aplicacion 1 (mo_investiga.py)."""
     import mo_pulso
     h = next(x for x in HERRAMIENTAS if x[1] == 'obras')
-    hp['secciones'][0]['bloque'] = mo_pulso.cajon_calculo(base, ref) + apps_rejilla(h)
+    liga_au = ('<p class="herr-nota-pie"><span aria-hidden="true">🖼️</span> '
+               '<b>¿Prefieres empezar con el recorrido visual?</b> Abre '
+               '<a href="auditoria-inversion-megaobras.html"><b>Inversión en megaobras y rescates en Auditoría en imágenes ➔</b></a> '
+               '(las 11 obras, los 2 rescates y los 6 sexenios paso a paso).</p>')
+    hp['secciones'][0]['bloque'] = mo_pulso.cajon_calculo(base, ref) + apps_rejilla(h) + '\n      ' + liga_au
     hp['estilos'] = ['mo-pulso.css']
     # La aplicacion «El pulso del gasto» ya no tiene pagina: su pestana vieja
     # lleva a sus cuatro cifras.

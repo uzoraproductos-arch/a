@@ -51,7 +51,8 @@ def e(id_, tema, que, porque, responsable, enlace, enlace_txt, aparece):
 # son cuatro aplicaciones, mo_capitulos.py).
 MEGAOBRAS_PAGS = [('herramienta-megaobras-tabla.html', 'Megaobras · En qué invirtió cada presidente'),
                   ('herramienta-megaobras-cero.html', 'Megaobras · Las cuatro cifras y los rescates'),
-                  ('herramienta-megaobras-pulso-cuenta.html', 'Megaobras · La cuenta de cada obra y el ritmo de la pérdida')]
+                  ('herramienta-megaobras-pulso-cuenta.html', 'Megaobras · La cuenta de cada obra y el ritmo de la pérdida'),
+                  ('auditoria-inversion-megaobras.html', 'Auditoría en imágenes · Inversión en megaobras y rescates')]
 
 
 # Pendientes que el motor escribe en su codigo (no viven como registro en la

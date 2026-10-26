@@ -400,6 +400,7 @@ TEMAS = [
     (['guaymas', 'amigo lng', 'epcilon', 'sanchez taboada', 'golfo de california'], 'auditoria-guaymas-gas.html', 'Guaymas y la Gaceta Parlamentaria', 'Auditoría en imágenes'),
     (['medicamentos', 'medicinas', 'ventiladores', 'pisa', 'astrazeneca', 'comprasmx'], 'auditoria-medicamentos-imss.html', 'Compras de medicamentos y contratos del IMSS', 'Auditoría en imágenes'),
     (['ley de ingresos 2027', 'hr ratings', 'techo de deuda', 'multas fiscales'], 'auditoria-deuda-congreso-2027.html', 'Ley de Ingresos 2027 y calificación BBB', 'Auditoría en imágenes'),
+    (['megaobras', 'fobaproa', 'farac', 'agronitrogenados', 'fertinal', 'estela de luz', 'bunker', 'enciclomedia'], 'auditoria-inversion-megaobras.html', 'Inversión en megaobras y rescates', 'Auditoría en imágenes'),
     (['intereses', 'costo financiero'], 'numeros-egreso-costo-financiero.html', 'Costo financiero de la deuda', 'Números'),
     (['deuda', 'endeudamiento', 'rfsp'], 'numeros-la-deuda.html', 'La deuda: se paga lo que se debe', 'Números'),
     (['paquete economico', '2027'], 'numeros-paquete-2027.html', 'Paquete Económico 2027', 'Números'),

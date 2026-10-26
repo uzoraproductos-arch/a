@@ -30695,6 +30695,314 @@ window.AUDIT_DB = {
           "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf"
         }
       ]
+    },
+    "inversion-megaobras": {
+      "ente": "Secretaría de la Defensa Nacional, Pemex, SICT, Salud, SEP, SSPC, IPAB y BANOBRAS (1988–2024)",
+      "quien": "Las dependencias y empresas públicas ejecutan y operan las obras (Defensa, Pemex, SICT, Birmex, SEP, SSPC, IPAB y BANOBRAS); la Secretaría de Hacienda reporta la Cuenta Pública y la Cartera de Inversión; la Auditoría Superior de la Federación fiscaliza los contratos y estados financieros.",
+      "que": "El registro de Inversión y Megaobras sigue 13 proyectos de seis sexenios (1988–2024), separados por método en 11 obras físicas o de equipamiento y 2 rescates financieros (FOBAPROA-IPAB y FARAC carretero). Las 11 obras pasaron de $529,936.6 millones de pesos presupuestados a $1,176,646.8 millones de costo real documentado (+122.0 % de sobrecosto, $646,710.2 millones por encima de lo aprobado). Los 2 rescates suman aparte $1,888,345.8 millones frente a los $610,056.6 millones reconocidos al inicio. En operación anual, de los 13 proyectos solo 6 publican su resultado financiero (5 pierden $78,171.3 millones y 1 gana $290.2 millones, con una pérdida neta anual documentada de $77,881.1 millones), 4 no publican estados financieros individualizados y 3 no operan como empresa.",
+      "falta": "Cuatro obras en operación o en proceso (Megafarmacia de Huehuetoca, Tren Interurbano México-Toluca, Agronitrogenados y el Búnker de Seguridad) no publican estados financieros dictaminados individualizados que permitan conocer cuánto cuesta operarlas al año ni cuánto ingresan: quedan en el Registro de pendientes (ficha reloj-megaobras).",
+      "pendiente_id": "reloj-megaobras",
+      "cifras": {
+        "obras_n": 11,
+        "rescates_n": 2,
+        "obras_presu_mdp": 529936.6,
+        "obras_real_mdp": 1176646.8,
+        "obras_brecha_mdp": 646710.2,
+        "obras_sobrecosto_pct": 122.0,
+        "rescates_presu_mdp": 610056.6,
+        "rescates_real_mdp": 1888345.8,
+        "total_con_rescates_mdp": 3064992.6,
+        "balance_neto_anual_mdp": 77881.1,
+        "balance_pierde_mdp": 78171.3,
+        "balance_gana_mdp": 290.2,
+        "n_con_dato_anual": 6,
+        "n_pendiente_anual": 4,
+        "n_no_aplica_anual": 3
+      },
+      "obras": [
+        {
+          "id": "tren-maya",
+          "nombre": "Tren Maya (1,554 km)",
+          "presidente": "Andrés Manuel López Obrador",
+          "periodo": "2018–2024",
+          "tipo": "obra",
+          "presu_mdp": 167341.6,
+          "real_mdp": 497350.2,
+          "sobrecosto_pct": 197.2,
+          "estado_real": "derivado",
+          "res_tipo": "dato",
+          "res_mdp": -2561.4,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-tren-maya",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-tren-maya",
+          "auditoria_href": "auditoria-tren-maya.html"
+        },
+        {
+          "id": "megafarmacia",
+          "nombre": "Megafarmacia del Bienestar (Huehuetoca)",
+          "presidente": "Andrés Manuel López Obrador",
+          "periodo": "2018–2024",
+          "tipo": "obra",
+          "presu_mdp": 3614.6,
+          "real_mdp": 3948.6,
+          "sobrecosto_pct": 9.2,
+          "estado_real": "oficial",
+          "res_tipo": "pendiente",
+          "res_mdp": null,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-megafarmacia",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-megafarmacia",
+          "auditoria_href": "auditoria-megafarmacia.html"
+        },
+        {
+          "id": "dos-bocas",
+          "nombre": "Refinería Olmeca en Dos Bocas (Paraíso, Tabasco)",
+          "presidente": "Andrés Manuel López Obrador",
+          "periodo": "2018–2024",
+          "tipo": "obra",
+          "presu_mdp": 157049.2,
+          "real_mdp": 357887.3,
+          "sobrecosto_pct": 128.0,
+          "estado_real": "oficial",
+          "res_tipo": "dato",
+          "res_mdp": -1473.7,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-dos-bocas",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-dos-bocas",
+          "auditoria_href": "auditoria-dos-bocas.html"
+        },
+        {
+          "id": "aifa-texcoco",
+          "nombre": "AIFA + Cancelación del NAIM Texcoco",
+          "presidente": "Andrés Manuel López Obrador",
+          "periodo": "2018–2024",
+          "tipo": "obra",
+          "presu_mdp": 79305.0,
+          "real_mdp": 101935.3,
+          "sobrecosto_pct": 28.5,
+          "estado_real": "derivado",
+          "res_tipo": "dato",
+          "res_mdp": 290.2,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-aifa-texcoco",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-aifa-texcoco",
+          "auditoria_href": "auditoria-aifa.html"
+        },
+        {
+          "id": "tren-toluca",
+          "nombre": "Tren Interurbano México-Toluca 'El Insurgente'",
+          "presidente": "Enrique Peña Nieto",
+          "periodo": "2012–2018",
+          "tipo": "obra",
+          "presu_mdp": 76346.8,
+          "real_mdp": 153694.3,
+          "sobrecosto_pct": 101.3,
+          "estado_real": "oficial",
+          "res_tipo": "pendiente",
+          "res_mdp": null,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-tren-toluca",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-tren-toluca",
+          "auditoria_href": "auditoria-tren-toluca.html"
+        },
+        {
+          "id": "agronitrogenados",
+          "nombre": "Plantas Chatarra Agronitrogenados",
+          "presidente": "Enrique Peña Nieto",
+          "periodo": "2012–2018",
+          "tipo": "obra",
+          "presu_mdp": 7894.2,
+          "real_mdp": 13698.3,
+          "sobrecosto_pct": 73.5,
+          "estado_real": "derivado",
+          "res_tipo": "pendiente",
+          "res_mdp": null,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-agronitrogenados",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-agronitrogenados",
+          "auditoria_href": null
+        },
+        {
+          "id": "fertinal",
+          "nombre": "Compra de Grupo Fertinal",
+          "presidente": "Enrique Peña Nieto",
+          "periodo": "2012–2018",
+          "tipo": "obra",
+          "presu_mdp": 12532.0,
+          "real_mdp": 13121.6,
+          "sobrecosto_pct": 4.7,
+          "estado_real": "oficial",
+          "res_tipo": "dato",
+          "res_mdp": -3600.1,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-fertinal",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-fertinal",
+          "auditoria_href": null
+        },
+        {
+          "id": "estela-luz",
+          "nombre": "Estela de Luz (Bicentenario)",
+          "presidente": "Felipe Calderón Hinojosa",
+          "periodo": "2006–2012",
+          "tipo": "obra",
+          "presu_mdp": 393.5,
+          "real_mdp": 1304.9,
+          "sobrecosto_pct": 231.6,
+          "estado_real": "oficial",
+          "res_tipo": "no_aplica",
+          "res_mdp": null,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-estela-luz",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-estela-luz",
+          "auditoria_href": null
+        },
+        {
+          "id": "bunker-garcia-luna",
+          "nombre": "El Búnker de Seguridad de García Luna (SSPC)",
+          "presidente": "Felipe Calderón Hinojosa",
+          "periodo": "2006–2012",
+          "tipo": "obra",
+          "presu_mdp": 347.4,
+          "real_mdp": 263.0,
+          "sobrecosto_pct": -24.3,
+          "estado_real": "derivado",
+          "res_tipo": "pendiente",
+          "res_mdp": null,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-bunker-garcia-luna",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-bunker-garcia-luna",
+          "auditoria_href": null
+        },
+        {
+          "id": "refineria-tula",
+          "nombre": "Refinería Bicentenario en Tula (Barda Perimetral)",
+          "presidente": "Felipe Calderón Hinojosa",
+          "periodo": "2006–2012",
+          "tipo": "obra",
+          "presu_mdp": 3714.0,
+          "real_mdp": 1127.6,
+          "sobrecosto_pct": -69.6,
+          "estado_real": "derivado",
+          "res_tipo": "no_aplica",
+          "res_mdp": null,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-refineria-tula",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-refineria-tula",
+          "auditoria_href": null
+        },
+        {
+          "id": "enciclomedia",
+          "nombre": "Programa Enciclomedia",
+          "presidente": "Vicente Fox Quesada",
+          "periodo": "2000–2006",
+          "tipo": "obra",
+          "presu_mdp": 21398.3,
+          "real_mdp": 32315.7,
+          "sobrecosto_pct": 51.0,
+          "estado_real": "derivado",
+          "res_tipo": "no_aplica",
+          "res_mdp": null,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-enciclomedia",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-enciclomedia",
+          "auditoria_href": null
+        },
+        {
+          "id": "fobaproa",
+          "nombre": "FOBAPROA / IPAB (Rescate Bancario de 1998)",
+          "presidente": "Ernesto Zedillo Ponce de León",
+          "periodo": "1994–2000",
+          "tipo": "rescate",
+          "presu_mdp": 552300.0,
+          "real_mdp": 1734494.3,
+          "sobrecosto_pct": 214.0,
+          "estado_real": "derivado",
+          "res_tipo": "dato",
+          "res_mdp": -59971.8,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-fobaproa",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-fobaproa",
+          "auditoria_href": null
+        },
+        {
+          "id": "farac-carretero",
+          "nombre": "FARAC (Rescate Carretero de 1997)",
+          "presidente": "Ernesto Zedillo Ponce de León",
+          "periodo": "1994–2000",
+          "tipo": "rescate",
+          "presu_mdp": 57756.6,
+          "real_mdp": 153851.5,
+          "sobrecosto_pct": 166.4,
+          "estado_real": "derivado",
+          "res_tipo": "dato",
+          "res_mdp": -10564.3,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-farac-carretero",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-farac-carretero",
+          "auditoria_href": null
+        }
+      ],
+      "sexenios": [
+        {
+          "clave": "salinas",
+          "nombre": "Carlos Salinas de Gortari",
+          "obras_n": 0,
+          "rescates_n": 0,
+          "costo_mdp": 0,
+          "res_mdp": 0,
+          "href": "herramienta-megaobras-tabla.html#mt-sx-salinas"
+        },
+        {
+          "clave": "zedillo",
+          "nombre": "Ernesto Zedillo Ponce de León",
+          "obras_n": 2,
+          "rescates_n": 2,
+          "costo_mdp": 1888345.8,
+          "res_mdp": -70536.1,
+          "href": "herramienta-megaobras-tabla.html#mt-sx-zedillo"
+        },
+        {
+          "clave": "fox",
+          "nombre": "Vicente Fox Quesada",
+          "obras_n": 1,
+          "rescates_n": 0,
+          "costo_mdp": 32315.7,
+          "res_mdp": 0,
+          "href": "herramienta-megaobras-tabla.html#mt-sx-fox"
+        },
+        {
+          "clave": "calderon",
+          "nombre": "Felipe Calderón Hinojosa",
+          "obras_n": 3,
+          "rescates_n": 0,
+          "costo_mdp": 2695.5,
+          "res_mdp": 0,
+          "href": "herramienta-megaobras-tabla.html#mt-sx-calderon"
+        },
+        {
+          "clave": "pena-nieto",
+          "nombre": "Enrique Peña Nieto",
+          "obras_n": 3,
+          "rescates_n": 0,
+          "costo_mdp": 180514.2,
+          "res_mdp": -3600.1,
+          "href": "herramienta-megaobras-tabla.html#mt-sx-pena-nieto"
+        },
+        {
+          "clave": "lopez-obrador",
+          "nombre": "Andrés Manuel López Obrador",
+          "obras_n": 4,
+          "rescates_n": 0,
+          "costo_mdp": 961121.4,
+          "res_mdp": -3744.9,
+          "href": "herramienta-megaobras-tabla.html#mt-sx-lopez-obrador"
+        }
+      ],
+      "fuentes": [
+        {
+          "doc": "SHCP: Cuenta Pública 2024 y 2025, Tomo VII Sector Paraestatal (Tren Maya, AIFA, Pemex, Birmex)",
+          "url": "https://www.cuentapublica.hacienda.gob.mx/"
+        },
+        {
+          "doc": "Auditoría Superior de la Federación: Informes Individuales de las Cuentas Públicas 2015 a 2024 (Tren Maya, Dos Bocas, AIFA, Tren Interurbano, Birmex, Estela de Luz, Búnker, FARAC)",
+          "url": "https://informe.asf.gob.mx/"
+        },
+        {
+          "doc": "IPAB: Estados Financieros Dictaminados 2024 y 2025 y Presupuesto de Egresos Ramo 34 (FOBAPROA-IPAB)",
+          "url": "https://www.gob.mx/ipab/documentos/estados-financieros-del-ipab"
+        },
+        {
+          "doc": "SHCP, Transparencia Presupuestaria: Obra Pública Abierta y Cartera de Programas y Proyectos de Inversión",
+          "url": "https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta"
+        }
+      ]
     }
   }
 };

@@ -59,6 +59,14 @@ PEND_PERDIDA = 'reloj-megaobras'
 PEND_UNITARIO = 'costo-unitario-megaobras'
 PEND_FICHA_TM = 'tren-maya-ficha'
 
+AUDITORIA_OBRA = {
+    'tren-maya': 'auditoria-tren-maya.html',
+    'dos-bocas': 'auditoria-dos-bocas.html',
+    'aifa-texcoco': 'auditoria-aifa.html',
+    'tren-toluca': 'auditoria-tren-toluca.html',
+    'megafarmacia': 'auditoria-megafarmacia.html',
+}
+
 
 def _json(x):
     return json.dumps(x, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
@@ -399,12 +407,17 @@ def ficha(o, ver, fuentes, sectores, cuenta):
   </div>
   {docs}
   <div class="ms-ficha-pie">
+    {auditoria}
     <button type="button" class="ms-btn ms-btn-sec ms-compartir" data-id="{id}"><span aria-hidden="true">🔗</span> Copiar el enlace a esta obra</button>
     <a class="ms-btn ms-btn-sec" href="#ms-comparativa"><span aria-hidden="true">↑</span> Volver a la comparativa</a>
     <span class="ms-copiado" role="status" aria-live="polite"></span>
   </div>
 </article>'''.format(
         id=esc(o['id']), color=esc(o.get('badge_color') or 'var(--gold)'), ico=o['icono'], nombre=esc(o['nombre']),
+        auditoria=('<a class="ms-btn ms-btn-sec" href="%s"><span aria-hidden="true">🖼️</span> Ver su Auditoría en imágenes</a> '
+                   '<a class="ms-btn ms-btn-sec" href="auditoria-inversion-megaobras.html"><span aria-hidden="true">🖼️</span> Las 13 en imágenes</a>'
+                   % AUDITORIA_OBRA[o['id']]) if o['id'] in AUDITORIA_OBRA else
+                  '<a class="ms-btn ms-btn-sec" href="auditoria-inversion-megaobras.html"><span aria-hidden="true">🖼️</span> Ver en Auditoría en imágenes</a>',
         pres=esc(o['presidente']), per=esc(o['periodo_sexenal']), sico=sec.get('icono', ''), snom=esc(sec.get('nombre', '')),
         estatus=esc(o['estatus']), vivo=caja_vivo(o),
         c_presu=chip_campo('inversion_presupuestada_mdp', pend_obra), presu=num(o['inversion_presupuestada_mdp']),

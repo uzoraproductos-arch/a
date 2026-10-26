@@ -114,6 +114,9 @@
       fuente: f.fuente + '. ' + f.alcance,
       acciones: [
         { txt: '📂 Abrir el expediente completo', href: 'expedientes.html#exp-' + id },
+        { txt: '🏗️ Ver su ficha y simulador en Inversión y Megaobras', href: 'herramienta-megaobras-sector.html#obra-' + (id === 'aifa' ? 'aifa-texcoco' : id) },
+        { txt: '📊 Ver su estado de resultados (gana o pierde)', href: 'herramienta-megaobras-pulso-cuenta.html#cuenta-' + (id === 'aifa' ? 'aifa-texcoco' : id) },
+        { txt: '🖼️ Panorama de las 11 megaobras y 2 rescates', href: 'auditoria-inversion-megaobras.html' },
         { txt: '🏛️ Leer el informe principal de la ASF', url: principal.url }
       ]
     };
@@ -234,6 +237,9 @@
       fuente: 'ASF, Informe Individual de la Cuenta Pública 2023, auditoría ' + a.num + ' (' + a.clave + '), resultado 4, pp. 79 a 84, y dictamen.',
       acciones: [
         { txt: '📂 Abrir el expediente de Birmex', href: 'expedientes.html#exp-birmex' },
+        { txt: '🏗️ Ver la ficha de la Megafarmacia en Inversión y Megaobras', href: 'herramienta-megaobras-sector.html#obra-megafarmacia' },
+        { txt: '📊 Ver su cuenta en Inversión y Megaobras', href: 'herramienta-megaobras-pulso-cuenta.html#cuenta-megafarmacia' },
+        { txt: '🖼️ Panorama de las 11 megaobras y 2 rescates', href: 'auditoria-inversion-megaobras.html' },
         { txt: '🏛️ Leer el informe de la ASF', url: a.url }
       ]
     };
@@ -418,6 +424,48 @@
     };
   }
 
+  function inversionMegaobras() {
+    var A = DB.auditorias_actuales && DB.auditorias_actuales['inversion-megaobras'];
+    if (!A) return null;
+    var c = A.cifras, f = A.fuentes, obras = A.obras || [];
+    return {
+      cont: [
+        { ico: '📐', tit: 'Presupuesto inicial (11 obras)', v: c.obras_presu_mdp, f: 'mdp1', etq: 'monto aprobado originalmente en documentos oficiales (1988–2024)', est: 'derivado' },
+        { ico: '🏗️', tit: 'Costo real (11 obras)', v: c.obras_real_mdp, f: 'mdp1', etq: '+' + c.obras_sobrecosto_pct + '% de sobrecosto (' + fmt(c.obras_brecha_mdp, 'mdp1') + ' por encima de lo aprobado)', est: 'derivado' },
+        { ico: '🏦', tit: 'Los 2 rescates (aparte)', v: c.rescates_real_mdp, f: 'mdp1', etq: 'FOBAPROA-IPAB (1998) y FARAC carretero (1997)', est: 'derivado' },
+        { ico: '📉', tit: 'Pérdida neta anual', v: c.balance_neto_anual_mdp, f: 'mdp1', etq: 'en los ' + c.n_con_dato_anual + ' proyectos con dato anual (5 pierden ' + fmt(c.balance_pierde_mdp, 'mdp1') + ' y el AIFA gana ' + fmt(c.balance_gana_mdp, 'mdp1') + ')', est: 'derivado' },
+        { ico: '⏳', tit: 'Operación sin publicar', txt: c.n_pendiente_anual + ' obras sin dato', etq: 'Megafarmacia, Tren Interurbano, Agronitrogenados y Búnker no publican estado de resultados propio', est: 'pendiente', pend: A.pendiente_id }
+      ],
+      rastroTit: 'Las 11 megaobras y los 2 rescates de seis sexenios: costo real, sobrecosto y resultado anual', rastroEst: 'derivado',
+      rastro: obras.slice().sort(function (a, b) { return b.real_mdp - a.real_mdp; }).map(function (o) {
+        var resTxt = o.res_tipo === 'dato'
+          ? (o.res_mdp >= 0 ? 'Gana ' + fmt(o.res_mdp, 'mdp1') + ' al año' : 'Pierde ' + fmt(Math.abs(o.res_mdp), 'mdp1') + ' al año')
+          : (o.res_tipo === 'pendiente' ? 'Resultado anual pendiente de publicación oficial' : 'No opera como empresa');
+        var sobTxt = (o.sobrecosto_pct >= 0 ? '+' : '') + o.sobrecosto_pct.toFixed(1) + '%';
+        return {
+          k: o.nombre + (o.tipo === 'rescate' ? ' [Rescate]' : ''),
+          sub: o.presidente + ' (' + o.periodo + ') · Presupuestado: ' + fmt(o.presu_mdp, 'mdp1') + ' · Variación: ' + sobTxt + ' · ' + resTxt,
+          v: o.real_mdp,
+          href: o.ficha_href,
+          est: o.estado_real
+        };
+      }),
+      escena: { tipo: 'reparto', tit: 'El peso de cada obra y rescate dentro del costo total', caja: '6 sexenios', unidad: 'mdp' },
+      hallazgo: A.que,
+      pendiente: A.falta,
+      pendienteId: A.pendiente_id,
+      fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
+      acciones: [
+        { txt: '🔎 Aplicación 1 · Haz tu propia investigación por presidente y pregunta', href: 'herramienta-megaobras-investiga.html' },
+        { txt: '🏛️ Aplicación 2 · En qué invirtió cada presidente (tabla general en vivo)', href: 'herramienta-megaobras-tabla.html' },
+        { txt: '🏗️ Aplicación 3 · Obra por obra, por industria y simulador en vivo', href: 'herramienta-megaobras-sector.html' },
+        { txt: '🧮 Aplicación 4 · Las cuatro cifras, los rescates y de cero al resultado', href: 'herramienta-megaobras-cero.html' },
+        { txt: '📊 Aplicación 5 · La cuenta de cada obra (estados de resultados) y el ritmo', href: 'herramienta-megaobras-pulso-cuenta.html' },
+        { txt: '🌳 Ver la huella ambiental de las megaobras en la Enciclopedia', href: 'datos-ambiente-megaobras.html' }
+      ]
+    };
+  }
+
   var ARMA = {
     'tren-maya': function () { return desdeExpediente('tren-maya'); },
     'dos-bocas': function () { return desdeExpediente('dos-bocas'); },
@@ -431,7 +479,8 @@
     'ine-contratos': ineContratos,
     'guaymas-gas': guaymasGas,
     'medicamentos-imss': medicamentosImss,
-    'deuda-congreso-2027': deudaCongreso2027
+    'deuda-congreso-2027': deudaCongreso2027,
+    'inversion-megaobras': inversionMegaobras
   };
 
   // --- Animacion de cifras --------------------------------------------------
@@ -760,7 +809,7 @@
   function htmlRastro(p) {
     var mayor = Math.max.apply(null, p.rastro.map(function (r) { return r.v; }).concat([0])) || 1;
     var filas = p.rastro.length ? p.rastro.map(function (r) {
-      var k = r.url ? '<a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer">' + esc(r.k) + ' ↗</a>' : esc(r.k);
+      var k = r.url ? '<a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer">' + esc(r.k) + ' ↗</a>' : (r.href ? '<a href="' + esc(r.href) + '">' + esc(r.k) + ' ➔</a>' : esc(r.k));
       return '<li class="au-fila">' +
         '<div class="au-fila-cab"><span class="au-fila-k">' + k + (r.est ? ' ' + chip(r.est) : '') + '</span>' +
         '<span class="au-fila-v num-tabular">' + fmt(r.v, 'mdp1') + '</span></div>' +

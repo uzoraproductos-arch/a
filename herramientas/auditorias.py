@@ -71,13 +71,17 @@ AUDITORIAS = [
      'Ilustración del tablero de votación en el Congreso con el techo de deuda 2027 y la nota soberana BBB',
      '🧾 Paquete Económico 2027 · Congreso, deuda y calificación BBB', 'El Congreso aprobó más deuda: Ley de Ingresos 2027 y nota soberana',
      '¿Cuánta deuda autorizó la Cámara de Diputados para 2027, qué cambió en las multas fiscales y qué dijo Hacienda sobre la nota BBB?'),
+    ('inversion-megaobras', 'assets/auditor/img/showcase_inversion_megaobras.jpg', 'Ilustración provisional',
+     'Ilustración panorámica de grandes obras de infraestructura, trenes, refinerías y el balance financiero de seis sexenios',
+     '🏗️ Inversión pública y rescates · 1988–2024', 'Inversión en megaobras y rescates: 11 obras, 2 rescates y 6 sexenios',
+     '¿Cuánto costaron las 11 megaobras y los 2 rescates de seis sexenios, cuánto pierden al año y dónde se consulta cada obra?'),
 ]
 
 
 # Investigaciones agrupadas por tema (entrega 2 de Astra, 10-10-2026). Las
 # usan el indice general (apartados.py) y el pie de cada investigacion.
 TEMAS = [
-    ('🏗️', 'Megaobras e infraestructura', ['tren-maya', 'dos-bocas', 'aifa', 'tren-toluca', 'megafarmacia', 'guaymas-gas']),
+    ('🏗️', 'Megaobras e infraestructura', ['inversion-megaobras', 'tren-maya', 'dos-bocas', 'aifa', 'tren-toluca', 'megafarmacia', 'guaymas-gas']),
     ('🗺️', 'Dinero para estados y municipios', ['ramo-33', 'lego-cienega']),
     ('💸', 'Deuda e ingresos del gobierno', ['deuda-soberana', 'huachicol-fiscal', 'deuda-congreso-2027']),
     ('🔍', 'Contratos, salud y órganos autónomos', ['ine-contratos', 'medicamentos-imss']),
@@ -115,6 +119,8 @@ RUTAS = {
                           'contratos-publicos.html?i=050GYR', 'Los contratos del IMSS en ComprasMX 2025 y 2026'),
     'deuda-congreso-2027': ('proyeccion2027', 'El Paquete Económico 2027 y la Ley de Ingresos',
                             'noticias-relevantes.html#col-lif-2027-deuda-y-multas', 'El cotejo documento por documento en Verificamos'),
+    'inversion-megaobras': ('eb-egresos', 'Cuánto se destina a inversión y desarrollo económico en el PEF',
+                            'herramienta-megaobras.html', 'Las 5 aplicaciones de Inversión y Megaobras: simuladores, sexenios y estados de resultados'),
 }
 
 
@@ -258,6 +264,14 @@ def _datos(id_):
                 (_mdp(c['costo_financiero_2027_mdp']), 'costo financiero de la deuda propuesto para 2027 en el Paquete Económico', 'oficial', None),
                 ('BBB+ → BBB', 'ajuste de HR Ratings a la nota soberana de largo plazo reconocido por Hacienda (Comunicado 82)', 'oficial', None),
                 ('Por cotejar', 'proyecciones del reporte de HR Ratings (déficit de 4.6 % del PIB y deuda a 2030)', 'pendiente', x['pendiente_id']),
+            ]
+        elif id_ == 'inversion-megaobras':
+            cuanto = [
+                (_mdp(c['obras_presu_mdp']), 'presupuesto inicial documentado de las %d obras (1988–2024)' % c['obras_n'], 'derivado', None),
+                ('%s (+%s %%)' % (_mdp(c['obras_real_mdp']), c['obras_sobrecosto_pct']), 'costo real documentado de las %d obras (%s por encima de lo aprobado)' % (c['obras_n'], _mdp(c['obras_brecha_mdp'])), 'derivado', None),
+                (_mdp(c['rescates_real_mdp']), 'costo comprometido aparte en los %d rescates (FOBAPROA-IPAB y FARAC carretero)' % c['rescates_n'], 'derivado', None),
+                ('−%s al año' % _mdp(c['balance_neto_anual_mdp']), 'pérdida neta anual en los %d proyectos con dato publicado (%d pierden %s y %d gana %s)' % (c['n_con_dato_anual'], 5, _mdp(c['balance_pierde_mdp']), 1, _mdp(c['balance_gana_mdp'])), 'derivado', None),
+                ('4 obras sin dato', 'operación anual no publicada por separado (Megafarmacia, Tren Interurbano, Agronitrogenados y Búnker)', 'pendiente', x['pendiente_id']),
             ]
         return {'que': x['que'], 'cuanto': cuanto, 'quien': x['quien'], 'docs': docs, 'falta': x['falta']}
     raise SystemExit('Sin lectura breve para %s' % id_)
@@ -466,6 +480,7 @@ TEMA_BOT = {
     'guaymas-gas': ['guaymas', 'amigo lng', 'epcilon', 'sanchez taboada', 'gas de texas', 'gaceta de sonora'],
     'medicamentos-imss': ['medicamentos del imss', 'compra de medicamentos', 'compras de medicinas', 'ventiladores del imss', 'cyber robotic'],
     'deuda-congreso-2027': ['ley de ingresos 2027', 'aprobo mas deuda', 'techo de deuda 2027', 'perdon de multas', 'hr ratings'],
+    'inversion-megaobras': ['megaobras', 'megaobra', 'inversion en megaobras', 'inversiones en megaobras', 'fobaproa', 'farac', 'agronitrogenados', 'fertinal', 'estela de luz', 'bunker', 'refineria de tula', 'barda de tula', 'enciclomedia', 'obras de cada sexenio'],
 }
 
 
