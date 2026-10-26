@@ -183,7 +183,7 @@ body[data-pagina="apartado"] a.nav-cuentanos { text-decoration: none; }
   font-size: 14px;
 }
 .apartado-pie .apartado-ancho { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; }
-.apartado-volver { color: #ffffff; font-weight: 700; }
+.apartado-volver { color: #ffffff; font-weight: 700; display: inline-flex; align-items: center; min-height: 44px; } /* 44 px de toque (AGENTS.md §4) */
 
 @media (max-width: 720px) {
   .apartado-ancho { padding: 0 16px; }

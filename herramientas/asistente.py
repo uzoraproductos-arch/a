@@ -296,6 +296,7 @@ PAGINA_K = {
     'donaciones.html': ' apoyar apoyo sostener sostenerla donar donativo aportar ayudar plataforma pase civico auditor',
     'servicios.html': ' contratar contrato medida servicio servicios investigacion encargo cotizacion suscripcion creditos sostener plataforma',
     'comunidad.html': ' participa participar reportar denunciar error corregir proponer tema',
+    'aviso-de-privacidad.html': ' privacidad datos personales mis datos guardan guardas cookies rastreo analitica borrar derechos arco',
 }
 
 

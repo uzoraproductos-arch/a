@@ -1334,6 +1334,64 @@ PILARES_LISTA = [
 
 LEY_PERIODISTAS = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LPPDDHP.pdf'
 
+# Aviso de privacidad (paso 1.5 del plan v2, 26-10-2026). Cotejado contra la
+# LFPDPPP vigente (nueva ley, DOF 20-03-2025; ultima reforma DOF 14-11-2025):
+# art. 15 dice que debe contener, art. 16 como se pone a disposicion y art. 2
+# fr. XV quien es la autoridad (ya no el INAI). Dice solo lo que hace hoy el
+# codigo: nada sale del navegador (CANAL_COMUNIDAD vacio, sin analitica, sin
+# llamadas a servidor). Cuando se conecte Supabase (docs/BASE-DE-DATOS.md),
+# este aviso cambia ANTES de recabar el primer dato.
+LFPDPPP = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf'
+AVISO_FECHA = '26-10-2026'
+_AV_NAVEGADOR = [
+    ('La plática con el Auditor', 'av-chat', 'Se guarda en la pestaña (sessionStorage) y se borra al cerrarla, o antes con «🗑️ Limpiar».'),
+    ('«Lo que aún no sé»', 'auditavision.bot.sinRespuesta', 'Las preguntas que el Auditor no supo contestar, hasta 50. Solo las ves tú; si quieres, las copias y nos las mandas.'),
+    ('Las columnas que sigues', 'av-sigo', 'Cuáles casos de Verificamos sigues y qué versión viste, para avisarte cuando cambian.'),
+    ('Ágora cívica', 'auditavision_foro_debates y otras', 'Tus hilos, tus apoyos y el seudónimo que elijas. No se publican: viven solo en tu navegador.'),
+    ('Preferencias de las herramientas', 'av-am-reloj, crReloj y otras', 'Cómo dejaste un reloj, una unidad o un filtro.'),
+]
+AVISO = {
+    'archivo': 'aviso-de-privacidad.html',
+    'menu': 'Aviso de privacidad',
+    'menu_archivo': AUDITOR_VIRTUAL,
+    'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+    'icono': '🔒',
+    'titulo': 'Aviso de privacidad',
+    'lema': 'Qué sabemos de ti: hoy, nada',
+    'entrada': ('Auditavisión no te pide cuenta, ni nombre, ni correo para usar la plataforma, y hoy ningún dato tuyo sale de tu navegador. '
+                'Aquí te lo explicamos con el orden que pide la ley (<a href="%s" target="_blank" rel="noopener">Ley Federal de Protección '
+                'de Datos Personales en Posesión de los Particulares, DOF 20-03-2025, art. 15 ↗</a>) %s. Vigente desde el %s.'
+                % (LFPDPPP, '<span class="est-chip est-oficial">oficial</span>', AVISO_FECHA)),
+    'secciones': [
+        {'id': 'responsable', 'titulo': 'Quién es responsable', 'texto': 'Artículo 15, fracción I.', 'tarjetas': [],
+         'bloque': ('<p>Auditavisión es un proyecto cívico independiente, publicado en GitHub Pages. El nombre y el domicilio de la persona '
+                    'o la organización responsable se publicarán aquí cuando el proyecto se constituya; mientras tanto, la plataforma no '
+                    'recaba datos personales, así que no hay datos que alguien administre por ti.</p>')},
+        {'id': 'datos', 'titulo': 'Qué datos tratamos', 'texto': 'Artículo 15, fracciones II y III.', 'tarjetas': [],
+         'bloque': ('<p><b>Ninguno en un servidor nuestro.</b> No hay registro, ni cuentas, ni herramientas de analítica, ni cookies propias. '
+                    'Los formularios (algo raro con el dinero público, un dato mal, un tema para investigar) arman el texto en tu pantalla '
+                    'para que tú lo copies o lo descargues: no se envían solos.</p>\n'
+                    '<p>Lo que sí se guarda <b>en tu propio navegador</b>, para que la plataforma recuerde lo que hiciste, es esto. '
+                    'Nunca nos llega, y lo borras al borrar los datos del sitio en tu navegador:</p>\n'
+                    '<ul>\n%s\n</ul>') % '\n'.join('<li><b>%s</b> (<code>%s</code>): %s</li>' % x for x in _AV_NAVEGADOR)},
+        {'id': 'terceros', 'titulo': 'Servicios de terceros', 'texto': 'Lo que tu navegador pide a otros sitios al abrir una página.', 'tarjetas': [],
+         'bloque': ('<p>Para mostrarte la página, tu navegador se conecta a GitHub Pages (donde vive el sitio), a Google Fonts (las letras) '
+                    'y a cdnjs (la librería de los mapas). Esos servicios reciben, como cualquier sitio, tu dirección IP y los datos técnicos '
+                    'de tu navegador, y los tratan con sus propias políticas. Los enlaces a portales oficiales y a noticias te llevan a '
+                    'sitios con sus propios avisos.</p>')},
+        {'id': 'derechos', 'titulo': 'Tus derechos y cómo limitar el uso', 'texto': 'Artículo 15, fracciones IV y V.', 'tarjetas': [],
+         'bloque': ('<p>Tienes derecho a acceder a tus datos, rectificarlos, cancelarlos y oponerte a su uso (derechos ARCO, arts. 21 a 28 de '
+                    'la ley). Como hoy no guardamos datos tuyos, lo ejerces tú mismo: borra los datos del sitio en tu navegador, o usa '
+                    '«🗑️ Limpiar» en el Auditor. Si un día recabamos algún dato, aquí estará el medio para pedirlo.</p>\n'
+                    '<p>La autoridad en materia de datos personales es ahora la Secretaría Anticorrupción y Buen Gobierno (art. 2, fr. XV), '
+                    'que tomó el lugar del extinto INAI.</p>')},
+        {'id': 'cambios', 'titulo': 'Si esto cambia', 'texto': 'Artículo 15, fracción VI.', 'tarjetas': [],
+         'bloque': ('<p>La plataforma tiene lista una base de datos para recibir formularios y preguntas, que todavía no está conectada. '
+                    '<b>Antes de que reciba el primer dato</b>, este aviso dirá qué se guarda, para qué, por cuánto tiempo y cómo pedir que se '
+                    'borre, y la fecha de arriba cambiará. Ningún formulario guardará tu nombre si no hace falta.</p>')},
+    ],
+}
+
 PILARES = {
     'archivo': 'pilares.html',
     'menu': 'Nuestros pilares',
@@ -4952,7 +5010,8 @@ def pagina(a, sello):
 
   <footer class="apartado-pie">
     <div class="apartado-ancho">
-{volver}      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
+{volver}      <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
     </div>
   </footer>
 
@@ -5360,7 +5419,7 @@ def generar(sello=None):
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     import datos_ambiente
-    for extra in [DICCIONARIO, NOTICIAS, PILARES, contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, NOTICIAS, PILARES, AVISO, contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
