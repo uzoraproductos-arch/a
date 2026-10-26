@@ -358,7 +358,7 @@
   "cuerpo": [
    "El 25 de octubre de 2026, en un mensaje publicado en Central Electoral, el sitio oficial del INE, Guadalupe Taddei Zavala anunció que el 26 de octubre presentaría ante la Cámara de Diputados su renuncia como consejera presidenta, cargo que ocupaba desde abril de 2023. Según ese mensaje, lo hace para proteger al Instituto, y la decisión no releva a nadie del deber de esclarecer los hechos que deban investigarse.",
    "Un día antes, el 24 de octubre, la Presidencia del INE publicó que respalda la investigación que la Auditoría Superior de la Federación abrió de oficio, que colaborará con ella, que ya envió los antecedentes a su Órgano Interno de Control y que abrirá un micrositio con las contrataciones, sus montos, sus proveedores y sus documentos. El 22 de octubre, en el Consejo General, un partido le pidió separarse del cargo mientras se investigaban las contrataciones señaladas por la prensa; consta en la versión estenográfica de esa sesión.",
-   "Lo que todavía no tiene documento oficial: el video de París, quién lo grabó, quién pagó el viaje, la frase «No me voy» y la suma de 245 millones de pesos en contratos. Todo eso viene de Latinus y de otros medios. Tampoco encontramos el comunicado de la propia Auditoría Superior: lo citan los medios, pero no lo pudimos abrir. El único documento del INE que nombra a Cajas Graf que pudimos consultar es el fallo de la licitación LP-INE-001/2025, de febrero de 2025, para urnas y mamparas de la elección judicial: ahí Cajas Graf, en participación conjunta con TOL Producciones, no cumplió las especificaciones técnicas. Ese fallo no dice si la empresa ganó otros contratos.",
+   "Lo que todavía no tiene documento oficial: el video de París, quién lo grabó, quién pagó el viaje, la frase «No me voy» y la suma de 245 millones de pesos en contratos. Todo eso viene de Latinus y de otros medios. Tampoco encontramos el comunicado de la propia Auditoría Superior: según los medios, lo dio a conocer el 23 de octubre, pero no lo localizamos en asf.gob.mx. El único documento del INE que nombra a Cajas Graf que pudimos consultar es el fallo de la licitación LP-INE-001/2025, de febrero de 2025, para urnas y mamparas de la elección judicial: ahí Cajas Graf, en participación conjunta con TOL Producciones, no cumplió las especificaciones técnicas. Ese fallo no dice si la empresa ganó otros contratos.",
    "Una nota de método: las páginas del INE no abrieron desde la plataforma; sus textos se tomaron de los comunicados de Central Electoral tal como los muestra el buscador. Ninguna autoridad ha resuelto que haya delito o falta administrativa: una investigación abierta no es una conclusión."
   ],
   "dato_curioso": "El único documento del INE que encontramos con el nombre de Cajas Graf la deja fuera: en febrero de 2025 su propuesta para urnas y mamparas de la elección judicial no cumplió las especificaciones técnicas.",
@@ -389,7 +389,7 @@
    {
     "dice": "La Auditoría Superior de la Federación abrió una investigación al instituto y sus proveedores.",
     "res": "matiz",
-    "explica": "El INE lo confirma: el 24 de octubre publicó que respalda la investigación que la ASF abrió de oficio. El comunicado de la ASF, con su alcance exacto, lo citan los medios pero no lo pudimos abrir: falta de la plataforma.",
+    "explica": "El INE lo confirma: el 24 de octubre publicó que respalda la investigación que la ASF abrió de oficio. Según la prensa, la ASF lo anunció el 23 de octubre de 2026 y alcanza al INE, a los institutos electorales locales y a sus proveedores. El comunicado de la ASF, con su alcance exacto, no lo localizamos en asf.gob.mx: falta de la plataforma.",
     "fuente": "INE, Central Electoral, 24-10-2026",
     "url": "https://centralelectoral.ine.mx/2026/10/24/la-presidencia-del-ine-respalda-la-investigacion-de-la-asf-y-reafirma-su-compromiso-con-el-estado-de-derecho/"
    },
@@ -403,7 +403,7 @@
    {
     "dice": "Latinus suma al menos 245 millones de pesos en contratos para Cajas Graf bajo Taddei en Sonora y en el INE.",
     "res": "pendiente",
-    "explica": "Es la suma de un medio. Para sostenerla hacen falta los contratos firmados por el INE y por el Instituto Estatal Electoral de Sonora, que no pudimos abrir: falta de la plataforma. Otros medios dan cifras distintas.",
+    "explica": "Es la suma de un medio. Para sostenerla hacen falta los contratos firmados por el INE y por el Instituto Estatal Electoral de Sonora, que no pudimos abrir: falta de la plataforma. Otros medios dan cifras distintas. Una nota de método: en los contratos de ComprasMX 2025 y 2026 que integra la plataforma (215,121 contratos de 1,078 instituciones) no aparece Cajas Graf, pero tampoco el INE, que es autónomo y no contrata por ComprasMX. Que no aparezca ahí no prueba nada: los contratos hay que pedirlos al INE y al IEE Sonora.",
     "fuente": "Plataforma Nacional de Transparencia",
     "url": "https://www.plataformadetransparencia.org.mx/",
     "quien": "Falta de la plataforma: los contratos del INE y del IEE Sonora son públicos y aún no los integramos",
