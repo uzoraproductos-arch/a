@@ -49,6 +49,7 @@
   },
   "cuerpo": [
    "El proyecto se llama AMIGO (American Mexican Integrated Gas Operations): una planta para licuar gas natural en Guaymas. Así lo nombra el Congreso de Sonora en su Gaceta, y la Presidencia lo llama «Proyecto LNG Amigo».",
+   "Del lado de Estados Unidos sí hay un documento oficial. La Orden 4629 del Departamento de Energía (DOE), del 8 de diciembre de 2020, expediente 20-31-LNG, autoriza a Epcilon LNG LLC, la empresa del proyecto, a exportar gas natural a México para licuarlo y a reexportarlo ya como gas natural licuado desde México, por 20 años, a países con y sin tratado de libre comercio con EE. UU.: hasta 395 mil millones de pies cúbicos al año. La orden le exige empezar a reexportar a más tardar el 8 de diciembre de 2027. La empresa pidió en diciembre de 2025 moverlo dos años, al 8 de diciembre de 2029; en julio de 2026 seguía mandando información para esa solicitud, y no encontramos que el DOE la haya resuelto.",
    "En la conferencia del 21 de octubre de 2026, la Secretaría de Energía lo ubicó en el Parque Industrial Pesquero «General Rodolfo Sánchez Taboada», un área ya ocupada por la industria, el cabotaje y la pesca, con 41.7 hectáreas, el 0.005 % del territorio del municipio. Habló de un máximo de 5 buques al mes (60 al año), el 4 % de las embarcaciones que ya cruzan la zona, y de almacenamiento para 290 mil metros cúbicos de gas. La Presidenta dijo que parte del gas vendría de Texas, que una porción se exportaría y otra se quedaría en el mercado interno, y que hay un amparo que impide avanzar mientras se revisan otra vez los impactos ambientales: «no vamos a cometer una irresponsabilidad».",
    "El 16 de octubre, la Presidenta había dicho que «no hay ningún daño ambiental», que se hizo el estudio de impacto ambiental, que el sitio no está en el ecosistema de la vaquita marina y que la obra «se paró» por los amparos.",
    "Lo que no consta en ningún documento oficial que pudimos abrir es el contrato de comodato. Lo reportó la prensa (N+ Focus), con fecha del 30 de septiembre de 2022 y la Comisión Estatal de Bienes y Concesiones como firmante; según esa misma prensa, el Gobierno del Estado, que encabeza Alfonso Durazo, lo ha negado o lo da por «sin efectos». Un contrato así es información que debe publicarse (Ley General de Transparencia, obligaciones sobre contratos, concesiones y permisos), y no lo encontramos publicado.",
@@ -76,6 +77,13 @@
     "estado": "oficial",
     "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
     "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "valor": "395 mil millones de pies³ al año",
+    "etq": "Gas natural de EE. UU. que la Orden 4629 del DOE autoriza exportar a México para licuarlo y reexportarlo (20 años)",
+    "estado": "oficial",
+    "fuente": "Departamento de Energía de EE. UU., Orden DOE/FE 4629 (08-12-2020), expediente 20-31-LNG",
+    "url": "https://www.energy.gov/sites/prod/files/2020/12/f81/ord4629.pdf"
    },
    {
     "valor": "12.3 ha",
@@ -112,7 +120,7 @@
    {
     "dice": "El negocio es procesar gas que viene de Texas para mandarlo a Asia; el gas ni siquiera se queda aquí.",
     "res": "matiz",
-    "explica": "La Presidenta dijo que parte del gas vendría de Texas, que una porción se exportaría y otra iría al mercado interno. En esa conferencia no se nombró a Asia como destino.",
+    "explica": "La Presidenta dijo que parte del gas vendría de Texas, que una porción se exportaría y otra iría al mercado interno. En esa conferencia no se nombró a Asia como destino. La Orden 4629 del Departamento de Energía de EE. UU. sí confirma que el gas sale de Estados Unidos y que el permiso es para licuarlo en México y reexportarlo a países con y sin tratado de libre comercio con EE. UU.",
     "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
     "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
    },
@@ -179,6 +187,10 @@
     "url": "https://www.pjf.gob.mx/"
    },
    {
+    "que": "Lo que resuelva el Departamento de Energía de EE. UU. sobre la prórroga al 08-12-2029 (expediente 20-31-LNG)",
+    "url": "https://public-inspection.federalregister.gov/2025-23764.pdf"
+   },
+   {
     "que": "Cuánto pagaría el proyecto en impuestos y derechos, y cuánto se queda en Sonora: no lo ha presentado la Secretaría de Energía",
     "url": "https://www.gob.mx/sener"
    },
@@ -188,6 +200,14 @@
    }
   ],
   "fuentes": [
+   {
+    "nombre": "Departamento de Energía de EE. UU.: Orden DOE/FE 4629, del 8 de diciembre de 2020, expediente 20-31-LNG (Epcilon LNG LLC, exportación de gas a México y reexportación como gas natural licuado)",
+    "url": "https://www.energy.gov/sites/prod/files/2020/12/f81/ord4629.pdf"
+   },
+   {
+    "nombre": "Federal Register: aviso de la solicitud de Epcilon LNG para prorrogar al 08-12-2029 el inicio de la reexportación (documento 2025-23764)",
+    "url": "https://public-inspection.federalregister.gov/2025-23764.pdf"
+   },
    {
     "nombre": "Presidencia: versión estenográfica de la conferencia del 21 de octubre de 2026 (Secretaría de Energía, proyecto en Guaymas)",
     "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
