@@ -1314,7 +1314,8 @@
 
       /* El país: si no se habla de un estado ni de un sexenio. La deuda y los
          intereses van primero; el gasto y los ingresos, después de Números. */
-      var nt = !es.length && nacTema(t), pideParte = PCT.test(t) || /de cada (peso|\$? ?100|cien)/.test(t);
+      /* Pemex o la CFE no son el país: sus intereses tienen su propio renglón (27-10-2026). */
+      var nt = !es.length && !/ (pemex|cfe) /.test(t) && nacTema(t), pideParte = PCT.test(t) || /de cada (peso|\$? ?100|cien)/.test(t);
       var ntOk = nt && (NAC.test(t) || nt === 'intereses' || nt === 'nueva' || /presupuesto (de |del )?(2026|este ano|federal)|cuanto (se )?gasta el gobierno/.test(t));
       var anioH = (/\b(199\d|20[01]\d|202[0-5])\b/.exec(t) || [])[1];
       if (ntOk && /intereses|nueva|deuda/.test(nt) && !pideParte && !anioH) { var na = nacional(nt); if (na) return fin(na, { tipo: 'nac', tema: nt }); }
@@ -1530,6 +1531,8 @@
     return {
       cotejo: cotejo,
       contesta: function (q) { try { return contesta(q); } catch (e) { if (window.console) console.warn('AuditorCharla', e); return null; } },
+      /* El veredicto de una cifra dicha contra un valor oficial (lo usa Inversión y Megaobras). */
+      juzga: function (claim, val) { var d = cifraDicha(norm(claim).replace(/[¿?¡!]/g, ' ')), j = d && juzgaDicho(d, val); return j ? { dicho: d, v: j } : null; },
       deFicha: deFicha, deDonde: deDonde, olvida: function () { ctx = {}; }, ctx: function () { return ctx; }
 
     };

@@ -57,7 +57,9 @@
   var SINON = { gana: 'sueldo remuneracion', ganan: 'sueldo remuneracion', sueldo: 'remuneracion salario', salario: 'remuneracion sueldo',
     presidente: 'presidencia ejecutivo', diputado: 'diputados camara', senador: 'senadores senado', robo: 'aclarar observaciones',
     huachicol: 'combustible contrabando', amlo: 'lopez obrador estado cuenta administracion', epn: 'pena nieto estado cuenta administracion',
-    peña: 'pena nieto', fox: 'fox quesada', calderon: 'calderon hinojosa', zedillo: 'zedillo ponce', investigaciones: 'modo inspector', investigacion: 'modo inspector', contratar: 'servicios encargo', fantasma: 'efos', factureras: 'efos', impuestos: 'tributarios recaudacion', deuda: 'deuda' };
+    peña: 'pena nieto', fox: 'fox quesada', calderon: 'calderon hinojosa', zedillo: 'zedillo ponce', investigaciones: 'modo inspector', investigacion: 'modo inspector', contratar: 'servicios encargo', fantasma: 'efos', factureras: 'efos', impuestos: 'tributarios recaudacion', deuda: 'deuda',
+    /* 27-10-2026: lo que las preguntas de prueba no encontraban. */
+    donar: 'donaciones donativo alcancia', dono: 'donaciones donativo', donativos: 'donaciones', apoyar: 'donaciones', transparentar: 'pendientes registro', dictamen: 'dictamen sellado independiente' };
   var vacia = {};
   VACIAS.forEach(function (w) { vacia[norm(w)] = 1; });
 
@@ -1429,12 +1431,37 @@
       sug: ['¿Qué megaobras hay en Tabasco?', '¿Cuál es el impacto ambiental del Tren Maya?', 'Impacto ambiental de las refinerías']
     };
   }
+  function cotejaObra(q, p) {
+    var obs = obrasEn(q);
+    if (obs.length !== 1 || !charla || !charla.juzga) return null;
+    var o = obs[0], c = o.c;
+    /* En dólares no se coteja: la plataforma no convierte monedas. */
+    if (/\b(dolar\w*|usd|mdd)\b/.test(p)) {
+      var rd = respObra(o, '', false);
+      rd.html = '<p>⚪ <b>No lo puedo cotejar en dólares.</b> ' + esc(MO.nombre) + ' lleva la obra en pesos, como la reportan sus documentos, y no convierte monedas. ' +
+        (o.resc ? 'Lo pagado y debido' : 'Su costo real') + ' es <b>' + esc(c.real.vt) + '</b> ' + chipE(c.real) + '.</p>' + rd.html;
+      return rd;
+    }
+    var sob = /\b(sobrecosto|sobreprecio|se encarecio|de mas)\b/.test(p), apr = /\b(aprob\w*|presupuest\w*|se presento)\b/.test(p);
+    var cual = sob ? c.sob : apr ? c.pres : c.real, val = sob ? { v: cual.v, u: 'pct' } : { v: cual.v, u: 'mdp' };
+    var jz = cual.e !== 'pendiente' && charla.juzga(q, val);
+    if (!jz) return null;
+    var etq = sob ? c.sob.et : apr ? (o.resc ? 'lo que se presentó' : 'lo aprobado') : (o.resc ? 'lo pagado y debido' : 'su costo real');
+    var r = respObra(o, sob ? 'sob' : apr ? 'pres' : '', false);
+    r.html = '<p>' + { verde: '✅', ambar: '⚠️', rojo: '❌' }[jz.v.tipo] + ' <b>' + esc(jz.v.tit) + '.</b> Dices «' + esc(jz.dicho.bruto) + '»; ' + esc(etq) + ', según ' + esc(MO.nombre) +
+      ', es <b>' + esc(cual.vt) + '</b> ' + chipE(cual) + '. ' + esc(jz.v.porque) + '</p>' +
+      '<p class="pa-chico">Veredicto ' + chip({ e: 'derivado' }) + ': diferencia entre la cifra que dices y la de la plataforma; se acepta el redondeo.</p>' + r.html;
+    r.tit = 'Verificación: ' + o.n;
+    return r;
+  }
   function megaobras(q, previas) {
     if (!MO.obras.length) return null;
     var p = plano(q);
-    /* Lo que contestan otros: verificar una cifra, el Paquete 2027, un expediente. */
-    if (/\b(es cierto|es verdad|dicen que|escuche|lei que|vi que)\b/.test(p) || /\b(2027|paquete|se propone|propuesta|propone)\b/.test(p) ||
-      /\b(expedientes?|pliegos?)\b/.test(p)) return null;
+    /* Lo que contestan otros: el Paquete 2027, un expediente. */
+    if (/\b(2027|paquete|se propone|propuesta|propone)\b/.test(p) || /\b(expedientes?|pliegos?)\b/.test(p)) return null;
+    /* «¿Es cierto que el Tren Maya costó 500 mil millones?» se coteja contra el
+       costo de la obra, no contra otra cifra que comparta su nombre (27-10-2026). */
+    if (/\b(es cierto|es verdad|dicen que|escuche|lei que|vi que)\b/.test(p)) return cotejaObra(q, p);
     /* Si pregunta por una obra específica (incluso su huella o alerta ambiental), o por el mapa ambiental / megaobras en un estado. */
     var obs0 = obrasEn(q);
     if (!obs0.length) {
@@ -1463,6 +1490,17 @@
       if (defin && obs[0].resc) return null;
       if (obs.length > 1) return respDuelo(obs[0], obs[1]);
       return respObra(obs[0], foco, MO_SIM.test(p));
+    }
+    /* 2 bis. El costo de una obra que no sigue la herramienta («¿cuánto costó el
+       Tren Interoceánico?»): se dice que no está, en vez de contestar con otra obra. */
+    if (!defin && /\b(cuanto|costo|cuesta|costaron|vale)\b/.test(p) && /\b(tren|refineria|aeropuerto|presa|autopista|carretera|puerto|corredor|acueducto|hospital)\b/.test(p)) {
+      var nObras = MO.obras.filter(function (x) { return !x.resc; });
+      return {
+        html: '<p>⚪ <b>Esa obra no está entre las que sigue ' + esc(MO.nombre) + '.</b> Su costo total no lo tengo con documento, así que no te doy una cifra. Sigo estas ' + nObras.length + ':</p>' +
+          '<p>' + nObras.map(function (x) { return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc('¿Cuánto costó ' + x.n + '?') + '">' + x.ico + ' ' + esc(x.n) + '</button>'; }).join(' ') + '</p>' +
+          '<p class="pa-chico">Si la obra trae dinero en el Paquete Económico 2027, pregúntame «¿cuánto propone el Paquete 2027 para…?».</p>',
+        ir: ['herramienta-megaobras.html', MO.nombre], rec: [], sug: [], anota: 1
+      };
     }
     /* 3. En qué invirtió un presidente (o dos, frente a frente). */
     if (/\b(obras?|megaobras?|invirti\w*|construy\w*|proyectos?|inversiones)\b/.test(p) && !/\binversion fisica\b/.test(p)) {
@@ -1624,13 +1662,20 @@
      que prestaron 54 hectáreas en Guaymas?» pide el cotejo, no las finanzas
      del municipio (26-10-2026). */
   var GENERICAS = { cierto: 1, verdad: 1, dicen: 1, circula: 1, redes: 1, gobierno: 1, mexico: 1 };
+  /* Una pregunta por un dato («¿cuántos ministros tiene la Corte?») o por un
+     estado de cuenta no es un cotejo, aunque comparta palabras con la columna:
+     la contesta la plática (27-10-2026). */
+  var PIDE_DATO = /^ *(cuant[oa]s?|cual(es)?|quien(es)?|donde|cuando|que es|que son) /, PIDE_COTEJO = / (cierto|verdad|falso|dicen|circula|redes) /;
   function verificado(q) {
+    var pq = plano(q);
+    if (/ estados? de cuenta /.test(pq) || (PIDE_DATO.test(pq) && !PIDE_COTEJO.test(pq))) return null;
     var col = buscar(q).slice(0, 12).filter(function (x) { return x.f.t === 'columna' && x.f.cot; })[0];
     if (!col || !charla) return null;
     var f = col.f, t = plano(f.tit + ' ' + (f.k || '') + ' ' + (f.txt || '') + ' ' + (f.cir ? f.cir.tx : ''));
     var ws = norm(q).replace(/[^a-z0-9ñ]+/g, ' ').split(' ').filter(function (w) { return w.length > 3 && !vacia[w] && !GENERICAS[w]; });
     var hits = ws.filter(function (w) { return t.indexOf(' ' + w + ' ') >= 0; }).length;
-    if (hits < 3 || hits * 2 < ws.length) return null;
+    /* Con «¿es cierto…?» basta que coincidan dos palabras: el lector ya pidió el cotejo. */
+    if (hits < (PIDE_COTEJO.test(pq) ? 2 : 3) || hits * 2 < ws.length) return null;
     return charla.deFicha(f);
   }
 
@@ -1648,11 +1693,39 @@
     };
   }
 
+  /* El dictamen y el Registro de pendientes, por su nombre (27-10-2026: las
+     preguntas de prueba los mandaban al Ágora y a Crisis ambientales). */
+  function propias(q) {
+    var p = plano(q);
+    if (/ dictamen(es)? (civico|independiente|sellado)| (generar|genero|saco|hago|pido|sirve) (un |el )?dictamen|^ (que es )?(el |un )?dictamen $/.test(p))
+      return {
+        html: '<p>🧾 El <b>Dictamen cívico independiente</b> respalda una respuesta mía: trae las cifras, de qué documento sale cada una, su estado (oficial, derivado o pendiente), un folio y una huella digital para comprobar que nadie lo alteró.</p>' +
+          '<p>Para sacarlo, hazme una pregunta y, en la respuesta, toca <b>«🧾 Generar dictamen»</b>: se abre en otra pestaña, listo para imprimir o compartir. El enlace solo lleva tu pregunta y la página la vuelve a contestar con la misma base, así que nadie puede fabricar uno con cifras ajenas.</p>' +
+          '<p class="pa-chico">No es un documento oficial ni un peritaje con validez ante una autoridad.</p>',
+        ir: ['herramienta-inspector-dictamen.html', 'Dictamen cívico independiente'], rec: [], sug: ['¿Cuánto debe Jalisco?', 'Verifica un estado de cuenta']
+      };
+    if (/ (falta|faltan) (por )?(transparentar|publicar)| no (han )?(transparentado|publicado) | datos pendientes /.test(p) && !/ ambient| crisis /.test(p)) {
+      var f = F.filter(function (x) { return x.ir && x.ir[0] === 'pendientes.html'; })[0];
+      if (f && charla) { var r = charla.deFicha(f); r.sug = ['¿Qué no dice el informe semestral?', '¿Cuánto dejó por aclarar la ASF?']; return r; }
+    }
+    /* La deuda de Pemex no la tiene la plataforma: se dice, con su pendiente,
+       en vez de contestar con su presupuesto (27-10-2026). */
+    if (/ pemex /.test(p) && (/ (debe|adeuda|deuda|endeudamiento|pasivos?) /.test(p)) && !/ (intereses|costo financiero|paga) /.test(p))
+      return {
+        html: '<p>⚪ <b>Cuánto debe Pemex, todavía no lo tengo con documento</b> ' + chip({ e: 'pendiente', p: 'pemex-deuda' }) + '. Pemex publica su deuda en sus reportes trimestrales; la plataforma aún no la coteja ni la integra, así que no te doy una cifra.</p>' +
+          '<p>Lo que sí tengo: lo que Pemex paga de intereses en 2026. Pregúntame «¿cuánto paga Pemex de intereses?».</p>',
+        ir: ['pendientes.html#pemex-deuda', 'Registro de pendientes'], rec: [], sug: ['¿Cuánto paga Pemex de intereses?', 'Diagnóstico de Pemex'], anota: 1
+      };
+    return null;
+  }
+
   function respuesta(q, previas) {
     var inv = investigacion(q);
     if (inv) return inv;
     var al = alarma(q);
     if (al) return al;
+    var pr = propias(q);
+    if (pr) return pr;
     var cx = cruceSat(q) || contratosCmx(q);
     if (cx) return cx;
     var pe = personaje(q);

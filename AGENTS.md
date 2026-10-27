@@ -3,9 +3,9 @@
 Instrucciones permanentes para cualquier agente de código que trabaje en este
 repositorio: Antigravity, Astra/Codex, Cursor, Claude Code o quien venga.
 
-Aquí están **las reglas**. El estado del proyecto, lo que está hecho, lo que
-falta y por qué se decidió cada cosa está en [CONTEXT.md](CONTEXT.md): léelo
-antes de tocar código.
+Aquí están **las reglas**. Dónde va el proyecto, en corto, está en
+[ESTADO.md](ESTADO.md): empieza por ahí. Lo que está hecho, lo que falta y por
+qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
 
 ---
 
@@ -255,7 +255,7 @@ python3 -m http.server 8000    # y abrir http://localhost:8000
 
 ## 5. Criterios de terminado
 
-Un cambio **no está hecho** hasta que las seis líneas se cumplen:
+Un cambio **no está hecho** hasta que las siete líneas se cumplen:
 
 1. `node --check assets/auditor/js/audit-engine.js` pasa sin error.
 2. La página levanta en `http://localhost:8000` y **la consola del navegador
@@ -268,6 +268,16 @@ Un cambio **no está hecho** hasta que las seis líneas se cumplen:
 6. `python3 herramientas/guardia_legibilidad.py --fase N` pasa, con N la
    fase vigente de `docs/ux/PLAN.md`. Para corregir una cifra con urgencia:
    `GUARDIA_OMITIR="motivo"`, y el motivo se anota en el commit.
+7. `python3 herramientas/prueba_auditor.py` pasa: las preguntas de prueba
+   del Auditor (`herramientas/preguntas_auditor.json`) siguen llevando a
+   donde deben. Un dato nuevo del bot lleva su pregunta ahí, y si un cambio
+   mueve una respuesta a propósito, su renglón se corrige en el mismo commit.
+
+Las siete se corren de una vez con
+`python3 herramientas/revision.py --base origin/claude/funny-turing-imtm54`,
+y GitHub las corre solas en cada envío (`.github/workflows/revision.yml`). El
+estado corto del proyecto vive en [ESTADO.md](ESTADO.md): se actualiza en el
+mismo commit que cambia lo que dice.
 
 Al terminar, di explícitamente qué quedó pendiente y por qué. La lista de
 pendientes vive en CONTEXT.md y se mantiene al día: es parte del entregable.

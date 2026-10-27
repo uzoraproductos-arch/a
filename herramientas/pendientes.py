@@ -59,6 +59,11 @@ MEGAOBRAS_PAGS = [('herramienta-megaobras-tabla.html', 'Megaobras · En qué inv
 # base). Cada uno: id, tema, que falta, por que, responsable, enlace oficial,
 # texto del enlace, donde aparece.
 PROPIOS = [
+    ('pemex-deuda', 'Deuda', 'Cuánto debe Pemex: el saldo de su deuda financiera',
+     'Pemex publica el saldo de su deuda en sus reportes trimestrales de resultados y en sus boletines, pero la plataforma todavía no lo ha cotejado ni integrado. '
+     'Lo que sí tiene es lo que Pemex paga de intereses en 2026: $190,838.8 millones (Presupuesto de Egresos 2026, anexo 1.E).',
+     PLATAFORMA, 'https://www.pemex.com/saladeprensa/boletines_nacionales/Paginas/2026_69_nacional.aspx',
+     'Pemex, resultados del segundo trimestre de 2026', [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor')]),
     ('asf-matriz-2018', 'Fiscalización', 'Matriz de Datos Básicos de la Cuenta Pública 2018',
      'La ASF no publicó en su portal la matriz de la Cuenta Pública 2018, como sí lo hizo con las demás. Sin ella, la serie de montos por aclarar tiene un hueco en ese año.',
      'Auditoría Superior de la Federación (ASF)', 'https://www.asf.gob.mx/Section/58_Informes_de_auditoria',

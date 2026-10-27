@@ -18,3 +18,6 @@ Thumbs.db
 # Respaldos manuales: el historial de Git cumple esta funcion
 backups/
 __pycache__/
+
+# Reporte local de la revisión semanal (en GitHub va al resumen de la ejecución)
+docs/SEMANAL.md

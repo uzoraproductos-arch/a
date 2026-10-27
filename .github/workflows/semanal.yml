@@ -1,0 +1,26 @@
+# Revisión semanal (Bloque 3 del plan, 27-10-2026): enlaces a fuentes que no
+# abren y documentos esperados que ya salieron (herramientas/semanal.py).
+# El reporte queda en el resumen de la ejecución; no cambia el repositorio.
+name: Revisión semanal
+
+on:
+  schedule:
+    - cron: '17 13 * * 1'   # lunes, 7:17 en la Ciudad de México
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  semanal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/funny-turing-imtm54
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Enlaces y vigías
+        run: python herramientas/semanal.py
