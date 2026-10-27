@@ -1046,6 +1046,18 @@
     function sanResp(t) {
       if (!SAN) return null;
       if (/documentar para sancionar|informe especial de la asf|guia de la asf/.test(t)) return sanTema('informe');
+      /* El informe semestral de la ASF (art. 38 LFRCF): lo que pasó con lo que observó. */
+      var asf = /\basf\b|auditoria superior|auditoria|fiscaliz/;
+      if (SAN.t.sem_informe) {
+        if (/(que no dice|puntos? ciegos?|lo que (le )?falta)/.test(t) && /semestral/.test(t)) return sanTema('sem_ciegos');
+        if (/informe semestral|situacion que guardan|estado que guarda la solventacion/.test(t)) return sanTema('sem_informe');
+        if (/resarcitori|fincamiento/.test(t)) return sanTema('sem_resarcitorias');
+        if (/(recuper|devuelt|devolvi|reintegr|regresad)/.test(t) && asf.test(t) && /cuant|dinero|monto|lana|millones/.test(t)) return sanTema('sem_recuperaciones');
+        if (/denuncias?( penal\w*| de hechos)?|sentencias?|carcel|ministerio publico|fiscalia/.test(t) && asf.test(t) && /cuant|como van|como va|que paso|estado|cuales/.test(t)) return sanTema('sem_denuncias');
+        if ((/cuant[oa]s?/.test(t) && /sancionad|sanciones|inhabilitad|castigad|al tribunal|tfja|destituid/.test(t) && (asf.test(t) || /funcionari|servidor/.test(t))) ||
+            /procedimientos? de responsabilidad|remitid\w* al (tfja|tribunal)|casos? (en|al) (el )?tribunal/.test(t)) return sanTema('sem_procedimientos');
+        if (/(cuant|como van|que paso|estado)/.test(t) && /pliegos?|acciones|observaciones|\bpras\b|promociones/.test(t) && (asf.test(t) || /pliego|pras/.test(t))) return sanTema('sem_acciones');
+      }
       /* Un tipo de irregularidad, solo si se pregunta por la sanción o la prueba. */
       if (/sancion|sancionar|castig|responsab|expediente|que documentos|como (lo |la )?(pruebo|pruebas|demuestro|probar)|falta administrativa|denunci|es ilegal|es delito|que pasa si|matriz/.test(t)) {
         for (var i = 0; i < SAN_FAM.length; i++) if (SAN_FAM[i][1].test(t)) return sanTema('fam_' + SAN_FAM[i][0]);

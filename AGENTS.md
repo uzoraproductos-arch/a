@@ -367,7 +367,12 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   oficiales (`informes-documentar-para-sancionar.html`) y el chat lo lee como
   `D.san`. Sus 20 matrices viven en `docs/informes/documentar-para-sancionar.json`;
   **un tipo de irregularidad que la gente diga de otro modo necesita su frase
-  en `FAMILIAS`**. Un documento de doctrina o una guía oficial es metodología:
+  en `FAMILIAS`**. El informe semestral de la ASF (art. 38 de la LFRCF), por
+  `herramientas/informe_semestral.py`: cuarta tarjeta de Informes oficiales
+  (`informes-semestral-asf.html`), y el chat lo lee dentro de `D.san` (claves
+  `sem_*`). **Cada semestre (1 de mayo y 1 de noviembre) se cambian sus cifras
+  y su `DOC` por las del informe nuevo**, con el anterior en `ANT` para el
+  cambio del semestre. Un documento de doctrina o una guía oficial es metodología:
   se explica en sencillo con su página, no se copia entero.
 - **Responde como chat:** claro, corto y contundente, con la cifra, qué
   quiere decir y su fuente a la vista. Cada respuesta con datos lleva

@@ -7838,6 +7838,24 @@ window.AUDIT_DB = {
       "definicion": "Lo que, según la ASF, debe probar todo expediente para que una irregularidad termine en sanción: quién fue (personal), qué norma o contrato violó (conductual), cuándo, dónde y cómo ocurrió (circunstancial) y a dónde fue el dinero y cuánto se afectó (finalidad). Si falta uno, el caso se puede caer aunque la irregularidad sea cierta.",
       "ley": "ASF, «Documentar para sancionar», julio de 2026, pp. 13 a 16",
       "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Informe semestral de la ASF",
+      "definicion": "El reporte que la Auditoría Superior de la Federación entrega a la Cámara de Diputados a más tardar el 1 de mayo y el 1 de noviembre sobre qué pasó con sus observaciones: cuáles se aclararon, cuánto se recuperó y cómo van los procedimientos de responsabilidad y las denuncias penales. La ley pide que diga las sanciones que procedieron y que se publique en datos abiertos.",
+      "ley": "Art. 38, Ley de Fiscalización y Rendición de Cuentas de la Federación (última reforma DOF 14-05-2026) · ASF, Informe sobre la situación que guardan las observaciones, recomendaciones y acciones promovidas, corte al 31 de marzo de 2026, p. 7 del PDF",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "No ejercicio de la acción penal (NEAP)",
+      "definicion": "Decisión del Ministerio Público de no llevar una denuncia ante un juez, por ejemplo porque no encontró delito o pruebas suficientes. Es el segundo estado más común de las denuncias penales de la ASF: 425 de 1,196 al 31 de marzo de 2026.",
+      "ley": "ASF, Informe sobre la situación que guardan las observaciones, recomendaciones y acciones promovidas, corte al 31 de marzo de 2026, p. 35",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Fincamiento de Responsabilidad Resarcitoria",
+      "definicion": "El procedimiento con que la ASF, hasta las Cuentas Públicas de 2016, obligaba directamente a pagar el daño causado al erario. Lleva 4,787 casos y $3,069.1 millones recuperados. Hoy los daños se persiguen también con procedimientos de la Ley General de Responsabilidades Administrativas: 2,395, de las Cuentas Públicas 2016 a 2022.",
+      "ley": "ASF, Informe sobre la situación que guardan las observaciones, recomendaciones y acciones promovidas, corte al 31 de marzo de 2026, pp. 30 y 560",
+      "categoria": "🔍 Fiscalización Superior"
     }
   ],
   "legislativo": {
@@ -9514,6 +9532,15 @@ window.AUDIT_DB = {
       "cita_apa": "Auditor\u00eda Superior de la Federaci\u00f3n. (2026). Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2025: primera entrega. ASF.",
       "url": "https://www.asf.gob.mx/Trans/Informes/IR2025a/index.html",
       "descripcion": "Primera entrega de la revisi\u00f3n de la Cuenta P\u00fablica 2025 (junio de 2026): 33 auditor\u00edas a la distribuci\u00f3n y pago de las participaciones federales, con su matriz de datos b\u00e1sicos."
+    },
+    {
+      "num": 155,
+      "id": "ref-asf-semestral",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalización Superior y Auditoría",
+      "cita_apa": "Auditoría Superior de la Federación. (2026). Informe sobre la situación que guardan las observaciones, recomendaciones y acciones promovidas. Corte al 31 de marzo de 2026. ASF.",
+      "url": "https://www.asf.gob.mx/uploads/56_Informes_especiales_de_auditoria/IS_31_03_2026.pdf",
+      "descripcion": "Informe semestral a la Cámara de Diputados (art. 38 de la LFRCF). Trae el estado de las 37,390 acciones de las Cuentas Públicas 2019 a 2024, los 2,395 procedimientos de responsabilidad, las 1,196 denuncias penales y las recuperaciones de 2001 a 2024. Lo explica la página Informe semestral de la ASF de Informes oficiales."
     },
     {
       "num": 154,

@@ -148,9 +148,9 @@ DATOS_PARTES = [
        'Los 2,479 municipios con sus ingresos, predial, participaciones y fondos del Ramo 33, en CSV.',
        'Los municipios del país con sus ingresos, predial, participaciones y aportaciones, según las Estadísticas de Finanzas '
        'Públicas Estatales y Municipales del INEGI. Descárgala completa o consulta un estado aquí mismo.')]),
-    ('informes', 'informes-oficiales.html', '📑', 'Informes oficiales', 'Cuenta Pública, diccionario e informe especial',
+    ('informes', 'informes-oficiales.html', '📑', 'Informes oficiales', 'Cuenta Pública, diccionario e informes de la ASF',
      'Lo que revisó la Auditoría Superior de la Federación en la Cuenta Pública, qué contiene cada archivo de datos de la '
-     'plataforma y la guía de la ASF para que una irregularidad termine en sanción. Cada tarjeta abre su propia página.',
+     'plataforma, la guía de la ASF para que una irregularidad termine en sanción y su informe semestral de cómo van esas acciones. Cada tarjeta abre su propia página.',
      [('asf', 'informes-cuenta-publica.html', '🔎', 'Informes de la Cuenta Pública (ASF)',
        'Qué revisó la Auditoría Superior en 2024, cuánto quedó por aclarar en tu estado y cuándo sale la siguiente entrega.',
        'Qué revisó la Auditoría Superior de la Federación en la Cuenta Pública 2024, cuánto quedó por aclarar en tu estado '
@@ -162,6 +162,11 @@ DATOS_PARTES = [
       # informe_sancion.py, con el mismo texto con que contesta el bot.
       ('especial', 'informes-documentar-para-sancionar.html', '⚖️', 'Informe especial: Documentar para sancionar',
        'La guía de la ASF para que una irregularidad termine en sanción: la cadena, los cuatro elementos de la prueba y las 20 matrices.',
+       None),
+      # Informe semestral de la ASF (pedido del autor, 27-10-2026): lo arma
+      # informe_semestral.py; el bot lo lee dentro de D.san.
+      ('semestral', 'informes-semestral-asf.html', '📊', 'Informe semestral de la ASF',
+       'Qué pasó con lo que observó la ASF: casos en el tribunal, denuncias penales y dinero recuperado, al 31 de marzo de 2026.',
        None)]),
 ]
 # Anclas viejas de descarga-los-datos.html: la pestana y cada #ficha-<id>.
@@ -183,8 +188,9 @@ def datos_paginas():
                            'tarjetas': [(f[2], f[3], f[4], f[1], None, None) for f in fichas_]}],
         })
         for fid, archivo, fico, fnombre, ffrase, fentrada in fichas_:
-            if fid == 'especial':
-                import informe_sancion as isan
+            if fid in ('especial', 'semestral'):
+                import importlib
+                isan = importlib.import_module('informe_sancion' if fid == 'especial' else 'informe_semestral')
                 paginas.append({
                     'archivo': archivo, 'menu': fnombre, 'menu_archivo': 'descarga-los-datos.html',
                     'padre': ('descarga-los-datos.html', 'Datos'), 'padre2': (portada, nombre),
@@ -552,7 +558,7 @@ APARTADOS = [
             {
                 'id': 'informes',
                 'pagina': 'informes-oficiales.html',
-                'pestana': ('📑', 'Informes oficiales', 'Cuenta Pública, diccionario e informe especial: abre su página'),
+                'pestana': ('📑', 'Informes oficiales', 'Cuenta Pública, diccionario e informes de la ASF: abre su página'),
             },
             {
                 # Cuarta tarjeta de Datos desde el 22-10-2026 (pedido del

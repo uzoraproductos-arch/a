@@ -294,6 +294,18 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
   .san-tabla th[scope="row"] { min-width: 0; border-bottom: 0; padding-bottom: 0; color: #0b2a63; }
   .san-matriz { padding: 0 10px 12px; }
 }
+/* Informe semestral de la ASF (27-10-2026): barras del estado de las denuncias. */
+.sem-grafica { margin: 14px 0; max-width: 860px; }
+.sem-grafica figcaption { font-weight: 700; margin-bottom: 8px; }
+.sem-barras { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.sem-barra { display: grid; grid-template-columns: minmax(0, 15em) minmax(0, 1fr) 7.5em; gap: 10px; align-items: center; }
+.sem-barra-pista { display: block; height: 14px; border-radius: 7px; background: rgba(127, 127, 127, .18); overflow: hidden; }
+.sem-barra-relleno { display: block; height: 100%; min-width: 3px; border-radius: 7px; background: #2f6fb3; }
+.sem-barra-num { text-align: right; font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) {
+  .sem-barra { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px; }
+  .sem-barra-que { grid-column: 1 / -1; }
+}
 .leg-mas a, .leg-pregunta a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; }
 
 /* ===== Rediseño del Auditor Virtual (24-10-2026, pedido del autor) =====
