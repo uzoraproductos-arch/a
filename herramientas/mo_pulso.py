@@ -496,9 +496,11 @@ def _cuenta_html(sm):
             '<div class="mp-marco"><table class="mp-tabla"><caption class="sr-only">La cuenta de %s</caption>'
             '<thead><tr><th scope="col">Concepto</th><th scope="col">Monto</th><th scope="col">Estado</th></tr></thead>'
             '<tbody>%s</tbody></table></div>'
-            '<p class="mp-cta-pie"><a href="herramienta-megaobras-sector.html#obra-%s">Ficha completa de la obra, por sector</a></p></article>'
+            '<p class="mp-cta-pie"><a href="herramienta-megaobras-sector.html#obra-%s">Ficha completa de la obra, por sector</a> · '
+            '<a href="%s">Su Auditoría en imágenes</a></p></article>'
             % (o['id'], o['id'], o['id'], o['icono'], esc(o['nombre']), esc(o['presidente']), esc(o['periodo_sexenal']),
-               ''.join(base), nota_base(o, cu.get(o['id']), 'mp-base'), esc(o['nombre']), ''.join(cuerpo) or '<tr><td colspan="3">Sin renglones.</td></tr>', o['id']))
+               ''.join(base), nota_base(o, cu.get(o['id']), 'mp-base'), esc(o['nombre']), ''.join(cuerpo) or '<tr><td colspan="3">Sin renglones.</td></tr>', o['id'],
+               'auditoria-aifa.html' if o['id'] == 'aifa-texcoco' else ('auditoria-%s.html' % o['id'])))
 
     indice = ''.join('<li><a href="#cuenta-%s"><span aria-hidden="true">%s</span> %s</a></li>'
                      % (o['id'], o['icono'], esc(o['nombre'].split(' (')[0])) for o in sm['obras'])

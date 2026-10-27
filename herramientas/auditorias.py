@@ -75,13 +75,45 @@ AUDITORIAS = [
      'Ilustración panorámica de grandes obras de infraestructura, trenes, refinerías y el balance financiero de seis sexenios',
      '🏗️ Inversión pública y rescates · 1988–2024', 'Inversión en megaobras y rescates: 11 obras, 2 rescates y 6 sexenios',
      '¿Cuánto costaron las 11 megaobras y los 2 rescates de seis sexenios, cuánto pierden al año y dónde se consulta cada obra?'),
+    ('agronitrogenados', 'assets/auditor/img/showcase_agronitrogenados.jpg', 'Ilustración provisional',
+     'Ilustración de la planta petroquímica de fertilizantes Agronitrogenados en Pajaritos, Coatzacoalcos, con torres oxidadas y carpetas de auditoría',
+     '🏭 Megaobras y compras de Pemex · Coatzacoalcos, Veracruz', 'Plantas de fertilizantes Agronitrogenados',
+     '¿Cuánto costó comprar y rehabilitar las plantas de Agronitrogenados en Pajaritos y qué observó la ASF?'),
+    ('fertinal', 'assets/auditor/img/showcase_fertinal.jpg', 'Ilustración provisional',
+     'Ilustración de la mina de roca fosfórica y planta industrial de Grupo Fertinal junto al mar con documentos de deuda y pérdidas',
+     '⛏️ Megaobras y compras de Pemex · Baja California Sur y Michoacán', 'Compra de Grupo Fertinal',
+     '¿Cuánto financió Pemex para comprar Grupo Fertinal y cuánto sigue perdiendo al año su filial de fertilizantes?'),
+    ('estela-luz', 'assets/auditor/img/showcase_estela_luz.jpg', 'Ilustración provisional',
+     'Ilustración de la torre de cuarzo y acero inoxidable de la Estela de Luz en Paseo de la Reforma al atardecer',
+     '🗼 Obras conmemorativas · Paseo de la Reforma, CDMX', 'Estela de Luz (Bicentenario)',
+     '¿Por qué la Estela de Luz costó más del triple de su contrato original y cuántos pagos improcedentes detectó la ASF?'),
+    ('bunker-garcia-luna', 'assets/auditor/img/showcase_bunker.jpg', 'Ilustración provisional',
+     'Ilustración del edificio subterráneo de inteligencia de Plataforma México en Constituyentes con pantallas y carpetas reservadas',
+     '📡 Seguridad e inteligencia · Plataforma México, CDMX', 'El Búnker de Seguridad de García Luna (SSPC)',
+     '¿Cuánto costó el edificio del Búnker de Seguridad en Constituyentes y por qué sigue pendiente el costo de sus sistemas?'),
+    ('refineria-tula', 'assets/auditor/img/showcase_refineria_tula.jpg', 'Ilustración provisional',
+     'Ilustración de la barda perimetral solitaria en el terreno semiárido de Tula, Hidalgo, donde se proyectó la Refinería Bicentenario',
+     '🧱 Proyectos cancelados · Atitalaquia y Tula, Hidalgo', 'Refinería Bicentenario en Tula (Barda Perimetral)',
+     '¿En qué se gastaron los $1,127.6 millones de la Refinería Bicentenario en Tula antes de cancelarse en 2014?'),
+    ('enciclomedia', 'assets/auditor/img/showcase_enciclomedia.jpg', 'Ilustración provisional',
+     'Ilustración de un salón de primaria en México con pizarrón electrónico interactivo, proyector y expedientes de auditoría',
+     '💻 Equipamiento educativo · SEP, 2001–2011', 'Programa Enciclomedia',
+     '¿Cuánto ejerció la SEP en el programa Enciclomedia a lo largo de once años y qué revisó la ASF en siete Cuentas Públicas?'),
+    ('fobaproa', 'assets/auditor/img/showcase_fobaproa.jpg', 'Ilustración provisional',
+     'Ilustración de bóvedas bancarias de los años noventa y bonos de deuda del rescate bancario FOBAPROA-IPAB',
+     '🏦 Rescate financiero · FOBAPROA-IPAB y Ramo 34 (1998–2025)', 'FOBAPROA / IPAB (Rescate Bancario de 1998)',
+     '¿Cuánto se ha pagado con impuestos por el rescate bancario FOBAPROA-IPAB y cuánto se sigue debiendo al cierre de 2025?'),
+    ('farac-carretero', 'assets/auditor/img/showcase_farac.jpg', 'Ilustración provisional',
+     'Ilustración de una autopista de cuota y caseta de peaje en México con carpetas del rescate carretero FARAC-FONADIN',
+     '🛣️ Rescate financiero · FARAC y FONADIN en Banobras (1997–2025)', 'FARAC (Rescate Carretero de 1997)',
+     '¿Cuánto costó rescatar las 23 autopistas privadas del FARAC en 1997 y qué deuda sigue vigente hoy en el FONADIN?'),
 ]
 
 
 # Investigaciones agrupadas por tema (entrega 2 de Astra, 10-10-2026). Las
 # usan el indice general (apartados.py) y el pie de cada investigacion.
 TEMAS = [
-    ('🏗️', 'Megaobras e infraestructura', ['inversion-megaobras', 'tren-maya', 'dos-bocas', 'aifa', 'tren-toluca', 'megafarmacia', 'guaymas-gas']),
+    ('🏗️', 'Megaobras e infraestructura', ['inversion-megaobras', 'tren-maya', 'dos-bocas', 'aifa', 'tren-toluca', 'megafarmacia', 'agronitrogenados', 'fertinal', 'estela-luz', 'bunker-garcia-luna', 'refineria-tula', 'enciclomedia', 'fobaproa', 'farac-carretero', 'guaymas-gas']),
     ('🗺️', 'Dinero para estados y municipios', ['ramo-33', 'lego-cienega']),
     ('💸', 'Deuda e ingresos del gobierno', ['deuda-soberana', 'huachicol-fiscal', 'deuda-congreso-2027']),
     ('🔍', 'Contratos, salud y órganos autónomos', ['ine-contratos', 'medicamentos-imss']),
@@ -121,6 +153,22 @@ RUTAS = {
                             'noticias-relevantes.html#col-lif-2027-deuda-y-multas', 'El cotejo documento por documento en Verificamos'),
     'inversion-megaobras': ('eb-egresos', 'Cuánto se destina a inversión y desarrollo económico en el PEF',
                             'herramienta-megaobras.html', 'Las 5 aplicaciones de Inversión y Megaobras: simuladores, sexenios y estados de resultados'),
+    'agronitrogenados': ('eb-egresos', 'Cuánto recibe cada ramo, Pemex incluido',
+                         'herramienta-megaobras-sector.html#obra-agronitrogenados', 'La ficha y los informes de la ASF sobre Agronitrogenados'),
+    'fertinal': ('eb-egresos', 'Cuánto recibe cada ramo, Pemex incluido',
+                 'herramienta-megaobras-sector.html#obra-fertinal', 'La ficha, el estado de resultados y las auditorías de Grupo Fertinal'),
+    'estela-luz': ('eb-egresos', 'El gasto del Gobierno Federal por ramo',
+                   'herramienta-megaobras-sector.html#obra-estela-luz', 'La ficha y la revisión de situación excepcional de la ASF sobre la Estela de Luz'),
+    'bunker-garcia-luna': ('eb-egresos', 'Cuánto recibe cada ramo, Seguridad incluida',
+                           'herramienta-megaobras-sector.html#obra-bunker-garcia-luna', 'La ficha del Búnker de Seguridad y las auditorías de Plataforma México'),
+    'refineria-tula': ('eb-egresos', 'Cuánto recibe cada ramo, Pemex incluido',
+                       'herramienta-megaobras-sector.html#obra-refineria-tula', 'La ficha y la auditoría de la ASF sobre la Refinería Bicentenario en Tula'),
+    'enciclomedia': ('eb-egresos', 'Cuánto recibe cada ramo, Educación Pública (Ramo 11) incluida',
+                     'herramienta-megaobras-sector.html#obra-enciclomedia', 'La ficha y las siete auditorías de la ASF al Programa Enciclomedia'),
+    'fobaproa': ('eb-ccreloj', 'El reloj del costo financiero de la deuda y el Ramo 34',
+                 'herramienta-megaobras-sector.html#obra-fobaproa', 'La ficha del rescate bancario FOBAPROA-IPAB y su estado de resultados'),
+    'farac-carretero': ('eb-ccreloj', 'El costo financiero y los pasivos del sector público',
+                        'herramienta-megaobras-sector.html#obra-farac-carretero', 'La ficha del rescate carretero FARAC-FONADIN y las auditorías de la ASF'),
 }
 
 
@@ -232,7 +280,7 @@ def _datos(id_):
     A = D.get('auditorias_actuales') or {}
     if id_ in A:
         x = A[id_]
-        c = x['cifras']
+        c = x.get('cifras') or {}
         docs = [_doc(f['doc'], f['url']) for f in x['fuentes']]
         if id_ == 'ine-contratos':
             cuanto = [
@@ -272,6 +320,11 @@ def _datos(id_):
                 (_mdp(c['rescates_real_mdp']), 'costo comprometido aparte en los %d rescates (FOBAPROA-IPAB y FARAC carretero)' % c['rescates_n'], 'derivado', None),
                 ('−%s al año' % _mdp(c['balance_neto_anual_mdp']), 'pérdida neta anual en los %d proyectos con dato publicado (%d pierden %s y %d gana %s)' % (c['n_con_dato_anual'], 5, _mdp(c['balance_pierde_mdp']), 1, _mdp(c['balance_gana_mdp'])), 'derivado', None),
                 ('4 obras sin dato', 'operación anual no publicada por separado (Megafarmacia, Tren Interurbano, Agronitrogenados y Búnker)', 'pendiente', x['pendiente_id']),
+            ]
+        else:
+            cuanto = [
+                (_mdp(p['v']) if 'v' in p else p['txt'], p['tit'] + ': ' + p['etq'], p['est'], p.get('pend'))
+                for p in x.get('cont') or []
             ]
         return {'que': x['que'], 'cuanto': cuanto, 'quien': x['quien'], 'docs': docs, 'falta': x['falta']}
     raise SystemExit('Sin lectura breve para %s' % id_)
@@ -480,7 +533,15 @@ TEMA_BOT = {
     'guaymas-gas': ['guaymas', 'amigo lng', 'epcilon', 'sanchez taboada', 'gas de texas', 'gaceta de sonora'],
     'medicamentos-imss': ['medicamentos del imss', 'compra de medicamentos', 'compras de medicinas', 'ventiladores del imss', 'cyber robotic'],
     'deuda-congreso-2027': ['ley de ingresos 2027', 'aprobo mas deuda', 'techo de deuda 2027', 'perdon de multas', 'hr ratings'],
-    'inversion-megaobras': ['megaobras', 'megaobra', 'inversion en megaobras', 'inversiones en megaobras', 'fobaproa', 'farac', 'agronitrogenados', 'fertinal', 'estela de luz', 'bunker', 'refineria de tula', 'barda de tula', 'enciclomedia', 'obras de cada sexenio'],
+    'inversion-megaobras': ['megaobras', 'megaobra', 'inversion en megaobras', 'inversiones en megaobras', 'obras de cada sexenio'],
+    'agronitrogenados': ['agronitrogenados', 'pajaritos', 'pro-agroindustria', 'plantas chatarra'],
+    'fertinal': ['fertinal', 'roca fosforica', 'fertilizantes pacifico'],
+    'estela-luz': ['estela de luz', 'monumento del bicentenario', 'fideicomiso del bicentenario'],
+    'bunker-garcia-luna': ['bunker de garcia luna', 'bunker de seguridad', 'plataforma mexico', 'constituyentes 947'],
+    'refineria-tula': ['refineria bicentenario', 'refineria de tula', 'barda de tula', 'barda perimetral'],
+    'enciclomedia': ['enciclomedia', 'pizarrones interactivos'],
+    'fobaproa': ['fobaproa', 'ipab', 'rescate bancario', 'ramo 34'],
+    'farac-carretero': ['farac', 'fonadin', 'rescate carretero', 'autopistas rescatadas'],
 }
 
 

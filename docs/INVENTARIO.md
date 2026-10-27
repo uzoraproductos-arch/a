@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 224 |
+| Páginas revisadas | 232 |
 | Páginas que solo redirigen | 28 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -20,20 +20,28 @@ La Enciclopedia queda fuera porque está congelada.
 | `agora.html` | Ágora cívica · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
 | `aprende.html` | Aprende · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `auditavision.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 1 | 0 | 0 | 0 | 0 |
-| `auditoria-aifa.html` | Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditoría en imágenes · Auditavisión | auditorias.py | 57 | 0 | 2 | 4 | 1 |
-| `auditoria-deuda-congreso-2027.html` | El Congreso aprobó más deuda: Ley de Ingresos 2027 y nota soberana · Auditoría en imágenes · Auditavisión | auditorias.py | 57 | 0 | 5 | 1 | 2 |
-| `auditoria-deuda-soberana.html` | Los intereses de la deuda pública · Auditoría en imágenes · Auditavisión | auditorias.py | 57 | 0 | 2 | 3 | 1 |
-| `auditoria-dos-bocas.html` | Refinería Olmeca (Dos Bocas) · Auditoría en imágenes · Auditavisión | auditorias.py | 57 | 0 | 2 | 4 | 1 |
-| `auditoria-guaymas-gas.html` | Guaymas y la Gaceta Parlamentaria: el proyecto de gas y su revisión ambiental · Auditoría en imágenes · Auditavisión | auditorias.py | 57 | 0 | 4 | 2 | 2 |
-| `auditoria-huachicol-fiscal.html` | Huachicol fiscal: el impuesto que no entra · Auditoría en imágenes · Auditavisión | auditorias.py | 57 | 0 | 2 | 2 | 2 |
-| `auditoria-ine-contratos.html` | El INE: su presupuesto, lo auditado y los contratos en revisión · Auditoría en imágenes · Auditavisión | auditorias.py | 57 | 0 | 4 | 1 | 2 |
-| `auditoria-inversion-megaobras.html` | Inversión en megaobras y rescates: 11 obras, 2 rescates y 6 sexenios · Auditoría en imágenes · Auditavisión | auditorias.py | 57 | 0 | 1 | 5 | 2 |
-| `auditoria-lego-cienega.html` | Ciénega de Flores: el dinero público alrededor de LEGO · Auditoría en imágenes · Auditavisión | auditorias.py | 57 | 0 | 2 | 3 | 1 |
-| `auditoria-medicamentos-imss.html` | Compras de medicamentos y contratos del sector salud · Auditoría en imágenes · Auditavisión | auditorias.py | 57 | 0 | 4 | 2 | 2 |
-| `auditoria-megafarmacia.html` | Megafarmacia del Bienestar (Huehuetoca) · Auditoría en imágenes · Auditavisión | auditorias.py | 57 | 0 | 4 | 2 | 1 |
-| `auditoria-ramo-33.html` | Ramo 33: el dinero para estados y municipios · Auditoría en imágenes · Auditavisión | auditorias.py | 57 | 0 | 4 | 1 | 1 |
-| `auditoria-tren-maya.html` | Tren Maya · Auditoría en imágenes · Auditavisión | auditorias.py | 57 | 0 | 2 | 3 | 1 |
-| `auditoria-tren-toluca.html` | Tren Interurbano México-Toluca «El Insurgente» · Auditoría en imágenes · Auditavisión | auditorias.py | 57 | 0 | 2 | 4 | 1 |
+| `auditoria-agronitrogenados.html` | Plantas de fertilizantes Agronitrogenados · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 4 | 2 | 2 |
+| `auditoria-aifa.html` | Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 2 | 4 | 1 |
+| `auditoria-bunker-garcia-luna.html` | El Búnker de Seguridad de García Luna (SSPC) · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 4 | 2 | 2 |
+| `auditoria-deuda-congreso-2027.html` | El Congreso aprobó más deuda: Ley de Ingresos 2027 y nota soberana · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 5 | 1 | 2 |
+| `auditoria-deuda-soberana.html` | Los intereses de la deuda pública · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 2 | 3 | 1 |
+| `auditoria-dos-bocas.html` | Refinería Olmeca (Dos Bocas) · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 2 | 4 | 1 |
+| `auditoria-enciclomedia.html` | Programa Enciclomedia · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 5 | 2 | 1 |
+| `auditoria-estela-luz.html` | Estela de Luz (Bicentenario) · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 4 | 2 | 2 |
+| `auditoria-farac-carretero.html` | FARAC (Rescate Carretero de 1997) · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 4 | 3 | 1 |
+| `auditoria-fertinal.html` | Compra de Grupo Fertinal · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 6 | 1 | 1 |
+| `auditoria-fobaproa.html` | FOBAPROA / IPAB (Rescate Bancario de 1998) · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 4 | 3 | 1 |
+| `auditoria-guaymas-gas.html` | Guaymas y la Gaceta Parlamentaria: el proyecto de gas y su revisión ambiental · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 4 | 2 | 2 |
+| `auditoria-huachicol-fiscal.html` | Huachicol fiscal: el impuesto que no entra · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 2 | 2 | 2 |
+| `auditoria-ine-contratos.html` | El INE: su presupuesto, lo auditado y los contratos en revisión · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 4 | 1 | 2 |
+| `auditoria-inversion-megaobras.html` | Inversión en megaobras y rescates: 11 obras, 2 rescates y 6 sexenios · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 1 | 5 | 2 |
+| `auditoria-lego-cienega.html` | Ciénega de Flores: el dinero público alrededor de LEGO · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 2 | 3 | 1 |
+| `auditoria-medicamentos-imss.html` | Compras de medicamentos y contratos del sector salud · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 4 | 2 | 2 |
+| `auditoria-megafarmacia.html` | Megafarmacia del Bienestar (Huehuetoca) · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 4 | 2 | 1 |
+| `auditoria-ramo-33.html` | Ramo 33: el dinero para estados y municipios · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 4 | 1 | 1 |
+| `auditoria-refineria-tula.html` | Refinería Bicentenario en Tula (Barda Perimetral) · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 4 | 3 | 1 |
+| `auditoria-tren-maya.html` | Tren Maya · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 2 | 3 | 1 |
+| `auditoria-tren-toluca.html` | Tren Interurbano México-Toluca «El Insurgente» · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 2 | 4 | 1 |
 | `aviso-de-privacidad.html` | Aviso de privacidad · Auditavisión | apartados.py | 26 | 0 | 1 | 0 | 0 |
 | `biblioteca-hacendaria.html` | Biblioteca hacendaria · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `busca-y-verifica.html` | Busca y verifica · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
@@ -118,7 +126,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-asf-documentos.html` | Documentos y descarga · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-asf-donde.html` | Dónde se concentra · Auditavisión | apartados.py | 32 | 0 | 1 | 2 | 0 |
 | `herramienta-inspector-asf-estado.html` | Tu estado · Auditavisión | apartados.py | 32 | 0 | 1 | 8 | 0 |
-| `herramienta-inspector-asf-imagenes.html` | Auditoría en imágenes · Auditavisión | apartados.py | 93 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector-asf-imagenes.html` | Auditoría en imágenes · Auditavisión | apartados.py | 125 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-asf-serie.html` | Seis años de revisiones · Auditavisión | apartados.py | 31 | 0 | 10 | 4 | 1 |
 | `herramienta-inspector-asf.html` | Expedientes de casos de la ASF · Auditavisión | apartados.py | 45 | 0 | 3 | 3 | 0 |
 | `herramienta-inspector-dictamen.html` | Dictamen pericial · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
@@ -139,16 +147,16 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras-pulso-calculo.html` | Cómo se calcula · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-megaobras-pulso-cifras.html` | Las cuatro cifras y los rescates · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-megaobras-pulso-composicion.html` | De qué está hecho el total · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `herramienta-megaobras-pulso-cuenta.html` | La cuenta de cada obra y el ritmo de la pérdida · Auditavisión | apartados.py | 45 | 0 | 75 | 58 | 22 |
+| `herramienta-megaobras-pulso-cuenta.html` | La cuenta de cada obra y el ritmo de la pérdida · Auditavisión | apartados.py | 58 | 0 | 75 | 58 | 22 |
 | `herramienta-megaobras-pulso-ritmo.html` | El ritmo de la pérdida · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-megaobras-pulso.html` | El pulso del gasto · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `herramienta-megaobras-sector.html` | Obra por obra, por industria · Auditavisión | apartados.py | 70 | 0 | 110 | 47 | 30 |
+| `herramienta-megaobras-sector.html` | Obra por obra, por industria · Auditavisión | apartados.py | 78 | 0 | 110 | 47 | 30 |
 | `herramienta-megaobras-sexenios.html` | Los seis sexenios · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `herramienta-megaobras-tabla.html` | En qué invirtió cada presidente · Auditavisión | apartados.py | 67 | 0 | 19 | 38 | 6 |
+| `herramienta-megaobras-tabla.html` | En qué invirtió cada presidente · Auditavisión | apartados.py | 80 | 0 | 19 | 38 | 6 |
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 40 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 31 | 0 | 1 | 1 | 1 |
-| `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 46 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 219 | 0 | 1 | 1 | 1 |
+| `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 54 | 0 | 3 | 6 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 227 | 0 | 1 | 1 | 1 |
 | `infografia_fiscal_mx.html` | Arquitectura Fiscal de México — Radiografía Tributaria en Tres Niveles de Gobierno | a mano | 0 | 0 | 0 | 0 | 0 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
@@ -222,7 +230,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 133 | 0 | 0 | 0 | 65 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 144 | 0 | 0 | 0 | 65 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 33 | 0 | 1 | 0 | 0 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |

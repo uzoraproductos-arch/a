@@ -222,23 +222,27 @@ def recolectar():
                  'dos-bocas': 'Pemex y su filial PTI Infraestructura de Desarrollo',
                  'bunker-garcia-luna': 'Secretaría de Seguridad y Protección Ciudadana (SSPC), heredera de la SSP'}.get(oid, HISTORICO)
         fu = (o.get('fuentes') or ['opa'])[0]
+        aud_pag = 'auditoria-aifa.html' if oid == 'aifa-texcoco' else ('auditoria-%s.html' % oid)
         out.append(e('obra-' + oid, 'Megaobras', '%s: %s' % (nombres.get(oid, oid), ', '.join(
             {'inversion_presupuestada_mdp': 'presupuesto original', 'inversion_real_mdp': 'costo total',
              'sobrecosto_pct': 'sobrecosto'}[k] for k in campos)),
             porque, quien, ver['fuentes'].get(fu, {}).get('url'), ver['fuentes'].get(fu, {}).get('doc', 'Documento')[:80],
-            [('herramienta-megaobras-sector.html#obra-' + oid, 'Megaobras · Obra por obra, por industria')] + MEGAOBRAS_PAGS))
+            [('herramienta-megaobras-sector.html#obra-' + oid, 'Megaobras · Obra por obra, por industria'),
+             (aud_pag, 'Auditoría en imágenes · ' + nombres.get(oid, oid))] + MEGAOBRAS_PAGS))
     # 4 bis. La cuenta de cada obra (17-10-2026): los renglones que siguen
     # sin cifra, una ficha por obra.
     for oid, filas in ((sim.get('cuenta') or {}).get('obras') or {}).items():
         pend = [f for f in filas if f['e'] == 'pendiente']
         if not pend:
             continue
+        aud_pag = 'auditoria-aifa.html' if oid == 'aifa-texcoco' else ('auditoria-%s.html' % oid)
         url = next((x['url'] for f in pend for x in f.get('f') or []), None) or next(
             (x['url'] for f in filas for x in f.get('f') or []), None)
         out.append(e('cuenta-' + oid, 'Megaobras', '%s: %s' % (nombres.get(oid, oid), ', '.join(f['et'].lower() for f in pend)),
                      ' '.join('%s: %s' % (f['et'], f['resp']) for f in pend),
                      '; '.join(sorted({f['resp'].split(':')[0] for f in pend})), url, 'Documento oficial más cercano',
-                     [('herramienta-megaobras-pulso-cuenta.html#cuenta-' + oid, 'Megaobras · La cuenta de cada obra')]))
+                     [('herramienta-megaobras-pulso-cuenta.html#cuenta-' + oid, 'Megaobras · La cuenta de cada obra'),
+                      (aud_pag, 'Auditoría en imágenes · ' + nombres.get(oid, oid))]))
     # 5. Reloj de perdidas de las megaobras.
     for r in d['calculadora_civica']['relojes']['fuentes']:
         if r.get('estado') == 'pendiente':

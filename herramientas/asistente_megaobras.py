@@ -253,7 +253,8 @@ def datos(d, peso):
             'sim': mo_tabla.SECTOR + '?industria=%s&mandato=%s#ms-vivo' % (o['sector_id'], quote(MANDATO[oid])),
             'res': rr, 'asf': limpio((ver or {}).get('hallazgo')) or None, 'fu': fu, 'ente': ente,
             'ir': {'ficha': mo_tabla.SECTOR + '#obra-' + oid, 'cuenta': mo_tabla.CUENTA + '#cuenta-' + oid,
-                   'tabla': mo_tabla.ARCHIVO + '#mt-' + oid},
+                   'tabla': mo_tabla.ARCHIVO + '#mt-' + oid,
+                   'auditoria': 'auditoria-aifa.html' if oid == 'aifa-texcoco' else ('auditoria-' + oid + '.html')},
         })
 
     # Los seis sexenios, cada uno con el estado de cuenta de su presidente.

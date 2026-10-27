@@ -466,6 +466,30 @@
     };
   }
 
+  function obraMega(id) {
+    var A = DB.auditorias_actuales && DB.auditorias_actuales[id];
+    if (!A) return null;
+    var f = A.fuentes || [];
+    return {
+      cont: A.cont || [],
+      rastroTit: A.rastroTit,
+      rastroEst: A.rastroEst || 'oficial',
+      rastro: A.rastro || [],
+      escena: { tipo: 'reparto', tit: 'Los tramos del dinero documentados en informes oficiales', caja: A.caja || 'Evidencia oficial', unidad: 'mdp' },
+      hallazgo: A.que,
+      pendiente: A.falta,
+      pendienteId: A.pendiente_id || null,
+      fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
+      acciones: [
+        { txt: '🏗️ Ver su ficha, historia y simulador en Inversión y Megaobras', href: 'herramienta-megaobras-sector.html#obra-' + id },
+        { txt: '📊 Ver su cuenta (estado de resultados) y ritmo en vivo', href: 'herramienta-megaobras-pulso-cuenta.html#cuenta-' + id },
+        { txt: '🏛️ Ver su renglón en la tabla por presidente', href: 'herramienta-megaobras-tabla.html#mt-' + id },
+        { txt: '🖼️ Panorama de las 11 megaobras y 2 rescates', href: 'auditoria-inversion-megaobras.html' },
+        f[0] ? { txt: '📄 Abrir el documento oficial principal', url: f[0].url } : null
+      ].filter(Boolean)
+    };
+  }
+
   var ARMA = {
     'tren-maya': function () { return desdeExpediente('tren-maya'); },
     'dos-bocas': function () { return desdeExpediente('dos-bocas'); },
@@ -480,7 +504,15 @@
     'guaymas-gas': guaymasGas,
     'medicamentos-imss': medicamentosImss,
     'deuda-congreso-2027': deudaCongreso2027,
-    'inversion-megaobras': inversionMegaobras
+    'inversion-megaobras': inversionMegaobras,
+    'agronitrogenados': function () { return obraMega('agronitrogenados'); },
+    'fertinal': function () { return obraMega('fertinal'); },
+    'estela-luz': function () { return obraMega('estela-luz'); },
+    'bunker-garcia-luna': function () { return obraMega('bunker-garcia-luna'); },
+    'refineria-tula': function () { return obraMega('refineria-tula'); },
+    'enciclomedia': function () { return obraMega('enciclomedia'); },
+    'fobaproa': function () { return obraMega('fobaproa'); },
+    'farac-carretero': function () { return obraMega('farac-carretero'); }
   };
 
   // --- Animacion de cifras --------------------------------------------------

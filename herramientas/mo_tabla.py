@@ -115,7 +115,7 @@ def _fila_obra(o, sectores, r):
         '<div><dt>%s</dt><dd>%s</dd></div>'
         '</dl>'
         '<div class="mt-res-caja">%s%s</div>'
-        '<p class="mt-obra-pie"><a href="%s#cuenta-%s">Su cuenta completa</a> · <a href="%s#obra-%s">Su ficha</a></p>'
+        '<p class="mt-obra-pie"><a href="%s#cuenta-%s">Su cuenta completa</a> · <a href="%s#obra-%s">Su ficha</a> · <a href="%s">Su Auditoría en imágenes</a></p>'
         '</li>'
         % (' mt-rescate' if resc else '', o['id'], o['icono'], esc(o['nombre']),
            ('<b class="mt-etq">Rescate: deuda, no obra</b> ' if resc else ''),
@@ -123,7 +123,8 @@ def _fila_obra(o, sectores, r):
            'Presentado en su momento' if resc else 'Aprobado', _cifra(o, 'inversion_presupuestada_mdp', mdp),
            'Pagado y debido' if resc else 'Costo real', _cifra(o, 'inversion_real_mdp', mdp),
            esc(o.get('sobrecosto_etiqueta') or 'Sobrecosto'), _cifra(o, 'sobrecosto_pct', _pct),
-           _celda_res(r, o['id']), como, CUENTA, o['id'], SECTOR, o['id']))
+           _celda_res(r, o['id']), como, CUENTA, o['id'], SECTOR, o['id'],
+           'auditoria-aifa.html' if o['id'] == 'aifa-texcoco' else ('auditoria-%s.html' % o['id'])))
 
 
 def _datos(base):

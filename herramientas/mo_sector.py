@@ -65,6 +65,14 @@ AUDITORIA_OBRA = {
     'aifa-texcoco': 'auditoria-aifa.html',
     'tren-toluca': 'auditoria-tren-toluca.html',
     'megafarmacia': 'auditoria-megafarmacia.html',
+    'agronitrogenados': 'auditoria-agronitrogenados.html',
+    'fertinal': 'auditoria-fertinal.html',
+    'estela-luz': 'auditoria-estela-luz.html',
+    'bunker-garcia-luna': 'auditoria-bunker-garcia-luna.html',
+    'refineria-tula': 'auditoria-refineria-tula.html',
+    'enciclomedia': 'auditoria-enciclomedia.html',
+    'fobaproa': 'auditoria-fobaproa.html',
+    'farac-carretero': 'auditoria-farac-carretero.html',
 }
 
 
