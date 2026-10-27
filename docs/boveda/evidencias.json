@@ -1,0 +1,3435 @@
+{
+ "nota": "Bóveda de evidencias de Auditavisión: la huella de cada documento que respalda un dato. La genera herramientas/boveda.py; no se edita a mano.",
+ "evidencias": {
+  "http://sil.gobernacion.gob.mx/Archivos/Documentos/2019/10/asun_3937150_20191015_1570723913.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:gordillo-la-sentencia-reservada",
+    "fuente:gordillo-la-sentencia-reservada"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "bcbb898074ce95696d25302a93671ab4a885e68a26e44308f156dccc9cf92237",
+   "bytes": 6582274,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "http://sil.gobernacion.gob.mx/Librerias/pp_PerfilLegislador.php?Referencia=595": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:gordillo-la-sentencia-reservada"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "42ab09a94c80ed3c14206529aa48ad7eb13d4a19dfc10356d99ff9da425583d7",
+   "bytes": 62948,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "http://sil.gobernacion.gob.mx/Librerias/pp_PerfilLegislador.php?Referencia=9222044": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:gomez-urrutia-de-la-casa-de-moneda-al-congreso"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "557f4b16e09cde1c894270835e62d361a3f40da4bd1825ad0667fb19166534f4",
+   "bytes": 89133,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "http://sil.gobernacion.gob.mx/Librerias/pp_PerfilLegislador.php?Referencia=9228830": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:gomez-urrutia-de-la-casa-de-moneda-al-congreso",
+    "fuente:gomez-urrutia-de-la-casa-de-moneda-al-congreso"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "fc5a8dca81d4267b3f62afc9912c175306f57fd99eec964418fbb4a519784003",
+   "bytes": 75659,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://alertadores.buengobierno.gob.mx/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-sabg-alertadores"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "bc69a53c9052a637ce142e3f775b1ee38f243ebd2a7240231be3fb66f5a05e00",
+   "bytes": 39789,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://apps.cjf.gob.mx/normativa/Recursos/2026-0-6-OAJ_V01.PDF": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-manual-remun-pjf"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "1bab2ed9e8821e6bd8e443b7239423b319a6626cc2a3104f2272eff676f55ef7",
+   "bytes": 366940,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://bagn.archivos.gob.mx/index.php/legajos/article/download/322/315": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:limantour-superavit-y-peso-oro",
+    "fuente:limantour-superavit-y-peso-oro"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 502 Bad Gateway"
+  },
+  "https://centralelectoral.ine.mx/2026/10/22/version-estenografica-de-la-sesion-extraordinaria-del-consejo-general-del-ine-22-de-octubre-de-2026": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:taddei-renuncia-ine-contratos"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://centralelectoral.ine.mx/2026/10/24/la-presidencia-del-ine-respalda-la-investigacion-de-la-asf-y-reafirma-su-compromiso-con-el-estado-de-derecho/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:ine-contratos",
+    "cotejo:taddei-renuncia-ine-contratos:1",
+    "fuente:taddei-renuncia-ine-contratos"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "sin copia",
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "motivo": "Las páginas del INE no abren desde el entorno de la nube donde se integró la columna; el texto se tomó de Central Electoral tal como lo muestra el buscador (nota de método de la columna, 26-10-2026). Falta copiarla con su huella desde una computadora donde ine.mx abra."
+  },
+  "https://centralelectoral.ine.mx/2026/10/25/mensaje-de-la-consejera-presidenta-del-instituto-nacional-electoral-guadalupe-taddei-zavala/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:ine-contratos",
+    "cifra:taddei-renuncia-ine-contratos",
+    "cotejo:taddei-renuncia-ine-contratos:0",
+    "fuente:taddei-renuncia-ine-contratos"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "sin copia",
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "motivo": "Las páginas del INE no abren desde el entorno de la nube donde se integró la columna; el texto se tomó de Central Electoral tal como lo muestra el buscador (nota de método de la columna, 26-10-2026). Falta copiarla con su huella desde una computadora donde ine.mx abra."
+  },
+  "https://ciep.mx/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-ciep-pjf",
+    "biblioteca:ref-ciep-transf"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://comprasmx.buengobierno.gob.mx/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-comprasmx"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "7da7d0a767e46cdce3f2df11cb8ab3cea4ed7db4c4f9c006dce904fde42d58ea",
+   "bytes": 7000,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://comprasmx.buengobierno.gob.mx/datos-abiertos": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:medicamentos-imss"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "7da7d0a767e46cdce3f2df11cb8ab3cea4ed7db4c4f9c006dce904fde42d58ea",
+   "bytes": 7000,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://comunicacionsocial.senado.gob.mx/informacion/comunicados/8300-avanza-en-comision-de-trabajo-reforma-para-aumentar-aguinaldo-de-15-a-30-dias-de-salario": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:gomez-urrutia-de-la-casa-de-moneda-al-congreso"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Forbidden"
+  },
+  "https://cuentame.inegi.org.mx/descubre/poblacion/analfabetismo/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-inegi-censo-2020"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "4bd91b98175231b0e404c9945a822c0fc0758e5f6d3dc6118fd952f974f72344",
+   "bytes": 3081,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/2023/SHCP/PEF_2024.html": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-pef2024"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "7be218473dd6366fa4c1d5b321c053d6c0d4172922582307c69bf4056beb024f",
+   "bytes": 8015944,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/2025/INE/CGext202506_15_ap_2_1.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-ine-cg563-2025"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "47dcfb8cc2103ea1f885c32537f436542aa8a8a41eeb0db1d50a14f0c404a8ac",
+   "bytes": 14231487,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/2025/INE/CGext202506_15_ap_2_2.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-ine-cg564-2025"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "3271e1d79a96349ea654d717f6156c29d3e0e200e6003643cf4244f8f5769ade",
+   "bytes": 2798541,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5332025&fecha=10/02/2014": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-dof-reforma-electoral-2014"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "cc25a6d26c8ad1effedec98efa9a8b4b38a9d74cc27f63ebf08f6f072d7ec9a1",
+   "bytes": 300810,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5596199&fecha=06/07/2020": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:medicamentos-imss",
+    "cifra:salud-ventiladores-y-medicinas",
+    "cotejo:salud-ventiladores-y-medicinas:1",
+    "fuente:salud-ventiladores-y-medicinas"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "14274efd9bb497da09655bdc5cb96d8489683a65674c28665290c89c86c6dcfd",
+   "bytes": 59846,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5707457&fecha=02/11/2023": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-dof-otis-desastre"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "db4d0428f7c927149d2182e95c30a5c9c2ac28606ee9478ac941959d1b19e1ff",
+   "bytes": 71189,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5768224&fecha=19/09/2025": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-sjf-duodecima"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "98572fe34f3e339bd3cc2dbcbd057e97a8cd08979279c72a7641249ce4194f82",
+   "bytes": 151663,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5776006&fecha=12/12/2025": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-dof-distribucion-2026"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "df672c3a8f0588dd01d8250cf486532ae6a7822cf34ebc126c3adf9ca99599ce",
+   "bytes": 8222464,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5777219&fecha=28/12/2025": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-rmf2026"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "1cef0094200a4311fe118e1d57b660d3a6352796b6c1071e969dbcd81a966fb7",
+   "bytes": 4469595,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5777649&fecha=31/12/2025": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-subsidio-empleo-2026"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "41d38eb48cb121f141beeea21f1d0a0bcb47378f3f75b66e23acc73bda8cd5fb",
+   "bytes": 74798,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5778072&fecha=09/01/2026": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-uma2026"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "d8eecb455bb3e4e9855051a6f7349dd903bb6e67df8af269f383da5d75992dff",
+   "bytes": 54553,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5781138&fecha=27/02/2026": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-sen-manual2026"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "b2198e202f4bf19204e6ff0357c109d63a399497480ee5c4734621063436632a",
+   "bytes": 265968,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5793100&fecha=09/07/2026": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-dof-distribucion-2026-mod"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "77fba8c55d744d25b1c3d74ceef1f5892697727468455028931de517de8785b6",
+   "bytes": 507238,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5796656&fecha=19/08/2026": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-ine-cg469-2026"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "defd674b7bf8c9951507db0fb646c43c98169efd2606d9a93a66f79eac1d3556",
+   "bytes": 160236,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5801000&fecha=13/10/2026": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-ine-consejos-2027"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "87b0a7628d07d5f7d97bf85418ffdd92b7460f696c62e7fc678b19585ee857a2",
+   "bytes": 1167662,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5801398&fecha=16/10/2026": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-ine-precampanas-2027"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "c609533f9c9fc62f5385059d5efc4290d397bfa91d93ab4cf0172c4e84e83726",
+   "bytes": 229170,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/reglas_2014/SEDESOL_301213_13.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:robles-sedesol-convenios-universidades"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "8efdb79a5cdf2f22b49fe65bf98ac3ee2c34d32fb9d0ec7a4ffb53a25a5e32d6",
+   "bytes": 2636609,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://fgr.org.mx/es/FGR/FEMCC": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-fgr-femcc"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://gaceta.diputados.gob.mx/Gaceta/57/1999/sep/19990923-I.html": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:fobaproa"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "a882a9f23f38be608b71180dc01ac33dd3325a3d12f2e222dba0bb51382a6f8e",
+   "bytes": 587827,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://gaceta.diputados.gob.mx/Gaceta/66/2026/sep/20260908.html": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-gaceta7121"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "d5c33377358ca4740f3df73cd42ad3a1b3c1b96cf497a26f3e8aa27f93042591",
+   "bytes": 86996,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-A.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:deuda-congreso-2027",
+    "biblioteca:ref-ilif2027"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "55d8436ec681a6815d82bee32a94509324d18bfc91e7bba16ae5f7c65ecd160d",
+   "bytes": 1822672,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-B.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-ppef2027"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "525d5fc44041ebe5db0a60f69ce011b0b697f2a1174c9780bcee4368b00bf7d2",
+   "bytes": 10777107,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:deuda-congreso-2027",
+    "biblioteca:ref-cgpe2027"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "5978f0631d2c88165b54bfce9c3fed2b8cca45eb44b3f267f3025c88f3c6d66a",
+   "bytes": 2167130,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-D.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lfd2027"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "3208c63f58bfad609d2fa2c10fbe00871818901dcace1b06a25340da01b3b8f7",
+   "bytes": 700535,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-E.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lisr2027"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "5e8afc6ced347842e01016e608222b406a183f61a9293c501a04edcb3e944acc",
+   "bytes": 1530069,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://gestion.api.congresoson.gob.mx/publico/descarga?uuid=f8cf663d-4257-4f5d-8b08-b05b80a83e72": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:guaymas-gas",
+    "fuente:guaymas-comodato-amigo-gnl"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "27d977403813ea1d6488f54a11322eb1c68f344fc5091fa86a7fda88e5d9e2fd",
+   "bytes": 1193319,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://imco.org.mx/finanzas-publicas/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-imco-iipe"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://ine.mx/wp-content/uploads/2025/02/lp-ine-001-2025-fallo.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:ine-contratos",
+    "cotejo:taddei-renuncia-ine-contratos:2",
+    "fuente:taddei-renuncia-ine-contratos"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "sin copia",
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "motivo": "Las páginas del INE no abren desde el entorno de la nube donde se integró la columna; el texto se tomó de Central Electoral tal como lo muestra el buscador (nota de método de la columna, 26-10-2026). Falta copiarla con su huella desde una computadora donde ine.mx abra."
+  },
+  "https://inehrm.gob.mx/work/models/inehrm/Resource/437/1/images/porfirio_porfiriato.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:limantour-superavit-y-peso-oro",
+    "fuente:limantour-superavit-y-peso-oro"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "0832cf62e60d7b77ff31ab8091dd9856c48d44d3d35ec3c577c76b211da0a5b6",
+   "bytes": 5466054,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://informe.asf.gob.mx/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:inversion-megaobras"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "f5e1405b1d4b99e78d7ba651b29adbf1ae459417a54d9d5454e823b060b50912",
+   "bytes": 46954,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://nuevaescuelamexicana.sep.gob.mx/contenido/coleccion/5632-por-culpa-de-un-pastelero/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:santa-anna-mesilla-y-perros",
+    "fuente:santa-anna-mesilla-y-perros"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "893bb809f5925c13f0df81e3eae40025f71bdb1b677d451dc4dd6c431eed1bb7",
+   "bytes": 60449,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://public-inspection.federalregister.gov/2025-23764.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:guaymas-comodato-amigo-gnl"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://repodatos.atdt.gob.mx/CONAPO/proyecciones/00_Pob_Mitad_1950_2070.csv": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-conapo-proyecciones"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Forbidden"
+  },
+  "https://repodatos.atdt.gob.mx/api_update/sat/padron/porsitrfc21.csv": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-sat-padron-rfc"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Forbidden"
+  },
+  "https://sil.gobernacion.gob.mx/Librerias/pp_PerfilLegislador.php?Referencia=9228910": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:garcia-luna-y-garcia-harfuch",
+    "fuente:garcia-luna-y-garcia-harfuch"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.asf.gob.mx/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-asf-fideicomisos-pjf"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "693e561a3487231e37c00d3369cb42e8b3667fe4ad373e8fbf14f4a080612c27",
+   "bytes": 62949,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Section/262_Denuncias_Ciudadanas": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-asf-denuncias"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "bytes": 0,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2006i/Tomos/T5V1.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:enciclomedia"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "e461b1f4b0b5ce298da8f294d824e51bad1b3d05a0797ca2a619608c21e27882",
+   "bytes": 2999124,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2007i/Tomos/T5V2.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:enciclomedia"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "f6dcf2a80b4cf212e60bca559a8b6ebee0d8c3a3acf9818327dd1662cca7e8ad",
+   "bytes": 3000156,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2008i/Tomos/T5V2.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:enciclomedia"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "3a9313a388b7c2b6c1b5b8dc34343096e5ad71d857af5d549930698edbbae720",
+   "bytes": 5054960,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2008i/Tomos/T9V2.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:bunker-garcia-luna"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "25b0b1cd4958ec6e5a12753c8730e59fa65e688380da3233749981f1e27ef509",
+   "bytes": 3162962,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2009i/Tomos/Tomo2/2009_1053_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:bunker-garcia-luna"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "c25fb6fac3442bd85bccdaa541edd476f0e26a7ee18309bad742d06a506d8593",
+   "bytes": 109056,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2009i/Tomos/Tomo4/2009_0338_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:enciclomedia"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "224c8bf22c0c92758a0c7be2b4e6c9bb689890705b545c337af24ef63546be5a",
+   "bytes": 247512,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2010i/Grupos/Desarrollo_Social/2010_0923_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:enciclomedia"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "4c1ae5003e22b015968ca84050232de1d974b1ddc7e779e3794211c828d7c6a0",
+   "bytes": 242452,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2011i/Grupos/Desarrollo_Social/2011_0388_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:enciclomedia"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "11ef141e8f641c2d67819b191d6945203a3dd1fdf87075d04124a1f3e04b991f",
+   "bytes": 315525,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2011i/Grupos/Gobierno/2011_0016_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:bunker-garcia-luna"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "dc1556b2979510721539d0c11111494e6afb588d6447200613b0c29ec95fdf99",
+   "bytes": 281330,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2014i/Documentos/Auditorias/2014_0207_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:robles-sedesol-convenios-universidades"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "ee040f026a2ad5faa05d6ef8ae88f11b4823966bf147027fa8185b44fbc94a11",
+   "bytes": 796124,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2014i/Documentos/Auditorias/2014_0229_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:robles-sedesol-convenios-universidades",
+    "fuente:robles-sedesol-convenios-universidades"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "9532718f09ab4fc7a831806716b0168c84ff39d4f5ea4b204dd15d8e72d73be0",
+   "bytes": 547791,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2014i/Documentos/Auditorias/2014_0315_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:refineria-tula"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "370607a9b7c055cf1c58a9455ea467730063e2276ff4e5078d3dddb787be02c4",
+   "bytes": 552484,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2015i/Documentos/Auditorias/2015_0099_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:farac-carretero"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "cb5acdcb3b5d6382e67f58153cd6146fc2c2402ccb66fdebd5f30396790436b0",
+   "bytes": 737484,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2015i/Documentos/Auditorias/2015_0498_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:agronitrogenados"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "906989b1266ac701aa6ff639be499afac9d670f501ed7aa57c5e58470eebe041",
+   "bytes": 671089,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2016ii/Documentos/Auditorias/2016_0468_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:fertinal"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "7028e6acd9ba71064179ce42229b6ad06dfcb36b349c2370d0626608bb340af3",
+   "bytes": 853162,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0091_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:farac-carretero"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "cea41e7ce9a83c96fbaeb5754b9a2894e55418729dc353181beb4a267a3de79b",
+   "bytes": 604605,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0096_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:farac-carretero"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "aef6346d39a48e59bd0666415965d83bf7da0cda69d84eba69de357c2d3581f8",
+   "bytes": 754269,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:agronitrogenados",
+    "auditoria:fertinal"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "d1f61d814ce1e5dd1f2c4d2e291cddf7ba0b651e75e252a8fe163d51ce1527f5",
+   "bytes": 2328559,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2018c/Documentos/Auditorias/2018_0469_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:lozoya-agronitrogenados-odebrecht",
+    "fuente:lozoya-agronitrogenados-odebrecht"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "131af4f74d9d2f4500c4ba903656d78bf0ab0705e01a3a89ba1c1c7e448590ba",
+   "bytes": 1904430,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2019c/Documentos/Auditorias/2019_0283_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:ovalle-segalmex-asf-fgr",
+    "fuente:ovalle-segalmex-asf-fgr"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "cfd8924b8366ae7a1e9be1cdaf0182acc8f451c3a2c9e921dc2bfade74cdd352",
+   "bytes": 327410,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2020c/Documentos/Auditorias/2020_0327_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:ovalle-segalmex-asf-fgr",
+    "fuente:ovalle-segalmex-asf-fgr"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "c59569a74a4d4be6f4c30e38c8ed8a31b3145f44d799fcde12822601526e927e",
+   "bytes": 667185,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2020c/Documentos/Auditorias/2020_0330_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:ovalle-segalmex-asf-fgr",
+    "fuente:ovalle-segalmex-asf-fgr"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "b8ff80dad768e6916a03227f4c93777394552278a9a9f420bd45c5d4525ebb6f",
+   "bytes": 2016491,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2021b/Documentos/Auditorias/2021_0968_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:abelina-lopez-lo-que-observaron-los-auditores"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "cc9e1da57e288e2bc0c2601bab067a8dde087e0620e597b2e0f31776c6a8efc4",
+   "bytes": 937994,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2021c/Documentos/Auditorias/2021_0967_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:abelina-lopez-lo-que-observaron-los-auditores"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "b8d2889eb4c6631cd9e62c2a73ca2f2f44762bf794d62218e9c9b75b41a9aa6e",
+   "bytes": 1210427,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2022b/Documentos/Auditorias/2022_1005_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:abelina-lopez-lo-que-observaron-los-auditores"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "bab16285cbe30bc143ee4c669c92b66692f4b1ffba874108660bff437999a7e1",
+   "bytes": 1400875,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_1003_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:abelina-lopez-lo-que-observaron-los-auditores",
+    "fuente:abelina-lopez-lo-que-observaron-los-auditores"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "73f101a7d70d118614615ada5b328508a31f9f29fd4026d4556a034d07aee61a",
+   "bytes": 1751218,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2022c/Documentos/Auditorias/2022_1004_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:abelina-lopez-lo-que-observaron-los-auditores"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "bc195989ed32e8eb9efb4d1d6c38ea93631d011d1ec8fc09440058d8a6f5451b",
+   "bytes": 207636,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2023b/Documentos/Auditorias/2023_0362_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-asf-cp2023-0362"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "6ae60e2ae041e1816a6263b1febed7be2b60be59a85e34d29a4d9928db5b73ff",
+   "bytes": 436834,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2023c/Documentos/Auditorias/2023_1103_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:abelina-lopez-lo-que-observaron-los-auditores",
+    "fuente:abelina-lopez-lo-que-observaron-los-auditores"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "84264797d1ef6d0219a80f5b8a3aac79da4af919a4c82d2a4c8d56dd1d14cf4f",
+   "bytes": 399492,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2023c/index.html": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:abelina-lopez-corte-invalida-auditoria-estatal"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "50af3a4cbc3b393ec84f7716decaf26727dbe22046abc9ea5de957b482cd1852",
+   "bytes": 500741,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0031_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-asf-cp2024-diputados"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "b8414d366b1af4d146f141ea6b932b38bcd7f0c024afaab1f2cb22b1fddfc7b3",
+   "bytes": 387113,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0032_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-asf-cp2024-senado"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "ba2ddea3e08b9ecb45489d37412e97ca95e807858fce70170f658b4c35c2655f",
+   "bytes": 357346,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2024b/Documentos/Auditorias/2024_0353_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-asf-cp2024-0353"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "0cb039ada784079a2596716f148818481614f1263bb1acf68576aeb334cb5b45",
+   "bytes": 387448,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_1084_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:abelina-lopez-lo-que-observaron-los-auditores",
+    "fuente:abelina-lopez-lo-que-observaron-los-auditores"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "0af61b838e1788610ce0676a2196f89937d41edb4d942a18e417487ab4dde2ec",
+   "bytes": 935257,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_1402_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-asf-cp2024-congreso-nl"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "4d51f61b6faed2150bd7a2893c505e180d0676313de54d85ddff8fd5d602af63",
+   "bytes": 1670789,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_1940_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-asf-cp2024-congreso-tlax"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "8baba945a429b876eb91a5adb65c145e90ee275fdc8e204ce22e401da9dfb7fc",
+   "bytes": 2406044,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Matriz/MDB_Consolidado.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:ine-contratos",
+    "biblioteca:ref-asf-mdb2024"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "49732c8da82eaafc6bdd67b0b0ce5c995773294d7e48e5412ad73e5c4fe15d66",
+   "bytes": 12006656,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2024c/index.html": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-asf-cp"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "af4fe885ae9a1da57829f02e639540d9c682c15a062ebb1107faaf1e9f44cd7f",
+   "bytes": 587110,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2025a/Documentos/Matriz/IR2025_Entrega_a.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-asf-mdb2025a"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "f0cd6497346ca2247f4db83f663fdcc99c517fc6f94c239f0970d3edb855edcc",
+   "bytes": 4970145,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/IR2025a/index.html": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-asf-ir2025a"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "5fde0647c52c974f774d31118fa83f8074ac4d1b4c9b094068beba69a0d9159e",
+   "bytes": 46954,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/Trans/Informes/ir2005i/Tomos/T6V2.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:enciclomedia"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "e668164a96e169ee16b5b5b78a3e875a43dc0a780d482c70bcd750e7fc8e380b",
+   "bytes": 3293679,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/uploads/5210_NAICM/NAICM.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-asf-naicm"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "b3f621fc8ef657e38114adb75fe2108b152fc3d87479e47353db4a88e27d5f9d",
+   "bytes": 1728274,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/uploads/56_Informes_especiales_de_auditoria/Estela_Luz_Nv.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:estela-luz",
+    "biblioteca:ref-asf-estela-luz"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "91cef08bd1cfdc16e91f4a40a5c46885d058b2083d77d3611b33709af89056f8",
+   "bytes": 2872749,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asf.gob.mx/uploads/63_Serie_de_Rendicion_de_Cuentas/Rc2.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:limantour-superavit-y-peso-oro",
+    "fuente:limantour-superavit-y-peso-oro"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "422360e05bcc648a9e2d9395fb6379d6f4d7fd749de4aed0f709187e8b93580a",
+   "bytes": 1770056,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.asfdatos.gob.mx/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-asfdatos"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "17f5fcc8674bc0f2381bbc02220d5cc3d778071f96ee93e2fbf821ce2285cc27",
+   "bytes": 1430,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.auditoriaguerrero.gob.mx/PDFs/entfisc/2024/informes/cp2023/3erbloque/001_Acapulco_CIF_2023_C_CIF_01_002_2024.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:abelina-lopez-corte-invalida-auditoria-estatal",
+    "cifra:abelina-lopez-lo-que-observaron-los-auditores",
+    "fuente:abelina-lopez-corte-invalida-auditoria-estatal",
+    "fuente:abelina-lopez-lo-que-observaron-los-auditores"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "d13e7fbbf572f7d011e2181fc36fc3b864ddd15b5fa43f13c59c3ae5c910e63b",
+   "bytes": 1067658,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.auditoriaguerrero.gob.mx/PDFs/entfisc/2024/informes/cp2023/3erbloque/ASE_resumen_de_auditorias_practicadas_al_municipio_de_acapulco_de_juarez.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:abelina-lopez-lo-que-observaron-los-auditores"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "2019553249b0800795c73a190b26423a69f00e70bca627de850f0f79966055e5",
+   "bytes": 78995,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.banxico.org.mx/SieInternet/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-banxico-sie"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "c370b3a0ba8c5ab66549c9827ef2397a86674fabda0a9e83e9300705ba6fa899",
+   "bytes": 41040,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.banxico.org.mx/conociendo-banxico/semblanza-historica-historia-.html": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:banco-de-mexico-1925"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "a38be8a701a924c246f3406168bd28ca0fcadf7fc2ec76f815da142e9643c558",
+   "bytes": 46848,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.banxico.org.mx/elib/hbm/1/1_2.html": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:limantour-superavit-y-peso-oro"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "f4a3d4258b76ba300fd9686191cb3223344df03f4796d950cfc1aadaf9528e8c",
+   "bytes": 45107,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.banxico.org.mx/elib/hbm/1/3_2.html": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:banco-de-mexico-1925",
+    "fuente:banco-de-mexico-1925"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "77532dd1040f64fb102c9b96f9f7254ff41929609bb9efb11b9986762c1d56e2",
+   "bytes": 49450,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.banxico.org.mx/elib/hbm/1/3_3.html": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:banco-de-mexico-1925",
+    "fuente:banco-de-mexico-1925"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "07cb7cd74391a9ae730bac6e6a60511760c195d0cb44e9dfbd93479c165fea3c",
+   "bytes": 58140,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.banxico.org.mx/tipcamb/tipCamIHAction.do?idioma=sp&fechaInicial=01/01/2013&fechaFinal=16/10/2026&salida=HTML": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-banxico-fix"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "0d638542ab45c98619787b39d7857dbdbd7d145a89e42fc6cf9e5ca413f1b15b",
+   "bytes": 4543352,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.bma.org.mx/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-bma-amparo"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://www.canaldelcongreso.gob.mx/noticias/10320": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:deuda-congreso-2027",
+    "cifra:lif-2027-deuda-y-multas",
+    "cotejo:lif-2027-deuda-y-multas:0",
+    "cotejo:lif-2027-deuda-y-multas:1",
+    "fuente:lif-2027-deuda-y-multas"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "e2fabd608ec153438cfcf52da30f85f812eeae326fe8e5a8c19e487075aa73d4",
+   "bytes": 65282,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.canaldelcongreso.gob.mx/noticias/10322": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:deuda-congreso-2027",
+    "cotejo:lif-2027-deuda-y-multas:2",
+    "fuente:lif-2027-deuda-y-multas"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "67fd25e770e4b04a52271fa2d8a6cc631d0026ff82f8714e479fef662f44a7df",
+   "bytes": 56820,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.canaldelcongreso.gob.mx/noticias/10329": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:deuda-congreso-2027",
+    "cifra:lif-2027-deuda-y-multas",
+    "fuente:lif-2027-deuda-y-multas"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "653ce14d46cb1a16edc8df2126244bc6459f4b5e364d9231416ed7732b761170",
+   "bytes": 63834,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.cenapred.gob.mx/es/Publicaciones/archivos/504-RESUMENEJECUTIVOIMPACTO2023.PDF": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-cenapred-impacto-2023"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "981e3aa60413a423ceb3ef6b6ff99eb8323bc3a6fd8dcaac194d66a394ea62a3",
+   "bytes": 1752901,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.cenapred.gob.mx/es/Publicaciones/archivos/521-RESUMENEJECUTIVOIMPACTO2024.PDF": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-cenapred-impacto-2024"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "ceb8f7f4f5cd1332a6559e7fe38b053593450b293badccf1839bcbb120193f5f",
+   "bytes": 3276028,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.cjf.gob.mx/transparencia/resources/Presupuestoejercido/cierremensual/2026/Cierre_Transparencia_2Trim_2026_archivos/sheet001.htm": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-oaj-trimestre2026"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.comunicacionpef.hacienda.gob.mx/work/models/COMUNICACION_DEL_PEF/Documentos/2026/distribucion_gasto_UR/r03_apurog.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-shcp-ramo03-ur"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.courtlistener.com/docket/16559363/united-states-v-garcia-luna/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-garcia-luna-edny"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://www.cuentapublica.hacienda.gob.mx": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-shcp-cuentapublica"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.cuentapublica.hacienda.gob.mx/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:inversion-megaobras"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EA_GF.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-shcp-cp2024-ea-gf"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/12NEF.02.01.xls": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-shcp-cp2024-birmex"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/7H0M.02.01.xls": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-shcp-cp2024-tren-maya"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/7HZI.02.01.xls": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-shcp-cp2024-aifa"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VIII/52T9M.05.DAR.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-pti-cp2024"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2025/tomo/VIII/52TYY.05.DAR.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-pemex-cp2025"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.datos.gob.mx/dataset/presidentas_presidentes_municipales": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-inafed-presidencias"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Forbidden"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/abro/LPCGPF_abro.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lpcgpf"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "33ee1534415f0eaf04a2473b7e4305a652819276bafc73309c5abbbed526e59f",
+   "bytes": 243249,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/marjur/marco/Dip_manual_remun_27feb26.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-dip-manual2026"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "e2d839ba972dbe26ba846a7190d7cf81184acf507c61a42deb09dc617de5c7dd",
+   "bytes": 268765,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/74.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lbm"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "14b84c537ed334d20f50824a46a9ce7fbbe826058b139daf112ab4087f566f71",
+   "bytes": 498554,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-cff"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "be7427b20d3552775ab42018f8f87578078770095bf8cf46322c25e36ee3aa7d",
+   "bytes": 3134465,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/CNPP.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:garcia-luna-testigos-y-la-ley-mexicana"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "7ceb0682c948d7d945e7e68b8d8699ceb795fc9a491aa62325db91ccf2309904",
+   "bytes": 1704798,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-cpeum",
+    "biblioteca:ref-cpeum-art127",
+    "biblioteca:ref-cpeum-control-constitucional",
+    "fuente:partida-secreta"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "cefb525ae8dfc97a7da40597d2ee918fe254d4bfce88301ff3c9959ced9e6e65",
+   "bytes": 3146661,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAASSP.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-laassp"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "883f6e9c3139d0961de302de7bddcf3262c69884008bb3b2324d57e5d67009fc",
+   "bytes": 682666,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAN.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lan"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "4ef50d6b4b3a6ad0378720c5d49463b4f17d70d9de39f895ed5dae4d2e21736d",
+   "bytes": 1352482,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAmp.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lamparo",
+    "biblioteca:ref-ley-amparo"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "05560493ac2b17b9e77eeb9741843176ee0fde76f05e75f853465b13621be78d",
+   "bytes": 1369391,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LCF.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lcf",
+    "cifra:origen-ramo-33",
+    "fuente:origen-ramo-33"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "5c89d48167a4e1170c69e0b1e0294260b806a30d861275d8dca09b0334cd09d4",
+   "bytes": 1383910,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LDFEFM.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-ldf"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "04c25edb67f0a8b6704cd7d56b7a4bb9f455c77a060199962317bbdb7c889247",
+   "bytes": 547164,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFCDO.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:garcia-luna-testigos-y-la-ley-mexicana",
+    "fuente:garcia-luna-testigos-y-la-ley-mexicana"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "6f9b44bd6bc8c19aad3747e9198f2c5543b0415afa4a3cd63b4bd995091932ad",
+   "bytes": 692224,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lfprh"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "ce45c7c0c4e9099691e6e24bd2456d0b6f71f91ab27eedd5c4f2190b66d47741",
+   "bytes": 1411811,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFRCF.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lfrcf"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "cc687a4d8d9de93d2d3ec9b40b26d0273e108bb002a6f611806dc36ebce5ba2c",
+   "bytes": 657518,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lft"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "12f09393a1951a91c3f57f579bf611b034edf1a5f78cdbfb828e23ff3a9acbf7",
+   "bytes": 4225835,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGCC.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lgcc"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "fa7447754261e46a344d4b49a9be0e1a5bd0eaf28c1ef12c721c124fe39e7b15",
+   "bytes": 698437,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGCG.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lgcg"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "cf7f5220f083bdcd8eed4104bbdf40299221f32cd5c51e17b1f03b033e677815",
+   "bytes": 636591,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGEEPA.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lgeepa"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "0574853d06020030188e8aee1eae5dabb2b476ac630cc52be631a48d2b91adbc",
+   "bytes": 1357460,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGIPE.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lgipe"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "8d6253c7ac28c654543484bac172ca12bbda8db41564b07f27ca5bbea0b4cf80",
+   "bytes": 2962213,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGP.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lgpob"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "15e8cb5ca11592f331fca6a94784cce3dd58837397857f2d764476768d0ca780",
+   "bytes": 518000,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGPGIR.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lgpgir"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "b34326588bd6e7519e33411d3658239e3aefb56cef0fae5d775bc894af64a565",
+   "bytes": 669174,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGRA.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lgra"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "1289ec6964e48c84990572ca6080ca05c9d6210e5b0ff5af6d8c9d935fc5fcc8",
+   "bytes": 972618,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lgs"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "a2d3f947b369e4383f2f27a4e9bd819a3dba768ab9bae527e6388e30c1f9e06c",
+   "bytes": 3286114,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTAIP.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lgtaip"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "e81e23876bd08da81cb8392af7054f6187ad043ca8f965777b455f9d12554e8b",
+   "bytes": 749599,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lif2026",
+    "fuente:lif-2027-deuda-y-multas"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "a305ca23bba43cddf2275067af29bb0ba35def7aedbbb0d3fc4557da9067a82c",
+   "bytes": 756083,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LOAPF.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-loapf"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "3edf486e601217f5f595f94f56832d8845cbd9193b6494af52473237252bcc5f",
+   "bytes": 2038522,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LOPSRM.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lopsrm"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "b760b87cb82b23955e149500a1a832a608029ca814f0653b1430f6948d33e9f5",
+   "bytes": 989068,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LPAB.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lpab",
+    "cifra:fobaproa-ipab",
+    "fuente:fobaproa-ipab"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "40725278819b2229ddb95c8deda858d7fda9c9dd83654729e9242727f1eee4a8",
+   "bytes": 600789,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LPlan.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-ley-planeacion"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "5a909996d6ef791fa377611c040a212dcf838cbf54ba16a7d7d0baaa57ac9962",
+   "bytes": 496203,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSNIEG.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lsnieg"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "bf18e4d51b4f44e741ab550e298f712a350ab08eec94061489aba7745c1aaeab",
+   "bytes": 826923,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:fobaproa",
+    "auditoria:guaymas-gas",
+    "auditoria:ine-contratos",
+    "biblioteca:ref-pef2026",
+    "cifra:fobaproa-ipab",
+    "cifra:origen-ramo-33",
+    "fuente:fobaproa-ipab",
+    "fuente:origen-ramo-33"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "02bf4543bd8e99d1bb980a3c513749114a6db35ee94a9ce8ef678cf73d95165b",
+   "bytes": 8624116,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf_mov/Ley_Federal_de_Deuda_Publica.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lfdp"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "806c0b6dfd900465c54bcca1d81dc0d377d3f75e9469a0c13f7f191d03d96d81",
+   "bytes": 294357,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf_mov/Ley_General_en_Materia_de_Delitos_Electorales.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lgmde"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "e72cd8ae1a4bac66ba304ef69445ebb929436905d113d1b404ac3ea175e09d0d",
+   "bytes": 273800,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/proceso/docleg/64/250_DOF_17may21.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:partida-secreta",
+    "fuente:partida-secreta"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "ba4478c51acfe6748d0432ddee2c1f702999f8f302ed2107a437357e08c934c8",
+   "bytes": 2992062,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/ref/dof/CPEUM_ref_250_17may21.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:partida-secreta"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "dbde2848235412b77e5dacf3ddcfd94424c791f22949bb0345b3f6265b746f11",
+   "bytes": 13580,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/ref/lcmopfih.htm": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lcmopfih"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "c63ec1732be1501d544502dbeed6912850c1acd4f4ddfc300e227f22ed92ca86",
+   "bytes": 26570,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/ref/lepepm.htm": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lepe"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "70ae0135af1a471028cffbb38b6eb0d55fbf0d32ebe21f4aee2fb41accfd33f1",
+   "bytes": 25284,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/ref/lfd.htm": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lfd"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "3e2fd24d3be7d91b066babea805ecf2c9bb6ad228974a92f5480ec05eacc9002",
+   "bytes": 196230,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/ref/lfisan.htm": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lfisan"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "72154e88f05eedad95314955b272d38b9d61c6c0ca68d1c6ed37ca3fa2997c47",
+   "bytes": 98572,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/ref/lfmped.htm": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lfmped"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "b068f750b8677e541ea76cd17d00cce47e59a46fdc5f9cdd0b9432f725671c17",
+   "bytes": 35221,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/ref/lieps.htm": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lieps"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "84e10255fd7476ef21d86f51ec60d9bae77fb92bd65376caf14aa9af28b91062",
+   "bytes": 152951,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/ref/ligie_2022.htm": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-ligie"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "e9acfbac24452a5bc0540b101968c20160e4ed49e04bf76f2c762c8fff7a16a5",
+   "bytes": 70732,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/ref/lih.htm": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lih"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "bd3f88e63fdd63fe861f3a0c700d1274ab314aca17c2c61e66da646f51e3369a",
+   "bytes": 52560,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lisr"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "197ab5cf502880699cc963474e234ad301246a6ed243c1353887ba65fe96f1cf",
+   "bytes": 43349,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/ref/liva.htm": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-liva"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "311f7fa0d5aafb13d43bc97d93dce2d59f646559c0a529c5cf6cab8a8b155be4",
+   "bytes": 118126,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/ref/loapf.htm": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-sabg"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "137ecbc6417355258201318ca90c2605127494e98c3341bd9c19600035f424c9",
+   "bytes": 192175,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/ref/lss.htm": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-lss"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "e230ef1bcf91f339932e9337a0f974cd17a94d5a9ad2113d45d39ed6de90c1b6",
+   "bytes": 110196,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.disciplinafinanciera.hacienda.gob.mx/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-shcp-alertas"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-reforma-judicial"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.dof.gob.mx'. (_ssl.c:1032)"
+  },
+  "https://www.eluniversal.com.mx/opinion/carlos-m-urzua/salario-justo/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-salario-real-historico"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://www.energy.gov/sites/prod/files/2020/12/f81/ord4629.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:guaymas-gas",
+    "cifra:guaymas-comodato-amigo-gnl",
+    "fuente:guaymas-comodato-amigo-gnl"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "sin copia",
+   "error": "Tunnel connection failed: 403 Forbidden",
+   "motivo": "energy.gov no abre desde el entorno de la nube; la orden (título, fecha, plazo de 2027 y reexportación) se cotejó el 26-10-2026 con los resultados del buscador que citan su texto y con el aviso del Federal Register 2025-23764. Falta copiarla con su huella."
+  },
+  "https://www.finanzaspublicas.hacienda.gob.mx/work/models/Finanzas_Publicas/docs/congreso/infotrim/2025/ivt/05adp/itandpdc_202504.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:farac-carretero",
+    "biblioteca:ref-shcp-informe-4t2025"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.gob.mx/agn/articulos/agnrecuerda-el-150-aniversario-del-triunfo-de-la-republica-liberal": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:juarez-suspension-de-pagos-1861"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "196504abf4d70c6184f4ba136218ddbdaddd069a2e23b75f1e77545ced255e09",
+   "bytes": 61839,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/amlo/prensa/inicia-plan-de-reconstruccion-en-guerrero-por-61-mil-313-mdp-presidente-amlo": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-shcp-plan-otis"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "819aa4e911c84660f2a7979581f22d94aa145cf43e0a61f850d1986adb4f5ef7",
+   "bytes": 54604,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/buengobierno/prensa/tribunal-confirma-validez-de-sancion-impuesta-por-funcion-publica-a-emilio-lozoya-ex-director-general-de-pemex": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:lozoya-agronitrogenados-odebrecht",
+    "fuente:lozoya-agronitrogenados-odebrecht"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "8f58e34b2fb1be32b000c14c41ed44c3af06dd9af63b303d1c2e86dff258e1ba",
+   "bytes": 57866,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/buengobierno/prensa/vinculan-a-proceso-a-tres-personas-denunciadas-por-la-funcion-publica-por-la-presunta-sustraccion-del-expediente-de-la-casa-blanca": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:casa-blanca-expediente",
+    "fuente:casa-blanca-expediente"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "0eb8445f76163896af7946d3b1bcfbbf854fe82ccd444bd3fe21d3b19e5e5dc5",
+   "bytes": 58687,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/cms/uploads/attachment/file/1041076/Tabla_de_Salarios_M_nimos_2026.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-conasami2026"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "240e00b084d14c4a6142fb4e4ad9d9ee66de499d94b0f554deb78eb04f7d9321",
+   "bytes": 193815,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/cms/uploads/attachment/file/1043973/Plan-Anual-De-Financiamiento_2026.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:fobaproa",
+    "biblioteca:ref-ipab-paf2026"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "413aac7e726132d712cb91ef318b69bca436e3cc65d184d1a2f19d8fb3c9cfbf",
+   "bytes": 353258,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/cms/uploads/attachment/file/1068974/Estados-Financieros_diciembre-2025.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:fobaproa",
+    "biblioteca:ref-ipab-ef2025"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "8be61d74726f181487eec7d60290706fb73677c7825f720cfdba7b1b4ffe6808",
+   "bytes": 799309,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/cms/uploads/attachment/file/1073775/IPAB_Notas-Cortas_Marzo_2026-DEF.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-ipab-notas-mar2026"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "e577ee96a65a5109ed0ce324eb5aa2a242eee5f8b14edebd9e23031486f5900e",
+   "bytes": 622746,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/cms/uploads/attachment/file/1078946/Diagn_stico_B_sico_Gesti_n_Integral_Residuos.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-dbgir2026"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "af47fb7034805c1822832af441d9bc3ad672abcaa558c8089f3bfe2bd2a0bb5e",
+   "bytes": 8608150,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/cms/uploads/attachment/file/1105543/producto-aeropuertos-2006-2026-ago-28092026.xlsx": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-afac-estadistica"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "0233f5258d3043f50d2f64a0d3ba47862d4c7df4e58c487c932f730b76d48b27",
+   "bytes": 703967,
+   "tipo": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/defensa/documentos/la-intervencion-francesa": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:juarez-suspension-de-pagos-1861"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "d1267b93442873b3174c5088cc9595b1964df24c2c3942c7703f99eaa8d3f103",
+   "bytes": 62357,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/epn%7Cpoliciafederal/articulos/designan-nuevo-titular-de-la-division-de-investigacion-de-la-policia-federal": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:garcia-luna-y-garcia-harfuch"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "7c3b191f22e38d02cd918fcba503e3022c661728a20838b2c6e53863b769ba12",
+   "bytes": 54260,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/fgr/prensa/comunicado-fgr-407-21-fgr-informa": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:lozoya-agronitrogenados-odebrecht"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "55ed48283b79488e393dfd211bdc53efec691f26294b89aeb3bc7f3d43c1ef1d",
+   "bytes": 41081,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/fgr/prensa/comunicado-fgr-46-19-situacion-actual-del-caso-odebrecht": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:lozoya-agronitrogenados-odebrecht",
+    "fuente:lozoya-agronitrogenados-odebrecht"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "d736d01c7db9f184538f76e4a90f28341eafd45dd0753e397370286900dd30ef",
+   "bytes": 50097,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/fgr/prensa/comunicado-fgr-530-22-fgr-obtiene-vinculacion-a-proceso-por-el-caso-segalmex": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:ovalle-segalmex-asf-fgr"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Internal Server Error"
+  },
+  "https://www.gob.mx/imss/prensa/com-106-imss-denuncia-robo-de-medicamentos-controlados": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:salud-ventiladores-y-medicinas"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "006a377e4be6cf9588ecb4bf3f09424df31e8304c6f95396bd71b74bbe544931",
+   "bytes": 57615,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/imss/prensa/respecto-a-la-informacion-sobre-la-compra-de-ventiladores-por-el-organo-de-operacion-administrativa-desconcentrada-hidalgo-el-imss-informa": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:medicamentos-imss",
+    "cifra:salud-ventiladores-y-medicinas",
+    "cotejo:salud-ventiladores-y-medicinas:2",
+    "fuente:salud-ventiladores-y-medicinas"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "98bf63371d6e6b71ce57ae5f5143f265f7cd1917fd14ff711fc6765eb2d63862",
+   "bytes": 54723,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/ipab/documentos/estados-financieros-del-ipab": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:inversion-megaobras"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Not Found"
+  },
+  "https://www.gob.mx/ipab/prensa/boletin-de-prensa-05-2026": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:fobaproa-ipab",
+    "fuente:fobaproa-ipab"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "b5d17441f545cae43614bb958310043f48518a53e113ac482da5fa9e76ce9ffa",
+   "bytes": 189502,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/presidencia/articulos/version-estenografica-50-aniversario-del-consejo-coordinador-empresarial": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cotejo:lif-2027-deuda-y-multas:3",
+    "fuente:lif-2027-deuda-y-multas"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "2867f4a291f0850f5250eb5bc68947d5604df63d09a4d4e091dfadb1319f9983",
+   "bytes": 67717,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-16-de-octubre-de-2026": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cotejo:guaymas-comodato-amigo-gnl:6",
+    "fuente:guaymas-comodato-amigo-gnl"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "df1ed5035add7aec786f0792fbd9bd0fbf6bcb0309e55eb57ff734828798194c",
+   "bytes": 156645,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:guaymas-gas",
+    "cifra:guaymas-comodato-amigo-gnl",
+    "cotejo:guaymas-comodato-amigo-gnl:1",
+    "cotejo:guaymas-comodato-amigo-gnl:2",
+    "cotejo:guaymas-comodato-amigo-gnl:3",
+    "cotejo:guaymas-comodato-amigo-gnl:4",
+    "fuente:guaymas-comodato-amigo-gnl"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "63cc1f3f7a4e359f3fd5b78fe798fd9cf210f71d54ac2c0ee1551e62c4cb5012",
+   "bytes": 153526,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/presidencia/prensa/presidenta-claudia-sheinbaum-informa-investigaciones-abiertas-contra-garcia-luna-en-uif-y-fgr": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:garcia-luna-las-dos-cortes",
+    "fuente:garcia-luna-y-garcia-harfuch"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "a57592e2103d4b0f2b6c87e5bb48d540ee0ac11d860914f482a055be5a5c7a6a",
+   "bytes": 60822,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/presidencia/prensa/presidenta-informa-que-los-5-8-mdd-recuperados-por-caso-garcia-luna-y-familia-weinberg-se-destinaran-a-escuelas-en-la-montana-de-guerrero?idiom=es": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:garcia-luna-las-dos-cortes",
+    "fuente:garcia-luna-las-dos-cortes"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "e399944fd8f8e6acb758fa0ce5b43256adbd54421c079635b2561f72bdf21d55",
+   "bytes": 60547,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-sat-69b"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "31e00743ea022a4a5614cf06cad98a437d64f87dea4d2dd728cccc8c58e1d402",
+   "bytes": 415334,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/segalmex/articulos/presidente-de-la-republica-designa-nuevos-nombramientos-299592?idiom=es": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:ovalle-segalmex-asf-fgr"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "1f0bd5f9416a2bd139d09bd1d5f58c254adf92e643b9a812f53fe49ed3f03810",
+   "bytes": 56647,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/segob/prensa/asumen-cargo-titulares-de-segob-sspc-y-cjef-inicia-segundo-piso-de-la-cuarta-transformacion": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:garcia-luna-y-garcia-harfuch"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "ce9ab802ee1bb2af3a367c086b6405d8e01f3e03817013ce9281a5211dbd2c68",
+   "bytes": 60201,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/segob/prensa/informan-segob-shcp-y-sfp-sobre-el-caso-segalmex?idiom=es": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:ovalle-segalmex-asf-fgr",
+    "fuente:ovalle-segalmex-asf-fgr"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "df44bb00c4233f8a28b1c6ff76b83fe6b2347c54a0fc223ac45c35bdd04cbb15",
+   "bytes": 58778,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/sfp/articulos/funcion-publica-avanza-con-los-procedimientos-sancionatorios-por-la-compra-de-20-ventiladores-del-imss-en-hidalgo-242591": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:salud-ventiladores-y-medicinas",
+    "fuente:salud-ventiladores-y-medicinas"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "f4ee3ab76576688bb99d5cc0f430834c6c3b54ff587fe560d3510f57ec88aa77",
+   "bytes": 51099,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/sfp/prensa/funcion-publica-investiga-desde-el-1-de-mayo-adquisicion-de-ventiladores-en-el-imss-secretaria-sandoval-ballesteros": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:salud-ventiladores-y-medicinas"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "128692a276d6d08ce878a77c8451fdc03c7199d4011e66a2d8bf049fafe63ef9",
+   "bytes": 51099,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/shcp/prensa/comunicado-no-50-hr-ratings-ratifico-la-calificacion-crediticia-de-mexico-en-bbb-modificando-su-perspectiva-de-negativa-a-estable": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:hr-ratings-baja-mexico-bbb"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "7d530aa2952e93b6ea211b3191038f2c7e2dd1ef20e0efc48541e90514900217",
+   "bytes": 57976,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/shcp/prensa/comunicado-no-71-la-secretaria-de-hacienda-y-credito-publico-entrega-el-paquete-economico-2027-al-h-congreso-de-la-union": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-shcp-c71"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "6d2e84ef73e06ce70b7e29a80b34c9ab85843e50483ad55a4668dba47c7b2247",
+   "bytes": 60646,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/shcp/prensa/comunicado-no-82": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:deuda-congreso-2027",
+    "cifra:hr-ratings-baja-mexico-bbb",
+    "cotejo:hr-ratings-baja-mexico-bbb:0",
+    "cotejo:hr-ratings-baja-mexico-bbb:3",
+    "fuente:hr-ratings-baja-mexico-bbb"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "31f84d429e8302bb976cb862849719d0c1f4bfedb0a679ca50b1f10ef10dd44b",
+   "bytes": 57826,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/uif/prensa/nota-relativa-a-la-sentencia-emitida-r": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:garcia-luna-las-dos-cortes",
+    "fuente:garcia-luna-las-dos-cortes"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "7a727bf64e9b3d3e4c1ba85f2d3caaf4a18329444859722387de9371f71fa774",
+   "bytes": 54834,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/uif/prensa/shcp-a-traves-de-la-uif-obtiene-nueva-sentencia-a-favor-del-estado-mexicano-por-mas-de-578-millones-de-dolares-en-caso-genaro-garcia-luna?idiom=es": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:garcia-luna-las-dos-cortes",
+    "fuente:garcia-luna-las-dos-cortes"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "c89bb0a40cb45c0af7e90f6d4b4c831bfb61b70fc4eb77fc6f51c16bc38b6b91",
+   "bytes": 54999,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.imss.gob.mx/prensa/archivo/202501/009": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-imss-empleo"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "9be334e332092d7d382f937e7c778d8549d64b82df0c325d30da5080eac83983",
+   "bytes": 852,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.inegi.org.mx/app/tabulados/interactivos/?pxq=Mortalidad_Mortalidad_09_b87a4bf1-9b47-442a-a5fc-ee5c65e37648": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-conapo-esperanza-vida"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "de0b12fa56a22257ea97cf23e03e4138ecf74686e69e4ad4c8e29414e2c7f511",
+   "bytes": 2090,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/historicos/1290/702825413576/702825413576_1.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-inegi-social-porfiriato"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "42b8efd27964b3df6b0c5a007457bc0b2e285b7245b0da5f589acebe3964f2f2",
+   "bytes": 4621510,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.inegi.org.mx/contenidos/programas/cngmd/2023/doc/cngmd2023_resultados_geogr_amb.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-cngmd2023"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "37e26cff2604a710fe94c76ea4a4fcbc31f2cb119986edb7a843c6ced136424d",
+   "bytes": 4137924,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.inegi.org.mx/contenidos/programas/cnije/2025/doc/cnije_2025_resultados.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-inegi-cnijfe2025-rr"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "5dfdd93b437885a370fb9f03d988b99ba191be16986828ab4be008709881dee3",
+   "bytes": 1091519,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/ee/CEEM2024_CP.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-ceem-2024"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "e858c48cc4e595c5d7550cef934c29cdc8ab9cd8e5aa21992fffb7a482976aa9",
+   "bytes": 301976,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibent/PIBE2024_CP.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-inegi-pib-2024"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "44e2471d0465335b1daba74586d95675eff78c91ec707047178c62461f3ade9f",
+   "bytes": 304620,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/cnple/CNPLE_2025_RR.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-inegi-cnple2025"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "04305b1e81ec07b93d19ecb5ceb8d9da17aa45062d4c17ba00a8d3335a6c2524",
+   "bytes": 1748034,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.inegi.org.mx/programas/cnijf/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-inegi-cnijf"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "0ef05aebaee20fc95126ee87301cb6d043113213efd134167a354bb519479f0a",
+   "bytes": 408,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.inegi.org.mx/programas/finanzas/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-inegi-efipem",
+    "biblioteca:ref-inegi-efipem-estatal"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "e57dee246fbd323b11551f1f99c952f10ddc247c29c885c63e4cc9b84914282f",
+   "bytes": 3820,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.inegi.org.mx/temas/ee/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-inegi-ceem"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "7f636594e46a51d3beecd880916d7dffca0e3913315aa5467f10f916c311098a",
+   "bytes": 2990,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.inegi.org.mx/temas/pib/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-inegi-cuentas"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "72de8d396abe940116f13ebafd30371a6d0ba5c34f03e3f9e2a2aeba10e758ee",
+   "bytes": 2924,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.inehrm.gob.mx/es/inehrm/La_Dictaduta_El_ultimo_Gobierno_de_Antonio_Lopez_de_Santa_Anna": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:santa-anna-mesilla-y-perros",
+    "fuente:santa-anna-mesilla-y-perros"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "f00a0cbbd2ba27f44118021fac1cf27a733946e318bccd7780e0749ec34540dc",
+   "bytes": 197729,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.inehrm.gob.mx/work/models/inehrm/Resource/440/1/images/5mayo.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:juarez-suspension-de-pagos-1861",
+    "fuente:juarez-suspension-de-pagos-1861"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "21209ccd1ca5ff37f3411c9fd684088b18742cb682b5daf34144b8cb1ad53bb2",
+   "bytes": 7598323,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:garcia-luna-las-dos-cortes",
+    "cifra:garcia-luna-testigos-y-la-ley-mexicana",
+    "cifra:garcia-luna-y-garcia-harfuch",
+    "fuente:garcia-luna-las-dos-cortes",
+    "fuente:garcia-luna-testigos-y-la-ley-mexicana",
+    "fuente:garcia-luna-y-garcia-harfuch"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://www.justice.gov/usao-edny/pr/former-mexican-secretary-public-security-genaro-garcia-luna-charged-engaging-continuing": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:garcia-luna-y-garcia-harfuch"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://www.justice.gov/usao-edny/press-release/file/1299686/dl": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:garcia-luna-y-garcia-harfuch"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://www.oaj.gob.mx/documentos/notasInformativas/docsNotasInformativas/2013/notaInformativa50.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:gordillo-la-sentencia-reservada",
+    "fuente:gordillo-la-sentencia-reservada"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[Errno 104] Connection reset by peer"
+  },
+  "https://www.oaj.gob.mx/documentos/notasInformativas/docsNotasInformativas/2014/notaInformativa55.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:gordillo-la-sentencia-reservada"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[Errno 104] Connection reset by peer"
+  },
+  "https://www.pef.hacienda.gob.mx/work/models/P3f26115/PEF2026/y6k1r4r1/docs/03/r03_aae.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-pef-ramo03"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.plataformadetransparencia.org.mx/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-pnt",
+    "biblioteca:ref-pnt-asesores-scjn"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://www.sat.gob.mx/aplicacion/operacion/50409/denuncias-sat": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-sat-denuncias"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Forbidden"
+  },
+  "https://www.scjn.gob.mx/conoce-la-corte": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-scjn-conoce-corte"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "8b11189898d18518df230baabf42460825f11ab7296533198bc8d41b89e30339",
+   "bytes": 51586,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.scjn.gob.mx/sites/default/files/listas/documento/2024-10-30/30%20OCTUBRE%202024%20-%20CR%20LISTAS%20SESI%C3%93N%20-%20FALLADOS%20-%20SIN%20DATOS%20SENSIBLES.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:robles-sedesol-convenios-universidades"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "d413b93c062b3d204dabbf07d2e9a0c0b93a67d314131daacf6ff22d50e1f7dd",
+   "bytes": 242366,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.scjn.gob.mx/sites/default/files/listas/documento/2024-10-31/LT%20VER%C3%81N%2013-11-2024.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:gomez-urrutia-de-la-casa-de-moneda-al-congreso"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "33b1c9e3551f738101f0a478cfe9dba82b68c329f697804c4324cae986e9056d",
+   "bytes": 535033,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.scjn.gob.mx/sites/default/files/presupuesto%20asignado/documento/2026-01/Estado-Analitico-Ejercicio-Presupuesto-2025-Trim-04.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-scjn-cierre2025"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "971329030f64cdeba8dfb58b63b2757558f749296b73314a166a95f90149b06a",
+   "bytes": 135652,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.scjn.gob.mx/sites/default/files/presupuesto%20asignado/documento/2026-07/Estado-Analitico-Ejercicio-Presupuesto-2026-Trim-02.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-scjn-trim2-2026"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "fa7ab67b31725a754c8ca6ee11ab9a19b01dc2ff3d52a7d4dab74b076d1c7efe",
+   "bytes": 160159,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.scjn.gob.mx/sites/default/files/presupuesto-asignado/documento/2026-09/EEP-2026-08.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-scjn-ejercicio2026"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "a27a73054f472fc7fc54bb03ea8fdf2859030fa682b41a8ac51fffe4f033ad37",
+   "bytes": 14524854,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.scjn.gob.mx/sites/default/files/versiones-taquigraficas/documento/2026-07-07/6%20de%20julio%20de%202026%20-%20Versi%C3%B3n%20definitiva%202._0.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:abelina-lopez-corte-invalida-auditoria-estatal",
+    "fuente:abelina-lopez-corte-invalida-auditoria-estatal"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "e28462f99d4513325c6d10e81b7c4905c03e5c6d4f74a67477d824aad8c36090",
+   "bytes": 313804,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.segundoinformedegobierno.gob.mx/gmx_media/2-ig-informe-consolidado-final_01_09_2026": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-presidencia-2ig"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Forbidden"
+  },
+  "https://www.te.gob.mx/SAI/Documentos//704/AI%20164-2024%20y%20acumuladas.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-ai-164-2024"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "d76860ec41f496eccab3d38ef45609b2d3bcc52e9cb780b3ee0b134367f2fc80",
+   "bytes": 2016222,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
+  "https://www.transparenciapresupuestaria.gob.mx/": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-transparencia-presupuestaria"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.transparenciapresupuestaria.gob.mx/Datos-Abiertos": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:fobaproa"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "auditoria:inversion-megaobras",
+    "biblioteca:ref-shcp-obra-publica-abierta"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/BD_Cuenta_Publica/CSV/cuenta_publica_2024_gf_ecd_epe.csv": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-shcp-cp2024-datos"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/BD_Cuenta_Publica/CSV/cuenta_publica_2025_gf_ecd_epe.csv": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-shcp-cp2025-datos"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/CSV/PEF_2026.csv": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-shcp-pef2026-datos"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/CSV/pef_ac01_avance_2t_2026.csv": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-shcp-avance-2t2026"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/XLSX/PPEF_2027.xlsx": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-shcp-ppef2027-datos"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Entidades_Federativas/2024/ejercicio_del_gasto_2024.zip": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-shcp-srft-2024"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+  },
+  "https://www.uscourts.gov/sites/default/files/2025-02/federal-rules-of-evidence-dec-1-2024_0.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "fuente:garcia-luna-testigos-y-la-ley-mexicana"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://www2.scjn.gob.mx/juridica/engroses/3/2025/31/2_353218_7619_firmado.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "cifra:abelina-lopez-corte-invalida-auditoria-estatal",
+    "fuente:abelina-lopez-corte-invalida-auditoria-estatal"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "2486cf2ac80cfc2c3c90f30e93d4287b17e28d0f6075b2114c227859033eb05f",
+   "bytes": 380984,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  }
+ }
+}
