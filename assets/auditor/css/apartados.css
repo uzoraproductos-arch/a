@@ -706,7 +706,7 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 }
 
 /* Las fotografías, por rubro (la ruta es relativa a esta hoja) */
-.herr-foto.rubro-obras::before { background-image: url('../img/herr-megaobras-plataformas-amplia.jpg'); }
+.herr-foto.rubro-obras::before { background-image: url('../img/herr-megaobras-ilustracion.svg'); }
 .herr-foto.rubro-calculadora::before { background-image: url('../img/herr-calculadora-monedas-amplia.jpg'); }
 .herr-foto.rubro-inspector::before { background-image: url('../img/herr-inspector-camaras.jpg'); }
 .apartado-tarjeta-modulo.herr-foto.rubro-inspector:not(.foto-auditor)::before { background-position: center 30%; }
@@ -747,6 +747,10 @@ body[data-pagina="apartado"] a.radar-stat-item, body[data-pagina="apartado"] a.r
 .herr-cab.rubro-obras { --tarjeta: #c2611d; }
 .herr-cab.rubro-obras::before { background-color: #9a4a14; }
 .herr-cab.rubro-obras::after { background: linear-gradient(90deg, rgba(154, 74, 20, 1) 0%, rgba(154, 74, 20, 0.95) 38%, rgba(154, 74, 20, 0.35) 62%, rgba(154, 74, 20, 0) 78%); }
+/* La ilustración (27-10-2026) tiene una versión para el encabezado que se
+   desvanece por la izquierda y no corta en seco; en celular el velo va parejo. */
+.herr-cab.rubro-obras::before { background-image: url('../img/herr-megaobras-ilustracion-cab.svg'); }
+@media (max-width: 700px) { .herr-cab.rubro-obras::after { background: rgba(154, 74, 20, 0.88); } }
 .herr-cab.rubro-calculadora { --tarjeta: #c9a227; }
 .herr-cab.rubro-calculadora::before { background-color: #85640f; }
 .herr-cab.rubro-calculadora::after { background: linear-gradient(90deg, rgba(133, 100, 15, 1) 0%, rgba(133, 100, 15, 0.95) 38%, rgba(133, 100, 15, 0.35) 62%, rgba(133, 100, 15, 0) 78%); }

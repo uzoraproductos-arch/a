@@ -696,7 +696,8 @@ APARTADOS = [
 # apartados.css las pone por rubro (.herr-foto.rubro-*), porque un url()
 # dentro de una variable se resolveria contra la carpeta de la hoja.
 HERR_IMG = {
-    'obras': 'assets/auditor/img/herr-megaobras-plataformas-amplia.jpg',
+    # Ilustración propia desde el 27-10-2026 (antes, una foto de plataformas).
+    'obras': 'assets/auditor/img/herr-megaobras-ilustracion.svg',
     'calculadora': 'assets/auditor/img/herr-calculadora-monedas-amplia.jpg',
     # Imagen del Modo Inspector desde el 24-10-2026 (la eligió el autor); el
     # foróptero se queda en el Auditor Virtual (foto_clase 'foto-auditor').

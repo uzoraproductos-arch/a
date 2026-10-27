@@ -1990,10 +1990,12 @@ El autor entregó cuatro imágenes ilustrativas que sustituyen a las de
 con el mismo nombre, los navegadores seguían mostrando la imagen vieja de su
 caché. **Para cambiar una imagen, cámbiale también el nombre** (el CSS no
 lleva sello en sus `url()`):
-plataformas petroleras para Megaobras, una pila de monedas para la
+plataformas petroleras para Megaobras (retirada el 27-10-2026: la sustituye una ilustración propia, abajo), una pila de monedas para la
 Calculadora Cívica, un foróptero para el Modo Inspector y una refinería con
 humo para el Costo Ambiental. Se ven en las tarjetas de Herramientas, en el
 encabezado de cada `herramienta-*.html` y en la franja «Las otras herramientas».
+
+**Megaobras: ilustración propia en lugar de la foto (27-10-2026, sello 20261027k).** Pedido del autor: «vayamos por la de inversiones y mega obras… sustituir una imagen». La foto de plataformas petroleras (de origen sin acreditar) se cambió por un dibujo vectorial hecho para la plataforma, sin derechos de terceros: una refinería con su quemador, un tren sobre su viaducto, una grúa de obra y la torre de control de un aeropuerto, al atardecer, en la escala de azul marino con el naranja del rubro. Es ilustrativo: no retrata una obra en particular. Dos archivos: `herr-megaobras-ilustracion.svg` (tarjetas, «Las otras herramientas» y el menú del chat) y `herr-megaobras-ilustracion-cab.svg` (el encabezado de `herramienta-megaobras*.html`), que es el mismo dibujo con una máscara que lo desvanece por la izquierda para fundirse con el naranja; si se cambia uno, se cambia el otro. En celular el velo naranja del encabezado va parejo para que el texto se lea. La foto queda en el historial.
 
 **Diccionario y glosario con página propia; nada lleva a la portada (09-10-2026, sello 20261009v).**
 Pedido del autor: los enlaces a la Enciclopedia (congelada) llegan ahora al
