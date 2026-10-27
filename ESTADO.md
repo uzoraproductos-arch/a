@@ -5,7 +5,7 @@ historia completa de cada decisión en [CONTEXT.md](CONTEXT.md), que pasa de
 7,000 renglones: aquí va solo lo que necesitas para no repetir trabajo ni
 pisar el de otro. **Se actualiza en el mismo commit que cambia lo que dice.**
 
-Última actualización: 27-10-2026 · sello `20261027k` · rama `claude/funny-turing-imtm54`.
+Última actualización: 27-10-2026 · sello `20261027l` · rama `claude/funny-turing-imtm54`.
 
 ## Antes de empezar y antes de empujar
 
@@ -41,6 +41,9 @@ que necesita navegador.
 
 ## Lo último que entró
 
+- **27-10-2026, sello 20261027l.** Imágenes, paso 4: se retiraron las dos fotos de
+  la ciudad y el modo de noche del Estado de cuenta cívico; su encabezado y la
+  imagen para compartir llevan la franja azul marino.
 - **27-10-2026, sello 20261027k.** Imágenes, paso 3: la foto de Inversión y
   Megaobras se cambió por una ilustración propia (SVG, sin derechos de terceros).
 - **27-10-2026, sello 20261027j.** Imágenes, paso 2: los estados de cuenta y las

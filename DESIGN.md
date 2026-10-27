@@ -190,9 +190,10 @@ institucional que usan los títulos, botones y enlaces del tema claro.
 
 ### 3.3 Neutros y superficies (vigente)
 
-Las superficies son **translúcidas**: se ven sobre la fotografía de la ciudad
-(`city_night.jpg` en oscuro, `city_day.jpg` en claro) y sobre un ruido de
-papel al 2.5 %.
+Las superficies nacieron **translúcidas**, para verse sobre una fotografía de
+la ciudad. Esa foto se apagó y el 27-10-2026 se retiró del repositorio
+(`city_night.jpg` y `city_day.jpg`, que quedan en el historial): hoy el fondo
+es liso y la plataforma solo tiene el tema claro.
 
 | Variable | Oscuro | Claro | Uso |
 |---|---|---|---|

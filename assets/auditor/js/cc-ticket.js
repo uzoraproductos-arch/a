@@ -698,20 +698,13 @@
   $('ctImprimir').addEventListener('click', function () { window.print(); });
 
   function texto(g, t, x, y, fuente, color, al) { g.font = fuente; g.fillStyle = color; g.textAlign = al || 'left'; g.fillText(t, x, y); }
-  function aleatorio(s) { s = s >>> 0; return function () { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
-  function horizonte(g, W, y0, alto, noche) {
-    var rnd = aleatorio(20260926), cielo = g.createLinearGradient(0, 0, 0, y0 + alto);
-    if (noche) { cielo.addColorStop(0, '#070b1a'); cielo.addColorStop(1, '#1d2650'); } else { cielo.addColorStop(0, '#9fd3f7'); cielo.addColorStop(1, '#fbe9c8'); }
-    g.fillStyle = cielo; g.fillRect(0, 0, W, y0 + alto);
-    var base = y0 + alto;
-    [[0.55, noche ? '#141b3a' : '#9fb3c8'], [1, noche ? '#0b1026' : '#5d7390']].forEach(function (c, capa) {
-      var x = -10;
-      while (x < W) {
-        var w = 40 + rnd() * 70, h = (40 + rnd() * 90) * c[0] + capa * 16;
-        g.fillStyle = c[1]; g.fillRect(x, base - h, w, h);
-        x += w + 4 + rnd() * 10;
-      }
-    });
+  /* Encabezado de la imagen: la franja azul marino de los estados de cuenta
+     (27-10-2026); ya no hay foto de ciudad ni opcion de noche. */
+  function franja(g, W, alto) {
+    var cab = g.createLinearGradient(0, 0, W, 0);
+    cab.addColorStop(0, '#071d47'); cab.addColorStop(0.38, '#0b2a63'); cab.addColorStop(1, '#2c579f');
+    g.fillStyle = cab; g.fillRect(0, 0, W, alto);
+    g.fillStyle = '#4f9be8'; g.fillRect(0, alto, W, 6);
   }
   function arco(g, t, rad, arriba, fuente) {
     g.font = fuente; g.textAlign = 'center'; g.textBaseline = 'middle';
@@ -748,32 +741,21 @@
 
   $('ctImagen').addEventListener('click', function () {
     var d = datosDoc(); if (!d) return;
-    var noche = $('ctNoche').checked;
-    var C = noche
-      ? { fondo: '#0c1122', tarjeta: '#131a33', linea: '#27305a', txt: '#eef1fa', suave: '#9aa3c7', oro: '#f2c14e', cian: '#4fd1e8', barra: '#f2c14e' }
-      : { fondo: '#f7f5ef', tarjeta: '#ffffff', linea: '#ddd6c6', txt: '#16203a', suave: '#5d6680', oro: '#a8740a', cian: '#0b7a8f', barra: '#c9921a' };
+    var C = { fondo: '#f7f5ef', tarjeta: '#ffffff', linea: '#ddd6c6', txt: '#16203a', suave: '#5d6680', oro: '#a8740a', cian: '#0b7a8f', barra: '#c9921a' };
     var W = 1080, H = 1350, M = 64;
     var serif = "'Playfair Display', Georgia, serif", sans = "Inter, 'Segoe UI', Arial, sans-serif", mono = "'JetBrains Mono', Consolas, monospace";
     var listo = (document.fonts && document.fonts.ready) ? document.fonts.ready.catch(function () {}) : Promise.resolve();
     listo.then(function () {
-      return Promise.all([imagen('assets/img/' + (noche ? 'city_night.jpg' : 'city_day.jpg')), imagen('assets/auditor/img/logo-auditavision.svg')]);
-    }).then(function (ims) {
-      var foto = ims[0], logo = ims[1];
+      return imagen('assets/auditor/img/logo-auditavision.svg');
+    }).then(function (logo) {
       var cv = document.createElement('canvas'); cv.width = W; cv.height = H;
       var g = cv.getContext('2d');
       g.fillStyle = C.fondo; g.fillRect(0, 0, W, H);
-      if (foto) {
-        var hH = 330, e = Math.max(W / foto.width, hH / foto.height), sw = W / e, sh = hH / e;
-        g.drawImage(foto, (foto.width - sw) / 2, (foto.height - sh) * 0.35, sw, sh, 0, 0, W, hH);
-        g.fillStyle = noche ? 'rgba(6,9,20,0.45)' : 'rgba(255,255,255,0.30)'; g.fillRect(0, 0, W, hH);
-      } else horizonte(g, W, 60, 250, noche);
-      var velo = g.createLinearGradient(0, 150, 0, 330);
-      velo.addColorStop(0, 'rgba(0,0,0,0)'); velo.addColorStop(1, C.fondo);
-      g.fillStyle = velo; g.fillRect(0, 120, W, 212);
+      franja(g, W, 250);
 
-      texto(g, 'AUDITAVISIÓN · SISTEMA CÍVICO DE FISCALIZACIÓN', M, 70, '600 20px ' + mono, noche ? '#ffffff' : '#16203a');
-      texto(g, 'Estado de Cuenta Cívico', M, 150, '700 64px ' + serif, noche ? '#ffffff' : '#16203a');
-      selloCanvas(g, W - M - 96, 158, 92, noche ? '#ecc767' : '#8a6512', noche ? 'rgba(8,12,26,0.55)' : 'rgba(255,255,255,0.6)', d.emitido, est.folio, logo);
+      texto(g, 'AUDITAVISIÓN · SISTEMA CÍVICO DE FISCALIZACIÓN', M, 70, '600 20px ' + mono, '#ffffff');
+      texto(g, 'Estado de Cuenta Cívico', M, 150, '700 64px ' + serif, '#ffffff');
+      selloCanvas(g, W - M - 96, 158, 92, '#ecc767', 'rgba(8,12,26,0.55)', d.emitido, est.folio, logo);
 
       [['PERIODO', d.periodo], ['FOLIO', est.folio || '—'], ['EMITIDO', d.emitido]].forEach(function (m, i) {
         var x = M + i * 330;
