@@ -678,6 +678,14 @@
    "dice": [
     "Es inversión privada, no gasto público"
    ]
+  },
+  {
+   "q": "¿Investigarán a Lorenzo Córdova?",
+   "ir": "noticias-relevantes.html#col-ine-contratos-desde-cordova"
+  },
+  {
+   "q": "¿Es cierto que la UIF congeló cuentas de contratistas del INE?",
+   "ir": "noticias-relevantes.html#col-ine-contratos-desde-cordova"
   }
  ]
 }

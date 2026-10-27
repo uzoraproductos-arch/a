@@ -41,6 +41,12 @@ que necesita navegador.
 
 ## Lo último que entró
 
+- **27-10-2026, sello 20261027o.** Verificamos: «¿Investigarán a Lorenzo Córdova?»
+  (publicación de politicomx), columna `ine-contratos-desde-cordova`. Consta el pedido
+  de auditoría (versión estenográfica del 26-10); lo de Córdova y «desde cuándo» queda
+  pendiente hasta que Presidencia publique la del 27-10; lo de la UIF es de un solo
+  proveedor, en 2023, y el amparo no tiene documento. Córdova entra al chat, y un
+  «¿es cierto que…?» se coteja antes de buscar en ComprasMX.
 - **27-10-2026, sello 20261027m.** Imágenes, paso 5: las fotos de la Calculadora
   Cívica, Costo Ambiental, el Modo Inspector y el foróptero del Auditor Virtual se
   cambiaron por ilustraciones propias (SVG), con la misma idea de cada foto. Quedan

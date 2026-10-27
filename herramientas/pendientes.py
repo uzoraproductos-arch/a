@@ -339,6 +339,7 @@ def recolectar():
     # relevantes · Verificamos, 26-10-2026).
     au_red = {
         'taddei-renuncia-ine-contratos': ('auditoria-ine-contratos.html', 'Auditoría en imágenes · El INE y contratos en revisión'),
+        'ine-contratos-desde-cordova': ('auditoria-ine-contratos.html', 'Auditoría en imágenes · El INE y contratos en revisión'),
         'guaymas-comodato-amigo-gnl': ('auditoria-guaymas-gas.html', 'Auditoría en imágenes · Guaymas y la Gaceta Parlamentaria'),
         'salud-ventiladores-y-medicinas': ('auditoria-medicamentos-imss.html', 'Auditoría en imágenes · Compras de medicamentos y contratos del IMSS'),
         'hr-ratings-baja-mexico-bbb': ('auditoria-deuda-congreso-2027.html', 'Auditoría en imágenes · Ley de Ingresos 2027 y nota soberana'),

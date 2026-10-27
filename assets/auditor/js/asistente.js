@@ -1750,6 +1750,10 @@
     if (al) return al;
     var pr = propias(q);
     if (pr) return pr;
+    /* «¿Es cierto que la UIF congeló cuentas de contratistas?» pide el cotejo de una
+       columna de Verificamos, no una búsqueda en ComprasMX (27-10-2026). */
+    var vc = PIDE_COTEJO.test(plano(q)) && verificado(q);
+    if (vc) return vc;
     var cx = cruceSat(q) || contratosCmx(q);
     if (cx) return cx;
     var pe = personaje(q);

@@ -12,7 +12,7 @@
 (function () {
   'use strict';
 
-  var EDICION = '26 de octubre de 2026';
+  var EDICION = '27 de octubre de 2026';
   var SECCIONES = [
     ['todas', 'Todas'],
     ['Personajes', 'Personajes'],
@@ -39,6 +39,138 @@
      Todas las columnas llevan al pie la liga para pedirla (derecho-de-replica.html). */
   var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
+ {
+  "id": "ine-contratos-desde-cordova",
+  "seccion": "Verificado",
+  "icono": "🗳️",
+  "titulo": "¿Investigarán a Lorenzo Córdova? Lo que pidió la Presidenta sobre los contratos del INE y lo que dijo de la UIF",
+  "balazo": "La Presidenta pidió que la Auditoría Superior revise los contratos del INE, según la prensa también los de antes de Guadalupe Taddei. Pedir que se revise un periodo no es acusar a nadie: ninguna autoridad ha señalado a Lorenzo Córdova. Del congelamiento de cuentas de la UIF y su amparo solo consta lo que ella dijo.",
+  "circula": {
+   "red": "Redes sociales",
+   "cuenta": "politicomx",
+   "fecha": "27 de octubre de 2026",
+   "texto": "¿Investigarán a Lorenzo Córdova? La presidenta Claudia Sheinbaum pidió a la ASF revisar todos los contratos del INE, no solamente los correspondientes a la administración de Guadalupe Taddei, sino también los de periodos anteriores, incluido el de Lorenzo Córdova. Sheinbaum señaló que es necesario conocer desde cuándo operan las empresas contratistas del INE y recordó que la UIF, encabezada entonces por Pablo Gómez, congeló cuentas de algunas de estas compañías, medida que posteriormente fue levantada mediante un amparo."
+  },
+  "cuerpo": [
+   "En su conferencia del 26 de octubre de 2026, cuando le preguntaron por la renuncia de Guadalupe Taddei, la Presidenta pidió una auditoría: «que la Auditoría Superior de la Federación haga su auditoría y señale si es que, en efecto, ella está involucrada o no». Consta en la versión estenográfica que publicó la Presidencia. Ese día habló de la gestión de Taddei; no mencionó a Lorenzo Córdova.",
+   "En la misma conferencia le preguntaron por la UIF. Dijo que en 2023 la UIF congeló las cuentas de «este proveedor que ha estado saliendo»: «Cuando estaba Pablo Gómez al frente de la UIF hay un congelamiento de cuentas de uno de los proveedores». Agregó que después un amparo obligó a liberarlas y que otras líneas de investigación «tendrá que informarlo la UIF, en su momento». No dijo el nombre de la empresa ni el mes. Habló de un proveedor, no de «algunas de estas compañías».",
+   "Lo de Córdova es del día siguiente. Según Informador, El Imparcial y El Financiero, el 27 de octubre pidió que la revisión no se quede en la gestión de Taddei, que alcance periodos anteriores, incluido el de Lorenzo Córdova Vianello, y que se informe desde cuándo tiene el INE contratos con esos contratistas. Cuando lo consultamos, la Presidencia todavía no publicaba la versión estenográfica de ese día. En cuanto salga, se coteja palabra por palabra.",
+   "Un dato que la publicación no dice: Córdova presidió el INE del 3 de abril de 2014 al 3 de abril de 2023, y Taddei entró ese mismo mes. El congelamiento fue «en 2023», según la Presidenta, así que pudo haber sido con cualquiera de los dos. Sin el mes, no se sabe. Pedir que se revisen los contratos de un periodo no es una acusación contra quien lo presidió: ninguna autoridad ha abierto un procedimiento contra Lorenzo Córdova, y toda persona se presume inocente mientras no se declare su responsabilidad (Constitución, art. 20, apartado B, fr. I).",
+   "Una nota de método: las notas de prensa no abrieron desde la plataforma; se citan por su medio y su liga, como punto de partida y no como fuente. La versión estenográfica del 26 de octubre se consultó en gob.mx."
+  ],
+  "dato_curioso": "El congelamiento que mencionó la Presidenta fue en 2023, el año en que el INE cambió de presidencia: Lorenzo Córdova salió el 3 de abril y Guadalupe Taddei entró ese mismo mes. Sin el mes, no se puede saber con cuál de los dos ocurrió.",
+  "cifras": [
+   {
+    "valor": "3/04/2014 – 3/04/2023",
+    "etq": "Periodo de Lorenzo Córdova como consejero presidente del INE",
+    "estado": "oficial",
+    "fuente": "INE, Central Electoral, 31-03-2023",
+    "url": "https://centralelectoral.ine.mx/2023/03/31/lorenzo-cordova-adriana-favela-ciro-murayama-y-jose-roberto-ruiz-se-despiden-de-la-herradura-de-la-democracia/"
+   },
+   {
+    "valor": "2023",
+    "etq": "Año en que, según la Presidenta, la UIF congeló las cuentas de un proveedor del INE",
+    "estado": "oficial",
+    "fuente": "Presidencia, versión estenográfica del 26-10-2026",
+    "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-26-de-octubre-de-2026"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "La presidenta Claudia Sheinbaum pidió a la ASF revisar los contratos del INE.",
+    "res": "consta",
+    "explica": "El 26 de octubre de 2026 pidió «que la Auditoría Superior de la Federación haga su auditoría». La ASF ya había abierto una investigación de oficio, según el INE (24-10-2026).",
+    "fuente": "Presidencia, versión estenográfica del 26-10-2026",
+    "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-26-de-octubre-de-2026"
+   },
+   {
+    "dice": "No solamente los contratos de la administración de Guadalupe Taddei, sino también los de periodos anteriores, incluido el de Lorenzo Córdova.",
+    "res": "pendiente",
+    "explica": "Lo publican Informador, El Imparcial y El Financiero sobre la conferencia del 27 de octubre de 2026. La versión estenográfica de ese día aún no estaba publicada cuando la consultamos: hasta cotejarla, solo lo dice la prensa.",
+    "fuente": "Solo en prensa (Informador, 27-10-2026)",
+    "url": "https://www.informador.mx/mexico/claudia-sheinbaum-exige-una-auditoria-muy-amplia-al-ine-pide-revisar-gestiones-de-guadalupe-taddei-y-lorenzo-cordova-20261027-0066.html",
+    "quien": "Presidencia de la República: la versión estenográfica de la conferencia del 27 de octubre de 2026 todavía no estaba publicada cuando la consultamos; suele salir después de la conferencia",
+    "donde": "https://www.gob.mx/presidencia/es/archivo/articulos"
+   },
+   {
+    "dice": "¿Investigarán a Lorenzo Córdova?",
+    "res": "no consta",
+    "explica": "Ninguna autoridad ha abierto un procedimiento contra él. Revisar los contratos de su periodo es revisar al INE, no acusarlo: una revisión no es una acusación y una acusación no es una condena (Constitución, art. 20, B, fr. I).",
+    "fuente": "Sin documento oficial",
+    "url": ""
+   },
+   {
+    "dice": "Sheinbaum señaló que es necesario conocer desde cuándo operan las empresas contratistas del INE.",
+    "res": "pendiente",
+    "explica": "También es de la conferencia del 27 de octubre y solo lo dice la prensa por ahora. Lo que sí se puede revisar ya son los contratos del INE en la Plataforma Nacional de Transparencia.",
+    "fuente": "Solo en prensa (El Imparcial, 27-10-2026)",
+    "url": "https://www.elimparcial.com/mexico/2026/10/27/claudia-sheinbaum-pide-investigar-los-contratos-del-ine-durante-la-gestion-de-lorenzo-cordova-tras-la-renuncia-de-guadalupe-taddei-por-presuntas-irregularidades-y-exige-revisar-a-los-proveedores-de-administraciones-anteriores/",
+    "quien": "Presidencia de la República: la versión estenográfica de la conferencia del 27 de octubre de 2026 todavía no estaba publicada cuando la consultamos; suele salir después de la conferencia",
+    "donde": "https://www.gob.mx/presidencia/es/archivo/articulos"
+   },
+   {
+    "dice": "La UIF, encabezada entonces por Pablo Gómez, congeló cuentas de algunas de estas compañías.",
+    "res": "matiz",
+    "explica": "La Presidenta lo dijo el 26 de octubre, pero de un solo proveedor y en 2023: «hay un congelamiento de cuentas de uno de los proveedores». No dijo cuál, y la UIF no lo ha publicado.",
+    "fuente": "Presidencia, versión estenográfica del 26-10-2026",
+    "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-26-de-octubre-de-2026"
+   },
+   {
+    "dice": "La medida fue levantada posteriormente mediante un amparo.",
+    "res": "pendiente",
+    "explica": "Consta que la Presidenta lo dijo («el amparo hace que se las tengan que liberar»), pero no hay documento del congelamiento ni del amparo: ni qué empresa, ni qué juzgado, ni cuándo. Ella misma dijo que lo demás «tendrá que informarlo la UIF, en su momento».",
+    "fuente": "Presidencia, versión estenográfica del 26-10-2026",
+    "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-26-de-octubre-de-2026",
+    "quien": "La UIF (Hacienda) tiene el expediente del congelamiento y un juzgado federal resolvió el amparo. La UIF guarda reserva de sus investigaciones por ley, así que no se le culpa de no publicarlo; la Presidenta anunció que informará en su momento",
+    "donde": "https://www.gob.mx/uif/prensa"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "La versión estenográfica de la conferencia del 27 de octubre de 2026, para cotejar palabra por palabra lo de Córdova y «desde cuándo»",
+    "url": "https://www.gob.mx/presidencia/es/archivo/articulos"
+   },
+   {
+    "que": "Lo que informe la UIF sobre el proveedor cuyas cuentas congeló en 2023 y el amparo que las liberó",
+    "url": "https://www.gob.mx/uif/prensa"
+   },
+   {
+    "que": "Los resultados de la Auditoría Superior sobre las contrataciones del INE, y si alcanzan años anteriores a 2023",
+    "url": "https://www.asf.gob.mx/"
+   },
+   {
+    "que": "El caso que lo originó: la renuncia de Guadalupe Taddei y lo que consta de Cajas Graf",
+    "url": "noticias-relevantes.html#col-taddei-renuncia-ine-contratos"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Presidencia de la República: versión estenográfica de la conferencia de prensa del 26 de octubre de 2026",
+    "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-26-de-octubre-de-2026"
+   },
+   {
+    "nombre": "INE, Central Electoral: Lorenzo Córdova, Adriana Favela, Ciro Murayama y José Roberto Ruiz se despiden de la herradura de la democracia (31-03-2023)",
+    "url": "https://centralelectoral.ine.mx/2023/03/31/lorenzo-cordova-adriana-favela-ciro-murayama-y-jose-roberto-ruiz-se-despiden-de-la-herradura-de-la-democracia/"
+   },
+   {
+    "nombre": "INE, Central Electoral: La Presidencia del INE respalda la investigación de la ASF (24-10-2026)",
+    "url": "https://centralelectoral.ine.mx/2026/10/24/la-presidencia-del-ine-respalda-la-investigacion-de-la-asf-y-reafirma-su-compromiso-con-el-estado-de-derecho/"
+   },
+   {
+    "nombre": "Punto de partida, no fuente: Informador (27-10-2026)",
+    "url": "https://www.informador.mx/mexico/claudia-sheinbaum-exige-una-auditoria-muy-amplia-al-ine-pide-revisar-gestiones-de-guadalupe-taddei-y-lorenzo-cordova-20261027-0066.html"
+   },
+   {
+    "nombre": "Punto de partida, no fuente: El Imparcial (27-10-2026)",
+    "url": "https://www.elimparcial.com/mexico/2026/10/27/claudia-sheinbaum-pide-investigar-los-contratos-del-ine-durante-la-gestion-de-lorenzo-cordova-tras-la-renuncia-de-guadalupe-taddei-por-presuntas-irregularidades-y-exige-revisar-a-los-proveedores-de-administraciones-anteriores/"
+   },
+   {
+    "nombre": "Punto de partida, no fuente: El Financiero (27-10-2026)",
+    "url": "https://www.elfinanciero.com.mx/nacional/2026/10/27/claudia-sheinbaum-mananera-temas-hoy-27-de-octubre-de-2026-en-vivo/"
+   }
+  ],
+  "actualizado": "27 de octubre de 2026"
+ },
  {
   "id": "guaymas-comodato-amigo-gnl",
   "seccion": "Verificado",
@@ -440,6 +572,10 @@
    {
     "que": "Quién ocupa la presidencia del INE y cómo la nombra la Cámara de Diputados",
     "url": "https://www.diputados.gob.mx/"
+   },
+   {
+    "que": "La revisión que pidió la Presidenta de los contratos de periodos anteriores, incluido el de Lorenzo Córdova, y lo que dijo del congelamiento de cuentas de la UIF (27-10-2026)",
+    "url": "noticias-relevantes.html#col-ine-contratos-desde-cordova"
    }
   ],
   "fuentes": [
@@ -460,7 +596,7 @@
     "url": "https://ine.mx/wp-content/uploads/2025/02/lp-ine-001-2025-fallo.pdf"
    }
   ],
-  "actualizado": "26 de octubre de 2026"
+  "actualizado": "27 de octubre de 2026"
  },
  {
   "id": "lif-2027-deuda-y-multas",

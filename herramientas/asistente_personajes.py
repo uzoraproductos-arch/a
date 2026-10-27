@@ -59,6 +59,7 @@ PERSONAJES = [
     ('lopez-beltran', 'Andrés López Beltrán', ['lopez beltran', 'andy lopez'], False),
     ('amilcar-olan', 'Amílcar Olán', ['amilcar olan', 'olan aparicio'], False),
     ('taddei', 'Guadalupe Taddei Zavala', ['taddei', 'guadalupe taddei'], False),
+    ('lorenzo-cordova', 'Lorenzo Córdova Vianello', ['lorenzo cordova', 'cordova vianello'], False),
     ('bartlett', 'Manuel Bartlett Díaz', ['bartlett'], False),
     ('alfonso-durazo', 'Alfonso Durazo Montaño', ['durazo'], False),
     ('pablo-gomez', 'Pablo Gómez Álvarez', ['pablo gomez'], False),
