@@ -41,6 +41,9 @@ que necesita navegador.
 
 ## Lo último que entró
 
+- **27-10-2026.** Pie de la portada: «Informes Individuales ASF», «Banxico: SIE» y
+  «SHCP: Registro Público Único» ya llevan a su página de la Enciclopedia
+  (`informes-cuenta-publica.html`, `radar-peso-maquina.html`, `numeros-las-32-entidades.html`).
 - **27-10-2026, sello 20261027l.** Imágenes, paso 4: se retiraron las dos fotos de
   la ciudad y el modo de noche del Estado de cuenta cívico; su encabezado y la
   imagen para compartir llevan la franja azul marino.

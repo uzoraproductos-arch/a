@@ -152,7 +152,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras-tabla.html` | En qué invirtió cada presidente · Auditavisión | apartados.py | 81 | 0 | 19 | 38 | 6 |
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 41 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 32 | 0 | 1 | 1 | 1 |
-| `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 54 | 0 | 3 | 6 | 1 |
+| `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 57 | 0 | 3 | 6 | 1 |
 | `indice.html` | Índice general · Auditavisión | apartados.py | 230 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
