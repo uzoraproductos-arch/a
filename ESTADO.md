@@ -44,7 +44,9 @@ que necesita navegador.
 - **27-10-2026, sello 20261027m.** Imágenes, paso 5: las fotos de la Calculadora
   Cívica, Costo Ambiental, el Modo Inspector y el foróptero del Auditor Virtual se
   cambiaron por ilustraciones propias (SVG), con la misma idea de cada foto. Quedan
-  las 22 de las investigaciones y el encabezado de la portada.
+  el encabezado de la portada.
+- **27-10-2026.** Las 22 ilustraciones de las investigaciones (`showcase_*.jpg`,
+  generadas con IA en Antigravity) se quedan como están: decisión del autor.
 - **27-10-2026.** Pie de la portada: «Informes Individuales ASF», «Banxico: SIE» y
   «SHCP: Registro Público Único» ya llevan a su página de la Enciclopedia
   (`informes-cuenta-publica.html`, `radar-peso-maquina.html`, `numeros-las-32-entidades.html`).
