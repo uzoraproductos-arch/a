@@ -21,3 +21,6 @@ __pycache__/
 
 # Reporte local de la revisión semanal (en GitHub va al resumen de la ejecución)
 docs/SEMANAL.md
+
+# Capturas de revision sueltas en la raiz: no se publican
+/*.png

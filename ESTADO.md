@@ -47,6 +47,9 @@ que necesita navegador.
   el encabezado de la portada.
 - **27-10-2026.** Las 22 ilustraciones de las investigaciones (`showcase_*.jpg`,
   generadas con IA en Antigravity) se quedan como están: decisión del autor.
+- **27-10-2026.** Se borraron las 26 capturas de revisión que estaban sueltas en la
+  raíz (6.3 MB, públicas en Pages y ya desactualizadas); quedan en el historial, y
+  `.gitignore` ignora desde ahora los `*.png` de la raíz.
 - **27-10-2026.** Pie de la portada: «Informes Individuales ASF», «Banxico: SIE» y
   «SHCP: Registro Público Único» ya llevan a su página de la Enciclopedia
   (`informes-cuenta-publica.html`, `radar-peso-maquina.html`, `numeros-las-32-entidades.html`).
