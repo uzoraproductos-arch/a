@@ -633,6 +633,51 @@
   {
    "q": "¿Cuánto se paga de intereses de la deuda?",
    "ir": "herramienta-inspector-asf-catalogo.html"
+  },
+  {
+   "q": "Derecho de réplica",
+   "ir": "derecho-de-replica.html"
+  },
+  {
+   "q": "¿Cómo pido una réplica?",
+   "ir": "derecho-de-replica.html"
+  },
+  {
+   "q": "Me mencionaron en una columna y es falso",
+   "ir": "derecho-de-replica.html"
+  },
+  {
+   "q": "Quiero corregir lo que dicen de mí",
+   "ir": "derecho-de-replica.html"
+  },
+  {
+   "q": "¿Qué es el derecho de réplica?",
+   "ir": "glosario.html#Derecho-de-replica"
+  },
+  {
+   "q": "¿Qué megaobras hay en Sonora?",
+   "ir": "datos-ambiente-megaobras.html?e=SON#abMapaObras",
+   "dice": [
+    "Inversión privada"
+   ],
+   "no_dice": [
+    "3,977.5"
+   ]
+  },
+  {
+   "q": "Mapa ambiental de megaobras por estado",
+   "ir": "datos-ambiente-megaobras.html#abMapaObras",
+   "dice": [
+    "Gasto público registrado",
+    "$2,890.8 mdp"
+   ]
+  },
+  {
+   "q": "¿Cuánto costó la terminal de gas de Guaymas?",
+   "ir": "noticias-relevantes.html#col-guaymas-comodato-amigo-gnl",
+   "dice": [
+    "Es inversión privada, no gasto público"
+   ]
   }
  ]
 }

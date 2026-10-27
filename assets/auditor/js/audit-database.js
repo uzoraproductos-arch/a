@@ -7856,6 +7856,12 @@ window.AUDIT_DB = {
       "definicion": "El procedimiento con que la ASF, hasta las Cuentas Públicas de 2016, obligaba directamente a pagar el daño causado al erario. Lleva 4,787 casos y $3,069.1 millones recuperados. Hoy los daños se persiguen también con procedimientos de la Ley General de Responsabilidades Administrativas: 2,395, de las Cuentas Públicas 2016 a 2022.",
       "ley": "ASF, Informe sobre la situación que guardan las observaciones, recomendaciones y acciones promovidas, corte al 31 de marzo de 2026, pp. 30 y 560",
       "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Derecho de réplica",
+      "definicion": "El derecho de toda persona a que se publique su aclaración cuando un medio u otro emisor de información difunde sobre ella datos inexactos o falsos que le causan un agravio político, económico, en su honor, vida privada o imagen. Se pide por escrito en los 15 días hábiles siguientes a la publicación; el emisor tiene 3 días hábiles para resolver y la publica gratis y sin comentarios.",
+      "ley": "Arts. 2, fr. II, 4, 6, 10 y 11, Ley Reglamentaria del artículo 6o. constitucional en materia del Derecho de Réplica (última reforma DOF 14-11-2025)",
+      "categoria": "🔍 Fiscalización Superior"
     }
   ],
   "legislativo": {
@@ -9532,6 +9538,15 @@ window.AUDIT_DB = {
       "cita_apa": "Auditor\u00eda Superior de la Federaci\u00f3n. (2026). Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2025: primera entrega. ASF.",
       "url": "https://www.asf.gob.mx/Trans/Informes/IR2025a/index.html",
       "descripcion": "Primera entrega de la revisi\u00f3n de la Cuenta P\u00fablica 2025 (junio de 2026): 33 auditor\u00edas a la distribuci\u00f3n y pago de las participaciones federales, con su matriz de datos b\u00e1sicos."
+    },
+    {
+      "num": 156,
+      "id": "ref-ley-replica",
+      "categoria": "constitucional",
+      "categoria_nombre": "Constitución Política de los Estados Unidos Mexicanos",
+      "cita_apa": "Cámara de Diputados del H. Congreso de la Unión. (2025). Ley Reglamentaria del Artículo 6o., Párrafo Primero, de la Constitución Política de los Estados Unidos Mexicanos, en Materia del Derecho de Réplica. Diario Oficial de la Federación, 4 de noviembre de 2015; última reforma DOF 14-11-2025.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LRArt6_MDR.pdf",
+      "descripcion": "Quién puede pedir una réplica, en qué plazos, cómo se publica y cuándo se puede negar. La SCJN invalidó porciones de los arts. 3, 10 y 19 (DOF 24-04-2018). La aplica la página Derecho de réplica de Auditavisión."
     },
     {
       "num": 155,

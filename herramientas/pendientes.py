@@ -59,6 +59,11 @@ MEGAOBRAS_PAGS = [('herramienta-megaobras-tabla.html', 'Megaobras · En qué inv
 # base). Cada uno: id, tema, que falta, por que, responsable, enlace oficial,
 # texto del enlace, donde aparece.
 PROPIOS = [
+    ('replica-responsable', 'Transparencia de la plataforma', 'Responsable de recibir y resolver las solicitudes de réplica',
+     'La Ley de réplica (art. 7) pide tener siempre publicado en el portal el nombre completo del responsable, con domicilio, código postal, '
+     'entidad, correo y teléfono. Auditavisión todavía no lo designa, así que hoy no puede recibir un escrito de réplica.',
+     'Auditavisión: falta que el autor designe al responsable', 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LRArt6_MDR.pdf',
+     'Ley Reglamentaria del artículo 6o. constitucional en materia del Derecho de Réplica', [('derecho-de-replica.html', 'Derecho de réplica')]),
     ('pemex-deuda', 'Deuda', 'Cuánto debe Pemex: el saldo de su deuda financiera',
      'Pemex publica el saldo de su deuda en sus reportes trimestrales de resultados y en sus boletines, pero la plataforma todavía no lo ha cotejado ni integrado. '
      'Lo que sí tiene es lo que Pemex paga de intereses en 2026: $190,838.8 millones (Presupuesto de Egresos 2026, anexo 1.E).',

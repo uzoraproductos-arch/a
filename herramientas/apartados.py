@@ -1355,7 +1355,10 @@ PILARES_LISTA = [
      'cuenta: Costo Ambiental sigue las crisis ambientales y el presupuesto de quien las vigila.'),
     ('🔔', 'Seguimiento: el caso no se olvida',
      'Cada caso de Verificamos trae «Lo que sigue»: el voto, el informe, el contrato o la sentencia que falta. Puedes seguir un '
-     'caso y la plataforma te avisa cuando lo actualizamos con un documento nuevo.'),
+     'caso y la plataforma te avisa cuando lo actualizamos con un documento nuevo.'),    ('✉️', 'Quien es nombrado puede responder',
+     'Nombramos a funcionarios y a empresas porque un documento oficial los nombra; a las personas privadas, no. Si te aludimos con un '
+     'dato inexacto o falso, tu aclaración se publica gratis, íntegra y sin comentarios: es tu derecho de réplica, y si el error es nuestro, '
+     'además lo corregimos en la fe de erratas.'),
 ]
 
 LEY_PERIODISTAS = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LPPDDHP.pdf'
@@ -1418,6 +1421,101 @@ AVISO = {
     ],
 }
 
+# Derecho de réplica y reglas con la prensa y las personas privadas (Bloque 4
+# del plan v2, 27-10-2026). Cotejado contra la Ley Reglamentaria del artículo
+# 6o., párrafo primero, de la Constitución, en materia del Derecho de Réplica
+# (DOF 04-11-2015; última reforma DOF 14-11-2025; huella del PDF en la bóveda).
+# La SCJN invalidó porciones de los arts. 3, 10 y 19 (DOF 24-04-2018): aquí solo
+# se cita lo vigente. El responsable del art. 7 lo designa el autor: mientras
+# no esté, la página lo dice con su pendiente (replica-responsable).
+LEY_REPLICA = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LRArt6_MDR.pdf'
+REPLICA_FECHA = '27-10-2026'
+_RP_OF = '<span class="est-chip est-oficial">oficial</span>'
+_RP_PEND = '<span class="est-chip est-pendiente" data-pend="replica-responsable">pendiente</span>'
+REPLICA = {
+    'archivo': 'derecho-de-replica.html',
+    'menu': 'Derecho de réplica',
+    'menu_archivo': AUDITOR_VIRTUAL,
+    'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+    'icono': '✉️',
+    'titulo': 'Derecho de réplica',
+    'lema': 'Si te aludimos con un dato inexacto, tu aclaración se publica',
+    'entrada': ('Auditavisión nombra a funcionarios, a dependencias y a empresas que aparecen en documentos oficiales. Si una columna, una '
+                'ficha o una respuesta del Auditor dice de ti algo inexacto o falso que te causa un agravio, tienes derecho a que tu '
+                'aclaración se publique, gratis y sin comentarios. Así lo manda la <a href="%s" target="_blank" rel="noopener">Ley '
+                'Reglamentaria del artículo 6o. constitucional en materia del Derecho de Réplica (DOF 04-11-2015, última reforma '
+                'DOF 14-11-2025) ↗</a> %s. Vigente desde el %s.' % (LEY_REPLICA, _RP_OF, REPLICA_FECHA)),
+    'secciones': [
+        {'id': 'que', 'titulo': 'Qué es y por qué nos obliga', 'texto': 'Artículos 2, fracción II, y 4.', 'tarjetas': [],
+         'bloque': ('<p>La ley lo define como «el derecho de toda persona a que sean publicadas o difundidas las aclaraciones que resulten '
+                    'pertinentes, respecto de datos o informaciones transmitidas o publicadas por los sujetos obligados, relacionados con '
+                    'hechos que le aludan, que sean inexactos o falsos, cuya divulgación le cause un agravio ya sea político, económico, en '
+                    'su honor, vida privada y/o imagen» (art. 2, fr. II).</p>\n'
+                    '<p>Obliga a los medios de comunicación, a las agencias de noticias, a los productores independientes «y cualquier otro '
+                    'emisor de información responsable del contenido original» (art. 4). Auditavisión escribe sus propias columnas y '
+                    'respuestas, así que asume esa obligación. La crítica también está sujeta a réplica cuando se apoya en información '
+                    'falsa o inexacta (art. 5).</p>')},
+        {'id': 'quien', 'titulo': 'Quién puede pedirla', 'texto': 'Artículo 3.', 'tarjetas': [],
+         'bloque': ('<ul>\n<li><b>Toda persona</b> aludida por información inexacta o falsa que le cause un agravio.</li>\n'
+                    '<li>Si la persona falleció o no puede hacerlo por sí misma: su cónyuge, concubina o concubino, conviviente, o sus '
+                    'parientes en línea directa hasta el segundo grado. Si hay varios, la ejerce quien la pida primero.</li>\n'
+                    '<li><b>Las empresas y organizaciones</b>, por medio de su representante legal.</li>\n'
+                    '<li>Los partidos, precandidatos y candidatos registrados; en los periodos electorales, todos los días cuentan como hábiles.</li>\n</ul>')},
+        {'id': 'como', 'titulo': 'Cómo pedirla', 'texto': 'Artículos 7, 9 y 10.', 'tarjetas': [],
+         'bloque': ('<p>Tienes <b>15 días hábiles</b>, contados desde el día siguiente a la publicación, para presentar un escrito con '
+                    '(art. 10):</p>\n<ol>\n<li>Tu nombre.</li>\n<li>Un domicilio para recibir notificaciones.</li>\n'
+                    '<li>La página donde está la información: la dirección de la columna, la ficha o la pregunta que le hiciste al Auditor.</li>\n'
+                    '<li>Los hechos que quieres aclarar.</li>\n<li>Tu firma, o la de tu representante legal.</li>\n'
+                    '<li>El texto de tu aclaración.</li>\n</ol>\n'
+                    '<p>Va con copia de tu identificación oficial y, si alguien la pide por ti, del documento que acredita la representación '
+                    'o el parentesco.</p>\n'
+                    '<p class="sv-aviso"><span class="sz-et">Todavía no</span> La ley pide tener siempre publicado el nombre completo del '
+                    'responsable de recibir y resolver las réplicas, con su domicilio, código postal, entidad, correo y teléfono (art. 7). '
+                    'Auditavisión aún no lo designa %s: hasta entonces no podemos recibir tu escrito, y ese plazo de 15 días no debería '
+                    'correr en tu contra. Mientras tanto, si encuentras un dato mal, '
+                    '<a href="comunidad-error.html">arma tu aviso en «Un dato mal»</a> y guárdalo con su fecha.</p>') % _RP_PEND},
+        {'id': 'plazos', 'titulo': 'Qué hacemos con ella y en cuánto tiempo', 'texto': 'Artículos 6, 11 a 14.', 'tarjetas': [],
+         'bloque': ('<ul>\n<li><b>3 días hábiles</b> para decidir si procede (art. 11) y <b>3 más</b> para avisarte en el domicilio que diste (art. 12).</li>\n'
+                    '<li>Si procede, se publica <b>en la siguiente actualización</b> de la página que te aludió (art. 14): en una columna de '
+                    'Noticias relevantes, en su recuadro «✉️ Réplica», y cambiamos su fecha para que quien sigue el caso reciba el aviso.</li>\n'
+                    '<li><b>Gratis, íntegra y sin comentarios</b>, apostillas ni imágenes que la desnaturalicen (art. 6).</li>\n'
+                    '<li>Tu texto se limita a la información que la motiva: sin juicios de valor ni ataques a terceros, y no más largo que lo '
+                    'que te aludió, salvo acuerdo o resolución judicial (art. 13).</li>\n'
+                    '<li>Si tu aclaración trae un documento que muestra que nos equivocamos, además corregimos el dato y lo anotamos en la '
+                    '<a href="comunidad-erratas.html">fe de erratas</a>. Un dato equivocado no se sostiene por terquedad.</li>\n</ul>')},
+        {'id': 'negar', 'titulo': 'Cuándo se puede negar', 'texto': 'Artículo 19.', 'tarjetas': [],
+         'bloque': ('<p>La ley permite negar la publicación solo en estos casos, y siempre <b>justificando la decisión</b> por escrito, con sus pruebas:</p>\n'
+                    '<ul>\n<li>Si no se pidió en el plazo ni con los requisitos de la ley.</li>\n'
+                    '<li>Si no se limita a aclarar los datos inexactos o falsos que aluden a la persona y le causan agravio.</li>\n'
+                    '<li>Si la información ya se aclaró, con la misma relevancia que la que le dio origen.</li>\n'
+                    '<li>Si la réplica es sobre información oficial que emitió un servidor público y que difundimos citándola.</li>\n</ul>\n'
+                    '<p>Sobre ese último caso: casi todo lo que publica Auditavisión es información oficial, citada con su documento. Si el '
+                    'error está en el documento, la aclaración le toca a la dependencia que lo emitió; aun así, publicamos que la pediste y '
+                    'lo que dijo la dependencia, si responde.</p>\n'
+                    '<p class="pa-chico">La Suprema Corte invalidó otras dos causas para negarla, «cuando sea ofensiva o contraria a las leyes» y '
+                    '«cuando la persona no tenga interés jurídico» (acción de inconstitucionalidad publicada en el DOF el 24-04-2018).</p>')},
+        {'id': 'juez', 'titulo': 'Si no estás de acuerdo', 'texto': 'Artículos 21, 23 y 24.', 'tarjetas': [],
+         'bloque': ('<p>Puedes acudir al <b>Juez de Distrito</b> de tu domicilio (art. 21) dentro de los <b>5 días hábiles</b> siguientes a que '
+                    'te avisemos de nuestra decisión, a que debimos avisarte sin hacerlo, o a que debimos publicar tu réplica sin hacerlo '
+                    '(art. 24). Ese juicio no te quita el derecho de reclamar los daños por otra vía (art. 23).</p>')},
+        {'id': 'reglas', 'titulo': 'Nuestras reglas con la prensa y con las personas privadas', 'texto': 'Para que la réplica casi nunca haga falta.', 'tarjetas': [],
+         'bloque': ('<ul>\n'
+                    '<li><b>La nota de prensa es punto de partida, no fuente.</b> Citamos a la periodista o al periodista y a su medio, con su '
+                    'nombre y su enlace, y cotejamos cada afirmación contra el documento oficial. Lo que solo dice la prensa se marca «sin '
+                    'documento oficial»: no se afirma ni se niega. No copiamos notas enteras: las resumimos y llevamos a la original.</li>\n'
+                    '<li><b>A las personas privadas no se les nombra.</b> Familiares, apoderados, empleados de una empresa o testigos no aparecen '
+                    'con su nombre, aunque una nota los mencione. Solo se nombra a servidores públicos, a quienes buscan un cargo, a personas '
+                    'que una autoridad ya hizo públicas en un documento oficial (una sentencia, una lista del SAT, un comunicado de la UIF) y '
+                    'a las empresas que un documento oficial nombra.</li>\n'
+                    '<li><b>Las personas físicas que contratan con el gobierno no se publican</b>: su RFC es un dato personal. Tener contratos '
+                    'públicos no es una irregularidad, y así lo decimos en cada respuesta.</li>\n'
+                    '<li><b>Una acusación no es una condena.</b> Mientras no haya sentencia firme, toda persona se presume inocente '
+                    '(Constitución, art. 20, apartado B, fr. I), y lo escribimos junto a cada acusación.</li>\n'
+                    '<li><b>Las mismas reglas para todos los gobiernos y todos los partidos</b>, como dicen nuestros '
+                    '<a href="pilares.html">pilares</a>.</li>\n</ul>')},
+    ],
+}
+
 PILARES = {
     'archivo': 'pilares.html',
     'menu': 'Nuestros pilares',
@@ -1427,13 +1525,13 @@ PILARES = {
     'titulo': 'Nuestros pilares',
     'lema': 'El periodista virtual del gasto público',
     'estilos': ['pilares.css'],
-    'entrada': ('Auditavisión existe para seguir el dinero público y contarlo con documentos. Estos son los nueve pilares que sostienen '
+    'entrada': ('Auditavisión existe para seguir el dinero público y contarlo con documentos. Estos son los diez pilares que sostienen '
                 'cada página, cada respuesta del Auditor Virtual y cada dictamen. Ejercer el periodismo en México tiene riesgos que el '
                 'propio Estado reconoce: por eso existe, desde 2012, una ley para proteger a periodistas y a personas defensoras de '
                 'derechos humanos (<a href="%s" target="_blank" rel="noopener">Ley para la Protección de Personas Defensoras de Derechos '
                 'Humanos y Periodistas, DOF 25-06-2012 ↗</a>) %s.' % (LEY_PERIODISTAS, '<span class="est-chip est-oficial">oficial</span>')),
     'secciones': [
-        {'id': 'pilares', 'titulo': 'Los nueve pilares', 'texto': 'Lo que hacemos, y lo que nunca hacemos, con el dinero público y con la verdad.',
+        {'id': 'pilares', 'titulo': 'Los diez pilares', 'texto': 'Lo que hacemos, y lo que nunca hacemos, con el dinero público y con la verdad.',
          'tarjetas': [],
          'bloque': '<ol class="pil-lista">\n%s\n        </ol>' % '\n'.join(
              '          <li><span class="pil-ico" aria-hidden="true">%s</span><div><h3>%s</h3><p>%s</p></div></li>' % x for x in PILARES_LISTA)},
@@ -1445,6 +1543,7 @@ PILARES = {
              ('⏳', 'Registro de pendientes', 'Lo que falta publicar, por qué falta y a quién le toca.', 'pendientes.html', None, None),
              ('🌿', 'Crisis ambientales', 'Las crisis y los proyectos con costo ambiental, ficha por ficha.', 'herramienta-ambiente-crisis.html', None, None),
              ('📥', 'Descarga los datos', 'Las cifras de la plataforma, para que las revises por tu cuenta.', 'descarga-los-datos.html', None, None),
+             ('✉️', 'Derecho de réplica', 'Si te aludimos con un dato inexacto, cómo pedir que se publique tu aclaración.', 'derecho-de-replica.html', None, None),
          ]},
     ],
 }
@@ -5093,6 +5192,7 @@ def pagina(a, sello):
   <footer class="apartado-pie">
     <div class="apartado-ancho">
 {volver}      <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
+      <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
       <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
     </div>
   </footer>
@@ -5118,6 +5218,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('27-10-2026', 'Derecho de réplica: si una columna, una ficha o una respuesta del Auditor te alude con un dato inexacto o falso, tu aclaración se publica gratis, íntegra y sin comentarios, como manda la ley. La nueva página dice cómo pedirla, en qué plazos y nuestras reglas con la prensa y con las personas privadas. Es además el décimo de nuestros pilares.'),
     ('27-10-2026', 'El dictamen cambia de nombre: ahora es el «Dictamen cívico independiente». Dice lo mismo que antes: es el respaldo documental de una respuesta, no un peritaje ni un documento con validez ante una autoridad. También hay aviso de privacidad, al pie de cada página.'),
     ('26-10-2026', 'Auditoría en imágenes llega a 22 investigaciones. Se integran las 13 megaobras y rescates individuales (Agronitrogenados, Grupo Fertinal, Estela de Luz, Búnker de Seguridad, Refinería Bicentenario en Tula, Enciclomedia, FOBAPROA-IPAB y FARAC carretero, junto a Tren Maya, Dos Bocas, AIFA, Tren Interurbano y Megafarmacia), el panorama de Inversión y Megaobras en seis sexenios y cuatro investigaciones actuales: el presupuesto y los contratos bajo revisión en el INE, el proyecto de gas en Guaymas y la Gaceta Parlamentaria de Sonora, las compras de medicamentos y contratos del IMSS en ComprasMX, y la aprobación de la Ley de Ingresos 2027 con el techo de deuda y la nota BBB.'),
     ('26-10-2026', 'Contratos públicos: los 215 mil contratos que el gobierno federal y los gobiernos que usan ComprasMX reportaron en los expedientes de 2025 y 2026. Pregúntale al Auditor «contratos de Laboratorios Pisa» o «¿a quién le compra el IMSS?» y te dice cuántos contratos, por cuánto, cuánto fue por adjudicación directa y la liga de cada uno. Y cruzamos a todos los proveedores con la lista negra del SAT.'),
@@ -5503,7 +5604,7 @@ def generar(sello=None):
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     import datos_ambiente
-    for extra in [DICCIONARIO, NOTICIAS, PILARES, AVISO, contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, NOTICIAS, PILARES, AVISO, REPLICA, contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

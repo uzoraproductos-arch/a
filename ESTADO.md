@@ -5,7 +5,7 @@ historia completa de cada decisión en [CONTEXT.md](CONTEXT.md), que pasa de
 7,000 renglones: aquí va solo lo que necesitas para no repetir trabajo ni
 pisar el de otro. **Se actualiza en el mismo commit que cambia lo que dice.**
 
-Última actualización: 27-10-2026 · sello `20261027g` · rama `claude/funny-turing-imtm54`.
+Última actualización: 27-10-2026 · sello `20261027h` · rama `claude/funny-turing-imtm54`.
 
 ## Antes de empezar y antes de empujar
 
@@ -16,7 +16,7 @@ python3 herramientas/revision.py --base origin/claude/funny-turing-imtm54   # al
 
 `revision.py` corre lo que pide AGENTS.md §5: `node --check`, los CR sueltos,
 que el sello haya subido si tocaste `assets/`, el inventario (enlaces rotos y
-cotejos sin evidencia), las **149 preguntas de prueba del Auditor**, la guardia
+cotejos sin evidencia), las **157 preguntas de prueba del Auditor**, la guardia
 de legibilidad y, si tocaste `supabase/`, la base de datos. GitHub la corre sola
 en cada envío (`.github/workflows/revision.yml`). Con `--rapida` se salta lo
 que necesita navegador.
@@ -36,11 +36,16 @@ que necesita navegador.
 | 1 · Cambios pequeños (candado del sello, Guaymas, ASF-INE, HR Ratings, aviso de privacidad, dictamen, lista 69-B) | Hecho |
 | 2 · Base de datos y bóveda de evidencias | Construido; falta lo del autor (abajo) |
 | 3 · Operación | Hecho: revisión automática, preguntas de prueba, este ESTADO.md y revisión semanal. Falta una decisión: los PDF pesados (abajo) |
-| 4 · Regla de prensa, personas privadas y réplica; mapa ambiental con gasto público aparte | Por empezar |
+| 4 · Regla de prensa, personas privadas y réplica; mapa ambiental con gasto público aparte | Hecho (AGENTS.md §2 bis). Falta lo del autor: el responsable de las réplicas (abajo) |
 | 5 · Legibilidad en celular (`docs/ux/PLAN.md`), lanzamiento (`docs/LANZAMIENTO.md`) y fusión a `main` | Por empezar; `main` solo avanza con permiso del autor |
 
 ## Lo último que entró
 
+- **27-10-2026, sello 20261027h.** Bloque 4: `derecho-de-replica.html` (Ley de
+  réplica cotejada, décimo pilar, recuadro «✉️ Réplica» en las columnas) y el
+  mapa ambiental separa 🏛️ gasto público de 🏢 inversión privada. Al revisarlo
+  salieron cifras sin documento en el mapa (Guaymas $3,977.5 mdp; montos de la
+  ASF que no cuadraban con los expedientes): ya salen de los expedientes.
 - **27-10-2026, sello 20261027g.** Bloque 3: `revision.py`, `prueba_auditor.py`
   con 149 preguntas, `semanal.py` y los dos flujos de GitHub. Las preguntas
   destaparon siete respuestas mal dirigidas, ya corregidas (detalle en
@@ -65,6 +70,10 @@ que necesita navegador.
 - Llenar `FUNCIONES`, `TURNSTILE_SITIO` y `AVISO_CONSERVACION` en
   `herramientas/apartados.py`, y dar el nombre y el domicilio del responsable
   para el aviso de privacidad.
+- **Designar al responsable de las réplicas** (Ley de réplica, art. 7: nombre
+  completo, domicilio, código postal, entidad, correo y teléfono, siempre a la
+  vista). Puede ser la misma persona del aviso de privacidad. Mientras no esté,
+  la plataforma no puede recibir un escrito de réplica (`replica-responsable`).
 - Sacar los tokens de Banxico y del INEGI.
 - Correr `python3 herramientas/boveda.py` desde su computadora: varios
   portales de gobierno no abren desde las sesiones en la nube.

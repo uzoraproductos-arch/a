@@ -296,6 +296,8 @@
 
     var lenteM = 'obras';
     var tipoM = 'todas';
+    /* ¿Quién paga? (Bloque 4, 27-10-2026): gasto público o inversión privada. */
+    var pagaM = 'todas';
     var edoSel = 'TAB';
 
     try {
@@ -310,6 +312,10 @@
       var qTipo = (params.get('tipo') || '').toLowerCase();
       if (['todas', 'trenes', 'energia', 'aeropuertos', 'agua'].indexOf(qTipo) >= 0) {
         tipoM = qTipo;
+      }
+      var qPaga = (params.get('paga') || '').toLowerCase();
+      if (['todas', 'publico', 'privado'].indexOf(qPaga) >= 0) {
+        pagaM = qPaga;
       }
       var qLente = (params.get('lente') || '').toLowerCase();
       if (['obras', 'gasto', 'asf'].indexOf(qLente) >= 0) {
@@ -326,7 +332,7 @@
 
     function obrasFiltradas() {
       return obrasM.filter(function (o) {
-        return tipoM === 'todas' || o.tipo === tipoM;
+        return (tipoM === 'todas' || o.tipo === tipoM) && (pagaM === 'todas' || o.paga === pagaM);
       });
     }
 
@@ -363,18 +369,25 @@
         o.edos.forEach(function (a) { edosFil[a] = (edosFil[a] || 0) + 1; });
       });
       var numEdos = Object.keys(edosFil).length;
-      var sumInv = ofil.reduce(function (ac, o) { return ac + (o.realMdp || 0); }, 0);
+      /* Solo el gasto público se suma: la inversión privada no es dinero público. */
+      var sumInv = ofil.reduce(function (ac, o) { return ac + (o.paga === 'publico' ? (o.realMdp || 0) : 0); }, 0);
+      var nPriv = ofil.filter(function (o) { return o.paga === 'privado'; }).length;
       var sumAsf = ofil.reduce(function (ac, o) { return ac + (o.asfMdp || 0); }, 0);
 
       if ($('abKpiEdos')) $('abKpiEdos').textContent = numEdos + ' de 32';
       if ($('abKpiInv')) $('abKpiInv').textContent = '$' + n(sumInv, 1) + ' mdp';
       if ($('abKpiAsf')) $('abKpiAsf').textContent = '$' + n(sumAsf, 1) + ' mdp';
+      if ($('abKpiInvNota')) $('abKpiInvNota').textContent = 'Suma nacional de cada obra, sin prorratear entre estados. ' +
+        (nPriv ? 'No suma ' + (nPriv === 1 ? 'el proyecto' : 'los ' + nPriv + ' proyectos') + ' de inversión privada del filtro: no es dinero público.' : 'La inversión privada no se suma: no es dinero público.');
 
       mapaCaja.querySelectorAll('.ab-mapa-lentes .ab-op').forEach(function (b) {
         b.setAttribute('aria-pressed', b.getAttribute('data-lente') === lenteM ? 'true' : 'false');
       });
       mapaCaja.querySelectorAll('.ab-mapa-tipos .ab-op').forEach(function (b) {
         b.setAttribute('aria-pressed', b.getAttribute('data-tipo') === tipoM ? 'true' : 'false');
+      });
+      mapaCaja.querySelectorAll('.ab-mapa-paga .ab-op').forEach(function (b) {
+        b.setAttribute('aria-pressed', b.getAttribute('data-paga') === pagaM ? 'true' : 'false');
       });
 
       mapaCaja.querySelectorAll('.tt-edo').forEach(function (p) {
@@ -449,7 +462,12 @@
           var multiTxt = o.multi
             ? '<p class="ab-ficha-multi"><span aria-hidden="true">🧭</span> <b>Obra multiestatal (' + esc(o.edos.join(', ')) + '):</b> la inversión mostrada es el total nacional de la obra; Hacienda no publica cuánto se ejerció dentro de cada estado.</p>'
             : '';
-          var costoFila = o.realMdp != null
+          var paga = o.paga === 'privado'
+            ? '<p class="ab-ficha-paga ab-ficha-privado"><span aria-hidden="true">🏢</span> <b>Inversión privada.</b> ' + esc((o.pagaTxt || '').replace(/^Inversión privada: /, '')) + '</p>'
+            : '<p class="ab-ficha-paga"><span aria-hidden="true">🏛️</span> <b>Gasto público.</b> ' + esc((o.pagaTxt || '').replace(/^Gasto público: /, '')) + '</p>';
+          var costoFila = o.paga === 'privado'
+            ? '<div><dt>Inversión</dt><dd>' + chipPend(o.estReal, o.pendReal) + ' <small>Privada: no se suma al gasto público del mapa</small></dd></div>'
+            : o.realMdp != null
             ? '<div><dt>Inversión registrada</dt><dd><b class="ab-num">$' + n(o.realMdp, 1) + ' mdp</b> ' + chipPend(o.estReal, o.pendReal) +
               (o.sobrePct != null ? ' · <small>Sobrecosto: <b class="ab-num">' + (o.sobrePct >= 0 ? '+' : '') + n(o.sobrePct, 1) + ' %</b> ' + chip('derivado') + '</small>' : '') + '</dd></div>'
             : '<div><dt>Inversión y presupuesto</dt><dd>' + chipPend(o.estReal, o.pendReal) + ' <small>En revisión documental</small></dd></div>';
@@ -460,10 +478,11 @@
               '<div><h4 class="ab-ficha-otit">' + esc(o.nombre) + '</h4>' +
               '<p class="ab-ficha-osede">' + esc(o.sede) + ' · <span class="ab-ficha-tag">' + esc(o.tipoNom) + '</span></p></div>' +
             '</header>' +
+            paga +
             multiTxt +
             '<dl class="ab-ficha-odl">' +
               costoFila +
-              '<div><dt>Fiscalización ASF / Daños</dt><dd>' + esc(o.asfTxt) + (o.asfMdp > 0 ? ' ' + chip('oficial') : '') + '</dd></div>' +
+              '<div><dt>Fiscalización ASF / Daños</dt><dd>' + esc(o.asfTxt) + (o.asfMdp > 0 ? ' ' + chip(o.asfEst || 'oficial') : '') + '</dd></div>' +
               '<div class="ab-ficha-alerta"><dt><span aria-hidden="true">🚨</span> Alerta del Auditor Ambiental</dt>' +
                 '<dd><b>Ecosistema:</b> ' + esc(o.ecosistema) + '.<br>' + esc(o.alerta) + '</dd></div>' +
               '<div><dt>Permiso ambiental (MIA / ASEA)</dt><dd>' + chipPend(o.miaEst, o.miaPend) + ' <small>' + esc(o.miaTxt) + '</small></dd></div>' +
@@ -508,6 +527,15 @@
     mapaCaja.querySelectorAll('.ab-mapa-lentes .ab-op').forEach(function (b) {
       b.addEventListener('click', function () {
         lenteM = b.getAttribute('data-lente');
+        pintarMapa();
+      });
+    });
+
+    mapaCaja.querySelectorAll('.ab-mapa-paga .ab-op').forEach(function (b) {
+      b.addEventListener('click', function () {
+        pagaM = b.getAttribute('data-paga');
+        var ofil = obrasFiltradas();
+        if (ofil.length && !ofil.some(function (o) { return o.edos.indexOf(edoSel) >= 0; })) edoSel = ofil[0].edos[0];
         pintarMapa();
       });
     });

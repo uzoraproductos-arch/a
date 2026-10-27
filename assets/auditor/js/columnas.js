@@ -32,7 +32,11 @@
      revisar para seguir el dinero), con res: consta, matiz,
      no consta o pendiente. Un cotejo pendiente lleva quien y donde, y
      herramientas/pendientes.py lo anota en el Registro de pendientes
-     (id red-<columna>-<n>). */
+     (id red-<columna>-<n>).
+     Derecho de réplica (Bloque 4, 27-10-2026): si una persona o empresa aludida
+     pide aclarar un dato y procede, su texto va en replica[{quien, fecha, texto}]
+     y se publica íntegro, sin comentarios ni apostillas (Ley de réplica, art. 6).
+     Todas las columnas llevan al pie la liga para pedirla (derecho-de-replica.html). */
   var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
  {
@@ -2309,6 +2313,10 @@
         '<div class="col-fuentes"><b>📎 Documentos que la sostienen</b><ol>' + fuentes + '</ol>' +
           (c.actualizado ? '<p class="col-act">Verificado al ' + esc(c.actualizado) + '.</p>' : '') +
         '</div>' +
+        (c.replica && c.replica.length ? '<aside class="col-replica"><b>✉️ Réplica</b>' + c.replica.map(function (r) {
+          return '<p>' + esc(r.texto) + '</p><small>' + esc(r.quien) + ' · ' + esc(r.fecha) + '</small>';
+        }).join('') + '</aside>' : '') +
+        '<p class="col-replica-pie">¿Esta columna te alude con un dato inexacto o falso? <a href="derecho-de-replica.html">Ejerce tu derecho de réplica</a>: se publica gratis, íntegra y sin comentarios.</p>' +
         '<div class="col-acciones">' +
           btnSeguir(c) +
           '<button type="button" class="col-copiar" data-id="' + esc(c.id) + '">🔗 Copiar enlace a esta columna</button>' +

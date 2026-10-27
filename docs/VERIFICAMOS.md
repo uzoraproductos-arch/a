@@ -42,6 +42,22 @@ qué falta, con cada fuente, y el dictamen lo respalda.
    pregunta en el chat por el caso, por la persona y por la empresa, y el
    dictamen. Luego los criterios de terminado de AGENTS.md §5.
 
+## Prensa, personas privadas y derecho de réplica
+
+Reglas completas en AGENTS.md §2 bis y, para el lector, en
+`derecho-de-replica.html`. En corto:
+
+- **La nota de prensa se cita con nombre** (quién la firma, qué medio, enlace)
+  y nunca es fuente de una cifra. Lo que solo dice la prensa es `no consta`.
+- **No se nombra a particulares**, aunque la nota lo haga. Si hace falta
+  aludirlos, se dice su relación («un familiar», «un apoderado»).
+- **Si alguien pide réplica** y procede (Ley de réplica, arts. 10 a 14):
+  su texto va íntegro en el campo `replica` de la columna
+  (`[{quien, fecha, texto}]`), sin comentarios ni apostillas (art. 6); se
+  cambia `actualizado`, y si demuestra un error nuestro, se corrige la
+  columna y se anota en la fe de erratas. Si no procede, se le responde por
+  escrito con la causa del art. 19 que aplica.
+
 ## Dónde buscar (fuentes oficiales)
 
 | Qué | Dónde |

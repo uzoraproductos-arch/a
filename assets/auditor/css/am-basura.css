@@ -266,3 +266,6 @@
 @media (prefers-reduced-motion: reduce) {
   .ab-paso, .ab-riel-b, .ab-org-barra { transition: none; }
 }
+/* Quien paga (Bloque 4, 27-10-2026). */
+.ab-ficha-paga { margin: 6px 0 8px; padding: 6px 10px; border-left: 3px solid #2e8b57; background: #eef6f1; font-size: 16px; }
+.ab-ficha-paga.ab-ficha-privado { border-left-color: #8a5a1f; background: #f8f1e6; }

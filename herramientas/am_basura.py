@@ -110,7 +110,7 @@ OBRAS_MAPA = [
         'sede': 'Complejo Petroquímico Pajaritos, Coatzacoalcos, Veracruz',
         'presMdp': 7894.2, 'realMdp': 13698.3, 'sobrePct': 73.5,
         'estReal': 'derivado', 'pendReal': None,
-        'asfMdp': 0.0, 'asfTxt': 'Auditado por la ASF en la Cuenta Pública 2017 ($819 millones de dólares entre compra y rehabilitación)',
+        'asfMdp': 0.0, 'asfTxt': 'La ASF concluyó que Pemex compró la planta sin evaluar el estado de los bienes y que el proyecto pasó de 475 a 760 millones de dólares (Cuenta Pública 2015, auditoría 498).',
         'ecosistema': 'Corredor industrial y estuario del río Coatzacoalcos – Laguna de Pajaritos, Veracruz',
         'alerta': 'Planta química con 14 años fuera de operación al momento de su compra en 2014, con equipos corroídos y pasivos industriales en la zona petroquímica de Pajaritos.',
         'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
@@ -125,7 +125,7 @@ OBRAS_MAPA = [
         'sede': 'Lázaro Cárdenas, Michoacán y mina en San Juan de la Costa, Baja California Sur',
         'presMdp': 12532.0, 'realMdp': 13121.6, 'sobrePct': 4.7,
         'estReal': 'oficial', 'pendReal': None,
-        'asfMdp': 0.0, 'asfTxt': 'Auditado por la ASF en la Cuenta Pública 2017 ($635 millones de dólares pagados con deuda incluida)',
+        'asfMdp': 0.0, 'asfTxt': 'Pemex la compró con 635 millones de dólares de créditos y la ASF dictaminó que la compra «no es un negocio rentable» (Cuenta Pública 2016, auditoría 468).',
         'ecosistema': 'Estero del río Balsas en Lázaro Cárdenas (Michoacán) y litoral de la Bahía de La Paz (Baja California Sur)',
         'alerta': 'Acumulación histórica de fosfoyeso (yeso ácido) en pilas industriales en Lázaro Cárdenas y extracción minera de roca fosfórica frente al Golfo de California.',
         'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
@@ -142,7 +142,7 @@ OBRAS_MAPA = [
         'estReal': 'oficial', 'pendReal': None,
         'asfMdp': 1045.0, 'asfTxt': '$1,045.0 mdp por aclarar ante la ASF en Birmex (Cuenta Pública 2023)',
         'ecosistema': 'Zona industrial y cuenca hidrológica de Huehuetoca, Estado de México',
-        'alerta': 'Reconversión de bodegas logísticas para almacenamiento federal y cadena de frío de medicamentos; la ASF documentó observaciones por $1,045.0 mdp en Birmex.',
+        'alerta': 'Reconversión de bodegas logísticas para almacenamiento federal y cadena de frío de medicamentos; la ASF dejó observaciones por aclarar en Birmex (abajo, con su expediente).',
         'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
         'miaTxt': 'Dictámenes de impacto ambiental y manejo de residuos farmacéuticos (COFEPRIS / SEMARNAT)',
         'aud': 'auditoria-megafarmacia.html', 'ficha': 'herramienta-megaobras-sector.html#obra-megafarmacia',
@@ -155,7 +155,7 @@ OBRAS_MAPA = [
         'sede': 'Bosque de Chapultepec, Ciudad de México',
         'presMdp': 393.5, 'realMdp': 1304.9, 'sobrePct': 231.6,
         'estReal': 'oficial', 'pendReal': None,
-        'asfMdp': 0.0, 'asfTxt': 'Auditado por la ASF en la Cuenta Pública 2010–2011 con pliegos por acero, cuarzo y cimentación',
+        'asfMdp': 0.0, 'asfTxt': 'La ASF documentó $399.2 mdp de pagos improcedentes incluidos en su costo final (acero, precios extraordinarios y cuarzo) y presentó denuncias de hechos (informe especial 2009-2011).',
         'ecosistema': 'Entrada al Bosque de Chapultepec y Paseo de la Reforma, Ciudad de México',
         'alerta': 'Excavación profunda y cimentación al pie del Bosque de Chapultepec con un sobrecosto de +231.6 % frente al proyecto original.',
         'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
@@ -170,9 +170,9 @@ OBRAS_MAPA = [
         'sede': 'Tula de Allende, Atitalaquia y Tlaxcoapan, Hidalgo',
         'presMdp': 3714.0, 'realMdp': 1127.6, 'sobrePct': -69.6,
         'estReal': 'derivado', 'pendReal': None,
-        'asfMdp': 0.0, 'asfTxt': 'Más de $9,375.0 mdp de gasto hundido total (compra de 700 hectáreas, nivelación y deuda) para 0 % de refinería',
+        'asfMdp': 0.0, 'asfTxt': 'La ASF constató que la refinería no continuó: de $3,714.0 mdp autorizados a sus dos proyectos se ejercieron $1,127.6 mdp, y siete contratos se terminaron antes de tiempo (Cuenta Pública 2014, auditoría 315).',
         'ecosistema': 'Cuenca atmosférica e hidrológica de Tula – Valle del Mezquital, Hidalgo',
-        'alerta': '700 hectáreas desmontadas y cercadas en una de las cuencas con mayor carga de contaminantes atmosféricos y de aguas residuales del centro del país, sin construir la planta.',
+        'alerta': 'Un predio acondicionado para una refinería que no se construyó, en una de las cuencas con mayor carga de contaminantes atmosféricos y de aguas residuales del centro del país. La superficie desmontada y su estado actual no están en un documento oficial integrado.',
         'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
         'miaTxt': 'MIA del proyecto cancelado y estado ambiental actual del polígono de 700 hectáreas',
         'aud': 'auditoria-refineria-tula.html', 'ficha': 'herramienta-megaobras-sector.html#obra-refineria-tula',
@@ -185,9 +185,9 @@ OBRAS_MAPA = [
         'sede': 'Av. Constituyentes, Ciudad de México',
         'presMdp': 347.4, 'realMdp': 263.0, 'sobrePct': -24.3,
         'estReal': 'derivado', 'pendReal': 'obra-bunker-garcia-luna',
-        'asfMdp': 0.0, 'asfTxt': '$3,365.0 mdp de inversión total con equipamiento tecnológico según Cuenta Pública 2009',
+        'asfMdp': 0.0, 'asfTxt': 'La ASF observó $23.4 mdp pagados de más o sin soporte, y que la licencia de construcción y el resolutivo de impacto ambiental se obtuvieron después de iniciar la obra (Cuenta Pública 2009, auditoría 1053).',
         'ecosistema': 'Ladera poniente colindante con la Tercera Sección del Bosque de Chapultepec, CDMX',
-        'alerta': 'Construcción subterránea de tres niveles en la ladera de Constituyentes; su operación técnica y mantenimiento quedaron reservados por seguridad nacional.',
+        'alerta': 'Obra en la ladera de Constituyentes, junto a la Tercera Sección del Bosque de Chapultepec; la ASF observó que su resolutivo de impacto ambiental se obtuvo después de iniciar la obra.',
         'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
         'miaTxt': 'Manifestación de impacto ambiental de la obra subterránea en Constituyentes',
         'aud': 'auditoria-bunker-garcia-luna.html', 'ficha': 'herramienta-megaobras-sector.html#obra-bunker-garcia-luna',
@@ -202,7 +202,7 @@ OBRAS_MAPA = [
         'estReal': 'oficial', 'pendReal': None,
         'asfMdp': 1655.9, 'asfTxt': '$1,655.9 mdp acumulados por aclarar ante la ASF ($1,123.5 mdp en CP 2023 + $532.4 mdp en CP 2024)',
         'ecosistema': 'Cuenca del río San Juan, presa El Cuchillo y zona metropolitana de Monterrey, Nuevo León',
-        'alerta': 'Obra hidráulica de emergencia para trasvase de agua a Monterrey; la ASF observó $1,655.9 mdp por pagos en exceso, sobrecostos en tubería de acero y bombeo sin comprobar.',
+        'alerta': 'Obra hidráulica de emergencia para trasvase de agua a Monterrey; lo que la ASF dejó por aclarar va abajo, con su expediente.',
         'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
         'miaTxt': 'Exención o MIA de emergencia ante SEMARNAT y caudal ecológico de la cuenca del río San Juan',
         'aud': 'auditoria-presupuesto-ambiental.html', 'ficha': 'herramienta-ambiente-auditor.html',
@@ -213,11 +213,14 @@ OBRAS_MAPA = [
         'tipo': 'energia', 'tipoNom': 'Refinerías y energía',
         'edos': ['SON'], 'multi': False,
         'sede': 'Heroica Guaymas, Sonora',
-        'presMdp': 3977.5, 'realMdp': 3977.5, 'sobrePct': None,
-        'estReal': 'oficial', 'pendReal': 'red-guaymas-comodato-amigo-gnl-1',
-        'asfMdp': 0.0, 'asfTxt': '$3,977.5 mdp de modernización portuaria anunciada; punto de acuerdo en la Gaceta Parlamentaria del 14-04-2026',
+        'presMdp': None, 'realMdp': None, 'sobrePct': None,
+        'estReal': 'pendiente', 'pendReal': 'red-guaymas-comodato-amigo-gnl-1',
+        'paga': 'privado',
+        'al': ['amigo lng', 'amigo gnl', 'epcilon', 'gas de guaymas', 'terminal de gas', 'planta de gas', 'gas natural licuado'],
+        'pagaTxt': 'Inversión privada: la planta es de Epcilon LNG LLC, la empresa a la que el Departamento de Energía de EE. UU. autorizó exportar el gas (Orden 4629, 08-12-2020). Su monto no es gasto público y no está en un documento oficial. Lo público es el suelo: 41.7 hectáreas según la Secretaría de Energía (21-10-2026), prestadas en un comodato que no se ha publicado.',
+        'asfMdp': 0.0, 'asfTxt': 'Sin auditoría de la ASF: no es una obra pagada con dinero federal.',
         'ecosistema': 'Bahía de Guaymas y litoral del Golfo de California, Sonora',
-        'alerta': 'El Congreso de Sonora exhortó en diciembre de 2025 a la ASEA y a la SEMARNAT a agilizar permisos de una planta de gas natural licuado; el comodato y el resolutivo ambiental siguen sin publicarse.',
+        'alerta': 'Planta para licuar gas en la bahía, en un área que ya ocupan la industria, el cabotaje y la pesca (Secretaría de Energía); la obra está detenida por amparos, y el comodato del suelo y el resolutivo de impacto ambiental de la ASEA siguen sin publicarse.',
         'miaEst': 'pendiente', 'miaPend': 'red-guaymas-comodato-amigo-gnl-8',
         'miaTxt': 'Resolutivo de impacto ambiental de la ASEA y contrato de comodato portuario en Guaymas',
         'aud': 'auditoria-guaymas-gas.html', 'ficha': 'noticias-relevantes.html#col-guaymas-comodato-amigo-gnl',
@@ -254,6 +257,43 @@ OBRAS_MAPA = [
         'exp': 'herramienta-ambiente-crisis.html', 'expNom': 'Crisis ambientales: Agua en Jalisco',
     },
 ]
+
+# Quién paga y lo que dijo la ASF (Bloque 4 del plan v2, 27-10-2026). El mapa
+# separa el gasto público de la inversión privada: solo el gasto público se
+# suma en sus contadores. Y los montos «por aclarar» ya no se escriben a mano:
+# salen de los expedientes de la ASF de la plataforma (cada informe con su
+# huella), como suma derivada. El 27-10-2026 se encontró que los escritos a
+# mano el 26-10-2026 no coincidían con ningún documento (Tren Maya decía
+# $8,563.5 mdp y su expediente suma $785.3).
+EXPEDIENTE = {'tren-maya': 'tren-maya', 'dos-bocas': 'dos-bocas', 'tren-toluca': 'tren-toluca',
+              'aifa-texcoco': 'aifa', 'megafarmacia': 'birmex', 'cuchillo-ii': 'cuchillo-ii'}
+PAGA = {'publico': ('🏛️', 'Gasto público'), 'privado': ('🏢', 'Inversión privada')}
+
+
+def _con_expedientes():
+    ruta = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'audit-database.js')
+    s = open(ruta, encoding='utf-8').read()
+    exp = {c['id']: c for c in json.loads(s[s.index('{'):s.rindex('}') + 1])['expedientes']['fichas']}
+    for m in OBRAS_MAPA:
+        m.setdefault('paga', 'publico')
+        m.setdefault('pagaTxt', 'Gasto público: se paga con el presupuesto federal o con el de una empresa del Estado.')
+        c = exp.get(EXPEDIENTE.get(m['id']))
+        if not c:
+            continue
+        anios = sorted(c['anios'], key=lambda a: a['cp'])
+        tot = round(sum(a['porAclarar'] for a in anios) / 1e6, 1)
+        n_aud = sum(a['auditorias'] for a in anios)
+        cps = '%d a %d' % (anios[0]['cp'], anios[-1]['cp']) if len(anios) > 1 else str(anios[0]['cp'])
+        desg = '; '.join('CP %d: $%s' % (a['cp'], format(round(a['porAclarar'] / 1e6, 1), ',.1f')) for a in anios)
+        txt = ('$%s mdp por aclarar: suma de %s de su expediente de la ASF, %s %s (%s).'
+               % (format(tot, ',.1f'), 'la auditoría' if n_aud == 1 else 'las %d auditorías' % n_aud,
+                  'Cuentas Públicas' if len(anios) > 1 else 'Cuenta Pública', cps, desg))
+        if m['id'] == 'aifa-texcoco':
+            txt += ' Aparte, la ASF auditó $113,327.7 mdp en la cancelación de Texcoco.'
+        m['asfMdp'], m['asfEst'], m['asfTxt'] = tot, 'derivado', txt
+
+
+_con_expedientes()
 
 
 def esc(t):
@@ -556,7 +596,7 @@ def construir(base, ref):
     } for e in base.get('estados', [])]
     edos_nom = {e['a']: e['n'] for e in edos_base}
     edos_con_obra = sorted({a for m in OBRAS_MAPA for a in m['edos']}, key=lambda k: edos_nom.get(k, k))
-    inv_obras_fis = sum(m['realMdp'] for m in OBRAS_MAPA if m.get('realMdp') and m['id'] in obras)
+    inv_obras_fis = sum(m['realMdp'] for m in OBRAS_MAPA if m.get('realMdp') and m['paga'] == 'publico')
     asf_obras_tot = sum(m['asfMdp'] for m in OBRAS_MAPA if m.get('asfMdp'))
 
     botones_edos = []
@@ -633,16 +673,24 @@ def construir(base, ref):
             <button type="button" class="ab-op" data-tipo="agua" aria-pressed="false"><span aria-hidden="true">💧</span> Agua y desastres (3)</button>
           </div>
         </div>
+        <div>
+          <p class="ab-mapa-et">3. ¿Quién paga?</p>
+          <div class="ab-grupo ab-mapa-paga" role="group" aria-label="Quién paga">
+            <button type="button" class="ab-op" data-paga="todas" aria-pressed="true"><span aria-hidden="true">⚖️</span> Todo (%(n_todos)d)</button>
+            <button type="button" class="ab-op" data-paga="publico" aria-pressed="false"><span aria-hidden="true">🏛️</span> Gasto público (%(n_pub)d)</button>
+            <button type="button" class="ab-op" data-paga="privado" aria-pressed="false"><span aria-hidden="true">🏢</span> Inversión privada (%(n_priv)d)</button>
+          </div>
+        </div>
       </div>
 
       <div class="ab-datos ab-mapa-kpis" id="abMapaKpis">
         <div class="ab-dato"><strong class="ab-num" id="abKpiEdos">%(n_edos)d de 32</strong><span class="ab-dato-r">entidades con megaobras o alertas en este filtro %(chip_d)s</span><small>Toca un estado en el mapa para ver qué obras cruzan su territorio</small></div>
-        <div class="ab-dato"><strong class="ab-num" id="abKpiInv">%(inv_fis)s</strong><span class="ab-dato-r">inversión registrada en las megaobras del filtro %(chip_d)s</span><small>Suma nacional de cada obra sin prorratear entre estados</small></div>
-        <div class="ab-dato ab-dato-rojo"><strong class="ab-num" id="abKpiAsf">%(asf_tot)s</strong><span class="ab-dato-r">por aclarar ante la ASF en estas obras %(chip_d)s</span><small>Adicional a los $113,327.7 mdp auditados en la cancelación de Texcoco</small></div>
+        <div class="ab-dato"><strong class="ab-num" id="abKpiInv">%(inv_fis)s</strong><span class="ab-dato-r">gasto público registrado en los proyectos del filtro %(chip_d)s</span><small id="abKpiInvNota">Suma nacional de cada obra, sin prorratear entre estados. La inversión privada no se suma: no es dinero público.</small></div>
+        <div class="ab-dato ab-dato-rojo"><strong class="ab-num" id="abKpiAsf">%(asf_tot)s</strong><span class="ab-dato-r">por aclarar ante la ASF en estas obras %(chip_d)s</span><small>Suma de los informes de sus expedientes de la ASF. Aparte, $113,327.7 mdp auditados en la cancelación de Texcoco</small></div>
         <div class="ab-dato"><strong class="ab-num">0 de 11</strong><span class="ab-dato-r">permisos ambientales (MIA) integrados %(chip_p0)s</span><small>SEMARNAT y ASEA · Toca el chip pendiente para ver la ficha del registro</small></div>
       </div>
 
-      <p class="ab-nota" id="abMapaQue">Los estados en verde concentran las megaobras físicas, refinerías, complejos industriales y crisis de agua o reconstrucción registrados en la plataforma. En obras que cruzan varios estados (como el Tren Maya o el Tren México–Toluca), se muestra el costo total de la obra con la advertencia de que Hacienda no publica cuánto se ejerció dentro de cada entidad.</p>
+      <p class="ab-nota" id="abMapaQue">Los estados en verde concentran las megaobras físicas, refinerías, complejos industriales y crisis de agua o reconstrucción registrados en la plataforma. En obras que cruzan varios estados (como el Tren Maya o el Tren México–Toluca), se muestra el costo total de la obra con la advertencia de que Hacienda no publica cuánto se ejerció dentro de cada entidad. Cada ficha dice quién paga: 🏛️ gasto público (el presupuesto federal o el de una empresa del Estado) o 🏢 inversión privada, que tiene costo ambiental pero no se paga con impuestos.</p>
 
       <div class="ab-mapa-rej">
         <figure class="ab-mapa-fig">
@@ -675,6 +723,8 @@ def construir(base, ref):
         'pend0': esc(A['pendientes'][0]) if A.get('pendientes') else '',
         'n_edos': len(edos_con_obra),
         'inv_fis': '$' + format(inv_obras_fis, ',.1f') + ' mdp',
+        'n_todos': len(OBRAS_MAPA), 'n_pub': sum(1 for m in OBRAS_MAPA if m['paga'] == 'publico'),
+        'n_priv': sum(1 for m in OBRAS_MAPA if m['paga'] == 'privado'),
         'asf_tot': '$' + format(asf_obras_tot, ',.1f') + ' mdp',
         'opciones_sel': opciones_sel,
         'svg': mapa_svg(RAIZ),

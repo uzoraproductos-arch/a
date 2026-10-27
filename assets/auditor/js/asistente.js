@@ -1363,7 +1363,7 @@
       if (os.length) {
         h += '<p>🚨 <b>' + os.length + (os.length === 1 ? ' megaobra o caso con alerta ambiental' : ' megaobras y casos con alerta ambiental') + ' en ' + esc(ed.n) + ':</b></p><ul class="pa-lista">' +
           os.map(function (c) {
-            var costo = c.realMdp != null ? ' · Inversión registrada: <b>' + fmtMdp(c.realMdp) + '</b> ' + chip({ e: c.estReal, p: c.pendReal }) + (c.multi ? ' <i>(total nacional en ' + c.edos.join(', ') + ')</i>' : '') : '';
+            var costo = c.paga === 'privado' ? ' · 🏢 <b>Inversión privada</b>: no es gasto público ' + chip({ e: c.estReal, p: c.pendReal }) : c.realMdp != null ? ' · 🏛️ Gasto público registrado: <b>' + fmtMdp(c.realMdp) + '</b> ' + chip({ e: c.estReal, p: c.pendReal }) + (c.multi ? ' <i>(total nacional en ' + c.edos.join(', ') + ')</i>' : '') : '';
             return '<li><span aria-hidden="true">' + esc(c.ico) + '</span> <b>' + esc(c.nombre) + '</b> (' + esc(c.sede) + ')' + costo + '.<br>' +
               '🌱 <b>Alerta ambiental (' + esc(c.ecosistema) + '):</b> ' + esc(c.alerta) + ' · Permiso: ' + chip({ e: c.miaEst, p: c.miaPend }) + ' <a href="' + esc(c.aud) + '">Ver su Auditoría en imágenes ➔</a></li>';
           }).join('') + '</ul>';
@@ -1397,20 +1397,23 @@
     var edosSet = {};
     lista.forEach(function (c) { (c.edos || []).forEach(function (a) { edosSet[a] = 1; }); });
     var nEdos = Object.keys(edosSet).length;
-    var sumInv = lista.reduce(function (ac, c) { return ac + (c.realMdp || 0); }, 0);
+    /* Solo el gasto público se suma (Bloque 4, 27-10-2026). */
+    var sumInv = lista.reduce(function (ac, c) { return ac + (c.paga === 'privado' ? 0 : (c.realMdp || 0)); }, 0);
+    var nPriv = lista.filter(function (c) { return c.paga === 'privado'; }).length;
     var sumAsf = lista.reduce(function (ac, c) { return ac + (c.asfMdp || 0); }, 0);
     var urlMapa = 'datos-ambiente-megaobras.html' + (tipo ? '?tipo=' + tipo : '') + '#abMapaObras';
 
     var h = '<p>🗺️ <b>Mapa ambiental de megaobras e infraestructura por estado</b> (' + esc(tipoTit) + '): concentra <b>' + lista.length + ' obras y casos</b> en <b>' + nEdos + ' de las 32 entidades</b> ' + chip({ e: 'derivado' }) + '.</p>' +
       '<ul class="pa-lista">' +
-      '<li>💰 <b>Inversión registrada en estas obras:</b> <b>' + fmtMdp(sumInv) + '</b> ' + chip({ e: 'derivado' }) + ' (suma nacional sin prorratear entre estados).</li>' +
+      '<li>💰 <b>Gasto público registrado en estas obras:</b> <b>' + fmtMdp(sumInv) + '</b> ' + chip({ e: 'derivado' }) + ' (suma nacional sin prorratear entre estados' +
+        (nPriv ? '; no incluye ' + (nPriv === 1 ? 'el proyecto' : 'los ' + nPriv + ' proyectos') + ' de inversión privada, que no es dinero público' : '') + ').</li>' +
       '<li>🔍 <b>Por aclarar ante la ASF en estas obras:</b> <b>' + fmtMdp(sumAsf) + '</b> ' + chip({ e: 'derivado' }) + ' (más $113,327.7 mdp auditados en la cancelación de Texcoco).</li>' +
       '<li>⏳ <b>Permisos ambientales (MIA) integrados:</b> <b>0 de 11 obras de construcción</b> ' + chip({ e: 'pendiente', p: 'ambiente-0' }) + ' (SEMARNAT y ASEA).</li>' +
       '</ul>' +
       '<p><b>Dónde están y qué alerta ambiental tienen:</b></p><ul class="pa-lista">' +
       lista.slice(0, 8).map(function (c) {
         return '<li><span aria-hidden="true">' + esc(c.ico) + '</span> <b>' + esc(c.nombre) + '</b> (' + esc(c.edos.join(', ')) + '): ' +
-          (c.realMdp != null ? '<b>' + fmtMdp(c.realMdp) + '</b> ' + chip({ e: c.estReal, p: c.pendReal }) + ' · ' : '') +
+          (c.paga === 'privado' ? '🏢 <b>inversión privada</b> · ' : c.realMdp != null ? '<b>' + fmtMdp(c.realMdp) + '</b> ' + chip({ e: c.estReal, p: c.pendReal }) + ' · ' : '') +
           '🌱 <i>' + esc(c.ecosistema) + '</i>. <a href="datos-ambiente-megaobras.html?e=' + encodeURIComponent(c.edos[0]) + '#abMapaObras">Ver en mapa ➔</a></li>';
       }).join('') + '</ul>' +
       '<p class="pa-chico">Toca <b>«Saber más»</b> para abrir el mapa interactivo en la Enciclopedia (Medio ambiente › La huella de las megaobras), con tres lentes: Megaobras y alerta ambiental, Gasto federalizado 2026 (Ramos 28 y 33) y Por aclarar ante la ASF.</p>';
@@ -1490,6 +1493,19 @@
       if (defin && obs[0].resc) return null;
       if (obs.length > 1) return respDuelo(obs[0], obs[1]);
       return respObra(obs[0], foco, MO_SIM.test(p));
+    }
+    /* 2 a. Un proyecto de inversión privada del mapa ambiental («¿cuánto costó la
+       terminal de gas de Guaymas?»): no es gasto público y se dice (Bloque 4). */
+    var priv = (MO.casosAmb || []).filter(function (c) { return c.paga === 'privado' && (c.al || []).some(function (a) { return p.indexOf(' ' + a + ' ') >= 0; }); })[0];
+    if (priv && !defin) {
+      var urlP = 'datos-ambiente-megaobras.html?e=' + encodeURIComponent(priv.edos[0]) + '&paga=privado#abMapaObras';
+      return {
+        html: '<p>' + priv.ico + ' <b>' + esc(priv.nombre) + '</b> (' + esc(priv.sede) + ')</p>' +
+          '<p>🏢 <b>Es inversión privada, no gasto público</b> ' + chip({ e: priv.estReal, p: priv.pendReal }) + '. ' + esc(priv.pagaTxt.replace(/^Inversión privada: /, '')) + '</p>' +
+          '<p>🌱 <b>Alerta ambiental:</b> ' + esc(priv.alerta) + '</p>',
+        ir: [priv.ficha || urlP, 'lo que verificamos del caso'], rec: [{ x: { ico: '🗺️', v: 'Ver en el mapa ambiental', n: 'Con los proyectos privados', ir: urlP } }],
+        sug: ['¿Es cierto que prestaron 54 hectáreas en Guaymas?', 'Mapa ambiental de megaobras por estado']
+      };
     }
     /* 2 bis. El costo de una obra que no sigue la herramienta («¿cuánto costó el
        Tren Interoceánico?»): se dice que no está, en vez de contestar con otra obra. */
@@ -1707,6 +1723,14 @@
     if (/ (falta|faltan) (por )?(transparentar|publicar)| no (han )?(transparentado|publicado) | datos pendientes /.test(p) && !/ ambient| crisis /.test(p)) {
       var f = F.filter(function (x) { return x.ir && x.ir[0] === 'pendientes.html'; })[0];
       if (f && charla) { var r = charla.deFicha(f); r.sug = ['¿Qué no dice el informe semestral?', '¿Cuánto dejó por aclarar la ASF?']; return r; }
+    }
+    /* Quien fue aludido y quiere aclarar: la página del derecho de réplica, no
+       la columna que comparte sus palabras (Bloque 4, 27-10-2026). «¿Qué es…?»
+       lo sigue contestando el glosario. */
+    if (!/^ que es /.test(p) && (/ (replica|rectificacion|rectificar) /.test(p) || / (corregir|aclarar|desmentir|responder) (lo|algo) (que )?(dicen|dijeron|publicaron|publican|escribieron) (de|sobre) mi /.test(p) ||
+        / me (aludieron|aluden|mencionaron|mencionan|nombraron|nombran|exhibieron) /.test(p))) {
+      var fr = F.filter(function (x) { return x.ir && x.ir[0] === 'derecho-de-replica.html'; })[0];
+      if (fr && charla) { var rr = charla.deFicha(fr); rr.sug = ['¿Qué es el derecho de réplica?', 'Fe de erratas']; return rr; }
     }
     /* La deuda de Pemex no la tiene la plataforma: se dice, con su pendiente,
        en vez de contestar con su presupuesto (27-10-2026). */

@@ -129,6 +129,13 @@
 .col-sigue ul { margin: 6px 0 0; padding-left: 20px; font-size: 15px; }
 .col-sigue li { margin-bottom: 6px; }
 .col-sigue a { color: #1f4f8a; }
+/* Derecho de réplica (Bloque 4, 27-10-2026). */
+.col-replica { border-left: 3px solid #1f4f8a; background: #eef3f9; padding: 10px 14px; margin: 0 0 14px; break-inside: avoid; }
+.col-replica b { font: 700 12px 'Inter', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
+.col-replica p { margin: 6px 0 2px; font-size: 16px; }
+.col-replica small { color: #555; }
+.col-replica-pie { font-size: 16px; margin: 0 0 14px; color: #444; }
+.col-replica-pie a { color: #1f4f8a; }
 .col-dato { background: #fbf3d9; border-top: 3px solid var(--col-tinta); padding: 10px 14px; margin: 4px 0 14px; }
 .col-dato b { font: 700 12px 'Inter', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
 .col-dato p { margin: 6px 0 0; font-size: 15.5px; }

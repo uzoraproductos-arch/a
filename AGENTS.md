@@ -51,7 +51,7 @@ el documento oficial (§2) y entra a su página de Auditavisión y al bot
 ### 0 ter. Los pilares: el periodista virtual del gasto público
 
 **Decisión del autor, 26-10-2026.** Auditavisión es el periodista virtual que
-sigue el gasto público. Sus nueve pilares están dichos al lector en
+sigue el gasto público. Sus diez pilares están dichos al lector en
 `pilares.html` (`PILARES_LISTA` de `herramientas/apartados.py`) y valen para
 todo cambio: que la verdad sea incómoda no la vuelve falsa; evidencia con
 folio; contrapeso, no propaganda (las mismas reglas para todos los gobiernos);
@@ -170,6 +170,33 @@ Esto es una plataforma de fiscalización del gasto público:
 
 Si te piden una cifra que no puedes sostener, dilo y déjala pendiente. Es la
 respuesta correcta en este proyecto.
+
+### 2 bis. Prensa, personas privadas y derecho de réplica
+
+**Bloque 4 del plan v2, 27-10-2026.** Cotejado contra la Ley Reglamentaria del
+artículo 6o. constitucional en materia del Derecho de Réplica (DOF 04-11-2015,
+última reforma DOF 14-11-2025). Lo explica al lector `derecho-de-replica.html`
+(`REPLICA` de `herramientas/apartados.py`), y es el décimo pilar.
+
+- **La nota de prensa es punto de partida, no fuente.** Se cita a la persona
+  que la firma y a su medio, con enlace; cada afirmación se coteja contra el
+  documento oficial (`docs/VERIFICAMOS.md`). No se copian notas enteras.
+- **A las personas privadas no se les nombra**: familiares, apoderados,
+  empleados, testigos. Solo servidores públicos, quienes buscan un cargo,
+  quienes una autoridad ya hizo públicos en un documento oficial y las
+  empresas que un documento oficial nombra. Las personas físicas con
+  contratos no se publican.
+- **Una acusación no es una condena** (Constitución, art. 20, B, fr. I): se
+  dice junto a cada acusación.
+- **La réplica se publica** en la misma columna, en su campo `replica`
+  (`columnas.js`), íntegra y sin comentarios (art. 6), y se cambia su
+  `actualizado` para que quien sigue el caso reciba el aviso. Plazos: 3 días
+  hábiles para resolver y 3 para notificar (arts. 11 y 12); si se niega, por
+  escrito y con una causa del art. 19. Si la réplica prueba un error nuestro,
+  además va a la fe de erratas.
+- **Falta designar al responsable** que pide el art. 7 (nombre, domicilio,
+  correo y teléfono, siempre a la vista): pendiente `replica-responsable`, a
+  cargo del autor.
 
 ---
 
@@ -429,6 +456,14 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   `asistente.py`), pero su página debe aceptar lo que el lector trae por la
   dirección (`?q=`, `?liga=`, `?verifica=`, `#ente=`) y su intención se
   agrega en `inspector()` de `asistente.js`.
+- **El mapa ambiental separa quién paga** (Bloque 4, 27-10-2026):
+  cada proyecto de `OBRAS_MAPA` (`herramientas/am_basura.py`) lleva `paga`
+  (`publico` o `privado`) y su porqué en `pagaTxt`; **solo el gasto público
+  se suma** en los contadores del mapa y del chat, y la inversión privada se
+  dice con su nombre, sin monto si no hay documento. Los montos «por aclarar»
+  ante la ASF **no se escriben a mano**: salen de los expedientes
+  (`EXPEDIENTE` del mismo módulo) como suma derivada. Un proyecto privado que
+  la gente nombra de otro modo lleva sus frases en `al`.
 - **Inversión y Megaobras vive también en el chat** (24-10-2026): cada obra,
   cada presidente, los rankings y las cuatro cifras los contesta
   `megaobras()` de `asistente.js` con lo que escribe
