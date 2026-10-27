@@ -128,14 +128,33 @@ conecta los botones «Enviar», «Lo que aún no sé» y «Búscalo en internet�
 - **Transparencia Presupuestaria y el DOF** no están en `portales`: publican
   archivos de datos abiertos, no una API de consulta. Entran por la fase 4
   (GitHub Actions semanal que descarga, regenera y abre un PR).
-- **La página todavía no llama a las funciones**: no hay proyecto ni
-  dirección. Los formularios siguen armando el texto y «Lo que aún no sé»
-  sigue en el navegador hasta que se configure.
+- **La página ya sabe llamar a las funciones (27-10-2026), pero está apagada**:
+  no hay proyecto. Al crearlo se llenan tres renglones de
+  `herramientas/apartados.py`: `FUNCIONES` (la dirección de las funciones),
+  `TURNSTILE_SITIO` (la llave **pública** del antispam) y
+  `AVISO_CONSERVACION` (cuánto tiempo se guardan los envíos; sin él la
+  generación se detiene, porque el aviso de privacidad debe cambiar antes del
+  primer dato). Entonces los formularios de «Cuéntanos lo que viste» mandan su
+  texto y devuelven folio, «Lo que aún no sé» llega a `preguntas_bot`, y si el
+  servidor falla, el texto se queda en pantalla para copiarlo. Falta el
+  formulario de Servicios (`servicios.js`), que tiene su propio envío.
 - **La IA no se probó contra la API real**: falta la llave. El candado de
   cifras y el filtro de enlaces de `buscar-web` sí están probados sin red.
 - **La lista de prensa es editorial**: la escogió el agente como punto de
   partida (diarios nacionales con hemeroteca en línea); el autor la confirma
   o la cambia en `_comun/web.ts`.
+
+## Respaldos (27-10-2026)
+
+```bash
+python herramientas/respaldo_base.py C:\respaldos-auditavision            # completo, llave de servicio
+python herramientas/respaldo_base.py C:\respaldos-auditavision --publico  # solo lo público
+```
+
+Baja cada tabla a CSV con un manifiesto de huellas SHA-256. El completo trae
+correos: va fuera del repositorio (el script se niega a guardarlo dentro) y
+se guarda cifrado. Si una migración agrega una tabla y no se suma a `TABLAS`,
+el respaldo se detiene. Conviene correrlo cada semana.
 
 Para comprobar la base en cualquier momento:
 
