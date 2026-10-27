@@ -938,7 +938,7 @@
   }
 
   function cabecera(ente, nivelTxt, sub) {
-    return (BANDA ? '<div class="ie-ft-banda"><img src="' + esc(BANDA) + '" alt=""></div>' : '') +
+    return '<div class="ie-ft-banda" aria-hidden="true">' + (BANDA ? '<img src="' + esc(BANDA) + '" alt="">' : '') + '</div>' +
       '<header class="ie-ft-cab">' +
       '<div class="ie-ft-marca"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="104" height="81" decoding="sync"><div><b>Auditavisión</b><small>El gasto público, a la vista</small></div></div>' +
       '<div class="ie-ft-tit"><span class="ie-ft-tipo">Ficha técnica · ' + nivelTxt + '</span>' +

@@ -1054,6 +1054,11 @@ menos»: lo que importa es separar lo gráfico al frente y lo informativo atrás
   y fuera la marca de agua de la esquina:
   `assets/auditor/img/encabezado-estado-de-cuenta.jpg` (736 × 240). Va en los
   42 documentos.
+  **Retirada el 27-10-2026** a pedido del autor: en su lugar va una franja de
+  color genérico (degradado azul marino #071d47 → #2c579f con la raya celeste
+  #4f9be8), en los estados de cuenta (`.ex-banda`) y en las fichas técnicas del
+  Auditor de entes (`.ie-ft-banda`). Si algún día vuelve a existir
+  `encabezado-estado-de-cuenta.*`, la imagen se pinta encima de la franja.
 - **Anverso, lo gráfico:** encabezado, el **termostato** (una rueda con un gajo
   por indicador o señal y su color, sin sumar en nota global, y un medidor por
   indicador de peor a mejor en tres tercios con la marca donde cae la cifra; en

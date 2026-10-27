@@ -34,7 +34,9 @@
 .ex-doc-espera { display: grid; place-items: center; min-height: 220px; border: 2px dashed #c9d3e6; border-radius: 10px; background: #f7f9fc; }
 .ex-espera { margin: 0; padding: 20px; text-align: center; color: #33415c; font-size: 15px; line-height: 1.6; }
 .ex-espera span { display: block; font-size: 40px; margin-bottom: 6px; }
-.ex-banda { margin: -26px -28px 18px; overflow: hidden; background: #0b2a63; }
+/* Sin foto (27-10-2026): la franja es de color, azul marino con la raya celeste. */
+.ex-banda { margin: -26px -28px 18px; overflow: hidden; background: linear-gradient(90deg, #071d47 0%, #0b2a63 38%, #2c579f 100%); border-bottom: 4px solid #4f9be8; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.ex-banda:empty { height: 56px; }
 .ex-banda img { display: block; width: 100%; height: 190px; object-fit: cover; object-position: 50% 62%; }
 .ex-doc-cab { display: grid; grid-template-columns: auto 1fr auto; gap: 22px; align-items: center; padding: 6px 0 18px; border-bottom: 3px solid #0b2a63; }
 .ex-marca { display: flex; gap: 12px; align-items: center; }
@@ -182,6 +184,7 @@
 @media (max-width: 720px) {
   .ex-cara { padding: 18px 14px 12px; }
   .ex-banda { margin: -18px -14px 14px; }
+  .ex-banda:empty { height: 40px; }
   .ex-banda img { height: 120px; }
   .ex-doc-cab { grid-template-columns: 1fr; gap: 12px; }
   .ex-marca img { width: 84px; }
@@ -209,6 +212,7 @@
 .ex-print .ex-cara::before { content: none; }
 .ex-print .ex-reverso { break-before: page; padding-top: 6px; }
 .ex-print .ex-banda { margin: 0 0 10px; }
+.ex-print .ex-banda:empty { height: 10mm; }
 .ex-print .ex-banda img { height: 28mm; }
 .ex-print .ex-doc-cab { grid-template-columns: auto 1fr auto; padding: 2px 0 10px; }
 .ex-print .ex-doc-tit h3 { font-size: 21px; }
