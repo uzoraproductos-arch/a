@@ -1710,6 +1710,47 @@ def servicios():
 # envian nada mientras CANAL_COMUNIDAD este vacio (se abre con el dominio,
 # igual que CANAL_SOLICITUD). Cada pagina lleva al pie «¿Viste un error?».
 CANAL_COMUNIDAD = ''
+# La base de datos (paso 2.7 del plan v2, 27-10-2026). Cuando el autor cree el
+# proyecto de Supabase, FUNCIONES lleva la dirección de sus funciones
+# (https://TU-PROYECTO.supabase.co/functions/v1) y TURNSTILE_SITIO la llave
+# PÚBLICA del antispam de Cloudflare (la secreta va solo en Supabase). Vacías,
+# nada se envía: el texto se arma en el navegador, como hasta hoy. Antes de
+# llenarlas, AVISO_CONSERVACION debe decir cuánto tiempo se guardan los envíos:
+# el aviso de privacidad cambia ANTES de recabar el primer dato, o la
+# generación se detiene.
+FUNCIONES = ''
+TURNSTILE_SITIO = ''
+AVISO_CONSERVACION = ''
+
+if FUNCIONES:
+    # Con el envío encendido, el aviso dice qué se guarda (tabla envios de la
+    # migración 20261024000001) y por cuánto tiempo, o no se genera nada.
+    if len(AVISO_CONSERVACION.strip()) < 10:
+        raise SystemExit('apartados.py: FUNCIONES está lleno pero AVISO_CONSERVACION no: el aviso de privacidad '
+                         'debe decir cuánto se guardan los envíos antes de recabar el primer dato')
+    def _cambia(txt, viejo, nuevo):
+        if viejo not in txt:  # si alguien reescribe el aviso, este parche no puede fallar en silencio
+            raise SystemExit('apartados.py: el aviso de privacidad cambió; actualiza el texto del envío encendido')
+        return txt.replace(viejo, nuevo)
+    for _sec in AVISO['secciones']:
+        if _sec['id'] == 'cambios':
+            _sec['bloque'] = ('<p>El envío de formularios ya está conectado y este aviso lo describe arriba. Si algún día se guarda '
+                              'algo más, este aviso lo dirá antes, y la fecha de arriba cambiará.</p>')
+        if _sec['id'] == 'datos':
+            _sec['bloque'] = _cambia(_sec['bloque'], '<b>Ninguno en un servidor nuestro.</b> ', '<b>Solo lo que tú envías.</b> ')
+            _sec['bloque'] = _cambia(_sec['bloque'],
+                'No hay registro, ni cuentas, ni herramientas de analítica, ni cookies propias. '
+                'Los formularios (algo raro con el dinero público, un dato mal, un tema para investigar) arman el texto en tu pantalla '
+                'para que tú lo copies o lo descargues: no se envían solos.',
+                'No hay registro, ni cuentas, ni herramientas de analítica, ni cookies propias. Los formularios (algo raro con el dinero '
+                'público, un dato mal, un tema para investigar) arman el texto en tu pantalla; <b>solo si pulsas «Enviar»</b> llega a '
+                'nuestra base de datos (Supabase), con: el tipo de mensaje, el asunto, el texto que escribiste, la página desde donde lo '
+                'mandaste, el enlace al documento que citaste, tu correo <b>solo si lo escribes y aceptas este aviso</b>, y una huella '
+                'cifrada de tu conexión (no tu dirección IP) para frenar el spam. Para qué: atender tu reporte, corregir el dato o '
+                'investigar el tema, y responderte. ' + AVISO_CONSERVACION.strip())
+    AVISO['entrada'] = _cambia(AVISO['entrada'], 'y hoy ningún dato tuyo sale de tu navegador',
+                                                'y solo lo que tú decides enviar sale de tu navegador')
+    AVISO['lema'] = 'Qué sabemos de ti: solo lo que tú nos mandas'
 
 # Fe de erratas: correcciones reales, documentadas en CONTEXT.md. Politica
 # de independencia, compromiso «De que respondemos»: se corrige en publico
@@ -1747,9 +1788,13 @@ def _campo_cm(i, et, ctl, ayuda=''):
             % (i, et, ctl, ('<small>%s</small>' % ayuda) if ayuda else ''))
 
 
-def _form_cm(id_, asunto, campos, boton):
+def _form_cm(id_, asunto, campos, boton, tipo=''):
+    envio = ''
+    if FUNCIONES and tipo:
+        envio = ' data-funcion="%s/recibir-formulario" data-tipo="%s"%s' % (
+            esc_attr(FUNCIONES.rstrip('/')), tipo, (' data-turnstile="%s"' % esc_attr(TURNSTILE_SITIO)) if TURNSTILE_SITIO else '')
     return '\n'.join([
-        '<form class="sv-form cm-form" id="%s" data-canal="%s" data-asunto="%s" novalidate>' % (id_, esc_attr(CANAL_COMUNIDAD), esc_attr(asunto)),
+        '<form class="sv-form cm-form" id="%s" data-canal="%s" data-asunto="%s"%s novalidate>' % (id_, esc_attr(CANAL_COMUNIDAD), esc_attr(asunto), envio),
         '\n'.join(campos),
         '          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">%s</button>'
         '<button type="reset" class="sz-btn">Empezar de nuevo</button></div>' % boton,
@@ -1765,14 +1810,22 @@ def formas(pre):
     ob = ' <span class="sv-req">obligatorio</span>'
     privado = ('          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. '
                'Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>')
+    if FUNCIONES:
+        privado = ('          <p class="sv-privado">🔒 Primero ves el texto tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar». '
+                   'Puedes firmar con seudónimo; el correo es opcional, solo sirve para responderte y se guarda únicamente si aceptas el '
+                   '<a href="aviso-de-privacidad.html">aviso de privacidad</a>.</p>')
 
     def c(sufijo, et, ctl, ayuda=''):
         i = pre + sufijo
         return _campo_cm(i, et, ctl.replace('{id}', i), ayuda)
 
     def firma(p):
-        return [c(p + 'Firma', 'Firma o seudónimo', '<input id="{id}" type="text" maxlength="80">'),
-                c(p + 'Correo', 'Correo (opcional)', '<input id="{id}" type="email" maxlength="160">')]
+        campos = [c(p + 'Firma', 'Firma o seudónimo', '<input id="{id}" type="text" maxlength="80">'),
+                  c(p + 'Correo', 'Correo (opcional)', '<input id="{id}" type="email" maxlength="160">')]
+        if FUNCIONES:
+            campos.append('            <label class="sv-check"><input type="checkbox" id="%sAcepta" data-acepta> Acepto el '
+                          '<a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi correo</label>' % (pre + p))
+        return campos
     reporte = _form_cm(pre + 'Reporte', 'Reporte ciudadano', [privado,
         '          <p class="sv-privado pt-aviso">⚠️ No escribas datos bancarios, documentos de identidad ni información de terceros que pueda ponerlos en riesgo.</p>',
         c('RepQue', 'Qué fue' + ob, '<select id="{id}" required><option value="">Elige una opción</option>'
@@ -1789,7 +1842,7 @@ def formas(pre):
           'Si lo sabes: Ramo 33, FISMDF, FORTAMUN, recurso estatal o propio del municipio.'),
         c('RepPrueba', 'Con qué prueba', '<input id="{id}" type="text" maxlength="300">',
           'Una foto con fecha, un número de contrato, una factura, un acta de entrega.'),
-        ] + firma('Rep'), 'Revisar mi reporte')
+        ] + firma('Rep'), 'Revisar mi reporte', 'reporte')
     tema = _form_cm(pre + 'Tema', 'Propuesta de tema', [privado,
         c('TemaQue', 'Tema' + ob, '<input id="{id}" type="text" maxlength="160" required>',
           'Por ejemplo: las compras de un hospital, una obra de tu municipio, un fideicomiso.'),
@@ -1797,7 +1850,7 @@ def formas(pre):
         c('TemaDonde', 'Entidad o municipio', '<input id="{id}" type="text" maxlength="120">'),
         c('TemaDocs', 'Documentos oficiales que conozcas', '<textarea id="{id}" rows="2" maxlength="800"></textarea>',
           'Ligas a la Auditoría Superior, Compranet, el DOF o Transparencia. Si no tienes, no pasa nada.'),
-        ] + firma('Tema'), 'Revisar mi propuesta')
+        ] + firma('Tema'), 'Revisar mi propuesta', 'tema')
     error = _form_cm(pre + 'Error', 'Señalamiento de error', [privado,
         c('ErrPagina', 'Página' + ob, '<input id="{id}" class="cm-pagina" type="text" maxlength="200" required>',
           'Si abriste esto desde una página, ya está escrita.'),
@@ -1805,7 +1858,7 @@ def formas(pre):
         c('ErrDice', 'Qué dice el documento oficial' + ob, '<textarea id="{id}" rows="2" maxlength="800" required></textarea>'),
         c('ErrFuente', 'Enlace al documento' + ob, '<input id="{id}" type="url" maxlength="400" required placeholder="https://">',
           'Sin documento no podemos corregir: es la misma regla que seguimos nosotros.'),
-        ] + firma('Err'), 'Revisar mi señalamiento')
+        ] + firma('Err'), 'Revisar mi señalamiento', 'errata')
     return {'reporta': reporte, 'tema': tema, 'error': error}
 
 
