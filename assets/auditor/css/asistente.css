@@ -281,6 +281,19 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .leg-tabla td { text-align: right; font-variant-numeric: tabular-nums; }
 .leg-tabla tfoot th, .leg-tabla tfoot td { font-weight: 800; border-bottom: 0; }
 .leg-fuentes { font-size: 16px; }
+/* Informe especial «Documentar para sancionar» (27-10-2026): tablas de texto. */
+.san-tabla { max-width: 860px; }
+.san-tabla td { text-align: left; font-variant-numeric: normal; }
+.san-tabla th[scope="row"] { vertical-align: top; min-width: 9em; }
+.san-tabla .pa-lista { margin: 0; }
+.san-rubro { margin: 22px 0 10px; font-size: 19px; color: #0b2a63; }
+.san-matriz { padding: 0 16px 14px; }
+@media (max-width: 640px) {
+  .san-tabla, .san-tabla tbody, .san-tabla tr, .san-tabla th, .san-tabla td { display: block; width: 100%; }
+  .san-tabla thead { display: none; }
+  .san-tabla th[scope="row"] { min-width: 0; border-bottom: 0; padding-bottom: 0; color: #0b2a63; }
+  .san-matriz { padding: 0 10px 12px; }
+}
 .leg-mas a, .leg-pregunta a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; }
 
 /* ===== Rediseño del Auditor Virtual (24-10-2026, pedido del autor) =====

@@ -361,6 +361,14 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   pestaña Datos (`datos-poder-legislativo.html`, `datos-poder-judicial.html`),
   una página por grupo de temas, armadas con el mismo texto del bot
   (`PAGINAS` de cada módulo).
+  Los informes especiales de la ASF, por `herramientas/informe_sancion.py`
+  (27-10-2026: «Documentar para sancionar», cotejado contra la LGRA y la
+  LFRCF vigentes): su página es la tarjeta «Informe especial» de Informes
+  oficiales (`informes-documentar-para-sancionar.html`) y el chat lo lee como
+  `D.san`. Sus 20 matrices viven en `docs/informes/documentar-para-sancionar.json`;
+  **un tipo de irregularidad que la gente diga de otro modo necesita su frase
+  en `FAMILIAS`**. Un documento de doctrina o una guía oficial es metodología:
+  se explica en sencillo con su página, no se copia entero.
 - **Responde como chat:** claro, corto y contundente, con la cifra, qué
   quiere decir y su fuente a la vista. Cada respuesta con datos lleva
   **«Saber más»**, que abre la página de la plataforma donde está la

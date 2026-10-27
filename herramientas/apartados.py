@@ -148,16 +148,21 @@ DATOS_PARTES = [
        'Los 2,479 municipios con sus ingresos, predial, participaciones y fondos del Ramo 33, en CSV.',
        'Los municipios del país con sus ingresos, predial, participaciones y aportaciones, según las Estadísticas de Finanzas '
        'Públicas Estatales y Municipales del INEGI. Descárgala completa o consulta un estado aquí mismo.')]),
-    ('informes', 'informes-oficiales.html', '📑', 'Informes oficiales', 'Cuenta Pública y diccionario',
-     'Lo que revisó la Auditoría Superior de la Federación en la Cuenta Pública y qué contiene cada archivo de datos de la '
-     'plataforma. Cada tarjeta abre su propia página.',
+    ('informes', 'informes-oficiales.html', '📑', 'Informes oficiales', 'Cuenta Pública, diccionario e informe especial',
+     'Lo que revisó la Auditoría Superior de la Federación en la Cuenta Pública, qué contiene cada archivo de datos de la '
+     'plataforma y la guía de la ASF para que una irregularidad termine en sanción. Cada tarjeta abre su propia página.',
      [('asf', 'informes-cuenta-publica.html', '🔎', 'Informes de la Cuenta Pública (ASF)',
        'Qué revisó la Auditoría Superior en 2024, cuánto quedó por aclarar en tu estado y cuándo sale la siguiente entrega.',
        'Qué revisó la Auditoría Superior de la Federación en la Cuenta Pública 2024, cuánto quedó por aclarar en tu estado '
        'y cuándo sale la siguiente entrega. Cada cifra, con su informe.'),
       ('diccionario', 'informes-diccionario.html', '📋', 'Diccionario de Datos',
        'Qué contiene cada archivo de datos de la plataforma, campo por campo.',
-       'Qué contiene cada archivo de datos de la plataforma, columna por columna. Cada base se descarga con el botón de su renglón.')]),
+       'Qué contiene cada archivo de datos de la plataforma, columna por columna. Cada base se descarga con el botón de su renglón.'),
+      # Informe especial de la ASF (pedido del autor, 27-10-2026): lo arma
+      # informe_sancion.py, con el mismo texto con que contesta el bot.
+      ('especial', 'informes-documentar-para-sancionar.html', '⚖️', 'Informe especial: Documentar para sancionar',
+       'La guía de la ASF para que una irregularidad termine en sanción: la cadena, los cuatro elementos de la prueba y las 20 matrices.',
+       None)]),
 ]
 # Anclas viejas de descarga-los-datos.html: la pestana y cada #ficha-<id>.
 DATOS_ANCLAS = dict([(d[0], d[1]) for d in DATOS_PARTES] +
@@ -178,6 +183,17 @@ def datos_paginas():
                            'tarjetas': [(f[2], f[3], f[4], f[1], None, None) for f in fichas_]}],
         })
         for fid, archivo, fico, fnombre, ffrase, fentrada in fichas_:
+            if fid == 'especial':
+                import informe_sancion as isan
+                paginas.append({
+                    'archivo': archivo, 'menu': fnombre, 'menu_archivo': 'descarga-los-datos.html',
+                    'padre': ('descarga-los-datos.html', 'Datos'), 'padre2': (portada, nombre),
+                    'icono': fico, 'titulo': fnombre, 'lema': nombre, 'entrada': isan.ENTRADA,
+                    'estilos': ['asistente.css'],
+                    'pie_extra': partes_nav(nombre, portada, ico, partes, archivo),
+                    'secciones': isan.secciones(),
+                })
+                continue
             paginas.append({
                 'archivo': archivo, 'menu': fnombre, 'menu_archivo': 'descarga-los-datos.html',
                 'padre': ('descarga-los-datos.html', 'Datos'), 'padre2': (portada, nombre),
@@ -536,7 +552,7 @@ APARTADOS = [
             {
                 'id': 'informes',
                 'pagina': 'informes-oficiales.html',
-                'pestana': ('📑', 'Informes oficiales', 'Cuenta Pública y diccionario: abre su página'),
+                'pestana': ('📑', 'Informes oficiales', 'Cuenta Pública, diccionario e informe especial: abre su página'),
             },
             {
                 # Cuarta tarjeta de Datos desde el 22-10-2026 (pedido del

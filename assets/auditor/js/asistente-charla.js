@@ -1036,6 +1036,31 @@
       return null;
     }
 
+    /* ---------- «Documentar para sancionar», el informe especial de la ASF (27-10-2026) ---------- */
+    var SAN = D.san || null;
+    var SAN_FAM = SAN ? Object.keys(SAN.fam).map(function (k) { return [k, new RegExp(SAN.fam[k])]; }) : [];
+    function sanTema(k) {
+      var x = SAN.t[k];
+      return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug };
+    }
+    function sanResp(t) {
+      if (!SAN) return null;
+      if (/documentar para sancionar|informe especial de la asf|guia de la asf/.test(t)) return sanTema('informe');
+      /* Un tipo de irregularidad, solo si se pregunta por la sanción o la prueba. */
+      if (/sancion|sancionar|castig|responsab|expediente|que documentos|como (lo |la )?(pruebo|pruebas|demuestro|probar)|falta administrativa|denunci|es ilegal|es delito|que pasa si|matriz/.test(t)) {
+        for (var i = 0; i < SAN_FAM.length; i++) if (SAN_FAM[i][1].test(t)) return sanTema('fam_' + SAN_FAM[i][0]);
+      }
+      if (/(elementos?|que (tiene|debe|deben|necesita|necesitan) (que )?probar|que se necesita para).*(sancion|sancionar|expediente|responsab|asf)|elemento (personal|conductual|circunstancial|finalidad)/.test(t)) return sanTema('elementos');
+      if (/(por que|porque).*(nadie|no|pocos|casi nunca).*(sancion|castig|carcel|pisa)|impunidad/.test(t) && /asf|auditor|funcionari|servidor|corrupc|desvio|observa/.test(t)) return sanTema('diagnostico');
+      if (/(que|cuales) sanciones|(lo|los|la|las|le|les) (pueden )?(sancionar|castigar|inhabilitar)|inhabilitacion|destitucion|sancion economica/.test(t)) return sanTema('sanciones');
+      if ((/(que|cuanto) (pasa|sigue|tarda)|despues de/.test(t) && /asf|auditoria|observa|pliego|no solvent/.test(t)) ||
+          /de la (irregularidad|auditoria|observacion) a la sancion|como se sanciona|quien sanciona|autoridad (investigadora|substanciadora|sustanciadora|resolutora)/.test(t) ||
+          (/prescrib|caducidad/.test(t) && /sancion|falta|responsab/.test(t))) return sanTema('cadena');
+      if (/que es (el |un |la )?(desvio de recursos|abuso de funciones|desacato|uso indebido de recursos)|(cuales|que) son las faltas (administrativas )?graves|tipos de faltas/.test(t)) return sanTema('conductas');
+      if (/tipos? de irregularidad|matrices de la asf|(que|cuales) irregularidades (detecta|encuentra|revisa)/.test(t)) return sanTema('matrices');
+      return null;
+    }
+
     /* ---------- El Poder Judicial de la Federación (23-10-2026) ---------- */
     var JUD = D.jud || null;
     function judTema(k, antes) {
@@ -1212,6 +1237,9 @@
 
       /* El Poder Legislativo y las elecciones: curules, sesiones, fechas y reformas. */
       /* El Poder Judicial: la Corte, los circuitos, la elección, el amparo. */
+      /* «Documentar para sancionar»: de la irregularidad a la sanción. */
+      var rs = sanResp(t);
+      if (rs) return fin(rs, { tipo: 'san' });
       var rj = judResp(t);
       if (rj) return fin(rj, { tipo: 'jud' });
       if (LEG && sigue && ctx.tipo === 'legcong' && es.length === 1 && !DINERO.test(t)) return fin(congresoLocal(es[0]), { tipo: 'legcong' });

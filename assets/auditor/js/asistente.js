@@ -698,6 +698,8 @@
     var p = plano(q);
     if (!CMX_RE.test(p) || SAT_PAL.test(p) || /^ (que|q) (es|son|significa)\b/.test(p)) return null;
     var rfcs = (q.match(RFC_RE) || []).map(function (x) { return x.toUpperCase(); });
+    /* «¿Qué pasa si no le cobran la pena al contratista?» no busca a una empresa: lo contesta «Documentar para sancionar». */
+    if (!rfcs.length && /\b(penas?|multas?|sancion\w*|incumpl\w*|no cumplio|clausulas?|pruebo|que documentos)\b/.test(p)) return null;
     var nombre = p.trim().split(' ').filter(function (w) { return w.length > 1 && CMX_FUERA.indexOf(w) < 0; }).join(' ');
     if (rfcs.length && rfcs[0].length === 13) {
       return { html: '<p>🔒 <code>' + esc(rfcs[0]) + '</code> es el RFC de una <b>persona física</b>. La plataforma no publica a las personas físicas que le venden al gobierno: su RFC es un dato personal. Solo cuentan en los totales de cada institución.</p>' +

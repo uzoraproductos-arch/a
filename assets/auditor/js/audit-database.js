@@ -7814,6 +7814,30 @@ window.AUDIT_DB = {
       "definicion": "Introducir mercancías al país, o sacarlas, sin pagar total o parcialmente sus contribuciones, sin el permiso que se requiera o cuando están prohibidas. La ley presume contrabando, entre otros casos, cuando se trasladan hidrocarburos sin la factura electrónica con Complemento Carta Porte. Se castiga con prisión de tres meses a cinco años, o de tres a nueve cuando lo omitido rebasa $1,815,560.",
       "ley": "Código Fiscal de la Federación, arts. 102, 103 (fracción XXIII) y 104",
       "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Autoridad investigadora",
+      "definicion": "La que investiga una posible falta administrativa: en la Secretaría Anticorrupción, en un órgano interno de control, en la ASF o en los fiscalizadores de los estados. Recibe el expediente de la auditoría y, si encuentra mérito, redacta el Informe de Presunta Responsabilidad Administrativa.",
+      "ley": "Art. 3, frs. II a IV, Ley General de Responsabilidades Administrativas (última reforma DOF 15-12-2025) · ASF, «Documentar para sancionar», julio de 2026, pp. 65 y 66",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Autoridad substanciadora",
+      "definicion": "La que conduce el procedimiento de responsabilidad desde que admite el Informe de Presunta Responsabilidad Administrativa hasta que termina la audiencia inicial, donde el presunto responsable declara y ofrece sus pruebas. Nunca puede ser la misma que investigó.",
+      "ley": "Art. 3, frs. II a IV, Ley General de Responsabilidades Administrativas (última reforma DOF 15-12-2025) · ASF, «Documentar para sancionar», julio de 2026, p. 66",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Autoridad resolutora",
+      "definicion": "La que decide si hay responsabilidad y qué sanción corresponde. En las faltas no graves es la unidad de responsabilidades del órgano interno de control; en las graves y en las de particulares, el tribunal competente (en lo federal, el Tribunal Federal de Justicia Administrativa).",
+      "ley": "Art. 3, frs. II a IV, Ley General de Responsabilidades Administrativas (última reforma DOF 15-12-2025) · ASF, «Documentar para sancionar», julio de 2026, p. 67",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Elementos de la irregularidad (personal, conductual, circunstancial y finalidad)",
+      "definicion": "Lo que, según la ASF, debe probar todo expediente para que una irregularidad termine en sanción: quién fue (personal), qué norma o contrato violó (conductual), cuándo, dónde y cómo ocurrió (circunstancial) y a dónde fue el dinero y cuánto se afectó (finalidad). Si falta uno, el caso se puede caer aunque la irregularidad sea cierta.",
+      "ley": "ASF, «Documentar para sancionar», julio de 2026, pp. 13 a 16",
+      "categoria": "🔍 Fiscalización Superior"
     }
   ],
   "legislativo": {
@@ -9490,6 +9514,15 @@ window.AUDIT_DB = {
       "cita_apa": "Auditor\u00eda Superior de la Federaci\u00f3n. (2026). Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2025: primera entrega. ASF.",
       "url": "https://www.asf.gob.mx/Trans/Informes/IR2025a/index.html",
       "descripcion": "Primera entrega de la revisi\u00f3n de la Cuenta P\u00fablica 2025 (junio de 2026): 33 auditor\u00edas a la distribuci\u00f3n y pago de las participaciones federales, con su matriz de datos b\u00e1sicos."
+    },
+    {
+      "num": 154,
+      "id": "ref-asf-documentar",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalización Superior y Auditoría",
+      "cita_apa": "Auditoría Superior de la Federación. (2026). Documentar para sancionar: de la irregularidad a la sanción (1.ª ed.). ASF.",
+      "url": "https://www.asf.gob.mx/Trans/Informes/Ir2025a/Documentos/Informes_Especiales/Documentar.pdf",
+      "descripcion": "Informe especial de la primera entrega de la Cuenta Pública 2025. Explica la cadena de la auditoría a la sanción, los cuatro elementos que debe probar un expediente y trae 20 matrices de documentos por tipo de irregularidad, hechas con lo observado en las Cuentas Públicas 2023 y 2024. Lo explica la página Informe especial de Informes oficiales."
     },
     {
       "num": 82,

@@ -296,6 +296,7 @@ PAGINA_K = {
     'donaciones.html': ' apoyar apoyo sostener sostenerla donar donativo aportar ayudar plataforma pase civico auditor',
     'servicios.html': ' contratar contrato medida servicio servicios investigacion encargo cotizacion suscripcion creditos sostener plataforma',
     'comunidad.html': ' participa participar reportar denunciar error corregir proponer tema',
+    'informes-documentar-para-sancionar.html': ' sancion sancionar sanciones castigo impunidad responsabilidad administrativa falta grave desvio abuso de funciones desacato ipra expediente matrices irregularidad',
     'aviso-de-privacidad.html': ' privacidad datos personales mis datos guardan guardas cookies rastreo analitica borrar derechos arco',
 }
 
@@ -461,9 +462,13 @@ def _charla(d):
     # El Poder Judicial (23-10-2026), cotejado contra la Constitución, los
     # acuerdos del INE, el Manual de remuneraciones y el PEF 2026.
     import asistente_judicial
+    # «Documentar para sancionar», el informe especial de la ASF (27-10-2026):
+    # de la irregularidad a la sanción, cotejado con la LGRA y la LFRCF.
+    import informe_sancion
     return {'nota': nota, 'met': met, 'edo': edo, 'cargos': cargos, 'smin': smin, 'adm': adm, 'admet': admet, 'expide': EXPIDE,
             'mapa': 'numeros-mapa-del-gasto-federalizado.html', 'num': num, 'datos': asistente_datos.datos(d, num, D),
-            'leg': asistente_legislativo.legislativo(), 'jud': asistente_judicial.judicial(d)}
+            'leg': asistente_legislativo.legislativo(), 'jud': asistente_judicial.judicial(d),
+            'san': informe_sancion.bot()}
 
 
 def _inspector():

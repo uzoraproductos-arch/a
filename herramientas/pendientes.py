@@ -158,6 +158,14 @@ PROPIOS = [
      'Las cifras que circulan («$15,434 millones en 13 fideicomisos») no aparecen en el decreto, y la plataforma aún no ha cotejado el informe oficial del entero.',
      PLATAFORMA, 'https://www.gob.mx/tesofe', 'Tesorería de la Federación',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-presupuesto.html', 'Datos · Poder Judicial · El presupuesto')]),
+    # «Documentar para sancionar», el informe especial de la ASF (27-10-2026).
+    ('asf-sanciones-efectividad', 'Fiscalización', 'Cuántas observaciones de la ASF terminan en una sanción firme',
+     'La guía «Documentar para sancionar» (ASF, julio de 2026) explica cómo debe documentarse una irregularidad para llegar a sanción, pero no dice cuántas llegan. '
+     'El dato existe: la ASF debe informar cada semestre, a más tardar el 1 de mayo y el 1 de noviembre, el estado de los procedimientos de responsabilidad '
+     'administrativa que promovió, y publicarlo en datos abiertos (art. 38 de la Ley de Fiscalización y Rendición de Cuentas de la Federación). '
+     'La plataforma aún no integra ese informe semestral ni las resoluciones del Tribunal Federal de Justicia Administrativa.',
+     PLATAFORMA, 'https://www.asf.gob.mx/', 'Auditoría Superior de la Federación (informe semestral, art. 38 LFRCF)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('informes-documentar-para-sancionar.html', 'Datos · Informes oficiales · Informe especial')]),
     ('predial-ocde', 'Estados y municipios', 'El predial como parte del PIB: 0.16% en México y 1.0% en la OCDE',
      'Las dos cifras vienen de las Estadísticas Tributarias de la OCDE, pero la plataforma no guardó el cuadro ni la edición de donde salieron y no pudo volver a abrirlo para cotejarlas. '
      'Quedan como pendientes hasta integrar el documento.',

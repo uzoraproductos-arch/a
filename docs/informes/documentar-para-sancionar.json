@@ -1,0 +1,1128 @@
+{
+ "_": "Las 20 matrices del capítulo 4 de «Documentar para sancionar» (ASF, primera edición, julio de 2026), copiadas del PDF oficial (SHA-256 d1d621c8dfc9dca6fa673a8c8f39818c92b374a6ca6331b30454da19c3072a9f) con pdftotext -layout y revisadas a mano contra las páginas. «pag» es la página impresa. Las lee herramientas/informe_sancion.py.",
+ "matrices": [
+  {
+   "n": 1,
+   "pag": 18,
+   "fam": "comprobacion",
+   "tit": "Falta de comprobación de los recursos para los fines que fueron establecidos en la normativa",
+   "rubro": "Recursos Federales Transferidos a las Entidades Federativas, a los Municipios y a las Alcaldías de la Ciudad de México",
+   "accion": "Por transferir los Subsidios para Organismos Descentralizados Estatales (recursos federales) a dos cuentas bancarias de la universidad, de las cuales no se proporcionó la documentación justificativa y comprobatoria de su destino y aplicación de acuerdo con el anexo de ejecución.",
+   "conducta": "desacato",
+   "tipo": "Desacato (Art. 63 de la LGRA)",
+   "con_71": false,
+   "el": {
+    "personal": [
+     "Nombramientos, Constancias de Servicio o Formato Único de Movimiento de Personal (FUMP), que acrediten la calidad de servidor público y comprueben el cargo durante el periodo de la irregularidad de los servidores públicos que tenían la obligación de administrar los Subsidios para Organismos Descentralizados Estatales."
+    ],
+    "conductual": [
+     {
+      "h": "Ley general",
+      "docs": [
+       "Ley General de Contabilidad Gubernamental. Prevé que se cuente con la documentación de las operaciones presupuestarias y contables, así como las comprobaciones de la información financiera."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Anexo de ejecución, y en su caso, Convenios modificatorios."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, Manual de Operación, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Contrato de apertura de las cuentas bancarias utilizadas, identificando a los servidores públicos autorizados para su manejo.",
+     "Carta de autorización de firmas para tramites bancarios.",
+     "Pólizas contables y presupuestales de egresos (firmadas), que demuestren la autorización del traspaso de los recursos de la cuenta federal a las cuentas institucionales.",
+     "Oficios de solicitud y autorización de pago.",
+     "Oficios mediante los cuales se informe a la Secretaría de Finanzas o equivalente del Estado, la cuenta receptora de los recursos del subsidio.",
+     "Auxiliares contables o registros presupuestales que reflejen el traspaso de los recursos a las cuentas bancarias identificadas."
+    ],
+    "finalidad": [
+     "Comprobantes de pago (transferencias/SPEI), que acrediten las transferencias de los recursos federales a dos cuentas bancarias de la universidad.",
+     "Estados de cuenta bancarios a nombre de la entidad fiscalizada, en los cuales se reflejen las transferencias de los recursos federales a las dos cuentas bancarias de la universidad."
+    ]
+   }
+  },
+  {
+   "n": 2,
+   "pag": 20,
+   "fam": "sin_factura",
+   "tit": "Falta de documentación comprobatoria de las erogaciones o que no reúne requisitos fiscales",
+   "rubro": "Adquisiciones, Arrendamientos y Servicios",
+   "accion": "Por no contar con la totalidad de la documentación justificativa y comprobatoria del gasto pagado con recursos del U006 2023, por las ampliaciones presupuestales del servicio de vigilancia para el periodo comprendido de junio a diciembre del año 2022, contempladas en el convenio modificatorio de ampliación por monto del contrato.",
+   "conducta": "desvio",
+   "tipo": "Desvío de recursos públicos (Art. 54 de la LGRA en relación con el art. 71 de la LGRA)",
+   "con_71": true,
+   "el": {
+    "personal": [
+     "Nombramientos, Constancias de Servicio o Formato Único de Movimiento de Personal (FUMP), que acrediten la calidad de servidor público y comprueben el cargo durante el periodo de la irregularidad, de los servidores públicos que tenían la facultad de revisar la comprobación y el ejercicio del gasto conforme a la normativa aplicable, o bien, el contrato a través del cual se señale formalmente al responsable de administrar el mismo."
+    ],
+    "personal_moral": [
+     "Cédula de identificación fiscal y Acta constitutiva, o en su caso, poder notarial del representante legal de la empresa.",
+     "Contrato y convenio modificatorio en los que se identifique a la personal moral y su Registro Federal de Contribuyentes.",
+     "Para el caso de personas físicas con actividad empresarial, la Constancia de Situación Fiscal."
+    ],
+    "conductual": [
+     {
+      "h": "Ley general",
+      "docs": [
+       "Ley General de Contabilidad Gubernamental. Prevé que se cuente con la documentación de las operaciones presupuestarias y contables, así como las comprobaciones de la información financiera."
+      ]
+     },
+     {
+      "h": "Ley federal",
+      "docs": [
+       "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público. Regula los procedimientos de contratación."
+      ]
+     },
+     {
+      "h": "Reglamento federal",
+      "docs": [
+       "Reglamento de la Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Contratos, anexos técnicos, y en su caso, convenios modificatorios."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, Manual de Operación, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Comprobantes Fiscales Digitales por Internet (CFDI), correspondientes al periodo observado, por el incremento del servicio contemplado en el convenio modificatorio de ampliación por monto del contrato.",
+     "Pólizas contables y presupuestales de egreso, donde se identifiquen que el concepto del pago corresponde a los servicios devengados en el ejercicio.",
+     "Comprobantes de pago (transferencias/SPEI).",
+     "Estados de cuenta bancarios, o Cuenta por Liquidar Certificada (CLC), que acrediten la salida efectiva del recurso para el pago del convenio modificatorio."
+    ],
+    "finalidad": [
+     "Documento que acredite los servicios observados.",
+     "Actas de Entrega-Recepción, que validen que los servicios en el periodo observado se recibieron a entera satisfacción.",
+     "Bitácoras, listas de asistencia o registros del servicio de vigilancia."
+    ]
+   }
+  },
+  {
+   "n": 3,
+   "pag": 23,
+   "fam": "sin_factura",
+   "tit": "Falta de documentación comprobatoria de las erogaciones o que no reúne requisitos fiscales",
+   "rubro": "Obra Pública",
+   "accion": "Por no acreditar la ejecución de los trabajos en distintas estimaciones de obra pública del contrato, pagado con el Fondo de Aportaciones para el Fortalecimiento de las Entidades Federativas 2023, toda vez que en los reportes fotográficos que les dieron sustento, se repitieron distintas fotografías en múltiples estimaciones y en algunas tenían plasmada una fecha distinta a la del periodo de la estimación de la cual formaban parte.",
+   "conducta": "desvio",
+   "tipo": "Desvío de recursos públicos (Art. 54 de la LGRA en relación con el art. 71 de la LGRA)",
+   "con_71": true,
+   "el": {
+    "personal": [
+     "Nombramiento del servidor público, el oficio de designación como Residente de obra, o en su caso, el Contrato a través del cual se señale formalmente al responsable de administrar la ejecución del mismo, que evidencie que se encontraba ocupando el cargo al momento de los hechos."
+    ],
+    "personal_moral": [
+     "Cédula de identificación fiscal y Acta constitutiva, o en su caso, poder notarial del representante legal de la empresa.",
+     "Contrato en el que se identifique a la personal moral y su Registro Federal de Contribuyentes.",
+     "Para el caso de personas físicas con actividad empresarial, la Constancia de Situación Fiscal."
+    ],
+    "conductual": [
+     {
+      "h": "Ley general",
+      "docs": [
+       "Ley General de Contabilidad Gubernamental. Prevé que se cuente con la documentación de las operaciones presupuestarias y contables, así como las comprobaciones de la información financiera."
+      ]
+     },
+     {
+      "h": "Ley federal",
+      "docs": [
+       "Ley de Obras Públicas y Servicios Relacionados con las Mismas y/o Ley de Obra Pública del Estado, en caso de que aplique. Regula la ejecución y control de los trabajos de infraestructura y servicios contratados."
+      ]
+     },
+     {
+      "h": "Reglamento general",
+      "docs": [
+       "Reglamento de Ley de Obras Públicas y Servicios Relacionados con las Mismas."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Contrato de obra pública y anexo técnico, y en su caso, convenios modificatorios."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, Manual de Operación, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Pólizas contables de egresos.",
+     "Comprobantes de pago (transferencia/SPEI).",
+     "Estados de cuenta bancarios o Cuenta por Liquidar Certificada (CLC), que acrediten la salida efectiva del recurso."
+    ],
+    "finalidad": [
+     "Estimaciones observadas, autorizadas por el servidor público responsable, derivadas del contrato suscrito.",
+     "Reportes fotográficos.",
+     "Generadores de obra.",
+     "Bitácoras de obra.",
+     "Acta de entrega-recepción.",
+     "Finiquito/ Extinción de derechos."
+    ]
+   }
+  },
+  {
+   "n": 4,
+   "pag": 26,
+   "fam": "pagos_exceso",
+   "tit": "Pagos improcedentes o en exceso",
+   "rubro": "Servicios Personales",
+   "accion": "Por realizar pagos a trabajadores durante su periodo de licencia sin goce de sueldo con los recursos de las Previsiones y Aportaciones para los Sistemas de Educación Básica, Normal, Tecnológica y de Adultos del ejercicio fiscal 2023, los cuales se consideraron improcedentes.",
+   "conducta": "abuso",
+   "tipo": "Abuso de funciones (Art. 57 de la LGRA)",
+   "con_71": false,
+   "el": {
+    "personal": [
+     "Nombramientos, Constancias de Servicio o Formato Único de Movimiento de Personal (FUMP), que acrediten la calidad de servidor público y comprueben el cargo durante el periodo de la irregularidad de los servidores públicos de las áreas responsables de validar y mantener actualizada la nómina respecto a las bajas temporales o suspensiones de pago por licencias."
+    ],
+    "conductual": [
+     {
+      "h": "Ley general",
+      "docs": [
+       "Ley General de Educación. Regula la prestación de los servicios de educación."
+      ]
+     },
+     {
+      "h": "Ley federal",
+      "docs": [
+       "Ley Federal de los Trabajadores al Servicio del Estado, Reglamentaria del apartado B) del artículo 123 Constitucional. Regula los casos aplicables para conceder las licencias."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Manual de Normas para la Administración de Recursos Humanos."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, Manual de Operación, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Oficios de solicitud y de autorización de licencia sin goce de sueldo de los trabajadores observados, en los cuales se establece el periodo exacto de la licencia otorgada.",
+     "Constancias de Servicio de los trabajadores con licencia.",
+     "Formato Único de Movimiento de Personal (FUMP).",
+     "Oficios de autorización para la dispersión de la nómina.",
+     "Nóminas del personal y/o listas de raya pagadas con recursos del Fondo.",
+     "Pólizas de egresos, que demuestren que se realizaron los pagos a los trabajadores observados."
+    ],
+    "finalidad": [
+     "Comprobantes Fiscales Digitales por Internet (CFDI) de nómina que comprueben los pagos realizados a los trabajadores observados.",
+     "Estados de cuenta bancarios a nombre de la entidad fiscalizada, en los cuales se reflejen las transferencias realizadas a los trabajadores observados."
+    ]
+   }
+  },
+  {
+   "n": 5,
+   "pag": 28,
+   "fam": "pagos_exceso",
+   "tit": "Pagos improcedentes o en exceso",
+   "rubro": "Obra Pública",
+   "accion": "Por el pago en exceso realizado, más el Impuesto al Valor Agregado y los intereses generados desde la fecha de pago hasta la de su recuperación o reintegro, con cargo al contrato de obra pública a precios unitarios y tiempo determinado que tuvo por objeto el \"Mantenimiento de las escolleras en el canal de acceso de…\", debido a que en la fiscalización superior de la Cuenta Pública 2022 ya se había observado dicho monto por concepto de ajuste de costos indebidos al haberse calculado con salarios mínimos en lugar de la Unidad de Medida y Actualización (UMA); al respecto, la entidad fiscalizada efectuó un reanálisis del ajuste de costos calculado con UMA a junio de 2023, en el que determinó un monto total, al que se le restaron los pagados, por lo que el monto que debía pagarse por ajuste de costos sería de 7,877,161.14 pesos; sin embargo, en la estimación con un periodo de ejecución del 1 de diciembre de 2022 al 30 de junio de 2023, pagada el 23 de diciembre de 2023 y autorizada por la residencia de obra y avalada por la supervisión externa, se pagaron 10,665,015.25 pesos al sumarse nuevamente el monto de los 2,787,854.11 pesos observados en la Cuenta Pública 2022, y que en el acta de finiquito se señalan como deducidos.",
+   "conducta": "desvio",
+   "tipo": "Desvío de recursos públicos (Art. 54 de la LGRA en relación con el art. 71 de la LGRA)",
+   "con_71": true,
+   "el": {
+    "personal": [
+     "Nombramiento del servidor público, oficio de designación como Residente de obra, o en su caso, el Contrato a través del cual se señale formalmente al responsable de administrar la ejecución del mismo, que evidencie que se encontraba ocupando el cargo al momento de los hechos."
+    ],
+    "personal_moral": [
+     "Cédula de identificación fiscal y Acta constitutiva, o en su caso, poder notarial del representante legal de la empresa.",
+     "Contrato en el que se identifique a la personal moral y su Registro Federal de Contribuyentes.",
+     "Para el caso de personas físicas con actividad empresarial, la Constancia de Situación Fiscal."
+    ],
+    "conductual": [
+     {
+      "h": "Ley general",
+      "docs": [
+       "Ley de Obras Públicas y Servicios Relacionados con las Mismas y/o Ley de Obra Pública del Estado, en caso de que aplique."
+      ]
+     },
+     {
+      "h": "Reglamentos federales",
+      "docs": [
+       "Reglamento de la Ley de Obras Públicas y Servicios Relacionados con las Mismas.",
+       "Reglamento de la Ley Federal de Presupuesto y Responsabilidad Hacendaria."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Contrato de obra pública a precios unitarios y tiempo determinado."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, Manual de Operación, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Reanálisis de ajustes de costos con UMA.",
+     "Análisis de precios unitarios.",
+     "Estimación observada con su soporte documental, autorizada por el servidor público responsable, derivada del contrato de obra pública a precios unitarios y tiempo determinado.",
+     "Bitácoras de obra.",
+     "Pólizas contables de egresos.",
+     "Oficios de aprobación/autorización de precios o de ajustes de precios.",
+     "Comprobantes Fiscales Digitales por Internet (CFDI).",
+     "Acta de entrega-recepción.",
+     "Finiquito/ Extinción de derechos."
+    ],
+    "finalidad": [
+     "Comprobantes de pago (transferencia/SPEI).",
+     "Estados de cuenta bancarios o Cuenta por Liquidar Certificada (CLC), que acrediten la salida efectiva del recurso."
+    ]
+   }
+  },
+  {
+   "n": 6,
+   "pag": 31,
+   "fam": "sin_autorizacion",
+   "tit": "Falta de autorización o justificación de las erogaciones",
+   "rubro": "Adquisiciones, Arrendamientos y Servicios",
+   "accion": "Por no proporcionar la documentación comprobatoria y justificativa del contrato correspondiente a la entrega de apoyos al campo, por la adquisición de fertilizante, debido a que el acta de entrega-recepción presentada no cumple con la debida formalización y requisición, asimismo no se acreditó la entrega de los apoyos.",
+   "conducta": "desacato",
+   "tipo": "Desacato (Art. 63 de la LGRA)",
+   "con_71": false,
+   "el": {
+    "personal": [
+     "Nombramiento del servidor público u oficio de designación, que evidencie que se encontraba en funciones al momento de los hechos, o bien, el contrato a través del cual se señale formalmente al responsable de administrar el mismo."
+    ],
+    "personal_moral": [
+     "Cédula de identificación fiscal y Acta constitutiva, o en su caso, poder notarial del representante legal de la empresa.",
+     "Contrato en el que se identifique a la personal moral y su Registro Federal de Contribuyentes.",
+     "Para el caso de personas físicas con actividad empresarial, la Constancia de Situación Fiscal."
+    ],
+    "conductual": [
+     {
+      "h": "Ley general",
+      "docs": [
+       "Ley General de Contabilidad Gubernamental. Prevé que se cuente con la documentación de las operaciones presupuestarias y contables, así como las comprobaciones de la información financiera."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Contrato, y en su caso, anexo técnico, o pedidos de las adquisiciones y/o servicios realizados con recursos del Fondo."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, Manual de Operación, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Oficios de solicitud de entrega de los apoyos a los beneficiarios.",
+     "Padrón de beneficiarios del programa.",
+     "Entradas y salidas del almacén (inventario).",
+     "Comprobantes de pago (transferencias/SPEI).",
+     "Estados de cuenta bancarios o Cuenta por Liquidar Certificada (CLC), que acrediten la salida efectiva del recurso."
+    ],
+    "finalidad": [
+     "Acta de entrega-recepción."
+    ]
+   }
+  },
+  {
+   "n": 7,
+   "pag": 33,
+   "fam": "sin_autorizacion",
+   "tit": "Falta de autorización o justificación de las erogaciones",
+   "rubro": "Obra Pública",
+   "accion": "Por un monto de 36,250,000.00 más las cargas financieras generadas desde su disposición hasta su reintegro a la cuenta bancaria de las Participaciones Federales a Entidades Federativas, debido a que no se presentaron las pruebas de laboratorio del contrato.",
+   "conducta": "abuso",
+   "tipo": "Abuso de funciones (Art. 57 de la LGRA)",
+   "con_71": false,
+   "el": {
+    "personal": [
+     "Nombramientos, Constancias de Servicio o Formato Único de Movimiento de Personal (FUMP), que acrediten la calidad de servidor público y comprueben el cargo durante el periodo de la irregularidad de los servidores públicos responsables de vigilar la calidad de los materiales, el oficio de designación como Residente de obra, o bien, el Contrato a través del cual se señale formalmente al responsable de administrar la ejecución del mismo."
+    ],
+    "conductual": [
+     {
+      "h": "Ley general",
+      "docs": [
+       "Ley General de Contabilidad Gubernamental. Prevé que se cuente con la documentación de las operaciones presupuestarias y contables, así como las comprobaciones de la información financiera.",
+       "Ley de Obras Públicas y Servicios Relacionados con las Mismas y/o Ley de Obra Pública del Estado, en caso de que aplique."
+      ]
+     },
+     {
+      "h": "Reglamento general",
+      "docs": [
+       "Reglamento de Ley de Obras Públicas y Servicios Relacionados con las Mismas."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Contrato de obra pública, anexo técnico y en su caso, convenios modificatorios."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, Manual de Operación, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Estimaciones de obra, autorizadas por el servidor público responsable, derivadas del Contrato suscrito.",
+     "Pólizas contables de egresos.",
+     "Comprobantes de pago (transferencia/SPEI).",
+     "Estados de cuenta bancarios que acrediten la salida efectiva del recurso."
+    ],
+    "finalidad": [
+     "Generadores de obra.",
+     "Bitácoras de obra.",
+     "Comprobantes Fiscales Digitales por Internet (CFDI), pagados.",
+     "Acta de entrega-recepción."
+    ]
+   }
+  },
+  {
+   "n": 8,
+   "pag": 35,
+   "fam": "adquisiciones",
+   "tit": "Otros incumplimientos de la normativa en materia de adquisiciones, arrendamientos y servicios",
+   "rubro": "Adquisiciones, Arrendamientos y Servicios",
+   "accion": "Por no presentar, de los contratos los reportes mensuales para acreditar los servicios de acuerdo con las cláusulas primera y quinta del contrato; CV.002/2024, la entrada al almacén no tiene el cargo de las personas que autorizan y reciben los productos ni sello de la entidad; CV.015/2024, la entrada al almacén no tiene el cargo de las personas que autorizan y reciben los productos ni sello de la entidad; SSM/ADQ/027/2023 EXCEP, evidencia del cumplimiento de la operación, el sistema de abasto, el surtimiento de bienes, los módulos de abasto, el almacenamiento de los bienes, la distribución y administración de los insumos ni el contrato de la cuenta bancaria.",
+   "conducta": "desacato",
+   "tipo": "Desacato (Art. 63 de la LGRA)",
+   "con_71": false,
+   "el": {
+    "personal": [
+     "Nombramientos, Constancias de Servicio o Formato Único de Movimiento de Personal (FUMP), que acrediten la calidad de servidor público y comprueben el cargo durante el periodo de la irregularidad de los servidores públicos de las áreas responsables de las requisiciones, que intervinieron en la gestión de los contratos, o bien, el contrato a través del cual se señale formalmente al responsable de administrar la ejecución del mismo."
+    ],
+    "conductual": [
+     {
+      "h": "Ley general",
+      "docs": [
+       "Ley General de Contabilidad Gubernamental. Prevé que se cuente con la documentación de las operaciones presupuestarias y contables, así como las comprobaciones de la información financiera."
+      ]
+     },
+     {
+      "h": "Ley federal",
+      "docs": [
+       "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público. Regula los procedimientos de contratación."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Contratos, anexos técnicos, y en su caso, convenios modificatorios."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, Manual de Operación, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Comprobantes Fiscales Digitales por Internet (CFDI), emitidos por los proveedores de los contratos observados, en donde se detallen los bienes y servicios pagados.",
+     "Comprobantes de pago (transferencia/SPEI).",
+     "Estados de cuenta bancarios que acrediten la salida efectiva del recurso.",
+     "Entradas al almacén que no se encuentran debidamente requisitadas o firmadas.",
+     "Oficios de solicitud y autorización de pago.",
+     "Pólizas contables de egresos."
+    ],
+    "finalidad": [
+     "Acta de entrega-recepción de los bienes."
+    ]
+   }
+  },
+  {
+   "n": 9,
+   "pag": 37,
+   "fam": "sin_factura",
+   "tit": "Falta de documentación comprobatoria de las erogaciones o que no reúne requisitos fiscales",
+   "rubro": "Servicios Personales",
+   "accion": "Por realizar el pago de vales de despensa, de los que se careció de los Comprobantes Fiscales Digitales por Internet, así como de la evidencia de que la empresa transfirió el monto correspondiente a cada trabajador por medio de monederos electrónicos.",
+   "conducta": "desvio",
+   "tipo": "Desvío de recursos públicos (Art. 54 de la LGRA en relación con el art. 71 de la LGRA)",
+   "con_71": true,
+   "el": {
+    "personal": [
+     "Nombramientos, Constancias de Servicio o Formato Único de Movimiento de Personal (FUMP), que acrediten la calidad de servidor público y comprueben el cargo durante el periodo de la irregularidad de los servidores públicos de las áreas responsables de realizar los pagos a proveedores y responsables de revisar que toda erogación cuente con el soporte documental."
+    ],
+    "personal_moral": [
+     "Cédula de identificación fiscal y Acta constitutiva, o en su caso, poder notarial del representante legal de la empresa.",
+     "Contrato en el que se identifique a la personal moral y su Registro Federal de Contribuyentes.",
+     "Para el caso de personas físicas con actividad empresarial, la Constancia de Situación Fiscal."
+    ],
+    "conductual": [
+     {
+      "h": "Ley general",
+      "docs": [
+       "Ley General de Contabilidad Gubernamental. Prevé que se cuente con la documentación de las operaciones presupuestarias y contables, así como las comprobaciones de la información financiera."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Anexo de Ejecución al Convenio Marco de Colaboración para el Apoyo Financiero.",
+       "Contrato."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, Manual de Operación, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Oficios de solicitud y autorización de pago.",
+     "Pólizas de egresos (firmadas), que demuestren la autorización para realizar las erogaciones a la empresa para el pago de vales de despensa.",
+     "Padrón de trabajadores beneficiados."
+    ],
+    "finalidad": [
+     "Comprobantes de pago (transferencias/SPEI), correspondientes al pago realizado a la empresa, la cual no acreditó el cumplimiento del contrato.",
+     "Estados de cuenta bancarios que acrediten la salida efectiva del recurso."
+    ]
+   }
+  },
+  {
+   "n": 10,
+   "pag": 39,
+   "fam": "pagos_exceso",
+   "tit": "Pagos improcedentes o en exceso",
+   "rubro": "Adquisiciones, Arrendamientos y Servicios",
+   "accion": "Por pagos en exceso más los intereses generados desde la fecha de pago hasta su recuperación o reintegro, en dos contratos de arrendamientos de bienes, ya que en dichos contratos se consideraron arrendamientos de equipos por 19 meses con diversos precios unitarios, no obstante, en las facturas correspondientes se señalaron arrendamientos por únicamente 9 meses y se ajustaron los precios unitarios para pagar indebidamente la totalidad de los montos contratados.",
+   "conducta": "desvio",
+   "tipo": "Desvío de recursos públicos (Art. 54 de la LGRA en relación con el art. 71 de la LGRA)",
+   "con_71": true,
+   "el": {
+    "personal": [
+     "Nombramiento del servidor público, oficio de designación, que evidencie que se encontraba ocupando el cargo al momento de los hechos, o en su caso, el contrato a través del cual se señale formalmente al responsable de administrar el mismo."
+    ],
+    "personal_moral": [
+     "Cédula de identificación fiscal y Acta constitutiva, o en su caso, poder notarial del representante legal de la empresa.",
+     "Contrato en el que se identifique a la personal moral y su Registro Federal de Contribuyentes.",
+     "Para el caso de personas físicas con actividad empresarial, la Constancia de Situación Fiscal."
+    ],
+    "conductual": [
+     {
+      "h": "Ley general",
+      "docs": [
+       "Ley General de Contabilidad Gubernamental. Prevé que se cuente con la documentación de las operaciones presupuestarias y contables."
+      ]
+     },
+     {
+      "h": "Reglamentos federales",
+      "docs": [
+       "Reglamento de la Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público.",
+       "Reglamento de la Ley Federal de Presupuesto y Responsabilidad Hacendaria."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Convenio Específico.",
+       "Contratos y su Anexo técnico."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, Manual de Operación, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Oficios de solicitud y autorización de pago.",
+     "Facturas emitidas por el arrendador.",
+     "Pólizas de egresos (firmadas), que demuestren la autorización para realizar las erogaciones a la empresa."
+    ],
+    "finalidad": [
+     "Comprobantes de pago (transferencias/SPEI).",
+     "Estados de cuenta bancarios o Cuenta por Liquidar Certificada (CLC), que acrediten la salida efectiva del recurso."
+    ]
+   }
+  },
+  {
+   "n": 11,
+   "pag": 41,
+   "fam": "rezago",
+   "tit": "Obras ejecutadas o acciones que no beneficiaron a sectores de la población en condiciones de rezago social y pobreza extrema",
+   "rubro": "Recursos Federales Transferidos a las Entidades Federativas, a los Municipios y a las Alcaldías de la Ciudad de México",
+   "accion": "No se acreditó que se benefició a la población objetivo del fondo, pagados con el Fondo de Aportaciones para la Infraestructura Social Municipal y de las Demarcaciones Territoriales del Distrito Federal (FAISMUN) 2024.",
+   "conducta": "desvio",
+   "tipo": "Desvío de recursos públicos (Art. 54 de la LGRA)",
+   "con_71": false,
+   "el": {
+    "personal": [
+     "Nombramientos, Constancias de Servicio o Formato Único de Movimiento de Personal (FUMP), que acrediten la calidad de servidor público y comprueben el cargo durante el periodo de la irregularidad de los servidores públicos que administraron los recursos del Fondo."
+    ],
+    "conductual": [
+     {
+      "h": "Ley general",
+      "docs": [
+       "Ley de Coordinación Fiscal. Señala los rubros a los que se debe destinar el FAISMUN."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Lineamientos que apliquen.",
+       "Contratos y anexos."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, Manual de Operación, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Consulta de las Zonas de Atención Prioritaria (ZAP) y/o identificación de localidades que no están clasificadas con alto y muy alto grado de rezago social, emitidas por el Consejo Nacional de Evaluación de la Política de Desarrollo Social (CONEVAL).",
+     "Expediente técnico de cada obra (justificación de elegibilidad, beneficiarios, localidad).",
+     "Estimaciones de obra y generadores.",
+     "Croquis o planos de localización de la obra.",
+     "Comprobantes de pago (transferencia/SPEI).",
+     "Estados de cuenta bancarios que acrediten la salida efectiva del recurso.",
+     "Pólizas contables de egresos.",
+     "Comprobantes Fiscales Digitales por Internet (CFDI), emitidos por los contratistas.",
+     "Oficios de solicitud y autorización de pago.",
+     "Padrón de beneficiarios de cada obra."
+    ],
+    "finalidad": [
+     "Acta de Entrega-Recepción.",
+     "Finiquito/Extinción de derechos.",
+     "Acta Administrativa Circunstanciada."
+    ]
+   }
+  },
+  {
+   "n": 12,
+   "pag": 43,
+   "fam": "rezago",
+   "tit": "Obras ejecutadas o acciones que no beneficiaron a sectores de la población en condiciones de rezago social y pobreza extrema",
+   "rubro": "Obra Pública",
+   "accion": "Por el incumplimiento del Programa de Apoyo a la Comunidad y Medio Ambiente (PACMA) relacionado con los trabajos y servicios de beneficio social a cargo en el contrato de obra, relativo a los trabajos de perforación direccional y vertical con barrenas y equipo direccional para pozos petroleros, integrado de la manera siguiente: correspondiente al presupuesto de dos cédulas PROA con números 8308-4 y 8291, más del presupuesto de la cédula PROA número 8308-2, las cuales no se han concluido y sin embargo los montos de dichas cédulas fueron reconocidos en el finiquito del contrato, ya que si bien se proporcionaron las facturas y una entrega parcial de los equipos adquiridos, no se proporcionaron las actas de entrega-recepción total, los oficios de conclusión de las cédulas, los oficios de reconocimiento e informes ejecutivos, los cuales son documentos necesarios para dar por concluidas y acreditadas las cédulas PROA.",
+   "conducta": "desvio",
+   "tipo": "Desvío de recursos públicos (Art. 54 de la LGRA en relación con el art. 71 de la LGRA)",
+   "con_71": true,
+   "el": {
+    "personal": [
+     "Nombramientos, Constancias de Servicio o Formato Único de Movimiento de Personal (FUMP), que acrediten la calidad de servidor público y comprueben el cargo durante el periodo de la irregularidad de los servidores públicos responsables de las áreas requirentes, o en caso, el contrato de obra a través del cual se señale formalmente al responsable de administrar la ejecución del mismo."
+    ],
+    "personal_moral": [
+     "Cédula de identificación fiscal y Acta constitutiva, o en su caso, poder notarial del representante legal de la empresa.",
+     "Contrato en el que se identifique a la personal moral y su Registro Federal de Contribuyentes.",
+     "Para el caso de personas físicas con actividad empresarial, la Constancia de Situación Fiscal."
+    ],
+    "conductual": [
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Contrato de obra y sus Anexos."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, Manual de Operación, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Cédulas PROA.",
+     "Comprobantes Fiscales Digitales por Internet (CFDI), emitidos por el proveedor.",
+     "Comprobantes de pago (transferencias/SPEI).",
+     "Estados de cuenta bancarios o Cuenta por Liquidar Certificada (CLC), que acrediten la salida efectiva del recurso.",
+     "Pólizas de egresos (firmadas), que demuestren la autorización para realizar las erogaciones a la empresa.",
+     "Oficios emitidos por la Gerencia de Responsabilidad Social en los que informa al representante del contrato de las cédulas de ejecución de PROA."
+    ],
+    "finalidad": [
+     "Finiquito del contrato de obra.",
+     "Actas de entrega-recepción parciales de los equipos adquiridos."
+    ]
+   }
+  },
+  {
+   "n": 13,
+   "pag": 45,
+   "fam": "sin_factura",
+   "tit": "Falta de documentación comprobatoria de las erogaciones o que no reúne requisitos fiscales",
+   "rubro": "Recursos Asignados a Programas, Fideicomisos, Fondos, Mandatos y Contratos Análogos",
+   "accion": "Por pagos realizados por conceptos de apoyos económicos con recursos de las Participaciones Federales a Municipios, que no se encontraron respaldados con la documentación original que comprobó el gasto.",
+   "conducta": "desvio",
+   "tipo": "Desvío de recursos públicos (Art. 54 de la LGRA)",
+   "con_71": false,
+   "el": {
+    "personal": [
+     "Nombramientos, Constancias de Servicio o Formato Único de Movimiento de Personal (FUMP), que acrediten la calidad de servidor público y comprueben el cargo durante el periodo de la irregularidad de los servidores públicos que tenían la atribución de autorizar la entrega de apoyos y la obligación de resguardar la documentación comprobatoria y justificativa original del gasto."
+    ],
+    "conductual": [
+     {
+      "h": "Ley general",
+      "docs": [
+       "Ley General de Contabilidad Gubernamental. Prevé que se cuente con la documentación original de las operaciones presupuestarias y contables."
+      ]
+     },
+     {
+      "h": "Normativa estatal",
+      "docs": [
+       "En su caso, Leyes, Reglamentos o Códigos que regulen la administración de recursos (Código Financiero para los Municipios del estado que corresponda)."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, Manual de Operación, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Listado de los pagos realizados por conceptos de apoyos económicos (auxiliar de bancos).",
+     "Pólizas de egresos de los pagos por concepto de apoyos económicos.",
+     "Oficios de solicitud y autorización para la entrega de los apoyos económicos.",
+     "Oficios de solicitud y autorización de pago.",
+     "Padrón o listado de beneficiarios."
+    ],
+    "finalidad": [
+     "Comprobantes de pago (SPEI/cheques).",
+     "Estados de cuenta bancarios que acrediten la salida efectiva del recurso.",
+     "Recibos firmados/acuses de recibo de beneficiarios (o constancia de ausencia)."
+    ]
+   }
+  },
+  {
+   "n": 14,
+   "pag": 47,
+   "fam": "clausulas",
+   "tit": "Incumplimiento de cláusulas de contratos, pedidos o convenios modificatorios",
+   "rubro": "Adquisiciones, Arrendamientos y Servicios",
+   "accion": "Por el pago de servicios de mantenimiento sin contar con la documentación justificativa, más las cargas financieras generadas desde su disposición hasta su reintegro a la Hacienda Pública Federal (TESOFE), que se integran de la manera siguiente: de los proyectos especiales, por conceptos adicionales y extraordinarios; por herramientas, maquinaria, equipos y accesorios, que conforme lo establecido en el Anexo 1 Técnico del contrato eran absoluta responsabilidad del proveedor para la correcta ejecución de los servicios, y por el concepto de surtimiento de pipas de agua; al respecto no se acreditó el motivo y justificación del pago de estos conceptos ni la solicitud, validación y autorización de los mismos, y tampoco acreditó que dichos cambios al contrato se formalizaran a través de un convenio modificatorio.",
+   "conducta": "desvio",
+   "tipo": "Desvío de recursos públicos (Art. 54 de la LGRA en relación con el art. 71 de la LGRA)",
+   "con_71": true,
+   "el": {
+    "personal": [
+     "Nombramientos, Constancias de Servicio o Formato Único de Movimiento de Personal (FUMP), que acrediten la calidad de servidor público y comprueben el cargo durante el periodo de la irregularidad de los servidores públicos responsables de las áreas (Servidor Público) requirentes, que intervinieron en la gestión del contrato, o bien, el contrato a través del cual se señale formalmente al responsable de administrar la ejecución del mismo."
+    ],
+    "personal_moral": [
+     "Cédula de identificación fiscal y Acta constitutiva, o en su caso, poder notarial del representante legal de la empresa.",
+     "Contrato en el que se identifique a la personal moral y su Registro Federal de Contribuyentes.",
+     "Para el caso de personas físicas con actividad empresarial, la Constancia de Situación Fiscal."
+    ],
+    "conductual": [
+     {
+      "h": "Ley general",
+      "docs": [
+       "Ley General de Contabilidad Gubernamental. Prevé que se cuente con la documentación de las operaciones presupuestarias y contables."
+      ]
+     },
+     {
+      "h": "Ley federal",
+      "docs": [
+       "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público. Regula los procedimientos de contratación y ejecución."
+      ]
+     },
+     {
+      "h": "Reglamentos federales",
+      "docs": [
+       "Reglamento de la Ley Federal de Presupuesto y Responsabilidad Hacendaria."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Contrato y su Anexo Técnico."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Comprobantes Fiscales Digitales por Internet (CFDI), emitidos por el contratista.",
+     "Comprobantes de pago (transferencias/SPEI).",
+     "Estados de cuenta bancarios o Cuenta por Liquidar Certificada (CLC), que acrediten la salida efectiva del recurso.",
+     "Pólizas de egresos (firmadas), que demuestren la autorización para realizar las erogaciones a la empresa.",
+     "Oficios de solicitud, validación y autorización del pago de los servicios sin contar con la documentación justificativa."
+    ],
+    "finalidad": [
+     "Estimaciones.",
+     "Número generadores.",
+     "Reportes fotográficos.",
+     "Croquis.",
+     "Actas de entrega-recepción."
+    ]
+   }
+  },
+  {
+   "n": 15,
+   "pag": 50,
+   "fam": "sin_autorizacion",
+   "tit": "Falta de autorización o justificación de las erogaciones",
+   "rubro": "Servicios Personales",
+   "accion": "Por pagos improcedentes con recursos del Fondo de Aportaciones para la Educación Tecnológica y de Adultos 2023 a un trabajador del Instituto Estatal de Educación para Adultos del Estado, del cual, no se acreditó que cumpliera con los conocimientos solicitados en la Cédula de Valuación de Puestos, toda vez que la entidad fiscalizada proporcionó copia certificada de un título de Licenciado en Filosofía y Letras y de una cédula profesional a nombre del servidor público; sin embargo, el nombre del titular, el número de cédula y el título obtenido verificado en el Registro de la Dirección General de Profesiones de la Secretaría de Educación Pública no coinciden con los presentados por la entidad fiscalizada.",
+   "conducta": "abuso",
+   "tipo": "Abuso de funciones (Art. 57 de la LGRA)",
+   "con_71": false,
+   "el": {
+    "personal": [
+     "Nombramientos, Constancias de Servicio o Formato Único de Movimiento de Personal (FUMP), que acrediten la calidad de servidor público y comprueben el cargo durante el periodo de la irregularidad de los servidores públicos responsables de validar los conocimientos solicitados en la Cédula de Valuación de Puestos."
+    ],
+    "conductual": [
+     {
+      "h": "Ley federal",
+      "docs": [
+       "Ley Federal de Presupuesto y Responsabilidad Hacendaria. Observa los pagos por conceptos de servicios personales."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Convenio de Coordinación.",
+       "Cédula de Valuación de Puestos del Instituto Nacional para la Educación de los Adultos."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, Manual de Operación, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Documento emitido por la autoridad educativa donde se hace constar que el número de cédula, el nombre o el título no coinciden con el del trabajador observado.",
+     "Cédula de Valuación de Puestos (Código AO1807) donde se detallan los conocimientos y títulos específicos requeridos para el cargo.",
+     "Título y Cédula Profesional que la entidad fiscalizada aceptó como válidos.",
+     "Expediente laboral del trabajador observado.",
+     "Oficios de autorización para la dispersión de la nómina.",
+     "Nóminas y pólizas que demuestren que el Instituto realizó los pagos al trabajador observado."
+    ],
+    "finalidad": [
+     "Comprobantes Fiscales Digitales por Internet (CFDI) de nómina, que comprueben los pagos realizados al trabajador observado.",
+     "Estados de cuenta bancarios a nombre de la entidad fiscalizada, en los cuales se reflejen las transferencias realizadas al trabajador observado."
+    ]
+   }
+  },
+  {
+   "n": 16,
+   "pag": 52,
+   "fam": "penas",
+   "tit": "Falta o inadecuada aplicación de penas y sanciones por incumplimientos",
+   "rubro": "Adquisiciones, Arrendamientos y Servicios",
+   "accion": "No se aplicaron penas convencionales por atraso, por el monto total de los bienes entregados a destiempo, por el concepto de \"Instalación y suministro de sistema abre puertas automático para dos hojas abatible, incluye material, mano de obra y herramienta\".",
+   "conducta": "abuso",
+   "tipo": "Abuso de funciones (Art. 57 de la LGRA)",
+   "con_71": false,
+   "el": {
+    "personal": [
+     "Nombramientos, Constancias de Servicio o Formato Único de Movimiento de Personal (FUMP), que acrediten la calidad de servidor público responsable de la recepción de los bienes, y del responsable de la autorización del pago total de la factura, o bien, el contrato a través del cual se señale formalmente al responsable de administrar el mismo."
+    ],
+    "conductual": [
+     {
+      "h": "Ley federal",
+      "docs": [
+       "Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público. Regula los procedimientos de contratación."
+      ]
+     },
+     {
+      "h": "Reglamento federal",
+      "docs": [
+       "Reglamento de la Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público."
+      ]
+     },
+     {
+      "h": "Ley estatal",
+      "docs": [
+       "Ley sobre Adquisiciones, Enajenaciones, Arrendamientos y Prestación de Servicios del Poder Ejecutivo del Estado que corresponda."
+      ]
+     },
+     {
+      "h": "Reglamento estatal",
+      "docs": [
+       "Reglamento de la Ley Sobre Adquisiciones, Enajenaciones, Arrendamientos y Prestación de Servicios del Poder Ejecutivo del Estado que corresponda."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Contrato de adquisición y/o convenios modificatorios."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Documento mediante el cual se haga de conocimiento al responsable de la recepción de los bienes, y al responsable de la autorización del pago, el atraso en la entrega de los bienes contratados.",
+     "Orden de compra/pedido con fecha pactada de entrega.",
+     "Oficio de solicitud o autorización de pago con fecha posterior al documento mediante el cual se informó el atraso en la entrega de los bienes.",
+     "Pólizas de egresos (firmadas), que demuestren la autorización para realizar las erogaciones a la empresa."
+    ],
+    "finalidad": [
+     "Comprobante de pago (transferencia/SPEI) del Comprobante Fiscal Digital por Internet (CFDI), sin haber aplicado las penas convencionales por el atraso en la entrega de los bienes contratados.",
+     "Acta de entrega-recepción, en la cual se visualice que la fecha en la que se instaló el sistema de puertas automático fue posterior a la fecha pactada en el contrato."
+    ]
+   }
+  },
+  {
+   "n": 17,
+   "pag": 54,
+   "fam": "penas",
+   "tit": "Falta o inadecuada aplicación de penas y sanciones por incumplimientos",
+   "rubro": "Obra Pública",
+   "accion": "Por no haber acreditado en los plazos establecidos la amortización de los anticipos otorgados conforme a los contratos.",
+   "conducta": "abuso",
+   "tipo": "Abuso de funciones (Art. 57 de la LGRA)",
+   "con_71": false,
+   "el": {
+    "personal": [
+     "Nombramientos, Constancias de Servicio o Formato Único de Movimiento de Personal (FUMP), que acrediten la calidad de servidor público y comprueben el cargo durante el periodo de la irregularidad de los servidores públicos responsables de supervisar el avance de las obras y aplicar los descuentos por amortización en cada estimación de pago, en su caso, el oficio de designación como Residente de obra, o bien, los Contratos a través del cual se señale formalmente al responsable de administrar la ejecución del mismo."
+    ],
+    "personal_moral": [
+     "Cédula de identificación fiscal y Acta constitutiva, o en su caso, poder notarial del representante legal de la empresa.",
+     "Contrato en el que se identifique a la personal moral y su Registro Federal de Contribuyentes.",
+     "Para el caso de personas físicas con actividad empresarial, la Constancia de Situación Fiscal."
+    ],
+    "conductual": [
+     {
+      "h": "Ley federal",
+      "docs": [
+       "Ley de Obras Públicas y Servicios Relacionados con las Mismas."
+      ]
+     },
+     {
+      "h": "Ley estatal",
+      "docs": [
+       "Ley de Obras Públicas y Servicios Relacionados con las Mismas para el Estado que corresponda."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Contratos de obra pública, anexos de ejecución, y en su caso, convenios modificatorios."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Póliza de egreso del pago de los anticipos.",
+     "Comprobantes Fiscales Digitales por Internet (CFDI) de las estimaciones pagadas sin deducción de amortización, emitidos por los contratistas de los 13 contratos.",
+     "Comprobantes de pago (SPEI) de las estimaciones.",
+     "CFDI de anticipos por contrato.",
+     "Comprobantes de pago (SPEI) de anticipos.",
+     "Estimaciones.",
+     "Garantías de anticipos (fianzas).",
+     "Estado de cuenta financiero de los contratos.",
+     "Estados de cuenta bancarios, que acrediten la salida efectiva del recurso."
+    ],
+    "finalidad": [
+     "Acta de entrega – recepción."
+    ]
+   }
+  },
+  {
+   "n": 18,
+   "pag": 56,
+   "fam": "sin_operar",
+   "tit": "Falta de operación de obras concluidas",
+   "rubro": "Obra Pública",
+   "accion": "Por concepto de obra terminada que no opera, por lo que no cumple con los objetivos del programa E040 Servicios de Asistencia Social Integral, los cuales incluyen conceptos de obra pagada no ejecutada.",
+   "conducta": "desvio",
+   "tipo": "Desvío de recursos públicos (Art. 54 de la LGRA en relación con el art. 71 de la LGRA)",
+   "con_71": true,
+   "el": {
+    "personal": [
+     "Nombramiento del servidor público, el oficio de designación como Residente de obra, o en su caso, el Contrato a través del cual se señale formalmente al responsable de administrar la ejecución del (Servidor Público) mismo, que evidencie que se encontraba ocupando el cargo al momento de los hechos."
+    ],
+    "personal_moral": [
+     "Cédula de identificación fiscal y Acta constitutiva, o en su caso, poder notarial del representante legal de la empresa.",
+     "Contrato en el que se identifique a la personal moral y su Registro Federal de Contribuyentes.",
+     "Para el caso de personas físicas con actividad empresarial, la Constancia de Situación Fiscal."
+    ],
+    "conductual": [
+     {
+      "h": "Ley federal",
+      "docs": [
+       "Ley de Obras Públicas y Servicios Relacionados con las Mismas. Precisa la fecha de inicio de la ejecución de los trabajos y la garantía en su cumplimiento."
+      ]
+     },
+     {
+      "h": "Reglamentos federales",
+      "docs": [
+       "Reglamento de la Ley de Obras Públicas y Servicios Relacionados con las Mismas."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Contrato de obra pública, y en su caso, anexo técnico."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, Manual de Operación, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Estimaciones observadas, autorizadas por el servidor público responsable, derivadas del contrato de obra.",
+     "Comprobantes Fiscales Digitales por Internet (CFDI) de las estimaciones observadas.",
+     "Comprobantes de pago (transferencia/SPEI).",
+     "Estados de cuenta bancarios o Cuenta por Liquidar Certificada (CLC), que acrediten la salida efectiva del recurso.",
+     "Oficios de solicitud y autorización de pago.",
+     "Pólizas contables de egresos (firmadas), que demuestren la autorización para realizar las erogaciones a la empresa."
+    ],
+    "finalidad": [
+     "Número generadores y croquis.",
+     "Reportes fotográficos.",
+     "Bitácoras de los trabajos de obra.",
+     "Acta de visita física de la obra.",
+     "Acta de entrega-recepción.",
+     "Finiquito/ Extinción de derechos."
+    ]
+   }
+  },
+  {
+   "n": 19,
+   "pag": 58,
+   "fam": "otros_transferidos",
+   "tit": "Otros incumplimientos de la normativa al ejercicio de los Recursos Federales transferidos a las entidades federativas, a los municipios y a las alcaldías de la Ciudad de México",
+   "rubro": "Recursos Federales Transferidos a las Entidades Federativas, a los Municipios y a las Alcaldías de la Ciudad de México",
+   "accion": "Por realizar pagos a trabajadores que no cumplieron con el perfil de puestos.",
+   "conducta": "abuso",
+   "tipo": "Abuso de funciones (Art. 57 de la LGRA)",
+   "con_71": false,
+   "el": {
+    "personal": [
+     "Nombramientos, Constancias de Servicio o Formato Único de Movimiento de Personal (FUMP), que acrediten la calidad de servidor público y comprueben el cargo durante el periodo de la irregularidad de los servidores públicos responsables de validar el perfil de puestos."
+    ],
+    "conductual": [
+     {
+      "h": "Ley federal",
+      "docs": [
+       "Ley Federal de Presupuesto y Responsabilidad Hacendaria. Observa el gasto y los pagos por conceptos de servicios personales."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, Manual de Operación, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Documento donde se detallen los requisitos establecidos para el perfil de puesto requerido.",
+     "Oficios de autorización para la dispersión de la nómina.",
+     "Nóminas pagadas de los trabajadores observados.",
+     "Expedientes de los trabajadores observados.",
+     "Pólizas de egresos que demuestren el registro de los pagos que se realizaron a los trabajadores observados."
+    ],
+    "finalidad": [
+     "Comprobantes Fiscales Digitales por Internet (CFDI) de nómina, que comprueban los pagos realizados a los trabajadores observados.",
+     "Estados de cuenta bancarios a nombre de la entidad fiscalizada, en los cuales se reflejen las transferencias realizadas a los trabajadores observados."
+    ]
+   }
+  },
+  {
+   "n": 20,
+   "pag": 60,
+   "fam": "reintegro",
+   "tit": "Omisión o reintegro extemporáneo de recursos o intereses a la cuenta del fondo, a la TESOFE o las tesorerías estatales",
+   "rubro": "Recursos Federales Transferidos a las Entidades Federativas, a los Municipios y a las Alcaldías de la Ciudad de México",
+   "accion": "Por no reintegrar a la Tesorería de la Federación los recursos no devengados conforme a la norma por conceptos y diferencias de volúmenes de obra no ejecutados que se pagaron injustificadamente con recursos del Fondo de Infraestructura Social para las Entidades del ejercicio fiscal 2024 de cuatro obras que amparan cinco proyectos.",
+   "conducta": "desvio",
+   "tipo": "Desvío de recursos públicos (Art. 54 de la LGRA en relación con el art. 71 de la LGRA)",
+   "con_71": true,
+   "el": {
+    "personal": [
+     "Nombramientos, Constancias de Servicio o Formato Único de Movimiento de Personal (FUMP), que acrediten la calidad de servidor público y evidencien que se encontraba ocupando el cargo al momento de los hechos, el oficio de designación como Residente de obra, o en su caso, el Contrato a través del cual se señale formalmente al responsable de administrar la ejecución del mismo."
+    ],
+    "personal_moral": [
+     "Cédula de identificación fiscal y Acta constitutiva, o en su caso, poder notarial del representante legal de la empresa.",
+     "Contrato en el que se identifique a la personal moral y su Registro Federal de Contribuyentes.",
+     "Para el caso de personas físicas con actividad empresarial, la Constancia de Situación Fiscal."
+    ],
+    "conductual": [
+     {
+      "h": "Ley federal",
+      "docs": [
+       "Ley de Disciplina Financiera de las Entidades Federativas y los Municipios. Establece las disposiciones para el ejercicio del gasto, con base en el Presupuesto de Egresos autorizado.",
+       "Ley de Obras Públicas y Servicios Relacionados con las Mismas. Precisa la fecha de inicio de la ejecución de los trabajos y la garantía en su cumplimiento."
+      ]
+     },
+     {
+      "h": "Reglamentos federales",
+      "docs": [
+       "Reglamento de la Ley de Obras Públicas y Servicios Relacionados con las Mismas."
+      ]
+     },
+     {
+      "h": "Ley estatal",
+      "docs": [
+       "Ley de Obras Públicas y Servicios Relacionados con las Mismas para el Estado que corresponda."
+      ]
+     },
+     {
+      "h": "Normativa específica",
+      "docs": [
+       "Contratos de obra pública, anexo técnico, y en su caso, convenios modificatorios."
+      ]
+     },
+     {
+      "h": "Normativa interna, en su caso",
+      "docs": [
+       "Reglamento Interior, Manual de Organización, entre otros."
+      ]
+     }
+    ],
+    "circunstancial": [
+     "Estimaciones de obra acompañadas de su documentación soporte, de los contratos observados, donde conste que el servidor público las autorizó para su pago.",
+     "Pólizas de pago relacionadas con los contratos observados."
+    ],
+    "finalidad": [
+     "Comprobantes Fiscales Digitales por Internet (CFDI), emitidos por el contratista.",
+     "Comprobantes de pago (transferencias/SPEI).",
+     "Estados de cuenta bancarios o Cuenta por Liquidar Certificada (CLC), que acrediten los pagos injustificados.",
+     "Actas de verificación física de las obras observadas.",
+     "Actas de entrega-recepción.",
+     "Finiquitos/extinción de derechos."
+    ]
+   }
+  }
+ ]
+}

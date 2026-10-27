@@ -1270,6 +1270,20 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://www.asf.gob.mx/Trans/Informes/Ir2025a/Documentos/Informes_Especiales/Documentar.pdf": {
+   "primera_vez": "2026-10-27",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-asf-documentar"
+   ],
+   "consultado": "2026-10-27",
+   "estado": "copiado",
+   "sha256": "d1d621c8dfc9dca6fa673a8c8f39818c92b374a6ca6331b30454da19c3072a9f",
+   "bytes": 1325885,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-27"
+  },
   "https://www.asf.gob.mx/Trans/Informes/ir2005i/Tomos/T6V2.pdf": {
    "primera_vez": "2026-10-27",
    "historial": [],
