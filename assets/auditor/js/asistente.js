@@ -1021,6 +1021,8 @@
       { sug: hit.h.apps.filter(function (a) { return a !== hit; }).slice(0, 3).map(function (a) { return a.n; }) });
     var h = null;
     Object.keys(HA.de).forEach(function (k) { if (!h && p.indexOf(HA.de[k]._p) >= 0) h = HA.de[k]; });
+    /* «La calculadora», a secas, es la Calculadora Cívica: no hay otra en la plataforma. */
+    if (!h && CR.apps && /(^| )calculadora( |$)/.test(p)) h = CR;
     return h ? respHerr(h) : null;
   }
   /* La investigación de Auditoría en imágenes que viene al caso, al frente de
