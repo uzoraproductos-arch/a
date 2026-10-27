@@ -64,7 +64,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-ambiente-basura.html` | La basura · Auditavisión | apartados.py | 39 | 0 | 14 | 9 | 1 |
 | `datos-ambiente-desglose.html` | Qué se acabó y qué se ensució · Auditavisión | apartados.py | 39 | 0 | 11 | 1 | 0 |
 | `datos-ambiente-leyes.html` | Las leyes que aplican · Auditavisión | apartados.py | 39 | 0 | 6 | 0 | 0 |
-| `datos-ambiente-megaobras.html` | La huella de las megaobras · Auditavisión | apartados.py | 48 | 0 | 4 | 4 | 9 |
+| `datos-ambiente-megaobras.html` | La huella de las megaobras · Auditavisión | apartados.py | 57 | 0 | 4 | 7 | 10 |
 | `datos-ambiente-pib.html` | El PIB que no alcanza · Auditavisión | apartados.py | 40 | 0 | 8 | 2 | 0 |
 | `datos-ambiente-presupuesto.html` | El presupuesto ambiental · Auditavisión | apartados.py | 39 | 0 | 4 | 4 | 0 |
 | `datos-ambiente-proteger.html` | Lo que se gasta en proteger · Auditavisión | apartados.py | 39 | 0 | 2 | 3 | 0 |

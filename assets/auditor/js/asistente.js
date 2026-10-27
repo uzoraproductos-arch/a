@@ -1020,7 +1020,7 @@
   MO.obras.forEach(function (o) { OB[o.id] = o; o._al = o.al.map(function (x) { return plano(x); }); });
   /* Nombres que también son de un municipio o de otra cosa: piden contexto de obra. */
   var MO_DEBIL = { ' tula ': 1, ' olmeca ': 1, ' texcoco ': 1, ' santa lucia ': 1, ' bunker ': 1, ' naim ': 1, ' ipab ': 1 };
-  var MO_CTX = /\b(obras?|megaobras?|aeropuerto|refineria|costo|costaron|cuesta|cuestan|sobrecostos?|pierde|pierden|perdio|perdida|gana|ganancia|cancelacion|construccion|inversion|invirti\w*|presupuesto|aprobado|asf|rescate)\b/;
+  var MO_CTX = /\b(obras?|megaobras?|aeropuerto|refineria|costo|costaron|cuesta|cuestan|sobrecostos?|pierde|pierden|perdio|perdida|gana|ganancia|cancelacion|construccion|inversion|invirti\w*|presupuesto|aprobado|asf|rescate|ambiental\w*|ambiente|huella|alerta|impacto|selva|manglar)\b/;
   var MO_EJ = {
     moinvestiga: 'Elige un presidente y una pregunta, y lee la respuesta con su documento.',
     motabla: 'Pregúntame «¿en qué obras invirtió Calderón?» o «compara las obras de Peña Nieto y AMLO».',
@@ -1117,6 +1117,8 @@
   }
   function moRec(o) {
     var s = sxDe(o), out = [], ex = expDe(o), en = o.ente && enteDe(o.ente);
+    if (o.amb) out.push({ x: { ico: '🗺️', v: 'Ver en el mapa ambiental', n: 'Inversión y alerta ambiental en ' + o.amb.sede, ir: o.amb.mapa } });
+    if (o.ir && o.ir.auditoria) out.push({ x: { ico: '🖼️', v: 'Ver investigación', n: 'Auditoría en imágenes de ' + o.n, ir: o.ir.auditoria } });
     out.push({ x: { ico: '🏭', v: 'Ver su ficha', n: 'Obra por obra, por industria', ir: o.ir.ficha } });
     out.push({ x: { ico: '⏱️', v: 'Ver simulador', n: 'Simulación en vivo de su industria y su sexenio', ir: o.sim } });
     out.push({ x: { ico: '📒', v: 'Ver su cuenta', n: 'Su estado de resultados completo', ir: o.ir.cuenta } });
@@ -1134,6 +1136,7 @@
   }
   var MO_SIM = /\b(simulador\w*|simula\w*|en vivo|ritmo|contador|mientras miro|por segundo)\b/;
   var MO_FOCO = [
+    ['amb', /\b(ambiental\w*|ambiente|ecologic\w*|ecosistema\w*|selva\w*|manglar\w*|cenote\w*|huella|deforest\w*|manifestacion|mia|semarnat|asea|profepa|alerta\w*|impacto|contaminacion|en que estados?|donde esta|ubicacion)\b/],
     ['salud', /\b(salud financiera|estado de resultados|finanzas|rentab\w*|ganancia bruta|ganancia neta|utilidad\w*|numeros de la obra)\b/],
     ['sob', /\b(sobrecostos?|de mas|se paso|se excedio|desfase|encarecio|cuanto mas)\b/],
     ['res', /\b(pierde|pierden|perdio|perdida|perdidas|gana|ganan|gano|ganancia|deficit|rentable|negocio|subsidio|al ano|cada ano|nos cuesta|sigue costando)\b/],
@@ -1146,7 +1149,10 @@
   function respObra(o, foco, sim) {
     var c = o.c, s = sxDe(o), lead = '';
     var nomP = o.resc ? 'Presentado en su momento' : 'Aprobado', nomR = o.resc ? 'Pagado y debido' : 'Costo real';
-    if (foco === 'sob') lead = o.resc ? 'Es un rescate, no una obra: su «sobrecosto» es lo que creció la deuda frente a lo que se presentó, <b>' + esc(c.sob.vt) + '</b> ' + chipE(c.sob) + '.' :
+    if (foco === 'amb' && o.amb) lead = '📍 Se ubica en <b>' + esc(o.amb.sede) + '</b>. Costó <b>' + esc(c.real.vt) + '</b> ' + chipE(c.real) +
+      '. <br>🚨 <b>Alerta del Auditor Ambiental (' + esc(o.amb.eco) + '):</b> ' + esc(o.amb.alerta) +
+      ' Permiso ambiental (MIA): ' + chip({ e: o.amb.miaEst, p: o.amb.miaPend }) + ' (' + esc(o.amb.miaTxt) + ').';
+    else if (foco === 'sob') lead = o.resc ? 'Es un rescate, no una obra: su «sobrecosto» es lo que creció la deuda frente a lo que se presentó, <b>' + esc(c.sob.vt) + '</b> ' + chipE(c.sob) + '.' :
       'Su sobrecosto es de <b>' + esc(c.sob.vt) + '</b> ' + chipE(c.sob) + ': se aprobaron ' + esc(c.pres.vt) + ' y costó ' + esc(c.real.vt) + '.';
     else if (foco === 'res') lead = o.res.tipo === 'dato' ? 'Al año, ' + (o.res.v < 0 ? '<b class="pa-rojo">pierde ' : '<b class="pa-verde">gana ') + esc(o.res.vt) + '</b> por sí misma (' + o.res.anio + ', ' + esc(o.res.base) + ') ' + chipE(o.res) + '.' +
       (netaHoy(o) ? ' En pesos de ' + esc(MO.mes) + ' son ' + esc(netaHoy(o)) + ' ' + chip({ e: 'derivado' }) + '.' : '') :
@@ -1158,21 +1164,25 @@
     else lead = (o.resc ? 'Lo pagado y lo que se sigue debiendo suma ' : 'Costó ') + '<b>' + esc(c.real.vt) + '</b> ' + chipE(c.real) + (o.resc ? '' : ', contra lo aprobado: ' + esc(c.pres.vt)) + '.';
     var h = '<p><span aria-hidden="true">' + o.ico + '</span> <b>' + esc(o.n) + '</b> · ' + esc(o.pres) + ' (' + esc(o.per) + ')' + (o.resc ? ' · <b>rescate: deuda, no obra</b>' : '') + '</p>' +
       '<p>' + lead + '</p><ul class="pa-lista">' +
+      (o.amb ? '<li>📍 Dónde está: <b>' + esc(o.amb.sede) + '</b> · <a href="' + esc(o.amb.mapa) + '">Ver en el mapa ambiental ➔</a></li>' : '') +
       '<li>' + nomP + ': <b>' + esc(c.pres.vt) + '</b> ' + chipE(c.pres) + '</li>' +
       '<li>' + nomR + ': <b>' + esc(c.real.vt) + '</b> ' + chipE(c.real) + '</li>' +
       '<li>' + esc(c.sob.et) + ': <b>' + esc(c.sob.vt) + '</b> ' + chipE(c.sob) + '</li>' +
-      '<li>' + resTxt(o.res) + '</li></ul>' + erHtml(o) +
+      '<li>' + resTxt(o.res) + '</li>' +
+      (o.amb && foco !== 'amb' ? '<li>🚨 <b>Alerta ambiental:</b> ' + esc(o.amb.eco) + ' · Permiso MIA: ' + chip({ e: o.amb.miaEst, p: o.amb.miaPend }) + '</li>' : '') +
+      '</ul>' + erHtml(o) +
       (o.asf && foco !== 'asf' ? '<p>🔍 <b>Lo que dijo la ASF:</b> ' + esc(o.asf) + '</p>' : '') +
       '<p class="pa-chico">' + o.sico + ' ' + esc(o.sec) + ' · Estatus: ' + esc(o.est) + '. «Gana o pierde» no descuenta lo que costó construirla.</p>' +
       portalesHtml(o.fu) + (charla && charla.deDonde ? charla.deDonde(moFuentes(o)) : '');
     var ci = [{ v: c.pres.vt, etq: nomP, e: c.pres.e }, { v: c.real.vt, etq: nomR, e: c.real.e }, { v: c.sob.vt, etq: c.sob.et, e: c.sob.e }];
     if (o.res.tipo === 'dato') ci.push({ v: (o.res.v < 0 ? '−' : '+') + o.res.vt, etq: 'Gana o pierde al año (' + o.res.anio + ')', e: o.res.e });
     var otras = MO.obras.filter(function (x) { return x !== o && !x.resc === !o.resc; });
+    var irDest = foco === 'amb' && o.amb ? [o.amb.mapa, 'el mapa ambiental de megaobras en ' + o.amb.sede] : [o.ir.ficha, 'su ficha en Inversión y Megaobras'];
     return {
-      html: h, ir: [o.ir.ficha, 'su ficha en Inversión y Megaobras'], app: sim ? { id: 'mosector', url: o.sim, abre: true } : foco === 'salud' ? { id: 'mocuenta', url: o.ir.cuenta } : { id: 'mosector', url: o.ir.ficha }, rec: moRec(o),
-      ficha: moFicha(o.n + ': lo que costó y lo que deja', h, ci, o.fu.concat(o.res.fu || []), [o.ir.ficha, 'Inversión y Megaobras']),
-      sug: [foco !== 'sob' ? '¿Y su sobrecosto?' : '¿Y cuánto pierde al año?', s && s.ids.length > 1 ? 'Obras de ' + s.n : '¿Qué megaobra tiene más sobrecosto?',
-        otras.length ? 'Compara ' + o.n.split(' (')[0] + ' con ' + otras[0].n : '¿Cuánto han costado las megaobras?']
+      html: h, ir: irDest, app: sim ? { id: 'mosector', url: o.sim, abre: true } : foco === 'salud' ? { id: 'mocuenta', url: o.ir.cuenta } : { id: 'mosector', url: o.ir.ficha }, rec: moRec(o),
+      ficha: moFicha(o.n + ': lo que costó y lo que deja', h, ci, o.fu.concat(o.res.fu || []), irDest),
+      sug: [foco !== 'amb' && o.amb ? '¿Cuál es el impacto ambiental de ' + o.n.split(' (')[0] + '?' : '¿Y su sobrecosto?', s && s.ids.length > 1 ? 'Obras de ' + s.n : '¿Qué megaobra tiene más sobrecosto?',
+        otras.length ? 'Compara ' + o.n.split(' (')[0] + ' con ' + otras[0].n : 'Mapa ambiental de megaobras por estado']
     };
   }
   function respDuelo(a, b) {
@@ -1310,12 +1320,111 @@
       sug: ['¿En qué invirtió cada presidente?', '¿Qué megaobra tiene más sobrecosto?', '¿Cuánto costó el Tren Maya?']
     };
   }
+  function respMapaAmb(q, p) {
+    var casos = MO.casosAmb || [], edosAmb = MO.edosAmb || [];
+    if (!casos.length) return null;
+    var ab = entidadDe(q);
+    var pideAmb = /\b(ambiental\w*|ambiente|ecologic\w*|ecosistema\w*|selva\w*|manglar\w*|cenote\w*|huella|deforest\w*|manifestacion|mia|semarnat|asea|profepa|alerta\w*|impacto|contaminacion)\b/.test(p);
+    var pideObra = /\b(megaobras?|obras?|infraestructura|refineria\w*|tren\w*|aeropuerto\w*|acueducto\w*|presa\w*|gas|gnl)\b/.test(p);
+    var pideMapa = /\b(mapa|estados|entidades|donde estan|en que estados)\b/.test(p);
+    if (!ab && !((pideAmb && (pideObra || pideMapa)) || (pideMapa && pideObra))) return null;
+    if (ab && !pideObra && !(pideAmb && pideMapa)) return null;
+
+    var fmtMdp = function (v) { return '$' + Number(v || 0).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp'; };
+    if (ab) {
+      var ed = edosAmb.filter(function (x) { return x.a === ab; })[0];
+      if (!ed) return null;
+      var os = casos.filter(function (c) { return (c.edos || []).indexOf(ab) >= 0; });
+      var urlEdo = 'datos-ambiente-megaobras.html?e=' + encodeURIComponent(ab) + '#abMapaObras';
+      var h = '<p>🗺️ <b>' + esc(ed.n) + ' (' + esc(ed.a) + ')</b> en el <b>Mapa ambiental de megaobras e infraestructura</b>:</p>' +
+        '<ul class="pa-lista">' +
+        '<li>🏛️ <b>Gasto federalizado 2026 (Ramos 28 y 33):</b> <b>' + fmtMdp(ed.gasto) + '</b> ' + chip({ e: 'derivado' }) + ' (Ramo 28: ' + fmtMdp(ed.r28) + ' · Ramo 33: ' + fmtMdp(ed.r33) + ').</li>' +
+        '<li>🔍 <b>Por aclarar ante la ASF en el estado (CP 2024):</b> <b>' + fmtMdp(ed.asf) + '</b> ' + chip({ e: 'oficial' }) + ' en ' + ed.aud + ' auditorías.</li>' +
+        '</ul>';
+      if (os.length) {
+        h += '<p>🚨 <b>' + os.length + (os.length === 1 ? ' megaobra o caso con alerta ambiental' : ' megaobras y casos con alerta ambiental') + ' en ' + esc(ed.n) + ':</b></p><ul class="pa-lista">' +
+          os.map(function (c) {
+            var costo = c.realMdp != null ? ' · Inversión registrada: <b>' + fmtMdp(c.realMdp) + '</b> ' + chip({ e: c.estReal, p: c.pendReal }) + (c.multi ? ' <i>(total nacional en ' + c.edos.join(', ') + ')</i>' : '') : '';
+            return '<li><span aria-hidden="true">' + esc(c.ico) + '</span> <b>' + esc(c.nombre) + '</b> (' + esc(c.sede) + ')' + costo + '.<br>' +
+              '🌱 <b>Alerta ambiental (' + esc(c.ecosistema) + '):</b> ' + esc(c.alerta) + ' · Permiso: ' + chip({ e: c.miaEst, p: c.miaPend }) + ' <a href="' + esc(c.aud) + '">Ver su Auditoría en imágenes ➔</a></li>';
+          }).join('') + '</ul>';
+      } else {
+        h += '<p>En el padrón actual de 14 megaobras federales y casos ambientales críticos no hay una megaobra ubicada en <b>' + esc(ed.n) + '</b> (se concentran en 15 entidades). En el mapa puedes revisar su gasto federalizado, su deuda estatal (' + fmtMdp(ed.deuda) + ', semáforo ' + esc(ed.sem) + ') y sus auditorías de la ASF.</p>';
+      }
+      var recs = [
+        { x: { ico: '🗺️', v: 'Abrir el mapa ambiental', n: 'Con ' + ed.n + ' seleccionado en La huella de las megaobras', ir: urlEdo } },
+        { x: { ico: '🏛️', v: 'Ver mapa del gasto federalizado', n: 'Ramos 28 y 33 en ' + ed.n, ir: 'numeros-mapa-del-gasto-federalizado.html?e=' + encodeURIComponent(ab) } },
+        { x: { ico: '🧾', v: 'Ver estado de cuenta', n: 'De ' + ed.n, ir: 'herramienta-inspector-entes.html#ente=estatal:' + encodeURIComponent(ab) } },
+        { x: { ico: '🌱', v: 'Auditar sector ambiental', n: 'SEMARNAT, Conagua y PROFEPA', ir: 'herramienta-ambiente-auditor.html' } }
+      ];
+      if (os.length && os[0].aud) recs.unshift({ x: { ico: '🖼️', v: 'Ver investigación', n: os[0].nombre, ir: os[0].aud } });
+      return {
+        html: h, ir: [urlEdo, 'el mapa ambiental de megaobras en ' + ed.n], rec: recs,
+        ficha: moFicha('Mapa ambiental y megaobras en ' + ed.n, h, [
+          { v: fmtMdp(ed.gasto), etq: ed.n + ': Ramos 28 y 33 (2026)', e: 'derivado' },
+          { v: fmtMdp(ed.asf), etq: ed.n + ': por aclarar ante la ASF (2024)', e: 'oficial' }
+        ], MO.portales, [urlEdo, 'La huella de las megaobras']),
+        sug: ['Mapa ambiental de megaobras por estado', os.length ? '¿Cuánto costó ' + os[0].nombre.split(' (')[0] + '?' : '¿Qué megaobras hay en Tabasco?', 'Estado de cuenta de ' + ed.n]
+      };
+    }
+
+    var tipo = null, tipoTit = 'todas las megaobras y casos ambientales';
+    if (/\b(tren\w*|selva\w*|ferroviari\w*)\b/.test(p)) { tipo = 'trenes'; tipoTit = 'trenes y selvas'; }
+    else if (/\b(refineria\w*|petroleo|pemex|energia|gas|gnl|fertiliz\w*)\b/.test(p)) { tipo = 'energia'; tipoTit = 'refinerías, energía e industria'; }
+    else if (/\b(aeropuerto\w*|aifa|texcoco|bodega|megafarmacia)\b/.test(p)) { tipo = 'aeropuertos'; tipoTit = 'aeropuertos y equipamiento'; }
+    else if (/\b(agua|acueducto\w*|presa\w*|huracan|otis|desastre\w*)\b/.test(p)) { tipo = 'agua'; tipoTit = 'agua y desastres'; }
+
+    var lista = tipo ? casos.filter(function (c) { return c.tipo === tipo; }) : casos;
+    var edosSet = {};
+    lista.forEach(function (c) { (c.edos || []).forEach(function (a) { edosSet[a] = 1; }); });
+    var nEdos = Object.keys(edosSet).length;
+    var sumInv = lista.reduce(function (ac, c) { return ac + (c.realMdp || 0); }, 0);
+    var sumAsf = lista.reduce(function (ac, c) { return ac + (c.asfMdp || 0); }, 0);
+    var urlMapa = 'datos-ambiente-megaobras.html' + (tipo ? '?tipo=' + tipo : '') + '#abMapaObras';
+
+    var h = '<p>🗺️ <b>Mapa ambiental de megaobras e infraestructura por estado</b> (' + esc(tipoTit) + '): concentra <b>' + lista.length + ' obras y casos</b> en <b>' + nEdos + ' de las 32 entidades</b> ' + chip({ e: 'derivado' }) + '.</p>' +
+      '<ul class="pa-lista">' +
+      '<li>💰 <b>Inversión registrada en estas obras:</b> <b>' + fmtMdp(sumInv) + '</b> ' + chip({ e: 'derivado' }) + ' (suma nacional sin prorratear entre estados).</li>' +
+      '<li>🔍 <b>Por aclarar ante la ASF en estas obras:</b> <b>' + fmtMdp(sumAsf) + '</b> ' + chip({ e: 'derivado' }) + ' (más $113,327.7 mdp auditados en la cancelación de Texcoco).</li>' +
+      '<li>⏳ <b>Permisos ambientales (MIA) integrados:</b> <b>0 de 11 obras de construcción</b> ' + chip({ e: 'pendiente', p: 'ambiente-0' }) + ' (SEMARNAT y ASEA).</li>' +
+      '</ul>' +
+      '<p><b>Dónde están y qué alerta ambiental tienen:</b></p><ul class="pa-lista">' +
+      lista.slice(0, 8).map(function (c) {
+        return '<li><span aria-hidden="true">' + esc(c.ico) + '</span> <b>' + esc(c.nombre) + '</b> (' + esc(c.edos.join(', ')) + '): ' +
+          (c.realMdp != null ? '<b>' + fmtMdp(c.realMdp) + '</b> ' + chip({ e: c.estReal, p: c.pendReal }) + ' · ' : '') +
+          '🌱 <i>' + esc(c.ecosistema) + '</i>. <a href="datos-ambiente-megaobras.html?e=' + encodeURIComponent(c.edos[0]) + '#abMapaObras">Ver en mapa ➔</a></li>';
+      }).join('') + '</ul>' +
+      '<p class="pa-chico">Toca <b>«Saber más»</b> para abrir el mapa interactivo en la Enciclopedia (Medio ambiente › La huella de las megaobras), con tres lentes: Megaobras y alerta ambiental, Gasto federalizado 2026 (Ramos 28 y 33) y Por aclarar ante la ASF.</p>';
+
+    return {
+      html: h, ir: [urlMapa, 'el mapa ambiental de megaobras por estado'],
+      rec: [
+        { x: { ico: '🗺️', v: 'Abrir el mapa ambiental', n: 'La huella de las megaobras por estado', ir: urlMapa } },
+        { x: { ico: '🌱', v: 'Auditar sector ambiental', n: 'SEMARNAT, Conagua, PROFEPA y ASEA', ir: 'herramienta-ambiente-auditor.html' } },
+        { x: { ico: '⏱️', v: 'Ver simulador', n: 'Simulación en vivo de las megaobras', ir: MO.sims.vivo } },
+        { x: { ico: '🌀', v: 'Ver crisis ambientales', n: 'Otis, agua en Jalisco y desastres', ir: 'herramienta-ambiente-crisis.html' } }
+      ],
+      ficha: moFicha('Mapa ambiental de megaobras por estado', h, [
+        { v: nEdos + ' de 32', etq: 'Entidades con megaobras o alertas', e: 'derivado' },
+        { v: fmtMdp(sumInv), etq: 'Inversión registrada en el filtro', e: 'derivado' },
+        { v: fmtMdp(sumAsf), etq: 'Por aclarar ante la ASF en estas obras', e: 'derivado' }
+      ], MO.portales, [urlMapa, 'La huella de las megaobras']),
+      sug: ['¿Qué megaobras hay en Tabasco?', '¿Cuál es el impacto ambiental del Tren Maya?', 'Impacto ambiental de las refinerías']
+    };
+  }
   function megaobras(q, previas) {
     if (!MO.obras.length) return null;
     var p = plano(q);
-    /* Lo que contestan otros: verificar una cifra, el Paquete 2027, la huella ambiental, un expediente. */
+    /* Lo que contestan otros: verificar una cifra, el Paquete 2027, un expediente. */
     if (/\b(es cierto|es verdad|dicen que|escuche|lei que|vi que)\b/.test(p) || /\b(2027|paquete|se propone|propuesta|propone)\b/.test(p) ||
-      /\b(ambiental|ambiente|selva|huella|deforest\w*|manifestacion)\b/.test(p) || /\b(expedientes?|pliegos?)\b/.test(p)) return null;
+      /\b(expedientes?|pliegos?)\b/.test(p)) return null;
+    /* Si pregunta por una obra específica (incluso su huella o alerta ambiental), o por el mapa ambiental / megaobras en un estado. */
+    var obs0 = obrasEn(q);
+    if (!obs0.length) {
+      var rAmb = respMapaAmb(q, p);
+      if (rAmb) return rAmb;
+      if (/\b(ambiental|ambiente|selva|huella|deforest\w*|manifestacion)\b/.test(p)) return null;
+    }
     var defin = /^\s*(que|q) (es|son|fue|significa)\b/.test(p);
     /* 1. Las aplicaciones por su nombre, o qué hay en la herramienta. */
     var id = null;

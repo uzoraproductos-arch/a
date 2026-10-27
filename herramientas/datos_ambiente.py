@@ -47,7 +47,7 @@ PARTES = [
      'El Ramo 16 en 2026 y el proyecto 2027, órgano por órgano, con su tabla en CSV',
      'ab', ['abPresupuesto'], 'dinero'),
     ('megaobras', 'datos-ambiente-megaobras.html', '🏗️', 'La huella de las megaobras',
-     'Las obras que necesitan permiso ambiental y lo que ya se sabe de su costo',
+     'El mapa de México con las megaobras e infraestructura por estado, su gasto federalizado y su alerta ambiental',
      'ab', ['abMegaobras'], 'dinero'),
     ('leyes', 'datos-ambiente-leyes.html', '⚖️', 'Las leyes que aplican',
      'Tu derecho a un medio ambiente sano, la basura, las obras y el clima, con su texto vigente',
