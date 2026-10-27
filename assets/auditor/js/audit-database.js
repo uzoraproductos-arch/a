@@ -30659,16 +30659,16 @@ window.AUDIT_DB = {
     "deuda-congreso-2027": {
       "ente": "Congreso de la Unión (Cámara de Diputados y Senado) y Secretaría de Hacienda y Crédito Público",
       "quien": "La Secretaría de Hacienda propone la Iniciativa de Ley de Ingresos; la Cámara de Diputados (15-10-2026) y el Senado de la República autorizan los ingresos y el techo de endeudamiento (art. 73, fracc. VIII constitucional); las agencias calificadoras evalúan el riesgo soberano.",
-      "que": "El 15 de octubre de 2026 el pleno de la Cámara de Diputados aprobó la Ley de Ingresos de la Federación para 2027 (331 votos a favor y 118 en contra en lo general), y el 21 de octubre la avalaron las comisiones unidas del Senado (18 a 11). El dictamen estima ingresos totales por $10,636,488.0 millones de pesos y autoriza un techo de endeudamiento interno neto del Gobierno Federal hasta por $1,700,000.0 millones ($1.7 billones). Además, aprobó una reserva al artículo vigésimo primero transitorio que quita el tope de $300 millones de pesos de ingresos anuales y permite a grandes contribuyentes obtener la reducción de multas, recargos y gastos de ejecución si pagan completo su adeudo principal. Ese mismo 15 de octubre, en su Comunicado 82, Hacienda informó que HR Ratings bajó la calificación soberana de largo plazo de México de BBB+ a BBB, con perspectiva estable.",
+      "que": "El 15 de octubre de 2026 el pleno de la Cámara de Diputados aprobó la Ley de Ingresos de la Federación para 2027 (331 votos a favor y 118 en contra en lo general), y el 21 de octubre la avalaron las comisiones unidas del Senado (18 a 11). La iniciativa de Hacienda estima ingresos totales por $10,636,488.1 millones de pesos (art. 1o.) y pide un techo de endeudamiento neto interno del Gobierno Federal hasta por $1,700,000.0 millones ($1.7 billones, art. 2o.). Además, aprobó una reserva al artículo vigésimo primero transitorio que quita el tope de $300 millones de pesos de ingresos anuales y permite a grandes contribuyentes obtener la reducción de multas, recargos y gastos de ejecución si pagan completo su adeudo principal. Ese mismo 15 de octubre, en su Comunicado 82, Hacienda informó que HR Ratings bajó la calificación soberana de largo plazo de México de BBB+ a BBB, con perspectiva estable.",
       "falta": "Falta la votación del pleno del Senado y la publicación del decreto en el Diario Oficial de la Federación para confirmar el texto definitivo del transitorio vigésimo primero. Además, el reporte de HR Ratings (donde constan sus razones y sus proyecciones de déficit de 4.6 % del PIB y deuda de 61.2 % en 2030) sigue pendiente porque su portal no abrió desde la plataforma.",
       "pendiente_id": "red-hr-ratings-baja-mexico-bbb-3",
       "cifras": {
-        "ingresos_totales_2027_mdp": 10636488.0,
+        "ingresos_totales_2027_mdp": 10636488.1,
         "ingresos_presupuestarios_2027_mdp": 9156528.9,
         "techo_deuda_interna_2027_mdp": 1700000.0,
         "costo_financiero_2027_mdp": 1636247.1,
         "rfsp_2027_mdp": 1555655.8,
-        "financiamiento_2027_mdp": 1479959.1,
+        "financiamiento_2027_mdp": 1479959.2,
         "votos_diputados_favor": 331,
         "votos_diputados_contra": 118,
         "ajuste_fiscal_2025_pp_pib": 1.3
@@ -30689,6 +30689,10 @@ window.AUDIT_DB = {
         {
           "doc": "SHCP, Comunicado No. 82: México mantiene el grado de inversión con las ocho agencias calificadoras; HR Ratings ajusta de BBB+ a BBB (15-10-2026)",
           "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+        },
+        {
+          "doc": "Iniciativa de Ley de Ingresos de la Federación 2027, arts. 1o. y 2o. (Gaceta Parlamentaria, 08-09-2026, Anexo A)",
+          "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-A.pdf"
         },
         {
           "doc": "SHCP, Criterios Generales de Política Económica para 2027 (Gaceta Parlamentaria, 08-09-2026)",

@@ -69,7 +69,7 @@ AUDITORIAS = [
      '¿Cuánto contratan en medicinas e insumos el IMSS, IMSS-Bienestar y Birmex, y qué parte se da por adjudicación directa?'),
     ('deuda-congreso-2027', 'assets/auditor/img/showcase_deuda_2027.jpg', 'Ilustración provisional',
      'Ilustración del tablero de votación en el Congreso con el techo de deuda 2027 y la nota soberana BBB',
-     '🧾 Paquete Económico 2027 · Congreso, deuda y calificación BBB', 'El Congreso aprobó más deuda: Ley de Ingresos 2027 y nota soberana',
+     '🧾 Paquete Económico 2027 · Congreso, deuda y calificación BBB', 'Diputados aprobó la deuda de 2027: Ley de Ingresos y nota soberana',
      '¿Cuánta deuda autorizó la Cámara de Diputados para 2027, qué cambió en las multas fiscales y qué dijo Hacienda sobre la nota BBB?'),
     ('inversion-megaobras', 'assets/auditor/img/showcase_inversion_megaobras.jpg', 'Ilustración provisional',
      'Ilustración panorámica de grandes obras de infraestructura, trenes, refinerías y el balance financiero de seis sexenios',

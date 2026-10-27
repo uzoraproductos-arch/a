@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 232 |
+| Páginas revisadas | 226 |
 | Páginas que solo redirigen | 28 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -16,14 +16,12 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Página | Título | Generador | Enlaces internos | Módulos embebidos | oficial | derivado | pendiente |
 |---|---|---|---:|---:|---:|---:|---:|
-| `Plan_Maestro_Auditor_Civico_20260927.html` | MEGA PLAN MAESTRO INTEGRAL — Auditor Cívico (Auditavisión) | a mano | 0 | 0 | 0 | 0 | 0 |
 | `agora.html` | Ágora cívica · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
 | `aprende.html` | Aprende · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
-| `auditavision.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 1 | 0 | 0 | 0 | 0 |
 | `auditoria-agronitrogenados.html` | Plantas de fertilizantes Agronitrogenados · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 4 | 2 | 2 |
 | `auditoria-aifa.html` | Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 2 | 4 | 1 |
 | `auditoria-bunker-garcia-luna.html` | El Búnker de Seguridad de García Luna (SSPC) · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 4 | 2 | 2 |
-| `auditoria-deuda-congreso-2027.html` | El Congreso aprobó más deuda: Ley de Ingresos 2027 y nota soberana · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 5 | 1 | 2 |
+| `auditoria-deuda-congreso-2027.html` | Diputados aprobó la deuda de 2027: Ley de Ingresos y nota soberana · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 5 | 1 | 2 |
 | `auditoria-deuda-soberana.html` | Los intereses de la deuda pública · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 2 | 3 | 1 |
 | `auditoria-dos-bocas.html` | Refinería Olmeca (Dos Bocas) · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 2 | 4 | 1 |
 | `auditoria-enciclomedia.html` | Programa Enciclomedia · Auditoría en imágenes · Auditavisión | auditorias.py | 73 | 0 | 5 | 2 | 1 |
@@ -59,7 +57,6 @@ La Enciclopedia queda fuera porque está congelada.
 | `contexto-dimensional-renglones.html` | Renglones que no se suman · Auditavisión | apartados.py | 32 | 0 | 3 | 0 | 1 |
 | `contexto-dimensional-social.html` | Dimensión social · Auditavisión | apartados.py | 32 | 0 | 6 | 0 | 1 |
 | `contratos-publicos.html` | Contratos públicos · Auditavisión | apartados.py | 31 | 0 | 1 | 1 | 0 |
-| `crecimiento_gasto_sexenal.html` | Crecimiento Real del Gasto Sexenal en México — Radiografía del Poder Presupuestario | a mano | 0 | 0 | 0 | 0 | 0 |
 | `datos-abiertos.html` | Datos abiertos · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `datos-ambiente-basura.html` | La basura · Auditavisión | apartados.py | 39 | 0 | 14 | 9 | 1 |
 | `datos-ambiente-desglose.html` | Qué se acabó y qué se ensució · Auditavisión | apartados.py | 39 | 0 | 11 | 1 | 0 |
@@ -86,7 +83,6 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-poder-judicial.html` | Poder Judicial · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
 | `datos-poder-legislativo.html` | Poder Legislativo · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
-| `diagrama_comparativo (1).html` | Radiografía del Erario: Sexenios del Siglo XXI en México | a mano | 0 | 0 | 0 | 0 | 0 |
 | `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `donaciones.html` | Donaciones · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `enciclopedia-auditavision.html` | Enciclopedia · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
@@ -129,7 +125,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-asf-imagenes.html` | Auditoría en imágenes · Auditavisión | apartados.py | 125 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-asf-serie.html` | Seis años de revisiones · Auditavisión | apartados.py | 31 | 0 | 10 | 4 | 1 |
 | `herramienta-inspector-asf.html` | Expedientes de casos de la ASF · Auditavisión | apartados.py | 45 | 0 | 3 | 3 | 0 |
-| `herramienta-inspector-dictamen.html` | Dictamen pericial · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector-dictamen.html` | Dictamen cívico independiente · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-efos.html` | Lista negra del SAT · Auditavisión | apartados.py | 38 | 0 | 2 | 7 | 0 |
 | `herramienta-inspector-entes-directorio.html` | Directorio de entes públicos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-entes.html` | Auditor de entes públicos · Auditavisión | apartados.py | 46 | 0 | 49 | 3 | 0 |
@@ -157,11 +153,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 31 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 54 | 0 | 3 | 6 | 1 |
 | `indice.html` | Índice general · Auditavisión | apartados.py | 227 | 0 | 1 | 1 | 1 |
-| `infografia_fiscal_mx.html` | Arquitectura Fiscal de México — Radiografía Tributaria en Tres Niveles de Gobierno | a mano | 0 | 0 | 0 | 0 | 0 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `informes-oficiales.html` | Informes oficiales · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
-| `mapa_mexico (1).html` | Mapa Interactivo — Gasto Federalizado por Entidad Federativa · PEF 2026 | a mano | 0 | 0 | 0 | 0 | 0 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
 | `noticias-relevantes.html` | Noticias relevantes · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 46 | 0 | 0 | 5 | 1 |

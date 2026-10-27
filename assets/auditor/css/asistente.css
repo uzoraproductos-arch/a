@@ -225,7 +225,7 @@
 .pa-burbuja a.pa-genera:hover, .pa-burbuja a.pa-genera:focus-visible { background: #343a43; color: #ffffff; }
 .pa-ver-donde { font-weight: 600; color: #44526b; }
 
-/* El dictamen pericial de Auditavisión (herramienta-inspector-dictamen.html). */
+/* El dictamen cívico independiente de Auditavisión (herramienta-inspector-dictamen.html). */
 .dic { max-width: 900px; margin: 0 auto; }
 .dic-acc { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
 .dic-doc { padding: 22px 26px; }

@@ -766,7 +766,7 @@ def pagina(cuenta, canal='', herramientas=()):
             <li><b>Sigo cada megaobra.</b> Pregúntame por el <b>Tren Maya</b>, <b>Dos Bocas</b>, el <b>AIFA</b> o el <b>FOBAPROA</b>: cuánto se aprobó, cuánto costó, su sobrecosto, si gana o pierde al año y qué dijo la ASF. También <b>en qué invirtió cada presidente</b> («obras de Calderón»), cuál tiene <b>más sobrecosto</b> y las cinco aplicaciones de Inversión y Megaobras, que también se abren aquí.</li>
             <li><b>Toca «📎 Fuente»</b> para ver la fuente de cada cifra y su estado: <span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">derivado</span> <span class="est-chip est-pendiente">pendiente</span>.</li>
             <li><b>¿Quieres ir a fondo?</b> «📖 Saber más» te lleva a la página de la plataforma donde está la información completa.</li>
-            <li><b>¿Necesitas el respaldo?</b> «🧾 Generar dictamen» abre, en otra pestaña, el dictamen pericial de Auditavisión: tu pregunta, la respuesta, sus cifras, sus fuentes y el método, con folio, sello y huella digital (SHA-256).</li>
+            <li><b>¿Necesitas el respaldo?</b> «🧾 Generar dictamen» abre, en otra pestaña, el dictamen cívico independiente de Auditavisión: tu pregunta, la respuesta, sus cifras, sus fuentes y el método, con folio, sello y huella digital (SHA-256).</li>
           </ol>
           <p class="pa-beta"><b>🛠️ En mejora continua.</b> Cada dato que integra la plataforma me vuelve más preciso. Si algo no lo sé, <a href="comunidad.html">cuéntanos</a> y lo agregamos.</p>
           <section class="pa-pendq" id="paSinResp" aria-labelledby="paSinRespT">

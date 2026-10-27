@@ -1199,14 +1199,14 @@ def herramienta_dictamen(bloque):
     h = next(x for x in HERRAMIENTAS if x[1] == 'inspector')
     import asistente
     return {
-        'archivo': asistente.DICTAMEN, 'menu': 'Dictamen pericial', 'menu_archivo': 'herramientas.html',
+        'archivo': asistente.DICTAMEN, 'menu': 'Dictamen cívico independiente', 'menu_archivo': 'herramientas.html',
         'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
-        'icono': '🧾', 'titulo': 'Dictamen pericial de Auditavisión',
+        'icono': '🧾', 'titulo': 'Dictamen cívico independiente de Auditavisión',
         'lema': '%s · el respaldo de una respuesta' % ASISTENTE[1], 'sin_icono_lema': True, 'icono_cab': LOGO_IMG,
         'entrada': ('<b>El respaldo de una respuesta del Auditor.</b> Tu pregunta, lo que se contestó, cada cifra con su estado, '
                     'sus fuentes oficiales y el método, con folio, sello y huella digital. Se arma de nuevo con los datos de la plataforma cada vez que se abre el enlace.'),
         'fondo': FOTO_AUDITOR, 'rubro': h[1], 'foto_clase': 'foto-auditor',
-        'secciones': [{'id': 'dictamen', 'titulo': 'Dictamen pericial de Auditavisión', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
+        'secciones': [{'id': 'dictamen', 'titulo': 'Dictamen cívico independiente de Auditavisión', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
         'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
     }
 
@@ -5040,6 +5040,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('27-10-2026', 'El dictamen cambia de nombre: ahora es el «Dictamen cívico independiente». Dice lo mismo que antes: es el respaldo documental de una respuesta, no un peritaje ni un documento con validez ante una autoridad. También hay aviso de privacidad, al pie de cada página.'),
     ('26-10-2026', 'Auditoría en imágenes llega a 22 investigaciones. Se integran las 13 megaobras y rescates individuales (Agronitrogenados, Grupo Fertinal, Estela de Luz, Búnker de Seguridad, Refinería Bicentenario en Tula, Enciclomedia, FOBAPROA-IPAB y FARAC carretero, junto a Tren Maya, Dos Bocas, AIFA, Tren Interurbano y Megafarmacia), el panorama de Inversión y Megaobras en seis sexenios y cuatro investigaciones actuales: el presupuesto y los contratos bajo revisión en el INE, el proyecto de gas en Guaymas y la Gaceta Parlamentaria de Sonora, las compras de medicamentos y contratos del IMSS en ComprasMX, y la aprobación de la Ley de Ingresos 2027 con el techo de deuda y la nota BBB.'),
     ('26-10-2026', 'Contratos públicos: los 215 mil contratos que el gobierno federal y los gobiernos que usan ComprasMX reportaron en los expedientes de 2025 y 2026. Pregúntale al Auditor «contratos de Laboratorios Pisa» o «¿a quién le compra el IMSS?» y te dice cuántos contratos, por cuánto, cuánto fue por adjudicación directa y la liga de cada uno. Y cruzamos a todos los proveedores con la lista negra del SAT.'),
     ('26-10-2026', 'Nuestros pilares: la nueva página dice en nueve puntos qué es Auditavisión, el periodista virtual del gasto público: que la verdad sea incómoda no la vuelve falsa, evidencia con folio, contrapeso y no propaganda, y reconocimiento a quienes hacen periodismo. Y ya puedes seguir un caso: en cada columna de Noticias relevantes, «🔔 Seguir este caso» te avisa cuando la actualizamos con un documento nuevo.'),
@@ -5064,7 +5065,7 @@ NOVEDADES = [
     ('23-10-2026', 'La pestaña Auditor Virtual abre directo en Pregúntale al Auditor. Junto a «Cómo platicar conmigo» está el botón «Herramientas», con las cuatro: Modo Inspector, que lleva a las Grandes investigaciones, Costo Ambiental, Calculadora Cívica e Inversión y Megaobras.'),
     ('23-10-2026', 'El menú queda en tres pestañas: Auditor Virtual, con las herramientas; Enciclopedia, que junta Números, Datos y Aprende; y Comunidad, la antigua Participa, donde la tarjeta Comunidad se llama ahora Participa. Ningún enlace cambia de dirección.'),
     ('23-10-2026', 'El Poder Judicial y el Poder Legislativo viven en Datos, cada uno con su portada y una página por tema: quién es quién, la Suprema Corte, los sueldos, el presupuesto, la elección judicial y cómo decide; las Cámaras, el calendario, las elecciones y los congresos de los estados. Pregúntale al Auditor contesta sobre los dos.'),
-    ('23-10-2026', 'Cada respuesta de Pregúntale al Auditor trae «Saber más», que abre la página donde está el dato, y «Generar dictamen», que abre el dictamen pericial sellado en su propia página.'),
+    ('23-10-2026', 'Cada respuesta de Pregúntale al Auditor trae «Saber más», que abre la página donde está el dato, y «Generar dictamen», que abre el dictamen sellado (hoy «Dictamen cívico independiente») en su propia página.'),
     ('23-10-2026', 'Pregúntale al Auditor es el auditor de toda la plataforma: contesta como chat con las cifras de Números y de Datos, cada una con su fuente, y verifica lo que «dicen» o la liga de una nota contra el documento oficial.'),
     ('22-10-2026', 'Costo Ambiental se reestructura: la parte informativa pasa a Datos → Medio ambiente, en nueve páginas, y la herramienta se queda con sus aplicaciones.'),
     ('22-10-2026', 'Calculadora Cívica: Tu estado de cuenta se abre en cuatro páginas (tu ingreso, lo que te retienen, a dónde va cada peso y tu estado de cuenta), y el Estado de cuenta administrativo pasa a ser su quinta aplicación.'),
@@ -5171,7 +5172,7 @@ def _hijas(base, ref):
         'numeros-paquete-2027.html': [(x[2], x[3]) for x in presupuesto_modulos.PE_PARTES],
         cc_ticket.PORTADA: [(cc_ticket.paso_archivo(x[1]), x[3]) for x in cc_ticket.PASOS],
         'herramienta-inspector-asf.html': [(p['archivo'], limpio(p['menu'])) for p in insp_asf.subpaginas(base, ref)],
-        ASISTENTE[0]: [(asistente.DICTAMEN, 'El dictamen pericial')],
+        ASISTENTE[0]: [(asistente.DICTAMEN, 'El dictamen cívico independiente')],
         'radar-peso.html': [(x[1], x[2]) for x in RADAR_PESO_PARTES],
         datos_ambiente.PORTADA: [(x[1], x[3]) for x in datos_ambiente.PARTES],
         al.PORTADA: [(x[0], x[2]) for x in al.PAGINAS],

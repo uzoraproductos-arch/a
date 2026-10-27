@@ -7,7 +7,7 @@
    dice en corto. La nota técnica sellada (folio + huella SHA-256, como el
    Estado de Cuenta) solo se arma si el lector toca «Generar ficha técnica».
    Si ninguna ficha responde, lo dice. Desde el 23-10-2026 (pedido del autor)
-   esa nota es el «Dictamen pericial de Auditavisión» y vive en su propia
+   esa nota es el «Dictamen cívico independiente de Auditavisión» y vive en su propia
    página (herramienta-inspector-dictamen.html, que carga este mismo archivo):
    el enlace lleva solo la pregunta y la página vuelve a contestarla con la
    misma base, así que nadie puede fabricar un dictamen con cifras propias.
@@ -171,7 +171,7 @@
     return (pre || 'NT') + '-' + f + '-' + hx.slice(0, 8).toUpperCase();
   }
 
-  /* El dictamen pericial (pedido del autor, 23-10-2026): la respuesta del
+  /* El dictamen cívico independiente (antes «pericial»; pedido del autor, 23-10-2026): la respuesta del
      Auditor con su respaldo completo. Encabezado y pie llevan el sello. */
   var ROMANO = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
   function dictamenHtml(q, r, f, antes) {
@@ -204,7 +204,7 @@
       '<header class="dic-cab"><div class="dic-cab-marca"><img src="' + LOGO + '" alt="" width="62" height="48">' +
       '<div><b>Auditavisión</b><small>Plataforma ciudadana de fiscalización del gasto público</small></div></div>' +
       '<div class="dic-sello">' + sello(null, 'DICTAMEN') + '</div>' +
-      '<div class="dic-cab-tx"><span class="pa-nota-tipo">Dictamen pericial · ' + esc(t[1]) + '</span>' +
+      '<div class="dic-cab-tx"><span class="pa-nota-tipo">Dictamen cívico independiente · ' + esc(t[1]) + '</span>' +
       '<dl><div><dt>Folio</dt><dd class="pa-folio">calculando…</dd></div><div><dt>Expedido</dt><dd>' + esc(hoy()) + '</dd></div>' +
       '<div><dt>Versión de la plataforma</dt><dd>' + esc(selloSitio()) + '</dd></div></dl></div></header>' +
       '<h2 class="dic-tit"><span aria-hidden="true">' + t[0] + '</span> ' + esc(f.tit) + '</h2>' +
@@ -232,7 +232,7 @@
       'Vale para la versión de la plataforma que indica: si un documento oficial cambia, el dictamen se actualiza y su huella también.</p>' +
       (ir ? '<p class="pa-ir dic-no-imprime"><a href="' + esc(ir[0]) + '">📖 Saber más en «' + esc(ir[1]) + '» ➔</a></p>' : '') +
       '<footer class="pa-sello"><div class="pa-sello-img dic-sello">' + sello(null, 'DICTAMEN') + '</div><div>' +
-      '<b>Dictamen pericial de Auditavisión</b>' +
+      '<b>Dictamen cívico independiente de Auditavisión</b>' +
       '<p>Folio <b class="pa-folio">calculando…</b> · Versión de la plataforma <b>' + esc(selloSitio()) + '</b></p>' +
       '<p class="pa-huella">Huella digital (SHA-256 de la ficha): <code>calculando…</code></p>' +
       '<p class="pa-leyenda">Para comprobarlo, abre el enlace de este dictamen: la plataforma lo vuelve a armar con sus datos y la huella debe coincidir. ' +

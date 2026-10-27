@@ -366,7 +366,7 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   **«Saber más»**, que abre la página de la plataforma donde está la
   información (el campo `ir` de la respuesta: una respuesta nueva sin `ir`
   no está terminada), y **«Generar dictamen»**, que abre en otra pestaña el
-  dictamen pericial sellado (`herramienta-inspector-dictamen.html`). El
+  «Dictamen cívico independiente» sellado (`herramienta-inspector-dictamen.html`). El
   enlace del dictamen solo lleva la pregunta (`?q=`, y las previas en `&c=`):
   la página vuelve a contestarla con la misma base, así que no se puede
   fabricar un dictamen con cifras ajenas. El dictamen dice que no es un
