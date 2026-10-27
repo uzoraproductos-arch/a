@@ -182,6 +182,25 @@ PROPIOS = [
      'Los tabulados y datos abiertos del censo pueden traer los expedientes en trámite al cierre del año y la plataforma aún no los integra.',
      PLATAFORMA, 'https://www.inegi.org.mx/programas/cnije/2025/', 'Censo Nacional de Impartición de Justicia Estatal 2025 (INEGI)',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-gestion.html', 'Datos · Poder Judicial · Lo que cuesta y lo que resuelve')]),
+    # La auditoría de gestión de salud pública (27-10-2026).
+    ('salud-tiempos-espera', 'Salud', 'Cuánto espera una persona una consulta de especialidad o una cirugía en el IMSS',
+     'La Memoria Estadística 2025 del IMSS trae cuántas consultas y cirugías se dieron, pero no cuánto tiempo se esperó por ellas. En su boletín 023/2026 el IMSS dijo que la '
+     'espera bajó 12 días en cataratas y 10 en vesícula, sin decir cuánto se esperaba antes ni cuánto se espera ahora, así que no se puede comprobar. El IMSS tiene el registro; '
+     'la plataforma no encontró dónde lo publica.',
+     'Instituto Mexicano del Seguro Social (IMSS): tiene el registro y no lo encontramos publicado', 'https://www.imss.gob.mx/conoce-al-imss/memoria-estadistica-2025',
+     'Memoria Estadística 2025 (IMSS)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-imss.html', 'Datos · Salud pública · El IMSS')]),
+    ('salud-issste-servicios', 'Salud', 'Consultas, egresos hospitalarios y cirugías del ISSSTE en 2025',
+     'El ISSSTE publica un anuario estadístico cada año (su página de anuarios lista el de 2025), pero el 27-10-2026 su servidor no respondió, ni directo ni a través de otra conexión, '
+     'y no se pudo cotejar. El gasto del ISSSTE sí está en la plataforma, con la Cuenta Pública 2025.',
+     PLATAFORMA, 'https://www.gob.mx/issste/documentos/anuarios-estadisticos', 'Anuarios estadísticos (ISSSTE)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-sistema.html', 'Datos · Salud pública · Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE')]),
+    ('salud-imss-bienestar', 'Salud', 'Consultas, egresos, cirugías y gasto del IMSS-Bienestar en 2025',
+     'En conferencias se han dado cifras de las consultas de 2025 del IMSS-Bienestar, pero la plataforma no encontró un informe oficial con sus servicios y su gasto completo. '
+     'El capítulo del IMSS-Bienestar de la Memoria Estadística 2025 del IMSS no se pudo descargar: su enlace devuelve una página web en lugar del archivo. '
+     'Hasta tener el documento, no se publican las cifras de las conferencias.',
+     PLATAFORMA, 'https://www.imss.gob.mx/conoce-al-imss/memoria-estadistica-2025', 'Memoria Estadística 2025 (IMSS), capítulo XIV',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-sistema.html', 'Datos · Salud pública · Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE')]),
     # «Documentar para sancionar», el informe especial de la ASF (27-10-2026).
     ('asf-sanciones-efectividad', 'Fiscalización', 'Cuántas observaciones de la ASF terminan en una sanción firme',
      'El artículo 38 de la Ley de Fiscalización y Rendición de Cuentas de la Federación manda que el informe semestral de la ASF dé «las sanciones que al efecto hayan '

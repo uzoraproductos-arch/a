@@ -466,10 +466,12 @@ def _charla(d):
     # «Documentar para sancionar», el informe especial de la ASF (27-10-2026):
     # de la irregularidad a la sanción, cotejado con la LGRA y la LFRCF.
     import informe_sancion
+    # Salud pública, auditoría de gestión (27-10-2026): IMSS, ISSSTE e IMSS-Bienestar.
+    import gestion_salud
     return {'nota': nota, 'met': met, 'edo': edo, 'cargos': cargos, 'smin': smin, 'adm': adm, 'admet': admet, 'expide': EXPIDE,
             'mapa': 'numeros-mapa-del-gasto-federalizado.html', 'num': num, 'datos': asistente_datos.datos(d, num, D),
             'leg': asistente_legislativo.legislativo(), 'jud': asistente_judicial.judicial(d),
-            'san': informe_sancion.bot()}
+            'san': informe_sancion.bot(), 'sal': gestion_salud.salud(d)}
 
 
 def _inspector():

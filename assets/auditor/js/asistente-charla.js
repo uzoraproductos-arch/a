@@ -1149,6 +1149,24 @@
       return null;
     }
 
+    /* ---------- Salud pública: lo que cuesta y lo que resuelve (27-10-2026) ---------- */
+    var SAL = D.sal || null;
+    function salTema(k) { var x = SAL.t[k]; return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug }; }
+    function salResp(t) {
+      if (!SAL) return null;
+      if (/seguro popular|insabi|instituto de salud para el bienestar/.test(t)) return salTema('transicion');
+      if (/imss ?bienestar/.test(t)) return salTema('imss_bienestar');
+      var imss = /\bimss\b|seguro social/.test(t), iss = /issste/.test(t);
+      var gestion = /consulta|cirug|operacion|egreso|hospitaliz|urgencia|atendi|atiende|atienden|resuelve|resolvio|espera|tarda|medicos?\b|doctor|especialista|camas?\b|quirofano|ocupacion|metas?\b|anunci|en salud|atencion medica|enfermedad y maternidad/;
+      if (iss && gestion.test(t)) return salTema('issste');
+      if (!imss || !gestion.test(t)) return null;
+      if (/cirug|operacion/.test(t) && (PIDE_VER.test(t) || /1 78|millon 780|anunci|dijo|meta/.test(t))) return salTema('imss_cotejo');
+      if (/anunci|dijo|metas?\b|boletin|conferencia/.test(t)) return salTema('imss_cotejo');
+      if (/medicos?\b|doctor|especialistas|camas?\b|quirofano|ocupacion|consultorios/.test(t)) return salTema('imss_recursos');
+      if (/gasta|gasto|cuesta|dinero|presupuesto|enfermedad y maternidad|en salud/.test(t) && !/consulta|cirug|egreso|urgencia/.test(t)) return salTema('imss_dinero');
+      return salTema('imss_servicios');
+    }
+
     function lista69(t) {
       var pag = B.fichas.filter(function (f) { return f.t === 'pagina' && f.ir && f.ir[0] === 'herramienta-inspector-efos.html'; })[0];
       var d = (DT.desc || []).filter(function (x) { return /69-B/.test(x.n); })[0];
@@ -1272,6 +1290,9 @@
       var r = !crudo && platica(t);
       if (r) { r.plat = 1; return fin(r, { tipo: '' }); }
       /* «¿Es cierto que…?», una liga o un párrafo con montos: se verifica. */
+      /* «¿Es cierto que el IMSS hizo 1.78 millones de cirugías?»: el cotejo de salud, antes del verificador general. */
+      var rsal = salResp(t);
+      if (rsal) return fin(rsal, { tipo: 'sal' });
       if (!crudo && (PIDE_VER.test(t) || LIGA.test(q) || (q.length > 160 && /\d/.test(q) && /peso|millon|billon|mdp/.test(t)))) {
         var vr = verifica(q, t);
         return vr.listo ? vr : fin(vr, { tipo: vr.plat || vr.sinDato || vr.pasa ? '' : 'ver' });
@@ -1570,6 +1591,8 @@
       contesta: function (q) { try { return contesta(q); } catch (e) { if (window.console) console.warn('AuditorCharla', e); return null; } },
       /* El veredicto de una cifra dicha contra un valor oficial (lo usa Inversión y Megaobras). */
       juzga: function (claim, val) { var d = cifraDicha(norm(claim).replace(/[¿?¡!]/g, ' ')), j = d && juzgaDicho(d, val); return j ? { dicho: d, v: j } : null; },
+      /* Salud pública antes que Verificamos: «¿es cierto que el IMSS hizo 1.78 millones de cirugías?» es un cotejo de salud (27-10-2026). */
+      salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       deFicha: deFicha, deDonde: deDonde, olvida: function () { ctx = {}; }, ctx: function () { return ctx; }
 
     };

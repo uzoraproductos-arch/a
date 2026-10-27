@@ -579,6 +579,13 @@ APARTADOS = [
                 'pagina': 'datos-poder-judicial.html',
                 'pestana': ('⚖️', 'Poder Judicial', 'La Corte, los circuitos, los sueldos y la elección: abre su página'),
             },
+            {
+                # Salud pública (27-10-2026): la auditoría de gestión del IMSS,
+                # el ISSSTE y el IMSS-Bienestar (gestion_salud.py).
+                'id': 'salud',
+                'pagina': 'datos-salud-publica.html',
+                'pestana': ('🏥', 'Salud pública', 'Lo que cuesta y lo que resuelve el IMSS, el ISSSTE y el IMSS-Bienestar: abre su página'),
+            },
             # El Estado de cuenta administrativo fue la cuarta tarjeta de Datos
             # del 12-10-2026 al 22-10-2026; desde entonces (pedido del autor)
             # es la quinta aplicacion de la Calculadora Civica. Su ancla vieja
@@ -1246,6 +1253,7 @@ def poderes_paginas(base):
     fuentes. Todo sale de asistente_legislativo.py y asistente_judicial.py."""
     import asistente_legislativo as al
     import asistente_judicial as aj
+    import gestion_salud as gs
     paginas = []
     poderes = [
         (al, '🏛️', 'Curules, escaños, sesiones, el calendario del presupuesto y las elecciones de 2027',
@@ -1257,6 +1265,13 @@ def poderes_paginas(base):
          'el presupuesto 2026, la elección judicial, cómo decide un juez y lo que resuelve con su dinero. Cotejado con la Constitución vigente, los acuerdos del INE, el Manual de '
          'remuneraciones y el Presupuesto de Egresos. Cada tarjeta abre su propia página.',
          lambda temas: aj.secciones(base, temas), 'jud-'),
+        # Salud pública (27-10-2026, pedido del autor): la auditoría de gestión
+        # del IMSS, el ISSSTE y el IMSS-Bienestar, con el mismo molde.
+        (gs, '🏥', 'Lo que cuesta y lo que resuelve: consultas, cirugías, médicos y camas',
+         'Cuánto gasta el sistema público de salud y lo que resuelve con ese dinero, con la Memoria Estadística del IMSS, la Cuenta Pública y la Ley General '
+         'de Salud. Lo que anuncian las instituciones se coteja contra lo que registran, y lo que nadie ha publicado va con su ficha en el Registro de pendientes. '
+         'Cada tarjeta abre su propia página.',
+         lambda temas: gs.secciones(base, temas), gs.PRE),
     ]
     for mod, ico, lema, entrada, secc, pre in poderes:
         partes = [(x[0], x[0], x[1], x[2]) for x in mod.PAGINAS]
@@ -5347,7 +5362,7 @@ def _hijas(base, ref):
     23-10-2026): sin ellas, el indice se quedaba en las portadas. Salen de las
     mismas listas que arman cada pagina, asi que una nueva aparece sola."""
     import estado_cuenta, presupuesto_modulos, cc_ticket, insp_asf, datos_ambiente, asistente
-    import asistente_legislativo as al, asistente_judicial as aj
+    import asistente_legislativo as al, asistente_judicial as aj, gestion_salud as gs
     limpio = lambda t: re.sub('<[^>]+>', '', t)
     return {
         estado_cuenta.ARCHIVO: [(p['archivo'], limpio(p.get('menu') or p['titulo'])) for p in estado_cuenta.construir()[0]
@@ -5360,6 +5375,7 @@ def _hijas(base, ref):
         datos_ambiente.PORTADA: [(x[1], x[3]) for x in datos_ambiente.PARTES],
         al.PORTADA: [(x[0], x[2]) for x in al.PAGINAS],
         aj.PORTADA: [(x[0], x[2]) for x in aj.PAGINAS],
+        gs.PORTADA: [(x[0], x[2]) for x in gs.PAGINAS],
     }
 
 

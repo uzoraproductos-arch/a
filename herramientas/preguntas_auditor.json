@@ -726,6 +726,46 @@
   {
    "q": "¿Cuánto tarda una audiencia en un juzgado?",
    "ir": "datos-judicial-gestion.html#jud-tiempos"
+  },
+  {
+   "q": "¿Cuántas consultas dio el IMSS en 2025?",
+   "ir": "datos-salud-imss.html#sal-imss_servicios",
+   "dice": [
+    "158,037,603"
+   ]
+  },
+  {
+   "q": "¿Es cierto que el IMSS hizo 1.78 millones de cirugías?",
+   "ir": "datos-salud-imss.html#sal-imss_cotejo",
+   "dice": [
+    "2,216,220"
+   ]
+  },
+  {
+   "q": "¿Cuántos médicos tiene el IMSS?",
+   "ir": "datos-salud-imss.html#sal-imss_recursos",
+   "dice": [
+    "113,643"
+   ]
+  },
+  {
+   "q": "¿Cuánto gasta el IMSS en salud?",
+   "ir": "datos-salud-imss.html#sal-imss_dinero",
+   "dice": [
+    "689,147.8"
+   ]
+  },
+  {
+   "q": "¿Qué pasó con el Seguro Popular?",
+   "ir": "datos-salud-sistema.html#sal-transicion"
+  },
+  {
+   "q": "¿Cuántas consultas da el IMSS-Bienestar?",
+   "ir": "datos-salud-sistema.html#sal-imss_bienestar"
+  },
+  {
+   "q": "¿Cuántas consultas da el ISSSTE?",
+   "ir": "datos-salud-sistema.html#sal-issste"
   }
  ]
 }

@@ -5,7 +5,7 @@ historia completa de cada decisión en [CONTEXT.md](CONTEXT.md), que pasa de
 7,000 renglones: aquí va solo lo que necesitas para no repetir trabajo ni
 pisar el de otro. **Se actualiza en el mismo commit que cambia lo que dice.**
 
-Última actualización: 27-10-2026 · sello `20261027r` · rama `claude/funny-turing-imtm54`.
+Última actualización: 27-10-2026 · sello `20261027t` · rama `claude/funny-turing-imtm54`.
 
 ## Antes de empezar y antes de empujar
 
@@ -16,7 +16,7 @@ python3 herramientas/revision.py --base origin/claude/funny-turing-imtm54   # al
 
 `revision.py` corre lo que pide AGENTS.md §5: `node --check`, los CR sueltos,
 que el sello haya subido si tocaste `assets/`, el inventario (enlaces rotos y
-cotejos sin evidencia), las **165 preguntas de prueba del Auditor**, la guardia
+cotejos sin evidencia), las **172 preguntas de prueba del Auditor**, la guardia
 de legibilidad y, si tocaste `supabase/`, la base de datos. GitHub la corre sola
 en cada envío (`.github/workflows/revision.yml`). Con `--rapida` se salta lo
 que necesita navegador.
@@ -41,6 +41,7 @@ que necesita navegador.
 
 ## Lo último que entró
 
+- **27-10-2026, sello 20261027t.** Auditoría de gestión de salud: tarjeta «Salud pública» en Datos (`herramientas/gestion_salud.py`). El IMSS con su Memoria Estadística 2025: lo que gasta el seguro de enfermedad, consultas, cirugías, médicos y camas, y el cotejo de su boletín de resultados (las cirugías no cuadran). Seguro Popular → INSABI → IMSS-Bienestar cotejado con la Ley General de Salud. ISSSTE (servicios) e IMSS-Bienestar quedan pendientes. Sigue ambiente cuando el autor lo pida.
 - **27-10-2026, sello 20261027r.** Auditoría de gestión, piloto del Poder Judicial: página `datos-judicial-gestion.html` («Lo que cuesta y lo que resuelve») y su chat, con el censo del INEGI CNIJF-E 2025 (`herramientas/gestion_judicial.py`): asuntos que entran y salen, dinero por asunto resuelto, rezago penal por estado y cuánto tardan la Corte y el Tribunal Electoral. Cuánto tarda un juzgado o una audiencia y el rezago civil quedan pendientes. Salud y ambiente siguen con el mismo molde cuando el autor lo pida.
 - **27-10-2026, sello 20261027o.** Verificamos: «¿Investigarán a Lorenzo Córdova?»
   (publicación de politicomx), columna `ine-contratos-desde-cordova`. Consta el pedido

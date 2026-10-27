@@ -398,7 +398,10 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   remuneraciones del PJF y el PEF 2026. Lo que resuelve con su dinero (la auditoría
   de gestión: asuntos, rezago y tiempos), por `herramientas/gestion_judicial.py`,
   con el censo del INEGI; **el dinero va siempre junto a lo que se resolvió con
-  él, y el «dinero por asunto» se dice como derivado, nunca como costo de un juicio**. Los dos Poderes viven además en la
+  él, y el «dinero por asunto» se dice como derivado, nunca como costo de un juicio**. La salud pública
+  (IMSS, ISSSTE, IMSS-Bienestar), con el mismo molde, por `herramientas/gestion_salud.py`
+  (tarjeta «Salud pública» de Datos y `D.sal` del chat); **lo que una institución anuncia se
+  coteja contra lo que registra su propio documento estadístico**. Los dos Poderes viven además en la
   pestaña Datos (`datos-poder-legislativo.html`, `datos-poder-judicial.html`),
   una página por grupo de temas, armadas con el mismo texto del bot
   (`PAGINAS` de cada módulo).
