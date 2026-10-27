@@ -698,11 +698,14 @@ APARTADOS = [
 HERR_IMG = {
     # Ilustración propia desde el 27-10-2026 (antes, una foto de plataformas).
     'obras': 'assets/auditor/img/herr-megaobras-ilustracion.svg',
-    'calculadora': 'assets/auditor/img/herr-calculadora-monedas-amplia.jpg',
+    # Las otras tres, también dibujos propios desde el 27-10-2026, con la
+    # misma idea de la foto que sustituyen (monedas, cámaras con ojos y la
+    # refinería sobre el humedal).
+    'calculadora': 'assets/auditor/img/herr-calculadora-ilustracion.svg',
     # Imagen del Modo Inspector desde el 24-10-2026 (la eligió el autor); el
     # foróptero se queda en el Auditor Virtual (foto_clase 'foto-auditor').
-    'inspector': 'assets/auditor/img/herr-inspector-camaras.jpg',
-    'ambiente': 'assets/auditor/img/herr-ambiente-refineria-amplia.jpg',
+    'inspector': 'assets/auditor/img/herr-inspector-ilustracion.svg',
+    'ambiente': 'assets/auditor/img/herr-ambiente-ilustracion.svg',
 }
 
 # (archivo, rubro, icono, titulo, subtitulo, texto, modulo del motor, temas)
@@ -815,7 +818,7 @@ LOGO_IMG = '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62
 # son tarjetas autonomas: la pagina de la herramienta solo las presenta y cada
 # una abre su propia pagina.
 INVESTIGACIONES = 'herramienta-inspector-investigaciones.html'
-FOTO_AUDITOR = 'assets/auditor/img/herr-inspector-foroptero-amplia.jpg'
+FOTO_AUDITOR = 'assets/auditor/img/herr-auditor-foroptero-ilustracion.svg'
 MODO_INSPECTOR = 'herramienta-inspector.html'
 # El menú «Herramientas» del chat (pedido del autor, 23-10-2026), en el orden
 # que pidió.

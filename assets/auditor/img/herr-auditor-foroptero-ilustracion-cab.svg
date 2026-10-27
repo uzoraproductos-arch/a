@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 670" width="1200" height="670" preserveAspectRatio="xMidYMid slice">
+  <!-- Ilustración del Auditor Virtual (Auditavisión, 27-10-2026).
+       Dibujo propio, sin fotografía: un foróptero, el aparato con que se
+       gradúa la vista, frente a una carta de lectura con términos del
+       gasto público. Ilustrativa.
+       Versión del encabezado: se desvanece por la izquierda para fundirse
+       con el color de la herramienta. -->
+  <defs>
+    <radialGradient id="fondo" cx="0.6" cy="0.45" r="0.8">
+      <stop offset="0" stop-color="#7b8592"/>
+      <stop offset="1" stop-color="#2b3038"/>
+    </radialGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4b525d"/>
+      <stop offset="1" stop-color="#1b1f25"/>
+    </linearGradient>
+    <linearGradient id="cromo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f6f8"/>
+      <stop offset="0.5" stop-color="#a9b1bb"/>
+      <stop offset="1" stop-color="#e3e7ec"/>
+    </linearGradient>
+    <radialGradient id="vidrio" cx="0.4" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#cfe6ff"/>
+      <stop offset="0.6" stop-color="#4f9be8"/>
+      <stop offset="1" stop-color="#0b2a63"/>
+    </radialGradient>
+    <linearGradient id="funde" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.32" stop-color="#fff" stop-opacity="1"/>
+    </linearGradient>
+    <mask id="mascara"><rect width="1200" height="670" fill="url(#funde)"/></mask>
+  </defs>
+  <g mask="url(#mascara)">
+  <!-- Fondo y la carta de lectura -->
+  <rect width="1200" height="670" fill="url(#fondo)"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-weight="700" text-anchor="middle" fill="#ffffff" opacity="0.16">
+    <text x="1040" y="150" font-size="130">$</text>
+    <text x="1040" y="270" font-size="80">A S F</text>
+    <text x="1040" y="360" font-size="58">3 3 % P</text>
+    <text x="1040" y="430" font-size="42">D E U D A</text>
+    <text x="1040" y="485" font-size="30">R A M O 2 8</text>
+    <text x="1040" y="528" font-size="22">I N P C · S A T</text>
+  </g>
+  <!-- Brazo y barra superior -->
+  <rect x="634" y="0" width="26" height="110" fill="url(#metal)"/>
+  <rect x="560" y="96" width="174" height="34" rx="10" fill="url(#metal)"/>
+  <circle cx="597" cy="113" r="11" fill="url(#cromo)"/><circle cx="697" cy="113" r="11" fill="url(#cromo)"/>
+  <rect x="610" y="130" width="74" height="70" rx="8" fill="#1b1f25"/>
+  <!-- El foróptero: dos cuerpos con su rueda de lentes -->
+  <g transform="translate(470 370) scale(-1 1)">
+    <circle cx="0" cy="0" r="176" fill="url(#metal)"/>
+    <circle cx="0" cy="0" r="176" fill="none" stroke="#5d6571" stroke-width="4"/>
+    <circle cx="-96.4" cy="-114.9" r="26" fill="url(#cromo)" stroke="#2b3038" stroke-width="3"/>
+    <circle cx="-96.4" cy="-114.9" r="12" fill="#2b3038"/>
+    <circle cx="38.8" cy="-144.9" r="22" fill="url(#cromo)" stroke="#2b3038" stroke-width="3"/>
+    <circle cx="38.8" cy="-144.9" r="10" fill="#2b3038"/>
+    <circle cx="135.9" cy="-63.4" r="30" fill="url(#cromo)" stroke="#2b3038" stroke-width="3"/>
+    <circle cx="135.9" cy="-63.4" r="14" fill="#2b3038"/>
+    <circle cx="129.9" cy="75" r="24" fill="url(#cromo)" stroke="#2b3038" stroke-width="3"/>
+    <circle cx="129.9" cy="75" r="11" fill="#2b3038"/>
+    <circle cx="13.1" cy="149.4" r="28" fill="url(#cromo)" stroke="#2b3038" stroke-width="3"/>
+    <circle cx="13.1" cy="149.4" r="13" fill="#2b3038"/>
+    <circle cx="-114.9" cy="96.4" r="22" fill="url(#cromo)" stroke="#2b3038" stroke-width="3"/>
+    <circle cx="-114.9" cy="96.4" r="10" fill="#2b3038"/>
+    <circle cx="-144.9" cy="-38.8" r="26" fill="url(#cromo)" stroke="#2b3038" stroke-width="3"/>
+    <circle cx="-144.9" cy="-38.8" r="12" fill="#2b3038"/>
+    <circle cx="0" cy="0" r="104" fill="#2b3038" stroke="url(#cromo)" stroke-width="10"/>
+    <circle cx="82" cy="0" r="9" fill="#5d6571"/>
+    <circle cx="66.3" cy="48.2" r="9" fill="#5d6571"/>
+    <circle cx="25.3" cy="78" r="9" fill="#5d6571"/>
+    <circle cx="-25.3" cy="78" r="9" fill="#5d6571"/>
+    <circle cx="-66.3" cy="48.2" r="9" fill="#5d6571"/>
+    <circle cx="-82" cy="0" r="9" fill="#5d6571"/>
+    <circle cx="-66.3" cy="-48.2" r="9" fill="#5d6571"/>
+    <circle cx="-25.3" cy="-78" r="9" fill="#5d6571"/>
+    <circle cx="25.3" cy="-78" r="9" fill="#5d6571"/>
+    <circle cx="66.3" cy="-48.2" r="9" fill="#5d6571"/>
+    <circle cx="0" cy="0" r="60" fill="url(#cromo)"/>
+    <circle cx="0" cy="0" r="46" fill="url(#vidrio)"/>
+    <path d="M-28 -18 Q-18 -34 2 -38" fill="none" stroke="#ffffff" stroke-opacity="0.75" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(824 370) scale(1 1)">
+    <circle cx="0" cy="0" r="176" fill="url(#metal)"/>
+    <circle cx="0" cy="0" r="176" fill="none" stroke="#5d6571" stroke-width="4"/>
+    <circle cx="-96.4" cy="-114.9" r="26" fill="url(#cromo)" stroke="#2b3038" stroke-width="3"/>
+    <circle cx="-96.4" cy="-114.9" r="12" fill="#2b3038"/>
+    <circle cx="38.8" cy="-144.9" r="22" fill="url(#cromo)" stroke="#2b3038" stroke-width="3"/>
+    <circle cx="38.8" cy="-144.9" r="10" fill="#2b3038"/>
+    <circle cx="135.9" cy="-63.4" r="30" fill="url(#cromo)" stroke="#2b3038" stroke-width="3"/>
+    <circle cx="135.9" cy="-63.4" r="14" fill="#2b3038"/>
+    <circle cx="129.9" cy="75" r="24" fill="url(#cromo)" stroke="#2b3038" stroke-width="3"/>
+    <circle cx="129.9" cy="75" r="11" fill="#2b3038"/>
+    <circle cx="13.1" cy="149.4" r="28" fill="url(#cromo)" stroke="#2b3038" stroke-width="3"/>
+    <circle cx="13.1" cy="149.4" r="13" fill="#2b3038"/>
+    <circle cx="-114.9" cy="96.4" r="22" fill="url(#cromo)" stroke="#2b3038" stroke-width="3"/>
+    <circle cx="-114.9" cy="96.4" r="10" fill="#2b3038"/>
+    <circle cx="-144.9" cy="-38.8" r="26" fill="url(#cromo)" stroke="#2b3038" stroke-width="3"/>
+    <circle cx="-144.9" cy="-38.8" r="12" fill="#2b3038"/>
+    <circle cx="0" cy="0" r="104" fill="#2b3038" stroke="url(#cromo)" stroke-width="10"/>
+    <circle cx="82" cy="0" r="9" fill="#5d6571"/>
+    <circle cx="66.3" cy="48.2" r="9" fill="#5d6571"/>
+    <circle cx="25.3" cy="78" r="9" fill="#5d6571"/>
+    <circle cx="-25.3" cy="78" r="9" fill="#5d6571"/>
+    <circle cx="-66.3" cy="48.2" r="9" fill="#5d6571"/>
+    <circle cx="-82" cy="0" r="9" fill="#5d6571"/>
+    <circle cx="-66.3" cy="-48.2" r="9" fill="#5d6571"/>
+    <circle cx="-25.3" cy="-78" r="9" fill="#5d6571"/>
+    <circle cx="25.3" cy="-78" r="9" fill="#5d6571"/>
+    <circle cx="66.3" cy="-48.2" r="9" fill="#5d6571"/>
+    <circle cx="0" cy="0" r="60" fill="url(#cromo)"/>
+    <circle cx="0" cy="0" r="46" fill="url(#vidrio)"/>
+    <path d="M-28 -18 Q-18 -34 2 -38" fill="none" stroke="#ffffff" stroke-opacity="0.75" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <rect x="604" y="300" width="86" height="140" rx="16" fill="url(#metal)"/>
+  <rect x="618" y="320" width="58" height="12" rx="6" fill="url(#cromo)"/>
+  <rect x="618" y="408" width="58" height="12" rx="6" fill="url(#cromo)"/>
+  <circle cx="647" cy="370" r="16" fill="url(#cromo)"/>
+  <!-- Mesa -->
+  <path d="M0 600 Q600 585 1200 600 V670 H0 Z" fill="#1b1f25"/>
+  <rect x="560" y="545" width="174" height="60" rx="12" fill="url(#metal)"/>
+  </g>
+</svg>

@@ -5,7 +5,7 @@ historia completa de cada decisión en [CONTEXT.md](CONTEXT.md), que pasa de
 7,000 renglones: aquí va solo lo que necesitas para no repetir trabajo ni
 pisar el de otro. **Se actualiza en el mismo commit que cambia lo que dice.**
 
-Última actualización: 27-10-2026 · sello `20261027l` · rama `claude/funny-turing-imtm54`.
+Última actualización: 27-10-2026 · sello `20261027m` · rama `claude/funny-turing-imtm54`.
 
 ## Antes de empezar y antes de empujar
 
@@ -41,6 +41,10 @@ que necesita navegador.
 
 ## Lo último que entró
 
+- **27-10-2026, sello 20261027m.** Imágenes, paso 5: las fotos de la Calculadora
+  Cívica, Costo Ambiental, el Modo Inspector y el foróptero del Auditor Virtual se
+  cambiaron por ilustraciones propias (SVG), con la misma idea de cada foto. Quedan
+  las 22 de las investigaciones y el encabezado de la portada.
 - **27-10-2026.** Pie de la portada: «Informes Individuales ASF», «Banxico: SIE» y
   «SHCP: Registro Público Único» ya llevan a su página de la Enciclopedia
   (`informes-cuenta-publica.html`, `radar-peso-maquina.html`, `numeros-las-32-entidades.html`).
