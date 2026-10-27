@@ -256,6 +256,19 @@
   var CLAVE = 'auditavision.bot.sinRespuesta', MAX = 50;
   var app = document.getElementById('paApp');
   var canal = app ? app.getAttribute('data-canal') || '' : '';
+  /* Con base de datos (paso 2.8 del plan v2, 27-10-2026; FUNCIONES de
+     apartados.py), cada pregunta nueva sin respuesta llega también a
+     pregunta-bot: solo la pregunta, el motivo, la ficha que dio y la versión.
+     Ni nombre ni correo. Si falla, se queda en el navegador como siempre. */
+  var funcionBot = app ? app.getAttribute('data-funcion') || '' : '';
+  function reporta(q, motivo, tit) {
+    if (!funcionBot || !window.fetch) return;
+    try {
+      fetch(funcionBot, { method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
+        body: JSON.stringify({ pregunta: String(q).slice(0, 600), motivo: motivo === 'noera' ? 'noera' : 'sin', ficha: tit || null, version: selloSitio() })
+      }).catch(function () {});
+    } catch (e) {}
+  }
   function leeLista() {
     try { var v = JSON.parse(localStorage.getItem(CLAVE) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; }
   }
@@ -266,7 +279,7 @@
     var l = leeLista(), k = plano(q), hoy = new Date().toISOString().slice(0, 10), x = null;
     l.forEach(function (o) { if (plano(o.q) === k && o.m === motivo) x = o; });
     if (x) { x.n = (x.n || 1) + 1; x.f = hoy; if (tit) x.t = tit; }
-    else l.unshift({ q: q, m: motivo, t: tit || '', f: hoy, n: 1 });
+    else { l.unshift({ q: q, m: motivo, t: tit || '', f: hoy, n: 1 }); reporta(q, motivo, tit); }
     guardaLista(l.slice(0, MAX));
     pintaLista();
   }

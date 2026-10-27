@@ -1738,6 +1738,9 @@ if FUNCIONES:
                               'algo más, este aviso lo dirá antes, y la fecha de arriba cambiará.</p>')
         if _sec['id'] == 'datos':
             _sec['bloque'] = _cambia(_sec['bloque'], '<b>Ninguno en un servidor nuestro.</b> ', '<b>Solo lo que tú envías.</b> ')
+            _sec['bloque'] = _cambia(_sec['bloque'], 'Solo las ves tú; si quieres, las copias y nos las mandas.',
+                                     'Además, cada pregunta nueva nos llega sola, sin tu nombre ni tu correo (solo la pregunta, la '
+                                     'ficha que te dio el Auditor y la versión de la página), para saber qué fichas faltan primero.')
             _sec['bloque'] = _cambia(_sec['bloque'],
                 'No hay registro, ni cuentas, ni herramientas de analítica, ni cookies propias. '
                 'Los formularios (algo raro con el dinero público, un dato mal, un tema para investigar) arman el texto en tu pantalla '

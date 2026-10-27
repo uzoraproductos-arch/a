@@ -706,7 +706,9 @@ def pagina(cuenta, canal='', herramientas=()):
                      for a, i, n, f, im in herramientas)
     ej = '\n'.join('              <button type="button" class="pa-ej" data-pa-pregunta="%s"><span aria-hidden="true">%s</span> %s</button>'
                    % (html.escape(q, quote=True), i, html.escape(q)) for q, i in EJEMPLOS)
-    return '''<div class="pa" id="paApp" data-canal="%s">
+    import apartados  # «Lo que aún no sé» llega a pregunta-bot cuando hay base (paso 2.8)
+    funcion = (' data-funcion="%s/pregunta-bot"' % html.escape(apartados.FUNCIONES.rstrip('/'), quote=True)) if apartados.FUNCIONES else ''
+    return '''<div class="pa" id="paApp" data-canal="%s"%s>
         <div class="pa-chat">
           <div class="pa-chat-cab">
             <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="52" height="40">
@@ -784,7 +786,7 @@ def pagina(cuenta, canal='', herramientas=()):
           <p class="pa-aviso"><b>Platico como chat, pero no invento.</b> No soy una inteligencia artificial que redacta: entiendo tu pregunta y contesto solo con cifras que la plataforma ya publicó con su documento (%s fichas y %s municipios). Si no lo tengo, te lo digo. Tu pregunta no sale de tu navegador.</p>
           </div>
         </aside>
-      </div>''' % (html.escape(canal, quote=True), herr, ej, format(cuenta.get('glosario', 0), ','),
+      </div>''' % (html.escape(canal, quote=True), funcion, herr, ej, format(cuenta.get('glosario', 0), ','),
                  format(total - cuenta.get('municipio', 0), ','), format(cuenta.get('municipio', 0), ','))
 
 
