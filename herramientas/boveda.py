@@ -31,6 +31,9 @@ Uso (solo Python estándar: funciona igual en Windows):
         Anota a mano un documento que no abre desde donde corres el script
         (por ejemplo, energy.gov desde la nube) y cómo se cotejó.
     python3 herramientas/boveda.py --revisa        # solo dice qué falta
+    python3 herramientas/boveda.py --subir C       # manda fichas y archivos de C a Supabase
+        Lee SUPABASE_URL y SUPABASE_SERVICE_ROLE_KEY del entorno: la llave de
+        servicio nunca se escribe en un archivo ni se pega en un chat.
 
 Una dirección que no abrió se anota con el error, nunca con una huella
 inventada; --revisa la cuenta como pendiente de copia.
@@ -162,7 +165,8 @@ def revisar(b, url, usos, descargas=None, archivo=False):
     e.pop('error', None)
     if descargas:
         os.makedirs(descargas, exist_ok=True)
-        ext = os.path.splitext(urllib.parse.urlparse(url).path)[1][:6] or '.bin'
+        ext = os.path.splitext(urllib.parse.urlparse(url).path)[1][:6].lower()
+        ext = ext if re.fullmatch(r'\.[a-z0-9]{1,5}', ext) else '.bin'
         ruta = os.path.join(descargas, h + ext)
         if not os.path.exists(ruta):
             with open(ruta, 'wb') as f:
@@ -194,6 +198,48 @@ def faltantes(b):
     return out
 
 
+def subir(b, carpeta):
+    """Manda a Supabase los documentos copiados: el archivo al almacenamiento
+    «boveda» (nombrado por su huella) y su ficha a public.evidencias. Lo que ya
+    está no se toca: la base rechaza corregir una huella."""
+    base = (os.environ.get('SUPABASE_URL') or '').rstrip('/')
+    llave = os.environ.get('SUPABASE_SERVICE_ROLE_KEY') or ''
+    if not (base.startswith('https://') or base.startswith('http://127.0.0.1')) or not llave:
+        raise SystemExit('boveda.py: faltan SUPABASE_URL y SUPABASE_SERVICE_ROLE_KEY en el entorno')
+    cab = {'apikey': llave, 'Authorization': 'Bearer ' + llave, 'User-Agent': AGENTE}
+    archivos = {os.path.splitext(f)[0]: f for f in os.listdir(carpeta)} if carpeta and os.path.isdir(carpeta) else {}
+    filas, subidos = [], 0
+    for url, e in sorted(b['evidencias'].items()):
+        if e.get('estado') != 'copiado':
+            continue
+        ruta = archivos.get(e['sha256'])
+        if ruta:
+            datos = open(os.path.join(carpeta, ruta), 'rb').read()
+            if hashlib.sha256(datos).hexdigest() != e['sha256']:
+                raise SystemExit('boveda.py: %s no coincide con su huella; no se sube' % ruta)
+            req = urllib.request.Request('%s/storage/v1/object/boveda/%s' % (base, ruta), data=datos, method='POST',
+                                         headers=dict(cab, **{'Content-Type': e.get('tipo') or 'application/octet-stream'}))
+            try:
+                urllib.request.urlopen(req, timeout=120).read()
+                subidos += 1
+            except urllib.error.HTTPError as x:
+                if x.code not in (400, 409):  # 409 (o 400 «Duplicate»): ya estaba
+                    raise
+        filas.append({'url': url, 'sha256': e['sha256'], 'bytes': e['bytes'], 'tipo': e.get('tipo') or None,
+                      'copiado': e['copiado'], 'ruta': ruta, 'archive_org': e.get('archive_org'), 'usos': e.get('usos', [])})
+        for h in e.get('historial', []):  # las huellas viejas también, si se conocen
+            if h.get('sha256') and h.get('bytes') and h.get('hasta'):
+                filas.append({'url': url, 'sha256': h['sha256'], 'bytes': h['bytes'], 'tipo': None,
+                              'copiado': h['hasta'], 'ruta': None, 'archive_org': None, 'usos': e.get('usos', [])})
+    for i in range(0, len(filas), 200):
+        req = urllib.request.Request('%s/rest/v1/evidencias?on_conflict=url,sha256' % base, method='POST',
+                                     data=json.dumps(filas[i:i + 200]).encode('utf-8'),
+                                     headers=dict(cab, **{'Content-Type': 'application/json',
+                                                          'Prefer': 'resolution=ignore-duplicates,return=minimal'}))
+        urllib.request.urlopen(req, timeout=120).read()
+    print('bóveda: %d fichas enviadas a public.evidencias, %d archivos nuevos en el almacenamiento' % (len(filas), subidos))
+
+
 def resumen(b):
     c = {}
     for e in b['evidencias'].values():
@@ -210,6 +256,7 @@ def main(argv=None):
     ap.add_argument('--sin-copia', dest='sin_copia', help='anota a mano una dirección que no abre')
     ap.add_argument('--motivo', default='', help='cómo se cotejó lo que no abrió')
     ap.add_argument('--revisa', action='store_true', help='solo informa; sale con 1 si un cotejo no tiene evidencia')
+    ap.add_argument('--subir', metavar='CARPETA', help='manda fichas y archivos de CARPETA a Supabase')
     a = ap.parse_args(argv)
 
     b = cargar()
@@ -224,6 +271,9 @@ def main(argv=None):
         # oficial sin copia es aviso hasta que se copie desde una
         # computadora donde su sitio abra (muchos no abren desde la nube).
         return 1 if duros else 0
+    if a.subir:
+        subir(b, a.subir)
+        return 0
     if a.sin_copia:
         sin_copia(b, a.sin_copia, a.motivo, dirs.get(a.sin_copia, []))
         guardar(b)

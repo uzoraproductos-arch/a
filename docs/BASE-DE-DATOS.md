@@ -27,6 +27,10 @@ probada. Falta solo lo que toca al autor: crear la cuenta y poner las llaves.
    ├─ portales ────────────▶ portales_cache  (Banxico SIE; INEGI por verificar)
    ├─ auditor-ia ──────────▶ consultas_ia    (Claude, con cuatro candados)
    └─ buscar-web ──────────▶ busquedas_web   (internet: solo enlaces)
+
+   herramientas/boveda.py --subir (llave de servicio, desde la computadora del autor)
+   └────────────────────────▶ evidencias + almacenamiento «boveda»
+                               (la huella de cada documento oficial)
                                   │
                     lee las fichas del sitio publicado
                     (assets/auditor/js/asistente-base.js)
@@ -36,6 +40,7 @@ probada. Falta solo lo que toca al autor: crear la cuenta y poner las llaves.
 |---|---|
 | `supabase/migrations/20261024000001_auditavision.sql` | Las 14 tablas y vistas, con seguridad por renglón en todas |
 | `supabase/migrations/20261024000002_busquedas_web.sql` | La tabla de las búsquedas en internet (pública: solo enlaces) |
+| `supabase/migrations/20261027000001_evidencias.sql` | La bóveda de evidencias: tabla pública de huellas SHA-256, inalterable (ni la llave de servicio corrige ni borra), y el almacenamiento «boveda» |
 | `supabase/functions/*/index.ts` | Las cinco funciones (Deno) y lo que comparten (`_comun/`) |
 | `supabase/pruebas/permisos.sql` | 30 pruebas de permisos: qué ve y qué escribe el público, una persona con cuenta y la administración |
 | `supabase/pruebas/cotejo_test.ts` | Pruebas del candado de cifras de la IA |
@@ -76,6 +81,30 @@ armadas (no necesitan la base). Con la llave puesta, `buscar-web` las hace por
    búsqueda se reusa un día. Tope: 5 por minuto y 30 por día por persona.
 
 Usa la misma `ANTHROPIC_API_KEY` que `auditor-ia`.
+
+## La bóveda de evidencias (27-10-2026)
+
+Cada documento oficial que respalda un dato tiene su ficha en
+`docs/boveda/evidencias.json`: huella SHA-256, tamaño, tipo y fecha. La
+escribe `herramientas/boveda.py`, y `inventario.py` falla si un cotejo
+«consta» o «matiz» de Verificamos no tiene evidencia (o un motivo escrito de
+por qué no se pudo copiar). Si un documento cambia, la huella vieja se queda
+en el historial: así se sabe que lo modificaron después del cotejo.
+
+Muchos portales no abren desde la nube donde trabajan los agentes (DOF, INE,
+Cuenta Pública, Transparencia Presupuestaria, energy.gov, archive.org). Desde
+tu computadora sí abren, así que la copia completa se hace ahí:
+
+```bash
+python herramientas/boveda.py --descargas C:\boveda-auditavision --archivo
+# y, cuando exista el proyecto de Supabase:
+set SUPABASE_URL=https://TU-PROYECTO.supabase.co
+set SUPABASE_SERVICE_ROLE_KEY=...      (en la terminal, nunca en un archivo)
+python herramientas/boveda.py --subir C:\boveda-auditavision
+```
+
+La carpeta de descargas queda **fuera** del repositorio: los archivos pesan
+cientos de megas y van al almacenamiento, no a Git.
 
 ## Lo que le toca al autor (decisiones 0.1 a 0.5 de LANZAMIENTO.md)
 

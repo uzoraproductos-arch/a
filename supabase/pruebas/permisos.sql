@@ -93,4 +93,33 @@ set role service_role;
 select pg_temp.igual((select count(*) from generate_series(1, 5) g where public.limite_ok('huella', 'ia', 3, 60)), 3, 'consultas que deja pasar un límite de 3 por minuto');
 reset role;
 
+-- 6. La bóveda de evidencias: pública para leer, inalterable para todos.
+set role service_role;
+insert into public.evidencias (url, sha256, bytes, tipo, copiado, ruta, usos) values
+  ('https://www.dof.gob.mx/ejemplo.pdf', repeat('a', 64), 1024, 'application/pdf', '2026-10-26', repeat('a', 64) || '.pdf', '{cotejo:ejemplo:0}'),
+  ('https://www.dof.gob.mx/ejemplo.pdf', repeat('b', 64), 2048, 'application/pdf', '2026-10-27', null, '{cotejo:ejemplo:0}');
+insert into storage.objects (bucket_id, name) values ('boveda', repeat('a', 64) || '.pdf');
+select pg_temp.debe_fallar($$insert into public.evidencias (url, sha256, bytes, copiado) values ('https://x.mx/a', 'no-es-huella', 1, '2026-10-27')$$, 'una huella que no es SHA-256');
+select pg_temp.debe_fallar($$insert into public.evidencias (url, sha256, bytes, copiado) values ('javascript:alert(1)', repeat('c', 64), 1, '2026-10-27')$$, 'una dirección que no es http');
+select pg_temp.debe_fallar($$insert into public.evidencias (url, sha256, bytes, copiado) values ('https://www.dof.gob.mx/ejemplo.pdf', repeat('a', 64), 1024, '2026-10-28')$$, 'la misma huella dos veces');
+select pg_temp.debe_fallar($$update public.evidencias set sha256 = repeat('d', 64)$$, 'corregir una huella, ni con la llave de servicio');
+select pg_temp.debe_fallar($$delete from public.evidencias$$, 'borrar una evidencia, ni con la llave de servicio');
+reset role;
+
+set role anon;
+select pg_temp.igual((select count(*) from public.evidencias), 2, 'evidencias que ve el público');
+select pg_temp.igual((select cambios from public.evidencias_vigentes where url = 'https://www.dof.gob.mx/ejemplo.pdf'), 1, 'veces que cambió el documento de ejemplo');
+select pg_temp.igual((select count(*) from storage.objects where bucket_id = 'boveda'), 1, 'archivos de la bóveda que ve el público');
+select pg_temp.debe_fallar($$insert into public.evidencias (url, sha256, bytes, copiado) values ('https://falsa.mx/x', repeat('e', 64), 1, '2026-10-27')$$, 'que el público plante una evidencia');
+select pg_temp.debe_fallar($$insert into storage.objects (bucket_id, name) values ('boveda', 'falso.pdf')$$, 'que el público suba un archivo a la bóveda');
+reset role;
+
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select pg_temp.debe_fallar($$insert into public.evidencias (url, sha256, bytes, copiado) values ('https://falsa.mx/y', repeat('f', 64), 1, '2026-10-27')$$, 'que la administración escriba evidencias sin la llave de servicio');
+delete from storage.objects where bucket_id = 'boveda';
+select pg_temp.igual((select count(*) from storage.objects where bucket_id = 'boveda'), 1, 'archivos de la bóveda tras un intento de borrarlos sin la llave de servicio');
+reset role;
+reset request.jwt.claim.sub;
+
 \echo 'Todas las pruebas de permisos pasaron.'
