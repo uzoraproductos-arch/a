@@ -686,6 +686,46 @@
   {
    "q": "¿Es cierto que la UIF congeló cuentas de contratistas del INE?",
    "ir": "noticias-relevantes.html#col-ine-contratos-desde-cordova"
+  },
+  {
+   "q": "¿Cuánto rezago tiene el Poder Judicial de Jalisco?",
+   "ir": "datos-judicial-gestion.html#jud-gestion_estados",
+   "dice": [
+    "64,628",
+    "40,431"
+   ]
+  },
+  {
+   "q": "¿Cuánto rezago tienen los poderes judiciales de los estados?",
+   "ir": "datos-judicial-gestion.html#jud-gestion_estados",
+   "dice": [
+    "2,205,864"
+   ]
+  },
+  {
+   "q": "¿Cuánto rezago penal hay?",
+   "ir": "datos-judicial-gestion.html#jud-rezago",
+   "dice": [
+    "503,937"
+   ]
+  },
+  {
+   "q": "¿Cuántos asuntos resuelven los juzgados federales?",
+   "ir": "datos-judicial-gestion.html#jud-gestion",
+   "dice": [
+    "1,859,221"
+   ]
+  },
+  {
+   "q": "¿Cuánto tarda la Suprema Corte en resolver?",
+   "ir": "datos-judicial-gestion.html#jud-tiempos",
+   "dice": [
+    "522 días"
+   ]
+  },
+  {
+   "q": "¿Cuánto tarda una audiencia en un juzgado?",
+   "ir": "datos-judicial-gestion.html#jud-tiempos"
   }
  ]
 }

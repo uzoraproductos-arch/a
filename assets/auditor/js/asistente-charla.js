@@ -1079,9 +1079,46 @@
       var x = JUD.t[k];
       return { html: (antes || '') + x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug };
     }
-    function judResp(t) {
+    /* Un poder judicial estatal: lo que entró, lo que concluyó, con cuánto dinero y lo que se le acumula (CNIJF-E 2025). */
+    function judEstado(e) {
+      var r = (JUD.est || []).filter(function (x) { return x[0] === e.a; })[0];
+      if (!r) return null;
+      var x = JUD.t.gestion_estados, tot = [0, 0];
+      JUD.est.forEach(function (y) { tot[0] += y[2]; tot[1] += y[3]; });
+      var p100 = 100 * r[3] / r[2], costo = r[1] * 1e6 / r[3];
+      var orden = JUD.est.slice().sort(function (a, b) { return a[3] / a[2] - b[3] / b[2]; }), lugar = orden.indexOf(r) + 1;
+      var h = '<p>En 2024 entraron <b>' + n(r[2]) + ' asuntos</b> a los juzgados de primera instancia del Poder Judicial de <b>' + esc(e.n) + '</b> y concluyó <b>' + n(r[3]) + '</b>: ' +
+        '<b>' + n(p100, 1) + ' de cada 100</b> (en todo el país, ' + n(100 * tot[1] / tot[0], 1) + '). ' +
+        (lugar <= 16 ? 'Es el lugar <b>' + lugar + ' de 32</b> entre los que menos concluyen para lo que les llega.' : 'Está entre los que más concluyen: lugar ' + (33 - lugar) + ' de 32.') + '</p>' +
+        '<p>Ejerció <b>$' + n(r[1], 1) + ' millones</b>: <b>$' + n(costo) + ' por asunto concluido</b>. Tiene ' + n(r[5]) + ' personas juzgadoras, ' + n(r[3] / r[5]) + ' asuntos concluidos por cada una.</p>' +
+        '<p>Al cierre del año le quedaban <b>' + n(r[4]) + ' causas penales pendientes</b> de concluir en el sistema acusatorio (el INEGI cuenta a cada persona procesada). ' +
+        'Cuánto quedó sin resolver en lo civil, familiar y mercantil no lo publica el reporte del censo.</p>' +
+        '<p class="pa-chico">El dinero por asunto no es lo que cuesta un juicio: el presupuesto paga todo el poder judicial. Y son cifras que el propio poder judicial le reporta al INEGI.</p>';
+      var fc = { tx: x.fu[0].fu.tx.replace(/, p\. \d+$/, ''), url: x.fu[0].fu.url };
+      var fu = [{ que: 'Asuntos ingresados y concluidos de ' + e.n + ' (tabla 23, p. 39)', e: 'oficial', fu: fc },
+        { que: 'Presupuesto ejercido en 2024 (gráfica 7, p. 14)', e: 'oficial', fu: fc },
+        { que: 'Causas penales pendientes y personas juzgadoras (tabla 25, p. 45, y tabla 6, p. 12)', e: 'oficial', fu: fc },
+        { que: 'Concluidos por cada 100 que entraron', e: 'derivado', op: n(r[3]) + ' ÷ ' + n(r[2]) + ' × 100', fu: fc },
+        { que: 'Dinero por asunto concluido', e: 'derivado', op: '$' + n(r[1], 1) + ' millones ÷ ' + n(r[3]), fu: fc },
+        { que: 'Asuntos concluidos por persona juzgadora', e: 'derivado', op: n(r[3]) + ' ÷ ' + n(r[5]), fu: fc }];
+      fu.push(x.fu[x.fu.length - 1]);
+      return { html: h, fu: fu, tit: 'Lo que cuesta y lo que resuelve el Poder Judicial de ' + e.n, ir: x.ir,
+        ci: [{ v: n(p100, 1), etq: 'asuntos concluidos por cada 100 que entraron', e: 'derivado' }, { v: '$' + n(costo), etq: 'por asunto concluido', e: 'derivado' },
+          { v: n(r[4]), etq: 'causas penales pendientes al cierre de 2024', e: 'oficial' }],
+        sug: ['¿Cuánto rezago tienen los poderes judiciales de los estados?', '¿Cuánto rezago penal hay?', '¿Cuánto tarda la Suprema Corte en resolver?'] };
+    }
+    function judResp(t, es) {
       if (!JUD) return null;
       var pj = /judicial|judicatura|\bpjf\b|suprema corte|\bscjn\b|la corte\b|\bjuez|\bjueces|juezas?\b|magistrad|ministr[oa]s?\b/;
+      /* La auditoría de gestión (27-10-2026): lo que resuelve con su dinero, el rezago y cuánto tarda. */
+      var juzga = /judicial|judicatura|\bpjf\b|suprema corte|\bscjn\b|la corte\b|\bjuez|\bjueces|juezas?\b|juzgado|tribunal|magistrad|justicia/;
+      if (/rezago|pendientes? de (concluir|resolver)|(asuntos|casos|juicios|expedientes|causas) (sin resolver|pendientes|acumulad|atorad)|(cuant[oa]s) (asuntos|casos|juicios|expedientes) (resuelve|resolvio|resolvieron|concluy|saca|sacan|atiende)|(cuanto|que tanto) (resuelve|resuelven|trabaja|trabajan)|(costo|cuesta|cuestan|dinero) (por|de) (cada )?(asunto|caso|juicio|expediente)|auditoria de gestion|desempeno|productividad|carga de trabajo|eficien/.test(t) && (juzga.test(t) || /rezago penal|causas penales/.test(t))) {
+        if (es && es.length === 1) return judEstado(es[0]);
+        if (/penal|carcel|preso|procesad/.test(t) || (/rezago|pendiente/.test(t) && !/estado|estatal|local|federal|corte|scjn/.test(t))) return judTema('rezago');
+        if (/estados|estatal|locales|cada estado|los estados/.test(t)) return judTema('gestion_estados');
+        return judTema('gestion');
+      }
+      if (/(cuanto|que tanto) (tarda|tardan|dura|duran|se tarda|se tardan)|duracion|cuanto tiempo|audiencia/.test(t) && juzga.test(t) && !/impuesto|fiscal|tributari/.test(t)) return judTema('tiempos');
       if (/fideicomis/.test(t) && pj.test(t)) return judTema('fideicomisos');
       if (/haber(es)? de retiro|pension(es)? (vitalicia|de (los )?ministr)|liquidacion(es)? de (los )?(jueces|ministr|magistrad)/.test(t)) return judTema('retiro');
       if (/eleccion|elegir|elegimos|votar|vota\b|votamos|votaron|eligen|elige|eligieron|votacion|comicios|urnas/.test(t) &&
@@ -1252,7 +1289,7 @@
       /* «Documentar para sancionar»: de la irregularidad a la sanción. */
       var rs = sanResp(t);
       if (rs) return fin(rs, { tipo: 'san' });
-      var rj = judResp(t);
+      var rj = judResp(t, es);
       if (rj) return fin(rj, { tipo: 'jud' });
       if (LEG && sigue && ctx.tipo === 'legcong' && es.length === 1 && !DINERO.test(t)) return fin(congresoLocal(es[0]), { tipo: 'legcong' });
       var rl = legResp(t, es, dir, cuantos);

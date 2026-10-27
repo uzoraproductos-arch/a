@@ -1252,9 +1252,9 @@ def poderes_paginas(base):
          'Cuántas personas legisladoras hay, cómo se eligen, cuándo sesionan, qué se vota el 6 de junio de 2027 y qué cambió con las reformas recientes. '
          'Cotejado con la Constitución vigente, la LGIPE, los acuerdos del INE publicados en el Diario Oficial y el censo del INEGI. Cada tarjeta abre su propia página.',
          lambda temas: al.secciones(base['estados'], temas), 'leg-'),
-        (aj, '⚖️', 'Quién juzga, cuánto cuesta, cuánto ganan y cómo decide',
+        (aj, '⚖️', 'Quién juzga, cuánto cuesta, cuánto ganan, cómo decide y cuánto resuelve',
          'La estructura del Poder Judicial de la Federación tras la reforma de 2024, la Suprema Corte electa en 2025, el tabulador de sueldos, '
-         'el presupuesto 2026, la elección judicial y cómo decide un juez. Cotejado con la Constitución vigente, los acuerdos del INE, el Manual de '
+         'el presupuesto 2026, la elección judicial, cómo decide un juez y lo que resuelve con su dinero. Cotejado con la Constitución vigente, los acuerdos del INE, el Manual de '
          'remuneraciones y el Presupuesto de Egresos. Cada tarjeta abre su propia página.',
          lambda temas: aj.secciones(base, temas), 'jud-'),
     ]

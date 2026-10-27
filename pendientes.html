@@ -20,12 +20,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261027o">
-  <script src="assets/auditor/js/iconos.js?v=20261027o"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261027o" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261027o">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261027o">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261027o">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261027r">
+  <script src="assets/auditor/js/iconos.js?v=20261027r"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261027r" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261027r">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261027r">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261027r">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -199,9 +199,9 @@
         <h2 class="sr-only" id="resumen-tit">Lo que falta, en números</h2>
         <div class="apartado-bloque">
         <div class="pe-resumen">
-          <div><b>70</b><span>pendientes registrados</span></div>
+          <div><b>72</b><span>pendientes registrados</span></div>
           <div class="pe-r-d"><b>48</b><span>🏛️ los debe publicar una dependencia</span></div>
-          <div class="pe-r-p"><b>19</b><span>🧰 los debemos integrar nosotros</span></div>
+          <div class="pe-r-p"><b>21</b><span>🧰 los debemos integrar nosotros</span></div>
           <div class="pe-r-h"><b>3</b><span>📜 son históricos, sin quien responda hoy</span></div>
         </div>
         <p class="pe-regla">Un dato pendiente no se estima ni se rellena: se dice que falta, por qué falta y dónde debería estar. Si la falta es de una dependencia obligada, la nombramos. Si el documento existe y aún no lo integramos, lo decimos: la falta es nuestra. ¿Tienes el documento? <a href="comunidad-error.html" data-puerta="error">Cuéntanos y lo integramos</a>.</p>
@@ -539,6 +539,20 @@
             <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
             <p class="pe-donde"><a href="https://www.gob.mx/tesofe" target="_blank" rel="noopener">🔗 Dónde debería estar: Tesorería de la Federación ↗</a></p>
             <p class="pe-aparece">Aparece en: <a href="herramienta-inspector-pregunta.html">Pregúntale al Auditor</a> · <a href="datos-judicial-presupuesto.html">Datos · Poder Judicial · El presupuesto</a> · <a class="pe-ancla" href="#judicial-fideicomisos-monto" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="judicial-tiempos-juzgados">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Cuánto tarda un juzgado o tribunal en resolver un asunto y en celebrar una audiencia, federal y estatal</h3>
+            <p class="pe-porque"><b>Por qué:</b> El reporte de resultados del censo del INEGI (CNIJF-E 2025) solo publica la duración promedio de los asuntos de la Suprema Corte (tabla 13) y del Tribunal Electoral (tabla 17). De los juzgados de distrito, los tribunales colegiados y los poderes judiciales de los estados, que es donde llega casi todo, no trae cuánto tardan en resolver ni cuánto se espera una audiencia. Los tabulados y datos abiertos del censo pueden traer más detalle y la plataforma aún no los integra: su página se arma con JavaScript y no se pudo leer desde donde se construye la plataforma. Si tampoco están ahí, la falta será de los órganos que reportan al INEGI.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.inegi.org.mx/programas/cnije/2025/" target="_blank" rel="noopener">🔗 Dónde debería estar: Censo Nacional de Impartición de Justicia Estatal 2025 (INEGI) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-inspector-pregunta.html">Pregúntale al Auditor</a> · <a href="datos-judicial-gestion.html">Datos · Poder Judicial · Lo que cuesta y lo que resuelve</a> · <a class="pe-ancla" href="#judicial-tiempos-juzgados" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="judicial-rezago-civil">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Cuántos expedientes civiles, familiares y mercantiles quedaron sin resolver al cierre de 2024 en los poderes judiciales de los estados</h3>
+            <p class="pe-porque"><b>Por qué:</b> El reporte de resultados del censo del INEGI (CNIJF-E 2025) publica las causas penales pendientes de concluir, pero de lo civil, familiar y mercantil solo da los asuntos que entraron y los que concluyeron (tabla 23). Y los que entraron incluyen las demandas desechadas o mandadas corregir, así que restarlos no da el rezago. Los tabulados y datos abiertos del censo pueden traer los expedientes en trámite al cierre del año y la plataforma aún no los integra.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.inegi.org.mx/programas/cnije/2025/" target="_blank" rel="noopener">🔗 Dónde debería estar: Censo Nacional de Impartición de Justicia Estatal 2025 (INEGI) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-inspector-pregunta.html">Pregúntale al Auditor</a> · <a href="datos-judicial-gestion.html">Datos · Poder Judicial · Lo que cuesta y lo que resuelve</a> · <a class="pe-ancla" href="#judicial-rezago-civil" aria-label="Enlace a este pendiente">#</a></p>
           </article>
         </div>
         </div>
@@ -882,11 +896,11 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261027o</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261027r</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261027o"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261027o"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261027r"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261027r"></script>
 </body>
 </html>

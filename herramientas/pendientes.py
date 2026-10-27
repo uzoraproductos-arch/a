@@ -168,6 +168,20 @@ PROPIOS = [
      'Las cifras que circulan («$15,434 millones en 13 fideicomisos») no aparecen en el decreto, y la plataforma aún no ha cotejado el informe oficial del entero.',
      PLATAFORMA, 'https://www.gob.mx/tesofe', 'Tesorería de la Federación',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-presupuesto.html', 'Datos · Poder Judicial · El presupuesto')]),
+    # La auditoría de gestión del Poder Judicial (27-10-2026).
+    ('judicial-tiempos-juzgados', 'Poderes', 'Cuánto tarda un juzgado o tribunal en resolver un asunto y en celebrar una audiencia, federal y estatal',
+     'El reporte de resultados del censo del INEGI (CNIJF-E 2025) solo publica la duración promedio de los asuntos de la Suprema Corte (tabla 13) y del Tribunal Electoral (tabla 17). '
+     'De los juzgados de distrito, los tribunales colegiados y los poderes judiciales de los estados, que es donde llega casi todo, no trae cuánto tardan en resolver ni cuánto '
+     'se espera una audiencia. Los tabulados y datos abiertos del censo pueden traer más detalle y la plataforma aún no los integra: su página se arma con JavaScript y no se '
+     'pudo leer desde donde se construye la plataforma. Si tampoco están ahí, la falta será de los órganos que reportan al INEGI.',
+     PLATAFORMA, 'https://www.inegi.org.mx/programas/cnije/2025/', 'Censo Nacional de Impartición de Justicia Estatal 2025 (INEGI)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-gestion.html', 'Datos · Poder Judicial · Lo que cuesta y lo que resuelve')]),
+    ('judicial-rezago-civil', 'Poderes', 'Cuántos expedientes civiles, familiares y mercantiles quedaron sin resolver al cierre de 2024 en los poderes judiciales de los estados',
+     'El reporte de resultados del censo del INEGI (CNIJF-E 2025) publica las causas penales pendientes de concluir, pero de lo civil, familiar y mercantil solo da los asuntos '
+     'que entraron y los que concluyeron (tabla 23). Y los que entraron incluyen las demandas desechadas o mandadas corregir, así que restarlos no da el rezago. '
+     'Los tabulados y datos abiertos del censo pueden traer los expedientes en trámite al cierre del año y la plataforma aún no los integra.',
+     PLATAFORMA, 'https://www.inegi.org.mx/programas/cnije/2025/', 'Censo Nacional de Impartición de Justicia Estatal 2025 (INEGI)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-gestion.html', 'Datos · Poder Judicial · Lo que cuesta y lo que resuelve')]),
     # «Documentar para sancionar», el informe especial de la ASF (27-10-2026).
     ('asf-sanciones-efectividad', 'Fiscalización', 'Cuántas observaciones de la ASF terminan en una sanción firme',
      'El artículo 38 de la Ley de Fiscalización y Rendición de Cuentas de la Federación manda que el informe semestral de la ASF dé «las sanciones que al efecto hayan '
