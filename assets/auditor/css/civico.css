@@ -716,9 +716,9 @@ body { background-color: #0f1218; }
    Cabecera: el pasillo con dos personas, el azul al lado y el edificio que
    sube. La imagen va a la derecha, a su tamaño natural, y el azul la funde
    por la izquierda; un paneo lento la recorre del pasillo hacia arriba.
-   Pie: la ciudad de noche como marca de agua (pie-planos.jpg queda guardada
-   como alternativa: basta cambiar --pie-imagen).
-   AVISO: imágenes de referencia tomadas de Pinterest, autoría por acreditar;
+   El pie ya no lleva foto (27-10-2026): son tres franjas de azul marino,
+   abajo en «EL PIE EN TRES FRANJAS».
+   AVISO: imagen de referencia tomada de Pinterest, autoría por acreditar;
    sustituir o acreditar antes de pasar a main (ver CONTEXT.md).
    ========================================================================== */
 [data-theme="light"] .site-top-nav {
@@ -749,13 +749,6 @@ body { background-color: #0f1218; }
 [data-theme="light"] .nav-brand-title,
 [data-theme="light"] .nav-brand-subtitle { text-shadow: 0 1px 3px rgba(4, 16, 42, 0.85); }
 
-[data-theme="light"] .site-footer {
-  --pie-imagen: url("../img/portada/pie-noche.jpg");
-  background:
-    linear-gradient(180deg, rgba(234, 243, 253, 0.90) 0%, rgba(234, 243, 253, 0.84) 100%),
-    var(--pie-imagen) center 30% / cover no-repeat,
-    var(--civ-hielo);
-}
 
 /* «Auditoría en imágenes» en pantallas anchas (más de 1560 px): la franja gris
    ocupa todo el ancho y el recuadro queda centrado, con el mismo ancho que el
@@ -1196,3 +1189,162 @@ html.av-en-chat .apartado-cuerpo { padding-top: 4px; padding-bottom: 8px; }
 @media print { .av-volver { display: none; } }
 /* En celular, encima del botón flotante «Cuéntanos lo que viste». */
 @media (max-width: 600px) { .av-volver { left: 12px; bottom: 80px; } }
+
+/* ==========================================================================
+   EL PIE EN TRES FRANJAS (27-10-2026, a pedido del autor)
+   Antes eran tres columnas sobre la foto de la ciudad de noche. Ahora cada
+   bloque es una franja horizontal de ancho completo: el texto a la izquierda
+   y su contenido (la leyenda, las leyes, los accesos) a la derecha. Los
+   azules son una escala más clara que la cabecera y el renglón final
+   (#071d47 · #0b2a63 · #123d8a), y se oscurecen hacia abajo para llegar al
+   renglón final sin salto. Texto blanco: 6.8:1 en la franja más clara.
+   ========================================================================== */
+:root {
+  --pie-1: #2c579f;
+  --pie-2: #244b8e;
+  --pie-3: #1c3f7c;
+  --pie-tinta: #ffffff;
+  --pie-tenue: #dbe7f8;
+  --pie-acento: #ffd166;
+}
+body .site-footer,
+body[data-theme] .site-footer,
+[data-theme="light"] .site-footer {
+  background: var(--pie-3);
+  padding: 0;
+  border-top: 0;
+  color: var(--pie-tenue);
+  font-size: 15px;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+body .site-footer .footer-inner {
+  display: block;
+  max-width: none;
+  margin: 0;
+}
+.pie-banda { padding: 30px max(20px, calc((100% - var(--rect-ancho)) / 2 + 20px)); }
+.pie-banda-1 { background: var(--pie-1); }
+.pie-banda-2 { background: var(--pie-2); border-top: 1px solid rgba(255, 255, 255, 0.10); }
+.pie-banda-3 { background: var(--pie-3); border-top: 1px solid rgba(255, 255, 255, 0.10); }
+.pie-banda-inner {
+  display: grid;
+  grid-template-columns: minmax(280px, 5fr) 7fr;
+  gap: 20px 44px;
+  align-items: start;
+}
+body .site-footer .pie-banda h4,
+[data-theme="light"] .site-footer .pie-banda h4 {
+  color: var(--pie-tinta) !important;
+  font-size: 19px;
+  line-height: 1.3;
+  margin: 0 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--pie-acento);
+  display: inline-block;
+}
+body .site-footer .pie-banda p,
+[data-theme="light"] .site-footer .pie-banda p:not(.leyenda-estados-tit) {
+  color: var(--pie-tenue) !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  margin: 0 0 12px;
+}
+body .site-footer .pie-banda p > span:not(.est-chip),
+[data-theme="light"] .site-footer .pie-banda p > span:not(.est-chip) { color: var(--pie-tinta) !important; font-weight: 700; }
+body .site-footer .pie-banda .pie-firma,
+[data-theme="light"] .site-footer .pie-banda .pie-firma {
+  font-family: var(--font-mono);
+  color: var(--pie-acento) !important;
+  font-size: 13px !important;
+}
+.pie-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.10);
+  color: var(--pie-tinta);
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+}
+.pie-boton:hover,
+.pie-boton:focus-visible { background: #ffffff; color: var(--civ-azul); }
+
+/* Franja 1: la leyenda de los tres estados, en tarjeta blanca para que los
+   chips conserven sus colores. */
+body .site-footer .pie-banda .leyenda-estados {
+  background: #ffffff;
+  border: 0;
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin: 0;
+}
+body .site-footer .pie-banda .leyenda-estados-tit { color: var(--civ-azul) !important; margin-bottom: 8px; }
+body .site-footer .pie-banda .leyenda-estados li,
+[data-theme="light"] .site-footer .pie-banda .leyenda-estados li {
+  color: #26344d !important;
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+/* Franja 2: las leyes y fuentes, en dos columnas */
+.pie-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2 280px;
+  column-gap: 32px;
+}
+body .site-footer .pie-lista li,
+[data-theme="light"] .site-footer .pie-lista li {
+  color: var(--pie-tenue) !important;
+  break-inside: avoid;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  line-height: 1.45;
+}
+body .site-footer .pie-lista .pie-ref {
+  color: var(--pie-tinta);
+  text-decoration-color: rgba(255, 209, 102, 0.7);
+}
+body .site-footer .pie-lista .pie-ref:hover { color: var(--pie-acento); }
+
+/* Franja 3: los accesos del glosario, en renglón */
+.pie-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; }
+.pie-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: var(--pie-tinta);
+  font-size: 14.5px;
+  text-decoration: none;
+}
+.pie-chip:hover,
+.pie-chip:focus-visible { background: #ffffff; color: var(--civ-azul); }
+body .site-footer .pie-banda .pie-nota { font-size: 14px !important; margin: 0; }
+
+/* El renglón final queda pegado a la última franja */
+body .site-footer .footer-bottom { margin: 0; }
+body .site-footer .footer-bottom .footer-aviso { color: var(--pie-acento); }
+
+@media (max-width: 900px) {
+  .pie-banda-inner { grid-template-columns: 1fr; }
+  .pie-banda { padding-top: 26px; padding-bottom: 26px; }
+  body .site-footer .pie-banda p,
+  [data-theme="light"] .site-footer .pie-banda p:not(.leyenda-estados-tit),
+  body .site-footer .pie-banda .leyenda-estados li,
+  [data-theme="light"] .site-footer .pie-banda .leyenda-estados li,
+  body .site-footer .pie-lista li,
+  .pie-chip,
+  .pie-boton { font-size: 16px !important; }
+}

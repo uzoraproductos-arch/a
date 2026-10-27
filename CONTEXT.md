@@ -403,6 +403,14 @@ autor eligió imágenes propias de su carpeta («Gasto público → imágenes»)
 - Pie («Principio y Compromiso»): `pie-noche.jpg` (ciudad de noche) como
   marca de agua; `pie-planos.jpg` (ciudad en planos con grúas) se guardó como
   alternativa: se cambia en la variable `--pie-imagen` de `civico.css`.
+  **Retiradas el 27-10-2026** a pedido del autor: el pie ya no lleva foto. Son
+  tres franjas horizontales de ancho completo (Principio y Compromiso,
+  Compendio Documental, Glosario y Marco Normativo), cada una con su texto a
+  la izquierda y su contenido a la derecha, en una escala de azul marino más
+  clara que la cabecera (`--pie-1` #2c579f, `--pie-2` #244b8e, `--pie-3`
+  #1c3f7c en `civico.css`, «EL PIE EN TRES FRANJAS»). Las dos fotos se
+  borraron del repositorio; siguen en el historial. Con eso, de las tres
+  imágenes de Pinterest solo queda por acreditar la de la cabecera.
 - **Pendiente de derechos:** las tres vienen de Pinterest y su autoría no
   está acreditada; la de noche lleva la firma «AFERA XV». Antes de pasar a
   `main`, sustituirlas por imágenes propias o generadas con IA (con su

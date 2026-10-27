@@ -5,7 +5,7 @@ historia completa de cada decisión en [CONTEXT.md](CONTEXT.md), que pasa de
 7,000 renglones: aquí va solo lo que necesitas para no repetir trabajo ni
 pisar el de otro. **Se actualiza en el mismo commit que cambia lo que dice.**
 
-Última actualización: 27-10-2026 · sello `20261027h` · rama `claude/funny-turing-imtm54`.
+Última actualización: 27-10-2026 · sello `20261027i` · rama `claude/funny-turing-imtm54`.
 
 ## Antes de empezar y antes de empujar
 
@@ -41,6 +41,8 @@ que necesita navegador.
 
 ## Lo último que entró
 
+- **27-10-2026, sello 20261027i.** Imágenes, paso 1: el pie de la portada ya
+  no lleva foto; son tres franjas horizontales en escala de azul marino.
 - **27-10-2026, sello 20261027h.** Bloque 4: `derecho-de-replica.html` (Ley de
   réplica cotejada, décimo pilar, recuadro «✉️ Réplica» en las columnas) y el
   mapa ambiental separa 🏛️ gasto público de 🏢 inversión privada. Al revisarlo
