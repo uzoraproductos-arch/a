@@ -854,6 +854,24 @@
   {
    "q": "¿Por qué quitaron el Seguro Popular?",
    "ir": "noticias-relevantes.html#col-seguro-popular-51-millones"
+  },
+  {
+   "q": "¿A cuántas personas llegó a cubrir el Seguro Popular, cuántas se quedaron sin acceso a la salud después y qué le observó la ASF?",
+   "ir": "auditoria-seguro-popular.html",
+   "dice": [
+    "53.5 millones"
+   ]
+  },
+  {
+   "q": "Muéstrame la auditoría en imágenes del Seguro Popular",
+   "ir": "auditoria-seguro-popular.html"
+  },
+  {
+   "q": "¿Qué le observó la ASF al Seguro Popular?",
+   "ir": "auditoria-seguro-popular.html",
+   "dice": [
+    "928.7"
+   ]
   }
  ]
 }

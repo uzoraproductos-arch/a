@@ -5,7 +5,7 @@ historia completa de cada decisión en [CONTEXT.md](CONTEXT.md), que pasa de
 7,000 renglones: aquí va solo lo que necesitas para no repetir trabajo ni
 pisar el de otro. **Se actualiza en el mismo commit que cambia lo que dice.**
 
-Última actualización: 28-10-2026 · sello `20261028e` · rama `claude/funny-turing-imtm54`.
+Última actualización: 28-10-2026 · sello `20261028k` · rama `claude/funny-turing-imtm54`.
 
 ## Antes de empezar y antes de empujar
 
@@ -16,7 +16,7 @@ python3 herramientas/revision.py --base origin/claude/funny-turing-imtm54   # al
 
 `revision.py` corre lo que pide AGENTS.md §5: `node --check`, los CR sueltos,
 que el sello haya subido si tocaste `assets/`, el inventario (enlaces rotos y
-cotejos sin evidencia), las **184 preguntas de prueba del Auditor**, la guardia
+cotejos sin evidencia), las **194 preguntas de prueba del Auditor**, la guardia
 de legibilidad y, si tocaste `supabase/`, la base de datos. GitHub la corre sola
 en cada envío (`.github/workflows/revision.yml`). Con `--rapida` se salta lo
 que necesita navegador.
@@ -41,6 +41,7 @@ que necesita navegador.
 
 ## Lo último que entró
 
+- **28-10-2026, sello 20261028k.** Auditoría en imágenes llega a 23 investigaciones: **Seguro Popular** (`auditoria-seguro-popular.html`, diapositiva 23), a pedido del autor («resaltar el éxito que fue»). El logro con sus números (5.3 → 53.5 millones de afiliados, ASF CP 2018), la línea del tiempo de la gente sin acceso a la salud 2016–2024 (INEGI, escena nueva `serie` de `auditoria-imagen.js`) y, como contrapeso, los $928.7 mdp que la ASF le observó en 2018 por tipo de irregularidad. Lo escribe `herramientas/integrar_seguro_popular.py`; el chat la abre con «la auditoría del Seguro Popular» o «qué le observó la ASF».
 - **28-10-2026, sello 20261028j.** Verificamos: «Con el Seguro Popular se atendieron más de 51 millones; ahorita nada» (columna `seguro-popular-51-millones`, audio de un reel). Matiz: el padrón llegó a 53.5 millones de afiliados (ASF, Cuenta Pública 2018), pero afiliado no es atendido. Consta el retroceso: sin acceso a servicios de salud, 20.1 millones en 2018, 50.4 en 2022 y 44.5 en 2024 (INEGI, comunicado 118/25). Pendiente: cuántos afiliados se atendieron de verdad (informes de resultados del SPSS, falta de la plataforma).
 - **28-10-2026, sello 20261028i.** La columna del ISSSTESON se corrige: lo que circula es el audio de un reel de Instagram, no una nota de prensa. VERIFICAMOS.md suma el paso 0: se coteja el texto de lo que circula, llegue con liga, captura, video o audio.
 - **28-10-2026, sello 20261028h.** Verificamos: «ISSSTESON: oxígeno pagado a un paciente fallecido y pensiones a personas muertas» (columna `isssteson-oxigeno-pensiones-fallecidos`). La nota no viene de la ASF sino del ISAF de Sonora (informe 2025AE0109010005, segundo trimestre de 2025). Consta: $158,400 de oxígeno sin vale, un paciente cobrado siete meses después de morir y que es recurrente (2024: $358,643 y tres pacientes). Matiz: de los $2,990,499 en pensiones, $2,458,447 eran cheques cancelados sin cobrarse y $158,619 ya se recuperaron; faltan $373,438. Empresa nueva: Biosistemas y Seguridad Privada.

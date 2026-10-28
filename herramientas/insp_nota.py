@@ -409,6 +409,7 @@ TEMAS = [
     (['enciclomedia', 'pizarrones interactivos'], 'auditoria-enciclomedia.html', 'Programa Enciclomedia', 'Auditoría en imágenes'),
     (['fobaproa', 'ipab', 'rescate bancario', 'ramo 34'], 'auditoria-fobaproa.html', 'FOBAPROA / IPAB (Rescate Bancario de 1998)', 'Auditoría en imágenes'),
     (['farac', 'fonadin', 'rescate carretero', 'autopistas rescatadas'], 'auditoria-farac-carretero.html', 'FARAC (Rescate Carretero de 1997)', 'Auditoría en imágenes'),
+    (['seguro popular', 'insabi', 'proteccion social en salud'], 'auditoria-seguro-popular.html', 'Seguro Popular: 53.5 millones de afiliados y lo que pasó después', 'Auditoría en imágenes'),
     (['intereses', 'costo financiero'], 'numeros-egreso-costo-financiero.html', 'Costo financiero de la deuda', 'Números'),
     (['deuda', 'endeudamiento', 'rfsp'], 'numeros-la-deuda.html', 'La deuda: se paga lo que se debe', 'Números'),
     (['paquete economico', '2027'], 'numeros-paquete-2027.html', 'Paquete Económico 2027', 'Números'),

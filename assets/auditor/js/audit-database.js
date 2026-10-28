@@ -31934,6 +31934,190 @@ window.AUDIT_DB = {
           "url": "https://www.finanzaspublicas.hacienda.gob.mx/work/models/Finanzas_Publicas/docs/congreso/infotrim/2025/ivt/05adp/itandpdc_202504.pdf"
         }
       ]
+    },
+    "seguro-popular": {
+      "ente": "Comisión Nacional de Protección Social en Salud (Secretaría de Salud) y los Regímenes Estatales de Protección Social en Salud",
+      "quien": "La Comisión Nacional de Protección Social en Salud, de la Secretaría de Salud, operaba el Sistema de Protección Social en Salud y transfería el dinero a los Regímenes Estatales de las 32 entidades, que daban el servicio. La Auditoría Superior de la Federación revisó su gasto (33 auditorías de la Cuenta Pública 2018). El Congreso aprobó en 2019 su sustitución por el INSABI y en 2023 el paso al IMSS-Bienestar. El INEGI mide cuánta gente no tiene acceso a servicios de salud.",
+      "que": "El Seguro Popular fue el brazo del Sistema de Protección Social en Salud para quien no tenía IMSS ni ISSSTE. Su logro está medido: pasó de 5.3 millones de personas afiliadas en 2004 a 53.5 millones en 2017, y en 2018 las 32 entidades acordaron mantener esa cobertura (ASF). Mientras operó, la gente sin acceso a servicios de salud se mantuvo en 18.8 millones en 2016 y 20.1 millones en 2018, el 16.2 % de la población. Tras su sustitución por el INSABI subió a 35.7 millones en 2020 y a 50.4 millones en 2022; en 2024, ya con el IMSS-Bienestar, eran 44.5 millones (INEGI): 24.4 millones más que en 2018. También tuvo sus fallas, y la ASF las documentó: en 2018 observó $928.7 millones, el 1.7 % de lo que revisó, sobre todo gasto sin comprobar y dinero no ejercido; $892.3 millones seguían por aclarar al cerrar la revisión. Un monto observado no es un daño probado: es lo que la entidad no comprobó a tiempo.",
+      "falta": "Cuántas personas afiliadas recibieron atención de verdad: las consultas y servicios venían en los informes de resultados del Sistema de Protección Social en Salud, que la plataforma aún no integra. Tampoco están todavía aquí las auditorías de la ASF al INSABI y al IMSS-Bienestar, ni cuánto de los $892.3 millones por aclarar se aclaró después.",
+      "pendiente_id": "red-seguro-popular-51-millones-2",
+      "caja": "2004–2024 · ASF e INEGI",
+      "cont": [
+        {
+          "ico": "📈",
+          "tit": "Afiliados, de 2004 a 2017",
+          "txt": "5.3 → 53.5 millones",
+          "etq": "personas con Seguro Popular; en 2018 las 32 entidades acordaron mantener la cobertura · ASF, CP 2018",
+          "est": "oficial"
+        },
+        {
+          "ico": "🩺",
+          "tit": "Sin acceso a la salud en 2018",
+          "txt": "20.1 millones",
+          "etq": "el 16.2 % de la población, con el Seguro Popular en operación · INEGI, comunicado 118/25",
+          "est": "oficial"
+        },
+        {
+          "ico": "📉",
+          "tit": "Sin acceso a la salud en 2024",
+          "txt": "44.5 millones",
+          "etq": "el 34.2 %; el máximo fue 50.4 millones en 2022 · INEGI, comunicado 118/25",
+          "est": "oficial"
+        },
+        {
+          "ico": "🔍",
+          "tit": "Observado por la ASF (2018)",
+          "v": 928.7,
+          "f": "mdp1",
+          "etq": "en 33 auditorías, el 1.7 % de lo revisado; $892.3 mdp seguían por aclarar",
+          "est": "oficial"
+        },
+        {
+          "ico": "➕",
+          "tit": "De más frente a 2018",
+          "txt": "+24.4 millones",
+          "etq": "personas sin acceso a servicios de salud. Operación: 44.5 − 20.1",
+          "est": "derivado"
+        },
+        {
+          "ico": "💰",
+          "tit": "Ejercido en 2018",
+          "v": 68148.4,
+          "f": "mdp1",
+          "etq": "el 3.5 % del gasto federalizado de la Cuenta Pública 2018 · ASF",
+          "est": "oficial"
+        },
+        {
+          "ico": "⏳",
+          "tit": "Atenciones de verdad",
+          "txt": "Sin integrar",
+          "etq": "cuántas consultas y servicios dio a sus afiliados",
+          "est": "pendiente",
+          "pend": "red-seguro-popular-51-millones-2"
+        }
+      ],
+      "serieTit": "La línea del tiempo: personas sin acceso a servicios de salud, 2016–2024",
+      "serieTxt": "Millones de personas con «carencia por acceso a los servicios de salud» (INEGI). Ojo: la encuesta mide si la persona dice estar afiliada o tener derecho a una institución, no si la atendieron ni si había medicinas. Con el INSABI desapareció el padrón de afiliados y cambió también la forma de declarar, y 2020 fue el año de la pandemia: la serie se lee con esas dos notas.",
+      "serie": [
+        {
+          "k": "2016",
+          "v": 18.8,
+          "pct": 15.6,
+          "sub": "Seguro Popular en operación",
+          "est": "oficial",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+        },
+        {
+          "k": "2018",
+          "v": 20.1,
+          "pct": 16.2,
+          "sub": "Seguro Popular: último año medido antes del cambio",
+          "est": "oficial",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+        },
+        {
+          "k": "2020",
+          "v": 35.7,
+          "pct": 28.2,
+          "sub": "INSABI desde el 1 de enero de 2020 (y la pandemia)",
+          "est": "oficial",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+        },
+        {
+          "k": "2022",
+          "v": 50.4,
+          "pct": 39.1,
+          "sub": "INSABI: el punto más alto de la serie",
+          "est": "oficial",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+        },
+        {
+          "k": "2024",
+          "v": 44.5,
+          "pct": 34.2,
+          "sub": "IMSS-Bienestar desde el decreto del 29 de mayo de 2023",
+          "est": "oficial",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+        }
+      ],
+      "rastroTit": "Lo que la ASF observó en el Seguro Popular en 2018, por tipo de irregularidad ($928.7 mdp)",
+      "rastroEst": "oficial",
+      "rastro": [
+        {
+          "k": "Falta de documentación justificativa o comprobatoria del gasto",
+          "sub": "9 entidades, entre ellas Campeche, Chihuahua, Ciudad de México y Tabasco · 35.9 % de lo observado",
+          "v": 333.1,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Recursos o rendimientos no ejercidos, devengados o sin reintegrar a la TESOFE",
+          "sub": "22 entidades · 25.4 % de lo observado",
+          "v": 236.2,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Transferencia de recursos a otras cuentas bancarias",
+          "sub": "Chiapas, Sinaloa y Tamaulipas · 8.7 %",
+          "v": 80.4,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Pago de sueldos, prestaciones o estímulos por encima de lo autorizado",
+          "sub": "Guerrero, Jalisco, Quintana Roo y Yucatán · 8.4 %",
+          "v": 77.6,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Gasto en conceptos que no cumplen los objetivos del programa",
+          "sub": "Campeche, Chiapas, Morelos y Quintana Roo · 5.4 %",
+          "v": 50.6,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Bienes pagados a precios superiores a los contratados",
+          "sub": "Chiapas y Quintana Roo · 2.7 %",
+          "v": 24.9,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Conceptos de nómina no autorizados",
+          "sub": "Hidalgo, Jalisco y Oaxaca · 2.3 %",
+          "v": 21.7,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Otros: personal sin el perfil, medicinas fuera del CAUSES, penas no aplicadas, bienes no localizados",
+          "sub": "11.2 % de lo observado",
+          "v": 104.2,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+          "est": "oficial"
+        }
+      ],
+      "fuentes": [
+        {
+          "doc": "ASF, Marco de Referencia «Recursos federales transferidos a través del Acuerdo de Coordinación (Seguro Popular)», Cuenta Pública 2018",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf"
+        },
+        {
+          "doc": "INEGI, comunicado de prensa 118/25, Pobreza multidimensional 2024, cuadro 1 (13-08-2025)",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+        },
+        {
+          "doc": "INEGI, Pobreza multidimensional 2024, presentación de resultados",
+          "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_presentacion_2024.pdf"
+        },
+        {
+          "doc": "Ley General de Salud, transitorios de los decretos del 29-11-2019 y del 29-05-2023",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf"
+        }
+      ]
     }
   }
 };

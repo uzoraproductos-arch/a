@@ -490,6 +490,34 @@
     };
   }
 
+  /* Seguro Popular (28-10-2026): el logro con sus números, la línea del
+     tiempo de la gente sin acceso a la salud (INEGI) y, en el rastro, lo que
+     la ASF le observó. Lo escribe herramientas/integrar_seguro_popular.py. */
+  function seguroPopular() {
+    var A = DB.auditorias_actuales && DB.auditorias_actuales['seguro-popular'];
+    if (!A) return null;
+    var f = A.fuentes || [];
+    return {
+      cont: A.cont || [],
+      rastroTit: A.rastroTit,
+      rastroEst: A.rastroEst || 'oficial',
+      rastro: A.rastro || [],
+      escena: { tipo: 'serie', tit: A.serieTit, txt: A.serieTxt, serie: A.serie || [] },
+      hallazgo: A.que,
+      pendiente: A.falta,
+      pendienteId: A.pendiente_id || null,
+      fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
+      acciones: [
+        { txt: '🔎 Leer el cotejo de «se atendieron más de 51 millones» en Verificamos', href: 'noticias-relevantes.html#col-seguro-popular-51-millones' },
+        { txt: '🏥 Del Seguro Popular al IMSS-Bienestar en Datos · Salud pública', href: 'datos-salud-sistema.html#sal-transicion' },
+        { txt: '💊 Compras de medicamentos y contratos del sector salud', href: 'auditoria-medicamentos-imss.html' },
+        { txt: '💬 Pregúntale al Auditor cuánta gente se quedó sin acceso a la salud', href: 'herramienta-inspector-pregunta.html?p=' + encodeURIComponent('¿Cuánta gente se quedó sin acceso a servicios de salud?') },
+        f[0] ? { txt: '📄 Abrir la auditoría de la ASF (Cuenta Pública 2018)', url: f[0].url } : null,
+        f[1] ? { txt: '📄 Abrir el comunicado del INEGI', url: f[1].url } : null
+      ].filter(Boolean)
+    };
+  }
+
   var ARMA = {
     'tren-maya': function () { return desdeExpediente('tren-maya'); },
     'dos-bocas': function () { return desdeExpediente('dos-bocas'); },
@@ -512,7 +540,8 @@
     'refineria-tula': function () { return obraMega('refineria-tula'); },
     'enciclomedia': function () { return obraMega('enciclomedia'); },
     'fobaproa': function () { return obraMega('fobaproa'); },
-    'farac-carretero': function () { return obraMega('farac-carretero'); }
+    'farac-carretero': function () { return obraMega('farac-carretero'); },
+    'seguro-popular': seguroPopular
   };
 
   // --- Animacion de cifras --------------------------------------------------
@@ -830,11 +859,29 @@
     } else if (e.tipo === 'fuga') {
       cuerpo = htmlFuga(p);
       txt = 'Aquí no hay gasto que repartir: es un impuesto que no entra. Juega con el porcentaje y mira el tamaño.';
+    } else if (e.tipo === 'serie') {
+      cuerpo = htmlSerie(e);
+      txt = esc(e.txt || '');
     }
     if (!cuerpo) return '';
     return '<section class="au-sec" aria-labelledby="auEscTit">' +
       '<div class="au-sec-cab"><h2 class="au-sec-tit" id="auEscTit"><span class="au-num" aria-hidden="true">2</span> ' + esc(e.tit) + '</h2>' +
       '<p class="au-sec-txt">' + txt + '</p></div>' + cuerpo + '</section>';
+  }
+
+  /* Una serie de personas, año por año (no son pesos): barras que crecen
+     como las del rastro. */
+  function htmlSerie(e) {
+    var mayor = Math.max.apply(null, e.serie.map(function (r) { return r.v; }).concat([0])) || 1;
+    return '<ul class="au-rastro au-serie" id="auSerie">' + e.serie.map(function (r) {
+      var k = r.url ? '<a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer">' + esc(r.k) + ' ↗</a>' : esc(r.k);
+      return '<li class="au-fila">' +
+        '<div class="au-fila-cab"><span class="au-fila-k">' + k + (r.est ? ' ' + chip(r.est) : '') + '</span>' +
+        '<span class="au-fila-v num-tabular">' + r.v.toFixed(1) + ' millones' + (r.pct !== undefined ? ' · ' + r.pct.toFixed(1) + '%' : '') + '</span></div>' +
+        '<span class="au-riel"><span class="au-barra" data-w="' + (r.v / mayor * 100).toFixed(2) + '" style="width:0%"></span></span>' +
+        (r.sub ? '<span class="au-fila-sub">' + esc(r.sub) + '</span>' : '') +
+      '</li>';
+    }).join('') + '</ul>';
   }
 
   // --- 3. El rastro ---------------------------------------------------------
@@ -885,7 +932,14 @@
   if (p.escena.tipo === 'reloj') armarReloj(p);
   if (p.escena.tipo === 'fuga') armarFuga(p);
 
-  /* Las barras del rastro crecen cuando el lector llega a ellas. */
+  /* Las barras del rastro (y de la serie) crecen cuando el lector llega a ellas. */
+  var serie = document.getElementById('auSerie');
+  if (serie && 'IntersectionObserver' in window) {
+    var ios = new IntersectionObserver(function (en) {
+      if (en[0].isIntersecting) { ios.disconnect(); contar(serie, 1200); }
+    }, { threshold: 0.2 });
+    ios.observe(serie);
+  } else if (serie) contar(serie, 0);
   var rastro = document.getElementById('auRastro');
   if (rastro && 'IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (en) {

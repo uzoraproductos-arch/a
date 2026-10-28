@@ -1745,6 +1745,12 @@
       var fs = F.filter(function (x) { return x.ir && x.ir[0] === 'noticias-relevantes.html#col-isssteson-oxigeno-pensiones-fallecidos'; })[0];
       if (fs && charla) { var rs = charla.deFicha(fs); rs.sug = ['¿Cuánto debe Sonora?', 'Biosistemas y Seguridad Privada']; return rs; }
     }
+    /* La investigación del Seguro Popular en Auditoría en imágenes (28-10-2026):
+       «la auditoría del Seguro Popular», «qué le observó la ASF». */
+    if (/ seguro popular /.test(p) && / (auditoria\w*|investigacion\w*|imagen\w*|asf|observ\w*|exito|logro\w*) /.test(p) && charla) {
+      var fi = INV.filter(function (x) { return x.ir && x.ir[0] === 'auditoria-seguro-popular.html'; })[0];
+      if (fi) { var ri = charla.deFicha(fi); ri.sug = ['¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?', '¿Qué pasó con el Seguro Popular?']; return ri; }
+    }
     /* Lo que el Seguro Popular cubría y cuánta gente se quedó sin acceso a la salud
        vive en su columna de Verificamos (28-10-2026); «¿qué pasó con el Seguro Popular?»
        sigue llevando a la transición de Datos · Salud pública. */

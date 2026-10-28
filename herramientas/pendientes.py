@@ -404,6 +404,7 @@ def recolectar():
         'guaymas-comodato-amigo-gnl': ('auditoria-guaymas-gas.html', 'Auditoría en imágenes · Guaymas y la Gaceta Parlamentaria'),
         'salud-ventiladores-y-medicinas': ('auditoria-medicamentos-imss.html', 'Auditoría en imágenes · Compras de medicamentos y contratos del IMSS'),
         'hr-ratings-baja-mexico-bbb': ('auditoria-deuda-congreso-2027.html', 'Auditoría en imágenes · Ley de Ingresos 2027 y nota soberana'),
+        'seguro-popular-51-millones': ('auditoria-seguro-popular.html', 'Auditoría en imágenes · Seguro Popular'),
     }
     import asistente_personajes
     for c in asistente_personajes.columnas()[0]:

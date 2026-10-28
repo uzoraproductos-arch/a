@@ -107,6 +107,10 @@ AUDITORIAS = [
      'Ilustración de una autopista de cuota y caseta de peaje en México con carpetas del rescate carretero FARAC-FONADIN',
      '🛣️ Rescate financiero · FARAC y FONADIN en Banobras (1997–2025)', 'FARAC (Rescate Carretero de 1997)',
      '¿Cuánto costó rescatar las 23 autopistas privadas del FARAC en 1997 y qué deuda sigue vigente hoy en el FONADIN?'),
+    ('seguro-popular', 'assets/auditor/img/showcase_seguro_popular.jpg', 'Ilustración provisional',
+     'Ilustración de un centro de salud con personas en la sala de espera, una póliza de afiliación y una gráfica de la gente sin acceso a la salud de 2016 a 2024',
+     '🏥 Salud pública · Seguro Popular, INSABI e IMSS-Bienestar (2004–2024)', 'Seguro Popular: 53.5 millones de afiliados y lo que pasó después',
+     '¿A cuántas personas llegó a cubrir el Seguro Popular, cuántas se quedaron sin acceso a la salud después y qué le observó la ASF?'),
 ]
 
 
@@ -116,7 +120,7 @@ TEMAS = [
     ('🏗️', 'Megaobras e infraestructura', ['inversion-megaobras', 'tren-maya', 'dos-bocas', 'aifa', 'tren-toluca', 'megafarmacia', 'agronitrogenados', 'fertinal', 'estela-luz', 'bunker-garcia-luna', 'refineria-tula', 'enciclomedia', 'fobaproa', 'farac-carretero', 'guaymas-gas']),
     ('🗺️', 'Dinero para estados y municipios', ['ramo-33', 'lego-cienega']),
     ('💸', 'Deuda e ingresos del gobierno', ['deuda-soberana', 'huachicol-fiscal', 'deuda-congreso-2027']),
-    ('🔍', 'Contratos, salud y órganos autónomos', ['ine-contratos', 'medicamentos-imss']),
+    ('🔍', 'Contratos, salud y órganos autónomos', ['ine-contratos', 'medicamentos-imss', 'seguro-popular']),
 ]
 
 
@@ -169,6 +173,8 @@ RUTAS = {
                  'herramienta-megaobras-sector.html#obra-fobaproa', 'La ficha del rescate bancario FOBAPROA-IPAB y su estado de resultados'),
     'farac-carretero': ('eb-ccreloj', 'El costo financiero y los pasivos del sector público',
                         'herramienta-megaobras-sector.html#obra-farac-carretero', 'La ficha del rescate carretero FARAC-FONADIN y las auditorías de la ASF'),
+    'seguro-popular': ('eb-salud', 'El gasto en salud, institución por institución',
+                       'datos-salud-sistema.html#sal-transicion', 'Del Seguro Popular al IMSS-Bienestar en Datos · Salud pública, con su tablero y sus fuentes'),
 }
 
 
@@ -543,6 +549,7 @@ TEMA_BOT = {
     'enciclomedia': ['enciclomedia', 'pizarrones interactivos'],
     'fobaproa': ['fobaproa', 'ipab', 'rescate bancario', 'ramo 34'],
     'farac-carretero': ['farac', 'fonadin', 'rescate carretero', 'autopistas rescatadas'],
+    'seguro-popular': ['seguro popular', 'insabi', 'proteccion social en salud', 'regimenes estatales de proteccion social'],
 }
 
 
