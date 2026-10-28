@@ -1349,7 +1349,11 @@ NOTICIAS_ARCHIVO = 'noticias-relevantes.html'
 
 
 def noticias(base, ref):
+    # Reestructurada como periodico el 28-10-2026 (pedido del autor): el
+    # armazon, el metodo, la agenda y la mesa de redaccion viven en
+    # herramientas/noticias.py; las notas y columnas, en columnas.js.
     import insp_nota
+    import noticias as nt
     return {
     'archivo': NOTICIAS_ARCHIVO,
     'menu': 'Noticias relevantes',
@@ -1357,71 +1361,15 @@ def noticias(base, ref):
     # cuelga de Aprende, aunque Aprende conserva su tarjeta hacia aquí.
     'icono': '📰',
     'titulo': 'Noticias relevantes',
-    'lema': 'La Columna del Erario',
-    'entrada': ('Lo que está pasando con el dinero público, verificado: notas breves «Al momento», con la fecha, nuestros datos y el glosario, '
-                'columnas de personajes y hechos, y el cotejo de lo que circula en redes. Aquí mismo puedes verificar una noticia, '
-                'proponernos una nota y leer las réplicas y posturas de quienes aludimos. Cada afirmación lleva el documento oficial que '
-                'la sostiene, y lo que dice la red se te muestra rotulado «sin verificar».'),
-    'scripts': ['columnas.js'] + list(insp_nota.SCRIPTS),
-    'estilos': ['columnas.css'] + list(insp_nota.ESTILOS),
+    'lema': 'Auditavisión Noticias',
+    'entrada': ('Las finanzas públicas de México, verificadas. Verifica una noticia, lee lo que pasó y lo que consta, nuestra opinión en la '
+                'Columna del Erario, las réplicas y posturas de quienes aludimos, los casos en seguimiento, los titulares que estamos jalando '
+                '(rotulados «sin verificar») y las fechas que vienen. Cada afirmación lleva el documento oficial que la sostiene.'),
+    'scripts': ['columnas.js'] + list(insp_nota.SCRIPTS) + nt.SCRIPTS,
+    'estilos': ['columnas.css'] + list(insp_nota.ESTILOS) + nt.ESTILOS,
     'secciones': [{
-        'id': 'columnas', 'titulo': 'La Columna del Erario', 'texto': '', 'sin_cab': True, 'tarjetas': [],
-        'bloque': ('<div class="col-diario" id="columnasDiario">\n'
-                   '          <noscript><p>Las columnas necesitan JavaScript.</p></noscript>\n'
-                   '        </div>'),
-    }, {
-        'id': 'al-momento', 'titulo': '⏱️ Al momento: las noticias del día, verificadas',
-        'texto': ('Notas breves de lo que está pasando con el dinero público. Cada una dice de qué nota de prensa salió (el punto de partida, nunca '
-                  'la fuente), qué consta en el documento oficial y qué falta probar, la cuenta con números redondos, lo que dicen nuestros datos '
-                  '(el estado de resultados o la salud financiera de la institución) y las palabras del glosario que hacen falta para entenderla. '
-                  'Al pie, «Lo que dice la red ahora» arma la búsqueda en noticias, YouTube, X, Facebook y el Diario Oficial: lo que encuentres ahí '
-                  'no lo verificamos nosotros, y puedes traerlo aquí abajo, a «Verifica una noticia».'),
-        'tarjetas': [],
-    }, {
-        # La aplicacion 5 del Modo Inspector, entera (pedido del autor,
-        # 28-10-2026: «que también lo integre la pestaña de noticias»).
-        'id': 'verifica', 'titulo': '⚖️ Verifica una noticia',
-        'texto': ('La misma aplicación «Contrasta una nota» de Herramientas y del Auditor, aquí dentro. Pega la liga de la noticia (o su texto): '
-                  'la leemos, encontramos sus cifras y te decimos cuáles coinciden con el documento oficial. Para un cotejo frase por frase, '
-                  'pregúntale al Auditor «¿es cierto que…?» o <a href="#propon">propón la nota</a> para la columna.'),
-        'tarjetas': [],
-        'bloque': insp_nota.construir(base, ref),
-    }, {
-        'id': 'propon', 'titulo': '✍️ Propón una nota para la Columna del Erario',
-        'texto': 'Así llega una noticia a la columna, y así la puedes traer tú.',
-        'tarjetas': [],
-        'bloque': (
-            '<ol class="col-pasos">\n'
-            '<li><b>Nos la mandas.</b> La liga de la nota, el video o la publicación, con lo que te llamó la atención. '
-            '<a href="comunidad-tema.html" data-puerta="tema">💡 Proponer una nota</a></li>\n'
-            '<li><b>La desarmamos en afirmaciones.</b> Cada frase que se puede comprobar («se acotó», «lo paga el Estado», «mil por ciento»).</li>\n'
-            '<li><b>Cotejamos cada una</b> contra el documento oficial: ✅ consta, ⚠️ consta con matices, ❌ sin documento oficial o '
-            '⏳ pendiente, siempre con el documento a la vista. Lo pendiente señala a quién le toca '
-            'publicarlo y entra al <a href="pendientes.html">Registro de pendientes</a>.</li>\n'
-            '<li><b>Se publica</b> como nota «Al momento» o como columna, con la fecha, la cuenta con números redondos, nuestros datos y el '
-            'glosario. Citamos al medio y a quien firma; no copiamos la nota.</li>\n'
-            '<li><b>Se sigue.</b> «Lo que sigue» dice qué documento falta, y cuando llega, la columna cambia y te avisamos.</li>\n'
-            '</ol>\n'
-            '<p class="col-pasos-pie">No publicamos el nombre de personas privadas, y una acusación no es una condena. '
-            'Las reglas completas: <a href="pilares.html">nuestros pilares</a>.</p>'),
-    }, {
-        'id': 'replica', 'titulo': '✉️ Réplica y postura',
-        'texto': ('Quien es aludido puede responder. La <b>réplica</b> la pide quien considera que un dato nuestro sobre él es inexacto o falso: '
-                  'se publica gratis, íntegra y sin comentarios, en la misma columna. La <b>postura</b> es lo que la institución o la persona '
-                  'aludida dijo en su propio documento (un comunicado, una respuesta oficial), con su liga: se publica en sus palabras y no la '
-                  'calificamos.'),
-        'tarjetas': [],
-        'bloque': ('<div class="col-replicas" id="columnasReplicas">\n'
-                   '          <noscript><p>La lista de réplicas necesita JavaScript.</p></noscript>\n'
-                   '        </div>\n'
-                   '<p class="col-pasos-pie"><a href="derecho-de-replica.html">✉️ Cómo ejercer tu derecho de réplica</a>: plazos, '
-                   'qué debe traer y cuándo se puede negar, según la ley.</p>'),
-    }, {
-        'id': 'seguir', 'titulo': '🔔 Sigue un caso',
-        'texto': ('Alarmas de seguimiento: toca «🔔 Seguir este caso» en cualquier columna y, cuando la actualicemos con un documento '
-                  'nuevo (el voto, el informe, el contrato o la sentencia de «Lo que sigue»), verás el aviso de novedades al volver. '
-                  'Tus seguimientos aparecen al inicio del diario. Se guardan solo en este navegador: no pedimos correo ni cuenta.'),
-        'tarjetas': [],
+        'id': 'diario', 'titulo': 'Auditavisión Noticias', 'texto': '', 'sin_cab': True, 'tarjetas': [],
+        'bloque': nt.construir(base, ref),
     }],
     }
 
@@ -5323,6 +5271,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('28-10-2026', 'Noticias se rehace como periódico: Auditavisión Noticias. Separa la noticia (lo que pasó y lo que consta) de la opinión (la Columna del Erario, nuestro argumento con documentos) y suma cuatro secciones: Seguimiento, con los casos abiertos y lo que falta para cerrarlos; la Mesa de redacción, con los titulares que estamos jalando, sin verificar; la Agenda del erario, con las fechas que fija la ley, y Cómo trabajamos, el método del rumor al documento. Y el verificador ahora te dice quién aparece en la nota y te lleva a su estado de cuenta y su salud financiera.'),
     ('28-10-2026', 'El Modo Inspector suma su séptima aplicación: Nepotismo y parentesco. Elige un parentesco («mi cuñado», «mi suegra») y ve qué grado es y qué ley lo alcanza: darle una plaza, un contrato o su cargo en la elección. Trae el árbol de grados, cómo se investiga un cargo y por qué un apellido igual no prueba nada. Y en el chat del Auditor pregúntale «¿mi cuñado puede trabajar en mi oficina?». En Noticias, además, ya puedes verificar una noticia, proponernos una nota y leer las réplicas y posturas.'),
     ('28-10-2026', 'Noticias es ahora la cuarta pestaña del menú, junto a Auditor Virtual, Enciclopedia y Comunidad. Estrena «Al momento»: notas breves de lo que está pasando, con su fecha, lo que consta en el documento oficial y lo que falta probar, la cuenta con números redondos, nuestros datos y el glosario. La primera: el IMSS acota la Modalidad 40, cotejada contra el Diario Oficial del 21 de octubre.'),
     ('27-10-2026', 'Derecho de réplica: si una columna, una ficha o una respuesta del Auditor te alude con un dato inexacto o falso, tu aclaración se publica gratis, íntegra y sin comentarios, como manda la ley. La nueva página dice cómo pedirla, en qué plazos y nuestras reglas con la prensa y con las personas privadas. Es además el décimo de nuestros pilares.'),

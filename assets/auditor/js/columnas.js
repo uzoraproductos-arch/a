@@ -12,15 +12,8 @@
 (function () {
   'use strict';
 
-  var EDICION = '28 de octubre de 2026';
-  var SECCIONES = [
-    ['todas', 'Todas'],
-    ['Al momento', 'Al momento'],
-    ['Personajes', 'Personajes'],
-    ['Hechos', 'Hechos'],
-    ['Historia', 'Historia'],
-    ['Verificado', 'Verificamos']
-  ];
+  var SEC_N = [['todas', 'Todas'], ['Al momento', 'Al momento'], ['Verificado', 'Verificamos']];
+  var SEC_O = [['todas', 'Toda la Columna'], ['Personajes', 'Personajes'], ['Hechos', 'Hechos'], ['Historia', 'Historia']];
   /* Ilustración de cada sección cuando la columna no trae retrato. */
   var ILUS = { Personajes: ['🧑‍⚖️', 'tinta'], Hechos: ['🗂️', 'sepia'], Historia: ['📜', 'oliva'], Verificado: ['🔍', 'sepia'], 'Al momento': ['⏱️', 'tinta'] };
 
@@ -3018,8 +3011,17 @@
  }
 ];
 
+  /* Desde el 28-10-2026 la pestaña es un periódico: «Al momento» y
+     «Verificado» son noticia (#noticiasDiario); lo demás es la Columna del
+     Erario, la opinión (#columnasDiario). La portada (#noticiasPortada) y el
+     seguimiento (#noticiasSeguimiento) solo llaman a la nota. */
+  var NOTICIA = { 'Al momento': 1, 'Verificado': 1 };
+  var VERIFICA = document.getElementById('verifica') ? '#verifica' : 'herramienta-inspector-nota.html';
   var raiz = document.getElementById('columnasDiario');
-  if (!raiz) return;
+  var raizN = document.getElementById('noticiasDiario');
+  var raizP = document.getElementById('noticiasPortada');
+  var raizS = document.getElementById('noticiasSeguimiento');
+  if (!raiz && !raizN) return;
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -3115,7 +3117,7 @@
       '<p class="col-red-lista">' + RED.map(function (r) {
         return '<a href="' + esc(r[2](c.red)) + '" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">' + r[0] + '</span> ' + r[1] + ' ↗</a>';
       }).join('') + '</p>' +
-      '<p class="col-red-pie">¿Encontraste una nota con cifras? <a href="herramienta-inspector-nota.html">Contrástala con los documentos oficiales ➔</a></p></div>';
+      '<p class="col-red-pie">¿Encontraste una nota con cifras? <a href="' + VERIFICA + '">Contrástala con los documentos oficiales ➔</a></p></div>';
   }
   /* La franja «Al momento»: las notas breves, de la más nueva a la más vieja. */
   function fechaN(f) { var p = String(f || '').split('-'); return p.length === 3 ? +(p[2] + p[1] + p[0]) : 0; }
@@ -3143,12 +3145,12 @@
     return '<article class="col-art' + (i === 0 ? ' col-art-portada' : '') + '" id="col-' + esc(c.id) + '" data-seccion="' + esc(c.seccion) + '">' +
       figura(c, i === 0) +
       '<div class="col-art-tx">' +
-        '<span class="col-kicker">' + esc(c.seccion) + '</span>' +
+        '<span class="col-kicker">' + (NOTICIA[c.seccion] ? esc(c.seccion === 'Verificado' ? 'Verificamos' : c.seccion) : '✒️ Opinión · ' + esc(c.seccion)) + '</span>' +
         (novedad(c) ? '<span class="col-nuevo">🆕 Novedades desde que lo sigues</span>' : '') +
         '<h4 class="col-titular">' + esc(c.titulo) + '</h4>' +
         '<p class="col-balazo">' + esc(c.balazo) + '</p>' +
-        '<p class="col-firma">Redacción Auditavisión · ' + (c.fecha ? esc(c.fecha) + ' · ' : '') + 'Con documentos oficiales</p>' +
-        '<button type="button" class="col-leer" aria-expanded="false" aria-controls="col-cuerpo-' + esc(c.id) + '">Leer la columna ➔</button>' +
+        '<p class="col-firma">' + (NOTICIA[c.seccion] ? 'Redacción Auditavisión' : 'La Columna del Erario') + ' · ' + (c.fecha ? esc(c.fecha) + ' · ' : '') + 'Con documentos oficiales</p>' +
+        '<button type="button" class="col-leer" aria-expanded="false" aria-controls="col-cuerpo-' + esc(c.id) + '">Leer completa ➔</button>' +
       '</div>' +
       '<div class="col-cuerpo" id="col-cuerpo-' + esc(c.id) + '" hidden>' +
         (c.cuerpo || []).map(function (p, k) { return '<p' + (k === 0 ? ' class="col-capitular"' : '') + '>' + esc(p) + '</p>'; }).join('') +
@@ -3182,49 +3184,101 @@
         '<p class="col-replica-pie">¿Esta columna te alude con un dato inexacto o falso? <a href="derecho-de-replica.html">Ejerce tu derecho de réplica</a>: se publica gratis, íntegra y sin comentarios.</p>' +
         '<div class="col-acciones">' +
           btnSeguir(c) +
-          '<button type="button" class="col-copiar" data-id="' + esc(c.id) + '">🔗 Copiar enlace a esta columna</button>' +
+          '<button type="button" class="col-copiar" data-id="' + esc(c.id) + '">🔗 Copiar enlace</button>' +
           '<button type="button" class="col-cerrar">Cerrar la columna ▴</button>' +
         '</div>' +
       '</div>' +
     '</article>';
   }
 
-  var filtro = 'todas';
-  function pintar() {
-    var lista = COLUMNAS.filter(function (c) { return filtro === 'todas' || c.seccion === filtro; });
-    raiz.innerHTML =
-      '<header class="col-cabezal">' +
-        '<div class="col-cabezal-linea"><span>Edición del ' + EDICION + '</span><span>Cada cifra, con su documento</span></div>' +
-        '<h3 class="col-nombre">La Columna del Erario</h3>' +
-        '<p class="col-lema">Lo que está pasando con el dinero público, y los personajes y hechos que vale la pena conocer</p>' +
-        '<nav class="col-secciones" aria-label="Secciones del diario">' +
-          SECCIONES.map(function (s) {
-            var n = s[0] === 'todas' ? COLUMNAS.length : COLUMNAS.filter(function (c) { return c.seccion === s[0]; }).length;
-            return '<button type="button" data-sec="' + s[0] + '" aria-pressed="' + (filtro === s[0]) + '">' + s[1] + ' <small>' + n + '</small></button>';
-          }).join('') +
-        '</nav>' +
-      '</header>' +
-      '<p class="col-aviso">Estas columnas sustituyen las fichas de personajes de la Enciclopedia, retiradas en septiembre de 2026 porque no citaban fuentes. ' +
-        'Aquí solo entra lo que sostiene un documento oficial: una sentencia, una resolución, un informe de la Auditoría Superior o el Diario Oficial. ' +
-        'Un proceso abierto no es una condena, y una cifra «por aclarar» no es un robo probado. ' +
-        'En «Verificamos» cotejamos, afirmación por afirmación, lo que circula en redes contra el documento oficial, y en «Al momento», en corto, las noticias del día.</p>' +
-      franja() +
-      panelSigo() +
+  var filtros = { n: 'todas', o: 'todas' };
+  function suyas(g) { return COLUMNAS.filter(function (c) { return g === 'n' ? NOTICIA[c.seccion] : !NOTICIA[c.seccion]; }); }
+  function rejilla(g) {
+    var el = g === 'n' ? raizN : raiz, secs = g === 'n' ? SEC_N : SEC_O;
+    if (!el) return;
+    var todas = suyas(g);
+    var lista = todas.filter(function (c) { return filtros[g] === 'todas' || c.seccion === filtros[g]; });
+    el.innerHTML =
+      '<nav class="col-secciones" aria-label="' + (g === 'n' ? 'Secciones de las noticias' : 'Secciones de la Columna') + '">' +
+        secs.map(function (s) {
+          var n = s[0] === 'todas' ? todas.length : todas.filter(function (c) { return c.seccion === s[0]; }).length;
+          return '<button type="button" data-g="' + g + '" data-sec="' + s[0] + '" aria-pressed="' + (filtros[g] === s[0]) + '">' + s[1] + ' <small>' + n + '</small></button>';
+        }).join('') +
+      '</nav>' +
+      (g === 'n'
+        ? '<p class="col-aviso"><b>Noticia, no opinión.</b> Aquí va lo que pasó y lo que consta en el documento oficial. «Al momento» trae las notas breves del día; ' +
+          '«Verificamos», el cotejo de lo que circula en redes, afirmación por afirmación. Un proceso abierto no es una condena, y una cifra «por aclarar» no es un robo probado.</p>'
+        : '<p class="col-aviso"><b>Opinión, con documentos.</b> La Columna del Erario es nuestro argumento sobre el uso del dinero público, y cada argumento descansa en ' +
+          'un documento oficial: una sentencia, una resolución, un informe de la Auditoría Superior o el Diario Oficial. Opinamos sobre decisiones públicas, nunca sobre la vida privada. ' +
+          'Estas columnas sustituyen las fichas de personajes de la Enciclopedia, retiradas en septiembre de 2026 porque no citaban fuentes.</p>') +
       (lista.length ? '<div class="col-rejilla">' + lista.map(articulo).join('') + '</div>'
                     : '<p class="col-vacio">Todavía no hay columnas verificadas en esta sección.</p>') +
-      '<details class="col-fuera"><summary>🧺 Lo que dejamos fuera y por qué <small>(' + DESCARTADO.length + ')</small></summary>' +
+      (g === 'o' ? '<details class="col-fuera"><summary>🧺 Lo que dejamos fuera y por qué <small>(' + DESCARTADO.length + ')</small></summary>' +
         '<p>Las fichas viejas de la Enciclopedia decían mucho más. Esto es lo que buscamos y no pudimos sostener con un documento oficial. ' +
         'Cuando el documento existe pero aún no lo abrimos, la falta es nuestra y lo decimos así.</p>' +
         '<ul>' + DESCARTADO.map(function (x) {
           return '<li><b>' + esc(x.tema) + ':</b> ' + esc(x.afirmacion) + '<br><span>' + esc(x.motivo) + '</span></li>';
         }).join('') + '</ul>' +
-      '</details>';
+      '</details>' : '');
+  }
+
+  /* La portada: la noticia principal, las que le siguen y, al lado, lo
+     último de la Columna. Son llamadas (#col-<id>): la nota completa vive
+     una sola vez, en su sección. */
+  function resumenCotejo(c) {
+    if (!c.cotejo) return '';
+    var ok = c.cotejo.filter(function (x) { return x.res === 'consta' || x.res === 'matiz'; }).length;
+    var pend = c.cotejo.filter(function (x) { return x.res === 'pendiente'; }).length;
+    var no = c.cotejo.filter(function (x) { return x.res === 'no consta'; }).length;
+    return '<span class="nt-cotejo-mini">' + (ok ? '✅ ' + ok + ' con documento' : '') + (no ? ' · ❌ ' + no + ' sin documento' : '') + (pend ? ' · ⏳ ' + pend + ' por probar' : '') + '</span>';
+  }
+  function llamada(c, clase) {
+    return '<li class="' + clase + '"><a href="#col-' + esc(c.id) + '"><span class="col-kicker">' + esc(c.seccion === 'Verificado' ? 'Verificamos' : c.seccion) + '</span>' +
+      '<b>' + esc(c.titulo) + '</b></a>' + resumenCotejo(c) + '</li>';
+  }
+  function portada() {
+    if (!raizP) return;
+    var nt = suyas('n'), op = suyas('o');
+    var lead = nt[0];
+    raizP.innerHTML = franja() +
+      '<div class="nt-portada">' +
+        (lead ? '<article class="nt-lead">' +
+          '<a class="nt-lead-a" href="#col-' + esc(lead.id) + '">' + figura(lead, true) +
+            '<span class="col-kicker">' + esc(lead.seccion) + '</span><h3 class="nt-lead-tit">' + esc(lead.titulo) + '</h3></a>' +
+          '<p class="nt-lead-balazo">' + esc(lead.balazo) + '</p>' +
+          '<p class="col-firma">Redacción Auditavisión · ' + (lead.fecha ? esc(lead.fecha) + ' · ' : '') + 'Con documentos oficiales</p>' + resumenCotejo(lead) +
+        '</article>' : '') +
+        '<div class="nt-mas"><h3 class="nt-col-tit">Más noticias</h3><ul class="nt-llamadas">' + nt.slice(1, 6).map(function (c) { return llamada(c, 'nt-llamada'); }).join('') + '</ul>' +
+          '<a class="nt-ver-todo" href="#al-momento">Todas las noticias (' + nt.length + ') ➔</a></div>' +
+        '<aside class="nt-op" aria-label="La Columna del Erario"><h3 class="nt-col-tit">✒️ Opinión</h3><p class="nt-op-lema">La Columna del Erario</p><ul class="nt-llamadas">' +
+          op.slice(0, 4).map(function (c) { return llamada(c, 'nt-llamada nt-llamada-op'); }).join('') + '</ul>' +
+          '<a class="nt-ver-todo" href="#columnas">Toda la Columna (' + op.length + ') ➔</a></aside>' +
+      '</div>';
+  }
+
+  /* Seguimiento: los casos abiertos con lo que falta para cerrarlos y, al
+     inicio, los que sigue el lector (solo en su navegador). */
+  function seguimiento() {
+    if (!raizS) return;
+    var casos = COLUMNAS.filter(function (c) { return c.sigue && c.sigue.length; });
+    var docs = casos.reduce(function (s, c) { return s + c.sigue.length; }, 0);
+    raizS.innerHTML = panelSigo() +
+      '<h3 class="nt-sub">📂 Casos abiertos: ' + casos.length + ' casos, ' + docs + ' documentos por llegar</h3>' +
+      '<ol class="nt-casos">' + casos.map(function (c) {
+        return '<li class="nt-caso"><div class="nt-caso-cab"><span class="col-kicker">' + esc(c.seccion === 'Verificado' ? 'Verificamos' : c.seccion) + '</span>' +
+          '<a href="#col-' + esc(c.id) + '"><b>' + esc(c.titulo) + '</b></a>' +
+          '<small>Revisado al ' + esc(c.actualizado || c.fecha || 'sin fecha') + ' · ' + c.sigue.length + (c.sigue.length === 1 ? ' documento' : ' documentos') + ' por llegar</small></div>' +
+          '<ul class="nt-caso-falta">' + c.sigue.slice(0, 3).map(function (x) {
+            return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.que) + ' ↗</a></li>';
+          }).join('') + (c.sigue.length > 3 ? '<li><a href="#col-' + esc(c.id) + '">y ' + (c.sigue.length - 3) + ' más en la nota ➔</a></li>' : '') + '</ul>' +
+          btnSeguir(c) + '</li>';
+      }).join('') + '</ol>';
   }
 
   function abrir(art, abrirla, desplazar) {
     var btn = art.querySelector('.col-leer'), cuerpo = art.querySelector('.col-cuerpo');
     btn.setAttribute('aria-expanded', abrirla ? 'true' : 'false');
-    btn.textContent = abrirla ? 'Leyendo la columna ▾' : 'Leer la columna ➔';
+    btn.textContent = abrirla ? 'Leyendo ▾' : 'Leer completa ➔';
     cuerpo.hidden = !abrirla;
     var c = porId(art.id.slice(4));
     if (abrirla && c && novedad(c)) {
@@ -3238,14 +3292,14 @@
     if (desplazar) {
       var nav = document.querySelector('.site-top-nav');
       document.body.classList.add('cabecera-compacta');
-      var alto = nav ? nav.getBoundingClientRect().height : 0;
+      var alto = (nav ? nav.getBoundingClientRect().height : 0) + 56;
       window.scrollTo({ top: Math.max(0, art.getBoundingClientRect().top + window.pageYOffset - alto - 12), behavior: 'smooth' });
     }
   }
 
-  raiz.addEventListener('click', function (e) {
+  document.addEventListener('click', function (e) {
     var sec = e.target.closest('.col-secciones button');
-    if (sec) { filtro = sec.getAttribute('data-sec'); pintar(); return; }
+    if (sec) { filtros[sec.getAttribute('data-g')] = sec.getAttribute('data-sec'); rejilla(sec.getAttribute('data-g')); return; }
     var leer = e.target.closest('.col-leer');
     if (leer) {
       var art = leer.closest('.col-art');
@@ -3259,14 +3313,14 @@
       var cs = porId(seg.getAttribute('data-id'));
       if (sigue(cs)) delete sigo[cs.id]; else sigo[cs.id] = cs.actualizado || '';
       sigoGuardar();
-      seg.outerHTML = btnSeguir(cs);
+      [].forEach.call(document.querySelectorAll('.col-seguir[data-id="' + cs.id + '"]'), function (b) { b.outerHTML = btnSeguir(cs); });
       repintarSigo();
       return;
     }
     var copiar = e.target.closest('.col-copiar');
     if (copiar) {
       var url = location.href.split('#')[0] + '#col-' + copiar.getAttribute('data-id');
-      var listo = function () { copiar.textContent = '✅ Enlace copiado'; setTimeout(function () { copiar.textContent = '🔗 Copiar enlace a esta columna'; }, 2200); };
+      var listo = function () { copiar.textContent = '✅ Enlace copiado'; setTimeout(function () { copiar.textContent = '🔗 Copiar enlace'; }, 2200); };
       if (navigator.clipboard) navigator.clipboard.writeText(url).then(listo, function () { prompt('Copia este enlace:', url); });
       else prompt('Copia este enlace:', url);
     }
@@ -3284,11 +3338,14 @@
           return '<li><a href="#col-' + esc(c.id) + '">' + esc(c.titulo) + '</a> <small>' +
             [n ? n + (n > 1 ? ' réplicas' : ' réplica') : '', m ? m + (m > 1 ? ' posturas' : ' postura') : ''].filter(Boolean).join(' · ') + '</small></li>';
         }).join('') + '</ul>'
-      : '<p class="col-rep-vacio">Hasta hoy nadie aludido en las ' + COLUMNAS.length + ' columnas y notas nos ha pedido una réplica, ' +
-        'y no hemos recibido posturas en documento propio. Cuando llegue una, aparecerá aquí y en su columna, y quien sigue el caso recibirá el aviso.</p>';
+      : '<p class="col-rep-vacio">Hasta hoy nadie aludido en las ' + COLUMNAS.length + ' notas y columnas nos ha pedido una réplica, ' +
+        'y no hemos recibido posturas en documento propio. Cuando llegue una, aparecerá aquí y en su nota, y quien sigue el caso recibirá el aviso.</p>';
   }
 
-  pintar();
+  rejilla('n');
+  rejilla('o');
+  portada();
+  seguimiento();
 
   /* Enlace directo a una columna (#col-<id>): abre la pestaña y la columna. */
   function irAColumna() {

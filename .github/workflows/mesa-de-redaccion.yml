@@ -1,0 +1,39 @@
+# Mesa de redacción (28-10-2026): junta titulares de finanzas públicas en
+# docs/noticias/bandeja.json (herramientas/recolectar_noticias.py), sin
+# verificar: solo titular, medio, fecha y liga. Corre a mano desde la
+# pestaña Actions. Para que corra sola cada día, quita el # de las dos líneas
+# de «schedule» (decisión del autor: cada corrida hace un commit en la rama).
+name: Mesa de redacción
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '23 14 * * *'   # cada día, 8:23 en la Ciudad de México
+
+permissions:
+  contents: write
+
+jobs:
+  mesa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/funny-turing-imtm54
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Juntar titulares
+        run: python herramientas/recolectar_noticias.py
+      - name: Guardar la bandeja
+        run: |
+          if git diff --quiet -- docs/noticias/bandeja.json; then
+            echo "Sin titulares nuevos."
+            exit 0
+          fi
+          git config user.name "Mesa de redacción"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/noticias/bandeja.json
+          git commit -m "Mesa de redacción: titulares sin verificar del $(date +%d-%m-%Y)"
+          git push origin HEAD:claude/funny-turing-imtm54

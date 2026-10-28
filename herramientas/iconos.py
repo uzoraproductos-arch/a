@@ -98,6 +98,8 @@ ICONOS = [
     ('🧵', 'spool', 'hilo'), ('🕒', 'clock-3', 'hora'), ('👀', 'eye', 'mira'),
     ('🏚️', 'house', 'casa dañada'), ('🟦', 'square', 'azul', 'azul r'), ('✍️', 'signature', 'firma'),
     ('⏮', 'skip-back', 'anterior'), ('🌲', 'tree-pine', 'bosque'), ('👪', 'users-round', 'familia'),
+    ('✂️', 'scissors', 'tijeras'), ('🗞️', 'newspaper', 'periódico'), ('🕵️', 'user-search', 'detective'),
+    ('🗃️', 'archive', 'archivo'), ('✒️', 'pen-tool', 'pluma'), ('🔔', 'bell', 'campana'), ('🔕', 'bell-off', 'sin aviso'),
     ('🏜️', 'sun', 'desierto'), ('🌵', 'sun', 'frontera'), ('💯', 'badge-check', 'completo'),
     ('🏧', 'credit-card', 'cajero'), ('🌪️', 'tornado', 'tornado'), ('🔑', 'key', 'clave'),
     ('🚰', 'glass-water', 'agua potable'), ('🏁', 'flag', 'meta'), ('🥈', 'medal', 'segundo lugar', 'plata'),

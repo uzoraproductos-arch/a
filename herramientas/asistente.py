@@ -475,7 +475,9 @@ def _charla(d):
             'leg': asistente_legislativo.legislativo(), 'jud': asistente_judicial.judicial(d),
             'san': informe_sancion.bot(), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d),
             # Nepotismo y cargos publicos (28-10-2026): la tabla de la calculadora.
-            'nep': nepotismo.bot()}
+            'nep': nepotismo.bot(),
+            # Agenda del erario de Noticias (28-10-2026): las fechas que fija la ley.
+            'agenda': __import__('noticias').AGENDA}
 
 
 def _inspector():

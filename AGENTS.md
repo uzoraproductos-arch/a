@@ -398,6 +398,32 @@ mudando a su página; no se agregan desgloses nuevos.
   aludida dijo en su propio documento: se publica en sus palabras, con su liga,
   y no se califica. La página es la función `noticias(base, ref)` de
   `apartados.py`.
+- **Noticias es un periódico: «Auditavisión Noticias»** (pedido del autor,
+  28-10-2026: «una nueva reestructuración tanto de diseño como de la
+  información… partiendo de una metodología u objetivo»). **Objetivo: que
+  ninguna noticia sobre el dinero público se quede sin cotejar.** Nueve
+  secciones con su barra: Portada, Verifica (`#verifica`), **Noticias**
+  (`#al-momento`: «Al momento» y «Verificado»; aquí no se opina), **Opinión**
+  (`#columnas`: la Columna del Erario, Personajes, Hechos e Historia: nuestro
+  argumento, siempre parado en un documento y nunca sobre la vida privada),
+  Réplica y postura (`#replica`), Seguimiento (`#seguir`: los casos con
+  `sigue` y «Pedir un seguimiento»), Mesa de redacción (`#mesa`), Agenda del
+  erario (`#agenda`) y Cómo trabajamos (`#metodo`, con `#propon`): el método
+  de siete pasos, del rumor al documento. **La noticia y la opinión no se
+  mezclan:** `columnas.js` reparte por `seccion` (`NOTICIA`), y una columna
+  nueva va en la que le toca. El armazón, el método, la agenda y las búsquedas
+  de la mesa viven en `herramientas/noticias.py`; la página la pinta
+  `noticias.js`. **La mesa de redacción** trae titulares de Bing Noticias y
+  Google Noticias al pedirlos (en el navegador) y los junta
+  `herramientas/recolectar_noticias.py` en `docs/noticias/bandeja.json`
+  (flujo «Mesa de redacción», a mano): **solo titular, medio, fecha y liga,
+  rotulados «sin verificar»; nunca el texto de la nota**. Un titular entra a
+  la plataforma solo después de pasar por el método. **La agenda** son plazos
+  de la ley, cada uno con su artículo; las fechas que la ley da como «30 días
+  después del trimestre» o «último día hábil» se dicen como cuenta nuestra
+  (`derivado`). El verificador dice además **quién aparece en la nota**
+  (`insp_nota.ENTE_PAL` y `ESTADO_PAL`) y lleva a su ficha del Auditor de
+  entes, con su estado de cuenta y su salud financiera.
 
 ---
 

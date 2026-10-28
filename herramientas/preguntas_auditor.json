@@ -977,6 +977,26 @@
   {
    "q": "verificar una noticia",
    "ir": "herramienta-inspector-nota.html"
+  },
+  {
+   "q": "¿Cuándo se aprueba el presupuesto de egresos?",
+   "ir": "noticias-relevantes.html#agenda"
+  },
+  {
+   "q": "Agenda del erario",
+   "ir": "noticias-relevantes.html#agenda"
+  },
+  {
+   "q": "¿Qué dicen hoy los periódicos?",
+   "ir": "noticias-relevantes.html#mesa"
+  },
+  {
+   "q": "Quiero pedir seguimiento a un caso",
+   "ir": "noticias-relevantes.html#seguir"
+  },
+  {
+   "q": "¿Cómo sigo un caso?",
+   "ir": "noticias-relevantes.html#seguimientos"
   }
  ]
 }

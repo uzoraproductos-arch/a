@@ -1754,6 +1754,37 @@
         html: '<p>✉️ En <b>Réplica y postura</b> de Noticias están las respuestas de quienes aludimos. La <b>réplica</b> la pide quien considera inexacto o falso un dato nuestro: se publica gratis, íntegra y sin comentarios en la misma columna. La <b>postura</b> es lo que la institución o la persona aludida dijo en su propio documento, con su liga: se publica en sus palabras y no la calificamos.</p>',
         ir: ['noticias-relevantes.html#replica', 'Noticias · Réplica y postura'], rec: [], sug: ['¿Cómo ejerzo mi derecho de réplica?', 'Noticias de hoy']
       };
+    /* Noticias reestructurada (28-10-2026): la agenda del erario, la mesa de
+       redacción y el seguimiento de casos tienen su sección. */
+    if ((/ (agenda del erario|calendario (fiscal|presupuestal|del presupuesto|del erario)|fechas (del presupuesto|del paquete economico|fiscales)) /.test(p) ||
+        / (cuando|que dia|que fecha|en que fecha) (se )?(entrega\w*|presenta\w*|aprueba\w*|llega\w*|manda\w*|envia\w*) (el |la |los )?(paquete economico|presupuesto de egresos|presupuesto|ley de ingresos|cuenta publica|informes? trimestral\w*|precriterios) /.test(p)) &&
+        !/ semestral /.test(p)) {
+      var AG = (B.dat && B.dat.agenda) || [], hoyA = new Date(); hoyA.setHours(0, 0, 0, 0);
+      var MES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+      var cuando = function (x, an) {
+        if (!x.ult) return new Date(an, x.m - 1, x.d);
+        var u = new Date(an, x.m, 0); while (u.getDay() === 0 || u.getDay() === 6) u.setDate(u.getDate() - 1); return u;
+      };
+      var prox = AG.map(function (x) { var f = cuando(x, hoyA.getFullYear()); if (f < hoyA) f = cuando(x, hoyA.getFullYear() + 1); return { x: x, f: f }; })
+        .sort(function (a, b) { return a.f - b.f; }).slice(0, 5);
+      if (prox.length) return {
+        html: '<p>🗓️ <b>Lo que viene en la agenda del erario</b>, con los plazos que fija la ley:</p><ul class="pa-lista">' + prox.map(function (o) {
+          return '<li><b>' + o.f.getDate() + ' de ' + MES[o.f.getMonth()] + (o.x.ult ? ' (último día hábil)' : '') + ':</b> ' + esc(o.x.que) + ' <small>· ' + esc(o.x.quien) + ' · <a href="' + esc(o.x.url) + '" target="_blank" rel="noopener">' + esc(o.x.ley) + ' ↗</a></small></li>';
+        }).join('') + '</ul><p class="pa-chico">Son plazos máximos: el documento puede llegar antes. Las fechas que la ley da como «30 días después del trimestre» o «último día hábil» son nuestra cuenta (derivado).</p>',
+        ir: ['noticias-relevantes.html#agenda', 'Noticias · Agenda del erario'], rec: [], sug: ['Noticias de hoy', '¿Qué es la Cuenta Pública?']
+      };
+    }
+    if (/ (mesa de redaccion|titulares (de hoy|del dia|recientes)|que dicen (hoy )?los periodicos|que publican los medios) /.test(p))
+      return {
+        html: '<p>📡 En la <b>Mesa de redacción</b> de Noticias juntamos titulares sobre finanzas públicas de los buscadores de noticias, por tema (presupuesto, deuda, ASF, impuestos, contratos, Pemex y CFE, salud, estados). Llegan <b>sin verificar</b>: son la materia prima, no la noticia. Cada uno lo puedes mandar al verificador con un toque.</p>',
+        ir: ['noticias-relevantes.html#mesa', 'Noticias · Mesa de redacción'], rec: [], sug: ['Verifica una noticia', 'Noticias de hoy']
+      };
+    if (/ (casos? (abiertos?|en seguimiento)|pedir (un )?seguimiento|den(le)? seguimiento|dar(le)? seguimiento|(sigo|seguir|sigan?) (un|este|el) caso|que no se olvide) /.test(p))
+      return {
+        html: '<p>🔔 En <b>Seguimiento</b> de Noticias están los casos abiertos, cada uno con el documento que falta para cerrarlo (un voto, un informe de la ASF, un contrato, una sentencia). Toca «Seguir este caso» y, cuando llegue el documento, verás el aviso; se guarda solo en tu navegador.</p>' +
+          '<p>¿Quieres que sigamos uno nuevo? Ahí mismo, «Pedir un seguimiento»: dinos qué es y qué documento esperas.</p>',
+        ir: ['noticias-relevantes.html#seguir', 'Noticias · Seguimiento'], rec: [], sug: ['Noticias de hoy', 'Proponer una nota']
+      };
     /* Quien fue aludido y quiere aclarar: la página del derecho de réplica, no
        la columna que comparte sus palabras (Bloque 4, 27-10-2026). «¿Qué es…?»
        lo sigue contestando el glosario. */

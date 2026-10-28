@@ -263,6 +263,31 @@
       '</details></li>';
   }
 
+  /* Quién aparece en la nota (28-10-2026): los estados y entes federales
+     que nombra, con la liga a su ficha del Auditor de entes (estado de
+     cuenta, salud financiera y dictamen). Solo por su nombre: puede fallar,
+     y así se dice. */
+  function quienes(n) {
+    var t = ' ' + plano((n.titulo || '') + ' ' + (n.texto || '')) + ' ', out = [];
+    (D.entes || []).forEach(function (e) {
+      var pos = -1;
+      e.k.forEach(function (k) {
+        var m = new RegExp('[^a-z0-9]' + k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?=[^a-z0-9])').exec(t);
+        if (m && (pos < 0 || m.index < pos)) pos = m.index;
+      });
+      if (pos >= 0) out.push({ e: e, pos: pos });
+    });
+    return out.sort(function (x, y) { return x.pos - y.pos; }).slice(0, 8).map(function (x) { return x.e; });
+  }
+  function quienesHtml(n, tema) {
+    var q = tema ? quienes(n) : [];
+    if (!q.length) return '';
+    return '<section class="in-temas in-entes"><h3 class="in-sub">Quién aparece en la nota: su estado de cuenta y su salud financiera</h3>' +
+      '<p class="in-txt">Los encontramos por su nombre; revisa que sea el mismo. En su ficha del Auditor de entes están su estado de cuenta, su salud financiera ' +
+      'y su dictamen, cada cifra con su documento.</p><ul>' +
+      q.map(function (e) { return '<li><a href="' + esc(e.h) + '"><small>' + esc(e.s) + '</small><span>' + esc(e.n) + ' <span aria-hidden="true">→</span></span></a></li>'; }).join('') +
+      '</ul></section>';
+  }
   function pinta(n) {
     var ext = analiza(n), r = conjunto(ext), rel = relevancia(n), cont = $('inVeredicto');
     var contr = ext.cifras.filter(function (c) { return c.v && c.v.tipo !== 'gris' && !c.dolar && c.sel; });
@@ -322,7 +347,7 @@
           '. Cada una que coincide vale 1; la que se acerca, ½; la que no coincide, 0. El resultado es el promedio sobre 100 ' + chip('derivado') + '.</p>' : '') +
       '</div>' +
       (just ? '<h3 class="in-sub">Por qué, cifra por cifra</h3><ol class="in-justs" id="inJusts">' + just + '</ol>' : '') +
-      sinHtml + dolHtml + temas + dictamenPie() + '</article>' +
+      sinHtml + dolHtml + temas + quienesHtml(n, tema) + dictamenPie() + '</article>' +
       '<div class="in-acciones">' +
         '<button type="button" class="in-boton" id="inCopiar"><span aria-hidden="true">📋</span> Copiar el veredicto</button>' +
         '<button type="button" class="in-boton in-sec" id="inOtra"><span aria-hidden="true">↺</span> Verificar otra nota</button>' +

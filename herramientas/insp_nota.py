@@ -486,9 +486,55 @@ def _temas():
     return [{'k': p, 'h': h, 't': t, 's': s} for p, h, t, s in TEMAS]
 
 
+# Quien aparece en la nota (pedido del autor, 28-10-2026: «interpretamos lo
+# que menciona… y sacamos nuestro dictamen… estado de resultados y salud
+# financiera»). Cada estado y cada ente federal del Auditor de entes, con las
+# palabras que lo nombran; el veredicto lleva a su ficha, donde estan su
+# estado de cuenta, su salud financiera y su dictamen. Los estados cuyo
+# nombre tambien es apellido o ciudad piden «estado de» o el gentilicio.
+ENTE_PAL = {
+    'shcp': ['shcp', 'hacienda', 'secretaria de hacienda'], 'imss': ['imss', 'seguro social'], 'issste': ['issste'],
+    'pemex': ['pemex', 'petroleos mexicanos'], 'cfe': ['cfe', 'comision federal de electricidad'], 'sep': ['sep', 'secretaria de educacion publica'],
+    'ine': ['ine', 'instituto nacional electoral'], 'inegi': ['inegi'], 'fgr': ['fgr', 'fiscalia general de la republica'],
+    'defensa': ['sedena', 'secretaria de la defensa'], 'marina': ['semar', 'secretaria de marina'], 'salud': ['secretaria de salud'],
+    'bienestar': ['secretaria de bienestar'], 'sict': ['sict', 'secretaria de infraestructura'], 'semarnat': ['semarnat'],
+    'sre': ['sre', 'cancilleria', 'secretaria de relaciones exteriores'], 'gobernacion': ['segob', 'secretaria de gobernacion'],
+    'cndh': ['cndh'], 'inai': ['inai'], 'cofece': ['cofece'], 'ift': ['ift'], 'cre': ['cre', 'comision reguladora de energia'],
+    'cnh': ['cnh', 'comision nacional de hidrocarburos'], 'tfja': ['tfja', 'tribunal federal de justicia administrativa'],
+    'judicial': ['poder judicial de la federacion', 'suprema corte', 'scjn'], 'legislativo': ['poder legislativo'],
+    'presidencia': ['oficina de la presidencia'], 'sspc': ['sspc', 'secretaria de seguridad'], 'stps': ['stps', 'secretaria del trabajo'],
+    'agricultura': ['sader', 'secretaria de agricultura'], 'economia': ['secretaria de economia'], 'energia': ['secretaria de energia', 'sener'],
+    'turismo': ['secretaria de turismo', 'sectur'], 'cultura': ['secretaria de cultura'], 'sedatu': ['sedatu'],
+    'secihti': ['secihti'], 'anticorrupcion': ['secretaria anticorrupcion'], 'atdt': ['agencia de transformacion digital'],
+    'mujeres': ['secretaria de las mujeres'], 'cjef': ['consejeria juridica'], 'tribunales-agrarios': ['tribunales agrarios'],
+}
+ESTADO_PAL = {
+    'MEX': ['estado de mexico', 'edomex', 'mexiquense'], 'CDMX': ['ciudad de mexico', 'cdmx'],
+    'HGO': ['estado de hidalgo', 'gobierno de hidalgo', 'hidalguense'], 'GRO': ['estado de guerrero', 'gobierno de guerrero', 'guerrerense'],
+    'MOR': ['estado de morelos', 'gobierno de morelos', 'morelense'], 'COL': ['estado de colima', 'gobierno de colima', 'colimense'],
+    'DGO': ['estado de durango', 'gobierno de durango', 'duranguense'], 'CAM': ['estado de campeche', 'gobierno de campeche', 'campechano'],
+}
+
+
+def _plano(t):
+    import unicodedata
+    return ''.join(c for c in unicodedata.normalize('NFD', t.lower()) if unicodedata.category(c) != 'Mn')
+
+
+def _entes(base):
+    out = []
+    for e in base['estados']:
+        k = ESTADO_PAL.get(e['abbr']) or [_plano(e['name']), 'estado de ' + _plano(e['name'])]
+        out.append({'k': k, 'n': e['name'], 'h': 'herramienta-inspector-entes.html#ente=estatal:' + e['abbr'], 's': 'Gobierno del estado'})
+    for f in base['inspector_federal']['entes']:
+        k = ENTE_PAL.get(f['id']) or [_plano(f['nombre'])]
+        out.append({'k': k, 'n': f['nombre'], 'h': 'herramienta-inspector-entes.html#ente=federal:' + f['id'], 's': 'Ente federal'})
+    return out
+
+
 def _datos_lector(base):
     datos = {'cat': catalogo_lector(base), 'catalogo': CATALOGO, 'pagina': PAGINA,
-             'fiscal': FISCAL, 'temas': _temas()}
+             'fiscal': FISCAL, 'temas': _temas(), 'entes': _entes(base)}
     return '  <script type="application/json" id="inDatos">%s</script>' % _json(datos)
 
 
@@ -514,7 +560,7 @@ def construir(base, ref):
     <p class="in-txt">Pega la liga de una noticia, una revista, un blog, un video o una publicación en redes. Leemos la nota, encontramos sus cifras y las ponemos junto a <b>{total} cifras oficiales</b>, cada una con su documento.</p>
     <div class="in-modos" role="tablist" aria-label="Cómo nos das la nota">
       <button type="button" class="in-modo" role="tab" id="inTabLiga" aria-selected="true" aria-controls="inFormLiga">Pegar la liga</button>
-      <button type="button" class="in-modo" role="tab" id="inTabTexto" aria-selected="false" aria-controls="inFormTexto" tabindex="-1">Pegar el texto</button>
+      <button type="button" class="in-modo" role="tab" id="inTabTexto" aria-selected="false" aria-controls="inFormTexto" tabindex="-1">Pegar el texto o la transcripción</button>
     </div>
     <form class="in-lee" id="inFormLiga" role="tabpanel" aria-labelledby="inTabLiga" novalidate>
       <label class="in-campo" for="inUrl"><span class="in-sr">Liga de la nota</span>
