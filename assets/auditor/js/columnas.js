@@ -38,6 +38,8 @@
      pide aclarar un dato y procede, su texto va en replica[{quien, fecha, texto}]
      y se publica íntegro, sin comentarios ni apostillas (Ley de réplica, art. 6).
      Todas las columnas llevan al pie la liga para pedirla (derecho-de-replica.html).
+     La postura (28-10-2026) es lo que la parte aludida dijo en su propio documento:
+     postura[{quien, fecha, texto, url}], en sus palabras y sin calificarla.
      «Al momento» (pedido del autor, 28-10-2026): notas breves de lo que está pasando,
      con el mismo cotejo de Verificamos y además fecha, nota{medio, titulo, fecha, url},
      ejemplo{tit, txt, filas, nota}, datos[{ico, tx, url, de}] (lo que dice la
@@ -3173,6 +3175,10 @@
         (c.replica && c.replica.length ? '<aside class="col-replica"><b>✉️ Réplica</b>' + c.replica.map(function (r) {
           return '<p>' + esc(r.texto) + '</p><small>' + esc(r.quien) + ' · ' + esc(r.fecha) + '</small>';
         }).join('') + '</aside>' : '') +
+        (c.postura && c.postura.length ? '<aside class="col-postura"><b>🗣️ Postura de la parte aludida</b>' + c.postura.map(function (r) {
+          return '<p>' + esc(r.texto) + '</p><small>' + esc(r.quien) + ' · ' + esc(r.fecha) +
+            (r.url ? ' · <a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer">su documento ↗</a>' : '') + '</small>';
+        }).join('') + '<small>En sus palabras: no la calificamos.</small></aside>' : '') +
         '<p class="col-replica-pie">¿Esta columna te alude con un dato inexacto o falso? <a href="derecho-de-replica.html">Ejerce tu derecho de réplica</a>: se publica gratis, íntegra y sin comentarios.</p>' +
         '<div class="col-acciones">' +
           btnSeguir(c) +
@@ -3265,6 +3271,22 @@
       else prompt('Copia este enlace:', url);
     }
   });
+
+  /* Réplicas y posturas (pedido del autor, 28-10-2026: «un apartado para
+     derecho de réplica, postura»). Lista las columnas que ya traen una u otra;
+     vive en la sección #replica de noticias-relevantes.html. */
+  var rep = document.getElementById('columnasReplicas');
+  if (rep) {
+    var con = COLUMNAS.filter(function (c) { return (c.replica && c.replica.length) || (c.postura && c.postura.length); });
+    rep.innerHTML = con.length
+      ? '<ul class="col-rep-lista">' + con.map(function (c) {
+          var n = (c.replica || []).length, m = (c.postura || []).length;
+          return '<li><a href="#col-' + esc(c.id) + '">' + esc(c.titulo) + '</a> <small>' +
+            [n ? n + (n > 1 ? ' réplicas' : ' réplica') : '', m ? m + (m > 1 ? ' posturas' : ' postura') : ''].filter(Boolean).join(' · ') + '</small></li>';
+        }).join('') + '</ul>'
+      : '<p class="col-rep-vacio">Hasta hoy nadie aludido en las ' + COLUMNAS.length + ' columnas y notas nos ha pedido una réplica, ' +
+        'y no hemos recibido posturas en documento propio. Cuando llegue una, aparecerá aquí y en su columna, y quien sigue el caso recibirá el aviso.</p>';
+  }
 
   pintar();
 

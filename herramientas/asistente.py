@@ -469,10 +469,13 @@ def _charla(d):
     # Salud pública, auditoría de gestión (27-10-2026): IMSS, ISSSTE e IMSS-Bienestar.
     import gestion_salud
     import gestion_ambiental
+    import nepotismo
     return {'nota': nota, 'met': met, 'edo': edo, 'cargos': cargos, 'smin': smin, 'adm': adm, 'admet': admet, 'expide': EXPIDE,
             'mapa': 'numeros-mapa-del-gasto-federalizado.html', 'num': num, 'datos': asistente_datos.datos(d, num, D),
             'leg': asistente_legislativo.legislativo(), 'jud': asistente_judicial.judicial(d),
-            'san': informe_sancion.bot(), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d)}
+            'san': informe_sancion.bot(), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d),
+            # Nepotismo y cargos publicos (28-10-2026): la tabla de la calculadora.
+            'nep': nepotismo.bot()}
 
 
 def _inspector():
@@ -718,6 +721,7 @@ for _i, _e in enumerate([('¿Cuánta gente se quedó sin acceso a la salud?', '�
 # primera tanda, al principio, y «noticias de hoy» en la segunda.
 EJEMPLOS.insert(0, ('¿Qué pasó con la Modalidad 40 del IMSS?', '⏱️'))
 EJEMPLOS.insert(7, ('Noticias de hoy', '📰'))
+EJEMPLOS.insert(14, ('¿Mi cuñado puede trabajar en mi oficina?', '👪'))
 
 
 

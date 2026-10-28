@@ -927,6 +927,56 @@
   {
    "q": "¿Qué está pasando?",
    "ir": "noticias-relevantes.html#al-momento"
+  },
+  {
+   "q": "¿Qué es el nepotismo?",
+   "ir": "nepotismo-y-cargos-publicos.html"
+  },
+  {
+   "q": "¿Mi cuñado puede trabajar en mi oficina?",
+   "ir": "nepotismo-y-cargos-publicos.html?rel=cunados#calculadora",
+   "dice": [
+    "segundo grado"
+   ]
+  },
+  {
+   "q": "¿Qué es el nepotismo electoral?",
+   "ir": "nepotismo-y-cargos-publicos.html#tres-leyes"
+  },
+  {
+   "q": "¿Cómo investigo si un funcionario contrató a su familia?",
+   "ir": "nepotismo-y-cargos-publicos.html#como-se-investiga"
+  },
+  {
+   "q": "¿Hasta qué grado de parentesco es nepotismo?",
+   "ir": "nepotismo-y-cargos-publicos.html"
+  },
+  {
+   "q": "¿Mi esposa puede ser candidata a mi cargo?",
+   "ir": "nepotismo-y-cargos-publicos.html#tres-leyes"
+  },
+  {
+   "q": "¿Por qué un apellido igual no prueba nada?",
+   "ir": "nepotismo-y-cargos-publicos.html#puntos-ciegos"
+  },
+  {
+   "q": "quiero proponer una nota",
+   "ir": "noticias-relevantes.html#propon"
+  },
+  {
+   "q": "réplicas y posturas",
+   "ir": "noticias-relevantes.html#replica"
+  },
+  {
+   "q": "¿El concuño cuenta como familia?",
+   "ir": "nepotismo-y-cargos-publicos.html?rel=concunos#calculadora",
+   "dice": [
+    "no hay parentesco"
+   ]
+  },
+  {
+   "q": "verificar una noticia",
+   "ir": "herramienta-inspector-nota.html"
   }
  ]
 }

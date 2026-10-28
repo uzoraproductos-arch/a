@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 237 |
+| Páginas revisadas | 238 |
 | Páginas que solo redirigen | 28 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -17,7 +17,7 @@ La Enciclopedia queda fuera porque está congelada.
 | Página | Título | Generador | Enlaces internos | Módulos embebidos | oficial | derivado | pendiente |
 |---|---|---|---:|---:|---:|---:|---:|
 | `agora.html` | Ágora cívica · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
-| `aprende.html` | Aprende · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
+| `aprende.html` | Aprende · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `auditoria-agronitrogenados.html` | Plantas de fertilizantes Agronitrogenados · Auditoría en imágenes · Auditavisión | auditorias.py | 77 | 0 | 4 | 2 | 2 |
 | `auditoria-aifa.html` | Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditoría en imágenes · Auditavisión | auditorias.py | 77 | 0 | 2 | 4 | 1 |
 | `auditoria-bunker-garcia-luna.html` | El Búnker de Seguridad de García Luna (SSPC) · Auditoría en imágenes · Auditavisión | auditorias.py | 77 | 0 | 4 | 2 | 2 |
@@ -161,14 +161,15 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 42 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 33 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 59 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 239 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 240 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
 | `informes-documentar-para-sancionar.html` | Informe especial: Documentar para sancionar · Auditavisión | apartados.py | 44 | 0 | 40 | 8 | 2 |
 | `informes-oficiales.html` | Informes oficiales · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
 | `informes-semestral-asf.html` | Informe semestral de la ASF · Auditavisión | apartados.py | 43 | 0 | 30 | 5 | 4 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
-| `noticias-relevantes.html` | Noticias relevantes · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
+| `nepotismo-y-cargos-publicos.html` | Nepotismo y cargos públicos · Auditavisión | apartados.py | 33 | 0 | 1 | 1 | 0 |
+| `noticias-relevantes.html` | Noticias relevantes · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 48 | 0 | 0 | 5 | 1 |
 | `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
 | `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 45 | 0 | 4 | 0 | 0 |

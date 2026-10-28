@@ -7868,6 +7868,36 @@ window.AUDIT_DB = {
       "definicion": "El derecho de quien deja de tener patrón a seguir cotizando por su cuenta al IMSS para su pensión: los seguros de invalidez y vida y de retiro, cesantía y vejez, pero no el de enfermedades y maternidad. Se pide dentro de los cinco años siguientes a la baja, con al menos 52 semanas cotizadas en los últimos cinco años, y las cuotas se pagan por mes adelantado. La ley dice que te inscribes con tu último salario o uno superior; desde el 22 de octubre de 2026, como medida temporal, el IMSS limita a los nuevos inscritos a su último salario registrado o hasta ese salario más una UMA, sin pagos hacia atrás.",
       "ley": "Arts. 218, 219 y 220 Ley del Seguro Social (última reforma DOF 15-01-2026) · Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS, punto cuarto (DOF 21-10-2026)",
       "categoria": "👷 Trabajo y Salario"
+    },
+    {
+      "termino": "Nepotismo",
+      "definicion": "La falta administrativa grave del servidor público que, valiéndose de su cargo, nombra, designa o interviene para que se contrate en el ente público donde trabaja a su cónyuge, a su concubina o concubino, o a un pariente: por consanguinidad hasta el cuarto grado (de padres e hijos a primos hermanos) o por afinidad hasta el segundo (suegros y cuñados). Vale para personal de confianza, de estructura, de base o por honorarios. La sanción la impone el tribunal de justicia administrativa: suspensión, destitución, multa o inhabilitación.",
+      "ley": "Art. 63 Bis Ley General de Responsabilidades Administrativas (adicionado DOF 19-11-2019) · Art. 78 LGRA (sanciones)",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Nepotismo electoral",
+      "definicion": "La prohibición de que el cónyuge, la pareja o un pariente de quien ocupa un cargo de elección compita por ese mismo cargo en la elección siguiente: Presidencia, gubernatura, diputación federal o local y ayuntamiento. Alcanza a quien tuvo el vínculo en los tres años anteriores a la elección, a los parientes en línea recta sin límite de grado, a los colaterales hasta el cuarto grado y a los afines hasta el segundo. Se aplica a partir de las elecciones de 2030.",
+      "ley": "Arts. 55 fr. VIII, 82 fr. VIII, 115 fr. I, 116 fr. I inciso c) y fr. II Constitución, y transitorio segundo del decreto DOF 01-04-2025",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Parentesco por consanguinidad",
+      "definicion": "El que existe entre personas que descienden de un mismo progenitor: padres e hijos, abuelos y nietos, hermanos, tíos y sobrinos, primos. La adopción plena se equipara a él. Cada generación es un grado: en línea recta se cuentan las generaciones entre las dos personas, y entre colaterales se sube hasta el tronco común y se baja por la otra línea, sin contar al tronco (hermanos, segundo grado; tíos, tercero; primos hermanos, cuarto).",
+      "ley": "Arts. 292, 293, 296, 297, 299 y 300 Código Civil Federal",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Parentesco por afinidad",
+      "definicion": "El que nace del matrimonio entre cada cónyuge y los parientes del otro: los suegros, el yerno o la nuera, los hijastros y los cuñados. No une a los parientes de un cónyuge con los del otro: entre concuños y entre consuegros no hay parentesco. El Código no dice cómo contar su grado; se cuenta, por costumbre, como el parentesco del cónyuge con esa persona (suegros, primero; cuñados, segundo).",
+      "ley": "Arts. 292 y 294 Código Civil Federal",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Ejercicio Abusivo de Funciones",
+      "definicion": "El delito del servidor público que otorga ilícitamente contratos, concesiones, permisos o compras que benefician económicamente a él, a su cónyuge, a sus ascendientes o descendientes, a sus parientes por consanguinidad o afinidad hasta el cuarto grado, a un tercero con quien tenga vínculos afectivos, económicos o de dependencia, o a sus socios y sociedades. Lo persigue la fiscalía y lo juzga un juez penal.",
+      "ley": "Art. 220 Código Penal Federal (fracción reformada DOF 18-07-2016)",
+      "categoria": "🔍 Fiscalización Superior"
     }
   ],
   "legislativo": {

@@ -136,6 +136,18 @@
 .col-replica small { color: #555; }
 .col-replica-pie { font-size: 16px; margin: 0 0 14px; color: #444; }
 .col-replica-pie a { color: #1f4f8a; }
+.col-postura { border-left: 3px solid #7a5a12; background: #f8f3e6; padding: 10px 14px; margin: 0 0 14px; break-inside: avoid; }
+.col-postura b { font: 700 12px 'Inter', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
+.col-postura p { margin: 6px 0 2px; font-size: 16px; }
+.col-postura small { display: block; color: #555; }
+.col-postura a { color: #1f4f8a; }
+/* Noticias relevantes (28-10-2026): propón una nota y réplicas y posturas */
+.col-pasos { margin: 0 0 12px; padding-left: 22px; font-size: 16px; line-height: 1.55; }
+.col-pasos li { margin-bottom: 10px; }
+.col-pasos a, .col-pasos-pie a, .col-rep-lista a { font-weight: 600; display: inline-flex; align-items: center; min-height: 44px; }
+.col-pasos-pie { font-size: 16px; margin: 0 0 8px; }
+.col-rep-lista { margin: 0 0 10px; padding-left: 20px; font-size: 16px; }
+.col-rep-vacio { font-size: 16px; margin: 0 0 10px; padding: 12px 14px; border-left: 3px solid #1f4f8a; background: rgba(31, 79, 138, 0.08); }
 .col-dato { background: #fbf3d9; border-top: 3px solid var(--col-tinta); padding: 10px 14px; margin: 4px 0 14px; }
 .col-dato b { font: 700 12px 'Inter', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
 .col-dato p { margin: 6px 0 0; font-size: 15.5px; }

@@ -1738,6 +1738,22 @@
         sug: am.slice(0, 2).map(function (x) { return x.tit; }).concat(['¿Cómo sigo un caso?'])
       };
     }
+    /* Nepotismo y cargos públicos (28-10-2026): antes que los contratos de
+       ComprasMX, que se quedaban con «contrató a su familia». */
+    if (charla && charla.nepotismo) { var rnep = charla.nepotismo(q); if (rnep) return rnep; }
+    /* Noticias relevantes (28-10-2026): proponer una nota para la Columna del
+       Erario y las réplicas y posturas publicadas viven en su pestaña. */
+    if (/ (propon\w*|proponer|mandar\w*|enviar\w*|sugerir\w*|pasar\w*|compartir\w*) (les |te )?(una |la |esta |mi )?(nota|noticia|publicacion)/.test(p) && !/ (verific|cierto|falso) /.test(p))
+      return {
+        html: '<p>✍️ Así llega una noticia a la <b>Columna del Erario</b>: nos mandas la liga, la desarmamos en afirmaciones, cotejamos cada una contra el documento oficial (consta, matiz, sin documento o pendiente) y se publica como nota «Al momento» o como columna, con la fecha, nuestros datos y el glosario. Citamos al medio y a quien firma; no copiamos la nota.</p>' +
+          '<p>Para mandarla, toca «Cuéntanos lo que viste» › «Un tema que deberíamos investigar».</p>',
+        ir: ['noticias-relevantes.html#propon', 'Noticias · Propón una nota'], rec: [], sug: ['Verifica una noticia', 'Noticias de hoy', '¿Cómo sigo un caso?']
+      };
+    if (/ posturas? /.test(p) && !/ postura (de|del) (gobierno|partido|presidenta|presidente) /.test(p))
+      return {
+        html: '<p>✉️ En <b>Réplica y postura</b> de Noticias están las respuestas de quienes aludimos. La <b>réplica</b> la pide quien considera inexacto o falso un dato nuestro: se publica gratis, íntegra y sin comentarios en la misma columna. La <b>postura</b> es lo que la institución o la persona aludida dijo en su propio documento, con su liga: se publica en sus palabras y no la calificamos.</p>',
+        ir: ['noticias-relevantes.html#replica', 'Noticias · Réplica y postura'], rec: [], sug: ['¿Cómo ejerzo mi derecho de réplica?', 'Noticias de hoy']
+      };
     /* Quien fue aludido y quiere aclarar: la página del derecho de réplica, no
        la columna que comparte sus palabras (Bloque 4, 27-10-2026). «¿Qué es…?»
        lo sigue contestando el glosario. */

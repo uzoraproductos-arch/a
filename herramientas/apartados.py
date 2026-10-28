@@ -650,6 +650,13 @@ APARTADOS = [
                 'pagina': 'noticias-relevantes.html',
                 'pestana': ('📰', 'Noticias relevantes', 'La Columna del Erario: abre su página'),
             },
+            {
+                # Pedido del autor, 28-10-2026: «adentrándonos a esta parte del
+                # nepotismo». La pagina la escribe herramientas/nepotismo.py.
+                'id': 'nepotismo',
+                'pagina': 'nepotismo-y-cargos-publicos.html',
+                'pestana': ('👪', 'Nepotismo y cargos públicos', 'Qué parientes alcanza la ley y cómo se investiga un cargo'),
+            },
             # «El Congreso y las elecciones» fue la cuarta pestaña de Aprende la
             # mañana del 23-10-2026; esa tarde (pedido del autor) se mudó a
             # Datos, como «Poder Legislativo» (poderes_paginas()).
@@ -1328,8 +1335,19 @@ def poderes_paginas(base):
 # Enciclopedia (personajes relevantes y datos curiosos), retiradas el
 # 27-09-2026 por no citar fuentes. Las pinta assets/auditor/js/columnas.js,
 # en formato de periodico: «La Columna del Erario».
-NOTICIAS = {
-    'archivo': 'noticias-relevantes.html',
+# Noticias relevantes, cuarta pestaña del menú desde el 28-10-2026. El mismo
+# dia, segundo pedido del autor: que todo lo de noticias viva junto y
+# vinculado. Por eso la pagina es una funcion: trae dentro la aplicacion
+# «Contrasta una nota» (insp_nota.construir(), la misma que sigue en
+# Herramientas y en el chat, no una copia), la ruta para proponer una nota y
+# el apartado de replicas y posturas (lo pinta columnas.js).
+NOTICIAS_ARCHIVO = 'noticias-relevantes.html'
+
+
+def noticias(base, ref):
+    import insp_nota
+    return {
+    'archivo': NOTICIAS_ARCHIVO,
     'menu': 'Noticias relevantes',
     # Cuarta pestaña del menú desde el 28-10-2026 (pedido del autor): ya no
     # cuelga de Aprende, aunque Aprende conserva su tarjeta hacia aquí.
@@ -1337,26 +1355,63 @@ NOTICIAS = {
     'titulo': 'Noticias relevantes',
     'lema': 'La Columna del Erario',
     'entrada': ('Lo que está pasando con el dinero público, verificado: notas breves «Al momento», con la fecha, nuestros datos y el glosario, '
-                'columnas de personajes y hechos, y el cotejo de lo que circula en redes. Cada afirmación lleva el documento oficial que la sostiene, '
-                'y lo que dice la red se te muestra rotulado «sin verificar».'),
-    'scripts': ['columnas.js'],
-    'estilos': ['columnas.css'],
+                'columnas de personajes y hechos, y el cotejo de lo que circula en redes. Aquí mismo puedes verificar una noticia, '
+                'proponernos una nota y leer las réplicas y posturas de quienes aludimos. Cada afirmación lleva el documento oficial que '
+                'la sostiene, y lo que dice la red se te muestra rotulado «sin verificar».'),
+    'scripts': ['columnas.js'] + list(insp_nota.SCRIPTS),
+    'estilos': ['columnas.css'] + list(insp_nota.ESTILOS),
     'secciones': [{
         'id': 'columnas', 'titulo': 'La Columna del Erario', 'texto': '', 'sin_cab': True, 'tarjetas': [],
         'bloque': ('<div class="col-diario" id="columnasDiario">\n'
                    '          <noscript><p>Las columnas necesitan JavaScript.</p></noscript>\n'
                    '        </div>'),
     }, {
-        # Seguir un caso (26-10-2026). El panel «Tus seguimientos» lo pinta
-        # columnas.js al inicio del diario; esta seccion lo explica y deja que
-        # el Auditor la encuentre («¿cómo sigo un caso?», «alarmas»).
         'id': 'al-momento', 'titulo': '⏱️ Al momento: las noticias del día, verificadas',
         'texto': ('Notas breves de lo que está pasando con el dinero público. Cada una dice de qué nota de prensa salió (el punto de partida, nunca '
                   'la fuente), qué consta en el documento oficial y qué falta probar, la cuenta con números redondos, lo que dicen nuestros datos '
                   '(el estado de resultados o la salud financiera de la institución) y las palabras del glosario que hacen falta para entenderla. '
                   'Al pie, «Lo que dice la red ahora» arma la búsqueda en noticias, YouTube, X, Facebook y el Diario Oficial: lo que encuentres ahí '
-                  'no lo verificamos nosotros, y puedes traerlo a Contrasta una nota.'),
+                  'no lo verificamos nosotros, y puedes traerlo aquí abajo, a «Verifica una noticia».'),
         'tarjetas': [],
+    }, {
+        # La aplicacion 5 del Modo Inspector, entera (pedido del autor,
+        # 28-10-2026: «que también lo integre la pestaña de noticias»).
+        'id': 'verifica', 'titulo': '⚖️ Verifica una noticia',
+        'texto': ('La misma aplicación «Contrasta una nota» de Herramientas y del Auditor, aquí dentro. Pega la liga de la noticia (o su texto): '
+                  'la leemos, encontramos sus cifras y te decimos cuáles coinciden con el documento oficial. Para un cotejo frase por frase, '
+                  'pregúntale al Auditor «¿es cierto que…?» o <a href="#propon">propón la nota</a> para la columna.'),
+        'tarjetas': [],
+        'bloque': insp_nota.construir(base, ref),
+    }, {
+        'id': 'propon', 'titulo': '✍️ Propón una nota para la Columna del Erario',
+        'texto': 'Así llega una noticia a la columna, y así la puedes traer tú.',
+        'tarjetas': [],
+        'bloque': (
+            '<ol class="col-pasos">\n'
+            '<li><b>Nos la mandas.</b> La liga de la nota, el video o la publicación, con lo que te llamó la atención. '
+            '<a href="comunidad-tema.html" data-puerta="tema">💡 Proponer una nota</a></li>\n'
+            '<li><b>La desarmamos en afirmaciones.</b> Cada frase que se puede comprobar («se acotó», «lo paga el Estado», «mil por ciento»).</li>\n'
+            '<li><b>Cotejamos cada una</b> contra el documento oficial: ✅ consta, ⚠️ consta con matices, ❌ sin documento oficial o '
+            '⏳ pendiente, siempre con el documento a la vista. Lo pendiente señala a quién le toca '
+            'publicarlo y entra al <a href="pendientes.html">Registro de pendientes</a>.</li>\n'
+            '<li><b>Se publica</b> como nota «Al momento» o como columna, con la fecha, la cuenta con números redondos, nuestros datos y el '
+            'glosario. Citamos al medio y a quien firma; no copiamos la nota.</li>\n'
+            '<li><b>Se sigue.</b> «Lo que sigue» dice qué documento falta, y cuando llega, la columna cambia y te avisamos.</li>\n'
+            '</ol>\n'
+            '<p class="col-pasos-pie">No publicamos el nombre de personas privadas, y una acusación no es una condena. '
+            'Las reglas completas: <a href="pilares.html">nuestros pilares</a>.</p>'),
+    }, {
+        'id': 'replica', 'titulo': '✉️ Réplica y postura',
+        'texto': ('Quien es aludido puede responder. La <b>réplica</b> la pide quien considera que un dato nuestro sobre él es inexacto o falso: '
+                  'se publica gratis, íntegra y sin comentarios, en la misma columna. La <b>postura</b> es lo que la institución o la persona '
+                  'aludida dijo en su propio documento (un comunicado, una respuesta oficial), con su liga: se publica en sus palabras y no la '
+                  'calificamos.'),
+        'tarjetas': [],
+        'bloque': ('<div class="col-replicas" id="columnasReplicas">\n'
+                   '          <noscript><p>La lista de réplicas necesita JavaScript.</p></noscript>\n'
+                   '        </div>\n'
+                   '<p class="col-pasos-pie"><a href="derecho-de-replica.html">✉️ Cómo ejercer tu derecho de réplica</a>: plazos, '
+                   'qué debe traer y cuándo se puede negar, según la ley.</p>'),
     }, {
         'id': 'seguir', 'titulo': '🔔 Sigue un caso',
         'texto': ('Alarmas de seguimiento: toca «🔔 Seguir este caso» en cualquier columna y, cuando la actualicemos con un documento '
@@ -1364,7 +1419,7 @@ NOTICIAS = {
                   'Tus seguimientos aparecen al inicio del diario. Se guardan solo en este navegador: no pedimos correo ni cuenta.'),
         'tarjetas': [],
     }],
-}
+    }
 
 
 
@@ -5653,7 +5708,8 @@ def generar(sello=None):
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     import datos_ambiente
-    for extra in [DICCIONARIO, NOTICIAS, PILARES, AVISO, REPLICA, contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    import nepotismo
+    for extra in [DICCIONARIO, noticias(base, ref), nepotismo.pagina(('aprende.html', 'Aprende')), PILARES, AVISO, REPLICA, contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

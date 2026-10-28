@@ -1036,6 +1036,54 @@
       return null;
     }
 
+    /* ---------- Nepotismo y cargos públicos (28-10-2026) ----------
+       D.nep lo escribe herramientas/nepotismo.py con la misma tabla de la
+       calculadora: «¿mi cuñado puede trabajar en mi oficina?» dice el grado y
+       qué ley lo alcanza, y lleva a la calculadora con el parentesco elegido. */
+    var NEP = D.nep || null;
+    var NEP_AL = NEP ? NEP.al.map(function (a) { return [a[0], new RegExp(a[1])]; }) : [];
+    function nepTema(k) {
+      var x = NEP.t[k];
+      return { html: x.h, fu: x.fu, ci: [], tit: x.tit, ir: x.ir, sug: x.sug };
+    }
+    function nepResp(t) {
+      if (!NEP) return null;
+      var nepo = /nepotismo|parentesco|consanguin|afinidad|familiares? en el gobierno|(contrat|nombr|meti|mete|acomod)\w* a (su|sus|mi|mis|tu|tus) (familia|parientes)/.test(t);
+      var ciego = /apellido/.test(t) && /(famili|parient|nepotismo|prueba)/.test(t);
+      if (ciego) return nepTema('ciegos');
+      if (/(investig|audit|averigu|descubr|como (se )?(sabe|se si|saber|compruebo|pruebo))/.test(t) && (nepo || /famili|parient/.test(t)) && /(funcionari|servidor|gobierno|cargo|contrat|nombr)/.test(t)) return nepTema('investigar');
+      var rel = null;
+      for (var i = 0; i < NEP_AL.length && !rel; i++) if (NEP_AL[i][1].test(t)) rel = NEP_AL[i][0];
+      var elect = /nepotismo electoral|heredar (el|su) cargo|(candidat|postul|compet)\w*/.test(t);
+      if (elect && (nepo || rel)) return nepTema('electoral');
+      var trabajo = /cuenta como famili|es (mi |su |tu )?(famili|parient)|que parentesco|que grado|trabaj|contrat|nombr|emple|plaza|puesto|chamba|\bmeter\b|\bmetio\b|acomod|oficina|dependencia|ayuntamiento|nomina|contrato|licitacion|permiso|concesion|nepotismo/.test(t);
+      if (rel && trabajo) {
+        var p = null;
+        for (var k = 0; k < NEP.p.length; k++) if (NEP.p[k].id === rel) p = NEP.p[k];
+        if (!p) return null;
+        var tipo = p.t === 'cons' ? 'pariente por consanguinidad, línea ' + p.l + ', ' + NEP.o[p.g] + ' grado'
+          : p.t === 'afin' ? 'pariente por afinidad, línea ' + p.l + ', ' + NEP.o[p.g] + ' grado'
+          : p.t === 'vinc' ? 'un vínculo de pareja (no es parentesco, pero la ley lo nombra)' : 'sin parentesco para la ley';
+        var tuyo = p.n.replace(/^Mi /, 'tu ').replace(/ mi /g, ' tu ').replace(/ (de )?mi /g, ' $1tu ').toLowerCase();
+        var M = { si: '✅ Sí lo alcanza', no: '➖ No lo alcanza', quiza: '⚠️ Depende' };
+        return {
+          tit: tuyo.charAt(0).toUpperCase() + tuyo.slice(1) + ' y la ley de nepotismo',
+          html: '<p>Para la ley, <b>' + esc(tuyo) + '</b> es ' + esc(tipo) + '. ' + esc(p.x) + '</p>' +
+            '<ul class="pa-lista">' + NEP.l.map(function (l) {
+              var r = p.r[l.k];
+              return '<li><b>' + esc(l.n) + ':</b> ' + M[r] + '. <small>' + esc(l.d) + (r === 'quiza' && NEP.q[l.k] ? ' ' + esc(NEP.q[l.k]) : '') + '</small></li>';
+            }).join('') + '</ul>' +
+            '<p class="pa-chico">Que la ley alcance a un parentesco no quiere decir que haya falta: tiene que haber un nombramiento, un contrato o una candidatura, y lo decide la autoridad.</p>',
+          fu: NEP.l.map(function (l) { return { que: l.a, e: 'oficial', fu: l.u }; }).concat([{ que: 'Grados de parentesco (Código Civil Federal, arts. 292 a 300)', e: 'oficial', fu: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CCF.pdf' }]),
+          ci: [], ir: [NEP.pag[0] + '?rel=' + p.id + '#calculadora', 'Calculadora de parentesco'],
+          sug: ['¿Cómo investigo si un funcionario contrató a su familia?', '¿Qué es el nepotismo electoral?', '¿Por qué un apellido igual no prueba nada?']
+        };
+      }
+      if (/nepotismo electoral/.test(t)) return nepTema('electoral');
+      if (nepo) return nepTema('general');
+      return null;
+    }
+
     /* ---------- «Documentar para sancionar», el informe especial de la ASF (27-10-2026) ---------- */
     var SAN = D.san || null;
     var SAN_FAM = SAN ? Object.keys(SAN.fam).map(function (k) { return [k, new RegExp(SAN.fam[k])]; }) : [];
@@ -1326,6 +1374,8 @@
       /* El Poder Legislativo y las elecciones: curules, sesiones, fechas y reformas. */
       /* El Poder Judicial: la Corte, los circuitos, la elección, el amparo. */
       /* «Documentar para sancionar»: de la irregularidad a la sanción. */
+      var rn = nepResp(t);
+      if (rn) return fin(rn, { tipo: 'nep' });
       var rs = sanResp(t);
       if (rs) return fin(rs, { tipo: 'san' });
       var rj = judResp(t, es);
@@ -1611,6 +1661,7 @@
       juzga: function (claim, val) { var d = cifraDicha(norm(claim).replace(/[¿?¡!]/g, ' ')), j = d && juzgaDicho(d, val); return j ? { dicho: d, v: j } : null; },
       /* Salud pública antes que Verificamos: «¿es cierto que el IMSS hizo 1.78 millones de cirugías?» es un cotejo de salud (27-10-2026). */
       salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
+      nepotismo: function (q) { var r = nepResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'nep' }); },
       ambiente: function (q) { var r = amgResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'amg' }); },
       deFicha: deFicha, deDonde: deDonde, olvida: function () { ctx = {}; }, ctx: function () { return ctx; }
 

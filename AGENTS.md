@@ -386,6 +386,17 @@ mudando a su página; no se agregan desgloses nuevos.
   **rotuladas «sin verificar»; nunca se copia ni se resume lo que dice la
   red**. Las cifras que la plataforma ya tiene se leen de su módulo, no se
   copian. El chat la encuentra sola, y «noticias de hoy» lista las más nuevas.
+- **Noticias reúne todo lo de noticias** (pedido del autor, 28-10-2026: «que
+  todo quede debidamente vinculado»). Además de «Al momento» y la Columna del
+  Erario, `noticias-relevantes.html` trae dentro la aplicación **Contrasta una
+  nota** (sección `#verifica`: es `insp_nota.construir()`, la misma de
+  Herramientas y del chat, nunca una copia), **Propón una nota** (`#propon`,
+  que abre la ruta «tema» del cajón) y **Réplica y postura** (`#replica`, que
+  `columnas.js` llena con las columnas que traen `replica` o `postura`). La
+  **postura** (`postura[{quien, fecha, texto, url}]`) es lo que la parte
+  aludida dijo en su propio documento: se publica en sus palabras, con su liga,
+  y no se califica. La página es la función `noticias(base, ref)` de
+  `apartados.py`.
 
 ---
 
@@ -426,6 +437,17 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   pestaña Datos (`datos-poder-legislativo.html`, `datos-poder-judicial.html`),
   una página por grupo de temas, armadas con el mismo texto del bot
   (`PAGINAS` de cada módulo).
+  El nepotismo y el parentesco en los cargos públicos, por
+  `herramientas/nepotismo.py` (28-10-2026; tarjeta de Aprende,
+  `nepotismo-y-cargos-publicos.html`, y `D.nep` del chat), cotejado con la
+  LGRA (art. 63 Bis), el Código Penal Federal (art. 220), el Código Civil
+  Federal (arts. 292 a 300) y la Constitución (nepotismo electoral, desde
+  2030): **qué ley alcanza a cada parentesco vive en una sola tabla
+  (`ALCANCE`/`alcance()`), que leen la calculadora, la página y el chat**, y
+  cómo se dice cada parentesco en la calle va en `ALIAS`. **Un apellido igual
+  nunca es prueba de parentesco**: un vínculo entra a la plataforma solo si lo
+  dice un documento oficial, y a los familiares que no son servidores públicos
+  no se les nombra.
   Los informes especiales de la ASF, por `herramientas/informe_sancion.py`
   (27-10-2026: «Documentar para sancionar», cotejado contra la LGRA y la
   LFRCF vigentes): su página es la tarjeta «Informe especial» de Informes

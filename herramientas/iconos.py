@@ -97,7 +97,7 @@ ICONOS = [
     ('📱', 'smartphone', 'celular'), ('☂️', 'umbrella', 'protección'), ('⭕', 'circle', 'círculo', 'rojo'),
     ('🧵', 'spool', 'hilo'), ('🕒', 'clock-3', 'hora'), ('👀', 'eye', 'mira'),
     ('🏚️', 'house', 'casa dañada'), ('🟦', 'square', 'azul', 'azul r'), ('✍️', 'signature', 'firma'),
-    ('⏮', 'skip-back', 'anterior'), ('🌲', 'tree-pine', 'bosque'),
+    ('⏮', 'skip-back', 'anterior'), ('🌲', 'tree-pine', 'bosque'), ('👪', 'users-round', 'familia'),
     ('🏜️', 'sun', 'desierto'), ('🌵', 'sun', 'frontera'), ('💯', 'badge-check', 'completo'),
     ('🏧', 'credit-card', 'cajero'), ('🌪️', 'tornado', 'tornado'), ('🔑', 'key', 'clave'),
     ('🚰', 'glass-water', 'agua potable'), ('🏁', 'flag', 'meta'), ('🥈', 'medal', 'segundo lugar', 'plata'),
