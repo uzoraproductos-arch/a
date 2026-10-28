@@ -1,14 +1,14 @@
 # Mesa de redacción (28-10-2026): junta titulares de finanzas públicas en
 # docs/noticias/bandeja.json (herramientas/recolectar_noticias.py), sin
-# verificar: solo titular, medio, fecha y liga. Corre a mano desde la
-# pestaña Actions. Para que corra sola cada día, quita el # de las dos líneas
-# de «schedule» (decisión del autor: cada corrida hace un commit en la rama).
+# verificar: solo titular, medio, fecha y liga. Corre sola cada día
+# (decisión del autor, 28-10-2026) y también a mano desde la pestaña Actions.
+# Cada corrida con titulares nuevos hace un commit en la rama.
 name: Mesa de redacción
 
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: '23 14 * * *'   # cada día, 8:23 en la Ciudad de México
+  schedule:
+    - cron: '23 14 * * *'   # cada día, 8:23 en la Ciudad de México
 
 permissions:
   contents: write

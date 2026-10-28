@@ -416,7 +416,7 @@ mudando a su página; no se agregan desgloses nuevos.
   `noticias.js`. **La mesa de redacción** trae titulares de Bing Noticias y
   Google Noticias al pedirlos (en el navegador) y los junta
   `herramientas/recolectar_noticias.py` en `docs/noticias/bandeja.json`
-  (flujo «Mesa de redacción», a mano): **solo titular, medio, fecha y liga,
+  (flujo «Mesa de redacción», cada día a las 8:23 de la Ciudad de México y a mano): **solo titular, medio, fecha y liga,
   rotulados «sin verificar»; nunca el texto de la nota**. Un titular entra a
   la plataforma solo después de pasar por el método. **La agenda** son plazos
   de la ley, cada uno con su artículo; las fechas que la ley da como «30 días
