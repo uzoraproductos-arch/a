@@ -1,4 +1,4 @@
-/* Nepotismo y cargos públicos (nepotismo-y-cargos-publicos.html, 28-10-2026).
+/* Nepotismo y parentesco (herramienta-inspector-nepotismo.html, 28-10-2026).
    La calculadora de parentesco: lee la tabla que escribe
    herramientas/nepotismo.py (alcance()) y dice qué grado es y qué ley lo
    alcanza. No busca a nadie y no guarda nada. Acepta ?rel=<id> para que el

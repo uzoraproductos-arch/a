@@ -21,7 +21,8 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
 - Las cuatro herramientas cuelgan del Auditor Virtual (botón «Herramientas»).
   **El Modo Inspector es las Grandes investigaciones** («realizar grandes
   investigaciones a través de seis aplicaciones»): una sola página,
-  `herramienta-inspector.html`, con las seis aplicaciones. Ya no presenta al
+  `herramienta-inspector.html`, con sus aplicaciones (siete desde el
+  28-10-2026: la sexta es Nepotismo y parentesco). Ya no presenta al
   chat como su «otra división», y `herramienta-inspector-investigaciones.html`
   solo redirige ahí. Su imagen son las cámaras con ojos (elegida por el
   autor, dibujada desde el 27-10-2026: `herr-inspector-ilustracion.svg`); el
@@ -438,8 +439,9 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   una página por grupo de temas, armadas con el mismo texto del bot
   (`PAGINAS` de cada módulo).
   El nepotismo y el parentesco en los cargos públicos, por
-  `herramientas/nepotismo.py` (28-10-2026; tarjeta de Aprende,
-  `nepotismo-y-cargos-publicos.html`, y `D.nep` del chat), cotejado con la
+  `herramientas/nepotismo.py` (28-10-2026; aplicación del Modo Inspector,
+  `herramienta-inspector-nepotismo.html`, con su tarjeta en Aprende, y
+  `D.nep` del chat; la página que tuvo en Aprende redirige ahí), cotejado con la
   LGRA (art. 63 Bis), el Código Penal Federal (art. 220), el Código Civil
   Federal (arts. 292 a 300) y la Constitución (nepotismo electoral, desde
   2030): **qué ley alcanza a cada parentesco vive en una sola tabla

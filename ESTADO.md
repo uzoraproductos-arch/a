@@ -5,7 +5,7 @@ historia completa de cada decisión en [CONTEXT.md](CONTEXT.md), que pasa de
 7,000 renglones: aquí va solo lo que necesitas para no repetir trabajo ni
 pisar el de otro. **Se actualiza en el mismo commit que cambia lo que dice.**
 
-Última actualización: 28-10-2026 · sello `20261028n` · rama `claude/funny-turing-imtm54`.
+Última actualización: 28-10-2026 · sello `20261028o` · rama `claude/funny-turing-imtm54`.
 
 ## Antes de empezar y antes de empujar
 
@@ -41,6 +41,7 @@ que necesita navegador.
 
 ## Lo último que entró
 
+- **28-10-2026, sello 20261028o.** **Nepotismo y parentesco es la séptima aplicación del Modo Inspector** (`herramienta-inspector-nepotismo.html`, la arma `nepotismo.construir()`); la página de Aprende redirige ahí y la tarjeta de Aprende lleva a la aplicación. **En pausa, por decisión del autor:** las leyes de responsabilidades de los 32 estados y lo que obligan a los municipios (nepotismo, declaraciones, gastos, obligaciones y adjudicaciones), hasta tener acceso a todos los portales; lo ya cotejado está en CONTEXT.md.
 - **28-10-2026, sello 20261028n.** **Noticias reúne todo lo de noticias**: la aplicación Contrasta una nota dentro de la pestaña (`#verifica`, la misma de Herramientas y del chat), «Propón una nota» (`#propon`) y «Réplica y postura» (`#replica`, con el campo nuevo `postura` de `columnas.js`). **Nepotismo y cargos públicos** (`nepotismo-y-cargos-publicos.html`, tarjeta de Aprende, `herramientas/nepotismo.py`): calculadora de parentesco, árbol de grados, las tres leyes (LGRA 63 Bis, CPF 220 y nepotismo electoral desde 2030), cómo se investiga un cargo y los puntos ciegos; el chat contesta «¿mi cuñado puede trabajar en mi oficina?». Cinco términos al glosario. 218 preguntas de prueba.
 - **28-10-2026, sello 20261028m.** **Noticias es la cuarta pestaña** del menú (`MENU` de `apartados.py` e `index.html`), y estrena **«Al momento»**: notas breves verificadas con fecha, la nota de prensa de origen, el cotejo, la cuenta con números redondos, nuestros datos, el glosario y las búsquedas armadas en la red («sin verificar»). Las escribe `herramientas/integrar_al_momento.py`. Primera: el IMSS acota la Modalidad 40 (DOF 21-10-2026), con tres pendientes en el Registro. Glosario: «Continuación Voluntaria (Modalidad 40)». Personaje: Zoé Robledo. 207 preguntas de prueba.
 - **28-10-2026, sello 20261028l.** Preguntas de ejemplo del chat (`EJEMPLOS` de `asistente.py`): 9 nuevas sobre lo verificado y las auditorías de gestión (Seguro Popular, acceso a la salud, ISSSTESON, consejerías del INE, consultas del IMSS, asuntos del Poder Judicial, denuncias de la PROFEPA). La del Seguro Popular entra en la primera tanda; las demás, una por tanda. 201 preguntas de prueba.

@@ -1,4 +1,10 @@
-/* Nepotismo y cargos públicos (28-10-2026). Generada por apartados.py con herramientas/nepotismo.py. */
+/* Nepotismo y parentesco (28-10-2026): séptima aplicación del Modo Inspector,
+   herramienta-inspector-nepotismo.html, que arma herramientas/nepotismo.py. */
+.nep-indice { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
+.nep-indice a { display: inline-flex; align-items: center; min-height: 44px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--civ-gris-borde, #c9d9ee); background: #fff; font-weight: 600; font-size: 15px; text-decoration: none; color: var(--civ-azul, #0b2a63); }
+.nep-sec { margin: 0 0 34px; scroll-margin-top: 90px; }
+.nep-tit { margin: 0 0 6px; font-size: 24px; line-height: 1.25; scroll-margin-top: 90px; }
+.nep-txt { margin: 0 0 14px; font-size: 16px; line-height: 1.55; }
 .nep-calc { padding: 16px; border: 1px solid var(--civ-gris-borde, #c9d9ee); border-radius: 14px; background: var(--civ-gris, #f1f7fe); }
 .nep-calc-et { display: block; font-weight: 700; font-size: 17px; margin: 0 0 8px; }
 .nep-sel { width: 100%; min-height: 48px; font-size: 17px; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--civ-gris-borde, #c9d9ee); background: #fff; color: #10213f; }

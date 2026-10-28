@@ -5,7 +5,7 @@ los cargos públicos, así como si hay manera de encontrar una relación entre
 los personajes que ocupan estos cargos públicos, de consanguinidad o
 afinidad, para poderlos nosotros también auditar»).
 
-Una página de la Enciclopedia (tarjeta de Aprende) con la calculadora de
+La séptima aplicación del Modo Inspector (y tarjeta de Aprende), con la calculadora de
 parentesco, el árbol de grados, las tres leyes que lo castigan, el método
 para investigar un cargo y los puntos ciegos. Cotejado contra los textos
 vigentes de la Cámara de Diputados (huellas en docs/boveda/):
@@ -26,12 +26,16 @@ una acusación no es una condena. La calculadora no busca a nadie: dice qué
 ley alcanza a un parentesco. Las reglas de cada ley viven aquí, en ALCANCE,
 y la página y el chat las leen de la misma tabla.
 
-Lo llama apartados.generar() (pagina()) y el chat lo encuentra solo.
+Lo llama apartados.insp_nativa() (INSP_NATIVAS['inspnepotismo']) y el chat lo
+lee como D.nep (bot()).
 """
 import html
 import json
 
-ARCHIVO = 'nepotismo-y-cargos-publicos.html'
+# Séptima aplicación del Modo Inspector (28-10-2026). La página que tuvo en
+# Aprende ese mismo día (ANTERIOR) redirige aquí.
+ARCHIVO = 'herramienta-inspector-nepotismo.html'
+ANTERIOR = 'nepotismo-y-cargos-publicos.html'
 
 LGRA = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGRA.pdf'
 CPF = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPF.pdf'
@@ -347,30 +351,24 @@ def _cuenta():
 
 
 SIGUE = [
-    ('La ley de responsabilidades de Sonora y de cada estado: si su nepotismo dice lo mismo que el 63 Bis', 'https://congresoson.gob.mx/leyes'),
+    ('Las leyes de responsabilidades de los 32 estados y lo que obligan a sus municipios: nepotismo, declaraciones, gastos y adjudicaciones', LGRA),
     ('Cuántas personas han sido sancionadas por nepotismo: el directorio de sancionados, por falta', SANCIONADOS),
     ('Cómo armonizaron los estados el nepotismo electoral (transitorio cuarto, DOF 01-04-2025)', CPEUM),
     ('Los casos que nos traigas: cada uno con el cargo, quién firmó y el documento del vínculo', 'comunidad-tema.html'),
 ]
 
 
-def pagina(padre):
-    """La página, con las migas de Aprende (padre = (archivo, nombre))."""
-    return {
-        'archivo': ARCHIVO,
-        'menu': 'Nepotismo y cargos públicos',
-        'menu_archivo': padre[0],
-        'padre': padre,
-        'icono': '👪',
-        'titulo': 'Nepotismo y cargos públicos',
-        'lema': 'Cómo se audita el parentesco en el servicio público',
-        'entrada': ('Nepotismo es usar un cargo público para dar trabajo, contratos o permisos a la familia. En México lo castigan tres leyes, '
-                    'cada una a su manera, y el parentesco se cuenta por grados, como lo dice el Código Civil. Aquí sabrás qué parientes '
-                    'alcanza cada ley, cómo se investiga un cargo con datos públicos y por qué un apellido igual no prueba nada %s.') % OF,
-        'estilos': ['nepotismo.css'],
-        'scripts': ['nepotismo.js'],
-        'secciones': [
-            {'id': 'calculadora', 'titulo': '🧮 ¿Esta persona cuenta como familia para la ley?',
+ENTRADA = ('Nepotismo es usar un cargo público para dar trabajo, contratos o permisos a la familia. En México lo castigan tres leyes, '
+           'cada una a su manera, y el parentesco se cuenta por grados, como lo dice el Código Civil. Aquí sabrás qué parientes '
+           'alcanza cada ley, cómo se investiga un cargo con datos públicos y por qué un apellido igual no prueba nada %s.') % OF
+
+ESTILOS = ['nepotismo.css']
+SCRIPTS = ['nepotismo.js']
+
+
+def secciones():
+    """Las partes de la aplicación, en orden: (id, titulo, texto, bloque)."""
+    return [(x['id'], x['titulo'], x['texto'], x['bloque']) for x in [{'id': 'calculadora', 'titulo': '🧮 ¿Esta persona cuenta como familia para la ley?',
              'texto': 'Elige el parentesco y te decimos qué grado es y qué ley lo alcanza. No busca a nadie: lee la ley.',
              'tarjetas': [], 'bloque': _calculadora()},
             {'id': 'grados', 'titulo': '🌳 Cómo se cuentan los grados',
@@ -397,9 +395,20 @@ def pagina(padre):
              'texto': 'Lo que falta revisar para seguir el dinero de la familia en la nómina.',
              'tarjetas': [], 'bloque': '<ul class="nep-sigue">\n%s\n</ul>' % '\n'.join(
                  '<li>%s</li>' % (liga(u, esc(t)) if u.startswith('http') else '<a href="%s" data-puerta="tema">%s</a>' % (u, esc(t)))
-                 for t, u in SIGUE)},
-        ],
-    }
+                 for t, u in SIGUE)},]]
+
+
+def construir(base=None, ref=None):
+    """La aplicación entera en una página (séptima del Modo Inspector desde el
+    28-10-2026, pedido del autor: «que todo esto del nepotismo quede como una
+    aplicación dentro de la herramienta de modo inspector»). Cada parte lleva
+    su h2 con id: el chat la indexa sola y llega a su ancla."""
+    ss = secciones()
+    indice = '<nav class="nep-indice" aria-label="Partes de la aplicación">%s</nav>' % ''.join(
+        '<a href="#%s">%s</a>' % (i, t) for i, t, _, _ in ss)
+    return '<div class="nep">\n%s\n%s\n</div>' % (indice, '\n'.join(
+        '<section class="nep-sec" aria-labelledby="%s"><h2 class="nep-tit" id="%s">%s</h2><p class="nep-txt">%s</p>\n%s\n</section>' % (
+            i, i, t, x, bl) for i, t, x, bl in ss))
 
 
 # ------------------------------------------------------------- el Auditor

@@ -930,34 +930,34 @@
   },
   {
    "q": "¿Qué es el nepotismo?",
-   "ir": "nepotismo-y-cargos-publicos.html"
+   "ir": "herramienta-inspector-nepotismo.html"
   },
   {
    "q": "¿Mi cuñado puede trabajar en mi oficina?",
-   "ir": "nepotismo-y-cargos-publicos.html?rel=cunados#calculadora",
+   "ir": "herramienta-inspector-nepotismo.html?rel=cunados#calculadora",
    "dice": [
     "segundo grado"
    ]
   },
   {
    "q": "¿Qué es el nepotismo electoral?",
-   "ir": "nepotismo-y-cargos-publicos.html#tres-leyes"
+   "ir": "herramienta-inspector-nepotismo.html#tres-leyes"
   },
   {
    "q": "¿Cómo investigo si un funcionario contrató a su familia?",
-   "ir": "nepotismo-y-cargos-publicos.html#como-se-investiga"
+   "ir": "herramienta-inspector-nepotismo.html#como-se-investiga"
   },
   {
    "q": "¿Hasta qué grado de parentesco es nepotismo?",
-   "ir": "nepotismo-y-cargos-publicos.html"
+   "ir": "herramienta-inspector-nepotismo.html"
   },
   {
    "q": "¿Mi esposa puede ser candidata a mi cargo?",
-   "ir": "nepotismo-y-cargos-publicos.html#tres-leyes"
+   "ir": "herramienta-inspector-nepotismo.html#tres-leyes"
   },
   {
    "q": "¿Por qué un apellido igual no prueba nada?",
-   "ir": "nepotismo-y-cargos-publicos.html#puntos-ciegos"
+   "ir": "herramienta-inspector-nepotismo.html#puntos-ciegos"
   },
   {
    "q": "quiero proponer una nota",
@@ -969,7 +969,7 @@
   },
   {
    "q": "¿El concuño cuenta como familia?",
-   "ir": "nepotismo-y-cargos-publicos.html?rel=concunos#calculadora",
+   "ir": "herramienta-inspector-nepotismo.html?rel=concunos#calculadora",
    "dice": [
     "no hay parentesco"
    ]

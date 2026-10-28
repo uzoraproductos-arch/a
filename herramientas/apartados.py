@@ -654,7 +654,7 @@ APARTADOS = [
                 # Pedido del autor, 28-10-2026: «adentrándonos a esta parte del
                 # nepotismo». La pagina la escribe herramientas/nepotismo.py.
                 'id': 'nepotismo',
-                'pagina': 'nepotismo-y-cargos-publicos.html',
+                'pagina': 'herramienta-inspector-nepotismo.html',
                 'pestana': ('👪', 'Nepotismo y cargos públicos', 'Qué parientes alcanza la ley y cómo se investiga un cargo'),
             },
             # «El Congreso y las elecciones» fue la cuarta pestaña de Aprende la
@@ -770,7 +770,7 @@ HERRAMIENTAS = [
      'Expedientes de la Auditoría Superior de la Federación (ASF), adjudicaciones directas, empresas que facturan operaciones simuladas '
      '(EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.'
      ' Y si un caso necesita ir más a fondo, en la aplicación de Servicios puedes pedir una investigación a la medida: cada cifra con su documento y bajo una política de independencia.'
-     ' Las seis también las usas desde el chat del <a href="herramienta-inspector-pregunta.html">Auditor</a>, sin salir de la plática.',
+     ' Las siete también las usas desde el chat del <a href="herramienta-inspector-pregunta.html">Auditor</a>, sin salir de la plática.',
 
      'verificador', [
          # «Que encontro la ASF» y «Expedientes de casos» se fusionaron el
@@ -788,6 +788,10 @@ HERRAMIENTAS = [
           'Busca por RFC o por nombre en el listado del artículo 69-B del Código Fiscal: a quienes el SAT presume o declara emisores de facturas por operaciones inexistentes.'),
          ('inspverifica', '🔏', 'Verifica un estado de cuenta', 'Busca y verifica',
           '¿Te compartieron un estado de cuenta de Auditavisión? Escribe su folio o su huella digital y comprueba, cifra por cifra, que no se alteró.'),
+         # Septima desde el 28-10-2026 (pedido del autor): el nepotismo, con su
+         # calculadora de parentesco (herramientas/nepotismo.py).
+         ('inspnepotismo', '👪', 'Nepotismo y parentesco', 'Busca y verifica',
+          'Elige un parentesco y ve qué grado es y qué ley lo alcanza: plaza, contrato o candidatura. Con el árbol de grados, cómo se investiga un cargo y por qué un apellido igual no prueba nada.'),
          # Venia de la pestana «Servicios» de Participa (pedido del autor, 11-10-2026).
          ('servicios.html', '🔎', 'Servicios de investigación', 'Investigación a la medida',
           'Cuando necesites ir más a fondo en un caso: revisión documental, expediente, seguimiento, capacitación o licencia, con la misma regla de la plataforma y su política de independencia. Tiene su propia página.'),
@@ -835,7 +839,7 @@ HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las'), 'inspector':
 # Desde el 24-10-2026 (decisión del autor) «Grandes investigaciones» ES el
 # Modo Inspector: una sola página, herramienta-inspector.html, con las seis
 # aplicaciones. La vieja página de las investigaciones redirige ahí.
-HERR_DIVISION = {'inspector': ('Modo Inspector', 'Grandes investigaciones a través de seis aplicaciones. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
+HERR_DIVISION = {'inspector': ('Modo Inspector', 'Grandes investigaciones a través de siete aplicaciones. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
 ASISTENTE = ('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor', 'Pregunta fácil, respuesta fácil',
              'El chat de Auditavisión. Pregúntale lo que quieras del dinero público, como lo dirías platicando: cuánto debe un estado, cuánto le llega a un municipio, cuánto gana un cargo o qué significa un término. Te contesta en corto y con datos oficiales, y si quieres el respaldo, te lleva a la página donde está la información y te arma el dictamen con su respaldo.')
 LOGO_IMG = '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62" height="48">'
@@ -864,7 +868,7 @@ MODULOS_PROPIOS = {'inspverifica'}
 # modulo de herramientas/ arma su pagina con construir(base, ref) y dice
 # sus ESTILOS y SCRIPTS (assets/auditor/css y js).
 INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspentes': 'insp_entes',
-                'inspnota': 'insp_nota', 'inspefos': 'insp_efos',
+                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'inspnepotismo': 'nepotismo',
                 # Calculadora Civica (pedido del autor, 12-10-2026): sus tres
                 # aplicaciones que abrian el motor en un marco.
                 'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj',
@@ -1014,7 +1018,7 @@ def herramienta(h, n):
 
 def herramienta_divisiones(h, n, ruta):
     """Modo Inspector. Desde el 24-10-2026 (decisión del autor) es las Grandes
-    investigaciones: su página muestra directo las seis aplicaciones. El chat
+    investigaciones: su página muestra directo sus aplicaciones (siete desde el 28-10-2026). El chat
     ya no es su «otra división»: es la portada del Auditor Virtual."""
     archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
     division = HERR_DIVISION[rubro]
@@ -1213,7 +1217,7 @@ def nav_de_pagina(archivo, padre3=None, cap=None):
         # al Modo Inspector (las Grandes investigaciones) y a la Enciclopedia.
         return ('<nav class="herr-nav-min" aria-label="Moverte desde aquí">\n'
                 '        <a class="herr-min" href="herramientas.html"><span>🧰 Herramientas</span><small>Las cuatro, en una página</small></a>\n'
-                '        <a class="herr-min" href="%s"><span>🔍 Modo Inspector</span><small>Grandes investigaciones en seis aplicaciones</small></a>\n'
+                '        <a class="herr-min" href="%s"><span>🔍 Modo Inspector</span><small>Grandes investigaciones en siete aplicaciones</small></a>\n'
                 '        <a class="herr-min" href="%s"><span>📚 Enciclopedia</span><small>Números, Datos y Aprende</small></a>\n'
                 '      </nav>' % (MODO_INSPECTOR, ENCICLOPEDIA))
     return None
@@ -1221,7 +1225,7 @@ def nav_de_pagina(archivo, padre3=None, cap=None):
 
 def herramienta_asistente(bloque):
     """Pagina del bot interno del Modo Inspector (11-10-2026): no es una de
-    las seis aplicaciones, es la segunda division de la herramienta."""
+    sus aplicaciones, es la segunda division de la herramienta."""
     h = next(x for x in HERRAMIENTAS if x[1] == 'inspector')
     archivo, rubro, icono, titulo = h[:4]
     nav = ('<nav class="herr-mod-nav" aria-label="Más del Modo Inspector">\n'
@@ -5319,6 +5323,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('28-10-2026', 'El Modo Inspector suma su séptima aplicación: Nepotismo y parentesco. Elige un parentesco («mi cuñado», «mi suegra») y ve qué grado es y qué ley lo alcanza: darle una plaza, un contrato o su cargo en la elección. Trae el árbol de grados, cómo se investiga un cargo y por qué un apellido igual no prueba nada. Y en el chat del Auditor pregúntale «¿mi cuñado puede trabajar en mi oficina?». En Noticias, además, ya puedes verificar una noticia, proponernos una nota y leer las réplicas y posturas.'),
     ('28-10-2026', 'Noticias es ahora la cuarta pestaña del menú, junto a Auditor Virtual, Enciclopedia y Comunidad. Estrena «Al momento»: notas breves de lo que está pasando, con su fecha, lo que consta en el documento oficial y lo que falta probar, la cuenta con números redondos, nuestros datos y el glosario. La primera: el IMSS acota la Modalidad 40, cotejada contra el Diario Oficial del 21 de octubre.'),
     ('27-10-2026', 'Derecho de réplica: si una columna, una ficha o una respuesta del Auditor te alude con un dato inexacto o falso, tu aclaración se publica gratis, íntegra y sin comentarios, como manda la ley. La nueva página dice cómo pedirla, en qué plazos y nuestras reglas con la prensa y con las personas privadas. Es además el décimo de nuestros pilares.'),
     ('27-10-2026', 'El dictamen cambia de nombre: ahora es el «Dictamen cívico independiente». Dice lo mismo que antes: es el respaldo documental de una respuesta, no un peritaje ni un documento con validez ante una autoridad. También hay aviso de privacidad, al pie de cada página.'),
@@ -5557,6 +5562,10 @@ def indice(base, ref):
 # Paginas que dejaron de existir y redirigen a donde se mudo su contenido.
 # Busca y verifica se fusiono con el Modo Inspector el 09-10-2026.
 REDIRECCIONES = {
+    # El nepotismo fue pagina de Aprende la tarde del 28-10-2026; esa noche
+    # (pedido del autor) paso a ser la septima aplicacion del Modo Inspector.
+    'nepotismo-y-cargos-publicos.html': ('herramienta-inspector-nepotismo.html', 'Nepotismo y cargos públicos',
+                                         'Es ahora una aplicación del Modo Inspector: Nepotismo y parentesco.'),
     # El Pase del Auditor Civico se retiro el 24-10-2026 (decision del autor).
     'pase-del-auditor.html': ('donaciones.html', 'Pase del Auditor Cívico',
                               'El Pase se retiró. Para sostener la plataforma están las donaciones y los Servicios de investigación.'),
@@ -5615,7 +5624,7 @@ REDIRECCIONES = {
     'herramienta-ambiente-basura.html': ('datos-medio-ambiente.html', 'Basura y protección',
                                          'Ahora vive en Datos → Medio ambiente, una página por tema.'),
     INVESTIGACIONES: (MODO_INSPECTOR, 'Grandes investigaciones',
-                      'Desde el 24-10-2026 las Grandes investigaciones son el Modo Inspector: sus seis aplicaciones están en su página.'),
+                      'Desde el 24-10-2026 las Grandes investigaciones son el Modo Inspector: sus aplicaciones están en su página.'),
     # La plataforma Enciclopedia antigua (9 pestañas, con assets/css, js y
     # data) se retiró el 24-10-2026 por decisión del autor: lo que servía ya
     # vive en Auditavisión. Su dirección lleva a la pestaña Enciclopedia; el
@@ -5708,8 +5717,7 @@ def generar(sello=None):
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     import datos_ambiente
-    import nepotismo
-    for extra in [DICCIONARIO, noticias(base, ref), nepotismo.pagina(('aprende.html', 'Aprende')), PILARES, AVISO, REPLICA, contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, noticias(base, ref), PILARES, AVISO, REPLICA, contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

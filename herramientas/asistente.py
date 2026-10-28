@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """«Pregúntale al Auditor»: el bot interno de Auditavision (pedido del autor,
-11-10-2026). Vive en el Modo Inspector, aparte de las seis aplicaciones de
+11-10-2026). Vive en el Modo Inspector, aparte de las siete aplicaciones de
 «Grandes investigaciones».
 
 Es un bot interno, no una IA generativa: no redacta cifras. Cada respuesta
@@ -479,7 +479,7 @@ def _charla(d):
 
 
 def _inspector():
-    """Las seis aplicaciones del Modo Inspector, para usarlas desde el chat
+    """Las siete aplicaciones del Modo Inspector, para usarlas desde el chat
     (pedido del autor, 24-10-2026). asistente.js las reconoce por su nombre
     o por lo que el lector trae (un RFC, un folio, una liga, un ente, un
     caso) y las abre en un marco de la respuesta; la lista negra del SAT la
@@ -758,7 +758,7 @@ def pagina(cuenta, canal='', herramientas=()):
               <div class="pa-burbuja">
                 <p>¡Hola! Soy el Auditor. Pregúntame lo que quieras del dinero público, como se lo preguntarías a un amigo: <b>cuánto debe tu estado</b>, <b>cuánta lana le llega a tu municipio</b>, <b>cuánto gana un diputado</b> o <b>qué significa</b> algún término.</p>
                 <p>Te contesto en corto y con datos oficiales. Si quieres ir a fondo, toca <b>«Saber más»</b> y te llevo a la página donde está la información; si necesitas el respaldo, <b>«Generar dictamen»</b>.</p>
-                <p>Y aquí mismo investigas con las seis aplicaciones del <b>Modo Inspector</b>: pégame un RFC, un folio o la liga de una nota, o pídeme el diagnóstico de un ente. Y te cuento cada <b>megaobra</b>: lo que costó, lo que pierde y quién la hizo.</p>
+                <p>Y aquí mismo investigas con las siete aplicaciones del <b>Modo Inspector</b>: pégame un RFC, un folio o la liga de una nota, o pídeme el diagnóstico de un ente. Y te cuento cada <b>megaobra</b>: lo que costó, lo que pierde y quién la hizo.</p>
               </div>
             </li>
           </ol>
@@ -793,7 +793,7 @@ def pagina(cuenta, canal='', herramientas=()):
             <li><b>Te contesto en corto:</b> la cifra, qué quiere decir y en qué lugar queda. Sé de los 32 estados, de los municipios, de los sueldos de los cargos públicos, de cada sexenio desde 1989, de %s términos del glosario y de las páginas de la plataforma.</li>
             <li><b>Saco cuentas:</b> ordeno, comparo, sumo y saco porcentajes y márgenes. Cuando hago una cuenta, te digo cuál fue.</li>
             <li><b>Verifico lo que oyes:</b> «¿es cierto que…?», «dicen que…» o la liga de una nota. Comparo la cifra con su documento oficial y te digo si coincide, si se acerca o si no cuadra.</li>
-            <li><b>Investigo contigo, sin salir del chat.</b> Las seis aplicaciones del Modo Inspector se usan desde aquí: pégame un <b>RFC</b> o un nombre y te digo si está en la lista negra del SAT; un <b>folio</b> (AV-…) y compruebo el estado de cuenta; la <b>liga de una nota</b> y la contrasto; pídeme el <b>diagnóstico de un ente</b> («diagnóstico de Pemex»), un <b>expediente de la ASF</b> («expediente de Segalmex») o una <b>investigación a la medida</b>. La aplicación se abre en la respuesta con «▶️ Úsala aquí».</li>
+            <li><b>Investigo contigo, sin salir del chat.</b> Las siete aplicaciones del Modo Inspector se usan desde aquí: pégame un <b>RFC</b> o un nombre y te digo si está en la lista negra del SAT; un <b>folio</b> (AV-…) y compruebo el estado de cuenta; la <b>liga de una nota</b> y la contrasto; pídeme el <b>diagnóstico de un ente</b> («diagnóstico de Pemex»), un <b>expediente de la ASF</b> («expediente de Segalmex») o una <b>investigación a la medida</b>. La aplicación se abre en la respuesta con «▶️ Úsala aquí».</li>
             <li><b>Sigo cada megaobra.</b> Pregúntame por el <b>Tren Maya</b>, <b>Dos Bocas</b>, el <b>AIFA</b> o el <b>FOBAPROA</b>: cuánto se aprobó, cuánto costó, su sobrecosto, si gana o pierde al año y qué dijo la ASF. También <b>en qué invirtió cada presidente</b> («obras de Calderón»), cuál tiene <b>más sobrecosto</b> y las cinco aplicaciones de Inversión y Megaobras, que también se abren aquí.</li>
             <li><b>Toca «📎 Fuente»</b> para ver la fuente de cada cifra y su estado: <span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">derivado</span> <span class="est-chip est-pendiente">pendiente</span>.</li>
             <li><b>¿Quieres ir a fondo?</b> «📖 Saber más» te lleva a la página de la plataforma donde está la información completa.</li>
