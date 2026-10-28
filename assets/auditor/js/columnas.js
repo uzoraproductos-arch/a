@@ -40,6 +40,145 @@
   var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
  {
+  "id": "seguro-popular-51-millones",
+  "seccion": "Verificado",
+  "icono": "🔎",
+  "titulo": "«Con el Seguro Popular se atendieron más de 51 millones; ahorita nada». Lo que dicen el INEGI y la ASF",
+  "balazo": "El Seguro Popular llegó a 53.5 millones de afiliados (ASF, Cuenta Pública 2018). Estar afiliado no es lo mismo que haber sido atendido, pero el golpe que se describe sí se ve en los números: las personas sin acceso a servicios de salud pasaron de 20.1 millones en 2018 a 50.4 millones en 2022, y en 2024 eran 44.5 millones (INEGI).",
+  "circula": {
+   "red": "Instagram (audio de un reel)",
+   "cuenta": "Testimonio de una persona que dice trabajar en los servicios de salud «toda la vida»; es una persona privada y no se le nombra. Llegó como audio, sin liga",
+   "fecha": "28 de octubre de 2026 (día en que llegó al Auditor)",
+   "texto": "—¿Cuántos años tiene trabajando usted aquí? —Toda la vida, gracias a Dios. Siempre, siempre, pero nunca como hoy. Pregúntale a la gente, la gente les va a decir. No digo que esto es nuevo. La corrupción no termina, pero esta ha sido la peor de toda la época en México. La peor. Cuando hicieron el Seguro Popular, yo pensé que estaba mal y resulta que fue lo mejor que se pudo haber instalado en México. Se atendieron más de 51 millones de mexicanos. Ahorita nada. Le dieron en la torre a la salud. ¿Por qué lo quitaron? No es un bienestar, es malestar. Malestar en todos los sentidos. Te voy a decir algo muy importante. Es muy feo llegar a viejo y no servir. Así es que nosotros vamos a servir con lo que podamos y como estemos."
+  },
+  "cuerpo": [
+   "Lo que dice este testimonio es serio, y por eso se coteja como cualquier cifra: con el documento oficial. Habla de tres cosas que sí se pueden medir: cuánta gente tenía el Seguro Popular, cuánta se quedó sin acceso a la salud después, y cuándo y cómo se quitó. Lo demás («la peor corrupción», «es malestar») es la opinión de quien lo vive, y se respeta como tal: no se coteja.",
+   "Cuánta gente tenía. El Seguro Popular era el brazo del Sistema de Protección Social en Salud para quien no tenía IMSS ni ISSSTE. Según la Auditoría Superior de la Federación, pasó de 5.3 millones de afiliados en 2004 a 53.5 millones en 2017, y para 2018 las 32 entidades acordaron mantener esa cobertura (auditoría MR-Seguro Popular, Cuenta Pública 2018, con datos de la Comisión Nacional de Protección Social en Salud). Así que «más de 51 millones» se queda corto, pero es la cifra de afiliados: una persona afiliada tenía derecho a atenderse, no necesariamente se atendió. Cuántas consultas dio en realidad está en los informes de resultados del propio sistema, que aún no integramos.",
+   "Cuánta gente se quedó sin acceso. El INEGI, que ahora mide la pobreza con la metodología del CONEVAL, cuenta a las personas con «carencia por acceso a los servicios de salud»: en 2018 eran 20.1 millones (16.2 %); en 2020, 35.7 millones (28.2 %); en 2022, 50.4 millones (39.1 %), y en 2024, 44.5 millones (34.2 %). Son 24.4 millones más que en 2018, aunque 5.9 millones menos que en el peor momento, 2022 (comunicado 118/25 del INEGI, cuadro 1). «Ahorita nada» no es literal: en 2024, 4.6 millones de personas dijeron estar afiliadas al IMSS-Bienestar y 13.7 millones se atienden en un centro de salud, hospital o instituto público. Pero el retroceso frente a 2018 es real y está medido.",
+   "¿Por qué lo quitaron? El cuándo y el cómo constan en la Ley General de Salud: el decreto del 29 de noviembre de 2019 sustituyó el Seguro Popular por el INSABI desde el 1 de enero de 2020, y el decreto del 29 de mayo de 2023 extinguió el INSABI y pasó sus recursos al IMSS-Bienestar. Tres instituciones en seis años. El porqué es una decisión política del Ejecutivo y del Congreso que aprobó las reformas; la plataforma no la juzga, la mide.",
+   "Ojo con la comparación. La medición cuenta si la persona está afiliada o tiene derecho a una institución, no si la atendieron bien ni si había medicinas. Y como las instituciones cambiaron, las series del sistema de salud se rompen en 2020 y en 2023. Quien diga «hoy se atiende más» o «hoy se atiende menos» tiene que decir de qué documento sale cada año.",
+   "Una nota de método: lo que circula es el audio de un reel de Instagram, y lo que se cotejó es su transcripción. A quien da el testimonio no se le nombra. Los dos documentos del INEGI y la auditoría de la ASF se leyeron completos. Las restas (24.4 y 5.9 millones) son nuestras: van como derivadas."
+  ],
+  "dato_curioso": "En 2022, 50.4 millones de personas no tenían acceso a servicios de salud: casi tantas como las que llegó a tener afiliadas el Seguro Popular en su mejor momento (53.5 millones).",
+  "cifras": [
+   {
+    "valor": "53.5 millones",
+    "etq": "Afiliados al Seguro Popular en 2017, cobertura que las 32 entidades acordaron mantener en 2018",
+    "estado": "oficial",
+    "fuente": "ASF, auditoría MR-Seguro Popular, Cuenta Pública 2018 (datos de la CNPSS)",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf"
+   },
+   {
+    "valor": "20.1 → 44.5 millones",
+    "etq": "Personas con carencia por acceso a los servicios de salud, 2018 y 2024 (16.2 % y 34.2 % de la población)",
+    "estado": "oficial",
+    "fuente": "INEGI, comunicado 118/25, Pobreza multidimensional 2024, cuadro 1",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+   },
+   {
+    "valor": "50.4 millones",
+    "etq": "Personas sin acceso a servicios de salud en 2022, el punto más alto de la serie (39.1 %)",
+    "estado": "oficial",
+    "fuente": "INEGI, comunicado 118/25, cuadro 1",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+   },
+   {
+    "valor": "24.4 millones",
+    "etq": "Personas sin acceso a servicios de salud de más en 2024 que en 2018. Operación: 44.5 − 20.1",
+    "estado": "derivado",
+    "fuente": "Cálculo con el cuadro 1 del comunicado 118/25 del INEGI",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "Con el Seguro Popular se atendieron más de 51 millones de mexicanos.",
+    "res": "matiz",
+    "explica": "El padrón llegó a 53.5 millones de afiliados (2017), así que la cifra se queda corta. El matiz: son afiliados, personas con derecho a atenderse, no personas atendidas. Cuántas se atendieron de verdad no lo tenemos todavía.",
+    "fuente": "ASF, auditoría MR-Seguro Popular, Cuenta Pública 2018",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf"
+   },
+   {
+    "dice": "Cuántas personas afiliadas al Seguro Popular recibieron atención.",
+    "res": "pendiente",
+    "explica": "Las consultas y servicios que dio el sistema venían en sus informes anuales de resultados, que la plataforma aún no ha integrado.",
+    "fuente": "ASF, auditoría MR-Seguro Popular, Cuenta Pública 2018",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+    "quien": "Falta de la plataforma: la Comisión Nacional de Protección Social en Salud (Secretaría de Salud) publicaba cada año su Informe de Resultados del Sistema de Protección Social en Salud, con las consultas y los servicios dados a los afiliados; aún no lo integramos",
+    "donde": "https://www.gob.mx/salud"
+   },
+   {
+    "dice": "Ahorita nada. Le dieron en la torre a la salud.",
+    "res": "matiz",
+    "explica": "El retroceso consta: sin acceso a servicios de salud había 20.1 millones en 2018, 50.4 millones en 2022 y 44.5 millones en 2024. «Nada» no es literal: en 2024, 4.6 millones dijeron estar afiliados al IMSS-Bienestar y 13.7 millones se atienden en centros de salud u hospitales públicos.",
+    "fuente": "INEGI, comunicado 118/25 (cuadro 1) y presentación de resultados de Pobreza multidimensional 2024",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+   },
+   {
+    "dice": "¿Por qué lo quitaron?",
+    "res": "consta",
+    "explica": "Que se quitó, cuándo y por qué ley consta: decreto del DOF del 29-11-2019 (Seguro Popular → INSABI desde el 1-01-2020) y decreto del 29-05-2023 (se extingue el INSABI y pasa al IMSS-Bienestar). El porqué de fondo es una decisión política: no se coteja.",
+    "fuente": "Ley General de Salud, transitorios de los decretos del 29-11-2019 y del 29-05-2023",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf"
+   },
+   {
+    "dice": "La corrupción no termina, pero esta ha sido la peor de toda la época en México.",
+    "res": "matiz",
+    "explica": "Es una opinión, no una cifra: no hay un documento oficial que compare la corrupción de un sexenio con la de otro. Lo que sí se puede revisar son las auditorías de la ASF de cada año, y el Seguro Popular también tuvo las suyas.",
+    "fuente": "ASF, auditoría MR-Seguro Popular, Cuenta Pública 2018",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf"
+   },
+   {
+    "dice": "No es un bienestar, es malestar.",
+    "res": "matiz",
+    "explica": "Es la opinión de quien lo vive, y se respeta: no se coteja. Lo medible está arriba: cuánta gente se quedó sin acceso y cuándo cambió el sistema.",
+    "fuente": "INEGI, comunicado 118/25",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "Los informes de resultados del Sistema de Protección Social en Salud (2012 a 2019): consultas y servicios reales a los afiliados, para compararlos con los del IMSS-Bienestar",
+    "url": "https://www.gob.mx/salud"
+   },
+   {
+    "que": "Los servicios y el gasto del IMSS-Bienestar en 2025, que la plataforma aún no encuentra publicados",
+    "url": "datos-salud-sistema.html#sal-transicion"
+   },
+   {
+    "que": "Las auditorías de la ASF al INSABI (2020 a 2023) y al IMSS-Bienestar: qué pasó con el dinero que heredaron del Seguro Popular",
+    "url": "https://www.asf.gob.mx/"
+   },
+   {
+    "que": "La medición de pobreza 2026 del INEGI, para ver si la carencia de acceso a la salud sigue bajando",
+    "url": "https://www.inegi.org.mx/desarrollosocial/pm/"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "INEGI, Comunicado de prensa 118/25, Pobreza multidimensional 2024 (13-08-2025)",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+   },
+   {
+    "nombre": "INEGI, Pobreza multidimensional 2024, presentación de resultados",
+    "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_presentacion_2024.pdf"
+   },
+   {
+    "nombre": "ASF, Recursos federales transferidos a través del Acuerdo de Coordinación, MR-Seguro Popular, Cuenta Pública 2018",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf"
+   },
+   {
+    "nombre": "Ley General de Salud, texto vigente (Cámara de Diputados)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf"
+   },
+   {
+    "nombre": "Auditavisión, Datos · Salud pública: del Seguro Popular al IMSS-Bienestar",
+    "url": "datos-salud-sistema.html#sal-transicion"
+   }
+  ],
+  "actualizado": "28 de octubre de 2026"
+ },
+ {
   "id": "isssteson-oxigeno-pensiones-fallecidos",
   "seccion": "Verificado",
   "icono": "🔎",

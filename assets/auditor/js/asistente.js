@@ -1745,6 +1745,18 @@
       var fs = F.filter(function (x) { return x.ir && x.ir[0] === 'noticias-relevantes.html#col-isssteson-oxigeno-pensiones-fallecidos'; })[0];
       if (fs && charla) { var rs = charla.deFicha(fs); rs.sug = ['¿Cuánto debe Sonora?', 'Biosistemas y Seguridad Privada']; return rs; }
     }
+    /* Lo que el Seguro Popular cubría y cuánta gente se quedó sin acceso a la salud
+       vive en su columna de Verificamos (28-10-2026); «¿qué pasó con el Seguro Popular?»
+       sigue llevando a la transición de Datos · Salud pública. */
+    if ((/ seguro popular /.test(p) && / (\d+ millones|millones|atend\w*|afiliad\w*|quitaron|quito|mejor|malestar) /.test(p)) ||
+        (/ (sin acceso|carencia\w*|se quedaron sin|perdieron) /.test(p) && / (salud|servicios de salud|servicios medicos) /.test(p) && / (cuant\w*|millones|gente|personas|mexicanos) /.test(p))) {
+      var fp = F.filter(function (x) { return x.ir && x.ir[0] === 'noticias-relevantes.html#col-seguro-popular-51-millones'; })[0];
+      if (fp && charla) { var rp = charla.deFicha(fp); rp.sug = ['¿Qué pasó con el Seguro Popular?', '¿Qué sabemos del IMSS-Bienestar?']; return rp; }
+    }
+    if (/ seguro popular /.test(p) && charla) {
+      var rt = charla.contesta(q);
+      if (rt && rt.ir && rt.ir[0] === 'datos-salud-sistema.html#sal-transicion') { rt.sug = ['¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?', '¿Cuánta gente se quedó sin acceso a servicios de salud?']; return rt; }
+    }
     /* La deuda de Pemex no la tiene la plataforma: se dice, con su pendiente,
        en vez de contestar con su presupuesto (27-10-2026). */
     if (/ pemex /.test(p) && (/ (debe|adeuda|deuda|endeudamiento|pasivos?) /.test(p)) && !/ (intereses|costo financiero|paga) /.test(p))

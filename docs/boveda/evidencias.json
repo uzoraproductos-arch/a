@@ -989,6 +989,23 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "cifra:seguro-popular-51-millones",
+    "cotejo:seguro-popular-51-millones:0",
+    "cotejo:seguro-popular-51-millones:4",
+    "fuente:seguro-popular-51-millones"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "copiado",
+   "sha256": "afabfdb37840aee1c72ca9be4a9bdf09c5eebbdda1196e8aeb8767924e27665c",
+   "bytes": 1515371,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-28"
+  },
   "https://www.asf.gob.mx/Trans/Informes/IR2018c/Documentos/Auditorias/2018_0469_a.pdf": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -3051,6 +3068,20 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_presentacion_2024.pdf": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "fuente:seguro-popular-51-millones"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "copiado",
+   "sha256": "3772644056accd093792766c8e2a690480ab2449962b24368fc1c5b49ecc9f5a",
+   "bytes": 677037,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-28"
+  },
   "https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/historicos/1290/702825413576/702825413576_1.pdf": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -3150,6 +3181,23 @@
    "tipo": "application/pdf",
    "http": 200,
    "copiado": "2026-10-27"
+  },
+  "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "cifra:seguro-popular-51-millones",
+    "cotejo:seguro-popular-51-millones:2",
+    "cotejo:seguro-popular-51-millones:5",
+    "fuente:seguro-popular-51-millones"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "copiado",
+   "sha256": "3205c17132c0ca5e099ba0b8a5893ee8ae0dbe2eed32666f4b5304964cdc1ef3",
+   "bytes": 395010,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-28"
   },
   "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/cnple/CNPLE_2025_RR.pdf": {
    "primera_vez": "2026-10-27",
