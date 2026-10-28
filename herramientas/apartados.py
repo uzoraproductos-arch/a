@@ -295,8 +295,8 @@ def bib_nav(actual):
 
 ENCICLOPEDIA = 'enciclopedia-auditavision.html'
 
-# Las pestañas del menú (decisión del autor, 23-10-2026): eran cinco y son
-# tres. Cada una: (archivo, nombre, páginas que la marcan como actual).
+# Las pestañas del menú (decisión del autor, 23-10-2026): eran cinco y
+# quedaron tres; desde el 28-10-2026 son cuatro, con Noticias. Cada una: (archivo, nombre, páginas que la marcan como actual).
 # La pestaña «Auditor Virtual» abre primero «Pregúntale al Auditor» (pedido del
 # autor, 23-10-2026); las cuatro herramientas cuelgan del botón «Herramientas»
 # de su cabecera, y herramientas.html sigue como su índice.
@@ -305,6 +305,10 @@ MENU = [
     (AUDITOR_VIRTUAL, 'Auditor Virtual', ('herramientas.html',)),
     (ENCICLOPEDIA, 'Enciclopedia', (ENCICLOPEDIA, 'sigue-el-dinero.html', 'descarga-los-datos.html', 'aprende.html')),
     ('participa.html', 'Comunidad', ('participa.html',)),
+    # Cuarta pestaña (pedido del autor, 28-10-2026: «darle más protagonismo a
+    # las noticias relevantes… como una cuarta pestaña»). Antes colgaba de
+    # Aprende; su archivo no cambia de nombre.
+    ('noticias-relevantes.html', 'Noticias', ('noticias-relevantes.html',)),
 ]
 
 APARTADOS = [
@@ -1327,13 +1331,14 @@ def poderes_paginas(base):
 NOTICIAS = {
     'archivo': 'noticias-relevantes.html',
     'menu': 'Noticias relevantes',
-    'menu_archivo': 'aprende.html',
-    'padre': ('aprende.html', 'Aprende'),
+    # Cuarta pestaña del menú desde el 28-10-2026 (pedido del autor): ya no
+    # cuelga de Aprende, aunque Aprende conserva su tarjeta hacia aquí.
     'icono': '📰',
     'titulo': 'Noticias relevantes',
     'lema': 'La Columna del Erario',
-    'entrada': ('Columnas con datos curiosos de personajes y hechos del dinero público, en formato de periódico. '
-                'Cada afirmación lleva el documento oficial que la sostiene.'),
+    'entrada': ('Lo que está pasando con el dinero público, verificado: notas breves «Al momento», con la fecha, nuestros datos y el glosario, '
+                'columnas de personajes y hechos, y el cotejo de lo que circula en redes. Cada afirmación lleva el documento oficial que la sostiene, '
+                'y lo que dice la red se te muestra rotulado «sin verificar».'),
     'scripts': ['columnas.js'],
     'estilos': ['columnas.css'],
     'secciones': [{
@@ -1345,6 +1350,14 @@ NOTICIAS = {
         # Seguir un caso (26-10-2026). El panel «Tus seguimientos» lo pinta
         # columnas.js al inicio del diario; esta seccion lo explica y deja que
         # el Auditor la encuentre («¿cómo sigo un caso?», «alarmas»).
+        'id': 'al-momento', 'titulo': '⏱️ Al momento: las noticias del día, verificadas',
+        'texto': ('Notas breves de lo que está pasando con el dinero público. Cada una dice de qué nota de prensa salió (el punto de partida, nunca '
+                  'la fuente), qué consta en el documento oficial y qué falta probar, la cuenta con números redondos, lo que dicen nuestros datos '
+                  '(el estado de resultados o la salud financiera de la institución) y las palabras del glosario que hacen falta para entenderla. '
+                  'Al pie, «Lo que dice la red ahora» arma la búsqueda en noticias, YouTube, X, Facebook y el Diario Oficial: lo que encuentres ahí '
+                  'no lo verificamos nosotros, y puedes traerlo a Contrasta una nota.'),
+        'tarjetas': [],
+    }, {
         'id': 'seguir', 'titulo': '🔔 Sigue un caso',
         'texto': ('Alarmas de seguimiento: toca «🔔 Seguir este caso» en cualquier columna y, cuando la actualicemos con un documento '
                   'nuevo (el voto, el informe, el contrato o la sentencia de «Lo que sigue»), verás el aviso de novedades al volver. '
@@ -5251,6 +5264,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('28-10-2026', 'Noticias es ahora la cuarta pestaña del menú, junto a Auditor Virtual, Enciclopedia y Comunidad. Estrena «Al momento»: notas breves de lo que está pasando, con su fecha, lo que consta en el documento oficial y lo que falta probar, la cuenta con números redondos, nuestros datos y el glosario. La primera: el IMSS acota la Modalidad 40, cotejada contra el Diario Oficial del 21 de octubre.'),
     ('27-10-2026', 'Derecho de réplica: si una columna, una ficha o una respuesta del Auditor te alude con un dato inexacto o falso, tu aclaración se publica gratis, íntegra y sin comentarios, como manda la ley. La nueva página dice cómo pedirla, en qué plazos y nuestras reglas con la prensa y con las personas privadas. Es además el décimo de nuestros pilares.'),
     ('27-10-2026', 'El dictamen cambia de nombre: ahora es el «Dictamen cívico independiente». Dice lo mismo que antes: es el respaldo documental de una respuesta, no un peritaje ni un documento con validez ante una autoridad. También hay aviso de privacidad, al pie de cada página.'),
     ('26-10-2026', 'Auditoría en imágenes llega a 22 investigaciones. Se integran las 13 megaobras y rescates individuales (Agronitrogenados, Grupo Fertinal, Estela de Luz, Búnker de Seguridad, Refinería Bicentenario en Tula, Enciclomedia, FOBAPROA-IPAB y FARAC carretero, junto a Tren Maya, Dos Bocas, AIFA, Tren Interurbano y Megafarmacia), el panorama de Inversión y Megaobras en seis sexenios y cuatro investigaciones actuales: el presupuesto y los contratos bajo revisión en el INE, el proyecto de gas en Guaymas y la Gaceta Parlamentaria de Sonora, las compras de medicamentos y contratos del IMSS en ComprasMX, y la aprobación de la Ley de Ingresos 2027 con el techo de deuda y la nota BBB.'),

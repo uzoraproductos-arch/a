@@ -1724,6 +1724,20 @@
       var f = F.filter(function (x) { return x.ir && x.ir[0] === 'pendientes.html'; })[0];
       if (f && charla) { var r = charla.deFicha(f); r.sug = ['¿Qué no dice el informe semestral?', '¿Cuánto dejó por aclarar la ASF?']; return r; }
     }
+    /* «Al momento» (28-10-2026): las notas breves de Noticias, de la más nueva a
+       la más vieja. Sin esto, «noticias de hoy» llevaba a una columna cualquiera. */
+    if (/ (noticias? (de hoy|del dia|recientes|de ultima hora|de la semana)|ultimas noticias|al momento|que (esta|estan) pasando|que hay de nuevo|que paso hoy) /.test(p)) {
+      var fn = function (d) { var x = String(d || '').split('-'); return x.length === 3 ? +(x[2] + x[1] + x[0]) : 0; };
+      var am = F.filter(function (x) { return x.t === 'columna' && / columna al momento /.test(plano(x.k)); })
+        .sort(function (x, y) { return fn(y.act) - fn(x.act); }).slice(0, 5);
+      if (am.length) return {
+        html: '<p>⏱️ <b>Al momento</b>, lo más reciente que verificamos contra los documentos oficiales:</p><ul class="pa-lista">' + am.map(function (x) {
+          return '<li><a href="' + esc(x.ir[0]) + '"><b>' + esc(x.tit) + '</b></a> <small>(' + esc(x.act) + ')</small><br>' + esc(x.txt) + '</li>';
+        }).join('') + '</ul><p class="pa-chico">Cada nota dice de qué nota de prensa salió, qué consta en el documento oficial y qué falta probar. Lo que dice la red, al pie de cada una, va rotulado «sin verificar».</p>',
+        ir: ['noticias-relevantes.html#al-momento', 'Noticias · Al momento'], rec: [],
+        sug: am.slice(0, 2).map(function (x) { return x.tit; }).concat(['¿Cómo sigo un caso?'])
+      };
+    }
     /* Quien fue aludido y quiere aclarar: la página del derecho de réplica, no
        la columna que comparte sus palabras (Bloque 4, 27-10-2026). «¿Qué es…?»
        lo sigue contestando el glosario. */

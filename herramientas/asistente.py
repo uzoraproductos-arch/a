@@ -714,6 +714,10 @@ for _i, _e in enumerate([('¿Cuánta gente se quedó sin acceso a la salud?', '�
                          ('¿Cuántas consultas da el IMSS?', '🩺'), ('¿Cuántos asuntos resuelve el Poder Judicial?', '⚖️'),
                          ('¿Cuántas denuncias atiende la PROFEPA?', '🌎')]):
     EJEMPLOS.insert(9 + _i * 6, _e)
+# «Al momento» de Noticias (28-10-2026): la noticia del día entra en la
+# primera tanda, al principio, y «noticias de hoy» en la segunda.
+EJEMPLOS.insert(0, ('¿Qué pasó con la Modalidad 40 del IMSS?', '⏱️'))
+EJEMPLOS.insert(7, ('Noticias de hoy', '📰'))
 
 
 

@@ -900,6 +900,33 @@
   {
    "q": "¿Cuántas denuncias atiende la PROFEPA?",
    "ir": "datos-justicia-ambiental-denuncias.html#amg-denuncias"
+  },
+  {
+   "q": "¿Qué pasó con la Modalidad 40 del IMSS?",
+   "ir": "noticias-relevantes.html#col-imss-modalidad-40-gestores",
+   "dice": [
+    "22 de octubre"
+   ]
+  },
+  {
+   "q": "¿Es cierto que la Modalidad 40 tenía un fraude de gestores?",
+   "ir": "noticias-relevantes.html#col-imss-modalidad-40-gestores"
+  },
+  {
+   "q": "¿Qué es la Modalidad 40?",
+   "ir": "glosario.html#Continuacion-Voluntaria"
+  },
+  {
+   "q": "Zoé Robledo",
+   "ir": "noticias-relevantes.html#col-imss-modalidad-40-gestores"
+  },
+  {
+   "q": "noticias de hoy",
+   "ir": "noticias-relevantes.html#al-momento"
+  },
+  {
+   "q": "¿Qué está pasando?",
+   "ir": "noticias-relevantes.html#al-momento"
   }
  ]
 }

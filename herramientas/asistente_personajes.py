@@ -75,6 +75,8 @@ PERSONAJES = [
     ('lopez-obrador', 'Andrés Manuel López Obrador', ['lopez obrador', 'amlo'], True),
     ('sheinbaum', 'Claudia Sheinbaum Pardo', ['sheinbaum'], True),
     ('vicente-fox', 'Vicente Fox Quesada', ['amigos de fox', 'vicente fox'], True),
+    # Director general del IMSS: la nota «Al momento» de la Modalidad 40 (28-10-2026).
+    ('zoe-robledo', 'Zoé Robledo Aburto', ['zoe robledo', 'robledo aburto'], False),
 ]
 
 # Las empresas contratistas que nombra un documento oficial citado en una

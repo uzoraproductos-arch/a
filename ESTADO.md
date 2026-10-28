@@ -5,7 +5,7 @@ historia completa de cada decisión en [CONTEXT.md](CONTEXT.md), que pasa de
 7,000 renglones: aquí va solo lo que necesitas para no repetir trabajo ni
 pisar el de otro. **Se actualiza en el mismo commit que cambia lo que dice.**
 
-Última actualización: 28-10-2026 · sello `20261028l` · rama `claude/funny-turing-imtm54`.
+Última actualización: 28-10-2026 · sello `20261028m` · rama `claude/funny-turing-imtm54`.
 
 ## Antes de empezar y antes de empujar
 
@@ -16,7 +16,7 @@ python3 herramientas/revision.py --base origin/claude/funny-turing-imtm54   # al
 
 `revision.py` corre lo que pide AGENTS.md §5: `node --check`, los CR sueltos,
 que el sello haya subido si tocaste `assets/`, el inventario (enlaces rotos y
-cotejos sin evidencia), las **201 preguntas de prueba del Auditor**, la guardia
+cotejos sin evidencia), las **207 preguntas de prueba del Auditor**, la guardia
 de legibilidad y, si tocaste `supabase/`, la base de datos. GitHub la corre sola
 en cada envío (`.github/workflows/revision.yml`). Con `--rapida` se salta lo
 que necesita navegador.
@@ -41,6 +41,7 @@ que necesita navegador.
 
 ## Lo último que entró
 
+- **28-10-2026, sello 20261028m.** **Noticias es la cuarta pestaña** del menú (`MENU` de `apartados.py` e `index.html`), y estrena **«Al momento»**: notas breves verificadas con fecha, la nota de prensa de origen, el cotejo, la cuenta con números redondos, nuestros datos, el glosario y las búsquedas armadas en la red («sin verificar»). Las escribe `herramientas/integrar_al_momento.py`. Primera: el IMSS acota la Modalidad 40 (DOF 21-10-2026), con tres pendientes en el Registro. Glosario: «Continuación Voluntaria (Modalidad 40)». Personaje: Zoé Robledo. 207 preguntas de prueba.
 - **28-10-2026, sello 20261028l.** Preguntas de ejemplo del chat (`EJEMPLOS` de `asistente.py`): 9 nuevas sobre lo verificado y las auditorías de gestión (Seguro Popular, acceso a la salud, ISSSTESON, consejerías del INE, consultas del IMSS, asuntos del Poder Judicial, denuncias de la PROFEPA). La del Seguro Popular entra en la primera tanda; las demás, una por tanda. 201 preguntas de prueba.
 - **28-10-2026, sello 20261028k.** Auditoría en imágenes llega a 23 investigaciones: **Seguro Popular** (`auditoria-seguro-popular.html`, diapositiva 23), a pedido del autor («resaltar el éxito que fue»). El logro con sus números (5.3 → 53.5 millones de afiliados, ASF CP 2018), la línea del tiempo de la gente sin acceso a la salud 2016–2024 (INEGI, escena nueva `serie` de `auditoria-imagen.js`) y, como contrapeso, los $928.7 mdp que la ASF le observó en 2018 por tipo de irregularidad. Lo escribe `herramientas/integrar_seguro_popular.py`; el chat la abre con «la auditoría del Seguro Popular» o «qué le observó la ASF».
 - **28-10-2026, sello 20261028j.** Verificamos: «Con el Seguro Popular se atendieron más de 51 millones; ahorita nada» (columna `seguro-popular-51-millones`, audio de un reel). Matiz: el padrón llegó a 53.5 millones de afiliados (ASF, Cuenta Pública 2018), pero afiliado no es atendido. Consta el retroceso: sin acceso a servicios de salud, 20.1 millones en 2018, 50.4 en 2022 y 44.5 en 2024 (INEGI, comunicado 118/25). Pendiente: cuántos afiliados se atendieron de verdad (informes de resultados del SPSS, falta de la plataforma).

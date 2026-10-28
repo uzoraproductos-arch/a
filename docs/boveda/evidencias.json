@@ -94,9 +94,20 @@
     "cifra:limantour-superavit-y-peso-oro",
     "fuente:limantour-superavit-y-peso-oro"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Tunnel connection failed: 502 Bad Gateway"
+  },
+  "https://centralelectoral.ine.mx/2023/03/31/lorenzo-cordova-adriana-favela-ciro-murayama-y-jose-roberto-ruiz-se-despiden-de-la-herradura-de-la-democracia/": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "cifra:ine-contratos-desde-cordova",
+    "fuente:ine-contratos-desde-cordova"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
   },
   "https://centralelectoral.ine.mx/2026/10/22/version-estenografica-de-la-sesion-extraordinaria-del-consejo-general-del-ine-22-de-octubre-de-2026": {
    "primera_vez": "2026-10-27",
@@ -104,7 +115,7 @@
    "usos": [
     "fuente:taddei-renuncia-ine-contratos"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Tunnel connection failed: 403 Forbidden"
   },
@@ -146,6 +157,16 @@
     "fuente:ine-oic-auditorias-consejerias"
    ]
   },
+  "https://centralelectoral.ine.mx/2026/10/27/version-estenografica-de-la-conferencia-de-prensa-que-ofrecieron-consejeras-y-consejeros-electorales-a-diversos-medios-de-comunicacion-27-de-octubre-de-2026/": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "fuente:ine-oic-auditorias-consejerias"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
   "https://ciep.mx/": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -153,7 +174,7 @@
     "biblioteca:ref-ciep-pjf",
     "biblioteca:ref-ciep-transf"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Tunnel connection failed: 403 Forbidden"
   },
@@ -191,7 +212,7 @@
    "usos": [
     "fuente:gomez-urrutia-de-la-casa-de-moneda-al-congreso"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -456,7 +477,7 @@
    "usos": [
     "biblioteca:ref-fgr-femcc"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Tunnel connection failed: 403 Forbidden"
   },
@@ -581,7 +602,7 @@
    "usos": [
     "biblioteca:ref-imco-iipe"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Tunnel connection failed: 403 Forbidden"
   },
@@ -627,6 +648,20 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://isaf.gob.mx/informes/cuenta-publica": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "fuente:isssteson-oxigeno-pensiones-fallecidos"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "copiado",
+   "sha256": "2cc103a0128f7ec8455b14dba542f3e3412c3648e9ddde35f2d94099941b9358",
+   "bytes": 30120,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-28"
+  },
   "https://nuevaescuelamexicana.sep.gob.mx/contenido/coleccion/5632-por-culpa-de-un-pastelero/": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -648,7 +683,7 @@
    "usos": [
     "fuente:guaymas-comodato-amigo-gnl"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Tunnel connection failed: 403 Forbidden"
   },
@@ -658,7 +693,7 @@
    "usos": [
     "biblioteca:ref-conapo-proyecciones"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -668,9 +703,25 @@
    "usos": [
     "biblioteca:ref-sat-padron-rfc"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Forbidden"
+  },
+  "https://sidof.segob.gob.mx/notas/5801708": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "cifra:imss-modalidad-40-gestores",
+    "cotejo:imss-modalidad-40-gestores:0",
+    "fuente:imss-modalidad-40-gestores"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "copiado",
+   "sha256": "7c7ca81bb274705abeccfbbe7fb45acb9c194d2d72a6fe48ece915319e3e46c2",
+   "bytes": 68748,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-28"
   },
   "https://sigas.isaf.gob.mx/api/File/Informe/22455": {
    "primera_vez": "2026-10-28",
@@ -703,7 +754,7 @@
     "cifra:garcia-luna-y-garcia-harfuch",
     "fuente:garcia-luna-y-garcia-harfuch"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -1557,7 +1608,7 @@
    "usos": [
     "biblioteca:ref-bma-amparo"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Tunnel connection failed: 403 Forbidden"
   },
@@ -1645,7 +1696,7 @@
    "usos": [
     "biblioteca:ref-oaj-trimestre2026"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -1655,7 +1706,7 @@
    "usos": [
     "biblioteca:ref-shcp-ramo03-ur"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -1665,7 +1716,7 @@
    "usos": [
     "biblioteca:ref-garcia-luna-edny"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Tunnel connection failed: 403 Forbidden"
   },
@@ -1675,7 +1726,7 @@
    "usos": [
     "biblioteca:ref-shcp-cuentapublica"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -1685,7 +1736,7 @@
    "usos": [
     "auditoria:inversion-megaobras"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -1695,7 +1746,7 @@
    "usos": [
     "biblioteca:ref-shcp-cp2024-ea-gf"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -1705,7 +1756,7 @@
    "usos": [
     "biblioteca:ref-shcp-cp2024-birmex"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -1715,7 +1766,7 @@
    "usos": [
     "biblioteca:ref-shcp-cp2024-tren-maya"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -1725,7 +1776,7 @@
    "usos": [
     "biblioteca:ref-shcp-cp2024-aifa"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -1735,7 +1786,7 @@
    "usos": [
     "biblioteca:ref-pti-cp2024"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -1745,7 +1796,7 @@
    "usos": [
     "biblioteca:ref-pemex-cp2025"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -1755,7 +1806,7 @@
    "usos": [
     "biblioteca:ref-inafed-presidencias"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -2218,6 +2269,22 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "cifra:imss-modalidad-40-gestores",
+    "cotejo:imss-modalidad-40-gestores:2",
+    "fuente:imss-modalidad-40-gestores"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "copiado",
+   "sha256": "8a28a16e1dce1f8e666f4cce5ed19745bc912b2ab1ca49787d5d4bef229398ed",
+   "bytes": 2161638,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-28"
+  },
   "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -2470,7 +2537,7 @@
    "usos": [
     "biblioteca:ref-shcp-alertas"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -2480,9 +2547,29 @@
    "usos": [
     "biblioteca:ref-reforma-judicial"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.dof.gob.mx'. (_ssl.c:1032)"
+  },
+  "https://www.elfinanciero.com.mx/nacional/2026/10/27/claudia-sheinbaum-mananera-temas-hoy-27-de-octubre-de-2026-en-vivo/": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "fuente:ine-contratos-desde-cordova"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://www.elimparcial.com/mexico/2026/10/27/claudia-sheinbaum-pide-investigar-los-contratos-del-ine-durante-la-gestion-de-lorenzo-cordova-tras-la-renuncia-de-guadalupe-taddei-por-presuntas-irregularidades-y-exige-revisar-a-los-proveedores-de-administraciones-anteriores/": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "fuente:ine-contratos-desde-cordova"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
   },
   "https://www.eluniversal.com.mx/opinion/carlos-m-urzua/salario-justo/": {
    "primera_vez": "2026-10-27",
@@ -2490,7 +2577,7 @@
    "usos": [
     "biblioteca:ref-salario-real-historico"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Tunnel connection failed: 403 Forbidden"
   },
@@ -2514,7 +2601,7 @@
     "auditoria:farac-carretero",
     "biblioteca:ref-shcp-informe-4t2025"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -2725,9 +2812,13 @@
    "usos": [
     "fuente:ovalle-segalmex-asf-fgr"
    ],
-   "consultado": "2026-10-27",
-   "estado": "no abrió",
-   "error": "Internal Server Error"
+   "consultado": "2026-10-28",
+   "estado": "copiado",
+   "sha256": "a50dbfd4e7f945f2a31475878e6fd4aca7b2db9b199df97f9692ab4d08692d13",
+   "bytes": 42070,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-28"
   },
   "https://www.gob.mx/imss/prensa/com-106-imss-denuncia-robo-de-medicamentos-controlados": {
    "primera_vez": "2026-10-27",
@@ -2766,7 +2857,7 @@
    "usos": [
     "auditoria:inversion-megaobras"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Not Found"
   },
@@ -3054,6 +3145,20 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://www.imss.gob.mx/sites/all/statics/pdf/estadisticas/memoria/2025/13-RecursosHumanosMaterialesFinancieros.xlsx": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "fuente:imss-modalidad-40-gestores"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "copiado",
+   "sha256": "88bcd2173b23d414848562a8408fd341006a8eb5699f2a8e01f1c56e718006e4",
+   "bytes": 1072853,
+   "tipo": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "http": 200,
+   "copiado": "2026-10-28"
+  },
   "https://www.inegi.org.mx/app/tabulados/interactivos/?pxq=Mortalidad_Mortalidad_09_b87a4bf1-9b47-442a-a5fc-ee5c65e37648": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -3270,6 +3375,21 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://www.inegi.org.mx/temas/uma/": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "cifra:imss-modalidad-40-gestores",
+    "fuente:imss-modalidad-40-gestores"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "copiado",
+   "sha256": "abd4902070624ffae9813fddeb06749c1e79db73956489583adca44298e0ef07",
+   "bytes": 4942,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-28"
+  },
   "https://www.inehrm.gob.mx/es/inehrm/La_Dictaduta_El_ultimo_Gobierno_de_Antonio_Lopez_de_Santa_Anna": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -3300,6 +3420,26 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://www.informador.mx/mexico/claudia-sheinbaum-exige-una-auditoria-muy-amplia-al-ine-pide-revisar-gestiones-de-guadalupe-taddei-y-lorenzo-cordova-20261027-0066.html": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "fuente:ine-contratos-desde-cordova"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://www.jornada.com.mx/2026/10/28/politica/012n2pol": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "fuente:imss-modalidad-40-gestores"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
   "https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -3311,7 +3451,7 @@
     "fuente:garcia-luna-testigos-y-la-ley-mexicana",
     "fuente:garcia-luna-y-garcia-harfuch"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Tunnel connection failed: 403 Forbidden"
   },
@@ -3321,7 +3461,7 @@
    "usos": [
     "fuente:garcia-luna-y-garcia-harfuch"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Tunnel connection failed: 403 Forbidden"
   },
@@ -3331,7 +3471,7 @@
    "usos": [
     "fuente:garcia-luna-y-garcia-harfuch"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Tunnel connection failed: 403 Forbidden"
   },
@@ -3342,7 +3482,7 @@
     "cifra:gordillo-la-sentencia-reservada",
     "fuente:gordillo-la-sentencia-reservada"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[Errno 104] Connection reset by peer"
   },
@@ -3352,7 +3492,7 @@
    "usos": [
     "fuente:gordillo-la-sentencia-reservada"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[Errno 104] Connection reset by peer"
   },
@@ -3362,7 +3502,7 @@
    "usos": [
     "biblioteca:ref-pef-ramo03"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -3373,7 +3513,7 @@
     "biblioteca:ref-pnt",
     "biblioteca:ref-pnt-asesores-scjn"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Tunnel connection failed: 403 Forbidden"
   },
@@ -3383,7 +3523,7 @@
    "usos": [
     "biblioteca:ref-sat-denuncias"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -3492,7 +3632,7 @@
    "usos": [
     "biblioteca:ref-presidencia-2ig"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -3516,7 +3656,7 @@
    "usos": [
     "biblioteca:ref-transparencia-presupuestaria"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -3526,7 +3666,7 @@
    "usos": [
     "auditoria:fobaproa"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -3537,7 +3677,7 @@
     "auditoria:inversion-megaobras",
     "biblioteca:ref-shcp-obra-publica-abierta"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -3547,7 +3687,7 @@
    "usos": [
     "biblioteca:ref-shcp-cp2024-datos"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -3569,7 +3709,7 @@
    "usos": [
     "biblioteca:ref-shcp-pef2026-datos"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -3579,7 +3719,7 @@
    "usos": [
     "biblioteca:ref-shcp-avance-2t2026"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -3589,7 +3729,7 @@
    "usos": [
     "biblioteca:ref-shcp-ppef2027-datos"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -3599,7 +3739,7 @@
    "usos": [
     "biblioteca:ref-shcp-srft-2024"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
   },
@@ -3609,7 +3749,7 @@
    "usos": [
     "fuente:garcia-luna-testigos-y-la-ley-mexicana"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-10-28",
    "estado": "no abrió",
    "error": "Tunnel connection failed: 403 Forbidden"
   },

@@ -29,7 +29,8 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
 - El Auditor Virtual tiene que funcionar y verse como lo mejor de la
   plataforma: un dato que la plataforma tiene y el chat no encuentra es un
   error (ver §5 ter).
-- Comunidad queda aparte, como la tercera pestaña.
+- Comunidad queda aparte, como la tercera pestaña, y **Noticias** es la
+  cuarta desde el 28-10-2026 (ver §5 bis).
 
 ### 0 bis. Una sola plataforma: la Enciclopedia antigua se retiró
 
@@ -344,8 +345,10 @@ mudando a su página; no se agregan desgloses nuevos.
   índice general.
 - El menú «Busca y verifica» se fusionó con el Modo Inspector (09-10-2026):
   es su parte B, y `busca-y-verifica.html` solo redirige ahí.
-- **El menú tiene tres pestañas, ni una más** (decisión del autor,
-  23-10-2026, que reemplaza la de cinco del 09-10-2026): **Auditor
+- **El menú tiene cuatro pestañas** (decisión del autor, 28-10-2026: «darle
+  más protagonismo a las noticias relevantes… como una cuarta pestaña», que
+  amplía la de tres del 23-10-2026, que a su vez reemplazó la de cinco del
+  09-10-2026): **Auditor
   Virtual** (abre `herramienta-inspector-pregunta.html`, «Pregúntale al
   Auditor»; desde el 23-10-2026 las cuatro herramientas cuelgan de su botón
   «Herramientas», junto a «Cómo platicar conmigo», y `herramientas.html`
@@ -359,7 +362,9 @@ mudando a su página; no se agregan desgloses nuevos.
   «Cuéntanos lo que viste» de la cabecera, su única puerta: ese botón abre
   el cajón con las cinco rutas (algo raro con el dinero público, un dato mal,
   un tema para investigar, compartir el Estado de Cuenta y fe de erratas); el Pase del Auditor Cívico se retiró y
-  `pase-del-auditor.html` redirige a Donaciones). Ningún archivo cambió de nombre, para no romper
+  `pase-del-auditor.html` redirige a Donaciones) y **Noticias**
+  (`noticias-relevantes.html`, que antes colgaba de Aprende; Aprende conserva
+  su tarjeta hacia ahí). Ningún archivo cambió de nombre, para no romper
   enlaces. Las pestañas viven en `MENU` de `herramientas/apartados.py`, y
   la portada (`index.html`) tiene su copia a mano. Lo que cuelga de
   Números, Datos o Aprende muestra «Enciclopedia» en sus migas.
@@ -367,6 +372,20 @@ mudando a su página; no se agregan desgloses nuevos.
   `enciclopedia-auditavision.html`; `enciclopedia.html` solo redirige ahí (§0 bis).
   «Números» es la antigua «Sigue el dinero»; su archivo sigue siendo
   `sigue-el-dinero.html`.
+- **«Al momento»: las noticias del día, verificadas** (pedido del autor,
+  28-10-2026: «notas más pequeñas… fechado con nuestros datos, verificado,
+  nuestra salud financiera, estado de resultados… y el glosario»). Es la
+  sección `Al momento` de `columnas.js` y la franja al inicio del diario.
+  Cada nota la escribe `herramientas/integrar_al_momento.py` (no se edita a
+  mano) con el molde de Verificamos (la nota de prensa es lo que se coteja,
+  con su medio y su liga) y además `fecha`, `nota`, `ejemplo` (la cuenta con
+  números redondos, siempre `derivado`), `datos` (lo que dice la plataforma:
+  estado de resultados, salud financiera, herramientas), `glosario` (cada
+  concepto con su ficha: si falta, se agrega al glosario en el mismo cambio)
+  y `red`: las búsquedas armadas en noticias, YouTube, X, Facebook y el DOF,
+  **rotuladas «sin verificar»; nunca se copia ni se resume lo que dice la
+  red**. Las cifras que la plataforma ya tiene se leen de su módulo, no se
+  copian. El chat la encuentra sola, y «noticias de hoy» lista las más nuevas.
 
 ---
 

@@ -15,13 +15,14 @@
   var EDICION = '28 de octubre de 2026';
   var SECCIONES = [
     ['todas', 'Todas'],
+    ['Al momento', 'Al momento'],
     ['Personajes', 'Personajes'],
     ['Hechos', 'Hechos'],
     ['Historia', 'Historia'],
     ['Verificado', 'Verificamos']
   ];
   /* Ilustración de cada sección cuando la columna no trae retrato. */
-  var ILUS = { Personajes: ['🧑‍⚖️', 'tinta'], Hechos: ['🗂️', 'sepia'], Historia: ['📜', 'oliva'], Verificado: ['🔍', 'sepia'] };
+  var ILUS = { Personajes: ['🧑‍⚖️', 'tinta'], Hechos: ['🗂️', 'sepia'], Historia: ['📜', 'oliva'], Verificado: ['🔍', 'sepia'], 'Al momento': ['⏱️', 'tinta'] };
 
   /* Cada columna: {id, seccion, titulo, balazo, cuerpo[], dato_curioso,
      cifras[{valor, etq, estado, fuente, url}], fuentes[{nombre, url}],
@@ -36,9 +37,233 @@
      Derecho de réplica (Bloque 4, 27-10-2026): si una persona o empresa aludida
      pide aclarar un dato y procede, su texto va en replica[{quien, fecha, texto}]
      y se publica íntegro, sin comentarios ni apostillas (Ley de réplica, art. 6).
-     Todas las columnas llevan al pie la liga para pedirla (derecho-de-replica.html). */
+     Todas las columnas llevan al pie la liga para pedirla (derecho-de-replica.html).
+     «Al momento» (pedido del autor, 28-10-2026): notas breves de lo que está pasando,
+     con el mismo cotejo de Verificamos y además fecha, nota{medio, titulo, fecha, url},
+     ejemplo{tit, txt, filas, nota}, datos[{ico, tx, url, de}] (lo que dice la
+     plataforma: estado de resultados, salud financiera), glosario[{t, url}] y red (la
+     búsqueda que se arma en buscadores y redes, rotulada «sin verificar»). Las escribe
+     herramientas/integrar_al_momento.py; no se editan a mano. */
   var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
+ {
+  "id": "imss-modalidad-40-gestores",
+  "seccion": "Al momento",
+  "icono": "⏱️",
+  "fecha": "28-10-2026",
+  "titulo": "El IMSS acota la Modalidad 40: lo que dice el Diario Oficial y lo que falta probar",
+  "balazo": "Desde el 22 de octubre, quien entre a la Modalidad 40 cotiza con su último salario o, cuando mucho, con una UMA más. El esquema de gestores y empresas fantasma que describió el director del IMSS todavía no tiene un documento público.",
+  "nota": {
+   "medio": "La Jornada",
+   "titulo": "Cambios a la modalidad 40, para frenar «abusos y fraudes»: Robledo",
+   "fecha": "28-10-2026",
+   "url": "https://www.jornada.com.mx/2026/10/28/politica/012n2pol"
+  },
+  "circula": {
+   "red": "La Jornada (prensa)",
+   "cuenta": "Zoé Robledo, director general del IMSS, citado por La Jornada",
+   "fecha": "28 de octubre de 2026",
+   "texto": "La Modalidad 40 del IMSS se acotó tras detectarse un esquema fraudulento de gestores que financiaban a los asegurados para pagar sus cotizaciones. En realidad se trataba de créditos que terminaba pagando el Estado mexicano, con pensiones que llegaban a incrementarse hasta mil por ciento. En otros casos, se les inscribía a empresas fantasma para seguir cotizando y cubrir las semanas requeridas, para luego incorporarse a la Modalidad 40."
+  },
+  "cuerpo": [
+   "Qué pasó. El 10 de octubre, el Consejo Técnico del IMSS aprobó un acuerdo que se publicó en el Diario Oficial el 21 de octubre y rige desde el día hábil siguiente, el 22. La Modalidad 40 (la ley la llama «continuación voluntaria en el régimen obligatorio») no desaparece: quien ya estaba inscrito sigue en las mismas condiciones hasta que termine el periodo que contrató, y conserva las semanas y los salarios que efectivamente pagó.",
+   "Qué cambió para quien se inscriba ahora. La ley dice que te inscribes «con el último salario o superior al que tenía en el momento de la baja» (art. 218), hasta el tope general de 25 veces (art. 28). El acuerdo pone, como medida temporal, un techo mucho más bajo: tu último salario registrado o hasta ese salario más una UMA ($3,566.22 al mes en 2026), nunca menos de un salario mínimo. Además, ya no se puede pagar hacia atrás, porque el aseguramiento cuenta desde la fecha de la solicitud; la inscripción será solo digital, y quien se asegura por su cuenta como trabajador independiente (art. 13, fracción I) ya no puede contratarla.",
+   "Por qué es dinero público. Las pensiones de quienes eligen el régimen de la ley de 1973 las paga el Gobierno Federal, no un fondo propio de cada trabajador (Ley del Seguro Social, transitorio duodécimo). Por eso una pensión más alta, lograda con cotizaciones altas en los últimos años, la termina pagando el erario. En el Presupuesto 2026 ese gasto pasa por el Ramo 19, Aportaciones a Seguridad Social, con $1,541,518.7 millones; el presupuesto no separa cuánto de eso corresponde a la Modalidad 40.",
+   "Lo que falta probar. El acuerdo no habla de fraudes, gestores ni empresas fantasma: dice que el Consejo «tomó conocimiento» de los informes de tres direcciones del IMSS, que no se han publicado. Los casos, el «mil por ciento» y las denuncias de las que habló el director general del IMSS, Zoé Robledo, son, por ahora, declaraciones. Una acusación no es una condena, y quien pagó su Modalidad 40 con su propio dinero no hizo nada indebido.",
+   "El punto ciego. La ley dice «último salario o superior» y el acuerdo le pone techo. Si un acuerdo del Consejo Técnico puede acotar lo que dice una ley del Congreso lo decidiría, en su caso, un tribunal. Mientras tanto, la medida vale hasta que el IMSS tenga su análisis financiero, que el propio acuerdo pide a más tardar seis meses después de emitido."
+  ],
+  "ejemplo": {
+   "tit": "La cuenta, con números redondos",
+   "txt": "Si tu último salario registrado ante el IMSS era de $10,000.00 al mes, esto es lo más alto con lo que podrías cotizar en la Modalidad 40:",
+   "filas": [
+    [
+     "Antes: la ley (arts. 218 y 28)",
+     "$89,155.50",
+     "25 × $3,566.22 (UMA mensual 2026)"
+    ],
+    [
+     "Desde el 22-10-2026: el acuerdo",
+     "$13,566.22",
+     "$10,000.00 + $3,566.22"
+    ]
+   ],
+   "nota": "Es un ejemplo derivado con la UMA mensual de 2026. Tu caso depende de tu historial de semanas y salarios."
+  },
+  "cotejo": [
+   {
+    "dice": "La Modalidad 40 del IMSS se acotó",
+    "res": "consta",
+    "explica": "El punto cuarto del acuerdo limita a los nuevos inscritos a su último salario registrado o hasta ese salario más una UMA, sin pagos hacia atrás. Es una medida temporal: dura hasta que el IMSS tenga su análisis financiero. Quien ya estaba inscrito conserva sus condiciones.",
+    "fuente": "DOF 21-10-2026, Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS, puntos cuarto y séptimo",
+    "url": "https://sidof.segob.gob.mx/notas/5801708"
+   },
+   {
+    "dice": "Se acotó tras detectarse un esquema fraudulento de gestores que financiaban a los asegurados para pagar sus cotizaciones",
+    "res": "pendiente",
+    "explica": "El acuerdo solo dice que el Consejo tomó conocimiento de los informes de las direcciones de Incorporación y Recaudación, de Prestaciones Económicas y Sociales y Jurídica; no los publica ni menciona a gestores. La ley pide que el asegurado pague sus cuotas por mes adelantado (art. 218), pero no dice de dónde debe salir el dinero: si un préstamo así fue fraude, lo tiene que probar una investigación.",
+    "fuente": "DOF 21-10-2026, Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS, punto primero",
+    "url": "https://sidof.segob.gob.mx/notas/5801708",
+    "quien": "IMSS: su H. Consejo Técnico y su Dirección Jurídica (los informes de la sesión del 10-10-2026 y las denuncias)",
+    "donde": "https://www.imss.gob.mx/transparencia"
+   },
+   {
+    "dice": "En realidad se trataba de créditos que terminaba pagando el Estado mexicano",
+    "res": "matiz",
+    "explica": "Consta que el Gobierno Federal paga las pensiones de quienes eligen el régimen de 1973: por eso una pensión más alta la paga el erario. Que esas cotizaciones se pagaran con préstamos de gestores no tiene, por ahora, documento público.",
+    "fuente": "Ley del Seguro Social, transitorio duodécimo (texto vigente, última reforma DOF 15-01-2026)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf"
+   },
+   {
+    "dice": "Pensiones que llegaban a incrementarse hasta mil por ciento",
+    "res": "pendiente",
+    "explica": "Ningún documento público trae los casos ni cómo se calculó ese porcentaje. Sin los casos no se puede comprobar ni descartar. El acuerdo ordena que la Dirección de Finanzas analice el efecto de la Modalidad 40 en la situación financiera del IMSS a más tardar seis meses después de emitido: ahí debería estar.",
+    "fuente": "DOF 21-10-2026, Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS, punto segundo",
+    "url": "https://sidof.segob.gob.mx/notas/5801708",
+    "quien": "IMSS: Dirección de Finanzas, Unidad de Riesgos Financieros y Actuariales (el análisis financiero, a más tardar el 10-04-2027)",
+    "donde": "https://www.imss.gob.mx/transparencia"
+   },
+   {
+    "dice": "Se les inscribía a empresas fantasma para seguir cotizando y cubrir las semanas requeridas",
+    "res": "pendiente",
+    "explica": "El IMSS no ha dicho qué empresas ni cuántos casos. Una empresa que factura operaciones simuladas aparece en la lista 69-B del SAT, que puedes consultar en nuestra Lista negra del SAT; dar de alta trabajadores que no existen se ve en los registros del propio IMSS, que no son públicos.",
+    "fuente": "DOF 21-10-2026, Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS, puntos primero y quinto",
+    "url": "https://sidof.segob.gob.mx/notas/5801708",
+    "quien": "IMSS: Dirección de Incorporación y Recaudación (qué patrones y cuántos casos)",
+    "donde": "https://www.imss.gob.mx/transparencia"
+   }
+  ],
+  "cifras": [
+   {
+    "valor": "+1 UMA",
+    "etq": "lo más que puede subir tu salario de cotización al entrar a la Modalidad 40 desde el 22-10-2026",
+    "estado": "oficial",
+    "fuente": "DOF 21-10-2026, Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS, punto cuarto",
+    "url": "https://sidof.segob.gob.mx/notas/5801708"
+   },
+   {
+    "valor": "25 veces",
+    "etq": "el tope general de cotización de la ley, al que antes podía llegar la Modalidad 40 (desde 2016 se mide en UMA)",
+    "estado": "oficial",
+    "fuente": "Ley del Seguro Social, arts. 28 y 218",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf"
+   },
+   {
+    "valor": "$3,566.22",
+    "etq": "una UMA al mes en 2026",
+    "estado": "oficial",
+    "fuente": "INEGI, UMA 2026 (DOF 09-01-2026)",
+    "url": "https://www.inegi.org.mx/temas/uma/"
+   },
+   {
+    "valor": "$1,541,518.7 millones",
+    "etq": "Ramo 19, Aportaciones a Seguridad Social, en 2026: por ahí pasan las pensiones que paga el Gobierno Federal",
+    "estado": "oficial",
+    "fuente": "PEF 2026, Anexo 1, pp. 33-34",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf"
+   },
+   {
+    "valor": "10-04-2027",
+    "etq": "a más tardar, el análisis financiero del IMSS (10-10-2026 + 6 meses)",
+    "estado": "derivado",
+    "fuente": "DOF 21-10-2026, Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS, punto segundo",
+    "url": "https://sidof.segob.gob.mx/notas/5801708"
+   }
+  ],
+  "datos": [
+   {
+    "ico": "📊",
+    "tx": "El estado de resultados del IMSS en 2025",
+    "url": "datos-salud-imss.html#sal-imss_dinero",
+    "de": "El seguro de Invalidez y Vida, uno de los dos a los que cotiza la Modalidad 40, cerró con un excedente de $108,197.4 millones; el de Enfermedad y Maternidad gastó $151,126.8 millones más de lo que ingresó, y todo el IMSS cerró con un faltante de $4,398.4 millones (Memoria Estadística 2025, cuadro XIII.45)."
+   },
+   {
+    "ico": "🏛️",
+    "tx": "La salud financiera del IMSS",
+    "url": "herramienta-inspector-entes.html#ente=federal:imss",
+    "de": "Su gasto en la Cuenta Pública 2025 y su ficha en el Auditor de entes, con sus documentos."
+   },
+   {
+    "ico": "🧾",
+    "tx": "Busca una empresa en la lista negra del SAT",
+    "url": "herramienta-inspector-efos.html",
+    "de": "Por RFC o por nombre: las empresas que el SAT presume que facturan operaciones simuladas (art. 69-B del Código Fiscal)."
+   },
+   {
+    "ico": "🔍",
+    "tx": "Contrasta otra nota de este tema",
+    "url": "herramienta-inspector-nota.html",
+    "de": "Pega la liga de una nota y la cotejamos contra los documentos oficiales."
+   }
+  ],
+  "glosario": [
+   {
+    "t": "Continuación voluntaria (Modalidad 40)",
+    "url": "glosario.html#Continuacion-Voluntaria"
+   },
+   {
+    "t": "UMA",
+    "url": "glosario.html#UMA"
+   },
+   {
+    "t": "Cuota obrera del IMSS",
+    "url": "glosario.html#Cuota-Obrera-del-IMSS"
+   },
+   {
+    "t": "Empresa fantasma",
+    "url": "glosario.html#Empresa-Fantasma"
+   },
+   {
+    "t": "IMSS",
+    "url": "glosario.html#Instituto-Mexicano-del-Seguro-Social"
+   }
+  ],
+  "red": "Modalidad 40 IMSS",
+  "sigue": [
+   {
+    "que": "El análisis financiero de la Modalidad 40 que el acuerdo pide al IMSS (a más tardar el 10-04-2027)",
+    "url": "https://www.imss.gob.mx/transparencia"
+   },
+   {
+    "que": "La propuesta de cambio a las reglas que la Dirección Jurídica debe llevar al Consejo Técnico (hasta 6 meses después del análisis)",
+    "url": "https://sidof.segob.gob.mx/notas/5801708"
+   },
+   {
+    "que": "Las denuncias que el IMSS dice haber presentado: en qué fiscalía y en qué etapa van",
+    "url": "https://www.gob.mx/fgr"
+   },
+   {
+    "que": "Si un tribunal revisa si un acuerdo del Consejo Técnico puede acotar el art. 218 de la ley",
+    "url": "https://www.scjn.gob.mx"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "DOF 21-10-2026, Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS (texto íntegro en SIDOF)",
+    "url": "https://sidof.segob.gob.mx/notas/5801708"
+   },
+   {
+    "nombre": "Ley del Seguro Social, texto vigente (última reforma DOF 15-01-2026): arts. 28, 218 y transitorio duodécimo",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf"
+   },
+   {
+    "nombre": "Presupuesto de Egresos de la Federación 2026, Anexo 1, pp. 33-34 (Ramo 19)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf"
+   },
+   {
+    "nombre": "INEGI, Unidad de Medida y Actualización 2026",
+    "url": "https://www.inegi.org.mx/temas/uma/"
+   },
+   {
+    "nombre": "IMSS, Memoria Estadística 2025, cap. XIII, cuadro XIII.45",
+    "url": "https://www.imss.gob.mx/sites/all/statics/pdf/estadisticas/memoria/2025/13-RecursosHumanosMaterialesFinancieros.xlsx"
+   },
+   {
+    "nombre": "Punto de partida: La Jornada, «Cambios a la modalidad 40, para frenar “abusos y fraudes”: Robledo» (28-10-2026)",
+    "url": "https://www.jornada.com.mx/2026/10/28/politica/012n2pol"
+   }
+  ],
+  "actualizado": "28-10-2026"
+ },
  {
   "id": "seguro-popular-51-millones",
   "seccion": "Verificado",
@@ -2847,6 +3072,64 @@
     if (viejo) viejo.outerHTML = panelSigo();
   }
 
+  /* «Al momento»: la cuenta con números redondos, como barras a escala. */
+  function ejemploHtml(c) {
+    var e = c.ejemplo;
+    if (!e) return '';
+    var num = function (t) { return parseFloat(String(t).replace(/[^0-9.]/g, '')) || 0; };
+    var max = Math.max.apply(null, e.filas.map(function (f) { return num(f[1]); }));
+    return '<div class="col-ejemplo"><b>🧮 ' + esc(e.tit) + '</b> ' + chip('derivado') + '<p>' + esc(e.txt) + '</p><ul>' +
+      e.filas.map(function (f) {
+        var w = max ? Math.max(2, Math.round(100 * num(f[1]) / max)) : 0;
+        return '<li><span class="col-ej-etq">' + esc(f[0]) + '</span><span class="col-ej-barra"><i style="width:' + w + '%"></i></span>' +
+          '<strong>' + esc(f[1]) + '</strong><small>Operación: ' + esc(f[2]) + '</small></li>';
+      }).join('') + '</ul>' + (e.nota ? '<p class="col-ej-nota">' + esc(e.nota) + '</p>' : '') + '</div>';
+  }
+  function datosHtml(c) {
+    if (!c.datos || !c.datos.length) return '';
+    return '<div class="col-datos"><b>📊 Lo que dicen nuestros datos</b><ul>' + c.datos.map(function (d) {
+      return '<li><a href="' + esc(d.url) + '"><span aria-hidden="true">' + d.ico + '</span> ' + esc(d.tx) + ' ➔</a><small>' + esc(d.de) + '</small></li>';
+    }).join('') + '</ul></div>';
+  }
+  function glosarioHtml(c) {
+    if (!c.glosario || !c.glosario.length) return '';
+    return '<div class="col-glosa"><b>📖 Si una palabra no te queda clara</b><p>' + c.glosario.map(function (g) {
+      return '<a href="' + esc(g.url) + '">' + esc(g.t) + '</a>';
+    }).join('') + '</p></div>';
+  }
+  /* Lo que dice la red: búsquedas armadas, nunca un texto copiado ni redactado
+     por nosotros. Se rotulan «sin verificar» y llevan a Contrasta una nota. */
+  var RED = [
+    ['📰', 'Noticias', function (q) { return 'https://news.google.com/search?q=' + encodeURIComponent(q) + '&hl=es-419&gl=MX&ceid=MX:es-419'; }],
+    ['▶️', 'YouTube', function (q) { return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q); }],
+    ['💬', 'X', function (q) { return 'https://x.com/search?q=' + encodeURIComponent(q) + '&f=live'; }],
+    ['👥', 'Facebook', function (q) { return 'https://www.facebook.com/search/posts/?q=' + encodeURIComponent(q); }],
+    ['📜', 'Diario Oficial', function (q) { return 'https://www.google.com/search?q=' + encodeURIComponent(q + ' site:dof.gob.mx'); }]
+  ];
+  function redHtml(c) {
+    if (!c.red) return '';
+    return '<div class="col-red"><b>📡 Lo que dice la red ahora</b>' +
+      '<p>Búsquedas ya armadas con «' + esc(c.red) + '». <b>Lo que encuentres ahí no lo verificó Auditavisión</b>: una nota o un video no son un documento oficial.</p>' +
+      '<p class="col-red-lista">' + RED.map(function (r) {
+        return '<a href="' + esc(r[2](c.red)) + '" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">' + r[0] + '</span> ' + r[1] + ' ↗</a>';
+      }).join('') + '</p>' +
+      '<p class="col-red-pie">¿Encontraste una nota con cifras? <a href="herramienta-inspector-nota.html">Contrástala con los documentos oficiales ➔</a></p></div>';
+  }
+  /* La franja «Al momento»: las notas breves, de la más nueva a la más vieja. */
+  function fechaN(f) { var p = String(f || '').split('-'); return p.length === 3 ? +(p[2] + p[1] + p[0]) : 0; }
+  function franja() {
+    var b = COLUMNAS.filter(function (c) { return c.seccion === 'Al momento'; })
+      .sort(function (x, y) { return fechaN(y.fecha) - fechaN(x.fecha); });
+    if (!b.length) return '';
+    return '<section class="col-franja" aria-labelledby="colFranjaTit"><h4 class="col-franja-tit" id="colFranjaTit">⏱️ Al momento <small>Lo que está pasando, verificado</small></h4><ol>' +
+      b.slice(0, 6).map(function (c) {
+        var pend = (c.cotejo || []).filter(function (x) { return x.res === 'pendiente'; }).length;
+        var ok = (c.cotejo || []).filter(function (x) { return x.res === 'consta' || x.res === 'matiz'; }).length;
+        return '<li><time>' + esc(c.fecha) + '</time><a href="#col-' + esc(c.id) + '">' + esc(c.titulo) + '</a>' +
+          '<small>' + ok + ' con documento · ' + pend + ' por probar' + (c.nota ? ' · a partir de ' + esc(c.nota.medio) : '') + '</small></li>';
+      }).join('') + '</ol></section>';
+  }
+
   function articulo(c, i) {
     var cifras = (c.cifras || []).map(function (x) {
       return '<li><strong>' + esc(x.valor) + '</strong><span>' + esc(x.etq) + '</span>' +
@@ -2862,12 +3145,15 @@
         (novedad(c) ? '<span class="col-nuevo">🆕 Novedades desde que lo sigues</span>' : '') +
         '<h4 class="col-titular">' + esc(c.titulo) + '</h4>' +
         '<p class="col-balazo">' + esc(c.balazo) + '</p>' +
-        '<p class="col-firma">Redacción Auditavisión · Con documentos oficiales</p>' +
+        '<p class="col-firma">Redacción Auditavisión · ' + (c.fecha ? esc(c.fecha) + ' · ' : '') + 'Con documentos oficiales</p>' +
         '<button type="button" class="col-leer" aria-expanded="false" aria-controls="col-cuerpo-' + esc(c.id) + '">Leer la columna ➔</button>' +
       '</div>' +
       '<div class="col-cuerpo" id="col-cuerpo-' + esc(c.id) + '" hidden>' +
         (c.cuerpo || []).map(function (p, k) { return '<p' + (k === 0 ? ' class="col-capitular"' : '') + '>' + esc(p) + '</p>'; }).join('') +
-        (c.circula ? '<aside class="col-circula"><b>📣 Lo que circula</b><p>«' + esc(c.circula.texto) + '»</p>' +
+        ejemploHtml(c) +
+        (c.nota ? '<p class="col-nota">📰 <b>De dónde salió:</b> <a href="' + esc(c.nota.url) + '" target="_blank" rel="noopener noreferrer">' + esc(c.nota.medio) + ', «' + esc(c.nota.titulo) + '» ↗</a> · ' + esc(c.nota.fecha) +
+          '. Es el punto de partida: lo cotejamos contra el documento oficial.</p>' : '') +
+        (c.circula ? '<aside class="col-circula"><b>' + (c.nota ? '📣 Lo que se dijo' : '📣 Lo que circula') + '</b><p>«' + esc(c.circula.texto) + '»</p>' +
           '<small>' + esc(c.circula.cuenta) + ' · ' + esc(c.circula.red) + ' · ' + esc(c.circula.fecha) + '</small></aside>' : '') +
         (c.cotejo ? '<div class="col-cotejo"><b>🔍 Cotejo, afirmación por afirmación</b><ol>' + c.cotejo.map(function (x, k) {
           var r = RES[x.res] || RES.pendiente;
@@ -2875,6 +3161,7 @@
             '<p><span class="col-res' + (x.res === 'pendiente' ? ' est-chip est-pendiente" data-pend="red-' + esc(c.id) + '-' + (k + 1) + '"' : '"') + '>' + r[0] + ' ' + r[1] + '</span> ' + esc(x.explica) + '</p>' +
             '<small>' + (x.url ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.fuente) + ' ↗</a>' : esc(x.fuente)) + '</small></li>';
         }).join('') + '</ol></div>' : '') +
+        datosHtml(c) + glosarioHtml(c) + redHtml(c) +
         (c.sigue ? '<div class="col-sigue"><b>🗓️ Lo que sigue</b><ul>' + c.sigue.map(function (x) {
           return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.que) + ' ↗</a></li>';
         }).join('') + '</ul></div>' : '') +
@@ -2903,7 +3190,7 @@
       '<header class="col-cabezal">' +
         '<div class="col-cabezal-linea"><span>Edición del ' + EDICION + '</span><span>Cada cifra, con su documento</span></div>' +
         '<h3 class="col-nombre">La Columna del Erario</h3>' +
-        '<p class="col-lema">Personajes y hechos del dinero público que vale la pena conocer</p>' +
+        '<p class="col-lema">Lo que está pasando con el dinero público, y los personajes y hechos que vale la pena conocer</p>' +
         '<nav class="col-secciones" aria-label="Secciones del diario">' +
           SECCIONES.map(function (s) {
             var n = s[0] === 'todas' ? COLUMNAS.length : COLUMNAS.filter(function (c) { return c.seccion === s[0]; }).length;
@@ -2914,7 +3201,8 @@
       '<p class="col-aviso">Estas columnas sustituyen las fichas de personajes de la Enciclopedia, retiradas en septiembre de 2026 porque no citaban fuentes. ' +
         'Aquí solo entra lo que sostiene un documento oficial: una sentencia, una resolución, un informe de la Auditoría Superior o el Diario Oficial. ' +
         'Un proceso abierto no es una condena, y una cifra «por aclarar» no es un robo probado. ' +
-        'En «Verificamos» cotejamos, afirmación por afirmación, lo que circula en redes contra el documento oficial.</p>' +
+        'En «Verificamos» cotejamos, afirmación por afirmación, lo que circula en redes contra el documento oficial, y en «Al momento», en corto, las noticias del día.</p>' +
+      franja() +
       panelSigo() +
       (lista.length ? '<div class="col-rejilla">' + lista.map(articulo).join('') + '</div>'
                     : '<p class="col-vacio">Todavía no hay columnas verificadas en esta sección.</p>') +

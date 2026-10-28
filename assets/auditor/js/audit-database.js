@@ -7862,6 +7862,12 @@ window.AUDIT_DB = {
       "definicion": "El derecho de toda persona a que se publique su aclaración cuando un medio u otro emisor de información difunde sobre ella datos inexactos o falsos que le causan un agravio político, económico, en su honor, vida privada o imagen. Se pide por escrito en los 15 días hábiles siguientes a la publicación; el emisor tiene 3 días hábiles para resolver y la publica gratis y sin comentarios.",
       "ley": "Arts. 2, fr. II, 4, 6, 10 y 11, Ley Reglamentaria del artículo 6o. constitucional en materia del Derecho de Réplica (última reforma DOF 14-11-2025)",
       "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Continuación Voluntaria (Modalidad 40)",
+      "definicion": "El derecho de quien deja de tener patrón a seguir cotizando por su cuenta al IMSS para su pensión: los seguros de invalidez y vida y de retiro, cesantía y vejez, pero no el de enfermedades y maternidad. Se pide dentro de los cinco años siguientes a la baja, con al menos 52 semanas cotizadas en los últimos cinco años, y las cuotas se pagan por mes adelantado. La ley dice que te inscribes con tu último salario o uno superior; desde el 22 de octubre de 2026, como medida temporal, el IMSS limita a los nuevos inscritos a su último salario registrado o hasta ese salario más una UMA, sin pagos hacia atrás.",
+      "ley": "Arts. 218, 219 y 220 Ley del Seguro Social (última reforma DOF 15-01-2026) · Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS, punto cuarto (DOF 21-10-2026)",
+      "categoria": "👷 Trabajo y Salario"
     }
   ],
   "legislativo": {
