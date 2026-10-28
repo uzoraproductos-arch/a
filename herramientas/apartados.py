@@ -1368,7 +1368,7 @@ def noticias(base, ref):
     'scripts': ['columnas.js'] + list(insp_nota.SCRIPTS) + nt.SCRIPTS,
     'estilos': ['columnas.css'] + list(insp_nota.ESTILOS) + nt.ESTILOS,
     'secciones': [{
-        'id': 'diario', 'titulo': 'Auditavisión Noticias', 'texto': '', 'sin_cab': True, 'tarjetas': [],
+        'id': 'diario', 'titulo': 'El diario de Noticias relevantes', 'texto': '', 'sin_cab': True, 'tarjetas': [],
         'bloque': nt.construir(base, ref),
     }],
     }

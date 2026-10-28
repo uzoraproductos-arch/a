@@ -9,7 +9,7 @@ La Enciclopedia queda fuera porque está congelada.
 |---|---|
 | Páginas revisadas | 239 |
 | Páginas que solo redirigen | 29 |
-| Enlaces internos a archivos que no existen | 1 |
+| Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
 
 ## Páginas
@@ -170,7 +170,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `informes-semestral-asf.html` | Informe semestral de la ASF · Auditavisión | apartados.py | 43 | 0 | 30 | 5 | 4 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
 | `nepotismo-y-cargos-publicos.html` | Nepotismo y cargos públicos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `noticias-relevantes.html` | Noticias relevantes · Auditavisión | apartados.py | 46 | 0 | 0 | 1 | 0 |
+| `noticias-relevantes.html` | Noticias relevantes · Auditavisión | apartados.py | 45 | 0 | 0 | 1 | 0 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 48 | 0 | 0 | 5 | 1 |
 | `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
 | `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 45 | 0 | 4 | 0 | 0 |
@@ -294,7 +294,7 @@ Los chips que pinta el motor al abrir un módulo no se cuentan aquí: solo los e
 
 ## Enlaces rotos
 
-- `noticias-relevantes.html` → `docs/VERIFICAMOS.md`
+Ninguno.
 
 ## Módulos del motor que todavía viven en la portada
 

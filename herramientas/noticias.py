@@ -152,7 +152,7 @@ def _metodo():
             '    <p class="nt-acciones"><a class="nt-btn" href="comunidad-tema.html" data-puerta="tema">💡 Proponer una nota</a> '
             '<a class="nt-btn nt-btn-sec" href="#verifica">⚖️ Mejor la verifico yo</a></p>\n'
             '    <p class="nt-pie">No publicamos el nombre de personas privadas, y una acusación no es una condena. Las reglas completas: '
-            '<a href="pilares.html">nuestros pilares</a> y <a href="docs/VERIFICAMOS.md">el protocolo de Verificamos</a>.</p>\n'
+            '<a href="pilares.html">nuestros pilares</a> y <a href="https://github.com/uzoraproductos-arch/a/blob/claude/funny-turing-imtm54/docs/VERIFICAMOS.md" target="_blank" rel="noopener">el protocolo de Verificamos ↗</a>.</p>\n'
             '  </div>') % pasos
 
 
