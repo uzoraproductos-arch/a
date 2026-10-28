@@ -201,6 +201,34 @@ PROPIOS = [
      'Hasta tener el documento, no se publican las cifras de las conferencias.',
      PLATAFORMA, 'https://www.imss.gob.mx/conoce-al-imss/memoria-estadistica-2025', 'Memoria Estadística 2025 (IMSS), capítulo XIV',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-sistema.html', 'Datos · Salud pública · Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE')]),
+    # La auditoría de gestión de la PROFEPA (28-10-2026).
+    ('ambiente-denuncias-causa', 'Medio ambiente', 'Cuántas denuncias populares investigadas concluyó la PROFEPA, por qué causa y en cuánto tiempo',
+     'Sus Informes de Actividades dan cuántas denuncias recibió, cuántas admitió y cuántas «concluyó», pero no separan las que concluyó por turnarlas a otra autoridad '
+     '(art. 199, fr. I de la LGEEPA) de las que investigó y resolvió, ni dicen por qué causa del art. 199 se cerró cada una ni cuánto tardó. La plataforma deriva la '
+     'parte investigada con la resta concluidas − no admitidas, que solo vale si las turnadas cuentan como concluidas. La PROFEPA lleva cada expediente en su sistema '
+     'de atención a denuncias y no lo publica.',
+     'Procuraduría Federal de Protección al Ambiente (PROFEPA): tiene el registro y no lo publica', 'https://www.gob.mx/profepa/articulos/informes-de-actividades-360477', 'Informes de Actividades (PROFEPA)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-justicia-ambiental-denuncias.html', 'Datos · Justicia ambiental · Tus denuncias ante la PROFEPA')]),
+    ('ambiente-profepa-rezago', 'Medio ambiente', 'Cuántos procedimientos de inspección de la PROFEPA quedaron sin resolver al cierre de 2024',
+     'El Informe 2023 dio el rezago: 11,179 procedimientos de 2019 a 2023 sin resolver. El Informe 2024 solo da los que concluyó (6,957: 2,011 de ese año y 4,946 de '
+     'años anteriores), no cuántos quedaron pendientes. Con los dos informes se deriva una cota mínima de los de años anteriores; la cifra exacta, con los de 2024, la debe la PROFEPA.',
+     'Procuraduría Federal de Protección al Ambiente (PROFEPA): tiene el registro y no lo publica', 'https://www.gob.mx/profepa/articulos/informes-de-actividades-360477', 'Informes de Actividades (PROFEPA)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-justicia-ambiental-rezago.html', 'Datos · Justicia ambiental · Expedientes, multas y la Fiscalía')]),
+    ('ambiente-multas-cobradas', 'Medio ambiente', 'Cuánto se cobró de las multas que impuso la PROFEPA',
+     'El Informe 2024 dice que en la inspección industrial se impusieron 325 multas por $925.88 millones, pero no cuánto se pagó, cuánto se impugnó ni cuánto se conmutó '
+     'por inversión ambiental (art. 173 de la LGEEPA). Solo da una ampliación de $291.77 millones por ingresos excedentes de multas y derechos juntos. Falta de transparencia de la PROFEPA.',
+     'Procuraduría Federal de Protección al Ambiente (PROFEPA): tiene el registro y no lo publica', 'https://www.gob.mx/profepa/articulos/informes-de-actividades-360477', 'Informes de Actividades (PROFEPA)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-justicia-ambiental-rezago.html', 'Datos · Justicia ambiental · Expedientes, multas y la Fiscalía')]),
+    ('ambiente-profepa-fgr', 'Medio ambiente', 'En qué terminaron las denuncias de la PROFEPA ante la Fiscalía General de la República',
+     'La PROFEPA presentó 814 denuncias, querellas y coadyuvancias ante la FGR en 2023 y 709 en 2024. Sus informes no dicen cuántas se judicializaron ni cuántas terminaron '
+     'en sentencia, y la plataforma no encontró un documento de la FGR que lo diga. La PROFEPA, como víctima u ofendida en esos casos, conoce su avance.',
+     'PROFEPA: es parte en esos casos y no publica su resultado', 'https://www.gob.mx/profepa/articulos/informes-de-actividades-360477', 'Informes de Actividades (PROFEPA)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-justicia-ambiental-rezago.html', 'Datos · Justicia ambiental · Expedientes, multas y la Fiscalía')]),
+    ('ambiente-profepa-informe-2025', 'Medio ambiente', 'El Informe de Actividades 2025 de la PROFEPA',
+     'El archivo del Informe 2024 se generó en agosto de 2025. Al 28-10-2026, la página de gob.mx titulada «Informe de Actividades 2025» de la PROFEPA trae el informe anual de su Comité '
+     'de Ética, no el de la Procuraduría, así que las cifras de la plataforma llegan a 2024.',
+     'Procuraduría Federal de Protección al Ambiente (PROFEPA): no lo encontramos publicado', 'https://www.gob.mx/profepa/articulos/informes-de-actividades-360477', 'Informes de Actividades (PROFEPA)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-justicia-ambiental-denuncias.html', 'Datos · Justicia ambiental · Tus denuncias ante la PROFEPA')]),
     # «Documentar para sancionar», el informe especial de la ASF (27-10-2026).
     ('asf-sanciones-efectividad', 'Fiscalización', 'Cuántas observaciones de la ASF terminan en una sanción firme',
      'El artículo 38 de la Ley de Fiscalización y Rendición de Cuentas de la Federación manda que el informe semestral de la ASF dé «las sanciones que al efecto hayan '

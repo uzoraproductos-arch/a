@@ -401,7 +401,9 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   él, y el «dinero por asunto» se dice como derivado, nunca como costo de un juicio**. La salud pública
   (IMSS, ISSSTE, IMSS-Bienestar), con el mismo molde, por `herramientas/gestion_salud.py`
   (tarjeta «Salud pública» de Datos y `D.sal` del chat); **lo que una institución anuncia se
-  coteja contra lo que registra su propio documento estadístico**. Los dos Poderes viven además en la
+  coteja contra lo que registra su propio documento estadístico**. La justicia ambiental (PROFEPA:
+  denuncias, rezago, multas y la Fiscalía), igual, por `herramientas/gestion_ambiental.py` (tarjeta
+  «Justicia ambiental» de Datos y `D.amg` del chat), cotejada con sus Informes de Actividades y la LGEEPA. Los dos Poderes viven además en la
   pestaña Datos (`datos-poder-legislativo.html`, `datos-poder-judicial.html`),
   una página por grupo de temas, armadas con el mismo texto del bot
   (`PAGINAS` de cada módulo).

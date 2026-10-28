@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 233 |
+| Páginas revisadas | 236 |
 | Páginas que solo redirigen | 28 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -75,11 +75,14 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-judicial-presupuesto.html` | El presupuesto · Auditavisión | apartados.py | 43 | 0 | 6 | 5 | 1 |
 | `datos-judicial-sueldos.html` | Sueldos y el tope del 127 · Auditavisión | apartados.py | 41 | 0 | 7 | 2 | 0 |
 | `datos-judicial-suprema-corte.html` | La Suprema Corte · Auditavisión | apartados.py | 41 | 0 | 10 | 1 | 0 |
+| `datos-justicia-ambiental-denuncias.html` | Tus denuncias ante la PROFEPA · Auditavisión | apartados.py | 36 | 0 | 18 | 5 | 3 |
+| `datos-justicia-ambiental-rezago.html` | Expedientes, multas y la Fiscalía · Auditavisión | apartados.py | 36 | 0 | 14 | 4 | 3 |
+| `datos-justicia-ambiental.html` | Justicia ambiental · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `datos-legislativo-calendario.html` | Sesiones, presupuesto y reformas · Auditavisión | apartados.py | 39 | 0 | 5 | 0 | 0 |
 | `datos-legislativo-camaras.html` | Las Cámaras · Auditavisión | apartados.py | 40 | 0 | 13 | 5 | 0 |
 | `datos-legislativo-elecciones.html` | Las elecciones · Auditavisión | apartados.py | 41 | 0 | 19 | 6 | 1 |
 | `datos-legislativo-estados.html` | Congresos locales y ayuntamientos · Auditavisión | apartados.py | 37 | 0 | 5 | 0 | 0 |
-| `datos-medio-ambiente.html` | Medio ambiente · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
+| `datos-medio-ambiente.html` | Medio ambiente · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 0 |
 | `datos-municipios.html` | Base de Datos Municipal EFIPEM (INEGI) · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `datos-poder-judicial.html` | Poder Judicial · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `datos-poder-legislativo.html` | Poder Legislativo · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
@@ -87,7 +90,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-salud-publica.html` | Salud pública · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `datos-salud-sistema.html` | Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE · Auditavisión | apartados.py | 36 | 0 | 4 | 0 | 2 |
 | `derecho-de-replica.html` | Derecho de réplica · Auditavisión | apartados.py | 30 | 0 | 1 | 0 | 1 |
-| `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
+| `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
 | `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `donaciones.html` | Donaciones · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `enciclopedia-auditavision.html` | Enciclopedia · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
@@ -157,7 +160,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 41 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 32 | 0 | 1 | 1 | 1 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 57 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 234 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 237 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
 | `informes-documentar-para-sancionar.html` | Informe especial: Documentar para sancionar · Auditavisión | apartados.py | 43 | 0 | 40 | 8 | 2 |
@@ -231,7 +234,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 166 | 0 | 0 | 0 | 76 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 176 | 0 | 0 | 0 | 81 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 35 | 0 | 1 | 0 | 0 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
@@ -299,7 +302,7 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-75 fichas, cada una con su porqué, su responsable y su enlace oficial.
+80 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 

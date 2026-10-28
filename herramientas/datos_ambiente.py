@@ -67,7 +67,8 @@ ANCLAS = {'abBasura': 'basura', 'abProteger': 'proteger', 'abPresupuesto': 'pres
 
 ENTRADA = ('El deterioro del ambiente también es gasto público: lo pagamos en agua, aire, suelo y basura. Aquí están las cifras '
            'de referencia, cada una con su documento: cuánto le cuesta al país el daño, cuánto se gasta en protegerlo, a dónde '
-           'va la basura, cuánto recibe el sector ambiental y qué dicen las leyes. Para hacer tus propias cuentas, '
+           'va la basura, cuánto recibe el sector ambiental y qué dicen las leyes. Lo que resuelve la PROFEPA con su dinero (denuncias, rezago y multas) '
+           'está en <a href="datos-justicia-ambiental.html">Justicia ambiental</a>. Para hacer tus propias cuentas, '
            've a la herramienta <a href="%s">Costo Ambiental</a>.' % HERRAMIENTA)
 
 HACER = ('<p class="apartado-nota">🧮 ¿Quieres hacer tus cuentas? En la herramienta <a href="%s">Costo Ambiental</a> '

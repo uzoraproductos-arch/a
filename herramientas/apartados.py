@@ -586,6 +586,13 @@ APARTADOS = [
                 'pagina': 'datos-salud-publica.html',
                 'pestana': ('🏥', 'Salud pública', 'Lo que cuesta y lo que resuelve el IMSS, el ISSSTE y el IMSS-Bienestar: abre su página'),
             },
+            {
+                # Justicia ambiental (28-10-2026): la auditoría de gestión de
+                # la PROFEPA (gestion_ambiental.py).
+                'id': 'justicia-ambiental',
+                'pagina': 'datos-justicia-ambiental.html',
+                'pestana': ('🌳', 'Justicia ambiental', 'Lo que cuesta y lo que resuelve la PROFEPA: denuncias, rezago y multas: abre su página'),
+            },
             # El Estado de cuenta administrativo fue la cuarta tarjeta de Datos
             # del 12-10-2026 al 22-10-2026; desde entonces (pedido del autor)
             # es la quinta aplicacion de la Calculadora Civica. Su ancla vieja
@@ -1254,6 +1261,7 @@ def poderes_paginas(base):
     import asistente_legislativo as al
     import asistente_judicial as aj
     import gestion_salud as gs
+    import gestion_ambiental as ga
     paginas = []
     poderes = [
         (al, '🏛️', 'Curules, escaños, sesiones, el calendario del presupuesto y las elecciones de 2027',
@@ -1272,6 +1280,12 @@ def poderes_paginas(base):
          'de Salud. Lo que anuncian las instituciones se coteja contra lo que registran, y lo que nadie ha publicado va con su ficha en el Registro de pendientes. '
          'Cada tarjeta abre su propia página.',
          lambda temas: gs.secciones(base, temas), gs.PRE),
+        # Justicia ambiental (28-10-2026): la PROFEPA con el mismo molde.
+        (ga, '🌳', 'Lo que cuesta y lo que resuelve la PROFEPA: denuncias, rezago, multas y la Fiscalía',
+         'Cuánto dinero ejerce la Procuraduría Federal de Protección al Ambiente y lo que resuelve con él, con sus Informes de Actividades 2022 a 2024 y la LGEEPA. '
+         'Lo que dice su informe se coteja contra sus propias tablas, y lo que no publica va con su ficha en el Registro de pendientes. '
+         'Cada tarjeta abre su propia página.',
+         lambda temas: ga.secciones(base, temas), ga.PRE),
     ]
     for mod, ico, lema, entrada, secc, pre in poderes:
         partes = [(x[0], x[0], x[1], x[2]) for x in mod.PAGINAS]
@@ -5362,7 +5376,7 @@ def _hijas(base, ref):
     23-10-2026): sin ellas, el indice se quedaba en las portadas. Salen de las
     mismas listas que arman cada pagina, asi que una nueva aparece sola."""
     import estado_cuenta, presupuesto_modulos, cc_ticket, insp_asf, datos_ambiente, asistente
-    import asistente_legislativo as al, asistente_judicial as aj, gestion_salud as gs
+    import asistente_legislativo as al, asistente_judicial as aj, gestion_salud as gs, gestion_ambiental as ga
     limpio = lambda t: re.sub('<[^>]+>', '', t)
     return {
         estado_cuenta.ARCHIVO: [(p['archivo'], limpio(p.get('menu') or p['titulo'])) for p in estado_cuenta.construir()[0]
@@ -5376,6 +5390,7 @@ def _hijas(base, ref):
         al.PORTADA: [(x[0], x[2]) for x in al.PAGINAS],
         aj.PORTADA: [(x[0], x[2]) for x in aj.PAGINAS],
         gs.PORTADA: [(x[0], x[2]) for x in gs.PAGINAS],
+        ga.PORTADA: [(x[0], x[2]) for x in ga.PAGINAS],
     }
 
 

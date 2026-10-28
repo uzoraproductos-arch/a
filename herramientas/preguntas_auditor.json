@@ -766,6 +766,38 @@
   {
    "q": "¿Cuántas consultas da el ISSSTE?",
    "ir": "datos-salud-sistema.html#sal-issste"
+  },
+  {
+   "q": "¿Cuántas denuncias resuelve la PROFEPA?",
+   "ir": "datos-justicia-ambiental-denuncias.html#amg-denuncias"
+  },
+  {
+   "q": "¿Cuánto tarda la PROFEPA en atender una denuncia?",
+   "ir": "datos-justicia-ambiental-denuncias.html#amg-plazos"
+  },
+  {
+   "q": "¿Cuánto cuesta la PROFEPA?",
+   "ir": "datos-justicia-ambiental-denuncias.html#amg-dinero"
+  },
+  {
+   "q": "¿Cuánto rezago tiene la PROFEPA?",
+   "ir": "datos-justicia-ambiental-rezago.html#amg-rezago"
+  },
+  {
+   "q": "¿Cuánto multa la PROFEPA?",
+   "ir": "datos-justicia-ambiental-rezago.html#amg-multas"
+  },
+  {
+   "q": "¿Cuántas denuncias presentó la PROFEPA ante la FGR?",
+   "ir": "datos-justicia-ambiental-rezago.html#amg-multas"
+  },
+  {
+   "q": "¿Es cierto que la PROFEPA resolvió el 99.5 % del rezago?",
+   "ir": "datos-justicia-ambiental-rezago.html#amg-cotejo"
+  },
+  {
+   "q": "¿Cuánto presupuesto tiene la PROFEPA?",
+   "ir": "datos-ambiente-presupuesto.html"
   }
  ]
 }

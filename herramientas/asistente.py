@@ -468,10 +468,11 @@ def _charla(d):
     import informe_sancion
     # Salud pública, auditoría de gestión (27-10-2026): IMSS, ISSSTE e IMSS-Bienestar.
     import gestion_salud
+    import gestion_ambiental
     return {'nota': nota, 'met': met, 'edo': edo, 'cargos': cargos, 'smin': smin, 'adm': adm, 'admet': admet, 'expide': EXPIDE,
             'mapa': 'numeros-mapa-del-gasto-federalizado.html', 'num': num, 'datos': asistente_datos.datos(d, num, D),
             'leg': asistente_legislativo.legislativo(), 'jud': asistente_judicial.judicial(d),
-            'san': informe_sancion.bot(), 'sal': gestion_salud.salud(d)}
+            'san': informe_sancion.bot(), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d)}
 
 
 def _inspector():

@@ -1167,6 +1167,22 @@
       return salTema('imss_servicios');
     }
 
+    /* La PROFEPA: lo que cuesta y lo que resuelve (gestion_ambiental.py). Su presupuesto 2026 lo sigue contestando el bloque ambiental. */
+    var AMG = D.amg || null;
+    function amgTema(k) { var x = AMG.t[k]; return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug }; }
+    function amgResp(t) {
+      if (!AMG) return null;
+      var ent = /profepa|procuraduria federal de proteccion al ambiente|denuncias? (popular|populares|ambiental|ambientales)\b|justicia ambiental|delitos? (ambiental|ambientales|contra el ambiente)/;
+      if (!ent.test(t)) return null;
+      if (/tarda|plazo|cuanto tiempo|dias\b|demora/.test(t)) return amgTema('plazos');
+      if (/cuadra|errata|87|informe dice|recursos? de revision|legalidad|99 5/.test(t)) return amgTema('cotejo');
+      if (/multa|sancion|clausur|fiscalia|fgr|querella|cobr|delito/.test(t)) return amgTema('multas');
+      if (/rezago|acumul|procedimiento|pendientes? de resolver|sin resolver/.test(t)) return amgTema('rezago');
+      if (/denuncia|queja|resuelv|resolvi|atiend|atendi|conclu|investig|admit|turna/.test(t)) return amgTema('denuncias');
+      if (/cuesta|gasta|gasto|ejerci|sueldo|dinero en que/.test(t)) return amgTema('dinero');
+      return null;
+    }
+
     function lista69(t) {
       var pag = B.fichas.filter(function (f) { return f.t === 'pagina' && f.ir && f.ir[0] === 'herramienta-inspector-efos.html'; })[0];
       var d = (DT.desc || []).filter(function (x) { return /69-B/.test(x.n); })[0];
@@ -1293,6 +1309,8 @@
       /* «¿Es cierto que el IMSS hizo 1.78 millones de cirugías?»: el cotejo de salud, antes del verificador general. */
       var rsal = salResp(t);
       if (rsal) return fin(rsal, { tipo: 'sal' });
+      var ramg = amgResp(t);
+      if (ramg) return fin(ramg, { tipo: 'amg' });
       if (!crudo && (PIDE_VER.test(t) || LIGA.test(q) || (q.length > 160 && /\d/.test(q) && /peso|millon|billon|mdp/.test(t)))) {
         var vr = verifica(q, t);
         return vr.listo ? vr : fin(vr, { tipo: vr.plat || vr.sinDato || vr.pasa ? '' : 'ver' });
@@ -1593,6 +1611,7 @@
       juzga: function (claim, val) { var d = cifraDicha(norm(claim).replace(/[¿?¡!]/g, ' ')), j = d && juzgaDicho(d, val); return j ? { dicho: d, v: j } : null; },
       /* Salud pública antes que Verificamos: «¿es cierto que el IMSS hizo 1.78 millones de cirugías?» es un cotejo de salud (27-10-2026). */
       salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
+      ambiente: function (q) { var r = amgResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'amg' }); },
       deFicha: deFicha, deDonde: deDonde, olvida: function () { ctx = {}; }, ctx: function () { return ctx; }
 
     };
