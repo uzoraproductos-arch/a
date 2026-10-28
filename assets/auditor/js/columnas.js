@@ -40,6 +40,141 @@
   var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
  {
+  "id": "isssteson-oxigeno-pensiones-fallecidos",
+  "seccion": "Verificado",
+  "icono": "🔎",
+  "titulo": "ISSSTESON: oxígeno pagado a un paciente fallecido y pensiones a personas muertas. ¿Dónde está el dinero?",
+  "balazo": "Las cifras de la nota constan en la auditoría del ISAF al ISSSTESON del primer semestre de 2025. Pero el mismo informe responde dónde está el dinero: de los $2,990,499 en pensiones, $2,458,447 eran cheques que se cancelaron sin cobrarse, $158,619 ya se recuperaron y faltan $373,438 por devolver. Del oxígeno, los $158,400 siguen sin comprobarse.",
+  "circula": {
+   "red": "Nota informativa que circula en prensa y redes",
+   "cuenta": "Texto que nos compartiste; el buscador lo ubica en Meganoticias («Las cuentas oscuras del Isssteson…»), que no abre desde la plataforma",
+   "fecha": "28 de octubre de 2026 (día en que llegó al Auditor)",
+   "texto": "¿Dónde está todo este dinero? No hallan si los beneficiados, como bien comentaban, por segundo año consecutivo en la compra de oxígeno a domicilio, pues no pudieron acreditarse la entrega a pacientes por más de 150,000 pesos y volvieron a pagar el oxígeno de un paciente que ya había fallecido el 9 de mayo de 2024. Además, pagaron 2,990,499 pesos en pensiones y jubilaciones a personas que ya estaban muertas según las actas de defunción por el Registro Civil. Morena nos lleva a la justicia social hasta la tumba."
+  },
+  "cuerpo": [
+   "La nota no habla de la Auditoría Superior de la Federación: sus cifras vienen del Instituto Superior de Auditoría y Fiscalización de Sonora (ISAF), que revisa las cuentas del gobierno del estado. El informe es el 2025AE0109010005, la auditoría integral al segundo trimestre de 2025 (lo acumulado de enero a junio) del Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado de Sonora (ISSSTESON), que da salud y pensiones a la burocracia estatal. Se notificó en marzo de 2026. En ese semestre el Instituto gastó (devengó) $6,322.4 millones, y el ISAF revisó el 86 %.",
+   "El oxígeno. En diciembre de 2024 el ISSSTESON compró oxígeno a domicilio para 121 pacientes a Biosistemas y Seguridad Privada, S.A. de C.V., y lo pagó el 14 de marzo de 2025: $173,792. Solo $15,392 tenían el vale con que el Departamento de Servicios Generales autoriza cada entrega, así que $158,400 no se pudieron comprobar. En esa factura venía un paciente que murió el 9 de mayo de 2024, siete meses antes. Además, el gasto de 2024 se cargó al presupuesto de 2025 y se respaldó con un contrato que empezó a valer el 1 de enero de 2025 (observación 2025AE005FN0072, pp. 26 a 30 del informe).",
+   "Sí es la segunda vez. En la auditoría del mismo semestre de 2024 (informe 2024AE0109010012), el ISAF ya había encontrado $358,643 de oxígeno de enero a abril de 2024 sin vale y tres pacientes cobrados después de morir. El proveedor ofreció entonces una nota de crédito, y el ISSSTESON prometió revisar cada mes la lista de defunciones. El ISAF la llama falla «recurrente».",
+   "Las pensiones. El ISAF cruzó la nómina con la plataforma del Registro Civil de Sonora y encontró 138 pagos, de enero a junio de 2025, a 129 pensiones de personas que ya habían muerto: $2,990,499 (observación 2025AE005FN0145, pp. 67 a 74). La mayoría fueron del mes siguiente a la muerte (126 de los 138 pagos), cuando la baja todavía no llegaba a la nómina. Pero no todos: una pensión se siguió pagando seis meses de 2025 a una persona que murió en abril de 2020.",
+   "¿Dónde está el dinero? El propio informe lo cuenta. 114 de esos pagos eran cheques que nunca se cobraron y se cancelaron: $2,458,447. El banco revirtió 4 depósitos ($79,086) y 4 más se descontaron de los gastos de funeral o del pago póstumo a la familia ($79,533). Faltan $373,438, de 18 pagos, que el ISSSTESON debe devolver a su cuenta. Ni esto ni lo del oxígeno se ha solventado: si no se aclara, el ISAF lo turna a la autoridad que determina responsabilidades. Una observación no es una condena (Constitución, art. 20, apartado B, fr. I).",
+   "Una nota de método: la nota de prensa no abrió desde la plataforma; su texto es el que nos compartiste. Los dos informes del ISAF se leyeron completos. Las cuentas «126 de 138» y la de la pensión de 2020 son nuestras, de la tabla del informe: van como derivadas. Los números de pensión y de afiliación no se publican."
+  ],
+  "dato_curioso": "Una pensión del ISSSTESON se pagó seis veces en 2025 (de enero a junio, $83,435 en total) a una persona que, según el Registro Civil, murió el 22 de abril de 2020.",
+  "cifras": [
+   {
+    "valor": "$2,990,499",
+    "etq": "Pensiones y jubilaciones pagadas de enero a junio de 2025 después de la fecha de defunción (138 pagos)",
+    "estado": "oficial",
+    "fuente": "ISAF, informe 2025AE0109010005, observación 2025AE005FN0145",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   },
+   {
+    "valor": "$373,438",
+    "etq": "Lo que el ISSSTESON aún debe devolver de esos pagos (18 pagos); el resto eran cheques cancelados ($2,458,447) o ya se recuperó ($158,619)",
+    "estado": "oficial",
+    "fuente": "ISAF, informe 2025AE0109010005, pp. 70 a 74",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   },
+   {
+    "valor": "$158,400",
+    "etq": "Oxígeno a domicilio de diciembre de 2024 pagado sin vale que compruebe la entrega (de $173,792 facturados)",
+    "estado": "oficial",
+    "fuente": "ISAF, informe 2025AE0109010005, observación 2025AE005FN0072",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   },
+   {
+    "valor": "126 de 138",
+    "etq": "Pagos de pensión que fueron del mes siguiente a la muerte. Operación: mes del pago menos mes de la defunción, renglón por renglón de la tabla del ISAF",
+    "estado": "derivado",
+    "fuente": "Cálculo con la tabla de la observación 2025AE005FN0145",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "Por segundo año consecutivo, en la compra de oxígeno a domicilio no pudieron acreditar la entrega a pacientes por más de 150,000 pesos.",
+    "res": "consta",
+    "explica": "$158,400 sin vale de autorización en la factura de diciembre de 2024 (pagada en marzo de 2025). El ISAF lo marca como recurrente: en 2024 fueron $358,643 de enero a abril.",
+    "fuente": "ISAF, informes 2025AE0109010005 (pp. 26 a 30) y 2024AE0109010012 (pp. 33 a 40)",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   },
+   {
+    "dice": "Volvieron a pagar el oxígeno de un paciente que ya había fallecido el 9 de mayo de 2024.",
+    "res": "consta",
+    "explica": "El ISAF lo dice así: se pagó el oxígeno de diciembre de 2024 a un paciente que murió el 9 de mayo de 2024. «Volvieron» también consta: en 2024 fueron tres pacientes.",
+    "fuente": "ISAF, informe 2025AE0109010005, observación 2025AE005FN0072, inciso b",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   },
+   {
+    "dice": "Pagaron 2,990,499 pesos en pensiones y jubilaciones a personas que ya estaban muertas según las actas del Registro Civil.",
+    "res": "matiz",
+    "explica": "La cifra consta, cotejada contra la plataforma del Registro Civil de Sonora. El matiz: $2,458,447 eran cheques que nunca se cobraron y se cancelaron, y $158,619 ya se recuperaron. Lo que salió y no ha vuelto son $373,438. Y 126 de los 138 pagos fueron del mes siguiente a la muerte: falla de control, no necesariamente un desvío.",
+    "fuente": "ISAF, informe 2025AE0109010005, observación 2025AE005FN0145, pp. 67 a 74",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   },
+   {
+    "dice": "¿Dónde está todo este dinero?",
+    "res": "matiz",
+    "explica": "El informe responde casi todo: $2,458,447 no salieron (cheques cancelados), $79,086 los devolvió el banco y $79,533 se descontaron de gastos de funeral y pagos póstumos. Lo que falta: $373,438 de pensiones y los $158,400 del oxígeno, que el ISAF pide devolver con intereses si no se comprueban.",
+    "fuente": "ISAF, informe 2025AE0109010005",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   },
+   {
+    "dice": "Ya se devolvieron los $373,438 de pensiones y los $158,400 del oxígeno.",
+    "res": "pendiente",
+    "explica": "Al cierre del informe (marzo de 2026) las dos observaciones seguían sin solventar. No hemos encontrado el seguimiento publicado.",
+    "fuente": "ISAF, informes de Cuenta Pública",
+    "url": "https://isaf.gob.mx/informes/cuenta-publica",
+    "quien": "Le toca al ISSSTESON acreditar ante el ISAF el reintegro y la cancelación del gasto (Ley de Fiscalización Superior para el Estado de Sonora, art. 50). Falta de la plataforma: no hemos encontrado publicado el seguimiento posterior al informe de marzo de 2026",
+    "donde": "https://isaf.gob.mx/informes/cuenta-publica"
+   },
+   {
+    "dice": "Morena nos lleva a la justicia social hasta la tumba.",
+    "res": "matiz",
+    "explica": "Es una opinión política, no una cifra: no se coteja. El informe no habla de partidos: observa a una institución, el ISSSTESON, y si hay responsables los determina la autoridad, persona por persona.",
+    "fuente": "ISAF, informe 2025AE0109010005",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "El seguimiento del ISAF: si el ISSSTESON devolvió los $373,438 de pensiones y los $158,400 del oxígeno, o si se turnó a la autoridad",
+    "url": "https://isaf.gob.mx/informes/cuenta-publica"
+   },
+   {
+    "que": "La auditoría del ISAF a la Cuenta Pública 2025 completa del ISSSTESON (el segundo semestre)",
+    "url": "https://isaf.gob.mx/informes/cuenta-publica"
+   },
+   {
+    "que": "Si se aplicó la nota de crédito que ofreció el proveedor en 2025 por los pacientes fallecidos de 2024",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/22455"
+   },
+   {
+    "que": "Los contratos federales de Biosistemas y Seguridad Privada en ComprasMX (31 en 2025, sobre todo con el IMSS y el IMSS-Bienestar)",
+    "url": "contratos-publicos.html"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "ISAF, Informe individual de la auditoría integral 2025AE0109010005 al ISSSTESON, segundo trimestre de 2025 (notificado en marzo de 2026)",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   },
+   {
+    "nombre": "ISAF, Informe individual de la auditoría integral 2024AE0109010012 al ISSSTESON, segundo trimestre de 2024 (notificado en marzo de 2025)",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/22455"
+   },
+   {
+    "nombre": "ISAF, informes de Cuenta Pública",
+    "url": "https://isaf.gob.mx/informes/cuenta-publica"
+   },
+   {
+    "nombre": "Meganoticias, «Las cuentas oscuras del Isssteson, millones bajo sospecha y servicios en decadencia» (prensa, punto de partida)",
+    "url": "https://www.meganoticias.mx/obregon-navojoa/noticia/las-cuentas-oscuras-del-isssteson-millones-bajo-sospecha-y-servicios-en-decadencia/782781"
+   }
+  ],
+  "actualizado": "28 de octubre de 2026"
+ },
+ {
   "id": "ine-oic-auditorias-consejerias",
   "seccion": "Verificado",
   "icono": "🔎",

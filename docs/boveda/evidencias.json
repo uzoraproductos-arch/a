@@ -672,6 +672,30 @@
    "estado": "no abrió",
    "error": "Forbidden"
   },
+  "https://sigas.isaf.gob.mx/api/File/Informe/22455": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [],
+   "consultado": "2026-10-28",
+   "estado": "copiado",
+   "sha256": "08f505d9f345ae33de81699e3f8abb71d3422be4d84d6a81ff3044e8778bf45d",
+   "bytes": 3715648,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-28"
+  },
+  "https://sigas.isaf.gob.mx/api/File/Informe/24290": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [],
+   "consultado": "2026-10-28",
+   "estado": "copiado",
+   "sha256": "a74aa480028a17f3e408df3c11465e596de99b55645904717ab81f83d03c9e22",
+   "bytes": 3051448,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-28"
+  },
   "https://sil.gobernacion.gob.mx/Librerias/pp_PerfilLegislador.php?Referencia=9228910": {
    "primera_vez": "2026-10-27",
    "historial": [],

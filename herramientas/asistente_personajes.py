@@ -89,6 +89,7 @@ PERSONAJES = [
 EMPRESAS = [
     ('cyber-robotic', 'Cyber Robotic Solutions, S.A. de C.V.', ['cyber robotic', 'cyber robotics'], False),
     ('cajas-graf', 'Cajas Graf, S.A. de C.V.', ['cajas graf', 'cajas graff'], False),
+    ('biosistemas', 'Biosistemas y Seguridad Privada, S.A. de C.V.', ['biosistemas', 'biosistemas y seguridad privada'], False),
     ('amigo-gnl', 'AMIGO LNG (American Mexican Integrated Gas Operations)', ['amigo lng', 'amigo gnl', 'american mexican integrated', 'proyecto amigo', 'epcilon', 'epcilon lng'], False),
 ]
 

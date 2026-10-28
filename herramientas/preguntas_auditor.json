@@ -814,6 +814,28 @@
   {
    "q": "¿Cuánta confianza hay en el INE?",
    "ir": "noticias-relevantes.html#col-ine-oic-auditorias-consejerias"
+  },
+  {
+   "q": "¿El ISSSTESON pagó pensiones a muertos?",
+   "ir": "noticias-relevantes.html#col-isssteson-oxigeno-pensiones-fallecidos",
+   "dice": [
+    "$373,438"
+   ]
+  },
+  {
+   "q": "¿Dónde está el dinero de las pensiones pagadas a personas fallecidas en Sonora?",
+   "ir": "noticias-relevantes.html#col-isssteson-oxigeno-pensiones-fallecidos"
+  },
+  {
+   "q": "oxígeno a domicilio a un paciente fallecido",
+   "ir": "noticias-relevantes.html#col-isssteson-oxigeno-pensiones-fallecidos",
+   "dice": [
+    "$158,400"
+   ]
+  },
+  {
+   "q": "Biosistemas y Seguridad Privada",
+   "ir": "noticias-relevantes.html#col-isssteson-oxigeno-pensiones-fallecidos"
   }
  ]
 }

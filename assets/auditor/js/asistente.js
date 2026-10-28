@@ -1738,6 +1738,13 @@
       var fc = F.filter(function (x) { return x.ir && x.ir[0] === 'noticias-relevantes.html#col-ine-oic-auditorias-consejerias'; })[0];
       if (fc && charla) { var rc = charla.deFicha(fc); rc.sug = ['¿El órgano interno de control puede auditar a los consejeros del INE?', '¿Cuánto gasta el INE?']; return rc; }
     }
+    /* Pensiones u oxígeno pagados a personas fallecidas en Sonora: la auditoría del
+       ISAF al ISSSTESON vive en su columna de Verificamos (28-10-2026); sin esto,
+       «Sonora» llevaba a la ficha del estado. */
+    if (/ (pension\w*|jubilacion\w*|jubilad\w*|oxigeno) /.test(p) && / (fallecid\w*|muert\w*|difunt\w*|finad\w*|defuncion\w*) /.test(p) && / (sonora|isssteson|isaf) /.test(p)) {
+      var fs = F.filter(function (x) { return x.ir && x.ir[0] === 'noticias-relevantes.html#col-isssteson-oxigeno-pensiones-fallecidos'; })[0];
+      if (fs && charla) { var rs = charla.deFicha(fs); rs.sug = ['¿Cuánto debe Sonora?', 'Biosistemas y Seguridad Privada']; return rs; }
+    }
     /* La deuda de Pemex no la tiene la plataforma: se dice, con su pendiente,
        en vez de contestar con su presupuesto (27-10-2026). */
     if (/ pemex /.test(p) && (/ (debe|adeuda|deuda|endeudamiento|pasivos?) /.test(p)) && !/ (intereses|costo financiero|paga) /.test(p))
