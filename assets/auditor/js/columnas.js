@@ -12,7 +12,7 @@
 (function () {
   'use strict';
 
-  var EDICION = '27 de octubre de 2026';
+  var EDICION = '28 de octubre de 2026';
   var SECCIONES = [
     ['todas', 'Todas'],
     ['Personajes', 'Personajes'],
@@ -39,6 +39,170 @@
      Todas las columnas llevan al pie la liga para pedirla (derecho-de-replica.html). */
   var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
+ {
+  "id": "ine-oic-auditorias-consejerias",
+  "seccion": "Verificado",
+  "icono": "🔎",
+  "titulo": "¿Auditarán también las oficinas de los consejeros del INE? Lo que permite la ley y lo que se denunció en conferencia",
+  "balazo": "Sí: la ley del INE dice que los consejeros son servidores públicos del Instituto y que ninguna área puede negarse a una revisión de su Órgano Interno de Control. Pero ese Órgano depende, en lo administrativo, de la presidencia que tendría que revisar, y lo que se dijo de sueldos, plazas y cuentas bancarias todavía no tiene un solo documento.",
+  "circula": {
+   "red": "Conferencia de prensa de las consejerías del INE",
+   "cuenta": "Pregunta de una persona reportera (versión estenográfica de Central Electoral)",
+   "fecha": "27 de octubre de 2026",
+   "texto": "Y me voy a permitir dar un mensaje a la estructura, porque se tienen que quitar el miedo, el miedo a denunciar y el miedo a decir las cosas como tienen que ser. Por años escuchamos a trabajadores que nos decían lo que estaba pasando y hasta ahora, gracias a Dios, con bien documentado, un periódico logró tener las pruebas para decir lo que estaba pasando en este instituto. Así que yo les digo a los trabajadores que nos pueden estar escuchando que por favor se armen de valor y que si no tienen confianza en las instituciones o en la gente a la que tienen que denunciar aquí en el INE, que se acerquen con nosotros los reporteros, porque vamos a seguir haciendo nuestro trabajo y vamos a seguir denunciando lo que está mal dentro del instituto. Y pregunta concreta para ustedes, consejeros, dicen que se necesitan hacer más auditorías, que el órgano interno de control tiene que deslindar responsabilidades y todo eso. ¿Eso incluye someter a sus oficinas a estas auditorías? Porque sabemos de trabajadores que nos han dicho que les descuentan de su sueldo para quedarse con el dinero, porque nos han dado también ya las cuentas bancarias del órgano interno de control en donde también les rentan las plazas. Y donde hay vocales ejecutivos, vocales distritales y locales, también candidatos a los que han recibido amenazas o que les piden dinero para poder tener audiencias o para poder estar en una lista de candidatos. ¿Hasta ahí le van a entrar? ¿Hasta ahí van a meter a sus oficinas también a las auditorías? Porque si ya se destapó la cloaca, creo que tiene que salir toda la cochinada, porque queremos un INE fuerte y confiable, como hasta hace unos años confiábamos muchos mexicanos en este instituto."
+  },
+  "cuerpo": [
+   "Tras la renuncia anunciada de Guadalupe Taddei, las consejerías del INE dieron una conferencia de prensa. Ahí se preguntó si las auditorías que ellas mismas piden alcanzarán a sus propias oficinas, y se denunciaron descuentos de sueldo, renta de plazas, amenazas y cobros a quienes buscan una audiencia o un lugar en una lista. La pregunta consta en la versión estenográfica que publicó el INE; su texto se tomó del buscador, porque el sitio del INE no abre desde la plataforma.",
+   "¿Pueden auditarse las oficinas de los consejeros? La ley dice que sí. El artículo 478 de la LGIPE cuenta como servidores públicos del Instituto al consejero presidente, a los consejeros del Consejo General, de los consejos locales y distritales, a los vocales ejecutivos y a toda persona con empleo o cargo en el INE. El Órgano Interno de Control fiscaliza los ingresos y egresos del Instituto (art. 487), revisa los recursos «a cargo de las áreas y órganos del Instituto», puede visitar sus sedes y recibe denuncias contra cualquiera de sus servidores públicos (art. 490, incisos a, e, l y m). Y todos los órganos están obligados a permitirle la revisión (art. 492). Lo único que no puede tocar son las decisiones electorales (art. 478, numeral 2).",
+   "Lo que pocas veces se dice: la Constitución adscribe ese Órgano, en lo administrativo, a la presidencia del Consejo General (art. 41, base V, apartado A), la misma oficina que tendría que revisar, y su estructura, personal y recursos los aprueba el Consejo General a propuesta de su titular (LGIPE, art. 487, numeral 5). Su contrapeso es externo: el titular lo designa la Cámara de Diputados con dos terceras partes de los votos y se coordina con la Auditoría Superior de la Federación. El actual, Víctor Hugo Carvente Contreras, fue designado el 10 de diciembre de 2024 (decreto del DOF del 13 de diciembre de 2024) por seis años.",
+   "Lo que se denunció (descuentos de sueldo, plazas rentadas, cuentas bancarias del Órgano, cobros a aspirantes) no tiene todavía ningún documento oficial: es la palabra de quien pregunta, que dice tener testimonios y estados de cuenta. Una acusación no es una condena (Constitución, art. 20, apartado B, fr. I). Si alguien quiere denunciar, la ley le da dos caminos: el propio Órgano Interno de Control (art. 490, inciso l) y, si hay delito, la Fiscalía Especializada en Combate a la Corrupción (art. 487).",
+   "Una nota de método: las páginas del INE y las notas de prensa no abrieron desde la plataforma. La pregunta se tomó tal como la muestra el buscador sobre la versión estenográfica; las leyes, el decreto y la encuesta del INEGI se consultaron completos."
+  ],
+  "dato_curioso": "La confianza en los institutos electorales bajó de 54.7 % en 2023 a 48.1 % en 2025, según la encuesta de calidad gubernamental del INEGI: en 2025, menos de la mitad dijo confiar en ellos.",
+  "cifras": [
+   {
+    "valor": "48.1 %",
+    "etq": "Personas que confían en los institutos electorales (INE y los de los estados) en 2025; 54.7 % en 2023 y 53.1 % en 2021",
+    "estado": "oficial",
+    "fuente": "INEGI, ENCIG 2025 (p. 50) y ENCIG 2023 (p. 212), principales resultados",
+    "url": "https://www.inegi.org.mx/contenidos/programas/encig/2025/doc/encig2025_principales_resultados.pdf"
+   },
+   {
+    "valor": "59.9 %",
+    "etq": "Personas que creen que en los institutos electorales la corrupción es muy frecuente o frecuente (2025)",
+    "estado": "oficial",
+    "fuente": "INEGI, ENCIG 2025, principales resultados, p. 50",
+    "url": "https://www.inegi.org.mx/contenidos/programas/encig/2025/doc/encig2025_principales_resultados.pdf"
+   },
+   {
+    "valor": "10/12/2024",
+    "etq": "Día en que la Cámara de Diputados designó al titular del Órgano Interno de Control del INE, por seis años",
+    "estado": "oficial",
+    "fuente": "Decreto de la Cámara de Diputados, DOF 13-12-2024",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/marjur/marco/Dip_decreto_OIC_INE_13dic24.pdf"
+   },
+   {
+    "valor": "$28,288.0 millones",
+    "etq": "Gasto ejercido del INE en 2025, el dinero que su Órgano Interno de Control debe fiscalizar",
+    "estado": "oficial",
+    "fuente": "SHCP, Cuenta Pública 2025, datos abiertos",
+    "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/BD_Cuenta_Publica/CSV/cuenta_publica_2025_gf_ecd_epe.csv"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "Un periódico logró tener las pruebas para decir lo que estaba pasando en este instituto.",
+    "res": "matiz",
+    "explica": "Hubo reportajes de prensa, y el INE publicó el 24 de octubre de 2026 que la Auditoría Superior abrió una investigación de oficio. Pero lo que publica un medio es punto de partida: ninguna autoridad ha resuelto todavía que haya falta o delito. Lo que consta y lo que no está en la columna sobre la renuncia de Guadalupe Taddei.",
+    "fuente": "INE, Central Electoral, 24-10-2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/24/la-presidencia-del-ine-respalda-la-investigacion-de-la-asf-y-reafirma-su-compromiso-con-el-estado-de-derecho/"
+   },
+   {
+    "dice": "Los consejeros dicen que se necesitan más auditorías y que el Órgano Interno de Control tiene que deslindar responsabilidades.",
+    "res": "consta",
+    "explica": "El 27 de octubre de 2026 las consejerías anunciaron una transición «basada en la colegialidad, la transparencia y la continuidad» y, según el texto que muestra el buscador, acordaron impulsar a través del Órgano Interno de Control la cooperación con las investigaciones.",
+    "fuente": "INE, Central Electoral, 27-10-2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/27/inician-consejerias-electorales-una-transicion-institucional-basada-en-la-colegialidad-la-transparencia-y-la-continuidad-del-ine/"
+   },
+   {
+    "dice": "¿Eso incluye someter a sus oficinas a estas auditorías?",
+    "res": "consta",
+    "explica": "La ley lo permite: los consejeros son servidores públicos del Instituto (LGIPE, art. 478), el Órgano revisa los recursos de todas las áreas y órganos y puede visitar sus sedes (art. 490), y ningún órgano puede negarse (art. 492). No puede revisar decisiones electorales (art. 478, numeral 2). Por juicio político responden ante el Congreso (Constitución, art. 110).",
+    "fuente": "LGIPE, texto vigente (última reforma DOF 02-06-2026), arts. 478, 487, 490 y 492",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGIPE.pdf"
+   },
+   {
+    "dice": "Respuesta de las consejeras y los consejeros a esta pregunta",
+    "res": "pendiente",
+    "explica": "Según la prensa, negaron conocer actos irregulares y dijeron estar dispuestos a colaborar. La versión estenográfica la tiene, pero no la pudimos leer completa: hasta cotejarla, no se cita.",
+    "fuente": "INE, versión estenográfica del 27-10-2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/27/version-estenografica-de-la-conferencia-de-prensa-que-ofrecieron-consejeras-y-consejeros-electorales-a-diversos-medios-de-comunicacion-27-de-octubre-de-2026/",
+    "quien": "Falta de la plataforma: el INE publicó la versión estenográfica en Central Electoral, pero su sitio no abre desde la plataforma; hay que leer la respuesta completa y cotejarla",
+    "donde": "https://centralelectoral.ine.mx/2026/10/27/version-estenografica-de-la-conferencia-de-prensa-que-ofrecieron-consejeras-y-consejeros-electorales-a-diversos-medios-de-comunicacion-27-de-octubre-de-2026/"
+   },
+   {
+    "dice": "A trabajadores les descuentan de su sueldo para quedarse con el dinero.",
+    "res": "no consta",
+    "explica": "No hay documento oficial: es lo que, según quien pregunta, le dijeron trabajadores. Una acusación no es una condena. Si ocurre, lo investiga el Órgano Interno de Control (LGIPE, art. 490, inciso l) y, si es delito, la Fiscalía Especializada en Combate a la Corrupción (art. 487).",
+    "fuente": "Sin documento oficial",
+    "url": ""
+   },
+   {
+    "dice": "Nos han dado las cuentas bancarias del Órgano Interno de Control en donde también les rentan las plazas.",
+    "res": "no consta",
+    "explica": "Las cuentas no se han publicado ni las ha revisado ninguna autoridad que lo haya informado. El Órgano Interno de Control es justo el señalado, así que su investigación no bastaría: su titular responde por la Ley General de Responsabilidades Administrativas (LGIPE, art. 489) y lo designó la Cámara de Diputados.",
+    "fuente": "Sin documento oficial",
+    "url": ""
+   },
+   {
+    "dice": "Vocales ejecutivos, distritales y locales; candidatos amenazados o a los que les piden dinero para tener audiencias o para estar en una lista.",
+    "res": "no consta",
+    "explica": "Sin documento oficial. Según la prensa, se refería a aspirantes a consejerías de los institutos electorales de los estados, que designa el Consejo General del INE (Constitución, art. 116, fr. IV, inciso c, 2o.): de ahí las listas.",
+    "fuente": "Sin documento oficial",
+    "url": ""
+   },
+   {
+    "dice": "Queremos un INE fuerte y confiable, como hasta hace unos años confiábamos muchos mexicanos en este instituto.",
+    "res": "matiz",
+    "explica": "La confianza sí bajó: 53.1 % en 2021, 54.7 % en 2023 y 48.1 % en 2025, según el INEGI. El matiz: la encuesta mide «institutos electorales», el INE junto con los de los estados, no el INE solo.",
+    "fuente": "INEGI, ENCIG 2025, principales resultados, p. 50",
+    "url": "https://www.inegi.org.mx/contenidos/programas/encig/2025/doc/encig2025_principales_resultados.pdf"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "La respuesta completa de las consejerías en la versión estenográfica del 27 de octubre de 2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/27/version-estenografica-de-la-conferencia-de-prensa-que-ofrecieron-consejeras-y-consejeros-electorales-a-diversos-medios-de-comunicacion-27-de-octubre-de-2026/"
+   },
+   {
+    "que": "Los informes semestral y anual del Órgano Interno de Control al Consejo General (LGIPE, art. 489), con lo que investigó y sancionó",
+    "url": "https://www.ine.mx/"
+   },
+   {
+    "que": "Cuánto presupuesto y cuánto personal tiene el Órgano Interno de Control del INE en 2026 (lo aprueba el Consejo General, art. 487)",
+    "url": "https://www.ine.mx/"
+   },
+   {
+    "que": "Los resultados de la Auditoría Superior sobre las contrataciones del INE",
+    "url": "https://www.asf.gob.mx/"
+   },
+   {
+    "que": "El caso que lo originó: la renuncia de Guadalupe Taddei y lo que consta de Cajas Graf",
+    "url": "noticias-relevantes.html#col-taddei-renuncia-ine-contratos"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "INE, Central Electoral: versión estenográfica de la conferencia de prensa de las consejerías (27-10-2026)",
+    "url": "https://centralelectoral.ine.mx/2026/10/27/version-estenografica-de-la-conferencia-de-prensa-que-ofrecieron-consejeras-y-consejeros-electorales-a-diversos-medios-de-comunicacion-27-de-octubre-de-2026/"
+   },
+   {
+    "nombre": "INE, Central Electoral: Inician consejerías electorales una transición institucional (27-10-2026)",
+    "url": "https://centralelectoral.ine.mx/2026/10/27/inician-consejerias-electorales-una-transicion-institucional-basada-en-la-colegialidad-la-transparencia-y-la-continuidad-del-ine/"
+   },
+   {
+    "nombre": "Ley General de Instituciones y Procedimientos Electorales, texto vigente (última reforma DOF 02-06-2026), arts. 478 a 493",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGIPE.pdf"
+   },
+   {
+    "nombre": "Constitución Política, texto vigente (última reforma DOF 07-10-2026), arts. 20, 41, 110 y 116",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+   },
+   {
+    "nombre": "Decreto por el que la Cámara de Diputados designa al titular del Órgano Interno de Control del INE (DOF 13-12-2024)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/marjur/marco/Dip_decreto_OIC_INE_13dic24.pdf"
+   },
+   {
+    "nombre": "INEGI, Encuesta Nacional de Calidad e Impacto Gubernamental 2025, principales resultados",
+    "url": "https://www.inegi.org.mx/contenidos/programas/encig/2025/doc/encig2025_principales_resultados.pdf"
+   },
+   {
+    "nombre": "INEGI, Encuesta Nacional de Calidad e Impacto Gubernamental 2023, principales resultados",
+    "url": "https://www.inegi.org.mx/contenidos/programas/encig/2023/doc/encig2023_principales_resultados.pdf"
+   }
+  ],
+  "actualizado": "28 de octubre de 2026"
+ },
  {
   "id": "ine-contratos-desde-cordova",
   "seccion": "Verificado",

@@ -135,6 +135,17 @@
    "error": "Tunnel connection failed: 403 Forbidden",
    "motivo": "Las páginas del INE no abren desde el entorno de la nube donde se integró la columna; el texto se tomó de Central Electoral tal como lo muestra el buscador (nota de método de la columna, 26-10-2026). Falta copiarla con su huella desde una computadora donde ine.mx abra."
   },
+  "https://centralelectoral.ine.mx/2026/10/27/inician-consejerias-electorales-una-transicion-institucional-basada-en-la-colegialidad-la-transparencia-y-la-continuidad-del-ine/": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "estado": "sin copia",
+   "motivo": "El sitio del INE (Central Electoral) no abre desde la nube de la sesión (el proxy rechaza el túnel). El comunicado del 27-10-2026 se cotejó con el texto que muestra el buscador; se marca para copiar desde una conexión que lo abra.",
+   "consultado": "2026-10-28",
+   "usos": [
+    "cotejo:ine-oic-auditorias-consejerias:1",
+    "fuente:ine-oic-auditorias-consejerias"
+   ]
+  },
   "https://ciep.mx/": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -1721,6 +1732,21 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://www.diputados.gob.mx/LeyesBiblio/marjur/marco/Dip_decreto_OIC_INE_13dic24.pdf": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "cifra:ine-oic-auditorias-consejerias",
+    "fuente:ine-oic-auditorias-consejerias"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "copiado",
+   "sha256": "059597d693993166fb5b3fb3bb0f620f2d2b4703a3bdfd22732223848854fa29",
+   "bytes": 9015,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-28"
+  },
   "https://www.diputados.gob.mx/LeyesBiblio/marjur/marco/Dip_manual_remun_27feb26.pdf": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -3043,6 +3069,36 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://www.inegi.org.mx/contenidos/programas/encig/2023/doc/encig2023_principales_resultados.pdf": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "fuente:ine-oic-auditorias-consejerias"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "copiado",
+   "sha256": "c999ac6385434acb19674641c801820316a3d474f086425454ef1cdaf5d455c5",
+   "bytes": 12296992,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-28"
+  },
+  "https://www.inegi.org.mx/contenidos/programas/encig/2025/doc/encig2025_principales_resultados.pdf": {
+   "primera_vez": "2026-10-28",
+   "historial": [],
+   "usos": [
+    "cifra:ine-oic-auditorias-consejerias",
+    "cotejo:ine-oic-auditorias-consejerias:7",
+    "fuente:ine-oic-auditorias-consejerias"
+   ],
+   "consultado": "2026-10-28",
+   "estado": "copiado",
+   "sha256": "476cf06ee8cb18727f2326c0d80e5f113ca3554a0851f89f3414ab1a03113548",
+   "bytes": 970921,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-10-28"
+  },
   "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/ee/CEEM2024_CP.pdf": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -3427,11 +3483,13 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "biblioteca:ref-shcp-cp2025-datos"
+    "biblioteca:ref-shcp-cp2025-datos",
+    "cifra:ine-oic-auditorias-consejerias"
    ],
-   "consultado": "2026-10-27",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+   "consultado": "2026-10-28",
+   "estado": "sin copia",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)",
+   "motivo": "El servidor manda una cadena de certificados incompleta y desde la nube no se pudo obtener el intermedio YR1. La cifra sale de la base (inspector_federal, cp2025), integrada con este archivo con huella SHA-256 973aab21969233bdfad3c4f87ccd467ab92421ea5c2cd249644c0bf2f7f1d0c0."
   },
   "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/CSV/PEF_2026.csv": {
    "primera_vez": "2026-10-27",

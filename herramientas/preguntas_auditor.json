@@ -798,6 +798,22 @@
   {
    "q": "¿Cuánto presupuesto tiene la PROFEPA?",
    "ir": "datos-ambiente-presupuesto.html"
+  },
+  {
+   "q": "¿Es cierto que el órgano interno de control del INE renta plazas?",
+   "ir": "noticias-relevantes.html#col-ine-oic-auditorias-consejerias"
+  },
+  {
+   "q": "¿El órgano interno de control puede auditar a los consejeros del INE?",
+   "ir": "noticias-relevantes.html#col-ine-oic-auditorias-consejerias"
+  },
+  {
+   "q": "¿Quién es Víctor Hugo Carvente?",
+   "ir": "noticias-relevantes.html#col-ine-oic-auditorias-consejerias"
+  },
+  {
+   "q": "¿Cuánta confianza hay en el INE?",
+   "ir": "noticias-relevantes.html#col-ine-oic-auditorias-consejerias"
   }
  ]
 }

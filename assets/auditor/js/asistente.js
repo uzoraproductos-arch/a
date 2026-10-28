@@ -1732,6 +1732,12 @@
       var fr = F.filter(function (x) { return x.ir && x.ir[0] === 'derecho-de-replica.html'; })[0];
       if (fr && charla) { var rr = charla.deFicha(fr); rr.sug = ['¿Qué es el derecho de réplica?', 'Fe de erratas']; return rr; }
     }
+    /* La confianza en el INE (ENCIG del INEGI) vive en la columna de Verificamos
+       sobre su Órgano Interno de Control (28-10-2026): sin esto, «INE» llevaba a su presupuesto. */
+    if (/ confian\w* /.test(p) && / (ine|instituto nacional electoral|institutos? electorales?) /.test(p)) {
+      var fc = F.filter(function (x) { return x.ir && x.ir[0] === 'noticias-relevantes.html#col-ine-oic-auditorias-consejerias'; })[0];
+      if (fc && charla) { var rc = charla.deFicha(fc); rc.sug = ['¿El órgano interno de control puede auditar a los consejeros del INE?', '¿Cuánto gasta el INE?']; return rc; }
+    }
     /* La deuda de Pemex no la tiene la plataforma: se dice, con su pendiente,
        en vez de contestar con su presupuesto (27-10-2026). */
     if (/ pemex /.test(p) && (/ (debe|adeuda|deuda|endeudamiento|pasivos?) /.test(p)) && !/ (intereses|costo financiero|paga) /.test(p))
