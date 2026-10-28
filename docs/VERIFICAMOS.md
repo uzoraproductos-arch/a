@@ -14,6 +14,14 @@ qué falta, con cada fuente, y el dictamen lo respalda.
 
 ## Los pasos, con cada nota que llegue
 
+0. **Fijar lo que circula, venga como venga.** Una liga, una captura, un
+   video o el audio de un reel sin liga valen igual: lo que se coteja es su
+   **texto**. Si llega como audio o video, se transcribe palabra por palabra
+   en `circula.texto`, y `circula.red` dice el formato («Instagram (audio de
+   un reel)»). Sin liga no se cita a la cuenta que lo publicó ni se le
+   atribuye nombre; con liga, se cita como en cualquier nota de prensa.
+   Que la plataforma no pueda abrir la liga no detiene el cotejo: lo que
+   decide es el documento oficial.
 1. **Separar las afirmaciones.** Cifras, nombres, contratos, fechas y
    frases atribuidas. Las opiniones de quien habla («me da la sensación…»)
    se cotejan solo si afirman un hecho.

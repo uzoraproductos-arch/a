@@ -46,8 +46,8 @@
   "titulo": "ISSSTESON: oxígeno pagado a un paciente fallecido y pensiones a personas muertas. ¿Dónde está el dinero?",
   "balazo": "Las cifras de la nota constan en la auditoría del ISAF al ISSSTESON del primer semestre de 2025. Pero el mismo informe responde dónde está el dinero: de los $2,990,499 en pensiones, $2,458,447 eran cheques que se cancelaron sin cobrarse, $158,619 ya se recuperaron y faltan $373,438 por devolver. Del oxígeno, los $158,400 siguen sin comprobarse.",
   "circula": {
-   "red": "Nota informativa que circula en prensa y redes",
-   "cuenta": "Texto que nos compartiste; el buscador lo ubica en Meganoticias («Las cuentas oscuras del Isssteson…»), que no abre desde la plataforma",
+   "red": "Instagram (audio de un reel)",
+   "cuenta": "Audio de un reel que nos compartiste sin liga; lo que se coteja es su transcripción, abajo",
    "fecha": "28 de octubre de 2026 (día en que llegó al Auditor)",
    "texto": "¿Dónde está todo este dinero? No hallan si los beneficiados, como bien comentaban, por segundo año consecutivo en la compra de oxígeno a domicilio, pues no pudieron acreditarse la entrega a pacientes por más de 150,000 pesos y volvieron a pagar el oxígeno de un paciente que ya había fallecido el 9 de mayo de 2024. Además, pagaron 2,990,499 pesos en pensiones y jubilaciones a personas que ya estaban muertas según las actas de defunción por el Registro Civil. Morena nos lleva a la justicia social hasta la tumba."
   },
@@ -57,7 +57,7 @@
    "Sí es la segunda vez. En la auditoría del mismo semestre de 2024 (informe 2024AE0109010012), el ISAF ya había encontrado $358,643 de oxígeno de enero a abril de 2024 sin vale y tres pacientes cobrados después de morir. El proveedor ofreció entonces una nota de crédito, y el ISSSTESON prometió revisar cada mes la lista de defunciones. El ISAF la llama falla «recurrente».",
    "Las pensiones. El ISAF cruzó la nómina con la plataforma del Registro Civil de Sonora y encontró 138 pagos, de enero a junio de 2025, a 129 pensiones de personas que ya habían muerto: $2,990,499 (observación 2025AE005FN0145, pp. 67 a 74). La mayoría fueron del mes siguiente a la muerte (126 de los 138 pagos), cuando la baja todavía no llegaba a la nómina. Pero no todos: una pensión se siguió pagando seis meses de 2025 a una persona que murió en abril de 2020.",
    "¿Dónde está el dinero? El propio informe lo cuenta. 114 de esos pagos eran cheques que nunca se cobraron y se cancelaron: $2,458,447. El banco revirtió 4 depósitos ($79,086) y 4 más se descontaron de los gastos de funeral o del pago póstumo a la familia ($79,533). Faltan $373,438, de 18 pagos, que el ISSSTESON debe devolver a su cuenta. Ni esto ni lo del oxígeno se ha solventado: si no se aclara, el ISAF lo turna a la autoridad que determina responsabilidades. Una observación no es una condena (Constitución, art. 20, apartado B, fr. I).",
-   "Una nota de método: la nota de prensa no abrió desde la plataforma; su texto es el que nos compartiste. Los dos informes del ISAF se leyeron completos. Las cuentas «126 de 138» y la de la pensión de 2020 son nuestras, de la tabla del informe: van como derivadas. Los números de pensión y de afiliación no se publican."
+   "Una nota de método: lo que circula es el audio de un reel de Instagram, y lo que se cotejó es su transcripción; sin liga, no citamos a la cuenta que lo publicó. Un reel nunca es fuente: lo que vale es el informe. Los dos informes del ISAF se leyeron completos. Las cuentas «126 de 138» y la de la pensión de 2020 son nuestras, de la tabla del informe: van como derivadas. Los números de pensión y de afiliación no se publican."
   ],
   "dato_curioso": "Una pensión del ISSSTESON se pagó seis veces en 2025 (de enero a junio, $83,435 en total) a una persona que, según el Registro Civil, murió el 22 de abril de 2020.",
   "cifras": [
@@ -166,10 +166,6 @@
    {
     "nombre": "ISAF, informes de Cuenta Pública",
     "url": "https://isaf.gob.mx/informes/cuenta-publica"
-   },
-   {
-    "nombre": "Meganoticias, «Las cuentas oscuras del Isssteson, millones bajo sospecha y servicios en decadencia» (prensa, punto de partida)",
-    "url": "https://www.meganoticias.mx/obregon-navojoa/noticia/las-cuentas-oscuras-del-isssteson-millones-bajo-sospecha-y-servicios-en-decadencia/782781"
    }
   ],
   "actualizado": "28 de octubre de 2026"
