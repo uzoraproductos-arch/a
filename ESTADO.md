@@ -5,7 +5,7 @@ historia completa de cada decisión en [CONTEXT.md](CONTEXT.md), que pasa de
 7,000 renglones: aquí va solo lo que necesitas para no repetir trabajo ni
 pisar el de otro. **Se actualiza en el mismo commit que cambia lo que dice.**
 
-Última actualización: 28-10-2026 · sello `20261028p` · rama `claude/funny-turing-imtm54`.
+Última actualización: 28-10-2026 · sello `20261028q` · rama `claude/funny-turing-imtm54`.
 
 ## Antes de empezar y antes de empujar
 
