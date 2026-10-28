@@ -702,6 +702,18 @@ for _i, _e in enumerate([('¿Cuánto costó el Tren Maya?', '🚆'), ('¿En qué
 # de la tercera y la quinta tanda.
 for _i, _e in enumerate([('¿Quién es Genaro García Luna?', '📰'), ('Noticias de Elba Esther Gordillo', '📰')]):
     EJEMPLOS.insert(17 + _i * 16, _e)
+# Lo que la gente cuenta y la plataforma verifica (28-10-2026, pedido del
+# autor: «añade preguntas predeterminadas de estas consideraciones»): los
+# testimonios de Verificamos y las auditorías de gestión. La primera entra
+# en la primera tanda, después de los estados de cuenta; las demás, una por
+# tanda.
+EJEMPLOS.insert(3, ('¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?', '🔎'))
+for _i, _e in enumerate([('¿Cuánta gente se quedó sin acceso a la salud?', '🩺'), ('¿Qué le observó la ASF al Seguro Popular?', '🏥'),
+                         ('¿Es cierto que el ISSSTESON pagó pensiones a personas fallecidas?', '🔎'),
+                         ('¿Auditarán las oficinas de los consejeros del INE?', '🗳️'), ('¿Qué pasó con el Seguro Popular?', '🏥'),
+                         ('¿Cuántas consultas da el IMSS?', '🩺'), ('¿Cuántos asuntos resuelve el Poder Judicial?', '⚖️'),
+                         ('¿Cuántas denuncias atiende la PROFEPA?', '🌎')]):
+    EJEMPLOS.insert(9 + _i * 6, _e)
 
 
 

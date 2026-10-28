@@ -872,6 +872,34 @@
    "dice": [
     "928.7"
    ]
+  },
+  {
+   "q": "¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?",
+   "ir": "noticias-relevantes.html#col-seguro-popular-51-millones"
+  },
+  {
+   "q": "¿Cuánta gente se quedó sin acceso a la salud?",
+   "ir": "noticias-relevantes.html#col-seguro-popular-51-millones"
+  },
+  {
+   "q": "¿Es cierto que el ISSSTESON pagó pensiones a personas fallecidas?",
+   "ir": "noticias-relevantes.html#col-isssteson-oxigeno-pensiones-fallecidos"
+  },
+  {
+   "q": "¿Auditarán las oficinas de los consejeros del INE?",
+   "ir": "noticias-relevantes.html#col-ine-oic-auditorias-consejerias"
+  },
+  {
+   "q": "¿Cuántas consultas da el IMSS?",
+   "ir": "datos-salud-imss.html#sal-imss_servicios"
+  },
+  {
+   "q": "¿Cuántos asuntos resuelve el Poder Judicial?",
+   "ir": "datos-judicial-gestion.html#jud-gestion"
+  },
+  {
+   "q": "¿Cuántas denuncias atiende la PROFEPA?",
+   "ir": "datos-justicia-ambiental-denuncias.html#amg-denuncias"
   }
  ]
 }
