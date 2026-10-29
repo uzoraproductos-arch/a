@@ -113,8 +113,8 @@ cientos de megas y van al almacenamiento, no a Git.
 | 1 | Crear el proyecto en supabase.com (región más cercana a México) | Gratis para probar; Pro, US$25 al mes, para producción |
 | 2 | Pasarle al agente la dirección del proyecto. **Nunca la llave de servicio por chat**: va directo en Supabase → Edge Functions → Secrets | — |
 | 3 | Secretos: `SITIO`, `SAL_IP` (cualquier frase larga), `TURNSTILE_SECRET` (antispam de Cloudflare, gratis) | — |
-| 4 | `BANXICO_TOKEN`: gratis en banxico.org.mx/SieAPIRest/service/v1/token | Gratis |
-| 5 | `INEGI_TOKEN`: gratis en inegi.org.mx (API de indicadores) | Gratis |
+| 4 | `BANXICO_TOKEN`: gratis, desde la página del API del SIE (banxico.org.mx/SieAPIRest/service/v1/, opción del token; llega por correo, 64 caracteres). Va en **GitHub → Settings → Secrets → Actions**; el flujo «Sube la base de datos» lo pasa a Supabase y sube `portales` | Gratis |
+| 5 | `INEGI_TOKEN`: gratis en la página de desarrolladores del API de indicadores del INEGI. Igual: secreto de GitHub, y el flujo lo pasa a Supabase | Gratis |
 | 6 | `ANTHROPIC_API_KEY`, solo si quieres la capa de IA | Por pregunta, según el modelo |
 
 Con eso, el agente corre `supabase db push` y `supabase functions deploy`, y
@@ -122,9 +122,9 @@ conecta los botones «Enviar», «Lo que aún no sé» y «Búscalo en internet�
 
 ## Pendiente, y por qué
 
-- **INEGI** sin verificar: desde el entorno de desarrollo su portal no
-  respondió. La dirección sigue la documentación de su API; se prueba al
-  poner la llave.
+- **INEGI**: la dirección sigue la sintaxis de su página de desarrolladores,
+  cotejada por el autor el 30-10-2026 (`…/INDICATOR/[id]/es/00/…/BISE/2.0/[token]?type=json`;
+  con `BIE:` adelante de la clave usa el BIE, área `0700`). Falta probarla con la llave.
 - **Transparencia Presupuestaria y el DOF** no están en `portales`: publican
   archivos de datos abiertos, no una API de consulta. Entran por la fase 4
   (GitHub Actions semanal que descarga, regenera y abre un PR).
@@ -183,3 +183,6 @@ Para comprobar la base en cualquier momento:
 python3 herramientas/prueba_base_datos.py
 deno test supabase/pruebas/
 ```
+- **La bóveda corre sola cada miércoles** (`.github/workflows/boveda.yml`, 30-10-2026):
+  desde la red de GitHub revisa las direcciones oficiales que respaldan los datos y guarda
+  su huella en `docs/boveda/evidencias.json`. No cambia ninguna cifra.

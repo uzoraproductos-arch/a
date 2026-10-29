@@ -32,16 +32,24 @@ const PORTALES: Record<string, Portal> = {
       return { real: u, publica: u, cabeceras: { "Bmx-Token": llave, "Accept": "application/json" } };
     },
   },
-  // INEGI, Banco de Información Económica (API de indicadores). POR VERIFICAR al
-  // configurar: desde el entorno de desarrollo el portal no respondió. La llave
-  // va en la dirección, así que la que se publica la lleva tapada.
+  // INEGI, API de indicadores. Sintaxis de su página de desarrolladores
+  // (cotejada por el autor el 30-10-2026):
+  //   .../jsonxml/INDICATOR/[IdIndicador]/[Idioma]/[Área]/[Recientes]/[Fuente]/2.0/[Token]?type=json
+  // con el ejemplo 1002000001/es/00/true/BISE/2.0. La fuente es BISE (indicadores
+  // de bancos de información sociodemográfica, área nacional «00») o BIE
+  // (Banco de Información Económica, área nacional «0700»): la clave se pide
+  // como «BIE:123456»; sin prefijo es BISE. Se trae la serie entera
+  // (Recientes = false). La llave va en la dirección, así que la que se
+  // publica la lleva tapada.
   "inegi-bie": {
-    nombre: "INEGI, Banco de Información Económica",
-    clave: /^\d{4,10}$/,
+    nombre: "INEGI, API de indicadores",
+    clave: /^(BIE:|BISE:)?\d{4,10}$/,
     llave: "INEGI_TOKEN",
     horas: 24,
     url: (clave, llave) => {
-      const p = "https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/" + clave + "/es/0700/false/BIE/2.0/";
+      const [fuente, id] = clave.includes(":") ? clave.split(":") : ["BISE", clave];
+      const area = fuente === "BIE" ? "0700" : "00";
+      const p = "https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/" + id + "/es/" + area + "/false/" + fuente + "/2.0/";
       return { real: p + llave + "?type=json", publica: p + "{llave}?type=json" };
     },
   },

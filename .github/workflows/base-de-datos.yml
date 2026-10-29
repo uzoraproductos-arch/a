@@ -30,6 +30,8 @@ jobs:
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
       SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
       SAL_IP: ${{ secrets.SAL_IP }}
+      BANXICO_TOKEN: ${{ secrets.BANXICO_TOKEN }}
+      INEGI_TOKEN: ${{ secrets.INEGI_TOKEN }}
     steps:
       - name: ¿Están los secretos?
         id: hay
@@ -58,3 +60,15 @@ jobs:
       - name: Sube la función de los códigos
         if: steps.hay.outputs.si == 'si'
         run: supabase functions deploy codigo --project-ref "$PROYECTO" --no-verify-jwt
+      # Las fuentes en vivo (30-10-2026): las llaves gratuitas de Banxico e
+      # INEGI van en los secretos del repositorio y de ahí a los de Supabase;
+      # nunca en un archivo ni en el chat. Sin ninguna, la función no se sube.
+      - name: Sube las llaves de Banxico e INEGI
+        if: steps.hay.outputs.si == 'si' && (env.BANXICO_TOKEN != '' || env.INEGI_TOKEN != '')
+        run: |
+          [ -n "$BANXICO_TOKEN" ] && supabase secrets set --project-ref "$PROYECTO" BANXICO_TOKEN="$BANXICO_TOKEN"
+          [ -n "$INEGI_TOKEN" ] && supabase secrets set --project-ref "$PROYECTO" INEGI_TOKEN="$INEGI_TOKEN"
+          true
+      - name: Sube la función de los portales
+        if: steps.hay.outputs.si == 'si' && (env.BANXICO_TOKEN != '' || env.INEGI_TOKEN != '')
+        run: supabase functions deploy portales --project-ref "$PROYECTO" --no-verify-jwt

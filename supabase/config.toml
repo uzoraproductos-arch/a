@@ -7,3 +7,6 @@ project_id = "auditavision"
 # del canje revisa sola sus límites, así que no pide JWT.
 [functions.codigo]
 verify_jwt = false
+
+[functions.portales]
+verify_jwt = false

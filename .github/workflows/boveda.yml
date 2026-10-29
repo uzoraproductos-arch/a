@@ -1,0 +1,57 @@
+# Bóveda de evidencias (30-10-2026, pedido del autor: «vincula la plataforma
+# a sus fuentes de la web»). Cada semana revisa, desde la red de GitHub, las
+# direcciones oficiales que respaldan los datos (herramientas/boveda.py) y
+# guarda en docs/boveda/evidencias.json la huella SHA-256, el tamaño y la
+# fecha de cada documento. No cambia ninguna cifra: si un documento cambió o
+# ya no abre, queda anotado para cotejarlo a mano (AGENTS.md §2).
+name: Bóveda de evidencias
+
+on:
+  workflow_dispatch:
+    inputs:
+      todas:
+        description: 'Volver a revisar todas las direcciones (no solo las que faltan)'
+        type: boolean
+        default: false
+  schedule:
+    - cron: '41 12 * * 3'   # miércoles, 6:41 en la Ciudad de México
+
+permissions:
+  contents: write
+
+jobs:
+  boveda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/funny-turing-imtm54
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Revisar las fuentes
+        run: |
+          if [ "${{ inputs.todas }}" = "true" ]; then
+            python herramientas/boveda.py --todas
+          else
+            python herramientas/boveda.py
+          fi
+          python - <<'PY' | tee -a "$GITHUB_STEP_SUMMARY"
+          import collections, json
+          e = json.load(open('docs/boveda/evidencias.json', encoding='utf-8'))['evidencias']
+          c = collections.Counter(v.get('estado', '?') for v in e.values())
+          print('Bóveda: %d direcciones · ' % len(e) + ' · '.join('%s %d' % kv for kv in sorted(c.items())))
+          PY
+      - name: Guardar las huellas
+        run: |
+          if git diff --quiet -- docs/boveda/evidencias.json; then
+            echo "Sin cambios en la bóveda."
+            exit 0
+          fi
+          git config user.name "Bóveda de evidencias"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/boveda/evidencias.json
+          git commit -m "Bóveda: huellas de las fuentes oficiales del $(date +%d-%m-%Y)"
+          git pull --rebase origin claude/funny-turing-imtm54
+          git push origin HEAD:claude/funny-turing-imtm54
