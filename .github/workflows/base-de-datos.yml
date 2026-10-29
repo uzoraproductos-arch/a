@@ -51,7 +51,7 @@ jobs:
         run: supabase link --project-ref "$PROYECTO" --password "$SUPABASE_DB_PASSWORD"
       - name: Sube las migraciones
         if: steps.hay.outputs.si == 'si'
-        run: supabase db push --password "$SUPABASE_DB_PASSWORD" --include-all
+        run: supabase db push --linked --password "$SUPABASE_DB_PASSWORD" --include-all
       - name: Sube la sal de la huella
         if: steps.hay.outputs.si == 'si' && env.SAL_IP != ''
         run: supabase secrets set --project-ref "$PROYECTO" SAL_IP="$SAL_IP"
