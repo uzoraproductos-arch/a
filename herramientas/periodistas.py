@@ -4,7 +4,7 @@
 riesgos que ese reportero en México, de asesinatos de reporteros,
 incidentes que han sido denunciados, antecedentes»).
 
-Página del modo Reportero (`periodismo-en-riesgo.html`, cuelga de Noticias)
+Página del modo Periodista (`periodismo-en-riesgo.html`, cuelga de Noticias)
 y fichas del chat. Cotejado contra el documento oficial:
 
 - Mecanismo de Protección para Personas Defensoras de Derechos Humanos y

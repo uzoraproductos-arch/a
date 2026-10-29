@@ -283,7 +283,7 @@ def _pendientes():
     out = []
     for x in pendientes.recolectar():
         out.append({'t': 'pendiente', 'tit': limpio(x['que']), 'txt': '',
-                    # ap: las paginas donde aparece; la nota del Reportero dice lo que falta en la pagina de la respuesta.
+                    # ap: las paginas donde aparece; la nota del Periodista dice lo que falta en la pagina de la respuesta.
                     'pend': {'pq': limpio(x['porque']), 'quien': x['responsable'], 'donde': x['enlace'], 'donde_tx': x['enlace_txt'], 'id': x['id'],
                              'ap': sorted({a[0].split('#')[0] for a in x.get('aparece') or []})},
                     'ir': ['pendientes.html#' + x['id'], 'Registro de pendientes'],
@@ -757,7 +757,7 @@ EJEMPLOS.insert(14, ('¿Mi cuñado puede trabajar en mi oficina?', '👪'))
 # muestra solo en su modo (modo_de), así que estas no estorban en los otros.
 EJEMPLOS.extend([('Mapa ambiental de megaobras por estado', '🗺️'), ('¿Es cierto que el Tren Maya contamina?', '🚆'),
                  ('¿Cuánto multa la PROFEPA?', '⚖️'), ('¿Cuánto presupuesto tiene la PROFEPA?', '🌎')])
-# Y el modo Reportero, las que muestran su nota (29-10-2026): una obra, un
+# Y el modo Periodista, las que muestran su nota (29-10-2026): una obra, un
 # concepto y una auditoría, contados con lo que casi nadie cuenta.
 EJEMPLOS.extend([('¿Qué pasó con Dos Bocas?', '🛢️'), ('¿Qué es el huachicol fiscal?', '⛽'),
                  ('¿Qué dejó por aclarar la ASF en el Tren Maya?', '🚆')])
@@ -785,14 +785,14 @@ MODOS = [
     # encontrar en cualquier otra parte… aquel que te transmite información
     # privilegiada». Privilegiada por estar enterrada en documentos públicos
     # que casi nadie lee, nunca por ser un rumor (AGENTS.md §2 bis).
-    ('reportero', '📰', 'Reportero', 'Lo que casi nadie te cuenta, con documento',
-     'Pregúntame por un concepto, una obra, una auditoría o lo que circula en redes, y te lo cuento como reportero: '
+    ('periodista', '📰', 'Periodista', 'Lo que casi nadie te cuenta, con documento',
+     'Pregúntame por un concepto, una obra, una auditoría o lo que circula en redes, y te lo cuento como periodista: '
      'lo que dice el documento, lo que casi nadie te cuenta (lo que la ASF dejó por aclarar, lo que ninguna dependencia ha publicado), '
      'el ruido y qué consta de él, y lo que sigue. Aquí viven las Noticias y el verificador de notas.',
      (), (('📰', 'Noticias de hoy'), ('🔎', 'Contrasta una nota'), ('📂', 'Expediente de Segalmex'),
           ('👪', 'Nepotismo y parentesco'), ('📰', '¿Quién es Genaro García Luna?'), ('🧾', 'Contratos públicos'),
           ('🏢', 'Empresas contratistas'), ('🏗️', '¿Qué obras no han publicado sus cifras?'), ('🛡️', 'Periodismo en riesgo')),
-     '<p>Estoy en <b>modo Reportero</b>: te cuento <b>lo que casi nadie te cuenta</b>. No son rumores: es lo que está enterrado en documentos públicos que casi nadie lee, '
+     '<p>Estoy en <b>modo Periodista</b>: te cuento <b>lo que casi nadie te cuenta</b>. No son rumores: es lo que está enterrado en documentos públicos que casi nadie lee, '
      'como lo que la ASF dejó por aclarar, lo que una dependencia no ha publicado (y quién lo debe) o lo que circula en redes y qué consta de ello.</p>'
      '<p>Pregúntame por un <b>concepto</b> («¿qué es el huachicol fiscal?»), una <b>obra</b> («¿qué pasó con Dos Bocas?»), una <b>auditoría</b> o <b>si es cierto</b> lo que circula, '
      'o pégame la liga de una nota. Una nota de prensa es mi punto de partida, nunca mi fuente, y <b>una acusación no es una condena</b>.</p>'),
@@ -815,7 +815,7 @@ MODOS = [
 # la que no cae en ninguno es del modo Inspector.
 MODO_EJEMPLO = [
     ('ambientalista', r'ambiental|basura|profepa|contamina'),
-    ('reportero', r'^es cierto|noticia|nota$|que paso|huachicol fiscal|por aclarar|quien es|auditaran|observo|sin acceso|consultas|asuntos resuelve|cunado'),
+    ('periodista', r'^es cierto|noticia|nota$|que paso|huachicol fiscal|por aclarar|quien es|auditaran|observo|sin acceso|consultas|asuntos resuelve|cunado'),
     ('ciudadano', r'civico|^que es|cuanto gana|dolar|valen|reloj de la deuda|%|cuantos (diputados|senadores)|quien preside|'
                   r'cuanto se recauda|eleccion|circuitos|en que se gasta|cuanto debe|lana|que estados de cuenta'),
 ]
@@ -842,7 +842,7 @@ def _fecha_col(t):
 
 
 def _sabias():
-    """«¿Sabías esto?» del modo Reportero (pedido del autor, 29-10-2026: «muy
+    """«¿Sabías esto?» del modo Periodista (pedido del autor, 29-10-2026: «muy
     actualizadas… unas que no hicieron tanto ruido en el pasado y que
     posiblemente deben de retomarse hoy en día»): las tres columnas
     verificadas más nuevas y tres casos de Personajes y Hechos que llevan más
@@ -862,7 +862,7 @@ def _sabias():
 
 def _ejemplos():
     """Las preguntas de ejemplo: (pregunta, texto, icono, modo, seña). Las de
-    «¿Sabías esto?» entran a las del Reportero, una cada tres, y quitan la
+    «¿Sabías esto?» entran a las del Periodista, una cada tres, y quitan la
     pregunta de ejemplo que ya llevaba a la misma columna (según el banco de
     pruebas, preguntas_auditor.json)."""
     with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'preguntas_auditor.json'), encoding='utf-8') as f:
@@ -872,9 +872,9 @@ def _ejemplos():
         ej = [e for e in ej if lleva.get(e[0], '').split('#')[-1] != 'col-' + c['id']]
         t = limpio(c['titulo'])
         corto = t if len(t) <= 80 else t[:78].rsplit(' ', 1)[0] + '…'
-        rep = [n for n, e in enumerate(ej) if e[3] == 'reportero']
+        rep = [n for n, e in enumerate(ej) if e[3] == 'periodista']
         pos = rep[min(k * 3 + 1, len(rep) - 1)] if rep else len(ej)
-        ej.insert(pos, (t, corto, c.get('icono') or '📰', 'reportero', sena))
+        ej.insert(pos, (t, corto, c.get('icono') or '📰', 'periodista', sena))
     return ej
 
 
@@ -963,7 +963,7 @@ def pagina(cuenta, canal='', herramientas=()):
           <div class="glos-drawer-cuerpo">
           <h3 id="paComoT">Cómo platicar conmigo</h3>
           <ol>
-            <li><b>Elige mi modo</b> con el botón de arriba: <b>🔍 Inspector</b> (la investigación más completa), <b>📰 Reportero</b> (un tema contado como nota, con las Noticias), <b>🙋 Ciudadano</b> (en corto, como un amigo) o <b>🌎 Ambientalista</b> (el costo y el daño ambiental). Cada modo trae sus aplicaciones y sus preguntas de ejemplo; los datos son los mismos en los cuatro.</li>
+            <li><b>Elige mi modo</b> con el botón de arriba: <b>🔍 Inspector</b> (la investigación más completa), <b>📰 Periodista</b> (un tema contado como nota, con las Noticias), <b>🙋 Ciudadano</b> (en corto, como un amigo) o <b>🌎 Ambientalista</b> (el costo y el daño ambiental). Cada modo trae sus aplicaciones y sus preguntas de ejemplo; los datos son los mismos en los cuatro.</li>
             <li><b>Escríbeme como hablas.</b> Entiendo «lana», «varo», «¿cuánto se clavaron?», siglas como CDMX o Edomex, y preguntas que siguen a la anterior: «¿y Nuevo León?», «¿y por habitante?», «¿y el que menos?».</li>
             <li><b>Te contesto en corto:</b> la cifra, qué quiere decir y en qué lugar queda. Sé de los 32 estados, de los municipios, de los sueldos de los cargos públicos, de cada sexenio desde 1989, de %s términos del glosario y de las páginas de la plataforma.</li>
             <li><b>Saco cuentas:</b> ordeno, comparo, sumo y saco porcentajes y márgenes. Cuando hago una cuenta, te digo cuál fue.</li>

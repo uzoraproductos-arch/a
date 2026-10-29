@@ -416,7 +416,7 @@
      que tocan el tema, primero las del modo elegido. El orden cambia con el
      modo; los datos, nunca. Una página cuyo título está completo en la
      pregunta va primero; las demás, solo si tocan el tema de cerca. */
-  var MODO_ICO = { inspector: '🔍', reportero: '📰', ciudadano: '🙋', ambientalista: '🌎' };
+  var MODO_ICO = { inspector: '🔍', periodista: '📰', ciudadano: '🙋', ambientalista: '🌎' };
   function modoVivo() { var a = document.getElementById('paApp'); return a ? a.getAttribute('data-modo') : ''; }
   function enciclopediaPara(q, r) {
     if (!r || r.sin || r.plat) return [];
@@ -442,7 +442,7 @@
         '<span><b>' + esc(f.tit) + '</b><small>' + (f.t === 'pagina' ? 'Página' : 'En «' + esc(f.ir[1]) + '»') + ' · Modo ' + esc(m.charAt(0).toUpperCase() + m.slice(1)) + '</small></span></a>';
     }).join('') + '</div></div>' : '';
   }
-  /* El modo Reportero (pedido del autor, 29-10-2026: «el reportero se
+  /* El modo Periodista (pedido del autor, 29-10-2026: «el reportero se
      convierte como en un chismoso… te transmite información privilegiada»).
      Bajo la misma respuesta, arma su nota con lo que casi nadie cuenta, pero
      sacado de documentos: lo que la ASF dejó por aclarar, lo que ninguna
@@ -455,7 +455,7 @@
     t = t.split(/[:(]| — | · /)[0].replace(/^Cuánto gana\s*/i, '').trim();
     return t.split(' ').length <= 6 ? t : '';
   }
-  function reportero(q, r) {
+  function periodista(q, r) {
     if (!r || r.sin || r.plat) return null;
     var f0 = r.ficha, tema = temaDe(r), res = buscar(q), piso = Math.max(5, res.length ? res[0].s * 0.35 : 0);
     var cerca = res.slice(0, 30).filter(function (x) { return x.s >= piso; }).map(function (x) { return x.f; });
@@ -514,7 +514,7 @@
     var sigue = [];
     cols.forEach(function (f) { (f.sigue || []).slice(0, 2 - sigue.length).forEach(function (s) { sigue.push('<li>🗓️ ' + (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.tx) + ' ↗</a>' : esc(s.tx)) + '</li>'); }); });
     var nada = !nadie.length && !ruido.length;
-    var h = '<div class="pa-reportero"><p class="pa-rep-t">📰 La nota del Reportero</p>' +
+    var h = '<div class="pa-reportero"><p class="pa-rep-t">📰 La nota del Periodista</p>' +
       (nadie.length ? '<p class="pa-rep-s">🕵️ Lo que casi nadie te cuenta</p><ul class="pa-lista">' + nadie.slice(0, 4).join('') + '</ul>' : '') +
       (ruido.length ? '<p class="pa-rep-s">📢 El ruido: lo que circula y lo que consta</p><ul class="pa-lista">' + ruido.join('') + '</ul>' : '') +
       (sigue.length ? '<p class="pa-rep-s">🗓️ Lo que sigue</p><ul class="pa-lista">' + sigue.join('') + '</ul>' : '') +
@@ -523,9 +523,9 @@
       (cols.length ? ', y <b>una acusación no es una condena</b>' : '') + '. A las personas privadas no las nombro.</p></div>';
     return { html: h, web: !r.web && tema ? tema : '' };
   }
-  function reporteroHtml(q, r) {
-    if (modoVivo() !== 'reportero') return '';
-    var n = reportero(q, r);
+  function periodistaHtml(q, r) {
+    if (modoVivo() !== 'periodista') return '';
+    var n = periodista(q, r);
     return n ? n.html + (n.web ? webHtml(n.web) : '') : '';
   }
   var TIPOS_REC = { mapa: 'mapa', mapas: 'mapa', reloj: 'reloj', relojes: 'reloj', contador: 'reloj', contadores: 'reloj', simulador: 'simulador', simuladores: 'simulador', tablero: 'tablero' };
@@ -1956,7 +1956,7 @@
   }
 
   /* El título de una columna, tal cual, abre esa columna (29-10-2026): así
-     contestan los «¿Sabías esto?» y «Para retomar» del Reportero, que van
+     contestan los «¿Sabías esto?» y «Para retomar» del Periodista, que van
      entre las preguntas de ejemplo. */
   function tituloColumna(q) {
     var pq = plano(q).trim();
@@ -2064,7 +2064,7 @@
       }
       if (r.anota && !ya) anota(q, 'sin');
       li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r, previas) +
-        reporteroHtml(q, r) +
+        periodistaHtml(q, r) +
         appDe(r) +
         (r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r)))) +
         enciclopediaHtml(enciclopediaPara(q, r)) +
@@ -2132,7 +2132,7 @@
     }
   }
   if (dic) {
-    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, reportero: reportero };
+    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista };
     armaDictamen();
     return;
   }
@@ -2181,8 +2181,8 @@
      antes desplegaba las herramientas, ahora elige el modo. El modo cambia el
      saludo, la franja de aplicaciones y las preguntas de ejemplo; los datos
      son los mismos en los cuatro. Se recuerda en este navegador y se puede
-     pedir por la dirección (?modo=reportero). */
-  var app = document.getElementById('paApp'), MODOS_OK = { inspector: 1, reportero: 1, ciudadano: 1, ambientalista: 1 };
+     pedir por la dirección (?modo=periodista). */
+  var app = document.getElementById('paApp'), MODOS_OK = { inspector: 1, periodista: 1, ciudadano: 1, ambientalista: 1 };
   function modoActual() { return app.getAttribute('data-modo'); }
   function poneModo(m, avisa) {
     if (!MODOS_OK[m]) return;
@@ -2377,13 +2377,16 @@
   })();
 
   /* Para revisar cómo puntúa una pregunta desde la consola. */
-  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, reportero: reportero };
+  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista };
   pintaLista();
   if (canal) document.getElementById('paSinRespNota').innerHTML = 'La lista se guarda solo en tu navegador y no se envía sola: con «Enviarlas a Auditavisión» nos la haces llegar tú.';
   var ps = new URLSearchParams(location.search), pre = ps.get('q'), lista = ps.get('p');
   (function () {
-    var m = ps.get('modo');
-    if (!MODOS_OK[m]) { try { m = localStorage.getItem('av-modo'); } catch (e) { m = null; } }
+    /* «Reportero» se llamó así hasta el 29-10-2026 (ahora es «Periodista»): las ligas
+       viejas (?modo=reportero) y lo que guardó el navegador siguen sirviendo. */
+    var viejo = function (x) { return x === 'reportero' ? 'periodista' : x; };
+    var m = viejo(ps.get('modo'));
+    if (!MODOS_OK[m]) { try { m = viejo(localStorage.getItem('av-modo')); } catch (e) { m = null; } }
     poneModo(MODOS_OK[m] ? m : modoActual());
   })();
   if (pre) responde(pre, true);

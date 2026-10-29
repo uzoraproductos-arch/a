@@ -1,5 +1,5 @@
 {
- "nota": "Banco de preguntas de prueba del Auditor (herramientas/prueba_auditor.py). Cada renglón dice adónde debe llevar «Saber más» (ir), qué frases debe traer la respuesta (dice) o si lo correcto es decir que no lo sabe (sin). Si un cambio mueve una respuesta a propósito, se corrige aquí en el mismo commit; si la mueve sin querer, el error está en el cambio. Con «modo», la pregunta se hace en ese modo y «dice» revisa también lo que el modo agrega (la nota del Reportero).",
+ "nota": "Banco de preguntas de prueba del Auditor (herramientas/prueba_auditor.py). Cada renglón dice adónde debe llevar «Saber más» (ir), qué frases debe traer la respuesta (dice) o si lo correcto es decir que no lo sabe (sin). Si un cambio mueve una respuesta a propósito, se corrige aquí en el mismo commit; si la mueve sin querer, el error está en el cambio. Con «modo», la pregunta se hace en ese modo y «dice» revisa también lo que el modo agrega (la nota del Periodista).",
  "preguntas": [
   {
    "q": "Dame mi estado de cuenta cívico",
@@ -1000,17 +1000,17 @@
   },
   {
    "q": "¿Qué pasó con Dos Bocas?",
-   "modo": "reportero",
+   "modo": "periodista",
    "ir": "herramienta-megaobras-sector.html#obra-dos-bocas",
    "dice": [
-    "La nota del Reportero",
+    "La nota del Periodista",
     "La ASF lo dejó por aclarar",
     "Le toca publicarlo a"
    ]
   },
   {
    "q": "¿Qué es el huachicol fiscal?",
-   "modo": "reportero",
+   "modo": "periodista",
    "ir": "glosario.html#Huachicol-Fiscal",
    "dice": [
     "Lo investigamos a fondo",
@@ -1019,7 +1019,7 @@
   },
   {
    "q": "¿Qué es el Ramo 33?",
-   "modo": "reportero",
+   "modo": "periodista",
    "dice": [
     "Lo investigamos a fondo",
     "Ramo 33: el dinero para estados y municipios"
@@ -1027,7 +1027,7 @@
   },
   {
    "q": "Modalidad 40",
-   "modo": "reportero",
+   "modo": "periodista",
    "dice": [
     "El ruido: lo que circula y lo que consta",
     "Consta, con matices",
@@ -1036,7 +1036,7 @@
   },
   {
    "q": "Segalmex",
-   "modo": "reportero",
+   "modo": "periodista",
    "dice": [
     "La ASF lo dejó por aclarar",
     "una acusación no es una condena"
@@ -1044,7 +1044,7 @@
   },
   {
    "q": "Tren Maya",
-   "modo": "reportero",
+   "modo": "periodista",
    "dice": [
     "Falta el documento",
     "Le toca publicarlo a"
@@ -1055,7 +1055,7 @@
   },
   {
    "q": "Periodismo en riesgo",
-   "modo": "reportero",
+   "modo": "periodista",
    "ir": "periodismo-en-riesgo.html",
    "dice": [
     "Aún no lo integramos",
@@ -1079,7 +1079,7 @@
   },
   {
    "q": "¿Mi cuñado puede trabajar en mi oficina?",
-   "modo": "reportero",
+   "modo": "periodista",
    "dice": [
     "Los puntos ciegos",
     "un apellido igual nunca es prueba de parentesco"
@@ -1090,50 +1090,50 @@
   },
   {
    "q": "El IMSS acota la Modalidad 40: lo que dice el Diario Oficial y lo que falta probar",
-   "modo": "reportero",
+   "modo": "periodista",
    "ir": "noticias-auditavision.html#col-imss-modalidad-40-gestores",
    "dice": [
-    "La nota del Reportero"
+    "La nota del Periodista"
    ]
   },
   {
    "q": "Elba Esther Gordillo: cinco años en proceso y una sentencia que se quiso reservar",
-   "modo": "reportero",
+   "modo": "periodista",
    "ir": "noticias-auditavision.html#col-gordillo-la-sentencia-reservada",
    "dice": [
-    "La nota del Reportero"
+    "La nota del Periodista"
    ]
   },
   {
    "q": "«Con el Seguro Popular se atendieron más de 51 millones; ahorita nada». Lo que dicen el INEGI y la ASF",
-   "modo": "reportero",
+   "modo": "periodista",
    "ir": "noticias-auditavision.html#col-seguro-popular-51-millones",
    "dice": [
-    "La nota del Reportero"
+    "La nota del Periodista"
    ]
   },
   {
    "q": "«Casa Blanca»: el expediente que, según la Función Pública, fue sustituido por una copia",
-   "modo": "reportero",
+   "modo": "periodista",
    "ir": "noticias-auditavision.html#col-casa-blanca-expediente",
    "dice": [
-    "La nota del Reportero"
+    "La nota del Periodista"
    ]
   },
   {
    "q": "ISSSTESON: oxígeno pagado a un paciente fallecido y pensiones a personas muertas. ¿Dónde está el dinero?",
-   "modo": "reportero",
+   "modo": "periodista",
    "ir": "noticias-auditavision.html#col-isssteson-oxigeno-pensiones-fallecidos",
    "dice": [
-    "La nota del Reportero"
+    "La nota del Periodista"
    ]
   },
   {
    "q": "Emilio Lozoya y la planta que Pemex compró tras 14 años sin operar",
-   "modo": "reportero",
+   "modo": "periodista",
    "ir": "noticias-auditavision.html#col-lozoya-agronitrogenados-odebrecht",
    "dice": [
-    "La nota del Reportero"
+    "La nota del Periodista"
    ]
   },
   {
@@ -1146,7 +1146,7 @@
   },
   {
    "q": "¿Cuánto pagarán los turistas extranjeros por entrar a México en 2027?",
-   "modo": "reportero",
+   "modo": "periodista",
    "ir": "noticias-auditavision.html#col-senado-ley-de-ingresos-2027"
   },
   {
@@ -1159,7 +1159,7 @@
   },
   {
    "q": "¿Qué pide Laura Haro para Jalisco en el presupuesto 2027?",
-   "modo": "reportero",
+   "modo": "periodista",
    "ir": "noticias-auditavision.html#col-jalisco-gasto-federal-pef-2027"
   }
  ]

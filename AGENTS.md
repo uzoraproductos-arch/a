@@ -22,19 +22,21 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
   «las herramientas… se van a convertir como en estos modelos que contienen
   las inteligencias artificiales»): **Inspector** (la investigación más
   completa: expedientes, entes, estados de cuenta, RFC, nepotismo, contratos
-  y megaobras), **Reportero** (un tema contado como nota, con las Noticias),
+  y megaobras), **Periodista** (un tema contado como nota, con las Noticias;
+  se llamó «Reportero» hasta que el autor lo renombró el 29-10-2026, y
+  `?modo=reportero` sigue sirviendo),
   **Ciudadano** (en corto, como un amigo, con la Calculadora Cívica; es el
   modo con el que abre) y **Ambientalista** (costo y daño ambiental). Viven
   en `MODOS` de `herramientas/asistente.py`: cada uno con su saludo, sus
   aplicaciones y sus preguntas de ejemplo (`modo_de()`); se eligen en el
   botón de la cabecera del chat, se recuerdan en el navegador (`av-modo`) y
-  se piden por la dirección (`?modo=reportero`). **Reportero** (29-10-2026) suma bajo la respuesta
-  «📰 La nota del Reportero» (`reportero()` de `asistente.js`): lo que casi nadie
+  se piden por la dirección (`?modo=periodista`). **Periodista** (29-10-2026) suma bajo la respuesta
+  «📰 La nota del Periodista» (`periodista()` de `asistente.js`): lo que casi nadie
   cuenta, sacado de la base (ASF, pendientes con quién los debe, cotejos de lo
   que circula, lo que sigue); **lo «privilegiado» es lo enterrado en documentos
   públicos, nunca un rumor**. El banco de pruebas acepta `modo`. **El modo cambia la forma de
   investigar y de contestar, nunca los datos** (§2). Por entregas: (a) el
-  selector, hecho; (b) la forma de responder de cada modo (Reportero, hecho);
+  selector, hecho; (b) la forma de responder de cada modo (Periodista, hecho);
   (c) el dictamen de cada modo.
 - **Las cuatro herramientas se mudaron a la Enciclopedia** (29-10-2026): su
   índice es la quinta tarjeta de Números, «Herramientas del Auditor»
@@ -515,7 +517,7 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   dice un documento oficial, y a los familiares que no son servidores públicos
   no se les nombra.
   Las agresiones a la prensa, por `herramientas/periodistas.py` (29-10-2026;
-  `periodismo-en-riesgo.html`, del modo Reportero), con el informe mensual del
+  `periodismo-en-riesgo.html`, del modo Periodista), con el informe mensual del
   Mecanismo de Protección (Gobernación); **los homicidios y las sentencias son de
   la FEADLE y, mientras no se coteje su documento, siguen pendientes: no se
   rellenan con cifras de organizaciones civiles**, y no se nombra a las personas.

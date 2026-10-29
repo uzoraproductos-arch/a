@@ -19,13 +19,13 @@ es del modo Inspector, la investigación más completa.
 
 import re
 
-MODOS_NOMBRE = {'inspector': 'Inspector', 'reportero': 'Reportero',
+MODOS_NOMBRE = {'inspector': 'Inspector', 'periodista': 'Periodista',
                 'ciudadano': 'Ciudadano', 'ambientalista': 'Ambientalista'}
-MODOS_ICONO = {'inspector': '🔍', 'reportero': '📰', 'ciudadano': '🙋', 'ambientalista': '🌎'}
+MODOS_ICONO = {'inspector': '🔍', 'periodista': '📰', 'ciudadano': '🙋', 'ambientalista': '🌎'}
 
 REGLAS = [
     ('ambientalista', r'ambient|basura|profepa|Medio ambiente|Justicia ambiental|Costo Ambiental'),
-    ('reportero', r'^noticias|^periodismo|^derecho-de-replica|^auditoria-|^pilares|Noticias'),
+    ('periodista', r'^noticias|^periodismo|^derecho-de-replica|^auditoria-|^pilares|Noticias'),
     ('ciudadano', r'^glosario|^diccionario|^marco-legal|^preguntas-frecuentes|^fuentes-oficiales|^aprende|^garantias|'
                   r'^estado-de-cuenta|Calculadora Cívica|Tu estado de cuenta|Baja al territorio|Biblioteca del Erario'),
 ]
