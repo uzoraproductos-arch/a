@@ -857,7 +857,7 @@ LOGO_IMG = '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62
 # son tarjetas autonomas: la pagina de la herramienta solo las presenta y cada
 # una abre su propia pagina.
 INVESTIGACIONES = 'herramienta-inspector-investigaciones.html'
-FOTO_AUDITOR = 'assets/auditor/img/herr-auditor-rostros.webp'
+FOTO_AUDITOR = 'assets/auditor/img/herr-auditor-foroptero.webp'
 MODO_INSPECTOR = 'herramienta-inspector.html'
 # El menú «Herramientas» del chat (pedido del autor, 23-10-2026), en el orden
 # que pidió.

@@ -50,8 +50,8 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
   chat como su «otra división», y `herramienta-inspector-investigaciones.html`
   solo redirige ahí. Su imagen son las cámaras con ojos (elegida por el
   autor, dibujada desde el 27-10-2026: `herr-inspector-ilustracion.svg`); el
-  chat lleva los rostros arrancados desde el 29-10-2026
-  (`herr-auditor-rostros.webp`, `foto_clase: 'foto-auditor'`).
+  chat lleva el foróptero, en la ilustración del autor desde el 29-10-2026
+  (`herr-auditor-foroptero.webp`, `foto_clase: 'foto-auditor'`).
 - El Auditor Virtual tiene que funcionar y verse como lo mejor de la
   plataforma: un dato que la plataforma tiene y el chat no encuentra es un
   error (ver §5 ter).
