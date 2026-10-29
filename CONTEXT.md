@@ -413,6 +413,18 @@ alternativa: para volver a ella basta cambiar el nombre en las tres `url()` de
 lluvia, el autor pidió regresar a la acuarela. `cabecera-lluvia.webp` se queda
 en el repositorio como alternativa.
 
+**Imagen del Auditor Virtual: el foróptero del gasto público (29-10-2026,
+decisión del autor).** Un foróptero que mira «Presupuesto», «Gasto» y
+«Auditoría», rodeado de funcionarios en sombra; ilustración del autor generada
+con IA, sin obra ajena de referencia. Va en el encabezado del chat y del
+dictamen (`assets/auditor/img/herr-auditor-foroptero.webp`, `FOTO_AUDITOR` de
+`apartados.py`); el foróptero dibujado (`herr-auditor-foroptero-ilustracion*.svg`)
+se queda en el repositorio. El encabezado usa `herr-auditor-foroptero-cab.webp`,
+la misma con el borde izquierdo desvanecido en la propia imagen (canal alfa).
+Antes se probó un collage de rostros arrancados,
+generado con la obra de «ashow» como referencia; se descartó por derechos y no
+quedó en el repositorio.
+
 **Imágenes de fondo en cabecera y pie (08-10-2026, sello 20261008j).** El
 autor eligió imágenes propias de su carpeta («Gasto público → imágenes»):
 - Cabecera: `assets/auditor/img/portada/cabecera-pasillo.webp` (el pasillo
