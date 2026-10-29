@@ -403,6 +403,9 @@ APARTADOS = [
         # al generar, y tambien 'hash_a_pagina' y 'abrir_a_pagina'.
         'pestanas': True,
         'pista': 'Cada parte de Números abre su propia página. Van en el orden en que se mueve el dinero.',
+        # Debajo, las cuatro herramientas del Auditor (pedido del autor,
+        # 29-10-2026: «copiarlas y pegarlas de momento»).
+        'herramientas': True,
         'secciones': [
             {
                 'id': 'origen',
@@ -5137,6 +5140,20 @@ def pagina(a, sello):
       </nav>''' % saltos
     else:
         en_pagina = ''
+    if a.get('herramientas'):
+        # Las cuatro herramientas del Auditor, también aquí (Números, pedido
+        # del autor, 29-10-2026): las mismas tarjetas de herramientas.html,
+        # leídas de ahí para que no se desfasen.
+        herr = next(x for x in APARTADOS if x['archivo'] == 'herramientas.html')['secciones'][0]
+        en_pagina += '''
+
+      <section class="apartado-seccion apartado-seccion-modulos" id="herramientas" aria-labelledby="herramientas-tit">
+        <h2 class="apartado-pestanas-grupo" id="herramientas-tit">🧰 Herramientas del Auditor</h2>
+        <p class="apartado-pestanas-pista">Haz tus propias cuentas con los mismos números: cada herramienta abre su propia página.</p>
+        <div class="apartado-rejilla apartado-rejilla-modulos">
+%s
+        </div>
+      </section>''' % '\n'.join(tarjeta(t, True) for t in herr['tarjetas'])
 
     nota = ('<a class="apartado-nota" href="index.html?ir=nota">📖 Qué son las finanzas públicas y qué encontrarás aquí</a>'
             if a.get('nota') else '')

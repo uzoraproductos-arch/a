@@ -253,7 +253,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `radar-reloj.html` | El reloj de cada administración · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `radar-tablero.html` | El tablero · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
-| `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
+| `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 
 Los chips que pinta el motor al abrir un módulo no se cuentan aquí: solo los escritos en el HTML.
