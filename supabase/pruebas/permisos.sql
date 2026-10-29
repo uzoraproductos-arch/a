@@ -180,6 +180,25 @@ select pg_temp.igual(abs(extract(epoch from public.pase_hasta(:'pase') - (now() 
 select pg_temp.igual(((public.canjear_codigo(:'cg')) ->> 'motivo' = 'no_valido')::int, 1, 'un código revocado');
 reset role;
 
+-- 7 bis. Los códigos propios (30-10-2026): los escribe la administración.
+set role anon;
+select pg_temp.debe_fallar($$select public.crear_codigo('PASE2345', interval '1 day')$$, 'que el público cree un código propio');
+reset role;
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
+select pg_temp.debe_fallar($$select public.crear_codigo('PASE2345', interval '1 day')$$, 'que una cuenta común cree un código propio');
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select pg_temp.igual((select count(*) from public.crear_codigo('pase-2345', interval '3 days', 5, null, 'Taller')), 1, 'un código propio, escrito en minúsculas y con guion');
+select pg_temp.igual((select count(*) from public.codigos where codigo = 'PASE2345' and usos_max = 5), 1, 'el código propio se guarda en mayúsculas y sin guion');
+select pg_temp.debe_fallar($$select public.crear_codigo('PASE 2345', interval '1 day')$$, 'un código propio repetido');
+select pg_temp.debe_fallar($$select public.crear_codigo('HOLA2026', interval '1 day')$$, 'un código propio con O y 0, que no se usan');
+select pg_temp.debe_fallar($$select public.crear_codigo('PASE23', interval '1 day')$$, 'un código propio de menos de 8 caracteres');
+reset role;
+reset request.jwt.claim.sub;
+set role service_role;
+select pg_temp.igual(((public.canjear_codigo('PASE-2345')) ->> 'ok')::boolean::int, 1, 'el código propio se canjea');
+reset role;
+
 -- 8. «Obtén uno»: las solicitudes de código (29-10-2026).
 set role anon;
 select pg_temp.debe_fallar($$select count(*) from public.solicitudes_codigo$$, 'que el público lea las solicitudes de código');

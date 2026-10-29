@@ -303,10 +303,16 @@
       var est = $('acGenerarEstado');
       var dur = g.duracion.value === 'otra' ? (Math.max(1, Math.min(1825, +g.dias.value || 0)) + ' days') : g.duracion.value;
       var antes = g.antes.value ? new Date(g.antes.value + 'T23:59:59').toISOString() : null;
+      var propio = g.propio.value.trim();
       est.textContent = 'Generando…';
-      rpc('generar_codigos', { p_cantidad: +g.cantidad.value, p_duracion: dur, p_usos: +g.usos.value || 1, p_antes: antes, p_nota: g.nota.value || null })
-        .then(function (nuevos) {
-          est.textContent = 'Listo: ' + nuevos.length + ' códigos nuevos de ' + duracion(dur) + '. Están arriba de la lista.';
+      // Con código propio se crea solo ese (crear_codigo); sin él, salen al azar.
+      var pide = propio
+        ? rpc('crear_codigo', { p_codigo: propio, p_duracion: dur, p_usos: +g.usos.value || 1, p_antes: antes, p_nota: g.nota.value || null })
+            .then(function (k) { g.propio.value = ''; return 'Listo: el código ' + bonito(k.codigo) + ' de ' + duracion(dur) + ' está arriba de la lista.'; })
+        : rpc('generar_codigos', { p_cantidad: +g.cantidad.value, p_duracion: dur, p_usos: +g.usos.value || 1, p_antes: antes, p_nota: g.nota.value || null })
+            .then(function (nuevos) { return 'Listo: ' + nuevos.length + ' códigos nuevos de ' + duracion(dur) + '. Están arriba de la lista.'; });
+      pide.then(function (msj) {
+          est.textContent = msj;
           return carga();
         }).catch(function (e2) { est.textContent = 'No se pudieron generar: ' + ((e2 && e2.message) || 'intenta de nuevo') + '.'; });
     });

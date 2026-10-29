@@ -224,6 +224,8 @@ def pagina_panel():
               '        <label>Usos por código <input class="ac-campo" name="usos" type="number" min="1" max="10000" value="1" required></label>\n'
               '        <label>Canjear antes del <input class="ac-campo" name="antes" type="date"></label>\n'
               '        <label class="ac-ancho">Nota <input class="ac-campo" name="nota" type="text" maxlength="120" placeholder="Para quién son: «Taller», «Prensa»…"></label>\n'
+              '        <label class="ac-ancho">Código propio (opcional) <input class="ac-campo" name="propio" type="text" maxlength="9" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Vacío: salen al azar. Ejemplo: PASE-2345"></label>\n'
+              '        <p class="ac-ayuda ac-ancho">Si escribes un código propio se crea solo ese, con la duración y los usos de arriba. Lleva 8 caracteres: números del 2 al 9 y letras sin I, L ni O.</p>\n'
               '      </div>\n'
               '      <p class="ac-acciones"><button class="sz-btn sz-btn-of" type="submit">Generar</button>\n'
               '        <button class="sz-btn ac-claro" type="button" id="acCsv">Descargar CSV</button>\n'

@@ -126,7 +126,7 @@ que necesita navegador.
   vista). Puede ser la misma persona del aviso de privacidad. Mientras no esté,
   la plataforma no puede recibir un escrito de réplica (`replica-responsable`).
 - Sacar los tokens de Banxico y del INEGI.
-- **Códigos de acceso:** darse de alta en `administradores` (con su correo, desde el panel de Supabase), la base y la función `codigo` ya están en su proyecto (flujo «Sube la base de datos», 29-10-2026); falta darse de alta en `administradores` y, cuando quiera cerrar la versión de prueba, `CANDADO = True` en `herramientas/acceso.py`.
+- **Códigos de acceso:** la base y la función `codigo` están en su proyecto (flujo «Sube la base de datos», 29-10-2026) y el autor ya está en `administradores` y entra al panel (30-10-2026). Falta probar un canje y, cuando quiera cerrar la versión de prueba, `CANDADO = True` en `herramientas/acceso.py`.
 - Correr `python3 herramientas/boveda.py` desde su computadora: varios
   portales de gobierno no abren desde las sesiones en la nube.
 - **Decidir qué hacer con los PDF pesados.** Hay 90 PDF en el repositorio

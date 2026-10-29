@@ -19,6 +19,13 @@ create function auth.uid() returns uuid language sql stable as $$
 $$;
 grant execute on function auth.uid() to anon, authenticated, service_role;
 
+-- Como en Supabase: pgcrypto vive en el esquema «extensions», fuera de public.
+-- Así una función con search_path = public que la use falla aquí también
+-- (30-10-2026: generar_codigos falló en el proyecto real por eso).
+create schema extensions;
+grant usage on schema extensions to anon, authenticated, service_role;
+create extension pgcrypto with schema extensions;
+
 -- El almacenamiento de archivos (Storage): sus dos tablas, con la seguridad
 -- por renglón encendida como en Supabase.
 create schema storage;
