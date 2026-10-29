@@ -1,0 +1,9 @@
+# Lo mínimo para que el CLI de Supabase suba la base y las funciones
+# (flujo «Sube la base de datos», .github/workflows/base-de-datos.yml).
+# Lo demás queda con los valores de Supabase.
+project_id = "auditavision"
+
+# Las llaves nuevas del proyecto (sb_publishable_…) no son JWT: la función
+# del canje revisa sola sus límites, así que no pide JWT.
+[functions.codigo]
+verify_jwt = false
