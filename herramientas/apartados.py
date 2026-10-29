@@ -5305,6 +5305,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('29-10-2026', 'El índice general sigue ahora el orden de las pestañas: el Auditor Virtual con sus cuatro modos, la Enciclopedia (Números, sus Herramientas, Datos y Aprende), Comunidad y Noticias, con sus tres páginas y sus secciones. Al final, las investigaciones por tema y cómo verificamos.'),
     ('28-10-2026', 'Noticias se rehace como periódico: Auditavisión Noticias. Separa la noticia (lo que pasó y lo que consta) de la opinión (la Columna del Erario, nuestro argumento con documentos) y suma cuatro secciones: Seguimiento, con los casos abiertos y lo que falta para cerrarlos; la Mesa de redacción, con los titulares que estamos jalando, sin verificar; la Agenda del erario, con las fechas que fija la ley, y Cómo trabajamos, el método del rumor al documento. Y el verificador ahora te dice quién aparece en la nota y te lleva a su estado de cuenta y su salud financiera.'),
     ('28-10-2026', 'El Modo Inspector suma su séptima aplicación: Nepotismo y parentesco. Elige un parentesco («mi cuñado», «mi suegra») y ve qué grado es y qué ley lo alcanza: darle una plaza, un contrato o su cargo en la elección. Trae el árbol de grados, cómo se investiga un cargo y por qué un apellido igual no prueba nada. Y en el chat del Auditor pregúntale «¿mi cuñado puede trabajar en mi oficina?». En Noticias, además, ya puedes verificar una noticia, proponernos una nota y leer las réplicas y posturas.'),
     ('28-10-2026', 'Noticias es ahora la cuarta pestaña del menú, junto a Auditor Virtual, Enciclopedia y Comunidad. Estrena «Al momento»: notas breves de lo que está pasando, con su fecha, lo que consta en el documento oficial y lo que falta probar, la cuenta con números redondos, nuestros datos y el glosario. La primera: el IMSS acota la Modalidad 40, cotejada contra el Diario Oficial del 21 de octubre.'),
@@ -5481,11 +5482,21 @@ def indice(base, ref):
                             [(modulo_archivo(h[0], t[0]), t[2], t[3]) for t in h[7]],
                             h[0])
                      for h in HERRAMIENTAS])
-    otros = [_grupo('📚', 'Enciclopedia', [
+    # El índice sigue el orden de las pestañas (pedido del autor, 29-10-2026):
+    # Auditor Virtual, Enciclopedia (Números, sus Herramientas, Datos y
+    # Aprende), Comunidad y Noticias; luego las investigaciones y el método.
+    import asistente, noticias
+    auditor = _rejilla([
+        grupo('💬', ASISTENTE[1], [(ASISTENTE[0], ASISTENTE[1], ASISTENTE[2])], ASISTENTE[0]),
+        _grupo('🎛️', 'Los cuatro modos', [('%s?modo=%s' % (ASISTENTE[0], m[0]), '%s Modo %s' % (m[1], m[2]), m[3])
+                                          for m in asistente.MODOS])])
+    enciclopedia = _rejilla([_grupo('📚', 'Enciclopedia', [
         (ENCICLOPEDIA, 'Enciclopedia', 'Números, Datos y Aprende en una sola puerta'),
         ('sigue-el-dinero.html', 'Números', 'El recorrido del dinero público'),
+        (NUMEROS_HERR, 'Herramientas del Auditor', 'Las cuatro herramientas y sus aplicaciones'),
         ('descarga-los-datos.html', 'Datos', 'El radar, las descargas, el ambiente y los Poderes'),
-        ('aprende.html', 'Aprende', 'La trivia, la Biblioteca y las noticias')])]
+        ('aprende.html', 'Aprende', 'La trivia, la Biblioteca y las noticias')])])
+    datos_aprende, comunidad = [], []
     for archivo in ('descarga-los-datos.html', 'aprende.html', 'participa.html'):
         a = ap[archivo]
         enl = [(x.get('pagina') or archivo + '#' + x['id'], x['pestana'][1], x['pestana'][2]) for x in a['secciones']]
@@ -5501,16 +5512,23 @@ def indice(base, ref):
             k = [e[0] for e in enl].index('garantias.html') + 1
             enl[k:k] = [(g[1], '· ' + g[3], '') for g in GARANTIAS_PARTES]
             enl += [('expedientes.html', 'Expedientes de casos de la ASF', 'Los casos por aclarar')]
-        otros.append(grupo(a['icono'], a['menu'], enl, archivo))
-        if archivo == 'participa.html':
+            comunidad.append(grupo(a['icono'], a['menu'], enl, archivo))
             # El boton de la cabecera, con sus cinco paginas (24-10-2026).
-            otros.append(_grupo('📢', 'Cuéntanos lo que viste', [
+            comunidad.append(_grupo('📢', 'Cuéntanos lo que viste', [
                 ('comunidad.html', 'Cuéntanos lo que viste', 'Reporta, señala errores, propón temas, comparte y fe de erratas')] + [
                 (c[1], '· ' + c[3], '') for c in COMUNIDAD_PARTES]))
-    otros.append(_grupo('🏛️', 'Los Poderes', [
+        else:
+            datos_aprende.append(grupo(a['icono'], a['menu'], enl, archivo))
+    datos_aprende.append(_grupo('🏛️', 'Los Poderes', [
         (al.PORTADA, 'Poder Legislativo', 'Las Cámaras, el calendario, las elecciones y los estados'),
         (aj.PORTADA, 'Poder Judicial', 'La Corte, los sueldos, el presupuesto y la elección judicial'),
         ('numeros-lo-que-cuestan-los-poderes.html', 'Lo que cuestan el Congreso y la Judicatura', 'Presupuesto 2026 y Cuenta Pública 2024')]))
+    # Noticias: el índice de la pestaña y sus tres páginas, cada una con sus
+    # secciones (las de PARTES de noticias.py, así una nueva aparece sola).
+    nsec = {x[0]: x[2] for x in noticias.SECCIONES}
+    diario = _rejilla([_grupo('📰', 'Noticias', [(noticias.ARCHIVO, 'Noticias', 'La pestaña: sus tres páginas en una sola puerta')], noticias.ARCHIVO)] +
+                      [_grupo(ico, tit, [(arch, tit, lema)] + [('%s#%s' % (arch, i), '· ' + nsec[i], '') for i in secs], arch)
+                       for arch, ico, tit, lema, _t, secs in noticias.PARTES])
     metodologia = (
         '<div class="indice-metodo">\n'
         '          <p>Toda cifra de la plataforma lleva su fuente oficial y uno de tres estados:</p>\n'
@@ -5526,17 +5544,22 @@ def indice(base, ref):
         '          <ul class="indice-lista indice-novedades">\n%s\n          </ul>\n'
         '        </div>') % '\n'.join('            <li><b>%s</b> %s</li>' % n for n in NOVEDADES)
     secc = [
-        ('investigaciones', '🖼️ Investigaciones, por tema', 'Las auditorías en imágenes. Cada una explica el caso y lleva a sus números y a su evidencia.', investigaciones),
+        ('auditor', '🔍 Auditor Virtual', 'El chat que te contesta todo, en sus cuatro modos, con su dictamen.', auditor),
+        ('enciclopedia', '📚 Enciclopedia', 'La parte de consulta: Números, sus Herramientas, Datos y Aprende.', enciclopedia),
         ('numeros', '💰 Enciclopedia · Números', 'El recorrido del dinero público, del impuesto a la rendición de cuentas, cada parte en su propia página.', numeros),
-        ('herramientas', '🧰 Auditor Virtual', 'Cada herramienta y sus módulos, con página propia.', herr),
-        ('mas', '📚 Enciclopedia · Datos y Aprende, Comunidad y los Poderes', 'Descargas, la Biblioteca del Erario Público, las noticias, la participación ciudadana y los Poderes de la Unión.', _rejilla(otros)),
+        ('herramientas', '🧰 Enciclopedia · Herramientas del Auditor', 'Cada herramienta y sus aplicaciones, con página propia.', herr),
+        ('mas', '📊 Enciclopedia · Datos y Aprende', 'Las descargas, el radar, el ambiente, los Poderes de la Unión y la Biblioteca del Erario Público.', _rejilla(datos_aprende)),
+        ('comunidad', '🤝 Comunidad', 'La participación ciudadana: el Ágora, tus garantías, las donaciones y «Cuéntanos lo que viste».', _rejilla(comunidad)),
+        ('noticias', '📰 Noticias', 'Auditavisión Noticias, el verificador y el seguimiento de cada caso.', diario),
+        ('investigaciones', '🖼️ Auditoría en imágenes, por tema', 'Las investigaciones. Cada una explica el caso y lleva a sus números y a su evidencia.', investigaciones),
         ('metodologia', '🔎 Cómo verificamos', 'La regla que sigue cada cifra y lo último que cambió.', metodologia),
     ]
     return {
         'archivo': 'indice.html', 'menu': 'Índice general', 'menu_archivo': 'indice.html',
         'icono': '🗂️', 'titulo': 'Índice general', 'lema': 'Todo lo que hay en Auditavisión, en una página',
-        'entrada': ('Aquí está el mapa completo de la plataforma: las investigaciones por tema, los capítulos de Números, '
-                    'cada herramienta con sus módulos, los datos, la obra de consulta y cómo verificamos cada cifra. '
+        'entrada': ('Aquí está el mapa completo de la plataforma, en el orden de sus pestañas: el Auditor Virtual y sus modos; '
+                    'la Enciclopedia, con los capítulos de Números, cada herramienta con sus aplicaciones, los datos y la obra de consulta; '
+                    'Comunidad y Noticias. Al final, las investigaciones por tema y cómo verificamos cada cifra. '
                     'Cada enlace abre su propia página.'),
         'secciones': [{'id': i, 'titulo': t, 'texto': x, 'tarjetas': [], 'bloque': b} for i, t, x, b in secc],
     }

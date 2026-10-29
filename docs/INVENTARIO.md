@@ -162,7 +162,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 45 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 59 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 241 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 266 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `informes-documentar-para-sancionar.html` | Informe especial: Documentar para sancionar · Auditavisión | apartados.py | 45 | 0 | 40 | 8 | 2 |
