@@ -401,6 +401,14 @@ antes: va al centro, se desvanece hacia los azules por los dos lados
 (`--cab-ancho`) y el paneo de 48 s la recorre de la calle hacia las torres.
 Con esto, la cabecera ya no tiene pendiente de derechos.
 
+**Cabecera con la calle bajo la lluvia (29-10-2026).** El autor pidió probar
+otra ilustración suya, también generada con IA: una calle mojada con luces
+turquesa, puentes elevados y torres que se pierden en la niebla. Es
+`assets/auditor/img/portada/cabecera-lluvia.webp`, con los mismos
+desvanecidos y el mismo paneo. La de acuarela se queda en el repositorio como
+alternativa: para volver a ella basta cambiar el nombre en las tres `url()` de
+`civico.css`.
+
 **Imágenes de fondo en cabecera y pie (08-10-2026, sello 20261008j).** El
 autor eligió imágenes propias de su carpeta («Gasto público → imágenes»):
 - Cabecera: `assets/auditor/img/portada/cabecera-pasillo.webp` (el pasillo
