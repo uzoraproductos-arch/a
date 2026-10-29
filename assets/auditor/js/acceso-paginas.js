@@ -115,6 +115,12 @@
       if (!A.vigente(p)) {
         // Se le acabó el tiempo: que pida otro (pedido del autor).
         caja.className = 'ac-tuyo ac-tuyo-fin';
+        if (p.admin) {
+          // El código de la administración cambió (cada lunes): el aviso lo manda al panel por el nuevo.
+          caja.innerHTML = '<p>🔑 <b>Tu código de administración cambió</b> el ' + esc(fecha(p.hasta)) + ', como cada semana. ' +
+            'Entra al panel con tu correo para ver el nuevo.</p><p><a class="sz-btn sz-btn-of" href="' + 'administracion-codigos.html' + '">Ver mi código nuevo</a></p>';
+          return;
+        }
         caja.innerHTML = '<p>Tu acceso terminó el <b>' + esc(fecha(p.hasta)) + '</b>. ¿Quieres seguir? Pide otro código aquí abajo.</p>';
         var b = $('acObtener'); if (b && $('acPedir').hidden) b.click();
         return;
@@ -268,15 +274,33 @@
         rpc('descartar_solicitud', { p_id: +b.dataset.descartar }).then(carga);
       }
     });
-    // El administrador entra a la plataforma sin gastar códigos: su navegador
-    // recibe un pase ilimitado y la entrada lo reconoce (pedido del autor).
+    // El código de la administración (pedido del autor, 30-10-2026): solo
+    // suyo, cambia cada lunes y abre la plataforma hasta ese lunes.
+    var sem = null;
+    function semana(cambiar) {
+      return rpc('codigo_admin_semana', { p_cambiar: !!cambiar }).then(function (j) {
+        sem = j;
+        var b = $('acSemCod'); b.textContent = bonito(j.codigo); b.dataset.copia = bonito(j.codigo);
+        $('acSemVence').innerHTML = 'Es solo tuyo y cambia solo el <b>' + esc(fecha(j.hasta)) + '</b> (hora de tu dispositivo). ' +
+          'Cuando cambie, tu acceso termina y la entrada te manda aquí por el nuevo.';
+      });
+    }
+    $('acSemCod').addEventListener('click', function () {
+      var b = $('acSemCod'); if (!b.dataset.copia || !navigator.clipboard) return;
+      navigator.clipboard.writeText(b.dataset.copia).then(function () { b.classList.add('ac-copiado'); setTimeout(function () { b.classList.remove('ac-copiado'); }, 1200); });
+    });
+    $('acSemCambiar').addEventListener('click', function () {
+      if (!confirm('¿Cambiar tu código ahora? El actual deja de abrir en todos tus dispositivos.')) return;
+      var p = A.leer(); if (p && p.admin) A.guardar(null);
+      semana(true).then(carga).catch(function () { alert('No se pudo cambiar. Intenta de nuevo.'); });
+    });
     $('acComoAdmin').addEventListener('click', function () {
       var est = $('acComoAdminEstado'), p = A.leer();
       if (p && p.admin && A.vigente(p)) { location.href = 'index.html'; return; }
       est.textContent = 'Preparando tu acceso…';
-      rpc('generar_codigos', { p_cantidad: 1, p_duracion: '100 years', p_usos: 1, p_antes: null, p_nota: 'Administración: ' + (s.correo || '') })
-        .then(function (k) { return A.pide({ accion: 'canjear', codigo: k[0].codigo, pase: p && p.pase }); })
+      (sem ? Promise.resolve(sem) : semana()).then(function (k) { return A.pide({ accion: 'canjear', codigo: k.codigo, pase: p && p.pase }); })
         .then(function (j) {
+          if (j && j.motivo === 'ya_canjeado' && j.hasta && Date.parse(j.hasta) > Date.now()) j.ok = true;
           if (!j || !j.ok) throw j;
           A.guardar({ pase: j.pase, hasta: j.hasta, visto: Date.now(), admin: true });
           location.href = 'index.html';
@@ -286,7 +310,7 @@
       token().then(function (t) { return auth('/auth/v1/user', null, t, 'GET'); }).then(function (u) {
         s.correo = u.email; pon(s);
         $('acQuien').textContent = 'Entraste como ' + u.email + '.';
-        return carga();
+        return Promise.all([carga(), semana()]);
       }).then(function () { entrar.hidden = true; admin.hidden = false; })
         .catch(function (e) {
           var no = e && /administraci/.test(e.message || '');

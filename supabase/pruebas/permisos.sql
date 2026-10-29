@@ -238,4 +238,23 @@ select pg_temp.igual((select count(*) from public.envios where asunto = 'Viejo')
 select pg_temp.igual((select count(*) from public.envios where asunto = 'Errata vieja' and correo is null), 1, 'una errata publicada vieja se queda sin correo');
 select pg_temp.igual((select count(*) from public.envios where asunto = 'Nuevo'), 1, 'el envío nuevo se guarda');
 
+-- 10. El código semanal de la administración (30-10-2026).
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
+select pg_temp.debe_fallar($$select public.codigo_admin_semana()$$, 'que una cuenta común vea el código de la administración');
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select (public.codigo_admin_semana()) ->> 'codigo' as ca \gset
+select pg_temp.igual(((public.codigo_admin_semana()) ->> 'codigo' = :'ca')::int, 1, 'el código de la semana es el mismo al pedirlo otra vez');
+select (public.codigo_admin_semana(true)) ->> 'codigo' as cb \gset
+select pg_temp.igual((:'ca' <> :'cb')::int, 1, 'cambiarlo antes da un código nuevo');
+reset role;
+reset request.jwt.claim.sub;
+select pg_temp.igual((select count(*) from public.codigos where codigo = :'ca' and revocado), 1, 'el código anterior queda revocado');
+set role service_role;
+select pg_temp.igual(((public.canjear_codigo(:'ca')) ->> 'ok' = 'true')::int, 0, 'el código anterior ya no abre');
+select (public.canjear_codigo(:'cb')) ->> 'hasta' as hb \gset
+select pg_temp.igual((:'hb'::timestamptz <= date_trunc('week', now() at time zone 'America/Mexico_City') at time zone 'America/Mexico_City' + interval '7 days')::int, 1,
+  'el acceso de la administración termina el lunes');
+reset role;
+
 \echo 'Todas las pruebas de permisos pasaron.'

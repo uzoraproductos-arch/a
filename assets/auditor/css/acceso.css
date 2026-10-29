@@ -113,3 +113,7 @@
 .ac-lado .ac-grupo { gap: 6px; }
 .ac-lado .ac-casilla { width: 46px; height: 56px; font-size: 24px; }
 @media (max-width: 520px) { .ac-lado .ac-casillas { flex-wrap: wrap; } }
+/* El código semanal de la administración (30-10-2026). */
+.ac-semana { margin: 14px 0; background: #fff8e6; border: 1px solid #ecd28c; border-radius: 14px; padding: 12px 16px; }
+.ac-semana h3 { margin: 0 0 6px; }
+.ac-semana-cod .ac-cod { font-size: 26px; letter-spacing: .12em; min-height: 44px; }
