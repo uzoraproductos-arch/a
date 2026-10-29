@@ -1046,10 +1046,46 @@
    "q": "Tren Maya",
    "modo": "reportero",
    "dice": [
-    "Aún no lo integramos"
+    "Falta el documento",
+    "Le toca publicarlo a"
    ],
    "no_dice": [
     "Le toca publicarlo a Falta de la plataforma"
+   ]
+  },
+  {
+   "q": "Periodismo en riesgo",
+   "modo": "reportero",
+   "ir": "periodismo-en-riesgo.html",
+   "dice": [
+    "Aún no lo integramos",
+    "FEADLE"
+   ]
+  },
+  {
+   "q": "¿Quién agrede a los periodistas?",
+   "ir": "periodismo-en-riesgo.html#pr-agresores",
+   "dice": [
+    "40.7 %",
+    "servidoras o servidores públicos"
+   ]
+  },
+  {
+   "q": "¿Cuántos periodistas protege el Mecanismo?",
+   "ir": "periodismo-en-riesgo.html#pr-hoy",
+   "dice": [
+    "690"
+   ]
+  },
+  {
+   "q": "¿Mi cuñado puede trabajar en mi oficina?",
+   "modo": "reportero",
+   "dice": [
+    "Los puntos ciegos",
+    "un apellido igual nunca es prueba de parentesco"
+   ],
+   "no_dice": [
+    "Un periódico logró"
    ]
   }
  ]

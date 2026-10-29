@@ -25,7 +25,7 @@ MODOS_ICONO = {'inspector': '🔍', 'reportero': '📰', 'ciudadano': '🙋', 'a
 
 REGLAS = [
     ('ambientalista', r'ambient|basura|profepa|Medio ambiente|Justicia ambiental|Costo Ambiental'),
-    ('reportero', r'^noticias|^derecho-de-replica|^auditoria-|^pilares|Noticias'),
+    ('reportero', r'^noticias|^periodismo|^derecho-de-replica|^auditoria-|^pilares|Noticias'),
     ('ciudadano', r'^glosario|^diccionario|^marco-legal|^preguntas-frecuentes|^fuentes-oficiales|^aprende|^garantias|'
                   r'^estado-de-cuenta|Calculadora Cívica|Tu estado de cuenta|Baja al territorio|Biblioteca del Erario'),
 ]
@@ -41,7 +41,7 @@ def modo_pagina(archivo, migas=''):
 
 # Paginas de la Enciclopedia que no muestran «Enciclopedia» en sus migas
 # porque cuelgan de otra pestaña, pero que las tarjetas de Aprende ofrecen.
-ENCICLOPEDIA_EXTRA = {'noticias-relevantes.html', 'derecho-de-replica.html', 'pilares.html',
+ENCICLOPEDIA_EXTRA = {'noticias-relevantes.html', 'periodismo-en-riesgo.html', 'derecho-de-replica.html', 'pilares.html',
                       'garantias.html', 'garantias-brujula.html', 'estado-de-cuenta.html'}
 
 

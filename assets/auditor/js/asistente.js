@@ -465,10 +465,27 @@
       var rt = buscar(tema), pt = Math.max(5, rt.length ? rt[0].s * 0.35 : 0);
       rt.slice(0, 30).forEach(function (x) { if (x.s >= pt && cerca.indexOf(x.f) < 0) cerca.push(x.f); });
     }
-    var cols = cerca.filter(function (f) { return f.t === 'columna'; }).slice(0, 2);
-    var pends = cerca.filter(function (f) { return f.t === 'pendiente' && f.pend; }).slice(0, 2);
+    /* Las columnas y los pendientes tienen que tocar el tema de cerca: la mitad del puntaje de la mejor ficha. */
+    var fuerte = [];
+    [res, tema && plano(tema) !== plano(q) ? buscar(tema) : []].forEach(function (rs) {
+      rs.slice(0, 30).forEach(function (x) { if (x.s >= Math.max(6, rs[0].s * 0.5)) fuerte.push(x.f); });
+    });
+    /* Y una columna, además, tiene que traer la mitad de las palabras de la pregunta (o el tema): «oficina» no basta para el INE. */
+    var ws = fichas(q).filter(function (w) { return w.length > 3; }), wt = tema ? fichas(tema) : [];
+    function hablaDe(f) {
+      var t = plano(f.tit + ' ' + (f.k || '') + ' ' + (f.txt || '') + ' ' + (f.cir ? f.cir.tx : ''));
+      var h = ws.filter(function (w) { return t.indexOf(' ' + w + ' ') >= 0; }).length, ht = wt.filter(function (w) { return t.indexOf(' ' + w + ' ') >= 0; }).length;
+      return (ws.length && h * 2 >= ws.length) || (wt.length && ht === wt.length);
+    }
+    var cols = cerca.filter(function (f) { return f.t === 'columna' && (f === f0 || (fuerte.indexOf(f) >= 0 && hablaDe(f))); }).slice(0, 2);
+    /* Primero, lo que falta en la página misma de la respuesta. */
+    var base = (r.ir || (f0 && f0.ir) || [''])[0].split('#')[0].split('?')[0];
+    var pends = F.filter(function (f) { return f.t === 'pendiente' && f.pend && base && (f.pend.ap || []).indexOf(base) >= 0; }).slice(0, 2);
+    cerca.forEach(function (f) { if (pends.length < 2 && f.t === 'pendiente' && f.pend && fuerte.indexOf(f) >= 0 && pends.indexOf(f) < 0) pends.push(f); });
     var exps = cerca.filter(function (f) { return f.t === 'expediente'; }).slice(0, 1);
     var nadie = [], iv = invDe(q, r);
+    /* Nepotismo (pedido del autor, 29-10-2026): lo que la ley todavía no alcanza, y la regla del apellido. */
+    if (base === 'herramienta-inspector-nepotismo.html') nadie.push('<li>🔦 <b>Los puntos ciegos:</b> la prohibición del nepotismo electoral se aplica a partir de las elecciones de 2030, el «yo contrato a tu sobrino y tú a mi hija» entre dependencias no es el caso del art. 63 Bis, y los datos de la familia en la declaración están en reserva. <a href="herramienta-inspector-nepotismo.html#puntos-ciegos">Ver los puntos ciegos ➔</a> Y ojo: <b>un apellido igual nunca es prueba de parentesco</b>; un vínculo entra a la plataforma solo si lo dice un documento oficial.</li>');
     if (iv) nadie.push('<li>📖 <b>Lo investigamos a fondo:</b> <a href="' + esc(iv.x.ir) + '">' + esc(iv.x.n) + ' ➔</a>, en Auditoría en imágenes.</li>');
     exps.forEach(function (f) {
       nadie.push('<li>📂 <b>La ASF lo dejó por aclarar.</b> ' + esc(recorta(f.txt, 220)) + ' <a href="' + esc(f.ir[0]) + '">Ver el expediente ➔</a></li>');

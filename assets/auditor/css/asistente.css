@@ -468,3 +468,6 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .pa-reportero .pa-lista { padding-left: 20px; }
 .pa-reportero .pa-lista li { margin-bottom: 8px; }
 .pa-reportero small { font-size: 14px; color: #44526b; }
+/* «¿Sabías esto?» del saludo del Reportero (29-10-2026). */
+.pa-sabias { margin-top: 12px; }
+.pa-sabias .pa-ej { margin: 0 6px 8px 0; text-align: left; }

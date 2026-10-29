@@ -283,7 +283,9 @@ def _pendientes():
     out = []
     for x in pendientes.recolectar():
         out.append({'t': 'pendiente', 'tit': limpio(x['que']), 'txt': '',
-                    'pend': {'pq': limpio(x['porque']), 'quien': x['responsable'], 'donde': x['enlace'], 'donde_tx': x['enlace_txt'], 'id': x['id']},
+                    # ap: las paginas donde aparece; la nota del Reportero dice lo que falta en la pagina de la respuesta.
+                    'pend': {'pq': limpio(x['porque']), 'quien': x['responsable'], 'donde': x['enlace'], 'donde_tx': x['enlace_txt'], 'id': x['id'],
+                             'ap': sorted({a[0].split('#')[0] for a in x.get('aparece') or []})},
                     'ir': ['pendientes.html#' + x['id'], 'Registro de pendientes'],
                     'k': limpio(x['tema']) + ' falta pendiente'})
     return out
@@ -614,7 +616,9 @@ def escribir_base():
     d = pendientes.db()
     # Las columnas de Noticias relevantes (24-10-2026), con sus documentos.
     import asistente_personajes
-    fichas = _fichas(d) + asistente_personajes.fichas() + _pendientes() + _paginas()
+    # Periodismo en riesgo (29-10-2026): las cifras del Mecanismo de Protección.
+    import periodistas
+    fichas = _fichas(d) + asistente_personajes.fichas() + periodistas.fichas() + _pendientes() + _paginas()
     cuenta = {}
     for f in fichas:
         cuenta[f['t']] = cuenta.get(f['t'], 0) + 1
@@ -782,7 +786,8 @@ MODOS = [
      'lo que dice el documento, lo que casi nadie te cuenta (lo que la ASF dejó por aclarar, lo que ninguna dependencia ha publicado), '
      'el ruido y qué consta de él, y lo que sigue. Aquí viven las Noticias y el verificador de notas.',
      (), (('📰', 'Noticias de hoy'), ('🔎', 'Contrasta una nota'), ('📂', 'Expediente de Segalmex'),
-          ('👪', 'Nepotismo y parentesco'), ('📰', '¿Quién es Genaro García Luna?')),
+          ('👪', 'Nepotismo y parentesco'), ('📰', '¿Quién es Genaro García Luna?'), ('🧾', 'Contratos públicos'),
+          ('🏢', 'Empresas contratistas'), ('🏗️', '¿Qué obras no han publicado sus cifras?'), ('🛡️', 'Periodismo en riesgo')),
      '<p>Estoy en <b>modo Reportero</b>: te cuento <b>lo que casi nadie te cuenta</b>. No son rumores: es lo que está enterrado en documentos públicos que casi nadie lee, '
      'como lo que la ASF dejó por aclarar, lo que una dependencia no ha publicado (y quién lo debe) o lo que circula en redes y qué consta de ello.</p>'
      '<p>Pregúntame por un <b>concepto</b> («¿qué es el huachicol fiscal?»), una <b>obra</b> («¿qué pasó con Dos Bocas?»), una <b>auditoría</b> o <b>si es cierto</b> lo que circula, '
@@ -819,6 +824,39 @@ def modo_de(q):
     return next((m for m, rx in MODO_EJEMPLO if re.search(rx, t)), 'inspector')
 
 
+MESES = {m: i for i, m in enumerate(('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto',
+                                      'septiembre', 'octubre', 'noviembre', 'diciembre'), 1)}
+
+
+def _fecha_col(t):
+    """La primera fecha de «actualizado» («28 de octubre de 2026» o «28-10-2026»), como (año, mes, día)."""
+    m = re.search(r'(\d{1,2}) de (\w+) de (\d{4})', t or '')
+    if m and m.group(2) in MESES:
+        return int(m.group(3)), MESES[m.group(2)], int(m.group(1))
+    m = re.search(r'(\d{1,2})-(\d{1,2})-(\d{4})', t or '')
+    return (int(m.group(3)), int(m.group(2)), int(m.group(1))) if m else (0, 0, 0)
+
+
+def _sabias_html():
+    """«¿Sabías esto?» del modo Reportero (pedido del autor, 29-10-2026: «muy
+    actualizadas… unas que no hicieron tanto ruido en el pasado y que
+    posiblemente deben de retomarse hoy en día»): las tres columnas
+    verificadas más nuevas y tres casos de Personajes y Hechos que llevan más
+    tiempo sin moverse. Cada una es una pregunta al chat."""
+    import asistente_personajes
+    cols = asistente_personajes.columnas()[0]
+    nuevas = sorted((c for c in cols if c.get('seccion') in ('Verificado', 'Al momento')), key=lambda c: _fecha_col(c.get('actualizado')), reverse=True)[:3]
+    viejas = sorted((c for c in cols if c.get('seccion') in ('Personajes', 'Hechos')), key=lambda c: _fecha_col(c.get('actualizado')))[:3]
+
+    def bt(c):
+        t = limpio(c['titulo'])
+        return ('<button type="button" class="pa-ej" data-pa-pregunta="%s"><span aria-hidden="true">%s</span> %s</button>'
+                % (html.escape(t, quote=True), c.get('icono') or '📰', html.escape(t if len(t) <= 80 else t[:78].rsplit(' ', 1)[0] + '…')))
+    return ('<div class="pa-sabias"><p class="pa-rep-s">🆕 ¿Sabías esto? Lo último que verificamos</p><p>%s</p>'
+            '<p class="pa-rep-s">🗂️ Casos que no hicieron tanto ruido y vale la pena retomar</p><p>%s</p></div>'
+            % (' '.join(bt(c) for c in nuevas), ' '.join(bt(c) for c in viejas)))
+
+
 def _modos_html():
     """El selector de modo de la cabecera, la franja con las aplicaciones del
     modo elegido y su saludo. Cada aplicación es una pregunta: el chat la
@@ -838,6 +876,8 @@ def _modos_html():
                 mid, '' if mid == MODO_INICIAL else ' hidden', ico, html.escape(nom), html.escape(lema), len(apps), html.escape(que),
                 '\n'.join('              <button type="button" class="pa-modo-app" data-pa-pregunta="%s"><span aria-hidden="true">%s</span> %s</button>'
                           % (html.escape(n, quote=True), i, html.escape(n)) for i, n in apps)))
+        if mid == 'reportero':
+            hola += _sabias_html()
         holas.append('                <div class="pa-hola-modo" data-modo="%s"%s>%s</div>' % (mid, '' if mid == MODO_INICIAL else ' hidden', hola))
     return '\n'.join(opciones), '\n'.join(franjas), '\n'.join(holas)
 

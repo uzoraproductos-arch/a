@@ -396,6 +396,10 @@ def recolectar():
                       ('numeros-mapa-del-gasto-federalizado.html', 'Números · El mapa del gasto federalizado')]))
     for p in PROPIOS:
         out.append(e(*p))
+    # 9 bis. Periodismo en riesgo (29-10-2026): lo que publica la FEADLE.
+    import periodistas
+    for x in periodistas.pendientes():
+        out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
     # 10. Lo que circula en redes y quedó pendiente en su cotejo (Noticias
     # relevantes · Verificamos, 26-10-2026).
     au_red = {

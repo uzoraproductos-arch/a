@@ -12,6 +12,32 @@ por un caso, un personaje o una empresa contratista, el chat le dice qué
 consta en documentos oficiales, qué tiene matices, qué solo dice la prensa y
 qué falta, con cada fuente, y el dictamen lo respalda.
 
+## La bandeja del Reportero
+
+**Decisión del autor, 29-10-2026:** el modo Reportero del Auditor se llena con
+lo que el autor va pasando («videos o noticias para nosotros verificarlo,
+integrarlo… para que cuando el usuario lo responda, pues nosotros ya lo
+tenemos resuelto»). Cada pieza sigue los pasos de abajo y se vuelve una
+columna de Verificado; desde ahí el Reportero la cuenta sola: en «¿Sabías
+esto?» del saludo (las tres más nuevas), en «📢 El ruido» de cada respuesta
+y en «🗓️ Lo que sigue». Los casos viejos de Personajes y Hechos que llevan
+más tiempo sin moverse salen en «Casos para retomar»: **al cambiar su
+`actualizado` con un documento nuevo, el caso vuelve al frente.**
+
+Para cada pieza, el autor pasa lo que tenga:
+
+1. La liga (o el archivo, la captura o la transcripción, si no hay liga).
+2. Quién lo dice y dónde: el medio, la cuenta o el programa, y la fecha.
+3. Qué le llamó la atención (una cifra, un contrato, una obra, un nombre).
+
+Lo que no cambia: un video o una nota nunca es fuente; a las personas
+privadas no se les nombra; un apellido igual nunca es prueba de parentesco;
+una acusación no es una condena; y lo que no tiene documento queda
+`pendiente`, con quién lo debe. Los contratos y las empresas se cotejan en
+ComprasMX y en las listas oficiales (ver «Dónde buscar»); las agresiones a
+la prensa, en el Mecanismo de Protección y en la FEADLE
+(`herramientas/periodistas.py`).
+
 ## Los pasos, con cada nota que llegue
 
 0. **Fijar lo que circula, venga como venga.** Una liga, una captura, un

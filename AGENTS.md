@@ -505,6 +505,11 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   nunca es prueba de parentesco**: un vínculo entra a la plataforma solo si lo
   dice un documento oficial, y a los familiares que no son servidores públicos
   no se les nombra.
+  Las agresiones a la prensa, por `herramientas/periodistas.py` (29-10-2026;
+  `periodismo-en-riesgo.html`, del modo Reportero), con el informe mensual del
+  Mecanismo de Protección (Gobernación); **los homicidios y las sentencias son de
+  la FEADLE y, mientras no se coteje su documento, siguen pendientes: no se
+  rellenan con cifras de organizaciones civiles**, y no se nombra a las personas.
   Los informes especiales de la ASF, por `herramientas/informe_sancion.py`
   (27-10-2026: «Documentar para sancionar», cotejado contra la LGRA y la
   LFRCF vigentes): su página es la tarjeta «Informe especial» de Informes
