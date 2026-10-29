@@ -117,3 +117,16 @@
 .ac-semana { margin: 14px 0; background: #fff8e6; border: 1px solid #ecd28c; border-radius: 14px; padding: 12px 16px; }
 .ac-semana h3 { margin: 0 0 6px; }
 .ac-semana-cod .ac-cod { font-size: 26px; letter-spacing: .12em; min-height: 44px; }
+
+/* El registro de códigos: activos o archivados, buscador y acciones (30-10-2026). */
+.ac-reg-tit { margin: 18px 0 8px; }
+.ac-orden { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px; margin: 10px 0 6px; }
+.ac-vista { display: flex; gap: 6px; }
+.ac-vista [aria-pressed="true"] { background: #0b2a63; color: #fff; border-color: #0b2a63; }
+.ac-busca { flex: 1 1 200px; display: flex; flex-direction: column; gap: 4px; }
+.ac-tabla .ac-acciones { gap: 6px; }
+.ac-peligro { background: #fff; color: #b3261e; border: 1px solid #e8b4b0; }
+.ac-peligro:hover { background: #fdecea; }
+.ac-fila-semana td { background: #fff8db; }
+.ac-editor td { background: #f4f7fc; }
+.ac-editor .ac-fila { margin: 4px 0; }

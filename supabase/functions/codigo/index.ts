@@ -17,7 +17,7 @@ sirve(async (req) => {
   if (accion === "consultar") {
     if (!pase) return responde(req, { ok: false, error: "Falta el pase." }, 400);
     if (!(await dentroDelLimite(db, huella, "codigo-consulta", 60, 600))) return responde(req, { ok: false, motivo: "espera" }, 429);
-    const { data, error } = await db.rpc("pase_hasta", { p_pase: pase });
+    const { data, error } = await db.rpc("pase_consulta", { p_pase: pase });
     if (error) throw error;
     return responde(req, { ok: true, hasta: data ?? null });
   }

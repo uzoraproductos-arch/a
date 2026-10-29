@@ -238,12 +238,23 @@ def pagina_panel():
               '      </div>\n'
               '      <p class="ac-acciones"><button class="sz-btn sz-btn-of" type="submit">Generar</button>\n'
               '        <button class="sz-btn ac-claro" type="button" id="acCsv">Descargar CSV</button>\n'
+              '        <button class="sz-btn ac-claro" type="button" id="acCsvUso">Descargar el registro de uso</button>\n'
               '        <button class="sz-btn ac-claro" type="button" id="acRecargar">Actualizar la lista</button></p>\n'
               '      <p class="ac-estado" id="acGenerarEstado" role="status" aria-live="polite"></p>\n'
               '    </form>\n'
+              '    <h3 class="ac-reg-tit">Registro de códigos</h3>\n'
               '    <div class="ac-resumen" id="acResumen"></div>\n'
+              '    <div class="ac-orden">\n'
+              '      <div class="ac-vista" role="group" aria-label="Qué códigos ver">\n'
+              '        <button class="sz-btn ac-chico ac-claro" type="button" data-vista="activos" aria-pressed="true">Activos <b id="acNAct">0</b></button>\n'
+              '        <button class="sz-btn ac-chico ac-claro" type="button" data-vista="archivados" aria-pressed="false">Archivados <b id="acNArc">0</b></button></div>\n'
+              '      <label class="ac-busca">Buscar <input class="ac-campo" id="acBusca" type="search" placeholder="Código o nota" autocomplete="off"></label>\n'
+              '      <button class="sz-btn ac-chico ac-claro" type="button" id="acArchInact" title="Revocados, terminados y vencidos">Archivar los que ya no abren</button>\n'
+              '    </div>\n'
+              '    <p class="ac-ayuda">Archivar solo ordena: el código sigue abriendo si alguien lo usa. Eliminar lo borra para siempre y quien lo canjeó pierde su tiempo.</p>\n'
+              '    <p class="ac-estado" id="acTablaEstado" role="status" aria-live="polite"></p>\n'
               '    <div class="ac-tabla-caja"><table class="ac-tabla" id="acTabla">\n'
-              '      <thead><tr><th>Código</th><th>Duración</th><th>Usos</th><th>Estado</th><th>Nota</th><th></th></tr></thead>\n'
+              '      <thead><tr><th>Código</th><th>Duración</th><th>Usos</th><th>Estado</th><th>Nota</th><th>Acciones</th></tr></thead>\n'
               '      <tbody></tbody></table></div>\n'
               '  </div>\n'
               '</div>') % opciones
@@ -254,7 +265,7 @@ def pagina_panel():
         'titulo': 'Administración de códigos',
         'lema': 'Solo para la administración',
         'entrada': ('Aquí generas los códigos de invitación, eliges cuánto dura cada uno y cuántas personas lo pueden usar, '
-                    'y los revocas cuando quieras. Solo abre con una cuenta dada de alta en la administración.'),
+                    'y los editas, archivas, revocas o eliminas cuando quieras. Solo abre con una cuenta dada de alta en la administración.'),
         'noindex': True,
         'estilos': ['acceso.css'],
         'scripts': ['acceso-paginas.js'],
