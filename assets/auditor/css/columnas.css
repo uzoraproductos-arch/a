@@ -92,12 +92,12 @@
 }
 .col-balazo { margin: 0 0 8px; font-size: 15.5px; line-height: 1.5; color: #333333; }
 .col-firma { margin: 0 0 10px; font: 11.5px 'Inter', system-ui, sans-serif; color: var(--col-gris); text-transform: uppercase; letter-spacing: 0.05em; }
-.col-leer, .col-copiar, .col-cerrar {
+.col-leer, .col-copiar, .col-cerrar, .col-seguir {
   font: 700 13px 'Inter', system-ui, sans-serif; cursor: pointer;
   background: none; border: 1px solid var(--col-tinta); border-radius: 999px; padding: 7px 14px; color: var(--col-tinta);
 }
-.col-leer:hover, .col-copiar:hover, .col-cerrar:hover { background: var(--col-tinta); color: #ffffff; }
-.col-leer:focus-visible, .col-copiar:focus-visible, .col-cerrar:focus-visible { outline: 2px solid #1f5fa8; outline-offset: 2px; }
+.col-leer:hover, .col-copiar:hover, .col-cerrar:hover, .col-seguir:hover { background: var(--col-tinta); color: #ffffff; }
+.col-leer:focus-visible, .col-copiar:focus-visible, .col-cerrar:focus-visible, .col-seguir:focus-visible { outline: 2px solid #1f5fa8; outline-offset: 2px; }
 
 /* Columna abierta: ocupa todo el ancho y se lee a dos columnas. */
 .col-abierta { grid-column: 1 / -1; border-left: 0 !important; padding-left: 0 !important; }
@@ -109,6 +109,45 @@
   font-size: 3.4em; line-height: 0.85; padding: 4px 8px 0 0; color: var(--col-tinta);
 }
 .col-dato, .col-cifras, .col-fuentes, .col-acciones { break-inside: avoid; }
+/* Verificamos (26-10-2026): lo que circula en redes y su cotejo. */
+.col-circula { background: #eef1f6; border-left: 4px solid #44526b; padding: 10px 14px; margin: 4px 0 14px; break-inside: avoid; }
+.col-circula b, .col-cotejo > b { font: 700 12px 'Inter', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
+.col-circula p { margin: 6px 0 4px; font-size: 16px; font-style: italic; }
+.col-circula small, .col-cotejo small { font: 13px 'Inter', system-ui, sans-serif; color: var(--col-gris); }
+.col-cotejo { margin: 0 0 14px; }
+.col-cotejo ol { margin: 6px 0 0; padding-left: 20px; }
+.col-cotejo li { margin-bottom: 12px; break-inside: avoid; }
+.col-cotejo li p { margin: 0 0 4px; font-size: 16px; }
+.col-cotejo .col-dice { font-weight: 600; }
+.col-res { display: inline-block; font: 700 13px 'Inter', system-ui, sans-serif; padding: 2px 8px; border-radius: 4px; margin-right: 4px; background: #e8e8e8; }
+.col-res-consta .col-res { background: #dcefdc; color: #1d5b24; }
+.col-res-matiz .col-res { background: #fbecc8; color: #6b4a00; }
+.col-res-no-consta .col-res { background: #f6dcda; color: #8a1f17; }
+.col-cotejo a { color: #1f4f8a; }
+.col-sigue { margin: 0 0 14px; break-inside: avoid; }
+.col-sigue b { font: 700 12px 'Inter', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
+.col-sigue ul { margin: 6px 0 0; padding-left: 20px; font-size: 15px; }
+.col-sigue li { margin-bottom: 6px; }
+.col-sigue a { color: #1f4f8a; }
+/* Derecho de réplica (Bloque 4, 27-10-2026). */
+.col-replica { border-left: 3px solid #1f4f8a; background: #eef3f9; padding: 10px 14px; margin: 0 0 14px; break-inside: avoid; }
+.col-replica b { font: 700 12px 'Inter', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
+.col-replica p { margin: 6px 0 2px; font-size: 16px; }
+.col-replica small { color: #555; }
+.col-replica-pie { font-size: 16px; margin: 0 0 14px; color: #444; }
+.col-replica-pie a { color: #1f4f8a; }
+.col-postura { border-left: 3px solid #7a5a12; background: #f8f3e6; padding: 10px 14px; margin: 0 0 14px; break-inside: avoid; }
+.col-postura b { font: 700 12px 'Inter', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
+.col-postura p { margin: 6px 0 2px; font-size: 16px; }
+.col-postura small { display: block; color: #555; }
+.col-postura a { color: #1f4f8a; }
+/* Noticias relevantes (28-10-2026): propón una nota y réplicas y posturas */
+.col-pasos { margin: 0 0 12px; padding-left: 22px; font-size: 16px; line-height: 1.55; }
+.col-pasos li { margin-bottom: 10px; }
+.col-pasos a, .col-pasos-pie a, .col-rep-lista a { font-weight: 600; display: inline-flex; align-items: center; min-height: 44px; }
+.col-pasos-pie { font-size: 16px; margin: 0 0 8px; }
+.col-rep-lista { margin: 0 0 10px; padding-left: 20px; font-size: 16px; }
+.col-rep-vacio { font-size: 16px; margin: 0 0 10px; padding: 12px 14px; border-left: 3px solid #1f4f8a; background: rgba(31, 79, 138, 0.08); }
 .col-dato { background: #fbf3d9; border-top: 3px solid var(--col-tinta); padding: 10px 14px; margin: 4px 0 14px; }
 .col-dato b { font: 700 12px 'Inter', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
 .col-dato p { margin: 6px 0 0; font-size: 15.5px; }
@@ -147,3 +186,46 @@
 .col-fuera ul { margin: 0; padding-left: 20px; columns: 2 320px; column-gap: 28px; }
 .col-fuera li { break-inside: avoid; margin-bottom: 10px; line-height: 1.45; }
 .col-fuera li span { color: var(--col-gris); font-size: 13px; }
+/* Seguir un caso (26-10-2026): el aviso de novedades se guarda en el navegador. */
+.col-seguir { min-height: 44px; }
+.col-seguir[aria-pressed="true"] { background: #8a5a00; border-color: #8a5a00; color: #ffffff; }
+.col-nuevo { display: inline-block; margin: 0 0 0 8px; padding: 2px 10px; border-radius: 999px; background: #8a5a00; color: #ffffff; font: 700 12px 'Inter', system-ui, sans-serif; vertical-align: middle; }
+.col-sigo { border: 1px solid var(--col-tinta); border-radius: 8px; padding: 12px 16px; margin: 0 0 18px; background: #fffaf0; }
+.col-sigo-tit { margin: 0 0 6px; font: 700 16px 'Inter', system-ui, sans-serif; color: var(--col-tinta); }
+.col-sigo ul { margin: 6px 0; padding-left: 20px; }
+.col-sigo li { margin-bottom: 8px; line-height: 1.45; font-size: 16px; }
+.col-sigo li a { color: var(--col-tinta); font-weight: 700; display: inline-block; min-height: 44px; padding-top: 10px; }
+.col-sigo li small { display: block; color: var(--col-gris); font-size: 13px; }
+.col-sigo-nuevo small { color: #8a5a00; font-weight: 700; }
+.col-sigo p { margin: 4px 0; font-size: 16px; }
+.col-sigo .col-sigo-nota { font-size: 13px; color: var(--col-gris); }
+/* Al momento (28-10-2026): notas breves, con la cuenta, nuestros datos, el glosario y la red. */
+.col-franja { border-top: 3px solid #a3231b; border-bottom: 1px solid var(--col-filete); padding: 10px 0 6px; margin: 0 0 18px; }
+.col-franja-tit { margin: 0 0 6px; font: 700 16px 'Inter', system-ui, sans-serif; color: #a3231b; text-transform: uppercase; letter-spacing: 0.06em; }
+.col-franja-tit small { color: var(--col-gris); font-weight: 500; text-transform: none; letter-spacing: 0; margin-left: 6px; }
+.col-franja ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.col-franja li { display: grid; grid-template-columns: auto 1fr; column-gap: 12px; align-items: baseline; }
+.col-franja time { font: 700 13px 'Inter', system-ui, sans-serif; color: #a3231b; }
+.col-franja li a { color: var(--col-tinta); font-weight: 700; font-size: 16px; display: inline-block; min-height: 44px; padding-top: 10px; }
+.col-franja li small { grid-column: 2; color: var(--col-gris); font-size: 13px; }
+.col-nota { font-size: 15px; margin: 0 0 12px; break-inside: avoid; }
+.col-nota a, .col-datos a, .col-glosa a, .col-red a { color: #1f4f8a; }
+.col-ejemplo, .col-datos, .col-glosa, .col-red { margin: 0 0 14px; break-inside: avoid; }
+.col-ejemplo > b, .col-datos > b, .col-glosa > b, .col-red > b { font: 700 12px 'Inter', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
+.col-ejemplo { background: #f4f1e8; padding: 10px 14px; border-left: 4px solid var(--col-tinta); }
+.col-ejemplo p { margin: 6px 0; font-size: 16px; }
+.col-ejemplo ul { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 10px; }
+.col-ejemplo li { display: grid; gap: 2px; }
+.col-ej-etq { font-size: 15px; }
+.col-ej-barra { display: block; height: 12px; background: #e6e0cf; border-radius: 6px; overflow: hidden; }
+.col-ej-barra i { display: block; height: 100%; background: #a3231b; border-radius: 6px; }
+.col-ejemplo li strong { font-family: 'Playfair Display', Georgia, serif; font-size: 20px; }
+.col-ejemplo li small, .col-ej-nota { font: 13px 'Inter', system-ui, sans-serif; color: var(--col-gris); }
+.col-datos ul { list-style: none; margin: 6px 0 0; padding: 0; }
+.col-datos li { margin-bottom: 8px; }
+.col-datos li a { display: inline-block; min-height: 44px; padding-top: 10px; font-weight: 700; font-size: 16px; }
+.col-datos li small { display: block; color: #333333; font-size: 15px; line-height: 1.45; }
+.col-glosa p, .col-red-lista { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0; }
+.col-glosa a, .col-red-lista a { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 14px; border: 1px solid var(--col-filete); border-radius: 999px; background: #ffffff; text-decoration: none; font-size: 15px; }
+.col-red p { margin: 6px 0; font-size: 15px; }
+.col-red-pie { color: var(--col-gris); }

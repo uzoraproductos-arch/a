@@ -13,6 +13,7 @@ lector puede leer en voz alta.
 Uso:
     python3 herramientas/sello.py            # dice cual es el sello de hoy
     python3 herramientas/sello.py 20260923a  # lo sube a ese
+    python3 herramientas/sello.py --siguiente  # lo sube al sugerido
 
 Toca las siete dependencias de index.html y el renglon del pie. Ejecutalo en
 todo cambio que toque assets/; si no tocaste assets/, no hace falta.
@@ -60,8 +61,22 @@ def siguiente(actual):
         # Despues de la z sigue za, zb...: el dia no se acaba con el alfabeto.
         if letra == 'z':
             return hoy + 'za'
+        if letra == 'zz':
+            return None
         return hoy + letra[:-1] + chr(ord(letra[-1]) + 1)
     return hoy + 'a'
+
+
+def es_mayor(nuevo, actual):
+    """True si el sello nuevo va despues del actual.
+
+    Un sello igual o anterior al publicado deja al lector con la copia
+    guardada en su navegador: el cambio existe pero no se ve. Pasa cuando dos
+    agentes trabajan a la vez y uno propone el sello que vio horas antes.
+    La comparacion de texto basta: la fecha tiene ancho fijo y despues de la
+    z vienen za, zb..., que en orden de texto tambien van despues.
+    """
+    return not actual or nuevo > actual
 
 
 def main():
@@ -75,8 +90,18 @@ def main():
         return 0
 
     nuevo = sys.argv[1]
+    if nuevo == '--siguiente':
+        nuevo = siguiente(actual)
+        if not nuevo:
+            print('ERROR: se acabaron las letras de hoy (zz); escribe el sello a mano')
+            return 2
     if not re.fullmatch(r'\d{8}[a-z]{0,2}', nuevo):
         print('uso: sello.py AAAAMMDD[letra]   (por ejemplo 20260923a)')
+        return 2
+    if not es_mayor(nuevo, actual):
+        print('ERROR: el sello %s no va despues del publicado (%s).' % (nuevo, actual))
+        print('Otro cambio ya subio el sello. Haz git pull y usa: '
+              'python3 herramientas/sello.py --siguiente')
         return 2
 
     for ruta in RUTAS:

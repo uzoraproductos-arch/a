@@ -47,7 +47,7 @@ PARTES = [
      'El Ramo 16 en 2026 y el proyecto 2027, órgano por órgano, con su tabla en CSV',
      'ab', ['abPresupuesto'], 'dinero'),
     ('megaobras', 'datos-ambiente-megaobras.html', '🏗️', 'La huella de las megaobras',
-     'Las obras que necesitan permiso ambiental y lo que ya se sabe de su costo',
+     'El mapa de México con las megaobras e infraestructura por estado, su gasto federalizado y su alerta ambiental',
      'ab', ['abMegaobras'], 'dinero'),
     ('leyes', 'datos-ambiente-leyes.html', '⚖️', 'Las leyes que aplican',
      'Tu derecho a un medio ambiente sano, la basura, las obras y el clima, con su texto vigente',
@@ -67,7 +67,8 @@ ANCLAS = {'abBasura': 'basura', 'abProteger': 'proteger', 'abPresupuesto': 'pres
 
 ENTRADA = ('El deterioro del ambiente también es gasto público: lo pagamos en agua, aire, suelo y basura. Aquí están las cifras '
            'de referencia, cada una con su documento: cuánto le cuesta al país el daño, cuánto se gasta en protegerlo, a dónde '
-           'va la basura, cuánto recibe el sector ambiental y qué dicen las leyes. Para hacer tus propias cuentas, '
+           'va la basura, cuánto recibe el sector ambiental y qué dicen las leyes. Lo que resuelve la PROFEPA con su dinero (denuncias, rezago y multas) '
+           'está en <a href="datos-justicia-ambiental.html">Justicia ambiental</a>. Para hacer tus propias cuentas, '
            've a la herramienta <a href="%s">Costo Ambiental</a>.' % HERRAMIENTA)
 
 HACER = ('<p class="apartado-nota">🧮 ¿Quieres hacer tus cuentas? En la herramienta <a href="%s">Costo Ambiental</a> '

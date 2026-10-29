@@ -3671,42 +3671,14 @@
   }
 
   /* --- La imagen para compartir (1080 x 1350, formato vertical de redes).
-     Sigue el tema de la pagina: ciudad de noche o de dia. El horizonte se
-     dibuja aqui mismo, sin fotos, para que ningun edificio real se lea
-     como una ciudad concreta. --- */
-  function eccAleatorio(semilla) {
-    let s = semilla >>> 0;
-    return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
-  }
-
-  function eccHorizonte(g, W, y0, alto, noche) {
-    const rnd = eccAleatorio(20260926);
-    const cielo = g.createLinearGradient(0, 0, 0, y0 + alto);
-    if (noche) { cielo.addColorStop(0, '#070b1a'); cielo.addColorStop(1, '#1d2650'); }
-    else { cielo.addColorStop(0, '#9fd3f7'); cielo.addColorStop(1, '#fbe9c8'); }
-    g.fillStyle = cielo; g.fillRect(0, 0, W, y0 + alto);
-    if (noche) {
-      g.fillStyle = 'rgba(255,255,255,0.8)';
-      for (let i = 0; i < 70; i++) g.fillRect(rnd() * W, rnd() * (y0 + alto * 0.5), 2, 2);
-      g.beginPath(); g.fillStyle = '#f4e7b8'; g.arc(W - 150, 90, 34, 0, Math.PI * 2); g.fill();
-    } else {
-      g.beginPath(); g.fillStyle = 'rgba(255,210,120,0.9)'; g.arc(W - 150, 95, 46, 0, Math.PI * 2); g.fill();
-    }
-    const base = y0 + alto;
-    [[0.55, noche ? '#141b3a' : '#9fb3c8'], [1, noche ? '#0b1026' : '#5d7390']].forEach(([esc, color], capa) => {
-      let x = -10;
-      while (x < W) {
-        const w = 40 + rnd() * 70, h = (40 + rnd() * 90) * esc + capa * 16;
-        g.fillStyle = color; g.fillRect(x, base - h, w, h);
-        if (capa === 1) {
-          g.fillStyle = noche ? 'rgba(255,211,107,0.85)' : 'rgba(255,255,255,0.55)';
-          for (let wy = base - h + 12; wy < base - 8; wy += 16)
-            for (let wx = x + 8; wx < x + w - 8; wx += 13)
-              if (rnd() < (noche ? 0.35 : 0.5)) g.fillRect(wx, wy, 5, 7);
-        }
-        x += w + 4 + rnd() * 10;
-      }
-    });
+     El encabezado es una franja azul marino, la misma de los estados de
+     cuenta (27-10-2026): ya no lleva foto de ciudad ni modo de dia o de
+     noche. --- */
+  function eccFranja(g, W, alto) {
+    const cab = g.createLinearGradient(0, 0, W, 0);
+    cab.addColorStop(0, '#071d47'); cab.addColorStop(0.38, '#0b2a63'); cab.addColorStop(1, '#2c579f');
+    g.fillStyle = cab; g.fillRect(0, 0, W, alto);
+    g.fillStyle = '#4f9be8'; g.fillRect(0, alto, W, 6);
   }
 
   function eccTexto(g, txt, x, y, fuente, color, alinear) {
@@ -3717,10 +3689,7 @@
     const d = eccDatos();
     if (!d) return;
     try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e) { /* sin fuentes web */ }
-    const noche = document.documentElement.getAttribute('data-theme') !== 'light';
-    const C = noche
-      ? { fondo: '#0c1122', tarjeta: '#131a33', linea: '#27305a', txt: '#eef1fa', suave: '#9aa3c7', oro: '#f2c14e', cian: '#4fd1e8', barra: '#f2c14e' }
-      : { fondo: '#f7f5ef', tarjeta: '#ffffff', linea: '#ddd6c6', txt: '#16203a', suave: '#5d6680', oro: '#a8740a', cian: '#0b7a8f', barra: '#c9921a' };
+    const C = { fondo: '#f7f5ef', tarjeta: '#ffffff', linea: '#ddd6c6', txt: '#16203a', suave: '#5d6680', oro: '#a8740a', cian: '#0b7a8f', barra: '#c9921a' };
     const W = 1080, H = 1350, M = 64;
     const cv = document.createElement('canvas');
     cv.width = W; cv.height = H;
@@ -3728,29 +3697,13 @@
     const serif = "'Playfair Display', Georgia, serif", sans = "Inter, 'Segoe UI', Arial, sans-serif", mono = "'JetBrains Mono', Consolas, monospace";
 
     g.fillStyle = C.fondo; g.fillRect(0, 0, W, H);
-    const foto = await new Promise(ok => {
-      const im = new Image();
-      im.onload = () => ok(im); im.onerror = () => ok(null);
-      im.src = 'assets/img/' + (noche ? 'city_night.jpg' : 'city_day.jpg');
-    });
-    if (foto) {
-      const hH = 330, esc = Math.max(W / foto.width, hH / foto.height);
-      const sw = W / esc, sh = hH / esc;
-      g.drawImage(foto, (foto.width - sw) / 2, (foto.height - sh) * 0.35, sw, sh, 0, 0, W, hH);
-      g.fillStyle = noche ? 'rgba(6,9,20,0.45)' : 'rgba(255,255,255,0.30)';
-      g.fillRect(0, 0, W, hH);
-    } else {
-      eccHorizonte(g, W, 60, 250, noche);
-    }
-    const velo = g.createLinearGradient(0, 150, 0, 330);
-    velo.addColorStop(0, 'rgba(0,0,0,0)'); velo.addColorStop(1, C.fondo);
-    g.fillStyle = velo; g.fillRect(0, 120, W, 212);
+    eccFranja(g, W, 250);
 
-    eccTexto(g, 'AUDITAVISIÓN · SISTEMA CÍVICO DE FISCALIZACIÓN', M, 70, '600 20px ' + mono, noche ? '#ffffff' : '#16203a');
-    eccTexto(g, 'Estado de Cuenta Cívico', M, 150, '700 64px ' + serif, noche ? '#ffffff' : '#16203a');
+    eccTexto(g, 'AUDITAVISIÓN · SISTEMA CÍVICO DE FISCALIZACIÓN', M, 70, '600 20px ' + mono, '#ffffff');
+    eccTexto(g, 'Estado de Cuenta Cívico', M, 150, '700 64px ' + serif, '#ffffff');
     if (esAuditor()) {
       const logo = await new Promise(ok => { const im = new Image(); im.onload = () => ok(im); im.onerror = () => ok(null); im.src = 'assets/auditor/img/logo-auditavision.svg'; });
-      selloCanvas(g, W - M - 96, 158, 92, noche ? '#ecc767' : '#8a6512', noche ? 'rgba(8,12,26,0.55)' : 'rgba(255,255,255,0.6)', d.emitido, d.folio, logo);
+      selloCanvas(g, W - M - 96, 158, 92, '#ecc767', 'rgba(8,12,26,0.55)', d.emitido, d.folio, logo);
     }
 
     const meta = [['PERIODO', d.periodo], ['FOLIO', d.folio], ['EMITIDO', d.emitido]];

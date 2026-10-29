@@ -1036,15 +1036,137 @@
       return null;
     }
 
+    /* ---------- Nepotismo y cargos públicos (28-10-2026) ----------
+       D.nep lo escribe herramientas/nepotismo.py con la misma tabla de la
+       calculadora: «¿mi cuñado puede trabajar en mi oficina?» dice el grado y
+       qué ley lo alcanza, y lleva a la calculadora con el parentesco elegido. */
+    var NEP = D.nep || null;
+    var NEP_AL = NEP ? NEP.al.map(function (a) { return [a[0], new RegExp(a[1])]; }) : [];
+    function nepTema(k) {
+      var x = NEP.t[k];
+      return { html: x.h, fu: x.fu, ci: [], tit: x.tit, ir: x.ir, sug: x.sug };
+    }
+    function nepResp(t) {
+      if (!NEP) return null;
+      var nepo = /nepotismo|parentesco|consanguin|afinidad|familiares? en el gobierno|(contrat|nombr|meti|mete|acomod)\w* a (su|sus|mi|mis|tu|tus) (familia|parientes)/.test(t);
+      var ciego = /apellido/.test(t) && /(famili|parient|nepotismo|prueba)/.test(t);
+      if (ciego) return nepTema('ciegos');
+      if (/(investig|audit|averigu|descubr|como (se )?(sabe|se si|saber|compruebo|pruebo))/.test(t) && (nepo || /famili|parient/.test(t)) && /(funcionari|servidor|gobierno|cargo|contrat|nombr)/.test(t)) return nepTema('investigar');
+      var rel = null;
+      for (var i = 0; i < NEP_AL.length && !rel; i++) if (NEP_AL[i][1].test(t)) rel = NEP_AL[i][0];
+      var elect = /nepotismo electoral|heredar (el|su) cargo|(candidat|postul|compet)\w*/.test(t);
+      if (elect && (nepo || rel)) return nepTema('electoral');
+      var trabajo = /cuenta como famili|es (mi |su |tu )?(famili|parient)|que parentesco|que grado|trabaj|contrat|nombr|emple|plaza|puesto|chamba|\bmeter\b|\bmetio\b|acomod|oficina|dependencia|ayuntamiento|nomina|contrato|licitacion|permiso|concesion|nepotismo/.test(t);
+      if (rel && trabajo) {
+        var p = null;
+        for (var k = 0; k < NEP.p.length; k++) if (NEP.p[k].id === rel) p = NEP.p[k];
+        if (!p) return null;
+        var tipo = p.t === 'cons' ? 'pariente por consanguinidad, línea ' + p.l + ', ' + NEP.o[p.g] + ' grado'
+          : p.t === 'afin' ? 'pariente por afinidad, línea ' + p.l + ', ' + NEP.o[p.g] + ' grado'
+          : p.t === 'vinc' ? 'un vínculo de pareja (no es parentesco, pero la ley lo nombra)' : 'sin parentesco para la ley';
+        var tuyo = p.n.replace(/^Mi /, 'tu ').replace(/ mi /g, ' tu ').replace(/ (de )?mi /g, ' $1tu ').toLowerCase();
+        var M = { si: '✅ Sí lo alcanza', no: '➖ No lo alcanza', quiza: '⚠️ Depende' };
+        return {
+          tit: tuyo.charAt(0).toUpperCase() + tuyo.slice(1) + ' y la ley de nepotismo',
+          html: '<p>Para la ley, <b>' + esc(tuyo) + '</b> es ' + esc(tipo) + '. ' + esc(p.x) + '</p>' +
+            '<ul class="pa-lista">' + NEP.l.map(function (l) {
+              var r = p.r[l.k];
+              return '<li><b>' + esc(l.n) + ':</b> ' + M[r] + '. <small>' + esc(l.d) + (r === 'quiza' && NEP.q[l.k] ? ' ' + esc(NEP.q[l.k]) : '') + '</small></li>';
+            }).join('') + '</ul>' +
+            '<p class="pa-chico">Que la ley alcance a un parentesco no quiere decir que haya falta: tiene que haber un nombramiento, un contrato o una candidatura, y lo decide la autoridad.</p>',
+          fu: NEP.l.map(function (l) { return { que: l.a, e: 'oficial', fu: l.u }; }).concat([{ que: 'Grados de parentesco (Código Civil Federal, arts. 292 a 300)', e: 'oficial', fu: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CCF.pdf' }]),
+          ci: [], ir: [NEP.pag[0] + '?rel=' + p.id + '#calculadora', 'Calculadora de parentesco'],
+          sug: ['¿Cómo investigo si un funcionario contrató a su familia?', '¿Qué es el nepotismo electoral?', '¿Por qué un apellido igual no prueba nada?']
+        };
+      }
+      if (/nepotismo electoral/.test(t)) return nepTema('electoral');
+      if (nepo) return nepTema('general');
+      return null;
+    }
+
+    /* ---------- «Documentar para sancionar», el informe especial de la ASF (27-10-2026) ---------- */
+    var SAN = D.san || null;
+    var SAN_FAM = SAN ? Object.keys(SAN.fam).map(function (k) { return [k, new RegExp(SAN.fam[k])]; }) : [];
+    function sanTema(k) {
+      var x = SAN.t[k];
+      return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug };
+    }
+    function sanResp(t) {
+      if (!SAN) return null;
+      if (/documentar para sancionar|informe especial de la asf|guia de la asf/.test(t)) return sanTema('informe');
+      /* El informe semestral de la ASF (art. 38 LFRCF): lo que pasó con lo que observó. */
+      var asf = /\basf\b|auditoria superior|auditoria|fiscaliz/;
+      if (SAN.t.sem_informe) {
+        if (/(que no dice|puntos? ciegos?|lo que (le )?falta)/.test(t) && /semestral/.test(t)) return sanTema('sem_ciegos');
+        if (/informe semestral|situacion que guardan|estado que guarda la solventacion/.test(t)) return sanTema('sem_informe');
+        if (/resarcitori|fincamiento/.test(t)) return sanTema('sem_resarcitorias');
+        if (/(recuper|devuelt|devolvi|reintegr|regresad)/.test(t) && asf.test(t) && /cuant|dinero|monto|lana|millones/.test(t)) return sanTema('sem_recuperaciones');
+        if (/denuncias?( penal\w*| de hechos)?|sentencias?|carcel|ministerio publico|fiscalia/.test(t) && asf.test(t) && /cuant|como van|como va|que paso|estado|cuales/.test(t)) return sanTema('sem_denuncias');
+        if ((/cuant[oa]s?/.test(t) && /sancionad|sanciones|inhabilitad|castigad|al tribunal|tfja|destituid/.test(t) && (asf.test(t) || /funcionari|servidor/.test(t))) ||
+            /procedimientos? de responsabilidad|remitid\w* al (tfja|tribunal)|casos? (en|al) (el )?tribunal/.test(t)) return sanTema('sem_procedimientos');
+        if (/(cuant|como van|que paso|estado)/.test(t) && /pliegos?|acciones|observaciones|\bpras\b|promociones/.test(t) && (asf.test(t) || /pliego|pras/.test(t))) return sanTema('sem_acciones');
+      }
+      /* Un tipo de irregularidad, solo si se pregunta por la sanción o la prueba. */
+      if (/sancion|sancionar|castig|responsab|expediente|que documentos|como (lo |la )?(pruebo|pruebas|demuestro|probar)|falta administrativa|denunci|es ilegal|es delito|que pasa si|matriz/.test(t)) {
+        for (var i = 0; i < SAN_FAM.length; i++) if (SAN_FAM[i][1].test(t)) return sanTema('fam_' + SAN_FAM[i][0]);
+      }
+      if (/(elementos?|que (tiene|debe|deben|necesita|necesitan) (que )?probar|que se necesita para).*(sancion|sancionar|expediente|responsab|asf)|elemento (personal|conductual|circunstancial|finalidad)/.test(t)) return sanTema('elementos');
+      if (/(por que|porque).*(nadie|no|pocos|casi nunca).*(sancion|castig|carcel|pisa)|impunidad/.test(t) && /asf|auditor|funcionari|servidor|corrupc|desvio|observa/.test(t)) return sanTema('diagnostico');
+      if (/(que|cuales) sanciones|(lo|los|la|las|le|les) (pueden )?(sancionar|castigar|inhabilitar)|inhabilitacion|destitucion|sancion economica/.test(t)) return sanTema('sanciones');
+      if ((/(que|cuanto) (pasa|sigue|tarda)|despues de/.test(t) && /asf|auditoria|observa|pliego|no solvent/.test(t)) ||
+          /de la (irregularidad|auditoria|observacion) a la sancion|como se sanciona|quien sanciona|autoridad (investigadora|substanciadora|sustanciadora|resolutora)/.test(t) ||
+          (/prescrib|caducidad/.test(t) && /sancion|falta|responsab/.test(t))) return sanTema('cadena');
+      if (/que es (el |un |la )?(desvio de recursos|abuso de funciones|desacato|uso indebido de recursos)|(cuales|que) son las faltas (administrativas )?graves|tipos de faltas/.test(t)) return sanTema('conductas');
+      if (/tipos? de irregularidad|matrices de la asf|(que|cuales) irregularidades (detecta|encuentra|revisa)/.test(t)) return sanTema('matrices');
+      return null;
+    }
+
     /* ---------- El Poder Judicial de la Federación (23-10-2026) ---------- */
     var JUD = D.jud || null;
     function judTema(k, antes) {
       var x = JUD.t[k];
       return { html: (antes || '') + x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug };
     }
-    function judResp(t) {
+    /* Un poder judicial estatal: lo que entró, lo que concluyó, con cuánto dinero y lo que se le acumula (CNIJF-E 2025). */
+    function judEstado(e) {
+      var r = (JUD.est || []).filter(function (x) { return x[0] === e.a; })[0];
+      if (!r) return null;
+      var x = JUD.t.gestion_estados, tot = [0, 0];
+      JUD.est.forEach(function (y) { tot[0] += y[2]; tot[1] += y[3]; });
+      var p100 = 100 * r[3] / r[2], costo = r[1] * 1e6 / r[3];
+      var orden = JUD.est.slice().sort(function (a, b) { return a[3] / a[2] - b[3] / b[2]; }), lugar = orden.indexOf(r) + 1;
+      var h = '<p>En 2024 entraron <b>' + n(r[2]) + ' asuntos</b> a los juzgados de primera instancia del Poder Judicial de <b>' + esc(e.n) + '</b> y concluyó <b>' + n(r[3]) + '</b>: ' +
+        '<b>' + n(p100, 1) + ' de cada 100</b> (en todo el país, ' + n(100 * tot[1] / tot[0], 1) + '). ' +
+        (lugar <= 16 ? 'Es el lugar <b>' + lugar + ' de 32</b> entre los que menos concluyen para lo que les llega.' : 'Está entre los que más concluyen: lugar ' + (33 - lugar) + ' de 32.') + '</p>' +
+        '<p>Ejerció <b>$' + n(r[1], 1) + ' millones</b>: <b>$' + n(costo) + ' por asunto concluido</b>. Tiene ' + n(r[5]) + ' personas juzgadoras, ' + n(r[3] / r[5]) + ' asuntos concluidos por cada una.</p>' +
+        '<p>Al cierre del año le quedaban <b>' + n(r[4]) + ' causas penales pendientes</b> de concluir en el sistema acusatorio (el INEGI cuenta a cada persona procesada). ' +
+        'Cuánto quedó sin resolver en lo civil, familiar y mercantil no lo publica el reporte del censo.</p>' +
+        '<p class="pa-chico">El dinero por asunto no es lo que cuesta un juicio: el presupuesto paga todo el poder judicial. Y son cifras que el propio poder judicial le reporta al INEGI.</p>';
+      var fc = { tx: x.fu[0].fu.tx.replace(/, p\. \d+$/, ''), url: x.fu[0].fu.url };
+      var fu = [{ que: 'Asuntos ingresados y concluidos de ' + e.n + ' (tabla 23, p. 39)', e: 'oficial', fu: fc },
+        { que: 'Presupuesto ejercido en 2024 (gráfica 7, p. 14)', e: 'oficial', fu: fc },
+        { que: 'Causas penales pendientes y personas juzgadoras (tabla 25, p. 45, y tabla 6, p. 12)', e: 'oficial', fu: fc },
+        { que: 'Concluidos por cada 100 que entraron', e: 'derivado', op: n(r[3]) + ' ÷ ' + n(r[2]) + ' × 100', fu: fc },
+        { que: 'Dinero por asunto concluido', e: 'derivado', op: '$' + n(r[1], 1) + ' millones ÷ ' + n(r[3]), fu: fc },
+        { que: 'Asuntos concluidos por persona juzgadora', e: 'derivado', op: n(r[3]) + ' ÷ ' + n(r[5]), fu: fc }];
+      fu.push(x.fu[x.fu.length - 1]);
+      return { html: h, fu: fu, tit: 'Lo que cuesta y lo que resuelve el Poder Judicial de ' + e.n, ir: x.ir,
+        ci: [{ v: n(p100, 1), etq: 'asuntos concluidos por cada 100 que entraron', e: 'derivado' }, { v: '$' + n(costo), etq: 'por asunto concluido', e: 'derivado' },
+          { v: n(r[4]), etq: 'causas penales pendientes al cierre de 2024', e: 'oficial' }],
+        sug: ['¿Cuánto rezago tienen los poderes judiciales de los estados?', '¿Cuánto rezago penal hay?', '¿Cuánto tarda la Suprema Corte en resolver?'] };
+    }
+    function judResp(t, es) {
       if (!JUD) return null;
       var pj = /judicial|judicatura|\bpjf\b|suprema corte|\bscjn\b|la corte\b|\bjuez|\bjueces|juezas?\b|magistrad|ministr[oa]s?\b/;
+      /* La auditoría de gestión (27-10-2026): lo que resuelve con su dinero, el rezago y cuánto tarda. */
+      var juzga = /judicial|judicatura|\bpjf\b|suprema corte|\bscjn\b|la corte\b|\bjuez|\bjueces|juezas?\b|juzgado|tribunal|magistrad|justicia/;
+      if (/rezago|pendientes? de (concluir|resolver)|(asuntos|casos|juicios|expedientes|causas) (sin resolver|pendientes|acumulad|atorad)|(cuant[oa]s) (asuntos|casos|juicios|expedientes) (resuelve|resolvio|resolvieron|concluy|saca|sacan|atiende)|(cuanto|que tanto) (resuelve|resuelven|trabaja|trabajan)|(costo|cuesta|cuestan|dinero) (por|de) (cada )?(asunto|caso|juicio|expediente)|auditoria de gestion|desempeno|productividad|carga de trabajo|eficien/.test(t) && (juzga.test(t) || /rezago penal|causas penales/.test(t))) {
+        if (es && es.length === 1) return judEstado(es[0]);
+        if (/penal|carcel|preso|procesad/.test(t) || (/rezago|pendiente/.test(t) && !/estado|estatal|local|federal|corte|scjn/.test(t))) return judTema('rezago');
+        if (/estados|estatal|locales|cada estado|los estados/.test(t)) return judTema('gestion_estados');
+        return judTema('gestion');
+      }
+      if (/(cuanto|que tanto) (tarda|tardan|dura|duran|se tarda|se tardan)|duracion|cuanto tiempo|audiencia/.test(t) && juzga.test(t) && !/impuesto|fiscal|tributari/.test(t)) return judTema('tiempos');
       if (/fideicomis/.test(t) && pj.test(t)) return judTema('fideicomisos');
       if (/haber(es)? de retiro|pension(es)? (vitalicia|de (los )?ministr)|liquidacion(es)? de (los )?(jueces|ministr|magistrad)/.test(t)) return judTema('retiro');
       if (/eleccion|elegir|elegimos|votar|vota\b|votamos|votaron|eligen|elige|eligieron|votacion|comicios|urnas/.test(t) &&
@@ -1072,6 +1194,40 @@
       if (/acci(on|ones) de inconstitucionalidad|controversias? constitucional/.test(t)) return judTema('controversias');
       if (/jurisprudencia|declaratoria general|obliga a (todos )?los (jueces|tribunales)/.test(t)) return judTema('jurisprudencia');
       if (/(cuanto|cuando) (tarda|dura|debe tardar)|plazo (para|de)/.test(t) && /juicio|sentencia|amparo|jueces|juez/.test(t)) return judTema('plazos');
+      return null;
+    }
+
+    /* ---------- Salud pública: lo que cuesta y lo que resuelve (27-10-2026) ---------- */
+    var SAL = D.sal || null;
+    function salTema(k) { var x = SAL.t[k]; return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug }; }
+    function salResp(t) {
+      if (!SAL) return null;
+      if (/seguro popular|insabi|instituto de salud para el bienestar/.test(t)) return salTema('transicion');
+      if (/imss ?bienestar/.test(t)) return salTema('imss_bienestar');
+      var imss = /\bimss\b|seguro social/.test(t), iss = /issste/.test(t);
+      var gestion = /consulta|cirug|operacion|egreso|hospitaliz|urgencia|atendi|atiende|atienden|resuelve|resolvio|espera|tarda|medicos?\b|doctor|especialista|camas?\b|quirofano|ocupacion|metas?\b|anunci|en salud|atencion medica|enfermedad y maternidad/;
+      if (iss && gestion.test(t)) return salTema('issste');
+      if (!imss || !gestion.test(t)) return null;
+      if (/cirug|operacion/.test(t) && (PIDE_VER.test(t) || /1 78|millon 780|anunci|dijo|meta/.test(t))) return salTema('imss_cotejo');
+      if (/anunci|dijo|metas?\b|boletin|conferencia/.test(t)) return salTema('imss_cotejo');
+      if (/medicos?\b|doctor|especialistas|camas?\b|quirofano|ocupacion|consultorios/.test(t)) return salTema('imss_recursos');
+      if (/gasta|gasto|cuesta|dinero|presupuesto|enfermedad y maternidad|en salud/.test(t) && !/consulta|cirug|egreso|urgencia/.test(t)) return salTema('imss_dinero');
+      return salTema('imss_servicios');
+    }
+
+    /* La PROFEPA: lo que cuesta y lo que resuelve (gestion_ambiental.py). Su presupuesto 2026 lo sigue contestando el bloque ambiental. */
+    var AMG = D.amg || null;
+    function amgTema(k) { var x = AMG.t[k]; return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug }; }
+    function amgResp(t) {
+      if (!AMG) return null;
+      var ent = /profepa|procuraduria federal de proteccion al ambiente|denuncias? (popular|populares|ambiental|ambientales)\b|justicia ambiental|delitos? (ambiental|ambientales|contra el ambiente)/;
+      if (!ent.test(t)) return null;
+      if (/tarda|plazo|cuanto tiempo|dias\b|demora/.test(t)) return amgTema('plazos');
+      if (/cuadra|errata|87|informe dice|recursos? de revision|legalidad|99 5/.test(t)) return amgTema('cotejo');
+      if (/multa|sancion|clausur|fiscalia|fgr|querella|cobr|delito/.test(t)) return amgTema('multas');
+      if (/rezago|acumul|procedimiento|pendientes? de resolver|sin resolver/.test(t)) return amgTema('rezago');
+      if (/denuncia|queja|resuelv|resolvi|atiend|atendi|conclu|investig|admit|turna/.test(t)) return amgTema('denuncias');
+      if (/cuesta|gasta|gasto|ejerci|sueldo|dinero en que/.test(t)) return amgTema('dinero');
       return null;
     }
 
@@ -1198,6 +1354,11 @@
       var r = !crudo && platica(t);
       if (r) { r.plat = 1; return fin(r, { tipo: '' }); }
       /* «¿Es cierto que…?», una liga o un párrafo con montos: se verifica. */
+      /* «¿Es cierto que el IMSS hizo 1.78 millones de cirugías?»: el cotejo de salud, antes del verificador general. */
+      var rsal = salResp(t);
+      if (rsal) return fin(rsal, { tipo: 'sal' });
+      var ramg = amgResp(t);
+      if (ramg) return fin(ramg, { tipo: 'amg' });
       if (!crudo && (PIDE_VER.test(t) || LIGA.test(q) || (q.length > 160 && /\d/.test(q) && /peso|millon|billon|mdp/.test(t)))) {
         var vr = verifica(q, t);
         return vr.listo ? vr : fin(vr, { tipo: vr.plat || vr.sinDato || vr.pasa ? '' : 'ver' });
@@ -1212,7 +1373,12 @@
 
       /* El Poder Legislativo y las elecciones: curules, sesiones, fechas y reformas. */
       /* El Poder Judicial: la Corte, los circuitos, la elección, el amparo. */
-      var rj = judResp(t);
+      /* «Documentar para sancionar»: de la irregularidad a la sanción. */
+      var rn = nepResp(t);
+      if (rn) return fin(rn, { tipo: 'nep' });
+      var rs = sanResp(t);
+      if (rs) return fin(rs, { tipo: 'san' });
+      var rj = judResp(t, es);
       if (rj) return fin(rj, { tipo: 'jud' });
       if (LEG && sigue && ctx.tipo === 'legcong' && es.length === 1 && !DINERO.test(t)) return fin(congresoLocal(es[0]), { tipo: 'legcong' });
       var rl = legResp(t, es, dir, cuantos);
@@ -1274,7 +1440,8 @@
 
       /* El país: si no se habla de un estado ni de un sexenio. La deuda y los
          intereses van primero; el gasto y los ingresos, después de Números. */
-      var nt = !es.length && nacTema(t), pideParte = PCT.test(t) || /de cada (peso|\$? ?100|cien)/.test(t);
+      /* Pemex o la CFE no son el país: sus intereses tienen su propio renglón (27-10-2026). */
+      var nt = !es.length && !/ (pemex|cfe) /.test(t) && nacTema(t), pideParte = PCT.test(t) || /de cada (peso|\$? ?100|cien)/.test(t);
       var ntOk = nt && (NAC.test(t) || nt === 'intereses' || nt === 'nueva' || /presupuesto (de |del )?(2026|este ano|federal)|cuanto (se )?gasta el gobierno/.test(t));
       var anioH = (/\b(199\d|20[01]\d|202[0-5])\b/.exec(t) || [])[1];
       if (ntOk && /intereses|nueva|deuda/.test(nt) && !pideParte && !anioH) { var na = nacional(nt); if (na) return fin(na, { tipo: 'nac', tema: nt }); }
@@ -1435,6 +1602,24 @@
         cv.forEach(function (c) { fu.push({ que: c.etq, e: c.e, p: c.p, fu: (f.fu || [])[0] }); });
         return { html: h + deDonde(fu), ficha: f, ir: f.ir, sug: [] };
       }
+      if (f.t === 'columna' && f.cot && f.cot.length) {
+        h = '<p>🔍 Lo verificamos en <b>Noticias relevantes</b>: <b>' + esc(f.tit) + '</b>.</p><p>' + esc(corto(f.txt, 360)) + '</p>' + cotejo(f, true) +
+          (f.nota ? '<p class="pa-chico">⚖️ ' + esc(f.nota) + '</p>' : '') +
+          '<p>Toca <b>«Saber más»</b> y te abro la columna completa; con <b>«Generar dictamen»</b> te llevas el cotejo con cada documento.</p>';
+        f.cot.forEach(function (x) { fu.push({ que: x.d, e: x.r === 'pendiente' ? 'pendiente' : (x.r === 'no consta' ? 'pendiente' : 'oficial'), p: x.p, fu: x.fu }); });
+        return { html: h + deDonde(fu.filter(function (x) { return x.fu && x.fu.url; })), ficha: f, ir: f.ir, sug: [] };
+      }
+      if (f.t === 'columna') {
+        var cc = (f.ci || []).slice(0, 3);
+        h = '<p>📰 En <b>Noticias relevantes</b>: <b>' + esc(f.tit) + '</b>.</p><p>' + esc(corto(f.txt, 360)) + '</p>' +
+          (cc.length ? '<ul class="pa-lista">' + cc.map(function (c) { return '<li><b>' + esc(c.v) + '</b> · ' + esc(c.etq) + ' ' + chip(c.e) + '</li>'; }).join('') + '</ul>' : '') +
+          (f.dc ? '<p class="pa-col-dc"><b>💡 Dato curioso:</b> ' + esc(f.dc) + '</p>' : '') +
+          (f.nota ? '<p class="pa-chico">⚖️ ' + esc(f.nota) + '</p>' : '') +
+          '<p>Toca <b>«Saber más»</b> y te abro la columna completa, con cada documento que la sostiene.</p>';
+        cc.forEach(function (c) { fu.push({ que: c.etq, e: c.e, fu: c.fu || (f.fu || [])[0] }); });
+        if (!cc.length && f.fu && f.fu[0]) fu.push({ que: 'Documento', e: 'oficial', fu: f.fu[0] });
+        return { html: h + (fu.length ? deDonde(fu) : ''), ficha: f, ir: f.ir, sug: [] };
+      }
       if (f.t === 'pagina' || f.t === 'seccion') {
         h = '<p>Eso lo encuentras en <a href="' + esc(f.ir[0]) + '"><b>' + esc(f.tit) + '</b></a>' + (f.t === 'seccion' ? ' (en ' + esc(f.ir[1]) + ')' : '') + '.' + (f.txt ? ' ' + esc(corto(f.txt, 240)) : '') + '</p>';
         return { html: h, ficha: f, ir: f.ir, sug: [] };
@@ -1451,8 +1636,33 @@
       return { html: h + (fu.length ? deDonde(fu) : ''), ficha: f, ir: f.ir, sug: [] };
     }
 
+    /* Verificamos (26-10-2026): lo que circula en redes y su cotejo contra
+       el documento oficial, afirmación por afirmación. */
+    var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
+    function cotejo(f, abierto) {
+      if (!f.cot || !f.cot.length) return '';
+      return (f.cir ? '<blockquote class="pa-cir"><b>📣 Lo que circula</b><p>«' + esc(f.cir.tx) + '»</p><small>' + esc(f.cir.q) + '</small></blockquote>' : '') +
+        '<details class="pa-cot"' + (abierto ? ' open' : '') + '><summary>🔍 Cotejo, afirmación por afirmación <small>(' + f.cot.length + ')</small></summary><ol>' +
+        f.cot.map(function (x) {
+          var r = RES[x.r] || RES.pendiente;
+          return '<li class="pa-cot-' + esc(x.r.replace(' ', '-')) + '"><p class="pa-cot-d">«' + esc(x.d) + '»</p>' +
+            '<p>' + (x.r === 'pendiente' ? chip('pendiente', x.p) : '<span class="pa-cot-r">' + r[0] + ' ' + r[1] + '</span>') + ' ' + esc(x.x) + '</p>' +
+            '<small>' + (x.fu.url ? '<a href="' + esc(x.fu.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.fu.tx) + ' ↗</a>' : esc(x.fu.tx)) + '</small></li>';
+        }).join('') + '</ol></details>' +
+        (f.sigue && f.sigue.length ? '<div class="pa-sigue"><p class="pa-mas-t">🗓️ Lo que sigue para seguir el dinero</p><ul>' + f.sigue.map(function (x) {
+          return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.tx) + ' ↗</a></li>';
+        }).join('') + '</ul></div>' : '');
+    }
+
     return {
+      cotejo: cotejo,
       contesta: function (q) { try { return contesta(q); } catch (e) { if (window.console) console.warn('AuditorCharla', e); return null; } },
+      /* El veredicto de una cifra dicha contra un valor oficial (lo usa Inversión y Megaobras). */
+      juzga: function (claim, val) { var d = cifraDicha(norm(claim).replace(/[¿?¡!]/g, ' ')), j = d && juzgaDicho(d, val); return j ? { dicho: d, v: j } : null; },
+      /* Salud pública antes que Verificamos: «¿es cierto que el IMSS hizo 1.78 millones de cirugías?» es un cotejo de salud (27-10-2026). */
+      salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
+      nepotismo: function (q) { var r = nepResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'nep' }); },
+      ambiente: function (q) { var r = amgResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'amg' }); },
       deFicha: deFicha, deDonde: deDonde, olvida: function () { ctx = {}; }, ctx: function () { return ctx; }
 
     };

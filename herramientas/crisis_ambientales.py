@@ -123,6 +123,15 @@ JAL_ZAPOTILLO = JAL + 'confirma-pablo-lemus-gobernador-de-jalisco-respal-47963'
 JAL_SALUD = JAL + '47232'
 PRES_0810 = ('https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-'
              'claudia-sheinbaum-pardo-del-08-de-octubre-de-2026')
+PRES_1610 = ('https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-'
+             'claudia-sheinbaum-pardo-del-16-de-octubre-de-2026')
+PRES_2110 = ('https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-'
+             'claudia-sheinbaum-pardo-del-21-de-octubre-de-2026')
+GACETA_SON_2104 = 'https://gestion.api.congresoson.gob.mx/publico/descarga?uuid=f8cf663d-4257-4f5d-8b08-b05b80a83e72'
+# El caso de Guaymas comparte sus pendientes con su columna de Verificamos
+# (noticias-auditavision.html#col-guaymas-comodato-amigo-gnl): los ids
+# red-<columna>-<n> los anota pendientes.py desde el cotejo.
+COL_GUAYMAS = 'guaymas-comodato-amigo-gnl'
 
 
 def mmp_tx(v):
@@ -276,6 +285,27 @@ def casos(base, ref):
          % fuente(JAL_SALUD, 'comunicado')),
     ], 'Una misma obra tiene varios precios según el comunicado, el total del plan solo se conoce por la prensa y nadie ha publicado cuántas casas reciben agua sucia. Lo que sí está documentado suma ya %s en solo dos obras.'
        % mdp(11922 + 7500, 0))
+    gym = _caso('en-curso', '🚢', 'Golfo de California · Proyecto AMIGO en Guaymas', '2026 · Guaymas, Sonora', 'En litigio', [
+        ('📍', '41.7 ha', 'El terreno, según la Secretaría de Energía', 'oficial', None,
+         'En el Parque Industrial Pesquero «General Rodolfo Sánchez Taboada», el 0.005 %% del municipio (%s). '
+         'En redes circulan 54 hectáreas en comodato gratuito: <a href="noticias-auditavision.html#col-%s">lo cotejamos en Verificamos</a>.'
+         % (fuente(PRES_2110, 'versión estenográfica del 21-10-2026'), COL_GUAYMAS)),
+        ('🚢', '60 al año', 'Buques metaneros, como máximo', 'oficial', None,
+         'Cinco al mes, el 4 %% de las embarcaciones que ya cruzan la zona; almacenamiento para 290 mil metros cúbicos de gas (%s).'
+         % fuente(PRES_2110, 'versión estenográfica del 21-10-2026')),
+        ('⚖️', 'Detenida', 'La obra, por amparos', 'oficial', None,
+         'La Presidenta: «ahorita se paró, como hay amparos» y «no hay ningún daño ambiental» (%s); el 21 de octubre dijo que se revisan otra vez los impactos (%s).'
+         % (fuente(PRES_1610, '16-10-2026'), fuente(PRES_2110, '21-10-2026'))),
+        ('🌿', 'Sin publicar', 'El resolutivo de impacto ambiental', 'pendiente', 'red-%s-8' % COL_GUAYMAS,
+         'Lo emite la ASEA, que también está en el <a href="herramienta-ambiente-auditor.html#aa-G00">Auditor ambiental</a> con su presupuesto. '
+         'La prensa reporta versiones distintas sobre si ya se otorgó; no lo pudimos abrir.'),
+        ('📄', 'Sin publicar', 'El contrato del terreno', 'pendiente', 'red-%s-1' % COL_GUAYMAS,
+         'El Gobierno de Sonora no ha transparentado el comodato que reporta la prensa ni su estado jurídico.'),
+        ('🏛️', '12-02-2026', 'El exhorto del Congreso de Sonora', 'oficial', None,
+         'Diputados del PAN y de MC pidieron a la ASEA, al INECC y a la Semarnat revisar el impacto de los tres proyectos de gas del Golfo (Saguaro, AMIGO y Vista Pacífico). '
+         'No se aprobó como urgente y se turnó a comisión (%s).' % fuente(GACETA_SON_2104, 'Gaceta No. 2104')),
+    ], 'Nadie ha publicado cuánto pagaría el proyecto en impuestos y derechos ni cuánto dejaría en Sonora, y el estudio que diría cuánto riesgo corren las ballenas y la pesca es justo lo que está en litigio. '
+       'Sin esos dos documentos no se puede hacer la cuenta de quién gana y quién pierde.')
     return '''<section class="cr-sec" aria-labelledby="crCasosTit">
         <h2 class="cr-tit" id="crCasosTit"><span aria-hidden="true">📂</span> Los casos, ficha por ficha</h2>
         <p class="cr-txt">Cada ficha sigue el mismo orden: qué se declaró, cuánto se dañó, cuánto se anunció, cuánto se comprobó y qué sigue sin publicarse. Lo que solo dijo la prensa no entra como cifra.</p>
@@ -283,8 +313,9 @@ def casos(base, ref):
         %s
         %s
         %s
+        %s
         </div>
-      </section>''' % (otis, simon, gdl)
+      </section>''' % (gym, otis, simon, gdl)
 
 
 def fondo(base, ref):

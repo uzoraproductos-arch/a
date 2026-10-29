@@ -1,0 +1,63 @@
+/* Nepotismo y parentesco (28-10-2026): séptima aplicación del Modo Inspector,
+   herramienta-inspector-nepotismo.html, que arma herramientas/nepotismo.py. */
+.nep-indice { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; }
+.nep-indice a { display: inline-flex; align-items: center; min-height: 44px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--civ-gris-borde, #c9d9ee); background: #fff; font-weight: 600; font-size: 15px; text-decoration: none; color: var(--civ-azul, #0b2a63); }
+.nep-sec { margin: 0 0 34px; scroll-margin-top: 90px; }
+.nep-tit { margin: 0 0 6px; font-size: 24px; line-height: 1.25; scroll-margin-top: 90px; }
+.nep-txt { margin: 0 0 14px; font-size: 16px; line-height: 1.55; }
+.nep-calc { padding: 16px; border: 1px solid var(--civ-gris-borde, #c9d9ee); border-radius: 14px; background: var(--civ-gris, #f1f7fe); }
+.nep-calc-et { display: block; font-weight: 700; font-size: 17px; margin: 0 0 8px; }
+.nep-sel { width: 100%; min-height: 48px; font-size: 17px; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--civ-gris-borde, #c9d9ee); background: #fff; color: #10213f; }
+.nep-res:empty { display: none; }
+.nep-res { margin-top: 14px; }
+.nep-res-cab b { display: block; font-size: 19px; }
+.nep-res-cab span { display: inline-block; margin: 4px 0; padding: 2px 10px; border-radius: 999px; background: var(--civ-azul-claro, #e3f0fd); color: var(--civ-azul, #0b2a63); font-weight: 600; font-size: 15px; }
+.nep-res-cab p, .nep-res-pie { margin: 4px 0 10px; font-size: 16px; line-height: 1.5; }
+.nep-res-leyes { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.nep-res-leyes li { display: flex; gap: 12px; align-items: flex-start; padding: 12px; border-radius: 12px; background: #fff; border-left: 5px solid #9aa5b5; }
+.nep-res-leyes li.nep-r-si { border-left-color: #b4261c; }
+.nep-res-leyes li.nep-r-quiza { border-left-color: #b8860b; }
+.nep-r-m { font-size: 22px; line-height: 1; width: 28px; flex: 0 0 auto; }
+.nep-res-leyes b { display: block; font-size: 16px; }
+.nep-res-leyes small { display: block; font-size: 15px; line-height: 1.45; margin-top: 4px; }
+.nep-res-leyes a, .nep-ligas a, .nep-sigue a { display: inline-flex; align-items: center; min-height: 44px; }
+.nep-todos { margin-top: 14px; }
+.nep-todos summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 600; font-size: 16px; }
+.nep-tabla-env { overflow-x: auto; max-width: 100%; }
+.nep-tabla { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 16px; line-height: 1.45; background: #fff; }
+.nep-tabla th, .nep-tabla td { border: 1px solid var(--civ-gris-borde, #c9d9ee); padding: 10px; vertical-align: top; text-align: left; }
+.nep-tabla thead th { background: var(--civ-azul, #0b2a63); color: #fff; }
+.nep-tabla thead th a { color: #fff; }
+.nep-tabla tbody th { background: var(--civ-gris, #f1f7fe); }
+.nep-tabla-p td { text-align: center; }
+.nep-fig { margin: 0; overflow-x: auto; max-width: 100%; }
+.nep-arbol { width: 100%; min-width: 600px; height: auto; max-width: 720px; display: block; margin: 0 auto; }
+.nep-arbol .nep-l { stroke: #9aa5b5; stroke-width: 2; fill: none; }
+.nep-arbol .nep-l-afin { stroke-dasharray: 6 5; }
+.nep-arbol rect { stroke-width: 2; }
+.nep-arbol text { font: 600 14px 'Inter', system-ui, sans-serif; text-anchor: middle; fill: #10213f; }
+.nep-arbol .nep-g { font-weight: 400; font-size: 12px; }
+.nep-arbol .nep-cab { font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; fill: #5b6577; }
+.nep-arbol .nep-yo rect { fill: var(--civ-azul, #0b2a63); stroke: var(--civ-azul, #0b2a63); }
+.nep-arbol .nep-yo text { fill: #fff; }
+.nep-arbol .nep-si rect, .nep-ley-si { fill: #fbe3e0; stroke: #b4261c; background: #fbe3e0; border-color: #b4261c; }
+.nep-arbol .nep-no rect, .nep-ley-no { fill: #fff; stroke: #9aa5b5; stroke-dasharray: 5 4; background: #fff; border-color: #9aa5b5; }
+.nep-arbol .nep-vinc rect { fill: #fbe3e0; stroke: #b4261c; stroke-width: 3; }
+.nep-fig figcaption { font-size: 15px; margin-top: 8px; line-height: 1.6; }
+.nep-ley { display: inline-block; width: 18px; height: 14px; border: 2px solid; border-radius: 4px; vertical-align: -2px; }
+.nep-ley-no { border-style: dashed; }
+.nep-cuenta { margin-top: 14px; padding: 12px 14px; border-left: 4px solid var(--civ-azul-medio, #1a56b8); background: var(--civ-gris, #f1f7fe); font-size: 16px; line-height: 1.5; }
+.nep-cuenta p, .nep-cuenta ul { margin: 0 0 8px; }
+.nep-nota { font-size: 15px; }
+.nep-pasos { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.nep-pasos li { display: flex; gap: 14px; padding: 14px; border: 1px solid var(--civ-gris-borde, #c9d9ee); border-radius: 12px; background: #fff; }
+.nep-paso-n { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--civ-azul, #0b2a63); color: #fff; font-weight: 700; font-size: 18px; }
+.nep-pasos h3, .nep-ciegos h3 { margin: 0 0 4px; font-size: 18px; }
+.nep-pasos p, .nep-ciegos p { margin: 0 0 4px; font-size: 16px; line-height: 1.55; }
+.nep-ciegos { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.nep-ciegos li { padding: 14px; border-radius: 12px; background: #fff8e6; border-left: 5px solid #b8860b; }
+.nep-reglas, .nep-sigue { font-size: 16px; line-height: 1.55; padding-left: 22px; }
+.nep-reglas li, .nep-sigue li { margin-bottom: 8px; }
+@media (max-width: 560px) {
+  .nep-pasos li { flex-direction: column; gap: 8px; }
+}

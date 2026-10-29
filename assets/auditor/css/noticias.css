@@ -1,0 +1,182 @@
+/* Auditavisión · Noticias, el periódico (28-10-2026).
+   Cabezal de diario, barra de secciones, portada a tres columnas, la
+   Columna (opinión) con su fondo propio, seguimiento, mesa de redacción y
+   agenda. Las notas y columnas usan columnas.css; el verificador,
+   insp-nota.css. */
+.nt-diario {
+  --nt-tinta: #121212;
+  --nt-gris: #4f4f4f;
+  --nt-filete: #d9d4c7;
+  --nt-papel: #fffdf8;
+  --nt-op: #f6efe2;
+  --nt-rojo: #a3231b;
+  --nt-azul: #1f4f8a;
+  color: var(--nt-tinta);
+  font-family: 'Source Serif 4', Georgia, serif;
+}
+.nt-cabezal {
+  background: var(--nt-papel); border: 1px solid var(--nt-filete); border-bottom: 0; border-radius: 6px 6px 0 0;
+  text-align: center; padding: 14px 20px 10px;
+}
+.nt-cabezal-linea {
+  display: flex; justify-content: space-between; gap: 6px 16px; flex-wrap: wrap; margin: 0;
+  font: 600 12px 'Inter', system-ui, sans-serif; letter-spacing: 0.06em; text-transform: uppercase; color: var(--nt-gris);
+  border-bottom: 1px solid var(--nt-filete); padding-bottom: 8px;
+}
+.nt-nombre {
+  font-family: 'Playfair Display', Georgia, serif; font-weight: 900; margin: 12px 0 2px;
+  font-size: clamp(34px, 6.4vw, 68px); line-height: 1.02; letter-spacing: -0.015em;
+}
+.nt-nombre span { font-style: italic; font-weight: 700; }
+.nt-lema { margin: 0; font-style: italic; color: var(--nt-gris); font-size: 16px; }
+
+/* La barra de secciones: se queda a la vista bajo la cabecera del sitio. */
+.nt-barra {
+  position: sticky; top: 0; z-index: 40;
+  display: flex; gap: 2px; overflow-x: auto; scrollbar-width: thin;
+  background: var(--nt-papel); border: 1px solid var(--nt-filete); border-top: 3px double var(--nt-tinta); border-bottom: 1px solid var(--nt-tinta);
+  padding: 0 8px; margin: 0 0 22px;
+}
+.nt-barra a {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 12px;
+  font: 700 13px 'Inter', system-ui, sans-serif; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--nt-tinta); text-decoration: none; border-bottom: 3px solid transparent; white-space: nowrap;
+}
+.nt-barra a:hover { background: #f1ece0; }
+.nt-barra a[aria-current="true"] { border-bottom-color: var(--nt-rojo); color: var(--nt-rojo); }
+.nt-barra a:focus-visible { outline: 2px solid var(--nt-azul); outline-offset: -2px; }
+
+/* Cada sección */
+.nt-sec { scroll-margin-top: 170px; margin: 0 0 40px; }
+.nt-sec-cab { border-top: 3px solid var(--nt-tinta); padding-top: 10px; margin-bottom: 16px; }
+.nt-tit {
+  font-family: 'Playfair Display', Georgia, serif; font-weight: 800; margin: 0 0 6px;
+  font-size: clamp(25px, 3.2vw, 34px); line-height: 1.15; color: var(--nt-tinta);
+}
+.nt-entrada { margin: 0; max-width: 72ch; font-size: 17px; line-height: 1.55; color: #333333; }
+.nt-sub { font-family: 'Playfair Display', Georgia, serif; font-size: 21px; margin: 22px 0 10px; color: var(--nt-tinta); }
+.nt-sub small { font: 500 14px 'Inter', system-ui, sans-serif; color: var(--nt-gris); }
+.nt-pie { font-size: 16px; line-height: 1.55; color: var(--nt-gris); margin: 12px 0 0; }
+.nt-sec-portada .nt-sec-cab { display: none; }
+
+/* Botones */
+.nt-acciones { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 0; }
+.nt-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0 18px;
+  font: 700 15px 'Inter', system-ui, sans-serif; color: #ffffff; background: var(--nt-tinta);
+  border: 1px solid var(--nt-tinta); border-radius: 999px; cursor: pointer; text-decoration: none;
+}
+.nt-btn:hover { background: #333333; }
+.nt-btn:disabled { opacity: 0.6; cursor: wait; }
+.nt-btn-sec { background: transparent; color: var(--nt-tinta); }
+.nt-btn-sec:hover { background: var(--nt-tinta); color: #ffffff; }
+.nt-btn:focus-visible { outline: 2px solid var(--nt-azul); outline-offset: 2px; }
+.nt-btn-chico { font-size: 14px; padding: 0 14px; }
+
+/* Portada: principal, más noticias y opinión */
+.nt-portada-raiz { background: var(--nt-papel); border: 1px solid var(--nt-filete); border-radius: 6px; padding: 18px 22px 22px; }
+.nt-portada { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); gap: 0; margin-top: 16px; }
+.nt-lead { padding-right: 22px; }
+.nt-lead-a { color: inherit; text-decoration: none; display: block; }
+.nt-lead-a:hover .nt-lead-tit { text-decoration: underline; }
+.nt-lead-tit { font-family: 'Playfair Display', Georgia, serif; font-weight: 800; font-size: clamp(26px, 3.4vw, 38px); line-height: 1.12; margin: 6px 0 10px; }
+.nt-lead-balazo { font-size: 18px; line-height: 1.55; margin: 0 0 8px; color: #2b2b2b; }
+.nt-lead .col-fig { margin-bottom: 12px; }
+.nt-mas, .nt-op { border-left: 1px solid var(--nt-filete); padding: 0 18px; }
+.nt-op { background: var(--nt-op); padding-top: 12px; padding-bottom: 12px; border-radius: 0 4px 4px 0; }
+.nt-col-tit { font: 800 13px 'Inter', system-ui, sans-serif; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 8px; padding-bottom: 6px; border-bottom: 2px solid var(--nt-tinta); }
+.nt-op-lema { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 18px; margin: 0 0 6px; }
+.nt-llamadas { list-style: none; margin: 0; padding: 0; }
+.nt-llamada { padding: 10px 0; border-bottom: 1px solid var(--nt-filete); }
+.nt-llamada a { color: inherit; text-decoration: none; display: block; }
+.nt-llamada a:hover b { text-decoration: underline; }
+.nt-llamada b { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 18px; line-height: 1.25; margin-top: 2px; }
+.nt-llamada-op b { font-style: italic; }
+.nt-cotejo-mini { display: block; font: 500 13px 'Inter', system-ui, sans-serif; color: var(--nt-gris); margin-top: 4px; }
+.nt-ver-todo { display: inline-flex; align-items: center; min-height: 44px; font: 700 14px 'Inter', system-ui, sans-serif; color: var(--nt-rojo); }
+
+/* La Columna: la opinión lleva su propio papel */
+.nt-sec-opinion .nt-sec-cab { border-top-color: var(--nt-rojo); }
+.col-diario.col-opinion { background: var(--nt-op); }
+.col-opinion .col-titular { font-style: italic; }
+
+/* Verifica: el portal a todo lo ancho */
+.nt-sec-verifica .in-portal { margin-top: 0; }
+
+/* Réplica y postura, y pedir un seguimiento */
+.nt-dos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.nt-caja { background: var(--nt-papel); border: 1px solid var(--nt-filete); border-radius: 6px; padding: 14px 18px; }
+.nt-caja .nt-sub { margin-top: 0; }
+.nt-caja p { font-size: 16.5px; line-height: 1.55; margin: 0 0 8px; }
+.nt-pide { margin-top: 18px; border-left: 4px solid var(--nt-rojo); }
+
+/* Seguimiento: los casos abiertos */
+.nt-casos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.nt-caso { background: var(--nt-papel); border: 1px solid var(--nt-filete); border-radius: 6px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.nt-caso-cab a { color: inherit; text-decoration: none; display: block; }
+.nt-caso-cab a:hover b { text-decoration: underline; }
+.nt-caso-cab b { font-family: 'Playfair Display', Georgia, serif; font-size: 18px; line-height: 1.25; }
+.nt-caso-cab small { display: block; font: 500 13px 'Inter', system-ui, sans-serif; color: var(--nt-gris); margin-top: 4px; }
+.nt-caso-falta { margin: 0; padding-left: 18px; font-size: 16px; line-height: 1.45; }
+.nt-caso-falta li { margin-bottom: 4px; }
+.nt-caso .col-seguir { align-self: flex-start; min-height: 44px; }
+
+/* Mesa de redacción */
+.nt-mesa { background: var(--nt-papel); border: 1px solid var(--nt-filete); border-radius: 6px; padding: 16px 18px; }
+.nt-mesa-temas { display: flex; flex-wrap: wrap; gap: 8px; }
+.nt-chip {
+  min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--nt-filete); background: #ffffff;
+  font: 600 14px 'Inter', system-ui, sans-serif; color: var(--nt-tinta); cursor: pointer;
+}
+.nt-chip[aria-pressed="true"] { background: var(--nt-tinta); color: #ffffff; border-color: var(--nt-tinta); }
+.nt-chip:focus-visible { outline: 2px solid var(--nt-azul); outline-offset: 2px; }
+.nt-mesa-q { margin: 14px 0 0; font-size: 16px; color: var(--nt-gris); font-style: italic; }
+.nt-mesa-falla { font-size: 16px; margin: 14px 0 6px; }
+.nt-titulares { list-style: none; margin: 14px 0 0; padding: 0; }
+.nt-tit-item { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; padding: 12px 0; border-bottom: 1px solid var(--nt-filete); }
+.nt-sinv {
+  grid-row: span 2; align-self: start; font: 700 11.5px 'Inter', system-ui, sans-serif; letter-spacing: 0.05em; text-transform: uppercase;
+  color: #7a4a00; background: #fff1d6; border: 1px solid #e8c37a; border-radius: 4px; padding: 3px 6px;
+}
+.nt-tit-a { font-family: 'Playfair Display', Georgia, serif; font-size: 18px; line-height: 1.3; color: var(--nt-tinta); }
+.nt-tit-item small { font: 500 14px 'Inter', system-ui, sans-serif; color: var(--nt-gris); }
+.nt-tit-acc { grid-column: 2; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+
+/* Agenda del erario */
+.nt-ag-lista { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.nt-ag { display: grid; grid-template-columns: 64px 1fr; gap: 12px; background: var(--nt-papel); border: 1px solid var(--nt-filete); border-radius: 6px; padding: 12px 14px; }
+.nt-ag-pronto { border-color: var(--nt-rojo); box-shadow: inset 4px 0 0 var(--nt-rojo); }
+.nt-ag-fecha { text-align: center; border-right: 1px solid var(--nt-filete); padding-right: 10px; }
+.nt-ag-fecha b { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 32px; line-height: 1; }
+.nt-ag-fecha span { font: 700 13px 'Inter', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.08em; color: var(--nt-rojo); }
+.nt-ag-falta { font: 700 13px 'Inter', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.05em; color: var(--nt-rojo); }
+.nt-ag-que { margin: 2px 0 4px; font-size: 17px; line-height: 1.35; font-weight: 600; }
+.nt-ag-quien, .nt-ag-nota { margin: 0 0 4px; font-size: 15px; line-height: 1.45; color: var(--nt-gris); }
+.nt-ag-anio { margin-top: 14px; }
+.nt-ag-anio summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font: 700 15px 'Inter', system-ui, sans-serif; }
+.nt-ag-todo { margin-top: 10px; }
+
+/* Cómo trabajamos */
+.nt-objetivo { font-size: 18px; line-height: 1.55; background: var(--nt-papel); border-left: 4px solid var(--nt-tinta); padding: 12px 16px; margin: 0 0 18px; }
+.nt-metodo { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; counter-reset: paso; }
+.nt-metodo li { display: grid; grid-template-columns: 44px 1fr; gap: 10px; background: var(--nt-papel); border: 1px solid var(--nt-filete); border-radius: 6px; padding: 12px 14px; }
+.nt-paso-n { font-size: 26px; line-height: 1.2; }
+.nt-metodo b { font-family: 'Playfair Display', Georgia, serif; font-size: 18px; }
+.nt-metodo p { margin: 4px 0 0; font-size: 16px; line-height: 1.5; }
+.nt-propon { margin-top: 22px; background: var(--nt-op); border-radius: 6px; padding: 14px 18px; }
+.nt-propon > p { font-size: 16.5px; line-height: 1.55; margin: 0 0 8px; }
+.nt-propon .nt-sub { margin-top: 0; }
+
+@media (max-width: 900px) {
+  .nt-portada { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .nt-lead { grid-column: 1 / -1; padding: 0 0 16px; border-bottom: 1px solid var(--nt-filete); margin-bottom: 12px; }
+  .nt-mas { border-left: 0; padding-left: 0; }
+}
+@media (max-width: 640px) {
+  .nt-cabezal { padding: 12px 14px 8px; }
+  .nt-portada-raiz { padding: 14px; }
+  .nt-portada, .nt-dos, .nt-casos, .nt-ag-lista { grid-template-columns: minmax(0, 1fr); }
+  .nt-mas, .nt-op { border-left: 0; padding-left: 0; padding-right: 0; }
+  .nt-op { padding: 12px 14px; border-radius: 4px; margin-top: 14px; }
+  .nt-lead { padding-right: 0; }
+}

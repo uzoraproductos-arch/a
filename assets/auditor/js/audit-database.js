@@ -7814,6 +7814,90 @@ window.AUDIT_DB = {
       "definicion": "Introducir mercancías al país, o sacarlas, sin pagar total o parcialmente sus contribuciones, sin el permiso que se requiera o cuando están prohibidas. La ley presume contrabando, entre otros casos, cuando se trasladan hidrocarburos sin la factura electrónica con Complemento Carta Porte. Se castiga con prisión de tres meses a cinco años, o de tres a nueve cuando lo omitido rebasa $1,815,560.",
       "ley": "Código Fiscal de la Federación, arts. 102, 103 (fracción XXIII) y 104",
       "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Autoridad investigadora",
+      "definicion": "La que investiga una posible falta administrativa: en la Secretaría Anticorrupción, en un órgano interno de control, en la ASF o en los fiscalizadores de los estados. Recibe el expediente de la auditoría y, si encuentra mérito, redacta el Informe de Presunta Responsabilidad Administrativa.",
+      "ley": "Art. 3, frs. II a IV, Ley General de Responsabilidades Administrativas (última reforma DOF 15-12-2025) · ASF, «Documentar para sancionar», julio de 2026, pp. 65 y 66",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Autoridad substanciadora",
+      "definicion": "La que conduce el procedimiento de responsabilidad desde que admite el Informe de Presunta Responsabilidad Administrativa hasta que termina la audiencia inicial, donde el presunto responsable declara y ofrece sus pruebas. Nunca puede ser la misma que investigó.",
+      "ley": "Art. 3, frs. II a IV, Ley General de Responsabilidades Administrativas (última reforma DOF 15-12-2025) · ASF, «Documentar para sancionar», julio de 2026, p. 66",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Autoridad resolutora",
+      "definicion": "La que decide si hay responsabilidad y qué sanción corresponde. En las faltas no graves es la unidad de responsabilidades del órgano interno de control; en las graves y en las de particulares, el tribunal competente (en lo federal, el Tribunal Federal de Justicia Administrativa).",
+      "ley": "Art. 3, frs. II a IV, Ley General de Responsabilidades Administrativas (última reforma DOF 15-12-2025) · ASF, «Documentar para sancionar», julio de 2026, p. 67",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Elementos de la irregularidad (personal, conductual, circunstancial y finalidad)",
+      "definicion": "Lo que, según la ASF, debe probar todo expediente para que una irregularidad termine en sanción: quién fue (personal), qué norma o contrato violó (conductual), cuándo, dónde y cómo ocurrió (circunstancial) y a dónde fue el dinero y cuánto se afectó (finalidad). Si falta uno, el caso se puede caer aunque la irregularidad sea cierta.",
+      "ley": "ASF, «Documentar para sancionar», julio de 2026, pp. 13 a 16",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Informe semestral de la ASF",
+      "definicion": "El reporte que la Auditoría Superior de la Federación entrega a la Cámara de Diputados a más tardar el 1 de mayo y el 1 de noviembre sobre qué pasó con sus observaciones: cuáles se aclararon, cuánto se recuperó y cómo van los procedimientos de responsabilidad y las denuncias penales. La ley pide que diga las sanciones que procedieron y que se publique en datos abiertos.",
+      "ley": "Art. 38, Ley de Fiscalización y Rendición de Cuentas de la Federación (última reforma DOF 14-05-2026) · ASF, Informe sobre la situación que guardan las observaciones, recomendaciones y acciones promovidas, corte al 31 de marzo de 2026, p. 7 del PDF",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "No ejercicio de la acción penal (NEAP)",
+      "definicion": "Decisión del Ministerio Público de no llevar una denuncia ante un juez, por ejemplo porque no encontró delito o pruebas suficientes. Es el segundo estado más común de las denuncias penales de la ASF: 425 de 1,196 al 31 de marzo de 2026.",
+      "ley": "ASF, Informe sobre la situación que guardan las observaciones, recomendaciones y acciones promovidas, corte al 31 de marzo de 2026, p. 35",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Fincamiento de Responsabilidad Resarcitoria",
+      "definicion": "El procedimiento con que la ASF, hasta las Cuentas Públicas de 2016, obligaba directamente a pagar el daño causado al erario. Lleva 4,787 casos y $3,069.1 millones recuperados. Hoy los daños se persiguen también con procedimientos de la Ley General de Responsabilidades Administrativas: 2,395, de las Cuentas Públicas 2016 a 2022.",
+      "ley": "ASF, Informe sobre la situación que guardan las observaciones, recomendaciones y acciones promovidas, corte al 31 de marzo de 2026, pp. 30 y 560",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Derecho de réplica",
+      "definicion": "El derecho de toda persona a que se publique su aclaración cuando un medio u otro emisor de información difunde sobre ella datos inexactos o falsos que le causan un agravio político, económico, en su honor, vida privada o imagen. Se pide por escrito en los 15 días hábiles siguientes a la publicación; el emisor tiene 3 días hábiles para resolver y la publica gratis y sin comentarios.",
+      "ley": "Arts. 2, fr. II, 4, 6, 10 y 11, Ley Reglamentaria del artículo 6o. constitucional en materia del Derecho de Réplica (última reforma DOF 14-11-2025)",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Continuación Voluntaria (Modalidad 40)",
+      "definicion": "El derecho de quien deja de tener patrón a seguir cotizando por su cuenta al IMSS para su pensión: los seguros de invalidez y vida y de retiro, cesantía y vejez, pero no el de enfermedades y maternidad. Se pide dentro de los cinco años siguientes a la baja, con al menos 52 semanas cotizadas en los últimos cinco años, y las cuotas se pagan por mes adelantado. La ley dice que te inscribes con tu último salario o uno superior; desde el 22 de octubre de 2026, como medida temporal, el IMSS limita a los nuevos inscritos a su último salario registrado o hasta ese salario más una UMA, sin pagos hacia atrás.",
+      "ley": "Arts. 218, 219 y 220 Ley del Seguro Social (última reforma DOF 15-01-2026) · Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS, punto cuarto (DOF 21-10-2026)",
+      "categoria": "👷 Trabajo y Salario"
+    },
+    {
+      "termino": "Nepotismo",
+      "definicion": "La falta administrativa grave del servidor público que, valiéndose de su cargo, nombra, designa o interviene para que se contrate en el ente público donde trabaja a su cónyuge, a su concubina o concubino, o a un pariente: por consanguinidad hasta el cuarto grado (de padres e hijos a primos hermanos) o por afinidad hasta el segundo (suegros y cuñados). Vale para personal de confianza, de estructura, de base o por honorarios. La sanción la impone el tribunal de justicia administrativa: suspensión, destitución, multa o inhabilitación.",
+      "ley": "Art. 63 Bis Ley General de Responsabilidades Administrativas (adicionado DOF 19-11-2019) · Art. 78 LGRA (sanciones)",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Nepotismo electoral",
+      "definicion": "La prohibición de que el cónyuge, la pareja o un pariente de quien ocupa un cargo de elección compita por ese mismo cargo en la elección siguiente: Presidencia, gubernatura, diputación federal o local y ayuntamiento. Alcanza a quien tuvo el vínculo en los tres años anteriores a la elección, a los parientes en línea recta sin límite de grado, a los colaterales hasta el cuarto grado y a los afines hasta el segundo. Se aplica a partir de las elecciones de 2030.",
+      "ley": "Arts. 55 fr. VIII, 82 fr. VIII, 115 fr. I, 116 fr. I inciso c) y fr. II Constitución, y transitorio segundo del decreto DOF 01-04-2025",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Parentesco por consanguinidad",
+      "definicion": "El que existe entre personas que descienden de un mismo progenitor: padres e hijos, abuelos y nietos, hermanos, tíos y sobrinos, primos. La adopción plena se equipara a él. Cada generación es un grado: en línea recta se cuentan las generaciones entre las dos personas, y entre colaterales se sube hasta el tronco común y se baja por la otra línea, sin contar al tronco (hermanos, segundo grado; tíos, tercero; primos hermanos, cuarto).",
+      "ley": "Arts. 292, 293, 296, 297, 299 y 300 Código Civil Federal",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Parentesco por afinidad",
+      "definicion": "El que nace del matrimonio entre cada cónyuge y los parientes del otro: los suegros, el yerno o la nuera, los hijastros y los cuñados. No une a los parientes de un cónyuge con los del otro: entre concuños y entre consuegros no hay parentesco. El Código no dice cómo contar su grado; se cuenta, por costumbre, como el parentesco del cónyuge con esa persona (suegros, primero; cuñados, segundo).",
+      "ley": "Arts. 292 y 294 Código Civil Federal",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Ejercicio Abusivo de Funciones",
+      "definicion": "El delito del servidor público que otorga ilícitamente contratos, concesiones, permisos o compras que benefician económicamente a él, a su cónyuge, a sus ascendientes o descendientes, a sus parientes por consanguinidad o afinidad hasta el cuarto grado, a un tercero con quien tenga vínculos afectivos, económicos o de dependencia, o a sus socios y sociedades. Lo persigue la fiscalía y lo juzga un juez penal.",
+      "ley": "Art. 220 Código Penal Federal (fracción reformada DOF 18-07-2016)",
+      "categoria": "🔍 Fiscalización Superior"
     }
   ],
   "legislativo": {
@@ -9490,6 +9574,33 @@ window.AUDIT_DB = {
       "cita_apa": "Auditor\u00eda Superior de la Federaci\u00f3n. (2026). Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2025: primera entrega. ASF.",
       "url": "https://www.asf.gob.mx/Trans/Informes/IR2025a/index.html",
       "descripcion": "Primera entrega de la revisi\u00f3n de la Cuenta P\u00fablica 2025 (junio de 2026): 33 auditor\u00edas a la distribuci\u00f3n y pago de las participaciones federales, con su matriz de datos b\u00e1sicos."
+    },
+    {
+      "num": 156,
+      "id": "ref-ley-replica",
+      "categoria": "constitucional",
+      "categoria_nombre": "Constitución Política de los Estados Unidos Mexicanos",
+      "cita_apa": "Cámara de Diputados del H. Congreso de la Unión. (2025). Ley Reglamentaria del Artículo 6o., Párrafo Primero, de la Constitución Política de los Estados Unidos Mexicanos, en Materia del Derecho de Réplica. Diario Oficial de la Federación, 4 de noviembre de 2015; última reforma DOF 14-11-2025.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LRArt6_MDR.pdf",
+      "descripcion": "Quién puede pedir una réplica, en qué plazos, cómo se publica y cuándo se puede negar. La SCJN invalidó porciones de los arts. 3, 10 y 19 (DOF 24-04-2018). La aplica la página Derecho de réplica de Auditavisión."
+    },
+    {
+      "num": 155,
+      "id": "ref-asf-semestral",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalización Superior y Auditoría",
+      "cita_apa": "Auditoría Superior de la Federación. (2026). Informe sobre la situación que guardan las observaciones, recomendaciones y acciones promovidas. Corte al 31 de marzo de 2026. ASF.",
+      "url": "https://www.asf.gob.mx/uploads/56_Informes_especiales_de_auditoria/IS_31_03_2026.pdf",
+      "descripcion": "Informe semestral a la Cámara de Diputados (art. 38 de la LFRCF). Trae el estado de las 37,390 acciones de las Cuentas Públicas 2019 a 2024, los 2,395 procedimientos de responsabilidad, las 1,196 denuncias penales y las recuperaciones de 2001 a 2024. Lo explica la página Informe semestral de la ASF de Informes oficiales."
+    },
+    {
+      "num": 154,
+      "id": "ref-asf-documentar",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalización Superior y Auditoría",
+      "cita_apa": "Auditoría Superior de la Federación. (2026). Documentar para sancionar: de la irregularidad a la sanción (1.ª ed.). ASF.",
+      "url": "https://www.asf.gob.mx/Trans/Informes/Ir2025a/Documentos/Informes_Especiales/Documentar.pdf",
+      "descripcion": "Informe especial de la primera entrega de la Cuenta Pública 2025. Explica la cadena de la auditoría a la sanción, los cuatro elementos que debe probar un expediente y trae 20 matrices de documentos por tipo de irregularidad, hechas con lo observado en las Cuentas Públicas 2023 y 2024. Lo explica la página Informe especial de Informes oficiales."
     },
     {
       "num": 82,
@@ -30499,6 +30610,1550 @@ window.AUDIT_DB = {
         "eur": "Ni Hacienda ni Banxico publican una proyección del peso frente al euro: los Criterios solo proyectan el tipo de cambio con el dólar. Ninguna ley los obliga a proyectar el euro, así que aquí no se proyecta.",
         "aviso": "Es una proyección, no un dato: Hacienda la usa para estimar ingresos y gasto, y la revisa cada año. Hacienda ya la revisó para 2026: aprobó 3.0 % de inflación de diciembre a diciembre en el Paquete Económico 2026 y ahora estima 3.5 % (Criterios 2027, p. 67 del PDF)."
       }
+    }
+  },
+  "auditorias_actuales": {
+    "ine-contratos": {
+      "ente": "Instituto Nacional Electoral (Ramo 22)",
+      "quien": "El Instituto Nacional Electoral ejerce el Ramo 22; la Cámara de Diputados aprueba su presupuesto y recibe la renuncia o designa a su presidencia; la Auditoría Superior de la Federación y el Órgano Interno de Control del INE fiscalizan sus contrataciones.",
+      "que": "El 24 de octubre de 2026 la Presidencia del INE publicó que respalda la investigación que la Auditoría Superior de la Federación abrió de oficio sobre contrataciones, que envió los antecedentes a su Órgano Interno de Control y que abrirá un micrositio con los contratos, montos, proveedores y documentos. Un día después, el 25 de octubre, su consejera presidenta anunció que el 26 de octubre presentaría su renuncia ante la Cámara de Diputados. En el único documento de licitación del INE que pudimos abrir donde aparece Cajas Graf (fallo LP-INE-001/2025, del 6 de febrero de 2025, para urnas y mamparas de la elección judicial), su propuesta en participación conjunta no cumplió las especificaciones técnicas.",
+      "falta": "Los contratos que la prensa suma en al menos $245 millones de pesos para Cajas Graf (en el INE y en el Instituto Estatal Electoral de Sonora) siguen pendientes: falta de la plataforma abrir los contratos oficiales. En ComprasMX 2025-2026 no aparece Cajas Graf, pero tampoco el INE, porque como órgano autónomo no contrata en esa plataforma. Una investigación abierta no es una resolución.",
+      "pendiente_id": "red-taddei-renuncia-ine-contratos-4",
+      "cifras": {
+        "ejercido_2025_mdp": 28288.0,
+        "aprobado_2026_mdp": 21837.2,
+        "calendario_2t_2026_mdp": 10742.7,
+        "pagado_2t_2026_mdp": 9648.4,
+        "asf_cp2024_auditorias": 4,
+        "asf_cp2024_po": 3,
+        "asf_cp2024_por_aclarar_mdp": 66.6,
+        "asf_cp2024_recuperado_mdp": 0.0
+      },
+      "fuentes": [
+        {
+          "doc": "Presupuesto de Egresos de la Federación 2026, Anexo 1, Ramo 22 Instituto Nacional Electoral",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf"
+        },
+        {
+          "doc": "ASF, Matriz de Datos Básicos CP 2024 (feb. 2026) (Ramo 22, Instituto Nacional Electoral)",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Matriz/MDB_Consolidado.pdf"
+        },
+        {
+          "doc": "INE, Central Electoral: La Presidencia del INE respalda la investigación de la ASF (24-10-2026)",
+          "url": "https://centralelectoral.ine.mx/2026/10/24/la-presidencia-del-ine-respalda-la-investigacion-de-la-asf-y-reafirma-su-compromiso-con-el-estado-de-derecho/"
+        },
+        {
+          "doc": "INE, Central Electoral: Mensaje de la Consejera Presidenta del INE (25-10-2026)",
+          "url": "https://centralelectoral.ine.mx/2026/10/25/mensaje-de-la-consejera-presidenta-del-instituto-nacional-electoral-guadalupe-taddei-zavala/"
+        },
+        {
+          "doc": "INE, Dirección Ejecutiva de Administración: fallo de la licitación pública LP-INE-001/2025 (06-02-2025)",
+          "url": "https://ine.mx/wp-content/uploads/2025/02/lp-ine-001-2025-fallo.pdf"
+        }
+      ]
+    },
+    "guaymas-gas": {
+      "ente": "Secretaría de Energía, ASEA (Ramo 16), Gobierno de Sonora y Congreso del Estado de Sonora",
+      "quien": "La empresa Epcilon LNG LLC promueve el proyecto AMIGO; el Departamento de Energía de EE. UU. autorizó la exportación de gas (Orden 4629); la Secretaría de Energía y la ASEA (Ramo 16) intervienen en el ámbito federal; en el Congreso de Sonora se presentó el exhorto en la Gaceta Parlamentaria No. 2104.",
+      "que": "El proyecto AMIGO busca instalar una planta de licuefacción de gas natural en el Parque Industrial Pesquero «General Rodolfo Sánchez Taboada», en Guaymas, Sonora. En tribuna del Congreso de Sonora y en redes se señaló la entrega en comodato gratuito de 54 hectáreas de suelo público para procesar gas de Texas y enviarlo a Asia, y el 12 de febrero de 2026 diputados presentaron en la Gaceta Parlamentaria No. 2104 un exhorto a la ASEA, al INECC y a la Semarnat para revisar los tres proyectos de gas del Golfo de California (Saguaro, AMIGO y Vista Pacífico). El 21 de octubre de 2026 la Secretaría de Energía reportó 41.7 hectáreas, hasta 60 buques al año (el 4 % del tránsito de la zona) y 290 mil m³ de almacenamiento, y la Presidenta informó que la obra está detenida por amparos mientras se revisan de nuevo los impactos ambientales.",
+      "falta": "El contrato de comodato sobre el predio en Guaymas no está publicado por el Gobierno de Sonora (pendiente en el Registro), y el resolutivo de impacto ambiental de la ASEA tampoco se pudo abrir desde la plataforma. Tampoco se ha publicado cuánto pagaría el proyecto en impuestos y derechos ni qué parte se quedaría en Sonora.",
+      "pendiente_id": "red-guaymas-comodato-amigo-gnl-1",
+      "pendiente_mia_id": "red-guaymas-comodato-amigo-gnl-8",
+      "cifras": {
+        "superficie_sener_ha": 41.7,
+        "superficie_tribuna_ha": 54.0,
+        "diferencia_ha": 12.3,
+        "buques_anuales": 60,
+        "almacenamiento_mil_m3": 290,
+        "doe_mmmpc_anuales": 395,
+        "asea_2026_mdp": 353.5,
+        "asea_2027_mdp": 409.9,
+        "profepa_2026_mdp": 827.1,
+        "conanp_2026_mdp": 1502.3,
+        "inecc_2026_mdp": 159.3
+      },
+      "fuentes": [
+        {
+          "doc": "Presidencia de la República: versión estenográfica del 21-10-2026 (Secretaría de Energía, proyecto en Guaymas)",
+          "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+        },
+        {
+          "doc": "Congreso del Estado de Sonora: Gaceta Parlamentaria No. 2104, sesión del 12-02-2026 (exhorto sobre Saguaro, AMIGO y Vista Pacífico)",
+          "url": "https://gestion.api.congresoson.gob.mx/publico/descarga?uuid=f8cf663d-4257-4f5d-8b08-b05b80a83e72"
+        },
+        {
+          "doc": "Departamento de Energía de EE. UU.: Orden DOE/FE 4629 (08-12-2020), expediente 20-31-LNG (Epcilon LNG LLC)",
+          "url": "https://www.energy.gov/sites/prod/files/2020/12/f81/ord4629.pdf"
+        },
+        {
+          "doc": "Presupuesto de Egresos de la Federación 2026, Ramo 16 Medio Ambiente y Recursos Naturales (ASEA, PROFEPA, CONANP e INECC)",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf"
+        }
+      ]
+    },
+    "medicamentos-imss": {
+      "ente": "IMSS (050GYR), IMSS-Bienestar (056AYO) y Birmex (012NEF)",
+      "quien": "El IMSS, el IMSS-Bienestar y Birmex contratan medicamentos e insumos médicos; la Secretaría Anticorrupción y Buen Gobierno publica los datos abiertos de ComprasMX y las circulares de inhabilitación en el Diario Oficial.",
+      "que": "En los datos abiertos de ComprasMX de 2025 y 2026, el IMSS registra 31,666 contratos por $381,890.6 millones de pesos, de los cuales $202,923.6 millones (53.1 %) se asignaron por adjudicación directa; IMSS-Bienestar suma 14,835 contratos por $227,202.8 millones (50.7 % por adjudicación directa), y Birmex registra 198 contratos por $35,853.1 millones (98.6 % por adjudicación directa). Respecto a los casos que circulan en redes: en mayo de 2020 el IMSS en Hidalgo devolvió 20 ventiladores sin haber pagado un peso porque no cumplían las especificaciones técnicas, y el Diario Oficial publicó la inhabilitación por 27 meses de Cyber Robotic Solutions (circular 11/2020).",
+      "falta": "Los señalamientos de prensa sobre más de $800 millones de pesos en adjudicaciones directas de medicinas atribuidas a redes de particulares siguen pendientes: ningún documento oficial abierto liga esos nombres con una razón social contratista, y los contratos de 2023 y 2024 están en el CompraNet histórico, que no responde.",
+      "pendiente_id": "red-salud-ventiladores-y-medicinas-4",
+      "cifras": {
+        "imss_contratos": 31666,
+        "imss_monto_mdp": 381890.6,
+        "imss_adj_directa_contratos": 17264,
+        "imss_adj_directa_mdp": 202923.6,
+        "imss_adj_directa_pct": 53.1,
+        "imss_competencia_mdp": 178966.9,
+        "imss_bienestar_contratos": 14835,
+        "imss_bienestar_monto_mdp": 227202.8,
+        "imss_bienestar_adj_directa_mdp": 115151.5,
+        "imss_bienestar_adj_directa_pct": 50.7,
+        "birmex_contratos": 198,
+        "birmex_monto_mdp": 35853.1,
+        "birmex_adj_directa_mdp": 35349.9,
+        "birmex_adj_directa_pct": 98.6,
+        "ventiladores_2020_inhabilitacion_meses": 27
+      },
+      "proveedores_imss": [
+        {
+          "nombre": "LABORATORIOS PISA SA DE CV",
+          "rfc": "LPI830527KJ2",
+          "contratos": 199,
+          "monto_mdp": 14585.5
+        },
+        {
+          "nombre": "ASTRAZENECA SA DE CV",
+          "rfc": "AST961231B69",
+          "contratos": 9,
+          "monto_mdp": 13464.0
+        },
+        {
+          "nombre": "BOEHRINGER INGELHEIM MEXICO SA DE CV",
+          "rfc": "BIM0711148Q0",
+          "contratos": 10,
+          "monto_mdp": 8318.7
+        },
+        {
+          "nombre": "INFRA SA DE CV",
+          "rfc": "INF891031LT4",
+          "contratos": 128,
+          "monto_mdp": 7279.2
+        },
+        {
+          "nombre": "BAYER DE MEXICO SA DE CV",
+          "rfc": "BME820511SU5",
+          "contratos": 25,
+          "monto_mdp": 6965.6
+        },
+        {
+          "nombre": "BRISTOL MYERS SQUIBB DE MEXICO S DE RL DE CV",
+          "rfc": "BMS021213KG9",
+          "contratos": 5,
+          "monto_mdp": 6883.4
+        }
+      ],
+      "fuentes": [
+        {
+          "doc": "ComprasMX, Datos Abiertos: Datos relevantes de los contratos 2025 y 2026 (IMSS 050GYR, IMSS-Bienestar 056AYO y Birmex 012NEF)",
+          "url": "https://comprasmx.buengobierno.gob.mx/datos-abiertos"
+        },
+        {
+          "doc": "IMSS: comunicado sobre la devolución sin pago de los ventiladores en Hidalgo (13-05-2020)",
+          "url": "https://www.gob.mx/imss/prensa/respecto-a-la-informacion-sobre-la-compra-de-ventiladores-por-el-organo-de-operacion-administrativa-desconcentrada-hidalgo-el-imss-informa"
+        },
+        {
+          "doc": "Diario Oficial de la Federación: Circular 11/2020 que inhabilita 27 meses a Cyber Robotic Solutions, S.A. de C.V. (06-07-2020)",
+          "url": "https://dof.gob.mx/nota_detalle.php?codigo=5596199&fecha=06/07/2020"
+        }
+      ]
+    },
+    "deuda-congreso-2027": {
+      "ente": "Congreso de la Unión (Cámara de Diputados y Senado) y Secretaría de Hacienda y Crédito Público",
+      "quien": "La Secretaría de Hacienda propone la Iniciativa de Ley de Ingresos; la Cámara de Diputados (15-10-2026) y el Senado de la República autorizan los ingresos y el techo de endeudamiento (art. 73, fracc. VIII constitucional); las agencias calificadoras evalúan el riesgo soberano.",
+      "que": "El 15 de octubre de 2026 el pleno de la Cámara de Diputados aprobó la Ley de Ingresos de la Federación para 2027 (331 votos a favor y 118 en contra en lo general), y el 21 de octubre la avalaron las comisiones unidas del Senado (18 a 11). La iniciativa de Hacienda estima ingresos totales por $10,636,488.1 millones de pesos (art. 1o.) y pide un techo de endeudamiento neto interno del Gobierno Federal hasta por $1,700,000.0 millones ($1.7 billones, art. 2o.). Además, aprobó una reserva al artículo vigésimo primero transitorio que quita el tope de $300 millones de pesos de ingresos anuales y permite a grandes contribuyentes obtener la reducción de multas, recargos y gastos de ejecución si pagan completo su adeudo principal. Ese mismo 15 de octubre, en su Comunicado 82, Hacienda informó que HR Ratings bajó la calificación soberana de largo plazo de México de BBB+ a BBB, con perspectiva estable.",
+      "falta": "Falta la votación del pleno del Senado y la publicación del decreto en el Diario Oficial de la Federación para confirmar el texto definitivo del transitorio vigésimo primero. Además, el reporte de HR Ratings (donde constan sus razones y sus proyecciones de déficit de 4.6 % del PIB y deuda de 61.2 % en 2030) sigue pendiente porque su portal no abrió desde la plataforma.",
+      "pendiente_id": "red-hr-ratings-baja-mexico-bbb-3",
+      "cifras": {
+        "ingresos_totales_2027_mdp": 10636488.1,
+        "ingresos_presupuestarios_2027_mdp": 9156528.9,
+        "techo_deuda_interna_2027_mdp": 1700000.0,
+        "costo_financiero_2027_mdp": 1636247.1,
+        "rfsp_2027_mdp": 1555655.8,
+        "financiamiento_2027_mdp": 1479959.2,
+        "votos_diputados_favor": 331,
+        "votos_diputados_contra": 118,
+        "ajuste_fiscal_2025_pp_pib": 1.3
+      },
+      "fuentes": [
+        {
+          "doc": "Canal del Congreso: Aprueban en San Lázaro Ley de Ingresos 2027 (15-10-2026)",
+          "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"
+        },
+        {
+          "doc": "Canal del Congreso: Modificación a Ley de Ingresos busca ampliar beneficios de regularización fiscal (16-10-2026)",
+          "url": "https://www.canaldelcongreso.gob.mx/noticias/10322"
+        },
+        {
+          "doc": "Canal del Congreso: Comisiones del Senado aprueban Ley de Ingresos 2027 (21-10-2026)",
+          "url": "https://www.canaldelcongreso.gob.mx/noticias/10329"
+        },
+        {
+          "doc": "SHCP, Comunicado No. 82: México mantiene el grado de inversión con las ocho agencias calificadoras; HR Ratings ajusta de BBB+ a BBB (15-10-2026)",
+          "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+        },
+        {
+          "doc": "Iniciativa de Ley de Ingresos de la Federación 2027, arts. 1o. y 2o. (Gaceta Parlamentaria, 08-09-2026, Anexo A)",
+          "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-A.pdf"
+        },
+        {
+          "doc": "SHCP, Criterios Generales de Política Económica para 2027 (Gaceta Parlamentaria, 08-09-2026)",
+          "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf"
+        }
+      ]
+    },
+    "inversion-megaobras": {
+      "ente": "Secretaría de la Defensa Nacional, Pemex, SICT, Salud, SEP, SSPC, IPAB y BANOBRAS (1988–2024)",
+      "quien": "Las dependencias y empresas públicas ejecutan y operan las obras (Defensa, Pemex, SICT, Birmex, SEP, SSPC, IPAB y BANOBRAS); la Secretaría de Hacienda reporta la Cuenta Pública y la Cartera de Inversión; la Auditoría Superior de la Federación fiscaliza los contratos y estados financieros.",
+      "que": "El registro de Inversión y Megaobras sigue 13 proyectos de seis sexenios (1988–2024), separados por método en 11 obras físicas o de equipamiento y 2 rescates financieros (FOBAPROA-IPAB y FARAC carretero). Las 11 obras pasaron de $529,936.6 millones de pesos presupuestados a $1,176,646.8 millones de costo real documentado (+122.0 % de sobrecosto, $646,710.2 millones por encima de lo aprobado). Los 2 rescates suman aparte $1,888,345.8 millones frente a los $610,056.6 millones reconocidos al inicio. En operación anual, de los 13 proyectos solo 6 publican su resultado financiero (5 pierden $78,171.3 millones y 1 gana $290.2 millones, con una pérdida neta anual documentada de $77,881.1 millones), 4 no publican estados financieros individualizados y 3 no operan como empresa.",
+      "falta": "Cuatro obras en operación o en proceso (Megafarmacia de Huehuetoca, Tren Interurbano México-Toluca, Agronitrogenados y el Búnker de Seguridad) no publican estados financieros dictaminados individualizados que permitan conocer cuánto cuesta operarlas al año ni cuánto ingresan: quedan en el Registro de pendientes (ficha reloj-megaobras).",
+      "pendiente_id": "reloj-megaobras",
+      "cifras": {
+        "obras_n": 11,
+        "rescates_n": 2,
+        "obras_presu_mdp": 529936.6,
+        "obras_real_mdp": 1176646.8,
+        "obras_brecha_mdp": 646710.2,
+        "obras_sobrecosto_pct": 122.0,
+        "rescates_presu_mdp": 610056.6,
+        "rescates_real_mdp": 1888345.8,
+        "total_con_rescates_mdp": 3064992.6,
+        "balance_neto_anual_mdp": 77881.1,
+        "balance_pierde_mdp": 78171.3,
+        "balance_gana_mdp": 290.2,
+        "n_con_dato_anual": 6,
+        "n_pendiente_anual": 4,
+        "n_no_aplica_anual": 3
+      },
+      "obras": [
+        {
+          "id": "tren-maya",
+          "nombre": "Tren Maya (1,554 km)",
+          "presidente": "Andrés Manuel López Obrador",
+          "periodo": "2018–2024",
+          "tipo": "obra",
+          "presu_mdp": 167341.6,
+          "real_mdp": 497350.2,
+          "sobrecosto_pct": 197.2,
+          "estado_real": "derivado",
+          "res_tipo": "dato",
+          "res_mdp": -2561.4,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-tren-maya",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-tren-maya",
+          "auditoria_href": "auditoria-tren-maya.html"
+        },
+        {
+          "id": "megafarmacia",
+          "nombre": "Megafarmacia del Bienestar (Huehuetoca)",
+          "presidente": "Andrés Manuel López Obrador",
+          "periodo": "2018–2024",
+          "tipo": "obra",
+          "presu_mdp": 3614.6,
+          "real_mdp": 3948.6,
+          "sobrecosto_pct": 9.2,
+          "estado_real": "oficial",
+          "res_tipo": "pendiente",
+          "res_mdp": null,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-megafarmacia",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-megafarmacia",
+          "auditoria_href": "auditoria-megafarmacia.html"
+        },
+        {
+          "id": "dos-bocas",
+          "nombre": "Refinería Olmeca en Dos Bocas (Paraíso, Tabasco)",
+          "presidente": "Andrés Manuel López Obrador",
+          "periodo": "2018–2024",
+          "tipo": "obra",
+          "presu_mdp": 157049.2,
+          "real_mdp": 357887.3,
+          "sobrecosto_pct": 128.0,
+          "estado_real": "oficial",
+          "res_tipo": "dato",
+          "res_mdp": -1473.7,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-dos-bocas",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-dos-bocas",
+          "auditoria_href": "auditoria-dos-bocas.html"
+        },
+        {
+          "id": "aifa-texcoco",
+          "nombre": "AIFA + Cancelación del NAIM Texcoco",
+          "presidente": "Andrés Manuel López Obrador",
+          "periodo": "2018–2024",
+          "tipo": "obra",
+          "presu_mdp": 79305.0,
+          "real_mdp": 101935.3,
+          "sobrecosto_pct": 28.5,
+          "estado_real": "derivado",
+          "res_tipo": "dato",
+          "res_mdp": 290.2,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-aifa-texcoco",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-aifa-texcoco",
+          "auditoria_href": "auditoria-aifa.html"
+        },
+        {
+          "id": "tren-toluca",
+          "nombre": "Tren Interurbano México-Toluca 'El Insurgente'",
+          "presidente": "Enrique Peña Nieto",
+          "periodo": "2012–2018",
+          "tipo": "obra",
+          "presu_mdp": 76346.8,
+          "real_mdp": 153694.3,
+          "sobrecosto_pct": 101.3,
+          "estado_real": "oficial",
+          "res_tipo": "pendiente",
+          "res_mdp": null,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-tren-toluca",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-tren-toluca",
+          "auditoria_href": "auditoria-tren-toluca.html"
+        },
+        {
+          "id": "agronitrogenados",
+          "nombre": "Plantas Chatarra Agronitrogenados",
+          "presidente": "Enrique Peña Nieto",
+          "periodo": "2012–2018",
+          "tipo": "obra",
+          "presu_mdp": 7894.2,
+          "real_mdp": 13698.3,
+          "sobrecosto_pct": 73.5,
+          "estado_real": "derivado",
+          "res_tipo": "pendiente",
+          "res_mdp": null,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-agronitrogenados",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-agronitrogenados",
+          "auditoria_href": "auditoria-agronitrogenados.html"
+        },
+        {
+          "id": "fertinal",
+          "nombre": "Compra de Grupo Fertinal",
+          "presidente": "Enrique Peña Nieto",
+          "periodo": "2012–2018",
+          "tipo": "obra",
+          "presu_mdp": 12532.0,
+          "real_mdp": 13121.6,
+          "sobrecosto_pct": 4.7,
+          "estado_real": "oficial",
+          "res_tipo": "dato",
+          "res_mdp": -3600.1,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-fertinal",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-fertinal",
+          "auditoria_href": "auditoria-fertinal.html"
+        },
+        {
+          "id": "estela-luz",
+          "nombre": "Estela de Luz (Bicentenario)",
+          "presidente": "Felipe Calderón Hinojosa",
+          "periodo": "2006–2012",
+          "tipo": "obra",
+          "presu_mdp": 393.5,
+          "real_mdp": 1304.9,
+          "sobrecosto_pct": 231.6,
+          "estado_real": "oficial",
+          "res_tipo": "no_aplica",
+          "res_mdp": null,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-estela-luz",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-estela-luz",
+          "auditoria_href": "auditoria-estela-luz.html"
+        },
+        {
+          "id": "bunker-garcia-luna",
+          "nombre": "El Búnker de Seguridad de García Luna (SSPC)",
+          "presidente": "Felipe Calderón Hinojosa",
+          "periodo": "2006–2012",
+          "tipo": "obra",
+          "presu_mdp": 347.4,
+          "real_mdp": 263.0,
+          "sobrecosto_pct": -24.3,
+          "estado_real": "derivado",
+          "res_tipo": "pendiente",
+          "res_mdp": null,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-bunker-garcia-luna",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-bunker-garcia-luna",
+          "auditoria_href": "auditoria-bunker-garcia-luna.html"
+        },
+        {
+          "id": "refineria-tula",
+          "nombre": "Refinería Bicentenario en Tula (Barda Perimetral)",
+          "presidente": "Felipe Calderón Hinojosa",
+          "periodo": "2006–2012",
+          "tipo": "obra",
+          "presu_mdp": 3714.0,
+          "real_mdp": 1127.6,
+          "sobrecosto_pct": -69.6,
+          "estado_real": "derivado",
+          "res_tipo": "no_aplica",
+          "res_mdp": null,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-refineria-tula",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-refineria-tula",
+          "auditoria_href": "auditoria-refineria-tula.html"
+        },
+        {
+          "id": "enciclomedia",
+          "nombre": "Programa Enciclomedia",
+          "presidente": "Vicente Fox Quesada",
+          "periodo": "2000–2006",
+          "tipo": "obra",
+          "presu_mdp": 21398.3,
+          "real_mdp": 32315.7,
+          "sobrecosto_pct": 51.0,
+          "estado_real": "derivado",
+          "res_tipo": "no_aplica",
+          "res_mdp": null,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-enciclomedia",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-enciclomedia",
+          "auditoria_href": "auditoria-enciclomedia.html"
+        },
+        {
+          "id": "fobaproa",
+          "nombre": "FOBAPROA / IPAB (Rescate Bancario de 1998)",
+          "presidente": "Ernesto Zedillo Ponce de León",
+          "periodo": "1994–2000",
+          "tipo": "rescate",
+          "presu_mdp": 552300.0,
+          "real_mdp": 1734494.3,
+          "sobrecosto_pct": 214.0,
+          "estado_real": "derivado",
+          "res_tipo": "dato",
+          "res_mdp": -59971.8,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-fobaproa",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-fobaproa",
+          "auditoria_href": "auditoria-fobaproa.html"
+        },
+        {
+          "id": "farac-carretero",
+          "nombre": "FARAC (Rescate Carretero de 1997)",
+          "presidente": "Ernesto Zedillo Ponce de León",
+          "periodo": "1994–2000",
+          "tipo": "rescate",
+          "presu_mdp": 57756.6,
+          "real_mdp": 153851.5,
+          "sobrecosto_pct": 166.4,
+          "estado_real": "derivado",
+          "res_tipo": "dato",
+          "res_mdp": -10564.3,
+          "ficha_href": "herramienta-megaobras-sector.html#obra-farac-carretero",
+          "cuenta_href": "herramienta-megaobras-pulso-cuenta.html#cuenta-farac-carretero",
+          "auditoria_href": "auditoria-farac-carretero.html"
+        }
+      ],
+      "sexenios": [
+        {
+          "clave": "salinas",
+          "nombre": "Carlos Salinas de Gortari",
+          "obras_n": 0,
+          "rescates_n": 0,
+          "costo_mdp": 0,
+          "res_mdp": 0,
+          "href": "herramienta-megaobras-tabla.html#mt-sx-salinas"
+        },
+        {
+          "clave": "zedillo",
+          "nombre": "Ernesto Zedillo Ponce de León",
+          "obras_n": 2,
+          "rescates_n": 2,
+          "costo_mdp": 1888345.8,
+          "res_mdp": -70536.1,
+          "href": "herramienta-megaobras-tabla.html#mt-sx-zedillo"
+        },
+        {
+          "clave": "fox",
+          "nombre": "Vicente Fox Quesada",
+          "obras_n": 1,
+          "rescates_n": 0,
+          "costo_mdp": 32315.7,
+          "res_mdp": 0,
+          "href": "herramienta-megaobras-tabla.html#mt-sx-fox"
+        },
+        {
+          "clave": "calderon",
+          "nombre": "Felipe Calderón Hinojosa",
+          "obras_n": 3,
+          "rescates_n": 0,
+          "costo_mdp": 2695.5,
+          "res_mdp": 0,
+          "href": "herramienta-megaobras-tabla.html#mt-sx-calderon"
+        },
+        {
+          "clave": "pena-nieto",
+          "nombre": "Enrique Peña Nieto",
+          "obras_n": 3,
+          "rescates_n": 0,
+          "costo_mdp": 180514.2,
+          "res_mdp": -3600.1,
+          "href": "herramienta-megaobras-tabla.html#mt-sx-pena-nieto"
+        },
+        {
+          "clave": "lopez-obrador",
+          "nombre": "Andrés Manuel López Obrador",
+          "obras_n": 4,
+          "rescates_n": 0,
+          "costo_mdp": 961121.4,
+          "res_mdp": -3744.9,
+          "href": "herramienta-megaobras-tabla.html#mt-sx-lopez-obrador"
+        }
+      ],
+      "fuentes": [
+        {
+          "doc": "SHCP: Cuenta Pública 2024 y 2025, Tomo VII Sector Paraestatal (Tren Maya, AIFA, Pemex, Birmex)",
+          "url": "https://www.cuentapublica.hacienda.gob.mx/"
+        },
+        {
+          "doc": "Auditoría Superior de la Federación: Informes Individuales de las Cuentas Públicas 2015 a 2024 (Tren Maya, Dos Bocas, AIFA, Tren Interurbano, Birmex, Estela de Luz, Búnker, FARAC)",
+          "url": "https://informe.asf.gob.mx/"
+        },
+        {
+          "doc": "IPAB: Estados Financieros Dictaminados 2024 y 2025 y Presupuesto de Egresos Ramo 34 (FOBAPROA-IPAB)",
+          "url": "https://www.gob.mx/ipab/documentos/estados-financieros-del-ipab"
+        },
+        {
+          "doc": "SHCP, Transparencia Presupuestaria: Obra Pública Abierta y Cartera de Programas y Proyectos de Inversión",
+          "url": "https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta"
+        }
+      ]
+    },
+    "agronitrogenados": {
+      "ente": "Petróleos Mexicanos (PMI Comercio Internacional, Pro-Agroindustria y Pemex Fertilizantes)",
+      "quien": "El Consejo de Administración de Pemex autorizó la compra y rehabilitación en diciembre de 2013 (Acuerdo CA-146/2013); PMI Comercio Internacional y Pro-Agroindustria ejecutaron la operación en Pajaritos, Coatzacoalcos, Veracruz; la Auditoría Superior de la Federación revisó las Cuentas Públicas 2015 y 2017.",
+      "que": "En diciembre de 2013 el Consejo de Administración de Pemex aprobó el proyecto «Adquisición de una empresa de fertilizantes (Agronitrogenados)» por $7,894.2 millones de pesos (475 millones de dólares de esa fecha: 275 millones por los activos y 200 millones para rehabilitar la planta, que llevaba 14 años sin operar). En 2014 PMI pagó $5,427.2 millones por los activos (264.1 millones de dólares) y, entre septiembre de 2014 y diciembre de 2017, destinó otros $8,271.1 millones (499 millones de dólares) a rehabilitar las plantas de urea I y II y sus servicios auxiliares: el desembolso acumulado subió a $13,698.3 millones (+73.5 % frente a lo autorizado). Además, la ASF documentó la baja contable de tres plantas ociosas por $4,206.0 millones y que al cierre de 2017 la planta aún no producía urea comercial.",
+      "falta": "Pemex no publica un estado de resultados individualizado de Pro-Agroindustria que separe los ingresos por venta de urea de la planta de Pajaritos, su costo de gas natural y su pérdida o utilidad anual: permanece en el Registro de pendientes (ficha cuenta-agronitrogenados).",
+      "pendiente_id": "cuenta-agronitrogenados",
+      "caja": "Planta de Pajaritos",
+      "cont": [
+        {
+          "ico": "📐",
+          "tit": "Autorizado en 2013",
+          "v": 7894.2,
+          "f": "mdp1",
+          "etq": "475 millones de dólares autorizados en el Acuerdo CA-146/2013 (17-12-2013)",
+          "est": "oficial"
+        },
+        {
+          "ico": "🏭",
+          "tit": "Compra de activos (2014)",
+          "v": 5427.2,
+          "f": "mdp1",
+          "etq": "pagado por activos que llevaban 14 años fuera de operación (264.1 MUSD)",
+          "est": "oficial"
+        },
+        {
+          "ico": "🔧",
+          "tit": "Rehabilitación (2014–2017)",
+          "v": 8271.1,
+          "f": "mdp1",
+          "etq": "499 MUSD ejercidos en las plantas de urea I y II sin lograr operación comercial en 2017",
+          "est": "oficial"
+        },
+        {
+          "ico": "📈",
+          "tit": "Costo real acumulado",
+          "v": 13698.3,
+          "f": "mdp1",
+          "etq": "+73.5 % frente al monto autorizado (+$5,804.1 millones)",
+          "est": "derivado"
+        },
+        {
+          "ico": "⏳",
+          "tit": "Operación anual hoy",
+          "txt": "Sin desglose propio",
+          "etq": "Pemex consolida Fertilizantes sin estado de resultados por planta",
+          "est": "pendiente",
+          "pend": "cuenta-agronitrogenados"
+        }
+      ],
+      "rastroTit": "Los tramos del gasto y deterioro en Agronitrogenados documentados por la ASF (CP 2015 y CP 2017)",
+      "rastroEst": "oficial",
+      "rastro": [
+        {
+          "k": "Rehabilitación de plantas de urea I y II y servicios auxiliares (sep-2014 a dic-2017)",
+          "sub": "499.0 millones de dólares ejercidos · ASF CP 2017, aud. 492-DE",
+          "v": 8271.1,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Compra de los activos de Agronitrogenados en Pajaritos (2014)",
+          "sub": "264.1 millones de dólares pagados · ASF CP 2017, aud. 492-DE",
+          "v": 5427.2,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Baja contable de tres plantas ociosas por deterioro",
+          "sub": "Activos dados de baja tras la compra · ASF CP 2017, aud. 492-DE",
+          "v": 4206.0,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Intereses y comisiones bancarias pagados en 2015 con la planta detenida",
+          "sub": "Financiamiento pagado antes de iniciar producción · ASF CP 2015, aud. 498-DE",
+          "v": 148.1,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2015i/Documentos/Auditorias/2015_0498_a.pdf",
+          "est": "oficial"
+        }
+      ],
+      "fuentes": [
+        {
+          "doc": "ASF, Cuenta Pública 2017, auditoría de desempeño 492-DE, Pemex Fertilizantes: Producción, Distribución y Comercialización de Amoniaco, Fertilizantes y sus Derivados",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf"
+        },
+        {
+          "doc": "ASF, Cuenta Pública 2015, auditoría 498-DE, Petróleos Mexicanos: Gestión Financiera para la Adquisición de Agro Nitrogenados",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2015i/Documentos/Auditorias/2015_0498_a.pdf"
+        }
+      ]
+    },
+    "fertinal": {
+      "ente": "Petróleos Mexicanos (Pemex Fertilizantes y PMX Fertilizantes Pacífico, S.A. de C.V.)",
+      "quien": "El Consejo de Administración de Pemex autorizó la compra en octubre de 2015 (Acuerdo CA-209/2015); las filiales de Pemex contrataron el financiamiento con Nafin, Bancomext y Banobras; la ASF fiscalizó las Cuentas Públicas 2016 y 2017 y Pemex Transformación Industrial reporta los resultados de PMX Fertilizantes Pacífico en la Cuenta Pública 2024.",
+      "que": "En octubre de 2015 el Consejo de Administración de Pemex autorizó adquirir Grupo Fertinal (mina de roca fosfórica en San Juan de la Costa, Baja California Sur, y complejo industrial en Lázaro Cárdenas, Michoacán) hasta por 635 millones de dólares ($12,532.0 millones de pesos al tipo de cambio del cierre). Para concretar la operación y liquidar los pasivos de la empresa, las filiales de Pemex contrataron créditos por $13,121.6 millones (+4.7 %), incluyendo un dividendo de 51 millones de dólares decretado antes de la compra. En su primer año en manos de Pemex (2016) la empresa registró una pérdida integral de $11,690.6 millones; en 2017 deterioró $4,007.0 millones de crédito mercantil, y en la Cuenta Pública 2024 su filial PMX Fertilizantes Pacífico reportó una pérdida neta anual de $3,600.1 millones.",
+      "falta": "Pemex Transformación Industrial publica la utilidad o pérdida neta de PMX Fertilizantes Pacífico en su nota de subsidiarias (-$3,600.1 millones en 2024), pero no desglosa por separado los ingresos y los costos operativos de esa filial en un estado de resultados abierto al público.",
+      "pendiente_id": null,
+      "caja": "Lázaro Cárdenas y BCS",
+      "cont": [
+        {
+          "ico": "📐",
+          "tit": "Tope autorizado (2015)",
+          "v": 12532.0,
+          "f": "mdp1",
+          "etq": "hasta 635 millones de dólares en el Acuerdo CA-209/2015 (26-10-2015)",
+          "est": "oficial"
+        },
+        {
+          "ico": "🏦",
+          "tit": "Financiamiento contratado",
+          "v": 13121.6,
+          "f": "mdp1",
+          "etq": "créditos con Nafin, Bancomext y Banobras para acciones y deuda (+4.7 %)",
+          "est": "oficial"
+        },
+        {
+          "ico": "📉",
+          "tit": "Pérdida integral en 2016",
+          "v": 11690.6,
+          "f": "mdp1",
+          "etq": "primer año de operación en Pemex · ASF CP 2016, aud. 468-DE",
+          "est": "oficial"
+        },
+        {
+          "ico": "🧾",
+          "tit": "Deterioro contable (2017)",
+          "v": 4007.0,
+          "f": "mdp1",
+          "etq": "223.8 millones de dólares de crédito mercantil deteriorado · ASF CP 2017",
+          "est": "oficial"
+        },
+        {
+          "ico": "🔴",
+          "tit": "Pérdida neta en 2024",
+          "v": 3600.1,
+          "f": "mdp1",
+          "etq": "resultado del ejercicio 2024 de PMX Fertilizantes Pacífico (CP 2024, Tomo VIII)",
+          "est": "oficial"
+        }
+      ],
+      "rastroTit": "Desembolsos, pérdidas operativas y deterioros de Grupo Fertinal en Pemex (2015–2024)",
+      "rastroEst": "oficial",
+      "rastro": [
+        {
+          "k": "Financiamiento contratado para adquirir acciones y liquidar deuda de Fertinal (dic-2015)",
+          "sub": "635 millones de dólares al tipo de cambio del cierre · ASF CP 2016, aud. 468-DE",
+          "v": 13121.6,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2016ii/Documentos/Auditorias/2016_0468_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Pérdida integral del primer ejercicio en Pemex (2016)",
+          "sub": "565.9 millones de dólares de pérdida integral · ASF CP 2016, aud. 468-DE",
+          "v": 11690.6,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2016ii/Documentos/Auditorias/2016_0468_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Gasto de operación de 2016 frente a $5,892.9 millones de ingresos reales",
+          "sub": "Los ingresos quedaron 41.3 % debajo de lo proyectado · ASF CP 2016, aud. 468-DE",
+          "v": 6903.8,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2016ii/Documentos/Auditorias/2016_0468_a.pdf",
+          "est": "derivado"
+        },
+        {
+          "k": "Deterioro del crédito mercantil reconocido en 2017",
+          "sub": "223.8 millones de dólares de deterioro · ASF CP 2017, aud. 492-DE",
+          "v": 4007.0,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Pérdida neta de PMX Fertilizantes Pacífico en el ejercicio 2024",
+          "sub": "Estados financieros dictaminados 2024 de Pemex Transformación Industrial (Nota 3)",
+          "v": 3600.1,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2016ii/Documentos/Auditorias/2016_0468_a.pdf",
+          "est": "oficial"
+        }
+      ],
+      "fuentes": [
+        {
+          "doc": "ASF, Cuenta Pública 2016, auditoría 468-DE, Pemex Fertilizantes: Gestión Financiera (compra de Grupo Fertinal)",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2016ii/Documentos/Auditorias/2016_0468_a.pdf"
+        },
+        {
+          "doc": "ASF, Cuenta Pública 2017, auditoría de desempeño 492-DE, Pemex Fertilizantes: Producción, Distribución y Comercialización de Amoniaco, Fertilizantes y sus Derivados",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0492_a.pdf"
+        },
+        {
+          "doc": "ASF, CP 2016, auditoría 468-DE, Pemex Fertilizantes: compra de Grupo Fertinal",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2016ii/Documentos/Auditorias/2016_0468_a.pdf"
+        }
+      ]
+    },
+    "estela-luz": {
+      "ente": "Fideicomiso del Bicentenario, III Servicios, S.A. de C.V. (filial de Pemex) y Secretaría de Educación Pública",
+      "quien": "El Fideicomiso del Bicentenario y la filial de Pemex III Servicios, S.A. de C.V. contrataron y supervisaron el monumento en Paseo de la Reforma; Gutsa Infraestructura ejecutó la obra; la Auditoría Superior de la Federación practicó la revisión de situación excepcional en la Cuenta Pública 2011.",
+      "que": "El monumento conmemorativo del Bicentenario de la Independencia y Centenario de la Revolución («Estela de Luz», en Paseo de la Reforma, Ciudad de México) se adjudicó el 18 de diciembre de 2009 por $393.5 millones de pesos para entregarse en agosto de 2010. Tras cuatro convenios modificatorios, el contrato de obra subió a $1,146.4 millones (+192.0 %) y el costo total del proyecto —con supervisión, estudios, asesorías y espectáculo inaugural— cerró en $1,304.9 millones (+231.6 %, más del triple del contrato original), inaugurándose en enero de 2012 con 16 meses de retraso. La ASF determinó pagos improcedentes por $399.2 millones: $248.9 millones en el precio y transporte del acero inoxidable importado de Finlandia y Alemania y $150.3 millones en cuarzo de Brasil, conceptos fuera de catálogo y penas convencionales no aplicadas.",
+      "falta": "Como monumento y espacio cultural, la Estela de Luz no opera como empresa ni cobra entrada. La Secretaría de Cultura no publica por separado cuánto cuesta cada año mantener la torre ni operar el Centro de Cultura Digital que funciona en su sótano: ese gasto anual queda en el Registro de pendientes (ficha cuenta-estela-luz).",
+      "pendiente_id": "cuenta-estela-luz",
+      "caja": "Paseo de la Reforma",
+      "cont": [
+        {
+          "ico": "📐",
+          "tit": "Contrato original (2009)",
+          "v": 393.5,
+          "f": "mdp1",
+          "etq": "adjudicado el 18 de diciembre de 2009 a Gutsa Infraestructura",
+          "est": "oficial"
+        },
+        {
+          "ico": "🏗️",
+          "tit": "Obra tras 4 convenios",
+          "v": 1146.4,
+          "f": "mdp1",
+          "etq": "+192.0 % sobre el contrato de construcción (16 meses de retraso)",
+          "est": "oficial"
+        },
+        {
+          "ico": "💰",
+          "tit": "Costo final del proyecto",
+          "v": 1304.9,
+          "f": "mdp1",
+          "etq": "+231.6 % frente al contrato original (incluye supervisión, proyectos e inauguración)",
+          "est": "oficial"
+        },
+        {
+          "ico": "⚠️",
+          "tit": "Pagos improcedentes (ASF)",
+          "v": 399.2,
+          "f": "mdp1",
+          "etq": "$248.9 millones en acero y $150.3 millones en cuarzo y extraordinarios",
+          "est": "derivado"
+        },
+        {
+          "ico": "⏳",
+          "tit": "Mantenimiento anual",
+          "txt": "Sin desglose propio",
+          "etq": "Cultura no separa el gasto de la torre ni del Centro de Cultura Digital",
+          "est": "pendiente",
+          "pend": "cuenta-estela-luz"
+        }
+      ],
+      "rastroTit": "De $393.5 millones a $1,304.9 millones: el costo y los pagos observados por la ASF en la Estela de Luz",
+      "rastroEst": "oficial",
+      "rastro": [
+        {
+          "k": "Costo final total del proyecto (obra, proyectos, supervisión e inauguración)",
+          "sub": "+231.6 % frente al contrato original · ASF, Revisión de Situación Excepcional CP 2011",
+          "v": 1304.9,
+          "url": "https://www.asf.gob.mx/uploads/56_Informes_especiales_de_auditoria/Estela_Luz_Nv.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Monto contratado de construcción tras cuatro convenios modificatorios",
+          "sub": "+192.0 % respecto a los $393.5 millones contratados en diciembre de 2009",
+          "v": 1146.4,
+          "url": "https://www.asf.gob.mx/uploads/56_Informes_especiales_de_auditoria/Estela_Luz_Nv.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Contrato original de construcción (18 de diciembre de 2009)",
+          "sub": "Plazo original de entrega: agosto de 2010 (se entregó en enero de 2012)",
+          "v": 393.5,
+          "url": "https://www.asf.gob.mx/uploads/56_Informes_especiales_de_auditoria/Estela_Luz_Nv.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Pagos injustificados en el precio por kilogramo y flete del acero inoxidable",
+          "sub": "Observados por la ASF en la revisión de situación excepcional",
+          "v": 248.9,
+          "url": "https://www.asf.gob.mx/uploads/56_Informes_especiales_de_auditoria/Estela_Luz_Nv.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Otros pagos improcedentes en cuarzo, conceptos fuera de catálogo y penas no aplicadas",
+          "sub": "Suman $399.2 millones de pagos improcedentes junto con el acero",
+          "v": 150.3,
+          "url": "https://www.asf.gob.mx/uploads/56_Informes_especiales_de_auditoria/Estela_Luz_Nv.pdf",
+          "est": "oficial"
+        }
+      ],
+      "fuentes": [
+        {
+          "doc": "ASF, Informe sobre la fiscalización superior del monumento Estela de Luz 2009-2011 (informe especial)",
+          "url": "https://www.asf.gob.mx/uploads/56_Informes_especiales_de_auditoria/Estela_Luz_Nv.pdf"
+        }
+      ]
+    },
+    "bunker-garcia-luna": {
+      "ente": "Secretaría de Seguridad Pública Federal (Coordinación General de Plataforma México, Ramo 36)",
+      "quien": "La Secretaría de Seguridad Pública Federal (encabezada en 2006–2012 por Genaro García Luna) adjudicó sin licitación la obra civil a TRADECO Infraestructura y reservó los contratos tecnológicos de Plataforma México; la Auditoría Superior de la Federación auditó las Cuentas Públicas 2008, 2009 y 2011.",
+      "que": "El Centro Nacional de Inteligencia de Plataforma México («el Búnker», en Av. Constituyentes 947, Ciudad de México) se adjudicó sin licitación el 30 de mayo de 2008 (contrato SSP/OM/DGARMSG/0645/2008 con TRADECO Infraestructura) por $347.4 millones de pesos, bajo la excepción de seguridad pública. Un convenio de reducción bajó el contrato civil a $289.1 millones y la ASF observó $23.4 millones de pagos en exceso, duplicados o sin soporte en acabados e instalaciones: por ello, el costo de la obra civil se ubica en un rango oficial entre $236.9 millones (ejercido en el capítulo de obra pública 2008–2009) y $289.1 millones (contrato modificado), con punto medio de $263.0 millones. Ese monto solo cubre el edificio: el programa Plataforma México ejerció $1,188.5 millones en 2008 y $1,898.1 millones en 2011, pero la SSP reservó por 12 años los contratos del equipamiento tecnológico e informático del sótano.",
+      "falta": "El costo total del Búnker con sus pantallas, servidores, enlaces satelitales y software sigue pendiente en el Registro (ficha obra-bunker-garcia-luna) porque la SSP reservó los contratos tecnológicos; y la SSPC tampoco publica por separado cuánto cuesta hoy operar y mantener el inmueble (ficha cuenta-bunker-garcia-luna).",
+      "pendiente_id": "obra-bunker-garcia-luna",
+      "caja": "Obra civil vs. tecnología reservada",
+      "cont": [
+        {
+          "ico": "📐",
+          "tit": "Contrato de obra civil (2008)",
+          "v": 347.4,
+          "f": "mdp1",
+          "etq": "adjudicado sin licitación a TRADECO el 30 de mayo de 2008",
+          "est": "oficial"
+        },
+        {
+          "ico": "🏢",
+          "tit": "Obra civil (punto medio)",
+          "v": 263.0,
+          "f": "mdp1",
+          "etq": "rango oficial entre $236.9 y $289.1 millones (-24.3% frente al contrato inicial)",
+          "est": "derivado"
+        },
+        {
+          "ico": "⚠️",
+          "tit": "Pagos observados en el edificio",
+          "v": 23.4,
+          "f": "mdp1",
+          "etq": "volúmenes pagados de más, conceptos duplicados y equipos sin soporte (ASF CP 2009)",
+          "est": "oficial"
+        },
+        {
+          "ico": "📡",
+          "tit": "Plataforma México en 2011",
+          "v": 1898.1,
+          "f": "mdp1",
+          "etq": "ejercido por la Coordinación General de Plataforma México · ASF CP 2011, aud. 16-GB",
+          "est": "oficial"
+        },
+        {
+          "ico": "🔒",
+          "tit": "Equipamiento tecnológico",
+          "txt": "Reservado 12 años",
+          "etq": "la SSP reservó los contratos de sistemas del Búnker y la SSPC no ha publicado el total",
+          "est": "pendiente",
+          "pend": "obra-bunker-garcia-luna"
+        }
+      ],
+      "rastroTit": "Lo que sí pudo auditar la ASF del edificio y del presupuesto de Plataforma México (2007–2011)",
+      "rastroEst": "oficial",
+      "rastro": [
+        {
+          "k": "Ejercido por la Coordinación General de Plataforma México en 2011",
+          "sub": "Presupuesto anual del programa de interconexión y sistemas · ASF CP 2011, aud. 16-GB",
+          "v": 1898.1,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2011i/Grupos/Gobierno/2011_0016_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Ejercido en acciones asociadas a Plataforma México en 2008",
+          "sub": "Incluye telecomunicaciones, cómputo e infraestructura · ASF CP 2008, Informe Sector Seguridad",
+          "v": 1188.5,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2008i/Tomos/T9V2.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Construcción de instalaciones y equipamiento de Plataforma México (2007–2009)",
+          "sub": "$195.9 millones en 2007, $127.6 millones en 2008 y $109.3 millones en 2009 · ASF CP 2009, aud. 1053",
+          "v": 432.7,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2009i/Tomos/Tomo2/2009_1053_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Contrato original de obra civil del edificio en Constituyentes 947",
+          "sub": "Adjudicado sin licitación a TRADECO Infraestructura (30-05-2008) · ASF CP 2009, aud. 1053",
+          "v": 347.4,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2009i/Tomos/Tomo2/2009_1053_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Monto del contrato civil tras el convenio de reducción del 29-12-2008",
+          "sub": "Cota superior del rango oficial de la obra civil · ASF CP 2009, aud. 1053",
+          "v": 289.1,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2009i/Tomos/Tomo2/2009_1053_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Pagos en exceso, conceptos duplicados y sin soporte observados en el edificio",
+          "sub": "Determinados por la ASF en la auditoría de inversiones físicas 1053 (CP 2009)",
+          "v": 23.4,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2009i/Tomos/Tomo2/2009_1053_a.pdf",
+          "est": "oficial"
+        }
+      ],
+      "fuentes": [
+        {
+          "doc": "ASF, Cuenta Pública 2009, auditoría de inversiones físicas 1053, Secretaría de Seguridad Pública: Edificio de Plataforma México, en el Distrito Federal",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2009i/Tomos/Tomo2/2009_1053_a.pdf"
+        },
+        {
+          "doc": "ASF, Informe del Resultado CP 2008, tomo IX, vol. 2, auditoría de desempeño 957: Plataforma México",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2008i/Tomos/T9V2.pdf"
+        },
+        {
+          "doc": "ASF, Cuenta Pública 2011, auditoría 16, SSP: Plataforma México. Servicios de telecomunicaciones y bienes informáticos",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2011i/Grupos/Gobierno/2011_0016_a.pdf"
+        }
+      ]
+    },
+    "refineria-tula": {
+      "ente": "Pemex Refinación (hoy Pemex Transformación Industrial)",
+      "quien": "Pemex Refinación registró en cartera y ejerció los estudios de preinversión y el acondicionamiento del predio en Atitalaquia y Tula de Allende, Hidalgo; el Gobierno del Estado de Hidalgo adquirió los terrenos; la Auditoría Superior de la Federación fiscalizó el cierre en la Cuenta Pública 2014 (auditoría 315-DE).",
+      "que": "Anunciada en marzo de 2008 como la nueva «Refinería Bicentenario» en Tula, Hidalgo (con un primer registro en cartera de $7,613.3 millones de pesos en 2009 para su etapa inicial), la obra se dividió en dos proyectos de inversión autorizados por $3,714.0 millones: $1,475.2 millones para estudios de preinversión y $2,238.8 millones para acondicionar el sitio. Pemex Refinación ejerció $659.3 millones en 17 contratos de estudios e ingeniería básica y $468.3 millones en limpiar el terreno y levantar la barda perimetral ($1,127.6 millones en total, el 30.4 % de lo autorizado), antes de cancelar definitivamente el proyecto en diciembre de 2014 sin haber construido un solo tren de refinación.",
+      "falta": "El proyecto se canceló en diciembre de 2014 sin entrar en operación: los $1,127.6 millones ejercidos en estudios, limpieza del predio y barda perimetral quedaron como costo hundido, sin ingresos ni estado de resultados anual.",
+      "pendiente_id": null,
+      "caja": "Cancelada en 2014",
+      "cont": [
+        {
+          "ico": "📋",
+          "tit": "Primer registro (2009)",
+          "v": 7613.3,
+          "f": "mdp1",
+          "etq": "monto inicial en cartera de inversión de Pemex Refinación en 2009",
+          "est": "oficial"
+        },
+        {
+          "ico": "📐",
+          "tit": "Autorizado en 2 proyectos",
+          "v": 3714.0,
+          "f": "mdp1",
+          "etq": "$1,475.2 millones en estudios + $2,238.8 millones en terreno y barda",
+          "est": "derivado"
+        },
+        {
+          "ico": "📄",
+          "tit": "Ejercido en 17 estudios",
+          "v": 659.3,
+          "f": "mdp1",
+          "etq": "estudios de preinversión e ingeniería básica (2010–2014) · ASF CP 2014",
+          "est": "oficial"
+        },
+        {
+          "ico": "🧱",
+          "tit": "Ejercido en predio y barda",
+          "v": 468.3,
+          "f": "mdp1",
+          "etq": "limpieza, nivelación y barda perimetral en Atitalaquia y Tula · ASF CP 2014",
+          "est": "oficial"
+        },
+        {
+          "ico": "🚫",
+          "tit": "Total hundido al cancelar",
+          "v": 1127.6,
+          "f": "mdp1",
+          "etq": "se ejerció el 30.4 % (-69.6 % respecto a lo autorizado) y no se refinó un barril",
+          "est": "derivado"
+        }
+      ],
+      "rastroTit": "En qué se fueron los $1,127.6 millones antes de cancelar la Refinería Bicentenario (ASF CP 2014)",
+      "rastroEst": "oficial",
+      "rastro": [
+        {
+          "k": "Presupuesto autorizado para acondicionamiento y preparación del sitio",
+          "sub": "De ese monto se dejaron de ejecutar $1,770.5 millones al cancelar · ASF CP 2014, aud. 315-DE",
+          "v": 2238.8,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2014i/Documentos/Auditorias/2014_0315_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Obra de acondicionamiento que se dejó de ejecutar por la cancelación",
+          "sub": "79.1 % del presupuesto del sitio no se ejerció · ASF CP 2014, aud. 315-DE",
+          "v": 1770.5,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2014i/Documentos/Auditorias/2014_0315_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Presupuesto autorizado para estudios de preinversión",
+          "sub": "Ingeniería básica, ambiental y de factibilidad · ASF CP 2014, aud. 315-DE",
+          "v": 1475.2,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2014i/Documentos/Auditorias/2014_0315_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Ejercido en 17 contratos de estudios de preinversión (2010–2014)",
+          "sub": "Costo hundido tras la cancelación del proyecto · ASF CP 2014, aud. 315-DE",
+          "v": 659.3,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2014i/Documentos/Auditorias/2014_0315_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Ejercido en acondicionamiento del terreno y barda perimetral",
+          "sub": "Única obra física ejecutada en el predio de Tula · ASF CP 2014, aud. 315-DE",
+          "v": 468.3,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2014i/Documentos/Auditorias/2014_0315_a.pdf",
+          "est": "oficial"
+        }
+      ],
+      "fuentes": [
+        {
+          "doc": "ASF, Cuenta Pública 2014, auditoría 315, Pemex Refinación: Calidad de Combustibles, Fase Gasolinas, de la Refinería «Miguel Hidalgo» y Revisión de la Cancelación de la Construcción de la Refinería Bicentenario",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2014i/Documentos/Auditorias/2014_0315_a.pdf"
+        }
+      ]
+    },
+    "enciclomedia": {
+      "ente": "Secretaría de Educación Pública (Ramo 11) e Instituto Latinoamericano de la Comunicación Educativa (ILCE)",
+      "quien": "La Secretaría de Educación Pública diseñó y contrató el programa multianual (2004–2011) con apoyo del ILCE; la Secretaría de Hacienda autorizó el techo multianual en el oficio OM-402; la Auditoría Superior de la Federación auditó el programa en siete Cuentas Públicas consecutivas (2005 a 2011).",
+      "que": "El Programa Enciclomedia buscó equipar 125,562 aulas de 5.º y 6.º de primaria con pizarrones interactivos, proyectores, computadoras e impresoras bajo esquemas multianuales de arrendamiento y compra. Hacienda autorizó un techo multianual de $21,398.3 millones de pesos (oficio OM-402, para 2005–2010), pero al sumar lo ejercido en las siete auditorías de la ASF de 2001 a 2011 el gasto acumulado llegó a $32,315.7 millones (+51.0 %, $10,917.4 millones por encima de la autorización original). La ASF documentó lámparas de proyectores fundidas sin reemplazo, aulas sin energía eléctrica ni conectividad, pagos por equipos no localizados y licencias sin soporte, hasta que el programa se cerró en 2011.",
+      "falta": "El programa se extinguió en 2011 y sus equipos quedaron dados de baja o en desuso en los planteles, por lo que no existe operación ni estado de resultados vigente.",
+      "pendiente_id": null,
+      "caja": "2001–2011 · 7 auditorías ASF",
+      "cont": [
+        {
+          "ico": "📐",
+          "tit": "Techo multianual (OM-402)",
+          "v": 21398.3,
+          "f": "mdp1",
+          "etq": "autorizado por Hacienda para equipar 125,562 aulas de primaria (2005–2010)",
+          "est": "oficial"
+        },
+        {
+          "ico": "💻",
+          "tit": "Ejercido de 2001 a 2006",
+          "v": 6417.8,
+          "f": "mdp1",
+          "etq": "arranque y primeros contratos multianuales · ASF CP 2006, aud. 280",
+          "est": "oficial"
+        },
+        {
+          "ico": "📈",
+          "tit": "Pico anual en 2007",
+          "v": 7145.8,
+          "f": "mdp1",
+          "etq": "año de mayor desembolso del programa · ASF CP 2007, aud. 392",
+          "est": "oficial"
+        },
+        {
+          "ico": "💰",
+          "tit": "Total ejercido (2001–2011)",
+          "v": 32315.7,
+          "f": "mdp1",
+          "etq": "+51.0 % sobre el techo autorizado (+$10,917.4 millones en once años)",
+          "est": "derivado"
+        },
+        {
+          "ico": "🚫",
+          "tit": "Estado del programa",
+          "txt": "Extinto en 2011",
+          "etq": "liquidado tras siete Cuentas Públicas con observaciones de la ASF",
+          "est": "oficial"
+        }
+      ],
+      "rastroTit": "Lo que ejerció la SEP en Enciclomedia año por año según las siete auditorías de la ASF (2001–2011)",
+      "rastroEst": "oficial",
+      "rastro": [
+        {
+          "k": "Ejercido en el ejercicio fiscal 2007",
+          "sub": "Cuenta Pública 2007 · ASF, auditoría 392",
+          "v": 7145.8,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2007i/Tomos/T5V2.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Ejercido acumulado de 2001 a 2006",
+          "sub": "Cuentas Públicas 2005 (aud. 142) y 2006 (aud. 280)",
+          "v": 6417.8,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2006i/Tomos/T5V1.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Ejercido en el ejercicio fiscal 2008",
+          "sub": "Cuenta Pública 2008 · ASF, auditoría 907",
+          "v": 5817.7,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2008i/Tomos/T5V2.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Ejercido en el ejercicio fiscal 2011 (cierre del programa)",
+          "sub": "Cuenta Pública 2011 · ASF, auditoría 226-DS",
+          "v": 4720.6,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2011i/Grupos/Desarrollo_Social/2011_0388_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Ejercido en el ejercicio fiscal 2010",
+          "sub": "Cuenta Pública 2010 · ASF, auditoría 261-DS",
+          "v": 4665.5,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2010i/Grupos/Desarrollo_Social/2010_0923_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Ejercido en el ejercicio fiscal 2009",
+          "sub": "Cuenta Pública 2009 · ASF, auditoría 275",
+          "v": 3548.4,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2009i/Tomos/Tomo4/2009_0338_a.pdf",
+          "est": "oficial"
+        }
+      ],
+      "fuentes": [
+        {
+          "doc": "ASF, Informe del Resultado de la Cuenta Pública 2005, tomo VI, vol. 2, auditoría 584, SEP: Egresos Presupuestales Asignados al Proyecto Enciclomedia",
+          "url": "https://www.asf.gob.mx/Trans/Informes/ir2005i/Tomos/T6V2.pdf"
+        },
+        {
+          "doc": "ASF, Informe del Resultado de la Cuenta Pública 2006, tomo V, vol. 1, auditoría 99, SEP: Evaluación del Programa Enciclomedia",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2006i/Tomos/T5V1.pdf"
+        },
+        {
+          "doc": "ASF, Informe del Resultado de la Cuenta Pública 2007, tomo V, vol. 2, auditoría 438, SEP: Programa Enciclomedia 5° y 6° Año de Primaria",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2007i/Tomos/T5V2.pdf"
+        },
+        {
+          "doc": "ASF, Informe del Resultado de la Cuenta Pública 2008, tomo V, vol. 2, auditoría 274, SEP: Programa E001 «Enciclomedia, 5° y 6° Año de Primaria»",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2008i/Tomos/T5V2.pdf"
+        },
+        {
+          "doc": "ASF, Cuenta Pública 2009, auditoría 338, SEP: Programa E001 «Enciclomedia» 5° y 6° Año de Primaria",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2009i/Tomos/Tomo4/2009_0338_a.pdf"
+        },
+        {
+          "doc": "ASF, Cuenta Pública 2010, auditoría 923, SEP: Programa E001 «Enciclomedia»",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2010i/Grupos/Desarrollo_Social/2010_0923_a.pdf"
+        },
+        {
+          "doc": "ASF, Cuenta Pública 2011, auditoría 388, SEP: Programa E001 «Enciclomedia»",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2011i/Grupos/Desarrollo_Social/2011_0388_a.pdf"
+        }
+      ]
+    },
+    "fobaproa": {
+      "ente": "Instituto para la Protección al Ahorro Bancario (IPAB) y Secretaría de Hacienda (Ramo 34 Erogaciones para los Programas de Apoyo a Ahorradores y Deudores de la Banca)",
+      "quien": "El Ejecutivo Federal presentó en 1998 la iniciativa para convertir los pasivos del FOBAPROA; el Congreso creó el IPAB en diciembre de 1998 y cada año aprueba transferencias fiscales en el Ramo 34 del Presupuesto de Egresos; el IPAB refinancia los Bonos de Protección al Ahorro (BPA) y publica sus estados financieros dictaminados.",
+      "que": "Este registro corresponde a un rescate financiero —no a una obra física—, por lo que se contabiliza aparte de las 11 obras. En febrero de 1998 el Ejecutivo pidió reconocer como deuda pública $552,300.0 millones de pesos de pasivos del FOBAPROA (Informe Mackey, Gaceta Parlamentaria del 23-09-1999). De 1999 a 2025 el erario federal ha transferido al IPAB $710,923.3 millones por el Ramo 34 (Programa de Apoyo a Ahorradores) y, aun después de veintisiete años de pagos, al 31 de diciembre de 2025 los pasivos netos del IPAB siguen en $1,023,571.0 millones: el costo comprometido (lo ya pagado con impuestos más el saldo que falta por pagar) suma $1,734,494.3 millones (+214.0 % frente al pasivo de 1998), o $2,009,825.7 millones si se agregan los $275,331.4 millones de programas de apoyo a deudores. Tan solo en 2025 el Fondo FOBAPROA devengó $97,855.8 millones de intereses; sin la transferencia de $52,451.9 millones del Ramo 34, su déficit propio fue de -$59,971.8 millones.",
+      "falta": "Los estados financieros del IPAB y la Cuenta Pública del Ramo 34 están publicados al cierre de 2025; lo que sigue corriendo cada año es el servicio de la deuda de los Bonos de Protección al Ahorro ($35,553.4 millones aprobados en el Ramo 34 del PEF 2026).",
+      "pendiente_id": null,
+      "caja": "Rescate 1998 · Sigue en pago",
+      "cont": [
+        {
+          "ico": "📜",
+          "tit": "Pasivo de febrero de 1998",
+          "v": 552300.0,
+          "f": "mdp1",
+          "etq": "monto presentado al Congreso para convertir en deuda pública (Informe Mackey)",
+          "est": "oficial"
+        },
+        {
+          "ico": "🏛️",
+          "tit": "Pagado por Ramo 34 (1999–2025)",
+          "v": 710923.3,
+          "f": "mdp1",
+          "etq": "transferencias presupuestarias acumuladas al Programa de Apoyo a Ahorradores",
+          "est": "oficial"
+        },
+        {
+          "ico": "🏦",
+          "tit": "Saldo de deuda al cierre 2025",
+          "v": 1023571.0,
+          "f": "mdp1",
+          "etq": "pasivos totales ($1,134,548 mdp) menos activos ($110,977 mdp) del IPAB",
+          "est": "oficial"
+        },
+        {
+          "ico": "📈",
+          "tit": "Costo comprometido total",
+          "v": 1734494.3,
+          "f": "mdp1",
+          "etq": "pagado + saldo por pagar (+214.0 % frente a 1998; $2,009,825.7 mdp con deudores)",
+          "est": "derivado"
+        },
+        {
+          "ico": "🔴",
+          "tit": "Déficit 2025 sin Ramo 34",
+          "v": 59971.8,
+          "f": "mdp1",
+          "etq": "en 2025 devengó $97,855.8 millones de intereses y recibió $52,451.9 millones del PEF",
+          "est": "derivado"
+        }
+      ],
+      "rastroTit": "De $552,300 millones en 1998 a $1,734,494.3 millones comprometidos al cierre de 2025 (IPAB y SHCP)",
+      "rastroEst": "oficial",
+      "rastro": [
+        {
+          "k": "Pasivos netos del IPAB al 31 de diciembre de 2025 (deuda que sigue viva)",
+          "sub": "Pasivos totales ($1,134,548 mdp) menos activos ($110,977 mdp) · Estados Financieros IPAB 2025",
+          "v": 1023571.0,
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/1068974/Estados-Financieros_diciembre-2025.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Transferencias acumuladas del Ramo 34 para apoyo a ahorradores (1999–2025)",
+          "sub": "Pagado con recursos fiscales del Presupuesto de Egresos · Plan Anual de Financiamiento 2026 del IPAB",
+          "v": 710923.3,
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/1043973/Plan-Anual-De-Financiamiento_2026.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Pasivo del FOBAPROA presentado al Congreso en febrero de 1998",
+          "sub": "Cifra original antes de intereses acumulados · Informe Mackey, Gaceta Parlamentaria (23-09-1999)",
+          "v": 552300.0,
+          "url": "https://gaceta.diputados.gob.mx/Gaceta/57/1999/sep/19990923-I.html",
+          "est": "oficial"
+        },
+        {
+          "k": "Recursos fiscales adicionales destinados a programas de apoyo a deudores",
+          "sub": "Reportados aparte del PAB en el Plan Anual de Financiamiento 2026 del IPAB",
+          "v": 275331.4,
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/1043973/Plan-Anual-De-Financiamiento_2026.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Intereses de la deuda devengados por el Fondo FOBAPROA tan solo en 2025",
+          "sub": "Nota 20 de los estados financieros dictaminados del IPAB 2025",
+          "v": 97855.8,
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/1068974/Estados-Financieros_diciembre-2025.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Ramo 34 ejercido en 2025 ($52,451.9 mdp) y aprobado en el PEF 2026 ($35,553.4 mdp)",
+          "sub": "Transferencia anual del erario para cubrir el costo financiero de los Bonos de Protección al Ahorro",
+          "v": 52451.9,
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf",
+          "est": "oficial"
+        }
+      ],
+      "fuentes": [
+        {
+          "doc": "IPAB: Estados financieros dictaminados al 31 de diciembre de 2025 y 2024",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/1068974/Estados-Financieros_diciembre-2025.pdf"
+        },
+        {
+          "doc": "IPAB: Plan Anual de Financiamiento 2026",
+          "url": "https://www.gob.mx/cms/uploads/attachment/file/1043973/Plan-Anual-De-Financiamiento_2026.pdf"
+        },
+        {
+          "doc": "Gaceta Parlamentaria (Cámara de Diputados, 23-09-1999): Informe de Michael W. Mackey sobre el FOBAPROA",
+          "url": "https://gaceta.diputados.gob.mx/Gaceta/57/1999/sep/19990923-I.html"
+        },
+        {
+          "doc": "SHCP, Cuenta Pública 2014-2025, datos abiertos (gasto por clave de cartera)",
+          "url": "https://www.transparenciapresupuestaria.gob.mx/Datos-Abiertos"
+        },
+        {
+          "doc": "Presupuesto de Egresos de la Federación 2026, DOF 21-11-2025 (edición vespertina), Anexo 8, p. 36",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf"
+        }
+      ]
+    },
+    "farac-carretero": {
+      "ente": "Fideicomiso de Apoyo para el Rescate de Autopistas Concesionadas (FARAC), hoy Fondo Nacional de Infraestructura (FONADIN) en BANOBRAS",
+      "quien": "El Gobierno Federal constituyó el FARAC en agosto de 1997 en BANOBRAS para rescatar 23 autopistas y puentes privados; en 2008 sus activos y pasivos pasaron al FONADIN; la Auditoría Superior de la Federación fiscalizó el rescate en las Cuentas Públicas 2015 y 2017 y Hacienda reporta el saldo del pasivo en los Requerimientos Financieros del Sector Público.",
+      "que": "Al igual que el FOBAPROA, el rescate carretero de 1997 es un rescate financiero y se presenta separado de las 11 obras físicas. En agosto de 1997 el Gobierno Federal rescató 23 autopistas y puentes concesionados y asumió $57,756.6 millones de pesos en indemnizaciones ($30,265.4 millones de deuda bancaria subrogada y $27,491.2 millones en Pagarés de Indemnización Carretera). Aunque el fondo cobró peajes y recibió $187,891.5 millones por re-concesionar autopistas entre 2007 y 2016, los intereses y gastos financieros superaron sus ingresos y de 1997 a 2017 acumuló pérdidas netas por $96,094.9 millones: el costo documentado hasta 2017 asciende al menos a $153,851.5 millones (+166.4 %). Al cierre de 2017 su deuda bursátil neta era de $225,500.2 millones (con $351,969.6 millones por pagar entre 2018 y 2033 según la ASF) y al cierre de 2025 Hacienda reporta todavía un saldo de pasivos del FARAC/FONADIN de $153,035.5 millones.",
+      "falta": "El último estado de resultados anual desglosado en informes públicos de la ASF es el de 2017 (déficit de -$10,564.3 millones): Banobras y Hacienda no publican en formato abierto la serie anual de ingresos por peaje, intereses pagados y pérdida o superávit del FONADIN de 2018 a 2025.",
+      "pendiente_id": null,
+      "caja": "23 autopistas rescatadas (1997)",
+      "cont": [
+        {
+          "ico": "🛣️",
+          "tit": "Indemnizaciones de 1997",
+          "v": 57756.6,
+          "f": "mdp1",
+          "etq": "23 autopistas y puentes: $30,265.4 mdp de deuda bancaria + $27,491.2 mdp en pagarés PIC",
+          "est": "oficial"
+        },
+        {
+          "ico": "📉",
+          "tit": "Pérdida acumulada (1997–2017)",
+          "v": 96094.9,
+          "f": "mdp1",
+          "etq": "veinte años en que los intereses superaron los ingresos del fondo · ASF CP 2017, aud. 91-GB",
+          "est": "derivado"
+        },
+        {
+          "ico": "💰",
+          "tit": "Costo documentado a 2017",
+          "v": 153851.5,
+          "f": "mdp1",
+          "etq": "cota mínima (indemnizaciones + pérdida acumulada, +166.4 % frente a 1997)",
+          "est": "derivado"
+        },
+        {
+          "ico": "🏦",
+          "tit": "Pasivo vivo al cierre 2025",
+          "v": 153035.5,
+          "f": "mdp1",
+          "etq": "saldo de pasivos del FARAC/FONADIN en el SHRFSP al 4T 2025 (SHCP)",
+          "est": "oficial"
+        },
+        {
+          "ico": "🔴",
+          "tit": "Déficit anual (corte 2017)",
+          "v": 10564.3,
+          "f": "mdp1",
+          "etq": "$16,650.0 millones de gastos frente a $6,085.6 millones de ingresos en 2017 (ASF)",
+          "est": "oficial"
+        }
+      ],
+      "rastroTit": "El rastro financiero del rescate carretero FARAC/FONADIN en la ASF y Hacienda (1997–2025)",
+      "rastroEst": "oficial",
+      "rastro": [
+        {
+          "k": "Capital e intereses por pagar de la deuda bursátil entre 2018 y 2033",
+          "sub": "$185,436.3 millones de capital + $166,533.3 millones de intereses proyectados · ASF CP 2017, aud. 96",
+          "v": 351969.6,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0096_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Deuda bursátil neta del rescate al 31 de diciembre de 2017",
+          "sub": "3.9 veces las indemnizaciones asumidas veinte años antes · ASF CP 2017, aud. 96",
+          "v": 225500.2,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0096_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Ingresos recibidos por re-concesionar autopistas a privados (2007–2016)",
+          "sub": "No alcanzaron para extinguir el pasivo por el peso de los intereses · ASF CP 2017, aud. 91-GB",
+          "v": 187891.5,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0091_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Saldo de pasivos del FARAC/FONADIN en el SHRFSP al cierre de 2025",
+          "sub": "0.4 % del PIB reportado por la SHCP en los Informes sobre la Situación Económica 4T 2025",
+          "v": 153035.5,
+          "url": "https://www.finanzaspublicas.hacienda.gob.mx/work/models/Finanzas_Publicas/docs/congreso/infotrim/2025/ivt/05adp/itandpdc_202504.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Pérdida neta acumulada del fideicomiso de 1997 a 2017",
+          "sub": "$37,260.4 millones (1997–2007) + $58,834.5 millones (2008–2017) · ASF CP 2017, aud. 91-GB",
+          "v": 96094.9,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0091_a.pdf",
+          "est": "derivado"
+        },
+        {
+          "k": "Indemnizaciones asumidas en agosto de 1997 por 23 autopistas y puentes",
+          "sub": "Deuda bancaria subrogada ($30,265.4 mdp) y pagarés PIC ($27,491.2 mdp) · ASF CP 2015, aud. 99",
+          "v": 57756.6,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2015i/Documentos/Auditorias/2015_0099_a.pdf",
+          "est": "oficial"
+        }
+      ],
+      "fuentes": [
+        {
+          "doc": "ASF, Cuenta Pública 2017, auditoría 96, Banobras: Fideicomiso Fondo Nacional de Infraestructura (deuda del rescate carretero)",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0096_a.pdf"
+        },
+        {
+          "doc": "ASF, Cuenta Pública 2017, auditoría 91-GB: Análisis del Otorgamiento y Rescate de las Concesiones Carreteras (FARAC-FONADIN)",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2017c/Documentos/Auditorias/2017_0091_a.pdf"
+        },
+        {
+          "doc": "ASF, Cuenta Pública 2015, auditoría 99: Fondo Nacional de Infraestructura (FONADIN)",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2015i/Documentos/Auditorias/2015_0099_a.pdf"
+        },
+        {
+          "doc": "SHCP: Informes sobre la Situación Económica, las Finanzas Públicas y la Deuda Pública al 4T 2025",
+          "url": "https://www.finanzaspublicas.hacienda.gob.mx/work/models/Finanzas_Publicas/docs/congreso/infotrim/2025/ivt/05adp/itandpdc_202504.pdf"
+        }
+      ]
+    },
+    "seguro-popular": {
+      "ente": "Comisión Nacional de Protección Social en Salud (Secretaría de Salud) y los Regímenes Estatales de Protección Social en Salud",
+      "quien": "La Comisión Nacional de Protección Social en Salud, de la Secretaría de Salud, operaba el Sistema de Protección Social en Salud y transfería el dinero a los Regímenes Estatales de las 32 entidades, que daban el servicio. La Auditoría Superior de la Federación revisó su gasto (33 auditorías de la Cuenta Pública 2018). El Congreso aprobó en 2019 su sustitución por el INSABI y en 2023 el paso al IMSS-Bienestar. El INEGI mide cuánta gente no tiene acceso a servicios de salud.",
+      "que": "El Seguro Popular fue el brazo del Sistema de Protección Social en Salud para quien no tenía IMSS ni ISSSTE. Su logro está medido: pasó de 5.3 millones de personas afiliadas en 2004 a 53.5 millones en 2017, y en 2018 las 32 entidades acordaron mantener esa cobertura (ASF). Mientras operó, la gente sin acceso a servicios de salud se mantuvo en 18.8 millones en 2016 y 20.1 millones en 2018, el 16.2 % de la población. Tras su sustitución por el INSABI subió a 35.7 millones en 2020 y a 50.4 millones en 2022; en 2024, ya con el IMSS-Bienestar, eran 44.5 millones (INEGI): 24.4 millones más que en 2018. También tuvo sus fallas, y la ASF las documentó: en 2018 observó $928.7 millones, el 1.7 % de lo que revisó, sobre todo gasto sin comprobar y dinero no ejercido; $892.3 millones seguían por aclarar al cerrar la revisión. Un monto observado no es un daño probado: es lo que la entidad no comprobó a tiempo.",
+      "falta": "Cuántas personas afiliadas recibieron atención de verdad: las consultas y servicios venían en los informes de resultados del Sistema de Protección Social en Salud, que la plataforma aún no integra. Tampoco están todavía aquí las auditorías de la ASF al INSABI y al IMSS-Bienestar, ni cuánto de los $892.3 millones por aclarar se aclaró después.",
+      "pendiente_id": "red-seguro-popular-51-millones-2",
+      "caja": "2004–2024 · ASF e INEGI",
+      "cont": [
+        {
+          "ico": "📈",
+          "tit": "Afiliados, de 2004 a 2017",
+          "txt": "5.3 → 53.5 millones",
+          "etq": "personas con Seguro Popular; en 2018 las 32 entidades acordaron mantener la cobertura · ASF, CP 2018",
+          "est": "oficial"
+        },
+        {
+          "ico": "🩺",
+          "tit": "Sin acceso a la salud en 2018",
+          "txt": "20.1 millones",
+          "etq": "el 16.2 % de la población, con el Seguro Popular en operación · INEGI, comunicado 118/25",
+          "est": "oficial"
+        },
+        {
+          "ico": "📉",
+          "tit": "Sin acceso a la salud en 2024",
+          "txt": "44.5 millones",
+          "etq": "el 34.2 %; el máximo fue 50.4 millones en 2022 · INEGI, comunicado 118/25",
+          "est": "oficial"
+        },
+        {
+          "ico": "🔍",
+          "tit": "Observado por la ASF (2018)",
+          "v": 928.7,
+          "f": "mdp1",
+          "etq": "en 33 auditorías, el 1.7 % de lo revisado; $892.3 mdp seguían por aclarar",
+          "est": "oficial"
+        },
+        {
+          "ico": "➕",
+          "tit": "De más frente a 2018",
+          "txt": "+24.4 millones",
+          "etq": "personas sin acceso a servicios de salud. Operación: 44.5 − 20.1",
+          "est": "derivado"
+        },
+        {
+          "ico": "💰",
+          "tit": "Ejercido en 2018",
+          "v": 68148.4,
+          "f": "mdp1",
+          "etq": "el 3.5 % del gasto federalizado de la Cuenta Pública 2018 · ASF",
+          "est": "oficial"
+        },
+        {
+          "ico": "⏳",
+          "tit": "Atenciones de verdad",
+          "txt": "Sin integrar",
+          "etq": "cuántas consultas y servicios dio a sus afiliados",
+          "est": "pendiente",
+          "pend": "red-seguro-popular-51-millones-2"
+        }
+      ],
+      "serieTit": "La línea del tiempo: personas sin acceso a servicios de salud, 2016–2024",
+      "serieTxt": "Millones de personas con «carencia por acceso a los servicios de salud» (INEGI). Ojo: la encuesta mide si la persona dice estar afiliada o tener derecho a una institución, no si la atendieron ni si había medicinas. Con el INSABI desapareció el padrón de afiliados y cambió también la forma de declarar, y 2020 fue el año de la pandemia: la serie se lee con esas dos notas.",
+      "serie": [
+        {
+          "k": "2016",
+          "v": 18.8,
+          "pct": 15.6,
+          "sub": "Seguro Popular en operación",
+          "est": "oficial",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+        },
+        {
+          "k": "2018",
+          "v": 20.1,
+          "pct": 16.2,
+          "sub": "Seguro Popular: último año medido antes del cambio",
+          "est": "oficial",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+        },
+        {
+          "k": "2020",
+          "v": 35.7,
+          "pct": 28.2,
+          "sub": "INSABI desde el 1 de enero de 2020 (y la pandemia)",
+          "est": "oficial",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+        },
+        {
+          "k": "2022",
+          "v": 50.4,
+          "pct": 39.1,
+          "sub": "INSABI: el punto más alto de la serie",
+          "est": "oficial",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+        },
+        {
+          "k": "2024",
+          "v": 44.5,
+          "pct": 34.2,
+          "sub": "IMSS-Bienestar desde el decreto del 29 de mayo de 2023",
+          "est": "oficial",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+        }
+      ],
+      "rastroTit": "Lo que la ASF observó en el Seguro Popular en 2018, por tipo de irregularidad ($928.7 mdp)",
+      "rastroEst": "oficial",
+      "rastro": [
+        {
+          "k": "Falta de documentación justificativa o comprobatoria del gasto",
+          "sub": "9 entidades, entre ellas Campeche, Chihuahua, Ciudad de México y Tabasco · 35.9 % de lo observado",
+          "v": 333.1,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Recursos o rendimientos no ejercidos, devengados o sin reintegrar a la TESOFE",
+          "sub": "22 entidades · 25.4 % de lo observado",
+          "v": 236.2,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Transferencia de recursos a otras cuentas bancarias",
+          "sub": "Chiapas, Sinaloa y Tamaulipas · 8.7 %",
+          "v": 80.4,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Pago de sueldos, prestaciones o estímulos por encima de lo autorizado",
+          "sub": "Guerrero, Jalisco, Quintana Roo y Yucatán · 8.4 %",
+          "v": 77.6,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Gasto en conceptos que no cumplen los objetivos del programa",
+          "sub": "Campeche, Chiapas, Morelos y Quintana Roo · 5.4 %",
+          "v": 50.6,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Bienes pagados a precios superiores a los contratados",
+          "sub": "Chiapas y Quintana Roo · 2.7 %",
+          "v": 24.9,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Conceptos de nómina no autorizados",
+          "sub": "Hidalgo, Jalisco y Oaxaca · 2.3 %",
+          "v": 21.7,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+          "est": "oficial"
+        },
+        {
+          "k": "Otros: personal sin el perfil, medicinas fuera del CAUSES, penas no aplicadas, bienes no localizados",
+          "sub": "11.2 % de lo observado",
+          "v": 104.2,
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+          "est": "oficial"
+        }
+      ],
+      "fuentes": [
+        {
+          "doc": "ASF, Marco de Referencia «Recursos federales transferidos a través del Acuerdo de Coordinación (Seguro Popular)», Cuenta Pública 2018",
+          "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf"
+        },
+        {
+          "doc": "INEGI, comunicado de prensa 118/25, Pobreza multidimensional 2024, cuadro 1 (13-08-2025)",
+          "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+        },
+        {
+          "doc": "INEGI, Pobreza multidimensional 2024, presentación de resultados",
+          "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_presentacion_2024.pdf"
+        },
+        {
+          "doc": "Ley General de Salud, transitorios de los decretos del 29-11-2019 y del 29-05-2023",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf"
+        }
+      ]
     }
   }
 };

@@ -148,7 +148,9 @@
 .ie-exp-acc { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
 
 /* La ficha técnica: encabezado y sello del Estado de Cuenta (21-10-2026) */
-.ie-ft-banda { margin: -20px -22px 18px; overflow: hidden; background: var(--ie-azul); border-radius: 11px 11px 0 0; }
+/* Sin foto (27-10-2026): la franja es de color, azul marino con la raya celeste. */
+.ie-ft-banda { margin: -20px -22px 18px; overflow: hidden; background: linear-gradient(90deg, #071d47 0%, #0b2a63 38%, #2c579f 100%); border-bottom: 4px solid #4f9be8; border-radius: 11px 11px 0 0; }
+.ie-ft-banda:empty { height: 56px; }
 .ie-ft-banda img { display: block; width: 100%; height: 190px; object-fit: cover; object-position: 50% 62%; }
 .ie-ft-cab { display: grid; grid-template-columns: auto 1fr auto; gap: 22px; align-items: center; margin: 0 0 18px; padding: 6px 0 18px; border-bottom: 3px solid var(--ie-azul); }
 .ie-ft-marca { display: flex; gap: 12px; align-items: center; }
@@ -338,6 +340,7 @@ button.ie-chipa { cursor: pointer; font-family: inherit; }
   .ie-exp-ico { font-size: 26px; }
   .ie-ft-banda { margin: -16px -14px 14px; border-radius: 7px 7px 0 0; }
   .ie-ft-banda img { height: 120px; }
+  .ie-ft-banda:empty { height: 40px; }
   .ie-ft-cab { grid-template-columns: 1fr; gap: 12px; }
   .ie-ft-marca img { width: 84px; }
   .ie-ft-meta { text-align: left; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); }
@@ -358,6 +361,7 @@ button.ie-chipa { cursor: pointer; font-family: inherit; }
   .ie-exp-marco { border: 0; border-radius: 0; box-shadow: none; padding: 0; }
   .ie-ft-banda { margin: 0 0 12px; border-radius: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .ie-ft-banda img { height: 32mm; }
+  .ie-ft-banda:empty { height: 10mm; }
   .ie-ft-cab { grid-template-columns: auto 1fr; gap: 10px 22px; }
   .ie-ft-marca img { width: 72px; }
   .ie-ft-meta { grid-column: 1 / -1; grid-template-columns: repeat(3, auto); justify-content: space-between; text-align: left; }

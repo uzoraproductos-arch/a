@@ -276,4 +276,314 @@
       } catch (e) { no(); }
     });
   });
+
+  /* 8. Mapa ambiental de megaobras e infraestructura por estado (26-10-2026) */
+  var mapaCaja = $('abMapaObras');
+  if (mapaCaja && D.mapaObras) {
+    var edos = D.mapaObras.edos || [];
+    var obrasM = D.mapaObras.obras || [];
+    var edosIdx = {};
+    var normClave = function (s) {
+      return String(s || '').trim().toUpperCase()
+        .replace(/Á/g, 'A').replace(/É/g, 'E').replace(/Í/g, 'I').replace(/Ó/g, 'O').replace(/Ú/g, 'U');
+    };
+    var claveReal = {};
+    edos.forEach(function (e) {
+      edosIdx[e.a] = e;
+      claveReal[normClave(e.a)] = e.a;
+      claveReal[normClave(e.n)] = e.a;
+    });
+
+    var lenteM = 'obras';
+    var tipoM = 'todas';
+    /* ¿Quién paga? (Bloque 4, 27-10-2026): gasto público o inversión privada. */
+    var pagaM = 'todas';
+    var edoSel = 'TAB';
+
+    try {
+      var params = new URLSearchParams(window.location.search || '');
+      var qEdo = params.get('e') || params.get('estado') || '';
+      if (!qEdo && window.location.hash && window.location.hash.indexOf('#e-') === 0) {
+        qEdo = decodeURIComponent(window.location.hash.slice(3));
+      }
+      if (qEdo && claveReal[normClave(qEdo)]) {
+        edoSel = claveReal[normClave(qEdo)];
+      }
+      var qTipo = (params.get('tipo') || '').toLowerCase();
+      if (['todas', 'trenes', 'energia', 'aeropuertos', 'agua'].indexOf(qTipo) >= 0) {
+        tipoM = qTipo;
+      }
+      var qPaga = (params.get('paga') || '').toLowerCase();
+      if (['todas', 'publico', 'privado'].indexOf(qPaga) >= 0) {
+        pagaM = qPaga;
+      }
+      var qLente = (params.get('lente') || '').toLowerCase();
+      if (['obras', 'gasto', 'asf'].indexOf(qLente) >= 0) {
+        lenteM = qLente;
+      }
+    } catch (e) { /* sin URLSearchParams */ }
+
+    function chipPend(e, pend) {
+      if (e === 'pendiente' && pend) {
+        return '<a class="est-chip est-pendiente" href="pendientes.html#' + esc(pend) + '" data-pend="' + esc(pend) + '">pendiente</a>';
+      }
+      return chip(e || 'oficial');
+    }
+
+    function obrasFiltradas() {
+      return obrasM.filter(function (o) {
+        return (tipoM === 'todas' || o.tipo === tipoM) && (pagaM === 'todas' || o.paga === pagaM);
+      });
+    }
+
+    function obrasDeEstado(a, soloFiltro) {
+      var lista = soloFiltro ? obrasFiltradas() : obrasM;
+      return lista.filter(function (o) { return o.edos.indexOf(a) >= 0; });
+    }
+
+    function colorCuartil(v, cortes, paleta) {
+      if (!v || v <= 0) return paleta[0];
+      if (v <= cortes[0]) return paleta[1];
+      if (v <= cortes[1]) return paleta[2];
+      if (v <= cortes[2]) return paleta[3];
+      return paleta[4];
+    }
+
+    function cuartiles(vals) {
+      var s = vals.filter(function (x) { return x > 0; }).slice().sort(function (a, b) { return a - b; });
+      if (!s.length) return [1, 2, 3];
+      var q = function (p) { return s[Math.min(s.length - 1, Math.floor(s.length * p))]; };
+      return [q(0.25), q(0.5), q(0.75)];
+    }
+
+    var cortesGasto = cuartiles(edos.map(function (e) { return e.gasto; }));
+    var cortesAsf = cuartiles(edos.map(function (e) { return e.asf; }));
+    var palObras = ['#e7efe9', '#8fd1ae', '#2e8b57', '#0f3d2a', '#082619'];
+    var palGasto = ['#e7efe9', '#b8dfc8', '#68b688', '#237a4b', '#0f3d2a'];
+    var palAsf = ['#e8f5ec', '#fde6b8', '#f4a261', '#e0533c', '#9e1b14'];
+
+    function pintarMapa() {
+      var ofil = obrasFiltradas();
+      var edosFil = {};
+      ofil.forEach(function (o) {
+        o.edos.forEach(function (a) { edosFil[a] = (edosFil[a] || 0) + 1; });
+      });
+      var numEdos = Object.keys(edosFil).length;
+      /* Solo el gasto público se suma: la inversión privada no es dinero público. */
+      var sumInv = ofil.reduce(function (ac, o) { return ac + (o.paga === 'publico' ? (o.realMdp || 0) : 0); }, 0);
+      var nPriv = ofil.filter(function (o) { return o.paga === 'privado'; }).length;
+      var sumAsf = ofil.reduce(function (ac, o) { return ac + (o.asfMdp || 0); }, 0);
+
+      if ($('abKpiEdos')) $('abKpiEdos').textContent = numEdos + ' de 32';
+      if ($('abKpiInv')) $('abKpiInv').textContent = '$' + n(sumInv, 1) + ' mdp';
+      if ($('abKpiAsf')) $('abKpiAsf').textContent = '$' + n(sumAsf, 1) + ' mdp';
+      if ($('abKpiInvNota')) $('abKpiInvNota').textContent = 'Suma nacional de cada obra, sin prorratear entre estados. ' +
+        (nPriv ? 'No suma ' + (nPriv === 1 ? 'el proyecto' : 'los ' + nPriv + ' proyectos') + ' de inversión privada del filtro: no es dinero público.' : 'La inversión privada no se suma: no es dinero público.');
+
+      mapaCaja.querySelectorAll('.ab-mapa-lentes .ab-op').forEach(function (b) {
+        b.setAttribute('aria-pressed', b.getAttribute('data-lente') === lenteM ? 'true' : 'false');
+      });
+      mapaCaja.querySelectorAll('.ab-mapa-tipos .ab-op').forEach(function (b) {
+        b.setAttribute('aria-pressed', b.getAttribute('data-tipo') === tipoM ? 'true' : 'false');
+      });
+      mapaCaja.querySelectorAll('.ab-mapa-paga .ab-op').forEach(function (b) {
+        b.setAttribute('aria-pressed', b.getAttribute('data-paga') === pagaM ? 'true' : 'false');
+      });
+
+      mapaCaja.querySelectorAll('.tt-edo').forEach(function (p) {
+        var a = p.getAttribute('data-a');
+        var e = edosIdx[a];
+        var cnt = edosFil[a] || 0;
+        var fill = palObras[0];
+        if (lenteM === 'obras') {
+          fill = cnt === 0 ? palObras[0] : (cnt === 1 ? palObras[1] : (cnt === 2 ? palObras[2] : palObras[3]));
+        } else if (lenteM === 'gasto' && e) {
+          fill = colorCuartil(e.gasto, cortesGasto, palGasto);
+        } else if (lenteM === 'asf' && e) {
+          fill = colorCuartil(e.asf, cortesAsf, palAsf);
+        }
+        p.style.fill = fill;
+        p.classList.toggle('sel', a === edoSel);
+        p.classList.toggle('ab-con-obra', cnt > 0);
+      });
+
+      var ley = $('abMapaLeyenda');
+      if (ley) {
+        if (lenteM === 'obras') {
+          ley.innerHTML =
+            '<span class="ab-ley-item"><i style="background:' + palObras[0] + '"></i> Sin obras en este filtro</span>' +
+            '<span class="ab-ley-item"><i style="background:' + palObras[1] + '"></i> 1 megaobra o caso</span>' +
+            '<span class="ab-ley-item"><i style="background:' + palObras[2] + '"></i> 2 obras o casos</span>' +
+            '<span class="ab-ley-item"><i style="background:' + palObras[3] + '"></i> 3 o más obras</span>';
+        } else if (lenteM === 'gasto') {
+          ley.innerHTML =
+            '<span class="ab-ley-item"><i style="background:' + palGasto[1] + '"></i> Hasta $' + n(cortesGasto[0], 0) + ' mdp</span>' +
+            '<span class="ab-ley-item"><i style="background:' + palGasto[2] + '"></i> Hasta $' + n(cortesGasto[1], 0) + ' mdp</span>' +
+            '<span class="ab-ley-item"><i style="background:' + palGasto[3] + '"></i> Hasta $' + n(cortesGasto[2], 0) + ' mdp</span>' +
+            '<span class="ab-ley-item"><i style="background:' + palGasto[4] + '"></i> Más de $' + n(cortesGasto[2], 0) + ' mdp ' + chip('derivado') + '</span>';
+        } else {
+          ley.innerHTML =
+            '<span class="ab-ley-item"><i style="background:' + palAsf[0] + '"></i> $0 mdp por aclarar</span>' +
+            '<span class="ab-ley-item"><i style="background:' + palAsf[1] + '"></i> Hasta $' + n(cortesAsf[0], 0) + ' mdp</span>' +
+            '<span class="ab-ley-item"><i style="background:' + palAsf[2] + '"></i> Hasta $' + n(cortesAsf[1], 0) + ' mdp</span>' +
+            '<span class="ab-ley-item"><i style="background:' + palAsf[4] + '"></i> Más de $' + n(cortesAsf[1], 0) + ' mdp ' + chip('oficial') + '</span>';
+        }
+      }
+
+      if ($('abMapaSel')) $('abMapaSel').value = edoSel;
+      mapaCaja.querySelectorAll('.ab-edo-btn').forEach(function (b) {
+        var a = b.getAttribute('data-edo');
+        var cnt = edosFil[a] || 0;
+        b.classList.toggle('ab-act', a === edoSel);
+        b.setAttribute('aria-pressed', a === edoSel ? 'true' : 'false');
+        b.classList.toggle('ab-edo-atenuado', cnt === 0);
+      });
+
+      pintarFicha();
+    }
+
+    function pintarFicha() {
+      var ficha = $('abMapaFicha');
+      var e = edosIdx[edoSel];
+      if (!ficha || !e) return;
+      var obrasFil = obrasDeEstado(edoSel, true);
+      var obrasTot = obrasDeEstado(edoSel, false);
+      var listaMostrar = obrasFil.length ? obrasFil : obrasTot;
+
+      var notaFiltro = '';
+      if (tipoM !== 'todas' && obrasFil.length === 0 && obrasTot.length > 0) {
+        notaFiltro = '<p class="ab-ficha-aviso">En el filtro actual no hay obras para ' + esc(e.n) +
+          ', pero el estado tiene <b>' + obrasTot.length + '</b> en otros rubros (mostradas abajo).</p>';
+      }
+
+      var tarjetasObra = '';
+      if (listaMostrar.length > 0) {
+        tarjetasObra = listaMostrar.map(function (o) {
+          var multiTxt = o.multi
+            ? '<p class="ab-ficha-multi"><span aria-hidden="true">🧭</span> <b>Obra multiestatal (' + esc(o.edos.join(', ')) + '):</b> la inversión mostrada es el total nacional de la obra; Hacienda no publica cuánto se ejerció dentro de cada estado.</p>'
+            : '';
+          var paga = o.paga === 'privado'
+            ? '<p class="ab-ficha-paga ab-ficha-privado"><span aria-hidden="true">🏢</span> <b>Inversión privada.</b> ' + esc((o.pagaTxt || '').replace(/^Inversión privada: /, '')) + '</p>'
+            : '<p class="ab-ficha-paga"><span aria-hidden="true">🏛️</span> <b>Gasto público.</b> ' + esc((o.pagaTxt || '').replace(/^Gasto público: /, '')) + '</p>';
+          var costoFila = o.paga === 'privado'
+            ? '<div><dt>Inversión</dt><dd>' + chipPend(o.estReal, o.pendReal) + ' <small>Privada: no se suma al gasto público del mapa</small></dd></div>'
+            : o.realMdp != null
+            ? '<div><dt>Inversión registrada</dt><dd><b class="ab-num">$' + n(o.realMdp, 1) + ' mdp</b> ' + chipPend(o.estReal, o.pendReal) +
+              (o.sobrePct != null ? ' · <small>Sobrecosto: <b class="ab-num">' + (o.sobrePct >= 0 ? '+' : '') + n(o.sobrePct, 1) + ' %</b> ' + chip('derivado') + '</small>' : '') + '</dd></div>'
+            : '<div><dt>Inversión y presupuesto</dt><dd>' + chipPend(o.estReal, o.pendReal) + ' <small>En revisión documental</small></dd></div>';
+
+          return '<article class="ab-ficha-obra">' +
+            '<header class="ab-ficha-ocab">' +
+              '<span class="ab-ficha-oico" aria-hidden="true">' + esc(o.ico) + '</span>' +
+              '<div><h4 class="ab-ficha-otit">' + esc(o.nombre) + '</h4>' +
+              '<p class="ab-ficha-osede">' + esc(o.sede) + ' · <span class="ab-ficha-tag">' + esc(o.tipoNom) + '</span></p></div>' +
+            '</header>' +
+            paga +
+            multiTxt +
+            '<dl class="ab-ficha-odl">' +
+              costoFila +
+              '<div><dt>Fiscalización ASF / Daños</dt><dd>' + esc(o.asfTxt) + (o.asfMdp > 0 ? ' ' + chip(o.asfEst || 'oficial') : '') + '</dd></div>' +
+              '<div class="ab-ficha-alerta"><dt><span aria-hidden="true">🚨</span> Alerta del Auditor Ambiental</dt>' +
+                '<dd><b>Ecosistema:</b> ' + esc(o.ecosistema) + '.<br>' + esc(o.alerta) + '</dd></div>' +
+              '<div><dt>Permiso ambiental (MIA / ASEA)</dt><dd>' + chipPend(o.miaEst, o.miaPend) + ' <small>' + esc(o.miaTxt) + '</small></dd></div>' +
+            '</dl>' +
+            '<div class="ab-ficha-olks">' +
+              '<a class="ab-ficha-lk" href="' + esc(o.aud) + '"><span aria-hidden="true">🖼️</span> Auditoría en imágenes</a>' +
+              '<a class="ab-ficha-lk" href="' + esc(o.ficha) + '"><span aria-hidden="true">🏭</span> Ficha y simulador</a>' +
+              '<a class="ab-ficha-lk" href="' + esc(o.exp) + '"><span aria-hidden="true">📂</span> ' + esc(o.expNom) + '</a>' +
+            '</div>' +
+          '</article>';
+        }).join('');
+      } else {
+        tarjetasObra = '<div class="ab-ficha-sin">' +
+          '<p><b>Sin megaobras federales en este padrón para ' + esc(e.n) + '.</b></p>' +
+          '<p>Las 14 megaobras físicas, refinerías y casos ambientales críticos del padrón se concentran en 15 entidades. Aquí puedes consultar el gasto federalizado que recibe ' + esc(e.n) + ' y lo que la ASF observó en su Cuenta Pública 2024.</p>' +
+        '</div>';
+      }
+
+      ficha.innerHTML =
+        '<div class="ab-ficha-cab">' +
+          '<div><p class="ab-ficha-kicker">Ficha del Auditor Ambiental por Estado</p>' +
+          '<h3 class="ab-ficha-tit"><span aria-hidden="true">📍</span> ' + esc(e.n) + ' <small>(' + esc(e.a) + ')</small></h3></div>' +
+          '<span class="ab-ficha-badge">' + (obrasTot.length ? obrasTot.length + (obrasTot.length === 1 ? ' obra o alerta' : ' obras y alertas') : 'Gasto estatal') + '</span>' +
+        '</div>' +
+        '<dl class="ab-ficha-est">' +
+          '<div><dt>Gasto federalizado 2026 (Ramos 28 y 33)</dt>' +
+            '<dd><b class="ab-num">$' + n(e.gasto, 1) + ' mdp</b> ' + chip('derivado') +
+            '<small>Ramo 28: $' + n(e.r28, 1) + ' mdp · Ramo 33: $' + n(e.r33, 1) + ' mdp · $' + n(e.pc, 0) + ' por habitante</small></dd></div>' +
+          '<div><dt>Por aclarar ante la ASF en el estado (CP 2024)</dt>' +
+            '<dd><b class="ab-num">$' + n(e.asf, 1) + ' mdp</b> ' + chip('oficial') +
+            '<small>En ' + n(e.aud, 0) + ' auditorías al gasto federalizado · Deuda estatal: $' + n(e.deuda, 1) + ' mdp (semáforo ' + esc(e.sem) + ')</small></dd></div>' +
+        '</dl>' +
+        notaFiltro +
+        '<div class="ab-ficha-obras">' + tarjetasObra + '</div>' +
+        '<div class="ab-ficha-pie">' +
+          '<a class="ab-ficha-lk" href="herramienta-inspector-entes.html#ente=edo-' + esc(e.a) + '"><span aria-hidden="true">🧾</span> Estado de cuenta de ' + esc(e.n) + '</a>' +
+          '<a class="ab-ficha-lk" href="numeros-mapa-del-gasto-federalizado.html?e=' + esc(e.a) + '"><span aria-hidden="true">🗺️</span> Mapa del gasto federalizado</a>' +
+          '<a class="ab-ficha-lk" href="herramienta-ambiente-auditor.html"><span aria-hidden="true">🌱</span> Auditar sector ambiental</a>' +
+        '</div>';
+    }
+
+    mapaCaja.querySelectorAll('.ab-mapa-lentes .ab-op').forEach(function (b) {
+      b.addEventListener('click', function () {
+        lenteM = b.getAttribute('data-lente');
+        pintarMapa();
+      });
+    });
+
+    mapaCaja.querySelectorAll('.ab-mapa-paga .ab-op').forEach(function (b) {
+      b.addEventListener('click', function () {
+        pagaM = b.getAttribute('data-paga');
+        var ofil = obrasFiltradas();
+        if (ofil.length && !ofil.some(function (o) { return o.edos.indexOf(edoSel) >= 0; })) edoSel = ofil[0].edos[0];
+        pintarMapa();
+      });
+    });
+
+    mapaCaja.querySelectorAll('.ab-mapa-tipos .ab-op').forEach(function (b) {
+      b.addEventListener('click', function () {
+        tipoM = b.getAttribute('data-tipo');
+        var ofil = obrasFiltradas();
+        var tieneEnFiltro = ofil.some(function (o) { return o.edos.indexOf(edoSel) >= 0; });
+        if (!tieneEnFiltro && ofil.length > 0) {
+          edoSel = ofil[0].edos[0];
+        }
+        pintarMapa();
+      });
+    });
+
+    mapaCaja.querySelectorAll('.tt-edo').forEach(function (p) {
+      var elegir = function () {
+        edoSel = p.getAttribute('data-a');
+        pintarMapa();
+      };
+      p.addEventListener('click', elegir);
+      p.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter' || ev.key === ' ') {
+          ev.preventDefault();
+          elegir();
+        }
+      });
+    });
+
+    if ($('abMapaSel')) {
+      $('abMapaSel').addEventListener('change', function () {
+        edoSel = $('abMapaSel').value;
+        pintarMapa();
+      });
+    }
+
+    mapaCaja.querySelectorAll('.ab-edo-btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        edoSel = b.getAttribute('data-edo');
+        pintarMapa();
+        var f = $('abMapaFicha');
+        if (f && f.scrollIntoView && !quieto && window.innerWidth < 960) {
+          f.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+    });
+
+    pintarMapa();
+  }
 })();

@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 670" width="1200" height="670" preserveAspectRatio="xMidYMid slice">
+  <!-- Ilustración de la Calculadora Cívica (Auditavisión, 27-10-2026).
+       Dibujo propio, sin fotografía: pilas de monedas, el ticket de la
+       cuenta y una calculadora. Ilustrativa: las cifras no son datos. -->
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1c1404"/>
+      <stop offset="0.55" stop-color="#4a3608"/>
+      <stop offset="1" stop-color="#85640f"/>
+    </linearGradient>
+    <radialGradient id="luz" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffe39a" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffe39a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="canto" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7a5a12"/>
+      <stop offset="0.45" stop-color="#e2b54a"/>
+      <stop offset="1" stop-color="#6b4d0c"/>
+    </linearGradient>
+    <linearGradient id="cara" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe7a1"/>
+      <stop offset="1" stop-color="#c99a2e"/>
+    </linearGradient>
+    <linearGradient id="mesa" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a1e07"/>
+      <stop offset="1" stop-color="#120c02"/>
+    </linearGradient>
+  </defs>
+  <!-- Fondo y luz -->
+  <rect width="1200" height="670" fill="url(#fondo)"/>
+  <circle cx="640" cy="230" r="420" fill="url(#luz)"/>
+  <!-- Mesa -->
+  <path d="M0 470 Q600 440 1200 470 V670 H0 Z" fill="url(#mesa)"/>
+  <!-- Ticket de la cuenta -->
+  <g transform="rotate(-8 300 380)">
+    <path d="M200 150 H400 V560 L380 572 L360 560 L340 572 L320 560 L300 572 L280 560 L260 572 L240 560 L220 572 L200 560 Z" fill="#f4ecd6"/>
+    <g fill="#b9a67a">
+      <rect x="222" y="185" width="150" height="8" rx="2"/>
+      <rect x="222" y="215" width="110" height="8" rx="2"/>
+      <rect x="222" y="245" width="130" height="8" rx="2"/>
+      <rect x="222" y="275" width="90" height="8" rx="2"/>
+      <rect x="222" y="305" width="140" height="8" rx="2"/>
+      <rect x="222" y="335" width="120" height="8" rx="2"/>
+      <rect x="222" y="365" width="100" height="8" rx="2"/>
+      <rect x="222" y="395" width="150" height="8" rx="2"/>
+      <rect x="222" y="425" width="80" height="8" rx="2"/>
+      <rect x="222" y="455" width="130" height="8" rx="2"/>
+      <rect x="222" y="485" width="110" height="8" rx="2"/>
+    </g>
+    <rect x="222" y="520" width="156" height="14" rx="2" fill="#85640f"/>
+  </g>
+  <!-- Pilas de monedas -->
+  <g>
+    <path d="M406 520 v15 a64 20.5 0 0 0 128 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="470" cy="520" rx="64" ry="20.5" fill="#b88a26"/>
+    <path d="M409 505 v15 a64 20.5 0 0 0 128 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="473" cy="505" rx="64" ry="20.5" fill="#b88a26"/>
+    <path d="M405.2 490 v15 a64 20.5 0 0 0 128 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="469.2" cy="490" rx="64" ry="20.5" fill="#b88a26"/>
+    <path d="M403.2 475 v15 a64 20.5 0 0 0 128 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="467.2" cy="475" rx="64" ry="20.5" fill="#b88a26"/>
+    <path d="M407.5 460 v15 a64 20.5 0 0 0 128 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="471.5" cy="460" rx="64" ry="20.5" fill="#b88a26"/>
+    <path d="M408.4 445 v15 a64 20.5 0 0 0 128 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="472.4" cy="445" rx="64" ry="20.5" fill="#b88a26"/>
+    <path d="M403.9 430 v15 a64 20.5 0 0 0 128 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="467.9" cy="430" rx="64" ry="20.5" fill="#b88a26"/>
+    <path d="M404.1 415 v15 a64 20.5 0 0 0 128 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="468.1" cy="415" rx="64" ry="20.5" fill="#b88a26"/>
+    <path d="M408.6 400 v15 a64 20.5 0 0 0 128 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="472.6" cy="400" rx="64" ry="20.5" fill="#b88a26"/>
+    <ellipse cx="472.6" cy="400" rx="60" ry="18.5" fill="url(#cara)"/>
+    <ellipse cx="472.6" cy="400" rx="48" ry="13.5" fill="none" stroke="#a9781b" stroke-width="3"/>
+    <text x="472.6" y="409" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="30" fill="#8a5f10" transform="scale(1 1)">$</text>
+  </g>
+  <g>
+    <path d="M548 535 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="620" cy="535" rx="72" ry="23" fill="#b88a26"/>
+    <path d="M551 520 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="623" cy="520" rx="72" ry="23" fill="#b88a26"/>
+    <path d="M547.2 505 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="619.2" cy="505" rx="72" ry="23" fill="#b88a26"/>
+    <path d="M545.2 490 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="617.2" cy="490" rx="72" ry="23" fill="#b88a26"/>
+    <path d="M549.5 475 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="621.5" cy="475" rx="72" ry="23" fill="#b88a26"/>
+    <path d="M550.4 460 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="622.4" cy="460" rx="72" ry="23" fill="#b88a26"/>
+    <path d="M545.9 445 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="617.9" cy="445" rx="72" ry="23" fill="#b88a26"/>
+    <path d="M546.1 430 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="618.1" cy="430" rx="72" ry="23" fill="#b88a26"/>
+    <path d="M550.6 415 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="622.6" cy="415" rx="72" ry="23" fill="#b88a26"/>
+    <path d="M549.2 400 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="621.2" cy="400" rx="72" ry="23" fill="#b88a26"/>
+    <path d="M545.1 385 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="617.1" cy="385" rx="72" ry="23" fill="#b88a26"/>
+    <path d="M547.6 370 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="619.6" cy="370" rx="72" ry="23" fill="#b88a26"/>
+    <path d="M551 355 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="623" cy="355" rx="72" ry="23" fill="#b88a26"/>
+    <path d="M547.7 340 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="619.7" cy="340" rx="72" ry="23" fill="#b88a26"/>
+    <path d="M545.1 325 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="617.1" cy="325" rx="72" ry="23" fill="#b88a26"/>
+    <path d="M549.1 310 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="621.1" cy="310" rx="72" ry="23" fill="#b88a26"/>
+    <path d="M550.6 295 v15 a72 23 0 0 0 144 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="622.6" cy="295" rx="72" ry="23" fill="#b88a26"/>
+    <ellipse cx="622.6" cy="295" rx="68" ry="21" fill="url(#cara)"/>
+    <ellipse cx="622.6" cy="295" rx="56" ry="16" fill="none" stroke="#a9781b" stroke-width="3"/>
+    <text x="622.6" y="304" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="30" fill="#8a5f10" transform="scale(1 1)">$</text>
+  </g>
+  <g>
+    <path d="M704 525 v15 a66 21.1 0 0 0 132 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="770" cy="525" rx="66" ry="21.1" fill="#b88a26"/>
+    <path d="M707 510 v15 a66 21.1 0 0 0 132 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="773" cy="510" rx="66" ry="21.1" fill="#b88a26"/>
+    <path d="M703.2 495 v15 a66 21.1 0 0 0 132 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="769.2" cy="495" rx="66" ry="21.1" fill="#b88a26"/>
+    <path d="M701.2 480 v15 a66 21.1 0 0 0 132 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="767.2" cy="480" rx="66" ry="21.1" fill="#b88a26"/>
+    <path d="M705.5 465 v15 a66 21.1 0 0 0 132 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="771.5" cy="465" rx="66" ry="21.1" fill="#b88a26"/>
+    <path d="M706.4 450 v15 a66 21.1 0 0 0 132 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="772.4" cy="450" rx="66" ry="21.1" fill="#b88a26"/>
+    <path d="M701.9 435 v15 a66 21.1 0 0 0 132 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="767.9" cy="435" rx="66" ry="21.1" fill="#b88a26"/>
+    <path d="M702.1 420 v15 a66 21.1 0 0 0 132 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="768.1" cy="420" rx="66" ry="21.1" fill="#b88a26"/>
+    <path d="M706.6 405 v15 a66 21.1 0 0 0 132 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="772.6" cy="405" rx="66" ry="21.1" fill="#b88a26"/>
+    <path d="M705.2 390 v15 a66 21.1 0 0 0 132 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="771.2" cy="390" rx="66" ry="21.1" fill="#b88a26"/>
+    <path d="M701.1 375 v15 a66 21.1 0 0 0 132 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="767.1" cy="375" rx="66" ry="21.1" fill="#b88a26"/>
+    <path d="M703.6 360 v15 a66 21.1 0 0 0 132 0 v-15 Z" fill="url(#canto)"/>
+    <ellipse cx="769.6" cy="360" rx="66" ry="21.1" fill="#b88a26"/>
+    <ellipse cx="769.6" cy="360" rx="62" ry="19.1" fill="url(#cara)"/>
+    <ellipse cx="769.6" cy="360" rx="50" ry="14.1" fill="none" stroke="#a9781b" stroke-width="3"/>
+    <text x="769.6" y="369" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="30" fill="#8a5f10" transform="scale(1 1)">$</text>
+  </g>
+  <!-- Monedas sueltas -->
+  <ellipse cx="360" cy="597" rx="48" ry="15.4" fill="#6b4d0c"/>
+  <ellipse cx="360" cy="590" rx="48" ry="15.4" fill="url(#cara)"/>
+  <ellipse cx="360" cy="590" rx="38" ry="11.4" fill="none" stroke="#a9781b" stroke-width="2.5"/>
+  <ellipse cx="540" cy="622" rx="40" ry="12.8" fill="#6b4d0c"/>
+  <ellipse cx="540" cy="615" rx="40" ry="12.8" fill="url(#cara)"/>
+  <ellipse cx="540" cy="615" rx="30" ry="8.8" fill="none" stroke="#a9781b" stroke-width="2.5"/>
+  <ellipse cx="880" cy="607" rx="52" ry="16.6" fill="#6b4d0c"/>
+  <ellipse cx="880" cy="600" rx="52" ry="16.6" fill="url(#cara)"/>
+  <ellipse cx="880" cy="600" rx="42" ry="12.6" fill="none" stroke="#a9781b" stroke-width="2.5"/>
+  <!-- Calculadora -->
+  <g transform="rotate(7 990 360)">
+    <rect x="880" y="170" width="230" height="350" rx="22" fill="#0f1b33"/>
+    <rect x="886" y="176" width="218" height="338" rx="18" fill="#17284a"/>
+    <rect x="904" y="196" width="182" height="62" rx="8" fill="#c9d8b0"/>
+    <text x="1074" y="242" text-anchor="end" font-family="Courier New, monospace" font-weight="700" font-size="34" fill="#22311a">15,000</text>
+    <rect x="904" y="278" width="38" height="44" rx="8" fill="#e8edf5"/>
+    <rect x="951" y="278" width="38" height="44" rx="8" fill="#e8edf5"/>
+    <rect x="998" y="278" width="38" height="44" rx="8" fill="#e8edf5"/>
+    <rect x="1045" y="278" width="38" height="44" rx="8" fill="#c9a227"/>
+    <rect x="904" y="334" width="38" height="44" rx="8" fill="#e8edf5"/>
+    <rect x="951" y="334" width="38" height="44" rx="8" fill="#e8edf5"/>
+    <rect x="998" y="334" width="38" height="44" rx="8" fill="#e8edf5"/>
+    <rect x="1045" y="334" width="38" height="44" rx="8" fill="#c9a227"/>
+    <rect x="904" y="390" width="38" height="44" rx="8" fill="#e8edf5"/>
+    <rect x="951" y="390" width="38" height="44" rx="8" fill="#e8edf5"/>
+    <rect x="998" y="390" width="38" height="44" rx="8" fill="#e8edf5"/>
+    <rect x="1045" y="390" width="38" height="44" rx="8" fill="#c9a227"/>
+    <rect x="904" y="446" width="38" height="44" rx="8" fill="#8ea0bf"/>
+    <rect x="951" y="446" width="38" height="44" rx="8" fill="#8ea0bf"/>
+    <rect x="998" y="446" width="38" height="44" rx="8" fill="#8ea0bf"/>
+    <rect x="1045" y="446" width="38" height="44" rx="8" fill="#c9a227"/>
+    <g font-family="Arial, sans-serif" font-weight="700" font-size="22" text-anchor="middle" fill="#17284a">
+      <text x="923" y="308">7</text>
+      <text x="970" y="308">8</text>
+      <text x="1017" y="308">9</text>
+      <text x="1064" y="308">÷</text>
+      <text x="923" y="364">4</text>
+      <text x="970" y="364">5</text>
+      <text x="1017" y="364">6</text>
+      <text x="1064" y="364">×</text>
+      <text x="923" y="420">1</text>
+      <text x="970" y="420">2</text>
+      <text x="1017" y="420">3</text>
+      <text x="1064" y="420">−</text>
+      <text x="923" y="476">0</text>
+      <text x="970" y="476">.</text>
+      <text x="1017" y="476">%</text>
+      <text x="1064" y="476">+</text>
+    </g>
+  </g>
+  <!-- Destellos -->
+  <g fill="#fff4cf">
+    <path d="M560 230 L565 245 L580 250 L565 255 L560 270 L555 255 L540 250 L555 245 Z"/>
+    <path d="M700 284 L704 296 L716 300 L704 304 L700 316 L696 304 L684 300 L696 296 Z"/>
+    <path d="M430 346.0 L433.5 356.5 L444.0 360 L433.5 363.5 L430 374.0 L426.5 363.5 L416.0 360 L426.5 356.5 Z"/>
+    <path d="M820 318 L823 327 L832 330 L823 333 L820 342 L817 333 L808 330 L817 327 Z"/>
+  </g>
+</svg>

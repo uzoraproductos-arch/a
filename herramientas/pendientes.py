@@ -51,13 +51,24 @@ def e(id_, tema, que, porque, responsable, enlace, enlace_txt, aparece):
 # son cuatro aplicaciones, mo_capitulos.py).
 MEGAOBRAS_PAGS = [('herramienta-megaobras-tabla.html', 'Megaobras · En qué invirtió cada presidente'),
                   ('herramienta-megaobras-cero.html', 'Megaobras · Las cuatro cifras y los rescates'),
-                  ('herramienta-megaobras-pulso-cuenta.html', 'Megaobras · La cuenta de cada obra y el ritmo de la pérdida')]
+                  ('herramienta-megaobras-pulso-cuenta.html', 'Megaobras · La cuenta de cada obra y el ritmo de la pérdida'),
+                  ('auditoria-inversion-megaobras.html', 'Auditoría en imágenes · Inversión en megaobras y rescates')]
 
 
 # Pendientes que el motor escribe en su codigo (no viven como registro en la
 # base). Cada uno: id, tema, que falta, por que, responsable, enlace oficial,
 # texto del enlace, donde aparece.
 PROPIOS = [
+    ('replica-responsable', 'Transparencia de la plataforma', 'Responsable de recibir y resolver las solicitudes de réplica',
+     'La Ley de réplica (art. 7) pide tener siempre publicado en el portal el nombre completo del responsable, con domicilio, código postal, '
+     'entidad, correo y teléfono. Auditavisión todavía no lo designa, así que hoy no puede recibir un escrito de réplica.',
+     'Auditavisión: falta que el autor designe al responsable', 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LRArt6_MDR.pdf',
+     'Ley Reglamentaria del artículo 6o. constitucional en materia del Derecho de Réplica', [('derecho-de-replica.html', 'Derecho de réplica')]),
+    ('pemex-deuda', 'Deuda', 'Cuánto debe Pemex: el saldo de su deuda financiera',
+     'Pemex publica el saldo de su deuda en sus reportes trimestrales de resultados y en sus boletines, pero la plataforma todavía no lo ha cotejado ni integrado. '
+     'Lo que sí tiene es lo que Pemex paga de intereses en 2026: $190,838.8 millones (Presupuesto de Egresos 2026, anexo 1.E).',
+     PLATAFORMA, 'https://www.pemex.com/saladeprensa/boletines_nacionales/Paginas/2026_69_nacional.aspx',
+     'Pemex, resultados del segundo trimestre de 2026', [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor')]),
     ('asf-matriz-2018', 'Fiscalización', 'Matriz de Datos Básicos de la Cuenta Pública 2018',
      'La ASF no publicó en su portal la matriz de la Cuenta Pública 2018, como sí lo hizo con las demás. Sin ella, la serie de montos por aclarar tiene un hueco en ese año.',
      'Auditoría Superior de la Federación (ASF)', 'https://www.asf.gob.mx/Section/58_Informes_de_auditoria',
@@ -157,6 +168,78 @@ PROPIOS = [
      'Las cifras que circulan («$15,434 millones en 13 fideicomisos») no aparecen en el decreto, y la plataforma aún no ha cotejado el informe oficial del entero.',
      PLATAFORMA, 'https://www.gob.mx/tesofe', 'Tesorería de la Federación',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-presupuesto.html', 'Datos · Poder Judicial · El presupuesto')]),
+    # La auditoría de gestión del Poder Judicial (27-10-2026).
+    ('judicial-tiempos-juzgados', 'Poderes', 'Cuánto tarda un juzgado o tribunal en resolver un asunto y en celebrar una audiencia, federal y estatal',
+     'El reporte de resultados del censo del INEGI (CNIJF-E 2025) solo publica la duración promedio de los asuntos de la Suprema Corte (tabla 13) y del Tribunal Electoral (tabla 17). '
+     'De los juzgados de distrito, los tribunales colegiados y los poderes judiciales de los estados, que es donde llega casi todo, no trae cuánto tardan en resolver ni cuánto '
+     'se espera una audiencia. Los tabulados y datos abiertos del censo pueden traer más detalle y la plataforma aún no los integra: su página se arma con JavaScript y no se '
+     'pudo leer desde donde se construye la plataforma. Si tampoco están ahí, la falta será de los órganos que reportan al INEGI.',
+     PLATAFORMA, 'https://www.inegi.org.mx/programas/cnije/2025/', 'Censo Nacional de Impartición de Justicia Estatal 2025 (INEGI)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-gestion.html', 'Datos · Poder Judicial · Lo que cuesta y lo que resuelve')]),
+    ('judicial-rezago-civil', 'Poderes', 'Cuántos expedientes civiles, familiares y mercantiles quedaron sin resolver al cierre de 2024 en los poderes judiciales de los estados',
+     'El reporte de resultados del censo del INEGI (CNIJF-E 2025) publica las causas penales pendientes de concluir, pero de lo civil, familiar y mercantil solo da los asuntos '
+     'que entraron y los que concluyeron (tabla 23). Y los que entraron incluyen las demandas desechadas o mandadas corregir, así que restarlos no da el rezago. '
+     'Los tabulados y datos abiertos del censo pueden traer los expedientes en trámite al cierre del año y la plataforma aún no los integra.',
+     PLATAFORMA, 'https://www.inegi.org.mx/programas/cnije/2025/', 'Censo Nacional de Impartición de Justicia Estatal 2025 (INEGI)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-gestion.html', 'Datos · Poder Judicial · Lo que cuesta y lo que resuelve')]),
+    # La auditoría de gestión de salud pública (27-10-2026).
+    ('salud-tiempos-espera', 'Salud', 'Cuánto espera una persona una consulta de especialidad o una cirugía en el IMSS',
+     'La Memoria Estadística 2025 del IMSS trae cuántas consultas y cirugías se dieron, pero no cuánto tiempo se esperó por ellas. En su boletín 023/2026 el IMSS dijo que la '
+     'espera bajó 12 días en cataratas y 10 en vesícula, sin decir cuánto se esperaba antes ni cuánto se espera ahora, así que no se puede comprobar. El IMSS tiene el registro; '
+     'la plataforma no encontró dónde lo publica.',
+     'Instituto Mexicano del Seguro Social (IMSS): tiene el registro y no lo encontramos publicado', 'https://www.imss.gob.mx/conoce-al-imss/memoria-estadistica-2025',
+     'Memoria Estadística 2025 (IMSS)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-imss.html', 'Datos · Salud pública · El IMSS')]),
+    ('salud-issste-servicios', 'Salud', 'Consultas, egresos hospitalarios y cirugías del ISSSTE en 2025',
+     'El ISSSTE publica un anuario estadístico cada año (su página de anuarios lista el de 2025), pero el 27-10-2026 su servidor no respondió, ni directo ni a través de otra conexión, '
+     'y no se pudo cotejar. El gasto del ISSSTE sí está en la plataforma, con la Cuenta Pública 2025.',
+     PLATAFORMA, 'https://www.gob.mx/issste/documentos/anuarios-estadisticos', 'Anuarios estadísticos (ISSSTE)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-sistema.html', 'Datos · Salud pública · Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE')]),
+    ('salud-imss-bienestar', 'Salud', 'Consultas, egresos, cirugías y gasto del IMSS-Bienestar en 2025',
+     'En conferencias se han dado cifras de las consultas de 2025 del IMSS-Bienestar, pero la plataforma no encontró un informe oficial con sus servicios y su gasto completo. '
+     'El capítulo del IMSS-Bienestar de la Memoria Estadística 2025 del IMSS no se pudo descargar: su enlace devuelve una página web en lugar del archivo. '
+     'Hasta tener el documento, no se publican las cifras de las conferencias.',
+     PLATAFORMA, 'https://www.imss.gob.mx/conoce-al-imss/memoria-estadistica-2025', 'Memoria Estadística 2025 (IMSS), capítulo XIV',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-sistema.html', 'Datos · Salud pública · Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE')]),
+    # La auditoría de gestión de la PROFEPA (28-10-2026).
+    ('ambiente-denuncias-causa', 'Medio ambiente', 'Cuántas denuncias populares investigadas concluyó la PROFEPA, por qué causa y en cuánto tiempo',
+     'Sus Informes de Actividades dan cuántas denuncias recibió, cuántas admitió y cuántas «concluyó», pero no separan las que concluyó por turnarlas a otra autoridad '
+     '(art. 199, fr. I de la LGEEPA) de las que investigó y resolvió, ni dicen por qué causa del art. 199 se cerró cada una ni cuánto tardó. La plataforma deriva la '
+     'parte investigada con la resta concluidas − no admitidas, que solo vale si las turnadas cuentan como concluidas. La PROFEPA lleva cada expediente en su sistema '
+     'de atención a denuncias y no lo publica.',
+     'Procuraduría Federal de Protección al Ambiente (PROFEPA): tiene el registro y no lo publica', 'https://www.gob.mx/profepa/articulos/informes-de-actividades-360477', 'Informes de Actividades (PROFEPA)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-justicia-ambiental-denuncias.html', 'Datos · Justicia ambiental · Tus denuncias ante la PROFEPA')]),
+    ('ambiente-profepa-rezago', 'Medio ambiente', 'Cuántos procedimientos de inspección de la PROFEPA quedaron sin resolver al cierre de 2024',
+     'El Informe 2023 dio el rezago: 11,179 procedimientos de 2019 a 2023 sin resolver. El Informe 2024 solo da los que concluyó (6,957: 2,011 de ese año y 4,946 de '
+     'años anteriores), no cuántos quedaron pendientes. Con los dos informes se deriva una cota mínima de los de años anteriores; la cifra exacta, con los de 2024, la debe la PROFEPA.',
+     'Procuraduría Federal de Protección al Ambiente (PROFEPA): tiene el registro y no lo publica', 'https://www.gob.mx/profepa/articulos/informes-de-actividades-360477', 'Informes de Actividades (PROFEPA)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-justicia-ambiental-rezago.html', 'Datos · Justicia ambiental · Expedientes, multas y la Fiscalía')]),
+    ('ambiente-multas-cobradas', 'Medio ambiente', 'Cuánto se cobró de las multas que impuso la PROFEPA',
+     'El Informe 2024 dice que en la inspección industrial se impusieron 325 multas por $925.88 millones, pero no cuánto se pagó, cuánto se impugnó ni cuánto se conmutó '
+     'por inversión ambiental (art. 173 de la LGEEPA). Solo da una ampliación de $291.77 millones por ingresos excedentes de multas y derechos juntos. Falta de transparencia de la PROFEPA.',
+     'Procuraduría Federal de Protección al Ambiente (PROFEPA): tiene el registro y no lo publica', 'https://www.gob.mx/profepa/articulos/informes-de-actividades-360477', 'Informes de Actividades (PROFEPA)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-justicia-ambiental-rezago.html', 'Datos · Justicia ambiental · Expedientes, multas y la Fiscalía')]),
+    ('ambiente-profepa-fgr', 'Medio ambiente', 'En qué terminaron las denuncias de la PROFEPA ante la Fiscalía General de la República',
+     'La PROFEPA presentó 814 denuncias, querellas y coadyuvancias ante la FGR en 2023 y 709 en 2024. Sus informes no dicen cuántas se judicializaron ni cuántas terminaron '
+     'en sentencia, y la plataforma no encontró un documento de la FGR que lo diga. La PROFEPA, como víctima u ofendida en esos casos, conoce su avance.',
+     'PROFEPA: es parte en esos casos y no publica su resultado', 'https://www.gob.mx/profepa/articulos/informes-de-actividades-360477', 'Informes de Actividades (PROFEPA)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-justicia-ambiental-rezago.html', 'Datos · Justicia ambiental · Expedientes, multas y la Fiscalía')]),
+    ('ambiente-profepa-informe-2025', 'Medio ambiente', 'El Informe de Actividades 2025 de la PROFEPA',
+     'El archivo del Informe 2024 se generó en agosto de 2025. Al 28-10-2026, la página de gob.mx titulada «Informe de Actividades 2025» de la PROFEPA trae el informe anual de su Comité '
+     'de Ética, no el de la Procuraduría, así que las cifras de la plataforma llegan a 2024.',
+     'Procuraduría Federal de Protección al Ambiente (PROFEPA): no lo encontramos publicado', 'https://www.gob.mx/profepa/articulos/informes-de-actividades-360477', 'Informes de Actividades (PROFEPA)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-justicia-ambiental-denuncias.html', 'Datos · Justicia ambiental · Tus denuncias ante la PROFEPA')]),
+    # «Documentar para sancionar», el informe especial de la ASF (27-10-2026).
+    ('asf-sanciones-efectividad', 'Fiscalización', 'Cuántas observaciones de la ASF terminan en una sanción firme',
+     'El artículo 38 de la Ley de Fiscalización y Rendición de Cuentas de la Federación manda que el informe semestral de la ASF dé «las sanciones que al efecto hayan '
+     'procedido», la pena de las denuncias penales y todo en datos abiertos. El de corte al 31 de marzo de 2026, que ya integra la plataforma, no lo hace: de sus 2,395 '
+     'procedimientos de responsabilidad, los 2,201 que mandó al Tribunal Federal de Justicia Administrativa solo dicen «Remitido al TFJA», sin resolución ni sanción; de sus '
+     '1,196 denuncias, 32 dicen «Sentencia» sin decir si fue condenatoria ni la pena, y de las 9,812 promociones a los órganos internos de control no se sabe qué resultó. '
+     'Solo está en PDF. Falta de transparencia de la ASF, que es la obligada a informarlo.',
+     'Auditoría Superior de la Federación (ASF)', 'https://www.asf.gob.mx/Section/59_Informes_especiales_de_auditoria',
+     'Informes semestrales a la Cámara de Diputados (ASF, art. 38 LFRCF)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('informes-documentar-para-sancionar.html', 'Datos · Informes oficiales · Informe especial'),
+      ('informes-semestral-asf.html', 'Datos · Informes oficiales · Informe semestral')]),
     ('predial-ocde', 'Estados y municipios', 'El predial como parte del PIB: 0.16% en México y 1.0% en la OCDE',
      'Las dos cifras vienen de las Estadísticas Tributarias de la OCDE, pero la plataforma no guardó el cuadro ni la edición de donde salieron y no pudo volver a abrirlo para cotejarlas. '
      'Quedan como pendientes hasta integrar el documento.',
@@ -221,23 +304,27 @@ def recolectar():
                  'dos-bocas': 'Pemex y su filial PTI Infraestructura de Desarrollo',
                  'bunker-garcia-luna': 'Secretaría de Seguridad y Protección Ciudadana (SSPC), heredera de la SSP'}.get(oid, HISTORICO)
         fu = (o.get('fuentes') or ['opa'])[0]
+        aud_pag = 'auditoria-aifa.html' if oid == 'aifa-texcoco' else ('auditoria-%s.html' % oid)
         out.append(e('obra-' + oid, 'Megaobras', '%s: %s' % (nombres.get(oid, oid), ', '.join(
             {'inversion_presupuestada_mdp': 'presupuesto original', 'inversion_real_mdp': 'costo total',
              'sobrecosto_pct': 'sobrecosto'}[k] for k in campos)),
             porque, quien, ver['fuentes'].get(fu, {}).get('url'), ver['fuentes'].get(fu, {}).get('doc', 'Documento')[:80],
-            [('herramienta-megaobras-sector.html#obra-' + oid, 'Megaobras · Obra por obra, por industria')] + MEGAOBRAS_PAGS))
+            [('herramienta-megaobras-sector.html#obra-' + oid, 'Megaobras · Obra por obra, por industria'),
+             (aud_pag, 'Auditoría en imágenes · ' + nombres.get(oid, oid))] + MEGAOBRAS_PAGS))
     # 4 bis. La cuenta de cada obra (17-10-2026): los renglones que siguen
     # sin cifra, una ficha por obra.
     for oid, filas in ((sim.get('cuenta') or {}).get('obras') or {}).items():
         pend = [f for f in filas if f['e'] == 'pendiente']
         if not pend:
             continue
+        aud_pag = 'auditoria-aifa.html' if oid == 'aifa-texcoco' else ('auditoria-%s.html' % oid)
         url = next((x['url'] for f in pend for x in f.get('f') or []), None) or next(
             (x['url'] for f in filas for x in f.get('f') or []), None)
         out.append(e('cuenta-' + oid, 'Megaobras', '%s: %s' % (nombres.get(oid, oid), ', '.join(f['et'].lower() for f in pend)),
                      ' '.join('%s: %s' % (f['et'], f['resp']) for f in pend),
                      '; '.join(sorted({f['resp'].split(':')[0] for f in pend})), url, 'Documento oficial más cercano',
-                     [('herramienta-megaobras-pulso-cuenta.html#cuenta-' + oid, 'Megaobras · La cuenta de cada obra')]))
+                     [('herramienta-megaobras-pulso-cuenta.html#cuenta-' + oid, 'Megaobras · La cuenta de cada obra'),
+                      (aud_pag, 'Auditoría en imágenes · ' + nombres.get(oid, oid))]))
     # 5. Reloj de perdidas de las megaobras.
     for r in d['calculadora_civica']['relojes']['fuentes']:
         if r.get('estado') == 'pendiente':
@@ -309,6 +396,29 @@ def recolectar():
                       ('numeros-mapa-del-gasto-federalizado.html', 'Números · El mapa del gasto federalizado')]))
     for p in PROPIOS:
         out.append(e(*p))
+    # 9 bis. Periodismo en riesgo (29-10-2026): lo que publica la FEADLE.
+    import periodistas
+    for x in periodistas.pendientes():
+        out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
+    # 10. Lo que circula en redes y quedó pendiente en su cotejo (Noticias
+    # relevantes · Verificamos, 26-10-2026).
+    au_red = {
+        'taddei-renuncia-ine-contratos': ('auditoria-ine-contratos.html', 'Auditoría en imágenes · El INE y contratos en revisión'),
+        'ine-contratos-desde-cordova': ('auditoria-ine-contratos.html', 'Auditoría en imágenes · El INE y contratos en revisión'),
+        'guaymas-comodato-amigo-gnl': ('auditoria-guaymas-gas.html', 'Auditoría en imágenes · Guaymas y la Gaceta Parlamentaria'),
+        'salud-ventiladores-y-medicinas': ('auditoria-medicamentos-imss.html', 'Auditoría en imágenes · Compras de medicamentos y contratos del IMSS'),
+        'hr-ratings-baja-mexico-bbb': ('auditoria-deuda-congreso-2027.html', 'Auditoría en imágenes · Ley de Ingresos 2027 y nota soberana'),
+        'seguro-popular-51-millones': ('auditoria-seguro-popular.html', 'Auditoría en imágenes · Seguro Popular'),
+    }
+    import asistente_personajes
+    for c in asistente_personajes.columnas()[0]:
+        for n, x in enumerate(c.get('cotejo', []), 1):
+            if x['res'] == 'pendiente':
+                ap = [('noticias-auditavision.html#col-' + c['id'], 'Noticias relevantes · ' + c['titulo'])]
+                if c['id'] in au_red:
+                    ap.append(au_red[c['id']])
+                out.append(e('red-%s-%d' % (c['id'], n), 'Lo que circula en redes', x['dice'], x['explica'],
+                             x.get('quien'), x.get('donde'), x['fuente'], ap))
     # El estado de cuenta de diputados y de la Corte (Radar) los muestra.
     ec = ('radar-estado-de-cuenta.html#expide', 'Radar · Estado de cuenta')
     for x in out:

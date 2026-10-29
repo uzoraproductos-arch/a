@@ -23,9 +23,12 @@ Lo llama apartados.insp_nativa() (INSP_NATIVAS['ambasura']).
 """
 import html
 import json
+import os
 
 from presupuesto_modulos import chip
+from territorio_modulos import mapa_svg
 
+RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ESTILOS = ['am-basura.css']
 SCRIPTS = ['am-basura.js']
 
@@ -34,6 +37,263 @@ SCRIPTS = ['am-basura.js']
 # financieros, las compras de empresas y los programas.
 OBRAS_FISICAS = ['tren-maya', 'dos-bocas', 'aifa-texcoco', 'tren-toluca', 'refineria-tula',
                  'megafarmacia', 'estela-luz', 'bunker-garcia-luna']
+
+# Catalogo georreferenciado para el Mapa Ambiental de Megaobras e Infraestructura
+# por Estado (26-10-2026): las 8 megaobras de construccion, las 2 plantas
+# industriales petroquimicas/fertilizantes de Pemex y los 4 casos estatales de
+# infraestructura hidrica, gasifera y reconstruccion por desastres.
+OBRAS_MAPA = [
+    {
+        'id': 'tren-maya', 'ico': '🚆', 'nombre': 'Tren Maya (1,554 km)',
+        'tipo': 'trenes', 'tipoNom': 'Trenes y selvas',
+        'edos': ['CAM', 'CHIS', 'QROO', 'TAB', 'YUC'], 'multi': True,
+        'sede': 'Campeche, Chiapas, Quintana Roo, Tabasco y Yucatán',
+        'presMdp': 167341.6, 'realMdp': 497350.2, 'sobrePct': 197.2,
+        'estReal': 'derivado', 'pendReal': None,
+        'asfMdp': 8563.5, 'asfTxt': '$8,563.5 mdp acumulados por aclarar ante la ASF (CP 2019–2024)',
+        'ecosistema': 'Selva maya, acuíferos kársticos, cenotes y cavernas subterráneas (Tramos 5, 6 y 7)',
+        'alerta': 'Tala y fragmentación de corredor biológico en cinco estados y cimentación con pilotes sobre suelo kárstico y cenotes. Los permisos ambientales definitivos (MIA) y el conteo oficial de árboles talados contra compensados siguen sin integrarse.',
+        'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
+        'miaTxt': 'Manifestaciones de Impacto Ambiental (SEMARNAT) y auditorías de desempeño ambiental',
+        'aud': 'auditoria-tren-maya.html', 'ficha': 'herramienta-megaobras-sector.html#obra-tren-maya',
+        'exp': 'expedientes.html#exp-tren-maya', 'expNom': 'Expediente ASF Tren Maya',
+    },
+    {
+        'id': 'dos-bocas', 'ico': '🛢️', 'nombre': 'Refinería Olmeca en Dos Bocas',
+        'tipo': 'energia', 'tipoNom': 'Refinerías y energía',
+        'edos': ['TAB'], 'multi': False,
+        'sede': 'Paraíso, Tabasco',
+        'presMdp': 157049.2, 'realMdp': 357887.3, 'sobrePct': 128.0,
+        'estReal': 'oficial', 'pendReal': 'obra-dos-bocas',
+        'asfMdp': 594.9, 'asfTxt': '$594.9 mdp por aclarar ante la ASF en contratos y supervisión',
+        'ecosistema': 'Humedales costeros, manglar y zona inundable del litoral de Paraíso, Tabasco',
+        'alerta': 'Desmonte de manglar en el predio costero, relleno hidráulico en zona de inundación y emisiones de refinación petrolera frente a la meta climática (NDC) de la Ley General de Cambio Climático.',
+        'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
+        'miaTxt': 'MIA y resolutivos de la ASEA sobre desmonte de manglar y condicionantes operativas',
+        'aud': 'auditoria-dos-bocas.html', 'ficha': 'herramienta-megaobras-sector.html#obra-dos-bocas',
+        'exp': 'expedientes.html#exp-dos-bocas', 'expNom': 'Expediente ASF Dos Bocas',
+    },
+    {
+        'id': 'tren-toluca', 'ico': '🚈', 'nombre': 'Tren Interurbano México–Toluca «El Insurgente»',
+        'tipo': 'trenes', 'tipoNom': 'Trenes y selvas',
+        'edos': ['MÉX', 'CDMX'], 'multi': True,
+        'sede': 'Zinacantepec a Observatorio (Estado de México y Ciudad de México)',
+        'presMdp': 76346.8, 'realMdp': 153694.3, 'sobrePct': 101.3,
+        'estReal': 'oficial', 'pendReal': None,
+        'asfMdp': 3098.6, 'asfTxt': '$3,098.6 mdp acumulados por aclarar ante la ASF (CP 2019–2024)',
+        'ecosistema': 'Bosque de Agua en la Sierra de las Cruces, La Marquesa y barrancas de Santa Fe',
+        'alerta': 'Más de una década de obras sobre la zona de recarga acuífera entre el Valle de Toluca y el Valle de México, con liberación tardía de derecho de vía y taludes forestales intervenidos.',
+        'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
+        'miaTxt': 'MIA regional de la SICT y cumplimiento de reforestación en la Sierra de las Cruces',
+        'aud': 'auditoria-tren-toluca.html', 'ficha': 'herramienta-megaobras-sector.html#obra-tren-toluca',
+        'exp': 'expedientes.html#exp-tren-toluca', 'expNom': 'Expediente ASF Tren Toluca',
+    },
+    {
+        'id': 'aifa-texcoco', 'ico': '🛫', 'nombre': 'AIFA en Santa Lucía y cancelación del NAIM Texcoco',
+        'tipo': 'aeropuertos', 'tipoNom': 'Aeropuertos y equipamiento',
+        'edos': ['MÉX'], 'multi': False,
+        'sede': 'Zumpango y Texcoco, Estado de México',
+        'presMdp': 79305.0, 'realMdp': 101935.3, 'sobrePct': 28.5,
+        'estReal': 'derivado', 'pendReal': 'obra-aifa-texcoco',
+        'asfMdp': 123.9, 'asfTxt': '$123.9 mdp por aclarar en AIFA + $113,327.7 mdp auditados por la ASF en la cancelación de Texcoco',
+        'ecosistema': 'Cuenca endorreica del Valle de México, acuífero Cuautitlán-Pachuca y vaso del Lago de Texcoco',
+        'alerta': 'Doble huella territorial: obras inconclusas y rehabilitación hidrológica en el vaso de Texcoco más extracción de agua y bancos de materiales pétreos en la cuenca de Zumpango-Santa Lucía.',
+        'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
+        'miaTxt': 'MIA del AIFA (SEDENA) y seguimiento del Área de Protección de Recursos Naturales Lago de Texcoco',
+        'aud': 'auditoria-aifa.html', 'ficha': 'herramienta-megaobras-sector.html#obra-aifa-texcoco',
+        'exp': 'expedientes.html#exp-aifa', 'expNom': 'Expediente ASF AIFA y Texcoco',
+    },
+    {
+        'id': 'agronitrogenados', 'ico': '🏭', 'nombre': 'Planta de fertilizantes Agronitrogenados (Pro-Agroindustria)',
+        'tipo': 'energia', 'tipoNom': 'Refinerías y energía',
+        'edos': ['VER'], 'multi': False,
+        'sede': 'Complejo Petroquímico Pajaritos, Coatzacoalcos, Veracruz',
+        'presMdp': 7894.2, 'realMdp': 13698.3, 'sobrePct': 73.5,
+        'estReal': 'derivado', 'pendReal': None,
+        'asfMdp': 0.0, 'asfTxt': 'La ASF concluyó que Pemex compró la planta sin evaluar el estado de los bienes y que el proyecto pasó de 475 a 760 millones de dólares (Cuenta Pública 2015, auditoría 498).',
+        'ecosistema': 'Corredor industrial y estuario del río Coatzacoalcos – Laguna de Pajaritos, Veracruz',
+        'alerta': 'Planta química con 14 años fuera de operación al momento de su compra en 2014, con equipos corroídos y pasivos industriales en la zona petroquímica de Pajaritos.',
+        'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
+        'miaTxt': 'Auditorías ambientales y dictámenes de pasivos industriales de la ASEA y PROFEPA en Pajaritos',
+        'aud': 'auditoria-agronitrogenados.html', 'ficha': 'herramienta-megaobras-sector.html#obra-agronitrogenados',
+        'exp': 'herramienta-megaobras-pulso-cuenta.html#cuenta-agronitrogenados', 'expNom': 'Cuenta de la obra en Pemex',
+    },
+    {
+        'id': 'fertinal', 'ico': '🧪', 'nombre': 'Grupo Fertinal (planta industrial y mina de roca fosfórica)',
+        'tipo': 'energia', 'tipoNom': 'Refinerías y energía',
+        'edos': ['MICH', 'BCS'], 'multi': True,
+        'sede': 'Lázaro Cárdenas, Michoacán y mina en San Juan de la Costa, Baja California Sur',
+        'presMdp': 12532.0, 'realMdp': 13121.6, 'sobrePct': 4.7,
+        'estReal': 'oficial', 'pendReal': None,
+        'asfMdp': 0.0, 'asfTxt': 'Pemex la compró con 635 millones de dólares de créditos y la ASF dictaminó que la compra «no es un negocio rentable» (Cuenta Pública 2016, auditoría 468).',
+        'ecosistema': 'Estero del río Balsas en Lázaro Cárdenas (Michoacán) y litoral de la Bahía de La Paz (Baja California Sur)',
+        'alerta': 'Acumulación histórica de fosfoyeso (yeso ácido) en pilas industriales en Lázaro Cárdenas y extracción minera de roca fosfórica frente al Golfo de California.',
+        'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
+        'miaTxt': 'Diagnóstico de pasivos ambientales y vida útil de reservas mineras en SEMARNAT y Pemex',
+        'aud': 'auditoria-fertinal.html', 'ficha': 'herramienta-megaobras-sector.html#obra-fertinal',
+        'exp': 'herramienta-megaobras-pulso-cuenta.html#cuenta-fertinal', 'expNom': 'Cuenta de la obra en Pemex',
+    },
+    {
+        'id': 'megafarmacia', 'ico': '💊', 'nombre': 'Megafarmacia del Bienestar (Birmex)',
+        'tipo': 'aeropuertos', 'tipoNom': 'Aeropuertos y equipamiento',
+        'edos': ['MÉX'], 'multi': False,
+        'sede': 'Huehuetoca, Estado de México',
+        'presMdp': 3614.6, 'realMdp': 3948.6, 'sobrePct': 9.2,
+        'estReal': 'oficial', 'pendReal': None,
+        'asfMdp': 1045.0, 'asfTxt': '$1,045.0 mdp por aclarar ante la ASF en Birmex (Cuenta Pública 2023)',
+        'ecosistema': 'Zona industrial y cuenca hidrológica de Huehuetoca, Estado de México',
+        'alerta': 'Reconversión de bodegas logísticas para almacenamiento federal y cadena de frío de medicamentos; la ASF dejó observaciones por aclarar en Birmex (abajo, con su expediente).',
+        'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
+        'miaTxt': 'Dictámenes de impacto ambiental y manejo de residuos farmacéuticos (COFEPRIS / SEMARNAT)',
+        'aud': 'auditoria-megafarmacia.html', 'ficha': 'herramienta-megaobras-sector.html#obra-megafarmacia',
+        'exp': 'expedientes.html#exp-birmex', 'expNom': 'Expediente ASF Birmex',
+    },
+    {
+        'id': 'estela-luz', 'ico': '🗼', 'nombre': 'Estela de Luz (Monumento del Bicentenario)',
+        'tipo': 'aeropuertos', 'tipoNom': 'Aeropuertos y equipamiento',
+        'edos': ['CDMX'], 'multi': False,
+        'sede': 'Bosque de Chapultepec, Ciudad de México',
+        'presMdp': 393.5, 'realMdp': 1304.9, 'sobrePct': 231.6,
+        'estReal': 'oficial', 'pendReal': None,
+        'asfMdp': 0.0, 'asfTxt': 'La ASF documentó $399.2 mdp de pagos improcedentes incluidos en su costo final (acero, precios extraordinarios y cuarzo) y presentó denuncias de hechos (informe especial 2009-2011).',
+        'ecosistema': 'Entrada al Bosque de Chapultepec y Paseo de la Reforma, Ciudad de México',
+        'alerta': 'Excavación profunda y cimentación al pie del Bosque de Chapultepec con un sobrecosto de +231.6 % frente al proyecto original.',
+        'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
+        'miaTxt': 'Autorización de impacto ambiental urbano en área de valor ambiental de Chapultepec',
+        'aud': 'auditoria-estela-luz.html', 'ficha': 'herramienta-megaobras-sector.html#obra-estela-luz',
+        'exp': 'herramienta-megaobras-pulso-cuenta.html#cuenta-estela-luz', 'expNom': 'Cuenta de la obra',
+    },
+    {
+        'id': 'refineria-tula', 'ico': '🧱', 'nombre': 'Refinería Bicentenario en Tula (barda perimetral)',
+        'tipo': 'energia', 'tipoNom': 'Refinerías y energía',
+        'edos': ['HGO'], 'multi': False,
+        'sede': 'Tula de Allende, Atitalaquia y Tlaxcoapan, Hidalgo',
+        'presMdp': 3714.0, 'realMdp': 1127.6, 'sobrePct': -69.6,
+        'estReal': 'derivado', 'pendReal': None,
+        'asfMdp': 0.0, 'asfTxt': 'La ASF constató que la refinería no continuó: de $3,714.0 mdp autorizados a sus dos proyectos se ejercieron $1,127.6 mdp, y siete contratos se terminaron antes de tiempo (Cuenta Pública 2014, auditoría 315).',
+        'ecosistema': 'Cuenca atmosférica e hidrológica de Tula – Valle del Mezquital, Hidalgo',
+        'alerta': 'Un predio acondicionado para una refinería que no se construyó, en una de las cuencas con mayor carga de contaminantes atmosféricos y de aguas residuales del centro del país. La superficie desmontada y su estado actual no están en un documento oficial integrado.',
+        'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
+        'miaTxt': 'MIA del proyecto cancelado y estado ambiental actual del polígono de 700 hectáreas',
+        'aud': 'auditoria-refineria-tula.html', 'ficha': 'herramienta-megaobras-sector.html#obra-refineria-tula',
+        'exp': 'herramienta-megaobras-pulso-cuenta.html#cuenta-refineria-tula', 'expNom': 'Cuenta de la obra',
+    },
+    {
+        'id': 'bunker-garcia-luna', 'ico': '🏢', 'nombre': 'Búnker de Seguridad de García Luna (Centro de Inteligencia)',
+        'tipo': 'aeropuertos', 'tipoNom': 'Aeropuertos y equipamiento',
+        'edos': ['CDMX'], 'multi': False,
+        'sede': 'Av. Constituyentes, Ciudad de México',
+        'presMdp': 347.4, 'realMdp': 263.0, 'sobrePct': -24.3,
+        'estReal': 'derivado', 'pendReal': 'obra-bunker-garcia-luna',
+        'asfMdp': 0.0, 'asfTxt': 'La ASF observó $23.4 mdp pagados de más o sin soporte, y que la licencia de construcción y el resolutivo de impacto ambiental se obtuvieron después de iniciar la obra (Cuenta Pública 2009, auditoría 1053).',
+        'ecosistema': 'Ladera poniente colindante con la Tercera Sección del Bosque de Chapultepec, CDMX',
+        'alerta': 'Obra en la ladera de Constituyentes, junto a la Tercera Sección del Bosque de Chapultepec; la ASF observó que su resolutivo de impacto ambiental se obtuvo después de iniciar la obra.',
+        'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
+        'miaTxt': 'Manifestación de impacto ambiental de la obra subterránea en Constituyentes',
+        'aud': 'auditoria-bunker-garcia-luna.html', 'ficha': 'herramienta-megaobras-sector.html#obra-bunker-garcia-luna',
+        'exp': 'herramienta-megaobras-pulso-cuenta.html#cuenta-bunker-garcia-luna', 'expNom': 'Cuenta de la obra',
+    },
+    {
+        'id': 'cuchillo-ii', 'ico': '💧', 'nombre': 'Acueducto El Cuchillo II (Conagua)',
+        'tipo': 'agua', 'tipoNom': 'Agua y desastres',
+        'edos': ['NL'], 'multi': False,
+        'sede': 'China a Monterrey, Nuevo León',
+        'presMdp': None, 'realMdp': None, 'sobrePct': None,
+        'estReal': 'oficial', 'pendReal': None,
+        'asfMdp': 1655.9, 'asfTxt': '$1,655.9 mdp acumulados por aclarar ante la ASF ($1,123.5 mdp en CP 2023 + $532.4 mdp en CP 2024)',
+        'ecosistema': 'Cuenca del río San Juan, presa El Cuchillo y zona metropolitana de Monterrey, Nuevo León',
+        'alerta': 'Obra hidráulica de emergencia para trasvase de agua a Monterrey; lo que la ASF dejó por aclarar va abajo, con su expediente.',
+        'miaEst': 'pendiente', 'miaPend': 'ambiente-0',
+        'miaTxt': 'Exención o MIA de emergencia ante SEMARNAT y caudal ecológico de la cuenca del río San Juan',
+        'aud': 'auditoria-presupuesto-ambiental.html', 'ficha': 'herramienta-ambiente-auditor.html',
+        'exp': 'expedientes.html#exp-cuchillo-ii', 'expNom': 'Expediente ASF El Cuchillo II',
+    },
+    {
+        'id': 'guaymas-gas', 'ico': '🔥', 'nombre': 'Puerto de Guaymas y terminal de licuefacción AMIGO LNG',
+        'tipo': 'energia', 'tipoNom': 'Refinerías y energía',
+        'edos': ['SON'], 'multi': False,
+        'sede': 'Heroica Guaymas, Sonora',
+        'presMdp': None, 'realMdp': None, 'sobrePct': None,
+        'estReal': 'pendiente', 'pendReal': 'red-guaymas-comodato-amigo-gnl-1',
+        'paga': 'privado',
+        'al': ['amigo lng', 'amigo gnl', 'epcilon', 'gas de guaymas', 'terminal de gas', 'planta de gas', 'gas natural licuado'],
+        'pagaTxt': 'Inversión privada: la planta es de Epcilon LNG LLC, la empresa a la que el Departamento de Energía de EE. UU. autorizó exportar el gas (Orden 4629, 08-12-2020). Su monto no es gasto público y no está en un documento oficial. Lo público es el suelo: 41.7 hectáreas según la Secretaría de Energía (21-10-2026), prestadas en un comodato que no se ha publicado.',
+        'asfMdp': 0.0, 'asfTxt': 'Sin auditoría de la ASF: no es una obra pagada con dinero federal.',
+        'ecosistema': 'Bahía de Guaymas y litoral del Golfo de California, Sonora',
+        'alerta': 'Planta para licuar gas en la bahía, en un área que ya ocupan la industria, el cabotaje y la pesca (Secretaría de Energía); la obra está detenida por amparos, y el comodato del suelo y el resolutivo de impacto ambiental de la ASEA siguen sin publicarse.',
+        'miaEst': 'pendiente', 'miaPend': 'red-guaymas-comodato-amigo-gnl-8',
+        'miaTxt': 'Resolutivo de impacto ambiental de la ASEA y contrato de comodato portuario en Guaymas',
+        'aud': 'auditoria-guaymas-gas.html', 'ficha': 'noticias-auditavision.html#col-guaymas-comodato-amigo-gnl',
+        'exp': 'noticias-auditavision.html#col-guaymas-comodato-amigo-gnl', 'expNom': 'Verificación Guaymas y ASEA',
+    },
+    {
+        'id': 'otis-acapulco', 'ico': '🌀', 'nombre': 'Reconstrucción por el huracán Otis en Acapulco y Coyuca',
+        'tipo': 'agua', 'tipoNom': 'Agua y desastres',
+        'edos': ['GRO'], 'multi': False,
+        'sede': 'Acapulco de Juárez y Coyuca de Benítez, Guerrero',
+        'presMdp': 61313.0, 'realMdp': 35017.0, 'sobrePct': None,
+        'estReal': 'oficial', 'pendReal': 'otis-diferencia',
+        'asfMdp': 0.0, 'asfTxt': '$84,207.0 mdp en daños estimados por CENAPRED; $26,296.0 mdp de diferencia entre lo anunciado y lo reportado como gastado',
+        'ecosistema': 'Bahía de Acapulco, Laguna de Coyuca y cuenca baja del río Papagayo, Guerrero',
+        'alerta': 'Impacto ambiental y sanitario tras el huracán categoría 5: residuos de demolición, drenaje colapsado y $26,296.0 mdp anunciados cuyo cierre presupuestario no han publicado Hacienda ni Bienestar.',
+        'miaEst': 'pendiente', 'miaPend': 'otis-diferencia',
+        'miaTxt': 'Cierre presupuestario de los $61,313 mdp anunciados y desglose por ramo (Hacienda y Bienestar)',
+        'aud': 'auditoria-presupuesto-ambiental.html', 'ficha': 'herramienta-ambiente-crisis.html',
+        'exp': 'herramienta-ambiente-crisis.html', 'expNom': 'Crisis ambientales: Huracán Otis',
+    },
+    {
+        'id': 'jalisco-agua', 'ico': '🚰', 'nombre': 'Presa El Zapotillo, Acueducto y red del SIAPA',
+        'tipo': 'agua', 'tipoNom': 'Agua y desastres',
+        'edos': ['JAL'], 'multi': False,
+        'sede': 'Cañadas de Obregón y Área Metropolitana de Guadalajara, Jalisco',
+        'presMdp': None, 'realMdp': None, 'sobrePct': None,
+        'estReal': 'pendiente', 'pendReal': 'gdl-zapotillo',
+        'asfMdp': 0.0, 'asfTxt': 'Plan Hídrico entregado al Congreso el 14-07-2026 sin anexo público de costos ni resultados de laboratorio de calidad del agua',
+        'ecosistema': 'Cuenca del río Verde (Los Altos de Jalisco) y red de agua potable de Guadalajara',
+        'alerta': 'Falta de transparencia de Conagua, el Gobierno de Jalisco, SIAPA y COPRISJAL sobre cuánto falta para concluir El Zapotillo, cuántas colonias reciben agua turbia y qué arrojan los análisis de laboratorio.',
+        'miaEst': 'pendiente', 'miaPend': 'gdl-plan-costos',
+        'miaTxt': 'Anexos financieros del Plan Hídrico, costo federal de El Zapotillo y resultados de laboratorio (COPRISJAL)',
+        'aud': 'auditoria-presupuesto-ambiental.html', 'ficha': 'herramienta-ambiente-crisis.html',
+        'exp': 'herramienta-ambiente-crisis.html', 'expNom': 'Crisis ambientales: Agua en Jalisco',
+    },
+]
+
+# Quién paga y lo que dijo la ASF (Bloque 4 del plan v2, 27-10-2026). El mapa
+# separa el gasto público de la inversión privada: solo el gasto público se
+# suma en sus contadores. Y los montos «por aclarar» ya no se escriben a mano:
+# salen de los expedientes de la ASF de la plataforma (cada informe con su
+# huella), como suma derivada. El 27-10-2026 se encontró que los escritos a
+# mano el 26-10-2026 no coincidían con ningún documento (Tren Maya decía
+# $8,563.5 mdp y su expediente suma $785.3).
+EXPEDIENTE = {'tren-maya': 'tren-maya', 'dos-bocas': 'dos-bocas', 'tren-toluca': 'tren-toluca',
+              'aifa-texcoco': 'aifa', 'megafarmacia': 'birmex', 'cuchillo-ii': 'cuchillo-ii'}
+PAGA = {'publico': ('🏛️', 'Gasto público'), 'privado': ('🏢', 'Inversión privada')}
+
+
+def _con_expedientes():
+    ruta = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'audit-database.js')
+    s = open(ruta, encoding='utf-8').read()
+    exp = {c['id']: c for c in json.loads(s[s.index('{'):s.rindex('}') + 1])['expedientes']['fichas']}
+    for m in OBRAS_MAPA:
+        m.setdefault('paga', 'publico')
+        m.setdefault('pagaTxt', 'Gasto público: se paga con el presupuesto federal o con el de una empresa del Estado.')
+        c = exp.get(EXPEDIENTE.get(m['id']))
+        if not c:
+            continue
+        anios = sorted(c['anios'], key=lambda a: a['cp'])
+        tot = round(sum(a['porAclarar'] for a in anios) / 1e6, 1)
+        n_aud = sum(a['auditorias'] for a in anios)
+        cps = '%d a %d' % (anios[0]['cp'], anios[-1]['cp']) if len(anios) > 1 else str(anios[0]['cp'])
+        desg = '; '.join('CP %d: $%s' % (a['cp'], format(round(a['porAclarar'] / 1e6, 1), ',.1f')) for a in anios)
+        txt = ('$%s mdp por aclarar: suma de %s de su expediente de la ASF, %s %s (%s).'
+               % (format(tot, ',.1f'), 'la auditoría' if n_aud == 1 else 'las %d auditorías' % n_aud,
+                  'Cuentas Públicas' if len(anios) > 1 else 'Cuenta Pública', cps, desg))
+        if m['id'] == 'aifa-texcoco':
+            txt += ' Aparte, la ASF auditó $113,327.7 mdp en la cancelación de Texcoco.'
+        m['asfMdp'], m['asfEst'], m['asfTxt'] = tot, 'derivado', txt
+
+
+_con_expedientes()
 
 
 def esc(t):
@@ -324,37 +584,151 @@ def construir(base, ref):
     }
 
     # ------------------------------------------------------------------
-    # 4. Megaobras
+    # 4. Megaobras y Mapa Ambiental por Estado
     sim = base.get('simulador_megaobras') or {}
     obras = {o['id']: o for o in sim.get('obras', [])}
+    mapa_idx = {m['id']: m for m in OBRAS_MAPA}
+    edos_base = [{
+        'a': e['abbr'], 'n': e['name'], 'gasto': e['gasto'],
+        'r28': e['ramo28'], 'r33': e['ramo33'], 'pc': e['pc'],
+        'deuda': e['deuda'], 'sem': e['semaforoDeuda'],
+        'asf': e['asfMontoObservado'], 'aud': e['asfAuditorias'],
+    } for e in base.get('estados', [])]
+    edos_nom = {e['a']: e['n'] for e in edos_base}
+    edos_con_obra = sorted({a for m in OBRAS_MAPA for a in m['edos']}, key=lambda k: edos_nom.get(k, k))
+    inv_obras_fis = sum(m['realMdp'] for m in OBRAS_MAPA if m.get('realMdp') and m['paga'] == 'publico')
+    asf_obras_tot = sum(m['asfMdp'] for m in OBRAS_MAPA if m.get('asfMdp'))
+
+    botones_edos = []
+    for a in edos_con_obra:
+        os_edo = [m for m in OBRAS_MAPA if a in m['edos']]
+        icos = ''.join(m['ico'] for m in os_edo)
+        botones_edos.append(
+            '<button type="button" class="ab-edo-btn" data-edo="%s">'
+            '<span class="ab-edo-ico" aria-hidden="true">%s</span>'
+            '<span class="ab-edo-nom">%s</span>'
+            '<span class="ab-edo-cnt ab-num">%d</span></button>'
+            % (esc(a), icos, esc(edos_nom.get(a, a)), len(os_edo)))
+    opciones_sel = ''.join(
+        '<option value="%s">%s (%s)%s</option>' % (
+            esc(e['a']), esc(e['n']), esc(e['a']),
+            (' · %d obra%s' % (sum(1 for m in OBRAS_MAPA if e['a'] in m['edos']),
+                               's' if sum(1 for m in OBRAS_MAPA if e['a'] in m['edos']) != 1 else ''))
+            if any(e['a'] in m['edos'] for m in OBRAS_MAPA) else '')
+        for e in sorted(edos_base, key=lambda x: x['n']))
+
     tarj_obras = []
     for oid in OBRAS_FISICAS:
         o = obras.get(oid)
         if not o:
             continue
+        m = mapa_idx.get(oid, {})
         e = (o.get('estado_campos') or {}).get('inversion_real_mdp') or 'pendiente'
         e = e if e in ('oficial', 'derivado', 'pendiente') else 'derivado'
+        pend_o = m.get('pendReal') or (('obra-' + oid) if e == 'pendiente' else None)
+        aud_href = m.get('aud') or ('auditoria-aifa.html' if oid == 'aifa-texcoco' else ('auditoria-%s.html' % oid))
+        sede_txt = m.get('sede') or ', '.join(edos_nom.get(x, x) for x in m.get('edos', []))
+        eco_txt = m.get('ecosistema') or 'Pendiente de integrar su Manifestación de Impacto Ambiental.'
         tarj_obras.append(
             '<li class="ab-obra"><a class="ab-obra-a" href="herramienta-megaobras-sector.html#obra-%s">'
             '<span class="ab-obra-ico" aria-hidden="true">%s</span><span class="ab-obra-n">%s</span>'
             '<span class="ab-obra-ir">Su ficha en Obra por obra, por industria ➔</span></a>'
-            '<dl class="ab-obra-dl"><div><dt>Costo registrado</dt><dd><b class="ab-num">%s</b> %s</dd></div>'
-            '<div><dt>Lo que su permiso ambiental autorizó</dt><dd>%s</dd></div></dl></li>'
-            % (esc(oid), esc(o.get('icono', '')), esc(o['nombre']), '$' + format(o['inversion_real_mdp'], ',.1f') + ' mdp',
-               chip(e, ('obra-' + oid) if e == 'pendiente' else None), chip('pendiente', pend_ids[0] if pend_ids else None)))
+            '<dl class="ab-obra-dl">'
+            '<div><dt>Dónde está</dt><dd><b>%s</b></dd></div>'
+            '<div><dt>Costo registrado</dt><dd><b class="ab-num">%s</b> %s</dd></div>'
+            '<div><dt>Ecosistema y alerta ambiental</dt><dd>%s</dd></div>'
+            '<div><dt>Lo que su permiso ambiental autorizó</dt><dd>%s · <a class="ab-fu" href="%s">Su Auditoría en imágenes ➔</a></dd></div>'
+            '</dl></li>'
+            % (esc(oid), esc(o.get('icono', '')), esc(o['nombre']), esc(sede_txt),
+               '$' + format(o['inversion_real_mdp'], ',.1f') + ' mdp',
+               chip(e, pend_o), esc(eco_txt),
+               chip('pendiente', pend_ids[0] if pend_ids else None), esc(aud_href)))
+
     megaobras = '''
   <section class="ab-bloque" id="abMegaobras" aria-labelledby="abMegTit">
-    <h2 class="ab-tit" id="abMegTit"><span aria-hidden="true">🏗️</span> La huella de las megaobras</h2>
+    <h2 class="ab-tit" id="abMegTit"><span aria-hidden="true">🏗️</span> La huella de las megaobras y el mapa ambiental por estado</h2>
     <p class="ab-txt">Toda obra que pueda causar desequilibrio ecológico necesita, antes de empezar, una Manifestación de Impacto Ambiental aprobada por la SEMARNAT (Ley General del Equilibrio Ecológico, artículo 28). En ese documento la propia obra reconoce cuánta vegetación retirará, qué especies afecta y qué medidas promete. %(lgeepa)s</p>
     <div class="ab-alerta ab-alerta-p">%(chip_p0)s %(pend0)s</div>
-    <p class="ab-txt">Aquí irá, obra por obra: lo que su permiso ambiental autorizó, lo que la Auditoría Superior o la PROFEPA hayan documentado después y lo que la obra costó. Mientras llega el documento, estas son las megaobras de construcción del registro, con lo que ya se sabe de su costo:</p>
+
+    <div class="ab-mapa" id="abMapaObras">
+      <h3 class="ab-sub"><span aria-hidden="true">🗺️</span> Mapa de inversión en megaobras, gasto federalizado y alerta ambiental por estado</h3>
+      <p class="ab-txt">Toca cualquier estado en el mapa o en la lista para abrir la <b>Ficha del Auditor Ambiental</b>: qué megaobras o proyectos de infraestructura tiene en su territorio, cuánto reciben sus finanzas estatales por gasto federalizado (Ramos 28 y 33), cuánto tiene por aclarar ante la ASF y qué alerta ambiental o permiso sigue pendiente.</p>
+
+      <div class="ab-mapa-mandos">
+        <div>
+          <p class="ab-mapa-et">1. Qué pintar en el mapa</p>
+          <div class="ab-grupo ab-mapa-lentes" role="group" aria-label="Qué pintar en el mapa">
+            <button type="button" class="ab-op" data-lente="obras" aria-pressed="true"><span aria-hidden="true">🏗️</span> Megaobras y alerta ambiental</button>
+            <button type="button" class="ab-op" data-lente="gasto" aria-pressed="false"><span aria-hidden="true">🏛️</span> Gasto federalizado 2026 (Ramos 28 y 33)</button>
+            <button type="button" class="ab-op" data-lente="asf" aria-pressed="false"><span aria-hidden="true">🔍</span> Por aclarar ante la ASF (CP 2024)</button>
+          </div>
+        </div>
+        <div>
+          <p class="ab-mapa-et">2. Filtrar por tipo de infraestructura y alerta</p>
+          <div class="ab-grupo ab-mapa-tipos" role="group" aria-label="Tipo de infraestructura">
+            <button type="button" class="ab-op" data-tipo="todas" aria-pressed="true"><span aria-hidden="true">🗺️</span> Todas (14)</button>
+            <button type="button" class="ab-op" data-tipo="trenes" aria-pressed="false"><span aria-hidden="true">🚆</span> Trenes y selvas (2)</button>
+            <button type="button" class="ab-op" data-tipo="energia" aria-pressed="false"><span aria-hidden="true">🛢️</span> Refinerías y energía (5)</button>
+            <button type="button" class="ab-op" data-tipo="aeropuertos" aria-pressed="false"><span aria-hidden="true">🛫</span> Aeropuertos y equipamiento (4)</button>
+            <button type="button" class="ab-op" data-tipo="agua" aria-pressed="false"><span aria-hidden="true">💧</span> Agua y desastres (3)</button>
+          </div>
+        </div>
+        <div>
+          <p class="ab-mapa-et">3. ¿Quién paga?</p>
+          <div class="ab-grupo ab-mapa-paga" role="group" aria-label="Quién paga">
+            <button type="button" class="ab-op" data-paga="todas" aria-pressed="true"><span aria-hidden="true">⚖️</span> Todo (%(n_todos)d)</button>
+            <button type="button" class="ab-op" data-paga="publico" aria-pressed="false"><span aria-hidden="true">🏛️</span> Gasto público (%(n_pub)d)</button>
+            <button type="button" class="ab-op" data-paga="privado" aria-pressed="false"><span aria-hidden="true">🏢</span> Inversión privada (%(n_priv)d)</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ab-datos ab-mapa-kpis" id="abMapaKpis">
+        <div class="ab-dato"><strong class="ab-num" id="abKpiEdos">%(n_edos)d de 32</strong><span class="ab-dato-r">entidades con megaobras o alertas en este filtro %(chip_d)s</span><small>Toca un estado en el mapa para ver qué obras cruzan su territorio</small></div>
+        <div class="ab-dato"><strong class="ab-num" id="abKpiInv">%(inv_fis)s</strong><span class="ab-dato-r">gasto público registrado en los proyectos del filtro %(chip_d)s</span><small id="abKpiInvNota">Suma nacional de cada obra, sin prorratear entre estados. La inversión privada no se suma: no es dinero público.</small></div>
+        <div class="ab-dato ab-dato-rojo"><strong class="ab-num" id="abKpiAsf">%(asf_tot)s</strong><span class="ab-dato-r">por aclarar ante la ASF en estas obras %(chip_d)s</span><small>Suma de los informes de sus expedientes de la ASF. Aparte, $113,327.7 mdp auditados en la cancelación de Texcoco</small></div>
+        <div class="ab-dato"><strong class="ab-num">0 de 11</strong><span class="ab-dato-r">permisos ambientales (MIA) integrados %(chip_p0)s</span><small>SEMARNAT y ASEA · Toca el chip pendiente para ver la ficha del registro</small></div>
+      </div>
+
+      <p class="ab-nota" id="abMapaQue">Los estados en verde concentran las megaobras físicas, refinerías, complejos industriales y crisis de agua o reconstrucción registrados en la plataforma. En obras que cruzan varios estados (como el Tren Maya o el Tren México–Toluca), se muestra el costo total de la obra con la advertencia de que Hacienda no publica cuánto se ejerció dentro de cada entidad. Cada ficha dice quién paga: 🏛️ gasto público (el presupuesto federal o el de una empresa del Estado) o 🏢 inversión privada, que tiene costo ambiental pero no se paga con impuestos.</p>
+
+      <div class="ab-mapa-rej">
+        <figure class="ab-mapa-fig">
+          <div class="ab-mapa-barra-sel">
+            <label class="ab-mapa-sel-l" for="abMapaSel">Ir directo a una entidad:</label>
+            <select class="ab-mapa-sel" id="abMapaSel">%(opciones_sel)s</select>
+          </div>
+          %(svg)s
+          <figcaption class="ab-mapa-ley" id="abMapaLeyenda"></figcaption>
+        </figure>
+        <aside class="ab-ficha" id="abMapaFicha" aria-live="polite"></aside>
+      </div>
+
+      <h4 class="ab-sub">Los %(n_edos)d estados con megaobras o alertas ambientales en el padrón</h4>
+      <p class="ab-txt">Toca una entidad para abrir su Ficha del Auditor Ambiental con su gasto federalizado, observaciones de la ASF y alertas por obra:</p>
+      <div class="ab-edos-lista" id="abMapaEdos" role="group" aria-label="Entidades con megaobras o alertas ambientales">
+        %(botones_edos)s
+      </div>
+    </div>
+
+    <h3 class="ab-sub">Las 8 megaobras de construcción del registro, obra por obra</h3>
+    <p class="ab-txt">Aquí va, obra por obra: dónde está, cuánto costó, qué ecosistema interviene y el estado de su permiso ambiental:</p>
     <ul class="ab-obras">%(obras)s</ul>
-    <p class="ab-nota">Costo registrado en pesos de cada año, sin quitar la inflación, con el estado que le da el registro de megaobras; toca la etiqueta para ver de dónde sale o por qué falta. Quedan fuera los rescates financieros (FOBAPROA, FARAC), las compras de empresas (Fertinal, Agronitrogenados) y los programas (Enciclomedia): no son obra que pida permiso ambiental.</p>
-    <p class="ab-acciones"><a class="ab-boton ab-sec" href="herramienta-megaobras-sector.html"><span aria-hidden="true">🏭</span> Ver el costo de todas las megaobras</a></p>
+    <p class="ab-nota">Costo registrado en pesos de cada año, sin quitar la inflación, con el estado que le da el registro de megaobras; toca la etiqueta para ver de dónde sale o por qué falta. Quedan fuera de esta lista de construcción los rescates financieros (FOBAPROA, FARAC) y los programas (Enciclomedia): no son obra que pida permiso ambiental.</p>
+    <p class="ab-acciones"><a class="ab-boton ab-sec" href="herramienta-megaobras-sector.html"><span aria-hidden="true">🏭</span> Ver el costo de todas las megaobras</a> <a class="ab-boton ab-sec" href="herramienta-ambiente-auditor.html"><span aria-hidden="true">🌱</span> Auditar órganos del sector ambiental</a></p>
   </section>''' % {
         'lgeepa': liga_ref('ref-lgeepa', 'Ley General del Equilibrio Ecológico'),
         'chip_p0': chip('pendiente', pend_ids[0] if pend_ids else None),
+        'chip_d': chip('derivado'),
         'pend0': esc(A['pendientes'][0]) if A.get('pendientes') else '',
+        'n_edos': len(edos_con_obra),
+        'inv_fis': '$' + format(inv_obras_fis, ',.1f') + ' mdp',
+        'n_todos': len(OBRAS_MAPA), 'n_pub': sum(1 for m in OBRAS_MAPA if m['paga'] == 'publico'),
+        'n_priv': sum(1 for m in OBRAS_MAPA if m['paga'] == 'privado'),
+        'asf_tot': '$' + format(asf_obras_tot, ',.1f') + ' mdp',
+        'opciones_sel': opciones_sel,
+        'svg': mapa_svg(RAIZ),
+        'botones_edos': ''.join(botones_edos),
         'obras': ''.join(tarj_obras),
     }
 
@@ -430,6 +804,7 @@ def construir(base, ref):
         'org': [{'ur': u['ur'], 'n': u['nombre'], 'aprobado': u['aprobado'], 'modificado': u['modificado'],
                  'pagado': u['pagado'], 'proyecto2027': u['proyecto2027']} for u in P['unidades']],
         'fu': {k: {'doc': F[k]['doc'], 'url': F[k]['url']} for k in ('PEF', 'AV2T2026', 'PPEF2027') if k in F},
+        'mapaObras': {'edos': edos_base, 'obras': OBRAS_MAPA},
     }
 
     arranque = '''

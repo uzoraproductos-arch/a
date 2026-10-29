@@ -1,0 +1,43 @@
+# Revisión automática de cada cambio (Bloque 3 del plan, 27-10-2026).
+# Corre herramientas/revision.py: node --check, CR sueltos, sello, inventario,
+# preguntas de prueba del Auditor, guardia de legibilidad y, si se tocó
+# supabase/, la base de datos. Solo lee el repositorio: no publica nada.
+name: Revisión
+
+on:
+  push:
+    branches: [claude/funny-turing-imtm54, main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  revision:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Playwright con Chromium (solo para las revisiones con navegador)
+        run: |
+          pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Revisión
+        env:
+          GUARDIA_FASE: '0'
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="origin/${{ github.base_ref }}"
+          else
+            BASE="${{ github.event.before }}"
+            git cat-file -e "$BASE^{commit}" 2>/dev/null || BASE="HEAD~1"
+          fi
+          python herramientas/revision.py --base "$BASE"

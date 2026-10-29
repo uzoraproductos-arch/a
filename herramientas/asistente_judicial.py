@@ -44,6 +44,7 @@ paginas() (apartados.py).
 import html
 
 from asistente_legislativo import CPEUM, _chip, _fuentes, bloque_tema
+import gestion_judicial
 
 INE563 = {'tx': 'INE, Acuerdo INE/CG563/2025: sumatoria nacional y asignación de ministras y ministros de la SCJN (15-06-2025)',
           'url': 'https://dof.gob.mx/2025/INE/CGext202506_15_ap_2_1.pdf',
@@ -113,6 +114,12 @@ PAGINAS = [
      'Los cuatro caminos para defender la Constitución, por dónde pasa un juicio de amparo y qué recursos proceden, cuándo llega un caso '
      'a la Suprema Corte y cuándo lo que decide obliga a todos los tribunales del país.',
      ['medios', 'amparo', 'recursos', 'controversias', 'llegar_corte', 'jurisprudencia', 'plazos']),
+    # La auditoría de gestión (pedido del autor, 27-10-2026): el dinero junto a
+    # lo que se resolvió con él. Cifras y tablas en gestion_judicial.py.
+    (gestion_judicial.PAGINA, '📊', 'Lo que cuesta y lo que resuelve', 'Asuntos resueltos, rezago y cuánto tarda, junto al dinero',
+     'Que las cuentas cuadren no dice si la justicia llega. Aquí el presupuesto de cada órgano va junto a cuántos asuntos le llegaron, cuántos resolvió, '
+     'cuántos se le acumulan y cuánto tarda, con el censo del INEGI. Y lo que nadie ha publicado, con su ficha en el Registro de pendientes.',
+     gestion_judicial.TEMAS),
 ]
 PAGINA_DE = {k: (p[0], p[2]) for p in PAGINAS for k in p[5]}
 
@@ -419,11 +426,13 @@ def judicial(d):
              'los tribunales deben resolver en un máximo de <b>seis meses</b>. Si no lo hacen, deben avisar al <b>Tribunal de Disciplina Judicial</b> y explicar por qué.</p>',
         'fu': [_o('Plazo de seis meses en materia tributaria (art. 17, reformado DOF 15-09-2024)', CPEUM)],
         'sug': ['¿Qué es el Tribunal de Disciplina Judicial?', '¿Qué es el amparo?']}
+    t.update(gestion_judicial.temas(d))
     assert sorted(PAGINA_DE) == sorted(t)
     for k, x in t.items():
         x.setdefault('ir', [PAGINA_DE[k][0] + '#jud-' + k, PAGINA_DE[k][1]])
         x['aqui'] = [PAGINA_DE[k][0] + '#jud-' + k, PAGINA_DE[k][1]]
-    return {'t': t, 'min': [[n, v] for n, v, _ in MINISTROS], 'pag': [PORTADA, PORTADA_TIT]}
+    return {'t': t, 'min': [[n, v] for n, v, _ in MINISTROS], 'pag': [PORTADA, PORTADA_TIT],
+            'est': gestion_judicial.por_estado(d)}
 
 
 def secciones(d, temas):
@@ -471,6 +480,8 @@ def secciones(d, temas):
                      '<tfoot><tr><th scope="row">Poder Judicial (Ramo 03)</th><td>%s</td><td>100 %%</td></tr></tfoot></table></div>'
                      '<p class="pa-chico">La parte de cada unidad es derivada: su aprobado entre el total del Ramo 03.</p>') % (
                 _chip('oficial'), filas, _mdp(r03['aprobado']))
+        elif k in gestion_judicial.TEMAS:
+            extra = gestion_judicial.extra(d, k)
         out.append({'id': 'jud-' + k, 'titulo': html.escape(x['tit']), 'texto': '', 'tarjetas': [],
                     'bloque': bloque_tema(x, extra, x['aqui'][0].split('#')[0])})
     return out

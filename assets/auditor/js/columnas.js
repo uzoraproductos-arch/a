@@ -12,20 +12,1952 @@
 (function () {
   'use strict';
 
-  var EDICION = '9 de octubre de 2026';
-  var SECCIONES = [
-    ['todas', 'Todas'],
-    ['Personajes', 'Personajes'],
-    ['Hechos', 'Hechos'],
-    ['Historia', 'Historia']
-  ];
+  var SEC_N = [['todas', 'Todas'], ['Al momento', 'Al momento'], ['Verificado', 'Verificamos']];
+  var SEC_O = [['todas', 'Toda la Columna'], ['Personajes', 'Personajes'], ['Hechos', 'Hechos'], ['Historia', 'Historia']];
   /* Ilustración de cada sección cuando la columna no trae retrato. */
-  var ILUS = { Personajes: ['🧑‍⚖️', 'tinta'], Hechos: ['🗂️', 'sepia'], Historia: ['📜', 'oliva'] };
+  var ILUS = { Personajes: ['🧑‍⚖️', 'tinta'], Hechos: ['🗂️', 'sepia'], Historia: ['📜', 'oliva'], Verificado: ['🔍', 'sepia'], 'Al momento': ['⏱️', 'tinta'] };
 
   /* Cada columna: {id, seccion, titulo, balazo, cuerpo[], dato_curioso,
      cifras[{valor, etq, estado, fuente, url}], fuentes[{nombre, url}],
-     actualizado, icono?, imagen?{src, alt, credito}} */
+     actualizado, icono?, imagen?{src, alt, credito}}.
+     La sección «Verificado» (26-10-2026) coteja lo que circula en redes y
+     trae además circula{red, cuenta, fecha, texto} y cotejo[{dice, res,
+     explica, fuente, url, quien?, donde?}] y sigue[{que, url}] (qué falta
+     revisar para seguir el dinero), con res: consta, matiz,
+     no consta o pendiente. Un cotejo pendiente lleva quien y donde, y
+     herramientas/pendientes.py lo anota en el Registro de pendientes
+     (id red-<columna>-<n>).
+     Derecho de réplica (Bloque 4, 27-10-2026): si una persona o empresa aludida
+     pide aclarar un dato y procede, su texto va en replica[{quien, fecha, texto}]
+     y se publica íntegro, sin comentarios ni apostillas (Ley de réplica, art. 6).
+     Todas las columnas llevan al pie la liga para pedirla (derecho-de-replica.html).
+     La postura (28-10-2026) es lo que la parte aludida dijo en su propio documento:
+     postura[{quien, fecha, texto, url}], en sus palabras y sin calificarla.
+     «Al momento» (pedido del autor, 28-10-2026): notas breves de lo que está pasando,
+     con el mismo cotejo de Verificamos y además fecha, nota{medio, titulo, fecha, url},
+     ejemplo{tit, txt, filas, nota}, datos[{ico, tx, url, de}] (lo que dice la
+     plataforma: estado de resultados, salud financiera), glosario[{t, url}] y red (la
+     búsqueda que se arma en buscadores y redes, rotulada «sin verificar»). Las escribe
+     herramientas/integrar_al_momento.py; no se editan a mano. */
+  var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
+ {
+  "id": "jalisco-gasto-federal-pef-2027",
+  "seccion": "Al momento",
+  "icono": "🗺️",
+  "fecha": "28-10-2026",
+  "titulo": "Jalisco y el gasto federal: aporta el 7.5 % del PIB y recibe el 6.1 % de lo que la Federación reparte a los estados",
+  "balazo": "El PRI Jalisco dice que el estado es el lugar 24 de 32 en gasto federal por habitante y pide reasignarle 30 mil millones en el Presupuesto 2027. Con las participaciones y aportaciones de 2026 que tiene la plataforma, Jalisco sale todavía más abajo: lugar 30 de 32. El punto ciego es por qué: el Ramo 33 se reparte por necesidad, y ahí Jalisco cae al lugar 29. El 83 % de caída de la inversión es un cálculo del partido que aún no podemos cotejar.",
+  "nota": {
+   "medio": "Crónica Jalisco",
+   "titulo": "Lamenta Laura Haro abandono de Jalisco en presupuesto federal, pide reasignar 30 mil mdp para 2027",
+   "fecha": "27-10-2026",
+   "url": "https://www.cronica.com.mx/jalisco/guadalajara/2026/10/27/lamenta-laura-haro-abandono-de-jalisco-en-presupuesto-federal-pide-reasignar-30-mil-mdp-para-2027/"
+  },
+  "circula": {
+   "red": "Instagram",
+   "cuenta": "@radioformulajalisco (Radio Fórmula Jalisco)",
+   "fecha": "28 de octubre de 2026",
+   "texto": "Aunque Jalisco es de los estados que más aporta a la economía nacional, ocupa el lugar 24 de 32 en gasto federal por habitante. El PRI Jalisco reveló que la inversión pública cayó un 83 % en los últimos años, con tijeretazos críticos en carreteras y agua. La dirigente Laura Haro exigió reasignar 30 mil millones de pesos en el PEF 2027."
+  },
+  "cuerpo": [
+   "Qué pasó. La dirigente del PRI en Jalisco, Laura Haro, presentó un análisis de su partido sobre lo que el Presupuesto federal le da al estado y pidió que la Cámara de Diputados le reasigne 30 mil millones de pesos en el Presupuesto de Egresos 2027, que la Cámara aprueba a más tardar el 15 de noviembre (Constitución, art. 74, fr. IV). Un análisis de partido es lo que se coteja, no una fuente: aquí va cada afirmación contra el documento.",
+   "Lo que sí consta. Jalisco produce el 7.5 % del PIB del país, el cuarto lugar después de la Ciudad de México, el Estado de México y Nuevo León (INEGI, PIB por entidad 2024). Y en 2026 recibe $147,379.7 millones de participaciones y aportaciones, $16,408 por habitante, contra $18,057 del promedio nacional: el lugar 30 de 32. Tiene el 6.7 % de la población y recibe el 6.1 % de ese dinero.",
+   "El punto ciego: no es una sola bolsa. Las participaciones (Ramo 28) se reparten con la fórmula de la Ley de Coordinación Fiscal, que pesa la población y la actividad económica: ahí Jalisco recibe el 6.7 % y queda en el lugar 12 por habitante, a la par de su población. Las aportaciones (Ramo 33) se reparten por necesidad (la pobreza, los maestros y las escuelas que paga la Federación): ahí recibe el 5.1 % y cae al lugar 29. Repartir por necesidad es lo que manda la ley; si la fórmula es justa con un estado que produce mucho es la discusión de fondo del pacto fiscal, y es política, no aritmética.",
+   "Lo que dice el lugar 24. Según la prensa, el PRI no midió esto, sino todo el gasto que el Proyecto de Presupuesto 2027 ubica en cada estado, una medida más amplia que lo que recibe el gobierno del estado. Es otra medida, y su documento todavía no lo pudimos abrir: va como pendiente. Con las dos medidas Jalisco queda en la parte baja de la tabla; el lugar exacto depende de qué se cuenta.",
+   "El agua. El 21 de octubre la Presidenta dijo que el Gobierno Federal pondrá «todo» lo que falta para el agua de Guadalajara, «alrededor de 12 mil millones, 13 mil millones», mientras Jalisco paga una planta potabilizadora de unos $7,500.0 millones. Es un anuncio: el dinero todavía no aparece en un presupuesto aprobado, y eso es lo que hay que seguir en el PEF 2027. Los 30 mil millones que pide el PRI equivalen al 20.4 % de lo que Jalisco recibe en un año de participaciones y aportaciones."
+  ],
+  "ejemplo": {
+   "tit": "La cuenta, con números redondos",
+   "txt": "De cada 100 pesos, o de cada 100 personas, del país:",
+   "filas": [
+    [
+     "Lo que produce Jalisco del PIB nacional (2024)",
+     "$7.5",
+     "INEGI, PIB por entidad 2024, p. 1"
+    ],
+    [
+     "Las personas que viven en Jalisco (2026)",
+     "6.7",
+     "8,982,027 ÷ 134,407,258 × 100"
+    ],
+    [
+     "Lo que le llega de participaciones (Ramo 28)",
+     "$6.7",
+     "$96,672.2 millones ÷ $1,438,766.8 millones × 100"
+    ],
+    [
+     "Lo que le llega de aportaciones (Ramo 33)",
+     "$5.1",
+     "$50,707.5 millones ÷ $988,254.7 millones × 100"
+    ]
+   ],
+   "nota": "Es un ejemplo derivado con los anexos de distribución 2026 (DOF) y la población a mitad de 2026 del CONAPO. No incluye convenios ni el Ramo 25."
+  },
+  "cotejo": [
+   {
+    "dice": "Jalisco es de los estados que más aporta a la economía nacional",
+    "res": "consta",
+    "explica": "Aporta el 7.5 % del PIB nacional de 2024, el cuarto lugar entre las 32 entidades.",
+    "fuente": "INEGI, Producto Interno Bruto por Entidad Federativa 2024, comunicado 156/25 (05-12-2025), p. 1",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibent/PIBE2024_CP.pdf"
+   },
+   {
+    "dice": "Ocupa el lugar 24 de 32 en gasto federal por habitante",
+    "res": "matiz",
+    "explica": "Depende de qué se cuente. En participaciones y aportaciones 2026, lo que la Federación le entrega al gobierno del estado y a sus municipios, Jalisco recibe $16,408 por habitante y queda en el lugar 30 de 32 (derivado), más abajo todavía. El lugar 24 sale, según la prensa, del gasto que el Proyecto 2027 ubica por entidad, que aún no integramos.",
+    "fuente": "DOF 12-12-2025, acuerdo de distribución de participaciones 2026 (Anexo 15); aportaciones en el Anexo 16 modificado (DOF 09-07-2026) y población del CONAPO, en la base de la plataforma",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5776006&fecha=12/12/2025"
+   },
+   {
+    "dice": "La inversión pública cayó un 83 % en los últimos años",
+    "res": "pendiente",
+    "explica": "Es un cálculo del PRI Jalisco que la prensa atribuye a comparar promedios de años distintos. No encontramos el documento del cálculo, y la serie oficial de inversión federal por estado de cada año está en la Cuenta Pública, que la plataforma todavía no integra por entidad.",
+    "fuente": "Notisistema (prensa), «Acusa PRI recorte de 83% en inversión federal para Jalisco»",
+    "url": "https://www.notisistema.com/noticias/acusa-pri-recorte-de-83-en-inversion-federal-para-jalisco/",
+    "quien": "Falta de la plataforma: la inversión federal por entidad de cada año viene en la Cuenta Pública y aún no la integramos",
+    "donde": "https://www.cuentapublica.hacienda.gob.mx/"
+   },
+   {
+    "dice": "Con tijeretazos críticos en carreteras y agua",
+    "res": "pendiente",
+    "explica": "La publicación no da montos ni programas. En agua, la Presidenta anunció el 21 de octubre que la Federación pondrá alrededor de 12 a 13 mil millones para Guadalajara, pero todavía no está en un presupuesto aprobado. Las carreteras por estado vienen en el Proyecto de Presupuesto 2027, que aún no pudimos abrir.",
+    "fuente": "Presidencia, versión estenográfica de la conferencia del 21-10-2026",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026",
+    "quien": "Falta de la plataforma: el Proyecto de Presupuesto 2027 por entidad y por programa no abre desde nuestra sesión",
+    "donde": "https://www.ppef.hacienda.gob.mx/"
+   }
+  ],
+  "cifras": [
+   {
+    "valor": "7.5 %",
+    "etq": "Lo que aporta Jalisco al PIB nacional (2024), cuarto lugar",
+    "estado": "oficial",
+    "fuente": "INEGI, PIB por entidad 2024, p. 1",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibent/PIBE2024_CP.pdf"
+   },
+   {
+    "valor": "$147,379.7 millones",
+    "etq": "Participaciones y aportaciones de Jalisco en 2026 (Ramo 28 + Ramo 33)",
+    "estado": "derivado",
+    "fuente": "Anexos 15 y 16 del acuerdo de distribución 2026 (DOF)",
+    "url": "numeros-mapa-del-gasto-federalizado.html?e=JAL"
+   },
+   {
+    "valor": "$16,408",
+    "etq": "Por habitante en Jalisco: lugar 30 de 32",
+    "estado": "derivado",
+    "fuente": "Ramos 28 y 33 de 2026 entre la población a mitad de 2026 del CONAPO",
+    "url": "numeros-mapa-del-gasto-federalizado.html?e=JAL"
+   },
+   {
+    "valor": "$18,057",
+    "etq": "Por habitante, promedio nacional (suma de los 32 ÷ población del país)",
+    "estado": "derivado",
+    "fuente": "Misma base",
+    "url": "numeros-mapa-del-gasto-federalizado.html"
+   },
+   {
+    "valor": "Lugar 12 y lugar 29",
+    "etq": "Por habitante: en participaciones (Ramo 28) y en aportaciones (Ramo 33)",
+    "estado": "derivado",
+    "fuente": "Misma base",
+    "url": "numeros-mapa-del-gasto-federalizado.html?e=JAL"
+   },
+   {
+    "valor": "$12,000 a $13,000 millones",
+    "etq": "Lo que la Federación anunció para el agua de Guadalajara (anuncio, no presupuesto aprobado)",
+    "estado": "oficial",
+    "fuente": "Presidencia, conferencia del 21-10-2026",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "valor": "20.4 %",
+    "etq": "Los 30 mil millones que pide el PRI, frente a las participaciones y aportaciones 2026 de Jalisco",
+    "estado": "derivado",
+    "fuente": "$30,000 millones ÷ $147,379.7 millones × 100",
+    "url": "numeros-mapa-del-gasto-federalizado.html?e=JAL"
+   }
+  ],
+  "datos": [
+   {
+    "ico": "🗺️",
+    "tx": "El mapa del gasto federalizado, en Jalisco",
+    "url": "numeros-mapa-del-gasto-federalizado.html?e=JAL",
+    "de": "Participaciones, aportaciones y convenios de cada estado, por habitante."
+   },
+   {
+    "ico": "🧾",
+    "tx": "El estado de cuenta y la salud financiera de Jalisco",
+    "url": "herramienta-inspector-entes.html#ente=estatal:JAL",
+    "de": "Cuánto recauda por su cuenta, cuánto depende de la Federación, su deuda y lo que la ASF dejó por aclarar."
+   },
+   {
+    "ico": "🚱",
+    "tx": "Crisis ambientales: el agua de Guadalajara",
+    "url": "herramienta-ambiente-crisis.html",
+    "de": "El Acueducto, la planta potabilizadora, El Zapotillo y lo que nadie ha publicado."
+   },
+   {
+    "ico": "📦",
+    "tx": "Auditoría en imágenes: el Ramo 33",
+    "url": "auditoria-ramo-33.html",
+    "de": "Cómo se reparten las aportaciones y qué encuentra la ASF."
+   },
+   {
+    "ico": "🗓️",
+    "tx": "El itinerario del Paquete 2027",
+    "url": "numeros-paquete-2027-itinerario.html",
+    "de": "El Presupuesto de Egresos se aprueba a más tardar el 15 de noviembre."
+   }
+  ],
+  "glosario": [
+   {
+    "t": "Gasto federalizado",
+    "url": "glosario.html#Gasto-Federalizado"
+   },
+   {
+    "t": "Ramo 28 (participaciones)",
+    "url": "glosario.html#Ramo-28"
+   },
+   {
+    "t": "Ramo 33 (aportaciones)",
+    "url": "glosario.html#Ramo-33"
+   },
+   {
+    "t": "PEF (Presupuesto de Egresos de la Federación)",
+    "url": "glosario.html#PEF"
+   },
+   {
+    "t": "PIB (Producto Interno Bruto)",
+    "url": "glosario.html#PIB"
+   }
+  ],
+  "red": "Jalisco gasto federal por habitante PEF 2027 PRI 30 mil millones",
+  "sigue": [
+   {
+    "que": "El Presupuesto de Egresos 2027 aprobado (a más tardar el 15 de noviembre): si trae reasignaciones para Jalisco y cuánto",
+    "url": "https://gaceta.diputados.gob.mx/"
+   },
+   {
+    "que": "Que el dinero federal anunciado para el agua de Guadalajara aparezca en el Presupuesto 2027 con su programa y su monto",
+    "url": "https://www.ppef.hacienda.gob.mx/"
+   },
+   {
+    "que": "El gasto del Proyecto 2027 por entidad, para cotejar el lugar 24 de 32",
+    "url": "https://www.ppef.hacienda.gob.mx/"
+   },
+   {
+    "que": "La inversión federal en Jalisco año por año en la Cuenta Pública, para cotejar el 83 %",
+    "url": "https://www.cuentapublica.hacienda.gob.mx/"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "INEGI: Producto Interno Bruto por Entidad Federativa 2024, comunicado 156/25 (05-12-2025)",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibent/PIBE2024_CP.pdf"
+   },
+   {
+    "nombre": "Acuerdos de distribución de participaciones y aportaciones 2026 (DOF) y población del CONAPO, en la base de la plataforma",
+    "url": "numeros-mapa-del-gasto-federalizado.html"
+   },
+   {
+    "nombre": "Presidencia: versión estenográfica de la conferencia del 21-10-2026",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "nombre": "Punto de partida: Crónica Jalisco, «Lamenta Laura Haro abandono de Jalisco en presupuesto federal, pide reasignar 30 mil mdp para 2027» (27-10-2026)",
+    "url": "https://www.cronica.com.mx/jalisco/guadalajara/2026/10/27/lamenta-laura-haro-abandono-de-jalisco-en-presupuesto-federal-pide-reasignar-30-mil-mdp-para-2027/"
+   },
+   {
+    "nombre": "Prensa: Notisistema, «Acusa PRI recorte de 83% en inversión federal para Jalisco»",
+    "url": "https://www.notisistema.com/noticias/acusa-pri-recorte-de-83-en-inversion-federal-para-jalisco/"
+   }
+  ],
+  "actualizado": "29-10-2026"
+ },
+ {
+  "id": "senado-ley-de-ingresos-2027",
+  "seccion": "Al momento",
+  "icono": "🏛️",
+  "fecha": "28-10-2026",
+  "titulo": "El Senado aprueba la Ley de Ingresos 2027: de sus 10.6 billones, casi 1.5 son dinero prestado",
+  "balazo": "El pleno del Senado la aprobó 75 a 34 y sin cambios, así que va al Ejecutivo para publicarse. De los 10.6 billones de pesos que «prevé obtener», 9.2 billones son ingresos y el resto es dinero prestado. Lo que pagan los turistas extranjeros por entrar a México sube a 1,158 pesos, y el cambio al ISR para automotrices y gasolineras todavía no tiene un documento oficial que podamos abrir.",
+  "nota": {
+   "medio": "El Financiero",
+   "titulo": "Senado aprueba cambios al ISR y aumentos en cuotas de servicios y trámites para 2027",
+   "fecha": "28-10-2026",
+   "url": "https://www.elfinanciero.com.mx/nacional/2026/10/28/senado-aprueba-cambios-al-isr-y-aumentos-en-cuotas-de-servicios-y-tramites-para-2027/"
+  },
+  "circula": {
+   "red": "Instagram",
+   "cuenta": "@elfinanciero_mx (El Financiero)",
+   "fecha": "28 de octubre de 2026",
+   "texto": "El Senado aprobó la Ley de Ingresos y la Ley Federal de Derechos para 2027, que contemplan una recaudación de más de 10.6 billones de pesos… el pago de visitantes extranjeros pasará de 983 a mil 158 pesos… cambios al ISR para excluir a determinadas empresas automotrices y gasolineras de las restricciones a las deducciones… más de 6.2 billones provendrían de impuestos… endeudamiento de hasta 1.7 billones."
+  },
+  "cuerpo": [
+   "Qué pasó. Según el Canal del Congreso (28 de octubre), el pleno del Senado aprobó la Ley de Ingresos de la Federación para 2027 con 75 votos a favor y 34 en contra en lo general, y 73 a 33 en lo particular. Quedó «en sus términos», como la mandó la Cámara de Diputados el 15 de octubre, y se envió al Ejecutivo. La ley manda publicarla en el Diario Oficial a más tardar 20 días naturales después de aprobada (LFPRH, art. 42, fr. VI).",
+   "El punto ciego: no son 10.6 billones de «recaudación». La ley estima $10,636,488.1 millones en total, pero esa suma incluye el dinero que el gobierno pedirá prestado. Los ingresos que entran sin endeudarse, los presupuestarios, son $9,156,528.9 millones; la diferencia, $1,479,959.2 millones, son los ingresos por financiamiento, que la ley suma en su total. Y los 1.7 billones de deuda interna son un techo: lo máximo que puede contratar en el año, no deuda ya contratada.",
+   "De dónde sale el dinero. Los impuestos aportan $6,263,886.8 millones, el 58.9 % del total: $3,288,975.3 millones del ISR, $1,768,717.3 millones del IVA y $828,256.0 millones del IEPS, según expuso en tribuna el presidente de la Comisión de Hacienda del Senado. Pemex y la CFE tienen sus propios techos de deuda.",
+   "Los derechos. La Cámara de Diputados aprobó el 14 de octubre la Ley Federal de Derechos: la cuota que paga quien visita México sin trabajar aquí (el turista extranjero) sube 17.8 % y queda en 1,158 pesos, y lo que se recaude se reparte 57 % para la Defensa, 15 % para el Instituto Nacional de Migración y 28 % para la Tesorería. Que el Senado también la aprobó lo dicen los medios; el documento del Senado todavía no lo pudimos abrir.",
+   "Lo que falta probar. Los medios dicen que el Senado cambió la reforma al ISR para que la industria automotriz y quienes venden gasolina y diésel no tengan el nuevo límite a las deducciones de quien ingresa más de 50 millones de pesos, y que por eso esa ley regresa a la Cámara de Diputados. Hasta leer la minuta del Senado, eso va como pendiente: la falta es nuestra, porque el portal del Senado no abre desde la plataforma."
+  ],
+  "ejemplo": {
+   "tit": "La cuenta, con números redondos",
+   "txt": "Si la Ley de Ingresos 2027 fueran 100 pesos:",
+   "filas": [
+    [
+     "Impuestos",
+     "$59",
+     "$6,263,886.8 millones ÷ $10,636,488.1 millones × 100"
+    ],
+    [
+     "Otros ingresos (petroleros, cuotas, derechos, organismos…)",
+     "$27",
+     "($9,156,528.9 millones − $6,263,886.8 millones) ÷ $10,636,488.1 millones × 100"
+    ],
+    [
+     "Dinero prestado (financiamiento)",
+     "$14",
+     "($10,636,488.1 millones − $9,156,528.9 millones) ÷ $10,636,488.1 millones × 100"
+    ]
+   ],
+   "nota": "Es un ejemplo derivado con las cifras del Paquete Económico 2027 que la Ley de Ingresos aprobó sin cambios."
+  },
+  "cotejo": [
+   {
+    "dice": "El Senado aprobó la Ley de Ingresos para 2027",
+    "res": "consta",
+    "explica": "75 a 34 en lo general y 73 a 33 en lo particular; quedó en sus términos y se envió al Ejecutivo. Falta su publicación en el Diario Oficial.",
+    "fuente": "Canal del Congreso, «Senado aprueba Ley de Ingresos 2027 por 10.6 billones de pesos» (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "dice": "Contemplan una recaudación de más de 10.6 billones de pesos",
+    "res": "matiz",
+    "explica": "La cifra, $10,636,488.1 millones, consta, pero no es recaudación: es el total de la ley e incluye $1,479,959.2 millones de financiamiento. Lo que entra sin endeudarse son $9,156,528.9 millones.",
+    "fuente": "Canal del Congreso (28-10-2026) y Paquete Económico 2027 en la base de la plataforma",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "dice": "Más de 6.2 billones provendrían del cobro de impuestos",
+    "res": "consta",
+    "explica": "Son $6,263,886.8 millones, el 58.9 % de los ingresos estimados.",
+    "fuente": "Canal del Congreso (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "dice": "El endeudamiento previsto podría alcanzar hasta 1.7 billones de pesos",
+    "res": "consta",
+    "explica": "La ley autoriza deuda interna neta hasta por 1 billón 700 mil millones de pesos. Es un techo, no deuda contratada; Pemex y la CFE tienen techos aparte.",
+    "fuente": "Canal del Congreso (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "dice": "El pago de visitantes extranjeros al ingresar a México pasará de 983 a 1,158 pesos",
+    "res": "matiz",
+    "explica": "Constan los 1,158 pesos y la subida de 17.8 %, en la versión que aprobó la Cámara de Diputados; es la cuota de quien entra sin permiso para trabajar, el turista. Los 983 pesos de hoy no vienen en la nota oficial, aunque cuadran con esa subida (1,158 ÷ 1.178 ≈ 983, derivado).",
+    "fuente": "Canal del Congreso, «Cámara de Diputados aprueba Ley Federal de Derechos 2027» (14-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10318"
+   },
+   {
+    "dice": "El Senado aprobó también la Ley Federal de Derechos",
+    "res": "pendiente",
+    "explica": "La nota oficial del Senado que leímos solo trae la Ley de Ingresos. El voto de la Ley de Derechos no lo pudimos abrir.",
+    "fuente": "Canal del Congreso (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338",
+    "quien": "Falta de la plataforma: el dictamen y su votación están en la Gaceta del Senado, que no abre desde nuestra sesión",
+    "donde": "https://www.senado.gob.mx/66/gaceta_del_senado"
+   },
+   {
+    "dice": "Se excluye a automotrices y gasolineras de las restricciones a las deducciones de quien ingresa más de 50 millones, y la ley del ISR regresa a Diputados",
+    "res": "pendiente",
+    "explica": "Ningún documento oficial que pudimos abrir trae la reserva ni su votación. Cuando la Cámara de Diputados reciba la minuta, su texto quedará en la Gaceta Parlamentaria.",
+    "fuente": "El Financiero y otros medios (28-10-2026)",
+    "url": "https://www.elfinanciero.com.mx/nacional/2026/10/28/senado-aprueba-cambios-al-isr-y-aumentos-en-cuotas-de-servicios-y-tramites-para-2027/",
+    "quien": "Falta de la plataforma: la minuta del Senado no abre desde nuestra sesión; después la publicará la Gaceta de Diputados",
+    "donde": "https://gaceta.diputados.gob.mx/"
+   }
+  ],
+  "cifras": [
+   {
+    "valor": "$10,636,488.1 millones",
+    "etq": "Ley de Ingresos 2027: el total, con financiamiento",
+    "estado": "oficial",
+    "fuente": "Canal del Congreso (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "valor": "$9,156,528.9 millones",
+    "etq": "Ingresos presupuestarios 2027: lo que entra sin endeudarse",
+    "estado": "oficial",
+    "fuente": "Criterios Generales de Política Económica 2027 (en la base)",
+    "url": "numeros-paquete-2027-cifras.html"
+   },
+   {
+    "valor": "$1,479,959.2 millones",
+    "etq": "Financiamiento dentro del total (total − ingresos presupuestarios)",
+    "estado": "derivado",
+    "fuente": "Operación con las dos cifras anteriores",
+    "url": "numeros-paquete-2027-cifras.html"
+   },
+   {
+    "valor": "$6,263,886.8 millones",
+    "etq": "Impuestos estimados para 2027",
+    "estado": "oficial",
+    "fuente": "Canal del Congreso (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "valor": "75 a 34",
+    "etq": "Votación en lo general en el pleno del Senado (73 a 33 en lo particular)",
+    "estado": "oficial",
+    "fuente": "Canal del Congreso (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "valor": "$1,158",
+    "etq": "Cuota del visitante extranjero sin actividad remunerada en 2027 (+17.8 %)",
+    "estado": "oficial",
+    "fuente": "Canal del Congreso (14-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10318"
+   }
+  ],
+  "datos": [
+   {
+    "ico": "📊",
+    "tx": "Cómo se ve 2027: las cifras del Paquete Económico",
+    "url": "numeros-paquete-2027-cifras.html",
+    "de": "Ingresos, gasto, déficit y deuda de 2027 junto a 2026, con los Criterios Generales."
+   },
+   {
+    "ico": "🧾",
+    "tx": "Los impuestos del Paquete 2027",
+    "url": "numeros-paquete-2027-impuestos.html",
+    "de": "Qué impuestos cambian y cuánto se espera de cada uno."
+   },
+   {
+    "ico": "🗓️",
+    "tx": "El itinerario que manda la ley",
+    "url": "numeros-paquete-2027-itinerario.html",
+    "de": "Diputados a más tardar el 20 de octubre, el Senado el 31 y la publicación 20 días después."
+   },
+   {
+    "ico": "📉",
+    "tx": "La deuda",
+    "url": "numeros-la-deuda.html",
+    "de": "Cuánto debe el país y quién autoriza cada peso prestado."
+   },
+   {
+    "ico": "🔍",
+    "tx": "El cotejo de la Ley de Ingresos en Diputados: el techo de deuda y el perdón de multas",
+    "url": "noticias-auditavision.html#col-lif-2027-deuda-y-multas",
+    "de": "Lo que circuló el 15 de octubre, afirmación por afirmación."
+   }
+  ],
+  "glosario": [
+   {
+    "t": "LIF (Ley de Ingresos de la Federación)",
+    "url": "glosario.html#LIF"
+   },
+   {
+    "t": "Ingresos presupuestarios",
+    "url": "glosario.html#Ingresos-Presupuestarios"
+   },
+   {
+    "t": "Techo de endeudamiento neto",
+    "url": "glosario.html#Techo-de-Endeudamiento-Neto"
+   },
+   {
+    "t": "ISR",
+    "url": "glosario.html#ISR"
+   },
+   {
+    "t": "Derechos (contribución)",
+    "url": "glosario.html#Derechos"
+   }
+  ],
+  "red": "Senado Ley de Ingresos 2027 ISR automotrices gasolineras",
+  "sigue": [
+   {
+    "que": "La publicación de la Ley de Ingresos 2027 en el Diario Oficial (a más tardar 20 días naturales después de aprobada)",
+    "url": "https://www.dof.gob.mx/"
+   },
+   {
+    "que": "El voto del Senado sobre la Ley Federal de Derechos y su publicación en el Diario Oficial",
+    "url": "https://www.senado.gob.mx/66/gaceta_del_senado"
+   },
+   {
+    "que": "La minuta del ISR que regresa a la Cámara de Diputados: el texto de la excepción para automotrices y gasolineras y su votación",
+    "url": "https://gaceta.diputados.gob.mx/"
+   },
+   {
+    "que": "El Presupuesto de Egresos 2027, que la Cámara de Diputados debe aprobar a más tardar el 15 de noviembre",
+    "url": "https://gaceta.diputados.gob.mx/"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Canal del Congreso: Senado aprueba Ley de Ingresos 2027 por 10.6 billones de pesos (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "nombre": "Canal del Congreso: Cámara de Diputados aprueba Ley Federal de Derechos 2027 (14-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10318"
+   },
+   {
+    "nombre": "Canal del Congreso: Aprueban en San Lázaro Ley de Ingresos 2027 (15-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"
+   },
+   {
+    "nombre": "Paquete Económico 2027: Criterios Generales de Política Económica (en la base de la plataforma)",
+    "url": "numeros-paquete-2027-cifras.html"
+   },
+   {
+    "nombre": "Punto de partida: El Financiero, «Senado aprueba cambios al ISR y aumentos en cuotas de servicios y trámites para 2027» (28-10-2026)",
+    "url": "https://www.elfinanciero.com.mx/nacional/2026/10/28/senado-aprueba-cambios-al-isr-y-aumentos-en-cuotas-de-servicios-y-tramites-para-2027/"
+   }
+  ],
+  "actualizado": "29-10-2026"
+ },
+ {
+  "id": "imss-modalidad-40-gestores",
+  "seccion": "Al momento",
+  "icono": "⏱️",
+  "fecha": "28-10-2026",
+  "titulo": "El IMSS acota la Modalidad 40: lo que dice el Diario Oficial y lo que falta probar",
+  "balazo": "Desde el 22 de octubre, quien entre a la Modalidad 40 cotiza con su último salario o, cuando mucho, con una UMA más. El esquema de gestores y empresas fantasma que describió el director del IMSS todavía no tiene un documento público.",
+  "nota": {
+   "medio": "La Jornada",
+   "titulo": "Cambios a la modalidad 40, para frenar «abusos y fraudes»: Robledo",
+   "fecha": "28-10-2026",
+   "url": "https://www.jornada.com.mx/2026/10/28/politica/012n2pol"
+  },
+  "circula": {
+   "red": "La Jornada (prensa)",
+   "cuenta": "Zoé Robledo, director general del IMSS, citado por La Jornada",
+   "fecha": "28 de octubre de 2026",
+   "texto": "La Modalidad 40 del IMSS se acotó tras detectarse un esquema fraudulento de gestores que financiaban a los asegurados para pagar sus cotizaciones. En realidad se trataba de créditos que terminaba pagando el Estado mexicano, con pensiones que llegaban a incrementarse hasta mil por ciento. En otros casos, se les inscribía a empresas fantasma para seguir cotizando y cubrir las semanas requeridas, para luego incorporarse a la Modalidad 40."
+  },
+  "cuerpo": [
+   "Qué pasó. El 10 de octubre, el Consejo Técnico del IMSS aprobó un acuerdo que se publicó en el Diario Oficial el 21 de octubre y rige desde el día hábil siguiente, el 22. La Modalidad 40 (la ley la llama «continuación voluntaria en el régimen obligatorio») no desaparece: quien ya estaba inscrito sigue en las mismas condiciones hasta que termine el periodo que contrató, y conserva las semanas y los salarios que efectivamente pagó.",
+   "Qué cambió para quien se inscriba ahora. La ley dice que te inscribes «con el último salario o superior al que tenía en el momento de la baja» (art. 218), hasta el tope general de 25 veces (art. 28). El acuerdo pone, como medida temporal, un techo mucho más bajo: tu último salario registrado o hasta ese salario más una UMA ($3,566.22 al mes en 2026), nunca menos de un salario mínimo. Además, ya no se puede pagar hacia atrás, porque el aseguramiento cuenta desde la fecha de la solicitud; la inscripción será solo digital, y quien se asegura por su cuenta como trabajador independiente (art. 13, fracción I) ya no puede contratarla.",
+   "Por qué es dinero público. Las pensiones de quienes eligen el régimen de la ley de 1973 las paga el Gobierno Federal, no un fondo propio de cada trabajador (Ley del Seguro Social, transitorio duodécimo). Por eso una pensión más alta, lograda con cotizaciones altas en los últimos años, la termina pagando el erario. En el Presupuesto 2026 ese gasto pasa por el Ramo 19, Aportaciones a Seguridad Social, con $1,541,518.7 millones; el presupuesto no separa cuánto de eso corresponde a la Modalidad 40.",
+   "Lo que falta probar. El acuerdo no habla de fraudes, gestores ni empresas fantasma: dice que el Consejo «tomó conocimiento» de los informes de tres direcciones del IMSS, que no se han publicado. Los casos, el «mil por ciento» y las denuncias de las que habló el director general del IMSS, Zoé Robledo, son, por ahora, declaraciones. Una acusación no es una condena, y quien pagó su Modalidad 40 con su propio dinero no hizo nada indebido.",
+   "El punto ciego. La ley dice «último salario o superior» y el acuerdo le pone techo. Si un acuerdo del Consejo Técnico puede acotar lo que dice una ley del Congreso lo decidiría, en su caso, un tribunal. Mientras tanto, la medida vale hasta que el IMSS tenga su análisis financiero, que el propio acuerdo pide a más tardar seis meses después de emitido."
+  ],
+  "ejemplo": {
+   "tit": "La cuenta, con números redondos",
+   "txt": "Si tu último salario registrado ante el IMSS era de $10,000.00 al mes, esto es lo más alto con lo que podrías cotizar en la Modalidad 40:",
+   "filas": [
+    [
+     "Antes: la ley (arts. 218 y 28)",
+     "$89,155.50",
+     "25 × $3,566.22 (UMA mensual 2026)"
+    ],
+    [
+     "Desde el 22-10-2026: el acuerdo",
+     "$13,566.22",
+     "$10,000.00 + $3,566.22"
+    ]
+   ],
+   "nota": "Es un ejemplo derivado con la UMA mensual de 2026. Tu caso depende de tu historial de semanas y salarios."
+  },
+  "cotejo": [
+   {
+    "dice": "La Modalidad 40 del IMSS se acotó",
+    "res": "consta",
+    "explica": "El punto cuarto del acuerdo limita a los nuevos inscritos a su último salario registrado o hasta ese salario más una UMA, sin pagos hacia atrás. Es una medida temporal: dura hasta que el IMSS tenga su análisis financiero. Quien ya estaba inscrito conserva sus condiciones.",
+    "fuente": "DOF 21-10-2026, Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS, puntos cuarto y séptimo",
+    "url": "https://sidof.segob.gob.mx/notas/5801708"
+   },
+   {
+    "dice": "Se acotó tras detectarse un esquema fraudulento de gestores que financiaban a los asegurados para pagar sus cotizaciones",
+    "res": "pendiente",
+    "explica": "El acuerdo solo dice que el Consejo tomó conocimiento de los informes de las direcciones de Incorporación y Recaudación, de Prestaciones Económicas y Sociales y Jurídica; no los publica ni menciona a gestores. La ley pide que el asegurado pague sus cuotas por mes adelantado (art. 218), pero no dice de dónde debe salir el dinero: si un préstamo así fue fraude, lo tiene que probar una investigación.",
+    "fuente": "DOF 21-10-2026, Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS, punto primero",
+    "url": "https://sidof.segob.gob.mx/notas/5801708",
+    "quien": "IMSS: su H. Consejo Técnico y su Dirección Jurídica (los informes de la sesión del 10-10-2026 y las denuncias)",
+    "donde": "https://www.imss.gob.mx/transparencia"
+   },
+   {
+    "dice": "En realidad se trataba de créditos que terminaba pagando el Estado mexicano",
+    "res": "matiz",
+    "explica": "Consta que el Gobierno Federal paga las pensiones de quienes eligen el régimen de 1973: por eso una pensión más alta la paga el erario. Que esas cotizaciones se pagaran con préstamos de gestores no tiene, por ahora, documento público.",
+    "fuente": "Ley del Seguro Social, transitorio duodécimo (texto vigente, última reforma DOF 15-01-2026)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf"
+   },
+   {
+    "dice": "Pensiones que llegaban a incrementarse hasta mil por ciento",
+    "res": "pendiente",
+    "explica": "Ningún documento público trae los casos ni cómo se calculó ese porcentaje. Sin los casos no se puede comprobar ni descartar. El acuerdo ordena que la Dirección de Finanzas analice el efecto de la Modalidad 40 en la situación financiera del IMSS a más tardar seis meses después de emitido: ahí debería estar.",
+    "fuente": "DOF 21-10-2026, Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS, punto segundo",
+    "url": "https://sidof.segob.gob.mx/notas/5801708",
+    "quien": "IMSS: Dirección de Finanzas, Unidad de Riesgos Financieros y Actuariales (el análisis financiero, a más tardar el 10-04-2027)",
+    "donde": "https://www.imss.gob.mx/transparencia"
+   },
+   {
+    "dice": "Se les inscribía a empresas fantasma para seguir cotizando y cubrir las semanas requeridas",
+    "res": "pendiente",
+    "explica": "El IMSS no ha dicho qué empresas ni cuántos casos. Una empresa que factura operaciones simuladas aparece en la lista 69-B del SAT, que puedes consultar en nuestra Lista negra del SAT; dar de alta trabajadores que no existen se ve en los registros del propio IMSS, que no son públicos.",
+    "fuente": "DOF 21-10-2026, Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS, puntos primero y quinto",
+    "url": "https://sidof.segob.gob.mx/notas/5801708",
+    "quien": "IMSS: Dirección de Incorporación y Recaudación (qué patrones y cuántos casos)",
+    "donde": "https://www.imss.gob.mx/transparencia"
+   }
+  ],
+  "cifras": [
+   {
+    "valor": "+1 UMA",
+    "etq": "lo más que puede subir tu salario de cotización al entrar a la Modalidad 40 desde el 22-10-2026",
+    "estado": "oficial",
+    "fuente": "DOF 21-10-2026, Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS, punto cuarto",
+    "url": "https://sidof.segob.gob.mx/notas/5801708"
+   },
+   {
+    "valor": "25 veces",
+    "etq": "el tope general de cotización de la ley, al que antes podía llegar la Modalidad 40 (desde 2016 se mide en UMA)",
+    "estado": "oficial",
+    "fuente": "Ley del Seguro Social, arts. 28 y 218",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf"
+   },
+   {
+    "valor": "$3,566.22",
+    "etq": "una UMA al mes en 2026",
+    "estado": "oficial",
+    "fuente": "INEGI, UMA 2026 (DOF 09-01-2026)",
+    "url": "https://www.inegi.org.mx/temas/uma/"
+   },
+   {
+    "valor": "$1,541,518.7 millones",
+    "etq": "Ramo 19, Aportaciones a Seguridad Social, en 2026: por ahí pasan las pensiones que paga el Gobierno Federal",
+    "estado": "oficial",
+    "fuente": "PEF 2026, Anexo 1, pp. 33-34",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf"
+   },
+   {
+    "valor": "10-04-2027",
+    "etq": "a más tardar, el análisis financiero del IMSS (10-10-2026 + 6 meses)",
+    "estado": "derivado",
+    "fuente": "DOF 21-10-2026, Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS, punto segundo",
+    "url": "https://sidof.segob.gob.mx/notas/5801708"
+   }
+  ],
+  "datos": [
+   {
+    "ico": "📊",
+    "tx": "El estado de resultados del IMSS en 2025",
+    "url": "datos-salud-imss.html#sal-imss_dinero",
+    "de": "El seguro de Invalidez y Vida, uno de los dos a los que cotiza la Modalidad 40, cerró con un excedente de $108,197.4 millones; el de Enfermedad y Maternidad gastó $151,126.8 millones más de lo que ingresó, y todo el IMSS cerró con un faltante de $4,398.4 millones (Memoria Estadística 2025, cuadro XIII.45)."
+   },
+   {
+    "ico": "🏛️",
+    "tx": "La salud financiera del IMSS",
+    "url": "herramienta-inspector-entes.html#ente=federal:imss",
+    "de": "Su gasto en la Cuenta Pública 2025 y su ficha en el Auditor de entes, con sus documentos."
+   },
+   {
+    "ico": "🧾",
+    "tx": "Busca una empresa en la lista negra del SAT",
+    "url": "herramienta-inspector-efos.html",
+    "de": "Por RFC o por nombre: las empresas que el SAT presume que facturan operaciones simuladas (art. 69-B del Código Fiscal)."
+   },
+   {
+    "ico": "🔍",
+    "tx": "Contrasta otra nota de este tema",
+    "url": "herramienta-inspector-nota.html",
+    "de": "Pega la liga de una nota y la cotejamos contra los documentos oficiales."
+   }
+  ],
+  "glosario": [
+   {
+    "t": "Continuación voluntaria (Modalidad 40)",
+    "url": "glosario.html#Continuacion-Voluntaria"
+   },
+   {
+    "t": "UMA",
+    "url": "glosario.html#UMA"
+   },
+   {
+    "t": "Cuota obrera del IMSS",
+    "url": "glosario.html#Cuota-Obrera-del-IMSS"
+   },
+   {
+    "t": "Empresa fantasma",
+    "url": "glosario.html#Empresa-Fantasma"
+   },
+   {
+    "t": "IMSS",
+    "url": "glosario.html#Instituto-Mexicano-del-Seguro-Social"
+   }
+  ],
+  "red": "Modalidad 40 IMSS",
+  "sigue": [
+   {
+    "que": "El análisis financiero de la Modalidad 40 que el acuerdo pide al IMSS (a más tardar el 10-04-2027)",
+    "url": "https://www.imss.gob.mx/transparencia"
+   },
+   {
+    "que": "La propuesta de cambio a las reglas que la Dirección Jurídica debe llevar al Consejo Técnico (hasta 6 meses después del análisis)",
+    "url": "https://sidof.segob.gob.mx/notas/5801708"
+   },
+   {
+    "que": "Las denuncias que el IMSS dice haber presentado: en qué fiscalía y en qué etapa van",
+    "url": "https://www.gob.mx/fgr"
+   },
+   {
+    "que": "Si un tribunal revisa si un acuerdo del Consejo Técnico puede acotar el art. 218 de la ley",
+    "url": "https://www.scjn.gob.mx"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "DOF 21-10-2026, Acuerdo ACDO.AS2.HCT.101026/302.P.DG del Consejo Técnico del IMSS (texto íntegro en SIDOF)",
+    "url": "https://sidof.segob.gob.mx/notas/5801708"
+   },
+   {
+    "nombre": "Ley del Seguro Social, texto vigente (última reforma DOF 15-01-2026): arts. 28, 218 y transitorio duodécimo",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf"
+   },
+   {
+    "nombre": "Presupuesto de Egresos de la Federación 2026, Anexo 1, pp. 33-34 (Ramo 19)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/PEF_2026.pdf"
+   },
+   {
+    "nombre": "INEGI, Unidad de Medida y Actualización 2026",
+    "url": "https://www.inegi.org.mx/temas/uma/"
+   },
+   {
+    "nombre": "IMSS, Memoria Estadística 2025, cap. XIII, cuadro XIII.45",
+    "url": "https://www.imss.gob.mx/sites/all/statics/pdf/estadisticas/memoria/2025/13-RecursosHumanosMaterialesFinancieros.xlsx"
+   },
+   {
+    "nombre": "Punto de partida: La Jornada, «Cambios a la modalidad 40, para frenar “abusos y fraudes”: Robledo» (28-10-2026)",
+    "url": "https://www.jornada.com.mx/2026/10/28/politica/012n2pol"
+   }
+  ],
+  "actualizado": "28-10-2026"
+ },
+ {
+  "id": "seguro-popular-51-millones",
+  "seccion": "Verificado",
+  "icono": "🔎",
+  "titulo": "«Con el Seguro Popular se atendieron más de 51 millones; ahorita nada». Lo que dicen el INEGI y la ASF",
+  "balazo": "El Seguro Popular llegó a 53.5 millones de afiliados (ASF, Cuenta Pública 2018). Estar afiliado no es lo mismo que haber sido atendido, pero el golpe que se describe sí se ve en los números: las personas sin acceso a servicios de salud pasaron de 20.1 millones en 2018 a 50.4 millones en 2022, y en 2024 eran 44.5 millones (INEGI).",
+  "circula": {
+   "red": "Instagram (audio de un reel)",
+   "cuenta": "Testimonio de una persona que dice trabajar en los servicios de salud «toda la vida»; es una persona privada y no se le nombra. Llegó como audio, sin liga",
+   "fecha": "28 de octubre de 2026 (día en que llegó al Auditor)",
+   "texto": "—¿Cuántos años tiene trabajando usted aquí? —Toda la vida, gracias a Dios. Siempre, siempre, pero nunca como hoy. Pregúntale a la gente, la gente les va a decir. No digo que esto es nuevo. La corrupción no termina, pero esta ha sido la peor de toda la época en México. La peor. Cuando hicieron el Seguro Popular, yo pensé que estaba mal y resulta que fue lo mejor que se pudo haber instalado en México. Se atendieron más de 51 millones de mexicanos. Ahorita nada. Le dieron en la torre a la salud. ¿Por qué lo quitaron? No es un bienestar, es malestar. Malestar en todos los sentidos. Te voy a decir algo muy importante. Es muy feo llegar a viejo y no servir. Así es que nosotros vamos a servir con lo que podamos y como estemos."
+  },
+  "cuerpo": [
+   "Lo que dice este testimonio es serio, y por eso se coteja como cualquier cifra: con el documento oficial. Habla de tres cosas que sí se pueden medir: cuánta gente tenía el Seguro Popular, cuánta se quedó sin acceso a la salud después, y cuándo y cómo se quitó. Lo demás («la peor corrupción», «es malestar») es la opinión de quien lo vive, y se respeta como tal: no se coteja.",
+   "Cuánta gente tenía. El Seguro Popular era el brazo del Sistema de Protección Social en Salud para quien no tenía IMSS ni ISSSTE. Según la Auditoría Superior de la Federación, pasó de 5.3 millones de afiliados en 2004 a 53.5 millones en 2017, y para 2018 las 32 entidades acordaron mantener esa cobertura (auditoría MR-Seguro Popular, Cuenta Pública 2018, con datos de la Comisión Nacional de Protección Social en Salud). Así que «más de 51 millones» se queda corto, pero es la cifra de afiliados: una persona afiliada tenía derecho a atenderse, no necesariamente se atendió. Cuántas consultas dio en realidad está en los informes de resultados del propio sistema, que aún no integramos.",
+   "Cuánta gente se quedó sin acceso. El INEGI, que ahora mide la pobreza con la metodología del CONEVAL, cuenta a las personas con «carencia por acceso a los servicios de salud»: en 2018 eran 20.1 millones (16.2 %); en 2020, 35.7 millones (28.2 %); en 2022, 50.4 millones (39.1 %), y en 2024, 44.5 millones (34.2 %). Son 24.4 millones más que en 2018, aunque 5.9 millones menos que en el peor momento, 2022 (comunicado 118/25 del INEGI, cuadro 1). «Ahorita nada» no es literal: en 2024, 4.6 millones de personas dijeron estar afiliadas al IMSS-Bienestar y 13.7 millones se atienden en un centro de salud, hospital o instituto público. Pero el retroceso frente a 2018 es real y está medido.",
+   "¿Por qué lo quitaron? El cuándo y el cómo constan en la Ley General de Salud: el decreto del 29 de noviembre de 2019 sustituyó el Seguro Popular por el INSABI desde el 1 de enero de 2020, y el decreto del 29 de mayo de 2023 extinguió el INSABI y pasó sus recursos al IMSS-Bienestar. Tres instituciones en seis años. El porqué es una decisión política del Ejecutivo y del Congreso que aprobó las reformas; la plataforma no la juzga, la mide.",
+   "Ojo con la comparación. La medición cuenta si la persona está afiliada o tiene derecho a una institución, no si la atendieron bien ni si había medicinas. Y como las instituciones cambiaron, las series del sistema de salud se rompen en 2020 y en 2023. Quien diga «hoy se atiende más» o «hoy se atiende menos» tiene que decir de qué documento sale cada año.",
+   "Una nota de método: lo que circula es el audio de un reel de Instagram, y lo que se cotejó es su transcripción. A quien da el testimonio no se le nombra. Los dos documentos del INEGI y la auditoría de la ASF se leyeron completos. Las restas (24.4 y 5.9 millones) son nuestras: van como derivadas."
+  ],
+  "dato_curioso": "En 2022, 50.4 millones de personas no tenían acceso a servicios de salud: casi tantas como las que llegó a tener afiliadas el Seguro Popular en su mejor momento (53.5 millones).",
+  "cifras": [
+   {
+    "valor": "53.5 millones",
+    "etq": "Afiliados al Seguro Popular en 2017, cobertura que las 32 entidades acordaron mantener en 2018",
+    "estado": "oficial",
+    "fuente": "ASF, auditoría MR-Seguro Popular, Cuenta Pública 2018 (datos de la CNPSS)",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf"
+   },
+   {
+    "valor": "20.1 → 44.5 millones",
+    "etq": "Personas con carencia por acceso a los servicios de salud, 2018 y 2024 (16.2 % y 34.2 % de la población)",
+    "estado": "oficial",
+    "fuente": "INEGI, comunicado 118/25, Pobreza multidimensional 2024, cuadro 1",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+   },
+   {
+    "valor": "50.4 millones",
+    "etq": "Personas sin acceso a servicios de salud en 2022, el punto más alto de la serie (39.1 %)",
+    "estado": "oficial",
+    "fuente": "INEGI, comunicado 118/25, cuadro 1",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+   },
+   {
+    "valor": "24.4 millones",
+    "etq": "Personas sin acceso a servicios de salud de más en 2024 que en 2018. Operación: 44.5 − 20.1",
+    "estado": "derivado",
+    "fuente": "Cálculo con el cuadro 1 del comunicado 118/25 del INEGI",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "Con el Seguro Popular se atendieron más de 51 millones de mexicanos.",
+    "res": "matiz",
+    "explica": "El padrón llegó a 53.5 millones de afiliados (2017), así que la cifra se queda corta. El matiz: son afiliados, personas con derecho a atenderse, no personas atendidas. Cuántas se atendieron de verdad no lo tenemos todavía.",
+    "fuente": "ASF, auditoría MR-Seguro Popular, Cuenta Pública 2018",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf"
+   },
+   {
+    "dice": "Cuántas personas afiliadas al Seguro Popular recibieron atención.",
+    "res": "pendiente",
+    "explica": "Las consultas y servicios que dio el sistema venían en sus informes anuales de resultados, que la plataforma aún no ha integrado.",
+    "fuente": "ASF, auditoría MR-Seguro Popular, Cuenta Pública 2018",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf",
+    "quien": "Falta de la plataforma: la Comisión Nacional de Protección Social en Salud (Secretaría de Salud) publicaba cada año su Informe de Resultados del Sistema de Protección Social en Salud, con las consultas y los servicios dados a los afiliados; aún no lo integramos",
+    "donde": "https://www.gob.mx/salud"
+   },
+   {
+    "dice": "Ahorita nada. Le dieron en la torre a la salud.",
+    "res": "matiz",
+    "explica": "El retroceso consta: sin acceso a servicios de salud había 20.1 millones en 2018, 50.4 millones en 2022 y 44.5 millones en 2024. «Nada» no es literal: en 2024, 4.6 millones dijeron estar afiliados al IMSS-Bienestar y 13.7 millones se atienden en centros de salud u hospitales públicos.",
+    "fuente": "INEGI, comunicado 118/25 (cuadro 1) y presentación de resultados de Pobreza multidimensional 2024",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+   },
+   {
+    "dice": "¿Por qué lo quitaron?",
+    "res": "consta",
+    "explica": "Que se quitó, cuándo y por qué ley consta: decreto del DOF del 29-11-2019 (Seguro Popular → INSABI desde el 1-01-2020) y decreto del 29-05-2023 (se extingue el INSABI y pasa al IMSS-Bienestar). El porqué de fondo es una decisión política: no se coteja.",
+    "fuente": "Ley General de Salud, transitorios de los decretos del 29-11-2019 y del 29-05-2023",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf"
+   },
+   {
+    "dice": "La corrupción no termina, pero esta ha sido la peor de toda la época en México.",
+    "res": "matiz",
+    "explica": "Es una opinión, no una cifra: no hay un documento oficial que compare la corrupción de un sexenio con la de otro. Lo que sí se puede revisar son las auditorías de la ASF de cada año, y el Seguro Popular también tuvo las suyas.",
+    "fuente": "ASF, auditoría MR-Seguro Popular, Cuenta Pública 2018",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf"
+   },
+   {
+    "dice": "No es un bienestar, es malestar.",
+    "res": "matiz",
+    "explica": "Es la opinión de quien lo vive, y se respeta: no se coteja. Lo medible está arriba: cuánta gente se quedó sin acceso y cuándo cambió el sistema.",
+    "fuente": "INEGI, comunicado 118/25",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "Los informes de resultados del Sistema de Protección Social en Salud (2012 a 2019): consultas y servicios reales a los afiliados, para compararlos con los del IMSS-Bienestar",
+    "url": "https://www.gob.mx/salud"
+   },
+   {
+    "que": "Los servicios y el gasto del IMSS-Bienestar en 2025, que la plataforma aún no encuentra publicados",
+    "url": "datos-salud-sistema.html#sal-transicion"
+   },
+   {
+    "que": "Las auditorías de la ASF al INSABI (2020 a 2023) y al IMSS-Bienestar: qué pasó con el dinero que heredaron del Seguro Popular",
+    "url": "https://www.asf.gob.mx/"
+   },
+   {
+    "que": "La medición de pobreza 2026 del INEGI, para ver si la carencia de acceso a la salud sigue bajando",
+    "url": "https://www.inegi.org.mx/desarrollosocial/pm/"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "INEGI, Comunicado de prensa 118/25, Pobreza multidimensional 2024 (13-08-2025)",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pm/pm2025_08.pdf"
+   },
+   {
+    "nombre": "INEGI, Pobreza multidimensional 2024, presentación de resultados",
+    "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_presentacion_2024.pdf"
+   },
+   {
+    "nombre": "ASF, Recursos federales transferidos a través del Acuerdo de Coordinación, MR-Seguro Popular, Cuenta Pública 2018",
+    "url": "https://www.asf.gob.mx/Trans/Informes/IR2018b/Documentos/Auditorias/2018_MR-SEGURO%20POPULAR_a.pdf"
+   },
+   {
+    "nombre": "Ley General de Salud, texto vigente (Cámara de Diputados)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf"
+   },
+   {
+    "nombre": "Auditavisión, Datos · Salud pública: del Seguro Popular al IMSS-Bienestar",
+    "url": "datos-salud-sistema.html#sal-transicion"
+   }
+  ],
+  "actualizado": "28 de octubre de 2026"
+ },
+ {
+  "id": "isssteson-oxigeno-pensiones-fallecidos",
+  "seccion": "Verificado",
+  "icono": "🔎",
+  "titulo": "ISSSTESON: oxígeno pagado a un paciente fallecido y pensiones a personas muertas. ¿Dónde está el dinero?",
+  "balazo": "Las cifras de la nota constan en la auditoría del ISAF al ISSSTESON del primer semestre de 2025. Pero el mismo informe responde dónde está el dinero: de los $2,990,499 en pensiones, $2,458,447 eran cheques que se cancelaron sin cobrarse, $158,619 ya se recuperaron y faltan $373,438 por devolver. Del oxígeno, los $158,400 siguen sin comprobarse.",
+  "circula": {
+   "red": "Instagram (audio de un reel)",
+   "cuenta": "Audio de un reel que nos compartiste sin liga; lo que se coteja es su transcripción, abajo",
+   "fecha": "28 de octubre de 2026 (día en que llegó al Auditor)",
+   "texto": "¿Dónde está todo este dinero? No hallan si los beneficiados, como bien comentaban, por segundo año consecutivo en la compra de oxígeno a domicilio, pues no pudieron acreditarse la entrega a pacientes por más de 150,000 pesos y volvieron a pagar el oxígeno de un paciente que ya había fallecido el 9 de mayo de 2024. Además, pagaron 2,990,499 pesos en pensiones y jubilaciones a personas que ya estaban muertas según las actas de defunción por el Registro Civil. Morena nos lleva a la justicia social hasta la tumba."
+  },
+  "cuerpo": [
+   "La nota no habla de la Auditoría Superior de la Federación: sus cifras vienen del Instituto Superior de Auditoría y Fiscalización de Sonora (ISAF), que revisa las cuentas del gobierno del estado. El informe es el 2025AE0109010005, la auditoría integral al segundo trimestre de 2025 (lo acumulado de enero a junio) del Instituto de Seguridad y Servicios Sociales de los Trabajadores del Estado de Sonora (ISSSTESON), que da salud y pensiones a la burocracia estatal. Se notificó en marzo de 2026. En ese semestre el Instituto gastó (devengó) $6,322.4 millones, y el ISAF revisó el 86 %.",
+   "El oxígeno. En diciembre de 2024 el ISSSTESON compró oxígeno a domicilio para 121 pacientes a Biosistemas y Seguridad Privada, S.A. de C.V., y lo pagó el 14 de marzo de 2025: $173,792. Solo $15,392 tenían el vale con que el Departamento de Servicios Generales autoriza cada entrega, así que $158,400 no se pudieron comprobar. En esa factura venía un paciente que murió el 9 de mayo de 2024, siete meses antes. Además, el gasto de 2024 se cargó al presupuesto de 2025 y se respaldó con un contrato que empezó a valer el 1 de enero de 2025 (observación 2025AE005FN0072, pp. 26 a 30 del informe).",
+   "Sí es la segunda vez. En la auditoría del mismo semestre de 2024 (informe 2024AE0109010012), el ISAF ya había encontrado $358,643 de oxígeno de enero a abril de 2024 sin vale y tres pacientes cobrados después de morir. El proveedor ofreció entonces una nota de crédito, y el ISSSTESON prometió revisar cada mes la lista de defunciones. El ISAF la llama falla «recurrente».",
+   "Las pensiones. El ISAF cruzó la nómina con la plataforma del Registro Civil de Sonora y encontró 138 pagos, de enero a junio de 2025, a 129 pensiones de personas que ya habían muerto: $2,990,499 (observación 2025AE005FN0145, pp. 67 a 74). La mayoría fueron del mes siguiente a la muerte (126 de los 138 pagos), cuando la baja todavía no llegaba a la nómina. Pero no todos: una pensión se siguió pagando seis meses de 2025 a una persona que murió en abril de 2020.",
+   "¿Dónde está el dinero? El propio informe lo cuenta. 114 de esos pagos eran cheques que nunca se cobraron y se cancelaron: $2,458,447. El banco revirtió 4 depósitos ($79,086) y 4 más se descontaron de los gastos de funeral o del pago póstumo a la familia ($79,533). Faltan $373,438, de 18 pagos, que el ISSSTESON debe devolver a su cuenta. Ni esto ni lo del oxígeno se ha solventado: si no se aclara, el ISAF lo turna a la autoridad que determina responsabilidades. Una observación no es una condena (Constitución, art. 20, apartado B, fr. I).",
+   "Una nota de método: lo que circula es el audio de un reel de Instagram, y lo que se cotejó es su transcripción; sin liga, no citamos a la cuenta que lo publicó. Un reel nunca es fuente: lo que vale es el informe. Los dos informes del ISAF se leyeron completos. Las cuentas «126 de 138» y la de la pensión de 2020 son nuestras, de la tabla del informe: van como derivadas. Los números de pensión y de afiliación no se publican."
+  ],
+  "dato_curioso": "Una pensión del ISSSTESON se pagó seis veces en 2025 (de enero a junio, $83,435 en total) a una persona que, según el Registro Civil, murió el 22 de abril de 2020.",
+  "cifras": [
+   {
+    "valor": "$2,990,499",
+    "etq": "Pensiones y jubilaciones pagadas de enero a junio de 2025 después de la fecha de defunción (138 pagos)",
+    "estado": "oficial",
+    "fuente": "ISAF, informe 2025AE0109010005, observación 2025AE005FN0145",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   },
+   {
+    "valor": "$373,438",
+    "etq": "Lo que el ISSSTESON aún debe devolver de esos pagos (18 pagos); el resto eran cheques cancelados ($2,458,447) o ya se recuperó ($158,619)",
+    "estado": "oficial",
+    "fuente": "ISAF, informe 2025AE0109010005, pp. 70 a 74",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   },
+   {
+    "valor": "$158,400",
+    "etq": "Oxígeno a domicilio de diciembre de 2024 pagado sin vale que compruebe la entrega (de $173,792 facturados)",
+    "estado": "oficial",
+    "fuente": "ISAF, informe 2025AE0109010005, observación 2025AE005FN0072",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   },
+   {
+    "valor": "126 de 138",
+    "etq": "Pagos de pensión que fueron del mes siguiente a la muerte. Operación: mes del pago menos mes de la defunción, renglón por renglón de la tabla del ISAF",
+    "estado": "derivado",
+    "fuente": "Cálculo con la tabla de la observación 2025AE005FN0145",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "Por segundo año consecutivo, en la compra de oxígeno a domicilio no pudieron acreditar la entrega a pacientes por más de 150,000 pesos.",
+    "res": "consta",
+    "explica": "$158,400 sin vale de autorización en la factura de diciembre de 2024 (pagada en marzo de 2025). El ISAF lo marca como recurrente: en 2024 fueron $358,643 de enero a abril.",
+    "fuente": "ISAF, informes 2025AE0109010005 (pp. 26 a 30) y 2024AE0109010012 (pp. 33 a 40)",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   },
+   {
+    "dice": "Volvieron a pagar el oxígeno de un paciente que ya había fallecido el 9 de mayo de 2024.",
+    "res": "consta",
+    "explica": "El ISAF lo dice así: se pagó el oxígeno de diciembre de 2024 a un paciente que murió el 9 de mayo de 2024. «Volvieron» también consta: en 2024 fueron tres pacientes.",
+    "fuente": "ISAF, informe 2025AE0109010005, observación 2025AE005FN0072, inciso b",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   },
+   {
+    "dice": "Pagaron 2,990,499 pesos en pensiones y jubilaciones a personas que ya estaban muertas según las actas del Registro Civil.",
+    "res": "matiz",
+    "explica": "La cifra consta, cotejada contra la plataforma del Registro Civil de Sonora. El matiz: $2,458,447 eran cheques que nunca se cobraron y se cancelaron, y $158,619 ya se recuperaron. Lo que salió y no ha vuelto son $373,438. Y 126 de los 138 pagos fueron del mes siguiente a la muerte: falla de control, no necesariamente un desvío.",
+    "fuente": "ISAF, informe 2025AE0109010005, observación 2025AE005FN0145, pp. 67 a 74",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   },
+   {
+    "dice": "¿Dónde está todo este dinero?",
+    "res": "matiz",
+    "explica": "El informe responde casi todo: $2,458,447 no salieron (cheques cancelados), $79,086 los devolvió el banco y $79,533 se descontaron de gastos de funeral y pagos póstumos. Lo que falta: $373,438 de pensiones y los $158,400 del oxígeno, que el ISAF pide devolver con intereses si no se comprueban.",
+    "fuente": "ISAF, informe 2025AE0109010005",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   },
+   {
+    "dice": "Ya se devolvieron los $373,438 de pensiones y los $158,400 del oxígeno.",
+    "res": "pendiente",
+    "explica": "Al cierre del informe (marzo de 2026) las dos observaciones seguían sin solventar. No hemos encontrado el seguimiento publicado.",
+    "fuente": "ISAF, informes de Cuenta Pública",
+    "url": "https://isaf.gob.mx/informes/cuenta-publica",
+    "quien": "Le toca al ISSSTESON acreditar ante el ISAF el reintegro y la cancelación del gasto (Ley de Fiscalización Superior para el Estado de Sonora, art. 50). Falta de la plataforma: no hemos encontrado publicado el seguimiento posterior al informe de marzo de 2026",
+    "donde": "https://isaf.gob.mx/informes/cuenta-publica"
+   },
+   {
+    "dice": "Morena nos lleva a la justicia social hasta la tumba.",
+    "res": "matiz",
+    "explica": "Es una opinión política, no una cifra: no se coteja. El informe no habla de partidos: observa a una institución, el ISSSTESON, y si hay responsables los determina la autoridad, persona por persona.",
+    "fuente": "ISAF, informe 2025AE0109010005",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "El seguimiento del ISAF: si el ISSSTESON devolvió los $373,438 de pensiones y los $158,400 del oxígeno, o si se turnó a la autoridad",
+    "url": "https://isaf.gob.mx/informes/cuenta-publica"
+   },
+   {
+    "que": "La auditoría del ISAF a la Cuenta Pública 2025 completa del ISSSTESON (el segundo semestre)",
+    "url": "https://isaf.gob.mx/informes/cuenta-publica"
+   },
+   {
+    "que": "Si se aplicó la nota de crédito que ofreció el proveedor en 2025 por los pacientes fallecidos de 2024",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/22455"
+   },
+   {
+    "que": "Los contratos federales de Biosistemas y Seguridad Privada en ComprasMX (31 en 2025, sobre todo con el IMSS y el IMSS-Bienestar)",
+    "url": "contratos-publicos.html"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "ISAF, Informe individual de la auditoría integral 2025AE0109010005 al ISSSTESON, segundo trimestre de 2025 (notificado en marzo de 2026)",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/24290"
+   },
+   {
+    "nombre": "ISAF, Informe individual de la auditoría integral 2024AE0109010012 al ISSSTESON, segundo trimestre de 2024 (notificado en marzo de 2025)",
+    "url": "https://sigas.isaf.gob.mx/api/File/Informe/22455"
+   },
+   {
+    "nombre": "ISAF, informes de Cuenta Pública",
+    "url": "https://isaf.gob.mx/informes/cuenta-publica"
+   }
+  ],
+  "actualizado": "28 de octubre de 2026"
+ },
+ {
+  "id": "ine-oic-auditorias-consejerias",
+  "seccion": "Verificado",
+  "icono": "🔎",
+  "titulo": "¿Auditarán también las oficinas de los consejeros del INE? Lo que permite la ley y lo que se denunció en conferencia",
+  "balazo": "Sí: la ley del INE dice que los consejeros son servidores públicos del Instituto y que ninguna área puede negarse a una revisión de su Órgano Interno de Control. Pero ese Órgano depende, en lo administrativo, de la presidencia que tendría que revisar, y lo que se dijo de sueldos, plazas y cuentas bancarias todavía no tiene un solo documento.",
+  "circula": {
+   "red": "Conferencia de prensa de las consejerías del INE",
+   "cuenta": "Pregunta de una persona reportera (versión estenográfica de Central Electoral)",
+   "fecha": "27 de octubre de 2026",
+   "texto": "Y me voy a permitir dar un mensaje a la estructura, porque se tienen que quitar el miedo, el miedo a denunciar y el miedo a decir las cosas como tienen que ser. Por años escuchamos a trabajadores que nos decían lo que estaba pasando y hasta ahora, gracias a Dios, con bien documentado, un periódico logró tener las pruebas para decir lo que estaba pasando en este instituto. Así que yo les digo a los trabajadores que nos pueden estar escuchando que por favor se armen de valor y que si no tienen confianza en las instituciones o en la gente a la que tienen que denunciar aquí en el INE, que se acerquen con nosotros los reporteros, porque vamos a seguir haciendo nuestro trabajo y vamos a seguir denunciando lo que está mal dentro del instituto. Y pregunta concreta para ustedes, consejeros, dicen que se necesitan hacer más auditorías, que el órgano interno de control tiene que deslindar responsabilidades y todo eso. ¿Eso incluye someter a sus oficinas a estas auditorías? Porque sabemos de trabajadores que nos han dicho que les descuentan de su sueldo para quedarse con el dinero, porque nos han dado también ya las cuentas bancarias del órgano interno de control en donde también les rentan las plazas. Y donde hay vocales ejecutivos, vocales distritales y locales, también candidatos a los que han recibido amenazas o que les piden dinero para poder tener audiencias o para poder estar en una lista de candidatos. ¿Hasta ahí le van a entrar? ¿Hasta ahí van a meter a sus oficinas también a las auditorías? Porque si ya se destapó la cloaca, creo que tiene que salir toda la cochinada, porque queremos un INE fuerte y confiable, como hasta hace unos años confiábamos muchos mexicanos en este instituto."
+  },
+  "cuerpo": [
+   "Tras la renuncia anunciada de Guadalupe Taddei, las consejerías del INE dieron una conferencia de prensa. Ahí se preguntó si las auditorías que ellas mismas piden alcanzarán a sus propias oficinas, y se denunciaron descuentos de sueldo, renta de plazas, amenazas y cobros a quienes buscan una audiencia o un lugar en una lista. La pregunta consta en la versión estenográfica que publicó el INE; su texto se tomó del buscador, porque el sitio del INE no abre desde la plataforma.",
+   "¿Pueden auditarse las oficinas de los consejeros? La ley dice que sí. El artículo 478 de la LGIPE cuenta como servidores públicos del Instituto al consejero presidente, a los consejeros del Consejo General, de los consejos locales y distritales, a los vocales ejecutivos y a toda persona con empleo o cargo en el INE. El Órgano Interno de Control fiscaliza los ingresos y egresos del Instituto (art. 487), revisa los recursos «a cargo de las áreas y órganos del Instituto», puede visitar sus sedes y recibe denuncias contra cualquiera de sus servidores públicos (art. 490, incisos a, e, l y m). Y todos los órganos están obligados a permitirle la revisión (art. 492). Lo único que no puede tocar son las decisiones electorales (art. 478, numeral 2).",
+   "Lo que pocas veces se dice: la Constitución adscribe ese Órgano, en lo administrativo, a la presidencia del Consejo General (art. 41, base V, apartado A), la misma oficina que tendría que revisar, y su estructura, personal y recursos los aprueba el Consejo General a propuesta de su titular (LGIPE, art. 487, numeral 5). Su contrapeso es externo: el titular lo designa la Cámara de Diputados con dos terceras partes de los votos y se coordina con la Auditoría Superior de la Federación. El actual, Víctor Hugo Carvente Contreras, fue designado el 10 de diciembre de 2024 (decreto del DOF del 13 de diciembre de 2024) por seis años.",
+   "Lo que se denunció (descuentos de sueldo, plazas rentadas, cuentas bancarias del Órgano, cobros a aspirantes) no tiene todavía ningún documento oficial: es la palabra de quien pregunta, que dice tener testimonios y estados de cuenta. Una acusación no es una condena (Constitución, art. 20, apartado B, fr. I). Si alguien quiere denunciar, la ley le da dos caminos: el propio Órgano Interno de Control (art. 490, inciso l) y, si hay delito, la Fiscalía Especializada en Combate a la Corrupción (art. 487).",
+   "Una nota de método: las páginas del INE y las notas de prensa no abrieron desde la plataforma. La pregunta se tomó tal como la muestra el buscador sobre la versión estenográfica; las leyes, el decreto y la encuesta del INEGI se consultaron completos."
+  ],
+  "dato_curioso": "La confianza en los institutos electorales bajó de 54.7 % en 2023 a 48.1 % en 2025, según la encuesta de calidad gubernamental del INEGI: en 2025, menos de la mitad dijo confiar en ellos.",
+  "cifras": [
+   {
+    "valor": "48.1 %",
+    "etq": "Personas que confían en los institutos electorales (INE y los de los estados) en 2025; 54.7 % en 2023 y 53.1 % en 2021",
+    "estado": "oficial",
+    "fuente": "INEGI, ENCIG 2025 (p. 50) y ENCIG 2023 (p. 212), principales resultados",
+    "url": "https://www.inegi.org.mx/contenidos/programas/encig/2025/doc/encig2025_principales_resultados.pdf"
+   },
+   {
+    "valor": "59.9 %",
+    "etq": "Personas que creen que en los institutos electorales la corrupción es muy frecuente o frecuente (2025)",
+    "estado": "oficial",
+    "fuente": "INEGI, ENCIG 2025, principales resultados, p. 50",
+    "url": "https://www.inegi.org.mx/contenidos/programas/encig/2025/doc/encig2025_principales_resultados.pdf"
+   },
+   {
+    "valor": "10/12/2024",
+    "etq": "Día en que la Cámara de Diputados designó al titular del Órgano Interno de Control del INE, por seis años",
+    "estado": "oficial",
+    "fuente": "Decreto de la Cámara de Diputados, DOF 13-12-2024",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/marjur/marco/Dip_decreto_OIC_INE_13dic24.pdf"
+   },
+   {
+    "valor": "$28,288.0 millones",
+    "etq": "Gasto ejercido del INE en 2025, el dinero que su Órgano Interno de Control debe fiscalizar",
+    "estado": "oficial",
+    "fuente": "SHCP, Cuenta Pública 2025, datos abiertos",
+    "url": "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/BD_Cuenta_Publica/CSV/cuenta_publica_2025_gf_ecd_epe.csv"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "Un periódico logró tener las pruebas para decir lo que estaba pasando en este instituto.",
+    "res": "matiz",
+    "explica": "Hubo reportajes de prensa, y el INE publicó el 24 de octubre de 2026 que la Auditoría Superior abrió una investigación de oficio. Pero lo que publica un medio es punto de partida: ninguna autoridad ha resuelto todavía que haya falta o delito. Lo que consta y lo que no está en la columna sobre la renuncia de Guadalupe Taddei.",
+    "fuente": "INE, Central Electoral, 24-10-2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/24/la-presidencia-del-ine-respalda-la-investigacion-de-la-asf-y-reafirma-su-compromiso-con-el-estado-de-derecho/"
+   },
+   {
+    "dice": "Los consejeros dicen que se necesitan más auditorías y que el Órgano Interno de Control tiene que deslindar responsabilidades.",
+    "res": "consta",
+    "explica": "El 27 de octubre de 2026 las consejerías anunciaron una transición «basada en la colegialidad, la transparencia y la continuidad» y, según el texto que muestra el buscador, acordaron impulsar a través del Órgano Interno de Control la cooperación con las investigaciones.",
+    "fuente": "INE, Central Electoral, 27-10-2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/27/inician-consejerias-electorales-una-transicion-institucional-basada-en-la-colegialidad-la-transparencia-y-la-continuidad-del-ine/"
+   },
+   {
+    "dice": "¿Eso incluye someter a sus oficinas a estas auditorías?",
+    "res": "consta",
+    "explica": "La ley lo permite: los consejeros son servidores públicos del Instituto (LGIPE, art. 478), el Órgano revisa los recursos de todas las áreas y órganos y puede visitar sus sedes (art. 490), y ningún órgano puede negarse (art. 492). No puede revisar decisiones electorales (art. 478, numeral 2). Por juicio político responden ante el Congreso (Constitución, art. 110).",
+    "fuente": "LGIPE, texto vigente (última reforma DOF 02-06-2026), arts. 478, 487, 490 y 492",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGIPE.pdf"
+   },
+   {
+    "dice": "Respuesta de las consejeras y los consejeros a esta pregunta",
+    "res": "pendiente",
+    "explica": "Según la prensa, negaron conocer actos irregulares y dijeron estar dispuestos a colaborar. La versión estenográfica la tiene, pero no la pudimos leer completa: hasta cotejarla, no se cita.",
+    "fuente": "INE, versión estenográfica del 27-10-2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/27/version-estenografica-de-la-conferencia-de-prensa-que-ofrecieron-consejeras-y-consejeros-electorales-a-diversos-medios-de-comunicacion-27-de-octubre-de-2026/",
+    "quien": "Falta de la plataforma: el INE publicó la versión estenográfica en Central Electoral, pero su sitio no abre desde la plataforma; hay que leer la respuesta completa y cotejarla",
+    "donde": "https://centralelectoral.ine.mx/2026/10/27/version-estenografica-de-la-conferencia-de-prensa-que-ofrecieron-consejeras-y-consejeros-electorales-a-diversos-medios-de-comunicacion-27-de-octubre-de-2026/"
+   },
+   {
+    "dice": "A trabajadores les descuentan de su sueldo para quedarse con el dinero.",
+    "res": "no consta",
+    "explica": "No hay documento oficial: es lo que, según quien pregunta, le dijeron trabajadores. Una acusación no es una condena. Si ocurre, lo investiga el Órgano Interno de Control (LGIPE, art. 490, inciso l) y, si es delito, la Fiscalía Especializada en Combate a la Corrupción (art. 487).",
+    "fuente": "Sin documento oficial",
+    "url": ""
+   },
+   {
+    "dice": "Nos han dado las cuentas bancarias del Órgano Interno de Control en donde también les rentan las plazas.",
+    "res": "no consta",
+    "explica": "Las cuentas no se han publicado ni las ha revisado ninguna autoridad que lo haya informado. El Órgano Interno de Control es justo el señalado, así que su investigación no bastaría: su titular responde por la Ley General de Responsabilidades Administrativas (LGIPE, art. 489) y lo designó la Cámara de Diputados.",
+    "fuente": "Sin documento oficial",
+    "url": ""
+   },
+   {
+    "dice": "Vocales ejecutivos, distritales y locales; candidatos amenazados o a los que les piden dinero para tener audiencias o para estar en una lista.",
+    "res": "no consta",
+    "explica": "Sin documento oficial. Según la prensa, se refería a aspirantes a consejerías de los institutos electorales de los estados, que designa el Consejo General del INE (Constitución, art. 116, fr. IV, inciso c, 2o.): de ahí las listas.",
+    "fuente": "Sin documento oficial",
+    "url": ""
+   },
+   {
+    "dice": "Queremos un INE fuerte y confiable, como hasta hace unos años confiábamos muchos mexicanos en este instituto.",
+    "res": "matiz",
+    "explica": "La confianza sí bajó: 53.1 % en 2021, 54.7 % en 2023 y 48.1 % en 2025, según el INEGI. El matiz: la encuesta mide «institutos electorales», el INE junto con los de los estados, no el INE solo.",
+    "fuente": "INEGI, ENCIG 2025, principales resultados, p. 50",
+    "url": "https://www.inegi.org.mx/contenidos/programas/encig/2025/doc/encig2025_principales_resultados.pdf"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "La respuesta completa de las consejerías en la versión estenográfica del 27 de octubre de 2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/27/version-estenografica-de-la-conferencia-de-prensa-que-ofrecieron-consejeras-y-consejeros-electorales-a-diversos-medios-de-comunicacion-27-de-octubre-de-2026/"
+   },
+   {
+    "que": "Los informes semestral y anual del Órgano Interno de Control al Consejo General (LGIPE, art. 489), con lo que investigó y sancionó",
+    "url": "https://www.ine.mx/"
+   },
+   {
+    "que": "Cuánto presupuesto y cuánto personal tiene el Órgano Interno de Control del INE en 2026 (lo aprueba el Consejo General, art. 487)",
+    "url": "https://www.ine.mx/"
+   },
+   {
+    "que": "Los resultados de la Auditoría Superior sobre las contrataciones del INE",
+    "url": "https://www.asf.gob.mx/"
+   },
+   {
+    "que": "El caso que lo originó: la renuncia de Guadalupe Taddei y lo que consta de Cajas Graf",
+    "url": "noticias-auditavision.html#col-taddei-renuncia-ine-contratos"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "INE, Central Electoral: versión estenográfica de la conferencia de prensa de las consejerías (27-10-2026)",
+    "url": "https://centralelectoral.ine.mx/2026/10/27/version-estenografica-de-la-conferencia-de-prensa-que-ofrecieron-consejeras-y-consejeros-electorales-a-diversos-medios-de-comunicacion-27-de-octubre-de-2026/"
+   },
+   {
+    "nombre": "INE, Central Electoral: Inician consejerías electorales una transición institucional (27-10-2026)",
+    "url": "https://centralelectoral.ine.mx/2026/10/27/inician-consejerias-electorales-una-transicion-institucional-basada-en-la-colegialidad-la-transparencia-y-la-continuidad-del-ine/"
+   },
+   {
+    "nombre": "Ley General de Instituciones y Procedimientos Electorales, texto vigente (última reforma DOF 02-06-2026), arts. 478 a 493",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGIPE.pdf"
+   },
+   {
+    "nombre": "Constitución Política, texto vigente (última reforma DOF 07-10-2026), arts. 20, 41, 110 y 116",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+   },
+   {
+    "nombre": "Decreto por el que la Cámara de Diputados designa al titular del Órgano Interno de Control del INE (DOF 13-12-2024)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/marjur/marco/Dip_decreto_OIC_INE_13dic24.pdf"
+   },
+   {
+    "nombre": "INEGI, Encuesta Nacional de Calidad e Impacto Gubernamental 2025, principales resultados",
+    "url": "https://www.inegi.org.mx/contenidos/programas/encig/2025/doc/encig2025_principales_resultados.pdf"
+   },
+   {
+    "nombre": "INEGI, Encuesta Nacional de Calidad e Impacto Gubernamental 2023, principales resultados",
+    "url": "https://www.inegi.org.mx/contenidos/programas/encig/2023/doc/encig2023_principales_resultados.pdf"
+   }
+  ],
+  "actualizado": "28 de octubre de 2026"
+ },
+ {
+  "id": "ine-contratos-desde-cordova",
+  "seccion": "Verificado",
+  "icono": "🗳️",
+  "titulo": "¿Investigarán a Lorenzo Córdova? Lo que pidió la Presidenta sobre los contratos del INE y lo que dijo de la UIF",
+  "balazo": "La Presidenta pidió que la Auditoría Superior revise los contratos del INE, según la prensa también los de antes de Guadalupe Taddei. Pedir que se revise un periodo no es acusar a nadie: ninguna autoridad ha señalado a Lorenzo Córdova. Del congelamiento de cuentas de la UIF y su amparo solo consta lo que ella dijo.",
+  "circula": {
+   "red": "Redes sociales",
+   "cuenta": "politicomx",
+   "fecha": "27 de octubre de 2026",
+   "texto": "¿Investigarán a Lorenzo Córdova? La presidenta Claudia Sheinbaum pidió a la ASF revisar todos los contratos del INE, no solamente los correspondientes a la administración de Guadalupe Taddei, sino también los de periodos anteriores, incluido el de Lorenzo Córdova. Sheinbaum señaló que es necesario conocer desde cuándo operan las empresas contratistas del INE y recordó que la UIF, encabezada entonces por Pablo Gómez, congeló cuentas de algunas de estas compañías, medida que posteriormente fue levantada mediante un amparo."
+  },
+  "cuerpo": [
+   "En su conferencia del 26 de octubre de 2026, cuando le preguntaron por la renuncia de Guadalupe Taddei, la Presidenta pidió una auditoría: «que la Auditoría Superior de la Federación haga su auditoría y señale si es que, en efecto, ella está involucrada o no». Consta en la versión estenográfica que publicó la Presidencia. Ese día habló de la gestión de Taddei; no mencionó a Lorenzo Córdova.",
+   "En la misma conferencia le preguntaron por la UIF. Dijo que en 2023 la UIF congeló las cuentas de «este proveedor que ha estado saliendo»: «Cuando estaba Pablo Gómez al frente de la UIF hay un congelamiento de cuentas de uno de los proveedores». Agregó que después un amparo obligó a liberarlas y que otras líneas de investigación «tendrá que informarlo la UIF, en su momento». No dijo el nombre de la empresa ni el mes. Habló de un proveedor, no de «algunas de estas compañías».",
+   "Lo de Córdova es del día siguiente. Según Informador, El Imparcial y El Financiero, el 27 de octubre pidió que la revisión no se quede en la gestión de Taddei, que alcance periodos anteriores, incluido el de Lorenzo Córdova Vianello, y que se informe desde cuándo tiene el INE contratos con esos contratistas. Cuando lo consultamos, la Presidencia todavía no publicaba la versión estenográfica de ese día. En cuanto salga, se coteja palabra por palabra.",
+   "Un dato que la publicación no dice: Córdova presidió el INE del 3 de abril de 2014 al 3 de abril de 2023, y Taddei entró ese mismo mes. El congelamiento fue «en 2023», según la Presidenta, así que pudo haber sido con cualquiera de los dos. Sin el mes, no se sabe. Pedir que se revisen los contratos de un periodo no es una acusación contra quien lo presidió: ninguna autoridad ha abierto un procedimiento contra Lorenzo Córdova, y toda persona se presume inocente mientras no se declare su responsabilidad (Constitución, art. 20, apartado B, fr. I).",
+   "Una nota de método: las notas de prensa no abrieron desde la plataforma; se citan por su medio y su liga, como punto de partida y no como fuente. La versión estenográfica del 26 de octubre se consultó en gob.mx."
+  ],
+  "dato_curioso": "El congelamiento que mencionó la Presidenta fue en 2023, el año en que el INE cambió de presidencia: Lorenzo Córdova salió el 3 de abril y Guadalupe Taddei entró ese mismo mes. Sin el mes, no se puede saber con cuál de los dos ocurrió.",
+  "cifras": [
+   {
+    "valor": "3/04/2014 – 3/04/2023",
+    "etq": "Periodo de Lorenzo Córdova como consejero presidente del INE",
+    "estado": "oficial",
+    "fuente": "INE, Central Electoral, 31-03-2023",
+    "url": "https://centralelectoral.ine.mx/2023/03/31/lorenzo-cordova-adriana-favela-ciro-murayama-y-jose-roberto-ruiz-se-despiden-de-la-herradura-de-la-democracia/"
+   },
+   {
+    "valor": "2023",
+    "etq": "Año en que, según la Presidenta, la UIF congeló las cuentas de un proveedor del INE",
+    "estado": "oficial",
+    "fuente": "Presidencia, versión estenográfica del 26-10-2026",
+    "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-26-de-octubre-de-2026"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "La presidenta Claudia Sheinbaum pidió a la ASF revisar los contratos del INE.",
+    "res": "consta",
+    "explica": "El 26 de octubre de 2026 pidió «que la Auditoría Superior de la Federación haga su auditoría». La ASF ya había abierto una investigación de oficio, según el INE (24-10-2026).",
+    "fuente": "Presidencia, versión estenográfica del 26-10-2026",
+    "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-26-de-octubre-de-2026"
+   },
+   {
+    "dice": "No solamente los contratos de la administración de Guadalupe Taddei, sino también los de periodos anteriores, incluido el de Lorenzo Córdova.",
+    "res": "pendiente",
+    "explica": "Lo publican Informador, El Imparcial y El Financiero sobre la conferencia del 27 de octubre de 2026. La versión estenográfica de ese día aún no estaba publicada cuando la consultamos: hasta cotejarla, solo lo dice la prensa.",
+    "fuente": "Solo en prensa (Informador, 27-10-2026)",
+    "url": "https://www.informador.mx/mexico/claudia-sheinbaum-exige-una-auditoria-muy-amplia-al-ine-pide-revisar-gestiones-de-guadalupe-taddei-y-lorenzo-cordova-20261027-0066.html",
+    "quien": "Presidencia de la República: la versión estenográfica de la conferencia del 27 de octubre de 2026 todavía no estaba publicada cuando la consultamos; suele salir después de la conferencia",
+    "donde": "https://www.gob.mx/presidencia/es/archivo/articulos"
+   },
+   {
+    "dice": "¿Investigarán a Lorenzo Córdova?",
+    "res": "no consta",
+    "explica": "Ninguna autoridad ha abierto un procedimiento contra él. Revisar los contratos de su periodo es revisar al INE, no acusarlo: una revisión no es una acusación y una acusación no es una condena (Constitución, art. 20, B, fr. I).",
+    "fuente": "Sin documento oficial",
+    "url": ""
+   },
+   {
+    "dice": "Sheinbaum señaló que es necesario conocer desde cuándo operan las empresas contratistas del INE.",
+    "res": "pendiente",
+    "explica": "También es de la conferencia del 27 de octubre y solo lo dice la prensa por ahora. Lo que sí se puede revisar ya son los contratos del INE en la Plataforma Nacional de Transparencia.",
+    "fuente": "Solo en prensa (El Imparcial, 27-10-2026)",
+    "url": "https://www.elimparcial.com/mexico/2026/10/27/claudia-sheinbaum-pide-investigar-los-contratos-del-ine-durante-la-gestion-de-lorenzo-cordova-tras-la-renuncia-de-guadalupe-taddei-por-presuntas-irregularidades-y-exige-revisar-a-los-proveedores-de-administraciones-anteriores/",
+    "quien": "Presidencia de la República: la versión estenográfica de la conferencia del 27 de octubre de 2026 todavía no estaba publicada cuando la consultamos; suele salir después de la conferencia",
+    "donde": "https://www.gob.mx/presidencia/es/archivo/articulos"
+   },
+   {
+    "dice": "La UIF, encabezada entonces por Pablo Gómez, congeló cuentas de algunas de estas compañías.",
+    "res": "matiz",
+    "explica": "La Presidenta lo dijo el 26 de octubre, pero de un solo proveedor y en 2023: «hay un congelamiento de cuentas de uno de los proveedores». No dijo cuál, y la UIF no lo ha publicado.",
+    "fuente": "Presidencia, versión estenográfica del 26-10-2026",
+    "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-26-de-octubre-de-2026"
+   },
+   {
+    "dice": "La medida fue levantada posteriormente mediante un amparo.",
+    "res": "pendiente",
+    "explica": "Consta que la Presidenta lo dijo («el amparo hace que se las tengan que liberar»), pero no hay documento del congelamiento ni del amparo: ni qué empresa, ni qué juzgado, ni cuándo. Ella misma dijo que lo demás «tendrá que informarlo la UIF, en su momento».",
+    "fuente": "Presidencia, versión estenográfica del 26-10-2026",
+    "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-26-de-octubre-de-2026",
+    "quien": "La UIF (Hacienda) tiene el expediente del congelamiento y un juzgado federal resolvió el amparo. La UIF guarda reserva de sus investigaciones por ley, así que no se le culpa de no publicarlo; la Presidenta anunció que informará en su momento",
+    "donde": "https://www.gob.mx/uif/prensa"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "La versión estenográfica de la conferencia del 27 de octubre de 2026, para cotejar palabra por palabra lo de Córdova y «desde cuándo»",
+    "url": "https://www.gob.mx/presidencia/es/archivo/articulos"
+   },
+   {
+    "que": "Lo que informe la UIF sobre el proveedor cuyas cuentas congeló en 2023 y el amparo que las liberó",
+    "url": "https://www.gob.mx/uif/prensa"
+   },
+   {
+    "que": "Los resultados de la Auditoría Superior sobre las contrataciones del INE, y si alcanzan años anteriores a 2023",
+    "url": "https://www.asf.gob.mx/"
+   },
+   {
+    "que": "El caso que lo originó: la renuncia de Guadalupe Taddei y lo que consta de Cajas Graf",
+    "url": "noticias-auditavision.html#col-taddei-renuncia-ine-contratos"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Presidencia de la República: versión estenográfica de la conferencia de prensa del 26 de octubre de 2026",
+    "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-26-de-octubre-de-2026"
+   },
+   {
+    "nombre": "INE, Central Electoral: Lorenzo Córdova, Adriana Favela, Ciro Murayama y José Roberto Ruiz se despiden de la herradura de la democracia (31-03-2023)",
+    "url": "https://centralelectoral.ine.mx/2023/03/31/lorenzo-cordova-adriana-favela-ciro-murayama-y-jose-roberto-ruiz-se-despiden-de-la-herradura-de-la-democracia/"
+   },
+   {
+    "nombre": "INE, Central Electoral: La Presidencia del INE respalda la investigación de la ASF (24-10-2026)",
+    "url": "https://centralelectoral.ine.mx/2026/10/24/la-presidencia-del-ine-respalda-la-investigacion-de-la-asf-y-reafirma-su-compromiso-con-el-estado-de-derecho/"
+   },
+   {
+    "nombre": "Punto de partida, no fuente: Informador (27-10-2026)",
+    "url": "https://www.informador.mx/mexico/claudia-sheinbaum-exige-una-auditoria-muy-amplia-al-ine-pide-revisar-gestiones-de-guadalupe-taddei-y-lorenzo-cordova-20261027-0066.html"
+   },
+   {
+    "nombre": "Punto de partida, no fuente: El Imparcial (27-10-2026)",
+    "url": "https://www.elimparcial.com/mexico/2026/10/27/claudia-sheinbaum-pide-investigar-los-contratos-del-ine-durante-la-gestion-de-lorenzo-cordova-tras-la-renuncia-de-guadalupe-taddei-por-presuntas-irregularidades-y-exige-revisar-a-los-proveedores-de-administraciones-anteriores/"
+   },
+   {
+    "nombre": "Punto de partida, no fuente: El Financiero (27-10-2026)",
+    "url": "https://www.elfinanciero.com.mx/nacional/2026/10/27/claudia-sheinbaum-mananera-temas-hoy-27-de-octubre-de-2026-en-vivo/"
+   }
+  ],
+  "actualizado": "27 de octubre de 2026"
+ },
+ {
+  "id": "guaymas-comodato-amigo-gnl",
+  "seccion": "Verificado",
+  "icono": "🚢",
+  "titulo": "Guaymas, 54 hectáreas y el gas de Texas: lo que consta del proyecto AMIGO",
+  "balazo": "Circula que el Gobierno de Sonora prestó gratis 54 hectáreas a una empresa para licuar gas y mandarlo a Asia. La Secretaría de Energía habla de 41.7 hectáreas, el contrato no está publicado y la obra está detenida por amparos.",
+  "circula": {
+   "red": "Redes sociales y tribuna del Congreso de Sonora",
+   "cuenta": "Publicación en redes y discurso en tribuna (la transcripción no dice quién habla)",
+   "fecha": "Octubre de 2026",
+   "texto": "El Gobierno del Estado le entregó a una empresa privada un contrato de comodato (el uso 100 % gratuito) de 54 hectáreas de suelo público, terrenos costeros del Parque Industrial Pesquero «Rodolfo Sánchez Taboada», en Guaymas, para procesar gas que viene de Texas y mandarlo a Asia. Las ganancias se van fuera y a Sonora le dejan la basura. En tribuna se agregó: los buques desorientarán a las ballenas, un derrame dejaría sin trabajo a pescadores, se pidió información de más de 100 millones de pesos del Puente Colorado sin respuesta, y se borró la información de la megafarmacia. «Que la verdad sea incómoda no la vuelve falsa»."
+  },
+  "cuerpo": [
+   "El proyecto se llama AMIGO (American Mexican Integrated Gas Operations): una planta para licuar gas natural en Guaymas. Así lo nombra el Congreso de Sonora en su Gaceta, y la Presidencia lo llama «Proyecto LNG Amigo».",
+   "Del lado de Estados Unidos sí hay un documento oficial. La Orden 4629 del Departamento de Energía (DOE), del 8 de diciembre de 2020, expediente 20-31-LNG, autoriza a Epcilon LNG LLC, la empresa del proyecto, a exportar gas natural a México para licuarlo y a reexportarlo ya como gas natural licuado desde México, por 20 años, a países con y sin tratado de libre comercio con EE. UU.: hasta 395 mil millones de pies cúbicos al año. La orden le exige empezar a reexportar a más tardar el 8 de diciembre de 2027. La empresa pidió en diciembre de 2025 moverlo dos años, al 8 de diciembre de 2029; en julio de 2026 seguía mandando información para esa solicitud, y no encontramos que el DOE la haya resuelto.",
+   "En la conferencia del 21 de octubre de 2026, la Secretaría de Energía lo ubicó en el Parque Industrial Pesquero «General Rodolfo Sánchez Taboada», un área ya ocupada por la industria, el cabotaje y la pesca, con 41.7 hectáreas, el 0.005 % del territorio del municipio. Habló de un máximo de 5 buques al mes (60 al año), el 4 % de las embarcaciones que ya cruzan la zona, y de almacenamiento para 290 mil metros cúbicos de gas. La Presidenta dijo que parte del gas vendría de Texas, que una porción se exportaría y otra se quedaría en el mercado interno, y que hay un amparo que impide avanzar mientras se revisan otra vez los impactos ambientales: «no vamos a cometer una irresponsabilidad».",
+   "El 16 de octubre, la Presidenta había dicho que «no hay ningún daño ambiental», que se hizo el estudio de impacto ambiental, que el sitio no está en el ecosistema de la vaquita marina y que la obra «se paró» por los amparos.",
+   "Lo que no consta en ningún documento oficial que pudimos abrir es el contrato de comodato. Lo reportó la prensa (N+ Focus), con fecha del 30 de septiembre de 2022 y la Comisión Estatal de Bienes y Concesiones como firmante; según esa misma prensa, el Gobierno del Estado, que encabeza Alfonso Durazo, lo ha negado o lo da por «sin efectos». Un contrato así es información que debe publicarse (Ley General de Transparencia, obligaciones sobre contratos, concesiones y permisos), y no lo encontramos publicado.",
+   "El Congreso ya lo había tocado: el 12 de febrero de 2026, diputados del PAN y de MC presentaron un exhorto a la ASEA, al INECC, a la Semarnat, a Turismo, al IMIPAS y al INPI para revisar el impacto ambiental de los tres proyectos de gas del Golfo de California (Saguaro, AMIGO y Vista Pacífico). No se aprobó como urgente y se turnó a comisión. Las demás afirmaciones del discurso (Puente Colorado, megafarmacia) no tienen todavía un documento oficial que podamos citar."
+  ],
+  "dato_curioso": "La Secretaría de Energía comparó los 60 buques al año con el tráfico que ya existe: serían el 4 % de las embarcaciones de la zona. Cuántas ballenas cruzan esa ruta y en qué meses no lo dice la conferencia; está en el estudio de impacto ambiental, que es justo lo que se litiga.",
+  "cifras": [
+   {
+    "valor": "41.7 ha",
+    "etq": "Superficie del proyecto según la Secretaría de Energía (0.005 % del municipio de Guaymas)",
+    "estado": "oficial",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "valor": "60 buques al año",
+    "etq": "Máximo de buques metaneros (5 al mes), el 4 % del tránsito actual de la zona",
+    "estado": "oficial",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "valor": "290 mil m³",
+    "etq": "Capacidad de almacenamiento de gas que presentó la Secretaría de Energía",
+    "estado": "oficial",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "valor": "395 mil millones de pies³ al año",
+    "etq": "Gas natural de EE. UU. que la Orden 4629 del DOE autoriza exportar a México para licuarlo y reexportarlo (20 años)",
+    "estado": "oficial",
+    "fuente": "Departamento de Energía de EE. UU., Orden DOE/FE 4629 (08-12-2020), expediente 20-31-LNG",
+    "url": "https://www.energy.gov/sites/prod/files/2020/12/f81/ord4629.pdf"
+   },
+   {
+    "valor": "12.3 ha",
+    "etq": "Diferencia entre las 54 hectáreas que circulan y las 41.7 de la Secretaría de Energía (54 − 41.7)",
+    "estado": "derivado",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "El Gobierno del Estado le entregó a una empresa privada un contrato de comodato, de uso gratuito.",
+    "res": "pendiente",
+    "explica": "El contrato no está en ningún documento oficial que pudimos abrir. Lo reporta la prensa (N+ Focus: firmado el 30-09-2022 por la Comisión Estatal de Bienes y Concesiones) y, según la prensa, el Gobierno de Sonora lo niega. Los contratos y concesiones sobre bienes públicos deben publicarse por ley de transparencia.",
+    "fuente": "Plataforma Nacional de Transparencia",
+    "url": "https://www.plataformadetransparencia.org.mx/",
+    "quien": "Gobierno de Sonora (Comisión Estatal de Bienes y Concesiones): no ha transparentado el contrato ni su estado jurídico, que también le pidieron diputados del Congreso local",
+    "donde": "https://www.plataformadetransparencia.org.mx/"
+   },
+   {
+    "dice": "Son 54 hectáreas de suelo público.",
+    "res": "matiz",
+    "explica": "La Secretaría de Energía dio otra cifra: 41.7 hectáreas, 12.3 menos (derivado: 54 − 41.7). Las 54 hectáreas vienen de la prensa y, según la prensa, de los reportes de la empresa ante el Departamento de Energía de EE. UU., que no pudimos abrir.",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "dice": "Son terrenos costeros del Parque Industrial Pesquero «Rodolfo Sánchez Taboada», en Guaymas.",
+    "res": "consta",
+    "explica": "La Secretaría de Energía lo ubicó ahí, en un área ya ocupada por la industria, el cabotaje y la pesca.",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "dice": "El negocio es procesar gas que viene de Texas para mandarlo a Asia; el gas ni siquiera se queda aquí.",
+    "res": "matiz",
+    "explica": "La Presidenta dijo que parte del gas vendría de Texas, que una porción se exportaría y otra iría al mercado interno. En esa conferencia no se nombró a Asia como destino. La Orden 4629 del Departamento de Energía de EE. UU. sí confirma que el gas sale de Estados Unidos y que el permiso es para licuarlo en México y reexportarlo a países con y sin tratado de libre comercio con EE. UU.",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "dice": "La Presidenta habló de soberanía energética y de si tenemos o no suficiente gas.",
+    "res": "consta",
+    "explica": "Lo justificó por el almacenamiento: dijo que México tiene alrededor de tres días de capacidad.",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "dice": "Las ganancias se van fuera y a Sonora solo le dejan la basura y la contaminación.",
+    "res": "no consta",
+    "explica": "Es una valoración. Ningún documento oficial que pudimos abrir dice cuánto pagaría el proyecto en impuestos y derechos, ni cuánto dejaría en Sonora; la conferencia de la Secretaría de Energía no dio esas cifras.",
+    "fuente": "Presidencia, versión estenográfica del 21-10-2026 (Secretaría de Energía)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "dice": "Los buques grandes desorientarán a las ballenas, y un derrame dejaría sin trabajo a pescadores.",
+    "res": "matiz",
+    "explica": "El Gobierno federal dice lo contrario: «no hay ningún daño ambiental», hasta 60 buques al año con ruta definida. Pero la obra está detenida por amparos y la propia Presidenta dijo que se revisan otra vez los impactos. El riesgo no está probado ni descartado: se decide en el estudio de impacto ambiental, que se litiga.",
+    "fuente": "Presidencia, versión estenográfica del 16-10-2026",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-16-de-octubre-de-2026"
+   },
+   {
+    "dice": "El proyecto ya tiene su autorización de impacto ambiental.",
+    "res": "pendiente",
+    "explica": "La Presidenta dijo que se hizo el estudio; la prensa reporta fechas y versiones distintas sobre la autorización de la ASEA, y hay suspensiones judiciales. El resolutivo no lo pudimos abrir: falta de la plataforma.",
+    "fuente": "Agencia de Seguridad, Energía y Ambiente (ASEA)",
+    "url": "https://www.gob.mx/asea",
+    "quien": "Falta de la plataforma: el expediente de impacto ambiental está en la ASEA y aún no lo integramos",
+    "donde": "https://www.gob.mx/asea"
+   },
+   {
+    "dice": "Pedimos información sobre más de 100 millones de pesos gastados en el Puente Colorado y no han contestado.",
+    "res": "no consta",
+    "explica": "No encontramos el monto ni las solicitudes en un documento oficial. El puente está en San Luis Río Colorado; según la prensa, la renovación de su concesión la revisa la SICT.",
+    "fuente": "Plataforma Nacional de Transparencia",
+    "url": "https://www.plataformadetransparencia.org.mx/"
+   },
+   {
+    "dice": "Ya borraron toda la información de la megafarmacia, y este gobierno ha reservado mucha información.",
+    "res": "no consta",
+    "explica": "Son afirmaciones generales que no pudimos cotejar con un índice de información reservada ni con una página retirada.",
+    "fuente": "Plataforma Nacional de Transparencia",
+    "url": "https://www.plataformadetransparencia.org.mx/"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "Pedir el contrato de comodato y su estado jurídico a la Comisión Estatal de Bienes y Concesiones de Sonora",
+    "url": "https://www.plataformadetransparencia.org.mx/"
+   },
+   {
+    "que": "El dictamen del exhorto del 12-02-2026 sobre los tres proyectos de gas, turnado a comisión en el Congreso de Sonora",
+    "url": "https://congresoson.gob.mx/"
+   },
+   {
+    "que": "El resolutivo de impacto ambiental y lo que diga la ASEA en la nueva revisión",
+    "url": "https://www.gob.mx/asea"
+   },
+   {
+    "que": "La resolución de los amparos que detienen la obra",
+    "url": "https://www.pjf.gob.mx/"
+   },
+   {
+    "que": "Lo que resuelva el Departamento de Energía de EE. UU. sobre la prórroga al 08-12-2029 (expediente 20-31-LNG)",
+    "url": "https://public-inspection.federalregister.gov/2025-23764.pdf"
+   },
+   {
+    "que": "Cuánto pagaría el proyecto en impuestos y derechos, y cuánto se queda en Sonora: no lo ha presentado la Secretaría de Energía",
+    "url": "https://www.gob.mx/sener"
+   },
+   {
+    "que": "La ficha del caso en Crisis ambientales (Costo Ambiental), con el presupuesto de la ASEA en el Auditor ambiental",
+    "url": "herramienta-ambiente-crisis.html"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Departamento de Energía de EE. UU.: Orden DOE/FE 4629, del 8 de diciembre de 2020, expediente 20-31-LNG (Epcilon LNG LLC, exportación de gas a México y reexportación como gas natural licuado)",
+    "url": "https://www.energy.gov/sites/prod/files/2020/12/f81/ord4629.pdf"
+   },
+   {
+    "nombre": "Federal Register: aviso de la solicitud de Epcilon LNG para prorrogar al 08-12-2029 el inicio de la reexportación (documento 2025-23764)",
+    "url": "https://public-inspection.federalregister.gov/2025-23764.pdf"
+   },
+   {
+    "nombre": "Presidencia: versión estenográfica de la conferencia del 21 de octubre de 2026 (Secretaría de Energía, proyecto en Guaymas)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "nombre": "Presidencia: versión estenográfica de la conferencia del 16 de octubre de 2026 (amparo e impacto ambiental)",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-16-de-octubre-de-2026"
+   },
+   {
+    "nombre": "Congreso del Estado de Sonora: Gaceta Parlamentaria No. 2104, acta de la sesión del 12 de febrero de 2026 (exhorto sobre los proyectos Saguaro, AMIGO y Vista Pacífico)",
+    "url": "https://gestion.api.congresoson.gob.mx/publico/descarga?uuid=f8cf663d-4257-4f5d-8b08-b05b80a83e72"
+   }
+  ],
+  "actualizado": "26 de octubre de 2026"
+ },
+ {
+  "id": "salud-ventiladores-y-medicinas",
+  "seccion": "Verificado",
+  "icono": "💊",
+  "titulo": "Medicinas y ventiladores del IMSS: lo que consta del robo, de los ventiladores de 2020 y de los contratos que circulan",
+  "balazo": "Los ventiladores que el IMSS compró en Hidalgo en 2020 no cumplieron el contrato, se devolvieron sin pagarse y la empresa quedó inhabilitada 27 meses, según el IMSS y el Diario Oficial. Los 800 millones en medicinas que se atribuyen a Amílcar Olán todavía no tienen un contrato oficial detrás.",
+  "circula": {
+   "red": "Transcripción de un video",
+   "cuenta": "Comentario en redes (autor no indicado)",
+   "fecha": "Octubre de 2026",
+   "texto": "Cuando hablan del robo de medicamentos en los almacenes y las farmacias de los hospitales, me da la sensación de que el gobierno le quiere echar la culpa al personal del IMSS (…). En 2020, a una empresa de un hijo de Bartlett le asignaron mediante adjudicación directa un contrato de 31 millones de pesos para comprar ventiladores respiratorios que ni siquiera cumplían con las especificaciones técnicas. Amílcar Olán (…) tiene contratos de adjudicación directa de medicamentos a sobreprecio por más de 800 millones de pesos en IMSS-Bienestar de Tabasco y Quintana Roo y en el IMSS."
+  },
+  "cuerpo": [
+   "Los ventiladores. El 4 de mayo de 2020 la Secretaría de la Función Pública informó que, desde el 1 de mayo, su Órgano Interno de Control en el IMSS investigaba la compra de ventiladores de la delegación de Hidalgo; después habló de 20 equipos. El 13 de mayo el IMSS informó que, tras la revisión técnica, los equipos «no reúnen los requerimientos y características técnicas-funcionales acordadas en el contrato», que el 8 de mayo levantó el acta para devolverlos al proveedor y que «al momento no se ha erogado ningún recurso por este contrato».",
+   "La sanción. El 6 de julio de 2020 el Diario Oficial publicó la circular 11/2020 de la Función Pública: dependencias, entidades, estados y municipios debían abstenerse de contratar con Cyber Robotic Solutions, S.A. de C.V. durante 27 meses (expediente SAN/032/2020, resolución del 2 de julio de 2020), plazo que se alarga si la empresa no paga la multa. La circular no dice el monto de la multa ni menciona al IMSS. La empresa impugnó la sanción ante el Tribunal Federal de Justicia Administrativa, y el Diario Oficial publicó después una medida cautelar.",
+   "Lo que no dicen esos documentos: que el contrato fuera por 31 millones de pesos, que se diera por adjudicación directa y que la empresa sea de un hijo de Manuel Bartlett. Eso viene de la investigación periodística de 2020; la circular solo nombra a la empresa.",
+   "Los contratos de medicinas. Lo que se dice de Amílcar Olán y de las compras de medicinas a sobreprecio viene de Latinus y de otros medios. La plataforma ya lo había buscado y no encontró un contrato, un informe de la Auditoría Superior ni una resolución que lo nombre: está en «Lo que dejamos fuera y por qué». La cifra nueva de más de 800 millones de pesos tampoco tiene un contrato que la sostenga. Los contratos del IMSS y de IMSS-Bienestar son públicos en ComprasMX; cuando los integremos, esta columna se actualiza.",
+   "El robo hormiga. No encontramos un documento oficial reciente en el que el gobierno atribuya el desabasto al robo del personal. Lo que sí hay es un comunicado del IMSS de mayo de 2019 que denunció el robo de medicamentos controlados de una farmacia y aseguró que el abasto estaba garantizado."
+  ],
+  "dato_curioso": "El IMSS nunca pagó esos ventiladores: los devolvió el 8 de mayo de 2020. Aun así, la empresa quedó inhabilitada, porque la sanción castiga lo que se ofreció y no cumplió, no solo el dinero que salió.",
+  "cifras": [
+   {
+    "valor": "20",
+    "etq": "Ventiladores de la compra del IMSS en Hidalgo que investigó la Función Pública",
+    "estado": "oficial",
+    "fuente": "SFP, comunicado sobre los procedimientos sancionatorios (2020)",
+    "url": "https://www.gob.mx/sfp/articulos/funcion-publica-avanza-con-los-procedimientos-sancionatorios-por-la-compra-de-20-ventiladores-del-imss-en-hidalgo-242591"
+   },
+   {
+    "valor": "$0",
+    "etq": "Lo que el IMSS había pagado por ese contrato al devolver los equipos",
+    "estado": "oficial",
+    "fuente": "IMSS, comunicado del 13-05-2020",
+    "url": "https://www.gob.mx/imss/prensa/respecto-a-la-informacion-sobre-la-compra-de-ventiladores-por-el-organo-de-operacion-administrativa-desconcentrada-hidalgo-el-imss-informa"
+   },
+   {
+    "valor": "27 meses",
+    "etq": "Inhabilitación de Cyber Robotic Solutions para contratar con el gobierno (circular 11/2020)",
+    "estado": "oficial",
+    "fuente": "DOF, 06-07-2020",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5596199&fecha=06/07/2020"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "El gobierno le quiere echar la culpa del desabasto al robo hormiga del personal del IMSS.",
+    "res": "no consta",
+    "explica": "Es una impresión de quien habla. No encontramos un documento oficial reciente que culpe del desabasto al personal. El IMSS sí denunció en 2019 el robo de medicamentos controlados en una farmacia y dijo que el abasto estaba garantizado.",
+    "fuente": "IMSS, comunicado 106 (mayo de 2019)",
+    "url": "https://www.gob.mx/imss/prensa/com-106-imss-denuncia-robo-de-medicamentos-controlados"
+   },
+   {
+    "dice": "En 2020 le asignaron a una empresa de un hijo de Bartlett, por adjudicación directa, un contrato de 31 millones de pesos para ventiladores.",
+    "res": "matiz",
+    "explica": "Consta que el IMSS en Hidalgo compró ventiladores, que no los pagó y que la Función Pública inhabilitó a Cyber Robotic Solutions. El monto de 31 millones, la adjudicación directa y quién es el dueño solo están en la prensa.",
+    "fuente": "DOF, circular 11/2020 (06-07-2020)",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5596199&fecha=06/07/2020"
+   },
+   {
+    "dice": "Los ventiladores ni siquiera cumplían las especificaciones técnicas.",
+    "res": "consta",
+    "explica": "El IMSS lo dijo: no reunían los requerimientos y características técnico-funcionales del contrato, y los devolvió.",
+    "fuente": "IMSS, comunicado del 13-05-2020",
+    "url": "https://www.gob.mx/imss/prensa/respecto-a-la-informacion-sobre-la-compra-de-ventiladores-por-el-organo-de-operacion-administrativa-desconcentrada-hidalgo-el-imss-informa"
+   },
+   {
+    "dice": "Amílcar Olán tiene contratos de adjudicación directa de medicinas a sobreprecio por más de 800 millones de pesos en IMSS-Bienestar de Tabasco y Quintana Roo y en el IMSS.",
+    "res": "pendiente",
+    "explica": "Es la suma de un medio. Los contratos de 2025 y 2026 del IMSS y de IMSS-Bienestar ya están en Contratos públicos, pero ningún documento oficial dice qué empresas serían de Olán, y sin eso no se le puede atribuir un monto. Los de 2023 y 2024 están en el CompraNet histórico, que aún no integramos.",
+    "fuente": "ComprasMX, Datos Abiertos",
+    "url": "https://comprasmx.buengobierno.gob.mx/datos-abiertos",
+    "quien": "Falta de la plataforma: los contratos de 2023 y 2024 del CompraNet histórico aún no los integramos, y ningún documento oficial abierto liga a Olán con una empresa contratista",
+    "donde": "https://comprasmx.buengobierno.gob.mx/datos-abiertos"
+   },
+   {
+    "dice": "Es amigo de Andy López Beltrán y socio de una marca de camisas de moda.",
+    "res": "no consta",
+    "explica": "Solo está en la prensa y en redes; ningún documento oficial lo dice. Una amistad o una sociedad privada no es, por sí sola, un delito.",
+    "fuente": "Solo en prensa",
+    "url": ""
+   }
+  ],
+  "sigue": [
+   {
+    "que": "Los contratos del IMSS en ComprasMX (2025 y 2026), ya integrados: sus proveedores mayores y cuánto fue por adjudicación directa",
+    "url": "contratos-publicos.html?i=050GYR"
+   },
+   {
+    "que": "Integrar los contratos de 2023 y 2024 del CompraNet histórico y cotejar los que se atribuyen a empresas ligadas a Olán, cuando un documento oficial las nombre",
+    "url": "https://comprasmx.buengobierno.gob.mx/datos-abiertos"
+   },
+   {
+    "que": "Buscar la sentencia del Tribunal Federal de Justicia Administrativa sobre la sanción a Cyber Robotic Solutions",
+    "url": "https://www.tfja.gob.mx/"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "IMSS: Respecto a la compra de ventiladores por el Órgano de Operación Administrativa Desconcentrada Hidalgo (13-05-2020)",
+    "url": "https://www.gob.mx/imss/prensa/respecto-a-la-informacion-sobre-la-compra-de-ventiladores-por-el-organo-de-operacion-administrativa-desconcentrada-hidalgo-el-imss-informa"
+   },
+   {
+    "nombre": "SFP: Función Pública investiga desde el 1 de mayo la adquisición de ventiladores en el IMSS (04-05-2020)",
+    "url": "https://www.gob.mx/sfp/prensa/funcion-publica-investiga-desde-el-1-de-mayo-adquisicion-de-ventiladores-en-el-imss-secretaria-sandoval-ballesteros"
+   },
+   {
+    "nombre": "SFP: Avanzan los procedimientos sancionatorios por la compra de 20 ventiladores del IMSS en Hidalgo (2020)",
+    "url": "https://www.gob.mx/sfp/articulos/funcion-publica-avanza-con-los-procedimientos-sancionatorios-por-la-compra-de-20-ventiladores-del-imss-en-hidalgo-242591"
+   },
+   {
+    "nombre": "DOF: Circular 11/2020 sobre Cyber Robotic Solutions, S.A. de C.V. (06-07-2020)",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5596199&fecha=06/07/2020"
+   },
+   {
+    "nombre": "IMSS, comunicado 106: IMSS denuncia robo de medicamentos controlados (mayo de 2019)",
+    "url": "https://www.gob.mx/imss/prensa/com-106-imss-denuncia-robo-de-medicamentos-controlados"
+   }
+  ],
+  "actualizado": "26 de octubre de 2026"
+ },
+ {
+  "id": "taddei-renuncia-ine-contratos",
+  "seccion": "Verificado",
+  "icono": "🗳️",
+  "titulo": "La renuncia de Guadalupe Taddei al INE: lo que consta en documentos y lo que solo dice la prensa",
+  "balazo": "El INE publicó que su consejera presidenta entregaría su renuncia el 26 de octubre y que respalda la investigación de la Auditoría Superior. El video, los montos y las frases que circulan vienen de medios y aún no tienen documento oficial.",
+  "circula": {
+   "red": "Redes sociales",
+   "cuenta": "Publicación que resume un reportaje de Latinus",
+   "fecha": "25 y 26 de octubre de 2026",
+   "texto": "Renuncia la presidenta del INE tras salir un video de su hijo brindando en París con un contratista, apoderado de Cajas Graf, proveedora de material electoral del instituto. Latinus suma al menos 245 millones de pesos en contratos para Cajas Graf bajo Taddei en Sonora y en el INE. La ASF abrió una investigación al instituto y a sus proveedores. Taddei habría dicho «No me voy» y al día siguiente anunció su renuncia ante la Cámara de Diputados."
+  },
+  "cuerpo": [
+   "El 25 de octubre de 2026, en un mensaje publicado en Central Electoral, el sitio oficial del INE, Guadalupe Taddei Zavala anunció que el 26 de octubre presentaría ante la Cámara de Diputados su renuncia como consejera presidenta, cargo que ocupaba desde abril de 2023. Según ese mensaje, lo hace para proteger al Instituto, y la decisión no releva a nadie del deber de esclarecer los hechos que deban investigarse.",
+   "Un día antes, el 24 de octubre, la Presidencia del INE publicó que respalda la investigación que la Auditoría Superior de la Federación abrió de oficio, que colaborará con ella, que ya envió los antecedentes a su Órgano Interno de Control y que abrirá un micrositio con las contrataciones, sus montos, sus proveedores y sus documentos. El 22 de octubre, en el Consejo General, un partido le pidió separarse del cargo mientras se investigaban las contrataciones señaladas por la prensa; consta en la versión estenográfica de esa sesión.",
+   "Lo que todavía no tiene documento oficial: el video de París, quién lo grabó, quién pagó el viaje, la frase «No me voy» y la suma de 245 millones de pesos en contratos. Todo eso viene de Latinus y de otros medios. Tampoco encontramos el comunicado de la propia Auditoría Superior: según los medios, lo dio a conocer el 23 de octubre, pero no lo localizamos en asf.gob.mx. El único documento del INE que nombra a Cajas Graf que pudimos consultar es el fallo de la licitación LP-INE-001/2025, de febrero de 2025, para urnas y mamparas de la elección judicial: ahí Cajas Graf, en participación conjunta con TOL Producciones, no cumplió las especificaciones técnicas. Ese fallo no dice si la empresa ganó otros contratos.",
+   "Una nota de método: las páginas del INE no abrieron desde la plataforma; sus textos se tomaron de los comunicados de Central Electoral tal como los muestra el buscador. Ninguna autoridad ha resuelto que haya delito o falta administrativa: una investigación abierta no es una conclusión."
+  ],
+  "dato_curioso": "El único documento del INE que encontramos con el nombre de Cajas Graf la deja fuera: en febrero de 2025 su propuesta para urnas y mamparas de la elección judicial no cumplió las especificaciones técnicas.",
+  "cifras": [
+   {
+    "valor": "26/10/2026",
+    "etq": "Día en que anunció que entregaría su renuncia ante la Cámara de Diputados",
+    "estado": "oficial",
+    "fuente": "INE, Central Electoral, mensaje del 25-10-2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/25/mensaje-de-la-consejera-presidenta-del-instituto-nacional-electoral-guadalupe-taddei-zavala/"
+   },
+   {
+    "valor": "Abril de 2023",
+    "etq": "Inicio de su encargo como consejera presidenta",
+    "estado": "oficial",
+    "fuente": "INE, Central Electoral, mensaje del 25-10-2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/25/mensaje-de-la-consejera-presidenta-del-instituto-nacional-electoral-guadalupe-taddei-zavala/"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "Renuncia la presidenta del INE y entrega su renuncia el lunes ante la Cámara de Diputados.",
+    "res": "consta",
+    "explica": "El INE publicó su mensaje del 25 de octubre de 2026: presentaría su renuncia el 26 de octubre ante la Cámara de Diputados. La aceptación de la Cámara aún no la vimos en un documento.",
+    "fuente": "INE, Central Electoral, 25-10-2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/25/mensaje-de-la-consejera-presidenta-del-instituto-nacional-electoral-guadalupe-taddei-zavala/"
+   },
+   {
+    "dice": "La Auditoría Superior de la Federación abrió una investigación al instituto y sus proveedores.",
+    "res": "matiz",
+    "explica": "El INE lo confirma: el 24 de octubre publicó que respalda la investigación que la ASF abrió de oficio. Según la prensa, la ASF lo anunció el 23 de octubre de 2026 y alcanza al INE, a los institutos electorales locales y a sus proveedores. El comunicado de la ASF, con su alcance exacto, no lo localizamos en asf.gob.mx: falta de la plataforma.",
+    "fuente": "INE, Central Electoral, 24-10-2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/24/la-presidencia-del-ine-respalda-la-investigacion-de-la-asf-y-reafirma-su-compromiso-con-el-estado-de-derecho/"
+   },
+   {
+    "dice": "Cajas Graf es proveedora de material electoral del INE.",
+    "res": "matiz",
+    "explica": "Consta que participó en la licitación LP-INE-001/2025 (urnas y mamparas de la elección judicial) y que no cumplió las especificaciones técnicas. Que el INE le haya pagado otros contratos solo lo dice la prensa: el contrato no lo pudimos abrir.",
+    "fuente": "INE, fallo de la licitación LP-INE-001/2025 (06-02-2025)",
+    "url": "https://ine.mx/wp-content/uploads/2025/02/lp-ine-001-2025-fallo.pdf"
+   },
+   {
+    "dice": "Latinus suma al menos 245 millones de pesos en contratos para Cajas Graf bajo Taddei en Sonora y en el INE.",
+    "res": "pendiente",
+    "explica": "Es la suma de un medio. Para sostenerla hacen falta los contratos firmados por el INE y por el Instituto Estatal Electoral de Sonora, que no pudimos abrir: falta de la plataforma. Otros medios dan cifras distintas. Una nota de método: en los contratos de ComprasMX 2025 y 2026 que integra la plataforma (215,121 contratos de 1,078 instituciones) no aparece Cajas Graf, pero tampoco el INE, que es autónomo y no contrata por ComprasMX. Que no aparezca ahí no prueba nada: los contratos hay que pedirlos al INE y al IEE Sonora.",
+    "fuente": "Plataforma Nacional de Transparencia",
+    "url": "https://www.plataformadetransparencia.org.mx/",
+    "quien": "Falta de la plataforma: los contratos del INE y del IEE Sonora son públicos y aún no los integramos",
+    "donde": "https://www.plataformadetransparencia.org.mx/"
+   },
+   {
+    "dice": "Un video muestra al hijo de Taddei brindando en París con el apoderado de Cajas Graf («París a tus pies, chamaquito»), y lo grabó el propio empresario.",
+    "res": "no consta",
+    "explica": "Es un video difundido por Latinus. No hay documento oficial sobre su contenido, su autoría ni quién pagó el viaje, y un video por sí solo no prueba un acto de corrupción. No lo afirmamos ni lo negamos.",
+    "fuente": "Solo en prensa (Latinus)",
+    "url": ""
+   },
+   {
+    "dice": "Un día antes, Taddei dijo a los consejeros «No me voy» y llamó «golpeteo político» a los señalamientos.",
+    "res": "no consta",
+    "explica": "Solo aparece en prensa. Lo que sí consta es que el 22 de octubre, en el Consejo General, un partido le pidió separarse del cargo mientras se investigaba.",
+    "fuente": "INE, versión estenográfica del Consejo General, 22-10-2026",
+    "url": "https://centralelectoral.ine.mx/2026/10/22/version-estenografica-de-la-sesion-extraordinaria-del-consejo-general-del-ine-22-de-octubre-de-2026"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "Resultados de la investigación de la Auditoría Superior sobre las contrataciones del INE y de los institutos locales",
+    "url": "https://www.asf.gob.mx/"
+   },
+   {
+    "que": "Micrositio del INE con sus contrataciones, montos, proveedores y documentos, anunciado el 24-10-2026",
+    "url": "https://www.ine.mx/"
+   },
+   {
+    "que": "Quién ocupa la presidencia del INE y cómo la nombra la Cámara de Diputados",
+    "url": "https://www.diputados.gob.mx/"
+   },
+   {
+    "que": "La revisión que pidió la Presidenta de los contratos de periodos anteriores, incluido el de Lorenzo Córdova, y lo que dijo del congelamiento de cuentas de la UIF (27-10-2026)",
+    "url": "noticias-auditavision.html#col-ine-contratos-desde-cordova"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "INE, Central Electoral: Mensaje de la Consejera Presidenta, Guadalupe Taddei Zavala (25-10-2026)",
+    "url": "https://centralelectoral.ine.mx/2026/10/25/mensaje-de-la-consejera-presidenta-del-instituto-nacional-electoral-guadalupe-taddei-zavala/"
+   },
+   {
+    "nombre": "INE, Central Electoral: La Presidencia del INE respalda la investigación de la ASF (24-10-2026)",
+    "url": "https://centralelectoral.ine.mx/2026/10/24/la-presidencia-del-ine-respalda-la-investigacion-de-la-asf-y-reafirma-su-compromiso-con-el-estado-de-derecho/"
+   },
+   {
+    "nombre": "INE, versión estenográfica de la sesión extraordinaria del Consejo General (22-10-2026)",
+    "url": "https://centralelectoral.ine.mx/2026/10/22/version-estenografica-de-la-sesion-extraordinaria-del-consejo-general-del-ine-22-de-octubre-de-2026"
+   },
+   {
+    "nombre": "INE, Dirección Ejecutiva de Administración: fallo de la licitación LP-INE-001/2025 (06-02-2025)",
+    "url": "https://ine.mx/wp-content/uploads/2025/02/lp-ine-001-2025-fallo.pdf"
+   }
+  ],
+  "actualizado": "27 de octubre de 2026"
+ },
+ {
+  "id": "lif-2027-deuda-y-multas",
+  "seccion": "Verificado",
+  "icono": "🧾",
+  "titulo": "Ley de Ingresos 2027: el techo de deuda y el perdón de multas, en sus documentos",
+  "balazo": "La Cámara de Diputados la aprobó el 15 de octubre con un techo de deuda interna de 1.7 billones de pesos y con un cambio para que las grandes empresas también paguen sus adeudos sin multas ni recargos. El 28 de octubre el pleno del Senado la aprobó sin cambios (75 a 34) y la envió al Ejecutivo.",
+  "circula": {
+   "red": "Instagram",
+   "cuenta": "@pajaropolitico (Animal Político)",
+   "fecha": "Octubre de 2026",
+   "texto": "Morena y aliados aprobaron la Ley de Ingresos 2027: avala 1.7 billones de pesos en deuda interna y elimina el 100% de multas y recargos fiscales a grandes contribuyentes tras acuerdo de Sheinbaum con el CCE."
+  },
+  "cuerpo": [
+   "El 15 de octubre de 2026 el pleno de la Cámara de Diputados aprobó la Ley de Ingresos de la Federación para 2027: 331 votos a favor y 118 en contra en lo general, y 340 contra 109 en lo particular, según el Canal del Congreso. Estima ingresos por 10 billones 636 mil 488 millones de pesos y autoriza endeudamiento interno neto hasta por un billón 700 mil millones. Ojo: es un techo, lo máximo que el gobierno puede pedir prestado en el año, no deuda ya contratada.",
+   "En la discusión, el diputado Ricardo Monreal presentó una reserva al artículo vigésimo primero transitorio, que se aprobó: amplía el programa de regularización fiscal, quita el tope de 300 millones de pesos de ingresos anuales y deja entrar a los contribuyentes que atiende la Administración General de Grandes Contribuyentes del SAT, con créditos firmes o consentidos. No es una condonación del impuesto: para obtener la reducción de multas, recargos y gastos de ejecución hay que pagar completo el adeudo.",
+   "El origen está a la vista. El 13 de octubre, en el 50 aniversario del Consejo Coordinador Empresarial, la presidenta Sheinbaum dijo, según la versión estenográfica oficial: «le propuse a la Secretaría de Hacienda que el próximo año a todos, sin tener límite, quienes tengan deudas con el fisco pueden pagar sin recargos» y «sin ninguna multa, sin ningún recargo, a cualquier monto». Lo dijo como propuesta suya; la palabra «acuerdo» la usan los medios.",
+   "En el Senado, el 21 de octubre las comisiones unidas de Hacienda y de Estudios Legislativos Primera aprobaron el paquete: 10 a 5 en la primera y 8 a 6 en la segunda. El pleno la aprobó en sus términos, 75 a 34 en lo general y 73 a 33 en lo particular, y la envió al Ejecutivo, según el Canal del Congreso del 28 de octubre. Falta su publicación en el Diario Oficial: hasta entonces no rige."
+  ],
+  "dato_curioso": "El perdón de multas no es nuevo: la Ley de Ingresos 2026 ya daba un estímulo del 100 % de multas y recargos por adeudos de 2024 y anteriores, pero dejaba fuera a quien ganara más de 300 millones de pesos al año. Lo que cambió para 2027 es ese tope.",
+  "cifras": [
+   {
+    "valor": "$1,700,000 millones",
+    "etq": "Techo de endeudamiento interno neto del Gobierno Federal para 2027 (aprobado por Diputados)",
+    "estado": "oficial",
+    "fuente": "Canal del Congreso, 15-10-2026",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"
+   },
+   {
+    "valor": "$10,636,488 millones",
+    "etq": "Ingresos totales estimados para 2027",
+    "estado": "oficial",
+    "fuente": "Canal del Congreso, 15-10-2026",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"
+   },
+   {
+    "valor": "331 a 118",
+    "etq": "Votación en lo general en la Cámara de Diputados (340 a 109 en lo particular)",
+    "estado": "oficial",
+    "fuente": "Canal del Congreso, 15-10-2026",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"
+   },
+   {
+    "valor": "18 a 11",
+    "etq": "Votos en las comisiones unidas del Senado (10 + 8 a favor; 5 + 6 en contra)",
+    "estado": "derivado",
+    "fuente": "Canal del Congreso, 21-10-2026; suma de las dos comisiones",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10329"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "Morena y aliados aprobaron la Ley de Ingresos 2027.",
+    "res": "matiz",
+    "explica": "La aprobaron la Cámara de Diputados (331 a 118 en lo general) y, el 28 de octubre, el pleno del Senado (75 a 34); falta su publicación en el DOF. El voto por partido no viene en las notas oficiales que consultamos.",
+    "fuente": "Canal del Congreso, 15 y 21-10-2026",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"
+   },
+   {
+    "dice": "Avala 1.7 billones de pesos en deuda interna.",
+    "res": "consta",
+    "explica": "Autoriza endeudamiento interno neto hasta por 1 billón 700 mil millones de pesos. Es el máximo permitido para el año, no deuda ya contratada.",
+    "fuente": "Canal del Congreso, 15-10-2026",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"
+   },
+   {
+    "dice": "Elimina el 100 % de multas y recargos fiscales a grandes contribuyentes.",
+    "res": "matiz",
+    "explica": "Es una reducción de multas, recargos y gastos de ejecución, no una condonación del impuesto: hay que pagar completo el adeudo. La reserva aprobada quita el tope de 300 millones de pesos y deja entrar a los grandes contribuyentes. El porcentaje exacto para 2027 no viene en la nota oficial; lo confirmará el texto publicado en el DOF.",
+    "fuente": "Canal del Congreso, 16-10-2026",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10322"
+   },
+   {
+    "dice": "Fue tras un acuerdo de Sheinbaum con el CCE.",
+    "res": "matiz",
+    "explica": "La presidenta lo anunció el 13 de octubre en el 50 aniversario del CCE como una propuesta suya a Hacienda: «sin ninguna multa, sin ningún recargo, a cualquier monto». Que sea un «acuerdo» con el CCE lo dicen los medios.",
+    "fuente": "Presidencia, versión estenográfica del 50 aniversario del CCE (13-10-2026)",
+    "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-50-aniversario-del-consejo-coordinador-empresarial"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "Ya llegó: el pleno del Senado la aprobó 75 a 34 (Canal del Congreso, 28-10-2026). Su nota «Al momento» trae el resto",
+    "url": "noticias-auditavision.html#col-senado-ley-de-ingresos-2027"
+   },
+   {
+    "que": "Publicación de la Ley de Ingresos 2027 en el Diario Oficial: el texto final del artículo vigésimo primero transitorio y el porcentaje exacto",
+    "url": "https://www.dof.gob.mx/"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Canal del Congreso: Aprueban en San Lázaro Ley de Ingresos 2027 (15-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"
+   },
+   {
+    "nombre": "Canal del Congreso: Modificación a Ley de Ingresos busca ampliar beneficios (16-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10322"
+   },
+   {
+    "nombre": "Canal del Congreso: Senado aprueba Ley de Ingresos 2027 por 10.6 billones de pesos (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "nombre": "Canal del Congreso: Comisiones del Senado aprueban Ley de Ingresos 2027 (21-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10329"
+   },
+   {
+    "nombre": "Presidencia de la República: versión estenográfica del 50 aniversario del Consejo Coordinador Empresarial (13-10-2026)",
+    "url": "https://www.gob.mx/presidencia/articulos/version-estenografica-50-aniversario-del-consejo-coordinador-empresarial"
+   },
+   {
+    "nombre": "Cámara de Diputados: Ley de Ingresos de la Federación para el Ejercicio Fiscal 2026",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf"
+   }
+  ],
+  "actualizado": "29 de octubre de 2026"
+ },
+ {
+  "id": "hr-ratings-baja-mexico-bbb",
+  "seccion": "Verificado",
+  "icono": "📉",
+  "titulo": "HR Ratings baja la nota de la deuda de México a BBB: lo que reconoce Hacienda",
+  "balazo": "El 15 de octubre de 2026 Hacienda informó que HR Ratings bajó la calificación de largo plazo de México de BBB+ a BBB, con perspectiva estable. México sigue con grado de inversión ante las ocho agencias que lo califican.",
+  "circula": {
+   "red": "Redes sociales",
+   "cuenta": "Publicación que menciona a @shcp_mx",
+   "fecha": "Octubre de 2026",
+   "texto": "HR Ratings redujo la calificación crediticia de largo plazo de la deuda soberana de México de BBB+ a BBB por deterioro fiscal, bajo crecimiento y rigidez del gasto. Estima un déficit de los RFSP de 4.6% del PIB para 2026 y prevé deuda de 61.2% del PIB en 2030. La SHCP, encabezada por Édgar Amador, destacó un ajuste fiscal previo de 1.3 puntos del PIB, la deuda en moneda nacional a tasa fija y las reservas internacionales."
+  },
+  "cuerpo": [
+   "Según el comunicado 82 de la Secretaría de Hacienda, del 15 de octubre de 2026, HR Ratings bajó la calificación de largo plazo de la deuda soberana de México de BBB+ a BBB, mantuvo la perspectiva estable y ratificó la de corto plazo en HR3. Hacienda subraya que México conserva el grado de inversión con las ocho agencias que califican su deuda.",
+   "En su respuesta, Hacienda recuerda que en 2025 hizo un ajuste fiscal de 1.3 puntos del PIB, el mayor desde 1990; que cerca del 80 % de la deuda del Gobierno Federal está en moneda nacional y a tasa fija; que las reservas internacionales superan los 256 mil millones de dólares, y que existe una Línea de Crédito Flexible del FMI por 24 mil millones de dólares.",
+   "Las razones y las proyecciones de la propia calificadora, un déficit de 4.6 % del PIB en 2026 y una deuda de 61.2 % del PIB en 2030, están en el reporte de HR Ratings, que no pudimos abrir desde la plataforma. Hasta cotejarlas, van como pendientes. Algunos medios citan otra proyección (65.6 % en 2033), y por eso no conviene repetir ninguna sin el reporte.",
+   "Qué quiere decir: BBB sigue siendo grado de inversión, el escalón más bajo antes de dejar de serlo es BBB-. Una calificación más baja suele encarecer lo que paga el país por pedir prestado, pero cuánto lo encarece no lo dice ningún documento oficial."
+  ],
+  "dato_curioso": "En octubre de 2025, HR Ratings había ratificado a México en BBB+ y mejorado su perspectiva de negativa a estable. Un año después, mantuvo la perspectiva estable pero bajó un escalón la nota.",
+  "cifras": [
+   {
+    "valor": "BBB+ → BBB",
+    "etq": "Calificación de largo plazo de la deuda soberana, según HR Ratings (perspectiva estable)",
+    "estado": "oficial",
+    "fuente": "SHCP, comunicado 82 (15-10-2026)",
+    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+   },
+   {
+    "valor": "1.3 pp del PIB",
+    "etq": "Ajuste fiscal de 2025, el mayor desde 1990, según Hacienda",
+    "estado": "oficial",
+    "fuente": "SHCP, comunicado 82 (15-10-2026)",
+    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+   },
+   {
+    "valor": "≈ 80 %",
+    "etq": "Deuda del Gobierno Federal en moneda nacional y a tasa fija",
+    "estado": "oficial",
+    "fuente": "SHCP, comunicado 82 (15-10-2026)",
+    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+   },
+   {
+    "valor": "> 256 mil mdd",
+    "etq": "Reservas internacionales",
+    "estado": "oficial",
+    "fuente": "SHCP, comunicado 82 (15-10-2026)",
+    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+   }
+  ],
+  "cotejo": [
+   {
+    "dice": "HR Ratings redujo la calificación de largo plazo de México de BBB+ a BBB.",
+    "res": "consta",
+    "explica": "Lo informa la propia Secretaría de Hacienda: de BBB+ a BBB, con perspectiva estable; la de corto plazo se ratificó en HR3.",
+    "fuente": "SHCP, comunicado 82 (15-10-2026)",
+    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+   },
+   {
+    "dice": "Fue por deterioro fiscal, bajo crecimiento económico y rigidez del gasto.",
+    "res": "pendiente",
+    "explica": "Son las razones de la calificadora; están en su reporte, que no pudimos abrir: falta de la plataforma.",
+    "fuente": "HR Ratings",
+    "url": "https://www.hrratings.com/",
+    "quien": "Falta de la plataforma: el reporte de HR Ratings existe y aún no lo integramos",
+    "donde": "https://www.hrratings.com/"
+   },
+   {
+    "dice": "Estima un déficit de los RFSP de 4.6 % del PIB para 2026 y deuda de 61.2 % del PIB en 2030.",
+    "res": "pendiente",
+    "explica": "Son proyecciones de HR Ratings, no de Hacienda. Los medios citan cifras distintas y el reporte no lo pudimos abrir: falta de la plataforma.",
+    "fuente": "HR Ratings",
+    "url": "https://www.hrratings.com/",
+    "quien": "Falta de la plataforma: el reporte de HR Ratings existe y aún no lo integramos",
+    "donde": "https://www.hrratings.com/"
+   },
+   {
+    "dice": "Hacienda destacó un ajuste fiscal previo de 1.3 puntos del PIB, la deuda en moneda nacional a tasa fija y las reservas internacionales.",
+    "res": "consta",
+    "explica": "Las tres cosas están en el comunicado: ajuste de 1.3 puntos del PIB en 2025, cerca del 80 % de la deuda federal en moneda nacional y a tasa fija, y reservas por más de 256 mil millones de dólares.",
+    "fuente": "SHCP, comunicado 82 (15-10-2026)",
+    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+   },
+   {
+    "dice": "La SHCP está encabezada por Édgar Amador.",
+    "res": "pendiente",
+    "explica": "El comunicado 82 no nombra al secretario, y no cotejamos su nombramiento en un documento oficial: falta de la plataforma.",
+    "fuente": "Secretaría de Hacienda",
+    "url": "https://www.gob.mx/shcp",
+    "quien": "Falta de la plataforma: el nombramiento es público y aún no lo integramos",
+    "donde": "https://www.gob.mx/shcp"
+   }
+  ],
+  "sigue": [
+   {
+    "que": "Abrir el reporte de HR Ratings para cotejar sus razones y sus proyecciones de déficit y deuda",
+    "url": "https://www.hrratings.com/"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "SHCP, comunicado No. 82: HR Ratings ratificó la calificación soberana de corto plazo de México en HR3 (15-10-2026)",
+    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+   },
+   {
+    "nombre": "SHCP, comunicado No. 50: HR Ratings ratificó la calificación de México en BBB+ y cambió su perspectiva a estable (28-10-2025)",
+    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-50-hr-ratings-ratifico-la-calificacion-crediticia-de-mexico-en-bbb-modificando-su-perspectiva-de-negativa-a-estable"
+   }
+  ],
+  "actualizado": "26 de octubre de 2026"
+ },
  {
   "id": "garcia-luna-las-dos-cortes",
   "seccion": "Personajes",
@@ -1562,8 +3494,22 @@
  }
 ];
 
+  /* Desde el 28-10-2026 la pestaña es un periódico: «Al momento» y
+     «Verificado» son noticia (#noticiasDiario); lo demás es la Columna del
+     Erario, la opinión (#columnasDiario). La portada (#noticiasPortada) y el
+     seguimiento (#noticiasSeguimiento) solo llaman a la nota. */
+  var NOTICIA = { 'Al momento': 1, 'Verificado': 1 };
+  /* Desde el 29-10-2026 el diario vive en tres páginas (noticias.py, PARTES):
+     las columnas completas, en Auditavisión Noticias; el verificador, en
+     Verifica una noticia, y los casos abiertos, en Seguimiento. COL es la
+     página de las columnas, vacía cuando ya estás en ella. */
+  var VERIFICA = document.getElementById('verifica') ? '#verifica' : 'noticias-verifica.html#verifica';
   var raiz = document.getElementById('columnasDiario');
-  if (!raiz) return;
+  var raizN = document.getElementById('noticiasDiario');
+  var raizP = document.getElementById('noticiasPortada');
+  var raizS = document.getElementById('noticiasSeguimiento');
+  var COL = (raiz || raizN) ? '' : 'noticias-auditavision.html';
+  if (!raiz && !raizN && !raizS && !document.getElementById('columnasReplicas')) return;
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -1583,6 +3529,99 @@
     return '<figure class="col-fig col-ilus col-ilus-' + il[1] + '" aria-hidden="true"><span>' + (c.icono || il[0]) + '</span></figure>';
   }
 
+  /* Seguir un caso (pedido del autor, 26-10-2026: «activar una herramienta
+     de alarmas, programar cierto tipo de noticias o seguimiento»). Se guarda
+     solo en este navegador (localStorage av-sigo: {id: actualizado}); no
+     pide correo ni cuenta. Cuando una columna cambia su «actualizado», quien
+     la sigue ve el aviso de novedades hasta que la vuelve a abrir. */
+  var SIGO_K = 'av-sigo';
+  var sigo = (function () { try { return JSON.parse(localStorage.getItem(SIGO_K) || '{}') || {}; } catch (e) { return {}; } })();
+  function sigoGuardar() { try { localStorage.setItem(SIGO_K, JSON.stringify(sigo)); } catch (e) { /* sin almacenamiento: se olvida al cerrar */ } }
+  function sigue(c) { return Object.prototype.hasOwnProperty.call(sigo, c.id); }
+  function novedad(c) { return sigue(c) && sigo[c.id] !== (c.actualizado || ''); }
+  function porId(id) { for (var k = 0; k < COLUMNAS.length; k++) if (COLUMNAS[k].id === id) return COLUMNAS[k]; return null; }
+  function btnSeguir(c) {
+    return '<button type="button" class="col-seguir" data-id="' + esc(c.id) + '" aria-pressed="' + sigue(c) + '">' +
+      (sigue(c) ? '🔕 Dejar de seguir este caso' : '🔔 Seguir este caso') + '</button>';
+  }
+  function panelSigo() {
+    var ids = Object.keys(sigo).filter(porId);
+    var nuevos = ids.filter(function (id) { return novedad(porId(id)); }).length;
+    return '<section class="col-sigo" id="seguimientos" aria-labelledby="colSigoTit">' +
+      '<h4 class="col-sigo-tit" id="colSigoTit">🔔 Tus seguimientos' + (nuevos ? ' <span class="col-nuevo">' + nuevos + ' con novedades</span>' : '') + '</h4>' +
+      (ids.length ? '<ul>' + ids.map(function (id) {
+        var c = porId(id), nov = novedad(c);
+        return '<li' + (nov ? ' class="col-sigo-nuevo"' : '') + '><a href="' + COL + '#col-' + esc(id) + '">' + esc(c.titulo) + '</a> <small>' +
+          (nov ? '🆕 Actualizada al ' + esc(c.actualizado) + '; la seguías desde la versión del ' + esc(sigo[id] || 'sin fecha') : 'Sin cambios desde el ' + esc(sigo[id] || 'sin fecha')) +
+          '</small></li>';
+      }).join('') + '</ul>'
+        : '<p>Todavía no sigues ningún caso. Abre una columna y toca «🔔 Seguir este caso»: cuando la actualicemos con un documento nuevo, aquí verás el aviso.</p>') +
+      '<p class="col-sigo-nota">Se guarda solo en este navegador: no pedimos correo ni cuenta, y nadie más lo ve. Si borras los datos del navegador, se borra la lista.</p>' +
+    '</section>';
+  }
+  function repintarSigo() {
+    var viejo = document.getElementById('seguimientos');
+    if (viejo) viejo.outerHTML = panelSigo();
+  }
+
+  /* «Al momento»: la cuenta con números redondos, como barras a escala. */
+  function ejemploHtml(c) {
+    var e = c.ejemplo;
+    if (!e) return '';
+    var num = function (t) { return parseFloat(String(t).replace(/[^0-9.]/g, '')) || 0; };
+    var max = Math.max.apply(null, e.filas.map(function (f) { return num(f[1]); }));
+    return '<div class="col-ejemplo"><b>🧮 ' + esc(e.tit) + '</b> ' + chip('derivado') + '<p>' + esc(e.txt) + '</p><ul>' +
+      e.filas.map(function (f) {
+        var w = max ? Math.max(2, Math.round(100 * num(f[1]) / max)) : 0;
+        return '<li><span class="col-ej-etq">' + esc(f[0]) + '</span><span class="col-ej-barra"><i style="width:' + w + '%"></i></span>' +
+          '<strong>' + esc(f[1]) + '</strong><small>Operación: ' + esc(f[2]) + '</small></li>';
+      }).join('') + '</ul>' + (e.nota ? '<p class="col-ej-nota">' + esc(e.nota) + '</p>' : '') + '</div>';
+  }
+  function datosHtml(c) {
+    if (!c.datos || !c.datos.length) return '';
+    return '<div class="col-datos"><b>📊 Lo que dicen nuestros datos</b><ul>' + c.datos.map(function (d) {
+      return '<li><a href="' + esc(d.url) + '"><span aria-hidden="true">' + d.ico + '</span> ' + esc(d.tx) + ' ➔</a><small>' + esc(d.de) + '</small></li>';
+    }).join('') + '</ul></div>';
+  }
+  function glosarioHtml(c) {
+    if (!c.glosario || !c.glosario.length) return '';
+    return '<div class="col-glosa"><b>📖 Si una palabra no te queda clara</b><p>' + c.glosario.map(function (g) {
+      return '<a href="' + esc(g.url) + '">' + esc(g.t) + '</a>';
+    }).join('') + '</p></div>';
+  }
+  /* Lo que dice la red: búsquedas armadas, nunca un texto copiado ni redactado
+     por nosotros. Se rotulan «sin verificar» y llevan a Contrasta una nota. */
+  var RED = [
+    ['📰', 'Noticias', function (q) { return 'https://news.google.com/search?q=' + encodeURIComponent(q) + '&hl=es-419&gl=MX&ceid=MX:es-419'; }],
+    ['▶️', 'YouTube', function (q) { return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q); }],
+    ['💬', 'X', function (q) { return 'https://x.com/search?q=' + encodeURIComponent(q) + '&f=live'; }],
+    ['👥', 'Facebook', function (q) { return 'https://www.facebook.com/search/posts/?q=' + encodeURIComponent(q); }],
+    ['📜', 'Diario Oficial', function (q) { return 'https://www.google.com/search?q=' + encodeURIComponent(q + ' site:dof.gob.mx'); }]
+  ];
+  function redHtml(c) {
+    if (!c.red) return '';
+    return '<div class="col-red"><b>📡 Lo que dice la red ahora</b>' +
+      '<p>Búsquedas ya armadas con «' + esc(c.red) + '». <b>Lo que encuentres ahí no lo verificó Auditavisión</b>: una nota o un video no son un documento oficial.</p>' +
+      '<p class="col-red-lista">' + RED.map(function (r) {
+        return '<a href="' + esc(r[2](c.red)) + '" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">' + r[0] + '</span> ' + r[1] + ' ↗</a>';
+      }).join('') + '</p>' +
+      '<p class="col-red-pie">¿Encontraste una nota con cifras? <a href="' + VERIFICA + '">Contrástala con los documentos oficiales ➔</a></p></div>';
+  }
+  /* La franja «Al momento»: las notas breves, de la más nueva a la más vieja. */
+  function fechaN(f) { var p = String(f || '').split('-'); return p.length === 3 ? +(p[2] + p[1] + p[0]) : 0; }
+  function franja() {
+    var b = COLUMNAS.filter(function (c) { return c.seccion === 'Al momento'; })
+      .sort(function (x, y) { return fechaN(y.fecha) - fechaN(x.fecha); });
+    if (!b.length) return '';
+    return '<section class="col-franja" aria-labelledby="colFranjaTit"><h4 class="col-franja-tit" id="colFranjaTit">⏱️ Al momento <small>Lo que está pasando, verificado</small></h4><ol>' +
+      b.slice(0, 6).map(function (c) {
+        var pend = (c.cotejo || []).filter(function (x) { return x.res === 'pendiente'; }).length;
+        var ok = (c.cotejo || []).filter(function (x) { return x.res === 'consta' || x.res === 'matiz'; }).length;
+        return '<li><time>' + esc(c.fecha) + '</time><a href="' + COL + '#col-' + esc(c.id) + '">' + esc(c.titulo) + '</a>' +
+          '<small>' + ok + ' con documento · ' + pend + ' por probar' + (c.nota ? ' · a partir de ' + esc(c.nota.medio) : '') + '</small></li>';
+      }).join('') + '</ol></section>';
+  }
+
   function articulo(c, i) {
     var cifras = (c.cifras || []).map(function (x) {
       return '<li><strong>' + esc(x.valor) + '</strong><span>' + esc(x.etq) + '</span>' +
@@ -1594,73 +3633,161 @@
     return '<article class="col-art' + (i === 0 ? ' col-art-portada' : '') + '" id="col-' + esc(c.id) + '" data-seccion="' + esc(c.seccion) + '">' +
       figura(c, i === 0) +
       '<div class="col-art-tx">' +
-        '<span class="col-kicker">' + esc(c.seccion) + '</span>' +
+        '<span class="col-kicker">' + (NOTICIA[c.seccion] ? esc(c.seccion === 'Verificado' ? 'Verificamos' : c.seccion) : '✒️ Opinión · ' + esc(c.seccion)) + '</span>' +
+        (novedad(c) ? '<span class="col-nuevo">🆕 Novedades desde que lo sigues</span>' : '') +
         '<h4 class="col-titular">' + esc(c.titulo) + '</h4>' +
         '<p class="col-balazo">' + esc(c.balazo) + '</p>' +
-        '<p class="col-firma">Redacción Auditavisión · Con documentos oficiales</p>' +
-        '<button type="button" class="col-leer" aria-expanded="false" aria-controls="col-cuerpo-' + esc(c.id) + '">Leer la columna ➔</button>' +
+        '<p class="col-firma">' + (NOTICIA[c.seccion] ? 'Redacción Auditavisión' : 'La Columna del Erario') + ' · ' + (c.fecha ? esc(c.fecha) + ' · ' : '') + 'Con documentos oficiales</p>' +
+        '<button type="button" class="col-leer" aria-expanded="false" aria-controls="col-cuerpo-' + esc(c.id) + '">Leer completa ➔</button>' +
       '</div>' +
       '<div class="col-cuerpo" id="col-cuerpo-' + esc(c.id) + '" hidden>' +
         (c.cuerpo || []).map(function (p, k) { return '<p' + (k === 0 ? ' class="col-capitular"' : '') + '>' + esc(p) + '</p>'; }).join('') +
+        ejemploHtml(c) +
+        (c.nota ? '<p class="col-nota">📰 <b>De dónde salió:</b> <a href="' + esc(c.nota.url) + '" target="_blank" rel="noopener noreferrer">' + esc(c.nota.medio) + ', «' + esc(c.nota.titulo) + '» ↗</a> · ' + esc(c.nota.fecha) +
+          '. Es el punto de partida: lo cotejamos contra el documento oficial.</p>' : '') +
+        (c.circula ? '<aside class="col-circula"><b>' + (c.nota ? '📣 Lo que se dijo' : '📣 Lo que circula') + '</b><p>«' + esc(c.circula.texto) + '»</p>' +
+          '<small>' + esc(c.circula.cuenta) + ' · ' + esc(c.circula.red) + ' · ' + esc(c.circula.fecha) + '</small></aside>' : '') +
+        (c.cotejo ? '<div class="col-cotejo"><b>🔍 Cotejo, afirmación por afirmación</b><ol>' + c.cotejo.map(function (x, k) {
+          var r = RES[x.res] || RES.pendiente;
+          return '<li class="col-res-' + esc(x.res.replace(' ', '-')) + '"><p class="col-dice">«' + esc(x.dice) + '»</p>' +
+            '<p><span class="col-res' + (x.res === 'pendiente' ? ' est-chip est-pendiente" data-pend="red-' + esc(c.id) + '-' + (k + 1) + '"' : '"') + '>' + r[0] + ' ' + r[1] + '</span> ' + esc(x.explica) + '</p>' +
+            '<small>' + (x.url ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.fuente) + ' ↗</a>' : esc(x.fuente)) + '</small></li>';
+        }).join('') + '</ol></div>' : '') +
+        datosHtml(c) + glosarioHtml(c) + redHtml(c) +
+        (c.sigue ? '<div class="col-sigue"><b>🗓️ Lo que sigue</b><ul>' + c.sigue.map(function (x) {
+          return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.que) + ' ↗</a></li>';
+        }).join('') + '</ul></div>' : '') +
         (c.dato_curioso ? '<aside class="col-dato"><b>💡 Dato curioso</b><p>' + esc(c.dato_curioso) + '</p></aside>' : '') +
         (cifras ? '<ul class="col-cifras" aria-label="Cifras de la columna">' + cifras + '</ul>' : '') +
         '<div class="col-fuentes"><b>📎 Documentos que la sostienen</b><ol>' + fuentes + '</ol>' +
           (c.actualizado ? '<p class="col-act">Verificado al ' + esc(c.actualizado) + '.</p>' : '') +
         '</div>' +
+        (c.replica && c.replica.length ? '<aside class="col-replica"><b>✉️ Réplica</b>' + c.replica.map(function (r) {
+          return '<p>' + esc(r.texto) + '</p><small>' + esc(r.quien) + ' · ' + esc(r.fecha) + '</small>';
+        }).join('') + '</aside>' : '') +
+        (c.postura && c.postura.length ? '<aside class="col-postura"><b>🗣️ Postura de la parte aludida</b>' + c.postura.map(function (r) {
+          return '<p>' + esc(r.texto) + '</p><small>' + esc(r.quien) + ' · ' + esc(r.fecha) +
+            (r.url ? ' · <a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer">su documento ↗</a>' : '') + '</small>';
+        }).join('') + '<small>En sus palabras: no la calificamos.</small></aside>' : '') +
+        '<p class="col-replica-pie">¿Esta columna te alude con un dato inexacto o falso? <a href="derecho-de-replica.html">Ejerce tu derecho de réplica</a>: se publica gratis, íntegra y sin comentarios.</p>' +
         '<div class="col-acciones">' +
-          '<button type="button" class="col-copiar" data-id="' + esc(c.id) + '">🔗 Copiar enlace a esta columna</button>' +
+          btnSeguir(c) +
+          '<button type="button" class="col-copiar" data-id="' + esc(c.id) + '">🔗 Copiar enlace</button>' +
           '<button type="button" class="col-cerrar">Cerrar la columna ▴</button>' +
         '</div>' +
       '</div>' +
     '</article>';
   }
 
-  var filtro = 'todas';
-  function pintar() {
-    var lista = COLUMNAS.filter(function (c) { return filtro === 'todas' || c.seccion === filtro; });
-    raiz.innerHTML =
-      '<header class="col-cabezal">' +
-        '<div class="col-cabezal-linea"><span>Edición del ' + EDICION + '</span><span>Cada cifra, con su documento</span></div>' +
-        '<h3 class="col-nombre">La Columna del Erario</h3>' +
-        '<p class="col-lema">Personajes y hechos del dinero público que vale la pena conocer</p>' +
-        '<nav class="col-secciones" aria-label="Secciones del diario">' +
-          SECCIONES.map(function (s) {
-            var n = s[0] === 'todas' ? COLUMNAS.length : COLUMNAS.filter(function (c) { return c.seccion === s[0]; }).length;
-            return '<button type="button" data-sec="' + s[0] + '" aria-pressed="' + (filtro === s[0]) + '">' + s[1] + ' <small>' + n + '</small></button>';
-          }).join('') +
-        '</nav>' +
-      '</header>' +
-      '<p class="col-aviso">Estas columnas sustituyen las fichas de personajes de la Enciclopedia, retiradas en septiembre de 2026 porque no citaban fuentes. ' +
-        'Aquí solo entra lo que sostiene un documento oficial: una sentencia, una resolución, un informe de la Auditoría Superior o el Diario Oficial. ' +
-        'Un proceso abierto no es una condena, y una cifra «por aclarar» no es un robo probado.</p>' +
+  var filtros = { n: 'todas', o: 'todas' };
+  function suyas(g) { return COLUMNAS.filter(function (c) { return g === 'n' ? NOTICIA[c.seccion] : !NOTICIA[c.seccion]; }); }
+  function rejilla(g) {
+    var el = g === 'n' ? raizN : raiz, secs = g === 'n' ? SEC_N : SEC_O;
+    if (!el) return;
+    var todas = suyas(g);
+    var lista = todas.filter(function (c) { return filtros[g] === 'todas' || c.seccion === filtros[g]; });
+    el.innerHTML =
+      '<nav class="col-secciones" aria-label="' + (g === 'n' ? 'Secciones de las noticias' : 'Secciones de la Columna') + '">' +
+        secs.map(function (s) {
+          var n = s[0] === 'todas' ? todas.length : todas.filter(function (c) { return c.seccion === s[0]; }).length;
+          return '<button type="button" data-g="' + g + '" data-sec="' + s[0] + '" aria-pressed="' + (filtros[g] === s[0]) + '">' + s[1] + ' <small>' + n + '</small></button>';
+        }).join('') +
+      '</nav>' +
+      (g === 'n'
+        ? '<p class="col-aviso"><b>Noticia, no opinión.</b> Aquí va lo que pasó y lo que consta en el documento oficial. «Al momento» trae las notas breves del día; ' +
+          '«Verificamos», el cotejo de lo que circula en redes, afirmación por afirmación. Un proceso abierto no es una condena, y una cifra «por aclarar» no es un robo probado.</p>'
+        : '<p class="col-aviso"><b>Opinión, con documentos.</b> La Columna del Erario es nuestro argumento sobre el uso del dinero público, y cada argumento descansa en ' +
+          'un documento oficial: una sentencia, una resolución, un informe de la Auditoría Superior o el Diario Oficial. Opinamos sobre decisiones públicas, nunca sobre la vida privada. ' +
+          'Estas columnas sustituyen las fichas de personajes de la Enciclopedia, retiradas en septiembre de 2026 porque no citaban fuentes.</p>') +
       (lista.length ? '<div class="col-rejilla">' + lista.map(articulo).join('') + '</div>'
                     : '<p class="col-vacio">Todavía no hay columnas verificadas en esta sección.</p>') +
-      '<details class="col-fuera"><summary>🧺 Lo que dejamos fuera y por qué <small>(' + DESCARTADO.length + ')</small></summary>' +
+      (g === 'o' ? '<details class="col-fuera"><summary>🧺 Lo que dejamos fuera y por qué <small>(' + DESCARTADO.length + ')</small></summary>' +
         '<p>Las fichas viejas de la Enciclopedia decían mucho más. Esto es lo que buscamos y no pudimos sostener con un documento oficial. ' +
         'Cuando el documento existe pero aún no lo abrimos, la falta es nuestra y lo decimos así.</p>' +
         '<ul>' + DESCARTADO.map(function (x) {
           return '<li><b>' + esc(x.tema) + ':</b> ' + esc(x.afirmacion) + '<br><span>' + esc(x.motivo) + '</span></li>';
         }).join('') + '</ul>' +
-      '</details>';
+      '</details>' : '');
+  }
+
+  /* La portada: la noticia principal, las que le siguen y, al lado, lo
+     último de la Columna. Son llamadas (#col-<id>): la nota completa vive
+     una sola vez, en su sección. */
+  function resumenCotejo(c) {
+    if (!c.cotejo) return '';
+    var ok = c.cotejo.filter(function (x) { return x.res === 'consta' || x.res === 'matiz'; }).length;
+    var pend = c.cotejo.filter(function (x) { return x.res === 'pendiente'; }).length;
+    var no = c.cotejo.filter(function (x) { return x.res === 'no consta'; }).length;
+    return '<span class="nt-cotejo-mini">' + (ok ? '✅ ' + ok + ' con documento' : '') + (no ? ' · ❌ ' + no + ' sin documento' : '') + (pend ? ' · ⏳ ' + pend + ' por probar' : '') + '</span>';
+  }
+  function llamada(c, clase) {
+    return '<li class="' + clase + '"><a href="' + COL + '#col-' + esc(c.id) + '"><span class="col-kicker">' + esc(c.seccion === 'Verificado' ? 'Verificamos' : c.seccion) + '</span>' +
+      '<b>' + esc(c.titulo) + '</b></a>' + resumenCotejo(c) + '</li>';
+  }
+  function portada() {
+    if (!raizP) return;
+    var nt = suyas('n'), op = suyas('o');
+    var lead = nt[0];
+    raizP.innerHTML = franja() +
+      '<div class="nt-portada">' +
+        (lead ? '<article class="nt-lead">' +
+          '<a class="nt-lead-a" href="' + COL + '#col-' + esc(lead.id) + '">' + figura(lead, true) +
+            '<span class="col-kicker">' + esc(lead.seccion) + '</span><h3 class="nt-lead-tit">' + esc(lead.titulo) + '</h3></a>' +
+          '<p class="nt-lead-balazo">' + esc(lead.balazo) + '</p>' +
+          '<p class="col-firma">Redacción Auditavisión · ' + (lead.fecha ? esc(lead.fecha) + ' · ' : '') + 'Con documentos oficiales</p>' + resumenCotejo(lead) +
+        '</article>' : '') +
+        '<div class="nt-mas"><h3 class="nt-col-tit">Más noticias</h3><ul class="nt-llamadas">' + nt.slice(1, 6).map(function (c) { return llamada(c, 'nt-llamada'); }).join('') + '</ul>' +
+          '<a class="nt-ver-todo" href="#al-momento">Todas las noticias (' + nt.length + ') ➔</a></div>' +
+        '<aside class="nt-op" aria-label="La Columna del Erario"><h3 class="nt-col-tit">✒️ Opinión</h3><p class="nt-op-lema">La Columna del Erario</p><ul class="nt-llamadas">' +
+          op.slice(0, 4).map(function (c) { return llamada(c, 'nt-llamada nt-llamada-op'); }).join('') + '</ul>' +
+          '<a class="nt-ver-todo" href="#columnas">Toda la Columna (' + op.length + ') ➔</a></aside>' +
+      '</div>';
+  }
+
+  /* Seguimiento: los casos abiertos con lo que falta para cerrarlos y, al
+     inicio, los que sigue el lector (solo en su navegador). */
+  function seguimiento() {
+    if (!raizS) return;
+    var casos = COLUMNAS.filter(function (c) { return c.sigue && c.sigue.length; });
+    var docs = casos.reduce(function (s, c) { return s + c.sigue.length; }, 0);
+    raizS.innerHTML = panelSigo() +
+      '<h3 class="nt-sub">📂 Casos abiertos: ' + casos.length + ' casos, ' + docs + ' documentos por llegar</h3>' +
+      '<ol class="nt-casos">' + casos.map(function (c) {
+        return '<li class="nt-caso"><div class="nt-caso-cab"><span class="col-kicker">' + esc(c.seccion === 'Verificado' ? 'Verificamos' : c.seccion) + '</span>' +
+          '<a href="' + COL + '#col-' + esc(c.id) + '"><b>' + esc(c.titulo) + '</b></a>' +
+          '<small>Revisado al ' + esc(c.actualizado || c.fecha || 'sin fecha') + ' · ' + c.sigue.length + (c.sigue.length === 1 ? ' documento' : ' documentos') + ' por llegar</small></div>' +
+          '<ul class="nt-caso-falta">' + c.sigue.slice(0, 3).map(function (x) {
+            return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.que) + ' ↗</a></li>';
+          }).join('') + (c.sigue.length > 3 ? '<li><a href="' + COL + '#col-' + esc(c.id) + '">y ' + (c.sigue.length - 3) + ' más en la nota ➔</a></li>' : '') + '</ul>' +
+          btnSeguir(c) + '</li>';
+      }).join('') + '</ol>';
   }
 
   function abrir(art, abrirla, desplazar) {
     var btn = art.querySelector('.col-leer'), cuerpo = art.querySelector('.col-cuerpo');
     btn.setAttribute('aria-expanded', abrirla ? 'true' : 'false');
-    btn.textContent = abrirla ? 'Leyendo la columna ▾' : 'Leer la columna ➔';
+    btn.textContent = abrirla ? 'Leyendo ▾' : 'Leer completa ➔';
     cuerpo.hidden = !abrirla;
+    var c = porId(art.id.slice(4));
+    if (abrirla && c && novedad(c)) {
+      sigo[c.id] = c.actualizado || '';
+      sigoGuardar();
+      var nv = art.querySelector('.col-art-tx .col-nuevo');
+      if (nv) nv.remove();
+      repintarSigo();
+    }
     art.classList.toggle('col-abierta', abrirla);
     if (desplazar) {
       var nav = document.querySelector('.site-top-nav');
       document.body.classList.add('cabecera-compacta');
-      var alto = nav ? nav.getBoundingClientRect().height : 0;
+      var alto = (nav ? nav.getBoundingClientRect().height : 0) + 56;
       window.scrollTo({ top: Math.max(0, art.getBoundingClientRect().top + window.pageYOffset - alto - 12), behavior: 'smooth' });
     }
   }
 
-  raiz.addEventListener('click', function (e) {
+  document.addEventListener('click', function (e) {
     var sec = e.target.closest('.col-secciones button');
-    if (sec) { filtro = sec.getAttribute('data-sec'); pintar(); return; }
+    if (sec) { filtros[sec.getAttribute('data-g')] = sec.getAttribute('data-sec'); rejilla(sec.getAttribute('data-g')); return; }
     var leer = e.target.closest('.col-leer');
     if (leer) {
       var art = leer.closest('.col-art');
@@ -1669,16 +3796,44 @@
     }
     var cerrar = e.target.closest('.col-cerrar');
     if (cerrar) { abrir(cerrar.closest('.col-art'), false, true); return; }
+    var seg = e.target.closest('.col-seguir');
+    if (seg) {
+      var cs = porId(seg.getAttribute('data-id'));
+      if (sigue(cs)) delete sigo[cs.id]; else sigo[cs.id] = cs.actualizado || '';
+      sigoGuardar();
+      [].forEach.call(document.querySelectorAll('.col-seguir[data-id="' + cs.id + '"]'), function (b) { b.outerHTML = btnSeguir(cs); });
+      repintarSigo();
+      return;
+    }
     var copiar = e.target.closest('.col-copiar');
     if (copiar) {
       var url = location.href.split('#')[0] + '#col-' + copiar.getAttribute('data-id');
-      var listo = function () { copiar.textContent = '✅ Enlace copiado'; setTimeout(function () { copiar.textContent = '🔗 Copiar enlace a esta columna'; }, 2200); };
+      var listo = function () { copiar.textContent = '✅ Enlace copiado'; setTimeout(function () { copiar.textContent = '🔗 Copiar enlace'; }, 2200); };
       if (navigator.clipboard) navigator.clipboard.writeText(url).then(listo, function () { prompt('Copia este enlace:', url); });
       else prompt('Copia este enlace:', url);
     }
   });
 
-  pintar();
+  /* Réplicas y posturas (pedido del autor, 28-10-2026: «un apartado para
+     derecho de réplica, postura»). Lista las columnas que ya traen una u otra;
+     vive en la sección #replica de noticias-relevantes.html. */
+  var rep = document.getElementById('columnasReplicas');
+  if (rep) {
+    var con = COLUMNAS.filter(function (c) { return (c.replica && c.replica.length) || (c.postura && c.postura.length); });
+    rep.innerHTML = con.length
+      ? '<ul class="col-rep-lista">' + con.map(function (c) {
+          var n = (c.replica || []).length, m = (c.postura || []).length;
+          return '<li><a href="' + COL + '#col-' + esc(c.id) + '">' + esc(c.titulo) + '</a> <small>' +
+            [n ? n + (n > 1 ? ' réplicas' : ' réplica') : '', m ? m + (m > 1 ? ' posturas' : ' postura') : ''].filter(Boolean).join(' · ') + '</small></li>';
+        }).join('') + '</ul>'
+      : '<p class="col-rep-vacio">Hasta hoy nadie aludido en las ' + COLUMNAS.length + ' notas y columnas nos ha pedido una réplica, ' +
+        'y no hemos recibido posturas en documento propio. Cuando llegue una, aparecerá aquí y en su nota, y quien sigue el caso recibirá el aviso.</p>';
+  }
+
+  rejilla('n');
+  rejilla('o');
+  portada();
+  seguimiento();
 
   /* Enlace directo a una columna (#col-<id>): abre la pestaña y la columna. */
   function irAColumna() {

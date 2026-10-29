@@ -45,13 +45,14 @@
   function fmt(v, f) {
     if (f === 'entero') return miles(Math.round(v).toFixed(0));
     if (f === 'pct') return v.toFixed(1) + '%';
+    if (f === 'ha1') return miles(v.toFixed(1)) + ' ha';
     if (f === 'pesos2') return '$' + miles((Math.round(v * 100) / 100).toFixed(2));
     return '$' + miles(v.toFixed(1)) + ' mdp';
   }
   function mdpPesos(p) { return fmt(p / 1e6, 'mdp1'); }
-  function chip(e) {
+  function chip(e, pend) {
     var t = (e === 'oficial' || e === 'pendiente') ? e : 'derivado';
-    return '<span class="est-chip est-' + t + '">' + t + '</span>';
+    return '<span class="est-chip est-' + t + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + t + '</span>';
   }
   function suma(l, c) { return l.reduce(function (a, x) { return a + (x[c] || 0); }, 0); }
   function acc(l, c) { return l.reduce(function (a, x) { return a + ((x.acciones && x.acciones[c]) || 0); }, 0); }
@@ -113,6 +114,9 @@
       fuente: f.fuente + '. ' + f.alcance,
       acciones: [
         { txt: '📂 Abrir el expediente completo', href: 'expedientes.html#exp-' + id },
+        { txt: '🏗️ Ver su ficha y simulador en Inversión y Megaobras', href: 'herramienta-megaobras-sector.html#obra-' + (id === 'aifa' ? 'aifa-texcoco' : id) },
+        { txt: '📊 Ver su estado de resultados (gana o pierde)', href: 'herramienta-megaobras-pulso-cuenta.html#cuenta-' + (id === 'aifa' ? 'aifa-texcoco' : id) },
+        { txt: '🖼️ Panorama de las 11 megaobras y 2 rescates', href: 'auditoria-inversion-megaobras.html' },
         { txt: '🏛️ Leer el informe principal de la ASF', url: principal.url }
       ]
     };
@@ -233,6 +237,9 @@
       fuente: 'ASF, Informe Individual de la Cuenta Pública 2023, auditoría ' + a.num + ' (' + a.clave + '), resultado 4, pp. 79 a 84, y dictamen.',
       acciones: [
         { txt: '📂 Abrir el expediente de Birmex', href: 'expedientes.html#exp-birmex' },
+        { txt: '🏗️ Ver la ficha de la Megafarmacia en Inversión y Megaobras', href: 'herramienta-megaobras-sector.html#obra-megafarmacia' },
+        { txt: '📊 Ver su cuenta en Inversión y Megaobras', href: 'herramienta-megaobras-pulso-cuenta.html#cuenta-megafarmacia' },
+        { txt: '🖼️ Panorama de las 11 megaobras y 2 rescates', href: 'auditoria-inversion-megaobras.html' },
         { txt: '🏛️ Leer el informe de la ASF', url: a.url }
       ]
     };
@@ -280,6 +287,237 @@
     };
   }
 
+  function ineContratos() {
+    var A = DB.auditorias_actuales && DB.auditorias_actuales['ine-contratos'];
+    if (!A) return null;
+    var c = A.cifras, f = A.fuentes;
+    return {
+      cont: [
+        { ico: '🗳️', tit: 'Ejercido en 2025', v: c.ejercido_2025_mdp, f: 'mdp1', etq: 'Cuenta Pública 2025, Ramo 22 (con elección judicial)', est: 'oficial' },
+        { ico: '📅', tit: 'Aprobado en 2026', v: c.aprobado_2026_mdp, f: 'mdp1', etq: 'Presupuesto de Egresos 2026, Ramo 22', est: 'oficial' },
+        { ico: '💸', tit: 'Pagado al 2T 2026', v: c.pagado_2t_2026_mdp, f: 'mdp1', etq: 'Informe Trimestral de Hacienda al segundo trimestre', est: 'oficial' },
+        { ico: '🔍', tit: 'Por aclarar (CP 2024)', v: c.asf_cp2024_por_aclarar_mdp, f: 'mdp1', etq: 'en ' + c.asf_cp2024_auditorias + ' auditorías y ' + c.asf_cp2024_po + ' pliegos de la ASF', est: 'oficial' },
+        { ico: '⏳', tit: 'Contratos señalados', txt: 'En revisión (ASF y OIC)', etq: 'los contratos que la prensa suma siguen pendientes de cotejo oficial', est: 'pendiente', pend: A.pendiente_id }
+      ],
+      rastroTit: 'El presupuesto y la fiscalización del INE en cifras oficiales', rastroEst: 'oficial',
+      rastro: [
+        { k: 'Gasto ejercido por el INE en 2025', sub: 'Cuenta Pública 2025, Tomo VI, Ramo 22 (año de la elección judicial)', v: c.ejercido_2025_mdp, url: f[0].url, est: 'oficial' },
+        { k: 'Presupuesto aprobado para el INE en 2026', sub: 'Presupuesto de Egresos de la Federación 2026, Anexo 1, Ramo 22', v: c.aprobado_2026_mdp, url: f[0].url, est: 'oficial' },
+        { k: 'Presupuesto calendarizado al 2.º trimestre de 2026', sub: 'Avance financiero al corte del primer semestre de 2026', v: c.calendario_2t_2026_mdp, url: f[0].url, est: 'oficial' },
+        { k: 'Gasto pagado al 2.º trimestre de 2026', sub: 'Informes sobre la Situación Económica y las Finanzas Públicas 2T 2026', v: c.pagado_2t_2026_mdp, url: f[0].url, est: 'oficial' },
+        { k: 'Monto por aclarar en la Cuenta Pública 2024', sub: c.asf_cp2024_auditorias + ' auditorías de la ASF al INE (' + c.asf_cp2024_po + ' pliegos de observaciones)', v: c.asf_cp2024_por_aclarar_mdp, url: f[1].url, est: 'oficial' }
+      ],
+      escena: { tipo: 'reparto', tit: 'La escala presupuestaria del INE (Ramo 22)', caja: 'Ramo 22 · INE', unidad: 'mdp' },
+      hallazgo: A.que,
+      pendiente: A.falta,
+      pendienteId: A.pendiente_id,
+      fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
+      acciones: [
+        { txt: '🏢 Ver la ficha técnica del INE en el Auditor de entes públicos', href: 'herramienta-inspector-entes.html#ente=federal:ine' },
+        { txt: '🔍 Leer el cotejo completo de lo que circula en Verificamos', href: 'noticias-auditavision.html#col-taddei-renuncia-ine-contratos' },
+        { txt: '📄 Fallo público de la licitación LP-INE-001/2025', url: f[4].url }
+      ]
+    };
+  }
+
+  function guaymasGas() {
+    var A = DB.auditorias_actuales && DB.auditorias_actuales['guaymas-gas'];
+    if (!A) return null;
+    var c = A.cifras, f = A.fuentes;
+    return {
+      cont: [
+        { ico: '📐', tit: 'Superficie según SENER', v: c.superficie_sener_ha, f: 'ha1', etq: 'Parque Industrial Pesquero «Rodolfo Sánchez Taboada» (21-10-2026)', est: 'oficial' },
+        { ico: '➖', tit: 'Diferencia en disputa', v: c.diferencia_ha, f: 'ha1', etq: 'frente a las ' + c.superficie_tribuna_ha + ' ha señaladas en tribuna (' + c.superficie_tribuna_ha + ' − ' + c.superficie_sener_ha + ')', est: 'derivado' },
+        { ico: '🚢', tit: 'Buques metaneros al año', v: c.buques_anuales, f: 'entero', etq: 'máximo (5 al mes, 4 % del tránsito de la zona) y ' + c.almacenamiento_mil_m3 + ' mil m³ de gas', est: 'oficial' },
+        { ico: '🛡️', tit: 'Presupuesto ASEA 2026', v: c.asea_2026_mdp, f: 'mdp1', etq: 'Ramo 16, unidad G00, agencia que revisa el impacto ambiental', est: 'oficial' },
+        { ico: '⏳', tit: 'Contrato de comodato', txt: 'Sin publicar', etq: 'el comodato y el resolutivo ambiental siguen pendientes', est: 'pendiente', pend: A.pendiente_id }
+      ],
+      rastroTit: 'Presupuesto 2026 de las autoridades ambientales exhortadas en la Gaceta Parlamentaria', rastroEst: 'oficial',
+      rastro: [
+        { k: 'CONANP · Comisión Nacional de Áreas Naturales Protegidas (F00)', sub: 'Presupuesto aprobado 2026 en el Ramo 16 para áreas naturales y marinas protegidas', v: c.conanp_2026_mdp, url: f[3].url, est: 'oficial' },
+        { k: 'PROFEPA · Procuraduría Federal de Protección al Ambiente (E00)', sub: 'Presupuesto aprobado 2026 en el Ramo 16 para inspección y vigilancia ambiental', v: c.profepa_2026_mdp, url: f[3].url, est: 'oficial' },
+        { k: 'ASEA · Proyecto de presupuesto 2027 (G00)', sub: 'Agencia Nacional de Seguridad Industrial y de Protección al Medio Ambiente del Sector Hidrocarburos (PPEF 2027)', v: c.asea_2027_mdp, url: f[3].url, est: 'oficial' },
+        { k: 'ASEA · Presupuesto aprobado 2026 (G00)', sub: 'Autoridad exhortada por el Congreso de Sonora para revisar los proyectos de gas del Golfo de California', v: c.asea_2026_mdp, url: f[3].url, est: 'oficial' },
+        { k: 'INECC · Instituto Nacional de Ecología y Cambio Climático (RJJ)', sub: 'Autoridad exhortada en la Gaceta Parlamentaria No. 2104 (aprobado 2026, Ramo 16)', v: c.inecc_2026_mdp, url: f[3].url, est: 'oficial' }
+      ],
+      escena: { tipo: 'reparto', tit: 'Con qué recursos cuentan las agencias ambientales del Ramo 16', caja: 'Ramo 16 · Ambiente', unidad: 'mdp' },
+      hallazgo: A.que,
+      pendiente: A.falta,
+      pendienteId: A.pendiente_id,
+      fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
+      acciones: [
+        { txt: '🌳 Ver la ficha del Golfo de California en Crisis ambientales', href: 'herramienta-ambiente-crisis.html' },
+        { txt: '🛡️ Revisar el presupuesto de la ASEA en el Auditor ambiental', href: 'herramienta-ambiente-auditor.html#aa-G00' },
+        { txt: '🔍 Leer el cotejo completo de Guaymas en Verificamos', href: 'noticias-auditavision.html#col-guaymas-comodato-amigo-gnl' },
+        { txt: '📜 Gaceta Parlamentaria No. 2104 del Congreso de Sonora', url: f[1].url }
+      ]
+    };
+  }
+
+  function medicamentosImss() {
+    var A = DB.auditorias_actuales && DB.auditorias_actuales['medicamentos-imss'];
+    if (!A) return null;
+    var c = A.cifras, f = A.fuentes, prov = A.proveedores_imss || [];
+    return {
+      cont: [
+        { ico: '🏥', tit: 'Contratos del IMSS', v: c.imss_monto_mdp, f: 'mdp1', etq: miles(c.imss_contratos) + ' contratos en ComprasMX (2025 y 2026)', est: 'oficial' },
+        { ico: '⚡', tit: 'Adjudicación directa IMSS', v: c.imss_adj_directa_pct, f: 'pct', etq: fmt(c.imss_adj_directa_mdp, 'mdp1') + ' en ' + miles(c.imss_adj_directa_contratos) + ' contratos directos', est: 'derivado' },
+        { ico: '🩺', tit: 'IMSS-Bienestar', v: c.imss_bienestar_monto_mdp, f: 'mdp1', etq: miles(c.imss_bienestar_contratos) + ' contratos (' + c.imss_bienestar_adj_directa_pct + '% por adjudicación directa)', est: 'oficial' },
+        { ico: '💊', tit: 'Birmex (2025-2026)', v: c.birmex_monto_mdp, f: 'mdp1', etq: miles(c.birmex_contratos) + ' contratos (' + c.birmex_adj_directa_pct + '% por adjudicación directa)', est: 'oficial' },
+        { ico: '⏳', tit: 'Señalamientos en redes', txt: 'Sin contrato oficial', etq: 'los >$800 mdp atribuidos en prensa (2023-2024) siguen pendientes', est: 'pendiente', pend: A.pendiente_id }
+      ],
+      rastroTit: 'Principales proveedores del IMSS en ComprasMX (2025 y 2026)', rastroEst: 'oficial',
+      rastro: prov.map(function (p) {
+        return {
+          k: p.nombre,
+          sub: 'RFC ' + p.rfc + ' · ' + miles(p.contratos) + ' contratos con el IMSS en 2025 y 2026 (importe antes de impuestos)',
+          v: p.monto_mdp,
+          url: f[0].url,
+          est: 'oficial'
+        };
+      }),
+      escena: { tipo: 'reparto', tit: 'El reparto entre los principales proveedores del IMSS', caja: 'IMSS · ComprasMX', unidad: 'mdp' },
+      hallazgo: A.que,
+      pendiente: A.falta,
+      pendienteId: A.pendiente_id,
+      fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
+      acciones: [
+        { txt: '📋 Explorar los contratos del IMSS en Contratos públicos', href: 'contratos-publicos.html?i=050GYR' },
+        { txt: '🏥 Ver los contratos de IMSS-Bienestar en Contratos públicos', href: 'contratos-publicos.html?i=056AYO' },
+        { txt: '🔍 Leer el cotejo de medicinas y ventiladores en Verificamos', href: 'noticias-auditavision.html#col-salud-ventiladores-y-medicinas' },
+        { txt: '📜 Circular 11/2020 en el Diario Oficial de la Federación', url: f[2].url }
+      ]
+    };
+  }
+
+  function deudaCongreso2027() {
+    var A = DB.auditorias_actuales && DB.auditorias_actuales['deuda-congreso-2027'];
+    if (!A) return null;
+    var c = A.cifras, f = A.fuentes;
+    return {
+      cont: [
+        { ico: '🧾', tit: 'Ingresos totales 2027', v: c.ingresos_totales_2027_mdp, f: 'mdp1', etq: 'estimados en la Ley de Ingresos aprobada por Diputados (15-10-2026)', est: 'oficial' },
+        { ico: '🏛️', tit: 'Techo de deuda interna', v: c.techo_deuda_interna_2027_mdp, f: 'mdp1', etq: 'endeudamiento interno neto máximo autorizado (' + c.votos_diputados_favor + ' votos a favor)', est: 'oficial' },
+        { ico: '💸', tit: 'Costo financiero 2027', v: c.costo_financiero_2027_mdp, f: 'mdp1', etq: 'intereses y comisiones propuestos en el Paquete Económico 2027', est: 'oficial' },
+        { ico: '📉', tit: 'Nota soberana HR Ratings', txt: 'BBB+ → BBB', etq: 'ajuste con perspectiva estable reconocido en el Comunicado 82 de Hacienda', est: 'oficial' },
+        { ico: '⏳', tit: 'Reporte de HR Ratings', txt: 'Por cotejar', etq: 'las proyecciones de 4.6% de déficit y 61.2% de deuda siguen pendientes', est: 'pendiente', pend: A.pendiente_id }
+      ],
+      rastroTit: 'Las grandes cifras del Paquete Económico y la Ley de Ingresos 2027', rastroEst: 'oficial',
+      rastro: [
+        { k: 'Ingresos presupuestarios estimados para 2027', sub: 'Impuestos, cuotas, derechos, productos y aprovechamientos (Criterios Generales 2027)', v: c.ingresos_presupuestarios_2027_mdp, url: f[4].url, est: 'oficial' },
+        { k: 'Techo de endeudamiento interno neto autorizado para 2027', sub: 'Aprobado por la Cámara de Diputados el 15-10-2026 (331 votos a favor y 118 en contra)', v: c.techo_deuda_interna_2027_mdp, url: f[0].url, est: 'oficial' },
+        { k: 'Costo financiero de la deuda propuesto para 2027', sub: 'Lo que se destinará a pagar intereses y servicio de la deuda en 2027', v: c.costo_financiero_2027_mdp, url: f[4].url, est: 'oficial' },
+        { k: 'Requerimientos Financieros del Sector Público (déficit ampliado 2027)', sub: 'Equivalente a 3.9 % del PIB en los Criterios Generales de Política Económica 2027', v: c.rfsp_2027_mdp, url: f[4].url, est: 'oficial' },
+        { k: 'Ingresos por financiamiento en la Ley de Ingresos 2027', sub: 'Diferencia entre ingresos totales ($10,636,488.0 mdp) e ingresos presupuestarios ($9,156,528.9 mdp)', v: c.financiamiento_2027_mdp, url: f[0].url, est: 'derivado' }
+      ],
+      escena: { tipo: 'reparto', tit: 'Ingresos, techo de deuda y costo financiero en 2027', caja: 'Paquete 2027', unidad: 'mdp' },
+      hallazgo: A.que,
+      pendiente: A.falta,
+      pendienteId: A.pendiente_id,
+      fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
+      acciones: [
+        { txt: '📈 Explorar el Paquete Económico 2027 paso a paso', href: 'numeros-paquete-2027.html' },
+        { txt: '🔍 Leer el cotejo de la Ley de Ingresos 2027 y las multas en Verificamos', href: 'noticias-auditavision.html#col-lif-2027-deuda-y-multas' },
+        { txt: '📉 Leer el cotejo sobre la calificación BBB de HR Ratings', href: 'noticias-auditavision.html#col-hr-ratings-baja-mexico-bbb' },
+        { txt: '📜 Nota oficial del Canal del Congreso (15-10-2026)', url: f[0].url }
+      ]
+    };
+  }
+
+  function inversionMegaobras() {
+    var A = DB.auditorias_actuales && DB.auditorias_actuales['inversion-megaobras'];
+    if (!A) return null;
+    var c = A.cifras, f = A.fuentes, obras = A.obras || [];
+    return {
+      cont: [
+        { ico: '📐', tit: 'Presupuesto inicial (11 obras)', v: c.obras_presu_mdp, f: 'mdp1', etq: 'monto aprobado originalmente en documentos oficiales (1988–2024)', est: 'derivado' },
+        { ico: '🏗️', tit: 'Costo real (11 obras)', v: c.obras_real_mdp, f: 'mdp1', etq: '+' + c.obras_sobrecosto_pct + '% de sobrecosto (' + fmt(c.obras_brecha_mdp, 'mdp1') + ' por encima de lo aprobado)', est: 'derivado' },
+        { ico: '🏦', tit: 'Los 2 rescates (aparte)', v: c.rescates_real_mdp, f: 'mdp1', etq: 'FOBAPROA-IPAB (1998) y FARAC carretero (1997)', est: 'derivado' },
+        { ico: '📉', tit: 'Pérdida neta anual', v: c.balance_neto_anual_mdp, f: 'mdp1', etq: 'en los ' + c.n_con_dato_anual + ' proyectos con dato anual (5 pierden ' + fmt(c.balance_pierde_mdp, 'mdp1') + ' y el AIFA gana ' + fmt(c.balance_gana_mdp, 'mdp1') + ')', est: 'derivado' },
+        { ico: '⏳', tit: 'Operación sin publicar', txt: c.n_pendiente_anual + ' obras sin dato', etq: 'Megafarmacia, Tren Interurbano, Agronitrogenados y Búnker no publican estado de resultados propio', est: 'pendiente', pend: A.pendiente_id }
+      ],
+      rastroTit: 'Las 11 megaobras y los 2 rescates de seis sexenios: costo real, sobrecosto y resultado anual', rastroEst: 'derivado',
+      rastro: obras.slice().sort(function (a, b) { return b.real_mdp - a.real_mdp; }).map(function (o) {
+        var resTxt = o.res_tipo === 'dato'
+          ? (o.res_mdp >= 0 ? 'Gana ' + fmt(o.res_mdp, 'mdp1') + ' al año' : 'Pierde ' + fmt(Math.abs(o.res_mdp), 'mdp1') + ' al año')
+          : (o.res_tipo === 'pendiente' ? 'Resultado anual pendiente de publicación oficial' : 'No opera como empresa');
+        var sobTxt = (o.sobrecosto_pct >= 0 ? '+' : '') + o.sobrecosto_pct.toFixed(1) + '%';
+        return {
+          k: o.nombre + (o.tipo === 'rescate' ? ' [Rescate]' : ''),
+          sub: o.presidente + ' (' + o.periodo + ') · Presupuestado: ' + fmt(o.presu_mdp, 'mdp1') + ' · Variación: ' + sobTxt + ' · ' + resTxt,
+          v: o.real_mdp,
+          href: o.ficha_href,
+          est: o.estado_real
+        };
+      }),
+      escena: { tipo: 'reparto', tit: 'El peso de cada obra y rescate dentro del costo total', caja: '6 sexenios', unidad: 'mdp' },
+      hallazgo: A.que,
+      pendiente: A.falta,
+      pendienteId: A.pendiente_id,
+      fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
+      acciones: [
+        { txt: '🔎 Aplicación 1 · Haz tu propia investigación por presidente y pregunta', href: 'herramienta-megaobras-investiga.html' },
+        { txt: '🏛️ Aplicación 2 · En qué invirtió cada presidente (tabla general en vivo)', href: 'herramienta-megaobras-tabla.html' },
+        { txt: '🏗️ Aplicación 3 · Obra por obra, por industria y simulador en vivo', href: 'herramienta-megaobras-sector.html' },
+        { txt: '🧮 Aplicación 4 · Las cuatro cifras, los rescates y de cero al resultado', href: 'herramienta-megaobras-cero.html' },
+        { txt: '📊 Aplicación 5 · La cuenta de cada obra (estados de resultados) y el ritmo', href: 'herramienta-megaobras-pulso-cuenta.html' },
+        { txt: '🌳 Ver la huella ambiental de las megaobras en la Enciclopedia', href: 'datos-ambiente-megaobras.html' }
+      ]
+    };
+  }
+
+  function obraMega(id) {
+    var A = DB.auditorias_actuales && DB.auditorias_actuales[id];
+    if (!A) return null;
+    var f = A.fuentes || [];
+    return {
+      cont: A.cont || [],
+      rastroTit: A.rastroTit,
+      rastroEst: A.rastroEst || 'oficial',
+      rastro: A.rastro || [],
+      escena: { tipo: 'reparto', tit: 'Los tramos del dinero documentados en informes oficiales', caja: A.caja || 'Evidencia oficial', unidad: 'mdp' },
+      hallazgo: A.que,
+      pendiente: A.falta,
+      pendienteId: A.pendiente_id || null,
+      fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
+      acciones: [
+        { txt: '🏗️ Ver su ficha, historia y simulador en Inversión y Megaobras', href: 'herramienta-megaobras-sector.html#obra-' + id },
+        { txt: '📊 Ver su cuenta (estado de resultados) y ritmo en vivo', href: 'herramienta-megaobras-pulso-cuenta.html#cuenta-' + id },
+        { txt: '🏛️ Ver su renglón en la tabla por presidente', href: 'herramienta-megaobras-tabla.html#mt-' + id },
+        { txt: '🖼️ Panorama de las 11 megaobras y 2 rescates', href: 'auditoria-inversion-megaobras.html' },
+        f[0] ? { txt: '📄 Abrir el documento oficial principal', url: f[0].url } : null
+      ].filter(Boolean)
+    };
+  }
+
+  /* Seguro Popular (28-10-2026): el logro con sus números, la línea del
+     tiempo de la gente sin acceso a la salud (INEGI) y, en el rastro, lo que
+     la ASF le observó. Lo escribe herramientas/integrar_seguro_popular.py. */
+  function seguroPopular() {
+    var A = DB.auditorias_actuales && DB.auditorias_actuales['seguro-popular'];
+    if (!A) return null;
+    var f = A.fuentes || [];
+    return {
+      cont: A.cont || [],
+      rastroTit: A.rastroTit,
+      rastroEst: A.rastroEst || 'oficial',
+      rastro: A.rastro || [],
+      escena: { tipo: 'serie', tit: A.serieTit, txt: A.serieTxt, serie: A.serie || [] },
+      hallazgo: A.que,
+      pendiente: A.falta,
+      pendienteId: A.pendiente_id || null,
+      fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
+      acciones: [
+        { txt: '🔎 Leer el cotejo de «se atendieron más de 51 millones» en Verificamos', href: 'noticias-auditavision.html#col-seguro-popular-51-millones' },
+        { txt: '🏥 Del Seguro Popular al IMSS-Bienestar en Datos · Salud pública', href: 'datos-salud-sistema.html#sal-transicion' },
+        { txt: '💊 Compras de medicamentos y contratos del sector salud', href: 'auditoria-medicamentos-imss.html' },
+        { txt: '💬 Pregúntale al Auditor cuánta gente se quedó sin acceso a la salud', href: 'herramienta-inspector-pregunta.html?p=' + encodeURIComponent('¿Cuánta gente se quedó sin acceso a servicios de salud?') },
+        f[0] ? { txt: '📄 Abrir la auditoría de la ASF (Cuenta Pública 2018)', url: f[0].url } : null,
+        f[1] ? { txt: '📄 Abrir el comunicado del INEGI', url: f[1].url } : null
+      ].filter(Boolean)
+    };
+  }
+
   var ARMA = {
     'tren-maya': function () { return desdeExpediente('tren-maya'); },
     'dos-bocas': function () { return desdeExpediente('dos-bocas'); },
@@ -289,7 +527,21 @@
     'lego-cienega': lego,
     'tren-toluca': function () { return desdeExpediente('tren-toluca'); },
     'megafarmacia': megafarmacia,
-    'huachicol-fiscal': huachicol
+    'huachicol-fiscal': huachicol,
+    'ine-contratos': ineContratos,
+    'guaymas-gas': guaymasGas,
+    'medicamentos-imss': medicamentosImss,
+    'deuda-congreso-2027': deudaCongreso2027,
+    'inversion-megaobras': inversionMegaobras,
+    'agronitrogenados': function () { return obraMega('agronitrogenados'); },
+    'fertinal': function () { return obraMega('fertinal'); },
+    'estela-luz': function () { return obraMega('estela-luz'); },
+    'bunker-garcia-luna': function () { return obraMega('bunker-garcia-luna'); },
+    'refineria-tula': function () { return obraMega('refineria-tula'); },
+    'enciclomedia': function () { return obraMega('enciclomedia'); },
+    'fobaproa': function () { return obraMega('fobaproa'); },
+    'farac-carretero': function () { return obraMega('farac-carretero'); },
+    'seguro-popular': seguroPopular
   };
 
   // --- Animacion de cifras --------------------------------------------------
@@ -322,7 +574,7 @@
           '<span class="au-paso-ico" aria-hidden="true">' + c.ico + '</span>' +
           '<span class="au-paso-tit">' + esc(c.tit) + '</span>' + cifra +
           (c.etq ? '<span class="au-paso-etq">' + esc(c.etq) + '</span>' : '') +
-          (c.est ? '<span class="au-paso-chip">' + chip(c.est) + '</span>' : '') +
+          (c.est ? '<span class="au-paso-chip">' + chip(c.est, c.pend) + '</span>' : '') +
         '</div>';
     }).join('');
     return '<section class="au-sec" aria-labelledby="auMapaTit">' +
@@ -607,6 +859,9 @@
     } else if (e.tipo === 'fuga') {
       cuerpo = htmlFuga(p);
       txt = 'Aquí no hay gasto que repartir: es un impuesto que no entra. Juega con el porcentaje y mira el tamaño.';
+    } else if (e.tipo === 'serie') {
+      cuerpo = htmlSerie(e);
+      txt = esc(e.txt || '');
     }
     if (!cuerpo) return '';
     return '<section class="au-sec" aria-labelledby="auEscTit">' +
@@ -614,11 +869,26 @@
       '<p class="au-sec-txt">' + txt + '</p></div>' + cuerpo + '</section>';
   }
 
+  /* Una serie de personas, año por año (no son pesos): barras que crecen
+     como las del rastro. */
+  function htmlSerie(e) {
+    var mayor = Math.max.apply(null, e.serie.map(function (r) { return r.v; }).concat([0])) || 1;
+    return '<ul class="au-rastro au-serie" id="auSerie">' + e.serie.map(function (r) {
+      var k = r.url ? '<a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer">' + esc(r.k) + ' ↗</a>' : esc(r.k);
+      return '<li class="au-fila">' +
+        '<div class="au-fila-cab"><span class="au-fila-k">' + k + (r.est ? ' ' + chip(r.est) : '') + '</span>' +
+        '<span class="au-fila-v num-tabular">' + r.v.toFixed(1) + ' millones' + (r.pct !== undefined ? ' · ' + r.pct.toFixed(1) + '%' : '') + '</span></div>' +
+        '<span class="au-riel"><span class="au-barra" data-w="' + (r.v / mayor * 100).toFixed(2) + '" style="width:0%"></span></span>' +
+        (r.sub ? '<span class="au-fila-sub">' + esc(r.sub) + '</span>' : '') +
+      '</li>';
+    }).join('') + '</ul>';
+  }
+
   // --- 3. El rastro ---------------------------------------------------------
   function htmlRastro(p) {
     var mayor = Math.max.apply(null, p.rastro.map(function (r) { return r.v; }).concat([0])) || 1;
     var filas = p.rastro.length ? p.rastro.map(function (r) {
-      var k = r.url ? '<a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer">' + esc(r.k) + ' ↗</a>' : esc(r.k);
+      var k = r.url ? '<a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer">' + esc(r.k) + ' ↗</a>' : (r.href ? '<a href="' + esc(r.href) + '">' + esc(r.k) + ' ➔</a>' : esc(r.k));
       return '<li class="au-fila">' +
         '<div class="au-fila-cab"><span class="au-fila-k">' + k + (r.est ? ' ' + chip(r.est) : '') + '</span>' +
         '<span class="au-fila-v num-tabular">' + fmt(r.v, 'mdp1') + '</span></div>' +
@@ -642,7 +912,7 @@
     return '<section class="au-sec" aria-labelledby="auHallTit">' +
       '<div class="au-sec-cab"><h2 class="au-sec-tit" id="auHallTit"><span class="au-num" aria-hidden="true">4</span> Lo que se encontró</h2></div>' +
       '<div class="au-hallazgo"><span class="au-hallazgo-ico" aria-hidden="true">🔎</span><p>' + esc(p.hallazgo) + '</p></div>' +
-      (p.pendiente ? '<p class="au-pendiente">' + chip('pendiente') + ' ' + esc(p.pendiente) + '</p>' : '') +
+      (p.pendiente ? '<p class="au-pendiente">' + chip('pendiente', p.pendienteId) + ' ' + esc(p.pendiente) + '</p>' : '') +
       '<p class="au-fuente"><b>Fuente:</b> ' + esc(p.fuente) + '</p></section>' +
       '<section class="au-sec" aria-labelledby="auSigTit">' +
       '<div class="au-sec-cab"><h2 class="au-sec-tit" id="auSigTit"><span class="au-num" aria-hidden="true">5</span> Sigue investigando</h2></div>' +
@@ -662,7 +932,14 @@
   if (p.escena.tipo === 'reloj') armarReloj(p);
   if (p.escena.tipo === 'fuga') armarFuga(p);
 
-  /* Las barras del rastro crecen cuando el lector llega a ellas. */
+  /* Las barras del rastro (y de la serie) crecen cuando el lector llega a ellas. */
+  var serie = document.getElementById('auSerie');
+  if (serie && 'IntersectionObserver' in window) {
+    var ios = new IntersectionObserver(function (en) {
+      if (en[0].isIntersecting) { ios.disconnect(); contar(serie, 1200); }
+    }, { threshold: 0.2 });
+    ios.observe(serie);
+  } else if (serie) contar(serie, 0);
   var rastro = document.getElementById('auRastro');
   if (rastro && 'IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (en) {

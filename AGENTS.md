@@ -3,9 +3,9 @@
 Instrucciones permanentes para cualquier agente de código que trabaje en este
 repositorio: Antigravity, Astra/Codex, Cursor, Claude Code o quien venga.
 
-Aquí están **las reglas**. El estado del proyecto, lo que está hecho, lo que
-falta y por qué se decidió cada cosa está en [CONTEXT.md](CONTEXT.md): léelo
-antes de tocar código.
+Aquí están **las reglas**. Dónde va el proyecto, en corto, está en
+[ESTADO.md](ESTADO.md): empieza por ahí. Lo que está hecho, lo que falta y por
+qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
 
 ---
 
@@ -18,17 +18,44 @@ antes de tocar código.
 | **La de consulta** (dogmática, teórica, de aprendizaje) | **Enciclopedia** (`enciclopedia-auditavision.html`: Números, Datos y Aprende) | La fuente de información de todo: cifras, leyes, glosario, Poderes, ambiente. |
 | **La de uso** | **Auditor Virtual** (abre `herramienta-inspector-pregunta.html`) | El producto estrella. **Le resuelve al usuario todo lo que se le ofrezca**: cualquier dato, municipio, salud financiera, investigación o auditoría en imágenes. Encuentra, explica y lleva a la página de la Enciclopedia o de la herramienta donde está el detalle. |
 
-- Las cuatro herramientas cuelgan del Auditor Virtual (botón «Herramientas»).
+- **El Auditor trabaja en cuatro modos** (decisión del autor, 29-10-2026:
+  «las herramientas… se van a convertir como en estos modelos que contienen
+  las inteligencias artificiales»): **Inspector** (la investigación más
+  completa: expedientes, entes, estados de cuenta, RFC, nepotismo, contratos
+  y megaobras), **Periodista** (un tema contado como nota, con las Noticias;
+  se llamó «Reportero» hasta que el autor lo renombró el 29-10-2026, y
+  `?modo=reportero` sigue sirviendo),
+  **Ciudadano** (en corto, como un amigo, con la Calculadora Cívica; es el
+  modo con el que abre) y **Ambientalista** (costo y daño ambiental). Viven
+  en `MODOS` de `herramientas/asistente.py`: cada uno con su saludo, sus
+  aplicaciones y sus preguntas de ejemplo (`modo_de()`); se eligen en el
+  botón de la cabecera del chat, se recuerdan en el navegador (`av-modo`) y
+  se piden por la dirección (`?modo=periodista`). **Periodista** (29-10-2026) suma bajo la respuesta
+  «📰 La nota del Periodista» (`periodista()` de `asistente.js`): lo que casi nadie
+  cuenta, sacado de la base (ASF, pendientes con quién los debe, cotejos de lo
+  que circula, lo que sigue); **lo «privilegiado» es lo enterrado en documentos
+  públicos, nunca un rumor**. El banco de pruebas acepta `modo`. **El modo cambia la forma de
+  investigar y de contestar, nunca los datos** (§2). Por entregas: (a) el
+  selector, hecho; (b) la forma de responder de cada modo (Periodista, hecho);
+  (c) el dictamen de cada modo.
+- **Las cuatro herramientas se mudaron a la Enciclopedia** (29-10-2026): su
+  índice es la quinta tarjeta de Números, «Herramientas del Auditor»
+  (`numeros-herramientas-del-auditor.html`, `HERR_INDICE` y `HERR_SITIO` de
+  `apartados.py`), y sus páginas cuelgan de ahí en las migas.
+  `herramientas.html` solo redirige.
   **El Modo Inspector es las Grandes investigaciones** («realizar grandes
   investigaciones a través de seis aplicaciones»): una sola página,
-  `herramienta-inspector.html`, con las seis aplicaciones. Ya no presenta al
+  `herramienta-inspector.html`, con sus aplicaciones (siete desde el
+  28-10-2026: la sexta es Nepotismo y parentesco). Ya no presenta al
   chat como su «otra división», y `herramienta-inspector-investigaciones.html`
-  solo redirige ahí. Su imagen es `herr-inspector-camaras.jpg` (elegida por el
-  autor); el chat conserva el foróptero (`foto_clase: 'foto-auditor'`).
+  solo redirige ahí. Su imagen son las cámaras con ojos (elegida por el
+  autor, dibujada desde el 27-10-2026: `herr-inspector-ilustracion.svg`); el
+  chat conserva el foróptero (`foto_clase: 'foto-auditor'`).
 - El Auditor Virtual tiene que funcionar y verse como lo mejor de la
   plataforma: un dato que la plataforma tiene y el chat no encuentra es un
   error (ver §5 ter).
-- Comunidad queda aparte, como la tercera pestaña.
+- Comunidad queda aparte, como la tercera pestaña, y **Noticias** es la
+  cuarta desde el 28-10-2026 (ver §5 bis).
 
 ### 0 bis. Una sola plataforma: la Enciclopedia antigua se retiró
 
@@ -47,6 +74,19 @@ historial (último commit que la trae: `490233d`) por si un día se retoma.
 Si se rescata algo de la antigua, se trata como dato nuevo: se coteja contra
 el documento oficial (§2) y entra a su página de Auditavisión y al bot
 (§5 ter). La antigua nunca es fuente de cifras.
+
+### 0 ter. Los pilares: el periodista virtual del gasto público
+
+**Decisión del autor, 26-10-2026.** Auditavisión es el periodista virtual que
+sigue el gasto público. Sus diez pilares están dichos al lector en
+`pilares.html` (`PILARES_LISTA` de `herramientas/apartados.py`) y valen para
+todo cambio: que la verdad sea incómoda no la vuelve falsa; evidencia con
+folio; contrapeso, no propaganda (las mismas reglas para todos los gobiernos);
+se reconoce a quienes hacen periodismo, pero su nota es punto de partida, no
+fuente de cifras; lo que falta se señala con nombre; que se entienda de un
+vistazo; el ambiente también es gasto público; y el caso no se olvida (cada
+columna de Verificamos trae «Lo que sigue» y se puede seguir: al cambiar su
+`actualizado`, quien la sigue ve el aviso). Un pilar nuevo se agrega ahí.
 
 ---
 
@@ -158,6 +198,33 @@ Esto es una plataforma de fiscalización del gasto público:
 Si te piden una cifra que no puedes sostener, dilo y déjala pendiente. Es la
 respuesta correcta en este proyecto.
 
+### 2 bis. Prensa, personas privadas y derecho de réplica
+
+**Bloque 4 del plan v2, 27-10-2026.** Cotejado contra la Ley Reglamentaria del
+artículo 6o. constitucional en materia del Derecho de Réplica (DOF 04-11-2015,
+última reforma DOF 14-11-2025). Lo explica al lector `derecho-de-replica.html`
+(`REPLICA` de `herramientas/apartados.py`), y es el décimo pilar.
+
+- **La nota de prensa es punto de partida, no fuente.** Se cita a la persona
+  que la firma y a su medio, con enlace; cada afirmación se coteja contra el
+  documento oficial (`docs/VERIFICAMOS.md`). No se copian notas enteras.
+- **A las personas privadas no se les nombra**: familiares, apoderados,
+  empleados, testigos. Solo servidores públicos, quienes buscan un cargo,
+  quienes una autoridad ya hizo públicos en un documento oficial y las
+  empresas que un documento oficial nombra. Las personas físicas con
+  contratos no se publican.
+- **Una acusación no es una condena** (Constitución, art. 20, B, fr. I): se
+  dice junto a cada acusación.
+- **La réplica se publica** en la misma columna, en su campo `replica`
+  (`columnas.js`), íntegra y sin comentarios (art. 6), y se cambia su
+  `actualizado` para que quien sigue el caso reciba el aviso. Plazos: 3 días
+  hábiles para resolver y 3 para notificar (arts. 11 y 12); si se niega, por
+  escrito y con una causa del art. 19. Si la réplica prueba un error nuestro,
+  además va a la fe de erratas.
+- **Falta designar al responsable** que pide el art. 7 (nombre, domicilio,
+  correo y teléfono, siempre a la vista): pendiente `replica-responsable`, a
+  cargo del autor.
+
 ---
 
 ## 3. Cómo está construido
@@ -213,7 +280,11 @@ python3 -m http.server 8000    # y abrir http://localhost:8000
 
   ```bash
   python3 herramientas/sello.py 20260923a
+  python3 herramientas/sello.py --siguiente   # el que sigue al publicado
   ```
+
+  Rechaza un sello igual o anterior al publicado (26-10-2026: un plan de otro
+  agente propuso uno ya rebasado). Si falla, `git pull` y `--siguiente`.
 
   Cambia las referencias `?v=` y el sello visible al pie de `index.html` (solo ahí). Si no tocaste
   `assets/`, no lo subas.
@@ -238,7 +309,7 @@ python3 -m http.server 8000    # y abrir http://localhost:8000
 
 ## 5. Criterios de terminado
 
-Un cambio **no está hecho** hasta que las seis líneas se cumplen:
+Un cambio **no está hecho** hasta que las siete líneas se cumplen:
 
 1. `node --check assets/auditor/js/audit-engine.js` pasa sin error.
 2. La página levanta en `http://localhost:8000` y **la consola del navegador
@@ -251,6 +322,16 @@ Un cambio **no está hecho** hasta que las seis líneas se cumplen:
 6. `python3 herramientas/guardia_legibilidad.py --fase N` pasa, con N la
    fase vigente de `docs/ux/PLAN.md`. Para corregir una cifra con urgencia:
    `GUARDIA_OMITIR="motivo"`, y el motivo se anota en el commit.
+7. `python3 herramientas/prueba_auditor.py` pasa: las preguntas de prueba
+   del Auditor (`herramientas/preguntas_auditor.json`) siguen llevando a
+   donde deben. Un dato nuevo del bot lleva su pregunta ahí, y si un cambio
+   mueve una respuesta a propósito, su renglón se corrige en el mismo commit.
+
+Las siete se corren de una vez con
+`python3 herramientas/revision.py --base origin/claude/funny-turing-imtm54`,
+y GitHub las corre solas en cada envío (`.github/workflows/revision.yml`). El
+estado corto del proyecto vive en [ESTADO.md](ESTADO.md): se actualiza en el
+mismo commit que cambia lo que dice.
 
 Al terminar, di explícitamente qué quedó pendiente y por qué. La lista de
 pendientes vive en CONTEXT.md y se mantiene al día: es parte del entregable.
@@ -289,13 +370,14 @@ mudando a su página; no se agregan desgloses nuevos.
   índice general.
 - El menú «Busca y verifica» se fusionó con el Modo Inspector (09-10-2026):
   es su parte B, y `busca-y-verifica.html` solo redirige ahí.
-- **El menú tiene tres pestañas, ni una más** (decisión del autor,
-  23-10-2026, que reemplaza la de cinco del 09-10-2026): **Auditor
+- **El menú tiene cuatro pestañas** (decisión del autor, 28-10-2026: «darle
+  más protagonismo a las noticias relevantes… como una cuarta pestaña», que
+  amplía la de tres del 23-10-2026, que a su vez reemplazó la de cinco del
+  09-10-2026): **Auditor
   Virtual** (abre `herramienta-inspector-pregunta.html`, «Pregúntale al
-  Auditor»; desde el 23-10-2026 las cuatro herramientas cuelgan de su botón
-  «Herramientas», junto a «Cómo platicar conmigo», y `herramientas.html`
-  sigue como su índice; el Modo Inspector de ese menú lleva directo a las
-  Grandes investigaciones), **Enciclopedia**
+  Auditor»; desde el 29-10-2026 su botón de la cabecera elige uno de los
+  cuatro modos, §0, y las herramientas viven en la Enciclopedia, en Números
+  › Herramientas del Auditor; `herramientas.html` redirige ahí), **Enciclopedia**
   (`enciclopedia-auditavision.html`, con tres tarjetas: Números, Datos y
   Aprende, que conservan sus páginas) y **Comunidad** (`participa.html`, la
   antigua Participa, con tres tarjetas desde el 24-10-2026: Ágora cívica,
@@ -304,7 +386,9 @@ mudando a su página; no se agregan desgloses nuevos.
   «Cuéntanos lo que viste» de la cabecera, su única puerta: ese botón abre
   el cajón con las cinco rutas (algo raro con el dinero público, un dato mal,
   un tema para investigar, compartir el Estado de Cuenta y fe de erratas); el Pase del Auditor Cívico se retiró y
-  `pase-del-auditor.html` redirige a Donaciones). Ningún archivo cambió de nombre, para no romper
+  `pase-del-auditor.html` redirige a Donaciones) y **Noticias**
+  (`noticias-relevantes.html`, que antes colgaba de Aprende; Aprende conserva
+  su tarjeta hacia ahí). Ningún archivo cambió de nombre, para no romper
   enlaces. Las pestañas viven en `MENU` de `herramientas/apartados.py`, y
   la portada (`index.html`) tiene su copia a mano. Lo que cuelga de
   Números, Datos o Aprende muestra «Enciclopedia» en sus migas.
@@ -312,6 +396,66 @@ mudando a su página; no se agregan desgloses nuevos.
   `enciclopedia-auditavision.html`; `enciclopedia.html` solo redirige ahí (§0 bis).
   «Números» es la antigua «Sigue el dinero»; su archivo sigue siendo
   `sigue-el-dinero.html`.
+- **«Al momento»: las noticias del día, verificadas** (pedido del autor,
+  28-10-2026: «notas más pequeñas… fechado con nuestros datos, verificado,
+  nuestra salud financiera, estado de resultados… y el glosario»). Es la
+  sección `Al momento` de `columnas.js` y la franja al inicio del diario.
+  Cada nota la escribe `herramientas/integrar_al_momento.py` (no se edita a
+  mano) con el molde de Verificamos (la nota de prensa es lo que se coteja,
+  con su medio y su liga) y además `fecha`, `nota`, `ejemplo` (la cuenta con
+  números redondos, siempre `derivado`), `datos` (lo que dice la plataforma:
+  estado de resultados, salud financiera, herramientas), `glosario` (cada
+  concepto con su ficha: si falta, se agrega al glosario en el mismo cambio)
+  y `red`: las búsquedas armadas en noticias, YouTube, X, Facebook y el DOF,
+  **rotuladas «sin verificar»; nunca se copia ni se resume lo que dice la
+  red**. Las cifras que la plataforma ya tiene se leen de su módulo, no se
+  copian. El chat la encuentra sola, y «noticias de hoy» lista las más nuevas.
+- **Noticias reúne todo lo de noticias** (pedido del autor, 28-10-2026: «que
+  todo quede debidamente vinculado»). Además de «Al momento» y la Columna del
+  Erario, `noticias-relevantes.html` trae dentro la aplicación **Contrasta una
+  nota** (sección `#verifica`: es `insp_nota.construir()`, la misma de
+  Herramientas y del chat, nunca una copia), **Propón una nota** (`#propon`,
+  que abre la ruta «tema» del cajón) y **Réplica y postura** (`#replica`, que
+  `columnas.js` llena con las columnas que traen `replica` o `postura`). La
+  **postura** (`postura[{quien, fecha, texto, url}]`) es lo que la parte
+  aludida dijo en su propio documento: se publica en sus palabras, con su liga,
+  y no se califica. La página es la función `noticias(base, ref)` de
+  `apartados.py`.
+- **Noticias es un periódico: «Auditavisión Noticias»** (pedido del autor,
+  28-10-2026: «una nueva reestructuración tanto de diseño como de la
+  información… partiendo de una metodología u objetivo»). **Objetivo: que
+  ninguna noticia sobre el dinero público se quede sin cotejar.** Nueve
+  secciones con su barra: Portada, Verifica (`#verifica`), **Noticias**
+  (`#al-momento`: «Al momento» y «Verificado»; aquí no se opina), **Opinión**
+  (`#columnas`: la Columna del Erario, Personajes, Hechos e Historia: nuestro
+  argumento, siempre parado en un documento y nunca sobre la vida privada),
+  Réplica y postura (`#replica`), Seguimiento (`#seguir`: los casos con
+  `sigue` y «Pedir un seguimiento»), Mesa de redacción (`#mesa`), Agenda del
+  erario (`#agenda`) y Cómo trabajamos (`#metodo`, con `#propon`): el método
+  de siete pasos, del rumor al documento. **Desde el 29-10-2026 la pestaña es
+  un índice de tres tarjetas** (pedido del autor), y el diario se reparte en tres
+  páginas (`PARTES` de `herramientas/noticias.py`): **Auditavisión Noticias**
+  (`noticias-auditavision.html`: Portada, Noticias, Opinión y Réplica; ahí viven
+  las columnas, `#col-<id>`), **Verifica una noticia** (`noticias-verifica.html`:
+  el verificador, la Mesa de redacción y Cómo trabajamos, con `#propon`) y
+  **Seguimiento: el caso no se olvida** (`noticias-seguimiento.html`: los casos
+  abiertos, `#seguimientos` y la Agenda). Las anclas viejas de
+  `noticias-relevantes.html` se mandan solas a su página (`ANCLAS`); un enlace
+  nuevo apunta directo a la página donde vive la sección. **La noticia y la opinión no se
+  mezclan:** `columnas.js` reparte por `seccion` (`NOTICIA`), y una columna
+  nueva va en la que le toca. El armazón, el método, la agenda y las búsquedas
+  de la mesa viven en `herramientas/noticias.py`; la página la pinta
+  `noticias.js`. **La mesa de redacción** trae titulares de Bing Noticias y
+  Google Noticias al pedirlos (en el navegador) y los junta
+  `herramientas/recolectar_noticias.py` en `docs/noticias/bandeja.json`
+  (flujo «Mesa de redacción», cada día a las 8:23 de la Ciudad de México y a mano): **solo titular, medio, fecha y liga,
+  rotulados «sin verificar»; nunca el texto de la nota**. Un titular entra a
+  la plataforma solo después de pasar por el método. **La agenda** son plazos
+  de la ley, cada uno con su artículo; las fechas que la ley da como «30 días
+  después del trimestre» o «último día hábil» se dicen como cuenta nuestra
+  (`derivado`). El verificador dice además **quién aparece en la nota**
+  (`insp_nota.ENTE_PAL` y `ESTADO_PAL`) y lleva a su ficha del Auditor de
+  entes, con su estado de cuenta y su salud financiera.
 
 ---
 
@@ -325,6 +469,14 @@ estadísticas, estados de cuenta, sueldos, márgenes, porcentajes,
 presupuestos, impuestos, glosario, leyes, referencias y las herramientas
 mismas. La plataforma es extensa; el bot es la puerta corta a todo.
 
+- **La Enciclopedia es la base de datos física del Auditor** (decisión del autor,
+  29-10-2026). Cada página de la Enciclopedia tiene su modo (`herramientas/modos.py`),
+  lleva «Pregúntale al Auditor · Modo X» en su cabecera y sale en el chat, en
+  «Saber más» o en «📚 En la Enciclopedia». **Una página nueva de la Enciclopedia
+  no está terminada hasta que `python3 herramientas/cobertura_auditor.py` pasa**
+  (corre en `revision.py`); si su título solo no basta para encontrarla, su
+  pregunta va en `PREGUNTA` de `modos.py`. La bodega de Supabase es el respaldo
+  y la navegación en internet solo da búsquedas «sin verificar».
 - **Todo lo nuevo entra al bot.** Una cifra, página o herramienta que se
   agrega a la plataforma no está terminada hasta que el bot la encuentra:
   las páginas y secciones se indexan solas al regenerar; las cifras
@@ -340,16 +492,54 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   Enciclopedia, que solo sirve de guía de temas). El Poder Judicial, por
   `herramientas/asistente_judicial.py`, cotejado contra la Constitución, los
   acuerdos del INE (INE/CG563/2025 e INE/CG564/2025), el Manual de
-  remuneraciones del PJF y el PEF 2026. Los dos Poderes viven además en la
+  remuneraciones del PJF y el PEF 2026. Lo que resuelve con su dinero (la auditoría
+  de gestión: asuntos, rezago y tiempos), por `herramientas/gestion_judicial.py`,
+  con el censo del INEGI; **el dinero va siempre junto a lo que se resolvió con
+  él, y el «dinero por asunto» se dice como derivado, nunca como costo de un juicio**. La salud pública
+  (IMSS, ISSSTE, IMSS-Bienestar), con el mismo molde, por `herramientas/gestion_salud.py`
+  (tarjeta «Salud pública» de Datos y `D.sal` del chat); **lo que una institución anuncia se
+  coteja contra lo que registra su propio documento estadístico**. La justicia ambiental (PROFEPA:
+  denuncias, rezago, multas y la Fiscalía), igual, por `herramientas/gestion_ambiental.py` (tarjeta
+  «Justicia ambiental» de Datos y `D.amg` del chat), cotejada con sus Informes de Actividades y la LGEEPA. Los dos Poderes viven además en la
   pestaña Datos (`datos-poder-legislativo.html`, `datos-poder-judicial.html`),
   una página por grupo de temas, armadas con el mismo texto del bot
   (`PAGINAS` de cada módulo).
+  El nepotismo y el parentesco en los cargos públicos, por
+  `herramientas/nepotismo.py` (28-10-2026; aplicación del Modo Inspector,
+  `herramienta-inspector-nepotismo.html`, con su tarjeta en Aprende, y
+  `D.nep` del chat; la página que tuvo en Aprende redirige ahí), cotejado con la
+  LGRA (art. 63 Bis), el Código Penal Federal (art. 220), el Código Civil
+  Federal (arts. 292 a 300) y la Constitución (nepotismo electoral, desde
+  2030): **qué ley alcanza a cada parentesco vive en una sola tabla
+  (`ALCANCE`/`alcance()`), que leen la calculadora, la página y el chat**, y
+  cómo se dice cada parentesco en la calle va en `ALIAS`. **Un apellido igual
+  nunca es prueba de parentesco**: un vínculo entra a la plataforma solo si lo
+  dice un documento oficial, y a los familiares que no son servidores públicos
+  no se les nombra.
+  Las agresiones a la prensa, por `herramientas/periodistas.py` (29-10-2026;
+  `periodismo-en-riesgo.html`, del modo Periodista), con el informe mensual del
+  Mecanismo de Protección (Gobernación); **los homicidios y las sentencias son de
+  la FEADLE y, mientras no se coteje su documento, siguen pendientes: no se
+  rellenan con cifras de organizaciones civiles**, y no se nombra a las personas.
+  Los informes especiales de la ASF, por `herramientas/informe_sancion.py`
+  (27-10-2026: «Documentar para sancionar», cotejado contra la LGRA y la
+  LFRCF vigentes): su página es la tarjeta «Informe especial» de Informes
+  oficiales (`informes-documentar-para-sancionar.html`) y el chat lo lee como
+  `D.san`. Sus 20 matrices viven en `docs/informes/documentar-para-sancionar.json`;
+  **un tipo de irregularidad que la gente diga de otro modo necesita su frase
+  en `FAMILIAS`**. El informe semestral de la ASF (art. 38 de la LFRCF), por
+  `herramientas/informe_semestral.py`: cuarta tarjeta de Informes oficiales
+  (`informes-semestral-asf.html`), y el chat lo lee dentro de `D.san` (claves
+  `sem_*`). **Cada semestre (1 de mayo y 1 de noviembre) se cambian sus cifras
+  y su `DOC` por las del informe nuevo**, con el anterior en `ANT` para el
+  cambio del semestre. Un documento de doctrina o una guía oficial es metodología:
+  se explica en sencillo con su página, no se copia entero.
 - **Responde como chat:** claro, corto y contundente, con la cifra, qué
   quiere decir y su fuente a la vista. Cada respuesta con datos lleva
   **«Saber más»**, que abre la página de la plataforma donde está la
   información (el campo `ir` de la respuesta: una respuesta nueva sin `ir`
   no está terminada), y **«Generar dictamen»**, que abre en otra pestaña el
-  dictamen pericial sellado (`herramienta-inspector-dictamen.html`). El
+  «Dictamen cívico independiente» sellado (`herramienta-inspector-dictamen.html`). El
   enlace del dictamen solo lleva la pregunta (`?q=`, y las previas en `&c=`):
   la página vuelve a contestarla con la misma base, así que no se puede
   fabricar un dictamen con cifras ajenas. El dictamen dice que no es un
@@ -389,6 +579,14 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   `asistente.py`), pero su página debe aceptar lo que el lector trae por la
   dirección (`?q=`, `?liga=`, `?verifica=`, `#ente=`) y su intención se
   agrega en `inspector()` de `asistente.js`.
+- **El mapa ambiental separa quién paga** (Bloque 4, 27-10-2026):
+  cada proyecto de `OBRAS_MAPA` (`herramientas/am_basura.py`) lleva `paga`
+  (`publico` o `privado`) y su porqué en `pagaTxt`; **solo el gasto público
+  se suma** en los contadores del mapa y del chat, y la inversión privada se
+  dice con su nombre, sin monto si no hay documento. Los montos «por aclarar»
+  ante la ASF **no se escriben a mano**: salen de los expedientes
+  (`EXPEDIENTE` del mismo módulo) como suma derivada. Un proyecto privado que
+  la gente nombra de otro modo lleva sus frases en `al`.
 - **Inversión y Megaobras vive también en el chat** (24-10-2026): cada obra,
   cada presidente, los rankings y las cuatro cifras los contesta
   `megaobras()` de `asistente.js` con lo que escribe
@@ -400,6 +598,73 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   básico (verde suma, rojo resta), en pesos de su año y de hoy con el INPC
   de la máquina del tiempo del peso; y donde la plataforma no tiene mapa,
   el chat lleva al **simulador** de la herramienta, ya filtrado.
+- **Las cuatro herramientas viven en el chat** (24-10-2026): además del Modo
+  Inspector y de Inversión y Megaobras, las seis aplicaciones de **Costo
+  Ambiental** y las cinco de la **Calculadora Cívica** se reconocen por su
+  nombre o por cómo se dicen en la calle (`ALIAS_APPS` de
+  `herramientas/asistente.py`) y se abren en el marco del chat
+  (`herramienta()` de `asistente.js`). «Gano 15 mil al mes, ¿cuánto me
+  retienen?» abre la Calculadora con el ingreso ya puesto (`?m=&p=&n=`): la
+  cuenta la hace la calculadora, nunca el chat. **Una aplicación nueva de
+  esas dos herramientas entra sola** al catálogo, y si la gente la llama de
+  otro modo, su frase va en `ALIAS_APPS`.
+  El régimen también se lee («manejo Uber», «rento mi depa», RESICO: `&r=&pl=`).
+  Toda aplicación abierta en el chat trae **«Generar dictamen»** (`conApp()`):
+  respalda qué hace y de qué documentos salen sus datos (`_fuentes_app()`
+  los toma de su página), con el enlace que repite la cuenta; nunca copia el
+  resultado.
+- **Las investigaciones de Auditoría en imágenes salen al frente**
+  (24-10-2026): cuando la plática toca su tema (Tren Maya, Dos Bocas,
+  huachicol, Ramo 33…), «Explóralo a fondo» abre con «📖 Ver la
+  investigación». **Una investigación nueva necesita sus frases en
+  `TEMA_BOT`** de `herramientas/auditorias.py`, o la generación se detiene.
+- **Noticias relevantes vive también en el chat** (24-10-2026): el nombre
+  de un personaje abre sus columnas (con sus cifras y documentos) y lo que
+  circula sin pruebas, con el motivo (`DESCARTADO` de `columnas.js`). Lo
+  escribe `herramientas/asistente_personajes.py`: **una columna nueva entra
+  sola**; **un personaje nuevo necesita su renglón en `PERSONAJES`**, y si su
+  nombre no aparece en ninguna columna ni en lo descartado, la generación se
+  detiene. De internet el chat **solo ofrece búsquedas armadas** en portales
+  oficiales y noticias, rotuladas «sin verificar», y lleva a Contrasta una
+  nota; la función `buscar-web` devuelve solo enlaces, nunca un texto
+  redactado por la IA sobre una persona.
+- **Verificamos: lo que circula en redes entra a la Enciclopedia**
+  (decisión del autor, 26-10-2026: «que el auditor tenga ese contenido en la
+  enciclopedia y que al momento de preguntar cuente con esa información y sus
+  fuentes para interpretarla y plasmarla en nuestro dictamen»). Cuando el
+  autor pasa un video, una publicación o una nota de redes, se vuelve una
+  columna de la sección **Verificado** de `columnas.js`, con `circula` (qué
+  dice, quién, dónde y cuándo) y `cotejo`: cada afirmación con su resultado
+  (`consta`, `matiz`, `no consta`, `pendiente`), su explicación y su
+  documento. **Un video o una nota nunca es fuente**: es lo que se coteja.
+  Un `pendiente` del cotejo lleva `quien` y `donde`, y entra solo al
+  Registro de pendientes (`red-<columna>-<n>`). El chat lo contesta, el
+  dictamen lo trae en su capítulo «Cotejo de lo que circula», y si nombra a
+  una persona de la vida pública se le agrega su renglón en `PERSONAJES`. A
+  los particulares (familiares, empleados de una empresa) no se les nombra.
+  Cada columna trae además `sigue`: lo que falta revisar para **seguir el
+  dinero** (un voto, el DOF, un informe de la ASF, contratos por integrar).
+  **Las empresas contratistas** que nombra un documento oficial van en
+  `EMPRESAS` (mismo módulo): el chat las contesta por su nombre, con
+  búsquedas armadas en ComprasMX, el directorio de sancionados, el DOF, la
+  ASF, la UIF y la OFAC, y la lista negra del SAT avisa si la plataforma ya
+  las tiene. El protocolo completo, con dónde buscar cada cosa, está en
+  [docs/VERIFICAMOS.md](docs/VERIFICAMOS.md): **quien retome el proyecto
+  empieza por los «Lo que sigue»**.
+- **Contratos públicos de ComprasMX** (decisión del autor, 26-10-2026: «integra
+  los contratos de ComprasMX»). `herramientas/actualizar_comprasmx.py` lee los
+  archivos de Datos Abiertos de ComprasMX (se bajan con su botón en
+  `comprasmx.buengobierno.gob.mx/datos-abiertos`; el servidor no los sirve a
+  una descarga directa) y escribe `assets/auditor/data/comprasmx/`: índice de
+  proveedores, una ficha por proveedor (por las dos primeras letras del RFC),
+  las instituciones y el cruce con la lista 69-B del SAT. El chat lo contesta
+  (`contratosCmx()` y `cruceSat()` de `asistente.js`, que cargan los
+  catálogos solo al preguntar) y `contratos-publicos.html` es su buscador. El
+  importe de cada contrato es `oficial` (antes de impuestos, como lo reportó la
+  institución); las sumas, `derivado`; no se convierten monedas, y en un
+  contrato abierto el importe suele ser el máximo, no lo pagado. **Las personas
+  físicas no se publican** (su RFC es un dato personal), y tener contratos no
+  es una irregularidad: así se dice en cada respuesta.
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).
@@ -408,10 +673,15 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   todo cálculo va como `derivado` con su operación; lo que no tiene lo dice
   y lo anota en «Lo que aún no sé».
 - **Hacia dónde va:** consultar portales externos y tener una capa de
-  inteligencia artificial que aprenda de las preguntas. Las dos necesitan
-  servidor y llaves que GitHub Pages no tiene: son decisión del autor (plan
-  en CONTEXT.md). Cuando llegue la IA, solo redacta con lo que le entregan
-  las fichas; nunca pone una cifra que no venga de un documento.
+  inteligencia artificial que aprenda de las preguntas. **La base de datos y
+  sus funciones ya están construidas** (24-10-2026, `supabase/`, explicadas en
+  `docs/BASE-DE-DATOS.md`); falta que el autor cree la cuenta y ponga las
+  llaves. La IA (`auditor-ia`) solo redacta con lo que le entregan las
+  fichas, y cada cifra de su respuesta se coteja contra ellas: si una no
+  aparece, se tira; `buscar-web` solo devuelve enlaces de sitios oficiales y
+  de una lista editorial de prensa. **Ninguna cifra fiscal vive en la base.** Todo cambio a
+  `supabase/` pasa `python3 herramientas/prueba_base_datos.py` y, si toca
+  las funciones, `deno check` y `deno test supabase/pruebas/`.
 
 ---
 

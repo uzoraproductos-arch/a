@@ -225,7 +225,7 @@
 .pa-burbuja a.pa-genera:hover, .pa-burbuja a.pa-genera:focus-visible { background: #343a43; color: #ffffff; }
 .pa-ver-donde { font-weight: 600; color: #44526b; }
 
-/* El dictamen pericial de Auditavisión (herramienta-inspector-dictamen.html). */
+/* El dictamen cívico independiente de Auditavisión (herramienta-inspector-dictamen.html). */
 .dic { max-width: 900px; margin: 0 auto; }
 .dic-acc { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
 .dic-doc { padding: 22px 26px; }
@@ -281,6 +281,31 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .leg-tabla td { text-align: right; font-variant-numeric: tabular-nums; }
 .leg-tabla tfoot th, .leg-tabla tfoot td { font-weight: 800; border-bottom: 0; }
 .leg-fuentes { font-size: 16px; }
+/* Informe especial «Documentar para sancionar» (27-10-2026): tablas de texto. */
+.san-tabla { max-width: 860px; }
+.san-tabla td { text-align: left; font-variant-numeric: normal; }
+.san-tabla th[scope="row"] { vertical-align: top; min-width: 9em; }
+.san-tabla .pa-lista { margin: 0; }
+.san-rubro { margin: 22px 0 10px; font-size: 19px; color: #0b2a63; }
+.san-matriz { padding: 0 16px 14px; }
+@media (max-width: 640px) {
+  .san-tabla, .san-tabla tbody, .san-tabla tr, .san-tabla th, .san-tabla td { display: block; width: 100%; }
+  .san-tabla thead { display: none; }
+  .san-tabla th[scope="row"] { min-width: 0; border-bottom: 0; padding-bottom: 0; color: #0b2a63; }
+  .san-matriz { padding: 0 10px 12px; }
+}
+/* Informe semestral de la ASF (27-10-2026): barras del estado de las denuncias. */
+.sem-grafica { margin: 14px 0; max-width: 860px; }
+.sem-grafica figcaption { font-weight: 700; margin-bottom: 8px; }
+.sem-barras { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.sem-barra { display: grid; grid-template-columns: minmax(0, 15em) minmax(0, 1fr) 7.5em; gap: 10px; align-items: center; }
+.sem-barra-pista { display: block; height: 14px; border-radius: 7px; background: rgba(127, 127, 127, .18); overflow: hidden; }
+.sem-barra-relleno { display: block; height: 100%; min-width: 3px; border-radius: 7px; background: #2f6fb3; }
+.sem-barra-num { text-align: right; font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) {
+  .sem-barra { grid-template-columns: minmax(0, 1fr) auto; gap: 4px 10px; }
+  .sem-barra-que { grid-column: 1 / -1; }
+}
 .leg-mas a, .leg-pregunta a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; }
 
 /* ===== Rediseño del Auditor Virtual (24-10-2026, pedido del autor) =====
@@ -380,3 +405,69 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
   .pa-app-acc .pa-boton { flex: 1 1 100%; justify-content: center; }
 }
 @media (prefers-reduced-motion: reduce) { .pa-app-marco iframe { transition: none; } }
+/* Noticias relevantes dentro del chat (24-10-2026): las columnas de un
+   personaje, lo que circula sin pruebas y las búsquedas en internet. */
+.pa-col { margin: 10px 0; padding: 10px 14px; border-left: 4px solid #8a6d3b; border-radius: 0 12px 12px 0; background: #fbf8f2; }
+.pa-col p { margin: 0 0 6px; }
+.pa-col-t { font-size: 16px; line-height: 1.35; }
+.pa-col-t a { color: #3b2f1a; }
+.pa-col-dc { font-size: 15px; color: #4a3d22; }
+.pa-desc { margin: 12px 0 0; border: 1px dashed #c9b48a; border-radius: 12px; background: #fffdf8; padding: 2px 14px; }
+.pa-desc[open] { padding-bottom: 10px; }
+.pa-desc summary { cursor: pointer; display: flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 700; color: #4a3d22; }
+.pa-desc ul { margin: 6px 0 0; padding-left: 20px; display: grid; gap: 8px; line-height: 1.5; }
+.pa-desc-mo { display: block; color: #5a6782; }
+.pa-web { margin: 14px 0 0; padding: 10px 14px 12px; border: 1px solid #dfe5f0; border-radius: 14px; background: #f8fafc; }
+.pa-web .pa-mas-t { margin-top: 0; }
+/* Verificamos (26-10-2026): lo que circula en redes y su cotejo. */
+.pa-cir { margin: 10px 0; padding: 10px 14px; background: #eef1f6; border-left: 4px solid #44526b; border-radius: 0 8px 8px 0; }
+.pa-cir p { margin: 6px 0 4px; font-style: italic; }
+.pa-cir small, .pa-cot small { font-size: 13px; color: #44526b; }
+.pa-cot { margin: 10px 0; }
+.pa-cot summary { cursor: pointer; font-weight: 700; min-height: 44px; display: flex; align-items: center; gap: 6px; }
+.pa-cot ol { margin: 6px 0 0; padding-left: 20px; }
+.pa-cot li { margin-bottom: 10px; }
+.pa-cot li p { margin: 0 0 4px; }
+.pa-cot-d { font-weight: 600; }
+.pa-cot-r { display: inline-block; font-size: 13px; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: #e8e8e8; color: #1f2937; }
+.pa-cot-consta .pa-cot-r { background: #dcefdc; color: #1d5b24; }
+.pa-cot-matiz .pa-cot-r { background: #fbecc8; color: #6b4a00; }
+.pa-cot-no-consta .pa-cot-r { background: #f6dcda; color: #8a1f17; }
+.pa-sigue ul { margin: 4px 0 10px; padding-left: 20px; }
+.pa-sigue li { margin-bottom: 6px; }
+.pa-sigue a { display: inline-block; min-height: 24px; }
+/* Los cuatro modos del Auditor (29-10-2026): el botón de la cabecera elige
+   el modo y la franja de arriba del hilo trae las aplicaciones del modo. */
+.pa-chat-cab > .pa-modos { flex: 1 1 100%; }
+.pa-modos ul { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.pa-modos .pa-modo-op { display: flex; align-items: center; gap: 12px; width: 100%; height: 100%; min-height: 64px; box-sizing: border-box; padding: 10px 12px; text-align: left; cursor: pointer; border: 1px solid #dfe5f0; border-radius: 10px; background: var(--pa-claro); color: #0b2a63; font: inherit; }
+.pa-modos .pa-modo-op:hover, .pa-modos .pa-modo-op:focus-visible { border-color: var(--pa); background: #ffffff; }
+.pa-modos .pa-modo-op[aria-pressed="true"] { border: 2px solid var(--pa); background: #ffffff; box-shadow: 0 0 0 3px #e2e6ec; }
+.pa-modo-ico { display: inline-grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: #ffffff; font-size: 20px; }
+.pa-modo-op b { display: block; font-size: 16px; color: #0b2a63; }
+.pa-modo-op small { display: block; font-size: 14px; color: #44526b; margin-top: 2px; }
+.pa-modo-franja { margin: 0; padding: 0 18px; border-bottom: 1px solid #e2e6ec; background: #ffffff; color: #33415c; }
+.pa-modo-franja[hidden] { display: none; }
+.pa-modo-franja summary { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; min-height: 48px; cursor: pointer; list-style: none; font-size: 16px; color: #0b2a63; }
+.pa-modo-franja summary::-webkit-details-marker { display: none; }
+.pa-modo-lema { color: #44526b; }
+.pa-modo-n { margin-left: auto; padding: 4px 12px; border-radius: 999px; background: var(--pa-claro); font-size: 14px; font-weight: 600; color: var(--pa); }
+.pa-modo-franja p { margin: 0 0 10px; font-size: 16px; line-height: 1.5; }
+.pa-modo-apps { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 14px; }
+.pa-modo-app { font: 600 15px/1.3 Inter, system-ui, sans-serif; cursor: pointer; border: 1px solid #c9d2e3; background: var(--pa-claro); color: #1c2a44; border-radius: 999px; padding: 8px 14px; min-height: 44px; text-align: left; }
+.pa-modo-app:hover, .pa-modo-app:focus-visible { border-color: var(--pa); background: #ffffff; }
+.pa-modo-aviso .pa-burbuja { background: #fff8e6; }
+@media (max-width: 560px) {
+  .pa-modo-lema { display: none; }
+}
+/* La nota del Periodista (29-10-2026): bajo la respuesta, en el modo Periodista,
+   lo que casi nadie cuenta, el ruido con su cotejo y lo que sigue. */
+.pa-reportero { margin-top: 14px; padding: 14px 16px; border-left: 4px solid #b3261e; background: #fbf7f2; border-radius: 0 12px 12px 0; }
+.pa-rep-t { margin: 0 0 6px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; font-size: 14px; color: #8a1c15; }
+.pa-rep-s { margin: 12px 0 4px; font-weight: 700; color: #0b2a63; }
+.pa-reportero .pa-lista { padding-left: 20px; }
+.pa-reportero .pa-lista li { margin-bottom: 8px; }
+.pa-reportero small { font-size: 14px; color: #44526b; }
+/* «¿Sabías esto?» del Periodista (29-10-2026): va entre las preguntas de ejemplo, con su seña. */
+.pa-ej-sabias { border-color: #b3412e; background: #fbf7f2; border-radius: 18px; }
+.pa-ej-sena { display: block; font-size: 12px; font-weight: 800; color: #b3412e; letter-spacing: .02em; margin-bottom: 2px; }

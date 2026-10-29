@@ -48,6 +48,68 @@
     }
   }
 
+  /* El envío a la base de datos (paso 2.7 del plan v2, 27-10-2026). Solo si
+     el formulario trae data-funcion (FUNCIONES de herramientas/apartados.py):
+     manda el mismo texto que el lector ya vio a la función recibir-formulario
+     de Supabase y le devuelve su folio. Si la red o el servidor fallan, el
+     texto se queda en pantalla para copiarlo o descargarlo: nunca se pierde.
+     El antispam (Cloudflare Turnstile) se carga solo cuando hay llave. */
+  var tsCarga = null;
+  function turnstile(llave, caja) {
+    if (!llave) return Promise.resolve(null);
+    if (!tsCarga) {
+      tsCarga = new Promise(function (ok, mal) {
+        var s = document.createElement('script');
+        s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+        s.async = true;
+        s.onload = function () { ok(window.turnstile); };
+        s.onerror = mal;
+        document.head.appendChild(s);
+      });
+    }
+    return tsCarga.then(function (ts) { return ts.render(caja, { sitekey: llave }); });
+  }
+
+  function paginaActual() {
+    var n = (location.pathname.split('/').pop() || 'index.html');
+    return /^[a-z0-9-]+\.html$/.test(n) ? n : null;
+  }
+
+  function enviar(form, t, asunto, estado, boton, wid) {
+    var url = form.getAttribute('data-funcion');
+    var q = function (sel) { var el = form.querySelector(sel); return el ? el.value.trim() : ''; };
+    var acepta = form.querySelector('[data-acepta]');
+    var pag = q('.cm-pagina').replace(/^.*\//, '').split(/[?#]/)[0];
+    var datos = {
+      tipo: form.getAttribute('data-tipo'),
+      asunto: asunto,
+      texto: t,
+      pagina: /^[a-z0-9-]+\.html$/.test(pag) ? pag : paginaActual(),
+      documento: q('input[type="url"]') || null,
+      correo: q('input[type="email"]') || null,
+      acepta_aviso: !!(acepta && acepta.checked),
+      turnstile: wid != null && window.turnstile ? window.turnstile.getResponse(wid) : null
+    };
+    boton.disabled = true;
+    estado.textContent = 'Enviando…';
+    var respaldo = ' Tu texto sigue aquí: cópialo o descárgalo para no perderlo.';
+    fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) })
+      .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+      .then(function (j) {
+        if (j && j.ok && j.folio) {
+          estado.textContent = '✓ Recibido. Tu folio es ' + j.folio + ': guárdalo para darle seguimiento.';
+          return;
+        }
+        boton.disabled = false;
+        estado.textContent = ((j && j.error) || 'No pudimos recibirlo.') + respaldo;
+        if (wid != null && window.turnstile) window.turnstile.reset(wid);
+      })
+      .catch(function () {
+        boton.disabled = false;
+        estado.textContent = 'No hay conexión con el servidor.' + respaldo;
+      });
+  }
+
   function descargar(t, nombre) {
     var blob = new Blob(['﻿' + t.replace(/\n/g, '\r\n')], { type: 'text/plain;charset=utf-8' });
     var a = document.createElement('a');
@@ -68,11 +130,12 @@
 
   function preparar(form) {
     var canal = form.getAttribute('data-canal') || '';
+    var funcion = form.getAttribute('data-funcion') || '';
     var asunto = form.getAttribute('data-asunto') || 'Mensaje';
     var error = form.querySelector('.cm-error');
     var resumen = form.nextElementSibling;
     if (!resumen || !resumen.classList.contains('cm-resumen')) return;
-    var campos = Array.prototype.slice.call(form.querySelectorAll('input, textarea, select'));
+    var campos = Array.prototype.slice.call(form.querySelectorAll('input:not([type="checkbox"]), textarea, select'));
 
     function armar() {
       var r = [asunto + ' · Auditavisión', 'Fecha: ' + fecha(), ''];
@@ -101,7 +164,19 @@
       estado.setAttribute('role', 'status');
       var acc = document.createElement('div');
       acc.className = 'sv-acciones';
-      if (canal) {
+      var cajaTs = null, wid = null;
+      if (funcion) {
+        var envia = boton('✉️ Enviar', 'sz-btn-of');
+        envia.addEventListener('click', function () { enviar(form, t, asunto + ': ' + campos[0].value.trim(), estado, envia, wid); });
+        acc.appendChild(envia);
+        if (form.getAttribute('data-turnstile')) {
+          cajaTs = document.createElement('div');
+          cajaTs.className = 'cm-turnstile';
+          turnstile(form.getAttribute('data-turnstile'), cajaTs).then(function (w) { wid = w; }, function () {
+            estado.textContent = 'No cargó el antispam; si «Enviar» falla, copia o descarga tu texto.';
+          });
+        }
+      } else if (canal) {
         var env = document.createElement('a');
         env.className = 'sz-btn sz-btn-of';
         env.textContent = '✉️ Enviar';
@@ -125,8 +200,9 @@
       acc.appendChild(boton('✏️ Corregir', '', function () { resumen.hidden = true; campos[0].focus(); }));
       resumen.appendChild(h);
       resumen.appendChild(area);
+      if (cajaTs) resumen.appendChild(cajaTs);
       resumen.appendChild(acc);
-      if (!canal) {
+      if (!canal && !funcion) {
         var sin = document.createElement('p');
         sin.className = 'sv-sincanal';
         sin.innerHTML = '<span class="sz-et">Próximamente</span> El envío se activa con el lanzamiento. Mientras, cópialo o descárgalo.';

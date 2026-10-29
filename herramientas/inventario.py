@@ -12,9 +12,11 @@ Escribe docs/INVENTARIO.md. No toca ningun archivo de la plataforma.
 """
 import os
 import re
+import sys
 from collections import Counter
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 EXCLUIR = set()
 
 
@@ -87,10 +89,23 @@ def main():
             if ancla not in fichas:
                 rotos.append((p, 'pendientes.html#' + ancla))
     out += ['', '## Registro de pendientes', '', '%d fichas, cada una con su porqué, su responsable y su enlace oficial.' % len(fichas)]
+    # Bóveda de evidencias (paso 2.3 del plan v2, 27-10-2026): un cotejo de
+    # Verificamos que dice «consta» o «matiz» necesita la huella de su
+    # documento, o un motivo escrito de por qué no se pudo copiar.
+    import boveda
+    bv = boveda.cargar()
+    falta = boveda.faltantes(bv)
+    sin_evid = [x for x in falta if x[1].startswith('cotejo')]
+    out += ['', '## Bóveda de evidencias', '', 'Documentos en `docs/boveda/evidencias.json`: %s.' % (boveda.resumen(bv) or 'ninguno'), '']
+    out += ['- FALTA: %s de `%s` → %s' % (n, c, u) for c, n, u, _ in sin_evid] or ['Todos los cotejos «consta» y «matiz» tienen su evidencia.']
+    avisos = [x for x in falta if not x[1].startswith('cotejo')]
+    if avisos:
+        out += ['', '%d cifras oficiales sin copia todavía (su sitio no abrió donde se corrió la bóveda):' % len(avisos), '']
+        out += ['- %s de `%s` → %s' % (n, c, u) for c, n, u, _ in avisos]
     os.makedirs(os.path.join(RAIZ, 'docs'), exist_ok=True)
     open(os.path.join(RAIZ, 'docs', 'INVENTARIO.md'), 'w', encoding='utf-8').write('\n'.join(out) + '\n')
-    print('inventario: %d páginas, %d enlaces rotos, %d redirecciones' % (len(paginas), len(rotos), len(redirige)))
-    return 1 if rotos else 0
+    print('inventario: %d páginas, %d enlaces rotos, %d redirecciones, %d cotejos sin evidencia' % (len(paginas), len(rotos), len(redirige), len(sin_evid)))
+    return 1 if rotos or sin_evid else 0
 
 
 if __name__ == '__main__':

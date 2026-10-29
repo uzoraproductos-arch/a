@@ -7,7 +7,7 @@
    dice en corto. La nota técnica sellada (folio + huella SHA-256, como el
    Estado de Cuenta) solo se arma si el lector toca «Generar ficha técnica».
    Si ninguna ficha responde, lo dice. Desde el 23-10-2026 (pedido del autor)
-   esa nota es el «Dictamen pericial de Auditavisión» y vive en su propia
+   esa nota es el «Dictamen cívico independiente de Auditavisión» y vive en su propia
    página (herramienta-inspector-dictamen.html, que carga este mismo archivo):
    el enlace lleva solo la pregunta y la página vuelve a contestarla con la
    misma base, así que nadie puede fabricar un dictamen con cifras propias.
@@ -46,7 +46,8 @@
     estado: ['🧾', 'Estado de cuenta'], ficha: ['🏢', 'Ficha técnica de un ente'], municipio: ['🏙️', 'Ficha técnica de un municipio'],
     cifra: ['📋', 'Cifra oficial del catálogo'], calculo: ['🧮', 'Respuesta con datos de la plataforma'],
     ley: ['⚖️', 'Artículo de ley'], faq: ['❓', 'Pregunta del Diccionario'],
-    investigacion: ['🖼️', 'Investigación de Auditoría en imágenes']
+    investigacion: ['🖼️', 'Investigación de Auditoría en imágenes'], app: ['🧩', 'Aplicación de la plataforma'],
+    columna: ['📰', 'Columna de Noticias relevantes']
   };
   var VACIAS = ('a al ante bajo con contra de del desde donde dónde cual cuál cuales cuáles como cómo el en entre es esta este esto ' +
     'ha hay la las le lo los me mi mas más muy no nos o para pero por porque que qué quien quién se sea ser si sí sin sobre son su sus ' +
@@ -56,7 +57,9 @@
   var SINON = { gana: 'sueldo remuneracion', ganan: 'sueldo remuneracion', sueldo: 'remuneracion salario', salario: 'remuneracion sueldo',
     presidente: 'presidencia ejecutivo', diputado: 'diputados camara', senador: 'senadores senado', robo: 'aclarar observaciones',
     huachicol: 'combustible contrabando', amlo: 'lopez obrador estado cuenta administracion', epn: 'pena nieto estado cuenta administracion',
-    peña: 'pena nieto', fox: 'fox quesada', calderon: 'calderon hinojosa', zedillo: 'zedillo ponce', investigaciones: 'modo inspector', investigacion: 'modo inspector', contratar: 'servicios encargo', fantasma: 'efos', factureras: 'efos', impuestos: 'tributarios recaudacion', deuda: 'deuda' };
+    peña: 'pena nieto', fox: 'fox quesada', calderon: 'calderon hinojosa', zedillo: 'zedillo ponce', investigaciones: 'modo inspector', investigacion: 'modo inspector', contratar: 'servicios encargo', fantasma: 'efos', factureras: 'efos', impuestos: 'tributarios recaudacion', deuda: 'deuda',
+    /* 27-10-2026: lo que las preguntas de prueba no encontraban. */
+    donar: 'donaciones donativo alcancia', dono: 'donaciones donativo', donativos: 'donaciones', apoyar: 'donaciones', transparentar: 'pendientes registro', dictamen: 'dictamen sellado independiente' };
   var vacia = {};
   VACIAS.forEach(function (w) { vacia[norm(w)] = 1; });
 
@@ -170,7 +173,7 @@
     return (pre || 'NT') + '-' + f + '-' + hx.slice(0, 8).toUpperCase();
   }
 
-  /* El dictamen pericial (pedido del autor, 23-10-2026): la respuesta del
+  /* El dictamen cívico independiente (antes «pericial»; pedido del autor, 23-10-2026): la respuesta del
      Auditor con su respaldo completo. Encabezado y pie llevan el sello. */
   var ROMANO = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
   function dictamenHtml(q, r, f, antes) {
@@ -186,6 +189,7 @@
     /* La clasificación de la información: por qué cada cifra está como está. */
     var est = {};
     (f.ci || []).forEach(function (c) { est[c.e] = 1; });
+    (f.cot || []).forEach(function (c) { if (c.r === 'pendiente') est.pendiente = 1; });
     (r.html.match(/est-(oficial|derivado|pendiente)/g) || []).forEach(function (m) { est[m.slice(4)] = 1; });
     if (f.pend) est.pendiente = 1;
     var clas = [];
@@ -202,7 +206,7 @@
       '<header class="dic-cab"><div class="dic-cab-marca"><img src="' + LOGO + '" alt="" width="62" height="48">' +
       '<div><b>Auditavisión</b><small>Plataforma ciudadana de fiscalización del gasto público</small></div></div>' +
       '<div class="dic-sello">' + sello(null, 'DICTAMEN') + '</div>' +
-      '<div class="dic-cab-tx"><span class="pa-nota-tipo">Dictamen pericial · ' + esc(t[1]) + '</span>' +
+      '<div class="dic-cab-tx"><span class="pa-nota-tipo">Dictamen cívico independiente · ' + esc(t[1]) + '</span>' +
       '<dl><div><dt>Folio</dt><dd class="pa-folio">calculando…</dd></div><div><dt>Expedido</dt><dd>' + esc(hoy()) + '</dd></div>' +
       '<div><dt>Versión de la plataforma</dt><dd>' + esc(selloSitio()) + '</dd></div></dl></div></header>' +
       '<h2 class="dic-tit"><span aria-hidden="true">' + t[0] + '</span> ' + esc(f.tit) + '</h2>' +
@@ -211,8 +215,14 @@
       cap('Respuesta del Auditor') + '<div class="dic-resp">' + resp + '</div>' +
       (f.txt && f.t !== 'calculo' ? '<p class="pa-nota-tx"><b>La ficha completa:</b> ' + esc(f.txt) + '</p>' : '') +
       (ci ? cap('Hallazgos: las cifras') + '<ul class="pa-cifras">' + ci + '</ul>' : '') +
+      (f.cot && f.cot.length && charla ? cap('Cotejo de lo que circula') +
+        '<p class="dic-chico">Cada afirmación que circula se comparó con el documento oficial. «Consta» quiere decir que el documento la sostiene; «con matices», que la sostiene en parte; «sin documento oficial», que solo la dice la prensa o las redes, y no la afirmamos ni la negamos.</p>' +
+        charla.cotejo(f, true) : '') +
+      (f.app ? cap('La aplicación y tu resultado') + '<p>La cuenta la hace <b>«' + esc(f.app.n) + '»</b>' + (f.app.par ? ', con lo que escribiste en la plática' : '') + '. ' +
+        'Para ver el resultado, o para que otra persona lo compruebe, abre la aplicación desde este enlace: <a href="' + esc(f.app.url) + '">' + esc(f.app.pag) + (f.app.par ? ' con tus datos' : '') + ' ➔</a>.</p>' +
+        '<p class="dic-chico">La aplicación calcula con la base de la plataforma vigente, así que con el mismo enlace y la misma versión da el mismo resultado.</p>' : '') +
       (pend ? cap('Lo que falta') + pend : '') +
-      cap('Fundamento documental') + (fu ? '<ol class="dic-fuentes">' + fu + '</ol>' : '<p>Esta respuesta no cita cifras: lleva a una página de la plataforma, donde cada dato trae su fuente.</p>') +
+      cap('Fundamento documental') + (fu ? '<ol class="dic-fuentes">' + fu + '</ol>' + (f.app && f.app.mas ? '<p class="dic-chico">Y ' + f.app.mas + ' documentos más, citados en la página de la aplicación.</p>' : '') : '<p>Esta respuesta no cita cifras: lleva a una página de la plataforma, donde cada dato trae su fuente.</p>') +
       cap('Método') + '<ol class="dic-metodo">' +
       '<li><b>Localización.</b> El Auditor buscó la respuesta en la base de la plataforma (' + B.fichas.length.toLocaleString('es-MX') + ' fichas), que solo guarda datos ya publicados con su documento.</li>' +
       '<li><b>Verificación.</b> Cada cifra se toma del documento oficial que se cita, sin estimar ni redondear a ojo. Las cuentas se hacen con cifras oficiales y se dice la operación.</li>' +
@@ -224,7 +234,7 @@
       'Vale para la versión de la plataforma que indica: si un documento oficial cambia, el dictamen se actualiza y su huella también.</p>' +
       (ir ? '<p class="pa-ir dic-no-imprime"><a href="' + esc(ir[0]) + '">📖 Saber más en «' + esc(ir[1]) + '» ➔</a></p>' : '') +
       '<footer class="pa-sello"><div class="pa-sello-img dic-sello">' + sello(null, 'DICTAMEN') + '</div><div>' +
-      '<b>Dictamen pericial de Auditavisión</b>' +
+      '<b>Dictamen cívico independiente de Auditavisión</b>' +
       '<p>Folio <b class="pa-folio">calculando…</b> · Versión de la plataforma <b>' + esc(selloSitio()) + '</b></p>' +
       '<p class="pa-huella">Huella digital (SHA-256 de la ficha): <code>calculando…</code></p>' +
       '<p class="pa-leyenda">Para comprobarlo, abre el enlace de este dictamen: la plataforma lo vuelve a armar con sus datos y la huella debe coincidir. ' +
@@ -248,6 +258,19 @@
   var CLAVE = 'auditavision.bot.sinRespuesta', MAX = 50;
   var app = document.getElementById('paApp');
   var canal = app ? app.getAttribute('data-canal') || '' : '';
+  /* Con base de datos (paso 2.8 del plan v2, 27-10-2026; FUNCIONES de
+     apartados.py), cada pregunta nueva sin respuesta llega también a
+     pregunta-bot: solo la pregunta, el motivo, la ficha que dio y la versión.
+     Ni nombre ni correo. Si falla, se queda en el navegador como siempre. */
+  var funcionBot = app ? app.getAttribute('data-funcion') || '' : '';
+  function reporta(q, motivo, tit) {
+    if (!funcionBot || !window.fetch) return;
+    try {
+      fetch(funcionBot, { method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
+        body: JSON.stringify({ pregunta: String(q).slice(0, 600), motivo: motivo === 'noera' ? 'noera' : 'sin', ficha: tit || null, version: selloSitio() })
+      }).catch(function () {});
+    } catch (e) {}
+  }
   function leeLista() {
     try { var v = JSON.parse(localStorage.getItem(CLAVE) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; }
   }
@@ -258,7 +281,7 @@
     var l = leeLista(), k = plano(q), hoy = new Date().toISOString().slice(0, 10), x = null;
     l.forEach(function (o) { if (plano(o.q) === k && o.m === motivo) x = o; });
     if (x) { x.n = (x.n || 1) + 1; x.f = hoy; if (tit) x.t = tit; }
-    else l.unshift({ q: q, m: motivo, t: tit || '', f: hoy, n: 1 });
+    else { l.unshift({ q: q, m: motivo, t: tit || '', f: hoy, n: 1 }); reporta(q, motivo, tit); }
     guardaLista(l.slice(0, MAX));
     pintaLista();
   }
@@ -377,11 +400,133 @@
     out.sort(function (a, b) { return b.s - a.s; });
     return out.slice(0, 3).map(function (o) { return { x: o.x, ab: ab }; });
   }
+  function conInv(q, r, lista) {
+    var iv = r.sin ? null : invDe(q, r);
+    if (!iv || lista.some(function (o) { return sinParam(o.x.ir) === iv.x.ir; })) return lista;
+    return [iv].concat(lista).slice(0, 5);
+  }
   function recursosHtml(lista) {
     return lista && lista.length ? '<div class="pa-rec"><p class="pa-mas-t">Explóralo a fondo</p><div class="pa-rec-lista">' + lista.map(function (o) {
       return '<a class="pa-rec-a" href="' + esc(ligaRec(o.x, o.ab)) + '"><span class="pa-rec-ico" aria-hidden="true">' + o.x.ico + '</span>' +
         '<span><b>' + esc(o.x.v) + '</b><small>' + esc(o.x.n) + (o.ab && o.x.ire ? ' · ' + esc(NOMBRE[o.ab]) : '') + '</small></span></a>';
     }).join('') + '</div></div>' : '';
+  }
+  /* La Enciclopedia es la base de datos física del Auditor (pedido del autor,
+     29-10-2026): al pie de cada respuesta van las páginas de la Enciclopedia
+     que tocan el tema, primero las del modo elegido. El orden cambia con el
+     modo; los datos, nunca. Una página cuyo título está completo en la
+     pregunta va primero; las demás, solo si tocan el tema de cerca. */
+  var MODO_ICO = { inspector: '🔍', periodista: '📰', ciudadano: '🙋', ambientalista: '🌎' };
+  function modoVivo() { var a = document.getElementById('paApp'); return a ? a.getAttribute('data-modo') : ''; }
+  function enciclopediaPara(q, r) {
+    if (!r || r.sin || r.plat) return [];
+    var ir = r.ir || (r.ficha && r.ficha.ir), base = ir ? sinParam(ir[0]) : '', pq = plano(q), modo = modoVivo();
+    var vistos = {}, out = [];
+    if (base) vistos[base] = 1;
+    var res = buscar(q), piso = Math.max(6, res.length ? res[0].s * 0.4 : 0);
+    res.slice(0, 40).forEach(function (x) {
+      var f = x.f, pg = f.ir && sinParam(f.ir[0]);
+      if (!f.e || !pg || vistos[pg]) return;
+      var tit = plano(f.t === 'pagina' ? f.tit : f.ir[1] || ''), exacto = tit.trim().length > 2 && pq.indexOf(tit) >= 0;
+      if (!exacto && x.s < piso) return;
+      vistos[pg] = 1;
+      out.push({ f: f, s: x.s * (exacto ? 3 : 1) * (f.m === modo ? 1.3 : 1) });
+    });
+    out.sort(function (a, b) { return b.s - a.s; });
+    return out.slice(0, 3).map(function (o) { return o.f; });
+  }
+  function enciclopediaHtml(lista) {
+    return lista.length ? '<div class="pa-rec pa-enc"><p class="pa-mas-t">📚 En la Enciclopedia</p><div class="pa-rec-lista">' + lista.map(function (f) {
+      var m = f.m || 'inspector';
+      return '<a class="pa-rec-a" href="' + esc(f.ir[0]) + '" data-modo="' + esc(m) + '"><span class="pa-rec-ico" aria-hidden="true">' + MODO_ICO[m] + '</span>' +
+        '<span><b>' + esc(f.tit) + '</b><small>' + (f.t === 'pagina' ? 'Página' : 'En «' + esc(f.ir[1]) + '»') + ' · Modo ' + esc(m.charAt(0).toUpperCase() + m.slice(1)) + '</small></span></a>';
+    }).join('') + '</div></div>' : '';
+  }
+  /* El modo Periodista (pedido del autor, 29-10-2026: «el reportero se
+     convierte como en un chismoso… te transmite información privilegiada»).
+     Bajo la misma respuesta, arma su nota con lo que casi nadie cuenta, pero
+     sacado de documentos: lo que la ASF dejó por aclarar, lo que ninguna
+     dependencia ha publicado (con su nombre), lo que circula y qué consta, y lo
+     que sigue. No agrega cifras ni rumores: todo sale de la base, y lo que no
+     tiene documento se dice así. */
+  function recorta(t, n) { t = String(t || ''); return t.length > n ? t.slice(0, n).replace(/\s+\S*$/, '') + '…' : t; }
+  function temaDe(r) {
+    var t = (r.ficha && r.ficha.tit) || '';
+    t = t.split(/[:(]| — | · /)[0].replace(/^Cuánto gana\s*/i, '').trim();
+    return t.split(' ').length <= 6 ? t : '';
+  }
+  function periodista(q, r) {
+    if (!r || r.sin || r.plat) return null;
+    var f0 = r.ficha, tema = temaDe(r), res = buscar(q), piso = Math.max(5, res.length ? res[0].s * 0.35 : 0);
+    var cerca = res.slice(0, 30).filter(function (x) { return x.s >= piso; }).map(function (x) { return x.f; });
+    if (f0 && cerca.indexOf(f0) < 0) cerca.unshift(f0);
+    /* Un concepto («¿qué es el Ramo 33?») se busca también por su nombre a secas. */
+    if (tema && plano(tema) !== plano(q)) {
+      var rt = buscar(tema), pt = Math.max(5, rt.length ? rt[0].s * 0.35 : 0);
+      rt.slice(0, 30).forEach(function (x) { if (x.s >= pt && cerca.indexOf(x.f) < 0) cerca.push(x.f); });
+    }
+    /* Las columnas y los pendientes tienen que tocar el tema de cerca: la mitad del puntaje de la mejor ficha. */
+    var fuerte = [];
+    [res, tema && plano(tema) !== plano(q) ? buscar(tema) : []].forEach(function (rs) {
+      rs.slice(0, 30).forEach(function (x) { if (x.s >= Math.max(6, rs[0].s * 0.5)) fuerte.push(x.f); });
+    });
+    /* Y una columna, además, tiene que traer la mitad de las palabras de la pregunta (o el tema): «oficina» no basta para el INE. */
+    var ws = fichas(q).filter(function (w) { return w.length > 3; }), wt = tema ? fichas(tema) : [];
+    function hablaDe(f) {
+      var t = plano(f.tit + ' ' + (f.k || '') + ' ' + (f.txt || '') + ' ' + (f.cir ? f.cir.tx : ''));
+      var h = ws.filter(function (w) { return t.indexOf(' ' + w + ' ') >= 0; }).length, ht = wt.filter(function (w) { return t.indexOf(' ' + w + ' ') >= 0; }).length;
+      return (ws.length && h * 2 >= ws.length) || (wt.length && ht === wt.length);
+    }
+    var cols = cerca.filter(function (f) { return f.t === 'columna' && (f === f0 || (fuerte.indexOf(f) >= 0 && hablaDe(f))); }).slice(0, 2);
+    /* Primero, lo que falta en la página misma de la respuesta. */
+    var base = (r.ir || (f0 && f0.ir) || [''])[0].split('#')[0].split('?')[0];
+    var pends = F.filter(function (f) { return f.t === 'pendiente' && f.pend && base && (f.pend.ap || []).indexOf(base) >= 0; }).slice(0, 2);
+    cerca.forEach(function (f) { if (pends.length < 2 && f.t === 'pendiente' && f.pend && fuerte.indexOf(f) >= 0 && pends.indexOf(f) < 0) pends.push(f); });
+    var exps = cerca.filter(function (f) { return f.t === 'expediente'; }).slice(0, 1);
+    var nadie = [], iv = invDe(q, r);
+    /* Nepotismo (pedido del autor, 29-10-2026): lo que la ley todavía no alcanza, y la regla del apellido. */
+    if (base === 'herramienta-inspector-nepotismo.html') nadie.push('<li>🔦 <b>Los puntos ciegos:</b> la prohibición del nepotismo electoral se aplica a partir de las elecciones de 2030, el «yo contrato a tu sobrino y tú a mi hija» entre dependencias no es el caso del art. 63 Bis, y los datos de la familia en la declaración están en reserva. <a href="herramienta-inspector-nepotismo.html#puntos-ciegos">Ver los puntos ciegos ➔</a> Y ojo: <b>un apellido igual nunca es prueba de parentesco</b>; un vínculo entra a la plataforma solo si lo dice un documento oficial.</li>');
+    if (iv) nadie.push('<li>📖 <b>Lo investigamos a fondo:</b> <a href="' + esc(iv.x.ir) + '">' + esc(iv.x.n) + ' ➔</a>, en Auditoría en imágenes.</li>');
+    exps.forEach(function (f) {
+      nadie.push('<li>📂 <b>La ASF lo dejó por aclarar.</b> ' + esc(recorta(f.txt, 220)) + ' <a href="' + esc(f.ir[0]) + '">Ver el expediente ➔</a></li>');
+    });
+    pends.forEach(function (f) {
+      /* Si la falta es de la plataforma, se dice así, sin culpar a nadie (AGENTS.md §2). */
+      var nuestra = /falta de la plataforma/i.test((f.pend.quien || '') + ' ' + (f.pend.pq || ''));
+      nadie.push('<li>' + chip({ e: 'pendiente', p: f.pend.id }) + (nuestra ? ' <b>Aún no lo integramos:</b> ' : ' <b>Falta el documento:</b> ') + esc(recorta(f.tit, 140)) + '. ' +
+        (f.pend.quien && !nuestra ? 'Le toca publicarlo a <b>' + esc(f.pend.quien) + '</b>. ' : '') + esc(recorta(f.pend.pq, 160)) +
+        (f.pend.donde ? ' <a href="' + esc(f.pend.donde) + '" target="_blank" rel="noopener">Dónde debería estar ↗</a>' : '') + '</li>');
+    });
+    cols.forEach(function (f) {
+      (f.cot || []).filter(function (c) { return c.r === 'no consta' || c.r === 'matiz'; }).slice(0, 1).forEach(function (c) {
+        nadie.push('<li><span class="pa-cot-r">' + (c.r === 'matiz' ? '⚠️ Consta, con matices' : '❌ Sin documento oficial') + '</span> <b>Se dice que</b> «' + esc(recorta(c.d, 120)) + '». ' + esc(recorta(c.x, 200)) +
+          (c.fu && c.fu.url ? ' <a href="' + esc(c.fu.url) + '" target="_blank" rel="noopener">' + esc(recorta(c.fu.tx, 70)) + ' ↗</a>' : '') + '</li>');
+      });
+    });
+    var ruido = cols.map(function (f) {
+      var n = {};
+      (f.cot || []).forEach(function (c) { n[c.r] = (n[c.r] || 0) + 1; });
+      var cuenta = ['consta', 'matiz', 'no consta', 'pendiente'].filter(function (k) { return n[k]; }).map(function (k) { return n[k] + ' ' + k; }).join(' · ');
+      return '<li>📰 <a href="' + esc(f.ir[0]) + '"><b>' + esc(f.tit) + '</b></a>' +
+        (f.cir && f.cir.tx ? '<br><small><b>Lo que circula:</b> «' + esc(recorta(f.cir.tx, 160)) + '»' + (f.cir.q ? ' (' + esc(recorta(f.cir.q, 90)) + ')' : '') + '</small>' : '') +
+        (cuenta ? '<br><small><b>Nuestro cotejo:</b> ' + esc(cuenta) + '</small>' : '') + '</li>';
+    });
+    var sigue = [];
+    cols.forEach(function (f) { (f.sigue || []).slice(0, 2 - sigue.length).forEach(function (s) { sigue.push('<li>🗓️ ' + (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.tx) + ' ↗</a>' : esc(s.tx)) + '</li>'); }); });
+    var nada = !nadie.length && !ruido.length;
+    var h = '<div class="pa-reportero"><p class="pa-rep-t">📰 La nota del Periodista</p>' +
+      (nadie.length ? '<p class="pa-rep-s">🕵️ Lo que casi nadie te cuenta</p><ul class="pa-lista">' + nadie.slice(0, 4).join('') + '</ul>' : '') +
+      (ruido.length ? '<p class="pa-rep-s">📢 El ruido: lo que circula y lo que consta</p><ul class="pa-lista">' + ruido.join('') + '</ul>' : '') +
+      (sigue.length ? '<p class="pa-rep-s">🗓️ Lo que sigue</p><ul class="pa-lista">' + sigue.join('') + '</ul>' : '') +
+      (nada ? '<p>En la redacción todavía no hay nota sobre esto: no tenemos cotejo de lo que circula ni pendientes señalados. <a href="noticias-verifica.html#propon">¿Lo investigamos? Propón una nota ➔</a></p>' : '') +
+      '<p class="pa-chico">Lo que te cuento sale de documentos públicos que casi nadie lee, no de rumores. Una nota de prensa es mi punto de partida, nunca mi fuente' +
+      (cols.length ? ', y <b>una acusación no es una condena</b>' : '') + '. A las personas privadas no las nombro.</p></div>';
+    return { html: h, web: !r.web && tema ? tema : '' };
+  }
+  function periodistaHtml(q, r) {
+    if (modoVivo() !== 'periodista') return '';
+    var n = periodista(q, r);
+    return n ? n.html + (n.web ? webHtml(n.web) : '') : '';
   }
   var TIPOS_REC = { mapa: 'mapa', mapas: 'mapa', reloj: 'reloj', relojes: 'reloj', contador: 'reloj', contadores: 'reloj', simulador: 'simulador', simuladores: 'simulador', tablero: 'tablero' };
   function pideRecurso(q) {
@@ -450,7 +595,7 @@
   function appDeLiga(u) {
     var b = sinParam(u || '').replace(/\.html$/, ''), hit = null;
     if (b === 'expedientes') return APP.inspasf;
-    IN.apps.concat(MO.apps).forEach(function (a) { if (!hit && (b === a._base || b.indexOf(a._base + '-') === 0)) hit = a; });
+    IN.apps.concat(MO.apps, HA.apps).forEach(function (a) { if (!hit && (b === a._base || b.indexOf(a._base + '-') === 0)) hit = a; });
     return hit;
   }
   function appHtml(o) {
@@ -500,6 +645,22 @@
     caja.classList.remove('pa-app-abierta', 'pa-app-lista', 'pa-app-completa');
     caja.querySelector('.pa-app-usa').hidden = false;
     caja.querySelector('.pa-app-usa').focus({ preventScroll: true });
+  }
+  /* El dictamen de una aplicación usada en el chat (24-10-2026): la cuenta
+     de tu caso la hace la aplicación al abrir su enlace; el dictamen respalda
+     qué hace, con qué datos y de qué documentos salen (las fuentes las junta
+     herramientas/asistente.py de su página). El chat no pone cifras. */
+  function conApp(r) {
+    if (!r) return r;
+    if (r.espera) { r.espera = r.espera.then(conApp); return r; }
+    var a = r.app && APP[r.app.id];
+    if (a && !r.ficha) {
+      var liga = r.app.url || a.url, par = liga.indexOf('?') >= 0;
+      r.ficha = { t: 'app', tit: a.n + ' · ' + (a.grupo || 'Modo Inspector'), txt: a.desc || a.frase || '', fu: a.fu || [], ir: r.ir || [liga, a.n],
+        app: { n: a.n, url: liga, par: par, mas: Math.max(0, (a.fun || 0) - (a.fu || []).length), pag: sinParam(liga) },
+        nota: 'La aplicación hace la cuenta en tu navegador, con sus propios datos publicados' + (par ? ' y con lo que escribiste, que va en su enlace' : '') + ': el resultado se lee en ella. Este dictamen no repite ese resultado; respalda el método y los documentos.' };
+    }
+    return r;
   }
   function respApp(id, liga, html, extra) {
     var a = APP[id], r = { html: html, ir: [liga, a.n], app: { id: id, url: liga, abre: true }, sug: [], rec: [] };
@@ -595,6 +756,9 @@
         '<ul class="pa-lista">' + todos.slice(0, MAX).map(linea).join('') + '</ul>' +
         (todos.length > MAX ? '<p class="pa-chico">Te muestro ' + MAX + '. Los ' + todos.length.toLocaleString('es-MX') + ' están en la aplicación aquí abajo; con el RFC la búsqueda es exacta.</p>' : '');
     }
+    /* Si la plataforma tiene a esa empresa en Noticias relevantes, lo dice. */
+    var emp = nombre && PE.per.filter(function (x) { return x.emp; }).filter(function (x) { return x.al.some(function (a) { return plano(nombre).indexOf(' ' + a + ' ') >= 0; }); })[0];
+    if (emp) h += '<p>📰 Además, la plataforma tiene a <b>' + esc(emp.n) + '</b> en Noticias relevantes, con lo que consta en documentos: <button type="button" class="pa-ej" data-pa-pregunta="' + esc(corta(emp.n)) + '">Ver lo que sabemos</button></p>';
     h += '<p class="pa-chico">⚖️ Aparecer en la lista es una determinación administrativa del SAT, no una condena penal. «Desvirtuado» y «sentencia favorable» significan que salió de la presunción.</p>';
     todos.slice(0, 12).forEach(function (r) { ci.push({ v: (sit[r[2]] || { t: r[2] }).t, etq: r[1] + ' · RFC ' + r[0] + ' · oficio ' + r[3] + ' (' + r[4] + ')', e: 'oficial' }); });
     var fuente = { tx: S.meta.fuente + ', corte al ' + corte, url: S.meta.url };
@@ -604,10 +768,168 @@
     return {
       html: h, ir: [liga, 'la Lista negra del SAT'], app: { id: 'inspefos', url: liga }, rec: [],
       ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: [fuente], ir: [liga, 'Lista negra del SAT'] },
-      sug: ['¿Qué es una EFOS?', 'Expedientes de casos de la ASF', 'Auditor de entes públicos']
+      sug: [(rfcs.length === 1 || nombre) ? 'Contratos de ' + (rfcs.length === 1 ? rfcs[0] : nombre) + ' en ComprasMX' : '¿Qué contratistas están en la lista negra del SAT?', '¿Qué es una EFOS?', 'Expedientes de casos de la ASF']
     };
   }
   function texto(h) { var d = document.createElement('div'); d.innerHTML = h; return d.textContent.replace(/\s+/g, ' ').trim().slice(0, 600); }
+
+  /* --- Contratos públicos de ComprasMX, en el chat (pedido del autor,
+     26-10-2026: «integrar los contratos de ComprasMX» para seguir el dinero).
+     Los catálogos los escribe herramientas/actualizar_comprasmx.py y se
+     descargan solo cuando se pregunta: el índice de proveedores (1 MB), las
+     instituciones (0.6 MB) y la ficha de cada proveedor, por las dos
+     primeras letras de su RFC. Cada importe es «oficial» (lo reportó la
+     institución, antes de impuestos); las sumas y porcentajes, «derivado».
+     Las personas físicas no se publican: su RFC es un dato personal. --- */
+  var CMX_DIR = 'assets/auditor/data/comprasmx/', CMX_PAG = 'contratos-publicos.html', CMXP = {};
+  function cargaJs(ruta, listo) {
+    var ya = listo();
+    if (ya) return Promise.resolve(ya);
+    if (CMXP[ruta]) return CMXP[ruta];
+    CMXP[ruta] = new Promise(function (ok, mal) {
+      var s = document.querySelector('script[src*="asistente.js"]'), v = s && /\?v=[\w.-]+/.exec(s.getAttribute('src'));
+      var sc = document.createElement('script');
+      sc.src = ruta + (v ? v[0] : '');
+      sc.onload = function () { var d = listo(); if (d) ok(d); else { CMXP[ruta] = null; mal(); } };
+      sc.onerror = function () { CMXP[ruta] = null; mal(); };
+      document.head.appendChild(sc);
+    });
+    return CMXP[ruta];
+  }
+  function cmxIdx() { return cargaJs(CMX_DIR + 'indice.js', function () { return window.CMX_IDX; }); }
+  function cmxInst() { return cargaJs(CMX_DIR + 'inst.js', function () { return window.CMX_INST; }); }
+  function cmxProv(rfc) {
+    var pre = rfc.slice(0, 2);
+    return cargaJs(CMX_DIR + 'p-' + pre.replace(/[^A-Z0-9]/g, '_') + '.js', function () { return window.CMX_P && window.CMX_P[pre]; })
+      .then(function (L) { return L[rfc] || null; });
+  }
+  function pesosCmx(v) {
+    if (Math.abs(v) >= 1e6) return '$' + (v / 1e6).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp';
+    return '$' + Math.round(v).toLocaleString('es-MX');
+  }
+  var TIPO_CMX = { AD: 'adjudicación directa', LP: 'licitación pública', I3: 'invitación a cuando menos tres', OT: 'otro procedimiento' };
+  var CMX_RE = /\b(contratos?|contratistas?|proveedor(es)?|proveedora|licitacion(es)?|adjudicacion(es)?|comprasmx|compras mx|compranet|a quien(es)? le compra|le (ha )?(pagado|comprado)|cuanto le paga\w*)\b/;
+  var CMX_FUERA = ('que cuales cual cuantos cuantas cuanto contrato contratos tiene tienen tuvo la el los las de del en a al y o con por para su sus le les ha han ' +
+    'compras mx comprasmx compranet gobierno empresa empresas proveedor proveedores proveedora contratista contratistas quien quienes son es ' +
+    'compra compro comprado vende vendio pagado paga pago pagan licitacion licitaciones adjudicacion adjudicaciones directa directas publica publicas ' +
+    'dame dime ver muestra muestrame busca buscame revisa sabes hay me puedes quiero saber lista mayores principales grandes mas federal').split(' ');
+  function contratosCmx(q) {
+    var p = plano(q);
+    if (!CMX_RE.test(p) || SAT_PAL.test(p) || /^ (que|q) (es|son|significa)\b/.test(p)) return null;
+    var rfcs = (q.match(RFC_RE) || []).map(function (x) { return x.toUpperCase(); });
+    /* «¿Qué pasa si no le cobran la pena al contratista?» no busca a una empresa: lo contesta «Documentar para sancionar». */
+    if (!rfcs.length && /\b(penas?|multas?|sancion\w*|incumpl\w*|no cumplio|clausulas?|pruebo|que documentos)\b/.test(p)) return null;
+    var nombre = p.trim().split(' ').filter(function (w) { return w.length > 1 && CMX_FUERA.indexOf(w) < 0; }).join(' ');
+    if (rfcs.length && rfcs[0].length === 13) {
+      return { html: '<p>🔒 <code>' + esc(rfcs[0]) + '</code> es el RFC de una <b>persona física</b>. La plataforma no publica a las personas físicas que le venden al gobierno: su RFC es un dato personal. Solo cuentan en los totales de cada institución.</p>' +
+        '<p>Si necesitas revisarlo, la fuente oficial es el sitio público de ComprasMX.</p>', ir: [CMX_PAG, 'Contratos públicos'], sug: [], rec: [] };
+    }
+    if (!rfcs.length && satNorm(nombre).length < 2) {
+      return { html: '<p>🧾 Tengo los <b>contratos públicos de ComprasMX</b>: los que reportaron las dependencias federales y los gobiernos que usan la plataforma, en los expedientes de 2025 y 2026. Dime una <b>empresa</b> («contratos de Laboratorios Pisa»), su <b>RFC</b> o una <b>institución</b> («¿a quién le compra el IMSS?») y te digo cuántos contratos, por cuánto, por qué procedimiento y la liga de cada uno.</p>',
+        ir: [CMX_PAG, 'Contratos públicos'], sug: ['¿A quién le compra el IMSS?', 'Contratos del Tren Maya', '¿Qué contratistas están en la lista negra del SAT?'], rec: [] };
+    }
+    var termino = rfcs.length ? rfcs[0] : nombre;
+    var prom = Promise.all([cmxIdx(), cmxInst()]).then(function (D) {
+      var I = D[0], T = D[1];
+      if (rfcs.length) return cmxProv(rfcs[0]).then(function (d) { return respProv(rfcs[0], d, I.meta); });
+      var ws = satNorm(nombre).split(' ');
+      /* Una institución por sus siglas («IMSS», «CFE») o por su nombre. */
+      var claves = Object.keys(T.i), sig = null;
+      if (ws.length <= 3) claves.forEach(function (k) { var s = satNorm(T.i[k].s).replace(/ /g, ''); if (!sig && s.length > 1 && ws.join('') === s) sig = k; });
+      var porNom = claves.filter(function (k) { var n = satNorm(T.i[k].n); return ws.every(function (w) { return (' ' + n + ' ').indexOf(' ' + w + ' ') >= 0; }); });
+      var provs = I.r.filter(function (r) { var n = ' ' + satNorm(r[1]) + ' '; return ws.every(function (w) { return n.indexOf(' ' + w + ' ') >= 0; }); });
+      var pideInst = /\b(a quien(es)? le compra|proveedores (de|del)|contratistas (de|del)|le compra)\b/.test(p);
+      if (sig || (porNom.length && (pideInst || !provs.length))) {
+        var k = sig || porNom.sort(function (a, b) { return T.i[b].m - T.i[a].m; })[0];
+        return respInst(k, T.i[k], T.meta, porNom.length > 1 && !sig ? porNom.length : 0);
+      }
+      if (!provs.length) return { html: '<p>◻️ No encontré «' + esc(nombre) + '» entre los <b>' + I.meta.proveedores.toLocaleString('es-MX') + '</b> proveedores (personas morales) ni entre las <b>' + I.meta.instituciones.toLocaleString('es-MX') + '</b> instituciones con contratos en ComprasMX, en los expedientes de 2025 y 2026.</p>' +
+        '<p>Eso no quiere decir que no tenga contratos: el nombre puede estar escrito distinto, sus contratos pueden ser de otros años, o la institución puede no reportar en ComprasMX. Varios órganos autónomos, como el INE, y los gobiernos que no usan la plataforma publican sus contratos en sus propios portales y en la Plataforma Nacional de Transparencia. Con el <b>RFC</b> la búsqueda es exacta.</p>',
+        ir: [CMX_PAG + '?q=' + encodeURIComponent(nombre), 'Contratos públicos'], sug: [], rec: [], web: nombre };
+      var exacto = provs.filter(function (r) { return satNorm(r[1]).replace(/\b(S ?A|DE|C ?V|S ?A ?P ?I|R ?L|S ?C)\b/g, '').replace(/ +/g, ' ').trim() === ws.join(' '); });
+      if (provs.length === 1 || exacto.length === 1) { var r1 = provs.length === 1 ? provs[0] : exacto[0]; return cmxProv(r1[0]).then(function (d) { return respProv(r1[0], d, I.meta); }); }
+      return { html: '<p>Encontré <b>' + provs.length.toLocaleString('es-MX') + '</b> proveedores con «' + esc(nombre) + '» en el nombre. ¿Cuál buscas?</p><p>' +
+        provs.slice(0, 8).map(function (r) { return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc('Contratos de ' + r[0]) + '">' + esc(r[1]) + '</button>'; }).join(' ') + '</p>' +
+        (provs.length > 8 ? '<p class="pa-chico">Te muestro 8. Con el RFC la búsqueda es exacta.</p>' : ''),
+        ir: [CMX_PAG + '?q=' + encodeURIComponent(nombre), 'Contratos públicos'], sug: [], rec: [] };
+    }, function () {
+      return { html: '<p>No pude descargar ahora el catálogo de contratos de ComprasMX. Revisa tu conexión y vuelve a preguntarme.</p>', ir: [CMX_PAG, 'Contratos públicos'], sug: [], rec: [] };
+    });
+    return { espera: prom, tit: 'Contratos en ComprasMX: ' + termino };
+  }
+  function cmxFuente(M) {
+    return { tx: M.fuente + ' (archivos ' + M.archivos.map(function (a) { return a.anio; }).join(' y ') + ', descargados el ' + M.descarga + ')', url: M.url };
+  }
+  function cmxCaveat() {
+    return '<p class="pa-chico">⚖️ Tener contratos con el gobierno no es una irregularidad. El importe es el que reportó cada institución, antes de impuestos; en un contrato abierto suele ser el máximo, no lo pagado. ComprasMX no publica pagos: lo pagado se rinde en la Cuenta Pública.</p>';
+  }
+  function respProv(rfc, d, M) {
+    if (!d) return { html: '<p>◻️ El RFC <code>' + esc(rfc) + '</code> no tiene contratos en los expedientes de 2025 y 2026 de ComprasMX.</p><p>Puede tenerlos en otros años o con gobiernos que no usan ComprasMX. Eso no certifica nada.</p>',
+      ir: [CMX_PAG + '?q=' + rfc, 'Contratos públicos'], sug: ['¿Está en la lista negra del SAT el RFC ' + rfc + '?'], rec: [] };
+    var tp = d.tp || {}, mtp = d.mtp || {}, fuente = cmxFuente(M), ci = [];
+    var partes = ['AD', 'LP', 'I3', 'OT'].filter(function (k) { return tp[k]; }).map(function (k) {
+      return '<b>' + tp[k].toLocaleString('es-MX') + '</b> por ' + TIPO_CMX[k] + (mtp[k] ? ' (' + pesosCmx(mtp[k]) + ')' : '');
+    });
+    var pctAd = d.m ? Math.round((mtp.AD || 0) / d.m * 1000) / 10 : 0;
+    var h = '<p>🏢 <b>' + esc(d.n) + '</b> (<code>' + esc(rfc) + '</code>) tiene <b>' + d.c.toLocaleString('es-MX') + ' contrato' + (d.c === 1 ? '' : 's') + '</b> en ComprasMX, en los expedientes de 2025 y 2026, por <b>' + pesosCmx(d.m) + '</b> antes de impuestos ' + chip({ e: 'derivado' }) + '.</p>' +
+      '<p>Por procedimiento: ' + partes.join('; ') + '.' + (d.m && mtp.AD ? ' La adjudicación directa es el ' + pctAd.toLocaleString('es-MX') + ' % de su importe ' + chip({ e: 'derivado' }) + '.' : '') + '</p>' +
+      (d.o ? '<p class="pa-chico">Además, en otras monedas (no se convierten): ' + Object.keys(d.o).map(function (k) { return d.o[k].toLocaleString('es-MX', { maximumFractionDigits: 0 }) + ' ' + esc(k); }).join(', ') + '.</p>' : '') +
+      '<p>Le vende a <b>' + d.ni + '</b> institucion' + (d.ni === 1 ? '' : 'es') + (d.ni > 1 ? '; las principales:' : ':') + '</p><ul class="pa-lista">' + d.i.map(function (x) {
+        return '<li><b>' + esc(x[1]) + '</b>: ' + x[3].toLocaleString('es-MX') + ' contrato' + (x[3] === 1 ? '' : 's') + ', ' + pesosCmx(x[4]) + '</li>';
+      }).join('') + '</ul>' +
+      '<p>Sus contratos mayores ' + chip({ e: 'oficial' }) + ':</p><ul class="pa-lista">' + d.k.map(function (k) {
+        return '<li>' + pesosCmx(k[3]) + (k[4] !== 'MXN' ? ' ' + esc(k[4]) : '') + ' · <b>' + esc(k[1]) + '</b> · ' + esc(TIPO_CMX[k[5]] || '') + (k[6] ? ' · ' + esc(k[6]) : '') + '<br><span class="pa-chico">' + esc(k[2]) + '</span>' +
+          (k[7] ? ' <a href="' + esc(M.detalle.replace('%s', k[7])) + '" target="_blank" rel="noopener">Ver en ComprasMX ↗</a>' : '') + '</li>';
+      }).join('') + '</ul>';
+    if (d.sat) {
+      var s = (IN.sat || {})[d.sat[0]] || { t: d.sat[0], txt: '' };
+      h += '<p>' + (d.sat[0] === 'F' ? '⛔' : d.sat[0] === 'P' ? '⚠️' : 'ℹ️') + ' <b>Aparece en la lista 69-B del SAT</b> como <b>' + esc(s.t) + '</b> (oficio ' + esc(d.sat[1]) + ', ' + esc(d.sat[2]) + '). ' + esc(s.txt || '') + '</p>';
+    }
+    var emp = PE.per.filter(function (x) { return x.emp; }).filter(function (x) { return x.al.some(function (a) { return plano(d.n).indexOf(' ' + a + ' ') >= 0; }); })[0];
+    if (emp) h += '<p>📰 La plataforma también tiene a <b>' + esc(corta(emp.n)) + '</b> en Noticias relevantes: <button type="button" class="pa-ej" data-pa-pregunta="' + esc(corta(emp.n)) + '">Ver lo que sabemos</button></p>';
+    h += cmxCaveat();
+    ci.push({ v: d.c.toLocaleString('es-MX') + ' contratos', etq: d.n + ' · RFC ' + rfc + ' · expedientes 2025 y 2026', e: 'oficial' });
+    ci.push({ v: pesosCmx(d.m), etq: 'Importe antes de impuestos, suma de sus contratos en pesos', e: 'derivado' });
+    d.k.forEach(function (k) { ci.push({ v: pesosCmx(k[3]) + (k[4] !== 'MXN' ? ' ' + k[4] : ''), etq: k[0] + ' · ' + k[1] + ' · ' + k[2], e: 'oficial' }); });
+    var tit = 'Contratos en ComprasMX: ' + d.n;
+    h += charla && charla.deDonde ? charla.deDonde([{ que: 'Datos relevantes de los contratos de ComprasMX', e: 'oficial', fu: fuente }]) : '';
+    return { html: h, ir: [CMX_PAG + '?q=' + rfc, 'Contratos públicos'], rec: [],
+      ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: [fuente], ir: [CMX_PAG + '?q=' + rfc, 'Contratos públicos'] },
+      sug: ['¿Está en la lista negra del SAT el RFC ' + rfc + '?'].concat(d.i.slice(0, 2).map(function (x) { return '¿A quién le compra ' + x[1] + '?'; })) };
+  }
+  function respInst(k, d, M, otras) {
+    var fuente = cmxFuente(M), ci = [];
+    var pc = d.c ? Math.round(d.ad / d.c * 1000) / 10 : 0, pm = d.m ? Math.round(d.mad / d.m * 1000) / 10 : 0;
+    var h = '<p>🏛️ <b>' + esc(d.n) + '</b>' + (d.s && d.s !== d.n ? ' (' + esc(d.s) + ')' : '') + ' reportó <b>' + d.c.toLocaleString('es-MX') + ' contratos</b> en ComprasMX, en los expedientes de 2025 y 2026, por <b>' + pesosCmx(d.m) + '</b> antes de impuestos ' + chip({ e: 'derivado' }) + '.</p>' +
+      '<p>Por <b>adjudicación directa</b>: ' + d.ad.toLocaleString('es-MX') + ' contratos (' + pc.toLocaleString('es-MX') + ' % del total) y ' + pesosCmx(d.mad) + ' (' + pm.toLocaleString('es-MX') + ' % del importe) ' + chip({ e: 'derivado' }) + '.</p>' +
+      (d.ot ? '<p class="pa-chico">Además, en otras monedas (no se convierten): ' + Object.keys(d.ot).map(function (x) { return d.ot[x].toLocaleString('es-MX', { maximumFractionDigits: 0 }) + ' ' + esc(x); }).join(', ') + '.</p>' : '') +
+      '<p>Le compró a <b>' + d.np.toLocaleString('es-MX') + '</b> empresas' + (d.pf ? ' y a personas físicas (' + d.pf.toLocaleString('es-MX') + ' contratos, ' + pesosCmx(d.mpf) + '; no se publican sus nombres)' : '') + '. Sus 10 proveedores mayores:</p><ol class="pa-lista">' +
+      d.p.map(function (x) { return '<li><button type="button" class="pa-ej" data-pa-pregunta="' + esc('Contratos de ' + x[0]) + '">' + esc(x[1]) + '</button> ' + pesosCmx(x[3]) + ' · ' + x[2].toLocaleString('es-MX') + ' contrato' + (x[2] === 1 ? '' : 's') + '</li>'; }).join('') + '</ol>' +
+      (otras ? '<p class="pa-chico">Hay ' + otras + ' instituciones con ese nombre; te muestro la de mayor importe. Escribe sus siglas para elegir otra.</p>' : '') + cmxCaveat();
+    ci.push({ v: d.c.toLocaleString('es-MX') + ' contratos', etq: d.n + ' · expedientes 2025 y 2026', e: 'oficial' });
+    ci.push({ v: pesosCmx(d.m), etq: 'Importe antes de impuestos, suma de sus contratos en pesos', e: 'derivado' });
+    ci.push({ v: pm.toLocaleString('es-MX') + ' %', etq: 'Del importe, por adjudicación directa (' + pesosCmx(d.mad) + ' ÷ ' + pesosCmx(d.m) + ')', e: 'derivado' });
+    d.p.forEach(function (x) { ci.push({ v: pesosCmx(x[3]), etq: x[1] + ' · ' + x[2] + ' contratos', e: 'derivado' }); });
+    var tit = 'Contratos de ' + d.n + ' en ComprasMX';
+    h += charla && charla.deDonde ? charla.deDonde([{ que: 'Datos relevantes de los contratos de ComprasMX', e: 'oficial', fu: fuente }]) : '';
+    return { html: h, ir: [CMX_PAG + '?i=' + encodeURIComponent(k), 'Contratos públicos'], rec: [],
+      ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: [fuente], ir: [CMX_PAG + '?i=' + encodeURIComponent(k), 'Contratos públicos'] },
+      sug: d.p.slice(0, 2).map(function (x) { return 'Contratos de ' + x[1]; }) };
+  }
+  /* Contratistas que también están en la lista 69-B del SAT. */
+  var CRUCE_RE = /\b(contratistas?|proveedor(es)?|empresas? con contratos?)\b.*\b(lista negra|69 ?b|efos|sat)\b|\b(lista negra|69 ?b|efos)\b.*\b(contratistas?|proveedor(es)?|contratos?)\b/;
+  function cruceSat(q) {
+    if (!CRUCE_RE.test(plano(q)) || (q.match(RFC_RE) || []).length) return null;
+    return { espera: cmxInst().then(function (T) {
+      var sit = IN.sat || {}, L = T.sat;
+      var h = '<p>Crucé los <b>' + T.meta.proveedores.toLocaleString('es-MX') + '</b> proveedores con contratos en ComprasMX (expedientes 2025 y 2026) contra la lista 69-B del SAT, por RFC: <b>' + L.length + '</b> aparecen ' + chip({ e: 'derivado' }) + '.</p>' +
+        '<ul class="pa-lista">' + L.map(function (r) { var s = sit[r[2]] || { t: r[2], i: '' }; return '<li>' + (s.i || '') + ' <button type="button" class="pa-ej" data-pa-pregunta="' + esc('Contratos de ' + r[0]) + '">' + esc(r[1]) + '</button> · <b>' + esc(s.t) + '</b> · ' + r[3] + ' contrato' + (r[3] === 1 ? '' : 's') + ', ' + pesosCmx(r[4]) + '</li>'; }).join('') + '</ul>' +
+        '<p>«Desvirtuado» y «sentencia favorable» quieren decir que salió de la presunción; solo «definitivo» es una determinación firme del SAT, y «presunto» es un proceso abierto.</p>' + cmxCaveat();
+      var fuentes = [cmxFuente(T.meta)];
+      return { html: h, ir: [CMX_PAG + '#cruce', 'Contratos públicos'], rec: [], sug: [],
+        ficha: { t: 'calculo', tit: 'Contratistas de ComprasMX en la lista 69-B del SAT', txt: texto(h), ci: L.map(function (r) { return { v: (sit[r[2]] || { t: r[2] }).t, etq: r[1] + ' · RFC ' + r[0], e: 'oficial' }; }), fu: fuentes, ir: [CMX_PAG + '#cruce', 'Contratos públicos'] } };
+    }, function () { return { html: '<p>No pude descargar ahora el catálogo de contratos.</p>', ir: [CMX_PAG, 'Contratos públicos'], sug: [], rec: [] }; }), tit: 'Contratistas en la lista 69-B' };
+  }
 
   /* --- Las demás: qué pide el lector y con qué la abrimos. --- */
   var FOLIO_RE = /\bAV-[A-Z0-9]{2,8}-[0-9A-F]{6,}\b|\b[0-9A-F]{64}\b/i, DICT_RE = /\b(DP|NT)-\d{8}-[0-9A-F]{8}\b/i;
@@ -737,10 +1059,104 @@
   var MO = (B.dat && B.dat.mo) || { obras: [], sx: [], apps: [], tot: {}, portales: [], sims: {} }, OB = {};
   var PESO_FU = ((B.dat && B.dat.datos && B.dat.datos.peso && B.dat.datos.peso.fx) || {}).BX_INPC;
   MO.apps.forEach(function (a) { a.grupo = MO.nombre; a.tot = MO.apps.length; a._p = plano(a.n); a._c = plano(a.n.split(/,| y /)[0]); a._base = sinParam(a.url).replace(/\.html$/, ''); APP[a.id] = a; });
+  /* Costo Ambiental y la Calculadora Cívica, dentro del chat (24-10-2026,
+     pedido del autor): sus aplicaciones se reconocen por su nombre o por como
+     se dicen en la calle (ALIAS_APPS de herramientas/asistente.py) y se abren
+     en el marco de la respuesta, como las del Modo Inspector. */
+  var HA = { apps: [], de: {} };
+  [(B.dat && B.dat.amb), (B.dat && B.dat.calc)].forEach(function (h) {
+    if (!h) return;
+    h._p = plano(h.nombre);
+    h.apps.forEach(function (a) { a.grupo = h.nombre; a.tot = h.apps.length; a.h = h; a._al = [plano(a.n)].concat((a.al || []).map(plano)); a._base = sinParam(a.url).replace(/\.html$/, ''); APP[a.id] = a; HA.apps.push(a); });
+    HA.de[h.pagina] = h;
+  });
+  function respHerr(h) {
+    return {
+      html: '<p><span aria-hidden="true">' + h.ico + '</span> <b>' + esc(h.nombre) + '</b> son ' + h.apps.length + ' aplicaciones, y todas las usas desde aquí, sin salir del chat:</p><ul class="pa-lista">' +
+        h.apps.map(function (a) { return '<li><span aria-hidden="true">' + a.ico + '</span> <b>' + esc(a.n) + '.</b> ' + esc(a.frase) + '.</li>'; }).join('') + '</ul>' +
+        '<p>Dime cuál quieres y la abro aquí abajo. Empiezo por la primera:</p>',
+      ir: [h.pagina, h.nombre], app: { id: h.apps[0].id, url: h.apps[0].url }, rec: [],
+      sug: h.apps.slice(1, 4).map(function (a) { return a.n; })
+    };
+  }
+  /* «Gano 15 mil al mes, ¿cuánto me retienen?»: la Calculadora Cívica hace la
+     cuenta con la tarifa oficial del ISR; el chat no pone cifras propias. */
+  var SUELDO = /\b(gano|ganamos|mi sueldo|mi salario|mi ingreso|mis ingresos|me pagan|cobro|percibo|facturo)\b/;
+  /* La cifra que se lee es la del ingreso: la primera después de «gano»,
+     «me pagan»…, y nunca la que cuenta hijos, años o días («gano 15 mil y
+     tengo 2 hijos» usa 15,000; «tengo 2 hijos y gano 15 mil», también). */
+  var NO_ES_INGRESO = /^\s*(hijos?|hijas?|ninos?|ninas?|dependientes?|personas?|anos?|meses|semanas?|dias?|horas?|empleados?|trabajadores?|cuartos?|casas?|departamentos?|locales?|veces|%|por ciento)\b/;
+  function sueldoDe(p) {
+    var t = p.replace(/(\d) (?=\d{3}\b)/g, '$1'), re = /(\d[\d,]*(?:\.\d+)?)\s*(mil\b|k\b)?/g, m, cand = [], s = SUELDO.exec(t), desde = s ? s.index : 0;
+    while ((m = re.exec(t))) {
+      if (NO_ES_INGRESO.test(t.slice(m.index + m[0].length))) continue;
+      var v = parseFloat(m[1].replace(/,/g, '')) * (m[2] ? 1000 : 1);
+      if (v >= 100 && v < 1e9) cand.push({ v: Math.round(v * 100) / 100, i: m.index });
+    }
+    var tras = cand.filter(function (c) { return c.i >= desde; });
+    return (tras[0] || cand[0] || { v: 0 }).v;
+  }
+  /* El régimen, si el lector lo dice; si no, sueldos y salarios (lo que la
+     calculadora supone y deja cambiar). */
+  var REGIMEN = [
+    ['plataformas', /\b(uber|didi|rappi|cabify|indrive|airbnb|booking|mercado libre|amazon|plataformas? (digitales?|tecnologicas?)|por (una )?app)\b/],
+    ['resico', /\b(resico|simplificado de confianza)\b/],
+    ['arrendamiento', /\b(rento (mi|una|un)|renta de (mi|mis)|cobro (la |de )?renta|me pagan (la |de )?renta|arrendamiento|arrendador)\b/],
+    ['honorarios', /\b(honorarios|freelance|independiente|por mi cuenta|negocio propio|mi negocio|actividad empresarial|profesionista)\b/],
+    ['sueldos', /\b(sueldos? y salarios?|nomina|asalariad[oa]|mi patron|mi empresa me paga|empleado de)\b/]
+  ];
+  var PLATA = [['hospedaje', /\b(airbnb|booking|hospedaje)\b/], ['bienes', /\b(mercado libre|amazon|vendo|ventas?)\b/], ['transporte', /./]];
+  function regimenDe(p) {
+    var r = REGIMEN.filter(function (x) { return x[1].test(p); })[0], pl = null;
+    if (r && r[0] === 'plataformas') pl = PLATA.filter(function (x) { return x[1].test(p); })[0][0];
+    return { r: r ? r[0] : '', pl: pl };
+  }
+  function herramienta(q) {
+    if (!HA.apps.length) return null;
+    var p = plano(q), cc = APP.ccticket, CR = B.dat.calc || {};
+    if (cc && SUELDO.test(p) && !/\b(diputad|senador|ministr|president|gobernador|alcalde|funcionari)\w*/.test(p)) {
+      var m = sueldoDe(p), per = /\b(al ano|anual|anuales|por ano)\b/.test(p) ? 'ano' : 'mes', nat = /\b(neto|netos|libres?|en mano|ya sin impuestos)\b/.test(p) ? 'neto' : 'bruto';
+      var rg = regimenDe(p), quin = m && /\b(quincena|quincenal|quincenales)\b/.test(p), sem = m && /\b(semana|semanal|semanales)\b/.test(p), m0 = m;
+      /* Por quincena: la calculadora trabaja por mes, y un mes son dos quincenas (derivado, se dice la operación). */
+      if (quin) { m = Math.round(m * 2 * 100) / 100; per = 'mes'; }
+      if (sem) m = 0;
+      var liga = 'herramienta-calculadora-ticket-retienen.html' + (m ? '?m=' + m + '&p=' + per + '&n=' + nat + (rg.r ? '&r=' + rg.r : '') + (rg.pl ? '&pl=' + rg.pl : '') : '');
+      var regN = rg.r && CR.reg ? CR.reg[rg.r] : '', plN = rg.pl && CR.plat ? CR.plat[rg.pl] : '';
+      var hijos = /\b(hijos?|hijas?|dependientes?|esposa|esposo|familia)\b/.test(p);
+      return respApp('ccticket', liga, '<p><span aria-hidden="true">🧾</span> Esa cuenta la hace <b>' + esc(cc.n) + '</b>, de la ' + esc(cc.grupo) + ': ' +
+        (m ? 'ya le puse tu ingreso de <b>$' + m.toLocaleString('es-MX') + (per === 'ano' ? ' al año' : ' al mes') + '</b>, ' + (nat === 'neto' ? 'después' : 'antes') + ' de descuentos' +
+          (regN ? ', en <b>' + esc(regN) + '</b>' + (plN ? ' (' + esc(plN.toLowerCase()) + ')' : '') : '') + '. ' :
+          sem ? 'la calculadora trabaja por mes o por año, así que escribe ahí lo que juntas al mes (no convierto semanas: los meses no tienen semanas exactas). ' : 'escribe lo que ganas. ') +
+        'Te dice cuánto te retienen, con la tarifa oficial del ISR, y a dónde va cada peso de tu impuesto, en un documento con folio y huella.</p>' +
+        (quin ? '<p class="pa-chico">' + chip({ e: 'derivado' }) + ' <b>Operación:</b> $' + m0.toLocaleString('es-MX') + ' a la quincena × 2 quincenas = $' + m.toLocaleString('es-MX') + ' al mes.</p>' : '') +
+        (hijos ? '<p class="pa-chico">Tus hijos o tu familia no cambian lo que te retienen cada mes: la tarifa del artículo 96 de la Ley del ISR no tiene descuento por dependientes. Algunos gastos de la familia, como los médicos y hospitalarios, se deducen en la declaración anual (artículo 151), que esta cuenta no hace.</p>' : '') +
+        '<p class="pa-chico">La cuenta la hace la calculadora con las tarifas publicadas. ' + (regN ? 'Si tu régimen es otro, cámbialo ahí mismo, en «1 · Tu ingreso».' : /\bfacturo\b/.test(p) ? 'Como facturas, elige en «1 · Tu ingreso» si estás en el RESICO o en actividad empresarial, porque cambia mucho lo que pagas; mientras, supuse sueldos y salarios.' : 'Supuse que trabajas con un patrón (sueldos y salarios); si no es así, cámbialo ahí mismo, en «1 · Tu ingreso».') + '</p>',
+        { sug: ['¿A dónde va cada peso de mis impuestos?', '¿Cuánto gana un diputado comparado conmigo?', 'Mi estado de cuenta ambiental'] });
+    }
+    if (/^\s*(que|q) (es|son|significa)\b/.test(p)) return null;
+    var hit = null;
+    HA.apps.forEach(function (a) { if (!hit && a._al.some(function (x) { return x.trim().split(' ').length > 1 && p.indexOf(x) >= 0; })) hit = a; });
+    if (hit) return respApp(hit.id, hit.url, '<p><span aria-hidden="true">' + hit.ico + '</span> <b>' + esc(hit.n) + '</b> es la aplicación ' + hit.k + ' de ' + esc(hit.grupo) + '. ' + esc(hit.desc) + '</p><p>Úsala aquí abajo, sin salir del chat, o abre su página con «Saber más».</p>',
+      { sug: hit.h.apps.filter(function (a) { return a !== hit; }).slice(0, 3).map(function (a) { return a.n; }) });
+    var h = null;
+    Object.keys(HA.de).forEach(function (k) { if (!h && p.indexOf(HA.de[k]._p) >= 0) h = HA.de[k]; });
+    /* «La calculadora», a secas, es la Calculadora Cívica: no hay otra en la plataforma. */
+    if (!h && CR.apps && /(^| )calculadora( |$)/.test(p)) h = CR;
+    return h ? respHerr(h) : null;
+  }
+  /* La investigación de Auditoría en imágenes que viene al caso, al frente de
+     «Explóralo a fondo» (las frases las escribe herramientas/auditorias.py). */
+  INV.forEach(function (f) { f._k = (f.k || []).map(plano); });
+  function invDe(q, r) {
+    var p = plano(q + ' ' + ((r.ficha && r.ficha.tit) || r.tit || '')), hit = null, ir = r.ir || (r.ficha && r.ficha.ir);
+    INV.forEach(function (f) { if (!hit && f._k.some(function (x) { return p.indexOf(x) >= 0; })) hit = f; });
+    if (!hit || (ir && sinParam(ir[0]) === hit.ir[0])) return null;
+    return { x: { ico: '📖', v: 'Ver la investigación', n: hit.tit, ir: hit.ir[0] } };
+  }
   MO.obras.forEach(function (o) { OB[o.id] = o; o._al = o.al.map(function (x) { return plano(x); }); });
   /* Nombres que también son de un municipio o de otra cosa: piden contexto de obra. */
   var MO_DEBIL = { ' tula ': 1, ' olmeca ': 1, ' texcoco ': 1, ' santa lucia ': 1, ' bunker ': 1, ' naim ': 1, ' ipab ': 1 };
-  var MO_CTX = /\b(obras?|megaobras?|aeropuerto|refineria|costo|costaron|cuesta|cuestan|sobrecostos?|pierde|pierden|perdio|perdida|gana|ganancia|cancelacion|construccion|inversion|invirti\w*|presupuesto|aprobado|asf|rescate)\b/;
+  var MO_CTX = /\b(obras?|megaobras?|aeropuerto|refineria|costo|costaron|cuesta|cuestan|sobrecostos?|pierde|pierden|perdio|perdida|gana|ganancia|cancelacion|construccion|inversion|invirti\w*|presupuesto|aprobado|asf|rescate|ambiental\w*|ambiente|huella|alerta|impacto|selva|manglar)\b/;
   var MO_EJ = {
     moinvestiga: 'Elige un presidente y una pregunta, y lee la respuesta con su documento.',
     motabla: 'Pregúntame «¿en qué obras invirtió Calderón?» o «compara las obras de Peña Nieto y AMLO».',
@@ -837,6 +1253,8 @@
   }
   function moRec(o) {
     var s = sxDe(o), out = [], ex = expDe(o), en = o.ente && enteDe(o.ente);
+    if (o.amb) out.push({ x: { ico: '🗺️', v: 'Ver en el mapa ambiental', n: 'Inversión y alerta ambiental en ' + o.amb.sede, ir: o.amb.mapa } });
+    if (o.ir && o.ir.auditoria) out.push({ x: { ico: '🖼️', v: 'Ver investigación', n: 'Auditoría en imágenes de ' + o.n, ir: o.ir.auditoria } });
     out.push({ x: { ico: '🏭', v: 'Ver su ficha', n: 'Obra por obra, por industria', ir: o.ir.ficha } });
     out.push({ x: { ico: '⏱️', v: 'Ver simulador', n: 'Simulación en vivo de su industria y su sexenio', ir: o.sim } });
     out.push({ x: { ico: '📒', v: 'Ver su cuenta', n: 'Su estado de resultados completo', ir: o.ir.cuenta } });
@@ -854,6 +1272,7 @@
   }
   var MO_SIM = /\b(simulador\w*|simula\w*|en vivo|ritmo|contador|mientras miro|por segundo)\b/;
   var MO_FOCO = [
+    ['amb', /\b(ambiental\w*|ambiente|ecologic\w*|ecosistema\w*|selva\w*|manglar\w*|cenote\w*|huella|deforest\w*|manifestacion|mia|semarnat|asea|profepa|alerta\w*|impacto|contaminacion|en que estados?|donde esta|ubicacion)\b/],
     ['salud', /\b(salud financiera|estado de resultados|finanzas|rentab\w*|ganancia bruta|ganancia neta|utilidad\w*|numeros de la obra)\b/],
     ['sob', /\b(sobrecostos?|de mas|se paso|se excedio|desfase|encarecio|cuanto mas)\b/],
     ['res', /\b(pierde|pierden|perdio|perdida|perdidas|gana|ganan|gano|ganancia|deficit|rentable|negocio|subsidio|al ano|cada ano|nos cuesta|sigue costando)\b/],
@@ -866,7 +1285,10 @@
   function respObra(o, foco, sim) {
     var c = o.c, s = sxDe(o), lead = '';
     var nomP = o.resc ? 'Presentado en su momento' : 'Aprobado', nomR = o.resc ? 'Pagado y debido' : 'Costo real';
-    if (foco === 'sob') lead = o.resc ? 'Es un rescate, no una obra: su «sobrecosto» es lo que creció la deuda frente a lo que se presentó, <b>' + esc(c.sob.vt) + '</b> ' + chipE(c.sob) + '.' :
+    if (foco === 'amb' && o.amb) lead = '📍 Se ubica en <b>' + esc(o.amb.sede) + '</b>. Costó <b>' + esc(c.real.vt) + '</b> ' + chipE(c.real) +
+      '. <br>🚨 <b>Alerta del Auditor Ambiental (' + esc(o.amb.eco) + '):</b> ' + esc(o.amb.alerta) +
+      ' Permiso ambiental (MIA): ' + chip({ e: o.amb.miaEst, p: o.amb.miaPend }) + ' (' + esc(o.amb.miaTxt) + ').';
+    else if (foco === 'sob') lead = o.resc ? 'Es un rescate, no una obra: su «sobrecosto» es lo que creció la deuda frente a lo que se presentó, <b>' + esc(c.sob.vt) + '</b> ' + chipE(c.sob) + '.' :
       'Su sobrecosto es de <b>' + esc(c.sob.vt) + '</b> ' + chipE(c.sob) + ': se aprobaron ' + esc(c.pres.vt) + ' y costó ' + esc(c.real.vt) + '.';
     else if (foco === 'res') lead = o.res.tipo === 'dato' ? 'Al año, ' + (o.res.v < 0 ? '<b class="pa-rojo">pierde ' : '<b class="pa-verde">gana ') + esc(o.res.vt) + '</b> por sí misma (' + o.res.anio + ', ' + esc(o.res.base) + ') ' + chipE(o.res) + '.' +
       (netaHoy(o) ? ' En pesos de ' + esc(MO.mes) + ' son ' + esc(netaHoy(o)) + ' ' + chip({ e: 'derivado' }) + '.' : '') :
@@ -878,21 +1300,25 @@
     else lead = (o.resc ? 'Lo pagado y lo que se sigue debiendo suma ' : 'Costó ') + '<b>' + esc(c.real.vt) + '</b> ' + chipE(c.real) + (o.resc ? '' : ', contra lo aprobado: ' + esc(c.pres.vt)) + '.';
     var h = '<p><span aria-hidden="true">' + o.ico + '</span> <b>' + esc(o.n) + '</b> · ' + esc(o.pres) + ' (' + esc(o.per) + ')' + (o.resc ? ' · <b>rescate: deuda, no obra</b>' : '') + '</p>' +
       '<p>' + lead + '</p><ul class="pa-lista">' +
+      (o.amb ? '<li>📍 Dónde está: <b>' + esc(o.amb.sede) + '</b> · <a href="' + esc(o.amb.mapa) + '">Ver en el mapa ambiental ➔</a></li>' : '') +
       '<li>' + nomP + ': <b>' + esc(c.pres.vt) + '</b> ' + chipE(c.pres) + '</li>' +
       '<li>' + nomR + ': <b>' + esc(c.real.vt) + '</b> ' + chipE(c.real) + '</li>' +
       '<li>' + esc(c.sob.et) + ': <b>' + esc(c.sob.vt) + '</b> ' + chipE(c.sob) + '</li>' +
-      '<li>' + resTxt(o.res) + '</li></ul>' + erHtml(o) +
+      '<li>' + resTxt(o.res) + '</li>' +
+      (o.amb && foco !== 'amb' ? '<li>🚨 <b>Alerta ambiental:</b> ' + esc(o.amb.eco) + ' · Permiso MIA: ' + chip({ e: o.amb.miaEst, p: o.amb.miaPend }) + '</li>' : '') +
+      '</ul>' + erHtml(o) +
       (o.asf && foco !== 'asf' ? '<p>🔍 <b>Lo que dijo la ASF:</b> ' + esc(o.asf) + '</p>' : '') +
       '<p class="pa-chico">' + o.sico + ' ' + esc(o.sec) + ' · Estatus: ' + esc(o.est) + '. «Gana o pierde» no descuenta lo que costó construirla.</p>' +
       portalesHtml(o.fu) + (charla && charla.deDonde ? charla.deDonde(moFuentes(o)) : '');
     var ci = [{ v: c.pres.vt, etq: nomP, e: c.pres.e }, { v: c.real.vt, etq: nomR, e: c.real.e }, { v: c.sob.vt, etq: c.sob.et, e: c.sob.e }];
     if (o.res.tipo === 'dato') ci.push({ v: (o.res.v < 0 ? '−' : '+') + o.res.vt, etq: 'Gana o pierde al año (' + o.res.anio + ')', e: o.res.e });
     var otras = MO.obras.filter(function (x) { return x !== o && !x.resc === !o.resc; });
+    var irDest = foco === 'amb' && o.amb ? [o.amb.mapa, 'el mapa ambiental de megaobras en ' + o.amb.sede] : [o.ir.ficha, 'su ficha en Inversión y Megaobras'];
     return {
-      html: h, ir: [o.ir.ficha, 'su ficha en Inversión y Megaobras'], app: sim ? { id: 'mosector', url: o.sim, abre: true } : foco === 'salud' ? { id: 'mocuenta', url: o.ir.cuenta } : { id: 'mosector', url: o.ir.ficha }, rec: moRec(o),
-      ficha: moFicha(o.n + ': lo que costó y lo que deja', h, ci, o.fu.concat(o.res.fu || []), [o.ir.ficha, 'Inversión y Megaobras']),
-      sug: [foco !== 'sob' ? '¿Y su sobrecosto?' : '¿Y cuánto pierde al año?', s && s.ids.length > 1 ? 'Obras de ' + s.n : '¿Qué megaobra tiene más sobrecosto?',
-        otras.length ? 'Compara ' + o.n.split(' (')[0] + ' con ' + otras[0].n : '¿Cuánto han costado las megaobras?']
+      html: h, ir: irDest, app: sim ? { id: 'mosector', url: o.sim, abre: true } : foco === 'salud' ? { id: 'mocuenta', url: o.ir.cuenta } : { id: 'mosector', url: o.ir.ficha }, rec: moRec(o),
+      ficha: moFicha(o.n + ': lo que costó y lo que deja', h, ci, o.fu.concat(o.res.fu || []), irDest),
+      sug: [foco !== 'amb' && o.amb ? '¿Cuál es el impacto ambiental de ' + o.n.split(' (')[0] + '?' : '¿Y su sobrecosto?', s && s.ids.length > 1 ? 'Obras de ' + s.n : '¿Qué megaobra tiene más sobrecosto?',
+        otras.length ? 'Compara ' + o.n.split(' (')[0] + ' con ' + otras[0].n : 'Mapa ambiental de megaobras por estado']
     };
   }
   function respDuelo(a, b) {
@@ -1030,12 +1456,139 @@
       sug: ['¿En qué invirtió cada presidente?', '¿Qué megaobra tiene más sobrecosto?', '¿Cuánto costó el Tren Maya?']
     };
   }
+  function respMapaAmb(q, p) {
+    var casos = MO.casosAmb || [], edosAmb = MO.edosAmb || [];
+    if (!casos.length) return null;
+    var ab = entidadDe(q);
+    var pideAmb = /\b(ambiental\w*|ambiente|ecologic\w*|ecosistema\w*|selva\w*|manglar\w*|cenote\w*|huella|deforest\w*|manifestacion|mia|semarnat|asea|profepa|alerta\w*|impacto|contaminacion)\b/.test(p);
+    var pideObra = /\b(megaobras?|obras?|infraestructura|refineria\w*|tren\w*|aeropuerto\w*|acueducto\w*|presa\w*|gas|gnl)\b/.test(p);
+    var pideMapa = /\b(mapa|estados|entidades|donde estan|en que estados)\b/.test(p);
+    if (!ab && !((pideAmb && (pideObra || pideMapa)) || (pideMapa && pideObra))) return null;
+    if (ab && !pideObra && !(pideAmb && pideMapa)) return null;
+
+    var fmtMdp = function (v) { return '$' + Number(v || 0).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp'; };
+    if (ab) {
+      var ed = edosAmb.filter(function (x) { return x.a === ab; })[0];
+      if (!ed) return null;
+      var os = casos.filter(function (c) { return (c.edos || []).indexOf(ab) >= 0; });
+      var urlEdo = 'datos-ambiente-megaobras.html?e=' + encodeURIComponent(ab) + '#abMapaObras';
+      var h = '<p>🗺️ <b>' + esc(ed.n) + ' (' + esc(ed.a) + ')</b> en el <b>Mapa ambiental de megaobras e infraestructura</b>:</p>' +
+        '<ul class="pa-lista">' +
+        '<li>🏛️ <b>Gasto federalizado 2026 (Ramos 28 y 33):</b> <b>' + fmtMdp(ed.gasto) + '</b> ' + chip({ e: 'derivado' }) + ' (Ramo 28: ' + fmtMdp(ed.r28) + ' · Ramo 33: ' + fmtMdp(ed.r33) + ').</li>' +
+        '<li>🔍 <b>Por aclarar ante la ASF en el estado (CP 2024):</b> <b>' + fmtMdp(ed.asf) + '</b> ' + chip({ e: 'oficial' }) + ' en ' + ed.aud + ' auditorías.</li>' +
+        '</ul>';
+      if (os.length) {
+        h += '<p>🚨 <b>' + os.length + (os.length === 1 ? ' megaobra o caso con alerta ambiental' : ' megaobras y casos con alerta ambiental') + ' en ' + esc(ed.n) + ':</b></p><ul class="pa-lista">' +
+          os.map(function (c) {
+            var costo = c.paga === 'privado' ? ' · 🏢 <b>Inversión privada</b>: no es gasto público ' + chip({ e: c.estReal, p: c.pendReal }) : c.realMdp != null ? ' · 🏛️ Gasto público registrado: <b>' + fmtMdp(c.realMdp) + '</b> ' + chip({ e: c.estReal, p: c.pendReal }) + (c.multi ? ' <i>(total nacional en ' + c.edos.join(', ') + ')</i>' : '') : '';
+            return '<li><span aria-hidden="true">' + esc(c.ico) + '</span> <b>' + esc(c.nombre) + '</b> (' + esc(c.sede) + ')' + costo + '.<br>' +
+              '🌱 <b>Alerta ambiental (' + esc(c.ecosistema) + '):</b> ' + esc(c.alerta) + ' · Permiso: ' + chip({ e: c.miaEst, p: c.miaPend }) + ' <a href="' + esc(c.aud) + '">Ver su Auditoría en imágenes ➔</a></li>';
+          }).join('') + '</ul>';
+      } else {
+        h += '<p>En el padrón actual de 14 megaobras federales y casos ambientales críticos no hay una megaobra ubicada en <b>' + esc(ed.n) + '</b> (se concentran en 15 entidades). En el mapa puedes revisar su gasto federalizado, su deuda estatal (' + fmtMdp(ed.deuda) + ', semáforo ' + esc(ed.sem) + ') y sus auditorías de la ASF.</p>';
+      }
+      var recs = [
+        { x: { ico: '🗺️', v: 'Abrir el mapa ambiental', n: 'Con ' + ed.n + ' seleccionado en La huella de las megaobras', ir: urlEdo } },
+        { x: { ico: '🏛️', v: 'Ver mapa del gasto federalizado', n: 'Ramos 28 y 33 en ' + ed.n, ir: 'numeros-mapa-del-gasto-federalizado.html?e=' + encodeURIComponent(ab) } },
+        { x: { ico: '🧾', v: 'Ver estado de cuenta', n: 'De ' + ed.n, ir: 'herramienta-inspector-entes.html#ente=estatal:' + encodeURIComponent(ab) } },
+        { x: { ico: '🌱', v: 'Auditar sector ambiental', n: 'SEMARNAT, Conagua y PROFEPA', ir: 'herramienta-ambiente-auditor.html' } }
+      ];
+      if (os.length && os[0].aud) recs.unshift({ x: { ico: '🖼️', v: 'Ver investigación', n: os[0].nombre, ir: os[0].aud } });
+      return {
+        html: h, ir: [urlEdo, 'el mapa ambiental de megaobras en ' + ed.n], rec: recs,
+        ficha: moFicha('Mapa ambiental y megaobras en ' + ed.n, h, [
+          { v: fmtMdp(ed.gasto), etq: ed.n + ': Ramos 28 y 33 (2026)', e: 'derivado' },
+          { v: fmtMdp(ed.asf), etq: ed.n + ': por aclarar ante la ASF (2024)', e: 'oficial' }
+        ], MO.portales, [urlEdo, 'La huella de las megaobras']),
+        sug: ['Mapa ambiental de megaobras por estado', os.length ? '¿Cuánto costó ' + os[0].nombre.split(' (')[0] + '?' : '¿Qué megaobras hay en Tabasco?', 'Estado de cuenta de ' + ed.n]
+      };
+    }
+
+    var tipo = null, tipoTit = 'todas las megaobras y casos ambientales';
+    if (/\b(tren\w*|selva\w*|ferroviari\w*)\b/.test(p)) { tipo = 'trenes'; tipoTit = 'trenes y selvas'; }
+    else if (/\b(refineria\w*|petroleo|pemex|energia|gas|gnl|fertiliz\w*)\b/.test(p)) { tipo = 'energia'; tipoTit = 'refinerías, energía e industria'; }
+    else if (/\b(aeropuerto\w*|aifa|texcoco|bodega|megafarmacia)\b/.test(p)) { tipo = 'aeropuertos'; tipoTit = 'aeropuertos y equipamiento'; }
+    else if (/\b(agua|acueducto\w*|presa\w*|huracan|otis|desastre\w*)\b/.test(p)) { tipo = 'agua'; tipoTit = 'agua y desastres'; }
+
+    var lista = tipo ? casos.filter(function (c) { return c.tipo === tipo; }) : casos;
+    var edosSet = {};
+    lista.forEach(function (c) { (c.edos || []).forEach(function (a) { edosSet[a] = 1; }); });
+    var nEdos = Object.keys(edosSet).length;
+    /* Solo el gasto público se suma (Bloque 4, 27-10-2026). */
+    var sumInv = lista.reduce(function (ac, c) { return ac + (c.paga === 'privado' ? 0 : (c.realMdp || 0)); }, 0);
+    var nPriv = lista.filter(function (c) { return c.paga === 'privado'; }).length;
+    var sumAsf = lista.reduce(function (ac, c) { return ac + (c.asfMdp || 0); }, 0);
+    var urlMapa = 'datos-ambiente-megaobras.html' + (tipo ? '?tipo=' + tipo : '') + '#abMapaObras';
+
+    var h = '<p>🗺️ <b>Mapa ambiental de megaobras e infraestructura por estado</b> (' + esc(tipoTit) + '): concentra <b>' + lista.length + ' obras y casos</b> en <b>' + nEdos + ' de las 32 entidades</b> ' + chip({ e: 'derivado' }) + '.</p>' +
+      '<ul class="pa-lista">' +
+      '<li>💰 <b>Gasto público registrado en estas obras:</b> <b>' + fmtMdp(sumInv) + '</b> ' + chip({ e: 'derivado' }) + ' (suma nacional sin prorratear entre estados' +
+        (nPriv ? '; no incluye ' + (nPriv === 1 ? 'el proyecto' : 'los ' + nPriv + ' proyectos') + ' de inversión privada, que no es dinero público' : '') + ').</li>' +
+      '<li>🔍 <b>Por aclarar ante la ASF en estas obras:</b> <b>' + fmtMdp(sumAsf) + '</b> ' + chip({ e: 'derivado' }) + ' (más $113,327.7 mdp auditados en la cancelación de Texcoco).</li>' +
+      '<li>⏳ <b>Permisos ambientales (MIA) integrados:</b> <b>0 de 11 obras de construcción</b> ' + chip({ e: 'pendiente', p: 'ambiente-0' }) + ' (SEMARNAT y ASEA).</li>' +
+      '</ul>' +
+      '<p><b>Dónde están y qué alerta ambiental tienen:</b></p><ul class="pa-lista">' +
+      lista.slice(0, 8).map(function (c) {
+        return '<li><span aria-hidden="true">' + esc(c.ico) + '</span> <b>' + esc(c.nombre) + '</b> (' + esc(c.edos.join(', ')) + '): ' +
+          (c.paga === 'privado' ? '🏢 <b>inversión privada</b> · ' : c.realMdp != null ? '<b>' + fmtMdp(c.realMdp) + '</b> ' + chip({ e: c.estReal, p: c.pendReal }) + ' · ' : '') +
+          '🌱 <i>' + esc(c.ecosistema) + '</i>. <a href="datos-ambiente-megaobras.html?e=' + encodeURIComponent(c.edos[0]) + '#abMapaObras">Ver en mapa ➔</a></li>';
+      }).join('') + '</ul>' +
+      '<p class="pa-chico">Toca <b>«Saber más»</b> para abrir el mapa interactivo en la Enciclopedia (Medio ambiente › La huella de las megaobras), con tres lentes: Megaobras y alerta ambiental, Gasto federalizado 2026 (Ramos 28 y 33) y Por aclarar ante la ASF.</p>';
+
+    return {
+      html: h, ir: [urlMapa, 'el mapa ambiental de megaobras por estado'],
+      rec: [
+        { x: { ico: '🗺️', v: 'Abrir el mapa ambiental', n: 'La huella de las megaobras por estado', ir: urlMapa } },
+        { x: { ico: '🌱', v: 'Auditar sector ambiental', n: 'SEMARNAT, Conagua, PROFEPA y ASEA', ir: 'herramienta-ambiente-auditor.html' } },
+        { x: { ico: '⏱️', v: 'Ver simulador', n: 'Simulación en vivo de las megaobras', ir: MO.sims.vivo } },
+        { x: { ico: '🌀', v: 'Ver crisis ambientales', n: 'Otis, agua en Jalisco y desastres', ir: 'herramienta-ambiente-crisis.html' } }
+      ],
+      ficha: moFicha('Mapa ambiental de megaobras por estado', h, [
+        { v: nEdos + ' de 32', etq: 'Entidades con megaobras o alertas', e: 'derivado' },
+        { v: fmtMdp(sumInv), etq: 'Inversión registrada en el filtro', e: 'derivado' },
+        { v: fmtMdp(sumAsf), etq: 'Por aclarar ante la ASF en estas obras', e: 'derivado' }
+      ], MO.portales, [urlMapa, 'La huella de las megaobras']),
+      sug: ['¿Qué megaobras hay en Tabasco?', '¿Cuál es el impacto ambiental del Tren Maya?', 'Impacto ambiental de las refinerías']
+    };
+  }
+  function cotejaObra(q, p) {
+    var obs = obrasEn(q);
+    if (obs.length !== 1 || !charla || !charla.juzga) return null;
+    var o = obs[0], c = o.c;
+    /* En dólares no se coteja: la plataforma no convierte monedas. */
+    if (/\b(dolar\w*|usd|mdd)\b/.test(p)) {
+      var rd = respObra(o, '', false);
+      rd.html = '<p>⚪ <b>No lo puedo cotejar en dólares.</b> ' + esc(MO.nombre) + ' lleva la obra en pesos, como la reportan sus documentos, y no convierte monedas. ' +
+        (o.resc ? 'Lo pagado y debido' : 'Su costo real') + ' es <b>' + esc(c.real.vt) + '</b> ' + chipE(c.real) + '.</p>' + rd.html;
+      return rd;
+    }
+    var sob = /\b(sobrecosto|sobreprecio|se encarecio|de mas)\b/.test(p), apr = /\b(aprob\w*|presupuest\w*|se presento)\b/.test(p);
+    var cual = sob ? c.sob : apr ? c.pres : c.real, val = sob ? { v: cual.v, u: 'pct' } : { v: cual.v, u: 'mdp' };
+    var jz = cual.e !== 'pendiente' && charla.juzga(q, val);
+    if (!jz) return null;
+    var etq = sob ? c.sob.et : apr ? (o.resc ? 'lo que se presentó' : 'lo aprobado') : (o.resc ? 'lo pagado y debido' : 'su costo real');
+    var r = respObra(o, sob ? 'sob' : apr ? 'pres' : '', false);
+    r.html = '<p>' + { verde: '✅', ambar: '⚠️', rojo: '❌' }[jz.v.tipo] + ' <b>' + esc(jz.v.tit) + '.</b> Dices «' + esc(jz.dicho.bruto) + '»; ' + esc(etq) + ', según ' + esc(MO.nombre) +
+      ', es <b>' + esc(cual.vt) + '</b> ' + chipE(cual) + '. ' + esc(jz.v.porque) + '</p>' +
+      '<p class="pa-chico">Veredicto ' + chip({ e: 'derivado' }) + ': diferencia entre la cifra que dices y la de la plataforma; se acepta el redondeo.</p>' + r.html;
+    r.tit = 'Verificación: ' + o.n;
+    return r;
+  }
   function megaobras(q, previas) {
     if (!MO.obras.length) return null;
     var p = plano(q);
-    /* Lo que contestan otros: verificar una cifra, el Paquete 2027, la huella ambiental, un expediente. */
-    if (/\b(es cierto|es verdad|dicen que|escuche|lei que|vi que)\b/.test(p) || /\b(2027|paquete|se propone|propuesta|propone)\b/.test(p) ||
-      /\b(ambiental|ambiente|selva|huella|deforest\w*|manifestacion)\b/.test(p) || /\b(expedientes?|pliegos?)\b/.test(p)) return null;
+    /* Lo que contestan otros: el Paquete 2027, un expediente. */
+    if (/\b(2027|paquete|se propone|propuesta|propone)\b/.test(p) || /\b(expedientes?|pliegos?)\b/.test(p)) return null;
+    /* «¿Es cierto que el Tren Maya costó 500 mil millones?» se coteja contra el
+       costo de la obra, no contra otra cifra que comparta su nombre (27-10-2026). */
+    if (/\b(es cierto|es verdad|dicen que|escuche|lei que|vi que)\b/.test(p)) return cotejaObra(q, p);
+    /* Si pregunta por una obra específica (incluso su huella o alerta ambiental), o por el mapa ambiental / megaobras en un estado. */
+    var obs0 = obrasEn(q);
+    if (!obs0.length) {
+      var rAmb = respMapaAmb(q, p);
+      if (rAmb) return rAmb;
+      if (/\b(ambiental|ambiente|selva|huella|deforest\w*|manifestacion)\b/.test(p)) return null;
+    }
     var defin = /^\s*(que|q) (es|son|fue|significa)\b/.test(p);
     /* 1. Las aplicaciones por su nombre, o qué hay en la herramienta. */
     var id = null;
@@ -1057,6 +1610,30 @@
       if (defin && obs[0].resc) return null;
       if (obs.length > 1) return respDuelo(obs[0], obs[1]);
       return respObra(obs[0], foco, MO_SIM.test(p));
+    }
+    /* 2 a. Un proyecto de inversión privada del mapa ambiental («¿cuánto costó la
+       terminal de gas de Guaymas?»): no es gasto público y se dice (Bloque 4). */
+    var priv = (MO.casosAmb || []).filter(function (c) { return c.paga === 'privado' && (c.al || []).some(function (a) { return p.indexOf(' ' + a + ' ') >= 0; }); })[0];
+    if (priv && !defin) {
+      var urlP = 'datos-ambiente-megaobras.html?e=' + encodeURIComponent(priv.edos[0]) + '&paga=privado#abMapaObras';
+      return {
+        html: '<p>' + priv.ico + ' <b>' + esc(priv.nombre) + '</b> (' + esc(priv.sede) + ')</p>' +
+          '<p>🏢 <b>Es inversión privada, no gasto público</b> ' + chip({ e: priv.estReal, p: priv.pendReal }) + '. ' + esc(priv.pagaTxt.replace(/^Inversión privada: /, '')) + '</p>' +
+          '<p>🌱 <b>Alerta ambiental:</b> ' + esc(priv.alerta) + '</p>',
+        ir: [priv.ficha || urlP, 'lo que verificamos del caso'], rec: [{ x: { ico: '🗺️', v: 'Ver en el mapa ambiental', n: 'Con los proyectos privados', ir: urlP } }],
+        sug: ['¿Es cierto que prestaron 54 hectáreas en Guaymas?', 'Mapa ambiental de megaobras por estado']
+      };
+    }
+    /* 2 bis. El costo de una obra que no sigue la herramienta («¿cuánto costó el
+       Tren Interoceánico?»): se dice que no está, en vez de contestar con otra obra. */
+    if (!defin && /\b(cuanto|costo|cuesta|costaron|vale)\b/.test(p) && /\b(tren|refineria|aeropuerto|presa|autopista|carretera|puerto|corredor|acueducto|hospital)\b/.test(p)) {
+      var nObras = MO.obras.filter(function (x) { return !x.resc; });
+      return {
+        html: '<p>⚪ <b>Esa obra no está entre las que sigue ' + esc(MO.nombre) + '.</b> Su costo total no lo tengo con documento, así que no te doy una cifra. Sigo estas ' + nObras.length + ':</p>' +
+          '<p>' + nObras.map(function (x) { return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc('¿Cuánto costó ' + x.n + '?') + '">' + x.ico + ' ' + esc(x.n) + '</button>'; }).join(' ') + '</p>' +
+          '<p class="pa-chico">Si la obra trae dinero en el Paquete Económico 2027, pregúntame «¿cuánto propone el Paquete 2027 para…?».</p>',
+        ir: ['herramienta-megaobras.html', MO.nombre], rec: [], sug: [], anota: 1
+      };
     }
     /* 3. En qué invirtió un presidente (o dos, frente a frente). */
     if (/\b(obras?|megaobras?|invirti\w*|construy\w*|proyectos?|inversiones)\b/.test(p) && !/\binversion fisica\b/.test(p)) {
@@ -1086,16 +1663,338 @@
     return null;
   }
 
+  /* ============ Noticias relevantes y personajes, dentro del chat ===========
+     (24-10-2026, pedido del autor): el nombre de un personaje abre lo que la
+     plataforma pudo sostener de él (las columnas de Noticias relevantes, con
+     sus documentos) y lo menos evidente: lo que circula y no se pudo probar,
+     con el motivo. Lo que hay en internet no lo afirma el chat: ofrece las
+     búsquedas ya armadas en los portales oficiales y en las noticias, como
+     «sin verificar», y lleva a Contrasta una nota. El índice lo escribe
+     herramientas/asistente_personajes.py. */
+  var PE = (B.dat && B.dat.per) || { per: [], web: [] }, COLF = {};
+  F.forEach(function (f) { if (f.t === 'columna') COLF[f.col] = f; });
+  var PER_CTX = /\b(quien es|quien fue|quienes son|quien era|noticias?|que se sabe|que paso con|que hizo|que hay de|que dicen de|datos? curiosos?|columnas?|historia de|biografia|trayectoria|procesos?|juicios?|sentencias?|sentenciad\w*|condena\w*|denuncia\w*|acusa\w*|investigad\w*|escandalos?|polemica\w*|corrupcion|carpetas?|detenid\w*|preso|presa|carcel|prision|rumor\w*|chismes?|contratos?|contratista\w*|proveedor\w*|empresa)\b/;
+  var NOTICIAS_RE = /^\s*(las |unas |dame |muestrame |ver |quiero |que )*(noticias( relevantes)?|columnas?( del erario)?|la columna del erario|datos curiosos)\s*$/;
+  var PARTICULA = { de: 1, del: 1, la: 1, las: 1, los: 1, y: 1 };
+  function personaDe(p) {
+    var hay = null, largo = 0;
+    PE.per.forEach(function (x) { x.al.forEach(function (a) { if (p.indexOf(' ' + a + ' ') >= 0 && a.length > largo) { hay = x; largo = a.length; } }); });
+    return hay;
+  }
+  /* Lo que queda de la pregunta sin el nombre ni las palabras vacías. */
+  function sobra(p, quita, nombre) {
+    var suyo = plano(nombre);
+    quita.forEach(function (a) { p = p.split(' ' + a + ' ').join(' '); });
+    return p.trim().split(/\s+/).filter(function (w) { return w && suyo.indexOf(' ' + w + ' ') < 0 && !vacia[w] && !PARTICULA[w] && !/^(sobre|acerca|algo|cosas?|todo|informacion|info|dato|datos)$/.test(w); });
+  }
+  /* Un nombre que la plataforma no tiene («¿quién es Fulana Pérez?»): se toma
+     tal como lo escribió el lector, para buscarlo fuera. */
+  function nombreDe(q) {
+    var t = String(q).replace(/[¿?¡!.,;:«»"]/g, ' ').replace(/\s+/g, ' ').trim();
+    var m = /^(?:dime |dame |busca |investiga )?(?:quien es|quién es|quien fue|quién fue|noticias de|noticias sobre|que se sabe de|qué se sabe de|que hizo|qué hizo|que hay de|qué hay de|que dicen de|qué dicen de|que paso con|qué pasó con)\s+(.+)$/i.exec(t);
+    var n = (m ? m[1] : t).replace(/^(el|la|los|las)\s+/i, '').trim(), ws = n.split(' ');
+    if (ws.length < 2 || ws.length > 6 || n.length > 70 || /\d/.test(n)) return null;
+    var propias = ws.filter(function (w) { return /^[A-ZÁÉÍÓÚÑ]/.test(w); }).length;
+    var todas = ws.every(function (w) { return /^[A-ZÁÉÍÓÚÑ]/.test(w) || PARTICULA[norm(w)]; });
+    /* Sin «quién es…», solo si cada palabra va con mayúscula: «Rocío Nahle». */
+    if (!m && (!todas || propias < 2)) return null;
+    if (m && propias < 1 && ws.length > 4) return null;
+    return n;
+  }
+  /* El nombre corto de una empresa: sin «, S.A. de C.V.» y parecidos. */
+  function corta(n) { return String(n).replace(/\s*\([^)]*\)\s*$/, '').replace(/,?\s+(S\.?\s?A\.?|S\.?\s?de\s?R\.?\s?L\.?|S\.?\s?C\.?|S\.?\s?A\.?\s?P\.?\s?I\.?).*$/i, '').trim(); }
+  function webHtml(nombre, emp) {
+    var q = '"' + (emp ? corta(nombre) : nombre) + '"';
+    return '<div class="pa-rec pa-web"><p class="pa-mas-t">Búscalo en internet</p>' +
+      '<p class="pa-chico">Esto ya no es la plataforma: son búsquedas ya armadas con el nombre, primero en portales oficiales y al final en las noticias. ' +
+      '<b>Lo que encuentres ahí no lo verificó Auditavisión</b>: una nota de prensa no es un documento oficial, y un proceso no es una condena.</p>' +
+      '<div class="pa-rec-lista">' + (emp ? PE.webEmp : PE.web).map(function (w) {
+        var portal = w.site && w.site.indexOf('https://') === 0;
+        var u = portal ? w.site : w.site ? 'https://www.google.com/search?q=' + encodeURIComponent(q + ' ' + w.site)
+          : 'https://news.google.com/search?q=' + encodeURIComponent(q) + '&hl=es-419&gl=MX&ceid=MX:es-419';
+        return '<a class="pa-rec-a" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer"><span class="pa-rec-ico" aria-hidden="true">' + w.ico + '</span>' +
+          '<span><b>' + esc(w.n) + '</b><small>' + (portal ? 'Portal oficial · escribe ahí ' + esc(q) + ' ↗' : w.e === 'oficial' ? 'Fuente oficial · se abre en otra pestaña ↗' : 'Prensa: sin verificar · se abre en otra pestaña ↗') + '</small></span></a>';
+      }).join('') + '</div>' +
+      '<p class="pa-chico">¿Encontraste una nota con cifras? Pégame aquí su liga y la cotejo contra los documentos oficiales, con <a href="herramienta-inspector-nota.html">Contrasta una nota</a>.</p></div>';
+  }
+  function colHtml(f, grande) {
+    var ci = (f.ci || []).slice(0, grande ? 3 : 2);
+    return '<div class="pa-col"><p class="pa-col-t">📰 <a href="' + esc(f.ir[0]) + '"><b>' + esc(f.tit) + '</b></a></p>' +
+      (f.txt ? '<p>' + esc(f.txt) + '</p>' : '') +
+      (ci.length ? '<ul class="pa-lista">' + ci.map(function (c) { return '<li><b>' + esc(c.v) + '</b> · ' + esc(c.etq) + ' ' + chip(c) + '</li>'; }).join('') + '</ul>' : '') +
+      (grande && f.dc ? '<p class="pa-col-dc"><b>💡 Dato curioso:</b> ' + esc(f.dc) + '</p>' : '') +
+      (grande && charla && f.cot ? charla.cotejo(f, false) : '') + '</div>';
+  }
+  function descHtml(per, abierto) {
+    if (!per.desc.length) return '';
+    return '<details class="pa-desc"' + (abierto ? ' open' : '') + '><summary>🧺 Lo que circula y no pudimos sostener <small>(' + per.descn + ')</small></summary>' +
+      '<p class="pa-chico">Esto se dice en prensa o en redes, pero la plataforma no encontró el documento oficial que lo pruebe. No lo afirmamos ni lo negamos: te decimos por qué se quedó fuera.</p><ul>' +
+      per.desc.map(function (d) { return '<li><b>' + esc(d.tema) + '.</b> ' + esc(d.af) + ' <span class="pa-desc-mo"><b>Por qué no:</b> ' + esc(d.mo) + '</span></li>'; }).join('') +
+      '</ul>' + (per.descn > per.desc.length ? '<p class="pa-chico">Y ' + (per.descn - per.desc.length) + ' más en <a href="' + esc(PE.pag) + '">Noticias relevantes</a>, al pie: «Lo que dejamos fuera y por qué».</p>' : '') + '</details>';
+  }
+  function respPersona(per) {
+    var cols = per.col.map(function (id) { return COLF[id]; }).filter(Boolean), f = cols[0];
+    var a = admDe(per.n), h, fu = [];
+    if (f) {
+      h = '<p>Sobre ' + (per.emp ? 'la empresa ' : '') + '<b>' + esc(per.n) + '</b>, ' + (cols.every(function (c) { return c.cot && c.cot.length; })
+          ? 'esto es lo que la plataforma cotejó contra documentos oficiales de lo que circula, en ' + (cols.length > 1 ? cols.length + ' columnas' : 'la columna') + ' de <b>Verificamos</b>:</p>'
+          : 'esto es lo que la plataforma pudo sostener con documentos, en ' + (cols.length > 1 ? 'sus ' + cols.length + ' columnas' : 'su columna') + ' de <b>Noticias relevantes</b>:</p>') +
+        cols.slice(0, 3).map(function (c, i) { return colHtml(c, i === 0); }).join('');
+      (f.ci || []).slice(0, 4).forEach(function (c) { fu.push({ que: c.etq, e: c.e, fu: c.fu || (f.fu || [])[0] }); });
+    } else {
+      h = '<p>Sobre <b>' + esc(per.n) + '</b>, la plataforma todavía no tiene una columna verificada. Lo que sí tengo es lo que circula y no se pudo sostener con un documento oficial, y por qué:</p>';
+    }
+    h += descHtml(per, !f);
+    if (a) h += '<p>' + esc(a.n) + ' también tiene el <a href="radar-estado-de-cuenta.html?adm=' + encodeURIComponent(a.id) + '"><b>estado de cuenta de su administración</b></a>: deuda, gasto y lo que observó la ASF.</p>';
+    h += '<p class="pa-chico">⚖️ ' + esc((f && f.nota) || 'Un proceso no es una condena: aquí solo va lo que consta en documentos, con presunción de inocencia.') + '</p>';
+    if (f && charla) h += charla.deDonde(fu.length ? fu : (f.fu || []).slice(0, 3).map(function (x) { return { que: 'Documento', e: 'oficial', fu: x }; }));
+    if (per.emp) h += '<p>🏢 Es una empresa que contrata o contrató con el gobierno. Abajo te dejo dónde ver sus contratos, si está sancionada o inhabilitada y si la autoridad la ha señalado; y pregúntame si está en la <b>lista negra del SAT</b>.</p>';
+    h += webHtml(per.n, per.emp);
+    /* Lo que la plataforma tiene de esa persona fuera de las columnas. */
+    var vistos = {}, sug = [];
+    cols.slice(3).forEach(function (c) { sug.push(c); vistos[c.tit] = 1; });
+    buscar(per.n).slice(0, 25).forEach(function (x) {
+      var t = plano(x.f.tit + ' ' + (x.f.k || '') + ' ' + (x.f.txt || ''));
+      if (sug.length < 4 && x.f.t !== 'columna' && x.f.t !== 'fuente' && !vistos[x.f.tit] && per.al.some(function (w) { return t.indexOf(' ' + w + ' ') >= 0; })) { vistos[x.f.tit] = 1; sug.push(x.f); }
+    });
+    if (per.emp) sug.unshift('¿Está en la lista negra del SAT la empresa ' + corta(per.n) + '?');
+    if (per.emp) sug.unshift('Contratos de ' + corta(per.n) + ' en ComprasMX');
+    PE.per.forEach(function (o) {
+      if (sug.length < 5 && o !== per && o.col.some(function (id) { return per.col.indexOf(id) >= 0; })) sug.push(o.emp ? corta(o.n) : '¿Quién es ' + o.n + '?');
+    });
+    return {
+      html: h, ficha: f || null, tit: per.n,
+      ir: f ? (cols.length === 1 ? f.ir : [PE.pag, 'Noticias relevantes']) : [PE.pag, 'Noticias relevantes'],
+      sug: sug, rec: []
+    };
+  }
+  function personaje(q) {
+    if (!PE.per.length) return null;
+    var p = plano(q), n = ' ' + norm(q).replace(/[^a-z0-9ñ]+/g, ' ') + ' ';
+    if (NOTICIAS_RE.test(n.trim())) {
+      var conCol = PE.per.filter(function (x) { return x.col.length; });
+      return {
+        html: '<p>📰 <b>Noticias relevantes</b> reúne ' + PE.n + ' columnas con datos poco conocidos de personajes y hechos del dinero público. Solo entra lo que se pudo verificar con un documento oficial, y cada columna cita los suyos.</p>' +
+          '<p>Pregúntame por un personaje y te digo lo que consta y lo que circula sin pruebas. Tengo columnas de:</p><p>' +
+          conCol.map(function (x) { return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc('¿Quién es ' + x.n + '?') + '">' + esc(x.n) + '</button>'; }).join(' ') + '</p>',
+        ir: [PE.pag, 'Noticias relevantes'], sug: [], rec: []
+      };
+    }
+    var per = personaDe(p);
+    if (!per) return null;
+    if (SAT_PAL.test(n)) return null;  // «¿está en la lista negra…?» lo contesta el SAT
+    var ctx = PER_CTX.test(n), nada = !sobra(p, per.al, per.n).length;
+    /* Un presidente a secas lo sigue contestando su estado de cuenta, y un
+       nombre que también es lugar (Benito Juárez) solo si se habla de personas. */
+    if ((per.pres || per.lugar) ? !ctx : !(ctx || nada)) return null;
+    return respPersona(per);
+  }
+
+  /* Lo que circula y ya cotejamos en Verificamos gana sobre la ficha de un
+     lugar cuando la pregunta trae varias palabras de la columna: «¿es cierto
+     que prestaron 54 hectáreas en Guaymas?» pide el cotejo, no las finanzas
+     del municipio (26-10-2026). */
+  /* Las palabras del dinero («millones», «mucho dinero») no dicen de qué columna se habla: con
+     ellas, «¿es cierto que Jalisco debe 50 mil millones?» se iba a la nota de Jalisco y no a
+     su deuda (29-10-2026). */
+  var GENERICAS = { cierto: 1, verdad: 1, dicen: 1, circula: 1, redes: 1, gobierno: 1, mexico: 1, millones: 1, pesos: 1, dinero: 1, mucho: 1 };
+  /* Una pregunta por un dato («¿cuántos ministros tiene la Corte?») o por un
+     estado de cuenta no es un cotejo, aunque comparta palabras con la columna:
+     la contesta la plática (27-10-2026). */
+  var PIDE_DATO = /^ *(cuant[oa]s?|cual(es)?|quien(es)?|donde|cuando|que es|que son) /, PIDE_COTEJO = / (cierto|verdad|falso|dicen|circula|redes) /;
+  function verificado(q) {
+    var pq = plano(q);
+    if (/ estados? de cuenta /.test(pq) || (PIDE_DATO.test(pq) && !PIDE_COTEJO.test(pq))) return null;
+    var col = buscar(q).slice(0, 12).filter(function (x) { return x.f.t === 'columna' && x.f.cot; })[0];
+    if (!col || !charla) return null;
+    var f = col.f, t = plano(f.tit + ' ' + (f.k || '') + ' ' + (f.txt || '') + ' ' + (f.cir ? f.cir.tx : ''));
+    var ws = norm(q).replace(/[^a-z0-9ñ]+/g, ' ').split(' ').filter(function (w) { return w.length > 3 && !vacia[w] && !GENERICAS[w]; });
+    var hits = ws.filter(function (w) { return t.indexOf(' ' + w + ' ') >= 0; }).length;
+    /* Con «¿es cierto…?» basta que coincidan dos palabras: el lector ya pidió el cotejo. */
+    if (hits < (PIDE_COTEJO.test(pq) ? 2 : 3) || hits * 2 < ws.length) return null;
+    return charla.deFicha(f);
+  }
+
+  /* Alarmas: seguir un caso (26-10-2026). El seguimiento vive en las
+     columnas de Noticias relevantes y se guarda en el navegador. */
+  var ALARMA_RE = /\b(alarmas?|avisame|avisarme|notificac\w*|sigo (un|el|este) caso|seguir (un|el|este|los) casos?|mis seguimientos|seguir casos)\b/;
+  function alarma(q) {
+    if (!ALARMA_RE.test(norm(q))) return null;
+    return {
+      html: '<p>🔔 <b>Sí: puedes seguir un caso.</b> Abre su columna en Noticias relevantes y toca «🔔 Seguir este caso». ' +
+        'Cuando la actualicemos con un documento nuevo (el voto, el informe, el contrato o la sentencia de «🗓️ Lo que sigue»), ' +
+        'al volver verás el aviso «🆕 Novedades» y la lista de «Tus seguimientos» al inicio del diario.</p>' +
+        '<p>Se guarda solo en este navegador: no pedimos correo ni cuenta, y nadie más lo ve. Los avisos por correo o al celular todavía no existen.</p>',
+      ir: ['noticias-seguimiento.html#seguimientos', 'Tus seguimientos'], sug: ['Noticias relevantes', 'Nuestros pilares'], rec: []
+    };
+  }
+
+  /* El dictamen y el Registro de pendientes, por su nombre (27-10-2026: las
+     preguntas de prueba los mandaban al Ágora y a Crisis ambientales). */
+  function propias(q) {
+    var p = plano(q);
+    if (/ dictamen(es)? (civico|independiente|sellado)| (generar|genero|saco|hago|pido|sirve) (un |el )?dictamen|^ (que es )?(el |un )?dictamen $/.test(p))
+      return {
+        html: '<p>🧾 El <b>Dictamen cívico independiente</b> respalda una respuesta mía: trae las cifras, de qué documento sale cada una, su estado (oficial, derivado o pendiente), un folio y una huella digital para comprobar que nadie lo alteró.</p>' +
+          '<p>Para sacarlo, hazme una pregunta y, en la respuesta, toca <b>«🧾 Generar dictamen»</b>: se abre en otra pestaña, listo para imprimir o compartir. El enlace solo lleva tu pregunta y la página la vuelve a contestar con la misma base, así que nadie puede fabricar uno con cifras ajenas.</p>' +
+          '<p class="pa-chico">No es un documento oficial ni un peritaje con validez ante una autoridad.</p>',
+        ir: ['herramienta-inspector-dictamen.html', 'Dictamen cívico independiente'], rec: [], sug: ['¿Cuánto debe Jalisco?', 'Verifica un estado de cuenta']
+      };
+    if (/ (falta|faltan) (por )?(transparentar|publicar)| no (han )?(transparentado|publicado) | datos pendientes /.test(p) && !/ ambient| crisis /.test(p)) {
+      var f = F.filter(function (x) { return x.ir && x.ir[0] === 'pendientes.html'; })[0];
+      if (f && charla) { var r = charla.deFicha(f); r.sug = ['¿Qué no dice el informe semestral?', '¿Cuánto dejó por aclarar la ASF?']; return r; }
+    }
+    /* «Al momento» (28-10-2026): las notas breves de Noticias, de la más nueva a
+       la más vieja. Sin esto, «noticias de hoy» llevaba a una columna cualquiera. */
+    if (/ (noticias? (de hoy|del dia|recientes|de ultima hora|de la semana)|ultimas noticias|al momento|que (esta|estan) pasando|que hay de nuevo|que paso hoy) /.test(p)) {
+      var fn = function (d) { var x = String(d || '').split('-'); return x.length === 3 ? +(x[2] + x[1] + x[0]) : 0; };
+      var am = F.filter(function (x) { return x.t === 'columna' && / columna al momento /.test(plano(x.k)); })
+        .sort(function (x, y) { return fn(y.act) - fn(x.act); }).slice(0, 5);
+      if (am.length) return {
+        html: '<p>⏱️ <b>Al momento</b>, lo más reciente que verificamos contra los documentos oficiales:</p><ul class="pa-lista">' + am.map(function (x) {
+          return '<li><a href="' + esc(x.ir[0]) + '"><b>' + esc(x.tit) + '</b></a> <small>(' + esc(x.act) + ')</small><br>' + esc(x.txt) + '</li>';
+        }).join('') + '</ul><p class="pa-chico">Cada nota dice de qué nota de prensa salió, qué consta en el documento oficial y qué falta probar. Lo que dice la red, al pie de cada una, va rotulado «sin verificar».</p>',
+        ir: ['noticias-auditavision.html#al-momento', 'Noticias · Al momento'], rec: [],
+        sug: am.slice(0, 2).map(function (x) { return x.tit; }).concat(['¿Cómo sigo un caso?'])
+      };
+    }
+    /* Nepotismo y cargos públicos (28-10-2026): antes que los contratos de
+       ComprasMX, que se quedaban con «contrató a su familia». */
+    if (charla && charla.nepotismo) { var rnep = charla.nepotismo(q); if (rnep) return rnep; }
+    /* Noticias relevantes (28-10-2026): proponer una nota para la Columna del
+       Erario y las réplicas y posturas publicadas viven en su pestaña. */
+    if (/ (propon\w*|proponer|mandar\w*|enviar\w*|sugerir\w*|pasar\w*|compartir\w*) (les |te )?(una |la |esta |mi )?(nota|noticia|publicacion)/.test(p) && !/ (verific|cierto|falso) /.test(p))
+      return {
+        html: '<p>✍️ Así llega una noticia a la <b>Columna del Erario</b>: nos mandas la liga, la desarmamos en afirmaciones, cotejamos cada una contra el documento oficial (consta, matiz, sin documento o pendiente) y se publica como nota «Al momento» o como columna, con la fecha, nuestros datos y el glosario. Citamos al medio y a quien firma; no copiamos la nota.</p>' +
+          '<p>Para mandarla, toca «Cuéntanos lo que viste» › «Un tema que deberíamos investigar».</p>',
+        ir: ['noticias-verifica.html#propon', 'Noticias · Propón una nota'], rec: [], sug: ['Verifica una noticia', 'Noticias de hoy', '¿Cómo sigo un caso?']
+      };
+    if (/ posturas? /.test(p) && !/ postura (de|del) (gobierno|partido|presidenta|presidente) /.test(p))
+      return {
+        html: '<p>✉️ En <b>Réplica y postura</b> de Noticias están las respuestas de quienes aludimos. La <b>réplica</b> la pide quien considera inexacto o falso un dato nuestro: se publica gratis, íntegra y sin comentarios en la misma columna. La <b>postura</b> es lo que la institución o la persona aludida dijo en su propio documento, con su liga: se publica en sus palabras y no la calificamos.</p>',
+        ir: ['noticias-auditavision.html#replica', 'Noticias · Réplica y postura'], rec: [], sug: ['¿Cómo ejerzo mi derecho de réplica?', 'Noticias de hoy']
+      };
+    /* Noticias reestructurada (28-10-2026): la agenda del erario, la mesa de
+       redacción y el seguimiento de casos tienen su sección. */
+    if ((/ (agenda del erario|calendario (fiscal|presupuestal|del presupuesto|del erario)|fechas (del presupuesto|del paquete economico|fiscales)) /.test(p) ||
+        / (cuando|que dia|que fecha|en que fecha) (se )?(entrega\w*|presenta\w*|aprueba\w*|llega\w*|manda\w*|envia\w*) (el |la |los )?(paquete economico|presupuesto de egresos|presupuesto|ley de ingresos|cuenta publica|informes? trimestral\w*|precriterios) /.test(p)) &&
+        !/ semestral /.test(p)) {
+      var AG = (B.dat && B.dat.agenda) || [], hoyA = new Date(); hoyA.setHours(0, 0, 0, 0);
+      var MES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+      var cuando = function (x, an) {
+        if (!x.ult) return new Date(an, x.m - 1, x.d);
+        var u = new Date(an, x.m, 0); while (u.getDay() === 0 || u.getDay() === 6) u.setDate(u.getDate() - 1); return u;
+      };
+      var prox = AG.map(function (x) { var f = cuando(x, hoyA.getFullYear()); if (f < hoyA) f = cuando(x, hoyA.getFullYear() + 1); return { x: x, f: f }; })
+        .sort(function (a, b) { return a.f - b.f; }).slice(0, 5);
+      if (prox.length) return {
+        html: '<p>🗓️ <b>Lo que viene en la agenda del erario</b>, con los plazos que fija la ley:</p><ul class="pa-lista">' + prox.map(function (o) {
+          return '<li><b>' + o.f.getDate() + ' de ' + MES[o.f.getMonth()] + (o.x.ult ? ' (último día hábil)' : '') + ':</b> ' + esc(o.x.que) + ' <small>· ' + esc(o.x.quien) + ' · <a href="' + esc(o.x.url) + '" target="_blank" rel="noopener">' + esc(o.x.ley) + ' ↗</a></small></li>';
+        }).join('') + '</ul><p class="pa-chico">Son plazos máximos: el documento puede llegar antes. Las fechas que la ley da como «30 días después del trimestre» o «último día hábil» son nuestra cuenta (derivado).</p>',
+        ir: ['noticias-seguimiento.html#agenda', 'Noticias · Agenda del erario'], rec: [], sug: ['Noticias de hoy', '¿Qué es la Cuenta Pública?']
+      };
+    }
+    if (/ (mesa de redaccion|titulares (de hoy|del dia|recientes)|que dicen (hoy )?los periodicos|que publican los medios) /.test(p))
+      return {
+        html: '<p>📡 En la <b>Mesa de redacción</b> de Noticias juntamos titulares sobre finanzas públicas de los buscadores de noticias, por tema (presupuesto, deuda, ASF, impuestos, contratos, Pemex y CFE, salud, estados). Llegan <b>sin verificar</b>: son la materia prima, no la noticia. Cada uno lo puedes mandar al verificador con un toque.</p>',
+        ir: ['noticias-verifica.html#mesa', 'Noticias · Mesa de redacción'], rec: [], sug: ['Verifica una noticia', 'Noticias de hoy']
+      };
+    if (/ (casos? (abiertos?|en seguimiento)|pedir (un )?seguimiento|den(le)? seguimiento|dar(le)? seguimiento|(sigo|seguir|sigan?) (un|este|el) caso|que no se olvide) /.test(p))
+      return {
+        html: '<p>🔔 En <b>Seguimiento</b> de Noticias están los casos abiertos, cada uno con el documento que falta para cerrarlo (un voto, un informe de la ASF, un contrato, una sentencia). Toca «Seguir este caso» y, cuando llegue el documento, verás el aviso; se guarda solo en tu navegador.</p>' +
+          '<p>¿Quieres que sigamos uno nuevo? Ahí mismo, «Pedir un seguimiento»: dinos qué es y qué documento esperas.</p>',
+        ir: ['noticias-seguimiento.html#seguir', 'Noticias · Seguimiento'], rec: [], sug: ['Noticias de hoy', 'Proponer una nota']
+      };
+    /* Quien fue aludido y quiere aclarar: la página del derecho de réplica, no
+       la columna que comparte sus palabras (Bloque 4, 27-10-2026). «¿Qué es…?»
+       lo sigue contestando el glosario. */
+    if (!/^ que es /.test(p) && (/ (replica|rectificacion|rectificar) /.test(p) || / (corregir|aclarar|desmentir|responder) (lo|algo) (que )?(dicen|dijeron|publicaron|publican|escribieron) (de|sobre) mi /.test(p) ||
+        / me (aludieron|aluden|mencionaron|mencionan|nombraron|nombran|exhibieron) /.test(p))) {
+      var fr = F.filter(function (x) { return x.ir && x.ir[0] === 'derecho-de-replica.html'; })[0];
+      if (fr && charla) { var rr = charla.deFicha(fr); rr.sug = ['¿Qué es el derecho de réplica?', 'Fe de erratas']; return rr; }
+    }
+    /* La confianza en el INE (ENCIG del INEGI) vive en la columna de Verificamos
+       sobre su Órgano Interno de Control (28-10-2026): sin esto, «INE» llevaba a su presupuesto. */
+    if (/ confian\w* /.test(p) && / (ine|instituto nacional electoral|institutos? electorales?) /.test(p)) {
+      var fc = F.filter(function (x) { return x.ir && x.ir[0] === 'noticias-auditavision.html#col-ine-oic-auditorias-consejerias'; })[0];
+      if (fc && charla) { var rc = charla.deFicha(fc); rc.sug = ['¿El órgano interno de control puede auditar a los consejeros del INE?', '¿Cuánto gasta el INE?']; return rc; }
+    }
+    /* Pensiones u oxígeno pagados a personas fallecidas en Sonora: la auditoría del
+       ISAF al ISSSTESON vive en su columna de Verificamos (28-10-2026); sin esto,
+       «Sonora» llevaba a la ficha del estado. */
+    if (/ (pension\w*|jubilacion\w*|jubilad\w*|oxigeno) /.test(p) && / (fallecid\w*|muert\w*|difunt\w*|finad\w*|defuncion\w*) /.test(p) && / (sonora|isssteson|isaf) /.test(p)) {
+      var fs = F.filter(function (x) { return x.ir && x.ir[0] === 'noticias-auditavision.html#col-isssteson-oxigeno-pensiones-fallecidos'; })[0];
+      if (fs && charla) { var rs = charla.deFicha(fs); rs.sug = ['¿Cuánto debe Sonora?', 'Biosistemas y Seguridad Privada']; return rs; }
+    }
+    /* La investigación del Seguro Popular en Auditoría en imágenes (28-10-2026):
+       «la auditoría del Seguro Popular», «qué le observó la ASF». */
+    if (/ seguro popular /.test(p) && / (auditoria\w*|investigacion\w*|imagen\w*|asf|observ\w*|exito|logro\w*) /.test(p) && charla) {
+      var fi = INV.filter(function (x) { return x.ir && x.ir[0] === 'auditoria-seguro-popular.html'; })[0];
+      if (fi) { var ri = charla.deFicha(fi); ri.sug = ['¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?', '¿Qué pasó con el Seguro Popular?']; return ri; }
+    }
+    /* Lo que el Seguro Popular cubría y cuánta gente se quedó sin acceso a la salud
+       vive en su columna de Verificamos (28-10-2026); «¿qué pasó con el Seguro Popular?»
+       sigue llevando a la transición de Datos · Salud pública. */
+    if ((/ seguro popular /.test(p) && / (\d+ millones|millones|atend\w*|afiliad\w*|quitaron|quito|mejor|malestar) /.test(p)) ||
+        (/ (sin acceso|carencia\w*|se quedaron sin|perdieron) /.test(p) && / (salud|servicios de salud|servicios medicos) /.test(p) && / (cuant\w*|millones|gente|personas|mexicanos) /.test(p))) {
+      var fp = F.filter(function (x) { return x.ir && x.ir[0] === 'noticias-auditavision.html#col-seguro-popular-51-millones'; })[0];
+      if (fp && charla) { var rp = charla.deFicha(fp); rp.sug = ['¿Qué pasó con el Seguro Popular?', '¿Qué sabemos del IMSS-Bienestar?']; return rp; }
+    }
+    if (/ seguro popular /.test(p) && charla) {
+      var rt = charla.contesta(q);
+      if (rt && rt.ir && rt.ir[0] === 'datos-salud-sistema.html#sal-transicion') { rt.sug = ['¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?', '¿Cuánta gente se quedó sin acceso a servicios de salud?']; return rt; }
+    }
+    /* La deuda de Pemex no la tiene la plataforma: se dice, con su pendiente,
+       en vez de contestar con su presupuesto (27-10-2026). */
+    if (/ pemex /.test(p) && (/ (debe|adeuda|deuda|endeudamiento|pasivos?) /.test(p)) && !/ (intereses|costo financiero|paga) /.test(p))
+      return {
+        html: '<p>⚪ <b>Cuánto debe Pemex, todavía no lo tengo con documento</b> ' + chip({ e: 'pendiente', p: 'pemex-deuda' }) + '. Pemex publica su deuda en sus reportes trimestrales; la plataforma aún no la coteja ni la integra, así que no te doy una cifra.</p>' +
+          '<p>Lo que sí tengo: lo que Pemex paga de intereses en 2026. Pregúntame «¿cuánto paga Pemex de intereses?».</p>',
+        ir: ['pendientes.html#pemex-deuda', 'Registro de pendientes'], rec: [], sug: ['¿Cuánto paga Pemex de intereses?', 'Diagnóstico de Pemex'], anota: 1
+      };
+    return null;
+  }
+
+  /* El título de una columna, tal cual, abre esa columna (29-10-2026): así
+     contestan los «¿Sabías esto?» y «Para retomar» del Periodista, que van
+     entre las preguntas de ejemplo. */
+  function tituloColumna(q) {
+    var pq = plano(q).trim();
+    if (pq.split(' ').length < 4 || !charla) return null;
+    var f = (B.fichas || []).filter(function (x) { return x.t === 'columna' && plano(x.tit).trim() === pq; })[0];
+    return f ? charla.deFicha(f) : null;
+  }
+
   function respuesta(q, previas) {
+    var tc = tituloColumna(q);
+    if (tc) return tc;
     var inv = investigacion(q);
     if (inv) return inv;
-    var ins = inspector(q, previas);
+    var al = alarma(q);
+    if (al) return al;
+    var pr = propias(q);
+    if (pr) return pr;
+    /* «¿Es cierto que la UIF congeló cuentas de contratistas?» pide el cotejo de una
+       columna de Verificamos, no una búsqueda en ComprasMX (27-10-2026). */
+    var sa = charla && charla.salud && PIDE_COTEJO.test(plano(q)) && (charla.salud(q) || (charla.ambiente && charla.ambiente(q)));
+    if (sa) return sa;
+    var vc = PIDE_COTEJO.test(plano(q)) && verificado(q);
+    if (vc) return vc;
+    var cx = cruceSat(q) || contratosCmx(q);
+    if (cx) return cx;
+    var pe = personaje(q);
+    if (pe) return pe;
+    var ins = conApp(inspector(q, previas));
     if (ins) return ins;
-    var mo = megaobras(q, previas);
+    var mo = conApp(megaobras(q, previas));
     if (mo) return mo;
+    var he = conApp(herramienta(q));
+    if (he) return he;
 
     var rc = pideRecurso(q);
     if (rc) return rc;
+    var vf = verificado(q);
+    if (vf) return vf;
     var r = charla && charla.contesta(q);
     var ec = estadoDeCuenta(q, r);
     if (ec) return ec;
@@ -1113,8 +2012,16 @@
     }
     if (r) return r;
     var res = buscar(q);
-    if (!res.length || res[0].s < 3) return { sin: res.slice(0, 3).map(function (x) { return x.f; }) };
+    if (!res.length || res[0].s < 3) return { sin: res.slice(0, 3).map(function (x) { return x.f; }), web: nombreDe(q) };
     var f = res[0].f, vistos = {}, otras = [];
+    /* Un nombre propio que la plataforma no tiene («Ricardo Monreal Ávila»)
+       no se contesta con lo que se le parece (un municipio «de Ávila»): se
+       dice que no está y se ofrece buscarlo fuera. */
+    var nom = nombreDe(q);
+    if (nom) {
+      var nws = fichas(nom), tt = plano(f.tit);
+      if (nws.filter(function (w) { return tt.indexOf(' ' + w + ' ') >= 0; }).length * 2 < nws.length) return { sin: res.slice(0, 3).map(function (x) { return x.f; }), web: nom };
+    }
     /* Un nombre a secas («Tren Maya») pide el caso, no lo que falta de él. */
     if (f.t === 'pendiente' && intencion(q) !== 'pendiente') {
       var alt = res.slice(1, 6).filter(function (x) { return x.f.t !== 'pendiente' && x.s >= res[0].s * 0.8; })[0];
@@ -1130,6 +2037,9 @@
     r = charla ? charla.deFicha(f) : { html: '<p><b>' + esc(f.tit) + '.</b> ' + esc(f.txt) + '</p>', ficha: f, ir: f.ir };
     r.sug = otras;
     r.tambien = true;
+    /* Un nombre que la plataforma no tiene: lo que encontró se queda, y se
+       ofrece buscarlo fuera, si lo encontrado no lo nombra. */
+    if (nom && plano(f.tit + ' ' + (f.txt || '')).indexOf(plano(nom)) < 0) r.web = nom;
     return r;
   }
 
@@ -1148,14 +2058,17 @@
     var espera = r.espera ? r.espera.then(function (x) { r = x; }) : null;
     var pinta = function (li) {
       if (r.sin) {
-        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin);
+        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + (r.web ? webHtml(r.web) : '');
         if (!ya) anota(q, 'sin');
         return;
       }
       if (r.anota && !ya) anota(q, 'sin');
       li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r, previas) +
+        periodistaHtml(q, r) +
         appDe(r) +
-        (r.plat ? '' : recursosHtml(r.rec || recursosPara(q, r))) +
+        (r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r)))) +
+        enciclopediaHtml(enciclopediaPara(q, r)) +
+        (r.web ? webHtml(r.web) : '') +
         (r.sug && r.sug.length ? '<p class="pa-mas-t">' + (r.tambien ? 'También te puede servir' : 'Sigue preguntando') + '</p>' + chips(r.sug) : '');
       var caja = li.querySelector('.pa-app[data-pa-abre]');
       if (caja) montaApp(caja);
@@ -1219,7 +2132,7 @@
     }
   }
   if (dic) {
-    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta };
+    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista };
     armaDictamen();
     return;
   }
@@ -1264,18 +2177,54 @@
       return;
     }
   });
-  /* El botón «Herramientas» despliega las cuatro herramientas (23-10-2026);
-     se cierra con Escape o al tocar fuera. */
+  /* Los cuatro modos del Auditor (29-10-2026): el botón de la cabecera, que
+     antes desplegaba las herramientas, ahora elige el modo. El modo cambia el
+     saludo, la franja de aplicaciones y las preguntas de ejemplo; los datos
+     son los mismos en los cuatro. Se recuerda en este navegador y se puede
+     pedir por la dirección (?modo=periodista). */
+  var app = document.getElementById('paApp'), MODOS_OK = { inspector: 1, periodista: 1, ciudadano: 1, ambientalista: 1 };
+  function modoActual() { return app.getAttribute('data-modo'); }
+  function poneModo(m, avisa) {
+    if (!MODOS_OK[m]) return;
+    var antes = modoActual();
+    app.setAttribute('data-modo', m);
+    Array.prototype.forEach.call(app.querySelectorAll('.pa-hola-modo, .pa-modo-franja'), function (x) {
+      x.hidden = x.getAttribute('data-modo') !== m;
+    });
+    var op = null;
+    Array.prototype.forEach.call(app.querySelectorAll('.pa-modo-op'), function (b) {
+      var si = b.getAttribute('data-pa-modo') === m;
+      b.setAttribute('aria-pressed', si ? 'true' : 'false');
+      if (si) op = b;
+    });
+    var et = document.getElementById('paModoActual');
+    /* El ícono se copia como está: iconos.js ya cambió el emoji por su trazo. */
+    var ico = op ? '<span aria-hidden="true">' + op.querySelector('.pa-modo-ico').innerHTML + '</span> ' : '';
+    if (et && op) et.innerHTML = ico + esc(op.getAttribute('data-nom'));
+    try { localStorage.setItem('av-modo', m); } catch (e) { /* sin almacenamiento: dura esta vista */ }
+    app.dispatchEvent(new CustomEvent('pa-modo', { detail: m }));
+    if (avisa && antes !== m && historial.length && op) {
+      hilo.insertAdjacentHTML('beforeend', '<li class="pa-msg pa-bot pa-modo-aviso"><div class="pa-burbuja"><p>' +
+        ico + 'Ahora estoy en <b>' + esc(op.getAttribute('data-nom')) + '</b>: ' + esc(op.getAttribute('data-lema')) + '.</p></div></li>');
+      hilo.scrollTop = hilo.scrollHeight;
+    }
+  }
   (function () {
     var bt = document.getElementById('paHerrAbre'), menu = document.getElementById('paHerr');
     if (!bt || !menu) return;
     function pon(abierto, foco) {
       menu.hidden = !abierto;
       bt.setAttribute('aria-expanded', abierto ? 'true' : 'false');
-      if (abierto) { var a = menu.querySelector('a'); if (a) a.focus({ preventScroll: true }); }
+      if (abierto) { var a = menu.querySelector('[aria-pressed="true"]') || menu.querySelector('button'); if (a) a.focus({ preventScroll: true }); }
       else if (foco) bt.focus({ preventScroll: true });
     }
     bt.addEventListener('click', function () { pon(menu.hidden); });
+    menu.addEventListener('click', function (ev) {
+      var b = ev.target.closest ? ev.target.closest('[data-pa-modo]') : null;
+      if (!b) return;
+      poneModo(b.getAttribute('data-pa-modo'), true);
+      pon(false, true);
+    });
     document.addEventListener('click', function (ev) {
       if (!menu.hidden && !menu.contains(ev.target) && !bt.contains(ev.target)) pon(false);
     });
@@ -1318,22 +2267,29 @@
   (function () {
     var lista = document.getElementById('paEjsLista');
     if (!lista) return;
-    var bts = Array.prototype.slice.call(lista.querySelectorAll('.pa-ej'));
+    var todas = Array.prototype.slice.call(lista.querySelectorAll('.pa-ej')), bts = todas;
     var otras = document.getElementById('paEjsOtras');
     var tanda = 0, n = 0;
     function porTanda() { return window.innerWidth < 640 ? 4 : 6; }
     function muestra(k) {
       var ini = (k * n) % bts.length;
+      todas.forEach(function (b) { if (bts.indexOf(b) < 0) b.hidden = true; });
       bts.forEach(function (b, i) {
         var pos = (i - ini + bts.length) % bts.length;
         b.hidden = pos >= n;
         b.style.setProperty('--pa-i', pos);
       });
     }
-    function mide() { n = Math.min(porTanda(), bts.length); muestra(tanda); }
-    if (bts.length <= porTanda()) return;
-    otras.hidden = false;
-    mide();
+    function mide() { n = Math.min(porTanda(), bts.length); otras.hidden = bts.length <= n; muestra(tanda); }
+    /* Cada modo muestra solo sus preguntas de ejemplo (29-10-2026). */
+    function delModo() {
+      var m = modoActual();
+      bts = todas.filter(function (b) { return b.getAttribute('data-modo') === m; });
+      if (!bts.length) bts = todas;
+      tanda = 0; mide();
+    }
+    app.addEventListener('pa-modo', delModo);
+    delModo();
     otras.addEventListener('click', function () {
       tanda++;
       muestra(tanda);
@@ -1421,10 +2377,18 @@
   })();
 
   /* Para revisar cómo puntúa una pregunta desde la consola. */
-  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta };
+  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista };
   pintaLista();
   if (canal) document.getElementById('paSinRespNota').innerHTML = 'La lista se guarda solo en tu navegador y no se envía sola: con «Enviarlas a Auditavisión» nos la haces llegar tú.';
   var ps = new URLSearchParams(location.search), pre = ps.get('q'), lista = ps.get('p');
+  (function () {
+    /* «Reportero» se llamó así hasta el 29-10-2026 (ahora es «Periodista»): las ligas
+       viejas (?modo=reportero) y lo que guardó el navegador siguen sirviendo. */
+    var viejo = function (x) { return x === 'reportero' ? 'periodista' : x; };
+    var m = viejo(ps.get('modo'));
+    if (!MODOS_OK[m]) { try { m = viejo(localStorage.getItem('av-modo')); } catch (e) { m = null; } }
+    poneModo(MODOS_OK[m] ? m : modoActual());
+  })();
   if (pre) responde(pre, true);
   /* ?p= (las imágenes de la portada, 23-10-2026): la pregunta queda escrita
      y el lector decide cuándo enviarla. */

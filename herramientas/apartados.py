@@ -148,16 +148,26 @@ DATOS_PARTES = [
        'Los 2,479 municipios con sus ingresos, predial, participaciones y fondos del Ramo 33, en CSV.',
        'Los municipios del país con sus ingresos, predial, participaciones y aportaciones, según las Estadísticas de Finanzas '
        'Públicas Estatales y Municipales del INEGI. Descárgala completa o consulta un estado aquí mismo.')]),
-    ('informes', 'informes-oficiales.html', '📑', 'Informes oficiales', 'Cuenta Pública y diccionario',
-     'Lo que revisó la Auditoría Superior de la Federación en la Cuenta Pública y qué contiene cada archivo de datos de la '
-     'plataforma. Cada tarjeta abre su propia página.',
+    ('informes', 'informes-oficiales.html', '📑', 'Informes oficiales', 'Cuenta Pública, diccionario e informes de la ASF',
+     'Lo que revisó la Auditoría Superior de la Federación en la Cuenta Pública, qué contiene cada archivo de datos de la '
+     'plataforma, la guía de la ASF para que una irregularidad termine en sanción y su informe semestral de cómo van esas acciones. Cada tarjeta abre su propia página.',
      [('asf', 'informes-cuenta-publica.html', '🔎', 'Informes de la Cuenta Pública (ASF)',
        'Qué revisó la Auditoría Superior en 2024, cuánto quedó por aclarar en tu estado y cuándo sale la siguiente entrega.',
        'Qué revisó la Auditoría Superior de la Federación en la Cuenta Pública 2024, cuánto quedó por aclarar en tu estado '
        'y cuándo sale la siguiente entrega. Cada cifra, con su informe.'),
       ('diccionario', 'informes-diccionario.html', '📋', 'Diccionario de Datos',
        'Qué contiene cada archivo de datos de la plataforma, campo por campo.',
-       'Qué contiene cada archivo de datos de la plataforma, columna por columna. Cada base se descarga con el botón de su renglón.')]),
+       'Qué contiene cada archivo de datos de la plataforma, columna por columna. Cada base se descarga con el botón de su renglón.'),
+      # Informe especial de la ASF (pedido del autor, 27-10-2026): lo arma
+      # informe_sancion.py, con el mismo texto con que contesta el bot.
+      ('especial', 'informes-documentar-para-sancionar.html', '⚖️', 'Informe especial: Documentar para sancionar',
+       'La guía de la ASF para que una irregularidad termine en sanción: la cadena, los cuatro elementos de la prueba y las 20 matrices.',
+       None),
+      # Informe semestral de la ASF (pedido del autor, 27-10-2026): lo arma
+      # informe_semestral.py; el bot lo lee dentro de D.san.
+      ('semestral', 'informes-semestral-asf.html', '📊', 'Informe semestral de la ASF',
+       'Qué pasó con lo que observó la ASF: casos en el tribunal, denuncias penales y dinero recuperado, al 31 de marzo de 2026.',
+       None)]),
 ]
 # Anclas viejas de descarga-los-datos.html: la pestana y cada #ficha-<id>.
 DATOS_ANCLAS = dict([(d[0], d[1]) for d in DATOS_PARTES] +
@@ -178,6 +188,18 @@ def datos_paginas():
                            'tarjetas': [(f[2], f[3], f[4], f[1], None, None) for f in fichas_]}],
         })
         for fid, archivo, fico, fnombre, ffrase, fentrada in fichas_:
+            if fid in ('especial', 'semestral'):
+                import importlib
+                isan = importlib.import_module('informe_sancion' if fid == 'especial' else 'informe_semestral')
+                paginas.append({
+                    'archivo': archivo, 'menu': fnombre, 'menu_archivo': 'descarga-los-datos.html',
+                    'padre': ('descarga-los-datos.html', 'Datos'), 'padre2': (portada, nombre),
+                    'icono': fico, 'titulo': fnombre, 'lema': nombre, 'entrada': isan.ENTRADA,
+                    'estilos': ['asistente.css'],
+                    'pie_extra': partes_nav(nombre, portada, ico, partes, archivo),
+                    'secciones': isan.secciones(),
+                })
+                continue
             paginas.append({
                 'archivo': archivo, 'menu': fnombre, 'menu_archivo': 'descarga-los-datos.html',
                 'padre': ('descarga-los-datos.html', 'Datos'), 'padre2': (portada, nombre),
@@ -273,52 +295,66 @@ def bib_nav(actual):
 
 ENCICLOPEDIA = 'enciclopedia-auditavision.html'
 
-# Las pestañas del menú (decisión del autor, 23-10-2026): eran cinco y son
-# tres. Cada una: (archivo, nombre, páginas que la marcan como actual).
-# La pestaña «Auditor Virtual» abre primero «Pregúntale al Auditor» (pedido del
-# autor, 23-10-2026); las cuatro herramientas cuelgan del botón «Herramientas»
-# de su cabecera, y herramientas.html sigue como su índice.
+# Las pestañas del menú (decisión del autor, 23-10-2026): eran cinco y
+# quedaron tres; desde el 28-10-2026 son cuatro, con Noticias. Cada una: (archivo, nombre, páginas que la marcan como actual).
+# La pestaña «Auditor Virtual» abre «Pregúntale al Auditor» (pedido del autor,
+# 23-10-2026), que desde el 29-10-2026 trabaja en cuatro modos. Las páginas
+# con menu_archivo 'herramientas.html' (el chat y el dictamen) marcan esta
+# pestaña; herramientas.html ya solo redirige a la Enciclopedia.
 AUDITOR_VIRTUAL = 'herramienta-inspector-pregunta.html'
+# Las herramientas se mudaron a la Enciclopedia (decisión del autor,
+# 29-10-2026): su índice es la tarjeta «Herramientas del Auditor» de Números,
+# y el Auditor Virtual se volvió sus cuatro modos (asistente.MODOS).
+NUMEROS_HERR = 'numeros-herramientas-del-auditor.html'
+HERR_SITIO = {'menu_archivo': 'sigue-el-dinero.html', 'padre': ('sigue-el-dinero.html', 'Números'),
+              'padre2': (NUMEROS_HERR, 'Herramientas del Auditor')}
 MENU = [
     (AUDITOR_VIRTUAL, 'Auditor Virtual', ('herramientas.html',)),
     (ENCICLOPEDIA, 'Enciclopedia', (ENCICLOPEDIA, 'sigue-el-dinero.html', 'descarga-los-datos.html', 'aprende.html')),
     ('participa.html', 'Comunidad', ('participa.html',)),
+    # Cuarta pestaña (pedido del autor, 28-10-2026: «darle más protagonismo a
+    # las noticias relevantes… como una cuarta pestaña»). Antes colgaba de
+    # Aprende; su archivo no cambia de nombre.
+    ('noticias-relevantes.html', 'Noticias', ('noticias-relevantes.html',)),
 ]
 
+# El índice de las cuatro herramientas. Desde el 29-10-2026 vive en
+# Números (NUMEROS_HERR); herramientas.html redirige ahí.
+HERR_INDICE = {
+    'archivo': 'herramientas.html',
+    # Desde el 23-10-2026 la pestaña se llama «Auditor Virtual» (decisión
+    # del autor); el archivo conserva su nombre para no romper enlaces.
+    'menu': 'Herramientas',
+    'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+    'icono': '🧰',
+    'titulo': 'Herramientas para seguir el dinero público',
+    'lema': 'El gasto público, a la vista',
+    'entrada': ('Dicho fácil: <b>de dónde sale el dinero de todos, en qué se gasta y quién revisa que se use bien.</b> '
+                'Lo contamos con documentos oficiales, para que cualquier persona lo entienda y lo pueda revisar. '
+                'Aquí están las cuatro herramientas del auditor: cada una abre su propia página.'),
+    'nota': True,
+    'guia': 'abajo',
+    'secciones': [
+        {
+            'id': 'modulos',
+            # Desde el 09-10-2026 los modulos son «herramientas» y la
+            # seccion va sin titulo ni parrafo (decision del autor): las
+            # tarjetas, mas grandes y con su imagen, son lo principal, y
+            # cada una abre su propia pagina (HERRAMIENTAS, abajo).
+            'titulo': '',
+            'texto': '',
+            'modulos': True,
+            'tarjetas': [
+                ('🏗️', 'Inversión y Megaobras', '', 'herramienta-megaobras.html', None, 'obras'),
+                ('💳', 'Calculadora Cívica', '', 'herramienta-calculadora.html', None, 'calculadora'),
+                ('🔍', 'Modo Inspector', '', 'herramienta-inspector.html', None, 'inspector'),
+                ('🌎', 'Costo Ambiental', '', 'herramienta-ambiente.html', None, 'ambiente'),
+            ],
+        },
+    ],
+}
+
 APARTADOS = [
-    {
-        'archivo': 'herramientas.html',
-        # Desde el 23-10-2026 la pestaña se llama «Auditor Virtual» (decisión
-        # del autor); el archivo conserva su nombre para no romper enlaces.
-        'menu': 'Herramientas',
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
-        'icono': '🧰',
-        'titulo': 'Herramientas para seguir el dinero público',
-        'lema': 'El gasto público, a la vista',
-        'entrada': ('Dicho fácil: <b>de dónde sale el dinero de todos, en qué se gasta y quién revisa que se use bien.</b> '
-                    'Lo contamos con documentos oficiales, para que cualquier persona lo entienda y lo pueda revisar. '
-                    'Aquí están las cuatro herramientas del auditor: cada una abre su propia página.'),
-        'nota': True,
-        'guia': 'abajo',
-        'secciones': [
-            {
-                'id': 'modulos',
-                # Desde el 09-10-2026 los modulos son «herramientas» y la
-                # seccion va sin titulo ni parrafo (decision del autor): las
-                # tarjetas, mas grandes y con su imagen, son lo principal, y
-                # cada una abre su propia pagina (HERRAMIENTAS, abajo).
-                'titulo': '',
-                'texto': '',
-                'modulos': True,
-                'tarjetas': [
-                    ('🏗️', 'Inversión y Megaobras', '', 'herramienta-megaobras.html', None, 'obras'),
-                    ('💳', 'Calculadora Cívica', '', 'herramienta-calculadora.html', None, 'calculadora'),
-                    ('🔍', 'Modo Inspector', '', 'herramienta-inspector.html', None, 'inspector'),
-                    ('🌎', 'Costo Ambiental', '', 'herramienta-ambiente.html', None, 'ambiente'),
-                ],
-            },
-        ],
-    },
     {
         # La Enciclopedia (decisión del autor, 23-10-2026): la segunda de las
         # tres pestañas junta Números, Datos y Aprende. No es la plataforma antigua
@@ -536,7 +572,7 @@ APARTADOS = [
             {
                 'id': 'informes',
                 'pagina': 'informes-oficiales.html',
-                'pestana': ('📑', 'Informes oficiales', 'Cuenta Pública y diccionario: abre su página'),
+                'pestana': ('📑', 'Informes oficiales', 'Cuenta Pública, diccionario e informes de la ASF: abre su página'),
             },
             {
                 # Cuarta tarjeta de Datos desde el 22-10-2026 (pedido del
@@ -557,6 +593,20 @@ APARTADOS = [
                 'pagina': 'datos-poder-judicial.html',
                 'pestana': ('⚖️', 'Poder Judicial', 'La Corte, los circuitos, los sueldos y la elección: abre su página'),
             },
+            {
+                # Salud pública (27-10-2026): la auditoría de gestión del IMSS,
+                # el ISSSTE y el IMSS-Bienestar (gestion_salud.py).
+                'id': 'salud',
+                'pagina': 'datos-salud-publica.html',
+                'pestana': ('🏥', 'Salud pública', 'Lo que cuesta y lo que resuelve el IMSS, el ISSSTE y el IMSS-Bienestar: abre su página'),
+            },
+            {
+                # Justicia ambiental (28-10-2026): la auditoría de gestión de
+                # la PROFEPA (gestion_ambiental.py).
+                'id': 'justicia-ambiental',
+                'pagina': 'datos-justicia-ambiental.html',
+                'pestana': ('🌳', 'Justicia ambiental', 'Lo que cuesta y lo que resuelve la PROFEPA: denuncias, rezago y multas: abre su página'),
+            },
             # El Estado de cuenta administrativo fue la cuarta tarjeta de Datos
             # del 12-10-2026 al 22-10-2026; desde entonces (pedido del autor)
             # es la quinta aplicacion de la Calculadora Civica. Su ancla vieja
@@ -573,7 +623,7 @@ APARTADOS = [
         # Noticias relevantes es su propia pagina desde el 11-10-2026; los
         # enlaces a una columna (#col-<id>) llegan a ella con su ancla.
         'hash_a_pagina': {'biblioteca': 'diccionario.html', 'kit': 'diccionario.html',
-                          'noticias': 'noticias-relevantes.html', 'col-*': 'noticias-relevantes.html',
+                          'noticias': 'noticias-relevantes.html', 'col-*': 'noticias-auditavision.html',
                           'congreso': 'datos-poder-legislativo.html'},
         'entrada': ('Las palabras del presupuesto, las leyes que lo rigen y las fuentes donde se publica, '
                     'explicadas en lenguaje llano. Para leer una cifra oficial no hace falta ser especialista. '
@@ -609,6 +659,13 @@ APARTADOS = [
                 'id': 'noticias',
                 'pagina': 'noticias-relevantes.html',
                 'pestana': ('📰', 'Noticias relevantes', 'La Columna del Erario: abre su página'),
+            },
+            {
+                # Pedido del autor, 28-10-2026: «adentrándonos a esta parte del
+                # nepotismo». La pagina la escribe herramientas/nepotismo.py.
+                'id': 'nepotismo',
+                'pagina': 'herramienta-inspector-nepotismo.html',
+                'pestana': ('👪', 'Nepotismo y cargos públicos', 'Qué parientes alcanza la ley y cómo se investiga un cargo'),
             },
             # «El Congreso y las elecciones» fue la cuarta pestaña de Aprende la
             # mañana del 23-10-2026; esa tarde (pedido del autor) se mudó a
@@ -674,12 +731,16 @@ APARTADOS = [
 # apartados.css las pone por rubro (.herr-foto.rubro-*), porque un url()
 # dentro de una variable se resolveria contra la carpeta de la hoja.
 HERR_IMG = {
-    'obras': 'assets/auditor/img/herr-megaobras-plataformas-amplia.jpg',
-    'calculadora': 'assets/auditor/img/herr-calculadora-monedas-amplia.jpg',
+    # Ilustración propia desde el 27-10-2026 (antes, una foto de plataformas).
+    'obras': 'assets/auditor/img/herr-megaobras-ilustracion.svg',
+    # Las otras tres, también dibujos propios desde el 27-10-2026, con la
+    # misma idea de la foto que sustituyen (monedas, cámaras con ojos y la
+    # refinería sobre el humedal).
+    'calculadora': 'assets/auditor/img/herr-calculadora-ilustracion.svg',
     # Imagen del Modo Inspector desde el 24-10-2026 (la eligió el autor); el
     # foróptero se queda en el Auditor Virtual (foto_clase 'foto-auditor').
-    'inspector': 'assets/auditor/img/herr-inspector-camaras.jpg',
-    'ambiente': 'assets/auditor/img/herr-ambiente-refineria-amplia.jpg',
+    'inspector': 'assets/auditor/img/herr-inspector-ilustracion.svg',
+    'ambiente': 'assets/auditor/img/herr-ambiente-ilustracion.svg',
 }
 
 # (archivo, rubro, icono, titulo, subtitulo, texto, modulo del motor, temas)
@@ -719,7 +780,7 @@ HERRAMIENTAS = [
      'Expedientes de la Auditoría Superior de la Federación (ASF), adjudicaciones directas, empresas que facturan operaciones simuladas '
      '(EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.'
      ' Y si un caso necesita ir más a fondo, en la aplicación de Servicios puedes pedir una investigación a la medida: cada cifra con su documento y bajo una política de independencia.'
-     ' Las seis también las usas desde el chat del <a href="herramienta-inspector-pregunta.html">Auditor</a>, sin salir de la plática.',
+     ' Las siete también las usas desde el chat del <a href="herramienta-inspector-pregunta.html">Auditor</a>, sin salir de la plática.',
 
      'verificador', [
          # «Que encontro la ASF» y «Expedientes de casos» se fusionaron el
@@ -737,6 +798,10 @@ HERRAMIENTAS = [
           'Busca por RFC o por nombre en el listado del artículo 69-B del Código Fiscal: a quienes el SAT presume o declara emisores de facturas por operaciones inexistentes.'),
          ('inspverifica', '🔏', 'Verifica un estado de cuenta', 'Busca y verifica',
           '¿Te compartieron un estado de cuenta de Auditavisión? Escribe su folio o su huella digital y comprueba, cifra por cifra, que no se alteró.'),
+         # Septima desde el 28-10-2026 (pedido del autor): el nepotismo, con su
+         # calculadora de parentesco (herramientas/nepotismo.py).
+         ('inspnepotismo', '👪', 'Nepotismo y parentesco', 'Busca y verifica',
+          'Elige un parentesco y ve qué grado es y qué ley lo alcanza: plaza, contrato o candidatura. Con el árbol de grados, cómo se investiga un cargo y por qué un apellido igual no prueba nada.'),
          # Venia de la pestana «Servicios» de Participa (pedido del autor, 11-10-2026).
          ('servicios.html', '🔎', 'Servicios de investigación', 'Investigación a la medida',
           'Cuando necesites ir más a fondo en un caso: revisión documental, expediente, seguimiento, capacitación o licencia, con la misma regla de la plataforma y su política de independencia. Tiene su propia página.'),
@@ -765,7 +830,7 @@ HERRAMIENTAS = [
          # Sexta aplicacion (pedido del autor, 11-10-2026): la arma
          # herramientas/crisis_ambientales.py.
          ('herramienta-ambiente-crisis.html', '🌀', 'Crisis ambientales', 'Investigaciones',
-          'Huracanes, inundaciones y crisis del agua: cuánto cubre el fondo, cuánto se anunció, cuánto se comprobó y lo que cuesta esperar. Con Otis, Simón y el agua de Guadalajara.'),
+          'Huracanes, inundaciones, crisis del agua y proyectos en litigio ambiental: cuánto cubre el fondo, cuánto se anunció, cuánto se comprobó y lo que cuesta esperar. Con Otis, Simón, el agua de Guadalajara y el gas de Guaymas.'),
      ]),
 ]
 
@@ -784,7 +849,7 @@ HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las'), 'inspector':
 # Desde el 24-10-2026 (decisión del autor) «Grandes investigaciones» ES el
 # Modo Inspector: una sola página, herramienta-inspector.html, con las seis
 # aplicaciones. La vieja página de las investigaciones redirige ahí.
-HERR_DIVISION = {'inspector': ('Modo Inspector', 'Grandes investigaciones a través de seis aplicaciones. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
+HERR_DIVISION = {'inspector': ('Modo Inspector', 'Grandes investigaciones a través de siete aplicaciones. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
 ASISTENTE = ('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor', 'Pregunta fácil, respuesta fácil',
              'El chat de Auditavisión. Pregúntale lo que quieras del dinero público, como lo dirías platicando: cuánto debe un estado, cuánto le llega a un municipio, cuánto gana un cargo o qué significa un término. Te contesta en corto y con datos oficiales, y si quieres el respaldo, te lleva a la página donde está la información y te arma el dictamen con su respaldo.')
 LOGO_IMG = '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62" height="48">'
@@ -792,7 +857,7 @@ LOGO_IMG = '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62
 # son tarjetas autonomas: la pagina de la herramienta solo las presenta y cada
 # una abre su propia pagina.
 INVESTIGACIONES = 'herramienta-inspector-investigaciones.html'
-FOTO_AUDITOR = 'assets/auditor/img/herr-inspector-foroptero-amplia.jpg'
+FOTO_AUDITOR = 'assets/auditor/img/herr-auditor-foroptero-ilustracion.svg'
 MODO_INSPECTOR = 'herramienta-inspector.html'
 # El menú «Herramientas» del chat (pedido del autor, 23-10-2026), en el orden
 # que pidió.
@@ -813,7 +878,7 @@ MODULOS_PROPIOS = {'inspverifica'}
 # modulo de herramientas/ arma su pagina con construir(base, ref) y dice
 # sus ESTILOS y SCRIPTS (assets/auditor/css y js).
 INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspentes': 'insp_entes',
-                'inspnota': 'insp_nota', 'inspefos': 'insp_efos',
+                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'inspnepotismo': 'nepotismo',
                 # Calculadora Civica (pedido del autor, 12-10-2026): sus tres
                 # aplicaciones que abrian el motor en un marco.
                 'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj',
@@ -937,8 +1002,7 @@ def herramienta(h, n):
     return {
         'archivo': archivo,
         'menu': titulo,
-        'menu_archivo': 'herramientas.html',
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+        **HERR_SITIO,
         'icono': icono,
         'titulo': titulo,
         'lema': 'Herramienta %d de %d' % (n, len(HERRAMIENTAS)),
@@ -963,13 +1027,12 @@ def herramienta(h, n):
 
 def herramienta_divisiones(h, n, ruta):
     """Modo Inspector. Desde el 24-10-2026 (decisión del autor) es las Grandes
-    investigaciones: su página muestra directo las seis aplicaciones. El chat
+    investigaciones: su página muestra directo sus aplicaciones (siete desde el 28-10-2026). El chat
     ya no es su «otra división»: es la portada del Auditor Virtual."""
     archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
     division = HERR_DIVISION[rubro]
     principal = {
-        'menu_archivo': 'herramientas.html',
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+        **HERR_SITIO,
         'fondo': HERR_IMG[rubro],
         'rubro': rubro,
         'sin_icono_lema': True,
@@ -1036,9 +1099,8 @@ def herramienta_modulo(h, n, i, bloque=None):
     return {
         'archivo': modulo_archivo(archivo, clave),
         'menu': nombre,
-        'menu_archivo': 'herramientas.html',
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
-        'padre2': (archivo, titulo),
+        **HERR_SITIO,
+        'padre3': (archivo, titulo),
         'icono': ico,
         'titulo': nombre,
         'lema': ('%s · %s %d de %d' % (titulo, pal[0], i + 1, len(temas)) if rubro in HERR_ICONO_CAB else
@@ -1062,7 +1124,11 @@ def megaobras_portada(hp, base, ref):
     propia investigacion» es ahora la aplicacion 1 (mo_investiga.py)."""
     import mo_pulso
     h = next(x for x in HERRAMIENTAS if x[1] == 'obras')
-    hp['secciones'][0]['bloque'] = mo_pulso.cajon_calculo(base, ref) + apps_rejilla(h)
+    liga_au = ('<p class="herr-nota-pie"><span aria-hidden="true">🖼️</span> '
+               '<b>¿Prefieres empezar con el recorrido visual?</b> Abre '
+               '<a href="auditoria-inversion-megaobras.html"><b>Inversión en megaobras y rescates en Auditoría en imágenes ➔</b></a> '
+               '(las 11 obras, los 2 rescates y los 6 sexenios paso a paso).</p>')
+    hp['secciones'][0]['bloque'] = mo_pulso.cajon_calculo(base, ref) + apps_rejilla(h) + '\n      ' + liga_au
     hp['estilos'] = ['mo-pulso.css']
     # La aplicacion «El pulso del gasto» ya no tiene pagina: su pestana vieja
     # lleva a sus cuatro cifras.
@@ -1157,16 +1223,16 @@ def nav_de_pagina(archivo, padre3=None, cap=None):
         # «división» del Modo Inspector; desde aquí se va a las herramientas,
         # al Modo Inspector (las Grandes investigaciones) y a la Enciclopedia.
         return ('<nav class="herr-nav-min" aria-label="Moverte desde aquí">\n'
-                '        <a class="herr-min" href="herramientas.html"><span>🧰 Herramientas</span><small>Las cuatro, en una página</small></a>\n'
-                '        <a class="herr-min" href="%s"><span>🔍 Modo Inspector</span><small>Grandes investigaciones en seis aplicaciones</small></a>\n'
+                '        <a class="herr-min" href="%s"><span>🧰 Herramientas</span><small>Las cuatro, en la Enciclopedia</small></a>\n'
+                '        <a class="herr-min" href="%s"><span>🔍 Modo Inspector</span><small>Grandes investigaciones en siete aplicaciones</small></a>\n'
                 '        <a class="herr-min" href="%s"><span>📚 Enciclopedia</span><small>Números, Datos y Aprende</small></a>\n'
-                '      </nav>' % (MODO_INSPECTOR, ENCICLOPEDIA))
+                '      </nav>' % (NUMEROS_HERR, MODO_INSPECTOR, ENCICLOPEDIA))
     return None
 
 
 def herramienta_asistente(bloque):
     """Pagina del bot interno del Modo Inspector (11-10-2026): no es una de
-    las seis aplicaciones, es la segunda division de la herramienta."""
+    sus aplicaciones, es la segunda division de la herramienta."""
     h = next(x for x in HERRAMIENTAS if x[1] == 'inspector')
     archivo, rubro, icono, titulo = h[:4]
     nav = ('<nav class="herr-mod-nav" aria-label="Más del Modo Inspector">\n'
@@ -1185,7 +1251,8 @@ def herramienta_asistente(bloque):
         'fondo': FOTO_AUDITOR, 'rubro': rubro, 'foto_clase': 'foto-auditor',
         'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
         'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
-        'pie_extra': nav + '\n\n      ' + herr_otras(archivo),
+        # Sin la fila de las cuatro herramientas: el chat ya es sus modos.
+        'pie_extra': nav,
     }
 
 
@@ -1195,14 +1262,14 @@ def herramienta_dictamen(bloque):
     h = next(x for x in HERRAMIENTAS if x[1] == 'inspector')
     import asistente
     return {
-        'archivo': asistente.DICTAMEN, 'menu': 'Dictamen pericial', 'menu_archivo': 'herramientas.html',
+        'archivo': asistente.DICTAMEN, 'menu': 'Dictamen cívico independiente', 'menu_archivo': 'herramientas.html',
         'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
-        'icono': '🧾', 'titulo': 'Dictamen pericial de Auditavisión',
+        'icono': '🧾', 'titulo': 'Dictamen cívico independiente de Auditavisión',
         'lema': '%s · el respaldo de una respuesta' % ASISTENTE[1], 'sin_icono_lema': True, 'icono_cab': LOGO_IMG,
         'entrada': ('<b>El respaldo de una respuesta del Auditor.</b> Tu pregunta, lo que se contestó, cada cifra con su estado, '
                     'sus fuentes oficiales y el método, con folio, sello y huella digital. Se arma de nuevo con los datos de la plataforma cada vez que se abre el enlace.'),
         'fondo': FOTO_AUDITOR, 'rubro': h[1], 'foto_clase': 'foto-auditor',
-        'secciones': [{'id': 'dictamen', 'titulo': 'Dictamen pericial de Auditavisión', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
+        'secciones': [{'id': 'dictamen', 'titulo': 'Dictamen cívico independiente de Auditavisión', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
         'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
     }
 
@@ -1216,17 +1283,32 @@ def poderes_paginas(base):
     fuentes. Todo sale de asistente_legislativo.py y asistente_judicial.py."""
     import asistente_legislativo as al
     import asistente_judicial as aj
+    import gestion_salud as gs
+    import gestion_ambiental as ga
     paginas = []
     poderes = [
         (al, '🏛️', 'Curules, escaños, sesiones, el calendario del presupuesto y las elecciones de 2027',
          'Cuántas personas legisladoras hay, cómo se eligen, cuándo sesionan, qué se vota el 6 de junio de 2027 y qué cambió con las reformas recientes. '
          'Cotejado con la Constitución vigente, la LGIPE, los acuerdos del INE publicados en el Diario Oficial y el censo del INEGI. Cada tarjeta abre su propia página.',
          lambda temas: al.secciones(base['estados'], temas), 'leg-'),
-        (aj, '⚖️', 'Quién juzga, cuánto cuesta, cuánto ganan y cómo decide',
+        (aj, '⚖️', 'Quién juzga, cuánto cuesta, cuánto ganan, cómo decide y cuánto resuelve',
          'La estructura del Poder Judicial de la Federación tras la reforma de 2024, la Suprema Corte electa en 2025, el tabulador de sueldos, '
-         'el presupuesto 2026, la elección judicial y cómo decide un juez. Cotejado con la Constitución vigente, los acuerdos del INE, el Manual de '
+         'el presupuesto 2026, la elección judicial, cómo decide un juez y lo que resuelve con su dinero. Cotejado con la Constitución vigente, los acuerdos del INE, el Manual de '
          'remuneraciones y el Presupuesto de Egresos. Cada tarjeta abre su propia página.',
          lambda temas: aj.secciones(base, temas), 'jud-'),
+        # Salud pública (27-10-2026, pedido del autor): la auditoría de gestión
+        # del IMSS, el ISSSTE y el IMSS-Bienestar, con el mismo molde.
+        (gs, '🏥', 'Lo que cuesta y lo que resuelve: consultas, cirugías, médicos y camas',
+         'Cuánto gasta el sistema público de salud y lo que resuelve con ese dinero, con la Memoria Estadística del IMSS, la Cuenta Pública y la Ley General '
+         'de Salud. Lo que anuncian las instituciones se coteja contra lo que registran, y lo que nadie ha publicado va con su ficha en el Registro de pendientes. '
+         'Cada tarjeta abre su propia página.',
+         lambda temas: gs.secciones(base, temas), gs.PRE),
+        # Justicia ambiental (28-10-2026): la PROFEPA con el mismo molde.
+        (ga, '🌳', 'Lo que cuesta y lo que resuelve la PROFEPA: denuncias, rezago, multas y la Fiscalía',
+         'Cuánto dinero ejerce la Procuraduría Federal de Protección al Ambiente y lo que resuelve con él, con sus Informes de Actividades 2022 a 2024 y la LGEEPA. '
+         'Lo que dice su informe se coteja contra sus propias tablas, y lo que no publica va con su ficha en el Registro de pendientes. '
+         'Cada tarjeta abre su propia página.',
+         lambda temas: ga.secciones(base, temas), ga.PRE),
     ]
     for mod, ico, lema, entrada, secc, pre in poderes:
         partes = [(x[0], x[0], x[1], x[2]) for x in mod.PAGINAS]
@@ -1265,25 +1347,342 @@ def poderes_paginas(base):
 # Enciclopedia (personajes relevantes y datos curiosos), retiradas el
 # 27-09-2026 por no citar fuentes. Las pinta assets/auditor/js/columnas.js,
 # en formato de periodico: «La Columna del Erario».
-NOTICIAS = {
-    'archivo': 'noticias-relevantes.html',
+# Noticias relevantes, cuarta pestaña del menú desde el 28-10-2026. El mismo
+# dia, segundo pedido del autor: que todo lo de noticias viva junto y
+# vinculado. Por eso la pagina es una funcion: trae dentro la aplicacion
+# «Contrasta una nota» (insp_nota.construir(), la misma que sigue en
+# Herramientas y en el chat, no una copia), la ruta para proponer una nota y
+# el apartado de replicas y posturas (lo pinta columnas.js).
+NOTICIAS_ARCHIVO = 'noticias-relevantes.html'
+
+
+def noticias(base, ref):
+    # Reestructurada como periodico el 28-10-2026 (pedido del autor): el
+    # armazon, el metodo, la agenda y la mesa de redaccion viven en
+    # herramientas/noticias.py; las notas y columnas, en columnas.js.
+    # Desde el 29-10-2026 (pedido del autor: «quiero que aquí existan tres
+    # tarjetas») la pestaña es un indice con tres tarjetas, cada una con su
+    # pagina (nt.PARTES). Las anclas viejas (#col-<id>, #verifica, #seguir…)
+    # se mandan a la pagina donde viven ahora (nt.ANCLAS).
+    import insp_nota
+    import noticias as nt
+    indice = {
+    'archivo': NOTICIAS_ARCHIVO,
     'menu': 'Noticias relevantes',
-    'menu_archivo': 'aprende.html',
-    'padre': ('aprende.html', 'Aprende'),
+    # Cuarta pestaña del menú desde el 28-10-2026 (pedido del autor): ya no
+    # cuelga de Aprende, aunque Aprende conserva su tarjeta hacia aquí.
     'icono': '📰',
     'titulo': 'Noticias relevantes',
-    'lema': 'La Columna del Erario',
-    'entrada': ('Columnas con datos curiosos de personajes y hechos del dinero público, en formato de periódico. '
-                'Cada afirmación lleva el documento oficial que la sostiene.'),
-    'scripts': ['columnas.js'],
-    'estilos': ['columnas.css'],
-    'secciones': [{
-        'id': 'columnas', 'titulo': 'La Columna del Erario', 'texto': '', 'sin_cab': True, 'tarjetas': [],
-        'bloque': ('<div class="col-diario" id="columnasDiario">\n'
-                   '          <noscript><p>Las columnas necesitan JavaScript.</p></noscript>\n'
-                   '        </div>'),
-    }],
+    'lema': 'La noticia, el verificador y el seguimiento',
+    'entrada': ('Las finanzas públicas de México, verificadas, en tres puertas: el periódico de la plataforma, el verificador para cotejar '
+                'lo que viste y el seguimiento de los casos que no se olvidan. Cada afirmación lleva el documento oficial que la sostiene.'),
+    'pestanas': True,
+    'pista': 'Cada tarjeta abre su propia página.',
+    'hash_a_pagina': nt.ANCLAS,
+    'secciones': [{'id': arch[:-5], 'pagina': arch, 'pestana': (ico, nom, lema)} for arch, ico, nom, lema, _e, _s in nt.PARTES],
+    }
+    paginas = [indice]
+    for arch, ico, nom, lema, entrada, _s in nt.PARTES:
+        verifica = arch == nt.VERIFICA
+        paginas.append({
+            'archivo': arch, 'menu': nom, 'menu_archivo': NOTICIAS_ARCHIVO,
+            'padre': (NOTICIAS_ARCHIVO, 'Noticias'),
+            'icono': ico, 'titulo': nom, 'lema': lema, 'entrada': entrada,
+            'scripts': ['columnas.js'] + (list(insp_nota.SCRIPTS) if verifica else []) + nt.SCRIPTS,
+            'estilos': ['columnas.css'] + (list(insp_nota.ESTILOS) if verifica else []) + nt.ESTILOS,
+            'secciones': [{
+                'id': 'diario', 'titulo': nom, 'texto': '', 'sin_cab': True, 'tarjetas': [],
+                'bloque': nt.construir(base, ref, arch),
+            }],
+        })
+    return paginas
+
+
+
+# Los pilares de la plataforma (decision del autor, 26-10-2026, a partir de
+# un discurso en la tribuna del Congreso de Sonora: «que queden como soporte
+# de nuestros pilares»). Son las reglas de AGENTS.md dichas al lector. La
+# unica cifra legal (la Ley de proteccion de 2012) lleva su documento.
+PILARES_LISTA = [
+    ('🗞️', 'Somos el periodista virtual del gasto público',
+     'El Auditor Virtual sigue el dinero público como lo haría una reportera de datos: busca en los documentos oficiales, '
+     'coteja lo que circula en redes, explica en sencillo y te lleva al documento. Lo hace con una ventaja: no se le puede '
+     'amenazar para que deje de buscar, y todo lo que encuentra queda a la vista de cualquiera.'),
+    ('🔥', 'Que la verdad sea incómoda no la vuelve falsa',
+     'Lo que tiene documento se publica, guste o no, sea del gobierno que sea. Y lo que no tiene documento no se publica como '
+     'hecho, por más que convenga: se dice que no consta.'),
+    ('📎', 'Evidencia con folio',
+     'Cada cifra lleva su documento, su página o su folio y su enlace, para que cualquiera lo pueda obtener y comprobar. '
+     'No es «porque un reportero dijo»: es porque ahí está el documento.'),
+    ('⚖️', 'Contrapeso, no propaganda',
+     'No protegemos a ningún gobierno ni a ningún partido. Lo que estuvo mal antes sigue estando mal ahora, con otro logo en la '
+     'camiseta: las mismas reglas valen para todos los gobiernos, los de antes y los de ahora.'),
+    ('📰', 'Reconocemos a quienes hacen periodismo',
+     'Muchas veces nos enteramos de un caso porque una periodista o un periodista lo sacó a la luz, arriesgando su trabajo y, '
+     'en México, a veces su vida. Su nota es el punto de partida: la citamos con su nombre y la cotejamos contra el documento '
+     'oficial. Nunca es la fuente de una cifra, pero sin su trabajo muchas veces no sabríamos dónde buscar.'),
+    ('⏳', 'Lo que falta, se señala con nombre',
+     'Cuando un dato no está publicado, no lo inventamos ni lo estimamos a ojo: lo marcamos «pendiente», decimos por qué falta y '
+     'quién debe publicarlo, y lo anotamos en el Registro de pendientes.'),
+    ('🗺️', 'Que se entienda de un vistazo',
+     'Mapas, contadores, simuladores y estados de cuenta para leer el dinero público de forma gráfica y sencilla, y siempre un '
+     'camino a los canales oficiales y a descargar los datos.'),
+    ('🌿', 'El ambiente también es gasto público',
+     'Las grandes obras y las inversiones del gobierno federal se pagan con dinero público, y su costo ambiental también se '
+     'cuenta: Costo Ambiental sigue las crisis ambientales y el presupuesto de quien las vigila.'),
+    ('🔔', 'Seguimiento: el caso no se olvida',
+     'Cada caso de Verificamos trae «Lo que sigue»: el voto, el informe, el contrato o la sentencia que falta. Puedes seguir un '
+     'caso y la plataforma te avisa cuando lo actualizamos con un documento nuevo.'),    ('✉️', 'Quien es nombrado puede responder',
+     'Nombramos a funcionarios y a empresas porque un documento oficial los nombra; a las personas privadas, no. Si te aludimos con un '
+     'dato inexacto o falso, tu aclaración se publica gratis, íntegra y sin comentarios: es tu derecho de réplica, y si el error es nuestro, '
+     'además lo corregimos en la fe de erratas.'),
+]
+
+LEY_PERIODISTAS = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LPPDDHP.pdf'
+
+# Aviso de privacidad (paso 1.5 del plan v2, 26-10-2026). Cotejado contra la
+# LFPDPPP vigente (nueva ley, DOF 20-03-2025; ultima reforma DOF 14-11-2025):
+# art. 15 dice que debe contener, art. 16 como se pone a disposicion y art. 2
+# fr. XV quien es la autoridad (ya no el INAI). Dice solo lo que hace hoy el
+# codigo: nada sale del navegador (CANAL_COMUNIDAD vacio, sin analitica, sin
+# llamadas a servidor). Cuando se conecte Supabase (docs/BASE-DE-DATOS.md),
+# este aviso cambia ANTES de recabar el primer dato.
+LFPDPPP = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf'
+AVISO_FECHA = '26-10-2026'
+_AV_NAVEGADOR = [
+    ('La plática con el Auditor', 'av-chat', 'Se guarda en la pestaña (sessionStorage) y se borra al cerrarla, o antes con «🗑️ Limpiar».'),
+    ('«Lo que aún no sé»', 'auditavision.bot.sinRespuesta', 'Las preguntas que el Auditor no supo contestar, hasta 50. Solo las ves tú; si quieres, las copias y nos las mandas.'),
+    ('Las columnas que sigues', 'av-sigo', 'Cuáles casos de Verificamos sigues y qué versión viste, para avisarte cuando cambian.'),
+    ('Ágora cívica', 'auditavision_foro_debates y otras', 'Tus hilos, tus apoyos y el seudónimo que elijas. No se publican: viven solo en tu navegador.'),
+    ('Preferencias de las herramientas', 'av-am-reloj, crReloj y otras', 'Cómo dejaste un reloj, una unidad o un filtro.'),
+]
+AVISO = {
+    'archivo': 'aviso-de-privacidad.html',
+    'menu': 'Aviso de privacidad',
+    'menu_archivo': AUDITOR_VIRTUAL,
+    'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+    'icono': '🔒',
+    'titulo': 'Aviso de privacidad',
+    'lema': 'Qué sabemos de ti: hoy, nada',
+    'entrada': ('Auditavisión no te pide cuenta, ni nombre, ni correo para usar la plataforma, y hoy ningún dato tuyo sale de tu navegador. '
+                'Aquí te lo explicamos con el orden que pide la ley (<a href="%s" target="_blank" rel="noopener">Ley Federal de Protección '
+                'de Datos Personales en Posesión de los Particulares, DOF 20-03-2025, art. 15 ↗</a>) %s. Vigente desde el %s.'
+                % (LFPDPPP, '<span class="est-chip est-oficial">oficial</span>', AVISO_FECHA)),
+    'secciones': [
+        {'id': 'responsable', 'titulo': 'Quién es responsable', 'texto': 'Artículo 15, fracción I.', 'tarjetas': [],
+         'bloque': ('<p>Auditavisión es un proyecto cívico independiente, publicado en GitHub Pages. El nombre y el domicilio de la persona '
+                    'o la organización responsable se publicarán aquí cuando el proyecto se constituya; mientras tanto, la plataforma no '
+                    'recaba datos personales, así que no hay datos que alguien administre por ti.</p>')},
+        {'id': 'datos', 'titulo': 'Qué datos tratamos', 'texto': 'Artículo 15, fracciones II y III.', 'tarjetas': [],
+         'bloque': ('<p><b>Ninguno en un servidor nuestro.</b> No hay registro, ni cuentas, ni herramientas de analítica, ni cookies propias. '
+                    'Los formularios (algo raro con el dinero público, un dato mal, un tema para investigar) arman el texto en tu pantalla '
+                    'para que tú lo copies o lo descargues: no se envían solos.</p>\n'
+                    '<p>Lo que sí se guarda <b>en tu propio navegador</b>, para que la plataforma recuerde lo que hiciste, es esto. '
+                    'Nunca nos llega, y lo borras al borrar los datos del sitio en tu navegador:</p>\n'
+                    '<ul>\n%s\n</ul>') % '\n'.join('<li><b>%s</b> (<code>%s</code>): %s</li>' % x for x in _AV_NAVEGADOR)},
+        {'id': 'terceros', 'titulo': 'Servicios de terceros', 'texto': 'Lo que tu navegador pide a otros sitios al abrir una página.', 'tarjetas': [],
+         'bloque': ('<p>Para mostrarte la página, tu navegador se conecta a GitHub Pages (donde vive el sitio), a Google Fonts (las letras) '
+                    'y a cdnjs (la librería de los mapas). Esos servicios reciben, como cualquier sitio, tu dirección IP y los datos técnicos '
+                    'de tu navegador, y los tratan con sus propias políticas. Los enlaces a portales oficiales y a noticias te llevan a '
+                    'sitios con sus propios avisos.</p>')},
+        {'id': 'derechos', 'titulo': 'Tus derechos y cómo limitar el uso', 'texto': 'Artículo 15, fracciones IV y V.', 'tarjetas': [],
+         'bloque': ('<p>Tienes derecho a acceder a tus datos, rectificarlos, cancelarlos y oponerte a su uso (derechos ARCO, arts. 21 a 28 de '
+                    'la ley). Como hoy no guardamos datos tuyos, lo ejerces tú mismo: borra los datos del sitio en tu navegador, o usa '
+                    '«🗑️ Limpiar» en el Auditor. Si un día recabamos algún dato, aquí estará el medio para pedirlo.</p>\n'
+                    '<p>La autoridad en materia de datos personales es ahora la Secretaría Anticorrupción y Buen Gobierno (art. 2, fr. XV), '
+                    'que tomó el lugar del extinto INAI.</p>')},
+        {'id': 'cambios', 'titulo': 'Si esto cambia', 'texto': 'Artículo 15, fracción VI.', 'tarjetas': [],
+         'bloque': ('<p>La plataforma tiene lista una base de datos para recibir formularios y preguntas, que todavía no está conectada. '
+                    '<b>Antes de que reciba el primer dato</b>, este aviso dirá qué se guarda, para qué, por cuánto tiempo y cómo pedir que se '
+                    'borre, y la fecha de arriba cambiará. Ningún formulario guardará tu nombre si no hace falta.</p>')},
+    ],
 }
+
+# Derecho de réplica y reglas con la prensa y las personas privadas (Bloque 4
+# del plan v2, 27-10-2026). Cotejado contra la Ley Reglamentaria del artículo
+# 6o., párrafo primero, de la Constitución, en materia del Derecho de Réplica
+# (DOF 04-11-2015; última reforma DOF 14-11-2025; huella del PDF en la bóveda).
+# La SCJN invalidó porciones de los arts. 3, 10 y 19 (DOF 24-04-2018): aquí solo
+# se cita lo vigente. El responsable del art. 7 lo designa el autor: mientras
+# no esté, la página lo dice con su pendiente (replica-responsable).
+LEY_REPLICA = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LRArt6_MDR.pdf'
+REPLICA_FECHA = '27-10-2026'
+_RP_OF = '<span class="est-chip est-oficial">oficial</span>'
+_RP_PEND = '<span class="est-chip est-pendiente" data-pend="replica-responsable">pendiente</span>'
+REPLICA = {
+    'archivo': 'derecho-de-replica.html',
+    'menu': 'Derecho de réplica',
+    'menu_archivo': AUDITOR_VIRTUAL,
+    'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+    'icono': '✉️',
+    'titulo': 'Derecho de réplica',
+    'lema': 'Si te aludimos con un dato inexacto, tu aclaración se publica',
+    'entrada': ('Auditavisión nombra a funcionarios, a dependencias y a empresas que aparecen en documentos oficiales. Si una columna, una '
+                'ficha o una respuesta del Auditor dice de ti algo inexacto o falso que te causa un agravio, tienes derecho a que tu '
+                'aclaración se publique, gratis y sin comentarios. Así lo manda la <a href="%s" target="_blank" rel="noopener">Ley '
+                'Reglamentaria del artículo 6o. constitucional en materia del Derecho de Réplica (DOF 04-11-2015, última reforma '
+                'DOF 14-11-2025) ↗</a> %s. Vigente desde el %s.' % (LEY_REPLICA, _RP_OF, REPLICA_FECHA)),
+    'secciones': [
+        {'id': 'que', 'titulo': 'Qué es y por qué nos obliga', 'texto': 'Artículos 2, fracción II, y 4.', 'tarjetas': [],
+         'bloque': ('<p>La ley lo define como «el derecho de toda persona a que sean publicadas o difundidas las aclaraciones que resulten '
+                    'pertinentes, respecto de datos o informaciones transmitidas o publicadas por los sujetos obligados, relacionados con '
+                    'hechos que le aludan, que sean inexactos o falsos, cuya divulgación le cause un agravio ya sea político, económico, en '
+                    'su honor, vida privada y/o imagen» (art. 2, fr. II).</p>\n'
+                    '<p>Obliga a los medios de comunicación, a las agencias de noticias, a los productores independientes «y cualquier otro '
+                    'emisor de información responsable del contenido original» (art. 4). Auditavisión escribe sus propias columnas y '
+                    'respuestas, así que asume esa obligación. La crítica también está sujeta a réplica cuando se apoya en información '
+                    'falsa o inexacta (art. 5).</p>')},
+        {'id': 'quien', 'titulo': 'Quién puede pedirla', 'texto': 'Artículo 3.', 'tarjetas': [],
+         'bloque': ('<ul>\n<li><b>Toda persona</b> aludida por información inexacta o falsa que le cause un agravio.</li>\n'
+                    '<li>Si la persona falleció o no puede hacerlo por sí misma: su cónyuge, concubina o concubino, conviviente, o sus '
+                    'parientes en línea directa hasta el segundo grado. Si hay varios, la ejerce quien la pida primero.</li>\n'
+                    '<li><b>Las empresas y organizaciones</b>, por medio de su representante legal.</li>\n'
+                    '<li>Los partidos, precandidatos y candidatos registrados; en los periodos electorales, todos los días cuentan como hábiles.</li>\n</ul>')},
+        {'id': 'como', 'titulo': 'Cómo pedirla', 'texto': 'Artículos 7, 9 y 10.', 'tarjetas': [],
+         'bloque': ('<p>Tienes <b>15 días hábiles</b>, contados desde el día siguiente a la publicación, para presentar un escrito con '
+                    '(art. 10):</p>\n<ol>\n<li>Tu nombre.</li>\n<li>Un domicilio para recibir notificaciones.</li>\n'
+                    '<li>La página donde está la información: la dirección de la columna, la ficha o la pregunta que le hiciste al Auditor.</li>\n'
+                    '<li>Los hechos que quieres aclarar.</li>\n<li>Tu firma, o la de tu representante legal.</li>\n'
+                    '<li>El texto de tu aclaración.</li>\n</ol>\n'
+                    '<p>Va con copia de tu identificación oficial y, si alguien la pide por ti, del documento que acredita la representación '
+                    'o el parentesco.</p>\n'
+                    '<p class="sv-aviso"><span class="sz-et">Todavía no</span> La ley pide tener siempre publicado el nombre completo del '
+                    'responsable de recibir y resolver las réplicas, con su domicilio, código postal, entidad, correo y teléfono (art. 7). '
+                    'Auditavisión aún no lo designa %s: hasta entonces no podemos recibir tu escrito, y ese plazo de 15 días no debería '
+                    'correr en tu contra. Mientras tanto, si encuentras un dato mal, '
+                    '<a href="comunidad-error.html">arma tu aviso en «Un dato mal»</a> y guárdalo con su fecha.</p>') % _RP_PEND},
+        {'id': 'plazos', 'titulo': 'Qué hacemos con ella y en cuánto tiempo', 'texto': 'Artículos 6, 11 a 14.', 'tarjetas': [],
+         'bloque': ('<ul>\n<li><b>3 días hábiles</b> para decidir si procede (art. 11) y <b>3 más</b> para avisarte en el domicilio que diste (art. 12).</li>\n'
+                    '<li>Si procede, se publica <b>en la siguiente actualización</b> de la página que te aludió (art. 14): en una columna de '
+                    'Noticias relevantes, en su recuadro «✉️ Réplica», y cambiamos su fecha para que quien sigue el caso reciba el aviso.</li>\n'
+                    '<li><b>Gratis, íntegra y sin comentarios</b>, apostillas ni imágenes que la desnaturalicen (art. 6).</li>\n'
+                    '<li>Tu texto se limita a la información que la motiva: sin juicios de valor ni ataques a terceros, y no más largo que lo '
+                    'que te aludió, salvo acuerdo o resolución judicial (art. 13).</li>\n'
+                    '<li>Si tu aclaración trae un documento que muestra que nos equivocamos, además corregimos el dato y lo anotamos en la '
+                    '<a href="comunidad-erratas.html">fe de erratas</a>. Un dato equivocado no se sostiene por terquedad.</li>\n</ul>')},
+        {'id': 'negar', 'titulo': 'Cuándo se puede negar', 'texto': 'Artículo 19.', 'tarjetas': [],
+         'bloque': ('<p>La ley permite negar la publicación solo en estos casos, y siempre <b>justificando la decisión</b> por escrito, con sus pruebas:</p>\n'
+                    '<ul>\n<li>Si no se pidió en el plazo ni con los requisitos de la ley.</li>\n'
+                    '<li>Si no se limita a aclarar los datos inexactos o falsos que aluden a la persona y le causan agravio.</li>\n'
+                    '<li>Si la información ya se aclaró, con la misma relevancia que la que le dio origen.</li>\n'
+                    '<li>Si la réplica es sobre información oficial que emitió un servidor público y que difundimos citándola.</li>\n</ul>\n'
+                    '<p>Sobre ese último caso: casi todo lo que publica Auditavisión es información oficial, citada con su documento. Si el '
+                    'error está en el documento, la aclaración le toca a la dependencia que lo emitió; aun así, publicamos que la pediste y '
+                    'lo que dijo la dependencia, si responde.</p>\n'
+                    '<p class="pa-chico">La Suprema Corte invalidó otras dos causas para negarla, «cuando sea ofensiva o contraria a las leyes» y '
+                    '«cuando la persona no tenga interés jurídico» (acción de inconstitucionalidad publicada en el DOF el 24-04-2018).</p>')},
+        {'id': 'juez', 'titulo': 'Si no estás de acuerdo', 'texto': 'Artículos 21, 23 y 24.', 'tarjetas': [],
+         'bloque': ('<p>Puedes acudir al <b>Juez de Distrito</b> de tu domicilio (art. 21) dentro de los <b>5 días hábiles</b> siguientes a que '
+                    'te avisemos de nuestra decisión, a que debimos avisarte sin hacerlo, o a que debimos publicar tu réplica sin hacerlo '
+                    '(art. 24). Ese juicio no te quita el derecho de reclamar los daños por otra vía (art. 23).</p>')},
+        {'id': 'reglas', 'titulo': 'Nuestras reglas con la prensa y con las personas privadas', 'texto': 'Para que la réplica casi nunca haga falta.', 'tarjetas': [],
+         'bloque': ('<ul>\n'
+                    '<li><b>La nota de prensa es punto de partida, no fuente.</b> Citamos a la periodista o al periodista y a su medio, con su '
+                    'nombre y su enlace, y cotejamos cada afirmación contra el documento oficial. Lo que solo dice la prensa se marca «sin '
+                    'documento oficial»: no se afirma ni se niega. No copiamos notas enteras: las resumimos y llevamos a la original.</li>\n'
+                    '<li><b>A las personas privadas no se les nombra.</b> Familiares, apoderados, empleados de una empresa o testigos no aparecen '
+                    'con su nombre, aunque una nota los mencione. Solo se nombra a servidores públicos, a quienes buscan un cargo, a personas '
+                    'que una autoridad ya hizo públicas en un documento oficial (una sentencia, una lista del SAT, un comunicado de la UIF) y '
+                    'a las empresas que un documento oficial nombra.</li>\n'
+                    '<li><b>Las personas físicas que contratan con el gobierno no se publican</b>: su RFC es un dato personal. Tener contratos '
+                    'públicos no es una irregularidad, y así lo decimos en cada respuesta.</li>\n'
+                    '<li><b>Una acusación no es una condena.</b> Mientras no haya sentencia firme, toda persona se presume inocente '
+                    '(Constitución, art. 20, apartado B, fr. I), y lo escribimos junto a cada acusación.</li>\n'
+                    '<li><b>Las mismas reglas para todos los gobiernos y todos los partidos</b>, como dicen nuestros '
+                    '<a href="pilares.html">pilares</a>.</li>\n</ul>')},
+    ],
+}
+
+PILARES = {
+    'archivo': 'pilares.html',
+    'menu': 'Nuestros pilares',
+    'menu_archivo': AUDITOR_VIRTUAL,
+    'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+    'icono': '🏛️',
+    'titulo': 'Nuestros pilares',
+    'lema': 'El periodista virtual del gasto público',
+    'estilos': ['pilares.css'],
+    'entrada': ('Auditavisión existe para seguir el dinero público y contarlo con documentos. Estos son los diez pilares que sostienen '
+                'cada página, cada respuesta del Auditor Virtual y cada dictamen. Ejercer el periodismo en México tiene riesgos que el '
+                'propio Estado reconoce: por eso existe, desde 2012, una ley para proteger a periodistas y a personas defensoras de '
+                'derechos humanos (<a href="%s" target="_blank" rel="noopener">Ley para la Protección de Personas Defensoras de Derechos '
+                'Humanos y Periodistas, DOF 25-06-2012 ↗</a>) %s.' % (LEY_PERIODISTAS, '<span class="est-chip est-oficial">oficial</span>')),
+    'secciones': [
+        {'id': 'pilares', 'titulo': 'Los diez pilares', 'texto': 'Lo que hacemos, y lo que nunca hacemos, con el dinero público y con la verdad.',
+         'tarjetas': [],
+         'bloque': '<ol class="pil-lista">\n%s\n        </ol>' % '\n'.join(
+             '          <li><span class="pil-ico" aria-hidden="true">%s</span><div><h3>%s</h3><p>%s</p></div></li>' % x for x in PILARES_LISTA)},
+        {'id': 'donde', 'titulo': 'Dónde se ven', 'texto': 'Cada pilar tiene su herramienta.',
+         'tarjetas': [
+             ('🤖', 'Pregúntale al Auditor', 'El periodista virtual: busca, coteja, explica y genera el dictamen.', AUDITOR_VIRTUAL, None, None),
+             ('🔍', 'Verificamos', 'Lo que circula en redes, cotejado afirmación por afirmación, y los casos que puedes seguir.', 'noticias-seguimiento.html#seguimientos', None, None),
+             ('🧾', 'Contratos públicos', 'Sigue el dinero: a quién le paga el gobierno, cuánto y por qué procedimiento (ComprasMX).', 'contratos-publicos.html', None, None),
+             ('⏳', 'Registro de pendientes', 'Lo que falta publicar, por qué falta y a quién le toca.', 'pendientes.html', None, None),
+             ('🌿', 'Crisis ambientales', 'Las crisis y los proyectos con costo ambiental, ficha por ficha.', 'herramienta-ambiente-crisis.html', None, None),
+             ('📥', 'Descarga los datos', 'Las cifras de la plataforma, para que las revises por tu cuenta.', 'descarga-los-datos.html', None, None),
+             ('✉️', 'Derecho de réplica', 'Si te aludimos con un dato inexacto, cómo pedir que se publique tu aclaración.', 'derecho-de-replica.html', None, None),
+         ]},
+    ],
+}
+
+
+
+def _cmx_meta():
+    """Lo que dice el catalogo de ComprasMX de si mismo (actualizar_comprasmx.py)."""
+    ruta = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets', 'auditor', 'data', 'comprasmx', 'inst.js')
+    t = open(ruta, encoding='utf-8').read()
+    d = json.loads(t[t.index('{'):t.rindex('}') + 1])
+    return d['meta'], len(d['sat'])
+
+
+def contratos_publicos():
+    """Contratos publicos de ComprasMX (pedido del autor, 26-10-2026: «integra
+    los contratos de ComprasMX» para seguir el dinero). El buscador y el
+    cruce los pinta contratos.js con los catalogos de actualizar_comprasmx.py."""
+    m, cruce = _cmx_meta()
+    arch = ''.join('<li><b>%s</b>: %s contratos <small>(sha256 %s…)</small></li>' % (a['archivo'], format(a['contratos'], ','), a['sha256'][:12])
+                   for a in m['archivos'])
+    return {
+        'archivo': 'contratos-publicos.html', 'menu': 'Contratos públicos', **HERR_SITIO,
+        'padre3': ('herramienta-inspector.html', 'Modo Inspector'),
+        'icono': '🧾', 'titulo': 'Contratos públicos', 'lema': 'Sigue el dinero: a quién le paga el gobierno',
+        'entrada': ('Los contratos que las dependencias federales y los gobiernos que usan ComprasMX reportaron en los expedientes de 2025 y 2026: '
+                    '%s empresas y %s instituciones. Busca una empresa, su RFC o una institución, y ve cuántos contratos tiene, por cuánto, '
+                    'por qué procedimiento y la liga de cada uno a ComprasMX. También puedes preguntárselo al Auditor: «contratos de Laboratorios Pisa», '
+                    '«¿a quién le compra el IMSS?».' % (format(m['proveedores'], ','), format(m['instituciones'], ','))),
+        'estilos': ['contratos.css'],
+        'scripts': ['contratos.js'],
+        'secciones': [
+            {'id': 'buscar', 'titulo': 'Busca una empresa o una institución', 'texto': 'Nombre, RFC o siglas: «Pisa», «IMSS», «Tren Maya».', 'tarjetas': [],
+             'bloque': ('<div class="cmx-app" id="cmxApp">\n'
+                        '          <form class="cmx-forma" id="cmxForma" role="search"><label for="cmxQ">Empresa, RFC o institución</label>'
+                        '<div class="cmx-fila"><input id="cmxQ" type="search" autocomplete="off" placeholder="Ej. Laboratorios Pisa, IMSS…">'
+                        '<button type="submit">Buscar</button></div></form>\n'
+                        '          <div class="cmx-sal" id="cmxSal" aria-live="polite"></div>\n'
+                        '          <noscript><p>El buscador necesita JavaScript.</p></noscript>\n'
+                        '        </div>')},
+            {'id': 'cruce', 'titulo': 'Contratistas en la lista negra del SAT',
+             'texto': ('Cruzamos, por RFC, a cada proveedor con contratos contra el listado del artículo 69-B del SAT (empresas que facturan '
+                       'operaciones inexistentes). Al corte de esta versión aparecen %d. Aparecer no es una condena: cada uno lleva su situación.' % cruce),
+             'tarjetas': [], 'bloque': '<div class="cmx-cruce" id="cmxCruce"><p>Cargando el cruce…</p></div>'},
+            {'id': 'metodo', 'titulo': 'De dónde salen los datos', 'texto': 'Lo que dice el documento y lo que no.', 'tarjetas': [],
+             'bloque': ('<div class="cmx-metodo">\n'
+                        '          <p>Fuente: <a href="%s" target="_blank" rel="noopener">ComprasMX, Datos Abiertos ↗</a>, «Datos relevantes de los contratos ingresados a la plataforma», '
+                        'de la Secretaría Anticorrupción y Buen Gobierno. Descargados el %s:</p>\n          <ul>%s</ul>\n'
+                        '          <ul>\n'
+                        '            <li><b>El importe de cada contrato es oficial</b> <span class="est-chip est-oficial">oficial</span>: el «Importe DRC», antes de impuestos, tal como lo reportó la institución. '
+                        'Las sumas y los porcentajes son <span class="est-chip est-derivado">derivado</span>: se suman solo los contratos en pesos; los de otras monedas se muestran aparte, sin convertir.</li>\n'
+                        '            <li><b>No es lo pagado.</b> En un contrato abierto el importe suele ser el máximo. ComprasMX no publica pagos: lo pagado se rinde en la Cuenta Pública.</li>\n'
+                        '            <li><b>El año es el del expediente</b>, no el del pago: el archivo de 2025 trae contratos firmados en 2026.</li>\n'
+                        '            <li><b>Solo lo que se reporta en ComprasMX.</b> Los estados y municipios que no la usan no aparecen, y los años anteriores a 2025 están en el CompraNet histórico, que aún no integramos.</li>\n'
+                        '            <li><b>Las personas físicas no se publican</b> con nombre ni RFC: su RFC es un dato personal. Solo cuentan en los totales de cada institución.</li>\n'
+                        '            <li><b>Tener contratos no es una irregularidad.</b> La plataforma no califica a nadie: muestra lo reportado y la liga al documento.</li>\n'
+                        '          </ul>\n'
+                        '          <p>Para actualizarlo: <code>python3 herramientas/actualizar_comprasmx.py</code> con los archivos descargados de la misma página.</p>\n'
+                        '        </div>') % (m['url'], m['descarga'], arch)},
+        ],
+        'pie_extra': herr_otras('herramienta-inspector.html'),
+    }
 
 
 DICCIONARIO = {
@@ -1319,9 +1718,8 @@ def simulador():
     ej = json.load(open(os.path.join(RAIZ, 'investigaciones', 'simulador', 'cgpe2027-cuadro-ii6.json'), encoding='utf-8'))
     datos = json.dumps(ej, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     return {
-        'archivo': 'simulador-presupuesto.html', 'menu': 'Reparte el presupuesto', 'menu_archivo': 'herramientas.html',
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
-        'padre2': ('herramienta-calculadora.html', 'Calculadora Cívica'),
+        'archivo': 'simulador-presupuesto.html', 'menu': 'Reparte el presupuesto', **HERR_SITIO,
+        'padre3': ('herramienta-calculadora.html', 'Calculadora Cívica'),
         'icono': '🧮', 'titulo': 'Reparte el presupuesto, desde cero', 'lema': 'Tú pones las cifras; el ejemplo oficial, Hacienda',
         'entrada': ('Un simulador que empieza en $0. Agrega lo que entra y a dónde va, reparte, compara dos escenarios y descarga la cuenta. '
                     'Si quieres partir de cifras reales, carga el ejemplo oficial: el presupuesto aprobado de 2026 o el estimado de 2027, '
@@ -1462,10 +1860,9 @@ def servicios():
         '        <div class="sv-resumen" id="svResumen" hidden></div>',
         '        <noscript><p>El formulario necesita JavaScript.</p></noscript>'])
     return {
-        'archivo': 'servicios.html', 'menu': 'Servicios de investigación', 'menu_archivo': 'herramientas.html',
+        'archivo': 'servicios.html', 'menu': 'Servicios de investigación', **HERR_SITIO,
         # Desde el 11-10-2026 es un modulo del Modo Inspector (pedido del autor).
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
-        'padre2': ('herramienta-inspector.html', 'Modo Inspector'),
+        'padre3': ('herramienta-inspector.html', 'Modo Inspector'),
         'icono': '🔎', 'titulo': 'Servicios de investigación', 'lema': 'La consulta es gratuita; la investigación a la medida se cotiza',
         'entrada': ('Todo lo que publica Auditavisión es libre y lo seguirá siendo. Cuando necesites ir más a fondo en un caso, '
                     'podemos hacer por encargo una investigación documental con la misma regla de la plataforma: cada cifra con '
@@ -1508,6 +1905,50 @@ def servicios():
 # envian nada mientras CANAL_COMUNIDAD este vacio (se abre con el dominio,
 # igual que CANAL_SOLICITUD). Cada pagina lleva al pie «¿Viste un error?».
 CANAL_COMUNIDAD = ''
+# La base de datos (paso 2.7 del plan v2, 27-10-2026). Cuando el autor cree el
+# proyecto de Supabase, FUNCIONES lleva la dirección de sus funciones
+# (https://TU-PROYECTO.supabase.co/functions/v1) y TURNSTILE_SITIO la llave
+# PÚBLICA del antispam de Cloudflare (la secreta va solo en Supabase). Vacías,
+# nada se envía: el texto se arma en el navegador, como hasta hoy. Antes de
+# llenarlas, AVISO_CONSERVACION debe decir cuánto tiempo se guardan los envíos:
+# el aviso de privacidad cambia ANTES de recabar el primer dato, o la
+# generación se detiene.
+FUNCIONES = ''
+TURNSTILE_SITIO = ''
+AVISO_CONSERVACION = ''
+
+if FUNCIONES:
+    # Con el envío encendido, el aviso dice qué se guarda (tabla envios de la
+    # migración 20261024000001) y por cuánto tiempo, o no se genera nada.
+    if len(AVISO_CONSERVACION.strip()) < 10:
+        raise SystemExit('apartados.py: FUNCIONES está lleno pero AVISO_CONSERVACION no: el aviso de privacidad '
+                         'debe decir cuánto se guardan los envíos antes de recabar el primer dato')
+    def _cambia(txt, viejo, nuevo):
+        if viejo not in txt:  # si alguien reescribe el aviso, este parche no puede fallar en silencio
+            raise SystemExit('apartados.py: el aviso de privacidad cambió; actualiza el texto del envío encendido')
+        return txt.replace(viejo, nuevo)
+    for _sec in AVISO['secciones']:
+        if _sec['id'] == 'cambios':
+            _sec['bloque'] = ('<p>El envío de formularios ya está conectado y este aviso lo describe arriba. Si algún día se guarda '
+                              'algo más, este aviso lo dirá antes, y la fecha de arriba cambiará.</p>')
+        if _sec['id'] == 'datos':
+            _sec['bloque'] = _cambia(_sec['bloque'], '<b>Ninguno en un servidor nuestro.</b> ', '<b>Solo lo que tú envías.</b> ')
+            _sec['bloque'] = _cambia(_sec['bloque'], 'Solo las ves tú; si quieres, las copias y nos las mandas.',
+                                     'Además, cada pregunta nueva nos llega sola, sin tu nombre ni tu correo (solo la pregunta, la '
+                                     'ficha que te dio el Auditor y la versión de la página), para saber qué fichas faltan primero.')
+            _sec['bloque'] = _cambia(_sec['bloque'],
+                'No hay registro, ni cuentas, ni herramientas de analítica, ni cookies propias. '
+                'Los formularios (algo raro con el dinero público, un dato mal, un tema para investigar) arman el texto en tu pantalla '
+                'para que tú lo copies o lo descargues: no se envían solos.',
+                'No hay registro, ni cuentas, ni herramientas de analítica, ni cookies propias. Los formularios (algo raro con el dinero '
+                'público, un dato mal, un tema para investigar) arman el texto en tu pantalla; <b>solo si pulsas «Enviar»</b> llega a '
+                'nuestra base de datos (Supabase), con: el tipo de mensaje, el asunto, el texto que escribiste, la página desde donde lo '
+                'mandaste, el enlace al documento que citaste, tu correo <b>solo si lo escribes y aceptas este aviso</b>, y una huella '
+                'cifrada de tu conexión (no tu dirección IP) para frenar el spam. Para qué: atender tu reporte, corregir el dato o '
+                'investigar el tema, y responderte. ' + AVISO_CONSERVACION.strip())
+    AVISO['entrada'] = _cambia(AVISO['entrada'], 'y hoy ningún dato tuyo sale de tu navegador',
+                                                'y solo lo que tú decides enviar sale de tu navegador')
+    AVISO['lema'] = 'Qué sabemos de ti: solo lo que tú nos mandas'
 
 # Fe de erratas: correcciones reales, documentadas en CONTEXT.md. Politica
 # de independencia, compromiso «De que respondemos»: se corrige en publico
@@ -1545,9 +1986,13 @@ def _campo_cm(i, et, ctl, ayuda=''):
             % (i, et, ctl, ('<small>%s</small>' % ayuda) if ayuda else ''))
 
 
-def _form_cm(id_, asunto, campos, boton):
+def _form_cm(id_, asunto, campos, boton, tipo=''):
+    envio = ''
+    if FUNCIONES and tipo:
+        envio = ' data-funcion="%s/recibir-formulario" data-tipo="%s"%s' % (
+            esc_attr(FUNCIONES.rstrip('/')), tipo, (' data-turnstile="%s"' % esc_attr(TURNSTILE_SITIO)) if TURNSTILE_SITIO else '')
     return '\n'.join([
-        '<form class="sv-form cm-form" id="%s" data-canal="%s" data-asunto="%s" novalidate>' % (id_, esc_attr(CANAL_COMUNIDAD), esc_attr(asunto)),
+        '<form class="sv-form cm-form" id="%s" data-canal="%s" data-asunto="%s"%s novalidate>' % (id_, esc_attr(CANAL_COMUNIDAD), esc_attr(asunto), envio),
         '\n'.join(campos),
         '          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">%s</button>'
         '<button type="reset" class="sz-btn">Empezar de nuevo</button></div>' % boton,
@@ -1563,14 +2008,22 @@ def formas(pre):
     ob = ' <span class="sv-req">obligatorio</span>'
     privado = ('          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. '
                'Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>')
+    if FUNCIONES:
+        privado = ('          <p class="sv-privado">🔒 Primero ves el texto tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar». '
+                   'Puedes firmar con seudónimo; el correo es opcional, solo sirve para responderte y se guarda únicamente si aceptas el '
+                   '<a href="aviso-de-privacidad.html">aviso de privacidad</a>.</p>')
 
     def c(sufijo, et, ctl, ayuda=''):
         i = pre + sufijo
         return _campo_cm(i, et, ctl.replace('{id}', i), ayuda)
 
     def firma(p):
-        return [c(p + 'Firma', 'Firma o seudónimo', '<input id="{id}" type="text" maxlength="80">'),
-                c(p + 'Correo', 'Correo (opcional)', '<input id="{id}" type="email" maxlength="160">')]
+        campos = [c(p + 'Firma', 'Firma o seudónimo', '<input id="{id}" type="text" maxlength="80">'),
+                  c(p + 'Correo', 'Correo (opcional)', '<input id="{id}" type="email" maxlength="160">')]
+        if FUNCIONES:
+            campos.append('            <label class="sv-check"><input type="checkbox" id="%sAcepta" data-acepta> Acepto el '
+                          '<a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi correo</label>' % (pre + p))
+        return campos
     reporte = _form_cm(pre + 'Reporte', 'Reporte ciudadano', [privado,
         '          <p class="sv-privado pt-aviso">⚠️ No escribas datos bancarios, documentos de identidad ni información de terceros que pueda ponerlos en riesgo.</p>',
         c('RepQue', 'Qué fue' + ob, '<select id="{id}" required><option value="">Elige una opción</option>'
@@ -1587,7 +2040,7 @@ def formas(pre):
           'Si lo sabes: Ramo 33, FISMDF, FORTAMUN, recurso estatal o propio del municipio.'),
         c('RepPrueba', 'Con qué prueba', '<input id="{id}" type="text" maxlength="300">',
           'Una foto con fecha, un número de contrato, una factura, un acta de entrega.'),
-        ] + firma('Rep'), 'Revisar mi reporte')
+        ] + firma('Rep'), 'Revisar mi reporte', 'reporte')
     tema = _form_cm(pre + 'Tema', 'Propuesta de tema', [privado,
         c('TemaQue', 'Tema' + ob, '<input id="{id}" type="text" maxlength="160" required>',
           'Por ejemplo: las compras de un hospital, una obra de tu municipio, un fideicomiso.'),
@@ -1595,7 +2048,7 @@ def formas(pre):
         c('TemaDonde', 'Entidad o municipio', '<input id="{id}" type="text" maxlength="120">'),
         c('TemaDocs', 'Documentos oficiales que conozcas', '<textarea id="{id}" rows="2" maxlength="800"></textarea>',
           'Ligas a la Auditoría Superior, Compranet, el DOF o Transparencia. Si no tienes, no pasa nada.'),
-        ] + firma('Tema'), 'Revisar mi propuesta')
+        ] + firma('Tema'), 'Revisar mi propuesta', 'tema')
     error = _form_cm(pre + 'Error', 'Señalamiento de error', [privado,
         c('ErrPagina', 'Página' + ob, '<input id="{id}" class="cm-pagina" type="text" maxlength="200" required>',
           'Si abriste esto desde una página, ya está escrita.'),
@@ -1603,7 +2056,7 @@ def formas(pre):
         c('ErrDice', 'Qué dice el documento oficial' + ob, '<textarea id="{id}" rows="2" maxlength="800" required></textarea>'),
         c('ErrFuente', 'Enlace al documento' + ob, '<input id="{id}" type="url" maxlength="400" required placeholder="https://">',
           'Sin documento no podemos corregir: es la misma regla que seguimos nosotros.'),
-        ] + firma('Err'), 'Revisar mi señalamiento')
+        ] + firma('Err'), 'Revisar mi señalamiento', 'errata')
     return {'reporta': reporte, 'tema': tema, 'error': error}
 
 
@@ -3480,12 +3933,11 @@ def radar():
         })
     # «Expide un estado de cuenta», en su propia pagina (pedido del autor, 10-10-2026).
     paginas.append({
-        'archivo': 'radar-estado-de-cuenta.html', 'menu': 'Estado de cuenta administrativo', 'menu_archivo': 'herramientas.html',
+        'archivo': 'radar-estado-de-cuenta.html', 'menu': 'Estado de cuenta administrativo', **HERR_SITIO,
         # Del 12-10-2026 al 22-10-2026 fue la cuarta tarjeta de Datos; desde
         # entonces (pedido del autor) es la quinta aplicacion de la
         # Calculadora Civica, con sus migas y su pie (nav_de_pagina).
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
-        'padre2': ('herramienta-calculadora.html', 'Calculadora Cívica'),
+        'padre3': ('herramienta-calculadora.html', 'Calculadora Cívica'),
         'icono': '🏛️', 'titulo': 'Estado de cuenta administrativo', 'lema': 'Calculadora Cívica · aplicación 5 de 5',
         'sin_icono_lema': True, 'icono_cab': '🏛️', 'fondo': HERR_IMG['calculadora'], 'rubro': 'calculadora',
         'entrada': EXPIDE_TEXTO + ' Cualquiera puede comprobar que no se alteró.',
@@ -4596,6 +5048,16 @@ def numeros_preparar():
         NUMEROS_PAGINAS.append(egreso_pagina(x, n, egresos, base['panoramaErario']['totalPEF'], refs, glosario))
     # La portada: solo las tarjetas, cada una a su pagina.
     a['secciones'] = [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], r[4])} for r in NUMEROS_PARTES]
+    # Quinta tarjeta: las cuatro herramientas del Auditor, en su página dentro
+    # de Números (pedido del autor, 29-10-2026: «una nueva tarjeta… que se
+    # llamara Herramientas del Auditor»). Son las tarjetas de HERR_INDICE.
+    a['secciones'].append({'id': 'herramientas', 'pagina': NUMEROS_HERR,
+                           'pestana': ('🧰', 'Herramientas del Auditor', 'Megaobras, Calculadora Cívica, Modo Inspector y Costo Ambiental')})
+    herr = {k: v for k, v in HERR_INDICE.items() if k != 'padre'}
+    NUMEROS_PAGINAS.append(dict(herr, archivo=NUMEROS_HERR, menu='Herramientas del Auditor', menu_archivo='sigue-el-dinero.html',
+                                padre=('sigue-el-dinero.html', 'Números'), titulo='Herramientas del Auditor', lema='Números',
+                                entrada=('Haz tus propias cuentas con los mismos números de la Enciclopedia. '
+                                         'Aquí están las cuatro herramientas del auditor: cada una abre su propia página.')))
     # Las anclas de cuando todo vivia en esta pagina llevan a la suya.
     a['hash_a_pagina'] = dict({r[0]: r[1] for r in NUMEROS_PARTES}, decide='numeros-gasto-publico.html', deuda='numeros-cuentas-claras.html', revisa='numeros-cuentas-claras.html', numPeso='numeros-cuanto-dinero-es.html#numPeso',
                               presupuesto='numeros-presupuesto.html', ati='herramienta-calculadora.html')
@@ -4705,7 +5167,6 @@ def pagina(a, sello):
       </nav>''' % saltos
     else:
         en_pagina = ''
-
     nota = ('<a class="apartado-nota" href="index.html?ir=nota">📖 Qué son las finanzas públicas y qué encontrarás aquí</a>'
             if a.get('nota') else '')
     guia = GUIA if a.get('guia') else ''
@@ -4737,6 +5198,11 @@ def pagina(a, sello):
     for nivel in ('padre2', 'padre3'):
         if a.get(nivel):
             padre += '<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a[nivel]
+    # Cada pagina de la Enciclopedia se pregunta al Auditor en su modo (29-10-2026).
+    import modos
+    if a['archivo'] != ENCICLOPEDIA and (ENCICLOPEDIA in padre or a['archivo'] in modos.ENCICLOPEDIA_EXTRA):
+        migas = re.sub(r'<[^>]+>', '', padre + a['menu'])
+        nota = (nota + ' ' if nota else '') + modos.enlace(a['archivo'], migas, re.sub('<[^>]+>', '', a['menu']))
     cab_clase, cab_estilo = 'apartado-cab', ''
     if a.get('fondo'):
         cab_clase += ' herr-cab herr-foto rubro-%s' % a['rubro'] + (' ' + a['foto_clase'] if a.get('foto_clase') else '')
@@ -4812,7 +5278,9 @@ def pagina(a, sello):
 
   <footer class="apartado-pie">
     <div class="apartado-ancho">
-{volver}      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
+{volver}      <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
+      <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
     </div>
   </footer>
 
@@ -4837,6 +5305,21 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('29-10-2026', 'El índice general sigue ahora el orden de las pestañas: el Auditor Virtual con sus cuatro modos, la Enciclopedia (Números, sus Herramientas, Datos y Aprende), Comunidad y Noticias, con sus tres páginas y sus secciones. Al final, las investigaciones por tema y cómo verificamos.'),
+    ('28-10-2026', 'Noticias se rehace como periódico: Auditavisión Noticias. Separa la noticia (lo que pasó y lo que consta) de la opinión (la Columna del Erario, nuestro argumento con documentos) y suma cuatro secciones: Seguimiento, con los casos abiertos y lo que falta para cerrarlos; la Mesa de redacción, con los titulares que estamos jalando, sin verificar; la Agenda del erario, con las fechas que fija la ley, y Cómo trabajamos, el método del rumor al documento. Y el verificador ahora te dice quién aparece en la nota y te lleva a su estado de cuenta y su salud financiera.'),
+    ('28-10-2026', 'El Modo Inspector suma su séptima aplicación: Nepotismo y parentesco. Elige un parentesco («mi cuñado», «mi suegra») y ve qué grado es y qué ley lo alcanza: darle una plaza, un contrato o su cargo en la elección. Trae el árbol de grados, cómo se investiga un cargo y por qué un apellido igual no prueba nada. Y en el chat del Auditor pregúntale «¿mi cuñado puede trabajar en mi oficina?». En Noticias, además, ya puedes verificar una noticia, proponernos una nota y leer las réplicas y posturas.'),
+    ('28-10-2026', 'Noticias es ahora la cuarta pestaña del menú, junto a Auditor Virtual, Enciclopedia y Comunidad. Estrena «Al momento»: notas breves de lo que está pasando, con su fecha, lo que consta en el documento oficial y lo que falta probar, la cuenta con números redondos, nuestros datos y el glosario. La primera: el IMSS acota la Modalidad 40, cotejada contra el Diario Oficial del 21 de octubre.'),
+    ('27-10-2026', 'Derecho de réplica: si una columna, una ficha o una respuesta del Auditor te alude con un dato inexacto o falso, tu aclaración se publica gratis, íntegra y sin comentarios, como manda la ley. La nueva página dice cómo pedirla, en qué plazos y nuestras reglas con la prensa y con las personas privadas. Es además el décimo de nuestros pilares.'),
+    ('27-10-2026', 'El dictamen cambia de nombre: ahora es el «Dictamen cívico independiente». Dice lo mismo que antes: es el respaldo documental de una respuesta, no un peritaje ni un documento con validez ante una autoridad. También hay aviso de privacidad, al pie de cada página.'),
+    ('26-10-2026', 'Auditoría en imágenes llega a 22 investigaciones. Se integran las 13 megaobras y rescates individuales (Agronitrogenados, Grupo Fertinal, Estela de Luz, Búnker de Seguridad, Refinería Bicentenario en Tula, Enciclomedia, FOBAPROA-IPAB y FARAC carretero, junto a Tren Maya, Dos Bocas, AIFA, Tren Interurbano y Megafarmacia), el panorama de Inversión y Megaobras en seis sexenios y cuatro investigaciones actuales: el presupuesto y los contratos bajo revisión en el INE, el proyecto de gas en Guaymas y la Gaceta Parlamentaria de Sonora, las compras de medicamentos y contratos del IMSS en ComprasMX, y la aprobación de la Ley de Ingresos 2027 con el techo de deuda y la nota BBB.'),
+    ('26-10-2026', 'Contratos públicos: los 215 mil contratos que el gobierno federal y los gobiernos que usan ComprasMX reportaron en los expedientes de 2025 y 2026. Pregúntale al Auditor «contratos de Laboratorios Pisa» o «¿a quién le compra el IMSS?» y te dice cuántos contratos, por cuánto, cuánto fue por adjudicación directa y la liga de cada uno. Y cruzamos a todos los proveedores con la lista negra del SAT.'),
+    ('26-10-2026', 'Nuestros pilares: la nueva página dice en nueve puntos qué es Auditavisión, el periodista virtual del gasto público: que la verdad sea incómoda no la vuelve falsa, evidencia con folio, contrapeso y no propaganda, y reconocimiento a quienes hacen periodismo. Y ya puedes seguir un caso: en cada columna de Noticias relevantes, «🔔 Seguir este caso» te avisa cuando la actualizamos con un documento nuevo.'),
+    ('26-10-2026', 'Verificamos Guaymas: el terreno del proyecto de gas AMIGO, cotejado. La Secretaría de Energía habla de 41.7 hectáreas, no de 54; el contrato de comodato no está publicado y queda pendiente a cargo del Gobierno de Sonora; la obra está detenida por amparos. El caso también entra a Crisis ambientales, con el presupuesto de la ASEA en el Auditor ambiental.'),
+    ('26-10-2026', 'Verificamos sigue el dinero: cada caso trae «Lo que sigue» (el voto, el Diario Oficial o el informe que falta revisar), y el Auditor ya reconoce a las empresas contratistas. Escribe «Cyber Robotic Solutions» o «Cajas Graf» y te dice qué consta en documentos, y dónde ver sus contratos, si está sancionada o si la autoridad la ha señalado. Nueva columna: medicinas y ventiladores del IMSS.'),
+    ('26-10-2026', 'Verificamos, en Noticias relevantes: lo que circula en redes, cotejado afirmación por afirmación contra el documento oficial. Tres primeras: la Ley de Ingresos 2027 (deuda y perdón de multas), la baja de la calificación de México por HR Ratings y la renuncia de la presidenta del INE. Pregúntale al Auditor «¿es cierto que perdonaron multas a grandes contribuyentes?» y te muestra qué consta, qué tiene matices y qué solo dice la prensa; el dictamen trae el cotejo completo.'),
+    ('24-10-2026', 'Noticias relevantes, en el chat del Auditor Virtual. Escribe el nombre de un personaje («García Luna», «¿quién es Omar García Harfuch?», «noticias de Elba Esther Gordillo») y te muestra lo que la plataforma pudo sostener con documentos, con sus cifras y su fuente, y también lo que circula sin pruebas y por qué se quedó fuera. Para buscar más, te deja las búsquedas listas en portales oficiales y en las noticias, marcadas como sin verificar, y la liga a Contrasta una nota.'),
+    ('24-10-2026', 'Las aplicaciones que usas dentro del Auditor Virtual ya traen «Generar dictamen»: dice qué hace la aplicación, de qué documentos oficiales salen sus datos y el enlace para repetir tu cuenta. Y el chat lee mejor tu ingreso: «gano 15 mil y tengo 2 hijos» usa los 15 mil, «8 mil a la quincena» se cuenta como 16 mil al mes (con la operación a la vista), y si dices Uber, Airbnb, renta o RESICO, la calculadora abre en ese régimen.'),
+    ('24-10-2026', 'El Auditor Virtual ya abre las cuatro herramientas. Además del Modo Inspector y de Inversión y Megaobras, ahora usas desde el chat las seis aplicaciones de Costo Ambiental y las cinco de la Calculadora Cívica. Dile «gano 15 mil al mes, ¿cuánto me retienen?» y abre tu estado de cuenta con tu ingreso ya puesto. Y cuando la plática toca el Tren Maya, Dos Bocas, el huachicol o el Ramo 33, te ofrece su investigación en imágenes.'),
     ('24-10-2026', 'Una sola Enciclopedia. La plataforma antigua se fusionó con Auditavisión: lo que servía ya vivía aquí con su fuente, y su dirección te trae a la pestaña Enciclopedia. De ella rescatamos cinco temas, cotejados contra la ley vigente: en Poder Judicial, los cuatro caminos para defender la Constitución, los recursos del amparo con sus plazos y cuándo llega un caso a la Suprema Corte; en Poder Legislativo, el proceso electoral etapa por etapa y cómo evaluar a una candidata o candidato. También los contesta el chat del Auditor.'),
     ('24-10-2026', 'La salud financiera de cada megaobra, en el chat del Auditor: su estado de resultados básico (ingresos, costos y gastos, ganancia bruta, intereses, resultado neto e inversión), en verde lo que suma y en rojo lo que resta, en pesos de su año y en pesos de hoy con el mismo INPC de la máquina del tiempo del peso. Y donde no hay mapa, el chat te lleva al simulador en vivo ya filtrado por la industria y el sexenio de la obra.'),
     ('24-10-2026', 'Inversión y Megaobras entra al chat del Auditor Virtual. Pregúntale por el Tren Maya, Dos Bocas, el AIFA, el FOBAPROA o cualquiera de las 13 obras y rescates: cuánto se aprobó, cuánto costó, su sobrecosto, si gana o pierde al año y qué dijo la ASF, cada cifra con su chip y su documento. También en qué invirtió cada presidente, cuál tiene más sobrecosto o pierde más, dos obras o dos sexenios frente a frente y las cuatro cifras del total. Cada respuesta lleva a la ficha y la cuenta de la obra, al estado de cuenta de su presidente, a la salud financiera de la dependencia a cargo y a los portales oficiales, y sus cinco aplicaciones se abren ahí mismo con «▶️ Úsala aquí».'),
@@ -4852,7 +5335,7 @@ NOVEDADES = [
     ('23-10-2026', 'La pestaña Auditor Virtual abre directo en Pregúntale al Auditor. Junto a «Cómo platicar conmigo» está el botón «Herramientas», con las cuatro: Modo Inspector, que lleva a las Grandes investigaciones, Costo Ambiental, Calculadora Cívica e Inversión y Megaobras.'),
     ('23-10-2026', 'El menú queda en tres pestañas: Auditor Virtual, con las herramientas; Enciclopedia, que junta Números, Datos y Aprende; y Comunidad, la antigua Participa, donde la tarjeta Comunidad se llama ahora Participa. Ningún enlace cambia de dirección.'),
     ('23-10-2026', 'El Poder Judicial y el Poder Legislativo viven en Datos, cada uno con su portada y una página por tema: quién es quién, la Suprema Corte, los sueldos, el presupuesto, la elección judicial y cómo decide; las Cámaras, el calendario, las elecciones y los congresos de los estados. Pregúntale al Auditor contesta sobre los dos.'),
-    ('23-10-2026', 'Cada respuesta de Pregúntale al Auditor trae «Saber más», que abre la página donde está el dato, y «Generar dictamen», que abre el dictamen pericial sellado en su propia página.'),
+    ('23-10-2026', 'Cada respuesta de Pregúntale al Auditor trae «Saber más», que abre la página donde está el dato, y «Generar dictamen», que abre el dictamen sellado (hoy «Dictamen cívico independiente») en su propia página.'),
     ('23-10-2026', 'Pregúntale al Auditor es el auditor de toda la plataforma: contesta como chat con las cifras de Números y de Datos, cada una con su fuente, y verifica lo que «dicen» o la liga de una nota contra el documento oficial.'),
     ('22-10-2026', 'Costo Ambiental se reestructura: la parte informativa pasa a Datos → Medio ambiente, en nueve páginas, y la herramienta se queda con sus aplicaciones.'),
     ('22-10-2026', 'Calculadora Cívica: Tu estado de cuenta se abre en cuatro páginas (tu ingreso, lo que te retienen, a dónde va cada peso y tu estado de cuenta), y el Estado de cuenta administrativo pasa a ser su quinta aplicación.'),
@@ -4951,7 +5434,7 @@ def _hijas(base, ref):
     23-10-2026): sin ellas, el indice se quedaba en las portadas. Salen de las
     mismas listas que arman cada pagina, asi que una nueva aparece sola."""
     import estado_cuenta, presupuesto_modulos, cc_ticket, insp_asf, datos_ambiente, asistente
-    import asistente_legislativo as al, asistente_judicial as aj
+    import asistente_legislativo as al, asistente_judicial as aj, gestion_salud as gs, gestion_ambiental as ga
     limpio = lambda t: re.sub('<[^>]+>', '', t)
     return {
         estado_cuenta.ARCHIVO: [(p['archivo'], limpio(p.get('menu') or p['titulo'])) for p in estado_cuenta.construir()[0]
@@ -4959,11 +5442,13 @@ def _hijas(base, ref):
         'numeros-paquete-2027.html': [(x[2], x[3]) for x in presupuesto_modulos.PE_PARTES],
         cc_ticket.PORTADA: [(cc_ticket.paso_archivo(x[1]), x[3]) for x in cc_ticket.PASOS],
         'herramienta-inspector-asf.html': [(p['archivo'], limpio(p['menu'])) for p in insp_asf.subpaginas(base, ref)],
-        ASISTENTE[0]: [(asistente.DICTAMEN, 'El dictamen pericial')],
+        ASISTENTE[0]: [(asistente.DICTAMEN, 'El dictamen cívico independiente')],
         'radar-peso.html': [(x[1], x[2]) for x in RADAR_PESO_PARTES],
         datos_ambiente.PORTADA: [(x[1], x[3]) for x in datos_ambiente.PARTES],
         al.PORTADA: [(x[0], x[2]) for x in al.PAGINAS],
         aj.PORTADA: [(x[0], x[2]) for x in aj.PAGINAS],
+        gs.PORTADA: [(x[0], x[2]) for x in gs.PAGINAS],
+        ga.PORTADA: [(x[0], x[2]) for x in ga.PAGINAS],
     }
 
 
@@ -4997,11 +5482,21 @@ def indice(base, ref):
                             [(modulo_archivo(h[0], t[0]), t[2], t[3]) for t in h[7]],
                             h[0])
                      for h in HERRAMIENTAS])
-    otros = [_grupo('📚', 'Enciclopedia', [
+    # El índice sigue el orden de las pestañas (pedido del autor, 29-10-2026):
+    # Auditor Virtual, Enciclopedia (Números, sus Herramientas, Datos y
+    # Aprende), Comunidad y Noticias; luego las investigaciones y el método.
+    import asistente, noticias
+    auditor = _rejilla([
+        grupo('💬', ASISTENTE[1], [(ASISTENTE[0], ASISTENTE[1], ASISTENTE[2])], ASISTENTE[0]),
+        _grupo('🎛️', 'Los cuatro modos', [('%s?modo=%s' % (ASISTENTE[0], m[0]), '%s Modo %s' % (m[1], m[2]), m[3])
+                                          for m in asistente.MODOS])])
+    enciclopedia = _rejilla([_grupo('📚', 'Enciclopedia', [
         (ENCICLOPEDIA, 'Enciclopedia', 'Números, Datos y Aprende en una sola puerta'),
         ('sigue-el-dinero.html', 'Números', 'El recorrido del dinero público'),
+        (NUMEROS_HERR, 'Herramientas del Auditor', 'Las cuatro herramientas y sus aplicaciones'),
         ('descarga-los-datos.html', 'Datos', 'El radar, las descargas, el ambiente y los Poderes'),
-        ('aprende.html', 'Aprende', 'La trivia, la Biblioteca y las noticias')])]
+        ('aprende.html', 'Aprende', 'La trivia, la Biblioteca y las noticias')])])
+    datos_aprende, comunidad = [], []
     for archivo in ('descarga-los-datos.html', 'aprende.html', 'participa.html'):
         a = ap[archivo]
         enl = [(x.get('pagina') or archivo + '#' + x['id'], x['pestana'][1], x['pestana'][2]) for x in a['secciones']]
@@ -5017,16 +5512,23 @@ def indice(base, ref):
             k = [e[0] for e in enl].index('garantias.html') + 1
             enl[k:k] = [(g[1], '· ' + g[3], '') for g in GARANTIAS_PARTES]
             enl += [('expedientes.html', 'Expedientes de casos de la ASF', 'Los casos por aclarar')]
-        otros.append(grupo(a['icono'], a['menu'], enl, archivo))
-        if archivo == 'participa.html':
+            comunidad.append(grupo(a['icono'], a['menu'], enl, archivo))
             # El boton de la cabecera, con sus cinco paginas (24-10-2026).
-            otros.append(_grupo('📢', 'Cuéntanos lo que viste', [
+            comunidad.append(_grupo('📢', 'Cuéntanos lo que viste', [
                 ('comunidad.html', 'Cuéntanos lo que viste', 'Reporta, señala errores, propón temas, comparte y fe de erratas')] + [
                 (c[1], '· ' + c[3], '') for c in COMUNIDAD_PARTES]))
-    otros.append(_grupo('🏛️', 'Los Poderes', [
+        else:
+            datos_aprende.append(grupo(a['icono'], a['menu'], enl, archivo))
+    datos_aprende.append(_grupo('🏛️', 'Los Poderes', [
         (al.PORTADA, 'Poder Legislativo', 'Las Cámaras, el calendario, las elecciones y los estados'),
         (aj.PORTADA, 'Poder Judicial', 'La Corte, los sueldos, el presupuesto y la elección judicial'),
         ('numeros-lo-que-cuestan-los-poderes.html', 'Lo que cuestan el Congreso y la Judicatura', 'Presupuesto 2026 y Cuenta Pública 2024')]))
+    # Noticias: el índice de la pestaña y sus tres páginas, cada una con sus
+    # secciones (las de PARTES de noticias.py, así una nueva aparece sola).
+    nsec = {x[0]: x[2] for x in noticias.SECCIONES}
+    diario = _rejilla([_grupo('📰', 'Noticias', [(noticias.ARCHIVO, 'Noticias', 'La pestaña: sus tres páginas en una sola puerta')], noticias.ARCHIVO)] +
+                      [_grupo(ico, tit, [(arch, tit, lema)] + [('%s#%s' % (arch, i), '· ' + nsec[i], '') for i in secs], arch)
+                       for arch, ico, tit, lema, _t, secs in noticias.PARTES])
     metodologia = (
         '<div class="indice-metodo">\n'
         '          <p>Toda cifra de la plataforma lleva su fuente oficial y uno de tres estados:</p>\n'
@@ -5042,17 +5544,22 @@ def indice(base, ref):
         '          <ul class="indice-lista indice-novedades">\n%s\n          </ul>\n'
         '        </div>') % '\n'.join('            <li><b>%s</b> %s</li>' % n for n in NOVEDADES)
     secc = [
-        ('investigaciones', '🖼️ Investigaciones, por tema', 'Las auditorías en imágenes. Cada una explica el caso y lleva a sus números y a su evidencia.', investigaciones),
+        ('auditor', '🔍 Auditor Virtual', 'El chat que te contesta todo, en sus cuatro modos, con su dictamen.', auditor),
+        ('enciclopedia', '📚 Enciclopedia', 'La parte de consulta: Números, sus Herramientas, Datos y Aprende.', enciclopedia),
         ('numeros', '💰 Enciclopedia · Números', 'El recorrido del dinero público, del impuesto a la rendición de cuentas, cada parte en su propia página.', numeros),
-        ('herramientas', '🧰 Auditor Virtual', 'Cada herramienta y sus módulos, con página propia.', herr),
-        ('mas', '📚 Enciclopedia · Datos y Aprende, Comunidad y los Poderes', 'Descargas, la Biblioteca del Erario Público, las noticias, la participación ciudadana y los Poderes de la Unión.', _rejilla(otros)),
+        ('herramientas', '🧰 Enciclopedia · Herramientas del Auditor', 'Cada herramienta y sus aplicaciones, con página propia.', herr),
+        ('mas', '📊 Enciclopedia · Datos y Aprende', 'Las descargas, el radar, el ambiente, los Poderes de la Unión y la Biblioteca del Erario Público.', _rejilla(datos_aprende)),
+        ('comunidad', '🤝 Comunidad', 'La participación ciudadana: el Ágora, tus garantías, las donaciones y «Cuéntanos lo que viste».', _rejilla(comunidad)),
+        ('noticias', '📰 Noticias', 'Auditavisión Noticias, el verificador y el seguimiento de cada caso.', diario),
+        ('investigaciones', '🖼️ Auditoría en imágenes, por tema', 'Las investigaciones. Cada una explica el caso y lleva a sus números y a su evidencia.', investigaciones),
         ('metodologia', '🔎 Cómo verificamos', 'La regla que sigue cada cifra y lo último que cambió.', metodologia),
     ]
     return {
         'archivo': 'indice.html', 'menu': 'Índice general', 'menu_archivo': 'indice.html',
         'icono': '🗂️', 'titulo': 'Índice general', 'lema': 'Todo lo que hay en Auditavisión, en una página',
-        'entrada': ('Aquí está el mapa completo de la plataforma: las investigaciones por tema, los capítulos de Números, '
-                    'cada herramienta con sus módulos, los datos, la obra de consulta y cómo verificamos cada cifra. '
+        'entrada': ('Aquí está el mapa completo de la plataforma, en el orden de sus pestañas: el Auditor Virtual y sus modos; '
+                    'la Enciclopedia, con los capítulos de Números, cada herramienta con sus aplicaciones, los datos y la obra de consulta; '
+                    'Comunidad y Noticias. Al final, las investigaciones por tema y cómo verificamos cada cifra. '
                     'Cada enlace abre su propia página.'),
         'secciones': [{'id': i, 'titulo': t, 'texto': x, 'tarjetas': [], 'bloque': b} for i, t, x, b in secc],
     }
@@ -5061,6 +5568,13 @@ def indice(base, ref):
 # Paginas que dejaron de existir y redirigen a donde se mudo su contenido.
 # Busca y verifica se fusiono con el Modo Inspector el 09-10-2026.
 REDIRECCIONES = {
+    # Las herramientas se mudaron a la Enciclopedia el 29-10-2026 (decisión
+    # del autor): su índice es la quinta tarjeta de Números.
+    'herramientas.html': (NUMEROS_HERR, 'Herramientas', 'Las cuatro herramientas viven ahora en la Enciclopedia: Números › Herramientas del Auditor.'),
+    # El nepotismo fue pagina de Aprende la tarde del 28-10-2026; esa noche
+    # (pedido del autor) paso a ser la septima aplicacion del Modo Inspector.
+    'nepotismo-y-cargos-publicos.html': ('herramienta-inspector-nepotismo.html', 'Nepotismo y cargos públicos',
+                                         'Es ahora una aplicación del Modo Inspector: Nepotismo y parentesco.'),
     # El Pase del Auditor Civico se retiro el 24-10-2026 (decision del autor).
     'pase-del-auditor.html': ('donaciones.html', 'Pase del Auditor Cívico',
                               'El Pase se retiró. Para sostener la plataforma están las donaciones y los Servicios de investigación.'),
@@ -5119,7 +5633,7 @@ REDIRECCIONES = {
     'herramienta-ambiente-basura.html': ('datos-medio-ambiente.html', 'Basura y protección',
                                          'Ahora vive en Datos → Medio ambiente, una página por tema.'),
     INVESTIGACIONES: (MODO_INSPECTOR, 'Grandes investigaciones',
-                      'Desde el 24-10-2026 las Grandes investigaciones son el Modo Inspector: sus seis aplicaciones están en su página.'),
+                      'Desde el 24-10-2026 las Grandes investigaciones son el Modo Inspector: sus aplicaciones están en su página.'),
     # La plataforma Enciclopedia antigua (9 pestañas, con assets/css, js y
     # data) se retiró el 24-10-2026 por decisión del autor: lo que servía ya
     # vive en Auditavisión. Su dirección lleva a la pestaña Enciclopedia; el
@@ -5212,7 +5726,8 @@ def generar(sello=None):
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     import datos_ambiente
-    for extra in [DICCIONARIO, NOTICIAS, GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    import periodistas
+    for extra in [DICCIONARIO, *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

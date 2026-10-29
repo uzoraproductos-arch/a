@@ -33,6 +33,7 @@ import re
 from urllib.parse import quote
 
 import apartados
+import am_basura
 import mo_base
 import mo_pulso
 import mo_sector
@@ -213,6 +214,10 @@ def datos(d, peso):
             malos.append('mandato sin filtro: ' + ape[g['clave']])
         for x in g['obras']:
             MANDATO[x['id']] = ape[g['clave']]
+    mapa_idx = {m['id']: m for m in am_basura.OBRAS_MAPA}
+    edos_amb = [{'a': e['abbr'], 'n': e['name'], 'gasto': e['gasto'], 'r28': e['ramo28'], 'r33': e['ramo33'],
+                 'pc': e['pc'], 'deuda': e['deuda'], 'sem': e['semaforoDeuda'],
+                 'asf': e['asfMontoObservado'], 'aud': e['asfAuditorias']} for e in d.get('estados', [])]
     out = []
     for o in obras:
         oid = o['id']
@@ -242,6 +247,15 @@ def datos(d, peso):
                 malos.append('#' + a)
         sec = sectores.get(o['sector_id']) or {}
         pend = 'obra-' + oid
+        m_amb = mapa_idx.get(oid)
+        amb_info = None
+        if m_amb:
+            amb_info = {
+                'edos': m_amb['edos'], 'multi': m_amb['multi'], 'sede': m_amb['sede'],
+                'eco': m_amb['ecosistema'], 'alerta': m_amb['alerta'],
+                'miaEst': m_amb['miaEst'], 'miaPend': m_amb['miaPend'], 'miaTxt': m_amb['miaTxt'],
+                'mapa': 'datos-ambiente-megaobras.html?e=%s#abMapaObras' % m_amb['edos'][0],
+            }
         out.append({
             'id': oid, 'n': o['nombre'].split(' (')[0], 'nom': o['nombre'], 'ico': o['icono'], 'pres': o['presidente'],
             'per': o['periodo_sexenal'], 'sec': limpio(sec.get('nombre')), 'sico': sec.get('icono', ''), 'est': limpio(o.get('estatus')),
@@ -252,8 +266,10 @@ def datos(d, peso):
             'sid': o['sector_id'], 'er': estado_resultados(o, cuenta.get(oid), r, peso), 'chy': costo_hoy(o, ver, peso),
             'sim': mo_tabla.SECTOR + '?industria=%s&mandato=%s#ms-vivo' % (o['sector_id'], quote(MANDATO[oid])),
             'res': rr, 'asf': limpio((ver or {}).get('hallazgo')) or None, 'fu': fu, 'ente': ente,
+            'amb': amb_info,
             'ir': {'ficha': mo_tabla.SECTOR + '#obra-' + oid, 'cuenta': mo_tabla.CUENTA + '#cuenta-' + oid,
-                   'tabla': mo_tabla.ARCHIVO + '#mt-' + oid},
+                   'tabla': mo_tabla.ARCHIVO + '#mt-' + oid,
+                   'auditoria': 'auditoria-aifa.html' if oid == 'aifa-texcoco' else ('auditoria-' + oid + '.html')},
         })
 
     # Los seis sexenios, cada uno con el estado de cuenta de su presidente.
@@ -306,4 +322,6 @@ def datos(d, peso):
         if ancla not in _anclas(arch):
             malos.append(sims[k])
     return {'obras': out, 'sx': sx, 'tot': tot, 'sims': sims, 'mes': peso['ref']['mes'], 'maquina': 'radar-peso-maquina.html', 'apps': apps, 'pagina': h[0], 'nombre': h[3], 'portales': portales,
-            'pend': 'pendientes.html#tema-megaobras', 'expide': EXPIDE}
+            'pend': 'pendientes.html#tema-megaobras', 'expide': EXPIDE,
+            'mapaAmb': 'datos-ambiente-megaobras.html#abMapaObras',
+            'casosAmb': am_basura.OBRAS_MAPA, 'edosAmb': edos_amb}

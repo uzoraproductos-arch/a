@@ -1,0 +1,1166 @@
+{
+ "nota": "Banco de preguntas de prueba del Auditor (herramientas/prueba_auditor.py). Cada renglón dice adónde debe llevar «Saber más» (ir), qué frases debe traer la respuesta (dice) o si lo correcto es decir que no lo sabe (sin). Si un cambio mueve una respuesta a propósito, se corrige aquí en el mismo commit; si la mueve sin querer, el error está en el cambio. Con «modo», la pregunta se hace en ese modo y «dice» revisa también lo que el modo agrega (la nota del Periodista).",
+ "preguntas": [
+  {
+   "q": "Dame mi estado de cuenta cívico",
+   "ir": "herramienta-calculadora-ticket.html"
+  },
+  {
+   "q": "¿Cuánto debe Jalisco?",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:JAL"
+  },
+  {
+   "q": "Mi estado de cuenta ambiental",
+   "ir": "herramienta-ambiente-ticket.html"
+  },
+  {
+   "q": "Estado de cuenta de AMLO",
+   "ir": "radar-estado-de-cuenta.html?adm=amlo"
+  },
+  {
+   "q": "¿Cuánta lana le llega a Zapopan?",
+   "ir": "herramienta-inspector-entes.html#ente=municipal:14120"
+  },
+  {
+   "q": "Muéstrame el mapa de la deuda de los estados",
+   "ir": "numeros-mapa-del-gasto-federalizado.html"
+  },
+  {
+   "q": "Estado de cuenta de un diputado",
+   "ir": "radar-estado-de-cuenta.html?doc=dip-fed"
+  },
+  {
+   "q": "¿Mi proveedor está en la lista negra del SAT?",
+   "ir": "contratos-publicos.html#cruce"
+  },
+  {
+   "q": "¿Cuánto gana un diputado?",
+   "ir": "herramienta-calculadora-compara.html"
+  },
+  {
+   "q": "¿Quién preside la Suprema Corte?",
+   "ir": "datos-judicial-suprema-corte.html#jud-corte"
+  },
+  {
+   "q": "¿Cuánto se recauda de IVA?",
+   "ir": "numeros-ingreso-iva.html"
+  },
+  {
+   "q": "El reloj de la deuda",
+   "ir": "herramienta-calculadora-reloj.html"
+  },
+  {
+   "q": "¿Cuánto costó el Tren Maya?",
+   "ir": "herramienta-megaobras-sector.html#obra-tren-maya"
+  },
+  {
+   "q": "¿Qué es un pliego de observaciones?",
+   "ir": "glosario.html#Pliego-de-Observaciones"
+  },
+  {
+   "q": "Estado de cuenta de un senador",
+   "ir": "radar-estado-de-cuenta.html?doc=senado"
+  },
+  {
+   "q": "Diagnóstico de Pemex",
+   "ir": "herramienta-inspector-entes.html#ente=federal:pemex"
+  },
+  {
+   "q": "¿Es cierto que Jalisco debe 50 mil millones?",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:JAL",
+   "dice": [
+    "No coincide con el documento"
+   ]
+  },
+  {
+   "q": "¿Quién es Genaro García Luna?",
+   "ir": "noticias-auditavision.html"
+  },
+  {
+   "q": "Estado de cuenta de Jalisco",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:JAL"
+  },
+  {
+   "q": "¿Cuántos diputados hay?",
+   "ir": "datos-legislativo-camaras.html#leg-diputados"
+  },
+  {
+   "q": "¿Cuánto vale hoy el dólar?",
+   "ir": "radar-peso-monedas.html"
+  },
+  {
+   "q": "¿En qué obras invirtió AMLO?",
+   "ir": "herramienta-megaobras-tabla.html#mt-sx-lopez-obrador"
+  },
+  {
+   "q": "¿Cuánto dejó por aclarar la ASF?",
+   "ir": "informes-cuenta-publica.html"
+  },
+  {
+   "q": "Estado de cuenta de Zapopan",
+   "ir": "herramienta-inspector-entes.html#ente=municipal:14120"
+  },
+  {
+   "q": "Expediente de Segalmex",
+   "ir": "expedientes.html#exp-segalmex"
+  },
+  {
+   "q": "¿Qué es un amparo?",
+   "ir": "glosario.html"
+  },
+  {
+   "q": "¿Cuánta basura se genera en México?",
+   "ir": "datos-ambiente-basura.html"
+  },
+  {
+   "q": "¿Qué estados de cuenta hay?",
+   "ir": "radar-estado-de-cuenta.html"
+  },
+  {
+   "q": "¿Qué estado debe más?",
+   "ir": "numeros-mapa-del-gasto-federalizado.html"
+  },
+  {
+   "q": "¿Qué megaobra tiene más sobrecosto?",
+   "ir": "herramienta-megaobras-sector.html"
+  },
+  {
+   "q": "¿Cuánto gana un ministro de la Corte?",
+   "ir": "herramienta-calculadora-compara.html"
+  },
+  {
+   "q": "Estado de cuenta de la Suprema Corte",
+   "ir": "radar-estado-de-cuenta.html?doc=scjn",
+   "dice": [
+    "estado de cuenta de la Suprema Corte"
+   ]
+  },
+  {
+   "q": "Contrasta una nota",
+   "ir": "herramienta-inspector-nota.html"
+  },
+  {
+   "q": "Noticias de Elba Esther Gordillo",
+   "ir": "noticias-auditavision.html#col-gordillo-la-sentencia-reservada"
+  },
+  {
+   "q": "¿En qué se gasta el presupuesto?",
+   "ir": "numeros-gasto-simulador-contable.html"
+  },
+  {
+   "q": "¿Cuándo es la próxima elección judicial?",
+   "ir": "datos-judicial-eleccion.html#jud-eleccion2028"
+  },
+  {
+   "q": "¿Qué es el Ramo 33?",
+   "ir": "glosario.html#Ramo-33"
+  },
+  {
+   "q": "Estado de cuenta de los presidentes",
+   "ir": "radar-estado-de-cuenta.html"
+  },
+  {
+   "q": "¿Cuánto pierde Dos Bocas al año?",
+   "ir": "herramienta-megaobras-sector.html#obra-dos-bocas"
+  },
+  {
+   "q": "¿Cuánto valen 1,000 pesos de 2000 hoy?",
+   "ir": "radar-peso-maquina.html"
+  },
+  {
+   "q": "Compara Nuevo León con Jalisco",
+   "ir": "numeros-mapa-del-gasto-federalizado.html"
+  },
+  {
+   "q": "Verifica un estado de cuenta",
+   "ir": "herramienta-inspector-verifica.html"
+  },
+  {
+   "q": "¿Cuánto gana la presidenta?",
+   "ir": "herramienta-calculadora-compara.html"
+  },
+  {
+   "q": "¿Cuánto se recauda de ISR?",
+   "ir": "numeros-ingreso-isr.html"
+  },
+  {
+   "q": "¿Cuántos senadores hay?",
+   "ir": "datos-legislativo-camaras.html#leg-senado"
+  },
+  {
+   "q": "¿Cuánto cuesta el daño ambiental?",
+   "ir": "datos-ambiente-desglose.html"
+  },
+  {
+   "q": "Compara el AIFA con el Tren Maya",
+   "ir": "herramienta-megaobras-sector.html"
+  },
+  {
+   "q": "El reloj del daño ambiental",
+   "ir": "herramienta-ambiente-reloj.html"
+  },
+  {
+   "q": "¿Cuánto es el 16 % de 2,500 millones?",
+   "dice": [
+    "$400 millones"
+   ]
+  },
+  {
+   "q": "¿Qué puedo investigar en el Modo Inspector?",
+   "ir": "herramienta-inspector.html"
+  },
+  {
+   "q": "¿Qué municipio recibe más?",
+   "ir": "numeros-baja-al-territorio.html"
+  },
+  {
+   "q": "¿Cuánto le cuesta al país la Suprema Corte?",
+   "ir": "numeros-lo-que-cuestan-los-poderes.html"
+  },
+  {
+   "q": "¿Cuánta deuda dejó AMLO?",
+   "ir": "radar-estado-de-cuenta.html?adm=amlo"
+  },
+  {
+   "q": "¿Cuándo es la elección de 2027?",
+   "ir": "datos-legislativo-elecciones.html#leg-elecciones"
+  },
+  {
+   "q": "¿Cuánto han costado las megaobras?",
+   "ir": "herramienta-megaobras.html"
+  },
+  {
+   "q": "¿Cuántos circuitos judiciales hay?",
+   "ir": "datos-judicial-estructura.html#jud-circuitos"
+  },
+  {
+   "q": "¿Qué es el Paquete Económico 2027?",
+   "ir": "glosario.html#Paquete-Economico"
+  },
+  {
+   "q": "Quiero pedir una investigación",
+   "ir": "servicios.html"
+  },
+  {
+   "q": "¿Cuánto gana un senador?",
+   "ir": "herramienta-calculadora-compara.html"
+  },
+  {
+   "q": "¿Cuánto nos cuesta el FOBAPROA?",
+   "ir": "herramienta-megaobras-sector.html#obra-fobaproa"
+  },
+  {
+   "q": "¿Cuántos funcionarios ha sancionado la ASF?",
+   "ir": "informes-semestral-asf.html#sem-procedimientos",
+   "dice": [
+    "no lo dice"
+   ]
+  },
+  {
+   "q": "¿Cuánto dinero ha recuperado la ASF?",
+   "ir": "informes-semestral-asf.html#sem-recuperaciones"
+  },
+  {
+   "q": "¿Cómo van las denuncias penales de la ASF?",
+   "ir": "informes-semestral-asf.html#sem-denuncias"
+  },
+  {
+   "q": "¿Qué no dice el informe semestral?",
+   "ir": "informes-semestral-asf.html#sem-ciegos"
+  },
+  {
+   "q": "¿Qué es el informe Documentar para sancionar?",
+   "ir": "informes-documentar-para-sancionar.html#san-informe"
+  },
+  {
+   "q": "¿Qué es un PRAS?",
+   "ir": "glosario.html#Promocion-de-Responsabilidad-Administrativa-Sancionatoria"
+  },
+  {
+   "q": "¿Qué es el TFJA?",
+   "ir": "herramienta-inspector-asf-autoridades.html#fz-tfja"
+  },
+  {
+   "q": "¿Qué es la Cuenta Pública?",
+   "ir": "glosario.html#Cuenta-Publica"
+  },
+  {
+   "q": "¿Qué es el SHRFSP?",
+   "ir": "glosario.html#Deuda-Publica-y-SHRFSP"
+  },
+  {
+   "q": "¿Qué es el IEPS?",
+   "ir": "glosario.html#IEPS"
+  },
+  {
+   "q": "¿Cuánto gana un magistrado?",
+   "ir": "herramienta-calculadora-compara.html"
+  },
+  {
+   "q": "¿Cuánto gana un diputado local de Jalisco?",
+   "ir": "herramienta-calculadora-compara.html"
+  },
+  {
+   "q": "¿Cuántos ministros tiene la Suprema Corte?",
+   "ir": "datos-judicial-suprema-corte.html#jud-corte",
+   "dice": [
+    "9 ministras y ministros"
+   ]
+  },
+  {
+   "q": "¿Qué es la reforma judicial?",
+   "ir": "datos-judicial-estructura.html#jud-estructura"
+  },
+  {
+   "q": "¿Cuántos municipios hay en México?",
+   "ir": "numeros-los-municipios.html"
+  },
+  {
+   "q": "¿Cuánto debe Nuevo León?",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:NL"
+  },
+  {
+   "q": "¿Cuánto debe la Ciudad de México?",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:CDMX"
+  },
+  {
+   "q": "¿Cuánto debe Veracruz?",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:VER"
+  },
+  {
+   "q": "Estado de cuenta de Guadalajara",
+   "ir": "herramienta-inspector-entes.html#ente=municipal:14039"
+  },
+  {
+   "q": "Estado de cuenta de Monterrey",
+   "ir": "herramienta-inspector-entes.html#ente=municipal:19039"
+  },
+  {
+   "q": "Salud financiera de Chiapas",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:CHIS"
+  },
+  {
+   "q": "¿Cuánto costó el AIFA?",
+   "ir": "herramienta-megaobras-sector.html#obra-aifa-texcoco"
+  },
+  {
+   "q": "¿Cuánto costó Dos Bocas?",
+   "ir": "herramienta-megaobras-sector.html#obra-dos-bocas"
+  },
+  {
+   "q": "¿Cuánto costó el Tren Interoceánico?",
+   "ir": "herramienta-megaobras.html",
+   "dice": [
+    "no está entre las que sigue"
+   ]
+  },
+  {
+   "q": "¿Qué pasó con Segalmex?",
+   "ir": "expedientes.html#exp-segalmex"
+  },
+  {
+   "q": "¿Qué es el huachicol fiscal?",
+   "ir": "glosario.html#Huachicol-Fiscal"
+  },
+  {
+   "q": "¿Qué es el Ramo 28?",
+   "ir": "glosario.html#Ramo-28"
+  },
+  {
+   "q": "¿Cuánto se va a pagar de intereses de la deuda?",
+   "ir": "herramienta-inspector-asf-catalogo.html"
+  },
+  {
+   "q": "¿Cuánto es la deuda pública?",
+   "ir": "numeros-ramos-y-dependencias.html"
+  },
+  {
+   "q": "Gano 15 mil al mes, ¿cuánto me retienen?",
+   "ir": "herramienta-calculadora-ticket-retienen.html?m=15000&p=mes&n=bruto"
+  },
+  {
+   "q": "La calculadora",
+   "ir": "herramienta-calculadora.html"
+  },
+  {
+   "q": "Abre la calculadora cívica",
+   "ir": "herramienta-calculadora.html"
+  },
+  {
+   "q": "Costo ambiental",
+   "ir": "herramienta-ambiente.html"
+  },
+  {
+   "q": "Lista negra del SAT",
+   "ir": "herramienta-inspector-efos.html"
+  },
+  {
+   "q": "¿Qué es un EFOS?",
+   "ir": "herramienta-inspector-efos.html"
+  },
+  {
+   "q": "Contratos de Grupo Carso",
+   "ir": "contratos-publicos.html?q=grupo%20carso"
+  },
+  {
+   "q": "¿Quién es Andrés Manuel López Obrador?",
+   "ir": "noticias-auditavision.html"
+  },
+  {
+   "q": "¿Qué es el FOBAPROA?",
+   "ir": "glosario.html#Rescate-Bancario-FOBAPROA-e-IPAB"
+  },
+  {
+   "q": "¿Qué falta por transparentar?",
+   "ir": "pendientes.html"
+  },
+  {
+   "q": "Registro de pendientes",
+   "ir": "pendientes.html"
+  },
+  {
+   "q": "¿Qué es el glosario?",
+   "ir": "glosario.html#terminos-tit"
+  },
+  {
+   "q": "Referencias de la plataforma",
+   "ir": "fuentes-oficiales.html"
+  },
+  {
+   "q": "Fe de erratas",
+   "ir": "comunidad-erratas.html"
+  },
+  {
+   "q": "Aviso de privacidad",
+   "ir": "aviso-de-privacidad.html"
+  },
+  {
+   "q": "Quiero donar",
+   "ir": "donaciones.html"
+  },
+  {
+   "q": "Cuéntanos lo que viste",
+   "ir": "comunidad.html"
+  },
+  {
+   "q": "¿Qué es Auditavisión?",
+   "ir": "index.html"
+  },
+  {
+   "q": "¿Cuáles son los pilares de Auditavisión?",
+   "ir": "pilares.html"
+  },
+  {
+   "q": "¿Cuánto cuesta el INE?",
+   "ir": "herramienta-inspector-entes.html#ente=federal:ine"
+  },
+  {
+   "q": "¿Qué es el Paquete Económico?",
+   "ir": "glosario.html#Paquete-Economico"
+  },
+  {
+   "q": "Dictamen cívico",
+   "ir": "herramienta-inspector-dictamen.html"
+  },
+  {
+   "q": "hola",
+   "dice": [
+    "¡Hola!"
+   ]
+  },
+  {
+   "q": "asdfghjkl",
+   "sin": true
+  },
+  {
+   "q": "¿Quién ganará el mundial?",
+   "sin": true
+  },
+  {
+   "q": "¿Es cierto que prestaron 54 hectáreas en Guaymas?",
+   "ir": "noticias-auditavision.html#col-guaymas-comodato-amigo-gnl"
+  },
+  {
+   "q": "¿Es cierto que el Tren Maya costó 500 mil millones?",
+   "ir": "herramienta-megaobras-sector.html#obra-tren-maya",
+   "dice": [
+    "Coincide con el documento"
+   ]
+  },
+  {
+   "q": "Dicen que Zapopan recibe mucho dinero",
+   "ir": "herramienta-inspector-entes.html#ente=municipal:14120"
+  },
+  {
+   "q": "¿Es cierto que el Tren Maya costó 100 mil millones?",
+   "ir": "herramienta-megaobras-sector.html#obra-tren-maya",
+   "dice": [
+    "No coincide con el documento"
+   ]
+  },
+  {
+   "q": "¿Es cierto que el Tren Maya tuvo un sobrecosto de 200 %?",
+   "ir": "herramienta-megaobras-sector.html#obra-tren-maya"
+  },
+  {
+   "q": "¿Es cierto que Dos Bocas costó 18 mil millones de dólares?",
+   "ir": "herramienta-megaobras-sector.html#obra-dos-bocas",
+   "dice": [
+    "No lo puedo cotejar en dólares"
+   ]
+  },
+  {
+   "q": "¿Es cierto que el Tren Maya tendrá 17 mil millones en 2027?",
+   "ir": "numeros-paquete-2027-gasto.html",
+   "dice": [
+    "Coincide con el documento"
+   ]
+  },
+  {
+   "q": "¿Es cierto que el Tren Maya contamina?",
+   "ir": "pendientes.html#cuenta-tren-maya"
+  },
+  {
+   "q": "¿Cuánto cuesta el Tren Interurbano México-Toluca?",
+   "ir": "herramienta-megaobras-sector.html#obra-tren-toluca"
+  },
+  {
+   "q": "¿Cuánto propone el Paquete 2027 para el corredor interoceánico?",
+   "ir": "numeros-paquete-2027-gasto.html"
+  },
+  {
+   "q": "¿Cuánto costó el aeropuerto de Texcoco?",
+   "ir": "herramienta-megaobras-sector.html#obra-aifa-texcoco"
+  },
+  {
+   "q": "¿Cuánto propone el Paquete 2027 para el Tren Maya?",
+   "ir": "numeros-paquete-2027-gasto.html"
+  },
+  {
+   "q": "¿Cuánto propone el Paquete 2027 para el Istmo de Tehuantepec?",
+   "ir": "numeros-paquete-2027-gasto.html"
+  },
+  {
+   "q": "¿Cuánto propone el Paquete 2027 para el Interoceánico?",
+   "ir": "numeros-paquete-2027-gasto.html"
+  },
+  {
+   "q": "¿Cómo puedo apoyar a Auditavisión?",
+   "ir": "donaciones.html"
+  },
+  {
+   "q": "¿Qué es el dictamen cívico independiente?",
+   "ir": "herramienta-inspector-dictamen.html"
+  },
+  {
+   "q": "¿Qué es la LGRA?",
+   "ir": "fuentes-oficiales.html#ref-lgra"
+  },
+  {
+   "q": "¿Cuánto gana un juez?",
+   "ir": "herramienta-calculadora-compara.html"
+  },
+  {
+   "q": "¿Cuánto gana un ministro?",
+   "ir": "herramienta-calculadora-compara.html"
+  },
+  {
+   "q": "Mapa ambiental",
+   "ir": "datos-ambiente-megaobras.html#abMapaObras"
+  },
+  {
+   "q": "¿Cuánto recibe Oaxaca?",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:OAX"
+  },
+  {
+   "q": "¿Qué estado depende más de la Federación?",
+   "ir": "numeros-mapa-del-gasto-federalizado.html"
+  },
+  {
+   "q": "¿Cuánto cuesta la pensión de adultos mayores?",
+   "ir": "numeros-paquete-2027-gasto.html"
+  },
+  {
+   "q": "Estado de cuenta de Peña Nieto",
+   "ir": "radar-estado-de-cuenta.html?adm=epn"
+  },
+  {
+   "q": "¿Cuánta deuda dejó Calderón?",
+   "ir": "radar-estado-de-cuenta.html?adm=calderon"
+  },
+  {
+   "q": "Contratos de Pemex",
+   "ir": "contratos-publicos.html?q=PTI151101TE5"
+  },
+  {
+   "q": "¿Cuánto debe Pemex?",
+   "ir": "pendientes.html#pemex-deuda",
+   "dice": [
+    "todavía no lo tengo con documento"
+   ]
+  },
+  {
+   "q": "Inversión y Megaobras",
+   "ir": "herramienta-megaobras.html"
+  },
+  {
+   "q": "Modo Inspector",
+   "ir": "herramienta-inspector.html"
+  },
+  {
+   "q": "¿Qué es un plurinominal?",
+   "ir": "datos-legislativo-camaras.html#leg-pluris"
+  },
+  {
+   "q": "¿Cuándo empieza el periodo de sesiones?",
+   "ir": "datos-legislativo-calendario.html#leg-sesiones"
+  },
+  {
+   "q": "¿Cuántos congresos locales hay?",
+   "ir": "datos-legislativo-estados.html#leg-locales"
+  },
+  {
+   "q": "¿Cuál es la deuda de Pemex?",
+   "ir": "pendientes.html#pemex-deuda",
+   "dice": [
+    "todavía no lo tengo con documento"
+   ]
+  },
+  {
+   "q": "¿Cuánto paga Pemex de intereses?",
+   "ir": "numeros-egreso-costo-financiero.html"
+  },
+  {
+   "q": "¿Cuánto se paga de intereses de la deuda?",
+   "ir": "herramienta-inspector-asf-catalogo.html"
+  },
+  {
+   "q": "Derecho de réplica",
+   "ir": "derecho-de-replica.html"
+  },
+  {
+   "q": "¿Cómo pido una réplica?",
+   "ir": "derecho-de-replica.html"
+  },
+  {
+   "q": "Me mencionaron en una columna y es falso",
+   "ir": "derecho-de-replica.html"
+  },
+  {
+   "q": "Quiero corregir lo que dicen de mí",
+   "ir": "derecho-de-replica.html"
+  },
+  {
+   "q": "¿Qué es el derecho de réplica?",
+   "ir": "glosario.html#Derecho-de-replica"
+  },
+  {
+   "q": "¿Qué megaobras hay en Sonora?",
+   "ir": "datos-ambiente-megaobras.html?e=SON#abMapaObras",
+   "dice": [
+    "Inversión privada"
+   ],
+   "no_dice": [
+    "3,977.5"
+   ]
+  },
+  {
+   "q": "Mapa ambiental de megaobras por estado",
+   "ir": "datos-ambiente-megaobras.html#abMapaObras",
+   "dice": [
+    "Gasto público registrado",
+    "$2,890.8 mdp"
+   ]
+  },
+  {
+   "q": "¿Cuánto costó la terminal de gas de Guaymas?",
+   "ir": "noticias-auditavision.html#col-guaymas-comodato-amigo-gnl",
+   "dice": [
+    "Es inversión privada, no gasto público"
+   ]
+  },
+  {
+   "q": "¿Investigarán a Lorenzo Córdova?",
+   "ir": "noticias-auditavision.html#col-ine-contratos-desde-cordova"
+  },
+  {
+   "q": "¿Es cierto que la UIF congeló cuentas de contratistas del INE?",
+   "ir": "noticias-auditavision.html#col-ine-contratos-desde-cordova"
+  },
+  {
+   "q": "¿Cuánto rezago tiene el Poder Judicial de Jalisco?",
+   "ir": "datos-judicial-gestion.html#jud-gestion_estados",
+   "dice": [
+    "64,628",
+    "40,431"
+   ]
+  },
+  {
+   "q": "¿Cuánto rezago tienen los poderes judiciales de los estados?",
+   "ir": "datos-judicial-gestion.html#jud-gestion_estados",
+   "dice": [
+    "2,205,864"
+   ]
+  },
+  {
+   "q": "¿Cuánto rezago penal hay?",
+   "ir": "datos-judicial-gestion.html#jud-rezago",
+   "dice": [
+    "503,937"
+   ]
+  },
+  {
+   "q": "¿Cuántos asuntos resuelven los juzgados federales?",
+   "ir": "datos-judicial-gestion.html#jud-gestion",
+   "dice": [
+    "1,859,221"
+   ]
+  },
+  {
+   "q": "¿Cuánto tarda la Suprema Corte en resolver?",
+   "ir": "datos-judicial-gestion.html#jud-tiempos",
+   "dice": [
+    "522 días"
+   ]
+  },
+  {
+   "q": "¿Cuánto tarda una audiencia en un juzgado?",
+   "ir": "datos-judicial-gestion.html#jud-tiempos"
+  },
+  {
+   "q": "¿Cuántas consultas dio el IMSS en 2025?",
+   "ir": "datos-salud-imss.html#sal-imss_servicios",
+   "dice": [
+    "158,037,603"
+   ]
+  },
+  {
+   "q": "¿Es cierto que el IMSS hizo 1.78 millones de cirugías?",
+   "ir": "datos-salud-imss.html#sal-imss_cotejo",
+   "dice": [
+    "2,216,220"
+   ]
+  },
+  {
+   "q": "¿Cuántos médicos tiene el IMSS?",
+   "ir": "datos-salud-imss.html#sal-imss_recursos",
+   "dice": [
+    "113,643"
+   ]
+  },
+  {
+   "q": "¿Cuánto gasta el IMSS en salud?",
+   "ir": "datos-salud-imss.html#sal-imss_dinero",
+   "dice": [
+    "689,147.8"
+   ]
+  },
+  {
+   "q": "¿Qué pasó con el Seguro Popular?",
+   "ir": "datos-salud-sistema.html#sal-transicion"
+  },
+  {
+   "q": "¿Cuántas consultas da el IMSS-Bienestar?",
+   "ir": "datos-salud-sistema.html#sal-imss_bienestar"
+  },
+  {
+   "q": "¿Cuántas consultas da el ISSSTE?",
+   "ir": "datos-salud-sistema.html#sal-issste"
+  },
+  {
+   "q": "¿Cuántas denuncias resuelve la PROFEPA?",
+   "ir": "datos-justicia-ambiental-denuncias.html#amg-denuncias"
+  },
+  {
+   "q": "¿Cuánto tarda la PROFEPA en atender una denuncia?",
+   "ir": "datos-justicia-ambiental-denuncias.html#amg-plazos"
+  },
+  {
+   "q": "¿Cuánto cuesta la PROFEPA?",
+   "ir": "datos-justicia-ambiental-denuncias.html#amg-dinero"
+  },
+  {
+   "q": "¿Cuánto rezago tiene la PROFEPA?",
+   "ir": "datos-justicia-ambiental-rezago.html#amg-rezago"
+  },
+  {
+   "q": "¿Cuánto multa la PROFEPA?",
+   "ir": "datos-justicia-ambiental-rezago.html#amg-multas"
+  },
+  {
+   "q": "¿Cuántas denuncias presentó la PROFEPA ante la FGR?",
+   "ir": "datos-justicia-ambiental-rezago.html#amg-multas"
+  },
+  {
+   "q": "¿Es cierto que la PROFEPA resolvió el 99.5 % del rezago?",
+   "ir": "datos-justicia-ambiental-rezago.html#amg-cotejo"
+  },
+  {
+   "q": "¿Cuánto presupuesto tiene la PROFEPA?",
+   "ir": "datos-ambiente-presupuesto.html"
+  },
+  {
+   "q": "¿Es cierto que el órgano interno de control del INE renta plazas?",
+   "ir": "noticias-auditavision.html#col-ine-oic-auditorias-consejerias"
+  },
+  {
+   "q": "¿El órgano interno de control puede auditar a los consejeros del INE?",
+   "ir": "noticias-auditavision.html#col-ine-oic-auditorias-consejerias"
+  },
+  {
+   "q": "¿Quién es Víctor Hugo Carvente?",
+   "ir": "noticias-auditavision.html#col-ine-oic-auditorias-consejerias"
+  },
+  {
+   "q": "¿Cuánta confianza hay en el INE?",
+   "ir": "noticias-auditavision.html#col-ine-oic-auditorias-consejerias"
+  },
+  {
+   "q": "¿El ISSSTESON pagó pensiones a muertos?",
+   "ir": "noticias-auditavision.html#col-isssteson-oxigeno-pensiones-fallecidos",
+   "dice": [
+    "$373,438"
+   ]
+  },
+  {
+   "q": "¿Dónde está el dinero de las pensiones pagadas a personas fallecidas en Sonora?",
+   "ir": "noticias-auditavision.html#col-isssteson-oxigeno-pensiones-fallecidos"
+  },
+  {
+   "q": "oxígeno a domicilio a un paciente fallecido",
+   "ir": "noticias-auditavision.html#col-isssteson-oxigeno-pensiones-fallecidos",
+   "dice": [
+    "$158,400"
+   ]
+  },
+  {
+   "q": "Biosistemas y Seguridad Privada",
+   "ir": "noticias-auditavision.html#col-isssteson-oxigeno-pensiones-fallecidos"
+  },
+  {
+   "q": "¿Es cierto que con el Seguro Popular se atendieron más de 51 millones de mexicanos?",
+   "ir": "noticias-auditavision.html#col-seguro-popular-51-millones",
+   "dice": [
+    "53.5 millones"
+   ]
+  },
+  {
+   "q": "¿Cuánta gente se quedó sin acceso a servicios de salud?",
+   "ir": "noticias-auditavision.html#col-seguro-popular-51-millones",
+   "dice": [
+    "44.5 millones"
+   ]
+  },
+  {
+   "q": "¿Por qué quitaron el Seguro Popular?",
+   "ir": "noticias-auditavision.html#col-seguro-popular-51-millones"
+  },
+  {
+   "q": "¿A cuántas personas llegó a cubrir el Seguro Popular, cuántas se quedaron sin acceso a la salud después y qué le observó la ASF?",
+   "ir": "auditoria-seguro-popular.html",
+   "dice": [
+    "53.5 millones"
+   ]
+  },
+  {
+   "q": "Muéstrame la auditoría en imágenes del Seguro Popular",
+   "ir": "auditoria-seguro-popular.html"
+  },
+  {
+   "q": "¿Qué le observó la ASF al Seguro Popular?",
+   "ir": "auditoria-seguro-popular.html",
+   "dice": [
+    "928.7"
+   ]
+  },
+  {
+   "q": "¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?",
+   "ir": "noticias-auditavision.html#col-seguro-popular-51-millones"
+  },
+  {
+   "q": "¿Cuánta gente se quedó sin acceso a la salud?",
+   "ir": "noticias-auditavision.html#col-seguro-popular-51-millones"
+  },
+  {
+   "q": "¿Es cierto que el ISSSTESON pagó pensiones a personas fallecidas?",
+   "ir": "noticias-auditavision.html#col-isssteson-oxigeno-pensiones-fallecidos"
+  },
+  {
+   "q": "¿Auditarán las oficinas de los consejeros del INE?",
+   "ir": "noticias-auditavision.html#col-ine-oic-auditorias-consejerias"
+  },
+  {
+   "q": "¿Cuántas consultas da el IMSS?",
+   "ir": "datos-salud-imss.html#sal-imss_servicios"
+  },
+  {
+   "q": "¿Cuántos asuntos resuelve el Poder Judicial?",
+   "ir": "datos-judicial-gestion.html#jud-gestion"
+  },
+  {
+   "q": "¿Cuántas denuncias atiende la PROFEPA?",
+   "ir": "datos-justicia-ambiental-denuncias.html#amg-denuncias"
+  },
+  {
+   "q": "¿Qué pasó con la Modalidad 40 del IMSS?",
+   "ir": "noticias-auditavision.html#col-imss-modalidad-40-gestores",
+   "dice": [
+    "22 de octubre"
+   ]
+  },
+  {
+   "q": "¿Es cierto que la Modalidad 40 tenía un fraude de gestores?",
+   "ir": "noticias-auditavision.html#col-imss-modalidad-40-gestores"
+  },
+  {
+   "q": "¿Qué es la Modalidad 40?",
+   "ir": "glosario.html#Continuacion-Voluntaria"
+  },
+  {
+   "q": "Zoé Robledo",
+   "ir": "noticias-auditavision.html#col-imss-modalidad-40-gestores"
+  },
+  {
+   "q": "noticias de hoy",
+   "ir": "noticias-auditavision.html#al-momento"
+  },
+  {
+   "q": "¿Qué está pasando?",
+   "ir": "noticias-auditavision.html#al-momento"
+  },
+  {
+   "q": "¿Qué es el nepotismo?",
+   "ir": "herramienta-inspector-nepotismo.html"
+  },
+  {
+   "q": "¿Mi cuñado puede trabajar en mi oficina?",
+   "ir": "herramienta-inspector-nepotismo.html?rel=cunados#calculadora",
+   "dice": [
+    "segundo grado"
+   ]
+  },
+  {
+   "q": "¿Qué es el nepotismo electoral?",
+   "ir": "herramienta-inspector-nepotismo.html#tres-leyes"
+  },
+  {
+   "q": "¿Cómo investigo si un funcionario contrató a su familia?",
+   "ir": "herramienta-inspector-nepotismo.html#como-se-investiga"
+  },
+  {
+   "q": "¿Hasta qué grado de parentesco es nepotismo?",
+   "ir": "herramienta-inspector-nepotismo.html"
+  },
+  {
+   "q": "¿Mi esposa puede ser candidata a mi cargo?",
+   "ir": "herramienta-inspector-nepotismo.html#tres-leyes"
+  },
+  {
+   "q": "¿Por qué un apellido igual no prueba nada?",
+   "ir": "herramienta-inspector-nepotismo.html#puntos-ciegos"
+  },
+  {
+   "q": "quiero proponer una nota",
+   "ir": "noticias-verifica.html#propon"
+  },
+  {
+   "q": "réplicas y posturas",
+   "ir": "noticias-auditavision.html#replica"
+  },
+  {
+   "q": "¿El concuño cuenta como familia?",
+   "ir": "herramienta-inspector-nepotismo.html?rel=concunos#calculadora",
+   "dice": [
+    "no hay parentesco"
+   ]
+  },
+  {
+   "q": "verificar una noticia",
+   "ir": "herramienta-inspector-nota.html"
+  },
+  {
+   "q": "¿Cuándo se aprueba el presupuesto de egresos?",
+   "ir": "noticias-seguimiento.html#agenda"
+  },
+  {
+   "q": "Agenda del erario",
+   "ir": "noticias-seguimiento.html#agenda"
+  },
+  {
+   "q": "¿Qué dicen hoy los periódicos?",
+   "ir": "noticias-verifica.html#mesa"
+  },
+  {
+   "q": "Quiero pedir seguimiento a un caso",
+   "ir": "noticias-seguimiento.html#seguir"
+  },
+  {
+   "q": "¿Cómo sigo un caso?",
+   "ir": "noticias-seguimiento.html#seguimientos"
+  },
+  {
+   "q": "¿Qué pasó con Dos Bocas?",
+   "modo": "periodista",
+   "ir": "herramienta-megaobras-sector.html#obra-dos-bocas",
+   "dice": [
+    "La nota del Periodista",
+    "La ASF lo dejó por aclarar",
+    "Le toca publicarlo a"
+   ]
+  },
+  {
+   "q": "¿Qué es el huachicol fiscal?",
+   "modo": "periodista",
+   "ir": "glosario.html#Huachicol-Fiscal",
+   "dice": [
+    "Lo investigamos a fondo",
+    "Falta el documento"
+   ]
+  },
+  {
+   "q": "¿Qué es el Ramo 33?",
+   "modo": "periodista",
+   "dice": [
+    "Lo investigamos a fondo",
+    "Ramo 33: el dinero para estados y municipios"
+   ]
+  },
+  {
+   "q": "Modalidad 40",
+   "modo": "periodista",
+   "dice": [
+    "El ruido: lo que circula y lo que consta",
+    "Consta, con matices",
+    "Lo que sigue"
+   ]
+  },
+  {
+   "q": "Segalmex",
+   "modo": "periodista",
+   "dice": [
+    "La ASF lo dejó por aclarar",
+    "una acusación no es una condena"
+   ]
+  },
+  {
+   "q": "Tren Maya",
+   "modo": "periodista",
+   "dice": [
+    "Falta el documento",
+    "Le toca publicarlo a"
+   ],
+   "no_dice": [
+    "Le toca publicarlo a Falta de la plataforma"
+   ]
+  },
+  {
+   "q": "Periodismo en riesgo",
+   "modo": "periodista",
+   "ir": "periodismo-en-riesgo.html",
+   "dice": [
+    "Aún no lo integramos",
+    "FEADLE"
+   ]
+  },
+  {
+   "q": "¿Quién agrede a los periodistas?",
+   "ir": "periodismo-en-riesgo.html#pr-agresores",
+   "dice": [
+    "40.7 %",
+    "servidoras o servidores públicos"
+   ]
+  },
+  {
+   "q": "¿Cuántos periodistas protege el Mecanismo?",
+   "ir": "periodismo-en-riesgo.html#pr-hoy",
+   "dice": [
+    "690"
+   ]
+  },
+  {
+   "q": "¿Mi cuñado puede trabajar en mi oficina?",
+   "modo": "periodista",
+   "dice": [
+    "Los puntos ciegos",
+    "un apellido igual nunca es prueba de parentesco"
+   ],
+   "no_dice": [
+    "Un periódico logró"
+   ]
+  },
+  {
+   "q": "El IMSS acota la Modalidad 40: lo que dice el Diario Oficial y lo que falta probar",
+   "modo": "periodista",
+   "ir": "noticias-auditavision.html#col-imss-modalidad-40-gestores",
+   "dice": [
+    "La nota del Periodista"
+   ]
+  },
+  {
+   "q": "Elba Esther Gordillo: cinco años en proceso y una sentencia que se quiso reservar",
+   "modo": "periodista",
+   "ir": "noticias-auditavision.html#col-gordillo-la-sentencia-reservada",
+   "dice": [
+    "La nota del Periodista"
+   ]
+  },
+  {
+   "q": "«Con el Seguro Popular se atendieron más de 51 millones; ahorita nada». Lo que dicen el INEGI y la ASF",
+   "modo": "periodista",
+   "ir": "noticias-auditavision.html#col-seguro-popular-51-millones",
+   "dice": [
+    "La nota del Periodista"
+   ]
+  },
+  {
+   "q": "«Casa Blanca»: el expediente que, según la Función Pública, fue sustituido por una copia",
+   "modo": "periodista",
+   "ir": "noticias-auditavision.html#col-casa-blanca-expediente",
+   "dice": [
+    "La nota del Periodista"
+   ]
+  },
+  {
+   "q": "ISSSTESON: oxígeno pagado a un paciente fallecido y pensiones a personas muertas. ¿Dónde está el dinero?",
+   "modo": "periodista",
+   "ir": "noticias-auditavision.html#col-isssteson-oxigeno-pensiones-fallecidos",
+   "dice": [
+    "La nota del Periodista"
+   ]
+  },
+  {
+   "q": "Emilio Lozoya y la planta que Pemex compró tras 14 años sin operar",
+   "modo": "periodista",
+   "ir": "noticias-auditavision.html#col-lozoya-agronitrogenados-odebrecht",
+   "dice": [
+    "La nota del Periodista"
+   ]
+  },
+  {
+   "q": "¿El Senado ya aprobó la Ley de Ingresos 2027?",
+   "ir": "noticias-auditavision.html#col-senado-ley-de-ingresos-2027"
+  },
+  {
+   "q": "¿Es cierto que la Ley de Ingresos 2027 recauda 10.6 billones?",
+   "ir": "noticias-auditavision.html#col-senado-ley-de-ingresos-2027"
+  },
+  {
+   "q": "¿Cuánto pagarán los turistas extranjeros por entrar a México en 2027?",
+   "modo": "periodista",
+   "ir": "noticias-auditavision.html#col-senado-ley-de-ingresos-2027"
+  },
+  {
+   "q": "¿Es cierto que Jalisco ocupa el lugar 24 de 32 en gasto federal por habitante?",
+   "ir": "noticias-auditavision.html#col-jalisco-gasto-federal-pef-2027"
+  },
+  {
+   "q": "¿Es cierto que la inversión federal en Jalisco cayó 83 %?",
+   "ir": "noticias-auditavision.html#col-jalisco-gasto-federal-pef-2027"
+  },
+  {
+   "q": "¿Qué pide Laura Haro para Jalisco en el presupuesto 2027?",
+   "modo": "periodista",
+   "ir": "noticias-auditavision.html#col-jalisco-gasto-federal-pef-2027"
+  }
+ ]
+}

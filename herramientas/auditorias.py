@@ -55,15 +55,72 @@ AUDITORIAS = [
      'Ilustración de pipas de combustible frente a una aduana portuaria al atardecer',
      '⛽ Evasión en combustibles · IEPS, aduanas y SAT', 'Huachicol fiscal: el impuesto que no entra',
      '¿Cuánto IEPS de gasolinas y diésel está en juego, y qué se sabe de lo que se evade?'),
+    ('ine-contratos', 'assets/auditor/img/showcase_ine_contratos.jpg', 'Ilustración provisional',
+     'Ilustración del edificio del Instituto Nacional Electoral, urnas y carpetas de licitación bajo revisión',
+     '🗳️ Órgano autónomo · Ramo 22, ASF y licitaciones', 'El INE: su presupuesto, lo auditado y los contratos en revisión',
+     '¿Cuánto presupuesto maneja el INE, qué le observó la ASF y qué consta de los contratos bajo revisión?'),
+    ('guaymas-gas', 'assets/auditor/img/showcase_guaymas_gas.jpg', 'Ilustración provisional',
+     'Ilustración de tanques de gas y un buque metanero frente a la costa de Guaymas y la Gaceta Parlamentaria de Sonora',
+     '🚢 Energía y medio ambiente · Guaymas, Sonora y Golfo de California', 'Guaymas y la Gaceta Parlamentaria: el proyecto de gas y su revisión ambiental',
+     '¿Qué consta en la Gaceta Parlamentaria y en documentos oficiales sobre el proyecto de gas en Guaymas y su impacto ambiental?'),
+    ('medicamentos-imss', 'assets/auditor/img/showcase_medicamentos_imss.jpg', 'Ilustración provisional',
+     'Ilustración de un almacén de medicamentos y expedientes de contratos de salud bajo revisión',
+     '💊 Contratos de salud · IMSS, IMSS-Bienestar y Birmex', 'Compras de medicamentos y contratos del sector salud',
+     '¿Cuánto contratan en medicinas e insumos el IMSS, IMSS-Bienestar y Birmex, y qué parte se da por adjudicación directa?'),
+    ('deuda-congreso-2027', 'assets/auditor/img/showcase_deuda_2027.jpg', 'Ilustración provisional',
+     'Ilustración del tablero de votación en el Congreso con el techo de deuda 2027 y la nota soberana BBB',
+     '🧾 Paquete Económico 2027 · Congreso, deuda y calificación BBB', 'Diputados aprobó la deuda de 2027: Ley de Ingresos y nota soberana',
+     '¿Cuánta deuda autorizó la Cámara de Diputados para 2027, qué cambió en las multas fiscales y qué dijo Hacienda sobre la nota BBB?'),
+    ('inversion-megaobras', 'assets/auditor/img/showcase_inversion_megaobras.jpg', 'Ilustración provisional',
+     'Ilustración panorámica de grandes obras de infraestructura, trenes, refinerías y el balance financiero de seis sexenios',
+     '🏗️ Inversión pública y rescates · 1988–2024', 'Inversión en megaobras y rescates: 11 obras, 2 rescates y 6 sexenios',
+     '¿Cuánto costaron las 11 megaobras y los 2 rescates de seis sexenios, cuánto pierden al año y dónde se consulta cada obra?'),
+    ('agronitrogenados', 'assets/auditor/img/showcase_agronitrogenados.jpg', 'Ilustración provisional',
+     'Ilustración de la planta petroquímica de fertilizantes Agronitrogenados en Pajaritos, Coatzacoalcos, con torres oxidadas y carpetas de auditoría',
+     '🏭 Megaobras y compras de Pemex · Coatzacoalcos, Veracruz', 'Plantas de fertilizantes Agronitrogenados',
+     '¿Cuánto costó comprar y rehabilitar las plantas de Agronitrogenados en Pajaritos y qué observó la ASF?'),
+    ('fertinal', 'assets/auditor/img/showcase_fertinal.jpg', 'Ilustración provisional',
+     'Ilustración de la mina de roca fosfórica y planta industrial de Grupo Fertinal junto al mar con documentos de deuda y pérdidas',
+     '⛏️ Megaobras y compras de Pemex · Baja California Sur y Michoacán', 'Compra de Grupo Fertinal',
+     '¿Cuánto financió Pemex para comprar Grupo Fertinal y cuánto sigue perdiendo al año su filial de fertilizantes?'),
+    ('estela-luz', 'assets/auditor/img/showcase_estela_luz.jpg', 'Ilustración provisional',
+     'Ilustración de la torre de cuarzo y acero inoxidable de la Estela de Luz en Paseo de la Reforma al atardecer',
+     '🗼 Obras conmemorativas · Paseo de la Reforma, CDMX', 'Estela de Luz (Bicentenario)',
+     '¿Por qué la Estela de Luz costó más del triple de su contrato original y cuántos pagos improcedentes detectó la ASF?'),
+    ('bunker-garcia-luna', 'assets/auditor/img/showcase_bunker.jpg', 'Ilustración provisional',
+     'Ilustración del edificio subterráneo de inteligencia de Plataforma México en Constituyentes con pantallas y carpetas reservadas',
+     '📡 Seguridad e inteligencia · Plataforma México, CDMX', 'El Búnker de Seguridad de García Luna (SSPC)',
+     '¿Cuánto costó el edificio del Búnker de Seguridad en Constituyentes y por qué sigue pendiente el costo de sus sistemas?'),
+    ('refineria-tula', 'assets/auditor/img/showcase_refineria_tula.jpg', 'Ilustración provisional',
+     'Ilustración de la barda perimetral solitaria en el terreno semiárido de Tula, Hidalgo, donde se proyectó la Refinería Bicentenario',
+     '🧱 Proyectos cancelados · Atitalaquia y Tula, Hidalgo', 'Refinería Bicentenario en Tula (Barda Perimetral)',
+     '¿En qué se gastaron los $1,127.6 millones de la Refinería Bicentenario en Tula antes de cancelarse en 2014?'),
+    ('enciclomedia', 'assets/auditor/img/showcase_enciclomedia.jpg', 'Ilustración provisional',
+     'Ilustración de un salón de primaria en México con pizarrón electrónico interactivo, proyector y expedientes de auditoría',
+     '💻 Equipamiento educativo · SEP, 2001–2011', 'Programa Enciclomedia',
+     '¿Cuánto ejerció la SEP en el programa Enciclomedia a lo largo de once años y qué revisó la ASF en siete Cuentas Públicas?'),
+    ('fobaproa', 'assets/auditor/img/showcase_fobaproa.jpg', 'Ilustración provisional',
+     'Ilustración de bóvedas bancarias de los años noventa y bonos de deuda del rescate bancario FOBAPROA-IPAB',
+     '🏦 Rescate financiero · FOBAPROA-IPAB y Ramo 34 (1998–2025)', 'FOBAPROA / IPAB (Rescate Bancario de 1998)',
+     '¿Cuánto se ha pagado con impuestos por el rescate bancario FOBAPROA-IPAB y cuánto se sigue debiendo al cierre de 2025?'),
+    ('farac-carretero', 'assets/auditor/img/showcase_farac.jpg', 'Ilustración provisional',
+     'Ilustración de una autopista de cuota y caseta de peaje en México con carpetas del rescate carretero FARAC-FONADIN',
+     '🛣️ Rescate financiero · FARAC y FONADIN en Banobras (1997–2025)', 'FARAC (Rescate Carretero de 1997)',
+     '¿Cuánto costó rescatar las 23 autopistas privadas del FARAC en 1997 y qué deuda sigue vigente hoy en el FONADIN?'),
+    ('seguro-popular', 'assets/auditor/img/showcase_seguro_popular.jpg', 'Ilustración provisional',
+     'Ilustración de un centro de salud con personas en la sala de espera, una póliza de afiliación y una gráfica de la gente sin acceso a la salud de 2016 a 2024',
+     '🏥 Salud pública · Seguro Popular, INSABI e IMSS-Bienestar (2004–2024)', 'Seguro Popular: 53.5 millones de afiliados y lo que pasó después',
+     '¿A cuántas personas llegó a cubrir el Seguro Popular, cuántas se quedaron sin acceso a la salud después y qué le observó la ASF?'),
 ]
 
 
 # Investigaciones agrupadas por tema (entrega 2 de Astra, 10-10-2026). Las
 # usan el indice general (apartados.py) y el pie de cada investigacion.
 TEMAS = [
-    ('🏗️', 'Megaobras e infraestructura', ['tren-maya', 'dos-bocas', 'aifa', 'tren-toluca', 'megafarmacia']),
+    ('🏗️', 'Megaobras e infraestructura', ['inversion-megaobras', 'tren-maya', 'dos-bocas', 'aifa', 'tren-toluca', 'megafarmacia', 'agronitrogenados', 'fertinal', 'estela-luz', 'bunker-garcia-luna', 'refineria-tula', 'enciclomedia', 'fobaproa', 'farac-carretero', 'guaymas-gas']),
     ('🗺️', 'Dinero para estados y municipios', ['ramo-33', 'lego-cienega']),
-    ('💸', 'Deuda e ingresos del gobierno', ['deuda-soberana', 'huachicol-fiscal']),
+    ('💸', 'Deuda e ingresos del gobierno', ['deuda-soberana', 'huachicol-fiscal', 'deuda-congreso-2027']),
+    ('🔍', 'Contratos, salud y órganos autónomos', ['ine-contratos', 'medicamentos-imss', 'seguro-popular']),
 ]
 
 
@@ -90,6 +147,34 @@ RUTAS = {
                      'herramienta-inspector-asf.html', 'Lo que auditó la ASF, ente por ente'),
     'huachicol-fiscal': ('eb-ingresos', 'De dónde sale el dinero: el IEPS en la Ley de Ingresos',
                          'herramienta-inspector-efos.html', 'La lista negra del SAT'),
+    'ine-contratos': ('eb-egresos', 'Cuánto recibe cada ramo, el INE incluido (Ramo 22)',
+                      'herramienta-inspector-entes.html#ente=federal:ine', 'La ficha técnica del INE en el Auditor de entes públicos'),
+    'guaymas-gas': ('eb-egresos', 'Cuánto recibe cada ramo, Medio Ambiente y Energía incluidos',
+                    'herramienta-ambiente-crisis.html', 'Crisis ambientales y el presupuesto de la ASEA'),
+    'medicamentos-imss': ('eb-egresos', 'Cuánto recibe cada ramo, el IMSS y Salud incluidos',
+                          'contratos-publicos.html?i=050GYR', 'Los contratos del IMSS en ComprasMX 2025 y 2026'),
+    'deuda-congreso-2027': ('proyeccion2027', 'El Paquete Económico 2027 y la Ley de Ingresos',
+                            'noticias-auditavision.html#col-lif-2027-deuda-y-multas', 'El cotejo documento por documento en Verificamos'),
+    'inversion-megaobras': ('eb-egresos', 'Cuánto se destina a inversión y desarrollo económico en el PEF',
+                            'herramienta-megaobras.html', 'Las 5 aplicaciones de Inversión y Megaobras: simuladores, sexenios y estados de resultados'),
+    'agronitrogenados': ('eb-egresos', 'Cuánto recibe cada ramo, Pemex incluido',
+                         'herramienta-megaobras-sector.html#obra-agronitrogenados', 'La ficha y los informes de la ASF sobre Agronitrogenados'),
+    'fertinal': ('eb-egresos', 'Cuánto recibe cada ramo, Pemex incluido',
+                 'herramienta-megaobras-sector.html#obra-fertinal', 'La ficha, el estado de resultados y las auditorías de Grupo Fertinal'),
+    'estela-luz': ('eb-egresos', 'El gasto del Gobierno Federal por ramo',
+                   'herramienta-megaobras-sector.html#obra-estela-luz', 'La ficha y la revisión de situación excepcional de la ASF sobre la Estela de Luz'),
+    'bunker-garcia-luna': ('eb-egresos', 'Cuánto recibe cada ramo, Seguridad incluida',
+                           'herramienta-megaobras-sector.html#obra-bunker-garcia-luna', 'La ficha del Búnker de Seguridad y las auditorías de Plataforma México'),
+    'refineria-tula': ('eb-egresos', 'Cuánto recibe cada ramo, Pemex incluido',
+                       'herramienta-megaobras-sector.html#obra-refineria-tula', 'La ficha y la auditoría de la ASF sobre la Refinería Bicentenario en Tula'),
+    'enciclomedia': ('eb-egresos', 'Cuánto recibe cada ramo, Educación Pública (Ramo 11) incluida',
+                     'herramienta-megaobras-sector.html#obra-enciclomedia', 'La ficha y las siete auditorías de la ASF al Programa Enciclomedia'),
+    'fobaproa': ('eb-ccreloj', 'El reloj del costo financiero de la deuda y el Ramo 34',
+                 'herramienta-megaobras-sector.html#obra-fobaproa', 'La ficha del rescate bancario FOBAPROA-IPAB y su estado de resultados'),
+    'farac-carretero': ('eb-ccreloj', 'El costo financiero y los pasivos del sector público',
+                        'herramienta-megaobras-sector.html#obra-farac-carretero', 'La ficha del rescate carretero FARAC-FONADIN y las auditorías de la ASF'),
+    'seguro-popular': ('eb-salud', 'El gasto en salud, institución por institución',
+                       'datos-salud-sistema.html#sal-transicion', 'Del Seguro Popular al IMSS-Bienestar en Datos · Salud pública, con su tablero y sus fuentes'),
 }
 
 
@@ -198,6 +283,56 @@ def _datos(id_):
                 'quien': 'El SAT cobra el IEPS y la Agencia Nacional de Aduanas revisa lo que entra al país; Hacienda propone la Ley de Ingresos y la Cámara de Diputados la aprueba.',
                 'docs': [_doc(il['doc'], il['url'])],
                 'falta': 'Ni el SAT ni Hacienda han publicado cuánto se pierde: el dato sigue pendiente por falta de transparencia de esas dependencias. ' + H['estudios']['texto']}
+    A = D.get('auditorias_actuales') or {}
+    if id_ in A:
+        x = A[id_]
+        c = x.get('cifras') or {}
+        docs = [_doc(f['doc'], f['url']) for f in x['fuentes']]
+        if id_ == 'ine-contratos':
+            cuanto = [
+                (_mdp(c['ejercido_2025_mdp']), 'ejercidos por el INE en la Cuenta Pública 2025 (Ramo 22)', 'oficial', None),
+                (_mdp(c['aprobado_2026_mdp']), 'aprobados para el INE en el Presupuesto de Egresos 2026', 'oficial', None),
+                (_mdp(c['asf_cp2024_por_aclarar_mdp']), 'quedaron por aclarar en %d auditorías de la ASF (Cuenta Pública 2024)' % c['asf_cp2024_auditorias'], 'oficial', None),
+                ('En revisión', 'contratos de Cajas Graf señalados en prensa (INE e IEE Sonora)', 'pendiente', x['pendiente_id']),
+            ]
+        elif id_ == 'guaymas-gas':
+            cuanto = [
+                ('%s ha' % c['superficie_sener_ha'], 'superficie del proyecto en Guaymas según la Secretaría de Energía (21-10-2026)', 'oficial', None),
+                ('%s ha' % c['diferencia_ha'], 'diferencia frente a las %s ha señaladas en tribuna (%s − %s)' % (int(c['superficie_tribuna_ha']), int(c['superficie_tribuna_ha']), c['superficie_sener_ha']), 'derivado', None),
+                ('%s buques al año' % c['buques_anuales'], 'máximo de buques metaneros (4 %% del tránsito de la zona) y %s mil m³ de almacenamiento' % c['almacenamiento_mil_m3'], 'oficial', None),
+                (_mdp(c['asea_2026_mdp']), 'presupuesto 2026 de la ASEA (Ramo 16, unidad G00), la agencia que revisa el impacto ambiental', 'oficial', None),
+                ('Sin publicar', 'contrato de comodato sobre el predio en Guaymas y resolutivo ambiental', 'pendiente', x['pendiente_id']),
+            ]
+        elif id_ == 'medicamentos-imss':
+            cuanto = [
+                (_mdp(c['imss_monto_mdp']), 'en %s contratos del IMSS registrados en ComprasMX (2025 y 2026)' % format(c['imss_contratos'], ','), 'oficial', None),
+                ('%s %% (%s)' % (c['imss_adj_directa_pct'], _mdp(c['imss_adj_directa_mdp'])), 'del monto del IMSS asignado por adjudicación directa (%s ÷ %s)' % (_mdp(c['imss_adj_directa_mdp']), _mdp(c['imss_monto_mdp'])), 'derivado', None),
+                (_mdp(c['imss_bienestar_monto_mdp']), 'en %s contratos de IMSS-Bienestar (%s %% por adjudicación directa)' % (format(c['imss_bienestar_contratos'], ','), c['imss_bienestar_adj_directa_pct']), 'oficial', None),
+                (_mdp(c['birmex_monto_mdp']), 'en %s contratos de Birmex (%s %% por adjudicación directa)' % (format(c['birmex_contratos'], ','), c['birmex_adj_directa_pct']), 'oficial', None),
+                ('Sin contrato oficial', 'señalamientos en prensa por más de $800 mdp en medicinas (2023-2024)', 'pendiente', x['pendiente_id']),
+            ]
+        elif id_ == 'deuda-congreso-2027':
+            cuanto = [
+                (_mdp(c['ingresos_totales_2027_mdp']), 'ingresos totales estimados en la Ley de Ingresos 2027 aprobada por Diputados (15-10-2026)', 'oficial', None),
+                (_mdp(c['techo_deuda_interna_2027_mdp']), 'techo de endeudamiento interno neto autorizado para 2027 (%d votos a favor y %d en contra)' % (c['votos_diputados_favor'], c['votos_diputados_contra']), 'oficial', None),
+                (_mdp(c['costo_financiero_2027_mdp']), 'costo financiero de la deuda propuesto para 2027 en el Paquete Económico', 'oficial', None),
+                ('BBB+ → BBB', 'ajuste de HR Ratings a la nota soberana de largo plazo reconocido por Hacienda (Comunicado 82)', 'oficial', None),
+                ('Por cotejar', 'proyecciones del reporte de HR Ratings (déficit de 4.6 % del PIB y deuda a 2030)', 'pendiente', x['pendiente_id']),
+            ]
+        elif id_ == 'inversion-megaobras':
+            cuanto = [
+                (_mdp(c['obras_presu_mdp']), 'presupuesto inicial documentado de las %d obras (1988–2024)' % c['obras_n'], 'derivado', None),
+                ('%s (+%s %%)' % (_mdp(c['obras_real_mdp']), c['obras_sobrecosto_pct']), 'costo real documentado de las %d obras (%s por encima de lo aprobado)' % (c['obras_n'], _mdp(c['obras_brecha_mdp'])), 'derivado', None),
+                (_mdp(c['rescates_real_mdp']), 'costo comprometido aparte en los %d rescates (FOBAPROA-IPAB y FARAC carretero)' % c['rescates_n'], 'derivado', None),
+                ('−%s al año' % _mdp(c['balance_neto_anual_mdp']), 'pérdida neta anual en los %d proyectos con dato publicado (%d pierden %s y %d gana %s)' % (c['n_con_dato_anual'], 5, _mdp(c['balance_pierde_mdp']), 1, _mdp(c['balance_gana_mdp'])), 'derivado', None),
+                ('4 obras sin dato', 'operación anual no publicada por separado (Megafarmacia, Tren Interurbano, Agronitrogenados y Búnker)', 'pendiente', x['pendiente_id']),
+            ]
+        else:
+            cuanto = [
+                (_mdp(p['v']) if 'v' in p else p['txt'], p['tit'] + ': ' + p['etq'], p['est'], p.get('pend'))
+                for p in x.get('cont') or []
+            ]
+        return {'que': x['que'], 'cuanto': cuanto, 'quien': x['quien'], 'docs': docs, 'falta': x['falta']}
     raise SystemExit('Sin lectura breve para %s' % id_)
 
 
@@ -321,6 +456,8 @@ def pagina(a, sello):
     <div class="apartado-ancho">
       <a class="apartado-volver" href="index.html#auditoria-en-imagenes">← Volver a Auditoría en imágenes</a>
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
+      <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
+      <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
       <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>{sello}</b></span>
     </div>
   </footer>
@@ -386,6 +523,36 @@ def _docs_planos(docs):
     return out
 
 
+# Las frases con que se nombra el tema de cada investigación (sin acentos),
+# para que el chat ofrezca «Ver la investigación» cuando la plática lo toca,
+# aunque la pregunta no sea la de su diapositiva (24-10-2026).
+TEMA_BOT = {
+    'tren-maya': ['tren maya'],
+    'dos-bocas': ['dos bocas', 'refineria olmeca'],
+    'deuda-soberana': ['intereses de la deuda', 'costo financiero', 'deuda soberana', 'deuda publica'],
+    'aifa': ['aifa', 'felipe angeles'],
+    'ramo-33': ['ramo 33', 'aportaciones federales', 'fais', 'fortamun'],
+    'lego-cienega': ['lego', 'cienega de flores'],
+    'tren-toluca': ['tren interurbano', 'tren a toluca', 'mexico toluca', 'el insurgente'],
+    'megafarmacia': ['megafarmacia', 'huehuetoca', 'birmex'],
+    'huachicol-fiscal': ['huachicol'],
+    'ine-contratos': ['contratos del ine', 'investigacion de la asf al ine', 'cajas graf', 'taddei', 'presupuesto del ine'],
+    'guaymas-gas': ['guaymas', 'amigo lng', 'epcilon', 'sanchez taboada', 'gas de texas', 'gaceta de sonora'],
+    'medicamentos-imss': ['medicamentos del imss', 'compra de medicamentos', 'compras de medicinas', 'ventiladores del imss', 'cyber robotic'],
+    'deuda-congreso-2027': ['ley de ingresos 2027', 'aprobo mas deuda', 'techo de deuda 2027', 'perdon de multas', 'hr ratings'],
+    'inversion-megaobras': ['megaobras', 'megaobra', 'inversion en megaobras', 'inversiones en megaobras', 'obras de cada sexenio'],
+    'agronitrogenados': ['agronitrogenados', 'pajaritos', 'pro-agroindustria', 'plantas chatarra'],
+    'fertinal': ['fertinal', 'roca fosforica', 'fertilizantes pacifico'],
+    'estela-luz': ['estela de luz', 'monumento del bicentenario', 'fideicomiso del bicentenario'],
+    'bunker-garcia-luna': ['bunker de garcia luna', 'bunker de seguridad', 'plataforma mexico', 'constituyentes 947'],
+    'refineria-tula': ['refineria bicentenario', 'refineria de tula', 'barda de tula', 'barda perimetral'],
+    'enciclomedia': ['enciclomedia', 'pizarrones interactivos'],
+    'fobaproa': ['fobaproa', 'ipab', 'rescate bancario', 'ramo 34'],
+    'farac-carretero': ['farac', 'fonadin', 'rescate carretero', 'autopistas rescatadas'],
+    'seguro-popular': ['seguro popular', 'insabi', 'proteccion social en salud', 'regimenes estatales de proteccion social'],
+}
+
+
 def bot_fichas():
     """Una ficha por investigación para «Pregúntale al Auditor» (23-10-2026):
     la contesta cuando le llega la pregunta de su diapositiva. Las cifras
@@ -394,12 +561,15 @@ def bot_fichas():
     out = []
     for a in AUDITORIAS:
         id_ = a[0]
+        if not TEMA_BOT.get(id_):
+            raise SystemExit('auditorias.py: la investigacion %s no tiene sus frases en TEMA_BOT' % id_)
         d = _datos(id_)
         out.append({'t': 'investigacion', 'tit': re.sub('<[^>]+>', '', a[5]), 'txt': d['que'],
                     'ci': [dict({'v': v, 'etq': etq, 'e': e}, **({'p': pend} if pend else {})) for v, etq, e, pend in d['cuanto']],
                     'fu': _docs_planos(d['docs']), 'qs': [q for q in (pq.get(id_), a[6]) if q],
                     'ir': [archivo(id_), 'la investigación en imágenes'],
-                    'exp': ('expedientes.html#exp-' + EXPEDIENTE[id_]) if id_ in EXPEDIENTE else ''})
+                    'exp': ('expedientes.html#exp-' + EXPEDIENTE[id_]) if id_ in EXPEDIENTE else '',
+                    'k': TEMA_BOT.get(id_, [])})
     return out
 
 

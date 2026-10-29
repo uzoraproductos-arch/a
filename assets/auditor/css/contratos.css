@@ -1,0 +1,26 @@
+/* Contratos públicos (contratos-publicos.html, 26-10-2026). Generada por apartados.py; la pinta contratos.js. */
+.cmx-forma label { display: block; font-weight: 700; margin-bottom: 6px; font-size: 16px; }
+.cmx-fila { display: flex; gap: 8px; flex-wrap: wrap; }
+.cmx-fila input { flex: 1 1 220px; min-height: 48px; font-size: 16px; padding: 10px 14px; border: 1px solid #b9c3d3; border-radius: 10px; background: #ffffff; color: #1c2a44; }
+.cmx-fila button { min-height: 48px; padding: 10px 20px; font-size: 16px; font-weight: 700; border: 0; border-radius: 10px; background: #1c2a44; color: #ffffff; cursor: pointer; }
+.cmx-sal { margin-top: 16px; }
+.cmx-sal > p, .cmx-cruce > p, .cmx-metodo p, .cmx-metodo li { font-size: 16px; line-height: 1.55; }
+.cmx-ficha { border: 1px solid #dfe5f0; border-radius: 14px; padding: 16px 18px; background: #ffffff; }
+.cmx-ficha h3 { margin: 0 0 10px; font-size: 20px; line-height: 1.3; }
+.cmx-ficha h3 small { font-size: 14px; font-weight: 500; color: #5b6577; margin-left: 6px; }
+.cmx-ficha h4, .cmx-sal h4 { margin: 16px 0 6px; font-size: 17px; }
+.cmx-ficha p { font-size: 16px; line-height: 1.55; }
+.cmx-cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 6px 0 12px; }
+.cmx-cifras div { background: #eef3fb; border-radius: 10px; padding: 10px 12px; }
+.cmx-cifras b { display: block; font-size: 20px; color: #1c2a44; }
+.cmx-cifras span { display: block; font-size: 14px; color: #3d4757; margin: 2px 0 6px; }
+.cmx-lista { margin: 0; padding-left: 22px; }
+.cmx-lista li { margin-bottom: 10px; font-size: 16px; line-height: 1.5; }
+.cmx-lista li span, .cmx-lista li small { color: #3d4757; font-size: 14px; }
+.cmx-ir { min-height: 44px; padding: 8px 12px; margin: 2px 4px 2px 0; border: 1px solid #1c2a44; border-radius: 999px; background: #ffffff; color: #1c2a44; font-weight: 700; font-size: 15px; cursor: pointer; text-align: left; }
+.cmx-ir:hover { background: #1c2a44; color: #ffffff; }
+.cmx-contratos a { display: inline-block; min-height: 44px; padding-top: 10px; font-weight: 700; }
+.cmx-nota { font-size: 14px !important; color: #3d4757; }
+.cmx-sat { background: #fff6e5; border-left: 4px solid #8a5a00; padding: 10px 12px; border-radius: 6px; }
+.cmx-cargando { color: #5b6577; }
+.cmx-ficha code, .cmx-lista code { word-break: break-all; }

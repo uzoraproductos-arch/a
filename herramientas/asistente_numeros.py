@@ -110,7 +110,7 @@ COMP_ALIAS = {'Combustibles automotrices': ['gasolina', 'gasolinas', 'diesel', '
               'Endeudamiento interno del Gobierno Federal': ['deuda interna', 'endeudamiento interno'],
               'Petróleos Mexicanos': ['ventas de pemex', 'lo que vende pemex', 'vende pemex', 'ingresos de pemex'],
               'Comisión Federal de Electricidad': ['ventas de la cfe', 'vende la cfe', 'ingresos de la cfe', 'lo que vende la cfe'],
-              'Costo financiero de Pemex y CFE': ['intereses de pemex', 'deuda de pemex y cfe']}
+              'Costo financiero de Pemex y CFE': ['intereses de pemex', 'pemex de intereses', 'intereses pemex', 'deuda de pemex y cfe']}
 # El estado de resultados de 2024: se nombra con el año para no confundirlo con 2026.
 CF_ALIAS = {'aprobado': ['gasto aprobado en 2024', 'presupuesto aprobado 2024', 'aprobado en 2024'],
             'ejercido': ['gasto ejercido en 2024', 'ejercido en 2024', 'se ejercio en 2024', 'cuenta publica 2024'],
@@ -365,7 +365,8 @@ def datos(d):
         for x in C['filas']:
             fila(id='%s-%s' % (clave, plano(x['n'])[:24].replace(' ', '-')), g=clave, sg=x.get('g'), n=limpio(x['n']), y='2027', v=x['m'], e='oficial',
                  fu=fu('SHCP, Criterios Generales de Política Económica 2027, p. 33', 'ref-cgpe2027'), d=limpio(x.get('d')),
-                 al=al(x['n'], ['pension de adultos mayores', 'pension del bienestar', 'pension de los abuelitos', 'pension para adultos mayores'] if 'Adultos Mayores' in x['n'] else []),
+                 al=al(x['n'], ['pension de adultos mayores', 'pension del bienestar', 'pension de los abuelitos', 'pension para adultos mayores'] if 'Adultos Mayores' in x['n'] else
+                       ['interoceanico', 'corredor interoceanico', 'tren interoceanico'] if 'Tehuantepec' in x['n'] else []),
                  par='prog-pam' if 'Adultos Mayores' in x['n'] else None,
                  ir=[NUM + 'paquete-2027-gasto.html', 'El gasto del Paquete 2027'])
         fila(id=clave + '-total', g=clave, tot=1, n=tit.replace('Los ', '').replace('Las ', '').replace(' (propuesta)', ''), y='2027', v=C['total'], e='oficial',

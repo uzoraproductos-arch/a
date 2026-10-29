@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """«Pregúntale al Auditor»: el bot interno de Auditavision (pedido del autor,
-11-10-2026). Vive en el Modo Inspector, aparte de las seis aplicaciones de
+11-10-2026). Vive en el Modo Inspector, aparte de las siete aplicaciones de
 «Grandes investigaciones».
 
 Es un bot interno, no una IA generativa: no redacta cifras. Cada respuesta
@@ -283,7 +283,9 @@ def _pendientes():
     out = []
     for x in pendientes.recolectar():
         out.append({'t': 'pendiente', 'tit': limpio(x['que']), 'txt': '',
-                    'pend': {'pq': limpio(x['porque']), 'quien': x['responsable'], 'donde': x['enlace'], 'donde_tx': x['enlace_txt'], 'id': x['id']},
+                    # ap: las paginas donde aparece; la nota del Periodista dice lo que falta en la pagina de la respuesta.
+                    'pend': {'pq': limpio(x['porque']), 'quien': x['responsable'], 'donde': x['enlace'], 'donde_tx': x['enlace_txt'], 'id': x['id'],
+                             'ap': sorted({a[0].split('#')[0] for a in x.get('aparece') or []})},
                     'ir': ['pendientes.html#' + x['id'], 'Registro de pendientes'],
                     'k': limpio(x['tema']) + ' falta pendiente'})
     return out
@@ -293,10 +295,32 @@ def _pendientes():
 # «¿cómo apoyo a la plataforma?» debe llevar a Donaciones y a Servicios, que
 # son las dos vias para sostenerla desde que se retiro el Pase).
 PAGINA_K = {
+    'index.html': ' sistema civico de fiscalizacion plataforma',
     'donaciones.html': ' apoyar apoyo sostener sostenerla donar donativo aportar ayudar plataforma pase civico auditor',
     'servicios.html': ' contratar contrato medida servicio servicios investigacion encargo cotizacion suscripcion creditos sostener plataforma',
     'comunidad.html': ' participa participar reportar denunciar error corregir proponer tema',
+    'informes-documentar-para-sancionar.html': ' sancion sancionar sanciones castigo impunidad responsabilidad administrativa falta grave desvio abuso de funciones desacato ipra expediente matrices irregularidad',
+    'derecho-de-replica.html': ' replica rectificacion aclaracion aclarar corregir me aludieron me mencionaron me nombraron nombran difamacion inexacto falso agravio prensa periodistas personas privadas responder',
+    'aviso-de-privacidad.html': ' privacidad datos personales mis datos guardan guardas cookies rastreo analitica borrar derechos arco',
 }
+
+
+def migas_de(s):
+    """Las migas de una pagina generada, sin Inicio: «Enciclopedia › Números › …»."""
+    m = re.search(r'<nav class="apartado-migas".*?</nav>', s, re.S)
+    if not m:
+        return ''
+    partes = [limpio(x) for x in re.findall(r'<(?:a|span)\b[^>]*>(.*?)</(?:a|span)>', m.group(0))]
+    return ' › '.join(x for x in partes if x and x != '›')
+
+
+def enciclopedia_de(n, s):
+    """{'e': 1, 'm': modo} si la pagina es de la Enciclopedia; {} si no."""
+    import modos
+    mg = migas_de(s)
+    if 'Enciclopedia' not in mg.split(' › ')[1:2] and n not in modos.ENCICLOPEDIA_EXTRA:
+        return {}
+    return {'e': 1, 'm': modos.modo_pagina(n, mg)}
 
 
 def _paginas():
@@ -315,8 +339,14 @@ def _paginas():
         if not t or not m:
             continue
         tit = limpio(t.group(1)).split(' · ')[0].split(' | ')[0]
-        out.append({'t': 'pagina', 'tit': tit, 'txt': limpio(m.group(1)), 'ir': [n, tit],
-                    'k': n[:-5].replace('-', ' ') + PAGINA_K.get(n, '')})
+        if n == 'index.html':
+            # «Auditavisión», a secas: si no, «¿Qué es Auditavisión?» se iba a Auditavisión Noticias (29-10-2026).
+            tit = tit.split(' — ')[0]
+        # Las paginas de la Enciclopedia llevan su modo (29-10-2026): el chat
+        # las ofrece en «En la Enciclopedia», primero las del modo elegido.
+        enc = enciclopedia_de(n, s)
+        out.append(dict({'t': 'pagina', 'tit': tit, 'txt': limpio(m.group(1)), 'ir': [n, tit],
+                         'k': n[:-5].replace('-', ' ') + PAGINA_K.get(n, '')}, **enc))
         # Cada seccion con titulo propio: lleva al lugar exacto de la pagina.
         vistos = set()
         for h in re.finditer(r'<h([23])[^>]*\bid="([^"]+)"[^>]*>(.*?)</h\1>', s, re.S):
@@ -341,7 +371,7 @@ def _paginas():
             if len(tx) > 420:
                 tx = tx[:420].rsplit(' ', 1)[0] + '…'
             # k lleva el texto de toda la seccion: se busca en el, se muestra el primer parrafo.
-            out.append({'t': 'seccion', 'tit': ht, 'txt': tx, 'ir': ['%s#%s' % (n, h.group(2)), tit], 'k': tit + ' ' + cuerpo})
+            out.append(dict({'t': 'seccion', 'tit': ht, 'txt': tx, 'ir': ['%s#%s' % (n, h.group(2)), tit], 'k': tit + ' ' + cuerpo}, **enc))
     return out
 
 
@@ -460,13 +490,25 @@ def _charla(d):
     # El Poder Judicial (23-10-2026), cotejado contra la Constitución, los
     # acuerdos del INE, el Manual de remuneraciones y el PEF 2026.
     import asistente_judicial
+    # «Documentar para sancionar», el informe especial de la ASF (27-10-2026):
+    # de la irregularidad a la sanción, cotejado con la LGRA y la LFRCF.
+    import informe_sancion
+    # Salud pública, auditoría de gestión (27-10-2026): IMSS, ISSSTE e IMSS-Bienestar.
+    import gestion_salud
+    import gestion_ambiental
+    import nepotismo
     return {'nota': nota, 'met': met, 'edo': edo, 'cargos': cargos, 'smin': smin, 'adm': adm, 'admet': admet, 'expide': EXPIDE,
             'mapa': 'numeros-mapa-del-gasto-federalizado.html', 'num': num, 'datos': asistente_datos.datos(d, num, D),
-            'leg': asistente_legislativo.legislativo(), 'jud': asistente_judicial.judicial(d)}
+            'leg': asistente_legislativo.legislativo(), 'jud': asistente_judicial.judicial(d),
+            'san': informe_sancion.bot(), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d),
+            # Nepotismo y cargos publicos (28-10-2026): la tabla de la calculadora.
+            'nep': nepotismo.bot(),
+            # Agenda del erario de Noticias (28-10-2026): las fechas que fija la ley.
+            'agenda': __import__('noticias').AGENDA}
 
 
 def _inspector():
-    """Las seis aplicaciones del Modo Inspector, para usarlas desde el chat
+    """Las siete aplicaciones del Modo Inspector, para usarlas desde el chat
     (pedido del autor, 24-10-2026). asistente.js las reconoce por su nombre
     o por lo que el lector trae (un RFC, un folio, una liga, un ente, un
     caso) y las abre en un marco de la respuesta; la lista negra del SAT la
@@ -484,10 +526,103 @@ def _inspector():
     return {'apps': apps, 'pagina': h[0], 'sat': sit}
 
 
+# Cómo se dice en la calle cada aplicación de Costo Ambiental y de la
+# Calculadora Cívica (24-10-2026): el chat la reconoce por su nombre o por
+# estas frases, sin acentos. Las que no traen frase solo entran por su nombre.
+ALIAS_APPS = {
+    'amticket': ['estado de cuenta ambiental', 'ticket ambiental'],
+    'amreloj': ['reloj del dano ambiental', 'reloj ambiental', 'reloj y el ano'],
+    'ampib': ['crecimiento es real', 'pib que no alcanza', 'pib ecologico', 'pib verde'],
+    'aminversion': ['simulador de inversion ambiental', 'inversion ambiental'],
+    'amauditor': ['auditor ambiental', 'organo por organo'],
+    'herramienta-ambiente-crisis.html': ['crisis ambientales', 'crisis ambiental'],
+    'ccticket': ['estado de cuenta civico', 'ticket civico', 'calcula mi isr', 'calcular mi isr'],
+    'cccompara': ['tu contra ellos', 'yo contra ellos'],
+    'ccreloj': ['reloj de la deuda'],
+    'simulador-presupuesto.html': ['reparte el presupuesto', 'simulador del presupuesto'],
+    'radar-estado-de-cuenta.html': ['estado de cuenta administrativo'],
+}
+
+
+def _apps_de(clave):
+    """Las aplicaciones de Costo Ambiental o de la Calculadora Cívica, para
+    usarlas desde el chat como las del Modo Inspector y las de Inversión y
+    Megaobras (pedido del autor, 24-10-2026). No llevan cifras: solo dicen
+    qué hay y dónde, y el chat las abre en un marco de la respuesta."""
+    import apartados
+    h = next(x for x in apartados.HERRAMIENTAS if x[1] == clave)
+    apps = [{'id': t[0], 'k': i + 1, 'ico': t[1], 'n': t[2], 'frase': t[3], 'desc': limpio(t[4]),
+             'url': apartados.modulo_archivo(h[0], t[0]), 'al': ALIAS_APPS.get(t[0], [])} for i, t in enumerate(h[7])]
+    for a in apps:
+        if not os.path.exists(os.path.join(RAIZ, a['url'])):
+            raise SystemExit('asistente.py: la aplicacion %s no tiene pagina (%s)' % (a['id'], a['url']))
+    return {'apps': apps, 'pagina': h[0], 'nombre': h[3], 'ico': h[2]}
+
+
+OFICIAL = re.compile(r'https?://([\w-]+\.)*(gob\.mx|inegi\.org\.mx|banxico\.org\.mx|ine\.mx|scjn\.gob\.mx|coneval\.org\.mx)/')
+
+
+def _fuentes_app(url, refs, salto=True):
+    """Las fuentes que cita una aplicacion en su pagina y en sus subpaginas
+    (pedido del autor, 24-10-2026: el dictamen de lo que se usa en el chat).
+    Solo documentos oficiales: las referencias de fuentes-oficiales.html, los
+    enlaces a dominios de gobierno y los que trae en sus datos; el dictamen no
+    agrega ninguna. Si la pagina remite sus fuentes a una de la Enciclopedia
+    («De donde salen… estan en datos-…»), se toman de ahi."""
+    raiz = url.split('?')[0].split('#')[0]
+    tallo = raiz[:-5]
+    pags = [raiz] + sorted(os.path.basename(x) for x in glob.glob(os.path.join(RAIZ, tallo + '-*.html')))
+    vistos, fu, remite = set(), [], []
+
+    def suma(tx, href):
+        if href in vistos:
+            return
+        vistos.add(href)
+        fu.append({'tx': tx, 'url': href})
+
+    for pg in pags:
+        s = open(os.path.join(RAIZ, pg), encoding='utf-8').read()
+        s = re.sub(r'<(header|footer|nav)\b.*?</\1>', '', s, flags=re.S)
+        for href, tx in re.findall(r'<a [^>]*href="([^"]+)"[^>]*>(.*?)</a>', s, re.S):
+            href = html.unescape(href)
+            tx = limpio(html.unescape(re.sub(r'<[^>]+>', '', tx)).replace('↗', '').replace('➔', '').strip())
+            if tx.startswith('Ver la página'):
+                continue  # la fe de erratas del cajon de Comunidad, en todas las paginas
+            generico = not tx or re.match(r'^(\[\d+\]|ver\b|aqu[ií]\b|archivo\b|pdf\b)', tx, re.I)
+            m = re.match(r'fuentes-oficiales\.html#(ref-[\w-]+)$', href)
+            if m and m.group(1) in refs:
+                r = refs[m.group(1)]
+                cita = limpio(r['cita_apa'])
+                if r.get('url'):
+                    suma(cita[:117] + '…' if generico and len(cita) > 120 else (cita if generico else tx[:120]), r['url'])
+            elif OFICIAL.match(href):
+                suma(re.sub(r'^www\.', '', href.split('/')[2]) if generico else (tx if len(tx) <= 120 else tx[:117] + '…'), href)
+            elif re.match(r'(datos|numeros|aprende)-[\w-]+\.html$', href.split('#')[0]):
+                remite.append(href.split('#')[0])
+        for js in re.findall(r'<script type="application/json"[^>]*>(.*?)</script>', s, re.S):
+            for tx, href in re.findall(r'"fuente"\s*:\s*"([^"]{4,200})"[^{}]*?"url"\s*:\s*"(https?://[^"]+)"', js):
+                if OFICIAL.match(href):
+                    suma(limpio(tx)[:120], href)
+            for href in re.findall(r'"(https?://[^"]+)"', js):
+                host = re.sub(r'^www\.', '', href.split('/')[2])
+                if OFICIAL.match(href) and not any(x['tx'] == host for x in fu):
+                    suma(host, href)
+    if not fu and salto:
+        for pg in dict.fromkeys(remite):
+            if os.path.exists(os.path.join(RAIZ, pg)):
+                for x in _fuentes_app(pg, refs, False):
+                    suma(x['tx'], x['url'])
+    return fu
+
+
 def escribir_base():
     import pendientes
     d = pendientes.db()
-    fichas = _fichas(d) + _pendientes() + _paginas()
+    # Las columnas de Noticias relevantes (24-10-2026), con sus documentos.
+    import asistente_personajes
+    # Periodismo en riesgo (29-10-2026): las cifras del Mecanismo de Protección.
+    import periodistas
+    fichas = _fichas(d) + asistente_personajes.fichas() + periodistas.fichas() + _pendientes() + _paginas()
     cuenta = {}
     for f in fichas:
         cuenta[f['t']] = cuenta.get(f['t'], 0) + 1
@@ -502,10 +637,25 @@ def escribir_base():
     dat = _charla(d)
     rec = asistente_recursos.base([(e['a'], e['n']) for e in dat['edo']])
     dat['insp'] = _inspector()
+    # Costo Ambiental y la Calculadora Cívica, dentro del chat (24-10-2026).
+    dat['amb'] = _apps_de('ambiente')
+    dat['calc'] = _apps_de('calculadora')
+    # Los regimenes que el chat reconoce en «gano…» (lo calcula la calculadora).
+    regs = d['calculadora_civica']['regimenes']
+    dat['calc']['reg'] = {r['id']: r['nombre'] for r in regs if not r.get('hereda')}
+    dat['calc']['plat'] = {t['id']: t['nombre'] for r in regs for t in r.get('tasas', [])}
     # Inversión y Megaobras, dentro del chat (24-10-2026): sus obras, sus
     # sexenios, sus cifras y sus cinco aplicaciones.
     import asistente_megaobras
     dat['mo'] = asistente_megaobras.datos(d, dat['datos']['peso'])
+    # Los personajes de Noticias relevantes y las búsquedas en internet.
+    dat['per'] = asistente_personajes.datos()
+    # Las fuentes de cada aplicacion, para su dictamen cuando se usa en el chat.
+    refs = {r['id']: r for r in d['referencias_legales']}
+    for k in ('insp', 'mo', 'amb', 'calc'):
+        for a in dat[k]['apps']:
+            fu = _fuentes_app(a['url'], refs)
+            a['fu'], a['fun'] = fu[:15], len(fu)
 
     js = ('/* Auditavisión · Base de fichas de «Pregúntale al Auditor». La escribe\r\n'
           '   herramientas/asistente.py desde window.AUDIT_DB, el Registro de\r\n'
@@ -582,41 +732,207 @@ for _i, _e in enumerate([('¿Cuánto costó el Tren Maya?', '🚆'), ('¿En qué
                          ('Compara el AIFA con el Tren Maya', '⚖️'), ('¿Cuánto han costado las megaobras?', '🏗️'),
                          ('¿Cuánto nos cuesta el FOBAPROA?', '🏦')]):
     EJEMPLOS.insert(12 + _i * 8, _e)
+# Noticias relevantes desde el chat (24-10-2026): sus personajes, al final
+# de la tercera y la quinta tanda.
+for _i, _e in enumerate([('¿Quién es Genaro García Luna?', '📰'), ('Noticias de Elba Esther Gordillo', '📰')]):
+    EJEMPLOS.insert(17 + _i * 16, _e)
+# Lo que la gente cuenta y la plataforma verifica (28-10-2026, pedido del
+# autor: «añade preguntas predeterminadas de estas consideraciones»): los
+# testimonios de Verificamos y las auditorías de gestión. La primera entra
+# en la primera tanda, después de los estados de cuenta; las demás, una por
+# tanda.
+EJEMPLOS.insert(3, ('¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?', '🔎'))
+for _i, _e in enumerate([('¿Cuánta gente se quedó sin acceso a la salud?', '🩺'), ('¿Qué le observó la ASF al Seguro Popular?', '🏥'),
+                         ('¿Es cierto que el ISSSTESON pagó pensiones a personas fallecidas?', '🔎'),
+                         ('¿Auditarán las oficinas de los consejeros del INE?', '🗳️'), ('¿Qué pasó con el Seguro Popular?', '🏥'),
+                         ('¿Cuántas consultas da el IMSS?', '🩺'), ('¿Cuántos asuntos resuelve el Poder Judicial?', '⚖️'),
+                         ('¿Cuántas denuncias atiende la PROFEPA?', '🌎')]):
+    EJEMPLOS.insert(9 + _i * 6, _e)
+# «Al momento» de Noticias (28-10-2026): la noticia del día entra en la
+# primera tanda, al principio, y «noticias de hoy» en la segunda.
+EJEMPLOS.insert(0, ('¿Qué pasó con la Modalidad 40 del IMSS?', '⏱️'))
+EJEMPLOS.insert(7, ('Noticias de hoy', '📰'))
+EJEMPLOS.insert(14, ('¿Mi cuñado puede trabajar en mi oficina?', '👪'))
+# El modo Ambientalista (29-10-2026) trae además las suyas: cada pregunta se
+# muestra solo en su modo (modo_de), así que estas no estorban en los otros.
+EJEMPLOS.extend([('Mapa ambiental de megaobras por estado', '🗺️'), ('¿Es cierto que el Tren Maya contamina?', '🚆'),
+                 ('¿Cuánto multa la PROFEPA?', '⚖️'), ('¿Cuánto presupuesto tiene la PROFEPA?', '🌎')])
+# Y el modo Periodista, las que muestran su nota (29-10-2026): una obra, un
+# concepto y una auditoría, contados con lo que casi nadie cuenta.
+EJEMPLOS.extend([('¿Qué pasó con Dos Bocas?', '🛢️'), ('¿Qué es el huachicol fiscal?', '⛽'),
+                 ('¿Qué dejó por aclarar la ASF en el Tren Maya?', '🚆')])
 
+
+
+# Los cuatro modos del Auditor (decisión del autor, 29-10-2026): las
+# herramientas se mudaron a la Enciclopedia y el Auditor trabaja como sus
+# «versiones», igual que un asistente de IA en el que eliges el modelo. El
+# modo cambia cómo investiga y cómo contesta, nunca los datos: en los cuatro
+# las cifras salen de la misma base, con su fuente y su estado (AGENTS.md §2).
+# (id, icono, nombre, lema, qué hace, herramientas cuyas aplicaciones usa,
+#  preguntas extra para sus aplicaciones, saludo)
+MODO_INICIAL = 'ciudadano'
+MODOS = [
+    ('inspector', '🔍', 'Inspector', 'La investigación más completa',
+     'Toda la base de datos, a fondo: expedientes de la ASF, entes públicos, estados de cuenta, RFC y lista negra del SAT, '
+     'nepotismo, contratos y megaobras. Te doy la cifra, la cuenta y todas sus fuentes.',
+     ('inspector', 'obras'), (),
+     '<p>Estoy en <b>modo Inspector</b>: investigo con toda la base de datos de la plataforma. Pégame un <b>RFC</b>, un <b>folio</b> o la liga de una nota, '
+     'pídeme el <b>diagnóstico de un ente</b> («diagnóstico de Pemex»), un <b>expediente de la ASF</b> o la cuenta de una <b>megaobra</b>.</p>'
+     '<p>Te contesto con la cifra, la operación y sus documentos. Si quieres el respaldo completo, toca <b>«Generar dictamen»</b>.</p>'),
+    # El objetivo del modo, en palabras del autor (29-10-2026): «el reportero
+    # se convierte como en un chismoso… información que igual no puede
+    # encontrar en cualquier otra parte… aquel que te transmite información
+    # privilegiada». Privilegiada por estar enterrada en documentos públicos
+    # que casi nadie lee, nunca por ser un rumor (AGENTS.md §2 bis).
+    ('periodista', '📰', 'Periodista', 'Lo que casi nadie te cuenta, con documento',
+     'Pregúntame por un concepto, una obra, una auditoría o lo que circula en redes, y te lo cuento como periodista: '
+     'lo que dice el documento, lo que casi nadie te cuenta (lo que la ASF dejó por aclarar, lo que ninguna dependencia ha publicado), '
+     'el ruido y qué consta de él, y lo que sigue. Aquí viven las Noticias y el verificador de notas.',
+     (), (('📰', 'Noticias de hoy'), ('🔎', 'Contrasta una nota'), ('📂', 'Expediente de Segalmex'),
+          ('👪', 'Nepotismo y parentesco'), ('📰', '¿Quién es Genaro García Luna?'), ('🧾', 'Contratos públicos'),
+          ('🏢', 'Empresas contratistas'), ('🏗️', '¿Qué obras no han publicado sus cifras?'), ('🛡️', 'Periodismo en riesgo')),
+     '<p>Estoy en <b>modo Periodista</b>: te cuento <b>lo que casi nadie te cuenta</b>. No son rumores: es lo que está enterrado en documentos públicos que casi nadie lee, '
+     'como lo que la ASF dejó por aclarar, lo que una dependencia no ha publicado (y quién lo debe) o lo que circula en redes y qué consta de ello.</p>'
+     '<p>Pregúntame por un <b>concepto</b> («¿qué es el huachicol fiscal?»), una <b>obra</b> («¿qué pasó con Dos Bocas?»), una <b>auditoría</b> o <b>si es cierto</b> lo que circula, '
+     'o pégame la liga de una nota. Una nota de prensa es mi punto de partida, nunca mi fuente, y <b>una acusación no es una condena</b>.</p>'),
+    ('ciudadano', '🙋', 'Ciudadano', 'Te lo explico como un amigo',
+     'Lo más sencillo: preguntas de todos los días, en corto y con un ejemplo. Cuánto te retienen, cuánto debe tu estado, '
+     'qué significa una palabra. Aquí viven tu estado de cuenta y la Calculadora Cívica.',
+     ('calculadora',), (),
+     '<p>¡Hola! Soy el Auditor y estoy en <b>modo Ciudadano</b>. Pregúntame lo que quieras del dinero público, como se lo preguntarías a un amigo: '
+     '<b>cuánto te retienen</b> de tu sueldo, <b>cuánto debe tu estado</b>, <b>cuánta lana le llega a tu municipio</b> o <b>qué significa</b> algún término.</p>'
+     '<p>Te contesto en corto y con datos oficiales. Si quieres ir a fondo, toca <b>«Saber más»</b>; y si quieres investigar en serio, cámbiame a otro modo arriba.</p>'),
+    ('ambientalista', '🌎', 'Ambientalista', 'El costo y el daño ambiental',
+     'Todo lo que tiene que ver con el ambiente: cuánto cuesta el daño, a dónde va la basura, cuánto se invierte en protegerlo, '
+     'qué resuelve la PROFEPA y quién paga cada proyecto. Aquí vive el Costo Ambiental.',
+     ('ambiente',), (('🗑️', '¿Cuánta basura se genera en México?'),),
+     '<p>Estoy en <b>modo Ambientalista</b>: investigo el <b>costo y el daño ambiental</b>. Pregúntame cuánto le cuesta al país el daño, '
+     '<b>a dónde va la basura</b>, cuánto se invierte en protegerlo o qué resuelve la <b>PROFEPA</b>.</p>'
+     '<p>El deterioro del ambiente también es gasto público: lo pagamos en agua, aire, suelo y basura. Y te digo quién paga cada proyecto, el gobierno o un privado.</p>'),
+]
+# A qué modo pertenece cada pregunta de ejemplo (sin acentos ni signos);
+# la que no cae en ninguno es del modo Inspector.
+MODO_EJEMPLO = [
+    ('ambientalista', r'ambiental|basura|profepa|contamina'),
+    ('periodista', r'^es cierto|noticia|nota$|que paso|huachicol fiscal|por aclarar|quien es|auditaran|observo|sin acceso|consultas|asuntos resuelve|cunado'),
+    ('ciudadano', r'civico|^que es|cuanto gana|dolar|valen|reloj de la deuda|%|cuantos (diputados|senadores)|quien preside|'
+                  r'cuanto se recauda|eleccion|circuitos|en que se gasta|cuanto debe|lana|que estados de cuenta'),
+]
+
+
+def modo_de(q):
+    import unicodedata
+    t = unicodedata.normalize('NFD', limpio(q).lower())
+    t = re.sub(r'[^a-z0-9% ]', '', t).strip()
+    return next((m for m, rx in MODO_EJEMPLO if re.search(rx, t)), 'inspector')
+
+
+MESES = {m: i for i, m in enumerate(('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto',
+                                      'septiembre', 'octubre', 'noviembre', 'diciembre'), 1)}
+
+
+def _fecha_col(t):
+    """La primera fecha de «actualizado» («28 de octubre de 2026» o «28-10-2026»), como (año, mes, día)."""
+    m = re.search(r'(\d{1,2}) de (\w+) de (\d{4})', t or '')
+    if m and m.group(2) in MESES:
+        return int(m.group(3)), MESES[m.group(2)], int(m.group(1))
+    m = re.search(r'(\d{1,2})-(\d{1,2})-(\d{4})', t or '')
+    return (int(m.group(3)), int(m.group(2)), int(m.group(1))) if m else (0, 0, 0)
+
+
+def _sabias():
+    """«¿Sabías esto?» del modo Periodista (pedido del autor, 29-10-2026: «muy
+    actualizadas… unas que no hicieron tanto ruido en el pasado y que
+    posiblemente deben de retomarse hoy en día»): las tres columnas
+    verificadas más nuevas y tres casos de Personajes y Hechos que llevan más
+    tiempo sin moverse. Desde el mismo día no van en el saludo («para dejar
+    como libre un poquito el chat»): se reparten entre las preguntas de
+    ejemplo del modo, con su seña. Da [(columna, seña)], nuevas y viejas
+    alternadas."""
+    import asistente_personajes
+    cols = asistente_personajes.columnas()[0]
+    nuevas = sorted((c for c in cols if c.get('seccion') in ('Verificado', 'Al momento')), key=lambda c: _fecha_col(c.get('actualizado')), reverse=True)[:3]
+    viejas = sorted((c for c in cols if c.get('seccion') in ('Personajes', 'Hechos')), key=lambda c: _fecha_col(c.get('actualizado')))[:3]
+    out = []
+    for n, v in zip(nuevas, viejas):
+        out += [(n, '🆕 ¿Sabías esto?'), (v, '🗂️ Para retomar')]
+    return out
+
+
+def _ejemplos():
+    """Las preguntas de ejemplo: (pregunta, texto, icono, modo, seña). Las de
+    «¿Sabías esto?» entran a las del Periodista, una cada tres, y quitan la
+    pregunta de ejemplo que ya llevaba a la misma columna (según el banco de
+    pruebas, preguntas_auditor.json)."""
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'preguntas_auditor.json'), encoding='utf-8') as f:
+        lleva = {x['q']: x.get('ir', '') for x in json.load(f)['preguntas']}
+    ej = [(q, q, i, modo_de(q), '') for q, i in EJEMPLOS]
+    for k, (c, sena) in enumerate(_sabias()):
+        ej = [e for e in ej if lleva.get(e[0], '').split('#')[-1] != 'col-' + c['id']]
+        t = limpio(c['titulo'])
+        corto = t if len(t) <= 80 else t[:78].rsplit(' ', 1)[0] + '…'
+        rep = [n for n, e in enumerate(ej) if e[3] == 'periodista']
+        pos = rep[min(k * 3 + 1, len(rep) - 1)] if rep else len(ej)
+        ej.insert(pos, (t, corto, c.get('icono') or '📰', 'periodista', sena))
+    return ej
+
+
+def _modos_html():
+    """El selector de modo de la cabecera, la franja con las aplicaciones del
+    modo elegido y su saludo. Cada aplicación es una pregunta: el chat la
+    reconoce por su nombre y la abre en su respuesta, como hasta ahora."""
+    import apartados
+    opciones, franjas, holas = [], [], []
+    for mid, ico, nom, lema, que, herrs, extra, hola in MODOS:
+        apps = [(t[1], t[2]) for clave in herrs for t in next(h for h in apartados.HERRAMIENTAS if h[1] == clave)[7]] + list(extra)
+        opciones.append('              <li><button type="button" class="pa-modo-op" data-pa-modo="%s" data-nom="Modo %s" data-lema="%s" aria-pressed="false">'
+                        '<span class="pa-modo-ico" aria-hidden="true">%s</span><span><b>Modo %s</b><small>%s</small></span></button></li>'
+                        % (mid, html.escape(nom), html.escape(lema[0].lower() + lema[1:], quote=True), ico, html.escape(nom), html.escape(lema)))
+        franjas.append(
+            '          <details class="pa-modo-franja" data-modo="%s"%s>\n'
+            '            <summary><span aria-hidden="true">%s</span> <b>Modo %s</b><span class="pa-modo-lema"> · %s</span>'
+            '<span class="pa-modo-n">%d aplicaciones ▾</span></summary>\n'
+            '            <p>%s</p>\n            <div class="pa-modo-apps">\n%s\n            </div>\n          </details>' % (
+                mid, '' if mid == MODO_INICIAL else ' hidden', ico, html.escape(nom), html.escape(lema), len(apps), html.escape(que),
+                '\n'.join('              <button type="button" class="pa-modo-app" data-pa-pregunta="%s"><span aria-hidden="true">%s</span> %s</button>'
+                          % (html.escape(n, quote=True), i, html.escape(n)) for i, n in apps)))
+        holas.append('                <div class="pa-hola-modo" data-modo="%s"%s>%s</div>' % (mid, '' if mid == MODO_INICIAL else ' hidden', hola))
+    return '\n'.join(opciones), '\n'.join(franjas), '\n'.join(holas)
 
 
 def pagina(cuenta, canal='', herramientas=()):
-    """herramientas: (archivo, icono, nombre, frase, imagen) de cada tarjeta
-    del menú «Herramientas» de la cabecera (pedido del autor, 23-10-2026)."""
+    """herramientas ya no se usa (29-10-2026: el menú «Herramientas» de la
+    cabecera es ahora el selector de modo); se queda para no romper a quien
+    lo llame."""
     total = sum(cuenta.values())
-    herr = '\n'.join('              <li><a class="pa-herr-tj" href="%s"><img src="%s" alt="" width="96" height="64" loading="lazy">'
-                     '<span><b><span aria-hidden="true">%s</span> %s</b><small>%s</small></span></a></li>'
-                     % (html.escape(a, quote=True), html.escape(im, quote=True), i, html.escape(n), html.escape(f))
-                     for a, i, n, f, im in herramientas)
-    ej = '\n'.join('              <button type="button" class="pa-ej" data-pa-pregunta="%s"><span aria-hidden="true">%s</span> %s</button>'
-                   % (html.escape(q, quote=True), i, html.escape(q)) for q, i in EJEMPLOS)
-    return '''<div class="pa" id="paApp" data-canal="%s">
+    opciones, franjas, holas = _modos_html()
+    ej = '\n'.join('              <button type="button" class="pa-ej%s" data-pa-pregunta="%s" data-modo="%s">%s<span aria-hidden="true">%s</span> %s</button>'
+                   % (' pa-ej-sabias' if sena else '', html.escape(q, quote=True), m, '<small class="pa-ej-sena">%s</small>' % sena if sena else '',
+                      i, html.escape(t)) for q, t, i, m, sena in _ejemplos())
+    import apartados  # «Lo que aún no sé» llega a pregunta-bot cuando hay base (paso 2.8)
+    funcion = (' data-funcion="%s/pregunta-bot"' % html.escape(apartados.FUNCIONES.rstrip('/'), quote=True)) if apartados.FUNCIONES else ''
+    return '''<div class="pa" id="paApp" data-canal="%s"%s data-modo="%s">
         <div class="pa-chat">
           <div class="pa-chat-cab">
             <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="52" height="40">
             <div><b>Pregúntale al Auditor</b><small><span class="pa-enlinea" aria-hidden="true"></span> En línea · contesta con datos oficiales</small></div>
             <span class="pa-cab-acc">
-            <button type="button" class="pa-como-abre pa-herr-abre" id="paHerrAbre" aria-controls="paHerr" aria-expanded="false"><span aria-hidden="true">🧰</span> Herramientas <span class="pa-herr-flecha" aria-hidden="true">▾</span></button>
+            <button type="button" class="pa-como-abre pa-herr-abre" id="paHerrAbre" aria-controls="paHerr" aria-expanded="false" aria-label="Cambiar el modo del Auditor"><span class="pa-modo-actual" id="paModoActual">🙋 Modo Ciudadano</span> <span class="pa-herr-flecha" aria-hidden="true">▾</span></button>
             <button type="button" class="pa-como-abre" id="paComoAbre" aria-controls="paComo" aria-expanded="false"><span aria-hidden="true">❓</span> Cómo platicar conmigo</button>
             </span>
-            <nav class="pa-herr" id="paHerr" aria-label="Herramientas del Auditor Virtual" hidden>
-              <p>Las cuatro herramientas del auditor. Cada una abre su propia página.</p>
+            <div class="pa-herr pa-modos" id="paHerr" role="group" aria-label="Modos del Auditor" hidden>
+              <p>Elige cómo quieres que investigue. Los datos son los mismos en los cuatro modos; cambia la forma de buscar y de contestarte.</p>
               <ul>
 %s
               </ul>
-            </nav>
+            </div>
           </div>
+%s
           <ol class="pa-hilo" id="paHilo" aria-live="polite">
             <li class="pa-msg pa-bot pa-hola">
               <div class="pa-burbuja">
-                <p>¡Hola! Soy el Auditor. Pregúntame lo que quieras del dinero público, como se lo preguntarías a un amigo: <b>cuánto debe tu estado</b>, <b>cuánta lana le llega a tu municipio</b>, <b>cuánto gana un diputado</b> o <b>qué significa</b> algún término.</p>
-                <p>Te contesto en corto y con datos oficiales. Si quieres ir a fondo, toca <b>«Saber más»</b> y te llevo a la página donde está la información; si necesitas el respaldo, <b>«Generar dictamen»</b>.</p>
-                <p>Y aquí mismo investigas con las seis aplicaciones del <b>Modo Inspector</b>: pégame un RFC, un folio o la liga de una nota, o pídeme el diagnóstico de un ente. Y te cuento cada <b>megaobra</b>: lo que costó, lo que pierde y quién la hizo.</p>
+%s
               </div>
             </li>
           </ol>
@@ -647,15 +963,16 @@ def pagina(cuenta, canal='', herramientas=()):
           <div class="glos-drawer-cuerpo">
           <h3 id="paComoT">Cómo platicar conmigo</h3>
           <ol>
+            <li><b>Elige mi modo</b> con el botón de arriba: <b>🔍 Inspector</b> (la investigación más completa), <b>📰 Periodista</b> (un tema contado como nota, con las Noticias), <b>🙋 Ciudadano</b> (en corto, como un amigo) o <b>🌎 Ambientalista</b> (el costo y el daño ambiental). Cada modo trae sus aplicaciones y sus preguntas de ejemplo; los datos son los mismos en los cuatro.</li>
             <li><b>Escríbeme como hablas.</b> Entiendo «lana», «varo», «¿cuánto se clavaron?», siglas como CDMX o Edomex, y preguntas que siguen a la anterior: «¿y Nuevo León?», «¿y por habitante?», «¿y el que menos?».</li>
             <li><b>Te contesto en corto:</b> la cifra, qué quiere decir y en qué lugar queda. Sé de los 32 estados, de los municipios, de los sueldos de los cargos públicos, de cada sexenio desde 1989, de %s términos del glosario y de las páginas de la plataforma.</li>
             <li><b>Saco cuentas:</b> ordeno, comparo, sumo y saco porcentajes y márgenes. Cuando hago una cuenta, te digo cuál fue.</li>
             <li><b>Verifico lo que oyes:</b> «¿es cierto que…?», «dicen que…» o la liga de una nota. Comparo la cifra con su documento oficial y te digo si coincide, si se acerca o si no cuadra.</li>
-            <li><b>Investigo contigo, sin salir del chat.</b> Las seis aplicaciones del Modo Inspector se usan desde aquí: pégame un <b>RFC</b> o un nombre y te digo si está en la lista negra del SAT; un <b>folio</b> (AV-…) y compruebo el estado de cuenta; la <b>liga de una nota</b> y la contrasto; pídeme el <b>diagnóstico de un ente</b> («diagnóstico de Pemex»), un <b>expediente de la ASF</b> («expediente de Segalmex») o una <b>investigación a la medida</b>. La aplicación se abre en la respuesta con «▶️ Úsala aquí».</li>
+            <li><b>Investigo contigo, sin salir del chat.</b> Las siete aplicaciones del Modo Inspector se usan desde aquí: pégame un <b>RFC</b> o un nombre y te digo si está en la lista negra del SAT; un <b>folio</b> (AV-…) y compruebo el estado de cuenta; la <b>liga de una nota</b> y la contrasto; pídeme el <b>diagnóstico de un ente</b> («diagnóstico de Pemex»), un <b>expediente de la ASF</b> («expediente de Segalmex») o una <b>investigación a la medida</b>. La aplicación se abre en la respuesta con «▶️ Úsala aquí».</li>
             <li><b>Sigo cada megaobra.</b> Pregúntame por el <b>Tren Maya</b>, <b>Dos Bocas</b>, el <b>AIFA</b> o el <b>FOBAPROA</b>: cuánto se aprobó, cuánto costó, su sobrecosto, si gana o pierde al año y qué dijo la ASF. También <b>en qué invirtió cada presidente</b> («obras de Calderón»), cuál tiene <b>más sobrecosto</b> y las cinco aplicaciones de Inversión y Megaobras, que también se abren aquí.</li>
             <li><b>Toca «📎 Fuente»</b> para ver la fuente de cada cifra y su estado: <span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">derivado</span> <span class="est-chip est-pendiente">pendiente</span>.</li>
             <li><b>¿Quieres ir a fondo?</b> «📖 Saber más» te lleva a la página de la plataforma donde está la información completa.</li>
-            <li><b>¿Necesitas el respaldo?</b> «🧾 Generar dictamen» abre, en otra pestaña, el dictamen pericial de Auditavisión: tu pregunta, la respuesta, sus cifras, sus fuentes y el método, con folio, sello y huella digital (SHA-256).</li>
+            <li><b>¿Necesitas el respaldo?</b> «🧾 Generar dictamen» abre, en otra pestaña, el dictamen cívico independiente de Auditavisión: tu pregunta, la respuesta, sus cifras, sus fuentes y el método, con folio, sello y huella digital (SHA-256).</li>
           </ol>
           <p class="pa-beta"><b>🛠️ En mejora continua.</b> Cada dato que integra la plataforma me vuelve más preciso. Si algo no lo sé, <a href="comunidad.html">cuéntanos</a> y lo agregamos.</p>
           <section class="pa-pendq" id="paSinResp" aria-labelledby="paSinRespT">
@@ -673,7 +990,7 @@ def pagina(cuenta, canal='', herramientas=()):
           <p class="pa-aviso"><b>Platico como chat, pero no invento.</b> No soy una inteligencia artificial que redacta: entiendo tu pregunta y contesto solo con cifras que la plataforma ya publicó con su documento (%s fichas y %s municipios). Si no lo tengo, te lo digo. Tu pregunta no sale de tu navegador.</p>
           </div>
         </aside>
-      </div>''' % (html.escape(canal, quote=True), herr, ej, format(cuenta.get('glosario', 0), ','),
+      </div>''' % (html.escape(canal, quote=True), funcion, MODO_INICIAL, opciones, franjas, holas, ej, format(cuenta.get('glosario', 0), ','),
                  format(total - cuenta.get('municipio', 0), ','), format(cuenta.get('municipio', 0), ','))
 
 

@@ -115,7 +115,11 @@ RECURSOS = [
      'obra obras megaobra megaobras ritmo perdida pierden dia mes trimestre semestre ano simulador'),
     ('obras-bolsillo', '👛', 'Ver simulador', 'Las megaobras, de la cifra a tu bolsillo', 'herramienta-megaobras-cero.html#mcMesa3', None, 'simulador',
      'obra obras megaobra megaobras bolsillo contribuyente cada uno me toca te toca sobrecosto simulador'),
-    ('obras-huella', '🌳', 'Ver huella', 'La huella ambiental de las megaobras', 'datos-ambiente-megaobras.html', None, 'tablero',
+    ('mapa-amb', '🗺️', 'Ver mapa ambiental', 'El mapa ambiental de megaobras por estado', 'datos-ambiente-megaobras.html#abMapaObras',
+     'datos-ambiente-megaobras.html?e=%s#abMapaObras', 'mapa',
+     'mapa ambiental ambiente megaobra megaobras obra obras infraestructura estado estados entidad entidades tren maya dos bocas refineria aifa aeropuerto huella impacto alerta selva manglar agua'),
+    ('obras-huella', '🌳', 'Ver huella', 'La huella ambiental de las megaobras', 'datos-ambiente-megaobras.html',
+     'datos-ambiente-megaobras.html?e=%s#abMapaObras', 'tablero',
      'obra obras megaobra megaobras tren maya dos bocas ambiental ambiente huella impacto selva deforestacion manifestacion'),
 ]
 
