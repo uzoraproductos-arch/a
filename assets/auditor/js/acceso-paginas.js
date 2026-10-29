@@ -6,7 +6,7 @@
 (function () {
   var A = window.AvAcceso, C = A && A.config;
   if (!C) return;
-  var ALFA = '0123456789';
+  var ALFA = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var $ = function (id) { return document.getElementById(id); };
   function fecha(iso) {
     var d = new Date(iso);
@@ -69,7 +69,7 @@
     });
 
     var MOTIVO = {
-      formato: 'Revisa el código: son ocho números.',
+      formato: 'Revisa el código: son ocho números o letras.',
       no_valido: 'Ese código no existe o ya no sirve. Revisa que esté bien escrito.',
       vencido: 'Ese código ya no se puede canjear: pasó su fecha límite.',
       agotado: 'Ese código ya se usó todas las veces que permite.',
@@ -412,7 +412,7 @@
     $('acMaestro').addEventListener('submit', function (e) {
       e.preventDefault();
       var f = $('acMaestro'), est = $('acMaeGuardar'), a = limpia(f.nuevo.value), b = limpia(f.otra.value);
-      if (a.length !== 8 || f.nuevo.value.replace(/[\s-]/g, '').length !== 8) { est.textContent = 'Son 8 números, del 0 al 9.'; return; }
+      if (a.length !== 8 || f.nuevo.value.replace(/[\s-]/g, '').length !== 8) { est.textContent = 'Son 8 caracteres: números y letras de la A a la Z.'; return; }
       if (a !== b) { est.textContent = 'Los dos no coinciden: escríbelo igual en las dos casillas.'; return; }
       est.textContent = 'Guardando…';
       rpc('fijar_codigo_admin', { p_codigo: a }).then(function () {

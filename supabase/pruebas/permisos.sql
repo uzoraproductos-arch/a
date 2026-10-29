@@ -143,7 +143,8 @@ select pg_temp.igual((select count(*) from public.generar_codigos(1, interval '1
 select count(*) as n from public.generar_codigos(1, interval '1 day', 1, now() - interval '1 hour', 'Ya vencido') \gset
 select pg_temp.debe_fallar($$select public.generar_codigos(501, interval '1 day')$$, 'generar más de 500 códigos de una vez');
 select pg_temp.debe_fallar($$select public.generar_codigos(1, interval '10 years')$$, 'un código de más de cinco años');
-select pg_temp.igual((select count(*) from public.codigos where codigo ~ '^[0-9]{8}$'), 6, 'códigos de 8 números');
+select pg_temp.igual((select count(*) from public.codigos where codigo ~ '^[23456789ABCDEFGHJKMNPQRSTUVWXYZ]{8}$' and codigo ~ '[0-9]' and codigo ~ '[A-Z]'), 6,
+  'los generados al azar llevan letras y números revueltos, sin 0, 1, O, I ni L');
 select codigo as c1 from public.codigos where nota = 'Prueba semana' order by id limit 1 \gset
 select codigo as c2 from public.codigos where nota = 'Prueba semana' order by id offset 1 limit 1 \gset
 select codigo as cg from public.codigos where nota = 'Grupo' \gset
@@ -163,7 +164,7 @@ select pg_temp.igual(((public.canjear_codigo(lower(substr(:'c2', 1, 4)) || ' - '
 select pg_temp.igual(((public.canjear_codigo(:'cv')) ->> 'motivo' = 'vencido')::int, 1, 'un código que ya no se podía canjear');
 select pg_temp.igual(((public.canjear_codigo('ABC')) ->> 'motivo' = 'formato')::int, 1, 'un código mal escrito');
 select pg_temp.igual(((public.canjear_codigo('ZZZZ2222')) ->> 'motivo' = 'no_valido')::int, 1, 'un código que no existe');
-select pg_temp.igual(((public.canjear_codigo('OOOO1111')) ->> 'motivo' = 'formato')::int, 1, 'un código con O y 1, que no se usan');
+select pg_temp.igual(((public.canjear_codigo('OOOO1111')) ->> 'motivo' = 'no_valido')::int, 1, 'un código con O y 1 que nadie creó: no existe');
 reset role;
 
 set role authenticated;
@@ -191,7 +192,9 @@ set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
 select pg_temp.igual((select count(*) from public.crear_codigo('2345-6789', interval '3 days', 5, null, 'Taller')), 1, 'un código propio, escrito con guion');
 select pg_temp.igual((select count(*) from public.codigos where codigo = '23456789' and usos_max = 5), 1, 'el código propio se guarda sin guion');
 select pg_temp.debe_fallar($$select public.crear_codigo('2345 6789', interval '1 day')$$, 'un código propio repetido');
-select pg_temp.debe_fallar($$select public.crear_codigo('PASE2345', interval '1 day')$$, 'un código propio con letras');
+select pg_temp.igual((select count(*) from public.crear_codigo('pase-tall', interval '1 day')), 1, 'un código propio de puras letras, en minúsculas y con guion');
+select pg_temp.igual((select count(*) from public.codigos where codigo = 'PASETALL'), 1, 'se guarda en mayúsculas y sin guion');
+select pg_temp.debe_fallar($$select public.crear_codigo('PAÑO2345', interval '1 day')$$, 'un código propio con Ñ');
 select pg_temp.igual((select count(*) from public.crear_codigo('1000 0001', interval '1 day', 1, null, null)), 1, 'un código propio con ceros y unos, sin nota');
 select pg_temp.debe_fallar($$select public.crear_codigo('234567', interval '1 day')$$, 'un código propio de menos de 8 números');
 reset role;
@@ -353,6 +356,22 @@ reset role;
 reset request.jwt.claim.sub;
 set role service_role;
 select pg_temp.igual((public.revisar_codigo_admin('40417263') is null)::int, 1, 'al cambiarlo, el código anterior deja de abrir');
+reset role;
+
+-- 14. Letras y números (30-10-2026).
+set role service_role;
+select pg_temp.igual(((public.canjear_codigo('pase-tall')) ->> 'ok')::boolean::int, 1, 'un código de puras letras se canjea, en minúsculas');
+reset role;
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select pg_temp.igual((select count(*) from public.generar_codigos(200, interval '1 day', 1, null, 'Revueltos') where codigo ~ '[0-9]' and codigo ~ '[A-Z]'), 200,
+  '200 generados al azar: todos con letras y números');
+select pg_temp.igual((select count(*) from public.crear_codigo('AB12CD34', interval '1 day')), 1, 'un código propio revuelto');
+select public.fijar_codigo_admin('ma3str0x');
+reset role;
+reset request.jwt.claim.sub;
+set role service_role;
+select pg_temp.igual((public.revisar_codigo_admin('MA3STR0X') = '00000000-0000-0000-0000-0000000000ad')::int, 1, 'un código maestro con letras, sin importar mayúsculas');
 reset role;
 
 \echo 'Todas las pruebas de permisos pasaron.'

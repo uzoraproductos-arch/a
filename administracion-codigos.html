@@ -21,14 +21,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261029zf">
-  <script src="assets/auditor/js/iconos.js?v=20261029zf"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261029zf"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261029zf" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261029zf">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261029zf">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261029zf">
-  <link rel="stylesheet" href="assets/auditor/css/acceso.css?v=20261029zf">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261029zg">
+  <script src="assets/auditor/js/iconos.js?v=20261029zg"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261029zg"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261029zg" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261029zg">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261029zg">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261029zg">
+  <link rel="stylesheet" href="assets/auditor/css/acceso.css?v=20261029zg">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -208,11 +208,11 @@
     <p class="ac-estado" id="acComoAdminEstado" role="status" aria-live="polite"></p>
     <form class="ac-semana ac-maestro" id="acMaestro" novalidate>
       <h3>Tu código maestro</h3>
-      <p class="ac-ayuda">Son 8 números que solo tú sabes. Escríbelos en la entrada de la plataforma, desde cualquier dispositivo, y te reconoce como administración sin pedirte el correo. No cambia solo: lo cambias aquí cuando quieras. No uses una fecha ni un número que alguien pueda adivinar, y no lo mandes por chat ni por correo.</p>
+      <p class="ac-ayuda">Son 8 números o letras que solo tú sabes. Escríbelos en la entrada de la plataforma, desde cualquier dispositivo, y te reconoce como administración sin pedirte el correo. No cambia solo: lo cambias aquí cuando quieras. No uses una fecha ni un número que alguien pueda adivinar, y no lo mandes por chat ni por correo.</p>
       <p class="ac-ayuda" id="acMaeEstado"></p>
       <div class="ac-fila">
-        <label>Código maestro nuevo <input class="ac-campo" name="nuevo" type="password" inputmode="numeric" maxlength="9" autocomplete="new-password" required></label>
-        <label>Escríbelo otra vez <input class="ac-campo" name="otra" type="password" inputmode="numeric" maxlength="9" autocomplete="new-password" required></label>
+        <label>Código maestro nuevo <input class="ac-campo" name="nuevo" type="password" autocapitalize="characters" maxlength="9" autocomplete="new-password" required></label>
+        <label>Escríbelo otra vez <input class="ac-campo" name="otra" type="password" autocapitalize="characters" maxlength="9" autocomplete="new-password" required></label>
       </div>
       <p class="ac-acciones"><button class="sz-btn sz-btn-of" type="submit">Guardar mi código maestro</button></p>
       <p class="ac-estado" id="acMaeGuardar" role="status" aria-live="polite"></p>
@@ -234,8 +234,8 @@
         <label>Personas por código <input class="ac-campo" name="usos" type="number" min="1" max="10000" value="1" required></label>
         <label>Canjear antes del <input class="ac-campo" name="antes" type="date"></label>
         <label class="ac-ancho">Nota (opcional) <input class="ac-campo" name="nota" type="text" maxlength="120" placeholder="Para quién son: «Taller», «Prensa»…"></label>
-        <label class="ac-ancho">Código propio (opcional) <input class="ac-campo" name="propio" type="text" inputmode="numeric" maxlength="9" autocomplete="off" spellcheck="false" placeholder="Vacío: salen al azar. Ejemplo: 2026-1029"></label>
-        <p class="ac-ayuda ac-ancho">Si escribes un código propio se crea solo ese, con la duración y los usos de arriba. Lleva 8 números, del 0 al 9. La nota es opcional.</p>
+        <label class="ac-ancho">Código propio (opcional) <input class="ac-campo" name="propio" type="text" autocapitalize="characters" maxlength="9" autocomplete="off" spellcheck="false" placeholder="Vacío: salen al azar. Ejemplo: 2026-1029 o PASE-TALL"></label>
+        <p class="ac-ayuda ac-ancho">Si escribes un código propio se crea solo ese, con la duración y los usos de arriba. Lleva 8 caracteres: puros números, puras letras o revueltos, como tú quieras. Los que salen al azar siempre revuelven letras y números, así que uno de puros números o de puras letras es uno que diste tú. La nota es opcional.</p>
       </div>
       <p class="ac-acciones"><button class="sz-btn sz-btn-of" type="submit">Generar</button>
         <button class="sz-btn ac-claro" type="button" id="acCsv">Descargar CSV</button>
@@ -270,12 +270,12 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261029zf</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261029zg</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261029zf"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261029zf"></script>
-  <script src="assets/auditor/js/acceso-paginas.js?v=20261029zf"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261029zg"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261029zg"></script>
+  <script src="assets/auditor/js/acceso-paginas.js?v=20261029zg"></script>
 </body>
 </html>
