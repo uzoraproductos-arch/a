@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 239 |
+| Páginas revisadas | 240 |
 | Páginas que solo redirigen | 29 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -194,6 +194,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-gasto-si-fuera-de.html` | Si el presupuesto fuera de… · Auditavisión | apartados.py | 45 | 0 | 0 | 1 | 0 |
 | `numeros-gasto-simulador-contable.html` | El simulador contable · Auditavisión | apartados.py | 37 | 0 | 0 | 0 | 0 |
 | `numeros-gasto-tres-presupuestos.html` | Los tres presupuestos · Auditavisión | apartados.py | 43 | 0 | 2 | 2 | 0 |
+| `numeros-herramientas-del-auditor.html` | Herramientas del Auditor · Auditavisión | apartados.py | 34 | 0 | 1 | 1 | 1 |
 | `numeros-ingreso-accesorios.html` | Accesorios de impuestos · Auditavisión | apartados.py | 38 | 0 | 1 | 1 | 0 |
 | `numeros-ingreso-aprovechamientos.html` | Aprovechamientos · Auditavisión | apartados.py | 38 | 0 | 1 | 1 | 0 |
 | `numeros-ingreso-comercio-exterior.html` | Comercio exterior · Auditavisión | apartados.py | 38 | 0 | 1 | 1 | 0 |
@@ -253,7 +254,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `radar-reloj.html` | El reloj de cada administración · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `radar-tablero.html` | El tablero · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
-| `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
+| `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 
 Los chips que pinta el motor al abrir un módulo no se cuentan aquí: solo los escritos en el HTML.
@@ -302,7 +303,7 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 | Destino | Veces enlazado |
 |---|---:|
-| `nota` | 1 |
+| `nota` | 2 |
 
 ## Registro de pendientes
 

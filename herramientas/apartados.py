@@ -403,9 +403,6 @@ APARTADOS = [
         # al generar, y tambien 'hash_a_pagina' y 'abrir_a_pagina'.
         'pestanas': True,
         'pista': 'Cada parte de Números abre su propia página. Van en el orden en que se mueve el dinero.',
-        # Debajo, las cuatro herramientas del Auditor (pedido del autor,
-        # 29-10-2026: «copiarlas y pegarlas de momento»).
-        'herramientas': True,
         'secciones': [
             {
                 'id': 'origen',
@@ -4282,6 +4279,7 @@ NUMEROS_ANTES = [
      'Se fundió con «Se paga lo que se debe» en «Cuentas claras».'),
 ]
 NUMEROS_PAGINAS = []
+NUMEROS_HERR = 'numeros-herramientas-del-auditor.html'
 # ?abrir=eb-bloque: a que direccion de Numeros lleva cada bloque del motor.
 NUMEROS_ABRIR = {}
 # Los bloques del motor que eran tarjetas de «Presupuesto» y de «Gasto
@@ -5031,6 +5029,17 @@ def numeros_preparar():
         NUMEROS_PAGINAS.append(egreso_pagina(x, n, egresos, base['panoramaErario']['totalPEF'], refs, glosario))
     # La portada: solo las tarjetas, cada una a su pagina.
     a['secciones'] = [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], r[4])} for r in NUMEROS_PARTES]
+    # Quinta tarjeta: las cuatro herramientas del Auditor, en su página dentro
+    # de Números (pedido del autor, 29-10-2026: «una nueva tarjeta… que se
+    # llamara Herramientas del Auditor»). Son las tarjetas de herramientas.html,
+    # leídas de ahí para que no se desfasen.
+    a['secciones'].append({'id': 'herramientas', 'pagina': NUMEROS_HERR,
+                           'pestana': ('🧰', 'Herramientas del Auditor', 'Megaobras, Calculadora Cívica, Modo Inspector y Costo Ambiental')})
+    herr = next(x for x in APARTADOS if x['archivo'] == 'herramientas.html')
+    NUMEROS_PAGINAS.append(dict(herr, archivo=NUMEROS_HERR, menu='Herramientas del Auditor', menu_archivo='sigue-el-dinero.html',
+                                padre=('sigue-el-dinero.html', 'Números'), titulo='Herramientas del Auditor', lema='Números',
+                                entrada=('Haz tus propias cuentas con los mismos números de la Enciclopedia. '
+                                         'Aquí están las cuatro herramientas del auditor: cada una abre su propia página.')))
     # Las anclas de cuando todo vivia en esta pagina llevan a la suya.
     a['hash_a_pagina'] = dict({r[0]: r[1] for r in NUMEROS_PARTES}, decide='numeros-gasto-publico.html', deuda='numeros-cuentas-claras.html', revisa='numeros-cuentas-claras.html', numPeso='numeros-cuanto-dinero-es.html#numPeso',
                               presupuesto='numeros-presupuesto.html', ati='herramienta-calculadora.html')
@@ -5140,21 +5149,6 @@ def pagina(a, sello):
       </nav>''' % saltos
     else:
         en_pagina = ''
-    if a.get('herramientas'):
-        # Las cuatro herramientas del Auditor, también aquí (Números, pedido
-        # del autor, 29-10-2026): las mismas tarjetas de herramientas.html,
-        # leídas de ahí para que no se desfasen.
-        herr = next(x for x in APARTADOS if x['archivo'] == 'herramientas.html')['secciones'][0]
-        en_pagina += '''
-
-      <section class="apartado-seccion apartado-seccion-modulos" id="herramientas" aria-labelledby="herramientas-tit">
-        <h2 class="apartado-pestanas-grupo" id="herramientas-tit">🧰 Herramientas del Auditor</h2>
-        <p class="apartado-pestanas-pista">Haz tus propias cuentas con los mismos números: cada herramienta abre su propia página.</p>
-        <div class="apartado-rejilla apartado-rejilla-modulos">
-%s
-        </div>
-      </section>''' % '\n'.join(tarjeta(t, True) for t in herr['tarjetas'])
-
     nota = ('<a class="apartado-nota" href="index.html?ir=nota">📖 Qué son las finanzas públicas y qué encontrarás aquí</a>'
             if a.get('nota') else '')
     guia = GUIA if a.get('guia') else ''
