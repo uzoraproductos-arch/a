@@ -413,6 +413,15 @@ alternativa: para volver a ella basta cambiar el nombre en las tres `url()` de
 lluvia, el autor pidió regresar a la acuarela. `cabecera-lluvia.webp` se queda
 en el repositorio como alternativa.
 
+**Imagen del Auditor Virtual: los rostros arrancados (29-10-2026, decisión del
+autor).** Reemplaza al foróptero en el encabezado del chat y del dictamen
+(`assets/auditor/img/herr-auditor-rostros.webp`, `FOTO_AUDITOR` de
+`apartados.py`); el foróptero se queda en el repositorio. El autor la generó con
+Krea AI. **Punto ciego:** la composición se parece mucho al collage firmado por
+«ashow» que se retiró del Modo Inspector el 24-10-2026 por falta de permiso. Se
+le advirtió al autor y él decidió publicarla. Si el artista reclama, se cambia
+por el foróptero (basta regresar las tres rutas).
+
 **Imágenes de fondo en cabecera y pie (08-10-2026, sello 20261008j).** El
 autor eligió imágenes propias de su carpeta («Gasto público → imágenes»):
 - Cabecera: `assets/auditor/img/portada/cabecera-pasillo.webp` (el pasillo
