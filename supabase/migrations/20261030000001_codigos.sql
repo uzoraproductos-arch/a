@@ -25,7 +25,8 @@ language sql immutable as $$ select '23456789ABCDEFGHJKMNPQRSTUVWXYZ'::text $$;
 create table public.codigos (
   id            bigint generated always as identity primary key,
   codigo        text not null unique check (codigo ~ '^[23456789ABCDEFGHJKMNPQRSTUVWXYZ]{8}$'),
-  duracion      interval not null check (duracion >= interval '1 hour' and duracion <= interval '5 years'),
+  -- De una hora a cinco años, o ilimitado: 100 años exactos (así lo lee el panel).
+  duracion      interval not null check (duracion >= interval '1 hour' and (duracion <= interval '5 years' or duracion = interval '100 years')),
   usos_max      integer not null default 1 check (usos_max between 1 and 10000),
   usos          integer not null default 0 check (usos >= 0 and usos <= usos_max),
   canjear_antes timestamptz,

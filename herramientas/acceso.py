@@ -8,8 +8,11 @@ tanto el número de código como el tiempo de apertura»).
 Mientras la plataforma se perfecciona todo es gratis: el código solo abre la
 puerta. Tres piezas:
 
-- canjea-tu-codigo.html: las ocho casillas (XXXX-XXXX). El canje da un «pase»
-  que se queda en el navegador, sin cuenta ni correo.
+- canjea-tu-codigo.html: la entrada, con la acuarela de la ciudad, lo último
+  verificado, las ocho casillas (XXXX-XXXX) y «¿No tienes código? Obtén uno»,
+  que deja el correo para que el autor mande uno. El canje da un «pase» que
+  se queda en el navegador, sin cuenta ni correo, y abre la ventana
+  «¡Felicidades! Cuentas con…».
 - administracion-codigos.html: el panel del autor. Entra con su correo (enlace
   mágico de Supabase), genera códigos con su duración y sus usos, los revoca y
   los descarga en CSV. Solo lo abre una cuenta de la tabla administradores.
@@ -49,6 +52,7 @@ LIBRES = [CANJE, PANEL, 'aviso-de-privacidad.html']
 DURACIONES = [
     ('1 day', '1 día'), ('3 days', '3 días'), ('5 days', '5 días'), ('7 days', '1 semana'),
     ('14 days', '2 semanas'), ('1 mon', '1 mes'), ('3 mons', '3 meses'), ('6 mons', '6 meses'), ('1 year', '1 año'),
+    ('100 years', 'Ilimitado'),
 ]
 
 
@@ -87,42 +91,105 @@ def _casillas():
             % (''.join(uno(i) for i in range(4)), ''.join(uno(i) for i in range(4, 8))))
 
 
-def pagina_canje():
+def _ultimas(n=3):
+    """Las notas «Al momento» más nuevas, para la entrada: solo el título y su
+    fecha (la nota completa vive en Noticias)."""
+    import asistente_personajes
+    cols = [c for c in asistente_personajes.columnas()[0] if c.get('seccion') == 'Al momento' and c.get('fecha')]
+    clave = lambda c: tuple(reversed(c['fecha'].split('-')))
+    return sorted(cols, key=clave, reverse=True)[:n]
+
+
+def entrada_html(sello):
+    """canjea-tu-codigo.html: la entrada de la versión de prueba (pedido del
+    autor, 29-10-2026: «de un lado… la imagen de la ciudad… y por la parte de
+    que quieres saber sobre las finanzas públicas, descubre el gasto y
+    posiblemente alguna noticia… ingresa con tu código promocional. ¿No tienes
+    código? Dale clic en obtener uno»). Página propia, sin el menú: mientras el
+    candado esté puesto es la única puerta."""
+    import html
+    import apartados
+    esc = lambda t: html.escape(t, quote=True)
+    notas = ''.join('\n          <li><span class="ac-n-fecha">%s</span> %s</li>' % (esc(c['fecha']), esc(c['titulo'])) for c in _ultimas())
     sin_base = '' if config()['funciones'] else (
-        '<p class="ac-aviso" id="acSinBase">⏳ El canje se enciende cuando la plataforma tenga su base de datos (Supabase). '
-        'Por ahora la entrada es libre.</p>')
-    bloque = ('<form class="ac-canje" id="acCanje" novalidate>\n'
-              '  <label class="ac-et" for="acCasilla0">Escribe tu código</label>\n'
-              '  %s\n'
-              '  <p class="ac-ayuda">Son ocho letras y números. No lleva la O, el cero, la I, la L ni el uno, para que no se confundan. '
-              'Si lo copiaste, pégalo en la primera casilla.</p>\n'
-              '  <button class="sz-btn sz-btn-of ac-boton" type="submit" disabled>Canjear</button>\n'
-              '  <p class="ac-estado" id="acEstado" role="status" aria-live="polite"></p>\n'
-              '</form>\n%s\n'
-              '<div class="ac-tuyo" id="acTuyo" hidden></div>') % (_casillas().replace('data-i="0"', 'data-i="0" id="acCasilla0"'), sin_base)
-    return {
-        'archivo': CANJE,
-        'menu': 'Canjea tu código',
-        'icono': '🎫',
-        'titulo': 'Canjea tu código',
-        'lema': 'La versión de prueba, por invitación',
-        'entrada': ('Auditavisión está en su versión de prueba y por ahora es gratis. Para entrar necesitas un código de invitación: '
-                    'escríbelo aquí y la plataforma se abre en este navegador por el tiempo que diga tu código. '
-                    'No te pedimos nombre ni correo.'),
-        'estilos': ['acceso.css'],
-        'scripts': ['acceso-paginas.js'],
-        'secciones': [
-            {'id': 'canje', 'titulo': 'Tu código', 'texto': 'Cuatro caracteres, un guion y otros cuatro: XXXX-XXXX.', 'tarjetas': [], 'bloque': bloque},
-            {'id': 'como', 'titulo': 'Cómo funciona', 'texto': 'Lo que pasa al canjear.', 'tarjetas': [],
-             'bloque': ('<ul>\n'
-                        '<li><b>El tiempo corre desde que lo canjeas</b>, no desde que te lo dieron.</li>\n'
-                        '<li><b>Si canjeas otro código</b> en el mismo navegador, su tiempo se suma al que te quedaba.</li>\n'
-                        '<li><b>Se queda en este navegador.</b> Si cambias de teléfono o borras los datos del sitio, necesitas otro código.</li>\n'
-                        '<li><b>Lo que guardamos:</b> que un código se canjeó, cuándo y un número al azar que identifica a tu navegador. '
-                        'Nada que diga quién eres. Lo explica el <a href="aviso-de-privacidad.html">aviso de privacidad</a>.</li>\n'
-                        '</ul>')},
-        ],
-    }
+        '\n        <p class="ac-aviso" id="acSinBase">⏳ El canje se enciende cuando la plataforma tenga su base de datos. '
+        'Por ahora la entrada es libre: <a href="index.html">pasa a la plataforma</a>.</p>')
+    casillas = _casillas().replace('data-i="0"', 'data-i="0" id="acCasilla0"')
+    return """<!DOCTYPE html>
+<!-- Página generada por herramientas/acceso.py: no la edites a mano. -->
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingresa con tu código · Auditavisión</title>
+  <meta name="description" content="Auditavisión, el gasto público a la vista. Versión de prueba por invitación: ingresa con tu código o pide uno.">
+  <meta name="theme-color" content="#0b2a63">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="assets/auditor/img/logo-auditavision.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="assets/auditor/js/iconos.js?v={sello}"></script>
+  <script src="assets/auditor/js/acceso.js?v={sello}"></script>
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">
+  <link rel="stylesheet" href="assets/auditor/css/acceso.css?v={sello}">
+</head>
+<body class="ac-entrada-cuerpo">
+  <main class="ac-entrada" id="contenido">
+    <figure class="ac-foto">
+      <img src="assets/auditor/img/portada/cabecera-lluvia.webp" alt="Una calle de ciudad bajo la lluvia, con torres entre la niebla, luces azules y gente caminando." width="1376" height="768">
+      <figcaption>Ilustración generada con IA</figcaption>
+    </figure>
+    <section class="ac-lado" aria-labelledby="acTitulo">
+      <p class="ac-marca">{logo}<span><b>Auditavisión</b><small>El gasto público, a la vista</small></span></p>
+      <h1 id="acTitulo">¿Quieres saber en qué se gasta el dinero de todos?</h1>
+      <p class="ac-lema"><b>Descubre el gasto público:</b> de dónde sale cada peso, quién lo gasta y quién revisa que se use bien. Todo con documentos oficiales.</p>
+      <div class="ac-noticias">
+        <h2>Lo último, verificado</h2>
+        <ul>{notas}
+        </ul>
+      </div>
+      <form class="ac-canje" id="acCanje" novalidate>
+        <label class="ac-et" for="acCasilla0">Ingresa con tu código promocional</label>
+        {casillas}
+        <p class="ac-ayuda">Ocho letras y números (sin O, cero, I, L ni uno). Si lo copiaste, pégalo en la primera casilla.</p>
+        <button class="sz-btn sz-btn-of ac-boton" type="submit" disabled>Ingresar</button>
+        <p class="ac-estado" id="acEstado" role="status" aria-live="polite"></p>
+      </form>{sin_base}
+      <div class="ac-tuyo" id="acTuyo" hidden></div>
+      <div class="ac-obtener">
+        <p>¿No tienes código? <button class="ac-enlace" type="button" id="acObtener" aria-expanded="false" aria-controls="acPedir">Obtén uno</button></p>
+        <form class="ac-pedir" id="acPedir" novalidate hidden>
+          <p class="ac-pedir-txt">Déjanos tu correo y te mandamos tu código. La versión de prueba es por invitación: la estamos abriendo poco a poco.</p>
+          <label class="ac-et" for="acPCorreo">Tu correo</label>
+          <input class="ac-campo" id="acPCorreo" name="correo" type="email" autocomplete="email" required>
+          <label class="ac-et" for="acPNombre">Tu nombre <small>(si quieres)</small></label>
+          <input class="ac-campo" id="acPNombre" name="nombre" type="text" autocomplete="name" maxlength="80">
+          <label class="ac-et" for="acPMotivo">¿A qué te dedicas o para qué lo quieres? <small>(si quieres)</small></label>
+          <input class="ac-campo" id="acPMotivo" name="motivo" type="text" maxlength="300">
+          <label class="ac-check"><input type="checkbox" name="acepta" required> Acepto el <a href="aviso-de-privacidad.html#codigos" target="_blank" rel="noopener">aviso de privacidad</a>: mi correo solo sirve para mandarme el código.</label>
+          <button class="sz-btn sz-btn-of" type="submit">Pedir mi código</button>
+          <p class="ac-estado" id="acPEstado" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <p class="ac-pie">Versión de prueba · gratis · <a href="aviso-de-privacidad.html">Aviso de privacidad</a> · <span>{sello}</span></p>
+    </section>
+  </main>
+  <dialog class="ac-felicidades" id="acFelicidades" aria-labelledby="acFTit">
+    <p class="ac-f-ico" aria-hidden="true">👏</p>
+    <h2 id="acFTit">¡Felicidades!</h2>
+    <p class="ac-f-cuanto" id="acFCuanto"></p>
+    <p class="ac-f-hasta" id="acFHasta"></p>
+    <a class="sz-btn sz-btn-of ac-boton" id="acFEntrar" href="index.html">Entrar a la plataforma</a>
+  </dialog>
+  <script src="assets/auditor/js/acceso-paginas.js?v={sello}"></script>
+</body>
+</html>
+""".format(sello=sello, logo=apartados.LOGO_IMG, notas=notas, casillas=casillas, sin_base=sin_base)
+
+
+def escribir_entrada(sello):
+    open(os.path.join(RAIZ, CANJE), 'w', encoding='utf-8', newline='\n').write(entrada_html(sello))
 
 
 def pagina_panel():
@@ -136,6 +203,15 @@ def pagina_panel():
               '  </form>\n'
               '  <div class="ac-admin" id="acAdmin" hidden>\n'
               '    <p class="ac-sesion"><span id="acQuien"></span> <button class="sz-btn ac-chico" type="button" id="acSalir">Salir</button></p>\n'
+              '    <p class="ac-acciones"><button class="sz-btn sz-btn-of" type="button" id="acComoAdmin">Abrir la plataforma como administrador</button></p>\n'
+              '    <p class="ac-estado" id="acComoAdminEstado" role="status" aria-live="polite"></p>\n'
+              '    <section class="ac-solicitudes" aria-labelledby="acSolTit">\n'
+              '      <h3 id="acSolTit">Solicitudes de código <span class="ac-chip ac-sin_usar" id="acSolCuenta"></span></h3>\n'
+              '      <p class="ac-ayuda">Quien pidió código desde la entrada. Elige cuánto le das, asigna y mándaselo desde tu correo.</p>\n'
+              '      <div class="ac-tabla-caja"><table class="ac-tabla" id="acSol">\n'
+              '        <thead><tr><th>Correo</th><th>Quién y para qué</th><th>Pidió</th><th>Estado</th><th></th></tr></thead>\n'
+              '        <tbody></tbody></table></div>\n'
+              '    </section>\n'
               '    <form class="ac-generar" id="acGenerar" novalidate>\n'
               '      <h3>Generar códigos</h3>\n'
               '      <div class="ac-fila">\n'
@@ -173,5 +249,7 @@ def pagina_panel():
 
 
 def paginas():
+    """Las páginas con el molde de apartados.py: el panel. La entrada tiene el
+    suyo (escribir_entrada)."""
     escribir_config()
-    return [pagina_canje(), pagina_panel()]
+    return [pagina_panel()]

@@ -1,6 +1,7 @@
 /* Las dos páginas de los códigos de acceso (pedido del autor, 29-10-2026):
-   el canje con sus ocho casillas (canjea-tu-codigo.html) y el panel de la
-   administración (administracion-codigos.html). La configuración y el pase
+   la entrada con sus ocho casillas, «¡Felicidades!» y «Obtén uno»
+   (canjea-tu-codigo.html), y el panel de la administración, con las
+   solicitudes y el acceso del administrador (administracion-codigos.html). La configuración y el pase
    los da acceso.js (window.AvAcceso). Lo genera herramientas/acceso.py. */
 (function () {
   var A = window.AvAcceso, C = A && A.config;
@@ -14,6 +15,17 @@
   }
   function limpia(t) { return String(t || '').toUpperCase().split('').filter(function (c) { return ALFA.indexOf(c) >= 0; }).join(''); }
   function bonito(c) { return c.slice(0, 4) + '-' + c.slice(4); }
+  // Cómo se leen las duraciones de PostgreSQL. «100 years» es el ilimitado.
+  var DUR = { '1 day': '1 día', '3 days': '3 días', '5 days': '5 días', '7 days': '1 semana', '14 days': '2 semanas',
+              '1 mon': '1 mes', '3 mons': '3 meses', '6 mons': '6 meses', '1 year': '1 año', '100 years': 'Ilimitado' };
+  function duracion(t) {
+    t = String(t || '');
+    if (DUR[t]) return DUR[t];
+    var m = /^(\d+) days?$/.exec(t); if (m) return m[1] + ' días';
+    return t.replace('mons', 'meses').replace('mon', 'mes').replace('years', 'años').replace('year', 'año').replace(':00:00', ' h');
+  }
+  var ILIMITADO = 50 * 365 * 864e5;  // más de 50 años por delante: ilimitado
+  function esIlimitado(hasta) { return Date.parse(hasta) - Date.now() > ILIMITADO; }
   function esc(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   /* ---------------- El canje ---------------- */
@@ -64,10 +76,23 @@
       espera: 'Fueron muchos intentos. Espera unos minutos y vuelve a probar.'
     };
     function listo(p, texto) {
-      A.guardar({ pase: p.pase, hasta: p.hasta, visto: Date.now() });
-      estado.innerHTML = '✅ ' + texto + ' Tienes acceso hasta el <b>' + esc(fecha(p.hasta)) + '</b>.';
+      var antes = A.leer() || {};
+      A.guardar({ pase: p.pase, hasta: p.hasta, visto: Date.now(), admin: !!antes.admin });
+      estado.textContent = '';
+      felicidades(p.duracion, p.hasta, texto);
       muestraTuyo();
-      setTimeout(function () { location.replace(volver); }, 2500);
+    }
+    // «¡Felicidades! Cuentas con…» (pedido del autor, 29-10-2026).
+    function felicidades(dur, hasta, nota) {
+      var d = $('acFelicidades');
+      var cuanto = esIlimitado(hasta) ? 'Cuentas con <b>acceso ilimitado</b> a toda la plataforma.'
+        : dur ? 'Cuentas con <b>' + esc(duracion(dur).toLowerCase()) + '</b> de acceso a toda la plataforma.'
+        : 'Tu código ya estaba activo en este navegador.';
+      $('acFCuanto').innerHTML = cuanto;
+      $('acFHasta').innerHTML = esIlimitado(hasta) ? '' : 'Tu acceso dura hasta el <b>' + esc(fecha(hasta)) + '</b>' +
+        (nota ? '. ' + esc(nota) : '') + '.';
+      $('acFEntrar').setAttribute('href', volver);
+      if (d && d.showModal) { d.showModal(); $('acFEntrar').focus(); } else location.replace(volver);
     }
     f.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -75,8 +100,8 @@
       var actual = A.leer();
       boton.disabled = true; estado.textContent = 'Revisando tu código…';
       A.pide({ accion: 'canjear', codigo: codigo(), pase: actual && actual.pase }).then(function (j) {
-        if (j && j.ok) return listo(j, 'Listo.');
-        if (j && j.motivo === 'ya_canjeado' && j.hasta && Date.parse(j.hasta) > Date.now()) return listo(j, 'Ese código ya estaba canjeado en este navegador.');
+        if (j && j.ok) return listo(j, (A.vigente(actual) && actual.pase === j.pase) ? 'Se sumó al tiempo que te quedaba' : '');
+        if (j && j.motivo === 'ya_canjeado' && j.hasta && Date.parse(j.hasta) > Date.now()) return listo({ pase: j.pase, hasta: j.hasta }, '');
         estado.textContent = MOTIVO[j && j.motivo] || 'No pudimos revisar tu código. Intenta de nuevo.';
         revisa();
       }).catch(function () { estado.textContent = 'No hubo conexión. Intenta de nuevo.'; revisa(); });
@@ -85,28 +110,58 @@
     function muestraTuyo() {
       var p = A.leer(), caja = $('acTuyo');
       if (!caja) return;
-      if (!A.vigente(p)) { caja.hidden = true; return; }
+      if (!p || !p.hasta) { caja.hidden = true; return; }
       caja.hidden = false;
-      caja.innerHTML = '<p>Tu acceso en este navegador vence el <b>' + esc(fecha(p.hasta)) + '</b>. Si canjeas otro código, se suma.</p>' +
-        '<p><a class="sz-btn" href="' + esc(volver) + '">Seguir a la plataforma</a></p>';
+      if (!A.vigente(p)) {
+        // Se le acabó el tiempo: que pida otro (pedido del autor).
+        caja.className = 'ac-tuyo ac-tuyo-fin';
+        caja.innerHTML = '<p>Tu acceso terminó el <b>' + esc(fecha(p.hasta)) + '</b>. ¿Quieres seguir? Pide otro código aquí abajo.</p>';
+        var b = $('acObtener'); if (b && $('acPedir').hidden) b.click();
+        return;
+      }
+      caja.className = 'ac-tuyo';
+      caja.innerHTML = '<p>' + (p.admin ? 'Entraste como <b>administración</b>. ' : '') +
+        (esIlimitado(p.hasta) ? 'Tu acceso en este navegador es <b>ilimitado</b>.' : 'Tu acceso en este navegador vence el <b>' + esc(fecha(p.hasta)) + '</b>. Si canjeas otro código, se suma.') +
+        '</p><p><a class="sz-btn sz-btn-of" href="' + esc(volver) + '">Entrar a la plataforma</a></p>';
     }
     muestraTuyo();
     var pega = new URLSearchParams(location.search).get('c');
     if (pega) reparte(0, pega);
   }
 
+  /* ---------------- «¿No tienes código? Obtén uno» ---------------- */
+  function pedir() {
+    var b = $('acObtener'), f = $('acPedir'); if (!b || !f) return;
+    b.addEventListener('click', function () {
+      f.hidden = !f.hidden; b.setAttribute('aria-expanded', String(!f.hidden));
+      if (!f.hidden) f.correo.focus();
+    });
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var est = $('acPEstado'), correo = f.correo.value.trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo)) { est.textContent = 'Escribe un correo válido.'; f.correo.focus(); return; }
+      if (!f.acepta.checked) { est.textContent = 'Para mandarte el código necesitamos que aceptes el aviso de privacidad.'; return; }
+      if (!C.funciones) { est.textContent = 'Las solicitudes se encienden cuando la plataforma tenga su base de datos.'; return; }
+      var boton = f.querySelector('button[type=submit]'); boton.disabled = true; est.textContent = 'Enviando tu solicitud…';
+      A.pide({ accion: 'solicitar', correo: correo, nombre: f.nombre.value.trim() || null, motivo: f.motivo.value.trim() || null, acepta_aviso: true })
+        .then(function (j) {
+          if (j && j.ok) {
+            f.innerHTML = '<p class="ac-pedido">✅ <b>Listo, recibimos tu solicitud</b> (folio ' + esc(j.folio) + '). Te mandaremos tu código a <b>' +
+              esc(correo) + '</b>. Revisa también tu carpeta de correo no deseado.</p>';
+            return;
+          }
+          est.textContent = j && j.motivo === 'espera' ? 'Ya recibimos varias solicitudes desde aquí. Intenta más tarde.'
+            : j && j.motivo === 'correo' ? 'Escribe un correo válido.' : 'No pudimos enviar tu solicitud. Intenta de nuevo.';
+          boton.disabled = false;
+        }).catch(function () { est.textContent = 'No hubo conexión. Intenta de nuevo.'; boton.disabled = false; });
+    });
+  }
+
   /* ---------------- El panel de la administración ---------------- */
   function panel() {
     var raiz = $('acPanel'); if (!raiz) return;
     var CLAVE = 'av-admin', s = null, lista = [];
-    var DUR = { '1 day': '1 día', '3 days': '3 días', '5 days': '5 días', '7 days': '1 semana', '14 days': '2 semanas',
-                '1 mon': '1 mes', '3 mons': '3 meses', '6 mons': '6 meses', '1 year': '1 año' };
     var EST = { en_uso: 'En uso', sin_usar: 'Sin usar', vencido: 'Vencido', terminado: 'Terminado', revocado: 'Revocado' };
-    function duracion(t) {
-      if (DUR[t]) return DUR[t];
-      var m = /^(\d+) days?$/.exec(t); if (m) return m[1] + ' días';
-      return t.replace('mons', 'meses').replace('mon', 'mes').replace('years', 'años').replace('year', 'año').replace(':00:00', ' h');
-    }
     function lee() { try { s = JSON.parse(sessionStorage.getItem(CLAVE) || 'null'); } catch (e) { s = null; } }
     function pon(x) { s = x; try { if (x) sessionStorage.setItem(CLAVE, JSON.stringify(x)); else sessionStorage.removeItem(CLAVE); } catch (e) {} }
     function auth(ruta, cuerpo, token, metodo) {
@@ -167,9 +222,66 @@
           (k.revocado ? 'Devolver' : 'Revocar') + '</button></td></tr>';
       }).join('') || '<tr><td colspan="6">Todavía no hay códigos.</td></tr>';
     }
-    function carga() {
-      return rpc('codigos_lista').then(function (j) { lista = j || []; pinta(); });
+    var sols = [];
+    var SOL = { nueva: 'Nueva', enviada: 'Enviada', descartada: 'Descartada' };
+    var opciones = Object.keys(DUR).map(function (k) { return '<option value="' + k + '"' + (k === '7 days' ? ' selected' : '') + '>' + DUR[k] + '</option>'; }).join('');
+    function pintaSol() {
+      var nuevas = sols.filter(function (x) { return x.estado === 'nueva'; }).length;
+      $('acSolCuenta').textContent = nuevas ? nuevas + (nuevas === 1 ? ' nueva' : ' nuevas') : 'sin pendientes';
+      $('acSol').querySelector('tbody').innerHTML = sols.map(function (x) {
+        var quien = [x.nombre, x.motivo].filter(Boolean).map(esc).join(' · ') + (x.veces > 1 ? ' <span class="ac-chip">pidió ' + x.veces + ' veces</span>' : '');
+        var accion = x.estado === 'nueva'
+          ? '<select class="ac-campo ac-sol-dur" data-sol="' + x.id + '" aria-label="Duración para ' + esc(x.correo) + '">' + opciones + '</select> ' +
+            '<button class="sz-btn sz-btn-of ac-chico" type="button" data-asignar="' + x.id + '">Asignar código</button> ' +
+            '<button class="sz-btn ac-chico ac-claro" type="button" data-descartar="' + x.id + '">Descartar</button>'
+          : x.codigo ? '<a class="sz-btn ac-chico ac-claro" href="' + esc(correoA(x.correo, x.nombre, x.codigo, x.duracion)) + '">Escribirle otra vez</a>' : '';
+        return '<tr><td>' + esc(x.correo) + '</td><td>' + (quien || '—') + '</td><td>' + esc(fecha(x.creado)) + '</td>' +
+          '<td>' + esc(SOL[x.estado]) + (x.codigo ? ': <b>' + esc(bonito(x.codigo)) + '</b> (' + esc(duracion(x.duracion)) + ')' : '') + '</td><td>' + accion + '</td></tr>';
+      }).join('') || '<tr><td colspan="5">Todavía nadie ha pedido código.</td></tr>';
     }
+    // El correo lo manda el autor desde el suyo: aquí solo se arma el mensaje.
+    function correoA(correo, nombre, cod, dur) {
+      var sitio = location.href.replace(/[^/]*$/, '');
+      var cuerpo = 'Hola' + (nombre ? ' ' + nombre : '') + ':\n\nGracias por querer probar Auditavisión, el gasto público a la vista.\n\n' +
+        'Tu código de acceso es: ' + bonito(cod) + '\n' +
+        (dur === '100 years' ? 'Tu acceso es ilimitado.' : 'Te da ' + duracion(dur).toLowerCase() + ' de acceso a toda la plataforma, contados desde que lo ingreses.') + '\n\n' +
+        'Entra aquí: ' + sitio + 'canjea-tu-codigo.html?c=' + cod + '\n\n' +
+        'Cuando se te acabe el tiempo, pide otro desde la misma página. Y si ves algo que mejorar, cuéntanos: tu opinión nos ayuda mucho.\n';
+      return 'mailto:' + encodeURIComponent(correo) + '?subject=' + encodeURIComponent('Tu código de acceso a Auditavisión') + '&body=' + encodeURIComponent(cuerpo);
+    }
+    function carga() {
+      return Promise.all([
+        rpc('codigos_lista').then(function (j) { lista = j || []; pinta(); }),
+        rpc('solicitudes_lista').then(function (j) { sols = j || []; pintaSol(); })
+      ]);
+    }
+    $('acSol').addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      if (b.dataset.asignar) {
+        var dur = $('acSol').querySelector('select[data-sol="' + b.dataset.asignar + '"]').value;
+        b.disabled = true;
+        rpc('atender_solicitud', { p_id: +b.dataset.asignar, p_duracion: dur }).then(function (r) {
+          location.href = correoA(r.correo, r.nombre, r.codigo, r.duracion);
+          return carga();
+        }).catch(function () { b.disabled = false; alert('No se pudo asignar el código. Intenta de nuevo.'); });
+      } else if (b.dataset.descartar && confirm('¿Descartar esta solicitud?')) {
+        rpc('descartar_solicitud', { p_id: +b.dataset.descartar }).then(carga);
+      }
+    });
+    // El administrador entra a la plataforma sin gastar códigos: su navegador
+    // recibe un pase ilimitado y la entrada lo reconoce (pedido del autor).
+    $('acComoAdmin').addEventListener('click', function () {
+      var est = $('acComoAdminEstado'), p = A.leer();
+      if (p && p.admin && A.vigente(p)) { location.href = 'index.html'; return; }
+      est.textContent = 'Preparando tu acceso…';
+      rpc('generar_codigos', { p_cantidad: 1, p_duracion: '100 years', p_usos: 1, p_antes: null, p_nota: 'Administración: ' + (s.correo || '') })
+        .then(function (k) { return A.pide({ accion: 'canjear', codigo: k[0].codigo, pase: p && p.pase }); })
+        .then(function (j) {
+          if (!j || !j.ok) throw j;
+          A.guardar({ pase: j.pase, hasta: j.hasta, visto: Date.now(), admin: true });
+          location.href = 'index.html';
+        }).catch(function () { est.textContent = 'No se pudo preparar tu acceso. Intenta de nuevo.'; });
+    });
     function abre() {
       token().then(function (t) { return auth('/auth/v1/user', null, t, 'GET'); }).then(function (u) {
         s.correo = u.email; pon(s);
@@ -222,6 +334,6 @@
     });
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { canje(); panel(); });
-  else { canje(); panel(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { pedir(); canje(); panel(); });
+  else { pedir(); canje(); panel(); }
 })();

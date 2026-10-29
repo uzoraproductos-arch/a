@@ -155,8 +155,11 @@ Mientras la plataforma se perfecciona, la versión de prueba se abre con un cód
 | `canjes` | Qué pase canjeó qué código y cuándo |
 | `generar_codigos`, `revocar_codigo`, `codigos_lista` | Las usa el panel (`administracion-codigos.html`); revisan `es_admin()` |
 | `canjear_codigo`, `pase_hasta` | Solo la llave de servicio: las llama la función `codigo`, que pone el límite de 10 intentos cada 10 minutos por IP |
+| `solicitudes_codigo` | «¿No tienes código? Obtén uno»: el correo (y, si quiere, nombre y a qué se dedica), solo con el aviso aceptado. Se borra a los 12 meses de atendida |
+| `solicitar_codigo` | Solo la llave de servicio (función `codigo`, 3 por hora por IP). No duplica una solicitud nueva del mismo correo |
+| `atender_solicitud`, `descartar_solicitud`, `solicitudes_lista` | El panel: asigna un código de un uso con la duración elegida y arma el correo para que el autor lo mande desde el suyo |
 
-El tiempo corre desde el canje; si el mismo pase canjea otro código, se suma. Revocar un código le quita su tiempo a quien lo canjeó. Los códigos no llevan 0, O, 1, I ni L (31 caracteres, unos 850 mil millones de combinaciones).
+Las duraciones van de 1 hora a 5 años, o **ilimitado** (`interval '100 years'`). El tiempo corre desde el canje; si el mismo pase canjea otro código, se suma. El administrador entra a su panel y «Abrir la plataforma como administrador» le da a su navegador un pase ilimitado, marcado como de la administración. Revocar un código le quita su tiempo a quien lo canjeó. Los códigos no llevan 0, O, 1, I ni L (31 caracteres, unos 850 mil millones de combinaciones).
 
 **Para encenderlo:** (1) crear el proyecto; (2) darte de alta en `administradores` con tu `user_id` (Authentication → Users → invita tu correo, y luego en el editor SQL: `insert into administradores values ('<tu user_id>', 'Tu nombre');`); (3) en Authentication → URL Configuration, agregar la dirección del panel a las *Redirect URLs*; (4) llenar `FUNCIONES` (`apartados.py`) y `SUPABASE_ANON` (`acceso.py`, la llave **pública**); (5) desplegar con `supabase functions deploy codigo --no-verify-jwt` si el proyecto usa las llaves nuevas (`sb_publishable_…`), que no son JWT; (6) cuando quieras cerrar la versión de prueba, `CANDADO = True` y regenerar.
 

@@ -21,14 +21,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261029s">
-  <script src="assets/auditor/js/iconos.js?v=20261029s"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261029s"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261029s" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261029s">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261029s">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261029s">
-  <link rel="stylesheet" href="assets/auditor/css/acceso.css?v=20261029s">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261029t">
+  <script src="assets/auditor/js/iconos.js?v=20261029t"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261029t"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261029t" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261029t">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261029t">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261029t">
+  <link rel="stylesheet" href="assets/auditor/css/acceso.css?v=20261029t">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -195,11 +195,20 @@
   </form>
   <div class="ac-admin" id="acAdmin" hidden>
     <p class="ac-sesion"><span id="acQuien"></span> <button class="sz-btn ac-chico" type="button" id="acSalir">Salir</button></p>
+    <p class="ac-acciones"><button class="sz-btn sz-btn-of" type="button" id="acComoAdmin">Abrir la plataforma como administrador</button></p>
+    <p class="ac-estado" id="acComoAdminEstado" role="status" aria-live="polite"></p>
+    <section class="ac-solicitudes" aria-labelledby="acSolTit">
+      <h3 id="acSolTit">Solicitudes de código <span class="ac-chip ac-sin_usar" id="acSolCuenta"></span></h3>
+      <p class="ac-ayuda">Quien pidió código desde la entrada. Elige cuánto le das, asigna y mándaselo desde tu correo.</p>
+      <div class="ac-tabla-caja"><table class="ac-tabla" id="acSol">
+        <thead><tr><th>Correo</th><th>Quién y para qué</th><th>Pidió</th><th>Estado</th><th></th></tr></thead>
+        <tbody></tbody></table></div>
+    </section>
     <form class="ac-generar" id="acGenerar" novalidate>
       <h3>Generar códigos</h3>
       <div class="ac-fila">
         <label>Cantidad <input class="ac-campo" name="cantidad" type="number" min="1" max="500" value="10" required></label>
-        <label>Duración <select class="ac-campo" name="duracion"><option value="1 day">1 día</option><option value="3 days">3 días</option><option value="5 days">5 días</option><option value="7 days" selected>1 semana</option><option value="14 days">2 semanas</option><option value="1 mon">1 mes</option><option value="3 mons">3 meses</option><option value="6 mons">6 meses</option><option value="1 year">1 año</option><option value="otra">Otra (en días)</option></select></label>
+        <label>Duración <select class="ac-campo" name="duracion"><option value="1 day">1 día</option><option value="3 days">3 días</option><option value="5 days">5 días</option><option value="7 days" selected>1 semana</option><option value="14 days">2 semanas</option><option value="1 mon">1 mes</option><option value="3 mons">3 meses</option><option value="6 mons">6 meses</option><option value="1 year">1 año</option><option value="100 years">Ilimitado</option><option value="otra">Otra (en días)</option></select></label>
         <label class="ac-otra" hidden>Días <input class="ac-campo" name="dias" type="number" min="1" max="1825" value="10"></label>
         <label>Usos por código <input class="ac-campo" name="usos" type="number" min="1" max="10000" value="1" required></label>
         <label>Canjear antes del <input class="ac-campo" name="antes" type="date"></label>
@@ -227,12 +236,12 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261029s</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261029t</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261029s"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261029s"></script>
-  <script src="assets/auditor/js/acceso-paginas.js?v=20261029s"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261029t"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261029t"></script>
+  <script src="assets/auditor/js/acceso-paginas.js?v=20261029t"></script>
 </body>
 </html>

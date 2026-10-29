@@ -1481,6 +1481,13 @@ AVISO = {
                     '<p>Lo que sí se guarda <b>en tu propio navegador</b>, para que la plataforma recuerde lo que hiciste, es esto. '
                     'Nunca nos llega, y lo borras al borrar los datos del sitio en tu navegador:</p>\n'
                     '<ul>\n%s\n</ul>') % '\n'.join('<li><b>%s</b> (<code>%s</code>): %s</li>' % x for x in _AV_NAVEGADOR)},
+        {'id': 'codigos', 'titulo': 'Si pides o canjeas un código de acceso', 'texto': 'La versión de prueba, por invitación (29-10-2026).', 'tarjetas': [],
+         'bloque': ('<p><b>Al canjear un código</b> no te pedimos nada tuyo: en la base de datos queda que un código se canjeó, cuándo, y un número '
+                    'al azar que identifica a tu navegador (<code>av-pase</code>). Sirve para saber hasta cuándo tienes acceso.</p>\n'
+                    '<p><b>Al pedir un código</b> («¿No tienes código? Obtén uno») guardamos tu correo y, si los escribes, tu nombre y a qué te dedicas, '
+                    'además de una huella cifrada de tu conexión (no tu dirección IP) para frenar el spam. <b>Para qué:</b> solo para mandarte tu código '
+                    'y, si lo pides otra vez, saber que ya lo tenías. No lo usamos para publicidad ni lo compartimos. <b>Cuánto tiempo:</b> la solicitud '
+                    'se borra sola 12 meses después de atendida. Para pedir que la borremos antes, responde al correo con el que te mandamos tu código.</p>')},
         {'id': 'terceros', 'titulo': 'Servicios de terceros', 'texto': 'Lo que tu navegador pide a otros sitios al abrir una página.', 'tarjetas': [],
          'bloque': ('<p>Para mostrarte la página, tu navegador se conecta a GitHub Pages (donde vive el sitio), a Google Fonts (las letras) '
                     'y a cdnjs (la librería de los mapas). Esos servicios reciben, como cualquier sitio, tu dirección IP y los datos técnicos '
@@ -5753,6 +5760,9 @@ def generar(sello=None):
     texto = pagina(herramienta_dictamen(asistente.dictamen_pagina()), sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, asistente.DICTAMEN), 'wb').write(texto.encode('utf-8'))
     print('asistente: %s con %d fichas %s' % (asistente.ARCHIVO, sum(cuenta.values()), cuenta))
+    # La entrada de la versión de prueba (códigos de acceso), con su molde propio.
+    import acceso
+    acceso.escribir_entrada(sello)
     import sitemap
     return sitemap.generar(sello)
 

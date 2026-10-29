@@ -45,7 +45,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `aviso-de-privacidad.html` | Aviso de privacidad · Auditavisión | apartados.py | 28 | 0 | 1 | 0 | 0 |
 | `biblioteca-hacendaria.html` | Biblioteca hacendaria · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `busca-y-verifica.html` | Busca y verifica · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `canjea-tu-codigo.html` | Canjea tu código · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
+| `canjea-tu-codigo.html` | Ingresa con tu código · Auditavisión | acceso.py | 7 | 0 | 0 | 0 | 0 |
 | `comunidad-compartir.html` | Comparte el Estado de Cuenta · Auditavisión | apartados.py | 37 | 0 | 0 | 0 | 0 |
 | `comunidad-erratas.html` | Fe de erratas · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 0 |
 | `comunidad-error.html` | Un dato mal en esta plataforma · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |

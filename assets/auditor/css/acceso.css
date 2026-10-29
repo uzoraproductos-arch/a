@@ -55,3 +55,61 @@
 
 /* El estilo de cada caja no le gana a hidden. */
 .ac-panel [hidden], .ac-tuyo[hidden], .ac-aviso[hidden] { display: none !important; }
+
+/* La entrada de la versión de prueba (canjea-tu-codigo.html): la foto de la
+   ciudad a un lado y, al otro, de qué se trata, lo último verificado, las
+   casillas y «Obtén uno» (pedido del autor, 29-10-2026). */
+.ac-entrada-cuerpo { margin: 0; background: #f4f7fd; color: #142033; font-family: Inter, system-ui, sans-serif; font-size: 16px; line-height: 1.55; }
+.ac-entrada { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(360px, 560px); min-height: 100vh; }
+.ac-foto { position: relative; margin: 0; overflow: hidden; background: #0b2a63; }
+.ac-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+.ac-foto::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7, 29, 71, 0) 55%, rgba(7, 29, 71, .35) 100%); }
+.ac-foto figcaption { position: absolute; left: 14px; bottom: 12px; z-index: 1; font-size: 13px; color: #fff; background: rgba(7, 29, 71, .7); border-radius: 999px; padding: 3px 10px; }
+.ac-lado { display: grid; align-content: center; gap: 16px; padding: 36px 40px; background: #fff; }
+.ac-marca { display: flex; align-items: center; gap: 10px; margin: 0; color: #0b2a63; }
+.ac-marca span { display: grid; line-height: 1.2; }
+.ac-marca b { font-size: 20px; }
+.ac-marca small { font-size: 14px; color: #5a6782; }
+.ac-lado h1 { margin: 0; font-family: "Playfair Display", Georgia, serif; font-weight: 900; font-size: clamp(28px, 3.2vw, 38px); line-height: 1.15; color: #0b2a63; }
+.ac-lema { margin: 0; font-size: 17px; color: #33415c; }
+.ac-noticias { border-left: 4px solid #4f9be8; background: #f4f7fd; border-radius: 0 12px 12px 0; padding: 10px 14px; }
+.ac-noticias h2 { margin: 0 0 6px; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: #2c579f; }
+.ac-noticias ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.ac-noticias li { font-size: 16px; color: #24324d; }
+.ac-n-fecha { font: 600 14px "JetBrains Mono", monospace; color: #5a6782; margin-right: 4px; }
+.ac-lado .ac-canje { padding: 16px; border-color: #c9d3e6; }
+.ac-obtener p { margin: 0; }
+.ac-enlace { font: inherit; font-weight: 700; color: #16408f; background: none; border: 0; padding: 0 4px; min-height: 44px; text-decoration: underline; cursor: pointer; }
+.ac-pedir { display: grid; gap: 8px; margin-top: 8px; background: #f7f9fd; border: 1px solid #dfe5f0; border-radius: 14px; padding: 14px 16px; }
+.ac-pedir-txt { color: #33415c; }
+.ac-pedir .ac-et { font-size: 15px; }
+.ac-pedir .ac-et small { font-weight: 400; color: #5a6782; }
+.ac-check { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; color: #24324d; }
+.ac-check input { width: 22px; height: 22px; margin-top: 2px; flex: none; }
+.ac-pedido { margin: 0; }
+.ac-pedir[hidden] { display: none !important; }
+.ac-tuyo-fin { background: #fff6e0; border-color: #f0d9a0; }
+.ac-pie { margin: 0; font-size: 14px; color: #5a6782; }
+.ac-pie a { color: #16408f; }
+.ac-felicidades { border: 0; border-radius: 20px; padding: 28px 28px 24px; max-width: min(92vw, 420px); text-align: center; box-shadow: 0 24px 60px rgba(7, 29, 71, .35); }
+.ac-felicidades::backdrop { background: rgba(7, 29, 71, .55); }
+.ac-felicidades h2 { margin: 0 0 8px; font-family: "Playfair Display", Georgia, serif; font-size: 32px; color: #0b2a63; }
+.ac-f-ico { margin: 0; font-size: 44px; color: #c8a032; }
+.ac-f-ico svg { width: 56px; height: 56px; }
+.ac-f-cuanto { font-size: 18px; margin: 0 0 6px; }
+.ac-f-hasta { font-size: 16px; color: #33415c; margin: 0 0 18px; }
+.ac-felicidades .ac-boton { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+.ac-sol-dur { width: auto; display: inline-block; min-width: 120px; }
+.ac-solicitudes { margin: 18px 0; }
+.ac-solicitudes h3 { color: #0b2a63; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+@media (max-width: 900px) {
+  .ac-entrada { grid-template-columns: 1fr; }
+  .ac-foto { height: 34vh; min-height: 200px; }
+  .ac-foto::after { background: linear-gradient(180deg, rgba(7, 29, 71, 0) 60%, rgba(7, 29, 71, .3) 100%); }
+  .ac-lado { padding: 22px 16px 28px; align-content: start; }
+}
+/* En la entrada, las ocho casillas caben en un renglón (4 – 4). */
+.ac-lado .ac-casillas { gap: 6px; flex-wrap: nowrap; }
+.ac-lado .ac-grupo { gap: 6px; }
+.ac-lado .ac-casilla { width: 46px; height: 56px; font-size: 24px; }
+@media (max-width: 520px) { .ac-lado .ac-casillas { flex-wrap: wrap; } }

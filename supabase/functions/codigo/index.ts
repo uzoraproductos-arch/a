@@ -1,13 +1,15 @@
-// codigo: canjear un código de acceso y consultar hasta cuándo abre un pase
-// (pedido del autor, 29-10-2026; migración 20261030000001_codigos.sql).
+// codigo: canjear un código de acceso, consultar hasta cuándo abre un pase y
+// pedir un código («¿No tienes código? Obtén uno») (pedido del autor,
+// 29-10-2026; migraciones 20261030000001_codigos.sql y 20261030000002).
 // Va por aquí, y no directo a la base, para poner el límite de intentos por IP:
-// así nadie prueba códigos al azar. Solo guarda el canje: ni nombre ni correo.
+// así nadie prueba códigos al azar. El canje no guarda nombre ni correo; la
+// solicitud guarda el correo solo con el aviso de privacidad aceptado.
 import { base, dentroDelLimite, huellaIp, leeJson, responde, sirve } from "../_comun/comun.ts";
 
 const PASE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 sirve(async (req) => {
-  const j = await leeJson(req, 1000);
+  const j = await leeJson(req, 2000);
   const accion = j && j.accion;
   const pase = j && typeof j.pase === "string" && PASE.test(j.pase) ? j.pase : null;
   const db = base(), huella = await huellaIp(req);
@@ -25,6 +27,20 @@ sirve(async (req) => {
     // Diez intentos cada diez minutos por IP, buenos o malos.
     if (!(await dentroDelLimite(db, huella, "codigo-canje", 10, 600))) return responde(req, { ok: false, motivo: "espera" }, 429);
     const { data, error } = await db.rpc("canjear_codigo", { p_codigo: codigo, p_pase: pase });
+    if (error) throw error;
+    return responde(req, data);
+  }
+
+  if (accion === "solicitar") {
+    // Tres solicitudes por hora por IP; el correo solo con el aviso aceptado.
+    if (!(await dentroDelLimite(db, huella, "codigo-solicitud", 3, 3600))) return responde(req, { ok: false, motivo: "espera" }, 429);
+    const { data, error } = await db.rpc("solicitar_codigo", {
+      p_correo: j && typeof j.correo === "string" ? j.correo.slice(0, 254) : "",
+      p_nombre: j && typeof j.nombre === "string" ? j.nombre.slice(0, 80) : null,
+      p_motivo: j && typeof j.motivo === "string" ? j.motivo.slice(0, 300) : null,
+      p_acepta: j?.acepta_aviso === true,
+      p_huella: huella,
+    });
     if (error) throw error;
     return responde(req, data);
   }

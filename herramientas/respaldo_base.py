@@ -34,7 +34,7 @@ import urllib.request
 # Todas las tablas de supabase/migrations/. Si una migración agrega una
 # tabla, va aquí: main() compara esta lista con las migraciones y se detiene.
 TABLAS = ['administradores', 'alertas', 'busquedas_web', 'canjes', 'codigos', 'consultas_ia', 'donaciones', 'envios', 'evidencias',
-          'foro_hilos', 'foro_mensajes', 'limites', 'pases', 'perfiles', 'portales_cache', 'preguntas_bot', 'suscripciones']
+          'foro_hilos', 'foro_mensajes', 'limites', 'pases', 'perfiles', 'portales_cache', 'preguntas_bot', 'solicitudes_codigo', 'suscripciones']
 PUBLICAS = ['envios_publicos', 'evidencias', 'busquedas_web', 'donaciones']
 PAGINA = 1000
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

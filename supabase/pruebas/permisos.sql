@@ -139,10 +139,11 @@ set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
 select count(*) as n from public.generar_codigos(3, interval '7 days', 1, null, 'Prueba semana') \gset
 select pg_temp.igual(:n, 3, 'códigos de una semana generados');
 select count(*) as n from public.generar_codigos(1, interval '1 day', 2, null, 'Grupo') \gset
+select pg_temp.igual((select count(*) from public.generar_codigos(1, interval '100 years', 1, null, 'Ilimitado')), 1, 'un código ilimitado');
 select count(*) as n from public.generar_codigos(1, interval '1 day', 1, now() - interval '1 hour', 'Ya vencido') \gset
 select pg_temp.debe_fallar($$select public.generar_codigos(501, interval '1 day')$$, 'generar más de 500 códigos de una vez');
 select pg_temp.debe_fallar($$select public.generar_codigos(1, interval '10 years')$$, 'un código de más de cinco años');
-select pg_temp.igual((select count(*) from public.codigos where codigo ~ '^[23456789ABCDEFGHJKMNPQRSTUVWXYZ]{8}$'), 5, 'códigos con el formato de 8 caracteres');
+select pg_temp.igual((select count(*) from public.codigos where codigo ~ '^[23456789ABCDEFGHJKMNPQRSTUVWXYZ]{8}$'), 6, 'códigos con el formato de 8 caracteres');
 select codigo as c1 from public.codigos where nota = 'Prueba semana' order by id limit 1 \gset
 select codigo as c2 from public.codigos where nota = 'Prueba semana' order by id offset 1 limit 1 \gset
 select codigo as cg from public.codigos where nota = 'Grupo' \gset
@@ -170,13 +171,40 @@ set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
 select public.revocar_codigo((select id from public.codigos where codigo = :'cg'));
 select pg_temp.igual((select count(*) from public.codigos_lista() where estado = 'revocado'), 1, 'códigos revocados en la lista');
 select pg_temp.igual((select count(*) from public.codigos_lista() where estado = 'en_uso'), 2, 'códigos en uso en la lista');
-select pg_temp.igual((select count(*) from public.codigos_lista() where estado = 'sin_usar'), 1, 'códigos sin usar en la lista');
+select pg_temp.igual((select count(*) from public.codigos_lista() where estado = 'sin_usar'), 2, 'códigos sin usar en la lista');
 select pg_temp.igual((select count(*) from public.codigos_lista() where estado = 'vencido'), 1, 'códigos vencidos en la lista');
 reset role;
 reset request.jwt.claim.sub;
 set role service_role;
 select pg_temp.igual(abs(extract(epoch from public.pase_hasta(:'pase') - (now() + interval '7 days')))::bigint / 60, 0, 'minutos de diferencia con una semana tras revocar el segundo código');
 select pg_temp.igual(((public.canjear_codigo(:'cg')) ->> 'motivo' = 'no_valido')::int, 1, 'un código revocado');
+reset role;
+
+-- 8. «Obtén uno»: las solicitudes de código (29-10-2026).
+set role anon;
+select pg_temp.debe_fallar($$select count(*) from public.solicitudes_codigo$$, 'que el público lea las solicitudes de código');
+select pg_temp.debe_fallar($$select public.solicitar_codigo('x@y.mx', null, null, true)$$, 'que el público pida un código sin pasar por la función');
+reset role;
+set role service_role;
+select pg_temp.igual(((public.solicitar_codigo('Ana@Ejemplo.mx', 'Ana', 'Soy contadora', true, 'h1')) ->> 'ok')::boolean::int, 1, 'una solicitud de código');
+select pg_temp.igual(((public.solicitar_codigo('ana@ejemplo.mx', null, null, true)) ->> 'ok')::boolean::int, 1, 'la misma persona pide otra vez');
+select pg_temp.igual(((public.solicitar_codigo('b@ejemplo.mx', null, null, false)) ->> 'motivo' = 'aviso')::int, 1, 'una solicitud sin aceptar el aviso');
+select pg_temp.igual(((public.solicitar_codigo('no-es-correo', null, null, true)) ->> 'motivo' = 'correo')::int, 1, 'una solicitud sin correo válido');
+select pg_temp.igual((select count(*) from public.solicitudes_codigo), 1, 'solicitudes guardadas (sin duplicar el mismo correo)');
+reset role;
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
+select pg_temp.debe_fallar($$select * from public.solicitudes_lista()$$, 'que una cuenta común vea las solicitudes');
+select pg_temp.debe_fallar($$select public.atender_solicitud(1, interval '1 day')$$, 'que una cuenta común atienda una solicitud');
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select (public.atender_solicitud((select id from public.solicitudes_codigo limit 1), interval '3 days')) ->> 'codigo' as cs \gset
+select pg_temp.igual((select count(*) from public.solicitudes_lista() where estado = 'enviada' and codigo = :'cs' and duracion = '3 days'), 1, 'solicitud atendida con su código de 3 días');
+reset role;
+reset request.jwt.claim.sub;
+set role service_role;
+select pg_temp.igual(((public.canjear_codigo(:'cs')) ->> 'ok')::boolean::int, 1, 'el código de la solicitud se canjea');
+select pg_temp.igual(((public.solicitar_codigo('ana@ejemplo.mx', null, 'Se me acabó el tiempo', true)) ->> 'ok')::boolean::int, 1, 'pedir más tiempo después de usarlo');
+select pg_temp.igual((select count(*) from public.solicitudes_codigo where correo = 'ana@ejemplo.mx'), 2, 'solicitudes del mismo correo tras usar su código');
 reset role;
 
 \echo 'Todas las pruebas de permisos pasaron.'
