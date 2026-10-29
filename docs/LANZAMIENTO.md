@@ -85,7 +85,7 @@ sin las decisiones de la fase 0.**
 
 | # | Decisión | Opciones | Listo cuando |
 |---|---|---|---|
-| 0.1 | Dominio | **Comprados (30-10-2026): `auditavision.com.mx` es la casa; `auditavision.com`, `auditavision.mx` y `auditavision.app` redirigen a ella.** Primer año: `.com.mx` $197.78, `.com` $155.05, `.mx` $580.50 y `.app` $316.73 (total $1,250.06 MXN; la renovación puede costar distinto). `.app` solo abre con HTTPS, así que su redirección debe servirse con certificado. Falta: los registros DNS, el dominio propio en GitHub Pages y las direcciones de Supabase | Comprados a tu nombre o al de la asociación |
+| 0.1 | Dominio | **Comprados en Cloudflare (30-10-2026): `auditavision.com.mx` es la casa; `auditavision.com`, `auditavision.mx` y `auditavision.app` redirigen a ella.** Primer año: `.com.mx` $197.78, `.com` $155.05, `.mx` $580.50 y `.app` $316.73 (total $1,250.06 MXN; la renovación puede costar distinto). `.app` solo abre con HTTPS, así que su redirección debe servirse con certificado. Falta: los registros DNS, el dominio propio en GitHub Pages y las direcciones de Supabase | Comprados a tu nombre o al de la asociación |
 | 0.2 | Forma jurídica | Asociación civil (permite donaciones y, si quieres, ser donataria autorizada) o persona física con actividad empresarial | Con RFC: lo pide la pasarela de pago |
 | 0.3 | Qué se publica de `investigaciones/` | (a) nada, solo ligas a la fuente oficial; (b) todo, en el almacén de Supabase; (c) solo lo que ya no está en línea en su fuente | Elegido |
 | 0.4 | Imagen del Modo Inspector | Confirmar autor y licencia de las cámaras, o reemplazar por una propia | Resuelto |
