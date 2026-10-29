@@ -81,3 +81,12 @@ jobs:
             -d '{"fuente":"banxico-sie","clave":"SF43718"}')
           echo "$r" | head -c 600; echo
           echo "$r" | grep -q '"ok":true' || { echo "::error::La función portales no trajo el tipo de cambio de Banxico"; exit 1; }
+      - name: Prueba la consulta al INEGI
+        if: steps.hay.outputs.si == 'si' && env.INEGI_TOKEN != ''
+        run: |
+          sleep 2
+          r=$(curl -s -m 40 -X POST "https://$PROYECTO.supabase.co/functions/v1/portales" \
+            -H 'Content-Type: application/json' -H 'Origin: https://auditavision.com.mx' \
+            -d '{"fuente":"inegi-bie","clave":"1002000001"}')
+          echo "$r" | head -c 600; echo
+          echo "$r" | grep -q '"ok":true' || { echo "::error::La función portales no trajo el indicador del INEGI"; exit 1; }
