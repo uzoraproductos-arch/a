@@ -680,7 +680,10 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   llaves. La IA (`auditor-ia`) solo redacta con lo que le entregan las
   fichas, y cada cifra de su respuesta se coteja contra ellas: si una no
   aparece, se tira; `buscar-web` solo devuelve enlaces de sitios oficiales y
-  de una lista editorial de prensa. **Ninguna cifra fiscal vive en la base.** Todo cambio a
+  de una lista editorial de prensa. **Ninguna cifra fiscal vive en la base.**
+  **Los códigos de acceso** (29-10-2026) abren la versión de prueba: `herramientas/acceso.py` arma el canje
+  y el panel, y su candado (`acceso.js`, en el `<head>` de todas las páginas) solo se enciende con
+  `CANDADO = True`; una página que deba abrir sin código va en `LIBRES`. Todo cambio a
   `supabase/` pasa `python3 herramientas/prueba_base_datos.py` y, si toca
   las funciones, `deno check` y `deno test supabase/pruebas/`.
 

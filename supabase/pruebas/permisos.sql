@@ -122,4 +122,61 @@ select pg_temp.igual((select count(*) from storage.objects where bucket_id = 'bo
 reset role;
 reset request.jwt.claim.sub;
 
+-- 7. Los códigos de acceso (29-10-2026): solo la administración los genera y
+-- los ve; el público canjea por la función (llave de servicio).
+set role anon;
+select pg_temp.debe_fallar($$select count(*) from public.codigos$$, 'que el público lea los códigos');
+select pg_temp.debe_fallar($$select public.canjear_codigo('ABCD2345')$$, 'que el público canjee sin pasar por la función');
+select pg_temp.debe_fallar($$select public.generar_codigos(1, interval '1 day')$$, 'que el público genere códigos');
+reset role;
+
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
+select pg_temp.debe_fallar($$select public.generar_codigos(1, interval '1 day')$$, 'que una cuenta común genere códigos');
+select pg_temp.debe_fallar($$select * from public.codigos_lista()$$, 'que una cuenta común vea la lista de códigos');
+select pg_temp.debe_fallar($$insert into public.codigos (codigo, duracion) values ('ABCD2345', interval '1 day')$$, 'que una cuenta común escriba un código');
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select count(*) as n from public.generar_codigos(3, interval '7 days', 1, null, 'Prueba semana') \gset
+select pg_temp.igual(:n, 3, 'códigos de una semana generados');
+select count(*) as n from public.generar_codigos(1, interval '1 day', 2, null, 'Grupo') \gset
+select count(*) as n from public.generar_codigos(1, interval '1 day', 1, now() - interval '1 hour', 'Ya vencido') \gset
+select pg_temp.debe_fallar($$select public.generar_codigos(501, interval '1 day')$$, 'generar más de 500 códigos de una vez');
+select pg_temp.debe_fallar($$select public.generar_codigos(1, interval '10 years')$$, 'un código de más de cinco años');
+select pg_temp.igual((select count(*) from public.codigos where codigo ~ '^[23456789ABCDEFGHJKMNPQRSTUVWXYZ]{8}$'), 5, 'códigos con el formato de 8 caracteres');
+select codigo as c1 from public.codigos where nota = 'Prueba semana' order by id limit 1 \gset
+select codigo as c2 from public.codigos where nota = 'Prueba semana' order by id offset 1 limit 1 \gset
+select codigo as cg from public.codigos where nota = 'Grupo' \gset
+select codigo as cv from public.codigos where nota = 'Ya vencido' \gset
+reset role;
+reset request.jwt.claim.sub;
+
+set role service_role;
+select (public.canjear_codigo(:'c1'))->>'pase' as pase \gset
+select pg_temp.igual((select count(*) from public.pases where id = :'pase'), 1, 'pase creado al canjear');
+select pg_temp.igual(abs(extract(epoch from public.pase_hasta(:'pase') - (now() + interval '7 days')))::bigint / 60, 0, 'minutos de diferencia con una semana desde el canje');
+select pg_temp.igual(((public.canjear_codigo(:'c1')) ->> 'motivo' = 'agotado')::int, 1, 'un código de un uso, canjeado otra vez');
+select pg_temp.igual(((public.canjear_codigo(:'c1', :'pase')) ->> 'motivo' = 'ya_canjeado')::int, 1, 'el mismo pase con el mismo código');
+select pg_temp.igual(((public.canjear_codigo(:'cg', :'pase')) ->> 'ok')::boolean::int, 1, 'un segundo código en el mismo pase');
+select pg_temp.igual(abs(extract(epoch from public.pase_hasta(:'pase') - (now() + interval '8 days')))::bigint / 60, 0, 'minutos de diferencia con ocho días (el tiempo se suma)');
+select pg_temp.igual(((public.canjear_codigo(lower(substr(:'c2', 1, 4)) || ' - ' || lower(substr(:'c2', 5)))) ->> 'ok')::boolean::int, 1, 'un código escrito en minúsculas y con guion');
+select pg_temp.igual(((public.canjear_codigo(:'cv')) ->> 'motivo' = 'vencido')::int, 1, 'un código que ya no se podía canjear');
+select pg_temp.igual(((public.canjear_codigo('ABC')) ->> 'motivo' = 'formato')::int, 1, 'un código mal escrito');
+select pg_temp.igual(((public.canjear_codigo('ZZZZ2222')) ->> 'motivo' = 'no_valido')::int, 1, 'un código que no existe');
+select pg_temp.igual(((public.canjear_codigo('OOOO1111')) ->> 'motivo' = 'formato')::int, 1, 'un código con O y 1, que no se usan');
+reset role;
+
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select public.revocar_codigo((select id from public.codigos where codigo = :'cg'));
+select pg_temp.igual((select count(*) from public.codigos_lista() where estado = 'revocado'), 1, 'códigos revocados en la lista');
+select pg_temp.igual((select count(*) from public.codigos_lista() where estado = 'en_uso'), 2, 'códigos en uso en la lista');
+select pg_temp.igual((select count(*) from public.codigos_lista() where estado = 'sin_usar'), 1, 'códigos sin usar en la lista');
+select pg_temp.igual((select count(*) from public.codigos_lista() where estado = 'vencido'), 1, 'códigos vencidos en la lista');
+reset role;
+reset request.jwt.claim.sub;
+set role service_role;
+select pg_temp.igual(abs(extract(epoch from public.pase_hasta(:'pase') - (now() + interval '7 days')))::bigint / 60, 0, 'minutos de diferencia con una semana tras revocar el segundo código');
+select pg_temp.igual(((public.canjear_codigo(:'cg')) ->> 'motivo' = 'no_valido')::int, 1, 'un código revocado');
+reset role;
+
 \echo 'Todas las pruebas de permisos pasaron.'

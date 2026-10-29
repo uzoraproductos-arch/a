@@ -1452,6 +1452,7 @@ AVISO_FECHA = '26-10-2026'
 _AV_NAVEGADOR = [
     ('La plática con el Auditor', 'av-chat', 'Se guarda en la pestaña (sessionStorage) y se borra al cerrarla, o antes con «🗑️ Limpiar».'),
     ('«Lo que aún no sé»', 'auditavision.bot.sinRespuesta', 'Las preguntas que el Auditor no supo contestar, hasta 50. Solo las ves tú; si quieres, las copias y nos las mandas.'),
+    ('Tu código de acceso', 'av-pase', 'Solo si canjeas un código de la versión de prueba: un número al azar que identifica a este navegador y hasta cuándo abre. En la base queda que ese número canjeó un código, y cuándo; nada que diga quién eres.'),
     ('Las columnas que sigues', 'av-sigo', 'Cuáles casos de Verificamos sigues y qué versión viste, para avisarte cuando cambian.'),
     ('Ágora cívica', 'auditavision_foro_debates y otras', 'Tus hilos, tus apoyos y el seudónimo que elijas. No se publican: viven solo en tu navegador.'),
     ('Preferencias de las herramientas', 'av-am-reloj, crReloj y otras', 'Cómo dejaste un reloj, una unidad o un filtro.'),
@@ -5250,6 +5251,7 @@ def pagina(a, sello):
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v={sello}">
   <script src="assets/auditor/js/iconos.js?v={sello}"></script>
+  <script src="assets/auditor/js/acceso.js?v={sello}"></script>
   <script src="assets/auditor/js/volver-auditor.js?v={sello}" defer></script>
   <link rel="stylesheet" href="assets/auditor/css/civico.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">
@@ -5289,7 +5291,7 @@ def pagina(a, sello):
 </body>
 </html>
 '''.format(titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
-           sociales=sociales(a['archivo'], titulo_doc, descripcion),
+           sociales=sociales(a['archivo'], titulo_doc, descripcion) + ('\n  <meta name="robots" content="noindex, nofollow">' if a.get('noindex') else ''),
            cabecera=cabecera(a.get('menu_archivo', a['archivo']), sello), menu=a['menu'],
            volver='' if a.get('pie_corto') else (
                '      <a class="apartado-volver" href="index.html">← Volver al auditor</a>\n'
@@ -5726,8 +5728,8 @@ def generar(sello=None):
     texto = pagina(m, sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     import datos_ambiente
-    import periodistas
-    for extra in [DICCIONARIO, *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    import periodistas, acceso
+    for extra in [DICCIONARIO, *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

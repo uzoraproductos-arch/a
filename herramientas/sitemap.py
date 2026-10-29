@@ -18,7 +18,8 @@ import re
 
 from apartados import RAIZ, SITIO
 
-EXCLUIR = set()
+# El panel de la administración de códigos no se ofrece a buscadores.
+EXCLUIR = {'administracion-codigos.html'}
 
 
 def redirige(texto):

@@ -1,0 +1,57 @@
+/* Los códigos de acceso: el canje de ocho casillas y el panel de la
+   administración (herramientas/acceso.py, 29-10-2026). */
+.ac-canje { display: grid; gap: 14px; justify-items: start; background: #fff; border: 1px solid #dfe5f0; border-radius: 16px; padding: 20px; }
+.ac-et { font-weight: 700; color: #0b2a63; font-size: 17px; }
+.ac-casillas { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ac-grupo { display: flex; gap: 8px; }
+.ac-casilla {
+  width: 52px; height: 60px; box-sizing: border-box; text-align: center; text-transform: uppercase;
+  font: 700 26px/1 "JetBrains Mono", monospace; color: #0b2a63; background: #f4f7fd;
+  border: 2px solid #c9d3e6; border-radius: 10px; padding: 0; caret-color: #2c579f;
+}
+.ac-casilla:focus { outline: none; border-color: #2c579f; background: #fff; box-shadow: 0 0 0 3px rgba(79, 155, 232, .35); }
+.ac-guion { font: 700 28px/1 "JetBrains Mono", monospace; color: #5a6782; padding: 0 4px; }
+.ac-ayuda { margin: 0; color: #33415c; font-size: 16px; max-width: 46ch; }
+.ac-boton { min-height: 48px; min-width: 160px; font-size: 17px; }
+.ac-estado { margin: 0; min-height: 1.4em; font-size: 16px; color: #24324d; }
+.ac-aviso { margin: 12px 0 0; background: #fff6e0; color: #4a3a12; border-radius: 12px; padding: 12px 14px; font-size: 16px; }
+.ac-tuyo { margin-top: 14px; background: #eef7f0; border: 1px solid #b9dcc2; border-radius: 14px; padding: 12px 16px; }
+.ac-tuyo p { margin: 6px 0; }
+
+.ac-entrar, .ac-generar { display: grid; gap: 10px; background: #fff; border: 1px solid #dfe5f0; border-radius: 16px; padding: 18px 20px; }
+.ac-generar h3 { margin: 0; color: #0b2a63; }
+.ac-campo { font: inherit; font-size: 16px; min-height: 44px; padding: 8px 10px; border-radius: 10px; border: 1px solid #c9d3e6; background: #fff; color: #142033; box-sizing: border-box; width: 100%; }
+.ac-fila { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; }
+.ac-fila label { display: grid; gap: 4px; font-weight: 600; color: #24324d; font-size: 15px; }
+.ac-fila .ac-ancho { grid-column: 1 / -1; }
+.ac-acciones { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+.ac-acciones .sz-btn, .ac-entrar .sz-btn { min-height: 44px; }
+.ac-claro { background: #fff; color: #0b2a63; border: 1px solid #c9d3e6; }
+.ac-chico { min-height: 44px; padding: 6px 12px; font-size: 15px; }
+.ac-sesion { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 0 0 12px; }
+.ac-resumen { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 10px; }
+.ac-chip { display: inline-block; border-radius: 999px; padding: 3px 10px; font-size: 14px; font-weight: 600; background: #eef2f8; color: #24324d; }
+.ac-en_uso { background: #e3f4e7; color: #1d5a2c; }
+.ac-sin_usar { background: #eef2f8; color: #24324d; }
+.ac-vencido { background: #fdecea; color: #8a1c14; }
+.ac-terminado { background: #ececec; color: #3d3d3d; }
+.ac-revocado { background: #3b1f1f; color: #fff; }
+.ac-tabla-caja { overflow-x: auto; border: 1px solid #dfe5f0; border-radius: 14px; background: #fff; }
+.ac-tabla { width: 100%; border-collapse: collapse; font-size: 15px; }
+.ac-tabla th, .ac-tabla td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #eef2f8; vertical-align: middle; }
+.ac-tabla th { color: #5a6782; font-weight: 700; font-size: 14px; }
+.ac-cod { font: 700 16px "JetBrains Mono", monospace; color: #0b2a63; background: none; border: 0; min-height: 44px; padding: 0 4px; cursor: pointer; }
+.ac-cod.ac-copiado::after { content: " ✓ copiado"; font: 600 13px Inter, sans-serif; color: #1d5a2c; }
+
+@media (max-width: 520px) {
+  .ac-canje { padding: 16px 12px; }
+  .ac-casillas { gap: 6px; }
+  .ac-grupo { gap: 6px; }
+  .ac-casilla { width: 46px; height: 54px; font-size: 24px; }
+  /* En celular, cuatro casillas por renglón: cada una sigue midiendo más de 44 px. */
+  .ac-casillas { flex-direction: column; align-items: flex-start; }
+  .ac-guion { display: none; }
+}
+
+/* El estilo de cada caja no le gana a hidden. */
+.ac-panel [hidden], .ac-tuyo[hidden], .ac-aviso[hidden] { display: none !important; }

@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 244 |
+| Páginas revisadas | 246 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -16,6 +16,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Página | Título | Generador | Enlaces internos | Módulos embebidos | oficial | derivado | pendiente |
 |---|---|---|---:|---:|---:|---:|---:|
+| `administracion-codigos.html` | Administración de códigos · Auditavisión | apartados.py | 28 | 0 | 0 | 0 | 0 |
 | `agora.html` | Ágora cívica · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
 | `aprende.html` | Aprende · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
 | `auditoria-agronitrogenados.html` | Plantas de fertilizantes Agronitrogenados · Auditoría en imágenes · Auditavisión | auditorias.py | 77 | 0 | 4 | 2 | 2 |
@@ -44,6 +45,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `aviso-de-privacidad.html` | Aviso de privacidad · Auditavisión | apartados.py | 28 | 0 | 1 | 0 | 0 |
 | `biblioteca-hacendaria.html` | Biblioteca hacendaria · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `busca-y-verifica.html` | Busca y verifica · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
+| `canjea-tu-codigo.html` | Canjea tu código · Auditavisión | apartados.py | 29 | 0 | 0 | 0 | 0 |
 | `comunidad-compartir.html` | Comparte el Estado de Cuenta · Auditavisión | apartados.py | 37 | 0 | 0 | 0 | 0 |
 | `comunidad-erratas.html` | Fe de erratas · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 0 |
 | `comunidad-error.html` | Un dato mal en esta plataforma · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |

@@ -144,6 +144,24 @@ conecta los botones «Enviar», «Lo que aún no sé» y «Búscalo en internet�
   partida (diarios nacionales con hemeroteca en línea); el autor la confirma
   o la cambia en `_comun/web.ts`.
 
+## Los códigos de acceso (29-10-2026)
+
+Mientras la plataforma se perfecciona, la versión de prueba se abre con un código de invitación, como los del Nintendo Switch: ocho casillas, `XXXX-XXXX`.
+
+| Pieza | Qué hace |
+|---|---|
+| `codigos` | El código, su duración (1 hora a 5 años), sus usos, la fecha límite para canjearlo, la nota y si está revocado |
+| `pases` | Un número al azar que guarda el navegador de quien canjeó (`av-pase`). Sin nombre ni correo |
+| `canjes` | Qué pase canjeó qué código y cuándo |
+| `generar_codigos`, `revocar_codigo`, `codigos_lista` | Las usa el panel (`administracion-codigos.html`); revisan `es_admin()` |
+| `canjear_codigo`, `pase_hasta` | Solo la llave de servicio: las llama la función `codigo`, que pone el límite de 10 intentos cada 10 minutos por IP |
+
+El tiempo corre desde el canje; si el mismo pase canjea otro código, se suma. Revocar un código le quita su tiempo a quien lo canjeó. Los códigos no llevan 0, O, 1, I ni L (31 caracteres, unos 850 mil millones de combinaciones).
+
+**Para encenderlo:** (1) crear el proyecto; (2) darte de alta en `administradores` con tu `user_id` (Authentication → Users → invita tu correo, y luego en el editor SQL: `insert into administradores values ('<tu user_id>', 'Tu nombre');`); (3) en Authentication → URL Configuration, agregar la dirección del panel a las *Redirect URLs*; (4) llenar `FUNCIONES` (`apartados.py`) y `SUPABASE_ANON` (`acceso.py`, la llave **pública**); (5) desplegar con `supabase functions deploy codigo --no-verify-jwt` si el proyecto usa las llaves nuevas (`sb_publishable_…`), que no son JWT; (6) cuando quieras cerrar la versión de prueba, `CANDADO = True` y regenerar.
+
+**El límite, dicho claro:** en un sitio estático el candado vive en el navegador. Detiene a quien entra por la puerta, no a quien lee el código de las páginas o desactiva JavaScript. Para cerrar de verdad, el sitio necesita un servidor que revise el pase antes de entregar la página (Vercel, fase 1 de LANZAMIENTO.md).
+
 ## Respaldos (27-10-2026)
 
 ```bash

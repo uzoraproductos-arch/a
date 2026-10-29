@@ -332,7 +332,7 @@ def _paginas():
         if n in (ARCHIVO, DICTAMEN):
             continue
         s = open(p, encoding='utf-8').read()
-        if 'http-equiv="refresh"' in s:
+        if 'http-equiv="refresh"' in s or 'name="robots" content="noindex' in s:
             continue
         t = re.search(r'<title>(.*?)</title>', s, re.S)
         m = re.search(r'<meta name="description" content="(.*?)"', s, re.S)
