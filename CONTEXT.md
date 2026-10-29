@@ -409,6 +409,10 @@ desvanecidos y el mismo paneo. La de acuarela se queda en el repositorio como
 alternativa: para volver a ella basta cambiar el nombre en las tres `url()` de
 `civico.css`.
 
+**De vuelta a la acuarela (29-10-2026).** Tras ver publicada la calle bajo la
+lluvia, el autor pidió regresar a la acuarela. `cabecera-lluvia.webp` se queda
+en el repositorio como alternativa.
+
 **Imágenes de fondo en cabecera y pie (08-10-2026, sello 20261008j).** El
 autor eligió imágenes propias de su carpeta («Gasto público → imágenes»):
 - Cabecera: `assets/auditor/img/portada/cabecera-pasillo.webp` (el pasillo

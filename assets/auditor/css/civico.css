@@ -722,13 +722,14 @@ body { background-color: #0f1218; }
    acuarela bajo la lluvia que entregó el autor (generada con IA); el pasillo
    de Pinterest se retiró del repositorio.
    Ese mismo día el autor pidió probar cabecera-lluvia.webp (la calle mojada
-   con luces turquesa y torres en la niebla, también generada con IA). La de
-   acuarela se guarda como alternativa: basta cambiar el nombre en las url().
+   con luces turquesa y torres en la niebla, también generada con IA). Tras
+   verla, volvió a la acuarela; la de la lluvia se guarda como alternativa:
+   basta cambiar el nombre en las url().
    ========================================================================== */
 [data-theme="light"] .site-top-nav {
   background:
     linear-gradient(90deg, #071d47 0%, #0b2a63 30%, rgba(11, 42, 99, 0.62) 56%, rgba(11, 42, 99, 0.46) 100%),
-    url("../img/portada/cabecera-lluvia.webp") right 0 top 82% / min(62%, 820px) auto no-repeat,
+    url("../img/portada/cabecera-acuarela.webp") right 0 top 82% / min(62%, 820px) auto no-repeat,
     #123d8a;
   animation: cabecera-pasillo 48s ease-in-out infinite alternate;
 }
@@ -740,7 +741,7 @@ body { background-color: #0f1218; }
   [data-theme="light"] .site-top-nav {
     background:
       linear-gradient(90deg, #071d47 0%, rgba(11, 42, 99, 0.88) 40%, rgba(11, 42, 99, 0.45) 100%),
-      url("../img/portada/cabecera-lluvia.webp") right 0 top 82% / min(70%, 520px) auto no-repeat,
+      url("../img/portada/cabecera-acuarela.webp") right 0 top 82% / min(70%, 520px) auto no-repeat,
       #123d8a;
   }
 }
@@ -1014,7 +1015,7 @@ a.erario-pleg-cab, a.erario-indice-paso { color: inherit; text-decoration: none;
       rgba(11, 42, 99, 0.55) calc(50% + var(--cab-ancho) / 4),
       #0b2a63 calc(50% + var(--cab-ancho) / 2 - 1%),
       #071d47 100%),
-    url("../img/portada/cabecera-lluvia.webp") center top 82% / var(--cab-ancho) auto no-repeat,
+    url("../img/portada/cabecera-acuarela.webp") center top 82% / var(--cab-ancho) auto no-repeat,
     #0b2a63;
   animation: cabecera-centro 48s ease-in-out infinite alternate;
 }
