@@ -77,6 +77,8 @@ PERSONAJES = [
     ('vicente-fox', 'Vicente Fox Quesada', ['amigos de fox', 'vicente fox'], True),
     # Director general del IMSS: la nota «Al momento» de la Modalidad 40 (28-10-2026).
     ('zoe-robledo', 'Zoé Robledo Aburto', ['zoe robledo', 'robledo aburto'], False),
+    # Dirigente del PRI en Jalisco: la nota «Al momento» de Jalisco y el gasto federal (29-10-2026).
+    ('laura-haro', 'Laura Haro', ['laura haro'], False),
 ]
 
 # Las empresas contratistas que nombra un documento oficial citado en una

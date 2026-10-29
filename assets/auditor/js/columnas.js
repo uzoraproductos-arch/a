@@ -42,6 +42,241 @@
   var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
  {
+  "id": "jalisco-gasto-federal-pef-2027",
+  "seccion": "Al momento",
+  "icono": "🗺️",
+  "fecha": "28-10-2026",
+  "titulo": "Jalisco y el gasto federal: aporta el 7.5 % del PIB y recibe el 6.1 % de lo que la Federación reparte a los estados",
+  "balazo": "El PRI Jalisco dice que el estado es el lugar 24 de 32 en gasto federal por habitante y pide reasignarle 30 mil millones en el Presupuesto 2027. Con las participaciones y aportaciones de 2026 que tiene la plataforma, Jalisco sale todavía más abajo: lugar 30 de 32. El punto ciego es por qué: el Ramo 33 se reparte por necesidad, y ahí Jalisco cae al lugar 29. El 83 % de caída de la inversión es un cálculo del partido que aún no podemos cotejar.",
+  "nota": {
+   "medio": "Crónica Jalisco",
+   "titulo": "Lamenta Laura Haro abandono de Jalisco en presupuesto federal, pide reasignar 30 mil mdp para 2027",
+   "fecha": "27-10-2026",
+   "url": "https://www.cronica.com.mx/jalisco/guadalajara/2026/10/27/lamenta-laura-haro-abandono-de-jalisco-en-presupuesto-federal-pide-reasignar-30-mil-mdp-para-2027/"
+  },
+  "circula": {
+   "red": "Instagram",
+   "cuenta": "@radioformulajalisco (Radio Fórmula Jalisco)",
+   "fecha": "28 de octubre de 2026",
+   "texto": "Aunque Jalisco es de los estados que más aporta a la economía nacional, ocupa el lugar 24 de 32 en gasto federal por habitante. El PRI Jalisco reveló que la inversión pública cayó un 83 % en los últimos años, con tijeretazos críticos en carreteras y agua. La dirigente Laura Haro exigió reasignar 30 mil millones de pesos en el PEF 2027."
+  },
+  "cuerpo": [
+   "Qué pasó. La dirigente del PRI en Jalisco, Laura Haro, presentó un análisis de su partido sobre lo que el Presupuesto federal le da al estado y pidió que la Cámara de Diputados le reasigne 30 mil millones de pesos en el Presupuesto de Egresos 2027, que la Cámara aprueba a más tardar el 15 de noviembre (Constitución, art. 74, fr. IV). Un análisis de partido es lo que se coteja, no una fuente: aquí va cada afirmación contra el documento.",
+   "Lo que sí consta. Jalisco produce el 7.5 % del PIB del país, el cuarto lugar después de la Ciudad de México, el Estado de México y Nuevo León (INEGI, PIB por entidad 2024). Y en 2026 recibe $147,379.7 millones de participaciones y aportaciones, $16,408 por habitante, contra $18,057 del promedio nacional: el lugar 30 de 32. Tiene el 6.7 % de la población y recibe el 6.1 % de ese dinero.",
+   "El punto ciego: no es una sola bolsa. Las participaciones (Ramo 28) se reparten con la fórmula de la Ley de Coordinación Fiscal, que pesa la población y la actividad económica: ahí Jalisco recibe el 6.7 % y queda en el lugar 12 por habitante, a la par de su población. Las aportaciones (Ramo 33) se reparten por necesidad (la pobreza, los maestros y las escuelas que paga la Federación): ahí recibe el 5.1 % y cae al lugar 29. Repartir por necesidad es lo que manda la ley; si la fórmula es justa con un estado que produce mucho es la discusión de fondo del pacto fiscal, y es política, no aritmética.",
+   "Lo que dice el lugar 24. Según la prensa, el PRI no midió esto, sino todo el gasto que el Proyecto de Presupuesto 2027 ubica en cada estado, una medida más amplia que lo que recibe el gobierno del estado. Es otra medida, y su documento todavía no lo pudimos abrir: va como pendiente. Con las dos medidas Jalisco queda en la parte baja de la tabla; el lugar exacto depende de qué se cuenta.",
+   "El agua. El 21 de octubre la Presidenta dijo que el Gobierno Federal pondrá «todo» lo que falta para el agua de Guadalajara, «alrededor de 12 mil millones, 13 mil millones», mientras Jalisco paga una planta potabilizadora de unos $7,500.0 millones. Es un anuncio: el dinero todavía no aparece en un presupuesto aprobado, y eso es lo que hay que seguir en el PEF 2027. Los 30 mil millones que pide el PRI equivalen al 20.4 % de lo que Jalisco recibe en un año de participaciones y aportaciones."
+  ],
+  "ejemplo": {
+   "tit": "La cuenta, con números redondos",
+   "txt": "De cada 100 pesos, o de cada 100 personas, del país:",
+   "filas": [
+    [
+     "Lo que produce Jalisco del PIB nacional (2024)",
+     "$7.5",
+     "INEGI, PIB por entidad 2024, p. 1"
+    ],
+    [
+     "Las personas que viven en Jalisco (2026)",
+     "6.7",
+     "8,982,027 ÷ 134,407,258 × 100"
+    ],
+    [
+     "Lo que le llega de participaciones (Ramo 28)",
+     "$6.7",
+     "$96,672.2 millones ÷ $1,438,766.8 millones × 100"
+    ],
+    [
+     "Lo que le llega de aportaciones (Ramo 33)",
+     "$5.1",
+     "$50,707.5 millones ÷ $988,254.7 millones × 100"
+    ]
+   ],
+   "nota": "Es un ejemplo derivado con los anexos de distribución 2026 (DOF) y la población a mitad de 2026 del CONAPO. No incluye convenios ni el Ramo 25."
+  },
+  "cotejo": [
+   {
+    "dice": "Jalisco es de los estados que más aporta a la economía nacional",
+    "res": "consta",
+    "explica": "Aporta el 7.5 % del PIB nacional de 2024, el cuarto lugar entre las 32 entidades.",
+    "fuente": "INEGI, Producto Interno Bruto por Entidad Federativa 2024, comunicado 156/25 (05-12-2025), p. 1",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibent/PIBE2024_CP.pdf"
+   },
+   {
+    "dice": "Ocupa el lugar 24 de 32 en gasto federal por habitante",
+    "res": "matiz",
+    "explica": "Depende de qué se cuente. En participaciones y aportaciones 2026, lo que la Federación le entrega al gobierno del estado y a sus municipios, Jalisco recibe $16,408 por habitante y queda en el lugar 30 de 32 (derivado), más abajo todavía. El lugar 24 sale, según la prensa, del gasto que el Proyecto 2027 ubica por entidad, que aún no integramos.",
+    "fuente": "DOF 12-12-2025, acuerdo de distribución de participaciones 2026 (Anexo 15); aportaciones en el Anexo 16 modificado (DOF 09-07-2026) y población del CONAPO, en la base de la plataforma",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5776006&fecha=12/12/2025"
+   },
+   {
+    "dice": "La inversión pública cayó un 83 % en los últimos años",
+    "res": "pendiente",
+    "explica": "Es un cálculo del PRI Jalisco que la prensa atribuye a comparar promedios de años distintos. No encontramos el documento del cálculo, y la serie oficial de inversión federal por estado de cada año está en la Cuenta Pública, que la plataforma todavía no integra por entidad.",
+    "fuente": "Notisistema (prensa), «Acusa PRI recorte de 83% en inversión federal para Jalisco»",
+    "url": "https://www.notisistema.com/noticias/acusa-pri-recorte-de-83-en-inversion-federal-para-jalisco/",
+    "quien": "Falta de la plataforma: la inversión federal por entidad de cada año viene en la Cuenta Pública y aún no la integramos",
+    "donde": "https://www.cuentapublica.hacienda.gob.mx/"
+   },
+   {
+    "dice": "Con tijeretazos críticos en carreteras y agua",
+    "res": "pendiente",
+    "explica": "La publicación no da montos ni programas. En agua, la Presidenta anunció el 21 de octubre que la Federación pondrá alrededor de 12 a 13 mil millones para Guadalajara, pero todavía no está en un presupuesto aprobado. Las carreteras por estado vienen en el Proyecto de Presupuesto 2027, que aún no pudimos abrir.",
+    "fuente": "Presidencia, versión estenográfica de la conferencia del 21-10-2026",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026",
+    "quien": "Falta de la plataforma: el Proyecto de Presupuesto 2027 por entidad y por programa no abre desde nuestra sesión",
+    "donde": "https://www.ppef.hacienda.gob.mx/"
+   }
+  ],
+  "cifras": [
+   {
+    "valor": "7.5 %",
+    "etq": "Lo que aporta Jalisco al PIB nacional (2024), cuarto lugar",
+    "estado": "oficial",
+    "fuente": "INEGI, PIB por entidad 2024, p. 1",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibent/PIBE2024_CP.pdf"
+   },
+   {
+    "valor": "$147,379.7 millones",
+    "etq": "Participaciones y aportaciones de Jalisco en 2026 (Ramo 28 + Ramo 33)",
+    "estado": "derivado",
+    "fuente": "Anexos 15 y 16 del acuerdo de distribución 2026 (DOF)",
+    "url": "numeros-mapa-del-gasto-federalizado.html?e=JAL"
+   },
+   {
+    "valor": "$16,408",
+    "etq": "Por habitante en Jalisco: lugar 30 de 32",
+    "estado": "derivado",
+    "fuente": "Ramos 28 y 33 de 2026 entre la población a mitad de 2026 del CONAPO",
+    "url": "numeros-mapa-del-gasto-federalizado.html?e=JAL"
+   },
+   {
+    "valor": "$18,057",
+    "etq": "Por habitante, promedio nacional (suma de los 32 ÷ población del país)",
+    "estado": "derivado",
+    "fuente": "Misma base",
+    "url": "numeros-mapa-del-gasto-federalizado.html"
+   },
+   {
+    "valor": "Lugar 12 y lugar 29",
+    "etq": "Por habitante: en participaciones (Ramo 28) y en aportaciones (Ramo 33)",
+    "estado": "derivado",
+    "fuente": "Misma base",
+    "url": "numeros-mapa-del-gasto-federalizado.html?e=JAL"
+   },
+   {
+    "valor": "$12,000 a $13,000 millones",
+    "etq": "Lo que la Federación anunció para el agua de Guadalajara (anuncio, no presupuesto aprobado)",
+    "estado": "oficial",
+    "fuente": "Presidencia, conferencia del 21-10-2026",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "valor": "20.4 %",
+    "etq": "Los 30 mil millones que pide el PRI, frente a las participaciones y aportaciones 2026 de Jalisco",
+    "estado": "derivado",
+    "fuente": "$30,000 millones ÷ $147,379.7 millones × 100",
+    "url": "numeros-mapa-del-gasto-federalizado.html?e=JAL"
+   }
+  ],
+  "datos": [
+   {
+    "ico": "🗺️",
+    "tx": "El mapa del gasto federalizado, en Jalisco",
+    "url": "numeros-mapa-del-gasto-federalizado.html?e=JAL",
+    "de": "Participaciones, aportaciones y convenios de cada estado, por habitante."
+   },
+   {
+    "ico": "🧾",
+    "tx": "El estado de cuenta y la salud financiera de Jalisco",
+    "url": "herramienta-inspector-entes.html#ente=estatal:JAL",
+    "de": "Cuánto recauda por su cuenta, cuánto depende de la Federación, su deuda y lo que la ASF dejó por aclarar."
+   },
+   {
+    "ico": "🚱",
+    "tx": "Crisis ambientales: el agua de Guadalajara",
+    "url": "herramienta-ambiente-crisis.html",
+    "de": "El Acueducto, la planta potabilizadora, El Zapotillo y lo que nadie ha publicado."
+   },
+   {
+    "ico": "📦",
+    "tx": "Auditoría en imágenes: el Ramo 33",
+    "url": "auditoria-ramo-33.html",
+    "de": "Cómo se reparten las aportaciones y qué encuentra la ASF."
+   },
+   {
+    "ico": "🗓️",
+    "tx": "El itinerario del Paquete 2027",
+    "url": "numeros-paquete-2027-itinerario.html",
+    "de": "El Presupuesto de Egresos se aprueba a más tardar el 15 de noviembre."
+   }
+  ],
+  "glosario": [
+   {
+    "t": "Gasto federalizado",
+    "url": "glosario.html#Gasto-Federalizado"
+   },
+   {
+    "t": "Ramo 28 (participaciones)",
+    "url": "glosario.html#Ramo-28"
+   },
+   {
+    "t": "Ramo 33 (aportaciones)",
+    "url": "glosario.html#Ramo-33"
+   },
+   {
+    "t": "PEF (Presupuesto de Egresos de la Federación)",
+    "url": "glosario.html#PEF"
+   },
+   {
+    "t": "PIB (Producto Interno Bruto)",
+    "url": "glosario.html#PIB"
+   }
+  ],
+  "red": "Jalisco gasto federal por habitante PEF 2027 PRI 30 mil millones",
+  "sigue": [
+   {
+    "que": "El Presupuesto de Egresos 2027 aprobado (a más tardar el 15 de noviembre): si trae reasignaciones para Jalisco y cuánto",
+    "url": "https://gaceta.diputados.gob.mx/"
+   },
+   {
+    "que": "Que el dinero federal anunciado para el agua de Guadalajara aparezca en el Presupuesto 2027 con su programa y su monto",
+    "url": "https://www.ppef.hacienda.gob.mx/"
+   },
+   {
+    "que": "El gasto del Proyecto 2027 por entidad, para cotejar el lugar 24 de 32",
+    "url": "https://www.ppef.hacienda.gob.mx/"
+   },
+   {
+    "que": "La inversión federal en Jalisco año por año en la Cuenta Pública, para cotejar el 83 %",
+    "url": "https://www.cuentapublica.hacienda.gob.mx/"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "INEGI: Producto Interno Bruto por Entidad Federativa 2024, comunicado 156/25 (05-12-2025)",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibent/PIBE2024_CP.pdf"
+   },
+   {
+    "nombre": "Acuerdos de distribución de participaciones y aportaciones 2026 (DOF) y población del CONAPO, en la base de la plataforma",
+    "url": "numeros-mapa-del-gasto-federalizado.html"
+   },
+   {
+    "nombre": "Presidencia: versión estenográfica de la conferencia del 21-10-2026",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "nombre": "Punto de partida: Crónica Jalisco, «Lamenta Laura Haro abandono de Jalisco en presupuesto federal, pide reasignar 30 mil mdp para 2027» (27-10-2026)",
+    "url": "https://www.cronica.com.mx/jalisco/guadalajara/2026/10/27/lamenta-laura-haro-abandono-de-jalisco-en-presupuesto-federal-pide-reasignar-30-mil-mdp-para-2027/"
+   },
+   {
+    "nombre": "Prensa: Notisistema, «Acusa PRI recorte de 83% en inversión federal para Jalisco»",
+    "url": "https://www.notisistema.com/noticias/acusa-pri-recorte-de-83-en-inversion-federal-para-jalisco/"
+   }
+  ],
+  "actualizado": "29-10-2026"
+ },
+ {
   "id": "senado-ley-de-ingresos-2027",
   "seccion": "Al momento",
   "icono": "🏛️",

@@ -1794,7 +1794,10 @@
      lugar cuando la pregunta trae varias palabras de la columna: «¿es cierto
      que prestaron 54 hectáreas en Guaymas?» pide el cotejo, no las finanzas
      del municipio (26-10-2026). */
-  var GENERICAS = { cierto: 1, verdad: 1, dicen: 1, circula: 1, redes: 1, gobierno: 1, mexico: 1 };
+  /* Las palabras del dinero («millones», «mucho dinero») no dicen de qué columna se habla: con
+     ellas, «¿es cierto que Jalisco debe 50 mil millones?» se iba a la nota de Jalisco y no a
+     su deuda (29-10-2026). */
+  var GENERICAS = { cierto: 1, verdad: 1, dicen: 1, circula: 1, redes: 1, gobierno: 1, mexico: 1, millones: 1, pesos: 1, dinero: 1, mucho: 1 };
   /* Una pregunta por un dato («¿cuántos ministros tiene la Corte?») o por un
      estado de cuenta no es un cotejo, aunque comparta palabras con la columna:
      la contesta la plática (27-10-2026). */

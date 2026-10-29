@@ -56,6 +56,22 @@ No se pudo abrir: el voto del Senado sobre la Ley Federal de Derechos y la
 reserva al ISR (automotrices y gasolineras), que solo traen los medios. El
 portal de Comunicación Social del Senado responde 403 a la sesión: es falta
 de la plataforma, no del Senado.
+
+Nota 3 · Jalisco y el gasto federal (29-10-2026). Pieza que pasó el autor:
+publicación de @radioformulajalisco en Instagram (28-10-2026) sobre el
+análisis del PRI Jalisco. Documentos cotejados:
+- INEGI, Comunicado 156/25, PIB por Entidad Federativa 2024 (05-12-2025),
+  p. 1: Jalisco aporta el 7.5 % del PIB nacional, el cuarto lugar.
+- La base: estados[].ramo28, ramo33 y pobPersonas (anexos 15 y 16 del
+  acuerdo de distribución 2026, DOF, y población a mitad de 2026 del CONAPO).
+  El lugar por habitante se calcula aquí, con la misma cuenta que «pc».
+- Presidencia, versión estenográfica del 21-10-2026: «El Gobierno Federal va
+  a aportar los recursos… Todo»: «alrededor de 12 mil millones, 13 mil
+  millones» para el agua de Guadalajara.
+No se pudo abrir: el Proyecto de Presupuesto 2027 por entidad (el portal del
+PPEF no responde a la sesión) ni las notas de Crónica y Notisistema (sus
+dominios están fuera de la red de la sesión). El lugar 24, el 83 % y los
+recortes en carreteras quedan como pendientes: la falta es de la plataforma.
 """
 import json
 import pathlib
@@ -65,6 +81,7 @@ RAIZ = pathlib.Path(__file__).resolve().parent.parent
 COLUMNAS_JS = RAIZ / 'assets' / 'auditor' / 'js' / 'columnas.js'
 sys.path.insert(0, str(RAIZ / 'herramientas'))
 import gestion_salud as gs  # noqa: E402
+import auditorias  # noqa: E402
 
 DOF_M40 = 'https://sidof.segob.gob.mx/notas/5801708'
 LSS = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf'
@@ -402,7 +419,191 @@ def senado_lif_2027():
     }
 
 
-NOTAS = [modalidad_40, senado_lif_2027]
+INEGI_PIBE = 'https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibent/PIBE2024_CP.pdf'
+PRES_2110 = ('https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-'
+             'claudia-sheinbaum-pardo-del-21-de-octubre-de-2026')
+PPEF = 'https://www.ppef.hacienda.gob.mx/'
+CUENTA_PUBLICA = 'https://www.cuentapublica.hacienda.gob.mx/'
+CRONICA_HARO = ('https://www.cronica.com.mx/jalisco/guadalajara/2026/10/27/'
+                'lamenta-laura-haro-abandono-de-jalisco-en-presupuesto-federal-pide-reasignar-30-mil-mdp-para-2027/')
+DOF_DISTRIB = 'https://dof.gob.mx/nota_detalle.php?codigo=5776006&fecha=12/12/2025'
+NOTISISTEMA_83 = 'https://www.notisistema.com/noticias/acusa-pri-recorte-de-83-en-inversion-federal-para-jalisco/'
+PIB_JAL = 7.5          # INEGI, PIBE 2024, p. 1
+AGUA_FED = (12000, 13000)   # Presidencia, 21-10-2026 («alrededor de»)
+PLANTA_JAL = 7500           # Presidencia, 21-10-2026, y Gobierno de Jalisco (crisis_ambientales.py)
+REASIGNA = 30000            # lo que pide el PRI Jalisco
+
+
+def _jalisco():
+    """Lo que la Federación reparte a Jalisco se lee de la base, y el lugar se calcula igual que «pc»."""
+    E = auditorias.db()['estados']
+    j = next(e for e in E if e['abbr'] == 'JAL')
+    tot = {k: sum(e[k] for e in E) for k in ('ramo28', 'ramo33', 'gasto', 'pobPersonas')}
+
+    def lugar(f):
+        return sorted(E, key=f, reverse=True).index(j) + 1
+    return {
+        'j': j, 'n': len(E), 'tot': tot,
+        'pc_nal': tot['gasto'] * 1e6 / tot['pobPersonas'],
+        'lugar': lugar(lambda e: e['pc']),
+        'lugar28': lugar(lambda e: e['ramo28'] / e['pobPersonas']),
+        'lugar33': lugar(lambda e: e['ramo33'] / e['pobPersonas']),
+        'sh_pob': 100 * j['pobPersonas'] / tot['pobPersonas'],
+        'sh_gasto': 100 * j['gasto'] / tot['gasto'],
+        'sh28': 100 * j['ramo28'] / tot['ramo28'],
+        'sh33': 100 * j['ramo33'] / tot['ramo33'],
+    }
+
+
+def jalisco_gasto_federal():
+    J = _jalisco()
+    j = J['j']
+    pesos = lambda v: '$' + format(round(v), ',')  # noqa: E731
+    pct = lambda v: format(v, '.1f') + ' %'  # noqa: E731
+    veces_gasto = 100 * REASIGNA / j['gasto']
+    return {
+        'id': 'jalisco-gasto-federal-pef-2027',
+        'seccion': 'Al momento',
+        'icono': '🗺️',
+        'fecha': '28-10-2026',
+        'titulo': 'Jalisco y el gasto federal: aporta el 7.5 %% del PIB y recibe el %s de lo que la Federación reparte a los estados'
+                  % pct(J['sh_gasto']),
+        'balazo': ('El PRI Jalisco dice que el estado es el lugar 24 de 32 en gasto federal por habitante y pide reasignarle 30 mil millones '
+                   'en el Presupuesto 2027. Con las participaciones y aportaciones de 2026 que tiene la plataforma, Jalisco sale todavía más '
+                   'abajo: lugar %d de %d. El punto ciego es por qué: el Ramo 33 se reparte por necesidad, y ahí Jalisco cae al '
+                   'lugar %d. El 83 %% de caída de la inversión es un cálculo del partido que aún no podemos cotejar.'
+                   % (J['lugar'], J['n'], J['lugar33'])),
+        'nota': {'medio': 'Crónica Jalisco', 'titulo': 'Lamenta Laura Haro abandono de Jalisco en presupuesto federal, pide reasignar 30 mil mdp para 2027',
+                 'fecha': '27-10-2026', 'url': CRONICA_HARO},
+        'circula': {'red': 'Instagram', 'cuenta': '@radioformulajalisco (Radio Fórmula Jalisco)', 'fecha': '28 de octubre de 2026',
+                    'texto': ('Aunque Jalisco es de los estados que más aporta a la economía nacional, ocupa el lugar 24 de 32 en gasto federal '
+                              'por habitante. El PRI Jalisco reveló que la inversión pública cayó un 83 % en los últimos años, con tijeretazos '
+                              'críticos en carreteras y agua. La dirigente Laura Haro exigió reasignar 30 mil millones de pesos en el PEF 2027.')},
+        'cuerpo': [
+            ('Qué pasó. La dirigente del PRI en Jalisco, Laura Haro, presentó un análisis de su partido sobre lo que el Presupuesto '
+             'federal le da al estado y pidió que la Cámara de Diputados le reasigne 30 mil millones de pesos en el Presupuesto de Egresos 2027, '
+             'que la Cámara aprueba a más tardar el 15 de noviembre (Constitución, art. 74, fr. IV). Un análisis de partido es lo que se coteja, '
+             'no una fuente: aquí va cada afirmación contra el documento.'),
+            ('Lo que sí consta. Jalisco produce el %s del PIB del país, el cuarto lugar después de la Ciudad de México, el Estado de México y '
+             'Nuevo León (INEGI, PIB por entidad 2024). Y en 2026 recibe %s de participaciones y aportaciones, %s por habitante, contra %s '
+             'del promedio nacional: el lugar %d de %d. Tiene el %s de la población y recibe el %s de ese dinero.'
+             % (pct(PIB_JAL), _mmdp(j['gasto']), pesos(j['pc']), pesos(J['pc_nal']), J['lugar'], J['n'], pct(J['sh_pob']), pct(J['sh_gasto']))),
+            ('El punto ciego: no es una sola bolsa. Las participaciones (Ramo 28) se reparten con la fórmula de la Ley de Coordinación Fiscal, '
+             'que pesa la población y la actividad económica: ahí Jalisco recibe el %s y queda en el lugar %d por habitante, a la par de su '
+             'población. Las aportaciones (Ramo 33) se reparten por necesidad (la pobreza, los maestros y las escuelas que paga la Federación): '
+             'ahí recibe el %s y cae al lugar %d. Repartir por necesidad es lo que manda la ley; si la fórmula es justa con un estado que '
+             'produce mucho es la discusión de fondo del pacto fiscal, y es política, no aritmética.'
+             % (pct(J['sh28']), J['lugar28'], pct(J['sh33']), J['lugar33'])),
+            ('Lo que dice el lugar 24. Según la prensa, el PRI no midió esto, sino todo el gasto que el Proyecto de Presupuesto 2027 ubica en '
+             'cada estado, una medida más amplia que lo que recibe el gobierno del estado. Es otra medida, y su documento todavía no '
+             'lo pudimos abrir: va como pendiente. Con las dos medidas Jalisco queda en la parte baja de la tabla; el lugar exacto depende de '
+             'qué se cuenta.'),
+            ('El agua. El 21 de octubre la Presidenta dijo que el Gobierno Federal pondrá «todo» lo que falta para el agua de Guadalajara, '
+             '«alrededor de 12 mil millones, 13 mil millones», mientras Jalisco paga una planta potabilizadora de unos %s. Es un anuncio: el '
+             'dinero todavía no aparece en un presupuesto aprobado, y eso es lo que hay que seguir en el PEF 2027. Los 30 mil millones que pide '
+             'el PRI equivalen al %s de lo que Jalisco recibe en un año de participaciones y aportaciones.'
+             % (_mmdp(PLANTA_JAL), pct(veces_gasto))),
+        ],
+        'ejemplo': {
+            'tit': 'La cuenta, con números redondos',
+            'txt': 'De cada 100 pesos, o de cada 100 personas, del país:',
+            'filas': [
+                ['Lo que produce Jalisco del PIB nacional (2024)', '$%s' % format(PIB_JAL, '.1f'), 'INEGI, PIB por entidad 2024, p. 1'],
+                ['Las personas que viven en Jalisco (2026)', format(J['sh_pob'], '.1f'),
+                 '%s ÷ %s × 100' % (format(j['pobPersonas'], ','), format(J['tot']['pobPersonas'], ','))],
+                ['Lo que le llega de participaciones (Ramo 28)', '$%s' % format(J['sh28'], '.1f'),
+                 '%s ÷ %s × 100' % (_mmdp(j['ramo28']), _mmdp(J['tot']['ramo28']))],
+                ['Lo que le llega de aportaciones (Ramo 33)', '$%s' % format(J['sh33'], '.1f'),
+                 '%s ÷ %s × 100' % (_mmdp(j['ramo33']), _mmdp(J['tot']['ramo33']))],
+            ],
+            'nota': ('Es un ejemplo derivado con los anexos de distribución 2026 (DOF) y la población a mitad de 2026 del CONAPO. No incluye '
+                     'convenios ni el Ramo 25.'),
+        },
+        'cotejo': [
+            {'dice': 'Jalisco es de los estados que más aporta a la economía nacional', 'res': 'consta',
+             'explica': 'Aporta el 7.5 % del PIB nacional de 2024, el cuarto lugar entre las 32 entidades.',
+             'fuente': 'INEGI, Producto Interno Bruto por Entidad Federativa 2024, comunicado 156/25 (05-12-2025), p. 1', 'url': INEGI_PIBE},
+            {'dice': 'Ocupa el lugar 24 de 32 en gasto federal por habitante', 'res': 'matiz',
+             'explica': ('Depende de qué se cuente. En participaciones y aportaciones 2026, lo que la Federación le entrega al gobierno del estado '
+                         'y a sus municipios, Jalisco recibe %s por habitante y queda en el lugar %d de %d (derivado), más abajo todavía. El '
+                         'lugar 24 sale, según la prensa, del gasto que el Proyecto 2027 ubica por entidad, que aún no integramos.'
+                         % (pesos(j['pc']), J['lugar'], J['n'])),
+             'fuente': 'DOF 12-12-2025, acuerdo de distribución de participaciones 2026 (Anexo 15); aportaciones en el Anexo 16 modificado (DOF 09-07-2026) y población del CONAPO, en la base de la plataforma',
+             'url': DOF_DISTRIB},
+            {'dice': 'La inversión pública cayó un 83 % en los últimos años', 'res': 'pendiente',
+             'explica': ('Es un cálculo del PRI Jalisco que la prensa atribuye a comparar promedios de años distintos. No encontramos el documento '
+                         'del cálculo, y la serie oficial de inversión federal por estado de cada año está en la Cuenta Pública, que la '
+                         'plataforma todavía no integra por entidad.'),
+             'fuente': 'Notisistema (prensa), «Acusa PRI recorte de 83% en inversión federal para Jalisco»', 'url': NOTISISTEMA_83,
+             'quien': 'Falta de la plataforma: la inversión federal por entidad de cada año viene en la Cuenta Pública y aún no la integramos',
+             'donde': CUENTA_PUBLICA},
+            {'dice': 'Con tijeretazos críticos en carreteras y agua', 'res': 'pendiente',
+             'explica': ('La publicación no da montos ni programas. En agua, la Presidenta anunció el 21 de octubre que la Federación pondrá '
+                         'alrededor de 12 a 13 mil millones para Guadalajara, pero todavía no está en un presupuesto aprobado. Las carreteras '
+                         'por estado vienen en el Proyecto de Presupuesto 2027, que aún no pudimos abrir.'),
+             'fuente': 'Presidencia, versión estenográfica de la conferencia del 21-10-2026', 'url': PRES_2110,
+             'quien': 'Falta de la plataforma: el Proyecto de Presupuesto 2027 por entidad y por programa no abre desde nuestra sesión',
+             'donde': PPEF},
+        ],
+        'cifras': [
+            {'valor': pct(PIB_JAL), 'etq': 'Lo que aporta Jalisco al PIB nacional (2024), cuarto lugar', 'estado': 'oficial',
+             'fuente': 'INEGI, PIB por entidad 2024, p. 1', 'url': INEGI_PIBE},
+            {'valor': _mmdp(j['gasto']), 'etq': 'Participaciones y aportaciones de Jalisco en 2026 (Ramo 28 + Ramo 33)', 'estado': 'derivado',
+             'fuente': 'Anexos 15 y 16 del acuerdo de distribución 2026 (DOF)', 'url': 'numeros-mapa-del-gasto-federalizado.html?e=JAL'},
+            {'valor': pesos(j['pc']), 'etq': 'Por habitante en Jalisco: lugar %d de %d' % (J['lugar'], J['n']), 'estado': 'derivado',
+             'fuente': 'Ramos 28 y 33 de 2026 entre la población a mitad de 2026 del CONAPO', 'url': 'numeros-mapa-del-gasto-federalizado.html?e=JAL'},
+            {'valor': pesos(J['pc_nal']), 'etq': 'Por habitante, promedio nacional (suma de los 32 ÷ población del país)', 'estado': 'derivado',
+             'fuente': 'Misma base', 'url': 'numeros-mapa-del-gasto-federalizado.html'},
+            {'valor': 'Lugar %d y lugar %d' % (J['lugar28'], J['lugar33']), 'etq': 'Por habitante: en participaciones (Ramo 28) y en aportaciones (Ramo 33)',
+             'estado': 'derivado', 'fuente': 'Misma base', 'url': 'numeros-mapa-del-gasto-federalizado.html?e=JAL'},
+            {'valor': '$%s a $%s millones' % (format(AGUA_FED[0], ','), format(AGUA_FED[1], ',')),
+             'etq': 'Lo que la Federación anunció para el agua de Guadalajara (anuncio, no presupuesto aprobado)', 'estado': 'oficial',
+             'fuente': 'Presidencia, conferencia del 21-10-2026', 'url': PRES_2110},
+            {'valor': pct(veces_gasto), 'etq': 'Los 30 mil millones que pide el PRI, frente a las participaciones y aportaciones 2026 de Jalisco',
+             'estado': 'derivado', 'fuente': '$30,000 millones ÷ %s × 100' % _mmdp(j['gasto']), 'url': 'numeros-mapa-del-gasto-federalizado.html?e=JAL'},
+        ],
+        'datos': [
+            {'ico': '🗺️', 'tx': 'El mapa del gasto federalizado, en Jalisco', 'url': 'numeros-mapa-del-gasto-federalizado.html?e=JAL',
+             'de': 'Participaciones, aportaciones y convenios de cada estado, por habitante.'},
+            {'ico': '🧾', 'tx': 'El estado de cuenta y la salud financiera de Jalisco', 'url': 'herramienta-inspector-entes.html#ente=estatal:JAL',
+             'de': 'Cuánto recauda por su cuenta, cuánto depende de la Federación, su deuda y lo que la ASF dejó por aclarar.'},
+            {'ico': '🚱', 'tx': 'Crisis ambientales: el agua de Guadalajara', 'url': 'herramienta-ambiente-crisis.html',
+             'de': 'El Acueducto, la planta potabilizadora, El Zapotillo y lo que nadie ha publicado.'},
+            {'ico': '📦', 'tx': 'Auditoría en imágenes: el Ramo 33', 'url': 'auditoria-ramo-33.html',
+             'de': 'Cómo se reparten las aportaciones y qué encuentra la ASF.'},
+            {'ico': '🗓️', 'tx': 'El itinerario del Paquete 2027', 'url': 'numeros-paquete-2027-itinerario.html',
+             'de': 'El Presupuesto de Egresos se aprueba a más tardar el 15 de noviembre.'},
+        ],
+        'glosario': [
+            {'t': 'Gasto federalizado', 'url': 'glosario.html#Gasto-Federalizado'},
+            {'t': 'Ramo 28 (participaciones)', 'url': 'glosario.html#Ramo-28'},
+            {'t': 'Ramo 33 (aportaciones)', 'url': 'glosario.html#Ramo-33'},
+            {'t': 'PEF (Presupuesto de Egresos de la Federación)', 'url': 'glosario.html#PEF'},
+            {'t': 'PIB (Producto Interno Bruto)', 'url': 'glosario.html#PIB'},
+        ],
+        'red': 'Jalisco gasto federal por habitante PEF 2027 PRI 30 mil millones',
+        'sigue': [
+            {'que': 'El Presupuesto de Egresos 2027 aprobado (a más tardar el 15 de noviembre): si trae reasignaciones para Jalisco y cuánto',
+             'url': 'https://gaceta.diputados.gob.mx/'},
+            {'que': 'Que el dinero federal anunciado para el agua de Guadalajara aparezca en el Presupuesto 2027 con su programa y su monto',
+             'url': PPEF},
+            {'que': 'El gasto del Proyecto 2027 por entidad, para cotejar el lugar 24 de 32', 'url': PPEF},
+            {'que': 'La inversión federal en Jalisco año por año en la Cuenta Pública, para cotejar el 83 %', 'url': CUENTA_PUBLICA},
+        ],
+        'fuentes': [
+            {'nombre': 'INEGI: Producto Interno Bruto por Entidad Federativa 2024, comunicado 156/25 (05-12-2025)', 'url': INEGI_PIBE},
+            {'nombre': 'Acuerdos de distribución de participaciones y aportaciones 2026 (DOF) y población del CONAPO, en la base de la plataforma',
+             'url': 'numeros-mapa-del-gasto-federalizado.html'},
+            {'nombre': 'Presidencia: versión estenográfica de la conferencia del 21-10-2026', 'url': PRES_2110},
+            {'nombre': 'Punto de partida: Crónica Jalisco, «Lamenta Laura Haro abandono de Jalisco en presupuesto federal, pide reasignar 30 mil mdp para 2027» (27-10-2026)',
+             'url': CRONICA_HARO},
+            {'nombre': 'Prensa: Notisistema, «Acusa PRI recorte de 83% en inversión federal para Jalisco»', 'url': NOTISISTEMA_83},
+        ],
+        'actualizado': '29-10-2026',
+    }
+
+
+NOTAS = [modalidad_40, senado_lif_2027, jalisco_gasto_federal]
 
 
 def main():

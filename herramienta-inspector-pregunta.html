@@ -20,13 +20,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261029j">
-  <script src="assets/auditor/js/iconos.js?v=20261029j"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261029j" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261029j">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261029j">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261029j">
-  <link rel="stylesheet" href="assets/auditor/css/asistente.css?v=20261029j">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261029k">
+  <script src="assets/auditor/js/iconos.js?v=20261029k"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261029k" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261029k">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261029k">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261029k">
+  <link rel="stylesheet" href="assets/auditor/css/asistente.css?v=20261029k">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -271,10 +271,11 @@
             <div class="pa-ejs-cab"><span>💡 Prueba con:</span>
               <button type="button" class="pa-ejs-otras" id="paEjsOtras" hidden>🔄 Otras preguntas</button></div>
             <div class="pa-ejs-lista" id="paEjsLista">
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué pasó con la Modalidad 40 del IMSS?" data-modo="reportero"><span aria-hidden="true">⏱️</span> ¿Qué pasó con la Modalidad 40 del IMSS?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="Dame mi estado de cuenta cívico" data-modo="ciudadano"><span aria-hidden="true">🧾</span> Dame mi estado de cuenta cívico</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto debe Jalisco?" data-modo="ciudadano"><span aria-hidden="true">🗺️</span> ¿Cuánto debe Jalisco?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="Mi estado de cuenta ambiental" data-modo="ambientalista"><span aria-hidden="true">🌎</span> Mi estado de cuenta ambiental</button>
-              <button type="button" class="pa-ej pa-ej-sabias" data-pa-pregunta="El Senado aprueba la Ley de Ingresos 2027: de sus 10.6 billones, casi 1.5 son dinero prestado" data-modo="reportero"><small class="pa-ej-sena">🆕 ¿Sabías esto?</small><span aria-hidden="true">🏛️</span> El Senado aprueba la Ley de Ingresos 2027: de sus 10.6 billones, casi 1.5 son…</button>
+              <button type="button" class="pa-ej pa-ej-sabias" data-pa-pregunta="Jalisco y el gasto federal: aporta el 7.5 % del PIB y recibe el 6.1 % de lo que la Federación reparte a los estados" data-modo="reportero"><small class="pa-ej-sena">🆕 ¿Sabías esto?</small><span aria-hidden="true">🗺️</span> Jalisco y el gasto federal: aporta el 7.5 % del PIB y recibe el 6.1 % de lo…</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?" data-modo="reportero"><span aria-hidden="true">🔎</span> ¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de AMLO" data-modo="inspector"><span aria-hidden="true">🏛️</span> Estado de cuenta de AMLO</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánta lana le llega a Zapopan?" data-modo="ciudadano"><span aria-hidden="true">🏙️</span> ¿Cuánta lana le llega a Zapopan?</button>
@@ -290,7 +291,7 @@
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto se recauda de IVA?" data-modo="ciudadano"><span aria-hidden="true">🧾</span> ¿Cuánto se recauda de IVA?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="El reloj de la deuda" data-modo="ciudadano"><span aria-hidden="true">⏱️</span> El reloj de la deuda</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto costó el Tren Maya?" data-modo="inspector"><span aria-hidden="true">🚆</span> ¿Cuánto costó el Tren Maya?</button>
-              <button type="button" class="pa-ej pa-ej-sabias" data-pa-pregunta="Ley de Ingresos 2027: el techo de deuda y el perdón de multas, en sus documentos" data-modo="reportero"><small class="pa-ej-sena">🆕 ¿Sabías esto?</small><span aria-hidden="true">🧾</span> Ley de Ingresos 2027: el techo de deuda y el perdón de multas, en sus documentos</button>
+              <button type="button" class="pa-ej pa-ej-sabias" data-pa-pregunta="El Senado aprueba la Ley de Ingresos 2027: de sus 10.6 billones, casi 1.5 son dinero prestado" data-modo="reportero"><small class="pa-ej-sena">🆕 ¿Sabías esto?</small><span aria-hidden="true">🏛️</span> El Senado aprueba la Ley de Ingresos 2027: de sus 10.6 billones, casi 1.5 son…</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Qué le observó la ASF al Seguro Popular?" data-modo="reportero"><span aria-hidden="true">🏥</span> ¿Qué le observó la ASF al Seguro Popular?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Qué es un pliego de observaciones?" data-modo="ciudadano"><span aria-hidden="true">📘</span> ¿Qué es un pliego de observaciones?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de un senador" data-modo="inspector"><span aria-hidden="true">🏛️</span> Estado de cuenta de un senador</button>
@@ -303,20 +304,20 @@
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántos diputados hay?" data-modo="ciudadano"><span aria-hidden="true">🏛️</span> ¿Cuántos diputados hay?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto vale hoy el dólar?" data-modo="ciudadano"><span aria-hidden="true">💱</span> ¿Cuánto vale hoy el dólar?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿En qué obras invirtió AMLO?" data-modo="inspector"><span aria-hidden="true">🏗️</span> ¿En qué obras invirtió AMLO?</button>
+              <button type="button" class="pa-ej pa-ej-sabias" data-pa-pregunta="Ley de Ingresos 2027: el techo de deuda y el perdón de multas, en sus documentos" data-modo="reportero"><small class="pa-ej-sena">🆕 ¿Sabías esto?</small><span aria-hidden="true">🧾</span> Ley de Ingresos 2027: el techo de deuda y el perdón de multas, en sus documentos</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto dejó por aclarar la ASF?" data-modo="reportero"><span aria-hidden="true">🔎</span> ¿Cuánto dejó por aclarar la ASF?</button>
-              <button type="button" class="pa-ej pa-ej-sabias" data-pa-pregunta="El IMSS acota la Modalidad 40: lo que dice el Diario Oficial y lo que falta probar" data-modo="reportero"><small class="pa-ej-sena">🆕 ¿Sabías esto?</small><span aria-hidden="true">⏱️</span> El IMSS acota la Modalidad 40: lo que dice el Diario Oficial y lo que falta…</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Auditarán las oficinas de los consejeros del INE?" data-modo="reportero"><span aria-hidden="true">🗳️</span> ¿Auditarán las oficinas de los consejeros del INE?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de Zapopan" data-modo="inspector"><span aria-hidden="true">🏙️</span> Estado de cuenta de Zapopan</button>
               <button type="button" class="pa-ej" data-pa-pregunta="Expediente de Segalmex" data-modo="inspector"><span aria-hidden="true">📂</span> Expediente de Segalmex</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Qué es un amparo?" data-modo="ciudadano"><span aria-hidden="true">📘</span> ¿Qué es un amparo?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánta basura se genera en México?" data-modo="ambientalista"><span aria-hidden="true">🗑️</span> ¿Cuánta basura se genera en México?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Qué estados de cuenta hay?" data-modo="ciudadano"><span aria-hidden="true">🧾</span> ¿Qué estados de cuenta hay?</button>
+              <button type="button" class="pa-ej pa-ej-sabias" data-pa-pregunta="Emilio Lozoya y la planta que Pemex compró tras 14 años sin operar" data-modo="reportero"><small class="pa-ej-sena">🗂️ Para retomar</small><span aria-hidden="true">🏭</span> Emilio Lozoya y la planta que Pemex compró tras 14 años sin operar</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Qué pasó con el Seguro Popular?" data-modo="reportero"><span aria-hidden="true">🏥</span> ¿Qué pasó con el Seguro Popular?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Qué estado debe más?" data-modo="ciudadano"><span aria-hidden="true">📊</span> ¿Qué estado debe más?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Qué megaobra tiene más sobrecosto?" data-modo="inspector"><span aria-hidden="true">📈</span> ¿Qué megaobra tiene más sobrecosto?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto gana un ministro de la Corte?" data-modo="ciudadano"><span aria-hidden="true">💰</span> ¿Cuánto gana un ministro de la Corte?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de la Suprema Corte" data-modo="inspector"><span aria-hidden="true">⚖️</span> Estado de cuenta de la Suprema Corte</button>
-              <button type="button" class="pa-ej pa-ej-sabias" data-pa-pregunta="Emilio Lozoya y la planta que Pemex compró tras 14 años sin operar" data-modo="reportero"><small class="pa-ej-sena">🗂️ Para retomar</small><span aria-hidden="true">🏭</span> Emilio Lozoya y la planta que Pemex compró tras 14 años sin operar</button>
               <button type="button" class="pa-ej" data-pa-pregunta="Contrasta una nota" data-modo="reportero"><span aria-hidden="true">📰</span> Contrasta una nota</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántas consultas da el IMSS?" data-modo="reportero"><span aria-hidden="true">🩺</span> ¿Cuántas consultas da el IMSS?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿En qué se gasta el presupuesto?" data-modo="ciudadano"><span aria-hidden="true">🏛️</span> ¿En qué se gasta el presupuesto?</button>
@@ -400,7 +401,7 @@
             </p>
             <p class="pa-chico" id="paSinRespNota">La lista se guarda solo en tu navegador: nadie más la ve y no se envía sola. Para hacérnosla llegar, cópiala y pégala en <a href="comunidad-tema.html" data-puerta="tema">📢 Cuéntanos lo que viste › Un tema que deberíamos investigar</a>, el botón de arriba a la izquierda.</p>
           </section>
-          <p class="pa-aviso"><b>Platico como chat, pero no invento.</b> No soy una inteligencia artificial que redacta: entiendo tu pregunta y contesto solo con cifras que la plataforma ya publicó con su documento (1,567 fichas y 2,479 municipios). Si no lo tengo, te lo digo. Tu pregunta no sale de tu navegador.</p>
+          <p class="pa-aviso"><b>Platico como chat, pero no invento.</b> No soy una inteligencia artificial que redacta: entiendo tu pregunta y contesto solo con cifras que la plataforma ya publicó con su documento (1,570 fichas y 2,479 municipios). Si no lo tengo, te lo digo. Tu pregunta no sale de tu navegador.</p>
           </div>
         </aside>
       </div>
@@ -419,16 +420,16 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261029j</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261029k</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261029j"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261029j"></script>
-  <script src="assets/auditor/js/municipios-efipem.js?v=20261029j"></script>
-  <script src="assets/auditor/js/asistente-base.js?v=20261029j"></script>
-  <script src="assets/auditor/js/verificador.js?v=20261029j"></script>
-  <script src="assets/auditor/js/asistente-charla.js?v=20261029j"></script>
-  <script src="assets/auditor/js/asistente.js?v=20261029j"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261029k"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261029k"></script>
+  <script src="assets/auditor/js/municipios-efipem.js?v=20261029k"></script>
+  <script src="assets/auditor/js/asistente-base.js?v=20261029k"></script>
+  <script src="assets/auditor/js/verificador.js?v=20261029k"></script>
+  <script src="assets/auditor/js/asistente-charla.js?v=20261029k"></script>
+  <script src="assets/auditor/js/asistente.js?v=20261029k"></script>
 </body>
 </html>

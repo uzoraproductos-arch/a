@@ -213,8 +213,12 @@
     "fuente:gomez-urrutia-de-la-casa-de-moneda-al-congreso"
    ],
    "consultado": "2026-10-29",
-   "estado": "no abrió",
-   "error": "Forbidden"
+   "estado": "copiado",
+   "sha256": "d02032286070b4dd9d8fbd985a7bdca8af8edf52b89ff177db3bfcb2c8a9c43d",
+   "bytes": 212,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-10-29"
   },
   "https://cuentame.inegi.org.mx/descubre/poblacion/analfabetismo/": {
    "primera_vez": "2026-10-27",
@@ -1751,6 +1755,16 @@
    "historial": [],
    "usos": [
     "biblioteca:ref-garcia-luna-edny"
+   ],
+   "consultado": "2026-10-29",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://www.cronica.com.mx/jalisco/guadalajara/2026/10/27/lamenta-laura-haro-abandono-de-jalisco-en-presupuesto-federal-pide-reasignar-30-mil-mdp-para-2027/": {
+   "primera_vez": "2026-10-29",
+   "historial": [],
+   "usos": [
+    "fuente:jalisco-gasto-federal-pef-2027"
    ],
    "consultado": "2026-10-29",
    "estado": "no abrió",
@@ -3516,6 +3530,16 @@
    "historial": [],
    "usos": [
     "fuente:garcia-luna-y-garcia-harfuch"
+   ],
+   "consultado": "2026-10-29",
+   "estado": "no abrió",
+   "error": "Tunnel connection failed: 403 Forbidden"
+  },
+  "https://www.notisistema.com/noticias/acusa-pri-recorte-de-83-en-inversion-federal-para-jalisco/": {
+   "primera_vez": "2026-10-29",
+   "historial": [],
+   "usos": [
+    "fuente:jalisco-gasto-federal-pef-2027"
    ],
    "consultado": "2026-10-29",
    "estado": "no abrió",
