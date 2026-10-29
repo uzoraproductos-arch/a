@@ -460,3 +460,11 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 @media (max-width: 560px) {
   .pa-modo-lema { display: none; }
 }
+/* La nota del Reportero (29-10-2026): bajo la respuesta, en el modo Reportero,
+   lo que casi nadie cuenta, el ruido con su cotejo y lo que sigue. */
+.pa-reportero { margin-top: 14px; padding: 14px 16px; border-left: 4px solid #b3261e; background: #fbf7f2; border-radius: 0 12px 12px 0; }
+.pa-rep-t { margin: 0 0 6px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; font-size: 14px; color: #8a1c15; }
+.pa-rep-s { margin: 12px 0 4px; font-weight: 700; color: #0b2a63; }
+.pa-reportero .pa-lista { padding-left: 20px; }
+.pa-reportero .pa-lista li { margin-bottom: 8px; }
+.pa-reportero small { font-size: 14px; color: #44526b; }

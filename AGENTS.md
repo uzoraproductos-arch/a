@@ -28,10 +28,14 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
   en `MODOS` de `herramientas/asistente.py`: cada uno con su saludo, sus
   aplicaciones y sus preguntas de ejemplo (`modo_de()`); se eligen en el
   botón de la cabecera del chat, se recuerdan en el navegador (`av-modo`) y
-  se piden por la dirección (`?modo=reportero`). **El modo cambia la forma de
+  se piden por la dirección (`?modo=reportero`). **Reportero** (29-10-2026) suma bajo la respuesta
+  «📰 La nota del Reportero» (`reportero()` de `asistente.js`): lo que casi nadie
+  cuenta, sacado de la base (ASF, pendientes con quién los debe, cotejos de lo
+  que circula, lo que sigue); **lo «privilegiado» es lo enterrado en documentos
+  públicos, nunca un rumor**. El banco de pruebas acepta `modo`. **El modo cambia la forma de
   investigar y de contestar, nunca los datos** (§2). Por entregas: (a) el
-  selector, hecho; (b) la forma de responder de cada modo; (c) el dictamen
-  de cada modo.
+  selector, hecho; (b) la forma de responder de cada modo (Reportero, hecho);
+  (c) el dictamen de cada modo.
 - **Las cuatro herramientas se mudaron a la Enciclopedia** (29-10-2026): su
   índice es la quinta tarjeta de Números, «Herramientas del Auditor»
   (`numeros-herramientas-del-auditor.html`, `HERR_INDICE` y `HERR_SITIO` de

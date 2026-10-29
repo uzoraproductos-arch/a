@@ -11,6 +11,7 @@ cada una lleve a donde debe:
   «Coincide con el documento»).
 - «no_dice»: frases que no debe traer.
 - «sin»: true si lo correcto es decir que no lo sabe.
+- «modo»: el modo en que se pregunta (si falta, Ciudadano, con el que abre).
 
 Falla si una sola pregunta cambia de destino o si la página arroja un error.
 Cuando un cambio mueve una respuesta a propósito (una página nueva, un ancla
@@ -41,10 +42,16 @@ PAGINA = 'herramienta-inspector-pregunta.html'
 
 # Lo mismo que hace el chat al contestar: respuesta(), y si espera una
 # descarga (la lista del SAT, ComprasMX), su promesa.
-PREGUNTA_JS = '''async (q) => {
+# Con «modo» (29-10-2026), la pregunta se hace en ese modo y el texto suma
+# lo que el modo agrega a la respuesta (la nota del Reportero).
+PREGUNTA_JS = '''async (arg) => {
+  const [q, modo] = Array.isArray(arg) ? arg : [arg, ''];
+  const app = document.getElementById('paApp');
+  if (app) app.setAttribute('data-modo', modo || 'ciudadano');
   let r = window.AuditorBot.respuesta(q, []);
   if (r && r.espera) r = await r.espera;
-  const t = ((r && r.html) || '').replace(/<[^>]+>/g, ' ').replace(/\\s+/g, ' ').trim();
+  const n = modo === 'reportero' && window.AuditorBot.reportero ? window.AuditorBot.reportero(q, r) : null;
+  const t = (((r && r.html) || '') + ' ' + ((n && n.html) || '')).replace(/<[^>]+>/g, ' ').replace(/\\s+/g, ' ').trim();
   return { ir: (r && r.ir && r.ir[0]) || null, sin: !!(r && r.sin), texto: t };
 }'''
 
@@ -91,9 +98,10 @@ def main():
         banco = [p for p in banco if a.solo.lower() in p['q'].lower()]
     vistas = set()
     for p in banco:
-        if p['q'] in vistas:
+        clave = (p['q'], p.get('modo', ''))
+        if clave in vistas:
             sys.exit('Pregunta repetida en el banco: %s' % p['q'])
-        vistas.add(p['q'])
+        vistas.add(clave)
         if not p.get('sin') and 'ir' not in p and not p.get('dice'):
             sys.exit('La pregunta «%s» no dice qué espera (ir, dice o sin).' % p['q'])
 
@@ -112,7 +120,7 @@ def main():
         pag.goto('http://127.0.0.1:%d/%s' % (srv.server_address[1], PAGINA))
         pag.wait_for_function('() => !!(window.AuditorBot && window.AuditorBot.respuesta)')
         for p in banco:
-            r = pag.evaluate(PREGUNTA_JS, p['q'])
+            r = pag.evaluate(PREGUNTA_JS, [p['q'], p.get('modo', '')])
             mal = revisa(p, r)
             if a.ver:
                 print('%s %s → %s' % ('✗' if mal else '✓', p['q'], 'no lo sabe' if r['sin'] else r['ir']))

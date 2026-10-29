@@ -442,6 +442,75 @@
         '<span><b>' + esc(f.tit) + '</b><small>' + (f.t === 'pagina' ? 'Página' : 'En «' + esc(f.ir[1]) + '»') + ' · Modo ' + esc(m.charAt(0).toUpperCase() + m.slice(1)) + '</small></span></a>';
     }).join('') + '</div></div>' : '';
   }
+  /* El modo Reportero (pedido del autor, 29-10-2026: «el reportero se
+     convierte como en un chismoso… te transmite información privilegiada»).
+     Bajo la misma respuesta, arma su nota con lo que casi nadie cuenta, pero
+     sacado de documentos: lo que la ASF dejó por aclarar, lo que ninguna
+     dependencia ha publicado (con su nombre), lo que circula y qué consta, y lo
+     que sigue. No agrega cifras ni rumores: todo sale de la base, y lo que no
+     tiene documento se dice así. */
+  function recorta(t, n) { t = String(t || ''); return t.length > n ? t.slice(0, n).replace(/\s+\S*$/, '') + '…' : t; }
+  function temaDe(r) {
+    var t = (r.ficha && r.ficha.tit) || '';
+    t = t.split(/[:(]| — | · /)[0].replace(/^Cuánto gana\s*/i, '').trim();
+    return t.split(' ').length <= 6 ? t : '';
+  }
+  function reportero(q, r) {
+    if (!r || r.sin || r.plat) return null;
+    var f0 = r.ficha, tema = temaDe(r), res = buscar(q), piso = Math.max(5, res.length ? res[0].s * 0.35 : 0);
+    var cerca = res.slice(0, 30).filter(function (x) { return x.s >= piso; }).map(function (x) { return x.f; });
+    if (f0 && cerca.indexOf(f0) < 0) cerca.unshift(f0);
+    /* Un concepto («¿qué es el Ramo 33?») se busca también por su nombre a secas. */
+    if (tema && plano(tema) !== plano(q)) {
+      var rt = buscar(tema), pt = Math.max(5, rt.length ? rt[0].s * 0.35 : 0);
+      rt.slice(0, 30).forEach(function (x) { if (x.s >= pt && cerca.indexOf(x.f) < 0) cerca.push(x.f); });
+    }
+    var cols = cerca.filter(function (f) { return f.t === 'columna'; }).slice(0, 2);
+    var pends = cerca.filter(function (f) { return f.t === 'pendiente' && f.pend; }).slice(0, 2);
+    var exps = cerca.filter(function (f) { return f.t === 'expediente'; }).slice(0, 1);
+    var nadie = [], iv = invDe(q, r);
+    if (iv) nadie.push('<li>📖 <b>Lo investigamos a fondo:</b> <a href="' + esc(iv.x.ir) + '">' + esc(iv.x.n) + ' ➔</a>, en Auditoría en imágenes.</li>');
+    exps.forEach(function (f) {
+      nadie.push('<li>📂 <b>La ASF lo dejó por aclarar.</b> ' + esc(recorta(f.txt, 220)) + ' <a href="' + esc(f.ir[0]) + '">Ver el expediente ➔</a></li>');
+    });
+    pends.forEach(function (f) {
+      /* Si la falta es de la plataforma, se dice así, sin culpar a nadie (AGENTS.md §2). */
+      var nuestra = /falta de la plataforma/i.test((f.pend.quien || '') + ' ' + (f.pend.pq || ''));
+      nadie.push('<li>' + chip({ e: 'pendiente', p: f.pend.id }) + (nuestra ? ' <b>Aún no lo integramos:</b> ' : ' <b>Falta el documento:</b> ') + esc(recorta(f.tit, 140)) + '. ' +
+        (f.pend.quien && !nuestra ? 'Le toca publicarlo a <b>' + esc(f.pend.quien) + '</b>. ' : '') + esc(recorta(f.pend.pq, 160)) +
+        (f.pend.donde ? ' <a href="' + esc(f.pend.donde) + '" target="_blank" rel="noopener">Dónde debería estar ↗</a>' : '') + '</li>');
+    });
+    cols.forEach(function (f) {
+      (f.cot || []).filter(function (c) { return c.r === 'no consta' || c.r === 'matiz'; }).slice(0, 1).forEach(function (c) {
+        nadie.push('<li><span class="pa-cot-r">' + (c.r === 'matiz' ? '⚠️ Consta, con matices' : '❌ Sin documento oficial') + '</span> <b>Se dice que</b> «' + esc(recorta(c.d, 120)) + '». ' + esc(recorta(c.x, 200)) +
+          (c.fu && c.fu.url ? ' <a href="' + esc(c.fu.url) + '" target="_blank" rel="noopener">' + esc(recorta(c.fu.tx, 70)) + ' ↗</a>' : '') + '</li>');
+      });
+    });
+    var ruido = cols.map(function (f) {
+      var n = {};
+      (f.cot || []).forEach(function (c) { n[c.r] = (n[c.r] || 0) + 1; });
+      var cuenta = ['consta', 'matiz', 'no consta', 'pendiente'].filter(function (k) { return n[k]; }).map(function (k) { return n[k] + ' ' + k; }).join(' · ');
+      return '<li>📰 <a href="' + esc(f.ir[0]) + '"><b>' + esc(f.tit) + '</b></a>' +
+        (f.cir && f.cir.tx ? '<br><small><b>Lo que circula:</b> «' + esc(recorta(f.cir.tx, 160)) + '»' + (f.cir.q ? ' (' + esc(recorta(f.cir.q, 90)) + ')' : '') + '</small>' : '') +
+        (cuenta ? '<br><small><b>Nuestro cotejo:</b> ' + esc(cuenta) + '</small>' : '') + '</li>';
+    });
+    var sigue = [];
+    cols.forEach(function (f) { (f.sigue || []).slice(0, 2 - sigue.length).forEach(function (s) { sigue.push('<li>🗓️ ' + (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.tx) + ' ↗</a>' : esc(s.tx)) + '</li>'); }); });
+    var nada = !nadie.length && !ruido.length;
+    var h = '<div class="pa-reportero"><p class="pa-rep-t">📰 La nota del Reportero</p>' +
+      (nadie.length ? '<p class="pa-rep-s">🕵️ Lo que casi nadie te cuenta</p><ul class="pa-lista">' + nadie.slice(0, 4).join('') + '</ul>' : '') +
+      (ruido.length ? '<p class="pa-rep-s">📢 El ruido: lo que circula y lo que consta</p><ul class="pa-lista">' + ruido.join('') + '</ul>' : '') +
+      (sigue.length ? '<p class="pa-rep-s">🗓️ Lo que sigue</p><ul class="pa-lista">' + sigue.join('') + '</ul>' : '') +
+      (nada ? '<p>En la redacción todavía no hay nota sobre esto: no tenemos cotejo de lo que circula ni pendientes señalados. <a href="noticias-relevantes.html#propon">¿Lo investigamos? Propón una nota ➔</a></p>' : '') +
+      '<p class="pa-chico">Lo que te cuento sale de documentos públicos que casi nadie lee, no de rumores. Una nota de prensa es mi punto de partida, nunca mi fuente' +
+      (cols.length ? ', y <b>una acusación no es una condena</b>' : '') + '. A las personas privadas no las nombro.</p></div>';
+    return { html: h, web: !r.web && tema ? tema : '' };
+  }
+  function reporteroHtml(q, r) {
+    if (modoVivo() !== 'reportero') return '';
+    var n = reportero(q, r);
+    return n ? n.html + (n.web ? webHtml(n.web) : '') : '';
+  }
   var TIPOS_REC = { mapa: 'mapa', mapas: 'mapa', reloj: 'reloj', relojes: 'reloj', contador: 'reloj', contadores: 'reloj', simulador: 'simulador', simuladores: 'simulador', tablero: 'tablero' };
   function pideRecurso(q) {
     var p = plano(q), tipo = null;
@@ -1963,6 +2032,7 @@
       }
       if (r.anota && !ya) anota(q, 'sin');
       li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r, previas) +
+        reporteroHtml(q, r) +
         appDe(r) +
         (r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r)))) +
         enciclopediaHtml(enciclopediaPara(q, r)) +
@@ -2030,7 +2100,7 @@
     }
   }
   if (dic) {
-    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara };
+    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, reportero: reportero };
     armaDictamen();
     return;
   }
@@ -2275,7 +2345,7 @@
   })();
 
   /* Para revisar cómo puntúa una pregunta desde la consola. */
-  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara };
+  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, reportero: reportero };
   pintaLista();
   if (canal) document.getElementById('paSinRespNota').innerHTML = 'La lista se guarda solo en tu navegador y no se envía sola: con «Enviarlas a Auditavisión» nos la haces llegar tú.';
   var ps = new URLSearchParams(location.search), pre = ps.get('q'), lista = ps.get('p');

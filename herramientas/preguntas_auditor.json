@@ -1,5 +1,5 @@
 {
- "nota": "Banco de preguntas de prueba del Auditor (herramientas/prueba_auditor.py). Cada renglón dice adónde debe llevar «Saber más» (ir), qué frases debe traer la respuesta (dice) o si lo correcto es decir que no lo sabe (sin). Si un cambio mueve una respuesta a propósito, se corrige aquí en el mismo commit; si la mueve sin querer, el error está en el cambio.",
+ "nota": "Banco de preguntas de prueba del Auditor (herramientas/prueba_auditor.py). Cada renglón dice adónde debe llevar «Saber más» (ir), qué frases debe traer la respuesta (dice) o si lo correcto es decir que no lo sabe (sin). Si un cambio mueve una respuesta a propósito, se corrige aquí en el mismo commit; si la mueve sin querer, el error está en el cambio. Con «modo», la pregunta se hace en ese modo y «dice» revisa también lo que el modo agrega (la nota del Reportero).",
  "preguntas": [
   {
    "q": "Dame mi estado de cuenta cívico",
@@ -997,6 +997,60 @@
   {
    "q": "¿Cómo sigo un caso?",
    "ir": "noticias-relevantes.html#seguimientos"
+  },
+  {
+   "q": "¿Qué pasó con Dos Bocas?",
+   "modo": "reportero",
+   "ir": "herramienta-megaobras-sector.html#obra-dos-bocas",
+   "dice": [
+    "La nota del Reportero",
+    "La ASF lo dejó por aclarar",
+    "Le toca publicarlo a"
+   ]
+  },
+  {
+   "q": "¿Qué es el huachicol fiscal?",
+   "modo": "reportero",
+   "ir": "glosario.html#Huachicol-Fiscal",
+   "dice": [
+    "Lo investigamos a fondo",
+    "Falta el documento"
+   ]
+  },
+  {
+   "q": "¿Qué es el Ramo 33?",
+   "modo": "reportero",
+   "dice": [
+    "Lo investigamos a fondo",
+    "Ramo 33: el dinero para estados y municipios"
+   ]
+  },
+  {
+   "q": "Modalidad 40",
+   "modo": "reportero",
+   "dice": [
+    "El ruido: lo que circula y lo que consta",
+    "Consta, con matices",
+    "Lo que sigue"
+   ]
+  },
+  {
+   "q": "Segalmex",
+   "modo": "reportero",
+   "dice": [
+    "La ASF lo dejó por aclarar",
+    "una acusación no es una condena"
+   ]
+  },
+  {
+   "q": "Tren Maya",
+   "modo": "reportero",
+   "dice": [
+    "Aún no lo integramos"
+   ],
+   "no_dice": [
+    "Le toca publicarlo a Falta de la plataforma"
+   ]
   }
  ]
 }

@@ -749,6 +749,10 @@ EJEMPLOS.insert(14, ('¿Mi cuñado puede trabajar en mi oficina?', '👪'))
 # muestra solo en su modo (modo_de), así que estas no estorban en los otros.
 EJEMPLOS.extend([('Mapa ambiental de megaobras por estado', '🗺️'), ('¿Es cierto que el Tren Maya contamina?', '🚆'),
                  ('¿Cuánto multa la PROFEPA?', '⚖️'), ('¿Cuánto presupuesto tiene la PROFEPA?', '🌎')])
+# Y el modo Reportero, las que muestran su nota (29-10-2026): una obra, un
+# concepto y una auditoría, contados con lo que casi nadie cuenta.
+EJEMPLOS.extend([('¿Qué pasó con Dos Bocas?', '🛢️'), ('¿Qué es el huachicol fiscal?', '⛽'),
+                 ('¿Qué dejó por aclarar la ASF en el Tren Maya?', '🚆')])
 
 
 
@@ -768,14 +772,21 @@ MODOS = [
      '<p>Estoy en <b>modo Inspector</b>: investigo con toda la base de datos de la plataforma. Pégame un <b>RFC</b>, un <b>folio</b> o la liga de una nota, '
      'pídeme el <b>diagnóstico de un ente</b> («diagnóstico de Pemex»), un <b>expediente de la ASF</b> o la cuenta de una <b>megaobra</b>.</p>'
      '<p>Te contesto con la cifra, la operación y sus documentos. Si quieres el respaldo completo, toca <b>«Generar dictamen»</b>.</p>'),
-    ('reportero', '📰', 'Reportero', 'Investiga un tema como una nota',
-     'Pregúntame por un tema informativo y te lo cuento como reportero: qué pasó, quién aparece, qué dice el documento, '
-     'qué falta y qué respondió la parte aludida. Aquí viven las Noticias y el verificador de notas.',
+    # El objetivo del modo, en palabras del autor (29-10-2026): «el reportero
+    # se convierte como en un chismoso… información que igual no puede
+    # encontrar en cualquier otra parte… aquel que te transmite información
+    # privilegiada». Privilegiada por estar enterrada en documentos públicos
+    # que casi nadie lee, nunca por ser un rumor (AGENTS.md §2 bis).
+    ('reportero', '📰', 'Reportero', 'Lo que casi nadie te cuenta, con documento',
+     'Pregúntame por un concepto, una obra, una auditoría o lo que circula en redes, y te lo cuento como reportero: '
+     'lo que dice el documento, lo que casi nadie te cuenta (lo que la ASF dejó por aclarar, lo que ninguna dependencia ha publicado), '
+     'el ruido y qué consta de él, y lo que sigue. Aquí viven las Noticias y el verificador de notas.',
      (), (('📰', 'Noticias de hoy'), ('🔎', 'Contrasta una nota'), ('📂', 'Expediente de Segalmex'),
           ('👪', 'Nepotismo y parentesco'), ('📰', '¿Quién es Genaro García Luna?')),
-     '<p>Estoy en <b>modo Reportero</b>: te cuento un tema como una nota, pero parada en documentos. Pregúntame <b>qué pasó</b> con un caso, '
-     '<b>quién es</b> un personaje público o <b>si es cierto</b> lo que circula, o pégame la <b>liga de una nota</b> y la contrasto.</p>'
-     '<p>Una nota de prensa es mi punto de partida, nunca mi fuente: cada cifra la coteja el documento oficial. Y <b>una acusación no es una condena</b>.</p>'),
+     '<p>Estoy en <b>modo Reportero</b>: te cuento <b>lo que casi nadie te cuenta</b>. No son rumores: es lo que está enterrado en documentos públicos que casi nadie lee, '
+     'como lo que la ASF dejó por aclarar, lo que una dependencia no ha publicado (y quién lo debe) o lo que circula en redes y qué consta de ello.</p>'
+     '<p>Pregúntame por un <b>concepto</b> («¿qué es el huachicol fiscal?»), una <b>obra</b> («¿qué pasó con Dos Bocas?»), una <b>auditoría</b> o <b>si es cierto</b> lo que circula, '
+     'o pégame la liga de una nota. Una nota de prensa es mi punto de partida, nunca mi fuente, y <b>una acusación no es una condena</b>.</p>'),
     ('ciudadano', '🙋', 'Ciudadano', 'Te lo explico como un amigo',
      'Lo más sencillo: preguntas de todos los días, en corto y con un ejemplo. Cuánto te retienen, cuánto debe tu estado, '
      'qué significa una palabra. Aquí viven tu estado de cuenta y la Calculadora Cívica.',
@@ -795,7 +806,7 @@ MODOS = [
 # la que no cae en ninguno es del modo Inspector.
 MODO_EJEMPLO = [
     ('ambientalista', r'ambiental|basura|profepa|contamina'),
-    ('reportero', r'^es cierto|noticia|nota$|que paso|quien es|auditaran|observo|sin acceso|consultas|asuntos resuelve|cunado'),
+    ('reportero', r'^es cierto|noticia|nota$|que paso|huachicol fiscal|por aclarar|quien es|auditaran|observo|sin acceso|consultas|asuntos resuelve|cunado'),
     ('ciudadano', r'civico|^que es|cuanto gana|dolar|valen|reloj de la deuda|%|cuantos (diputados|senadores)|quien preside|'
                   r'cuanto se recauda|eleccion|circuitos|en que se gasta|cuanto debe|lana|que estados de cuenta'),
 ]

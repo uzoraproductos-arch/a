@@ -20,13 +20,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261029d">
-  <script src="assets/auditor/js/iconos.js?v=20261029d"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261029d" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261029d">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261029d">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261029d">
-  <link rel="stylesheet" href="assets/auditor/css/asistente.css?v=20261029d">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261029e">
+  <script src="assets/auditor/js/iconos.js?v=20261029e"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261029e" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261029e">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261029e">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261029e">
+  <link rel="stylesheet" href="assets/auditor/css/asistente.css?v=20261029e">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -194,7 +194,7 @@
               <p>Elige cómo quieres que investigue. Los datos son los mismos en los cuatro modos; cambia la forma de buscar y de contestarte.</p>
               <ul>
               <li><button type="button" class="pa-modo-op" data-pa-modo="inspector" data-nom="Modo Inspector" data-lema="la investigación más completa" aria-pressed="false"><span class="pa-modo-ico" aria-hidden="true">🔍</span><span><b>Modo Inspector</b><small>La investigación más completa</small></span></button></li>
-              <li><button type="button" class="pa-modo-op" data-pa-modo="reportero" data-nom="Modo Reportero" data-lema="investiga un tema como una nota" aria-pressed="false"><span class="pa-modo-ico" aria-hidden="true">📰</span><span><b>Modo Reportero</b><small>Investiga un tema como una nota</small></span></button></li>
+              <li><button type="button" class="pa-modo-op" data-pa-modo="reportero" data-nom="Modo Reportero" data-lema="lo que casi nadie te cuenta, con documento" aria-pressed="false"><span class="pa-modo-ico" aria-hidden="true">📰</span><span><b>Modo Reportero</b><small>Lo que casi nadie te cuenta, con documento</small></span></button></li>
               <li><button type="button" class="pa-modo-op" data-pa-modo="ciudadano" data-nom="Modo Ciudadano" data-lema="te lo explico como un amigo" aria-pressed="false"><span class="pa-modo-ico" aria-hidden="true">🙋</span><span><b>Modo Ciudadano</b><small>Te lo explico como un amigo</small></span></button></li>
               <li><button type="button" class="pa-modo-op" data-pa-modo="ambientalista" data-nom="Modo Ambientalista" data-lema="el costo y el daño ambiental" aria-pressed="false"><span class="pa-modo-ico" aria-hidden="true">🌎</span><span><b>Modo Ambientalista</b><small>El costo y el daño ambiental</small></span></button></li>
               </ul>
@@ -219,8 +219,8 @@
             </div>
           </details>
           <details class="pa-modo-franja" data-modo="reportero" hidden>
-            <summary><span aria-hidden="true">📰</span> <b>Modo Reportero</b><span class="pa-modo-lema"> · Investiga un tema como una nota</span><span class="pa-modo-n">5 aplicaciones ▾</span></summary>
-            <p>Pregúntame por un tema informativo y te lo cuento como reportero: qué pasó, quién aparece, qué dice el documento, qué falta y qué respondió la parte aludida. Aquí viven las Noticias y el verificador de notas.</p>
+            <summary><span aria-hidden="true">📰</span> <b>Modo Reportero</b><span class="pa-modo-lema"> · Lo que casi nadie te cuenta, con documento</span><span class="pa-modo-n">5 aplicaciones ▾</span></summary>
+            <p>Pregúntame por un concepto, una obra, una auditoría o lo que circula en redes, y te lo cuento como reportero: lo que dice el documento, lo que casi nadie te cuenta (lo que la ASF dejó por aclarar, lo que ninguna dependencia ha publicado), el ruido y qué consta de él, y lo que sigue. Aquí viven las Noticias y el verificador de notas.</p>
             <div class="pa-modo-apps">
               <button type="button" class="pa-modo-app" data-pa-pregunta="Noticias de hoy"><span aria-hidden="true">📰</span> Noticias de hoy</button>
               <button type="button" class="pa-modo-app" data-pa-pregunta="Contrasta una nota"><span aria-hidden="true">🔎</span> Contrasta una nota</button>
@@ -257,7 +257,7 @@
             <li class="pa-msg pa-bot pa-hola">
               <div class="pa-burbuja">
                 <div class="pa-hola-modo" data-modo="inspector" hidden><p>Estoy en <b>modo Inspector</b>: investigo con toda la base de datos de la plataforma. Pégame un <b>RFC</b>, un <b>folio</b> o la liga de una nota, pídeme el <b>diagnóstico de un ente</b> («diagnóstico de Pemex»), un <b>expediente de la ASF</b> o la cuenta de una <b>megaobra</b>.</p><p>Te contesto con la cifra, la operación y sus documentos. Si quieres el respaldo completo, toca <b>«Generar dictamen»</b>.</p></div>
-                <div class="pa-hola-modo" data-modo="reportero" hidden><p>Estoy en <b>modo Reportero</b>: te cuento un tema como una nota, pero parada en documentos. Pregúntame <b>qué pasó</b> con un caso, <b>quién es</b> un personaje público o <b>si es cierto</b> lo que circula, o pégame la <b>liga de una nota</b> y la contrasto.</p><p>Una nota de prensa es mi punto de partida, nunca mi fuente: cada cifra la coteja el documento oficial. Y <b>una acusación no es una condena</b>.</p></div>
+                <div class="pa-hola-modo" data-modo="reportero" hidden><p>Estoy en <b>modo Reportero</b>: te cuento <b>lo que casi nadie te cuenta</b>. No son rumores: es lo que está enterrado en documentos públicos que casi nadie lee, como lo que la ASF dejó por aclarar, lo que una dependencia no ha publicado (y quién lo debe) o lo que circula en redes y qué consta de ello.</p><p>Pregúntame por un <b>concepto</b> («¿qué es el huachicol fiscal?»), una <b>obra</b> («¿qué pasó con Dos Bocas?»), una <b>auditoría</b> o <b>si es cierto</b> lo que circula, o pégame la liga de una nota. Una nota de prensa es mi punto de partida, nunca mi fuente, y <b>una acusación no es una condena</b>.</p></div>
                 <div class="pa-hola-modo" data-modo="ciudadano"><p>¡Hola! Soy el Auditor y estoy en <b>modo Ciudadano</b>. Pregúntame lo que quieras del dinero público, como se lo preguntarías a un amigo: <b>cuánto te retienen</b> de tu sueldo, <b>cuánto debe tu estado</b>, <b>cuánta lana le llega a tu municipio</b> o <b>qué significa</b> algún término.</p><p>Te contesto en corto y con datos oficiales. Si quieres ir a fondo, toca <b>«Saber más»</b>; y si quieres investigar en serio, cámbiame a otro modo arriba.</p></div>
                 <div class="pa-hola-modo" data-modo="ambientalista" hidden><p>Estoy en <b>modo Ambientalista</b>: investigo el <b>costo y el daño ambiental</b>. Pregúntame cuánto le cuesta al país el daño, <b>a dónde va la basura</b>, cuánto se invierte en protegerlo o qué resuelve la <b>PROFEPA</b>.</p><p>El deterioro del ambiente también es gasto público: lo pagamos en agua, aire, suelo y basura. Y te digo quién paga cada proyecto, el gobierno o un privado.</p></div>
               </div>
@@ -296,7 +296,7 @@
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántos diputados hay?" data-modo="ciudadano"><span aria-hidden="true">🏛️</span> ¿Cuántos diputados hay?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto vale hoy el dólar?" data-modo="ciudadano"><span aria-hidden="true">💱</span> ¿Cuánto vale hoy el dólar?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿En qué obras invirtió AMLO?" data-modo="inspector"><span aria-hidden="true">🏗️</span> ¿En qué obras invirtió AMLO?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto dejó por aclarar la ASF?" data-modo="inspector"><span aria-hidden="true">🔎</span> ¿Cuánto dejó por aclarar la ASF?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto dejó por aclarar la ASF?" data-modo="reportero"><span aria-hidden="true">🔎</span> ¿Cuánto dejó por aclarar la ASF?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Auditarán las oficinas de los consejeros del INE?" data-modo="reportero"><span aria-hidden="true">🗳️</span> ¿Auditarán las oficinas de los consejeros del INE?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de Zapopan" data-modo="inspector"><span aria-hidden="true">🏙️</span> Estado de cuenta de Zapopan</button>
               <button type="button" class="pa-ej" data-pa-pregunta="Expediente de Segalmex" data-modo="inspector"><span aria-hidden="true">📂</span> Expediente de Segalmex</button>
@@ -343,6 +343,9 @@
               <button type="button" class="pa-ej" data-pa-pregunta="¿Es cierto que el Tren Maya contamina?" data-modo="ambientalista"><span aria-hidden="true">🚆</span> ¿Es cierto que el Tren Maya contamina?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto multa la PROFEPA?" data-modo="ambientalista"><span aria-hidden="true">⚖️</span> ¿Cuánto multa la PROFEPA?</button>
               <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto presupuesto tiene la PROFEPA?" data-modo="ambientalista"><span aria-hidden="true">🌎</span> ¿Cuánto presupuesto tiene la PROFEPA?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué pasó con Dos Bocas?" data-modo="reportero"><span aria-hidden="true">🛢️</span> ¿Qué pasó con Dos Bocas?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué es el huachicol fiscal?" data-modo="reportero"><span aria-hidden="true">⛽</span> ¿Qué es el huachicol fiscal?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué dejó por aclarar la ASF en el Tren Maya?" data-modo="reportero"><span aria-hidden="true">🚆</span> ¿Qué dejó por aclarar la ASF en el Tren Maya?</button>
             </div>
           </div>
           <div class="pa-pie">
@@ -408,16 +411,16 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261029d</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261029e</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261029d"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261029d"></script>
-  <script src="assets/auditor/js/municipios-efipem.js?v=20261029d"></script>
-  <script src="assets/auditor/js/asistente-base.js?v=20261029d"></script>
-  <script src="assets/auditor/js/verificador.js?v=20261029d"></script>
-  <script src="assets/auditor/js/asistente-charla.js?v=20261029d"></script>
-  <script src="assets/auditor/js/asistente.js?v=20261029d"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261029e"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261029e"></script>
+  <script src="assets/auditor/js/municipios-efipem.js?v=20261029e"></script>
+  <script src="assets/auditor/js/asistente-base.js?v=20261029e"></script>
+  <script src="assets/auditor/js/verificador.js?v=20261029e"></script>
+  <script src="assets/auditor/js/asistente-charla.js?v=20261029e"></script>
+  <script src="assets/auditor/js/asistente.js?v=20261029e"></script>
 </body>
 </html>
