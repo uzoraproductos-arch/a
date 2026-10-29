@@ -16,7 +16,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Página | Título | Generador | Enlaces internos | Módulos embebidos | oficial | derivado | pendiente |
 |---|---|---|---:|---:|---:|---:|---:|
-| `administracion-codigos.html` | Administración de códigos · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
+| `administracion-codigos.html` | Administración de códigos · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
 | `agora.html` | Ágora cívica · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 0 |
 | `aprende.html` | Aprende · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
 | `auditoria-agronitrogenados.html` | Plantas de fertilizantes Agronitrogenados · Auditoría en imágenes · Auditavisión | auditorias.py | 83 | 0 | 4 | 2 | 2 |

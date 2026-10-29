@@ -100,12 +100,30 @@
       var actual = A.leer();
       boton.disabled = true; estado.textContent = 'Revisando tu código…';
       A.pide({ accion: 'canjear', codigo: codigo(), pase: actual && actual.pase }).then(function (j) {
+        if (j && j.ok && j.admin) return maestro(j.token_hash);
         if (j && j.ok) return listo(j, (A.vigente(actual) && actual.pase === j.pase) ? 'Se sumó al tiempo que te quedaba' : '');
         if (j && j.motivo === 'ya_canjeado' && j.hasta && Date.parse(j.hasta) > Date.now()) return listo({ pase: j.pase, hasta: j.hasta }, '');
         estado.textContent = MOTIVO[j && j.motivo] || 'No pudimos revisar tu código. Intenta de nuevo.';
         revisa();
       }).catch(function () { estado.textContent = 'No hubo conexión. Intenta de nuevo.'; revisa(); });
     });
+
+    // El código maestro (30-10-2026): la función devuelve un enlace de un solo
+    // uso que aquí se cambia por la sesión de la administración, y el panel abre.
+    function maestro(hash) {
+      estado.textContent = 'Te reconocimos: abriendo tu panel de administración…';
+      return fetch(C.supabase + '/auth/v1/verify', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'apikey': C.anon },
+        body: JSON.stringify({ type: 'magiclink', token_hash: hash })
+      }).then(function (r) { return r.json().then(function (j) { if (!r.ok || !j.access_token) throw j; return j; }); })
+        .then(function (j) {
+          try {
+            sessionStorage.setItem('av-admin', JSON.stringify({ token: j.access_token, refresh: j.refresh_token,
+              vence: Date.now() + (+j.expires_in || 3600) * 1000 }));
+          } catch (e) {}
+          location.href = C.panel + '?maestro=1';
+        });
+    }
 
     function muestraTuyo() {
       var p = A.leer(), caja = $('acTuyo');
@@ -174,7 +192,10 @@
       var h = { 'Content-Type': 'application/json', 'apikey': C.anon };
       if (token) h.Authorization = 'Bearer ' + token;
       return fetch(C.supabase + ruta, { method: metodo || 'POST', headers: h, body: cuerpo ? JSON.stringify(cuerpo) : undefined })
-        .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw j; return j; }); });
+        .then(function (r) {
+          // Una función que no devuelve nada contesta sin cuerpo (204).
+          return r.text().then(function (t) { var j = t ? JSON.parse(t) : null; if (!r.ok) throw j; return j; });
+        });
     }
     function token() {
       if (!s) return Promise.reject({ message: 'sin sesión' });
@@ -357,24 +378,62 @@
       var p = A.leer(); if (p && p.admin) A.guardar(null);
       semana(true).then(carga).catch(function () { alert('No se pudo cambiar. Intenta de nuevo.'); });
     });
-    $('acComoAdmin').addEventListener('click', function () {
-      var est = $('acComoAdminEstado'), p = A.leer();
-      if (p && p.admin && A.vigente(p)) { location.href = 'index.html'; return; }
-      est.textContent = 'Preparando tu acceso…';
-      (sem ? Promise.resolve(sem) : semana()).then(function (k) { return A.pide({ accion: 'canjear', codigo: k.codigo, pase: p && p.pase }); })
+    // El pase de este navegador con el código de la semana (para el candado).
+    function paseAdmin() {
+      var p = A.leer();
+      if (p && p.admin && A.vigente(p)) return Promise.resolve();
+      return (sem ? Promise.resolve(sem) : semana()).then(function (k) { return A.pide({ accion: 'canjear', codigo: k.codigo, pase: p && p.pase }); })
         .then(function (j) {
           if (j && j.motivo === 'ya_canjeado' && j.hasta && Date.parse(j.hasta) > Date.now()) j.ok = true;
           if (!j || !j.ok) throw j;
           A.guardar({ pase: j.pase, hasta: j.hasta, visto: Date.now(), admin: true });
-          location.href = 'index.html';
-        }).catch(function () { est.textContent = 'No se pudo preparar tu acceso. Intenta de nuevo.'; });
+        });
+    }
+    $('acComoAdmin').addEventListener('click', function () {
+      var est = $('acComoAdminEstado');
+      est.textContent = 'Preparando tu acceso…';
+      paseAdmin().then(function () { location.href = 'index.html'; })
+        .catch(function () { est.textContent = 'No se pudo preparar tu acceso. Intenta de nuevo.'; });
+    });
+
+    // El código maestro (pedido del autor, 30-10-2026): con él, la entrada te
+    // reconoce sin correo. No cambia solo: lo cambias aquí cuando quieras.
+    function maestroInfo() {
+      return rpc('codigo_admin_info').then(function (j) {
+        $('acMaeEstado').innerHTML = j.puesto
+          ? 'Ya tienes código maestro. Lo cambiaste el <b>' + esc(fecha(j.cambiado)) + '</b>.'
+          : 'Aún no pones tu código maestro: mientras, entras con tu correo.';
+        var e = j.entradas || [];
+        $('acMaeEntradas').innerHTML = e.length
+          ? 'Últimas entradas con él: ' + e.map(function (x) { return esc(fecha(x)); }).join(' · ') + '. Si ves una que no fue tuya, cámbialo.'
+          : '';
+      });
+    }
+    $('acMaestro').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var f = $('acMaestro'), est = $('acMaeGuardar'), a = limpia(f.nuevo.value), b = limpia(f.otra.value);
+      if (a.length !== 8 || f.nuevo.value.replace(/[\s-]/g, '').length !== 8) { est.textContent = 'Son 8 números, del 0 al 9.'; return; }
+      if (a !== b) { est.textContent = 'Los dos no coinciden: escríbelo igual en las dos casillas.'; return; }
+      est.textContent = 'Guardando…';
+      rpc('fijar_codigo_admin', { p_codigo: a }).then(function () {
+        f.reset(); est.textContent = 'Listo: desde ahora la entrada te reconoce con ese código. El anterior ya no abre.';
+        return maestroInfo();
+      }).catch(function (x) { est.textContent = (x && x.message) ? 'No se guardó: ' + x.message + '.' : 'No se pudo guardar. Intenta de nuevo.'; });
     });
     function abre() {
       token().then(function (t) { return auth('/auth/v1/user', null, t, 'GET'); }).then(function (u) {
         s.correo = u.email; pon(s);
         $('acQuien').textContent = 'Entraste como ' + u.email + '.';
-        return Promise.all([carga(), semana()]);
-      }).then(function () { entrar.hidden = true; admin.hidden = false; })
+        return Promise.all([carga(), semana(), maestroInfo()]);
+      }).then(function () {
+        entrar.hidden = true; admin.hidden = false;
+        // Llegaste con el código maestro: se prepara también el pase de este navegador.
+        if (/[?&]maestro=1/.test(location.search)) {
+          history.replaceState(null, '', location.pathname);
+          $('acQuien').textContent += ' Te reconocimos con tu código maestro.';
+          paseAdmin().catch(function () {});
+        }
+      })
         .catch(function (e) {
           var no = e && /administraci/.test(e.message || '');
           $('acEntrarEstado').textContent = no ? 'Esta cuenta no está dada de alta en la administración.' : 'Tu sesión venció: vuelve a pedir el enlace.';

@@ -318,4 +318,41 @@ select pg_temp.igual((select count(*) from public.codigo_uso() where correo = 'a
 reset role;
 reset request.jwt.claim.sub;
 
+-- 13. El código maestro de la administración (30-10-2026).
+set role anon;
+select pg_temp.debe_fallar($$select public.fijar_codigo_admin('40417263')$$, 'que el público ponga el código maestro');
+select pg_temp.debe_fallar($$select public.revisar_codigo_admin('40417263')$$, 'que el público pruebe el código maestro sin la función');
+select pg_temp.debe_fallar($$select count(*) from public.admin_codigo$$, 'que el público lea la huella del código maestro');
+select pg_temp.debe_fallar($$select count(*) from public.admin_entradas$$, 'que el público lea las entradas de la administración');
+reset role;
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
+select pg_temp.debe_fallar($$select public.fijar_codigo_admin('40417263')$$, 'que una cuenta común ponga el código maestro');
+select pg_temp.debe_fallar($$select public.codigo_admin_info()$$, 'que una cuenta común vea el código maestro');
+select pg_temp.debe_fallar($$select count(*) from public.admin_codigo$$, 'que una cuenta común lea la huella');
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select pg_temp.igual((public.codigo_admin_info()->>'puesto')::boolean::int, 0, 'sin código maestro al principio');
+select pg_temp.debe_fallar($$select public.fijar_codigo_admin('1234567')$$, 'un código maestro de 7 números');
+select pg_temp.debe_fallar($$select public.fijar_codigo_admin('11111111')$$, 'un código maestro demasiado fácil');
+select codigo as cm from public.crear_codigo('55501234', interval '1 day') \gset
+select pg_temp.debe_fallar($$select public.fijar_codigo_admin('55501234')$$, 'un código maestro igual a un código común');
+select public.fijar_codigo_admin('4041-7263');
+select pg_temp.igual((public.codigo_admin_info()->>'puesto')::boolean::int, 1, 'el código maestro quedó puesto');
+reset role;
+reset request.jwt.claim.sub;
+select pg_temp.igual((select (huella like '$2%')::int from public.admin_codigo), 1, 'se guarda solo su huella bcrypt, nunca en claro');
+set role service_role;
+select pg_temp.igual((public.revisar_codigo_admin('40417264') is null)::int, 1, 'un código maestro equivocado no abre');
+select pg_temp.igual((public.revisar_codigo_admin('40417263') = '00000000-0000-0000-0000-0000000000ad')::int, 1, 'el código maestro reconoce a la administración');
+reset role;
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select pg_temp.igual(jsonb_array_length(public.codigo_admin_info()->'entradas'), 1, 'la entrada con el código maestro quedó anotada (y la fallida no)');
+select public.fijar_codigo_admin('40417299');
+reset role;
+reset request.jwt.claim.sub;
+set role service_role;
+select pg_temp.igual((public.revisar_codigo_admin('40417263') is null)::int, 1, 'al cambiarlo, el código anterior deja de abrir');
+reset role;
+
 \echo 'Todas las pruebas de permisos pasaron.'
