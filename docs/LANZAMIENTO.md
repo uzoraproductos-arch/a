@@ -85,7 +85,7 @@ sin las decisiones de la fase 0.**
 
 | # | Decisión | Opciones | Listo cuando |
 |---|---|---|---|
-| 0.1 | Dominio | `auditavision.mx`, `.org.mx` o `.com.mx`; se compra en un registrador acreditado ante NIC México (Vercel no vende `.mx`) | Comprado a tu nombre o al de la asociación |
+| 0.1 | Dominio | **Decidido (30-10-2026): `auditavision.com.mx` es la casa y `auditavision.com` redirige a ella** (`.mx`, opcional). Registrador sugerido: Cloudflare (precio de costo y redirección gratis; cobra en dólares) o Akky (el de NIC México; cobra en pesos y factura en México). Vercel no vende `.mx` | Comprados a tu nombre o al de la asociación |
 | 0.2 | Forma jurídica | Asociación civil (permite donaciones y, si quieres, ser donataria autorizada) o persona física con actividad empresarial | Con RFC: lo pide la pasarela de pago |
 | 0.3 | Qué se publica de `investigaciones/` | (a) nada, solo ligas a la fuente oficial; (b) todo, en el almacén de Supabase; (c) solo lo que ya no está en línea en su fuente | Elegido |
 | 0.4 | Imagen del Modo Inspector | Confirmar autor y licencia de las cámaras, o reemplazar por una propia | Resuelto |
