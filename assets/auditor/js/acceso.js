@@ -4,7 +4,7 @@
    La configuración la escribe herramientas/acceso.py entre sus marcas: no la
    edites a mano. Las páginas del canje y del panel usan acceso-paginas.js. */
 (function () {
-  var C = /*config*/{"candado":true,"funciones":"https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1","supabase":"https://nuqiyzcilbrrlezmesnf.supabase.co","anon":"sb_publishable_gf28FUrT1zcoaGl4C2f_aQ_exkzAQ9g","canje":"canjea-tu-codigo.html","libres":["canjea-tu-codigo.html","administracion-codigos.html","aviso-de-privacidad.html"]}/*fin-config*/;
+  var C = /*config*/{"candado":true,"funciones":"https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1","supabase":"https://nuqiyzcilbrrlezmesnf.supabase.co","anon":"sb_publishable_gf28FUrT1zcoaGl4C2f_aQ_exkzAQ9g","canje":"canjea-tu-codigo.html","panel":"administracion-codigos.html","libres":["canjea-tu-codigo.html","administracion-codigos.html","aviso-de-privacidad.html"]}/*fin-config*/;
   var CLAVE = 'av-pase';
   var DIA = 12 * 3600 * 1000;  // cada cuánto se vuelve a preguntar a la base (por si se revocó)
 
@@ -22,6 +22,23 @@
     }).then(function (r) { return r.json(); });
   }
   window.AvAcceso = { config: C, leer: leer, guardar: guardar, vigente: vigente, pide: pide };
+
+  // La pestaña «Administración» (pedido del autor, 30-10-2026): solo aparece
+  // en el navegador que entró con el código de la administración. El público
+  // no la ve; el panel sigue pidiendo el correo de administración para abrir.
+  var yo = leer();
+  if (yo && yo.admin && vigente(yo)) {
+    document.addEventListener('DOMContentLoaded', function () {
+      var barra = document.querySelector('.site-top-nav .nav-center-links');
+      if (!barra || barra.querySelector('.nav-menu-admin')) return;
+      var aqui = (location.pathname.split('/').pop() || '') === C.panel;
+      var d = document.createElement('div');
+      d.className = 'nav-menu-item nav-menu-pagina nav-menu-admin';
+      d.innerHTML = '<a class="mega-menu-trigger" href="' + C.panel + '" title="Tus códigos, las solicitudes y tu código de la semana"' +
+        (aqui ? ' aria-current="page"' : '') + '>Administración</a>';
+      barra.insertBefore(d, barra.querySelector('.nav-menu-cuentanos'));
+    });
+  }
 
   if (!C.candado || !C.funciones) return;
   // En la copia local (python3 -m http.server y las pruebas de revision.py)

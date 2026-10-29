@@ -72,6 +72,7 @@ def config():
         'supabase': base,
         'anon': SUPABASE_ANON,
         'canje': CANJE,
+        'panel': PANEL,
         'libres': LIBRES,
     }
 
