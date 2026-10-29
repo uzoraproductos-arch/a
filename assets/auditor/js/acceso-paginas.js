@@ -6,7 +6,7 @@
 (function () {
   var A = window.AvAcceso, C = A && A.config;
   if (!C) return;
-  var ALFA = '23456789ABCDEFGHJKMNPQRSTUVWXYZ';
+  var ALFA = '0123456789';
   var $ = function (id) { return document.getElementById(id); };
   function fecha(iso) {
     var d = new Date(iso);
@@ -69,7 +69,7 @@
     });
 
     var MOTIVO = {
-      formato: 'Revisa el código: son ocho letras y números.',
+      formato: 'Revisa el código: son ocho números.',
       no_valido: 'Ese código no existe o ya no sirve. Revisa que esté bien escrito.',
       vencido: 'Ese código ya no se puede canjear: pasó su fecha límite.',
       agotado: 'Ese código ya se usó todas las veces que permite.',

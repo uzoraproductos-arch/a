@@ -87,9 +87,9 @@ def escribir_config():
 
 
 def _casillas():
-    uno = lambda i: ('<input class="ac-casilla" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" '
-                     'spellcheck="false" maxlength="1" aria-label="Carácter %d de 8" data-i="%d">' % (i + 1, i))
-    return ('<div class="ac-casillas" role="group" aria-label="Tu código, de ocho caracteres">'
+    uno = lambda i: ('<input class="ac-casilla" type="text" inputmode="numeric" autocomplete="off" '
+                     'spellcheck="false" maxlength="1" aria-label="Número %d de 8" data-i="%d">' % (i + 1, i))
+    return ('<div class="ac-casillas" role="group" aria-label="Tu código, de ocho números">'
             '<span class="ac-grupo">%s</span><span class="ac-guion" aria-hidden="true">–</span><span class="ac-grupo">%s</span></div>'
             % (''.join(uno(i) for i in range(4)), ''.join(uno(i) for i in range(4, 8))))
 
@@ -155,7 +155,7 @@ def entrada_html(sello):
       <form class="ac-canje" id="acCanje" novalidate>
         <label class="ac-et" for="acCasilla0">Ingresa con tu código promocional</label>
         {casillas}
-        <p class="ac-ayuda">Ocho letras y números (sin O, cero, I, L ni uno). Si lo copiaste, pégalo en la primera casilla.</p>
+        <p class="ac-ayuda">Ocho números. Si lo copiaste, pégalo en la primera casilla.</p>
         <button class="sz-btn sz-btn-of ac-boton" type="submit" disabled>Ingresar</button>
         <p class="ac-estado" id="acEstado" role="status" aria-live="polite"></p>
       </form>{sin_base}
@@ -221,11 +221,11 @@ def pagina_panel():
               '        <label>Cantidad <input class="ac-campo" name="cantidad" type="number" min="1" max="500" value="10" required></label>\n'
               '        <label>Duración <select class="ac-campo" name="duracion">%s<option value="otra">Otra (en días)</option></select></label>\n'
               '        <label class="ac-otra" hidden>Días <input class="ac-campo" name="dias" type="number" min="1" max="1825" value="10"></label>\n'
-              '        <label>Usos por código <input class="ac-campo" name="usos" type="number" min="1" max="10000" value="1" required></label>\n'
+              '        <label>Personas por código <input class="ac-campo" name="usos" type="number" min="1" max="10000" value="1" required></label>\n'
               '        <label>Canjear antes del <input class="ac-campo" name="antes" type="date"></label>\n'
-              '        <label class="ac-ancho">Nota <input class="ac-campo" name="nota" type="text" maxlength="120" placeholder="Para quién son: «Taller», «Prensa»…"></label>\n'
-              '        <label class="ac-ancho">Código propio (opcional) <input class="ac-campo" name="propio" type="text" maxlength="9" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Vacío: salen al azar. Ejemplo: PASE-2345"></label>\n'
-              '        <p class="ac-ayuda ac-ancho">Si escribes un código propio se crea solo ese, con la duración y los usos de arriba. Lleva 8 caracteres: números del 2 al 9 y letras sin I, L ni O.</p>\n'
+              '        <label class="ac-ancho">Nota (opcional) <input class="ac-campo" name="nota" type="text" maxlength="120" placeholder="Para quién son: «Taller», «Prensa»…"></label>\n'
+              '        <label class="ac-ancho">Código propio (opcional) <input class="ac-campo" name="propio" type="text" inputmode="numeric" maxlength="9" autocomplete="off" spellcheck="false" placeholder="Vacío: salen al azar. Ejemplo: 2026-1029"></label>\n'
+              '        <p class="ac-ayuda ac-ancho">Si escribes un código propio se crea solo ese, con la duración y los usos de arriba. Lleva 8 números, del 0 al 9. La nota es opcional.</p>\n'
               '      </div>\n'
               '      <p class="ac-acciones"><button class="sz-btn sz-btn-of" type="submit">Generar</button>\n'
               '        <button class="sz-btn ac-claro" type="button" id="acCsv">Descargar CSV</button>\n'

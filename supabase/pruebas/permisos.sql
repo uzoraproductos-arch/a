@@ -143,7 +143,7 @@ select pg_temp.igual((select count(*) from public.generar_codigos(1, interval '1
 select count(*) as n from public.generar_codigos(1, interval '1 day', 1, now() - interval '1 hour', 'Ya vencido') \gset
 select pg_temp.debe_fallar($$select public.generar_codigos(501, interval '1 day')$$, 'generar más de 500 códigos de una vez');
 select pg_temp.debe_fallar($$select public.generar_codigos(1, interval '10 years')$$, 'un código de más de cinco años');
-select pg_temp.igual((select count(*) from public.codigos where codigo ~ '^[23456789ABCDEFGHJKMNPQRSTUVWXYZ]{8}$'), 6, 'códigos con el formato de 8 caracteres');
+select pg_temp.igual((select count(*) from public.codigos where codigo ~ '^[0-9]{8}$'), 6, 'códigos de 8 números');
 select codigo as c1 from public.codigos where nota = 'Prueba semana' order by id limit 1 \gset
 select codigo as c2 from public.codigos where nota = 'Prueba semana' order by id offset 1 limit 1 \gset
 select codigo as cg from public.codigos where nota = 'Grupo' \gset
@@ -182,21 +182,23 @@ reset role;
 
 -- 7 bis. Los códigos propios (30-10-2026): los escribe la administración.
 set role anon;
-select pg_temp.debe_fallar($$select public.crear_codigo('PASE2345', interval '1 day')$$, 'que el público cree un código propio');
+select pg_temp.debe_fallar($$select public.crear_codigo('23456789', interval '1 day')$$, 'que el público cree un código propio');
 reset role;
 set role authenticated;
 set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
-select pg_temp.debe_fallar($$select public.crear_codigo('PASE2345', interval '1 day')$$, 'que una cuenta común cree un código propio');
+select pg_temp.debe_fallar($$select public.crear_codigo('23456789', interval '1 day')$$, 'que una cuenta común cree un código propio');
 set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
-select pg_temp.igual((select count(*) from public.crear_codigo('pase-2345', interval '3 days', 5, null, 'Taller')), 1, 'un código propio, escrito en minúsculas y con guion');
-select pg_temp.igual((select count(*) from public.codigos where codigo = 'PASE2345' and usos_max = 5), 1, 'el código propio se guarda en mayúsculas y sin guion');
-select pg_temp.debe_fallar($$select public.crear_codigo('PASE 2345', interval '1 day')$$, 'un código propio repetido');
-select pg_temp.debe_fallar($$select public.crear_codigo('HOLA2026', interval '1 day')$$, 'un código propio con O y 0, que no se usan');
-select pg_temp.debe_fallar($$select public.crear_codigo('PASE23', interval '1 day')$$, 'un código propio de menos de 8 caracteres');
+select pg_temp.igual((select count(*) from public.crear_codigo('2345-6789', interval '3 days', 5, null, 'Taller')), 1, 'un código propio, escrito con guion');
+select pg_temp.igual((select count(*) from public.codigos where codigo = '23456789' and usos_max = 5), 1, 'el código propio se guarda sin guion');
+select pg_temp.debe_fallar($$select public.crear_codigo('2345 6789', interval '1 day')$$, 'un código propio repetido');
+select pg_temp.debe_fallar($$select public.crear_codigo('PASE2345', interval '1 day')$$, 'un código propio con letras');
+select pg_temp.igual((select count(*) from public.crear_codigo('1000 0001', interval '1 day', 1, null, null)), 1, 'un código propio con ceros y unos, sin nota');
+select pg_temp.debe_fallar($$select public.crear_codigo('234567', interval '1 day')$$, 'un código propio de menos de 8 números');
 reset role;
 reset request.jwt.claim.sub;
 set role service_role;
-select pg_temp.igual(((public.canjear_codigo('PASE-2345')) ->> 'ok')::boolean::int, 1, 'el código propio se canjea');
+select pg_temp.igual(((public.canjear_codigo('2345-6789')) ->> 'ok')::boolean::int, 1, 'el código propio se canjea');
+select pg_temp.igual(((public.canjear_codigo('1000-0001')) ->> 'ok')::boolean::int, 1, 'un código con ceros y unos se canjea');
 reset role;
 
 -- 8. «Obtén uno»: las solicitudes de código (29-10-2026).
