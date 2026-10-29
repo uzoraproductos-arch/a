@@ -1952,7 +1952,19 @@
     return null;
   }
 
+  /* El título de una columna, tal cual, abre esa columna (29-10-2026): así
+     contestan los «¿Sabías esto?» y «Para retomar» del Reportero, que van
+     entre las preguntas de ejemplo. */
+  function tituloColumna(q) {
+    var pq = plano(q).trim();
+    if (pq.split(' ').length < 4 || !charla) return null;
+    var f = (B.fichas || []).filter(function (x) { return x.t === 'columna' && plano(x.tit).trim() === pq; })[0];
+    return f ? charla.deFicha(f) : null;
+  }
+
   function respuesta(q, previas) {
+    var tc = tituloColumna(q);
+    if (tc) return tc;
     var inv = investigacion(q);
     if (inv) return inv;
     var al = alarma(q);

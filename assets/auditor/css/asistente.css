@@ -468,6 +468,6 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .pa-reportero .pa-lista { padding-left: 20px; }
 .pa-reportero .pa-lista li { margin-bottom: 8px; }
 .pa-reportero small { font-size: 14px; color: #44526b; }
-/* «¿Sabías esto?» del saludo del Reportero (29-10-2026). */
-.pa-sabias { margin-top: 12px; }
-.pa-sabias .pa-ej { margin: 0 6px 8px 0; text-align: left; }
+/* «¿Sabías esto?» del Reportero (29-10-2026): va entre las preguntas de ejemplo, con su seña. */
+.pa-ej-sabias { border-color: #b3412e; background: #fbf7f2; border-radius: 18px; }
+.pa-ej-sena { display: block; font-size: 12px; font-weight: 800; color: #b3412e; letter-spacing: .02em; margin-bottom: 2px; }

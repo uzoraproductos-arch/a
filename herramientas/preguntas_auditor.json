@@ -1087,6 +1087,54 @@
    "no_dice": [
     "Un periódico logró"
    ]
+  },
+  {
+   "q": "El IMSS acota la Modalidad 40: lo que dice el Diario Oficial y lo que falta probar",
+   "modo": "reportero",
+   "ir": "noticias-relevantes.html#col-imss-modalidad-40-gestores",
+   "dice": [
+    "La nota del Reportero"
+   ]
+  },
+  {
+   "q": "Elba Esther Gordillo: cinco años en proceso y una sentencia que se quiso reservar",
+   "modo": "reportero",
+   "ir": "noticias-relevantes.html#col-gordillo-la-sentencia-reservada",
+   "dice": [
+    "La nota del Reportero"
+   ]
+  },
+  {
+   "q": "«Con el Seguro Popular se atendieron más de 51 millones; ahorita nada». Lo que dicen el INEGI y la ASF",
+   "modo": "reportero",
+   "ir": "noticias-relevantes.html#col-seguro-popular-51-millones",
+   "dice": [
+    "La nota del Reportero"
+   ]
+  },
+  {
+   "q": "«Casa Blanca»: el expediente que, según la Función Pública, fue sustituido por una copia",
+   "modo": "reportero",
+   "ir": "noticias-relevantes.html#col-casa-blanca-expediente",
+   "dice": [
+    "La nota del Reportero"
+   ]
+  },
+  {
+   "q": "ISSSTESON: oxígeno pagado a un paciente fallecido y pensiones a personas muertas. ¿Dónde está el dinero?",
+   "modo": "reportero",
+   "ir": "noticias-relevantes.html#col-isssteson-oxigeno-pensiones-fallecidos",
+   "dice": [
+    "La nota del Reportero"
+   ]
+  },
+  {
+   "q": "Emilio Lozoya y la planta que Pemex compró tras 14 años sin operar",
+   "modo": "reportero",
+   "ir": "noticias-relevantes.html#col-lozoya-agronitrogenados-odebrecht",
+   "dice": [
+    "La nota del Reportero"
+   ]
   }
  ]
 }

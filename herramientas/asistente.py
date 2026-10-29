@@ -837,24 +837,41 @@ def _fecha_col(t):
     return (int(m.group(3)), int(m.group(2)), int(m.group(1))) if m else (0, 0, 0)
 
 
-def _sabias_html():
+def _sabias():
     """«¿Sabías esto?» del modo Reportero (pedido del autor, 29-10-2026: «muy
     actualizadas… unas que no hicieron tanto ruido en el pasado y que
     posiblemente deben de retomarse hoy en día»): las tres columnas
     verificadas más nuevas y tres casos de Personajes y Hechos que llevan más
-    tiempo sin moverse. Cada una es una pregunta al chat."""
+    tiempo sin moverse. Desde el mismo día no van en el saludo («para dejar
+    como libre un poquito el chat»): se reparten entre las preguntas de
+    ejemplo del modo, con su seña. Da [(columna, seña)], nuevas y viejas
+    alternadas."""
     import asistente_personajes
     cols = asistente_personajes.columnas()[0]
     nuevas = sorted((c for c in cols if c.get('seccion') in ('Verificado', 'Al momento')), key=lambda c: _fecha_col(c.get('actualizado')), reverse=True)[:3]
     viejas = sorted((c for c in cols if c.get('seccion') in ('Personajes', 'Hechos')), key=lambda c: _fecha_col(c.get('actualizado')))[:3]
+    out = []
+    for n, v in zip(nuevas, viejas):
+        out += [(n, '🆕 ¿Sabías esto?'), (v, '🗂️ Para retomar')]
+    return out
 
-    def bt(c):
+
+def _ejemplos():
+    """Las preguntas de ejemplo: (pregunta, texto, icono, modo, seña). Las de
+    «¿Sabías esto?» entran a las del Reportero, una cada tres, y quitan la
+    pregunta de ejemplo que ya llevaba a la misma columna (según el banco de
+    pruebas, preguntas_auditor.json)."""
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'preguntas_auditor.json'), encoding='utf-8') as f:
+        lleva = {x['q']: x.get('ir', '') for x in json.load(f)['preguntas']}
+    ej = [(q, q, i, modo_de(q), '') for q, i in EJEMPLOS]
+    for k, (c, sena) in enumerate(_sabias()):
+        ej = [e for e in ej if lleva.get(e[0], '').split('#')[-1] != 'col-' + c['id']]
         t = limpio(c['titulo'])
-        return ('<button type="button" class="pa-ej" data-pa-pregunta="%s"><span aria-hidden="true">%s</span> %s</button>'
-                % (html.escape(t, quote=True), c.get('icono') or '📰', html.escape(t if len(t) <= 80 else t[:78].rsplit(' ', 1)[0] + '…')))
-    return ('<div class="pa-sabias"><p class="pa-rep-s">🆕 ¿Sabías esto? Lo último que verificamos</p><p>%s</p>'
-            '<p class="pa-rep-s">🗂️ Casos que no hicieron tanto ruido y vale la pena retomar</p><p>%s</p></div>'
-            % (' '.join(bt(c) for c in nuevas), ' '.join(bt(c) for c in viejas)))
+        corto = t if len(t) <= 80 else t[:78].rsplit(' ', 1)[0] + '…'
+        rep = [n for n, e in enumerate(ej) if e[3] == 'reportero']
+        pos = rep[min(k * 3 + 1, len(rep) - 1)] if rep else len(ej)
+        ej.insert(pos, (t, corto, c.get('icono') or '📰', 'reportero', sena))
+    return ej
 
 
 def _modos_html():
@@ -876,8 +893,6 @@ def _modos_html():
                 mid, '' if mid == MODO_INICIAL else ' hidden', ico, html.escape(nom), html.escape(lema), len(apps), html.escape(que),
                 '\n'.join('              <button type="button" class="pa-modo-app" data-pa-pregunta="%s"><span aria-hidden="true">%s</span> %s</button>'
                           % (html.escape(n, quote=True), i, html.escape(n)) for i, n in apps)))
-        if mid == 'reportero':
-            hola += _sabias_html()
         holas.append('                <div class="pa-hola-modo" data-modo="%s"%s>%s</div>' % (mid, '' if mid == MODO_INICIAL else ' hidden', hola))
     return '\n'.join(opciones), '\n'.join(franjas), '\n'.join(holas)
 
@@ -888,8 +903,9 @@ def pagina(cuenta, canal='', herramientas=()):
     lo llame."""
     total = sum(cuenta.values())
     opciones, franjas, holas = _modos_html()
-    ej = '\n'.join('              <button type="button" class="pa-ej" data-pa-pregunta="%s" data-modo="%s"><span aria-hidden="true">%s</span> %s</button>'
-                   % (html.escape(q, quote=True), modo_de(q), i, html.escape(q)) for q, i in EJEMPLOS)
+    ej = '\n'.join('              <button type="button" class="pa-ej%s" data-pa-pregunta="%s" data-modo="%s">%s<span aria-hidden="true">%s</span> %s</button>'
+                   % (' pa-ej-sabias' if sena else '', html.escape(q, quote=True), m, '<small class="pa-ej-sena">%s</small>' % sena if sena else '',
+                      i, html.escape(t)) for q, t, i, m, sena in _ejemplos())
     import apartados  # «Lo que aún no sé» llega a pregunta-bot cuando hay base (paso 2.8)
     funcion = (' data-funcion="%s/pregunta-bot"' % html.escape(apartados.FUNCIONES.rstrip('/'), quote=True)) if apartados.FUNCIONES else ''
     return '''<div class="pa" id="paApp" data-canal="%s"%s data-modo="%s">
