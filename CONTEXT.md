@@ -392,6 +392,15 @@ significado no cambia. Contraste medido con WCAG (mínimo 4.5:1), en
    Menús, modales y cajón conservan su sombra porque flotan.
 (Resuelto en 20261008l: la caja del treemap ya va en tema claro.)
 
+**Cabecera en acuarela (29-10-2026).** El autor entregó una ilustración
+propia, generada con IA: una ciudad futurista en acuarela, bajo la lluvia, con
+torres que se pierden en la niebla. Reemplaza al pasillo de Pinterest, que se
+retiró del repositorio por derechos. Vive en
+`assets/auditor/img/portada/cabecera-acuarela.webp` y conserva todo lo de
+antes: va al centro, se desvanece hacia los azules por los dos lados
+(`--cab-ancho`) y el paneo de 48 s la recorre de la calle hacia las torres.
+Lo que sigue pendiente de derechos es solo el pie.
+
 **Imágenes de fondo en cabecera y pie (08-10-2026, sello 20261008j).** El
 autor eligió imágenes propias de su carpeta («Gasto público → imágenes»):
 - Cabecera: `assets/auditor/img/portada/cabecera-pasillo.webp` (el pasillo
