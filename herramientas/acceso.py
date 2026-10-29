@@ -38,9 +38,12 @@ JS = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'acceso.js')
 
 # El candado: True = sin un código vigente no se entra a la plataforma.
 CANDADO = False
-# La llave PÚBLICA (anon) del proyecto de Supabase. Va en la página por
-# diseño; la llave de servicio, nunca.
-SUPABASE_ANON = ''
+# El proyecto de Supabase (creado por el autor el 29-10-2026) y su llave
+# PÚBLICA (publishable). Va en la página por diseño; la llave de servicio
+# (secret), nunca. Va aparte de FUNCIONES de apartados.py: los códigos se
+# conectan sin encender el envío de los formularios, que espera su aviso.
+SUPABASE_URL = 'https://nuqiyzcilbrrlezmesnf.supabase.co'
+SUPABASE_ANON = 'sb_publishable_gf28FUrT1zcoaGl4C2f_aQ_exkzAQ9g'
 
 CANJE = 'canjea-tu-codigo.html'
 PANEL = 'administracion-codigos.html'
@@ -57,15 +60,15 @@ DURACIONES = [
 
 
 def config():
-    import apartados
-    funciones = apartados.FUNCIONES.rstrip('/')
-    if CANDADO and not (funciones and SUPABASE_ANON):
-        raise SystemExit('acceso.py: CANDADO está puesto, pero faltan FUNCIONES (apartados.py) o SUPABASE_ANON: '
+    base = SUPABASE_URL.rstrip('/')
+    funciones = (base + '/functions/v1') if base else ''
+    if CANDADO and not (base and SUPABASE_ANON):
+        raise SystemExit('acceso.py: CANDADO está puesto, pero faltan SUPABASE_URL o SUPABASE_ANON: '
                          'nadie podría canjear un código y la plataforma quedaría cerrada para todos.')
     return {
         'candado': CANDADO,
         'funciones': funciones,
-        'supabase': re.sub(r'/functions/v1$', '', funciones),
+        'supabase': base,
         'anon': SUPABASE_ANON,
         'canje': CANJE,
         'libres': LIBRES,

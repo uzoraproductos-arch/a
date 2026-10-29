@@ -4,7 +4,7 @@
    La configuración la escribe herramientas/acceso.py entre sus marcas: no la
    edites a mano. Las páginas del canje y del panel usan acceso-paginas.js. */
 (function () {
-  var C = /*config*/{"candado":false,"funciones":"","supabase":"","anon":"","canje":"canjea-tu-codigo.html","libres":["canjea-tu-codigo.html","administracion-codigos.html","aviso-de-privacidad.html"]}/*fin-config*/;
+  var C = /*config*/{"candado":false,"funciones":"https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1","supabase":"https://nuqiyzcilbrrlezmesnf.supabase.co","anon":"sb_publishable_gf28FUrT1zcoaGl4C2f_aQ_exkzAQ9g","canje":"canjea-tu-codigo.html","libres":["canjea-tu-codigo.html","administracion-codigos.html","aviso-de-privacidad.html"]}/*fin-config*/;
   var CLAVE = 'av-pase';
   var DIA = 12 * 3600 * 1000;  // cada cuánto se vuelve a preguntar a la base (por si se revocó)
 
