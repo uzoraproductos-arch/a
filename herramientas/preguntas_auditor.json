@@ -1135,6 +1135,19 @@
    "dice": [
     "La nota del Reportero"
    ]
+  },
+  {
+   "q": "¿El Senado ya aprobó la Ley de Ingresos 2027?",
+   "ir": "noticias-auditavision.html#col-senado-ley-de-ingresos-2027"
+  },
+  {
+   "q": "¿Es cierto que la Ley de Ingresos 2027 recauda 10.6 billones?",
+   "ir": "noticias-auditavision.html#col-senado-ley-de-ingresos-2027"
+  },
+  {
+   "q": "¿Cuánto pagarán los turistas extranjeros por entrar a México en 2027?",
+   "modo": "reportero",
+   "ir": "noticias-auditavision.html#col-senado-ley-de-ingresos-2027"
   }
  ]
 }

@@ -42,6 +42,250 @@
   var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
  {
+  "id": "senado-ley-de-ingresos-2027",
+  "seccion": "Al momento",
+  "icono": "🏛️",
+  "fecha": "28-10-2026",
+  "titulo": "El Senado aprueba la Ley de Ingresos 2027: de sus 10.6 billones, casi 1.5 son dinero prestado",
+  "balazo": "El pleno del Senado la aprobó 75 a 34 y sin cambios, así que va al Ejecutivo para publicarse. De los 10.6 billones de pesos que «prevé obtener», 9.2 billones son ingresos y el resto es dinero prestado. Lo que pagan los turistas extranjeros por entrar a México sube a 1,158 pesos, y el cambio al ISR para automotrices y gasolineras todavía no tiene un documento oficial que podamos abrir.",
+  "nota": {
+   "medio": "El Financiero",
+   "titulo": "Senado aprueba cambios al ISR y aumentos en cuotas de servicios y trámites para 2027",
+   "fecha": "28-10-2026",
+   "url": "https://www.elfinanciero.com.mx/nacional/2026/10/28/senado-aprueba-cambios-al-isr-y-aumentos-en-cuotas-de-servicios-y-tramites-para-2027/"
+  },
+  "circula": {
+   "red": "Instagram",
+   "cuenta": "@elfinanciero_mx (El Financiero)",
+   "fecha": "28 de octubre de 2026",
+   "texto": "El Senado aprobó la Ley de Ingresos y la Ley Federal de Derechos para 2027, que contemplan una recaudación de más de 10.6 billones de pesos… el pago de visitantes extranjeros pasará de 983 a mil 158 pesos… cambios al ISR para excluir a determinadas empresas automotrices y gasolineras de las restricciones a las deducciones… más de 6.2 billones provendrían de impuestos… endeudamiento de hasta 1.7 billones."
+  },
+  "cuerpo": [
+   "Qué pasó. Según el Canal del Congreso (28 de octubre), el pleno del Senado aprobó la Ley de Ingresos de la Federación para 2027 con 75 votos a favor y 34 en contra en lo general, y 73 a 33 en lo particular. Quedó «en sus términos», como la mandó la Cámara de Diputados el 15 de octubre, y se envió al Ejecutivo. La ley manda publicarla en el Diario Oficial a más tardar 20 días naturales después de aprobada (LFPRH, art. 42, fr. VI).",
+   "El punto ciego: no son 10.6 billones de «recaudación». La ley estima $10,636,488.1 millones en total, pero esa suma incluye el dinero que el gobierno pedirá prestado. Los ingresos que entran sin endeudarse, los presupuestarios, son $9,156,528.9 millones; la diferencia, $1,479,959.2 millones, son los ingresos por financiamiento, que la ley suma en su total. Y los 1.7 billones de deuda interna son un techo: lo máximo que puede contratar en el año, no deuda ya contratada.",
+   "De dónde sale el dinero. Los impuestos aportan $6,263,886.8 millones, el 58.9 % del total: $3,288,975.3 millones del ISR, $1,768,717.3 millones del IVA y $828,256.0 millones del IEPS, según expuso en tribuna el presidente de la Comisión de Hacienda del Senado. Pemex y la CFE tienen sus propios techos de deuda.",
+   "Los derechos. La Cámara de Diputados aprobó el 14 de octubre la Ley Federal de Derechos: la cuota que paga quien visita México sin trabajar aquí (el turista extranjero) sube 17.8 % y queda en 1,158 pesos, y lo que se recaude se reparte 57 % para la Defensa, 15 % para el Instituto Nacional de Migración y 28 % para la Tesorería. Que el Senado también la aprobó lo dicen los medios; el documento del Senado todavía no lo pudimos abrir.",
+   "Lo que falta probar. Los medios dicen que el Senado cambió la reforma al ISR para que la industria automotriz y quienes venden gasolina y diésel no tengan el nuevo límite a las deducciones de quien ingresa más de 50 millones de pesos, y que por eso esa ley regresa a la Cámara de Diputados. Hasta leer la minuta del Senado, eso va como pendiente: la falta es nuestra, porque el portal del Senado no abre desde la plataforma."
+  ],
+  "ejemplo": {
+   "tit": "La cuenta, con números redondos",
+   "txt": "Si la Ley de Ingresos 2027 fueran 100 pesos:",
+   "filas": [
+    [
+     "Impuestos",
+     "$59",
+     "$6,263,886.8 millones ÷ $10,636,488.1 millones × 100"
+    ],
+    [
+     "Otros ingresos (petroleros, cuotas, derechos, organismos…)",
+     "$27",
+     "($9,156,528.9 millones − $6,263,886.8 millones) ÷ $10,636,488.1 millones × 100"
+    ],
+    [
+     "Dinero prestado (financiamiento)",
+     "$14",
+     "($10,636,488.1 millones − $9,156,528.9 millones) ÷ $10,636,488.1 millones × 100"
+    ]
+   ],
+   "nota": "Es un ejemplo derivado con las cifras del Paquete Económico 2027 que la Ley de Ingresos aprobó sin cambios."
+  },
+  "cotejo": [
+   {
+    "dice": "El Senado aprobó la Ley de Ingresos para 2027",
+    "res": "consta",
+    "explica": "75 a 34 en lo general y 73 a 33 en lo particular; quedó en sus términos y se envió al Ejecutivo. Falta su publicación en el Diario Oficial.",
+    "fuente": "Canal del Congreso, «Senado aprueba Ley de Ingresos 2027 por 10.6 billones de pesos» (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "dice": "Contemplan una recaudación de más de 10.6 billones de pesos",
+    "res": "matiz",
+    "explica": "La cifra, $10,636,488.1 millones, consta, pero no es recaudación: es el total de la ley e incluye $1,479,959.2 millones de financiamiento. Lo que entra sin endeudarse son $9,156,528.9 millones.",
+    "fuente": "Canal del Congreso (28-10-2026) y Paquete Económico 2027 en la base de la plataforma",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "dice": "Más de 6.2 billones provendrían del cobro de impuestos",
+    "res": "consta",
+    "explica": "Son $6,263,886.8 millones, el 58.9 % de los ingresos estimados.",
+    "fuente": "Canal del Congreso (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "dice": "El endeudamiento previsto podría alcanzar hasta 1.7 billones de pesos",
+    "res": "consta",
+    "explica": "La ley autoriza deuda interna neta hasta por 1 billón 700 mil millones de pesos. Es un techo, no deuda contratada; Pemex y la CFE tienen techos aparte.",
+    "fuente": "Canal del Congreso (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "dice": "El pago de visitantes extranjeros al ingresar a México pasará de 983 a 1,158 pesos",
+    "res": "matiz",
+    "explica": "Constan los 1,158 pesos y la subida de 17.8 %, en la versión que aprobó la Cámara de Diputados; es la cuota de quien entra sin permiso para trabajar, el turista. Los 983 pesos de hoy no vienen en la nota oficial, aunque cuadran con esa subida (1,158 ÷ 1.178 ≈ 983, derivado).",
+    "fuente": "Canal del Congreso, «Cámara de Diputados aprueba Ley Federal de Derechos 2027» (14-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10318"
+   },
+   {
+    "dice": "El Senado aprobó también la Ley Federal de Derechos",
+    "res": "pendiente",
+    "explica": "La nota oficial del Senado que leímos solo trae la Ley de Ingresos. El voto de la Ley de Derechos no lo pudimos abrir.",
+    "fuente": "Canal del Congreso (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338",
+    "quien": "Falta de la plataforma: el dictamen y su votación están en la Gaceta del Senado, que no abre desde nuestra sesión",
+    "donde": "https://www.senado.gob.mx/66/gaceta_del_senado"
+   },
+   {
+    "dice": "Se excluye a automotrices y gasolineras de las restricciones a las deducciones de quien ingresa más de 50 millones, y la ley del ISR regresa a Diputados",
+    "res": "pendiente",
+    "explica": "Ningún documento oficial que pudimos abrir trae la reserva ni su votación. Cuando la Cámara de Diputados reciba la minuta, su texto quedará en la Gaceta Parlamentaria.",
+    "fuente": "El Financiero y otros medios (28-10-2026)",
+    "url": "https://www.elfinanciero.com.mx/nacional/2026/10/28/senado-aprueba-cambios-al-isr-y-aumentos-en-cuotas-de-servicios-y-tramites-para-2027/",
+    "quien": "Falta de la plataforma: la minuta del Senado no abre desde nuestra sesión; después la publicará la Gaceta de Diputados",
+    "donde": "https://gaceta.diputados.gob.mx/"
+   }
+  ],
+  "cifras": [
+   {
+    "valor": "$10,636,488.1 millones",
+    "etq": "Ley de Ingresos 2027: el total, con financiamiento",
+    "estado": "oficial",
+    "fuente": "Canal del Congreso (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "valor": "$9,156,528.9 millones",
+    "etq": "Ingresos presupuestarios 2027: lo que entra sin endeudarse",
+    "estado": "oficial",
+    "fuente": "Criterios Generales de Política Económica 2027 (en la base)",
+    "url": "numeros-paquete-2027-cifras.html"
+   },
+   {
+    "valor": "$1,479,959.2 millones",
+    "etq": "Financiamiento dentro del total (total − ingresos presupuestarios)",
+    "estado": "derivado",
+    "fuente": "Operación con las dos cifras anteriores",
+    "url": "numeros-paquete-2027-cifras.html"
+   },
+   {
+    "valor": "$6,263,886.8 millones",
+    "etq": "Impuestos estimados para 2027",
+    "estado": "oficial",
+    "fuente": "Canal del Congreso (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "valor": "75 a 34",
+    "etq": "Votación en lo general en el pleno del Senado (73 a 33 en lo particular)",
+    "estado": "oficial",
+    "fuente": "Canal del Congreso (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "valor": "$1,158",
+    "etq": "Cuota del visitante extranjero sin actividad remunerada en 2027 (+17.8 %)",
+    "estado": "oficial",
+    "fuente": "Canal del Congreso (14-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10318"
+   }
+  ],
+  "datos": [
+   {
+    "ico": "📊",
+    "tx": "Cómo se ve 2027: las cifras del Paquete Económico",
+    "url": "numeros-paquete-2027-cifras.html",
+    "de": "Ingresos, gasto, déficit y deuda de 2027 junto a 2026, con los Criterios Generales."
+   },
+   {
+    "ico": "🧾",
+    "tx": "Los impuestos del Paquete 2027",
+    "url": "numeros-paquete-2027-impuestos.html",
+    "de": "Qué impuestos cambian y cuánto se espera de cada uno."
+   },
+   {
+    "ico": "🗓️",
+    "tx": "El itinerario que manda la ley",
+    "url": "numeros-paquete-2027-itinerario.html",
+    "de": "Diputados a más tardar el 20 de octubre, el Senado el 31 y la publicación 20 días después."
+   },
+   {
+    "ico": "📉",
+    "tx": "La deuda",
+    "url": "numeros-la-deuda.html",
+    "de": "Cuánto debe el país y quién autoriza cada peso prestado."
+   },
+   {
+    "ico": "🔍",
+    "tx": "El cotejo de la Ley de Ingresos en Diputados: el techo de deuda y el perdón de multas",
+    "url": "noticias-auditavision.html#col-lif-2027-deuda-y-multas",
+    "de": "Lo que circuló el 15 de octubre, afirmación por afirmación."
+   }
+  ],
+  "glosario": [
+   {
+    "t": "LIF (Ley de Ingresos de la Federación)",
+    "url": "glosario.html#LIF"
+   },
+   {
+    "t": "Ingresos presupuestarios",
+    "url": "glosario.html#Ingresos-Presupuestarios"
+   },
+   {
+    "t": "Techo de endeudamiento neto",
+    "url": "glosario.html#Techo-de-Endeudamiento-Neto"
+   },
+   {
+    "t": "ISR",
+    "url": "glosario.html#ISR"
+   },
+   {
+    "t": "Derechos (contribución)",
+    "url": "glosario.html#Derechos"
+   }
+  ],
+  "red": "Senado Ley de Ingresos 2027 ISR automotrices gasolineras",
+  "sigue": [
+   {
+    "que": "La publicación de la Ley de Ingresos 2027 en el Diario Oficial (a más tardar 20 días naturales después de aprobada)",
+    "url": "https://www.dof.gob.mx/"
+   },
+   {
+    "que": "El voto del Senado sobre la Ley Federal de Derechos y su publicación en el Diario Oficial",
+    "url": "https://www.senado.gob.mx/66/gaceta_del_senado"
+   },
+   {
+    "que": "La minuta del ISR que regresa a la Cámara de Diputados: el texto de la excepción para automotrices y gasolineras y su votación",
+    "url": "https://gaceta.diputados.gob.mx/"
+   },
+   {
+    "que": "El Presupuesto de Egresos 2027, que la Cámara de Diputados debe aprobar a más tardar el 15 de noviembre",
+    "url": "https://gaceta.diputados.gob.mx/"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Canal del Congreso: Senado aprueba Ley de Ingresos 2027 por 10.6 billones de pesos (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
+    "nombre": "Canal del Congreso: Cámara de Diputados aprueba Ley Federal de Derechos 2027 (14-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10318"
+   },
+   {
+    "nombre": "Canal del Congreso: Aprueban en San Lázaro Ley de Ingresos 2027 (15-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"
+   },
+   {
+    "nombre": "Paquete Económico 2027: Criterios Generales de Política Económica (en la base de la plataforma)",
+    "url": "numeros-paquete-2027-cifras.html"
+   },
+   {
+    "nombre": "Punto de partida: El Financiero, «Senado aprueba cambios al ISR y aumentos en cuotas de servicios y trámites para 2027» (28-10-2026)",
+    "url": "https://www.elfinanciero.com.mx/nacional/2026/10/28/senado-aprueba-cambios-al-isr-y-aumentos-en-cuotas-de-servicios-y-tramites-para-2027/"
+   }
+  ],
+  "actualizado": "29-10-2026"
+ },
+ {
   "id": "imss-modalidad-40-gestores",
   "seccion": "Al momento",
   "icono": "⏱️",
@@ -1257,7 +1501,7 @@
   "seccion": "Verificado",
   "icono": "🧾",
   "titulo": "Ley de Ingresos 2027: el techo de deuda y el perdón de multas, en sus documentos",
-  "balazo": "La Cámara de Diputados la aprobó el 15 de octubre con un techo de deuda interna de 1.7 billones de pesos y con un cambio para que las grandes empresas también paguen sus adeudos sin multas ni recargos. El Senado todavía no la vota en el pleno.",
+  "balazo": "La Cámara de Diputados la aprobó el 15 de octubre con un techo de deuda interna de 1.7 billones de pesos y con un cambio para que las grandes empresas también paguen sus adeudos sin multas ni recargos. El 28 de octubre el pleno del Senado la aprobó sin cambios (75 a 34) y la envió al Ejecutivo.",
   "circula": {
    "red": "Instagram",
    "cuenta": "@pajaropolitico (Animal Político)",
@@ -1268,7 +1512,7 @@
    "El 15 de octubre de 2026 el pleno de la Cámara de Diputados aprobó la Ley de Ingresos de la Federación para 2027: 331 votos a favor y 118 en contra en lo general, y 340 contra 109 en lo particular, según el Canal del Congreso. Estima ingresos por 10 billones 636 mil 488 millones de pesos y autoriza endeudamiento interno neto hasta por un billón 700 mil millones. Ojo: es un techo, lo máximo que el gobierno puede pedir prestado en el año, no deuda ya contratada.",
    "En la discusión, el diputado Ricardo Monreal presentó una reserva al artículo vigésimo primero transitorio, que se aprobó: amplía el programa de regularización fiscal, quita el tope de 300 millones de pesos de ingresos anuales y deja entrar a los contribuyentes que atiende la Administración General de Grandes Contribuyentes del SAT, con créditos firmes o consentidos. No es una condonación del impuesto: para obtener la reducción de multas, recargos y gastos de ejecución hay que pagar completo el adeudo.",
    "El origen está a la vista. El 13 de octubre, en el 50 aniversario del Consejo Coordinador Empresarial, la presidenta Sheinbaum dijo, según la versión estenográfica oficial: «le propuse a la Secretaría de Hacienda que el próximo año a todos, sin tener límite, quienes tengan deudas con el fisco pueden pagar sin recargos» y «sin ninguna multa, sin ningún recargo, a cualquier monto». Lo dijo como propuesta suya; la palabra «acuerdo» la usan los medios.",
-   "En el Senado, el 21 de octubre las comisiones unidas de Hacienda y de Estudios Legislativos Primera aprobaron el paquete: 10 a 5 en la primera y 8 a 6 en la segunda. Falta el voto del pleno y su publicación en el Diario Oficial: hasta entonces no es ley."
+   "En el Senado, el 21 de octubre las comisiones unidas de Hacienda y de Estudios Legislativos Primera aprobaron el paquete: 10 a 5 en la primera y 8 a 6 en la segunda. El pleno la aprobó en sus términos, 75 a 34 en lo general y 73 a 33 en lo particular, y la envió al Ejecutivo, según el Canal del Congreso del 28 de octubre. Falta su publicación en el Diario Oficial: hasta entonces no rige."
   ],
   "dato_curioso": "El perdón de multas no es nuevo: la Ley de Ingresos 2026 ya daba un estímulo del 100 % de multas y recargos por adeudos de 2024 y anteriores, pero dejaba fuera a quien ganara más de 300 millones de pesos al año. Lo que cambió para 2027 es ese tope.",
   "cifras": [
@@ -1305,7 +1549,7 @@
    {
     "dice": "Morena y aliados aprobaron la Ley de Ingresos 2027.",
     "res": "matiz",
-    "explica": "La aprobó la Cámara de Diputados (331 a 118 en lo general) y la avalaron las comisiones del Senado, pero falta el voto del pleno del Senado y su publicación en el DOF. El voto por partido no viene en la nota oficial que consultamos.",
+    "explica": "La aprobaron la Cámara de Diputados (331 a 118 en lo general) y, el 28 de octubre, el pleno del Senado (75 a 34); falta su publicación en el DOF. El voto por partido no viene en las notas oficiales que consultamos.",
     "fuente": "Canal del Congreso, 15 y 21-10-2026",
     "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"
    },
@@ -1333,8 +1577,8 @@
   ],
   "sigue": [
    {
-    "que": "Votación del pleno del Senado (prevista para la última semana de octubre de 2026)",
-    "url": "https://www.senado.gob.mx/"
+    "que": "Ya llegó: el pleno del Senado la aprobó 75 a 34 (Canal del Congreso, 28-10-2026). Su nota «Al momento» trae el resto",
+    "url": "noticias-auditavision.html#col-senado-ley-de-ingresos-2027"
    },
    {
     "que": "Publicación de la Ley de Ingresos 2027 en el Diario Oficial: el texto final del artículo vigésimo primero transitorio y el porcentaje exacto",
@@ -1351,6 +1595,10 @@
     "url": "https://www.canaldelcongreso.gob.mx/noticias/10322"
    },
    {
+    "nombre": "Canal del Congreso: Senado aprueba Ley de Ingresos 2027 por 10.6 billones de pesos (28-10-2026)",
+    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+   },
+   {
     "nombre": "Canal del Congreso: Comisiones del Senado aprueban Ley de Ingresos 2027 (21-10-2026)",
     "url": "https://www.canaldelcongreso.gob.mx/noticias/10329"
    },
@@ -1363,7 +1611,7 @@
     "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf"
    }
   ],
-  "actualizado": "26 de octubre de 2026"
+  "actualizado": "29 de octubre de 2026"
  },
  {
   "id": "hr-ratings-baja-mexico-bbb",

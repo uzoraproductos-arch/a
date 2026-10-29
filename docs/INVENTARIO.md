@@ -241,7 +241,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 185 | 0 | 0 | 0 | 88 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 187 | 0 | 0 | 0 | 90 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 30 | 0 | 6 | 3 | 1 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 37 | 0 | 1 | 0 | 0 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
@@ -312,16 +312,17 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-87 fichas, cada una con su porqué, su responsable y su enlace oficial.
+89 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 
-Documentos en `docs/boveda/evidencias.json`: 218 copiado, 52 no abrió, 7 sin copia.
+Documentos en `docs/boveda/evidencias.json`: 220 copiado, 53 no abrió, 7 sin copia.
 
 Todos los cotejos «consta» y «matiz» tienen su evidencia.
 
-11 cifras oficiales sin copia todavía (su sitio no abrió donde se corrió la bóveda):
+12 cifras oficiales sin copia todavía (su sitio no abrió donde se corrió la bóveda):
 
+- cifra «$9,156,528.9 millones» de `senado-ley-de-ingresos-2027` → numeros-paquete-2027-cifras.html
 - cifra «3/04/2014 – 3/04/2023» de `ine-contratos-desde-cordova` → https://centralelectoral.ine.mx/2023/03/31/lorenzo-cordova-adriana-favela-ciro-murayama-y-jose-roberto-ruiz-se-despiden-de-la-herradura-de-la-democracia/
 - cifra «460 meses de prisión» de `garcia-luna-las-dos-cortes` → https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years
 - cifra «460 meses» de `garcia-luna-testigos-y-la-ley-mexicana` → https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years
