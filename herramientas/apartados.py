@@ -5182,6 +5182,11 @@ def pagina(a, sello):
     for nivel in ('padre2', 'padre3'):
         if a.get(nivel):
             padre += '<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a[nivel]
+    # Cada pagina de la Enciclopedia se pregunta al Auditor en su modo (29-10-2026).
+    import modos
+    if a['archivo'] != ENCICLOPEDIA and (ENCICLOPEDIA in padre or a['archivo'] in modos.ENCICLOPEDIA_EXTRA):
+        migas = re.sub(r'<[^>]+>', '', padre + a['menu'])
+        nota = (nota + ' ' if nota else '') + modos.enlace(a['archivo'], migas, re.sub('<[^>]+>', '', a['menu']))
     cab_clase, cab_estilo = 'apartado-cab', ''
     if a.get('fondo'):
         cab_clase += ' herr-cab herr-foto rubro-%s' % a['rubro'] + (' ' + a['foto_clase'] if a.get('foto_clase') else '')

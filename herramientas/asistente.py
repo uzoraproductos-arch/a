@@ -302,6 +302,24 @@ PAGINA_K = {
 }
 
 
+def migas_de(s):
+    """Las migas de una pagina generada, sin Inicio: «Enciclopedia › Números › …»."""
+    m = re.search(r'<nav class="apartado-migas".*?</nav>', s, re.S)
+    if not m:
+        return ''
+    partes = [limpio(x) for x in re.findall(r'<(?:a|span)\b[^>]*>(.*?)</(?:a|span)>', m.group(0))]
+    return ' › '.join(x for x in partes if x and x != '›')
+
+
+def enciclopedia_de(n, s):
+    """{'e': 1, 'm': modo} si la pagina es de la Enciclopedia; {} si no."""
+    import modos
+    mg = migas_de(s)
+    if 'Enciclopedia' not in mg.split(' › ')[1:2] and n not in modos.ENCICLOPEDIA_EXTRA:
+        return {}
+    return {'e': 1, 'm': modos.modo_pagina(n, mg)}
+
+
 def _paginas():
     """Cada pagina de la plataforma, por su titulo y su descripcion: para las
     preguntas de «¿donde encuentro...?»."""
@@ -318,8 +336,11 @@ def _paginas():
         if not t or not m:
             continue
         tit = limpio(t.group(1)).split(' · ')[0].split(' | ')[0]
-        out.append({'t': 'pagina', 'tit': tit, 'txt': limpio(m.group(1)), 'ir': [n, tit],
-                    'k': n[:-5].replace('-', ' ') + PAGINA_K.get(n, '')})
+        # Las paginas de la Enciclopedia llevan su modo (29-10-2026): el chat
+        # las ofrece en «En la Enciclopedia», primero las del modo elegido.
+        enc = enciclopedia_de(n, s)
+        out.append(dict({'t': 'pagina', 'tit': tit, 'txt': limpio(m.group(1)), 'ir': [n, tit],
+                         'k': n[:-5].replace('-', ' ') + PAGINA_K.get(n, '')}, **enc))
         # Cada seccion con titulo propio: lleva al lugar exacto de la pagina.
         vistos = set()
         for h in re.finditer(r'<h([23])[^>]*\bid="([^"]+)"[^>]*>(.*?)</h\1>', s, re.S):
@@ -344,7 +365,7 @@ def _paginas():
             if len(tx) > 420:
                 tx = tx[:420].rsplit(' ', 1)[0] + '…'
             # k lleva el texto de toda la seccion: se busca en el, se muestra el primer parrafo.
-            out.append({'t': 'seccion', 'tit': ht, 'txt': tx, 'ir': ['%s#%s' % (n, h.group(2)), tit], 'k': tit + ' ' + cuerpo})
+            out.append(dict({'t': 'seccion', 'tit': ht, 'txt': tx, 'ir': ['%s#%s' % (n, h.group(2)), tit], 'k': tit + ' ' + cuerpo}, **enc))
     return out
 
 

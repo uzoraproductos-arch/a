@@ -411,6 +411,37 @@
         '<span><b>' + esc(o.x.v) + '</b><small>' + esc(o.x.n) + (o.ab && o.x.ire ? ' · ' + esc(NOMBRE[o.ab]) : '') + '</small></span></a>';
     }).join('') + '</div></div>' : '';
   }
+  /* La Enciclopedia es la base de datos física del Auditor (pedido del autor,
+     29-10-2026): al pie de cada respuesta van las páginas de la Enciclopedia
+     que tocan el tema, primero las del modo elegido. El orden cambia con el
+     modo; los datos, nunca. Una página cuyo título está completo en la
+     pregunta va primero; las demás, solo si tocan el tema de cerca. */
+  var MODO_ICO = { inspector: '🔍', reportero: '📰', ciudadano: '🙋', ambientalista: '🌎' };
+  function modoVivo() { var a = document.getElementById('paApp'); return a ? a.getAttribute('data-modo') : ''; }
+  function enciclopediaPara(q, r) {
+    if (!r || r.sin || r.plat) return [];
+    var ir = r.ir || (r.ficha && r.ficha.ir), base = ir ? sinParam(ir[0]) : '', pq = plano(q), modo = modoVivo();
+    var vistos = {}, out = [];
+    if (base) vistos[base] = 1;
+    var res = buscar(q), piso = Math.max(6, res.length ? res[0].s * 0.4 : 0);
+    res.slice(0, 40).forEach(function (x) {
+      var f = x.f, pg = f.ir && sinParam(f.ir[0]);
+      if (!f.e || !pg || vistos[pg]) return;
+      var tit = plano(f.t === 'pagina' ? f.tit : f.ir[1] || ''), exacto = tit.trim().length > 2 && pq.indexOf(tit) >= 0;
+      if (!exacto && x.s < piso) return;
+      vistos[pg] = 1;
+      out.push({ f: f, s: x.s * (exacto ? 3 : 1) * (f.m === modo ? 1.3 : 1) });
+    });
+    out.sort(function (a, b) { return b.s - a.s; });
+    return out.slice(0, 3).map(function (o) { return o.f; });
+  }
+  function enciclopediaHtml(lista) {
+    return lista.length ? '<div class="pa-rec pa-enc"><p class="pa-mas-t">📚 En la Enciclopedia</p><div class="pa-rec-lista">' + lista.map(function (f) {
+      var m = f.m || 'inspector';
+      return '<a class="pa-rec-a" href="' + esc(f.ir[0]) + '" data-modo="' + esc(m) + '"><span class="pa-rec-ico" aria-hidden="true">' + MODO_ICO[m] + '</span>' +
+        '<span><b>' + esc(f.tit) + '</b><small>' + (f.t === 'pagina' ? 'Página' : 'En «' + esc(f.ir[1]) + '»') + ' · Modo ' + esc(m.charAt(0).toUpperCase() + m.slice(1)) + '</small></span></a>';
+    }).join('') + '</div></div>' : '';
+  }
   var TIPOS_REC = { mapa: 'mapa', mapas: 'mapa', reloj: 'reloj', relojes: 'reloj', contador: 'reloj', contadores: 'reloj', simulador: 'simulador', simuladores: 'simulador', tablero: 'tablero' };
   function pideRecurso(q) {
     var p = plano(q), tipo = null;
@@ -1934,6 +1965,7 @@
       li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r, previas) +
         appDe(r) +
         (r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r)))) +
+        enciclopediaHtml(enciclopediaPara(q, r)) +
         (r.web ? webHtml(r.web) : '') +
         (r.sug && r.sug.length ? '<p class="pa-mas-t">' + (r.tambien ? 'También te puede servir' : 'Sigue preguntando') + '</p>' + chips(r.sug) : '');
       var caja = li.querySelector('.pa-app[data-pa-abre]');
@@ -1998,7 +2030,7 @@
     }
   }
   if (dic) {
-    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta };
+    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara };
     armaDictamen();
     return;
   }
@@ -2243,7 +2275,7 @@
   })();
 
   /* Para revisar cómo puntúa una pregunta desde la consola. */
-  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta };
+  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara };
   pintaLista();
   if (canal) document.getElementById('paSinRespNota').innerHTML = 'La lista se guarda solo en tu navegador y no se envía sola: con «Enviarlas a Auditavisión» nos la haces llegar tú.';
   var ps = new URLSearchParams(location.search), pre = ps.get('q'), lista = ps.get('p');

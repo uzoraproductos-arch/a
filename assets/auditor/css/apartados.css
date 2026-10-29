@@ -71,6 +71,25 @@ body[data-pagina="apartado"] a.nav-cuentanos { text-decoration: none; }
   font-weight: 600;
 }
 
+/* «Pregúntale al Auditor · Modo X» (29-10-2026): cada pagina de la Enciclopedia
+   abre el chat en su modo, con la pregunta ya hecha. Pastilla blanca: se lee
+   igual sobre la cabecera clara y sobre la fotografia de las herramientas. */
+.apartado-auditor {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  margin: 14px 10px 0 0;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--civ-gris-borde);
+  background: #ffffff;
+  color: var(--civ-azul-medio);
+  font-weight: 600;
+  text-decoration: none;
+}
+.apartado-auditor:hover { background: var(--civ-azul-claro); }
+
 /* Cuerpo */
 .apartado-cuerpo { padding-top: 26px; padding-bottom: 48px; }
 .apartado-saltos {

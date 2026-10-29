@@ -454,6 +454,14 @@ estadísticas, estados de cuenta, sueldos, márgenes, porcentajes,
 presupuestos, impuestos, glosario, leyes, referencias y las herramientas
 mismas. La plataforma es extensa; el bot es la puerta corta a todo.
 
+- **La Enciclopedia es la base de datos física del Auditor** (decisión del autor,
+  29-10-2026). Cada página de la Enciclopedia tiene su modo (`herramientas/modos.py`),
+  lleva «Pregúntale al Auditor · Modo X» en su cabecera y sale en el chat, en
+  «Saber más» o en «📚 En la Enciclopedia». **Una página nueva de la Enciclopedia
+  no está terminada hasta que `python3 herramientas/cobertura_auditor.py` pasa**
+  (corre en `revision.py`); si su título solo no basta para encontrarla, su
+  pregunta va en `PREGUNTA` de `modos.py`. La bodega de Supabase es el respaldo
+  y la navegación en internet solo da búsquedas «sin verificar».
 - **Todo lo nuevo entra al bot.** Una cifra, página o herramienta que se
   agrega a la plataforma no está terminada hasta que el bot la encuentra:
   las páginas y secciones se indexan solas al regenerar; las cifras

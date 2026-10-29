@@ -14,7 +14,9 @@ Revisa:
   2. Los CR sueltos que deben conservarse (AGENTS.md §4).
   3. Que el sello haya subido si el cambio tocó assets/ (con --base).
   4. El inventario: enlaces rotos y cotejos sin evidencia.
-  5. Las preguntas de prueba del Auditor (prueba_auditor.py).
+  5. Las preguntas de prueba del Auditor (prueba_auditor.py) y que cada
+     página de la Enciclopedia esté en el Auditor, en su modo
+     (cobertura_auditor.py).
   6. La guardia de legibilidad, en la fase vigente (GUARDIA_FASE, 0 por omisión).
   7. La base de datos, si el cambio tocó supabase/ y hay PostgreSQL.
 
@@ -96,6 +98,7 @@ def main():
     revisiones.append(('inventario', lambda: corre('inventario.py')))
     if not a.rapida:
         revisiones.append(('preguntas del Auditor', lambda: corre('prueba_auditor.py')))
+        revisiones.append(('la Enciclopedia en el Auditor', lambda: corre('cobertura_auditor.py')))
         revisiones.append(('guardia de legibilidad', lambda: corre('guardia_legibilidad.py', '--fase', os.environ.get('GUARDIA_FASE', '0'))))
     if a.base and any(c.startswith('supabase/') for c in git('diff', '--name-only', a.base + '...HEAD').split()):
         revisiones.append(('base de datos', lambda: corre('prueba_base_datos.py')))
