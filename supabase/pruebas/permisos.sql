@@ -228,4 +228,14 @@ select pg_temp.igual(((public.solicitar_codigo('ana@ejemplo.mx', null, 'Se me ac
 select pg_temp.igual((select count(*) from public.solicitudes_codigo where correo = 'ana@ejemplo.mx'), 2, 'solicitudes del mismo correo tras usar su código');
 reset role;
 
+-- 9. Los envíos se guardan 12 meses (30-10-2026).
+insert into public.envios (tipo, asunto, texto, correo, acepta_aviso, creado) values
+  ('tema', 'Viejo', 'Un envío de hace más de un año', 'v@ejemplo.mx', true, now() - interval '13 months');
+insert into public.envios (tipo, asunto, texto, estado, correo, acepta_aviso, creado) values
+  ('errata', 'Errata vieja', 'Una fe de erratas publicada hace más de un año', 'publicado', 'e@ejemplo.mx', true, now() - interval '13 months');
+insert into public.envios (tipo, asunto, texto) values ('tema', 'Nuevo', 'Un envío de hoy, que barre los viejos');
+select pg_temp.igual((select count(*) from public.envios where asunto = 'Viejo'), 0, 'un envío de hace más de 12 meses se borra');
+select pg_temp.igual((select count(*) from public.envios where asunto = 'Errata vieja' and correo is null), 1, 'una errata publicada vieja se queda sin correo');
+select pg_temp.igual((select count(*) from public.envios where asunto = 'Nuevo'), 1, 'el envío nuevo se guarda');
+
 \echo 'Todas las pruebas de permisos pasaron.'

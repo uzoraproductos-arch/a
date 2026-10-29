@@ -20,13 +20,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261029y">
-  <script src="assets/auditor/js/iconos.js?v=20261029y"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261029y"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261029y" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261029y">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261029y">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261029y">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261029z">
+  <script src="assets/auditor/js/iconos.js?v=20261029z"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261029z"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261029z" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261029z">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261029z">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261029z">
   <script>(function () { var m = {"presupuestaria": "contexto-dimensional-presupuestaria.html", "financiera": "contexto-dimensional-financiera.html", "social": "contexto-dimensional-social.html", "ambiental": "contexto-dimensional-ambiental.html", "renglones": "contexto-dimensional-renglones.html", "descarga": "contexto-dimensional-descarga.html", "presupuestariaTit": "contexto-dimensional-presupuestaria.html", "financieraTit": "contexto-dimensional-financiera.html", "socialTit": "contexto-dimensional-social.html", "ambientalTit": "contexto-dimensional-ambiental.html", "renglonesTit": "contexto-dimensional-renglones.html", "descargaTit": "contexto-dimensional-descarga.html"}, h = location.hash.slice(1); if (m[h]) { location.replace(m[h] + (/[?#]/.test(m[h]) ? '' : location.search)); return; } for (var k in m) if (k.slice(-1) === '*' && h && h.indexOf(k.slice(0, -1)) === 0) { location.replace(m[k] + '#' + h); return; } })();</script>
 </head>
 <body data-pagina="apartado">
@@ -85,8 +85,8 @@
       <details class="pt-ruta" name="pt-ruta" data-ruta="reporta">
         <summary><span class="pt-ico" aria-hidden="true">🏗️</span><span class="pt-sum"><b>Algo raro con el dinero público</b><span>Una obra que no cuadra, un contrato o una compra sospechosa, un programa social usado en campaña, un cobro indebido.</span></span></summary>
         <div class="pt-ruta-cuerpo">
-        <form class="sv-form cm-form" id="ptReporte" data-canal="" data-asunto="Reporte ciudadano" novalidate>
-          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+        <form class="sv-form cm-form" id="ptReporte" data-canal="" data-asunto="Reporte ciudadano" data-funcion="https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1/recibir-formulario" data-tipo="reporte" novalidate>
+          <p class="sv-privado">🔒 Primero ves el texto tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar». Puedes firmar con seudónimo; el correo es opcional, solo sirve para responderte y se guarda únicamente si aceptas el <a href="aviso-de-privacidad.html">aviso de privacidad</a>.</p>
           <p class="sv-privado pt-aviso">⚠️ No escribas datos bancarios, documentos de identidad ni información de terceros que pueda ponerlos en riesgo.</p>
             <div class="sv-campo"><label for="ptRepQue">Qué fue <span class="sv-req">obligatorio</span></label><select id="ptRepQue" required><option value="">Elige una opción</option><option>Una obra que no cuadra</option><option>Un contrato o una compra sospechosa</option><option>Uso electoral de un programa social</option><option>Un cobro o trámite indebido</option><option>Una duda sobre gasto o presupuesto</option></select></div>
             <div class="sv-campo"><label for="ptRepDonde">Dónde <span class="sv-req">obligatorio</span></label><input id="ptRepDonde" type="text" maxlength="200" required><small>Entidad, municipio, colonia y una referencia física. Una dirección vale más que un adjetivo.</small></div>
@@ -96,6 +96,7 @@
             <div class="sv-campo"><label for="ptRepPrueba">Con qué prueba</label><input id="ptRepPrueba" type="text" maxlength="300"><small>Una foto con fecha, un número de contrato, una factura, un acta de entrega.</small></div>
             <div class="sv-campo"><label for="ptRepFirma">Firma o seudónimo</label><input id="ptRepFirma" type="text" maxlength="80"></div>
             <div class="sv-campo"><label for="ptRepCorreo">Correo (opcional)</label><input id="ptRepCorreo" type="email" maxlength="160"></div>
+            <label class="sv-check"><input type="checkbox" id="ptRepAcepta" data-acepta> Acepto el <a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi correo</label>
           <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi reporte</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
           <p class="sv-error cm-error" role="alert" hidden></p>
         </form>
@@ -106,14 +107,15 @@
       <details class="pt-ruta" name="pt-ruta" data-ruta="error">
         <summary><span class="pt-ico" aria-hidden="true">✏️</span><span class="pt-sum"><b>Un dato mal en esta plataforma</b><span>Una cifra que no coincide con su documento oficial. Si tienes razón, se corrige y entra a la fe de erratas.</span></span></summary>
         <div class="pt-ruta-cuerpo">
-        <form class="sv-form cm-form" id="ptError" data-canal="" data-asunto="Señalamiento de error" novalidate>
-          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+        <form class="sv-form cm-form" id="ptError" data-canal="" data-asunto="Señalamiento de error" data-funcion="https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1/recibir-formulario" data-tipo="errata" novalidate>
+          <p class="sv-privado">🔒 Primero ves el texto tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar». Puedes firmar con seudónimo; el correo es opcional, solo sirve para responderte y se guarda únicamente si aceptas el <a href="aviso-de-privacidad.html">aviso de privacidad</a>.</p>
             <div class="sv-campo"><label for="ptErrPagina">Página <span class="sv-req">obligatorio</span></label><input id="ptErrPagina" class="cm-pagina" type="text" maxlength="200" required><small>Si abriste esto desde una página, ya está escrita.</small></div>
             <div class="sv-campo"><label for="ptErrDato">Qué dato está mal <span class="sv-req">obligatorio</span></label><textarea id="ptErrDato" rows="2" maxlength="800" required></textarea></div>
             <div class="sv-campo"><label for="ptErrDice">Qué dice el documento oficial <span class="sv-req">obligatorio</span></label><textarea id="ptErrDice" rows="2" maxlength="800" required></textarea></div>
             <div class="sv-campo"><label for="ptErrFuente">Enlace al documento <span class="sv-req">obligatorio</span></label><input id="ptErrFuente" type="url" maxlength="400" required placeholder="https://"><small>Sin documento no podemos corregir: es la misma regla que seguimos nosotros.</small></div>
             <div class="sv-campo"><label for="ptErrFirma">Firma o seudónimo</label><input id="ptErrFirma" type="text" maxlength="80"></div>
             <div class="sv-campo"><label for="ptErrCorreo">Correo (opcional)</label><input id="ptErrCorreo" type="email" maxlength="160"></div>
+            <label class="sv-check"><input type="checkbox" id="ptErrAcepta" data-acepta> Acepto el <a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi correo</label>
           <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi señalamiento</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
           <p class="sv-error cm-error" role="alert" hidden></p>
         </form>
@@ -123,14 +125,15 @@
       <details class="pt-ruta" name="pt-ruta" data-ruta="tema">
         <summary><span class="pt-ico" aria-hidden="true">💡</span><span class="pt-sum"><b>Un tema que deberíamos investigar</b><span>Lo que te gustaría que revisáramos, con los documentos que conozcas.</span></span></summary>
         <div class="pt-ruta-cuerpo">
-        <form class="sv-form cm-form" id="ptTema" data-canal="" data-asunto="Propuesta de tema" novalidate>
-          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+        <form class="sv-form cm-form" id="ptTema" data-canal="" data-asunto="Propuesta de tema" data-funcion="https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1/recibir-formulario" data-tipo="tema" novalidate>
+          <p class="sv-privado">🔒 Primero ves el texto tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar». Puedes firmar con seudónimo; el correo es opcional, solo sirve para responderte y se guarda únicamente si aceptas el <a href="aviso-de-privacidad.html">aviso de privacidad</a>.</p>
             <div class="sv-campo"><label for="ptTemaQue">Tema <span class="sv-req">obligatorio</span></label><input id="ptTemaQue" type="text" maxlength="160" required><small>Por ejemplo: las compras de un hospital, una obra de tu municipio, un fideicomiso.</small></div>
             <div class="sv-campo"><label for="ptTemaPor">Por qué importa <span class="sv-req">obligatorio</span></label><textarea id="ptTemaPor" rows="3" maxlength="1200" required></textarea></div>
             <div class="sv-campo"><label for="ptTemaDonde">Entidad o municipio</label><input id="ptTemaDonde" type="text" maxlength="120"></div>
             <div class="sv-campo"><label for="ptTemaDocs">Documentos oficiales que conozcas</label><textarea id="ptTemaDocs" rows="2" maxlength="800"></textarea><small>Ligas a la Auditoría Superior, Compranet, el DOF o Transparencia. Si no tienes, no pasa nada.</small></div>
             <div class="sv-campo"><label for="ptTemaFirma">Firma o seudónimo</label><input id="ptTemaFirma" type="text" maxlength="80"></div>
             <div class="sv-campo"><label for="ptTemaCorreo">Correo (opcional)</label><input id="ptTemaCorreo" type="email" maxlength="160"></div>
+            <label class="sv-check"><input type="checkbox" id="ptTemaAcepta" data-acepta> Acepto el <a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi correo</label>
           <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi propuesta</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
           <p class="sv-error cm-error" role="alert" hidden></p>
         </form>
@@ -207,11 +210,11 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261029y</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261029z</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261029y"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261029y"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261029z"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261029z"></script>
 </body>
 </html>

@@ -126,7 +126,7 @@ que necesita navegador.
   vista). Puede ser la misma persona del aviso de privacidad. Mientras no esté,
   la plataforma no puede recibir un escrito de réplica (`replica-responsable`).
 - Sacar los tokens de Banxico y del INEGI.
-- **Códigos de acceso:** la base y la función `codigo` están en su proyecto (flujo «Sube la base de datos», 29-10-2026) y el autor ya está en `administradores` y entra al panel (30-10-2026). El candado se encendió el 30-10-2026, con la plataforma ya en `auditavision.com.mx`.
+- **Códigos de acceso:** la base y la función `codigo` están en su proyecto (flujo «Sube la base de datos», 29-10-2026) y el autor ya está en `administradores` y entra al panel (30-10-2026). El candado se encendió el 30-10-2026, con la plataforma ya en `auditavision.com.mx`. El mismo día: `main` se igualó con la rama (permiso del autor), Banxico quedó conectado en vivo (función `portales`, probada en el flujo), la bóveda corre cada miércoles y los formularios guardan lo enviado 12 meses (`FUNCIONES` encendido). Falta: la llave del INEGI probada, el antispam Turnstile y que el chat use `portales`.
 - Correr `python3 herramientas/boveda.py` desde su computadora: varios
   portales de gobierno no abren desde las sesiones en la nube.
 - **Decidir qué hacer con los PDF pesados.** Hay 90 PDF en el repositorio
