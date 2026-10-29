@@ -801,7 +801,7 @@
       if (est.huella) texto(g, 'Huella SHA-256: ' + est.huella, M, H - 120, '400 13px ' + mono, C.suave);
       texto(g, 'Fuentes: tarifas ISR, Anexo 8 RMF 2026 · PEF 2026. Montos por renglón: derivados.', M, H - 92, '400 16px ' + sans, C.suave);
       texto(g, 'Ejercicio de divulgación. No es un comprobante fiscal.', M, H - 64, '400 16px ' + sans, C.suave);
-      texto(g, 'uzoraproductos-arch.github.io/a', W - M, H - 64, '700 18px ' + mono, C.oro, 'right');
+      texto(g, 'auditavision.com.mx', W - M, H - 64, '700 18px ' + mono, C.oro, 'right');
       var a = document.createElement('a');
       a.download = 'estado-de-cuenta-civico-' + (est.folio || 'AV') + '.png';
       a.href = cv.toDataURL('image/png');

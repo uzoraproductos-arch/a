@@ -4,7 +4,7 @@
 import { createClient, type SupabaseClient } from "npm:@supabase/supabase-js@2.117.3";
 
 /** El sitio publicado: solo desde aquí se aceptan llamadas del navegador. */
-export const SITIO = (Deno.env.get("SITIO") ?? "https://uzoraproductos-arch.github.io/a/").replace(/\/?$/, "/");
+export const SITIO = (Deno.env.get("SITIO") ?? "https://auditavision.com.mx/").replace(/\/?$/, "/");
 const ORIGENES = [new URL(SITIO).origin, ...(Deno.env.get("ORIGENES_EXTRA") ?? "").split(",").map((x) => x.trim()).filter(Boolean)];
 
 export function cabeceras(req: Request): Record<string, string> {

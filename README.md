@@ -6,7 +6,7 @@ Sistema cívico de fiscalización y geopolítica del gasto público en México.
 
 | | |
 |---|---|
-| **En vivo** | https://uzoraproductos-arch.github.io/a/ |
+| **En vivo** | https://auditavision.com.mx/ (la dirección vieja, `uzoraproductos-arch.github.io/a/`, manda ahí) |
 | **Rama de trabajo** | `claude/funny-turing-imtm54` — **no `main`** |
 | **Antes de tocar código** | [AGENTS.md](AGENTS.md) (reglas) · [CONTEXT.md](CONTEXT.md) (estado) |
 

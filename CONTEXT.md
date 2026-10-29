@@ -57,7 +57,7 @@ buena. **No empujes a `main` sin permiso expreso del autor.**
 |---|---|
 | Repositorio | `https://github.com/uzoraproductos-arch/a` |
 | Rama de trabajo | `claude/funny-turing-imtm54` |
-| Publicado y en vivo | `https://uzoraproductos-arch.github.io/a/` |
+| Publicado y en vivo | `https://auditavision.com.mx/` (desde el 30-10-2026; `uzoraproductos-arch.github.io/a/` redirige ahí) |
 | Revisión | El pull request #1 se fusionó en `main` el 29-09-2026; lo nuevo irá en un pull request nuevo |
 | Copia comprimida | `.../a/archive/refs/heads/claude/funny-turing-imtm54.zip` |
 
@@ -1549,7 +1549,7 @@ los Servicios.
   que solo redirigen. No se escribe `robots.txt` porque el sitio vive en
   `/a/` y los buscadores solo leen el de la raíz del dominio: **el autor
   tiene que registrar el mapa en Google Search Console**
-  (`https://uzoraproductos-arch.github.io/a/sitemap.xml`).
+  (`https://auditavision.com.mx/sitemap.xml`).
 
 Pendientes de la entrega 5:
 - **Páginas por tema** para los temas candidatos de Astra que aún no tienen

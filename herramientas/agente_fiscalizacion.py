@@ -34,7 +34,7 @@ import urllib.request
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import fiscalizadores as fz  # noqa: E402
 
-AGENTE = 'Auditavision-agente-fiscalizacion/1.0 (+https://uzoraproductos-arch.github.io/a/)'
+AGENTE = 'Auditavision-agente-fiscalizacion/1.0 (+https://auditavision.com.mx/)'
 
 
 def consultar(url):

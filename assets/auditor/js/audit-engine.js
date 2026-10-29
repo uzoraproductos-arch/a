@@ -3757,7 +3757,7 @@
 
     eccTexto(g, 'Fuentes: tarifas ISR, Anexo 8 RMF 2026 · PEF 2026, DOF 21-11-2025. Montos por renglón: derivados.', M, H - 92, '400 16px ' + sans, C.suave);
     eccTexto(g, 'Ejercicio de divulgación. No es un comprobante fiscal.', M, H - 64, '400 16px ' + sans, C.suave);
-    eccTexto(g, 'uzoraproductos-arch.github.io/a', W - M, H - 64, '700 18px ' + mono, C.oro, 'right');
+    eccTexto(g, 'auditavision.com.mx', W - M, H - 64, '700 18px ' + mono, C.oro, 'right');
 
     const a = document.createElement('a');
     a.download = 'estado-de-cuenta-civico-' + d.folio + '.png';

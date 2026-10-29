@@ -54,7 +54,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DB = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'audit-database.js')
 COLUMNAS = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'columnas.js')
 SALIDA = os.path.join(RAIZ, 'docs', 'boveda', 'evidencias.json')
-AGENTE = 'Mozilla/5.0 (compatible; Auditavision-boveda/1.0; +https://uzoraproductos-arch.github.io/a/)'
+AGENTE = 'Mozilla/5.0 (compatible; Auditavision-boveda/1.0; +https://auditavision.com.mx/)'
 LIMITE = 80 * 1024 * 1024  # un PDF de la Cuenta Pública rara vez pasa de esto
 RES_CON_PRUEBA = ('consta', 'matiz')
 

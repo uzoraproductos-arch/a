@@ -940,7 +940,7 @@ def modulo_archivo(archivo, clave):
 
 # Para buscadores y para compartir (propuesta de Astra, punto 8; entrega 5,
 # 10-10-2026): cada pagina dice su direccion estable y su tarjeta social.
-SITIO = 'https://uzoraproductos-arch.github.io/a/'
+SITIO = 'https://auditavision.com.mx/'
 
 
 def sociales(archivo, titulo, descripcion, imagen=None):

@@ -30,7 +30,7 @@ import urllib.error
 import urllib.request
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FUERA = ('fonts.googleapis.com', 'fonts.gstatic.com', 'uzoraproductos-arch.github.io')
+FUERA = ('fonts.googleapis.com', 'fonts.gstatic.com', 'uzoraproductos-arch.github.io', 'auditavision.com.mx')
 
 # Documentos que esperamos: (qué es, dirección donde aparecerá, qué hacer).
 # Ojo: la ASF ya tiene en esa dirección un PDF de una página que dice
