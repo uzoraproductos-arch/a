@@ -43,7 +43,7 @@ def git(*a):
 
 
 def sello_de(texto):
-    m = re.search(r'\?v=(\d{8}[a-z]?)', texto)
+    m = re.search(r'\?v=(\d{8}[a-z]{0,2})\b', texto)
     return m.group(1) if m else None
 
 
