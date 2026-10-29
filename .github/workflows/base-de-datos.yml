@@ -72,3 +72,12 @@ jobs:
       - name: Sube la función de los portales
         if: steps.hay.outputs.si == 'si' && (env.BANXICO_TOKEN != '' || env.INEGI_TOKEN != '')
         run: supabase functions deploy portales --project-ref "$PROYECTO" --no-verify-jwt
+      - name: Prueba la consulta a Banxico
+        if: steps.hay.outputs.si == 'si' && env.BANXICO_TOKEN != ''
+        run: |
+          sleep 5
+          r=$(curl -s -m 40 -X POST "https://$PROYECTO.supabase.co/functions/v1/portales" \
+            -H 'Content-Type: application/json' -H 'Origin: https://auditavision.com.mx' \
+            -d '{"fuente":"banxico-sie","clave":"SF43718"}')
+          echo "$r" | head -c 600; echo
+          echo "$r" | grep -q '"ok":true' || { echo "::error::La función portales no trajo el tipo de cambio de Banxico"; exit 1; }
