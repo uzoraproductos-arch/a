@@ -417,9 +417,10 @@ en el repositorio como alternativa.
 autor).** Reemplaza al foróptero en el encabezado del chat y del dictamen
 (`assets/auditor/img/herr-auditor-rostros.webp`, `FOTO_AUDITOR` de
 `apartados.py`); el foróptero se queda en el repositorio. El autor la generó con
-Krea AI. **Punto ciego:** la composición se parece mucho al collage firmado por
-«ashow» que se retiró del Modo Inspector el 24-10-2026 por falta de permiso. Se
-le advirtió al autor y él decidió publicarla. Si el artista reclama, se cambia
+Krea AI **usando como referencia** el collage firmado por «ashow» que se retiró
+del Modo Inspector el 24-10-2026 por falta de permiso. **Punto ciego:** es una
+obra derivada de esa pieza; sin permiso del artista tiene el mismo problema que
+la original. Se le advirtió al autor. Si el artista reclama, se cambia
 por el foróptero (basta regresar las tres rutas).
 
 **Imágenes de fondo en cabecera y pie (08-10-2026, sello 20261008j).** El
