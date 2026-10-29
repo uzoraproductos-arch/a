@@ -623,7 +623,7 @@ APARTADOS = [
         # Noticias relevantes es su propia pagina desde el 11-10-2026; los
         # enlaces a una columna (#col-<id>) llegan a ella con su ancla.
         'hash_a_pagina': {'biblioteca': 'diccionario.html', 'kit': 'diccionario.html',
-                          'noticias': 'noticias-relevantes.html', 'col-*': 'noticias-relevantes.html',
+                          'noticias': 'noticias-relevantes.html', 'col-*': 'noticias-auditavision.html',
                           'congreso': 'datos-poder-legislativo.html'},
         'entrada': ('Las palabras del presupuesto, las leyes que lo rigen y las fuentes donde se publica, '
                     'explicadas en lenguaje llano. Para leer una cifra oficial no hace falta ser especialista. '
@@ -1360,26 +1360,42 @@ def noticias(base, ref):
     # Reestructurada como periodico el 28-10-2026 (pedido del autor): el
     # armazon, el metodo, la agenda y la mesa de redaccion viven en
     # herramientas/noticias.py; las notas y columnas, en columnas.js.
+    # Desde el 29-10-2026 (pedido del autor: «quiero que aquí existan tres
+    # tarjetas») la pestaña es un indice con tres tarjetas, cada una con su
+    # pagina (nt.PARTES). Las anclas viejas (#col-<id>, #verifica, #seguir…)
+    # se mandan a la pagina donde viven ahora (nt.ANCLAS).
     import insp_nota
     import noticias as nt
-    return {
+    indice = {
     'archivo': NOTICIAS_ARCHIVO,
     'menu': 'Noticias relevantes',
     # Cuarta pestaña del menú desde el 28-10-2026 (pedido del autor): ya no
     # cuelga de Aprende, aunque Aprende conserva su tarjeta hacia aquí.
     'icono': '📰',
     'titulo': 'Noticias relevantes',
-    'lema': 'Auditavisión Noticias',
-    'entrada': ('Las finanzas públicas de México, verificadas. Verifica una noticia, lee lo que pasó y lo que consta, nuestra opinión en la '
-                'Columna del Erario, las réplicas y posturas de quienes aludimos, los casos en seguimiento, los titulares que estamos jalando '
-                '(rotulados «sin verificar») y las fechas que vienen. Cada afirmación lleva el documento oficial que la sostiene.'),
-    'scripts': ['columnas.js'] + list(insp_nota.SCRIPTS) + nt.SCRIPTS,
-    'estilos': ['columnas.css'] + list(insp_nota.ESTILOS) + nt.ESTILOS,
-    'secciones': [{
-        'id': 'diario', 'titulo': 'El diario de Noticias relevantes', 'texto': '', 'sin_cab': True, 'tarjetas': [],
-        'bloque': nt.construir(base, ref),
-    }],
+    'lema': 'La noticia, el verificador y el seguimiento',
+    'entrada': ('Las finanzas públicas de México, verificadas, en tres puertas: el periódico de la plataforma, el verificador para cotejar '
+                'lo que viste y el seguimiento de los casos que no se olvidan. Cada afirmación lleva el documento oficial que la sostiene.'),
+    'pestanas': True,
+    'pista': 'Cada tarjeta abre su propia página.',
+    'hash_a_pagina': nt.ANCLAS,
+    'secciones': [{'id': arch[:-5], 'pagina': arch, 'pestana': (ico, nom, lema)} for arch, ico, nom, lema, _e, _s in nt.PARTES],
     }
+    paginas = [indice]
+    for arch, ico, nom, lema, entrada, _s in nt.PARTES:
+        verifica = arch == nt.VERIFICA
+        paginas.append({
+            'archivo': arch, 'menu': nom, 'menu_archivo': NOTICIAS_ARCHIVO,
+            'padre': (NOTICIAS_ARCHIVO, 'Noticias'),
+            'icono': ico, 'titulo': nom, 'lema': lema, 'entrada': entrada,
+            'scripts': ['columnas.js'] + (list(insp_nota.SCRIPTS) if verifica else []) + nt.SCRIPTS,
+            'estilos': ['columnas.css'] + (list(insp_nota.ESTILOS) if verifica else []) + nt.ESTILOS,
+            'secciones': [{
+                'id': 'diario', 'titulo': nom, 'texto': '', 'sin_cab': True, 'tarjetas': [],
+                'bloque': nt.construir(base, ref, arch),
+            }],
+        })
+    return paginas
 
 
 
@@ -1599,7 +1615,7 @@ PILARES = {
         {'id': 'donde', 'titulo': 'Dónde se ven', 'texto': 'Cada pilar tiene su herramienta.',
          'tarjetas': [
              ('🤖', 'Pregúntale al Auditor', 'El periodista virtual: busca, coteja, explica y genera el dictamen.', AUDITOR_VIRTUAL, None, None),
-             ('🔍', 'Verificamos', 'Lo que circula en redes, cotejado afirmación por afirmación, y los casos que puedes seguir.', 'noticias-relevantes.html#seguimientos', None, None),
+             ('🔍', 'Verificamos', 'Lo que circula en redes, cotejado afirmación por afirmación, y los casos que puedes seguir.', 'noticias-seguimiento.html#seguimientos', None, None),
              ('🧾', 'Contratos públicos', 'Sigue el dinero: a quién le paga el gobierno, cuánto y por qué procedimiento (ComprasMX).', 'contratos-publicos.html', None, None),
              ('⏳', 'Registro de pendientes', 'Lo que falta publicar, por qué falta y a quién le toca.', 'pendientes.html', None, None),
              ('🌿', 'Crisis ambientales', 'Las crisis y los proyectos con costo ambiental, ficha por ficha.', 'herramienta-ambiente-crisis.html', None, None),
@@ -5688,7 +5704,7 @@ def generar(sello=None):
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     import datos_ambiente
     import periodistas
-    for extra in [DICCIONARIO, noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in [DICCIONARIO, *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

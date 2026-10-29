@@ -658,7 +658,7 @@
    },
    {
     "que": "El caso que lo originó: la renuncia de Guadalupe Taddei y lo que consta de Cajas Graf",
-    "url": "noticias-relevantes.html#col-taddei-renuncia-ine-contratos"
+    "url": "noticias-auditavision.html#col-taddei-renuncia-ine-contratos"
    }
   ],
   "fuentes": [
@@ -794,7 +794,7 @@
    },
    {
     "que": "El caso que lo originó: la renuncia de Guadalupe Taddei y lo que consta de Cajas Graf",
-    "url": "noticias-relevantes.html#col-taddei-renuncia-ine-contratos"
+    "url": "noticias-auditavision.html#col-taddei-renuncia-ine-contratos"
    }
   ],
   "fuentes": [
@@ -1229,7 +1229,7 @@
    },
    {
     "que": "La revisión que pidió la Presidenta de los contratos de periodos anteriores, incluido el de Lorenzo Córdova, y lo que dijo del congelamiento de cuentas de la UIF (27-10-2026)",
-    "url": "noticias-relevantes.html#col-ine-contratos-desde-cordova"
+    "url": "noticias-auditavision.html#col-ine-contratos-desde-cordova"
    }
   ],
   "fuentes": [
@@ -3016,12 +3016,17 @@
      Erario, la opinión (#columnasDiario). La portada (#noticiasPortada) y el
      seguimiento (#noticiasSeguimiento) solo llaman a la nota. */
   var NOTICIA = { 'Al momento': 1, 'Verificado': 1 };
-  var VERIFICA = document.getElementById('verifica') ? '#verifica' : 'herramienta-inspector-nota.html';
+  /* Desde el 29-10-2026 el diario vive en tres páginas (noticias.py, PARTES):
+     las columnas completas, en Auditavisión Noticias; el verificador, en
+     Verifica una noticia, y los casos abiertos, en Seguimiento. COL es la
+     página de las columnas, vacía cuando ya estás en ella. */
+  var VERIFICA = document.getElementById('verifica') ? '#verifica' : 'noticias-verifica.html#verifica';
   var raiz = document.getElementById('columnasDiario');
   var raizN = document.getElementById('noticiasDiario');
   var raizP = document.getElementById('noticiasPortada');
   var raizS = document.getElementById('noticiasSeguimiento');
-  if (!raiz && !raizN) return;
+  var COL = (raiz || raizN) ? '' : 'noticias-auditavision.html';
+  if (!raiz && !raizN && !raizS && !document.getElementById('columnasReplicas')) return;
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -3063,7 +3068,7 @@
       '<h4 class="col-sigo-tit" id="colSigoTit">🔔 Tus seguimientos' + (nuevos ? ' <span class="col-nuevo">' + nuevos + ' con novedades</span>' : '') + '</h4>' +
       (ids.length ? '<ul>' + ids.map(function (id) {
         var c = porId(id), nov = novedad(c);
-        return '<li' + (nov ? ' class="col-sigo-nuevo"' : '') + '><a href="#col-' + esc(id) + '">' + esc(c.titulo) + '</a> <small>' +
+        return '<li' + (nov ? ' class="col-sigo-nuevo"' : '') + '><a href="' + COL + '#col-' + esc(id) + '">' + esc(c.titulo) + '</a> <small>' +
           (nov ? '🆕 Actualizada al ' + esc(c.actualizado) + '; la seguías desde la versión del ' + esc(sigo[id] || 'sin fecha') : 'Sin cambios desde el ' + esc(sigo[id] || 'sin fecha')) +
           '</small></li>';
       }).join('') + '</ul>'
@@ -3129,7 +3134,7 @@
       b.slice(0, 6).map(function (c) {
         var pend = (c.cotejo || []).filter(function (x) { return x.res === 'pendiente'; }).length;
         var ok = (c.cotejo || []).filter(function (x) { return x.res === 'consta' || x.res === 'matiz'; }).length;
-        return '<li><time>' + esc(c.fecha) + '</time><a href="#col-' + esc(c.id) + '">' + esc(c.titulo) + '</a>' +
+        return '<li><time>' + esc(c.fecha) + '</time><a href="' + COL + '#col-' + esc(c.id) + '">' + esc(c.titulo) + '</a>' +
           '<small>' + ok + ' con documento · ' + pend + ' por probar' + (c.nota ? ' · a partir de ' + esc(c.nota.medio) : '') + '</small></li>';
       }).join('') + '</ol></section>';
   }
@@ -3233,7 +3238,7 @@
     return '<span class="nt-cotejo-mini">' + (ok ? '✅ ' + ok + ' con documento' : '') + (no ? ' · ❌ ' + no + ' sin documento' : '') + (pend ? ' · ⏳ ' + pend + ' por probar' : '') + '</span>';
   }
   function llamada(c, clase) {
-    return '<li class="' + clase + '"><a href="#col-' + esc(c.id) + '"><span class="col-kicker">' + esc(c.seccion === 'Verificado' ? 'Verificamos' : c.seccion) + '</span>' +
+    return '<li class="' + clase + '"><a href="' + COL + '#col-' + esc(c.id) + '"><span class="col-kicker">' + esc(c.seccion === 'Verificado' ? 'Verificamos' : c.seccion) + '</span>' +
       '<b>' + esc(c.titulo) + '</b></a>' + resumenCotejo(c) + '</li>';
   }
   function portada() {
@@ -3243,7 +3248,7 @@
     raizP.innerHTML = franja() +
       '<div class="nt-portada">' +
         (lead ? '<article class="nt-lead">' +
-          '<a class="nt-lead-a" href="#col-' + esc(lead.id) + '">' + figura(lead, true) +
+          '<a class="nt-lead-a" href="' + COL + '#col-' + esc(lead.id) + '">' + figura(lead, true) +
             '<span class="col-kicker">' + esc(lead.seccion) + '</span><h3 class="nt-lead-tit">' + esc(lead.titulo) + '</h3></a>' +
           '<p class="nt-lead-balazo">' + esc(lead.balazo) + '</p>' +
           '<p class="col-firma">Redacción Auditavisión · ' + (lead.fecha ? esc(lead.fecha) + ' · ' : '') + 'Con documentos oficiales</p>' + resumenCotejo(lead) +
@@ -3266,11 +3271,11 @@
       '<h3 class="nt-sub">📂 Casos abiertos: ' + casos.length + ' casos, ' + docs + ' documentos por llegar</h3>' +
       '<ol class="nt-casos">' + casos.map(function (c) {
         return '<li class="nt-caso"><div class="nt-caso-cab"><span class="col-kicker">' + esc(c.seccion === 'Verificado' ? 'Verificamos' : c.seccion) + '</span>' +
-          '<a href="#col-' + esc(c.id) + '"><b>' + esc(c.titulo) + '</b></a>' +
+          '<a href="' + COL + '#col-' + esc(c.id) + '"><b>' + esc(c.titulo) + '</b></a>' +
           '<small>Revisado al ' + esc(c.actualizado || c.fecha || 'sin fecha') + ' · ' + c.sigue.length + (c.sigue.length === 1 ? ' documento' : ' documentos') + ' por llegar</small></div>' +
           '<ul class="nt-caso-falta">' + c.sigue.slice(0, 3).map(function (x) {
             return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.que) + ' ↗</a></li>';
-          }).join('') + (c.sigue.length > 3 ? '<li><a href="#col-' + esc(c.id) + '">y ' + (c.sigue.length - 3) + ' más en la nota ➔</a></li>' : '') + '</ul>' +
+          }).join('') + (c.sigue.length > 3 ? '<li><a href="' + COL + '#col-' + esc(c.id) + '">y ' + (c.sigue.length - 3) + ' más en la nota ➔</a></li>' : '') + '</ul>' +
           btnSeguir(c) + '</li>';
       }).join('') + '</ol>';
   }
@@ -3335,7 +3340,7 @@
     rep.innerHTML = con.length
       ? '<ul class="col-rep-lista">' + con.map(function (c) {
           var n = (c.replica || []).length, m = (c.postura || []).length;
-          return '<li><a href="#col-' + esc(c.id) + '">' + esc(c.titulo) + '</a> <small>' +
+          return '<li><a href="' + COL + '#col-' + esc(c.id) + '">' + esc(c.titulo) + '</a> <small>' +
             [n ? n + (n > 1 ? ' réplicas' : ' réplica') : '', m ? m + (m > 1 ? ' posturas' : ' postura') : ''].filter(Boolean).join(' · ') + '</small></li>';
         }).join('') + '</ul>'
       : '<p class="col-rep-vacio">Hasta hoy nadie aludido en las ' + COLUMNAS.length + ' notas y columnas nos ha pedido una réplica, ' +

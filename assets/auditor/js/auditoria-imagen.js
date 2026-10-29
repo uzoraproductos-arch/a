@@ -314,7 +314,7 @@
       fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
       acciones: [
         { txt: '🏢 Ver la ficha técnica del INE en el Auditor de entes públicos', href: 'herramienta-inspector-entes.html#ente=federal:ine' },
-        { txt: '🔍 Leer el cotejo completo de lo que circula en Verificamos', href: 'noticias-relevantes.html#col-taddei-renuncia-ine-contratos' },
+        { txt: '🔍 Leer el cotejo completo de lo que circula en Verificamos', href: 'noticias-auditavision.html#col-taddei-renuncia-ine-contratos' },
         { txt: '📄 Fallo público de la licitación LP-INE-001/2025', url: f[4].url }
       ]
     };
@@ -348,7 +348,7 @@
       acciones: [
         { txt: '🌳 Ver la ficha del Golfo de California en Crisis ambientales', href: 'herramienta-ambiente-crisis.html' },
         { txt: '🛡️ Revisar el presupuesto de la ASEA en el Auditor ambiental', href: 'herramienta-ambiente-auditor.html#aa-G00' },
-        { txt: '🔍 Leer el cotejo completo de Guaymas en Verificamos', href: 'noticias-relevantes.html#col-guaymas-comodato-amigo-gnl' },
+        { txt: '🔍 Leer el cotejo completo de Guaymas en Verificamos', href: 'noticias-auditavision.html#col-guaymas-comodato-amigo-gnl' },
         { txt: '📜 Gaceta Parlamentaria No. 2104 del Congreso de Sonora', url: f[1].url }
       ]
     };
@@ -384,7 +384,7 @@
       acciones: [
         { txt: '📋 Explorar los contratos del IMSS en Contratos públicos', href: 'contratos-publicos.html?i=050GYR' },
         { txt: '🏥 Ver los contratos de IMSS-Bienestar en Contratos públicos', href: 'contratos-publicos.html?i=056AYO' },
-        { txt: '🔍 Leer el cotejo de medicinas y ventiladores en Verificamos', href: 'noticias-relevantes.html#col-salud-ventiladores-y-medicinas' },
+        { txt: '🔍 Leer el cotejo de medicinas y ventiladores en Verificamos', href: 'noticias-auditavision.html#col-salud-ventiladores-y-medicinas' },
         { txt: '📜 Circular 11/2020 en el Diario Oficial de la Federación', url: f[2].url }
       ]
     };
@@ -417,8 +417,8 @@
       fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
       acciones: [
         { txt: '📈 Explorar el Paquete Económico 2027 paso a paso', href: 'numeros-paquete-2027.html' },
-        { txt: '🔍 Leer el cotejo de la Ley de Ingresos 2027 y las multas en Verificamos', href: 'noticias-relevantes.html#col-lif-2027-deuda-y-multas' },
-        { txt: '📉 Leer el cotejo sobre la calificación BBB de HR Ratings', href: 'noticias-relevantes.html#col-hr-ratings-baja-mexico-bbb' },
+        { txt: '🔍 Leer el cotejo de la Ley de Ingresos 2027 y las multas en Verificamos', href: 'noticias-auditavision.html#col-lif-2027-deuda-y-multas' },
+        { txt: '📉 Leer el cotejo sobre la calificación BBB de HR Ratings', href: 'noticias-auditavision.html#col-hr-ratings-baja-mexico-bbb' },
         { txt: '📜 Nota oficial del Canal del Congreso (15-10-2026)', url: f[0].url }
       ]
     };
@@ -508,7 +508,7 @@
       pendienteId: A.pendiente_id || null,
       fuente: f.map(function (x) { return x.doc; }).join('; ') + '.',
       acciones: [
-        { txt: '🔎 Leer el cotejo de «se atendieron más de 51 millones» en Verificamos', href: 'noticias-relevantes.html#col-seguro-popular-51-millones' },
+        { txt: '🔎 Leer el cotejo de «se atendieron más de 51 millones» en Verificamos', href: 'noticias-auditavision.html#col-seguro-popular-51-millones' },
         { txt: '🏥 Del Seguro Popular al IMSS-Bienestar en Datos · Salud pública', href: 'datos-salud-sistema.html#sal-transicion' },
         { txt: '💊 Compras de medicamentos y contratos del sector salud', href: 'auditoria-medicamentos-imss.html' },
         { txt: '💬 Pregúntale al Auditor cuánta gente se quedó sin acceso a la salud', href: 'herramienta-inspector-pregunta.html?p=' + encodeURIComponent('¿Cuánta gente se quedó sin acceso a servicios de salud?') },

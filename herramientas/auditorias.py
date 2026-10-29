@@ -154,7 +154,7 @@ RUTAS = {
     'medicamentos-imss': ('eb-egresos', 'Cuánto recibe cada ramo, el IMSS y Salud incluidos',
                           'contratos-publicos.html?i=050GYR', 'Los contratos del IMSS en ComprasMX 2025 y 2026'),
     'deuda-congreso-2027': ('proyeccion2027', 'El Paquete Económico 2027 y la Ley de Ingresos',
-                            'noticias-relevantes.html#col-lif-2027-deuda-y-multas', 'El cotejo documento por documento en Verificamos'),
+                            'noticias-auditavision.html#col-lif-2027-deuda-y-multas', 'El cotejo documento por documento en Verificamos'),
     'inversion-megaobras': ('eb-egresos', 'Cuánto se destina a inversión y desarrollo económico en el PEF',
                             'herramienta-megaobras.html', 'Las 5 aplicaciones de Inversión y Megaobras: simuladores, sexenios y estados de resultados'),
     'agronitrogenados': ('eb-egresos', 'Cuánto recibe cada ramo, Pemex incluido',

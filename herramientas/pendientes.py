@@ -414,7 +414,7 @@ def recolectar():
     for c in asistente_personajes.columnas()[0]:
         for n, x in enumerate(c.get('cotejo', []), 1):
             if x['res'] == 'pendiente':
-                ap = [('noticias-relevantes.html#col-' + c['id'], 'Noticias relevantes · ' + c['titulo'])]
+                ap = [('noticias-auditavision.html#col-' + c['id'], 'Noticias relevantes · ' + c['titulo'])]
                 if c['id'] in au_red:
                     ap.append(au_red[c['id']])
                 out.append(e('red-%s-%d' % (c['id'], n), 'Lo que circula en redes', x['dice'], x['explica'],

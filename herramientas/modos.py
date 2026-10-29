@@ -41,7 +41,8 @@ def modo_pagina(archivo, migas=''):
 
 # Paginas de la Enciclopedia que no muestran «Enciclopedia» en sus migas
 # porque cuelgan de otra pestaña, pero que las tarjetas de Aprende ofrecen.
-ENCICLOPEDIA_EXTRA = {'noticias-relevantes.html', 'periodismo-en-riesgo.html', 'derecho-de-replica.html', 'pilares.html',
+ENCICLOPEDIA_EXTRA = {'noticias-relevantes.html', 'noticias-auditavision.html', 'noticias-verifica.html', 'noticias-seguimiento.html',
+                      'periodismo-en-riesgo.html', 'derecho-de-replica.html', 'pilares.html',
                       'garantias.html', 'garantias-brujula.html', 'estado-de-cuenta.html'}
 
 

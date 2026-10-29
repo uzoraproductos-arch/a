@@ -74,7 +74,7 @@
   },
   {
    "q": "¿Quién es Genaro García Luna?",
-   "ir": "noticias-relevantes.html"
+   "ir": "noticias-auditavision.html"
   },
   {
    "q": "Estado de cuenta de Jalisco",
@@ -141,7 +141,7 @@
   },
   {
    "q": "Noticias de Elba Esther Gordillo",
-   "ir": "noticias-relevantes.html#col-gordillo-la-sentencia-reservada"
+   "ir": "noticias-auditavision.html#col-gordillo-la-sentencia-reservada"
   },
   {
    "q": "¿En qué se gasta el presupuesto?",
@@ -404,7 +404,7 @@
   },
   {
    "q": "¿Quién es Andrés Manuel López Obrador?",
-   "ir": "noticias-relevantes.html"
+   "ir": "noticias-auditavision.html"
   },
   {
    "q": "¿Qué es el FOBAPROA?",
@@ -478,7 +478,7 @@
   },
   {
    "q": "¿Es cierto que prestaron 54 hectáreas en Guaymas?",
-   "ir": "noticias-relevantes.html#col-guaymas-comodato-amigo-gnl"
+   "ir": "noticias-auditavision.html#col-guaymas-comodato-amigo-gnl"
   },
   {
    "q": "¿Es cierto que el Tren Maya costó 500 mil millones?",
@@ -674,18 +674,18 @@
   },
   {
    "q": "¿Cuánto costó la terminal de gas de Guaymas?",
-   "ir": "noticias-relevantes.html#col-guaymas-comodato-amigo-gnl",
+   "ir": "noticias-auditavision.html#col-guaymas-comodato-amigo-gnl",
    "dice": [
     "Es inversión privada, no gasto público"
    ]
   },
   {
    "q": "¿Investigarán a Lorenzo Córdova?",
-   "ir": "noticias-relevantes.html#col-ine-contratos-desde-cordova"
+   "ir": "noticias-auditavision.html#col-ine-contratos-desde-cordova"
   },
   {
    "q": "¿Es cierto que la UIF congeló cuentas de contratistas del INE?",
-   "ir": "noticias-relevantes.html#col-ine-contratos-desde-cordova"
+   "ir": "noticias-auditavision.html#col-ine-contratos-desde-cordova"
   },
   {
    "q": "¿Cuánto rezago tiene el Poder Judicial de Jalisco?",
@@ -801,59 +801,59 @@
   },
   {
    "q": "¿Es cierto que el órgano interno de control del INE renta plazas?",
-   "ir": "noticias-relevantes.html#col-ine-oic-auditorias-consejerias"
+   "ir": "noticias-auditavision.html#col-ine-oic-auditorias-consejerias"
   },
   {
    "q": "¿El órgano interno de control puede auditar a los consejeros del INE?",
-   "ir": "noticias-relevantes.html#col-ine-oic-auditorias-consejerias"
+   "ir": "noticias-auditavision.html#col-ine-oic-auditorias-consejerias"
   },
   {
    "q": "¿Quién es Víctor Hugo Carvente?",
-   "ir": "noticias-relevantes.html#col-ine-oic-auditorias-consejerias"
+   "ir": "noticias-auditavision.html#col-ine-oic-auditorias-consejerias"
   },
   {
    "q": "¿Cuánta confianza hay en el INE?",
-   "ir": "noticias-relevantes.html#col-ine-oic-auditorias-consejerias"
+   "ir": "noticias-auditavision.html#col-ine-oic-auditorias-consejerias"
   },
   {
    "q": "¿El ISSSTESON pagó pensiones a muertos?",
-   "ir": "noticias-relevantes.html#col-isssteson-oxigeno-pensiones-fallecidos",
+   "ir": "noticias-auditavision.html#col-isssteson-oxigeno-pensiones-fallecidos",
    "dice": [
     "$373,438"
    ]
   },
   {
    "q": "¿Dónde está el dinero de las pensiones pagadas a personas fallecidas en Sonora?",
-   "ir": "noticias-relevantes.html#col-isssteson-oxigeno-pensiones-fallecidos"
+   "ir": "noticias-auditavision.html#col-isssteson-oxigeno-pensiones-fallecidos"
   },
   {
    "q": "oxígeno a domicilio a un paciente fallecido",
-   "ir": "noticias-relevantes.html#col-isssteson-oxigeno-pensiones-fallecidos",
+   "ir": "noticias-auditavision.html#col-isssteson-oxigeno-pensiones-fallecidos",
    "dice": [
     "$158,400"
    ]
   },
   {
    "q": "Biosistemas y Seguridad Privada",
-   "ir": "noticias-relevantes.html#col-isssteson-oxigeno-pensiones-fallecidos"
+   "ir": "noticias-auditavision.html#col-isssteson-oxigeno-pensiones-fallecidos"
   },
   {
    "q": "¿Es cierto que con el Seguro Popular se atendieron más de 51 millones de mexicanos?",
-   "ir": "noticias-relevantes.html#col-seguro-popular-51-millones",
+   "ir": "noticias-auditavision.html#col-seguro-popular-51-millones",
    "dice": [
     "53.5 millones"
    ]
   },
   {
    "q": "¿Cuánta gente se quedó sin acceso a servicios de salud?",
-   "ir": "noticias-relevantes.html#col-seguro-popular-51-millones",
+   "ir": "noticias-auditavision.html#col-seguro-popular-51-millones",
    "dice": [
     "44.5 millones"
    ]
   },
   {
    "q": "¿Por qué quitaron el Seguro Popular?",
-   "ir": "noticias-relevantes.html#col-seguro-popular-51-millones"
+   "ir": "noticias-auditavision.html#col-seguro-popular-51-millones"
   },
   {
    "q": "¿A cuántas personas llegó a cubrir el Seguro Popular, cuántas se quedaron sin acceso a la salud después y qué le observó la ASF?",
@@ -875,19 +875,19 @@
   },
   {
    "q": "¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?",
-   "ir": "noticias-relevantes.html#col-seguro-popular-51-millones"
+   "ir": "noticias-auditavision.html#col-seguro-popular-51-millones"
   },
   {
    "q": "¿Cuánta gente se quedó sin acceso a la salud?",
-   "ir": "noticias-relevantes.html#col-seguro-popular-51-millones"
+   "ir": "noticias-auditavision.html#col-seguro-popular-51-millones"
   },
   {
    "q": "¿Es cierto que el ISSSTESON pagó pensiones a personas fallecidas?",
-   "ir": "noticias-relevantes.html#col-isssteson-oxigeno-pensiones-fallecidos"
+   "ir": "noticias-auditavision.html#col-isssteson-oxigeno-pensiones-fallecidos"
   },
   {
    "q": "¿Auditarán las oficinas de los consejeros del INE?",
-   "ir": "noticias-relevantes.html#col-ine-oic-auditorias-consejerias"
+   "ir": "noticias-auditavision.html#col-ine-oic-auditorias-consejerias"
   },
   {
    "q": "¿Cuántas consultas da el IMSS?",
@@ -903,14 +903,14 @@
   },
   {
    "q": "¿Qué pasó con la Modalidad 40 del IMSS?",
-   "ir": "noticias-relevantes.html#col-imss-modalidad-40-gestores",
+   "ir": "noticias-auditavision.html#col-imss-modalidad-40-gestores",
    "dice": [
     "22 de octubre"
    ]
   },
   {
    "q": "¿Es cierto que la Modalidad 40 tenía un fraude de gestores?",
-   "ir": "noticias-relevantes.html#col-imss-modalidad-40-gestores"
+   "ir": "noticias-auditavision.html#col-imss-modalidad-40-gestores"
   },
   {
    "q": "¿Qué es la Modalidad 40?",
@@ -918,15 +918,15 @@
   },
   {
    "q": "Zoé Robledo",
-   "ir": "noticias-relevantes.html#col-imss-modalidad-40-gestores"
+   "ir": "noticias-auditavision.html#col-imss-modalidad-40-gestores"
   },
   {
    "q": "noticias de hoy",
-   "ir": "noticias-relevantes.html#al-momento"
+   "ir": "noticias-auditavision.html#al-momento"
   },
   {
    "q": "¿Qué está pasando?",
-   "ir": "noticias-relevantes.html#al-momento"
+   "ir": "noticias-auditavision.html#al-momento"
   },
   {
    "q": "¿Qué es el nepotismo?",
@@ -961,11 +961,11 @@
   },
   {
    "q": "quiero proponer una nota",
-   "ir": "noticias-relevantes.html#propon"
+   "ir": "noticias-verifica.html#propon"
   },
   {
    "q": "réplicas y posturas",
-   "ir": "noticias-relevantes.html#replica"
+   "ir": "noticias-auditavision.html#replica"
   },
   {
    "q": "¿El concuño cuenta como familia?",
@@ -980,23 +980,23 @@
   },
   {
    "q": "¿Cuándo se aprueba el presupuesto de egresos?",
-   "ir": "noticias-relevantes.html#agenda"
+   "ir": "noticias-seguimiento.html#agenda"
   },
   {
    "q": "Agenda del erario",
-   "ir": "noticias-relevantes.html#agenda"
+   "ir": "noticias-seguimiento.html#agenda"
   },
   {
    "q": "¿Qué dicen hoy los periódicos?",
-   "ir": "noticias-relevantes.html#mesa"
+   "ir": "noticias-verifica.html#mesa"
   },
   {
    "q": "Quiero pedir seguimiento a un caso",
-   "ir": "noticias-relevantes.html#seguir"
+   "ir": "noticias-seguimiento.html#seguir"
   },
   {
    "q": "¿Cómo sigo un caso?",
-   "ir": "noticias-relevantes.html#seguimientos"
+   "ir": "noticias-seguimiento.html#seguimientos"
   },
   {
    "q": "¿Qué pasó con Dos Bocas?",
@@ -1091,7 +1091,7 @@
   {
    "q": "El IMSS acota la Modalidad 40: lo que dice el Diario Oficial y lo que falta probar",
    "modo": "reportero",
-   "ir": "noticias-relevantes.html#col-imss-modalidad-40-gestores",
+   "ir": "noticias-auditavision.html#col-imss-modalidad-40-gestores",
    "dice": [
     "La nota del Reportero"
    ]
@@ -1099,7 +1099,7 @@
   {
    "q": "Elba Esther Gordillo: cinco años en proceso y una sentencia que se quiso reservar",
    "modo": "reportero",
-   "ir": "noticias-relevantes.html#col-gordillo-la-sentencia-reservada",
+   "ir": "noticias-auditavision.html#col-gordillo-la-sentencia-reservada",
    "dice": [
     "La nota del Reportero"
    ]
@@ -1107,7 +1107,7 @@
   {
    "q": "«Con el Seguro Popular se atendieron más de 51 millones; ahorita nada». Lo que dicen el INEGI y la ASF",
    "modo": "reportero",
-   "ir": "noticias-relevantes.html#col-seguro-popular-51-millones",
+   "ir": "noticias-auditavision.html#col-seguro-popular-51-millones",
    "dice": [
     "La nota del Reportero"
    ]
@@ -1115,7 +1115,7 @@
   {
    "q": "«Casa Blanca»: el expediente que, según la Función Pública, fue sustituido por una copia",
    "modo": "reportero",
-   "ir": "noticias-relevantes.html#col-casa-blanca-expediente",
+   "ir": "noticias-auditavision.html#col-casa-blanca-expediente",
    "dice": [
     "La nota del Reportero"
    ]
@@ -1123,7 +1123,7 @@
   {
    "q": "ISSSTESON: oxígeno pagado a un paciente fallecido y pensiones a personas muertas. ¿Dónde está el dinero?",
    "modo": "reportero",
-   "ir": "noticias-relevantes.html#col-isssteson-oxigeno-pensiones-fallecidos",
+   "ir": "noticias-auditavision.html#col-isssteson-oxigeno-pensiones-fallecidos",
    "dice": [
     "La nota del Reportero"
    ]
@@ -1131,7 +1131,7 @@
   {
    "q": "Emilio Lozoya y la planta que Pemex compró tras 14 años sin operar",
    "modo": "reportero",
-   "ir": "noticias-relevantes.html#col-lozoya-agronitrogenados-odebrecht",
+   "ir": "noticias-auditavision.html#col-lozoya-agronitrogenados-odebrecht",
    "dice": [
     "La nota del Reportero"
    ]

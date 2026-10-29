@@ -518,7 +518,7 @@
       (nadie.length ? '<p class="pa-rep-s">🕵️ Lo que casi nadie te cuenta</p><ul class="pa-lista">' + nadie.slice(0, 4).join('') + '</ul>' : '') +
       (ruido.length ? '<p class="pa-rep-s">📢 El ruido: lo que circula y lo que consta</p><ul class="pa-lista">' + ruido.join('') + '</ul>' : '') +
       (sigue.length ? '<p class="pa-rep-s">🗓️ Lo que sigue</p><ul class="pa-lista">' + sigue.join('') + '</ul>' : '') +
-      (nada ? '<p>En la redacción todavía no hay nota sobre esto: no tenemos cotejo de lo que circula ni pendientes señalados. <a href="noticias-relevantes.html#propon">¿Lo investigamos? Propón una nota ➔</a></p>' : '') +
+      (nada ? '<p>En la redacción todavía no hay nota sobre esto: no tenemos cotejo de lo que circula ni pendientes señalados. <a href="noticias-verifica.html#propon">¿Lo investigamos? Propón una nota ➔</a></p>' : '') +
       '<p class="pa-chico">Lo que te cuento sale de documentos públicos que casi nadie lee, no de rumores. Una nota de prensa es mi punto de partida, nunca mi fuente' +
       (cols.length ? ', y <b>una acusación no es una condena</b>' : '') + '. A las personas privadas no las nombro.</p></div>';
     return { html: h, web: !r.web && tema ? tema : '' };
@@ -1822,7 +1822,7 @@
         'Cuando la actualicemos con un documento nuevo (el voto, el informe, el contrato o la sentencia de «🗓️ Lo que sigue»), ' +
         'al volver verás el aviso «🆕 Novedades» y la lista de «Tus seguimientos» al inicio del diario.</p>' +
         '<p>Se guarda solo en este navegador: no pedimos correo ni cuenta, y nadie más lo ve. Los avisos por correo o al celular todavía no existen.</p>',
-      ir: [PE.pag + '#seguimientos', 'Tus seguimientos'], sug: ['Noticias relevantes', 'Nuestros pilares'], rec: []
+      ir: ['noticias-seguimiento.html#seguimientos', 'Tus seguimientos'], sug: ['Noticias relevantes', 'Nuestros pilares'], rec: []
     };
   }
 
@@ -1851,7 +1851,7 @@
         html: '<p>⏱️ <b>Al momento</b>, lo más reciente que verificamos contra los documentos oficiales:</p><ul class="pa-lista">' + am.map(function (x) {
           return '<li><a href="' + esc(x.ir[0]) + '"><b>' + esc(x.tit) + '</b></a> <small>(' + esc(x.act) + ')</small><br>' + esc(x.txt) + '</li>';
         }).join('') + '</ul><p class="pa-chico">Cada nota dice de qué nota de prensa salió, qué consta en el documento oficial y qué falta probar. Lo que dice la red, al pie de cada una, va rotulado «sin verificar».</p>',
-        ir: ['noticias-relevantes.html#al-momento', 'Noticias · Al momento'], rec: [],
+        ir: ['noticias-auditavision.html#al-momento', 'Noticias · Al momento'], rec: [],
         sug: am.slice(0, 2).map(function (x) { return x.tit; }).concat(['¿Cómo sigo un caso?'])
       };
     }
@@ -1864,12 +1864,12 @@
       return {
         html: '<p>✍️ Así llega una noticia a la <b>Columna del Erario</b>: nos mandas la liga, la desarmamos en afirmaciones, cotejamos cada una contra el documento oficial (consta, matiz, sin documento o pendiente) y se publica como nota «Al momento» o como columna, con la fecha, nuestros datos y el glosario. Citamos al medio y a quien firma; no copiamos la nota.</p>' +
           '<p>Para mandarla, toca «Cuéntanos lo que viste» › «Un tema que deberíamos investigar».</p>',
-        ir: ['noticias-relevantes.html#propon', 'Noticias · Propón una nota'], rec: [], sug: ['Verifica una noticia', 'Noticias de hoy', '¿Cómo sigo un caso?']
+        ir: ['noticias-verifica.html#propon', 'Noticias · Propón una nota'], rec: [], sug: ['Verifica una noticia', 'Noticias de hoy', '¿Cómo sigo un caso?']
       };
     if (/ posturas? /.test(p) && !/ postura (de|del) (gobierno|partido|presidenta|presidente) /.test(p))
       return {
         html: '<p>✉️ En <b>Réplica y postura</b> de Noticias están las respuestas de quienes aludimos. La <b>réplica</b> la pide quien considera inexacto o falso un dato nuestro: se publica gratis, íntegra y sin comentarios en la misma columna. La <b>postura</b> es lo que la institución o la persona aludida dijo en su propio documento, con su liga: se publica en sus palabras y no la calificamos.</p>',
-        ir: ['noticias-relevantes.html#replica', 'Noticias · Réplica y postura'], rec: [], sug: ['¿Cómo ejerzo mi derecho de réplica?', 'Noticias de hoy']
+        ir: ['noticias-auditavision.html#replica', 'Noticias · Réplica y postura'], rec: [], sug: ['¿Cómo ejerzo mi derecho de réplica?', 'Noticias de hoy']
       };
     /* Noticias reestructurada (28-10-2026): la agenda del erario, la mesa de
        redacción y el seguimiento de casos tienen su sección. */
@@ -1888,19 +1888,19 @@
         html: '<p>🗓️ <b>Lo que viene en la agenda del erario</b>, con los plazos que fija la ley:</p><ul class="pa-lista">' + prox.map(function (o) {
           return '<li><b>' + o.f.getDate() + ' de ' + MES[o.f.getMonth()] + (o.x.ult ? ' (último día hábil)' : '') + ':</b> ' + esc(o.x.que) + ' <small>· ' + esc(o.x.quien) + ' · <a href="' + esc(o.x.url) + '" target="_blank" rel="noopener">' + esc(o.x.ley) + ' ↗</a></small></li>';
         }).join('') + '</ul><p class="pa-chico">Son plazos máximos: el documento puede llegar antes. Las fechas que la ley da como «30 días después del trimestre» o «último día hábil» son nuestra cuenta (derivado).</p>',
-        ir: ['noticias-relevantes.html#agenda', 'Noticias · Agenda del erario'], rec: [], sug: ['Noticias de hoy', '¿Qué es la Cuenta Pública?']
+        ir: ['noticias-seguimiento.html#agenda', 'Noticias · Agenda del erario'], rec: [], sug: ['Noticias de hoy', '¿Qué es la Cuenta Pública?']
       };
     }
     if (/ (mesa de redaccion|titulares (de hoy|del dia|recientes)|que dicen (hoy )?los periodicos|que publican los medios) /.test(p))
       return {
         html: '<p>📡 En la <b>Mesa de redacción</b> de Noticias juntamos titulares sobre finanzas públicas de los buscadores de noticias, por tema (presupuesto, deuda, ASF, impuestos, contratos, Pemex y CFE, salud, estados). Llegan <b>sin verificar</b>: son la materia prima, no la noticia. Cada uno lo puedes mandar al verificador con un toque.</p>',
-        ir: ['noticias-relevantes.html#mesa', 'Noticias · Mesa de redacción'], rec: [], sug: ['Verifica una noticia', 'Noticias de hoy']
+        ir: ['noticias-verifica.html#mesa', 'Noticias · Mesa de redacción'], rec: [], sug: ['Verifica una noticia', 'Noticias de hoy']
       };
     if (/ (casos? (abiertos?|en seguimiento)|pedir (un )?seguimiento|den(le)? seguimiento|dar(le)? seguimiento|(sigo|seguir|sigan?) (un|este|el) caso|que no se olvide) /.test(p))
       return {
         html: '<p>🔔 En <b>Seguimiento</b> de Noticias están los casos abiertos, cada uno con el documento que falta para cerrarlo (un voto, un informe de la ASF, un contrato, una sentencia). Toca «Seguir este caso» y, cuando llegue el documento, verás el aviso; se guarda solo en tu navegador.</p>' +
           '<p>¿Quieres que sigamos uno nuevo? Ahí mismo, «Pedir un seguimiento»: dinos qué es y qué documento esperas.</p>',
-        ir: ['noticias-relevantes.html#seguir', 'Noticias · Seguimiento'], rec: [], sug: ['Noticias de hoy', 'Proponer una nota']
+        ir: ['noticias-seguimiento.html#seguir', 'Noticias · Seguimiento'], rec: [], sug: ['Noticias de hoy', 'Proponer una nota']
       };
     /* Quien fue aludido y quiere aclarar: la página del derecho de réplica, no
        la columna que comparte sus palabras (Bloque 4, 27-10-2026). «¿Qué es…?»
@@ -1913,14 +1913,14 @@
     /* La confianza en el INE (ENCIG del INEGI) vive en la columna de Verificamos
        sobre su Órgano Interno de Control (28-10-2026): sin esto, «INE» llevaba a su presupuesto. */
     if (/ confian\w* /.test(p) && / (ine|instituto nacional electoral|institutos? electorales?) /.test(p)) {
-      var fc = F.filter(function (x) { return x.ir && x.ir[0] === 'noticias-relevantes.html#col-ine-oic-auditorias-consejerias'; })[0];
+      var fc = F.filter(function (x) { return x.ir && x.ir[0] === 'noticias-auditavision.html#col-ine-oic-auditorias-consejerias'; })[0];
       if (fc && charla) { var rc = charla.deFicha(fc); rc.sug = ['¿El órgano interno de control puede auditar a los consejeros del INE?', '¿Cuánto gasta el INE?']; return rc; }
     }
     /* Pensiones u oxígeno pagados a personas fallecidas en Sonora: la auditoría del
        ISAF al ISSSTESON vive en su columna de Verificamos (28-10-2026); sin esto,
        «Sonora» llevaba a la ficha del estado. */
     if (/ (pension\w*|jubilacion\w*|jubilad\w*|oxigeno) /.test(p) && / (fallecid\w*|muert\w*|difunt\w*|finad\w*|defuncion\w*) /.test(p) && / (sonora|isssteson|isaf) /.test(p)) {
-      var fs = F.filter(function (x) { return x.ir && x.ir[0] === 'noticias-relevantes.html#col-isssteson-oxigeno-pensiones-fallecidos'; })[0];
+      var fs = F.filter(function (x) { return x.ir && x.ir[0] === 'noticias-auditavision.html#col-isssteson-oxigeno-pensiones-fallecidos'; })[0];
       if (fs && charla) { var rs = charla.deFicha(fs); rs.sug = ['¿Cuánto debe Sonora?', 'Biosistemas y Seguridad Privada']; return rs; }
     }
     /* La investigación del Seguro Popular en Auditoría en imágenes (28-10-2026):
@@ -1934,7 +1934,7 @@
        sigue llevando a la transición de Datos · Salud pública. */
     if ((/ seguro popular /.test(p) && / (\d+ millones|millones|atend\w*|afiliad\w*|quitaron|quito|mejor|malestar) /.test(p)) ||
         (/ (sin acceso|carencia\w*|se quedaron sin|perdieron) /.test(p) && / (salud|servicios de salud|servicios medicos) /.test(p) && / (cuant\w*|millones|gente|personas|mexicanos) /.test(p))) {
-      var fp = F.filter(function (x) { return x.ir && x.ir[0] === 'noticias-relevantes.html#col-seguro-popular-51-millones'; })[0];
+      var fp = F.filter(function (x) { return x.ir && x.ir[0] === 'noticias-auditavision.html#col-seguro-popular-51-millones'; })[0];
       if (fp && charla) { var rp = charla.deFicha(fp); rp.sug = ['¿Qué pasó con el Seguro Popular?', '¿Qué sabemos del IMSS-Bienestar?']; return rp; }
     }
     if (/ seguro popular /.test(p) && charla) {

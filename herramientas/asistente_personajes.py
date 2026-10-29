@@ -33,7 +33,7 @@ import unicodedata
 from apartados import RAIZ
 
 COLUMNAS_JS = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'columnas.js')
-PAGINA = 'noticias-relevantes.html'
+PAGINA = 'noticias-auditavision.html'
 
 # (id, nombre, cómo se dice en la calle, presidente[, columnas]). Las
 # columnas se encuentran solas por sus palabras; solo se dicen a mano cuando

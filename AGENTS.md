@@ -430,7 +430,16 @@ mudando a su página; no se agregan desgloses nuevos.
   Réplica y postura (`#replica`), Seguimiento (`#seguir`: los casos con
   `sigue` y «Pedir un seguimiento»), Mesa de redacción (`#mesa`), Agenda del
   erario (`#agenda`) y Cómo trabajamos (`#metodo`, con `#propon`): el método
-  de siete pasos, del rumor al documento. **La noticia y la opinión no se
+  de siete pasos, del rumor al documento. **Desde el 29-10-2026 la pestaña es
+  un índice de tres tarjetas** (pedido del autor), y el diario se reparte en tres
+  páginas (`PARTES` de `herramientas/noticias.py`): **Auditavisión Noticias**
+  (`noticias-auditavision.html`: Portada, Noticias, Opinión y Réplica; ahí viven
+  las columnas, `#col-<id>`), **Verifica una noticia** (`noticias-verifica.html`:
+  el verificador, la Mesa de redacción y Cómo trabajamos, con `#propon`) y
+  **Seguimiento: el caso no se olvida** (`noticias-seguimiento.html`: los casos
+  abiertos, `#seguimientos` y la Agenda). Las anclas viejas de
+  `noticias-relevantes.html` se mandan solas a su página (`ANCLAS`); un enlace
+  nuevo apunta directo a la página donde vive la sección. **La noticia y la opinión no se
   mezclan:** `columnas.js` reparte por `seccion` (`NOTICIA`), y una columna
   nueva va en la que le toca. El armazón, el método, la agenda y las búsquedas
   de la mesa viven en `herramientas/noticias.py`; la página la pinta

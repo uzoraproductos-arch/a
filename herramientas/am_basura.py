@@ -223,8 +223,8 @@ OBRAS_MAPA = [
         'alerta': 'Planta para licuar gas en la bahía, en un área que ya ocupan la industria, el cabotaje y la pesca (Secretaría de Energía); la obra está detenida por amparos, y el comodato del suelo y el resolutivo de impacto ambiental de la ASEA siguen sin publicarse.',
         'miaEst': 'pendiente', 'miaPend': 'red-guaymas-comodato-amigo-gnl-8',
         'miaTxt': 'Resolutivo de impacto ambiental de la ASEA y contrato de comodato portuario en Guaymas',
-        'aud': 'auditoria-guaymas-gas.html', 'ficha': 'noticias-relevantes.html#col-guaymas-comodato-amigo-gnl',
-        'exp': 'noticias-relevantes.html#col-guaymas-comodato-amigo-gnl', 'expNom': 'Verificación Guaymas y ASEA',
+        'aud': 'auditoria-guaymas-gas.html', 'ficha': 'noticias-auditavision.html#col-guaymas-comodato-amigo-gnl',
+        'exp': 'noticias-auditavision.html#col-guaymas-comodato-amigo-gnl', 'expNom': 'Verificación Guaymas y ASEA',
     },
     {
         'id': 'otis-acapulco', 'ico': '🌀', 'nombre': 'Reconstrucción por el huracán Otis en Acapulco y Coyuca',

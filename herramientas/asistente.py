@@ -295,6 +295,7 @@ def _pendientes():
 # «¿cómo apoyo a la plataforma?» debe llevar a Donaciones y a Servicios, que
 # son las dos vias para sostenerla desde que se retiro el Pase).
 PAGINA_K = {
+    'index.html': ' sistema civico de fiscalizacion plataforma',
     'donaciones.html': ' apoyar apoyo sostener sostenerla donar donativo aportar ayudar plataforma pase civico auditor',
     'servicios.html': ' contratar contrato medida servicio servicios investigacion encargo cotizacion suscripcion creditos sostener plataforma',
     'comunidad.html': ' participa participar reportar denunciar error corregir proponer tema',
@@ -338,6 +339,9 @@ def _paginas():
         if not t or not m:
             continue
         tit = limpio(t.group(1)).split(' · ')[0].split(' | ')[0]
+        if n == 'index.html':
+            # «Auditavisión», a secas: si no, «¿Qué es Auditavisión?» se iba a Auditavisión Noticias (29-10-2026).
+            tit = tit.split(' — ')[0]
         # Las paginas de la Enciclopedia llevan su modo (29-10-2026): el chat
         # las ofrece en «En la Enciclopedia», primero las del modo elegido.
         enc = enciclopedia_de(n, s)

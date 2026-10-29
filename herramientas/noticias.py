@@ -20,6 +20,32 @@ recolectar_noticias.py. Ninguna cifra se escribe en este módulo.
 import json
 
 ARCHIVO = 'noticias-relevantes.html'
+
+# Desde el 29-10-2026 (pedido del autor: «quiero que aquí existan tres
+# tarjetas… y que nos desglosen a cada una de sus páginas») la pestaña es un
+# índice con tres tarjetas, y el diario se reparte en tres páginas. Cada
+# sección vive en una sola: (archivo, ícono, nombre, lema, entrada, secciones).
+DIARIO = 'noticias-auditavision.html'
+VERIFICA = 'noticias-verifica.html'
+SEGUIMIENTO = 'noticias-seguimiento.html'
+PARTES = [
+    (DIARIO, '🗞️', 'Auditavisión Noticias', 'La columna periodística: la noticia, verificada, y la opinión, con documentos',
+     'El periódico de la plataforma. La portada con lo más reciente; las noticias del día y el cotejo de lo que circula, afirmación por '
+     'afirmación; la Columna del Erario, nuestra opinión parada en documentos, y las réplicas y posturas de quienes aludimos.',
+     ('portada', 'al-momento', 'columnas', 'replica')),
+    (VERIFICA, '⚖️', 'Verifica una noticia', 'Del rumor al documento',
+     'Pega la liga o el texto de lo que viste y lo ponemos junto al documento oficial. Aquí también están los titulares que estamos jalando '
+     '(rotulados «sin verificar»), nuestro método de siete pasos y la puerta para proponernos una nota.',
+     ('verifica', 'mesa', 'metodo')),
+    (SEGUIMIENTO, '🔔', 'Seguimiento: el caso no se olvida', 'Qué documento falta para cerrar cada caso, y cuándo debe llegar',
+     'Los casos abiertos, con el documento que falta para cerrarlos; los que tú sigues, con su aviso de novedades, y la agenda del erario: '
+     'las fechas en que la ley obliga a publicar el dinero público.',
+     ('seguir', 'agenda')),
+]
+# Las anclas viejas del diario de una sola página (noticias-relevantes.html#…),
+# a la página donde viven ahora. «col-*» son las columnas.
+ANCLAS = dict([(sid, arch + '#' + sid) for arch, *_r, secs in PARTES for sid in secs] +
+              [('propon', VERIFICA + '#propon'), ('seguimientos', SEGUIMIENTO + '#seguimientos'), ('col-*', DIARIO)])
 BANDEJA = 'docs/noticias/bandeja.json'
 
 CPEUM = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf'
@@ -36,7 +62,7 @@ SCRIPTS = ['noticias.js']
 SECCIONES = [
     ('portada', '🗞️', 'Portada', 'Portada',
      'Lo más reciente, en corto: la noticia principal, lo que está pasando «Al momento» y lo último de la Columna.'),
-    ('verifica', '⚖️', 'Verifica', 'Verifica una noticia',
+    ('verifica', '⚖️', 'Verifica', 'El verificador: pega la nota y la cotejamos',
      'Pega la liga de una nota, un portal o un video, o el texto o la transcripción de lo que viste en redes. Leemos lo que dice, '
      'encontramos sus cifras, las ponemos junto al documento oficial y te damos nuestro dictamen, con la salud financiera de quien aparece en la nota.'),
     ('al-momento', '📰', 'Noticias', 'Noticias: lo que pasó y lo que consta',
@@ -47,7 +73,7 @@ SECCIONES = [
      'que vale la pena conocer.'),
     ('replica', '✉️', 'Réplica y postura', 'Réplica y postura',
      'Quien es aludido puede responder, y lo que la parte aludida dijo en su propio documento se publica en sus palabras.'),
-    ('seguir', '🔔', 'Seguimiento', 'Seguimiento: el caso no se olvida',
+    ('seguir', '🔔', 'Casos abiertos', 'Casos abiertos: lo que falta para cerrarlos',
      'Cada caso abierto dice qué documento falta para cerrarlo. Síguelo y te avisamos cuando llegue, o pídele al Auditor que siga uno nuevo.'),
     ('mesa', '📡', 'Mesa de redacción', 'Mesa de redacción: lo que estamos jalando',
      'Titulares sobre finanzas públicas que juntamos de los buscadores de noticias para alimentar nuestra base. Llegan <b>sin verificar</b>: '
@@ -156,9 +182,15 @@ def _metodo():
             '  </div>') % pasos
 
 
-def construir(base, ref):
+def construir(base, ref, archivo=DIARIO):
     import insp_nota
-    nav = '\n'.join('    <a href="#%s"><span aria-hidden="true">%s</span> %s</a>' % (i, ico, n) for i, ico, n, _t, _e in SECCIONES)
+    parte = next(p for p in PARTES if p[0] == archivo)
+    mias = [x for x in SECCIONES if x[0] in parte[5]]
+    nav = '\n'.join(['    <a href="#%s"><span aria-hidden="true">%s</span> %s</a>' % (i, ico, n) for i, ico, n, _t, _e in mias] +
+                    ['    <a class="nt-barra-otra" href="%s"><span aria-hidden="true">%s</span> %s ➔</a>' % (a, ico, n.split(':')[0])
+                     for a, ico, n, *_r in PARTES if a != archivo] +
+                    (['    <a class="nt-barra-otra" href="periodismo-en-riesgo.html"><span aria-hidden="true">🛡️</span> Periodismo en riesgo ➔</a>']
+                     if archivo == DIARIO else []))
     cuerpos = {
         'portada': ('<div id="noticiasPortada" class="nt-portada-raiz"><noscript><p>La portada necesita JavaScript.</p></noscript></div>'),
         'verifica': insp_nota.construir(base, ref) +
@@ -190,14 +222,14 @@ def construir(base, ref):
         'metodo': _metodo(),
     }
     clases = {'columnas': ' nt-sec-opinion', 'verifica': ' nt-sec-verifica', 'portada': ' nt-sec-portada'}
-    partes = [_sec(i, ico, t, e, cuerpos[i], clases.get(i, '')) for i, ico, _n, t, e in SECCIONES]
+    partes = [_sec(i, ico, t, e, cuerpos[i], clases.get(i, '')) for i, ico, _n, t, e in mias]
     return ('<div class="nt-diario">\n'
             '<header class="nt-cabezal">\n'
             '  <p class="nt-cabezal-linea"><span id="noticiasHoy">Las finanzas públicas de México</span><span>Cada cifra, con su documento</span></p>\n'
             '  <p class="nt-nombre">Auditavisión <span>Noticias</span></p>\n'
             '  <p class="nt-lema">La noticia, verificada. La opinión, con documentos. Y el caso, en seguimiento.</p>\n'
             '</header>\n'
-            '<nav class="nt-barra" aria-label="Secciones del diario">\n%s\n</nav>\n%s\n'
+            '<nav class="nt-barra" aria-label="Secciones de esta página y las otras dos de Noticias">\n%s\n</nav>\n%s\n'
             '<script type="application/json" id="noticiasDatos">%s</script>\n'
             '</div>') % (nav, '\n'.join(partes), json.dumps(datos(), ensure_ascii=False).replace('</', '<\\/'))
 

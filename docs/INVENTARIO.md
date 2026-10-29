@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 241 |
+| Páginas revisadas | 244 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -170,7 +170,10 @@ La Enciclopedia queda fuera porque está congelada.
 | `informes-semestral-asf.html` | Informe semestral de la ASF · Auditavisión | apartados.py | 44 | 0 | 30 | 5 | 4 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `nepotismo-y-cargos-publicos.html` | Nepotismo y cargos públicos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `noticias-relevantes.html` | Noticias relevantes · Auditavisión | apartados.py | 46 | 0 | 0 | 1 | 0 |
+| `noticias-auditavision.html` | Auditavisión Noticias · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
+| `noticias-relevantes.html` | Noticias relevantes · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
+| `noticias-seguimiento.html` | Seguimiento: el caso no se olvida · Auditavisión | apartados.py | 34 | 0 | 0 | 1 | 0 |
+| `noticias-verifica.html` | Verifica una noticia · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 49 | 0 | 0 | 5 | 1 |
 | `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
 | `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 46 | 0 | 4 | 0 | 0 |

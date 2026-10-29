@@ -129,7 +129,7 @@ PRES_2110 = ('https://www.gob.mx/presidencia/es/articulos/version-estenografica-
              'claudia-sheinbaum-pardo-del-21-de-octubre-de-2026')
 GACETA_SON_2104 = 'https://gestion.api.congresoson.gob.mx/publico/descarga?uuid=f8cf663d-4257-4f5d-8b08-b05b80a83e72'
 # El caso de Guaymas comparte sus pendientes con su columna de Verificamos
-# (noticias-relevantes.html#col-guaymas-comodato-amigo-gnl): los ids
+# (noticias-auditavision.html#col-guaymas-comodato-amigo-gnl): los ids
 # red-<columna>-<n> los anota pendientes.py desde el cotejo.
 COL_GUAYMAS = 'guaymas-comodato-amigo-gnl'
 
@@ -288,7 +288,7 @@ def casos(base, ref):
     gym = _caso('en-curso', '🚢', 'Golfo de California · Proyecto AMIGO en Guaymas', '2026 · Guaymas, Sonora', 'En litigio', [
         ('📍', '41.7 ha', 'El terreno, según la Secretaría de Energía', 'oficial', None,
          'En el Parque Industrial Pesquero «General Rodolfo Sánchez Taboada», el 0.005 %% del municipio (%s). '
-         'En redes circulan 54 hectáreas en comodato gratuito: <a href="noticias-relevantes.html#col-%s">lo cotejamos en Verificamos</a>.'
+         'En redes circulan 54 hectáreas en comodato gratuito: <a href="noticias-auditavision.html#col-%s">lo cotejamos en Verificamos</a>.'
          % (fuente(PRES_2110, 'versión estenográfica del 21-10-2026'), COL_GUAYMAS)),
         ('🚢', '60 al año', 'Buques metaneros, como máximo', 'oficial', None,
          'Cinco al mes, el 4 %% de las embarcaciones que ya cruzan la zona; almacenamiento para 290 mil metros cúbicos de gas (%s).'
