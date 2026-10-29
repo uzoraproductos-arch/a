@@ -20,13 +20,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261029b">
-  <script src="assets/auditor/js/iconos.js?v=20261029b"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261029b" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261029b">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261029b">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261029b">
-  <link rel="stylesheet" href="assets/auditor/css/asistente.css?v=20261029b">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261029c">
+  <script src="assets/auditor/js/iconos.js?v=20261029c"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261029c" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261029c">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261029c">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261029c">
+  <link rel="stylesheet" href="assets/auditor/css/asistente.css?v=20261029c">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -181,31 +181,85 @@
       <section class="apartado-seccion" id="chat" aria-labelledby="chat-tit">
         <h2 class="sr-only" id="chat-tit">Pregúntale al Auditor</h2>
         <div class="apartado-bloque">
-        <div class="pa" id="paApp" data-canal="">
+        <div class="pa" id="paApp" data-canal="" data-modo="ciudadano">
         <div class="pa-chat">
           <div class="pa-chat-cab">
             <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="52" height="40">
             <div><b>Pregúntale al Auditor</b><small><span class="pa-enlinea" aria-hidden="true"></span> En línea · contesta con datos oficiales</small></div>
             <span class="pa-cab-acc">
-            <button type="button" class="pa-como-abre pa-herr-abre" id="paHerrAbre" aria-controls="paHerr" aria-expanded="false"><span aria-hidden="true">🧰</span> Herramientas <span class="pa-herr-flecha" aria-hidden="true">▾</span></button>
+            <button type="button" class="pa-como-abre pa-herr-abre" id="paHerrAbre" aria-controls="paHerr" aria-expanded="false" aria-label="Cambiar el modo del Auditor"><span class="pa-modo-actual" id="paModoActual">🙋 Modo Ciudadano</span> <span class="pa-herr-flecha" aria-hidden="true">▾</span></button>
             <button type="button" class="pa-como-abre" id="paComoAbre" aria-controls="paComo" aria-expanded="false"><span aria-hidden="true">❓</span> Cómo platicar conmigo</button>
             </span>
-            <nav class="pa-herr" id="paHerr" aria-label="Herramientas del Auditor Virtual" hidden>
-              <p>Las cuatro herramientas del auditor. Cada una abre su propia página.</p>
+            <div class="pa-herr pa-modos" id="paHerr" role="group" aria-label="Modos del Auditor" hidden>
+              <p>Elige cómo quieres que investigue. Los datos son los mismos en los cuatro modos; cambia la forma de buscar y de contestarte.</p>
               <ul>
-              <li><a class="pa-herr-tj" href="herramienta-inspector.html"><img src="assets/auditor/img/herr-inspector-ilustracion.svg" alt="" width="96" height="64" loading="lazy"><span><b><span aria-hidden="true">🔍</span> Modo Inspector</b><small>Dónde quedó el dinero que nadie ha podido explicar</small></span></a></li>
-              <li><a class="pa-herr-tj" href="herramienta-ambiente.html"><img src="assets/auditor/img/herr-ambiente-ilustracion.svg" alt="" width="96" height="64" loading="lazy"><span><b><span aria-hidden="true">🌎</span> Costo Ambiental</b><small>El gasto que no aparece en el recibo</small></span></a></li>
-              <li><a class="pa-herr-tj" href="herramienta-calculadora.html"><img src="assets/auditor/img/herr-calculadora-ilustracion.svg" alt="" width="96" height="64" loading="lazy"><span><b><span aria-hidden="true">💳</span> Calculadora Cívica</b><small>Tu sueldo, tus impuestos y el rubro al que llegan</small></span></a></li>
-              <li><a class="pa-herr-tj" href="herramienta-megaobras.html"><img src="assets/auditor/img/herr-megaobras-ilustracion.svg" alt="" width="96" height="64" loading="lazy"><span><b><span aria-hidden="true">🏗️</span> Inversión y Megaobras</b><small>Lo que se prometió, lo que se pagó y la diferencia</small></span></a></li>
+              <li><button type="button" class="pa-modo-op" data-pa-modo="inspector" data-nom="Modo Inspector" data-lema="la investigación más completa" aria-pressed="false"><span class="pa-modo-ico" aria-hidden="true">🔍</span><span><b>Modo Inspector</b><small>La investigación más completa</small></span></button></li>
+              <li><button type="button" class="pa-modo-op" data-pa-modo="reportero" data-nom="Modo Reportero" data-lema="investiga un tema como una nota" aria-pressed="false"><span class="pa-modo-ico" aria-hidden="true">📰</span><span><b>Modo Reportero</b><small>Investiga un tema como una nota</small></span></button></li>
+              <li><button type="button" class="pa-modo-op" data-pa-modo="ciudadano" data-nom="Modo Ciudadano" data-lema="te lo explico como un amigo" aria-pressed="false"><span class="pa-modo-ico" aria-hidden="true">🙋</span><span><b>Modo Ciudadano</b><small>Te lo explico como un amigo</small></span></button></li>
+              <li><button type="button" class="pa-modo-op" data-pa-modo="ambientalista" data-nom="Modo Ambientalista" data-lema="el costo y el daño ambiental" aria-pressed="false"><span class="pa-modo-ico" aria-hidden="true">🌎</span><span><b>Modo Ambientalista</b><small>El costo y el daño ambiental</small></span></button></li>
               </ul>
-            </nav>
+            </div>
           </div>
+          <details class="pa-modo-franja" data-modo="inspector" hidden>
+            <summary><span aria-hidden="true">🔍</span> <b>Modo Inspector</b><span class="pa-modo-lema"> · La investigación más completa</span><span class="pa-modo-n">12 aplicaciones ▾</span></summary>
+            <p>Toda la base de datos, a fondo: expedientes de la ASF, entes públicos, estados de cuenta, RFC y lista negra del SAT, nepotismo, contratos y megaobras. Te doy la cifra, la cuenta y todas sus fuentes.</p>
+            <div class="pa-modo-apps">
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Expedientes de casos de la ASF"><span aria-hidden="true">🏛️</span> Expedientes de casos de la ASF</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Auditor de entes públicos"><span aria-hidden="true">🏢</span> Auditor de entes públicos</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Contrasta una nota"><span aria-hidden="true">📰</span> Contrasta una nota</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Lista negra del SAT"><span aria-hidden="true">🧾</span> Lista negra del SAT</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Verifica un estado de cuenta"><span aria-hidden="true">🔏</span> Verifica un estado de cuenta</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Nepotismo y parentesco"><span aria-hidden="true">👪</span> Nepotismo y parentesco</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Servicios de investigación"><span aria-hidden="true">🔎</span> Servicios de investigación</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Haz tu propia investigación"><span aria-hidden="true">🔍</span> Haz tu propia investigación</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="En qué invirtió cada presidente"><span aria-hidden="true">🏛️</span> En qué invirtió cada presidente</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Obra por obra, por industria"><span aria-hidden="true">🏭</span> Obra por obra, por industria</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Las cuatro cifras y los rescates"><span aria-hidden="true">🧭</span> Las cuatro cifras y los rescates</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="La cuenta de cada obra y el ritmo de la pérdida"><span aria-hidden="true">📒</span> La cuenta de cada obra y el ritmo de la pérdida</button>
+            </div>
+          </details>
+          <details class="pa-modo-franja" data-modo="reportero" hidden>
+            <summary><span aria-hidden="true">📰</span> <b>Modo Reportero</b><span class="pa-modo-lema"> · Investiga un tema como una nota</span><span class="pa-modo-n">5 aplicaciones ▾</span></summary>
+            <p>Pregúntame por un tema informativo y te lo cuento como reportero: qué pasó, quién aparece, qué dice el documento, qué falta y qué respondió la parte aludida. Aquí viven las Noticias y el verificador de notas.</p>
+            <div class="pa-modo-apps">
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Noticias de hoy"><span aria-hidden="true">📰</span> Noticias de hoy</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Contrasta una nota"><span aria-hidden="true">🔎</span> Contrasta una nota</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Expediente de Segalmex"><span aria-hidden="true">📂</span> Expediente de Segalmex</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Nepotismo y parentesco"><span aria-hidden="true">👪</span> Nepotismo y parentesco</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="¿Quién es Genaro García Luna?"><span aria-hidden="true">📰</span> ¿Quién es Genaro García Luna?</button>
+            </div>
+          </details>
+          <details class="pa-modo-franja" data-modo="ciudadano">
+            <summary><span aria-hidden="true">🙋</span> <b>Modo Ciudadano</b><span class="pa-modo-lema"> · Te lo explico como un amigo</span><span class="pa-modo-n">5 aplicaciones ▾</span></summary>
+            <p>Lo más sencillo: preguntas de todos los días, en corto y con un ejemplo. Cuánto te retienen, cuánto debe tu estado, qué significa una palabra. Aquí viven tu estado de cuenta y la Calculadora Cívica.</p>
+            <div class="pa-modo-apps">
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Tu estado de cuenta"><span aria-hidden="true">🧾</span> Tu estado de cuenta</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Tú contra ellos"><span aria-hidden="true">⚡</span> Tú contra ellos</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="El reloj de la deuda"><span aria-hidden="true">⏱️</span> El reloj de la deuda</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Reparte el presupuesto"><span aria-hidden="true">🧮</span> Reparte el presupuesto</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Estado de cuenta administrativo"><span aria-hidden="true">🏛️</span> Estado de cuenta administrativo</button>
+            </div>
+          </details>
+          <details class="pa-modo-franja" data-modo="ambientalista" hidden>
+            <summary><span aria-hidden="true">🌎</span> <b>Modo Ambientalista</b><span class="pa-modo-lema"> · El costo y el daño ambiental</span><span class="pa-modo-n">7 aplicaciones ▾</span></summary>
+            <p>Todo lo que tiene que ver con el ambiente: cuánto cuesta el daño, a dónde va la basura, cuánto se invierte en protegerlo, qué resuelve la PROFEPA y quién paga cada proyecto. Aquí vive el Costo Ambiental.</p>
+            <div class="pa-modo-apps">
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Tu estado de cuenta ambiental"><span aria-hidden="true">🧾</span> Tu estado de cuenta ambiental</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="El reloj y el año"><span aria-hidden="true">⏱️</span> El reloj y el año</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="¿Cuánto del crecimiento es real?"><span aria-hidden="true">📈</span> ¿Cuánto del crecimiento es real?</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Simulador de inversión ambiental"><span aria-hidden="true">🌱</span> Simulador de inversión ambiental</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Auditor ambiental"><span aria-hidden="true">🔍</span> Auditor ambiental</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="Crisis ambientales"><span aria-hidden="true">🌀</span> Crisis ambientales</button>
+              <button type="button" class="pa-modo-app" data-pa-pregunta="¿Cuánta basura se genera en México?"><span aria-hidden="true">🗑️</span> ¿Cuánta basura se genera en México?</button>
+            </div>
+          </details>
           <ol class="pa-hilo" id="paHilo" aria-live="polite">
             <li class="pa-msg pa-bot pa-hola">
               <div class="pa-burbuja">
-                <p>¡Hola! Soy el Auditor. Pregúntame lo que quieras del dinero público, como se lo preguntarías a un amigo: <b>cuánto debe tu estado</b>, <b>cuánta lana le llega a tu municipio</b>, <b>cuánto gana un diputado</b> o <b>qué significa</b> algún término.</p>
-                <p>Te contesto en corto y con datos oficiales. Si quieres ir a fondo, toca <b>«Saber más»</b> y te llevo a la página donde está la información; si necesitas el respaldo, <b>«Generar dictamen»</b>.</p>
-                <p>Y aquí mismo investigas con las siete aplicaciones del <b>Modo Inspector</b>: pégame un RFC, un folio o la liga de una nota, o pídeme el diagnóstico de un ente. Y te cuento cada <b>megaobra</b>: lo que costó, lo que pierde y quién la hizo.</p>
+                <div class="pa-hola-modo" data-modo="inspector" hidden><p>Estoy en <b>modo Inspector</b>: investigo con toda la base de datos de la plataforma. Pégame un <b>RFC</b>, un <b>folio</b> o la liga de una nota, pídeme el <b>diagnóstico de un ente</b> («diagnóstico de Pemex»), un <b>expediente de la ASF</b> o la cuenta de una <b>megaobra</b>.</p><p>Te contesto con la cifra, la operación y sus documentos. Si quieres el respaldo completo, toca <b>«Generar dictamen»</b>.</p></div>
+                <div class="pa-hola-modo" data-modo="reportero" hidden><p>Estoy en <b>modo Reportero</b>: te cuento un tema como una nota, pero parada en documentos. Pregúntame <b>qué pasó</b> con un caso, <b>quién es</b> un personaje público o <b>si es cierto</b> lo que circula, o pégame la <b>liga de una nota</b> y la contrasto.</p><p>Una nota de prensa es mi punto de partida, nunca mi fuente: cada cifra la coteja el documento oficial. Y <b>una acusación no es una condena</b>.</p></div>
+                <div class="pa-hola-modo" data-modo="ciudadano"><p>¡Hola! Soy el Auditor y estoy en <b>modo Ciudadano</b>. Pregúntame lo que quieras del dinero público, como se lo preguntarías a un amigo: <b>cuánto te retienen</b> de tu sueldo, <b>cuánto debe tu estado</b>, <b>cuánta lana le llega a tu municipio</b> o <b>qué significa</b> algún término.</p><p>Te contesto en corto y con datos oficiales. Si quieres ir a fondo, toca <b>«Saber más»</b>; y si quieres investigar en serio, cámbiame a otro modo arriba.</p></div>
+                <div class="pa-hola-modo" data-modo="ambientalista" hidden><p>Estoy en <b>modo Ambientalista</b>: investigo el <b>costo y el daño ambiental</b>. Pregúntame cuánto le cuesta al país el daño, <b>a dónde va la basura</b>, cuánto se invierte en protegerlo o qué resuelve la <b>PROFEPA</b>.</p><p>El deterioro del ambiente también es gasto público: lo pagamos en agua, aire, suelo y basura. Y te digo quién paga cada proyecto, el gobierno o un privado.</p></div>
               </div>
             </li>
           </ol>
@@ -213,78 +267,82 @@
             <div class="pa-ejs-cab"><span>💡 Prueba con:</span>
               <button type="button" class="pa-ejs-otras" id="paEjsOtras" hidden>🔄 Otras preguntas</button></div>
             <div class="pa-ejs-lista" id="paEjsLista">
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué pasó con la Modalidad 40 del IMSS?"><span aria-hidden="true">⏱️</span> ¿Qué pasó con la Modalidad 40 del IMSS?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Dame mi estado de cuenta cívico"><span aria-hidden="true">🧾</span> Dame mi estado de cuenta cívico</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto debe Jalisco?"><span aria-hidden="true">🗺️</span> ¿Cuánto debe Jalisco?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Mi estado de cuenta ambiental"><span aria-hidden="true">🌎</span> Mi estado de cuenta ambiental</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?"><span aria-hidden="true">🔎</span> ¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de AMLO"><span aria-hidden="true">🏛️</span> Estado de cuenta de AMLO</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánta lana le llega a Zapopan?"><span aria-hidden="true">🏙️</span> ¿Cuánta lana le llega a Zapopan?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Noticias de hoy"><span aria-hidden="true">📰</span> Noticias de hoy</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Muéstrame el mapa de la deuda de los estados"><span aria-hidden="true">🗺️</span> Muéstrame el mapa de la deuda de los estados</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de un diputado"><span aria-hidden="true">🏛️</span> Estado de cuenta de un diputado</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Mi proveedor está en la lista negra del SAT?"><span aria-hidden="true">🧾</span> ¿Mi proveedor está en la lista negra del SAT?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánta gente se quedó sin acceso a la salud?"><span aria-hidden="true">🩺</span> ¿Cuánta gente se quedó sin acceso a la salud?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto gana un diputado?"><span aria-hidden="true">💰</span> ¿Cuánto gana un diputado?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Quién preside la Suprema Corte?"><span aria-hidden="true">⚖️</span> ¿Quién preside la Suprema Corte?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Mi cuñado puede trabajar en mi oficina?"><span aria-hidden="true">👪</span> ¿Mi cuñado puede trabajar en mi oficina?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto se recauda de IVA?"><span aria-hidden="true">🧾</span> ¿Cuánto se recauda de IVA?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="El reloj de la deuda"><span aria-hidden="true">⏱️</span> El reloj de la deuda</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto costó el Tren Maya?"><span aria-hidden="true">🚆</span> ¿Cuánto costó el Tren Maya?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué le observó la ASF al Seguro Popular?"><span aria-hidden="true">🏥</span> ¿Qué le observó la ASF al Seguro Popular?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué es un pliego de observaciones?"><span aria-hidden="true">📘</span> ¿Qué es un pliego de observaciones?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de un senador"><span aria-hidden="true">🏛️</span> Estado de cuenta de un senador</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Diagnóstico de Pemex"><span aria-hidden="true">🏢</span> Diagnóstico de Pemex</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Es cierto que Jalisco debe 50 mil millones?"><span aria-hidden="true">🔎</span> ¿Es cierto que Jalisco debe 50 mil millones?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Quién es Genaro García Luna?"><span aria-hidden="true">📰</span> ¿Quién es Genaro García Luna?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Es cierto que el ISSSTESON pagó pensiones a personas fallecidas?"><span aria-hidden="true">🔎</span> ¿Es cierto que el ISSSTESON pagó pensiones a personas fallecidas?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de Jalisco"><span aria-hidden="true">🗺️</span> Estado de cuenta de Jalisco</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántos diputados hay?"><span aria-hidden="true">🏛️</span> ¿Cuántos diputados hay?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto vale hoy el dólar?"><span aria-hidden="true">💱</span> ¿Cuánto vale hoy el dólar?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿En qué obras invirtió AMLO?"><span aria-hidden="true">🏗️</span> ¿En qué obras invirtió AMLO?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto dejó por aclarar la ASF?"><span aria-hidden="true">🔎</span> ¿Cuánto dejó por aclarar la ASF?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Auditarán las oficinas de los consejeros del INE?"><span aria-hidden="true">🗳️</span> ¿Auditarán las oficinas de los consejeros del INE?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de Zapopan"><span aria-hidden="true">🏙️</span> Estado de cuenta de Zapopan</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Expediente de Segalmex"><span aria-hidden="true">📂</span> Expediente de Segalmex</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué es un amparo?"><span aria-hidden="true">📘</span> ¿Qué es un amparo?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánta basura se genera en México?"><span aria-hidden="true">🗑️</span> ¿Cuánta basura se genera en México?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué estados de cuenta hay?"><span aria-hidden="true">🧾</span> ¿Qué estados de cuenta hay?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué pasó con el Seguro Popular?"><span aria-hidden="true">🏥</span> ¿Qué pasó con el Seguro Popular?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué estado debe más?"><span aria-hidden="true">📊</span> ¿Qué estado debe más?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué megaobra tiene más sobrecosto?"><span aria-hidden="true">📈</span> ¿Qué megaobra tiene más sobrecosto?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto gana un ministro de la Corte?"><span aria-hidden="true">💰</span> ¿Cuánto gana un ministro de la Corte?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de la Suprema Corte"><span aria-hidden="true">⚖️</span> Estado de cuenta de la Suprema Corte</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Contrasta una nota"><span aria-hidden="true">📰</span> Contrasta una nota</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántas consultas da el IMSS?"><span aria-hidden="true">🩺</span> ¿Cuántas consultas da el IMSS?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Noticias de Elba Esther Gordillo"><span aria-hidden="true">📰</span> Noticias de Elba Esther Gordillo</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿En qué se gasta el presupuesto?"><span aria-hidden="true">🏛️</span> ¿En qué se gasta el presupuesto?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuándo es la próxima elección judicial?"><span aria-hidden="true">🗳️</span> ¿Cuándo es la próxima elección judicial?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué es el Ramo 33?"><span aria-hidden="true">📘</span> ¿Qué es el Ramo 33?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de los presidentes"><span aria-hidden="true">🏛️</span> Estado de cuenta de los presidentes</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántos asuntos resuelve el Poder Judicial?"><span aria-hidden="true">⚖️</span> ¿Cuántos asuntos resuelve el Poder Judicial?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto pierde Dos Bocas al año?"><span aria-hidden="true">🛢️</span> ¿Cuánto pierde Dos Bocas al año?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto valen 1,000 pesos de 2000 hoy?"><span aria-hidden="true">💱</span> ¿Cuánto valen 1,000 pesos de 2000 hoy?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Compara Nuevo León con Jalisco"><span aria-hidden="true">⚖️</span> Compara Nuevo León con Jalisco</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Verifica un estado de cuenta"><span aria-hidden="true">🔏</span> Verifica un estado de cuenta</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto gana la presidenta?"><span aria-hidden="true">💰</span> ¿Cuánto gana la presidenta?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántas denuncias atiende la PROFEPA?"><span aria-hidden="true">🌎</span> ¿Cuántas denuncias atiende la PROFEPA?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto se recauda de ISR?"><span aria-hidden="true">🧾</span> ¿Cuánto se recauda de ISR?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántos senadores hay?"><span aria-hidden="true">🏛️</span> ¿Cuántos senadores hay?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto cuesta el daño ambiental?"><span aria-hidden="true">🌎</span> ¿Cuánto cuesta el daño ambiental?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Compara el AIFA con el Tren Maya"><span aria-hidden="true">⚖️</span> Compara el AIFA con el Tren Maya</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="El reloj del daño ambiental"><span aria-hidden="true">⏱️</span> El reloj del daño ambiental</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto es el 16 % de 2,500 millones?"><span aria-hidden="true">🧮</span> ¿Cuánto es el 16 % de 2,500 millones?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué puedo investigar en el Modo Inspector?"><span aria-hidden="true">🔍</span> ¿Qué puedo investigar en el Modo Inspector?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué municipio recibe más?"><span aria-hidden="true">🏙️</span> ¿Qué municipio recibe más?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto le cuesta al país la Suprema Corte?"><span aria-hidden="true">⚖️</span> ¿Cuánto le cuesta al país la Suprema Corte?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánta deuda dejó AMLO?"><span aria-hidden="true">🧾</span> ¿Cuánta deuda dejó AMLO?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuándo es la elección de 2027?"><span aria-hidden="true">🗳️</span> ¿Cuándo es la elección de 2027?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto han costado las megaobras?"><span aria-hidden="true">🏗️</span> ¿Cuánto han costado las megaobras?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántos circuitos judiciales hay?"><span aria-hidden="true">🗺️</span> ¿Cuántos circuitos judiciales hay?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué es el Paquete Económico 2027?"><span aria-hidden="true">📘</span> ¿Qué es el Paquete Económico 2027?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="Quiero pedir una investigación"><span aria-hidden="true">🔎</span> Quiero pedir una investigación</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto gana un senador?"><span aria-hidden="true">💰</span> ¿Cuánto gana un senador?</button>
-              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto nos cuesta el FOBAPROA?"><span aria-hidden="true">🏦</span> ¿Cuánto nos cuesta el FOBAPROA?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué pasó con la Modalidad 40 del IMSS?" data-modo="reportero"><span aria-hidden="true">⏱️</span> ¿Qué pasó con la Modalidad 40 del IMSS?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Dame mi estado de cuenta cívico" data-modo="ciudadano"><span aria-hidden="true">🧾</span> Dame mi estado de cuenta cívico</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto debe Jalisco?" data-modo="ciudadano"><span aria-hidden="true">🗺️</span> ¿Cuánto debe Jalisco?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Mi estado de cuenta ambiental" data-modo="ambientalista"><span aria-hidden="true">🌎</span> Mi estado de cuenta ambiental</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?" data-modo="reportero"><span aria-hidden="true">🔎</span> ¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de AMLO" data-modo="inspector"><span aria-hidden="true">🏛️</span> Estado de cuenta de AMLO</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánta lana le llega a Zapopan?" data-modo="ciudadano"><span aria-hidden="true">🏙️</span> ¿Cuánta lana le llega a Zapopan?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Noticias de hoy" data-modo="reportero"><span aria-hidden="true">📰</span> Noticias de hoy</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Muéstrame el mapa de la deuda de los estados" data-modo="inspector"><span aria-hidden="true">🗺️</span> Muéstrame el mapa de la deuda de los estados</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de un diputado" data-modo="inspector"><span aria-hidden="true">🏛️</span> Estado de cuenta de un diputado</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Mi proveedor está en la lista negra del SAT?" data-modo="inspector"><span aria-hidden="true">🧾</span> ¿Mi proveedor está en la lista negra del SAT?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánta gente se quedó sin acceso a la salud?" data-modo="reportero"><span aria-hidden="true">🩺</span> ¿Cuánta gente se quedó sin acceso a la salud?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto gana un diputado?" data-modo="ciudadano"><span aria-hidden="true">💰</span> ¿Cuánto gana un diputado?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Quién preside la Suprema Corte?" data-modo="ciudadano"><span aria-hidden="true">⚖️</span> ¿Quién preside la Suprema Corte?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Mi cuñado puede trabajar en mi oficina?" data-modo="reportero"><span aria-hidden="true">👪</span> ¿Mi cuñado puede trabajar en mi oficina?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto se recauda de IVA?" data-modo="ciudadano"><span aria-hidden="true">🧾</span> ¿Cuánto se recauda de IVA?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="El reloj de la deuda" data-modo="ciudadano"><span aria-hidden="true">⏱️</span> El reloj de la deuda</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto costó el Tren Maya?" data-modo="inspector"><span aria-hidden="true">🚆</span> ¿Cuánto costó el Tren Maya?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué le observó la ASF al Seguro Popular?" data-modo="reportero"><span aria-hidden="true">🏥</span> ¿Qué le observó la ASF al Seguro Popular?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué es un pliego de observaciones?" data-modo="ciudadano"><span aria-hidden="true">📘</span> ¿Qué es un pliego de observaciones?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de un senador" data-modo="inspector"><span aria-hidden="true">🏛️</span> Estado de cuenta de un senador</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Diagnóstico de Pemex" data-modo="inspector"><span aria-hidden="true">🏢</span> Diagnóstico de Pemex</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Es cierto que Jalisco debe 50 mil millones?" data-modo="reportero"><span aria-hidden="true">🔎</span> ¿Es cierto que Jalisco debe 50 mil millones?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Quién es Genaro García Luna?" data-modo="reportero"><span aria-hidden="true">📰</span> ¿Quién es Genaro García Luna?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Es cierto que el ISSSTESON pagó pensiones a personas fallecidas?" data-modo="reportero"><span aria-hidden="true">🔎</span> ¿Es cierto que el ISSSTESON pagó pensiones a personas fallecidas?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de Jalisco" data-modo="inspector"><span aria-hidden="true">🗺️</span> Estado de cuenta de Jalisco</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántos diputados hay?" data-modo="ciudadano"><span aria-hidden="true">🏛️</span> ¿Cuántos diputados hay?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto vale hoy el dólar?" data-modo="ciudadano"><span aria-hidden="true">💱</span> ¿Cuánto vale hoy el dólar?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿En qué obras invirtió AMLO?" data-modo="inspector"><span aria-hidden="true">🏗️</span> ¿En qué obras invirtió AMLO?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto dejó por aclarar la ASF?" data-modo="inspector"><span aria-hidden="true">🔎</span> ¿Cuánto dejó por aclarar la ASF?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Auditarán las oficinas de los consejeros del INE?" data-modo="reportero"><span aria-hidden="true">🗳️</span> ¿Auditarán las oficinas de los consejeros del INE?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de Zapopan" data-modo="inspector"><span aria-hidden="true">🏙️</span> Estado de cuenta de Zapopan</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Expediente de Segalmex" data-modo="inspector"><span aria-hidden="true">📂</span> Expediente de Segalmex</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué es un amparo?" data-modo="ciudadano"><span aria-hidden="true">📘</span> ¿Qué es un amparo?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánta basura se genera en México?" data-modo="ambientalista"><span aria-hidden="true">🗑️</span> ¿Cuánta basura se genera en México?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué estados de cuenta hay?" data-modo="ciudadano"><span aria-hidden="true">🧾</span> ¿Qué estados de cuenta hay?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué pasó con el Seguro Popular?" data-modo="reportero"><span aria-hidden="true">🏥</span> ¿Qué pasó con el Seguro Popular?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué estado debe más?" data-modo="ciudadano"><span aria-hidden="true">📊</span> ¿Qué estado debe más?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué megaobra tiene más sobrecosto?" data-modo="inspector"><span aria-hidden="true">📈</span> ¿Qué megaobra tiene más sobrecosto?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto gana un ministro de la Corte?" data-modo="ciudadano"><span aria-hidden="true">💰</span> ¿Cuánto gana un ministro de la Corte?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de la Suprema Corte" data-modo="inspector"><span aria-hidden="true">⚖️</span> Estado de cuenta de la Suprema Corte</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Contrasta una nota" data-modo="reportero"><span aria-hidden="true">📰</span> Contrasta una nota</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántas consultas da el IMSS?" data-modo="reportero"><span aria-hidden="true">🩺</span> ¿Cuántas consultas da el IMSS?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Noticias de Elba Esther Gordillo" data-modo="reportero"><span aria-hidden="true">📰</span> Noticias de Elba Esther Gordillo</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿En qué se gasta el presupuesto?" data-modo="ciudadano"><span aria-hidden="true">🏛️</span> ¿En qué se gasta el presupuesto?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuándo es la próxima elección judicial?" data-modo="ciudadano"><span aria-hidden="true">🗳️</span> ¿Cuándo es la próxima elección judicial?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué es el Ramo 33?" data-modo="ciudadano"><span aria-hidden="true">📘</span> ¿Qué es el Ramo 33?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Estado de cuenta de los presidentes" data-modo="inspector"><span aria-hidden="true">🏛️</span> Estado de cuenta de los presidentes</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántos asuntos resuelve el Poder Judicial?" data-modo="reportero"><span aria-hidden="true">⚖️</span> ¿Cuántos asuntos resuelve el Poder Judicial?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto pierde Dos Bocas al año?" data-modo="inspector"><span aria-hidden="true">🛢️</span> ¿Cuánto pierde Dos Bocas al año?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto valen 1,000 pesos de 2000 hoy?" data-modo="ciudadano"><span aria-hidden="true">💱</span> ¿Cuánto valen 1,000 pesos de 2000 hoy?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Compara Nuevo León con Jalisco" data-modo="inspector"><span aria-hidden="true">⚖️</span> Compara Nuevo León con Jalisco</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Verifica un estado de cuenta" data-modo="inspector"><span aria-hidden="true">🔏</span> Verifica un estado de cuenta</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto gana la presidenta?" data-modo="ciudadano"><span aria-hidden="true">💰</span> ¿Cuánto gana la presidenta?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántas denuncias atiende la PROFEPA?" data-modo="ambientalista"><span aria-hidden="true">🌎</span> ¿Cuántas denuncias atiende la PROFEPA?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto se recauda de ISR?" data-modo="ciudadano"><span aria-hidden="true">🧾</span> ¿Cuánto se recauda de ISR?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántos senadores hay?" data-modo="ciudadano"><span aria-hidden="true">🏛️</span> ¿Cuántos senadores hay?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto cuesta el daño ambiental?" data-modo="ambientalista"><span aria-hidden="true">🌎</span> ¿Cuánto cuesta el daño ambiental?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Compara el AIFA con el Tren Maya" data-modo="inspector"><span aria-hidden="true">⚖️</span> Compara el AIFA con el Tren Maya</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="El reloj del daño ambiental" data-modo="ambientalista"><span aria-hidden="true">⏱️</span> El reloj del daño ambiental</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto es el 16 % de 2,500 millones?" data-modo="ciudadano"><span aria-hidden="true">🧮</span> ¿Cuánto es el 16 % de 2,500 millones?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué puedo investigar en el Modo Inspector?" data-modo="inspector"><span aria-hidden="true">🔍</span> ¿Qué puedo investigar en el Modo Inspector?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué municipio recibe más?" data-modo="inspector"><span aria-hidden="true">🏙️</span> ¿Qué municipio recibe más?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto le cuesta al país la Suprema Corte?" data-modo="inspector"><span aria-hidden="true">⚖️</span> ¿Cuánto le cuesta al país la Suprema Corte?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánta deuda dejó AMLO?" data-modo="inspector"><span aria-hidden="true">🧾</span> ¿Cuánta deuda dejó AMLO?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuándo es la elección de 2027?" data-modo="ciudadano"><span aria-hidden="true">🗳️</span> ¿Cuándo es la elección de 2027?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto han costado las megaobras?" data-modo="inspector"><span aria-hidden="true">🏗️</span> ¿Cuánto han costado las megaobras?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuántos circuitos judiciales hay?" data-modo="ciudadano"><span aria-hidden="true">🗺️</span> ¿Cuántos circuitos judiciales hay?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Qué es el Paquete Económico 2027?" data-modo="ciudadano"><span aria-hidden="true">📘</span> ¿Qué es el Paquete Económico 2027?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Quiero pedir una investigación" data-modo="inspector"><span aria-hidden="true">🔎</span> Quiero pedir una investigación</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto gana un senador?" data-modo="ciudadano"><span aria-hidden="true">💰</span> ¿Cuánto gana un senador?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto nos cuesta el FOBAPROA?" data-modo="inspector"><span aria-hidden="true">🏦</span> ¿Cuánto nos cuesta el FOBAPROA?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="Mapa ambiental de megaobras por estado" data-modo="ambientalista"><span aria-hidden="true">🗺️</span> Mapa ambiental de megaobras por estado</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Es cierto que el Tren Maya contamina?" data-modo="ambientalista"><span aria-hidden="true">🚆</span> ¿Es cierto que el Tren Maya contamina?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto multa la PROFEPA?" data-modo="ambientalista"><span aria-hidden="true">⚖️</span> ¿Cuánto multa la PROFEPA?</button>
+              <button type="button" class="pa-ej" data-pa-pregunta="¿Cuánto presupuesto tiene la PROFEPA?" data-modo="ambientalista"><span aria-hidden="true">🌎</span> ¿Cuánto presupuesto tiene la PROFEPA?</button>
             </div>
           </div>
           <div class="pa-pie">
@@ -307,6 +365,7 @@
           <div class="glos-drawer-cuerpo">
           <h3 id="paComoT">Cómo platicar conmigo</h3>
           <ol>
+            <li><b>Elige mi modo</b> con el botón de arriba: <b>🔍 Inspector</b> (la investigación más completa), <b>📰 Reportero</b> (un tema contado como nota, con las Noticias), <b>🙋 Ciudadano</b> (en corto, como un amigo) o <b>🌎 Ambientalista</b> (el costo y el daño ambiental). Cada modo trae sus aplicaciones y sus preguntas de ejemplo; los datos son los mismos en los cuatro.</li>
             <li><b>Escríbeme como hablas.</b> Entiendo «lana», «varo», «¿cuánto se clavaron?», siglas como CDMX o Edomex, y preguntas que siguen a la anterior: «¿y Nuevo León?», «¿y por habitante?», «¿y el que menos?».</li>
             <li><b>Te contesto en corto:</b> la cifra, qué quiere decir y en qué lugar queda. Sé de los 32 estados, de los municipios, de los sueldos de los cargos públicos, de cada sexenio desde 1989, de 265 términos del glosario y de las páginas de la plataforma.</li>
             <li><b>Saco cuentas:</b> ordeno, comparo, sumo y saco porcentajes y márgenes. Cuando hago una cuenta, te digo cuál fue.</li>
@@ -330,7 +389,7 @@
             </p>
             <p class="pa-chico" id="paSinRespNota">La lista se guarda solo en tu navegador: nadie más la ve y no se envía sola. Para hacérnosla llegar, cópiala y pégala en <a href="comunidad-tema.html" data-puerta="tema">📢 Cuéntanos lo que viste › Un tema que deberíamos investigar</a>, el botón de arriba a la izquierda.</p>
           </section>
-          <p class="pa-aviso"><b>Platico como chat, pero no invento.</b> No soy una inteligencia artificial que redacta: entiendo tu pregunta y contesto solo con cifras que la plataforma ya publicó con su documento (1,556 fichas y 2,479 municipios). Si no lo tengo, te lo digo. Tu pregunta no sale de tu navegador.</p>
+          <p class="pa-aviso"><b>Platico como chat, pero no invento.</b> No soy una inteligencia artificial que redacta: entiendo tu pregunta y contesto solo con cifras que la plataforma ya publicó con su documento (1,554 fichas y 2,479 municipios). Si no lo tengo, te lo digo. Tu pregunta no sale de tu navegador.</p>
           </div>
         </aside>
       </div>
@@ -338,7 +397,7 @@
       </section>
 
       <nav class="herr-nav-min" aria-label="Moverte desde aquí">
-        <a class="herr-min" href="herramientas.html"><span>🧰 Herramientas</span><small>Las cuatro, en una página</small></a>
+        <a class="herr-min" href="numeros-herramientas-del-auditor.html"><span>🧰 Herramientas</span><small>Las cuatro, en la Enciclopedia</small></a>
         <a class="herr-min" href="herramienta-inspector.html"><span>🔍 Modo Inspector</span><small>Grandes investigaciones en siete aplicaciones</small></a>
         <a class="herr-min" href="enciclopedia-auditavision.html"><span>📚 Enciclopedia</span><small>Números, Datos y Aprende</small></a>
       </nav>
@@ -349,16 +408,16 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261029b</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261029c</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261029b"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261029b"></script>
-  <script src="assets/auditor/js/municipios-efipem.js?v=20261029b"></script>
-  <script src="assets/auditor/js/asistente-base.js?v=20261029b"></script>
-  <script src="assets/auditor/js/verificador.js?v=20261029b"></script>
-  <script src="assets/auditor/js/asistente-charla.js?v=20261029b"></script>
-  <script src="assets/auditor/js/asistente.js?v=20261029b"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261029c"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261029c"></script>
+  <script src="assets/auditor/js/municipios-efipem.js?v=20261029c"></script>
+  <script src="assets/auditor/js/asistente-base.js?v=20261029c"></script>
+  <script src="assets/auditor/js/verificador.js?v=20261029c"></script>
+  <script src="assets/auditor/js/asistente-charla.js?v=20261029c"></script>
+  <script src="assets/auditor/js/asistente.js?v=20261029c"></script>
 </body>
 </html>

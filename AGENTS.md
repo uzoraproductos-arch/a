@@ -18,7 +18,25 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
 | **La de consulta** (dogmática, teórica, de aprendizaje) | **Enciclopedia** (`enciclopedia-auditavision.html`: Números, Datos y Aprende) | La fuente de información de todo: cifras, leyes, glosario, Poderes, ambiente. |
 | **La de uso** | **Auditor Virtual** (abre `herramienta-inspector-pregunta.html`) | El producto estrella. **Le resuelve al usuario todo lo que se le ofrezca**: cualquier dato, municipio, salud financiera, investigación o auditoría en imágenes. Encuentra, explica y lleva a la página de la Enciclopedia o de la herramienta donde está el detalle. |
 
-- Las cuatro herramientas cuelgan del Auditor Virtual (botón «Herramientas»).
+- **El Auditor trabaja en cuatro modos** (decisión del autor, 29-10-2026:
+  «las herramientas… se van a convertir como en estos modelos que contienen
+  las inteligencias artificiales»): **Inspector** (la investigación más
+  completa: expedientes, entes, estados de cuenta, RFC, nepotismo, contratos
+  y megaobras), **Reportero** (un tema contado como nota, con las Noticias),
+  **Ciudadano** (en corto, como un amigo, con la Calculadora Cívica; es el
+  modo con el que abre) y **Ambientalista** (costo y daño ambiental). Viven
+  en `MODOS` de `herramientas/asistente.py`: cada uno con su saludo, sus
+  aplicaciones y sus preguntas de ejemplo (`modo_de()`); se eligen en el
+  botón de la cabecera del chat, se recuerdan en el navegador (`av-modo`) y
+  se piden por la dirección (`?modo=reportero`). **El modo cambia la forma de
+  investigar y de contestar, nunca los datos** (§2). Por entregas: (a) el
+  selector, hecho; (b) la forma de responder de cada modo; (c) el dictamen
+  de cada modo.
+- **Las cuatro herramientas se mudaron a la Enciclopedia** (29-10-2026): su
+  índice es la quinta tarjeta de Números, «Herramientas del Auditor»
+  (`numeros-herramientas-del-auditor.html`, `HERR_INDICE` y `HERR_SITIO` de
+  `apartados.py`), y sus páginas cuelgan de ahí en las migas.
+  `herramientas.html` solo redirige.
   **El Modo Inspector es las Grandes investigaciones** («realizar grandes
   investigaciones a través de seis aplicaciones»): una sola página,
   `herramienta-inspector.html`, con sus aplicaciones (siete desde el
@@ -351,10 +369,9 @@ mudando a su página; no se agregan desgloses nuevos.
   amplía la de tres del 23-10-2026, que a su vez reemplazó la de cinco del
   09-10-2026): **Auditor
   Virtual** (abre `herramienta-inspector-pregunta.html`, «Pregúntale al
-  Auditor»; desde el 23-10-2026 las cuatro herramientas cuelgan de su botón
-  «Herramientas», junto a «Cómo platicar conmigo», y `herramientas.html`
-  sigue como su índice; el Modo Inspector de ese menú lleva directo a las
-  Grandes investigaciones), **Enciclopedia**
+  Auditor»; desde el 29-10-2026 su botón de la cabecera elige uno de los
+  cuatro modos, §0, y las herramientas viven en la Enciclopedia, en Números
+  › Herramientas del Auditor; `herramientas.html` redirige ahí), **Enciclopedia**
   (`enciclopedia-auditavision.html`, con tres tarjetas: Números, Datos y
   Aprende, que conservan sus páginas) y **Comunidad** (`participa.html`, la
   antigua Participa, con tres tarjetas desde el 24-10-2026: Ágora cívica,

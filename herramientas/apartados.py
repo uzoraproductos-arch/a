@@ -297,10 +297,17 @@ ENCICLOPEDIA = 'enciclopedia-auditavision.html'
 
 # Las pestañas del menú (decisión del autor, 23-10-2026): eran cinco y
 # quedaron tres; desde el 28-10-2026 son cuatro, con Noticias. Cada una: (archivo, nombre, páginas que la marcan como actual).
-# La pestaña «Auditor Virtual» abre primero «Pregúntale al Auditor» (pedido del
-# autor, 23-10-2026); las cuatro herramientas cuelgan del botón «Herramientas»
-# de su cabecera, y herramientas.html sigue como su índice.
+# La pestaña «Auditor Virtual» abre «Pregúntale al Auditor» (pedido del autor,
+# 23-10-2026), que desde el 29-10-2026 trabaja en cuatro modos. Las páginas
+# con menu_archivo 'herramientas.html' (el chat y el dictamen) marcan esta
+# pestaña; herramientas.html ya solo redirige a la Enciclopedia.
 AUDITOR_VIRTUAL = 'herramienta-inspector-pregunta.html'
+# Las herramientas se mudaron a la Enciclopedia (decisión del autor,
+# 29-10-2026): su índice es la tarjeta «Herramientas del Auditor» de Números,
+# y el Auditor Virtual se volvió sus cuatro modos (asistente.MODOS).
+NUMEROS_HERR = 'numeros-herramientas-del-auditor.html'
+HERR_SITIO = {'menu_archivo': 'sigue-el-dinero.html', 'padre': ('sigue-el-dinero.html', 'Números'),
+              'padre2': (NUMEROS_HERR, 'Herramientas del Auditor')}
 MENU = [
     (AUDITOR_VIRTUAL, 'Auditor Virtual', ('herramientas.html',)),
     (ENCICLOPEDIA, 'Enciclopedia', (ENCICLOPEDIA, 'sigue-el-dinero.html', 'descarga-los-datos.html', 'aprende.html')),
@@ -311,40 +318,43 @@ MENU = [
     ('noticias-relevantes.html', 'Noticias', ('noticias-relevantes.html',)),
 ]
 
+# El índice de las cuatro herramientas. Desde el 29-10-2026 vive en
+# Números (NUMEROS_HERR); herramientas.html redirige ahí.
+HERR_INDICE = {
+    'archivo': 'herramientas.html',
+    # Desde el 23-10-2026 la pestaña se llama «Auditor Virtual» (decisión
+    # del autor); el archivo conserva su nombre para no romper enlaces.
+    'menu': 'Herramientas',
+    'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+    'icono': '🧰',
+    'titulo': 'Herramientas para seguir el dinero público',
+    'lema': 'El gasto público, a la vista',
+    'entrada': ('Dicho fácil: <b>de dónde sale el dinero de todos, en qué se gasta y quién revisa que se use bien.</b> '
+                'Lo contamos con documentos oficiales, para que cualquier persona lo entienda y lo pueda revisar. '
+                'Aquí están las cuatro herramientas del auditor: cada una abre su propia página.'),
+    'nota': True,
+    'guia': 'abajo',
+    'secciones': [
+        {
+            'id': 'modulos',
+            # Desde el 09-10-2026 los modulos son «herramientas» y la
+            # seccion va sin titulo ni parrafo (decision del autor): las
+            # tarjetas, mas grandes y con su imagen, son lo principal, y
+            # cada una abre su propia pagina (HERRAMIENTAS, abajo).
+            'titulo': '',
+            'texto': '',
+            'modulos': True,
+            'tarjetas': [
+                ('🏗️', 'Inversión y Megaobras', '', 'herramienta-megaobras.html', None, 'obras'),
+                ('💳', 'Calculadora Cívica', '', 'herramienta-calculadora.html', None, 'calculadora'),
+                ('🔍', 'Modo Inspector', '', 'herramienta-inspector.html', None, 'inspector'),
+                ('🌎', 'Costo Ambiental', '', 'herramienta-ambiente.html', None, 'ambiente'),
+            ],
+        },
+    ],
+}
+
 APARTADOS = [
-    {
-        'archivo': 'herramientas.html',
-        # Desde el 23-10-2026 la pestaña se llama «Auditor Virtual» (decisión
-        # del autor); el archivo conserva su nombre para no romper enlaces.
-        'menu': 'Herramientas',
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
-        'icono': '🧰',
-        'titulo': 'Herramientas para seguir el dinero público',
-        'lema': 'El gasto público, a la vista',
-        'entrada': ('Dicho fácil: <b>de dónde sale el dinero de todos, en qué se gasta y quién revisa que se use bien.</b> '
-                    'Lo contamos con documentos oficiales, para que cualquier persona lo entienda y lo pueda revisar. '
-                    'Aquí están las cuatro herramientas del auditor: cada una abre su propia página.'),
-        'nota': True,
-        'guia': 'abajo',
-        'secciones': [
-            {
-                'id': 'modulos',
-                # Desde el 09-10-2026 los modulos son «herramientas» y la
-                # seccion va sin titulo ni parrafo (decision del autor): las
-                # tarjetas, mas grandes y con su imagen, son lo principal, y
-                # cada una abre su propia pagina (HERRAMIENTAS, abajo).
-                'titulo': '',
-                'texto': '',
-                'modulos': True,
-                'tarjetas': [
-                    ('🏗️', 'Inversión y Megaobras', '', 'herramienta-megaobras.html', None, 'obras'),
-                    ('💳', 'Calculadora Cívica', '', 'herramienta-calculadora.html', None, 'calculadora'),
-                    ('🔍', 'Modo Inspector', '', 'herramienta-inspector.html', None, 'inspector'),
-                    ('🌎', 'Costo Ambiental', '', 'herramienta-ambiente.html', None, 'ambiente'),
-                ],
-            },
-        ],
-    },
     {
         # La Enciclopedia (decisión del autor, 23-10-2026): la segunda de las
         # tres pestañas junta Números, Datos y Aprende. No es la plataforma antigua
@@ -992,8 +1002,7 @@ def herramienta(h, n):
     return {
         'archivo': archivo,
         'menu': titulo,
-        'menu_archivo': 'herramientas.html',
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+        **HERR_SITIO,
         'icono': icono,
         'titulo': titulo,
         'lema': 'Herramienta %d de %d' % (n, len(HERRAMIENTAS)),
@@ -1023,8 +1032,7 @@ def herramienta_divisiones(h, n, ruta):
     archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
     division = HERR_DIVISION[rubro]
     principal = {
-        'menu_archivo': 'herramientas.html',
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+        **HERR_SITIO,
         'fondo': HERR_IMG[rubro],
         'rubro': rubro,
         'sin_icono_lema': True,
@@ -1091,9 +1099,8 @@ def herramienta_modulo(h, n, i, bloque=None):
     return {
         'archivo': modulo_archivo(archivo, clave),
         'menu': nombre,
-        'menu_archivo': 'herramientas.html',
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
-        'padre2': (archivo, titulo),
+        **HERR_SITIO,
+        'padre3': (archivo, titulo),
         'icono': ico,
         'titulo': nombre,
         'lema': ('%s · %s %d de %d' % (titulo, pal[0], i + 1, len(temas)) if rubro in HERR_ICONO_CAB else
@@ -1216,10 +1223,10 @@ def nav_de_pagina(archivo, padre3=None, cap=None):
         # «división» del Modo Inspector; desde aquí se va a las herramientas,
         # al Modo Inspector (las Grandes investigaciones) y a la Enciclopedia.
         return ('<nav class="herr-nav-min" aria-label="Moverte desde aquí">\n'
-                '        <a class="herr-min" href="herramientas.html"><span>🧰 Herramientas</span><small>Las cuatro, en una página</small></a>\n'
+                '        <a class="herr-min" href="%s"><span>🧰 Herramientas</span><small>Las cuatro, en la Enciclopedia</small></a>\n'
                 '        <a class="herr-min" href="%s"><span>🔍 Modo Inspector</span><small>Grandes investigaciones en siete aplicaciones</small></a>\n'
                 '        <a class="herr-min" href="%s"><span>📚 Enciclopedia</span><small>Números, Datos y Aprende</small></a>\n'
-                '      </nav>' % (MODO_INSPECTOR, ENCICLOPEDIA))
+                '      </nav>' % (NUMEROS_HERR, MODO_INSPECTOR, ENCICLOPEDIA))
     return None
 
 
@@ -1244,7 +1251,8 @@ def herramienta_asistente(bloque):
         'fondo': FOTO_AUDITOR, 'rubro': rubro, 'foto_clase': 'foto-auditor',
         'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
         'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
-        'pie_extra': nav + '\n\n      ' + herr_otras(archivo),
+        # Sin la fila de las cuatro herramientas: el chat ya es sus modos.
+        'pie_extra': nav,
     }
 
 
@@ -1619,9 +1627,8 @@ def contratos_publicos():
     arch = ''.join('<li><b>%s</b>: %s contratos <small>(sha256 %s…)</small></li>' % (a['archivo'], format(a['contratos'], ','), a['sha256'][:12])
                    for a in m['archivos'])
     return {
-        'archivo': 'contratos-publicos.html', 'menu': 'Contratos públicos', 'menu_archivo': 'herramientas.html',
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
-        'padre2': ('herramienta-inspector.html', 'Modo Inspector'),
+        'archivo': 'contratos-publicos.html', 'menu': 'Contratos públicos', **HERR_SITIO,
+        'padre3': ('herramienta-inspector.html', 'Modo Inspector'),
         'icono': '🧾', 'titulo': 'Contratos públicos', 'lema': 'Sigue el dinero: a quién le paga el gobierno',
         'entrada': ('Los contratos que las dependencias federales y los gobiernos que usan ComprasMX reportaron en los expedientes de 2025 y 2026: '
                     '%s empresas y %s instituciones. Busca una empresa, su RFC o una institución, y ve cuántos contratos tiene, por cuánto, '
@@ -1695,9 +1702,8 @@ def simulador():
     ej = json.load(open(os.path.join(RAIZ, 'investigaciones', 'simulador', 'cgpe2027-cuadro-ii6.json'), encoding='utf-8'))
     datos = json.dumps(ej, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     return {
-        'archivo': 'simulador-presupuesto.html', 'menu': 'Reparte el presupuesto', 'menu_archivo': 'herramientas.html',
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
-        'padre2': ('herramienta-calculadora.html', 'Calculadora Cívica'),
+        'archivo': 'simulador-presupuesto.html', 'menu': 'Reparte el presupuesto', **HERR_SITIO,
+        'padre3': ('herramienta-calculadora.html', 'Calculadora Cívica'),
         'icono': '🧮', 'titulo': 'Reparte el presupuesto, desde cero', 'lema': 'Tú pones las cifras; el ejemplo oficial, Hacienda',
         'entrada': ('Un simulador que empieza en $0. Agrega lo que entra y a dónde va, reparte, compara dos escenarios y descarga la cuenta. '
                     'Si quieres partir de cifras reales, carga el ejemplo oficial: el presupuesto aprobado de 2026 o el estimado de 2027, '
@@ -1838,10 +1844,9 @@ def servicios():
         '        <div class="sv-resumen" id="svResumen" hidden></div>',
         '        <noscript><p>El formulario necesita JavaScript.</p></noscript>'])
     return {
-        'archivo': 'servicios.html', 'menu': 'Servicios de investigación', 'menu_archivo': 'herramientas.html',
+        'archivo': 'servicios.html', 'menu': 'Servicios de investigación', **HERR_SITIO,
         # Desde el 11-10-2026 es un modulo del Modo Inspector (pedido del autor).
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
-        'padre2': ('herramienta-inspector.html', 'Modo Inspector'),
+        'padre3': ('herramienta-inspector.html', 'Modo Inspector'),
         'icono': '🔎', 'titulo': 'Servicios de investigación', 'lema': 'La consulta es gratuita; la investigación a la medida se cotiza',
         'entrada': ('Todo lo que publica Auditavisión es libre y lo seguirá siendo. Cuando necesites ir más a fondo en un caso, '
                     'podemos hacer por encargo una investigación documental con la misma regla de la plataforma: cada cifra con '
@@ -3912,12 +3917,11 @@ def radar():
         })
     # «Expide un estado de cuenta», en su propia pagina (pedido del autor, 10-10-2026).
     paginas.append({
-        'archivo': 'radar-estado-de-cuenta.html', 'menu': 'Estado de cuenta administrativo', 'menu_archivo': 'herramientas.html',
+        'archivo': 'radar-estado-de-cuenta.html', 'menu': 'Estado de cuenta administrativo', **HERR_SITIO,
         # Del 12-10-2026 al 22-10-2026 fue la cuarta tarjeta de Datos; desde
         # entonces (pedido del autor) es la quinta aplicacion de la
         # Calculadora Civica, con sus migas y su pie (nav_de_pagina).
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
-        'padre2': ('herramienta-calculadora.html', 'Calculadora Cívica'),
+        'padre3': ('herramienta-calculadora.html', 'Calculadora Cívica'),
         'icono': '🏛️', 'titulo': 'Estado de cuenta administrativo', 'lema': 'Calculadora Cívica · aplicación 5 de 5',
         'sin_icono_lema': True, 'icono_cab': '🏛️', 'fondo': HERR_IMG['calculadora'], 'rubro': 'calculadora',
         'entrada': EXPIDE_TEXTO + ' Cualquiera puede comprobar que no se alteró.',
@@ -4279,7 +4283,6 @@ NUMEROS_ANTES = [
      'Se fundió con «Se paga lo que se debe» en «Cuentas claras».'),
 ]
 NUMEROS_PAGINAS = []
-NUMEROS_HERR = 'numeros-herramientas-del-auditor.html'
 # ?abrir=eb-bloque: a que direccion de Numeros lleva cada bloque del motor.
 NUMEROS_ABRIR = {}
 # Los bloques del motor que eran tarjetas de «Presupuesto» y de «Gasto
@@ -5031,11 +5034,10 @@ def numeros_preparar():
     a['secciones'] = [{'id': r[0], 'pagina': r[1], 'pestana': (r[2], r[3], r[4])} for r in NUMEROS_PARTES]
     # Quinta tarjeta: las cuatro herramientas del Auditor, en su página dentro
     # de Números (pedido del autor, 29-10-2026: «una nueva tarjeta… que se
-    # llamara Herramientas del Auditor»). Son las tarjetas de herramientas.html,
-    # leídas de ahí para que no se desfasen.
+    # llamara Herramientas del Auditor»). Son las tarjetas de HERR_INDICE.
     a['secciones'].append({'id': 'herramientas', 'pagina': NUMEROS_HERR,
                            'pestana': ('🧰', 'Herramientas del Auditor', 'Megaobras, Calculadora Cívica, Modo Inspector y Costo Ambiental')})
-    herr = next(x for x in APARTADOS if x['archivo'] == 'herramientas.html')
+    herr = {k: v for k, v in HERR_INDICE.items() if k != 'padre'}
     NUMEROS_PAGINAS.append(dict(herr, archivo=NUMEROS_HERR, menu='Herramientas del Auditor', menu_archivo='sigue-el-dinero.html',
                                 padre=('sigue-el-dinero.html', 'Números'), titulo='Herramientas del Auditor', lema='Números',
                                 entrada=('Haz tus propias cuentas con los mismos números de la Enciclopedia. '
@@ -5522,6 +5524,9 @@ def indice(base, ref):
 # Paginas que dejaron de existir y redirigen a donde se mudo su contenido.
 # Busca y verifica se fusiono con el Modo Inspector el 09-10-2026.
 REDIRECCIONES = {
+    # Las herramientas se mudaron a la Enciclopedia el 29-10-2026 (decisión
+    # del autor): su índice es la quinta tarjeta de Números.
+    'herramientas.html': (NUMEROS_HERR, 'Herramientas', 'Las cuatro herramientas viven ahora en la Enciclopedia: Números › Herramientas del Auditor.'),
     # El nepotismo fue pagina de Aprende la tarde del 28-10-2026; esa noche
     # (pedido del autor) paso a ser la septima aplicacion del Modo Inspector.
     'nepotismo-y-cargos-publicos.html': ('herramienta-inspector-nepotismo.html', 'Nepotismo y cargos públicos',

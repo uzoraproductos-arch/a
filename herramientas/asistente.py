@@ -724,43 +724,123 @@ for _i, _e in enumerate([('¿Cuánta gente se quedó sin acceso a la salud?', '�
 EJEMPLOS.insert(0, ('¿Qué pasó con la Modalidad 40 del IMSS?', '⏱️'))
 EJEMPLOS.insert(7, ('Noticias de hoy', '📰'))
 EJEMPLOS.insert(14, ('¿Mi cuñado puede trabajar en mi oficina?', '👪'))
+# El modo Ambientalista (29-10-2026) trae además las suyas: cada pregunta se
+# muestra solo en su modo (modo_de), así que estas no estorban en los otros.
+EJEMPLOS.extend([('Mapa ambiental de megaobras por estado', '🗺️'), ('¿Es cierto que el Tren Maya contamina?', '🚆'),
+                 ('¿Cuánto multa la PROFEPA?', '⚖️'), ('¿Cuánto presupuesto tiene la PROFEPA?', '🌎')])
 
+
+
+# Los cuatro modos del Auditor (decisión del autor, 29-10-2026): las
+# herramientas se mudaron a la Enciclopedia y el Auditor trabaja como sus
+# «versiones», igual que un asistente de IA en el que eliges el modelo. El
+# modo cambia cómo investiga y cómo contesta, nunca los datos: en los cuatro
+# las cifras salen de la misma base, con su fuente y su estado (AGENTS.md §2).
+# (id, icono, nombre, lema, qué hace, herramientas cuyas aplicaciones usa,
+#  preguntas extra para sus aplicaciones, saludo)
+MODO_INICIAL = 'ciudadano'
+MODOS = [
+    ('inspector', '🔍', 'Inspector', 'La investigación más completa',
+     'Toda la base de datos, a fondo: expedientes de la ASF, entes públicos, estados de cuenta, RFC y lista negra del SAT, '
+     'nepotismo, contratos y megaobras. Te doy la cifra, la cuenta y todas sus fuentes.',
+     ('inspector', 'obras'), (),
+     '<p>Estoy en <b>modo Inspector</b>: investigo con toda la base de datos de la plataforma. Pégame un <b>RFC</b>, un <b>folio</b> o la liga de una nota, '
+     'pídeme el <b>diagnóstico de un ente</b> («diagnóstico de Pemex»), un <b>expediente de la ASF</b> o la cuenta de una <b>megaobra</b>.</p>'
+     '<p>Te contesto con la cifra, la operación y sus documentos. Si quieres el respaldo completo, toca <b>«Generar dictamen»</b>.</p>'),
+    ('reportero', '📰', 'Reportero', 'Investiga un tema como una nota',
+     'Pregúntame por un tema informativo y te lo cuento como reportero: qué pasó, quién aparece, qué dice el documento, '
+     'qué falta y qué respondió la parte aludida. Aquí viven las Noticias y el verificador de notas.',
+     (), (('📰', 'Noticias de hoy'), ('🔎', 'Contrasta una nota'), ('📂', 'Expediente de Segalmex'),
+          ('👪', 'Nepotismo y parentesco'), ('📰', '¿Quién es Genaro García Luna?')),
+     '<p>Estoy en <b>modo Reportero</b>: te cuento un tema como una nota, pero parada en documentos. Pregúntame <b>qué pasó</b> con un caso, '
+     '<b>quién es</b> un personaje público o <b>si es cierto</b> lo que circula, o pégame la <b>liga de una nota</b> y la contrasto.</p>'
+     '<p>Una nota de prensa es mi punto de partida, nunca mi fuente: cada cifra la coteja el documento oficial. Y <b>una acusación no es una condena</b>.</p>'),
+    ('ciudadano', '🙋', 'Ciudadano', 'Te lo explico como un amigo',
+     'Lo más sencillo: preguntas de todos los días, en corto y con un ejemplo. Cuánto te retienen, cuánto debe tu estado, '
+     'qué significa una palabra. Aquí viven tu estado de cuenta y la Calculadora Cívica.',
+     ('calculadora',), (),
+     '<p>¡Hola! Soy el Auditor y estoy en <b>modo Ciudadano</b>. Pregúntame lo que quieras del dinero público, como se lo preguntarías a un amigo: '
+     '<b>cuánto te retienen</b> de tu sueldo, <b>cuánto debe tu estado</b>, <b>cuánta lana le llega a tu municipio</b> o <b>qué significa</b> algún término.</p>'
+     '<p>Te contesto en corto y con datos oficiales. Si quieres ir a fondo, toca <b>«Saber más»</b>; y si quieres investigar en serio, cámbiame a otro modo arriba.</p>'),
+    ('ambientalista', '🌎', 'Ambientalista', 'El costo y el daño ambiental',
+     'Todo lo que tiene que ver con el ambiente: cuánto cuesta el daño, a dónde va la basura, cuánto se invierte en protegerlo, '
+     'qué resuelve la PROFEPA y quién paga cada proyecto. Aquí vive el Costo Ambiental.',
+     ('ambiente',), (('🗑️', '¿Cuánta basura se genera en México?'),),
+     '<p>Estoy en <b>modo Ambientalista</b>: investigo el <b>costo y el daño ambiental</b>. Pregúntame cuánto le cuesta al país el daño, '
+     '<b>a dónde va la basura</b>, cuánto se invierte en protegerlo o qué resuelve la <b>PROFEPA</b>.</p>'
+     '<p>El deterioro del ambiente también es gasto público: lo pagamos en agua, aire, suelo y basura. Y te digo quién paga cada proyecto, el gobierno o un privado.</p>'),
+]
+# A qué modo pertenece cada pregunta de ejemplo (sin acentos ni signos);
+# la que no cae en ninguno es del modo Inspector.
+MODO_EJEMPLO = [
+    ('ambientalista', r'ambiental|basura|profepa|contamina'),
+    ('reportero', r'^es cierto|noticia|nota$|que paso|quien es|auditaran|observo|sin acceso|consultas|asuntos resuelve|cunado'),
+    ('ciudadano', r'civico|^que es|cuanto gana|dolar|valen|reloj de la deuda|%|cuantos (diputados|senadores)|quien preside|'
+                  r'cuanto se recauda|eleccion|circuitos|en que se gasta|cuanto debe|lana|que estados de cuenta'),
+]
+
+
+def modo_de(q):
+    import unicodedata
+    t = unicodedata.normalize('NFD', limpio(q).lower())
+    t = re.sub(r'[^a-z0-9% ]', '', t).strip()
+    return next((m for m, rx in MODO_EJEMPLO if re.search(rx, t)), 'inspector')
+
+
+def _modos_html():
+    """El selector de modo de la cabecera, la franja con las aplicaciones del
+    modo elegido y su saludo. Cada aplicación es una pregunta: el chat la
+    reconoce por su nombre y la abre en su respuesta, como hasta ahora."""
+    import apartados
+    opciones, franjas, holas = [], [], []
+    for mid, ico, nom, lema, que, herrs, extra, hola in MODOS:
+        apps = [(t[1], t[2]) for clave in herrs for t in next(h for h in apartados.HERRAMIENTAS if h[1] == clave)[7]] + list(extra)
+        opciones.append('              <li><button type="button" class="pa-modo-op" data-pa-modo="%s" data-nom="Modo %s" data-lema="%s" aria-pressed="false">'
+                        '<span class="pa-modo-ico" aria-hidden="true">%s</span><span><b>Modo %s</b><small>%s</small></span></button></li>'
+                        % (mid, html.escape(nom), html.escape(lema[0].lower() + lema[1:], quote=True), ico, html.escape(nom), html.escape(lema)))
+        franjas.append(
+            '          <details class="pa-modo-franja" data-modo="%s"%s>\n'
+            '            <summary><span aria-hidden="true">%s</span> <b>Modo %s</b><span class="pa-modo-lema"> · %s</span>'
+            '<span class="pa-modo-n">%d aplicaciones ▾</span></summary>\n'
+            '            <p>%s</p>\n            <div class="pa-modo-apps">\n%s\n            </div>\n          </details>' % (
+                mid, '' if mid == MODO_INICIAL else ' hidden', ico, html.escape(nom), html.escape(lema), len(apps), html.escape(que),
+                '\n'.join('              <button type="button" class="pa-modo-app" data-pa-pregunta="%s"><span aria-hidden="true">%s</span> %s</button>'
+                          % (html.escape(n, quote=True), i, html.escape(n)) for i, n in apps)))
+        holas.append('                <div class="pa-hola-modo" data-modo="%s"%s>%s</div>' % (mid, '' if mid == MODO_INICIAL else ' hidden', hola))
+    return '\n'.join(opciones), '\n'.join(franjas), '\n'.join(holas)
 
 
 def pagina(cuenta, canal='', herramientas=()):
-    """herramientas: (archivo, icono, nombre, frase, imagen) de cada tarjeta
-    del menú «Herramientas» de la cabecera (pedido del autor, 23-10-2026)."""
+    """herramientas ya no se usa (29-10-2026: el menú «Herramientas» de la
+    cabecera es ahora el selector de modo); se queda para no romper a quien
+    lo llame."""
     total = sum(cuenta.values())
-    herr = '\n'.join('              <li><a class="pa-herr-tj" href="%s"><img src="%s" alt="" width="96" height="64" loading="lazy">'
-                     '<span><b><span aria-hidden="true">%s</span> %s</b><small>%s</small></span></a></li>'
-                     % (html.escape(a, quote=True), html.escape(im, quote=True), i, html.escape(n), html.escape(f))
-                     for a, i, n, f, im in herramientas)
-    ej = '\n'.join('              <button type="button" class="pa-ej" data-pa-pregunta="%s"><span aria-hidden="true">%s</span> %s</button>'
-                   % (html.escape(q, quote=True), i, html.escape(q)) for q, i in EJEMPLOS)
+    opciones, franjas, holas = _modos_html()
+    ej = '\n'.join('              <button type="button" class="pa-ej" data-pa-pregunta="%s" data-modo="%s"><span aria-hidden="true">%s</span> %s</button>'
+                   % (html.escape(q, quote=True), modo_de(q), i, html.escape(q)) for q, i in EJEMPLOS)
     import apartados  # «Lo que aún no sé» llega a pregunta-bot cuando hay base (paso 2.8)
     funcion = (' data-funcion="%s/pregunta-bot"' % html.escape(apartados.FUNCIONES.rstrip('/'), quote=True)) if apartados.FUNCIONES else ''
-    return '''<div class="pa" id="paApp" data-canal="%s"%s>
+    return '''<div class="pa" id="paApp" data-canal="%s"%s data-modo="%s">
         <div class="pa-chat">
           <div class="pa-chat-cab">
             <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="52" height="40">
             <div><b>Pregúntale al Auditor</b><small><span class="pa-enlinea" aria-hidden="true"></span> En línea · contesta con datos oficiales</small></div>
             <span class="pa-cab-acc">
-            <button type="button" class="pa-como-abre pa-herr-abre" id="paHerrAbre" aria-controls="paHerr" aria-expanded="false"><span aria-hidden="true">🧰</span> Herramientas <span class="pa-herr-flecha" aria-hidden="true">▾</span></button>
+            <button type="button" class="pa-como-abre pa-herr-abre" id="paHerrAbre" aria-controls="paHerr" aria-expanded="false" aria-label="Cambiar el modo del Auditor"><span class="pa-modo-actual" id="paModoActual">🙋 Modo Ciudadano</span> <span class="pa-herr-flecha" aria-hidden="true">▾</span></button>
             <button type="button" class="pa-como-abre" id="paComoAbre" aria-controls="paComo" aria-expanded="false"><span aria-hidden="true">❓</span> Cómo platicar conmigo</button>
             </span>
-            <nav class="pa-herr" id="paHerr" aria-label="Herramientas del Auditor Virtual" hidden>
-              <p>Las cuatro herramientas del auditor. Cada una abre su propia página.</p>
+            <div class="pa-herr pa-modos" id="paHerr" role="group" aria-label="Modos del Auditor" hidden>
+              <p>Elige cómo quieres que investigue. Los datos son los mismos en los cuatro modos; cambia la forma de buscar y de contestarte.</p>
               <ul>
 %s
               </ul>
-            </nav>
+            </div>
           </div>
+%s
           <ol class="pa-hilo" id="paHilo" aria-live="polite">
             <li class="pa-msg pa-bot pa-hola">
               <div class="pa-burbuja">
-                <p>¡Hola! Soy el Auditor. Pregúntame lo que quieras del dinero público, como se lo preguntarías a un amigo: <b>cuánto debe tu estado</b>, <b>cuánta lana le llega a tu municipio</b>, <b>cuánto gana un diputado</b> o <b>qué significa</b> algún término.</p>
-                <p>Te contesto en corto y con datos oficiales. Si quieres ir a fondo, toca <b>«Saber más»</b> y te llevo a la página donde está la información; si necesitas el respaldo, <b>«Generar dictamen»</b>.</p>
-                <p>Y aquí mismo investigas con las siete aplicaciones del <b>Modo Inspector</b>: pégame un RFC, un folio o la liga de una nota, o pídeme el diagnóstico de un ente. Y te cuento cada <b>megaobra</b>: lo que costó, lo que pierde y quién la hizo.</p>
+%s
               </div>
             </li>
           </ol>
@@ -791,6 +871,7 @@ def pagina(cuenta, canal='', herramientas=()):
           <div class="glos-drawer-cuerpo">
           <h3 id="paComoT">Cómo platicar conmigo</h3>
           <ol>
+            <li><b>Elige mi modo</b> con el botón de arriba: <b>🔍 Inspector</b> (la investigación más completa), <b>📰 Reportero</b> (un tema contado como nota, con las Noticias), <b>🙋 Ciudadano</b> (en corto, como un amigo) o <b>🌎 Ambientalista</b> (el costo y el daño ambiental). Cada modo trae sus aplicaciones y sus preguntas de ejemplo; los datos son los mismos en los cuatro.</li>
             <li><b>Escríbeme como hablas.</b> Entiendo «lana», «varo», «¿cuánto se clavaron?», siglas como CDMX o Edomex, y preguntas que siguen a la anterior: «¿y Nuevo León?», «¿y por habitante?», «¿y el que menos?».</li>
             <li><b>Te contesto en corto:</b> la cifra, qué quiere decir y en qué lugar queda. Sé de los 32 estados, de los municipios, de los sueldos de los cargos públicos, de cada sexenio desde 1989, de %s términos del glosario y de las páginas de la plataforma.</li>
             <li><b>Saco cuentas:</b> ordeno, comparo, sumo y saco porcentajes y márgenes. Cuando hago una cuenta, te digo cuál fue.</li>
@@ -817,7 +898,7 @@ def pagina(cuenta, canal='', herramientas=()):
           <p class="pa-aviso"><b>Platico como chat, pero no invento.</b> No soy una inteligencia artificial que redacta: entiendo tu pregunta y contesto solo con cifras que la plataforma ya publicó con su documento (%s fichas y %s municipios). Si no lo tengo, te lo digo. Tu pregunta no sale de tu navegador.</p>
           </div>
         </aside>
-      </div>''' % (html.escape(canal, quote=True), funcion, herr, ej, format(cuenta.get('glosario', 0), ','),
+      </div>''' % (html.escape(canal, quote=True), funcion, MODO_INICIAL, opciones, franjas, holas, ej, format(cuenta.get('glosario', 0), ','),
                  format(total - cuenta.get('municipio', 0), ','), format(cuenta.get('municipio', 0), ','))
 
 

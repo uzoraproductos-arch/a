@@ -8,7 +8,7 @@ La Enciclopedia queda fuera porque está congelada.
 | Concepto | Cantidad |
 |---|---|
 | Páginas revisadas | 240 |
-| Páginas que solo redirigen | 29 |
+| Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
 
@@ -57,7 +57,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `contexto-dimensional-presupuestaria.html` | Dimensión presupuestaria · Auditavisión | apartados.py | 33 | 0 | 3 | 1 | 0 |
 | `contexto-dimensional-renglones.html` | Renglones que no se suman · Auditavisión | apartados.py | 34 | 0 | 3 | 0 | 1 |
 | `contexto-dimensional-social.html` | Dimensión social · Auditavisión | apartados.py | 34 | 0 | 6 | 0 | 1 |
-| `contratos-publicos.html` | Contratos públicos · Auditavisión | apartados.py | 33 | 0 | 1 | 1 | 0 |
+| `contratos-publicos.html` | Contratos públicos · Auditavisión | apartados.py | 35 | 0 | 1 | 1 | 0 |
 | `datos-abiertos.html` | Datos abiertos · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
 | `datos-ambiente-basura.html` | La basura · Auditavisión | apartados.py | 41 | 0 | 14 | 9 | 1 |
 | `datos-ambiente-desglose.html` | Qué se acabó y qué se ensució · Auditavisión | apartados.py | 41 | 0 | 11 | 1 | 0 |
@@ -97,7 +97,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `enciclopedia-auditavision.html` | Enciclopedia · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `enciclopedia.html` | La Enciclopedia antigua · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `estado-de-cuenta.html` | Contexto dimensional · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 0 |
-| `expedientes.html` | Los casos por aclarar · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
+| `expedientes.html` | Los casos por aclarar · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
 | `fuentes-del-auditor.html` | Fuentes del auditor · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `fuentes-oficiales.html` | Referencias · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
 | `garantias-brujula.html` | La brújula: ¿a qué puerta toco? · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
@@ -106,61 +106,61 @@ La Enciclopedia queda fuera porque está congelada.
 | `garantias-reto.html` | ¿Mito o realidad? · Auditavisión | apartados.py | 37 | 0 | 0 | 0 | 0 |
 | `garantias.html` | Garantías cívicas · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
 | `glosario.html` | Diccionario · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
-| `herramienta-ambiente-auditor.html` | Auditor ambiental · Auditavisión | apartados.py | 40 | 0 | 73 | 41 | 0 |
+| `herramienta-ambiente-auditor.html` | Auditor ambiental · Auditavisión | apartados.py | 42 | 0 | 73 | 41 | 0 |
 | `herramienta-ambiente-basura.html` | Basura y protección · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `herramienta-ambiente-crisis.html` | Crisis ambientales · Auditavisión | apartados.py | 51 | 0 | 22 | 7 | 21 |
-| `herramienta-ambiente-inversion.html` | Simulador de inversión ambiental · Auditavisión | apartados.py | 37 | 0 | 5 | 6 | 0 |
-| `herramienta-ambiente-pib.html` | ¿Cuánto del crecimiento es real? · Auditavisión | apartados.py | 38 | 0 | 3 | 0 | 0 |
-| `herramienta-ambiente-reloj.html` | El reloj y el año · Auditavisión | apartados.py | 46 | 0 | 38 | 57 | 8 |
-| `herramienta-ambiente-ticket.html` | Tu estado de cuenta ambiental · Auditavisión | apartados.py | 44 | 0 | 9 | 12 | 0 |
-| `herramienta-ambiente.html` | Costo Ambiental · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
-| `herramienta-calculadora-compara.html` | Tú contra ellos · Auditavisión | apartados.py | 42 | 0 | 46 | 19 | 9 |
-| `herramienta-calculadora-reloj.html` | El reloj de la deuda · Auditavisión | apartados.py | 46 | 0 | 6 | 8 | 1 |
-| `herramienta-calculadora-ticket-estado.html` | Tu estado de cuenta · Auditavisión | apartados.py | 61 | 0 | 17 | 20 | 0 |
-| `herramienta-calculadora-ticket-ingreso.html` | Tu ingreso · Auditavisión | apartados.py | 60 | 0 | 16 | 20 | 0 |
-| `herramienta-calculadora-ticket-reparto.html` | A dónde va cada peso · Auditavisión | apartados.py | 63 | 0 | 17 | 20 | 0 |
-| `herramienta-calculadora-ticket-retienen.html` | Lo que te retienen · Auditavisión | apartados.py | 63 | 0 | 17 | 20 | 0 |
-| `herramienta-calculadora-ticket.html` | Tu estado de cuenta · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
-| `herramienta-calculadora.html` | Calculadora Cívica · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-asf-2025.html` | La Cuenta Pública 2025 · Auditavisión | apartados.py | 34 | 0 | 6 | 0 | 0 |
-| `herramienta-inspector-asf-acciones.html` | Qué significa cada acción · Auditavisión | apartados.py | 34 | 0 | 1 | 0 | 0 |
-| `herramienta-inspector-asf-autoridades.html` | Quién fiscaliza · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-asf-calendario.html` | El seguimiento 2024–2027 · Auditavisión | apartados.py | 33 | 0 | 0 | 3 | 0 |
-| `herramienta-inspector-asf-catalogo.html` | Catálogo de cifras oficiales · Auditavisión | apartados.py | 47 | 0 | 245 | 3 | 0 |
-| `herramienta-inspector-asf-cifras.html` | La Cuenta Pública 2024 en cifras · Auditavisión | apartados.py | 33 | 0 | 6 | 1 | 0 |
-| `herramienta-inspector-asf-documentos.html` | Documentos y descarga · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-asf-donde.html` | Dónde se concentra · Auditavisión | apartados.py | 34 | 0 | 1 | 2 | 0 |
-| `herramienta-inspector-asf-estado.html` | Tu estado · Auditavisión | apartados.py | 34 | 0 | 1 | 8 | 0 |
-| `herramienta-inspector-asf-imagenes.html` | Auditoría en imágenes · Auditavisión | apartados.py | 131 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-asf-serie.html` | Seis años de revisiones · Auditavisión | apartados.py | 33 | 0 | 10 | 4 | 1 |
-| `herramienta-inspector-asf.html` | Expedientes de casos de la ASF · Auditavisión | apartados.py | 47 | 0 | 3 | 3 | 0 |
+| `herramienta-ambiente-crisis.html` | Crisis ambientales · Auditavisión | apartados.py | 53 | 0 | 22 | 7 | 21 |
+| `herramienta-ambiente-inversion.html` | Simulador de inversión ambiental · Auditavisión | apartados.py | 39 | 0 | 5 | 6 | 0 |
+| `herramienta-ambiente-pib.html` | ¿Cuánto del crecimiento es real? · Auditavisión | apartados.py | 40 | 0 | 3 | 0 | 0 |
+| `herramienta-ambiente-reloj.html` | El reloj y el año · Auditavisión | apartados.py | 48 | 0 | 38 | 57 | 8 |
+| `herramienta-ambiente-ticket.html` | Tu estado de cuenta ambiental · Auditavisión | apartados.py | 46 | 0 | 9 | 12 | 0 |
+| `herramienta-ambiente.html` | Costo Ambiental · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 0 |
+| `herramienta-calculadora-compara.html` | Tú contra ellos · Auditavisión | apartados.py | 44 | 0 | 46 | 19 | 9 |
+| `herramienta-calculadora-reloj.html` | El reloj de la deuda · Auditavisión | apartados.py | 48 | 0 | 6 | 8 | 1 |
+| `herramienta-calculadora-ticket-estado.html` | Tu estado de cuenta · Auditavisión | apartados.py | 62 | 0 | 17 | 20 | 0 |
+| `herramienta-calculadora-ticket-ingreso.html` | Tu ingreso · Auditavisión | apartados.py | 61 | 0 | 16 | 20 | 0 |
+| `herramienta-calculadora-ticket-reparto.html` | A dónde va cada peso · Auditavisión | apartados.py | 64 | 0 | 17 | 20 | 0 |
+| `herramienta-calculadora-ticket-retienen.html` | Lo que te retienen · Auditavisión | apartados.py | 64 | 0 | 17 | 20 | 0 |
+| `herramienta-calculadora-ticket.html` | Tu estado de cuenta · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
+| `herramienta-calculadora.html` | Calculadora Cívica · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector-asf-2025.html` | La Cuenta Pública 2025 · Auditavisión | apartados.py | 35 | 0 | 6 | 0 | 0 |
+| `herramienta-inspector-asf-acciones.html` | Qué significa cada acción · Auditavisión | apartados.py | 35 | 0 | 1 | 0 | 0 |
+| `herramienta-inspector-asf-autoridades.html` | Quién fiscaliza · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector-asf-calendario.html` | El seguimiento 2024–2027 · Auditavisión | apartados.py | 34 | 0 | 0 | 3 | 0 |
+| `herramienta-inspector-asf-catalogo.html` | Catálogo de cifras oficiales · Auditavisión | apartados.py | 48 | 0 | 245 | 3 | 0 |
+| `herramienta-inspector-asf-cifras.html` | La Cuenta Pública 2024 en cifras · Auditavisión | apartados.py | 34 | 0 | 6 | 1 | 0 |
+| `herramienta-inspector-asf-documentos.html` | Documentos y descarga · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector-asf-donde.html` | Dónde se concentra · Auditavisión | apartados.py | 35 | 0 | 1 | 2 | 0 |
+| `herramienta-inspector-asf-estado.html` | Tu estado · Auditavisión | apartados.py | 35 | 0 | 1 | 8 | 0 |
+| `herramienta-inspector-asf-imagenes.html` | Auditoría en imágenes · Auditavisión | apartados.py | 132 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector-asf-serie.html` | Seis años de revisiones · Auditavisión | apartados.py | 34 | 0 | 10 | 4 | 1 |
+| `herramienta-inspector-asf.html` | Expedientes de casos de la ASF · Auditavisión | apartados.py | 49 | 0 | 3 | 3 | 0 |
 | `herramienta-inspector-dictamen.html` | Dictamen cívico independiente · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-efos.html` | Lista negra del SAT · Auditavisión | apartados.py | 40 | 0 | 2 | 7 | 0 |
+| `herramienta-inspector-efos.html` | Lista negra del SAT · Auditavisión | apartados.py | 42 | 0 | 2 | 7 | 0 |
 | `herramienta-inspector-entes-directorio.html` | Directorio de entes públicos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-entes.html` | Auditor de entes públicos · Auditavisión | apartados.py | 48 | 0 | 49 | 3 | 0 |
+| `herramienta-inspector-entes.html` | Auditor de entes públicos · Auditavisión | apartados.py | 50 | 0 | 49 | 3 | 0 |
 | `herramienta-inspector-investigaciones.html` | Grandes investigaciones · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-nepotismo.html` | Nepotismo y parentesco · Auditavisión | apartados.py | 35 | 0 | 0 | 1 | 0 |
+| `herramienta-inspector-nepotismo.html` | Nepotismo y parentesco · Auditavisión | apartados.py | 37 | 0 | 0 | 1 | 0 |
 | `herramienta-inspector-nota-cifras.html` | Contrasta una nota · las cifras · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-nota-liga.html` | Contrasta una nota · la nota · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-nota-veredicto.html` | Contrasta una nota · el veredicto · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-nota.html` | Contrasta una nota · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-pregunta.html` | Auditor Virtual · Auditavisión | apartados.py | 35 | 0 | 1 | 1 | 1 |
+| `herramienta-inspector-nota.html` | Contrasta una nota · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector-pregunta.html` | Auditor Virtual · Auditavisión | apartados.py | 31 | 0 | 1 | 1 | 1 |
 | `herramienta-inspector-radar.html` | Radar por entidad · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-verifica.html` | Verifica un estado de cuenta · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector.html` | Modo Inspector · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
-| `herramienta-megaobras-cero.html` | Las cuatro cifras y los rescates · Auditavisión | apartados.py | 44 | 0 | 35 | 55 | 7 |
-| `herramienta-megaobras-investiga.html` | Haz tu propia investigación · Auditavisión | apartados.py | 105 | 0 | 59 | 94 | 22 |
+| `herramienta-inspector-verifica.html` | Verifica un estado de cuenta · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector.html` | Modo Inspector · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 0 |
+| `herramienta-megaobras-cero.html` | Las cuatro cifras y los rescates · Auditavisión | apartados.py | 46 | 0 | 35 | 55 | 7 |
+| `herramienta-megaobras-investiga.html` | Haz tu propia investigación · Auditavisión | apartados.py | 107 | 0 | 59 | 94 | 22 |
 | `herramienta-megaobras-pulso-calculo.html` | Cómo se calcula · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-megaobras-pulso-cifras.html` | Las cuatro cifras y los rescates · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-megaobras-pulso-composicion.html` | De qué está hecho el total · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `herramienta-megaobras-pulso-cuenta.html` | La cuenta de cada obra y el ritmo de la pérdida · Auditavisión | apartados.py | 60 | 0 | 75 | 58 | 22 |
+| `herramienta-megaobras-pulso-cuenta.html` | La cuenta de cada obra y el ritmo de la pérdida · Auditavisión | apartados.py | 61 | 0 | 75 | 58 | 22 |
 | `herramienta-megaobras-pulso-ritmo.html` | El ritmo de la pérdida · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-megaobras-pulso.html` | El pulso del gasto · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `herramienta-megaobras-sector.html` | Obra por obra, por industria · Auditavisión | apartados.py | 80 | 0 | 110 | 47 | 30 |
+| `herramienta-megaobras-sector.html` | Obra por obra, por industria · Auditavisión | apartados.py | 82 | 0 | 110 | 47 | 30 |
 | `herramienta-megaobras-sexenios.html` | Los seis sexenios · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `herramienta-megaobras-tabla.html` | En qué invirtió cada presidente · Auditavisión | apartados.py | 82 | 0 | 19 | 38 | 6 |
-| `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 42 | 0 | 0 | 2 | 1 |
-| `herramientas.html` | Herramientas · Auditavisión | apartados.py | 33 | 0 | 1 | 1 | 1 |
+| `herramienta-megaobras-tabla.html` | En qué invirtió cada presidente · Auditavisión | apartados.py | 84 | 0 | 19 | 38 | 6 |
+| `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 44 | 0 | 0 | 2 | 1 |
+| `herramientas.html` | Herramientas · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 59 | 0 | 3 | 6 | 1 |
 | `indice.html` | Índice general · Auditavisión | apartados.py | 241 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
@@ -243,7 +243,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
-| `radar-estado-de-cuenta.html` | Estado de cuenta administrativo · Auditavisión | apartados.py | 32 | 0 | 0 | 0 | 0 |
+| `radar-estado-de-cuenta.html` | Estado de cuenta administrativo · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
 | `radar-hacendario.html` | Radar hacendario · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
 | `radar-hoy.html` | Hoy y los estados de cuenta · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-peso-maquina.html` | La máquina del tiempo del peso · Auditavisión | apartados.py | 37 | 0 | 0 | 0 | 0 |
@@ -253,9 +253,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `radar-presupuesto-en-curso.html` | Hoy: el presupuesto en curso · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-reloj.html` | El reloj de cada administración · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `radar-tablero.html` | El tablero · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
-| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
+| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
-| `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 31 | 0 | 0 | 0 | 0 |
+| `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
 
 Los chips que pinta el motor al abrir un módulo no se cuentan aquí: solo los escritos en el HTML.
 
@@ -281,6 +281,7 @@ Los chips que pinta el motor al abrir un módulo no se cuentan aquí: solo los e
 | `herramienta-megaobras-pulso-ritmo.html` | `herramienta-megaobras-pulso-cuenta.html#mpRitmo` |
 | `herramienta-megaobras-pulso.html` | `herramienta-megaobras.html` |
 | `herramienta-megaobras-sexenios.html` | `herramienta-megaobras-tabla.html` |
+| `herramientas.html` | `numeros-herramientas-del-auditor.html` |
 | `nepotismo-y-cargos-publicos.html` | `herramienta-inspector-nepotismo.html` |
 | `numeros-el-peso-de-2026.html` | `numeros-cuanto-dinero-es.html#numPeso` |
 | `numeros-la-deuda.html` | `numeros-cuentas-claras.html` |
@@ -303,7 +304,7 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 | Destino | Veces enlazado |
 |---|---:|
-| `nota` | 2 |
+| `nota` | 1 |
 
 ## Registro de pendientes
 

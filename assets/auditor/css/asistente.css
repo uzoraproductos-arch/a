@@ -436,3 +436,27 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .pa-sigue ul { margin: 4px 0 10px; padding-left: 20px; }
 .pa-sigue li { margin-bottom: 6px; }
 .pa-sigue a { display: inline-block; min-height: 24px; }
+/* Los cuatro modos del Auditor (29-10-2026): el botón de la cabecera elige
+   el modo y la franja de arriba del hilo trae las aplicaciones del modo. */
+.pa-chat-cab > .pa-modos { flex: 1 1 100%; }
+.pa-modos ul { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.pa-modos .pa-modo-op { display: flex; align-items: center; gap: 12px; width: 100%; height: 100%; min-height: 64px; box-sizing: border-box; padding: 10px 12px; text-align: left; cursor: pointer; border: 1px solid #dfe5f0; border-radius: 10px; background: var(--pa-claro); color: #0b2a63; font: inherit; }
+.pa-modos .pa-modo-op:hover, .pa-modos .pa-modo-op:focus-visible { border-color: var(--pa); background: #ffffff; }
+.pa-modos .pa-modo-op[aria-pressed="true"] { border: 2px solid var(--pa); background: #ffffff; box-shadow: 0 0 0 3px #e2e6ec; }
+.pa-modo-ico { display: inline-grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: #ffffff; font-size: 20px; }
+.pa-modo-op b { display: block; font-size: 16px; color: #0b2a63; }
+.pa-modo-op small { display: block; font-size: 14px; color: #44526b; margin-top: 2px; }
+.pa-modo-franja { margin: 0; padding: 0 18px; border-bottom: 1px solid #e2e6ec; background: #ffffff; color: #33415c; }
+.pa-modo-franja[hidden] { display: none; }
+.pa-modo-franja summary { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; min-height: 48px; cursor: pointer; list-style: none; font-size: 16px; color: #0b2a63; }
+.pa-modo-franja summary::-webkit-details-marker { display: none; }
+.pa-modo-lema { color: #44526b; }
+.pa-modo-n { margin-left: auto; padding: 4px 12px; border-radius: 999px; background: var(--pa-claro); font-size: 14px; font-weight: 600; color: var(--pa); }
+.pa-modo-franja p { margin: 0 0 10px; font-size: 16px; line-height: 1.5; }
+.pa-modo-apps { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 14px; }
+.pa-modo-app { font: 600 15px/1.3 Inter, system-ui, sans-serif; cursor: pointer; border: 1px solid #c9d2e3; background: var(--pa-claro); color: #1c2a44; border-radius: 999px; padding: 8px 14px; min-height: 44px; text-align: left; }
+.pa-modo-app:hover, .pa-modo-app:focus-visible { border-color: var(--pa); background: #ffffff; }
+.pa-modo-aviso .pa-burbuja { background: #fff8e6; }
+@media (max-width: 560px) {
+  .pa-modo-lema { display: none; }
+}

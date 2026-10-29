@@ -2043,18 +2043,54 @@
       return;
     }
   });
-  /* El botón «Herramientas» despliega las cuatro herramientas (23-10-2026);
-     se cierra con Escape o al tocar fuera. */
+  /* Los cuatro modos del Auditor (29-10-2026): el botón de la cabecera, que
+     antes desplegaba las herramientas, ahora elige el modo. El modo cambia el
+     saludo, la franja de aplicaciones y las preguntas de ejemplo; los datos
+     son los mismos en los cuatro. Se recuerda en este navegador y se puede
+     pedir por la dirección (?modo=reportero). */
+  var app = document.getElementById('paApp'), MODOS_OK = { inspector: 1, reportero: 1, ciudadano: 1, ambientalista: 1 };
+  function modoActual() { return app.getAttribute('data-modo'); }
+  function poneModo(m, avisa) {
+    if (!MODOS_OK[m]) return;
+    var antes = modoActual();
+    app.setAttribute('data-modo', m);
+    Array.prototype.forEach.call(app.querySelectorAll('.pa-hola-modo, .pa-modo-franja'), function (x) {
+      x.hidden = x.getAttribute('data-modo') !== m;
+    });
+    var op = null;
+    Array.prototype.forEach.call(app.querySelectorAll('.pa-modo-op'), function (b) {
+      var si = b.getAttribute('data-pa-modo') === m;
+      b.setAttribute('aria-pressed', si ? 'true' : 'false');
+      if (si) op = b;
+    });
+    var et = document.getElementById('paModoActual');
+    /* El ícono se copia como está: iconos.js ya cambió el emoji por su trazo. */
+    var ico = op ? '<span aria-hidden="true">' + op.querySelector('.pa-modo-ico').innerHTML + '</span> ' : '';
+    if (et && op) et.innerHTML = ico + esc(op.getAttribute('data-nom'));
+    try { localStorage.setItem('av-modo', m); } catch (e) { /* sin almacenamiento: dura esta vista */ }
+    app.dispatchEvent(new CustomEvent('pa-modo', { detail: m }));
+    if (avisa && antes !== m && historial.length && op) {
+      hilo.insertAdjacentHTML('beforeend', '<li class="pa-msg pa-bot pa-modo-aviso"><div class="pa-burbuja"><p>' +
+        ico + 'Ahora estoy en <b>' + esc(op.getAttribute('data-nom')) + '</b>: ' + esc(op.getAttribute('data-lema')) + '.</p></div></li>');
+      hilo.scrollTop = hilo.scrollHeight;
+    }
+  }
   (function () {
     var bt = document.getElementById('paHerrAbre'), menu = document.getElementById('paHerr');
     if (!bt || !menu) return;
     function pon(abierto, foco) {
       menu.hidden = !abierto;
       bt.setAttribute('aria-expanded', abierto ? 'true' : 'false');
-      if (abierto) { var a = menu.querySelector('a'); if (a) a.focus({ preventScroll: true }); }
+      if (abierto) { var a = menu.querySelector('[aria-pressed="true"]') || menu.querySelector('button'); if (a) a.focus({ preventScroll: true }); }
       else if (foco) bt.focus({ preventScroll: true });
     }
     bt.addEventListener('click', function () { pon(menu.hidden); });
+    menu.addEventListener('click', function (ev) {
+      var b = ev.target.closest ? ev.target.closest('[data-pa-modo]') : null;
+      if (!b) return;
+      poneModo(b.getAttribute('data-pa-modo'), true);
+      pon(false, true);
+    });
     document.addEventListener('click', function (ev) {
       if (!menu.hidden && !menu.contains(ev.target) && !bt.contains(ev.target)) pon(false);
     });
@@ -2097,22 +2133,29 @@
   (function () {
     var lista = document.getElementById('paEjsLista');
     if (!lista) return;
-    var bts = Array.prototype.slice.call(lista.querySelectorAll('.pa-ej'));
+    var todas = Array.prototype.slice.call(lista.querySelectorAll('.pa-ej')), bts = todas;
     var otras = document.getElementById('paEjsOtras');
     var tanda = 0, n = 0;
     function porTanda() { return window.innerWidth < 640 ? 4 : 6; }
     function muestra(k) {
       var ini = (k * n) % bts.length;
+      todas.forEach(function (b) { if (bts.indexOf(b) < 0) b.hidden = true; });
       bts.forEach(function (b, i) {
         var pos = (i - ini + bts.length) % bts.length;
         b.hidden = pos >= n;
         b.style.setProperty('--pa-i', pos);
       });
     }
-    function mide() { n = Math.min(porTanda(), bts.length); muestra(tanda); }
-    if (bts.length <= porTanda()) return;
-    otras.hidden = false;
-    mide();
+    function mide() { n = Math.min(porTanda(), bts.length); otras.hidden = bts.length <= n; muestra(tanda); }
+    /* Cada modo muestra solo sus preguntas de ejemplo (29-10-2026). */
+    function delModo() {
+      var m = modoActual();
+      bts = todas.filter(function (b) { return b.getAttribute('data-modo') === m; });
+      if (!bts.length) bts = todas;
+      tanda = 0; mide();
+    }
+    app.addEventListener('pa-modo', delModo);
+    delModo();
     otras.addEventListener('click', function () {
       tanda++;
       muestra(tanda);
@@ -2204,6 +2247,11 @@
   pintaLista();
   if (canal) document.getElementById('paSinRespNota').innerHTML = 'La lista se guarda solo en tu navegador y no se envía sola: con «Enviarlas a Auditavisión» nos la haces llegar tú.';
   var ps = new URLSearchParams(location.search), pre = ps.get('q'), lista = ps.get('p');
+  (function () {
+    var m = ps.get('modo');
+    if (!MODOS_OK[m]) { try { m = localStorage.getItem('av-modo'); } catch (e) { m = null; } }
+    poneModo(MODOS_OK[m] ? m : modoActual());
+  })();
   if (pre) responde(pre, true);
   /* ?p= (las imágenes de la portada, 23-10-2026): la pregunta queda escrita
      y el lector decide cuándo enviarla. */
