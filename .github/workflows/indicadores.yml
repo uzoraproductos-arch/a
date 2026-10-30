@@ -1,0 +1,68 @@
+# El peso al día con Banxico (pedido del autor, 30-10-2026: «lo que
+# necesitamos de INEGI y de Banxico es llenar nuestra base de datos para que
+# nuestro chat responda a través de nuestra base»). Cada semana trae del SIE
+# de Banxico el INPC, el dólar y el euro (herramientas/actualizar_peso.py),
+# los coteja contra lo que ya está en la base y, si hay meses nuevos o un dato
+# del día más reciente, los escribe en audit-database.js, sube el sello (que
+# regenera las páginas y la base del chat) y lo empuja a la rama que publica
+# el sitio. Si Banxico cambió un mes que ya estaba, se detiene sin escribir.
+# La llave es el secreto BANXICO_TOKEN del repositorio, nunca un archivo.
+name: Indicadores de Banxico
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/funny-turing-imtm54]
+    paths: ['herramientas/actualizar_peso.py', '.github/workflows/indicadores.yml']
+  schedule:
+    - cron: '23 17 * * 5'   # viernes, 11:23 en la Ciudad de México
+
+permissions:
+  contents: write
+
+concurrency:
+  group: indicadores
+  cancel-in-progress: false
+
+jobs:
+  peso:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      BANXICO_TOKEN: ${{ secrets.BANXICO_TOKEN }}
+    steps:
+      - name: ¿Está la llave?
+        id: hay
+        run: |
+          if [ -z "$BANXICO_TOKEN" ]; then
+            echo "::warning::Falta BANXICO_TOKEN en los secretos del repositorio: no se actualiza nada."
+            echo "si=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "si=si" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.hay.outputs.si == 'si'
+        with:
+          ref: claude/funny-turing-imtm54
+      - uses: actions/setup-python@v5
+        if: steps.hay.outputs.si == 'si'
+        with:
+          python-version: '3.12'
+      - name: Traer y cotejar con Banxico
+        if: steps.hay.outputs.si == 'si'
+        run: python herramientas/actualizar_peso.py | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Guardar en la base y publicar
+        if: steps.hay.outputs.si == 'si'
+        run: |
+          if git diff --quiet -- assets/auditor/js/audit-database.js; then
+            echo "Sin cambios: la base ya tiene lo último de Banxico."
+            exit 0
+          fi
+          node --check assets/auditor/js/audit-database.js
+          python herramientas/sello.py --siguiente
+          git config user.name "Indicadores de Banxico"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Banxico: INPC, dólar y euro al día ($(date +%d-%m-%Y))"
+          git pull --rebase origin claude/funny-turing-imtm54
+          git push origin HEAD:claude/funny-turing-imtm54

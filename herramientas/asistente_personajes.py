@@ -142,6 +142,20 @@ WEB_EMPRESA = [
     ('📰', 'Noticias (prensa, sin verificar)', 'prensa', None),
 ]
 
+# Para un dato que la plataforma no tiene (pedido del autor, 30-10-2026: «si
+# acaso no la tuviéramos en nuestra base de datos… la consulta con internet»):
+# la misma pregunta, buscada primero en las fuentes oficiales de cifras y al
+# final en las noticias. Solo enlaces: el chat no afirma lo que hay ahí.
+WEB_DATO = [
+    ('🏦', 'Banco de México', 'oficial', 'site:banxico.org.mx'),
+    ('📊', 'INEGI', 'oficial', 'site:inegi.org.mx'),
+    ('💰', 'Hacienda y Transparencia Presupuestaria', 'oficial', 'site:transparenciapresupuestaria.gob.mx OR site:gob.mx/shcp'),
+    ('🏛️', 'Documentos del Gobierno de México', 'oficial', 'site:gob.mx'),
+    ('📜', 'Diario Oficial de la Federación', 'oficial', 'site:dof.gob.mx'),
+    ('🔎', 'Auditoría Superior de la Federación', 'oficial', 'site:asf.gob.mx'),
+    ('📰', 'Noticias (prensa, sin verificar)', 'prensa', None),
+]
+
 
 # La regla de las columnas (columnas.js), dicha también en el chat y en el
 # dictamen.
@@ -262,4 +276,5 @@ def datos():
             vistas[a] = p['id']
     return {'per': out, 'web': [{'ico': i, 'n': n, 'e': e, 'site': s} for i, n, e, s in WEB],
             'webEmp': [{'ico': i, 'n': n, 'e': e, 'site': s} for i, n, e, s in WEB_EMPRESA],
+            'webDato': [{'ico': i, 'n': n, 'e': e, 'site': s} for i, n, e, s in WEB_DATO],
             'pag': PAGINA, 'n': len(cols)}
