@@ -221,7 +221,7 @@ def pagina_panel():
               '    <form class="ac-semana ac-maestro" id="acMaestro" novalidate>\n'
               '      <h3>Tu código maestro</h3>\n'
               '      <p class="ac-ayuda">Son 8 números o letras que solo tú sabes. Escríbelos en la entrada de la plataforma, desde cualquier '
-              'dispositivo, y te reconoce como administración sin pedirte el correo. No cambia solo: lo cambias aquí cuando quieras. '
+              'dispositivo, y te reconoce como administración sin pedirte el correo. No cambia solo: lo cambias aquí cuando quieras. Si ese número ya era uno de tus códigos comunes, se archiva y pasa a ser tu código maestro. '
               'No uses una fecha ni un número que alguien pueda adivinar, y no lo mandes por chat ni por correo.</p>\n'
               '      <p class="ac-ayuda" id="acMaeEstado"></p>\n'
               '      <div class="ac-fila">\n'

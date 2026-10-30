@@ -338,7 +338,6 @@ select pg_temp.igual((public.codigo_admin_info()->>'puesto')::boolean::int, 0, '
 select pg_temp.debe_fallar($$select public.fijar_codigo_admin('1234567')$$, 'un código maestro de 7 números');
 select pg_temp.debe_fallar($$select public.fijar_codigo_admin('11111111')$$, 'un código maestro demasiado fácil');
 select codigo as cm from public.crear_codigo('55501234', interval '1 day') \gset
-select pg_temp.debe_fallar($$select public.fijar_codigo_admin('55501234')$$, 'un código maestro igual a un código común');
 select public.fijar_codigo_admin('4041-7263');
 select pg_temp.igual((public.codigo_admin_info()->>'puesto')::boolean::int, 1, 'el código maestro quedó puesto');
 reset role;
@@ -372,6 +371,17 @@ reset role;
 reset request.jwt.claim.sub;
 set role service_role;
 select pg_temp.igual((public.revisar_codigo_admin('MA3STR0X') = '00000000-0000-0000-0000-0000000000ad')::int, 1, 'un código maestro con letras, sin importar mayúsculas');
+reset role;
+-- 15. El maestro puede ser un código común que ya existía (30-10-2026).
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select public.fijar_codigo_admin('5550-1234');
+select pg_temp.igual((select count(*) from public.codigos where codigo = '55501234' and archivado and not revocado and nota like '%código maestro%'), 1,
+  'el código común con ese número se archiva (sin revocarlo) y lo dice su nota');
+reset role;
+reset request.jwt.claim.sub;
+set role service_role;
+select pg_temp.igual((public.revisar_codigo_admin('55501234') = '00000000-0000-0000-0000-0000000000ad')::int, 1, 'y ese número ya abre como código maestro');
 reset role;
 
 \echo 'Todas las pruebas de permisos pasaron.'
