@@ -50,7 +50,9 @@ jobs:
           python-version: '3.12'
       - name: Traer y cotejar con Banxico
         if: steps.hay.outputs.si == 'si'
-        run: python herramientas/actualizar_peso.py | tee -a "$GITHUB_STEP_SUMMARY"
+        run: |
+          set -o pipefail
+          python herramientas/actualizar_peso.py | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Guardar en la base y publicar
         if: steps.hay.outputs.si == 'si'
         run: |

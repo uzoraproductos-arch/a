@@ -45,8 +45,10 @@ def pide(ruta, token):
 
 
 def numero(t):
+    """El dato de Banxico, redondeado a 6 decimales como se guardó la base el
+    10-10-2026 (Banxico entrega 98.794999699501; la base, 98.795)."""
     t = str(t).replace(',', '').strip()
-    return None if t in ('', 'N/E') else float(t)
+    return None if t in ('', 'N/E') else round(float(t), 6)
 
 
 def mensual(datos):
@@ -80,7 +82,7 @@ def cotejar(nombre, viejo, nuevo):
     for anio, vals in viejo.items():
         nv = nuevo.get(anio, [])
         for i, v in enumerate(vals):
-            if i >= len(nv) or abs(nv[i] - v) > 1e-9 * max(1, abs(v)):
+            if i >= len(nv) or abs(nv[i] - v) > 5e-7:
                 raise SystemExit('actualizar_peso: %s de %s cambió en Banxico (%s → %s): se revisa a mano antes de escribir'
                                  % (nombre, mes_texto(anio, i + 1), v, nv[i] if i < len(nv) else 'sin dato'))
     for anio, nv in nuevo.items():
