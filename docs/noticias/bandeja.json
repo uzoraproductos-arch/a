@@ -1,5 +1,726 @@
 {
-  "actualizado": null,
-  "nota": "Titulares que junta herramientas/recolectar_noticias.py, sin verificar. Solo titular, medio, fecha y liga; nunca el texto de la nota.",
-  "notas": []
+ "actualizado": "30 de octubre de 2026",
+ "nota": "Titulares que junta herramientas/recolectar_noticias.py, sin verificar. Solo titular, medio, fecha y liga; nunca el texto de la nota.",
+ "notas": [
+  {
+   "titulo": "Presupuesto de México para 2027 es congruente con consolidación fiscal progresiva: Hacienda",
+   "medio": "Bloomberg Línea",
+   "fecha": "27 de octubre de 2026",
+   "url": "https://www.bloomberglinea.com/latinoamerica/mexico/presupuesto-de-mexico-para-2027-es-congruente-con-consolidacion-fiscal-progresiva-hacienda/",
+   "tema": "presupuesto",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Presupuesto de Egresos 2027 garantiza el cumplimiento de derechos de los mexicanos en seguridad, educación, vivienda y salud: SHCP",
+   "medio": "El Heraldo de México",
+   "fecha": "27 de octubre de 2026",
+   "url": "https://heraldodemexico.com.mx/nacional/2026/10/27/presupuesto-de-egresos-2027-garantiza-el-cumplimiento-de-derechos-de-los-mexicanos-en-seguridad-educacion-vivienda-salud-shcp-917262.html",
+   "tema": "presupuesto",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Insiste Zamora en criticar a Hacienda por omitir al ‘Tren Sinaloense’ y recortar presupuesto para el estado",
+   "medio": "Periódico Noroeste",
+   "fecha": "27 de octubre de 2026",
+   "url": "https://www.noroeste.com.mx/culiacan/insiste-zamora-en-criticar-a-hacienda-por-omitir-al-tren-sinaloense-y-recortar-presupuesto-para-el-estado-LK26866951",
+   "tema": "presupuesto",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Paquete Económico 2027 reduce presupuesto a energía, pero aumenta en salud, educación y vivienda: Hacienda",
+   "medio": "Milenio",
+   "fecha": "27 de octubre de 2026",
+   "url": "https://www.milenio.com/negocios/paquete-economico-2027-aumenta-presupuesto-salud-educacion-vivienda",
+   "tema": "presupuesto",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Presupuesto 2027 tendrá inversión pública estancada e intereses de la deuda en ascenso",
+   "medio": "Expansión on MSN",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/otras/presupuesto-2027-tendr%C3%A1-inversi%C3%B3n-p%C3%BAblica-estancada-e-intereses-de-la-deuda-en-ascenso/ar-AA2gkBqz",
+   "tema": "presupuesto",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "México perfila histórico presupuesto de 43 mil mdp para diversidad LGBT+",
+   "medio": "Periódico Enfoque",
+   "fecha": "17 de octubre de 2026",
+   "url": "https://www.periodicoenfoque.com.mx/nacional/mexico-perfila-historico-presupuesto-de-43-mil-mdp-para-diversidad-lgbt",
+   "tema": "presupuesto",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Presupuesto de Egresos 2026: Pensión para Adultos Mayores y Pensión para Mujeres, los programas más beneficiados",
+   "medio": "SDPnoticias",
+   "fecha": "10 de septiembre de 2025",
+   "url": "https://www.sdpnoticias.com/mexico/presupuesto-de-egresos-2026-pension-para-adultos-mayores-y-pension-para-mujeres-los-programas-mas-beneficiados/",
+   "tema": "presupuesto",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Mario Zamora exhibe a Hacienda: promocionan el tren sinaloense, pero no le destinan un solo peso para el 2027",
+   "medio": "Los Noticieristas",
+   "fecha": "28 de octubre de 2026",
+   "url": "https://losnoticieristas.com/politica/2026/10/mario-zamora-exhibe-a-hacienda-promocionan-el-tren-sinaloense-pero-no-le-destinan-un-solo-peso-para-el-2027-1156864/",
+   "tema": "presupuesto",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "DOF publica Presupuesto de Egresos 2026; estas áreas son prioritarias",
+   "medio": "SDPnoticias",
+   "fecha": "21 de noviembre de 2025",
+   "url": "https://www.sdpnoticias.com/mexico/dof-publica-presupuesto-de-egresos-2026-estas-areas-son-prioritarias/",
+   "tema": "presupuesto",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Cámara de Diputados aprueba Presupuesto de Egresos 2026",
+   "medio": "El Siglo de Torreón",
+   "fecha": "5 de noviembre de 2025",
+   "url": "https://www.elsiglodetorreon.com.mx/noticia/2025/camara-de-diputados-aprueba-presupuesto-de-egresos-2026.html",
+   "tema": "presupuesto",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Presupuesto 2025 frena megaproyectos: sin fondos el Tren Sinaloense y vías clave",
+   "medio": "Debate",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://www.debate.com.mx/sinaloa/losmochis/presupuesto-2025-frena-megaproyectos-sin-fondos-el-tren-sinaloense-y-vias-clave-20261029-0002.html",
+   "tema": "presupuesto",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "¿Cuánto debe México y cómo te afecta? La deuda llegaría a 80 billones de pesos: $611 mil por mexicano",
+   "medio": "TV Azteca",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://www.tvazteca.com/aztecanoticias/deuda-publica-mexico-2026-cuanto-debe-el-gobierno-pasivos-y-pensiones-sumarian-80-billones-pesos/",
+   "tema": "deuda",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Informes sobre la Situación Económica, las Finanzas Públicas y la Deuda Pública al tercer trimestre de 2026",
+   "medio": "tallapolitica.com.mx",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://www.tallapolitica.com.mx/informes-sobre-la-situacion-economica-las-finanzas-publicas-y-la-deuda-publica-al-tercer-trimestre-de-2026/",
+   "tema": "deuda",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Hacienda mejora expectativa de crecimiento para México",
+   "medio": "Enfoque Noticias",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://enfoquenoticias.com.mx/noticias/hacienda-mejora-expectativa-de-crecimiento-para-mexico",
+   "tema": "deuda",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Economía mexicana crece 3.2% en el tercer trimestre: Hacienda",
+   "medio": "Puente Libre",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://puentelibre.mx/local/economia-mexicana-crece-32-en-el-tercer-trimestre-hacienda/",
+   "tema": "deuda",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "México refinancia deuda por 238 mil 153 millones de pesos, informa Hacienda",
+   "medio": "Excélsior",
+   "fecha": "19 de octubre de 2026",
+   "url": "https://www.excelsior.com.mx/finanzas/mexico-refinancia-deuda-por-238-mil-153-millones-pesos-informa-hacienda",
+   "tema": "deuda",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Hacienda refinancia deuda pública por 238 mil millones de pesos",
+   "medio": "Tribuna Noticias",
+   "fecha": "19 de octubre de 2026",
+   "url": "https://tribunanoticias.mx/hacienda-refinancia-deuda-publica-238-mil-millones-pesos/",
+   "tema": "deuda",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Reducir déficit fiscal, la prioridad del Gobierno.- Hacienda",
+   "medio": "El Diario",
+   "fecha": "28 de octubre de 2026",
+   "url": "https://diario.mx/nacional/2026/oct/28/reducir-deficit-fiscal-la-prioridad-del-gobierno-hacienda-1145797.html",
+   "tema": "deuda",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Deuda de México: ¿Quiénes son los presidentes que más endeudaron al país?",
+   "medio": "Diario de Yucatán",
+   "fecha": "16 de octubre de 2026",
+   "url": "https://www.yucatan.com.mx/central-9/2026/10/16/deuda-de-mexico-quienes-son-los-tres-presidentes-que-endeudaron-mas-al-pais.html",
+   "tema": "deuda",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Secretaría de Hacienda aplaza los pagos de la deuda pública mexicana hasta 2047 por un monto de 238 mil 153 millones de pesos para reducir la presión económica al Gobierno ...",
+   "medio": "elimparcial-elimparcial-prod.web.arc-cdn",
+   "fecha": "20 de octubre de 2026",
+   "url": "https://elimparcial-elimparcial-prod.web.arc-cdn.net/dinero/2026/10/19/mexico-refinancia-deuda-publica-por-238-mil-153-millones-de-pesos-y-aplaza-vencimientos-hasta-2047-para-reducir-la-presion-de-pagos-del-gobierno-federal/",
+   "tema": "deuda",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Deuda pública de México supera los 18 billones de pesos; el promedio por persona es de 135 mil",
+   "medio": "SDPnoticias",
+   "fecha": "29 de noviembre de 2025",
+   "url": "https://www.sdpnoticias.com/negocios/deuda-publica-de-mexico-supera-los-18-billones-de-pesos-el-promedio-por-persona-es-de-135-mil/",
+   "tema": "deuda",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Hacienda descarta riesgo por la trayectoria de la deuda, pero reconoce que el crecimiento económico será clave para contener el endeudamiento",
+   "medio": "EL IMPARCIAL on MSN",
+   "fecha": "28 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/dinero/econom%C3%ADa/hacienda-descarta-riesgo-por-la-trayectoria-de-la-deuda-pero-reconoce-que-el-crecimiento-econ%C3%B3mico-ser%C3%A1-clave-para-contener-el-endeudamiento/ar-AA2gg7GG",
+   "tema": "deuda",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Raúl Bolaños pide a la ASF llamar a José Alfredo Hernández Casillas",
+   "medio": "sdpnoticias",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.sdpnoticias.com/mexico/raul-bolanos-pide-a-la-asf-llamar-a-jose-alfredo-hernandez-casillas/",
+   "tema": "asf",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Reduce Tamaulipas monto observado por la Auditoría Superior de la Federación; se revisan 20 mil mdp",
+   "medio": "El Universal",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://www.eluniversal.com.mx/estados/reduce-tamaulipas-monto-observado-por-la-auditoria-superior-de-la-federacion-se-revisan-20-mil-mdp/",
+   "tema": "asf",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Solicita CosmoColor a ASF revisar contratos de credenciales",
+   "medio": "Plano Informativo",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://planoinformativo.com/1178792/solicita-cosmocolor-a-asf-revisar-contratos-de-credenciales-",
+   "tema": "asf",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "¿Qué descubrió la Auditoría Superior de la Federación en las finanzas del INE?",
+   "medio": "cadenapolitica",
+   "fecha": "24 de octubre de 2026",
+   "url": "https://cadenapolitica.com/2026/10/24/que-descubrio-la-auditoria-superior-de-la-federacion-en-las-finanzas-del-ine/",
+   "tema": "asf",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Inicia Auditoría Superior de la Federación investigación a INE",
+   "medio": "El Heraldo de México",
+   "fecha": "23 de octubre de 2026",
+   "url": "https://heraldodemexico.com.mx/nacional/2026/10/23/inicia-auditoria-superior-de-la-federacion-investigacion-ine-914892.html",
+   "tema": "asf",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Sheinbaum pide realizar auditoría profunda al INE y transparentar contratos",
+   "medio": "Expansión on MSN",
+   "fecha": "27 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/mexico/sheinbaum-pide-realizar-auditor%C3%ADa-profunda-al-ine-y-transparentar-contratos/ar-AA2gc3sC",
+   "tema": "asf",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Auditoría Superior de la Federación va por 66 revisiones en Tamaulipas",
+   "medio": "Milenio on MSN",
+   "fecha": "23 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/mexico/auditor%C3%ADa-superior-de-la-federaci%C3%B3n-va-por-66-revisiones-en-tamaulipas/ar-AA2fWIml",
+   "tema": "asf",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Gobierno de BCS atiende 99% de las observaciones de la Auditoría Superior de la Federación",
+   "medio": "Cabovision",
+   "fecha": "15 de octubre de 2026",
+   "url": "https://cabovision.tv/articulo/84798-gobierno-de-bcs-atiende-99-de-las-observaciones-de-la-auditoria-superior-de-la-federacion",
+   "tema": "asf",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Pide Arturo Zubía a la Auditoría Superior de la Federación investigar el manejo del dinero del INE",
+   "medio": "Entrelíneas",
+   "fecha": "28 de octubre de 2026",
+   "url": "https://entrelineas.com.mx/pide-arturo-zubia-a-la-auditoria-superior-de-la-federacion-investigar-el-manejo-del-dinero-del-ine/",
+   "tema": "asf",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Exige Claudia Sheinbaum a la Auditoría Superior auditar las gestiones de Taddei y Córdova en el INE",
+   "medio": "Cambio de Michoacán",
+   "fecha": "27 de octubre de 2026",
+   "url": "https://cambiodemichoacan.com.mx/2026/10/27/exige-claudia-sheinbaum-a-la-auditoria-superior-auditar-las-gestiones-de-taddei-y-cordova-en-el-ine/",
+   "tema": "asf",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Investigación de la Auditoría Superior de la Federación al INE, involucra al IEE de Puebla",
+   "medio": "Municipios Puebla",
+   "fecha": "24 de octubre de 2026",
+   "url": "https://municipiospuebla.mx/nota/politica/investigacion-de-la-auditoria-superior-de-la-federacion-al-ine-involucra-al-iee-de-puebla",
+   "tema": "asf",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "La Auditoría Superior de la Federación abre investigación de oficio contra el INE",
+   "medio": "MVS Noticias",
+   "fecha": "23 de octubre de 2026",
+   "url": "https://mvsnoticias.com/nacional/2026/10/23/la-auditoria-superior-de-la-federacion-abre-investigacion-de-oficio-contra-el-ine-751017.html",
+   "tema": "asf",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "SAT va por una recaudación histórica de 6.2 billones de pesos para 2027: IVA e ISR concentrarán la mayor parte de los recursos",
+   "medio": "Infobae",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://www.infobae.com/mexico/2026/10/29/sat-va-por-una-recaudacion-historica-de-62-billones-de-pesos-para-2027-iva-e-isr-concentraran-la-mayor-parte-de-los-recursos/",
+   "tema": "impuestos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "SAT logra cifra récord de recaudación y estos impuestos aportan más",
+   "medio": "Debate",
+   "fecha": "28 de septiembre de 2026",
+   "url": "https://www.debate.com.mx/economia/sat-logra-cifra-record-de-recaudacion-y-estos-impuestos-aportan-mas-20260928-0212.html",
+   "tema": "impuestos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Explicador: ¿Qué impuestos y reglas fiscales cambiarán en México en 2027?",
+   "medio": "El Economista",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://www.eleconomista.com.mx/explicadores/cambios-fiscales-mexico-2027-explicados-20261029-841182.html",
+   "tema": "impuestos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "SAT busca recaudar 300,000 mdp a través del cumplimiento voluntario en 2027",
+   "medio": "EL CEO",
+   "fecha": "19 de octubre de 2026",
+   "url": "https://elceo.com/economia/sat-recaudar-cumplimiento-voluntario-2027/",
+   "tema": "impuestos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "SAT: ¿Quién paga el gasto público en México?",
+   "medio": "La Verdad Noticias on MSN",
+   "fecha": "8 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/news/other/sat-quién-paga-el-gasto-público-en-méxico/ar-AA2dUEus",
+   "tema": "impuestos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "México logra recaudación récord de impuestos en 2025 sin aumentar tasas fiscales",
+   "medio": "La Crónica de Hoy",
+   "fecha": "19 de enero de 2026",
+   "url": "https://www.cronica.com.mx/negocios/2026/01/19/mexico-logra-recaudacion-record-de-impuestos-en-2025-sin-aumentar-tasas-fiscales/",
+   "tema": "impuestos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "SAT logra nuevo récord en recaudación de impuestos en noviembre con 4.9 billones de pesos",
+   "medio": "El Universal",
+   "fecha": "9 de diciembre de 2025",
+   "url": "https://www.eluniversal.com.mx/cartera/sat-logra-nuevo-record-en-recaudacion-de-impuestos-en-noviembre-con-49-billones-de-pesos/",
+   "tema": "impuestos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Recaudación de impuestos cayó 1% durante enero-julio de 2026 por disminución de ingresos por ISR",
+   "medio": "El Economista",
+   "fecha": "27 de agosto de 2026",
+   "url": "https://www.eleconomista.com.mx/economia/recaudacion-impuestos-cayo-1-anual-enero-julio-2026-caida-ingresos-isr-20260827-830581.html",
+   "tema": "impuestos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "México rompe récord histórico de recaudación tributaria en 2025",
+   "medio": "El Siglo de Torreón",
+   "fecha": "19 de enero de 2026",
+   "url": "https://www.elsiglodetorreon.com.mx/noticia/2026/mexico-rompe-record-historico-de-recaudacion-tributaria-en-2025.html",
+   "tema": "impuestos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "SAT logra aumentar recaudación fiscal en el primer semestre de 2026, por cobro de impuestos como el IEPS, ISR e IVA; obtuvo 2.96 billones de pesos",
+   "medio": "El Imparcial",
+   "fecha": "31 de julio de 2026",
+   "url": "https://www.elimparcial.com/dinero/2026/07/31/sat-logra-aumentar-recaudacion-fiscal-en-el-primer-semestre-de-2026-por-cobro-de-impuestos-como-el-ieps-isr-e-iva-obtuvo-296-billones-de-pesos/",
+   "tema": "impuestos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Vendes en TikTok Shop, Mercado Libre o Amazon: ¿Debes pagar impuestos al SAT por tus ventas digitales en México?",
+   "medio": "DeDinero",
+   "fecha": "5 de septiembre de 2025",
+   "url": "https://www.dedinero.com.mx/gasto/vendes-en-tiktok-shop-mercado-libre-o-amazon-debes-pagar-impuestos-al-sat-por-tus-ventas-digitales-en-mexico/",
+   "tema": "impuestos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "En México, pagamos impuestos. La tranquilidad no viene incluida",
+   "medio": "Energía Hoy",
+   "fecha": "26 de octubre de 2026",
+   "url": "https://energiahoy.com/comunidad-eh/en-mexico-pagamos-impuestos-la-tranquilidad-no-viene-incluida/",
+   "tema": "impuestos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Noticias de Adjudicación contratos en Milenio",
+   "medio": "Milenio",
+   "fecha": "28 de octubre de 2026",
+   "url": "https://www.milenio.com/temas/adjudicacion-contratos",
+   "tema": "contratos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Reprueban 75% de entidades en transparencia fiscal; opacidad en licitaciones y adjudicación directa: aregional",
+   "medio": "La Crónica de Hoy",
+   "fecha": "17 de septiembre de 2026",
+   "url": "https://www.cronica.com.mx/nacional/2026/09/17/reprueban-75-de-entidades-en-transparencia-fiscal-opacidad-en-licitaciones-y-adjudicacion-directa-aregional/",
+   "tema": "contratos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Gobierno cubre 94.5% del material de curación previsto para el abasto de instituciones de salud para 2027 y 2028",
+   "medio": "El Economista",
+   "fecha": "4 de octubre de 2026",
+   "url": "https://www.eleconomista.com.mx/empresas/gobierno-cubre-94-5-material-curacion-previsto-abasto-instituciones-salud-2027-20261004-836775.html",
+   "tema": "contratos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "El 75% de contratos de Tlalpan se otorgaron por adjudicación directa",
+   "medio": "Yahoo Noticias en Español",
+   "fecha": "18 de octubre de 2026",
+   "url": "https://es-us.noticias.yahoo.com/75-contratos-tlalpan-otorgaron-adjudicaci%C3%B3n-060000691.html",
+   "tema": "contratos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "PAN CDMX pide auditar contratos otorgados por adjudicación directa durante la administración de Clara Brugada",
+   "medio": "La Crónica de Hoy",
+   "fecha": "28 de julio de 2026",
+   "url": "https://www.cronica.com.mx/metropoli/2026/07/28/pan-cdmx-pide-auditar-contratos-otorgados-por-adjudicacion-directa-durante-la-administracion-de-clara-brugada/",
+   "tema": "contratos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Licitación de medicamentos sigue abierta y trabajamos con el gobierno para corregir errores: Pfizer México",
+   "medio": "El Economista",
+   "fecha": "23 de enero de 2025",
+   "url": "https://www.eleconomista.com.mx/empresas/licitacion-medicamentos-sigue-abierta-gobierno-corregir-errores-pfizer-mexico-20250123-743394.html",
+   "tema": "contratos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Licitaciones del Tren Maya no serán por adjudicación directa y comienzan en marzo: Fonatur",
+   "medio": "Sin Embargo",
+   "fecha": "12 de febrero de 2019",
+   "url": "https://www.sinembargo.mx/3535308/las-licitaciones-del-tren-maya-no-seran-por-adjudicacion-directa-y-comienzan-en-marzo-fonatur/",
+   "tema": "contratos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Más de 2 mil 400 empresas falsearon información para obtener contratos del Gobierno de México y recibieron multas por 2 mil 182 millones de pesos e inhabilitaciones de hasta ...",
+   "medio": "El Imparcial",
+   "fecha": "13 de julio de 2026",
+   "url": "https://www.elimparcial.com/mexico/2026/07/13/mas-de-2-mil-400-empresas-falsearon-informacion-para-obtener-contratos-del-gobierno-de-mexico-y-recibieron-multas-por-2-mil-182-millones-de-pesos-e-inhabilitaciones-de-hasta-siete-anos/",
+   "tema": "contratos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Ensenada renta 42 vehículos por casi 34 millones de pesos sin licitación",
+   "medio": "BajaNews MX",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://bajanews.mx/Cali-Baja/61972/ensenada-renta-42-vehiculos-por-casi-34-millones-de-pesos-sin-licitacion",
+   "tema": "contratos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "El Gobierno de Alejandro Armenta compró por adjudicación directa un helicóptero por 115.7 millones de pesos",
+   "medio": "El Diario",
+   "fecha": "20 de octubre de 2026",
+   "url": "https://diario.mx/nacional/2026/oct/21/vuelos-morenistas-1144484.html",
+   "tema": "contratos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "El IEEM bajo la lupa; deciden postergar procesos de licitación",
+   "medio": "El Heraldo de México",
+   "fecha": "28 de octubre de 2026",
+   "url": "https://heraldodemexico.com.mx/opinion/2026/10/29/el-ieem-bajo-la-lupa-deciden-postergar-procesos-de-licitacion-918570.html",
+   "tema": "contratos",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Pemex perdió 10,795 millones de pesos en el tercer trimestre; deuda con proveedores baja",
+   "medio": "El Economista",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.eleconomista.com.mx/mercados/pemex-perdio-10-792-millones-pesos-tercer-trimestre-deuda-proveedores-baja-20261030-841400.html",
+   "tema": "empresas",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Pemex pierde 10,795 millones de pesos, aunque reduce su deuda financiera y con proveedores",
+   "medio": "Expansión on MSN",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/otras/pemex-pierde-10795-millones-de-pesos-aunque-reduce-su-deuda-financiera-y-con-proveedores/ar-AA2graUg",
+   "tema": "empresas",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Pemex perdió 10,795 mdp en el tercer trimestre de 2026",
+   "medio": "EL CEO",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://elceo.com/negocios/pemex-perdio-10795-mdp-tercer-trimestre-de-2026/",
+   "tema": "empresas",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Pemex reduce sus pérdidas en más de 82% en tercer trimestre, impulsado por mayores ventas y precios del petróleo",
+   "medio": "Milenio on MSN",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/otras/pemex-reduce-sus-p%C3%A9rdidas-en-m%C3%A1s-de-82-en-tercer-trimestre-impulsado-por-mayores-ventas-y-precios-del-petr%C3%B3leo/ar-AA2grkSe",
+   "tema": "empresas",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "CFE fortalece sus finanzas y mantiene margen operativo de 31.7%",
+   "medio": "Reporte Índigo",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://www.reporteindigo.com/nacional/cfe-fortalece-sus-finanzas-y-mantiene-margen-operativo-de-31.7-20261029-0083.html",
+   "tema": "empresas",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "S&P cambia a negativa la perspectiva de Pemex y CFE tras ajuste a calificación de México",
+   "medio": "Diario de Yucatán",
+   "fecha": "13 de mayo de 2026",
+   "url": "https://www.yucatan.com.mx/mexico/2026/05/13/sp-perspectiva-calificacion-negativa-pemex-cfemexico-deuda-deficit.html",
+   "tema": "empresas",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "CFE registra pérdidas en el tercer trimestre, tras un año de ganancias",
+   "medio": "Periódico Zócalo",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://www.zocalo.com.mx/cfe-registra-perdidas-en-el-tercer-trimestre-tras-un-ano-de-ganancias/",
+   "tema": "empresas",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Senado aprueba Ley de Ingresos 2027 con deuda millonaria",
+   "medio": "Diario del Yaqui",
+   "fecha": "27 de octubre de 2026",
+   "url": "https://diariodelyaqui.mx/nacional/senado-aprueba-ley-de-ingresos-2027-con-deuda-millonaria/146664",
+   "tema": "empresas",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "CFE reportó pérdidas por 23 mil millones de pesos durante el tercer trimestre de 2026, su deuda también repuntó",
+   "medio": "Infobae",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://www.infobae.com/mexico/2026/10/29/cfe-reporto-perdidas-por-23-mil-millones-de-pesos-durante-el-tercer-trimestre-de-2026-su-deuda-tambien-repunto/",
+   "tema": "empresas",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "El costo de las pensiones pone presión a Pemex y CFE: deben 2.1 billones de pesos",
+   "medio": "Indigo",
+   "fecha": "13 de agosto de 2026",
+   "url": "https://www.reporteindigo.com/dinero/el-costo-de-las-pensiones-pone-presion-a-pemex-y-cfe-deben-2.1-billones-de-pesos-20260813-0062.html",
+   "tema": "empresas",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Legisladores contemplan Presupuesto 2027 de 2.38 billones para salud",
+   "medio": "Siete24",
+   "fecha": "27 de octubre de 2026",
+   "url": "https://siete24.mx/mexico/legisladores-contemplan-presupuesto-2027-de-2-38-billones-para-salud/",
+   "tema": "salud",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "En 2027, SSM contaría con presupuesto similar al de 2026, prevé Elías Ibarra",
+   "medio": "Noventa Grados",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.noventagrados.com.mx/salud/en-2027-ssm-contaria-con-presupuesto-similar-al-de-2026-preve-elias-ibarra.htm",
+   "tema": "salud",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Acuerdan diputados de la Comisión de Seguridad Social otorgar recursos adicionales a IMSS e ISSSTE para 2027",
+   "medio": "Reporte Índigo",
+   "fecha": "15 de octubre de 2026",
+   "url": "https://www.reporteindigo.com/nacional/acuerdan-diputados-de-la-comision-de-seguridad-social-otorgar-recursos-adicionales-a-imss-e-issste-para-2027-20261015-0133.html",
+   "tema": "salud",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "IMSS tendría mil millones de pesos extra en 2027; esta es la propuesta que planteran los diputados",
+   "medio": "TV Azteca",
+   "fecha": "15 de octubre de 2026",
+   "url": "https://www.tvazteca.com/aztecanoticias/imss-2027-diputados-proponen-mil-millones-pesos-adicionales-al-presupuesto/",
+   "tema": "salud",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Realmente ha disminuido el presupuesto de salud?”",
+   "medio": "Quadratin Hidalgo",
+   "fecha": "22 de octubre de 2026",
+   "url": "https://hidalgo.quadratin.com.mx/opinion/realmente-ha-disminuido-el-presupuesto-de-salud/",
+   "tema": "salud",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Presupuesto de Salud 2027",
+   "medio": "La Silla Rota",
+   "fecha": "23 de octubre de 2026",
+   "url": "https://lasillarota.com/opinion/columnas/2026/10/23/presupuesto-de-salud-2027-534285.html",
+   "tema": "salud",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Diputados recomiendan reasignar mil mdp a prestaciones sociales en el IMSS",
+   "medio": "Milenio on MSN",
+   "fecha": "15 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/other/diputados-recomiendan-reasignar-mil-mdp-a-prestaciones-sociales-en-el-imss/ar-AA2ekF7U",
+   "tema": "salud",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Decreto presidencial amenaza al IMSS y al ISSSTE: diputado",
+   "medio": "El Siglo de Torreón",
+   "fecha": "10 de abril de 2026",
+   "url": "https://www.elsiglodetorreon.com.mx/noticia/2026/decreto-presidencial-amenaza-al-imss-y-al-issste-diputado.html",
+   "tema": "salud",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "¿Cuándo depositan el aguinaldo a pensionados del IMSS e ISSSTE?",
+   "medio": "El Informador",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://www.informador.mx/mexico/aguinaldo-pensionados-imss-e-issste-2026-cuando-lo-depositan-20261029-0212.html",
+   "tema": "salud",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Aguinaldo 2026: fechas de pago para pensionados IMSS, ISSSTE, sector público y privado en México",
+   "medio": "Mi Bolsillo on MSN",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/otras/aguinaldo-2026-fechas-de-pago-para-pensionados-imss-issste-sector-p%C3%BAblico-y-privado-en-m%C3%A9xico/ar-AA2gmXml",
+   "tema": "salud",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Pensión IMSS e ISSSTE: fecha exacta del depósito del aguinaldo 2026 y quiénes lo reciben primero",
+   "medio": "Eje Central",
+   "fecha": "5 de octubre de 2026",
+   "url": "https://www.ejecentral.com.mx/nuestro-eje/pension-imss-e-issste-fecha-exacta-del-deposito-del-aguinaldo-2026-y-quienes-lo-reciben-primero",
+   "tema": "salud",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Pensión del IMSS e ISSSTE en noviembre: estas son las fechas de pago y cuándo recibirán el aguinaldo",
+   "medio": "Expansión",
+   "fecha": "25 de octubre de 2026",
+   "url": "https://expansion.mx/finanzas-personales/2026/10/25/pension-imss-issste-noviembre-fecha-cuanto-aguinaldo",
+   "tema": "salud",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Rescatan estados con gasto público",
+   "medio": "El Mañana de Reynosa",
+   "fecha": "3 de mayo de 2021",
+   "url": "https://www.elmanana.com/rescatan-estados-con-gasto-publico/5339012",
+   "tema": "estados",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Recortes a participaciones federales obligan a Ciudad Valles a considerar préstamo para cierre 2026",
+   "medio": "ANTENA SAN LUIS",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://antenasanluis.mx/recortes-participaciones-ciudad-valles-prestamo/",
+   "tema": "estados",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Participaciones federales registran su primera disminución desde el 2020",
+   "medio": "El Economista",
+   "fecha": "18 de octubre de 2026",
+   "url": "https://www.eleconomista.com.mx/estados/participaciones-federales-registran-primera-disminucion-20261019-839461.html",
+   "tema": "estados",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Estados y municipios enfrentan presiones financieras: Moody's",
+   "medio": "El Economista",
+   "fecha": "23 de julio de 2026",
+   "url": "https://www.eleconomista.com.mx/estados/estados-municipios-enfrentan-presiones-financieras-moody-s-20260724-824825.html",
+   "tema": "estados",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Alcaldes panistas urgen a gobierno entregar a estados y municipios 26 mmdp en participaciones federales antes de que concluya el actual ejercicio fiscal",
+   "medio": "Indigo",
+   "fecha": "13 de octubre de 2026",
+   "url": "https://www.reporteindigo.com/nacional/alcaldes-panistas-urgen-a-gobierno-entregar-a-estados-y-municipios-26-mmdp-en-participaciones-federales-antes-de-que-concluya-el-actual-ejercicio-fiscal-20261013-0114.html",
+   "tema": "estados",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Pierde Ciudad Victoria 20 mdp en participaciones federales",
+   "medio": "ABC Noticias",
+   "fecha": "22 de octubre de 2026",
+   "url": "https://abcnoticias.mx/tamaulipas/2026/10/22/pierde-ciudad-victoria-20-mdp-en-participaciones-federales-293187.html",
+   "tema": "estados",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Recortes en participaciones federales han sido pocos para el municipio: tesorero de Torreón",
+   "medio": "Milenio",
+   "fecha": "17 de septiembre de 2026",
+   "url": "https://www.milenio.com/estados/torreon-registra-recortes-participaciones-federales-2026",
+   "tema": "estados",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Nuevo León activará fondo para proteger a municipios ante caída de participaciones federales",
+   "medio": "SDPnoticias",
+   "fecha": "14 de julio de 2026",
+   "url": "https://www.sdpnoticias.com/estados/nuevo-leon/nuevo-leon-activara-fondo-para-proteger-a-municipios-ante-caida-de-participaciones-federales/",
+   "tema": "estados",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Hacienda activa fondo de estabilización para subsanar recursos a estados y municipios; medida busca alinearse al PEF",
+   "medio": "El Universal on MSN",
+   "fecha": "20 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/otras/hacienda-activa-fondo-de-estabilizaci%C3%B3n-para-subsanar-recursos-a-estados-y-municipios-medida-busca-alinearse-al-pef/ar-AA2fH1QN",
+   "tema": "estados",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Llegaron a Tamaulipas más recursos federales",
+   "medio": "Milenio",
+   "fecha": "24 de octubre de 2026",
+   "url": "https://www.milenio.com/estados/tamaulipas-recibe-32-mil-millones-pesos-recursos-federales",
+   "tema": "estados",
+   "visto": "30 de octubre de 2026"
+  },
+  {
+   "titulo": "Patea ASF fiscalización a federación, estados y municipios",
+   "medio": "El Universal",
+   "fecha": "29 de junio de 2026",
+   "url": "https://www.eluniversal.com.mx/nacion/patea-asf-fiscalizacion-a-federacion-estados-y-municipios/?outputType=amp",
+   "tema": "estados",
+   "visto": "30 de octubre de 2026"
+  }
+ ]
 }

@@ -1717,6 +1717,22 @@
       }).join('') + '</div>' +
       '<p class="pa-chico">¿Encontraste una nota con cifras? Pégame aquí su liga y la cotejo contra los documentos oficiales, con <a href="herramienta-inspector-nota.html">Contrasta una nota</a>.</p></div>';
   }
+  /* Lo que la base no tiene (30-10-2026): la misma pregunta, ya buscada en
+     Banxico, el INEGI y los portales oficiales, y al final en las noticias.
+     Son enlaces rotulados «sin verificar»: el chat no afirma lo que hay ahí. */
+  function fueraHtml(q) {
+    var t = String(q).replace(/[¿?¡!«»"]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 120);
+    if (!t || !PE.webDato) return '';
+    return '<div class="pa-rec pa-web"><p class="pa-mas-t">Búscalo fuera de la plataforma</p>' +
+      '<p class="pa-chico">Esto ya no es nuestra base: es tu pregunta, ya buscada primero en las fuentes oficiales de cifras y al final en las noticias. ' +
+      '<b>Lo que encuentres ahí no lo verificó Auditavisión.</b> Si das con el documento oficial, cuéntanos y lo integramos con su fuente.</p>' +
+      '<div class="pa-rec-lista">' + PE.webDato.map(function (w) {
+        var u = w.site ? 'https://www.google.com/search?q=' + encodeURIComponent(t + ' ' + w.site)
+          : 'https://news.google.com/search?q=' + encodeURIComponent(t) + '&hl=es-419&gl=MX&ceid=MX:es-419';
+        return '<a class="pa-rec-a" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer"><span class="pa-rec-ico" aria-hidden="true">' + w.ico + '</span>' +
+          '<span><b>' + esc(w.n) + '</b><small>' + (w.e === 'oficial' ? 'Fuente oficial: sin verificar por nosotros · se abre en otra pestaña ↗' : 'Prensa: sin verificar · se abre en otra pestaña ↗') + '</small></span></a>';
+      }).join('') + '</div></div>';
+  }
   function colHtml(f, grande) {
     var ci = (f.ci || []).slice(0, grande ? 3 : 2);
     return '<div class="pa-col"><p class="pa-col-t">📰 <a href="' + esc(f.ir[0]) + '"><b>' + esc(f.tit) + '</b></a></p>' +
@@ -2058,7 +2074,7 @@
     var espera = r.espera ? r.espera.then(function (x) { r = x; }) : null;
     var pinta = function (li) {
       if (r.sin) {
-        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + (r.web ? webHtml(r.web) : '');
+        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + (r.web ? webHtml(r.web) : fueraHtml(q));
         if (!ya) anota(q, 'sin');
         return;
       }

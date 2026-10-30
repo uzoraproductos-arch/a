@@ -63,6 +63,13 @@ jobs:
       # Las fuentes en vivo (30-10-2026): las llaves gratuitas de Banxico e
       # INEGI van en los secretos del repositorio y de ahí a los de Supabase;
       # nunca en un archivo ni en el chat. Sin ninguna, la función no se sube.
+      # Formularios y «Lo que aún no sé» (30-10-2026): con el aviso de
+      # privacidad ya diciendo cuánto se guarda (12 meses).
+      - name: Sube las funciones de los formularios
+        if: steps.hay.outputs.si == 'si'
+        run: |
+          supabase functions deploy recibir-formulario --project-ref "$PROYECTO" --no-verify-jwt
+          supabase functions deploy pregunta-bot --project-ref "$PROYECTO" --no-verify-jwt
       - name: Sube las llaves de Banxico e INEGI
         if: steps.hay.outputs.si == 'si' && (env.BANXICO_TOKEN != '' || env.INEGI_TOKEN != '')
         run: |

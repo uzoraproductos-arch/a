@@ -5,14 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aviso de privacidad · Auditavisión</title>
-  <meta name="description" content="Auditavisión no te pide cuenta, ni nombre, ni correo para usar la plataforma, y hoy ningún dato tuyo sale de tu navegador. Aquí te lo explicamos con el orden que pide la ley (Ley Federal de Protección de Datos Personales en Posesión de los Particulares, DOF 20-03-2025, art. 15 ↗) oficial. Vigente desde el 26-10-2026.">
+  <meta name="description" content="Auditavisión no te pide cuenta, ni nombre, ni correo para usar la plataforma, y solo lo que tú decides enviar sale de tu navegador. Aquí te lo explicamos con el orden que pide la ley (Ley Federal de Protección de Datos Personales en Posesión de los Particulares, DOF 20-03-2025, art. 15 ↗) oficial. Vigente desde el 26-10-2026.">
   <link rel="canonical" href="https://auditavision.com.mx/aviso-de-privacidad.html">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Auditavisión">
   <meta property="og:locale" content="es_MX">
   <meta property="og:url" content="https://auditavision.com.mx/aviso-de-privacidad.html">
   <meta property="og:title" content="Aviso de privacidad · Auditavisión">
-  <meta property="og:description" content="Auditavisión no te pide cuenta, ni nombre, ni correo para usar la plataforma, y hoy ningún dato tuyo sale de tu navegador. Aquí te lo explicamos con el orden que pide la ley (Ley Federal de Protección de Datos Personales en Posesión de los Particulares, DOF 20-03-2025, art. 15 ↗) oficial. Vigente desde el 26-10-2026.">
+  <meta property="og:description" content="Auditavisión no te pide cuenta, ni nombre, ni correo para usar la plataforma, y solo lo que tú decides enviar sale de tu navegador. Aquí te lo explicamos con el orden que pide la ley (Ley Federal de Protección de Datos Personales en Posesión de los Particulares, DOF 20-03-2025, art. 15 ↗) oficial. Vigente desde el 26-10-2026.">
   <meta name="twitter:card" content="summary">
   <meta name="theme-color" content="#0b2a63">
   <meta name="color-scheme" content="light">
@@ -20,13 +20,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261029y">
-  <script src="assets/auditor/js/iconos.js?v=20261029y"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261029y"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261029y" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261029y">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261029y">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261029y">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261030c">
+  <script src="assets/auditor/js/iconos.js?v=20261030c"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261030c"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261030c" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261030c">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261030c">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261030c">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -84,8 +84,8 @@
       <details class="pt-ruta" name="pt-ruta" data-ruta="reporta">
         <summary><span class="pt-ico" aria-hidden="true">🏗️</span><span class="pt-sum"><b>Algo raro con el dinero público</b><span>Una obra que no cuadra, un contrato o una compra sospechosa, un programa social usado en campaña, un cobro indebido.</span></span></summary>
         <div class="pt-ruta-cuerpo">
-        <form class="sv-form cm-form" id="ptReporte" data-canal="" data-asunto="Reporte ciudadano" novalidate>
-          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+        <form class="sv-form cm-form" id="ptReporte" data-canal="" data-asunto="Reporte ciudadano" data-funcion="https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1/recibir-formulario" data-tipo="reporte" novalidate>
+          <p class="sv-privado">🔒 Primero ves el texto tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar». Puedes firmar con seudónimo; el correo es opcional, solo sirve para responderte y se guarda únicamente si aceptas el <a href="aviso-de-privacidad.html">aviso de privacidad</a>.</p>
           <p class="sv-privado pt-aviso">⚠️ No escribas datos bancarios, documentos de identidad ni información de terceros que pueda ponerlos en riesgo.</p>
             <div class="sv-campo"><label for="ptRepQue">Qué fue <span class="sv-req">obligatorio</span></label><select id="ptRepQue" required><option value="">Elige una opción</option><option>Una obra que no cuadra</option><option>Un contrato o una compra sospechosa</option><option>Uso electoral de un programa social</option><option>Un cobro o trámite indebido</option><option>Una duda sobre gasto o presupuesto</option></select></div>
             <div class="sv-campo"><label for="ptRepDonde">Dónde <span class="sv-req">obligatorio</span></label><input id="ptRepDonde" type="text" maxlength="200" required><small>Entidad, municipio, colonia y una referencia física. Una dirección vale más que un adjetivo.</small></div>
@@ -95,6 +95,7 @@
             <div class="sv-campo"><label for="ptRepPrueba">Con qué prueba</label><input id="ptRepPrueba" type="text" maxlength="300"><small>Una foto con fecha, un número de contrato, una factura, un acta de entrega.</small></div>
             <div class="sv-campo"><label for="ptRepFirma">Firma o seudónimo</label><input id="ptRepFirma" type="text" maxlength="80"></div>
             <div class="sv-campo"><label for="ptRepCorreo">Correo (opcional)</label><input id="ptRepCorreo" type="email" maxlength="160"></div>
+            <label class="sv-check"><input type="checkbox" id="ptRepAcepta" data-acepta> Acepto el <a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi correo</label>
           <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi reporte</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
           <p class="sv-error cm-error" role="alert" hidden></p>
         </form>
@@ -105,14 +106,15 @@
       <details class="pt-ruta" name="pt-ruta" data-ruta="error">
         <summary><span class="pt-ico" aria-hidden="true">✏️</span><span class="pt-sum"><b>Un dato mal en esta plataforma</b><span>Una cifra que no coincide con su documento oficial. Si tienes razón, se corrige y entra a la fe de erratas.</span></span></summary>
         <div class="pt-ruta-cuerpo">
-        <form class="sv-form cm-form" id="ptError" data-canal="" data-asunto="Señalamiento de error" novalidate>
-          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+        <form class="sv-form cm-form" id="ptError" data-canal="" data-asunto="Señalamiento de error" data-funcion="https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1/recibir-formulario" data-tipo="errata" novalidate>
+          <p class="sv-privado">🔒 Primero ves el texto tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar». Puedes firmar con seudónimo; el correo es opcional, solo sirve para responderte y se guarda únicamente si aceptas el <a href="aviso-de-privacidad.html">aviso de privacidad</a>.</p>
             <div class="sv-campo"><label for="ptErrPagina">Página <span class="sv-req">obligatorio</span></label><input id="ptErrPagina" class="cm-pagina" type="text" maxlength="200" required><small>Si abriste esto desde una página, ya está escrita.</small></div>
             <div class="sv-campo"><label for="ptErrDato">Qué dato está mal <span class="sv-req">obligatorio</span></label><textarea id="ptErrDato" rows="2" maxlength="800" required></textarea></div>
             <div class="sv-campo"><label for="ptErrDice">Qué dice el documento oficial <span class="sv-req">obligatorio</span></label><textarea id="ptErrDice" rows="2" maxlength="800" required></textarea></div>
             <div class="sv-campo"><label for="ptErrFuente">Enlace al documento <span class="sv-req">obligatorio</span></label><input id="ptErrFuente" type="url" maxlength="400" required placeholder="https://"><small>Sin documento no podemos corregir: es la misma regla que seguimos nosotros.</small></div>
             <div class="sv-campo"><label for="ptErrFirma">Firma o seudónimo</label><input id="ptErrFirma" type="text" maxlength="80"></div>
             <div class="sv-campo"><label for="ptErrCorreo">Correo (opcional)</label><input id="ptErrCorreo" type="email" maxlength="160"></div>
+            <label class="sv-check"><input type="checkbox" id="ptErrAcepta" data-acepta> Acepto el <a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi correo</label>
           <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi señalamiento</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
           <p class="sv-error cm-error" role="alert" hidden></p>
         </form>
@@ -122,14 +124,15 @@
       <details class="pt-ruta" name="pt-ruta" data-ruta="tema">
         <summary><span class="pt-ico" aria-hidden="true">💡</span><span class="pt-sum"><b>Un tema que deberíamos investigar</b><span>Lo que te gustaría que revisáramos, con los documentos que conozcas.</span></span></summary>
         <div class="pt-ruta-cuerpo">
-        <form class="sv-form cm-form" id="ptTema" data-canal="" data-asunto="Propuesta de tema" novalidate>
-          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+        <form class="sv-form cm-form" id="ptTema" data-canal="" data-asunto="Propuesta de tema" data-funcion="https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1/recibir-formulario" data-tipo="tema" novalidate>
+          <p class="sv-privado">🔒 Primero ves el texto tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar». Puedes firmar con seudónimo; el correo es opcional, solo sirve para responderte y se guarda únicamente si aceptas el <a href="aviso-de-privacidad.html">aviso de privacidad</a>.</p>
             <div class="sv-campo"><label for="ptTemaQue">Tema <span class="sv-req">obligatorio</span></label><input id="ptTemaQue" type="text" maxlength="160" required><small>Por ejemplo: las compras de un hospital, una obra de tu municipio, un fideicomiso.</small></div>
             <div class="sv-campo"><label for="ptTemaPor">Por qué importa <span class="sv-req">obligatorio</span></label><textarea id="ptTemaPor" rows="3" maxlength="1200" required></textarea></div>
             <div class="sv-campo"><label for="ptTemaDonde">Entidad o municipio</label><input id="ptTemaDonde" type="text" maxlength="120"></div>
             <div class="sv-campo"><label for="ptTemaDocs">Documentos oficiales que conozcas</label><textarea id="ptTemaDocs" rows="2" maxlength="800"></textarea><small>Ligas a la Auditoría Superior, Compranet, el DOF o Transparencia. Si no tienes, no pasa nada.</small></div>
             <div class="sv-campo"><label for="ptTemaFirma">Firma o seudónimo</label><input id="ptTemaFirma" type="text" maxlength="80"></div>
             <div class="sv-campo"><label for="ptTemaCorreo">Correo (opcional)</label><input id="ptTemaCorreo" type="email" maxlength="160"></div>
+            <label class="sv-check"><input type="checkbox" id="ptTemaAcepta" data-acepta> Acepto el <a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi correo</label>
           <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi propuesta</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
           <p class="sv-error cm-error" role="alert" hidden></p>
         </form>
@@ -168,9 +171,9 @@
     <header class="apartado-cab">
       <div class="apartado-ancho">
         <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <a href="herramienta-inspector-pregunta.html">Auditor Virtual</a> <span aria-hidden="true">›</span> <span>Aviso de privacidad</span></nav>
-        <span class="apartado-lema">🔒 Qué sabemos de ti: hoy, nada</span>
+        <span class="apartado-lema">🔒 Qué sabemos de ti: solo lo que tú nos mandas</span>
         <h1 class="apartado-titulo">Aviso de privacidad</h1>
-        <p class="apartado-entrada">Auditavisión no te pide cuenta, ni nombre, ni correo para usar la plataforma, y hoy ningún dato tuyo sale de tu navegador. Aquí te lo explicamos con el orden que pide la ley (<a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf" target="_blank" rel="noopener">Ley Federal de Protección de Datos Personales en Posesión de los Particulares, DOF 20-03-2025, art. 15 ↗</a>) <span class="est-chip est-oficial">oficial</span>. Vigente desde el 26-10-2026.</p>
+        <p class="apartado-entrada">Auditavisión no te pide cuenta, ni nombre, ni correo para usar la plataforma, y solo lo que tú decides enviar sale de tu navegador. Aquí te lo explicamos con el orden que pide la ley (<a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf" target="_blank" rel="noopener">Ley Federal de Protección de Datos Personales en Posesión de los Particulares, DOF 20-03-2025, art. 15 ↗</a>) <span class="est-chip est-oficial">oficial</span>. Vigente desde el 26-10-2026.</p>
         
       </div>
     </header>
@@ -202,12 +205,12 @@
           <p class="apartado-seccion-texto">Artículo 15, fracciones II y III.</p>
         </div>
         <div class="apartado-bloque">
-        <p><b>Ninguno en un servidor nuestro.</b> No hay registro, ni cuentas, ni herramientas de analítica, ni cookies propias. Los formularios (algo raro con el dinero público, un dato mal, un tema para investigar) arman el texto en tu pantalla para que tú lo copies o lo descargues: no se envían solos.</p>
+        <p><b>Solo lo que tú envías.</b> No hay registro, ni cuentas, ni herramientas de analítica, ni cookies propias. Los formularios (algo raro con el dinero público, un dato mal, un tema para investigar) arman el texto en tu pantalla; <b>solo si pulsas «Enviar»</b> llega a nuestra base de datos (Supabase), con: el tipo de mensaje, el asunto, el texto que escribiste, la página desde donde lo mandaste, el enlace al documento que citaste, tu correo <b>solo si lo escribes y aceptas este aviso</b>, y una huella cifrada de tu conexión (no tu dirección IP) para frenar el spam. Para qué: atender tu reporte, corregir el dato o investigar el tema, y responderte. Lo que envías se guarda <b>12 meses</b> desde que llega y luego se borra solo. Una fe de erratas que publicamos se queda a la vista, pero sin tu correo. Para pedir que lo borremos antes, escríbenos desde el mismo correo.</p>
 <p>Lo que sí se guarda <b>en tu propio navegador</b>, para que la plataforma recuerde lo que hiciste, es esto. Nunca nos llega, y lo borras al borrar los datos del sitio en tu navegador:</p>
 <ul>
 <li><b>La plática con el Auditor</b> (<code>av-chat</code>): Se guarda en la pestaña (sessionStorage) y se borra al cerrarla, o antes con «🗑️ Limpiar».</li>
-<li><b>«Lo que aún no sé»</b> (<code>auditavision.bot.sinRespuesta</code>): Las preguntas que el Auditor no supo contestar, hasta 50. Solo las ves tú; si quieres, las copias y nos las mandas.</li>
-<li><b>Tu código de acceso</b> (<code>av-pase</code>): Solo si canjeas un código de la versión de prueba: un número al azar que identifica a este navegador y hasta cuándo abre. En la base queda que ese número canjeó un código, y cuándo; nada que diga quién eres.</li>
+<li><b>«Lo que aún no sé»</b> (<code>auditavision.bot.sinRespuesta</code>): Las preguntas que el Auditor no supo contestar, hasta 50. Además, cada pregunta nueva nos llega sola, sin tu nombre ni tu correo (solo la pregunta, la ficha que te dio el Auditor y la versión de la página), para saber qué fichas faltan primero.</li>
+<li><b>Tu código de acceso</b> (<code>av-pase</code>): Solo si canjeas un código de la versión de prueba: un número al azar que identifica a este navegador y hasta cuándo abre. En la base queda que ese número canjeó un código, cuándo, y los días en que abrió la plataforma (solo la fecha); nada que diga quién eres.</li>
 <li><b>Las columnas que sigues</b> (<code>av-sigo</code>): Cuáles casos de Verificamos sigues y qué versión viste, para avisarte cuando cambian.</li>
 <li><b>Ágora cívica</b> (<code>auditavision_foro_debates y otras</code>): Tus hilos, tus apoyos y el seudónimo que elijas. No se publican: viven solo en tu navegador.</li>
 <li><b>Preferencias de las herramientas</b> (<code>av-am-reloj, crReloj y otras</code>): Cómo dejaste un reloj, una unidad o un filtro.</li>
@@ -221,7 +224,7 @@
           <p class="apartado-seccion-texto">La versión de prueba, por invitación (29-10-2026).</p>
         </div>
         <div class="apartado-bloque">
-        <p><b>Al canjear un código</b> no te pedimos nada tuyo: en la base de datos queda que un código se canjeó, cuándo, y un número al azar que identifica a tu navegador (<code>av-pase</code>). Sirve para saber hasta cuándo tienes acceso.</p>
+        <p><b>Al canjear un código</b> no te pedimos nada tuyo: en la base de datos queda que un código se canjeó, cuándo, y un número al azar que identifica a tu navegador (<code>av-pase</code>). Sirve para saber hasta cuándo tienes acceso. También anotamos <b>la fecha de cada día en que abres la plataforma</b> (solo el día: ni la hora ni las páginas), para que la administración sepa cuánto se usa cada código; esas fechas se borran solas a los 12 meses. Si tu código te llegó porque lo pediste con tu correo, la administración ve ese uso junto a tu solicitud.</p>
 <p><b>Al pedir un código</b> («¿No tienes código? Obtén uno») guardamos tu correo y, si los escribes, tu nombre y a qué te dedicas, además de una huella cifrada de tu conexión (no tu dirección IP) para frenar el spam. <b>Para qué:</b> solo para mandarte tu código y, si lo pides otra vez, saber que ya lo tenías. No lo usamos para publicidad ni lo compartimos. <b>Cuánto tiempo:</b> la solicitud se borra sola 12 meses después de atendida. Para pedir que la borremos antes, responde al correo con el que te mandamos tu código.</p>
         </div>
       </section>
@@ -253,7 +256,7 @@
           <p class="apartado-seccion-texto">Artículo 15, fracción VI.</p>
         </div>
         <div class="apartado-bloque">
-        <p>La plataforma tiene lista una base de datos para recibir formularios y preguntas, que todavía no está conectada. <b>Antes de que reciba el primer dato</b>, este aviso dirá qué se guarda, para qué, por cuánto tiempo y cómo pedir que se borre, y la fecha de arriba cambiará. Ningún formulario guardará tu nombre si no hace falta.</p>
+        <p>El envío de formularios ya está conectado y este aviso lo describe arriba. Si algún día se guarda algo más, este aviso lo dirá antes, y la fecha de arriba cambiará.</p>
         </div>
       </section>
     </div>
@@ -265,11 +268,11 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261029y</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261030c</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261029y"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261029y"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261030c"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261030c"></script>
 </body>
 </html>

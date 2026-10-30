@@ -1452,7 +1452,7 @@ AVISO_FECHA = '26-10-2026'
 _AV_NAVEGADOR = [
     ('La plática con el Auditor', 'av-chat', 'Se guarda en la pestaña (sessionStorage) y se borra al cerrarla, o antes con «🗑️ Limpiar».'),
     ('«Lo que aún no sé»', 'auditavision.bot.sinRespuesta', 'Las preguntas que el Auditor no supo contestar, hasta 50. Solo las ves tú; si quieres, las copias y nos las mandas.'),
-    ('Tu código de acceso', 'av-pase', 'Solo si canjeas un código de la versión de prueba: un número al azar que identifica a este navegador y hasta cuándo abre. En la base queda que ese número canjeó un código, y cuándo; nada que diga quién eres.'),
+    ('Tu código de acceso', 'av-pase', 'Solo si canjeas un código de la versión de prueba: un número al azar que identifica a este navegador y hasta cuándo abre. En la base queda que ese número canjeó un código, cuándo, y los días en que abrió la plataforma (solo la fecha); nada que diga quién eres.'),
     ('Las columnas que sigues', 'av-sigo', 'Cuáles casos de Verificamos sigues y qué versión viste, para avisarte cuando cambian.'),
     ('Ágora cívica', 'auditavision_foro_debates y otras', 'Tus hilos, tus apoyos y el seudónimo que elijas. No se publican: viven solo en tu navegador.'),
     ('Preferencias de las herramientas', 'av-am-reloj, crReloj y otras', 'Cómo dejaste un reloj, una unidad o un filtro.'),
@@ -1483,7 +1483,10 @@ AVISO = {
                     '<ul>\n%s\n</ul>') % '\n'.join('<li><b>%s</b> (<code>%s</code>): %s</li>' % x for x in _AV_NAVEGADOR)},
         {'id': 'codigos', 'titulo': 'Si pides o canjeas un código de acceso', 'texto': 'La versión de prueba, por invitación (29-10-2026).', 'tarjetas': [],
          'bloque': ('<p><b>Al canjear un código</b> no te pedimos nada tuyo: en la base de datos queda que un código se canjeó, cuándo, y un número '
-                    'al azar que identifica a tu navegador (<code>av-pase</code>). Sirve para saber hasta cuándo tienes acceso.</p>\n'
+                    'al azar que identifica a tu navegador (<code>av-pase</code>). Sirve para saber hasta cuándo tienes acceso. '
+                    'También anotamos <b>la fecha de cada día en que abres la plataforma</b> (solo el día: ni la hora ni las páginas), para que la '
+                    'administración sepa cuánto se usa cada código; esas fechas se borran solas a los 12 meses. Si tu código te llegó porque lo '
+                    'pediste con tu correo, la administración ve ese uso junto a tu solicitud.</p>\n'
                     '<p><b>Al pedir un código</b> («¿No tienes código? Obtén uno») guardamos tu correo y, si los escribes, tu nombre y a qué te dedicas, '
                     'además de una huella cifrada de tu conexión (no tu dirección IP) para frenar el spam. <b>Para qué:</b> solo para mandarte tu código '
                     'y, si lo pides otra vez, saber que ya lo tenías. No lo usamos para publicidad ni lo compartimos. <b>Cuánto tiempo:</b> la solicitud '
@@ -1921,9 +1924,12 @@ CANAL_COMUNIDAD = ''
 # llenarlas, AVISO_CONSERVACION debe decir cuánto tiempo se guardan los envíos:
 # el aviso de privacidad cambia ANTES de recabar el primer dato, o la
 # generación se detiene.
-FUNCIONES = ''
+FUNCIONES = 'https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1'
 TURNSTILE_SITIO = ''
-AVISO_CONSERVACION = ''
+# Decisión del autor, 30-10-2026: 12 meses (la migración 20261030000005 lo cumple).
+AVISO_CONSERVACION = ('Lo que envías se guarda <b>12 meses</b> desde que llega y luego se borra solo. Una fe de erratas que '
+                      'publicamos se queda a la vista, pero sin tu correo. Para pedir que lo borremos antes, escríbenos '
+                      'desde el mismo correo.')
 
 if FUNCIONES:
     # Con el envío encendido, el aviso dice qué se guarda (tabla envios de la
