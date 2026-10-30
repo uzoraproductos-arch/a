@@ -24,20 +24,24 @@
   window.AvAcceso = { config: C, leer: leer, guardar: guardar, vigente: vigente, pide: pide };
 
   // La pestaña «Administración» (pedido del autor, 30-10-2026): solo aparece
-  // en el navegador que entró con el código de la administración. El público
-  // no la ve; el panel sigue pidiendo el correo de administración para abrir.
+  // en el navegador de la administración: el que entró a su panel (con el
+  // correo o con el código maestro) o con su código de la semana. El público
+  // no la ve, y el panel sigue pidiendo sesión de administración para abrir.
+  // El panel la pone en cuanto la administración entra, sin recargar.
+  function pestana() {
+    var barra = document.querySelector('.site-top-nav .nav-center-links');
+    if (!barra || barra.querySelector('.nav-menu-admin')) return;
+    var aqui = (location.pathname.split('/').pop() || '') === C.panel;
+    var d = document.createElement('div');
+    d.className = 'nav-menu-item nav-menu-pagina nav-menu-admin';
+    d.innerHTML = '<a class="mega-menu-trigger" href="' + C.panel + '" title="Tus códigos, las solicitudes y tu código de la semana"' +
+      (aqui ? ' aria-current="page"' : '') + '>Administración</a>';
+    barra.insertBefore(d, barra.querySelector('.nav-menu-cuentanos'));
+  }
+  window.AvAcceso.pestana = pestana;
   var yo = leer();
   if (yo && yo.admin && vigente(yo)) {
-    document.addEventListener('DOMContentLoaded', function () {
-      var barra = document.querySelector('.site-top-nav .nav-center-links');
-      if (!barra || barra.querySelector('.nav-menu-admin')) return;
-      var aqui = (location.pathname.split('/').pop() || '') === C.panel;
-      var d = document.createElement('div');
-      d.className = 'nav-menu-item nav-menu-pagina nav-menu-admin';
-      d.innerHTML = '<a class="mega-menu-trigger" href="' + C.panel + '" title="Tus códigos, las solicitudes y tu código de la semana"' +
-        (aqui ? ' aria-current="page"' : '') + '>Administración</a>';
-      barra.insertBefore(d, barra.querySelector('.nav-menu-cuentanos'));
-    });
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pestana); else pestana();
   }
 
   if (!C.candado || !C.funciones) return;

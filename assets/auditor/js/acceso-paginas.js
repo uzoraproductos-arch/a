@@ -427,12 +427,13 @@
         return Promise.all([carga(), semana(), maestroInfo()]);
       }).then(function () {
         entrar.hidden = true; admin.hidden = false;
-        // Llegaste con el código maestro: se prepara también el pase de este navegador.
         if (/[?&]maestro=1/.test(location.search)) {
           history.replaceState(null, '', location.pathname);
           $('acQuien').textContent += ' Te reconocimos con tu código maestro.';
-          paseAdmin().catch(function () {});
         }
+        // Entraste a tu panel (con el correo o con el código maestro): este
+        // navegador queda como de la administración y sale la pestaña.
+        paseAdmin().then(function () { if (A.pestana) A.pestana(); }).catch(function () {});
       })
         .catch(function (e) {
           var no = e && /administraci/.test(e.message || '');
