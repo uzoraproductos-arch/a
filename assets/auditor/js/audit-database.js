@@ -29045,7 +29045,7 @@ window.AUDIT_DB = {
       "Pesos de hoy: cada año se multiplica por el INPC de septiembre de 2026 entre el INPC promedio de ese año. Dólares y euros: cada año se divide entre el tipo de cambio promedio de ese año. Son conversiones derivadas, con datos de Banxico, y se dicen junto a su cifra."
     ],
     "peso": {
-      "consulta": "10 de octubre de 2026",
+      "consulta": "30 de octubre de 2026",
       "nota": "Lo que vale el peso a lo largo del tiempo: el Índice Nacional de Precios al Consumidor (INPC) y el tipo de cambio frente al dólar y al euro, mes por mes, como los publica el Banco de México; el valor de hoy, y la proyección oficial de Hacienda hasta 2032. Con esto el Radar pasa las cifras de cada año a pesos de hoy, a dólares y a euros.",
       "fuentes": {
         "BX_INPC": {
@@ -29064,8 +29064,8 @@ window.AUDIT_DB = {
           "url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=6&accion=consultarCuadro&idCuadro=CF336&locale=es"
         },
         "BX_DIARIO": {
-          "corto": "Banxico, SIE, cuadros CF102 y CF307: FIX y euro del 9 de octubre de 2026",
-          "doc": "Banco de México, Sistema de Información Económica: serie SF43718, tipo de cambio FIX, pesos por dólar, fecha de determinación (cuadro CF102 «Tipos de cambio diarios»), y serie SF46410, cotización del euro respecto al peso (cuadro CF307, divisas de la canasta del DEG). Dato del 9 de octubre de 2026, el último publicado al consultar.",
+          "corto": "Banxico, SIE, cuadros CF102 y CF307: FIX y euro del 29 de octubre de 2026",
+          "doc": "Banco de México, Sistema de Información Económica: serie SF43718, tipo de cambio FIX, pesos por dólar, fecha de determinación (cuadro CF102 «Tipos de cambio diarios»), y serie SF46410, cotización del euro respecto al peso (cuadro CF307, divisas de la canasta del DEG). Dato del 29 de octubre de 2026, el último publicado al consultar.",
           "url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=6&accion=consultarCuadro&idCuadro=CF102&locale=es"
         },
         "CGPE2027_MACRO": {
@@ -30557,10 +30557,10 @@ window.AUDIT_DB = {
         }
       },
       "hoy": {
-        "fecha": "9 de octubre de 2026",
-        "iso": "2026-10-09",
-        "usd": 18.4163,
-        "eur": 20.6419,
+        "fecha": "29 de octubre de 2026",
+        "iso": "2026-10-29",
+        "usd": 18.8148,
+        "eur": 20.9635,
         "f": "BX_DIARIO",
         "inpc_mes": "septiembre de 2026"
       },
