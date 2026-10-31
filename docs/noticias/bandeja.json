@@ -1,7 +1,287 @@
 {
- "actualizado": "30 de octubre de 2026",
+ "actualizado": "31 de octubre de 2026",
  "nota": "Titulares que junta herramientas/recolectar_noticias.py, sin verificar. Solo titular, medio, fecha y liga; nunca el texto de la nota.",
  "notas": [
+  {
+   "titulo": "Jalisco propone presupuesto de 193 mil mdp para 2027; agua tendrá aumento de 132%",
+   "medio": "Crónica",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://www.cronica.com.mx/jalisco/guadalajara/2026/10/31/jalisco-propone-presupuesto-de-193-mil-mdp-para-2027-agua-tendra-aumento-de-132/",
+   "tema": "presupuesto",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Hacienda descarta volver a utilizar P-Caps para apoyar finanzas de Pemex",
+   "medio": "Bloomberg Línea",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.bloomberglinea.com/latinoamerica/mexico/hacienda-descarta-volver-a-utilizar-p-caps-para-apoyar-finanzas-de-pemex/",
+   "tema": "presupuesto",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Pleno del Cabildo aprueba anteproyectos de Ley de Ingresos y Presupuesto de Egresos 2027",
+   "medio": "Telediario México on MSN",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/otras/pleno-del-cabildo-aprueba-anteproyectos-de-ley-de-ingresos-y-presupuesto-de-egresos-2027/ar-AA2gsliB",
+   "tema": "presupuesto",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Deuda pública en México crece 4.5% real hasta septiembre de 2026",
+   "medio": "Crónica",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.cronica.com.mx/nacional/2026/10/30/deuda-publica-en-mexico-crece-45-real-hasta-septiembre-de-2026/",
+   "tema": "deuda",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Deuda pública de México aumenta 4.5% y los ingresos del Gobierno caen 2.8% hasta septiembre",
+   "medio": "xeva Noticias",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://xeva.com.mx/nacional/297780/deuda-publica-de-mexico-aumenta-45-y-los-ingresos-del-gobierno-caen-28-hasta-septiembre",
+   "tema": "deuda",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Deuda pública de México crece 4.5 % real hasta septiembre mientras caen sus ingresos",
+   "medio": "El Informador",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.informador.mx/economia/deuda-publica-de-mexico-crece-4.5--real-hasta-septiembre-mientras-caen-sus-ingresos-20261030-0142.html",
+   "tema": "deuda",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Deuda pública supera los 19 billones de pesos en México",
+   "medio": "La Opinión De Poza Rica",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://laopinion.net/deuda-publica-supera-los-19-billones-de-pesos-en-mexico/",
+   "tema": "deuda",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Deuda pública crece un 4.5% real",
+   "medio": "El Siglo de Durango",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.elsiglodedurango.com.mx/noticia/2026/deuda-publica-crece-un-45-real.html",
+   "tema": "deuda",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Deuda pública de México sube a 52.6 por ciento del PIB",
+   "medio": "Notisistema",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.notisistema.com/noticias/deuda-publica-de-mexico-sube-a-52-6-por-ciento-del-pib/",
+   "tema": "deuda",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Deuda pública de México sube al 52.6 % del PIB al cierre de septiembre",
+   "medio": "MVS Noticias",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://mvsnoticias.com/economia/2026/10/30/deuda-publica-de-mexico-sube-al-526-del-pib-al-cierre-de-septiembre-751884.html",
+   "tema": "deuda",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "KBRA ratificó la calificación crediticia de México en BBB: Hacienda",
+   "medio": "El Economista",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.eleconomista.com.mx/economia/kbra-ratifico-calificacion-crediticia-mexico-bbb-hacienda-20261030-841504.html",
+   "tema": "deuda",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Detecta Auditoría Superior de la Federación irregularidades por 9 mmdp en Cuenta Pública 2025, sobre todo en salud y educación",
+   "medio": "Reporte Índigo",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.reporteindigo.com/nacional/detecta-auditoria-superior-de-la-federacion-irregularidades-por-9-mmdp-en-cuenta-publica-2025-sobre-todo-en-salud-y-educacion-20261030-0101.html",
+   "tema": "asf",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Auditoría Superior de la Federación le imputó a Samuel García desvíos de al menos 728.13 millones de pesos con triangulaciones de recursos y simulación de operaciones",
+   "medio": "EL IMPARCIAL",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://www.elimparcial.com/mexico/2026/10/31/auditoria-superior-de-la-federacion-le-imputo-a-samuel-garcia-desvios-de-al-menos-72813-millones-de-pesos-con-triangulaciones-de-recursos-y-simulacion-de-operaciones/",
+   "tema": "asf",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Auditoría Superior de la Federación detecta más de 9 mil mdp por aclarar en los tres órdenes de gobierno",
+   "medio": "Crónica",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.cronica.com.mx/nacional/2026/10/30/auditoria-superior-de-la-federacion-detecta-mas-de-9-mil-mdp-por-aclarar-en-los-tres-ordenes-de-gobierno/",
+   "tema": "asf",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Auditoría Superior de la Federación tiene en la mira contratos del INE que superan los 8 mil millones de pesos",
+   "medio": "Dossier Político",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://dossierpolitico.com/2026/10/31/auditoria-superior-de-la-federacion-tiene-en-la-mira-contratos-del-ine-que-superan-los-8-mil-millones-de-pesos/",
+   "tema": "asf",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Auditoría entrega 374 informes de la Cuenta Pública 2025; reporta más de 9 mil mdp por aclarar",
+   "medio": "Radio Fórmula",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.radioformula.com.mx/politica/auditoria-entrega-374-informes-de-la-cuenta-publica-2025-reporta-mas-de-9-mil-mdp-por-aclarar-20261030-0075.html",
+   "tema": "asf",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Detecta ASF a Gobierno de Nuevo León presunta triangulación de recursos públicos",
+   "medio": "Milenio",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://www.milenio.com/politica/asf-detecta-nuevo-leon-presunta-simulacion-triangulacion-recursos",
+   "tema": "asf",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Auditoría Superior de la Federación (ASF) halla posible daño al erario por 9 mmdp en 2025; se han presentado 40 denuncias",
+   "medio": "Colima Noticias",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://www.colimanoticias.com/auditoria-superior-de-la-federacion-asf-halla-posible-dano-al-erario-por-9-mmdp-en-2025-se-han-presentado-40-denuncias/",
+   "tema": "asf",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Auditoría Superior de la Federación detectó 9 mil mdp por aclarar; van 40 denuncias penales",
+   "medio": "La Silla Rota",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://lasillarota.com/nacion/2026/10/30/auditoria-superior-de-la-federacion-detecto-9-mil-mdp-por-aclarar-535340.html",
+   "tema": "asf",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Samuel García bajo la lupa: ASF lo denuncia por presunto desvío de 7 mil 200 mdp",
+   "medio": "Diario del Yaqui",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://diariodelyaqui.mx/nacional/samuel-garcia-bajo-la-lupa-asf-lo-denuncia-por-presunto-desvio-de-7-mil-200-mdp/146889",
+   "tema": "asf",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Municipios concentran casi 6 de 10 pesos por aclarar ante la Auditoría",
+   "medio": "La Razón de México",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.razon.com.mx/mexico/2026/10/31/municipios-concentran-casi-6-de-10-pesos-por-aclarar-ante-la-auditoria/",
+   "tema": "asf",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Auditoría Superior asegura servidores de Territorium tras fallas en examen de la UNAM; investiga irregularidades en la contratación",
+   "medio": "El Universal on MSN",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/dinero/general/auditor%C3%ADa-superior-asegura-servidores-de-territorium-tras-fallas-en-examen-de-la-unam-investiga-irregularidades-en-la-contrataci%C3%B3n/ar-AA2grbMQ",
+   "tema": "asf",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "ASF va contra responsables de irregularidades en examen de la UNAM",
+   "medio": "Milenio on MSN",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/mexico/asf-va-contra-responsables-de-irregularidades-en-examen-de-la-unam/ar-AA2gtgK8",
+   "tema": "asf",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "SAT reporta repunte en ingresos federales: Recaudación supera los 4.8 billones de pesos en 2026",
+   "medio": "Mi Bolsillo on MSN",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/otras/sat-reporta-repunte-en-ingresos-federales-recaudaci%C3%B3n-supera-los-48-billones-de-pesos-en-2026/ar-AA2grQLA",
+   "tema": "impuestos",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "¿Democracia por adjudicación directa?",
+   "medio": "El Universal",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.eluniversal.com.mx/opinion/adriana-davila-fernandez/democracia-por-adjudicacion-directa/",
+   "tema": "contratos",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Gobierno de AMLO otorga 8 de cada 10 contratos públicos mediante adjudicación directa",
+   "medio": "Proceso",
+   "fecha": "28 de marzo de 2019",
+   "url": "https://www.proceso.com.mx/nacional/2019/3/28/gobierno-de-amlo-otorga-de-cada-10-contratos-publicos-mediante-adjudicacion-directa-222397.html",
+   "tema": "contratos",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Pemex destina más de 370 mil mdp al pago de proveedores y logra reducción de su deuda",
+   "medio": "Milenio",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://www.milenio.com/negocios/pemex-destina-370-mil-mdp-pago-proveedores-logra-reducc",
+   "tema": "empresas",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Trasladan CFE y Pemex presión financiera fuera de balance",
+   "medio": "El Diario",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://diario.mx/economia/2026/oct/30/trasladan-cfe-y-pemex-presion-financiera-fuera-de-balance-1146250.html",
+   "tema": "empresas",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Pemex aumenta 28.5% sus ingresos y reduce deuda en el tercer trimestre de 2026",
+   "medio": "La Silla Rota",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://lasillarota.com/negocios/2026/10/30/pemex-aumenta-285-sus-ingresos-y-reduce-deuda-en-el-tercer-trimestre-de-2026-535270.html",
+   "tema": "empresas",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Sin cambio de fondo; Pemex y CFE siguen atadas a los subsidios de Hacienda",
+   "medio": "Energy 21",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://energy21.com.mx/sin-cambio-de-fondo-pemex-y-cfe-siguen-atadas-a-los-subsidios-de-hacienda/",
+   "tema": "empresas",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Hacienda descarta P-Caps para Pemex tras US$12.000M en 2025",
+   "medio": "ecosistemastartup",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://ecosistemastartup.com/hacienda-descarta-p-caps-para-pemex-tras-us12-000m-en-2025/",
+   "tema": "empresas",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "CFE reporta deuda financiera de 501,315 millones de pesos al tercer trimestre de 2026",
+   "medio": "petroleoenergia",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://petroleoenergia.com/noticias/cfe-reporta-deuda-financiera-de-501315-millones-de-pesos-al-tercer-trimestre-de-2026/",
+   "tema": "empresas",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Cámara de Diputados prepara discusión del Presupuesto 2027 y analiza cambios a la Modalidad 40 del IMSS",
+   "medio": "Enfoque Noticias",
+   "fecha": "24 de octubre de 2026",
+   "url": "https://enfoquenoticias.com.mx/noticias/monreal-presupuesto-2027-modalidad-40-imss",
+   "tema": "salud",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "Moody's ve un cierre de año más retador para estados y municipios",
+   "medio": "Milenio",
+   "fecha": "1 de agosto de 2026",
+   "url": "https://www.milenio.com/negocios/moody-municipios-enfrentan-retos-financieros-2026",
+   "tema": "estados",
+   "visto": "31 de octubre de 2026"
+  },
+  {
+   "titulo": "SHCP activa fondo de estabilización para subsanar recursos a estados",
+   "medio": "El Mañana de Reynosa",
+   "fecha": "21 de octubre de 2026",
+   "url": "https://www.elmanana.com/noticias/nacional/shcp-activa-feief-para-compensar-recursos/6199190",
+   "tema": "estados",
+   "visto": "31 de octubre de 2026"
+  },
   {
    "titulo": "Presupuesto de México para 2027 es congruente con consolidación fiscal progresiva: Hacienda",
    "medio": "Bloomberg Línea",
