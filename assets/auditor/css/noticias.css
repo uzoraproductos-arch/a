@@ -180,3 +180,14 @@
   .nt-op { padding: 12px 14px; border-radius: 4px; margin-top: 14px; }
   .nt-lead { padding-right: 0; }
 }
+/* Hemeroteca: las notas que ya cotejamos, por medio (31-10-2026). */
+.nt-hem { background: var(--nt-papel); border: 1px solid var(--nt-filete); border-radius: 6px; padding: 16px 18px; }
+.nt-hem-resumen { font-size: 16px; margin: 0 0 12px; }
+.nt-hem-medio { border-top: 1px solid var(--nt-filete); }
+.nt-hem-medio summary { min-height: 44px; display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 700; font-size: 17px; }
+.nt-hem-medio summary small { color: var(--nt-gris); font-weight: 500; }
+.nt-hem-medio ul { list-style: none; margin: 0 0 10px; padding: 0; }
+.nt-hem-medio li { margin: 0 0 10px; }
+.nt-hem-medio li > a { display: inline-block; min-height: 44px; padding-top: 10px; font-size: 16px; }
+.nt-hem-medio li small { display: block; font-size: 15px; color: var(--nt-gris); }
+.nt-hem-medio li small a { display: inline-block; min-height: 44px; padding-top: 10px; }

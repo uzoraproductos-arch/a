@@ -72,6 +72,25 @@ No se pudo abrir: el Proyecto de Presupuesto 2027 por entidad (el portal del
 PPEF no responde a la sesión) ni las notas de Crónica y Notisistema (sus
 dominios están fuera de la red de la sesión). El lugar 24, el 83 % y los
 recortes en carreteras quedan como pendientes: la falta es de la plataforma.
+
+Nota 4 · La segunda entrega de la ASF de la Cuenta Pública 2025 (31-10-2026).
+Pieza que pasó el autor: publicación de @pajaropolitico (Animal Político) en
+Instagram (31-10-2026). Documentos cotejados:
+- LFRCF, arts. 35, 38, 39 y 41: la segunda entrega es el último día hábil de
+  octubre (30-10-2026) y los plazos para aclarar (ya en la base, PLAZOS de
+  integrar_cuenta_publica.py).
+- La base: la primera entrega de la Cuenta Pública 2025 (MDB, p. 11, en
+  cuenta_publica.cp2025 de audit-database.js) y el padrón de 2,479 municipios
+  del INEGI.
+No se pudo abrir: el portal de la ASF (asf.gob.mx e informe.asf.gob.mx no
+resuelven desde la sesión) ni los sitios de los medios. Las cifras de la
+segunda entrega quedan pendientes: la falta es de la plataforma. De los
+medios solo se guardan titular, medio, fecha y liga (campo «medios»: la
+hemeroteca), tal como los indexaba el buscador el 31-10-2026.
+
+Campo nuevo desde la nota 4: medios [{medio, titulo, fecha, url}], cómo lo
+contaron otros medios. Es la hemeroteca: la página «Verifica una noticia» las
+lista por medio y el chat reconoce sus ligas cuando el lector las pega.
 """
 import json
 import pathlib
@@ -603,7 +622,186 @@ def jalisco_gasto_federal():
     }
 
 
-NOTAS = [modalidad_40, senado_lif_2027, jalisco_gasto_federal]
+ASF_PORTAL = 'https://informe.asf.gob.mx/'
+ASF_MDB25A = 'https://www.asf.gob.mx/Trans/Informes/IR2025a/Documentos/Matriz/IR2025_Entrega_a.pdf'
+LFRCF = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LFRCF.pdf'
+PAJARO = 'https://www.instagram.com/pajaropolitico/'
+FALTA_ASF = ('Falta de la plataforma: la ASF entregó a la Cámara de Diputados su segunda entrega de la Cuenta Pública 2025 (la ley '
+             'la fija el último día hábil de octubre: el 30-10-2026), pero su portal no abre desde nuestro servidor y aún no integramos '
+             'su Matriz de Datos Básicos.')
+
+
+def _cp2025a():
+    """La primera entrega 2025 se lee de la base, no se copia a mano."""
+    import integrar_cuenta_publica as icp
+    a = icp.CP2025A
+    if a['entrega'] != 'primera' or a['auditorias'] != 33:
+        raise SystemExit('integrar_al_momento: la primera entrega 2025 cambió; revisa la nota de la ASF')
+    # Los plazos de la cuenta del ejemplo, tal como están en la base.
+    pl = [(x['plazo'], x['fundamento']) for x in icp.PLAZOS]
+    for x in (('10 días hábiles', 'LFRCF, art. 39'), ('30 días hábiles', 'LFRCF, art. 39'), ('120 días hábiles', 'LFRCF, art. 41')):
+        if x not in pl:
+            raise SystemExit('integrar_al_momento: el plazo %s cambió en integrar_cuenta_publica.PLAZOS' % (x,))
+    return a
+
+
+def _municipios():
+    t = (RAIZ / 'assets' / 'auditor' / 'js' / 'municipios-efipem.js').read_text(encoding='utf-8')
+    if 'Los 2,479 municipios' not in t:
+        raise SystemExit('integrar_al_momento: el padrón municipal cambió; revisa la nota de la ASF')
+    return 2479
+
+
+def asf_segunda_entrega_2025():
+    from apartados import glosario_ancla
+    a = _cp2025a()
+    mun = _municipios()
+    pct = round(100 * 42 / mun, 1)
+    acl, rec = a['porAclarar'] / 1e6, a['recuperaciones'] / 1e6
+    g = lambda t: {'t': t.split(' (')[0], 'url': 'glosario.html#' + glosario_ancla(t)}
+    return {
+        'id': 'asf-segunda-entrega-cp2025',
+        'seccion': 'Al momento',
+        'icono': '🔎',
+        'fecha': '30-10-2026',
+        'titulo': 'La ASF y los 9 mil millones «por aclarar» de 2025: lo que se sabe, lo que falta y lo que nadie te explica',
+        'balazo': ('La Auditoría Superior entregó su segunda tanda de informes de la Cuenta Pública 2025 y los medios coinciden en «más de 9 mil millones» '
+                   'pendientes de aclarar, más de la mitad en 42 municipios. Antes de compartirlo: «por aclarar» no es un robo probado, 42 municipios '
+                   'son menos del 2 % de los del país y las 40 denuncias no salieron todas de este informe. Las cifras exactas siguen pendientes hasta '
+                   'que integremos el documento de la ASF.'),
+        'nota': {'medio': 'Animal Político (@pajaropolitico, Instagram)',
+                 'titulo': 'La ASF reportó más de 9 mil mdp pendientes de aclarar: 5 mil 200 mdp corresponden a 42 municipios',
+                 'fecha': '31-10-2026', 'url': PAJARO},
+        'circula': {'red': 'Instagram', 'cuenta': '@pajaropolitico (Animal Político)', 'fecha': '31 de octubre de 2026',
+                    'texto': ('La ASF reportó más de 9 mil mdp pendientes de aclarar: 5 mil 200 mdp corresponden a 42 municipios que no acreditaron '
+                              'el destino del gasto. Hay 40 denuncias por obras no hechas y equipo extraviado.')},
+        'cuerpo': [
+            ('Qué pasó. El 30 de octubre, último día hábil del mes, la Auditoría Superior de la Federación (ASF) entregó a la Cámara de Diputados '
+             'la segunda tanda de informes individuales de su revisión de la Cuenta Pública 2025. No es una fecha que eligió: la Ley de '
+             'Fiscalización la fija así (art. 35), y la tercera tanda, con el Informe General, llega el 20 de febrero de 2027.'),
+            ('Lo que reportan los medios. Todos coinciden en «más de 9 mil millones de pesos» por aclarar en los tres órdenes de gobierno y en '
+             'que el bloque más grande está en 42 municipios, «más de 5 mil 200 millones». En el detalle no coinciden: una nota habla de 9,008 '
+             'millones; otra, de 9,600 al sumar la primera entrega de junio. Por eso aquí todavía no damos una cifra exacta: la daremos con la '
+             'Matriz de Datos Básicos de la ASF, que es el documento que manda.'),
+            ('Lo que casi nadie explica. «Por aclarar» quiere decir que, al cierre de la auditoría, el gobierno no presentó los papeles que '
+             'prueban en qué se gastó ese dinero. No es un daño comprobado: la ley le da 30 días hábiles para responder después de recibir su '
+             'informe, y a la ASF 120 días hábiles para decidir si lo aclarado basta (arts. 39 y 41). Lo que no se aclare puede volverse un '
+             'pliego de observaciones y, después, una investigación.'),
+            ('El tamaño de la muestra. 42 municipios son el %s %% de los %s que tiene el país. Que en esos 42 aparezca más de la mitad del monto '
+             'dice mucho de esos 42, pero no permite decir cuánto «falta» en todos los municipios: la ASF revisa una muestra cada año.'
+             % (pct, format(mun, ','))),
+            ('Las denuncias. Las «40 denuncias» que circulan son, según la prensa, las que la ASF presentó en los seis meses de su actual '
+             'titular, no las que salieron de este informe. Su estado oficial debe venir en el informe semestral de la ASF, que la ley le da '
+             'hasta el 1 de noviembre (art. 38).'),
+            ('Lo que sí tenemos. De la primera entrega de la Cuenta Pública 2025 (junio de 2026: 33 auditorías a la distribución de las '
+             'participaciones federales), la Matriz de la ASF registra %s millones de pesos por aclarar y %s millones de recuperaciones. '
+             'Esa cifra no se parece a los «600 millones» de junio que suma una de las notas: es un punto que la ASF tendrá que aclarar con '
+             'su documento.' % (format(round(acl, 1), ',.1f'), format(round(rec, 1), ',.1f'))),
+        ],
+        'ejemplo': {
+            'tit': 'Del informe a la respuesta: el reloj que corre desde el 30 de octubre',
+            'txt': ('Así corren los plazos de la ley para un municipio con dinero por aclarar. Son días hábiles: sin sábados, domingos ni festivos, '
+                    'así que en el calendario son bastante más.'),
+            'filas': [
+                ['La ASF le manda su informe', '10 días hábiles', 'LFRCF, art. 39'],
+                ['El municipio responde y aporta papeles', '30 días hábiles', 'LFRCF, art. 39'],
+                ['La ASF decide si lo aclarado basta', '120 días hábiles', 'LFRCF, art. 41'],
+                ['En total, cuando mucho', '160 días hábiles', '10 + 30 + 120'],
+            ],
+            'nota': 'Es una cuenta derivada con los plazos máximos de la ley; la ASF puede resolver antes.',
+        },
+        'cotejo': [
+            {'dice': 'La ASF reportó más de 9 mil mdp pendientes de aclarar',
+             'res': 'pendiente',
+             'explica': ('Varios medios lo publicaron el 30 y 31 de octubre, pero con cifras distintas (9,008 o 9,600 millones). La cifra oficial está '
+                         'en la Matriz de Datos Básicos de la segunda entrega, que aún no integramos.'),
+             'fuente': 'ASF, Informe del Resultado de la Cuenta Pública 2025, segunda entrega', 'url': ASF_PORTAL,
+             'quien': FALTA_ASF, 'donde': ASF_PORTAL},
+            {'dice': '5 mil 200 mdp corresponden a 42 municipios que no acreditaron el destino del gasto',
+             'res': 'pendiente',
+             'explica': ('Lo reportan varios medios (uno precisa 5,243 millones). Dos matices que sí podemos dar: «no acreditaron» significa que '
+                         'al corte no presentaron documentación, y todavía tienen plazo para hacerlo; y 42 municipios son el %s %% de los %s del país '
+                         '(derivado: 42 ÷ %s × 100).' % (pct, format(mun, ','), format(mun, ','))),
+             'fuente': 'LFRCF, arts. 39 y 41; INEGI, padrón municipal en la base de la plataforma', 'url': LFRCF,
+             'quien': FALTA_ASF, 'donde': ASF_PORTAL},
+            {'dice': 'Hay 40 denuncias por obras no hechas y equipo extraviado',
+             'res': 'pendiente',
+             'explica': ('Según la prensa, son las denuncias que la ASF presentó en seis meses ante la Fiscalía Anticorrupción, más tres penales: '
+                         'no todas salieron de este informe. Las obras no hechas y el equipo extraviado son ejemplos que dio el auditor. El estado '
+                         'oficial de las denuncias va en el informe semestral de la ASF (LFRCF, art. 38).'),
+             'fuente': 'ASF, informe semestral sobre la solventación de observaciones y acciones', 'url': 'informes-semestral-asf.html',
+             'quien': ('Falta de la plataforma: la ASF debe publicar su informe semestral a más tardar el 1-11-2026 (LFRCF, art. 38) y '
+                       'todavía no lo integramos.'), 'donde': ASF_PORTAL},
+            {'dice': 'Sumados a los 600 millones de su primer paquete de informes de junio, son 9,600 millones (El Financiero)',
+             'res': 'matiz',
+             'explica': ('La Matriz de Datos Básicos de la primera entrega 2025 (p. 11) registra %s millones por aclarar y %s millones de '
+                         'recuperaciones en sus 33 auditorías: no aparecen 600 millones. Además, el titular indexado decía «9,600 mmdp», que '
+                         'serían miles de millones: mil veces más de lo que dice la propia nota.' % (format(round(acl, 1), ',.1f'), format(round(rec, 1), ',.1f'))),
+             'fuente': 'ASF, Matriz de Datos Básicos de la Cuenta Pública 2025, primera entrega (jun. 2026), p. 11', 'url': ASF_MDB25A},
+        ],
+        'medios': [
+            {'medio': 'La Jornada', 'titulo': 'Sin aclarar, 9 mil mdp de la cuenta pública 2025: ASF', 'fecha': '31-10-2026',
+             'url': 'https://www.jornada.com.mx/2026/10/31/politica/006n3pol'},
+            {'medio': 'El Financiero', 'titulo': 'ASF reporta gastos irregulares por 9,600 mmdp en 2025 de recursos federales; ya hay 40 denuncias',
+             'fecha': '30-10-2026', 'url': 'https://www.elfinanciero.com.mx/nacional/2026/10/30/asf-reporta-gastos-irregulares-por-9600-mmdp-en-2025-de-recursos-federales-ya-hay-40-denuncias/'},
+            {'medio': 'La Razón', 'titulo': 'Municipios concentran seis de cada 10 pesos pendientes de aclarar ante la ASF', 'fecha': '30-10-2026',
+             'url': 'https://www.razon.com.mx/mexico/2026/10/30/municipios-concentran-seis-de-cada-10-pesos-pendientes-de-aclarar-ante-la-asf/'},
+            {'medio': 'La Razón', 'titulo': 'En Cuenta Pública 2025, 9 mil mdp por aclarar; municipios, con más observaciones de ASF', 'fecha': '31-10-2026',
+             'url': 'https://www.razon.com.mx/mexico/2026/10/31/en-cuenta-publica-2025-9-mil-mdp-por-aclarar-municipios-con-mas-observaciones-de-asf/'},
+            {'medio': 'Excélsior', 'titulo': 'Detectan más de 5 mil 200 mdp sin comprobar en 42 municipios', 'fecha': '',
+             'url': 'https://www.excelsior.com.mx/nacional/detectan-mas-5-mil-200-mdp-sin-comprobar-42-municipios'},
+            {'medio': 'El Universal', 'titulo': 'Auditoría Superior identifica simulación de operaciones en gobiernos de Nuevo León y Sinaloa', 'fecha': '',
+             'url': 'https://www.eluniversal.com.mx/nacion/auditoria-superior-identifica-simulacion-de-operaciones-en-nuevo-leon-y-sinaloa-funcionarios-entregan-recursos-a-familiares/'},
+            {'medio': 'Infobae', 'titulo': 'Aureliano Hernández reporta 40 denuncias penales en seis meses al frente de la ASF', 'fecha': '31-10-2026',
+             'url': 'https://www.infobae.com/mexico/2026/10/31/aureliano-hernandez-reporta-40-denuncias-penales-en-seis-meses-al-frente-de-la-asf-destaca-el-caso-de-nuevo-leon-y-sinaloa/'},
+            {'medio': 'El Heraldo de México', 'titulo': 'La ASF ha presentado 40 denuncias en combate a la corrupción y otras tres penales en 6 meses', 'fecha': '30-10-2026',
+             'url': 'https://heraldodemexico.com.mx/nacional/2026/10/30/la-asf-ha-presentado-40-denuncias-en-combate-la-corrupcion-otras-tres-penales-en-meses-919679.html'},
+            {'medio': 'Político MX', 'titulo': 'ASF presenta 40 denuncias penales e indaga casos de INE y la UNAM', 'fecha': '30-10-2026',
+             'url': 'https://politico.mx/2026/10/30/asf-presenta-40-denuncias-penales-e-indaga-casos-de-ine-y-la-unam/'},
+            {'medio': 'MVS Noticias', 'titulo': 'ASF detecta más de 9 mil mdp por aclarar en segunda revisión de la Cuenta Pública 2025', 'fecha': '30-10-2026',
+             'url': 'https://mvsnoticias.com/nacional/2026/10/30/asf-detecta-mas-de-9-mil-mdp-por-aclarar-en-segunda-revision-de-la-cuenta-publica-2025-751861.html'},
+            {'medio': 'El Imparcial', 'titulo': 'La ASF detectó más de 9 mil millones de pesos pendientes de aclarar en el gasto público de 2025', 'fecha': '30-10-2026',
+             'url': 'https://www.elimparcial.com/dinero/2026/10/30/la-auditoria-superior-de-la-federacion-asf-detecto-mas-de-9-mil-millones-de-pesos-pendientes-de-aclarar-en-el-gasto-publico-de-2025-el-hallazgo-mas-relevante-esta-en-los-municipios-ninguno-de-los-42-ayuntamientos-revisados-pudo-acreditar-documentalmente-el-destino-de-la-totalidad-de-los-recursos-federales-fiscalizados/'},
+            {'medio': 'UnoTV', 'titulo': 'ASF detecta más de 9 mil mdp por aclarar en ejercicio 2025; investiga irregularidades en INE y OPLEs', 'fecha': '',
+             'url': 'https://www.unotv.com/nacional/asf-detecta-mas-de-9-mil-mdp-por-aclarar-en-2025-investiga-irregularidades-ine-y-oples/'},
+            {'medio': '24 Horas', 'titulo': 'ASF detecta más de 9 mil millones de pesos sin aclarar en los tres órdenes de gobierno', 'fecha': '',
+             'url': 'https://24-horas.mx/mexico/asf-detecta-mas-de-9-mil-millones-de-pesos-sin-aclarar-en-los-tres-ordenes-de-gobierno/'},
+            {'medio': 'Capital México', 'titulo': 'Detectan anomalías en el gasto público de 2025', 'fecha': '',
+             'url': 'https://www.capitalmexico.com.mx/politica/detectan-anomalias-en-el-gasto-publico-de-2025/'},
+        ],
+        'datos': [
+            {'ico': '🔎', 'tx': 'Las cifras de la ASF, entrega por entrega', 'url': 'herramienta-inspector-asf-cifras.html',
+             'de': 'Auditorías, acciones, recuperaciones y montos por aclarar de la Cuenta Pública 2024 completa y la primera entrega de 2025.'},
+            {'ico': '🗺️', 'tx': 'Lo que la ASF encontró en tu estado', 'url': 'herramienta-inspector-asf-estado.html',
+             'de': 'El monto por aclarar de tu entidad y sus municipios, con su documento.'},
+            {'ico': '📊', 'tx': 'El informe semestral de la ASF', 'url': 'informes-semestral-asf.html',
+             'de': 'Cómo van las observaciones y las denuncias: el que viene se publica a más tardar el 1 de noviembre.'},
+            {'ico': '📦', 'tx': 'Auditoría en imágenes: el Ramo 33', 'url': 'auditoria-ramo-33.html',
+             'de': 'El dinero federal que llega a los municipios y lo que la ASF suele encontrar.'},
+            {'ico': '🏘️', 'tx': 'Baja al territorio: los 2,479 municipios', 'url': 'numeros-baja-al-territorio.html',
+             'de': 'Cuánto le llega a tu municipio y de qué fondos.'},
+        ],
+        'glosario': [g('Monto por Aclarar'), g('Informe Individual de Auditoría'), g('Pliego de Observaciones'),
+                     g('Denuncia de Hechos (ASF)'), g('Auditoría Superior de la Federación (ASF)'), g('Cuenta Pública')],
+        'red': 'ASF segunda entrega Cuenta Pública 2025 monto por aclarar municipios',
+        'sigue': [
+            {'que': 'La Matriz de Datos Básicos de la segunda entrega 2025: el monto por aclarar exacto, por entidad y por municipio', 'url': ASF_PORTAL},
+            {'que': 'El informe semestral de la ASF (a más tardar el 1-11-2026): el estado de las denuncias', 'url': ASF_PORTAL},
+            {'que': 'Las respuestas de los 42 municipios: lo que se aclare en los 30 días hábiles que les da la ley', 'url': LFRCF},
+            {'que': 'La tercera entrega y el Informe General de la Cuenta Pública 2025 (20-02-2027)', 'url': ASF_PORTAL},
+        ],
+        'fuentes': [
+            {'nombre': 'Ley de Fiscalización y Rendición de Cuentas de la Federación, arts. 35, 38, 39 y 41', 'url': LFRCF},
+            {'nombre': 'ASF, Matriz de Datos Básicos de la Cuenta Pública 2025, primera entrega (junio de 2026), p. 11', 'url': ASF_MDB25A},
+            {'nombre': 'INEGI, padrón de 2,479 municipios (EFIPEM 2024), en la base de la plataforma', 'url': 'numeros-baja-al-territorio.html'},
+            {'nombre': 'ASF, portal del Informe del Resultado de la Cuenta Pública 2025', 'url': ASF_PORTAL},
+            {'nombre': 'Punto de partida: @pajaropolitico (Animal Político), Instagram, 31-10-2026', 'url': PAJARO},
+        ],
+        'actualizado': '31-10-2026',
+    }
+
+
+NOTAS = [modalidad_40, senado_lif_2027, jalisco_gasto_federal, asf_segunda_entrega_2025]
 
 
 def main():

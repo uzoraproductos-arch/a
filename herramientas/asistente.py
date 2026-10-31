@@ -329,7 +329,9 @@ def _paginas():
     out = []
     for p in sorted(glob.glob(os.path.join(RAIZ, '*.html'))):
         n = os.path.basename(p)
-        if n in (ARCHIVO, DICTAMEN):
+        # Las notas «Al momento» con página propia (para buscadores, 31-10-2026) ya
+        # están en el chat como columnas: su página no compite con su ficha.
+        if n in (ARCHIVO, DICTAMEN) or n.startswith('noticias-al-momento-'):
             continue
         s = open(p, encoding='utf-8').read()
         if 'http-equiv="refresh"' in s or 'name="robots" content="noindex' in s:

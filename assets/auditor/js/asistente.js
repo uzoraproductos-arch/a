@@ -942,6 +942,19 @@
     });
     return hit;
   }
+  /* La liga sin protocolo, www, consulta ni diagonal final (liga_plana de asistente_personajes.py). */
+  function ligaPlana(u) { return String(u || '').trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').split(/[?#]/)[0].replace(/\/+$/, ''); }
+  function hemeroteca(liga) {
+    var H = (B.dat && B.dat.per && B.dat.per.hem) || [], u = ligaPlana(liga);
+    var h = H.filter(function (x) { return x.u === u; })[0];
+    var f = h && (B.fichas || []).filter(function (x) { return x.t === 'columna' && x.col === h.col; })[0];
+    if (!f || !charla) return null;
+    var r = charla.deFicha(f);
+    r.html = '<p>🗂️ Esa nota ya está en nuestra <b>hemeroteca</b>: ' + esc(h.m) + (h.f ? ', ' + esc(h.f) : '') + ', «' + esc(h.t) + '». ' +
+      (h.rol === 'origen' ? 'De ella partimos para este cotejo' : 'Es una de las notas que contaron el mismo hecho') + ', y esto es lo que consta en los documentos oficiales:</p>' + r.html +
+      '<p class="pa-chico">El titular de un medio no es la fuente: lo que vale es el documento que va junto a cada afirmación. ¿Quieres revisar la nota cifra por cifra? <a href="' + esc(APP.inspnota.url + '?liga=' + encodeURIComponent(liga)) + '">Contrástala aquí</a>.</p>';
+    return r;
+  }
   function inspector(q, previas) {
     if (!IN.apps.length) return null;
     var p = plano(q), t = String(q).trim(), m;
@@ -966,6 +979,9 @@
         ' con los datos vigentes de la plataforma y te digo si coincide. El resultado sale en el recuadro de abajo.</p>' +
         '<p class="pa-chico">Si no coincide, o el documento se alteró, o se expidió con datos anteriores.</p>');
     }
+    /* 2a. La hemeroteca (31-10-2026): si la liga es de una nota que ya cotejamos, se dice y se abre su cotejo. */
+    var hem = liga && hemeroteca(liga);
+    if (hem) return hem;
     /* 2. La liga de una nota: «Contrasta una nota» la lee aquí mismo. */
     if (liga) {
       return respApp('inspnota', APP.inspnota.url + '?liga=' + encodeURIComponent(liga),

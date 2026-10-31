@@ -1161,6 +1161,29 @@
    "q": "¿Qué pide Laura Haro para Jalisco en el presupuesto 2027?",
    "modo": "periodista",
    "ir": "noticias-auditavision.html#col-jalisco-gasto-federal-pef-2027"
+  },
+  {
+   "q": "¿Es cierto que la ASF reportó más de 9 mil millones pendientes de aclarar?",
+   "ir": "noticias-auditavision.html#col-asf-segunda-entrega-cp2025"
+  },
+  {
+   "q": "¿Qué pasa con los 42 municipios que no acreditaron el gasto ante la ASF?",
+   "modo": "periodista",
+   "ir": "noticias-auditavision.html#col-asf-segunda-entrega-cp2025"
+  },
+  {
+   "q": "https://www.jornada.com.mx/2026/10/31/politica/006n3pol?partner=rss",
+   "ir": "noticias-auditavision.html#col-asf-segunda-entrega-cp2025",
+   "dice": [
+    "hemeroteca"
+   ]
+  },
+  {
+   "q": "Revisa esta nota: https://www.elfinanciero.com.mx/nacional/2026/10/30/asf-reporta-gastos-irregulares-por-9600-mmdp-en-2025-de-recursos-federales-ya-hay-40-denuncias/",
+   "ir": "noticias-auditavision.html#col-asf-segunda-entrega-cp2025",
+   "dice": [
+    "hemeroteca"
+   ]
   }
  ]
 }

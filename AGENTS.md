@@ -411,6 +411,12 @@ mudando a su página; no se agregan desgloses nuevos.
   **rotuladas «sin verificar»; nunca se copia ni se resume lo que dice la
   red**. Las cifras que la plataforma ya tiene se leen de su módulo, no se
   copian. El chat la encuentra sola, y «noticias de hoy» lista las más nuevas.
+  **Hemeroteca y buscadores** (pedido del autor, 31-10-2026): una nota puede
+  traer `medios` (cómo lo contaron otros medios: medio, titular, fecha y liga,
+  sin verificar, nunca el texto); se juntan en `noticias-verifica.html#hemeroteca`
+  y el chat reconoce esas ligas. Cada nota tiene su página
+  `noticias-al-momento-<id>.html`, escrita en el HTML con su NewsArticle, para
+  que Google la encuentre (`paginas_al_momento()` de `herramientas/noticias.py`).
 - **Noticias reúne todo lo de noticias** (pedido del autor, 28-10-2026: «que
   todo quede debidamente vinculado»). Además de «Al momento» y la Columna del
   Erario, `noticias-relevantes.html` trae dentro la aplicación **Contrasta una

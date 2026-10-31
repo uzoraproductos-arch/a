@@ -1395,7 +1395,7 @@ def noticias(base, ref):
                 'bloque': nt.construir(base, ref, arch),
             }],
         })
-    return paginas
+    return paginas + nt.paginas_al_momento()
 
 
 
