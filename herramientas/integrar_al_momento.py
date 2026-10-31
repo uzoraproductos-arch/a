@@ -88,6 +88,20 @@ segunda entrega quedan pendientes: la falta es de la plataforma. De los
 medios solo se guardan titular, medio, fecha y liga (campo «medios»: la
 hemeroteca), tal como los indexaba el buscador el 31-10-2026.
 
+Nota 5 · Portacelis y el permiso de importación de diésel (31-10-2026). Pieza
+que pasó el autor: una publicación sin liga que circula en redes («URGENTE —
+REGALO DE DESPEDIDA…»), que retoma la investigación de MCCI del 05-10-2026.
+Sin liga no se cita a la cuenta (VERIFICAMOS, paso 0). Documentos cotejados:
+- Constitución, art. 83: el sexenio terminó el 30-09-2024.
+- SAT, lista del art. 69-B del CFF (assets/auditor/data/sat-69b.js, corte al
+  31-12-2025): Portacelis no aparece. Se lee del archivo, no se copia.
+No se pudo abrir: el permiso de la Sener (la copia la tiene MCCI), el acuerdo
+del DOF del 18-09-2024 (dof.gob.mx no resuelve desde la sesión) ni el sitio de
+MCCI: el permiso, los litros y las fechas quedan pendientes, por falta de la
+plataforma. La declaratoria del SAT ante la FGR no es pública: las carpetas
+de investigación son reservadas (CNPP, art. 218). A la persona privada que,
+según MCCI, administraba la empresa no se le nombra (AGENTS.md §2 bis).
+
 Campo nuevo desde la nota 4: medios [{medio, titulo, fecha, url}], cómo lo
 contaron otros medios. Es la hemeroteca: la página «Verifica una noticia» las
 lista por medio y el chat reconoce sus ligas cuando el lector las pega.
@@ -801,7 +815,154 @@ def asf_segunda_entrega_2025():
     }
 
 
-NOTAS = [modalidad_40, senado_lif_2027, jalisco_gasto_federal, asf_segunda_entrega_2025]
+MCCI_PORTACELIS = 'https://contralacorrupcion.mx/gobierno-de-amlo-favorecio-a-huachicolera-ligada-a-amilcar-olan/'
+CPEUM = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf'
+CNPP = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CNPP.pdf'
+SENER = 'https://www.gob.mx/sener'
+DOF_BUSCA = 'https://dof.gob.mx/'
+FGR = 'https://www.gob.mx/fgr'
+FALTA_SENER = ('Falta de la plataforma: MCCI dice tener copia del permiso de la Secretaría de Energía; ni esa copia ni el registro '
+               'de permisos de la Sener abren desde nuestro servidor.')
+
+
+def _sat69b():
+    """La lista 69-B se lee de su archivo: Portacelis no debe estar."""
+    t = (RAIZ / 'assets' / 'auditor' / 'data' / 'sat-69b.js').read_text(encoding='utf-8')
+    meta = json.loads(t[t.index('{'):t.rindex('}') + 1])['meta']
+    if 'portacelis' in t.lower():
+        raise SystemExit('integrar_al_momento: Portacelis ya aparece en la lista 69-B; corrige la nota de Portacelis')
+    return meta
+
+
+def portacelis_diesel():
+    from apartados import glosario_ancla
+    m = _sat69b()
+    g = lambda t: {'t': t.split(' (')[0], 'url': 'glosario.html#' + glosario_ancla(t)}
+    return {
+        'id': 'portacelis-permiso-diesel-sener',
+        'seccion': 'Al momento',
+        'icono': '🛢️',
+        'fecha': '31-10-2026',
+        'titulo': 'Portacelis y el permiso para importar 52 millones de litros de diésel: lo que dice MCCI, lo que consta y lo que es puro adjetivo',
+        'balazo': ('Circula que el gobierno anterior dio un «permiso exprés» a una empresa «fantasma» ligada a Amílcar Olán para importar '
+                   '52 millones de litros de diésel. La historia viene de una investigación de MCCI del 5 de octubre. Lo que podemos decir hoy: '
+                   'el sexenio sí terminaba tres días después de la fecha del permiso; Portacelis no está en la lista de empresas fantasma del SAT; '
+                   'el permiso y los litros siguen sin un documento que podamos abrir, y «narcoexpresidente» no lo sostiene ninguna acusación.'),
+        'nota': {'medio': 'Mexicanos contra la Corrupción y la Impunidad (MCCI)',
+                 'titulo': 'Gobierno de AMLO favoreció a huachicolera ligada a Amílcar Olán', 'fecha': '05-10-2026', 'url': MCCI_PORTACELIS},
+        'circula': {'red': 'Redes sociales (publicación sin liga)', 'cuenta': 'Cuenta no identificada', 'fecha': '31 de octubre de 2026',
+                    'texto': ('URGENTE — REGALO DE DESPEDIDA: A solo días de dejar el poder, el narcoexpresidente AMLO le otorgó un permiso exprés a la '
+                              'empresa «fantasma» Portacelis, ligada al amigo íntimo de «El Andy», Amílcar Olán, para importar 52 millones de litros '
+                              'de presunto diésel contrabandeado, según una investigación de MCCI.')},
+        'cuerpo': [
+            ('De dónde viene. La publicación que circula retoma, casi tres semanas después, una investigación de Mexicanos contra la Corrupción '
+             'y la Impunidad (MCCI) del 5 de octubre. Según MCCI, la Secretaría de Energía autorizó el 27 de septiembre de 2024 a Portacelis Gas '
+             'and Oil a importar hasta 52 millones de litros de diésel, nueve días después de endurecer sus reglas para esos permisos y cuando la '
+             'empresa tenía unas semanas de creada. MCCI es una organización de periodismo de investigación: su trabajo es el punto de partida, '
+             'no la fuente; el documento que manda es el permiso.'),
+            ('Lo que sí consta. El sexenio terminó el 30 de septiembre de 2024: la Constitución fija que la nueva presidencia empieza el 1 de '
+             'octubre (art. 83). Si el permiso es del 27, como dice MCCI, se dio a tres días del cambio. Y Portacelis no aparece en la lista del '
+             'artículo 69-B del Código Fiscal, la de las empresas que el SAT considera que facturan operaciones simuladas (las llamadas «fantasma»), '
+             'en nuestra copia con corte al %s.' % m['corte']),
+            ('Lo que no podemos sostener todavía. El permiso mismo, su fecha, quién lo firmó y los 52 millones de litros: la copia la tiene MCCI y no '
+             'abre desde nuestro servidor, ni el registro de la Sener. Tampoco los litros que la empresa habría dejado de declarar: la prensa habla de '
+             '80, 83 o 90 millones, según la nota, a partir de una declaratoria del SAT ante la Fiscalía que no es pública.'),
+            ('Lo que es adjetivo. «Narcoexpresidente» y «regalo de despedida» no son datos: no hay acusación, proceso ni sentencia que los sostenga, '
+             'y una acusación tampoco sería una condena (Constitución, art. 20). «Fantasma», en el sentido del SAT, no consta. Y que una empresa '
+             'esté «ligada» a una persona porque la administra alguien de su confianza es un vínculo que reporta MCCI, no una resolución de autoridad: '
+             'según la prensa, Amílcar Olán no figura como acusado.'),
+            ('Por qué importa. El llamado huachicol fiscal (meter combustible declarándolo como otra cosa, o por menos litros, para no pagar el IEPS) '
+             'es dinero que deja de entrar a la hacienda pública. Si una autoridad confirma que este permiso se usó para eso, la pregunta de fondo es '
+             'quién lo autorizó y con qué requisitos: eso es lo que hay que seguir.'),
+        ],
+        'cotejo': [
+            {'dice': 'A solo días de dejar el poder… le otorgó un permiso exprés',
+             'res': 'matiz',
+             'explica': ('El sexenio terminó el 30-09-2024 (Constitución, art. 83), así que una fecha del 27 de septiembre sí queda a tres días. Pero el '
+                         'permiso, según MCCI, lo dio la Secretaría de Energía, firmado por un director de área, no el Presidente en persona, y la '
+                         'fecha misma sale de un documento que todavía no podemos abrir.'),
+             'fuente': 'Constitución Política, art. 83', 'url': CPEUM},
+            {'dice': 'Para importar 52 millones de litros de diésel',
+             'res': 'pendiente',
+             'explica': 'Es la cifra que MCCI atribuye al permiso. Sin el permiso a la vista no la podemos confirmar ni negar.',
+             'fuente': 'Secretaría de Energía, permiso previo de importación de petrolíferos', 'url': MCCI_PORTACELIS,
+             'quien': FALTA_SENER, 'donde': SENER},
+            {'dice': 'La empresa «fantasma» Portacelis',
+             'res': 'no consta',
+             'explica': ('Portacelis no aparece en la lista 69-B del SAT (empresas que facturan operaciones simuladas) en nuestra copia con corte al %s, '
+                         'que revisa %s contribuyentes. Que una empresa sea nueva o no tenga historial de importaciones no la vuelve «fantasma» en '
+                         'el sentido de la ley.' % (m['corte'], format(m['total'], ','))),
+             'fuente': m['fuente'], 'url': m['url']},
+            {'dice': 'Ligada al amigo íntimo de «El Andy», Amílcar Olán',
+             'res': 'no consta',
+             'explica': ('Es el vínculo que reporta MCCI: la empresa la administraba una persona de confianza de Olán. No encontramos un documento '
+                         'oficial (acta en el Registro Público de Comercio, resolución o acusación) que lo establezca, y según la prensa Olán no '
+                         'figura como acusado.'),
+             'fuente': 'MCCI, investigación del 05-10-2026 (punto de partida, no fuente)', 'url': MCCI_PORTACELIS},
+            {'dice': 'Presunto diésel contrabandeado',
+             'res': 'pendiente',
+             'explica': ('La prensa reporta una declaratoria de perjuicio del SAT ante la FGR por litros no declarados (80, 83 o 90 millones, según el '
+                         'medio). Una denuncia no es una condena. La carpeta es reservada por ley, así que nadie está obligado a publicarla todavía: '
+                         'el dato público llegará con una acusación formal o una sentencia.'),
+             'fuente': 'Código Nacional de Procedimientos Penales, art. 218 (reserva de la investigación)', 'url': CNPP,
+             'quien': ('Nadie está obligado a publicarlo aún: las carpetas de investigación son reservadas (CNPP, art. 218). Lo hará público la FGR '
+                       'si presenta una acusación formal.'), 'donde': FGR},
+            {'dice': 'El narcoexpresidente AMLO',
+             'res': 'no consta',
+             'explica': ('Es un calificativo de quien publica. No existe una acusación, un proceso ni una sentencia por narcotráfico contra el '
+                         'expresidente, y aun si existiera una acusación, no sería una condena (Constitución, art. 20, B, fr. I).'),
+             'fuente': 'Constitución Política, art. 20, apartado B, fr. I (presunción de inocencia)', 'url': CPEUM},
+        ],
+        'medios': [
+            {'medio': 'La Silla Rota', 'titulo': 'Gobierno de AMLO autorizó a firma ligada a Olán importar diesel: MCCI', 'fecha': '05-10-2026',
+             'url': 'https://lasillarota.com/nacion/2026/10/5/gobierno-de-amlo-autorizo-a-firma-ligada-a-olan-importar-diesel-mcci-531479.html'},
+            {'medio': 'Político MX', 'titulo': 'Gobierno de AMLO dio permiso a empresa ligada a Amílcar Olán para importar diésel', 'fecha': '05-10-2026',
+             'url': 'https://politico.mx/2026/10/05/gobierno-de-amlo-dio-permiso-a-empresa-ligada-a-amilcar-olan-para-importar-diesel/'},
+            {'medio': 'Aristegui Noticias', 'titulo': 'Gobierno de AMLO favoreció a presunta huachicolera ligada a Amílcar Olán', 'fecha': '05-10-2026',
+             'url': 'https://aristeguinoticias.com/0510/investigaciones-especiales/gobierno-de-amlo-favorecio-a-presunta-huachicolera-ligada-a-amilcar-olan-mcci/'},
+            {'medio': 'Noticaribe', 'titulo': 'Gobierno de AMLO autorizó importación de diésel a empresa ligada a Amílcar Olán pese a nuevas reglas: MCCI',
+             'fecha': '05-10-2026', 'url': 'https://noticaribe.com.mx/2026/10/05/gobierno-de-amlo-autorizo-importacion-de-diesel-a-empresa-ligada-a-amilcar-olan-pese-a-nuevas-reglas-mcci/'},
+            {'medio': 'Revista República', 'titulo': 'Gobierno de AMLO favoreció a presunta huachicolera ligada a Amílcar Olán', 'fecha': '06-10-2026',
+             'url': 'https://revistarepublica.com/2026/10/06/gobierno-de-amlo-favorecio-a-presunta-huachicolera-ligada-a-amilcar-olan-mcci/'},
+            {'medio': 'TV Azteca', 'titulo': 'A 3 días de acabar el sexenio de AMLO, la empresa ligada a Amílcar Olán obtuvo permiso irregular', 'fecha': '',
+             'url': 'https://www.tvazteca.com/aztecanoticias/video-a-3-dias-acabar-el-sexenio-amlo-la-empresa-ligada-a-amilcar-olan-obtuvo-permiso-irregular'},
+            {'medio': 'Forbes México', 'titulo': 'MCCI revela que empresa ligada a Amílcar Olán no declaró 80 millones de litros de diésel', 'fecha': '',
+             'url': 'https://forbes.com.mx/mcci-revela-que-empresa-ligada-a-amilcar-olan-amigo-de-andy-lopez-beltran-no-declaro-80-millones-de-litros-de-diesel/'},
+            {'medio': 'Político MX', 'titulo': 'Empresa ligada a Amílcar Olán, amigo de «Andy», omitió declarar 83 millones de litros de diésel', 'fecha': '07-09-2026',
+             'url': 'https://politico.mx/2026/09/07/empresa-ligada-a-amilcar-olan-amigo-de-andy-omitio-declarar-83-millones-de-litros-de-diesel-sat/'},
+            {'medio': 'Expreso de Tamaulipas', 'titulo': 'Destapan otro fraude millonario en las aduanas', 'fecha': '09-09-2026',
+             'url': 'https://expreso.press/2026/09/09/destapan-otro-fraude-millonario-en-las-aduanas/'},
+            {'medio': 'Canal 44', 'titulo': 'Señalan presuntos beneficios a huachicolera ligada a Amílcar Olán durante sexenio anterior', 'fecha': '',
+             'url': 'https://canal44.com/gobierno-amlo-portacelis-presunta-huachicolera-amilcar-olan/'},
+        ],
+        'datos': [
+            {'ico': '⛽', 'tx': 'Auditoría en imágenes: el huachicol fiscal', 'url': 'auditoria-huachicol-fiscal.html',
+             'de': 'Cómo funciona el contrabando de combustible declarado como otra cosa, y lo que dicen los documentos.'},
+            {'ico': '🚫', 'tx': 'La lista negra del SAT', 'url': 'herramienta-inspector-efos.html',
+             'de': 'Busca cualquier empresa por nombre o RFC entre los contribuyentes del artículo 69-B.'},
+            {'ico': '📑', 'tx': 'Contratos públicos', 'url': 'contratos-publicos.html',
+             'de': 'Si una empresa le vendió al gobierno, ahí aparecen sus contratos de ComprasMX.'},
+        ],
+        'glosario': [g('Huachicol Fiscal'), g('Empresa Fantasma (EFOS)'), g('Contrabando (Delito Fiscal)'),
+                     g('IEPS (Impuesto Especial sobre Producción y Servicios)')],
+        'red': 'Portacelis permiso Sener diésel Amílcar Olán MCCI',
+        'sigue': [
+            {'que': 'El permiso previo de importación de la Sener a Portacelis: fecha, firma, volumen y requisitos', 'url': SENER},
+            {'que': 'El acuerdo de la Sener publicado en el DOF el 18-09-2024 que endureció los requisitos', 'url': DOF_BUSCA},
+            {'que': 'Si la FGR presenta una acusación formal por contrabando, y contra quién', 'url': FGR},
+            {'que': 'La próxima actualización de la lista 69-B del SAT', 'url': m['url']},
+        ],
+        'fuentes': [
+            {'nombre': 'Constitución Política de los Estados Unidos Mexicanos, arts. 20 y 83', 'url': CPEUM},
+            {'nombre': '%s, corte al %s, en la base de la plataforma' % (m['fuente'], m['corte']), 'url': m['url']},
+            {'nombre': 'Código Nacional de Procedimientos Penales, art. 218', 'url': CNPP},
+            {'nombre': 'Punto de partida: MCCI, «Gobierno de AMLO favoreció a huachicolera ligada a Amílcar Olán» (05-10-2026)', 'url': MCCI_PORTACELIS},
+        ],
+        'actualizado': '31-10-2026',
+    }
+
+
+NOTAS = [modalidad_40, senado_lif_2027, jalisco_gasto_federal, asf_segunda_entrega_2025, portacelis_diesel]
 
 
 def main():

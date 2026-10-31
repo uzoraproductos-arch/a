@@ -404,7 +404,7 @@
   },
   {
    "q": "¿Quién es Andrés Manuel López Obrador?",
-   "ir": "noticias-auditavision.html"
+   "ir": "noticias-auditavision.html#col-portacelis-permiso-diesel-sener"
   },
   {
    "q": "¿Qué es el FOBAPROA?",
@@ -1181,6 +1181,22 @@
   {
    "q": "Revisa esta nota: https://www.elfinanciero.com.mx/nacional/2026/10/30/asf-reporta-gastos-irregulares-por-9600-mmdp-en-2025-de-recursos-federales-ya-hay-40-denuncias/",
    "ir": "noticias-auditavision.html#col-asf-segunda-entrega-cp2025",
+   "dice": [
+    "hemeroteca"
+   ]
+  },
+  {
+   "q": "¿Es cierto que AMLO le dio a Portacelis un permiso para importar 52 millones de litros de diésel?",
+   "ir": "noticias-auditavision.html#col-portacelis-permiso-diesel-sener"
+  },
+  {
+   "q": "¿Portacelis es una empresa fantasma?",
+   "modo": "periodista",
+   "ir": "herramienta-inspector-efos.html?q=portacelis"
+  },
+  {
+   "q": "https://lasillarota.com/nacion/2026/10/5/gobierno-de-amlo-autorizo-a-firma-ligada-a-olan-importar-diesel-mcci-531479.html",
+   "ir": "noticias-auditavision.html#col-portacelis-permiso-diesel-sener",
    "dice": [
     "hemeroteca"
    ]
