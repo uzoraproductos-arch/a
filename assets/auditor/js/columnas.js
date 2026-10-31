@@ -47,6 +47,202 @@
   var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
  {
+  "id": "carnaval-ensenada-2026-imcudhe",
+  "seccion": "Al momento",
+  "icono": "🎭",
+  "fecha": "30-10-2026",
+  "titulo": "El Carnaval de Ensenada costó más de 22 millones y recuperó 1.2: lo que se dijo ante el Cabildo y lo que falta publicar",
+  "balazo": "Una regidora cuestionó al Instituto de Cultura de Ensenada por gastar más de 22 millones de pesos en un Carnaval de seis días que, dice, dejó 1.2 millones de «ganancia». Las cifras salieron de viva voz ante el Cabildo y todavía no tienen un documento público que las desglose. El punto ciego: 1.2 millones no es ganancia sino lo que se recuperó, y en los 22 millones no están los artistas estelares, que pagó un patrocinador a cambio de publicidad.",
+  "nota": {
+   "medio": "Ana Daniela García Salgado, regidora de Ensenada (@danielasalgadoens, Instagram)",
+   "titulo": "Más de 22 millones de pesos en un Carnaval de seis días. ¿Y la cultura de Ensenada?",
+   "fecha": "30-10-2026",
+   "url": "https://www.instagram.com/danielasalgadoens/"
+  },
+  "circula": {
+   "red": "Instagram",
+   "cuenta": "@danielasalgadoens (Ana Daniela García Salgado, regidora del Ayuntamiento de Ensenada)",
+   "fecha": "30 de octubre de 2026",
+   "texto": "Durante la glosa del IMCUDHE, cuestionamos al director por el gasto de más de 22 millones de pesos en el Carnaval, un evento que dejó apenas 1.2 millones de pesos de ganancia. Si el objetivo es impulsar la cultura, también hay que hablar de prioridades. ¿Cuántos espacios culturales pudieron mejorarse? ¿Cuánto talento local pudo recibir apoyo?"
+  },
+  "cuerpo": [
+   "Qué pasó. En la glosa del informe del Instituto Municipal de Cultura y Desarrollo Humano de Ensenada (IMCUDHE) ante el Cabildo, la regidora Ana Daniela García Salgado cuestionó a su director, Rodrigo Ventura de la Cabada, por lo que costó el Carnaval 2026. Según la prensa local, el Instituto reportó alrededor de 22.7 millones de pesos de gasto; otra nota da 22.3 millones. La diferencia, de unos 400 mil pesos, no se ha explicado.",
+   "El punto ciego de la «ganancia». Si se gastaron 22 millones y entraron 1.2, el Carnaval no dejó una ganancia: recuperó una parte pequeña de lo que costó, y el resto lo pagó el presupuesto público. La palabra importa: un evento cultural puede justificarse aunque no gane dinero, pero entonces hay que medirlo por lo que logró, y eso es lo que pide la regidora.",
+   "Lo que no está en los 22 millones. Los artistas estelares, según el director, los pagó una empresa privada con un esquema de patrocinio, a cambio de exponer sus marcas. Cuánto valió ese patrocinio no se ha dicho, y según la regidora el procedimiento del donativo no pasó por el Cabildo. Un patrocinio con contraprestación tampoco es un regalo: es un trato que debería constar por escrito.",
+   "El presupuesto. Según la prensa, el Presupuesto 2026 le asignó 16 millones al Carnaval y después hubo una ampliación de 11 millones, que la regidora dice haber votado porque se le informó que habría recaudación y donaciones formales. Cuando el Ayuntamiento publique su información financiera, se podrá ver cuánto se aprobó, cuánto se amplió y cuánto se gastó en realidad.",
+   "Para darte la escala, con datos oficiales: Ensenada ingresó $3,147.2 millones en 2024, de los cuales $1,453.7 millones fueron ingresos propios (lo que cobra el municipio por su cuenta) y $446.1 millones, predial (INEGI, finanzas municipales 2024, cifras definitivas)."
+  ],
+  "ejemplo": {
+   "tit": "Así se compone el dinero de Ensenada (2024)",
+   "txt": "Lo que ingresó el municipio en un año, según el INEGI. El Carnaval se paga de esta bolsa.",
+   "filas": [
+    [
+     "Ingresos totales",
+     "$3,147.2 millones",
+     "INEGI, EFIPEM 2024"
+    ],
+    [
+     "Ingresos propios",
+     "$1,453.7 millones",
+     "INEGI, EFIPEM 2024"
+    ],
+    [
+     "Participaciones federales",
+     "$1,018.2 millones",
+     "INEGI, EFIPEM 2024"
+    ],
+    [
+     "Aportaciones federales (Ramo 33)",
+     "$594.7 millones",
+     "INEGI, EFIPEM 2024"
+    ],
+    [
+     "Predial",
+     "$446.1 millones",
+     "INEGI, EFIPEM 2024"
+    ]
+   ],
+   "nota": "Pesos de 2024 redondeados a millones. Las cifras del Carnaval no entran aquí porque todavía no tienen documento."
+  },
+  "cotejo": [
+   {
+    "dice": "El gasto de más de 22 millones de pesos en el Carnaval",
+    "res": "pendiente",
+    "explica": "Lo informó el IMCUDHE ante el Cabildo, según la prensa, que da dos cifras: 22.7 y 22.3 millones. Ninguna incluye a los artistas estelares, pagados por un patrocinador.",
+    "fuente": "IMCUDHE, información financiera del Carnaval 2026",
+    "url": "https://www.ensenada.gob.mx/",
+    "quien": "Falta de la plataforma: las cifras se dieron en la glosa del IMCUDHE ante el Cabildo; su desglose debe estar en la información financiera del Instituto y del Ayuntamiento (Ley General de Contabilidad Gubernamental), que no abre desde nuestro servidor.",
+    "donde": "https://www.ensenada.gob.mx/"
+   },
+   {
+    "dice": "Un evento que dejó apenas 1.2 millones de pesos de ganancia",
+    "res": "matiz",
+    "explica": "Aunque la cifra se confirme, no es una ganancia: es lo que se recuperó (taquilla, permisos, patrocinios) frente a lo que se gastó. Una ganancia sería lo que queda después de cubrir todo el gasto, y aquí faltaron más de 20 millones. La cifra misma la reporta una sola nota y sigue pendiente de documento.",
+    "fuente": "Ley General de Contabilidad Gubernamental (ingresos y egresos se registran por separado)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGCG.pdf"
+   },
+   {
+    "dice": "Un Carnaval de seis días",
+    "res": "pendiente",
+    "explica": "Las fechas del programa oficial del Carnaval 2026 no abren desde nuestro servidor.",
+    "fuente": "Ayuntamiento de Ensenada, programa del Carnaval 2026",
+    "url": "https://www.ensenada.gob.mx/",
+    "quien": "Falta de la plataforma: el portal del Ayuntamiento de Ensenada no abre desde nuestro servidor.",
+    "donde": "https://www.ensenada.gob.mx/"
+   }
+  ],
+  "medios": [
+   {
+    "medio": "El Imparcial",
+    "titulo": "Ayuntamiento de Ensenada cambia versión sobre patrocinio de artistas del Carnaval 2026",
+    "fecha": "30-10-2026",
+    "url": "https://www.elimparcial.com/tij/ensenada/2026/10/30/ayuntamiento-de-ensenada-cambia-version-sobre-patrocinio-de-artistas-del-carnaval-2026/"
+   },
+   {
+    "medio": "El Vigía",
+    "titulo": "Pagan artistas del Carnaval con un «donativo» privado",
+    "fecha": "30-10-2026",
+    "url": "https://www.elvigia.net/general/2026/10/30/pagan-artistas-del-carnaval-con-un-donativo-privado-477929.html"
+   },
+   {
+    "medio": "CNR Noticias",
+    "titulo": "Reportan gasto de 22.7 millones en el Carnaval, pero no aclaran cuánto costaron los artistas estelares",
+    "fecha": "",
+    "url": "https://www.cnrnoticias.tv/noticiacnr/reportan-gasto-de-22-7-millones-en-el-carnaval-pero-no-aclaran-cu%C3%A1nto-costaron-los-artistas-estelar"
+   },
+   {
+    "medio": "El Imparcial",
+    "titulo": "Critican presunta opacidad en 2 años de Carnaval de Ensenada",
+    "fecha": "07-10-2026",
+    "url": "https://www.elimparcial.com/tij/ensenada/2026/10/07/critican-presunta-opacidad-de-claudia-agaton-en-2-anos-de-carnaval-de-ensenada/"
+   },
+   {
+    "medio": "El Vigía",
+    "titulo": "Anuncian oficialmente Carnaval de Ensenada",
+    "fecha": "14-02-2026",
+    "url": "https://www.elvigia.net/general/2026/2/14/anuncian-oficialmentecarnaval-de-ensenada-494893.html"
+   },
+   {
+    "medio": "El Imparcial (columna)",
+    "titulo": "Carnaval de gastos",
+    "fecha": "12-03-2026",
+    "url": "https://www.elimparcial.com/tij/columnas/2026/03/12/carnaval-de-gastos/"
+   },
+   {
+    "medio": "AFN Tijuana (editorial)",
+    "titulo": "Carnaval de dudas",
+    "fecha": "",
+    "url": "https://afntijuana.info/editoriales/173388_carnaval_de_dudas"
+   }
+  ],
+  "datos": [
+   {
+    "ico": "🏙️",
+    "tx": "Ensenada en el Auditor de entes",
+    "url": "herramienta-inspector-entes.html#ente=municipal:02001",
+    "de": "Su estado de cuenta, su salud financiera y lo que la ASF le ha observado."
+   },
+   {
+    "ico": "🏘️",
+    "tx": "Baja al territorio: los 2,479 municipios",
+    "url": "numeros-baja-al-territorio.html",
+    "de": "Cuánto le llega a tu municipio y cuánto cobra por su cuenta."
+   }
+  ],
+  "glosario": [
+   {
+    "t": "Hacienda Municipal",
+    "url": "glosario.html#Hacienda-Municipal"
+   },
+   {
+    "t": "Adecuación Presupuestaria",
+    "url": "glosario.html#Adecuacion-Presupuestaria"
+   },
+   {
+    "t": "Impuesto Predial",
+    "url": "glosario.html#Impuesto-Predial"
+   },
+   {
+    "t": "Solicitud de Acceso a la Información",
+    "url": "glosario.html#Solicitud-de-Acceso-a-la-Informacion"
+   }
+  ],
+  "red": "Carnaval Ensenada 2026 gasto IMCUDHE",
+  "sigue": [
+   {
+    "que": "El estado del ejercicio del presupuesto del IMCUDHE con el gasto del Carnaval 2026, partida por partida",
+    "url": "https://www.ensenada.gob.mx/"
+   },
+   {
+    "que": "El convenio de patrocinio con la empresa que pagó a los artistas: qué dio y qué recibió a cambio",
+    "url": "https://www.ensenada.gob.mx/"
+   },
+   {
+    "que": "El acta de Cabildo de la ampliación presupuestal del Carnaval",
+    "url": "https://www.ensenada.gob.mx/"
+   },
+   {
+    "que": "La cuenta pública 2026 de Ensenada y su revisión por la Auditoría Superior de Baja California",
+    "url": "https://www.asebc.gob.mx/"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "INEGI, Estadística de Finanzas Públicas Estatales y Municipales 2024, cifras definitivas (Ensenada)",
+    "url": "https://www.inegi.org.mx/programas/finanzas/"
+   },
+   {
+    "nombre": "Ley General de Contabilidad Gubernamental",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGCG.pdf"
+   },
+   {
+    "nombre": "Punto de partida: Ana Daniela García Salgado (@danielasalgadoens), Instagram, 30-10-2026",
+    "url": "https://www.instagram.com/danielasalgadoens/"
+   }
+  ],
+  "actualizado": "31-10-2026"
+ },
+ {
   "id": "portacelis-permiso-diesel-sener",
   "seccion": "Al momento",
   "icono": "🛢️",

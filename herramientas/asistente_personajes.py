@@ -58,6 +58,8 @@ PERSONAJES = [
     ('raul-salinas', 'Raúl Salinas de Gortari', ['raul salinas'], False),
     ('lopez-beltran', 'Andrés López Beltrán', ['lopez beltran', 'andy lopez'], False),
     ('amilcar-olan', 'Amílcar Olán', ['amilcar olan', 'olan aparicio'], False),
+    ('garcia-salgado', 'Ana Daniela García Salgado', ['daniela garcia salgado', 'daniela salgado', 'danielasalgadoens'], False),
+    ('ventura-cabada', 'Rodrigo Ventura de la Cabada', ['ventura de la cabada'], False),
     ('taddei', 'Guadalupe Taddei Zavala', ['taddei', 'guadalupe taddei'], False),
     ('lorenzo-cordova', 'Lorenzo Córdova Vianello', ['lorenzo cordova', 'cordova vianello'], False),
     ('carvente', 'Víctor Hugo Carvente Contreras', ['carvente', 'victor hugo carvente'], False),
