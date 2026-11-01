@@ -9,6 +9,7 @@
 name: Sube la base de datos
 
 on:
+  workflow_dispatch:   # a mano, p. ej. para probar una llave nueva
   push:
     branches: [claude/funny-turing-imtm54, main]
     paths: ['supabase/**', '.github/workflows/base-de-datos.yml']
