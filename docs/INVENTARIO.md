@@ -164,7 +164,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 51 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 65 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 273 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 274 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `informes-documentar-para-sancionar.html` | Informe especial: Documentar para sancionar · Auditavisión | apartados.py | 51 | 0 | 40 | 8 | 2 |
@@ -186,7 +186,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `noticias-auditavision.html` | Auditavisión Noticias · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `noticias-relevantes.html` | Noticias relevantes · Auditavisión | apartados.py | 37 | 0 | 0 | 0 | 0 |
 | `noticias-seguimiento.html` | Seguimiento: el caso no se olvida · Auditavisión | apartados.py | 40 | 0 | 0 | 1 | 0 |
-| `noticias-verifica.html` | Verifica una noticia · Auditavisión | apartados.py | 52 | 0 | 0 | 0 | 0 |
+| `noticias-verifica.html` | Verifica una noticia · Auditavisión | apartados.py | 73 | 0 | 0 | 0 | 0 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 55 | 0 | 0 | 5 | 1 |
 | `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 0 |
 | `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 52 | 0 | 4 | 0 | 0 |
@@ -256,7 +256,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 219 | 0 | 0 | 0 | 116 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 36 | 0 | 6 | 3 | 1 |
-| `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 43 | 0 | 1 | 0 | 0 |
+| `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 44 | 0 | 1 | 0 | 0 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |

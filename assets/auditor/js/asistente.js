@@ -1829,7 +1829,9 @@
   /* Las palabras del dinero («millones», «mucho dinero») no dicen de qué columna se habla: con
      ellas, «¿es cierto que Jalisco debe 50 mil millones?» se iba a la nota de Jalisco y no a
      su deuda (29-10-2026). */
-  var GENERICAS = { cierto: 1, verdad: 1, dicen: 1, circula: 1, redes: 1, gobierno: 1, mexico: 1, millones: 1, pesos: 1, dinero: 1, mucho: 1 };
+  var GENERICAS = { cierto: 1, verdad: 1, dicen: 1, circula: 1, redes: 1, gobierno: 1, mexico: 1, millones: 1, pesos: 1, dinero: 1, mucho: 1,
+    /* Las palabras de tendencia no son el tema (01-11-2026: «el gasto en cultura cayó 40 % en los últimos años» abría la nota de Jalisco). */
+    ultimos: 1, anos: 1, meses: 1, cayo: 1, subio: 1, bajo: 1, aumento: 1, crecio: 1, record: 1, historico: 1 };
   /* Una pregunta por un dato («¿cuántos ministros tiene la Corte?») o por un
      estado de cuenta no es un cotejo, aunque comparta palabras con la columna:
      la contesta la plática (27-10-2026). */

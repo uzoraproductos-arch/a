@@ -1301,6 +1301,26 @@
    "dice": [
     "hemeroteca"
    ]
+  },
+  {
+   "q": "¿Qué es un punto ciego de una nota?",
+   "ir": "noticias-verifica.html#puntos-ciegos-tit"
+  },
+  {
+   "q": "¿Es cierto que el gobierno garantiza hospitales nuevos sin costo y sin deuda?",
+   "dice": [
+    "Puntos ciegos",
+    "Una promesa contada como hecho",
+    "alguien paga"
+   ]
+  },
+  {
+   "q": "Dicen que el gasto en cultura cayó 40 % en los últimos años",
+   "dice": [
+    "Puntos ciegos",
+    "Un porcentaje sin su base",
+    "desde cuándo"
+   ]
   }
  ]
 }

@@ -225,6 +225,24 @@
     return { pts: pts, temas: temas };
   }
 
-  return { analiza: analiza, juzga: juzga, conjunto: conjunto, relevancia: relevancia, porId: porId, plano: plano, fmt: fmt };
+  /* ---------- Los puntos ciegos (puntos_ciegos.py, 01-11-2026) ----------
+     Lugares donde una nota suele esconder algo: una promesa contada como
+     hecho, un porcentaje sin su base, «sin deuda»… No califican la nota: son
+     preguntas que conviene hacer. Se encuentran por las palabras. */
+  var RE_CIEGO = {};
+  function ciegos(n) {
+    var txt = (n.titulo ? n.titulo + '\n' : '') + (n.texto || ''), p = plano(txt), out = [];
+    (D.ciegos || []).forEach(function (r) {
+      var re = RE_CIEGO[r.id] || (RE_CIEGO[r.id] = new RegExp('(^|[^a-z0-9])(' + r.re + ')(?![a-z0-9])'));
+      var m = re.exec(p);
+      if (!m) return;
+      var ini = m.index + m[1].length, fin = ini + m[2].length;
+      var a = Math.max(0, ini - 70), b = Math.min(txt.length, fin + 70);
+      out.push({ r: r, frase: txt.slice(ini, fin), antes: (a > 0 ? '…' : '') + txt.slice(a, ini), despues: txt.slice(fin, b) + (b < txt.length ? '…' : '') });
+    });
+    return out;
+  }
+
+  return { analiza: analiza, juzga: juzga, conjunto: conjunto, relevancia: relevancia, ciegos: ciegos, porId: porId, plano: plano, fmt: fmt };
   };
 })();

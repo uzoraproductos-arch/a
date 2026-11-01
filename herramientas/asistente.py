@@ -478,7 +478,9 @@ def _charla(d):
         adm.append({'id': a['id'], 'n': a['n'], 'c': a['c'], 'ini': a['ini'], 'a': a['a'], 'curso': a.get('curso'), 'aviso': limpio(a.get('aviso')), 'v': v})
     admet = {k: {'n': D['metricas'][k]['tit'], 'u': D['metricas'][k]['u']} for k in claves}
     import insp_nota
-    nota = {'cat': insp_nota.catalogo_lector(d), 'fiscal': insp_nota.FISCAL, 'temas': insp_nota._temas(), 'pagina': insp_nota.PAGINA}
+    import puntos_ciegos
+    nota = {'cat': insp_nota.catalogo_lector(d), 'fiscal': insp_nota.FISCAL, 'temas': insp_nota._temas(), 'pagina': insp_nota.PAGINA,
+            'ciegos': puntos_ciegos.datos(), 'ciegos_pag': puntos_ciegos.PAGINA}
     # Las cifras de la pestaña Números (23-10-2026): ingresos, gasto, ramos,
     # gasto federalizado, Poderes, Paquete 2027 y Cuenta Pública.
     import asistente_numeros

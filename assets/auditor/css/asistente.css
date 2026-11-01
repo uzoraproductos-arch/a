@@ -471,3 +471,6 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 /* «¿Sabías esto?» del Periodista (29-10-2026): va entre las preguntas de ejemplo, con su seña. */
 .pa-ej-sabias { border-color: #b3412e; background: #fbf7f2; border-radius: 18px; }
 .pa-ej-sena { display: block; font-size: 12px; font-weight: 800; color: #b3412e; letter-spacing: .02em; margin-bottom: 2px; }
+/* Los puntos ciegos de lo que dices (puntos_ciegos.py, 01-11-2026). */
+.pa-ciegos { margin: 10px 0; padding: 10px 12px; border-left: 4px solid #b7791f; border-radius: 10px; background: #fffaf0; color: #1d2b45; }
+.pa-ciegos p { margin: 0 0 6px; }

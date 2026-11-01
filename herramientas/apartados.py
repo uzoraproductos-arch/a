@@ -1408,6 +1408,14 @@ PILARES_LISTA = [
      'El Auditor Virtual sigue el dinero público como lo haría una reportera de datos: busca en los documentos oficiales, '
      'coteja lo que circula en redes, explica en sencillo y te lleva al documento. Lo hace con una ventaja: no se le puede '
      'amenazar para que deje de buscar, y todo lo que encuentra queda a la vista de cualquiera.'),
+    # Decisión del autor, 01-11-2026: «podríamos ser considerados competidores de todos estos medios informativos, pero
+    # debemos ser los mejores».
+    ('🏆', 'Competimos siendo el mejor auditor, no el más rápido',
+     'Los medios dan la noticia; nosotros la cotejamos, la cruzamos con nuestra base y no la olvidamos. Nuestra ventaja es una base de '
+     'datos que crece con cada nota, y lo «privilegiado» que encontramos es lo que ya es público pero está enterrado en documentos que '
+     'casi nadie lee ni cruza: nunca una filtración ni un rumor. Por eso cada nota pasa por el '
+     '<a href="noticias-verifica.html#puntos-ciegos">detector de puntos ciegos</a>, que busca lo que suele esconderse en las promesas, '
+     'los porcentajes y los adjetivos.'),
     ('🔥', 'Que la verdad sea incómoda no la vuelve falsa',
      'Lo que tiene documento se publica, guste o no, sea del gobierno que sea. Y lo que no tiene documento no se publica como '
      'hecho, por más que convenga: se dice que no consta.'),
@@ -1613,13 +1621,13 @@ PILARES = {
     'titulo': 'Nuestros pilares',
     'lema': 'El periodista virtual del gasto público',
     'estilos': ['pilares.css'],
-    'entrada': ('Auditavisión existe para seguir el dinero público y contarlo con documentos. Estos son los diez pilares que sostienen '
+    'entrada': ('Auditavisión existe para seguir el dinero público y contarlo con documentos. Estos son los once pilares que sostienen '
                 'cada página, cada respuesta del Auditor Virtual y cada dictamen. Ejercer el periodismo en México tiene riesgos que el '
                 'propio Estado reconoce: por eso existe, desde 2012, una ley para proteger a periodistas y a personas defensoras de '
                 'derechos humanos (<a href="%s" target="_blank" rel="noopener">Ley para la Protección de Personas Defensoras de Derechos '
                 'Humanos y Periodistas, DOF 25-06-2012 ↗</a>) %s.' % (LEY_PERIODISTAS, '<span class="est-chip est-oficial">oficial</span>')),
     'secciones': [
-        {'id': 'pilares', 'titulo': 'Los diez pilares', 'texto': 'Lo que hacemos, y lo que nunca hacemos, con el dinero público y con la verdad.',
+        {'id': 'pilares', 'titulo': 'Los once pilares', 'texto': 'Lo que hacemos, y lo que nunca hacemos, con el dinero público y con la verdad.',
          'tarjetas': [],
          'bloque': '<ol class="pil-lista">\n%s\n        </ol>' % '\n'.join(
              '          <li><span class="pil-ico" aria-hidden="true">%s</span><div><h3>%s</h3><p>%s</p></div></li>' % x for x in PILARES_LISTA)},

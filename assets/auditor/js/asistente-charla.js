@@ -1276,12 +1276,28 @@
       if (Math.abs(pct) <= 10) return { tipo: 'ambar', tit: 'Se acerca, pero no es la misma cifra', porque: 'Se aleja ' + pt(pct) + '. Suele ser otro año, otra etapa (aprobado contra ejercido) o un redondeo grueso.' };
       return { tipo: 'rojo', tit: 'No coincide con el documento', porque: 'Lo que dices es ' + pt(pct) + (dif > 0 ? ' mayor' : ' menor') + ' que el dato oficial.' };
     }
+    /* Los puntos ciegos de lo que dices (puntos_ciegos.py): preguntas, no veredicto. */
+    function ciegosDe(claim) {
+      var pc = VER && VER.ciegos ? VER.ciegos({ texto: claim }) : [];
+      if (!pc.length) return '';
+      return '<div class="pa-ciegos"><p><b>🔦 Puntos ciegos:</b> antes de creerlo, pregunta esto.</p><ul class="pa-lista">' +
+        pc.slice(0, 4).map(function (x) { return '<li><b>' + esc(x.r.n) + '</b> («' + esc(x.frase) + '»). ' + esc(x.r.pr) + '</li>'; }).join('') +
+        '</ul><p class="pa-chico">Los encuentro por las palabras y no califican lo que dices. <a href="' + esc(D.nota.ciegos_pag || 'noticias-verifica.html#puntos-ciegos') + '">Qué es un punto ciego</a>.</p></div>';
+    }
     function verifica(q, t) {
+      vClaim = '';
+      var r0 = verifica0(q, t), pc = vClaim && r0 && r0.html ? ciegosDe(vClaim) : '';
+      if (pc) r0.html = r0.html.replace(/(<details class="pa-dedonde">|$)/, function (m) { return pc + m; });
+      return r0;
+    }
+    var vClaim = '';
+    function verifica0(q, t) {
       var url = (LIGA.exec(q) || [])[0];
       if (url) return { html: '<p>Para revisar una nota completa, la leo con el verificador de notas: encuentra cada cifra en pesos, la empata con su documento oficial y te da un veredicto con semáforo.</p>' +
           '<p><a class="pa-boton pa-primario" href="' + esc(D.nota.pagina + '?liga=' + encodeURIComponent(url)) + '">🔎 Verificar esta nota</a></p>' +
           '<p class="pa-chico">Si solo quieres revisar un dato, pégame la frase: «¿es cierto que…?».</p>', fu: [], tit: '', plat: 1 };
       var claim = q.replace(/^\s*[¿¡]?\s*/, '').replace(/^(es cierto|es verdad|sera cierto|sera verdad|neta|en serio|dicen|verifica(me)?|verificar|checa(me)?|confirma(me)?|desmiente|le[ií]|vi|escuch[eé]|me dijeron|me contaron|seg[uú]n|es falso|es mentira|fake)\s*(que|si|lo de|esto|esta)?\s*[:,]?\s*/i, '').replace(/[?¿]/g, '').trim();
+      vClaim = claim;
       var ext = VER ? VER.analiza({ texto: claim, titulo: '' }) : { cifras: [] }, r = VER ? VER.conjunto(ext) : null;
       var juzgadas = ext.cifras.filter(function (c) { return c.v && c.v.tipo !== 'gris'; });
       if (juzgadas.length) {

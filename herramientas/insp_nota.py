@@ -533,8 +533,9 @@ def _entes(base):
 
 
 def _datos_lector(base):
+    import puntos_ciegos
     datos = {'cat': catalogo_lector(base), 'catalogo': CATALOGO, 'pagina': PAGINA,
-             'fiscal': FISCAL, 'temas': _temas(), 'entes': _entes(base)}
+             'fiscal': FISCAL, 'temas': _temas(), 'entes': _entes(base), 'ciegos': puntos_ciegos.datos()}
     return '  <script type="application/json" id="inDatos">%s</script>' % _json(datos)
 
 

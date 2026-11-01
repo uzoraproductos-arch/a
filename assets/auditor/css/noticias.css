@@ -191,3 +191,10 @@
 .nt-hem-medio li > a { display: inline-block; min-height: 44px; padding-top: 10px; font-size: 16px; }
 .nt-hem-medio li small { display: block; font-size: 15px; color: var(--nt-gris); }
 .nt-hem-medio li small a { display: inline-block; min-height: 44px; padding-top: 10px; }
+/* Los puntos ciegos (puntos_ciegos.py, 01-11-2026). */
+.nt-ciegos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.nt-ciego { background: var(--nt-papel); border: 1px solid var(--nt-filete); border-left: 4px solid var(--nt-rojo); border-radius: 6px; padding: 12px 14px; }
+.nt-ciego p { margin: 6px 0 0; font-size: 16px; line-height: 1.5; }
+.nt-ciego-n { font-family: 'Playfair Display', Georgia, serif; font-size: 18px; }
+.nt-ciego-de { color: var(--nt-gris); }
+.nt-ciegos-no { font-size: 16px; line-height: 1.5; }

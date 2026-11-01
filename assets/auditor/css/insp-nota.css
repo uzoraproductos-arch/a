@@ -302,3 +302,10 @@ details.in-aviso[open] > summary { margin-bottom: 8px; }
   .in-med-marca, .in-bar-r, .in-tips li, .in-luz { transition: none; }
   .in-est-lee::before { animation: none; }
 }
+/* Los puntos ciegos (puntos_ciegos.py, 01-11-2026): preguntas, no veredicto. */
+.in-ciegos { margin: 18px 0; }
+.in-ciegos-l { list-style: none; display: grid; gap: 10px; margin: 0; padding: 0; }
+.in-ciegos-l li { padding: 12px 14px; border: 1px solid #e6dcc3; border-left: 4px solid #b7791f; border-radius: 12px; background: #fffaf0; }
+.in-ciego-n { margin: 0 0 4px; font-size: 17px; color: #0b2a63; }
+.in-ciego-de { margin: 6px 0 0; font-size: 16px; color: var(--in-gris); }
+.in-ciegos .in-txt { margin: 6px 0 0; }

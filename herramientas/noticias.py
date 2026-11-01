@@ -36,7 +36,7 @@ PARTES = [
     (VERIFICA, '⚖️', 'Verifica una noticia', 'Del rumor al documento',
      'Pega la liga o el texto de lo que viste y lo ponemos junto al documento oficial. Aquí también están la hemeroteca (las notas de los medios que ya cotejamos), los titulares que estamos jalando '
      '(rotulados «sin verificar»), nuestro método de siete pasos y la puerta para proponernos una nota.',
-     ('verifica', 'hemeroteca', 'mesa', 'metodo')),
+     ('verifica', 'puntos-ciegos', 'hemeroteca', 'mesa', 'metodo')),
     (SEGUIMIENTO, '🔔', 'Seguimiento: el caso no se olvida', 'Qué documento falta para cerrar cada caso, y cuándo debe llegar',
      'Los casos abiertos, con el documento que falta para cerrarlos; los que tú sigues, con su aviso de novedades, y la agenda del erario: '
      'las fechas en que la ley obliga a publicar el dinero público.',
@@ -75,6 +75,11 @@ SECCIONES = [
      'Quien es aludido puede responder, y lo que la parte aludida dijo en su propio documento se publica en sus palabras.'),
     ('seguir', '🔔', 'Casos abiertos', 'Casos abiertos: lo que falta para cerrarlos',
      'Cada caso abierto dice qué documento falta para cerrarlo. Síguelo y te avisamos cuando llegue, o pídele al Auditor que siga uno nuevo.'),
+    # El detector de puntos ciegos (pedido del autor, 01-11-2026): lo que las
+    # notas suelen esconder, en reglas que el verificador y el chat aplican solos.
+    ('puntos-ciegos', '🔦', 'Puntos ciegos', 'Puntos ciegos: lo que una nota suele esconder',
+     'Doce preguntas que conviene hacerle a cualquier nota sobre el dinero público antes de creerle. El verificador y el Auditor las '
+     'buscan solos en lo que pegues.'),
     # La hemeroteca (pedido del autor, 31-10-2026: «seguimiento como Animal
     # Político, La Jornada… vincular toda la información que gira sobre
     # finanzas públicas»): las notas de prensa que ya cotejamos, por medio.
@@ -191,6 +196,7 @@ def _metodo():
 
 def construir(base, ref, archivo=DIARIO):
     import insp_nota
+    import puntos_ciegos
     parte = next(p for p in PARTES if p[0] == archivo)
     mias = [x for x in SECCIONES if x[0] in parte[5]]
     nav = '\n'.join(['    <a href="#%s"><span aria-hidden="true">%s</span> %s</a>' % (i, ico, n) for i, ico, n, _t, _e in mias] +
@@ -228,6 +234,7 @@ def construir(base, ref, archivo=DIARIO):
                    '<p class="nt-pie">Son los plazos máximos que fija la ley: el documento puede llegar antes. Cuando la fecha cae en día inhábil '
                    'o la ley prevé una prórroga, puede moverse. Los «días que faltan» son nuestra cuenta ' + insp_nota_chip('derivado') + '.</p>'),
         'metodo': _metodo(),
+        'puntos-ciegos': puntos_ciegos.seccion(lambda t: __import__('html').escape(str(t or ''), quote=False)),
     }
     clases = {'columnas': ' nt-sec-opinion', 'verifica': ' nt-sec-verifica', 'portada': ' nt-sec-portada'}
     partes = [_sec(i, ico, t, e, cuerpos[i], clases.get(i, '')) for i, ico, _n, t, e in mias]
