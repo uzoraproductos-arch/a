@@ -30,7 +30,6 @@ jobs:
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
       SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
       SAL_IP: ${{ secrets.SAL_IP }}
-      BANXICO_TOKEN: ${{ secrets.BANXICO_TOKEN }}
       INEGI_TOKEN: ${{ secrets.INEGI_TOKEN }}
     steps:
       - name: ¿Están los secretos?
@@ -70,24 +69,14 @@ jobs:
         run: |
           supabase functions deploy recibir-formulario --project-ref "$PROYECTO" --no-verify-jwt
           supabase functions deploy pregunta-bot --project-ref "$PROYECTO" --no-verify-jwt
-      - name: Sube las llaves de Banxico e INEGI
-        if: steps.hay.outputs.si == 'si' && (env.BANXICO_TOKEN != '' || env.INEGI_TOKEN != '')
-        run: |
-          [ -n "$BANXICO_TOKEN" ] && supabase secrets set --project-ref "$PROYECTO" BANXICO_TOKEN="$BANXICO_TOKEN"
-          [ -n "$INEGI_TOKEN" ] && supabase secrets set --project-ref "$PROYECTO" INEGI_TOKEN="$INEGI_TOKEN"
-          true
+      # Banxico salió el 01-11-2026 por decisión del autor: ya no se usa su llave
+      # y este flujo no la vuelve a poner en Supabase.
+      - name: Sube la llave del INEGI
+        if: steps.hay.outputs.si == 'si' && env.INEGI_TOKEN != ''
+        run: supabase secrets set --project-ref "$PROYECTO" INEGI_TOKEN="$INEGI_TOKEN"
       - name: Sube la función de los portales
-        if: steps.hay.outputs.si == 'si' && (env.BANXICO_TOKEN != '' || env.INEGI_TOKEN != '')
+        if: steps.hay.outputs.si == 'si' && env.INEGI_TOKEN != ''
         run: supabase functions deploy portales --project-ref "$PROYECTO" --no-verify-jwt
-      - name: Prueba la consulta a Banxico
-        if: steps.hay.outputs.si == 'si' && env.BANXICO_TOKEN != ''
-        run: |
-          sleep 5
-          r=$(curl -s -m 40 -X POST "https://$PROYECTO.supabase.co/functions/v1/portales" \
-            -H 'Content-Type: application/json' -H 'Origin: https://auditavision.com.mx' \
-            -d '{"fuente":"banxico-sie","clave":"SF43718"}')
-          echo "$r" | head -c 600; echo
-          echo "$r" | grep -q '"ok":true' || { echo "::error::La función portales no trajo el tipo de cambio de Banxico"; exit 1; }
       - name: Prueba la consulta al INEGI
         if: steps.hay.outputs.si == 'si' && env.INEGI_TOKEN != ''
         run: |
