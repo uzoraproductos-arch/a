@@ -89,9 +89,9 @@ medios solo se guardan titular, medio, fecha y liga (campo «medios»: la
 hemeroteca), tal como los indexaba el buscador el 31-10-2026.
 
 Nota 5 · Portacelis y el permiso de importación de diésel (31-10-2026). Pieza
-que pasó el autor: una publicación sin liga que circula en redes («URGENTE —
+que pasó el autor: la publicación de @derechadiariomx en Instagram («URGENTE —
 REGALO DE DESPEDIDA…»), que retoma la investigación de MCCI del 05-10-2026.
-Sin liga no se cita a la cuenta (VERIFICAMOS, paso 0). Documentos cotejados:
+El 01-11-2026 el autor dio la cuenta: se cita, sin fecha exacta («hace 3 semanas»). Documentos cotejados:
 - Constitución, art. 83: el sexenio terminó el 30-09-2024.
 - SAT, lista del art. 69-B del CFF (assets/auditor/data/sat-69b.js, corte al
   31-12-2025): Portacelis no aparece. Se lee del archivo, no se copia.
@@ -865,12 +865,12 @@ def portacelis_diesel():
                    'el permiso y los litros siguen sin un documento que podamos abrir, y «narcoexpresidente» no lo sostiene ninguna acusación.'),
         'nota': {'medio': 'Mexicanos contra la Corrupción y la Impunidad (MCCI)',
                  'titulo': 'Gobierno de AMLO favoreció a huachicolera ligada a Amílcar Olán', 'fecha': '05-10-2026', 'url': MCCI_PORTACELIS},
-        'circula': {'red': 'Redes sociales (publicación sin liga)', 'cuenta': 'Cuenta no identificada', 'fecha': '31 de octubre de 2026',
+        'circula': {'red': 'Instagram', 'cuenta': '@derechadiariomx', 'fecha': 'octubre de 2026 (unas tres semanas antes del 1 de noviembre)',
                     'texto': ('URGENTE — REGALO DE DESPEDIDA: A solo días de dejar el poder, el narcoexpresidente AMLO le otorgó un permiso exprés a la '
                               'empresa «fantasma» Portacelis, ligada al amigo íntimo de «El Andy», Amílcar Olán, para importar 52 millones de litros '
                               'de presunto diésel contrabandeado, según una investigación de MCCI.')},
         'cuerpo': [
-            ('De dónde viene. La publicación que circula retoma, casi tres semanas después, una investigación de Mexicanos contra la Corrupción '
+            ('De dónde viene. La publicación de la cuenta @derechadiariomx en Instagram retoma una investigación de Mexicanos contra la Corrupción '
              'y la Impunidad (MCCI) del 5 de octubre. Según MCCI, la Secretaría de Energía autorizó el 27 de septiembre de 2024 a Portacelis Gas '
              'and Oil a importar hasta 52 millones de litros de diésel, nueve días después de endurecer sus reglas para esos permisos y cuando la '
              'empresa tenía unas semanas de creada. MCCI es una organización de periodismo de investigación: su trabajo es el punto de partida, '
@@ -972,8 +972,9 @@ def portacelis_diesel():
             {'nombre': '%s, corte al %s, en la base de la plataforma' % (m['fuente'], m['corte']), 'url': m['url']},
             {'nombre': 'Código Nacional de Procedimientos Penales, art. 218', 'url': CNPP},
             {'nombre': 'Punto de partida: MCCI, «Gobierno de AMLO favoreció a huachicolera ligada a Amílcar Olán» (05-10-2026)', 'url': MCCI_PORTACELIS},
+            {'nombre': 'Lo que circula: @derechadiariomx, Instagram (octubre de 2026)', 'url': 'https://www.instagram.com/derechadiariomx/'},
         ],
-        'actualizado': '31-10-2026',
+        'actualizado': '01-11-2026',
     }
 
 

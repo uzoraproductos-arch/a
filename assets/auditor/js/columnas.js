@@ -259,13 +259,13 @@
    "url": "https://contralacorrupcion.mx/gobierno-de-amlo-favorecio-a-huachicolera-ligada-a-amilcar-olan/"
   },
   "circula": {
-   "red": "Redes sociales (publicación sin liga)",
-   "cuenta": "Cuenta no identificada",
-   "fecha": "31 de octubre de 2026",
+   "red": "Instagram",
+   "cuenta": "@derechadiariomx",
+   "fecha": "octubre de 2026 (unas tres semanas antes del 1 de noviembre)",
    "texto": "URGENTE — REGALO DE DESPEDIDA: A solo días de dejar el poder, el narcoexpresidente AMLO le otorgó un permiso exprés a la empresa «fantasma» Portacelis, ligada al amigo íntimo de «El Andy», Amílcar Olán, para importar 52 millones de litros de presunto diésel contrabandeado, según una investigación de MCCI."
   },
   "cuerpo": [
-   "De dónde viene. La publicación que circula retoma, casi tres semanas después, una investigación de Mexicanos contra la Corrupción y la Impunidad (MCCI) del 5 de octubre. Según MCCI, la Secretaría de Energía autorizó el 27 de septiembre de 2024 a Portacelis Gas and Oil a importar hasta 52 millones de litros de diésel, nueve días después de endurecer sus reglas para esos permisos y cuando la empresa tenía unas semanas de creada. MCCI es una organización de periodismo de investigación: su trabajo es el punto de partida, no la fuente; el documento que manda es el permiso.",
+   "De dónde viene. La publicación de la cuenta @derechadiariomx en Instagram retoma una investigación de Mexicanos contra la Corrupción y la Impunidad (MCCI) del 5 de octubre. Según MCCI, la Secretaría de Energía autorizó el 27 de septiembre de 2024 a Portacelis Gas and Oil a importar hasta 52 millones de litros de diésel, nueve días después de endurecer sus reglas para esos permisos y cuando la empresa tenía unas semanas de creada. MCCI es una organización de periodismo de investigación: su trabajo es el punto de partida, no la fuente; el documento que manda es el permiso.",
    "Lo que sí consta. El sexenio terminó el 30 de septiembre de 2024: la Constitución fija que la nueva presidencia empieza el 1 de octubre (art. 83). Si el permiso es del 27, como dice MCCI, se dio a tres días del cambio. Y Portacelis no aparece en la lista del artículo 69-B del Código Fiscal, la de las empresas que el SAT considera que facturan operaciones simuladas (las llamadas «fantasma»), en nuestra copia con corte al 31 de diciembre de 2025.",
    "Lo que no podemos sostener todavía. El permiso mismo, su fecha, quién lo firmó y los 52 millones de litros: la copia la tiene MCCI y no abre desde nuestro servidor, ni el registro de la Sener. Tampoco los litros que la empresa habría dejado de declarar: la prensa habla de 80, 83 o 90 millones, según la nota, a partir de una declaratoria del SAT ante la Fiscalía que no es pública.",
    "Lo que es adjetivo. «Narcoexpresidente» y «regalo de despedida» no son datos: no hay acusación, proceso ni sentencia que los sostenga, y una acusación tampoco sería una condena (Constitución, art. 20). «Fantasma», en el sentido del SAT, no consta. Y que una empresa esté «ligada» a una persona porque la administra alguien de su confianza es un vínculo que reporta MCCI, no una resolución de autoridad: según la prensa, Amílcar Olán no figura como acusado.",
@@ -454,9 +454,13 @@
    {
     "nombre": "Punto de partida: MCCI, «Gobierno de AMLO favoreció a huachicolera ligada a Amílcar Olán» (05-10-2026)",
     "url": "https://contralacorrupcion.mx/gobierno-de-amlo-favorecio-a-huachicolera-ligada-a-amilcar-olan/"
+   },
+   {
+    "nombre": "Lo que circula: @derechadiariomx, Instagram (octubre de 2026)",
+    "url": "https://www.instagram.com/derechadiariomx/"
    }
   ],
-  "actualizado": "31-10-2026"
+  "actualizado": "01-11-2026"
  },
  {
   "id": "asf-segunda-entrega-cp2025",
