@@ -1897,7 +1897,180 @@ def agua_guadalajara_federal():
     }
 
 
-NOTAS = [modalidad_40, senado_lif_2027, jalisco_gasto_federal, asf_segunda_entrega_2025, portacelis_diesel, carnaval_ensenada, asf_nuevo_leon, lfd_dnr_defensa, pemex_3t_2026, servidores_exportacion, agua_guadalajara_federal]
+
+# Huawei y el gobierno (bandeja 11, 01-11-2026). Lo que se coteja es una publicación de
+# @derechadiariomx que resume la serie «Operación Huawei» de Código Magenta (audios
+# atribuidos a un ejecutivo comercial de Huawei). La base es ComprasMX 2025–2026.
+POST_HUAWEI = 'https://www.instagram.com/p/DfGNWzKCVy9/'   # sin el parámetro de rastreo
+CM_GRAB = 'https://codigomagenta.com.mx/operacion-huawei-grabaciones-secretas/'
+CM_WASH = 'https://codigomagenta.com.mx/operacion-huawei-alerta-en-washington/'
+CM_AMLO = 'https://codigomagenta.com.mx/presume-huawei-favoritismo-de-amlo/'
+FCC_LISTA = 'https://www.fcc.gov/supplychain/coveredlist'
+CMX_DA = 'https://comprasmx.buengobierno.gob.mx/datos-abiertos'
+COMPRANET_CM = 'https://upcp-compranet.hacienda.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf'
+CONTRATOS_PAG = 'contratos-publicos.html'
+FALTA_CMX = ('Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026, no el histórico de CompraNet de 2019 a 2024 ni '
+             'los contratos marco; esos portales no abren desde nuestra sesión.')
+
+
+def _huawei_cmx():
+    """Lo que dice ComprasMX de Huawei: proveedores con ese nombre (búsqueda completa) y contratos cuyo título nombra la marca
+    (solo entre los contratos más grandes de cada proveedor que guarda la plataforma). Se lee de assets/auditor/data/comprasmx/."""
+    import glob
+    d = RAIZ / 'assets' / 'auditor' / 'data' / 'comprasmx'
+    def carga(f):
+        s = f.read_text(encoding='utf-8')
+        a = s.index('= {', s.index('window.CMX_')) + 2
+        return json.loads(s[a:s.rindex('}') + 1])
+    idx = carga(d / 'indice.js')['meta']
+    inst = carga(d / 'inst.js')['i']
+    prov, contr = [], []
+    for f in sorted(glob.glob(str(d / 'p-*.js'))):
+        for rfc, x in carga(pathlib.Path(f)).items():
+            if 'HUAWEI' in x['n'].upper():
+                prov.append(x['n'])
+            for k in x.get('k', []):
+                if 'HUAWEI' in k[2].upper():
+                    contr.append({'prov': x['n'], 'cod': k[0], 'inst': inst.get(k[1], {}).get('n', k[1]), 'tit': k[2], 'imp': k[3],
+                                  'mon': k[4], 'tipo': k[5], 'fecha': k[6]})
+    if prov:
+        raise SystemExit('integrar_al_momento: ya hay un proveedor con «Huawei» en el nombre en ComprasMX; revisa la nota de Huawei')
+    if len(contr) != 2 or any(c['mon'] != 'MXN' for c in contr):
+        raise SystemExit('integrar_al_momento: cambiaron los contratos con la marca Huawei en ComprasMX; revisa la nota de Huawei')
+    n = sum(a['contratos'] for a in idx['archivos'])
+    return idx, n, sorted(contr, key=lambda c: -c['imp'])
+
+
+def huawei_gobierno():
+    from apartados import glosario_ancla
+    g = lambda t: {'t': t.split(' (')[0], 'url': 'glosario.html#' + glosario_ancla(t)}
+    idx, n, cs = _huawei_cmx()
+    p2 = lambda v: '$%s' % format(v, ',.2f')
+    TIPO = {'LP': 'licitación pública', 'I3': 'invitación a cuando menos tres personas', 'AD': 'adjudicación directa'}
+    suma = sum(c['imp'] for c in cs)
+    tt = lambda t: t.title().replace(' De ', ' de ').replace(' Del ', ' del ').replace(' La ', ' la ')
+    cap = lambda t: t.capitalize().replace('huawei', 'Huawei')
+    hj = tt(cs[0]['inst'])
+    return {
+        'id': 'huawei-gobierno-codigo-magenta',
+        'seccion': 'Al momento',
+        'icono': '📡',
+        'temas': ['huawei', 'codigo magenta', 'operacion huawei'],
+        'fecha': '01-11-2026',
+        'titulo': ('¿Huawei «digitaliza» al gobierno con acceso total al IMSS, al SAT y a Aduanas? En los contratos federales de 2025 y '
+                   '2026, Huawei no aparece como proveedor'),
+        'balazo': ('Circula que Morena «recurre a Huawei» y que sus ejecutivos «tendrían total acceso» a los sistemas más sensibles del '
+                   'gobierno, según audios que publicó Código Magenta. Los audios son de un ejecutivo comercial que presume clientes: no '
+                   'son un contrato. En los %s contratos federales de ComprasMX de 2025 y 2026, ningún proveedor se llama Huawei; lo que sí '
+                   'hay son dos compras de equipo de esa marca a otras empresas, las dos del %s. Lo de años anteriores está pendiente.'
+                   % (format(n, ','), hj)),
+        'nota': {'medio': 'Código Magenta', 'titulo': 'Operación Huawei: Grabaciones secretas', 'fecha': '', 'url': CM_GRAB},
+        'circula': {'red': 'Instagram', 'cuenta': '@derechadiariomx', 'fecha': '30 de octubre de 2026 (dos días antes del 1 de noviembre)',
+                    'texto': ('MORENA RECURRE A HUAWEI PARA DIGITALIZAR AL GOBIERNO: Según grabaciones obtenidas por el medio Código Magenta, '
+                              'ejecutivos chinos de alto nivel de Huawei tendrían total acceso para digitalizar los sistemas más sensibles '
+                              'del gobierno mexicano. Desde IMSS, SAT, ISSSTE, Aduanas y hasta aeropuertos, el control que la multinacional '
+                              'china tendría en México sería peligroso para la relación con Estados Unidos, cuyo gobierno ya calificó a '
+                              'Huawei como una amenaza para la seguridad nacional.')},
+        'cuerpo': [
+            ('De dónde sale. Código Magenta publicó una serie, «Operación Huawei», con grabaciones que atribuye a un ejecutivo comercial de '
+             'Huawei en México. Según las notas que la retoman, en ellas el ejecutivo dice que su empresa es el mayor proveedor tecnológico '
+             'del IMSS, del SAT, de la Agencia Nacional de Aduanas y de la Conagua, que construyó centros de datos para el IMSS y que su '
+             'gente ayudó a redactar un contrato marco de servicios tecnológicos. Es lo que dice un vendedor de sus clientes: no es un '
+             'contrato, y no conocemos una autenticación de los audios. La serie no abre desde la plataforma.'),
+            ('Lo que dicen los contratos. Cruzamos la base de ComprasMX que tiene la plataforma: los %s contratos que las dependencias '
+             'federales reportaron en 2025 y 2026 (descarga del %s). Ningún proveedor se llama Huawei. Lo que sí aparece son dos compras '
+             'de equipo de la marca a otras empresas, las dos del %s: %s por «%s» (%s, %s) y %s por «%s» (%s, %s). En total, %s antes de '
+             'impuestos (derivado). Tener contratos no es una irregularidad.'
+             % (format(n, ','), '26-10-2026' if idx.get('descarga') == '2026-10-26' else idx.get('descarga'), hj,
+                p2(cs[0]['imp']), cap(cs[0]['tit']), cs[0]['prov'], TIPO.get(cs[0]['tipo'], cs[0]['tipo']),
+                p2(cs[1]['imp']), cap(cs[1]['tit']), cs[1]['prov'], TIPO.get(cs[1]['tipo'], cs[1]['tipo']), p2(suma))),
+            ('El primer punto ciego: el condicional. «Tendrían total acceso», «el control que tendría», «sería peligroso»: la publicación '
+             'no afirma un hecho, lo supone. Y «total acceso» no es lo que se cita de los audios, que hablan de ser proveedor. Vender equipo '
+             'o construir un centro de datos no es lo mismo que controlar un sistema: eso depende de quién lo opera y de qué dice el contrato.'),
+            ('El segundo: «Morena recurre». Un partido no contrata servicios del gobierno; contratan las dependencias, y cada contrato '
+             'queda en ComprasMX con su número. Los audios hablan de dependencias y de funcionarios, no de una decisión del partido.'),
+            ('El tercero: lo que todavía no vemos. Nuestra búsqueda de la marca en los títulos solo cubre los cinco contratos más grandes '
+             'de cada proveedor que guarda la plataforma, y no tenemos el histórico de CompraNet de 2019 a 2024 ni el contrato marco de nube '
+             'de 2024: ahí podría estar lo que dice el ejecutivo. Una compra por medio de otra empresa tampoco lleva el nombre de Huawei '
+             'como proveedor. Por eso lo de años anteriores queda pendiente, y una acusación no es una condena.'),
+        ],
+        'ejemplo': {
+            'tit': 'La cuenta, con los contratos que sí aparecen',
+            'txt': 'Lo que ComprasMX registra con la marca Huawei en el título (2025 y 2026):',
+            'filas': [[tt(c['inst']) + ' · ' + c['cod'], p2(c['imp']),
+                       '%s, %s, %s' % (c['prov'], TIPO.get(c['tipo'], c['tipo']), c['fecha'])] for c in cs] +
+                     [['Total', p2(suma), ' + '.join(p2(c['imp']) for c in cs)]],
+            'nota': ('Importe antes de impuestos tal como lo reportó la institución; en un contrato abierto suele ser el máximo, no lo pagado. '
+                     'La suma es derivada.'),
+        },
+        'cotejo': [
+            {'dice': 'Morena recurre a Huawei para digitalizar al gobierno', 'res': 'no consta',
+             'explica': ('Ningún documento oficial muestra un contrato del gobierno, y menos de un partido, con Huawei para «digitalizar al '
+                         'gobierno». En los %s contratos federales de ComprasMX de 2025 y 2026 no hay ningún proveedor llamado Huawei.'
+                         % format(n, ',')),
+             'fuente': 'ComprasMX, Datos Abiertos 2025 y 2026 (Secretaría Anticorrupción y Buen Gobierno), en la base de la plataforma',
+             'url': CMX_DA},
+            {'dice': 'Ejecutivos chinos de alto nivel de Huawei tendrían total acceso para digitalizar los sistemas más sensibles', 'res': 'pendiente',
+             'explica': ('Lo dice en condicional, y se apoya en audios que el medio atribuye a un ejecutivo comercial de Huawei: '
+                         'lo que dice de sus clientes no es un documento. No conocemos una autenticación de los audios, y eso no los vuelve falsos: falta ver los '
+                         'contratos de esos años.'),
+             'fuente': 'Código Magenta, «Operación Huawei: Grabaciones secretas»', 'url': CM_GRAB, 'quien': FALTA_CMX, 'donde': CMX_DA},
+            {'dice': 'Desde IMSS, SAT, ISSSTE, Aduanas y hasta aeropuertos', 'res': 'pendiente',
+             'explica': ('En 2025 y 2026 ninguna de esas dependencias le contrató directamente a Huawei. Lo que el ejecutivo dice de años '
+                         'anteriores, o de compras por medio de otras empresas, se vería en el histórico de CompraNet y en los contratos '
+                         'marco, que no integramos todavía. En 2025 y 2026 solo el %s compró equipo de la marca, a otras empresas.' % hj),
+             'fuente': 'ComprasMX, Datos Abiertos 2025 y 2026, en la base de la plataforma', 'url': CONTRATOS_PAG,
+             'quien': FALTA_CMX, 'donde': COMPRANET_CM},
+            {'dice': 'Estados Unidos ya calificó a Huawei como una amenaza para la seguridad nacional', 'res': 'pendiente',
+             'explica': ('Varias fuentes reportan que la Comisión Federal de Comunicaciones de EE. UU. designó a Huawei como amenaza en junio '
+                         'de 2020 y la puso en su lista de equipo cubierto en 2021. Es un documento oficial de otro gobierno, y su portal no '
+                         'abre desde la plataforma: lo dejamos pendiente hasta leerlo.'),
+             'fuente': 'FCC, Covered List', 'url': FCC_LISTA,
+             'quien': 'Falta de la plataforma: el portal de la FCC no abre desde nuestra sesión.', 'donde': FCC_LISTA},
+            {'dice': 'Sería peligroso para la relación con Estados Unidos', 'res': 'no consta',
+             'explica': 'Es una opinión en condicional, no un dato: no se coteja. Ningún documento oficial de los dos gobiernos lo dice así.',
+             'fuente': 'Lo que circula: @derechadiariomx', 'url': POST_HUAWEI},
+        ],
+        'medios': [
+            {'medio': '@derechadiariomx (Instagram)', 'titulo': 'Morena recurre a Huawei para digitalizar al gobierno', 'fecha': '30-10-2026',
+             'url': POST_HUAWEI},
+            {'medio': 'Código Magenta', 'titulo': 'Operación Huawei: Grabaciones secretas', 'fecha': '', 'url': CM_GRAB},
+            {'medio': 'Código Magenta', 'titulo': 'Operación Huawei: alerta en Washington', 'fecha': '', 'url': CM_WASH},
+            {'medio': 'Código Magenta', 'titulo': 'Presume Huawei favoritismo de AMLO', 'fecha': '', 'url': CM_AMLO},
+            {'medio': 'Mundo Ejecutivo', 'titulo': 'Huawei en México: audios filtrados revelan presuntos vínculos con infraestructura tecnológica del gobierno',
+             'fecha': '', 'url': 'https://mundoejecutivo.com.mx/actualidad/huawei-en-mexico-audios-filtrados-revelan-presuntos-vinculos-con-infraestructura-tecnologica-del-gobierno/'},
+            {'medio': 'Energía Hoy', 'titulo': 'Huawei bajo la lupa: audios apuntan a infraestructura crítica de Pemex y CFE', 'fecha': '',
+             'url': 'https://energiahoy.com/tech-trends/huawei-bajo-la-lupa-audios-apuntan-a-infraestructura-critica-de-pemex-y-cfe/'},
+            {'medio': 'Índice Político', 'titulo': 'Audios atribuidos a Huawei describen su alcance en dependencias del gobierno mexicano', 'fecha': '',
+             'url': 'https://indicepolitico.com/audios-atribuidos-a-huawei-describen-su-alcance-en-dependencias-del-gobierno-mexicano/'},
+            {'medio': 'SonoraPresente', 'titulo': 'Código Magenta revela audios sobre expansión de Huawei en áreas estratégicas del gobierno mexicano',
+             'fecha': '', 'url': 'https://sonorapresente.com/2026/09/codigo-magenta-revela-audios-sobre-expansion-de-huawei-en-areas-estrategicas-del-gobierno-mexicano/'},
+        ],
+        'datos': [
+            {'ico': '📑', 'tx': 'Contratos públicos (ComprasMX)', 'url': CONTRATOS_PAG,
+             'de': 'Busca a cualquier proveedor del gobierno federal: sus contratos, quién se los dio y cómo.'},
+            {'ico': '🏛️', 'tx': 'Auditor de entes', 'url': 'herramienta-inspector-entes.html',
+             'de': 'El estado de cuenta y la salud financiera del IMSS, el SAT, el ISSSTE y las demás dependencias.'},
+        ],
+        'glosario': [g('Licitación Pública'), g('Invitación a Cuando Menos Tres Personas'), g('Adjudicación Directa')],
+        'red': 'Huawei gobierno México Código Magenta audios IMSS SAT Aduanas',
+        'sigue': [
+            {'que': 'Los contratos de 2019 a 2024 en el histórico de CompraNet: si Huawei, directamente o por medio de otras empresas, le vendió al IMSS, al SAT o a Aduanas', 'url': CMX_DA},
+            {'que': 'El Anexo 4 del contrato marco de nube pública de 2024: qué proveedores quedaron acreditados', 'url': COMPRANET_CM},
+            {'que': 'La respuesta de la Agencia de Transformación Digital y de las dependencias nombradas', 'url': 'https://www.gob.mx/atdt'},
+            {'que': 'La designación de la FCC y la Covered List, en su documento', 'url': FCC_LISTA},
+        ],
+        'fuentes': [
+            {'nombre': 'ComprasMX, Datos Abiertos: Datos Relevantes de los Contratos 2025 y 2026 (descarga del 26-10-2026), en la base de la plataforma',
+             'url': CMX_DA},
+            {'nombre': 'Pendiente: FCC, Covered List', 'url': FCC_LISTA},
+            {'nombre': 'Punto de partida: Código Magenta, serie «Operación Huawei»', 'url': CM_GRAB},
+            {'nombre': 'Lo que circula: @derechadiariomx, Instagram (30-10-2026)', 'url': POST_HUAWEI},
+        ],
+        'actualizado': '01-11-2026',
+    }
+
+NOTAS = [modalidad_40, senado_lif_2027, jalisco_gasto_federal, asf_segunda_entrega_2025, portacelis_diesel, carnaval_ensenada, asf_nuevo_leon, lfd_dnr_defensa, pemex_3t_2026, servidores_exportacion, agua_guadalajara_federal, huawei_gobierno]
 
 
 def main():

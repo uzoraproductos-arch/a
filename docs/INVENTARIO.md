@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 257 |
+| Páginas revisadas | 258 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -176,6 +176,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `noticias-al-momento-asf-nuevo-leon-triangulacion-cp2025.html` | La ASF denuncia una presunta triangulación de 7 mil 200 millones en Nuevo León: lo que dice, lo que falta y por qué «desvió» todavía no es un hecho · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 3 |
 | `noticias-al-momento-asf-segunda-entrega-cp2025.html` | La ASF y los 9 mil millones «por aclarar» de 2025: lo que se sabe, lo que falta y lo que nadie te explica · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 3 |
 | `noticias-al-momento-carnaval-ensenada-2026-imcudhe.html` | El Carnaval de Ensenada costó más de 22 millones y recuperó 1.2: lo que se dijo ante el Cabildo y lo que falta publicar · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 2 |
+| `noticias-al-momento-huawei-gobierno-codigo-magenta.html` | ¿Huawei «digitaliza» al gobierno con acceso total al IMSS, al SAT y a Aduanas? En los contratos federales de 2025 y 2026, Huawei no aparece como proveedor · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 3 |
 | `noticias-al-momento-imss-modalidad-40-gestores.html` | El IMSS acota la Modalidad 40: lo que dice el Diario Oficial y lo que falta probar · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 3 |
 | `noticias-al-momento-jalisco-gasto-federal-pef-2027.html` | Jalisco y el gasto federal: aporta el 7.5 % del PIB y recibe el 6.1 % de lo que la Federación reparte a los estados · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-lfd-2027-dnr-defensa-tren-maya-aifa.html` | ¿18 mil millones «en subsidios» para el Tren Maya y el AIFA? Es el cobro a los turistas extranjeros, y el 57 % es la parte de la Defensa, no un aumento · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 2 |
@@ -186,7 +187,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `noticias-auditavision.html` | Auditavisión Noticias · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `noticias-relevantes.html` | Noticias relevantes · Auditavisión | apartados.py | 37 | 0 | 0 | 0 | 0 |
 | `noticias-seguimiento.html` | Seguimiento: el caso no se olvida · Auditavisión | apartados.py | 44 | 0 | 8 | 4 | 6 |
-| `noticias-verifica.html` | Verifica una noticia · Auditavisión | apartados.py | 73 | 0 | 0 | 0 | 0 |
+| `noticias-verifica.html` | Verifica una noticia · Auditavisión | apartados.py | 74 | 0 | 0 | 0 | 0 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 55 | 0 | 0 | 5 | 1 |
 | `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 0 |
 | `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 52 | 0 | 4 | 0 | 0 |
@@ -254,7 +255,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 222 | 0 | 0 | 0 | 119 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 225 | 0 | 0 | 0 | 122 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 36 | 0 | 6 | 3 | 1 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 45 | 0 | 1 | 0 | 0 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
@@ -325,7 +326,7 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-118 fichas, cada una con su porqué, su responsable y su enlace oficial.
+121 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 

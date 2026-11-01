@@ -34,6 +34,7 @@ ESPERA = {
     'pemex-3t-2026-perdida-neta': {'porcentaje', 'comparacion', 'dolares', 'resultado'},
     'servidores-ia-exportaciones-contenido-nacional': {'porcentaje', 'comparacion', 'dolares', 'quien', 'proyeccion'},
     'agua-guadalajara-14500-federal': {'promesa', 'sin-costo'},
+    'huawei-gobierno-codigo-magenta': {'condicional', 'quien', 'juicio'},
 }
 NEUTRAS = [
     'Según el PEF 2026, el gasto aprobado del Ramo 12 es de 1,000 millones de pesos.',

@@ -1383,6 +1383,26 @@
     "No hay presupuesto aprobado publicado",
     "Anunciado en 2019"
    ]
+  },
+  {
+   "q": "¿Es cierto que Huawei tiene total acceso al IMSS y al SAT?",
+   "ir": "noticias-auditavision.html#col-huawei-gobierno-codigo-magenta",
+   "dice": [
+    "no aparece como proveedor"
+   ]
+  },
+  {
+   "q": "https://www.instagram.com/p/DfGNWzKCVy9/?rpxt=abc",
+   "ir": "noticias-auditavision.html#col-huawei-gobierno-codigo-magenta",
+   "dice": [
+    "hemeroteca"
+   ]
+  },
+  {
+   "q": "Dicen que el presupuesto de cultura tendría un recorte de 40 %",
+   "dice": [
+    "El condicional que esconde un rumor"
+   ]
   }
  ]
 }

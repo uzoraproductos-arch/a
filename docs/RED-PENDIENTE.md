@@ -35,6 +35,7 @@ Se actualiza cada vez que una nota deja un pendiente por un portal que no abre.
 | `www.ppef.hacienda.gob.mx` | Proyecto de Presupuesto 2027 por ramo y por empresa | `jalisco-gasto-federal-pef-2027`, `lfd-2027-dnr-defensa-tren-maya-aifa` |
 | `www.transparenciapresupuestaria.gob.mx` | Datos abiertos del gasto | varias |
 | `www.gob.mx` | Sener (permisos de importación), FGR, IPAB, Conagua y comunicados de Presidencia | `portacelis-permiso-diesel-sener`, `agua-guadalajara-14500-federal` |
+| `upcp-compranet.hacienda.gob.mx`, `comprasmx.buengobierno.gob.mx` | Contratos marco (nube pública 2024, Anexo 4 de proveedores acreditados) y el histórico de CompraNet 2019–2024; ComprasMX para bajar los datos abiertos al día | `huawei-gobierno-codigo-magenta` |
 | `stastdgv2portfgr032.blob.core.windows.net` | Estadísticas de la FEADLE (FGR) sobre agresiones a periodistas | pendiente `periodistas-feadle` |
 
 ## Empresas públicas
@@ -70,4 +71,6 @@ Sirven para leer la nota completa que se coteja; nunca son fuente de cifras.
 | `latinus.us` | Nota de los 18 mil millones de la Defensa |
 | `www.jornada.com.mx` | Nota de la ASF y Nuevo León |
 | `www.instagram.com` | Leer las publicaciones que pasa el autor |
+| `codigomagenta.com.mx` | Leer la serie «Operación Huawei» (lo que se coteja) | `huawei-gobierno-codigo-magenta` |
+| `www.fcc.gov` | Designación de Huawei como amenaza (2020) y la Covered List (Comisión Federal de Comunicaciones de EE. UU.) | `huawei-gobierno-codigo-magenta` |
 | `www.justice.gov` | Sentencia de García Luna (Departamento de Justicia de EE. UU.) |

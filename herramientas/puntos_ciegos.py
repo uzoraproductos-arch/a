@@ -82,7 +82,7 @@ REGLAS = [
             ('portacelis-permiso-diesel-sener', '«Según una investigación de MCCI»: el permiso se coteja en el documento de la Sener.')]},
     {'id': 'juicio', 'ico': '📢', 'n': 'Palabras que juzgan antes de probar',
      're': r'despilfarro|fracasad[oa]s?|faraonic[oa]s?|regalo|urgente|expres|al vapor|madruguete|escandal[oa]s?|escandalos[oa]s?|'
-           r'narco[a-z]*|fantasma|saqueo|atraco|en solo',
+           r'narco[a-z]*|fantasma|saqueo|atraco|en solo|peligros[oa]s?',
      'ex': 'Los adjetivos son opinión. No vuelven falsa la nota, pero tampoco la prueban: el cotejo se hace sobre los hechos y las '
            'cifras, no sobre el tono.',
      'pr': 'Quítale los adjetivos: ¿qué afirmación queda y qué documento la sostiene?',
@@ -116,6 +116,12 @@ REGLAS = [
            'hecho hasta que pasa.',
      'pr': '¿Quién la hizo y con qué supuestos? ¿Hay un documento oficial que la respalde?',
      'de': [('servidores-ia-exportaciones-contenido-nacional', '«Los $82,500 MDD que vienen para data centers a 2031» es una proyección de privados, no una inversión hecha.')]},
+    {'id': 'condicional', 'ico': '❓', 'n': 'El condicional que esconde un rumor',
+     're': r'(tendria|tendrian|seria|serian|habria|habrian|estaria|estarian)',
+     'ex': ('«Tendría», «sería», «habría»: la nota no afirma un hecho, lo supone. Es la forma de publicar algo que nadie ha '
+            'confirmado sin decirlo.'),
+     'pr': '¿Quién lo confirma, y con qué documento? Si nadie, es una hipótesis, no una noticia.',
+     'de': [('huawei-gobierno-codigo-magenta', '«Tendrían total acceso» y «sería peligroso»: la publicación supone, y los contratos de 2025 y 2026 no lo muestran.')]},
 ]
 
 # Lo que el detector no puede ver con un solo texto: se dice en la página.
