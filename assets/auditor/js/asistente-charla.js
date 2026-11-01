@@ -1155,11 +1155,51 @@
           { v: n(r[4]), etq: 'causas penales pendientes al cierre de 2024', e: 'oficial' }],
         sug: ['¿Cuánto rezago tienen los poderes judiciales de los estados?', '¿Cuánto rezago penal hay?', '¿Cuánto tarda la Suprema Corte en resolver?'] };
     }
+    /* El circuito judicial que se nombra en la pregunta: «tercer circuito», «circuito 3», «decimoquinto circuito». */
+    function judCircuito(t) {
+      if (!/circuito/.test(t)) return 0;
+      var m = t.match(/circuito (?:numero |no\.? |num\.? )?(\d{1,2})\b/) || t.match(/\b(\d{1,2})\s?(?:o|er|ero|ro|do|to|vo|mo|no|°|º)?\.? circuito/);
+      if (m) { var k = +m[1]; return k >= 1 && k <= 32 ? k : 0; }
+      var u = t.replace(/decimoctavo/g, 'decimo octavo').replace(/undecimo/g, 'decimo primer').replace(/duodecimo/g, 'decimo segundo')
+        .replace(/(decimo|vigesimo|trigesimo)(?=[a-z])/g, '$1 ').replace(/primero/g, 'primer').replace(/tercero/g, 'tercer');
+      var d = u.match(/\b(?:(decimo|vigesimo|trigesimo) ?)?(primer|segundo|tercer|cuarto|quinto|sexto|septimo|octavo|noveno)? circuito/);
+      if (!d || (!d[1] && !d[2])) return 0;
+      var dec = { decimo: 10, vigesimo: 20, trigesimo: 30 }[d[1]] || 0;
+      var uni = ['primer', 'segundo', 'tercer', 'cuarto', 'quinto', 'sexto', 'septimo', 'octavo', 'noveno'].indexOf(d[2]) + 1;
+      var r = dec + uni;
+      return r >= 1 && r <= 32 ? r : 0;
+    }
     function judResp(t, es) {
       if (!JUD) return null;
       var pj = /judicial|judicatura|\bpjf\b|suprema corte|\bscjn\b|la corte\b|\bjuez|\bjueces|juezas?\b|magistrad|ministr[oa]s?\b/;
       /* La auditoría de gestión (27-10-2026): lo que resuelve con su dinero, el rezago y cuánto tarda. */
       var juzga = /judicial|judicatura|\bpjf\b|suprema corte|\bscjn\b|la corte\b|\bjuez|\bjueces|juezas?\b|juzgado|tribunal|magistrad|justicia/;
+      /* Antes y después de la reforma judicial (01-11-2026): la estadística de la DGEJ. */
+      if (JUD.t.reforma_antes_despues) {
+        var refo = /reforma judicial|desde la reforma|despues de la reforma|antes y despues|(jueces|juezas|juzgadores|personas juzgadoras|magistrad\w*) (electos|electas|nuevos|nuevas)|nuevos jueces|eleccion judicial/;
+        if (/(cuant[oa]s|porcentaje|proporcion|cuantas son) (juezas|mujeres|magistradas)|juezas (hay|son)|mujeres (juezas|titulares|juzgadoras|en los juzgados)|paridad.*(juez|judicial)|secretari\w* (en funciones|haciendo|que suplen|suplen)|(juzgados|tribunales|organos) sin (juez|titular)|quien juzga/.test(t) && juzga.test(t)) return judTema('reforma_titulares');
+        if (/(como|cuanto) (ha )?(crecido|crece|aumentado|aumenta)|cada ano|por ano|historic|desde 2022|ultimos (anos|cuatro anos)|serie/.test(t) && /rezago|pendientes|acumul|asuntos/.test(t) && /federal|distrito|colegiad|juzgados/.test(t)) return judTema('reforma_serie');
+        if (refo.test(t) && /resuelve|resuelven|resolvieron|productiv|desempeno|eficien|rezago|trabaj|asuntos|sentencias|funcion|mejor|peor|igual|cambi/.test(t)) return judTema('reforma_antes_despues');
+      }
+      /* Litigiosidad y productividad por circuito (01-11-2026): los indicadores de la DGEJ, 2021 a 2025. */
+      if (JUD.t.jd_litig) {
+        var cn = judCircuito(t);
+        var orgc = /colegiados? de apelacion|unitari|apelacion/.test(t) ? 'apel' : (/colegiad|amparo directo|amparo en revision/.test(t) ? 'tcc' : (/distrito|amparo indirecto/.test(t) ? 'jd' : ''));
+        var indc = /circuito|partidos? judicial|litigiosidad|congestion|indicadores? (estadisticos )?judicial|productividad/;
+        var porOrg = /juzgado por juzgado|tribunal por tribunal|organo por organo|(cada|por|mi|que|cual|el) (juzgado|tribunal|organo)\b|juzgados? (primero|segundo|tercero|cuarto|quinto|sexto|septimo|octavo|noveno|decimo|vigesimo)|(primer|segundo|tercer|cuarto|quinto|sexto|septimo|octavo|noveno|decimo)o? tribunal|tribunal colegiado (primero|segundo|tercero|cuarto|quinto|sexto|septimo|octavo|noveno|decimo)/.test(t);
+        if (!cn && es && es.length === 1 && JUD.circ && (porOrg || /circuito|litigiosidad|congestion|productividad|juzgados? de distrito|tribunal(es)? colegiad|juzgados? federal|tribunal(es)? federal/.test(t))) {
+          var ic = JUD.circ.indexOf(es[0].a);
+          if (ic >= 0) cn = ic + 1;
+        }
+        if (cn && porOrg && JUD.t['org_' + cn]) return judTema('org_' + cn);
+        if (cn && JUD.t['circ_' + cn] && !orgc) return judTema('circ_' + cn);
+        if (indc.test(t) || (orgc && /por circuito|cada circuito|circuitos/.test(t))) {
+          var cual = /productiv|tarda|tardan|duracion|dias|por secretario|cuantas sentencias|rapid|lent/.test(t) ? 'prod' : 'litig';
+          if (orgc) return judTema(orgc + '_' + cual);
+          if (cn && JUD.t['circ_' + cn]) return judTema('circ_' + cn);
+          if (/litigiosidad|congestion|productividad|indicadores?|por circuito|partidos? judicial/.test(t)) return judTema('jd_' + cual);
+        }
+      }
       if (/rezago|pendientes? de (concluir|resolver)|(asuntos|casos|juicios|expedientes|causas) (sin resolver|pendientes|acumulad|atorad)|(cuant[oa]s) (asuntos|casos|juicios|expedientes) (resuelve|resolvio|resolvieron|concluy|saca|sacan|atiende)|(cuanto|que tanto) (resuelve|resuelven|trabaja|trabajan)|(costo|cuesta|cuestan|dinero) (por|de) (cada )?(asunto|caso|juicio|expediente)|auditoria de gestion|desempeno|productividad|carga de trabajo|eficien/.test(t) && (juzga.test(t) || /rezago penal|causas penales/.test(t))) {
         if (es && es.length === 1) return judEstado(es[0]);
         if (/penal|carcel|preso|procesad/.test(t) || (/rezago|pendiente/.test(t) && !/estado|estatal|local|federal|corte|scjn/.test(t))) return judTema('rezago');

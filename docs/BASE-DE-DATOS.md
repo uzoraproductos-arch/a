@@ -142,8 +142,8 @@ conecta los botones «Enviar», «Lo que aún no sé» y «Búscalo en internet�
 - **La IA no se probó contra la API real**: falta la llave. El candado de
   cifras y el filtro de enlaces de `buscar-web` sí están probados sin red.
 - **La lista de prensa es editorial**: la escogió el agente como punto de
-  partida (diarios nacionales con hemeroteca en línea); el autor la confirma
-  o la cambia en `_comun/web.ts`.
+  partida (diarios nacionales con hemeroteca en línea) y **el autor la
+  confirmó el 01-11-2026**; se cambia en `_comun/web.ts`.
 
 ## Los códigos de acceso (29-10-2026)
 

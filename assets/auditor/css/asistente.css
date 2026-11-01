@@ -280,6 +280,10 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .leg-tabla th, .leg-tabla td { padding: 8px 10px; border-bottom: 1px solid #dfe5f0; text-align: left; }
 .leg-tabla td { text-align: right; font-variant-numeric: tabular-nums; }
 .leg-tabla tfoot th, .leg-tabla tfoot td { font-weight: 800; border-bottom: 0; }
+/* Indicadores por circuito (01-11-2026): cada indicador se abre con un toque. */
+.ic-ind { border-bottom: 1px solid #dfe5f0; }
+.ic-ind > summary { min-height: 44px; padding: 10px 4px; cursor: pointer; font-weight: 700; display: list-item; }
+.ic-org { margin: 22px 0 6px; }
 .leg-fuentes { font-size: 16px; }
 /* Informe especial «Documentar para sancionar» (27-10-2026): tablas de texto. */
 .san-tabla { max-width: 860px; }

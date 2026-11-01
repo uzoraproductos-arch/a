@@ -728,6 +728,83 @@
    "ir": "datos-judicial-gestion.html#jud-tiempos"
   },
   {
+   "q": "¿Resuelven igual los juzgados federales después de la reforma judicial?",
+   "ir": "datos-judicial-reforma.html#jud-reforma_antes_despues",
+   "dice": [
+    "96.7",
+    "93.8"
+   ]
+  },
+  {
+   "q": "¿Cómo ha crecido el rezago de los juzgados federales?",
+   "ir": "datos-judicial-reforma.html#jud-reforma_serie",
+   "dice": [
+    "837,930",
+    "471,099"
+   ]
+  },
+  {
+   "q": "¿Cuántas juezas hay desde la reforma?",
+   "ir": "datos-judicial-reforma.html#jud-reforma_titulares",
+   "dice": [
+    "47 %"
+   ]
+  },
+  {
+   "q": "¿Cómo va el Primer Circuito?",
+   "ir": "datos-judicial-por-circuito.html#jud-circ_1",
+   "dice": [
+    "4,549.19"
+   ]
+  },
+  {
+   "q": "¿Cuál es la litigiosidad de los juzgados de distrito por circuito?",
+   "ir": "datos-judicial-circuitos-distrito.html#jud-jd_litig",
+   "dice": [
+    "1,731.64"
+   ]
+  },
+  {
+   "q": "¿Cuánto tardan los tribunales colegiados por circuito?",
+   "ir": "datos-judicial-circuitos-colegiados.html#jud-tcc_prod",
+   "dice": [
+    "333.67"
+   ]
+  },
+  {
+   "q": "¿Productividad de los tribunales de apelación por circuito?",
+   "ir": "datos-judicial-circuitos-apelacion.html#jud-apel_prod",
+   "dice": [
+    "17,992"
+   ]
+  },
+  {
+   "q": "¿Índice de congestión del vigésimo cuarto circuito?",
+   "ir": "datos-judicial-por-circuito.html#jud-circ_24",
+   "dice": [
+    "2,746.29"
+   ]
+  },
+  {
+   "q": "¿Cómo va el circuito judicial de Jalisco?",
+   "ir": "datos-judicial-por-circuito.html#jud-circ_3",
+   "dice": [
+    "1,647.72"
+   ]
+  },
+  {
+   "q": "¿Qué juzgado de distrito de Nayarit tiene más pendientes?",
+   "ir": "datos-judicial-circuito-24-organos.html#jud-org_24"
+  },
+  {
+   "q": "Primer Circuito juzgado por juzgado",
+   "ir": "datos-judicial-circuito-1-organos.html#jud-org_1"
+  },
+  {
+   "q": "¿Cuál tribunal colegiado del tercer circuito es el más lento?",
+   "ir": "datos-judicial-circuito-3-organos.html#jud-org_3"
+  },
+  {
    "q": "¿Cuántas consultas dio el IMSS en 2025?",
    "ir": "datos-salud-imss.html#sal-imss_servicios",
    "dice": [
