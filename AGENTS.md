@@ -417,6 +417,9 @@ mudando a su página; no se agregan desgloses nuevos.
   y el chat reconoce esas ligas. Cada nota tiene su página
   `noticias-al-momento-<id>.html`, escrita en el HTML con su NewsArticle, para
   que Google la encuentre (`paginas_al_momento()` de `herramientas/noticias.py`).
+  Si la pregunta natural de una nota nombra un municipio o un estado («¿cuánto
+  costó el Carnaval de Ensenada?»), la nota lleva `temas` (sus palabras propias)
+  para que el chat la abra antes que la ficha del lugar (`temaColumna()`).
 - **Noticias reúne todo lo de noticias** (pedido del autor, 28-10-2026: «que
   todo quede debidamente vinculado»). Además de «Al momento» y la Columna del
   Erario, `noticias-relevantes.html` trae dentro la aplicación **Contrasta una

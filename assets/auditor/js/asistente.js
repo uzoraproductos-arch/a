@@ -1997,9 +1997,21 @@
     return f ? charla.deFicha(f) : null;
   }
 
+  /* Una palabra propia de una nota («carnaval», campo temas de integrar_al_momento.py)
+     abre esa nota aunque la pregunta nombre también a un municipio o a un estado (01-11-2026). */
+  function temaColumna(q) {
+    var pq = ' ' + plano(q) + ' ';
+    var f = (B.fichas || []).filter(function (x) {
+      return x.t === 'columna' && (x.tem || []).some(function (w) { return pq.indexOf(' ' + w + ' ') >= 0; });
+    })[0];
+    return f && charla ? charla.deFicha(f) : null;
+  }
+
   function respuesta(q, previas) {
     var tc = tituloColumna(q);
     if (tc) return tc;
+    var tm = temaColumna(q);
+    if (tm) return tm;
     var inv = investigacion(q);
     if (inv) return inv;
     var al = alarma(q);

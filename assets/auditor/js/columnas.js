@@ -48,6 +48,9 @@
   var COLUMNAS = [
  {
   "id": "carnaval-ensenada-2026-imcudhe",
+  "temas": [
+   "carnaval"
+  ],
   "seccion": "Al momento",
   "icono": "🎭",
   "fecha": "30-10-2026",

@@ -113,6 +113,10 @@ Carnaval (22.3 o 22.7 millones, 1.2 de recuperación, 16 del presupuesto y la
 ampliación de 11) solo las tiene la prensa: quedan pendientes, por falta de
 la plataforma. Las cuentas con números de prensa no se hacen como derivado.
 
+Campo opcional temas [palabras]: las que son propias de la nota («carnaval»); en el
+chat, una pregunta que las trae abre la nota aunque también nombre a un municipio
+o a un estado (temaColumna() de asistente.js).
+
 Campo nuevo desde la nota 4: medios [{medio, titulo, fecha, url}], cómo lo
 contaron otros medios. Es la hemeroteca: la página «Verifica una noticia» las
 lista por medio y el chat reconoce sus ligas cuando el lector las pega.
@@ -1001,6 +1005,8 @@ def carnaval_ensenada():
     mdp = lambda v: '$%s millones' % format(round(v / 1e6, 1), ',.1f')
     return {
         'id': 'carnaval-ensenada-2026-imcudhe',
+        # Palabras propias del tema: le ganan al nombre del municipio en el chat.
+        'temas': ['carnaval'],
         'seccion': 'Al momento',
         'icono': '🎭',
         'fecha': '30-10-2026',

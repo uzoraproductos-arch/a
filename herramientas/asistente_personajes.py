@@ -228,6 +228,7 @@ def fichas():
                     'cot': cot, 'sigue': [{'tx': x['que'], 'url': x['url']} for x in c.get('sigue', [])],
                     'dc': c.get('dato_curioso', ''), 'act': c.get('actualizado', ''),
                     'ci': ci, 'fu': fu, 'col': c['id'], 'nota': NOTA,
+                    'tem': [plano(t).strip() for t in c.get('temas', [])],
                     'ir': [PAGINA + '#col-' + c['id'], 'Noticias relevantes'],
                     'k': 'noticias columna %s %s %s' % (
                         c['seccion'] + (' verificamos redes es cierto circula' if cot else ''),
