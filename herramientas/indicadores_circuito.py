@@ -184,6 +184,7 @@ def chequeo():
     d = datos()
     assert len(ORD) == 32 and len(EDO) == 32
     assert len(d['datos']) > 300, 'faltan cuadros de la DGEJ'
+    assert 'vacios' in d, 'el archivo no trae los indicadores vacíos: corre actualizar_indicadores_dgej.py'
     for org in ('2', '4'):
         for a in ANOS:
             for ind in (5, 7, 9, 10, 12, 17):
@@ -361,6 +362,40 @@ def indicadores(org, niv):
     return sorted({x['ind'] for x in datos()['datos'] if x['org'] == org and x['niv'] == str(niv)})
 
 
+NIVEL_NOM = {'1': 'Plantilla judicial', '2': 'Perfil de juezas, jueces y magistraturas', '3': 'Litigiosidad', '4': 'Acceso tecnológico',
+             '5': 'Productividad', '6': 'Incidencia (por materia, delito y acto reclamado)'}
+
+
+def vacios(org):
+    """Lo que el sistema anuncia para este órgano y publica sin valores, en los
+    años en que el órgano existía (los unitarios hasta 2023; los colegiados de
+    apelación desde 2023)."""
+    vivos = {x['ano'] for x in datos()['datos'] if x['org'] == org}
+    out = []
+    for v in datos().get('vacios', []):
+        an = [a for a in v['anos'] if a in vivos]
+        if v['org'] == org and an:
+            out.append(dict(v, anos=an))
+    return out
+
+
+def _vacios_html(orgs):
+    from asistente_legislativo import _chip
+    filas = ''
+    for org in orgs:
+        for v in vacios(org):
+            n = nombre(dict(v, niv=v['niv'])) if v['niv'] != '3' else NOMBRE3.get(v['ind'], v['nombre'])
+            filas += '<li>%s%s · %s · %s</li>' % ((html.escape(ORGANO[org]) + ': ') if len(orgs) > 1 else '', html.escape(NIVEL_NOM[v['niv']]),
+                                                 html.escape(n), ', '.join(v['anos']))
+    if not filas:
+        return ''
+    return ('<details class="ic-ind"><summary>Lo que el sistema anuncia y publica vacío %s</summary><p class="pa-chico">El sistema de la DGEJ tiene estos indicadores, '
+            'pero en los años que se indican no trae ningún valor, ni por circuito ni en el total nacional. Plantilla, perfil, acceso tecnológico e incidencia salen vacíos '
+            'en todos los órganos de 2021 a 2025 (y en los juzgados de distrito, también en 2008, 2011, 2015 y 2018 a 2020, que revisamos). '
+            'Cuántas juezas y jueces hay, su edad, sus estudios y su antigüedad, cuánto personal tienen y de qué tratan los asuntos son datos que el Órgano de '
+            'Administración Judicial tiene y no publica ahí.</p><ul class="pa-lista">%s</ul></details>') % (_chip('pendiente', 'judicial-indicadores-vacios'), filas)
+
+
 def extra(k):
     """Las tablas de la página: todos los indicadores, circuito por circuito y año por año."""
     from asistente_legislativo import _chip
@@ -375,6 +410,8 @@ def extra(k):
         if len(orgs) > 1:
             out += '<h3 class="ic-org">%s</h3>' % html.escape(ORGANO[org])
         out += ''.join(_tabla(org, niv, i) for i in indicadores(org, niv))
+    if cual == 'litig':
+        out += _vacios_html(orgs)
     return out + '<p class="pa-chico">Fuente: <a href="%s" target="_blank" rel="noopener noreferrer">Indicadores Estadísticos Judiciales de la DGEJ ↗</a>.</p>' % SISTEMA
 
 

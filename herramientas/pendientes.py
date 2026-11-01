@@ -198,6 +198,16 @@ PROPIOS = [
      PLATAFORMA, 'https://www.scjn.gob.mx/', 'Suprema Corte de Justicia de la Nación',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-reforma.html', 'Datos · Poder Judicial · Antes y después de la reforma')]),
     # Indicadores por circuito de la DGEJ (01-11-2026).
+    ('judicial-indicadores-vacios', 'Poderes', 'Plantilla, perfil, acceso tecnológico e incidencia de los juzgados y tribunales federales, circuito por circuito',
+     'El sistema de Indicadores Estadísticos Judiciales anuncia, para cada tipo de órgano, cuántas juezas, jueces y magistraturas hay, su edad, nivel de estudios y '
+     'antigüedad, cuánto personal de apoyo tienen, sus computadoras y conexión, y de qué materia, delito o acto reclamado son sus asuntos. De 2021 a 2025 todos esos '
+     'cuadros salen vacíos, por circuito y en el total nacional (en los juzgados de distrito, también en 2008, 2011, 2015 y 2018 a 2020). '
+     'Falta de transparencia del Órgano de Administración Judicial, que administra la estadística desde el 1 de septiembre de 2025 (antes, del Consejo de la Judicatura Federal).',
+     'Órgano de Administración Judicial (Dirección General de Estadística Judicial)', 'https://www.dgej.cjf.gob.mx/Indicadores/acuerd_nal_ini.asp',
+     'Indicadores Estadísticos Judiciales de la DGEJ',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-circuitos-distrito.html', 'Datos · Poder Judicial · Juzgados de distrito por circuito'),
+      ('datos-judicial-circuitos-colegiados.html', 'Datos · Poder Judicial · Tribunales colegiados por circuito'),
+      ('datos-judicial-circuitos-apelacion.html', 'Datos · Poder Judicial · Tribunales de apelación por circuito')]),
     ('judicial-apelacion-tiempos', 'Poderes', 'Cuánto tardan los tribunales colegiados de apelación, circuito por circuito',
      'El sistema de Indicadores Estadísticos Judiciales tiene el indicador de duración (del ingreso a la sentencia) para los tribunales colegiados de apelación, '
      'pero de 2023 a 2025 sale vacío; de los tribunales unitarios, que se transformaron en ellos, sí lo publicó hasta 2023. '

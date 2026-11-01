@@ -71,9 +71,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-ambiente-puntos-ciegos.html` | Puntos ciegos y consecuencias · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `datos-ambiente-quien-lo-mide.html` | Quién lo mide y de dónde sale · Auditavisión | apartados.py | 49 | 0 | 0 | 0 | 3 |
 | `datos-descargas.html` | Descarga en CSV (abre en Excel) · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
-| `datos-judicial-circuitos-apelacion.html` | Tribunales de apelación por circuito · Auditavisión | apartados.py | 47 | 0 | 18 | 1 | 3 |
-| `datos-judicial-circuitos-colegiados.html` | Tribunales colegiados por circuito · Auditavisión | apartados.py | 47 | 0 | 20 | 1 | 2 |
-| `datos-judicial-circuitos-distrito.html` | Juzgados de distrito por circuito · Auditavisión | apartados.py | 47 | 0 | 19 | 1 | 2 |
+| `datos-judicial-circuitos-apelacion.html` | Tribunales de apelación por circuito · Auditavisión | apartados.py | 47 | 0 | 18 | 1 | 4 |
+| `datos-judicial-circuitos-colegiados.html` | Tribunales colegiados por circuito · Auditavisión | apartados.py | 47 | 0 | 20 | 1 | 3 |
+| `datos-judicial-circuitos-distrito.html` | Juzgados de distrito por circuito · Auditavisión | apartados.py | 47 | 0 | 19 | 1 | 3 |
 | `datos-judicial-como-decide.html` | Cómo decide un juez · Auditavisión | apartados.py | 54 | 0 | 16 | 0 | 0 |
 | `datos-judicial-eleccion.html` | La elección judicial · Auditavisión | apartados.py | 47 | 0 | 6 | 2 | 2 |
 | `datos-judicial-estructura.html` | Quién es quién y los 32 circuitos · Auditavisión | apartados.py | 50 | 0 | 19 | 3 | 2 |
@@ -248,7 +248,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 30 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 195 | 0 | 0 | 0 | 95 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 199 | 0 | 0 | 0 | 96 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 30 | 0 | 6 | 3 | 1 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 37 | 0 | 1 | 0 | 0 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
@@ -319,7 +319,7 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-94 fichas, cada una con su porqué, su responsable y su enlace oficial.
+95 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 

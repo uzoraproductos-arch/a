@@ -7,10 +7,12 @@ indicadores»).
 La fuente es el sistema público de la Dirección General de Estadística
 Judicial (Órgano de Administración Judicial), sin clave:
 https://www.dgej.cjf.gob.mx/Indicadores/acuerd_nal_ini.asp
-Por cada año, tipo de órgano y nivel (3 = litigiosidad, 5 = productividad)
+Por cada año, tipo de órgano y nivel (1 plantilla, 2 perfil, 3 litigiosidad,
+4 acceso tecnológico, 5 productividad, 6 incidencia)
 la página resumen trae los cinco primeros lugares y una liga «Ver todos los
 circuitos» por indicador; esa liga da el valor de los 32 circuitos y el total
-nacional. Se guarda todo, con la huella SHA-256 de cada página, en
+nacional. Lo que el sistema anuncia y no trae (los niveles 1, 2, 4 y 6 completos,
+y algunos indicadores de 3 y 5) se guarda en «vacios». Se guarda todo, con la huella SHA-256 de cada página, en
 docs/estadistica/dgej-indicadores-circuito.json, que lee
 herramientas/indicadores_circuito.py.
 
@@ -42,13 +44,14 @@ BASE = 'https://www.dgej.cjf.gob.mx/Indicadores/'
 ANOS = ['2021', '2022', '2023', '2024', '2025']
 ORGANOS = {'2': 'Juzgados de Distrito', '3': 'Tribunales Unitarios de Circuito',
            '4': 'Tribunales Colegiados de Circuito', '340': 'Tribunales Colegiados de Apelación'}
-NIVELES = {'3': 'Litigiosidad', '5': 'Productividad'}
+NIVELES = {'1': 'Plantilla judicial', '2': 'Perfil de magistrados y jueces', '3': 'Litigiosidad', '4': 'Acceso tecnológico',
+           '5': 'Productividad', '6': 'Incidencia'}
 
 
 def resumen_url(ano, torid, nivel):
     # Así lo arma acuerd_nal_ini.asp: productividad tiene una página por tipo
     # de órgano, y la de apelación usa la de unitarios.
-    pag = '(%s)' % nivel if nivel == '3' else '(5-%s)' % ('3' if torid == '340' else torid)
+    pag = '(%s)' % nivel if nivel in '1234' else '(%s-%s)' % (nivel, '3' if torid == '340' else torid)
     return BASE + 'IndicadoresJudiciales%s.asp?torid=%s&ano=%s&nivel=%s&titulo=X' % (pag, torid, ano, nivel)
 
 
@@ -99,7 +102,7 @@ def main():
         with urllib.request.urlopen(url, context=ctx, timeout=60) as r:
             return r.read()
 
-    datos = []
+    datos, vacios = [], {}
     for ano in ANOS:
         for torid in ORGANOS:
             for nivel in NIVELES:
@@ -109,15 +112,20 @@ def main():
                     raw = baja(url, 'circ/%s_%s_%s_%s.html' % (ano, torid, nivel, ind))
                     vals, nac = lee_circuitos(raw)
                     if not vals and nac is None:
+                        # El sistema anuncia el indicador pero no trae valores.
+                        v = vacios.setdefault((torid, nivel, int(ind)), {'org': torid, 'niv': nivel, 'ind': int(ind), 'nombre': q['nombre'].strip(),
+                                                                          'defi': defi, 'anos': []})
+                        v['anos'].append(ano)
                         continue
                     datos.append({'ano': ano, 'org': torid, 'niv': nivel, 'ind': int(ind), 'nombre': q['nombre'].strip(),
                                   'defi': defi, 'nac': nac, 'c': vals, 'url': url, 'sha256': hashlib.sha256(raw).hexdigest()})
     datos.sort(key=lambda x: (x['org'], x['niv'], x['ind'], x['ano']))
     with open(SALIDA, 'w', encoding='utf-8') as f:
         json.dump({'fuente': BASE + 'acuerd_nal_ini.asp', 'consulta': time.strftime('%d-%m-%Y'), 'organos': ORGANOS,
-                   'niveles': NIVELES, 'datos': datos}, f, ensure_ascii=False, separators=(',', ':'))
+                   'niveles': NIVELES, 'datos': datos,
+                   'vacios': sorted(vacios.values(), key=lambda x: (x['org'], x['niv'], x['ind']))}, f, ensure_ascii=False, separators=(',', ':'))
         f.write('\n')
-    print('indicadores DGEJ: %d cuadros con datos -> %s' % (len(datos), os.path.relpath(SALIDA)))
+    print('indicadores DGEJ: %d cuadros con datos y %d indicadores vacíos -> %s' % (len(datos), len(vacios), os.path.relpath(SALIDA)))
 
 
 if __name__ == '__main__':
