@@ -11,7 +11,7 @@ informe de labores del Órgano de Administración Judicial (antes, del Consejo
 de la Judicatura Federal). Se cotejaron el 01-11-2026 en su
 introducción, que trae el movimiento nacional y las personas juzgadoras:
 
-- 2022, 2023 y 2024: año estadístico del 16 de noviembre al 15 de noviembre.
+- 2021, 2022, 2023 y 2024: año estadístico del 16 de noviembre al 15 de noviembre.
 - 2025-1: del 16-11-2024 al 30-06-2025. Todo antes del cambio de personas
   juzgadoras (las electas tomaron protesta el 1-09-2025).
 - 2025-2: el año estadístico completo, del 16-11-2024 al 15-11-2025.
@@ -42,13 +42,14 @@ _BASE = 'https://www.dgej.cjf.gob.mx/resources/anexos/'
 
 # Introducción de cada Anexo Estadístico, con su huella SHA-256 (01-11-2026).
 DOC = {
+    '2021': ('2021/graficas/intro_2021.pdf', '3c11a7905fec45bb631c4dce29d72532f3bc821cdbf0cbc22414ca27298cc143'),
     '2022': ('2022/graficas/intro_2022.pdf', '2ec8a8d25b831d66ecfa13d1a193000d3a6cf2b285ab8391c953c851c463fc27'),
     '2023': ('2023/graficas/intro_2023.pdf', '7de19e9181d44111b54cd51f4eb172793ece065ee9e9b6d85ee1edc5a7d24d6c'),
     '2024': ('2024/graficas/intro_2024.pdf', 'ef57285986c76416da423abd1c44bcd507cbcb1cf0b2f70b09310e409fec4c41'),
     '2025-1': ('2025/graficas/intro_2025.pdf', '0a9060e2da686d358dac96693a9523ac3d7fa0b8f01720d60ee813a099ea1ebc'),
     '2025-2': ('2025/graficas/intro_2025-2.pdf', 'aa036b58b4072ee07514076885f135ec58708ce1b9a968431b788b2b435d0ec9'),
 }
-PERIODO = {'2022': '16-11-2021 a 15-11-2022', '2023': '16-11-2022 a 15-11-2023', '2024': '16-11-2023 a 15-11-2024',
+PERIODO = {'2021': '16-11-2020 a 15-11-2021', '2022': '16-11-2021 a 15-11-2022', '2023': '16-11-2022 a 15-11-2023', '2024': '16-11-2023 a 15-11-2024',
            '2025-1': '16-11-2024 a 30-06-2025', '2025-2': '16-11-2024 a 15-11-2025'}
 
 
@@ -63,6 +64,7 @@ def _f(k, donde):
 # ingresos, carga de trabajo, total de egresos, existencia final, dónde).
 # Ingresos y egresos incluyen los de traslado o por acuerdo, como los suma el anexo.
 MOV = {
+    '2021': (379613, 1082702, 1462315, 991353, 471099, 'apartado 5 y cuadro 5.1'),
     '2022': (468908, 1346228, 1815136, 1285953, 525486, 'apartado 1.6 y cuadro 1.10'),
     '2023': (531571, 1493712, 2025283, 1413724, 610782, 'cuadro 10'),
     '2024': (606330, 2024297, 2630627, 1920547, 706419, 'apartado 1.6 y cuadro 10'),
@@ -136,6 +138,7 @@ def chequeo():
     assert _pct(474, 1525) == MUJERES_PCT['2024']
     assert round(100.0 * 716 / 1539) == int(MUJERES_PCT['2025-2'])
     assert DIAS_ANTES + DIAS_DESPUES == 365
+    assert MOV['2021'][4] == 471099 and MOV['2021'][3] == 991353
 
 
 PEND_ELECTOS = {'que': 'Cómo resuelven las personas juzgadoras electas en 2025 frente a las que siguieron, órgano por órgano', 'e': 'pendiente',
@@ -185,21 +188,21 @@ def temas():
                {'v': _pct(d_e, d_i), 'etq': 'después (jul a nov-2025)', 'e': 'derivado'},
                {'v': _n(TCC['2025-2'][4]), 'etq': 'asuntos pendientes en los tribunales colegiados al 15-11-2025', 'e': 'oficial'}],
         'sug': ['¿Cómo ha crecido el rezago de los juzgados federales?', '¿Cuántas juezas hay desde la reforma?', '¿Cuánto rezago penal hay?']}
-    s0, s1 = MOV['2022'], MOV['2025-2']
+    s0, s1 = MOV['2021'], MOV['2025-2']
     t['reforma_serie'] = {
-        'tit': 'Cuatro años de juzgados federales: lo que entra, lo que sale y lo que se acumula',
-        'h': '<p>Al cierre de cada año estadístico, los juzgados y tribunales federales se quedan con asuntos sin terminar. En 2022 eran <b>%s</b>; '
+        'tit': 'Cinco años de juzgados federales: lo que entra, lo que sale y lo que se acumula',
+        'h': '<p>Al cierre de cada año estadístico, los juzgados y tribunales federales se quedan con asuntos sin terminar. Al cierre de 2021 eran <b>%s</b>; '
              'al 15 de noviembre de 2025, <b>%s</b>: <b>%s %% más</b>. Solo en el último año crecieron %s %%.</p>'
-             '<p>No es que trabajen menos: en 2025 salieron %s asuntos, más del doble que en 2022. Es que entran todavía más: %s. '
+             '<p>No es que trabajen menos: en 2025 salieron %s asuntos, casi el triple que en 2021 (%s). Es que entran todavía más: %s, frente a %s en 2021. '
              'El anexo no explica en su resumen nacional por qué crecieron tanto los ingresos.</p>'
              '<p class="pa-chico">Cada anexo corrige un poco el cierre del anterior (por eso la existencia inicial de un año no siempre es la final del año pasado). '
              'Son cifras que cada órgano reporta de sí mismo.</p>' % (
-                 _n(s0[4]), _n(s1[4]), _pct(s1[4] - s0[4], s0[4]), _pct(s1[4] - MOV['2024'][4], MOV['2024'][4]), _n(s1[3]), _n(s1[1])),
-        'fu': [_o('Movimiento nacional de %s' % k, _f(k, MOV[k][5])) for k in ('2022', '2023', '2024', '2025-2')] +
+                 _n(s0[4]), _n(s1[4]), _pct(s1[4] - s0[4], s0[4]), _pct(s1[4] - MOV['2024'][4], MOV['2024'][4]), _n(s1[3]), _n(s0[3]), _n(s1[1]), _n(s0[1])),
+        'fu': [_o('Movimiento nacional de %s' % k, _f(k, MOV[k][5])) for k in ('2021', '2022', '2023', '2024', '2025-2')] +
               [_o('Aumento de lo pendiente', _f('2025-2', 'apartado 1.6'),
                   '(%s − %s) ÷ %s × 100' % (_n(s1[4]), _n(s0[4]), _n(s0[4])))],
         'ci': [{'v': _n(s1[4]), 'etq': 'asuntos pendientes al 15-11-2025', 'e': 'oficial'},
-               {'v': _pct(s1[4] - s0[4], s0[4]) + ' %', 'etq': 'más que al cierre de 2022', 'e': 'derivado'}],
+               {'v': _pct(s1[4] - s0[4], s0[4]) + ' %', 'etq': 'más que al cierre de 2021', 'e': 'derivado'}],
         'sug': ['¿Resuelven igual los juzgados federales después de la reforma judicial?', '¿Cuánto rezago penal hay?']}
     m24 = sum(f[2] for f in TIT['2024'])
     m25 = sum(f[2] for f in TIT['2025-2'])
@@ -244,7 +247,7 @@ def extra(k):
     if k == 'reforma_serie':
         filas = ''.join('<tr><th scope="row">%s</th><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (
             '2025' if a == '2025-2' else a, _n(MOV[a][1]), _n(MOV[a][3]), _pct(MOV[a][3], MOV[a][1]), _n(MOV[a][4]))
-            for a in ('2022', '2023', '2024', '2025-2'))
+            for a in ('2021', '2022', '2023', '2024', '2025-2'))
         return ('<div class="leg-tabla-caja"><table class="leg-tabla"><caption>Juzgados y tribunales federales, cada año estadístico %s</caption>'
                 '<thead><tr><th scope="col">Año</th><th scope="col">Entraron</th><th scope="col">Salieron</th><th scope="col">De cada 100 %s</th>'
                 '<th scope="col">Pendientes al cierre</th></tr></thead><tbody>%s</tbody></table></div>' + pie) % (

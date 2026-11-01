@@ -76,7 +76,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-judicial-estructura.html` | Quién es quién y los 32 circuitos · Auditavisión | apartados.py | 46 | 0 | 19 | 3 | 2 |
 | `datos-judicial-gestion.html` | Lo que cuesta y lo que resuelve · Auditavisión | apartados.py | 45 | 0 | 24 | 11 | 5 |
 | `datos-judicial-presupuesto.html` | El presupuesto · Auditavisión | apartados.py | 46 | 0 | 6 | 5 | 1 |
-| `datos-judicial-reforma.html` | Antes y después de la reforma · Auditavisión | apartados.py | 44 | 0 | 21 | 9 | 4 |
+| `datos-judicial-reforma.html` | Antes y después de la reforma · Auditavisión | apartados.py | 44 | 0 | 22 | 9 | 4 |
 | `datos-judicial-sueldos.html` | Sueldos y el tope del 127 · Auditavisión | apartados.py | 44 | 0 | 7 | 2 | 0 |
 | `datos-judicial-suprema-corte.html` | La Suprema Corte · Auditavisión | apartados.py | 44 | 0 | 10 | 1 | 0 |
 | `datos-justicia-ambiental-denuncias.html` | Tus denuncias ante la PROFEPA · Auditavisión | apartados.py | 38 | 0 | 18 | 5 | 3 |
