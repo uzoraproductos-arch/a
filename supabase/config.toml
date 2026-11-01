@@ -10,3 +10,9 @@ verify_jwt = false
 
 [functions.portales]
 verify_jwt = false
+
+[functions.recibir-formulario]
+verify_jwt = false
+
+[functions.pregunta-bot]
+verify_jwt = false

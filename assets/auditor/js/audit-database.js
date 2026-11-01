@@ -7898,6 +7898,18 @@ window.AUDIT_DB = {
       "definicion": "El delito del servidor público que otorga ilícitamente contratos, concesiones, permisos o compras que benefician económicamente a él, a su cónyuge, a sus ascendientes o descendientes, a sus parientes por consanguinidad o afinidad hasta el cuarto grado, a un tercero con quien tenga vínculos afectivos, económicos o de dependencia, o a sus socios y sociedades. Lo persigue la fiscalía y lo juzga un juez penal.",
       "ley": "Art. 220 Código Penal Federal (fracción reformada DOF 18-07-2016)",
       "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Pérdida Neta (Resultado Neto)",
+      "definicion": "Lo que queda cuando a todos los ingresos de un periodo se les restan todos sus costos y gastos: los de operar, los intereses de la deuda, lo que se gana o se pierde porque cambió el tipo de cambio, el deterioro de activos, los impuestos y los derechos. Si sale negativo es pérdida neta; si sale positivo, utilidad o rendimiento neto. Es una cifra contable: no es lo mismo que el dinero que entró o salió de la caja en esos meses. Pemex la reporta cada trimestre, en pesos, en su informe de resultados a la Bolsa Mexicana de Valores.",
+      "ley": "NIC 1, Presentación de estados financieros (Normas Internacionales de Información Financiera, con las que reporta Pemex)",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Deterioro de Activos",
+      "definicion": "Lo que una empresa le resta al valor con el que tiene registrado un activo (un pozo, una refinería, una planta) cuando lo que espera recuperar de él, usándolo o vendiéndolo, ya es menor. Se registra como gasto y hace más grande la pérdida del periodo, aunque no salga dinero de la caja; si después el activo recupera valor, el deterioro se puede revertir y se registra como ingreso. Por eso una pérdida más chica puede deberse a menos deterioro y no a que la empresa venda u opere mejor.",
+      "ley": "NIC 36, Deterioro del valor de los activos (Normas Internacionales de Información Financiera)",
+      "categoria": "💰 Hacendario & Deuda"
     }
   ],
   "legislativo": {
@@ -16085,7 +16097,8 @@ window.AUDIT_DB = {
           "medio": 128.0,
           "op": "(357,887.3 ÷ 160,000.0 − 1) × 100 = 123.7 % y (357,887.3 ÷ 154,098.4 − 1) × 100 = 132.2 %; punto medio (123.7 + 132.2) ÷ 2 = 128.0 % (127.96 con todos los decimales). Compara pesos nominales y llega solo a 2024: la obra seguía en proceso, así que es una cota inferior del sobrecosto final."
         }
-      }
+      },
+      "presupuesto_etiqueta": "Anunciado en 2019"
     },
     {
       "id": "aifa-texcoco",
@@ -29045,7 +29058,7 @@ window.AUDIT_DB = {
       "Pesos de hoy: cada año se multiplica por el INPC de septiembre de 2026 entre el INPC promedio de ese año. Dólares y euros: cada año se divide entre el tipo de cambio promedio de ese año. Son conversiones derivadas, con datos de Banxico, y se dicen junto a su cifra."
     ],
     "peso": {
-      "consulta": "10 de octubre de 2026",
+      "consulta": "30 de octubre de 2026",
       "nota": "Lo que vale el peso a lo largo del tiempo: el Índice Nacional de Precios al Consumidor (INPC) y el tipo de cambio frente al dólar y al euro, mes por mes, como los publica el Banco de México; el valor de hoy, y la proyección oficial de Hacienda hasta 2032. Con esto el Radar pasa las cifras de cada año a pesos de hoy, a dólares y a euros.",
       "fuentes": {
         "BX_INPC": {
@@ -29064,8 +29077,8 @@ window.AUDIT_DB = {
           "url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=6&accion=consultarCuadro&idCuadro=CF336&locale=es"
         },
         "BX_DIARIO": {
-          "corto": "Banxico, SIE, cuadros CF102 y CF307: FIX y euro del 9 de octubre de 2026",
-          "doc": "Banco de México, Sistema de Información Económica: serie SF43718, tipo de cambio FIX, pesos por dólar, fecha de determinación (cuadro CF102 «Tipos de cambio diarios»), y serie SF46410, cotización del euro respecto al peso (cuadro CF307, divisas de la canasta del DEG). Dato del 9 de octubre de 2026, el último publicado al consultar.",
+          "corto": "Banxico, SIE, cuadros CF102 y CF307: FIX y euro del 29 de octubre de 2026",
+          "doc": "Banco de México, Sistema de Información Económica: serie SF43718, tipo de cambio FIX, pesos por dólar, fecha de determinación (cuadro CF102 «Tipos de cambio diarios»), y serie SF46410, cotización del euro respecto al peso (cuadro CF307, divisas de la canasta del DEG). Dato del 29 de octubre de 2026, el último publicado al consultar.",
           "url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=6&accion=consultarCuadro&idCuadro=CF102&locale=es"
         },
         "CGPE2027_MACRO": {
@@ -30557,10 +30570,10 @@ window.AUDIT_DB = {
         }
       },
       "hoy": {
-        "fecha": "9 de octubre de 2026",
-        "iso": "2026-10-09",
-        "usd": 18.4163,
-        "eur": 20.6419,
+        "fecha": "29 de octubre de 2026",
+        "iso": "2026-10-29",
+        "usd": 18.8148,
+        "eur": 20.9635,
         "f": "BX_DIARIO",
         "inpc_mes": "septiembre de 2026"
       },

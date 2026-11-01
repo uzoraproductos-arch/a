@@ -38,6 +38,14 @@ ComprasMX y en las listas oficiales (ver «Dónde buscar»); las agresiones a
 la prensa, en el Mecanismo de Protección y en la FEADLE
 (`herramientas/periodistas.py`).
 
+**La hemeroteca (31-10-2026).** Cuando varios medios cuentan el mismo hecho,
+la nota guarda en `medios` cómo lo contó cada uno: medio, titular, fecha y
+liga, rotulados «sin verificar» (nunca el texto). Se juntan en
+`noticias-verifica.html#hemeroteca`, y el chat reconoce esas ligas: quien
+pegue una nota que ya cotejamos llega directo al cotejo. Cada nota «Al
+momento» tiene además su página propia para buscadores
+(`noticias-al-momento-<id>.html`), que se genera sola.
+
 ## Los pasos, con cada nota que llegue
 
 0. **Fijar lo que circula, venga como venga.** Una liga, una captura, un

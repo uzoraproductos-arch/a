@@ -143,7 +143,8 @@ select pg_temp.igual((select count(*) from public.generar_codigos(1, interval '1
 select count(*) as n from public.generar_codigos(1, interval '1 day', 1, now() - interval '1 hour', 'Ya vencido') \gset
 select pg_temp.debe_fallar($$select public.generar_codigos(501, interval '1 day')$$, 'generar más de 500 códigos de una vez');
 select pg_temp.debe_fallar($$select public.generar_codigos(1, interval '10 years')$$, 'un código de más de cinco años');
-select pg_temp.igual((select count(*) from public.codigos where codigo ~ '^[0-9]{8}$'), 6, 'códigos de 8 números');
+select pg_temp.igual((select count(*) from public.codigos where codigo ~ '^[23456789ABCDEFGHJKMNPQRSTUVWXYZ]{8}$' and codigo ~ '[0-9]' and codigo ~ '[A-Z]'), 6,
+  'los generados al azar llevan letras y números revueltos, sin 0, 1, O, I ni L');
 select codigo as c1 from public.codigos where nota = 'Prueba semana' order by id limit 1 \gset
 select codigo as c2 from public.codigos where nota = 'Prueba semana' order by id offset 1 limit 1 \gset
 select codigo as cg from public.codigos where nota = 'Grupo' \gset
@@ -163,7 +164,7 @@ select pg_temp.igual(((public.canjear_codigo(lower(substr(:'c2', 1, 4)) || ' - '
 select pg_temp.igual(((public.canjear_codigo(:'cv')) ->> 'motivo' = 'vencido')::int, 1, 'un código que ya no se podía canjear');
 select pg_temp.igual(((public.canjear_codigo('ABC')) ->> 'motivo' = 'formato')::int, 1, 'un código mal escrito');
 select pg_temp.igual(((public.canjear_codigo('ZZZZ2222')) ->> 'motivo' = 'no_valido')::int, 1, 'un código que no existe');
-select pg_temp.igual(((public.canjear_codigo('OOOO1111')) ->> 'motivo' = 'formato')::int, 1, 'un código con O y 1, que no se usan');
+select pg_temp.igual(((public.canjear_codigo('OOOO1111')) ->> 'motivo' = 'no_valido')::int, 1, 'un código con O y 1 que nadie creó: no existe');
 reset role;
 
 set role authenticated;
@@ -191,7 +192,9 @@ set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
 select pg_temp.igual((select count(*) from public.crear_codigo('2345-6789', interval '3 days', 5, null, 'Taller')), 1, 'un código propio, escrito con guion');
 select pg_temp.igual((select count(*) from public.codigos where codigo = '23456789' and usos_max = 5), 1, 'el código propio se guarda sin guion');
 select pg_temp.debe_fallar($$select public.crear_codigo('2345 6789', interval '1 day')$$, 'un código propio repetido');
-select pg_temp.debe_fallar($$select public.crear_codigo('PASE2345', interval '1 day')$$, 'un código propio con letras');
+select pg_temp.igual((select count(*) from public.crear_codigo('pase-tall', interval '1 day')), 1, 'un código propio de puras letras, en minúsculas y con guion');
+select pg_temp.igual((select count(*) from public.codigos where codigo = 'PASETALL'), 1, 'se guarda en mayúsculas y sin guion');
+select pg_temp.debe_fallar($$select public.crear_codigo('PAÑO2345', interval '1 day')$$, 'un código propio con Ñ');
 select pg_temp.igual((select count(*) from public.crear_codigo('1000 0001', interval '1 day', 1, null, null)), 1, 'un código propio con ceros y unos, sin nota');
 select pg_temp.debe_fallar($$select public.crear_codigo('234567', interval '1 day')$$, 'un código propio de menos de 8 números');
 reset role;
@@ -226,6 +229,159 @@ set role service_role;
 select pg_temp.igual(((public.canjear_codigo(:'cs')) ->> 'ok')::boolean::int, 1, 'el código de la solicitud se canjea');
 select pg_temp.igual(((public.solicitar_codigo('ana@ejemplo.mx', null, 'Se me acabó el tiempo', true)) ->> 'ok')::boolean::int, 1, 'pedir más tiempo después de usarlo');
 select pg_temp.igual((select count(*) from public.solicitudes_codigo where correo = 'ana@ejemplo.mx'), 2, 'solicitudes del mismo correo tras usar su código');
+reset role;
+
+-- 9. Los envíos se guardan 12 meses (30-10-2026).
+insert into public.envios (tipo, asunto, texto, correo, acepta_aviso, creado) values
+  ('tema', 'Viejo', 'Un envío de hace más de un año', 'v@ejemplo.mx', true, now() - interval '13 months');
+insert into public.envios (tipo, asunto, texto, estado, correo, acepta_aviso, creado) values
+  ('errata', 'Errata vieja', 'Una fe de erratas publicada hace más de un año', 'publicado', 'e@ejemplo.mx', true, now() - interval '13 months');
+insert into public.envios (tipo, asunto, texto) values ('tema', 'Nuevo', 'Un envío de hoy, que barre los viejos');
+select pg_temp.igual((select count(*) from public.envios where asunto = 'Viejo'), 0, 'un envío de hace más de 12 meses se borra');
+select pg_temp.igual((select count(*) from public.envios where asunto = 'Errata vieja' and correo is null), 1, 'una errata publicada vieja se queda sin correo');
+select pg_temp.igual((select count(*) from public.envios where asunto = 'Nuevo'), 1, 'el envío nuevo se guarda');
+
+-- 10. El código semanal de la administración (30-10-2026).
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
+select pg_temp.debe_fallar($$select public.codigo_admin_semana()$$, 'que una cuenta común vea el código de la administración');
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select (public.codigo_admin_semana()) ->> 'codigo' as ca \gset
+select pg_temp.igual(((public.codigo_admin_semana()) ->> 'codigo' = :'ca')::int, 1, 'el código de la semana es el mismo al pedirlo otra vez');
+select (public.codigo_admin_semana(true)) ->> 'codigo' as cb \gset
+select pg_temp.igual((:'ca' <> :'cb')::int, 1, 'cambiarlo antes da un código nuevo');
+reset role;
+reset request.jwt.claim.sub;
+select pg_temp.igual((select count(*) from public.codigos where codigo = :'ca' and revocado), 1, 'el código anterior queda revocado');
+set role service_role;
+select pg_temp.igual(((public.canjear_codigo(:'ca')) ->> 'ok' = 'true')::int, 0, 'el código anterior ya no abre');
+select (public.canjear_codigo(:'cb')) ->> 'hasta' as hb \gset
+select pg_temp.igual((:'hb'::timestamptz <= date_trunc('week', now() at time zone 'America/Mexico_City') at time zone 'America/Mexico_City' + interval '7 days')::int, 1,
+  'el acceso de la administración termina el lunes');
+reset role;
+
+-- 11. Orden en la tabla de códigos: editar, archivar y eliminar (30-10-2026).
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
+select pg_temp.debe_fallar($$select public.editar_codigo(1, 'x', 1, null, null)$$, 'que una cuenta común edite un código');
+select pg_temp.debe_fallar($$select public.archivar_codigo(1)$$, 'que una cuenta común archive un código');
+select pg_temp.debe_fallar($$select public.eliminar_codigo(1)$$, 'que una cuenta común elimine un código');
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select id as ie from public.generar_codigos(1, interval '1 day', 1, null, 'Para editar') \gset
+select public.editar_codigo(:ie, '  Taller de prensa ', 3, now() + interval '2 days', interval '5 days');
+select pg_temp.igual((select count(*) from public.codigos where id = :ie and nota = 'Taller de prensa' and usos_max = 3
+  and duracion = interval '5 days' and canjear_antes > now()), 1, 'un código editado guarda su nota, usos, fecha y duración');
+select public.editar_codigo(:ie, '', 3, null, interval '5 days');
+select pg_temp.igual((select count(*) from public.codigos where id = :ie and nota is null and canjear_antes is null), 1, 'editar puede quitar la nota y la fecha límite');
+select pg_temp.debe_fallar(format($$select public.editar_codigo(%s, null, 1, null, interval '10 years')$$, :ie), 'editar un código a más de cinco años');
+select pg_temp.debe_fallar($$select public.editar_codigo((select id from public.codigos where semanal and not revocado), 'x', 1, null, null)$$, 'editar el código de la semana');
+select pg_temp.debe_fallar($$select public.eliminar_codigo((select id from public.codigos where semanal and not revocado))$$, 'eliminar el código de la semana');
+select public.archivar_codigo(:ie);
+select pg_temp.igual((select count(*) from public.codigos_lista() where id = :ie and archivado), 1, 'un código archivado sigue en la lista, marcado');
+select public.archivar_codigo(:ie, false);
+select pg_temp.igual((select count(*) from public.codigos_lista() where id = :ie and not archivado), 1, 'un código se puede desarchivar');
+select public.archivar_inactivos() as na \gset
+select pg_temp.igual((select count(*) from public.codigos_lista() where archivado and estado not in ('revocado', 'terminado', 'vencido')), 0,
+  'archivar los inactivos no toca los que siguen sirviendo');
+select pg_temp.igual((:na > 0)::int, 1, 'archivar los inactivos archiva los revocados, terminados y vencidos');
+select pg_temp.igual(((select count(*) from public.codigos_lista() where estado = 'en_uso' and not archivado) > 0)::int, 1, 'los códigos en uso se quedan a la vista');
+select public.eliminar_codigo(:ie);
+select pg_temp.igual((select count(*) from public.codigos where id = :ie), 0, 'un código eliminado se borra');
+reset role;
+reset request.jwt.claim.sub;
+
+-- 12. El registro de uso de cada código (30-10-2026).
+set role anon;
+select pg_temp.debe_fallar($$select * from public.codigo_uso()$$, 'que el público vea el uso de los códigos');
+select pg_temp.debe_fallar($$select public.pase_consulta(gen_random_uuid())$$, 'que el público anote días de uso sin la función');
+select pg_temp.debe_fallar($$select count(*) from public.pase_dias$$, 'que el público lea los días de uso');
+reset role;
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
+select pg_temp.debe_fallar($$select * from public.codigo_uso()$$, 'que una cuenta común vea el uso de los códigos');
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select codigo as cu, id as iu from public.generar_codigos(1, interval '7 days', 2, null, 'Uso') \gset
+reset role;
+reset request.jwt.claim.sub;
+set role service_role;
+select (public.canjear_codigo(:'cu'))->>'pase' as pu \gset
+select (public.canjear_codigo(:'cu'))->>'pase' as pu2 \gset
+select pg_temp.igual((public.pase_consulta(:'pu') > now() + interval '6 days')::int, 1, 'la consulta diaria devuelve hasta cuándo abre');
+select public.pase_consulta(:'pu');
+select pg_temp.igual((select count(*) from public.pase_dias where pase_id = :'pu'), 1, 'el canje y las consultas del mismo día cuentan un solo día');
+insert into public.pase_dias values (:'pu', current_date - 3);
+reset role;
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select pg_temp.igual((select count(*) from public.codigo_uso(:iu)), 2, 'un renglón por persona que canjeó el código');
+select pg_temp.igual((select dias from public.codigo_uso(:iu) where persona = 1), 2, 'días de uso de la primera persona');
+select pg_temp.igual((select count(*) from public.codigo_uso(:iu) where persona = 2 and dias = 1 and hasta > now() and nombre is null), 1,
+  'la segunda persona: un día, su acceso vigente y sin nombre (no vino de una solicitud)');
+select pg_temp.igual((select count(*) from public.codigo_uso() where correo = 'ana@ejemplo.mx'), 1, 'el código de una solicitud trae el correo de quien lo pidió');
+reset role;
+reset request.jwt.claim.sub;
+
+-- 13. El código maestro de la administración (30-10-2026).
+set role anon;
+select pg_temp.debe_fallar($$select public.fijar_codigo_admin('40417263')$$, 'que el público ponga el código maestro');
+select pg_temp.debe_fallar($$select public.revisar_codigo_admin('40417263')$$, 'que el público pruebe el código maestro sin la función');
+select pg_temp.debe_fallar($$select count(*) from public.admin_codigo$$, 'que el público lea la huella del código maestro');
+select pg_temp.debe_fallar($$select count(*) from public.admin_entradas$$, 'que el público lea las entradas de la administración');
+reset role;
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
+select pg_temp.debe_fallar($$select public.fijar_codigo_admin('40417263')$$, 'que una cuenta común ponga el código maestro');
+select pg_temp.debe_fallar($$select public.codigo_admin_info()$$, 'que una cuenta común vea el código maestro');
+select pg_temp.debe_fallar($$select count(*) from public.admin_codigo$$, 'que una cuenta común lea la huella');
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select pg_temp.igual((public.codigo_admin_info()->>'puesto')::boolean::int, 0, 'sin código maestro al principio');
+select pg_temp.debe_fallar($$select public.fijar_codigo_admin('1234567')$$, 'un código maestro de 7 números');
+select pg_temp.debe_fallar($$select public.fijar_codigo_admin('11111111')$$, 'un código maestro demasiado fácil');
+select codigo as cm from public.crear_codigo('55501234', interval '1 day') \gset
+select public.fijar_codigo_admin('4041-7263');
+select pg_temp.igual((public.codigo_admin_info()->>'puesto')::boolean::int, 1, 'el código maestro quedó puesto');
+reset role;
+reset request.jwt.claim.sub;
+select pg_temp.igual((select (huella like '$2%')::int from public.admin_codigo), 1, 'se guarda solo su huella bcrypt, nunca en claro');
+set role service_role;
+select pg_temp.igual((public.revisar_codigo_admin('40417264') is null)::int, 1, 'un código maestro equivocado no abre');
+select pg_temp.igual((public.revisar_codigo_admin('40417263') = '00000000-0000-0000-0000-0000000000ad')::int, 1, 'el código maestro reconoce a la administración');
+reset role;
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select pg_temp.igual(jsonb_array_length(public.codigo_admin_info()->'entradas'), 1, 'la entrada con el código maestro quedó anotada (y la fallida no)');
+select public.fijar_codigo_admin('40417299');
+reset role;
+reset request.jwt.claim.sub;
+set role service_role;
+select pg_temp.igual((public.revisar_codigo_admin('40417263') is null)::int, 1, 'al cambiarlo, el código anterior deja de abrir');
+reset role;
+
+-- 14. Letras y números (30-10-2026).
+set role service_role;
+select pg_temp.igual(((public.canjear_codigo('pase-tall')) ->> 'ok')::boolean::int, 1, 'un código de puras letras se canjea, en minúsculas');
+reset role;
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select pg_temp.igual((select count(*) from public.generar_codigos(200, interval '1 day', 1, null, 'Revueltos') where codigo ~ '[0-9]' and codigo ~ '[A-Z]'), 200,
+  '200 generados al azar: todos con letras y números');
+select pg_temp.igual((select count(*) from public.crear_codigo('AB12CD34', interval '1 day')), 1, 'un código propio revuelto');
+select public.fijar_codigo_admin('ma3str0x');
+reset role;
+reset request.jwt.claim.sub;
+set role service_role;
+select pg_temp.igual((public.revisar_codigo_admin('MA3STR0X') = '00000000-0000-0000-0000-0000000000ad')::int, 1, 'un código maestro con letras, sin importar mayúsculas');
+reset role;
+-- 15. El maestro puede ser un código común que ya existía (30-10-2026).
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select public.fijar_codigo_admin('5550-1234');
+select pg_temp.igual((select count(*) from public.codigos where codigo = '55501234' and archivado and not revocado and nota like '%código maestro%'), 1,
+  'el código común con ese número se archiva (sin revocarlo) y lo dice su nota');
+reset role;
+reset request.jwt.claim.sub;
+set role service_role;
+select pg_temp.igual((public.revisar_codigo_admin('55501234') = '00000000-0000-0000-0000-0000000000ad')::int, 1, 'y ese número ya abre como código maestro');
 reset role;
 
 \echo 'Todas las pruebas de permisos pasaron.'

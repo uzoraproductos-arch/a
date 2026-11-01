@@ -1155,11 +1155,51 @@
           { v: n(r[4]), etq: 'causas penales pendientes al cierre de 2024', e: 'oficial' }],
         sug: ['¿Cuánto rezago tienen los poderes judiciales de los estados?', '¿Cuánto rezago penal hay?', '¿Cuánto tarda la Suprema Corte en resolver?'] };
     }
+    /* El circuito judicial que se nombra en la pregunta: «tercer circuito», «circuito 3», «decimoquinto circuito». */
+    function judCircuito(t) {
+      if (!/circuito/.test(t)) return 0;
+      var m = t.match(/circuito (?:numero |no\.? |num\.? )?(\d{1,2})\b/) || t.match(/\b(\d{1,2})\s?(?:o|er|ero|ro|do|to|vo|mo|no|°|º)?\.? circuito/);
+      if (m) { var k = +m[1]; return k >= 1 && k <= 32 ? k : 0; }
+      var u = t.replace(/decimoctavo/g, 'decimo octavo').replace(/undecimo/g, 'decimo primer').replace(/duodecimo/g, 'decimo segundo')
+        .replace(/(decimo|vigesimo|trigesimo)(?=[a-z])/g, '$1 ').replace(/primero/g, 'primer').replace(/tercero/g, 'tercer');
+      var d = u.match(/\b(?:(decimo|vigesimo|trigesimo) ?)?(primer|segundo|tercer|cuarto|quinto|sexto|septimo|octavo|noveno)? circuito/);
+      if (!d || (!d[1] && !d[2])) return 0;
+      var dec = { decimo: 10, vigesimo: 20, trigesimo: 30 }[d[1]] || 0;
+      var uni = ['primer', 'segundo', 'tercer', 'cuarto', 'quinto', 'sexto', 'septimo', 'octavo', 'noveno'].indexOf(d[2]) + 1;
+      var r = dec + uni;
+      return r >= 1 && r <= 32 ? r : 0;
+    }
     function judResp(t, es) {
       if (!JUD) return null;
       var pj = /judicial|judicatura|\bpjf\b|suprema corte|\bscjn\b|la corte\b|\bjuez|\bjueces|juezas?\b|magistrad|ministr[oa]s?\b/;
       /* La auditoría de gestión (27-10-2026): lo que resuelve con su dinero, el rezago y cuánto tarda. */
       var juzga = /judicial|judicatura|\bpjf\b|suprema corte|\bscjn\b|la corte\b|\bjuez|\bjueces|juezas?\b|juzgado|tribunal|magistrad|justicia/;
+      /* Antes y después de la reforma judicial (01-11-2026): la estadística de la DGEJ. */
+      if (JUD.t.reforma_antes_despues) {
+        var refo = /reforma judicial|desde la reforma|despues de la reforma|antes y despues|(jueces|juezas|juzgadores|personas juzgadoras|magistrad\w*) (electos|electas|nuevos|nuevas)|nuevos jueces|eleccion judicial/;
+        if (/(cuant[oa]s|porcentaje|proporcion|cuantas son) (juezas|mujeres|magistradas)|juezas (hay|son)|mujeres (juezas|titulares|juzgadoras|en los juzgados)|paridad.*(juez|judicial)|secretari\w* (en funciones|haciendo|que suplen|suplen)|(juzgados|tribunales|organos) sin (juez|titular)|quien juzga/.test(t) && juzga.test(t)) return judTema('reforma_titulares');
+        if (/(como|cuanto) (ha )?(crecido|crece|aumentado|aumenta)|cada ano|por ano|historic|desde 2022|ultimos (anos|cuatro anos)|serie/.test(t) && /rezago|pendientes|acumul|asuntos/.test(t) && /federal|distrito|colegiad|juzgados/.test(t)) return judTema('reforma_serie');
+        if (refo.test(t) && /resuelve|resuelven|resolvieron|productiv|desempeno|eficien|rezago|trabaj|asuntos|sentencias|funcion|mejor|peor|igual|cambi/.test(t)) return judTema('reforma_antes_despues');
+      }
+      /* Litigiosidad y productividad por circuito (01-11-2026): los indicadores de la DGEJ, 2021 a 2025. */
+      if (JUD.t.jd_litig) {
+        var cn = judCircuito(t);
+        var orgc = /colegiados? de apelacion|unitari|apelacion/.test(t) ? 'apel' : (/colegiad|amparo directo|amparo en revision/.test(t) ? 'tcc' : (/distrito|amparo indirecto/.test(t) ? 'jd' : ''));
+        var indc = /circuito|partidos? judicial|litigiosidad|congestion|indicadores? (estadisticos )?judicial|productividad/;
+        var porOrg = /juzgado por juzgado|tribunal por tribunal|organo por organo|(cada|por|mi|que|cual|el) (juzgado|tribunal|organo)\b|juzgados? (primero|segundo|tercero|cuarto|quinto|sexto|septimo|octavo|noveno|decimo|vigesimo)|(primer|segundo|tercer|cuarto|quinto|sexto|septimo|octavo|noveno|decimo)o? tribunal|tribunal colegiado (primero|segundo|tercero|cuarto|quinto|sexto|septimo|octavo|noveno|decimo)/.test(t);
+        if (!cn && es && es.length === 1 && JUD.circ && (porOrg || /circuito|litigiosidad|congestion|productividad|juzgados? de distrito|tribunal(es)? colegiad|juzgados? federal|tribunal(es)? federal/.test(t))) {
+          var ic = JUD.circ.indexOf(es[0].a);
+          if (ic >= 0) cn = ic + 1;
+        }
+        if (cn && porOrg && JUD.t['org_' + cn]) return judTema('org_' + cn);
+        if (cn && JUD.t['circ_' + cn] && !orgc) return judTema('circ_' + cn);
+        if (indc.test(t) || (orgc && /por circuito|cada circuito|circuitos/.test(t))) {
+          var cual = /productiv|tarda|tardan|duracion|dias|por secretario|cuantas sentencias|rapid|lent/.test(t) ? 'prod' : 'litig';
+          if (orgc) return judTema(orgc + '_' + cual);
+          if (cn && JUD.t['circ_' + cn]) return judTema('circ_' + cn);
+          if (/litigiosidad|congestion|productividad|indicadores?|por circuito|partidos? judicial/.test(t)) return judTema('jd_' + cual);
+        }
+      }
       if (/rezago|pendientes? de (concluir|resolver)|(asuntos|casos|juicios|expedientes|causas) (sin resolver|pendientes|acumulad|atorad)|(cuant[oa]s) (asuntos|casos|juicios|expedientes) (resuelve|resolvio|resolvieron|concluy|saca|sacan|atiende)|(cuanto|que tanto) (resuelve|resuelven|trabaja|trabajan)|(costo|cuesta|cuestan|dinero) (por|de) (cada )?(asunto|caso|juicio|expediente)|auditoria de gestion|desempeno|productividad|carga de trabajo|eficien/.test(t) && (juzga.test(t) || /rezago penal|causas penales/.test(t))) {
         if (es && es.length === 1) return judEstado(es[0]);
         if (/penal|carcel|preso|procesad/.test(t) || (/rezago|pendiente/.test(t) && !/estado|estatal|local|federal|corte|scjn/.test(t))) return judTema('rezago');
@@ -1231,6 +1271,39 @@
       return null;
     }
 
+    /* La memoria de promesas (promesas.py, 01-11-2026): lo que se anunció, seguido hasta el Presupuesto, la Cuenta Pública y la ASF. */
+    var PROM = D.prom || null;
+    function promUna(p) {
+      var NOM = {}, ICO = {};
+      PROM.etapas.forEach(function (e) { ICO[e[0]] = e[1]; NOM[e[0]] = e[2]; });
+      var fu = [], ci = [];
+      var h = '<p><b>' + esc(p.tit) + '.</b> Quién lo dijo: ' + esc(p.quien) + '.</p><ul class="pa-prom">' + p.etapas.map(function (x) {
+        fu.push({ que: NOM[x.et] + (x.fecha ? ' (' + x.fecha + ')' : ''), e: x.e, fu: { tx: x.fu, url: x.url } });
+        if (x.e !== 'pendiente') ci.push({ v: x.cifra, etq: NOM[x.et] + (x.fecha ? ', ' + x.fecha : ''), e: x.e });
+        return '<li>' + ICO[x.et] + ' <b>' + esc(NOM[x.et]) + '</b>' + (x.fecha ? ' · ' + esc(x.fecha) : '') + ': <b>' + esc(x.cifra) + '</b> ' + chip(x.e, x.pend) + '. ' + esc(x.tx) + '</li>';
+      }).join('') + '</ul>';
+      var c = p.cambio;
+      h += '<p><b>Lo que cambió:</b> ' + esc(c.tx) + ' ' + chip(c.e) + (c.pend ? ' ' + chip('pendiente', c.pend) : '') + '</p><p class="pa-chico">Operación: ' + esc(c.op) + '. Una promesa es «oficial» porque consta que se dijo, no porque se haya gastado.</p>' +
+        '<p><b>Lo que sigue:</b> ' + esc(p.sigue) + '</p>';
+      fu.push({ que: 'Lo que cambió', e: c.e, op: c.op });
+      return { html: h, fu: fu, ci: ci, tit: 'Memoria de promesas: ' + p.tit, ir: [PROM.pag.replace('#promesas', '#promesa-' + p.id), 'la memoria de promesas'],
+        sug: ['¿Qué otras promesas sigues?', '¿Qué es un punto ciego?'] };
+    }
+    function promResp(t) {
+      if (!PROM) return null;
+      var pide = /promet|promesa|cumpli|cumplen|cumplio|llego el dinero|cambio la cifra/.test(t);
+      if (!pide) return null;
+      var una = PROM.p.filter(function (p) { return p.temas.some(function (w) { return t.indexOf(w) >= 0; }); })[0];
+      if (una) return promUna(una);
+      if (!/memoria de promesas|que (otras )?promesas|promesas (del gobierno|de gasto|que sigues|sigues)|lo que (han )?prometido|que (han )?prometido|lo que prometieron/.test(t)) return null;
+      return { html: '<p>La <b>memoria de promesas</b> guarda cada cifra que anuncia un gobierno, con su fecha y su documento, y la sigue por cuatro etapas: ' +
+          PROM.etapas.map(function (e) { return e[1] + ' ' + esc(e[2]); }).join(' → ') + '. Así se ve cuándo cambia o nunca llega. Por ahora sigo estas:</p><ul class="pa-prom">' +
+          PROM.p.map(function (p) { return '<li>' + p.ico + ' <a href="' + esc(PROM.pag.replace('#promesas', '#promesa-' + p.id)) + '">' + esc(p.tit) + '</a>. ' + esc(p.cambio.tx) + '</li>'; }).join('') +
+          '</ul><p class="pa-chico">Las mismas reglas para todos los gobiernos: lo que todavía no tiene documento va pendiente, con su ficha.</p>',
+        fu: [], tit: 'La memoria de promesas', ir: [PROM.pag, 'la memoria de promesas'],
+        sug: PROM.p.map(function (p) { return '¿Qué pasó con lo que prometieron de ' + p.temas[0] + '?'; }).slice(0, 3) };
+    }
+
     function lista69(t) {
       var pag = B.fichas.filter(function (f) { return f.t === 'pagina' && f.ir && f.ir[0] === 'herramienta-inspector-efos.html'; })[0];
       var d = (DT.desc || []).filter(function (x) { return /69-B/.test(x.n); })[0];
@@ -1276,12 +1349,46 @@
       if (Math.abs(pct) <= 10) return { tipo: 'ambar', tit: 'Se acerca, pero no es la misma cifra', porque: 'Se aleja ' + pt(pct) + '. Suele ser otro año, otra etapa (aprobado contra ejercido) o un redondeo grueso.' };
       return { tipo: 'rojo', tit: 'No coincide con el documento', porque: 'Lo que dices es ' + pt(pct) + (dif > 0 ? ' mayor' : ' menor') + ' que el dato oficial.' };
     }
+    /* Antes de calificar: ¿la cifra que dices y el dato oficial miden lo mismo? (01-11-2026)
+       «3 mil millones sin deuda para hospitales» no se compara contra toda la deuda del país:
+       si lo que dices niega el tema («sin deuda») o tiene un destino que el dato no trae
+       («para hospitales»), no hay veredicto. Devuelve el porqué, o '' si sí se puede juzgar. */
+    var NIEGA = /^(sin|no|ni|libre de|libres de|fuera de)$/;
+    function otroConcepto(claim, dentro) {
+      var c = plano(claim), tit = plano(dentro.tit || ''), todo = tit + ' ' + plano(String(dentro.html || '').replace(/<[^>]+>/g, ' '));
+      var pal = c.split(/[^a-z0-9]+/), comp = [], neg = [];
+      pal.forEach(function (w, i) {
+        if (w.length < 4 || tit.indexOf(w.slice(0, 5)) < 0) return;
+        comp.push(w);
+        if (NIEGA.test(pal[i - 1] || '') || NIEGA.test((pal[i - 2] || '') + ' ' + (pal[i - 1] || ''))) neg.push(w);
+      });
+      if (neg.length && neg.length === comp.length) return 'Dices «' + neg.map(function (w) { return 'sin ' + w; })[0] + '»: tu cifra no es ' + neg[0] + ', y el dato que tengo sí lo es.';
+      var m = /(^| )(para|destinad[oa]s? a|dirigid[oa]s? a|etiquetad[oa]s? (para|a))( el| la| los| las| un| una| su| sus)? ([a-z]{4,})/.exec(c);
+      if (m && todo.indexOf(m[5].slice(0, 5)) < 0) return 'Tu cifra es para «' + m[5] + '», y el dato que tengo es «' + (dentro.tit || 'otro concepto') + '»: no miden lo mismo.';
+      return '';
+    }
+    /* Los puntos ciegos de lo que dices (puntos_ciegos.py): preguntas, no veredicto. */
+    function ciegosDe(claim) {
+      var pc = VER && VER.ciegos ? VER.ciegos({ texto: claim }) : [];
+      if (!pc.length) return '';
+      return '<div class="pa-ciegos"><p><b>🔦 Puntos ciegos:</b> antes de creerlo, pregunta esto.</p><ul class="pa-lista">' +
+        pc.slice(0, 4).map(function (x) { return '<li><b>' + esc(x.r.n) + '</b> («' + esc(x.frase) + '»). ' + esc(x.r.pr) + '</li>'; }).join('') +
+        '</ul><p class="pa-chico">Los encuentro por las palabras y no califican lo que dices. <a href="' + esc(D.nota.ciegos_pag || 'noticias-verifica.html#puntos-ciegos') + '">Qué es un punto ciego</a>.</p></div>';
+    }
     function verifica(q, t) {
+      vClaim = '';
+      var r0 = verifica0(q, t), pc = vClaim && r0 && r0.html ? ciegosDe(vClaim) : '';
+      if (pc) r0.html = r0.html.replace(/(<details class="pa-dedonde">|$)/, function (m) { return pc + m; });
+      return r0;
+    }
+    var vClaim = '';
+    function verifica0(q, t) {
       var url = (LIGA.exec(q) || [])[0];
       if (url) return { html: '<p>Para revisar una nota completa, la leo con el verificador de notas: encuentra cada cifra en pesos, la empata con su documento oficial y te da un veredicto con semáforo.</p>' +
           '<p><a class="pa-boton pa-primario" href="' + esc(D.nota.pagina + '?liga=' + encodeURIComponent(url)) + '">🔎 Verificar esta nota</a></p>' +
           '<p class="pa-chico">Si solo quieres revisar un dato, pégame la frase: «¿es cierto que…?».</p>', fu: [], tit: '', plat: 1 };
       var claim = q.replace(/^\s*[¿¡]?\s*/, '').replace(/^(es cierto|es verdad|sera cierto|sera verdad|neta|en serio|dicen|verifica(me)?|verificar|checa(me)?|confirma(me)?|desmiente|le[ií]|vi|escuch[eé]|me dijeron|me contaron|seg[uú]n|es falso|es mentira|fake)\s*(que|si|lo de|esto|esta)?\s*[:,]?\s*/i, '').replace(/[?¿]/g, '').trim();
+      vClaim = claim;
       var ext = VER ? VER.analiza({ texto: claim, titulo: '' }) : { cifras: [] }, r = VER ? VER.conjunto(ext) : null;
       var juzgadas = ext.cifras.filter(function (c) { return c.v && c.v.tipo !== 'gris'; });
       if (juzgadas.length) {
@@ -1303,11 +1410,17 @@
       var dicho = cifraDicha(norm(claim).replace(/[¿?¡!]/g, ' ')), val = dentro && dentro.val;
       if (val && val.dia && /diari|al dia|por dia|cada dia/.test(t)) val = { v: val.dia, u: 'mdp' };
       if (val && val.anual && /al ano|anual|por ano|cada ano/.test(t)) val = { v: val.anual, u: 'pesos' };
-      var jz = val && dicho ? juzgaDicho(dicho, val) : null;
+      var oc = val && dicho ? otroConcepto(claim, dentro) : '';
+      var jz = val && dicho && !oc ? juzgaDicho(dicho, val) : null;
       if (jz) {
         dentro.listo = 1;
         dentro.html = '<p>' + VEMO[jz.tipo] + ' <b>' + esc(jz.tit) + '.</b> Dices «' + esc(dicho.bruto) + '». ' + esc(jz.porque) + ' Esto es lo que dice el dato oficial:</p>' + dentro.html;
         dentro.html = dentro.html.replace('<details class="pa-dedonde">', '<p class="pa-chico">Veredicto ' + chip('derivado') + ': diferencia entre la cifra que dices y la oficial; se acepta el redondeo.</p><details class="pa-dedonde">');
+        return dentro;
+      }
+      if (dentro && oc) {
+        dentro.listo = 1;
+        dentro.html = '<p>⚪ <b>No califico tu cifra.</b> ' + esc(oc) + ' Compararla contra este dato daría un veredicto falso, así que te dejo lo que dicen los datos oficiales del tema más cercano para que lo juzgues:</p>' + dentro.html;
         return dentro;
       }
       if (dentro) {
@@ -1359,6 +1472,8 @@
       if (rsal) return fin(rsal, { tipo: 'sal' });
       var ramg = amgResp(t);
       if (ramg) return fin(ramg, { tipo: 'amg' });
+      var rprom = promResp(t);
+      if (rprom) return fin(rprom, { tipo: 'prom' });
       if (!crudo && (PIDE_VER.test(t) || LIGA.test(q) || (q.length > 160 && /\d/.test(q) && /peso|millon|billon|mdp/.test(t)))) {
         var vr = verifica(q, t);
         return vr.listo ? vr : fin(vr, { tipo: vr.plat || vr.sinDato || vr.pasa ? '' : 'ver' });
@@ -1662,6 +1777,7 @@
       /* Salud pública antes que Verificamos: «¿es cierto que el IMSS hizo 1.78 millones de cirugías?» es un cotejo de salud (27-10-2026). */
       salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       nepotismo: function (q) { var r = nepResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'nep' }); },
+      promesa: function (q) { var r = promResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'prom' }); },
       ambiente: function (q) { var r = amgResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'amg' }); },
       deFicha: deFicha, deDonde: deDonde, olvida: function () { ctx = {}; }, ctx: function () { return ctx; }
 

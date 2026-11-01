@@ -182,6 +182,40 @@ PROPIOS = [
      'Los tabulados y datos abiertos del censo pueden traer los expedientes en trámite al cierre del año y la plataforma aún no los integra.',
      PLATAFORMA, 'https://www.inegi.org.mx/programas/cnije/2025/', 'Censo Nacional de Impartición de Justicia Estatal 2025 (INEGI)',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-gestion.html', 'Datos · Poder Judicial · Lo que cuesta y lo que resuelve')]),
+    # Antes y después de la reforma judicial (01-11-2026).
+    ('judicial-electos-por-organo', 'Poderes', 'Cómo resuelven las personas juzgadoras electas en 2025 frente a las que siguieron en el cargo, órgano por órgano',
+     'Los Anexos Estadísticos de la DGEJ dan el movimiento nacional y por tipo de órgano, y el año 2025 partido al 30 de junio, así que sí se ve el antes y el después '
+     'del conjunto. Los indicadores órgano por órgano (2021 a 2025) ya están en la plataforma, en las páginas «órgano por órgano» de cada circuito. '
+     'Para separar a las personas electas de las que siguieron falta cruzarlos con la lista de personas electas y el órgano al que quedó adscrita cada una '
+     '(INE y Órgano de Administración Judicial), y la DGEJ no parte 2025 en antes y después de su llegada. Ese cruce la plataforma aún no lo hace. '
+     'Una comparación justa además debe ser del mismo órgano y la misma materia, porque cada persona electa heredó el rezago de su juzgado.',
+     PLATAFORMA, 'https://www.dgej.cjf.gob.mx/paginas/informacionRelevante.htm?pageName=informacion%2FanexoEstadisticoWeb.htm',
+     'Anexos Estadísticos de la DGEJ (tabulados por órgano)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-reforma.html', 'Datos · Poder Judicial · Antes y después de la reforma')]),
+    ('scjn-estadistica-nueva-corte', 'Poderes', 'Cuántos asuntos resuelve la nueva Suprema Corte y cuánto tarda, comparado con la Corte anterior',
+     'Desde el 1 de septiembre de 2025 la Corte resuelve todo en Pleno, sin las dos Salas. Su estadística y sus comunicados con cifras de productividad viven en '
+     'sitios de la Corte que la plataforma todavía no pudo consultar, y una comparación «por sesión» del Pleno nuevo contra el Pleno anterior deja fuera lo que '
+     'resolvían las Salas: hay que comparar el total de asuntos resueltos por la Corte entera, con el mismo tipo de asunto y periodo.',
+     PLATAFORMA, 'https://www.scjn.gob.mx/', 'Suprema Corte de Justicia de la Nación',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-reforma.html', 'Datos · Poder Judicial · Antes y después de la reforma')]),
+    # Indicadores por circuito de la DGEJ (01-11-2026).
+    ('judicial-indicadores-vacios', 'Poderes', 'Plantilla, perfil, acceso tecnológico e incidencia de los juzgados y tribunales federales, circuito por circuito',
+     'El sistema de Indicadores Estadísticos Judiciales anuncia, para cada tipo de órgano, cuántas juezas, jueces y magistraturas hay, su edad, nivel de estudios y '
+     'antigüedad, cuánto personal de apoyo tienen, sus computadoras y conexión, y de qué materia, delito o acto reclamado son sus asuntos. De 2021 a 2025 todos esos '
+     'cuadros salen vacíos, por circuito y en el total nacional (en los juzgados de distrito, también en 2008, 2011, 2015 y 2018 a 2020). '
+     'Falta de transparencia del Órgano de Administración Judicial, que administra la estadística desde el 1 de septiembre de 2025 (antes, del Consejo de la Judicatura Federal).',
+     'Órgano de Administración Judicial (Dirección General de Estadística Judicial)', 'https://www.dgej.cjf.gob.mx/Indicadores/acuerd_nal_ini.asp',
+     'Indicadores Estadísticos Judiciales de la DGEJ',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-circuitos-distrito.html', 'Datos · Poder Judicial · Juzgados de distrito por circuito'),
+      ('datos-judicial-circuitos-colegiados.html', 'Datos · Poder Judicial · Tribunales colegiados por circuito'),
+      ('datos-judicial-circuitos-apelacion.html', 'Datos · Poder Judicial · Tribunales de apelación por circuito')]),
+    ('judicial-apelacion-tiempos', 'Poderes', 'Cuánto tardan los tribunales colegiados de apelación, circuito por circuito',
+     'El sistema de Indicadores Estadísticos Judiciales tiene el indicador de duración (del ingreso a la sentencia) para los tribunales colegiados de apelación, '
+     'pero de 2023 a 2025 sale vacío; de los tribunales unitarios, que se transformaron en ellos, sí lo publicó hasta 2023. '
+     'Falta de transparencia del Órgano de Administración Judicial, que administra la estadística desde el 1 de septiembre de 2025.',
+     'Órgano de Administración Judicial (Dirección General de Estadística Judicial)', 'https://www.dgej.cjf.gob.mx/Indicadores/acuerd_nal_ini.asp',
+     'Indicadores Estadísticos Judiciales de la DGEJ',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-circuitos-apelacion.html', 'Datos · Poder Judicial · Tribunales de apelación por circuito')]),
     # La auditoría de gestión de salud pública (27-10-2026).
     ('salud-tiempos-espera', 'Salud', 'Cuánto espera una persona una consulta de especialidad o una cirugía en el IMSS',
      'La Memoria Estadística 2025 del IMSS trae cuántas consultas y cirugías se dieron, pero no cuánto tiempo se esperó por ellas. En su boletín 023/2026 el IMSS dijo que la '
@@ -397,6 +431,9 @@ def recolectar():
     for p in PROPIOS:
         out.append(e(*p))
     # 9 bis. Periodismo en riesgo (29-10-2026): lo que publica la FEADLE.
+    import promesas
+    for x in promesas.pendientes():
+        out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
     import periodistas
     for x in periodistas.pendientes():
         out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))

@@ -120,7 +120,7 @@ def _fila_obra(o, sectores, r):
         % (' mt-rescate' if resc else '', o['id'], o['icono'], esc(o['nombre']),
            ('<b class="mt-etq">Rescate: deuda, no obra</b> ' if resc else ''),
            esc(sec.get('nombre', '')), esc(o.get('estatus') or ''),
-           'Presentado en su momento' if resc else 'Aprobado', _cifra(o, 'inversion_presupuestada_mdp', mdp),
+           esc(o.get('presupuesto_etiqueta') or ('Presentado en su momento' if resc else 'Aprobado')), _cifra(o, 'inversion_presupuestada_mdp', mdp),
            'Pagado y debido' if resc else 'Costo real', _cifra(o, 'inversion_real_mdp', mdp),
            esc(o.get('sobrecosto_etiqueta') or 'Sobrecosto'), _cifra(o, 'sobrecosto_pct', _pct),
            _celda_res(r, o['id']), como, CUENTA, o['id'], SECTOR, o['id'],

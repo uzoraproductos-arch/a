@@ -58,6 +58,10 @@ PERSONAJES = [
     ('raul-salinas', 'Raúl Salinas de Gortari', ['raul salinas'], False),
     ('lopez-beltran', 'Andrés López Beltrán', ['lopez beltran', 'andy lopez'], False),
     ('amilcar-olan', 'Amílcar Olán', ['amilcar olan', 'olan aparicio'], False),
+    ('garcia-salgado', 'Ana Daniela García Salgado', ['daniela garcia salgado', 'daniela salgado', 'danielasalgadoens'], False),
+    ('ventura-cabada', 'Rodrigo Ventura de la Cabada', ['ventura de la cabada'], False),
+    ('samuel-garcia', 'Samuel García Sepúlveda', ['samuel garcia'], False),
+    ('rocha-moya', 'Rubén Rocha Moya', ['rocha moya', 'ruben rocha'], False),
     ('taddei', 'Guadalupe Taddei Zavala', ['taddei', 'guadalupe taddei'], False),
     ('lorenzo-cordova', 'Lorenzo Córdova Vianello', ['lorenzo cordova', 'cordova vianello'], False),
     ('carvente', 'Víctor Hugo Carvente Contreras', ['carvente', 'victor hugo carvente'], False),
@@ -142,6 +146,20 @@ WEB_EMPRESA = [
     ('📰', 'Noticias (prensa, sin verificar)', 'prensa', None),
 ]
 
+# Para un dato que la plataforma no tiene (pedido del autor, 30-10-2026: «si
+# acaso no la tuviéramos en nuestra base de datos… la consulta con internet»):
+# la misma pregunta, buscada primero en las fuentes oficiales de cifras y al
+# final en las noticias. Solo enlaces: el chat no afirma lo que hay ahí.
+WEB_DATO = [
+    ('🏦', 'Banco de México', 'oficial', 'site:banxico.org.mx'),
+    ('📊', 'INEGI', 'oficial', 'site:inegi.org.mx'),
+    ('💰', 'Hacienda y Transparencia Presupuestaria', 'oficial', 'site:transparenciapresupuestaria.gob.mx OR site:gob.mx/shcp'),
+    ('🏛️', 'Documentos del Gobierno de México', 'oficial', 'site:gob.mx'),
+    ('📜', 'Diario Oficial de la Federación', 'oficial', 'site:dof.gob.mx'),
+    ('🔎', 'Auditoría Superior de la Federación', 'oficial', 'site:asf.gob.mx'),
+    ('📰', 'Noticias (prensa, sin verificar)', 'prensa', None),
+]
+
 
 # La regla de las columnas (columnas.js), dicha también en el chat y en el
 # dictamen.
@@ -212,10 +230,40 @@ def fichas():
                     'cot': cot, 'sigue': [{'tx': x['que'], 'url': x['url']} for x in c.get('sigue', [])],
                     'dc': c.get('dato_curioso', ''), 'act': c.get('actualizado', ''),
                     'ci': ci, 'fu': fu, 'col': c['id'], 'nota': NOTA,
+                    'tem': [plano(t).strip() for t in c.get('temas', [])],
                     'ir': [PAGINA + '#col-' + c['id'], 'Noticias relevantes'],
                     'k': 'noticias columna %s %s %s' % (
                         c['seccion'] + (' verificamos redes es cierto circula' if cot else ''),
                         cir['texto'] if cir else '', ' '.join(c.get('cuerpo', []))[:900])})
+    return out
+
+
+def liga_plana(u):
+    """La liga sin protocolo, sin www, sin consulta y sin diagonal final: así
+    empatan https://www.jornada.com.mx/x/?partner=rss y jornada.com.mx/x.
+    Mismo criterio que ligaPlana() de asistente.js y norm() de columnas.js."""
+    u = re.sub(r'^https?://', '', str(u or '').strip().lower())
+    u = re.sub(r'^www\.', '', u)
+    return re.split(r'[?#]', u)[0].rstrip('/')
+
+
+def hemeroteca():
+    """Las notas de prensa que ya cotejamos (pedido del autor, 31-10-2026):
+    la nota de origen y lo que contaron otros medios (campo «medios»), cada
+    una con la columna donde se cotejó. Solo titular, medio, fecha y liga."""
+    cols, _ = columnas()
+    out, vistas = [], {}
+    for c in cols:
+        for rol, m in ([('origen', c['nota'])] if c.get('nota') else []) + [('medio', x) for x in c.get('medios', [])]:
+            for k in ('medio', 'titulo', 'url'):
+                if not m.get(k):
+                    raise SystemExit('asistente_personajes: una nota de prensa de «%s» no trae %s' % (c['id'], k))
+            u = liga_plana(m['url'])
+            # Un perfil de red social (instagram.com/cuenta) no es una nota.
+            if re.fullmatch(r'(instagram|x|twitter|facebook|tiktok|youtube)\.com/[^/]+', u) or u in vistas:
+                continue
+            vistas[u] = c['id']
+            out.append({'u': u, 'col': c['id'], 'm': m['medio'], 't': m['titulo'], 'f': m.get('fecha', ''), 'rol': rol})
     return out
 
 
@@ -262,4 +310,5 @@ def datos():
             vistas[a] = p['id']
     return {'per': out, 'web': [{'ico': i, 'n': n, 'e': e, 'site': s} for i, n, e, s in WEB],
             'webEmp': [{'ico': i, 'n': n, 'e': e, 'site': s} for i, n, e, s in WEB_EMPRESA],
-            'pag': PAGINA, 'n': len(cols)}
+            'webDato': [{'ico': i, 'n': n, 'e': e, 'site': s} for i, n, e, s in WEB_DATO],
+            'pag': PAGINA, 'n': len(cols), 'hem': hemeroteca()}

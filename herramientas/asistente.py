@@ -329,7 +329,9 @@ def _paginas():
     out = []
     for p in sorted(glob.glob(os.path.join(RAIZ, '*.html'))):
         n = os.path.basename(p)
-        if n in (ARCHIVO, DICTAMEN):
+        # Las notas «Al momento» con página propia (para buscadores, 31-10-2026) ya
+        # están en el chat como columnas: su página no compite con su ficha.
+        if n in (ARCHIVO, DICTAMEN) or n.startswith('noticias-al-momento-'):
             continue
         s = open(p, encoding='utf-8').read()
         if 'http-equiv="refresh"' in s or 'name="robots" content="noindex' in s:
@@ -476,7 +478,9 @@ def _charla(d):
         adm.append({'id': a['id'], 'n': a['n'], 'c': a['c'], 'ini': a['ini'], 'a': a['a'], 'curso': a.get('curso'), 'aviso': limpio(a.get('aviso')), 'v': v})
     admet = {k: {'n': D['metricas'][k]['tit'], 'u': D['metricas'][k]['u']} for k in claves}
     import insp_nota
-    nota = {'cat': insp_nota.catalogo_lector(d), 'fiscal': insp_nota.FISCAL, 'temas': insp_nota._temas(), 'pagina': insp_nota.PAGINA}
+    import puntos_ciegos
+    nota = {'cat': insp_nota.catalogo_lector(d), 'fiscal': insp_nota.FISCAL, 'temas': insp_nota._temas(), 'pagina': insp_nota.PAGINA,
+            'ciegos': puntos_ciegos.datos(), 'ciegos_pag': puntos_ciegos.PAGINA}
     # Las cifras de la pestaña Números (23-10-2026): ingresos, gasto, ramos,
     # gasto federalizado, Poderes, Paquete 2027 y Cuenta Pública.
     import asistente_numeros
@@ -503,6 +507,8 @@ def _charla(d):
             'san': informe_sancion.bot(), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d),
             # Nepotismo y cargos publicos (28-10-2026): la tabla de la calculadora.
             'nep': nepotismo.bot(),
+            # La memoria de promesas (01-11-2026): promesa → Presupuesto → Cuenta Pública → ASF.
+            'prom': __import__('promesas').datos(),
             # Agenda del erario de Noticias (28-10-2026): las fechas que fija la ley.
             'agenda': __import__('noticias').AGENDA}
 

@@ -2,7 +2,8 @@
 // pedir un código («¿No tienes código? Obtén uno») (pedido del autor,
 // 29-10-2026; migraciones 20261030000001_codigos.sql y 20261030000002).
 // Va por aquí, y no directo a la base, para poner el límite de intentos por IP:
-// así nadie prueba códigos al azar. El canje no guarda nombre ni correo; la
+// así nadie prueba códigos al azar. El código maestro de la administración
+// entra por aquí mismo y abre su sesión (migración 20261030000009). El canje no guarda nombre ni correo; la
 // solicitud guarda el correo solo con el aviso de privacidad aceptado.
 import { base, dentroDelLimite, huellaIp, leeJson, responde, sirve } from "../_comun/comun.ts";
 
@@ -17,7 +18,7 @@ sirve(async (req) => {
   if (accion === "consultar") {
     if (!pase) return responde(req, { ok: false, error: "Falta el pase." }, 400);
     if (!(await dentroDelLimite(db, huella, "codigo-consulta", 60, 600))) return responde(req, { ok: false, motivo: "espera" }, 429);
-    const { data, error } = await db.rpc("pase_hasta", { p_pase: pase });
+    const { data, error } = await db.rpc("pase_consulta", { p_pase: pase });
     if (error) throw error;
     return responde(req, { ok: true, hasta: data ?? null });
   }
@@ -26,6 +27,21 @@ sirve(async (req) => {
     const codigo = j && typeof j.codigo === "string" ? j.codigo.slice(0, 40) : "";
     // Diez intentos cada diez minutos por IP, buenos o malos.
     if (!(await dentroDelLimite(db, huella, "codigo-canje", 10, 600))) return responde(req, { ok: false, motivo: "espera" }, 429);
+    // Y cuarenta al día: el código maestro son 8 números y no debe poder
+    // adivinarse probando fechas (migración 20261030000009).
+    if (!(await dentroDelLimite(db, huella, "codigo-canje-dia", 40, 86400))) return responde(req, { ok: false, motivo: "espera" }, 429);
+    // El código maestro de la administración: si coincide, se abre su sesión
+    // sin correo. Se le devuelve un enlace de un solo uso (token_hash) que el
+    // navegador cambia por la sesión en /auth/v1/verify; el correo no viaja.
+    const maestro = await db.rpc("revisar_codigo_admin", { p_codigo: codigo });
+    if (maestro.error) throw maestro.error;
+    if (maestro.data) {
+      const u = await db.auth.admin.getUserById(maestro.data as string);
+      if (u.error || !u.data.user?.email) throw u.error ?? new Error("la administración no tiene correo");
+      const l = await db.auth.admin.generateLink({ type: "magiclink", email: u.data.user.email });
+      if (l.error) throw l.error;
+      return responde(req, { ok: true, admin: true, token_hash: l.data.properties.hashed_token });
+    }
     const { data, error } = await db.rpc("canjear_codigo", { p_codigo: codigo, p_pase: pase });
     if (error) throw error;
     return responde(req, data);

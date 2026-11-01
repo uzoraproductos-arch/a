@@ -942,6 +942,19 @@
     });
     return hit;
   }
+  /* La liga sin protocolo, www, consulta ni diagonal final (liga_plana de asistente_personajes.py). */
+  function ligaPlana(u) { return String(u || '').trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').split(/[?#]/)[0].replace(/\/+$/, ''); }
+  function hemeroteca(liga) {
+    var H = (B.dat && B.dat.per && B.dat.per.hem) || [], u = ligaPlana(liga);
+    var h = H.filter(function (x) { return x.u === u; })[0];
+    var f = h && (B.fichas || []).filter(function (x) { return x.t === 'columna' && x.col === h.col; })[0];
+    if (!f || !charla) return null;
+    var r = charla.deFicha(f);
+    r.html = '<p>🗂️ Esa nota ya está en nuestra <b>hemeroteca</b>: ' + esc(h.m) + (h.f ? ', ' + esc(h.f) : '') + ', «' + esc(h.t) + '». ' +
+      (h.rol === 'origen' ? 'De ella partimos para este cotejo' : 'Es una de las notas que contaron el mismo hecho') + ', y esto es lo que consta en los documentos oficiales:</p>' + r.html +
+      '<p class="pa-chico">El titular de un medio no es la fuente: lo que vale es el documento que va junto a cada afirmación. ¿Quieres revisar la nota cifra por cifra? <a href="' + esc(APP.inspnota.url + '?liga=' + encodeURIComponent(liga)) + '">Contrástala aquí</a>.</p>';
+    return r;
+  }
   function inspector(q, previas) {
     if (!IN.apps.length) return null;
     var p = plano(q), t = String(q).trim(), m;
@@ -966,6 +979,9 @@
         ' con los datos vigentes de la plataforma y te digo si coincide. El resultado sale en el recuadro de abajo.</p>' +
         '<p class="pa-chico">Si no coincide, o el documento se alteró, o se expidió con datos anteriores.</p>');
     }
+    /* 2a. La hemeroteca (31-10-2026): si la liga es de una nota que ya cotejamos, se dice y se abre su cotejo. */
+    var hem = liga && hemeroteca(liga);
+    if (hem) return hem;
     /* 2. La liga de una nota: «Contrasta una nota» la lee aquí mismo. */
     if (liga) {
       return respApp('inspnota', APP.inspnota.url + '?liga=' + encodeURIComponent(liga),
@@ -1234,7 +1250,7 @@
   }
   function moFuentes(o) {
     var c = o.c, l = [
-      { que: (o.resc ? 'Presentado en su momento' : 'Aprobado') + ': ' + c.pres.vt, e: c.pres.e, p: c.pres.p, op: c.pres.op || c.pres.d },
+      { que: (o.pet || (o.resc ? 'Presentado en su momento' : 'Aprobado')) + ': ' + c.pres.vt, e: c.pres.e, p: c.pres.p, op: c.pres.op || c.pres.d },
       { que: (o.resc ? 'Pagado y debido' : 'Costo real') + ': ' + c.real.vt, e: c.real.e, p: c.real.p, op: c.real.op || c.real.d },
       { que: c.sob.et + ': ' + c.sob.vt, e: c.sob.e, p: c.sob.p, op: c.sob.op || c.sob.d }];
     if (o.res.tipo === 'dato') l.push({ que: 'Lo que ' + (o.res.v < 0 ? 'pierde' : 'gana') + ' al año (' + o.res.anio + ')', e: o.res.e, op: o.res.op, fu: o.res.fu[0] });
@@ -1284,7 +1300,7 @@
   function netaHoy(o) { var x = (o.er || []).filter(function (y) { return y.k === 'neta'; })[0]; return x && x.hoyt; }
   function respObra(o, foco, sim) {
     var c = o.c, s = sxDe(o), lead = '';
-    var nomP = o.resc ? 'Presentado en su momento' : 'Aprobado', nomR = o.resc ? 'Pagado y debido' : 'Costo real';
+    var nomP = o.pet || (o.resc ? 'Presentado en su momento' : 'Aprobado'), nomR = o.resc ? 'Pagado y debido' : 'Costo real';
     if (foco === 'amb' && o.amb) lead = '📍 Se ubica en <b>' + esc(o.amb.sede) + '</b>. Costó <b>' + esc(c.real.vt) + '</b> ' + chipE(c.real) +
       '. <br>🚨 <b>Alerta del Auditor Ambiental (' + esc(o.amb.eco) + '):</b> ' + esc(o.amb.alerta) +
       ' Permiso ambiental (MIA): ' + chip({ e: o.amb.miaEst, p: o.amb.miaPend }) + ' (' + esc(o.amb.miaTxt) + ').';
@@ -1293,11 +1309,11 @@
     else if (foco === 'res') lead = o.res.tipo === 'dato' ? 'Al año, ' + (o.res.v < 0 ? '<b class="pa-rojo">pierde ' : '<b class="pa-verde">gana ') + esc(o.res.vt) + '</b> por sí misma (' + o.res.anio + ', ' + esc(o.res.base) + ') ' + chipE(o.res) + '.' +
       (netaHoy(o) ? ' En pesos de ' + esc(MO.mes) + ' son ' + esc(netaHoy(o)) + ' ' + chip({ e: 'derivado' }) + '.' : '') :
       o.res.tipo === 'no_aplica' ? 'No opera, así que no tiene ganancia ni pérdida del año: ' + esc(o.res.txt) : 'No publica lo que gana o pierde al año ' + chipE({ e: 'pendiente', p: o.res.p }) + ': ' + esc(o.res.txt);
-    else if (foco === 'pres') lead = (o.resc ? 'Se presentó en su momento con ' : 'Se aprobó con ') + '<b>' + esc(c.pres.vt) + '</b> ' + chipE(c.pres) + '.';
+    else if (foco === 'pres') lead = (o.resc ? 'Se presentó en su momento con ' : o.pet ? 'No hay presupuesto aprobado publicado; se anunció con ' : 'Se aprobó con ') + '<b>' + esc(c.pres.vt) + '</b> ' + chipE(c.pres) + '.';
     else if (foco === 'salud') lead = 'Su salud financiera, en su estado de resultados básico: lo que ingresa, lo que gasta en operar, lo que paga de intereses y su resultado del año.' +
       (o.res.tipo === 'dato' ? ' Cierra con ' + (o.res.v < 0 ? '<b class="pa-rojo">▼ pérdida de ' : '<b class="pa-verde">▲ ganancia de ') + esc(o.res.vt) + '</b> (' + o.res.anio + ').' : '');
     else if (foco === 'asf') lead = o.asf ? '<b>Lo que dijo la ASF:</b> ' + esc(o.asf) : 'La plataforma todavía no integra un documento de la ASF sobre esta obra ' + chip({ e: 'pendiente', p: 'obra-' + o.id }) + '.';
-    else lead = (o.resc ? 'Lo pagado y lo que se sigue debiendo suma ' : 'Costó ') + '<b>' + esc(c.real.vt) + '</b> ' + chipE(c.real) + (o.resc ? '' : ', contra lo aprobado: ' + esc(c.pres.vt)) + '.';
+    else lead = (o.resc ? 'Lo pagado y lo que se sigue debiendo suma ' : 'Costó ') + '<b>' + esc(c.real.vt) + '</b> ' + chipE(c.real) + (o.resc ? '' : ', contra lo ' + (o.pet ? 'anunciado' : 'aprobado') + ': ' + esc(c.pres.vt)) + '.';
     var h = '<p><span aria-hidden="true">' + o.ico + '</span> <b>' + esc(o.n) + '</b> · ' + esc(o.pres) + ' (' + esc(o.per) + ')' + (o.resc ? ' · <b>rescate: deuda, no obra</b>' : '') + '</p>' +
       '<p>' + lead + '</p><ul class="pa-lista">' +
       (o.amb ? '<li>📍 Dónde está: <b>' + esc(o.amb.sede) + '</b> · <a href="' + esc(o.amb.mapa) + '">Ver en el mapa ambiental ➔</a></li>' : '') +
@@ -1327,7 +1343,7 @@
     var h = '<p>⚖️ <b>' + esc(a.n) + '</b> frente a <b>' + esc(b.n) + '</b>, con las mismas cifras de Inversión y Megaobras:</p>' +
       '<div class="pa-tabla pa-tabla-ajusta"><table><thead><tr><th></th><th scope="col">' + a.ico + ' ' + esc(a.n) + '</th><th scope="col">' + b.ico + ' ' + esc(b.n) + '</th></tr></thead><tbody>' +
       fila('Presidente', esc(a.pres) + ' (' + esc(a.per) + ')', esc(b.pres) + ' (' + esc(b.per) + ')') +
-      fila('Aprobado', v(a.c.pres), v(b.c.pres)) + fila('Costo real', v(a.c.real), v(b.c.real)) +
+      fila(a.pet || b.pet ? 'Aprobado o anunciado' : 'Aprobado', v(a.c.pres) + (a.pet ? ' <small>(' + esc(a.pet.toLowerCase()) + ')</small>' : ''), v(b.c.pres) + (b.pet ? ' <small>(' + esc(b.pet.toLowerCase()) + ')</small>' : '')) + fila('Costo real', v(a.c.real), v(b.c.real)) +
       fila('Sobrecosto', v(a.c.sob), v(b.c.sob)) + fila('Al año', resTxt(a.res, 1), resTxt(b.res, 1)) +
       '</tbody></table></div>' +
       (a.resc || b.resc ? '<p class="pa-chico">Ojo: un rescate es una deuda que el Estado asumió, no una obra; su crecimiento no se compara con un sobrecosto.</p>' : '') +
@@ -1717,6 +1733,22 @@
       }).join('') + '</div>' +
       '<p class="pa-chico">¿Encontraste una nota con cifras? Pégame aquí su liga y la cotejo contra los documentos oficiales, con <a href="herramienta-inspector-nota.html">Contrasta una nota</a>.</p></div>';
   }
+  /* Lo que la base no tiene (30-10-2026): la misma pregunta, ya buscada en
+     Banxico, el INEGI y los portales oficiales, y al final en las noticias.
+     Son enlaces rotulados «sin verificar»: el chat no afirma lo que hay ahí. */
+  function fueraHtml(q) {
+    var t = String(q).replace(/[¿?¡!«»"]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 120);
+    if (!t || !PE.webDato) return '';
+    return '<div class="pa-rec pa-web"><p class="pa-mas-t">Búscalo fuera de la plataforma</p>' +
+      '<p class="pa-chico">Esto ya no es nuestra base: es tu pregunta, ya buscada primero en las fuentes oficiales de cifras y al final en las noticias. ' +
+      '<b>Lo que encuentres ahí no lo verificó Auditavisión.</b> Si das con el documento oficial, cuéntanos y lo integramos con su fuente.</p>' +
+      '<div class="pa-rec-lista">' + PE.webDato.map(function (w) {
+        var u = w.site ? 'https://www.google.com/search?q=' + encodeURIComponent(t + ' ' + w.site)
+          : 'https://news.google.com/search?q=' + encodeURIComponent(t) + '&hl=es-419&gl=MX&ceid=MX:es-419';
+        return '<a class="pa-rec-a" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer"><span class="pa-rec-ico" aria-hidden="true">' + w.ico + '</span>' +
+          '<span><b>' + esc(w.n) + '</b><small>' + (w.e === 'oficial' ? 'Fuente oficial: sin verificar por nosotros · se abre en otra pestaña ↗' : 'Prensa: sin verificar · se abre en otra pestaña ↗') + '</small></span></a>';
+      }).join('') + '</div></div>';
+  }
   function colHtml(f, grande) {
     var ci = (f.ci || []).slice(0, grande ? 3 : 2);
     return '<div class="pa-col"><p class="pa-col-t">📰 <a href="' + esc(f.ir[0]) + '"><b>' + esc(f.tit) + '</b></a></p>' +
@@ -1797,7 +1829,9 @@
   /* Las palabras del dinero («millones», «mucho dinero») no dicen de qué columna se habla: con
      ellas, «¿es cierto que Jalisco debe 50 mil millones?» se iba a la nota de Jalisco y no a
      su deuda (29-10-2026). */
-  var GENERICAS = { cierto: 1, verdad: 1, dicen: 1, circula: 1, redes: 1, gobierno: 1, mexico: 1, millones: 1, pesos: 1, dinero: 1, mucho: 1 };
+  var GENERICAS = { cierto: 1, verdad: 1, dicen: 1, circula: 1, redes: 1, gobierno: 1, mexico: 1, millones: 1, pesos: 1, dinero: 1, mucho: 1,
+    /* Las palabras de tendencia no son el tema (01-11-2026: «el gasto en cultura cayó 40 % en los últimos años» abría la nota de Jalisco). */
+    ultimos: 1, anos: 1, meses: 1, cayo: 1, subio: 1, bajo: 1, aumento: 1, crecio: 1, record: 1, historico: 1 };
   /* Una pregunta por un dato («¿cuántos ministros tiene la Corte?») o por un
      estado de cuenta no es un cotejo, aunque comparta palabras con la columna:
      la contesta la plática (27-10-2026). */
@@ -1808,7 +1842,11 @@
     var col = buscar(q).slice(0, 12).filter(function (x) { return x.f.t === 'columna' && x.f.cot; })[0];
     if (!col || !charla) return null;
     var f = col.f, t = plano(f.tit + ' ' + (f.k || '') + ' ' + (f.txt || '') + ' ' + (f.cir ? f.cir.tx : ''));
-    var ws = norm(q).replace(/[^a-z0-9ñ]+/g, ' ').split(' ').filter(function (w) { return w.length > 3 && !vacia[w] && !GENERICAS[w]; });
+    /* El nombre de una megaobra no cuenta como coincidencia: «¿es cierto que el Tren Maya costó 500 mil
+       millones?» se coteja contra la obra, aunque una nota hable del Tren Maya (01-11-2026). */
+    var deObra = {};
+    (MO.obras.length ? obrasEn(q) : []).forEach(function (o) { o._al.forEach(function (al) { al.split(' ').forEach(function (w) { deObra[w] = 1; }); }); });
+    var ws = norm(q).replace(/[^a-z0-9ñ]+/g, ' ').split(' ').filter(function (w) { return w.length > 3 && !vacia[w] && !GENERICAS[w] && !deObra[w]; });
     var hits = ws.filter(function (w) { return t.indexOf(' ' + w + ' ') >= 0; }).length;
     /* Con «¿es cierto…?» basta que coincidan dos palabras: el lector ya pidió el cotejo. */
     if (hits < (PIDE_COTEJO.test(pq) ? 2 : 3) || hits * 2 < ws.length) return null;
@@ -1965,9 +2003,30 @@
     return f ? charla.deFicha(f) : null;
   }
 
+  /* Una palabra propia de una nota («carnaval», campo temas de integrar_al_momento.py)
+     abre esa nota aunque la pregunta nombre también a un municipio o a un estado (01-11-2026). */
+  function temaColumna(q) {
+    /* Una liga pegada la reconoce la hemeroteca, no las palabras de su dirección. */
+    if (/https?:\/\/|www\./i.test(q)) return null;
+    var pq = ' ' + plano(q) + ' ';
+    var f = (B.fichas || []).filter(function (x) {
+      return x.t === 'columna' && (x.tem || []).some(function (w) { return pq.indexOf(' ' + w + ' ') >= 0; });
+    })[0];
+    return f && charla ? charla.deFicha(f) : null;
+  }
+
   function respuesta(q, previas) {
+    /* Una liga que ya está en la hemeroteca abre su cotejo antes que cualquier palabra de su dirección
+       («pemex-perdidas-…-deuda» se iba al pendiente de la deuda de Pemex, 01-11-2026). */
+    var lg = (/https?:\/\/[^\s<>"']+/i.exec(String(q)) || [])[0], hm = lg && hemeroteca(lg);
+    if (hm) return hm;
+    /* La memoria de promesas (01-11-2026): «¿qué pasó con lo que prometieron…?» antes que la nota o la obra del mismo tema. */
+    var pm = charla && charla.promesa && charla.promesa(q);
+    if (pm) return pm;
     var tc = tituloColumna(q);
     if (tc) return tc;
+    var tm = temaColumna(q);
+    if (tm) return tm;
     var inv = investigacion(q);
     if (inv) return inv;
     var al = alarma(q);
@@ -2058,7 +2117,7 @@
     var espera = r.espera ? r.espera.then(function (x) { r = x; }) : null;
     var pinta = function (li) {
       if (r.sin) {
-        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + (r.web ? webHtml(r.web) : '');
+        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + (r.web ? webHtml(r.web) : fueraHtml(q));
         if (!ya) anota(q, 'sin');
         return;
       }

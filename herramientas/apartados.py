@@ -1395,7 +1395,7 @@ def noticias(base, ref):
                 'bloque': nt.construir(base, ref, arch),
             }],
         })
-    return paginas
+    return paginas + nt.paginas_al_momento()
 
 
 
@@ -1408,6 +1408,15 @@ PILARES_LISTA = [
      'El Auditor Virtual sigue el dinero público como lo haría una reportera de datos: busca en los documentos oficiales, '
      'coteja lo que circula en redes, explica en sencillo y te lleva al documento. Lo hace con una ventaja: no se le puede '
      'amenazar para que deje de buscar, y todo lo que encuentra queda a la vista de cualquiera.'),
+    # Decisión del autor, 01-11-2026: «podríamos ser considerados competidores de todos estos medios informativos, pero
+    # debemos ser los mejores».
+    ('🏆', 'Competimos siendo el mejor auditor, no el más rápido',
+     'Los medios dan la noticia; nosotros la cotejamos, la cruzamos con nuestra base y no la olvidamos. Nuestra ventaja es una base de '
+     'datos que crece con cada nota, y lo «privilegiado» que encontramos es lo que ya es público pero está enterrado en documentos que '
+     'casi nadie lee ni cruza: nunca una filtración ni un rumor. Por eso cada nota pasa por el '
+     '<a href="noticias-verifica.html#puntos-ciegos">detector de puntos ciegos</a>, que busca lo que suele esconderse en las promesas, '
+     'los porcentajes y los adjetivos, y cada cifra que anuncia un gobierno entra a la '
+     '<a href="noticias-seguimiento.html#promesas">memoria de promesas</a>, que la sigue hasta el Presupuesto, la Cuenta Pública y la Auditoría.'),
     ('🔥', 'Que la verdad sea incómoda no la vuelve falsa',
      'Lo que tiene documento se publica, guste o no, sea del gobierno que sea. Y lo que no tiene documento no se publica como '
      'hecho, por más que convenga: se dice que no consta.'),
@@ -1452,7 +1461,7 @@ AVISO_FECHA = '26-10-2026'
 _AV_NAVEGADOR = [
     ('La plática con el Auditor', 'av-chat', 'Se guarda en la pestaña (sessionStorage) y se borra al cerrarla, o antes con «🗑️ Limpiar».'),
     ('«Lo que aún no sé»', 'auditavision.bot.sinRespuesta', 'Las preguntas que el Auditor no supo contestar, hasta 50. Solo las ves tú; si quieres, las copias y nos las mandas.'),
-    ('Tu código de acceso', 'av-pase', 'Solo si canjeas un código de la versión de prueba: un número al azar que identifica a este navegador y hasta cuándo abre. En la base queda que ese número canjeó un código, y cuándo; nada que diga quién eres.'),
+    ('Tu código de acceso', 'av-pase', 'Solo si canjeas un código de la versión de prueba: un número al azar que identifica a este navegador y hasta cuándo abre. En la base queda que ese número canjeó un código, cuándo, y los días en que abrió la plataforma (solo la fecha); nada que diga quién eres.'),
     ('Las columnas que sigues', 'av-sigo', 'Cuáles casos de Verificamos sigues y qué versión viste, para avisarte cuando cambian.'),
     ('Ágora cívica', 'auditavision_foro_debates y otras', 'Tus hilos, tus apoyos y el seudónimo que elijas. No se publican: viven solo en tu navegador.'),
     ('Preferencias de las herramientas', 'av-am-reloj, crReloj y otras', 'Cómo dejaste un reloj, una unidad o un filtro.'),
@@ -1483,7 +1492,10 @@ AVISO = {
                     '<ul>\n%s\n</ul>') % '\n'.join('<li><b>%s</b> (<code>%s</code>): %s</li>' % x for x in _AV_NAVEGADOR)},
         {'id': 'codigos', 'titulo': 'Si pides o canjeas un código de acceso', 'texto': 'La versión de prueba, por invitación (29-10-2026).', 'tarjetas': [],
          'bloque': ('<p><b>Al canjear un código</b> no te pedimos nada tuyo: en la base de datos queda que un código se canjeó, cuándo, y un número '
-                    'al azar que identifica a tu navegador (<code>av-pase</code>). Sirve para saber hasta cuándo tienes acceso.</p>\n'
+                    'al azar que identifica a tu navegador (<code>av-pase</code>). Sirve para saber hasta cuándo tienes acceso. '
+                    'También anotamos <b>la fecha de cada día en que abres la plataforma</b> (solo el día: ni la hora ni las páginas), para que la '
+                    'administración sepa cuánto se usa cada código; esas fechas se borran solas a los 12 meses. Si tu código te llegó porque lo '
+                    'pediste con tu correo, la administración ve ese uso junto a tu solicitud.</p>\n'
                     '<p><b>Al pedir un código</b> («¿No tienes código? Obtén uno») guardamos tu correo y, si los escribes, tu nombre y a qué te dedicas, '
                     'además de una huella cifrada de tu conexión (no tu dirección IP) para frenar el spam. <b>Para qué:</b> solo para mandarte tu código '
                     'y, si lo pides otra vez, saber que ya lo tenías. No lo usamos para publicidad ni lo compartimos. <b>Cuánto tiempo:</b> la solicitud '
@@ -1610,13 +1622,13 @@ PILARES = {
     'titulo': 'Nuestros pilares',
     'lema': 'El periodista virtual del gasto público',
     'estilos': ['pilares.css'],
-    'entrada': ('Auditavisión existe para seguir el dinero público y contarlo con documentos. Estos son los diez pilares que sostienen '
+    'entrada': ('Auditavisión existe para seguir el dinero público y contarlo con documentos. Estos son los once pilares que sostienen '
                 'cada página, cada respuesta del Auditor Virtual y cada dictamen. Ejercer el periodismo en México tiene riesgos que el '
                 'propio Estado reconoce: por eso existe, desde 2012, una ley para proteger a periodistas y a personas defensoras de '
                 'derechos humanos (<a href="%s" target="_blank" rel="noopener">Ley para la Protección de Personas Defensoras de Derechos '
                 'Humanos y Periodistas, DOF 25-06-2012 ↗</a>) %s.' % (LEY_PERIODISTAS, '<span class="est-chip est-oficial">oficial</span>')),
     'secciones': [
-        {'id': 'pilares', 'titulo': 'Los diez pilares', 'texto': 'Lo que hacemos, y lo que nunca hacemos, con el dinero público y con la verdad.',
+        {'id': 'pilares', 'titulo': 'Los once pilares', 'texto': 'Lo que hacemos, y lo que nunca hacemos, con el dinero público y con la verdad.',
          'tarjetas': [],
          'bloque': '<ol class="pil-lista">\n%s\n        </ol>' % '\n'.join(
              '          <li><span class="pil-ico" aria-hidden="true">%s</span><div><h3>%s</h3><p>%s</p></div></li>' % x for x in PILARES_LISTA)},
@@ -1921,9 +1933,12 @@ CANAL_COMUNIDAD = ''
 # llenarlas, AVISO_CONSERVACION debe decir cuánto tiempo se guardan los envíos:
 # el aviso de privacidad cambia ANTES de recabar el primer dato, o la
 # generación se detiene.
-FUNCIONES = ''
+FUNCIONES = 'https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1'
 TURNSTILE_SITIO = ''
-AVISO_CONSERVACION = ''
+# Decisión del autor, 30-10-2026: 12 meses (la migración 20261030000005 lo cumple).
+AVISO_CONSERVACION = ('Lo que envías se guarda <b>12 meses</b> desde que llega y luego se borra solo. Una fe de erratas que '
+                      'publicamos se queda a la vista, pero sin tu correo. Para pedir que lo borremos antes, escríbenos '
+                      'desde el mismo correo.')
 
 if FUNCIONES:
     # Con el envío encendido, el aviso dice qué se guarda (tabla envios de la

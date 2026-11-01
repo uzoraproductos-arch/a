@@ -1814,11 +1814,14 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "biblioteca:ref-shcp-cp2024-tren-maya"
+    "biblioteca:ref-shcp-cp2024-tren-maya",
+    "cotejo:lfd-2027-dnr-defensa-tren-maya-aifa:6",
+    "fuente:lfd-2027-dnr-defensa-tren-maya-aifa"
    ],
-   "consultado": "2026-10-29",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+   "consultado": "2026-11-01",
+   "estado": "sin copia",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)",
+   "motivo": "El portal de la Cuenta Pública no abre desde la sesión en la nube (certificado). Las cifras del estado de actividades 2024 del Tren Maya (H0M) se extrajeron antes del archivo con huella SHA-256 ff42c55b106103118c03282bb47e8576307ad7d5d4bc2e64260a54477f651e4c, registrada en simulador_megaobras.operacion_oficial.fuentes.ef_h0m de audit-database.js."
   },
   "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/7HZI.02.01.xls": {
    "primera_vez": "2026-10-27",
@@ -2998,6 +3001,17 @@
    "tipo": "text/html",
    "http": 200,
    "copiado": "2026-10-27"
+  },
+  "https://www.gob.mx/presidencia/prensa/gobierno-de-mexico-invertira-14-mil-500-mdp-para-garantizar-agua-en-guadalajara-sin-deuda-ni-privatizacion-presidenta-claudia-sheinbaum": {
+   "primera_vez": "2026-11-01",
+   "historial": [],
+   "estado": "sin copia",
+   "motivo": "gob.mx no abre desde la sesión en la nube. Se cotejó solo el título del comunicado de Presidencia del 28-10-2026, visto por el buscador («Gobierno de México invertirá 14 mil 500 mdp para garantizar agua en Guadalajara sin deuda ni privatización»); el desglose quedó pendiente.",
+   "consultado": "2026-11-01",
+   "usos": [
+    "cotejo:agua-guadalajara-14500-federal:0",
+    "fuente:agua-guadalajara-14500-federal"
+   ]
   },
   "https://www.gob.mx/presidencia/prensa/presidenta-claudia-sheinbaum-informa-investigaciones-abiertas-contra-garcia-luna-en-uif-y-fgr": {
    "primera_vez": "2026-10-27",

@@ -127,7 +127,7 @@
   }
 
   /* ---------- El motor: encontrar, empatar y juzgar (verificador.js) ---------- */
-  var V = window.AuditorVerifica(D), analiza = V.analiza, conjunto = V.conjunto, relevancia = V.relevancia;
+  var V = window.AuditorVerifica(D), analiza = V.analiza, conjunto = V.conjunto, relevancia = V.relevancia, ciegos = V.ciegos;
 
   /* ---------- El sello de Auditavisión (como los estados de cuenta) ---------- */
   var LOGO = 'assets/auditor/img/logo-auditavision.svg';
@@ -288,8 +288,23 @@
       q.map(function (e) { return '<li><a href="' + esc(e.h) + '"><small>' + esc(e.s) + '</small><span>' + esc(e.n) + ' <span aria-hidden="true">→</span></span></a></li>'; }).join('') +
       '</ul></section>';
   }
+  /* Los puntos ciegos (puntos_ciegos.py): dónde suele esconderse algo y qué
+     preguntar. No entran al veredicto ni a la huella: no califican. */
+  function ciegosHtml(pc) {
+    if (!pc.length) return '';
+    return '<section class="in-ciegos" aria-labelledby="inCiegosTit"><h3 class="in-sub" id="inCiegosTit">🔦 Puntos ciegos: lo que conviene preguntar (' + pc.length + ')</h3>' +
+      '<p class="in-txt">No son errores ni cuentan en el veredicto: son lugares donde una nota sobre el dinero público suele esconder algo. ' +
+      'Los encontramos por las palabras, así que pueden fallar. <a href="noticias-verifica.html#puntos-ciegos">Los doce puntos ciegos</a>.</p><ul class="in-ciegos-l">' +
+      pc.map(function (x) {
+        var de = x.r.de[0];
+        return '<li><p class="in-ciego-n"><span aria-hidden="true">' + esc(x.r.ico) + '</span> <b>' + esc(x.r.n) + '</b></p>' +
+          '<p class="in-hall-or">' + esc(x.antes) + '<mark>' + esc(x.frase) + '</mark>' + esc(x.despues) + '</p>' +
+          '<p class="in-txt">' + esc(x.r.ex) + '</p><p class="in-txt"><b>Qué preguntar:</b> ' + esc(x.r.pr) + '</p>' +
+          (de ? '<p class="in-ciego-de">Así lo vimos: <a href="' + esc(de.h) + '">' + esc(de.t) + '</a></p>' : '') + '</li>';
+      }).join('') + '</ul></section>';
+  }
   function pinta(n) {
-    var ext = analiza(n), r = conjunto(ext), rel = relevancia(n), cont = $('inVeredicto');
+    var ext = analiza(n), pc = ciegos(n), r = conjunto(ext), rel = relevancia(n), cont = $('inVeredicto');
     var contr = ext.cifras.filter(function (c) { return c.v && c.v.tipo !== 'gris' && !c.dolar && c.sel; });
     var sin = ext.cifras.filter(function (c) { return !c.dolar && (!c.sel || (c.v && c.v.tipo === 'gris')); });
     var dol = ext.cifras.filter(function (c) { return c.dolar; });
@@ -347,7 +362,7 @@
           '. Cada una que coincide vale 1; la que se acerca, ½; la que no coincide, 0. El resultado es el promedio sobre 100 ' + chip('derivado') + '.</p>' : '') +
       '</div>' +
       (just ? '<h3 class="in-sub">Por qué, cifra por cifra</h3><ol class="in-justs" id="inJusts">' + just + '</ol>' : '') +
-      sinHtml + dolHtml + temas + quienesHtml(n, tema) + dictamenPie() + '</article>' +
+      ciegosHtml(pc) + sinHtml + dolHtml + temas + quienesHtml(n, tema) + dictamenPie() + '</article>' +
       '<div class="in-acciones">' +
         '<button type="button" class="in-boton" id="inCopiar"><span aria-hidden="true">📋</span> Copiar el veredicto</button>' +
         '<button type="button" class="in-boton in-sec" id="inOtra"><span aria-hidden="true">↺</span> Verificar otra nota</button>' +
@@ -378,6 +393,8 @@
         c.v.tit + ', ' + pctTx(c.v.pct) + '. Fuente: ' + (o.f || '') + (o.u ? ' ' + o.u : ''));
     });
     if (r.sin && r.n) L.push('Cifras sin contrastar (sin documento en el catálogo): ' + r.sin);
+    var pc = ciegos(n);
+    if (pc.length) L.push('Puntos ciegos (preguntas, no veredicto): ' + pc.map(function (x) { return x.r.n + ' («' + x.frase + '»)'; }).join('; '));
     if (firmado.folio) L.push('Folio ' + firmado.folio + ' · huella SHA-256 ' + firmado.huella + ' · versión ' + selloSitio());
     L.push(LEYENDA);
     L.push('Verifícala tú: ' + (n.liga && n.origen === 'liga' ? location.origin + location.pathname + '?liga=' + encodeURIComponent(n.liga) : location.origin + location.pathname));

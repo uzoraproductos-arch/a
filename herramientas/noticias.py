@@ -34,13 +34,14 @@ PARTES = [
      'afirmación; la Columna del Erario, nuestra opinión parada en documentos, y las réplicas y posturas de quienes aludimos.',
      ('portada', 'al-momento', 'columnas', 'replica')),
     (VERIFICA, '⚖️', 'Verifica una noticia', 'Del rumor al documento',
-     'Pega la liga o el texto de lo que viste y lo ponemos junto al documento oficial. Aquí también están los titulares que estamos jalando '
+     'Pega la liga o el texto de lo que viste y lo ponemos junto al documento oficial. Aquí también están la hemeroteca (las notas de los medios que ya cotejamos), los titulares que estamos jalando '
      '(rotulados «sin verificar»), nuestro método de siete pasos y la puerta para proponernos una nota.',
-     ('verifica', 'mesa', 'metodo')),
+     ('verifica', 'puntos-ciegos', 'hemeroteca', 'mesa', 'metodo')),
     (SEGUIMIENTO, '🔔', 'Seguimiento: el caso no se olvida', 'Qué documento falta para cerrar cada caso, y cuándo debe llegar',
-     'Los casos abiertos, con el documento que falta para cerrarlos; los que tú sigues, con su aviso de novedades, y la agenda del erario: '
+     'Los casos abiertos, con el documento que falta para cerrarlos; los que tú sigues, con su aviso de novedades; la memoria de promesas, '
+     'y la agenda del erario: '
      'las fechas en que la ley obliga a publicar el dinero público.',
-     ('seguir', 'agenda')),
+     ('seguir', 'promesas', 'agenda')),
 ]
 # Las anclas viejas del diario de una sola página (noticias-relevantes.html#…),
 # a la página donde viven ahora. «col-*» son las columnas.
@@ -75,9 +76,25 @@ SECCIONES = [
      'Quien es aludido puede responder, y lo que la parte aludida dijo en su propio documento se publica en sus palabras.'),
     ('seguir', '🔔', 'Casos abiertos', 'Casos abiertos: lo que falta para cerrarlos',
      'Cada caso abierto dice qué documento falta para cerrarlo. Síguelo y te avisamos cuando llegue, o pídele al Auditor que siga uno nuevo.'),
+    # El detector de puntos ciegos (pedido del autor, 01-11-2026): lo que las
+    # notas suelen esconder, en reglas que el verificador y el chat aplican solos.
+    ('puntos-ciegos', '🔦', 'Puntos ciegos', 'Puntos ciegos: lo que una nota suele esconder',
+     'Trece preguntas que conviene hacerle a cualquier nota sobre el dinero público antes de creerle. El verificador y el Auditor las '
+     'buscan solos en lo que pegues.'),
+    # La hemeroteca (pedido del autor, 31-10-2026: «seguimiento como Animal
+    # Político, La Jornada… vincular toda la información que gira sobre
+    # finanzas públicas»): las notas de prensa que ya cotejamos, por medio.
+    ('hemeroteca', '🗂️', 'Hemeroteca', 'Hemeroteca: las notas que ya cotejamos',
+     'Lo que publicaron los medios sobre el dinero público y que ya pusimos junto al documento oficial: Animal Político, La Jornada, '
+     'El Financiero y los demás, cada titular con su liga y con la nota donde lo cotejamos. Solo guardamos el titular, el medio y la fecha, '
+     '<b>sin verificar</b>: lo que consta está en nuestro cotejo, no en el titular.'),
     ('mesa', '📡', 'Mesa de redacción', 'Mesa de redacción: lo que estamos jalando',
      'Titulares sobre finanzas públicas que juntamos de los buscadores de noticias para alimentar nuestra base. Llegan <b>sin verificar</b>: '
      'son la materia prima, no la noticia. Cualquiera la puedes mandar al verificador.'),
+    # La memoria de promesas (pedido del autor, 01-11-2026): cada cifra que anuncia
+    # un gobierno, seguida por Presupuesto, Cuenta Pública y ASF (promesas.py).
+    ('promesas', '📣', 'Promesas', 'Memoria de promesas: lo que se anunció y lo que llegó',
+     'Cada cifra que anuncia un gobierno, con su fecha y su documento, seguida hasta el Presupuesto, la Cuenta Pública y la Auditoría Superior.'),
     ('agenda', '🗓️', 'Agenda', 'Agenda del erario: lo que viene',
      'Las fechas que la ley fija para el dinero público: cuándo llega el Paquete Económico, cuándo se aprueba, cuándo informa Hacienda y cuándo entrega la Auditoría Superior.'),
     ('metodo', '🧭', 'Cómo trabajamos', 'Cómo trabajamos: del rumor al documento',
@@ -184,6 +201,8 @@ def _metodo():
 
 def construir(base, ref, archivo=DIARIO):
     import insp_nota
+    import promesas
+    import puntos_ciegos
     parte = next(p for p in PARTES if p[0] == archivo)
     mias = [x for x in SECCIONES if x[0] in parte[5]]
     nav = '\n'.join(['    <a href="#%s"><span aria-hidden="true">%s</span> %s</a>' % (i, ico, n) for i, ico, n, _t, _e in mias] +
@@ -215,11 +234,15 @@ def construir(base, ref, archivo=DIARIO):
                    'esperas (un informe de la ASF, una votación, una sentencia, la Cuenta Pública). Si lo podemos sostener con documentos, abre su caso aquí.</p>\n'
                    '  <p class="nt-acciones"><a class="nt-btn" href="comunidad-tema.html" data-puerta="tema">🔔 Pedir un seguimiento</a></p>\n'
                    '</div>'),
+        'hemeroteca': '<div id="noticiasHemeroteca" class="nt-hem"><noscript><p>La hemeroteca necesita JavaScript.</p></noscript></div>',
         'mesa': ('<div id="noticiasMesa" class="nt-mesa"><noscript><p>La mesa de redacción necesita JavaScript.</p></noscript></div>'),
         'agenda': ('<div id="noticiasAgenda" class="nt-agenda"><noscript><p>La agenda necesita JavaScript.</p></noscript></div>\n'
                    '<p class="nt-pie">Son los plazos máximos que fija la ley: el documento puede llegar antes. Cuando la fecha cae en día inhábil '
                    'o la ley prevé una prórroga, puede moverse. Los «días que faltan» son nuestra cuenta ' + insp_nota_chip('derivado') + '.</p>'),
         'metodo': _metodo(),
+        'puntos-ciegos': puntos_ciegos.seccion(lambda t: __import__('html').escape(str(t or ''), quote=False)),
+        'promesas': promesas.seccion(lambda t: __import__('html').escape(str(t or ''), quote=False),
+                                     lambda e, p=None: '<span class="est-chip est-%s"%s>%s</span>' % (e, (' data-pend="%s"' % p) if p else '', e)),
     }
     clases = {'columnas': ' nt-sec-opinion', 'verifica': ' nt-sec-verifica', 'portada': ' nt-sec-portada'}
     partes = [_sec(i, ico, t, e, cuerpos[i], clases.get(i, '')) for i, ico, _n, t, e in mias]
@@ -236,3 +259,87 @@ def construir(base, ref, archivo=DIARIO):
 
 def insp_nota_chip(estado):
     return '<span class="est-chip est-%s">%s</span>' % (estado, estado)
+
+
+# Cada nota «Al momento» con su página propia (pedido del autor, 31-10-2026:
+# «que el usuario, al momento de llevar a cabo una búsqueda en Google, nos
+# encuentre»). El diario las pinta con JavaScript, y un buscador necesita el
+# texto en la página: aquí va escrita, con su NewsArticle (schema.org) y su
+# dirección estable, que entra sola a sitemap.xml. Es la misma nota de
+# columnas.js (la escribe integrar_al_momento.py): no se redacta otra vez.
+AL_MOMENTO = 'noticias-al-momento-%s.html'
+RES_TX = {'consta': ('✅', 'Consta'), 'matiz': ('⚠️', 'Consta, con matices'), 'no consta': ('❌', 'Sin documento oficial'),
+          'pendiente': ('⏳', 'Pendiente')}
+
+
+def _iso(f):
+    d, m, a = f.split('-')
+    return '%s-%s-%s' % (a, m, d)
+
+
+def _nota_html(c, sitio):
+    import html as h
+    e = lambda t: h.escape(str(t or ''), quote=True)
+    liga = lambda u, t, rel='noopener noreferrer': '<a href="%s" target="_blank" rel="%s">%s ↗</a>' % (e(u), rel, e(t))
+    partes = ['<article class="nt-nota-propia">']
+    partes += ['<p%s>%s</p>' % (' class="col-capitular"' if k == 0 else '', e(p)) for k, p in enumerate(c.get('cuerpo', []))]
+    if c.get('nota'):
+        n = c['nota']
+        partes.append('<p class="col-nota">📰 <b>De dónde salió:</b> %s · %s. Es el punto de partida: lo cotejamos contra el documento oficial.</p>'
+                      % (liga(n['url'], '%s, «%s»' % (n['medio'], n['titulo'])), e(n['fecha'])))
+    if c.get('cotejo'):
+        partes.append('<h2 class="nt-sub" id="cotejo">🔍 Cotejo, afirmación por afirmación</h2><ol class="nt-cotejo">')
+        for k, x in enumerate(c['cotejo'], 1):
+            ico, tx = RES_TX[x['res']]
+            chip = (' class="est-chip est-pendiente" data-pend="red-%s-%d"' % (e(c['id']), k)) if x['res'] == 'pendiente' else ''
+            partes.append('<li><p class="col-dice">«%s»</p><p><span%s>%s %s</span> %s</p><small>%s</small></li>'
+                          % (e(x['dice']), chip, ico, tx, e(x['explica']), liga(x['url'], x['fuente']) if x.get('url') else e(x['fuente'])))
+        partes.append('</ol>')
+    if c.get('medios'):
+        partes.append('<h2 class="nt-sub" id="medios">🗞️ Cómo lo contaron otros medios</h2>'
+                      '<p>Titulares tal como los publicaron, <b>sin verificar</b>: son el punto de partida, no la fuente.</p><ul class="nt-medios">')
+        partes += ['<li><b>%s</b>%s: %s</li>' % (e(m['medio']), (' · ' + e(m['fecha'])) if m.get('fecha') else '',
+                                                 liga(m['url'], m['titulo'], 'noopener noreferrer nofollow')) for m in c['medios']]
+        partes.append('</ul>')
+    if c.get('sigue'):
+        partes.append('<h2 class="nt-sub" id="sigue">🗓️ Lo que sigue</h2><ul>')
+        partes += ['<li>%s</li>' % liga(x['url'], x['que']) for x in c['sigue']]
+        partes.append('</ul>')
+    partes.append('<h2 class="nt-sub" id="fuentes">📎 Documentos que la sostienen</h2><ol>')
+    partes += ['<li>%s</li>' % liga(f['url'], f['nombre']) for f in c.get('fuentes', [])]
+    partes.append('</ol><p class="col-act">Verificado al %s.</p>' % e(c.get('actualizado', c.get('fecha'))))
+    partes.append('<p class="nt-acciones"><a class="nt-btn" href="%s#col-%s">🧮 La nota completa, con la cuenta, nuestros datos y el glosario</a> '
+                  '<a class="nt-btn nt-btn-sec" href="herramienta-inspector-pregunta.html?modo=periodista&amp;q=%s">💬 Pregúntale al Auditor</a></p>'
+                  % (DIARIO, e(c['id']), e(c['titulo'][:120])))
+    partes.append('<p class="col-replica-pie">¿Esta nota te alude con un dato inexacto o falso? <a href="derecho-de-replica.html">Ejerce tu derecho de réplica</a>: se publica gratis, íntegra y sin comentarios.</p>')
+    partes.append('</article>')
+    url = sitio + AL_MOMENTO % c['id']
+    ld = {'@context': 'https://schema.org', '@type': 'NewsArticle', 'headline': c['titulo'][:110], 'description': c['balazo'],
+          'datePublished': _iso(c['fecha']), 'dateModified': _iso(c.get('actualizado', c['fecha'])), 'inLanguage': 'es-MX',
+          'mainEntityOfPage': url, 'url': url,
+          'author': {'@type': 'Organization', 'name': 'Redacción Auditavisión', 'url': sitio},
+          'publisher': {'@type': 'Organization', 'name': 'Auditavisión', 'url': sitio},
+          'isBasedOn': [x['url'] for x in ([c['nota']] if c.get('nota') else []) + c.get('medios', [])],
+          'citation': [f['url'] for f in c.get('fuentes', []) if f['url'].startswith('http')]}
+    partes.append('<script type="application/ld+json">%s</script>' % json.dumps(ld, ensure_ascii=False).replace('</', '<\\/'))
+    return '\n'.join(partes)
+
+
+def paginas_al_momento():
+    import asistente_personajes
+    from apartados import SITIO
+    cols, _ = asistente_personajes.columnas()
+    out = []
+    for c in cols:
+        if c['seccion'] != 'Al momento':
+            continue
+        out.append({
+            'archivo': AL_MOMENTO % c['id'], 'menu': c['titulo'], 'menu_archivo': ARCHIVO,
+            'padre': (DIARIO, 'Auditavisión Noticias'),
+            'icono': c.get('icono', '⏱️'), 'titulo': c['titulo'], 'lema': 'Al momento · %s · Redacción Auditavisión' % c['fecha'],
+            'entrada': c['balazo'],
+            'estilos': ['columnas.css'] + ESTILOS,
+            'secciones': [{'id': 'nota', 'titulo': c['titulo'], 'texto': '', 'sin_cab': True, 'tarjetas': [],
+                           'bloque': _nota_html(c, SITIO)}],
+        })
+    return out

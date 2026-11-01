@@ -20,13 +20,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261029y">
-  <script src="assets/auditor/js/iconos.js?v=20261029y"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261029y"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261029y" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261029y">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261029y">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261029y">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261101x">
+  <script src="assets/auditor/js/iconos.js?v=20261101x"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261101x"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261101x" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261101x">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261101x">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261101x">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -84,8 +84,8 @@
       <details class="pt-ruta" name="pt-ruta" data-ruta="reporta">
         <summary><span class="pt-ico" aria-hidden="true">🏗️</span><span class="pt-sum"><b>Algo raro con el dinero público</b><span>Una obra que no cuadra, un contrato o una compra sospechosa, un programa social usado en campaña, un cobro indebido.</span></span></summary>
         <div class="pt-ruta-cuerpo">
-        <form class="sv-form cm-form" id="ptReporte" data-canal="" data-asunto="Reporte ciudadano" novalidate>
-          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+        <form class="sv-form cm-form" id="ptReporte" data-canal="" data-asunto="Reporte ciudadano" data-funcion="https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1/recibir-formulario" data-tipo="reporte" novalidate>
+          <p class="sv-privado">🔒 Primero ves el texto tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar». Puedes firmar con seudónimo; el correo es opcional, solo sirve para responderte y se guarda únicamente si aceptas el <a href="aviso-de-privacidad.html">aviso de privacidad</a>.</p>
           <p class="sv-privado pt-aviso">⚠️ No escribas datos bancarios, documentos de identidad ni información de terceros que pueda ponerlos en riesgo.</p>
             <div class="sv-campo"><label for="ptRepQue">Qué fue <span class="sv-req">obligatorio</span></label><select id="ptRepQue" required><option value="">Elige una opción</option><option>Una obra que no cuadra</option><option>Un contrato o una compra sospechosa</option><option>Uso electoral de un programa social</option><option>Un cobro o trámite indebido</option><option>Una duda sobre gasto o presupuesto</option></select></div>
             <div class="sv-campo"><label for="ptRepDonde">Dónde <span class="sv-req">obligatorio</span></label><input id="ptRepDonde" type="text" maxlength="200" required><small>Entidad, municipio, colonia y una referencia física. Una dirección vale más que un adjetivo.</small></div>
@@ -95,6 +95,7 @@
             <div class="sv-campo"><label for="ptRepPrueba">Con qué prueba</label><input id="ptRepPrueba" type="text" maxlength="300"><small>Una foto con fecha, un número de contrato, una factura, un acta de entrega.</small></div>
             <div class="sv-campo"><label for="ptRepFirma">Firma o seudónimo</label><input id="ptRepFirma" type="text" maxlength="80"></div>
             <div class="sv-campo"><label for="ptRepCorreo">Correo (opcional)</label><input id="ptRepCorreo" type="email" maxlength="160"></div>
+            <label class="sv-check"><input type="checkbox" id="ptRepAcepta" data-acepta> Acepto el <a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi correo</label>
           <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi reporte</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
           <p class="sv-error cm-error" role="alert" hidden></p>
         </form>
@@ -105,14 +106,15 @@
       <details class="pt-ruta" name="pt-ruta" data-ruta="error">
         <summary><span class="pt-ico" aria-hidden="true">✏️</span><span class="pt-sum"><b>Un dato mal en esta plataforma</b><span>Una cifra que no coincide con su documento oficial. Si tienes razón, se corrige y entra a la fe de erratas.</span></span></summary>
         <div class="pt-ruta-cuerpo">
-        <form class="sv-form cm-form" id="ptError" data-canal="" data-asunto="Señalamiento de error" novalidate>
-          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+        <form class="sv-form cm-form" id="ptError" data-canal="" data-asunto="Señalamiento de error" data-funcion="https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1/recibir-formulario" data-tipo="errata" novalidate>
+          <p class="sv-privado">🔒 Primero ves el texto tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar». Puedes firmar con seudónimo; el correo es opcional, solo sirve para responderte y se guarda únicamente si aceptas el <a href="aviso-de-privacidad.html">aviso de privacidad</a>.</p>
             <div class="sv-campo"><label for="ptErrPagina">Página <span class="sv-req">obligatorio</span></label><input id="ptErrPagina" class="cm-pagina" type="text" maxlength="200" required><small>Si abriste esto desde una página, ya está escrita.</small></div>
             <div class="sv-campo"><label for="ptErrDato">Qué dato está mal <span class="sv-req">obligatorio</span></label><textarea id="ptErrDato" rows="2" maxlength="800" required></textarea></div>
             <div class="sv-campo"><label for="ptErrDice">Qué dice el documento oficial <span class="sv-req">obligatorio</span></label><textarea id="ptErrDice" rows="2" maxlength="800" required></textarea></div>
             <div class="sv-campo"><label for="ptErrFuente">Enlace al documento <span class="sv-req">obligatorio</span></label><input id="ptErrFuente" type="url" maxlength="400" required placeholder="https://"><small>Sin documento no podemos corregir: es la misma regla que seguimos nosotros.</small></div>
             <div class="sv-campo"><label for="ptErrFirma">Firma o seudónimo</label><input id="ptErrFirma" type="text" maxlength="80"></div>
             <div class="sv-campo"><label for="ptErrCorreo">Correo (opcional)</label><input id="ptErrCorreo" type="email" maxlength="160"></div>
+            <label class="sv-check"><input type="checkbox" id="ptErrAcepta" data-acepta> Acepto el <a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi correo</label>
           <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi señalamiento</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
           <p class="sv-error cm-error" role="alert" hidden></p>
         </form>
@@ -122,14 +124,15 @@
       <details class="pt-ruta" name="pt-ruta" data-ruta="tema">
         <summary><span class="pt-ico" aria-hidden="true">💡</span><span class="pt-sum"><b>Un tema que deberíamos investigar</b><span>Lo que te gustaría que revisáramos, con los documentos que conozcas.</span></span></summary>
         <div class="pt-ruta-cuerpo">
-        <form class="sv-form cm-form" id="ptTema" data-canal="" data-asunto="Propuesta de tema" novalidate>
-          <p class="sv-privado">🔒 Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador. Puedes firmar con seudónimo; el correo es opcional y solo sirve para responderte.</p>
+        <form class="sv-form cm-form" id="ptTema" data-canal="" data-asunto="Propuesta de tema" data-funcion="https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1/recibir-formulario" data-tipo="tema" novalidate>
+          <p class="sv-privado">🔒 Primero ves el texto tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar». Puedes firmar con seudónimo; el correo es opcional, solo sirve para responderte y se guarda únicamente si aceptas el <a href="aviso-de-privacidad.html">aviso de privacidad</a>.</p>
             <div class="sv-campo"><label for="ptTemaQue">Tema <span class="sv-req">obligatorio</span></label><input id="ptTemaQue" type="text" maxlength="160" required><small>Por ejemplo: las compras de un hospital, una obra de tu municipio, un fideicomiso.</small></div>
             <div class="sv-campo"><label for="ptTemaPor">Por qué importa <span class="sv-req">obligatorio</span></label><textarea id="ptTemaPor" rows="3" maxlength="1200" required></textarea></div>
             <div class="sv-campo"><label for="ptTemaDonde">Entidad o municipio</label><input id="ptTemaDonde" type="text" maxlength="120"></div>
             <div class="sv-campo"><label for="ptTemaDocs">Documentos oficiales que conozcas</label><textarea id="ptTemaDocs" rows="2" maxlength="800"></textarea><small>Ligas a la Auditoría Superior, Compranet, el DOF o Transparencia. Si no tienes, no pasa nada.</small></div>
             <div class="sv-campo"><label for="ptTemaFirma">Firma o seudónimo</label><input id="ptTemaFirma" type="text" maxlength="80"></div>
             <div class="sv-campo"><label for="ptTemaCorreo">Correo (opcional)</label><input id="ptTemaCorreo" type="email" maxlength="160"></div>
+            <label class="sv-check"><input type="checkbox" id="ptTemaAcepta" data-acepta> Acepto el <a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi correo</label>
           <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi propuesta</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
           <p class="sv-error cm-error" role="alert" hidden></p>
         </form>
@@ -196,6 +199,7 @@
           <a href="#tema-elecciones">Elecciones</a>
           <a href="#tema-salud">Salud</a>
           <a href="#tema-medio-ambiente">Medio ambiente</a>
+          <a href="#tema-memoria-de-promesas">Memoria de promesas</a>
           <a href="#tema-libertad-de-expresion">Libertad de expresión</a>
           <a href="#tema-lo-que-circula-en-redes">Lo que circula en redes</a>
       </nav>
@@ -204,9 +208,9 @@
         <h2 class="sr-only" id="resumen-tit">Lo que falta, en números</h2>
         <div class="apartado-bloque">
         <div class="pe-resumen">
-          <div><b>91</b><span>pendientes registrados</span></div>
-          <div class="pe-r-d"><b>64</b><span>🏛️ los debe publicar una dependencia</span></div>
-          <div class="pe-r-p"><b>24</b><span>🧰 los debemos integrar nosotros</span></div>
+          <div><b>125</b><span>pendientes registrados</span></div>
+          <div class="pe-r-d"><b>95</b><span>🏛️ los debe publicar una dependencia</span></div>
+          <div class="pe-r-p"><b>27</b><span>🧰 los debemos integrar nosotros</span></div>
           <div class="pe-r-h"><b>3</b><span>📜 son históricos, sin quien responda hoy</span></div>
         </div>
         <p class="pe-regla">Un dato pendiente no se estima ni se rellena: se dice que falta, por qué falta y dónde debería estar. Si la falta es de una dependencia obligada, la nombramos. Si el documento existe y aún no lo integramos, lo decimos: la falta es nuestra. ¿Tienes el documento? <a href="comunidad-error.html" data-puerta="error">Cuéntanos y lo integramos</a>.</p>
@@ -559,6 +563,34 @@
             <p class="pe-donde"><a href="https://www.inegi.org.mx/programas/cnije/2025/" target="_blank" rel="noopener">🔗 Dónde debería estar: Censo Nacional de Impartición de Justicia Estatal 2025 (INEGI) ↗</a></p>
             <p class="pe-aparece">Aparece en: <a href="herramienta-inspector-pregunta.html">Pregúntale al Auditor</a> · <a href="datos-judicial-gestion.html">Datos · Poder Judicial · Lo que cuesta y lo que resuelve</a> · <a class="pe-ancla" href="#judicial-rezago-civil" aria-label="Enlace a este pendiente">#</a></p>
           </article>
+          <article class="pe-item pe-plataforma" id="judicial-electos-por-organo">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Cómo resuelven las personas juzgadoras electas en 2025 frente a las que siguieron en el cargo, órgano por órgano</h3>
+            <p class="pe-porque"><b>Por qué:</b> Los Anexos Estadísticos de la DGEJ dan el movimiento nacional y por tipo de órgano, y el año 2025 partido al 30 de junio, así que sí se ve el antes y el después del conjunto. Los indicadores órgano por órgano (2021 a 2025) ya están en la plataforma, en las páginas «órgano por órgano» de cada circuito. Para separar a las personas electas de las que siguieron falta cruzarlos con la lista de personas electas y el órgano al que quedó adscrita cada una (INE y Órgano de Administración Judicial), y la DGEJ no parte 2025 en antes y después de su llegada. Ese cruce la plataforma aún no lo hace. Una comparación justa además debe ser del mismo órgano y la misma materia, porque cada persona electa heredó el rezago de su juzgado.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.dgej.cjf.gob.mx/paginas/informacionRelevante.htm?pageName=informacion%2FanexoEstadisticoWeb.htm" target="_blank" rel="noopener">🔗 Dónde debería estar: Anexos Estadísticos de la DGEJ (tabulados por órgano) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-inspector-pregunta.html">Pregúntale al Auditor</a> · <a href="datos-judicial-reforma.html">Datos · Poder Judicial · Antes y después de la reforma</a> · <a class="pe-ancla" href="#judicial-electos-por-organo" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="scjn-estadistica-nueva-corte">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Cuántos asuntos resuelve la nueva Suprema Corte y cuánto tarda, comparado con la Corte anterior</h3>
+            <p class="pe-porque"><b>Por qué:</b> Desde el 1 de septiembre de 2025 la Corte resuelve todo en Pleno, sin las dos Salas. Su estadística y sus comunicados con cifras de productividad viven en sitios de la Corte que la plataforma todavía no pudo consultar, y una comparación «por sesión» del Pleno nuevo contra el Pleno anterior deja fuera lo que resolvían las Salas: hay que comparar el total de asuntos resueltos por la Corte entera, con el mismo tipo de asunto y periodo.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.scjn.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: Suprema Corte de Justicia de la Nación ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-inspector-pregunta.html">Pregúntale al Auditor</a> · <a href="datos-judicial-reforma.html">Datos · Poder Judicial · Antes y después de la reforma</a> · <a class="pe-ancla" href="#scjn-estadistica-nueva-corte" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="judicial-indicadores-vacios">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Plantilla, perfil, acceso tecnológico e incidencia de los juzgados y tribunales federales, circuito por circuito</h3>
+            <p class="pe-porque"><b>Por qué:</b> El sistema de Indicadores Estadísticos Judiciales anuncia, para cada tipo de órgano, cuántas juezas, jueces y magistraturas hay, su edad, nivel de estudios y antigüedad, cuánto personal de apoyo tienen, sus computadoras y conexión, y de qué materia, delito o acto reclamado son sus asuntos. De 2021 a 2025 todos esos cuadros salen vacíos, por circuito y en el total nacional (en los juzgados de distrito, también en 2008, 2011, 2015 y 2018 a 2020). Falta de transparencia del Órgano de Administración Judicial, que administra la estadística desde el 1 de septiembre de 2025 (antes, del Consejo de la Judicatura Federal).</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Órgano de Administración Judicial (Dirección General de Estadística Judicial)</p>
+            <p class="pe-donde"><a href="https://www.dgej.cjf.gob.mx/Indicadores/acuerd_nal_ini.asp" target="_blank" rel="noopener">🔗 Dónde debería estar: Indicadores Estadísticos Judiciales de la DGEJ ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-inspector-pregunta.html">Pregúntale al Auditor</a> · <a href="datos-judicial-circuitos-distrito.html">Datos · Poder Judicial · Juzgados de distrito por circuito</a> · <a href="datos-judicial-circuitos-colegiados.html">Datos · Poder Judicial · Tribunales colegiados por circuito</a> · <a href="datos-judicial-circuitos-apelacion.html">Datos · Poder Judicial · Tribunales de apelación por circuito</a> · <a class="pe-ancla" href="#judicial-indicadores-vacios" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="judicial-apelacion-tiempos">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Cuánto tardan los tribunales colegiados de apelación, circuito por circuito</h3>
+            <p class="pe-porque"><b>Por qué:</b> El sistema de Indicadores Estadísticos Judiciales tiene el indicador de duración (del ingreso a la sentencia) para los tribunales colegiados de apelación, pero de 2023 a 2025 sale vacío; de los tribunales unitarios, que se transformaron en ellos, sí lo publicó hasta 2023. Falta de transparencia del Órgano de Administración Judicial, que administra la estadística desde el 1 de septiembre de 2025.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Órgano de Administración Judicial (Dirección General de Estadística Judicial)</p>
+            <p class="pe-donde"><a href="https://www.dgej.cjf.gob.mx/Indicadores/acuerd_nal_ini.asp" target="_blank" rel="noopener">🔗 Dónde debería estar: Indicadores Estadísticos Judiciales de la DGEJ ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-inspector-pregunta.html">Pregúntale al Auditor</a> · <a href="datos-judicial-circuitos-apelacion.html">Datos · Poder Judicial · Tribunales de apelación por circuito</a> · <a class="pe-ancla" href="#judicial-apelacion-tiempos" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
         </div>
         </div>
       </section>
@@ -890,6 +922,38 @@
         </div>
       </section>
 
+      <section class="apartado-seccion" id="tema-memoria-de-promesas" aria-labelledby="tema-memoria-de-promesas-tit">
+        <div class="apartado-seccion-cab">
+          <h2 class="apartado-seccion-titulo" id="tema-memoria-de-promesas-tit"><span class="sr-only"></span>Memoria de promesas</h2>
+          <p class="apartado-seccion-texto"></p>
+        </div>
+        <div class="apartado-bloque">
+        <div class="pe-lista">
+          <article class="pe-item pe-dependencia" id="promesa-agua-guadalajara-pef">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Si los 14,500 millones federales para el agua de Guadalajara aparecen en el Presupuesto 2027</h3>
+            <p class="pe-porque"><b>Por qué:</b> Todavía no toca: la Cámara de Diputados aprueba el Presupuesto 2027 a más tardar el 15 de noviembre de 2026 (Constitución, art. 74, fr. IV). Según la prensa, la Presidenta dijo que el dinero no vendrá etiquetado; si no aparece en el ramo de la Conagua con su programa, Hacienda y la Conagua tendrán que decir de dónde sale.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Cámara de Diputados (aprobación) y Secretaría de Hacienda (publicación en el DOF)</p>
+            <p class="pe-donde"><a href="https://www.ppef.hacienda.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: Proyecto de Presupuesto 2027 (Hacienda) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-seguimiento.html#promesas">Noticias · Memoria de promesas</a> · <a class="pe-ancla" href="#promesa-agua-guadalajara-pef" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="promesa-agua-guadalajara-ejercido">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Lo que de verdad se gaste en las obras de agua de Guadalajara y lo que revise la Auditoría</h3>
+            <p class="pe-porque"><b>Por qué:</b> Todavía no toca: lo gastado en 2027 sale en la Cuenta Pública 2027, a más tardar el 30 de abril de 2028 (Constitución, art. 74, fr. VI), y la Auditoría Superior la revisa en 2028 y 2029 (LFRCF, art. 35).</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Secretaría de Hacienda (Cuenta Pública) y Comisión Nacional del Agua (ejecución)</p>
+            <p class="pe-donde"><a href="https://www.cuentapublica.hacienda.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: Cuenta Pública (Hacienda) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-seguimiento.html#promesas">Noticias · Memoria de promesas</a> · <a class="pe-ancla" href="#promesa-agua-guadalajara-ejercido" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="promesa-dos-bocas-pef">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Lo que cada Presupuesto de 2019 a 2024 le asignó a la Refinería Olmeca</h3>
+            <p class="pe-porque"><b>Por qué:</b> Los presupuestos de cada año son públicos; la plataforma todavía no integra la partida de la refinería.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.transparenciapresupuestaria.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: Transparencia Presupuestaria (Hacienda) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-seguimiento.html#promesas">Noticias · Memoria de promesas</a> · <a class="pe-ancla" href="#promesa-dos-bocas-pef" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+        </div>
+        </div>
+      </section>
+
       <section class="apartado-seccion" id="tema-libertad-de-expresion" aria-labelledby="tema-libertad-de-expresion-tit">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="tema-libertad-de-expresion-tit"><span class="sr-only"></span>Libertad de expresión</h2>
@@ -915,6 +979,195 @@
         </div>
         <div class="apartado-bloque">
         <div class="pe-lista">
+          <article class="pe-item pe-dependencia" id="red-huawei-gobierno-codigo-magenta-2">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Ejecutivos chinos de alto nivel de Huawei tendrían total acceso para digitalizar los sistemas más sensibles</h3>
+            <p class="pe-porque"><b>Por qué:</b> Lo dice en condicional, y se apoya en audios que el medio atribuye a un ejecutivo comercial de Huawei: lo que dice de sus clientes no es un documento. No conocemos una autenticación de los audios, y eso no los vuelve falsos: falta ver los contratos de esos años.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026, no el histórico de CompraNet de 2019 a 2024 ni los contratos marco; esos portales no abren desde nuestra sesión.</p>
+            <p class="pe-donde"><a href="https://comprasmx.buengobierno.gob.mx/datos-abiertos" target="_blank" rel="noopener">🔗 Dónde debería estar: Código Magenta, «Operación Huawei: Grabaciones secretas» ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-huawei-gobierno-codigo-magenta">Noticias relevantes · ¿Huawei «digitaliza» al gobierno con acceso total al IMSS, al SAT y a Aduanas? En los contratos federales de 2025 y 2026, Huawei no aparece como proveedor</a> · <a class="pe-ancla" href="#red-huawei-gobierno-codigo-magenta-2" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-huawei-gobierno-codigo-magenta-3">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Desde IMSS, SAT, ISSSTE, Aduanas y hasta aeropuertos</h3>
+            <p class="pe-porque"><b>Por qué:</b> En 2025 y 2026 ninguna de esas dependencias le contrató directamente a Huawei. Lo que el ejecutivo dice de años anteriores, o de compras por medio de otras empresas, se vería en el histórico de CompraNet y en los contratos marco, que no integramos todavía. En 2025 y 2026 solo el Hospital Juárez de México compró equipo de la marca, a otras empresas.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026, no el histórico de CompraNet de 2019 a 2024 ni los contratos marco; esos portales no abren desde nuestra sesión.</p>
+            <p class="pe-donde"><a href="https://upcp-compranet.hacienda.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: ComprasMX, Datos Abiertos 2025 y 2026, en la base de la plataforma ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-huawei-gobierno-codigo-magenta">Noticias relevantes · ¿Huawei «digitaliza» al gobierno con acceso total al IMSS, al SAT y a Aduanas? En los contratos federales de 2025 y 2026, Huawei no aparece como proveedor</a> · <a class="pe-ancla" href="#red-huawei-gobierno-codigo-magenta-3" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-huawei-gobierno-codigo-magenta-4">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Estados Unidos ya calificó a Huawei como una amenaza para la seguridad nacional</h3>
+            <p class="pe-porque"><b>Por qué:</b> Varias fuentes reportan que la Comisión Federal de Comunicaciones de EE. UU. designó a Huawei como amenaza en junio de 2020 y la puso en su lista de equipo cubierto en 2021. Es un documento oficial de otro gobierno, y su portal no abre desde la plataforma: lo dejamos pendiente hasta leerlo.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: el portal de la FCC no abre desde nuestra sesión.</p>
+            <p class="pe-donde"><a href="https://www.fcc.gov/supplychain/coveredlist" target="_blank" rel="noopener">🔗 Dónde debería estar: FCC, Covered List ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-huawei-gobierno-codigo-magenta">Noticias relevantes · ¿Huawei «digitaliza» al gobierno con acceso total al IMSS, al SAT y a Aduanas? En los contratos federales de 2025 y 2026, Huawei no aparece como proveedor</a> · <a class="pe-ancla" href="#red-huawei-gobierno-codigo-magenta-4" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-agua-guadalajara-14500-federal-2">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> 9,300 millones para el acueducto Chapala–Guadalajara y 5,200 para Calderón–San Gaspar</h3>
+            <p class="pe-porque"><b>Por qué:</b> Los dos suman los 14,500, pero el desglose lo dio la prensa; el texto del comunicado no abre. El acueducto, según la iniciativa del Gobierno de Jalisco, cuesta $11,922 millones.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: el comunicado de Presidencia y la versión estenográfica del 28 de octubre están en gob.mx, que no abre desde nuestra sesión; solo pudimos ver su título.</p>
+            <p class="pe-donde"><a href="https://www.gob.mx/presidencia/prensa/gobierno-de-mexico-invertira-14-mil-500-mdp-para-garantizar-agua-en-guadalajara-sin-deuda-ni-privatizacion-presidenta-claudia-sheinbaum" target="_blank" rel="noopener">🔗 Dónde debería estar: Presidencia, comunicado del 28-10-2026 ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-agua-guadalajara-14500-federal">Noticias relevantes · El agua de Guadalajara: la Federación anuncia 14,500 millones «sin deuda», pero el dinero todavía no aparece en el Presupuesto 2027</a> · <a class="pe-ancla" href="#red-agua-guadalajara-14500-federal-2" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-agua-guadalajara-14500-federal-3">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Para consolidar obras hidráulicas</h3>
+            <p class="pe-porque"><b>Por qué:</b> Las obras empezarían en 2027 y las grandes terminarían a finales de 2028, según la prensa. Las fechas y el expediente de cada obra los debe publicar la Conagua, que las ejecutaría.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> La Conagua, que ejecutaría las obras, no ha publicado su expediente ni su calendario.</p>
+            <p class="pe-donde"><a href="https://www.gob.mx/conagua" target="_blank" rel="noopener">🔗 Dónde debería estar: Comisión Nacional del Agua ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-agua-guadalajara-14500-federal">Noticias relevantes · El agua de Guadalajara: la Federación anuncia 14,500 millones «sin deuda», pero el dinero todavía no aparece en el Presupuesto 2027</a> · <a class="pe-ancla" href="#red-agua-guadalajara-14500-federal-3" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-agua-guadalajara-14500-federal-5">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Para garantizar agua potable de calidad</h3>
+            <p class="pe-porque"><b>Por qué:</b> Salud Jalisco no ha publicado los resultados de laboratorio del agua de la zona metropolitana.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Salud Jalisco: no ha publicado los resultados de laboratorio del agua.</p>
+            <p class="pe-donde"><a href="https://ssj.jalisco.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: Crisis ambientales: el agua de Guadalajara ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-agua-guadalajara-14500-federal">Noticias relevantes · El agua de Guadalajara: la Federación anuncia 14,500 millones «sin deuda», pero el dinero todavía no aparece en el Presupuesto 2027</a> · <a class="pe-ancla" href="#red-agua-guadalajara-14500-federal-5" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-servidores-ia-exportaciones-contenido-nacional-1">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> En el primer semestre de 2026 exportamos 82,900 millones de dólares en servidores</h3>
+            <p class="pe-porque"><b>Por qué:</b> La cifra es de S&P Global Market Intelligence, una consultora privada, según la prensa. La oficial es la balanza comercial del INEGI por producto, que no pudimos abrir.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: el INEGI publica la balanza comercial por producto y el valor agregado de exportación por rama; su portal no abre desde nuestra sesión.</p>
+            <p class="pe-donde"><a href="https://www.inegi.org.mx/temas/balanza/" target="_blank" rel="noopener">🔗 Dónde debería estar: INEGI, Balanza comercial de mercancías de México ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-servidores-ia-exportaciones-contenido-nacional">Noticias relevantes · ¿México ya exporta más servidores que autos? Lo dice una consultora privada, no el INEGI, y el «3 a 7 % mexicano» no tiene documento</a> · <a class="pe-ancla" href="#red-servidores-ia-exportaciones-contenido-nacional-1" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-servidores-ia-exportaciones-contenido-nacional-2">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Superando autos (74,800 millones de dólares)</h3>
+            <p class="pe-porque"><b>Por qué:</b> Según la prensa, los 74,800 son autos y autopartes juntos, y la comparación es de un semestre: la consultora dice que podrían superarlos en el año completo. Sin la balanza del INEGI no lo podemos confirmar.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: el INEGI publica la balanza comercial por producto y el valor agregado de exportación por rama; su portal no abre desde nuestra sesión.</p>
+            <p class="pe-donde"><a href="https://www.inegi.org.mx/temas/balanza/" target="_blank" rel="noopener">🔗 Dónde debería estar: INEGI, Balanza comercial de mercancías de México ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-servidores-ia-exportaciones-contenido-nacional">Noticias relevantes · ¿México ya exporta más servidores que autos? Lo dice una consultora privada, no el INEGI, y el «3 a 7 % mexicano» no tiene documento</a> · <a class="pe-ancla" href="#red-servidores-ia-exportaciones-contenido-nacional-2" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-servidores-ia-exportaciones-contenido-nacional-3">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> De cada 100 dólares del servidor solo 3 a 7 son mexicanos, contra 39 % del automotriz</h3>
+            <p class="pe-porque"><b>Por qué:</b> Es una estimación publicada por la prensa, sin documento oficial. La medida del INEGI, el valor agregado de exportación de la manufactura global, ubicaría el contenido nacional de computadoras y periféricos en 21 % en 2024, según otra nota: es otra medida, de otro año y de toda la rama.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: el INEGI publica la balanza comercial por producto y el valor agregado de exportación por rama; su portal no abre desde nuestra sesión.</p>
+            <p class="pe-donde"><a href="https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibval/VAEMG2024_CP.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: INEGI, Valor agregado de exportación de la manufactura global 2024 ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-servidores-ia-exportaciones-contenido-nacional">Noticias relevantes · ¿México ya exporta más servidores que autos? Lo dice una consultora privada, no el INEGI, y el «3 a 7 % mexicano» no tiene documento</a> · <a class="pe-ancla" href="#red-servidores-ia-exportaciones-contenido-nacional-3" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-servidores-ia-exportaciones-contenido-nacional-4">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> 93.9 % va a un solo cliente: Estados Unidos</h3>
+            <p class="pe-porque"><b>Por qué:</b> También es de S&P Global, según la prensa. El destino de las exportaciones por producto lo publica el INEGI.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: el INEGI publica la balanza comercial por producto y el valor agregado de exportación por rama; su portal no abre desde nuestra sesión.</p>
+            <p class="pe-donde"><a href="https://www.inegi.org.mx/temas/balanza/" target="_blank" rel="noopener">🔗 Dónde debería estar: INEGI, Balanza comercial de mercancías de México ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-servidores-ia-exportaciones-contenido-nacional">Noticias relevantes · ¿México ya exporta más servidores que autos? Lo dice una consultora privada, no el INEGI, y el «3 a 7 % mexicano» no tiene documento</a> · <a class="pe-ancla" href="#red-servidores-ia-exportaciones-contenido-nacional-4" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-servidores-ia-exportaciones-contenido-nacional-5">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Los 82,500 millones de dólares que vienen para data centers en México a 2031</h3>
+            <p class="pe-porque"><b>Por qué:</b> Es la proyección de la Asociación Mexicana de Data Centers para 2026 a 2031 (directa más indirecta), no una inversión comprometida ni un dato oficial. Lo comprometido se sabría por los anuncios registrados ante la Secretaría de Economía y por la inversión extranjera directa que reporta.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Ni la Secretaría de Economía ni otra dependencia publica una cifra oficial de inversión en centros de datos: la única proyección es la de un gremio privado.</p>
+            <p class="pe-donde"><a href="https://www.gob.mx/se" target="_blank" rel="noopener">🔗 Dónde debería estar: Secretaría de Economía, Inversión extranjera directa ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-servidores-ia-exportaciones-contenido-nacional">Noticias relevantes · ¿México ya exporta más servidores que autos? Lo dice una consultora privada, no el INEGI, y el «3 a 7 % mexicano» no tiene documento</a> · <a class="pe-ancla" href="#red-servidores-ia-exportaciones-contenido-nacional-5" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-pemex-3t-2026-perdida-neta-1">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Pemex reportó una pérdida neta de 10 mil 792 millones de pesos en el tercer trimestre</h3>
+            <p class="pe-porque"><b>Por qué:</b> Casi todos los medios dan 10,795 millones (EFE, Expansión) y solo uno 10,792. Manda el reporte de Pemex a la Bolsa, que no pudimos abrir.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: Pemex publica sus resultados trimestrales en su portal de relación con inversionistas y los entrega a la Bolsa Mexicana de Valores; ninguno de los dos abre desde nuestra sesión.</p>
+            <p class="pe-donde"><a href="https://www.bmv.com.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: Pemex, Reporte de resultados al 30 de septiembre de 2026 ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-pemex-3t-2026-perdida-neta">Noticias relevantes · Pemex vuelve a perder en el tercer trimestre: ¿10,792 o 10,795 millones?, y lo que esa pérdida no cuenta</a> · <a class="pe-ancla" href="#red-pemex-3t-2026-perdida-neta-1" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-pemex-3t-2026-perdida-neta-2">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> (605 millones de dólares)</h3>
+            <p class="pe-porque"><b>Por qué:</b> Es una conversión: 605 millones de dólares equivalen a unos 17.8 pesos por dólar. Otro medio convirtió a 596.9 millones. El tipo de cambio que usó Pemex vendrá en su reporte.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: Pemex publica sus resultados trimestrales en su portal de relación con inversionistas y los entrega a la Bolsa Mexicana de Valores; ninguno de los dos abre desde nuestra sesión.</p>
+            <p class="pe-donde"><a href="https://www.bmv.com.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: Pemex, Reporte de resultados al 30 de septiembre de 2026 ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-pemex-3t-2026-perdida-neta">Noticias relevantes · Pemex vuelve a perder en el tercer trimestre: ¿10,792 o 10,795 millones?, y lo que esa pérdida no cuenta</a> · <a class="pe-ancla" href="#red-pemex-3t-2026-perdida-neta-2" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-pemex-3t-2026-perdida-neta-3">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Un 82.4 % menos que los 61 mil 247 millones del mismo periodo del año pasado</h3>
+            <p class="pe-porque"><b>Por qué:</b> La resta cuadra con las dos versiones de la prensa (10,792 contra 61,247, o 10,795 contra 61,242: 82.4 % menos en las dos), pero las dos cifras de partida siguen sin documento abierto.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: Pemex publica sus resultados trimestrales en su portal de relación con inversionistas y los entrega a la Bolsa Mexicana de Valores; ninguno de los dos abre desde nuestra sesión.</p>
+            <p class="pe-donde"><a href="https://www.bmv.com.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: Pemex, reportes de resultados del tercer trimestre de 2025 y de 2026 ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-pemex-3t-2026-perdida-neta">Noticias relevantes · Pemex vuelve a perder en el tercer trimestre: ¿10,792 o 10,795 millones?, y lo que esa pérdida no cuenta</a> · <a class="pe-ancla" href="#red-pemex-3t-2026-perdida-neta-3" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-pemex-3t-2026-perdida-neta-4">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Se debió a un incremento en ventas y disminución en deterioro de activos</h3>
+            <p class="pe-porque"><b>Por qué:</b> La prensa reporta ingresos 28.5 % más altos y una pérdida cambiaria de 16,391 millones. El deterioro de activos es un registro contable: si baja, la pérdida se achica aunque no entre más dinero. El desglose está en el reporte.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: Pemex publica sus resultados trimestrales en su portal de relación con inversionistas y los entrega a la Bolsa Mexicana de Valores; ninguno de los dos abre desde nuestra sesión.</p>
+            <p class="pe-donde"><a href="https://www.bmv.com.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: Pemex, Reporte de resultados al 30 de septiembre de 2026 ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-pemex-3t-2026-perdida-neta">Noticias relevantes · Pemex vuelve a perder en el tercer trimestre: ¿10,792 o 10,795 millones?, y lo que esa pérdida no cuenta</a> · <a class="pe-ancla" href="#red-pemex-3t-2026-perdida-neta-4" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-lfd-2027-dnr-defensa-tren-maya-aifa-2">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> En solo dos horas</h3>
+            <p class="pe-porque"><b>Por qué:</b> La prensa lo dice de la sesión de la Comisión de Hacienda del 12 de octubre. La duración consta en su versión estenográfica, que no pudimos abrir. Y no fue la única votación: después votaron el pleno y el Senado.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: el dictamen de la Ley Federal de Derechos 2027 y su reserva están en la Gaceta Parlamentaria, que no abre desde nuestra sesión.</p>
+            <p class="pe-donde"><a href="https://gaceta.diputados.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: Latinus (12-10-2026), punto de partida, no fuente ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-lfd-2027-dnr-defensa-tren-maya-aifa">Noticias relevantes · ¿18 mil millones «en subsidios» para el Tren Maya y el AIFA? Es el cobro a los turistas extranjeros, y el 57 % es la parte de la Defensa, no un aumento</a> · <a class="pe-ancla" href="#red-lfd-2027-dnr-defensa-tren-maya-aifa-2" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-lfd-2027-dnr-defensa-tren-maya-aifa-3">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Más de 18 mil millones de pesos</h3>
+            <p class="pe-porque"><b>Por qué:</b> Es un cálculo de prensa sobre lo que se recaudaría con este derecho. Ningún documento que pudimos abrir dice cuánto se espera juntar en 2027, ni si los 18 mil millones son todo lo de la Defensa o solo lo adicional.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: el dictamen de la Ley Federal de Derechos 2027 y su reserva están en la Gaceta Parlamentaria, que no abre desde nuestra sesión.</p>
+            <p class="pe-donde"><a href="https://gaceta.diputados.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: Iniciativa de reforma a la Ley Federal de Derechos 2027 (Gaceta Parlamentaria 7121, Anexo D) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-lfd-2027-dnr-defensa-tren-maya-aifa">Noticias relevantes · ¿18 mil millones «en subsidios» para el Tren Maya y el AIFA? Es el cobro a los turistas extranjeros, y el 57 % es la parte de la Defensa, no un aumento</a> · <a class="pe-ancla" href="#red-lfd-2027-dnr-defensa-tren-maya-aifa-3" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-asf-nuevo-leon-triangulacion-cp2025-1">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> La ASF denuncia 7 mil 200 millones de pesos</h3>
+            <p class="pe-porque"><b>Por qué:</b> Varios medios coinciden en que la ASF presentó una denuncia ante la Fiscalía por una presunta triangulación de esa cantidad. El informe individual que lo sostiene es de la segunda entrega de la Cuenta Pública 2025 y todavía no lo integramos.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: la ASF entregó a la Cámara de Diputados su segunda entrega de la Cuenta Pública 2025 (la ley la fija el último día hábil de octubre: el 30-10-2026), pero su portal no abre desde nuestro servidor y aún no integramos su Matriz de Datos Básicos.</p>
+            <p class="pe-donde"><a href="https://informe.asf.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: ASF, informe individual de la Cuenta Pública 2025 (Nuevo León) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-asf-nuevo-leon-triangulacion-cp2025">Noticias relevantes · La ASF denuncia una presunta triangulación de 7 mil 200 millones en Nuevo León: lo que dice, lo que falta y por qué «desvió» todavía no es un hecho</a> · <a class="pe-ancla" href="#red-asf-nuevo-leon-triangulacion-cp2025-1" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-asf-nuevo-leon-triangulacion-cp2025-3">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Transfirió 5 mil 851 millones de pesos a una constructora</h3>
+            <p class="pe-porque"><b>Por qué:</b> Lo dicen todos los medios que lo citan; el detalle de las transferencias está en el informe de la ASF, que no podemos abrir.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: la ASF entregó a la Cámara de Diputados su segunda entrega de la Cuenta Pública 2025 (la ley la fija el último día hábil de octubre: el 30-10-2026), pero su portal no abre desde nuestro servidor y aún no integramos su Matriz de Datos Básicos.</p>
+            <p class="pe-donde"><a href="https://informe.asf.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: ASF, informe individual de la Cuenta Pública 2025 (Nuevo León) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-asf-nuevo-leon-triangulacion-cp2025">Noticias relevantes · La ASF denuncia una presunta triangulación de 7 mil 200 millones en Nuevo León: lo que dice, lo que falta y por qué «desvió» todavía no es un hecho</a> · <a class="pe-ancla" href="#red-asf-nuevo-leon-triangulacion-cp2025-3" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-asf-nuevo-leon-triangulacion-cp2025-5">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Reporte de cuenta pública 2025 incluye investigación contra Rubén Rocha</h3>
+            <p class="pe-porque"><b>Por qué:</b> Según la prensa, la misma revisión encontró operaciones ligadas al gobierno de Sinaloa. No sabemos si la ASF lo presenta como investigación contra el gobernador o sobre recursos de su gobierno: eso lo dice el informe.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: la ASF entregó a la Cámara de Diputados su segunda entrega de la Cuenta Pública 2025 (la ley la fija el último día hábil de octubre: el 30-10-2026), pero su portal no abre desde nuestro servidor y aún no integramos su Matriz de Datos Básicos.</p>
+            <p class="pe-donde"><a href="https://informe.asf.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: ASF, informes individuales de la Cuenta Pública 2025 (Sinaloa) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-asf-nuevo-leon-triangulacion-cp2025">Noticias relevantes · La ASF denuncia una presunta triangulación de 7 mil 200 millones en Nuevo León: lo que dice, lo que falta y por qué «desvió» todavía no es un hecho</a> · <a class="pe-ancla" href="#red-asf-nuevo-leon-triangulacion-cp2025-5" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-carnaval-ensenada-2026-imcudhe-1">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> El gasto de más de 22 millones de pesos en el Carnaval</h3>
+            <p class="pe-porque"><b>Por qué:</b> Lo informó el IMCUDHE ante el Cabildo, según la prensa, que da dos cifras: 22.7 y 22.3 millones. Ninguna incluye a los artistas estelares, pagados por un patrocinador.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: las cifras se dieron en la glosa del IMCUDHE ante el Cabildo; su desglose debe estar en la información financiera del Instituto y del Ayuntamiento (Ley General de Contabilidad Gubernamental), que no abre desde nuestro servidor.</p>
+            <p class="pe-donde"><a href="https://www.ensenada.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: IMCUDHE, información financiera del Carnaval 2026 ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-carnaval-ensenada-2026-imcudhe">Noticias relevantes · El Carnaval de Ensenada costó más de 22 millones y recuperó 1.2: lo que se dijo ante el Cabildo y lo que falta publicar</a> · <a class="pe-ancla" href="#red-carnaval-ensenada-2026-imcudhe-1" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-carnaval-ensenada-2026-imcudhe-3">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Un Carnaval de seis días</h3>
+            <p class="pe-porque"><b>Por qué:</b> Las fechas del programa oficial del Carnaval 2026 no abren desde nuestro servidor.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: el portal del Ayuntamiento de Ensenada no abre desde nuestro servidor.</p>
+            <p class="pe-donde"><a href="https://www.ensenada.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: Ayuntamiento de Ensenada, programa del Carnaval 2026 ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-carnaval-ensenada-2026-imcudhe">Noticias relevantes · El Carnaval de Ensenada costó más de 22 millones y recuperó 1.2: lo que se dijo ante el Cabildo y lo que falta publicar</a> · <a class="pe-ancla" href="#red-carnaval-ensenada-2026-imcudhe-3" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-portacelis-permiso-diesel-sener-2">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Para importar 52 millones de litros de diésel</h3>
+            <p class="pe-porque"><b>Por qué:</b> Es la cifra que MCCI atribuye al permiso. Sin el permiso a la vista no la podemos confirmar ni negar.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: MCCI dice tener copia del permiso de la Secretaría de Energía; ni esa copia ni el registro de permisos de la Sener abren desde nuestro servidor.</p>
+            <p class="pe-donde"><a href="https://www.gob.mx/sener" target="_blank" rel="noopener">🔗 Dónde debería estar: Secretaría de Energía, permiso previo de importación de petrolíferos ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-portacelis-permiso-diesel-sener">Noticias relevantes · Portacelis y el permiso para importar 52 millones de litros de diésel: lo que dice MCCI, lo que consta y lo que es puro adjetivo</a> · <a class="pe-ancla" href="#red-portacelis-permiso-diesel-sener-2" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-portacelis-permiso-diesel-sener-5">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Presunto diésel contrabandeado</h3>
+            <p class="pe-porque"><b>Por qué:</b> La prensa reporta una declaratoria de perjuicio del SAT ante la FGR por litros no declarados (80, 83 o 90 millones, según el medio). Una denuncia no es una condena. La carpeta es reservada por ley, así que nadie está obligado a publicarla todavía: el dato público llegará con una acusación formal o una sentencia.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Nadie está obligado a publicarlo aún: las carpetas de investigación son reservadas (CNPP, art. 218). Lo hará público la FGR si presenta una acusación formal.</p>
+            <p class="pe-donde"><a href="https://www.gob.mx/fgr" target="_blank" rel="noopener">🔗 Dónde debería estar: Código Nacional de Procedimientos Penales, art. 218 (reserva de la investigación) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-portacelis-permiso-diesel-sener">Noticias relevantes · Portacelis y el permiso para importar 52 millones de litros de diésel: lo que dice MCCI, lo que consta y lo que es puro adjetivo</a> · <a class="pe-ancla" href="#red-portacelis-permiso-diesel-sener-5" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-asf-segunda-entrega-cp2025-1">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> La ASF reportó más de 9 mil mdp pendientes de aclarar</h3>
+            <p class="pe-porque"><b>Por qué:</b> Varios medios lo publicaron el 30 y 31 de octubre, pero con cifras distintas (9,008 o 9,600 millones). La cifra oficial está en la Matriz de Datos Básicos de la segunda entrega, que aún no integramos.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: la ASF entregó a la Cámara de Diputados su segunda entrega de la Cuenta Pública 2025 (la ley la fija el último día hábil de octubre: el 30-10-2026), pero su portal no abre desde nuestro servidor y aún no integramos su Matriz de Datos Básicos.</p>
+            <p class="pe-donde"><a href="https://informe.asf.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: ASF, Informe del Resultado de la Cuenta Pública 2025, segunda entrega ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-asf-segunda-entrega-cp2025">Noticias relevantes · La ASF y los 9 mil millones «por aclarar» de 2025: lo que se sabe, lo que falta y lo que nadie te explica</a> · <a class="pe-ancla" href="#red-asf-segunda-entrega-cp2025-1" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-asf-segunda-entrega-cp2025-2">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> 5 mil 200 mdp corresponden a 42 municipios que no acreditaron el destino del gasto</h3>
+            <p class="pe-porque"><b>Por qué:</b> Lo reportan varios medios (uno precisa 5,243 millones). Dos matices que sí podemos dar: «no acreditaron» significa que al corte no presentaron documentación, y todavía tienen plazo para hacerlo; y 42 municipios son el 1.7 % de los 2,479 del país (derivado: 42 ÷ 2,479 × 100).</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: la ASF entregó a la Cámara de Diputados su segunda entrega de la Cuenta Pública 2025 (la ley la fija el último día hábil de octubre: el 30-10-2026), pero su portal no abre desde nuestro servidor y aún no integramos su Matriz de Datos Básicos.</p>
+            <p class="pe-donde"><a href="https://informe.asf.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: LFRCF, arts. 39 y 41; INEGI, padrón municipal en la base de la plataforma ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-asf-segunda-entrega-cp2025">Noticias relevantes · La ASF y los 9 mil millones «por aclarar» de 2025: lo que se sabe, lo que falta y lo que nadie te explica</a> · <a class="pe-ancla" href="#red-asf-segunda-entrega-cp2025-2" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-dependencia" id="red-asf-segunda-entrega-cp2025-3">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Hay 40 denuncias por obras no hechas y equipo extraviado</h3>
+            <p class="pe-porque"><b>Por qué:</b> Según la prensa, son las denuncias que la ASF presentó en seis meses ante la Fiscalía Anticorrupción, más tres penales: no todas salieron de este informe. Las obras no hechas y el equipo extraviado son ejemplos que dio el auditor. El estado oficial de las denuncias va en el informe semestral de la ASF (LFRCF, art. 38).</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: la ASF debe publicar su informe semestral a más tardar el 1-11-2026 (LFRCF, art. 38) y todavía no lo integramos.</p>
+            <p class="pe-donde"><a href="https://informe.asf.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: ASF, informe semestral sobre la solventación de observaciones y acciones ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-asf-segunda-entrega-cp2025">Noticias relevantes · La ASF y los 9 mil millones «por aclarar» de 2025: lo que se sabe, lo que falta y lo que nadie te explica</a> · <a class="pe-ancla" href="#red-asf-segunda-entrega-cp2025-3" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
           <article class="pe-item pe-dependencia" id="red-jalisco-gasto-federal-pef-2027-3">
             <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> La inversión pública cayó un 83 % en los últimos años</h3>
             <p class="pe-porque"><b>Por qué:</b> Es un cálculo del PRI Jalisco que la prensa atribuye a comparar promedios de años distintos. No encontramos el documento del cálculo, y la serie oficial de inversión federal por estado de cada año está en la Cuenta Pública, que la plataforma todavía no integra por entidad.</p>
@@ -1067,11 +1320,11 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261029y</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261101x</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261029y"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261029y"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261101x"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261101x"></script>
 </body>
 </html>

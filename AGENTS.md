@@ -79,7 +79,7 @@ el documento oficial (§2) y entra a su página de Auditavisión y al bot
 ### 0 ter. Los pilares: el periodista virtual del gasto público
 
 **Decisión del autor, 26-10-2026.** Auditavisión es el periodista virtual que
-sigue el gasto público. Sus diez pilares están dichos al lector en
+sigue el gasto público. Sus once pilares están dichos al lector en
 `pilares.html` (`PILARES_LISTA` de `herramientas/apartados.py`) y valen para
 todo cambio: que la verdad sea incómoda no la vuelve falsa; evidencia con
 folio; contrapeso, no propaganda (las mismas reglas para todos los gobiernos);
@@ -88,6 +88,37 @@ fuente de cifras; lo que falta se señala con nombre; que se entienda de un
 vistazo; el ambiente también es gasto público; y el caso no se olvida (cada
 columna de Verificamos trae «Lo que sigue» y se puede seguir: al cambiar su
 `actualizado`, quien la sigue ve el aviso). Un pilar nuevo se agrega ahí.
+
+**Competimos siendo el mejor auditor, no el más rápido** (decisión del autor,
+01-11-2026: «podríamos ser considerados competidores de todos estos medios
+informativos, pero debemos ser los mejores, y eso consiste en armar una buena
+base de datos»). Es el segundo pilar. Los medios dan la noticia; Auditavisión
+la coteja, la cruza con su base y no la olvida. Lo «privilegiado» es lo que ya
+es público pero está enterrado en documentos que casi nadie cruza: **nunca una
+filtración, un dato personal ni un rumor**. Se construye en entregas:
+
+1. **El detector de puntos ciegos** (hecho, 01-11-2026): lo que las notas
+   suelen esconder, en reglas (`REGLAS` de `herramientas/puntos_ciegos.py`)
+   que el verificador de notas y el chat («¿es cierto que…?») aplican solos
+   (`ciegos()` de `verificador.js`). Se explican al lector en
+   `noticias-verifica.html#puntos-ciegos`. **Un punto ciego no califica la
+   nota ni entra al veredicto**: es una pregunta que conviene hacer, y se
+   encuentra por las palabras. Cada regla nace de una nota «Al momento» y la
+   cita en `de`; **cuando una nota nueva enseñe un punto ciego nuevo, se
+   agrega su regla y su caso en `prueba_puntos_ciegos.py`** (corre en
+   `revision.py`). Las expresiones valen igual en Python y en JavaScript: sin
+   lookbehind ni grupos con nombre.
+2. **La memoria de promesas** (hecha, 01-11-2026): cada cifra que anuncia un
+   gobierno, con su fecha, seguida por promesa → Presupuesto → Cuenta Pública
+   → ASF, para ver cuándo cambia o nunca llega (`PROMESAS` de
+   `herramientas/promesas.py`; se lee en `noticias-seguimiento.html#promesas` y
+   el chat la contesta con `D.prom`). **Ninguna cifra se escribe ahí**: se lee
+   del módulo que ya la coteja, y si cambia allá la generación se detiene. Una
+   promesa es «oficial» porque consta que se dijo, no porque se gastó; una
+   etapa sin documento es «pendiente» con su ficha (`pendientes()`), y la que
+   todavía no toca dice su fecha legal. **Una nota «Al momento» que anuncie
+   una cifra de gasto agrega su promesa ahí**, con su pregunta de prueba.
+3. **Abrir la red** (del autor): los portales de `docs/RED-PENDIENTE.md`.
 
 ---
 
@@ -204,7 +235,7 @@ respuesta correcta en este proyecto.
 **Bloque 4 del plan v2, 27-10-2026.** Cotejado contra la Ley Reglamentaria del
 artículo 6o. constitucional en materia del Derecho de Réplica (DOF 04-11-2015,
 última reforma DOF 14-11-2025). Lo explica al lector `derecho-de-replica.html`
-(`REPLICA` de `herramientas/apartados.py`), y es el décimo pilar.
+(`REPLICA` de `herramientas/apartados.py`), y es el undécimo pilar.
 
 - **La nota de prensa es punto de partida, no fuente.** Se cita a la persona
   que la firma y a su medio, con enlace; cada afirmación se coteja contra el
@@ -328,6 +359,9 @@ Un cambio **no está hecho** hasta que las siete líneas se cumplen:
    donde deben. Un dato nuevo del bot lleva su pregunta ahí, y si un cambio
    mueve una respuesta a propósito, su renglón se corrige en el mismo commit.
 
+El detector de puntos ciegos tiene su prueba (`prueba_puntos_ciegos.py`, sin
+navegador), que `revision.py` corre junto con el inventario.
+
 Las siete se corren de una vez con
 `python3 herramientas/revision.py --base origin/claude/funny-turing-imtm54`,
 y GitHub las corre solas en cada envío (`.github/workflows/revision.yml`). El
@@ -411,6 +445,15 @@ mudando a su página; no se agregan desgloses nuevos.
   **rotuladas «sin verificar»; nunca se copia ni se resume lo que dice la
   red**. Las cifras que la plataforma ya tiene se leen de su módulo, no se
   copian. El chat la encuentra sola, y «noticias de hoy» lista las más nuevas.
+  **Hemeroteca y buscadores** (pedido del autor, 31-10-2026): una nota puede
+  traer `medios` (cómo lo contaron otros medios: medio, titular, fecha y liga,
+  sin verificar, nunca el texto); se juntan en `noticias-verifica.html#hemeroteca`
+  y el chat reconoce esas ligas. Cada nota tiene su página
+  `noticias-al-momento-<id>.html`, escrita en el HTML con su NewsArticle, para
+  que Google la encuentre (`paginas_al_momento()` de `herramientas/noticias.py`).
+  Si la pregunta natural de una nota nombra un municipio o un estado («¿cuánto
+  costó el Carnaval de Ensenada?»), la nota lleva `temas` (sus palabras propias)
+  para que el chat la abra antes que la ficha del lugar (`temaColumna()`).
 - **Noticias reúne todo lo de noticias** (pedido del autor, 28-10-2026: «que
   todo quede debidamente vinculado»). Además de «Al momento» y la Columna del
   Erario, `noticias-relevantes.html` trae dentro la aplicación **Contrasta una

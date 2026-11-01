@@ -43,7 +43,7 @@ def git(*a):
 
 
 def sello_de(texto):
-    m = re.search(r'\?v=(\d{8}[a-z]?)', texto)
+    m = re.search(r'\?v=(\d{8}[a-z]{0,2})\b', texto)
     return m.group(1) if m else None
 
 
@@ -96,6 +96,7 @@ def main():
     if a.base:
         revisiones.append(('sello', lambda: r_sello(a.base)))
     revisiones.append(('inventario', lambda: corre('inventario.py')))
+    revisiones.append(('puntos ciegos', lambda: corre('prueba_puntos_ciegos.py')))
     if not a.rapida:
         revisiones.append(('preguntas del Auditor', lambda: corre('prueba_auditor.py')))
         revisiones.append(('la Enciclopedia en el Auditor', lambda: corre('cobertura_auditor.py')))

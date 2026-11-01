@@ -280,6 +280,10 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .leg-tabla th, .leg-tabla td { padding: 8px 10px; border-bottom: 1px solid #dfe5f0; text-align: left; }
 .leg-tabla td { text-align: right; font-variant-numeric: tabular-nums; }
 .leg-tabla tfoot th, .leg-tabla tfoot td { font-weight: 800; border-bottom: 0; }
+/* Indicadores por circuito (01-11-2026): cada indicador se abre con un toque. */
+.ic-ind { border-bottom: 1px solid #dfe5f0; }
+.ic-ind > summary { min-height: 44px; padding: 10px 4px; cursor: pointer; font-weight: 700; display: list-item; }
+.ic-org { margin: 22px 0 6px; }
 .leg-fuentes { font-size: 16px; }
 /* Informe especial «Documentar para sancionar» (27-10-2026): tablas de texto. */
 .san-tabla { max-width: 860px; }
@@ -471,3 +475,8 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 /* «¿Sabías esto?» del Periodista (29-10-2026): va entre las preguntas de ejemplo, con su seña. */
 .pa-ej-sabias { border-color: #b3412e; background: #fbf7f2; border-radius: 18px; }
 .pa-ej-sena { display: block; font-size: 12px; font-weight: 800; color: #b3412e; letter-spacing: .02em; margin-bottom: 2px; }
+/* Los puntos ciegos de lo que dices (puntos_ciegos.py, 01-11-2026). */
+.pa-ciegos { margin: 10px 0; padding: 10px 12px; border-left: 4px solid #b7791f; border-radius: 10px; background: #fffaf0; color: #1d2b45; }
+.pa-ciegos p { margin: 0 0 6px; }
+.pa-prom { list-style: none; margin: 8px 0; padding: 0; }
+.pa-prom li { margin: 0 0 8px; padding-left: 10px; border-left: 3px solid #1f4f8a; }

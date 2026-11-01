@@ -92,11 +92,11 @@
 }
 .col-balazo { margin: 0 0 8px; font-size: 15.5px; line-height: 1.5; color: #333333; }
 .col-firma { margin: 0 0 10px; font: 11.5px 'Inter', system-ui, sans-serif; color: var(--col-gris); text-transform: uppercase; letter-spacing: 0.05em; }
-.col-leer, .col-copiar, .col-cerrar, .col-seguir {
+.col-leer, .col-copiar, .col-cerrar, .col-seguir, .col-propia {
   font: 700 13px 'Inter', system-ui, sans-serif; cursor: pointer;
   background: none; border: 1px solid var(--col-tinta); border-radius: 999px; padding: 7px 14px; color: var(--col-tinta);
 }
-.col-leer:hover, .col-copiar:hover, .col-cerrar:hover, .col-seguir:hover { background: var(--col-tinta); color: #ffffff; }
+.col-leer:hover, .col-copiar:hover, .col-cerrar:hover, .col-seguir:hover, .col-propia:hover { background: var(--col-tinta); color: #ffffff; }
 .col-leer:focus-visible, .col-copiar:focus-visible, .col-cerrar:focus-visible, .col-seguir:focus-visible { outline: 2px solid #1f5fa8; outline-offset: 2px; }
 
 /* Columna abierta: ocupa todo el ancho y se lee a dos columnas. */
@@ -229,3 +229,12 @@
 .col-glosa a, .col-red-lista a { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 14px; border: 1px solid var(--col-filete); border-radius: 999px; background: #ffffff; text-decoration: none; font-size: 15px; }
 .col-red p { margin: 6px 0; font-size: 15px; }
 .col-red-pie { color: var(--col-gris); }
+/* Hemeroteca: cómo lo contaron otros medios (31-10-2026). */
+.col-medios { margin: 0 0 14px; break-inside: avoid; }
+.col-medios > b { font: 700 12px 'Inter', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.06em; }
+.col-medios p { margin: 6px 0; font-size: 15px; color: var(--col-gris); }
+.col-medios ul { list-style: none; margin: 6px 0 0; padding: 0; }
+.col-medios li { margin-bottom: 6px; border-bottom: 1px dotted var(--col-filete); }
+.col-medio { display: block; font: 700 13px 'Inter', system-ui, sans-serif; color: var(--col-gris); padding-top: 6px; }
+.col-medios li a { display: inline-block; min-height: 44px; padding: 4px 0 8px; color: #1f4f8a; font-size: 16px; }
+.col-propia { display: inline-flex; align-items: center; text-decoration: none; }
