@@ -126,6 +126,20 @@ millones) quedan pendientes, por falta de la plataforma. No se nombra a la
 constructora, a las otras empresas ni a los familiares: ningún documento
 oficial abierto los nombra (AGENTS.md §2 bis).
 
+Nota 8 · El cobro a turistas extranjeros y la parte de la Defensa (01-11-2026).
+Pieza que pasó el autor: publicación de @derechadiariomx en Instagram («18 mil
+millones en subsidios para el Tren Maya y el AIFA… aumento del 57 %»), que
+retoma la nota de Latinus del 12-10-2026. Documentos cotejados:
+- Canal del Congreso, 14-10-2026: Ley Federal de Derechos 2027, DNR de 1,158
+  pesos (+17.8 %) y reparto 57 % Defensa, 15 % INM y 28 % Tesorería.
+- La base: estados de actividades 2024 del Tren Maya y del AIFA (Cuenta
+  Pública, simulador_megaobras.operacion_oficial) y la inversión 2027 del Tren
+  Maya (CGPE 2027, p. 33, paquete_2027.inversion). Se leen, no se copian.
+No se pudo abrir: el dictamen, la reserva y la versión estenográfica (Gaceta
+Parlamentaria), ni la votación del Senado. El 50 % anterior de la Defensa y
+los 18 mil millones son de prensa: el 50 % solo se usa dicho así, y los 18 mil
+quedan pendientes, por falta de la plataforma.
+
 Campo opcional temas [palabras]: las que son propias de la nota («carnaval»); en el
 chat, una pregunta que las trae abre la nota aunque también nombre a un municipio
 o a un estado (temaColumna() de asistente.js).
@@ -1256,7 +1270,187 @@ def asf_nuevo_leon():
     }
 
 
-NOTAS = [modalidad_40, senado_lif_2027, jalisco_gasto_federal, asf_segunda_entrega_2025, portacelis_diesel, carnaval_ensenada, asf_nuevo_leon]
+
+LATINUS_DNR = ('https://latinus.us/mexico/2026/10/12/'
+               'en-dos-horas-diputados-de-la-4t-asignan-18-mil-millones-de-pesos-mas-para-tren-maya-aifa-en-2027-186856.html')
+DERECHA = 'https://www.instagram.com/derechadiariomx/'
+GACETA_DIP = 'https://gaceta.diputados.gob.mx/'
+LFD_INICIATIVA = 'https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-D.pdf'
+PAQ_GASTO = 'numeros-paquete-2027-gasto.html'
+DNR_DEFENSA, DNR_INM, DNR_TESO = 57, 15, 28   # Canal del Congreso, 10318 (14-10-2026)
+DNR_ANTES = 50                                 # lo que tenía la Defensa antes de la reserva: solo la prensa
+FALTA_DICT = ('Falta de la plataforma: el dictamen de la Ley Federal de Derechos 2027 y su reserva están en la Gaceta '
+              'Parlamentaria, que no abre desde nuestra sesión.')
+
+
+def _megaobras_2027():
+    """Lo que la base ya sabe del Tren Maya y del AIFA: su operación de 2024 (Cuenta Pública) y la inversión que
+    el Paquete 2027 propone para el Tren Maya (CGPE 2027, p. 33). Se lee, no se copia."""
+    d = auditorias.db()
+    op = d['simulador_megaobras']['operacion_oficial']
+    tm, af = op['obras']['tren-maya'], op['obras']['aifa-texcoco']
+    inv = {f['n']: f['m'] for f in d['paquete_2027']['inversion']['filas']}
+    if 'Tren Maya' not in inv:
+        raise SystemExit('integrar_al_momento: el Paquete 2027 de la base ya no trae la inversión del Tren Maya')
+    for o in (tm, af):
+        if o['anio'] != 2024:
+            raise SystemExit('integrar_al_momento: la operación del Tren Maya o del AIFA cambió de año; revisa la nota del DNR')
+    return tm, af, inv['Tren Maya'], op['fuentes']
+
+
+def lfd_dnr_defensa():
+    from apartados import glosario_ancla
+    g = lambda t: {'t': t.split(' (')[0], 'url': 'glosario.html#' + glosario_ancla(t)}
+    tm, af, inv_tm, F = _megaobras_2027()
+    m1 = lambda v: '$%s millones' % format(round(v, 1), ',.1f')
+    par = lambda k: DNR_2027 * k / 100
+    return {
+        'id': 'lfd-2027-dnr-defensa-tren-maya-aifa',
+        'seccion': 'Al momento',
+        'icono': '✈️',
+        'temas': ['tren maya y el aifa', 'tren maya y al aifa', 'tren maya y aifa', 'no residente'],
+        'fecha': '01-11-2026',
+        'titulo': ('¿18 mil millones «en subsidios» para el Tren Maya y el AIFA? Es el cobro a los turistas extranjeros, '
+                   'y el 57 % es la parte de la Defensa, no un aumento'),
+        'balazo': ('Circula que Morena aprobó en dos horas más de 18 mil millones de pesos en subsidios para el Tren Maya y el AIFA, '
+                   '«un aumento del 57 %». Lo que se votó fue la Ley Federal de Derechos 2027: lo que pagan los turistas extranjeros al '
+                   'entrar sube a 1,158 pesos, y de lo que se junte, el 57 % irá a la Defensa, que opera los dos proyectos. El 57 % es '
+                   'una parte, no un aumento, y los 18 mil millones son un cálculo de prensa que ningún documento abierto confirma.'),
+        'nota': {'medio': 'Latinus', 'titulo': 'En dos horas, diputados de la 4T asignan 18 mil millones de pesos más para Tren Maya y AIFA en 2027',
+                 'fecha': '12-10-2026', 'url': LATINUS_DNR},
+        'circula': {'red': 'Instagram', 'cuenta': '@derechadiariomx', 'fecha': 'octubre de 2026 (unas dos semanas antes del 1 de noviembre)',
+                    'texto': ('DESPILFARRO EXPRÉS: Los diputados de Morena aprobaron, en solo dos horas, más de 18 mil millones de pesos en '
+                              'subsidios para los proyectos más fracasados de AMLO: el Tren Maya y el AIFA. El gasto sería a partir del 2027 y '
+                              'representa un aumento del 57 % para intentar levantar las obras faraónicas.')},
+        'cuerpo': [
+            ('Qué se votó. No fue el Presupuesto de Egresos: fue la Ley Federal de Derechos para 2027, la que fija lo que el Estado cobra '
+             'por un servicio o por usar un bien público. La Cámara de Diputados la aprobó en el pleno el 14 de octubre, según el Canal del '
+             'Congreso. Entre sus cambios, el Derecho de No Residente (lo que paga el extranjero que entra a México sin permiso para trabajar, '
+             'el turista) sube %s %% y queda en %s pesos, y lo que se recaude se reparte %d %% para la Defensa, %d %% para el Instituto '
+             'Nacional de Migración y %d %% para la Tesorería.' % (DNR_SUBE, format(DNR_2027, ','), DNR_DEFENSA, DNR_INM, DNR_TESO)),
+            ('Las «dos horas». Lo rápido fue la sesión de la Comisión de Hacienda del 12 de octubre: ahí, según la prensa, una reserva de '
+             'Morena subió la parte de la Defensa de %d %% a %d %%. Luego votó el pleno, y la prensa reporta 339 votos a favor, más de los que '
+             'tiene Morena sola, y que el Senado la aprobó el 27 de octubre. La versión del pleno y la del Senado todavía no las pudimos abrir.'
+             % (DNR_ANTES, DNR_DEFENSA)),
+            ('El punto ciego: el 57 %% no es un aumento. Es la parte de la recaudación que le toca a la Defensa. Si antes era el %d %%, como '
+             'dicen los medios, subió %d puntos: con el mismo dinero recaudado, la Defensa recibiría %d %% más (%d ÷ %d), no 57 %% más. '
+             'Esa cuenta usa un dato de prensa, así que no la damos como derivado. Y no es un subsidio aprobado en el Presupuesto: es dinero que pagan los turistas extranjeros y que la '
+             'ley manda a una dependencia. Cuánto llega depende de cuántos visitantes entren en 2027.'
+             % (DNR_ANTES, DNR_DEFENSA - DNR_ANTES, round(100 * (DNR_DEFENSA - DNR_ANTES) / DNR_ANTES), DNR_DEFENSA - DNR_ANTES, DNR_ANTES)),
+            ('Los 18 mil millones. Es una estimación de Latinus, y la prensa no dice si son todo lo que recibiría la Defensa o solo lo '
+             'adicional. Ni la Ley de Ingresos ni la nota oficial del Congreso que pudimos leer traen cuánto se espera juntar con este derecho. '
+             'Ojo con otro «18 mil»: la prensa también reporta unos 18 mil millones en transferencias federales para el Tren Maya en el '
+             'proyecto de Presupuesto 2027, que es otra bolsa y otra ley. En la base tenemos lo que ese proyecto prevé invertir en el Tren Maya: '
+             '%s, según los Criterios Generales 2027.' % m1(inv_tm)),
+            ('«Los proyectos más fracasados». Es un adjetivo. Con sus propios estados de la Cuenta Pública 2024, el Tren Maya cobró %s por '
+             'operar y gastó %s: sin lo que le transfirió el gobierno (%s), perdía %s. El AIFA, en cambio, cobró %s y gastó %s: sus ingresos '
+             'por operar le alcanzaron, y aun así recibió %s de transferencias, con las que pagó nómina y servicios. Esos números no cuentan '
+             'lo que costó construirlos.'
+             % (m1(tm['ingresos_gestion']), m1(tm['gastos_totales']), m1(tm['transferencias']), m1(-tm['resultado_sin_transferencias']),
+                m1(af['ingresos_gestion']), m1(af['gastos_totales']), m1(af['transferencias']))),
+        ],
+        'ejemplo': {
+            'tit': 'La cuenta, con un turista',
+            'txt': 'De cada pago de %s pesos de un turista extranjero en 2027:' % format(DNR_2027, ','),
+            'filas': [['Defensa (opera el Tren Maya y el AIFA)', '$%.2f' % par(DNR_DEFENSA), '%s × %d %%' % (format(DNR_2027, ','), DNR_DEFENSA)],
+                      ['Instituto Nacional de Migración', '$%.2f' % par(DNR_INM), '%s × %d %%' % (format(DNR_2027, ','), DNR_INM)],
+                      ['Tesorería de la Federación', '$%.2f' % par(DNR_TESO), '%s × %d %%' % (format(DNR_2027, ','), DNR_TESO)]],
+            'nota': ('Es un ejemplo derivado con la cuota y el reparto que reportó el Canal del Congreso. Cuánto suma en el año depende de '
+                     'cuántos visitantes entren, y ese pronóstico no viene en ningún documento que pudimos abrir.'),
+        },
+        'cotejo': [
+            {'dice': 'Los diputados de Morena aprobaron', 'res': 'matiz',
+             'explica': ('La reserva que subió la parte de la Defensa fue de Morena, según la prensa, pero quien aprobó la ley fue el pleno de '
+                         'la Cámara de Diputados el 14 de octubre, y la prensa reporta 339 votos a favor, con los de sus aliados.'),
+             'fuente': 'Canal del Congreso, «Cámara de Diputados aprueba Ley Federal de Derechos 2027» (14-10-2026)', 'url': CANAL_LFD},
+            {'dice': 'En solo dos horas', 'res': 'pendiente',
+             'explica': ('La prensa lo dice de la sesión de la Comisión de Hacienda del 12 de octubre. La duración consta en su versión '
+                         'estenográfica, que no pudimos abrir. Y no fue la única votación: después votaron el pleno y el Senado.'),
+             'fuente': 'Latinus (12-10-2026), punto de partida, no fuente', 'url': LATINUS_DNR,
+             'quien': FALTA_DICT, 'donde': GACETA_DIP},
+            {'dice': 'Más de 18 mil millones de pesos', 'res': 'pendiente',
+             'explica': ('Es un cálculo de prensa sobre lo que se recaudaría con este derecho. Ningún documento que pudimos abrir dice cuánto se '
+                         'espera juntar en 2027, ni si los 18 mil millones son todo lo de la Defensa o solo lo adicional.'),
+             'fuente': 'Iniciativa de reforma a la Ley Federal de Derechos 2027 (Gaceta Parlamentaria 7121, Anexo D)', 'url': LFD_INICIATIVA,
+             'quien': FALTA_DICT, 'donde': GACETA_DIP},
+            {'dice': 'En subsidios para el Tren Maya y el AIFA', 'res': 'matiz',
+             'explica': ('No es un subsidio del Presupuesto: es la parte de un derecho que pagan los turistas extranjeros y que la ley '
+                         'manda a la Defensa (%d %%), dependencia que opera los dos proyectos. Si el texto de la ley obliga a gastarlo en ellos '
+                         'lo dirá el decreto publicado.' % DNR_DEFENSA),
+             'fuente': 'Canal del Congreso (14-10-2026)', 'url': CANAL_LFD},
+            {'dice': 'Representa un aumento del 57 %', 'res': 'no consta',
+             'explica': ('El 57 %% es la parte de la recaudación que va a la Defensa, no un aumento. Si antes era el %d %%, como dice la prensa, '
+                         'subió %d puntos, que son %d %% más; esa cuenta usa el dato de prensa. La cuota misma sube %s %%.'
+                         % (DNR_ANTES, DNR_DEFENSA - DNR_ANTES, round(100 * (DNR_DEFENSA - DNR_ANTES) / DNR_ANTES), DNR_SUBE)),
+             'fuente': 'Canal del Congreso (14-10-2026)', 'url': CANAL_LFD},
+            {'dice': 'El gasto sería a partir del 2027', 'res': 'consta',
+             'explica': 'Es la Ley Federal de Derechos del ejercicio 2027: rige desde el 1 de enero, una vez publicada en el Diario Oficial.',
+             'fuente': 'Canal del Congreso (14-10-2026)', 'url': CANAL_LFD},
+            {'dice': 'Los proyectos más fracasados de AMLO… obras faraónicas', 'res': 'matiz',
+             'explica': ('Son adjetivos. Los números de 2024: el Tren Maya gastó %s y cobró %s por operar; el AIFA cobró %s y gastó %s. '
+                         'Uno pierde al operar y el otro no, y ninguno de esos números incluye lo que costó construirlo.'
+                         % (m1(tm['gastos_totales']), m1(tm['ingresos_gestion']), m1(af['ingresos_gestion']), m1(af['gastos_totales']))),
+             'fuente': F['ef_h0m']['doc'], 'url': F['ef_h0m']['url']},
+        ],
+        'medios': [
+            {'medio': 'Latinus', 'titulo': 'En dos horas, diputados de la 4T asignan 18 mil millones de pesos más para Tren Maya y AIFA en 2027',
+             'fecha': '12-10-2026', 'url': LATINUS_DNR},
+            {'medio': 'Noticaribe', 'titulo': 'Aprueban en comisiones Ley Federal de Derechos: diputados reducen alza al Derecho de No Residente, '
+             'pero aún así lo elevan a mil 158 pesos para 2027', 'fecha': '12-10-2026',
+             'url': 'https://noticaribe.com.mx/2026/10/12/aprueban-en-comisiones-ley-federal-de-derechos-diputados-reducen-alza-al-derecho-de-no-residente-pero-aun-asi-lo-elevan-a-mil-158-pesos-para-2027/'},
+            {'medio': 'Expansión', 'titulo': 'Diputados: alzas a derechos de extranjeros y vía ferroviaria', 'fecha': '12-10-2026',
+             'url': 'https://expansion.mx/economia/2026/10/12/diputados-alzas-derechos-extranjeros-via-ferroviaria'},
+            {'medio': 'Expansión', 'titulo': 'Alzas en cuotas para turistas, aeronaves y trenes, y medidores de agua obligatorios avanzan en Ley de Derechos 2027',
+             'fecha': '13-10-2026', 'url': 'https://expansion.mx/economia/2026/10/13/ley-derechos-2027-alzas-cuotas-turistas-aereo-vias-ferreas'},
+            {'medio': 'Quadratín Chihuahua', 'titulo': 'Destinarían 18 mil millones de pesos en subsidios al Tren Maya y al AIFA durante 2027', 'fecha': '',
+             'url': 'https://chihuahua.quadratin.com.mx/nacionales/destinarian-18-mil-millones-de-pesos-en-subsidios-al-tren-maya-y-al-aifa-durante-2027/'},
+            {'medio': 'La Onda Oaxaca', 'titulo': 'Morena aprueba aumentar recursos para la Sedena; estiman 18 mil millones de pesos adicionales para '
+             'proyectos como el Tren Maya y el AIFA', 'fecha': '',
+             'url': 'https://www.laondaoaxaca.com.mx/2026/10/morena-aprueba-aumentar-recursos-para-la-sedena-estiman-18-mil-millones-de-pesos-adicionales-para-proyectos-como-el-tren-maya-y-el-aifa'},
+            {'medio': 'Entorno Político', 'titulo': 'Diputados reducen cuota a turistas extranjeros y elevan recursos para Tren Maya y AIFA', 'fecha': '',
+             'url': 'https://www.entornopolitico.com/nota.php?id=240128'},
+            {'medio': 'Semanario ZETA', 'titulo': 'Cámara de Diputados aprueba la Ley Federal de Derechos 2027 con alzas en salud, turismo y aviación',
+             'fecha': '', 'url': 'https://zetatijuana.com/2026/10/camara-de-diputados-aprueba-la-ley-federal-de-derechos-2027-con-alzas-en-salud-turismo-y-aviacion/'},
+            {'medio': 'Expansión', 'titulo': 'Senado aprueba Ley de Ingresos y Ley de Derechos', 'fecha': '27-10-2026',
+             'url': 'https://expansion.mx/economia/2026/10/27/senado-aprueba-ley-ingresos-derechos'},
+            {'medio': 'Crónica', 'titulo': 'Aprueba Senado Ley de Derechos para 2027; alerta oposición endeudamiento para el país', 'fecha': '27-10-2026',
+             'url': 'https://www.cronica.com.mx/nacional/2026/10/27/aprueba-senado-ley-de-derechos-para-2027-alerta-oposicion-endeudamiento-para-el-pais/'},
+        ],
+        'datos': [
+            {'ico': '🚆', 'tx': 'Auditoría en imágenes: el Tren Maya', 'url': 'auditoria-tren-maya.html',
+             'de': 'Lo que costó, lo que observó la ASF y lo que pierde al operar.'},
+            {'ico': '🛫', 'tx': 'Auditoría en imágenes: el AIFA', 'url': 'auditoria-aifa.html',
+             'de': 'Su costo, sus pasajeros y lo que el gobierno le transfiere por cada uno.'},
+            {'ico': '📊', 'tx': 'Inversión y Megaobras: el estado de resultados de cada obra', 'url': 'herramienta-megaobras-sector.html#obra-tren-maya',
+             'de': 'Verde lo que entra, rojo lo que sale, en pesos de su año y de hoy.'},
+            {'ico': '🏗️', 'tx': 'El gasto del Paquete 2027', 'url': PAQ_GASTO,
+             'de': 'Las prioridades de inversión de 2027, con el Tren Maya entre los trenes.'},
+            {'ico': '🔍', 'tx': 'La Ley de Ingresos 2027 en el Senado', 'url': 'noticias-auditavision.html#col-senado-ley-de-ingresos-2027',
+             'de': 'La otra mitad del paquete: cuánto entra, cuánto es deuda y la cuota del turista.'},
+        ],
+        'glosario': [g('Derechos (Contribución)'), g('Empresas Públicas del Estado'), g('Paquete Económico')],
+        'red': 'Derecho de No Residente 2027 57 por ciento Defensa Tren Maya AIFA',
+        'sigue': [
+            {'que': 'El decreto de la Ley Federal de Derechos 2027 en el Diario Oficial: si obliga a gastar el 57 % en el Tren Maya y el AIFA',
+             'url': DOF_BUSCA},
+            {'que': 'El dictamen y la versión estenográfica de la Comisión de Hacienda del 12 de octubre: la reserva y su duración', 'url': GACETA_DIP},
+            {'que': 'El Presupuesto de Egresos 2027 (a más tardar el 15 de noviembre): las transferencias al Tren Maya y al AIFA', 'url': PPEF},
+            {'que': 'La Cuenta Pública 2027: cuánto juntó de verdad este derecho y cuánto recibió la Defensa', 'url': CUENTA_PUBLICA},
+        ],
+        'fuentes': [
+            {'nombre': 'Canal del Congreso: Cámara de Diputados aprueba Ley Federal de Derechos 2027 (14-10-2026)', 'url': CANAL_LFD},
+            {'nombre': 'Iniciativa de reforma a la Ley Federal de Derechos 2027, Gaceta Parlamentaria 7121, Anexo D (08-09-2026)', 'url': LFD_INICIATIVA},
+            {'nombre': F['ef_h0m']['doc'], 'url': F['ef_h0m']['url']},
+            {'nombre': F['ef_hzi']['doc'], 'url': F['ef_hzi']['url']},
+            {'nombre': 'Criterios Generales de Política Económica 2027, p. 33 (prioridades de inversión), en la base de la plataforma', 'url': PAQ_GASTO},
+            {'nombre': 'Punto de partida: Latinus, «En dos horas, diputados de la 4T asignan 18 mil millones…» (12-10-2026)', 'url': LATINUS_DNR},
+            {'nombre': 'Lo que circula: @derechadiariomx, Instagram (octubre de 2026)', 'url': DERECHA},
+        ],
+        'actualizado': '01-11-2026',
+    }
+
+
+NOTAS = [modalidad_40, senado_lif_2027, jalisco_gasto_federal, asf_segunda_entrega_2025, portacelis_diesel, carnaval_ensenada, asf_nuevo_leon, lfd_dnr_defensa]
 
 
 def main():

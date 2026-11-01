@@ -404,7 +404,7 @@
   },
   {
    "q": "¿Quién es Andrés Manuel López Obrador?",
-   "ir": "noticias-auditavision.html#col-portacelis-permiso-diesel-sener"
+   "ir": "noticias-auditavision.html"
   },
   {
    "q": "¿Qué es el FOBAPROA?",
@@ -1147,7 +1147,7 @@
   {
    "q": "¿Cuánto pagarán los turistas extranjeros por entrar a México en 2027?",
    "modo": "periodista",
-   "ir": "noticias-auditavision.html#col-senado-ley-de-ingresos-2027"
+   "ir": "noticias-auditavision.html#col-lfd-2027-dnr-defensa-tren-maya-aifa"
   },
   {
    "q": "¿Es cierto que Jalisco ocupa el lugar 24 de 32 en gasto federal por habitante?",
@@ -1240,6 +1240,19 @@
    "dice": [
     "hemeroteca"
    ]
+  },
+  {
+   "q": "¿Es cierto que los diputados aprobaron 18 mil millones en subsidios para el Tren Maya y el AIFA?",
+   "ir": "noticias-auditavision.html#col-lfd-2027-dnr-defensa-tren-maya-aifa"
+  },
+  {
+   "q": "¿A dónde va el dinero del derecho de no residente?",
+   "ir": "noticias-auditavision.html#col-lfd-2027-dnr-defensa-tren-maya-aifa"
+  },
+  {
+   "q": "¿Cuánto dinero le dan al Tren Maya y al AIFA en 2027?",
+   "modo": "periodista",
+   "ir": "noticias-auditavision.html#col-lfd-2027-dnr-defensa-tren-maya-aifa"
   }
  ]
 }

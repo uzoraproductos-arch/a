@@ -1814,11 +1814,14 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "biblioteca:ref-shcp-cp2024-tren-maya"
+    "biblioteca:ref-shcp-cp2024-tren-maya",
+    "cotejo:lfd-2027-dnr-defensa-tren-maya-aifa:6",
+    "fuente:lfd-2027-dnr-defensa-tren-maya-aifa"
    ],
-   "consultado": "2026-10-29",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)"
+   "consultado": "2026-11-01",
+   "estado": "sin copia",
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)",
+   "motivo": "El portal de la Cuenta Pública no abre desde la sesión en la nube (certificado). Las cifras del estado de actividades 2024 del Tren Maya (H0M) se extrajeron antes del archivo con huella SHA-256 ff42c55b106103118c03282bb47e8576307ad7d5d4bc2e64260a54477f651e4c, registrada en simulador_megaobras.operacion_oficial.fuentes.ef_h0m de audit-database.js."
   },
   "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/7HZI.02.01.xls": {
    "primera_vez": "2026-10-27",

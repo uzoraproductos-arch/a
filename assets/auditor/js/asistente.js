@@ -1840,7 +1840,11 @@
     var col = buscar(q).slice(0, 12).filter(function (x) { return x.f.t === 'columna' && x.f.cot; })[0];
     if (!col || !charla) return null;
     var f = col.f, t = plano(f.tit + ' ' + (f.k || '') + ' ' + (f.txt || '') + ' ' + (f.cir ? f.cir.tx : ''));
-    var ws = norm(q).replace(/[^a-z0-9ñ]+/g, ' ').split(' ').filter(function (w) { return w.length > 3 && !vacia[w] && !GENERICAS[w]; });
+    /* El nombre de una megaobra no cuenta como coincidencia: «¿es cierto que el Tren Maya costó 500 mil
+       millones?» se coteja contra la obra, aunque una nota hable del Tren Maya (01-11-2026). */
+    var deObra = {};
+    (MO.obras.length ? obrasEn(q) : []).forEach(function (o) { o._al.forEach(function (al) { al.split(' ').forEach(function (w) { deObra[w] = 1; }); }); });
+    var ws = norm(q).replace(/[^a-z0-9ñ]+/g, ' ').split(' ').filter(function (w) { return w.length > 3 && !vacia[w] && !GENERICAS[w] && !deObra[w]; });
     var hits = ws.filter(function (w) { return t.indexOf(' ' + w + ' ') >= 0; }).length;
     /* Con «¿es cierto…?» basta que coincidan dos palabras: el lector ya pidió el cotejo. */
     if (hits < (PIDE_COTEJO.test(pq) ? 2 : 3) || hits * 2 < ws.length) return null;

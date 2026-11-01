@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 253 |
+| Páginas revisadas | 254 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -177,6 +177,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `noticias-al-momento-carnaval-ensenada-2026-imcudhe.html` | El Carnaval de Ensenada costó más de 22 millones y recuperó 1.2: lo que se dijo ante el Cabildo y lo que falta publicar · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-imss-modalidad-40-gestores.html` | El IMSS acota la Modalidad 40: lo que dice el Diario Oficial y lo que falta probar · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 3 |
 | `noticias-al-momento-jalisco-gasto-federal-pef-2027.html` | Jalisco y el gasto federal: aporta el 7.5 % del PIB y recibe el 6.1 % de lo que la Federación reparte a los estados · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 2 |
+| `noticias-al-momento-lfd-2027-dnr-defensa-tren-maya-aifa.html` | ¿18 mil millones «en subsidios» para el Tren Maya y el AIFA? Es el cobro a los turistas extranjeros, y el 57 % es la parte de la Defensa, no un aumento · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-portacelis-permiso-diesel-sener.html` | Portacelis y el permiso para importar 52 millones de litros de diésel: lo que dice MCCI, lo que consta y lo que es puro adjetivo · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-senado-ley-de-ingresos-2027.html` | El Senado aprueba la Ley de Ingresos 2027: de sus 10.6 billones, casi 1.5 son dinero prestado · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 2 |
 | `noticias-auditavision.html` | Auditavisión Noticias · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
@@ -250,7 +251,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 205 | 0 | 0 | 0 | 102 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 207 | 0 | 0 | 0 | 104 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 36 | 0 | 6 | 3 | 1 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 43 | 0 | 1 | 0 | 0 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
@@ -321,11 +322,11 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-101 fichas, cada una con su porqué, su responsable y su enlace oficial.
+103 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 
-Documentos en `docs/boveda/evidencias.json`: 221 copiado, 54 no abrió, 7 sin copia.
+Documentos en `docs/boveda/evidencias.json`: 221 copiado, 53 no abrió, 8 sin copia.
 
 Todos los cotejos «consta» y «matiz» tienen su evidencia.
 
