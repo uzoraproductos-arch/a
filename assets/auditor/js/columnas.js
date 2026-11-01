@@ -47,6 +47,203 @@
   var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
  {
+  "id": "agua-guadalajara-14500-federal",
+  "seccion": "Al momento",
+  "icono": "🚰",
+  "temas": [
+   "agua de guadalajara",
+   "agua en guadalajara",
+   "agua potable",
+   "acueducto",
+   "chapala",
+   "san gaspar",
+   "siapa"
+  ],
+  "fecha": "01-11-2026",
+  "titulo": "El agua de Guadalajara: la Federación anuncia 14,500 millones «sin deuda», pero el dinero todavía no aparece en el Presupuesto 2027",
+  "balazo": "El Gobierno de México dice que invertirá 14 mil 500 millones de pesos en obras de agua para la zona metropolitana de Guadalajara sin endeudarse. El anuncio es oficial; el dinero, todavía no: según la prensa, no vendrá etiquetado en el Presupuesto 2027. Hace una semana la cifra era de 12 a 13 mil millones, y la calidad del agua sigue sin resultados de laboratorio publicados.",
+  "nota": {
+   "medio": "Presidencia de la República (comunicado)",
+   "titulo": "Gobierno de México invertirá 14 mil 500 mdp para garantizar agua en Guadalajara sin deuda ni privatización",
+   "fecha": "28-10-2026",
+   "url": "https://www.gob.mx/presidencia/prensa/gobierno-de-mexico-invertira-14-mil-500-mdp-para-garantizar-agua-en-guadalajara-sin-deuda-ni-privatizacion-presidenta-claudia-sheinbaum"
+  },
+  "circula": {
+   "red": "Instagram",
+   "cuenta": "@gobmexico (Gobierno de México)",
+   "fecha": "29 de octubre de 2026 (tres días antes del 1 de noviembre)",
+   "texto": "Reafirmamos el compromiso con la población de la zona metropolitana de Guadalajara para garantizar agua potable de calidad; el gobierno federal invierte 14 mil 500 millones de pesos para consolidar obras hidráulicas sin adquirir deuda."
+  },
+  "cuerpo": [
+   "Qué se anunció. El 28 de octubre, la Presidenta y el gobernador Pablo Lemus presentaron el plan: la Federación pone 14 mil 500 millones y Jalisco unos 10 mil 200, según la prensa. Lo federal lo ejercería la Conagua: 9 mil 300 millones para el acueducto Chapala–Guadalajara y 5 mil 200 para el sistema Calderón–San Gaspar. Las obras empezarían a principios de 2027 y las grandes terminarían hacia finales de 2028; la operación seguiría con el SIAPA. El texto completo del comunicado no abre desde la plataforma: el desglose y las fechas van como pendientes.",
+   "El primer punto ciego: «invierte» todavía es «invertirá». El comunicado oficial lo dice en futuro, y según Expansión la Presidenta explicó que los recursos no vendrán etiquetados en el Presupuesto de Egresos 2027, que la Cámara aprueba a más tardar el 15 de noviembre. Sin una partida a la vista, no se puede seguir de dónde saldrá cada peso ni compararlo después con lo ejercido.",
+   "El segundo: la cifra creció en una semana. El 21 de octubre, en su conferencia, la Presidenta habló de «alrededor de» $12,000 millones a $13,000 millones; el 28, de $14,500 millones. Y el acueducto que la Federación pagaría con 9 mil 300 millones lo presupuestó el Gobierno de Jalisco en $11,922 millones en la iniciativa que mandó al Congreso local: con esos dos números, faltarían unos $2,622 millones, y nadie ha dicho quién los pone (cuenta con una cifra de prensa, sin chip derivado).",
+   "El tercero: «sin adquirir deuda» quiere decir que Jalisco no se endeuda. El Presupuesto federal sí se financia en parte con deuda: de los $10,636,488.1 millones de la Ley de Ingresos 2027, $1,479,959.2 millones son financiamiento. El dinero no tiene etiqueta de origen: se puede decir que el estado no pedirá prestado, no que la obra se pague sin deuda pública.",
+   "El cuarto: «agua potable de calidad» es la meta, no un dato. Salud Jalisco explicó cómo toma sus muestras, pero no ha publicado los resultados de laboratorio; ese pendiente sigue abierto en Crisis ambientales."
+  ],
+  "cotejo": [
+   {
+    "dice": "El gobierno federal invierte 14 mil 500 millones de pesos",
+    "res": "matiz",
+    "explica": "Es lo que anunció Presidencia el 28 de octubre: el título de su comunicado dice «invertirá». Es un compromiso, no un gasto ejercido ni una partida aprobada; según la prensa, no vendrá etiquetado en el Presupuesto 2027.",
+    "fuente": "Presidencia, comunicado del 28-10-2026",
+    "url": "https://www.gob.mx/presidencia/prensa/gobierno-de-mexico-invertira-14-mil-500-mdp-para-garantizar-agua-en-guadalajara-sin-deuda-ni-privatizacion-presidenta-claudia-sheinbaum"
+   },
+   {
+    "dice": "9,300 millones para el acueducto Chapala–Guadalajara y 5,200 para Calderón–San Gaspar",
+    "res": "pendiente",
+    "explica": "Los dos suman los 14,500, pero el desglose lo dio la prensa; el texto del comunicado no abre. El acueducto, según la iniciativa del Gobierno de Jalisco, cuesta $11,922 millones.",
+    "fuente": "Presidencia, comunicado del 28-10-2026",
+    "url": "https://www.gob.mx/presidencia/prensa/gobierno-de-mexico-invertira-14-mil-500-mdp-para-garantizar-agua-en-guadalajara-sin-deuda-ni-privatizacion-presidenta-claudia-sheinbaum",
+    "quien": "Falta de la plataforma: el comunicado de Presidencia y la versión estenográfica del 28 de octubre están en gob.mx, que no abre desde nuestra sesión; solo pudimos ver su título.",
+    "donde": "https://www.gob.mx/presidencia/prensa/gobierno-de-mexico-invertira-14-mil-500-mdp-para-garantizar-agua-en-guadalajara-sin-deuda-ni-privatizacion-presidenta-claudia-sheinbaum"
+   },
+   {
+    "dice": "Para consolidar obras hidráulicas",
+    "res": "pendiente",
+    "explica": "Las obras empezarían en 2027 y las grandes terminarían a finales de 2028, según la prensa. Las fechas y el expediente de cada obra los debe publicar la Conagua, que las ejecutaría.",
+    "fuente": "Comisión Nacional del Agua",
+    "url": "https://www.gob.mx/conagua",
+    "quien": "La Conagua, que ejecutaría las obras, no ha publicado su expediente ni su calendario.",
+    "donde": "https://www.gob.mx/conagua"
+   },
+   {
+    "dice": "Sin adquirir deuda",
+    "res": "matiz",
+    "explica": "Jalisco no se endeudaría por estas obras. Pero el Presupuesto federal se financia en parte con deuda: $1,479,959.2 millones de los $10,636,488.1 millones de la Ley de Ingresos 2027 son financiamiento.",
+    "fuente": "Criterios Generales de Política Económica 2027 (Gaceta Parlamentaria 7121, Anexo C), en la base de la plataforma",
+    "url": "https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf"
+   },
+   {
+    "dice": "Para garantizar agua potable de calidad",
+    "res": "pendiente",
+    "explica": "Salud Jalisco no ha publicado los resultados de laboratorio del agua de la zona metropolitana.",
+    "fuente": "Crisis ambientales: el agua de Guadalajara",
+    "url": "herramienta-ambiente-crisis.html",
+    "quien": "Salud Jalisco: no ha publicado los resultados de laboratorio del agua.",
+    "donde": "https://ssj.jalisco.gob.mx/"
+   }
+  ],
+  "medios": [
+   {
+    "medio": "@gobmexico (Instagram)",
+    "titulo": "El gobierno federal invierte 14 mil 500 millones de pesos para consolidar obras hidráulicas sin adquirir deuda",
+    "fecha": "29-10-2026",
+    "url": "https://www.instagram.com/p/DfDZtTIH9Nx/"
+   },
+   {
+    "medio": "Expansión Política",
+    "titulo": "Crisis del agua en Guadalajara: la inversión en acueductos",
+    "fecha": "28-10-2026",
+    "url": "https://politica.expansion.mx/presidencia/2026/10/28/crisis-agua-guadalajara-inversion-acueductos"
+   },
+   {
+    "medio": "La Jornada",
+    "titulo": "Gobierno federal y el de Jalisco invertirán $25 mil millones para resolver el problema del agua en Guadalajara",
+    "fecha": "28-10-2026",
+    "url": "https://www.jornada.com.mx/noticia/2026/10/28/estados/gobierno-federal-invertira-14-mil-millones-y-el-de-jalisco-10-mil-200-millones-para-suministrar-agua-limpia-en-guadalajara"
+   },
+   {
+    "medio": "Excélsior",
+    "titulo": "Gobierno federal y Jalisco invertirán 25 mil mdp en infraestructura hídrica para Guadalajara",
+    "fecha": "",
+    "url": "https://www.excelsior.com.mx/nacional/gobierno-federal-y-jalisco-invertiran-25-mil-mdp-infraestructura-hidrica-para-guadalajara"
+   },
+   {
+    "medio": "ADN",
+    "titulo": "Invertirá Gobierno de México 14 mil 500 mdp en agua potable para Guadalajara",
+    "fecha": "",
+    "url": "https://www.adiario.mx/mexico/invertira-gobierno-de-mexico-14-mil-500-mdp-en-agua-potable-para-guadalajara/"
+   },
+   {
+    "medio": "Publimetro",
+    "titulo": "Agua en Guadalajara: cuándo mejorará (2027-2028)",
+    "fecha": "28-10-2026",
+    "url": "https://www.publimetro.com.mx/nacional/2026/10/28/agua-guadalajara-cuando-mejorara-2027-2028/"
+   },
+   {
+    "medio": "N+",
+    "titulo": "Presentan plan para llevar agua limpia a Guadalajara sin deuda ni aumento de tarifas",
+    "fecha": "",
+    "url": "https://www.nmas.com.mx/politica/presentan-plan-para-llevar-agua-limpia-guadalajara-sin-deuda-ni-aumento-de-tarifas/"
+   },
+   {
+    "medio": "Crónica Jalisco",
+    "titulo": "Debe quedar en el presupuesto federal 2027 la promesa que hizo Sheinbaum a Jalisco",
+    "fecha": "21-10-2026",
+    "url": "https://www.cronica.com.mx/jalisco/guadalajara/2026/10/21/debe-quedar-en-el-presupuesto-federal-2027-la-promesa-que-hizo-sheinbaum-a-jalisco/"
+   }
+  ],
+  "datos": [
+   {
+    "ico": "🚱",
+    "tx": "Crisis ambientales: el agua de Guadalajara",
+    "url": "herramienta-ambiente-crisis.html",
+    "de": "Lo anunciado, lo comprobado y lo que falta: el Plan Hídrico, El Zapotillo y la calidad del agua."
+   },
+   {
+    "ico": "🗺️",
+    "tx": "Jalisco y el gasto federal",
+    "url": "noticias-al-momento-jalisco-gasto-federal-pef-2027.html",
+    "de": "Cuánto le da la Federación a Jalisco por habitante, y por qué sale abajo."
+   },
+   {
+    "ico": "📊",
+    "tx": "Cómo se ve 2027: las cifras del Paquete Económico",
+    "url": "numeros-paquete-2027-cifras.html",
+    "de": "Cuánto del Presupuesto 2027 se paga con dinero prestado."
+   }
+  ],
+  "glosario": [
+   {
+    "t": "Paquete Económico",
+    "url": "glosario.html#Paquete-Economico"
+   }
+  ],
+  "red": "agua Guadalajara 14 mil 500 millones acueducto Chapala Calderón San Gaspar Conagua",
+  "sigue": [
+   {
+    "que": "El Presupuesto de Egresos 2027 (a más tardar el 15 de noviembre): si los 14,500 millones aparecen en el ramo de la Conagua",
+    "url": "https://www.ppef.hacienda.gob.mx/"
+   },
+   {
+    "que": "El expediente y el calendario de cada obra en la Conagua",
+    "url": "https://www.gob.mx/conagua"
+   },
+   {
+    "que": "Quién pone la diferencia entre los 9,300 federales y los 11,922 que Jalisco calculó para el acueducto",
+    "url": "herramienta-ambiente-crisis.html"
+   },
+   {
+    "que": "Los resultados de laboratorio del agua que debe publicar Salud Jalisco",
+    "url": "https://ssj.jalisco.gob.mx/"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Presidencia, «Gobierno de México invertirá 14 mil 500 mdp para garantizar agua en Guadalajara sin deuda ni privatización» (28-10-2026)",
+    "url": "https://www.gob.mx/presidencia/prensa/gobierno-de-mexico-invertira-14-mil-500-mdp-para-garantizar-agua-en-guadalajara-sin-deuda-ni-privatizacion-presidenta-claudia-sheinbaum"
+   },
+   {
+    "nombre": "Presidencia, versión estenográfica de la conferencia del 21-10-2026",
+    "url": "https://www.gob.mx/presidencia/es/articulos/version-estenografica-conferencia-de-prensa-de-la-presidenta-claudia-sheinbaum-pardo-del-21-de-octubre-de-2026"
+   },
+   {
+    "nombre": "Gobierno de Jalisco, iniciativa del Acueducto Sustituto Chapala–Guadalajara (08-10-2026), en Crisis ambientales",
+    "url": "herramienta-ambiente-crisis.html"
+   },
+   {
+    "nombre": "Paquete Económico 2027 en la base de la plataforma",
+    "url": "numeros-paquete-2027-cifras.html"
+   },
+   {
+    "nombre": "Lo que circula: @gobmexico, Instagram (29-10-2026)",
+    "url": "https://www.instagram.com/p/DfDZtTIH9Nx/"
+   }
+  ],
+  "actualizado": "01-11-2026"
+ },
+ {
   "id": "servidores-ia-exportaciones-contenido-nacional",
   "seccion": "Al momento",
   "icono": "🖥️",
@@ -1849,6 +2046,10 @@
   "red": "Jalisco gasto federal por habitante PEF 2027 PRI 30 mil millones",
   "sigue": [
    {
+    "que": "Novedad del 28-10-2026: la Federación ya habla de 14,500 millones para el agua (ver la nota «El agua de Guadalajara»)",
+    "url": "noticias-al-momento-agua-guadalajara-14500-federal.html"
+   },
+   {
     "que": "El Presupuesto de Egresos 2027 aprobado (a más tardar el 15 de noviembre): si trae reasignaciones para Jalisco y cuánto",
     "url": "https://gaceta.diputados.gob.mx/"
    },
@@ -1887,7 +2088,7 @@
     "url": "https://www.notisistema.com/noticias/acusa-pri-recorte-de-83-en-inversion-federal-para-jalisco/"
    }
   ],
-  "actualizado": "29-10-2026"
+  "actualizado": "01-11-2026"
  },
  {
   "id": "senado-ley-de-ingresos-2027",

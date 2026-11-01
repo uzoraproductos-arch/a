@@ -3002,6 +3002,17 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://www.gob.mx/presidencia/prensa/gobierno-de-mexico-invertira-14-mil-500-mdp-para-garantizar-agua-en-guadalajara-sin-deuda-ni-privatizacion-presidenta-claudia-sheinbaum": {
+   "primera_vez": "2026-11-01",
+   "historial": [],
+   "estado": "sin copia",
+   "motivo": "gob.mx no abre desde la sesión en la nube. Se cotejó solo el título del comunicado de Presidencia del 28-10-2026, visto por el buscador («Gobierno de México invertirá 14 mil 500 mdp para garantizar agua en Guadalajara sin deuda ni privatización»); el desglose quedó pendiente.",
+   "consultado": "2026-11-01",
+   "usos": [
+    "cotejo:agua-guadalajara-14500-federal:0",
+    "fuente:agua-guadalajara-14500-federal"
+   ]
+  },
   "https://www.gob.mx/presidencia/prensa/presidenta-claudia-sheinbaum-informa-investigaciones-abiertas-contra-garcia-luna-en-uif-y-fgr": {
    "primera_vez": "2026-10-27",
    "historial": [],

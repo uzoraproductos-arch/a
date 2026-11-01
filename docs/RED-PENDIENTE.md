@@ -34,7 +34,7 @@ Se actualiza cada vez que una nota deja un pendiente por un portal que no abre.
 | `www.cuentapublica.hacienda.gob.mx` | Estados financieros de las empresas públicas (Tren Maya, AIFA); hoy falla por certificado | `lfd-2027-dnr-defensa-tren-maya-aifa` (anotado sin copia en la bóveda) |
 | `www.ppef.hacienda.gob.mx` | Proyecto de Presupuesto 2027 por ramo y por empresa | `jalisco-gasto-federal-pef-2027`, `lfd-2027-dnr-defensa-tren-maya-aifa` |
 | `www.transparenciapresupuestaria.gob.mx` | Datos abiertos del gasto | varias |
-| `www.gob.mx` | Sener (permisos de importación), FGR, IPAB y boletines oficiales | `portacelis-permiso-diesel-sener` |
+| `www.gob.mx` | Sener (permisos de importación), FGR, IPAB, Conagua y comunicados de Presidencia | `portacelis-permiso-diesel-sener`, `agua-guadalajara-14500-federal` |
 | `stastdgv2portfgr032.blob.core.windows.net` | Estadísticas de la FEADLE (FGR) sobre agresiones a periodistas | pendiente `periodistas-feadle` |
 
 ## Empresas públicas
@@ -50,6 +50,7 @@ Se actualiza cada vez que una nota deja un pendiente por un portal que no abre.
 |---|---|---|
 | `www.ensenada.gob.mx` | Información financiera del Ayuntamiento y del IMCUDHE | `carnaval-ensenada-2026-imcudhe` |
 | `www.asebc.gob.mx` | Auditoría Superior de Baja California | `carnaval-ensenada-2026-imcudhe` |
+| `ssj.jalisco.gob.mx`, `www.jalisco.gob.mx` | Resultados de laboratorio del agua (Salud Jalisco) y comunicados del Gobierno de Jalisco | `agua-guadalajara-14500-federal` |
 
 ## Estadística oficial
 

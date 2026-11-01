@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 256 |
+| Páginas revisadas | 257 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -172,11 +172,12 @@ La Enciclopedia queda fuera porque está congelada.
 | `informes-semestral-asf.html` | Informe semestral de la ASF · Auditavisión | apartados.py | 50 | 0 | 30 | 5 | 4 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `nepotismo-y-cargos-publicos.html` | Nepotismo y cargos públicos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
+| `noticias-al-momento-agua-guadalajara-14500-federal.html` | El agua de Guadalajara: la Federación anuncia 14,500 millones «sin deuda», pero el dinero todavía no aparece en el Presupuesto 2027 · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 3 |
 | `noticias-al-momento-asf-nuevo-leon-triangulacion-cp2025.html` | La ASF denuncia una presunta triangulación de 7 mil 200 millones en Nuevo León: lo que dice, lo que falta y por qué «desvió» todavía no es un hecho · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 3 |
 | `noticias-al-momento-asf-segunda-entrega-cp2025.html` | La ASF y los 9 mil millones «por aclarar» de 2025: lo que se sabe, lo que falta y lo que nadie te explica · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 3 |
 | `noticias-al-momento-carnaval-ensenada-2026-imcudhe.html` | El Carnaval de Ensenada costó más de 22 millones y recuperó 1.2: lo que se dijo ante el Cabildo y lo que falta publicar · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-imss-modalidad-40-gestores.html` | El IMSS acota la Modalidad 40: lo que dice el Diario Oficial y lo que falta probar · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 3 |
-| `noticias-al-momento-jalisco-gasto-federal-pef-2027.html` | Jalisco y el gasto federal: aporta el 7.5 % del PIB y recibe el 6.1 % de lo que la Federación reparte a los estados · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 2 |
+| `noticias-al-momento-jalisco-gasto-federal-pef-2027.html` | Jalisco y el gasto federal: aporta el 7.5 % del PIB y recibe el 6.1 % de lo que la Federación reparte a los estados · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-lfd-2027-dnr-defensa-tren-maya-aifa.html` | ¿18 mil millones «en subsidios» para el Tren Maya y el AIFA? Es el cobro a los turistas extranjeros, y el 57 % es la parte de la Defensa, no un aumento · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-pemex-3t-2026-perdida-neta.html` | Pemex vuelve a perder en el tercer trimestre: ¿10,792 o 10,795 millones?, y lo que esa pérdida no cuenta · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 4 |
 | `noticias-al-momento-portacelis-permiso-diesel-sener.html` | Portacelis y el permiso para importar 52 millones de litros de diésel: lo que dice MCCI, lo que consta y lo que es puro adjetivo · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 2 |
@@ -253,7 +254,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 216 | 0 | 0 | 0 | 113 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 219 | 0 | 0 | 0 | 116 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 36 | 0 | 6 | 3 | 1 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 43 | 0 | 1 | 0 | 0 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
@@ -324,11 +325,11 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-112 fichas, cada una con su porqué, su responsable y su enlace oficial.
+115 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 
-Documentos en `docs/boveda/evidencias.json`: 221 copiado, 53 no abrió, 8 sin copia.
+Documentos en `docs/boveda/evidencias.json`: 221 copiado, 53 no abrió, 9 sin copia.
 
 Todos los cotejos «consta» y «matiz» tienen su evidencia.
 

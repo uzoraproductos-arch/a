@@ -1285,6 +1285,22 @@
    "dice": [
     "hemeroteca"
    ]
+  },
+  {
+   "q": "¿Es cierto que el gobierno federal invierte 14 mil 500 millones en el agua de Guadalajara sin deuda?",
+   "ir": "noticias-auditavision.html#col-agua-guadalajara-14500-federal"
+  },
+  {
+   "q": "¿Cuánto va a poner la Federación para el agua de Guadalajara?",
+   "modo": "periodista",
+   "ir": "noticias-auditavision.html#col-agua-guadalajara-14500-federal"
+  },
+  {
+   "q": "https://www.instagram.com/p/DfDZtTIH9Nx/?img_index=2&exln=dTUwbmdoajhzbWFy",
+   "ir": "noticias-auditavision.html#col-agua-guadalajara-14500-federal",
+   "dice": [
+    "hemeroteca"
+   ]
   }
  ]
 }
