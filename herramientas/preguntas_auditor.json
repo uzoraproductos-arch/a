@@ -1321,6 +1321,27 @@
     "Un porcentaje sin su base",
     "desde cuándo"
    ]
+  },
+  {
+   "q": "¿Es cierto que el gobierno destinará 3 mil millones sin deuda para hospitales?",
+   "dice": [
+    "No califico tu cifra",
+    "sin deuda"
+   ]
+  },
+  {
+   "q": "¿Es cierto que pedirán 3 mil millones de deuda para hospitales?",
+   "dice": [
+    "No califico tu cifra",
+    "hospitales"
+   ]
+  },
+  {
+   "q": "¿Es cierto que un diputado gana 80 mil pesos?",
+   "dice": [
+    "Coincide con el documento",
+    "79,846"
+   ]
   }
  ]
 }

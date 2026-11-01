@@ -1276,6 +1276,24 @@
       if (Math.abs(pct) <= 10) return { tipo: 'ambar', tit: 'Se acerca, pero no es la misma cifra', porque: 'Se aleja ' + pt(pct) + '. Suele ser otro año, otra etapa (aprobado contra ejercido) o un redondeo grueso.' };
       return { tipo: 'rojo', tit: 'No coincide con el documento', porque: 'Lo que dices es ' + pt(pct) + (dif > 0 ? ' mayor' : ' menor') + ' que el dato oficial.' };
     }
+    /* Antes de calificar: ¿la cifra que dices y el dato oficial miden lo mismo? (01-11-2026)
+       «3 mil millones sin deuda para hospitales» no se compara contra toda la deuda del país:
+       si lo que dices niega el tema («sin deuda») o tiene un destino que el dato no trae
+       («para hospitales»), no hay veredicto. Devuelve el porqué, o '' si sí se puede juzgar. */
+    var NIEGA = /^(sin|no|ni|libre de|libres de|fuera de)$/;
+    function otroConcepto(claim, dentro) {
+      var c = plano(claim), tit = plano(dentro.tit || ''), todo = tit + ' ' + plano(String(dentro.html || '').replace(/<[^>]+>/g, ' '));
+      var pal = c.split(/[^a-z0-9]+/), comp = [], neg = [];
+      pal.forEach(function (w, i) {
+        if (w.length < 4 || tit.indexOf(w.slice(0, 5)) < 0) return;
+        comp.push(w);
+        if (NIEGA.test(pal[i - 1] || '') || NIEGA.test((pal[i - 2] || '') + ' ' + (pal[i - 1] || ''))) neg.push(w);
+      });
+      if (neg.length && neg.length === comp.length) return 'Dices «' + neg.map(function (w) { return 'sin ' + w; })[0] + '»: tu cifra no es ' + neg[0] + ', y el dato que tengo sí lo es.';
+      var m = /(^| )(para|destinad[oa]s? a|dirigid[oa]s? a|etiquetad[oa]s? (para|a))( el| la| los| las| un| una| su| sus)? ([a-z]{4,})/.exec(c);
+      if (m && todo.indexOf(m[5].slice(0, 5)) < 0) return 'Tu cifra es para «' + m[5] + '», y el dato que tengo es «' + (dentro.tit || 'otro concepto') + '»: no miden lo mismo.';
+      return '';
+    }
     /* Los puntos ciegos de lo que dices (puntos_ciegos.py): preguntas, no veredicto. */
     function ciegosDe(claim) {
       var pc = VER && VER.ciegos ? VER.ciegos({ texto: claim }) : [];
@@ -1319,11 +1337,17 @@
       var dicho = cifraDicha(norm(claim).replace(/[¿?¡!]/g, ' ')), val = dentro && dentro.val;
       if (val && val.dia && /diari|al dia|por dia|cada dia/.test(t)) val = { v: val.dia, u: 'mdp' };
       if (val && val.anual && /al ano|anual|por ano|cada ano/.test(t)) val = { v: val.anual, u: 'pesos' };
-      var jz = val && dicho ? juzgaDicho(dicho, val) : null;
+      var oc = val && dicho ? otroConcepto(claim, dentro) : '';
+      var jz = val && dicho && !oc ? juzgaDicho(dicho, val) : null;
       if (jz) {
         dentro.listo = 1;
         dentro.html = '<p>' + VEMO[jz.tipo] + ' <b>' + esc(jz.tit) + '.</b> Dices «' + esc(dicho.bruto) + '». ' + esc(jz.porque) + ' Esto es lo que dice el dato oficial:</p>' + dentro.html;
         dentro.html = dentro.html.replace('<details class="pa-dedonde">', '<p class="pa-chico">Veredicto ' + chip('derivado') + ': diferencia entre la cifra que dices y la oficial; se acepta el redondeo.</p><details class="pa-dedonde">');
+        return dentro;
+      }
+      if (dentro && oc) {
+        dentro.listo = 1;
+        dentro.html = '<p>⚪ <b>No califico tu cifra.</b> ' + esc(oc) + ' Compararla contra este dato daría un veredicto falso, así que te dejo lo que dicen los datos oficiales del tema más cercano para que lo juzgues:</p>' + dentro.html;
         return dentro;
       }
       if (dentro) {
