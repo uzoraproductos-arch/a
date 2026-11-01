@@ -124,7 +124,12 @@
     var v = el.value.trim();
     if (el.required && !v) return false;
     if (v && el.type === 'email') return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-    if (v && el.type === 'url') return /^https?:\/\/\S+\.\S+/.test(v);
+    if (v && el.type === 'url') {
+      // «www.dof.gob.mx» o «Https://…» (el celular pone mayúscula): se completa solo.
+      if (!/^[a-z][a-z0-9+.-]*:/i.test(v) && /^[^\s\/]+\.[^\s\/]+/.test(v)) { v = 'https://' + v; el.value = v; }
+      if (/^https?:/i.test(v) && !/^https?:/.test(v)) { v = v.replace(/^https?/i, function (m) { return m.toLowerCase(); }); el.value = v; }
+      return /^https?:\/\/[^\s.]+\.\S+/i.test(v);
+    }
     return true;
   }
 
