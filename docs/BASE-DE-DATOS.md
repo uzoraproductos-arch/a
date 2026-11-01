@@ -128,7 +128,7 @@ conecta los botones «Enviar», «Lo que aún no sé» y «Búscalo en internet�
 - **Transparencia Presupuestaria y el DOF** no están en `portales`: publican
   archivos de datos abiertos, no una API de consulta. Entran por la fase 4
   (GitHub Actions semanal que descarga, regenera y abre un PR).
-- **Encendido el 30-10-2026** (autor: «ambos sí»): `FUNCIONES` apunta al proyecto, el aviso de privacidad dice que los envíos se guardan 12 meses y la migración `20261030000005_conservacion_envios.sql` lo cumple (cada envío nuevo borra los de más de un año; una errata publicada se queda sin correo). `recibir-formulario` y `pregunta-bot` se suben con el flujo. Antispam (Cloudflare Turnstile, gratis): `TURNSTILE_SITIO` puesto el 01-11-2026; falta `TURNSTILE_SECRET` en Supabase, y mientras no esté solo frena el límite por conexión.
+- **Encendido el 30-10-2026** (autor: «ambos sí»): `FUNCIONES` apunta al proyecto, el aviso de privacidad dice que los envíos se guardan 12 meses y la migración `20261030000005_conservacion_envios.sql` lo cumple (cada envío nuevo borra los de más de un año; una errata publicada se queda sin correo). `recibir-formulario` y `pregunta-bot` se suben con el flujo. Antispam (Cloudflare Turnstile, gratis): encendido el 01-11-2026 (`TURNSTILE_SITIO` en `apartados.py`, `TURNSTILE_SECRET` en Supabase) y probado por el autor con un envío real.
 - *(Nota anterior, 27-10-2026)* **La página ya sabe llamar a las funciones (27-10-2026), pero está apagada**:
   no hay proyecto. Al crearlo se llenan tres renglones de
   `herramientas/apartados.py`: `FUNCIONES` (la dirección de las funciones),
