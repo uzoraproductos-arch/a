@@ -36,6 +36,7 @@ import ssl
 import sys
 import time
 import urllib.parse
+import urllib.error
 import urllib.request
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
@@ -46,6 +47,9 @@ ORGANOS = {'2': 'Juzgados de Distrito', '3': 'Tribunales Unitarios de Circuito',
            '4': 'Tribunales Colegiados de Circuito', '340': 'Tribunales Colegiados de Apelación'}
 NIVELES = {'1': 'Plantilla judicial', '2': 'Perfil de magistrados y jueces', '3': 'Litigiosidad', '4': 'Acceso tecnológico',
            '5': 'Productividad', '6': 'Incidencia'}
+
+
+ERROR_SERVIDOR = b'error occurred on the server'
 
 
 def resumen_url(ano, torid, nivel):
@@ -102,11 +106,30 @@ def main():
         with urllib.request.urlopen(url, context=ctx, timeout=60) as r:
             return r.read()
 
-    datos, vacios = [], {}
+    datos, vacios, avisos, previo = [], {}, [], {}
     for ano in ANOS:
         for torid in ORGANOS:
             for nivel in NIVELES:
-                for q, defi in lee_resumen(baja(resumen_url(ano, torid, nivel), '%s_%s_%s.html' % (ano, torid, nivel))):
+                url_res = resumen_url(ano, torid, nivel)
+                try:
+                    raw_res = baja(url_res, '%s_%s_%s.html' % (ano, torid, nivel))
+                except urllib.error.HTTPError as e:
+                    raw_res = b'error occurred on the server (HTTP %d)' % e.code
+                lista = lee_resumen(raw_res)
+                if ERROR_SERVIDOR in raw_res:
+                    # La página que enlista los indicadores se cae a la mitad
+                    # (JD 2023, productividad: error 500 tras el indicador 17).
+                    # Los cuadros sí existen: se piden con la lista del año
+                    # anterior y se deja dicho.
+                    ya = {q['indicador'] for q, _ in lista}
+                    extra = [(dict(q, ano=ano), d) for q, d in previo.get((torid, nivel), []) if q['indicador'] not in ya]
+                    lista += extra
+                    avisos.append({'ano': ano, 'org': torid, 'niv': nivel, 'url': url_res,
+                                   'texto': 'La página resumen del sistema da error del servidor; %d cuadros se pidieron directo con la lista de %s.'
+                                            % (len(extra), str(int(ano) - 1))})
+                else:
+                    previo[(torid, nivel)] = lista
+                for q, defi in lista:
                     ind = q['indicador']
                     url = BASE + 'IndicadoresJudicialesCircuito.asp?' + urllib.parse.urlencode(q, encoding='latin-1')
                     raw = baja(url, 'circ/%s_%s_%s_%s.html' % (ano, torid, nivel, ind))
@@ -122,7 +145,7 @@ def main():
     datos.sort(key=lambda x: (x['org'], x['niv'], x['ind'], x['ano']))
     with open(SALIDA, 'w', encoding='utf-8') as f:
         json.dump({'fuente': BASE + 'acuerd_nal_ini.asp', 'consulta': time.strftime('%d-%m-%Y'), 'organos': ORGANOS,
-                   'niveles': NIVELES, 'datos': datos,
+                   'niveles': NIVELES, 'datos': datos, 'avisos': avisos,
                    'vacios': sorted(vacios.values(), key=lambda x: (x['org'], x['niv'], x['ind']))}, f, ensure_ascii=False, separators=(',', ':'))
         f.write('\n')
     print('indicadores DGEJ: %d cuadros con datos y %d indicadores vacíos -> %s' % (len(datos), len(vacios), os.path.relpath(SALIDA)))

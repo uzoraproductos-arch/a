@@ -185,6 +185,15 @@ def chequeo():
     assert len(ORD) == 32 and len(EDO) == 32
     assert len(d['datos']) > 300, 'faltan cuadros de la DGEJ'
     assert 'vacios' in d, 'el archivo no trae los indicadores vacíos: corre actualizar_indicadores_dgej.py'
+    # Productividad completa: cada indicador con datos de un año debe estar en
+    # los demás años del mismo órgano, o anotado como vacío (la página resumen
+    # de JD 2023 se cae y casi se pierden siete cuadros).
+    for org in ('2', '4'):
+        hay = {(x['ind'], x['ano']) for x in d['datos'] if x['org'] == org and str(x['niv']) == '5'}
+        vac = {(v['ind'], a) for v in d['vacios'] if v['org'] == org and str(v['niv']) == '5' for a in v['anos']}
+        for ind in {i for i, _ in hay}:
+            for a in ANOS:
+                assert (ind, a) in hay or (ind, a) in vac, 'productividad: falta el indicador %s de %s en %s' % (ind, org, a)
     for org in ('2', '4'):
         for a in ANOS:
             for ind in (5, 7, 9, 10, 12, 17):
@@ -251,7 +260,7 @@ def temas():
               'en 2025, <b>%s días</b>.</p><ul class="pa-lista"><li><b>Los más lentos</b> (2025): %s.</li><li><b>Los más rápidos</b> (2025): %s.</li>'
               '<li><b>Lo que saca cada persona secretaria a la semana</b> (asuntos proyectados y aprobados que salen): %s en %s; %s en %s.</li>'
               '<li><b>Asuntos que salieron con sentencia</b>: %s en %s; %s en %s.</li></ul>'
-              '<p class="pa-chico">El sistema no trae 2023 en estos tres últimos indicadores. Los tiempos del proceso penal federal (del auto de plazo al cierre '
+              '<p class="pa-chico">Los tiempos del proceso penal federal (del auto de plazo al cierre '
               'de instrucción y a la sentencia) van en las tablas.</p>%s') % (
             _v(dur0['nac']), _v(dur1['nac']), _lista(orden(dur1)[:3], ' días'), _lista(orden(dur1, alto=False)[:3], ' días'),
             _v(sec[0]['nac']), sec[0]['ano'], _v(sec[-1]['nac']), sec[-1]['ano'], _v(sen[0]['nac']), sen[0]['ano'], _v(sen[-1]['nac']), sen[-1]['ano'], AVISO),
@@ -412,6 +421,11 @@ def extra(k):
         out += ''.join(_tabla(org, niv, i) for i in indicadores(org, niv))
     if cual == 'litig':
         out += _vacios_html(orgs)
+    for a in datos().get('avisos', []):
+        if a['org'] in orgs and int(a['niv']) == niv:
+            out += ('<p class="pa-chico">Ojo: en %s, la <a href="%s" target="_blank" rel="noopener noreferrer">página resumen ↗</a> del sistema de la DGEJ '
+                    'se cae con un error del servidor a la mitad de la lista. Los cuadros que faltaban sí existen: los pedimos uno por uno con la lista del año '
+                    'anterior, y cada tabla trae su propia liga.</p>') % (a['ano'], html.escape(a['url']))
     return out + '<p class="pa-chico">Fuente: <a href="%s" target="_blank" rel="noopener noreferrer">Indicadores Estadísticos Judiciales de la DGEJ ↗</a>.</p>' % SISTEMA
 
 
