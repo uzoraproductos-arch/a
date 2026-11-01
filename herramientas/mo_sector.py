@@ -390,14 +390,14 @@ def ficha(o, ver, fuentes, sectores, cuenta):
   </header>
   {vivo}
   <div class="ms-inv">
-    <div class="ms-inv-c"><span class="ms-inv-l">Presupuesto original {c_presu}</span><span class="ms-inv-v ms-num">${presu} mdp</span></div>
+    <div class="ms-inv-c"><span class="ms-inv-l">{et_pres} {c_presu}</span><span class="ms-inv-v ms-num">${presu} mdp</span></div>
     <div class="ms-inv-c"><span class="ms-inv-l">Costo real erogado {c_real}</span><span class="ms-inv-v ms-inv-oro ms-num">${real} mdp</span></div>
     <div class="ms-inv-c"><span class="ms-inv-l">{et_sob} {c_sob}</span><span class="ms-inv-v ms-num{rojo}">{sob}%</span></div>
   </div>
   {antecedente}{base}
   <details class="ms-plegable"><summary><span aria-hidden="true">🔎</span> De dónde sale cada una de estas tres cifras</summary>
     <div class="ms-plegable-cuerpo"><dl class="ms-defs">
-      <dt>Presupuesto original</dt><dd>{d_presu}</dd>
+      <dt>{et_pres}</dt><dd>{d_presu}</dd>
       <dt>Costo real erogado</dt><dd>{d_real}</dd>
       <dt>{et_sob}</dt><dd>{d_sob}</dd>
     </dl></div></details>
@@ -431,6 +431,7 @@ def ficha(o, ver, fuentes, sectores, cuenta):
         c_presu=chip_campo('inversion_presupuestada_mdp', pend_obra), presu=num(o['inversion_presupuestada_mdp']),
         c_real=chip_campo('inversion_real_mdp', pend_obra), real=num(o['inversion_real_mdp']),
         et_sob=esc(o.get('sobrecosto_etiqueta') or 'Sobrecosto'),
+        et_pres=esc(o.get('presupuesto_etiqueta') or 'Presupuesto original'),
         antecedente=('<p class="ms-nota"><span aria-hidden="true">🕰️</span> <strong>Antecedente.</strong> %s</p>' % esc(o['antecedente'])) if o.get('antecedente') else '',
         base=nota_base(o, cuenta.get(o['id']), 'ms-plegable ms-base'),
         c_sob=chip_campo('sobrecosto_pct', pend_obra), sob=('+' if sob > 0 else '') + jsnum(sob), rojo=' ms-inv-rojo' if sob > 100 else '',
@@ -598,7 +599,7 @@ def _construir(base, ref):
         <span class="ms-cifra-s">equivale a <span class="ms-num" id="msCSeg">—</span> por segundo</span></div>
     </div>
     <p class="ms-nota" id="msNotaFiltro"></p>
-    <p class="ms-nota">Las tres son sumas de las obras del filtro (<span class="ms-op">costo real = suma de lo erogado; sobrecosto = erogado ÷ aprobado − 1, de modo que cada obra pesa según su tamaño; por segundo = pérdida neta ÷ 31,536,000</span>). La pérdida neta es la misma medida de toda la herramienta: lo que pierden menos lo que ganan, en el año más reciente que publica cada obra; las que no lo publican no se estiman y dicen {c_pend_perd}.</p>
+    <p class="ms-nota">Las tres son sumas de las obras del filtro (<span class="ms-op">costo real = suma de lo erogado; sobrecosto = erogado ÷ aprobado − 1, de modo que cada obra pesa según su tamaño; por segundo = pérdida neta ÷ 31,536,000</span>). La pérdida neta es la misma medida de toda la herramienta: lo que pierden menos lo que ganan, en el año más reciente que publica cada obra; las que no lo publican no se estiman y dicen {c_pend_perd}.{nota_anun}</p>
   </section>
 
   <aside class="ms-aviso">
@@ -671,6 +672,8 @@ def _construir(base, ref):
         n=n, treal=sim_mdp(total_real), tpresu=sim_mdp(total_presu), c_der=chip('derivado'),
         n_resc=len(rescates), rreal=sim_mdp(resc_real),
         c_pend_perd=chip('pendiente', PEND_PERDIDA),
+        nota_anun=''.join(' En «%s», la cifra de partida es lo %s: no hay un presupuesto aprobado publicado, y aun así entra en «aprobado» para que la suma no la pierda.'
+                          % (esc(o['nombre']), esc(o['presupuesto_etiqueta'][0].lower() + o['presupuesto_etiqueta'][1:])) for o in solo_obras if o.get('presupuesto_etiqueta')),
         losetas='\n      '.join(losetas), mandatos='\n      '.join(mandatos), ordenes=ordenes, cadencias=cadencias,
         tm_fecha=esc(tm.get('fecha', '10-10-2026')), tm_motivo=esc(tm.get('motivo', '')), tm_alt=esc(tm.get('alternativa', 'expedientes.html#exp-tren-maya')),
         c_tm=chip('pendiente', PEND_FICHA_TM),

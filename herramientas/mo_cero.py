@@ -90,6 +90,7 @@ def obras(base):
         ver = (vf.get('obras') or {}).get(o['id']) or {}
         x = {'id': o['id'], 'n': o['nombre'], 'ico': o['icono'], 's': o['sector_id'], 'p': o['presidente'],
              'per': o['periodo_sexenal'], 'presu': o['inversion_presupuestada_mdp'], 'real': o['inversion_real_mdp'],
+             'pet': o.get('presupuesto_etiqueta') or '',
              'sob': o['sobrecosto_pct'], 'ec': dict(o.get('estado_campos') or {}), 'resc': o.get('tipo') == 'rescate',
              'defs': ver.get('definiciones') or {}, 'clave': ver.get('clave') or '',
              'fu': [{'d': (vfu.get(k) or cvf.get(k))['doc'], 'u': (vfu.get(k) or cvf.get(k))['url']}
@@ -157,11 +158,12 @@ def mesa1_filas(lista):
         dch = ' ' + chip('pendiente', 'obra-' + o['id']) if _pend_doc(o) else ''
         filas.append(
             '<tr class="mc-fila" data-i="%d" data-id="%s"><td class="mc-n" data-et="#">%d</td><td class="mc-nom">%s</td>'
-            '<td class="mc-num" data-et="Aprobado (mdp)" data-k="presu">%s %s</td>'
+            '<td class="mc-num" data-et="%s (mdp)" data-k="presu">%s%s %s</td>'
             '<td class="mc-num" data-et="Erogado (mdp)" data-k="real">%s %s</td>'
             '<td class="mc-num mc-dif" data-et="Diferencia" data-k="dif">%s%s%s</td>'
             '<td class="mc-num mc-acum" data-et="Acumulado" data-k="acum">%s</td></tr>'
-            % (i, esc(o['id']), i, _nom(o, 1), fnum(o['presu']), _ch(o, 'inversion_presupuestada_mdp'),
+            % (i, esc(o['id']), i, _nom(o, 1), esc(o.get('pet') or 'Aprobado'), fnum(o['presu']),
+               (' <small>(%s)</small>' % esc(o['pet'].lower())) if o.get('pet') else '', _ch(o, 'inversion_presupuestada_mdp'),
                fnum(o['real']), _ch(o, 'inversion_real_mdp'), '+' if dif > 0 else '', fnum(dif), dch, fnum(_rnd(acum))))
     return '\n'.join(filas)
 

@@ -65,6 +65,15 @@ RESCATES = {
     },
 }
 
+# Obras cuya cifra de partida no es un presupuesto aprobado (01-11-2026, pedido
+# del autor). En Dos Bocas, los $154,098.4 a $160,000.0 mdp son lo que se
+# anunció el 9-05-2019 (Sener y Presidencia): el presupuesto que aprobó el
+# consejo de Pemex sigue sin publicarse. Las páginas dicen «Anunciado», no
+# «Aprobado», y la memoria de promesas (promesas.py) lo sigue como promesa.
+ETIQUETAS = {
+    'dos-bocas': {'presupuesto_etiqueta': 'Anunciado en 2019'},
+}
+
 # Fondo FOBAPROA, estado de actividades (IPAB, estados financieros
 # dictaminados al 31-12-2025, PDF p. 33, columna 2024): déficit del ejercicio
 # (22,411,077,805) y transferencias del Programa de Apoyo a Ahorradores
@@ -96,6 +105,8 @@ def main():
             o.update(cambio)
         else:
             o.pop('tipo', None)
+        o.pop('presupuesto_etiqueta', None)
+        o.update(ETIQUETAS.get(o['id'], {}))
 
     # La definicion del FOBAPROA decia 214.1 % y el valor redondeado es 214.0.
     dfb = sim['verificacion']['obras']['fobaproa']['definiciones']

@@ -1375,6 +1375,14 @@
    "dice": [
     "cuatro etapas"
    ]
+  },
+  {
+   "q": "¿Con cuánto se aprobó Dos Bocas?",
+   "ir": "herramienta-megaobras-sector.html#obra-dos-bocas",
+   "dice": [
+    "No hay presupuesto aprobado publicado",
+    "Anunciado en 2019"
+   ]
   }
  ]
 }

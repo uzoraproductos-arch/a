@@ -259,7 +259,7 @@ def datos(d, peso):
         out.append({
             'id': oid, 'n': o['nombre'].split(' (')[0], 'nom': o['nombre'], 'ico': o['icono'], 'pres': o['presidente'],
             'per': o['periodo_sexenal'], 'sec': limpio(sec.get('nombre')), 'sico': sec.get('icono', ''), 'est': limpio(o.get('estatus')),
-            'resc': 1 if o.get('tipo') == 'rescate' else 0, 'al': ALIAS.get(oid, []),
+            'resc': 1 if o.get('tipo') == 'rescate' else 0, 'al': ALIAS.get(oid, []), 'pet': o.get('presupuesto_etiqueta') or '',
             'c': {'pres': _cifra(o, 'inversion_presupuestada_mdp', mo_pulso.mdp, ver, pend),
                   'real': _cifra(o, 'inversion_real_mdp', mo_pulso.mdp, ver, pend),
                   'sob': dict(_cifra(o, 'sobrecosto_pct', _pct, ver, pend), et=limpio(o.get('sobrecosto_etiqueta') or 'Sobrecosto'))},

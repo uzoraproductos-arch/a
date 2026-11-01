@@ -101,7 +101,7 @@
       acum += dif;
       pasos[1].push({ id: o.id, dif: dif, antes: antes, acum: acum });
       return '<tr class="mc-fila" data-i="' + i + '" data-id="' + esc(o.id) + '"><td class="mc-n" data-et="#">' + i + '</td><td class="mc-nom">' + nom(o, 1) + '</td>' +
-        '<td class="mc-num" data-et="Aprobado (mdp)" data-k="presu">' + fnum(o.presu) + ' ' + chC(o, 'inversion_presupuestada_mdp') + '</td>' +
+        '<td class="mc-num" data-et="' + esc(o.pet || 'Aprobado') + ' (mdp)" data-k="presu">' + fnum(o.presu) + (o.pet ? ' <small>(' + esc(o.pet.toLowerCase()) + ')</small>' : '') + ' ' + chC(o, 'inversion_presupuestada_mdp') + '</td>' +
         '<td class="mc-num" data-et="Erogado (mdp)" data-k="real">' + fnum(o.real) + ' ' + chC(o, 'inversion_real_mdp') + '</td>' +
         '<td class="mc-num mc-dif" data-et="Diferencia" data-k="dif">' + sg(dif) + fnum(dif) + (pendDoc(o) ? ' ' + chip('pendiente', 'obra-' + o.id) : '') + '</td>' +
         '<td class="mc-num mc-acum" data-et="Acumulado" data-k="acum">' + fnum(Math.round(acum)) + '</td></tr>';
@@ -277,7 +277,7 @@
     return f ? '<p class="mc-exp-t">Documentos cotejados de esta obra</p><ul class="mc-exp-fu">' + f + '</ul>' : '';
   }
   function defsHtml(o, campos) {
-    var et = { inversion_presupuestada_mdp: 'Aprobado', inversion_real_mdp: 'Erogado', sobrecosto_pct: 'Sobrecosto' };
+    var et = { inversion_presupuestada_mdp: o.pet || 'Aprobado', inversion_real_mdp: 'Erogado', sobrecosto_pct: 'Sobrecosto' };
     return campos.map(function (k) {
       var e = (o.ec || {})[k] || 'pendiente';
       var d = (o.defs || {})[k] || (e === 'pendiente' ? 'Cifra del registro sin documento oficial localizado todavía.' : '');
@@ -303,7 +303,7 @@
   }
 
   function op1(o, p) {
-    return 'Erogado ' + fnum(o.real) + ' − aprobado ' + fnum(o.presu) + ' = <b>' + sg(p.dif) + fnum(p.dif) + ' mdp</b>. ' +
+    return 'Erogado ' + fnum(o.real) + ' − ' + (o.pet ? o.pet.toLowerCase() : 'aprobado') + ' ' + fnum(o.presu) + ' = <b>' + sg(p.dif) + fnum(p.dif) + ' mdp</b>. ' +
       'Acumulado: ' + fnum(Math.round(p.antes)) + ' ' + (p.dif < 0 ? '−' : '+') + ' ' + fnum(Math.abs(p.dif)) + ' = <b>' + fnum(Math.round(p.acum)) + ' mdp</b>.' +
       (pendDoc(o) ? ' ' + chip('pendiente', 'obra-' + o.id) + ' Esta obra trae al menos una cifra sin documento: cuenta en el inventario, no como dato auditado.' : '');
   }

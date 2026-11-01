@@ -129,6 +129,8 @@ def _ficha_obra(base, o, sectores, sx_clave, compartida):
         e, txt, pend, d = _cifra(o, campo, v)
         if campo == 'sobrecosto_pct' and o.get('sobrecosto_etiqueta'):
             et = esc(o['sobrecosto_etiqueta'])
+        if campo == 'inversion_presupuestada_mdp' and o.get('presupuesto_etiqueta'):
+            et = esc(o['presupuesto_etiqueta'])
         filas.append('<div class="mx-c"><dt>%s</dt><dd><b>%s</b> %s</dd>%s</div>'
                      % (et, esc(txt), chip(e, pend),
                         ('<dd class="mx-c-def">%s</dd>' % esc(d)) if d else ''))

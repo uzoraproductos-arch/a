@@ -16097,7 +16097,8 @@ window.AUDIT_DB = {
           "medio": 128.0,
           "op": "(357,887.3 ÷ 160,000.0 − 1) × 100 = 123.7 % y (357,887.3 ÷ 154,098.4 − 1) × 100 = 132.2 %; punto medio (123.7 + 132.2) ÷ 2 = 128.0 % (127.96 con todos los decimales). Compara pesos nominales y llega solo a 2024: la obra seguía en proceso, así que es una cota inferior del sobrecosto final."
         }
-      }
+      },
+      "presupuesto_etiqueta": "Anunciado en 2019"
     },
     {
       "id": "aifa-texcoco",

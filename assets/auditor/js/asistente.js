@@ -1250,7 +1250,7 @@
   }
   function moFuentes(o) {
     var c = o.c, l = [
-      { que: (o.resc ? 'Presentado en su momento' : 'Aprobado') + ': ' + c.pres.vt, e: c.pres.e, p: c.pres.p, op: c.pres.op || c.pres.d },
+      { que: (o.pet || (o.resc ? 'Presentado en su momento' : 'Aprobado')) + ': ' + c.pres.vt, e: c.pres.e, p: c.pres.p, op: c.pres.op || c.pres.d },
       { que: (o.resc ? 'Pagado y debido' : 'Costo real') + ': ' + c.real.vt, e: c.real.e, p: c.real.p, op: c.real.op || c.real.d },
       { que: c.sob.et + ': ' + c.sob.vt, e: c.sob.e, p: c.sob.p, op: c.sob.op || c.sob.d }];
     if (o.res.tipo === 'dato') l.push({ que: 'Lo que ' + (o.res.v < 0 ? 'pierde' : 'gana') + ' al año (' + o.res.anio + ')', e: o.res.e, op: o.res.op, fu: o.res.fu[0] });
@@ -1300,7 +1300,7 @@
   function netaHoy(o) { var x = (o.er || []).filter(function (y) { return y.k === 'neta'; })[0]; return x && x.hoyt; }
   function respObra(o, foco, sim) {
     var c = o.c, s = sxDe(o), lead = '';
-    var nomP = o.resc ? 'Presentado en su momento' : 'Aprobado', nomR = o.resc ? 'Pagado y debido' : 'Costo real';
+    var nomP = o.pet || (o.resc ? 'Presentado en su momento' : 'Aprobado'), nomR = o.resc ? 'Pagado y debido' : 'Costo real';
     if (foco === 'amb' && o.amb) lead = '📍 Se ubica en <b>' + esc(o.amb.sede) + '</b>. Costó <b>' + esc(c.real.vt) + '</b> ' + chipE(c.real) +
       '. <br>🚨 <b>Alerta del Auditor Ambiental (' + esc(o.amb.eco) + '):</b> ' + esc(o.amb.alerta) +
       ' Permiso ambiental (MIA): ' + chip({ e: o.amb.miaEst, p: o.amb.miaPend }) + ' (' + esc(o.amb.miaTxt) + ').';
@@ -1309,11 +1309,11 @@
     else if (foco === 'res') lead = o.res.tipo === 'dato' ? 'Al año, ' + (o.res.v < 0 ? '<b class="pa-rojo">pierde ' : '<b class="pa-verde">gana ') + esc(o.res.vt) + '</b> por sí misma (' + o.res.anio + ', ' + esc(o.res.base) + ') ' + chipE(o.res) + '.' +
       (netaHoy(o) ? ' En pesos de ' + esc(MO.mes) + ' son ' + esc(netaHoy(o)) + ' ' + chip({ e: 'derivado' }) + '.' : '') :
       o.res.tipo === 'no_aplica' ? 'No opera, así que no tiene ganancia ni pérdida del año: ' + esc(o.res.txt) : 'No publica lo que gana o pierde al año ' + chipE({ e: 'pendiente', p: o.res.p }) + ': ' + esc(o.res.txt);
-    else if (foco === 'pres') lead = (o.resc ? 'Se presentó en su momento con ' : 'Se aprobó con ') + '<b>' + esc(c.pres.vt) + '</b> ' + chipE(c.pres) + '.';
+    else if (foco === 'pres') lead = (o.resc ? 'Se presentó en su momento con ' : o.pet ? 'No hay presupuesto aprobado publicado; se anunció con ' : 'Se aprobó con ') + '<b>' + esc(c.pres.vt) + '</b> ' + chipE(c.pres) + '.';
     else if (foco === 'salud') lead = 'Su salud financiera, en su estado de resultados básico: lo que ingresa, lo que gasta en operar, lo que paga de intereses y su resultado del año.' +
       (o.res.tipo === 'dato' ? ' Cierra con ' + (o.res.v < 0 ? '<b class="pa-rojo">▼ pérdida de ' : '<b class="pa-verde">▲ ganancia de ') + esc(o.res.vt) + '</b> (' + o.res.anio + ').' : '');
     else if (foco === 'asf') lead = o.asf ? '<b>Lo que dijo la ASF:</b> ' + esc(o.asf) : 'La plataforma todavía no integra un documento de la ASF sobre esta obra ' + chip({ e: 'pendiente', p: 'obra-' + o.id }) + '.';
-    else lead = (o.resc ? 'Lo pagado y lo que se sigue debiendo suma ' : 'Costó ') + '<b>' + esc(c.real.vt) + '</b> ' + chipE(c.real) + (o.resc ? '' : ', contra lo aprobado: ' + esc(c.pres.vt)) + '.';
+    else lead = (o.resc ? 'Lo pagado y lo que se sigue debiendo suma ' : 'Costó ') + '<b>' + esc(c.real.vt) + '</b> ' + chipE(c.real) + (o.resc ? '' : ', contra lo ' + (o.pet ? 'anunciado' : 'aprobado') + ': ' + esc(c.pres.vt)) + '.';
     var h = '<p><span aria-hidden="true">' + o.ico + '</span> <b>' + esc(o.n) + '</b> · ' + esc(o.pres) + ' (' + esc(o.per) + ')' + (o.resc ? ' · <b>rescate: deuda, no obra</b>' : '') + '</p>' +
       '<p>' + lead + '</p><ul class="pa-lista">' +
       (o.amb ? '<li>📍 Dónde está: <b>' + esc(o.amb.sede) + '</b> · <a href="' + esc(o.amb.mapa) + '">Ver en el mapa ambiental ➔</a></li>' : '') +
@@ -1343,7 +1343,7 @@
     var h = '<p>⚖️ <b>' + esc(a.n) + '</b> frente a <b>' + esc(b.n) + '</b>, con las mismas cifras de Inversión y Megaobras:</p>' +
       '<div class="pa-tabla pa-tabla-ajusta"><table><thead><tr><th></th><th scope="col">' + a.ico + ' ' + esc(a.n) + '</th><th scope="col">' + b.ico + ' ' + esc(b.n) + '</th></tr></thead><tbody>' +
       fila('Presidente', esc(a.pres) + ' (' + esc(a.per) + ')', esc(b.pres) + ' (' + esc(b.per) + ')') +
-      fila('Aprobado', v(a.c.pres), v(b.c.pres)) + fila('Costo real', v(a.c.real), v(b.c.real)) +
+      fila(a.pet || b.pet ? 'Aprobado o anunciado' : 'Aprobado', v(a.c.pres) + (a.pet ? ' <small>(' + esc(a.pet.toLowerCase()) + ')</small>' : ''), v(b.c.pres) + (b.pet ? ' <small>(' + esc(b.pet.toLowerCase()) + ')</small>' : '')) + fila('Costo real', v(a.c.real), v(b.c.real)) +
       fila('Sobrecosto', v(a.c.sob), v(b.c.sob)) + fila('Al año', resTxt(a.res, 1), resTxt(b.res, 1)) +
       '</tbody></table></div>' +
       (a.resc || b.resc ? '<p class="pa-chico">Ojo: un rescate es una deuda que el Estado asumió, no una obra; su crecimiento no se compara con un sobrecosto.</p>' : '') +

@@ -82,7 +82,7 @@ def _invirtio(obs, sectores, ancla):
         '<li class="mi-o">%s<dl class="mi-dl"><div><dt>%s</dt><dd>%s</dd></div><div><dt>%s</dt><dd>%s</dd></div>'
         '<div><dt>%s</dt><dd>%s</dd></div></dl></li>'
         % (_obra_cab(o, sectores),
-           'Presentado en su momento' if o.get('tipo') == 'rescate' else 'Aprobado', mo_tabla._cifra(o, 'inversion_presupuestada_mdp', mdp),
+           esc(o.get('presupuesto_etiqueta') or ('Presentado en su momento' if o.get('tipo') == 'rescate' else 'Aprobado')), mo_tabla._cifra(o, 'inversion_presupuestada_mdp', mdp),
            'Pagado y debido' if o.get('tipo') == 'rescate' else 'Costo real', mo_tabla._cifra(o, 'inversion_real_mdp', mdp),
            esc(o.get('sobrecosto_etiqueta') or 'Sobrecosto'), mo_tabla._cifra(o, 'sobrecosto_pct', mo_tabla._pct))
         for o in obs)
