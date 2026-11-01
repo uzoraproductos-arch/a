@@ -728,6 +728,28 @@
    "ir": "datos-judicial-gestion.html#jud-tiempos"
   },
   {
+   "q": "¿Resuelven igual los juzgados federales después de la reforma judicial?",
+   "ir": "datos-judicial-reforma.html#jud-reforma_antes_despues",
+   "dice": [
+    "96.7",
+    "93.8"
+   ]
+  },
+  {
+   "q": "¿Cómo ha crecido el rezago de los juzgados federales?",
+   "ir": "datos-judicial-reforma.html#jud-reforma_serie",
+   "dice": [
+    "837,930"
+   ]
+  },
+  {
+   "q": "¿Cuántas juezas hay desde la reforma?",
+   "ir": "datos-judicial-reforma.html#jud-reforma_titulares",
+   "dice": [
+    "47 %"
+   ]
+  },
+  {
    "q": "¿Cuántas consultas dio el IMSS en 2025?",
    "ir": "datos-salud-imss.html#sal-imss_servicios",
    "dice": [

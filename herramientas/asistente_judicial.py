@@ -45,6 +45,7 @@ import html
 
 from asistente_legislativo import CPEUM, _chip, _fuentes, bloque_tema
 import gestion_judicial
+import estadistica_judicial
 
 INE563 = {'tx': 'INE, Acuerdo INE/CG563/2025: sumatoria nacional y asignación de ministras y ministros de la SCJN (15-06-2025)',
           'url': 'https://dof.gob.mx/2025/INE/CGext202506_15_ap_2_1.pdf',
@@ -120,6 +121,12 @@ PAGINAS = [
      'Que las cuentas cuadren no dice si la justicia llega. Aquí el presupuesto de cada órgano va junto a cuántos asuntos le llegaron, cuántos resolvió, '
      'cuántos se le acumulan y cuánto tarda, con el censo del INEGI. Y lo que nadie ha publicado, con su ficha en el Registro de pendientes.',
      gestion_judicial.TEMAS),
+    # Antes y después de la reforma (pedido del autor, 01-11-2026): la
+    # estadística de la DGEJ. Cifras y tablas en estadistica_judicial.py.
+    (estadistica_judicial.PAGINA, '🔁', 'Antes y después de la reforma', 'Lo que resuelven los juzgados federales y quién juzga, antes y después',
+     'Con la estadística oficial del propio Poder Judicial: cuántos asuntos entraron y salieron de los juzgados y tribunales federales antes y después de que '
+     'llegaron las personas electas, cuánto se acumula cada año y quién juzga ahora. Y lo que todavía no se puede medir, con su ficha en el Registro de pendientes.',
+     estadistica_judicial.TEMAS),
 ]
 PAGINA_DE = {k: (p[0], p[2]) for p in PAGINAS for k in p[5]}
 
@@ -427,6 +434,7 @@ def judicial(d):
         'fu': [_o('Plazo de seis meses en materia tributaria (art. 17, reformado DOF 15-09-2024)', CPEUM)],
         'sug': ['¿Qué es el Tribunal de Disciplina Judicial?', '¿Qué es el amparo?']}
     t.update(gestion_judicial.temas(d))
+    t.update(estadistica_judicial.temas())
     assert sorted(PAGINA_DE) == sorted(t)
     for k, x in t.items():
         x.setdefault('ir', [PAGINA_DE[k][0] + '#jud-' + k, PAGINA_DE[k][1]])
@@ -482,6 +490,8 @@ def secciones(d, temas):
                 _chip('oficial'), filas, _mdp(r03['aprobado']))
         elif k in gestion_judicial.TEMAS:
             extra = gestion_judicial.extra(d, k)
+        elif k in estadistica_judicial.TEMAS:
+            extra = estadistica_judicial.extra(k)
         out.append({'id': 'jud-' + k, 'titulo': html.escape(x['tit']), 'texto': '', 'tarjetas': [],
                     'bloque': bloque_tema(x, extra, x['aqui'][0].split('#')[0])})
     return out

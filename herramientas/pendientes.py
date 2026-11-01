@@ -182,6 +182,21 @@ PROPIOS = [
      'Los tabulados y datos abiertos del censo pueden traer los expedientes en trámite al cierre del año y la plataforma aún no los integra.',
      PLATAFORMA, 'https://www.inegi.org.mx/programas/cnije/2025/', 'Censo Nacional de Impartición de Justicia Estatal 2025 (INEGI)',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-gestion.html', 'Datos · Poder Judicial · Lo que cuesta y lo que resuelve')]),
+    # Antes y después de la reforma judicial (01-11-2026).
+    ('judicial-electos-por-organo', 'Poderes', 'Cómo resuelven las personas juzgadoras electas en 2025 frente a las que siguieron en el cargo, órgano por órgano',
+     'Los Anexos Estadísticos de la DGEJ dan el movimiento nacional y por tipo de órgano, y el año 2025 partido al 30 de junio, así que sí se ve el antes y el después '
+     'del conjunto. Para separar a las personas electas de las que siguieron hay que cruzar los tabulados por órgano jurisdiccional que la DGEJ también publica con '
+     'la lista de personas electas y su adscripción (INE y Órgano de Administración Judicial). Los dos documentos existen y la plataforma aún no los cruza. '
+     'Una comparación justa además debe ser del mismo órgano y la misma materia, porque cada persona electa heredó el rezago de su juzgado.',
+     PLATAFORMA, 'https://www.dgej.cjf.gob.mx/paginas/informacionRelevante.htm?pageName=informacion%2FanexoEstadisticoWeb.htm',
+     'Anexos Estadísticos de la DGEJ (tabulados por órgano)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-reforma.html', 'Datos · Poder Judicial · Antes y después de la reforma')]),
+    ('scjn-estadistica-nueva-corte', 'Poderes', 'Cuántos asuntos resuelve la nueva Suprema Corte y cuánto tarda, comparado con la Corte anterior',
+     'Desde el 1 de septiembre de 2025 la Corte resuelve todo en Pleno, sin las dos Salas. Su estadística y sus comunicados con cifras de productividad viven en '
+     'sitios de la Corte que la plataforma todavía no pudo consultar, y una comparación «por sesión» del Pleno nuevo contra el Pleno anterior deja fuera lo que '
+     'resolvían las Salas: hay que comparar el total de asuntos resueltos por la Corte entera, con el mismo tipo de asunto y periodo.',
+     PLATAFORMA, 'https://www.scjn.gob.mx/', 'Suprema Corte de Justicia de la Nación',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-reforma.html', 'Datos · Poder Judicial · Antes y después de la reforma')]),
     # La auditoría de gestión de salud pública (27-10-2026).
     ('salud-tiempos-espera', 'Salud', 'Cuánto espera una persona una consulta de especialidad o una cirugía en el IMSS',
      'La Memoria Estadística 2025 del IMSS trae cuántas consultas y cirugías se dieron, pero no cuánto tiempo se esperó por ellas. En su boletín 023/2026 el IMSS dijo que la '

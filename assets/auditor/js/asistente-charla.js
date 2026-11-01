@@ -1160,6 +1160,13 @@
       var pj = /judicial|judicatura|\bpjf\b|suprema corte|\bscjn\b|la corte\b|\bjuez|\bjueces|juezas?\b|magistrad|ministr[oa]s?\b/;
       /* La auditoría de gestión (27-10-2026): lo que resuelve con su dinero, el rezago y cuánto tarda. */
       var juzga = /judicial|judicatura|\bpjf\b|suprema corte|\bscjn\b|la corte\b|\bjuez|\bjueces|juezas?\b|juzgado|tribunal|magistrad|justicia/;
+      /* Antes y después de la reforma judicial (01-11-2026): la estadística de la DGEJ. */
+      if (JUD.t.reforma_antes_despues) {
+        var refo = /reforma judicial|desde la reforma|despues de la reforma|antes y despues|(jueces|juezas|juzgadores|personas juzgadoras|magistrad\w*) (electos|electas|nuevos|nuevas)|nuevos jueces|eleccion judicial/;
+        if (/(cuant[oa]s|porcentaje|proporcion|cuantas son) (juezas|mujeres|magistradas)|juezas (hay|son)|mujeres (juezas|titulares|juzgadoras|en los juzgados)|paridad.*(juez|judicial)|secretari\w* (en funciones|haciendo|que suplen|suplen)|(juzgados|tribunales|organos) sin (juez|titular)|quien juzga/.test(t) && juzga.test(t)) return judTema('reforma_titulares');
+        if (/(como|cuanto) (ha )?(crecido|crece|aumentado|aumenta)|cada ano|por ano|historic|desde 2022|ultimos (anos|cuatro anos)|serie/.test(t) && /rezago|pendientes|acumul|asuntos/.test(t) && /federal|distrito|colegiad|juzgados/.test(t)) return judTema('reforma_serie');
+        if (refo.test(t) && /resuelve|resuelven|resolvieron|productiv|desempeno|eficien|rezago|trabaj|asuntos|sentencias|funcion|mejor|peor|igual|cambi/.test(t)) return judTema('reforma_antes_despues');
+      }
       if (/rezago|pendientes? de (concluir|resolver)|(asuntos|casos|juicios|expedientes|causas) (sin resolver|pendientes|acumulad|atorad)|(cuant[oa]s) (asuntos|casos|juicios|expedientes) (resuelve|resolvio|resolvieron|concluy|saca|sacan|atiende)|(cuanto|que tanto) (resuelve|resuelven|trabaja|trabajan)|(costo|cuesta|cuestan|dinero) (por|de) (cada )?(asunto|caso|juicio|expediente)|auditoria de gestion|desempeno|productividad|carga de trabajo|eficien/.test(t) && (juzga.test(t) || /rezago penal|causas penales/.test(t))) {
         if (es && es.length === 1) return judEstado(es[0]);
         if (/penal|carcel|preso|procesad/.test(t) || (/rezago|pendiente/.test(t) && !/estado|estatal|local|federal|corte|scjn/.test(t))) return judTema('rezago');
