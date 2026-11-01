@@ -2020,6 +2020,9 @@
        («pemex-perdidas-…-deuda» se iba al pendiente de la deuda de Pemex, 01-11-2026). */
     var lg = (/https?:\/\/[^\s<>"']+/i.exec(String(q)) || [])[0], hm = lg && hemeroteca(lg);
     if (hm) return hm;
+    /* La memoria de promesas (01-11-2026): «¿qué pasó con lo que prometieron…?» antes que la nota o la obra del mismo tema. */
+    var pm = charla && charla.promesa && charla.promesa(q);
+    if (pm) return pm;
     var tc = tituloColumna(q);
     if (tc) return tc;
     var tm = temaColumna(q);

@@ -38,9 +38,10 @@ PARTES = [
      '(rotulados «sin verificar»), nuestro método de siete pasos y la puerta para proponernos una nota.',
      ('verifica', 'puntos-ciegos', 'hemeroteca', 'mesa', 'metodo')),
     (SEGUIMIENTO, '🔔', 'Seguimiento: el caso no se olvida', 'Qué documento falta para cerrar cada caso, y cuándo debe llegar',
-     'Los casos abiertos, con el documento que falta para cerrarlos; los que tú sigues, con su aviso de novedades, y la agenda del erario: '
+     'Los casos abiertos, con el documento que falta para cerrarlos; los que tú sigues, con su aviso de novedades; la memoria de promesas, '
+     'y la agenda del erario: '
      'las fechas en que la ley obliga a publicar el dinero público.',
-     ('seguir', 'agenda')),
+     ('seguir', 'promesas', 'agenda')),
 ]
 # Las anclas viejas del diario de una sola página (noticias-relevantes.html#…),
 # a la página donde viven ahora. «col-*» son las columnas.
@@ -90,6 +91,10 @@ SECCIONES = [
     ('mesa', '📡', 'Mesa de redacción', 'Mesa de redacción: lo que estamos jalando',
      'Titulares sobre finanzas públicas que juntamos de los buscadores de noticias para alimentar nuestra base. Llegan <b>sin verificar</b>: '
      'son la materia prima, no la noticia. Cualquiera la puedes mandar al verificador.'),
+    # La memoria de promesas (pedido del autor, 01-11-2026): cada cifra que anuncia
+    # un gobierno, seguida por Presupuesto, Cuenta Pública y ASF (promesas.py).
+    ('promesas', '📣', 'Promesas', 'Memoria de promesas: lo que se anunció y lo que llegó',
+     'Cada cifra que anuncia un gobierno, con su fecha y su documento, seguida hasta el Presupuesto, la Cuenta Pública y la Auditoría Superior.'),
     ('agenda', '🗓️', 'Agenda', 'Agenda del erario: lo que viene',
      'Las fechas que la ley fija para el dinero público: cuándo llega el Paquete Económico, cuándo se aprueba, cuándo informa Hacienda y cuándo entrega la Auditoría Superior.'),
     ('metodo', '🧭', 'Cómo trabajamos', 'Cómo trabajamos: del rumor al documento',
@@ -196,6 +201,7 @@ def _metodo():
 
 def construir(base, ref, archivo=DIARIO):
     import insp_nota
+    import promesas
     import puntos_ciegos
     parte = next(p for p in PARTES if p[0] == archivo)
     mias = [x for x in SECCIONES if x[0] in parte[5]]
@@ -235,6 +241,8 @@ def construir(base, ref, archivo=DIARIO):
                    'o la ley prevé una prórroga, puede moverse. Los «días que faltan» son nuestra cuenta ' + insp_nota_chip('derivado') + '.</p>'),
         'metodo': _metodo(),
         'puntos-ciegos': puntos_ciegos.seccion(lambda t: __import__('html').escape(str(t or ''), quote=False)),
+        'promesas': promesas.seccion(lambda t: __import__('html').escape(str(t or ''), quote=False),
+                                     lambda e, p=None: '<span class="est-chip est-%s"%s>%s</span>' % (e, (' data-pend="%s"' % p) if p else '', e)),
     }
     clases = {'columnas': ' nt-sec-opinion', 'verifica': ' nt-sec-verifica', 'portada': ' nt-sec-portada'}
     partes = [_sec(i, ico, t, e, cuerpos[i], clases.get(i, '')) for i, ico, _n, t, e in mias]

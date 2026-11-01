@@ -1415,7 +1415,8 @@ PILARES_LISTA = [
      'datos que crece con cada nota, y lo «privilegiado» que encontramos es lo que ya es público pero está enterrado en documentos que '
      'casi nadie lee ni cruza: nunca una filtración ni un rumor. Por eso cada nota pasa por el '
      '<a href="noticias-verifica.html#puntos-ciegos">detector de puntos ciegos</a>, que busca lo que suele esconderse en las promesas, '
-     'los porcentajes y los adjetivos.'),
+     'los porcentajes y los adjetivos, y cada cifra que anuncia un gobierno entra a la '
+     '<a href="noticias-seguimiento.html#promesas">memoria de promesas</a>, que la sigue hasta el Presupuesto, la Cuenta Pública y la Auditoría.'),
     ('🔥', 'Que la verdad sea incómoda no la vuelve falsa',
      'Lo que tiene documento se publica, guste o no, sea del gobierno que sea. Y lo que no tiene documento no se publica como '
      'hecho, por más que convenga: se dice que no consta.'),

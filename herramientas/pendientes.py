@@ -397,6 +397,9 @@ def recolectar():
     for p in PROPIOS:
         out.append(e(*p))
     # 9 bis. Periodismo en riesgo (29-10-2026): lo que publica la FEADLE.
+    import promesas
+    for x in promesas.pendientes():
+        out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
     import periodistas
     for x in periodistas.pendientes():
         out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))

@@ -108,9 +108,16 @@ filtración, un dato personal ni un rumor**. Se construye en entregas:
    agrega su regla y su caso en `prueba_puntos_ciegos.py`** (corre en
    `revision.py`). Las expresiones valen igual en Python y en JavaScript: sin
    lookbehind ni grupos con nombre.
-2. **La memoria de promesas** (siguiente): cada cifra que anuncia un gobierno,
-   con su fecha, seguida por promesa → Presupuesto → Cuenta Pública → ASF,
-   para ver cuándo cambia o nunca llega.
+2. **La memoria de promesas** (hecha, 01-11-2026): cada cifra que anuncia un
+   gobierno, con su fecha, seguida por promesa → Presupuesto → Cuenta Pública
+   → ASF, para ver cuándo cambia o nunca llega (`PROMESAS` de
+   `herramientas/promesas.py`; se lee en `noticias-seguimiento.html#promesas` y
+   el chat la contesta con `D.prom`). **Ninguna cifra se escribe ahí**: se lee
+   del módulo que ya la coteja, y si cambia allá la generación se detiene. Una
+   promesa es «oficial» porque consta que se dijo, no porque se gastó; una
+   etapa sin documento es «pendiente» con su ficha (`pendientes()`), y la que
+   todavía no toca dice su fecha legal. **Una nota «Al momento» que anuncie
+   una cifra de gasto agrega su promesa ahí**, con su pregunta de prueba.
 3. **Abrir la red** (del autor): los portales de `docs/RED-PENDIENTE.md`.
 
 ---

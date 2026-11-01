@@ -198,3 +198,16 @@
 .nt-ciego-n { font-family: 'Playfair Display', Georgia, serif; font-size: 18px; }
 .nt-ciego-de { color: var(--nt-gris); }
 .nt-ciegos-no { font-size: 16px; line-height: 1.5; }
+/* La memoria de promesas (promesas.py, 01-11-2026): promesa → Presupuesto → Cuenta Pública → ASF. */
+.nt-prom { background: var(--nt-papel); border: 1px solid var(--nt-filete); border-radius: 6px; padding: 12px 14px; margin: 0 0 16px; }
+.nt-prom p { font-size: 16px; line-height: 1.5; margin: 6px 0 0; }
+.nt-prom-pasos { font-weight: 600; color: var(--nt-azul); font-size: 16px; }
+.nt-prom-quien { color: var(--nt-gris); }
+.nt-prom-etapas { list-style: none; margin: 10px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.nt-prom-et { border-left: 4px solid var(--nt-azul); background: var(--nt-op); border-radius: 6px; padding: 8px 10px; }
+.nt-prom-promesa { border-left-color: var(--nt-rojo); }
+.nt-prom-et-n { font-family: 'Playfair Display', Georgia, serif; font-size: 18px; }
+.nt-prom-cifra { font-weight: 700; font-size: 18px; }
+.nt-prom-cambio { border-top: 1px solid var(--nt-filete); padding-top: 8px; }
+.nt-prom-op { color: var(--nt-gris); }
+.nt-prom a { overflow-wrap: anywhere; }

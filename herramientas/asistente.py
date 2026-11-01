@@ -507,6 +507,8 @@ def _charla(d):
             'san': informe_sancion.bot(), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d),
             # Nepotismo y cargos publicos (28-10-2026): la tabla de la calculadora.
             'nep': nepotismo.bot(),
+            # La memoria de promesas (01-11-2026): promesa → Presupuesto → Cuenta Pública → ASF.
+            'prom': __import__('promesas').datos(),
             # Agenda del erario de Noticias (28-10-2026): las fechas que fija la ley.
             'agenda': __import__('noticias').AGENDA}
 

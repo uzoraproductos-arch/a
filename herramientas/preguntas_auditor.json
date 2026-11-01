@@ -1342,6 +1342,39 @@
     "Coincide con el documento",
     "79,846"
    ]
+  },
+  {
+   "q": "¿Qué pasó con lo que prometieron para el agua de Guadalajara?",
+   "ir": "noticias-seguimiento.html#promesa-agua-guadalajara",
+   "dice": [
+    "14,500",
+    "Todavía no toca",
+    "punto medio"
+   ]
+  },
+  {
+   "q": "¿Cumplieron lo que prometieron para Otis?",
+   "ir": "noticias-seguimiento.html#promesa-otis",
+   "dice": [
+    "61,313",
+    "35,017",
+    "26,296"
+   ]
+  },
+  {
+   "q": "¿Cuánto prometieron para Dos Bocas y cuánto costó?",
+   "ir": "noticias-seguimiento.html#promesa-dos-bocas",
+   "dice": [
+    "8,000 millones de dólares",
+    "357,887.3"
+   ]
+  },
+  {
+   "q": "¿Qué es la memoria de promesas?",
+   "ir": "noticias-seguimiento.html#promesas",
+   "dice": [
+    "cuatro etapas"
+   ]
   }
  ]
 }

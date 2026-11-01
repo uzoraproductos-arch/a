@@ -1874,6 +1874,8 @@ def agua_guadalajara_federal():
              'de': 'Cuánto le da la Federación a Jalisco por habitante, y por qué sale abajo.'},
             {'ico': '📊', 'tx': 'Cómo se ve 2027: las cifras del Paquete Económico', 'url': 'numeros-paquete-2027-cifras.html',
              'de': 'Cuánto del Presupuesto 2027 se paga con dinero prestado.'},
+            {'ico': '📣', 'tx': 'Memoria de promesas: el agua de Guadalajara', 'url': 'noticias-seguimiento.html#promesa-agua-guadalajara',
+             'de': 'La cifra de cada fecha, y si llega al Presupuesto, a la Cuenta Pública y a la Auditoría.'},
         ],
         'glosario': [g('Paquete Económico')],
         'red': 'agua Guadalajara 14 mil 500 millones acueducto Chapala Calderón San Gaspar Conagua',

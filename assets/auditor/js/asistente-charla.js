@@ -1231,6 +1231,39 @@
       return null;
     }
 
+    /* La memoria de promesas (promesas.py, 01-11-2026): lo que se anunció, seguido hasta el Presupuesto, la Cuenta Pública y la ASF. */
+    var PROM = D.prom || null;
+    function promUna(p) {
+      var NOM = {}, ICO = {};
+      PROM.etapas.forEach(function (e) { ICO[e[0]] = e[1]; NOM[e[0]] = e[2]; });
+      var fu = [], ci = [];
+      var h = '<p><b>' + esc(p.tit) + '.</b> Quién lo dijo: ' + esc(p.quien) + '.</p><ul class="pa-prom">' + p.etapas.map(function (x) {
+        fu.push({ que: NOM[x.et] + (x.fecha ? ' (' + x.fecha + ')' : ''), e: x.e, fu: { tx: x.fu, url: x.url } });
+        if (x.e !== 'pendiente') ci.push({ v: x.cifra, etq: NOM[x.et] + (x.fecha ? ', ' + x.fecha : ''), e: x.e });
+        return '<li>' + ICO[x.et] + ' <b>' + esc(NOM[x.et]) + '</b>' + (x.fecha ? ' · ' + esc(x.fecha) : '') + ': <b>' + esc(x.cifra) + '</b> ' + chip(x.e, x.pend) + '. ' + esc(x.tx) + '</li>';
+      }).join('') + '</ul>';
+      var c = p.cambio;
+      h += '<p><b>Lo que cambió:</b> ' + esc(c.tx) + ' ' + chip(c.e) + (c.pend ? ' ' + chip('pendiente', c.pend) : '') + '</p><p class="pa-chico">Operación: ' + esc(c.op) + '. Una promesa es «oficial» porque consta que se dijo, no porque se haya gastado.</p>' +
+        '<p><b>Lo que sigue:</b> ' + esc(p.sigue) + '</p>';
+      fu.push({ que: 'Lo que cambió', e: c.e, op: c.op });
+      return { html: h, fu: fu, ci: ci, tit: 'Memoria de promesas: ' + p.tit, ir: [PROM.pag.replace('#promesas', '#promesa-' + p.id), 'la memoria de promesas'],
+        sug: ['¿Qué otras promesas sigues?', '¿Qué es un punto ciego?'] };
+    }
+    function promResp(t) {
+      if (!PROM) return null;
+      var pide = /promet|promesa|cumpli|cumplen|cumplio|llego el dinero|cambio la cifra/.test(t);
+      if (!pide) return null;
+      var una = PROM.p.filter(function (p) { return p.temas.some(function (w) { return t.indexOf(w) >= 0; }); })[0];
+      if (una) return promUna(una);
+      if (!/memoria de promesas|que (otras )?promesas|promesas (del gobierno|de gasto|que sigues|sigues)|lo que (han )?prometido|que (han )?prometido|lo que prometieron/.test(t)) return null;
+      return { html: '<p>La <b>memoria de promesas</b> guarda cada cifra que anuncia un gobierno, con su fecha y su documento, y la sigue por cuatro etapas: ' +
+          PROM.etapas.map(function (e) { return e[1] + ' ' + esc(e[2]); }).join(' → ') + '. Así se ve cuándo cambia o nunca llega. Por ahora sigo estas:</p><ul class="pa-prom">' +
+          PROM.p.map(function (p) { return '<li>' + p.ico + ' <a href="' + esc(PROM.pag.replace('#promesas', '#promesa-' + p.id)) + '">' + esc(p.tit) + '</a>. ' + esc(p.cambio.tx) + '</li>'; }).join('') +
+          '</ul><p class="pa-chico">Las mismas reglas para todos los gobiernos: lo que todavía no tiene documento va pendiente, con su ficha.</p>',
+        fu: [], tit: 'La memoria de promesas', ir: [PROM.pag, 'la memoria de promesas'],
+        sug: PROM.p.map(function (p) { return '¿Qué pasó con lo que prometieron de ' + p.temas[0] + '?'; }).slice(0, 3) };
+    }
+
     function lista69(t) {
       var pag = B.fichas.filter(function (f) { return f.t === 'pagina' && f.ir && f.ir[0] === 'herramienta-inspector-efos.html'; })[0];
       var d = (DT.desc || []).filter(function (x) { return /69-B/.test(x.n); })[0];
@@ -1399,6 +1432,8 @@
       if (rsal) return fin(rsal, { tipo: 'sal' });
       var ramg = amgResp(t);
       if (ramg) return fin(ramg, { tipo: 'amg' });
+      var rprom = promResp(t);
+      if (rprom) return fin(rprom, { tipo: 'prom' });
       if (!crudo && (PIDE_VER.test(t) || LIGA.test(q) || (q.length > 160 && /\d/.test(q) && /peso|millon|billon|mdp/.test(t)))) {
         var vr = verifica(q, t);
         return vr.listo ? vr : fin(vr, { tipo: vr.plat || vr.sinDato || vr.pasa ? '' : 'ver' });
@@ -1702,6 +1737,7 @@
       /* Salud pública antes que Verificamos: «¿es cierto que el IMSS hizo 1.78 millones de cirugías?» es un cotejo de salud (27-10-2026). */
       salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       nepotismo: function (q) { var r = nepResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'nep' }); },
+      promesa: function (q) { var r = promResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'prom' }); },
       ambiente: function (q) { var r = amgResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'amg' }); },
       deFicha: deFicha, deDonde: deDonde, olvida: function () { ctx = {}; }, ctx: function () { return ctx; }
 

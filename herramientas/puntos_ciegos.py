@@ -121,7 +121,7 @@ REGLAS = [
 # Lo que el detector no puede ver con un solo texto: se dice en la página.
 NO_VE = [
     ('Una cifra que cambia de una fecha a otra', 'En el agua de Guadalajara, la cifra federal pasó de «alrededor de 12 a 13 mil» a 14,500 '
-     'millones en una semana. Verlo pide comparar declaraciones: es la siguiente entrega, la memoria de promesas.'),
+     'millones en una semana. Verlo pide comparar declaraciones: lo hace la memoria de promesas (noticias-seguimiento.html#promesas).'),
     ('Lo que la nota no menciona', 'Una cifra que falta no tiene palabras que la delaten. Eso lo encuentra el cotejo contra la base, '
      'no el detector.'),
 ]
