@@ -9,13 +9,12 @@
 # La llave es el secreto BANXICO_TOKEN del repositorio, nunca un archivo.
 name: Indicadores de Banxico
 
+# Apagado el 01-11-2026 por decisión del autor: «de Banxico ya no ponemos el
+# token; con los datos que publica y los que ya tenemos es suficiente». La base
+# se queda con el último dato cotejado (FIX del 29-10-2026) y lo dice con su
+# fecha. Solo corre a mano, y sin BANXICO_TOKEN no hace nada.
 on:
   workflow_dispatch:
-  push:
-    branches: [claude/funny-turing-imtm54]
-    paths: ['herramientas/actualizar_peso.py', '.github/workflows/indicadores.yml']
-  schedule:
-    - cron: '23 17 * * 5'   # viernes, 11:23 en la Ciudad de México
 
 permissions:
   contents: write
