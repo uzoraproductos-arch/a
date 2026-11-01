@@ -37,10 +37,27 @@ def get(org, niv, ind, ano, circ):
 
 
 def valores(org, niv, ind, ano, circ):
-    """{nombre del órgano: valor} de ese cuadro."""
+    """{nombre del órgano: valor} de ese cuadro.
+
+    Si el sistema publica dos órganos con el mismo nombre en un cuadro (dos
+    juzgados mercantiles de Veracruz, dos tribunales de apelación del
+    Decimoséptimo Circuito), se distinguen por el orden en que aparecen.
+    """
     x = get(org, niv, ind, ano, circ)
+    if not x:
+        return {}
     nom = datos()['nombres']
-    return {nom[i]: v for i, v in x['v']} if x else {}
+    veces = {}
+    for i, _ in x['v']:
+        veces[i] = veces.get(i, 0) + 1
+    out, vista = {}, {}
+    for i, v in x['v']:
+        k = nom[i]
+        if veces[i] > 1:
+            vista[i] = vista.get(i, 0) + 1
+            k = '%s (%s que publica el sistema con este nombre)' % (k, ('primero', 'segundo', 'tercero', 'cuarto')[vista[i] - 1])
+        out[k] = v
+    return out
 
 
 def archivo(n):
@@ -50,7 +67,11 @@ def archivo(n):
 def chequeo():
     d = datos()
     assert not d['faltan'], 'faltan %d páginas por órgano: vuelve a correr actualizar_indicadores_organo.py' % len(d['faltan'])
-    assert not d['descuadres'], 'la suma de los órganos no da la del circuito: %s' % d['descuadres'][:3]
+    # Donde la DGEJ publica un total de circuito que no es la suma de sus
+    # órganos (tribunales colegiados 2021: 1 a 5 asuntos) se publica tal cual,
+    # con aviso. Una diferencia grande sería un error de lectura: detiene todo.
+    for q in d['descuadres']:
+        assert abs(q['suma'] - q['circuito']) <= 10, 'la suma de los órganos no da la del circuito: %s' % q
     # Cada tabla por circuito de los niveles 3 y 5 tiene su detalle por órgano.
     n = 0
     for x in ic.datos()['datos']:
@@ -143,10 +164,21 @@ def _tabla(org, niv, ind, n):
             for x in xs))
 
 
+def _descuadres(n):
+    ds = [q for q in datos()['descuadres'] if q['circ'] == str(n)]
+    if not ds:
+        return ''
+    li = ''.join('<li>%s %s, «%s»: el circuito dice %s y sus órganos suman %s.</li>' % (
+        html.escape(ic.ORGANO[q['org']]), q['ano'], html.escape(ic.nombre(ic.get(q['org'], q['niv'], q['ind'], q['ano']))),
+        ic._v(q['circuito']), ic._v(q['suma'])) for q in ds)
+    return ('<p class="pa-chico"><b>Ojo:</b> en estos cuadros, la cifra que la DGEJ publica para el circuito no es la suma de lo que publica '
+            'para cada órgano. Se dejan las dos como vienen; no corregimos ninguna.</p><ul class="pa-lista">%s</ul>') % li
+
+
 def extra(k):
     from asistente_legislativo import _chip
     n = int(k.split('_')[1])
-    out = ('<p class="pa-chico">Cada indicador que la DGEJ publica para este circuito, órgano por órgano y año por año %s. El renglón del pie es la cifra del '
+    out = _descuadres(n) + ('<p class="pa-chico">Cada indicador que la DGEJ publica para este circuito, órgano por órgano y año por año %s. El renglón del pie es la cifra del '
            'circuito. Un órgano que cambió de nombre o de materia sale en otro renglón, porque el sistema lo identifica por su nombre. Toca cada '
            'indicador para abrir su tabla.</p>') % _chip('oficial')
     for org in _org_en(n):

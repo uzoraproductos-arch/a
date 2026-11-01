@@ -185,8 +185,9 @@ PROPIOS = [
     # Antes y después de la reforma judicial (01-11-2026).
     ('judicial-electos-por-organo', 'Poderes', 'Cómo resuelven las personas juzgadoras electas en 2025 frente a las que siguieron en el cargo, órgano por órgano',
      'Los Anexos Estadísticos de la DGEJ dan el movimiento nacional y por tipo de órgano, y el año 2025 partido al 30 de junio, así que sí se ve el antes y el después '
-     'del conjunto. Para separar a las personas electas de las que siguieron hay que cruzar los tabulados por órgano jurisdiccional que la DGEJ también publica con '
-     'la lista de personas electas y su adscripción (INE y Órgano de Administración Judicial). Los dos documentos existen y la plataforma aún no los cruza. '
+     'del conjunto. Los indicadores órgano por órgano (2021 a 2025) ya están en la plataforma, en las páginas «órgano por órgano» de cada circuito. '
+     'Para separar a las personas electas de las que siguieron falta cruzarlos con la lista de personas electas y el órgano al que quedó adscrita cada una '
+     '(INE y Órgano de Administración Judicial), y la DGEJ no parte 2025 en antes y después de su llegada. Ese cruce la plataforma aún no lo hace. '
      'Una comparación justa además debe ser del mismo órgano y la misma materia, porque cada persona electa heredó el rezago de su juzgado.',
      PLATAFORMA, 'https://www.dgej.cjf.gob.mx/paginas/informacionRelevante.htm?pageName=informacion%2FanexoEstadisticoWeb.htm',
      'Anexos Estadísticos de la DGEJ (tabulados por órgano)',

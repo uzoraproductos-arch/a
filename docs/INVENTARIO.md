@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 251 |
+| Páginas revisadas | 283 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -71,18 +71,50 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-ambiente-puntos-ciegos.html` | Puntos ciegos y consecuencias · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `datos-ambiente-quien-lo-mide.html` | Quién lo mide y de dónde sale · Auditavisión | apartados.py | 49 | 0 | 0 | 0 | 3 |
 | `datos-descargas.html` | Descarga en CSV (abre en Excel) · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
-| `datos-judicial-circuitos-apelacion.html` | Tribunales de apelación por circuito · Auditavisión | apartados.py | 47 | 0 | 18 | 1 | 4 |
-| `datos-judicial-circuitos-colegiados.html` | Tribunales colegiados por circuito · Auditavisión | apartados.py | 47 | 0 | 20 | 1 | 3 |
-| `datos-judicial-circuitos-distrito.html` | Juzgados de distrito por circuito · Auditavisión | apartados.py | 47 | 0 | 19 | 1 | 3 |
-| `datos-judicial-como-decide.html` | Cómo decide un juez · Auditavisión | apartados.py | 54 | 0 | 16 | 0 | 0 |
-| `datos-judicial-eleccion.html` | La elección judicial · Auditavisión | apartados.py | 47 | 0 | 6 | 2 | 2 |
-| `datos-judicial-estructura.html` | Quién es quién y los 32 circuitos · Auditavisión | apartados.py | 50 | 0 | 19 | 3 | 2 |
-| `datos-judicial-gestion.html` | Lo que cuesta y lo que resuelve · Auditavisión | apartados.py | 49 | 0 | 24 | 11 | 5 |
-| `datos-judicial-por-circuito.html` | Tu circuito judicial · Auditavisión | apartados.py | 77 | 0 | 320 | 0 | 32 |
-| `datos-judicial-presupuesto.html` | El presupuesto · Auditavisión | apartados.py | 50 | 0 | 6 | 5 | 1 |
-| `datos-judicial-reforma.html` | Antes y después de la reforma · Auditavisión | apartados.py | 48 | 0 | 22 | 9 | 4 |
-| `datos-judicial-sueldos.html` | Sueldos y el tope del 127 · Auditavisión | apartados.py | 48 | 0 | 7 | 2 | 0 |
-| `datos-judicial-suprema-corte.html` | La Suprema Corte · Auditavisión | apartados.py | 48 | 0 | 10 | 1 | 0 |
+| `datos-judicial-circuito-1-organos.html` | Primer Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-10-organos.html` | Décimo Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-11-organos.html` | Decimoprimer Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-12-organos.html` | Decimosegundo Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-13-organos.html` | Decimotercer Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-14-organos.html` | Decimocuarto Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-15-organos.html` | Decimoquinto Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-16-organos.html` | Decimosexto Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-17-organos.html` | Decimoséptimo Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-18-organos.html` | Decimoctavo Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-19-organos.html` | Decimonoveno Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-2-organos.html` | Segundo Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-20-organos.html` | Vigésimo Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-21-organos.html` | Vigésimo Primer Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-22-organos.html` | Vigésimo Segundo Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-23-organos.html` | Vigésimo Tercer Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-24-organos.html` | Vigésimo Cuarto Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-25-organos.html` | Vigésimo Quinto Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-26-organos.html` | Vigésimo Sexto Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-27-organos.html` | Vigésimo Séptimo Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-28-organos.html` | Vigésimo Octavo Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-29-organos.html` | Vigésimo Noveno Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-3-organos.html` | Tercer Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-30-organos.html` | Trigésimo Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-31-organos.html` | Trigésimo Primer Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-32-organos.html` | Trigésimo Segundo Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-4-organos.html` | Cuarto Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-5-organos.html` | Quinto Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-6-organos.html` | Sexto Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-7-organos.html` | Séptimo Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-8-organos.html` | Octavo Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuito-9-organos.html` | Noveno Circuito: órgano por órgano · Auditavisión | apartados.py | 79 | 0 | 7 | 0 | 1 |
+| `datos-judicial-circuitos-apelacion.html` | Tribunales de apelación por circuito · Auditavisión | apartados.py | 79 | 0 | 18 | 1 | 4 |
+| `datos-judicial-circuitos-colegiados.html` | Tribunales colegiados por circuito · Auditavisión | apartados.py | 79 | 0 | 20 | 1 | 3 |
+| `datos-judicial-circuitos-distrito.html` | Juzgados de distrito por circuito · Auditavisión | apartados.py | 79 | 0 | 19 | 1 | 3 |
+| `datos-judicial-como-decide.html` | Cómo decide un juez · Auditavisión | apartados.py | 86 | 0 | 16 | 0 | 0 |
+| `datos-judicial-eleccion.html` | La elección judicial · Auditavisión | apartados.py | 79 | 0 | 6 | 2 | 2 |
+| `datos-judicial-estructura.html` | Quién es quién y los 32 circuitos · Auditavisión | apartados.py | 82 | 0 | 19 | 3 | 2 |
+| `datos-judicial-gestion.html` | Lo que cuesta y lo que resuelve · Auditavisión | apartados.py | 81 | 0 | 24 | 11 | 5 |
+| `datos-judicial-por-circuito.html` | Tu circuito judicial · Auditavisión | apartados.py | 141 | 0 | 320 | 0 | 32 |
+| `datos-judicial-presupuesto.html` | El presupuesto · Auditavisión | apartados.py | 82 | 0 | 6 | 5 | 1 |
+| `datos-judicial-reforma.html` | Antes y después de la reforma · Auditavisión | apartados.py | 80 | 0 | 22 | 9 | 4 |
+| `datos-judicial-sueldos.html` | Sueldos y el tope del 127 · Auditavisión | apartados.py | 80 | 0 | 7 | 2 | 0 |
+| `datos-judicial-suprema-corte.html` | La Suprema Corte · Auditavisión | apartados.py | 80 | 0 | 10 | 1 | 0 |
 | `datos-justicia-ambiental-denuncias.html` | Tus denuncias ante la PROFEPA · Auditavisión | apartados.py | 38 | 0 | 18 | 5 | 3 |
 | `datos-justicia-ambiental-rezago.html` | Expedientes, multas y la Fiscalía · Auditavisión | apartados.py | 38 | 0 | 14 | 4 | 3 |
 | `datos-justicia-ambiental.html` | Justicia ambiental · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
@@ -92,7 +124,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-legislativo-estados.html` | Congresos locales y ayuntamientos · Auditavisión | apartados.py | 39 | 0 | 5 | 0 | 0 |
 | `datos-medio-ambiente.html` | Medio ambiente · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `datos-municipios.html` | Base de Datos Municipal EFIPEM (INEGI) · Auditavisión | apartados.py | 34 | 0 | 0 | 0 | 0 |
-| `datos-poder-judicial.html` | Poder Judicial · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
+| `datos-poder-judicial.html` | Poder Judicial · Auditavisión | apartados.py | 75 | 0 | 0 | 0 | 0 |
 | `datos-poder-legislativo.html` | Poder Legislativo · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
 | `datos-salud-imss.html` | El IMSS: lo que cuesta y lo que resuelve · Auditavisión | apartados.py | 39 | 0 | 18 | 9 | 3 |
 | `datos-salud-publica.html` | Salud pública · Auditavisión | apartados.py | 33 | 0 | 0 | 0 | 0 |
@@ -169,7 +201,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 45 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 59 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 271 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 303 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `informes-documentar-para-sancionar.html` | Informe especial: Documentar para sancionar · Auditavisión | apartados.py | 45 | 0 | 40 | 8 | 2 |

@@ -77,7 +77,8 @@ PAGINA_CIRC = ('datos-judicial-por-circuito.html', '📍', 'Tu circuito judicial
                'cuántos se les acumulan y cuánto tardan, comparado con todo el país. Con la estadística oficial del Poder Judicial, 2021 a 2025.')
 TEMAS_GRUPO = {g[6]: [g[6] + '_litig', g[6] + '_prod'] for g in GRUPOS}
 TEMAS_CIRC = ['circ_%d' % n for n in range(1, 33)]
-TEMAS = [k for g in GRUPOS for k in TEMAS_GRUPO[g[6]]] + TEMAS_CIRC
+TEMAS_ORG = ['org_%d' % n for n in range(1, 33)]  # indicadores_organo.py: una página por circuito
+TEMAS = [k for g in GRUPOS for k in TEMAS_GRUPO[g[6]]] + TEMAS_CIRC + TEMAS_ORG
 
 # Cómo se dice cada indicador de litigiosidad (nivel 3) en sencillo.
 NOMBRE3 = {1: 'Litigiosidad penal', 2: 'Litigiosidad administrativa', 3: 'Litigiosidad civil', 4: 'Litigiosidad del trabajo',
@@ -341,11 +342,15 @@ def temas():
         t['circ_%d' % n] = {
             'tit': '%s Circuito: %s%s' % (ORD[n - 1], EDO_NOM[EDO[n - 1]], ' ' + ALCANCE[n] if n in ALCANCE else ''),
             'h': ('<p>En los juzgados de distrito del <b>%s Circuito</b> entraron <b>%s asuntos por cada 100 mil habitantes</b> en 2025: '
-                  'lugar %d de %d en litigiosidad (nacional: %s).</p><ul class="pa-lista">%s</ul>%s') % (
-                ORD[n - 1], _v(lit['c'][c]), ll, lt_, _v(lit['nac']), ''.join(partes), AVISO),
+                  'lugar %d de %d en litigiosidad (nacional: %s).</p><ul class="pa-lista">%s</ul>'
+                  '<p>Juzgado por juzgado y tribunal por tribunal: <a href="%s">%s Circuito, órgano por órgano</a>.</p>%s') % (
+                ORD[n - 1], _v(lit['c'][c]), ll, lt_, _v(lit['nac']), ''.join(partes), 'datos-judicial-circuito-%d-organos.html' % n, ORD[n - 1], AVISO),
             'fu': [_o('Litigiosidad total de los juzgados de distrito por circuito, 2025', lit)] + fu + [PEND_ELECTOS],
             'ci': [{'v': _v(lit['c'][c]), 'etq': 'asuntos por cada 100 mil habitantes en sus juzgados de distrito (2025)', 'e': 'oficial'}],
             'sug': ['¿Litigiosidad de los juzgados de distrito por circuito?', '¿Cuánto tardan los tribunales colegiados por circuito?']}
+    import indicadores_organo
+    indicadores_organo.chequeo()
+    t.update(indicadores_organo.temas())
     return t
 
 
@@ -410,6 +415,9 @@ def extra(k):
     from asistente_legislativo import _chip
     if k.startswith('circ_'):
         return ''
+    if k.startswith('org_'):
+        import indicadores_organo
+        return indicadores_organo.extra(k)
     pre, cual = k.rsplit('_', 1)
     niv = 3 if cual == 'litig' else 5
     orgs = next(g[5] for g in GRUPOS if g[6] == pre)
@@ -431,4 +439,5 @@ def extra(k):
 
 def paginas():
     """Las entradas de PAGINAS de asistente_judicial.py."""
-    return [(g[0], g[1], g[2], g[3], g[4], TEMAS_GRUPO[g[6]]) for g in GRUPOS] + [PAGINA_CIRC + (TEMAS_CIRC,)]
+    import indicadores_organo
+    return [(g[0], g[1], g[2], g[3], g[4], TEMAS_GRUPO[g[6]]) for g in GRUPOS] + [PAGINA_CIRC + (TEMAS_CIRC,)] + indicadores_organo.paginas()

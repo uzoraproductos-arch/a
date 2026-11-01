@@ -1186,10 +1186,12 @@
         var cn = judCircuito(t);
         var orgc = /colegiados? de apelacion|unitari|apelacion/.test(t) ? 'apel' : (/colegiad|amparo directo|amparo en revision/.test(t) ? 'tcc' : (/distrito|amparo indirecto/.test(t) ? 'jd' : ''));
         var indc = /circuito|partidos? judicial|litigiosidad|congestion|indicadores? (estadisticos )?judicial|productividad/;
-        if (!cn && es && es.length === 1 && JUD.circ && /circuito|litigiosidad|congestion|productividad|juzgados? de distrito|tribunal(es)? colegiad|juzgados? federal|tribunal(es)? federal/.test(t)) {
+        var porOrg = /juzgado por juzgado|tribunal por tribunal|organo por organo|(cada|por|mi|que|cual|el) (juzgado|tribunal|organo)\b|juzgados? (primero|segundo|tercero|cuarto|quinto|sexto|septimo|octavo|noveno|decimo|vigesimo)|(primer|segundo|tercer|cuarto|quinto|sexto|septimo|octavo|noveno|decimo)o? tribunal|tribunal colegiado (primero|segundo|tercero|cuarto|quinto|sexto|septimo|octavo|noveno|decimo)/.test(t);
+        if (!cn && es && es.length === 1 && JUD.circ && (porOrg || /circuito|litigiosidad|congestion|productividad|juzgados? de distrito|tribunal(es)? colegiad|juzgados? federal|tribunal(es)? federal/.test(t))) {
           var ic = JUD.circ.indexOf(es[0].a);
           if (ic >= 0) cn = ic + 1;
         }
+        if (cn && porOrg && JUD.t['org_' + cn]) return judTema('org_' + cn);
         if (cn && JUD.t['circ_' + cn] && !orgc) return judTema('circ_' + cn);
         if (indc.test(t) || (orgc && /por circuito|cada circuito|circuitos/.test(t))) {
           var cual = /productiv|tarda|tardan|duracion|dias|por secretario|cuantas sentencias|rapid|lent/.test(t) ? 'prod' : 'litig';
