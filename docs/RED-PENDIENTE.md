@@ -55,7 +55,7 @@ Se actualiza cada vez que una nota deja un pendiente por un portal que no abre.
 
 | Dominio | Qué destraba |
 |---|---|
-| `www.inegi.org.mx` | Actualizar EFIPEM, PIB por entidad e INPC |
+| `www.inegi.org.mx` | Actualizar EFIPEM, PIB por entidad e INPC; balanza comercial por producto y valor agregado de exportación (`servidores-ia-exportaciones-contenido-nacional`) |
 | `www.banxico.org.mx` | Tipo de cambio FIX (para cotejar conversiones a dólares) |
 | `centralelectoral.ine.mx` | Comunicados del INE (`ine-contratos-desde-cordova`) |
 

@@ -47,6 +47,206 @@
   var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
  {
+  "id": "servidores-ia-exportaciones-contenido-nacional",
+  "seccion": "Al momento",
+  "icono": "🖥️",
+  "temas": [
+   "exportacion de servidores",
+   "exportaciones de servidores",
+   "exportamos servidores",
+   "exporta servidores",
+   "servidores de ia",
+   "servidores para ia",
+   "centros de datos",
+   "data centers",
+   "contenido nacional"
+  ],
+  "fecha": "01-11-2026",
+  "titulo": "¿México ya exporta más servidores que autos? Lo dice una consultora privada, no el INEGI, y el «3 a 7 % mexicano» no tiene documento",
+  "balazo": "Circula que en el primer semestre de 2026 México exportó 82,900 millones de dólares en servidores, más que en autos (74,800), pero que de cada 100 dólares solo 3 a 7 son mexicanos, contra 39 en el automotriz. Las cifras de exportación son de S&P Global y comparan contra autos y autopartes juntos; el contenido mexicano es una estimación sin documento oficial, y los 82,500 millones para centros de datos son la proyección de un gremio, no inversión comprometida.",
+  "nota": {
+   "medio": "Imagen Radio",
+   "titulo": "Exportación de servidores podría superar a la de autos en México; alcanza 82 mil 900 mdd",
+   "fecha": "",
+   "url": "https://www.imagenradio.com.mx/finanzas/exportacion-servidores-podria-superar-autos-mexico-alcanza-82-mil-900-mdd"
+  },
+  "circula": {
+   "red": "Instagram",
+   "cuenta": "publicación con liga (la pieza no trae el nombre de la cuenta)",
+   "fecha": "octubre de 2026",
+   "texto": "Dato: en el primer semestre de 2026 exportamos $82,900 MDD en servidores, superando autos ($74,800 MDD), pero de cada $100 del servidor solo $3-7 son mexicanos vs 39 % que ya logra el sector automotriz. 93.9 % va a un solo cliente: EEUU. Proyección: el valor no está en la caja; está en subir ese contenido de 7 % a 30-40 %… y en capturar los $82,500 MDD que vienen para data centers en México a 2031."
+  },
+  "cuerpo": [
+   "De dónde salen las cifras. Los 82,900 millones de dólares de servidores en el primer semestre, los 74,800 de autos y el 93.9 % que va a Estados Unidos los publicó S&P Global Market Intelligence, una consultora privada, según la prensa. La cifra oficial es la balanza comercial del INEGI por producto, y no abre desde la plataforma: por eso todas quedan pendientes.",
+   "El primer punto ciego: «superando autos» compara contra autos y autopartes juntos, y es un semestre. La misma consultora dice que, de mantenerse el ritmo, los servidores «podrían» superar a todo el sector en el año completo: todavía no ha pasado. Y exportar mucho no es lo mismo que ganar mucho: si casi todo lo de adentro se importa, lo que se queda en el país es el ensamble.",
+   "El segundo: el «3 a 7 % mexicano» no tiene documento. Lo publicó Excélsior como estimación. La medida oficial más cercana es el valor agregado de exportación de la manufactura global del INEGI, que para computadoras y equipo periférico ubicaría el contenido nacional en 21 % en 2024, según otra nota de prensa. Son cosas distintas: una habla de servidores de 2026 y la otra de toda la rama en 2024. El 39 % del automotriz tampoco pudimos abrirlo.",
+   "El tercero: los 82,500 millones «que vienen» para centros de datos son la proyección de la Asociación Mexicana de Data Centers (MEXDC) para 2026 a 2031: unos 20,630 millones de inversión directa y 61,890 indirecta. Es un gremio de la industria, no un compromiso de inversión, y es dinero privado: no pasa por el Presupuesto.",
+   "Dónde toca el dinero público. Lo que sí le cuesta al erario son la energía y el agua que esos centros necesitan, y los incentivos fiscales que se les den. Querétaro, el estado que más centros de datos concentra, recaudó $13,589.8 millones por su cuenta y depende en 77.5 % del dinero federal, según su ficha en la plataforma. «Pasar de taller de ensamble a arquitectos de infraestructura» es una propuesta, no un dato: no se coteja."
+  ],
+  "cotejo": [
+   {
+    "dice": "En el primer semestre de 2026 exportamos 82,900 millones de dólares en servidores",
+    "res": "pendiente",
+    "explica": "La cifra es de S&P Global Market Intelligence, una consultora privada, según la prensa. La oficial es la balanza comercial del INEGI por producto, que no pudimos abrir.",
+    "fuente": "INEGI, Balanza comercial de mercancías de México",
+    "url": "https://www.inegi.org.mx/temas/balanza/",
+    "quien": "Falta de la plataforma: el INEGI publica la balanza comercial por producto y el valor agregado de exportación por rama; su portal no abre desde nuestra sesión.",
+    "donde": "https://www.inegi.org.mx/temas/balanza/"
+   },
+   {
+    "dice": "Superando autos (74,800 millones de dólares)",
+    "res": "pendiente",
+    "explica": "Según la prensa, los 74,800 son autos y autopartes juntos, y la comparación es de un semestre: la consultora dice que podrían superarlos en el año completo. Sin la balanza del INEGI no lo podemos confirmar.",
+    "fuente": "INEGI, Balanza comercial de mercancías de México",
+    "url": "https://www.inegi.org.mx/temas/balanza/",
+    "quien": "Falta de la plataforma: el INEGI publica la balanza comercial por producto y el valor agregado de exportación por rama; su portal no abre desde nuestra sesión.",
+    "donde": "https://www.inegi.org.mx/temas/balanza/"
+   },
+   {
+    "dice": "De cada 100 dólares del servidor solo 3 a 7 son mexicanos, contra 39 % del automotriz",
+    "res": "pendiente",
+    "explica": "Es una estimación publicada por la prensa, sin documento oficial. La medida del INEGI, el valor agregado de exportación de la manufactura global, ubicaría el contenido nacional de computadoras y periféricos en 21 % en 2024, según otra nota: es otra medida, de otro año y de toda la rama.",
+    "fuente": "INEGI, Valor agregado de exportación de la manufactura global 2024",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibval/VAEMG2024_CP.pdf",
+    "quien": "Falta de la plataforma: el INEGI publica la balanza comercial por producto y el valor agregado de exportación por rama; su portal no abre desde nuestra sesión.",
+    "donde": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibval/VAEMG2024_CP.pdf"
+   },
+   {
+    "dice": "93.9 % va a un solo cliente: Estados Unidos",
+    "res": "pendiente",
+    "explica": "También es de S&P Global, según la prensa. El destino de las exportaciones por producto lo publica el INEGI.",
+    "fuente": "INEGI, Balanza comercial de mercancías de México",
+    "url": "https://www.inegi.org.mx/temas/balanza/",
+    "quien": "Falta de la plataforma: el INEGI publica la balanza comercial por producto y el valor agregado de exportación por rama; su portal no abre desde nuestra sesión.",
+    "donde": "https://www.inegi.org.mx/temas/balanza/"
+   },
+   {
+    "dice": "Los 82,500 millones de dólares que vienen para data centers en México a 2031",
+    "res": "pendiente",
+    "explica": "Es la proyección de la Asociación Mexicana de Data Centers para 2026 a 2031 (directa más indirecta), no una inversión comprometida ni un dato oficial. Lo comprometido se sabría por los anuncios registrados ante la Secretaría de Economía y por la inversión extranjera directa que reporta.",
+    "fuente": "Secretaría de Economía, Inversión extranjera directa",
+    "url": "https://www.gob.mx/se",
+    "quien": "Ni la Secretaría de Economía ni otra dependencia publica una cifra oficial de inversión en centros de datos: la única proyección es la de un gremio privado.",
+    "donde": "https://www.gob.mx/se"
+   }
+  ],
+  "medios": [
+   {
+    "medio": "Instagram (la publicación que circula)",
+    "titulo": "Dato: H1 2026 exportamos $82,900 MDD en servidores, superando autos",
+    "fecha": "",
+    "url": "https://www.instagram.com/p/DfAF4OKsLkv/"
+   },
+   {
+    "medio": "Imagen Radio",
+    "titulo": "Exportación de servidores podría superar a la de autos en México; alcanza 82 mil 900 mdd",
+    "fecha": "",
+    "url": "https://www.imagenradio.com.mx/finanzas/exportacion-servidores-podria-superar-autos-mexico-alcanza-82-mil-900-mdd"
+   },
+   {
+    "medio": "Excélsior",
+    "titulo": "México ensambla el futuro de otros; exporta más servidores para la IA que automóviles",
+    "fecha": "",
+    "url": "https://www.excelsior.com.mx/nacional/ensamblar-futuro"
+   },
+   {
+    "medio": "Dossier Político",
+    "titulo": "México ensambla el futuro de otros; exporta más servidores para la IA que automóviles",
+    "fecha": "19-10-2026",
+    "url": "https://dossierpolitico.com/2026/10/19/mexico-ensambla-el-futuro-de-otros-exporta-mas-servidores-para-la-ia-que-automoviles/"
+   },
+   {
+    "medio": "El Diario",
+    "titulo": "México exporta más servidores, pero sigue dependiendo de EEUU",
+    "fecha": "28-09-2026",
+    "url": "https://diario.mx/opinion/2026/sep/28/mexico-exporta-mas-servidores-pero-sigue-dependiendo-de-eeuu-1140623.html"
+   },
+   {
+    "medio": "El Financiero (Bloomberg Businessweek)",
+    "titulo": "Boom de exportaciones y crecimiento mediocre",
+    "fecha": "03-09-2026",
+    "url": "https://www.elfinanciero.com.mx/bloomberg-businessweek/2026/09/03/boom-de-exportaciones-y-crecimiento-mediocre/"
+   },
+   {
+    "medio": "El Insurgente MX",
+    "titulo": "Exportaciones de equipo de cómputo crecen 182.1 %, pero contenido nacional es solo 21 %",
+    "fecha": "",
+    "url": "https://elinsurgentemx.mx/exportaciones-de-equipo-de-computo-crecen-182-1-pero-contenido-nacional-es-solo-21"
+   },
+   {
+    "medio": "Merca2.0",
+    "titulo": "Mientras la industria automotriz pierde velocidad, México encuentra un nuevo motor: las exportaciones de servidores para IA",
+    "fecha": "",
+    "url": "https://www.merca20.com/mientras-la-industria-automotriz-pierde-velocidad-mexico-encuentra-un-nuevo-motor-para-su-economia-las-exportaciones-de-servidores-para-ia-se-disparan/"
+   },
+   {
+    "medio": "DCD (DatacenterDynamics)",
+    "titulo": "México prevé atraer 82,500 millones de dólares en centros de datos",
+    "fecha": "",
+    "url": "https://www.datacenterdynamics.com/es/noticias/m%C3%A9xico-prev%C3%A9-atraer-82500-millones-de-d%C3%B3lares-en-centros-de-datos/"
+   },
+   {
+    "medio": "Mexico Business News",
+    "titulo": "Mexico Targets US$82.5 Billion Data Center Buildout Through 2031",
+    "fecha": "",
+    "url": "https://mexicobusiness.news/cloudanddata/news/mexico-targets-us825-billion-data-center-buildout-through-2031"
+   }
+  ],
+  "datos": [
+   {
+    "ico": "🏛️",
+    "tx": "La ficha de Querétaro en el Auditor de entes",
+    "url": "herramienta-inspector-entes.html#ente=estatal:QRO",
+    "de": "Su estado de cuenta, su salud financiera y lo que la ASF le observó."
+   },
+   {
+    "ico": "📊",
+    "tx": "Las 32 entidades",
+    "url": "numeros-las-32-entidades.html",
+    "de": "Cuánto recauda cada estado por su cuenta y cuánto depende de la Federación."
+   }
+  ],
+  "glosario": [],
+  "red": "exportaciones servidores México 2026 contenido nacional S&P Global INEGI",
+  "sigue": [
+   {
+    "que": "La balanza comercial del INEGI por producto: cuánto se exportó de verdad en servidores y en autos",
+    "url": "https://www.inegi.org.mx/temas/balanza/"
+   },
+   {
+    "que": "El valor agregado de exportación 2025 del INEGI: el contenido nacional de cómputo y del automotriz",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibval/VAEMG2024_CP.pdf"
+   },
+   {
+    "que": "Los incentivos fiscales y la energía que el gobierno comprometa para centros de datos",
+    "url": "https://dof.gob.mx/"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "La base: ficha de Querétaro (recaudación propia y dependencia del dinero federal)",
+    "url": "herramienta-inspector-entes.html#ente=estatal:QRO"
+   },
+   {
+    "nombre": "Pendiente: INEGI, Balanza comercial de mercancías de México",
+    "url": "https://www.inegi.org.mx/temas/balanza/"
+   },
+   {
+    "nombre": "Pendiente: INEGI, Valor agregado de exportación de la manufactura global 2024",
+    "url": "https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2025/pibval/VAEMG2024_CP.pdf"
+   },
+   {
+    "nombre": "Punto de partida: Imagen Radio, con datos de S&P Global Market Intelligence",
+    "url": "https://www.imagenradio.com.mx/finanzas/exportacion-servidores-podria-superar-autos-mexico-alcanza-82-mil-900-mdd"
+   },
+   {
+    "nombre": "Lo que circula: publicación en Instagram (octubre de 2026)",
+    "url": "https://www.instagram.com/p/DfAF4OKsLkv/"
+   }
+  ],
+  "actualizado": "01-11-2026"
+ },
+ {
   "id": "pemex-3t-2026-perdida-neta",
   "seccion": "Al momento",
   "icono": "🛢️",

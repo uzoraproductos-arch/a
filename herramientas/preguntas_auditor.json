@@ -1269,6 +1269,22 @@
    "dice": [
     "hemeroteca"
    ]
+  },
+  {
+   "q": "¿Es cierto que México exporta más servidores que autos?",
+   "ir": "noticias-auditavision.html#col-servidores-ia-exportaciones-contenido-nacional"
+  },
+  {
+   "q": "¿Cuánto contenido nacional tienen los servidores que exporta México?",
+   "modo": "periodista",
+   "ir": "noticias-auditavision.html#col-servidores-ia-exportaciones-contenido-nacional"
+  },
+  {
+   "q": "https://www.instagram.com/p/DfAF4OKsLkv/?xtok=NDBxOW1wb2Y3dm14",
+   "ir": "noticias-auditavision.html#col-servidores-ia-exportaciones-contenido-nacional",
+   "dice": [
+    "hemeroteca"
+   ]
   }
  ]
 }
