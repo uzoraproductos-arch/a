@@ -47,6 +47,232 @@
   var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
  {
+  "id": "asf-nuevo-leon-triangulacion-cp2025",
+  "seccion": "Al momento",
+  "icono": "🔎",
+  "fecha": "31-10-2026",
+  "temas": [
+   "samuel garcia",
+   "triangulacion"
+  ],
+  "titulo": "La ASF denuncia una presunta triangulación de 7 mil 200 millones en Nuevo León: lo que dice, lo que falta y por qué «desvió» todavía no es un hecho",
+  "balazo": "Según la prensa, la Auditoría Superior presentó ante la Fiscalía una denuncia por una presunta triangulación de más de 7 mil millones de pesos desde el gobierno de Nuevo León, que llegaría en parte a un despacho ligado a la familia del gobernador Samuel García. Es una de las revisiones de la segunda entrega de la Cuenta Pública 2025. Una denuncia no es una condena, las cifras no coinciden entre medios y el documento de la ASF todavía no lo podemos abrir.",
+  "nota": {
+   "medio": "La Jornada",
+   "titulo": "Samuel García desvió 7 mil 200 mdp, denuncia la ASF",
+   "fecha": "31-10-2026",
+   "url": "https://www.jornada.com.mx/2026/10/31/estados/021n1est"
+  },
+  "circula": {
+   "red": "Instagram",
+   "cuenta": "@lajornadaonline (La Jornada)",
+   "fecha": "31 de octubre de 2026",
+   "texto": "Samuel García desvió 7 mil 200 millones de pesos, denuncia la Auditoría Superior de la Federación. La administración del gobernador de Nuevo León transfirió 5 mil 851 millones de pesos a una constructora. García compró una propiedad de mil millones de pesos. Reporte de cuenta pública 2025 incluye investigación contra Rubén Rocha."
+  },
+  "cuerpo": [
+   "Qué pasó. Con la segunda entrega de la revisión de la Cuenta Pública 2025 (30 de octubre), varios medios reportaron que la ASF presentó una denuncia penal por una presunta triangulación desde el gobierno de Nuevo León: el dinero habría pasado del gobierno a una constructora, de ahí a otra empresa y, en parte, a un despacho jurídico que la prensa liga a la familia del gobernador Samuel García. Es la misma entrega de la nota sobre los 9 mil millones por aclarar.",
+   "Las cifras no coinciden. Todos los medios dicen «7 mil 200 millones» y «5 mil 851 millones a una constructora», pero lo que habría llegado al despacho cambia según la nota: 385.3 millones en unas, 928.13 millones en otras. Hasta tener el informe individual de la ASF, esas cifras son lo que reporta la prensa.",
+   "«Desvió» es una conclusión que todavía no existe. La ASF denuncia; quien investiga es la Fiscalía y quien decide es un juez. Mientras tanto, rige la presunción de inocencia (Constitución, art. 20). Y hay un paso más que casi nadie explica: para proceder penalmente contra un gobernador en funciones por un delito federal, la Cámara de Diputados tiene que hacer una declaración de procedencia, que se comunica al Congreso del estado (Constitución, art. 111).",
+   "La propiedad de mil millones. Que el gobernador comprara una propiedad de ese valor con este dinero lo dice la prensa; no encontramos un documento oficial abierto que lo sostenga.",
+   "Sinaloa. Según La Jornada, el mismo reporte incluye una investigación relacionada con el gobierno de Rubén Rocha Moya; otras notas dicen que la constructora también movió recursos hacia personas cercanas a él. No hay detalle oficial que podamos abrir.",
+   "Para darte la escala, con datos oficiales: en 2026 la Federación le reparte a Nuevo León $76,530.0 millones de participaciones (Ramo 28) y $35,809.5 millones de aportaciones (Ramo 33), según los acuerdos de distribución publicados en el Diario Oficial."
+  ],
+  "ejemplo": {
+   "tit": "Lo que la Federación le reparte a Nuevo León y a Sinaloa en 2026",
+   "txt": "Participaciones y aportaciones de 2026, de los acuerdos de distribución del Diario Oficial que ya están en la plataforma.",
+   "filas": [
+    [
+     "Nuevo León: participaciones (Ramo 28)",
+     "$76,530.0 millones",
+     "DOF, acuerdo de distribución 2026"
+    ],
+    [
+     "Nuevo León: aportaciones (Ramo 33)",
+     "$35,809.5 millones",
+     "DOF, acuerdo de distribución 2026"
+    ],
+    [
+     "Sinaloa: participaciones (Ramo 28)",
+     "$33,662.4 millones",
+     "DOF, acuerdo de distribución 2026"
+    ],
+    [
+     "Sinaloa: aportaciones (Ramo 33)",
+     "$24,662.5 millones",
+     "DOF, acuerdo de distribución 2026"
+    ]
+   ],
+   "nota": "Millones de pesos de 2026. No es lo que se auditó: la ASF revisa el gasto de 2025."
+  },
+  "cotejo": [
+   {
+    "dice": "La ASF denuncia 7 mil 200 millones de pesos",
+    "res": "pendiente",
+    "explica": "Varios medios coinciden en que la ASF presentó una denuncia ante la Fiscalía por una presunta triangulación de esa cantidad. El informe individual que lo sostiene es de la segunda entrega de la Cuenta Pública 2025 y todavía no lo integramos.",
+    "fuente": "ASF, informe individual de la Cuenta Pública 2025 (Nuevo León)",
+    "url": "https://informe.asf.gob.mx/",
+    "quien": "Falta de la plataforma: la ASF entregó a la Cámara de Diputados su segunda entrega de la Cuenta Pública 2025 (la ley la fija el último día hábil de octubre: el 30-10-2026), pero su portal no abre desde nuestro servidor y aún no integramos su Matriz de Datos Básicos.",
+    "donde": "https://informe.asf.gob.mx/"
+   },
+   {
+    "dice": "Samuel García desvió…",
+    "res": "no consta",
+    "explica": "Es la conclusión del titular, no de la ASF: lo que hay, según la prensa, es una denuncia. Una denuncia no es una condena (Constitución, art. 20), y contra un gobernador en funciones se necesita además una declaración de procedencia de la Cámara de Diputados (art. 111).",
+    "fuente": "Constitución Política, arts. 20 y 111",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+   },
+   {
+    "dice": "Transfirió 5 mil 851 millones de pesos a una constructora",
+    "res": "pendiente",
+    "explica": "Lo dicen todos los medios que lo citan; el detalle de las transferencias está en el informe de la ASF, que no podemos abrir.",
+    "fuente": "ASF, informe individual de la Cuenta Pública 2025 (Nuevo León)",
+    "url": "https://informe.asf.gob.mx/",
+    "quien": "Falta de la plataforma: la ASF entregó a la Cámara de Diputados su segunda entrega de la Cuenta Pública 2025 (la ley la fija el último día hábil de octubre: el 30-10-2026), pero su portal no abre desde nuestro servidor y aún no integramos su Matriz de Datos Básicos.",
+    "donde": "https://informe.asf.gob.mx/"
+   },
+   {
+    "dice": "García compró una propiedad de mil millones de pesos",
+    "res": "no consta",
+    "explica": "Solo lo dice la prensa. No encontramos un documento oficial abierto (informe, denuncia publicada o registro) que lo sostenga.",
+    "fuente": "La Jornada, 31-10-2026 (punto de partida, no fuente)",
+    "url": "https://www.jornada.com.mx/2026/10/31/estados/021n1est"
+   },
+   {
+    "dice": "Reporte de cuenta pública 2025 incluye investigación contra Rubén Rocha",
+    "res": "pendiente",
+    "explica": "Según la prensa, la misma revisión encontró operaciones ligadas al gobierno de Sinaloa. No sabemos si la ASF lo presenta como investigación contra el gobernador o sobre recursos de su gobierno: eso lo dice el informe.",
+    "fuente": "ASF, informes individuales de la Cuenta Pública 2025 (Sinaloa)",
+    "url": "https://informe.asf.gob.mx/",
+    "quien": "Falta de la plataforma: la ASF entregó a la Cámara de Diputados su segunda entrega de la Cuenta Pública 2025 (la ley la fija el último día hábil de octubre: el 30-10-2026), pero su portal no abre desde nuestro servidor y aún no integramos su Matriz de Datos Básicos.",
+    "donde": "https://informe.asf.gob.mx/"
+   }
+  ],
+  "medios": [
+   {
+    "medio": "Norte Digital",
+    "titulo": "Denuncia ASF a Samuel García por presunta triangulación de 7.2 mmdp",
+    "fecha": "",
+    "url": "https://nortedigital.mx/denuncia-asf-a-samuel-garcia-por-presunta-triangulacion-de-7-2-mmdp/"
+   },
+   {
+    "medio": "Eje Central",
+    "titulo": "ASF denuncia a Samuel García por presunto desvío de 7 mil 200 millones de pesos en Nuevo León; esto se sabe",
+    "fecha": "",
+    "url": "https://www.ejecentral.com.mx/nuestro-eje/asf-denuncia-a-samuel-garcia-por-presunto-desvio-de-7-mil-200-millones-de-pesos-en-nuevo-leon-esto-se-sabe"
+   },
+   {
+    "medio": "La Jornada de Oriente",
+    "titulo": "Samuel García, gobernador de Nuevo León, desvió 7 mil 200 mdp, denuncia la ASF",
+    "fecha": "",
+    "url": "https://www.lajornadadeoriente.com.mx/puebla/asf-denuncia-triangulacion-7200-millones-samuel-garcia/"
+   },
+   {
+    "medio": "SDP Noticias",
+    "titulo": "ASF denuncia presunta triangulación de 7 mil 200 mdp en gobierno de Samuel García",
+    "fecha": "",
+    "url": "https://www.sdpnoticias.com/estados/nuevo-leon/asf-denuncia-presunta-triangulacion-de-7-mil-200-mdp-en-gobierno-de-samuel-garcia/"
+   },
+   {
+    "medio": "Proyecto Puente",
+    "titulo": "Acusan a Samuel García por presunto desvío de 7 mil 200 mdp",
+    "fecha": "31-10-2026",
+    "url": "https://proyectopuente.com.mx/2026/10/31/acusan-a-samuel-garcia-por-presunto-desvio-de-7-mil-200-mdp"
+   },
+   {
+    "medio": "Platino News",
+    "titulo": "Samuel García habría desviado 7 mil 200 MDP según la ASF",
+    "fecha": "",
+    "url": "https://platino.news/samuel-garcia-habria-desviado-7-mil-200-mdp-segun-la-asf/"
+   },
+   {
+    "medio": "Cadena Política",
+    "titulo": "Samuel García, gobernador de Nuevo León, bajo investigación por la ASF",
+    "fecha": "31-10-2026",
+    "url": "https://cadenapolitica.com/2026/10/31/samuel-garcia-gobernador-de-nuevo-leon-denuncia-asf-desvios/"
+   }
+  ],
+  "datos": [
+   {
+    "ico": "🔎",
+    "tx": "La segunda entrega de la ASF: los 9 mil millones por aclarar",
+    "url": "noticias-al-momento-asf-segunda-entrega-cp2025.html",
+    "de": "La misma entrega, con los municipios, los plazos para aclarar y las denuncias."
+   },
+   {
+    "ico": "🗺️",
+    "tx": "Nuevo León en el Auditor de entes",
+    "url": "herramienta-inspector-entes.html#ente=estatal:NL",
+    "de": "Su estado de cuenta, su salud financiera y lo que la ASF le ha observado."
+   },
+   {
+    "ico": "🗺️",
+    "tx": "Sinaloa en el Auditor de entes",
+    "url": "herramienta-inspector-entes.html#ente=estatal:SIN",
+    "de": "Lo mismo, para Sinaloa."
+   }
+  ],
+  "glosario": [
+   {
+    "t": "Denuncia de Hechos",
+    "url": "glosario.html#Denuncia-de-Hechos"
+   },
+   {
+    "t": "Informe Individual de Auditoría",
+    "url": "glosario.html#Informe-Individual-de-Auditoria"
+   },
+   {
+    "t": "Auditoría Superior de la Federación",
+    "url": "glosario.html#Auditoria-Superior-de-la-Federacion"
+   },
+   {
+    "t": "Ramo 28",
+    "url": "glosario.html#Ramo-28"
+   },
+   {
+    "t": "Ramo 33",
+    "url": "glosario.html#Ramo-33"
+   }
+  ],
+  "red": "ASF denuncia Nuevo León triangulación Samuel García Cuenta Pública 2025",
+  "sigue": [
+   {
+    "que": "El informe individual de la ASF sobre Nuevo León: montos, empresas y el camino del dinero",
+    "url": "https://informe.asf.gob.mx/"
+   },
+   {
+    "que": "Si la FGR pide a la Cámara de Diputados la declaración de procedencia (Constitución, art. 111)",
+    "url": "https://gaceta.diputados.gob.mx/"
+   },
+   {
+    "que": "El informe individual sobre Sinaloa",
+    "url": "https://informe.asf.gob.mx/"
+   },
+   {
+    "que": "La respuesta del gobierno de Nuevo León a las observaciones (30 días hábiles, LFRCF art. 39)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFRCF.pdf"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Constitución Política de los Estados Unidos Mexicanos, arts. 20 y 111",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+   },
+   {
+    "nombre": "Acuerdos de distribución de participaciones y aportaciones 2026 (DOF), en la base de la plataforma",
+    "url": "numeros-mapa-del-gasto-federalizado.html"
+   },
+   {
+    "nombre": "Ley de Fiscalización y Rendición de Cuentas de la Federación, art. 39",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFRCF.pdf"
+   },
+   {
+    "nombre": "Punto de partida: La Jornada, «Samuel García desvió 7 mil 200 mdp, denuncia la ASF» (31-10-2026)",
+    "url": "https://www.jornada.com.mx/2026/10/31/estados/021n1est"
+   }
+  ],
+  "actualizado": "01-11-2026"
+ },
+ {
   "id": "carnaval-ensenada-2026-imcudhe",
   "temas": [
    "carnaval"

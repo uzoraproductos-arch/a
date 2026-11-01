@@ -1224,6 +1224,22 @@
    "dice": [
     "hemeroteca"
    ]
+  },
+  {
+   "q": "¿Es cierto que Samuel García desvió 7 mil 200 millones?",
+   "ir": "noticias-auditavision.html#col-asf-nuevo-leon-triangulacion-cp2025"
+  },
+  {
+   "q": "¿Qué denunció la ASF del gobierno de Samuel García?",
+   "modo": "periodista",
+   "ir": "noticias-auditavision.html#col-asf-nuevo-leon-triangulacion-cp2025"
+  },
+  {
+   "q": "https://www.jornada.com.mx/2026/10/31/estados/021n1est",
+   "ir": "noticias-auditavision.html#col-asf-nuevo-leon-triangulacion-cp2025",
+   "dice": [
+    "hemeroteca"
+   ]
   }
  ]
 }
