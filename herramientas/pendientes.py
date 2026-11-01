@@ -197,6 +197,14 @@ PROPIOS = [
      'resolvían las Salas: hay que comparar el total de asuntos resueltos por la Corte entera, con el mismo tipo de asunto y periodo.',
      PLATAFORMA, 'https://www.scjn.gob.mx/', 'Suprema Corte de Justicia de la Nación',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-reforma.html', 'Datos · Poder Judicial · Antes y después de la reforma')]),
+    # Indicadores por circuito de la DGEJ (01-11-2026).
+    ('judicial-apelacion-tiempos', 'Poderes', 'Cuánto tardan los tribunales colegiados de apelación, circuito por circuito',
+     'El sistema de Indicadores Estadísticos Judiciales tiene el indicador de duración (del ingreso a la sentencia) para los tribunales colegiados de apelación, '
+     'pero de 2023 a 2025 sale vacío; de los tribunales unitarios, que se transformaron en ellos, sí lo publicó hasta 2023. '
+     'Falta de transparencia del Órgano de Administración Judicial, que administra la estadística desde el 1 de septiembre de 2025.',
+     'Órgano de Administración Judicial (Dirección General de Estadística Judicial)', 'https://www.dgej.cjf.gob.mx/Indicadores/acuerd_nal_ini.asp',
+     'Indicadores Estadísticos Judiciales de la DGEJ',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-circuitos-apelacion.html', 'Datos · Poder Judicial · Tribunales de apelación por circuito')]),
     # La auditoría de gestión de salud pública (27-10-2026).
     ('salud-tiempos-espera', 'Salud', 'Cuánto espera una persona una consulta de especialidad o una cirugía en el IMSS',
      'La Memoria Estadística 2025 del IMSS trae cuántas consultas y cirugías se dieron, pero no cuánto tiempo se esperó por ellas. En su boletín 023/2026 el IMSS dijo que la '

@@ -46,6 +46,7 @@ import html
 from asistente_legislativo import CPEUM, _chip, _fuentes, bloque_tema
 import gestion_judicial
 import estadistica_judicial
+import indicadores_circuito
 
 INE563 = {'tx': 'INE, Acuerdo INE/CG563/2025: sumatoria nacional y asignación de ministras y ministros de la SCJN (15-06-2025)',
           'url': 'https://dof.gob.mx/2025/INE/CGext202506_15_ap_2_1.pdf',
@@ -127,6 +128,9 @@ PAGINAS = [
      'Con la estadística oficial del propio Poder Judicial: cuántos asuntos entraron y salieron de los juzgados y tribunales federales antes y después de que '
      'llegaron las personas electas, cuánto se acumula cada año y quién juzga ahora. Y lo que todavía no se puede medir, con su ficha en el Registro de pendientes.',
      estadistica_judicial.TEMAS),
+    # Litigiosidad y productividad por circuito (pedido del autor, 01-11-2026):
+    # los Indicadores Estadísticos Judiciales de la DGEJ, 2021 a 2025.
+    *indicadores_circuito.paginas(),
 ]
 PAGINA_DE = {k: (p[0], p[2]) for p in PAGINAS for k in p[5]}
 
@@ -435,12 +439,13 @@ def judicial(d):
         'sug': ['¿Qué es el Tribunal de Disciplina Judicial?', '¿Qué es el amparo?']}
     t.update(gestion_judicial.temas(d))
     t.update(estadistica_judicial.temas())
+    t.update(indicadores_circuito.temas())
     assert sorted(PAGINA_DE) == sorted(t)
     for k, x in t.items():
         x.setdefault('ir', [PAGINA_DE[k][0] + '#jud-' + k, PAGINA_DE[k][1]])
         x['aqui'] = [PAGINA_DE[k][0] + '#jud-' + k, PAGINA_DE[k][1]]
     return {'t': t, 'min': [[n, v] for n, v, _ in MINISTROS], 'pag': [PORTADA, PORTADA_TIT],
-            'est': gestion_judicial.por_estado(d)}
+            'est': gestion_judicial.por_estado(d), 'circ': indicadores_circuito.EDO}
 
 
 def secciones(d, temas):
@@ -492,6 +497,8 @@ def secciones(d, temas):
             extra = gestion_judicial.extra(d, k)
         elif k in estadistica_judicial.TEMAS:
             extra = estadistica_judicial.extra(k)
+        elif k in indicadores_circuito.TEMAS:
+            extra = indicadores_circuito.extra(k)
         out.append({'id': 'jud-' + k, 'titulo': html.escape(x['tit']), 'texto': '', 'tarjetas': [],
                     'bloque': bloque_tema(x, extra, x['aqui'][0].split('#')[0])})
     return out
