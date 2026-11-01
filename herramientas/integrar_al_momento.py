@@ -140,6 +140,15 @@ Parlamentaria), ni la votación del Senado. El 50 % anterior de la Defensa y
 los 18 mil millones son de prensa: el 50 % solo se usa dicho así, y los 18 mil
 quedan pendientes, por falta de la plataforma.
 
+Nota 9 · Pemex y su pérdida del tercer trimestre de 2026 (01-11-2026). Pieza
+que pasó el autor: publicación de un medio en Instagram («pérdida neta de 10 mil
+792 millones… 82.4 % menos que los 61 mil 247»). Documentos cotejados:
+- La base: Anexo 1 del PEF 2026 (gasto programable y costo financiero de
+  Pemex) y el punto ciego c-pemex del Paquete 2027 (Ramo 18). Se leen.
+No se pudo abrir: el reporte trimestral de Pemex (su portal y la BMV). La
+pérdida (10,792 o 10,795), los dólares, la base de 2025 y las causas quedan
+pendientes, por falta de la plataforma.
+
 Campo opcional temas [palabras]: las que son propias de la nota («carnaval»); en el
 chat, una pregunta que las trae abre la nota aunque también nombre a un municipio
 o a un estado (temaColumna() de asistente.js).
@@ -1450,7 +1459,154 @@ def lfd_dnr_defensa():
     }
 
 
-NOTAS = [modalidad_40, senado_lif_2027, jalisco_gasto_federal, asf_segunda_entrega_2025, portacelis_diesel, carnaval_ensenada, asf_nuevo_leon, lfd_dnr_defensa]
+
+PEMEX_RI = 'https://www.pemex.com/'
+BMV = 'https://www.bmv.com.mx/'
+EFE_PEMEX = 'https://www.infobae.com/america/agencias/2026/10/30/pemex-pierde-605-millones-de-dolares-en-tercer-trimestre-de-2026-pese-a-mayores-ingresos/'
+EXP_PEMEX = 'https://expansion.mx/empresas/2026/10/30/pemex-perdidas-tercer-trimestre-2026-ingresos-deuda'
+FALTA_PEMEX = ('Falta de la plataforma: Pemex publica sus resultados trimestrales en su portal de relación con inversionistas y los '
+               'entrega a la Bolsa Mexicana de Valores; ninguno de los dos abre desde nuestra sesión.')
+
+
+def _pemex():
+    """Lo que la base ya sabe de Pemex: su gasto y su costo financiero en el PEF 2026 (Anexo 1) y el apoyo del
+    Ramo 18 de 2026 y 2027 (CGPE 2027). Se lee, no se copia."""
+    d = auditorias.db()
+    a1 = d['panoramaErario']['anexo1PEF2026']
+    em = [g for g in a1['grupos'] if g['clave'] == 'E'][0]['ramos']
+    prog = [r for r in em if r['nombre'] == 'Petróleos Mexicanos'][0]['pesos'] / 1e6
+    fin = [r for r in em if r['nombre'] == 'Petróleos Mexicanos · costo financiero'][0]['pesos'] / 1e6
+    cp = [c for c in d['paquete_2027']['ciegos'] if c['id'] == 'c-pemex'][0]
+    if '263,476.0' not in cp['documento'] or '81,100.0' not in cp['documento']:
+        raise SystemExit('integrar_al_momento: cambió el punto ciego c-pemex del Paquete 2027; revisa la nota de Pemex')
+    return prog, fin, a1
+
+
+def pemex_3t_2026():
+    from apartados import glosario_ancla
+    g = lambda t: {'t': t.split(' (')[0], 'url': 'glosario.html#' + glosario_ancla(t)}
+    prog, fin, a1 = _pemex()
+    m1 = lambda v: '$%s millones' % format(round(v, 1), ',.1f')
+    tot = prog + fin
+    return {
+        'id': 'pemex-3t-2026-perdida-neta',
+        'seccion': 'Al momento',
+        'icono': '🛢️',
+        'temas': ['tercer trimestre', 'perdio pemex', 'pierde pemex', 'perdida de pemex', 'perdida neta de pemex'],
+        'fecha': '01-11-2026',
+        'titulo': 'Pemex vuelve a perder en el tercer trimestre: ¿10,792 o 10,795 millones?, y lo que esa pérdida no cuenta',
+        'balazo': ('Circula que Pemex perdió 10 mil 792 millones de pesos entre julio y septiembre, 82.4 %% menos que un año antes, por '
+                   'más ventas y menos deterioro de activos. La mayoría de los medios da 10,795 millones, y el reporte de Pemex no abre '
+                   'desde la plataforma: la cifra queda pendiente. La cuenta del 82.4 %% sí cuadra con las dos versiones, y lo que casi '
+                   'nadie dice es cuánto le cuestan al erario los intereses de Pemex: %s en 2026.' % m1(fin)),
+        'nota': {'medio': 'EFE (vía Infobae)', 'titulo': 'Pemex pierde 605 millones de dólares en tercer trimestre de 2026 pese a mayores ingresos',
+                 'fecha': '30-10-2026', 'url': EFE_PEMEX},
+        'circula': {'red': 'Instagram', 'cuenta': 'un medio que remite a «el link de nuestra bio» (la publicación no trae el nombre de la cuenta)',
+                    'fecha': '30 de octubre de 2026',
+                    'texto': ('La estatal Petróleos Mexicanos (Pemex) reportó este viernes una pérdida neta de 10 mil 792 millones de pesos '
+                              '(605 millones de dólares) durante el tercer trimestre. Esto representa un 82.4 % menos que los 61 mil 247 millones '
+                              'de pesos registrados en el mismo periodo del año pasado; esto se debió a un incremento en ventas y disminución en '
+                              'deterioro de activos.')},
+        'cuerpo': [
+            ('Qué pasó. Pemex entregó el viernes 30 de octubre su reporte del tercer trimestre de 2026 (julio a septiembre). Según la '
+             'prensa, regresó a los números rojos después de la utilidad del segundo trimestre: perdió unos 10.8 mil millones de pesos. El '
+             'reporte mismo, en el portal de Pemex y en la Bolsa Mexicana de Valores, no abre desde la plataforma, así que todas las cifras '
+             'de esta nota que vienen de la prensa van como pendientes.'),
+            ('El primer punto ciego: ¿10,792 o 10,795? La publicación dice 10,792 millones, igual que Industry & Energy Magazine. EFE y '
+             'Expansión dicen 10,795. Para el mismo trimestre de 2025 la publicación dice 61,247 millones y otros medios, 61,242. Son '
+             'diferencias chicas, pero dos cifras distintas no pueden ser las dos «la de Pemex»: manda el reporte.'),
+            ('La cuenta del 82.4 % cuadra. Con las cifras de la publicación, 10,792 ÷ 61,247 = 0.176: la pérdida es 82.4 % menor. Con las '
+             'otras, 10,795 ÷ 61,242 también da 82.4 %. Y los dólares son una conversión: 605 millones de dólares implican unos 17.8 pesos '
+             'por dólar; otro medio convirtió a 596.9 millones. Pemex reporta en pesos.'),
+            ('Lo que la pérdida no cuenta. «Perdió menos» no quiere decir «ya no cuesta». En el Presupuesto de 2026, Pemex tiene %s de gasto '
+             'programable y %s más de costo financiero, los intereses de su deuda: de cada 100 pesos que el Presupuesto le asigna, %.1f son '
+             'intereses (derivado). Y en 2026 el Ramo 18 le dio a la política de hidrocarburos 263,476.0 millones; para 2027 se proponen '
+             '81,100.0 millones, según los Criterios Generales.' % (m1(prog), m1(fin), 100 * fin / tot)),
+            ('Por qué perdió, según la prensa. EFE cita a la directora de Finanzas: la pérdida cambiaria fue de 16,391 millones, porque el '
+             'peso se depreció en el trimestre, y los ingresos subieron 28.5 %. Si eso es así, sin el efecto del tipo de cambio el trimestre '
+             'habría salido positivo; pero es una cuenta con cifras de prensa, así que no la damos como derivado. Y «menos deterioro» quiere '
+             'decir que Pemex le restó menos valor a sus activos que hace un año: es un registro contable, no dinero que entró.'),
+        ],
+        'ejemplo': {
+            'tit': 'La cuenta, con números redondos',
+            'txt': 'Si el Presupuesto 2026 de Pemex fueran 100 pesos:',
+            'filas': [['Para operar e invertir (gasto programable)', '$%.0f' % (100 * prog / tot), '%s ÷ %s × 100' % (m1(prog), m1(tot))],
+                      ['Para pagar intereses de su deuda (costo financiero)', '$%.0f' % (100 * fin / tot), '%s ÷ %s × 100' % (m1(fin), m1(tot))]],
+            'nota': 'Es un ejemplo derivado con el Anexo 1 del Decreto de Presupuesto de Egresos 2026, que la plataforma tiene en su base.',
+        },
+        'cotejo': [
+            {'dice': 'Pemex reportó una pérdida neta de 10 mil 792 millones de pesos en el tercer trimestre', 'res': 'pendiente',
+             'explica': ('Casi todos los medios dan 10,795 millones (EFE, Expansión) y solo uno 10,792. Manda el reporte de Pemex a la Bolsa, '
+                         'que no pudimos abrir.'),
+             'fuente': 'Pemex, Reporte de resultados al 30 de septiembre de 2026', 'url': PEMEX_RI,
+             'quien': FALTA_PEMEX, 'donde': BMV},
+            {'dice': '(605 millones de dólares)', 'res': 'pendiente',
+             'explica': ('Es una conversión: 605 millones de dólares equivalen a unos 17.8 pesos por dólar. Otro medio convirtió a 596.9 millones. '
+                         'El tipo de cambio que usó Pemex vendrá en su reporte.'),
+             'fuente': 'Pemex, Reporte de resultados al 30 de septiembre de 2026', 'url': PEMEX_RI,
+             'quien': FALTA_PEMEX, 'donde': BMV},
+            {'dice': 'Un 82.4 % menos que los 61 mil 247 millones del mismo periodo del año pasado', 'res': 'pendiente',
+             'explica': ('La resta cuadra con las dos versiones de la prensa (10,792 contra 61,247, o 10,795 contra 61,242: 82.4 % menos en las '
+                         'dos), pero las dos cifras de partida siguen sin documento abierto.'),
+             'fuente': 'Pemex, reportes de resultados del tercer trimestre de 2025 y de 2026', 'url': PEMEX_RI,
+             'quien': FALTA_PEMEX, 'donde': BMV},
+            {'dice': 'Se debió a un incremento en ventas y disminución en deterioro de activos', 'res': 'pendiente',
+             'explica': ('La prensa reporta ingresos 28.5 % más altos y una pérdida cambiaria de 16,391 millones. El deterioro de activos es un '
+                         'registro contable: si baja, la pérdida se achica aunque no entre más dinero. El desglose está en el reporte.'),
+             'fuente': 'Pemex, Reporte de resultados al 30 de septiembre de 2026', 'url': PEMEX_RI,
+             'quien': FALTA_PEMEX, 'donde': BMV},
+        ],
+        'medios': [
+            {'medio': 'EFE (vía Infobae)', 'titulo': 'Pemex pierde 605 millones de dólares en tercer trimestre de 2026 pese a mayores ingresos',
+             'fecha': '30-10-2026', 'url': EFE_PEMEX},
+            {'medio': 'Expansión', 'titulo': 'Pemex pierde 10,795 millones de pesos, aunque reduce su deuda financiera y con proveedores',
+             'fecha': '30-10-2026', 'url': EXP_PEMEX},
+            {'medio': 'Industry & Energy Magazine', 'titulo': 'Pemex pierde 10 mil 792 millones de pesos, pese a aumentar 28.5 % sus ingresos en el 3T',
+             'fecha': '', 'url': 'https://energymagazine.mx/2026/10/pemex-pierde-10-mil-792-millones-de-pesos-pese-a-aumentar-28-5-sus-ingresos/'},
+            {'medio': 'MVS Noticias', 'titulo': 'Pierde Pemex 605 millones de dólares en tercer trimestre de 2026', 'fecha': '30-10-2026',
+             'url': 'https://mvsnoticias.com/economia/2026/10/30/pierde-pemex-605-millones-de-dolares-en-tercer-trimestre-de-2026-751799.html'},
+            {'medio': 'Energy21', 'titulo': 'Pierde Pemex 10.8 mil mdp en el tercer trimestre de 2026', 'fecha': '',
+             'url': 'https://energy21.com.mx/pierde-pemex-10-mil-mdp-en-el-tercer-trimestre-de-2026/'},
+            {'medio': 'Uniradio Informa', 'titulo': 'Pemex reporta pérdida neta de 10 mil 800 mdp en tercer trimestre', 'fecha': '',
+             'url': 'https://www.uniradioinforma.com/negocios/pemex-reporta-perdida-neta-10-mil-800-mdp-tercer-trimestre-n911631'},
+            {'medio': 'ABC Noticias', 'titulo': 'Pierde Pemex más de 10 mil mdp en tercer trimestre de 2026', 'fecha': '30-10-2026',
+             'url': 'https://abcnoticias.mx/nacional/2026/10/30/pierde-pemex-mas-de-10-mil-mdp-en-tercer-trimestre-de-2026-294001.html'},
+            {'medio': 'Energía a Debate', 'titulo': 'Vuelve Pemex a resultados negativos en el 3T', 'fecha': '',
+             'url': 'https://energiaadebate.com/vuelve-pemex-a-resultados-negativos-en-el-3t'},
+        ],
+        'datos': [
+            {'ico': '💸', 'tx': 'El costo financiero: lo que se paga de intereses', 'url': 'numeros-egreso-costo-financiero.html',
+             'de': 'Cuánto se va en intereses de la deuda del país, de Pemex y de la CFE.'},
+            {'ico': '🔦', 'tx': 'Los puntos ciegos del Paquete 2027', 'url': 'numeros-paquete-2027-puntos-ciegos.html',
+             'de': 'Entre ellos, por qué los 81 mil millones para Pemex no son un apoyo nuevo.'},
+            {'ico': '🏭', 'tx': 'Auditoría en imágenes: Dos Bocas', 'url': 'auditoria-dos-bocas.html',
+             'de': 'La refinería de Pemex: lo que costó, lo que pagó su filial y lo que observó la ASF.'},
+            {'ico': '⛽', 'tx': 'Auditoría en imágenes: el huachicol fiscal', 'url': 'auditoria-huachicol-fiscal.html',
+             'de': 'El combustible que entra sin pagar lo que debe: dinero que deja de llegar al erario.'},
+        ],
+        'glosario': [g('Pérdida Neta (Resultado Neto)'), g('Deterioro de Activos'), g('Costo Financiero de la Deuda'),
+                     g('Empresas Públicas del Estado')],
+        'red': 'Pemex pérdida neta tercer trimestre 2026 reporte de resultados',
+        'sigue': [
+            {'que': 'El reporte de resultados del tercer trimestre en la Bolsa: la pérdida exacta, el tipo de cambio y el deterioro', 'url': BMV},
+            {'que': 'El saldo de la deuda financiera de Pemex al 30 de septiembre (lo que la plataforma todavía no tiene)',
+             'url': 'pendientes.html#pemex-deuda'},
+            {'que': 'El Presupuesto de Egresos 2027 (a más tardar el 15 de noviembre): cuánto queda del apoyo del Ramo 18', 'url': PPEF},
+            {'que': 'La Cuenta Pública 2026: lo que Pemex ejerció y lo que pagó de intereses', 'url': CUENTA_PUBLICA},
+        ],
+        'fuentes': [
+            {'nombre': '%s, pp. %s, en la base de la plataforma' % (a1['fuente'], a1['paginas']), 'url': a1['url']},
+            {'nombre': 'Criterios Generales de Política Económica 2027 (Ramo 18), en la base de la plataforma',
+             'url': 'numeros-paquete-2027-puntos-ciegos.html'},
+            {'nombre': 'Pendiente: Pemex, Reporte de resultados al 30 de septiembre de 2026 (portal de Pemex y Bolsa Mexicana de Valores)',
+             'url': BMV},
+            {'nombre': 'Punto de partida: EFE, «Pemex pierde 605 millones de dólares en tercer trimestre de 2026…» (30-10-2026)', 'url': EFE_PEMEX},
+        ],
+        'actualizado': '01-11-2026',
+    }
+
+
+NOTAS = [modalidad_40, senado_lif_2027, jalisco_gasto_federal, asf_segunda_entrega_2025, portacelis_diesel, carnaval_ensenada, asf_nuevo_leon, lfd_dnr_defensa, pemex_3t_2026]
 
 
 def main():

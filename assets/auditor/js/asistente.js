@@ -2004,6 +2004,8 @@
   /* Una palabra propia de una nota («carnaval», campo temas de integrar_al_momento.py)
      abre esa nota aunque la pregunta nombre también a un municipio o a un estado (01-11-2026). */
   function temaColumna(q) {
+    /* Una liga pegada la reconoce la hemeroteca, no las palabras de su dirección. */
+    if (/https?:\/\/|www\./i.test(q)) return null;
     var pq = ' ' + plano(q) + ' ';
     var f = (B.fichas || []).filter(function (x) {
       return x.t === 'columna' && (x.tem || []).some(function (w) { return pq.indexOf(' ' + w + ' ') >= 0; });
@@ -2012,6 +2014,10 @@
   }
 
   function respuesta(q, previas) {
+    /* Una liga que ya está en la hemeroteca abre su cotejo antes que cualquier palabra de su dirección
+       («pemex-perdidas-…-deuda» se iba al pendiente de la deuda de Pemex, 01-11-2026). */
+    var lg = (/https?:\/\/[^\s<>"']+/i.exec(String(q)) || [])[0], hm = lg && hemeroteca(lg);
+    if (hm) return hm;
     var tc = tituloColumna(q);
     if (tc) return tc;
     var tm = temaColumna(q);

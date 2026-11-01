@@ -171,6 +171,15 @@ TERMINOS = [
      'definicion': 'La estadística del INEGI que pone en pesos lo que la economía le cuesta al ambiente: el agotamiento de recursos naturales, la degradación del aire, el agua y el suelo, y lo que se gasta en proteger el ambiente. De ellas salen el PIB ecológico (PINE) y los costos totales por agotamiento y degradación: $1,382,214 millones de pesos en 2024. Se publican cada diciembre con los datos del año anterior.',
      'ley': 'INEGI, Cuentas Económicas y Ecológicas de México 2024 (1-12-2025) · Art. 26 apartado B CPEUM',
      'categoria': AMB},
+    # --- Estados financieros de las empresas públicas (bandeja 8, 01-11-2026) ---
+    {'termino': 'Pérdida Neta (Resultado Neto)',
+     'definicion': 'Lo que queda cuando a todos los ingresos de un periodo se les restan todos sus costos y gastos: los de operar, los intereses de la deuda, lo que se gana o se pierde porque cambió el tipo de cambio, el deterioro de activos, los impuestos y los derechos. Si sale negativo es pérdida neta; si sale positivo, utilidad o rendimiento neto. Es una cifra contable: no es lo mismo que el dinero que entró o salió de la caja en esos meses. Pemex la reporta cada trimestre, en pesos, en su informe de resultados a la Bolsa Mexicana de Valores.',
+     'ley': 'NIC 1, Presentación de estados financieros (Normas Internacionales de Información Financiera, con las que reporta Pemex)',
+     'categoria': HAC},
+    {'termino': 'Deterioro de Activos',
+     'definicion': 'Lo que una empresa le resta al valor con el que tiene registrado un activo (un pozo, una refinería, una planta) cuando lo que espera recuperar de él, usándolo o vendiéndolo, ya es menor. Se registra como gasto y hace más grande la pérdida del periodo, aunque no salga dinero de la caja; si después el activo recupera valor, el deterioro se puede revertir y se registra como ingreso. Por eso una pérdida más chica puede deberse a menos deterioro y no a que la empresa venda u opere mejor.',
+     'ley': 'NIC 36, Deterioro del valor de los activos (Normas Internacionales de Información Financiera)',
+     'categoria': HAC},
 ]
 
 # Términos que ya existían y se reescriben. La clave es el nombre actual; si
@@ -198,7 +207,7 @@ REESCRITURAS = {
         'ley': 'Art. 94 CPEUM (reforma DOF 15-09-2024) · Presupuesto analítico de plazas del ' + MANPJF},
     'Secretario(a) de Estudio y Cuenta': {
         'definicion': 'Persona funcionaria judicial adscrita a una ponencia que analiza amparos, controversias y acciones de inconstitucionalidad y redacta los proyectos de sentencia. Su remuneración se fija en el manual anual del Poder Judicial según su nivel; la plataforma la cita de ese documento y no de estimaciones.',
-        'ley': 'Ley Orgánica del Poder Judicial de la Federación · ' + MANPJF},
+        'ley': 'Ley Orgánica del Poder Judicial de la Federación (DOF 20-12-2024), art. 15 · ' + MANPJF},
     'Asesoría de Ponencia y Récord de Plazas (Más de 70 asesores)': {
         'termino': 'Asesoría de Ponencia',
         'definicion': 'Personal de confianza o por honorarios que apoya a las ponencias con investigación jurídica. Cuántas plazas tiene cada ponencia se lee en el presupuesto analítico de plazas del manual anual del Poder Judicial; la cifra de «más de 70 asesores por ministro» que circuló en el debate público no tiene documento citado en la plataforma y no se usa.',

@@ -7898,6 +7898,18 @@ window.AUDIT_DB = {
       "definicion": "El delito del servidor público que otorga ilícitamente contratos, concesiones, permisos o compras que benefician económicamente a él, a su cónyuge, a sus ascendientes o descendientes, a sus parientes por consanguinidad o afinidad hasta el cuarto grado, a un tercero con quien tenga vínculos afectivos, económicos o de dependencia, o a sus socios y sociedades. Lo persigue la fiscalía y lo juzga un juez penal.",
       "ley": "Art. 220 Código Penal Federal (fracción reformada DOF 18-07-2016)",
       "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Pérdida Neta (Resultado Neto)",
+      "definicion": "Lo que queda cuando a todos los ingresos de un periodo se les restan todos sus costos y gastos: los de operar, los intereses de la deuda, lo que se gana o se pierde porque cambió el tipo de cambio, el deterioro de activos, los impuestos y los derechos. Si sale negativo es pérdida neta; si sale positivo, utilidad o rendimiento neto. Es una cifra contable: no es lo mismo que el dinero que entró o salió de la caja en esos meses. Pemex la reporta cada trimestre, en pesos, en su informe de resultados a la Bolsa Mexicana de Valores.",
+      "ley": "NIC 1, Presentación de estados financieros (Normas Internacionales de Información Financiera, con las que reporta Pemex)",
+      "categoria": "💰 Hacendario & Deuda"
+    },
+    {
+      "termino": "Deterioro de Activos",
+      "definicion": "Lo que una empresa le resta al valor con el que tiene registrado un activo (un pozo, una refinería, una planta) cuando lo que espera recuperar de él, usándolo o vendiéndolo, ya es menor. Se registra como gasto y hace más grande la pérdida del periodo, aunque no salga dinero de la caja; si después el activo recupera valor, el deterioro se puede revertir y se registra como ingreso. Por eso una pérdida más chica puede deberse a menos deterioro y no a que la empresa venda u opere mejor.",
+      "ley": "NIC 36, Deterioro del valor de los activos (Normas Internacionales de Información Financiera)",
+      "categoria": "💰 Hacendario & Deuda"
     }
   ],
   "legislativo": {

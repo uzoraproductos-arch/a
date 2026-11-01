@@ -1253,6 +1253,22 @@
    "q": "¿Cuánto dinero le dan al Tren Maya y al AIFA en 2027?",
    "modo": "periodista",
    "ir": "noticias-auditavision.html#col-lfd-2027-dnr-defensa-tren-maya-aifa"
+  },
+  {
+   "q": "¿Es cierto que Pemex perdió 10 mil 792 millones en el tercer trimestre?",
+   "ir": "noticias-auditavision.html#col-pemex-3t-2026-perdida-neta"
+  },
+  {
+   "q": "¿Cuánto perdió Pemex en el tercer trimestre?",
+   "modo": "periodista",
+   "ir": "noticias-auditavision.html#col-pemex-3t-2026-perdida-neta"
+  },
+  {
+   "q": "https://expansion.mx/empresas/2026/10/30/pemex-perdidas-tercer-trimestre-2026-ingresos-deuda",
+   "ir": "noticias-auditavision.html#col-pemex-3t-2026-perdida-neta",
+   "dice": [
+    "hemeroteca"
+   ]
   }
  ]
 }
