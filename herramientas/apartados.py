@@ -1934,7 +1934,7 @@ CANAL_COMUNIDAD = ''
 # el aviso de privacidad cambia ANTES de recabar el primer dato, o la
 # generación se detiene.
 FUNCIONES = 'https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1'
-TURNSTILE_SITIO = ''
+TURNSTILE_SITIO = '0x4AAAAAAFvaChN1BsDAhY5L'  # pública (autor, 01-11-2026)
 # Decisión del autor, 30-10-2026: 12 meses (la migración 20261030000005 lo cumple).
 AVISO_CONSERVACION = ('Lo que envías se guarda <b>12 meses</b> desde que llega y luego se borra solo. Una fe de erratas que '
                       'publicamos se queda a la vista, pero sin tu correo. Para pedir que lo borremos antes, escríbenos '
