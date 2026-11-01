@@ -104,7 +104,8 @@ según MCCI, administraba la empresa no se le nombra (AGENTS.md §2 bis).
 
 Nota 6 · El Carnaval de Ensenada y sus 22 millones (31-10-2026). Pieza que
 pasó el autor: publicación de @danielasalgadoens (la regidora Ana Daniela
-García Salgado) en Instagram, tras la glosa del IMCUDHE. Documentos cotejados:
+García Salgado) en Instagram, tras la glosa del IMCUDHE; el 01-11-2026 dio la
+liga del reel (instagram.com/reel/DfI6V7Ltsgh). Documentos cotejados:
 - INEGI, EFIPEM 2024, cifras definitivas (municipios-efipem.js): lo que
   ingresó Ensenada en 2024. Se lee del archivo, no se copia.
 No se pudo abrir: la glosa ni la información financiera del IMCUDHE y del
@@ -978,7 +979,7 @@ def portacelis_diesel():
     }
 
 
-DSALGADO = 'https://www.instagram.com/danielasalgadoens/'
+DSALGADO = 'https://www.instagram.com/reel/DfI6V7Ltsgh/'  # el reel del 30-10-2026 (sin el parámetro de rastreo)
 ENSENADA_ENTE = 'herramienta-inspector-entes.html#ente=municipal:02001'
 ENSENADA_GOB = 'https://www.ensenada.gob.mx/'
 LGCG = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGCG.pdf'
@@ -1019,7 +1020,7 @@ def carnaval_ensenada():
         'nota': {'medio': 'Ana Daniela García Salgado, regidora de Ensenada (@danielasalgadoens, Instagram)',
                  'titulo': 'Más de 22 millones de pesos en un Carnaval de seis días. ¿Y la cultura de Ensenada?',
                  'fecha': '30-10-2026', 'url': DSALGADO},
-        'circula': {'red': 'Instagram', 'cuenta': '@danielasalgadoens (Ana Daniela García Salgado, regidora del Ayuntamiento de Ensenada)',
+        'circula': {'red': 'Instagram (reel)', 'cuenta': '@danielasalgadoens (Ana Daniela García Salgado, regidora del Ayuntamiento de Ensenada)',
                     'fecha': '30 de octubre de 2026',
                     'texto': ('Durante la glosa del IMCUDHE, cuestionamos al director por el gasto de más de 22 millones de pesos en el Carnaval, '
                               'un evento que dejó apenas 1.2 millones de pesos de ganancia. Si el objetivo es impulsar la cultura, también hay que '
@@ -1107,7 +1108,7 @@ def carnaval_ensenada():
             {'nombre': 'Ley General de Contabilidad Gubernamental', 'url': LGCG},
             {'nombre': 'Punto de partida: Ana Daniela García Salgado (@danielasalgadoens), Instagram, 30-10-2026', 'url': DSALGADO},
         ],
-        'actualizado': '31-10-2026',
+        'actualizado': '01-11-2026',
     }
 
 

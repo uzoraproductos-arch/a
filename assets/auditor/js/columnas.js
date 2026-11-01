@@ -60,10 +60,10 @@
    "medio": "Ana Daniela García Salgado, regidora de Ensenada (@danielasalgadoens, Instagram)",
    "titulo": "Más de 22 millones de pesos en un Carnaval de seis días. ¿Y la cultura de Ensenada?",
    "fecha": "30-10-2026",
-   "url": "https://www.instagram.com/danielasalgadoens/"
+   "url": "https://www.instagram.com/reel/DfI6V7Ltsgh/"
   },
   "circula": {
-   "red": "Instagram",
+   "red": "Instagram (reel)",
    "cuenta": "@danielasalgadoens (Ana Daniela García Salgado, regidora del Ayuntamiento de Ensenada)",
    "fecha": "30 de octubre de 2026",
    "texto": "Durante la glosa del IMCUDHE, cuestionamos al director por el gasto de más de 22 millones de pesos en el Carnaval, un evento que dejó apenas 1.2 millones de pesos de ganancia. Si el objetivo es impulsar la cultura, también hay que hablar de prioridades. ¿Cuántos espacios culturales pudieron mejorarse? ¿Cuánto talento local pudo recibir apoyo?"
@@ -240,10 +240,10 @@
    },
    {
     "nombre": "Punto de partida: Ana Daniela García Salgado (@danielasalgadoens), Instagram, 30-10-2026",
-    "url": "https://www.instagram.com/danielasalgadoens/"
+    "url": "https://www.instagram.com/reel/DfI6V7Ltsgh/"
    }
   ],
-  "actualizado": "31-10-2026"
+  "actualizado": "01-11-2026"
  },
  {
   "id": "portacelis-permiso-diesel-sener",
