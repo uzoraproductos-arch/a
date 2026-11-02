@@ -52,13 +52,13 @@ jobs:
         run: supabase link --project-ref "$PROYECTO" --password "$SUPABASE_DB_PASSWORD"
       - name: Sube las migraciones
         if: steps.hay.outputs.si == 'si'
-        run: supabase db push --linked --password "$SUPABASE_DB_PASSWORD" --include-all
+        run: supabase db push --linked --password "$SUPABASE_DB_PASSWORD" --include-all --yes
       - name: Sube la sal de la huella
         if: steps.hay.outputs.si == 'si' && env.SAL_IP != ''
-        run: supabase secrets set --project-ref "$PROYECTO" SAL_IP="$SAL_IP"
+        run: supabase secrets set --project-ref "$PROYECTO" SAL_IP="$SAL_IP" --yes
       - name: Sube la función de los códigos
         if: steps.hay.outputs.si == 'si'
-        run: supabase functions deploy codigo --project-ref "$PROYECTO" --no-verify-jwt
+        run: supabase functions deploy codigo --project-ref "$PROYECTO" --no-verify-jwt --yes
       # Las fuentes en vivo (30-10-2026): las llaves gratuitas de Banxico e
       # INEGI van en los secretos del repositorio y de ahí a los de Supabase;
       # nunca en un archivo ni en el chat. Sin ninguna, la función no se sube.
@@ -67,16 +67,43 @@ jobs:
       - name: Sube las funciones de los formularios
         if: steps.hay.outputs.si == 'si'
         run: |
-          supabase functions deploy recibir-formulario --project-ref "$PROYECTO" --no-verify-jwt
-          supabase functions deploy pregunta-bot --project-ref "$PROYECTO" --no-verify-jwt
+          supabase functions deploy recibir-formulario --project-ref "$PROYECTO" --no-verify-jwt --yes
+          supabase functions deploy pregunta-bot --project-ref "$PROYECTO" --no-verify-jwt --yes
+      # La IA del Auditor (02-11-2026): la llave ANTHROPIC_API_KEY vive solo en
+      # los secretos de Supabase (la puso el autor); aquí solo se suben las
+      # funciones. Sin la llave, contestan «pendiente» y el chat sigue igual.
+      - name: Sube las funciones de la IA
+        if: steps.hay.outputs.si == 'si'
+        run: |
+          supabase functions deploy auditor-ia --project-ref "$PROYECTO" --no-verify-jwt --yes
+          supabase functions deploy buscar-web --project-ref "$PROYECTO" --no-verify-jwt --yes
+      - name: Prueba la IA con una pregunta real
+        if: steps.hay.outputs.si == 'si'
+        run: |
+          sleep 5
+          cuerpo=$(python3 - <<'PY'
+          import json, re
+          s = open('assets/auditor/js/asistente-base.js', encoding='utf-8').read()
+          i = s.index('window.AUDITOR_BASE = ') + len('window.AUDITOR_BASE = ')
+          f = json.loads(s[i:s.rindex('};') + 1])['fichas']
+          ids = [k for k, x in enumerate(f) if 'Ramo 33' in x.get('tit', '')][:4]
+          v = re.search(r'\?v=(\d{8}[a-z]{0,2})', open('index.html', encoding='utf-8').read()).group(1)
+          print(json.dumps({'pregunta': '¿Para qué sirve el Ramo 33?', 'fichas': ids, 'version': v}))
+          PY
+          )
+          r=$(curl -s -m 90 -X POST "https://$PROYECTO.supabase.co/functions/v1/auditor-ia" \
+            -H 'Content-Type: application/json' -H 'Origin: https://auditavision.com.mx' -d "$cuerpo")
+          echo "$r" | head -c 900; echo
+          if echo "$r" | grep -q '"pendiente":true'; then echo "::warning::La IA no tiene su llave en Supabase (ANTHROPIC_API_KEY)"; exit 0; fi
+          echo "$r" | grep -q '"ok":true' || { echo "::error::La IA no contestó la pregunta de prueba"; exit 1; }
       # Banxico salió el 01-11-2026 por decisión del autor: ya no se usa su llave
       # y este flujo no la vuelve a poner en Supabase.
       - name: Sube la llave del INEGI
         if: steps.hay.outputs.si == 'si' && env.INEGI_TOKEN != ''
-        run: supabase secrets set --project-ref "$PROYECTO" INEGI_TOKEN="$INEGI_TOKEN"
+        run: supabase secrets set --project-ref "$PROYECTO" INEGI_TOKEN="$INEGI_TOKEN" --yes
       - name: Sube la función de los portales
         if: steps.hay.outputs.si == 'si' && env.INEGI_TOKEN != ''
-        run: supabase functions deploy portales --project-ref "$PROYECTO" --no-verify-jwt
+        run: supabase functions deploy portales --project-ref "$PROYECTO" --no-verify-jwt --yes
       - name: Prueba la consulta al INEGI
         if: steps.hay.outputs.si == 'si' && env.INEGI_TOKEN != ''
         run: |

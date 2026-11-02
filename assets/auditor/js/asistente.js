@@ -25,6 +25,8 @@
   /* Los municipios salen del padrón del INEGI (municipios-efipem.js, que la
      página carga): aquí se arma la ficha de cada uno. */
   var MU = window.AUDIT_MUNICIPIOS, NOMBRE = {};
+  /* Las fichas del archivo publicado; la función auditor-ia solo conoce esas. */
+  var N0 = B.fichas.length;
   ((B.dat && B.dat.edo) || []).forEach(function (e) { NOMBRE[e.a] = e.n; });
   if (MU && MU.ent) Object.keys(MU.ent).forEach(function (ab) {
     MU.ent[ab].lista.forEach(function (r) {
@@ -270,6 +272,82 @@
         body: JSON.stringify({ pregunta: String(q).slice(0, 600), motivo: motivo === 'noera' ? 'noera' : 'sin', ficha: tit || null, version: selloSitio() })
       }).catch(function () {});
     } catch (e) {}
+  }
+  /* La IA del Auditor (02-11-2026, decisión del autor). Cuando la base no
+     contesta, el lector puede pedir que la IA redacte con las fichas más
+     cercanas (función auditor-ia): solo ve esas fichas, cada cifra de su
+     respuesta se coteja contra ellas en la función y, si una no aparece, no
+     se muestra nada. Es a pedido, con botón, para cuidar el gasto. Y con un
+     nombre que la plataforma no tiene, «Buscar ahora» (buscar-web) trae solo
+     enlaces de sitios oficiales y de la lista de prensa, sin verificar. */
+  var funcionBase = funcionBot ? funcionBot.replace(/\/pregunta-bot$/, '') : '';
+  function idsIa(q) {
+    return buscar(q).slice(0, 8).map(function (x) { return F.indexOf(x.f); }).filter(function (i) { return i >= 0 && i < N0; });
+  }
+  function iaHtml(q) {
+    if (!funcionBase || !idsIa(q).length) return '';
+    return '<div class="pa-rec pa-ia"><p class="pa-mas-t">Pídeselo a la IA</p>' +
+      '<p class="pa-chico">Una inteligencia artificial puede redactarte una respuesta <b>solo con las fichas más cercanas de la plataforma</b>. ' +
+      'Cada cifra que escriba se coteja contra ellas; si escribe una que no está, la descartamos y no te mostramos nada.</p>' +
+      '<p><button type="button" class="pa-boton pa-ia-btn" data-pa-ia="' + esc(q) + '">📝 Redáctalo con las fichas</button></p>' +
+      '<div class="pa-ia-sal" aria-live="polite"></div></div>';
+  }
+  function parrafos(t) {
+    return String(t).split(/\n\s*\n/).map(function (x) { return x.trim(); }).filter(Boolean)
+      .map(function (x) { return '<p>' + esc(x).replace(/\n/g, '<br>') + '</p>'; }).join('');
+  }
+  function postea(nombre, cuerpo) {
+    return fetch(funcionBase + '/' + nombre, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(cuerpo) })
+      .then(function (r) { return r.json().catch(function () { return { ok: false }; }); });
+  }
+  function pideIa(bt) {
+    var q = bt.getAttribute('data-pa-ia'), sal = bt.closest('.pa-ia').querySelector('.pa-ia-sal'), ids = idsIa(q);
+    if (!ids.length || !window.fetch) return;
+    bt.disabled = true;
+    sal.innerHTML = '<p class="pa-chico">Redactando con ' + ids.length + ' fichas de la plataforma…</p>';
+    postea('auditor-ia', { pregunta: q.slice(0, 600), fichas: ids, version: selloSitio() }).then(function (j) {
+      if (j && j.ok) {
+        var fu = (j.fuentes || []).map(function (x) {
+          var ir = x.ir && x.ir[0] ? ' · <a href="' + esc(x.ir[0]) + '">' + esc(x.ir[1] || 'Saber más') + '</a>' : '';
+          return '<li><b>' + esc(x.tit) + '</b>' + ir + '</li>';
+        }).join('');
+        sal.innerHTML = '<div class="pa-resp">' + parrafos(j.respuesta) + '</div>' +
+          (fu ? '<p class="pa-mas-t">De dónde sale</p><ul class="pa-ia-fu">' + fu + '</ul>' : '') +
+          '<p class="pa-chico">📝 ' + esc(j.aviso || 'Redactado por inteligencia artificial solo con fichas de la plataforma.') + '</p>';
+        bt.hidden = true;
+      } else {
+        var m = j && j.rechazo === 'cifra_no_respaldada' ? 'La IA escribió una cifra que no está en las fichas, así que la descartamos. Prefiero no darte nada antes que un dato sin documento.'
+          : j && j.rechazo ? 'La IA no pudo darte una respuesta que cumpla nuestras reglas. Prueba con otras palabras.'
+          : (j && j.error) || 'La IA no respondió ahora. El Auditor sigue contestando con su base.';
+        sal.innerHTML = '<p class="pa-chico">' + esc(m) + '</p>';
+        bt.disabled = false;
+      }
+      guarda();
+    }, function () { sal.innerHTML = '<p class="pa-chico">No hubo conexión con la IA. Intenta más tarde.</p>'; bt.disabled = false; });
+  }
+  function webVivoHtml(nombre) {
+    if (!funcionBase) return '';
+    return '<p><button type="button" class="pa-boton pa-web-btn" data-pa-web="' + esc(nombre) + '">🔎 Buscar ahora en sitios oficiales y prensa</button></p>' +
+      '<div class="pa-web-sal" aria-live="polite"></div>';
+  }
+  function pideWeb(bt) {
+    var n = bt.getAttribute('data-pa-web'), sal = bt.parentNode.nextElementSibling;
+    if (!window.fetch || !sal) return;
+    bt.disabled = true;
+    sal.innerHTML = '<p class="pa-chico">Buscando «' + esc(n) + '»…</p>';
+    postea('buscar-web', { nombre: n }).then(function (j) {
+      if (j && j.ok) {
+        sal.innerHTML = (j.enlaces || []).length ? '<div class="pa-rec-lista">' + j.enlaces.map(function (e) {
+          return '<a class="pa-rec-a" href="' + esc(e.url) + '" target="_blank" rel="noopener noreferrer"><span class="pa-rec-ico" aria-hidden="true">' + (e.tipo === 'oficial' ? '🏛️' : '📰') + '</span>' +
+            '<span><b>' + esc(e.titulo) + '</b><small>' + esc(e.sitio) + (e.tipo === 'oficial' ? ' · oficial' : ' · prensa, sin verificar') + (e.fecha ? ' · ' + esc(e.fecha) : '') + ' ↗</small></span></a>';
+        }).join('') + '</div><p class="pa-chico">' + esc(j.aviso || '') + '</p>' : '<p class="pa-chico">No encontré enlaces en los sitios de la lista. Usa las búsquedas de arriba.</p>';
+        bt.hidden = true;
+      } else {
+        sal.innerHTML = '<p class="pa-chico">' + esc((j && j.error) || 'El buscador no respondió. Usa las búsquedas de arriba.') + '</p>';
+        bt.disabled = false;
+      }
+      guarda();
+    }, function () { sal.innerHTML = '<p class="pa-chico">No hubo conexión. Usa las búsquedas de arriba.</p>'; bt.disabled = false; });
   }
   function leeLista() {
     try { var v = JSON.parse(localStorage.getItem(CLAVE) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; }
@@ -1724,6 +1802,7 @@
     return '<div class="pa-rec pa-web"><p class="pa-mas-t">Búscalo en internet</p>' +
       '<p class="pa-chico">Esto ya no es la plataforma: son búsquedas ya armadas con el nombre, primero en portales oficiales y al final en las noticias. ' +
       '<b>Lo que encuentres ahí no lo verificó Auditavisión</b>: una nota de prensa no es un documento oficial, y un proceso no es una condena.</p>' +
+      (emp ? '' : webVivoHtml(nombre)) +
       '<div class="pa-rec-lista">' + (emp ? PE.webEmp : PE.web).map(function (w) {
         var portal = w.site && w.site.indexOf('https://') === 0;
         var u = portal ? w.site : w.site ? 'https://www.google.com/search?q=' + encodeURIComponent(q + ' ' + w.site)
@@ -2117,7 +2196,7 @@
     var espera = r.espera ? r.espera.then(function (x) { r = x; }) : null;
     var pinta = function (li) {
       if (r.sin) {
-        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + (r.web ? webHtml(r.web) : fueraHtml(q));
+        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + iaHtml(q) + (r.web ? webHtml(r.web) : fueraHtml(q));
         if (!ya) anota(q, 'sin');
         return;
       }
@@ -2217,11 +2296,18 @@
       if (mm && mm._mide) mm._mide();
       return;
     }
+    var ia = ev.target.closest ? ev.target.closest('[data-pa-ia]') : null;
+    if (ia) { if (!ia.disabled) pideIa(ia); return; }
+    var wb = ev.target.closest ? ev.target.closest('[data-pa-web]') : null;
+    if (wb) { if (!wb.disabled) pideWeb(wb); return; }
     var ne = ev.target.closest ? ev.target.closest('.pa-noera') : null;
     if (ne) {
       if (!ne.disabled) anota(ne.getAttribute('data-pa-q'), 'noera', ne.getAttribute('data-pa-tit'));
       ne.disabled = true;
       ne.textContent = '✅ Anotada en «Lo que aún no sé»';
+      /* La respuesta no servía: se ofrece la IA, con las fichas más cercanas. */
+      var bu = ne.closest('.pa-burbuja');
+      if (bu && !bu.querySelector('.pa-ia')) { bu.insertAdjacentHTML('beforeend', iaHtml(ne.getAttribute('data-pa-q'))); guarda(); }
       return;
     }
     if (ev.target.id === 'paSinRespCopiar') {

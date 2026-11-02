@@ -1457,7 +1457,25 @@ LEY_PERIODISTAS = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LPPDDHP.pdf'
 # llamadas a servidor). Cuando se conecte Supabase (docs/BASE-DE-DATOS.md),
 # este aviso cambia ANTES de recabar el primer dato.
 LFPDPPP = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf'
-AVISO_FECHA = '26-10-2026'
+AVISO_FECHA = '02-11-2026'
+# El responsable de los datos personales (LFPDPPP art. 15, fr. I) y de las
+# réplicas (Ley de réplica, art. 7): lo designó el autor el 02-11-2026. Un solo
+# renglón que leen las dos páginas; si cambia, cambia aquí.
+RESPONSABLE = {
+    'nombre': 'Inspector Meteoro',  # seudónimo que pidió el autor (02-11-2026)
+    'domicilio': 'Avenida Santa Margarita 4950',
+    'cp': '45136',
+    'municipio': 'Zapopan',
+    'entidad': 'Jalisco',
+    'correo': 'uzora.productos@gmail.com',
+    'telefono': '33 4048 5150',
+}
+def _responsable_html():
+    r = RESPONSABLE
+    return ('<ul class="av-responsable">\n<li><b>Nombre:</b> %s</li>\n<li><b>Domicilio:</b> %s, C.P. %s, %s, %s</li>\n'
+            '<li><b>Correo:</b> <a href="mailto:%s">%s</a></li>\n<li><b>Teléfono:</b> <a href="tel:+52%s">%s</a></li>\n</ul>'
+            % (r['nombre'], r['domicilio'], r['cp'], r['municipio'], r['entidad'], r['correo'], r['correo'],
+               r['telefono'].replace(' ', ''), r['telefono']))
 _AV_NAVEGADOR = [
     ('La plática con el Auditor', 'av-chat', 'Se guarda en la pestaña (sessionStorage) y se borra al cerrarla, o antes con «🗑️ Limpiar».'),
     ('«Lo que aún no sé»', 'auditavision.bot.sinRespuesta', 'Las preguntas que el Auditor no supo contestar, hasta 50. Solo las ves tú; si quieres, las copias y nos las mandas.'),
@@ -1480,9 +1498,8 @@ AVISO = {
                 % (LFPDPPP, '<span class="est-chip est-oficial">oficial</span>', AVISO_FECHA)),
     'secciones': [
         {'id': 'responsable', 'titulo': 'Quién es responsable', 'texto': 'Artículo 15, fracción I.', 'tarjetas': [],
-         'bloque': ('<p>Auditavisión es un proyecto cívico independiente, publicado en GitHub Pages. El nombre y el domicilio de la persona '
-                    'o la organización responsable se publicarán aquí cuando el proyecto se constituya; mientras tanto, la plataforma no '
-                    'recaba datos personales, así que no hay datos que alguien administre por ti.</p>')},
+         'bloque': ('<p>Auditavisión es un proyecto cívico independiente, publicado en GitHub Pages. La persona responsable de tus datos '
+                    'personales, y a quien te diriges para cualquier asunto de este aviso, es:</p>\n' + _responsable_html())},
         {'id': 'datos', 'titulo': 'Qué datos tratamos', 'texto': 'Artículo 15, fracciones II y III.', 'tarjetas': [],
          'bloque': ('<p><b>Ninguno en un servidor nuestro.</b> No hay registro, ni cuentas, ni herramientas de analítica, ni cookies propias. '
                     'Los formularios (algo raro con el dinero público, un dato mal, un tema para investigar) arman el texto en tu pantalla '
@@ -1500,15 +1517,27 @@ AVISO = {
                     'además de una huella cifrada de tu conexión (no tu dirección IP) para frenar el spam. <b>Para qué:</b> solo para mandarte tu código '
                     'y, si lo pides otra vez, saber que ya lo tenías. No lo usamos para publicidad ni lo compartimos. <b>Cuánto tiempo:</b> la solicitud '
                     'se borra sola 12 meses después de atendida. Para pedir que la borremos antes, responde al correo con el que te mandamos tu código.</p>')},
+        {'id': 'ia', 'titulo': 'Si le pides algo a la inteligencia artificial', 'texto': 'La IA del Auditor, a pedido (02-11-2026).', 'tarjetas': [],
+         'bloque': ('<p>El Auditor contesta con su base sin ninguna IA. Solo si pulsas <b>«Redáctalo con las fichas»</b>, tu pregunta y '
+                    'las fichas de la plataforma más cercanas se mandan a <b>Anthropic</b> (el modelo Claude, en Estados Unidos), que '
+                    'redacta la respuesta. Guardamos en nuestra base la pregunta, qué fichas se usaron, lo que contestó y una huella '
+                    'cifrada de tu conexión (no tu dirección IP), para auditar a la IA y frenar el abuso; <b>nada de tu nombre ni tu '
+                    'correo</b>. Se borra solo a los <b>12 meses</b>. Por eso, <b>no escribas datos personales en tu pregunta</b>.</p>\n'
+                    '<p>Si pulsas <b>«Buscar ahora»</b> con el nombre de una persona de la vida pública, ese nombre se manda a Anthropic '
+                    'para buscarlo en sitios oficiales y de prensa. Los enlaces que encuentre quedan públicos, con su fecha (así cualquiera '
+                    'puede ver qué se encontró), y se reusan un día para no repetir la búsqueda. De quien busca no se guarda nada.</p>')},
         {'id': 'terceros', 'titulo': 'Servicios de terceros', 'texto': 'Lo que tu navegador pide a otros sitios al abrir una página.', 'tarjetas': [],
          'bloque': ('<p>Para mostrarte la página, tu navegador se conecta a GitHub Pages (donde vive el sitio), a Google Fonts (las letras) '
-                    'y a cdnjs (la librería de los mapas). Esos servicios reciben, como cualquier sitio, tu dirección IP y los datos técnicos '
+                    'y a cdnjs (la librería de los mapas). Si abres un formulario para enviarlo, también a Cloudflare Turnstile, '
+                    'que comprueba que eres una persona y no un programa; y si usas la IA, a nuestra base, que llama a Anthropic (arriba). Esos servicios reciben, como cualquier sitio, tu dirección IP y los datos técnicos '
                     'de tu navegador, y los tratan con sus propias políticas. Los enlaces a portales oficiales y a noticias te llevan a '
                     'sitios con sus propios avisos.</p>')},
         {'id': 'derechos', 'titulo': 'Tus derechos y cómo limitar el uso', 'texto': 'Artículo 15, fracciones IV y V.', 'tarjetas': [],
          'bloque': ('<p>Tienes derecho a acceder a tus datos, rectificarlos, cancelarlos y oponerte a su uso (derechos ARCO, arts. 21 a 28 de '
-                    'la ley). Como hoy no guardamos datos tuyos, lo ejerces tú mismo: borra los datos del sitio en tu navegador, o usa '
-                    '«🗑️ Limpiar» en el Auditor. Si un día recabamos algún dato, aquí estará el medio para pedirlo.</p>\n'
+                    'la ley). Lo que vive en tu navegador lo borras tú mismo: borra los datos del sitio, o usa «🗑️ Limpiar» en el '
+                    'Auditor. Para lo que nos enviaste, escribe a <a href="mailto:%s">%s</a> con tu nombre, qué derecho ejerces y, de '
+                    'preferencia, desde el mismo correo con el que nos escribiste; si no lo usaste, dinos la fecha y el folio del envío. '
+                    'Te respondemos en ese mismo correo.</p>\n' % (RESPONSABLE['correo'], RESPONSABLE['correo']) +
                     '<p>La autoridad en materia de datos personales es ahora la Secretaría Anticorrupción y Buen Gobierno (art. 2, fr. XV), '
                     'que tomó el lugar del extinto INAI.</p>')},
         {'id': 'cambios', 'titulo': 'Si esto cambia', 'texto': 'Artículo 15, fracción VI.', 'tarjetas': [],
@@ -1523,12 +1552,11 @@ AVISO = {
 # 6o., párrafo primero, de la Constitución, en materia del Derecho de Réplica
 # (DOF 04-11-2015; última reforma DOF 14-11-2025; huella del PDF en la bóveda).
 # La SCJN invalidó porciones de los arts. 3, 10 y 19 (DOF 24-04-2018): aquí solo
-# se cita lo vigente. El responsable del art. 7 lo designa el autor: mientras
-# no esté, la página lo dice con su pendiente (replica-responsable).
+# se cita lo vigente. El responsable del art. 7 es RESPONSABLE (arriba), que
+# designó el autor el 02-11-2026.
 LEY_REPLICA = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LRArt6_MDR.pdf'
 REPLICA_FECHA = '27-10-2026'
 _RP_OF = '<span class="est-chip est-oficial">oficial</span>'
-_RP_PEND = '<span class="est-chip est-pendiente" data-pend="replica-responsable">pendiente</span>'
 REPLICA = {
     'archivo': 'derecho-de-replica.html',
     'menu': 'Derecho de réplica',
@@ -1566,11 +1594,10 @@ REPLICA = {
                     '<li>El texto de tu aclaración.</li>\n</ol>\n'
                     '<p>Va con copia de tu identificación oficial y, si alguien la pide por ti, del documento que acredita la representación '
                     'o el parentesco.</p>\n'
-                    '<p class="sv-aviso"><span class="sz-et">Todavía no</span> La ley pide tener siempre publicado el nombre completo del '
-                    'responsable de recibir y resolver las réplicas, con su domicilio, código postal, entidad, correo y teléfono (art. 7). '
-                    'Auditavisión aún no lo designa %s: hasta entonces no podemos recibir tu escrito, y ese plazo de 15 días no debería '
-                    'correr en tu contra. Mientras tanto, si encuentras un dato mal, '
-                    '<a href="comunidad-error.html">arma tu aviso en «Un dato mal»</a> y guárdalo con su fecha.</p>') % _RP_PEND},
+                    '<p><b>A quién se dirige tu escrito</b> (art. 7). El responsable de recibir y resolver las réplicas es:</p>\n'
+                    + _responsable_html() +
+                    '\n<p>Mándalo al correo, con tu identificación y tu firma escaneadas, o entrégalo en el domicilio. Si solo encontraste '
+                    'un dato mal, sin agravio, es más rápido <a href="comunidad-error.html">«Un dato mal»</a>.</p>')},
         {'id': 'plazos', 'titulo': 'Qué hacemos con ella y en cuánto tiempo', 'texto': 'Artículos 6, 11 a 14.', 'tarjetas': [],
          'bloque': ('<ul>\n<li><b>3 días hábiles</b> para decidir si procede (art. 11) y <b>3 más</b> para avisarte en el domicilio que diste (art. 12).</li>\n'
                     '<li>Si procede, se publica <b>en la siguiente actualización</b> de la página que te aludió (art. 14): en una columna de '

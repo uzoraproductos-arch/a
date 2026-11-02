@@ -129,7 +129,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-salud-imss.html` | El IMSS: lo que cuesta y lo que resuelve · Auditavisión | apartados.py | 45 | 0 | 18 | 9 | 3 |
 | `datos-salud-publica.html` | Salud pública · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
 | `datos-salud-sistema.html` | Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE · Auditavisión | apartados.py | 44 | 0 | 4 | 0 | 2 |
-| `derecho-de-replica.html` | Derecho de réplica · Auditavisión | apartados.py | 38 | 0 | 1 | 0 | 1 |
+| `derecho-de-replica.html` | Derecho de réplica · Auditavisión | apartados.py | 38 | 0 | 1 | 0 | 0 |
 | `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 | `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 0 |
 | `donaciones.html` | Donaciones · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
@@ -292,7 +292,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 235 | 0 | 0 | 0 | 126 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 234 | 0 | 0 | 0 | 125 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 36 | 0 | 6 | 3 | 1 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 45 | 0 | 1 | 0 | 0 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
@@ -363,25 +363,18 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-125 fichas, cada una con su porqué, su responsable y su enlace oficial.
+124 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 
-Documentos en `docs/boveda/evidencias.json`: 221 copiado, 53 no abrió, 9 sin copia.
+Documentos en `docs/boveda/evidencias.json`: 253 copiado, 37 no abrió, 9 sin copia.
 
 Todos los cotejos «consta» y «matiz» tienen su evidencia.
 
-12 cifras oficiales sin copia todavía (su sitio no abrió donde se corrió la bóveda):
+5 cifras oficiales sin copia todavía (su sitio no abrió donde se corrió la bóveda):
 
 - cifra «$9,156,528.9 millones» de `senado-ley-de-ingresos-2027` → numeros-paquete-2027-cifras.html
-- cifra «3/04/2014 – 3/04/2023» de `ine-contratos-desde-cordova` → https://centralelectoral.ine.mx/2023/03/31/lorenzo-cordova-adriana-favela-ciro-murayama-y-jose-roberto-ruiz-se-despiden-de-la-herradura-de-la-democracia/
-- cifra «460 meses de prisión» de `garcia-luna-las-dos-cortes` → https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years
-- cifra «460 meses» de `garcia-luna-testigos-y-la-ley-mexicana` → https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years
-- cifra «2 millones de dólares» de `garcia-luna-testigos-y-la-ley-mexicana` → https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years
-- cifra «5 cargos» de `garcia-luna-testigos-y-la-ley-mexicana` → https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years
 - cifra «2008» de `garcia-luna-y-garcia-harfuch` → https://sil.gobernacion.gob.mx/Librerias/pp_PerfilLegislador.php?Referencia=9228910
 - cifra «2011–2014» de `garcia-luna-y-garcia-harfuch` → https://sil.gobernacion.gob.mx/Librerias/pp_PerfilLegislador.php?Referencia=9228910
-- cifra «2006–2012» de `garcia-luna-y-garcia-harfuch` → https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years
-- cifra «460 meses» de `garcia-luna-y-garcia-harfuch` → https://www.justice.gov/usao-edny/pr/ex-mexican-secretary-public-security-genaro-garcia-luna-sentenced-over-38-years
 - cifra «75 centigramos de oro puro» de `limantour-superavit-y-peso-oro` → https://bagn.archivos.gob.mx/index.php/legajos/article/download/322/315
 - cifra «ISR del ejercicio 2008» de `gordillo-la-sentencia-reservada` → https://www.oaj.gob.mx/documentos/notasInformativas/docsNotasInformativas/2013/notaInformativa50.pdf
