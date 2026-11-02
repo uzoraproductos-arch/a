@@ -132,7 +132,7 @@
   function filas3(a) {
     var pad = D.padron.n, bc = a.brecha * 1000000 / pad, pc = a.anual * 1000000 / pad;
     pasos[3] = [{ v: '$0' }, { v: smdp(a.brecha) }, { v: pesos(bc) }, { v: smdp(a.anual) }, { v: pesos(pc) }];
-    return '<tr class="mc-fila" data-i="1"><td class="mc-n" data-et="Paso">1</td><td class="mc-nom">Pesos pagados de más sobre lo aprobado <small>(saldo de 2000 a 2024)</small></td>' +
+    return '<tr class="mc-fila" data-i="1"><td class="mc-n" data-et="Paso">1</td><td class="mc-nom">Pesos pagados de más sobre lo previsto <small>(saldo de 2000 a 2024)</small></td>' +
         '<td class="mc-op" data-et="Operación">resultado de la mesa 1</td><td class="mc-num mc-acum" data-et="Resultado">' + smdp(a.brecha) + '</td></tr>\n' +
       '<tr class="mc-fila mc-div" data-i="2"><td class="mc-n" data-et="Paso">2</td><td class="mc-nom">Entre cada contribuyente con RFC activo</td>' +
         '<td class="mc-op" data-et="Operación">' + fnum(Math.round(a.brecha * 10) / 10) + ' mdp × 1,000,000 ÷ ' + fnum(pad) + '</td><td class="mc-num mc-acum" data-et="Resultado">' + pesos(bc) + ' <small>por contribuyente</small></td></tr>\n' +
@@ -174,7 +174,7 @@
     render.ceros = render.ceros || [cero1, cero2, cero3];
     var c = render.ceros;
     t1.tBodies[0].innerHTML = c[0] + '\n' + filas1(vista1);
-    $('mcPie1').innerHTML = '<tr><td></td><td class="mc-nom">Total de las obras</td><td class="mc-num" data-et="Aprobado (mdp)">' + fnum(A1.presu) +
+    $('mcPie1').innerHTML = '<tr><td></td><td class="mc-nom">Total de las obras</td><td class="mc-num" data-et="Previsto (mdp)">' + fnum(A1.presu) +
       '</td><td class="mc-num" data-et="Erogado (mdp)">' + fnum(A1.real) + '</td><td class="mc-num mc-dif" data-et="Diferencia">' + sg(A1.brecha) + fnum(A1.brecha) +
       '</td><td class="mc-num mc-acum" data-et="Acumulado">' + fnum(A1.brecha) + '</td></tr>';
     $('mcCierre1').innerHTML = cierre1(vista1, A1);
@@ -245,7 +245,7 @@
   }
 
   function finTexto(m) {
-    if (m === 1) return '<b>Cuenta completa.</b> La última celda del acumulado, <b>' + fnum(A.brecha) + ' mdp</b>, es el sobrecosto del conjunto: erogado total (' + fnum(A.real) + ') menos aprobado total (' + fnum(A.presu) + '). Pulsa una obra para ver su documento.';
+    if (m === 1) return '<b>Cuenta completa.</b> La última celda del acumulado, <b>' + fnum(A.brecha) + ' mdp</b>, es el sobrecosto del conjunto: erogado total (' + fnum(A.real) + ') menos previsto total (' + fnum(A.presu) + '). Pulsa una obra para ver su documento.';
     if (m === 2) return '<b>Cuenta completa.</b> Solo entran las obras que publican su resultado: lo que pierden menos lo que ganan da una pérdida neta de <b>' + fnum(Math.round(A.anual * 10) / 10) + ' mdp</b> al año. Abajo, la misma cifra partida en el tiempo.';
     return '<b>Cuenta completa.</b> Dos divisiones separadas, con el mismo divisor oficial. No se suman: una es un saldo de décadas y la otra el flujo de un año.';
   }
@@ -290,7 +290,7 @@
     if (m === 3) {
       var a = A, pad = fnum(D.padron.n);
       var tx = {
-        1: 'Se toma el resultado de la mesa 1: <b>' + smdp(a.brecha) + '</b> pagados de más sobre lo aprobado. Es un saldo: se acumuló a lo largo de décadas.',
+        1: 'Se toma el resultado de la mesa 1: <b>' + smdp(a.brecha) + '</b> pagados de más sobre lo previsto. Es un saldo: se acumuló a lo largo de décadas.',
         2: 'Ese saldo, en pesos (' + fnum(Math.round(a.brecha * 10) / 10) + ' mdp × 1,000,000), entre <b>' + pad + '</b> contribuyentes con RFC activo = <b>' + pasos[3][2].v + '</b> por contribuyente ' + chip('derivado') + '.',
         3: 'Aparte, el resultado de la mesa 2: <b>' + smdp(a.anual) + '</b> de pérdida neta en un año. Es un flujo: se repite cada año mientras las obras operen igual.',
         4: 'Ese flujo, en pesos, entre los mismos <b>' + pad + '</b> contribuyentes = <b>' + pasos[3][4].v + '</b> por contribuyente, cada año ' + chip('derivado') + '.'
@@ -384,7 +384,7 @@
     var e = function (o, c) { return (o.ec || {})[c] || 'pendiente'; };
     if (k === '1') {
       var acum = 0;
-      csv('mesa-1-aprobado-erogado.csv', [['#', 'Obra', 'Aprobado (mdp)', 'Estado aprobado', 'Erogado (mdp)', 'Estado erogado', 'Diferencia (mdp)', 'Acumulado (mdp)']]
+      csv('mesa-1-aprobado-erogado.csv', [['#', 'Obra', 'Previsto (mdp)', 'Estado previsto', 'Erogado (mdp)', 'Estado erogado', 'Diferencia (mdp)', 'Acumulado (mdp)']]
         .concat(vista.map(function (o, i) { var d = o.real - o.presu; acum += d; return [i + 1, o.n, o.presu, e(o, 'inversion_presupuestada_mdp'), o.real, e(o, 'inversion_real_mdp'), Math.round(d * 10) / 10, Math.round(acum * 10) / 10]; }))
         .concat([['', 'Total del filtro', Math.round(A.presu * 10) / 10, 'derivado', Math.round(A.real * 10) / 10, 'derivado', Math.round(A.brecha * 10) / 10, Math.round(A.brecha * 10) / 10], pie]));
     } else if (k === '2') {
@@ -398,14 +398,14 @@
     } else if (k === '3') {
       var pad = D.padron.n;
       csv('mesa-3-por-contribuyente.csv', [['Paso', 'Concepto', 'Operación', 'Resultado', 'Estado'],
-        [1, 'Pesos pagados de más sobre lo aprobado (mdp)', 'resultado de la mesa 1', Math.round(A.brecha * 10) / 10, 'derivado'],
+        [1, 'Pesos pagados de más sobre lo previsto (mdp)', 'resultado de la mesa 1', Math.round(A.brecha * 10) / 10, 'derivado'],
         [2, 'Por contribuyente con RFC activo (pesos)', 'mesa 1 × 1,000,000 ÷ ' + pad, Math.round(A.brecha * 1000000 / pad), 'derivado'],
         [3, 'Pérdida neta de un año (mdp)', 'resultado de la mesa 2', Math.round(A.anual * 10) / 10, 'derivado'],
         [4, 'Por contribuyente con RFC activo, cada año (pesos)', 'mesa 2 × 1,000,000 ÷ ' + pad, Math.round(A.anual * 1000000 / pad), 'derivado'],
         ['Divisor', D.padron.d, D.padron.u, pad, 'oficial'], pie]);
     } else {
       var tot = D.obras.reduce(function (s, o) { return s + o.real; }, 0);
-      csv('inventario-megaobras-por-sector.csv', [['Sector', 'Obra', 'Presidente', 'Periodo', 'Aprobado (mdp)', 'Estado aprobado', 'Erogado (mdp)', 'Estado erogado', 'Diferencia (mdp)', 'Sobrecosto (%)', 'Estado sobrecosto', '% del total erogado', 'Documentos']]
+      csv('inventario-megaobras-por-sector.csv', [['Sector', 'Obra', 'Presidente', 'Periodo', 'Previsto (mdp)', 'Estado previsto', 'Erogado (mdp)', 'Estado erogado', 'Diferencia (mdp)', 'Sobrecosto (%)', 'Estado sobrecosto', '% del total erogado', 'Documentos']]
         .concat(D.obras.map(function (o) {
           return [D.sectores[o.s].n, o.n, o.p, o.per, o.presu, e(o, 'inversion_presupuestada_mdp'), o.real, e(o, 'inversion_real_mdp'), Math.round((o.real - o.presu) * 10) / 10,
             o.sob, e(o, 'sobrecosto_pct'), (o.real / tot * 100).toFixed(1), (o.fu || []).map(function (f) { return f.d + ' ' + f.u; }).join(' | ')];

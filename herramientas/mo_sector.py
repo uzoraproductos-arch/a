@@ -548,7 +548,7 @@ def _construir(base, ref):
   <section class="ms-arranque" aria-labelledby="msArrTit">
     <p class="ms-kicker">{kicker}</p>
     <h2 class="ms-grande" id="msArrTit">{n} megaobras, obra por obra. Elige una industria y un mandato.</h2>
-    <p class="ms-lead">Las {n} obras emblemáticas de 2000 a 2024 costaron <b class="ms-num">{treal}</b> {c_der} frente a <b class="ms-num">{tpresu}</b> aprobados. Los {n_resc} rescates, bancario y carretero, van aparte (<b class="ms-num">{rreal}</b> pagados y debidos {c_der}): son deudas que el Estado asumió, no obras, y los ves en la industria «Rescates». Este es <b>el único filtro de la herramienta</b>: elige industria y presidente, compara las que queden, mira si cada una gana o pierde mientras lees y ponlo junto a cifras que conoces.</p>
+    <p class="ms-lead">Las {n} obras emblemáticas de 2000 a 2024 costaron <b class="ms-num">{treal}</b> {c_der} frente a <b class="ms-num">{tpresu}</b> previstos. Los {n_resc} rescates, bancario y carretero, van aparte (<b class="ms-num">{rreal}</b> pagados y debidos {c_der}): son deudas que el Estado asumió, no obras, y los ves en la industria «Rescates». Este es <b>el único filtro de la herramienta</b>: elige industria y presidente, compara las que queden, mira si cada una gana o pierde mientras lees y ponlo junto a cifras que conoces.</p>
     <div class="ms-resumen" id="msResumen" aria-live="polite"></div>
     <ol class="ms-indice" aria-label="Lo que hay en esta página">
       <li><a href="#ms-industria"><span class="ms-n">1</span> Industria</a></li>
@@ -591,7 +591,7 @@ def _construir(base, ref):
       <div class="ms-cifra"><span class="ms-cifra-l">Costo real del filtro {c_der}</span>
         <span class="ms-cifra-v ms-num" id="msCReal">—</span>
         <span class="ms-cifra-s"><span class="ms-num" id="msCCuota">—</span> del costo real de las {n} obras</span></div>
-      <div class="ms-cifra"><span class="ms-cifra-l">Aprobado frente a erogado {c_der}</span>
+      <div class="ms-cifra"><span class="ms-cifra-l">Previsto frente a erogado {c_der}</span>
         <span class="ms-cifra-v ms-num" id="msCPresu">—</span>
         <span class="ms-cifra-s"><span class="ms-num" id="msCBrecha">—</span> de más, un <span class="ms-num" id="msCSob">—</span></span></div>
       <div class="ms-cifra ms-cifra-roja" id="msCPerdCaja"><span class="ms-cifra-l"><span id="msCPerdEt">Pérdida neta del año</span> {c_der}</span>
@@ -599,7 +599,7 @@ def _construir(base, ref):
         <span class="ms-cifra-s">equivale a <span class="ms-num" id="msCSeg">—</span> por segundo</span></div>
     </div>
     <p class="ms-nota" id="msNotaFiltro"></p>
-    <p class="ms-nota">Las tres son sumas de las obras del filtro (<span class="ms-op">costo real = suma de lo erogado; sobrecosto = erogado ÷ aprobado − 1, de modo que cada obra pesa según su tamaño; por segundo = pérdida neta ÷ 31,536,000</span>). La pérdida neta es la misma medida de toda la herramienta: lo que pierden menos lo que ganan, en el año más reciente que publica cada obra; las que no lo publican no se estiman y dicen {c_pend_perd}.{nota_anun}</p>
+    <p class="ms-nota">Las tres son sumas de las obras del filtro (<span class="ms-op">costo real = suma de lo erogado; sobrecosto = erogado ÷ previsto − 1, de modo que cada obra pesa según su tamaño; por segundo = pérdida neta ÷ 31,536,000</span>). La pérdida neta es la misma medida de toda la herramienta: lo que pierden menos lo que ganan, en el año más reciente que publica cada obra; las que no lo publican no se estiman y dicen {c_pend_perd}.{nota_anun}</p>
   </section>
 
   <aside class="ms-aviso">
@@ -672,7 +672,7 @@ def _construir(base, ref):
         n=n, treal=sim_mdp(total_real), tpresu=sim_mdp(total_presu), c_der=chip('derivado'),
         n_resc=len(rescates), rreal=sim_mdp(resc_real),
         c_pend_perd=chip('pendiente', PEND_PERDIDA),
-        nota_anun=''.join(' En «%s», la cifra de partida es lo %s: no hay un presupuesto aprobado publicado, y aun así entra en «aprobado» para que la suma no la pierda.'
+        nota_anun=''.join(' En «%s», la cifra de partida es lo %s: no hay un presupuesto aprobado publicado, y por eso el total se llama «previsto» y no «aprobado».'
                           % (esc(o['nombre']), esc(o['presupuesto_etiqueta'][0].lower() + o['presupuesto_etiqueta'][1:])) for o in solo_obras if o.get('presupuesto_etiqueta')),
         losetas='\n      '.join(losetas), mandatos='\n      '.join(mandatos), ordenes=ordenes, cadencias=cadencias,
         tm_fecha=esc(tm.get('fecha', '10-10-2026')), tm_motivo=esc(tm.get('motivo', '')), tm_alt=esc(tm.get('alternativa', 'expedientes.html#exp-tren-maya')),
