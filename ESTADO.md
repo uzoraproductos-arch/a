@@ -5,7 +5,7 @@ historia completa de cada decisión en [CONTEXT.md](CONTEXT.md), que pasa de
 7,000 renglones: aquí va solo lo que necesitas para no repetir trabajo ni
 pisar el de otro. **Se actualiza en el mismo commit que cambia lo que dice.**
 
-Última actualización: 01-11-2026 · sello `20261101x` · rama `claude/funny-turing-imtm54`.
+Última actualización: 02-11-2026 · sello `20261102f` · rama `claude/funny-turing-imtm54`.
 
 ## Antes de empezar y antes de empujar
 
@@ -21,6 +21,7 @@ de legibilidad y, si tocaste `supabase/`, la base de datos. GitHub la corre sola
 en cada envío (`.github/workflows/revision.yml`). Con `--rapida` se salta lo
 que necesita navegador.
 
+- **02-11-2026, sello 20261102f.** **Megaobras: los totales dicen «previsto», no «aprobado».** Decisión del autor. La suma de lo «aprobado» de las 11 obras incluía lo anunciado de Dos Bocas; ahora el total, la brecha («pagado de más sobre lo previsto») y el sobrecosto del conjunto («erogado ÷ previsto») se llaman así en Las cuatro cifras, Pulso y cuenta, Sector, la tabla, Investiga, Auditoría en imágenes y el chat, que lo explica: «previstos (aprobados o, si no se publicó el presupuesto, anunciados)». Cada obra conserva su etiqueta («Aprobado» o «Anunciado en 2019»). Las cifras no cambian. Una pregunta de prueba.
 - **Las preguntas de prueba** viven en `herramientas/preguntas_auditor.json`.
   Si un cambio mueve una respuesta a propósito, se corrige su renglón en el
   mismo commit; si la mueve sin querer, el error está en el cambio. Cada dato

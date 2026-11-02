@@ -1448,8 +1448,8 @@
   function respMoTodo(lista) {
     var T = MO.tot;
     var h = '<p>🏗️ <b>' + esc(MO.nombre) + '</b> sigue ' + T.n + ' megaobras y ' + T.nresc + ' rescates, de 1988 a 2024. Sus cuatro cifras:</p><ul class="pa-lista">' +
-      '<li>Costo real de las ' + T.n + ' obras: <b>' + esc(T.realt) + '</b> ' + chip({ e: 'derivado' }) + ', contra ' + esc(T.presut) + ' aprobados.</li>' +
-      '<li>Pagado de más sobre lo aprobado: <b>' + esc(T.brechat) + '</b> ' + chip({ e: 'derivado' }) + '.</li>' +
+      '<li>Costo real de las ' + T.n + ' obras: <b>' + esc(T.realt) + '</b> ' + chip({ e: 'derivado' }) + ', contra ' + esc(T.presut) + ' previstos (aprobados o, si no se publicó el presupuesto, anunciados).</li>' +
+      '<li>Pagado de más sobre lo previsto: <b>' + esc(T.brechat) + '</b> ' + chip({ e: 'derivado' }) + '.</li>' +
       '<li>Lo que pierden al año las que publican su resultado: <b>' + (T.neto < 0 ? '−' : '+') + esc(T.netot) + '</b> ' + chip({ e: 'derivado' }) + ' (' + T.npierde + ' pierden ' + esc(T.pierdet) + ' y ' + T.ngana + ' gana ' + esc(T.ganat) + ').</li>' +
       '<li>Sin resultado publicado: ' + T.npend + ' ' + chip({ e: 'pendiente', p: 'tema-megaobras' }) + '. No operan: ' + T.nna + '.</li></ul>' +
       '<p class="pa-chico">' + esc(T.medida) + '</p>' +
@@ -1458,7 +1458,7 @@
       }).join('') + '</ul>' : '') + portalesHtml() +
       (charla && charla.deDonde ? charla.deDonde([
         { que: 'Costo real de las ' + T.n + ' obras', e: 'derivado', op: 'suma del costo registrado de cada obra, sin los rescates' },
-        { que: 'Pagado de más', e: 'derivado', op: 'costo real − lo aprobado (' + T.realt + ' − ' + T.presut + ')' },
+        { que: 'Pagado de más', e: 'derivado', op: 'costo real − lo previsto (' + T.realt + ' − ' + T.presut + ')' },
         { que: 'Lo que pierden al año', e: 'derivado', op: 'suma del resultado del año más reciente de cada obra que lo publica (' + T.anios.join(', ') + ')' }].concat(MO.portales.map(function (f) { return { que: 'Portal oficial', e: 'oficial', fu: f }; }))) : '');
     return {
       html: h, ir: [MO.pagina, MO.nombre], app: { id: 'mocero', url: APP.mocero.url }, rec: [

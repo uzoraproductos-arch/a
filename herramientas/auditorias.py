@@ -322,7 +322,7 @@ def _datos(id_):
         elif id_ == 'inversion-megaobras':
             cuanto = [
                 (_mdp(c['obras_presu_mdp']), 'presupuesto inicial documentado de las %d obras (1988–2024)' % c['obras_n'], 'derivado', None),
-                ('%s (+%s %%)' % (_mdp(c['obras_real_mdp']), c['obras_sobrecosto_pct']), 'costo real documentado de las %d obras (%s por encima de lo aprobado)' % (c['obras_n'], _mdp(c['obras_brecha_mdp'])), 'derivado', None),
+                ('%s (+%s %%)' % (_mdp(c['obras_real_mdp']), c['obras_sobrecosto_pct']), 'costo real documentado de las %d obras (%s por encima de lo previsto)' % (c['obras_n'], _mdp(c['obras_brecha_mdp'])), 'derivado', None),
                 (_mdp(c['rescates_real_mdp']), 'costo comprometido aparte en los %d rescates (FOBAPROA-IPAB y FARAC carretero)' % c['rescates_n'], 'derivado', None),
                 ('−%s al año' % _mdp(c['balance_neto_anual_mdp']), 'pérdida neta anual en los %d proyectos con dato publicado (%d pierden %s y %d gana %s)' % (c['n_con_dato_anual'], 5, _mdp(c['balance_pierde_mdp']), 1, _mdp(c['balance_gana_mdp'])), 'derivado', None),
                 ('4 obras sin dato', 'operación anual no publicada por separado (Megafarmacia, Tren Interurbano, Agronitrogenados y Búnker)', 'pendiente', x['pendiente_id']),

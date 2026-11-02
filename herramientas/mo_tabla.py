@@ -221,7 +221,7 @@ def construir(base, ref):
     </ol>
     <div class="mt-claves">
       <p><span>Costo real de las {n} obras</span><b class="mt-num">{real}</b> {chip_der}</p>
-      <p><span>Pagado de más sobre lo aprobado</span><b class="mt-num">{brecha}</b> {chip_der}</p>
+      <p><span>Pagado de más sobre lo previsto</span><b class="mt-num">{brecha}</b> {chip_der}</p>
       <p><span>Ganancia o pérdida del año, donde se publica</span><b class="mt-num {sig}">{tot}</b> {chip_der}</p>
     </div>
     <div class="mt-pantalla">
@@ -251,7 +251,7 @@ def construir(base, ref):
 
   <aside class="mt-nota">
     <p>{medida}</p>
-    <p><b>Cómo leer la tabla.</b> «Gana o pierde» no descuenta lo que costó construir la obra: una obra puede ganar en el año y haber costado mucho más de lo aprobado. Los años no son iguales para todas ({anios}) y las cifras son nominales, sin deflactar. Cada renglón está completo en <a href="{cuenta}">La cuenta de cada obra</a>.</p>
+    <p><b>Cómo leer la tabla.</b> «Gana o pierde» no descuenta lo que costó construir la obra: una obra puede ganar en el año y haber costado mucho más de lo previsto. Los años no son iguales para todas ({anios}) y las cifras son nominales, sin deflactar. Cada renglón está completo en <a href="{cuenta}">La cuenta de cada obra</a>.</p>
     <p><b>Los rescates.</b> El FOBAPROA y el FARAC son deudas que el Estado asumió, no obras: su «costo» es lo pagado y lo debido, y su crecimiento no se compara con el sobrecosto de una obra. En la tabla general su costo se suma con el de las obras solo como referencia.</p>
     <p><b>Cómo se calcula.</b> Costo del sexenio = suma del costo registrado de sus obras {chip_der}; donde una obra tiene rango, entra su punto medio. Gana o pierde al año = suma de los resultados publicados {chip_der}. Por segundo = resultado anual × 1,000,000 ÷ 31,536,000. Lo que falta está en el <a href="pendientes.html#tema-megaobras">Registro de pendientes</a>.</p>
   </aside>

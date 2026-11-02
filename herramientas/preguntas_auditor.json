@@ -1480,6 +1480,13 @@
    "dice": [
     "El condicional que esconde un rumor"
    ]
+  },
+  {
+   "q": "¿Cuánto costaron las megaobras en total?",
+   "dice": [
+    "previstos (aprobados o, si no se publicó el presupuesto, anunciados)",
+    "Pagado de más sobre lo previsto"
+   ]
   }
  ]
 }

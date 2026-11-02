@@ -430,8 +430,8 @@
     var c = A.cifras, f = A.fuentes, obras = A.obras || [];
     return {
       cont: [
-        { ico: '📐', tit: 'Presupuesto inicial (11 obras)', v: c.obras_presu_mdp, f: 'mdp1', etq: 'monto aprobado originalmente en documentos oficiales (1988–2024)', est: 'derivado' },
-        { ico: '🏗️', tit: 'Costo real (11 obras)', v: c.obras_real_mdp, f: 'mdp1', etq: '+' + c.obras_sobrecosto_pct + '% de sobrecosto (' + fmt(c.obras_brecha_mdp, 'mdp1') + ' por encima de lo aprobado)', est: 'derivado' },
+        { ico: '📐', tit: 'Presupuesto inicial (11 obras)', v: c.obras_presu_mdp, f: 'mdp1', etq: 'monto previsto originalmente en documentos oficiales (1988–2024): aprobado o, si no se publicó, anunciado', est: 'derivado' },
+        { ico: '🏗️', tit: 'Costo real (11 obras)', v: c.obras_real_mdp, f: 'mdp1', etq: '+' + c.obras_sobrecosto_pct + '% de sobrecosto (' + fmt(c.obras_brecha_mdp, 'mdp1') + ' por encima de lo previsto)', est: 'derivado' },
         { ico: '🏦', tit: 'Los 2 rescates (aparte)', v: c.rescates_real_mdp, f: 'mdp1', etq: 'FOBAPROA-IPAB (1998) y FARAC carretero (1997)', est: 'derivado' },
         { ico: '📉', tit: 'Pérdida neta anual', v: c.balance_neto_anual_mdp, f: 'mdp1', etq: 'en los ' + c.n_con_dato_anual + ' proyectos con dato anual (5 pierden ' + fmt(c.balance_pierde_mdp, 'mdp1') + ' y el AIFA gana ' + fmt(c.balance_gana_mdp, 'mdp1') + ')', est: 'derivado' },
         { ico: '⏳', tit: 'Operación sin publicar', txt: c.n_pendiente_anual + ' obras sin dato', etq: 'Megafarmacia, Tren Interurbano, Agronitrogenados y Búnker no publican estado de resultados propio', est: 'pendiente', pend: A.pendiente_id }

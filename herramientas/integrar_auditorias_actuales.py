@@ -628,8 +628,8 @@ def construir(d):
             'que': (
                 'El registro de Inversión y Megaobras sigue 13 proyectos de seis sexenios (1988–2024), separados por método en 11 obras '
                 'físicas o de equipamiento y 2 rescates financieros (FOBAPROA-IPAB y FARAC carretero). Las 11 obras pasaron de '
-                '$529,936.6 millones de pesos presupuestados a $1,176,646.8 millones de costo real documentado (+122.0 % de sobrecosto, '
-                '$646,710.2 millones por encima de lo aprobado). Los 2 rescates suman aparte $1,888,345.8 millones frente a los '
+                '$529,936.6 millones de pesos previstos a $1,176,646.8 millones de costo real documentado (+122.0 % de sobrecosto, '
+                '$646,710.2 millones por encima de lo previsto: lo aprobado o, si no se publicó, lo anunciado). Los 2 rescates suman aparte $1,888,345.8 millones frente a los '
                 '$610,056.6 millones reconocidos al inicio. En operación anual, de los 13 proyectos solo 6 publican su resultado financiero '
                 '(5 pierden $78,171.3 millones y 1 gana $290.2 millones, con una pérdida neta anual documentada de $77,881.1 millones), '
                 '4 no publican estados financieros individualizados y 3 no operan como empresa.'
