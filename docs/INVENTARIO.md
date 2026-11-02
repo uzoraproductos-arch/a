@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 295 |
+| Páginas revisadas | 296 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -18,7 +18,8 @@ La Enciclopedia queda fuera porque está congelada.
 |---|---|---|---:|---:|---:|---:|---:|
 | `administracion-codigos.html` | Administración de códigos · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
 | `agora.html` | Ágora cívica · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 0 |
-| `aprende.html` | Aprende · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
+| `aprende-auditoria.html` | Cómo se audita · Auditavisión | apartados.py | 53 | 0 | 20 | 0 | 0 |
+| `aprende.html` | Aprende · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
 | `auditoria-agronitrogenados.html` | Plantas de fertilizantes Agronitrogenados · Auditoría en imágenes · Auditavisión | auditorias.py | 83 | 0 | 4 | 2 | 2 |
 | `auditoria-aifa.html` | Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditoría en imágenes · Auditavisión | auditorias.py | 83 | 0 | 2 | 4 | 1 |
 | `auditoria-bunker-garcia-luna.html` | El Búnker de Seguridad de García Luna (SSPC) · Auditoría en imágenes · Auditavisión | auditorias.py | 83 | 0 | 4 | 2 | 2 |
@@ -201,7 +202,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 51 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 65 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 312 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 313 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `informes-documentar-para-sancionar.html` | Informe especial: Documentar para sancionar · Auditavisión | apartados.py | 51 | 0 | 40 | 8 | 2 |

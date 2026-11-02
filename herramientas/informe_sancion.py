@@ -283,6 +283,8 @@ def bot():
     import informe_semestral
     t = temas()
     t.update(informe_semestral.temas())
+    import metodologia_auditoria
+    t.update(metodologia_auditoria.temas())
     return {'t': t, 'fam': {k: v[1] for k, v in FAMILIAS.items()}, 'pag': [ARCHIVO, TITULO]}
 
 

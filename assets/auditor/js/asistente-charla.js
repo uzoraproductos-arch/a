@@ -1094,6 +1094,15 @@
     function sanResp(t) {
       if (!SAN) return null;
       if (/documentar para sancionar|informe especial de la asf|guia de la asf/.test(t)) return sanTema('informe');
+      /* «Cómo se audita»: la metodología, cotejada con el Marco de Control Interno de la ASF, la LFPIORPI y el CNPP (02-11-2026). */
+      if (SAN.t.met_control) {
+        if (/triangulo del fraude|factores? (de riesgo )?(del?|de) fraude|por que (alguien|la gente|un funcionario) (comete|roba|hace) (un )?fraude|racionalizacion/.test(t)) return sanTema('met_fraude');
+        if (/riesgo (inherente|residual)|auditoria (basada )?(en|por) riesgos|tolerancia (al riesgo|cero)|segregacion de funciones|mapa de riesgos/.test(t)) return sanTema('met_riesgos');
+        if (/control(es)? interno|\bcoso\b|marco integrado|\bmici\b|seguridad razonable|primera linea de defensa/.test(t)) return sanTema('met_control');
+        if (/cadena de custodia|prueba pericial|peritaje|perito|dictamen pericial|auditoria forense.*(prueba|juicio|evidencia)|evidencia.*(juicio|tribunal)/.test(t)) return sanTema('met_forense');
+        if (/lavado de dinero|lavar dinero|blanqueo|actividad(es)? vulnerables?|lfpiorpi|antilavado|beneficiario controlador|procedencia ilicita|conozca a su cliente|\bpld\b/.test(t)) return sanTema('met_lavado');
+        if (/como (se )?audita|como (audita|trabaja|investiga) (auditavision|la plataforma)|metodologia (de (la )?)?auditori|metodo (de|del) auditor/.test(t)) return sanTema('met_ruta');
+      }
       /* El informe semestral de la ASF (art. 38 LFRCF): lo que pasó con lo que observó. */
       var asf = /\basf\b|auditoria superior|auditoria|fiscaliz/;
       if (SAN.t.sem_informe) {

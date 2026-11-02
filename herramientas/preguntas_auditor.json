@@ -1480,6 +1480,30 @@
    "dice": [
     "El condicional que esconde un rumor"
    ]
+  },
+  {
+   "q": "¿Qué es el control interno?",
+   "ir": "aprende-auditoria.html#met-control"
+  },
+  {
+   "q": "¿Qué es el triángulo del fraude?",
+   "ir": "aprende-auditoria.html#met-fraude"
+  },
+  {
+   "q": "¿Qué es el riesgo inherente?",
+   "ir": "aprende-auditoria.html#met-riesgos"
+  },
+  {
+   "q": "¿Qué es la cadena de custodia?",
+   "ir": "aprende-auditoria.html#met-forense"
+  },
+  {
+   "q": "¿Qué es una actividad vulnerable?",
+   "ir": "aprende-auditoria.html#met-lavado"
+  },
+  {
+   "q": "¿Cómo audita Auditavisión?",
+   "ir": "aprende-auditoria.html#met-ruta"
   }
  ]
 }

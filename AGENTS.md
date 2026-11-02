@@ -578,7 +578,9 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   `sem_*`). **Cada semestre (1 de mayo y 1 de noviembre) se cambian sus cifras
   y su `DOC` por las del informe nuevo**, con el anterior en `ANT` para el
   cambio del semestre. Un documento de doctrina o una guía oficial es metodología:
-  se explica en sencillo con su página, no se copia entero.
+  se explica en sencillo con su página, no se copia entero. La metodología de auditoría (control interno, riesgos, fraude, prueba y lavado) vive en `aprende-auditoria.html`, por
+  `herramientas/metodologia_auditoria.py`, cotejada contra el Marco Integrado de Control Interno de la ASF, la LFPIORPI y el
+  CNPP: **un temario o un folleto de curso nunca es fuente**, solo guía de temas.
 - **Responde como chat:** claro, corto y contundente, con la cifra, qué
   quiere decir y su fuente a la vista. Cada respuesta con datos lleva
   **«Saber más»**, que abre la página de la plataforma donde está la

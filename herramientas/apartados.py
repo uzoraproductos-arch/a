@@ -667,6 +667,13 @@ APARTADOS = [
                 'pagina': 'herramienta-inspector-nepotismo.html',
                 'pestana': ('👪', 'Nepotismo y cargos públicos', 'Qué parientes alcanza la ley y cómo se investiga un cargo'),
             },
+            {
+                # Pedido del autor, 02-11-2026: «integra nuestra base de datos
+                # como metodología». La pagina la escribe metodologia_auditoria.py.
+                'id': 'como-se-audita',
+                'pagina': 'aprende-auditoria.html',
+                'pestana': ('🧭', 'Cómo se audita', 'Control interno, riesgos, fraude, prueba y lavado, con su fuente oficial'),
+            },
             # «El Congreso y las elecciones» fue la cuarta pestaña de Aprende la
             # mañana del 23-10-2026; esa tarde (pedido del autor) se mudó a
             # Datos, como «Poder Legislativo» (poderes_paginas()).
@@ -5778,7 +5785,8 @@ def generar(sello=None):
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     import datos_ambiente
     import periodistas, acceso
-    for extra in [DICCIONARIO, *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    import metodologia_auditoria
+    for extra in [DICCIONARIO, metodologia_auditoria.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
