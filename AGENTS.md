@@ -253,9 +253,10 @@ artículo 6o. constitucional en materia del Derecho de Réplica (DOF 04-11-2015,
   hábiles para resolver y 3 para notificar (arts. 11 y 12); si se niega, por
   escrito y con una causa del art. 19. Si la réplica prueba un error nuestro,
   además va a la fe de erratas.
-- **Falta designar al responsable** que pide el art. 7 (nombre, domicilio,
-  correo y teléfono, siempre a la vista): pendiente `replica-responsable`, a
-  cargo del autor.
+- **El responsable** que pide el art. 7 (nombre, domicilio, código postal,
+  entidad, correo y teléfono, siempre a la vista) lo designó el autor el
+  02-11-2026. Vive en `RESPONSABLE` de `herramientas/apartados.py`, que leen
+  el aviso de privacidad y `derecho-de-replica.html`: si cambia, cambia ahí.
 
 ---
 

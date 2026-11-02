@@ -134,13 +134,11 @@ que necesita navegador.
 
 - Crear el proyecto de Supabase y poner las llaves **solo en su panel**
   (Edge Functions → Secrets), nunca en el repositorio ni en el chat.
-- Llenar `FUNCIONES`, `TURNSTILE_SITIO` y `AVISO_CONSERVACION` en
-  `herramientas/apartados.py`, y dar el nombre y el domicilio del responsable
-  para el aviso de privacidad.
-- **Designar al responsable de las réplicas** (Ley de réplica, art. 7: nombre
-  completo, domicilio, código postal, entidad, correo y teléfono, siempre a la
-  vista). Puede ser la misma persona del aviso de privacidad. Mientras no esté,
-  la plataforma no puede recibir un escrito de réplica (`replica-responsable`).
+- **Responsable designado (02-11-2026):** el autor dio domicilio, correo y
+  teléfono, y pidió publicarse con el seudónimo «Inspector Meteoro» (la ley
+  pide nombre completo: decisión del autor), para el aviso de privacidad y el derecho de réplica
+  (`RESPONSABLE` de `apartados.py`); las dos páginas lo muestran y la
+  plataforma ya puede recibir un escrito de réplica.
 - Sacar el token del INEGI (Banxico salió el 01-11-2026 por decisión del autor).
 - **La IA del Auditor, en pausa por decisión del autor (02-11-2026).** Falta la llave `ANTHROPIC_API_KEY` en Supabase (con saldo y tope en platform.claude.com). Cuando esté: subir `auditor-ia` y `buscar-web` en el flujo «Sube la base de datos» (hoy no se suben) y conectarlas al chat («Lo que aún no sé» y «Búscalo en internet»; hoy el chat no las llama). Costo estimado: ~US$0.03 por pregunta con Opus 5.5 (unas 150 con US$5), ~US$0.015 con Sonnet 5.5 (`MODELO_IA`).
 - **Google:** `auditavision.com.mx` quedó en Search Console el 02-11-2026 (prefijo de URL, verificado con la etiqueta `google-site-verification` de `index.html`: **no se quita**) y su `sitemap.xml` se envió bien. Mientras el candado esté encendido, el robot de Google solo ve la entrada (`canjea-tu-codigo.html`): el contenido no aparece en el buscador hasta el lanzamiento o hasta que el autor decida abrirlo.

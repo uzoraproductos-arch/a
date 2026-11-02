@@ -129,7 +129,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-salud-imss.html` | El IMSS: lo que cuesta y lo que resuelve · Auditavisión | apartados.py | 45 | 0 | 18 | 9 | 3 |
 | `datos-salud-publica.html` | Salud pública · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
 | `datos-salud-sistema.html` | Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE · Auditavisión | apartados.py | 44 | 0 | 4 | 0 | 2 |
-| `derecho-de-replica.html` | Derecho de réplica · Auditavisión | apartados.py | 38 | 0 | 1 | 0 | 1 |
+| `derecho-de-replica.html` | Derecho de réplica · Auditavisión | apartados.py | 38 | 0 | 1 | 0 | 0 |
 | `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 | `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 0 |
 | `donaciones.html` | Donaciones · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
@@ -292,7 +292,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 235 | 0 | 0 | 0 | 126 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 234 | 0 | 0 | 0 | 125 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 36 | 0 | 6 | 3 | 1 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 45 | 0 | 1 | 0 | 0 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
@@ -363,7 +363,7 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-125 fichas, cada una con su porqué, su responsable y su enlace oficial.
+124 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 
