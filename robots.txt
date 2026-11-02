@@ -1,0 +1,5 @@
+# Auditavisión: el mapa del sitio, para los buscadores.
+User-agent: *
+Disallow: /administracion-codigos.html
+
+Sitemap: https://auditavision.com.mx/sitemap.xml
