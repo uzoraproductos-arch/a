@@ -1517,10 +1517,19 @@ AVISO = {
                     'además de una huella cifrada de tu conexión (no tu dirección IP) para frenar el spam. <b>Para qué:</b> solo para mandarte tu código '
                     'y, si lo pides otra vez, saber que ya lo tenías. No lo usamos para publicidad ni lo compartimos. <b>Cuánto tiempo:</b> la solicitud '
                     'se borra sola 12 meses después de atendida. Para pedir que la borremos antes, responde al correo con el que te mandamos tu código.</p>')},
+        {'id': 'ia', 'titulo': 'Si le pides algo a la inteligencia artificial', 'texto': 'La IA del Auditor, a pedido (02-11-2026).', 'tarjetas': [],
+         'bloque': ('<p>El Auditor contesta con su base sin ninguna IA. Solo si pulsas <b>«Redáctalo con las fichas»</b>, tu pregunta y '
+                    'las fichas de la plataforma más cercanas se mandan a <b>Anthropic</b> (el modelo Claude, en Estados Unidos), que '
+                    'redacta la respuesta. Guardamos en nuestra base la pregunta, qué fichas se usaron, lo que contestó y una huella '
+                    'cifrada de tu conexión (no tu dirección IP), para auditar a la IA y frenar el abuso; <b>nada de tu nombre ni tu '
+                    'correo</b>. Se borra solo a los <b>12 meses</b>. Por eso, <b>no escribas datos personales en tu pregunta</b>.</p>\n'
+                    '<p>Si pulsas <b>«Buscar ahora»</b> con el nombre de una persona de la vida pública, ese nombre se manda a Anthropic '
+                    'para buscarlo en sitios oficiales y de prensa. Los enlaces que encuentre quedan públicos, con su fecha (así cualquiera '
+                    'puede ver qué se encontró), y se reusan un día para no repetir la búsqueda. De quien busca no se guarda nada.</p>')},
         {'id': 'terceros', 'titulo': 'Servicios de terceros', 'texto': 'Lo que tu navegador pide a otros sitios al abrir una página.', 'tarjetas': [],
          'bloque': ('<p>Para mostrarte la página, tu navegador se conecta a GitHub Pages (donde vive el sitio), a Google Fonts (las letras) '
                     'y a cdnjs (la librería de los mapas). Si abres un formulario para enviarlo, también a Cloudflare Turnstile, '
-                    'que comprueba que eres una persona y no un programa. Esos servicios reciben, como cualquier sitio, tu dirección IP y los datos técnicos '
+                    'que comprueba que eres una persona y no un programa; y si usas la IA, a nuestra base, que llama a Anthropic (arriba). Esos servicios reciben, como cualquier sitio, tu dirección IP y los datos técnicos '
                     'de tu navegador, y los tratan con sus propias políticas. Los enlaces a portales oficiales y a noticias te llevan a '
                     'sitios con sus propios avisos.</p>')},
         {'id': 'derechos', 'titulo': 'Tus derechos y cómo limitar el uso', 'texto': 'Artículo 15, fracciones IV y V.', 'tarjetas': [],

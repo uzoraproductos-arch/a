@@ -720,8 +720,12 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
 - **Hacia dónde va:** consultar portales externos y tener una capa de
   inteligencia artificial que aprenda de las preguntas. **La base de datos y
   sus funciones ya están construidas** (24-10-2026, `supabase/`, explicadas en
-  `docs/BASE-DE-DATOS.md`); falta que el autor cree la cuenta y ponga las
-  llaves. La IA (`auditor-ia`) solo redacta con lo que le entregan las
+  `docs/BASE-DE-DATOS.md`). **La IA está encendida desde el 02-11-2026**, a
+  pedido del lector y con botón: «📝 Redáctalo con las fichas» cuando la base
+  no contesta o el lector pulsa «No era lo que buscaba» (`pideIa()` de `asistente.js`, que le pasa las fichas más
+  cercanas) y «🔎 Buscar ahora» en «Búscalo en internet» (`pideWeb()`). El
+  flujo «Sube la base de datos» sube las dos funciones y prueba la IA con una
+  pregunta real; el aviso de privacidad dice qué se manda a Anthropic. La IA (`auditor-ia`) solo redacta con lo que le entregan las
   fichas, y cada cifra de su respuesta se coteja contra ellas: si una no
   aparece, se tira; `buscar-web` solo devuelve enlaces de sitios oficiales y
   de una lista editorial de prensa. **Ninguna cifra fiscal vive en la base.**
