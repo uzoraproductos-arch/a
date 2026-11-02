@@ -56,6 +56,74 @@ sólido es Propuestas de valor.
 | 9. Estructura de costos | 0 | 2 | 1 |
 | **Total** | **16** | **16** | **9** |
 
+## La propuesta de valor, constituida (02-11-2026)
+
+La definición del autor:
+
+> «Auditavisión es una plataforma digital que sirve como investigador virtual,
+> reportero y noticiero; revisa las finanzas públicas del Estado mexicano desde
+> el gasto más hormiga, mantiene un control de sus operaciones en sus tres
+> niveles, más de lo que la misma ASF llega a detectar.»
+
+| Su frase | Qué se sostiene hoy | Cómo decirlo |
+|---|---|---|
+| «investigador, reportero, noticiero» | ✅ Son los modos Inspector y Periodista, y la pestaña Noticias. | Igual. |
+| «desde el gasto más hormiga» | 🟡 En lo federal se llega a cada contrato de ComprasMX. Muchos municipios no publican sus gastos menores. | «Hasta el contrato más chico que se publica, y lo que no se publica, con el nombre de quien lo debe». |
+| «mantiene un control» | ❌ El control interno es de cada institución (Marco Integrado de Control Interno de la ASF). | «Vigila». |
+| «en sus tres niveles» | 🟡 Están los 32 estados y 2,479 municipios, con distinta profundidad. | «Federación, estados y municipios», con un semáforo de cobertura. |
+| «más de lo que la ASF detecta» | ❌ No está probado. La ASF hizo 2,264 auditorías a la Cuenta Pública 2024 y puede exigir documentos (`integrar_cuenta_publica.py`), pero revisa después de que cierra el año: la última entrega de 2024 salió en febrero de 2026. | «Llegamos antes y cruzamos lo que nadie cruza». Se prueba con el registro de señales tempranas. |
+
+**La frase propuesta:** «Auditavisión es el auditor ciudadano del dinero
+público de México: vigila a la Federación, los estados y los municipios hasta
+el contrato más chico que se publica, cruza lo que nadie cruza y te avisa antes
+de que llegue la auditoría. Cada cifra trae su documento.»
+
+### ¿Por qué alguien pagaría?
+
+**La prueba ácida: si mañana cerramos, ¿quién se queja?** Hoy, nadie, porque
+nadie depende todavía de la plataforma:
+
+- el candado no deja entrar;
+- no hay avisos por correo;
+- no hay un caso que la prensa nos cite.
+
+Ser indispensable se gana con **hábito** (los avisos), **memoria** (la bóveda y
+la memoria de promesas) y **prueba** (que nos citen).
+
+La ciudadanía no paga: la consulta es gratis por regla. Pagan quienes pierden
+dinero, tiempo o reputación por no saber algo a tiempo.
+
+| # | Segmento | Lo que les duele | Lo que se les vende | Motivo para pagar |
+|---|---|---|---|---|
+| 1 | Empresas y sus contadores | Las facturas de un proveedor que está en la lista 69-B pueden dejar de servirles para deducir (Código Fiscal, art. 69-B). Contratar con una empresa sancionada también es un riesgo. | Ficha de debida diligencia del proveedor y un aviso si entra a una lista | Alto |
+| 2 | Auditores, despachos y personal de órganos de control | Formarse y certificarse: pagan diplomados de 80 h. | Taller «Documentar para sancionar» | Alto |
+| 3 | Regidurías y congresos locales, de cualquier partido | Votar sin equipo técnico | Expediente del ente antes de la sesión. Mismo producto y mismo precio para todos. | Medio |
+| 4 | Municipios y tesorerías (los auditados) | Observaciones de la ASF que se repiten cada año | Capacitación preventiva, nunca «limpiar» su expediente. **Lo decide el autor.** | Medio |
+| 5 | Medios y periodistas | Tiempo y riesgo de réplica | Revisión documental, licencia del verificador | Bajo en dinero, alto en alcance |
+
+**Por qué podemos llegar a ser indispensables:**
+
+- **Memoria.**
+  - La plataforma une promesa → Presupuesto → Cuenta Pública → ASF, y la bóveda guarda copia de los documentos.
+  - Con el INAI extinto desde el 20-03-2025, la transparencia federal depende de una secretaría del Ejecutivo.
+- **El cruce.** Los informes de la ASF se cruzan con los contratos, la lista 69-B y las notas.
+- **Confianza revisable.**
+  - La IA tira cualquier respuesta con una cifra que no está en las fichas.
+  - Hay fe de erratas y derecho de réplica con plazos de ley.
+
+### Propuestas, en orden
+
+1. **Validar antes de construir (30 días).**
+   - 10 entrevistas, 2 por segmento.
+   - 3 pilotos con precio escrito.
+2. **Registro de señales tempranas.**
+   - Cada señal se anota con su fecha.
+   - Si la ASF la observa después, queda probado que llegamos antes.
+3. **Ficha de debida diligencia del proveedor**, armada con ComprasMX, la lista 69-B y los sancionados.
+4. **Avisos por correo:** seguir a un municipio o a un proveedor.
+5. **«Gasto hormiga» por solicitud de acceso:** modelos de solicitud para pedir viáticos y fondos revolventes. Lo que no se entregue va al Registro de pendientes.
+6. **Semáforo de cobertura** por nivel de gobierno.
+
 ---
 
 ## 1. Segmentos de clientes
@@ -210,9 +278,11 @@ Enciclopedia antigua (AGENTS.md §0 bis).
 
 1. La forma jurídica.
 2. El primer cliente.
-3. El primer producto de pago. Recomendación: el **taller «Documentar para sancionar»**.
+3. El primer producto de pago. Recomendación: el **taller «Documentar para sancionar»** y la **ficha de debida diligencia del proveedor**.
 4. La fecha para quitar el candado.
 5. La analítica sin cookies.
+6. Si se vende a los auditados (municipios y tesorerías), y con qué límites.
+7. La frase de la propuesta de valor.
 
 ## Metodología
 
