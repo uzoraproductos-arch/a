@@ -47,6 +47,15 @@ FUENTES = {
         'corto': 'ASF, Informe del Resultado CP 2025, 1.ª entrega',
         'doc': 'Auditoría Superior de la Federación, Informe del Resultado de la Fiscalización Superior de la Cuenta Pública 2025, primera entrega',
         'url': ASF + 'IR2025a/index.html'},
+    'MDB2025B': {
+        'corto': 'ASF, Matriz de Datos Básicos CP 2025, 2.ª entrega (oct. 2026)',
+        'doc': 'Auditoría Superior de la Federación, Matriz de Datos Básicos, Fiscalización Superior de la Cuenta Pública 2025, segunda entrega, corte octubre de 2026',
+        'url': 'https://informe.asf.gob.mx/Documentos/Matriz/IR2025_Entrega_a.pdf',
+        'sha256': 'b926aa45c440966574f79c722d42ab319471dc42ee43785fc89f2feee4c6c230'},
+    'IR2025B': {
+        'corto': 'ASF, Informe del Resultado CP 2025, 2.ª entrega',
+        'doc': 'Auditoría Superior de la Federación, Informe del Resultado de la Fiscalización Superior de la Cuenta Pública 2025, segunda entrega',
+        'url': 'https://informe.asf.gob.mx/'},
     'LFRCF': {
         'corto': 'Ley de Fiscalización, reforma DOF 14-05-2026',
         'doc': 'Ley de Fiscalización y Rendición de Cuentas de la Federación, última reforma DOF 14-05-2026',
@@ -84,8 +93,8 @@ CALENDARIO = [
      'fundamento': 'CPEUM, art. 74, fr. VI', 'fuente': 'CPEUM', 'hecho': True},
     {'fecha': '2026-06-30', 'titulo': 'Primera entrega de la ASF', 'texto': 'Informes individuales que concluyen en el periodo. En 2026 fueron 33 auditorías a la distribución de las participaciones federales.',
      'fundamento': 'LFRCF, art. 35', 'fuente': 'LFRCF', 'hecho': True},
-    {'fecha': '2026-10-30', 'titulo': 'Segunda entrega de la ASF', 'texto': 'Último día hábil de octubre (el 31 de octubre de 2026 cae en sábado).',
-     'fundamento': 'LFRCF, art. 35', 'fuente': 'LFRCF', 'hecho': False},
+    {'fecha': '2026-10-30', 'titulo': 'Segunda entrega de la ASF', 'texto': 'Último día hábil de octubre (el 31 de octubre de 2026 cayó en sábado). En 2026 fueron 374 auditorías (36 del ámbito federal y 338 de gasto federalizado).',
+     'fundamento': 'LFRCF, art. 35', 'fuente': 'LFRCF', 'hecho': True},
     {'fecha': '2027-02-20', 'titulo': 'Tercera entrega e Informe General', 'texto': 'Últimos informes individuales y el Informe General Ejecutivo, que es público.',
      'fundamento': 'LFRCF, arts. 33 y 35', 'fuente': 'LFRCF', 'hecho': False},
 ]
@@ -113,6 +122,20 @@ CP2025A = {
     'recuperaciones': 20669471.05, 'porAclarar': 1403459.00,
     'que': 'Una auditoría a la SHCP, como coordinadora de la distribución de las participaciones federales, y una a cada una de las 32 entidades.',
     'fuente': 'MDB2025A', 'pagina': 11, 'estado': 'oficial',
+}
+
+CP2025B = {
+    'entrega': 'segunda', 'corte': 'octubre de 2026', 'auditorias': 374,
+    'universo': 1077249091597.46, 'muestra': 1042309021963.39, 'representatividad': 96.75,
+    'acciones': 660, 'R': 45, 'RD': 15, 'PEFCF': 55, 'SA': 1, 'PRAS': 153, 'PO': 391,
+    'recuperaciones': 1527166019.68, 'porAclarar': 9008649917.27,
+    'federalAuditorias': 36, 'federalPorAclarar': 1655827526.02, 'federalRecuperaciones': 343789861.50,
+    'federalizadoAuditorias': 338, 'federalizadoPorAclarar': 7352822391.25, 'federalizadoRecuperaciones': 1183376158.18,
+    'municipiosAuditados': 42, 'municipiosMuestra': 5262731606.19, 'municipiosPorAclarar': 5243303554.32, 'municipiosPO': 128,
+    'nuevoLeonPorAclarar': 487302174.75, 'nuevoLeonGobiernoPorAclarar': 36129723.26, 'nuevoLeonMunicipiosPorAclarar': 451172451.49,
+    'sinaloaPorAclarar': 194208001.14, 'sinaloaGobiernoPorAclarar': 0.00, 'sinaloaMunicipiosPorAclarar': 194208001.14,
+    'que': '36 auditorías del ámbito federal y 338 de gasto federalizado (incluidos 42 municipios, donde quedaron $5,243.3 millones por aclarar en 128 pliegos de observaciones).',
+    'fuente': 'MDB2025B', 'pagina': 11, 'estado': 'oficial',
 }
 
 REF_NUEVAS = [
@@ -161,6 +184,7 @@ def construir():
             'paginaEntidades': '19 a 23',
         },
         'cp2025': CP2025A,
+        'cp2025b': CP2025B,
         'serie': serie(m),
     }
 

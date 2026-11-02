@@ -594,9 +594,9 @@
   },
   {
    "q": "¿Cuánto debe Pemex?",
-   "ir": "pendientes.html#pemex-deuda",
+   "ir": "noticias-auditavision.html#col-pemex-3t-2026-perdida-neta",
    "dice": [
-    "todavía no lo tengo con documento"
+    "77.6 mil millones de dólares"
    ]
   },
   {
@@ -621,9 +621,9 @@
   },
   {
    "q": "¿Cuál es la deuda de Pemex?",
-   "ir": "pendientes.html#pemex-deuda",
+   "ir": "noticias-auditavision.html#col-pemex-3t-2026-perdida-neta",
    "dice": [
-    "todavía no lo tengo con documento"
+    "77.6 mil millones de dólares"
    ]
   },
   {
@@ -1135,7 +1135,15 @@
    "modo": "periodista",
    "ir": "periodismo-en-riesgo.html",
    "dice": [
-    "Aún no lo integramos",
+    "110 homicidios",
+    "FEADLE"
+   ]
+  },
+  {
+   "q": "¿Cuántos homicidios de periodistas registra la FEADLE?",
+   "ir": "periodismo-en-riesgo.html#pr-feadle",
+   "dice": [
+    "110",
     "FEADLE"
    ]
   },

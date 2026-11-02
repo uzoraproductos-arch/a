@@ -564,6 +564,7 @@
     var nadie = [], iv = invDe(q, r);
     /* Nepotismo (pedido del autor, 29-10-2026): lo que la ley todavía no alcanza, y la regla del apellido. */
     if (base === 'herramienta-inspector-nepotismo.html') nadie.push('<li>🔦 <b>Los puntos ciegos:</b> la prohibición del nepotismo electoral se aplica a partir de las elecciones de 2030, el «yo contrato a tu sobrino y tú a mi hija» entre dependencias no es el caso del art. 63 Bis, y los datos de la familia en la declaración están en reserva. <a href="herramienta-inspector-nepotismo.html#puntos-ciegos">Ver los puntos ciegos ➔</a> Y ojo: <b>un apellido igual nunca es prueba de parentesco</b>; un vínculo entra a la plataforma solo si lo dice un documento oficial.</li>');
+    if (base === 'periodismo-en-riesgo.html') nadie.push('<li>🛡️ <b>Lo que registran Gobernación y la FEADLE:</b> 40.7 % de los probables agresores señalados ante el Mecanismo son servidores públicos (374 de 918), y de 2000 a septiembre de 2026 la FEADLE registra 110 homicidios de periodistas, 1,940 indagatorias y 53 sentencias condenatorias. <a href="periodismo-en-riesgo.html#pr-feadle">Ver cifras de la FEADLE ➔</a></li>');
     if (iv) nadie.push('<li>📖 <b>Lo investigamos a fondo:</b> <a href="' + esc(iv.x.ir) + '">' + esc(iv.x.n) + ' ➔</a>, en Auditoría en imágenes.</li>');
     exps.forEach(function (f) {
       nadie.push('<li>📂 <b>La ASF lo dejó por aclarar.</b> ' + esc(recorta(f.txt, 220)) + ' <a href="' + esc(f.ir[0]) + '">Ver el expediente ➔</a></li>');
@@ -2063,13 +2064,13 @@
       var rt = charla.contesta(q);
       if (rt && rt.ir && rt.ir[0] === 'datos-salud-sistema.html#sal-transicion') { rt.sug = ['¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?', '¿Cuánta gente se quedó sin acceso a servicios de salud?']; return rt; }
     }
-    /* La deuda de Pemex no la tiene la plataforma: se dice, con su pendiente,
-       en vez de contestar con su presupuesto (27-10-2026). */
+    /* Saldo de la deuda financiera de Pemex: boletines nacionales 86 (30-10-2026, 3T 2026)
+       y 69 (31-07-2026, 2T 2026), más el costo financiero en el PEF 2026. */
     if (/ pemex /.test(p) && (/ (debe|adeuda|deuda|endeudamiento|pasivos?) /.test(p)) && !/ (intereses|costo financiero|paga) /.test(p))
       return {
-        html: '<p>⚪ <b>Cuánto debe Pemex, todavía no lo tengo con documento</b> ' + chip({ e: 'pendiente', p: 'pemex-deuda' }) + '. Pemex publica su deuda en sus reportes trimestrales; la plataforma aún no la coteja ni la integra, así que no te doy una cifra.</p>' +
-          '<p>Lo que sí tengo: lo que Pemex paga de intereses en 2026. Pregúntame «¿cuánto paga Pemex de intereses?».</p>',
-        ir: ['pendientes.html#pemex-deuda', 'Registro de pendientes'], rec: [], sug: ['¿Cuánto paga Pemex de intereses?', 'Diagnóstico de Pemex'], anota: 1
+        html: '<p><b>Al cierre del tercer trimestre de 2026 (30 de septiembre de 2026), el saldo de la deuda financiera de Pemex fue de 77.6 mil millones de dólares</b> ' + chip({ e: 'oficial' }) + ' (<a href="https://www.pemex.com/saladeprensa/boletines_nacionales/Paginas/2026_86_nacional.aspx" target="_blank" rel="noopener">Pemex, Boletín nacional 86, 30 de octubre de 2026 ↗</a>).</p>' +
+          '<p>Al cierre del segundo trimestre (30 de junio de 2026) se ubicaba en <b>77.5 mil millones de dólares</b>, una disminución de <b>9.1 %</b> respecto al cierre de 2025 ' + chip({ e: 'oficial' }) + ' (<a href="https://www.pemex.com/saladeprensa/boletines_nacionales/Paginas/2026_69_nacional.aspx" target="_blank" rel="noopener">Pemex, Boletín nacional 69, 31 de julio de 2026 ↗</a>). Además, en el Presupuesto de Egresos 2026 Pemex tiene aprobados <b>$190,838.8 millones de pesos</b> para su costo financiero (intereses y comisiones).</p>',
+        ir: ['noticias-auditavision.html#col-pemex-3t-2026-perdida-neta', 'Pemex en el 3T 2026'], rec: [], sug: ['¿Cuánto paga Pemex de intereses?', 'Pemex en el 3T 2026: lo que dice la nota y lo que falta del reporte', 'Diagnóstico de Pemex'], anota: 1
       };
     return null;
   }

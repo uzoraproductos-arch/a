@@ -20,7 +20,7 @@ Se actualiza cada vez que una nota deja un pendiente por un portal que no abre.
 
 | Dominio | Qué destraba | Notas que lo esperan |
 |---|---|---|
-| `asf.gob.mx`, `informe.asf.gob.mx` | Informes individuales y denuncias de la segunda entrega de la Cuenta Pública 2025; Matriz de Datos Básicos | `asf-segunda-entrega-cp2025`, `asf-nuevo-leon-triangulacion-cp2025` |
+| `asf.gob.mx`, `informe.asf.gob.mx` | Informes individuales, denuncias e informe semestral (la Matriz de Datos Básicos de la 2.ª entrega CP 2025 ya quedó integrada el 02-11-2026) | `asf-segunda-entrega-cp2025`, `asf-nuevo-leon-triangulacion-cp2025` |
 | `gaceta.diputados.gob.mx`, `www.diputados.gob.mx` | Dictámenes, reservas y votaciones; leyes vigentes (LeyesBiblio) | `lfd-2027-dnr-defensa-tren-maya-aifa`, `senado-ley-de-ingresos-2027` |
 | `www.senado.gob.mx`, `comunicacion.senado.gob.mx` | Gaceta del Senado y votación de la Ley Federal de Derechos 2027 | `senado-ley-de-ingresos-2027`, `lfd-2027-dnr-defensa-tren-maya-aifa` |
 | `www.canaldelcongreso.gob.mx` | Notas oficiales de las votaciones (ya se citan; hay que copiar su huella a la bóveda) | `senado-ley-de-ingresos-2027`, `lfd-2027-dnr-defensa-tren-maya-aifa` |
@@ -34,15 +34,15 @@ Se actualiza cada vez que una nota deja un pendiente por un portal que no abre.
 | `www.cuentapublica.hacienda.gob.mx` | Estados financieros de las empresas públicas (Tren Maya, AIFA); hoy falla por certificado | `lfd-2027-dnr-defensa-tren-maya-aifa` (anotado sin copia en la bóveda) |
 | `www.ppef.hacienda.gob.mx` | Proyecto de Presupuesto 2027 por ramo y por empresa | `jalisco-gasto-federal-pef-2027`, `lfd-2027-dnr-defensa-tren-maya-aifa` |
 | `www.transparenciapresupuestaria.gob.mx` | Datos abiertos del gasto | varias |
-| `www.gob.mx` | Sener (permisos de importación), FGR, IPAB, Conagua y comunicados de Presidencia | `portacelis-permiso-diesel-sener`, `agua-guadalajara-14500-federal` |
+| `www.gob.mx` | Sener (permisos de importación), FGR, IPAB y Conagua (el comunicado de Presidencia del 28-10-2026 sobre el agua de Guadalajara ya quedó integrado el 02-11-2026) | `portacelis-permiso-diesel-sener`, `agua-guadalajara-14500-federal` |
 | `upcp-compranet.hacienda.gob.mx`, `comprasmx.buengobierno.gob.mx` | Contratos marco (nube pública 2024, Anexo 4 de proveedores acreditados) y el histórico de CompraNet 2019–2024; ComprasMX para bajar los datos abiertos al día | `huawei-gobierno-codigo-magenta` |
-| `stastdgv2portfgr032.blob.core.windows.net` | Estadísticas de la FEADLE (FGR) sobre agresiones a periodistas | pendiente `periodistas-feadle` |
+| `stastdgv2portfgr032.blob.core.windows.net` | Estadísticas de la FEADLE (FGR) sobre agresiones a periodistas (**Integrado el 02-11-2026** al corte de sep. 2026; cerrado `periodistas-feadle`) | — |
 
 ## Empresas públicas
 
 | Dominio | Qué destraba | Notas que lo esperan |
 |---|---|---|
-| `www.pemex.com` | Reporte de resultados trimestrales y saldo de la deuda | `pemex-3t-2026-perdida-neta`, pendiente `pemex-deuda` |
+| `www.pemex.com` | Reporte financiero completo trimestral (**Integrados el 02-11-2026** los Boletines 69 y 86 con el saldo de la deuda; cerrado `pemex-deuda`) | `pemex-3t-2026-perdida-neta` |
 | `www.bmv.com.mx` | Reportes que Pemex entrega a la Bolsa | `pemex-3t-2026-perdida-neta` |
 
 ## Estados y municipios

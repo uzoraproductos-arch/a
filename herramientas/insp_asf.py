@@ -370,18 +370,39 @@ def acciones(C):
 def nueva(C, ref, prox):
     N = C['cp2025']
     st = N['estado']
-    return sec('ia-2025', '🆕', 'La Cuenta Pública 2025: lo que ya salió', '''
-        <p class="ia-txt">La primera entrega (%s) revisó un solo tema: <b>cómo se repartieron las participaciones federales</b>, el dinero de libre uso que la Federación entrega a los estados. %s</p>
+    b2 = C.get('cp2025b')
+    seg = ''
+    if b2:
+        st2 = b2['estado']
+        seg = '''
+        <h3 class="ia-sub">Segunda entrega (%s): %s auditorías</h3>
+        <p class="ia-txt">%s</p>
         <div class="ia-datos">%s%s%s%s%s</div>
-        <p class="ia-nota">%s %s %s. Los 33 informes, en el %s. %s</p>''' % (
-        esc(N['corte']), esc(N['que']),
+        <p class="ia-nota">%s %s. En el ámbito federal se practicaron %s auditorías ($%s millones por aclarar) y en el gasto federalizado %s auditorías ($%s millones por aclarar). Los informes individuales se publican en el %s.</p>''' % (
+            esc(b2['corte']), num(b2['auditorias']), esc(b2['que']),
+            dato(num(b2['auditorias']), 'auditorías', st2),
+            dato(monto(b2['muestra']), 'revisados', st2, pct(b2['representatividad'], 2) + ' del universo seleccionado'),
+            dato(num(b2['acciones']), 'acciones', st2, '%s pliegos de observaciones y %s PRAS' % (num(b2['PO']), num(b2['PRAS']))),
+            dato(mdp(b2['porAclarar']), 'por aclarar', st2),
+            dato(mdp(b2['recuperaciones']), 'recuperados', st2),
+            chip('oficial'), fuente(C, b2['fuente'], b2['pagina']),
+            num(b2['federalAuditorias']), format(b2['federalPorAclarar'] / 1e6, ',.1f'),
+            num(b2['federalizadoAuditorias']), format(b2['federalizadoPorAclarar'] / 1e6, ',.1f'),
+            fuente(C, 'IR2025B'))
+    return sec('ia-2025', '🆕', 'La Cuenta Pública 2025: lo que ya salió', '''
+        <h3 class="ia-sub">Primera entrega (%s): %s auditorías</h3>
+        <p class="ia-txt">La primera entrega revisó un solo tema: <b>cómo se repartieron las participaciones federales</b>, el dinero de libre uso que la Federación entrega a los estados. %s</p>
+        <div class="ia-datos">%s%s%s%s%s</div>
+        <p class="ia-nota">%s %s %s. Los 33 informes, en el %s.</p>%s%s''' % (
+        esc(N['corte']), num(N['auditorias']), esc(N['que']),
         dato(num(N['auditorias']), 'auditorías', st),
         dato(monto(N['muestra']), 'revisados', st, pct(N['representatividad'], 0) + ' del universo'),
         dato(num(N['acciones']), 'acciones', st, '%s recomendaciones y %s solicitud de aclaración' % (num(N['R']), num(N['SA']))),
         dato(pesos(N['porAclarar']), 'por aclarar', st),
         dato(pesos(N['recuperaciones']), 'recuperados', st),
         chip('oficial'), fuente(C, N['fuente'], N['pagina']), ref('ref-asf-mdb2025a'), fuente(C, 'IR2025A'),
-        ('Lo que viene: la %s, el %s.' % (esc(minus(prox['titulo'])), fecha(prox['fecha']))) if prox else ''))
+        seg,
+        ('<p class="ia-nota">Lo que viene: la %s, el %s.</p>' % (esc(minus(prox['titulo'])), fecha(prox['fecha']))) if prox else ''))
 
 
 def documentos(C, ref):
@@ -475,9 +496,9 @@ def capitulos(base, ref):
           'Qué significa cada acción y qué pasa después',
           'Una observación no es una sentencia. Cada acción abre un camino distinto, con los plazos que marca la ley.',
           lambda: acciones(C)),
-        c('2025', 'ia-2025', '🆕', 'La Cuenta Pública 2025', num(N['auditorias']) + ' auditorías en la 1.ª entrega',
+        c('2025', 'ia-2025', '🆕', 'La Cuenta Pública 2025', num(N['auditorias'] + (C.get('cp2025b') or {}).get('auditorias', 0)) + ' auditorías en 1.ª y 2.ª entregas',
           'La Cuenta Pública 2025: lo que ya salió',
-          'Lo que trae la primera entrega de la ASF sobre el gasto de 2025 y lo que viene después.',
+          'Lo que traen la primera y la segunda entrega de la ASF sobre el gasto de 2025 y lo que viene después.',
           lambda: nueva(C, ref, prox)),
         c('catalogo', 'ia-catalogo', '📋', 'Catálogo de cifras oficiales', format(len(insp_nota.catalogo(base)), ',') + ' cifras con documento',
           'Catálogo de cifras oficiales',

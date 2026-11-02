@@ -22143,6 +22143,17 @@ window.AUDIT_DB = {
         "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2025, primera entrega",
         "url": "https://www.asf.gob.mx/Trans/Informes/IR2025a/index.html"
       },
+      "MDB2025B": {
+        "corto": "ASF, Matriz de Datos B\u00e1sicos CP 2025, 2.\u00aa entrega (oct. 2026)",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Matriz de Datos B\u00e1sicos, Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2025, segunda entrega, corte octubre de 2026",
+        "url": "https://informe.asf.gob.mx/Documentos/Matriz/IR2025_Entrega_a.pdf",
+        "sha256": "b926aa45c440966574f79c722d42ab319471dc42ee43785fc89f2feee4c6c230"
+      },
+      "IR2025B": {
+        "corto": "ASF, Informe del Resultado CP 2025, 2.\u00aa entrega",
+        "doc": "Auditor\u00eda Superior de la Federaci\u00f3n, Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2025, segunda entrega",
+        "url": "https://informe.asf.gob.mx/"
+      },
       "LFRCF": {
         "corto": "Ley de Fiscalizaci\u00f3n, reforma DOF 14-05-2026",
         "doc": "Ley de Fiscalizaci\u00f3n y Rendici\u00f3n de Cuentas de la Federaci\u00f3n, \u00faltima reforma DOF 14-05-2026",
@@ -22222,10 +22233,10 @@ window.AUDIT_DB = {
       {
         "fecha": "2026-10-30",
         "titulo": "Segunda entrega de la ASF",
-        "texto": "\u00daltimo d\u00eda h\u00e1bil de octubre (el 31 de octubre de 2026 cae en s\u00e1bado).",
+        "texto": "\u00daltimo d\u00eda h\u00e1bil de octubre (el 31 de octubre de 2026 cay\u00f3 en s\u00e1bado). En 2026 fueron 374 auditor\u00edas (36 del \u00e1mbito federal y 338 de gasto federalizado).",
         "fundamento": "LFRCF, art. 35",
         "fuente": "LFRCF",
-        "hecho": false
+        "hecho": true
       },
       {
         "fecha": "2027-02-20",
@@ -24161,6 +24172,43 @@ window.AUDIT_DB = {
       "porAclarar": 1403459.0,
       "que": "Una auditor\u00eda a la SHCP, como coordinadora de la distribuci\u00f3n de las participaciones federales, y una a cada una de las 32 entidades.",
       "fuente": "MDB2025A",
+      "pagina": 11,
+      "estado": "oficial"
+    },
+    "cp2025b": {
+      "entrega": "segunda",
+      "corte": "octubre de 2026",
+      "auditorias": 374,
+      "universo": 1077249091597.46,
+      "muestra": 1042309021963.39,
+      "representatividad": 96.75,
+      "acciones": 660,
+      "R": 45,
+      "RD": 15,
+      "PEFCF": 55,
+      "SA": 1,
+      "PRAS": 153,
+      "PO": 391,
+      "recuperaciones": 1527166019.68,
+      "porAclarar": 9008649917.27,
+      "federalAuditorias": 36,
+      "federalPorAclarar": 1655827526.02,
+      "federalRecuperaciones": 343789861.5,
+      "federalizadoAuditorias": 338,
+      "federalizadoPorAclarar": 7352822391.25,
+      "federalizadoRecuperaciones": 1183376158.18,
+      "municipiosAuditados": 42,
+      "municipiosMuestra": 5262731606.19,
+      "municipiosPorAclarar": 5243303554.32,
+      "municipiosPO": 128,
+      "nuevoLeonPorAclarar": 487302174.75,
+      "nuevoLeonGobiernoPorAclarar": 36129723.26,
+      "nuevoLeonMunicipiosPorAclarar": 451172451.49,
+      "sinaloaPorAclarar": 194208001.14,
+      "sinaloaGobiernoPorAclarar": 0.0,
+      "sinaloaMunicipiosPorAclarar": 194208001.14,
+      "que": "36 auditor\u00edas del \u00e1mbito federal y 338 de gasto federalizado (incluidos 42 municipios, donde quedaron $5,243.3 millones por aclarar en 128 pliegos de observaciones).",
+      "fuente": "MDB2025B",
       "pagina": 11,
       "estado": "oficial"
     },

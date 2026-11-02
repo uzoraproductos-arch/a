@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 296 |
+| Páginas revisadas | 302 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -16,10 +16,12 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Página | Título | Generador | Enlaces internos | Módulos embebidos | oficial | derivado | pendiente |
 |---|---|---|---:|---:|---:|---:|---:|
+| `Plan_Maestro_Auditor_Civico_20260927.html` | MEGA PLAN MAESTRO INTEGRAL — Auditor Cívico (Auditavisión) | a mano | 0 | 0 | 0 | 0 | 0 |
 | `administracion-codigos.html` | Administración de códigos · Auditavisión | apartados.py | 35 | 0 | 0 | 0 | 0 |
 | `agora.html` | Ágora cívica · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 0 |
 | `aprende-auditoria.html` | Cómo se audita · Auditavisión | apartados.py | 53 | 0 | 20 | 0 | 0 |
 | `aprende.html` | Aprende · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
+| `auditavision.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 1 | 0 | 0 | 0 | 0 |
 | `auditoria-agronitrogenados.html` | Plantas de fertilizantes Agronitrogenados · Auditoría en imágenes · Auditavisión | auditorias.py | 83 | 0 | 4 | 2 | 2 |
 | `auditoria-aifa.html` | Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditoría en imágenes · Auditavisión | auditorias.py | 83 | 0 | 2 | 4 | 1 |
 | `auditoria-bunker-garcia-luna.html` | El Búnker de Seguridad de García Luna (SSPC) · Auditoría en imágenes · Auditavisión | auditorias.py | 83 | 0 | 4 | 2 | 2 |
@@ -61,6 +63,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `contexto-dimensional-renglones.html` | Renglones que no se suman · Auditavisión | apartados.py | 41 | 0 | 3 | 0 | 1 |
 | `contexto-dimensional-social.html` | Dimensión social · Auditavisión | apartados.py | 41 | 0 | 6 | 0 | 1 |
 | `contratos-publicos.html` | Contratos públicos · Auditavisión | apartados.py | 42 | 0 | 1 | 1 | 0 |
+| `crecimiento_gasto_sexenal.html` | Crecimiento Real del Gasto Sexenal en México — Radiografía del Poder Presupuestario | a mano | 0 | 0 | 0 | 0 | 0 |
 | `datos-abiertos.html` | Datos abiertos · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
 | `datos-ambiente-basura.html` | La basura · Auditavisión | apartados.py | 48 | 0 | 14 | 9 | 1 |
 | `datos-ambiente-desglose.html` | Qué se acabó y qué se ensució · Auditavisión | apartados.py | 48 | 0 | 11 | 1 | 0 |
@@ -132,6 +135,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-salud-sistema.html` | Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE · Auditavisión | apartados.py | 44 | 0 | 4 | 0 | 2 |
 | `derecho-de-replica.html` | Derecho de réplica · Auditavisión | apartados.py | 38 | 0 | 1 | 0 | 0 |
 | `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
+| `diagrama_comparativo (1).html` | Radiografía del Erario: Sexenios del Siglo XXI en México | a mano | 0 | 0 | 0 | 0 | 0 |
 | `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 0 |
 | `donaciones.html` | Donaciones · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
 | `enciclopedia-auditavision.html` | Enciclopedia · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
@@ -162,7 +166,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-calculadora-ticket-retienen.html` | Lo que te retienen · Auditavisión | apartados.py | 71 | 0 | 17 | 20 | 0 |
 | `herramienta-calculadora-ticket.html` | Tu estado de cuenta · Auditavisión | apartados.py | 53 | 0 | 0 | 0 | 0 |
 | `herramienta-calculadora.html` | Calculadora Cívica · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-asf-2025.html` | La Cuenta Pública 2025 · Auditavisión | apartados.py | 42 | 0 | 6 | 0 | 0 |
+| `herramienta-inspector-asf-2025.html` | La Cuenta Pública 2025 · Auditavisión | apartados.py | 42 | 0 | 12 | 0 | 0 |
 | `herramienta-inspector-asf-acciones.html` | Qué significa cada acción · Auditavisión | apartados.py | 42 | 0 | 1 | 0 | 0 |
 | `herramienta-inspector-asf-autoridades.html` | Quién fiscaliza · Auditavisión | apartados.py | 53 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-asf-calendario.html` | El seguimiento 2024–2027 · Auditavisión | apartados.py | 41 | 0 | 0 | 3 | 0 |
@@ -203,25 +207,27 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 65 | 0 | 3 | 6 | 1 |
 | `indice.html` | Índice general · Auditavisión | apartados.py | 313 | 0 | 1 | 1 | 1 |
+| `infografia_fiscal_mx.html` | Arquitectura Fiscal de México — Radiografía Tributaria en Tres Niveles de Gobierno | a mano | 0 | 0 | 0 | 0 | 0 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `informes-documentar-para-sancionar.html` | Informe especial: Documentar para sancionar · Auditavisión | apartados.py | 51 | 0 | 40 | 8 | 2 |
 | `informes-oficiales.html` | Informes oficiales · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 0 |
 | `informes-semestral-asf.html` | Informe semestral de la ASF · Auditavisión | apartados.py | 50 | 0 | 30 | 5 | 4 |
+| `mapa_mexico (1).html` | Mapa Interactivo — Gasto Federalizado por Entidad Federativa · PEF 2026 | a mano | 0 | 0 | 0 | 0 | 0 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `nepotismo-y-cargos-publicos.html` | Nepotismo y cargos públicos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `noticias-al-momento-agua-guadalajara-14500-federal.html` | El agua de Guadalajara: la Federación anuncia 14,500 millones «sin deuda», pero el dinero todavía no aparece en el Presupuesto 2027 · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 3 |
-| `noticias-al-momento-asf-nuevo-leon-triangulacion-cp2025.html` | La ASF denuncia una presunta triangulación de 7 mil 200 millones en Nuevo León: lo que dice, lo que falta y por qué «desvió» todavía no es un hecho · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 3 |
-| `noticias-al-momento-asf-segunda-entrega-cp2025.html` | La ASF y los 9 mil millones «por aclarar» de 2025: lo que se sabe, lo que falta y lo que nadie te explica · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 3 |
+| `noticias-al-momento-agua-guadalajara-14500-federal.html` | El agua de Guadalajara: la Federación anuncia 14,500 millones «sin deuda», pero el dinero todavía no aparece en el Presupuesto 2027 · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 2 |
+| `noticias-al-momento-asf-nuevo-leon-triangulacion-cp2025.html` | La ASF denuncia una presunta triangulación de 7 mil 200 millones en Nuevo León: lo que dice la Matriz oficial, lo que falta y por qué «desvió» todavía no es un hecho · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 3 |
+| `noticias-al-momento-asf-segunda-entrega-cp2025.html` | La ASF y los 9 mil millones «por aclarar» de 2025: lo que dice la Matriz oficial, lo que falta y lo que nadie te explica · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 1 |
 | `noticias-al-momento-carnaval-ensenada-2026-imcudhe.html` | El Carnaval de Ensenada costó más de 22 millones y recuperó 1.2: lo que se dijo ante el Cabildo y lo que falta publicar · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-huawei-gobierno-codigo-magenta.html` | ¿Huawei «digitaliza» al gobierno con acceso total al IMSS, al SAT y a Aduanas? En los contratos federales de 2025 y 2026, Huawei no aparece como proveedor · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 3 |
 | `noticias-al-momento-imss-modalidad-40-gestores.html` | El IMSS acota la Modalidad 40: lo que dice el Diario Oficial y lo que falta probar · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 3 |
 | `noticias-al-momento-jalisco-gasto-federal-pef-2027.html` | Jalisco y el gasto federal: aporta el 7.5 % del PIB y recibe el 6.1 % de lo que la Federación reparte a los estados · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-lfd-2027-dnr-defensa-tren-maya-aifa.html` | ¿18 mil millones «en subsidios» para el Tren Maya y el AIFA? Es el cobro a los turistas extranjeros, y el 57 % es la parte de la Defensa, no un aumento · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 2 |
-| `noticias-al-momento-pemex-3t-2026-perdida-neta.html` | Pemex vuelve a perder en el tercer trimestre: ¿10,792 o 10,795 millones?, y lo que esa pérdida no cuenta · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 4 |
+| `noticias-al-momento-pemex-3t-2026-perdida-neta.html` | Pemex vuelve a perder en el tercer trimestre: lo que dice su Boletín 86, el punto ciego de la pérdida neta y su deuda de 77.6 mil mdd · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 3 |
 | `noticias-al-momento-portacelis-permiso-diesel-sener.html` | Portacelis y el permiso para importar 52 millones de litros de diésel: lo que dice MCCI, lo que consta y lo que es puro adjetivo · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-senado-ley-de-ingresos-2027.html` | El Senado aprueba la Ley de Ingresos 2027: de sus 10.6 billones, casi 1.5 son dinero prestado · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 2 |
-| `noticias-al-momento-servidores-ia-exportaciones-contenido-nacional.html` | ¿México ya exporta más servidores que autos? Lo dice una consultora privada, no el INEGI, y el «3 a 7 % mexicano» no tiene documento · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 5 |
+| `noticias-al-momento-servidores-ia-exportaciones-contenido-nacional.html` | ¿México ya exporta más servidores que autos? Lo dice una consultora privada, no el INEGI, y el «3 a 7 % mexicano» no tiene documento · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 4 |
 | `noticias-auditavision.html` | Auditavisión Noticias · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `noticias-relevantes.html` | Noticias relevantes · Auditavisión | apartados.py | 37 | 0 | 0 | 0 | 0 |
 | `noticias-seguimiento.html` | Seguimiento: el caso no se olvida · Auditavisión | apartados.py | 44 | 0 | 8 | 4 | 6 |
@@ -293,8 +299,8 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 234 | 0 | 0 | 0 | 125 |
-| `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 36 | 0 | 6 | 3 | 1 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 226 | 0 | 0 | 0 | 117 |
+| `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 36 | 0 | 11 | 5 | 0 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 45 | 0 | 1 | 0 | 0 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
@@ -364,11 +370,11 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-124 fichas, cada una con su porqué, su responsable y su enlace oficial.
+116 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 
-Documentos en `docs/boveda/evidencias.json`: 253 copiado, 37 no abrió, 9 sin copia.
+Documentos en `docs/boveda/evidencias.json`: 258 copiado, 37 no abrió, 8 sin copia.
 
 Todos los cotejos «consta» y «matiz» tienen su evidencia.
 
