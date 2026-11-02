@@ -1,7 +1,111 @@
 {
- "actualizado": "31 de octubre de 2026",
+ "actualizado": "1 de noviembre de 2026",
  "nota": "Titulares que junta herramientas/recolectar_noticias.py, sin verificar. Solo titular, medio, fecha y liga; nunca el texto de la nota.",
  "notas": [
+  {
+   "titulo": "Comisión de presupuesto y cuenta pública de la Cámara de Diputados se declara en sesión permanente",
+   "medio": "El Heraldo de México",
+   "fecha": "27 de octubre de 2026",
+   "url": "https://heraldodemexico.com.mx/nacional/2026/10/27/comision-de-presupuesto-cuenta-publica-de-la-camara-de-diputados-se-declara-en-sesion-permanente-917324.html",
+   "tema": "presupuesto",
+   "visto": "1 de noviembre de 2026"
+  },
+  {
+   "titulo": "La deuda pública de México aumentó 4.5% hasta septiembre, informa Hacienda",
+   "medio": "Colima Noticias",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://www.colimanoticias.com/la-deuda-publica-de-mexico-aumento-4-5-hasta-septiembre-informa-hacienda/",
+   "tema": "deuda",
+   "visto": "1 de noviembre de 2026"
+  },
+  {
+   "titulo": "ASF reporta más de $9 mil millones por aclarar del gasto de 2025; municipios concentran más de $5.2 mil millones",
+   "medio": "Periódico Noroeste",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.noroeste.com.mx/nacional/asf-reporta-mas-de-9-mil-millones-por-aclarar-del-gasto-de-2025-municipios-concentran-mas-de-52-mil-millones-KF26987915",
+   "tema": "asf",
+   "visto": "1 de noviembre de 2026"
+  },
+  {
+   "titulo": "Bajo la lupa, 10,535 mdp",
+   "medio": "El Mañana de Reynosa",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.elmanana.com/noticias/nacional/danos-al-erario-2025-por-auditoria-superior-de-la-federacion/6203396",
+   "tema": "asf",
+   "visto": "1 de noviembre de 2026"
+  },
+  {
+   "titulo": "¿Samuel García desvió 7 mil 200 millones de pesos? Esto reveló la ASF sobre Nuevo León",
+   "medio": "Récord (México) on MSN",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/otras/samuel-garc%C3%ADa-desvi%C3%B3-7-mil-200-millones-de-pesos-esto-revel%C3%B3-la-asf-sobre-nuevo-le%C3%B3n/ar-AA2gv0of",
+   "tema": "asf",
+   "visto": "1 de noviembre de 2026"
+  },
+  {
+   "titulo": "Detecta la ASF que Gobierno de Veracruz pagó $319 mil a 88 personas fallecidas",
+   "medio": "Al Calor Político",
+   "fecha": "10 de enero de 2026",
+   "url": "https://www.alcalorpolitico.com/informacion/detecta-la-asf-que-gobierno-de-veracruz-pago-319-mil-a-88-personas-fallecidas-452767.html",
+   "tema": "asf",
+   "visto": "1 de noviembre de 2026"
+  },
+  {
+   "titulo": "La Auditoría Superior de la Federación investiga al INE por irregularidades",
+   "medio": "Periódico La Voz",
+   "fecha": "24 de octubre de 2026",
+   "url": "https://periodicolavoz.com.mx/nacion/auditoria-superior-de-la-federacion-investiga-al-ine/385312",
+   "tema": "asf",
+   "visto": "1 de noviembre de 2026"
+  },
+  {
+   "titulo": "Auditoría Superior requiere al Instituto Electoral de Sonora contratos de licitaciones tras caso Taddei",
+   "medio": "Vanguardia MX",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://vanguardia.com.mx/noticias/mexico/auditoria-superior-requiere-al-instituto-electoral-de-sonora-contratos-de-licitaciones-tras-caso-taddei-CD24507041",
+   "tema": "asf",
+   "visto": "1 de noviembre de 2026"
+  },
+  {
+   "titulo": "SAT: ¿Llegarán inspectores a tu domicilio? El nuevo plan contra la evasión de impuestos",
+   "medio": "Heraldo Binario",
+   "fecha": "27 de octubre de 2026",
+   "url": "https://www.heraldobinario.com.mx/tendencias/2026/10/27/sat-llegaran-inspectores-a-tu-domicilio-el-nuevo-plan-contra-la-evasion-de-impuestos-43089.html",
+   "tema": "impuestos",
+   "visto": "1 de noviembre de 2026"
+  },
+  {
+   "titulo": "Defiende SHCP estrategia fiscal y financiera de Pemex y CFE",
+   "medio": "Quadratín CDMX",
+   "fecha": "30 de septiembre de 2026",
+   "url": "https://mexico.quadratin.com.mx/defiende-shcp-estrategia-fiscal-y-financiera-de-pemex-y-cfe/",
+   "tema": "empresas",
+   "visto": "1 de noviembre de 2026"
+  },
+  {
+   "titulo": "Finanzas sanas para la soberanía energética",
+   "medio": "El Financiero",
+   "fecha": "1 de marzo de 2026",
+   "url": "https://www.elfinanciero.com.mx/opinion/colaborador-invitado/2026/03/02/finanzas-sanas-para-la-soberania-energetica/",
+   "tema": "empresas",
+   "visto": "1 de noviembre de 2026"
+  },
+  {
+   "titulo": "Servicio Universal de Salud arrancará en 2027 sin presupuesto adicional para IMSS e ISSSTE",
+   "medio": "xpectrofm",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://xpectrofm.com/servicio-universal-de-salud-arrancara-en-2027-sin-presupuesto-adicional-para-imss-e-issste/",
+   "tema": "salud",
+   "visto": "1 de noviembre de 2026"
+  },
+  {
+   "titulo": "CDMX: ¿y el presupuesto de IMSS Bienestar?",
+   "medio": "Nexos",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://www.nexos.com.mx/cdmx-y-el-presupuesto-de-imss-bienestar/",
+   "tema": "salud",
+   "visto": "1 de noviembre de 2026"
+  },
   {
    "titulo": "Jalisco propone presupuesto de 193 mil mdp para 2027; agua tendrá aumento de 132%",
    "medio": "Crónica",
