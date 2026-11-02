@@ -607,13 +607,13 @@
     var n = periodista(q, r);
     return n ? n.html + (n.web ? webHtml(n.web) : '') : '';
   }
-  var TIPOS_REC = { mapa: 'mapa', mapas: 'mapa', reloj: 'reloj', relojes: 'reloj', contador: 'reloj', contadores: 'reloj', simulador: 'simulador', simuladores: 'simulador', tablero: 'tablero' };
+  var TIPOS_REC = { planisferio: 'mapa', mapa: 'mapa', mapas: 'mapa', reloj: 'reloj', relojes: 'reloj', contador: 'reloj', contadores: 'reloj', simulador: 'simulador', simuladores: 'simulador', tablero: 'tablero' };
   function pideRecurso(q) {
     var p = plano(q), tipo = null;
     Object.keys(TIPOS_REC).forEach(function (w) { if (p.indexOf(' ' + w + ' ') >= 0) tipo = TIPOS_REC[w]; });
     if (!tipo || / estados? de cuenta /.test(p)) return null;
     var ws = conSinon(q), ab = entidadDe(q), mejor = null, ms = 0, delTipo = REC.filter(function (x) { return x.tipo === tipo; });
-    var tema = ws.filter(function (w) { return !TIPOS_REC[w] && !(ab && plano(NOMBRE[ab]).indexOf(' ' + w + ' ') >= 0); });
+    var tema = ws.filter(function (w) { return (!TIPOS_REC[w] || w === 'planisferio') && !(ab && plano(NOMBRE[ab]).indexOf(' ' + w + ' ') >= 0); });
     delTipo.forEach(function (x) { var s = comunes(x._k, tema); if (s > ms) { ms = s; mejor = x; } });
     if (!mejor && tema.length > 1) return null;
     var lista = function (xs) { return '<ul class="pa-lista">' + xs.map(function (x) { return '<li><a href="' + esc(ligaRec(x, ab)) + '">' + x.ico + ' <b>' + esc(x.n) + '</b></a></li>'; }).join('') + '</ul>'; };

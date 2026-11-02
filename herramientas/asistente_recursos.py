@@ -135,6 +135,11 @@ RECURSOS = [
     ('obras-huella', '🌳', 'Ver huella', 'La huella ambiental de las megaobras', 'datos-ambiente-megaobras.html',
      'datos-ambiente-megaobras.html?e=%s#abMapaObras', 'tablero',
      'obra obras megaobra megaobras tren maya dos bocas ambiental ambiente huella impacto selva deforestacion manifestacion'),
+    # El Planisferio (pedido del autor, 02-11-2026): la segunda pestaña, México
+    # en un mapa por dimensiones; con un estado, abre el mapa con él elegido.
+    ('planisferio', '🗺️', 'Ver en el Planisferio', 'El Planisferio: México en un mapa', 'planisferio.html',
+     'planisferio.html?e=%s', 'mapa',
+     'planisferio mapa mexico republica tres presupuestos pisos federal estatal municipal municipios dimension dimensiones portal territorio'),
 ]
 
 

@@ -1524,6 +1524,18 @@
   {
    "q": "Quiero revisar a un proveedor antes de contratarlo",
    "ir": "servicios.html#sv-diligencia"
+  },
+  {
+   "q": "Muéstrame el mapa de los tres presupuestos",
+   "ir": "planisferio.html"
+  },
+  {
+   "q": "Abre el planisferio",
+   "ir": "planisferio.html"
+  },
+  {
+   "q": "Ver Jalisco en el planisferio",
+   "ir": "planisferio.html?e=JAL"
   }
  ]
 }

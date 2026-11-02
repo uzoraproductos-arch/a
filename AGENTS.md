@@ -58,6 +58,38 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
 - Comunidad queda aparte, como la tercera pestaña, y **Noticias** es la
   cuarta desde el 28-10-2026 (ver §5 bis).
 
+### 0 quater. El menú de cinco pestañas y el Planisferio
+
+**Decisión del autor, 02-11-2026.** El menú (`MENU` de `apartados.py` y su
+copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
+**Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras
+Ágora, Garantías y Donaciones), **Noticiero** (antes «Noticias») y
+**Servicios** (`servicios.html`, que fue módulo del Modo Inspector). Ningún
+archivo cambió de nombre. Las páginas de Números, Datos y Aprende marcan
+Comunidad (`ENCICLO_MARCAN`) y sus migas empiezan «Comunidad › Enciclopedia».
+Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
+
+- **El Planisferio es la segunda herramienta en funcionalidad**, después del
+  Auditor: un mapa grande de México por **dimensiones** (`DIMENSIONES` de
+  `herramientas/planisferio.py`): financiera, deuda, inversión, ambiental,
+  legislativa y judicial. Toca una entidad y lleva a su **portal**
+  (`planisferio-<clave>.html`, clave sin acentos: `mex`), con sus municipios.
+- **No trae datos propios:** ordena en el territorio lo que la Enciclopedia
+  ya cotejó (`AUDIT_DB`, `municipios-efipem.js`). Una cifra nueva entra
+  primero a su módulo de la Enciclopedia y de ahí la lee el Planisferio.
+- **Por entregas.** Primera (02-11-2026): la dimensión financiera, los tres
+  presupuestos de cada entidad (lo que baja de la Federación, lo que cobra el
+  estado, lo que ingresan sus municipios) y los contadores de la Enciclopedia
+  (ritmo por segundo = cifra anual ÷ 31,536,000 s, `derivado`). Las demás
+  dimensiones salen «Próximamente» y llevan a donde ya viven; un enlace roto
+  detiene la generación. Después: el mapa de los municipios, entidad por
+  entidad, con el Marco Geoestadístico del INEGI.
+- **Vive en el Auditor:** «Ver en el Planisferio» es un renglón de
+  `RECURSOS` (`asistente_recursos.py`, con `?e=` para abrir el mapa con la
+  entidad elegida) y «planisferio» cuenta como pedir un mapa (`TIPOS_REC` de
+  `asistente.js`). Una dimensión nueva que se pinte necesita su pregunta en
+  `preguntas_auditor.json`.
+
 ### 0 bis. Una sola plataforma: la Enciclopedia antigua se retiró
 
 **Decisión del autor, 24-10-2026.** Antes había dos «Enciclopedias». La
