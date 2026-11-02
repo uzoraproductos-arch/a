@@ -169,11 +169,30 @@ MESA = [
     ('empresas', '🛢️ Pemex y CFE', 'Pemex CFE finanzas deuda'),
     ('salud', '🏥 IMSS, ISSSTE y salud', 'IMSS ISSSTE presupuesto'),
     ('estados', '🗺️ Estados y municipios', 'participaciones federales estados municipios'),
+    ('medios', '📰 Lo que publican los medios', 'finanzas públicas en los medios que seguimos por nombre'),
 ]
+
+# Los medios que la mesa sigue por nombre (pedido del autor, 02-11-2026:
+# «un agente de seguimiento de publicaciones… Animal Político, La Jornada, El
+# Financiero, El Informador… Latinus»). Cada uno se busca con su dominio y
+# TEMAS_MEDIOS; lo que junta va al tema «medios» de la bandeja, rotulado «sin
+# verificar», y la misma historia contada por varios medios se agrupa.
+MEDIOS = [
+    ('Animal Político', 'animalpolitico.com'),
+    ('La Jornada', 'jornada.com.mx'),
+    ('El Financiero', 'elfinanciero.com.mx'),
+    ('El Informador', 'informador.mx'),
+    ('Latinus', 'latinus.us'),
+    ('El Economista', 'eleconomista.com.mx'),
+    ('Proceso', 'proceso.com.mx'),
+    ('Expansión', 'expansion.mx'),
+]
+TEMAS_MEDIOS = 'presupuesto OR deuda OR "Auditoría Superior" OR licitación OR Hacienda OR desvío'
 
 
 def datos():
-    return {'agenda': AGENDA, 'mesa': [{'id': i, 't': t, 'q': q} for i, t, q in MESA], 'bandeja': BANDEJA}
+    return {'agenda': AGENDA, 'mesa': [{'id': i, 't': t, 'q': q} for i, t, q in MESA], 'bandeja': BANDEJA,
+            'medios': [{'n': n, 'd': d} for n, d in MEDIOS], 'temasMedios': TEMAS_MEDIOS}
 
 
 def _sec(id_, ico, tit, entrada, cuerpo, clase=''):

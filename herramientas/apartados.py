@@ -1812,9 +1812,30 @@ SERVICIOS = [
     ('capacitacion', '🎓', 'Capacitación',
      'Talleres para leer el presupuesto y usar las herramientas de la plataforma.',
      'Taller de interpretación presupuestaria y uso del Modo Inspector.', 'Universidades públicas y privadas, organizaciones, equipos de trabajo y dependencias de gobierno.'),
+    ('diligencia', '🏢', 'Revisión de un proveedor',
+     'Lo que los documentos públicos dicen de una empresa: sus contratos con el gobierno, si está en la lista 69-B del SAT, en el directorio de sancionados o en un informe de la ASF.',
+     'Ficha del proveedor con cada hallazgo y su documento; con seguimiento, aviso cuando algo cambia.', 'Empresas, despachos contables y áreas de cumplimiento.'),
     ('licencia', '🔑', 'Licencia de las herramientas',
      'El uso de las herramientas y los datos de la plataforma dentro de tu institución.',
      'Licencia de uso, adaptación y acompañamiento.', 'Dependencias de gobierno, universidades, medios y organizaciones.'),
+]
+
+# A quién servimos (pedido del autor, 02-11-2026: «quedar con esa pestaña de
+# servicios de qué ofrecemos hacia esos sectores y en qué consisten»). Cada
+# sector dice lo que necesita y qué servicios de SERVICIOS lo atienden.
+SECTORES = [
+    ('🏢', 'Empresas y sus contadores', 'Saber con quién contratan: un proveedor en la lista 69-B del SAT o sancionado es un riesgo fiscal y legal.',
+     ['diligencia', 'seguimiento']),
+    ('🧮', 'Auditores, despachos y órganos de control', 'Formarse con casos mexicanos reales: las 20 matrices de la ASF, el control interno y la prueba.',
+     ['capacitacion', 'revision']),
+    ('🏛️', 'Regidurías y congresos', 'Llegar a una sesión de cabildo o a la revisión de una cuenta pública con los documentos ya cruzados. El mismo servicio y la misma regla para todos los partidos.',
+     ['expediente', 'seguimiento']),
+    ('📰', 'Medios y periodistas', 'Cotejar rápido una cifra antes de publicarla y tener el documento que la sostiene.',
+     ['revision', 'licencia']),
+    ('🎓', 'Universidades y organizaciones civiles', 'Enseñar a leer el presupuesto y usar los datos en clase o en un proyecto.',
+     ['capacitacion', 'licencia']),
+    ('📋', 'Gobiernos y dependencias', 'Capacitar a su personal. Nunca a cambio de retirar, suavizar o retrasar lo que publicamos (política de independencia).',
+     ['capacitacion', 'licencia']),
 ]
 
 PROCESO = [
@@ -1865,6 +1886,15 @@ def servicios():
         '            <p class="sv-que">%s</p>\n'
         '            <dl class="sv-dl"><dt>Entregable</dt><dd>%s</dd><dt>Para quién</dt><dd>%s</dd></dl>\n'
         '          </article>' % s for s in SERVICIOS)
+    nom = {x[0]: x[2] for x in SERVICIOS}
+    sectores = '\n'.join(
+        '          <article class="sv-servicio sv-sector">\n'
+        '            <span class="sv-ico" aria-hidden="true">%s</span>\n'
+        '            <h3 class="sv-tit">%s</h3>\n'
+        '            <p class="sv-que">%s</p>\n'
+        '            <p class="sv-que"><b>Te sirve:</b> %s.</p>\n'
+        '          </article>' % (ico, sec, nec, ', '.join('<a href="#sv-%s">%s</a>' % (i, nom[i]) for i in ids))
+        for ico, sec, nec, ids in SECTORES)
     pasos = '\n'.join(
         '          <li class="sv-paso"><span class="sv-paso-num" aria-hidden="true">%d</span>'
         '<span class="sv-paso-ico" aria-hidden="true">%s</span><b>%s</b><span>%s</span></li>' % ((n,) + p)
@@ -1927,8 +1957,10 @@ def servicios():
         'antes': ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> Los Servicios se abren con el lanzamiento de la '
                   'plataforma. Ya puedes armar tu solicitud y guardarla; el envío se activa entonces.</p>'),
         'secciones': [
-            {'id': 'oferta', 'titulo': 'Qué podemos investigar', 'texto': 'Cinco servicios, de una pregunta puntual a una licencia para tu institución.',
+            {'id': 'oferta', 'titulo': 'Qué podemos investigar', 'texto': '%s servicios, de una pregunta puntual a una licencia para tu institución.' % ['Cero', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho'][len(SERVICIOS)],
              'tarjetas': [], 'bloque': '<div class="sv-servicios">\n%s\n        </div>' % oferta},
+            {'id': 'sectores', 'titulo': 'A quién servimos', 'texto': 'Lo que necesita cada sector y qué servicio lo atiende. La consulta de la plataforma sigue siendo gratuita para todos.',
+             'tarjetas': [], 'bloque': '<div class="sv-servicios">\n%s\n        </div>' % sectores},
             {'id': 'proceso', 'titulo': 'Cómo trabajamos', 'texto': 'Siete pasos. Nada se cobra antes de que aceptes la cotización.',
              'tarjetas': [], 'bloque': '<ol class="sv-pasos">\n%s\n        </ol>' % pasos},
             {'id': 'precio', 'titulo': 'Cuánto cuesta', 'texto': 'Cada encargo se cotiza por escrito antes de empezar.', 'tarjetas': [],
@@ -5363,6 +5395,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('02-11-2026', 'El mapa del dinero: el mapa de las 32 entidades suma dos capas que puedes operar. «No cuadra» compara lo que cada estado dice que recibió con lo que la Federación dice que le pagó, y «Obras con alerta ambiental» cuenta los proyectos del mapa ambiental en cada estado. El Auditor abre cada capa directo («mapa de la deuda»). La Mesa de redacción sigue además a ocho medios por su nombre y junta la misma historia cuando varios la cuentan. Servicios suma «A quién servimos» y la revisión de un proveedor.'),
     ('29-10-2026', 'El índice general sigue ahora el orden de las pestañas: el Auditor Virtual con sus cuatro modos, la Enciclopedia (Números, sus Herramientas, Datos y Aprende), Comunidad y Noticias, con sus tres páginas y sus secciones. Al final, las investigaciones por tema y cómo verificamos.'),
     ('28-10-2026', 'Noticias se rehace como periódico: Auditavisión Noticias. Separa la noticia (lo que pasó y lo que consta) de la opinión (la Columna del Erario, nuestro argumento con documentos) y suma cuatro secciones: Seguimiento, con los casos abiertos y lo que falta para cerrarlos; la Mesa de redacción, con los titulares que estamos jalando, sin verificar; la Agenda del erario, con las fechas que fija la ley, y Cómo trabajamos, el método del rumor al documento. Y el verificador ahora te dice quién aparece en la nota y te lleva a su estado de cuenta y su salud financiera.'),
     ('28-10-2026', 'El Modo Inspector suma su séptima aplicación: Nepotismo y parentesco. Elige un parentesco («mi cuñado», «mi suegra») y ve qué grado es y qué ley lo alcanza: darle una plaza, un contrato o su cargo en la elección. Trae el árbol de grados, cómo se investiga un cargo y por qué un apellido igual no prueba nada. Y en el chat del Auditor pregúntale «¿mi cuñado puede trabajar en mi oficina?». En Noticias, además, ya puedes verificar una noticia, proponernos una nota y leer las réplicas y posturas.'),

@@ -25,6 +25,7 @@
     if (v == null) return '—';
     if (f === 'pesos') return '$' + num(Math.round(v), 0);
     if (f === 'pct') return num(v, 1) + '%';
+    if (f === 'n') return num(v, v % 1 ? 1 : 0);
     return mdp(v);
   }
   function chip(e, pend) {
@@ -45,9 +46,12 @@
     var PAL = {
       oro: ['#fbf3dc', '#f0d98f', '#d9b34f', '#a8801f', '#6b4f0c'],
       azul: ['#e3ecf8', '#b4c9ea', '#6f95d2', '#2f5fa8', '#0b2a63'],
-      rojo: ['#fbe5e2', '#f2b3aa', '#e06f60', '#b3261e', '#6e1510']
+      rojo: ['#fbe5e2', '#f2b3aa', '#e06f60', '#b3261e', '#6e1510'],
+      verde: ['#e4f3e8', '#b3dcbd', '#6dba82', '#2e8a4c', '#0f5128']
     };
-    var lente = D.lentes[0], sel = null;
+    /* La lente que llega en ?l=deuda (desde el Auditor o una liga). */
+    var pideL = /[?&]l=([a-z]+)/.exec(location.search);
+    var lente = D.lentes.filter(function (l) { return pideL && l.id === pideL[1]; })[0] || D.lentes[0], sel = null;
     var porA = {};
     D.e.forEach(function (e) { porA[e.a] = e; });
 
@@ -58,6 +62,8 @@
     /* Cinco clases con el mismo número de entidades (quintiles): así el
        color compara posiciones, no lo deforma un solo estado enorme. */
     function cortes(o) {
+      /* Un conteo (obras) va por número, no por quintiles: casi todos son 0, 1 o 2. */
+      if (lente.fmt === 'n') return [1, 2, 3, 4];
       var v = o.map(function (e) { return e[lente.id]; }).sort(function (a, b) { return a - b; });
       return [1, 2, 3, 4].map(function (k) { return v[Math.round(k * v.length / 5)]; });
     }
@@ -81,7 +87,7 @@
         '<span class="tt-ley-tit">' + esc(lente.nom) + '</span><span class="tt-ley-cls">' +
         pal.map(function (col, i) {
           return '<span><i style="background:' + col + '"></i>' + (i ? 'desde ' : '') + fmt(lim[i], lente.fmt) + '</span>';
-        }).join('') + '</span><span class="tt-ley-pie">De menos a más: cada color agrupa a seis o siete entidades.' +
+        }).join('') + '</span><span class="tt-ley-pie">' + (lente.fmt === 'n' ? 'De menos a más: cada color es un número de proyectos.' : 'De menos a más: cada color agrupa a seis o siete entidades.') +
         (lente.falta ? ' Con rayas, sin dato.' : '') + '</span>';
       document.getElementById('ttQue').innerHTML = esc(lente.que) + ' ' + chip(lente.est);
       document.getElementById('ttFuente').innerHTML = '<b>Fuente:</b> ' + lente.fuente +
@@ -89,6 +95,8 @@
       var cu = document.getElementById('ttCuadre');
       cu.innerHTML = lente.cuadre || '';
       cu.hidden = !lente.cuadre;
+      var sc = document.getElementById('ttSinCapa');
+      if (sc) sc.textContent = D.sin_capa || '';
       resumen(o);
       ranking(o);
       ficha();
@@ -153,12 +161,18 @@
         '<dt>Ramo 33 · aportaciones</dt><dd>' + mdp(e.r33) + ' ' + chip('oficial') + '</dd>' +
         '<dt>Por aclarar ante la ASF (2024)</dt><dd>' + mdp(e.asf) + ' · ' + e.aud + ' auditorías ' + chip('oficial') + '</dd>' +
         '<dt>Deuda registrada</dt><dd>' + mdp(e.deuda) + ' · semáforo ' + esc(e.sem.toLowerCase()) + ' ' + chip('oficial') + '</dd>' +
+        '<dt>No cuadra (INEGI contra Cuenta Pública, 2024)</dt><dd>' + (e.cuadre == null ? chip('pendiente', 'entidades-' + e.a.toLowerCase()) : fmt(e.cuadre, 'pct') + ' ' + chip('derivado')) + '</dd>' +
+        '<dt>Obras con alerta ambiental</dt><dd>' + e.obras + (e.obras ? ' (' + e.opub + ' con dinero público, ' + e.opriv + ' privadas)' : '') + ' ' + chip('derivado') + '</dd>' +
         '</dl><p class="tt-ficha-ir"><a href="' + D.ent + '?e=' + encodeURIComponent(e.a) + '#circuito">Su circuito: de dónde viene cada peso ➔</a>' +
-        '<a href="' + D.mun + '?e=' + encodeURIComponent(e.a) + '#padron">Sus municipios, uno por uno ➔</a></p>';
+        '<a href="' + D.mun + '?e=' + encodeURIComponent(e.a) + '#padron">Sus municipios, uno por uno ➔</a>' +
+        (e.obras ? '<a href="datos-ambiente-megaobras.html?e=' + encodeURIComponent(e.a) + '#abMapaObras">Sus obras en el mapa ambiental ➔</a>' : '') + '</p>';
     }
 
     function elige(a) { sel = a; pinta(); }
 
+    Array.prototype.forEach.call(raiz.querySelectorAll('.tt-lente'), function (x) {
+      x.setAttribute('aria-checked', x.getAttribute('data-l') === lente.id ? 'true' : 'false');
+    });
     raiz.querySelector('.tt-lentes').addEventListener('click', function (ev) {
       var b = ev.target.closest('.tt-lente');
       if (!b) return;

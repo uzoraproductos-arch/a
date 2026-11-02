@@ -895,6 +895,8 @@
     var p = plano(q);
     if (!CMX_RE.test(p) || SAT_PAL.test(p) || /^ (que|q) (es|son|significa)\b/.test(p)) return null;
     var rfcs = (q.match(RFC_RE) || []).map(function (x) { return x.toUpperCase(); });
+    /* «¿Cómo reviso a un proveedor antes de contratarlo?» pide el método, no a una empresa: lo contesta map/serv_diligencia (D.san). */
+    if (!rfcs.length && /\b(antes de contratar\w*|debida diligencia)\b/.test(p)) return null;
     /* «¿Qué pasa si no le cobran la pena al contratista?» no busca a una empresa: lo contesta «Documentar para sancionar». */
     if (!rfcs.length && /\b(penas?|multas?|sancion\w*|incumpl\w*|no cumplio|clausulas?|pruebo|que documentos)\b/.test(p)) return null;
     var nombre = p.trim().split(' ').filter(function (w) { return w.length > 1 && CMX_FUERA.indexOf(w) < 0; }).join(' ');
@@ -2102,6 +2104,8 @@
     /* La memoria de promesas (01-11-2026): «¿qué pasó con lo que prometieron…?» antes que la nota o la obra del mismo tema. */
     var pm = charla && charla.promesa && charla.promesa(q);
     if (pm) return pm;
+    var mp = charla && charla.mapa && charla.mapa(q);
+    if (mp) return mp;
     var tc = tituloColumna(q);
     if (tc) return tc;
     var tm = temaColumna(q);

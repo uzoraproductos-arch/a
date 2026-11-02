@@ -124,6 +124,38 @@ dinero, tiempo o reputación por no saber algo a tiempo.
 5. **«Gasto hormiga» por solicitud de acceso:** modelos de solicitud para pedir viáticos y fondos revolventes. Lo que no se entregue va al Registro de pendientes.
 6. **Semáforo de cobertura** por nivel de gobierno.
 
+### Lo que el autor aclaró (02-11-2026)
+
+- **«Control»** quiere decir seguimiento y vigilancia de hacia dónde va el
+  dinero, como principio de transparencia; por eso los mapas. Hecho: el mapa
+  del dinero (`numeros-mapa-del-gasto-federalizado.html`) tiene siete capas que
+  el lector opera: Ramos 28 y 33, por habitante, dependencia, deuda, por
+  aclarar ante la ASF, **No cuadra** y **Obras con alerta ambiental**. La
+  contaminación por estado no tiene capa: no hay cifra estatal cotejada.
+- **Los servicios** se quedan en su pestaña: `servicios.html#sectores` dice qué
+  se ofrece a cada sector, y se sumó la **Revisión de un proveedor**.
+- **«Superiores a la autoridad»** quiere decir una base más completa y mejor
+  cruzada que la de cada portal. Se sostiene comparando portal contra portal:
+  la ASF publica sus informes; Hacienda, la Cuenta Pública; el INEGI, lo que
+  reportan los estados; aquí se cruzan («No cuadra» es el primer ejemplo).
+- **Respaldo histórico**, porque la transparencia puede disminuir: la bóveda
+  (`boveda.py`) guarda cada miércoles la huella de los documentos que
+  respaldan los datos. Falta guardar las copias fuera de GitHub (almacenamiento
+  «boveda» de Supabase) y pedir copia a archive.org (`--archivo`).
+- **Medios:** la Mesa de redacción sigue a ocho medios por nombre y junta la
+  misma historia cuando varios la cuentan. Solo titular, medio, fecha y liga,
+  sin verificar.
+- **Elecciones del 6 de junio de 2027 y buscadores.** La gente va a buscar a
+  su gobierno en Google. Tres cosas deciden si nos encuentra:
+  1. **El candado** (`CANDADO = True`): mientras esté puesto, Google solo ve el
+     canje. Es la decisión que más pesa.
+  2. **Una página fija por estado**: hoy la ficha de cada estado vive en una
+     dirección con `#`, que Google no indexa por separado. Treinta y dos
+     páginas («Jalisco: su dinero, su deuda, lo que no cuadra») responderían a
+     lo que la gente escribe.
+  3. **Notas «Al momento» de campaña**: cada promesa de gasto de una
+     candidatura entra a la memoria de promesas, con su fecha.
+
 ---
 
 ## 1. Segmentos de clientes

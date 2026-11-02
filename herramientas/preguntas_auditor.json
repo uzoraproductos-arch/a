@@ -23,7 +23,7 @@
   },
   {
    "q": "Muéstrame el mapa de la deuda de los estados",
-   "ir": "numeros-mapa-del-gasto-federalizado.html"
+   "ir": "numeros-mapa-del-gasto-federalizado.html?l=deuda"
   },
   {
    "q": "Estado de cuenta de un diputado",
@@ -1504,6 +1504,18 @@
   {
    "q": "¿Cómo audita Auditavisión?",
    "ir": "aprende-auditoria.html#met-ruta"
+  },
+  {
+   "q": "¿Qué estados no cuadran con lo que les pagó la Federación?",
+   "ir": "numeros-mapa-del-gasto-federalizado.html?l=cuadre"
+  },
+  {
+   "q": "Muéstrame el mapa de obras con alerta ambiental por estado",
+   "ir": "datos-ambiente-megaobras.html#abMapaObras"
+  },
+  {
+   "q": "Quiero revisar a un proveedor antes de contratarlo",
+   "ir": "servicios.html#sv-diligencia"
   }
  ]
 }

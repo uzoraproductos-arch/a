@@ -125,6 +125,23 @@ def mapa(base, ref, raiz):
                   (' Quedan %s de redondeo a décimas.' % mdp(abs(resto))) if abs(resto) >= 0.5 else ''))
     deuda_f = sorted(set(e['deudaFuente'] for e in E), key=len)[0]
     sems = sorted(set(e['semaforoDeuda'] for e in E))
+    IE = base['inspector_estatal']['entidades']
+
+    def cuadra_pct(a):
+        x = IE.get(a)
+        if not x or x.get('inegiPart') is None:
+            return None
+        fed = x['cpR28'] + x['cpR33']
+        return round(abs(x['inegiPart'] + x['inegiAportSinConvenios'] - fed) / fed * 100, 2)
+    sin_cuadre = [e['abbr'] for e in E if cuadra_pct(e["abbr"]) is None]
+    import am_basura  # aquí: am_basura importa este módulo
+    obras = {}
+    for o in am_basura.OBRAS_MAPA:
+        for a in o['edos']:
+            obras.setdefault(a, {'publico': 0, 'privado': 0})[o['paga']] += 1
+    raros = set(obras) - set(e['abbr'] for e in E)
+    if raros:
+        raise SystemExit('territorio_modulos: OBRAS_MAPA trae claves de estado que no existen: ' + ', '.join(sorted(raros)))
     lentes = [
         {'id': 'gasto', 'nom': 'Ramos 28 y 33', 'fmt': 'mdp', 'est': 'derivado', 'pal': 'oro', 'suma': True,
          'que': 'Lo que cada estado recibe en 2026 por participaciones (Ramo 28) y aportaciones (Ramo 33), las dos vías que fija la Ley de Coordinación Fiscal.',
@@ -146,19 +163,40 @@ def mapa(base, ref, raiz):
         {'id': 'asf', 'nom': 'Por aclarar ante la ASF', 'fmt': 'mdp', 'est': 'oficial', 'pal': 'rojo', 'suma': True,
          'que': 'Lo que la Auditoría Superior de la Federación dejó por aclarar del dinero federal que recibió cada estado en 2024.',
          'fuente': '%s %s' % (E[0]['asfFuente'], ref('ref-asf-mdb2024'))},
+        # Las dos lentes del mapa del dinero (pedido del autor, 02-11-2026:
+        # «que el usuario pueda operar los mapas… inversión, contaminación,
+        # deuda, falta de transparencia»). Ninguna cifra se escribe aquí: el
+        # cuadre sale de inspector_estatal (integrar_rendicion.py) y las
+        # obras, de OBRAS_MAPA (am_basura.py).
+        {'id': 'cuadre', 'nom': 'No cuadra', 'fmt': 'pct', 'est': 'derivado', 'pal': 'rojo', 'suma': False,
+         'que': 'Cuánto se aleja lo que el gobierno del estado reportó al INEGI como recibido en 2024 de lo que la Cuenta Pública dice que la Federación le pagó '
+                '(Ramos 28 y 33, sin convenios). Una diferencia puede tener explicación (retenciones por adeudos, pagos a un fideicomiso de deuda, registros en otro año), '
+                'pero esa explicación tiene que darla el gobierno.',
+         'fuente': 'Diferencia, sin signo, entre la suma del INEGI y la de la Cuenta Pública, ÷ lo que registra la Cuenta Pública × 100. Cuenta Pública 2024, datos abiertos %s; '
+                   'INEGI, finanzas públicas estatales 2024 %s. La operación es nuestra.' % (ref('ref-shcp-cp2024-datos'), ref('ref-inegi-efipem-estatal')),
+         'falta': sin_cuadre, 'falta_pend': 'entidades-' + '-'.join(sin_cuadre).lower(),
+         'falta_txt': 'La Ciudad de México no figura en la estadística estatal del INEGI: no hay segunda cifra con que contrastar.'},
+        {'id': 'obras', 'nom': 'Obras con alerta ambiental', 'fmt': 'n', 'est': 'derivado', 'pal': 'verde', 'suma': False,
+         'que': 'Cuántos proyectos del mapa ambiental (megaobras, infraestructura y crisis con gasto público o inversión privada) tocan cada estado. '
+                'Es un conteo, no un monto: una obra que cruza cinco estados cuenta en los cinco. El detalle, con quién paga, está en el mapa ambiental.',
+         'fuente': 'Conteo nuestro de los proyectos de la herramienta Costo Ambiental (%s), cada uno con sus documentos.' % (
+             '<a href="datos-ambiente-megaobras.html#abMapaObras">mapa ambiental de megaobras</a>')},
     ]
     datos = {
         'lentes': lentes,
         'e': [{'a': e['abbr'], 'n': e['name'], 'gasto': e['gasto'], 'r28': e['ramo28'], 'r33': e['ramo33'], 'pc': e['pc'],
                'dep': None if e['abbr'] in sin_dep else e['dep'], 'deuda': e['deuda'], 'sem': e['semaforoDeuda'],
-               'asf': e['asfMontoObservado'], 'aud': e['asfAuditorias']} for e in E],
+               'asf': e['asfMontoObservado'], 'aud': e['asfAuditorias'], 'cuadre': cuadra_pct(e['abbr']),
+               'obras': sum(obras.get(e['abbr'], {}).values()), 'opub': obras.get(e['abbr'], {}).get('publico', 0),
+               'opriv': obras.get(e['abbr'], {}).get('privado', 0)} for e in E],
+        'sin_capa': 'Contaminación por estado: la plataforma todavía no tiene una cifra estatal cotejada; las cuentas ecológicas del INEGI que ya integra son nacionales.',
         'ent': ENTIDADES, 'mun': MUNICIPIOS,
     }
     botones = ''.join('<button type="button" class="tt-lente" role="radio" aria-checked="%s" data-l="%s">%s</button>'
                       % ('true' if i == 0 else 'false', l['id'], l['nom']) for i, l in enumerate(lentes))
     return '''<section class="pm tt-mapa" id="ttMapa" aria-labelledby="ttMapaTit">
-          <h2 class="pm-tit" id="ttMapaTit">Las 32 entidades, sobre el territorio</h2>
-          <p class="pm-txt">De los <b>%s</b> del gasto federalizado, la mayor parte viaja por dos ramos: las participaciones y las aportaciones. Elige qué quieres ver; el mapa y el cuadro de abajo cambian juntos. Toca un estado para ver su ficha.</p>
+          <h2 class="pm-tit" id="ttMapaTit">El mapa del dinero: las 32 entidades</h2>
+          <p class="pm-txt">De los <b>%s</b> del gasto federalizado, la mayor parte viaja por dos ramos, las participaciones y las aportaciones. Elige qué quieres ver (cuánto llega, cuánto se debe, qué dejó la ASF por aclarar, qué no cuadra y dónde hay obras con alerta ambiental); el mapa y el cuadro de abajo cambian juntos. Toca un estado para ver su ficha.</p>
           <div class="tt-lentes" role="radiogroup" aria-label="Qué mostrar en el mapa">%s</div>
           <p class="tt-que" id="ttQue"></p>
           <div class="tt-mapa-rej">
@@ -171,6 +209,7 @@ def mapa(base, ref, raiz):
           <div class="tt-res" id="ttRes"></div>
           <p class="pm-pie" id="ttFuente"></p>
           <p class="pm-pie tt-cuadre" id="ttCuadre"></p>
+          <p class="pm-pie" id="ttSinCapa"></p>
         </section>
         <section class="pm" aria-labelledby="ttRankTit">
           <h2 class="pm-tit" id="ttRankTit">De mayor a menor</h2>
@@ -351,3 +390,56 @@ def municipios(base, ref, glos, raiz):
         A['titulo'], A['texto'], A['consecuencia'], ref('ref-cpeum'),
         format(catalogo, ','), anio,
         _json({'mapa': MAPA, 'ent': ENTIDADES, 'pend': 'municipios-sin-cuenta', 'nom': {e['abbr']: e['name'] for e in base['estados']}}))
+
+
+# ---------------------------------------------------------------------------
+# El Auditor: «¿qué estados no cuadran?» (02-11-2026). Lo lee asistente-charla.js
+# dentro de D.san (clave map_cuadre), con el mismo cálculo de la lente.
+# ---------------------------------------------------------------------------
+def temas_bot(d):
+    IE = d['inspector_estatal']['entidades']
+    nom = {e['abbr']: e['name'] for e in d['estados']}
+    filas = []
+    for a, x in IE.items():
+        if x.get('inegiPart') is None:
+            continue
+        fed = x['cpR28'] + x['cpR33']
+        est = x['inegiPart'] + x['inegiAportSinConvenios']
+        filas.append((abs(est - fed) / fed * 100, a, est, fed))
+    filas.sort(reverse=True)
+    top = filas[:5]
+    li = ''.join('<li><b>%s</b>: %s%% (dice haber recibido %s; la Federación registra %s)</li>' % (
+        nom.get(a, a), '{:,.1f}'.format(p), mdp(est), mdp(fed)) for p, a, est, fed in top)
+    CP = {'tx': 'SHCP, Cuenta Pública 2024, base de datos abierta (pagado a cada entidad por los Ramos 28 y 33)',
+          'url': 'https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/BD_Cuenta_Publica/CSV/cuenta_publica_2024_gf_ecd_epe.csv'}
+    INEGI = {'tx': 'INEGI, Estadística de Finanzas Públicas Estatales (EFIPEM), ejercicio 2024 (lo que cada gobierno estatal reportó como recibido)',
+             'url': 'https://www.inegi.org.mx/programas/finanzas/'}
+    return {'map_cuadre': {
+        'tit': 'Lo que no cuadra: lo que dice cada estado contra lo que dice la Federación',
+        'h': '<p>Cada gobierno estatal le reporta al INEGI cuánto recibió de la Federación, y la Cuenta Pública registra cuánto le pagó. Deberían coincidir. '
+             'En 2024, las cinco entidades donde más se separan las dos cifras (participaciones y aportaciones, sin convenios) son:</p><ol>%s</ol>'
+             '<p>Una diferencia puede tener explicación (retenciones de participaciones por adeudos, pagos directos a un fideicomiso de deuda, registros en otro año), '
+             'pero esa explicación tiene que darla el gobierno. La Ciudad de México no figura en la estadística estatal del INEGI: no hay segunda cifra con que contrastar. '
+             'En el mapa del dinero puedes ver a las 31 con la capa «No cuadra».</p>' % li,
+        'ci': [{'v': '{:,.1f}%'.format(top[0][0]), 'etq': 'la mayor diferencia (%s), ÷ lo que registra la Cuenta Pública' % nom.get(top[0][1]), 'e': 'derivado'},
+               {'v': str(len(filas)), 'etq': 'entidades con las dos cifras para contrastar', 'e': 'derivado'}],
+        'fu': [{'que': 'Lo que la Federación pagó a cada entidad', 'e': 'oficial', 'fu': CP},
+               {'que': 'Lo que cada gobierno estatal reportó como recibido', 'e': 'oficial', 'fu': INEGI}],
+        'sug': ['¿Cuánto debe cada estado?', '¿Qué dejó la ASF por aclarar en mi estado?', 'Muéstrame el mapa de obras con alerta ambiental por estado'],
+        'ir': ['numeros-mapa-del-gasto-federalizado.html?l=cuadre', 'El mapa del dinero']},
+        # Revisar a un proveedor (02-11-2026): lo gratis primero, y el servicio.
+        'serv_diligencia': {
+        'tit': 'Cómo revisar a un proveedor antes de contratarlo',
+        'h': '<p>Lo básico lo puedes hacer gratis, aquí mismo:</p><ol>'
+             '<li><b>Sus contratos con el gobierno:</b> búscalo por nombre o RFC en <a href="contratos-publicos.html">Contratos públicos</a> (ComprasMX).</li>'
+             '<li><b>La lista negra del SAT:</b> pregúntame «¿está en la lista negra del SAT?» con su RFC o su nombre. Si un proveedor está en la lista 69-B como definitivo, '
+             'sus facturas pueden dejar de servirte para deducir (Código Fiscal de la Federación, art. 69-B).</li>'
+             '<li><b>Sanciones e informes:</b> en su ficha te armo las búsquedas en el directorio de proveedores sancionados, el DOF y la ASF.</li></ol>'
+             '<p>Si necesitas una ficha completa, con cada hallazgo y su documento, y un aviso cuando algo cambie, eso es el servicio <b>Revisión de un proveedor</b>. '
+             'Tener contratos con el gobierno no es una irregularidad, y estar en una lista no prueba un delito.</p>',
+        'ci': [],
+        'fu': [{'que': 'Lista de contribuyentes con operaciones presuntamente inexistentes (art. 69-B)', 'e': 'oficial',
+                'fu': {'tx': 'Código Fiscal de la Federación, art. 69-B', 'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf'}}],
+        'sug': ['¿Está en la lista negra del SAT?', '¿Qué contratos tiene una empresa con el gobierno?', '¿Qué servicios ofrece Auditavisión?'],
+        'ir': ['servicios.html#sv-diligencia', 'Revisión de un proveedor']}}
+

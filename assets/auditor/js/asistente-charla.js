@@ -1091,6 +1091,14 @@
       var x = SAN.t[k];
       return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug };
     }
+    /* El mapa del dinero y la revisión de un proveedor (02-11-2026): van antes que
+       las columnas, porque «no cuadra» o «contratar» también salen en las notas. */
+    function mapaResp(t) {
+      if (!SAN) return null;
+      if (SAN.t.map_cuadre && /\b(no )?cuadra(n)?\b|incongruen|no coincide/.test(t) && /\b(estados?|entidad(es)?)\b/.test(t) && /federacion|inegi|cuenta publica|recib/.test(t)) return sanTema('map_cuadre');
+      if (SAN.t.serv_diligencia && /debida diligencia|antes de contratar|\b(como|quiero|puedo) (reviso|revisar|checo|checar|investigo|investigar|verifico|verificar) (a )?(un|una|mi|mis) (proveedor|proveedores|empresa)\b/.test(t)) return sanTema('serv_diligencia');
+      return null;
+    }
     function sanResp(t) {
       if (!SAN) return null;
       if (/documentar para sancionar|informe especial de la asf|guia de la asf/.test(t)) return sanTema('informe');
@@ -1786,6 +1794,7 @@
       /* Salud pública antes que Verificamos: «¿es cierto que el IMSS hizo 1.78 millones de cirugías?» es un cotejo de salud (27-10-2026). */
       salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       nepotismo: function (q) { var r = nepResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'nep' }); },
+      mapa: function (q) { var r = mapaResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'san' }); },
       promesa: function (q) { var r = promResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'prom' }); },
       ambiente: function (q) { var r = amgResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'amg' }); },
       deFicha: deFicha, deDonde: deDonde, olvida: function () { ctx = {}; }, ctx: function () { return ctx; }

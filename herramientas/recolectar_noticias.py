@@ -31,6 +31,9 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SALIDA = os.path.join(RAIZ, noticias.BANDEJA)
 MAXIMO = 400        # notas que se conservan en la bandeja
 POR_TEMA = 15       # titulares nuevos por tema en cada corrida
+POR_MEDIO = 6       # titulares nuevos por medio seguido en cada corrida
+PARECIDO = 0.5      # palabras en común para decir que es la misma historia
+VACIAS = set('de la el los las en y a que por con para del al se su sus un una lo como mas más es ya no sobre tras ante entre'.split())
 MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre',
          'noviembre', 'diciembre']
 
@@ -96,6 +99,27 @@ EJEMPLO = b'''<?xml version="1.0"?><rss xmlns:News="https://www.bing.com/news/se
 </channel></rss>'''
 
 
+def palabras(t):
+    t = re.sub(r'[^a-záéíóúüñ0-9 ]', ' ', t.lower())
+    return {w for w in t.split() if len(w) > 2 and w not in VACIAS}
+
+
+def agrupa(nuevas, viejas):
+    """La misma historia contada por varios medios («nomás cambian
+    redacciones», dijo el autor) queda con el mismo «grupo»: la url de la
+    primera nota que la contó. Se compara por palabras en común (Jaccard)."""
+    previas = [(n.get('grupo') or n['url'], palabras(n['titulo'])) for n in viejas[:MAXIMO]]
+    for n in reversed(nuevas):
+        p = palabras(n['titulo'])
+        g = None
+        for gid, q in previas:
+            if p and q and len(p & q) / len(p | q) >= PARECIDO:
+                g = gid
+                break
+        n['grupo'] = g or n['url']
+        previas.insert(0, (n['grupo'], p))
+
+
 def main():
     prueba = '--prueba' in sys.argv
     hoy = fecha_txt(datetime.date.today())
@@ -106,7 +130,9 @@ def main():
     viejas = previa.get('notas') or []
     vistas = {n['url'] for n in viejas} | {n['titulo'].lower() for n in viejas}
     nuevas, fallas = [], []
-    for tema, _t, q in noticias.MESA:
+    busquedas = [(t, q, POR_TEMA) for t, _x, q in noticias.MESA if t != 'medios']
+    busquedas += [('medios', 'site:%s %s' % (d, noticias.TEMAS_MEDIOS), POR_MEDIO) for _n, d in noticias.MEDIOS]
+    for tema, q, tope in busquedas:
         lista = []
         for fuente in ([lambda: EJEMPLO] if prueba else [lambda: bajar(bing(q)), lambda: bajar(google(q))]):
             try:
@@ -118,12 +144,13 @@ def main():
                 break
         k = 0
         for n in lista:
-            if n['url'] in vistas or n['titulo'].lower() in vistas or k >= POR_TEMA:
+            if n['url'] in vistas or n['titulo'].lower() in vistas or k >= tope:
                 continue
             vistas.update([n['url'], n['titulo'].lower()])
             n['visto'] = hoy
             nuevas.append(n)
             k += 1
+    agrupa(nuevas, viejas)
     datos = {'actualizado': hoy if nuevas or not previa.get('actualizado') else previa['actualizado'],
              'nota': 'Titulares que junta herramientas/recolectar_noticias.py, sin verificar. Solo titular, medio, fecha y liga; nunca el texto de la nota.',
              'notas': (nuevas + viejas)[:MAXIMO]}
