@@ -58,9 +58,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `congreso-y-elecciones.html` | El Congreso y las elecciones · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `contexto-dimensional-ambiental.html` | Dimensión ambiental · Auditavisión | apartados.py | 41 | 0 | 4 | 1 | 0 |
 | `contexto-dimensional-descarga.html` | Descarga y metodología · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
-| `contexto-dimensional-financiera.html` | Dimensión financiera · Auditavisión | apartados.py | 41 | 0 | 4 | 1 | 2 |
+| `contexto-dimensional-financiera.html` | Dimensión financiera · Auditavisión | apartados.py | 41 | 0 | 6 | 1 | 0 |
 | `contexto-dimensional-presupuestaria.html` | Dimensión presupuestaria · Auditavisión | apartados.py | 40 | 0 | 3 | 1 | 0 |
-| `contexto-dimensional-renglones.html` | Renglones que no se suman · Auditavisión | apartados.py | 41 | 0 | 3 | 0 | 1 |
+| `contexto-dimensional-renglones.html` | Renglones que no se suman · Auditavisión | apartados.py | 41 | 0 | 4 | 0 | 0 |
 | `contexto-dimensional-social.html` | Dimensión social · Auditavisión | apartados.py | 41 | 0 | 6 | 0 | 1 |
 | `contratos-publicos.html` | Contratos públicos · Auditavisión | apartados.py | 42 | 0 | 1 | 1 | 0 |
 | `crecimiento_gasto_sexenal.html` | Crecimiento Real del Gasto Sexenal en México — Radiografía del Poder Presupuestario | a mano | 0 | 0 | 0 | 0 | 0 |
@@ -152,7 +152,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `glosario.html` | Diccionario · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `herramienta-ambiente-auditor.html` | Auditor ambiental · Auditavisión | apartados.py | 49 | 0 | 73 | 41 | 0 |
 | `herramienta-ambiente-basura.html` | Basura y protección · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `herramienta-ambiente-crisis.html` | Crisis ambientales · Auditavisión | apartados.py | 60 | 0 | 22 | 7 | 21 |
+| `herramienta-ambiente-crisis.html` | Crisis ambientales · Auditavisión | apartados.py | 60 | 0 | 23 | 7 | 19 |
 | `herramienta-ambiente-inversion.html` | Simulador de inversión ambiental · Auditavisión | apartados.py | 46 | 0 | 5 | 6 | 0 |
 | `herramienta-ambiente-pib.html` | ¿Cuánto del crecimiento es real? · Auditavisión | apartados.py | 47 | 0 | 3 | 0 | 0 |
 | `herramienta-ambiente-reloj.html` | El reloj y el año · Auditavisión | apartados.py | 55 | 0 | 38 | 57 | 8 |
@@ -220,7 +220,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `noticias-al-momento-asf-nuevo-leon-triangulacion-cp2025.html` | La ASF denuncia una presunta triangulación de 7 mil 200 millones en Nuevo León: lo que dice la Matriz oficial, lo que falta y por qué «desvió» todavía no es un hecho · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 3 |
 | `noticias-al-momento-asf-segunda-entrega-cp2025.html` | La ASF y los 9 mil millones «por aclarar» de 2025: lo que dice la Matriz oficial, lo que falta y lo que nadie te explica · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 1 |
 | `noticias-al-momento-carnaval-ensenada-2026-imcudhe.html` | El Carnaval de Ensenada costó más de 22 millones y recuperó 1.2: lo que se dijo ante el Cabildo y lo que falta publicar · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 2 |
-| `noticias-al-momento-huawei-gobierno-codigo-magenta.html` | ¿Huawei «digitaliza» al gobierno con acceso total al IMSS, al SAT y a Aduanas? En los contratos federales de 2025 y 2026, Huawei no aparece como proveedor · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 3 |
+| `noticias-al-momento-huawei-gobierno-codigo-magenta.html` | ¿Huawei «digitaliza» al gobierno con acceso total al IMSS, al SAT y a Aduanas? En los contratos federales de 2025 y 2026, Huawei no aparece como proveedor · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-imss-modalidad-40-gestores.html` | El IMSS acota la Modalidad 40: lo que dice el Diario Oficial y lo que falta probar · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 3 |
 | `noticias-al-momento-jalisco-gasto-federal-pef-2027.html` | Jalisco y el gasto federal: aporta el 7.5 % del PIB y recibe el 6.1 % de lo que la Federación reparte a los estados · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-lfd-2027-dnr-defensa-tren-maya-aifa.html` | ¿18 mil millones «en subsidios» para el Tren Maya y el AIFA? Es el cobro a los turistas extranjeros, y el 57 % es la parte de la Defensa, no un aumento · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 2 |
@@ -249,7 +249,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-egreso-participaciones.html` | Participaciones (Ramo 28) · Auditavisión | apartados.py | 55 | 0 | 1 | 1 | 0 |
 | `numeros-egreso-poderes-y-organos-autonomos.html` | Poderes y órganos autónomos · Auditavisión | apartados.py | 55 | 0 | 1 | 1 | 0 |
 | `numeros-el-peso-de-2026.html` | El peso de 2026 · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `numeros-estado-de-resultados.html` | El estado de resultados del Gobierno · Auditavisión | apartados.py | 55 | 0 | 11 | 7 | 22 |
+| `numeros-estado-de-resultados.html` | El estado de resultados del Gobierno · Auditavisión | apartados.py | 69 | 0 | 28 | 7 | 1 |
 | `numeros-gasto-publico.html` | Gasto público · Auditavisión | apartados.py | 47 | 0 | 0 | 0 | 0 |
 | `numeros-gasto-quien-lo-aprueba.html` | ¿Quién lo aprueba? · Auditavisión | apartados.py | 58 | 0 | 11 | 0 | 0 |
 | `numeros-gasto-si-fuera-de.html` | Si el presupuesto fuera de… · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 0 |
@@ -299,7 +299,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 226 | 0 | 0 | 0 | 117 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 219 | 0 | 0 | 0 | 112 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 36 | 0 | 11 | 5 | 0 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 45 | 0 | 1 | 0 | 0 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
@@ -370,11 +370,11 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-116 fichas, cada una con su porqué, su responsable y su enlace oficial.
+111 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 
-Documentos en `docs/boveda/evidencias.json`: 258 copiado, 37 no abrió, 8 sin copia.
+Documentos en `docs/boveda/evidencias.json`: 273 copiado, 37 no abrió, 8 sin copia.
 
 Todos los cotejos «consta» y «matiz» tienen su evidencia.
 

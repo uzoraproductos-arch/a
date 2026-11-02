@@ -127,12 +127,10 @@
    },
    {
     "dice": "Estados Unidos ya calificó a Huawei como una amenaza para la seguridad nacional",
-    "res": "pendiente",
-    "explica": "Varias fuentes reportan que la Comisión Federal de Comunicaciones de EE. UU. designó a Huawei como amenaza en junio de 2020 y la puso en su lista de equipo cubierto en 2021. Es un documento oficial de otro gobierno, y su portal no abre desde la plataforma: lo dejamos pendiente hasta leerlo.",
-    "fuente": "FCC, Covered List",
-    "url": "https://www.fcc.gov/supplychain/coveredlist",
-    "quien": "Falta de la plataforma: el portal de la FCC no abre desde nuestra sesión.",
-    "donde": "https://www.fcc.gov/supplychain/coveredlist"
+    "res": "consta",
+    "explica": "La Ley de Autorización de Defensa Nacional de EE. UU. para el año fiscal 2019 (Public Law 115-232, sección 889(f)(3)(A), promulgada el 13 de agosto de 2018) definió expresamente como «equipo o servicio de telecomunicaciones cubierto» el producido por Huawei Technologies Company o ZTE Corporation, prohibiendo a las agencias federales adquirirlo o contratar con entidades que lo usen como componente sustancial, base legal de la Covered List de la FCC.",
+    "fuente": "Congreso de EE. UU., Public Law 115-232 (John S. McCain NDAA FY2019), sec. 889(f)(3)(A) (13-08-2018)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-115publ232/html/PLAW-115publ232.htm"
    },
    {
     "dice": "Sería peligroso para la relación con Estados Unidos",
@@ -233,10 +231,6 @@
    {
     "que": "La respuesta de la Agencia de Transformación Digital y de las dependencias nombradas",
     "url": "https://www.gob.mx/atdt"
-   },
-   {
-    "que": "La designación de la FCC y la Covered List, en su documento",
-    "url": "https://www.fcc.gov/supplychain/coveredlist"
    }
   ],
   "fuentes": [
@@ -245,8 +239,8 @@
     "url": "https://comprasmx.buengobierno.gob.mx/datos-abiertos"
    },
    {
-    "nombre": "Pendiente: FCC, Covered List",
-    "url": "https://www.fcc.gov/supplychain/coveredlist"
+    "nombre": "Congreso de EE. UU., Public Law 115-232 (John S. McCain National Defense Authorization Act for Fiscal Year 2019), sec. 889(f)(3)(A) (13-08-2018)",
+    "url": "https://www.govinfo.gov/content/pkg/PLAW-115publ232/html/PLAW-115publ232.htm"
    },
    {
     "nombre": "Punto de partida: Código Magenta, serie «Operación Huawei»",
@@ -257,7 +251,7 @@
     "url": "https://www.instagram.com/p/DfGNWzKCVy9/"
    }
   ],
-  "actualizado": "01-11-2026"
+  "actualizado": "02-11-2026"
  },
  {
   "id": "agua-guadalajara-14500-federal",
@@ -4030,12 +4024,10 @@
    },
    {
     "dice": "La SHCP está encabezada por Édgar Amador.",
-    "res": "pendiente",
-    "explica": "El comunicado 82 no nombra al secretario, y no cotejamos su nombramiento en un documento oficial: falta de la plataforma.",
-    "fuente": "Secretaría de Hacienda",
-    "url": "https://www.gob.mx/shcp",
-    "quien": "Falta de la plataforma: el nombramiento es público y aún no lo integramos",
-    "donde": "https://www.gob.mx/shcp"
+    "res": "consta",
+    "explica": "La Cámara de Diputados ratificó el 12 de marzo de 2025 el nombramiento expedido por la titular del Poder Ejecutivo Federal a favor de Édgar Abraham Amador Zamora como Secretario de Hacienda y Crédito Público.",
+    "fuente": "Gaceta Parlamentaria, Cámara de Diputados, dictamen de ratificación (12-03-2025)",
+    "url": "https://gaceta.diputados.gob.mx/Gaceta/66/2025/mar/20250312.html"
    }
   ],
   "sigue": [
@@ -4052,9 +4044,13 @@
    {
     "nombre": "SHCP, comunicado No. 50: HR Ratings ratificó la calificación de México en BBB+ y cambió su perspectiva a estable (28-10-2025)",
     "url": "https://www.gob.mx/shcp/prensa/comunicado-no-50-hr-ratings-ratifico-la-calificacion-crediticia-de-mexico-en-bbb-modificando-su-perspectiva-de-negativa-a-estable"
+   },
+   {
+    "nombre": "Cámara de Diputados, Gaceta Parlamentaria del 12-03-2025: dictamen de ratificación de Édgar Abraham Amador Zamora como Secretario de Hacienda y Crédito Público",
+    "url": "https://gaceta.diputados.gob.mx/Gaceta/66/2025/mar/20250312.html"
    }
   ],
-  "actualizado": "26 de octubre de 2026"
+  "actualizado": "2 de noviembre de 2026"
  },
  {
   "id": "garcia-luna-las-dos-cortes",

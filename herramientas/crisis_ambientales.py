@@ -91,10 +91,15 @@ def calculadora(base, ref, ejemplos):
 # Documentos que no estan en el compendio: se citan con su enlace directo.
 # Todos se abrieron y se cotejaron el 11-10-2026.
 # ---------------------------------------------------------------------------
-PEF_HIST = [  # Fondo de Desastres Naturales aprobado en el PEF de cada ano (Ramo 23)
+PEF_HIST = [  # Fondo de Desastres Naturales aprobado en el PEF de cada ano (Ramo 23, Anexo 20)
     (2018, 24644.0, 'https://www.diputados.gob.mx/LeyesBiblio/abro/pef_2018/PEF_2018_abro.pdf'),
     (2019, 3644.0, 'https://www.diputados.gob.mx/LeyesBiblio/abro/pef_2019/PEF_2019_abro.pdf'),
     (2020, 3353.0, 'https://www.diputados.gob.mx/LeyesBiblio/abro/pef_2020/PEF_2020_abro.pdf'),
+    (2021, 8727.349813, 'https://www.diputados.gob.mx/LeyesBiblio/abro/pef_2021/PEF_2021_abro.pdf'),
+    (2022, 9054.884831, 'https://www.diputados.gob.mx/LeyesBiblio/abro/pef_2022/PEF_2022_abro.pdf'),
+    (2023, 17156.826205, 'https://www.diputados.gob.mx/LeyesBiblio/abro/pef_2023/PEF_2023_abro.pdf'),
+    (2024, 17984.76142, 'https://www.diputados.gob.mx/LeyesBiblio/abro/pef_2024/PEF_2024_abro.pdf'),
+    (2025, 18677.174735, 'https://www.diputados.gob.mx/LeyesBiblio/abro/pef_2025/PEF_2025_abro.pdf'),
 ]
 FONDEN_2026 = 19430.107735   # PEF 2026, Anexo 20 (p. 60 del PDF)
 FONDEN_2027 = 20057.115013   # Proyecto de PEF 2027, Anexo 20 (p. 442 del PDF)
@@ -204,7 +209,7 @@ def hueco(base, ref):
         <ul class="cr-hueco cr-hist">
 %s
         </ul>
-        <p class="cr-nota">En 2021 se extinguió el fideicomiso del FONDEN, pero el Presupuesto conserva el renglón con su nombre en el Ramo 23. Los años 2021 a 2025 todavía no los integramos %s.</p>
+        <p class="cr-nota">En 2021 se extinguió el fideicomiso del FONDEN, pero el Presupuesto conserva el renglón con su nombre en el Anexo 20 del Ramo 23 (2018 a 2026 aprobados; 2027 propuesto) %s.</p>
         <h3 class="cr-sub">Lo que de verdad costaron <small>Daños y pérdidas estimados por CENAPRED, en pesos de cada año</small></h3>
         <ul class="cr-hueco cr-cenapred">
 %s
@@ -213,7 +218,7 @@ def hueco(base, ref):
       </section>''' % (
         '\n'.join(filas), chip('oficial'), cg, chip('derivado'), mdp(FONDEN_2026), mdp(SEGURO), mdp(bonos), mdp(cubre),
         mdp(falta), chip('derivado'), mdp(GRANDE), mdp(cubre), '\n'.join(_renglon(*c) for c in capas), hist_html,
-        pend('fonden-2021-2025'), cen, chip('oficial'), ref('ref-cenapred-impacto-2024'), pend('cenapred-serie'))
+        chip('oficial'), cen, chip('oficial'), ref('ref-cenapred-impacto-2024'), pend('cenapred-serie'))
     return falta, html
 
 
@@ -351,7 +356,6 @@ FALTA = [
     ('gdl-colonias', 'El SIAPA', 'publicar cuántas colonias reciben agua de mala calidad.'),
     ('gdl-calidad', 'Salud Jalisco', 'publicar los resultados de laboratorio del agua.'),
     ('cenapred-serie', 'CENAPRED', 'publicar en cuadro, y no solo en gráfica, la serie anual de daños 2000-2024.'),
-    ('fonden-2021-2025', 'Auditavisión', 'integrar el Fondo de Desastres de los Presupuestos 2021 a 2025.'),
 ]
 
 

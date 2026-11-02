@@ -81,9 +81,6 @@ PROPIOS = [
      'Ningún documento oficial publica el subsidio por usuario de las obras. La plataforma lo marca como pendiente hasta que la dependencia que opera cada obra publique su costo de operación y su número de usuarios.',
      'Las dependencias que operan cada obra (Sedena, Pemex, Fonatur, SICT)', 'https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta',
      'Obra Pública Abierta (Hacienda)', [('herramienta-megaobras-sector.html', 'Megaobras · Obra por obra, por industria')]),
-    ('estado-cuenta-pesos-2024', 'Cuenta Pública 2024', 'Pesos de 2024 en el Estado de Cuenta y el subejercicio de 2024',
-     'Los Criterios Generales 2027 dan 2024 solo en por ciento del PIB. Los pesos y el subejercicio (modificado menos devengado) están en el Tomo II de la Cuenta Pública 2024, que la plataforma aún no coteja: el portal de Hacienda no se pudo abrir con conexión verificada.',
-     PLATAFORMA, CP2024, 'Cuenta Pública 2024 (Hacienda)', [('estado-de-cuenta.html', 'Contexto dimensional')]),
     ('radar-1989', 'Historia', 'Ingresos, gasto, inversión y costo financiero de 1989, el primer año de Salinas',
      'Las Estadísticas Oportunas de Hacienda, que usa el Radar, empiezan en 1990, y el Anexo Estadístico del 5.º Informe en 1995. '
      'La Cuenta Pública de 1989 existe, pero la plataforma aún no la integra. Mientras tanto, Salinas se mide con cinco de sus seis años '
@@ -131,9 +128,6 @@ PROPIOS = [
      'Falta de transparencia de CENAPRED.',
      'Centro Nacional de Prevención de Desastres (CENAPRED)', 'https://www.cenapred.gob.mx/es/Publicaciones/archivos/521-RESUMENEJECUTIVOIMPACTO2024.PDF',
      'Impacto socioeconómico 2024 (CENAPRED)', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
-    ('fonden-2021-2025', 'Desastres', 'Fondo de Desastres Naturales aprobado en los Presupuestos 2021 a 2025',
-     'Los Presupuestos de esos años están publicados; la plataforma aún no integra el renglón del Ramo 23.',
-     PLATAFORMA, 'https://www.diputados.gob.mx/LeyesBiblio/', 'Leyes federales (Cámara de Diputados)', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
     # El Poder Legislativo en el bot (23-10-2026).
     ('elecciones-2027-cargos', 'Elecciones', 'Cuáles son las 17 gubernaturas de 2027 y cuántos cargos locales se eligen (diputaciones locales por principio y ayuntamientos)',
      'El INE confirma en un acuerdo publicado en el Diario Oficial (INE/CG469/2026) que en 2027 habrá elecciones en las 32 entidades y 17 gubernaturas, pero la lista por estado y el conteo de cargos '

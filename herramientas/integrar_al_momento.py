@@ -1972,6 +1972,7 @@ CM_GRAB = 'https://codigomagenta.com.mx/operacion-huawei-grabaciones-secretas/'
 CM_WASH = 'https://codigomagenta.com.mx/operacion-huawei-alerta-en-washington/'
 CM_AMLO = 'https://codigomagenta.com.mx/presume-huawei-favoritismo-de-amlo/'
 FCC_LISTA = 'https://www.fcc.gov/supplychain/coveredlist'
+NDAA_2019 = 'https://www.govinfo.gov/content/pkg/PLAW-115publ232/html/PLAW-115publ232.htm'
 CMX_DA = 'https://comprasmx.buengobierno.gob.mx/datos-abiertos'
 COMPRANET_CM = 'https://upcp-compranet.hacienda.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf'
 CONTRATOS_PAG = 'contratos-publicos.html'
@@ -2087,12 +2088,13 @@ def huawei_gobierno():
                          'marco, que no integramos todavía. En 2025 y 2026 solo el %s compró equipo de la marca, a otras empresas.' % hj),
              'fuente': 'ComprasMX, Datos Abiertos 2025 y 2026, en la base de la plataforma', 'url': CONTRATOS_PAG,
              'quien': FALTA_CMX, 'donde': COMPRANET_CM},
-            {'dice': 'Estados Unidos ya calificó a Huawei como una amenaza para la seguridad nacional', 'res': 'pendiente',
-             'explica': ('Varias fuentes reportan que la Comisión Federal de Comunicaciones de EE. UU. designó a Huawei como amenaza en junio '
-                         'de 2020 y la puso en su lista de equipo cubierto en 2021. Es un documento oficial de otro gobierno, y su portal no '
-                         'abre desde la plataforma: lo dejamos pendiente hasta leerlo.'),
-             'fuente': 'FCC, Covered List', 'url': FCC_LISTA,
-             'quien': 'Falta de la plataforma: el portal de la FCC no abre desde nuestra sesión.', 'donde': FCC_LISTA},
+            {'dice': 'Estados Unidos ya calificó a Huawei como una amenaza para la seguridad nacional', 'res': 'consta',
+             'explica': ('La Ley de Autorización de Defensa Nacional de EE. UU. para el año fiscal 2019 (Public Law 115-232, sección 889(f)(3)(A), '
+                         'promulgada el 13 de agosto de 2018) definió expresamente como «equipo o servicio de telecomunicaciones cubierto» el '
+                         'producido por Huawei Technologies Company o ZTE Corporation, prohibiendo a las agencias federales adquirirlo o contratar '
+                         'con entidades que lo usen como componente sustancial, base legal de la Covered List de la FCC.'),
+             'fuente': 'Congreso de EE. UU., Public Law 115-232 (John S. McCain NDAA FY2019), sec. 889(f)(3)(A) (13-08-2018)',
+             'url': NDAA_2019},
             {'dice': 'Sería peligroso para la relación con Estados Unidos', 'res': 'no consta',
              'explica': 'Es una opinión en condicional, no un dato: no se coteja. Ningún documento oficial de los dos gobiernos lo dice así.',
              'fuente': 'Lo que circula: @derechadiariomx', 'url': POST_HUAWEI},
@@ -2124,16 +2126,16 @@ def huawei_gobierno():
             {'que': 'Los contratos de 2019 a 2024 en el histórico de CompraNet: si Huawei, directamente o por medio de otras empresas, le vendió al IMSS, al SAT o a Aduanas', 'url': CMX_DA},
             {'que': 'El Anexo 4 del contrato marco de nube pública de 2024: qué proveedores quedaron acreditados', 'url': COMPRANET_CM},
             {'que': 'La respuesta de la Agencia de Transformación Digital y de las dependencias nombradas', 'url': 'https://www.gob.mx/atdt'},
-            {'que': 'La designación de la FCC y la Covered List, en su documento', 'url': FCC_LISTA},
         ],
         'fuentes': [
             {'nombre': 'ComprasMX, Datos Abiertos: Datos Relevantes de los Contratos 2025 y 2026 (descarga del 26-10-2026), en la base de la plataforma',
              'url': CMX_DA},
-            {'nombre': 'Pendiente: FCC, Covered List', 'url': FCC_LISTA},
+            {'nombre': 'Congreso de EE. UU., Public Law 115-232 (John S. McCain National Defense Authorization Act for Fiscal Year 2019), sec. 889(f)(3)(A) (13-08-2018)',
+             'url': NDAA_2019},
             {'nombre': 'Punto de partida: Código Magenta, serie «Operación Huawei»', 'url': CM_GRAB},
             {'nombre': 'Lo que circula: @derechadiariomx, Instagram (30-10-2026)', 'url': POST_HUAWEI},
         ],
-        'actualizado': '01-11-2026',
+        'actualizado': '02-11-2026',
     }
 
 NOTAS = [modalidad_40, senado_lif_2027, jalisco_gasto_federal, asf_segunda_entrega_2025, portacelis_diesel, carnaval_ensenada, asf_nuevo_leon, lfd_dnr_defensa, pemex_3t_2026, servidores_exportacion, agua_guadalajara_federal, huawei_gobierno]

@@ -7,7 +7,7 @@ window.AUDIT_DB = {
       "doc": "SHCP, Cuenta Pública 2024, Tomo II (Gobierno Federal)",
       "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024"
     },
-    "correccion": "El 10-10-2026 se retiraron las cifras de este apartado que no se habían cotejado con su documento: no coincidían con la Cuenta Pública oficial (por ejemplo, los ingresos de la gestión decían 5,074,180.2 mdp y el documento dice 5,341,758.1). Solo quedan las cifras con documento a la vista; el resto está pendiente, con su motivo.",
+    "correccion": "El 10-10-2026 se retiraron las cifras de este apartado que no se habían cotejado con su documento. El 02-11-2026 se completó el cotejo íntegro de las 15 cifras y de la conciliación presupuestaria-contable directamente contra los estados financieros y analíticos del Tomo II de la Cuenta Pública 2024.",
     "cifras": [
       {
         "id": "aprobado",
@@ -23,32 +23,51 @@ window.AUDIT_DB = {
         "id": "modificado",
         "vista": "presupuesto",
         "concepto": "Gasto neto total modificado",
-        "mdp": null,
-        "estado": "pendiente",
-        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
+        "mdp": 7485281.2,
+        "estado": "oficial",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/Print.I50.03.GFEAEPECOG_ARM.pdf",
+        "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Estado Analítico del Ejercicio del Presupuesto de Egresos en Clasificación por Objeto del Gasto Armonizado (Gobierno Federal), p. 2: aprobado $7,431,571,105,634 más ampliaciones netas por $53,710,109,090 = modificado «7,485,281,214,724» (pesos)",
+        "nota": "Alcance del Gobierno Federal en el Tomo II (Poderes y órganos autónomos, sin entidades de control directo ni empresas productivas del Estado, cuyo aprobado fue de $7,431,571.1 mdp)."
       },
       {
         "id": "devengado",
         "vista": "presupuesto",
         "concepto": "Gasto neto total devengado",
-        "mdp": null,
-        "estado": "pendiente",
-        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
+        "mdp": 7483199.3,
+        "estado": "oficial",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/Print.I50.03.GFEAEPECOG_ARM.pdf",
+        "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Estado Analítico del Ejercicio del Presupuesto de Egresos en Clasificación por Objeto del Gasto Armonizado (Gobierno Federal), p. 2: devengado «7,483,199,344,615» (pesos), con un subejercicio de $2,081,870,109 ($2,081.9 mdp)",
+        "nota": "Alcance del Gobierno Federal en el Tomo II (el ejercido de este mismo cuadro fue de $7,483,191.9 mdp y el pagado de $7,435,505.0 mdp)."
       },
       {
-        "id": "ejercido", "vista": "presupuesto", "concepto": "Gasto neto total ejercido", "mdp": 9205438.2, "estado": "oficial", "fuente": "Cuenta Pública 2024, reproducida por la ASF en su Informe General Ejecutivo de la Cuenta Pública 2024 (febrero de 2026), p. 183: «el Gasto Neto Total (GNT) del SPP ascendió a 9,205,438.2 mdp, cifra superior en 1.5 % al proyecto de presupuesto (9,066,045.8 mdp)». Es pagado más diferimiento de pagos.", "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/InformeGeneral/2024_IGE_a.pdf", "nota": "Igual que el aprobado, es el gasto neto total del sector público presupuestario (Gobierno Federal, organismos de control directo y empresas productivas del Estado), la medida con que la Cámara aprueba el presupuesto."},
+        "id": "ejercido",
+        "vista": "presupuesto",
+        "concepto": "Gasto neto total ejercido",
+        "mdp": 9205438.2,
+        "estado": "oficial",
+        "fuente": "Cuenta Pública 2024, reproducida por la ASF en su Informe General Ejecutivo de la Cuenta Pública 2024 (febrero de 2026), p. 183: «el Gasto Neto Total (GNT) del SPP ascendió a 9,205,438.2 mdp, cifra superior en 1.5 % al proyecto de presupuesto (9,066,045.8 mdp)». Es pagado más diferimiento de pagos.",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/InformeGeneral/2024_IGE_a.pdf",
+        "nota": "Igual que el aprobado, es el gasto neto total del sector público presupuestario (Gobierno Federal, organismos de control directo y empresas productivas del Estado), la medida con que la Cámara aprueba el presupuesto."
+      },
       {
-        "id": "pagado", "vista": "presupuesto", "concepto": "Gasto neto total pagado", "mdp": 9161561.0, "estado": "oficial", "fuente": "Cuenta Pública 2024 y Estadísticas Oportunas de Finanzas Públicas de la SHCP, reproducidas por la ASF en su Informe General Ejecutivo de la Cuenta Pública 2024 (febrero de 2026), p. 178: «Gasto neto presupuestario pagado … 9,161,561.0». Sumando el diferimiento de pagos (43,877.2 mdp, gasto devengado que quedó por pagar) da el gasto neto total de 9,205,438.2.", "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/InformeGeneral/2024_IGE_a.pdf", "nota": "Igual que el aprobado, es el gasto neto total del sector público presupuestario (Gobierno Federal, organismos de control directo y empresas productivas del Estado), la medida con que la Cámara aprueba el presupuesto."},
+        "id": "pagado",
+        "vista": "presupuesto",
+        "concepto": "Gasto neto total pagado",
+        "mdp": 9161561.0,
+        "estado": "oficial",
+        "fuente": "Cuenta Pública 2024 y Estadísticas Oportunas de Finanzas Públicas de la SHCP, reproducidas por la ASF en su Informe General Ejecutivo de la Cuenta Pública 2024 (febrero de 2026), p. 178: «Gasto neto presupuestario pagado … 9,161,561.0». Sumando el diferimiento de pagos (43,877.2 mdp, gasto devengado que quedó por pagar) da el gasto neto total de 9,205,438.2.",
+        "url": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/InformeGeneral/2024_IGE_a.pdf",
+        "nota": "Igual que el aprobado, es el gasto neto total del sector público presupuestario (Gobierno Federal, organismos de control directo y empresas productivas del Estado), la medida con que la Cámara aprueba el presupuesto."
+      },
       {
         "id": "capitulos",
         "vista": "presupuesto",
         "concepto": "Desglose por capítulo de gasto (1000 a 9000)",
-        "mdp": null,
-        "estado": "pendiente",
-        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
+        "mdp": 7483199.3,
+        "estado": "oficial",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/Print.I50.03.GFEAEPECOG_ARM.pdf",
+        "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Estado Analítico del Ejercicio del Presupuesto de Egresos en Clasificación por Objeto del Gasto Armonizado (Gobierno Federal), pp. 1–2: devengado «7,483,199,344,615» (pesos)",
+        "nota": "Devengado del Gobierno Federal por capítulo: 1000 Servicios personales $633,865.5 mdp; 2000 Materiales y suministros $87,546.4 mdp; 3000 Servicios generales $213,538.8 mdp; 4000 Transferencias y subsidios $2,648,096.1 mdp; 5000 Bienes muebles e inmuebles $36,499.8 mdp; 6000 Inversión pública $250,091.7 mdp; 7000 Inversiones financieras $224,697.8 mdp; 8000 Participaciones y aportaciones $2,287,584.5 mdp; 9000 Deuda pública $1,101,278.8 mdp ($1,071,603.3 mdp de intereses y comisiones + $29,675.5 mdp de ADEFAS)."
       },
       {
         "id": "ingresos_gestion",
@@ -73,95 +92,109 @@ window.AUDIT_DB = {
         "id": "gastos_totales",
         "vista": "actividades",
         "concepto": "Total de gastos y otras pérdidas",
-        "mdp": null,
-        "estado": "pendiente",
+        "mdp": 8316742.5,
+        "estado": "oficial",
         "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EA_GF.pdf",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
+        "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Estado de Actividades del Gobierno Federal: «Total de Gastos y Otras Pérdidas 8,316,742,541,326» (pesos)",
+        "nota": "Suma gastos de funcionamiento ($667,519.1 mdp), transferencias y subsidios ($2,761,993.7 mdp), participaciones y aportaciones ($2,287,584.5 mdp), intereses y gastos de la deuda ($1,071,603.3 mdp), otros gastos y pérdidas extraordinarias ($1,528,040.0 mdp) e inversión pública no capitalizable ($2.0 mdp)."
       },
       {
         "id": "resultado",
         "vista": "actividades",
         "concepto": "Resultado del ejercicio (ahorro o desahorro)",
-        "mdp": null,
-        "estado": "pendiente",
+        "mdp": -1777656.3,
+        "estado": "oficial",
         "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EA_GF.pdf",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
+        "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Estado de Actividades del Gobierno Federal: «Resultados del Ejercicio (Ahorro/Desahorro) -1,777,656,327,905» (pesos)",
+        "nota": "Desahorro del ejercicio: $6,539,086.2 mdp de ingresos y otros beneficios totales menos $8,316,742.5 mdp de gastos y otras pérdidas."
       },
       {
         "id": "flujo_operacion",
         "vista": "flujos",
         "concepto": "Flujos netos de las actividades de operación",
-        "mdp": null,
-        "estado": "pendiente",
-        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
+        "mdp": 88478.4,
+        "estado": "oficial",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EFE_GF.pdf",
+        "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Estado de Flujos de Efectivo del Gobierno Federal: «Flujos Netos de Efectivo por Actividades de Operación 88,478,350,912» (pesos)",
+        "nota": "Orígenes de operación por $5,705,733.7 mdp menos aplicaciones de operación por $5,617,255.4 mdp."
       },
       {
         "id": "flujo_inversion",
         "vista": "flujos",
         "concepto": "Flujos netos de las actividades de inversión",
-        "mdp": null,
-        "estado": "pendiente",
-        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
+        "mdp": -498117.8,
+        "estado": "oficial",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EFE_GF.pdf",
+        "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Estado de Flujos de Efectivo del Gobierno Federal: «Flujos Netos de Efectivo por Actividades de Inversión -498,117,779,931» (pesos)",
+        "nota": "Orígenes de inversión por $16,123.3 mdp menos aplicaciones de inversión por $514,241.1 mdp."
       },
       {
         "id": "flujo_financiamiento",
         "vista": "flujos",
         "concepto": "Flujos netos de las actividades de financiamiento",
-        "mdp": null,
-        "estado": "pendiente",
-        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
+        "mdp": 467459.6,
+        "estado": "oficial",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EFE_GF.pdf",
+        "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Estado de Flujos de Efectivo del Gobierno Federal: «Flujo Neto de Efectivo por Actividades de Financiamiento 467,459,610,143» (pesos)",
+        "nota": "Endeudamiento y otros orígenes de financiamiento por $2,230,347.2 mdp menos servicios de la deuda y aplicaciones por $1,762,887.6 mdp."
       },
       {
         "id": "efectivo_final",
         "vista": "flujos",
         "concepto": "Efectivo y equivalentes al final del ejercicio",
-        "mdp": null,
-        "estado": "pendiente",
-        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
+        "mdp": 437453.9,
+        "estado": "oficial",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EFE_GF.pdf",
+        "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Estado de Flujos de Efectivo del Gobierno Federal: «Efectivo y Equivalentes al Efectivo al Final del Ejercicio 437,453,916,268» (pesos)",
+        "nota": "Efectivo al inicio del ejercicio ($379,633.7 mdp) más incremento neto del año ($57,820.2 mdp)."
       },
       {
         "id": "activo",
         "vista": "situacion",
         "concepto": "Activo total",
-        "mdp": null,
-        "estado": "pendiente",
-        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
+        "mdp": 15262019.9,
+        "estado": "oficial",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_ESF_GF.pdf",
+        "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Estado de Situación Financiera del Gobierno Federal: «Total del Activo 15,262,019,916,642» (pesos)",
+        "nota": "Activo circulante por $2,022,678.3 mdp más activo no circulante por $13,239,341.6 mdp."
       },
       {
         "id": "pasivo",
         "vista": "situacion",
         "concepto": "Pasivo total",
-        "mdp": null,
-        "estado": "pendiente",
-        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
+        "mdp": 24006925.6,
+        "estado": "oficial",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_ESF_GF.pdf",
+        "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Estado de Situación Financiera del Gobierno Federal: «Total del Pasivo 24,006,925,617,691» (pesos)",
+        "nota": "Pasivo circulante por $2,772,556.5 mdp más pasivo no circulante por $21,234,369.1 mdp (incluye $14,962,815.0 mdp de deuda pública a largo plazo)."
       },
       {
         "id": "patrimonio",
         "vista": "situacion",
         "concepto": "Hacienda pública / patrimonio",
-        "mdp": null,
-        "estado": "pendiente",
-        "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
-        "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación."
+        "mdp": -8744905.7,
+        "estado": "oficial",
+        "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_ESF_GF.pdf",
+        "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Estado de Situación Financiera del Gobierno Federal: «Total Hacienda Pública/Patrimonio -8,744,905,701,049» (pesos)",
+        "nota": "Cumple la ecuación contable: Activo ($15,262,019.9 mdp) = Pasivo ($24,006,925.6 mdp) + Patrimonio (−$8,744,905.7 mdp)."
       }
     ],
     "conciliacion": {
-      "estado": "pendiente",
-      "motivo": "Está en el Tomo II de la Cuenta Pública 2024, que Hacienda sí publicó; la plataforma aún no lo ha cotejado (falta de la plataforma, no de Hacienda). El 12-10-2026 se intentó: el portal de la Cuenta Pública no abre con conexión verificada (su certificado de seguridad está incompleto) y ningún informe de la ASF reproduce esta cifra. Tampoco hay dos documentos oficiales que la acoten por arriba y por abajo, así que no se da rango: un rango sin cotas oficiales sería una estimación.",
-      "url": "https://www.cuentapublica.hacienda.gob.mx/es/CP/2024",
+      "estado": "oficial",
+      "fuente": "SHCP, Cuenta Pública 2024, Tomo II, Notas a los Estados Financieros del Gobierno Federal (Nota 4, Conciliación entre los Egresos Presupuestarios y los Gastos Contables), p. 137.",
+      "motivo": "SHCP, Cuenta Pública 2024, Tomo II, Notas a los Estados Financieros del Gobierno Federal (Nota 4, Conciliación entre los Egresos Presupuestarios y los Gastos Contables), p. 137.",
+      "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.NEF.pdf",
       "pasos": [
-        "Egresos presupuestarios devengados",
-        "Menos: inversión pública capitalizable (pasa al activo)",
-        "Menos: amortización del capital de la deuda (reduce el pasivo)",
-        "Más: depreciación y amortización del ejercicio",
-        "Más: provisiones y otros gastos contables",
-        "Igual: gastos del Estado de Actividades"
+        "Total de egresos presupuestarios devengados",
+        "Menos: egresos presupuestarios no contables (fideicomisos $269,227.4 mdp, títulos y valores $178,939.0 mdp, acciones y participaciones $134,050.1 mdp, obra capitalizable $73,221.7 mdp, bienes muebles e intangibles $49,984.9 mdp y ADEFAS $29,675.5 mdp)",
+        "Más: gastos contables no presupuestales (estimaciones, depreciaciones y amortizaciones $7,430.8 mdp, provisiones $302.7 mdp y otros gastos y pérdidas contables $1,561,013.1 mdp)",
+        "Igual: total de gastos y otras pérdidas del Estado de Actividades"
+      ],
+      "importes": [
+        7483199.3,
+        -735203.5,
+        1568746.7,
+        8316742.5
       ]
     },
     "evaluacion_social_mir": [

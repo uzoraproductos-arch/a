@@ -113,10 +113,17 @@ COMP_ALIAS = {'Combustibles automotrices': ['gasolina', 'gasolinas', 'diesel', '
               'Costo financiero de Pemex y CFE': ['intereses de pemex', 'pemex de intereses', 'intereses pemex', 'deuda de pemex y cfe']}
 # El estado de resultados de 2024: se nombra con el año para no confundirlo con 2026.
 CF_ALIAS = {'aprobado': ['gasto aprobado en 2024', 'presupuesto aprobado 2024', 'aprobado en 2024'],
+            'modificado': ['gasto modificado en 2024', 'presupuesto modificado 2024', 'modificado en 2024'],
+            'devengado': ['gasto devengado en 2024', 'presupuesto devengado 2024', 'devengado en 2024'],
             'ejercido': ['gasto ejercido en 2024', 'ejercido en 2024', 'se ejercio en 2024', 'cuenta publica 2024'],
             'pagado': ['gasto pagado en 2024', 'pagado en 2024'],
             'ingresos_gestion': ['ingresos de la gestion', 'por la gestion'],
-            'intereses_deuda': ['intereses de la deuda en 2024', 'intereses en 2024', 'intereses de 2024']}
+            'intereses_deuda': ['intereses de la deuda en 2024', 'intereses en 2024', 'intereses de 2024'],
+            'gastos_totales': ['gastos totales de 2024', 'total de gastos y otras perdidas 2024'],
+            'resultado': ['resultado del ejercicio 2024', 'desahorro de 2024', 'ahorro o desahorro 2024'],
+            'activo': ['activo total de 2024', 'activo del gobierno federal 2024'],
+            'pasivo': ['pasivo total de 2024', 'pasivo del gobierno federal 2024'],
+            'patrimonio': ['patrimonio del gobierno federal 2024', 'hacienda publica 2024']}
 
 
 def datos(d):

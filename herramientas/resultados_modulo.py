@@ -24,7 +24,7 @@ def chip(e, pend=None):
 
 
 def mdp(v, d=1):
-    return '$' + format(v, ',.%df' % d) + ' mdp'
+    return ('$' if v >= 0 else '−$') + format(abs(v), ',.%df' % d) + ' mdp'
 
 
 def doc(url, texto='Documento ↗'):
@@ -120,11 +120,11 @@ def construir(base, ref, glos):
             <p class="er-avance-tit">Cuánto hemos cotejado</p>
             <p class="er-avance-n"><b>%d</b> de %d cifras</p>
             <span class="er-avance-b" aria-hidden="true"><span style="width:%.1f%%"></span></span>
-            <p class="er-avance-tx">tienen ya su documento a la vista %s. Las demás están en el Tomo II, que Hacienda <b>sí publicó</b>: falta que la plataforma las coteje, y por eso se muestran sin monto %s.</p>
+            <p class="er-avance-tx">tienen ya su documento a la vista %s. Los cinco momentos del presupuesto, los tres estados financieros del Gobierno Federal y la conciliación contable están completos con sus documentos del Tomo II de la Cuenta Pública 2024 %s.</p>
             <p class="er-avance-tx"><small>%d ÷ %d = %.0f%%.</small></p>
           </div>
         </div>''' % (espejo, glos('Cuenta Pública', 'Cuenta Pública'), ref_lgcg, ref_cp,
-                     len(ok), len(cif), avance, chip('derivado'), chip('pendiente', PEND_CP), len(ok), len(cif), avance)
+                     len(ok), len(cif), avance, chip('derivado'), chip('oficial'), len(ok), len(cif), avance)
 
     # --- Pestanas ---
     botones = ''.join(
@@ -149,8 +149,8 @@ def construir(base, ref, glos):
             'er-ok' if por[m]['mdp'] is not None else 'er-falta', i + 1, m.capitalize(),
             mdp(por[m]['mdp']) if por[m]['mdp'] is not None else chip('pendiente', PEND_CP))
         for i, m in enumerate(momentos))
-    p_pres = panel('presupuesto', escalera + '<p class="er-pie">Los cinco %s del gasto neto total 2024, del sector público presupuestario. El ejercido y el pagado los reproduce la Auditoría Superior de la Federación de la Cuenta Pública %s; el modificado y el devengado siguen pendientes.</p>' % (glos(
-        'Momentos Contables del Gasto (Aprobado, Modificado, Devengado y Ejercido)', 'momentos'), ref('ref-asf-cp')) + lista('presupuesto'))
+    p_pres = panel('presupuesto', escalera + '<p class="er-pie">Los cinco %s de 2024. El aprobado, el ejercido y el pagado miden el gasto neto total del sector público presupuestario (reproducidos por la ASF %s); el modificado y el devengado son los del Gobierno Federal en el Tomo II de la Cuenta Pública 2024 %s.</p>' % (glos(
+        'Momentos Contables del Gasto (Aprobado, Modificado, Devengado y Ejercido)', 'momentos'), ref('ref-asf-cp'), ref_cp) + lista('presupuesto'))
 
     # Estado de actividades: el «¿Cuanto crees?» de los intereses.
     ing, inte = por['ingresos_gestion'], por['intereses_deuda']
@@ -219,14 +219,16 @@ def construir(base, ref, glos):
     p_soc = panel('social', social)
 
     c = cf['conciliacion']
+    imps = c.get('importes') or []
     pasos = '<ol class="er-concil">%s</ol>' % ''.join(
-        '<li class="%s"><span class="er-concil-n">%d</span><span class="er-concil-t">%s</span><span class="er-concil-v">%s</span></li>' % (
+        '<li class="%s"><span class="er-concil-n">%d</span><span class="er-concil-t">%s</span><span class="er-concil-v">%s %s</span></li>' % (
             'er-concil-fin' if t.startswith('Igual') else ('er-concil-menos' if t.startswith('Menos') else ('er-concil-mas' if t.startswith('Más') else '')),
-            i + 1, t, chip('pendiente', PEND_CP)) for i, t in enumerate(c['pasos']))
-    p_con = panel('conciliacion', pasos + '<p class="er-pie">El método es el de la Ley General de Contabilidad Gubernamental %s. Los importes de 2024 se retiraron el 10-10-2026 porque no tenían cotejo. %s %s</p>' % (
-        ref_lgcg, c['motivo'], doc(c['url'], 'Dónde está ↗')))
+            i + 1, t, mdp(imps[i]) if i < len(imps) and imps[i] is not None else '',
+            chip(c['estado'], PEND_CP if c['estado'] == 'pendiente' else None)) for i, t in enumerate(c['pasos']))
+    p_con = panel('conciliacion', pasos + '<p class="er-pie">El método es el de la Ley General de Contabilidad Gubernamental %s. %s %s %s</p>' % (
+        ref_lgcg, c.get('fuente') or c.get('motivo', ''), ref_cp, doc(c['url'])))
 
-    correccion = ('<details class="er-correccion"><summary>📝 Corrección del 10-10-2026: por qué hay tantos pendientes</summary>'
+    correccion = ('<details class="er-correccion"><summary>📝 Historial de verificación (10-10-2026 y 02-11-2026)</summary>'
                   '<p>%s</p><p>Alcance: %s</p></details>' % (cf['correccion'], cf['alcance']))
     otra = ('<p class="er-otra">🧭 ¿Quieres ver 2024 junto a 2026 y 2027, en las mismas unidades? '
             '<a href="estado-de-cuenta.html">Abre el Contexto dimensional ➔</a></p>')
