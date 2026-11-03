@@ -1,7 +1,529 @@
 {
- "actualizado": "1 de noviembre de 2026",
+ "actualizado": "2 de noviembre de 2026",
  "nota": "Titulares que junta herramientas/recolectar_noticias.py, sin verificar. Solo titular, medio, fecha y liga; nunca el texto de la nota.",
  "notas": [
+  {
+   "titulo": "Le pasan la tijera al INE en el Presupuesto de Egresos 2027",
+   "medio": "Frontenet",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.frontenet.com/nacion/le-pasan-la-tijera-al-ine-en-el-presupuesto-de-egresos-2027-20261102-492071.html",
+   "tema": "presupuesto",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.elfinanciero.com.mx/nacional/2026/11/02/presupuesto-2027-diputados-quitan-5-mil-mdp-al-ine-y-los-reparten-entre-estos-sectores/"
+  },
+  {
+   "titulo": "Jalisco proyecta aumentar 132% presupuesto para infraestructura hídrica en 2027",
+   "medio": "El Economista",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/estados/jalisco-proyecta-aumentar-132-presupuesto-infraestructura-hidrica-20261101-841650.html",
+   "tema": "presupuesto",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/estados/jalisco-proyecta-aumentar-132-presupuesto-infraestructura-hidrica-20261101-841650.html"
+  },
+  {
+   "titulo": "México paga 159 mil millones de pesos menos de lo previsto por su deuda pública",
+   "medio": "Municipios Puebla",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://municipiospuebla.mx/nota/economia/mexico-paga-159-mil-millones-de-pesos-menos-de-lo-previsto-por-su-deuda-publica",
+   "tema": "deuda",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://municipiospuebla.mx/nota/economia/mexico-paga-159-mil-millones-de-pesos-menos-de-lo-previsto-por-su-deuda-publica"
+  },
+  {
+   "titulo": "Deuda pública de México suma 19.6 billones de pesos; se mantiene estable frente al PIB",
+   "medio": "Imagen Radio",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.imagenradio.com.mx/finanzas/deuda-publica-mexico-suma-19-6-billones-pesos-mantiene-estable-frente-pib",
+   "tema": "deuda",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.imagenradio.com.mx/finanzas/deuda-publica-mexico-suma-19-6-billones-pesos-mantiene-estable-frente-pib"
+  },
+  {
+   "titulo": "Así afecta el dólar a la deuda pública de México",
+   "medio": "news.jointly",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://news.jointly.mx/como-afecta-dolar-deuda-mexico/",
+   "tema": "deuda",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://news.jointly.mx/como-afecta-dolar-deuda-mexico/"
+  },
+  {
+   "titulo": "Cinco estados concentran el 54 % de la deuda estatal de México, revela informe",
+   "medio": "Municipios Puebla",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://municipiospuebla.mx/nota/nacion/cinco-estados-concentran-el-54-de-la-deuda-estatal-de-mexico-revela-informe",
+   "tema": "deuda",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://municipiospuebla.mx/nota/nacion/cinco-estados-concentran-el-54-de-la-deuda-estatal-de-mexico-revela-informe"
+  },
+  {
+   "titulo": "Plan México depende de la inversión privada para concretarse, reconoce Hacienda",
+   "medio": "EL CEO",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://elceo.com/economia/plan-mexico-depende-de-la-inversion-privada-para-concretarse-reconoce-hacienda/",
+   "tema": "deuda",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://elceo.com/economia/plan-mexico-depende-de-la-inversion-privada-para-concretarse-reconoce-hacienda/"
+  },
+  {
+   "titulo": "Desciende deuda de estados; cinco concentran 54%, señala Auditoría",
+   "medio": "La Jornada Zacatecas",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://ljz.mx/02/11/2026/desciende-deuda-de-estados-cinco-concentran-54-senala-auditoria/",
+   "tema": "deuda",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://ljz.mx/02/11/2026/desciende-deuda-de-estados-cinco-concentran-54-senala-auditoria/"
+  },
+  {
+   "titulo": "Auditoría Superior de la Federación (ASF) presenta 40 denuncias penales por posibles actos de corrupción después de detectar irregularidades por más de 9 mil millones de pesos",
+   "medio": "EL IMPARCIAL",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.elimparcial.com/mexico/2026/11/02/auditoria-superior-de-la-federacion-asf-presenta-40-denuncias-penales-por-posibles-actos-de-corrupcion-despues-de-detectar-irregularidades-por-mas-de-9-mil-millones-de-pesos/",
+   "tema": "asf",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.elimparcial.com/mexico/2026/11/02/auditoria-superior-de-la-federacion-asf-presenta-40-denuncias-penales-por-posibles-actos-de-corrupcion-despues-de-detectar-irregularidades-por-mas-de-9-mil-millones-de-pesos/"
+  },
+  {
+   "titulo": "La ASF reportó 655.9 millones de pesos del Fone pendientes de aclaración por las entidades federativas",
+   "medio": "El Economista",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/politica/asf-reporto-655-9-millones-pesos-fone-pendientes-aclaracion-entidades-federativas-20261101-841635.html",
+   "tema": "asf",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/politica/asf-reporto-655-9-millones-pesos-fone-pendientes-aclaracion-entidades-federativas-20261101-841635.html"
+  },
+  {
+   "titulo": "Malecón, puentes y más: las obras millonarias de Rocha Moya bajo revisión de la ASF",
+   "medio": "OEM",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://oem.com.mx/elsoldesinaloa/local/malecon-puentes-y-mas-las-obras-millonarias-de-rocha-moya-bajo-revision-de-la-asf-32923338",
+   "tema": "asf",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://oem.com.mx/elsoldesinaloa/local/malecon-puentes-y-mas-las-obras-millonarias-de-rocha-moya-bajo-revision-de-la-asf-32923338"
+  },
+  {
+   "titulo": "Encuentran irregularidades por 9,008 millones de pesos",
+   "medio": "El Economista",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/politica/encuentran-irregularidades-9-008-millones-pesos-20261102-841684.html",
+   "tema": "asf",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/politica/encuentran-irregularidades-9-008-millones-pesos-20261102-841684.html"
+  },
+  {
+   "titulo": "SAT sufre su primera caída en ISR desde 2009 y se complican las metas de recaudación de Hacienda",
+   "medio": "EL CEO",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://elceo.com/economia/sat-sufre-primera-caida-isr-desde-2009-se-complican-metas-recaudacion-hacienda/",
+   "tema": "impuestos",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://elceo.com/economia/sat-sufre-primera-caida-isr-desde-2009-se-complican-metas-recaudacion-hacienda/"
+  },
+  {
+   "titulo": "Tecnología para gobierno, muchas necesidades pero poco presupuesto",
+   "medio": "eSemanal",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://esemanal.mx/2026/11/tecnologia-para-gobierno-muchas-necesidades-pero-poco-presupuesto/",
+   "tema": "contratos",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://esemanal.mx/2026/11/tecnologia-para-gobierno-muchas-necesidades-pero-poco-presupuesto/"
+  },
+  {
+   "titulo": "Tecnología para Gobierno: El giro hacia los servicios administrados y la evolución consultiva del canal",
+   "medio": "eSemanal",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://esemanal.mx/2026/11/tecnologia-para-gobierno-el-giro-hacia-los-servicios-administrados-y-la-evolucion-consultiva-del-canal/",
+   "tema": "contratos",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://esemanal.mx/2026/11/tecnologia-para-gobierno-el-giro-hacia-los-servicios-administrados-y-la-evolucion-consultiva-del-canal/"
+  },
+  {
+   "titulo": "Pagan Pemex y CFE alto costo de deuda",
+   "medio": "Reforma",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.reforma.com/pagan-pemex-y-cfe-alto-costo-de-deuda/ar3306334",
+   "tema": "empresas",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.reforma.com/pagan-pemex-y-cfe-alto-costo-de-deuda/ar3306334"
+  },
+  {
+   "titulo": "Pemex, la petrolera más endeudada del mundo, disparó sus pasivos con proveedores a 414 mil millones de pesos al cierre del tercer trimestre, desatando una severa crisis de ...",
+   "medio": "EL IMPARCIAL",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.elimparcial.com/dinero/2026/11/02/pemex-la-petrolera-mas-endeudada-del-mundo-disparo-sus-pasivos-con-proveedores-a-414-mil-millones-de-pesos-al-cierre-del-tercer-trimestre-desatando-una-severa-crisis-de-liquidez-y-despidos-masivos-en-la-industria/",
+   "tema": "empresas",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.elimparcial.com/dinero/2026/11/02/pemex-la-petrolera-mas-endeudada-del-mundo-disparo-sus-pasivos-con-proveedores-a-414-mil-millones-de-pesos-al-cierre-del-tercer-trimestre-desatando-una-severa-crisis-de-liquidez-y-despidos-masivos-en-la-industria/"
+  },
+  {
+   "titulo": "Pemex alcanza su nivel más bajo de deuda en 12 años al cierre del tercer trimestre 2026",
+   "medio": "Crónica",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.cronica.com.mx/nacional/2026/11/02/pemex-alcanza-su-nivel-mas-bajo-de-deuda-en-12-anos-al-cierre-del-tercer-trimestre-2026/",
+   "tema": "empresas",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.imagenradio.com.mx/finanzas/pemex-reduce-deuda-9-alcanza-nivel-mas-bajo-12-anos"
+  },
+  {
+   "titulo": "Pemex reduce su deuda financiera a 77 mil 606 millones de dólares, su nivel más bajo en 12 años",
+   "medio": "ContraRéplica",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.contrareplica.mx/nota-Pemex-reduce-su-deuda-financiera-a-77-mil-606-millones-de-dolares-su-nivel-mas-bajo-en-12-anos--202621139",
+   "tema": "empresas",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.imagenradio.com.mx/finanzas/pemex-reduce-deuda-9-alcanza-nivel-mas-bajo-12-anos"
+  },
+  {
+   "titulo": "Pemex reduce su deuda 9% y alcanza su nivel más bajo en 12 años",
+   "medio": "Imagen Radio",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.imagenradio.com.mx/finanzas/pemex-reduce-deuda-9-alcanza-nivel-mas-bajo-12-anos",
+   "tema": "empresas",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.imagenradio.com.mx/finanzas/pemex-reduce-deuda-9-alcanza-nivel-mas-bajo-12-anos"
+  },
+  {
+   "titulo": "Deuda de Pemex con proveedores casi se cuadruplica desde el inicio de la 4T",
+   "medio": "EL CEO",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://elceo.com/negocios/deuda-pemex-proveedores-casi-cuadruplica-desde-inicio-4t/",
+   "tema": "empresas",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://elceo.com/negocios/deuda-pemex-proveedores-casi-cuadruplica-desde-inicio-4t/"
+  },
+  {
+   "titulo": "Deuda con proveedores presiona a Pemex: sube casi 40 mil mdp en un trimestre",
+   "medio": "energymagazine",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://energymagazine.mx/2026/11/deuda-con-proveedores-presiona-a-pemex-sube-casi-40-mil-mdp-en-un-trimestre/",
+   "tema": "empresas",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://energymagazine.mx/2026/11/deuda-con-proveedores-presiona-a-pemex-sube-casi-40-mil-mdp-en-un-trimestre/"
+  },
+  {
+   "titulo": "Pensión IMSS e ISSSTE: se acercan los depósitos del aguinaldo, ¿cuándo caen los pagos?",
+   "medio": "El Informador",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.informador.mx/economia/pension-imss-e-issste-se-acercan-los-depositos-del-aguinaldo-cuando-caen-los-pagos-20261102-0046.html",
+   "tema": "salud",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.informador.mx/economia/pension-imss-e-issste-se-acercan-los-depositos-del-aguinaldo-cuando-caen-los-pagos-20261102-0046.html"
+  },
+  {
+   "titulo": "Aguinaldo 2026 en IMSS e ISSSTE: ¿quiénes sí lo reciben y cuándo depositan?",
+   "medio": "Mi Bolsillo on MSN",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/otras/aguinaldo-2026-en-imss-e-issste-qui%C3%A9nes-s%C3%AD-lo-reciben-y-cu%C3%A1ndo-depositan/ar-AA2gBSab",
+   "tema": "salud",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.informador.mx/mexico/aguinaldo-pensionados-imss-e-issste-2026-cuando-lo-depositan-20261029-0212.html"
+  },
+  {
+   "titulo": "Zacatecas destaca a nivel nacional por aumento de participaciones federales",
+   "medio": "Imagen Zacatecas",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://imagenzac.com.mx/capital/zacatecas-destaca-a-nivel-nacional-por-aumento-de-participaciones-federales",
+   "tema": "estados",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://imagenzac.com.mx/capital/zacatecas-destaca-a-nivel-nacional-por-aumento-de-participaciones-federales"
+  },
+  {
+   "titulo": "Van alcaldes por más participaciones federales",
+   "medio": "La Unión de Morelos",
+   "fecha": "14 de octubre de 2020",
+   "url": "https://www.launion.com.mx/morelos/cuautla/noticias/169106-van-alcaldes-por-mas-participaciones-federales.html",
+   "tema": "estados",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.launion.com.mx/morelos/cuautla/noticias/169106-van-alcaldes-por-mas-participaciones-federales.html"
+  },
+  {
+   "titulo": "Latinoamerica opera con menos del 1 % del presupuesto nacional destinado al medio ambiente",
+   "medio": "Grupo Animal",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPejQybDB4ZDFKaU9CcTRiSWpsNHI2WDZXN3hYaXJVY1Fxdmk3NWRVc1hQWEdwYUQ1ck1GM3QyZHV4ay10VXcwUGNpNnFJVEpNN1hGcDNlME9VSmF2a2YtWFRHeUlSN3pQLUtIWXBUZ19mdnFIb3RIbE5LOE4wWjVNQ21yeWRCaXJHb1JhcnRrZUZnRmNjaXJBdU95SHNEak42eHdvN25GSzBWSUtDVFhnMG5n?oc=5",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPejQybDB4ZDFKaU9CcTRiSWpsNHI2WDZXN3hYaXJVY1Fxdmk3NWRVc1hQWEdwYUQ1ck1GM3QyZHV4ay10VXcwUGNpNnFJVEpNN1hGcDNlME9VSmF2a2YtWFRHeUlSN3pQLUtIWXBUZ19mdnFIb3RIbE5LOE4wWjVNQ21yeWRCaXJHb1JhcnRrZUZnRmNjaXJBdU95SHNEak42eHdvN25GSzBWSUtDVFhnMG5n?oc=5"
+  },
+  {
+   "titulo": "INE analiza dar vista a la Auditoría Superior por irregularidades en gestión de Taddei; suman 15 renuncias",
+   "medio": "Grupo Animal",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPX25hcWozMW1BaWFWZmxFU0NwQnNMY1kweUhhdW95ejJoQnM5VE5MS1o3dTktNm42QTFmYXF4UW9sUWZsS19hVFBBcE13NGc1bDRQOFIzbGhscHhOajBwU1NmWlRXVFl3amxqR2Q4c3BTaS1TYmdUZmU0QUNlSnlXTG5vMm5BdWo4OUNuN0N2VDNFcWRQaVJQSmxDZw?oc=5",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPX25hcWozMW1BaWFWZmxFU0NwQnNMY1kweUhhdW95ejJoQnM5VE5MS1o3dTktNm42QTFmYXF4UW9sUWZsS19hVFBBcE13NGc1bDRQOFIzbGhscHhOajBwU1NmWlRXVFl3amxqR2Q4c3BTaS1TYmdUZmU0QUNlSnlXTG5vMm5BdWo4OUNuN0N2VDNFcWRQaVJQSmxDZw?oc=5"
+  },
+  {
+   "titulo": "Pemex tuvo un crecimiento histórico de su deuda con Emilio Lozoya",
+   "medio": "Grupo Animal",
+   "fecha": "28 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPeVA1YWZJcFZ3YVFabGNRcGRhcThxSmExdnRRSnh2VnN0R2FxLVA2UVZJdlBGS3NxX0N2cGF3TDhLRHkxSW52aGVvYlJ4dzlKVDdrN2RpUFhwWjM1ZWFWRzJaZFhxdzl0aTBJakFVVEd3bTBncnlralo3ZUdGc3M3WGlrQXBWc0xyTEQ4?oc=5",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPeVA1YWZJcFZ3YVFabGNRcGRhcThxSmExdnRRSnh2VnN0R2FxLVA2UVZJdlBGS3NxX0N2cGF3TDhLRHkxSW52aGVvYlJ4dzlKVDdrN2RpUFhwWjM1ZWFWRzJaZFhxdzl0aTBJakFVVEd3bTBncnlralo3ZUdGc3M3WGlrQXBWc0xyTEQ4?oc=5"
+  },
+  {
+   "titulo": "Auditoría observa 906 mdp a autoridad educativa de CDMX por servicios no acreditados y pagos de nómina",
+   "medio": "Grupo Animal",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPWjJqY1FtcEpfRXd0S05WS2ppTEUxd0RvY0FfN2x5VVpKai14TlNaZmRwMFJ5TWVueVVaTUtNeDl0TnhTQ0hCTnNaTlNkc2FmU1pZSlZ4VjF0YUdIdlUzRmhXUkduRGoyZ2J3NFNKRnRWajkteXBCdUpnZUpUTEFXSC1qR3owbmtKcmxmOUNXVVJGek9oWlh6bDhIRy1Pb21CZnFGd3BCYnlFN2ZkR1NNLWZTRWJGUER1RnVoakZZX3lkVVk?oc=5",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPWjJqY1FtcEpfRXd0S05WS2ppTEUxd0RvY0FfN2x5VVpKai14TlNaZmRwMFJ5TWVueVVaTUtNeDl0TnhTQ0hCTnNaTlNkc2FmU1pZSlZ4VjF0YUdIdlUzRmhXUkduRGoyZ2J3NFNKRnRWajkteXBCdUpnZUpUTEFXSC1qR3owbmtKcmxmOUNXVVJGek9oWlh6bDhIRy1Pb21CZnFGd3BCYnlFN2ZkR1NNLWZTRWJGUER1RnVoakZZX3lkVVk?oc=5"
+  },
+  {
+   "titulo": "COP 17 de Biodiversidad: México y su compromiso dual en la protección de 232 áreas naturales",
+   "medio": "Grupo Animal",
+   "fecha": "28 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPNVVpZFl0U3k5NC1jaU55cmJZR3Fhc0F0VWd1dUFhMjB5czYyTWdWV3NrZWJVZ2pPS3czZlhFRElwUmZSREFKb1ZJMHRmcjNkS3JNZjduNGI5OWt0NFVYaEtIdVhybC1ZcjRmX0t6VkNFdnhEQlM1THBEaEs1V0VMZE9VOEFKbEZmNjJjX1lsUmhINEVtQWhfN3YxV2YxR0ZKX1Y0MEF1aVg?oc=5",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPNVVpZFl0U3k5NC1jaU55cmJZR3Fhc0F0VWd1dUFhMjB5czYyTWdWV3NrZWJVZ2pPS3czZlhFRElwUmZSREFKb1ZJMHRmcjNkS3JNZjduNGI5OWt0NFVYaEtIdVhybC1ZcjRmX0t6VkNFdnhEQlM1THBEaEs1V0VMZE9VOEFKbEZmNjJjX1lsUmhINEVtQWhfN3YxV2YxR0ZKX1Y0MEF1aVg?oc=5"
+  },
+  {
+   "titulo": "Trabajadores del IMSS anuncian otra megamarcha para el 9 de noviembre",
+   "medio": "Grupo Animal",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9XbGxqNlFrZjdZNnRva3M3ZFFxOWsxLTZoaFo5OUwxNmtMcXIwRDZwUml5MUJrbGdEdGN4NlBtYjM4MHBKSXB1NmdRSWZMSnY2YzZKVENMdEJZY0NvdElrTEdfUmRhTno5cElEejNUT011enA5?oc=5",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9XbGxqNlFrZjdZNnRva3M3ZFFxOWsxLTZoaFo5OUwxNmtMcXIwRDZwUml5MUJrbGdEdGN4NlBtYjM4MHBKSXB1NmdRSWZMSnY2YzZKVENMdEJZY0NvdElrTEdfUmRhTno5cElEejNUT011enA5?oc=5"
+  },
+  {
+   "titulo": "Ahorro de 159 mil 350 mdp en pago de intereses de la deuda a septiembre",
+   "medio": "La Jornada",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/noticia/2026/11/02/economia/ahorro-de-159-mil-350-mdp-en-pago-de-intereses-de-la-deuda-a-septiembre",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/noticia/2026/11/02/economia/ahorro-de-159-mil-350-mdp-en-pago-de-intereses-de-la-deuda-a-septiembre"
+  },
+  {
+   "titulo": "El gobierno ha pagado menos por intereses de la deuda pública",
+   "medio": "La Jornada",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/2026/11/02/economia/016n1eco",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/2026/11/02/economia/016n1eco"
+  },
+  {
+   "titulo": "Las ánimas pasean por las calles de Mérida",
+   "medio": "La Jornada",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/2026/11/02/fotografia",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/2026/11/02/fotografia"
+  },
+  {
+   "titulo": "Asesinan a balazos a un hombre en la colonia Ex Hacienda El Rosario",
+   "medio": "La Jornada",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/noticia/2026/11/01/capital/asesinan-a-balazos-a-un-hombre-en-la-colonia-ex-hacienda-el-rosario",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/noticia/2026/11/01/capital/asesinan-a-balazos-a-un-hombre-en-la-colonia-ex-hacienda-el-rosario"
+  },
+  {
+   "titulo": "El futbol salda su deuda con Charlyn - Balance de la jornada",
+   "medio": "La Jornada",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/noticia/2026/11/02/columnas/el-futbol-salda-su-deuda-con-charlyn-balance-de-la-jornada",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/2026/11/02/opinion"
+  },
+  {
+   "titulo": "El futbol salda su deuda con Charlyn",
+   "medio": "La Jornada",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/2026/11/02/opinion",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/2026/11/02/opinion"
+  },
+  {
+   "titulo": "Avanza PIB 3.2% en el tercer trimestre de 2026, su mayor ritmo en tres años",
+   "medio": "El Financiero",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.elfinanciero.com.mx/economia/2026/11/01/avanza-pib-32-en-el-tercer-trimestre-de-2026-su-mayor-ritmo-en-tres-anos/",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.elfinanciero.com.mx/economia/2026/11/01/avanza-pib-32-en-el-tercer-trimestre-de-2026-su-mayor-ritmo-en-tres-anos/"
+  },
+  {
+   "titulo": "Se metió con dinero de cárceles: FGR explica esquema de desvío de recursos de Inés Gómez Mont",
+   "medio": "El Financiero",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.elfinanciero.com.mx/nacional/2026/11/02/ines-gomez-mont-desvio-recursos-que-eran-para-carceles-en-mexico-fgr/",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.elfinanciero.com.mx/nacional/2026/11/02/ines-gomez-mont-desvio-recursos-que-eran-para-carceles-en-mexico-fgr/"
+  },
+  {
+   "titulo": "El ingeniero Cárdenas",
+   "medio": "El Financiero",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.elfinanciero.com.mx/opinion/david-colmenares-paramo/2026/11/02/el-ingeniero-cardenas/",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.elfinanciero.com.mx/opinion/david-colmenares-paramo/2026/11/02/el-ingeniero-cardenas/"
+  },
+  {
+   "titulo": "Le pasan la tijera al INE en el Presupuesto de Egresos 2027: ¿En qué gastarán ese dinero?",
+   "medio": "El Financiero",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.elfinanciero.com.mx/nacional/2026/11/02/presupuesto-2027-diputados-quitan-5-mil-mdp-al-ine-y-los-reparten-entre-estos-sectores/",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.elfinanciero.com.mx/nacional/2026/11/02/presupuesto-2027-diputados-quitan-5-mil-mdp-al-ine-y-los-reparten-entre-estos-sectores/"
+  },
+  {
+   "titulo": "¿Qué podemos esperar después de las elecciones intermedias en Estados Unidos?",
+   "medio": "El Financiero",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.elfinanciero.com.mx/opinion/ernesto-o-farrill-santoscoy/2026/11/02/que-podemos-esperar-despues-de-las-elecciones-intermedias-en-estados-unidos/",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.elfinanciero.com.mx/opinion/ernesto-o-farrill-santoscoy/2026/11/02/que-podemos-esperar-despues-de-las-elecciones-intermedias-en-estados-unidos/"
+  },
+  {
+   "titulo": "La corrupción: el tema pendiente de la 4T",
+   "medio": "El Informador",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.informador.mx/ideas/la-corrupcion-el-tema-pendiente-de-la-4t-20261101-0100.html",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.informador.mx/ideas/la-corrupcion-el-tema-pendiente-de-la-4t-20261101-0100.html"
+  },
+  {
+   "titulo": "\"Club Taddei\": gobierno de Alfonso Durazo da trabajo no sólo al hijo, también a la nuera de la expresidenta del INE",
+   "medio": "LatinUS",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQbzNuLWJNSWdjODVaa2JUQktuR0gtOU9aaENvMmlJVmNoSkRMV0ctWVFHRGd6bGlxOU9aS1ZVMUZndDFlV01JZVRIUURPV1hURDlXUjI0M2JLTXRLX3c3d0R2djNJZGZYNURuQ0thTmwwSkZjblotUDV1Z0gyZjY4LVJMSHN5bmNVSEtEb3dBUHI1SWhEa3Bmdl9yM2t2Xy0zN0VmRXhJT3RsWnZWQjFDellVX2lmWktvLUZSSFQ0WnkybGlUVzNUb1h4VHg2YTkzeWZnd3VOV2daUVdhQ3RFbHlHYw?oc=5",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQbzNuLWJNSWdjODVaa2JUQktuR0gtOU9aaENvMmlJVmNoSkRMV0ctWVFHRGd6bGlxOU9aS1ZVMUZndDFlV01JZVRIUURPV1hURDlXUjI0M2JLTXRLX3c3d0R2djNJZGZYNURuQ0thTmwwSkZjblotUDV1Z0gyZjY4LVJMSHN5bmNVSEtEb3dBUHI1SWhEa3Bmdl9yM2t2Xy0zN0VmRXhJT3RsWnZWQjFDellVX2lmWktvLUZSSFQ0WnkybGlUVzNUb1h4VHg2YTkzeWZnd3VOV2daUVdhQ3RFbHlHYw?oc=5"
+  },
+  {
+   "titulo": "\"Guadalupe Taddei traicionó la confianza del pueblo de México\", acusó Sheinbaum respecto del escándalo de corrupción en el INE",
+   "medio": "LatinUS",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxPZ1dZbzRMczVrZjliMzRzM3gwa2RZZ2FsWWc1c29RQ0VsNDJqUVdHdExpeXNsMFdJR3hLS3JMTDBkaVRBVnRROTFVSG1uMmhjM245WFdPVkcxUFBSLVBtZEpSY3RCenFTcFRwcXVaR1MzSGtSUnRhRFNhYjN6ekFoOTZuZkdWTndHNmYyWkVybEpaYW9XcVVXZEVhbFMtQjhiWjUxdHNRdXJOc0d2Q1NORERRU1VyUVNFSkJmLVNib0M4THI0VUJvVFdxdUY1OHhjOFpEc2RKajNwRm9BQ3Vlck1n?oc=5",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxPZ1dZbzRMczVrZjliMzRzM3gwa2RZZ2FsWWc1c29RQ0VsNDJqUVdHdExpeXNsMFdJR3hLS3JMTDBkaVRBVnRROTFVSG1uMmhjM245WFdPVkcxUFBSLVBtZEpSY3RCenFTcFRwcXVaR1MzSGtSUnRhRFNhYjN6ekFoOTZuZkdWTndHNmYyWkVybEpaYW9XcVVXZEVhbFMtQjhiWjUxdHNRdXJOc0d2Q1NORERRU1VyUVNFSkJmLVNib0M4THI0VUJvVFdxdUY1OHhjOFpEc2RKajNwRm9BQ3Vlck1n?oc=5"
+  },
+  {
+   "titulo": "Talleres Gráficos, propuesta por Sheinbaum para acabar con el “coyotaje” electoral, participó en multimillonario contrato entregado por Taddei",
+   "medio": "LatinUS",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPd0RiM2lRNThDMjJnektudmNqT0xkdUpTQXN1UXJ0T0NfZkNzYk9rR1Q5UjB6ZUxJTVhiaWc3YVd0N0tUdDd4UDUxMzExUl8tNEIyZG1kTk1RSnlUOXVqVWVkdkp1ZmV5cjJJaDI0X2FIRlJaYmhLa1FvOFFXT0lSdlNWSkdJNG9fVUZES0NEdEQ5RWF3Uktvc2U1cGM5V05VSENDTTNIWEgzcVB2ajdfTjZyeHlUY0JDTHVCYktKZzFFNmdrbERkeFp3UEFjTVo5YU5nRUlWMkQ4OXp6R09YMHdEbw?oc=5",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPd0RiM2lRNThDMjJnektudmNqT0xkdUpTQXN1UXJ0T0NfZkNzYk9rR1Q5UjB6ZUxJTVhiaWc3YVd0N0tUdDd4UDUxMzExUl8tNEIyZG1kTk1RSnlUOXVqVWVkdkp1ZmV5cjJJaDI0X2FIRlJaYmhLa1FvOFFXT0lSdlNWSkdJNG9fVUZES0NEdEQ5RWF3Uktvc2U1cGM5V05VSENDTTNIWEgzcVB2ajdfTjZyeHlUY0JDTHVCYktKZzFFNmdrbERkeFp3UEFjTVo5YU5nRUlWMkQ4OXp6R09YMHdEbw?oc=5"
+  },
+  {
+   "titulo": "Cosmocolor, la empresa presente en el brindis de Taddei y el contratista favorito del INE",
+   "medio": "LatinUS",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQWi10QmVmeUZsUlZWT2FrMWFnalZaYkJYSTVLUU1rZ3ZiRGMyckJKeEVaUVpwckYzSVppdmprVlhwQmJFdV9rdWx5VE9nY19jYU5qbmNTVDZmSXdtVnJCZ0RWMzJ0YVBoWUxPalc0cUVNei1Qa0tpRm5RVEtOeFU4RG1OUG04RDJ1OHl2YUJmWXg1Q2IyTnhWeDNsNHB6ZVdEMWs1Rktxc1JRY3FOVlVxOWtvUkduSXM5c2ZOWWxYajhSOHdULUZveWJXb0t4VHFZdVY4?oc=5",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQWi10QmVmeUZsUlZWT2FrMWFnalZaYkJYSTVLUU1rZ3ZiRGMyckJKeEVaUVpwckYzSVppdmprVlhwQmJFdV9rdWx5VE9nY19jYU5qbmNTVDZmSXdtVnJCZ0RWMzJ0YVBoWUxPalc0cUVNei1Qa0tpRm5RVEtOeFU4RG1OUG04RDJ1OHl2YUJmWXg1Q2IyTnhWeDNsNHB6ZVdEMWs1Rktxc1JRY3FOVlVxOWtvUkduSXM5c2ZOWWxYajhSOHdULUZveWJXb0t4VHFZdVY4?oc=5"
+  },
+  {
+   "titulo": "Desde Puebla, Blanca Cruz también entregó contrato por $129.7 millones a empresa relacionada al contratista favorito de Taddei",
+   "medio": "LatinUS",
+   "fecha": "28 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQLWxYUlNUS2U1NFhlNFk2SnhlczBfdG5FZy0wTUFkOUdycldpQmVkSjhCOVFOd3ZqaTlWV2dDcjRPLVo5VDRvUGlfQ2Z0OEV3Z2hhUVU0QUVMN3pNVmRrbWl3dFBrV1hKZUxxMUtUbGw5blVZNG9Jd2FqTUJnRl84SzloRzVNSWNSRXhpX1h6aC1pOHdJZnIyc3dheXdPUFA3Q0NmLWZNR3lCQjROZkR6WEhIeC00WXdFMWFiNHF4Z1UtLXM2elF1NlJmbFJOYnBVc25jc2FxbTdEd0RRN1N3VGZ6VQ?oc=5",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQLWxYUlNUS2U1NFhlNFk2SnhlczBfdG5FZy0wTUFkOUdycldpQmVkSjhCOVFOd3ZqaTlWV2dDcjRPLVo5VDRvUGlfQ2Z0OEV3Z2hhUVU0QUVMN3pNVmRrbWl3dFBrV1hKZUxxMUtUbGw5blVZNG9Jd2FqTUJnRl84SzloRzVNSWNSRXhpX1h6aC1pOHdJZnIyc3dheXdPUFA3Q0NmLWZNR3lCQjROZkR6WEhIeC00WXdFMWFiNHF4Z1UtLXM2elF1NlJmbFJOYnBVc25jc2FxbTdEd0RRN1N3VGZ6VQ?oc=5"
+  },
+  {
+   "titulo": "París y mansión en El Pedregal: contratista favorito del INE les puso casas a los hijos de Guadalupe Taddei",
+   "medio": "LatinUS",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxPSzFDd2RuZkphc1Y1cnhTc0VDdEVmdDdyUDMwZl9ieEIyZXVFYTJMQmZreE9SMWhWZkJOX3R3MmZxVUlWXzNtS21XSG9rMFg5OVU1WV9BLWhBS3F1ZHVnR1BwOU53Q0gtZTJEMDdSRW9VZURRRFVfLTVGNXMydTN4eEZOLUxYVkhxWU9RVHlWZk82ejdtWVJpaVY0V3ZsOFB2bjhxN3ZRWUx4TzRGV2JlQ01hSzlWcFlVOU5ydW1idVRzWkpXRDdvb19sR0plYWRZSkI2MHYzWHRLSHQ3bzl0Wkx3?oc=5",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxPSzFDd2RuZkphc1Y1cnhTc0VDdEVmdDdyUDMwZl9ieEIyZXVFYTJMQmZreE9SMWhWZkJOX3R3MmZxVUlWXzNtS21XSG9rMFg5OVU1WV9BLWhBS3F1ZHVnR1BwOU53Q0gtZTJEMDdSRW9VZURRRFVfLTVGNXMydTN4eEZOLUxYVkhxWU9RVHlWZk82ejdtWVJpaVY0V3ZsOFB2bjhxN3ZRWUx4TzRGV2JlQ01hSzlWcFlVOU5ydW1idVRzWkpXRDdvb19sR0plYWRZSkI2MHYzWHRLSHQ3bzl0Wkx3?oc=5"
+  },
+  {
+   "titulo": "¿Listo para un mundo sin efectivo en las gasolineras? El 35% de las operaciones aún se paga en cash",
+   "medio": "El Economista",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/finanzaspersonales/listo-mundo-efectivo-gasolineras-35-operaciones-aun-paga-cash-20261102-841729.html",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/finanzaspersonales/listo-mundo-efectivo-gasolineras-35-operaciones-aun-paga-cash-20261102-841729.html"
+  },
+  {
+   "titulo": "Ingresos públicos cayeron 2.8% anual",
+   "medio": "El Economista",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/economia/ingresos-publicos-cayeron-2-8-anual-20261102-841675.html",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/economia/ingresos-publicos-cayeron-2-8-anual-20261102-841675.html"
+  },
+  {
+   "titulo": "KBRA ratifica nota soberana de México en “BBB”",
+   "medio": "El Economista",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/economia/kbra-ratifica-nota-soberana-mexico-bbb-20261101-841652.html",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/economia/kbra-ratifica-nota-soberana-mexico-bbb-20261101-841652.html"
+  },
+  {
+   "titulo": "“Se descartan más P-Caps para Pemex”",
+   "medio": "El Economista",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/economia/descartan-p-caps-pemex-20261102-841674.html",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/economia/descartan-p-caps-pemex-20261102-841674.html"
+  },
+  {
+   "titulo": "“Factible, déficit de 4.1% de PIB este año”",
+   "medio": "El Economista",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/economia/factible-deficit-4-1-pib-ano-20261102-841676.html",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/economia/factible-deficit-4-1-pib-ano-20261102-841676.html"
+  },
+  {
+   "titulo": "Comar, sin comprobar gasto por 1.2 millones de pesos en servicios de traducción",
+   "medio": "El Economista",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/politica/comar-comprobar-gasto-1-2-millones-pesos-servicios-traduccion-20261102-841681.html",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/politica/comar-comprobar-gasto-1-2-millones-pesos-servicios-traduccion-20261102-841681.html"
+  },
+  {
+   "titulo": "Primer ministro de Bélgica dimite tras fracasar las negociaciones presupuestarias",
+   "medio": "Proceso",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://www.proceso.com.mx/internacional/2026/11/2/primer-ministro-de-belgica-dimite-tras-fracasar-las-negociaciones-presupuestarias-382971.html",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://www.proceso.com.mx/internacional/2026/11/2/primer-ministro-de-belgica-dimite-tras-fracasar-las-negociaciones-presupuestarias-382971.html"
+  },
+  {
+   "titulo": "Restaurantes, bienestar y mascotas ganan espacio en el gasto con tarjetas de jóvenes",
+   "medio": "Expansión",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://expansion.mx/economia/2026/11/02/restaurantes-bienestar-y-mascotas-ganan-espacio-en-el-gasto-con-tarjetas-de-jovenes",
+   "tema": "medios",
+   "visto": "2 de noviembre de 2026",
+   "grupo": "https://expansion.mx/economia/2026/11/02/restaurantes-bienestar-y-mascotas-ganan-espacio-en-el-gasto-con-tarjetas-de-jovenes"
+  },
   {
    "titulo": "Comisión de presupuesto y cuenta pública de la Cámara de Diputados se declara en sesión permanente",
    "medio": "El Heraldo de México",
