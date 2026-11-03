@@ -160,7 +160,7 @@
         '<dt>Ramo 28 · participaciones</dt><dd>' + mdp(e.r28) + ' ' + chip('oficial') + '</dd>' +
         '<dt>Ramo 33 · aportaciones</dt><dd>' + mdp(e.r33) + ' ' + chip('oficial') + '</dd>' +
         '<dt>Por aclarar ante la ASF (2024)</dt><dd>' + mdp(e.asf) + ' · ' + e.aud + ' auditorías ' + chip('oficial') + '</dd>' +
-        '<dt>Deuda registrada</dt><dd>' + mdp(e.deuda) + ' · semáforo ' + esc(e.sem.toLowerCase()) + ' ' + chip('oficial') + '</dd>' +
+        '<dt>Deuda registrada</dt><dd>' + mdp(e.deuda) + (e.sem ? ' · semáforo ' + esc(e.sem.toLowerCase()) : ' · sin semáforo: no se mide') + ' ' + chip('oficial') + '</dd>' +
         '<dt>No cuadra (INEGI contra Cuenta Pública, 2024)</dt><dd>' + (e.cuadre == null ? chip('pendiente', 'entidades-' + e.a.toLowerCase()) : fmt(e.cuadre, 'pct') + ' ' + chip('derivado')) + '</dd>' +
         '<dt>Obras con alerta ambiental</dt><dd>' + e.obras + (e.obras ? ' (' + e.opub + ' con dinero público, ' + e.opriv + ' privadas)' : '') + ' ' + chip('derivado') + '</dd>' +
         '</dl><p class="tt-ficha-ir"><a href="' + D.ent + '?e=' + encodeURIComponent(e.a) + '#circuito">Su circuito: de dónde viene cada peso ➔</a>' +
@@ -237,7 +237,7 @@
         '<div class="pm-kpi"><span class="pm-kpi-k">Le bajan por los Ramos 28 y 33 ' + chip('derivado') + '</span><b class="pm-kpi-v num-tabular">' + mdp(baja) + '</b><small>2026</small></div>' +
         '<div class="pm-kpi pm-green"><span class="pm-kpi-k">Cobró por su cuenta ' + (sinDato ? chip('pendiente', D.pend) : chip('derivado')) + '</span><b class="pm-kpi-v num-tabular">' + (sinDato ? '—' : mdp(e.propia)) + '</b><small>2024</small></div>' +
         '<div class="pm-kpi"><span class="pm-kpi-k">Por cada peso propio recibió de la Federación ' + (razon ? chip('derivado') : chip('pendiente', D.pend)) + '</span><b class="pm-kpi-v num-tabular">' + (razon || '—') + '</b><small>' + (razon ? 'Federal 2024 ÷ propio 2024' : 'Sin cifras de 2024') + '</small></div>' +
-        '<div class="pm-kpi pm-red"><span class="pm-kpi-k">Deuda registrada ' + chip('oficial') + '</span><b class="pm-kpi-v num-tabular">' + mdp(e.deuda) + '</b><small>Semáforo ' + esc(e.sem.toLowerCase()) + ' del Sistema de Alertas</small></div>' +
+        '<div class="pm-kpi pm-red"><span class="pm-kpi-k">Deuda registrada ' + chip('oficial') + '</span><b class="pm-kpi-v num-tabular">' + mdp(e.deuda) + '</b><small>' + (e.sem ? 'Semáforo ' + esc(e.sem.toLowerCase()) + ' del Sistema de Alertas' : 'El Sistema de Alertas no la mide') + '</small></div>' +
         '</div>' +
         (sinDato ? '<p class="pm-ciego">La Ciudad de México no figura en la estadística estatal del INEGI: sus convenios, su recaudación propia y su dependencia de 2024 siguen pendientes.</p>' : '') +
         '<p class="tt-circ-ir"><a href="' + D.mapa + '?e=' + encodeURIComponent(e.a) + '">📍 Verlo en el mapa ➔</a><a href="' + D.mun + '?e=' + encodeURIComponent(e.a) + '#padron">🏘️ Sus municipios, uno por uno ➔</a></p>';

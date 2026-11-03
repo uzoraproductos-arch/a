@@ -170,7 +170,7 @@
           expl: 'Lo observado por la ASF equivale al ' + obsPct.toFixed(2) + '% de lo que recibe en un año por los Ramos 28 y 33. ' +
             'Observado no es robado: es dinero cuyo destino no quedó acreditado y que hay que aclarar.' },
         { et: 'Holgura frente a la deuda', ico: '⚖️', v: acot(100 - deudaPct * 2),
-          crudo: simMdp(e.deuda) + ' de deuda · semáforo ' + e.semaforoDeuda,
+          crudo: simMdp(e.deuda) + ' de deuda · ' + (e.semaforoDeuda ? 'semáforo ' + e.semaforoDeuda : 'sin semáforo: no se mide'),
           expl: 'Su deuda equivale al ' + deudaPct.toFixed(1) + '% de lo que recibe en un año por los Ramos 28 y 33. ' +
             'El semáforo es el del Sistema de Alertas de la SHCP, no nuestro.' }
       ];
@@ -268,7 +268,8 @@
     var sem = (e.semaforoDeuda || '').toLowerCase();
     out.push({ k: 'deuda', ico: '⚖️', q: '¿Puede con su deuda?',
       e: sem === 'verde' ? 'ok' : sem === 'amarillo' ? 'alerta' : sem === 'rojo' ? 'grave' : 'sin',
-      v: e.semaforoDeuda ? 'Semáforo ' + sem + ' de Hacienda' : 'Sin evaluación',
+      v: e.semaforoDeuda ? 'Semáforo ' + sem + ' de Hacienda' : e.deuda === 0 ? 'Sin deuda inscrita en el Registro Público Único' : 'Sin evaluación',
+      ch: !e.semaforoDeuda && e.deuda === 0 ? 'oficial' : '', t: !e.semaforoDeuda && e.deuda === 0 ? 'No se mide' : '',
       d: 'Debe ' + simMdp(e.deuda) + '. ' + (e.deudaIld ? 'Su deuda equivale al ' + e.deudaIld + ' % de sus ingresos de libre disposición. ' : '') +
         'El color no es de Auditavisión: es el que asigna el Sistema de Alertas de la SHCP (' + (e.deudaFuente || 'SHCP') + ').', f: '' });
     return out;
@@ -771,8 +772,8 @@
     return '<ol class="ie-senales">' + dg.map(function (x) {
       return '<li class="ie-senal s-' + x.e + '" id="ie-q-' + x.k + '">' +
         '<p class="ie-senal-q"><span aria-hidden="true">' + x.ico + '</span> ' + x.q + '</p>' +
-        '<p class="ie-senal-v"><span class="ie-sem-et">' + SEM[x.e].ico + ' ' + SEM[x.e].t + ':</span> <b>' + x.v + '</b> ' +
-        chip(x.e === 'sin' ? 'pendiente' : 'derivado', x.e === 'sin' ? x.pend : '') + '</p>' +
+        '<p class="ie-senal-v"><span class="ie-sem-et">' + SEM[x.e].ico + ' ' + (x.t || SEM[x.e].t) + ':</span> <b>' + x.v + '</b> ' +
+        chip(x.ch || (x.e === 'sin' ? 'pendiente' : 'derivado'), x.ch ? '' : x.e === 'sin' ? x.pend : '') + '</p>' +
         '<p class="ie-senal-d">' + x.d + (x.f ? ' ' + x.f : '') + '</p></li>';
     }).join('') + '</ol>';
   }

@@ -1613,6 +1613,12 @@
    "dice": [
     "está en la LDF"
    ]
+  },
+  {
+   "q": "¿En qué semáforo de deuda está Tlaxcala?",
+   "dice": [
+    "no le publica semáforo"
+   ]
   }
  ]
 }

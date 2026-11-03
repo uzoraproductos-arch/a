@@ -6141,7 +6141,7 @@ window.AUDIT_DB = {
       "gobernador": "Lorena Cuéllar Cisneros",
       "partido": "MORENA",
       "deuda": 0,
-      "semaforoDeuda": "Verde",
+      "semaforoDeuda": null,
       "deudaIld": 0,
       "deudaSd": null,
       "deudaOcp": null,

@@ -124,7 +124,9 @@ def mapa(base, ref, raiz):
                   '; '.join('%s, %s' % (x['n'].lower() if x['n'].startswith(('No ', 'Componente')) else x['n'], mdp(x['mdp'])) for x in sin),
                   (' Quedan %s de redondeo a décimas.' % mdp(abs(resto))) if abs(resto) >= 0.5 else ''))
     deuda_f = sorted(set(e['deudaFuente'] for e in E), key=len)[0]
-    sems = sorted(set(e['semaforoDeuda'] for e in E))
+    # Tlaxcala no tiene semáforo (LDF, art. 43): no se cuenta entre los medidos.
+    sems = sorted(set(e['semaforoDeuda'] for e in E if e['semaforoDeuda']))
+    sin_sem = [e['name'] for e in E if not e['semaforoDeuda']]
     IE = base['inspector_estatal']['entidades']
 
     def cuadra_pct(a):
@@ -158,7 +160,8 @@ def mapa(base, ref, raiz):
          'falta_txt': 'La Ciudad de México no figura en la estadística estatal del INEGI: su dependencia sigue pendiente.'},
         {'id': 'deuda', 'nom': 'Deuda registrada', 'fmt': 'mdp', 'est': 'oficial', 'pal': 'rojo', 'suma': True,
          'que': 'Lo que cada gobierno estatal debe según el Sistema de Alertas de Hacienda. ' + (
-             'Las 32 están hoy en semáforo %s.' % sems[0].lower() if len(sems) == 1 else 'El color del semáforo va en su ficha.'),
+             ('Las %d que mide están hoy en semáforo %s.' % (len(E) - len(sin_sem), sems[0].lower()) if len(sems) == 1 else 'El color del semáforo va en su ficha.') + (
+             ' %s no se mide: no tiene deuda inscrita en el Registro Público Único, y Hacienda no le publica semáforo (LDF, art. 43).' % ' ni '.join(sin_sem) if sin_sem else '')),
          'fuente': '%s %s' % (deuda_f, ref('ref-shcp-alertas'))},
         {'id': 'asf', 'nom': 'Por aclarar ante la ASF', 'fmt': 'mdp', 'est': 'oficial', 'pal': 'rojo', 'suma': True,
          'que': 'Lo que la Auditoría Superior de la Federación dejó por aclarar del dinero federal que recibió cada estado en 2024.',

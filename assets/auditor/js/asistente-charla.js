@@ -244,6 +244,9 @@
         h = '<p>Lo que <b>' + esc(e.n) + '</b> debía a corto plazo, a proveedores y a contratistas, menos lo que tenía en efectivo, bancos e inversiones temporales, equivale al ' + V + ' de sus ingresos totales de 2025.' +
           (v < 0 ? ' Sale negativo: tenía en caja más que esas deudas.' : '') + ' Es el tercer indicador del Sistema de Alertas de Hacienda.' + lugarTxt('ocp', e, 'de mayor a menor') + '</p>';
         fu.push(LUGAR);
+      } else if (k === 'sem' && !e.sem) {
+        h = '<p>Hacienda no le publica semáforo a <b>' + esc(e.n) + '</b>: no tiene deuda inscrita en el Registro Público Único, y el Sistema de Alertas solo evalúa a quien la tiene (Ley de Disciplina Financiera, art. 43). No se mide; no es lo mismo que estar en verde.</p>';
+        fu = [fuenteDe('deuda', e, 'Semáforo y deuda')];
       } else if (k === 'sem') {
         h = '<p>Hacienda tiene a <b>' + esc(e.n) + '</b> en semáforo <b>' + esc((e.sem || '').toLowerCase()) + '</b>' + semTxt(e.sem) + '. Debe <b>' + fmt(e.deuda, 'mdp') + '</b>' + (e.ild != null ? ', el ' + fmt(e.ild, 'pct') + ' de sus ingresos de libre disposición' : '') + '.</p>';
         fu = [fuenteDe('deuda', e, 'Semáforo y deuda')];
@@ -281,7 +284,7 @@
         h = '<p><b>' + esc(e.n) + '</b> tiene ' + V + ' a mitad de 2026, según el CONAPO.' + lugarTxt('pob', e, 'de mayor a menor') + '</p>';
         fu.push(LUGAR);
       }
-      return { html: h, fu: fu, val: k === 'sem' ? null : { v: v, u: m.u }, ci: [{ v: fmt(v, m.u) || e.sem, etq: m.n, e: m.e, op: m.op }], tit: e.n + ': ' + m.n };
+      return { html: h, fu: fu, val: k === 'sem' ? null : { v: v, u: m.u }, ci: [{ v: fmt(v, m.u) || e.sem || 'No se mide', etq: m.n, e: m.e, op: m.op }], tit: e.n + ': ' + m.n };
     }
 
     function edoResumen(e) {
