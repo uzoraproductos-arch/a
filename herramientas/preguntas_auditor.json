@@ -1934,6 +1934,44 @@
    "dice": [
     "1,221,711.03 ha"
    ]
+  },
+  {
+   "q": "¿Cuánto bosque tiene Durango?",
+   "ir": "planisferio-dgo.html#ambiental",
+   "dice": [
+    "Su superficie forestal",
+    "10,618,110.3 ha"
+   ]
+  },
+  {
+   "q": "¿Cuál es la superficie forestal de México?",
+   "ir": "aprende-recursos-naturales.html#rn-bosques",
+   "dice": [
+    "138,695,229.8 ha",
+    "matorral xerófilo"
+   ]
+  },
+  {
+   "q": "¿Qué estado tiene más superficie forestal?",
+   "ir": "aprende-recursos-naturales.html#rn-bosques",
+   "dice": [
+    "Chihuahua tiene la mayor superficie forestal",
+    "48.8 %"
+   ]
+  },
+  {
+   "q": "¿Qué parte del bosque de Tabasco se quemó?",
+   "ir": "planisferio-tab.html#ambiental",
+   "dice": [
+    "9.7 de cada 100 hectáreas forestales"
+   ]
+  },
+  {
+   "q": "¿Dónde están los bosques en el mapa?",
+   "ir": "planisferio.html?d=ambiental&l=sfT",
+   "dice": [
+    "138,695,229.8 ha"
+   ]
   }
  ]
 }

@@ -1210,8 +1210,9 @@
         if (/(se puede|pueden|puede|dan|otorgan) (dar |otorgar |tener )?(una )?concesion(es)? (de|del|sobre|para) (el |la )?(litio|uranio|petroleo|hidrocarburos|minerales radiactivos)/.test(t)) return sanTema('rn_regimen');
         if (/(que|cual|cuales) ley(es)? (rige|rigen|regula|regulan|aplica|aplican) (a )?(la |el |los |las |al )?(mineria|minas|pesca|forestal|bosques|agua|aguas|petroleo|hidrocarburos|electricidad|energia electrica|litio|nuclear)/.test(t) ||
             /ley (de|federal de|general de) (mineria|pesca|aguas nacionales|desarrollo forestal)/.test(t) && /que (dice|es|regula)|quien (la )?aplica/.test(t)) return sanTema('rn_ramos');
-        /* Los incendios forestales (CONAFOR, cierre de 2025 y de 2024): los de un estado, o el país. */
-        if (SAN.t.rn_incendios && (/incendios? forestal|superficie (quemada|afectada por (el fuego|los incendios))|hectareas quemadas|manejo del fuego|combate (de |a )?(los )?incendios|incendios? (en|de) (los )?(bosques?|selvas?)/.test(t) ||
+        /* Los bosques y los incendios forestales (CONAFOR, 2023 y cierres de 2025 y 2024): los de un estado, o el país. */
+        var sfQ = /superficie forestal|vegetacion forestal|(cuanto|cuantas hectareas de|hectareas de|superficie de) (bosques?|selvas?)|cuanto (bosque|selva)|bosques? (de|tiene|hay en) (cada|el|la|los|que)|donde (estan|hay|quedan) (los )?bosques|bosques?.{0,40}(se quemo|quemad|ardio)/.test(t);
+        if (SAN.t.rn_incendios && (sfQ || /incendios? forestal|superficie (quemada|afectada por (el fuego|los incendios))|hectareas quemadas|manejo del fuego|combate (de |a )?(los )?incendios|incendios? (en|de) (los )?(bosques?|selvas?)/.test(t) ||
             /\bincendios\b/.test(t) && /cuant|cuales|que estado|hubo|tuvo|tuvieron|quien|mapa|punto(s)? ciego|no dice/.test(t)) &&
             !/refineri|pemex|ducto|gasolin|mercado|edificio|guarderia|seguro/.test(t)) {
           if (/punto(s)? ciego|no dice|no dicen|no cuadra|ojo con/.test(t)) return sanTema('rn_incendios_ciegos');
@@ -1221,6 +1222,11 @@
           }).sort(function (a, b) { return b[2] - a[2]; });
           var ti = plano(t), hi = IE.filter(function (x) { return x[1].test(ti); })[0];
           if (hi && !/cada estado|todos los estados|que estados?|cual(es)? estados?/.test(t)) return sanTema(hi[0]);
+          if (sfQ && SAN.t.rn_bosques && !/incendi|fuego|quem/.test(t)) {
+            var bq = sanTema('rn_bosques');
+            if (/\bmapa\b|planisferio|donde (estan|quedan|hay)/.test(t)) bq.ir = ['planisferio.html?d=ambiental&l=sfT', 'los bosques en el Planisferio'];
+            return bq;
+          }
           var im = sanTema('rn_incendios');
           if (/\bmapa\b|planisferio|donde (estan|quedan|hay)/.test(t)) im.ir = ['planisferio.html?d=ambiental&l=incH', 'los incendios forestales en el Planisferio'];
           return im;

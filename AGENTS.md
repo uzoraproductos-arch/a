@@ -160,8 +160,10 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   «sobreexplotado»**: son dos mediciones distintas de la CONAGUA.
   **Los incendios forestales** (03-11-2026) salen del cierre estadístico anual de la CONAFOR
   (`INC25`, `INC24`, con huella; si las filas no suman el cierre, se detiene). **La superficie afectada
-  no se dice como bosque perdido**: casi toda es pasto y matorral, y la parte del bosque de cada estado
-  espera su superficie forestal.
+  no se dice como bosque perdido**: casi toda es pasto y matorral. **La superficie forestal** (03-11-2026) sale del
+  «Estado que guarda el sector forestal en México 2023» de la CONAFOR (`SF`, con huella; si una fila o una columna
+  no cuadran, se detiene): **«forestal» no se dice como «bosque»** (incluye el matorral), y lo que el fuego tocó
+  frente a ella es una proporción con años distintos, nunca la parte que se perdió.
 - **Las leyes del dinero en los tres niveles** (03-11-2026,
   `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
   cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y
