@@ -1562,6 +1562,9 @@
     var pideMapa = /\b(mapa|estados|entidades|donde estan|en que estados)\b/.test(p);
     if (!ab && !((pideAmb && (pideObra || pideMapa)) || (pideMapa && pideObra))) return null;
     if (ab && !pideObra && !(pideAmb && pideMapa)) return null;
+    // La inversión de un gobierno estatal (su obra directa o lo que pasa a sus
+    // organismos) la contesta la charla con el INEGI, no el mapa ambiental.
+    if (ab && !pideAmb && /invers|invierte|invirti|obra publica|organismos? de (obra|infraestructura)/.test(p)) return null;
 
     var fmtMdp = function (v) { return '$' + Number(v || 0).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp'; };
     if (ab) {

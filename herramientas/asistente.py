@@ -427,6 +427,14 @@ def _charla(d):
                    'fu': fu('INEGI, Estadística de Finanzas Públicas Estatales (EFIPEM) 2024', C['recaudacionPropia']['ref']),
                    'op': 'impuestos + cuotas de seguridad social + contribuciones de mejoras + derechos + productos + aprovechamientos', 'sin': sin,
                    'pend': 'entidades-' + '-'.join(sin).lower()},
+        # La inversión del gobierno del estado (03-11-2026, dimensión del
+        # Planisferio): las dos vías no se suman.
+        'inv': {'n': 'obra que hizo el gobierno del estado en 2024 (su capítulo de inversión pública)', 'u': 'mdp', 'e': 'oficial', 'suma': 1,
+                'fu': fu('INEGI, Estadística de Finanzas Públicas Estatales (EFIPEM) 2024, capítulo «Inversión pública»', C['invPub']['ref']),
+                'sin': C['invPub']['sinFuente'], 'pend': 'entidades-' + '-'.join(C['invPub']['sinFuente']).lower()},
+        'invt': {'n': 'lo que el gobierno del estado les pasó a sus organismos de obra en 2024', 'u': 'mdp', 'e': 'oficial', 'suma': 1,
+                 'fu': fu('INEGI, Estadística de Finanzas Públicas Estatales (EFIPEM) 2024, subpartida «Instituciones y programas de infraestructura»', C['invInfra']['ref']),
+                 'sin': C['invInfra']['sinFuente'], 'pend': 'entidades-' + '-'.join(C['invInfra']['sinFuente']).lower()},
         'pob': {'n': 'habitantes a mitad de 2026', 'u': 'gente', 'e': 'derivado', 'suma': 1,
                 'fu': fu('CONAPO, proyecciones de población 2020-2070', url=C['pob']['url'])},
     }
@@ -436,7 +444,8 @@ def _charla(d):
         x = {'a': e['abbr'], 'n': e['name'], 'deuda': e.get('deuda'), 'ild': e.get('deudaIld'), 'sem': e.get('semaforoDeuda'),
              'sd': e.get('deudaSd'), 'ocp': e.get('deudaOcp'),
              'asf': e.get('asfMontoObservado'), 'aud': e.get('asfAuditorias'), 'radar': round(r['v'][0], 2) if r else None,
-             'gasto': e['gasto'], 'r28': e['ramo28'], 'r33': e['ramo33'], 'pc': e['pc'], 'pob': e.get('pobPersonas')}
+             'gasto': e['gasto'], 'r28': e['ramo28'], 'r33': e['ramo33'], 'pc': e['pc'], 'pob': e.get('pobPersonas'),
+             'inv': e.get('invPub'), 'invt': e.get('invInfra'), 'egr': e.get('egr2024')}
         for k in ('dep', 'propia'):
             x[k] = None if e['abbr'] in sin else e[{'dep': 'dep', 'propia': 'recaudacionPropia'}[k]]
         edo.append(x)

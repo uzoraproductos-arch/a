@@ -136,6 +136,7 @@ def mapa(base, ref, raiz):
         fed = x['cpR28'] + x['cpR33']
         return round(abs(x['inegiPart'] + x['inegiAportSinConvenios'] - fed) / fed * 100, 2)
     sin_cuadre = [e['abbr'] for e in E if cuadra_pct(e["abbr"]) is None]
+    sin_inv = [e['abbr'] for e in E if e.get('invPub') is None]
     import am_basura  # aquí: am_basura importa este módulo
     obras = {}
     for o in am_basura.OBRAS_MAPA:
@@ -166,6 +167,21 @@ def mapa(base, ref, raiz):
         {'id': 'asf', 'nom': 'Por aclarar ante la ASF', 'fmt': 'mdp', 'est': 'oficial', 'pal': 'rojo', 'suma': True,
          'que': 'Lo que la Auditoría Superior de la Federación dejó por aclarar del dinero federal que recibió cada estado en 2024.',
          'fuente': '%s %s' % (E[0]['asfFuente'], ref('ref-asf-mdb2024'))},
+        # La inversión (03-11-2026, dimensión «Inversión» del Planisferio):
+        # las dos vías por las que un gobierno estatal hace obra, que no se
+        # suman (anclar_egresos_entidades.py).
+        {'id': 'inv', 'nom': 'Obra que hizo el estado', 'fmt': 'mdp', 'est': 'oficial', 'pal': 'verde', 'suma': True,
+         'que': ('Lo que el gobierno del estado gastó en 2024 en su capítulo de inversión pública: la obra que contrató o hizo por su cuenta. '
+                 'No cuenta la que hace por medio de sus organismos de obra; esa va en la lente siguiente.'),
+         'fuente': '%s %s' % (C['invPub']['fuente'], ref(C['invPub']['ref'])),
+         'falta': sin_inv, 'falta_pend': 'entidades-' + '-'.join(sin_inv).lower(),
+         'falta_txt': 'La Ciudad de México no figura en la estadística estatal del INEGI: su inversión sigue pendiente.'},
+        {'id': 'invt', 'nom': 'A sus organismos de obra', 'fmt': 'mdp', 'est': 'oficial', 'pal': 'verde', 'suma': True,
+         'que': ('Lo que el gobierno del estado les pasó en 2024 a sus organismos de infraestructura (juntas de caminos, comisiones de agua, institutos de obra). '
+                 'Con eso hacen obra, pero también pagan su nómina y su operación: por eso no se suma a la obra directa.'),
+         'fuente': '%s %s' % (C['invInfra']['fuente'], ref(C['invInfra']['ref'])),
+         'falta': sin_inv, 'falta_pend': 'entidades-' + '-'.join(sin_inv).lower(),
+         'falta_txt': 'La Ciudad de México no figura en la estadística estatal del INEGI: sus transferencias siguen pendientes.'},
         # Las dos lentes del mapa del dinero (pedido del autor, 02-11-2026:
         # «que el usuario pueda operar los mapas… inversión, contaminación,
         # deuda, falta de transparencia»). Ninguna cifra se escribe aquí: el
@@ -190,6 +206,7 @@ def mapa(base, ref, raiz):
         'e': [{'a': e['abbr'], 'n': e['name'], 'gasto': e['gasto'], 'r28': e['ramo28'], 'r33': e['ramo33'], 'pc': e['pc'],
                'dep': None if e['abbr'] in sin_dep else e['dep'], 'deuda': e['deuda'], 'sem': e['semaforoDeuda'],
                'asf': e['asfMontoObservado'], 'aud': e['asfAuditorias'], 'cuadre': cuadra_pct(e['abbr']),
+               'inv': e.get('invPub'), 'invt': e.get('invInfra'),
                'obras': sum(obras.get(e['abbr'], {}).values()), 'opub': obras.get(e['abbr'], {}).get('publico', 0),
                'opriv': obras.get(e['abbr'], {}).get('privado', 0)} for e in E],
         'sin_capa': 'Contaminación por estado: la plataforma todavía no tiene una cifra estatal cotejada; las cuentas ecológicas del INEGI que ya integra son nacionales.',

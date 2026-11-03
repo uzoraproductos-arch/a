@@ -1619,6 +1619,33 @@
    "dice": [
     "no le publica semáforo"
    ]
+  },
+  {
+   "q": "Muéstrame la inversión de Yucatán en el planisferio",
+   "ir": "planisferio.html?d=inversion&e=YUC"
+  },
+  {
+   "q": "¿Cuánto invirtió Yucatán en obra pública?",
+   "ir": "planisferio-yuc.html#inversion",
+   "dice": [
+    "de cada $100",
+    "organismos de obra"
+   ]
+  },
+  {
+   "q": "¿Cuánto les pasó Jalisco a sus organismos de obra?",
+   "ir": "planisferio-jal.html#inversion",
+   "dice": [
+    "organismos de infraestructura",
+    "no se suman"
+   ]
+  },
+  {
+   "q": "¿Cuánto invirtió la Ciudad de México en obra pública?",
+   "ir": "planisferio-cdmx.html#inversion",
+   "dice": [
+    "no figura en la estadística estatal"
+   ]
   }
  ]
 }

@@ -161,6 +161,8 @@
         '<dt>Ramo 33 · aportaciones</dt><dd>' + mdp(e.r33) + ' ' + chip('oficial') + '</dd>' +
         '<dt>Por aclarar ante la ASF (2024)</dt><dd>' + mdp(e.asf) + ' · ' + e.aud + ' auditorías ' + chip('oficial') + '</dd>' +
         '<dt>Deuda registrada</dt><dd>' + mdp(e.deuda) + (e.sem ? ' · semáforo ' + esc(e.sem.toLowerCase()) : ' · sin semáforo: no se mide') + ' ' + chip('oficial') + '</dd>' +
+        '<dt>Obra que hizo el estado (2024)</dt><dd>' + (e.inv == null ? chip('pendiente', 'entidades-' + e.a.toLowerCase()) : mdp(e.inv) + ' ' + chip('oficial')) + '</dd>' +
+        '<dt>A sus organismos de obra (2024)</dt><dd>' + (e.invt == null ? chip('pendiente', 'entidades-' + e.a.toLowerCase()) : mdp(e.invt) + ' ' + chip('oficial')) + '</dd>' +
         '<dt>No cuadra (INEGI contra Cuenta Pública, 2024)</dt><dd>' + (e.cuadre == null ? chip('pendiente', 'entidades-' + e.a.toLowerCase()) : fmt(e.cuadre, 'pct') + ' ' + chip('derivado')) + '</dd>' +
         '<dt>Obras con alerta ambiental</dt><dd>' + e.obras + (e.obras ? ' (' + e.opub + ' con dinero público, ' + e.opriv + ' privadas)' : '') + ' ' + chip('derivado') + '</dd>' +
         '</dl><p class="tt-ficha-ir"><a href="' + D.ent + '?e=' + encodeURIComponent(e.a) + '#circuito">Su circuito: de dónde viene cada peso ➔</a>' +

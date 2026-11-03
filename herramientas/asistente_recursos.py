@@ -150,6 +150,9 @@ RECURSOS = [
     ('pl-deuda', '🏦', 'Ver la deuda en el Planisferio', 'La deuda de los 32 estados y sus tres indicadores, en el Planisferio', 'planisferio.html?d=deuda',
      'planisferio.html?d=deuda&e=%s', 'mapa',
      'deuda deudas debe deben endeudado endeudamiento semaforo alertas planisferio indicadores servicio pagar corto plazo libre disposicion mapa'),
+    ('pl-inversion', '🏗️', 'Ver la inversión en el Planisferio', 'La obra de los gobiernos estatales y lo que dejó la ASF, en el Planisferio', 'planisferio.html?d=inversion',
+     'planisferio.html?d=inversion&e=%s', 'mapa',
+     'inversion invierte invirtio obra obras publica infraestructura organismos caminos planisferio mapa'),
 ]
 
 

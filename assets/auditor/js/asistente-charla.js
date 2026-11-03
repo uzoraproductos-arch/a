@@ -164,6 +164,8 @@
       ['ild', /libre disposicion|ingresos de libre/],
       ['aud', /cuantas auditorias|numero de auditorias|auditorias (le )?(hizo|hicieron|practic)/],
       ['asf', /aclarar|\basf\b|auditoria superior|robo|robaron|roban|transa|desfalc|desvi|chingaron|clavaron|embols|volaron|moche|corrup|irregular|observ|huec|fiscaliz|perdio|perdieron|desapareci/],
+      ['invt', /organismos? de (obra|infraestructura)|juntas? (estatal )?de caminos|institutos? de (obra|infraestructura)/],
+      ['inv', /invers|invierte|invirti|obra publica|obras? (que )?(hizo|hace|hicieron|construy)|cuanta obra|cuanto (gasto|gastaron|gasta) en obras?/],
       ['deuda', /deud|debe\b|deben\b|adeud|endeud|prestamo|prestado|credito|empenad/],
       ['dep', /depend|mantenid|vive de|viven de|colgad|autonom|de la federacion vive/],
       ['propia', /recaud|cobra por su cuenta|sus propios|ingresos propios|impuestos propios|cobran ellos|genera(n)? (su|sus)/],
@@ -280,6 +282,14 @@
       } else if (k === 'propia') {
         h = '<p>En 2024, <b>' + esc(e.n) + '</b> recaudó por su cuenta ' + V + ': impuestos estatales, derechos, cuotas y otros cobros.' + lugarTxt('propia', e, 'de mayor a menor') + '</p>';
         fu.push(LUGAR);
+      } else if (k === 'inv' || k === 'invt') {
+        var veces = e.inv ? e.invt / e.inv : null;
+        h = (k === 'inv' ?
+          '<p>En 2024, el gobierno de <b>' + esc(e.n) + '</b> gastó ' + V + ' en obra que contrató o hizo por su cuenta (su capítulo de inversión pública): <b>$' + n(e.inv / e.egr * 100, 1) + ' de cada $100</b> que gastó.' + lugarTxt('inv', e, 'de mayor a menor') + '</p>' :
+          '<p>En 2024, el gobierno de <b>' + esc(e.n) + '</b> les pasó ' + V + ' a sus organismos de infraestructura (juntas de caminos, comisiones de agua, institutos de obra).' + lugarTxt('invt', e, 'de mayor a menor') + '</p>') +
+          '<p class="pa-ojo">Ojo: un gobierno estatal hace obra por dos vías. ' + (k === 'inv' ? 'Además de la suya, les pasó <b>' + fmt(e.invt, 'mdp') + '</b> a sus organismos de obra' : 'Además, hizo <b>' + fmt(e.inv, 'mdp') + '</b> de obra directa') +
+          (veces > 1 ? ', ' + n(veces, 1) + ' veces su obra directa' : '') + '. Las dos no se suman: con lo que reciben, esos organismos también pagan su nómina y su operación.</p>';
+        fu.push(fuenteDe(k === 'inv' ? 'invt' : 'inv', e), { que: 'De cada $100 que gastó', e: 'derivado', op: 'inversión pública ÷ total de egresos de 2024 (' + fmt(e.egr, 'mdp') + ') × 100' }, LUGAR);
       } else if (k === 'pob') {
         h = '<p><b>' + esc(e.n) + '</b> tiene ' + V + ' a mitad de 2026, según el CONAPO.' + lugarTxt('pob', e, 'de mayor a menor') + '</p>';
         fu.push(LUGAR);
@@ -299,7 +309,8 @@
     /* Cómo se dice cada cifra en «el estado con más…». */
     var RK = { deuda: 'deuda', ild: 'deuda frente a sus ingresos de libre disposición', sd: 'pago de deuda frente a sus ingresos de libre disposición', ocp: 'deudas de corto plazo frente a sus ingresos', asf: 'dinero por aclarar ante la ASF', aud: 'auditorías de la ASF',
       radar: 'dinero por aclarar de cada $100 revisados', gasto: 'dinero federal en 2026 (Ramos 28 y 33)', r28: 'participaciones', r33: 'aportaciones',
-      pc: 'dinero federal por habitante', dep: 'dependencia de la Federación', propia: 'recaudación propia', pob: 'población' };
+      pc: 'dinero federal por habitante', dep: 'dependencia de la Federación', propia: 'recaudación propia', pob: 'población',
+      inv: 'obra directa del gobierno del estado (2024)', invt: 'dinero a sus organismos de obra (2024)' };
     var RKM = { ing: 'ingresos', part: 'participaciones', aport: 'aportaciones', fortamun: 'FORTAMUN', fismdf: 'FAIS municipal', predial: 'cobro de predial',
       propios: 'ingresos propios', egr: 'egresos', dep: 'dependencia de la Federación' };
     function ranking(k, dir, cuantos, porHab) {
@@ -1689,6 +1700,8 @@
       if (k && PCT.test(t) && M[k] && M[k].suma && !porHab) return fin(conLiga(parte(e, k), MAPA[0], MAPA[1]), { tipo: 'edo', met: k, es: es });
       var re2 = k ? edoMet(e, k, porHab) : edoResumen(e);
       re2.ir = ['herramienta-inspector-entes.html#ente=estatal:' + e.a, 'su ficha técnica en el Auditor de entes públicos'];
+      // La inversión vive en su portal del Planisferio (planisferio.py, #inversion).
+      if (k === 'inv' || k === 'invt') re2.ir = ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html#inversion', 'su inversión en el Planisferio'];
       re2.ficha = B.fichas.filter(function (f) { return f.t === 'entidad' && f.tit === e.n; })[0];
       re2.tit = re2.tit || e.n;
       if (!k) re2.sug = ['¿Qué lugar ocupa ' + e.n + ' en deuda?', '¿Cuánto recibe ' + e.n + ' por habitante?', 'Municipios de ' + e.n + ' que más ingresan'];

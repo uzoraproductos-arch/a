@@ -104,6 +104,15 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   porque el semáforo junta en verde a estados muy distintos, y lo dice. Lo
   que no se mide por ley va en gris como «no se mide», no como pendiente. Se
   abre con `planisferio.html?d=deuda` y cada portal la trae en `#deuda`.
+- **La inversión, tercera dimensión pintada** (03-11-2026). Lee `invPub`,
+  `invInfra` y `egr2024` de `DB.estados` (los escribe
+  `herramientas/anclar_egresos_entidades.py` desde la estadística estatal del
+  INEGI, con su tabla dentro del script y `--csv` para cotejarla contra el
+  archivo) y lo que dejó la ASF. **La obra directa y lo que pasa a los
+  organismos de obra nunca se suman**: con eso también se paga nómina. Se
+  abre con `planisferio.html?d=inversion` y cada portal la trae en
+  `#inversion`; en la Enciclopedia son las lentes `inv` e `invt` del mapa del
+  gasto federalizado.
 - **Las leyes del dinero en los tres niveles** (03-11-2026,
   `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
   cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y
