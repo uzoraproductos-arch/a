@@ -62,6 +62,7 @@
       if (l.fmt === 'mbd1') return num(v, 1) + ' mil b/d';
       if (l.fmt === 'ha') return num(v, 0) + ' ha';
       if (l.fmt === 'hm3') return num(v, 1) + ' hm³';
+      if (l.fmt === 't') return num(v, 0) + ' t';
       return mdp(v);
     }
     D.e.forEach(function (e) { porA[e.a] = e; });
@@ -208,7 +209,16 @@
     function mdps(v) { return v == null ? 'no figura en la nota' : '<b class="num-tabular">' + (v < 0 ? '−' : '+') + '$' + num(Math.abs(v), 1) + ' mdp</b> ' + chip('oficial'); }
     var PROD = { mayor: 'Una de las diez que dan el 94.9 % de la producción minera', menor: 'Entre las 17 que dan el 5.2 % de la producción minera' };
     function ambiental(e, fijo) {
-      var r = e.ref, m = e.min, w = e.acu, z = e.inc, b = e.sf, refL = /^ref/.test(lente.id), minL = /^min/.test(lente.id), incL = /^inc|^sf/.test(lente.id);
+      var r = e.ref, m = e.min, w = e.acu, z = e.inc, b = e.sf, refL = /^ref/.test(lente.id), minL = /^min/.test(lente.id), incL = /^inc|^sf/.test(lente.id), q = e.pe, peL = /^pe/.test(lente.id);
+      var sg = function (v) { return (v > 0 ? '+' : v < 0 ? '−' : '') + num(Math.abs(v), 1) + '%'; };
+      var pesc = q ? (e.peT != null ?
+        '<p class="pl-ficha-sub">🐟 Su pesca y su acuacultura · 2025</p><dl class="pl-ficha-dl">' +
+        '<dt>Toneladas en peso vivo</dt><dd><b class="num-tabular">' + num(e.peT, 0) + ' t</b> ' + chip('oficial') + ' · lugar ' + q.lt + '</dd>' +
+        '<dt>Su valor, a precio de playa</dt><dd><b class="num-tabular">' + mdp(e.peV) + '</b> ' + chip('oficial') + ' · lugar ' + q.lv + '</dd>' +
+        '<dt>De cultivo, de cada 100 t</dt><dd><b class="num-tabular">' + num(q.pacu, 1) + '</b> ' + chip('derivado') + '</dd>' +
+        '<dt>Contra 2024</dt><dd>toneladas ' + sg(q.ct) + ' · valor ' + sg(q.cv) + ' ' + chip('derivado') + '</dd></dl>' +
+        '<p class="pl-ficha-mun">Es lo que se declaró en los avisos de arribo y de cosecha, no todo lo que se pescó, y no dice si las especies aguantan.</p>' :
+        '<p class="pl-ficha-sub">🐟 No registró pesca ni acuacultura en 2025</p><p class="pl-ficha-mun">En 2024 registró ' + num(q.t24, 0) + ' t. No registrar no es lo mismo que no tener pesca.</p>') : '';
       var agua = w ?
         '<p class="pl-ficha-sub">💧 Sus acuíferos · corte dic 2022</p><dl class="pl-ficha-dl">' +
         '<dt>Sin agua para concesionar</dt><dd><b class="num-tabular">' + w.sin + ' de ' + w.n + '</b> ' + chip('oficial') + ' · ' + num(e.acuP, 1) + '% ' + chip('derivado') + '</dd>' +
@@ -239,7 +249,7 @@
         '<dt>Valor ganado o perdido en libros · 2025</dt><dd>' + (r.id === 'olmeca' ? 'es de una filial y PEMEX la arrienda' : mdps(r.d25)) + '</dd></dl>' +
         '<p class="pl-ficha-mun">Procesar no es producir gasolina, y el valor en libros es una estimación, no dinero que salió de la caja.</p>' :
         '<p class="pl-ficha-sub">🛢️ Sin refinería de PEMEX</p>';
-      ficha.innerHTML = '<h3>' + esc(e.n) + '</h3>' + (refL ? refi + agua + fuego + minas : minL ? minas + agua + fuego + refi : incL ? fuego + agua + minas + refi : agua + fuego + minas + refi) +
+      ficha.innerHTML = '<h3>' + esc(e.n) + '</h3>' + (refL ? refi + agua + fuego + pesc + minas : minL ? minas + agua + fuego + pesc + refi : incL ? fuego + agua + pesc + minas + refi : peL ? pesc + agua + fuego + minas + refi : agua + fuego + pesc + minas + refi) +
         '<a class="pl-ficha-ir" href="' + esc(e.p) + '#ambiental">Ver sus recursos naturales en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }

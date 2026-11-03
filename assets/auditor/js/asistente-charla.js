@@ -1210,6 +1210,21 @@
         if (/(se puede|pueden|puede|dan|otorgan) (dar |otorgar |tener )?(una )?concesion(es)? (de|del|sobre|para) (el |la )?(litio|uranio|petroleo|hidrocarburos|minerales radiactivos)/.test(t)) return sanTema('rn_regimen');
         if (/(que|cual|cuales) ley(es)? (rige|rigen|regula|regulan|aplica|aplican) (a )?(la |el |los |las |al )?(mineria|minas|pesca|forestal|bosques|agua|aguas|petroleo|hidrocarburos|electricidad|energia electrica|litio|nuclear)/.test(t) ||
             /ley (de|federal de|general de) (mineria|pesca|aguas nacionales|desarrollo forestal)/.test(t) && /que (dice|es|regula)|quien (la )?aplica/.test(t)) return sanTema('rn_ramos');
+        /* La pesca y la acuacultura (CONAPESCA, Anuario 2025): la de un estado, o el país. */
+        if (SAN.t.rn_pesca && /\bpesca\b|pesquer|acuacultur|acuicol|\bpescan?\b|\bpesco\b|\bpescaron\b|(toneladas|produccion) de (pescado|mariscos?|camaron)|granjas? (acuicolas?|de camaron|de peces)/.test(t) &&
+            !/ley (general |federal )?de pesca|\bvedas?\b|permisos? de pesca|concesion(es)? de pesca|pesca (de|en) (aguas|rio) revuelt/.test(t)) {
+          if (/punto(s)? ciego|no dice|no dicen|no cuadra|ojo con/.test(t)) return sanTema('rn_pesca_ciegos');
+          var PE = Object.keys(SAN.t).filter(function (k) { return /^rn_pe_/.test(k); }).map(function (k) {
+            var nm = plano(SAN.t[k].tit.split(':')[0]).trim();
+            return [k, nm === 'estado de mexico' ? /estado de mexico|edomex|edo mex/ : new RegExp('\\b' + nm + '\\b'), nm.length];
+          }).sort(function (a, b) { return b[2] - a[2]; });
+          var tp = plano(t), hp = PE.filter(function (x) { return x[1].test(tp); })[0];
+          if (hp && !/cada estado|todos los estados|que estados?|cual(es)? estados?/.test(t)) return sanTema(hp[0]);
+          var pm = sanTema('rn_pesca');
+          if (/\bmapa\b|planisferio|donde (se )?pesca/.test(t)) pm.ir = /valor|vale|valio|dinero|pesos/.test(t) ? ['planisferio.html?d=ambiental&l=peV', 'el valor de la pesca en el Planisferio'] :
+            ['planisferio.html?d=ambiental&l=peT', 'la pesca en el Planisferio'];
+          return pm;
+        }
         /* Los bosques y los incendios forestales (CONAFOR, 2023 y cierres de 2025 y 2024): los de un estado, o el país. */
         var sfQ = /superficie forestal|vegetacion forestal|(cuanto|cuantas hectareas de|hectareas de|superficie de) (bosques?|selvas?)|cuanto (bosque|selva)|bosques? (de|tiene|hay en) (cada|el|la|los|que)|donde (estan|hay|quedan) (los )?bosques|bosques?.{0,40}(se quemo|quemad|ardio)/.test(t);
         if (SAN.t.rn_incendios && (sfQ || /incendios? forestal|superficie (quemada|afectada por (el fuego|los incendios))|hectareas quemadas|manejo del fuego|combate (de |a )?(los )?incendios|incendios? (en|de) (los )?(bosques?|selvas?)/.test(t) ||

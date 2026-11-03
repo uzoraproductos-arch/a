@@ -232,6 +232,7 @@ def _datos(base, padron):
     aq = rn.acuiferos([e['abbr'] for e in base['estados']])
     ic = rn.incendios([e['abbr'] for e in base['estados']])
     fo = rn.forestal([e['abbr'] for e in base['estados']])
+    pe = rn.pesca([e['abbr'] for e in base['estados']])
     pj = gj.judiciales_estados(base)
     E = base['estados']
     C = base['fiscalEntidades']['campos']
@@ -291,6 +292,10 @@ def _datos(base, padron):
         b = fo[e['abbr']]
         filas[-1].update({'sfT': b['sf'], 'incP': b['pq'],
                           'sf': {k: b[k] for k in ('parb', 'psec', 'pnac', 'lug', 'lq')}})
+        # Su pesca y su acuacultura (CONAPESCA, Anuario 2025): Nuevo León no registró en 2025.
+        q = pe[e['abbr']]
+        filas[-1].update({'peT': q['t'], 'peV': q['mdp'],
+                          'pe': {k: q[k] for k in ('pacu', 'pt', 'lt', 'lv', 'ct', 'cv', 't24')}})
     return filas
 
 
@@ -393,6 +398,12 @@ LENTES = [
     {'id': 'incP', 'dim': 'ambiental', 'fmt': 'pct', 'nom': 'Lo que el fuego de 2025 afectó, frente a su superficie forestal', 'pal': 'rojo', 'est': 'derivado', 'anio': 2025,
      'que': ('La superficie afectada por los incendios de 2025 ÷ la superficie forestal de la entidad × 100. Es una proporción con años distintos (el fuego de 2025, el mapa de 2018), '
              'no la parte del bosque que se perdió: casi todo lo afectado es pasto y matorral. La división es nuestra.')},
+    {'id': 'peT', 'dim': 'ambiental', 'fmt': 't', 'nom': 'Pesca y acuacultura', 'pal': 'azul', 'est': 'oficial', 'anio': 2025,
+     'que': ('Las toneladas en peso vivo que registró cada entidad en 2025, de captura y de cultivo, según el Anuario de la CONAPESCA. Es lo que se declaró en los avisos de arribo '
+             'y de cosecha, no todo lo que se pescó, y no dice si las especies aguantan: eso lo dice la Carta Nacional Pesquera.')},
+    {'id': 'peV', 'dim': 'ambiental', 'fmt': 'mdp', 'nom': 'Valor de su pesca', 'pal': 'azul', 'est': 'oficial', 'anio': 2025,
+     'que': ('Lo que valió en 2025 lo que registró cada entidad, a precio de playa (la primera venta), en millones de pesos de ese año, sin descontar la inflación. '
+             'Mucho volumen no es mucho valor: depende de qué se pesca.')},
     {'id': 'incH', 'dim': 'ambiental', 'fmt': 'ha', 'nom': 'Superficie afectada por incendios forestales', 'pal': 'rojo', 'est': 'oficial', 'anio': 2025,
      'que': ('Las hectáreas que afectaron los incendios forestales de cada entidad en 2025, según el cierre de la CONAFOR. Superficie afectada no es bosque perdido: '
              'en el país, 95 de cada 100 hectáreas fueron de pasto, matorral y hojarasca.')},
@@ -471,6 +482,10 @@ def _fuentes(ref, base=None):
     sf = ('Comisión Nacional Forestal, «Estado que guarda el sector forestal en México 2023», tabla 1 «Superficie forestal por tipo de vegetación a nivel estatal», p. 4, con el '
           'Inventario Nacional Forestal y de Suelos 2015-2020 y la Serie VII de uso del suelo del INEGI, 2018 (<a href="%s">PDF</a>; huella SHA-256 <code>%s…</code>)') % (
         html.escape(rn.SF_DOC['url']), rn.SF_DOC['sha256'][:12])
+    pe = ('Comisión Nacional de Acuacultura y Pesca, Anuario Estadístico de Acuacultura y Pesca 2025, cuadros 2.5.6 «Serie histórica de la producción pesquera nacional en peso vivo» '
+          'y 2.5.12 «Serie histórica del valor de la producción pesquera», pp. 171 y 177 (<a href="%s">PDF</a>; huella SHA-256 <code>%s…</code>)') % (
+        html.escape(rn.PE_DOC['url']), rn.PE_DOC['sha256'][:12])
+    extra.update({'peT': pe + '.', 'peV': pe + '. Miles de pesos ÷ 1,000: la cuenta es nuestra.'})
     extra.update({'incH': ic + '.', 'incN': ic + '.', 'sfT': sf + '.',
                   'incP': 'Superficie afectada por los incendios de 2025 (%s) ÷ superficie forestal (%s) × 100. La división es nuestra.' % (ic, sf)})
     return dict(extra, **{
@@ -553,6 +568,11 @@ def pagina_mapa(base, ref, tres, padron):
         falta[i] = {'a': sin_ref, 'gris': 'sin refinería de PEMEX', 'pend': None,
                     'txt': ('%d entidades no tienen refinería de PEMEX: van en gris por eso, no porque no tengan problemas ambientales. Sus acuíferos, sus bosques, sus incendios forestales y sus concesiones mineras '
                             'tienen su lente.') % len(sin_ref)}
+    sin_pe = [f['a'] for f in filas if f['peT'] is None]
+    for i in ('peT', 'peV'):
+        falta[i] = {'a': sin_pe, 'gris': 'no registró en 2025', 'pend': None,
+                    'txt': ('%s no registró producción pesquera ni acuícola en 2025 en el Anuario de la CONAPESCA. Va en gris por eso: no registrar no es lo mismo que no tener pesca, '
+                            'porque el Anuario es lo que se declaró en los avisos de arribo y de cosecha.') % ' y '.join(nombre[a] for a in sin_pe)}
     sin_min = [f['a'] for f in filas if f['minT'] is None]
     for i in ('minT', 'minH'):
         falta[i] = {'a': sin_min, 'gris': 'no figura en el cuadro', 'pend': None,
@@ -620,7 +640,7 @@ def pagina_mapa(base, ref, tres, padron):
                        'La inversión es la obra que hace cada gobierno estatal, directa o por medio de sus organismos, y lo que la Auditoría Superior dejó por aclarar. '
                        'La legislativa son los 32 congresos locales: lo que gastó cada uno, cuánto cuesta por curul y cómo se compara con el tope del 0.70 %% de la Constitución. '
                        'La judicial son los 32 poderes judiciales de los estados: lo que ejerció cada uno junto a lo que concluyó con ese dinero y las causas penales que se le acumulan. '
-                       'La ambiental son los recursos naturales: los acuíferos de cada estado y cuántos ya no tienen agua para concesionar, su superficie forestal y sus incendios forestales, sus concesiones mineras y las siete refinerías de PEMEX, cuánto crudo procesa cada una frente a su capacidad y cuánto valor ganó o perdió en sus libros; en las lentes de refinación, el punto marca la entidad, no el sitio exacto. '
+                       'La ambiental son los recursos naturales: los acuíferos de cada estado y cuántos ya no tienen agua para concesionar, su superficie forestal y sus incendios forestales, su pesca y su acuacultura, sus concesiones mineras y las siete refinerías de PEMEX, cuánto crudo procesa cada una frente a su capacidad y cuánto valor ganó o perdió en sus libros; en las lentes de refinación, el punto marca la entidad, no el sitio exacto. '
                        'Elige la dimensión y qué ver; el color compara a las 32 por quintiles (cinco grupos con el mismo número de entidades).') % (
                            ('%d dimensiones: la %s y la %s' % (len(pintadas), ', la '.join(d[2].lower() for d in pintadas[:-1]), pintadas[-1][2].lower())) if len(pintadas) > 1 else 'una dimensión'),
              'tarjetas': [], 'bloque': bloque_mapa},
@@ -671,7 +691,13 @@ def _nota_amb(filas):
              'es una proporción con el mapa de vegetación de 2018, no la parte que se perdió, y «forestal» incluye el matorral.<br><br>') % (
         format(round(h25), ','), format(a25 / h25 * 100, '.1f'), chip('derivado'), format(rn.INC_NAC['min'] / h25 * 100, '.1f'), chip('derivado'),
         nom[mn], format(I[mn]['n'], ','), nom[gh], nom[fq], format(F[fq]['pq'], '.1f'), chip('derivado'), nom[gh], format(F[gh]['pq'], '.1f'))
-    return agua + fuego + ('<b>Lo que una cifra de refinación no dice.</b> Un mes no es la regla: la %s procesó %s mil barriles diarios en junio de 2026 %s, contra %s mil de promedio en los diez meses %s, '
+    P = rn.pesca([f['a'] for f in filas])
+    gap = max((k for k in P if P[k]['t']), key=lambda k: P[k]['lv'] - P[k]['lt'])
+    pesca = ('<b>Lo que el mapa de la pesca no dice.</b> Es lo que se declaró en los avisos de arribo y de cosecha, no todo lo que se pescó, y no dice si las especies aguantan. '
+             'Mucho volumen no es mucho valor: %s es el lugar %d por toneladas y el %d por valor %s. El valor de 2025 es en pesos de ese año y subió %s %% contra 2024, con las toneladas casi iguales %s. '
+             'Y el propio Anuario imprime cruzadas las cifras de Jalisco y Colima en dos de sus cuadros: aquí van las de sus series.<br><br>') % (
+        nom[gap], P[gap]['lt'], P[gap]['lv'], chip('derivado'), format((rn.PE_TOT['val'] - rn.PE_TOT['val24']) / rn.PE_TOT['val24'] * 100, '.1f'), chip('derivado'))
+    return agua + fuego + pesca + ('<b>Lo que una cifra de refinación no dice.</b> Un mes no es la regla: la %s procesó %s mil barriles diarios en junio de 2026 %s, contra %s mil de promedio en los diez meses %s, '
             'por mantenimiento según el Informe. Procesar crudo no es producir gasolina: lo que sale depende de cada planta. Y el valor que pierde una refinería en los libros de PEMEX '
             '(la %s, %s en 2025 %s) es una estimación de lo que dejará de generar, no dinero que salió de la caja.<br><br>'
             '<b>Lo que el mapa de las minas no dice.</b> Una concesión no es una mina trabajando: %s tienen concesiones y no aparecen entre las entidades con '
@@ -1083,6 +1109,26 @@ def _ambiental_portal(base, ref, e):
         format(b['sf'], ',.1f'), chip('oficial'), b['lug'], ('%s %%' % format(b['pnac'], '.1f')) if b['pnac'] >= 0.05 else 'menos del 0.1 %', chip('derivado'),
         format(b['parb'], '.1f'), chip('derivado'), format(b['psec'], '.1f'), chip('derivado'),
         format(b['pq'], '.1f') if b['pq'] >= 0.05 else 'menos de 0.1', chip('derivado'), b['lq'], fu['sfT'] + ' Tabla 2, pp. 10-11. Porcentajes y lugares: cuenta nuestra.')
+    q = rn.pesca([x['abbr'] for x in base['estados']])[a]
+    sg = lambda v: ('+' if v > 0 else '−' if v < 0 else '') + format(abs(v), '.1f') + ' %'
+    if q['t']:
+        pp = ('<article class="pl-piso pl-piso-amb"><p class="pl-piso-n">🐟 Su pesca y su acuacultura · 2025</p>'
+              '<p class="pl-piso-v"><b class="num-tabular">%s t</b> en peso vivo %s</p>'
+              '<dl class="pl-dl"><dt>Su lugar</dt><dd>%d.º por toneladas · %s del país %s</dd>'
+              '<dt>Su valor, a precio de playa</dt><dd><b class="num-tabular">%s</b> %s · lugar %d por valor</dd>'
+              '<dt>De cada 100 toneladas, de cultivo</dt><dd><b class="num-tabular">%s</b> %s</dd>'
+              '<dt>Contra 2024</dt><dd>toneladas %s · valor %s %s</dd></dl>'
+              '<p>Es lo que se declaró en los avisos de arribo y de cosecha (Ley General de Pesca y Acuacultura Sustentables, art. 4), no todo lo que se pescó, y no dice si las especies '
+              'aguantan: eso lo dice la Carta Nacional Pesquera (art. 32). El valor es en pesos de cada año, sin descontar la inflación.%s</p>'
+              '<p class="pl-piso-f">%s Captura y acuacultura: cuadros 2.5.8 y 2.5.10. Porcentajes, cambios y lugares: cuenta nuestra.</p></article>') % (
+            format(q['t'], ','), chip('oficial'), q['lt'], ('%s %%' % format(q['pt'], '.1f')) if q['pt'] >= 0.05 else 'menos del 0.1 %', chip('derivado'),
+            mdp(q['mdp']), chip('oficial'), q['lv'], format(q['pacu'], '.1f'), chip('derivado'), sg(q['ct']), sg(q['cv']), chip('derivado'),
+            ' Los cuadros 2.1.10 y 2.1.11 del Anuario imprimen cruzadas las cifras de Jalisco y Colima; aquí van las de sus series.' if a in rn.PE_CRUCE else '', fu['peT'])
+    else:
+        pp = ('<article class="pl-piso pl-piso-amb"><p class="pl-piso-n">🐟 Su pesca y su acuacultura · 2025</p>'
+              '<p class="pl-piso-v">No registró producción en 2025 %s</p>'
+              '<p>En 2024 había registrado <b class="num-tabular">%s t</b> %s. No registrar no es lo mismo que no tener pesca: el Anuario es lo que se declaró en los avisos de arribo y de cosecha.</p>'
+              '<p class="pl-piso-f">%s</p></article>') % (chip('oficial'), format(q['t24'], ','), chip('oficial'), fu['peT'])
     pf = ('<article class="pl-piso pl-piso-amb"><p class="pl-piso-n">🔥 Sus incendios forestales · 2025</p>'
           '<p class="pl-piso-v"><b class="num-tabular">%s ha</b> afectadas %s</p>'
           '<dl class="pl-dl"><dt>Incendios</dt><dd><b class="num-tabular">%s</b> %s · lugar %d de 32</dd>'
@@ -1102,13 +1148,13 @@ def _ambiental_portal(base, ref, e):
         x['ico'], html.escape(x['nom']), html.escape(x['renov'].split(',')[0]), html.escape(x['quien']), html.escape(x['autoridad'].split(' (')[0]))
         for x in rn.RAMOS)
     esquema = ('<div class="pl-reglas"><p><b>Los recursos de su territorio, por sector</b></p>'
-               '<p>Su pesca y sus denuncias ante la PROFEPA ya tienen ley y autoridad, pero todavía no su cifra para %s %s. Así se reparte quién explota cada recurso:</p>'
+               '<p>Sus denuncias ante la PROFEPA ya tienen ley y autoridad, pero todavía no su cifra para %s %s. Así se reparte quién explota cada recurso:</p>'
                '<ul class="pl-sectores">%s</ul>'
                '<p class="pl-ficha-ir"><a href="%s">🌎 Cómo se audita cada recurso ➔</a> '
                '<a href="planisferio.html?d=ambiental&amp;e=%s">Las siete refinerías en el mapa ➔</a> '
                '<a href="datos-ambiente-megaobras.html?e=%s#abMapaObras">Sus obras con alerta ambiental ➔</a></p></div>') % (
         html.escape(nom), chip('pendiente', 'ambiente-por-estado'), ramos, rn.ARCHIVO, quote(a), quote(a))
-    return '<div class="pl-pisos">%s%s%s%s%s</div>%s%s' % (p0, ps, pf, p2, p1, ciego, esquema)
+    return '<div class="pl-pisos">%s%s%s%s%s%s</div>%s%s' % (p0, ps, pf, pp, p2, p1, ciego, esquema)
 
 
 def pagina_portal(base, ref, e, padron, prev, sig, iv):
@@ -1253,7 +1299,7 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv):
              'tarjetas': [], 'bloque': _judicial_portal(base, ref, e)},
             {'id': 'ambiental', 'titulo': 'Sus recursos naturales',
              'texto': ('Quién explota los recursos de %s y quién los audita. Empieza por lo que ya tiene cifra: sus acuíferos y cuántos ya no tienen agua para concesionar, '
-                       'su superficie forestal y sus incendios forestales de 2025, sus concesiones mineras y la refinería de PEMEX, si la tiene, con el crudo que procesa y el valor que ganó o perdió en los libros de PEMEX.') % nom,
+                       'su superficie forestal y sus incendios forestales de 2025, su pesca y su acuacultura, sus concesiones mineras y la refinería de PEMEX, si la tiene, con el crudo que procesa y el valor que ganó o perdió en los libros de PEMEX.') % nom,
              'tarjetas': [], 'bloque': _ambiental_portal(base, ref, e)},
             {'id': 'leyes', 'titulo': 'Sus leyes del dinero',
              'texto': 'Con qué leyes cobra, compra, se endeuda y rinde cuentas %s, quién las aprueba y dónde se publican.' % nom,

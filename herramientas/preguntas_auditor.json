@@ -1972,6 +1972,52 @@
    "dice": [
     "138,695,229.8 ha"
    ]
+  },
+  {
+   "q": "¿Cuánto pesca Sinaloa?",
+   "ir": "planisferio-sin.html#ambiental",
+   "dice": [
+    "480,141 t",
+    "de pesca y acuacultura en peso vivo"
+   ]
+  },
+  {
+   "q": "¿Qué estado pesca más?",
+   "ir": "aprende-recursos-naturales.html#rn-pesca",
+   "dice": [
+    "Sonora registró más que nadie",
+    "81.6 %"
+   ]
+  },
+  {
+   "q": "¿Cuánta acuacultura hay en México?",
+   "ir": "aprende-recursos-naturales.html#rn-pesca",
+   "dice": [
+    "2,206,439 t",
+    "17.6 fueron de cultivo"
+   ]
+  },
+  {
+   "q": "¿Qué no dicen las cifras de la pesca?",
+   "ir": "aprende-recursos-naturales.html#rn-pesca-ciegos",
+   "dice": [
+    "cruza a Jalisco y Colima",
+    "Carta Nacional Pesquera"
+   ]
+  },
+  {
+   "q": "¿Cuánto vale la pesca en el mapa?",
+   "ir": "planisferio.html?d=ambiental&l=peV",
+   "dice": [
+    "$61,941.5 mdp"
+   ]
+  },
+  {
+   "q": "¿Cuánto pesca Nuevo León?",
+   "ir": "planisferio-nl.html#ambiental",
+   "dice": [
+    "no registró producción pesquera ni acuícola en 2025"
+   ]
   }
  ]
 }

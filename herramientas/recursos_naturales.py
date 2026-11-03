@@ -373,6 +373,48 @@ SF = {'AGS': (101575.2, 30031.7, 0.0, 0.0, 35700.7, 92327.2, 259634.8, 95225.4, 
       'YUC': (0.0, 2541686.9, 92654.8, 25786.8, 0.0, 34246.0, 2694374.5, 146339.8, 2548034.7), 'ZAC': (1084248.0, 354075.3, 0.0, 0.0, 2675952.6, 1109959.3, 5224235.3, 3185797.8, 2038437.5)}
 SF_TOT = (34846606.8, 30332322.1, 947893.3, 527054.0, 56200206.3, 15841147.2, 138695229.8, 95227461.4, 43467768.4)
 
+# CONAPESCA, Anuario Estadístico de Acuacultura y Pesca 2025 (cifras de 2025,
+# publicado en junio de 2026). Por entidad: (peso vivo 2025, captura 2025,
+# acuacultura 2025, en toneladas; valor 2025, en miles de pesos a precio de
+# playa; peso vivo 2024; valor 2024). Salen de las series de los cuadros 2.5.6,
+# 2.5.8, 2.5.10 y 2.5.12 (pp. 171 a 177). «-» va en 0: Nuevo León no registró
+# producción en 2025. El Anuario trae dos tropiezos que se dicen tal cual: los
+# cuadros 2.1.10 y 2.1.11 (pp. 137-138) le dan a Jalisco las cifras de Colima y
+# a Colima las de Jalisco (PE_CRUCE, contra el cuadro 2.1.5 y las series), y el
+# renglón TOTAL del cuadro 2.5.8 de la captura repite el de la acuacultura. Si
+# una fila o una columna deja de cuadrar, o si la CONAPESCA corrige el cruce,
+# la generación se detiene.
+PE_DOC = {'tx': 'Comisión Nacional de Acuacultura y Pesca, Anuario Estadístico de Acuacultura y Pesca 2025',
+          'url': 'https://www.gob.mx/cms/uploads/attachment/file/1088921/ANUARIO_CONAPESCA_2025.pdf',
+          'archivo': 'investigaciones/recursos-naturales/CONAPESCA_AnuarioAcuaculturaPesca2025.pdf',
+          'sha256': '670ac9d63f44f1da732a5a59fa0290532a201509d869e4b28bf9fed911af2932'}
+PE_PAG = 'https://www.gob.mx/conapesca/documentos/anuario-estadistico-de-acuacultura-y-pesca'
+PESCA = {'AGS': (93, 0, 93, 9218, 86, 7919), 'BC': (325246, 311398, 13848, 4266136, 353035, 3609317), 'BCS': (313063, 303925, 9138, 5102990, 204271, 2510392),
+      'CAM': (43717, 43288, 428, 1785651, 44785, 1352349), 'CDMX': (7, 0, 7, 1112, 1, 164), 'CHIH': (524, 270, 253, 23782, 407, 28292),
+      'CHIS': (42127, 22103, 20024, 1101853, 34697, 941396), 'COAH': (133, 121, 12, 7082, 23, 805), 'COL': (52444, 46070, 6375, 1031904, 43144, 950550),
+      'DGO': (427, 28, 399, 27917, 229, 11613), 'GRO': (9609, 8465, 1144, 624058, 7230, 392262), 'GTO': (100, 0, 100, 9024, 77, 6394),
+      'HGO': (4098, 54, 4044, 349010, 5879, 588924), 'JAL': (16800, 6366, 10434, 554960, 13806, 351928), 'MICH': (8833, 3068, 5764, 292081, 12951, 422704),
+      'MOR': (300, 2, 299, 25294, 208, 5335), 'MÉX': (15845, 2275, 13570, 1077978, 15651, 1086955), 'NAY': (31562, 13787, 17775, 1410524, 32512, 1578088),
+      'NL': (0, 0, 0, 0, 34, 3114), 'OAX': (5048, 4590, 457, 276867, 5587, 234806), 'PUE': (467, 53, 414, 41102, 315, 16496),
+      'QRO': (562, 23, 540, 42472, 451, 33194), 'QROO': (2836, 2728, 108, 408835, 2226, 314164), 'SIN': (480141, 336586, 143555, 17286288, 468319, 14529716),
+      'SLP': (1188, 7, 1181, 84297, 52, 3351), 'SON': (682879, 564812, 118067, 18444569, 776180, 11430875), 'TAB': (34942, 26899, 8044, 1071952, 38591, 1351973),
+      'TAM': (33394, 28588, 4806, 1223585, 31738, 1183953), 'TLAX': (118, 17, 101, 9125, 103, 7333), 'VER': (51641, 46172, 5469, 1664947, 60612, 1805531),
+      'YUC': (46576, 45702, 873, 3639420, 40230, 2434149), 'ZAC': (1720, 0, 1720, 47416, 1154, 34253)}
+# Los totales del Anuario: peso vivo 2025, acuacultura 2025, valor 2025, peso
+# vivo 2024, valor 2024 y peso desembarcado 2025 (cuadros 2.1.5, 2.5.6, 2.5.10
+# y 2.5.12). La captura total no se lee del cuadro 2.5.8: es peso vivo menos
+# acuacultura, cuenta nuestra.
+PE_TOT = {'viv': 2206439, 'acu': 389043, 'val': 61941451, 'viv24': 2194586, 'val24': 47228294, 'des': 2036574}
+# Lo que imprimen los cuadros 2.1.10 y 2.1.11 en los renglones de Jalisco y
+# Colima: (toneladas desembarcadas, miles de pesos).
+PE_CRUCE = {'JAL': (52213, 1031904), 'COL': (16317, 554960)}
+# Las toneladas desembarcadas de 2025 de las dos, en el cuadro 2.1.5.
+PE_DES = {'JAL': 16317, 'COL': 52213}
+# El renglón TOTAL de 2025 que imprime el cuadro 2.5.8 de la captura.
+PE_TOT_258 = 389043
+# El valor nacional de dos especies, 2024 y 2025 (cuadro 2.5.11, p. 176), en miles de pesos.
+PE_ESP = {'camarón': (20330496, 26214666), 'calamar': (115865, 1562449)}
+
 
 def _huella(doc):
     """Si el documento está en el repositorio, su huella debe coincidir."""
@@ -571,6 +613,39 @@ def forestal(abbrs=None):
     return out
 
 
+def pesca(abbrs=None):
+    """La pesca y la acuacultura de cada entidad (CONAPESCA, Anuario 2025) y lo
+    derivado: su parte del país, su lugar por toneladas y por valor, la parte
+    que es cultivo y el cambio contra 2024. Si las filas o las columnas ya no
+    cuadran con el Anuario, o si se corrige el cruce de Jalisco y Colima, la
+    generación se detiene."""
+    _huella(PE_DOC)
+    for k, v in PESCA.items():
+        if abs(v[1] + v[2] - v[0]) > 2:
+            raise SystemExit('recursos_naturales: la captura y la acuacultura de %s ya no suman su peso vivo (%s)' % (k, v[0]))
+    s = lambda j: sum(v[j] for v in PESCA.values())
+    for j, c, tol in ((0, 'viv', 3), (2, 'acu', 3), (3, 'val', 5), (4, 'viv24', 3), (5, 'val24', 5)):
+        if abs(s(j) - PE_TOT[c]) > tol:
+            raise SystemExit('recursos_naturales: la columna %s de la pesca suma %s; el Anuario dice %s' % (c, s(j), PE_TOT[c]))
+    if abbrs is not None and set(PESCA) != set(abbrs):
+        raise SystemExit('recursos_naturales: las entidades de la pesca no son las de la base: %s' % sorted(set(PESCA) ^ set(abbrs)))
+    # El cruce del Anuario: lo que imprime en Jalisco es lo de Colima, y al revés.
+    if not (PE_CRUCE['JAL'] == (PE_DES['COL'], PESCA['COL'][3]) and PE_CRUCE['COL'] == (PE_DES['JAL'], PESCA['JAL'][3])):
+        raise SystemExit('recursos_naturales: los cuadros 2.1.10 y 2.1.11 ya no cruzan a Jalisco y Colima: cambia el punto ciego de la pesca')
+    if PE_TOT_258 != PE_TOT['acu']:
+        raise SystemExit('recursos_naturales: el renglón TOTAL del cuadro 2.5.8 ya no repite la acuacultura: cambia el punto ciego de la pesca')
+    ov = sorted(PESCA, key=lambda a: -PESCA[a][0])
+    op = sorted(PESCA, key=lambda a: -PESCA[a][3])
+    out = {}
+    for a, v in PESCA.items():
+        reg = v[0] > 0
+        out[a] = {'t': v[0] if reg else None, 'cap': v[1], 'acu': v[2], 'val': v[3], 'mdp': round(v[3] / 1000, 1) if reg else None, 't24': v[4], 'val24': v[5],
+                  'pacu': round(v[2] / v[0] * 100, 1) if reg else None, 'pt': round(v[0] / PE_TOT['viv'] * 100, 2), 'pv': round(v[3] / PE_TOT['val'] * 100, 2),
+                  'lt': ov.index(a) + 1 if reg else None, 'lv': op.index(a) + 1 if reg else None,
+                  'ct': round((v[0] - v[4]) / v[4] * 100, 1) if reg and v[4] else None, 'cv': round((v[3] - v[5]) / v[5] * 100, 1) if reg and v[5] else None}
+    return out
+
+
 # Cómo nombra el Acuerdo de 2023 a cada entidad, para leer su CSV.
 ACU_ENT = {'AGUASCALIENTES': 'AGS', 'BAJA CALIFORNIA': 'BC', 'BAJA CALIFORNIA SUR': 'BCS', 'CAMPECHE': 'CAM', 'COAHUILA': 'COAH', 'COLIMA': 'COL',
            'CHIAPAS': 'CHIS', 'CHIHUAHUA': 'CHIH', 'CIUDAD DE MÉXICO': 'CDMX', 'DURANGO': 'DGO', 'GUANAJUATO': 'GTO', 'GUERRERO': 'GRO', 'HIDALGO': 'HGO',
@@ -676,6 +751,37 @@ def tabla_forestal():
             'con años distintos, no la parte que se perdió. Las sumas, porcentajes y lugares son nuestros.</small></p>') % (
         _chip('oficial'), _chip('derivado'), _chip('derivado'), _chip('derivado'), _chip('derivado'), _chip('derivado'), filas,
         _n(SF_TOT[6], 1), _n(SF_TOT[0] + SF_TOT[1], 1), _n(arb / SF_TOT[6] * 100, 1), _n(SF_TOT[8] / SF_TOT[6] * 100, 1), _n(INC_TOT[25][1] / SF_TOT[6] * 100, 1))
+
+
+def _sig(v):
+    return ('+' if v > 0 else '−' if v < 0 else '') + _n(abs(v), 1) + ' %'
+
+
+def tabla_pesca():
+    import auditorias
+    nom = {e['abbr']: e['name'] for e in auditorias.db()['estados']}
+    P = pesca(list(nom))
+    reg = sorted((a for a in P if P[a]['t']), key=lambda a: P[a]['lt'])
+    filas = ''.join(
+        '<tr><th scope="row">%d. %s</th><td class="num-tabular">%s</td><td class="num-tabular">%s</td><td class="num-tabular">%s</td>'
+        '<td class="num-tabular">%s <small>(%d.º)</small></td><td class="num-tabular">%s</td><td class="num-tabular">%s</td></tr>' % (
+            P[a]['lt'], html.escape(nom[a]), _n(P[a]['t']), _n(P[a]['pacu'], 1), _n(P[a]['pt'], 1) if P[a]['pt'] >= 0.05 else 'menos de 0.1',
+            _n(P[a]['mdp'], 1), P[a]['lv'], _sig(P[a]['ct']), _sig(P[a]['cv']))
+        for a in reg)
+    sin = [a for a in P if not P[a]['t']]
+    filas += ''.join('<tr><th scope="row">%s</th><td colspan="6">No registró producción en 2025 (en 2024, %s t y $%s mdp)</td></tr>' % (
+        html.escape(nom[a]), _n(P[a]['t24']), _n(P[a]['val24'] / 1000, 1)) for a in sin)
+    return ('<div class="leg-tabla-caja"><table class="leg-tabla"><caption>La pesca y la acuacultura de cada entidad, 2025 (toneladas en peso vivo, ordenadas de más a menos, '
+            'y millones de pesos a precio de playa)</caption>'
+            '<thead><tr><th scope="col">Entidad</th><th scope="col">Toneladas %s</th><th scope="col">De cultivo, de cada 100 %s</th><th scope="col">Su parte del país %s</th>'
+            '<th scope="col">Valor, mdp (lugar) %s</th><th scope="col">Toneladas contra 2024 %s</th><th scope="col">Valor contra 2024 %s</th></tr></thead>'
+            '<tbody>%s</tbody><tfoot><tr><th scope="row">Las 32</th><td class="num-tabular">%s</td><td class="num-tabular">%s</td><td class="num-tabular">100</td>'
+            '<td class="num-tabular">%s</td><td class="num-tabular">%s</td><td class="num-tabular">%s</td></tr></tfoot></table></div>'
+            '<p><small>De cultivo: la acuacultura ÷ el peso vivo × 100. El valor es en pesos de cada año, sin descontar la inflación. Las proporciones, cambios y lugares son nuestros. '
+            'Jalisco y Colima van con las cifras de las series del Anuario y de su cuadro 2.1.5: sus cuadros 2.1.10 y 2.1.11 las imprimen cruzadas.</small></p>') % (
+        _chip('oficial'), _chip('derivado'), _chip('derivado'), _chip('oficial'), _chip('derivado'), _chip('derivado'), filas,
+        _n(PE_TOT['viv']), _n(PE_TOT['acu'] / PE_TOT['viv'] * 100, 1), _n(PE_TOT['val'] / 1000, 1),
+        _sig((PE_TOT['viv'] - PE_TOT['viv24']) / PE_TOT['viv24'] * 100), _sig((PE_TOT['val'] - PE_TOT['val24']) / PE_TOT['val24'] * 100))
 
 
 def tabla_incendios():
@@ -877,12 +983,13 @@ def temas():
     _temas_mineria(t)
     _temas_agua(t)
     _temas_incendios(t)
+    _temas_pesca(t)
     for k, x in t.items():
-        x['ir'] = [ARCHIVO + '#' + (k.replace('_', '-') if not k.startswith(('rn_ref_', 'rn_min_', 'rn_acu_', 'rn_if_')) else
+        x['ir'] = [ARCHIVO + '#' + (k.replace('_', '-') if not k.startswith(('rn_ref_', 'rn_min_', 'rn_acu_', 'rn_if_', 'rn_pe_')) else
                                    'rn-refinerias' if k.startswith('rn_ref_') else 'rn-mineria' if k.startswith('rn_min_') else
-                                   'rn-incendios' if k.startswith('rn_if_') else 'rn-agua'), TITULO]
+                                   'rn-incendios' if k.startswith('rn_if_') else 'rn-pesca' if k.startswith('rn_pe_') else 'rn-agua'), TITULO]
         x['aqui'] = x['ir']
-        if k.startswith(('rn_min_', 'rn_acu_', 'rn_if_')):
+        if k.startswith(('rn_min_', 'rn_acu_', 'rn_if_', 'rn_pe_')):
             x['ir'] = [x.pop('portal') + '#ambiental', 'sus recursos naturales en el Planisferio']
     return t
 
@@ -1214,11 +1321,127 @@ def _temas_incendios(t):
             'sug': ['¿Qué estado tuvo más superficie quemada?', '¿Qué no dicen las cifras de incendios?', '¿Cuántos acuíferos de %s están en déficit?' % nom[a]]}
 
 
-SECCIONES = [('rn_capitulo', 'Renovables y no renovables'), ('rn_regimen', 'Las tres vías y las tres auditorías'),
+def _t(v):
+    return format(v, ',') + ' t'
+
+
+def _temas_pesca(t):
+    """La pesca y la acuacultura: el panorama nacional, sus puntos ciegos y una
+    ficha por entidad."""
+    import auditorias
+    import planisferio
+    E = auditorias.db()['estados']
+    nom = {e['abbr']: e['name'] for e in E}
+    P = pesca(list(nom))
+    fp = lambda c: _f(PE_DOC, c)
+    T = PE_TOT
+    cap = T['viv'] - T['acu']
+    reg = [a for a in P if P[a]['t']]
+    ot = sorted(reg, key=lambda a: P[a]['lt'])
+    ov = sorted(reg, key=lambda a: P[a]['lv'])
+    c4 = sum(P[a]['t'] for a in ot[:4]) / T['viv'] * 100
+    if [nom[a] for a in ot[:4]] != ['Sonora', 'Sinaloa', 'Baja California', 'Baja California Sur'] or round(c4, 1) != 81.6:
+        raise SystemExit('recursos_naturales: los cuatro estados con más pesca ya no son los que nombra el Anuario (p. 123), o ya no suman más de cuatro quintas partes')
+    sinl = ['AGS', 'CHIH', 'CDMX', 'COAH', 'DGO', 'GTO', 'HGO', 'MÉX', 'MOR', 'NL', 'PUE', 'QRO', 'SLP', 'TLAX', 'ZAC']
+    tsin = sum(PESCA[a][0] for a in sinl)
+    if abs(tsin - 25582) > 3:
+        raise SystemExit('recursos_naturales: las entidades sin litoral ya no suman las 25,582 t del Anuario')
+    ex = max(sinl, key=lambda a: PESCA[a][0])
+    gap = max(reg, key=lambda a: P[a]['lv'] - P[a]['lt'])
+    dv = (T['val'] - T['val24']) / T['val24'] * 100
+    dt = (T['viv'] - T['viv24']) / T['viv24'] * 100
+    inc = T['val'] - T['val24']
+    cam, cal = PE_ESP['camarón'], PE_ESP['calamar']
+    son = P['SON']
+    lgpas = ley('lgpas', 'arts. 4, fracciones VI y VII, 32 y 63')
+    nl = [a for a in P if not P[a]['t']]
+    t['rn_pesca'] = {
+        'tit': 'La pesca y la acuacultura, estado por estado',
+        'h': ('<p>La pesca es un recurso renovable si se respeta el ritmo con que se reproducen las especies. La ley distingue la <b>captura</b> (lo que se saca del mar, los ríos y las presas) '
+              'de la <b>acuacultura</b> (lo que se cultiva en granjas), y obliga a reportar las dos: el pescador con su <b>aviso de arribo</b> y el productor acuícola con su <b>aviso de cosecha</b> '
+              '(Ley General de Pesca y Acuacultura Sustentables, art. 4, fracciones VI y VII). Con esos avisos, la Comisión Nacional de Acuacultura y Pesca (CONAPESCA) arma su Anuario.</p>'
+              '<p>En 2025 el país registró <b>%s</b> de pesca y acuacultura en peso vivo %s, %s más que en 2024 %s. De cada 100 toneladas, %s fueron de cultivo %s. '
+              'Su valor a precio de playa fue de <b>%s</b> %s, %s más que en 2024 %s.</p>'
+              '<p><b>%s</b> registró más que nadie: %s, el %s %% del país %s. Con %s, %s y %s junta el %s %% %s: el Anuario lo atribuye a sus pesquerías masivas de sardina, túnidos, camarón, '
+              'anchoveta y, en 2025, calamar. Las %d entidades sin litoral registraron %s, el %s %% %s, casi todo de cultivo; %s es la mayor, con %s.</p>') % (
+            _t(T['viv']), _chip('oficial'), _n(dt, 1) + ' %', _chip('derivado'), _n(T['acu'] / T['viv'] * 100, 1), _chip('derivado'),
+            _mdps(T['val'] / 1000).lstrip('+'), _chip('oficial'), _n(dv, 1) + ' %', _chip('derivado'),
+            nom[ot[0]], _t(P[ot[0]]['t']), _n(P[ot[0]]['pt'], 1), _chip('derivado'), nom[ot[1]], nom[ot[2]], nom[ot[3]], _n(c4, 1), _chip('derivado'),
+            len(sinl), _t(tsin), _n(tsin / T['viv'] * 100, 2), _chip('derivado'), nom[ex], _t(PESCA[ex][0])),
+        'ci': [{'v': _t(T['viv']), 'etq': 'de pesca y acuacultura en 2025', 'e': 'oficial'},
+               {'v': _mdps(T['val'] / 1000).lstrip('+'), 'etq': 'su valor a precio de playa', 'e': 'oficial'},
+               {'v': '%s %%' % _n(T['acu'] / T['viv'] * 100, 1), 'etq': 'fue de cultivo (acuacultura)', 'e': 'derivado', 'op': 'acuacultura ÷ peso vivo total × 100'}],
+        'fu': [_o('Peso vivo, captura, acuacultura y valor por entidad, 2015-2025', fp('cuadros 2.5.6, 2.5.8, 2.5.10 y 2.5.12, pp. 171 a 177')),
+               _o('Lo que dice el Anuario de su método y de la concentración en el noroeste', fp('pp. 122-123')),
+               _o('Los avisos de arribo y de cosecha', lgpas),
+               _o('Las proporciones, los cambios y los lugares', fp('cuadros 2.5.6 y 2.5.12'), 'derivado')],
+        'sug': ['¿Cuánto pesca Sinaloa?', '¿Qué estado pesca más?', '¿Qué no dicen las cifras de la pesca?']}
+    t['rn_pesca_ciegos'] = {
+        'tit': 'Lo que las cifras de la pesca no dicen',
+        'h': '<p>Siete preguntas que conviene hacer antes de leer el mapa de la pesca:</p>%s' % _lista([
+            ('<b>Es lo que se declaró, no todo lo que se pescó.</b> El Anuario sale de los avisos de arribo, de cosecha y de producción que captura el propio productor en el Sistema de '
+             'Información de Pesca y Acuacultura (SIPESCA), con factores de conversión y ajustes (p. 122). Lo que no se declara no aparece. Y lo de un estado no es solo lo de su costa: '
+             'quien pesca en altamar o en aguas extranjeras con barco mexicano también entrega su aviso de arribo (Ley General de Pesca y Acuacultura Sustentables, art. 63).'),
+            ('<b>Hay dos toneladas.</b> El peso desembarcado es el del producto como llega, descabezado, fileteado o eviscerado: %s en 2025. El peso vivo, el del animal entero, '
+             'se calcula con factores del Instituto Mexicano de Investigación en Pesca y Acuacultura Sustentables (IMIPAS): %s %s (glosario, p. 336). Una nota que mezcla las dos compara cosas distintas; '
+             'aquí se usa el peso vivo.') % (_t(T['des']), _t(T['viv']), _chip('oficial')),
+            ('<b>El propio Anuario cruza a Jalisco y Colima.</b> Sus cuadros 2.1.10 y 2.1.11 (pp. 137-138) le dan a Jalisco %s y %s, y a Colima %s y %s. Pero su cuadro 2.1.5 y sus series '
+             '(cuadros 2.5.6 y 2.5.12) dicen lo contrario: Colima desembarcó %s y su pesca valió %s; Jalisco, %s y %s. Aquí van las de las series. Con el cruce, el ranking del cuadro 2.1.11 '
+             'pone a Jalisco donde va Colima.') % (
+                _t(PE_CRUCE['JAL'][0]), _mdps(PE_CRUCE['JAL'][1] / 1000).lstrip('+'), _t(PE_CRUCE['COL'][0]), _mdps(PE_CRUCE['COL'][1] / 1000).lstrip('+'),
+                _t(PE_DES['COL']), _mdps(P['COL']['val'] / 1000).lstrip('+'), _t(PE_DES['JAL']), _mdps(P['JAL']['val'] / 1000).lstrip('+')),
+            ('<b>Un total que no es el suyo.</b> El renglón TOTAL del cuadro 2.5.8, el de la captura (p. 173), repite el total de la acuacultura: %s en 2025. La captura de 2025 fue de %s %s, '
+             'peso vivo menos acuacultura, y es lo que suman sus propios renglones.') % (_t(PE_TOT_258), _t(cap), _chip('derivado')),
+            ('<b>El valor subió y el volumen casi no.</b> El valor creció %s y las toneladas, %s %s. El camarón explica %s de cada 100 pesos del alza y el calamar, %s %s: el calamar pasó de %s a %s. '
+             'Y son pesos de cada año, sin descontar la inflación. En %s las toneladas bajaron %s y el valor subió %s.') % (
+                _n(dv, 1) + ' %', _n(dt, 1) + ' %', _chip('derivado'), _n((cam[1] - cam[0]) / inc * 100, 1), _n((cal[1] - cal[0]) / inc * 100, 1), _chip('derivado'),
+                _mdps(cal[0] / 1000).lstrip('+'), _mdps(cal[1] / 1000).lstrip('+'), nom['SON'], _sig(son['ct']).lstrip('−'), _sig(son['cv']).lstrip('+')),
+            ('<b>Mucho volumen no es mucho valor.</b> %s quedó en el lugar %d por toneladas y en el %d por valor %s: lo que se pesca pesa distinto en la caja. '
+             'Y sobre una base chica los saltos engañan: %s pasó de %s en 2024 a %s en 2025 %s; un salto así pide preguntar si cambió la producción o el registro.') % (
+                nom[gap], P[gap]['lt'], P[gap]['lv'], _chip('derivado'), nom['SLP'], _t(P['SLP']['t24']), _t(P['SLP']['t']), _chip('oficial')),
+            ('<b>Volumen no es salud del recurso.</b> Que se pesque más no dice si la especie aguanta. Eso lo dice la Carta Nacional Pesquera, que elabora el IMIPAS y debe publicarse en el DOF '
+             'cada dos años (Ley General de Pesca y Acuacultura Sustentables, art. 32). %s') % (
+                ('Y %s no registró producción en 2025, lo que no es lo mismo que no tener pesca.' % _y([nom[a] for a in nl])) if nl else '')]),
+        'fu': [_o('El método (p. 122), el glosario (p. 336) y los cuadros 2.1.5, 2.1.10, 2.1.11, 2.5.6, 2.5.8, 2.5.11 y 2.5.12', fp('pp. 122, 132, 137-138, 171, 173, 176-177 y 336')),
+               _o('Los avisos, la pesca en altamar y la Carta Nacional Pesquera', lgpas),
+               _o('La captura, los cambios, las partes del alza y los lugares', fp('cuadros 2.5.6, 2.5.10, 2.5.11 y 2.5.12'), 'derivado')],
+        'sug': ['¿Qué estado pesca más?', '¿Cuánto vale la pesca de Sonora?', '¿Qué no dicen las cifras de incendios?']}
+    for a in nom:
+        x = P[a]
+        cv = lambda c, pl='': ('subi%s %s' % ('eron' if pl else 'ó', _sig(c).lstrip('+'))) if c > 0 else ('baj%s %s' % ('aron' if pl else 'ó', _sig(c).lstrip('−'))) if c < 0 else ('quedaron igual' if pl else 'quedó igual')
+        if x['t']:
+            h = ('<p>En 2025, <b>%s</b> registró <b>%s</b> de pesca y acuacultura en peso vivo %s: el lugar %d de %d entidades con registro y el %s %% del país %s. '
+                 'De cada 100 toneladas, %s fueron de cultivo y %s de captura %s.</p>'
+                 '<p>Su valor a precio de playa fue de <b>%s</b> %s, el lugar %d por valor %s. Contra 2024, las toneladas %s y el valor %s %s; el valor es en pesos de cada año, sin descontar la inflación.</p>'
+                 '<p>Es lo que se declaró en los avisos de arribo y de cosecha (Ley General de Pesca y Acuacultura Sustentables, art. 4), no todo lo que se pescó, y no dice si las especies aguantan: '
+                 'eso lo dice la Carta Nacional Pesquera (art. 32).%s</p>') % (
+                nom[a], _t(x['t']), _chip('oficial'), x['lt'], len(reg), _n(x['pt'], 2) if x['pt'] >= 0.01 else 'menos del 0.01', _chip('derivado'),
+                _n(x['pacu'], 1), _n(100 - x['pacu'], 1), _chip('derivado'),
+                _mdps(x['mdp']).lstrip('+'), _chip('oficial'), x['lv'], _chip('derivado'), cv(x['ct'], 1), cv(x['cv']), _chip('derivado'),
+                ' Ojo: los cuadros 2.1.10 y 2.1.11 del Anuario le dan a %s las cifras de %s; aquí van las de sus series y su cuadro 2.1.5.' % (nom[a], nom['COL' if a == 'JAL' else 'JAL'])
+                if a in PE_CRUCE else '')
+            ci = [{'v': _t(x['t']), 'etq': 'de pesca y acuacultura en 2025', 'e': 'oficial'},
+                  {'v': _mdps(x['mdp']).lstrip('+'), 'etq': 'su valor a precio de playa', 'e': 'oficial'},
+                  {'v': '%s %%' % _n(x['pacu'], 1), 'etq': 'fue de cultivo', 'e': 'derivado', 'op': 'acuacultura ÷ peso vivo × 100'}]
+        else:
+            h = ('<p><b>%s</b> no registró producción pesquera ni acuícola en 2025 en el Anuario de la CONAPESCA %s. En 2024 había registrado %s, con un valor de %s %s. '
+                 'No registrar no es lo mismo que no tener pesca: el Anuario es lo que se declaró en los avisos de arribo y de cosecha (Ley General de Pesca y Acuacultura Sustentables, art. 4).</p>') % (
+                nom[a], _chip('oficial'), _t(x['t24']), _mdps(x['val24'] / 1000).lstrip('+'), _chip('oficial'))
+            ci = [{'v': '0 t', 'etq': 'registradas en 2025', 'e': 'oficial'}, {'v': _t(x['t24']), 'etq': 'registradas en 2024', 'e': 'oficial'}]
+        t['rn_pe_' + planisferio.clave(a)] = {
+            'tit': '%s: su pesca y su acuacultura' % nom[a], 'h': h, 'ci': ci,
+            'fu': [_o('Su peso vivo, captura, acuacultura y valor, 2024 y 2025', fp('cuadros 2.5.6, 2.5.8, 2.5.10 y 2.5.12, pp. 171 a 177')),
+                   _o('Las proporciones, los cambios y los lugares', fp('cuadros 2.5.6 y 2.5.12'), 'derivado'), _o('Los avisos y la Carta Nacional Pesquera', lgpas)],
+            'portal': planisferio.portal(a), 'edo': a,
+            'sug': ['¿Qué estado pesca más?', '¿Qué no dicen las cifras de la pesca?', '¿Cuánto bosque tiene %s?' % nom[a]]}
+
+
+SECCIONES = [('rn_capitulo','Renovables y no renovables'), ('rn_regimen', 'Las tres vías y las tres auditorías'),
              ('rn_ramos', 'Los seis ramos, ayer y hoy'), ('rn_agua', 'El agua del subsuelo, estado por estado'),
              ('rn_agua_ciegos', 'Lo que el mapa del agua no dice'), ('rn_bosques', 'Los bosques de cada estado: su superficie forestal'),
              ('rn_incendios', 'Los incendios forestales, estado por estado'),
-             ('rn_incendios_ciegos', 'Lo que las cifras de incendios no dicen'), ('rn_pemex', 'PEMEX, ayer y hoy'),
+             ('rn_incendios_ciegos', 'Lo que las cifras de incendios no dicen'), ('rn_pesca', 'La pesca y la acuacultura, estado por estado'),
+             ('rn_pesca_ciegos', 'Lo que las cifras de la pesca no dicen'), ('rn_pemex', 'PEMEX, ayer y hoy'),
              ('rn_refinerias', 'Las refinerías de PEMEX'), ('rn_mineria', 'Las concesiones mineras, estado por estado'),
              ('rn_mineria_ciegos', 'Lo que el cuadro de las minas no dice'), ('rn_auditar', 'Lo subrayado: la guía del auditor'),
              ('rn_ciegos', 'Los puntos ciegos')]
@@ -1234,6 +1457,8 @@ def secciones():
                                                '<a href="%s">El documento de la CONAFOR (PDF) ➔</a></p>' % SF_DOC['url'],
              'rn_incendios': tabla_incendios() + '<p class="leg-mas"><a href="planisferio.html?d=ambiental&amp;l=incH">🗺️ Los incendios en el Planisferio ➔</a> · '
                                                  '<a href="%s">Los reportes semanales de la CONAFOR ➔</a></p>' % INC_PAG,
+             'rn_pesca': tabla_pesca() + '<p class="leg-mas"><a href="planisferio.html?d=ambiental&amp;l=peT">🗺️ La pesca en el Planisferio ➔</a> · '
+                                         '<a href="%s">El Anuario de la CONAPESCA (PDF) ➔</a></p>' % PE_DOC['url'],
              'rn_agua': tabla_agua() + '<p class="leg-mas"><a href="planisferio.html?d=ambiental&amp;l=acuP">🗺️ Los acuíferos en el Planisferio ➔</a></p>',
              'rn_mineria': tabla_mineria() + tabla_derechos() + '<p class="leg-mas"><a href="planisferio.html?d=ambiental&amp;l=minT">🗺️ Las concesiones en el Planisferio ➔</a></p>'}
     return [{'id': k.replace('_', '-'), 'titulo': html.escape(tit), 'texto': '', 'tarjetas': [],
@@ -1244,6 +1469,7 @@ ENTRADA = ('El capítulo de recursos naturales del libro del autor, «Introducci
            'qué recursos se renuevan y cuáles se agotan, de quién son, quién los explota y con qué ley, y a quién se audita en cada caso. '
            'Empieza por el agua del subsuelo: los 653 acuíferos del país, cuáles ya no tienen agua para concesionar y cuáles se miden como sobreexplotados. '
            'Sigue con los bosques: la superficie forestal de cada estado y los incendios forestales de 2025, cuánto terreno afectaron, qué parte era de árboles y cuánto es frente a su superficie forestal. '
+           'Luego, la pesca y la acuacultura de cada estado en 2025: cuántas toneladas registró, cuánto valieron y qué parte fue de cultivo. '
            'Cada regla está cotejada contra el texto vigente, porque el libro describe las leyes de 1993-1994. Incluye la sección de PEMEX y sus siete refinerías, '
            'con lo que procesa cada una frente a su capacidad, y las concesiones mineras de cada estado, que también se ven en el Planisferio. Es la misma información con que contesta Pregúntale al Auditor.')
 
@@ -1253,7 +1479,7 @@ def pagina():
     return {
         'archivo': ARCHIVO, 'menu': TITULO, 'menu_archivo': 'aprende.html',
         'padre': ('aprende.html', 'Aprende'),
-        'icono': '🌎', 'titulo': TITULO, 'lema': 'Renovables y no renovables: el agua del subsuelo, los bosques y sus incendios, las minas de cada estado y las refinerías de PEMEX, qué se audita y con qué ley',
+        'icono': '🌎', 'titulo': TITULO, 'lema': 'Renovables y no renovables: el agua del subsuelo, los bosques y sus incendios, la pesca, las minas de cada estado y las refinerías de PEMEX, qué se audita y con qué ley',
         'estilos': ['asistente.css'], 'entrada': ENTRADA, 'secciones': secciones(),
     }
 
@@ -1278,10 +1504,11 @@ def pendientes():
          'responsable': 'Comisión Nacional del Agua (CONAGUA)', 'enlace': 'https://sigagis.conagua.gob.mx/gas1/sections/Disponibilidad_Acuiferos.html',
          'enlace_txt': 'CONAGUA, disponibilidad de los acuíferos', 'aparece': ap},
         {'id': 'ambiente-por-estado', 'tema': 'Recursos naturales',
-         'que': 'El resto de la cifra ambiental de cada una de las 32 entidades: las denuncias ante la PROFEPA y su pesca',
+         'que': 'El resto de la cifra ambiental de cada una de las 32 entidades: las denuncias ante la PROFEPA',
          'porque': ('El Informe de Actividades 2024 de la PROFEPA nombra estados pero no publica sus cifras por entidad, y la plataforma aún no coteja si sus datos abiertos las traen; '
-                    'tampoco integra todavía la pesca de cada estado. Ya están las concesiones mineras, los acuíferos, los incendios forestales y la superficie forestal de cada entidad '
-                    '(CONAFOR, «Estado que guarda el sector forestal en México 2023», con el mapa de vegetación de 2018), todos desde el 03-11-2026.'),
+                    'ese es el último que falta. Ya están las concesiones mineras, los acuíferos, los incendios forestales, la superficie forestal (CONAFOR, «Estado que guarda el sector forestal '
+                    'en México 2023», con el mapa de vegetación de 2018) y la pesca y la acuacultura de cada entidad (CONAPESCA, Anuario Estadístico de Acuacultura y Pesca 2025), '
+                    'todos desde el 03-11-2026.'),
          'responsable': P.PLATAFORMA, 'enlace': 'https://www.inegi.org.mx/temas/ambiente/',
          'enlace_txt': 'INEGI, estadísticas de medio ambiente', 'aparece': ap},
     ]
