@@ -7344,6 +7344,17 @@ Pedido del autor: «continuemos» (con los pendientes; era el primero de la list
 - **Revisado** en el navegador a 390 y 1280 px: portal de Jalisco con `?ml=inv`, ficha de Zapopan, piso municipal, portal de la Ciudad de México, padrón de la Enciclopedia y ficha del Auditor de entes, sin errores de consola ni desborde.
 - **Pendiente:** las dimensiones ambiental, legislativa y judicial del Planisferio, los umbrales del semáforo, la deuda municipal (Sistema de Alertas, sin descarga desde este entorno) y las ligas estatales «por cotejar».
 
+## Entrega — 03-11-2026: la deuda de los municipios, en su propia cuenta (sello 20261103y)
+
+Pedido del autor: «continúa con las deudas municipales».
+
+- **Por qué así:** la deuda municipal estaba pendiente porque el Sistema de Alertas (`disciplinafinanciera.hacienda.gob.mx`) no responde desde este entorno. Con el pilar de la base de datos (§0 ter), no se pide por solicitud: se integra lo que el municipio ya hizo público en su cuenta al INEGI, y el saldo se queda pendiente con su nombre.
+- **El dato:** INEGI, EFIPEM municipal 2024, cifras definitivas (`conjunto_de_datos_efipem_municipal_csv.zip`, SHA-256 `6fca09ef…`, el mismo de la inversión). Egresos, capítulo «Deuda pública»: amortización $9,864.5 mdp, intereses $3,905.5 mdp, comisiones + gastos + coberturas $101.5 mdp y ADEFAS $7,510.5 mdp (total $21,382.0 mdp). Ingresos, concepto «Empréstitos»: $4,726.0 mdp. 978 municipios con algo en el capítulo, 715 con pagos de crédito (capital, intereses o comisiones), 144 con empréstitos.
+- **El código:** `herramientas/anclar_deuda_municipios.py <zip>` → `assets/auditor/js/municipios-deuda.js` (`window.AUDIT_MUN_DEUDA`, `[dp, am, int, cf, adefas, emp]` por clave de cinco dígitos). Importa la huella, la URL y el padrón de `anclar_inversion_municipios.py`. `planisferio.py` lo lee con `deu_mun()` (se detiene si no trae justo a los municipios con cuenta), lo pinta en `_deuda_mun()` y en las lentes `dpag` y `emp` (`CERO_MUN`: el $0 lleva su tono y los cortes salen de los que sí reportaron). `territorio.js` suma la columna; `asistente-charla.js` la métrica `deu`.
+- **Puntos ciegos:** (1) pagar no es deber: un municipio en $0 puede deber a proveedores o tener un crédito sin pagos ese año; (2) los ADEFAS no son crédito bancario; (3) el capítulo «Financiamiento» del INEGI ($28,233 mdp) es casi todo «Déficit» ($23,507 mdp), el renglón con que el INEGI cuadra ingreso y egreso: decir que los municipios «se financiaron» con eso sería falso.
+- **Corrección:** `mv()` del chat devolvía la inversión municipal en millones y el resto del padrón en pesos: la respuesta decía «$1,543.04» y «de cada $100» salía casi en cero. Ya va en pesos.
+- **Pendiente:** el saldo de cada municipio (Sistema de Alertas, `deuda-municipios`); la ficha municipal del Auditor de entes aún no muestra la deuda; y lo de antes: `ambiente-por-estado`, `acuiferos-disponibilidad-nueva`, `mineria-por-estado-2026`, el rezago civil, el presupuesto aprobado de los congresos, sus remuneraciones, los umbrales del semáforo y las ligas estatales «por cotejar».
+
 ## Entrega — 03-11-2026: la base de datos, duodécimo pilar (sello 20261103x)
 
 - **Pedido.** Al buscar las denuncias de la PROFEPA por estado, el autor descartó la Plataforma Nacional de Transparencia («no podemos contar o confiar con la plataforma de transparencia») y decidió: «la construcción de nuestra base de datos debe convertirse en ese pilar de transparencia».

@@ -395,7 +395,7 @@ def municipios(base, ref, glos, raiz):
             <label class="tt-sel"><span>Buscar municipio</span><input type="search" id="ttMunBusca" placeholder="Escribe un nombre" autocomplete="off"></label>
             <label class="tt-sel"><span>Ordenar por</span><select id="ttMunOrden">
               <option value="nombre">Nombre (A–Z)</option><option value="ing">Ingreso total</option><option value="predial">Predial cobrado</option>
-              <option value="fortamun">FORTAMUN recibido</option><option value="fismdf">FISMDF recibido</option><option value="dep">Dependencia de transferencias</option><option value="inv">Inversión pública</option></select></label>
+              <option value="fortamun">FORTAMUN recibido</option><option value="fismdf">FISMDF recibido</option><option value="dep">Dependencia de transferencias</option><option value="inv">Inversión pública</option><option value="dpag">Pagó de deuda</option></select></label>
           </div>
           <div id="ttMun" aria-live="polite"><noscript><p>El padrón necesita JavaScript. Los datos completos se descargan en <a href="descarga-los-datos.html">Datos</a>.</p></noscript></div>
         </section>

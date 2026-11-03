@@ -1288,7 +1288,7 @@ def herramienta_asistente(bloque):
         'entrada': '<b>%s.</b> %s' % (ASISTENTE[2], ASISTENTE[3]),
         'fondo': FOTO_AUDITOR, 'rubro': rubro, 'foto_clase': 'foto-auditor',
         'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
-        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
+        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
         # Sin la fila de las cuatro herramientas: el chat ya es sus modos.
         'pie_extra': nav,
     }
@@ -1308,7 +1308,7 @@ def herramienta_dictamen(bloque):
                     'sus fuentes oficiales y el método, con folio, sello y huella digital. Se arma de nuevo con los datos de la plataforma cada vez que se abre el enlace.'),
         'fondo': FOTO_AUDITOR, 'rubro': h[1], 'foto_clase': 'foto-auditor',
         'secciones': [{'id': 'dictamen', 'titulo': 'Dictamen cívico independiente de Auditavisión', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
-        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
+        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
     }
 
 
@@ -5176,7 +5176,7 @@ def numeros_preparar():
     import gasto_modulos as gm
     import poderes_modulo as pdm
     guion = {'gp-tres': [], 'eb-cuenta-federal': 'resultados.js', 'eb-salud': [], 'eb-egresos': [], 'eb-ciegos': [], 'poderes': [], 'eb-cuanto': ['numeros.js', 'radar.js'], 'nr-origenes': 'numeros.js', 'eb-mapa': 'territorio.js', 'territorio': 'territorio.js',
-             'municipios': ['municipios-efipem.js', 'municipios-inversion.js', 'territorio.js']}
+             'municipios': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'territorio.js']}
     for m in NUMEROS_MODULOS:
         NUMEROS_ABRIR[m[0]] = m[1]
         hecho = propios.get(m[0])
@@ -5468,6 +5468,7 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('03-11-2026', 'La deuda de los municipios llega al Planisferio y a la Enciclopedia: lo que cada uno pagó por sus créditos y pidió prestado en 2024, según su propia cuenta al INEGI. Es lo que pagó, no lo que debe: su saldo lo publica Hacienda y sigue pendiente, con el nombre de quien lo debe.'),
     ('03-11-2026', 'Nuestro duodécimo pilar: la base de datos es un pilar de transparencia. No dependemos de solicitudes que solo ve quien las pide: armamos la transparencia con lo que se publica para todos, con la huella digital de cada documento, las cuentas rehechas y lo que falta en el Registro de pendientes, con el nombre de quien lo debe. La página de los pilares explica, paso por paso, cómo entra una cifra a la plataforma.'),
     ('02-11-2026', 'El mapa del dinero: el mapa de las 32 entidades suma dos capas que puedes operar. «No cuadra» compara lo que cada estado dice que recibió con lo que la Federación dice que le pagó, y «Obras con alerta ambiental» cuenta los proyectos del mapa ambiental en cada estado. El Auditor abre cada capa directo («mapa de la deuda»). La Mesa de redacción sigue además a ocho medios por su nombre y junta la misma historia cuando varios la cuentan. Servicios suma «A quién servimos» y la revisión de un proveedor.'),
     ('29-10-2026', 'El índice general sigue ahora el orden de las pestañas: el Auditor Virtual con sus cuatro modos, la Enciclopedia (Números, sus Herramientas, Datos y Aprende), Comunidad y Noticias, con sus tres páginas y sus secciones. Al final, las investigaciones por tema y cómo verificamos.'),

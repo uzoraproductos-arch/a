@@ -244,11 +244,12 @@ def pendientes():
          'porque': 'Las aprueba el congreso de cada estado y se publican en su periódico oficial; la plataforma aún no las integra municipio por municipio.',
          'responsable': P.PLATAFORMA, 'enlace': OJN, 'enlace_txt': 'Orden Jurídico Nacional (Gobernación), ámbito estatal',
          'aparece': ap},
-        {'id': 'deuda-municipios', 'tema': 'Deuda', 'que': 'La deuda de los municipios en el Sistema de Alertas, municipio por municipio',
-         'porque': ('Hacienda mide también a los municipios con deuda inscrita (LDF, art. 43). El archivo no se pudo descargar en el cotejo del %s '
-                    '(el portal de disciplina financiera no respondió) y no se escribe una cifra sin su documento.') % COTEJO,
+        {'id': 'deuda-municipios', 'tema': 'Deuda', 'que': 'El saldo de la deuda de cada municipio (lo que debe) en el Sistema de Alertas, municipio por municipio',
+         'porque': ('Hacienda mide también a los municipios con deuda inscrita (LDF, art. 43). Lo que cada municipio pagó por sus créditos y pidió prestado en 2024 ya '
+                    'está integrado, con su cuenta pública al INEGI (anclar_deuda_municipios.py); lo que debe al cierre, no: el archivo del Sistema de Alertas no se pudo '
+                    'descargar en el cotejo del %s (el portal de disciplina financiera no respondió) y no se escribe una cifra sin su documento.') % COTEJO,
          'responsable': P.PLATAFORMA, 'enlace': SDA_PAGINA, 'enlace_txt': 'Sistema de Alertas (SHCP)',
-         'aparece': [('planisferio.html', 'Planisferio · cada portal, «Su deuda»')]},
+         'aparece': [('planisferio.html', 'Planisferio · cada portal, «Su deuda» y el mapa de sus municipios')]},
     ]
 
 

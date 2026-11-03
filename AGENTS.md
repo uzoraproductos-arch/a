@@ -104,6 +104,12 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   porque el semáforo junta en verde a estados muy distintos, y lo dice. Lo
   que no se mide por ley va en gris como «no se mide», no como pendiente. Se
   abre con `planisferio.html?d=deuda` y cada portal la trae en `#deuda`.
+  **La de los municipios** (03-11-2026) sale de su propia cuenta al INEGI
+  (`municipios-deuda.js`, que escribe `herramientas/anclar_deuda_municipios.py`):
+  **lo que pagaron y pidieron prestado en el año, nunca lo que deben** (el saldo es
+  del Sistema de Alertas y sigue pendiente), los ADEFAS no se dicen como crédito y
+  el capítulo «Financiamiento» del INEGI no se dice como deuda nueva: casi todo es
+  «Déficit», su renglón de cuadre.
 - **La inversión, tercera dimensión pintada** (03-11-2026). Lee `invPub`,
   `invInfra` y `egr2024` de `DB.estados` (los escribe
   `herramientas/anclar_egresos_entidades.py` desde la estadística estatal del
