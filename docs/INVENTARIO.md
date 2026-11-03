@@ -269,7 +269,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-ingreso-venta-de-bienes-y-servicios.html` | Venta de bienes y servicios (IMSS, ISSSTE, Pemex y CFE) · Auditavisión | apartados.py | 47 | 0 | 1 | 1 | 0 |
 | `numeros-la-deuda.html` | Se paga lo que se debe · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `numeros-las-32-entidades.html` | Las 32 entidades: del peso federal al estatal · Auditavisión | apartados.py | 57 | 0 | 3 | 2 | 0 |
-| `numeros-lo-que-cuestan-los-poderes.html` | Lo que cuestan el Congreso y la Judicatura · Auditavisión | apartados.py | 65 | 0 | 32 | 17 | 4 |
+| `numeros-lo-que-cuestan-los-poderes.html` | Lo que cuestan el Congreso y la Judicatura · Auditavisión | apartados.py | 65 | 0 | 32 | 17 | 3 |
 | `numeros-lo-que-la-cifra-no-dice.html` | Lo que la cifra grande no dice · Auditavisión | apartados.py | 52 | 0 | 0 | 4 | 1 |
 | `numeros-los-16-origenes.html` | Los 16 orígenes del ingreso · Auditavisión | apartados.py | 61 | 0 | 2 | 3 | 0 |
 | `numeros-los-municipios.html` | Los 2,479 municipios: predial y transferencias · Auditavisión | apartados.py | 55 | 0 | 3 | 4 | 1 |
@@ -294,42 +294,42 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 224 | 0 | 0 | 0 | 115 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 223 | 0 | 0 | 0 | 114 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 37 | 0 | 11 | 5 | 0 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 46 | 0 | 1 | 0 | 0 |
-| `planisferio-ags.html` | Aguascalientes · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio-bc.html` | Baja California · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio-bcs.html` | Baja California Sur · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio-cam.html` | Campeche · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio-cdmx.html` | Ciudad de México · Auditavisión | apartados.py | 61 | 0 | 10 | 9 | 23 |
-| `planisferio-chih.html` | Chihuahua · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 4 |
-| `planisferio-chis.html` | Chiapas · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 6 |
-| `planisferio-coah.html` | Coahuila · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio-col.html` | Colima · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio-dgo.html` | Durango · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio-gro.html` | Guerrero · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 14 |
-| `planisferio-gto.html` | Guanajuato · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio-hgo.html` | Hidalgo · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio-jal.html` | Jalisco · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 16 |
-| `planisferio-mex.html` | Estado de México · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 4 |
-| `planisferio-mich.html` | Michoacán · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 5 |
-| `planisferio-mor.html` | Morelos · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio-nay.html` | Nayarit · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio-nl.html` | Nuevo León · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 8 |
-| `planisferio-oax.html` | Oaxaca · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 28 |
-| `planisferio-pue.html` | Puebla · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 19 |
-| `planisferio-qro.html` | Querétaro · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio-qroo.html` | Quintana Roo · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio-sin.html` | Sinaloa · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 5 |
-| `planisferio-slp.html` | San Luis Potosí · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 4 |
-| `planisferio-son.html` | Sonora · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio-tab.html` | Tabasco · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio-tam.html` | Tamaulipas · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 4 |
-| `planisferio-tlax.html` | Tlaxcala · Auditavisión | apartados.py | 67 | 0 | 11 | 16 | 3 |
-| `planisferio-ver.html` | Veracruz · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 5 |
-| `planisferio-yuc.html` | Yucatán · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio-zac.html` | Zacatecas · Auditavisión | apartados.py | 67 | 0 | 15 | 18 | 3 |
-| `planisferio.html` | Planisferio · Auditavisión | apartados.py | 76 | 0 | 6 | 7 | 0 |
+| `planisferio-ags.html` | Aguascalientes · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio-bc.html` | Baja California · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio-bcs.html` | Baja California Sur · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio-cam.html` | Campeche · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio-cdmx.html` | Ciudad de México · Auditavisión | apartados.py | 66 | 0 | 12 | 11 | 25 |
+| `planisferio-chih.html` | Chihuahua · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 5 |
+| `planisferio-chis.html` | Chiapas · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 7 |
+| `planisferio-coah.html` | Coahuila · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio-col.html` | Colima · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio-dgo.html` | Durango · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio-gro.html` | Guerrero · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 15 |
+| `planisferio-gto.html` | Guanajuato · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio-hgo.html` | Hidalgo · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio-jal.html` | Jalisco · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 17 |
+| `planisferio-mex.html` | Estado de México · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 5 |
+| `planisferio-mich.html` | Michoacán · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 6 |
+| `planisferio-mor.html` | Morelos · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio-nay.html` | Nayarit · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio-nl.html` | Nuevo León · Auditavisión | apartados.py | 73 | 0 | 22 | 21 | 9 |
+| `planisferio-oax.html` | Oaxaca · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 29 |
+| `planisferio-pue.html` | Puebla · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 20 |
+| `planisferio-qro.html` | Querétaro · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio-qroo.html` | Quintana Roo · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio-sin.html` | Sinaloa · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 6 |
+| `planisferio-slp.html` | San Luis Potosí · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 5 |
+| `planisferio-son.html` | Sonora · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio-tab.html` | Tabasco · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio-tam.html` | Tamaulipas · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 5 |
+| `planisferio-tlax.html` | Tlaxcala · Auditavisión | apartados.py | 73 | 0 | 19 | 19 | 4 |
+| `planisferio-ver.html` | Veracruz · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 6 |
+| `planisferio-yuc.html` | Yucatán · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio-zac.html` | Zacatecas · Auditavisión | apartados.py | 72 | 0 | 18 | 21 | 4 |
+| `planisferio.html` | Planisferio · Auditavisión | apartados.py | 75 | 0 | 6 | 10 | 0 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
@@ -398,7 +398,7 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-114 fichas, cada una con su porqué, su responsable y su enlace oficial.
+113 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 

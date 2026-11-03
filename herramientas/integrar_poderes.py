@@ -310,8 +310,10 @@ def construir():
             'senadoCapitulos2024': senado_cap,
             'congresos2024': congresos,
             'asfCongresos2024': asf_congresos,
-            'pendientes': ['Remuneraciones individuales de los 32 congresos locales',
-                           'Número de legisladores de cada congreso con su fuente, para el costo por legislador'],
+            # El número de legisladores de cada congreso ya tiene fuente
+            # (CNPLE 2025, tabla 8, en asistente_legislativo.CONGRESOS) desde
+            # el 03-11-2026: el gasto por curul se dice como derivado.
+            'pendientes': ['Remuneraciones individuales de los 32 congresos locales'],
         },
     }
 

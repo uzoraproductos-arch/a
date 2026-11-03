@@ -23,6 +23,7 @@
       if (u === 'pesos') return '$' + n(v);
       if (u === 'pesos2') return '$' + n(v, 2);
       if (u === 'pct') return n(v, 1) + ' %';
+      if (u === 'pct2') return n(v, 2) + ' %';
       if (u === 'ent') return n(v);
       if (u === 'gente') return n(v) + ' personas';
       if (u === 'pib') return n(v, 1) + ' % del PIB';
@@ -160,6 +161,11 @@
 
     /* ---------- Qué se pregunta ---------- */
     var MET_EDO = [
+      /* Los congresos locales (CNPLE 2025): van primero, porque «cuánto gasta el congreso» no es lo que recibe el estado. */
+      ['congp', /(tope|limite|0 70|cero punto setenta).*(congres|legislatura)|(congres|legislatura).*(tope|limite|0 70|cero punto setenta)/],
+      ['congx', /(congres|legislatura|diputad[oa]s? local|legislador(es)? local).*(por (cada )?(curul|diputad|legislador)|cada (curul|diputad|legislador))|(cuesta|cuestan|costo|gasta|gastan) (cada|por) (curul|diputad|legislador)[a-z]* local/],
+      ['congn', /(cuant[oa]s|numero de|integrantes) .*(diputad[oa]s? locales|legisladores locales)|(congres|legislatura).*(cuant[oa]s (diputad|legislador|integrantes)|integrantes|integra|tamano)/],
+      ['cong', /(congres|legislatura|poder legislativo).*\b(gasta|gastan|gasto|gastaron|cuesta|cuestan|costo|ejercio|ejercieron|presupuesto)\b|\b(gasta|gastan|gasto|gastaron|cuesta|cuestan|costo|ejercio|ejercieron)\b.*(congres|legislatura)/],
       ['radar', /de cada (100|cien)|radar|bandera roja|proporcion a lo auditado/],
       ['sem', /semaforo|alerta/],
       ['sd', /servicio de (la )?deuda|pagar (su |sus |la )?deudas?\b|pagos? de (su |la )?deuda/],
@@ -293,6 +299,14 @@
           '<p class="pa-ojo">Ojo: un gobierno estatal hace obra por dos vías. ' + (k === 'inv' ? 'Además de la suya, les pasó <b>' + fmt(e.invt, 'mdp') + '</b> a sus organismos de obra' : 'Además, hizo <b>' + fmt(e.inv, 'mdp') + '</b> de obra directa') +
           (veces > 1 ? ', ' + n(veces, 1) + ' veces su obra directa' : '') + '. Las dos no se suman: con lo que reciben, esos organismos también pagan su nómina y su operación.</p>';
         fu.push(fuenteDe(k === 'inv' ? 'invt' : 'inv', e), { que: 'De cada $100 de su egreso', e: 'derivado', op: 'inversión pública ÷ total de egresos de 2024 (' + fmt(e.egr, 'mdp') + ') × 100' }, LUGAR);
+      } else if (k === 'cong' || k === 'congx' || k === 'congp' || k === 'congn') {
+        h = '<p>En 2024, el Congreso de <b>' + esc(e.n) + '</b> gastó <b>' + fmt(e.cong, 'mdp') + '</b>, según lo que reportó al censo de los congresos estatales del INEGI.' + lugarTxt('cong', e, 'entre los congresos que más gastaron') +
+          ' Lo integran <b>' + n(e.congn) + ' personas legisladoras</b>, así que cuesta <b>' + fmt(e.congx, 'mdp') + ' por curul</b>.' + lugarTxt('congx', e, 'entre los que más cuestan por curul') + '</p>' +
+          (e.congp != null ? '<p>Ese gasto equivale al <b>' + fmt(e.congp, 'pct2') + '</b> del egreso total del gobierno del estado en 2024' + (e.congp > M.congp.tope ? ': arriba' : ': debajo') + ' del tope del <b>0.70 %</b> que la Constitución les pone desde abril de 2026 (art. 116, fr. II).</p>' : '') +
+          '<p class="pa-ojo">Ojo: el gasto por curul no es lo que gana cada quien, es lo que cuesta la institución entera por cada lugar del pleno. Y el tope ' + (e.congp != null ? 'no se le puede reclamar a 2024' : 'se mide contra el presupuesto de egresos del estado') + ': es de 2026, se mide contra el presupuesto de egresos que aprueba el estado (no contra lo que registró el INEGI) y la reducción surte efecto al iniciar la legislatura siguiente (transitorio quinto).</p>';
+        fu = [fuenteDe('cong', e), fuenteDe('congn', e), fuenteDe('congx', e)];
+        if (e.congp != null) fu.push(fuenteDe('congp', e));
+        fu.push(LUGAR);
       } else if (k === 'pob') {
         h = '<p><b>' + esc(e.n) + '</b> tiene ' + V + ' a mitad de 2026, según el CONAPO.' + lugarTxt('pob', e, 'de mayor a menor') + '</p>';
         fu.push(LUGAR);
@@ -313,7 +327,8 @@
     var RK = { deuda: 'deuda', ild: 'deuda frente a sus ingresos de libre disposición', sd: 'pago de deuda frente a sus ingresos de libre disposición', ocp: 'deudas de corto plazo frente a sus ingresos', asf: 'dinero por aclarar ante la ASF', aud: 'auditorías de la ASF',
       radar: 'dinero por aclarar de cada $100 revisados', gasto: 'dinero federal en 2026 (Ramos 28 y 33)', r28: 'participaciones', r33: 'aportaciones',
       pc: 'dinero federal por habitante', dep: 'dependencia de la Federación', propia: 'recaudación propia', pob: 'población',
-      inv: 'obra directa del gobierno del estado (2024)', invt: 'dinero a sus organismos de obra (2024)' };
+      inv: 'obra directa del gobierno del estado (2024)', invt: 'dinero a sus organismos de obra (2024)',
+      cong: 'gasto de su congreso (2024)', congx: 'gasto de su congreso por curul (2024)', congp: 'gasto de su congreso frente al egreso del estado (2024)', congn: 'personas legisladoras en su congreso' };
     var RKM = { ing: 'ingresos', part: 'participaciones', aport: 'aportaciones', fortamun: 'FORTAMUN', fismdf: 'FAIS municipal', predial: 'cobro de predial',
       propios: 'ingresos propios', egr: 'egresos', dep: 'dependencia de la Federación', inv: 'inversión pública (obra y proyectos productivos)' };
     function ranking(k, dir, cuantos, porHab) {
@@ -368,6 +383,39 @@
       var tot = l.reduce(function (s, x) { return s + x[k]; }, 0);
       return { html: '<p>Entre los ' + l.length + ' estados, ' + esc(m.n) + ' suma <b>' + fmt(tot, m.u) + '</b>.</p>', tit: 'Total: ' + m.n,
         fu: [fuenteDe(k), { que: 'Suma', e: 'derivado', op: 'suma de los ' + l.length + ' estados con cifra' }], ci: [{ v: fmt(tot, m.u), etq: m.n + ', suma de los estados', e: 'derivado' }] };
+    }
+    /* Los 32 congresos locales (03-11-2026, dimensión legislativa del Planisferio): lo que gastó cada uno, por curul y frente al tope del 0.70 %.
+       Va antes que las Cámaras y los renglones del gasto: «congreso local» no es el Poder Legislativo federal. Cuántos lo integran lo sigue contestando legResp(). */
+    var LOCAL = /congresos? (local|locales|estatal|estatales|de los estados)|diputad[oa]s? locales?|legisladores? locales?|legislaturas? (local|locales|estatal|estatales)/;
+    function congLocal(t, es, dir, cuantos) {
+      var k = metrica(t, MET_EDO);
+      if (!/^cong/.test(k) || k === 'congn' || /union|federal|camara|senad|san lazaro/.test(t) || GANA.test(t)) return null;
+      if (es.length > 1 || (!es.length && !LOCAL.test(t) && !/(congresos|legislaturas)\b/.test(t) && k !== 'congp')) return null;
+      var r;
+      if (es.length === 1) {
+        var e = es[0];
+        r = edoMet(e, k, false);
+        r.ir = ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html#legislativa', 'su congreso en el Planisferio'];
+        r.sug = ['¿Qué congreso local gasta más por curul?', '¿Qué congresos pasan del tope del 0.70 %?', '¿Cuánto debe ' + e.n + '?'];
+      } else {
+        if (/barat|economic/.test(t)) dir = 'min';
+        r = k === 'congp' && !RANK.test(t) ? sobreTope() : (TOTAL.test(t) || /\btodos\b/.test(t)) && M[k].suma && !RANK.test(t) ? total(k) : ranking(k, dir, cuantos, false);
+        r.ir = ['planisferio.html?d=legislativa', 'los 32 congresos en el Planisferio'];
+      }
+      r.met = k;
+      return r;
+    }
+    /* Los congresos que pasarían del tope del 0.70 % si se midiera su gasto de 2024: referencia, no incumplimiento. */
+    function sobreTope() {
+      var m = M.congp, l = EDO.filter(function (x) { return x.congp != null; }), arr = l.filter(function (x) { return x.congp > m.tope; }).sort(function (a, b) { return b.congp - a.congp; });
+      var sin = EDO.filter(function (x) { return x.congp == null; });
+      return { html: '<p>Si el gasto de 2024 de cada congreso local se midiera contra el tope del <b>0.70 %</b> del presupuesto de egresos de su estado (Constitución, art. 116, fr. II, desde el 23 de abril de 2026), <b>' + arr.length + ' de los ' + l.length + '</b> quedarían arriba:</p><ol class="pa-lista">' +
+          arr.map(function (x) { return '<li><b>' + esc(x.n) + '</b>: ' + fmt(x.congp, 'pct2') + ' (' + fmt(x.cong, 'mdp') + ')</li>'; }).join('') + '</ol>' +
+          '<p class="pa-ojo">Ojo: no es un incumplimiento. El tope es de 2026 y el gasto, de 2024; se divide entre el egreso que registró el INEGI, no entre el presupuesto que aprobó cada estado, y la reducción surte efecto al iniciar la legislatura siguiente (transitorio quinto). ' +
+          'Al que ya está debajo, la reforma le prohíbe crecer en términos reales sobre 2026 (transitorio octavo).' + (sin.length ? ' ' + sin.map(function (x) { return esc(x.n); }).join(', ') + ' queda fuera: sin su egreso en la estadística estatal del INEGI no hay división ' + chip('pendiente', m.pend) + '.' : '') + '</p>',
+        tit: 'Los congresos locales frente al tope del 0.70 %', fu: [fuenteDe('congp'), fuenteDe('cong')],
+        ci: [{ v: arr.length + ' de ' + l.length, etq: 'congresos locales arriba del 0.70 % como referencia', e: 'derivado', op: m.op }],
+        sug: ['¿Qué congreso local gasta más por curul?', '¿Cuánto gasta el Congreso de Jalisco?', '¿Cuántos congresos locales hay?'] };
     }
     function parte(e, k) {
       var m = M[k], l = EDO.filter(function (x) { return x[k] != null; });
@@ -1551,6 +1599,8 @@
       var rj = judResp(t, es);
       if (rj) return fin(rj, { tipo: 'jud' });
       if (LEG && sigue && ctx.tipo === 'legcong' && es.length === 1 && !DINERO.test(t)) return fin(congresoLocal(es[0]), { tipo: 'legcong' });
+      var rcl = congLocal(t, es, dir, cuantos);
+      if (rcl) return fin(rcl, { tipo: 'edo', met: rcl.met, es: es });
       var rl = legResp(t, es, dir, cuantos);
       if (rl) return fin(rl, { tipo: rl.tit && rl.tit.indexOf('Congreso de ') === 0 ? 'legcong' : 'leg' });
 
@@ -1605,7 +1655,7 @@
       }
 
       /* Una dependencia federal: lo que le aprobaron. */
-      var nf0 = numFila(t), dp = !es.length && !define0(t) && !(nf0 && !nf0.tot && !nf0.sut && nf0.g !== 'ramo26' && nf0.g !== 'cp25') && /presupuesto|dieron|dan|aprobaron|tiene|recibe|gasta|le toca|cuanto|lana|dinero|varo/.test(t) ? dependencia(t) : null;
+      var nf0 = numFila(t), dp = !es.length && !define0(t) && !/congresos? (local|locales|estatal|estatales|de los estados)|por curul|diputad[oa]s? locales?|legisladores? locales?|tope del? 0 70/.test(t) && !(nf0 && !nf0.tot && !nf0.sut && nf0.g !== 'ramo26' && nf0.g !== 'cp25') && /presupuesto|dieron|dan|aprobaron|tiene|recibe|gasta|le toca|cuanto|lana|dinero|varo/.test(t) ? dependencia(t) : null;
       if (dp) return fin(depResp(dp), { tipo: 'dep' });
 
       /* El país: si no se habla de un estado ni de un sexenio. La deuda y los
@@ -1678,18 +1728,10 @@
       }
       if (define && !es.length) return null;
 
-      /* El congreso de un estado (INEGI, Censo de Poderes Legislativos). */
-      var CG = NU.congresos;
-      if (CG && es.length === 1 && /congreso|legislatura|diputados locales|diputadas locales|poder legislativo/.test(t) && !GANA.test(t)) {
-        var cgl = Object.keys(CG.v).sort(function (a, b) { return CG.v[b] - CG.v[a]; }), cgn = cgl.filter(function (x) { return plano(x) === plano(es[0].n) || (es[0].a === 'MEX' && /mexico/.test(plano(x)) && !/ciudad/.test(plano(x))); })[0];
-        if (cgn) return fin({ html: '<p>En ' + CG.y + ', el Congreso de <b>' + esc(es[0].n) + '</b> ejerció <b>' + mdp(CG.v[cgn]) + '</b>. Es el lugar <b>' + (cgl.indexOf(cgn) + 1) + ' de ' + cgl.length + '</b> entre los congresos estatales.</p>',
-          fu: [{ que: 'Gasto ejercido del congreso estatal ' + CG.y, e: 'oficial', fu: CG.fu }, { que: 'Lugar', e: 'derivado', op: 'ordenamos los congresos de mayor a menor gasto' }],
-          ci: [{ v: mdp(CG.v[cgn]), etq: 'Congreso de ' + es[0].n + ' (' + CG.y + ')', e: 'oficial' }], tit: 'Congreso de ' + es[0].n + ': lo que gastó en ' + CG.y,
-          ir: ['numeros-lo-que-cuestan-los-poderes.html', 'Lo que cuestan el Congreso y la Judicatura'], sug: ['¿Cuánto cuesta la Cámara de Diputados?', '¿Cuánto gana un diputado?'] }, { tipo: '' });
-      }
-
       /* Los estados. */
       var k = metrica(t, MET_EDO);
+      /* Los congresos locales ya los contestó congLocal(). */
+      if (/^cong/.test(k)) k = '';
       var sinTema = !k, sigueY = /^\s*(y|e|ahora|tambien)\b/.test(t);
       if (!k && ctx.tipo === 'edo' && ctx.met && (sigueY || es.length)) k = ctx.met;
       if (!k && porHab) k = 'pc';

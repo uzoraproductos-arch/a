@@ -119,6 +119,16 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   los mismos municipios con cuenta que el padrón, la generación se detiene.
   El «egreso total» del INEGI incluye lo que quedó en caja: se dice «de cada
   $100 de su egreso», no «de lo que gastó».
+- **La legislativa, cuarta dimensión pintada** (03-11-2026). Los 32 congresos
+  locales: lo que gastó cada uno en 2024 (CNPLE 2025), cuántos lo integran, el
+  gasto por curul y el gasto frente al egreso del estado. Todo sale de
+  `congresos_estados()` de `asistente_legislativo.py`, que leen el Planisferio,
+  la Enciclopedia y el chat. **El tope del 0.70 % (art. 116, fr. II) se dice como
+  referencia, nunca como incumplimiento** mientras se compare gasto de 2024 contra
+  el egreso del INEGI: la prueba es el presupuesto aprobado del congreso contra el
+  presupuesto de egresos del estado. El gasto por curul no es lo que gana nadie.
+  Se abre con `planisferio.html?d=legislativa` y cada portal la trae en
+  `#legislativa`; en el chat, `congLocal()` va antes que las Cámaras federales.
 - **Las leyes del dinero en los tres niveles** (03-11-2026,
   `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
   cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y

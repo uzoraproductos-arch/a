@@ -1660,6 +1660,40 @@
    "dice": [
     "inversión pública"
    ]
+  },
+  {
+   "q": "¿Cuánto gasta el Congreso de Jalisco?",
+   "ir": "planisferio-jal.html#legislativa",
+   "dice": [
+    "$922.2 millones",
+    "por curul"
+   ]
+  },
+  {
+   "q": "¿Qué congreso local gasta más por curul?",
+   "ir": "planisferio.html?d=legislativa",
+   "dice": [
+    "Michoacán"
+   ]
+  },
+  {
+   "q": "¿Qué congresos rebasan el tope del 0.70 %?",
+   "ir": "planisferio.html?d=legislativa",
+   "dice": [
+    "no es un incumplimiento",
+    "transitorio octavo"
+   ]
+  },
+  {
+   "q": "¿Cuántos diputados tiene el congreso de Jalisco?",
+   "ir": "datos-legislativo-estados.html#leg-locales",
+   "dice": [
+    "38 personas legisladoras"
+   ]
+  },
+  {
+   "q": "¿Cuánto cuesta el Congreso de la Unión?",
+   "ir": "herramienta-inspector-entes.html#ente=federal:legislativo"
   }
  ]
 }

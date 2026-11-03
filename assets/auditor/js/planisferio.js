@@ -55,7 +55,9 @@
       l = l || lente;
       if (v == null) return '—';
       if (l.fmt === 'pct') return num(v, 1) + '%';
+      if (l.fmt === 'pct2') return num(v, 2) + '%';
       if (l.fmt === 'pesos') return '$' + num(v, 0);
+      if (l.fmt === 'n') return num(v, 0);
       return mdp(v);
     }
     D.e.forEach(function (e) { porA[e.a] = e; });
@@ -125,10 +127,24 @@
         '<a class="pl-ficha-ir" href="' + esc(e.p) + '#inversion">Ver su inversión en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
+    /* Su congreso: lo que gastó, cuántos lo integran, por curul y la
+       referencia contra el tope del 0.70 % (art. 116, fr. II). */
+    function legislativa(e, fijo) {
+      var d = function (id, nom) {
+        var l = lenteDe(id);
+        return '<dt>' + nom + '</dt><dd>' + (e[id] == null ? 'Sin cifra ' + chip('pendiente', l.falta && l.falta.pend) : '<b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est)) + '</dd>';
+      };
+      ficha.innerHTML = '<h3>Congreso de ' + esc(e.n) + '</h3><p class="pl-ficha-sub">Su gasto de 2024 · censo de los congresos del INEGI</p>' +
+        '<dl class="pl-ficha-dl">' + d('leg', 'Lo que gastó') + d('legn', 'Personas legisladoras') + d('legx', 'Por curul') + d('legp', 'Frente al tope del 0.70 %') + '</dl>' +
+        (e.legp != null && e.legp > 0.70 ? '<p class="pl-ficha-mun">Arriba del 0.70 % como referencia: el tope es de 2026 y su gasto, de 2024; no es un incumplimiento.</p>' : '') +
+        '<a class="pl-ficha-ir" href="' + esc(e.p) + '#legislativa">Ver su congreso en su portal ➔</a>' +
+        (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
+    }
     function muestra(e, fijo) {
       if (!e) return;
       if (dimP === 'deuda') { deuda(e, fijo); return; }
       if (dimP === 'inversion') { inversion(e, fijo); return; }
+      if (dimP === 'legislativa') { legislativa(e, fijo); return; }
       ficha.innerHTML = '<h3>' + esc(e.n) + '</h3><p class="pl-ficha-sub">Capital: ' + esc(e.cap) + ' · ' + num(e.pob, 0) + ' habitantes</p>' +
         '<dl class="pl-ficha-dl">' +
         fila('Le baja de la Federación', e.fed, 'derivado', 2026) +
@@ -142,7 +158,7 @@
     function elige(a, abrir) {
       var e = porA[a];
       if (!e) return;
-      if (abrir && sel && sel.a === a) { location.href = e.p + (dimP === 'deuda' ? '#deuda' : dimP === 'inversion' ? '#inversion' : ''); return; }
+      if (abrir && sel && sel.a === a) { location.href = e.p + (dimP === 'financiera' ? '' : '#' + dimP); return; }
       sel = e;
       pinta();
       muestra(e, true);
@@ -199,7 +215,7 @@
     }
     var m = /[?&]e=([^&#]+)/.exec(location.search), pedida = null;
     try { pedida = m ? decodeURIComponent(m[1]) : null; } catch (err) { pedida = null; }
-    /* ?d=deuda o ?d=inversion (desde el Auditor): abre el mapa en esa dimensión. */
+    /* ?d=deuda, ?d=inversion o ?d=legislativa (desde el Auditor): abre el mapa en esa dimensión. */
     var md = /[?&]d=([a-z]+)/.exec(location.search);
     if (md && D.dims[md[1]]) eligeDim(md[1]); else pinta();
     /* ?e=JAL&m=1 (desde el Auditor): si la entidad ya tiene el mapa de sus
