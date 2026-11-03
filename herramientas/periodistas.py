@@ -197,7 +197,7 @@ def pagina():
         'archivo': ARCHIVO,
         'menu': TITULO,
         'menu_archivo': 'noticias-relevantes.html',
-        'padre': ('noticias-relevantes.html', 'Noticias'),
+        'padre': ('noticias-relevantes.html', 'Noticiero'),
         'icono': '🛡️',
         'titulo': TITULO,
         'lema': 'Lo que el Estado registra de las agresiones a la prensa',

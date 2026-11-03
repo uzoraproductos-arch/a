@@ -83,6 +83,11 @@ RECURSOS = [
     ('circuito', '🔄', 'Ver su circuito', 'El circuito del dinero de cada estado', 'numeros-las-32-entidades.html#circuito',
      'numeros-las-32-entidades.html?e=%s#circuito', 'mapa',
      'estado estados entidad estatal recauda recaudacion propia convenios ramo 25 circuito'),
+    # El mapa de los municipios del Planisferio (03-11-2026): con un estado
+    # que ya tiene sus límites del INEGI, lleva directo a su portal (m=1).
+    ('mapa-mun', '🗺️', 'Ver el mapa de sus municipios', 'El mapa de los municipios de tu estado', 'planisferio.html#mapa',
+     'planisferio.html?e=%s&m=1', 'mapa',
+     'mapa municipios municipio municipal alcaldias alcaldia limites territorio'),
     ('padron', '🏘️', 'Ver sus municipios', 'Los municipios, uno por uno', 'numeros-los-municipios.html#padron',
      'numeros-los-municipios.html?e=%s#padron', 'mapa',
      'municipio municipios municipal alcaldia ayuntamiento predial fortamun fismdf padron'),
@@ -135,6 +140,11 @@ RECURSOS = [
     ('obras-huella', '🌳', 'Ver huella', 'La huella ambiental de las megaobras', 'datos-ambiente-megaobras.html',
      'datos-ambiente-megaobras.html?e=%s#abMapaObras', 'tablero',
      'obra obras megaobra megaobras tren maya dos bocas ambiental ambiente huella impacto selva deforestacion manifestacion'),
+    # El Planisferio (pedido del autor, 02-11-2026): la segunda pestaña, México
+    # en un mapa por dimensiones; con un estado, abre el mapa con él elegido.
+    ('planisferio', '🗺️', 'Ver en el Planisferio', 'El Planisferio: México en un mapa', 'planisferio.html',
+     'planisferio.html?e=%s', 'mapa',
+     'planisferio mapa mexico republica tres presupuestos pisos federal estatal municipal municipios dimension dimensiones portal territorio'),
 ]
 
 

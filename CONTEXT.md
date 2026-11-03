@@ -7202,3 +7202,73 @@ promedio y de cierre. No convertir ningún pendiente en oficial sin ese cotejo.
 - **El código maestro de la administración (pedido del autor, 30-10-2026: «que nomás a través del código que yo ingreso se reconozca que yo soy el administrador» y «únicamente va a estar cambiando si yo te lo digo»).** Migración `20261030000009_codigo_maestro.sql`: tabla `admin_codigo` (un solo renglón con la huella bcrypt, a quién pertenece y cuándo cambió) y `admin_entradas` (fecha y hora de cada entrada, sin IP; 12 meses), ninguna legible por el público ni por cuentas comunes. `fijar_codigo_admin` (solo administración: 8 números, no uno trivial ni uno que ya sea código común), `codigo_admin_info` (si está puesto, cuándo cambió y las últimas 20 entradas) y `revisar_codigo_admin` (solo llave de servicio). La función `codigo`, al canjear, lo revisa primero; si coincide, pide a Supabase un enlace mágico de un solo uso para el correo de la administración y devuelve solo su `token_hash`, que la entrada cambia por la sesión (`/auth/v1/verify`) y lleva al panel (`?maestro=1`), que además prepara el pase del navegador con el código de la semana. El panel trae «Tu código maestro» para ponerlo y cambiarlo (dos casillas ocultas). **Decisión:** el código no se escribe en el repositorio, que es público, ni se pasa por el chat: lo pone el autor desde su panel. **Punto ciego:** 8 números se adivinan más fácil que un correo; por eso el límite diario de 40 intentos por IP y la lista de entradas para notar una ajena. Una fecha (nacimiento, aniversario) es lo primero que se prueba: se recomienda no usarla. 19 pruebas nuevas en `permisos.sql`. **Corrección (30-10-2026, migración `20261030000011`):** el autor ya tenía su número dado de alta como código propio común; la entrada lo canjeaba como común (sin reconocerlo como administración) y `fijar_codigo_admin` lo rechazaba. Ahora el maestro se queda con ese número y el código común se archiva (sin revocarlo, con la nota «ahora es el código maestro»).
 - **Códigos con letras (pedido del autor, 30-10-2026: «sí va a ser necesario meterle también letras… aquellos que únicamente sean números es porque yo los otorgué… o viceversa, puras letras»).** Migración `20261030000010_codigos_letras.sql`: `generar_codigos` (y con él el código de la semana) usa 31 caracteres sin los que se confunden (0, 1, O, I, L) y descarta los que salgan de puros números o puras letras; `crear_codigo`, el canje y el código maestro aceptan cualquier combinación de 0-9 y A-Z, sin importar mayúsculas. **Punto ciego:** los códigos de puros números que se generaron al azar antes de este cambio (del 30-10-2026) siguen sirviendo y no son «del autor»; si se quiere la regla sin excepción, se revocan o archivan desde el panel.
 - **Banxico e INEGI llenan la base; el chat responde con la base (decisión del autor, 30-10-2026: «lo que necesitamos únicamente de INEGI y de Banxico es llenar nuestra base de datos para que nuestro chat responda a través de nuestra base de datos… si acaso no la tuviéramos… la consulta con internet»).** `herramientas/actualizar_peso.py` trae del SIE las mismas series que ya están en `finanzas_sexenales.peso` (SP1, SF329, SF57923, y el FIX SF43718 y el euro SF46410 del día). **Cotejo:** cada mes que ya estaba tiene que venir igual de Banxico; si uno cambió o una serie llega con huecos, se detiene sin escribir. Solo agrega meses nuevos, actualiza el dato del día, los textos de sus fuentes (hasta qué mes) y la nota del Radar («el INPC de… »). El flujo `indicadores.yml` lo corre cada viernes a las 11:23 de la Ciudad de México y a mano, sube el sello (que regenera el chat) y empuja a la rama. Para lo que la base no tiene, `fueraHtml()` de `asistente.js` añade a «No tengo una ficha verificada» la pregunta ya buscada en Banxico, INEGI, Hacienda, gob.mx, el DOF, la ASF y las noticias (`WEB_DATO`), rotulada «sin verificar»: el chat no afirma lo que hay ahí. La función `portales` (consulta en vivo) queda encendida pero el chat no la usa. **Puntos ciegos:** el horario semanal solo corre desde `main` (hasta que el autor la actualice, corre a mano o al cambiar el programa); del INEGI aún no se eligieron las series que llenan la base; y el chat a veces contesta con «lo más cercano» en vez de decir que no sabe, y entonces no ofrece la búsqueda de fuera.
+
+## Entrega — 02-11-2026: el Planisferio y el menú de cinco pestañas (sello 20261102n)
+
+Pedido del autor: «La pestaña de enciclopedia la vamos a convertir en la cuarta tarjeta que se encuentra en la pestaña de comunidad, y justo después de la pestaña de auditor virtual, la cual cambiará el nombre únicamente a auditor, vamos a crear esta segunda pestaña que se va a llamar planisferio… En esta primera parte el mapa únicamente mostrará lo relativo a los tres presupuestos y sus integraciones… cambia de nombre la pestaña noticias a noticiero; asimismo se puede ir integrando la pestaña de servicios».
+
+- **Menú:** Auditor · Planisferio · Comunidad (Ágora, Garantías, Donaciones y Enciclopedia) · Noticiero · Servicios (AGENTS.md §0 quater).
+- **Antes de construir** se verificó la rama: los siete commits del 02-11-2026 (mapa del dinero con «No cuadra» y obras, Servicios por sector, tandas 1 y 2 de pendientes propios: de 124 a 111) quedaron como base, sin tocarlos.
+- **Planisferio** (`planisferio.html` y 32 portales): mapa SVG de las 32 entidades (el mismo de `territorio_modulos.mapa_svg`), tres lentes por piso de gobierno, ficha al tocar y portal al volver a tocar; contadores de los tres presupuestos (del Estado, nacional y social), del gasto federalizado y de la bolsa municipal; en cada portal, la tabla de sus municipios del padrón INEGI 2024 con buscador y orden, y las puertas a deuda, inversión, ambiente, congreso local, Auditor de entes y chat.
+- **Lectura de «los tres presupuestos»:** en el mapa son los tres pisos de la hacienda de cada entidad (federal, estatal y municipal); en los contadores, los tres presupuestos de la doctrina que ya usa Números (del Estado, nacional y social). Si el autor quería solo una de las dos, se ajusta en `planisferio.py`.
+
+### Pendientes del Planisferio
+- **El mapa de los municipios:** hecho para **las 32 entidades** el 03-11-2026 (abajo). Queda actualizarlo cuando el INEGI publique un Marco Geoestadístico nuevo (se vuelve a correr el script con el archivo nuevo; si cambian los municipios, la generación se detiene hasta que el padrón los traiga).
+- **Las otras cinco dimensiones** (deuda, inversión, ambiental, legislativa, judicial) todavía no se pintan en el mapa: hoy llevan a su página de la Enciclopedia.
+- **Ciudad de México:** sin recaudación propia cotejada (`entidades-cdmx`) y sin cuenta municipal de sus 16 alcaldías (`municipios-sin-cuenta`), como en el resto de la plataforma.
+
+## Entrega — 03-11-2026: el mapa de los municipios de Jalisco (sello 20261103a)
+
+Pedido del autor: «sigue con el mapa de los municipios de Jalisco».
+
+- **Fuente:** INEGI, Marco Geoestadístico 2024, versión por área geoestadística estatal (`794551132173/14_jalisco.zip`, 149.8 MB, SHA-256 `7eeaa78c0b591bdb0338a5d8cfb842a78e342272378ddd335a7b8011ce88d81c`; metadato «Modified: 2024-08-31»). Capa `14mun` (125 áreas geoestadísticas municipales), en la cónica conforme de Lambert del INEGI (EPSG:6372). Licencia: Términos de Libre Uso de la Información del INEGI.
+- **Integración:** `herramientas/integrar_mg_municipios.py` (Douglas-Peucker a 400 m, islotes de menos de 0.5 km² fuera) → `docs/geo/mg2024-mun-14.json`. El archivo de 150 MB no se sube al repositorio: queda su huella.
+- **Página:** sección «El mapa de sus 125 municipios» en `planisferio-jal.html`, con las cifras del padrón INEGI 2024 que ya tenía la plataforma (ninguna cifra nueva). La dependencia es `derivado`, con su operación.
+- **Aviso del INEGI, repetido en la página:** los límites son geoestadísticos y no deben tomarse como la fuente oficial de la división político-administrativa.
+- **Pendiente:** las otras 31 entidades (misma receta: bajar `<cve>_<nombre>.zip` y correr el script). La Ciudad de México tendrá mapa de sus 16 demarcaciones, pero en gris: no rinden cuenta municipal.
+
+## Entrega — 03-11-2026: el mapa de los municipios de las 32 entidades (sellos 20261103b y 20261103c)
+
+Pedido del autor: «ok bueno continua con el desarrollo» y «avísame cuando estén las 32».
+
+- **Fuente:** los 32 archivos del Marco Geoestadístico 2024 del INEGI, versión por área geoestadística estatal (`.../marcogeo/794551132173/<cve>_<nombre>.zip`), bajados uno por uno el 03-11-2026 e integrados con `herramientas/integrar_mg_municipios.py`. Los zip (de 8 MB a cientos de MB) no se suben: queda su huella. Los 32 JSON suman 1.8 MB.
+- **Cambios al integrador:** la tolerancia de Douglas-Peucker es el lado mayor de la entidad ÷ 1000, entre 80 m y 400 m (los islotes se quitan por debajo de 3 × tolerancia², con tope de 0.5 km²), y la fecha de integración es la del día en que corre. Jalisco no cambia (400 m).
+- **Validación:** los 2,478 trazos coinciden clave por clave con el padrón (2,479 renglones: la clave 996 «No especificado» del Estado de México no es un territorio y se omite del mapa y de la validación).
+- **Ciudad de México:** «El mapa de sus 16 alcaldías», sin lentes ni color, con el aviso de que no rinden cuenta municipal al INEGI (`municipios-sin-cuenta`).
+- **Pantalla:** el borde de cada municipio mide lo mismo en pantalla sin importar la escala de la entidad (`vector-effect: non-scaling-stroke`). Oaxaca, con 570 municipios, pesa 496 KB de página.
+- **Chat:** `mapa-mun` reconoce «alcaldías»; dos preguntas nuevas (314).
+
+| Clave | Archivo del INEGI | Municipios | Simplificación | SHA-256 del zip | JSON |
+|---|---|---|---|---|---|
+| 01 | `01_aguascalientes.zip` | 11 | 107 m | `4cf17667a660…` | 16 KB |
+| 02 | `02_bajacalifornia.zip` | 7 | 400 m | `2a3e220e2fe0…` | 14 KB |
+| 03 | `03_bajacaliforniasur.zip` | 5 | 400 m | `17e1b1b9dd7f…` | 21 KB |
+| 04 | `04_campeche.zip` | 13 | 357 m | `2dd1894f8045…` | 16 KB |
+| 05 | `05_coahuiladezaragoza.zip` | 38 | 400 m | `b1d9370443b6…` | 32 KB |
+| 06 | `06_colima.zip` | 10 | 400 m | `69724d75b3a9…` | 9 KB |
+| 07 | `07_chiapas.zip` | 124 | 400 m | `297145948b4f…` | 94 KB |
+| 08 | `08_chihuahua.zip` | 67 | 400 m | `48fa382f41bf…` | 92 KB |
+| 09 | `09_ciudaddemexico.zip` | 16 | 80 m | `c1fa076237b9…` | 10 KB |
+| 10 | `10_durango.zip` | 39 | 400 m | `4437e08aedd4…` | 55 KB |
+| 11 | `11_guanajuato.zip` | 46 | 251 m | `b0cc5ac58790…` | 54 KB |
+| 12 | `12_guerrero.zip` | 85 | 400 m | `25b4c964b6ba…` | 73 KB |
+| 13 | `13_hidalgo.zip` | 84 | 199 m | `274243b63181…` | 83 KB |
+| 14 | `14_jalisco.zip` | 125 | 400 m | `7eeaa78c0b59…` | 110 KB |
+| 15 | `15_mexico.zip` | 125 | 212 m | `11d7f9bd0c6d…` | 83 KB |
+| 16 | `16_michoacandeocampo.zip` | 113 | 385 m | `6eaf00be0745…` | 76 KB |
+| 17 | `17_morelos.zip` | 36 | 90 m | `064e29f82698…` | 36 KB |
+| 18 | `18_nayarit.zip` | 20 | 305 m | `8b18b98ca095…` | 29 KB |
+| 19 | `19_nuevoleon.zip` | 51 | 400 m | `bbedbf381f7e…` | 35 KB |
+| 20 | `20_oaxaca.zip` | 570 | 400 m | `99098b1fc6e8…` | 199 KB |
+| 21 | `21_puebla.zip` | 217 | 330 m | `0a364c301320…` | 117 KB |
+| 22 | `22_queretaro.zip` | 18 | 184 m | `fa112f4c7304…` | 24 KB |
+| 23 | `23_quintanaroo.zip` | 11 | 400 m | `556999f1c0ff…` | 12 KB |
+| 24 | `24_sanluispotosi.zip` | 59 | 400 m | `8cb4ee77031e…` | 50 KB |
+| 25 | `25_sinaloa.zip` | 20 | 400 m | `bb015ec2265f…` | 33 KB |
+| 26 | `26_sonora.zip` | 72 | 400 m | `09ef9a6d88c9…` | 77 KB |
+| 27 | `27_tabasco.zip` | 17 | 339 m | `76da03048b7b…` | 26 KB |
+| 28 | `28_tamaulipas.zip` | 43 | 400 m | `9c795c050eda…` | 40 KB |
+| 29 | `29_tlaxcala.zip` | 60 | 114 m | `5491bcd9ca69…` | 35 KB |
+| 30 | `30_veracruzignaciodelallave.zip` | 212 | 400 m | `5b021b37aa47…` | 141 KB |
+| 31 | `31_yucatan.zip` | 106 | 400 m | `cb97e3fd052e…` | 77 KB |
+| 32 | `32_zacatecas.zip` | 58 | 400 m | `e9213f9df2ac…` | 51 KB |

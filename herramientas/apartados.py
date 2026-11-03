@@ -308,14 +308,25 @@ AUDITOR_VIRTUAL = 'herramienta-inspector-pregunta.html'
 NUMEROS_HERR = 'numeros-herramientas-del-auditor.html'
 HERR_SITIO = {'menu_archivo': 'sigue-el-dinero.html', 'padre': ('sigue-el-dinero.html', 'Números'),
               'padre2': (NUMEROS_HERR, 'Herramientas del Auditor')}
+# Las páginas de la Enciclopedia (Números, Datos y Aprende). Desde el
+# 02-11-2026 la Enciclopedia es la cuarta tarjeta de Comunidad (pedido del
+# autor), así que estas páginas marcan la pestaña Comunidad y sus migas
+# empiezan «Comunidad › Enciclopedia».
+ENCICLO_MARCAN = (ENCICLOPEDIA, 'sigue-el-dinero.html', 'descarga-los-datos.html', 'aprende.html')
+# El menú desde el 02-11-2026 (pedido del autor): «Auditor» (antes «Auditor
+# Virtual»), el Planisferio como segunda pestaña, Comunidad con la
+# Enciclopedia dentro, «Noticiero» (antes «Noticias») y Servicios. Ningún
+# archivo cambió de nombre.
+PLANISFERIO = 'planisferio.html'
 MENU = [
-    (AUDITOR_VIRTUAL, 'Auditor Virtual', ('herramientas.html',)),
-    (ENCICLOPEDIA, 'Enciclopedia', (ENCICLOPEDIA, 'sigue-el-dinero.html', 'descarga-los-datos.html', 'aprende.html')),
-    ('participa.html', 'Comunidad', ('participa.html',)),
-    # Cuarta pestaña (pedido del autor, 28-10-2026: «darle más protagonismo a
-    # las noticias relevantes… como una cuarta pestaña»). Antes colgaba de
-    # Aprende; su archivo no cambia de nombre.
-    ('noticias-relevantes.html', 'Noticias', ('noticias-relevantes.html',)),
+    (AUDITOR_VIRTUAL, 'Auditor', ('herramientas.html',)),
+    (PLANISFERIO, 'Planisferio', (PLANISFERIO,)),
+    ('participa.html', 'Comunidad', ('participa.html',) + ENCICLO_MARCAN),
+    # Pedido del autor, 28-10-2026: «darle más protagonismo a las noticias
+    # relevantes… como una cuarta pestaña». Desde el 02-11-2026 se llama
+    # «Noticiero»; su archivo no cambia de nombre.
+    ('noticias-relevantes.html', 'Noticiero', ('noticias-relevantes.html',)),
+    ('servicios.html', 'Servicios', ('servicios.html',)),
 ]
 
 # El índice de las cuatro herramientas. Desde el 29-10-2026 vive en
@@ -325,7 +336,7 @@ HERR_INDICE = {
     # Desde el 23-10-2026 la pestaña se llama «Auditor Virtual» (decisión
     # del autor); el archivo conserva su nombre para no romper enlaces.
     'menu': 'Herramientas',
-    'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+    'padre': (AUDITOR_VIRTUAL, 'Auditor'),
     'icono': '🧰',
     'titulo': 'Herramientas para seguir el dinero público',
     'lema': 'El gasto público, a la vista',
@@ -361,6 +372,9 @@ APARTADOS = [
         # (enciclopedia.html, retirada el 24-10-2026): aquí solo hay tres tarjetas.
         'archivo': ENCICLOPEDIA,
         'menu': 'Enciclopedia',
+        # Cuarta tarjeta de Comunidad desde el 02-11-2026 (pedido del autor).
+        'menu_archivo': 'participa.html',
+        'padre': ('participa.html', 'Comunidad'),
         'icono': '📚',
         'titulo': 'Enciclopedia',
         'lema': 'La obra de consulta del auditor',
@@ -687,9 +701,10 @@ APARTADOS = [
         'menu': 'Comunidad',
         'icono': '💬',
         'titulo': 'Comunidad',
-        'lema': 'Ágora cívica y canales oficiales',
+        'lema': 'Ágora cívica, canales oficiales y la Enciclopedia',
         'entrada': ('Contrasta posturas con fuentes, publica tu argumento y, si viste algo raro con el dinero público, '
-                    'llévalo al canal oficial que corresponde. Sin correos, teléfonos ni rastreo.'),
+                    'llévalo al canal oficial que corresponde. Aquí vive también la Enciclopedia, la obra de consulta de '
+                    'la plataforma. Sin correos, teléfonos ni rastreo.'),
         'pestanas': True,
         # «Servicios» paso al Modo Inspector (pedido del autor, 11-10-2026).
         'hash_a_pagina': {'agora': 'agora.html', 'garantias': 'garantias.html', 'servicios': 'servicios.html',
@@ -725,6 +740,14 @@ APARTADOS = [
                 'id': 'donaciones',
                 'pagina': 'donaciones.html',
                 'pestana': ('🐷', 'Donaciones', 'Ayuda a sostener la plataforma, a la vista de todos: abre su página'),
+            },
+            {
+                # Pedido del autor, 02-11-2026: la pestaña Enciclopedia se
+                # vuelve la cuarta tarjeta de Comunidad. Su página y las de
+                # Números, Datos y Aprende no cambian de nombre.
+                'id': 'enciclopedia',
+                'pagina': ENCICLOPEDIA,
+                'pestana': ('📚', 'Enciclopedia', 'Números, Datos y Aprende: la obra de consulta, con su fuente oficial: abre su página'),
             },
         ],
     },
@@ -1270,7 +1293,7 @@ def herramienta_dictamen(bloque):
     import asistente
     return {
         'archivo': asistente.DICTAMEN, 'menu': 'Dictamen cívico independiente', 'menu_archivo': 'herramientas.html',
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+        'padre': (AUDITOR_VIRTUAL, 'Auditor'),
         'icono': '🧾', 'titulo': 'Dictamen cívico independiente de Auditavisión',
         'lema': '%s · el respaldo de una respuesta' % ASISTENTE[1], 'sin_icono_lema': True, 'icono_cab': LOGO_IMG,
         'entrada': ('<b>El respaldo de una respuesta del Auditor.</b> Tu pregunta, lo que se contestó, cada cifra con su estado, '
@@ -1375,11 +1398,12 @@ def noticias(base, ref):
     import noticias as nt
     indice = {
     'archivo': NOTICIAS_ARCHIVO,
-    'menu': 'Noticias relevantes',
+    'menu': 'Noticiero',
     # Cuarta pestaña del menú desde el 28-10-2026 (pedido del autor): ya no
-    # cuelga de Aprende, aunque Aprende conserva su tarjeta hacia aquí.
+    # cuelga de Aprende, aunque Aprende conserva su tarjeta hacia aquí. Desde
+    # el 02-11-2026 se llama «Noticiero» (pedido del autor).
     'icono': '📰',
-    'titulo': 'Noticias relevantes',
+    'titulo': 'Noticiero',
     'lema': 'La noticia, el verificador y el seguimiento',
     'entrada': ('Las finanzas públicas de México, verificadas, en tres puertas: el periódico de la plataforma, el verificador para cotejar '
                 'lo que viste y el seguimiento de los casos que no se olvidan. Cada afirmación lleva el documento oficial que la sostiene.'),
@@ -1393,7 +1417,7 @@ def noticias(base, ref):
         verifica = arch == nt.VERIFICA
         paginas.append({
             'archivo': arch, 'menu': nom, 'menu_archivo': NOTICIAS_ARCHIVO,
-            'padre': (NOTICIAS_ARCHIVO, 'Noticias'),
+            'padre': (NOTICIAS_ARCHIVO, 'Noticiero'),
             'icono': ico, 'titulo': nom, 'lema': lema, 'entrada': entrada,
             'scripts': ['columnas.js'] + (list(insp_nota.SCRIPTS) if verifica else []) + nt.SCRIPTS,
             'estilos': ['columnas.css'] + (list(insp_nota.ESTILOS) if verifica else []) + nt.ESTILOS,
@@ -1495,7 +1519,7 @@ AVISO = {
     'archivo': 'aviso-de-privacidad.html',
     'menu': 'Aviso de privacidad',
     'menu_archivo': AUDITOR_VIRTUAL,
-    'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+    'padre': (AUDITOR_VIRTUAL, 'Auditor'),
     'icono': '🔒',
     'titulo': 'Aviso de privacidad',
     'lema': 'Qué sabemos de ti: hoy, nada',
@@ -1568,7 +1592,7 @@ REPLICA = {
     'archivo': 'derecho-de-replica.html',
     'menu': 'Derecho de réplica',
     'menu_archivo': AUDITOR_VIRTUAL,
-    'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+    'padre': (AUDITOR_VIRTUAL, 'Auditor'),
     'icono': '✉️',
     'titulo': 'Derecho de réplica',
     'lema': 'Si te aludimos con un dato inexacto, tu aclaración se publica',
@@ -1651,7 +1675,7 @@ PILARES = {
     'archivo': 'pilares.html',
     'menu': 'Nuestros pilares',
     'menu_archivo': AUDITOR_VIRTUAL,
-    'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+    'padre': (AUDITOR_VIRTUAL, 'Auditor'),
     'icono': '🏛️',
     'titulo': 'Nuestros pilares',
     'lema': 'El periodista virtual del gasto público',
@@ -1944,9 +1968,9 @@ def servicios():
         '        <div class="sv-resumen" id="svResumen" hidden></div>',
         '        <noscript><p>El formulario necesita JavaScript.</p></noscript>'])
     return {
-        'archivo': 'servicios.html', 'menu': 'Servicios de investigación', **HERR_SITIO,
-        # Desde el 11-10-2026 es un modulo del Modo Inspector (pedido del autor).
-        'padre3': ('herramienta-inspector.html', 'Modo Inspector'),
+        # Quinta pestaña del menú desde el 02-11-2026 (pedido del autor); del
+        # 11-10-2026 a esa fecha fue un módulo del Modo Inspector.
+        'archivo': 'servicios.html', 'menu': 'Servicios de investigación', 'menu_archivo': 'servicios.html',
         'icono': '🔎', 'titulo': 'Servicios de investigación', 'lema': 'La consulta es gratuita; la investigación a la medida se cotiza',
         'entrada': ('Todo lo que publica Auditavisión es libre y lo seguirá siendo. Cuando necesites ir más a fondo en un caso, '
                     'podemos hacer por encargo una investigación documental con la misma regla de la plataforma: cada cifra con '
@@ -5281,9 +5305,12 @@ def pagina(a, sello):
     titulo_doc = '%s · Auditavisión' % re.sub('<[^>]+>', '', a['menu'])
     descripcion = re.sub('<[^>]+>', '', a['entrada'])
     padre = ('<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a['padre']) if a.get('padre') else ''
-    if (a.get('menu_archivo', a['archivo']) in MENU[1][2] and a['archivo'] != ENCICLOPEDIA
+    if (a.get('menu_archivo', a['archivo']) in ENCICLO_MARCAN and a['archivo'] != ENCICLOPEDIA
             and (a.get('padre') or (None,))[0] != ENCICLOPEDIA):
         padre = '<a href="%s">Enciclopedia</a> <span aria-hidden="true">›</span> %s' % (ENCICLOPEDIA, padre)
+    # La Enciclopedia vive en Comunidad desde el 02-11-2026: sus migas lo dicen.
+    if ENCICLOPEDIA in padre and 'participa.html' not in padre:
+        padre = '<a href="participa.html">Comunidad</a> <span aria-hidden="true">›</span> ' + padre
     for nivel in ('padre2', 'padre3'):
         if a.get(nivel):
             padre += '<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a[nivel]
@@ -5819,7 +5846,8 @@ def generar(sello=None):
     import datos_ambiente
     import periodistas, acceso
     import metodologia_auditoria
-    for extra in [DICCIONARIO, metodologia_auditoria.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    import planisferio
+    for extra in planisferio.paginas(base, ref, numeros_datos(base)) + [DICCIONARIO, metodologia_auditoria.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
