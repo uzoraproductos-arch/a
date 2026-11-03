@@ -357,7 +357,7 @@
       azul: ['#e3ecf8', '#b4c9ea', '#6f95d2', '#2f5fa8', '#0b2a63'],
       rojo: ['#fbe5e2', '#f2b3aa', '#e06f60', '#b3261e', '#6e1510']
     };
-    var porC = {}, lente = D.lentes[0], sel = null, ficha = document.getElementById('plMunFicha');
+    var porC = {}, lente = D.lentes[0], sel = null, ficha = document.getElementById('plMunFicha'), CERO = '#eeede6';
     D.m.forEach(function (x) { porC[x.c] = x; });
     var paths = document.querySelectorAll('.pl-mun');
     function fmt(v) { return v == null ? '—' : lente.u === 'pct' ? num(v, 1) + '%' : mdp(v); }
@@ -366,7 +366,8 @@
     D.lentes.forEach(function (l) { if (l.id === pedidaL) lente = l; });
     Array.prototype.forEach.call(document.querySelectorAll('#mapa-municipios .pl-lente'), function (b) { b.setAttribute('aria-checked', b.getAttribute('data-l') === lente.id ? 'true' : 'false'); });
     function cortes() {
-      var v = D.m.map(function (x) { return x[lente.id]; }).filter(function (x) { return x != null; }).sort(function (a, b) { return a - b; });
+      /* En las lentes donde el $0 es lo común, los cortes salen de los que sí reportaron algo. */
+      var v = D.m.map(function (x) { return x[lente.id]; }).filter(function (x) { return x != null && (!lente.cero || x > 0); }).sort(function (a, b) { return a - b; });
       return [1, 2, 3, 4].map(function (k) { return v[Math.round(k * v.length / 5)]; });
     }
     function pinta() {
@@ -374,7 +375,7 @@
       Array.prototype.forEach.call(paths, function (p) {
         var x = porC[p.getAttribute('data-c')], v = x ? x[lente.id] : null, k = -1;
         if (v != null) { k = 0; while (k < 4 && v >= c[k]) k++; }
-        p.style.fill = k < 0 ? '#d5dae3' : pal[k];
+        p.style.fill = k < 0 ? '#d5dae3' : (lente.cero && v === 0) ? CERO : pal[k];
         p.classList.toggle('sel', !!sel && sel.c === p.getAttribute('data-c'));
         if (x) p.setAttribute('aria-label', x.n + ': ' + (v == null ? (D.sin ? 'sin cuenta municipal' : 'sin cuenta de ' + D.anio) : fmt(v)));
       });
@@ -385,8 +386,9 @@
         return;
       }
       document.getElementById('plMunLeyenda').innerHTML = '<span class="pl-ley-tit">' + esc(lente.nom) + ' (' + D.anio + ')</span><span class="pl-ley-cls">' +
+        (lente.cero ? '<span><i style="background:' + CERO + '"></i>$0 reportado</span>' : '') +
         pal.map(function (col, i) {
-          var t = i === 0 ? 'menos de ' + fmt(lim[1]) : i === 4 ? fmt(lim[4]) + ' o más' : fmt(lim[i]) + ' a ' + fmt(lim[i + 1]);
+          var t = i === 0 ? (lente.cero ? 'más de $0 y ' : '') + 'menos de ' + fmt(lim[1]) : i === 4 ? fmt(lim[4]) + ' o más' : fmt(lim[i]) + ' a ' + fmt(lim[i + 1]);
           return '<span><i style="background:' + col + '"></i>' + t + '</span>';
         }).join('') + '<span><i style="background:#d5dae3"></i>' + (D.sin ? 'sin cuenta municipal' : 'sin cuenta') + '</span></span>';
       document.getElementById('plMunQue').textContent = lente.que;
@@ -404,7 +406,11 @@
         '<dt>Aportaciones (FORTAMUN ' + mdp(x.fort) + ' · FISMDF ' + mdp(x.fis) + ')</dt><dd>' + mdp(x.aport) + ' ' + chip('oficial') + '</dd>' +
         '<dt>Predial cobrado</dt><dd>' + mdp(x.predial) + ' ' + chip('oficial') + '</dd>' +
         '<dt>Dependencia de transferencias</dt><dd>' + (x.dep == null ? '—' : num(x.dep, 1) + '%') + ' ' + chip('derivado') + '</dd>' +
-        (x.inv == null ? '' : '<dt>Inversión pública' + (x.invp == null ? '' : ' ($' + num(x.invp, 1) + ' de cada $100 de su egreso ' + chip('derivado') + ')') + '</dt><dd>' + mdp(x.inv) + ' ' + chip('oficial') + '</dd>') + '</dl>' +
+        (x.inv == null ? '' : '<dt>Inversión pública' + (x.invp == null ? '' : ' ($' + num(x.invp, 1) + ' de cada $100 de su egreso ' + chip('derivado') + ')') + '</dt><dd>' + mdp(x.inv) + ' ' + chip('oficial') + '</dd>') +
+        (x.dpag == null ? '' : '<dt>Pagó por sus créditos (capital, intereses y comisiones)</dt><dd>' + mdp(x.dpag) + ' ' + chip('derivado') + '</dd>' +
+          '<dt>Pidió prestado en el año</dt><dd>' + mdp(x.emp) + ' ' + chip('oficial') + '</dd>' +
+          '<dt>Adeudos de años anteriores (ADEFAS)</dt><dd>' + mdp(x.adef) + ' ' + chip('oficial') + '</dd>') + '</dl>' +
+        (x.dpag == null ? '' : '<p class="pl-ficha-sub">Es lo que pagó y pidió en el año, no lo que debe: su saldo lo publica Hacienda y sigue ' + chip('pendiente', 'deuda-municipios') + '.</p>') +
         '<a class="pl-ficha-ir" href="' + ente + '">Su estado de cuenta y salud financiera ➔</a>';
     }
     function elige(c) {

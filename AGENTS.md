@@ -104,6 +104,12 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   porque el semáforo junta en verde a estados muy distintos, y lo dice. Lo
   que no se mide por ley va en gris como «no se mide», no como pendiente. Se
   abre con `planisferio.html?d=deuda` y cada portal la trae en `#deuda`.
+  **La de los municipios** (03-11-2026) sale de su propia cuenta al INEGI
+  (`municipios-deuda.js`, que escribe `herramientas/anclar_deuda_municipios.py`):
+  **lo que pagaron y pidieron prestado en el año, nunca lo que deben** (el saldo es
+  del Sistema de Alertas y sigue pendiente), los ADEFAS no se dicen como crédito y
+  el capítulo «Financiamiento» del INEGI no se dice como deuda nueva: casi todo es
+  «Déficit», su renglón de cuadre.
 - **La inversión, tercera dimensión pintada** (03-11-2026). Lee `invPub`,
   `invInfra` y `egr2024` de `DB.estados` (los escribe
   `herramientas/anclar_egresos_entidades.py` desde la estadística estatal del
@@ -204,7 +210,7 @@ el documento oficial (§2) y entra a su página de Auditavisión y al bot
 ### 0 ter. Los pilares: el periodista virtual del gasto público
 
 **Decisión del autor, 26-10-2026.** Auditavisión es el periodista virtual que
-sigue el gasto público. Sus once pilares están dichos al lector en
+sigue el gasto público. Sus doce pilares están dichos al lector en
 `pilares.html` (`PILARES_LISTA` de `herramientas/apartados.py`) y valen para
 todo cambio: que la verdad sea incómoda no la vuelve falsa; evidencia con
 folio; contrapeso, no propaganda (las mismas reglas para todos los gobiernos);
@@ -213,6 +219,20 @@ fuente de cifras; lo que falta se señala con nombre; que se entienda de un
 vistazo; el ambiente también es gasto público; y el caso no se olvida (cada
 columna de Verificamos trae «Lo que sigue» y se puede seguir: al cambiar su
 `actualizado`, quien la sigue ve el aviso). Un pilar nuevo se agrega ahí.
+
+**La base de datos es el pilar de transparencia** (decisión del autor,
+03-11-2026: «la construcción de nuestra base de datos debe convertirse en ese
+pilar de transparencia», tras «no podemos contar o confiar con la plataforma de
+transparencia»). Es el duodécimo pilar, y la página lo explica en seis pasos
+(`BASE_PASOS` de `apartados.py`, sección `#base` de `pilares.html`). **Ninguna
+cifra se apoya en una respuesta a una solicitud de acceso** (la Plataforma
+Nacional de Transparencia, sin órgano autónomo desde la Ley General de
+Transparencia, DOF 20-03-2025): solo entra lo que la dependencia publica para
+todos, con la huella SHA-256 del archivo, su cuadre (si no cuadra, se detiene),
+su chip y su enlace. **Un pendiente no se resuelve proponiendo una solicitud**:
+su enlace es el portal donde la dependencia debía publicarlo, y si no lo
+publica, se queda con su nombre. Lo que diga una solicitud ajena, si alguna vez
+llega, es punto de partida, como una nota de prensa.
 
 **Competimos siendo el mejor auditor, no el más rápido** (decisión del autor,
 01-11-2026: «podríamos ser considerados competidores de todos estos medios

@@ -275,11 +275,14 @@
         return { cve: e.cve + f[0], nom: f[1], hay: hay, ing: ing, part: hay ? f[3] / 1e6 : null,
           fortamun: hay ? f[5] / 1e6 : null, fismdf: hay ? f[6] / 1e6 : null, predial: hay ? f[7] / 1e6 : null,
           dep: (hay && ing > 0) ? (f[3] + f[4]) / f[2] * 100 : null,
-          inv: hay && IV && IV.mun[e.cve + f[0]] ? IV.mun[e.cve + f[0]][0] / 1e6 : null };
+          inv: hay && IV && IV.mun[e.cve + f[0]] ? IV.mun[e.cve + f[0]][0] / 1e6 : null,
+          dpag: hay && DV && DV.mun[e.cve + f[0]] ? (DV.mun[e.cve + f[0]][1] + DV.mun[e.cve + f[0]][2] + DV.mun[e.cve + f[0]][3]) / 1e6 : null };
       });
     }
     /* La inversión pública de cada municipio (municipios-inversion.js, INEGI). */
     var IV = window.AUDIT_MUN_INV || null;
+    /* Lo que pagó por sus créditos en el año (municipios-deuda.js, INEGI): capital, intereses y comisiones, no lo que debe. */
+    var DV = window.AUDIT_MUN_DEUDA || null;
     function celda(v) { return v == null ? '<td class="tt-nada">—</td>' : '<td>$' + num(v, 1) + '</td>'; }
     function pinta() {
       var a = s.value, e = F.ent[a], q = plano(busca.value || ''), c = ord.value;
@@ -293,6 +296,7 @@
       var t = e.tot || {}, sinRep = e.n - e.conCifra;
       var depEnt = t.ing > 0 ? (t.part + t.aport) / t.ing * 100 : null;
       var invEnt = IV ? filas(a).reduce(function (s, m) { return m.inv == null ? s : s + m.inv * 1e6; }, 0) : null;
+      var dpEnt = DV ? filas(a).reduce(function (s, m) { return m.dpag == null ? s : s + m.dpag * 1e6; }, 0) : null;
       var h = '<div class="tt-mun-res"><h3>' + esc(NOM[a] || a) + '</h3><p>' + e.n + ' ' + voz + ' en el catálogo del INEGI' +
         (e.conCifra ? ' · <b>' + e.conCifra + '</b> rindieron cuenta en ' + F.anio : '') +
         (e.conCifra && sinRep ? ' · <span class="tt-falta">' + sinRep + ' sin reporte</span> ' + chip('pendiente', D.pend) : '') + '</p>';
@@ -303,7 +307,7 @@
           'y aquí aparecen sin cifra en lugar de en ceros.</p>';
       } else if (e.conCifra) {
         h += '<div class="pm-kpis tt-kpis">' + [['Ingreso total', t.ing], ['Participaciones', t.part], ['Predial cobrado', t.predial],
-          ['FORTAMUN', t.fortamun], ['FISMDF', t.fismdf]].concat(IV ? [['Inversión pública', invEnt]] : []).map(function (k) {
+          ['FORTAMUN', t.fortamun], ['FISMDF', t.fismdf]].concat(IV ? [['Inversión pública', invEnt]] : []).concat(DV ? [['Pagó de deuda', dpEnt]] : []).map(function (k) {
           return '<div class="pm-kpi"><span class="pm-kpi-k">' + k[0] + ' ' + chip('derivado') + '</span><b class="pm-kpi-v num-tabular">$' + num(k[1] / 1e6, 1) + '</b><small>mdp, suma de sus municipios</small></div>';
         }).join('') + '</div>' +
         '<p class="tt-mun-dep">Dependencia de transferencias de sus municipios: <b>' + num(depEnt, 1) + '%</b> ' + chip('derivado') +
@@ -317,17 +321,18 @@
       h += '<div class="tt-tabla-marco"><table class="tt-tabla"><caption class="sr-only">Ingresos de los ' + voz + ' de ' + esc(NOM[a] || a) +
         ' en ' + F.anio + ', en millones de pesos</caption><thead><tr><th scope="col">Municipio</th><th scope="col">Ingreso total</th>' +
         '<th scope="col">Participaciones</th><th scope="col">Predial</th><th scope="col">FORTAMUN</th><th scope="col">FISMDF</th>' +
-        '<th scope="col">Dependencia</th>' + (IV ? '<th scope="col">Inversión pública</th>' : '') + '</tr></thead><tbody>' + l.map(function (m) {
+        '<th scope="col">Dependencia</th>' + (IV ? '<th scope="col">Inversión pública</th>' : '') + (DV ? '<th scope="col">Pagó de deuda</th>' : '') + '</tr></thead><tbody>' + l.map(function (m) {
           if (!m.hay) {
-            return '<tr class="tt-sin"><th scope="row"><small>' + m.cve + '</small>' + esc(m.nom) + '</th><td colspan="' + (IV ? 7 : 6) + '">' +
+            return '<tr class="tt-sin"><th scope="row"><small>' + m.cve + '</small>' + esc(m.nom) + '</th><td colspan="' + (6 + (IV ? 1 : 0) + (DV ? 1 : 0)) + '">' +
               (cdmx ? 'Su presupuesto lo aprueba el Congreso de la Ciudad' : 'No rindió cuenta pública ' + F.anio + ' ante el INEGI') + '</td></tr>';
           }
           return '<tr><th scope="row"><small>' + m.cve + '</small>' + esc(m.nom) + '</th>' + celda(m.ing) + celda(m.part) + celda(m.predial) +
             celda(m.fortamun) + celda(m.fismdf) + '<td class="tt-dep-c"><span class="tt-dep-b"><span style="width:' + Math.min(100, m.dep || 0).toFixed(1) +
-            '%"></span></span>' + (m.dep == null ? '—' : num(m.dep, 1) + '%') + '</td>' + (IV ? celda(m.inv) : '') + '</tr>';
+            '%"></span></span>' + (m.dep == null ? '—' : num(m.dep, 1) + '%') + '</td>' + (IV ? celda(m.inv) : '') + (DV ? celda(m.dpag) : '') + '</tr>';
         }).join('') + '</tbody></table></div>' +
         '<p class="pm-pie">' + esc(F.fuente) + ' Cifras en millones de pesos. La <b>dependencia</b> es cuánto de cada $100 que ingresó el municipio vino de participaciones y aportaciones, no de lo que cobró por su cuenta ' + chip('derivado') + '.' +
-          (IV ? ' La <b>inversión pública</b> es su capítulo de egresos de obra pública y proyectos productivos ' + chip('oficial') + '; quien rindió su cuenta sin ese capítulo aparece en $0.' : '') + '</p>' +
+          (IV ? ' La <b>inversión pública</b> es su capítulo de egresos de obra pública y proyectos productivos ' + chip('oficial') + '; quien rindió su cuenta sin ese capítulo aparece en $0.' : '') +
+          (DV ? ' <b>Pagó de deuda</b> es el capital, los intereses y las comisiones de sus créditos en ' + F.anio + ' ' + chip('derivado') + ': lo que pagó, no lo que debe; su saldo lo publica Hacienda y sigue ' + chip('pendiente', 'deuda-municipios') + '.' : '') + '</p>' +
         '<p class="tt-circ-ir"><a href="' + D.ent + '?e=' + encodeURIComponent(a) + '#circuito">🗺️ El circuito del estado ➔</a><a href="' + D.mapa + '?e=' + encodeURIComponent(a) + '">📍 Verlo en el mapa ➔</a></p>';
       cont.innerHTML = h;
     }

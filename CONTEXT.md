@@ -7344,6 +7344,31 @@ Pedido del autor: «continuemos» (con los pendientes; era el primero de la list
 - **Revisado** en el navegador a 390 y 1280 px: portal de Jalisco con `?ml=inv`, ficha de Zapopan, piso municipal, portal de la Ciudad de México, padrón de la Enciclopedia y ficha del Auditor de entes, sin errores de consola ni desborde.
 - **Pendiente:** las dimensiones ambiental, legislativa y judicial del Planisferio, los umbrales del semáforo, la deuda municipal (Sistema de Alertas, sin descarga desde este entorno) y las ligas estatales «por cotejar».
 
+## Entrega — 03-11-2026: la deuda en la ficha de cada municipio (sello 20261103z)
+
+Pedido del autor: «integra lo que debe cada municipio y la ficha».
+
+- **La ficha:** el Auditor de entes carga `municipios-deuda.js` (`MUN_ARCHIVOS` de `insp_entes.py`) y su diagnóstico municipal suma «¿Cuánto pagó por su deuda?»: lo que pagó (capital, intereses y comisiones), lo que pidió prestado y los ADEFAS de 2024. Va en «Sin señal»: pagar deuda no es una irregularidad, y no se inventa un umbral.
+- **Lo que debe (el saldo):** no entró. `disciplinafinanciera.hacienda.gob.mx` dio 503 y archive.org no abrió desde este entorno. Lo publica Hacienda en su página de Disciplina Financiera (el archivo «Financiamientos de Municipios y sus Entes Públicos», con su hoja «Saldo por municipios y tipo de acreedor») y en el «Listado de Financiamientos y Obligaciones» del Registro Público Único. Cuando el autor lo suba, entra con su huella y su cuadre contra los totales de Hacienda, y se cierra `deuda-municipios`. Un estudio del CEFP que lo resume no es la fuente.
+
+## Entrega — 03-11-2026: la deuda de los municipios, en su propia cuenta (sello 20261103y)
+
+Pedido del autor: «continúa con las deudas municipales».
+
+- **Por qué así:** la deuda municipal estaba pendiente porque el Sistema de Alertas (`disciplinafinanciera.hacienda.gob.mx`) no responde desde este entorno. Con el pilar de la base de datos (§0 ter), no se pide por solicitud: se integra lo que el municipio ya hizo público en su cuenta al INEGI, y el saldo se queda pendiente con su nombre.
+- **El dato:** INEGI, EFIPEM municipal 2024, cifras definitivas (`conjunto_de_datos_efipem_municipal_csv.zip`, SHA-256 `6fca09ef…`, el mismo de la inversión). Egresos, capítulo «Deuda pública»: amortización $9,864.5 mdp, intereses $3,905.5 mdp, comisiones + gastos + coberturas $101.5 mdp y ADEFAS $7,510.5 mdp (total $21,382.0 mdp). Ingresos, concepto «Empréstitos»: $4,726.0 mdp. 978 municipios con algo en el capítulo, 715 con pagos de crédito (capital, intereses o comisiones), 144 con empréstitos.
+- **El código:** `herramientas/anclar_deuda_municipios.py <zip>` → `assets/auditor/js/municipios-deuda.js` (`window.AUDIT_MUN_DEUDA`, `[dp, am, int, cf, adefas, emp]` por clave de cinco dígitos). Importa la huella, la URL y el padrón de `anclar_inversion_municipios.py`. `planisferio.py` lo lee con `deu_mun()` (se detiene si no trae justo a los municipios con cuenta), lo pinta en `_deuda_mun()` y en las lentes `dpag` y `emp` (`CERO_MUN`: el $0 lleva su tono y los cortes salen de los que sí reportaron). `territorio.js` suma la columna; `asistente-charla.js` la métrica `deu`.
+- **Puntos ciegos:** (1) pagar no es deber: un municipio en $0 puede deber a proveedores o tener un crédito sin pagos ese año; (2) los ADEFAS no son crédito bancario; (3) el capítulo «Financiamiento» del INEGI ($28,233 mdp) es casi todo «Déficit» ($23,507 mdp), el renglón con que el INEGI cuadra ingreso y egreso: decir que los municipios «se financiaron» con eso sería falso.
+- **Corrección:** `mv()` del chat devolvía la inversión municipal en millones y el resto del padrón en pesos: la respuesta decía «$1,543.04» y «de cada $100» salía casi en cero. Ya va en pesos.
+- **Pendiente:** el saldo de cada municipio (Sistema de Alertas, `deuda-municipios`); la ficha municipal del Auditor de entes aún no muestra la deuda; y lo de antes: `ambiente-por-estado`, `acuiferos-disponibilidad-nueva`, `mineria-por-estado-2026`, el rezago civil, el presupuesto aprobado de los congresos, sus remuneraciones, los umbrales del semáforo y las ligas estatales «por cotejar».
+
+## Entrega — 03-11-2026: la base de datos, duodécimo pilar (sello 20261103x)
+
+- **Pedido.** Al buscar las denuncias de la PROFEPA por estado, el autor descartó la Plataforma Nacional de Transparencia («no podemos contar o confiar con la plataforma de transparencia») y decidió: «la construcción de nuestra base de datos debe convertirse en ese pilar de transparencia».
+- **Hecho.** Pilar 8 de `PILARES_LISTA`, «Nuestra base de datos es un pilar de transparencia» (tras «Lo que falta, se señala con nombre»), con la Ley General de Transparencia (DOF 20-03-2025) como documento de que el INAI se extinguió. `BASE_PASOS` y la sección `#base` de `pilares.html`: seis pasos que dicen lo que el código ya hace (huellas SHA-256 en los módulos, cuadres que detienen la generación, chips, `pendientes.py`, datos abiertos). La página dice «doce pilares». Novedad en `NOVEDADES`. Regla en AGENTS.md §0 ter. Pregunta nueva: «¿Cómo arman su base de datos? ¿Por qué confiar en ella?» → `pilares.html` (380).
+- **Lo que no cambió.** Las fichas que ya enlazan a la PNT (p. ej. `asesores-congresos-locales` de `pendientes.py`, `nepotismo.py`, `fiscalizadores.py`) siguen ahí: la PNT es donde cada sujeto obligado carga sus obligaciones, no una solicitud. Conviene cambiarlas, una por una, por el portal de transparencia de cada dependencia cuando se coteje.
+- **Pendiente:** `ambiente-por-estado` (las denuncias de la PROFEPA por entidad). El Informe 2024 no las trae; el autor busca el CSV de datos.gob.mx o la tabla por entidad del Compendio de Estadísticas Ambientales de la SEMARNAT. Si ninguna las trae, el porqué de la ficha dirá que la PROFEPA no las publica.
+
 ## Entrega — 03-11-2026: la pesca y la acuacultura de cada estado (sello 20261103w)
 
 Pedido del autor: «intégralo y continuemos». Se integró el PR #124 (la superficie forestal) y se siguió con lo propuesto: la pesca, la otra mitad de `ambiente-por-estado`.

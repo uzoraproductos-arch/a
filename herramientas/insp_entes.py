@@ -56,7 +56,7 @@ CDMX_AVISO = (
     'asignación que les aprueba el Congreso capitalino. De ahí que el INEGI no las levante '
     'en su estadística municipal, y que aquí aparezcan sin cifra en lugar de en ceros.')
 
-MUN_ARCHIVOS = ['municipios-efipem.js', 'municipios-rendicion.js', 'municipios-inversion.js']
+MUN_ARCHIVOS = ['municipios-efipem.js', 'municipios-rendicion.js', 'municipios-inversion.js', 'municipios-deuda.js']
 
 # Un solo navegador (pedido del autor, 21-10-2026): el buscador, los tres
 # niveles, los filtros y el directorio van juntos en esta pagina; la del

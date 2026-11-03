@@ -1288,7 +1288,7 @@ def herramienta_asistente(bloque):
         'entrada': '<b>%s.</b> %s' % (ASISTENTE[2], ASISTENTE[3]),
         'fondo': FOTO_AUDITOR, 'rubro': rubro, 'foto_clase': 'foto-auditor',
         'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
-        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
+        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
         # Sin la fila de las cuatro herramientas: el chat ya es sus modos.
         'pie_extra': nav,
     }
@@ -1308,7 +1308,7 @@ def herramienta_dictamen(bloque):
                     'sus fuentes oficiales y el método, con folio, sello y huella digital. Se arma de nuevo con los datos de la plataforma cada vez que se abre el enlace.'),
         'fondo': FOTO_AUDITOR, 'rubro': h[1], 'foto_clase': 'foto-auditor',
         'secciones': [{'id': 'dictamen', 'titulo': 'Dictamen cívico independiente de Auditavisión', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
-        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
+        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
     }
 
 
@@ -1472,6 +1472,16 @@ PILARES_LISTA = [
     ('⏳', 'Lo que falta, se señala con nombre',
      'Cuando un dato no está publicado, no lo inventamos ni lo estimamos a ojo: lo marcamos «pendiente», decimos por qué falta y '
      'quién debe publicarlo, y lo anotamos en el Registro de pendientes.'),
+    # Decision del autor, 03-11-2026: «la construccion de nuestra base de datos debe convertirse en ese pilar de
+    # transparencia», tras descartar la Plataforma Nacional de Transparencia como via («no podemos contar o confiar» en ella).
+    ('🗃️', 'Nuestra base de datos es un pilar de transparencia',
+     'No esperamos a que alguien conteste una solicitud. La respuesta a una solicitud solo la tiene quien la pidió, y desde 2025 ya no '
+     'la revisa un órgano autónomo: el INAI se extinguió y su tarea pasó al propio Gobierno (<a href="%s" target="_blank" rel="noopener">'
+     'Ley General de Transparencia, DOF 20-03-2025 ↗</a>). Nosotros armamos la transparencia con lo que se publica para todos: cada '
+     'documento oficial que integramos guarda su huella digital (SHA-256), para comprobar que es el mismo archivo; sus totales se vuelven '
+     'a sumar, y si no cuadran no se publica nada; cada cifra lleva su chip, su página y su enlace, y la base se '
+     '<a href="datos-abiertos.html">descarga</a> completa. Lo que el Gobierno no publica no se consigue por debajo de la mesa: se queda en '
+     'el <a href="pendientes.html">Registro de pendientes</a>, con el nombre de quien lo debe.' % 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTAIP.pdf'),
     ('🗺️', 'Que se entienda de un vistazo',
      'Mapas, contadores, simuladores y estados de cuenta para leer el dinero público de forma gráfica y sencilla, y siempre un '
      'camino a los canales oficiales y a descargar los datos.'),
@@ -1487,6 +1497,28 @@ PILARES_LISTA = [
 ]
 
 LEY_PERIODISTAS = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LPPDDHP.pdf'
+
+# Los pasos del duodecimo pilar (03-11-2026): como entra una cifra a la base. Dicen lo que ya hace el codigo
+# (huellas de herramientas/*.py, cuadres que detienen la generacion, chips, pendientes.py); si eso cambia, cambia aqui.
+BASE_PASOS = [
+    ('📄', 'Solo lo que se publica para todos',
+     'Una cifra entra solo si sale de un documento que cualquiera puede abrir: el DOF, la Cuenta Pública, la ASF, el INEGI, los informes '
+     'y anuarios de cada dependencia. Una respuesta a una solicitud, una filtración o una nota de prensa no son la fuente.'),
+    ('🔏', 'La huella del archivo',
+     'Guardamos la huella digital (SHA-256) del archivo de donde salió la cifra. Si alguien cambia el documento, la huella deja de '
+     'coincidir y se nota.'),
+    ('🧮', 'Las cuentas se vuelven a hacer',
+     'Copiamos las filas y volvemos a sumar: si las entidades no dan el total que publica la dependencia, la plataforma se detiene y '
+     'no publica nada hasta aclararlo.'),
+    ('🏷️', 'Cada cifra dice qué es',
+     '«Oficial» si está tal cual en su documento; «derivado» si la calculamos, con la operación dicha; «pendiente» si no está publicado. Y '
+     'siempre con su página y su enlace.'),
+    ('⏳', 'Lo que falta, con nombre',
+     'Si la dependencia no lo publica, no lo rellenamos: queda en el Registro de pendientes, con por qué falta, quién lo debe y dónde '
+     'debería estar.'),
+    ('💾', 'Todo se descarga',
+     'Las bases salen en CSV para que las revises en Excel, y el Auditor Virtual te lleva a la página y al documento de cada respuesta.'),
+]
 
 # Aviso de privacidad (paso 1.5 del plan v2, 26-10-2026). Cotejado contra la
 # LFPDPPP vigente (nueva ley, DOF 20-03-2025; ultima reforma DOF 14-11-2025):
@@ -1688,16 +1720,21 @@ PILARES = {
     'titulo': 'Nuestros pilares',
     'lema': 'El periodista virtual del gasto público',
     'estilos': ['pilares.css'],
-    'entrada': ('Auditavisión existe para seguir el dinero público y contarlo con documentos. Estos son los once pilares que sostienen '
+    'entrada': ('Auditavisión existe para seguir el dinero público y contarlo con documentos. Estos son los doce pilares que sostienen '
                 'cada página, cada respuesta del Auditor Virtual y cada dictamen. Ejercer el periodismo en México tiene riesgos que el '
                 'propio Estado reconoce: por eso existe, desde 2012, una ley para proteger a periodistas y a personas defensoras de '
                 'derechos humanos (<a href="%s" target="_blank" rel="noopener">Ley para la Protección de Personas Defensoras de Derechos '
                 'Humanos y Periodistas, DOF 25-06-2012 ↗</a>) %s.' % (LEY_PERIODISTAS, '<span class="est-chip est-oficial">oficial</span>')),
     'secciones': [
-        {'id': 'pilares', 'titulo': 'Los once pilares', 'texto': 'Lo que hacemos, y lo que nunca hacemos, con el dinero público y con la verdad.',
+        {'id': 'pilares', 'titulo': 'Los doce pilares', 'texto': 'Lo que hacemos, y lo que nunca hacemos, con el dinero público y con la verdad.',
          'tarjetas': [],
          'bloque': '<ol class="pil-lista">\n%s\n        </ol>' % '\n'.join(
              '          <li><span class="pil-ico" aria-hidden="true">%s</span><div><h3>%s</h3><p>%s</p></div></li>' % x for x in PILARES_LISTA)},
+        {'id': 'base', 'titulo': 'Cómo se arma nuestra base de datos',
+         'texto': 'El duodécimo pilar, paso por paso. Así entra una cifra a la plataforma, y así puedes comprobarla tú.',
+         'tarjetas': [],
+         'bloque': '<ol class="pil-lista">\n%s\n        </ol>' % '\n'.join(
+             '          <li><span class="pil-ico" aria-hidden="true">%s</span><div><h3>%s</h3><p>%s</p></div></li>' % x for x in BASE_PASOS)},
         {'id': 'donde', 'titulo': 'Dónde se ven', 'texto': 'Cada pilar tiene su herramienta.',
          'tarjetas': [
              ('🤖', 'Pregúntale al Auditor', 'El periodista virtual: busca, coteja, explica y genera el dictamen.', AUDITOR_VIRTUAL, None, None),
@@ -5139,7 +5176,7 @@ def numeros_preparar():
     import gasto_modulos as gm
     import poderes_modulo as pdm
     guion = {'gp-tres': [], 'eb-cuenta-federal': 'resultados.js', 'eb-salud': [], 'eb-egresos': [], 'eb-ciegos': [], 'poderes': [], 'eb-cuanto': ['numeros.js', 'radar.js'], 'nr-origenes': 'numeros.js', 'eb-mapa': 'territorio.js', 'territorio': 'territorio.js',
-             'municipios': ['municipios-efipem.js', 'municipios-inversion.js', 'territorio.js']}
+             'municipios': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'territorio.js']}
     for m in NUMEROS_MODULOS:
         NUMEROS_ABRIR[m[0]] = m[1]
         hecho = propios.get(m[0])
@@ -5431,6 +5468,8 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('03-11-2026', 'La deuda de los municipios llega al Planisferio y a la Enciclopedia: lo que cada uno pagó por sus créditos y pidió prestado en 2024, según su propia cuenta al INEGI. Es lo que pagó, no lo que debe: su saldo lo publica Hacienda y sigue pendiente, con el nombre de quien lo debe.'),
+    ('03-11-2026', 'Nuestro duodécimo pilar: la base de datos es un pilar de transparencia. No dependemos de solicitudes que solo ve quien las pide: armamos la transparencia con lo que se publica para todos, con la huella digital de cada documento, las cuentas rehechas y lo que falta en el Registro de pendientes, con el nombre de quien lo debe. La página de los pilares explica, paso por paso, cómo entra una cifra a la plataforma.'),
     ('02-11-2026', 'El mapa del dinero: el mapa de las 32 entidades suma dos capas que puedes operar. «No cuadra» compara lo que cada estado dice que recibió con lo que la Federación dice que le pagó, y «Obras con alerta ambiental» cuenta los proyectos del mapa ambiental en cada estado. El Auditor abre cada capa directo («mapa de la deuda»). La Mesa de redacción sigue además a ocho medios por su nombre y junta la misma historia cuando varios la cuentan. Servicios suma «A quién servimos» y la revisión de un proveedor.'),
     ('29-10-2026', 'El índice general sigue ahora el orden de las pestañas: el Auditor Virtual con sus cuatro modos, la Enciclopedia (Números, sus Herramientas, Datos y Aprende), Comunidad y Noticias, con sus tres páginas y sus secciones. Al final, las investigaciones por tema y cómo verificamos.'),
     ('28-10-2026', 'Noticias se rehace como periódico: Auditavisión Noticias. Separa la noticia (lo que pasó y lo que consta) de la opinión (la Columna del Erario, nuestro argumento con documentos) y suma cuatro secciones: Seguimiento, con los casos abiertos y lo que falta para cerrarlos; la Mesa de redacción, con los titulares que estamos jalando, sin verificar; la Agenda del erario, con las fechas que fija la ley, y Cómo trabajamos, el método del rumor al documento. Y el verificador ahora te dice quién aparece en la nota y te lleva a su estado de cuenta y su salud financiera.'),
