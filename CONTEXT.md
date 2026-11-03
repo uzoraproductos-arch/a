@@ -7344,6 +7344,13 @@ Pedido del autor: «continuemos» (con los pendientes; era el primero de la list
 - **Revisado** en el navegador a 390 y 1280 px: portal de Jalisco con `?ml=inv`, ficha de Zapopan, piso municipal, portal de la Ciudad de México, padrón de la Enciclopedia y ficha del Auditor de entes, sin errores de consola ni desborde.
 - **Pendiente:** las dimensiones ambiental, legislativa y judicial del Planisferio, los umbrales del semáforo, la deuda municipal (Sistema de Alertas, sin descarga desde este entorno) y las ligas estatales «por cotejar».
 
+## Entrega — 03-11-2026: la deuda en la ficha de cada municipio (sello 20261103z)
+
+Pedido del autor: «integra lo que debe cada municipio y la ficha».
+
+- **La ficha:** el Auditor de entes carga `municipios-deuda.js` (`MUN_ARCHIVOS` de `insp_entes.py`) y su diagnóstico municipal suma «¿Cuánto pagó por su deuda?»: lo que pagó (capital, intereses y comisiones), lo que pidió prestado y los ADEFAS de 2024. Va en «Sin señal»: pagar deuda no es una irregularidad, y no se inventa un umbral.
+- **Lo que debe (el saldo):** no entró. `disciplinafinanciera.hacienda.gob.mx` dio 503 y archive.org no abrió desde este entorno. Lo publica Hacienda en su página de Disciplina Financiera (el archivo «Financiamientos de Municipios y sus Entes Públicos», con su hoja «Saldo por municipios y tipo de acreedor») y en el «Listado de Financiamientos y Obligaciones» del Registro Público Único. Cuando el autor lo suba, entra con su huella y su cuadre contra los totales de Hacienda, y se cierra `deuda-municipios`. Un estudio del CEFP que lo resume no es la fuente.
+
 ## Entrega — 03-11-2026: la deuda de los municipios, en su propia cuenta (sello 20261103y)
 
 Pedido del autor: «continúa con las deudas municipales».
