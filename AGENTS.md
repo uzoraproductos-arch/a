@@ -84,7 +84,13 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   `numeros_tres()` de la Enciclopedia (la misma función, nunca una copia). Junto a
   ella van «💰 Cuánto dinero es» (`presupuesto_modulos.cuanto()`) y «🧾 Los 16
   orígenes del ingreso» (`numeros_renglones(..., lleno=True)`: ya contabilizados,
-  porque en la ventana no corre `numeros.js`).
+  porque en el Planisferio no corre `numeros.js`).
+  **El mapa es lo principal** (rediseño del autor, 03-11-2026): la página es una sola
+  sección, sin «En esta página»; tras la entrada vienen las dimensiones y su mapa.
+  Los contadores, «Cuánto dinero es» y «Los 16 orígenes» van integrados debajo del
+  mapa **solo en la dimensión financiera** (`.pl-solo-dim[data-dim]`, que
+  `planisferio.js` esconde en las demás), y las 32 entidades abren en la ventana
+  lateral con el botón «📍 Las 32 entidades».
 - **No trae datos propios:** ordena en el territorio lo que la Enciclopedia
   ya cotejó (`AUDIT_DB`, `municipios-efipem.js`). Una cifra nueva entra
   primero a su módulo de la Enciclopedia y de ahí la lee el Planisferio.

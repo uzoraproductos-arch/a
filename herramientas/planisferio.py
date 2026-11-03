@@ -657,20 +657,18 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         '<a class="glos-drawer-todo" href="numeros-gasto-tres-presupuestos.html" style="text-align:center; text-decoration:none;">📚 Verlo en la Enciclopedia ➔</a>',
         'Enciclopedia · Números · Gasto público')
     # «Cuánto dinero es» y «Los 16 orígenes del ingreso» (pedido del autor,
-    # 03-11-2026): las mismas funciones de la Enciclopedia, en su ventana.
-    # Cada una se antepone, asi que van al reves: quedan Cuánto, Orígenes y la cuenta.
-    for tid, ico, marca, tit, cuerpo, href, hsh in (
-            ('plTplOrigenes', '🧾', 'Los 16 orígenes del ingreso', 'De dónde sale cada peso de 2026', origenes, 'numeros-los-16-origenes.html', 'origenes'),
-            ('plTplCuanto', '💰', 'Cuánto dinero es', 'El total de 2026 y lo que baja al territorio', cuanto, 'numeros-cuanto-dinero-es.html', 'cuanto')):
+    # 03-11-2026): las mismas funciones de la Enciclopedia. Desde el rediseño
+    # del mismo día van integradas en la dimensión financiera, no en ventana.
+    modulos = []
+    for ico, marca, tit, cuerpo, href in (
+            ('💰', 'Cuánto dinero es', 'El total de 2026 y lo que baja al territorio', cuanto, 'numeros-cuanto-dinero-es.html'),
+            ('🧾', 'Los 16 orígenes del ingreso', 'De dónde sale cada peso de 2026', origenes, 'numeros-los-16-origenes.html')):
         if not cuerpo:
             continue
         if not _existe(href):
             raise SystemExit('planisferio: «%s» apunta a %s, que no existe' % (marca, href))
-        cuenta_btn = ('<button type="button" class="pl-caj-b pl-cuenta-otra" data-cajon="%s" data-cajon-tit="%sTit" data-cajon-hash="%s" aria-haspopup="dialog">%s %s</button>'
-                      '<template id="%s">%s</template>') % (tid, tid, hsh, ico, marca, tid, _cajon(
-            ico, marca, tit, tid + 'Tit', cuerpo,
-            '<a class="glos-drawer-todo" href="%s" style="text-align:center; text-decoration:none;">📚 Verlo en la Enciclopedia ➔</a>' % href,
-            'Enciclopedia · Números · Presupuesto')) + cuenta_btn
+        modulos.append('<article class="pl-fin-mod"><h3><span aria-hidden="true">%s</span> %s</h3><p class="pl-fin-sub">%s</p>%s'
+                       '<p class="pl-ficha-ir"><a href="%s">📚 Verlo en la Enciclopedia ➔</a></p></article>' % (ico, marca, tit, cuerpo, href))
     dims = []
     for k, (i, ico, nom, que, ir, _ire, pinta) in enumerate(DIMENSIONES):
         if ir and not _existe(ir):
@@ -813,10 +811,21 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
           </div>
           <p class="pl-pie" id="plFuente"></p>
           <p class="pl-pie" id="plFalta"></p>
-          <nav class="pl-indice" aria-label="Las 32 entidades, una por una"><h3>Las 32 entidades, en orden alfabético</h3><ul>%s</ul></nav>
+          <div class="pl-indice-b"><button type="button" class="pl-caj-b pl-indice-btn" data-cajon="plTplIndice" data-cajon-tit="plTplIndiceTit" data-cajon-hash="entidades" aria-haspopup="dialog">📍 Las 32 entidades: entra a su portal</button></div>
+          <template id="plTplIndice">%s</template>
+          <div class="pl-solo-dim pl-fin" data-dim="financiera">
+            <h3 class="pl-fin-tit">Cuánto dinero es, de dónde sale y lo que baja al territorio</h3>
+            <p class="pl-fin-sub">Los tres presupuestos de la Federación en 2026, lo que transfiere a estados y municipios y lo que ingresaron los municipios. El ritmo por segundo es la cifra anual entre 31,536,000 segundos: sirve para dimensionarla, no es dinero que se mueva en tiempo real.</p>
+            <div class="pl-conts">%s</div>
+            <div class="pl-cuentas">%s</div>
+            %s
+          </div>
           <script type="application/json" id="plDatos">%s</script>
           <noscript><p>El mapa se colorea con JavaScript; sin él, cada entidad se abre desde la lista de arriba.</p></noscript>''' % (
-        ''.join(dims), lentes, ''.join(cajones), ''.join(plantillas), svg, indice, _json(datos))
+        ''.join(dims), lentes, ''.join(cajones), ''.join(plantillas), svg,
+        _cajon('📍', 'Las 32 entidades', 'Elige una entidad para entrar a su portal', 'plTplIndiceTit',
+               '<nav class="pl-indice" aria-label="Las 32 entidades, una por una"><ul>%s</ul></nav>' % indice),
+        contadores, cuenta_btn, ''.join(modulos), _json(datos))
     return {
         'archivo': ARCHIVO, 'menu': 'Planisferio', 'menu_archivo': ARCHIVO,
         'icono': '🗺️', 'titulo': 'Planisferio', 'lema': 'México en un mapa: cada entidad, cada municipio, cada peso',
@@ -828,10 +837,6 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
             {'id': 'mapa', 'titulo': 'Elige una dimensión',
              'texto': 'Hoy se pintan %d. Cada una trae su «Cómo leerla» y lo que su mapa no dice.' % len(pintadas),
              'tarjetas': [], 'bloque': bloque_mapa},
-            {'id': 'contadores', 'titulo': 'Cuánto dinero es, de dónde sale y lo que baja al territorio',
-             'texto': ('Los tres presupuestos de la Federación en 2026, lo que transfiere a estados y municipios y lo que ingresaron los municipios. '
-                       'El ritmo por segundo es la cifra anual entre 31,536,000 segundos: sirve para dimensionarla, no es dinero que se mueva en tiempo real.'),
-             'tarjetas': [], 'bloque': '<div class="pl-conts">%s</div><div class="pl-cuentas">%s</div>' % (contadores, cuenta_btn)},
         ] + ([] if not otras else [
             {'id': 'dimensiones', 'titulo': 'Las dimensiones que vienen',
              'texto': ('El Planisferio crece por entregas, una dimensión a la vez y, después, municipio por municipio. Mientras llegan al mapa, cada una ya tiene su lugar en la Enciclopedia:'),

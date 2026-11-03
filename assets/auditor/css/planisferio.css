@@ -155,3 +155,16 @@ p.pl-ficha-ir a:hover, p.pl-ficha-ir a:focus-visible { background: #16408c; }
 .pl-cont { display: flex; flex-direction: column; }
 .pl-cont-b { margin-top: auto; }
 .pl-cont-f { margin-bottom: 10px; }
+/* Rediseño del 03-11-2026: el mapa primero. Las 32 entidades abren en la
+   ventana lateral, y lo de la dimensión financiera va debajo del mapa. */
+.pl-indice-b { margin: 16px 0 0; }
+.pl-indice-btn { min-height: 52px; }
+.glos-drawer .pl-indice ul { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.pl-fin { margin: 28px 0 0; padding-top: 20px; border-top: 2px solid #d5dae3; }
+.pl-fin[hidden] { display: none; }
+.pl-fin-tit { margin: 0 0 6px; font-size: 22px; color: #0b2a63; }
+.pl-fin-sub { margin: 0 0 14px; }
+.pl-fin-mod { margin: 24px 0 0; padding: 18px 16px; border: 1px solid #d5dae3; border-radius: 16px; background: var(--bg-card, transparent); }
+.pl-fin-mod h3 { margin: 0 0 4px; font-size: 20px; color: #0b2a63; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pl-fin-tit, :root:not([data-theme="light"]) .pl-fin-mod h3 { color: #c9d8f2; } }
+:root[data-theme="dark"] .pl-fin-tit, :root[data-theme="dark"] .pl-fin-mod h3 { color: #c9d8f2; }

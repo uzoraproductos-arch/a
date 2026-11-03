@@ -143,7 +143,8 @@
       document.getElementById('plFalta').innerHTML = f && f.a.length ? (f.pend ? 'Sin cifra: ' + f.a.map(function (a) { return esc(porA[a].n); }).join(', ') + ' ' + chip('pendiente', f.pend) + '. ' : '') + esc(f.txt) : '';
       /* «Cómo leerla» y «Lo que este mapa no dice» abren en la ventana lateral
          (apartados.js, button[data-cajon]): solo se ven los de la dimensión elegida. */
-      Array.prototype.forEach.call(document.querySelectorAll('.pl-cajones [data-dim]'), function (b) { b.hidden = b.getAttribute('data-dim') !== dimP; });
+      /* Lo de una sola dimensión (los contadores, «Cuánto dinero es» y «Los 16 orígenes» son de la financiera) se ve solo en ella. */
+      Array.prototype.forEach.call(document.querySelectorAll('.pl-cajones [data-dim], .pl-solo-dim[data-dim]'), function (b) { b.hidden = b.getAttribute('data-dim') !== dimP; });
     }
     function fila(nom, v, est, anio, pend) {
       return '<dt>' + nom + ' · ' + anio + '</dt><dd>' + (v == null ? 'Sin cifra ' + chip('pendiente', pend) : '<b class="num-tabular">' + mdp(v) + '</b> ' + chip(est)) + '</dd>';
