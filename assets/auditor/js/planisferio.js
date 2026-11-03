@@ -60,6 +60,7 @@
       if (l.fmt === 'n') return num(v, 0);
       if (l.fmt === 'mbd') return num(v, 0) + ' mil b/d';
       if (l.fmt === 'mbd1') return num(v, 1) + ' mil b/d';
+      if (l.fmt === 'ha') return num(v, 0) + ' ha';
       return mdp(v);
     }
     D.e.forEach(function (e) { porA[e.a] = e; });
@@ -116,7 +117,7 @@
         });
         svg.appendChild(marcas);
       }
-      marcas.style.display = dimP === 'ambiental' ? '' : 'none';
+      marcas.style.display = dimP === 'ambiental' && /^ref/.test(lente.id) ? '' : 'none';
     }
     function pinta() {
       marca();
@@ -200,19 +201,29 @@
         '<a class="pl-ficha-ir" href="' + esc(e.p) + '#judicial">Ver su Poder Judicial en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
-    /* Sus recursos naturales: su refinería de PEMEX, si tiene (Segundo
-       Informe 2026 y estados financieros de PEMEX 2025). */
+    /* Sus recursos naturales: sus concesiones mineras (DGM, marzo de 2024) y su
+       refinería de PEMEX, si tiene (Segundo Informe 2026, Anuario 2024 y estados
+       financieros de PEMEX 2025). */
     function mdps(v) { return v == null ? 'no figura en la nota' : '<b class="num-tabular">' + (v < 0 ? '−' : '+') + '$' + num(Math.abs(v), 1) + ' mdp</b> ' + chip('oficial'); }
+    var PROD = { mayor: 'Una de las diez que dan el 94.9 % de la producción minera', menor: 'Entre las 17 que dan el 5.2 % de la producción minera' };
     function ambiental(e, fijo) {
-      var r = e.ref, f = lenteDe('refj').falta;
-      ficha.innerHTML = '<h3>' + esc(e.n) + '</h3>' + (r ?
+      var r = e.ref, m = e.min, refL = /^ref/.test(lente.id);
+      var minas = m ?
+        '<p class="pl-ficha-sub">⛏️ Concesiones mineras · marzo 2024</p><dl class="pl-ficha-dl">' +
+        '<dt>Títulos vigentes</dt><dd><b class="num-tabular">' + num(e.minT, 0) + '</b> ' + chip('oficial') + ' · lugar ' + m.lug + ' de 30</dd>' +
+        '<dt>Hectáreas que amparan</dt><dd><b class="num-tabular">' + num(e.minH, 0) + ' ha</b> ' + chip('oficial') + '</dd>' +
+        (m.t26 != null ? '<dt>Al 30 de junio de 2026</dt><dd><b class="num-tabular">' + num(m.t26, 0) + '</b> ' + chip('oficial') + '</dd>' : '') + '</dl>' +
+        '<p class="pl-ficha-mun">' + (PROD[m.prod] || 'No aparece entre las entidades con producción minera: tener concesiones no es tener minas trabajando') + '.</p>' :
+        '<p class="pl-ficha-sub">⛏️ No figura en el cuadro de concesiones mineras</p>';
+      var refi = r ?
         '<p class="pl-ficha-sub">🛢️ ' + esc(r.n) + ' · ' + esc(r.sede) + '</p><dl class="pl-ficha-dl">' +
         '<dt>Crudo procesado · junio 2026</dt><dd><b class="num-tabular">' + num(r.jun, 0) + ' mil b/d</b> ' + chip('oficial') + ' · lugar ' + r.lug + ' de 7</dd>' +
         '<dt>Promedio sep-25 a jun-26</dt><dd><b class="num-tabular">' + num(r.prom, 1) + ' mil b/d</b> ' + chip('derivado') + '</dd>' +
-        '<dt>Su mejor mes</dt><dd><b class="num-tabular">' + num(r.max, 0) + ' mil b/d</b> en ' + esc(r.mmax) + ' ' + chip('oficial') + '</dd>' +
+        '<dt>Capacidad · uso promedio</dt><dd><b class="num-tabular">' + num(r.cap, 0) + ' mil b/d · ' + num(r.uso, 1) + '%</b> ' + chip('derivado') + '</dd>' +
         '<dt>Valor ganado o perdido en libros · 2025</dt><dd>' + (r.id === 'olmeca' ? 'es de una filial y PEMEX la arrienda' : mdps(r.d25)) + '</dd></dl>' +
         '<p class="pl-ficha-mun">Procesar no es producir gasolina, y el valor en libros es una estimación, no dinero que salió de la caja.</p>' :
-        '<p class="pl-ficha-sub">Sin refinería de PEMEX</p><p class="pl-ficha-mun">' + esc(f.txt) + '</p>') +
+        '<p class="pl-ficha-sub">🛢️ Sin refinería de PEMEX</p>';
+      ficha.innerHTML = '<h3>' + esc(e.n) + '</h3>' + (refL ? refi + minas : minas + refi) +
         '<a class="pl-ficha-ir" href="' + esc(e.p) + '#ambiental">Ver sus recursos naturales en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
@@ -293,8 +304,11 @@
     }
     var m = /[?&]e=([^&#]+)/.exec(location.search), pedida = null;
     try { pedida = m ? decodeURIComponent(m[1]) : null; } catch (err) { pedida = null; }
-    /* ?d=deuda, ?d=inversion, ?d=ambiental, ?d=legislativa o ?d=judicial (desde el Auditor): abre el mapa en esa dimensión. */
+    /* ?d=deuda, ?d=inversion, ?d=ambiental, ?d=legislativa o ?d=judicial (desde el Auditor): abre el mapa en esa dimensión (y &l=, en esa lente). */
     var md = /[?&]d=([a-z]+)/.exec(location.search);
+    /* &l=minT (desde el Auditor o la Enciclopedia): la lente con que abre esa dimensión. */
+    var ml = /[?&]l=([A-Za-z]+)/.exec(location.search), lp = ml && lenteDe(ml[1]);
+    if (lp) ultima[lp.dim] = lp.id;
     if (md && D.dims[md[1]]) eligeDim(md[1]); else pinta();
     /* ?e=JAL&m=1 (desde el Auditor): si la entidad ya tiene el mapa de sus
        municipios, se va directo a él; si no, se queda con su ficha. */

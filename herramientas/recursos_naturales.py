@@ -200,6 +200,47 @@ EF = {'tx': 'Petróleos Mexicanos, estados financieros consolidados 2025, notas 
       'url': 'https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2025/tomo/VIII/52TYY.05.DAR.pdf',
       'archivo': 'investigaciones/costo-vivo/PEMEX_EstadosFinancierosConsolidados2025.pdf',
       'sha256': '0a6fe9e89e0d94714ea441134ac3c1ee7446c4c4713baaf9e62d8ebd554b86b2'}
+AE = {'tx': 'Petróleos Mexicanos, Anuario Estadístico 2024, cuadro 3.6 «Capacidad de proceso por refinería, 2024»',
+      'url': 'https://www.pemex.com/ri/Publicaciones/Anuario%20Estadistico%20Archivos/Anuario%20Estad%C3%ADstico%202024.pdf',
+      'archivo': 'investigaciones/recursos-naturales/PEMEX_AnuarioEstadistico2024.pdf',
+      'sha256': '8114ab3ab3d1fe0ca4f68a99e01ca1c7cf5f235ecad235607ee4c33b0b41c897'}
+# Capacidad de destilación atmosférica de crudo al cierre de 2024, miles de
+# barriles diarios (Anuario 2024, cuadro 3.6, p. 48). Sumadas dan los 1,980
+# del Sistema Nacional de Refinación que publica el mismo cuadro.
+CAPACIDAD = {'cadereyta': 275, 'madero': 190, 'olmeca': 340, 'minatitlan': 285, 'salamanca': 245, 'salina-cruz': 330, 'tula': 315}
+CAP_SNR = 1980
+
+# Las concesiones mineras (03-11-2026, la entrega que pidió el autor después
+# de las refinerías). Secretaría de Economía, Prontuario Estadístico de la
+# Minería enero-junio 2025, cuadro «Número de concesiones mineras y superficie
+# por Entidad Federativa 2024», p. 20, con fuente «DGM, marzo 2024». Treinta
+# entidades: la Ciudad de México y Quintana Roo no figuran en el cuadro.
+PRONT = {'tx': 'Secretaría de Economía, Prontuario Estadístico de la Minería, enero-junio 2025, cuadro «Número de concesiones mineras y superficie por Entidad Federativa 2024» '
+               '(fuente del cuadro: Dirección General de Minas, marzo de 2024)',
+         'url': 'https://www.gob.mx/cms/uploads/attachment/file/1042764/Prontuario_Ene-Jun_2025.pdf',
+         'archivo': 'investigaciones/recursos-naturales/SE_ProntuarioMineria_EneJun2025.pdf',
+         'sha256': '6de85f293d5bc78f65eb9be89ef7fb089db5be5c95d5c23d64e7f86ba128e353'}
+MINAS = {'AGS': (136, 49256.43), 'BC': (528, 537622.68), 'BCS': (148, 417000.27), 'CAM': (15, 2009.67), 'COAH': (1738, 914040.82),
+         'COL': (258, 172590.75), 'CHIS': (47, 54220.31), 'CHIH': (3069, 1428070.42), 'DGO': (3402, 1491399.90), 'GTO': (578, 207235.44),
+         'GRO': (594, 593182.55), 'HGO': (407, 125064.29), 'JAL': (1252, 708584.26), 'MÉX': (224, 140259.88), 'MICH': (691, 731218.75),
+         'MOR': (45, 11681.52), 'NAY': (367, 287557.81), 'NL': (561, 114681.11), 'OAX': (286, 311578.15), 'PUE': (301, 102312.39),
+         'QRO': (340, 87002.08), 'SLP': (552, 322711.8409), 'SIN': (1249, 610318.84), 'SON': (4029, 2687585.45), 'TAB': (3, 1313.00),
+         'TAM': (102, 92959.99), 'TLAX': (2, 1803.00), 'VER': (78, 71089.79), 'YUC': (29, 9751.28), 'ZAC': (2200, 1186071.46)}
+MINAS_TOT = (23231, 13470174)
+# Lo que paga la minería por sus concesiones y lo que extrae (millones de
+# pesos, enero a junio de 2025, cifras preliminares de Hacienda que reproduce
+# el mismo Prontuario, p. 21): Ley Federal de Derechos, arts. 263, 268, 269 y 270.
+DERECHOS = [('263', 'Por la concesión (cuota por hectárea)', 1497.3), ('268', 'Derecho especial sobre minería', 9806.5),
+            ('269', 'Derecho adicional sobre minería', 6.0), ('270', 'Derecho extraordinario sobre minería (oro, plata y platino)', 982.1)]
+DERECHOS_TOT = 12291.8
+# Segundo Informe de Gobierno, p. 444 (p. 468 del PDF): el corte al 30 de
+# junio de 2026, nacional y de cuatro estados; las diez entidades que dan el
+# 94.9 % del valor de la producción (nota 1/) y las 17 que dan el 5.2 % (2/).
+MIN26 = {'SON': 3643, 'DGO': 3178, 'CHIH': 2761, 'ZAC': 1999}
+NAC26 = {'t': 20542, 'mha': 9.19, 'pct': 4.6, 'canc': 2141, 'rec': 1.62}
+PROD_MAYOR = ['BCS', 'CHIH', 'COAH', 'COL', 'DGO', 'GRO', 'JAL', 'SLP', 'SON', 'ZAC']
+PROD_MENOR = ['AGS', 'BC', 'CAM', 'CHIS', 'MÉX', 'GTO', 'HGO', 'MICH', 'NAY', 'NL', 'OAX', 'PUE', 'QRO', 'SIN', 'TAM', 'VER', 'YUC']
+INF_MIN = 'p. 444 (p. 468 del PDF)'
 
 
 def _huella(doc):
@@ -220,12 +261,17 @@ def refinerias():
     diez meses (media aritmética) y el lugar en junio de 2026."""
     _huella(INF)
     _huella(EF)
+    _huella(AE)
     out = []
     for i, (k, n, sede, a, m, d25, d24, d23, vu25, vu24) in enumerate(REFINERIAS):
         if len(m) != len(MESES):
             raise SystemExit('recursos_naturales: %s no trae los %d meses' % (k, len(MESES)))
         out.append({'id': k, 'n': n, 'sede': sede, 'a': a, 'm': m, 'jun': m[-1], 'prom': round(sum(m) / len(m), 1),
                     'max': max(m), 'mmax': MES_LARGO[MESES[m.index(max(m))]], 'd25': d25, 'd24': d24, 'd23': d23, 'vu25': vu25, 'vu24': vu24})
+        cap = CAPACIDAD[k]
+        out[-1].update({'cap': cap, 'uso': round(out[-1]['prom'] / cap * 100, 1), 'usoj': round(m[-1] / cap * 100, 1)})
+    if sum(CAPACIDAD.values()) != CAP_SNR or set(CAPACIDAD) != {r['id'] for r in out}:
+        raise SystemExit('recursos_naturales: las capacidades por refinería ya no suman los %s mil barriles diarios del Anuario' % format(CAP_SNR, ','))
     # La suma de las etiquetas de cada mes contra el total publicado: el
     # redondeo de la gráfica deja hasta 2 miles de diferencia, nunca más.
     for j, tot in enumerate(TOTAL_SNR):
@@ -252,6 +298,28 @@ def refinerias_estados():
     return out
 
 
+def mineria(abbrs=None):
+    """Las concesiones mineras de cada entidad (DGM, marzo de 2024) y lo
+    derivado: su parte del total nacional y las hectáreas por título. Si el
+    cuadro ya no suma su total, la generación se detiene."""
+    _huella(PRONT)
+    t = sum(v[0] for v in MINAS.values())
+    h = sum(v[1] for v in MINAS.values())
+    if t != MINAS_TOT[0] or abs(h - MINAS_TOT[1]) > 1:
+        raise SystemExit('recursos_naturales: el cuadro de concesiones suma %d títulos y %.0f ha; el Prontuario dice %d y %d' % (t, h, MINAS_TOT[0], MINAS_TOT[1]))
+    if abs(sum(x[2] for x in DERECHOS) - DERECHOS_TOT) > 0.2:
+        raise SystemExit('recursos_naturales: los derechos mineros ya no suman %s' % DERECHOS_TOT)
+    if abbrs is not None and not set(MINAS) | set(MIN26) <= set(abbrs):
+        raise SystemExit('recursos_naturales: claves de entidad que no existen en la base: %s' % sorted((set(MINAS) | set(MIN26)) - set(abbrs)))
+    orden = sorted(MINAS, key=lambda a: -MINAS[a][0])
+    out = {}
+    for a, (n, ha) in MINAS.items():
+        out[a] = {'t': n, 'ha': round(ha), 'pt': round(n / MINAS_TOT[0] * 100, 2), 'ph': round(ha / MINAS_TOT[1] * 100, 2),
+                  'hxt': round(ha / n), 'lug': orden.index(a) + 1, 't26': MIN26.get(a),
+                  'prod': 'mayor' if a in PROD_MAYOR else 'menor' if a in PROD_MENOR else None}
+    return out
+
+
 def _mdps(v):
     if v is None:
         return '—'
@@ -262,12 +330,18 @@ def _chip(e, pend=None):
     return '<span class="est-chip est-%s"%s>%s</span>' % (e, ' data-pend="%s"' % pend if pend else '', e)
 
 
+def uso_snr():
+    """El sistema entero: el promedio del total publicado en los diez meses ÷ la capacidad de las siete × 100."""
+    return round(sum(TOTAL_SNR) / len(TOTAL_SNR) / CAP_SNR * 100, 1)
+
+
 def tabla_refinerias():
     R = refinerias()
     filas = ''.join(
         '<tr><th scope="row">%s<br><small>%s</small></th><td class="num-tabular">%s</td><td class="num-tabular">%s</td><td class="num-tabular">%s<br><small>%s</small></td>'
-        '<td class="num-tabular">%s</td><td class="num-tabular">%s</td></tr>' % (
+        '<td class="num-tabular">%s</td><td class="num-tabular">%s</td><td class="num-tabular">%s</td><td class="num-tabular">%s</td></tr>' % (
             html.escape(r['n']), html.escape(r['sede']), format(r['jun'], ','), format(r['prom'], ',.1f'), format(r['max'], ','), r['mmax'],
+            format(r['cap'], ','), format(r['uso'], '.1f') + ' %',
             _mdps(r['d25']) if r['d25'] is not None else ('no la consolida como unidad propia' if r['id'] == 'olmeca' else 'no figura'),
             _mdps(r['d24']) if r['d24'] is not None else ('—' if r['id'] == 'olmeca' else 'no figura'))
         for r in sorted(R, key=lambda x: -x['jun']))
@@ -275,11 +349,38 @@ def tabla_refinerias():
     return ('<div class="leg-tabla-caja"><table class="leg-tabla"><caption>El Sistema Nacional de Refinación, refinería por refinería '
             '(miles de barriles diarios de crudo procesado y millones de pesos)</caption>'
             '<thead><tr><th scope="col">Refinería</th><th scope="col">Junio 2026 %s</th><th scope="col">Promedio sep-25 a jun-26 %s</th>'
-            '<th scope="col">Su mejor mes %s</th><th scope="col">Valor perdido (−) o recuperado (+) en libros, 2025 %s</th><th scope="col">Igual, 2024 %s</th></tr></thead>'
-            '<tbody>%s</tbody><tfoot><tr><th scope="row">Las siete</th><td class="num-tabular">%s</td><td colspan="4"><small>La suma de las etiquetas da %s; '
-            'el Informe publica %s. La diferencia es redondeo de la gráfica.</small></td></tr></tfoot></table></div>') % (
-        _chip('oficial'), _chip('derivado'), _chip('oficial'), _chip('oficial'), _chip('oficial'), filas,
-        format(s_jun, ','), format(s_jun, ','), format(TOTAL_SNR[-1], ','))
+            '<th scope="col">Su mejor mes %s</th><th scope="col">Capacidad de destilación, 2024 %s</th><th scope="col">Uso promedio de su capacidad %s</th><th scope="col">Valor perdido (−) o recuperado (+) en libros, 2025 %s</th><th scope="col">Igual, 2024 %s</th></tr></thead>'
+            '<tbody>%s</tbody><tfoot><tr><th scope="row">Las siete</th><td class="num-tabular">%s</td><td colspan="2"><small>La suma de las etiquetas da %s; '
+            'el Informe publica %s. La diferencia es redondeo de la gráfica.</small></td><td class="num-tabular">%s</td><td class="num-tabular">%s</td><td colspan="2"><small>'
+            'Uso: promedio de los diez meses ÷ capacidad × 100, cuenta nuestra. La capacidad es la del cierre de 2024 (PEMEX, Anuario Estadístico 2024, cuadro 3.6, p. 48).</small></td></tr></tfoot></table></div>') % (
+        _chip('oficial'), _chip('derivado'), _chip('oficial'), _chip('oficial'), _chip('derivado'), _chip('oficial'), _chip('oficial'), filas,
+        format(s_jun, ','), format(s_jun, ','), format(TOTAL_SNR[-1], ','), format(CAP_SNR, ','), format(uso_snr(), '.1f') + ' %')
+
+
+def tabla_mineria():
+    import auditorias
+    nom = {e['abbr']: e['name'] for e in auditorias.db()['estados']}
+    M = mineria(list(nom))
+    P = {'mayor': 'de las 10 que dan el 94.9 %', 'menor': 'de las 17 que dan el 5.2 %', None: 'no figura'}
+    filas = ''.join(
+        '<tr><th scope="row">%d. %s</th><td class="num-tabular">%s</td><td class="num-tabular">%s</td><td class="num-tabular">%s %%</td>'
+        '<td class="num-tabular">%s</td><td class="num-tabular">%s</td><td>%s</td></tr>' % (
+            x['lug'], html.escape(nom[a]), _n(x['t']), _n(x['ha']), _n(x['pt'], 2), _n(x['hxt']), _n(x['t26']) if x['t26'] is not None else '—', P[x['prod']])
+        for a, x in sorted(M.items(), key=lambda i: i[1]['lug']))
+    return ('<div class="leg-tabla-caja"><table class="leg-tabla"><caption>Las concesiones mineras de cada entidad (títulos vigentes y hectáreas que amparan)</caption>'
+            '<thead><tr><th scope="col">Entidad</th><th scope="col">Títulos, marzo de 2024 %s</th><th scope="col">Hectáreas %s</th><th scope="col">Su parte de los títulos del país %s</th>'
+            '<th scope="col">Hectáreas por título %s</th><th scope="col">Títulos, junio de 2026 %s</th><th scope="col">En la producción minera %s</th></tr></thead>'
+            '<tbody>%s</tbody><tfoot><tr><th scope="row">Las %d</th><td class="num-tabular">%s</td><td class="num-tabular">%s</td><td colspan="4"><small>%s no figuran en el cuadro. '
+            'Junio de 2026: el Segundo Informe solo da cuatro estados y el total nacional (%s títulos).</small></td></tr></tfoot></table></div>') % (
+        _chip('oficial'), _chip('oficial'), _chip('derivado'), _chip('derivado'), _chip('oficial'), _chip('oficial'), filas, len(M),
+        _n(MINAS_TOT[0]), _n(MINAS_TOT[1]), _y([nom[a] for a in sorted(set(nom) - set(M))]), _n(NAC26['t']))
+
+
+def tabla_derechos():
+    filas = ''.join('<tr><th scope="row">Art. %s · %s</th><td class="num-tabular">$%s mdp</td></tr>' % (k, html.escape(n), _n(v, 1)) for k, n, v in DERECHOS)
+    return ('<div class="leg-tabla-caja"><table class="leg-tabla"><caption>Lo que pagó la minería en derechos, enero a junio de 2025 (cifras preliminares de Hacienda)</caption>'
+            '<thead><tr><th scope="col">Derecho (Ley Federal de Derechos)</th><th scope="col">Millones de pesos %s</th></tr></thead><tbody>%s</tbody>'
+            '<tfoot><tr><th scope="row">Total</th><td class="num-tabular">$%s mdp</td></tr></tfoot></table></div>') % (_chip('oficial'), filas, _n(DERECHOS_TOT, 1))
 
 
 def tabla_ramos():
@@ -374,17 +475,21 @@ def temas():
                _o('Vigilancia, auditoría y la ASF (arts. 54 y 61)', ley('lepepm', 'arts. 54 y 61')),
                _o('Extinción de las subsidiarias y abrogación de la Ley de PEMEX de 2014 (transitorios segundo y tercero)', ley('lepepm', 'transitorios'))],
         'sug': ['¿Quién audita a PEMEX?', '¿Cuánto crudo procesa cada refinería?', '¿Qué refinería perdió más valor?']}
+    uso = sorted(R, key=lambda r: -r['uso'])
     peor24 = min((r for r in R if r['d24'] is not None), key=lambda r: r['d24'])
     peor25 = min((r for r in R if r['d25'] is not None), key=lambda r: r['d25'])
     t['rn_refinerias'] = {
         'tit': 'Las refinerías de PEMEX: cuánto procesan y cuánto valen en sus libros',
         'h': ('<p>El Sistema Nacional de Refinación tiene <b>siete refinerías</b>. En junio de 2026 la que más crudo procesó fue la <b>%s</b>, con %s mil barriles diarios %s, '
               'y la que menos, la <b>%s</b>, con %s mil %s. De septiembre de 2025 a junio de 2026 el promedio de Olmeca fue de %s mil barriles diarios %s; el texto del Informe, redondeado, dice 188.</p>'
+              '<p>¿Cuánto de lo que pueden procesar usan? PEMEX publica la capacidad de destilación de cada una al cierre de 2024: <b>%s mil barriles diarios</b> entre las siete %s. '
+              'En los diez meses el sistema usó en promedio el <b>%s %%</b> %s. La que más, la <b>%s</b>, con el %s %%; la que menos, la <b>%s</b>, con el %s %% %s.</p>'
               '<p>Lo que casi nadie cruza está en los estados financieros de PEMEX: cada año revisa si cada refinería todavía vale lo que dicen sus libros. Si espera recuperar menos, '
               'reconoce un <b>deterioro</b> (pierde valor); si mejora, una <b>reversa</b>. En 2024 la %s perdió %s %s. En 2025 la %s recuperó %s %s por su coquizadora, y la %s perdió %s %s.</p>'
               '<p>Dos cosas que no dicen esas cifras: el deterioro es una <b>estimación contable</b> con el precio, el tipo de cambio y la tasa que supone PEMEX, no dinero que salió de la caja; '
               'y Olmeca no aparece en esa nota porque es de una filial y PEMEX la arrienda. Lo que costó Olmeca ya lo audita la plataforma en su investigación.</p>') % (
             jun[0]['n'], jun[0]['jun'], _chip('oficial'), jun[-1]['n'], jun[-1]['jun'], _chip('oficial'), format(por['olmeca']['prom'], '.1f'), _chip('derivado'),
+            format(CAP_SNR, ','), _chip('oficial'), format(uso_snr(), '.1f'), _chip('derivado'), uso[0]['n'], format(uso[0]['uso'], '.1f'), uso[-1]['n'], format(uso[-1]['uso'], '.1f'), _chip('derivado'),
             peor24['n'], _mdps(peor24['d24']).lstrip('−'), _chip('oficial'), por['tula']['n'], _mdps(por['tula']['d25']).lstrip('+'), _chip('oficial'),
             peor25['n'], _mdps(peor25['d25']).lstrip('−'), _chip('oficial')),
         'ci': [{'v': '7', 'etq': 'refinerías en el Sistema Nacional de Refinación', 'e': 'oficial'},
@@ -392,8 +497,9 @@ def temas():
         'fu': [_o('Crudo procesado por refinería y por mes, sep-25 a jun-26; el promedio de cada una es la media de los diez meses (nuestra)', _f(INF, '')),
                _o('Deterioro y reversa de 2025 por refinería', _f(EF, 'p. 59')),
                _o('Deterioro y reversa de 2024 y 2023 por refinería', _f(EF, 'p. 63')),
-               _o('Valor de uso de cada refinería, 2025, 2024 y 2023', _f(EF, 'pp. 61 y 65'))],
-        'sug': ['¿Cuánto crudo procesa la refinería de Salina Cruz?', '¿Qué es el deterioro de un activo?', '¿Cuánto costó Dos Bocas?']}
+               _o('Valor de uso de cada refinería, 2025, 2024 y 2023', _f(EF, 'pp. 61 y 65')),
+               _o('Capacidad de destilación atmosférica de cada refinería al cierre de 2024; el uso (promedio ÷ capacidad × 100) es nuestro', _f(AE, 'p. 48'))],
+        'sug': ['¿Cuánto crudo procesa la refinería de Salina Cruz?', '¿Qué refinería usa más su capacidad?', '¿Cuánto costó Dos Bocas?']}
     t['rn_auditar'] = {
         'tit': 'Lo que el autor subrayó: la guía para auditar recursos naturales',
         'h': '<p>Lo subrayado en el capítulo marca la ruta. Cada punto, con lo que ya tiene la plataforma y lo que falta:</p>%s' % _lista([
@@ -415,8 +521,9 @@ def temas():
             '<b>La ley vigente también envejece.</b> La ley nuclear de 1985 sigue nombrando a la «Secretaría de Energía, Minas e Industria Paraestatal».',
             '<b>Procesar no es producir.</b> El crudo que entra a una refinería no es la gasolina que sale: la gasolina depende de cada planta.',
             '<b>Un deterioro no es dinero perdido en efectivo.</b> Es una estimación de lo que la refinería dejará de generar, con supuestos que PEMEX pone y que cambian cada año.',
-            '<b>Un estado sin refinería no es un estado sin problema ambiental.</b> El mapa marca dónde hay refinerías, no dónde hay daño. Las minas, el agua y los bosques de cada estado '
-            'todavía no tienen cifra en la plataforma.',
+            '<b>Un estado sin refinería no es un estado sin problema ambiental.</b> El mapa marca dónde hay refinerías y concesiones mineras, no dónde hay daño. El agua y los bosques '
+            'de cada estado todavía no tienen cifra en la plataforma.',
+            '<b>La capacidad no es una meta.</b> Usar poco más de la mitad de una refinería, como hizo el sistema en esos diez meses, puede ser falta de crudo, mantenimiento o una planta que no arranca: el porcentaje dice cuánto, no por qué.',
             '<b>El libro no trae el agua,</b> que es un recurso renovable en crisis en varios estados y se explota por concesión.']),
         'fu': [_o('La ley nuclear vigente todavía nombra a la SEMIP', ley('lnuc', 'art. 3')),
                _o('Las leyes que cita el libro', _libro('pp. 83 a 94'), 'derivado')],
@@ -434,22 +541,120 @@ def temas():
             'tit': '%s: cuánto crudo procesa' % r['n'],
             'h': ('<p>La <b>%s</b>, en %s, procesó <b>%s mil barriles diarios</b> de petróleo crudo en junio de 2026 %s: el lugar %d de las siete refinerías de PEMEX. '
                   'De septiembre de 2025 a junio de 2026 promedió %s mil %s, y su mejor mes fue %s, con %s mil %s.</p>%s'
-                  '<p>Procesar crudo no es producir gasolina, y un mes bajo puede ser mantenimiento. Su capacidad instalada sigue %s.</p>') % (
+                  '<p>Su capacidad de destilación es de <b>%s mil barriles diarios</b> (PEMEX, cierre de 2024) %s: en esos diez meses usó en promedio el <b>%s %%</b> %s, '
+                  'y en junio, el %s %%. Procesar crudo no es producir gasolina, y un mes bajo puede ser mantenimiento.</p>') % (
                 r['n'].replace('Refinería ', 'refinería '), r['sede'], format(r['jun'], ','), _chip('oficial'), r['lug'], format(r['prom'], '.1f'), _chip('derivado'),
-                r['mmax'], format(r['max'], ','), _chip('oficial'), val, _chip('pendiente', 'refinerias-capacidad')),
+                r['mmax'], format(r['max'], ','), _chip('oficial'), val, format(r['cap'], ','), _chip('oficial'), format(r['uso'], '.1f'), _chip('derivado'), format(r['usoj'], '.1f')),
             'ci': [{'v': '%s mil' % format(r['jun'], ','), 'etq': 'barriles diarios de crudo, junio de 2026', 'e': 'oficial'},
-                   {'v': '%s mil' % format(r['prom'], '.1f'), 'etq': 'promedio de sep-25 a jun-26', 'e': 'derivado', 'op': 'media aritmética de los diez meses'}],
-            'fu': [_o('Crudo procesado por refinería y por mes', _f(INF, ''))] + ([] if r['id'] == 'olmeca' else [_o('Deterioro y reversa por refinería, 2025 y 2024', _f(EF, 'pp. 59 y 63'))]),
+                   {'v': '%s mil' % format(r['prom'], '.1f'), 'etq': 'promedio de sep-25 a jun-26', 'e': 'derivado', 'op': 'media aritmética de los diez meses'},
+                   {'v': '%s %%' % format(r['uso'], '.1f'), 'etq': 'de su capacidad, en promedio', 'e': 'derivado', 'op': 'promedio de los diez meses ÷ %s mil de capacidad × 100' % r['cap']}],
+            'fu': [_o('Crudo procesado por refinería y por mes', _f(INF, '')), _o('Capacidad de destilación al cierre de 2024', _f(AE, 'p. 48'))] + ([] if r['id'] == 'olmeca' else [_o('Deterioro y reversa por refinería, 2025 y 2024', _f(EF, 'pp. 59 y 63'))]),
             'sug': ['¿Cuánto crudo procesa cada refinería?', '¿Qué refinería perdió más valor?', '¿Quién audita a PEMEX?']}
+    _temas_mineria(t)
     for k, x in t.items():
-        x['ir'] = [ARCHIVO + '#' + (k.replace('_', '-') if not k.startswith('rn_ref_') else 'rn-refinerias'), TITULO]
+        x['ir'] = [ARCHIVO + '#' + (k.replace('_', '-') if not k.startswith(('rn_ref_', 'rn_min_')) else 'rn-refinerias' if k.startswith('rn_ref_') else 'rn-mineria'), TITULO]
         x['aqui'] = x['ir']
+        if k.startswith('rn_min_'):
+            x['ir'] = [x.pop('portal') + '#ambiental', 'sus recursos naturales en el Planisferio']
     return t
+
+
+def _y(xs):
+    return xs[0] if len(xs) == 1 else ', '.join(xs[:-1]) + ' y ' + xs[-1]
+
+
+def _n(v, d=0):
+    return format(v, ',.%df' % d)
+
+
+def _temas_mineria(t):
+    """Las concesiones mineras: el panorama nacional y una ficha por entidad."""
+    import auditorias
+    import planisferio
+    E = auditorias.db()['estados']
+    nom = {e['abbr']: e['name'] for e in E}
+    M = mineria(list(nom))
+    orden = sorted(M, key=lambda a: -M[a]['t'])
+    sin_prod = [a for a in orden if M[a]['prod'] is None]
+    fp = _f(PRONT, 'p. 20')
+    fi = {'tx': 'Presidencia de la República, Segundo Informe de Gobierno 2025-2026, sector minero, %s' % INF_MIN, 'url': INF['url']}
+    fd = {'tx': 'Secretaría de Economía, Prontuario Estadístico de la Minería, enero-junio 2025, «Recaudación fiscal del sector minero», p. 21 (cifras preliminares de Hacienda)', 'url': PRONT['url']}
+    d26 = sorted(MIN26, key=lambda a: MIN26[a] - M[a]['t'])
+    implicita = round(NAC26['rec'] / 0.15, 1)
+    t['rn_mineria'] = {
+        'tit': 'Las concesiones mineras, estado por estado',
+        'h': ('<p>Los minerales son de la Nación y un particular solo los explota con una <b>concesión</b> de la Secretaría de Economía. En marzo de 2024 había '
+              '<b>%s títulos</b> vigentes sobre <b>%s hectáreas</b> %s, en %d entidades. <b>%s</b> tenía más que nadie: %s títulos %s, el %s %% del país %s; '
+              'le seguían %s y %s. %s no figuran en el cuadro.</p>'
+              '<p>El Segundo Informe da un corte más nuevo, pero solo nacional y de cuatro estados: al 30 de junio de 2026 quedaban <b>%s títulos</b> sobre '
+              '<b>%s millones de hectáreas</b>, el %s %% del territorio %s, y se habían cancelado %s concesiones por incumplir sus obligaciones, con %s millones de hectáreas '
+              'de vuelta al Estado %s.</p>'
+              '<p>Lo que paga una mina se ve en la Ley Federal de Derechos: de enero a junio de 2025 la minería pagó <b>$%s mdp</b> en derechos %s, y de ellos solo '
+              '$%s mdp fueron la cuota por hectárea concesionada (art. 263); lo demás se cobra sobre lo que vende y extrae (arts. 268 a 270). Esa recaudación no se publica por estado.</p>') % (
+            _n(MINAS_TOT[0]), _n(MINAS_TOT[1]), _chip('oficial'), len(M), nom[orden[0]], _n(M[orden[0]]['t']), _chip('oficial'), _n(M[orden[0]]['pt'], 2), _chip('derivado'),
+            nom[orden[1]], nom[orden[2]], _y([nom[a] for a in sorted(set(nom) - set(M))]),
+            _n(NAC26['t']), _n(NAC26['mha'], 2), _n(NAC26['pct'], 1), _chip('oficial'), _n(NAC26['canc']), _n(NAC26['rec'], 2), _chip('oficial'),
+            _n(DERECHOS_TOT, 1), _chip('oficial'), _n(DERECHOS[0][2], 1)),
+        'ci': [{'v': _n(MINAS_TOT[0]), 'etq': 'títulos de concesión minera vigentes en marzo de 2024 (DGM)', 'e': 'oficial'},
+               {'v': _n(NAC26['t']), 'etq': 'títulos vigentes al 30 de junio de 2026 (Segundo Informe)', 'e': 'oficial'},
+               {'v': '$%s mdp' % _n(DERECHOS_TOT, 1), 'etq': 'derechos mineros pagados de enero a junio de 2025 (preliminar)', 'e': 'oficial'}],
+        'fu': [_o('Títulos y hectáreas concesionadas por entidad, marzo de 2024; las partes de cada estado y las hectáreas por título son nuestras', fp),
+               _o('Títulos y superficie al 30 de junio de 2026, cancelaciones y las entidades con producción minera', fi),
+               _o('Derechos mineros de enero a junio de 2025 (Ley Federal de Derechos, arts. 263, 268, 269 y 270)', fd),
+               _o('Concesiones, concurso, plazo y exclusiones (arts. 5, 14 Bis y 15)', ley('lmin', 'arts. 5, 14 Bis y 15'))],
+        'sug': ['¿Cuántas concesiones mineras tiene Sonora?', '¿Qué estado tiene más concesiones mineras?', '¿Cuánto paga una mina por su concesión?']}
+    t['rn_mineria_ciegos'] = {
+        'tit': 'Lo que el cuadro de concesiones no dice',
+        'h': '<p>Cinco cosas que conviene preguntar antes de leer el mapa de las minas:</p>%s' % _lista([
+            ('<b>Una concesión no es una mina trabajando.</b> %s tienen concesiones y no aparecen entre las 27 entidades con producción minera que enlista el Informe. '
+             'La concesión da el derecho a explorar y explotar; no dice que ya se excave.') % _y([nom[a] for a in sin_prod]),
+            '<b>Hectárea concesionada no es hectárea excavada.</b> El cuadro mide el terreno que ampara cada título, no el tajo ni la presa de jales.',
+            ('<b>Dos cortes que no se explican entre sí.</b> En marzo de 2024 eran %s millones de hectáreas %s; en junio de 2026, %s millones %s. Pero el Informe dice que los %s millones '
+             'de hectáreas recuperadas son el 15 %% de lo concesionado en octubre de 2024, lo que daría unos %s millones %s (cuenta nuestra). Pudo haber concesiones vencidas o '
+             'renuncias en medio, pero ninguno de los dos documentos lo explica. Es pregunta para la Secretaría de Economía.') % (
+                _n(MINAS_TOT[1] / 1e6, 2), _chip('oficial'), _n(NAC26['mha'], 2), _chip('oficial'), _n(NAC26['rec'], 2), _n(implicita, 1), _chip('derivado')),
+            ('<b>El cuadro por estado no se ha puesto al día.</b> El Prontuario de enero-junio de 2025 repite el corte de marzo de 2024; el Informe solo da cuatro estados al día: %s.') % '; '.join(
+                '%s, %s títulos (%s)' % (nom[a], _n(MIN26[a]), ('−' if MIN26[a] < M[a]['t'] else '+') + _n(abs(MIN26[a] - M[a]['t']))) for a in d26),
+            '<b>La grava y la arena no están ahí.</b> La Ley de Minería no se aplica a las rocas que solo sirven para materiales de construcción (art. 5, fr. IV): '
+            'esos bancos de material los regulan los estados y municipios, y no salen en este cuadro.']),
+        'fu': [_o('Títulos y hectáreas por entidad, marzo de 2024', fp), _o('Corte de junio de 2026, cancelaciones y entidades con producción', fi),
+               _o('Exclusión de las rocas para construcción (art. 5, fr. IV)', ley('lmin', 'art. 5'))],
+        'sug': ['¿Qué estado tiene más concesiones mineras?', '¿Cuántas concesiones mineras se cancelaron?', '¿Qué ley rige la minería?']}
+    for a in nom:
+        x = M.get(a)
+        if x:
+            cambio = ''
+            if x['t26'] is not None:
+                cambio = (' Al 30 de junio de 2026 el Segundo Informe le cuenta <b>%s títulos</b> %s: %s %s que en marzo de 2024 %s.') % (
+                    _n(x['t26']), _chip('oficial'), _n(abs(x['t26'] - x['t'])), 'menos' if x['t26'] < x['t'] else 'más', _chip('derivado'))
+            prod = {'mayor': 'Es una de las diez entidades que dan el 94.9 % del valor de la producción minera del país.',
+                    'menor': 'Está entre las 17 entidades que juntas dan el 5.2 % del valor de la producción minera.',
+                    None: 'No aparece entre las 27 entidades con producción minera que enlista el Informe: tener concesiones no es lo mismo que tener minas trabajando.'}[x['prod']]
+            h = ('<p>En marzo de 2024 <b>%s</b> tenía <b>%s títulos de concesión minera</b> vigentes %s, sobre <b>%s hectáreas</b> %s: el lugar %d de %d entidades, '
+                 'con el %s %% de los títulos del país %s y unas %s hectáreas por título %s.%s</p><p>%s</p>'
+                 '<p>Que una empresa tenga una concesión no es una irregularidad: lo que se audita es que pague sus derechos, cumpla sus obligaciones y repare el daño. '
+                 'Hectárea concesionada no es hectárea excavada, y lo que paga la minería no se publica por estado.</p>') % (
+                nom[a], _n(x['t']), _chip('oficial'), _n(x['ha']), _chip('oficial'), x['lug'], len(M), _n(x['pt'], 2), _chip('derivado'), _n(x['hxt']), _chip('derivado'), cambio, prod)
+            ci = [{'v': _n(x['t']), 'etq': 'títulos de concesión minera, marzo de 2024', 'e': 'oficial'},
+                  {'v': _n(x['ha']) + ' ha', 'etq': 'superficie concesionada', 'e': 'oficial'}]
+            if x['t26'] is not None:
+                ci.append({'v': _n(x['t26']), 'etq': 'títulos al 30 de junio de 2026', 'e': 'oficial'})
+            fu = [_o('Títulos y hectáreas por entidad, marzo de 2024; su parte del país y las hectáreas por título son nuestras', fp), _o('Entidades con producción minera y corte de junio de 2026', fi)]
+        else:
+            h = ('<p><b>%s</b> no figura en el cuadro de concesiones mineras por entidad de la Dirección General de Minas (marzo de 2024), que trae 30 entidades, ni entre las 27 '
+                 'con producción minera del Segundo Informe.</p><p>Eso no quiere decir que no se extraiga nada de su suelo: la Ley de Minería no se aplica a las rocas que solo sirven '
+                 'para materiales de construcción (art. 5, fr. IV), y esos bancos de grava y arena no salen en el cuadro.</p>') % nom[a]
+            ci = []
+            fu = [_o('Las 30 entidades del cuadro de concesiones', fp), _o('Exclusión de las rocas para construcción (art. 5, fr. IV)', ley('lmin', 'art. 5'))]
+        t['rn_min_' + planisferio.clave(a)] = {
+            'tit': '%s: sus concesiones mineras' % nom[a], 'h': h, 'ci': ci, 'fu': fu, 'portal': planisferio.portal(a), 'edo': a,
+            'sug': ['¿Qué estado tiene más concesiones mineras?', '¿Cuánto paga una mina por su concesión?', '¿Cuánto crudo procesa cada refinería?']}
 
 
 SECCIONES = [('rn_capitulo', 'Renovables y no renovables'), ('rn_regimen', 'Las tres vías y las tres auditorías'),
              ('rn_ramos', 'Los seis ramos, ayer y hoy'), ('rn_pemex', 'PEMEX, ayer y hoy'),
-             ('rn_refinerias', 'Las refinerías de PEMEX'), ('rn_auditar', 'Lo subrayado: la guía del auditor'),
+             ('rn_refinerias', 'Las refinerías de PEMEX'), ('rn_mineria', 'Las concesiones mineras, estado por estado'),
+             ('rn_mineria_ciegos', 'Lo que el cuadro de las minas no dice'), ('rn_auditar', 'Lo subrayado: la guía del auditor'),
              ('rn_ciegos', 'Los puntos ciegos')]
 
 
@@ -458,7 +663,8 @@ def secciones():
     extra = {'rn_ramos': tabla_ramos(),
              'rn_refinerias': tabla_refinerias() + '<p class="leg-mas"><a href="planisferio.html?d=ambiental">🗺️ Verlas en el Planisferio ➔</a> · '
                                                    '<a href="auditoria-dos-bocas.html">📖 La investigación de Dos Bocas ➔</a> · '
-                                                   '<a href="auditoria-refineria-tula.html">📖 La de la refinería de Tula ➔</a></p>'}
+                                                   '<a href="auditoria-refineria-tula.html">📖 La de la refinería de Tula ➔</a></p>',
+             'rn_mineria': tabla_mineria() + tabla_derechos() + '<p class="leg-mas"><a href="planisferio.html?d=ambiental&amp;l=minT">🗺️ Las concesiones en el Planisferio ➔</a></p>'}
     return [{'id': k.replace('_', '-'), 'titulo': html.escape(tit), 'texto': '', 'tarjetas': [],
              'bloque': bloque_tema(T[k], extra.get(k, ''), ARCHIVO)} for k, tit in SECCIONES]
 
@@ -466,7 +672,7 @@ def secciones():
 ENTRADA = ('El capítulo de recursos naturales del libro del autor, «Introducción al Derecho Económico», convertido en método de auditoría y puesto al día: '
            'qué recursos se renuevan y cuáles se agotan, de quién son, quién los explota y con qué ley, y a quién se audita en cada caso. '
            'Cada regla está cotejada contra el texto vigente, porque el libro describe las leyes de 1993-1994. Incluye la sección de PEMEX y sus siete refinerías, '
-           'que también se ven en el Planisferio. Es la misma información con que contesta Pregúntale al Auditor.')
+           'con lo que procesa cada una frente a su capacidad, y las concesiones mineras de cada estado, que también se ven en el Planisferio. Es la misma información con que contesta Pregúntale al Auditor.')
 
 
 def pagina():
@@ -474,7 +680,7 @@ def pagina():
     return {
         'archivo': ARCHIVO, 'menu': TITULO, 'menu_archivo': 'aprende.html',
         'padre': ('aprende.html', 'Aprende'),
-        'icono': '🌎', 'titulo': TITULO, 'lema': 'Renovables y no renovables, PEMEX y sus refinerías: qué se audita y con qué ley',
+        'icono': '🌎', 'titulo': TITULO, 'lema': 'Renovables y no renovables, PEMEX y sus refinerías, las minas de cada estado: qué se audita y con qué ley',
         'estilos': ['asistente.css'], 'entrada': ENTRADA, 'secciones': secciones(),
     }
 
@@ -484,18 +690,18 @@ def pendientes():
     import pendientes as P
     ap = [(ARCHIVO, 'Aprende · ' + TITULO), ('planisferio.html', 'Planisferio · dimensión ambiental')]
     return [
-        {'id': 'refinerias-capacidad', 'tema': 'Recursos naturales',
-         'que': 'La capacidad instalada de destilación de cada refinería de PEMEX, para medir cuánto de ella usa',
-         'porque': ('El Segundo Informe da el crudo procesado por refinería y solo la capacidad de Olmeca en porcentaje (263 mil barriles diarios, 77 %). '
-                    'PEMEX publica la capacidad de cada una en su Base de Datos Institucional y su anuario estadístico, pero su portal no respondió desde donde '
-                    'se construye la plataforma en el cotejo del 03-11-2026. Las cifras que circulan en la prensa no se usan en su lugar.'),
-         'responsable': P.PLATAFORMA, 'enlace': 'https://www.pemex.com/ri/Publicaciones/Paginas/default.aspx',
-         'enlace_txt': 'PEMEX, publicaciones para inversionistas y Base de Datos Institucional', 'aparece': ap},
+        {'id': 'mineria-por-estado-2026', 'tema': 'Recursos naturales',
+         'que': 'Las concesiones mineras vigentes de cada una de las 32 entidades con un corte reciente (títulos y hectáreas)',
+         'porque': ('El Prontuario Estadístico de la Minería de la Secretaría de Economía, en su edición de enero-junio de 2025 (publicada en diciembre de 2025), repite el cuadro '
+                    'por entidad con corte de marzo de 2024. El Segundo Informe da el corte del 30 de junio de 2026, pero solo nacional (20,542 títulos) y de cuatro estados. '
+                    'Mientras la Secretaría de Economía no publique el cuadro por entidad al día, el mapa usa el de marzo de 2024 y lo dice.'),
+         'responsable': 'Secretaría de Economía (Dirección General de Minas)', 'enlace': 'https://www.gob.mx/se/acciones-y-programas/mineria',
+         'enlace_txt': 'Secretaría de Economía, minería', 'aparece': ap},
         {'id': 'ambiente-por-estado', 'tema': 'Recursos naturales',
-         'que': 'Una cifra ambiental de cada una de las 32 entidades: concesiones mineras, acuíferos sobreexplotados, superficie forestal y denuncias ante la PROFEPA',
-         'porque': ('El Informe de Actividades 2024 de la PROFEPA nombra estados pero no publica sus cifras por entidad. Las concesiones mineras (Secretaría de Economía), '
-                    'la disponibilidad de los acuíferos (CONAGUA) y la superficie forestal (CONAFOR) sí se publican por entidad y la plataforma aún no las integra. '
-                    'Mientras tanto el mapa ambiental solo marca dónde están las refinerías, y lo dice.'),
+         'que': 'El resto de la cifra ambiental de cada una de las 32 entidades: acuíferos sobreexplotados, superficie forestal y denuncias ante la PROFEPA',
+         'porque': ('El Informe de Actividades 2024 de la PROFEPA nombra estados pero no publica sus cifras por entidad. La disponibilidad de los acuíferos (CONAGUA) y la '
+                    'superficie forestal (CONAFOR) sí se publican por entidad y la plataforma aún no las integra. Las concesiones mineras ya están (03-11-2026); '
+                    'mientras tanto el mapa ambiental marca las refinerías y las minas, no el agua ni los bosques, y lo dice.'),
          'responsable': P.PLATAFORMA, 'enlace': 'https://www.inegi.org.mx/temas/ambiente/',
          'enlace_txt': 'INEGI, estadísticas de medio ambiente', 'aparece': ap},
     ]

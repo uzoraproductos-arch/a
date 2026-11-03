@@ -1191,7 +1191,7 @@
           ['salamanca', /salamanca/], ['tula', /\btula\b|miguel hidalgo/], ['olmeca', /olmeca|dos bocas/]];
         if (/refiner/.test(t) && /\bmapa\b|planisferio|donde (estan|quedan|hay)|en que estados?/.test(t)) {
           var mr = sanTema('rn_refinerias');
-          mr.ir = ['planisferio.html?d=ambiental', 'las siete refinerías en el Planisferio'];
+          mr.ir = ['planisferio.html?d=ambiental&l=refj', 'las siete refinerías en el Planisferio'];
           return mr;
         }
         if (/refiner|dos bocas|olmeca/.test(t) && /crudo|procesa|barriles|refina\b|cuanto refina|deterioro|valor (en|de) (sus )?libros|perdio (mas )?valor|perdio valor|capacidad|lugar|ranking|cual(es)? (refineria|es la refineria)|cuantas refinerias/.test(t)) {
@@ -1210,6 +1210,21 @@
         if (/(se puede|pueden|puede|dan|otorgan) (dar |otorgar |tener )?(una )?concesion(es)? (de|del|sobre|para) (el |la )?(litio|uranio|petroleo|hidrocarburos|minerales radiactivos)/.test(t)) return sanTema('rn_regimen');
         if (/(que|cual|cuales) ley(es)? (rige|rigen|regula|regulan|aplica|aplican) (a )?(la |el |los |las |al )?(mineria|minas|pesca|forestal|bosques|agua|aguas|petroleo|hidrocarburos|electricidad|energia electrica|litio|nuclear)/.test(t) ||
             /ley (de|federal de|general de) (mineria|pesca|aguas nacionales|desarrollo forestal)/.test(t) && /que (dice|es|regula)|quien (la )?aplica/.test(t)) return sanTema('rn_ramos');
+        /* Las concesiones mineras (DGM, marzo de 2024; el Segundo Informe, junio de 2026): la de un estado, o el país. */
+        if (SAN.t.rn_mineria && /concesion(es)? miner|concesionad[ao]s? (a|para) (la )?miner|titulos? (de concesion )?miner|\bminas?\b|mineras?\b|mineria/.test(t) && !/ley minera|ley de mineria|fondo minero|litio|uranio|radiactiv/.test(t)) {
+          if (/punto(s)? ciego|no dice|no cuadra|ojo con/.test(t)) return sanTema('rn_mineria_ciegos');
+          var ME = Object.keys(SAN.t).filter(function (k) { return /^rn_min_/.test(k); }).map(function (k) {
+            var nm = plano(SAN.t[k].tit.split(':')[0]).trim();
+            return [k, nm === 'estado de mexico' ? /estado de mexico|edomex|edo mex/ : new RegExp('\\b' + nm + '\\b'), nm.length];
+          }).sort(function (a, b) { return b[2] - a[2]; });
+          var tp = plano(t), hit = ME.filter(function (x) { return x[1].test(tp); })[0];
+          if (hit && !/cada estado|todos los estados|que estados?|cual(es)? estados?/.test(t)) {
+            return sanTema(hit[0]);
+          }
+          var mm = sanTema('rn_mineria');
+          if (/\bmapa\b|planisferio|donde (estan|quedan|hay)/.test(t)) mm.ir = ['planisferio.html?d=ambiental&l=minT', 'las concesiones mineras en el Planisferio'];
+          return mm;
+        }
       }
       if (SAN.t.serv_diligencia && /debida diligencia|antes de contratar|\b(como|quiero|puedo) (reviso|revisar|checo|checar|investigo|investigar|verifico|verificar) (a )?(un|una|mi|mis) (proveedor|proveedores|empresa)\b/.test(t)) return sanTema('serv_diligencia');
       return null;

@@ -57,7 +57,7 @@ DIMENSIONES = [
      'La obra que hace cada gobierno estatal, directa o por medio de sus organismos, y lo que la ASF dejó por aclarar del dinero federal que recibió.',
      'numeros-mapa-del-gasto-federalizado.html?l=inv', 'numeros-mapa-del-gasto-federalizado.html?l=inv&e=%s', True),
     ('ambiental', '🌎', 'Ambiental',
-     'Los recursos naturales y quién los explota, empezando por las siete refinerías de PEMEX: cuánto crudo procesa cada una y cuánto valor ganó o perdió en sus libros.',
+     'Los recursos naturales y quién los explota: las concesiones mineras de cada estado y las siete refinerías de PEMEX, con el crudo que procesa cada una frente a su capacidad.',
      'aprende-recursos-naturales.html#rn-refinerias', None, True),
     ('legislativa', '🏛️', 'Legislativa',
      'Los 32 congresos locales: lo que gastó cada uno, cuántas personas legisladoras lo integran y cómo se compara con el tope de la Constitución.',
@@ -228,6 +228,7 @@ def _datos(base, padron):
     import recursos_naturales as rn
     cg = al.congresos_estados(base)
     rf = rn.refinerias_estados()
+    mi = rn.mineria([e['abbr'] for e in base['estados']])
     pj = gj.judiciales_estados(base)
     E = base['estados']
     C = base['fiscalEntidades']['campos']
@@ -267,9 +268,14 @@ def _datos(base, padron):
         # Su refinería de PEMEX, si tiene (Segundo Informe 2026 y estados
         # financieros de PEMEX 2025): una o ninguna por entidad.
         r = rf.get(e['abbr'])
-        filas[-1].update({'refj': r['jun'] if r else None, 'refp': r['prom'] if r else None})
+        filas[-1].update({'refj': r['jun'] if r else None, 'refp': r['prom'] if r else None, 'refu': r['uso'] if r else None})
         if r:
-            filas[-1]['ref'] = {k: r[k] for k in ('id', 'n', 'sede', 'jun', 'prom', 'max', 'mmax', 'd25', 'd24', 'vu25', 'lug')}
+            filas[-1]['ref'] = {k: r[k] for k in ('id', 'n', 'sede', 'jun', 'prom', 'max', 'mmax', 'd25', 'd24', 'vu25', 'lug', 'cap', 'uso', 'usoj')}
+        # Sus concesiones mineras (Secretaría de Economía, DGM, marzo de 2024).
+        x = mi.get(e['abbr'])
+        filas[-1].update({'minT': x['t'] if x else None, 'minH': x['ha'] if x else None})
+        if x:
+            filas[-1]['min'] = {k: x[k] for k in ('pt', 'ph', 'hxt', 'lug', 't26', 'prod')}
     return filas
 
 
@@ -360,16 +366,25 @@ LENTES = [
     # La dimensión ambiental (03-11-2026): los recursos naturales, empezando
     # por las refinerías de PEMEX (recursos_naturales.py). Un estado sin
     # refinería va en gris como «sin refinería», nunca como «sin problema».
+    {'id': 'minT', 'dim': 'ambiental', 'fmt': 'n', 'nom': 'Concesiones mineras', 'pal': 'oro', 'est': 'oficial', 'anio': 'marzo 2024',
+     'que': ('Los títulos de concesión minera vigentes en cada entidad, según la Dirección General de Minas. Una concesión da derecho a explorar y explotar; '
+             'no quiere decir que ya haya una mina trabajando.')},
+    {'id': 'minH', 'dim': 'ambiental', 'fmt': 'ha', 'nom': 'Hectáreas concesionadas', 'pal': 'oro', 'est': 'oficial', 'anio': 'marzo 2024',
+     'que': ('El terreno que amparan esas concesiones, en hectáreas. Es la superficie del título, no la excavada: el tajo y las presas de jales no se miden aquí.')},
     {'id': 'refj', 'dim': 'ambiental', 'fmt': 'mbd', 'nom': 'Crudo que procesó su refinería', 'pal': 'oro', 'est': 'oficial', 'anio': 'junio 2026',
      'que': ('Los barriles diarios de petróleo crudo que procesó en junio de 2026 la refinería de PEMEX de cada entidad, en miles. Siete entidades tienen una; '
              'las demás van en gris porque no tienen refinería, no porque no tengan problemas ambientales: sus minas, su agua y sus bosques todavía no tienen cifra aquí.')},
     {'id': 'refp', 'dim': 'ambiental', 'fmt': 'mbd1', 'nom': 'Su promedio de diez meses', 'pal': 'oro', 'est': 'derivado', 'anio': 'sep-25 a jun-26',
      'que': ('El promedio de los diez meses de septiembre de 2025 a junio de 2026: corrige un mes malo por mantenimiento. Es la media aritmética de las diez cifras mensuales del Informe; '
              'la cuenta es nuestra.')},
+    {'id': 'refu', 'dim': 'ambiental', 'fmt': 'pct', 'nom': 'Cuánto usa de su capacidad', 'pal': 'oro', 'est': 'derivado', 'anio': 'sep-25 a jun-26',
+     'que': ('El promedio de los diez meses entre la capacidad de destilación de la refinería al cierre de 2024, × 100. Dice cuánto usa, no por qué: '
+             'falta de crudo, mantenimiento o una planta que no arranca se ven igual.')},
 ]
 
 
 def _fuentes(ref, base=None):
+    import recursos_naturales as rn
     extra = {}
     if base is not None:
         E = base['estados']
@@ -407,7 +422,13 @@ def _fuentes(ref, base=None):
         })
     inf = ('Presidencia de la República, Segundo Informe de Gobierno 2025-2026, gráfica «Procesamiento de petróleo crudo en el Sistema Nacional de Refinación 2025-2026», '
            'p. 378, elaborada por la SENER con la Base de Datos Institucional de PEMEX %s') % ref('ref-presidencia-2ig')
-    extra.update({'refj': inf + '.', 'refp': inf + '. Promedio de los diez meses (media aritmética): la cuenta es nuestra.'})
+    ae = ('PEMEX, Anuario Estadístico 2024, cuadro 3.6 «Capacidad de proceso por refinería, 2024», p. 48 (<a href="%s">PDF</a>; huella SHA-256 <code>%s…</code>)') % (
+        html.escape(rn.AE['url']), rn.AE['sha256'][:12])
+    pr = ('Secretaría de Economía, Prontuario Estadístico de la Minería enero-junio 2025, cuadro «Número de concesiones mineras y superficie por Entidad Federativa 2024», p. 20, '
+          'con fuente «DGM, marzo 2024» (<a href="%s">PDF</a>; huella SHA-256 <code>%s…</code>). El cuadro trae 30 entidades.') % (html.escape(rn.PRONT['url']), rn.PRONT['sha256'][:12])
+    extra.update({'refj': inf + '.', 'refp': inf + '. Promedio de los diez meses (media aritmética): la cuenta es nuestra.',
+                  'refu': 'Promedio de los diez meses (%s) ÷ capacidad de destilación atmosférica al cierre de 2024 (%s) × 100. La división es nuestra.' % (inf, ae),
+                  'minT': pr, 'minH': pr})
     return dict(extra, **{
         'fed': 'Ramo 28: Anexo 15 del acuerdo de distribución (DOF 12-12-2025) %s. Ramo 33: Anexo 16, versión modificada (DOF 09-07-2026) %s. La suma de los dos es nuestra.' % (
             ref('ref-dof-distribucion-2026'), ref('ref-dof-distribucion-2026-mod')),
@@ -484,10 +505,15 @@ def pagina_mapa(base, ref, tres, padron):
     nota_jud = _nota_jud(filas)
     nota_amb = _nota_amb(filas)
     sin_ref = [f['a'] for f in filas if f['refj'] is None]
-    for i in ('refj', 'refp'):
+    for i in ('refj', 'refp', 'refu'):
         falta[i] = {'a': sin_ref, 'gris': 'sin refinería de PEMEX', 'pend': None,
-                    'txt': ('%d entidades no tienen refinería de PEMEX: van en gris por eso, no porque no tengan problemas ambientales. La cifra ambiental de cada entidad '
-                            '(concesiones mineras, acuíferos, bosques, denuncias) todavía está pendiente.') % len(sin_ref)}
+                    'txt': ('%d entidades no tienen refinería de PEMEX: van en gris por eso, no porque no tengan problemas ambientales. Sus concesiones mineras están en la lente '
+                            'de las minas; su agua y sus bosques todavía están pendientes.') % len(sin_ref)}
+    sin_min = [f['a'] for f in filas if f['minT'] is None]
+    for i in ('minT', 'minH'):
+        falta[i] = {'a': sin_min, 'gris': 'no figura en el cuadro', 'pend': None,
+                    'txt': ('%s no figuran en el cuadro de concesiones mineras por entidad de la Dirección General de Minas, que trae 30 entidades. No quiere decir que no se extraiga '
+                            'nada de su suelo: la Ley de Minería no se aplica a la grava, la arena y las rocas para construir (art. 5, fr. IV).') % ' y '.join(nombre[a] for a in sin_min)}
     # El punto ciego de la inversión: el capítulo de inversión pública, solo,
     # hace ver «sin obra» a quien la hace por medio de sus organismos.
     con_inv = [f for f in filas if f['inv'] is not None]
@@ -550,7 +576,7 @@ def pagina_mapa(base, ref, tres, padron):
                        'La inversión es la obra que hace cada gobierno estatal, directa o por medio de sus organismos, y lo que la Auditoría Superior dejó por aclarar. '
                        'La legislativa son los 32 congresos locales: lo que gastó cada uno, cuánto cuesta por curul y cómo se compara con el tope del 0.70 %% de la Constitución. '
                        'La judicial son los 32 poderes judiciales de los estados: lo que ejerció cada uno junto a lo que concluyó con ese dinero y las causas penales que se le acumulan. '
-                       'La ambiental empieza por los recursos no renovables: las siete refinerías de PEMEX, cuánto crudo procesa cada una y cuánto valor ganó o perdió en sus libros; el punto marca la entidad, no el sitio exacto. '
+                       'La ambiental empieza por los recursos no renovables: las concesiones mineras de cada estado y las siete refinerías de PEMEX, cuánto crudo procesa cada una frente a su capacidad y cuánto valor ganó o perdió en sus libros; en las lentes de refinación, el punto marca la entidad, no el sitio exacto. '
                        'Elige la dimensión y qué ver; el color compara a las 32 por quintiles (cinco grupos con el mismo número de entidades).') % (
                            ('%d dimensiones: la %s y la %s' % (len(pintadas), ', la '.join(d[2].lower() for d in pintadas[:-1]), pintadas[-1][2].lower())) if len(pintadas) > 1 else 'una dimensión'),
              'tarjetas': [], 'bloque': bloque_mapa},
@@ -578,10 +604,14 @@ def _nota_amb(filas):
     d25 = min((r for r in R if r['d25'] is not None), key=lambda r: r['d25'])
     return ('<b>Lo que una cifra de refinación no dice.</b> Un mes no es la regla: la %s procesó %s mil barriles diarios en junio de 2026 %s, contra %s mil de promedio en los diez meses %s, '
             'por mantenimiento según el Informe. Procesar crudo no es producir gasolina: lo que sale depende de cada planta. Y el valor que pierde una refinería en los libros de PEMEX '
-            '(la %s, %s en 2025 %s) es una estimación de lo que dejará de generar, no dinero que salió de la caja. Siete entidades tienen refinería; que las otras %d vayan en gris '
-            'no quiere decir que no tengan daño ambiental, sino que su cifra todavía está %s.') % (
+            '(la %s, %s en 2025 %s) es una estimación de lo que dejará de generar, no dinero que salió de la caja.<br><br>'
+            '<b>Lo que el mapa de las minas no dice.</b> Una concesión no es una mina trabajando: %s tienen concesiones y no aparecen entre las entidades con '
+            'producción minera del Segundo Informe. Hectárea concesionada no es hectárea excavada. Y el cuadro por estado es de marzo de 2024 %s: al 30 de junio de 2026 el país tenía '
+            '%s títulos %s, %s menos %s, pero la Secretaría de Economía solo ha dado al día cuatro estados. El agua y los bosques de cada entidad siguen %s.') % (
         caida['n'].replace('Refinería ', 'refinería '), caida['jun'], chip('oficial'), format(caida['prom'], '.1f'), chip('derivado'),
-        d25['n'].replace('Refinería ', 'refinería '), rn._mdps(d25['d25']), chip('oficial'), len(filas) - len(R), chip('pendiente', 'ambiente-por-estado'))
+        d25['n'].replace('Refinería ', 'refinería '), rn._mdps(d25['d25']), chip('oficial'),
+        rn._y([f['n'] for f in filas if f.get('min') and f['min']['prod'] is None]), chip('pendiente', 'mineria-por-estado-2026'),
+        format(rn.NAC26['t'], ','), chip('oficial'), format(rn.MINAS_TOT[0] - rn.NAC26['t'], ','), chip('derivado'), chip('pendiente', 'ambiente-por-estado'))
 
 
 def _nota_jud(filas):
@@ -909,33 +939,59 @@ def _ambiental_portal(base, ref, e):
               '<dl class="pl-dl"><dt>Su lugar entre las siete</dt><dd>%d.º %s</dd>'
               '<dt>Promedio de sep-25 a jun-26</dt><dd><b class="num-tabular">%s mil</b> %s</dd>'
               '<dt>Su mejor mes</dt><dd><b class="num-tabular">%s mil</b> en %s %s</dd>'
+              '<dt>Su capacidad de destilación (2024)</dt><dd><b class="num-tabular">%s mil</b> %s</dd>'
+              '<dt>Cuánto usó de ella, en promedio</dt><dd><b class="num-tabular">%s %%</b> %s</dd>'
               '<dt>Valor perdido (−) o recuperado (+) en libros, 2025</dt><dd>%s</dd>'
               '<dt>Igual, 2024</dt><dd>%s</dd></dl>'
-              '<p class="pl-piso-f">Crudo procesado: %s Valor en libros: %s.%s</p></article>') % (
+              '<p class="pl-piso-f">Crudo procesado: %s Capacidad y uso: %s Valor en libros: %s.%s</p></article>') % (
             html.escape(r['n']), html.escape(r['sede']), format(r['jun'], ','), chip('oficial'), r['lug'], chip('derivado'),
             format(r['prom'], ',.1f'), chip('derivado'), format(r['max'], ','), r['mmax'], chip('oficial'),
+            format(r['cap'], ','), chip('oficial'), format(r['uso'], '.1f'), chip('derivado'),
             'es de una filial de PEMEX, que se la arrienda: no se mide como unidad propia' if olmeca else d(r['d25']),
-            '—' if olmeca else d(r['d24']), fu['refj'], ef,
+            '—' if olmeca else d(r['d24']), fu['refj'], fu['refu'], ef,
             ' <a href="auditoria-dos-bocas.html">📖 Lo que costó: la investigación de Dos Bocas ➔</a>' if olmeca else
             (' <a href="auditoria-refineria-tula.html">📖 La refinería que no se construyó en Tula ➔</a>' if r['id'] == 'tula' else ''))
         ciego = ('<p class="pl-dim-nota"><b>Lo que esas cifras no dicen.</b> Procesar crudo no es producir gasolina, y un mes no es la regla. El valor que pierde o recupera en los libros '
-                 'es una estimación de lo que PEMEX espera que genere, con su precio, su tipo de cambio y su tasa; no es dinero que salió de la caja. Su capacidad instalada sigue %s.</p>') % chip('pendiente', 'refinerias-capacidad')
+                 'es una estimación de lo que PEMEX espera que genere, con su precio, su tipo de cambio y su tasa; no es dinero que salió de la caja. Y el porcentaje de uso dice cuánto, '
+                 'no por qué: falta de crudo, mantenimiento o una planta que no arranca se ven igual.</p>')
     else:
         p1 = ('<article class="pl-piso pl-piso-amb"><p class="pl-piso-n">🛢️ Refinación</p><p class="pl-piso-v"><b>No tiene refinería de PEMEX</b></p>'
               '<p>Las siete refinerías del Sistema Nacional de Refinación están en Nuevo León, Tamaulipas, Veracruz, Guanajuato, Oaxaca, Hidalgo y Tabasco. '
               'No tener refinería no quiere decir no tener problemas ambientales.</p></article>')
         ciego = ''
+    m = rn.mineria([x['abbr'] for x in base['estados']]).get(a)
+    if m:
+        prod = {'mayor': 'Es una de las diez entidades que dan el 94.9 % del valor de la producción minera.',
+                'menor': 'Está entre las 17 entidades que juntas dan el 5.2 % del valor de la producción minera.',
+                None: 'No aparece entre las entidades con producción minera del Segundo Informe: tener concesiones no es tener minas trabajando.'}[m['prod']]
+        p2 = ('<article class="pl-piso pl-piso-amb"><p class="pl-piso-n">⛏️ Concesiones mineras · marzo de 2024</p>'
+              '<p class="pl-piso-v"><b class="num-tabular">%s títulos</b> vigentes %s</p>'
+              '<dl class="pl-dl"><dt>Hectáreas que amparan</dt><dd><b class="num-tabular">%s</b> %s</dd>'
+              '<dt>Su lugar entre las 30 con concesiones</dt><dd>%d.º %s</dd>'
+              '<dt>Su parte de los títulos del país</dt><dd><b class="num-tabular">%s %%</b> %s</dd>'
+              '<dt>Hectáreas por título</dt><dd><b class="num-tabular">%s</b> %s</dd>%s</dl>'
+              '<p>%s</p><p class="pl-piso-f">%s</p></article>') % (
+            format(m['t'], ','), chip('oficial'), format(m['ha'], ','), chip('oficial'), m['lug'], chip('derivado'), format(m['pt'], '.2f'), chip('derivado'),
+            format(m['hxt'], ','), chip('derivado'),
+            ('<dt>Al 30 de junio de 2026</dt><dd><b class="num-tabular">%s títulos</b> %s (%s%s %s)</dd>' % (
+                format(m['t26'], ','), chip('oficial'), '−' if m['t26'] < m['t'] else '+', format(abs(m['t26'] - m['t']), ','), chip('derivado'))) if m['t26'] is not None else
+            ('<dt>Al día</dt><dd>La Secretaría de Economía no ha publicado su cifra por estado después de marzo de 2024 %s</dd>' % chip('pendiente', 'mineria-por-estado-2026')),
+            prod, fu['minT'] + ' Junio de 2026 y producción: Segundo Informe de Gobierno, p. 444 %s.' % ref('ref-presidencia-2ig'))
+    else:
+        p2 = ('<article class="pl-piso pl-piso-amb"><p class="pl-piso-n">⛏️ Concesiones mineras</p><p class="pl-piso-v"><b>No figura en el cuadro de la Dirección General de Minas</b></p>'
+              '<p>El cuadro de marzo de 2024 trae 30 entidades. No quiere decir que no se extraiga nada de su suelo: la Ley de Minería no se aplica a la grava, la arena y las rocas '
+              'para construir (art. 5, fr. IV), que regulan los estados y municipios.</p></article>')
     ramos = ''.join('<li><span aria-hidden="true">%s</span> <b>%s</b> <small>(%s)</small><br>Quién lo explota: %s<br><small>Quién lo regula: %s</small></li>' % (
         x['ico'], html.escape(x['nom']), html.escape(x['renov'].split(',')[0]), html.escape(x['quien']), html.escape(x['autoridad'].split(' (')[0]))
         for x in rn.RAMOS)
     esquema = ('<div class="pl-reglas"><p><b>Los recursos de su territorio, por sector</b></p>'
-               '<p>Sus minas, su agua, sus bosques y su pesca ya tienen ley y autoridad, pero todavía no su cifra para %s %s. Así se reparte quién los explota:</p>'
+               '<p>Su agua, sus bosques y su pesca ya tienen ley y autoridad, pero todavía no su cifra para %s %s. Así se reparte quién explota cada recurso:</p>'
                '<ul class="pl-sectores">%s</ul>'
                '<p class="pl-ficha-ir"><a href="%s">🌎 Cómo se audita cada recurso ➔</a> '
                '<a href="planisferio.html?d=ambiental&amp;e=%s">Las siete refinerías en el mapa ➔</a> '
                '<a href="datos-ambiente-megaobras.html?e=%s#abMapaObras">Sus obras con alerta ambiental ➔</a></p></div>') % (
         html.escape(nom), chip('pendiente', 'ambiente-por-estado'), ramos, rn.ARCHIVO, quote(a), quote(a))
-    return '<div class="pl-pisos">%s</div>%s%s' % (p1, ciego, esquema)
+    return '<div class="pl-pisos">%s%s</div>%s%s' % (p2, p1, ciego, esquema)
 
 
 def pagina_portal(base, ref, e, padron, prev, sig, iv):
