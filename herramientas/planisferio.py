@@ -137,12 +137,16 @@ MAPA_MUN = """<div class="pl-lentes" role="radiogroup" aria-label="Qué ver en e
 def _mapa_mun(e, m, g, ref, padron):
     """El mapa de los municipios de una entidad, con sus cifras del padrón."""
     cves_geo = {x['c'] for x in g['m']}
-    cves_pad = {r[0] for r in m['lista']}
+    # Las claves 990 y más del catálogo del INEGI («No especificado», en el
+    # Estado de México la 996) no son un territorio: no tienen trazo.
+    cves_pad = {r[0] for r in m['lista'] if r[0] < '990'}
     if cves_geo != cves_pad:
         raise SystemExit('planisferio: el Marco Geoestadístico y el padrón no traen los mismos municipios de %s (sobran %s; faltan %s)' % (
             e['name'], sorted(cves_geo - cves_pad), sorted(cves_pad - cves_geo)))
     datos = []
     for r in m['lista']:
+        if r[0] >= '990':
+            continue
         x = {'c': r[0], 'n': r[1]}
         if len(r) >= 10:
             ing, part, aport, fortamun, fismdf, predial = r[2], r[3], r[4], r[5], r[6], r[7]
@@ -439,7 +443,7 @@ def pagina_portal(base, ref, e, padron, prev, sig):
             {'id': 'ritmo', 'titulo': 'Su contador', 'texto': '', 'tarjetas': [], 'bloque': ritmo},
         ] + ([
             {'id': 'mapa-municipios',
-             'titulo': ('El mapa de sus %d municipios' if m['conCifra'] else 'El mapa de sus %d alcaldías') % m['n'],
+             'titulo': ('El mapa de sus %d municipios' if m['conCifra'] else 'El mapa de sus %d alcaldías') % len(g['m']),
              'texto': ('Cada municipio en su lugar, con lo que ingresó en %d. Elige qué ver; el color compara a los municipios del estado por quintiles '
                        '(cinco grupos con el mismo número de municipios). Toca uno para ver su ficha.' % padron['anio'] if m['conCifra'] else
                        'Cada alcaldía en su lugar. No llevan color por cifra porque no rinden cuenta municipal al INEGI; '
