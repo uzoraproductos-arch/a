@@ -7213,7 +7213,7 @@ Pedido del autor: «La pestaña de enciclopedia la vamos a convertir en la cuart
 - **Lectura de «los tres presupuestos»:** en el mapa son los tres pisos de la hacienda de cada entidad (federal, estatal y municipal); en los contadores, los tres presupuestos de la doctrina que ya usa Números (del Estado, nacional y social). Si el autor quería solo una de las dos, se ajusta en `planisferio.py`.
 
 ### Pendientes del Planisferio
-- **El mapa de los municipios:** hecho para **Jalisco** el 03-11-2026 (abajo). Faltan las otras 31 entidades; es una falta de la plataforma, no de una dependencia: el Marco Geoestadístico 2024 del INEGI existe y se integra entidad por entidad.
+- **El mapa de los municipios:** hecho para **las 32 entidades** el 03-11-2026 (abajo). Queda actualizarlo cuando el INEGI publique un Marco Geoestadístico nuevo (se vuelve a correr el script con el archivo nuevo; si cambian los municipios, la generación se detiene hasta que el padrón los traiga).
 - **Las otras cinco dimensiones** (deuda, inversión, ambiental, legislativa, judicial) todavía no se pintan en el mapa: hoy llevan a su página de la Enciclopedia.
 - **Ciudad de México:** sin recaudación propia cotejada (`entidades-cdmx`) y sin cuenta municipal de sus 16 alcaldías (`municipios-sin-cuenta`), como en el resto de la plataforma.
 
@@ -7227,3 +7227,48 @@ Pedido del autor: «sigue con el mapa de los municipios de Jalisco».
 - **Aviso del INEGI, repetido en la página:** los límites son geoestadísticos y no deben tomarse como la fuente oficial de la división político-administrativa.
 - **Pendiente:** las otras 31 entidades (misma receta: bajar `<cve>_<nombre>.zip` y correr el script). La Ciudad de México tendrá mapa de sus 16 demarcaciones, pero en gris: no rinden cuenta municipal.
 
+## Entrega — 03-11-2026: el mapa de los municipios de las 32 entidades (sellos 20261103b y 20261103c)
+
+Pedido del autor: «ok bueno continua con el desarrollo» y «avísame cuando estén las 32».
+
+- **Fuente:** los 32 archivos del Marco Geoestadístico 2024 del INEGI, versión por área geoestadística estatal (`.../marcogeo/794551132173/<cve>_<nombre>.zip`), bajados uno por uno el 03-11-2026 e integrados con `herramientas/integrar_mg_municipios.py`. Los zip (de 8 MB a cientos de MB) no se suben: queda su huella. Los 32 JSON suman 1.8 MB.
+- **Cambios al integrador:** la tolerancia de Douglas-Peucker es el lado mayor de la entidad ÷ 1000, entre 80 m y 400 m (los islotes se quitan por debajo de 3 × tolerancia², con tope de 0.5 km²), y la fecha de integración es la del día en que corre. Jalisco no cambia (400 m).
+- **Validación:** los 2,478 trazos coinciden clave por clave con el padrón (2,479 renglones: la clave 996 «No especificado» del Estado de México no es un territorio y se omite del mapa y de la validación).
+- **Ciudad de México:** «El mapa de sus 16 alcaldías», sin lentes ni color, con el aviso de que no rinden cuenta municipal al INEGI (`municipios-sin-cuenta`).
+- **Pantalla:** el borde de cada municipio mide lo mismo en pantalla sin importar la escala de la entidad (`vector-effect: non-scaling-stroke`). Oaxaca, con 570 municipios, pesa 496 KB de página.
+- **Chat:** `mapa-mun` reconoce «alcaldías»; dos preguntas nuevas (314).
+
+| Clave | Archivo del INEGI | Municipios | Simplificación | SHA-256 del zip | JSON |
+|---|---|---|---|---|---|
+| 01 | `01_aguascalientes.zip` | 11 | 107 m | `4cf17667a660…` | 16 KB |
+| 02 | `02_bajacalifornia.zip` | 7 | 400 m | `2a3e220e2fe0…` | 14 KB |
+| 03 | `03_bajacaliforniasur.zip` | 5 | 400 m | `17e1b1b9dd7f…` | 21 KB |
+| 04 | `04_campeche.zip` | 13 | 357 m | `2dd1894f8045…` | 16 KB |
+| 05 | `05_coahuiladezaragoza.zip` | 38 | 400 m | `b1d9370443b6…` | 32 KB |
+| 06 | `06_colima.zip` | 10 | 400 m | `69724d75b3a9…` | 9 KB |
+| 07 | `07_chiapas.zip` | 124 | 400 m | `297145948b4f…` | 94 KB |
+| 08 | `08_chihuahua.zip` | 67 | 400 m | `48fa382f41bf…` | 92 KB |
+| 09 | `09_ciudaddemexico.zip` | 16 | 80 m | `c1fa076237b9…` | 10 KB |
+| 10 | `10_durango.zip` | 39 | 400 m | `4437e08aedd4…` | 55 KB |
+| 11 | `11_guanajuato.zip` | 46 | 251 m | `b0cc5ac58790…` | 54 KB |
+| 12 | `12_guerrero.zip` | 85 | 400 m | `25b4c964b6ba…` | 73 KB |
+| 13 | `13_hidalgo.zip` | 84 | 199 m | `274243b63181…` | 83 KB |
+| 14 | `14_jalisco.zip` | 125 | 400 m | `7eeaa78c0b59…` | 110 KB |
+| 15 | `15_mexico.zip` | 125 | 212 m | `11d7f9bd0c6d…` | 83 KB |
+| 16 | `16_michoacandeocampo.zip` | 113 | 385 m | `6eaf00be0745…` | 76 KB |
+| 17 | `17_morelos.zip` | 36 | 90 m | `064e29f82698…` | 36 KB |
+| 18 | `18_nayarit.zip` | 20 | 305 m | `8b18b98ca095…` | 29 KB |
+| 19 | `19_nuevoleon.zip` | 51 | 400 m | `bbedbf381f7e…` | 35 KB |
+| 20 | `20_oaxaca.zip` | 570 | 400 m | `99098b1fc6e8…` | 199 KB |
+| 21 | `21_puebla.zip` | 217 | 330 m | `0a364c301320…` | 117 KB |
+| 22 | `22_queretaro.zip` | 18 | 184 m | `fa112f4c7304…` | 24 KB |
+| 23 | `23_quintanaroo.zip` | 11 | 400 m | `556999f1c0ff…` | 12 KB |
+| 24 | `24_sanluispotosi.zip` | 59 | 400 m | `8cb4ee77031e…` | 50 KB |
+| 25 | `25_sinaloa.zip` | 20 | 400 m | `bb015ec2265f…` | 33 KB |
+| 26 | `26_sonora.zip` | 72 | 400 m | `09ef9a6d88c9…` | 77 KB |
+| 27 | `27_tabasco.zip` | 17 | 339 m | `76da03048b7b…` | 26 KB |
+| 28 | `28_tamaulipas.zip` | 43 | 400 m | `9c795c050eda…` | 40 KB |
+| 29 | `29_tlaxcala.zip` | 60 | 114 m | `5491bcd9ca69…` | 35 KB |
+| 30 | `30_veracruzignaciodelallave.zip` | 212 | 400 m | `5b021b37aa47…` | 141 KB |
+| 31 | `31_yucatan.zip` | 106 | 400 m | `cb97e3fd052e…` | 77 KB |
+| 32 | `32_zacatecas.zip` | 58 | 400 m | `e9213f9df2ac…` | 51 KB |

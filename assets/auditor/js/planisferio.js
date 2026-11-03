@@ -183,7 +183,7 @@
       var lim = [null].concat(c);
       if (D.sin) {
         document.getElementById('plMunLeyenda').innerHTML = '<span class="pl-ley-cls"><span><i style="background:#d5dae3"></i>sin cuenta municipal</span></span>';
-        document.getElementById('plMunQue').textContent = D.sin;
+        document.getElementById('plMunQue').textContent = '';
         return;
       }
       document.getElementById('plMunLeyenda').innerHTML = '<span class="pl-ley-tit">' + esc(lente.nom) + ' (' + D.anio + ')</span><span class="pl-ley-cls">' +
@@ -213,6 +213,9 @@
       if (!x) return;
       sel = x;
       pinta();
+      // El seleccionado se dibuja al final, para que sus vecinos no le tapen el borde.
+      var p = document.querySelector('.pl-mun[data-c="' + c + '"]');
+      if (p) { var foco = document.activeElement === p; p.parentNode.appendChild(p); if (foco) p.focus(); }
       muestra(x);
       Array.prototype.forEach.call(document.querySelectorAll('#plMun tr[data-c]'), function (r) { r.classList.toggle('sel', r.getAttribute('data-c') === c); });
     }

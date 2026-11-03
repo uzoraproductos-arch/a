@@ -167,7 +167,7 @@ def _mapa_mun(e, m, g, ref, padron):
     return MAPA_MUN % (
         '' if sin else lentes, svg, padron['anio'], g['fuente'], g['url'], g['integrado'], g['sha256'][:12] + '…', g['aviso'],
         padron['anio'], ref('ref-inegi-efipem'),
-        ('En gris, todas: %s %s' % (sin, chip('pendiente', 'municipios-sin-cuenta')) if sin else
+        ('En gris, todas, porque no rinden cuenta municipal %s.' % chip('pendiente', 'municipios-sin-cuenta') if sin else
          'En gris, los municipios que no rindieron su cuenta de %d %s.' % (padron['anio'], chip('pendiente', 'municipios-sin-cuenta'))),
         _json(info))
 
@@ -302,7 +302,7 @@ def pagina_mapa(base, ref, tres, padron):
         'archivo': ARCHIVO, 'menu': 'Planisferio', 'menu_archivo': ARCHIVO,
         'icono': '🗺️', 'titulo': 'Planisferio', 'lema': 'México en un mapa: cada entidad, cada municipio, cada peso',
         'entrada': ('El dinero público tiene domicilio. Aquí está México entero en un mapa: elige una dimensión, mira cómo se reparte '
-                    'y toca una entidad para entrar a su portal, con sus municipios uno por uno. Todo sale de la base de la '
+                    'y toca una entidad para entrar a su portal, con el mapa de sus municipios y cada uno con sus cuentas. Todo sale de la base de la '
                     'Enciclopedia, con su fuente oficial y su etiqueta; el Planisferio solo lo pone en el territorio.'),
         'estilos': ['numeros.css', 'planisferio.css'],
         'scripts': ['planisferio.js'],
