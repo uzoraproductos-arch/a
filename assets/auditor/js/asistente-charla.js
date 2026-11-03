@@ -1528,6 +1528,52 @@
       return salTema('imss_servicios');
     }
 
+    /* La administración pública en los tres niveles (administracion_publica.py, 03-11-2026): quién la forma, qué hace, cuánto cuesta, cómo contrata y quién la audita.
+       asistente.js pide apuEdo() antes que las columnas, que también hablan de gobiernos y contratos. */
+    var APU = D.apu || null;
+    function apuTema(k) { var x = APU.t[k]; return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug }; }
+    function apuEstado(e) {
+      var r = APU.est.filter(function (x) { return x[0] === e.a; })[0];
+      if (!r) return null;
+      var x = APU.t.estados, y = APU.t.auditorias, c = APU.t.contratos;
+      var tot = APU.est.reduce(function (s, z) { return [s[0] + z[2], s[1] + z[3]]; }, [0, 0]);
+      var h = '<p><b>El gobierno de ' + esc(e.n) + '</b> le reportó al INEGI <b>' + n(r[2]) + ' personas</b> en su administración al cierre de 2024 (' + n(r[6], 1) +
+        ' por cada mil habitantes) y <b>' + n(r[1]) + ' personas titulares</b> al frente de sus instituciones. Ejerció <b>$' + n(r[3], 1) + ' millones</b> en 2024 (' +
+        n(100 * r[3] / tot[1], 1) + ' % de lo que ejercieron los 32), y sus municipios, <b>$' + n(r[7], 1) + ' millones</b>.</p>' +
+        '<p>Hizo <b>' + n(r[4]) + ' contratos</b>, y <b>' + n(r[5], 1) + ' de cada 100 fueron por adjudicación directa</b>, sin concurso.</p>' +
+        '<p>La Auditoría Superior de la Federación, al revisar el dinero federal de la Cuenta Pública 2024, le hizo <b>' + n(r[8]) + ' auditorías al gobierno del estado</b>, ' +
+        'que dejaron <b>$' + n(r[9], 1) + ' millones por aclarar</b>, y <b>' + n(r[10]) + ' a sus municipios</b>, con <b>$' + n(r[11], 1) + ' millones por aclarar</b>.</p>' +
+        '<p class="pa-chico">Lo del INEGI es lo que cada gobierno reportó a su censo, no una auditoría, y el censo no dice qué organismos incluyó cada estado. ' +
+        'Un monto por aclarar no es un desfalco comprobado. El dinero propio del estado lo revisa su entidad de fiscalización local, que la plataforma aún no integra.</p>';
+      var fu = [x.fu[1], x.fu[2], x.fu[3], c.fu[0], x.fu[5], { que: 'Personal por cada mil habitantes', e: 'derivado', op: n(r[2]) + ' ÷ población × 1,000', fu: x.fu[1].fu }];
+      return { html: h, fu: fu, tit: 'La administración pública de ' + e.n,
+        ci: [{ v: n(r[2]), etq: 'personas en su administración', e: 'oficial' }, { v: n(r[5], 1) + ' %', etq: 'de sus contratos, por adjudicación directa', e: 'oficial' },
+             { v: '$' + n(r[9], 1) + ' millones', etq: 'por aclarar del gobierno ante la ASF', e: 'oficial' }],
+        ir: ['planisferio-' + e.a.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase() + '.html#administracion', 'su administración pública en el Planisferio'],
+        sug: ['¿Qué estado tiene más burócratas por habitante?', '¿Quién audita a la administración pública?', '¿Qué funciones tiene un municipio?'] };
+    }
+    var APU_RX = /administracion(es)? publicas?|burocrat|servidores? public|servidoras? public|trabaja(n|dores)? (en|para|del?) (el |los )?gobiernos?|empleados? (del?|de los) gobiernos?|personal del gobierno|poder ejecutivo (estatal|local|del estado)/;
+    function apuEdo(t) {
+      if (!APU || !APU.est) return null;
+      var sEs = estados(t).e, adj = /adjudicacion directa|sin licitar|sin licitacion|sin concurso/.test(t);
+      if (sEs.length === 1 && (APU_RX.test(t) || (adj && /gobierno|estado|contrat/.test(t)))) return apuEstado(sEs[0]);
+      if (!sEs.length && adj && /(que|cual) estados?|cada estado|por estado|los estados|de los 32|entidad|gobierno federal|federaci|\bapf\b/.test(t)) return apuTema('contratos');
+      if (!sEs.length && APU_RX.test(t) && /(que|cual) estados?|cada estado|por estado|los estados|de los 32|por habitante/.test(t)) return apuTema('estados');
+      return null;
+    }
+    function apuResp(t) {
+      if (!APU) return null;
+      var r = apuEdo(t);
+      if (r) return r;
+      var ap = APU_RX.test(t) || /\bapf\b|\bape\b/.test(t);
+      if (/funcion(es)?|que hace|servicios publicos|para que sirve|atribucion/.test(t) && (ap || /(un|el|los|del?) municipios?\b|ayuntamiento/.test(t)) && !/funcion publica/.test(t)) return apuTema('funciones');
+      if (/quien(es)? (audita|revisa|fiscaliza)|contralori|organos? internos? de control|auditorias? (internas?|a la administracion|a los municipios|a los gobiernos)/.test(t)) return apuTema('auditorias');
+      if (ap && /audit|fiscaliz|por aclarar|asf/.test(t)) return apuTema('auditorias');
+      if (ap && /contrat|adjudic|licita/.test(t)) return apuTema('contratos');
+      if (ap) return apuTema('niveles');
+      return null;
+    }
+
     /* La PROFEPA: lo que cuesta y lo que resuelve (gestion_ambiental.py). Su presupuesto 2026 lo sigue contestando el bloque ambiental. */
     var AMG = D.amg || null;
     function amgTema(k) { var x = AMG.t[k]; return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug }; }
@@ -1745,6 +1791,8 @@
       if (rsal) return fin(rsal, { tipo: 'sal' });
       var ramg = amgResp(t);
       if (ramg) return fin(ramg, { tipo: 'amg' });
+      var rapu = apuResp(t);
+      if (rapu) return fin(rapu, { tipo: 'apu' });
       var rprom = promResp(t);
       if (rprom) return fin(rprom, { tipo: 'prom' });
       if (!crudo && (PIDE_VER.test(t) || LIGA.test(q) || (q.length > 160 && /\d/.test(q) && /peso|millon|billon|mdp/.test(t)))) {
@@ -2049,6 +2097,7 @@
       juzga: function (claim, val) { var d = cifraDicha(norm(claim).replace(/[¿?¡!]/g, ' ')), j = d && juzgaDicho(d, val); return j ? { dicho: d, v: j } : null; },
       /* Salud pública antes que Verificamos: «¿es cierto que el IMSS hizo 1.78 millones de cirugías?» es un cotejo de salud (27-10-2026). */
       salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
+      administracion: function (q) { var r = apuEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'apu' }); },
       saludEstado: function (q) { var r = salEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       nepotismo: function (q) { var r = nepResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'nep' }); },
       mapa: function (q) { var r = mapaResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'san' }); },

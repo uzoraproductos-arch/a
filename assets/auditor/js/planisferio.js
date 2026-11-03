@@ -64,6 +64,7 @@
       if (l.fmt === 'hm3') return num(v, 1) + ' hm³';
       if (l.fmt === 't') return num(v, 0) + ' t';
       if (l.fmt === 'dec2') return num(v, 2);
+      if (l.fmt === 'dec1') return num(v, 1);
       return mdp(v);
     }
     D.e.forEach(function (e) { porA[e.a] = e; });
@@ -225,6 +226,23 @@
         '<a class="pl-ficha-ir" href="' + esc(e.p) + '#salud">Ver su salud pública en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
+    /* Su administración pública (administracion_publica.py): lo que su gobierno reportó al censo del INEGI, lo que ejercieron sus municipios y lo que la ASF dejó por aclarar. */
+    function administracion(e, fijo) {
+      var u = e.apu, d = function (id, nom, extra) {
+        var l = lenteDe(id);
+        return '<dt>' + nom + '</dt><dd><b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est) + (extra || '') + '</dd>';
+      };
+      var est = '<p class="pl-ficha-sub">🏢 Su gobierno · censo del INEGI 2025</p><dl class="pl-ficha-dl">' + d('apP', 'Personal') + d('apK', 'Por cada mil habitantes') +
+        '<dt>Personas titulares</dt><dd><b class="num-tabular">' + num(u.tit, 0) + '</b> ' + chip('oficial') + '</dd>' + d('apX', 'Lo que ejerció en 2024') +
+        d('apD', 'Contratos por adjudicación directa', ' · de ' + num(u.con, 0)) +
+        d('apG', 'ASF · por aclarar', ' · ' + num(u.ga, 0) + ' auditorías') + '</dl>';
+      var mun = '<p class="pl-ficha-sub">🏘️ Sus ' + (e.a === 'CDMX' ? 'alcaldías' : 'municipios') + '</p><dl class="pl-ficha-dl">' + d('apM', 'Lo que ejercieron en 2024') +
+        d('apA', 'ASF · por aclarar', ' · ' + num(u.ma, 0) + ' auditorías') + '</dl>';
+      ficha.innerHTML = '<h3>' + esc(e.n) + '</h3>' + (/^ap[MA]$/.test(lente.id) ? mun + est : est + mun) +
+        '<p class="pl-ficha-mun">Lo del INEGI es lo que cada gobierno contestó a su censo; un monto por aclarar no es un desfalco comprobado.</p>' +
+        '<a class="pl-ficha-ir" href="' + esc(e.p) + '#administracion">Ver su administración pública en su portal ➔</a>' +
+        (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
+    }
     /* Sus recursos naturales: sus acuíferos (CONAGUA, DOF 09-11-2023, corte 2022), sus incendios (CONAFOR, cierre 2025), sus concesiones mineras (DGM, marzo de 2024) y su
        refinería de PEMEX, si tiene (Segundo Informe 2026, Anuario 2024 y estados
        financieros de PEMEX 2025). */
@@ -280,6 +298,7 @@
       if (dimP === 'ambiental') { ambiental(e, fijo); return; }
       if (dimP === 'judicial') { judicial(e, fijo); return; }
       if (dimP === 'salud') { salud(e, fijo); return; }
+      if (dimP === 'administracion') { administracion(e, fijo); return; }
       if (dimP === 'deuda') { deuda(e, fijo); return; }
       if (dimP === 'inversion') { inversion(e, fijo); return; }
       if (dimP === 'legislativa') { legislativa(e, fijo); return; }

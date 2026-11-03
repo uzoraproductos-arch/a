@@ -2051,6 +2051,34 @@
    "dice": [
     "Tlaxcala"
    ]
+  },
+  {
+   "q": "¿Cuánta gente trabaja en el gobierno de Jalisco?",
+   "ir": "planisferio-jal.html#administracion",
+   "dice": [
+    "149,888"
+   ]
+  },
+  {
+   "q": "¿Qué estado da más contratos por adjudicación directa?",
+   "ir": "datos-administracion-publica-auditorias.html#adm-contratos",
+   "dice": [
+    "Sonora"
+   ]
+  },
+  {
+   "q": "¿Quién audita a los municipios?",
+   "ir": "datos-administracion-publica-auditorias.html#adm-auditorias",
+   "dice": [
+    "9,487"
+   ]
+  },
+  {
+   "q": "¿Qué funciones tiene un municipio?",
+   "ir": "datos-administracion-publica-niveles.html#adm-funciones",
+   "dice": [
+    "art. 115"
+   ]
   }
  ]
 }

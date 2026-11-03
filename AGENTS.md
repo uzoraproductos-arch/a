@@ -203,6 +203,7 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   de alta especialidad se cuentan donde están** y lo que el ISSSTE no publica por estado
   (derechohabientes, consultas, cirugías) sigue con su ficha. Se abre con
   `planisferio.html?d=salud` y cada portal la trae en `#salud`.
+- **La administración pública, octava dimensión pintada** (03-11-2026, pedido del autor: «qué funciones tiene… sus auditorías… en los tres niveles»). El gobierno que ejecuta: la federal, las 32 estatales y las municipales. Todo sale de `herramientas/administracion_publica.py`, con los censos de gobierno del INEGI (CNGF-E 2025 y CNGMD 2025, con huella; si una tabla no suma el total que el reporte dice en su texto, se detiene) y la Matriz de la ASF que ya está en la base. Lo leen la Enciclopedia (Datos › Administración pública), el Planisferio (`?d=administracion`, `#administracion` en cada portal) y el chat (`D.apu`, `apuEdo()` antes que las columnas). **Lo del censo se dice como lo que cada gobierno reportó, nunca como auditoría**, y el personal de dos estados no se compara sin decir que el censo no dice qué organismos incluyó cada uno; **la adjudicación directa cuenta contratos, no pesos, y no se dice como irregularidad**; y lo que dejó la ASF es solo del dinero federal.
 - **Las leyes del dinero en los tres niveles** (03-11-2026,
   `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
   cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y

@@ -68,6 +68,10 @@ DIMENSIONES = [
     ('salud', '🩺', 'Salud pública',
      'El IMSS y el ISSSTE en cada estado: cuántas personas tiene adscritas el IMSS, cuántas consultas y cirugías les dio y con cuántas camas, y con cuántos médicos, camas y unidades cuenta el ISSSTE.',
      'datos-salud-sistema.html#sal-estados', None, True),
+    ('administracion', '🏢', 'Administración pública',
+     'El gobierno que ejecuta, en los tres niveles: cuánta gente tiene la administración de cada estado, cuánto ejerció, cuántos contratos dio sin concurso, '
+     'cuánto ejercieron sus municipios y qué les dejó por aclarar la Auditoría Superior de la Federación.',
+     'datos-administracion-publica-niveles.html#adm-estados', None, True),
 ]
 
 
@@ -223,9 +227,13 @@ def _mapa_mun(e, m, g, ref, padron, iv, dv):
 def _existe(enlace):
     # La página de los recursos naturales se escribe en la misma corrida
     # (recursos_naturales.pagina()), así que cuenta aunque aún no esté en disco.
+    # Igual las de la administración pública (administracion_publica.py),
+    # que escribe poderes_paginas() de apartados.py.
     import recursos_naturales
+    import administracion_publica
     archivo = enlace.split('#')[0].split('?')[0]
-    return archivo == recursos_naturales.ARCHIVO or os.path.exists(os.path.join(RAIZ, archivo))
+    return (archivo == recursos_naturales.ARCHIVO or archivo in [administracion_publica.PORTADA] + [x[0] for x in administracion_publica.PAGINAS]
+            or os.path.exists(os.path.join(RAIZ, archivo)))
 
 
 def _ritmo(anual_mdp):
@@ -283,6 +291,8 @@ def _datos(base, padron):
     pj = gj.judiciales_estados(base)
     import gestion_salud as gsal
     sa = gsal.salud_estados(base)
+    import administracion_publica as apu
+    ap = apu.estados(base)
     E = base['estados']
     C = base['fiscalEntidades']['campos']
     sin = set(C['recaudacionPropia'].get('sinFuente', []))
@@ -326,6 +336,13 @@ def _datos(base, padron):
                           'sal': {'con': h['con'], 'esp': h['esp'], 'urg': h['urg'], 'egr': h['egr'], 'camc': h['camc'], 'iqk': h['iqk'],
                                   'ie': h['is']['enf'], 'ic': h['is']['cons'], 'mu': h['im']['u'], 'mk': h['im']['cam'], 'me': h['im']['enf'],
                                   'oo': [n for n, _ in h.get('ooad', [])]}})
+        # Su administración pública (03-11-2026): lo que su gobierno le reportó
+        # al censo del INEGI (CNGE 2025), lo que ejercieron sus municipios
+        # (CNGMD 2025) y lo que la ASF dejó por aclarar a cada nivel (CP 2024).
+        x = ap[e['abbr']]
+        filas[-1].update({'apP': x['per'], 'apK': x['perk'], 'apX': x['pres'], 'apD': x['ad'], 'apG': x['gpa'], 'apM': x['mpres'], 'apA': x['mpa'],
+                          'apu': {'tit': x['tit'], 'con': x['con'], 'ga': x['ga'], 'ma': x['ma'], 'presp': x['presp'], 'mpresp': x['mpresp'],
+                                  'oa': x['oa'], 'opa': x['opa']}})
         # Su refinería de PEMEX, si tiene (Segundo Informe 2026 y estados
         # financieros de PEMEX 2025): una o ninguna por entidad.
         r = rf.get(e['abbr'])
@@ -465,6 +482,29 @@ LENTES = [
     {'id': 'imM', 'dim': 'salud', 'fmt': 'n', 'nom': 'IMSS · Médicos, en el mismo registro', 'pal': 'azul', 'est': 'oficial', 'anio': 2025,
      'que': ('Las médicas y médicos del IMSS en cada estado según el mismo registro de la DGIS que el ISSSTE: así se comparan las dos instituciones con la misma regla. '
              'Desde 2025 incluye las unidades rurales del antiguo programa IMSS-Bienestar, por eso no es la cifra de la Memoria.')},
+    # La administración pública (03-11-2026, pedido del autor): el gobierno
+    # que ejecuta. Lo del INEGI es lo que cada gobierno reportó a su censo.
+    {'id': 'apP', 'dim': 'administracion', 'fmt': 'n', 'nom': 'Personal de su administración', 'pal': 'azul', 'est': 'oficial', 'anio': 2024,
+     'que': ('Las personas que el gobierno de cada estado le reportó al INEGI en su administración pública al cierre de 2024, con sus titulares. '
+             'Es lo que cada uno contestó al censo: el INEGI no dice qué organismos incluyó cada gobierno, y por eso hay diferencias que no son de tamaño.')},
+    {'id': 'apK', 'dim': 'administracion', 'fmt': 'dec1', 'nom': 'Personal por cada mil habitantes', 'pal': 'azul', 'est': 'derivado', 'anio': 2024,
+     'que': ('El personal de su administración entre la población del estado, por mil. Sirve para preguntar, no para concluir: un estado que reporta poco '
+             'puede tener a sus maestros o médicos en organismos que no contó.')},
+    {'id': 'apX', 'dim': 'administracion', 'fmt': 'mdp', 'nom': 'Lo que ejerció su gobierno', 'pal': 'verde', 'est': 'oficial', 'anio': 2024,
+     'que': ('El presupuesto que ejerció la administración pública de cada estado en 2024, en pesos de ese año, según su respuesta al censo del INEGI. '
+             'No es la Cuenta Pública del estado: es lo que reportó su Poder Ejecutivo, sin su congreso ni su poder judicial.')},
+    {'id': 'apD', 'dim': 'administracion', 'fmt': 'pct', 'nom': 'Contratos por adjudicación directa', 'pal': 'rojo', 'est': 'oficial', 'anio': 2024,
+     'que': ('De cada 100 contratos que hizo la administración del estado en 2024, cuántos se dieron por adjudicación directa, sin concurso. '
+             'Cuenta contratos, no pesos, y la adjudicación directa es legal en los casos que fija la ley: dice cuánto se compra sin competir, no que haya irregularidad.')},
+    {'id': 'apG', 'dim': 'administracion', 'fmt': 'mdp', 'nom': 'ASF · Por aclarar del gobierno del estado', 'pal': 'rojo', 'est': 'oficial', 'anio': 2024,
+     'que': ('Lo que la Auditoría Superior de la Federación dejó por aclarar al gobierno de cada estado al revisar el dinero federal de la Cuenta Pública 2024 '
+             '(sin sus municipios ni lo que la ASF agrupa como «Otros»). No es un desfalco comprobado: es lo que no tenía papeles al cerrar la auditoría.')},
+    {'id': 'apM', 'dim': 'administracion', 'fmt': 'mdp', 'nom': 'Lo que ejercieron sus municipios', 'pal': 'verde', 'est': 'oficial', 'anio': 2024,
+     'que': ('El presupuesto que ejercieron en 2024 las administraciones de los municipios de cada estado (en la Ciudad de México, sus alcaldías), '
+             'según el censo municipal del INEGI. Algunos municipios no contestaron.')},
+    {'id': 'apA', 'dim': 'administracion', 'fmt': 'mdp', 'nom': 'ASF · Por aclarar de sus municipios', 'pal': 'rojo', 'est': 'oficial', 'anio': 2024,
+     'que': ('Lo que la ASF dejó por aclarar a los municipios de cada estado por el dinero federal que recibieron (Cuenta Pública 2024). '
+             'La ASF solo revisa a una parte de los municipios cada año, y su dinero propio lo revisa la entidad de fiscalización del estado.')},
     # La dimensión ambiental (03-11-2026): los recursos naturales, empezando
     # por las refinerías de PEMEX (recursos_naturales.py). Un estado sin
     # refinería va en gris como «sin refinería», nunca como «sin problema».
@@ -563,6 +603,20 @@ def _fuentes(ref, base=None):
             'isK': (dgis % ('ISSSTE', html.escape(dg['url']), dg['sha256'][:12])) + ', columna «Total camas área hospitalización».',
             'isU': (dgis % ('ISSSTE', html.escape(dg['url']), dg['sha256'][:12])) + '.',
             'imM': (dgis % ('IMSS', html.escape(dg['url']), dg['sha256'][:12])) + ', columna «Total médicos generales especialistas y odontólogos». El IMSS no le reportó personal de %d establecimientos.' % sp['imss'],
+        })
+        import administracion_publica as apu
+        cg_ = '%s (<a href="%s">PDF</a>; huella SHA-256 <code>%s…</code>)' % (html.escape(apu.CNGE['tx']), apu.CNGE['url'], apu.CNGE['sha256'][:12])
+        cm_ = '%s (<a href="%s">PDF</a>; huella SHA-256 <code>%s…</code>)' % (html.escape(apu.CNGMD['tx']), apu.CNGMD['url'], apu.CNGMD['sha256'][:12])
+        fa = apu.fuente_asf(base)
+        asf_ = '%s (<a href="%s">PDF</a>) %s' % (html.escape(fa['tx']), html.escape(fa['url']), ref('ref-asf-mdb2024'))
+        extra.update({
+            'apP': '%s, tabla 3 «Personal adscrito… según entidad federativa», p. 8. Las tablas suman los totales del texto del reporte.' % cg_,
+            'apK': 'Personal (%s, tabla 3, p. 8) ÷ población de la entidad × 1,000. La división es nuestra.' % cg_,
+            'apX': '%s, gráfica 5 «Presupuesto ejercido… según entidad federativa», p. 11, pesos corrientes.' % cg_,
+            'apD': '%s, tabla 9 «Contratos… según entidad federativa y tipo de procedimiento», p. 31. %s' % (cg_, html.escape(apu.CONTRATOS_NOTA)),
+            'apG': '%s, renglón «Gobierno del Estado» de cada entidad.' % asf_,
+            'apM': '%s, gráfica 23 «Presupuesto ejercido… según entidad federativa», p. 26, pesos corrientes.' % cm_,
+            'apA': '%s, renglón «Municipios» de cada entidad.' % asf_,
         })
     inf = ('Presidencia de la República, Segundo Informe de Gobierno 2025-2026, gráfica «Procesamiento de petróleo crudo en el Sistema Nacional de Refinación 2025-2026», '
            'p. 378, elaborada por la SENER con la Base de Datos Institucional de PEMEX %s') % ref('ref-presidencia-2ig')
@@ -717,6 +771,7 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
     nota_jud = _nota_jud(filas)
     nota_amb = _nota_amb(filas)
     nota_sal = _nota_sal(filas)
+    nota_apu = _nota_apu(filas)
     sin_ref = [f['a'] for f in filas if f['refj'] is None]
     for i in ('refj', 'refp', 'refu'):
         falta[i] = {'a': sin_ref, 'gris': 'sin refinería de PEMEX', 'pend': None,
@@ -755,7 +810,7 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
                       med[0]['n'], pct(med[0]['ild']), med[-1]['n'], pct(med[-1]['ild']), chip('oficial')))
     datos = {'lentes': [dict(l, fuente=fu[l['id']], falta=falta.get(l['id'])) for l in LENTES], 'e': filas,
              'dims': {i: {'n': nom, 'ir': ir, 'ire': ire, 'pinta': pinta} for i, _, nom, _, ir, ire, pinta in DIMENSIONES}}
-    notas = {'deuda': nota_deuda, 'inversion': nota_inv, 'legislativa': nota_leg, 'judicial': nota_jud, 'ambiental': nota_amb, 'salud': nota_sal}
+    notas = {'deuda': nota_deuda, 'inversion': nota_inv, 'legislativa': nota_leg, 'judicial': nota_jud, 'ambiental': nota_amb, 'salud': nota_sal, 'administracion': nota_apu}
     # Lo que antes era un párrafo largo arriba del mapa y una nota debajo
     # (decisión del autor, 03-11-2026: «mucho contenido de narración»): cada
     # dimensión tiene su «Cómo leerla» y su «Lo que el mapa no dice» en la
@@ -770,6 +825,9 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         'salud': ('El IMSS y el ISSSTE en cada estado. Del IMSS, lo que registra su Memoria Estadística 2025: a cuántas personas tiene adscritas, cuántas consultas y cirugías dio '
                   'y cuántas camas tiene por cada mil. Del ISSSTE, con qué cuenta según el registro de la Secretaría de Salud: médicos, camas y unidades. '
                   'La última lente pone a los médicos del IMSS en ese mismo registro, para comparar las dos con la misma regla.'),
+        'administracion': ('El gobierno que ejecuta, en los tres niveles. De la administración de cada estado, lo que le reportó al censo del INEGI: cuánta gente tiene, '
+                           'cuánto ejerció en 2024 y cuántos de sus contratos dio por adjudicación directa. De sus municipios, cuánto ejercieron. Y de los dos, lo que la '
+                           'Auditoría Superior de la Federación dejó por aclarar del dinero federal de la Cuenta Pública 2024. La ficha trae además el nivel federal, para comparar.'),
         'ambiental': ('Los recursos naturales: los acuíferos de cada estado y cuántos ya no tienen agua para concesionar, su superficie forestal y sus incendios forestales, '
                       'su pesca y su acuacultura, sus concesiones mineras y las siete refinerías de PEMEX, cuánto crudo procesa cada una frente a su capacidad y cuánto valor '
                       'ganó o perdió en sus libros. En las lentes de refinación, el punto marca la entidad, no el sitio exacto.'),
@@ -915,6 +973,25 @@ def _nota_sal(filas):
         format(cd['isM'], ','), format(tm, ','), cd['n'], chip('oficial'), format(round(100.0 * cd['isM'] / tm)), chip('derivado'),
         pr[0]['n'], format(100.0 * pr[0]['isM'] / (pr[0]['isM'] + pr[0]['imM']), '.1f'), chip('derivado'),
         chip('pendiente', 'salud-issste-servicios'))
+
+
+def _nota_apu(filas):
+    """Los puntos ciegos de la administración pública, dichos con las
+    cifras: el personal que no se cuenta igual, la adjudicación que cuenta
+    contratos y no pesos, y la auditoría que solo ve el dinero federal."""
+    import administracion_publica as apu
+    k = sorted(filas, key=lambda f: f['apK'])
+    d = sorted((f for f in filas if f['a'] not in ('OAX', 'YUC')), key=lambda f: f['apD'])
+    ga = sum(f['apG'] for f in filas)
+    ma = sum(f['apA'] for f in filas)
+    return ('<b>No todos cuentan lo mismo.</b> Por cada mil habitantes, el gobierno de %s reportó %s personas en su administración y el de %s, %s %s. '
+            'Es lo que cada uno le contestó al censo del INEGI, que no dice qué organismos incluyó cada gobierno: una diferencia así se pregunta, no se concluye. '
+            '<b>La adjudicación directa cuenta contratos, no pesos:</b> %s dio %s de cada 100 sin concurso y %s, %s %s, pero un solo contrato grande pesa más que cien chicos. %s '
+            '<b>La auditoría que se ve es la del dinero federal.</b> La ASF dejó %s por aclarar a los 32 gobiernos estatales y %s a sus municipios %s, y no es un desfalco comprobado. '
+            'El dinero propio de cada estado y de cada municipio lo revisa la entidad de fiscalización superior del estado, cuyos informes la plataforma todavía no ha integrado.') % (
+        k[-1]['n'], format(k[-1]['apK'], '.1f'), k[0]['n'], format(k[0]['apK'], '.1f'), chip('derivado'),
+        d[-1]['n'], format(d[-1]['apD'], '.1f'), d[0]['n'], format(d[0]['apD'], '.1f'), chip('oficial'), html.escape(apu.CONTRATOS_NOTA),
+        mdp(ga), mdp(ma), chip('derivado'))
 
 
 def _nota_jud(filas):
@@ -1324,6 +1401,63 @@ def _salud_portal(base, ref, e):
     return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, ir)
 
 
+def _administracion_portal(base, ref, e):
+    """Su administración pública (03-11-2026): los tres niveles en tres pisos.
+    La federal, para comparar; la del estado, con lo que reportó al censo del
+    INEGI; la de sus municipios, con lo que ejercieron; y en cada piso, lo que
+    la ASF dejó por aclarar. Todo sale de administracion_publica.py."""
+    import administracion_publica as apu
+    ap = apu.estados(base)
+    a, nom = e['abbr'], e['name']
+    x = ap[a]
+    cp = base['cuenta_publica_asf']['cp2024']
+    af = apu.apf_asf(cp)
+    lugar = lambda k, alto=True: sorted(ap, key=lambda z: -ap[z][k] if alto else ap[z][k]).index(a) + 1
+    pes = lambda v: '$' + format(v, ',')
+    p1 = ('<article class="pl-piso pl-piso-fed"><p class="pl-piso-n">1 · La federal, para comparar · 2024</p>'
+          '<p class="pl-piso-v"><b class="num-tabular">%s</b> personas %s</p>'
+          '<dl class="pl-dl"><dt>Instituciones</dt><dd>%s %s <small>secretarías, organismos y empresas del Estado, con PEMEX y la CFE</small></dd>'
+          '<dt>Lo que ejerció</dt><dd>%s %s</dd>'
+          '<dt>Contratos por adjudicación directa</dt><dd>%s de cada 100 %s <small>de %s contratos, sin las empresas públicas del Estado</small></dd>'
+          '<dt>ASF, Cuenta Pública 2024</dt><dd>%s auditorías · %s por aclarar %s <small>a secretarías, organismos y empresas federales, sin los Poderes ni los autónomos</small></dd>'
+          '</dl></article>') % (
+              format(apu.APF['per'], ','), chip('oficial'), format(apu.APF['inst'], ','), chip('oficial'), mdp(apu.APF['pres']), chip('oficial'),
+              format(apu.APF['ad'], '.1f'), chip('oficial'), format(apu.APF['con'], ','), format(af['aud'], ','), mdp(af['pa']), chip('derivado'))
+    p2 = ('<article class="pl-piso pl-piso-ape"><p class="pl-piso-n">2 · La del gobierno de %s · 2024</p>'
+          '<p class="pl-piso-v"><b class="num-tabular">%s</b> personas %s</p>'
+          '<dl class="pl-dl"><dt>Por cada mil habitantes</dt><dd>%s %s <small>lugar %d de 32, de la que más reporta a la que menos</small></dd>'
+          '<dt>Personas titulares de sus instituciones</dt><dd>%s %s <small>una persona puede encabezar más de una; no cuenta las vacantes</small></dd>'
+          '<dt>Lo que ejerció</dt><dd>%s %s <small>%s por habitante %s</small></dd>'
+          '<dt>Contratos</dt><dd>%s %s <small>%s de cada 100 por adjudicación directa %s, lugar %d de 32 de la que más a la que menos</small></dd>'
+          '<dt>ASF, Cuenta Pública 2024</dt><dd>%s auditorías al gobierno del estado · %s por aclarar %s <small>del dinero federal que recibió</small></dd>'
+          '<dt>Otros entes, según la ASF</dt><dd>%s auditorías · %s por aclarar %s <small>lo que la ASF agrupa como «Otros»</small></dd>'
+          '</dl></article>') % (
+              html.escape(nom), format(x['per'], ','), chip('oficial'), format(x['perk'], '.1f'), chip('derivado'), lugar('perk'),
+              format(x['tit'], ','), chip('oficial'), mdp(x['pres']), chip('oficial'), pes(x['presp']), chip('derivado'),
+              format(x['con'], ','), chip('oficial'), format(x['ad'], '.1f'), chip('oficial'), lugar('ad'),
+              format(x['ga'], ','), mdp(x['gpa']), chip('oficial'), format(x['oa'], ','), mdp(x['opa']), chip('oficial'))
+    p3 = ('<article class="pl-piso pl-piso-apm"><p class="pl-piso-n">3 · La de sus %s · 2024</p>'
+          '<p class="pl-piso-v"><b class="num-tabular">%s</b> ejercidos %s</p>'
+          '<dl class="pl-dl"><dt>Por habitante</dt><dd>%s %s</dd>'
+          '<dt>ASF, Cuenta Pública 2024</dt><dd>%s auditorías · %s por aclarar %s <small>la ASF revisa a una parte de los municipios cada año</small></dd>'
+          '<dt>Lo que hacen</dt><dd>Agua, drenaje, alumbrado, limpia, mercados, panteones, rastro, calles y parques, seguridad y tránsito %s <small>Constitución, art. 115, fr. III</small></dd>'
+          '</dl></article>') % (
+              'alcaldías' if a == 'CDMX' else 'municipios', mdp(x['mpres']), chip('oficial'), pes(x['mpresp']), chip('derivado'),
+              format(x['ma'], ','), mdp(x['mpa']), chip('oficial'), chip('oficial'))
+    fu = ('<p class="pl-piso-f">%s: personal, tabla 3, p. 8; titulares, tabla 1, p. 5; presupuesto, gráfica 5, p. 11; contratos, tabla 9, p. 31 (<a href="%s">PDF</a>). '
+          '%s: presupuesto municipal, gráfica 23, p. 26 (<a href="%s">PDF</a>). %s (<a href="%s">PDF</a>). Las divisiones son nuestras, con la población de la base.</p>') % (
+              html.escape(apu.CNGE['tx']), apu.CNGE['url'], html.escape(apu.CNGMD['tx']), apu.CNGMD['url'],
+              html.escape(apu.fuente_asf(base)['tx']), html.escape(apu.fuente_asf(base)['url']))
+    ciego = ('<p class="pl-dim-nota"><b>Lo que estas cifras no dicen.</b> Lo del INEGI es lo que el gobierno de %s le contestó a su censo, no una auditoría, y el censo no dice qué organismos '
+             'incluyó en su cuenta. La adjudicación directa cuenta contratos, no pesos, y es legal en los casos que fija la ley. Un monto por aclarar no es un desfalco comprobado. '
+             'Y la ASF solo revisa el dinero federal: el propio del estado y de sus municipios lo revisa la entidad de fiscalización superior del estado, '
+             'cuyos informes la plataforma todavía no ha integrado.</p>') % html.escape(nom)
+    ir = ('<p class="pl-ficha-ir"><a href="planisferio.html?d=administracion&amp;e=%s">Las 32 administraciones, en el mapa ➔</a> '
+          '<a href="datos-administracion-publica-niveles.html#adm-estados">La tabla completa, en la Enciclopedia ➔</a> '
+          '<a href="datos-administracion-publica-auditorias.html">Quién la audita y cómo contrata ➔</a></p>') % quote(a)
+    return '<div class="pl-pisos">%s%s%s</div>%s%s%s' % (p1, p2, p3, fu, ciego, ir)
+
+
 def _ambiental_portal(base, ref, e):
     """Sus recursos naturales (03-11-2026): sus acuíferos, sus incendios forestales, sus concesiones mineras, su refinería de PEMEX, si tiene,
     y los siete ramos de recursos con quién los explota y quién los audita,
@@ -1610,6 +1744,10 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
              'texto': ('A cuántas personas tiene adscritas el IMSS en %s, cuántas consultas y cirugías les dio y con cuántas camas, y con cuántos médicos, camas y unidades '
                        'cuenta el ISSSTE. Del IMSS, su Memoria Estadística 2025; del ISSSTE, el registro de recursos de la Secretaría de Salud, porque su anuario no responde.') % nom,
              'tarjetas': [], 'bloque': _salud_portal(base, ref, e)},
+            {'id': 'administracion', 'titulo': 'Su administración pública',
+             'texto': ('El gobierno que ejecuta, en los tres niveles: cuánta gente tiene la administración de %s, cuánto ejerció en 2024 y cuántos contratos dio sin concurso; '
+                       'cuánto ejercieron sus municipios; y lo que la Auditoría Superior de la Federación dejó por aclarar a cada uno. Arriba, la federal, para comparar.') % nom,
+             'tarjetas': [], 'bloque': _administracion_portal(base, ref, e)},
             {'id': 'ambiental', 'titulo': 'Sus recursos naturales',
              'texto': ('Quién explota los recursos de %s y quién los audita. Empieza por lo que ya tiene cifra: sus acuíferos y cuántos ya no tienen agua para concesionar, '
                        'su superficie forestal y sus incendios forestales de 2025, su pesca y su acuacultura, sus concesiones mineras y la refinería de PEMEX, si la tiene, con el crudo que procesa y el valor que ganó o perdió en los libros de PEMEX.') % nom,
