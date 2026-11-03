@@ -1536,6 +1536,10 @@
   {
    "q": "Ver Jalisco en el planisferio",
    "ir": "planisferio.html?e=JAL"
+  },
+  {
+   "q": "Muéstrame el mapa de los municipios de Jalisco",
+   "ir": "planisferio.html?e=JAL&m=1"
   }
  ]
 }

@@ -309,7 +309,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-gro.html` | Guerrero · Auditavisión | apartados.py | 54 | 0 | 4 | 8 | 11 |
 | `planisferio-gto.html` | Guanajuato · Auditavisión | apartados.py | 54 | 0 | 4 | 8 | 0 |
 | `planisferio-hgo.html` | Hidalgo · Auditavisión | apartados.py | 54 | 0 | 4 | 8 | 0 |
-| `planisferio-jal.html` | Jalisco · Auditavisión | apartados.py | 54 | 0 | 4 | 8 | 13 |
+| `planisferio-jal.html` | Jalisco · Auditavisión | apartados.py | 55 | 0 | 4 | 8 | 14 |
 | `planisferio-mex.html` | Estado de México · Auditavisión | apartados.py | 54 | 0 | 4 | 8 | 1 |
 | `planisferio-mich.html` | Michoacán · Auditavisión | apartados.py | 54 | 0 | 4 | 8 | 2 |
 | `planisferio-mor.html` | Morelos · Auditavisión | apartados.py | 54 | 0 | 4 | 8 | 0 |

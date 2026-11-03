@@ -82,8 +82,17 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   estado, lo que ingresan sus municipios) y los contadores de la Enciclopedia
   (ritmo por segundo = cifra anual ÷ 31,536,000 s, `derivado`). Las demás
   dimensiones salen «Próximamente» y llevan a donde ya viven; un enlace roto
-  detiene la generación. Después: el mapa de los municipios, entidad por
-  entidad, con el Marco Geoestadístico del INEGI.
+  detiene la generación.
+- **El mapa de los municipios, entidad por entidad** (desde el 03-11-2026;
+  Jalisco primero). Sus límites salen del **Marco Geoestadístico 2024 del
+  INEGI**: `herramientas/integrar_mg_municipios.py <ent>_<nombre>.zip` (se
+  corre a mano con `pyshp`) escribe `docs/geo/mg2024-mun-<cve>.json`, con la
+  huella SHA-256 del archivo de origen, y `planisferio.py` lo pinta en el
+  portal (`#mapa-municipios`) si existe. **Si sus claves no coinciden con las
+  del padrón municipal, la generación se detiene.** La página repite el aviso
+  del INEGI: esos límites son geoestadísticos, no la fuente oficial de la
+  división político-administrativa. El chat lleva ahí con
+  `planisferio.html?e=JAL&m=1` (renglón `mapa-mun` de `RECURSOS`).
 - **Vive en el Auditor:** «Ver en el Planisferio» es un renglón de
   `RECURSOS` (`asistente_recursos.py`, con `?e=` para abrir el mapa con la
   entidad elegida) y «planisferio» cuenta como pedir un mapa (`TIPOS_REC` de

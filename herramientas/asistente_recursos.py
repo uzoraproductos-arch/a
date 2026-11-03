@@ -83,6 +83,11 @@ RECURSOS = [
     ('circuito', '🔄', 'Ver su circuito', 'El circuito del dinero de cada estado', 'numeros-las-32-entidades.html#circuito',
      'numeros-las-32-entidades.html?e=%s#circuito', 'mapa',
      'estado estados entidad estatal recauda recaudacion propia convenios ramo 25 circuito'),
+    # El mapa de los municipios del Planisferio (03-11-2026): con un estado
+    # que ya tiene sus límites del INEGI, lleva directo a su portal (m=1).
+    ('mapa-mun', '🗺️', 'Ver el mapa de sus municipios', 'El mapa de los municipios de tu estado', 'planisferio.html#mapa',
+     'planisferio.html?e=%s&m=1', 'mapa',
+     'mapa municipios municipio municipal limites territorio'),
     ('padron', '🏘️', 'Ver sus municipios', 'Los municipios, uno por uno', 'numeros-los-municipios.html#padron',
      'numeros-los-municipios.html?e=%s#padron', 'mapa',
      'municipio municipios municipal alcaldia ayuntamiento predial fortamun fismdf padron'),

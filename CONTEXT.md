@@ -7213,7 +7213,17 @@ Pedido del autor: «La pestaña de enciclopedia la vamos a convertir en la cuart
 - **Lectura de «los tres presupuestos»:** en el mapa son los tres pisos de la hacienda de cada entidad (federal, estatal y municipal); en los contadores, los tres presupuestos de la doctrina que ya usa Números (del Estado, nacional y social). Si el autor quería solo una de las dos, se ajusta en `planisferio.py`.
 
 ### Pendientes del Planisferio
-- **El mapa de los municipios:** falta integrar la geometría municipal (Marco Geoestadístico del INEGI). Es una falta de la plataforma, no de una dependencia: el documento existe y aún no lo integramos. Se hará entidad por entidad.
+- **El mapa de los municipios:** hecho para **Jalisco** el 03-11-2026 (abajo). Faltan las otras 31 entidades; es una falta de la plataforma, no de una dependencia: el Marco Geoestadístico 2024 del INEGI existe y se integra entidad por entidad.
 - **Las otras cinco dimensiones** (deuda, inversión, ambiental, legislativa, judicial) todavía no se pintan en el mapa: hoy llevan a su página de la Enciclopedia.
 - **Ciudad de México:** sin recaudación propia cotejada (`entidades-cdmx`) y sin cuenta municipal de sus 16 alcaldías (`municipios-sin-cuenta`), como en el resto de la plataforma.
+
+## Entrega — 03-11-2026: el mapa de los municipios de Jalisco (sello 20261103a)
+
+Pedido del autor: «sigue con el mapa de los municipios de Jalisco».
+
+- **Fuente:** INEGI, Marco Geoestadístico 2024, versión por área geoestadística estatal (`794551132173/14_jalisco.zip`, 149.8 MB, SHA-256 `7eeaa78c0b591bdb0338a5d8cfb842a78e342272378ddd335a7b8011ce88d81c`; metadato «Modified: 2024-08-31»). Capa `14mun` (125 áreas geoestadísticas municipales), en la cónica conforme de Lambert del INEGI (EPSG:6372). Licencia: Términos de Libre Uso de la Información del INEGI.
+- **Integración:** `herramientas/integrar_mg_municipios.py` (Douglas-Peucker a 400 m, islotes de menos de 0.5 km² fuera) → `docs/geo/mg2024-mun-14.json`. El archivo de 150 MB no se sube al repositorio: queda su huella.
+- **Página:** sección «El mapa de sus 125 municipios» en `planisferio-jal.html`, con las cifras del padrón INEGI 2024 que ya tenía la plataforma (ninguna cifra nueva). La dependencia es `derivado`, con su operación.
+- **Aviso del INEGI, repetido en la página:** los límites son geoestadísticos y no deben tomarse como la fuente oficial de la división político-administrativa.
+- **Pendiente:** las otras 31 entidades (misma receta: bajar `<cve>_<nombre>.zip` y correr el script). La Ciudad de México tendrá mapa de sus 16 demarcaciones, pero en gris: no rinden cuenta municipal.
 

@@ -95,6 +95,7 @@
         fila('Cobra el estado por su cuenta', e.est, 'derivado', 2024, D.pend.est) +
         fila('Ingresan sus municipios', e.mun, 'derivado', 2024, D.pend.mun) +
         '</dl><p class="pl-ficha-mun">' + e.mn + (e.a === 'CDMX' ? ' demarcaciones' : ' municipios') + (e.mc ? ', ' + e.mc + ' con cuenta de 2024' : ', sin cuenta municipal') + '.</p>' +
+        (e.mm ? '<p class="pl-ficha-mun">🗺️ Su portal ya trae el mapa de sus municipios.</p>' : '') +
         '<a class="pl-ficha-ir" href="' + esc(e.p) + '">Entrar al portal de ' + esc(e.n) + ' ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
@@ -141,6 +142,9 @@
     var m = /[?&]e=([^&#]+)/.exec(location.search), pedida = null;
     try { pedida = m ? decodeURIComponent(m[1]) : null; } catch (err) { pedida = null; }
     pinta();
+    /* ?e=JAL&m=1 (desde el Auditor): si la entidad ya tiene el mapa de sus
+       municipios, se va directo a él; si no, se queda con su ficha. */
+    if (pedida && porA[pedida] && porA[pedida].mm && /[?&]m=1/.test(location.search)) { location.replace(porA[pedida].p + '#mapa-municipios'); return; }
     if (pedida && porA[pedida]) elige(pedida, false);
     else if (pedida) {
       var p = plano(pedida);
@@ -148,7 +152,91 @@
     }
   })();
 
-  /* 3 · Los municipios de cada portal ---------------------------------- */
+  /* 3 · El mapa de los municipios (Marco Geoestadístico 2024 del INEGI) */
+  (function () {
+    var nodo = document.getElementById('plMunDatos');
+    if (!nodo) return;
+    var D;
+    try { D = JSON.parse(nodo.textContent); } catch (e) { return; }
+    var PAL = {
+      verde: ['#e4f3e8', '#b3dcbd', '#6dba82', '#2e8a4c', '#0f5128'],
+      azul: ['#e3ecf8', '#b4c9ea', '#6f95d2', '#2f5fa8', '#0b2a63'],
+      rojo: ['#fbe5e2', '#f2b3aa', '#e06f60', '#b3261e', '#6e1510']
+    };
+    var porC = {}, lente = D.lentes[0], sel = null, ficha = document.getElementById('plMunFicha');
+    D.m.forEach(function (x) { porC[x.c] = x; });
+    var paths = document.querySelectorAll('.pl-mun');
+    function fmt(v) { return v == null ? '—' : lente.id === 'dep' ? num(v, 1) + '%' : mdp(v); }
+    function cortes() {
+      var v = D.m.map(function (x) { return x[lente.id]; }).filter(function (x) { return x != null; }).sort(function (a, b) { return a - b; });
+      return [1, 2, 3, 4].map(function (k) { return v[Math.round(k * v.length / 5)]; });
+    }
+    function pinta() {
+      var c = cortes(), pal = PAL[lente.pal];
+      Array.prototype.forEach.call(paths, function (p) {
+        var x = porC[p.getAttribute('data-c')], v = x ? x[lente.id] : null, k = -1;
+        if (v != null) { k = 0; while (k < 4 && v >= c[k]) k++; }
+        p.style.fill = k < 0 ? '#d5dae3' : pal[k];
+        p.classList.toggle('sel', !!sel && sel.c === p.getAttribute('data-c'));
+        if (x) p.setAttribute('aria-label', x.n + ': ' + (v == null ? 'sin cuenta de ' + D.anio : fmt(v)));
+      });
+      var lim = [null].concat(c);
+      document.getElementById('plMunLeyenda').innerHTML = '<span class="pl-ley-tit">' + esc(lente.nom) + ' (' + D.anio + ')</span><span class="pl-ley-cls">' +
+        pal.map(function (col, i) {
+          var t = i === 0 ? 'menos de ' + fmt(lim[1]) : i === 4 ? fmt(lim[4]) + ' o más' : fmt(lim[i]) + ' a ' + fmt(lim[i + 1]);
+          return '<span><i style="background:' + col + '"></i>' + t + '</span>';
+        }).join('') + '<span><i style="background:#d5dae3"></i>sin cuenta</span></span>';
+      document.getElementById('plMunQue').textContent = lente.que;
+    }
+    function muestra(x) {
+      var ente = 'herramienta-inspector-entes.html#ente=municipal:' + D.cve + x.c;
+      if (x.ing == null) {
+        ficha.innerHTML = '<h3>' + esc(x.n) + '</h3><p>No rindió su cuenta de ' + D.anio + ' al INEGI ' + chip('pendiente', D.pend) +
+          ': sigue en el padrón, sin cifra. Ponerle cero falsearía la cifra.</p><a class="pl-ficha-ir" href="' + ente + '">Su ficha en el Auditor de entes ➔</a>';
+        return;
+      }
+      ficha.innerHTML = '<h3>' + esc(x.n) + '</h3><p class="pl-ficha-sub">Clave INEGI ' + D.cve + x.c + ' · cuentas de ' + D.anio + '</p><dl class="pl-ficha-dl">' +
+        '<dt>Ingreso total</dt><dd><b class="num-tabular">' + mdp(x.ing) + '</b> ' + chip('oficial') + '</dd>' +
+        '<dt>Participaciones</dt><dd>' + mdp(x.part) + ' ' + chip('oficial') + '</dd>' +
+        '<dt>Aportaciones (FORTAMUN ' + mdp(x.fort) + ' · FISMDF ' + mdp(x.fis) + ')</dt><dd>' + mdp(x.aport) + ' ' + chip('oficial') + '</dd>' +
+        '<dt>Predial cobrado</dt><dd>' + mdp(x.predial) + ' ' + chip('oficial') + '</dd>' +
+        '<dt>Dependencia de transferencias</dt><dd>' + (x.dep == null ? '—' : num(x.dep, 1) + '%') + ' ' + chip('derivado') + '</dd></dl>' +
+        '<a class="pl-ficha-ir" href="' + ente + '">Su estado de cuenta y salud financiera ➔</a>';
+    }
+    function elige(c) {
+      var x = porC[c];
+      if (!x) return;
+      sel = x;
+      pinta();
+      muestra(x);
+      Array.prototype.forEach.call(document.querySelectorAll('#plMun tr[data-c]'), function (r) { r.classList.toggle('sel', r.getAttribute('data-c') === c); });
+    }
+    Array.prototype.forEach.call(paths, function (p) {
+      var c = p.getAttribute('data-c');
+      p.addEventListener('click', function () { elige(c); });
+      p.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); elige(c); } });
+      p.addEventListener('mouseenter', function () { if (!sel) muestra(porC[c]); });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('#mapa-municipios .pl-lente'), function (b) {
+      b.addEventListener('click', function () {
+        lente = D.lentes.filter(function (l) { return l.id === b.getAttribute('data-l'); })[0] || lente;
+        Array.prototype.forEach.call(document.querySelectorAll('#mapa-municipios .pl-lente'), function (x) { x.setAttribute('aria-checked', x === b ? 'true' : 'false'); });
+        pinta();
+      });
+    });
+    /* Desde la tabla: tocar el nombre de un municipio lo ilumina en el mapa. */
+    Array.prototype.forEach.call(document.querySelectorAll('#plMun tr[data-c] th'), function (th) {
+      th.classList.add('pl-th-ir');
+      th.setAttribute('tabindex', '0');
+      th.addEventListener('click', function () {
+        elige(th.parentNode.getAttribute('data-c'));
+        document.getElementById('plMunMapa').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    pinta();
+  })();
+
+  /* 4 · Los municipios de cada portal ---------------------------------- */
   (function () {
     var t = document.getElementById('plMun');
     if (!t) return;

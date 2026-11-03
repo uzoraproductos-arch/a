@@ -33,6 +33,12 @@
 .pl-edo { stroke: #fff; stroke-width: .8; cursor: pointer; transition: fill .35s ease; }
 .pl-edo:hover, .pl-edo:focus-visible { stroke: #0b2a63; stroke-width: 1.8; outline: none; }
 .pl-edo.sel { stroke: #b3261e; stroke-width: 2.6; }
+.pl-mun { stroke: #fff; stroke-width: .6; cursor: pointer; transition: fill .35s ease; }
+.pl-mun:hover, .pl-mun:focus-visible { stroke: #0b2a63; stroke-width: 1.6; outline: none; }
+.pl-mun.sel { stroke: #b3261e; stroke-width: 2.4; }
+.pl-svg-mun { max-height: 640px; }
+.pl-tabla tr.sel th, .pl-tabla tr.sel td { background: #fff3d6; }
+.pl-th-ir { cursor: pointer; color: #0b2a63; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .pl-leyenda { display: grid; gap: 6px; margin-top: 10px; font-size: 14px; color: #33415c; }
 .pl-ley-tit { font-weight: 800; color: #0b2a63; }
 .pl-ley-cls { display: flex; flex-wrap: wrap; gap: 6px 14px; }

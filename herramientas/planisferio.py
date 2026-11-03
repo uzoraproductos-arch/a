@@ -101,6 +101,68 @@ def _padron():
     return json.loads(subprocess.run(['node', '-e', js], check=True, capture_output=True, text=True).stdout)
 
 
+def geo_mun(cve_ent):
+    """Los límites municipales de una entidad (Marco Geoestadístico 2024 del
+    INEGI), si ya se integraron con integrar_mg_municipios.py."""
+    ruta = os.path.join(RAIZ, 'docs', 'geo', 'mg2024-mun-%s.json' % cve_ent)
+    return json.load(open(ruta, encoding='utf-8')) if os.path.exists(ruta) else None
+
+
+# Las lentes del mapa municipal: (id, nombre, paleta, qué dice).
+LENTES_MUN = [
+    ('ing', 'Ingreso total', 'verde',
+     'Todo lo que ingresó cada municipio en 2024: lo propio, lo que le llegó del estado y de la Federación, y lo que pidió prestado.'),
+    ('predial', 'Predial cobrado', 'azul',
+     'Lo que cada municipio cobró de impuesto predial en 2024: el impuesto que la Constitución le reserva (art. 115, fr. IV).'),
+    ('dep', 'Dependencia de transferencias', 'rojo',
+     'De cada $100 que ingresó en 2024, cuántos llegaron de fuera: (participaciones + aportaciones) ÷ ingreso total × 100.'),
+]
+
+MAPA_MUN = """<div class="pl-lentes" role="radiogroup" aria-label="Qué ver en el mapa de los municipios">%s</div>
+          <p class="pl-que" id="plMunQue"></p>
+          <div class="pl-rej" id="plMunMapa">
+            <figure class="pl-fig">
+              %s
+              <figcaption class="pl-leyenda" id="plMunLeyenda"></figcaption>
+            </figure>
+            <aside class="pl-ficha" id="plMunFicha" aria-live="polite">
+              <p class="pl-ficha-vacia"><b>Toca un municipio.</b> Verás lo que ingresó en %d, de dónde le llegó y la puerta a su ficha en el Auditor de entes.</p>
+            </aside>
+          </div>
+          <p class="pl-pie">Límites: %s (<a href="%s">descarga del INEGI</a>), integrados el %s; huella SHA-256 del archivo de origen <code>%s</code>. Simplificados para verse en pantalla. %s
+          Cifras: INEGI, finanzas públicas municipales %d %s. En gris, los municipios que no rindieron su cuenta de %d %s.</p>
+          <script type="application/json" id="plMunDatos">%s</script>"""
+
+
+def _mapa_mun(e, m, g, ref, padron):
+    """El mapa de los municipios de una entidad, con sus cifras del padrón."""
+    cves_geo = {x['c'] for x in g['m']}
+    cves_pad = {r[0] for r in m['lista']}
+    if cves_geo != cves_pad:
+        raise SystemExit('planisferio: el Marco Geoestadístico y el padrón no traen los mismos municipios de %s (sobran %s; faltan %s)' % (
+            e['name'], sorted(cves_geo - cves_pad), sorted(cves_pad - cves_geo)))
+    datos = []
+    for r in m['lista']:
+        x = {'c': r[0], 'n': r[1]}
+        if len(r) >= 10:
+            ing, part, aport, fortamun, fismdf, predial = r[2], r[3], r[4], r[5], r[6], r[7]
+            x.update({'ing': round(ing / 1e6, 1), 'part': round(part / 1e6, 1), 'aport': round(aport / 1e6, 1),
+                      'predial': round(predial / 1e6, 1), 'fort': round(fortamun / 1e6, 1), 'fis': round(fismdf / 1e6, 1),
+                      'dep': round((part + aport) / ing * 100, 1) if ing else None})
+        datos.append(x)
+    svg = '<svg class="pl-svg pl-svg-mun" viewBox="0 0 %s %s" role="group" aria-label="Los municipios de %s">%s</svg>' % (
+        g['vb'][0], g['vb'][1], e['name'], ''.join(
+            '<path class="pl-mun" data-c="%s" d="%s" tabindex="0" role="button" aria-label="%s"><title>%s</title></path>' % (
+                x['c'], x['d'], x['n'], x['n']) for x in g['m']))
+    lentes = ''.join('<button type="button" class="pl-lente" role="radio" aria-checked="%s" data-l="%s">%s</button>' % (
+        'true' if k == 0 else 'false', i, n) for k, (i, n, _p, _q) in enumerate(LENTES_MUN))
+    info = {'ent': e['abbr'], 'cve': m['cve'], 'pend': 'municipios-sin-cuenta', 'anio': padron['anio'],
+            'lentes': [{'id': i, 'nom': n, 'pal': p, 'que': q} for i, n, p, q in LENTES_MUN], 'm': datos}
+    return MAPA_MUN % (
+        lentes, svg, padron['anio'], g['fuente'], g['url'], g['integrado'], g['sha256'][:12] + '…', g['aviso'],
+        padron['anio'], ref('ref-inegi-efipem'), padron['anio'], chip('pendiente', 'municipios-sin-cuenta'), _json(info))
+
+
 def _existe(enlace):
     return os.path.exists(os.path.join(RAIZ, enlace.split('#')[0].split('?')[0]))
 
@@ -141,7 +203,7 @@ def _datos(base, padron):
             'est': None if e['abbr'] in sin else e['recaudacionPropia'],
             'dep': None if e['abbr'] in sin else e['dep'],
             'mun': round(m['tot']['ing'] / 1e6, 1) if con else None,
-            'mn': m['n'], 'mc': con,
+            'mn': m['n'], 'mc': con, 'mm': geo_mun(m['cve']) is not None,
         })
     return filas
 
@@ -307,14 +369,14 @@ def pagina_portal(base, ref, e, padron, prev, sig):
     filas = []
     for r in m['lista']:
         if len(r) < 3:
-            filas.append('<tr data-n="%s"><th scope="row">%s</th><td colspan="5" class="pl-sin">Sin cuenta de 2024 %s</td></tr>' % (
-                json.dumps(r[1].lower(), ensure_ascii=False)[1:-1], r[1], chip('pendiente', 'municipios-sin-cuenta')))
+            filas.append('<tr data-c="%s" data-n="%s"><th scope="row">%s</th><td colspan="5" class="pl-sin">Sin cuenta de 2024 %s</td></tr>' % (
+                r[0], json.dumps(r[1].lower(), ensure_ascii=False)[1:-1], r[1], chip('pendiente', 'municipios-sin-cuenta')))
             continue
         cve, n, ing, part, aport, fortamun, fismdf, predial, propios, egr = r[:10]
         dep = (part + aport) / ing * 100 if ing else None
-        filas.append('<tr data-n="%s" data-ing="%d" data-predial="%d" data-dep="%s"><th scope="row">%s</th>'
+        filas.append('<tr data-c="%s" data-n="%s" data-ing="%d" data-predial="%d" data-dep="%s"><th scope="row">%s</th>'
                      '<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (
-                         json.dumps(n.lower(), ensure_ascii=False)[1:-1], ing, predial, '%.2f' % dep if dep is not None else '',
+                         cve, json.dumps(n.lower(), ensure_ascii=False)[1:-1], ing, predial, '%.2f' % dep if dep is not None else '',
                          n, mdp(ing / 1e6), mdp(part / 1e6), mdp(aport / 1e6), mdp(predial / 1e6), pct(dep) if dep is not None else '—'))
     tabla = ('<div class="pl-mun-mandos"><label class="pl-sel"><span>Buscar municipio</span><input type="search" id="plMunBusca" placeholder="Escribe un nombre" autocomplete="off"></label>'
              '<label class="pl-sel"><span>Ordenar por</span><select id="plMunOrden"><option value="n">Nombre (A–Z)</option><option value="ing">Ingreso total</option>'
@@ -325,6 +387,8 @@ def pagina_portal(base, ref, e, padron, prev, sig):
              '<p class="pl-pie">Cifras de cada municipio: INEGI, finanzas públicas municipales %d %s, en millones de pesos (mdp) %s. '
              'La dependencia es (participaciones + aportaciones) ÷ ingreso total × 100 %s: cuánto de lo que ingresó llegó de fuera.</p>' % (
                  m['n'], nom, padron['anio'], ''.join(filas), padron['anio'], ref('ref-inegi-efipem'), chip('oficial'), chip('derivado')))
+    g = geo_mun(m['cve'])
+    mapa_mun = _mapa_mun(e, m, g, ref, padron) if g else ''
     # 4 · Las otras dimensiones y el Auditor
     dl = _congresos(base)
     puertas = []
@@ -368,9 +432,14 @@ def pagina_portal(base, ref, e, padron, prev, sig):
              'texto': 'Un piso por cada orden de gobierno. Los años no se mezclan: lo que baja es de 2026 y lo que cobran el estado y sus municipios, de 2024, el último con cifras definitivas del INEGI.',
              'tarjetas': [], 'bloque': '<div class="pl-pisos">%s%s%s</div>' % (p1, p2, p3)},
             {'id': 'ritmo', 'titulo': 'Su contador', 'texto': '', 'tarjetas': [], 'bloque': ritmo},
+        ] + ([
+            {'id': 'mapa-municipios', 'titulo': 'El mapa de sus %d municipios' % m['n'],
+             'texto': ('Cada municipio en su lugar, con lo que ingresó en %d. Elige qué ver; el color compara a los municipios del estado por quintiles '
+                       '(cinco grupos con el mismo número de municipios). Toca uno para ver su ficha.' % padron['anio']),
+             'tarjetas': [], 'bloque': mapa_mun}] if g else []) + [
             {'id': 'municipios', 'titulo': 'Sus municipios, uno por uno',
-             'texto': ('El que no rindió cuenta sigue en la lista, sin cifra: borrarlo falsearía el padrón y ponerle cero falsearía la cifra. '
-                       'El mapa de sus municipios, con el Marco Geoestadístico del INEGI, llega en una próxima entrega del Planisferio.'),
+             'texto': ('El que no rindió cuenta sigue en la lista, sin cifra: borrarlo falsearía el padrón y ponerle cero falsearía la cifra. ' +
+                       ('' if g else 'El mapa de sus municipios, con el Marco Geoestadístico del INEGI, llega en una próxima entrega del Planisferio, entidad por entidad.')),
              'tarjetas': [], 'bloque': tabla},
             {'id': 'dimensiones', 'titulo': 'Sus otras dimensiones',
              'texto': 'Mientras llegan al Planisferio, ya están en la Enciclopedia y en el Auditor, con %s elegido:' % nom,
