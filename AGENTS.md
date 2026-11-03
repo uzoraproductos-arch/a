@@ -164,6 +164,10 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   «Estado que guarda el sector forestal en México 2023» de la CONAFOR (`SF`, con huella; si una fila o una columna
   no cuadran, se detiene): **«forestal» no se dice como «bosque»** (incluye el matorral), y lo que el fuego tocó
   frente a ella es una proporción con años distintos, nunca la parte que se perdió.
+  **La pesca y la acuacultura** (03-11-2026) salen de las series del Anuario Estadístico de Acuacultura y Pesca de la
+  CONAPESCA (`PESCA`, con huella; si una fila o una columna no cuadran, se detiene): **lo registrado se dice como lo declarado
+  en los avisos de arribo y de cosecha, nunca como todo lo pescado ni como salud de la especie**, y una entidad sin registro va
+  en gris como «no registró», no como «sin pesca». Si el Anuario se contradice entre cuadros, se dice y se toman sus series.
 - **Las leyes del dinero en los tres niveles** (03-11-2026,
   `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
   cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y
