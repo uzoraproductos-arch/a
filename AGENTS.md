@@ -96,6 +96,14 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   del INEGI: esos límites son geoestadísticos, no la fuente oficial de la
   división político-administrativa. El chat lleva ahí con
   `planisferio.html?e=JAL&m=1` (renglón `mapa-mun` de `RECURSOS`).
+- **La deuda, segunda dimensión pintada** (03-11-2026). Cada dimensión de
+  `DIMENSIONES` dice si se pinta, y sus lentes viven en `LENTES` con su
+  `dim` y su formato. La deuda lee del Sistema de Alertas (`deuda`,
+  `deudaIld`, `deudaSd`, `deudaOcp`, `ildMdp` de `DB.estados`, que escribe
+  `integrar_expedientes.py`); **el mapa colorea por cifra, no por semáforo**,
+  porque el semáforo junta en verde a estados muy distintos, y lo dice. Lo
+  que no se mide por ley va en gris como «no se mide», no como pendiente. Se
+  abre con `planisferio.html?d=deuda` y cada portal la trae en `#deuda`.
 - **Vive en el Auditor:** «Ver en el Planisferio» es un renglón de
   `RECURSOS` (`asistente_recursos.py`, con `?e=` para abrir el mapa con la
   entidad elegida) y «planisferio» cuenta como pedir un mapa (`TIPOS_REC` de

@@ -400,6 +400,12 @@ def _charla(d):
                   'fu': fu(sorted(set(e['deudaFuente'] for e in E), key=len)[0], 'ref-shcp-alertas')},
         'ild': {'n': 'deuda entre ingresos de libre disposición', 'u': 'pct', 'e': 'oficial', 'peor': 'max',
                 'fu': fu(sorted(set(e['deudaFuente'] for e in E), key=len)[0], 'ref-shcp-alertas')},
+        # Los otros dos indicadores del Sistema de Alertas (03-11-2026, los
+        # pinta el Planisferio en su dimensión de deuda).
+        'sd': {'n': 'pago de la deuda y obligaciones entre ingresos de libre disposición', 'u': 'pct', 'e': 'oficial', 'peor': 'max',
+               'fu': fu(sorted(set(e['deudaFuente'] for e in E), key=len)[0], 'ref-shcp-alertas')},
+        'ocp': {'n': 'deudas de corto plazo, con proveedores y contratistas, menos lo que tiene en caja, entre ingresos totales', 'u': 'pct', 'e': 'oficial', 'peor': 'max',
+                'fu': fu(sorted(set(e['deudaFuente'] for e in E), key=len)[0], 'ref-shcp-alertas')},
         'asf': {'n': 'monto por aclarar ante la ASF (Cuenta Pública 2024)', 'u': 'mdp', 'e': 'oficial', 'suma': 1, 'peor': 'max',
                 'fu': fu(E[0]['asfFuente'], 'ref-asf-mdb2024')},
         'aud': {'n': 'auditorías de la ASF (Cuenta Pública 2024)', 'u': 'ent', 'e': 'oficial', 'suma': 1,
@@ -428,6 +434,7 @@ def _charla(d):
     for e in E:
         r = rad['est'].get(e['abbr'])
         x = {'a': e['abbr'], 'n': e['name'], 'deuda': e.get('deuda'), 'ild': e.get('deudaIld'), 'sem': e.get('semaforoDeuda'),
+             'sd': e.get('deudaSd'), 'ocp': e.get('deudaOcp'),
              'asf': e.get('asfMontoObservado'), 'aud': e.get('asfAuditorias'), 'radar': round(r['v'][0], 2) if r else None,
              'gasto': e['gasto'], 'r28': e['ramo28'], 'r33': e['ramo33'], 'pc': e['pc'], 'pob': e.get('pobPersonas')}
         for k in ('dep', 'propia'):

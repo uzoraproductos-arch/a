@@ -47,9 +47,17 @@
     var PAL = {
       oro: ['#fbf3dc', '#f0d98f', '#d9b34f', '#a8801f', '#6b4f0c'],
       azul: ['#e3ecf8', '#b4c9ea', '#6f95d2', '#2f5fa8', '#0b2a63'],
-      verde: ['#e4f3e8', '#b3dcbd', '#6dba82', '#2e8a4c', '#0f5128']
+      verde: ['#e4f3e8', '#b3dcbd', '#6dba82', '#2e8a4c', '#0f5128'],
+      rojo: ['#fbe5e2', '#f2b3aa', '#e06f60', '#b3261e', '#6e1510']
     };
-    var porA = {}, lente = D.lentes[0], sel = null;
+    var porA = {}, lente = D.lentes[0], sel = null, dimP = lente.dim, ultima = {};
+    function fmt(v, l) {
+      l = l || lente;
+      if (v == null) return '—';
+      if (l.fmt === 'pct') return num(v, 1) + '%';
+      if (l.fmt === 'pesos') return '$' + num(v, 0);
+      return mdp(v);
+    }
     D.e.forEach(function (e) { porA[e.a] = e; });
     var paths = document.querySelectorAll('.pl-edo');
     var ficha = document.getElementById('plFicha'), aviso = document.getElementById('plDimAviso');
@@ -70,30 +78,46 @@
         var e = porA[p.getAttribute('data-a')], k = e ? clase(e[lente.id], c) : -1;
         p.style.fill = k < 0 ? '#d5dae3' : pal[k];
         p.classList.toggle('sel', !!sel && sel.a === p.getAttribute('data-a'));
-        if (e) p.setAttribute('aria-label', e.n + ': ' + (e[lente.id] == null ? 'sin cifra' : mdp(e[lente.id])) + '. Toca para ver su ficha.');
+        if (e) p.setAttribute('aria-label', e.n + ': ' + (e[lente.id] == null ? (lente.falta ? lente.falta.gris : 'sin cifra') : fmt(e[lente.id])) + '. Toca para ver su ficha.');
       });
       var lim = [null].concat(c).concat([null]);
       document.getElementById('plLeyenda').innerHTML = '<span class="pl-ley-tit">' + esc(lente.nom) + ' (' + lente.anio + ')</span><span class="pl-ley-cls">' +
         pal.map(function (col, i) {
-          var t = i === 0 ? 'menos de ' + mdp(lim[1]) : i === 4 ? mdp(lim[4]) + ' o más' : mdp(lim[i]) + ' a ' + mdp(lim[i + 1]);
+          var t = i === 0 ? 'menos de ' + fmt(lim[1]) : i === 4 ? fmt(lim[4]) + ' o más' : fmt(lim[i]) + ' a ' + fmt(lim[i + 1]);
           return '<span><i style="background:' + col + '"></i>' + t + '</span>';
-        }).join('') + '<span><i style="background:#d5dae3"></i>sin cifra</span></span>';
+        }).join('') + (lente.falta && lente.falta.a.length ? '<span><i style="background:#d5dae3"></i>' + esc(lente.falta.gris) + '</span>' : '') + '</span>';
       document.getElementById('plQue').textContent = lente.que;
       document.getElementById('plFuente').innerHTML = lente.fuente;
-      var falta = D.falta[lente.id] || [];
-      document.getElementById('plFalta').innerHTML = falta.length ? 'Sin cifra en este piso: ' + falta.map(function (a) { return esc(porA[a].n); }).join(', ') + ' ' + chip('pendiente', D.pend[lente.id]) +
-        (lente.id === 'mun' ? '. Las alcaldías de la Ciudad de México no rinden cuenta municipal al INEGI.' : '. La Ciudad de México no figura en la estadística estatal del INEGI.') : '';
+      var f = lente.falta;
+      document.getElementById('plFalta').innerHTML = f && f.a.length ? (f.pend ? 'Sin cifra: ' + f.a.map(function (a) { return esc(porA[a].n); }).join(', ') + ' ' + chip('pendiente', f.pend) + '. ' : '') + esc(f.txt) : '';
+      var nota = document.getElementById('plDimNota'), tx = D.notas && D.notas[dimP];
+      if (nota) { nota.innerHTML = tx || ''; nota.hidden = !tx; }
     }
     function fila(nom, v, est, anio, pend) {
       return '<dt>' + nom + ' · ' + anio + '</dt><dd>' + (v == null ? 'Sin cifra ' + chip('pendiente', pend) : '<b class="num-tabular">' + mdp(v) + '</b> ' + chip(est)) + '</dd>';
     }
+    function lenteDe(id) { return D.lentes.filter(function (l) { return l.id === id; })[0]; }
+    function deuda(e, fijo) {
+      var med = e.ild != null, d = function (id, nom) {
+        var l = lenteDe(id);
+        return '<dt>' + nom + '</dt><dd>' + (e[id] == null ? esc(l.falta.gris) : '<b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est)) + '</dd>';
+      };
+      ficha.innerHTML = '<h3>' + esc(e.n) + '</h3><p class="pl-ficha-sub">Su deuda al cierre de 2025 · Sistema de Alertas</p>' +
+        '<dl class="pl-ficha-dl">' + d('deuda', 'Lo que debe') + d('dpc', 'Por habitante') + d('ild', 'Deuda ÷ ingresos libres') +
+        d('sd', 'Lo que se va en pagarla') + d('ocp', 'Deudas de corto plazo') +
+        '<dt>Semáforo de Hacienda</dt><dd>' + esc(e.sem) + ' ' + chip('oficial') + '</dd></dl>' +
+        (med ? '' : '<p class="pl-ficha-mun">' + esc(lenteDe('ild').falta.txt) + '</p>') +
+        '<a class="pl-ficha-ir" href="' + esc(e.p) + '#deuda">Ver su deuda en su portal ➔</a>' +
+        (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
+    }
     function muestra(e, fijo) {
       if (!e) return;
+      if (dimP === 'deuda') { deuda(e, fijo); return; }
       ficha.innerHTML = '<h3>' + esc(e.n) + '</h3><p class="pl-ficha-sub">Capital: ' + esc(e.cap) + ' · ' + num(e.pob, 0) + ' habitantes</p>' +
         '<dl class="pl-ficha-dl">' +
         fila('Le baja de la Federación', e.fed, 'derivado', 2026) +
-        fila('Cobra el estado por su cuenta', e.est, 'derivado', 2024, D.pend.est) +
-        fila('Ingresan sus municipios', e.mun, 'derivado', 2024, D.pend.mun) +
+        fila('Cobra el estado por su cuenta', e.est, 'derivado', 2024, lenteDe('est').falta.pend) +
+        fila('Ingresan sus municipios', e.mun, 'derivado', 2024, lenteDe('mun').falta.pend) +
         '</dl><p class="pl-ficha-mun">' + e.mn + (e.a === 'CDMX' ? ' demarcaciones' : ' municipios') + (e.mc ? ', ' + e.mc + ' con cuenta de 2024' : ', sin cuenta municipal') + '.</p>' +
         (e.mm ? '<p class="pl-ficha-mun">🗺️ Su portal ya trae el mapa de sus municipios.</p>' : '') +
         '<a class="pl-ficha-ir" href="' + esc(e.p) + '">Entrar al portal de ' + esc(e.n) + ' ➔</a>' +
@@ -102,7 +126,7 @@
     function elige(a, abrir) {
       var e = porA[a];
       if (!e) return;
-      if (abrir && sel && sel.a === a) { location.href = e.p; return; }
+      if (abrir && sel && sel.a === a) { location.href = e.p + (dimP === 'deuda' ? '#deuda' : ''); return; }
       sel = e;
       pinta();
       muestra(e, true);
@@ -115,33 +139,53 @@
       p.addEventListener('mouseenter', function () { if (!sel) muestra(porA[a], false); });
       p.addEventListener('focus', function () { if (!sel) muestra(porA[a], false); });
     });
-    Array.prototype.forEach.call(document.querySelectorAll('.pl-lente'), function (b) {
-      b.addEventListener('click', function () {
-        lente = D.lentes.filter(function (l) { return l.id === b.getAttribute('data-l'); })[0] || lente;
-        Array.prototype.forEach.call(document.querySelectorAll('.pl-lente'), function (x) { x.setAttribute('aria-checked', x === b ? 'true' : 'false'); });
-        pinta();
+    var botones = document.querySelectorAll('.pl-lentes .pl-lente[data-dim]');
+    function ponLente(id) {
+      lente = lenteDe(id) || lente;
+      ultima[lente.dim] = lente.id;
+      Array.prototype.forEach.call(botones, function (x) {
+        x.setAttribute('aria-checked', x.getAttribute('data-l') === lente.id ? 'true' : 'false');
+        x.hidden = x.getAttribute('data-dim') !== lente.dim;
       });
+      pinta();
+      if (sel) muestra(sel, true);
+    }
+    Array.prototype.forEach.call(botones, function (b) {
+      b.addEventListener('click', function () { ponLente(b.getAttribute('data-l')); });
     });
+    /* Una dimensión que ya se pinta cambia el mapa con su primera lente (o
+       la última que se eligió en ella). */
+    function ponDim(id) {
+      dimP = id;
+      ponLente(ultima[id] || D.lentes.filter(function (l) { return l.dim === id; })[0].id);
+      if (!sel) ficha.innerHTML = '<p class="pl-ficha-vacia"><b>Toca una entidad.</b> Verás sus cifras de la dimensión que elegiste y la puerta a su portal, con sus municipios.</p>';
+    }
     /* Las dimensiones que todavía no se pintan llevan a donde ya viven. */
     var dim = null;
     function avisa() {
       if (!dim || !aviso) return;
       var d = D.dims[dim], liga = d.ire && sel && d.ire.indexOf('%s') >= 0 && dim !== 'legislativa' ? d.ire.replace('%s', encodeURIComponent(sel.a)) : d.ir;
       aviso.innerHTML = '<b>La dimensión ' + esc(d.n.toLowerCase()) + ' llega al Planisferio en una próxima entrega.</b> Mientras, ya está en la Enciclopedia' +
-        (sel && liga !== d.ir ? ', con ' + esc(sel.n) + ' elegido' : '') + ': <a href="' + esc(liga) + '">ábrela ➔</a>. El mapa de abajo sigue en la dimensión financiera.';
+        (sel && liga !== d.ir ? ', con ' + esc(sel.n) + ' elegido' : '') + ': <a href="' + esc(liga) + '">ábrela ➔</a>. El mapa de abajo sigue en la dimensión ' + esc(D.dims[dimP].n.toLowerCase()) + '.';
       aviso.hidden = false;
     }
     Array.prototype.forEach.call(document.querySelectorAll('.pl-dim'), function (b) {
       b.addEventListener('click', function () {
-        var id = b.getAttribute('data-dim');
-        Array.prototype.forEach.call(document.querySelectorAll('.pl-dim'), function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
-        dim = D.dims[id] && D.dims[id].ir ? id : null;
-        if (dim) avisa(); else if (aviso) aviso.hidden = true;
+        eligeDim(b.getAttribute('data-dim'));
       });
     });
+    function eligeDim(id) {
+      if (!D.dims[id]) return;
+      Array.prototype.forEach.call(document.querySelectorAll('.pl-dim'), function (x) { x.setAttribute('aria-selected', x.getAttribute('data-dim') === id ? 'true' : 'false'); });
+      if (D.dims[id].pinta) { dim = null; if (aviso) aviso.hidden = true; ponDim(id); return; }
+      dim = id;
+      avisa();
+    }
     var m = /[?&]e=([^&#]+)/.exec(location.search), pedida = null;
     try { pedida = m ? decodeURIComponent(m[1]) : null; } catch (err) { pedida = null; }
-    pinta();
+    /* ?d=deuda (desde el Auditor): abre el mapa en esa dimensión. */
+    var md = /[?&]d=([a-z]+)/.exec(location.search);
+    if (md && D.dims[md[1]]) eligeDim(md[1]); else pinta();
     /* ?e=JAL&m=1 (desde el Auditor): si la entidad ya tiene el mapa de sus
        municipios, se va directo a él; si no, se queda con su ficha. */
     if (pedida && porA[pedida] && porA[pedida].mm && /[?&]m=1/.test(location.search)) { location.replace(porA[pedida].p + '#mapa-municipios'); return; }
