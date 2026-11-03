@@ -57,7 +57,7 @@ DIMENSIONES = [
      'La obra que hace cada gobierno estatal, directa o por medio de sus organismos, y lo que la ASF dejó por aclarar del dinero federal que recibió.',
      'numeros-mapa-del-gasto-federalizado.html?l=inv', 'numeros-mapa-del-gasto-federalizado.html?l=inv&e=%s', True),
     ('ambiental', '🌎', 'Ambiental',
-     'Los recursos naturales y quién los explota: los acuíferos de cada estado y cuántos ya no tienen agua para concesionar, sus concesiones mineras y las siete refinerías de PEMEX.',
+     'Los recursos naturales y quién los explota: los acuíferos de cada estado y cuántos ya no tienen agua para concesionar, sus incendios forestales, sus concesiones mineras y las siete refinerías de PEMEX.',
      'aprende-recursos-naturales.html#rn-agua', None, True),
     ('legislativa', '🏛️', 'Legislativa',
      'Los 32 congresos locales: lo que gastó cada uno, cuántas personas legisladoras lo integran y cómo se compara con el tope de la Constitución.',
@@ -230,6 +230,7 @@ def _datos(base, padron):
     rf = rn.refinerias_estados()
     mi = rn.mineria([e['abbr'] for e in base['estados']])
     aq = rn.acuiferos([e['abbr'] for e in base['estados']])
+    ic = rn.incendios([e['abbr'] for e in base['estados']])
     pj = gj.judiciales_estados(base)
     E = base['estados']
     C = base['fiscalEntidades']['campos']
@@ -281,6 +282,10 @@ def _datos(base, padron):
         w = aq[e['abbr']]
         filas[-1].update({'acuP': w['ps'], 'acuD': w['def'],
                           'acu': {'n': w['n'], 'con': w['con'], 'sin': w['sin'], 'disp': w['disp'], 'lug': w['lug'], 's27': [n for c, n, d in w['s27']]}})
+        # Sus incendios forestales (CONAFOR, cierre de 2025 y de 2024): las 32 tienen.
+        z = ic[e['abbr']]
+        filas[-1].update({'incH': z['ha'], 'incN': z['n'],
+                          'inc': {k: z[k] for k in ('parb', 'hxi', 'lleg', 'lh', 'ln', 'ha24', 'cam')}})
     return filas
 
 
@@ -377,6 +382,11 @@ LENTES = [
     {'id': 'acuD', 'dim': 'ambiental', 'fmt': 'hm3', 'nom': 'Suma de sus déficits de agua', 'pal': 'rojo', 'est': 'derivado', 'anio': 'corte dic 2022',
      'que': ('Los millones de metros cúbicos al año que faltan en sus acuíferos en déficit, sumados. Un estado con muchos acuíferos grandes sale más alto; '
              'cero quiere decir que ninguno estaba en déficit, no que su agua esté limpia.')},
+    {'id': 'incH', 'dim': 'ambiental', 'fmt': 'ha', 'nom': 'Superficie afectada por incendios forestales', 'pal': 'rojo', 'est': 'oficial', 'anio': 2025,
+     'que': ('Las hectáreas que afectaron los incendios forestales de cada entidad en 2025, según el cierre de la CONAFOR. Superficie afectada no es bosque perdido: '
+             'en el país, 95 de cada 100 hectáreas fueron de pasto, matorral y hojarasca.')},
+    {'id': 'incN', 'dim': 'ambiental', 'fmt': 'n', 'nom': 'Incendios forestales', 'pal': 'rojo', 'est': 'oficial', 'anio': 2025,
+     'que': ('Cuántos incendios forestales tuvo cada entidad en 2025. Muchos incendios no es mucha superficie: la que más tuvo no es la que más terreno perdió.')},
     {'id': 'minT', 'dim': 'ambiental', 'fmt': 'n', 'nom': 'Concesiones mineras', 'pal': 'oro', 'est': 'oficial', 'anio': 'marzo 2024',
      'que': ('Los títulos de concesión minera vigentes en cada entidad, según la Dirección General de Minas. Una concesión da derecho a explorar y explotar; '
              'no quiere decir que ya haya una mina trabajando.')},
@@ -384,7 +394,7 @@ LENTES = [
      'que': ('El terreno que amparan esas concesiones, en hectáreas. Es la superficie del título, no la excavada: el tajo y las presas de jales no se miden aquí.')},
     {'id': 'refj', 'dim': 'ambiental', 'fmt': 'mbd', 'nom': 'Crudo que procesó su refinería', 'pal': 'oro', 'est': 'oficial', 'anio': 'junio 2026',
      'que': ('Los barriles diarios de petróleo crudo que procesó en junio de 2026 la refinería de PEMEX de cada entidad, en miles. Siete entidades tienen una; '
-             'las demás van en gris porque no tienen refinería, no porque no tengan problemas ambientales: sus acuíferos y sus minas tienen su lente.')},
+             'las demás van en gris porque no tienen refinería, no porque no tengan problemas ambientales: sus acuíferos, sus incendios y sus minas tienen su lente.')},
     {'id': 'refp', 'dim': 'ambiental', 'fmt': 'mbd1', 'nom': 'Su promedio de diez meses', 'pal': 'oro', 'est': 'derivado', 'anio': 'sep-25 a jun-26',
      'que': ('El promedio de los diez meses de septiembre de 2025 a junio de 2026: corrige un mes malo por mantenimiento. Es la media aritmética de las diez cifras mensuales del Informe; '
              'la cuenta es nuestra.')},
@@ -445,6 +455,9 @@ def _fuentes(ref, base=None):
         html.escape(rn.ACU['url']), rn.ACU['archivo'].split('/')[-1], rn.ACU['sha256'][:12])
     extra.update({'acuP': 'Acuíferos con disponibilidad negativa ÷ acuíferos de la entidad × 100, con el %s. La división es nuestra.' % aq,
                   'acuD': 'Suma de la disponibilidad negativa (déficit) de los acuíferos de la entidad, con el %s. La suma es nuestra.' % aq})
+    ic = ('Comisión Nacional Forestal, Gerencia de Manejo del Fuego, Cierre estadístico 2025, cuadro 4 «Incendios y superficie con información acumulada» '
+          '(<a href="%s">PDF</a>; huella SHA-256 <code>%s…</code>)') % (html.escape(rn.INC_DOC['url']), rn.INC_DOC['sha256'][:12])
+    extra.update({'incH': ic + '.', 'incN': ic + '.'})
     return dict(extra, **{
         'fed': 'Ramo 28: Anexo 15 del acuerdo de distribución (DOF 12-12-2025) %s. Ramo 33: Anexo 16, versión modificada (DOF 09-07-2026) %s. La suma de los dos es nuestra.' % (
             ref('ref-dof-distribucion-2026'), ref('ref-dof-distribucion-2026-mod')),
@@ -523,8 +536,8 @@ def pagina_mapa(base, ref, tres, padron):
     sin_ref = [f['a'] for f in filas if f['refj'] is None]
     for i in ('refj', 'refp', 'refu'):
         falta[i] = {'a': sin_ref, 'gris': 'sin refinería de PEMEX', 'pend': None,
-                    'txt': ('%d entidades no tienen refinería de PEMEX: van en gris por eso, no porque no tengan problemas ambientales. Sus acuíferos y sus concesiones mineras '
-                            'tienen su lente; sus bosques todavía están pendientes.') % len(sin_ref)}
+                    'txt': ('%d entidades no tienen refinería de PEMEX: van en gris por eso, no porque no tengan problemas ambientales. Sus acuíferos, sus incendios forestales y sus concesiones mineras '
+                            'tienen su lente; la superficie de sus bosques todavía está pendiente.') % len(sin_ref)}
     sin_min = [f['a'] for f in filas if f['minT'] is None]
     for i in ('minT', 'minH'):
         falta[i] = {'a': sin_min, 'gris': 'no figura en el cuadro', 'pend': None,
@@ -592,7 +605,7 @@ def pagina_mapa(base, ref, tres, padron):
                        'La inversión es la obra que hace cada gobierno estatal, directa o por medio de sus organismos, y lo que la Auditoría Superior dejó por aclarar. '
                        'La legislativa son los 32 congresos locales: lo que gastó cada uno, cuánto cuesta por curul y cómo se compara con el tope del 0.70 %% de la Constitución. '
                        'La judicial son los 32 poderes judiciales de los estados: lo que ejerció cada uno junto a lo que concluyó con ese dinero y las causas penales que se le acumulan. '
-                       'La ambiental son los recursos naturales: los acuíferos de cada estado y cuántos ya no tienen agua para concesionar, sus concesiones mineras y las siete refinerías de PEMEX, cuánto crudo procesa cada una frente a su capacidad y cuánto valor ganó o perdió en sus libros; en las lentes de refinación, el punto marca la entidad, no el sitio exacto. '
+                       'La ambiental son los recursos naturales: los acuíferos de cada estado y cuántos ya no tienen agua para concesionar, sus incendios forestales, sus concesiones mineras y las siete refinerías de PEMEX, cuánto crudo procesa cada una frente a su capacidad y cuánto valor ganó o perdió en sus libros; en las lentes de refinación, el punto marca la entidad, no el sitio exacto. '
                        'Elige la dimensión y qué ver; el color compara a las 32 por quintiles (cinco grupos con el mismo número de entidades).') % (
                            ('%d dimensiones: la %s y la %s' % (len(pintadas), ', la '.join(d[2].lower() for d in pintadas[:-1]), pintadas[-1][2].lower())) if len(pintadas) > 1 else 'una dimensión'),
              'tarjetas': [], 'bloque': bloque_mapa},
@@ -627,12 +640,23 @@ def _nota_amb(filas):
         rn._y(['%s (%s)' % (n, nom[a]) for n, a in dif]), chip('oficial'), chip('pendiente', 'acuiferos-disponibilidad-nueva'))
     if not dif or len(A) != 32:
         raise SystemExit('planisferio: el punto ciego del agua ya no tiene acuíferos sobreexplotados con disponibilidad')
-    return agua + ('<b>Lo que una cifra de refinación no dice.</b> Un mes no es la regla: la %s procesó %s mil barriles diarios en junio de 2026 %s, contra %s mil de promedio en los diez meses %s, '
+    I = rn.incendios([f['a'] for f in filas])
+    h25, a25 = rn.INC_TOT[25][1], rn.INC_TOT[25][2]
+    mn = min(I, key=lambda k: I[k]['ln'])
+    gh = min(I, key=lambda k: I[k]['lh'])
+    if mn == gh:
+        raise SystemExit('planisferio: el punto ciego del fuego ya no aplica: la entidad con más incendios es la de más superficie')
+    fuego = ('<b>Lo que el mapa del fuego no dice.</b> Superficie afectada no es bosque perdido: de las %s ha que afectaron los incendios de 2025, solo el %s %% era de árboles %s, '
+             'y la CONAFOR calificó de impacto mínimo el %s %% %s. Muchos incendios no es mucha superficie: %s tuvo más (%s) y %s, más terreno afectado. '
+             'Y la cifra de una semana no es la del año: el cierre sumó incendios que se reportaron tarde. Para saber qué parte del bosque de cada estado se quemó falta su superficie forestal %s.<br><br>') % (
+        format(round(h25), ','), format(a25 / h25 * 100, '.1f'), chip('derivado'), format(rn.INC_NAC['min'] / h25 * 100, '.1f'), chip('derivado'),
+        nom[mn], format(I[mn]['n'], ','), nom[gh], chip('pendiente', 'ambiente-por-estado'))
+    return agua + fuego + ('<b>Lo que una cifra de refinación no dice.</b> Un mes no es la regla: la %s procesó %s mil barriles diarios en junio de 2026 %s, contra %s mil de promedio en los diez meses %s, '
             'por mantenimiento según el Informe. Procesar crudo no es producir gasolina: lo que sale depende de cada planta. Y el valor que pierde una refinería en los libros de PEMEX '
             '(la %s, %s en 2025 %s) es una estimación de lo que dejará de generar, no dinero que salió de la caja.<br><br>'
             '<b>Lo que el mapa de las minas no dice.</b> Una concesión no es una mina trabajando: %s tienen concesiones y no aparecen entre las entidades con '
             'producción minera del Segundo Informe. Hectárea concesionada no es hectárea excavada. Y el cuadro por estado es de marzo de 2024 %s: al 30 de junio de 2026 el país tenía '
-            '%s títulos %s, %s menos %s, pero la Secretaría de Economía solo ha dado al día cuatro estados. Los bosques de cada entidad siguen %s.') % (
+            '%s títulos %s, %s menos %s, pero la Secretaría de Economía solo ha dado al día cuatro estados. La superficie forestal de cada entidad sigue %s.') % (
         caida['n'].replace('Refinería ', 'refinería '), caida['jun'], chip('oficial'), format(caida['prom'], '.1f'), chip('derivado'),
         d25['n'].replace('Refinería ', 'refinería '), rn._mdps(d25['d25']), chip('oficial'),
         rn._y([f['n'] for f in filas if f.get('min') and f['min']['prod'] is None]), chip('pendiente', 'mineria-por-estado-2026'),
@@ -948,7 +972,7 @@ def _judicial_portal(base, ref, e):
 
 
 def _ambiental_portal(base, ref, e):
-    """Sus recursos naturales (03-11-2026): sus acuíferos, sus concesiones mineras, su refinería de PEMEX, si tiene,
+    """Sus recursos naturales (03-11-2026): sus acuíferos, sus incendios forestales, sus concesiones mineras, su refinería de PEMEX, si tiene,
     y los siete ramos de recursos con quién los explota y quién los audita,
     en esquema. Todo sale de recursos_naturales.py."""
     import recursos_naturales as rn
@@ -1025,17 +1049,33 @@ def _ambiental_portal(base, ref, e):
                                                                                      sum(1 for v in rn.ACUIFEROS.values() if v[3] > 0))) if w['def'] > 0 else 'ninguno estaba en déficit',
         format(w['disp'], ',.1f'), chip('derivado'), k27, chip('pendiente', 'acuiferos-disponibilidad-nueva'),
         fu['acuD'], (' Sobreexplotados: Segundo Informe de Gobierno, p. 513 %s.' % ref('ref-presidencia-2ig')) if w['s27'] else '')
+    z = rn.incendios([x['abbr'] for x in base['estados']])[a]
+    pf = ('<article class="pl-piso pl-piso-amb"><p class="pl-piso-n">🔥 Sus incendios forestales · 2025</p>'
+          '<p class="pl-piso-v"><b class="num-tabular">%s ha</b> afectadas %s</p>'
+          '<dl class="pl-dl"><dt>Incendios</dt><dd><b class="num-tabular">%s</b> %s · lugar %d de 32</dd>'
+          '<dt>Su lugar por superficie</dt><dd>%d.º de 32 %s</dd>'
+          '<dt>De cada 100 hectáreas, de árboles</dt><dd><b class="num-tabular">%s</b> %s</dd>'
+          '<dt>Hectáreas por incendio</dt><dd><b class="num-tabular">%s</b> %s</dd>'
+          '<dt>Llegada de la brigada, en promedio</dt><dd><b class="num-tabular">%s</b> horas %s</dd>'
+          '<dt>En 2024</dt><dd><b class="num-tabular">%s ha</b> %s · %s</dd></dl>'
+          '<p>Superficie afectada no es bosque perdido: el daño depende del impacto, y la mayor parte del fuego del país corre por pasto y matorral. El combate inicial le toca al '
+          'municipio, luego al estado y luego a la CONAFOR (Ley General de Desarrollo Forestal Sustentable, art. 119); quien tiene el terreno debe restaurarlo en dos años (art. 121).</p>'
+          '<p class="pl-piso-f">%s Cierre de 2024: <a href="%s">PDF</a>. Lugares, porcentajes y promedios: cuenta nuestra.</p></article>') % (
+        format(z['ha'], ',.2f'), chip('oficial'), format(z['n'], ','), chip('oficial'), z['ln'], z['lh'], chip('derivado'), format(z['parb'], '.1f'), chip('derivado'),
+        format(z['hxi'], ',.1f'), chip('derivado'), z['lleg'], chip('oficial'), format(z['ha24'], ',.2f'), chip('oficial'),
+        ('%s%s %% %s' % ('+' if z['cam'] > 0 else '−', format(abs(z['cam']), '.1f'), chip('derivado'))) if z['cam'] else 'igual',
+        fu['incH'], html.escape(rn.INC_DOC24['url']))
     ramos = ''.join('<li><span aria-hidden="true">%s</span> <b>%s</b> <small>(%s)</small><br>Quién lo explota: %s<br><small>Quién lo regula: %s</small></li>' % (
         x['ico'], html.escape(x['nom']), html.escape(x['renov'].split(',')[0]), html.escape(x['quien']), html.escape(x['autoridad'].split(' (')[0]))
         for x in rn.RAMOS)
     esquema = ('<div class="pl-reglas"><p><b>Los recursos de su territorio, por sector</b></p>'
-               '<p>Sus bosques y su pesca ya tienen ley y autoridad, pero todavía no su cifra para %s %s. Así se reparte quién explota cada recurso:</p>'
+               '<p>La superficie de sus bosques y su pesca ya tienen ley y autoridad, pero todavía no su cifra para %s %s. Así se reparte quién explota cada recurso:</p>'
                '<ul class="pl-sectores">%s</ul>'
                '<p class="pl-ficha-ir"><a href="%s">🌎 Cómo se audita cada recurso ➔</a> '
                '<a href="planisferio.html?d=ambiental&amp;e=%s">Las siete refinerías en el mapa ➔</a> '
                '<a href="datos-ambiente-megaobras.html?e=%s#abMapaObras">Sus obras con alerta ambiental ➔</a></p></div>') % (
         html.escape(nom), chip('pendiente', 'ambiente-por-estado'), ramos, rn.ARCHIVO, quote(a), quote(a))
-    return '<div class="pl-pisos">%s%s%s</div>%s%s' % (p0, p2, p1, ciego, esquema)
+    return '<div class="pl-pisos">%s%s%s%s</div>%s%s' % (p0, pf, p2, p1, ciego, esquema)
 
 
 def pagina_portal(base, ref, e, padron, prev, sig, iv):
@@ -1180,7 +1220,7 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv):
              'tarjetas': [], 'bloque': _judicial_portal(base, ref, e)},
             {'id': 'ambiental', 'titulo': 'Sus recursos naturales',
              'texto': ('Quién explota los recursos de %s y quién los audita. Empieza por lo que ya tiene cifra: sus acuíferos y cuántos ya no tienen agua para concesionar, '
-                       'sus concesiones mineras y la refinería de PEMEX, si la tiene, con el crudo que procesa y el valor que ganó o perdió en los libros de PEMEX.') % nom,
+                       'sus incendios forestales de 2025, sus concesiones mineras y la refinería de PEMEX, si la tiene, con el crudo que procesa y el valor que ganó o perdió en los libros de PEMEX.') % nom,
              'tarjetas': [], 'bloque': _ambiental_portal(base, ref, e)},
             {'id': 'leyes', 'titulo': 'Sus leyes del dinero',
              'texto': 'Con qué leyes cobra, compra, se endeuda y rinde cuentas %s, quién las aprueba y dónde se publican.' % nom,

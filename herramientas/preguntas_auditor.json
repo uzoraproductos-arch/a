@@ -1887,6 +1887,53 @@
    "dice": [
     "653 acuíferos"
    ]
+  },
+  {
+   "q": "¿Cuántos incendios forestales hubo en Chihuahua?",
+   "ir": "planisferio-chih.html#ambiental",
+   "dice": [
+    "596 incendios forestales",
+    "221,533.30 ha"
+   ]
+  },
+  {
+   "q": "¿Qué estado tuvo más incendios forestales?",
+   "ir": "aprende-recursos-naturales.html#rn-incendios",
+   "dice": [
+    "7,002 incendios forestales",
+    "Jalisco tuvo más incendios"
+   ]
+  },
+  {
+   "q": "Incendios forestales en Baja California Sur",
+   "ir": "planisferio-bcs.html#ambiental",
+   "dice": [
+    "7 incendios forestales",
+    "80.4"
+   ]
+  },
+  {
+   "q": "¿Quién combate los incendios forestales?",
+   "ir": "aprende-recursos-naturales.html#rn-incendios",
+   "dice": [
+    "combate inicial",
+    "art. 119"
+   ]
+  },
+  {
+   "q": "¿Qué no dicen las cifras de incendios forestales?",
+   "ir": "aprende-recursos-naturales.html#rn-incendios-ciegos",
+   "dice": [
+    "no es bosque perdido",
+    "01:51"
+   ]
+  },
+  {
+   "q": "¿Dónde están los incendios forestales en el mapa?",
+   "ir": "planisferio.html?d=ambiental&l=incH",
+   "dice": [
+    "1,221,711.03 ha"
+   ]
   }
  ]
 }

@@ -291,6 +291,55 @@ SOBRE27 = {'AGS': [('0103', 'El Llano', -6.257537), ('0105', 'Valle de Calvillo'
 AGUA26 = {'mon': 138, 'pozos': 3904, 'pozos_s': 772, 'bal': 189, 'tit': 538805, 'inc': 58938, 'rec': 24712.5, 'tram': 7868, 'res': 6094}
 INF_AGUA = {'s27': 'p. 513 (p. 537 del PDF), nota 1/', 'tit': 'p. 511 (p. 535 del PDF)', 'rec': 'p. 510 (p. 534 del PDF)'}
 
+# Los incendios forestales (03-11-2026, la primera cifra de los bosques).
+# CONAFOR, Gerencia de Manejo del Fuego, «Cierre estadístico 2025» (01-01 al
+# 31-12-2025), cuadro 4 «Incendios y superficie con información acumulada»:
+# por entidad, (incendios, hectáreas de arbolado adulto, renuevo, arbustivo,
+# herbáceo, hojarasca, total, tiempo promedio de llegada h:mm). El arbóreo es
+# adulto + renuevo; el herbáceo de sus resúmenes incluye la hojarasca. Y el
+# cierre de 2024, por entidad (incendios, hectáreas). Si no suman, se detiene.
+INC_DOC = {'tx': 'Comisión Nacional Forestal, Gerencia de Manejo del Fuego, «Cierre estadístico 2025», del 1 de enero al 31 de diciembre de 2025',
+           'url': 'https://www.gob.mx/cms/uploads/attachment/file/1084029/Cierre_de_la_Temporada_2025.pdf',
+           'archivo': 'investigaciones/recursos-naturales/CONAFOR_CierreIncendios2025.pdf',
+           'sha256': 'f29ead61c128a65cc745b2341ff0451468368c0321a7ade3d327bcbb8db0e1e5'}
+INC_DOC24 = {'tx': 'Comisión Nacional Forestal, Gerencia de Manejo del Fuego, «Cierre estadístico 2024», cuadro 4',
+             'url': 'https://www.gob.mx/cms/uploads/attachment/file/965295/Cierre_de_la_Temporada_2024.pdf',
+             'archivo': 'investigaciones/recursos-naturales/CONAFOR_CierreIncendios2024.pdf',
+             'sha256': '15a4c0af14443d2729a6534b098cbfa298e5563883c1eeaf622c949e8e7c6c03'}
+INC_PAG = 'https://www.gob.mx/conafor/documentos/reporte-semanal-de-incendios'
+INC25 = {'AGS': (136, 33.72, 0.0, 2276.86, 5386.47, 231.59, 7928.65, '01:29'), 'BC': (65, 6798.49, 138.78, 43248.42, 4672.65, 576.22, 55434.56, '08:43'),
+         'BCS': (7, 96.82, 0.0, 17.08, 6.45, 0.0, 120.35, '00:35'), 'CAM': (56, 1482.22, 52.23, 7243.18, 43165.37, 37.32, 51980.32, '55:36'),
+         'CHIS': (287, 115.88, 13.40, 754.84, 22942.96, 15753.99, 39581.06, '10:26'), 'CHIH': (596, 6609.12, 11032.86, 27938.37, 95665.73, 80287.23, 221533.30, '08:13'),
+         'CDMX': (512, 0.0, 0.0, 48.73, 2794.69, 400.22, 3243.65, '01:10'), 'COAH': (44, 159.57, 89.69, 2654.01, 1931.08, 887.19, 5721.55, '07:54'),
+         'COL': (68, 0.0, 0.0, 138.28, 1537.40, 1336.55, 3012.23, '06:51'), 'DGO': (411, 656.71, 4340.02, 26925.70, 37949.91, 33529.97, 103402.31, '06:00'),
+         'GTO': (125, 65.04, 0.0, 4027.81, 2790.44, 3158.94, 10042.24, '02:40'), 'GRO': (304, 364.74, 4258.50, 16935.76, 49982.37, 33039.27, 104580.64, '09:33'),
+         'HGO': (144, 142.66, 183.39, 2429.12, 824.89, 178.09, 3758.14, '04:45'), 'JAL': (919, 5034.19, 581.55, 21842.71, 41103.13, 20260.29, 88821.87, '02:45'),
+         'MÉX': (796, 227.61, 1035.29, 10235.29, 8164.28, 76.45, 19738.93, '01:46'), 'MICH': (682, 3106.87, 1640.13, 14155.19, 15344.58, 11556.09, 45802.86, '01:58'),
+         'MOR': (194, 87.70, 0.78, 2449.04, 3182.73, 4455.50, 10175.74, '05:47'), 'NAY': (163, 4.44, 0.0, 14485.03, 16330.27, 36951.12, 67770.85, '24:46'),
+         'NL': (52, 2.0, 0.0, 1074.84, 1456.11, 1533.34, 4066.30, '01:55'), 'OAX': (201, 1035.74, 1569.37, 6615.19, 8671.08, 18330.12, 36221.50, '13:01'),
+         'PUE': (303, 174.19, 338.29, 3699.14, 9019.23, 0.0, 13230.85, '02:07'), 'QRO': (93, 296.84, 185.04, 1709.29, 267.25, 1256.20, 3714.61, '02:56'),
+         'QROO': (29, 173.65, 0.0, 6324.81, 143.09, 0.0, 6641.55, '43:12'), 'SLP': (119, 0.0, 0.0, 4285.08, 6164.01, 6415.04, 16864.13, '06:35'),
+         'SIN': (76, 0.0, 0.0, 10739.02, 30737.86, 65338.56, 106815.44, '31:24'), 'SON': (43, 1476.78, 500.38, 4290.31, 14986.78, 27273.61, 48527.87, '38:50'),
+         'TAB': (150, 7045.93, 0.0, 0.0, 72214.48, 0.0, 79260.42, '03:21'), 'TAM': (23, 2129.29, 0.0, 5913.36, 1682.39, 9702.59, 19427.62, '44:52'),
+         'TLAX': (93, 96.35, 75.28, 659.68, 1385.57, 212.96, 2429.85, '00:55'), 'VER': (172, 195.0, 116.21, 3761.75, 2668.29, 37.66, 6778.92, '07:25'),
+         'YUC': (13, 107.34, 0.0, 2091.47, 16.06, 0.0, 2214.87, '09:04'), 'ZAC': (126, 636.87, 1.02, 6597.92, 15503.27, 10128.78, 32867.85, '05:28')}
+INC24 = {'AGS': (32, 636.14), 'BC': (120, 32674.71), 'BCS': (11, 71.05), 'CAM': (30, 27666.61),
+         'CHIS': (456, 187263.77), 'CHIH': (543, 127711.32), 'CDMX': (993, 3532.09), 'COAH': (32, 500.78),
+         'COL': (110, 10853.61), 'DGO': (364, 72829.43), 'GTO': (39, 3857.41), 'GRO': (327, 416780.18),
+         'HGO': (179, 4562.54), 'JAL': (950, 112487.43), 'MÉX': (1079, 42162.36), 'MICH': (831, 97718.52),
+         'MOR': (163, 4825.11), 'NAY': (142, 83859.53), 'NL': (26, 2411.73), 'OAX': (274, 160437.52),
+         'PUE': (421, 30406.15), 'QRO': (87, 1179.69), 'QROO': (64, 91547.95), 'SLP': (70, 18252.75),
+         'SIN': (47, 42364.46), 'SON': (48, 7957.84), 'TAB': (52, 23263.54), 'TAM': (33, 9769.82),
+         'TLAX': (166, 2549.77), 'VER': (235, 15108.89), 'YUC': (29, 20333.81), 'ZAC': (49, 16639.18)}
+INC_TOT = {25: (7002, 1221711.03, 64507.94), 24: (8002, 1672215.70)}
+# Del mismo cierre: el promedio 1998-2024 (cuadro 7), la clasificación de
+# impacto (cuadro 9: severo, moderado, mínimo), los ecosistemas sensibles al
+# fuego (cuadro 10) y los que dependen de él (cuadro 11), los días-persona (resumen) y los incendios que la última
+# semana integró con retraso (resumen). Y el tiempo de detección que el cierre
+# de 2025 le da a 2024 (00:47) contra el que dio el cierre de 2024 (01:51).
+INC_NAC = {'prom_n': 7999, 'prom_ha': 442458, 'sev': 17484.91, 'mod': 416421.77, 'min': 787804.34, 'sens_n': 1442, 'sens_ha': 171127.79,
+           'dep_n': 4589, 'dep_ha': 771912.75, 'dp': 363065, 'tarde_n': 80, 'tarde_ha': 17136.51, 'det25': '03:54', 'det24_en25': '00:47', 'det24_en24': '01:51'}
+
 
 def _huella(doc):
     """Si el documento está en el repositorio, su huella debe coincidir."""
@@ -420,6 +469,39 @@ def acuiferos(abbrs=None):
     return out
 
 
+def incendios(abbrs=None):
+    """Los incendios forestales de cada entidad (CONAFOR, cierre de 2025, y el
+    de 2024 para comparar) y lo derivado: el arbóreo de cada 100 hectáreas,
+    las hectáreas por incendio, el cambio contra 2024 y su lugar. Si las filas
+    ya no suman los totales del cierre, la generación se detiene."""
+    _huella(INC_DOC)
+    _huella(INC_DOC24)
+    for k, v in INC25.items():
+        if abs(sum(v[1:6]) - v[6]) > 0.05:
+            raise SystemExit('recursos_naturales: la fila de incendios de %s ya no suma su total (%s)' % (k, v[6]))
+    n25, h25, a25 = sum(v[0] for v in INC25.values()), sum(v[6] for v in INC25.values()), sum(v[1] + v[2] for v in INC25.values())
+    n24, h24 = sum(v[0] for v in INC24.values()), sum(v[1] for v in INC24.values())
+    if n25 != INC_TOT[25][0] or abs(h25 - INC_TOT[25][1]) > 0.05 or abs(a25 - INC_TOT[25][2]) > 0.05:
+        raise SystemExit('recursos_naturales: los incendios de 2025 suman %d y %.2f ha (arbóreo %.2f); el cierre dice %s' % (n25, h25, a25, INC_TOT[25]))
+    if n24 != INC_TOT[24][0] or abs(h24 - INC_TOT[24][1]) > 0.05:
+        raise SystemExit('recursos_naturales: los incendios de 2024 suman %d y %.2f ha; el cierre dice %s' % (n24, h24, INC_TOT[24]))
+    if abs(INC_NAC['sev'] + INC_NAC['mod'] + INC_NAC['min'] - INC_TOT[25][1]) > 0.05:
+        raise SystemExit('recursos_naturales: la clasificación de impacto de los incendios ya no suma el total del cierre')
+    if abbrs is not None and (set(INC25) != set(abbrs) or set(INC24) != set(abbrs)):
+        raise SystemExit('recursos_naturales: las entidades de los incendios no son las de la base: %s' % sorted((set(INC25) | set(INC24)) ^ set(abbrs)))
+    oh = sorted(INC25, key=lambda a: -INC25[a][6])
+    on = sorted(INC25, key=lambda a: -INC25[a][0])
+    out = {}
+    for a, v in INC25.items():
+        n, ha, arb = v[0], v[6], v[1] + v[2]
+        n4, h4 = INC24[a]
+        out[a] = {'n': n, 'ha': round(ha, 2), 'arb': round(arb, 2), 'parb': round(arb / ha * 100, 1) if ha else 0.0,
+                  'hxi': round(ha / n, 1) if n else None, 'lleg': v[7], 'lh': oh.index(a) + 1, 'ln': on.index(a) + 1,
+                  'n24': n4, 'ha24': h4, 'cam': round((ha - h4) / h4 * 100, 1) if h4 else None,
+                  'pn': round(n / INC_TOT[25][0] * 100, 1), 'ph': round(ha / INC_TOT[25][1] * 100, 1)}
+    return out
+
+
 # Cómo nombra el Acuerdo de 2023 a cada entidad, para leer su CSV.
 ACU_ENT = {'AGUASCALIENTES': 'AGS', 'BAJA CALIFORNIA': 'BC', 'BAJA CALIFORNIA SUR': 'BCS', 'CAMPECHE': 'CAM', 'COAHUILA': 'COAH', 'COLIMA': 'COL',
            'CHIAPAS': 'CHIS', 'CHIHUAHUA': 'CHIH', 'CIUDAD DE MÉXICO': 'CDMX', 'DURANGO': 'DGO', 'GUANAJUATO': 'GTO', 'GUERRERO': 'GRO', 'HIDALGO': 'HGO',
@@ -502,6 +584,27 @@ def tabla_agua():
             '<td class="num-tabular">%s</td><td class="num-tabular">%s</td><td class="num-tabular">27</td></tr></tfoot></table></div>') % (
         _chip('oficial'), _chip('oficial'), _chip('derivado'), _chip('derivado'), _chip('derivado'), _chip('oficial'), filas,
         _n(ACU_TOT[0]), _n(ACU_TOT[2]), _n(ACU_TOT[2] / ACU_TOT[0] * 100, 1), _n(ACU_SUMAS[0], 1), _n(ACU_SUMAS[1], 1))
+
+
+def tabla_incendios():
+    import auditorias
+    nom = {e['abbr']: e['name'] for e in auditorias.db()['estados']}
+    I = incendios(list(nom))
+    filas = ''.join(
+        '<tr><th scope="row">%d. %s</th><td class="num-tabular">%s</td><td class="num-tabular">%s</td><td class="num-tabular">%s</td><td class="num-tabular">%s</td>'
+        '<td class="num-tabular">%s</td><td class="num-tabular">%s</td><td class="num-tabular">%s%s %%</td></tr>' % (
+            x['lh'], html.escape(nom[a]), _n(x['n']), _n(x['ha'], 2), _n(x['parb'], 1), _n(x['hxi'], 1), x['lleg'], _n(x['ha24'], 2),
+            '+' if x['cam'] > 0 else '−' if x['cam'] < 0 else '', _n(abs(x['cam']), 1))
+        for a, x in sorted(I.items(), key=lambda i: i[1]['lh']))
+    return ('<div class="leg-tabla-caja"><table class="leg-tabla"><caption>Los incendios forestales de cada entidad, 2025 (hectáreas afectadas, ordenadas de más a menos)</caption>'
+            '<thead><tr><th scope="col">Entidad</th><th scope="col">Incendios %s</th><th scope="col">Hectáreas %s</th><th scope="col">De árboles, de cada 100 %s</th>'
+            '<th scope="col">Hectáreas por incendio %s</th><th scope="col">Llegada de la brigada (h:mm, promedio) %s</th><th scope="col">Hectáreas en 2024 %s</th>'
+            '<th scope="col">Cambio de la superficie %s</th></tr></thead>'
+            '<tbody>%s</tbody><tfoot><tr><th scope="row">Las 32</th><td class="num-tabular">%s</td><td class="num-tabular">%s</td><td class="num-tabular">%s</td>'
+            '<td class="num-tabular">%s</td><td></td><td class="num-tabular">%s</td><td class="num-tabular">−%s %%</td></tr></tfoot></table></div>') % (
+        _chip('oficial'), _chip('oficial'), _chip('derivado'), _chip('derivado'), _chip('oficial'), _chip('oficial'), _chip('derivado'), filas,
+        _n(INC_TOT[25][0]), _n(INC_TOT[25][1], 2), _n(INC_TOT[25][2] / INC_TOT[25][1] * 100, 1), _n(INC_TOT[25][1] / INC_TOT[25][0], 1), _n(INC_TOT[24][1], 2),
+        _n((INC_TOT[24][1] - INC_TOT[25][1]) / INC_TOT[24][1] * 100, 1))
 
 
 def tabla_derechos():
@@ -650,7 +753,7 @@ def temas():
             '<b>Procesar no es producir.</b> El crudo que entra a una refinería no es la gasolina que sale: la gasolina depende de cada planta.',
             '<b>Un deterioro no es dinero perdido en efectivo.</b> Es una estimación de lo que la refinería dejará de generar, con supuestos que PEMEX pone y que cambian cada año.',
             '<b>Un estado sin refinería no es un estado sin problema ambiental.</b> El mapa marca dónde hay refinerías, concesiones mineras y acuíferos en déficit, no dónde hay daño. '
-            'Los bosques de cada estado todavía no tienen cifra en la plataforma.',
+            'De los bosques, la plataforma ya tiene los incendios de cada estado, pero todavía no su superficie forestal: sin ella no se sabe qué parte de su bosque se quemó.',
             '<b>La capacidad no es una meta.</b> Usar poco más de la mitad de una refinería, como hizo el sistema en esos diez meses, puede ser falta de crudo, mantenimiento o una planta que no arranca: el porcentaje dice cuánto, no por qué.',
             '<b>El libro no trae el agua,</b> que es un recurso renovable en crisis en varios estados y se explota por concesión. La plataforma la agrega con los 653 acuíferos '
             'de la CONAGUA, y su corte es de 2022 aunque la ley pide revisarlo cada dos años.']),
@@ -681,11 +784,13 @@ def temas():
             'sug': ['¿Cuánto crudo procesa cada refinería?', '¿Qué refinería perdió más valor?', '¿Quién audita a PEMEX?']}
     _temas_mineria(t)
     _temas_agua(t)
+    _temas_incendios(t)
     for k, x in t.items():
-        x['ir'] = [ARCHIVO + '#' + (k.replace('_', '-') if not k.startswith(('rn_ref_', 'rn_min_', 'rn_acu_')) else
-                                   'rn-refinerias' if k.startswith('rn_ref_') else 'rn-mineria' if k.startswith('rn_min_') else 'rn-agua'), TITULO]
+        x['ir'] = [ARCHIVO + '#' + (k.replace('_', '-') if not k.startswith(('rn_ref_', 'rn_min_', 'rn_acu_', 'rn_if_')) else
+                                   'rn-refinerias' if k.startswith('rn_ref_') else 'rn-mineria' if k.startswith('rn_min_') else
+                                   'rn-incendios' if k.startswith('rn_if_') else 'rn-agua'), TITULO]
         x['aqui'] = x['ir']
-        if k.startswith(('rn_min_', 'rn_acu_')):
+        if k.startswith(('rn_min_', 'rn_acu_', 'rn_if_')):
             x['ir'] = [x.pop('portal') + '#ambiental', 'sus recursos naturales en el Planisferio']
     return t
 
@@ -880,9 +985,105 @@ def _temas_agua(t):
             'sug': ['¿Qué estado tiene más acuíferos en déficit?', '¿Qué acuíferos están sobreexplotados?', '¿Cuántas concesiones mineras tiene %s?' % nom[a]]}
 
 
+def _ha(v, d=0):
+    return format(v, ',.%df' % d) + ' ha'
+
+
+def _temas_incendios(t):
+    """Los incendios forestales: el panorama nacional, sus puntos ciegos y una
+    ficha por entidad."""
+    import auditorias
+    import planisferio
+    E = auditorias.db()['estados']
+    nom = {e['abbr']: e['name'] for e in E}
+    I = incendios(list(nom))
+    fc = lambda c: _f(INC_DOC, c)
+    N = INC_NAC
+    n25, h25, a25 = INC_TOT[25]
+    n24, h24 = INC_TOT[24]
+    oh = sorted(I, key=lambda a: I[a]['lh'])
+    on = sorted(I, key=lambda a: I[a]['ln'])
+    top = oh[0]
+    masn = on[0]
+    grande = max(I, key=lambda a: I[a]['hxi'] or 0)
+    sube = max(I, key=lambda a: I[a]['cam'])
+    baja = min(I, key=lambda a: I[a]['cam'])
+    p = lambda x, y: _n(x / y * 100, 1)
+    lgdfs = ley('lgdfs', 'arts. 117 a 121 y 155')
+    t['rn_incendios'] = {
+        'tit': 'Los incendios forestales, estado por estado',
+        'h': ('<p>Los bosques, las selvas y los matorrales son un recurso renovable: se reponen si se les deja. El fuego es la amenaza que se mide cada semana. La ley reparte la tarea: '
+              'el <b>municipio</b> atiende el combate inicial; si lo rebasa, va el <b>estado</b>, y si tampoco alcanza, la <b>Comisión Nacional Forestal</b>, que coordina el Programa de '
+              'Manejo del Fuego (Ley General de Desarrollo Forestal Sustentable, art. 119). Quien tiene el terreno debe restaurar lo quemado en un plazo máximo de dos años (art. 121), '
+              'y provocar un incendio forestal es infracción (art. 155).</p>'
+              '<p>En 2025 hubo <b>%s incendios forestales</b> en las 32 entidades, que afectaron <b>%s</b> %s. Fue %s %% menos superficie que en 2024, el año más alto de la serie que publica la CONAFOR (1998 y 2011 a 2025), con %s %s; '
+              'pero %s veces el promedio de 1998 a 2024, de %s al año %s.</p>'
+              '<p><b>%s</b> tuvo la mayor superficie afectada: %s en %s incendios %s, el %s %% del país %s. <b>%s</b> tuvo más incendios, %s, pero quedó en el lugar %d por superficie. '
+              '<b>%s</b> tuvo los más grandes: %s por incendio %s, y su brigada tardó en promedio %s horas en llegar %s.</p>'
+              '<p>De cada 100 hectáreas afectadas, solo %s eran de árboles (arbolado adulto y renuevo) %s; el resto, pasto, matorral y hojarasca. La CONAFOR clasificó el '
+              '%s %% de la superficie como de impacto mínimo y el %s %% como de impacto severo %s. En el combate se aplicaron %s días-persona %s.</p>') % (
+            _n(n25), _ha(h25, 2), _chip('oficial'), _n((h24 - h25) / h24 * 100, 1), _ha(h24, 2), _chip('oficial'),
+            _n(h25 / N['prom_ha'], 1), _ha(N['prom_ha']), _chip('derivado'),
+            nom[top], _ha(I[top]['ha'], 2), _n(I[top]['n']), _chip('oficial'), _n(I[top]['ph'], 1), _chip('derivado'), nom[masn], _n(I[masn]['n']), I[masn]['lh'],
+            nom[grande], _ha(I[grande]['hxi'], 1), _chip('derivado'), I[grande]['lleg'], _chip('oficial'),
+            p(a25, h25), _chip('derivado'), p(N['min'], h25), p(N['sev'], h25), _chip('derivado'), _n(N['dp']), _chip('oficial')),
+        'ci': [{'v': _n(n25), 'etq': 'incendios forestales en 2025', 'e': 'oficial'},
+               {'v': _ha(h25), 'etq': 'superficie afectada en 2025', 'e': 'oficial'},
+               {'v': '%s %%' % p(a25, h25), 'etq': 'de esa superficie era de árboles', 'e': 'derivado', 'op': 'arbolado adulto + renuevo ÷ superficie total × 100'}],
+        'fu': [_o('Incendios y superficie por entidad, 2025 (cuadro 4); el promedio 1998-2024 (cuadro 7); el impacto (cuadro 9). Los porcentajes y las veces son nuestros', fc('cuadros 4, 7 y 9')),
+               _o('Incendios y superficie por entidad, 2024', _f(INC_DOC24, 'cuadro 4')),
+               _o('Quién combate, la restauración y la infracción', lgdfs)],
+        'sug': ['¿Cuántos incendios forestales hubo en Chihuahua?', '¿Qué estado tuvo más incendios forestales?', '¿Qué no dicen las cifras de incendios?']}
+    t['rn_incendios_ciegos'] = {
+        'tit': 'Lo que las cifras de incendios no dicen',
+        'h': '<p>Seis preguntas que conviene hacer antes de leer el mapa del fuego:</p>%s' % _lista([
+            ('<b>Superficie afectada no es bosque perdido.</b> De las %s de 2025, el %s %% fue pasto, matorral y hojarasca, y la CONAFOR calificó de impacto mínimo el %s %% %s, '
+             'donde muere menos del 20 %% del arbolado. El impacto severo, donde muere más de la mitad, fue de %s %s.') % (
+                _ha(h25), _n(100 - a25 / h25 * 100, 1), p(N['min'], h25), _chip('derivado'), _ha(N['sev'], 2), _chip('oficial')),
+            ('<b>No todo fuego es daño.</b> La CONAFOR cuenta %s incendios, en %s, en ecosistemas que dependen del fuego para renovarse %s, y %s, en %s, en ecosistemas sensibles a él, '
+             'donde el daño es mayor (NOM-015-SEMARNAT/AGRICULTURA-2023).') % (_n(N['dep_n']), _ha(N['dep_ha'], 2), _chip('oficial'), _n(N['sens_n']), _ha(N['sens_ha'], 2)),
+            ('<b>Un año no es la tendencia.</b> 2024 fue el más alto de la serie y 2025 bajó, pero quedó en %s veces el promedio de 1998 a 2024. Por estado los saltos son enormes: %s subió %s %% (de %s a %s) y %s bajó %s %% %s; '
+             'sobre una base chica, un solo incendio grande cambia el porcentaje.') % (
+                _n(h25 / N['prom_ha'], 1), nom[sube], _n(I[sube]['cam'], 1), _ha(I[sube]['ha24']), _ha(I[sube]['ha']), nom[baja], _n(-I[baja]['cam'], 1), _chip('derivado')),
+            ('<b>Muchos incendios no es mucha superficie.</b> %s tuvo %s incendios y %s, %s, pero %s quemó más terreno: %s contra %s %s. Lo que cambia la superficie es cuánto tarda la brigada en llegar y '
+             'cuánto dura el fuego.') % (nom[masn], _n(I[masn]['n']), nom[grande], _n(I[grande]['n']), nom[grande], _ha(I[grande]['ha']), _ha(I[masn]['ha']), _chip('oficial')),
+            ('<b>La cifra cambia después de la temporada.</b> Los reportes semanales no son el cierre: solo la última semana de 2025 sumó %d incendios de fechas anteriores, con %s, que no se habían '
+             'reportado %s. Una nota con la cifra de mayo o de junio no es la del año.') % (N['tarde_n'], _ha(N['tarde_ha'], 2), _chip('oficial')),
+            ('<b>Los tiempos no cuadran entre documentos.</b> El cierre de 2025 dice que en 2024 un incendio se detectaba en promedio en %s (horas:minutos); el cierre de 2024 había dicho %s %s. '
+             'Con dos cifras de la misma dependencia para el mismo año, la comparación de tiempos es pregunta para la CONAFOR. Y para saber qué parte del bosque de cada estado se quemó, '
+             'falta su superficie forestal, que la plataforma todavía no integra %s.') % (N['det24_en25'], N['det24_en24'], _chip('oficial'), _chip('pendiente', 'ambiente-por-estado'))]),
+        'fu': [_o('Impacto, ecosistemas, días-persona e incendios integrados con retraso', fc('resumen ejecutivo y cuadros 7, 9, 10 y 11')),
+               _o('El tiempo de detección de 2024 en su propio cierre', _f(INC_DOC24, 'cuadro 4'))],
+        'sug': ['¿Qué estado tuvo más superficie quemada?', '¿Cuántos acuíferos de Chihuahua están en déficit?', '¿Quién combate los incendios forestales?']}
+    for a in nom:
+        x = I[a]
+        cam = ('%s %s %% contra 2024 (%s en %s incendios) %s' % ('subió' if x['cam'] > 0 else 'bajó', _n(abs(x['cam']), 1), _ha(x['ha24'], 2), _n(x['n24']), _chip('derivado'))
+               if x['cam'] else 'igual que en 2024')
+        h = ('<p>En 2025, <b>%s</b> tuvo <b>%s incendios forestales</b> que afectaron <b>%s</b> %s: el lugar %d de 32 por superficie y el %d por número de incendios %s. '
+             'La superficie %s.</p>'
+             '<p>De cada 100 hectáreas afectadas, %s eran de árboles %s. Cada incendio afectó en promedio %s %s, y la brigada tardó en promedio %s horas en llegar %s.</p>'
+             '<p>%sEl combate inicial le toca al municipio, luego al estado y luego a la CONAFOR '
+             '(Ley General de Desarrollo Forestal Sustentable, art. 119), y quien tiene el terreno debe restaurarlo en dos años (art. 121).</p>') % (
+            nom[a], _n(x['n']), _ha(x['ha'], 2), _chip('oficial'), x['lh'], x['ln'], _chip('derivado'), cam,
+            _n(x['parb'], 1), _chip('derivado'), _ha(x['hxi'], 1), _chip('derivado'), x['lleg'], _chip('oficial'),
+            'Superficie afectada no es bosque perdido: aquí la mayor parte del fuego corrió por pasto, matorral y hojarasca. ' if x['parb'] < 50 else
+            'Aquí la mayor parte de lo afectado fue de árboles, y aun así superficie afectada no es bosque perdido: el daño depende del impacto. ')
+        t['rn_if_' + planisferio.clave(a)] = {
+            'tit': '%s: sus incendios forestales' % nom[a], 'h': h,
+            'ci': [{'v': _n(x['n']), 'etq': 'incendios forestales en 2025', 'e': 'oficial'},
+                   {'v': _ha(x['ha']), 'etq': 'superficie afectada en 2025', 'e': 'oficial'},
+                   {'v': '%s%s %%' % ('+' if x['cam'] > 0 else '−' if x['cam'] < 0 else '', _n(abs(x['cam']), 1)), 'etq': 'superficie contra 2024', 'e': 'derivado',
+                    'op': '(superficie 2025 − superficie 2024) ÷ superficie 2024 × 100'}],
+            'fu': [_o('Incendios y superficie de 2025 por entidad; los porcentajes, lugares y promedios son nuestros', fc('cuadro 4')),
+                   _o('Incendios y superficie de 2024 por entidad', _f(INC_DOC24, 'cuadro 4')), _o('Quién combate y la restauración', ley('lgdfs', 'arts. 119 y 121'))],
+            'portal': planisferio.portal(a), 'edo': a,
+            'sug': ['¿Qué estado tuvo más superficie quemada?', '¿Qué no dicen las cifras de incendios?', '¿Cuántos acuíferos de %s están en déficit?' % nom[a]]}
+
+
 SECCIONES = [('rn_capitulo', 'Renovables y no renovables'), ('rn_regimen', 'Las tres vías y las tres auditorías'),
              ('rn_ramos', 'Los seis ramos, ayer y hoy'), ('rn_agua', 'El agua del subsuelo, estado por estado'),
-             ('rn_agua_ciegos', 'Lo que el mapa del agua no dice'), ('rn_pemex', 'PEMEX, ayer y hoy'),
+             ('rn_agua_ciegos', 'Lo que el mapa del agua no dice'), ('rn_incendios', 'Los incendios forestales, estado por estado'),
+             ('rn_incendios_ciegos', 'Lo que las cifras de incendios no dicen'), ('rn_pemex', 'PEMEX, ayer y hoy'),
              ('rn_refinerias', 'Las refinerías de PEMEX'), ('rn_mineria', 'Las concesiones mineras, estado por estado'),
              ('rn_mineria_ciegos', 'Lo que el cuadro de las minas no dice'), ('rn_auditar', 'Lo subrayado: la guía del auditor'),
              ('rn_ciegos', 'Los puntos ciegos')]
@@ -894,6 +1095,8 @@ def secciones():
              'rn_refinerias': tabla_refinerias() + '<p class="leg-mas"><a href="planisferio.html?d=ambiental">🗺️ Verlas en el Planisferio ➔</a> · '
                                                    '<a href="auditoria-dos-bocas.html">📖 La investigación de Dos Bocas ➔</a> · '
                                                    '<a href="auditoria-refineria-tula.html">📖 La de la refinería de Tula ➔</a></p>',
+             'rn_incendios': tabla_incendios() + '<p class="leg-mas"><a href="planisferio.html?d=ambiental&amp;l=incH">🗺️ Los incendios en el Planisferio ➔</a> · '
+                                                 '<a href="%s">Los reportes semanales de la CONAFOR ➔</a></p>' % INC_PAG,
              'rn_agua': tabla_agua() + '<p class="leg-mas"><a href="planisferio.html?d=ambiental&amp;l=acuP">🗺️ Los acuíferos en el Planisferio ➔</a></p>',
              'rn_mineria': tabla_mineria() + tabla_derechos() + '<p class="leg-mas"><a href="planisferio.html?d=ambiental&amp;l=minT">🗺️ Las concesiones en el Planisferio ➔</a></p>'}
     return [{'id': k.replace('_', '-'), 'titulo': html.escape(tit), 'texto': '', 'tarjetas': [],
@@ -903,6 +1106,7 @@ def secciones():
 ENTRADA = ('El capítulo de recursos naturales del libro del autor, «Introducción al Derecho Económico», convertido en método de auditoría y puesto al día: '
            'qué recursos se renuevan y cuáles se agotan, de quién son, quién los explota y con qué ley, y a quién se audita en cada caso. '
            'Empieza por el agua del subsuelo: los 653 acuíferos del país, cuáles ya no tienen agua para concesionar y cuáles se miden como sobreexplotados. '
+           'Sigue con los bosques: los incendios forestales de 2025 en cada estado, cuánto terreno afectaron y qué parte era de árboles. '
            'Cada regla está cotejada contra el texto vigente, porque el libro describe las leyes de 1993-1994. Incluye la sección de PEMEX y sus siete refinerías, '
            'con lo que procesa cada una frente a su capacidad, y las concesiones mineras de cada estado, que también se ven en el Planisferio. Es la misma información con que contesta Pregúntale al Auditor.')
 
@@ -912,7 +1116,7 @@ def pagina():
     return {
         'archivo': ARCHIVO, 'menu': TITULO, 'menu_archivo': 'aprende.html',
         'padre': ('aprende.html', 'Aprende'),
-        'icono': '🌎', 'titulo': TITULO, 'lema': 'Renovables y no renovables: el agua del subsuelo, las minas de cada estado y las refinerías de PEMEX, qué se audita y con qué ley',
+        'icono': '🌎', 'titulo': TITULO, 'lema': 'Renovables y no renovables: el agua del subsuelo, los incendios forestales, las minas de cada estado y las refinerías de PEMEX, qué se audita y con qué ley',
         'estilos': ['asistente.css'], 'entrada': ENTRADA, 'secciones': secciones(),
     }
 
@@ -938,8 +1142,9 @@ def pendientes():
          'enlace_txt': 'CONAGUA, disponibilidad de los acuíferos', 'aparece': ap},
         {'id': 'ambiente-por-estado', 'tema': 'Recursos naturales',
          'que': 'El resto de la cifra ambiental de cada una de las 32 entidades: superficie forestal y denuncias ante la PROFEPA',
-         'porque': ('El Informe de Actividades 2024 de la PROFEPA nombra estados pero no publica sus cifras por entidad. La superficie forestal (CONAFOR) sí se publica por entidad '
-                    'y la plataforma aún no la integra. Las concesiones mineras y los acuíferos ya están (03-11-2026); mientras tanto el mapa ambiental no marca los bosques, y lo dice.'),
+         'porque': ('El Informe de Actividades 2024 de la PROFEPA nombra estados pero no publica sus cifras por entidad. La superficie forestal de cada entidad (CONAFOR, Inventario '
+                    'Nacional Forestal y de Suelos) sí se publica y la plataforma aún no la integra: sin ella, los incendios de cada estado (que ya están, con el cierre de 2025 de la CONAFOR) '
+                    'no se pueden decir como parte de su bosque. Las concesiones mineras y los acuíferos también ya están (03-11-2026).'),
          'responsable': P.PLATAFORMA, 'enlace': 'https://www.inegi.org.mx/temas/ambiente/',
          'enlace_txt': 'INEGI, estadísticas de medio ambiente', 'aparece': ap},
     ]

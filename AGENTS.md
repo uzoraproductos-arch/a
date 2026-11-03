@@ -158,6 +158,10 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   las sumas de cada entidad y se detiene si no cuadran. **La disponibilidad se dice como el agua
   que aún se puede concesionar, nunca como el agua que queda, y «sin disponibilidad» no se dice
   «sobreexplotado»**: son dos mediciones distintas de la CONAGUA.
+  **Los incendios forestales** (03-11-2026) salen del cierre estadístico anual de la CONAFOR
+  (`INC25`, `INC24`, con huella; si las filas no suman el cierre, se detiene). **La superficie afectada
+  no se dice como bosque perdido**: casi toda es pasto y matorral, y la parte del bosque de cada estado
+  espera su superficie forestal.
 - **Las leyes del dinero en los tres niveles** (03-11-2026,
   `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
   cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y

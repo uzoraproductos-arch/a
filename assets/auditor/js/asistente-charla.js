@@ -1210,6 +1210,21 @@
         if (/(se puede|pueden|puede|dan|otorgan) (dar |otorgar |tener )?(una )?concesion(es)? (de|del|sobre|para) (el |la )?(litio|uranio|petroleo|hidrocarburos|minerales radiactivos)/.test(t)) return sanTema('rn_regimen');
         if (/(que|cual|cuales) ley(es)? (rige|rigen|regula|regulan|aplica|aplican) (a )?(la |el |los |las |al )?(mineria|minas|pesca|forestal|bosques|agua|aguas|petroleo|hidrocarburos|electricidad|energia electrica|litio|nuclear)/.test(t) ||
             /ley (de|federal de|general de) (mineria|pesca|aguas nacionales|desarrollo forestal)/.test(t) && /que (dice|es|regula)|quien (la )?aplica/.test(t)) return sanTema('rn_ramos');
+        /* Los incendios forestales (CONAFOR, cierre de 2025 y de 2024): los de un estado, o el país. */
+        if (SAN.t.rn_incendios && (/incendios? forestal|superficie (quemada|afectada por (el fuego|los incendios))|hectareas quemadas|manejo del fuego|combate (de |a )?(los )?incendios|incendios? (en|de) (los )?(bosques?|selvas?)/.test(t) ||
+            /\bincendios\b/.test(t) && /cuant|cuales|que estado|hubo|tuvo|tuvieron|quien|mapa|punto(s)? ciego|no dice/.test(t)) &&
+            !/refineri|pemex|ducto|gasolin|mercado|edificio|guarderia|seguro/.test(t)) {
+          if (/punto(s)? ciego|no dice|no dicen|no cuadra|ojo con/.test(t)) return sanTema('rn_incendios_ciegos');
+          var IE = Object.keys(SAN.t).filter(function (k) { return /^rn_if_/.test(k); }).map(function (k) {
+            var nm = plano(SAN.t[k].tit.split(':')[0]).trim();
+            return [k, nm === 'estado de mexico' ? /estado de mexico|edomex|edo mex/ : new RegExp('\\b' + nm + '\\b'), nm.length];
+          }).sort(function (a, b) { return b[2] - a[2]; });
+          var ti = plano(t), hi = IE.filter(function (x) { return x[1].test(ti); })[0];
+          if (hi && !/cada estado|todos los estados|que estados?|cual(es)? estados?/.test(t)) return sanTema(hi[0]);
+          var im = sanTema('rn_incendios');
+          if (/\bmapa\b|planisferio|donde (estan|quedan|hay)/.test(t)) im.ir = ['planisferio.html?d=ambiental&l=incH', 'los incendios forestales en el Planisferio'];
+          return im;
+        }
         /* El agua del subsuelo (CONAGUA, DOF 09-11-2023, corte al 30-12-2022; el Segundo Informe, 2026): la de un estado, o el país. */
         if (SAN.t.rn_agua && /acuifer|aguas? subterrane|aguas? del subsuelo|subsuelo.*\bagua|sobreexplot|disponibilidad (media anual )?del? agua|deficit (de agua|hidric)|(concesiones|titulos) de (concesion de )?agua/.test(t) &&
             !/ley de aguas|ley general de aguas|forest|bosque|pesquer|pesca\b/.test(t)) {
