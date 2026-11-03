@@ -12,7 +12,8 @@ Se corre a mano, una entidad a la vez, con el archivo que publica el INEGI
 
 Lee la capa de municipios (conjunto_de_datos/<ent>mun.shp), en la proyección
 cónica conforme de Lambert del propio INEGI (EPSG:6372), quita los vértices
-que no se notan a la escala del portal (Douglas-Peucker, 400 m) y escribe
+que no se notan a la escala del portal (Douglas-Peucker: 400 m, o menos en
+las entidades chicas) y escribe
 docs/geo/mg2024-mun-<ent>.json: un trazo SVG por municipio, en kilómetros,
 con la huella SHA-256 del archivo de origen. planisferio.py lo lee al
 generar; si las claves no coinciden con el padrón del INEGI, se detiene.
@@ -27,12 +28,15 @@ import json
 import math
 import os
 import sys
+import time
 import zipfile
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 URL = ('https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/geografia/'
        'marcogeo/794551132173/%s')
-TOL_KM = 0.4           # vértice que se aleja menos de 400 m de la línea, fuera
+TOL_KM = 0.4           # vértice que se aleja menos de 400 m de la línea, fuera...
+TOL_MIN_KM = 0.08      # ...salvo en las entidades chicas: la tolerancia baja con
+TOL_DIV = 1000         # su tamaño (lado mayor ÷ 1000), sin bajar de 80 m
 MIN_KM2 = 0.5          # islotes de menos de medio kilómetro cuadrado, fuera
 
 
@@ -79,6 +83,8 @@ def integrar(ruta_zip):
     r = shapefile.Reader(shp=io.BytesIO(z.read(base + '.shp')), shx=io.BytesIO(z.read(base + '.shx')),
                          dbf=io.BytesIO(z.read(base + '.dbf')), encoding='latin-1')
     x0, y0, x1, y1 = r.bbox
+    tol = max(TOL_MIN_KM, min(TOL_KM, max(x1 - x0, y1 - y0) / 1000 / TOL_DIV))
+    minimo = min(MIN_KM2, tol * tol * 3)
     ent = None
     muns = []
     for sr in r.iterShapeRecords():
@@ -89,9 +95,9 @@ def integrar(ruta_zip):
         for a, b in zip(partes, partes[1:]):
             # A kilómetros, con el norte arriba (y del SVG crece hacia abajo).
             anillo = [((x - x0) / 1000, (y1 - y) / 1000) for x, y in pts[a:b]]
-            if _area(anillo) < MIN_KM2:
+            if _area(anillo) < minimo:
                 continue
-            s = _dp(anillo, TOL_KM)
+            s = _dp(anillo, tol)
             if len(s) >= 4:
                 anillos.append(s)
         if not anillos:
@@ -103,8 +109,8 @@ def integrar(ruta_zip):
         'fuente': 'INEGI, Marco Geoestadístico 2024 (versión por área geoestadística estatal), capa de áreas geoestadísticas municipales',
         'url': URL % os.path.basename(ruta_zip), 'pagina': 'https://www.inegi.org.mx/temas/mg/',
         'licencia': 'Términos de Libre Uso de la Información del INEGI (https://www.inegi.org.mx/inegi/terminos.html)',
-        'sha256': huella, 'bytes': len(datos), 'integrado': '03-11-2026',
-        'proyeccion': 'Cónica conforme de Lambert del INEGI (EPSG:6372), en kilómetros; simplificada a %d m' % (TOL_KM * 1000),
+        'sha256': huella, 'bytes': len(datos), 'integrado': time.strftime('%d-%m-%Y'),
+        'proyeccion': 'Cónica conforme de Lambert del INEGI (EPSG:6372), en kilómetros; simplificada a %d m' % round(tol * 1000),
         'aviso': ('El INEGI advierte que estos límites son geoestadísticos, para referenciar censos y encuestas, y que no deben '
                   'tomarse como la fuente oficial de la división político-administrativa del país.'),
         'ent': ent, 'vb': [round((x1 - x0) / 1000, 1), round((y1 - y0) / 1000, 1)], 'm': muns,

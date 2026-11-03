@@ -1540,6 +1540,14 @@
   {
    "q": "Muéstrame el mapa de los municipios de Jalisco",
    "ir": "planisferio.html?e=JAL&m=1"
+  },
+  {
+   "q": "Muéstrame el mapa de los municipios de Oaxaca",
+   "ir": "planisferio.html?e=OAX&m=1"
+  },
+  {
+   "q": "Mapa de las alcaldías de la Ciudad de México",
+   "ir": "planisferio.html?e=CDMX&m=1"
   }
  ]
 }

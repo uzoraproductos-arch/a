@@ -178,21 +178,26 @@
         if (v != null) { k = 0; while (k < 4 && v >= c[k]) k++; }
         p.style.fill = k < 0 ? '#d5dae3' : pal[k];
         p.classList.toggle('sel', !!sel && sel.c === p.getAttribute('data-c'));
-        if (x) p.setAttribute('aria-label', x.n + ': ' + (v == null ? 'sin cuenta de ' + D.anio : fmt(v)));
+        if (x) p.setAttribute('aria-label', x.n + ': ' + (v == null ? (D.sin ? 'sin cuenta municipal' : 'sin cuenta de ' + D.anio) : fmt(v)));
       });
       var lim = [null].concat(c);
+      if (D.sin) {
+        document.getElementById('plMunLeyenda').innerHTML = '<span class="pl-ley-cls"><span><i style="background:#d5dae3"></i>sin cuenta municipal</span></span>';
+        document.getElementById('plMunQue').textContent = D.sin;
+        return;
+      }
       document.getElementById('plMunLeyenda').innerHTML = '<span class="pl-ley-tit">' + esc(lente.nom) + ' (' + D.anio + ')</span><span class="pl-ley-cls">' +
         pal.map(function (col, i) {
           var t = i === 0 ? 'menos de ' + fmt(lim[1]) : i === 4 ? fmt(lim[4]) + ' o más' : fmt(lim[i]) + ' a ' + fmt(lim[i + 1]);
           return '<span><i style="background:' + col + '"></i>' + t + '</span>';
-        }).join('') + '<span><i style="background:#d5dae3"></i>sin cuenta</span></span>';
+        }).join('') + '<span><i style="background:#d5dae3"></i>' + (D.sin ? 'sin cuenta municipal' : 'sin cuenta') + '</span></span>';
       document.getElementById('plMunQue').textContent = lente.que;
     }
     function muestra(x) {
       var ente = 'herramienta-inspector-entes.html#ente=municipal:' + D.cve + x.c;
       if (x.ing == null) {
-        ficha.innerHTML = '<h3>' + esc(x.n) + '</h3><p>No rindió su cuenta de ' + D.anio + ' al INEGI ' + chip('pendiente', D.pend) +
-          ': sigue en el padrón, sin cifra. Ponerle cero falsearía la cifra.</p><a class="pl-ficha-ir" href="' + ente + '">Su ficha en el Auditor de entes ➔</a>';
+        ficha.innerHTML = '<h3>' + esc(x.n) + '</h3><p>' + (D.sin ? esc(D.sin) + ' ' + chip('pendiente', D.pend) :
+          'No rindió su cuenta de ' + D.anio + ' al INEGI ' + chip('pendiente', D.pend) + ': sigue en el padrón, sin cifra.') + ' Ponerle cero falsearía la cifra.</p><a class="pl-ficha-ir" href="' + ente + '">Su ficha en el Auditor de entes ➔</a>';
         return;
       }
       ficha.innerHTML = '<h3>' + esc(x.n) + '</h3><p class="pl-ficha-sub">Clave INEGI ' + D.cve + x.c + ' · cuentas de ' + D.anio + '</p><dl class="pl-ficha-dl">' +

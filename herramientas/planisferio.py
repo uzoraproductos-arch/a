@@ -130,7 +130,7 @@ MAPA_MUN = """<div class="pl-lentes" role="radiogroup" aria-label="Qué ver en e
             </aside>
           </div>
           <p class="pl-pie">Límites: %s (<a href="%s">descarga del INEGI</a>), integrados el %s; huella SHA-256 del archivo de origen <code>%s</code>. Simplificados para verse en pantalla. %s
-          Cifras: INEGI, finanzas públicas municipales %d %s. En gris, los municipios que no rindieron su cuenta de %d %s.</p>
+          Cifras: INEGI, finanzas públicas municipales %d %s. %s</p>
           <script type="application/json" id="plMunDatos">%s</script>"""
 
 
@@ -156,11 +156,16 @@ def _mapa_mun(e, m, g, ref, padron):
                 x['c'], x['d'], x['n'], x['n']) for x in g['m']))
     lentes = ''.join('<button type="button" class="pl-lente" role="radio" aria-checked="%s" data-l="%s">%s</button>' % (
         'true' if k == 0 else 'false', i, n) for k, (i, n, _p, _q) in enumerate(LENTES_MUN))
-    info = {'ent': e['abbr'], 'cve': m['cve'], 'pend': 'municipios-sin-cuenta', 'anio': padron['anio'],
+    sin = None if m['conCifra'] else ('Las alcaldías de la Ciudad de México no rinden cuenta municipal al INEGI: '
+                                      'su dinero va dentro del presupuesto de la Ciudad.')
+    info = {'ent': e['abbr'], 'cve': m['cve'], 'pend': 'municipios-sin-cuenta', 'anio': padron['anio'], 'sin': sin,
             'lentes': [{'id': i, 'nom': n, 'pal': p, 'que': q} for i, n, p, q in LENTES_MUN], 'm': datos}
     return MAPA_MUN % (
-        lentes, svg, padron['anio'], g['fuente'], g['url'], g['integrado'], g['sha256'][:12] + '…', g['aviso'],
-        padron['anio'], ref('ref-inegi-efipem'), padron['anio'], chip('pendiente', 'municipios-sin-cuenta'), _json(info))
+        '' if sin else lentes, svg, padron['anio'], g['fuente'], g['url'], g['integrado'], g['sha256'][:12] + '…', g['aviso'],
+        padron['anio'], ref('ref-inegi-efipem'),
+        ('En gris, todas: %s %s' % (sin, chip('pendiente', 'municipios-sin-cuenta')) if sin else
+         'En gris, los municipios que no rindieron su cuenta de %d %s.' % (padron['anio'], chip('pendiente', 'municipios-sin-cuenta'))),
+        _json(info))
 
 
 def _existe(enlace):
@@ -433,9 +438,12 @@ def pagina_portal(base, ref, e, padron, prev, sig):
              'tarjetas': [], 'bloque': '<div class="pl-pisos">%s%s%s</div>' % (p1, p2, p3)},
             {'id': 'ritmo', 'titulo': 'Su contador', 'texto': '', 'tarjetas': [], 'bloque': ritmo},
         ] + ([
-            {'id': 'mapa-municipios', 'titulo': 'El mapa de sus %d municipios' % m['n'],
+            {'id': 'mapa-municipios',
+             'titulo': ('El mapa de sus %d municipios' if m['conCifra'] else 'El mapa de sus %d alcaldías') % m['n'],
              'texto': ('Cada municipio en su lugar, con lo que ingresó en %d. Elige qué ver; el color compara a los municipios del estado por quintiles '
-                       '(cinco grupos con el mismo número de municipios). Toca uno para ver su ficha.' % padron['anio']),
+                       '(cinco grupos con el mismo número de municipios). Toca uno para ver su ficha.' % padron['anio'] if m['conCifra'] else
+                       'Cada alcaldía en su lugar. No llevan color por cifra porque no rinden cuenta municipal al INEGI; '
+                       'toca una para ir a su ficha en el Auditor de entes.'),
              'tarjetas': [], 'bloque': mapa_mun}] if g else []) + [
             {'id': 'municipios', 'titulo': 'Sus municipios, uno por uno',
              'texto': ('El que no rindió cuenta sigue en la lista, sin cifra: borrarlo falsearía el padrón y ponerle cero falsearía la cifra. ' +

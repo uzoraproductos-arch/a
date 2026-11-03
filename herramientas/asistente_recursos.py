@@ -87,7 +87,7 @@ RECURSOS = [
     # que ya tiene sus límites del INEGI, lleva directo a su portal (m=1).
     ('mapa-mun', '🗺️', 'Ver el mapa de sus municipios', 'El mapa de los municipios de tu estado', 'planisferio.html#mapa',
      'planisferio.html?e=%s&m=1', 'mapa',
-     'mapa municipios municipio municipal limites territorio'),
+     'mapa municipios municipio municipal alcaldias alcaldia limites territorio'),
     ('padron', '🏘️', 'Ver sus municipios', 'Los municipios, uno por uno', 'numeros-los-municipios.html#padron',
      'numeros-los-municipios.html?e=%s#padron', 'mapa',
      'municipio municipios municipal alcaldia ayuntamiento predial fortamun fismdf padron'),
