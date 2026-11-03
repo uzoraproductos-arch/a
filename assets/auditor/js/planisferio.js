@@ -110,9 +110,25 @@
         '<a class="pl-ficha-ir" href="' + esc(e.p) + '#deuda">Ver su deuda en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
+    /* La inversión: la obra directa y lo de sus organismos van separadas
+       (no se suman), y lo que dejó la ASF. */
+    function inversion(e, fijo) {
+      var d = function (id, nom) {
+        var l = lenteDe(id);
+        return '<dt>' + nom + '</dt><dd>' + (e[id] == null ? 'Sin cifra ' + chip('pendiente', l.falta && l.falta.pend) : '<b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est)) + '</dd>';
+      };
+      var mas = e.inv != null && e.invt > e.inv;
+      ficha.innerHTML = '<h3>' + esc(e.n) + '</h3><p class="pl-ficha-sub">La obra de su gobierno en 2024 · INEGI y ASF</p>' +
+        '<dl class="pl-ficha-dl">' + d('inv', 'Obra que hizo el estado') + d('invp', 'De cada $100 de su egreso') + d('invt', 'A sus organismos de obra') +
+        '<dt>Por aclarar ante la ASF</dt><dd><b class="num-tabular">' + mdp(e.asf) + '</b> · ' + e.aud + ' auditorías ' + chip('oficial') + '</dd></dl>' +
+        (mas ? '<p class="pl-ficha-mun">Les pasó a sus organismos más que la obra que hizo él mismo: las dos cifras no se suman.</p>' : '') +
+        '<a class="pl-ficha-ir" href="' + esc(e.p) + '#inversion">Ver su inversión en su portal ➔</a>' +
+        (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
+    }
     function muestra(e, fijo) {
       if (!e) return;
       if (dimP === 'deuda') { deuda(e, fijo); return; }
+      if (dimP === 'inversion') { inversion(e, fijo); return; }
       ficha.innerHTML = '<h3>' + esc(e.n) + '</h3><p class="pl-ficha-sub">Capital: ' + esc(e.cap) + ' · ' + num(e.pob, 0) + ' habitantes</p>' +
         '<dl class="pl-ficha-dl">' +
         fila('Le baja de la Federación', e.fed, 'derivado', 2026) +
@@ -126,7 +142,7 @@
     function elige(a, abrir) {
       var e = porA[a];
       if (!e) return;
-      if (abrir && sel && sel.a === a) { location.href = e.p + (dimP === 'deuda' ? '#deuda' : ''); return; }
+      if (abrir && sel && sel.a === a) { location.href = e.p + (dimP === 'deuda' ? '#deuda' : dimP === 'inversion' ? '#inversion' : ''); return; }
       sel = e;
       pinta();
       muestra(e, true);
@@ -183,7 +199,7 @@
     }
     var m = /[?&]e=([^&#]+)/.exec(location.search), pedida = null;
     try { pedida = m ? decodeURIComponent(m[1]) : null; } catch (err) { pedida = null; }
-    /* ?d=deuda (desde el Auditor): abre el mapa en esa dimensión. */
+    /* ?d=deuda o ?d=inversion (desde el Auditor): abre el mapa en esa dimensión. */
     var md = /[?&]d=([a-z]+)/.exec(location.search);
     if (md && D.dims[md[1]]) eligeDim(md[1]); else pinta();
     /* ?e=JAL&m=1 (desde el Auditor): si la entidad ya tiene el mapa de sus
@@ -210,7 +226,11 @@
     var porC = {}, lente = D.lentes[0], sel = null, ficha = document.getElementById('plMunFicha');
     D.m.forEach(function (x) { porC[x.c] = x; });
     var paths = document.querySelectorAll('.pl-mun');
-    function fmt(v) { return v == null ? '—' : lente.id === 'dep' ? num(v, 1) + '%' : mdp(v); }
+    function fmt(v) { return v == null ? '—' : lente.u === 'pct' ? num(v, 1) + '%' : mdp(v); }
+    /* ?ml=inv abre el mapa con esa lente (el portal lleva así desde «Su inversión»). */
+    var pedidaL = new URLSearchParams(location.search).get('ml');
+    D.lentes.forEach(function (l) { if (l.id === pedidaL) lente = l; });
+    Array.prototype.forEach.call(document.querySelectorAll('#mapa-municipios .pl-lente'), function (b) { b.setAttribute('aria-checked', b.getAttribute('data-l') === lente.id ? 'true' : 'false'); });
     function cortes() {
       var v = D.m.map(function (x) { return x[lente.id]; }).filter(function (x) { return x != null; }).sort(function (a, b) { return a - b; });
       return [1, 2, 3, 4].map(function (k) { return v[Math.round(k * v.length / 5)]; });
@@ -249,7 +269,8 @@
         '<dt>Participaciones</dt><dd>' + mdp(x.part) + ' ' + chip('oficial') + '</dd>' +
         '<dt>Aportaciones (FORTAMUN ' + mdp(x.fort) + ' · FISMDF ' + mdp(x.fis) + ')</dt><dd>' + mdp(x.aport) + ' ' + chip('oficial') + '</dd>' +
         '<dt>Predial cobrado</dt><dd>' + mdp(x.predial) + ' ' + chip('oficial') + '</dd>' +
-        '<dt>Dependencia de transferencias</dt><dd>' + (x.dep == null ? '—' : num(x.dep, 1) + '%') + ' ' + chip('derivado') + '</dd></dl>' +
+        '<dt>Dependencia de transferencias</dt><dd>' + (x.dep == null ? '—' : num(x.dep, 1) + '%') + ' ' + chip('derivado') + '</dd>' +
+        (x.inv == null ? '' : '<dt>Inversión pública' + (x.invp == null ? '' : ' ($' + num(x.invp, 1) + ' de cada $100 de su egreso ' + chip('derivado') + ')') + '</dt><dd>' + mdp(x.inv) + ' ' + chip('oficial') + '</dd>') + '</dl>' +
         '<a class="pl-ficha-ir" href="' + ente + '">Su estado de cuenta y salud financiera ➔</a>';
     }
     function elige(c) {

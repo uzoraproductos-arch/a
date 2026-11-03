@@ -124,7 +124,9 @@ def mapa(base, ref, raiz):
                   '; '.join('%s, %s' % (x['n'].lower() if x['n'].startswith(('No ', 'Componente')) else x['n'], mdp(x['mdp'])) for x in sin),
                   (' Quedan %s de redondeo a décimas.' % mdp(abs(resto))) if abs(resto) >= 0.5 else ''))
     deuda_f = sorted(set(e['deudaFuente'] for e in E), key=len)[0]
-    sems = sorted(set(e['semaforoDeuda'] for e in E))
+    # Tlaxcala no tiene semáforo (LDF, art. 43): no se cuenta entre los medidos.
+    sems = sorted(set(e['semaforoDeuda'] for e in E if e['semaforoDeuda']))
+    sin_sem = [e['name'] for e in E if not e['semaforoDeuda']]
     IE = base['inspector_estatal']['entidades']
 
     def cuadra_pct(a):
@@ -134,6 +136,7 @@ def mapa(base, ref, raiz):
         fed = x['cpR28'] + x['cpR33']
         return round(abs(x['inegiPart'] + x['inegiAportSinConvenios'] - fed) / fed * 100, 2)
     sin_cuadre = [e['abbr'] for e in E if cuadra_pct(e["abbr"]) is None]
+    sin_inv = [e['abbr'] for e in E if e.get('invPub') is None]
     import am_basura  # aquí: am_basura importa este módulo
     obras = {}
     for o in am_basura.OBRAS_MAPA:
@@ -158,11 +161,27 @@ def mapa(base, ref, raiz):
          'falta_txt': 'La Ciudad de México no figura en la estadística estatal del INEGI: su dependencia sigue pendiente.'},
         {'id': 'deuda', 'nom': 'Deuda registrada', 'fmt': 'mdp', 'est': 'oficial', 'pal': 'rojo', 'suma': True,
          'que': 'Lo que cada gobierno estatal debe según el Sistema de Alertas de Hacienda. ' + (
-             'Las 32 están hoy en semáforo %s.' % sems[0].lower() if len(sems) == 1 else 'El color del semáforo va en su ficha.'),
+             ('Las %d que mide están hoy en semáforo %s.' % (len(E) - len(sin_sem), sems[0].lower()) if len(sems) == 1 else 'El color del semáforo va en su ficha.') + (
+             ' %s no se mide: no tiene deuda inscrita en el Registro Público Único, y Hacienda no le publica semáforo (LDF, art. 43).' % ' ni '.join(sin_sem) if sin_sem else '')),
          'fuente': '%s %s' % (deuda_f, ref('ref-shcp-alertas'))},
         {'id': 'asf', 'nom': 'Por aclarar ante la ASF', 'fmt': 'mdp', 'est': 'oficial', 'pal': 'rojo', 'suma': True,
          'que': 'Lo que la Auditoría Superior de la Federación dejó por aclarar del dinero federal que recibió cada estado en 2024.',
          'fuente': '%s %s' % (E[0]['asfFuente'], ref('ref-asf-mdb2024'))},
+        # La inversión (03-11-2026, dimensión «Inversión» del Planisferio):
+        # las dos vías por las que un gobierno estatal hace obra, que no se
+        # suman (anclar_egresos_entidades.py).
+        {'id': 'inv', 'nom': 'Obra que hizo el estado', 'fmt': 'mdp', 'est': 'oficial', 'pal': 'verde', 'suma': True,
+         'que': ('Lo que el gobierno del estado gastó en 2024 en su capítulo de inversión pública: la obra que contrató o hizo por su cuenta. '
+                 'No cuenta la que hace por medio de sus organismos de obra; esa va en la lente siguiente.'),
+         'fuente': '%s %s' % (C['invPub']['fuente'], ref(C['invPub']['ref'])),
+         'falta': sin_inv, 'falta_pend': 'entidades-' + '-'.join(sin_inv).lower(),
+         'falta_txt': 'La Ciudad de México no figura en la estadística estatal del INEGI: su inversión sigue pendiente.'},
+        {'id': 'invt', 'nom': 'A sus organismos de obra', 'fmt': 'mdp', 'est': 'oficial', 'pal': 'verde', 'suma': True,
+         'que': ('Lo que el gobierno del estado les pasó en 2024 a sus organismos de infraestructura (juntas de caminos, comisiones de agua, institutos de obra). '
+                 'Con eso hacen obra, pero también pagan su nómina y su operación: por eso no se suma a la obra directa.'),
+         'fuente': '%s %s' % (C['invInfra']['fuente'], ref(C['invInfra']['ref'])),
+         'falta': sin_inv, 'falta_pend': 'entidades-' + '-'.join(sin_inv).lower(),
+         'falta_txt': 'La Ciudad de México no figura en la estadística estatal del INEGI: sus transferencias siguen pendientes.'},
         # Las dos lentes del mapa del dinero (pedido del autor, 02-11-2026:
         # «que el usuario pueda operar los mapas… inversión, contaminación,
         # deuda, falta de transparencia»). Ninguna cifra se escribe aquí: el
@@ -187,6 +206,7 @@ def mapa(base, ref, raiz):
         'e': [{'a': e['abbr'], 'n': e['name'], 'gasto': e['gasto'], 'r28': e['ramo28'], 'r33': e['ramo33'], 'pc': e['pc'],
                'dep': None if e['abbr'] in sin_dep else e['dep'], 'deuda': e['deuda'], 'sem': e['semaforoDeuda'],
                'asf': e['asfMontoObservado'], 'aud': e['asfAuditorias'], 'cuadre': cuadra_pct(e['abbr']),
+               'inv': e.get('invPub'), 'invt': e.get('invInfra'),
                'obras': sum(obras.get(e['abbr'], {}).values()), 'opub': obras.get(e['abbr'], {}).get('publico', 0),
                'opriv': obras.get(e['abbr'], {}).get('privado', 0)} for e in E],
         'sin_capa': 'Contaminación por estado: la plataforma todavía no tiene una cifra estatal cotejada; las cuentas ecológicas del INEGI que ya integra son nacionales.',
@@ -369,13 +389,13 @@ def municipios(base, ref, glos, raiz):
         <section class="pm" id="padron" aria-labelledby="ttMun4">
           <p class="pm-eq-n">4 de 4</p>
           <h2 class="pm-tit" id="ttMun4">Municipio por municipio</h2>
-          <p class="pm-txt">Los %s municipios del catálogo del INEGI, con lo que de verdad ingresó cada uno en %d: su predial, sus participaciones, sus dos fondos del Ramo 33 y qué tan dependiente resulta la suma. El que no rindió cuenta sigue en la lista, sin cifra: borrarlo falsearía el padrón y ponerle cero falsearía la cifra.</p>
+          <p class="pm-txt">Los %s municipios del catálogo del INEGI, con lo que de verdad ingresó cada uno en %d (su predial, sus participaciones, sus dos fondos del Ramo 33 y qué tan dependiente resulta la suma) y lo que pagó de inversión pública. El que no rindió cuenta sigue en la lista, sin cifra: borrarlo falsearía el padrón y ponerle cero falsearía la cifra.</p>
           <div class="tt-mun-mandos">
             <label class="tt-sel"><span>Entidad federativa</span><select id="ttMunSel"></select></label>
             <label class="tt-sel"><span>Buscar municipio</span><input type="search" id="ttMunBusca" placeholder="Escribe un nombre" autocomplete="off"></label>
             <label class="tt-sel"><span>Ordenar por</span><select id="ttMunOrden">
               <option value="nombre">Nombre (A–Z)</option><option value="ing">Ingreso total</option><option value="predial">Predial cobrado</option>
-              <option value="fortamun">FORTAMUN recibido</option><option value="fismdf">FISMDF recibido</option><option value="dep">Dependencia de transferencias</option></select></label>
+              <option value="fortamun">FORTAMUN recibido</option><option value="fismdf">FISMDF recibido</option><option value="dep">Dependencia de transferencias</option><option value="inv">Inversión pública</option></select></label>
           </div>
           <div id="ttMun" aria-live="polite"><noscript><p>El padrón necesita JavaScript. Los datos completos se descargan en <a href="descarga-los-datos.html">Datos</a>.</p></noscript></div>
         </section>

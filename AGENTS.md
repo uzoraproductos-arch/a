@@ -104,6 +104,30 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   porque el semáforo junta en verde a estados muy distintos, y lo dice. Lo
   que no se mide por ley va en gris como «no se mide», no como pendiente. Se
   abre con `planisferio.html?d=deuda` y cada portal la trae en `#deuda`.
+- **La inversión, tercera dimensión pintada** (03-11-2026). Lee `invPub`,
+  `invInfra` y `egr2024` de `DB.estados` (los escribe
+  `herramientas/anclar_egresos_entidades.py` desde la estadística estatal del
+  INEGI, con su tabla dentro del script y `--csv` para cotejarla contra el
+  archivo) y lo que dejó la ASF. **La obra directa y lo que pasa a los
+  organismos de obra nunca se suman**: con eso también se paga nómina. Se
+  abre con `planisferio.html?d=inversion` y cada portal la trae en
+  `#inversion`; en la Enciclopedia son las lentes `inv` e `invt` del mapa del
+  gasto federalizado. **La de cada municipio vive en su propio archivo**
+  (`municipios-inversion.js`, que escribe
+  `herramientas/anclar_inversion_municipios.py <zip municipal del INEGI>`),
+  nunca como columna nueva del padrón, que se lee por posición; si no trae a
+  los mismos municipios con cuenta que el padrón, la generación se detiene.
+  El «egreso total» del INEGI incluye lo que quedó en caja: se dice «de cada
+  $100 de su egreso», no «de lo que gastó».
+- **Las leyes del dinero en los tres niveles** (03-11-2026,
+  `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
+  cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y
+  municipal. **No copia leyes ni pone una liga que no respondió al cotejo**:
+  una dirección sin verificar va con su nombre y «liga por cotejar». Las
+  fechas federales salen del índice de la Cámara de Diputados; si una ley se
+  reforma, se cambia su renglón en `FEDERALES`. Cada portal del Planisferio
+  la lee en `#leyes` y en «Las reglas de su deuda». El chat la abre con
+  `leyNivel()` de `asistente.js` antes que la ficha del estado.
 - **Vive en el Auditor:** «Ver en el Planisferio» es un renglón de
   `RECURSOS` (`asistente_recursos.py`, con `?e=` para abrir el mapa con la
   entidad elegida) y «planisferio» cuenta como pedir un mapa (`TIPOS_REC` de

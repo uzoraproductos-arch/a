@@ -108,7 +108,7 @@
     var MUN_NOM = { ing: 'ingresos totales de 2024', part: 'participaciones federales (Ramo 28)', aport: 'aportaciones federales (Ramo 33)',
       fortamun: 'FORTAMUN, la aportación para fortalecer al municipio', fismdf: 'FAIS municipal, para obras en zonas de pobreza',
       predial: 'lo que cobró de predial', propios: 'ingresos propios, lo que cobró por su cuenta', egr: 'egresos de 2024',
-      dep: 'dependencia de la Federación' };
+      dep: 'dependencia de la Federación', inv: 'inversión pública de 2024 (obra y proyectos productivos)' };
     /* Nombres de municipio que también son palabras comunes: solo cuentan si se dice «municipio». */
     var COMUN = ' centro reforma progreso victoria solidaridad libres union la union paz la paz general nacional independencia hidalgo morelos guerrero juarez allende zaragoza madero obregon mexico tabasco colima durango aguascalientes campeche chihuahua oaxaca puebla queretaro tlaxcala zacatecas tepic jalisco nuevo nombre jesus maria santiago san pedro trinidad libertad ';
     /* Nombres cortos que la gente dice sin su apellido («Tula» por Tula de Allende). */
@@ -127,8 +127,11 @@
         });
       });
     }
+    /* La inversión de cada municipio vive en su propio archivo (municipios-inversion.js). */
+    var MINV = window.AUDIT_MUN_INV || null;
     function mv(m, k) {
       if (!m.v) return null;
+      if (k === 'inv') { var iv = MINV && MINV.mun[m.cve]; return iv ? iv[0] / 1e6 : null; }
       if (k === 'dep') return m.v[MCAMPO.ing] ? (m.v[MCAMPO.part] + m.v[MCAMPO.aport]) / m.v[MCAMPO.ing] * 100 : null;
       return m.v[MCAMPO[k]];
     }
@@ -164,6 +167,8 @@
       ['ild', /libre disposicion|ingresos de libre/],
       ['aud', /cuantas auditorias|numero de auditorias|auditorias (le )?(hizo|hicieron|practic)/],
       ['asf', /aclarar|\basf\b|auditoria superior|robo|robaron|roban|transa|desfalc|desvi|chingaron|clavaron|embols|volaron|moche|corrup|irregular|observ|huec|fiscaliz|perdio|perdieron|desapareci/],
+      ['invt', /organismos? de (obra|infraestructura)|juntas? (estatal )?de caminos|institutos? de (obra|infraestructura)/],
+      ['inv', /invers|invierte|invirti|obra publica|obras? (que )?(hizo|hace|hicieron|construy)|cuanta obra|cuanto (gasto|gastaron|gasta) en obras?/],
       ['deuda', /deud|debe\b|deben\b|adeud|endeud|prestamo|prestado|credito|empenad/],
       ['dep', /depend|mantenid|vive de|viven de|colgad|autonom|de la federacion vive/],
       ['propia', /recaud|cobra por su cuenta|sus propios|ingresos propios|impuestos propios|cobran ellos|genera(n)? (su|sus)/],
@@ -172,7 +177,7 @@
       ['pob', /poblacion|habitantes tiene|cuanta gente|cuantas personas|cuantos habitantes|cuantos viven/],
       ['gasto', /recib|le (dan|mandan|llega|llegan|toca|tocan|manda|pasan|da)|les (dan|mandan|llega|toca)|transfer|federaliz|ramos? 28 y 33|presupuesto|cuanto dinero|cuanta (lana|feria)|cuanto (varo|baro)|dinero (le|les)|lana|varo|feria|cuanto tiene/]
     ];
-    var MET_MUN = [['predial', /predial/], ['fortamun', /fortamun|fortalecimiento/], ['fismdf', /\bfais\b|fismdf|infraestructura social/],
+    var MET_MUN = [['inv', /invers|invierte|invirti|obra publica|obras? (que )?(hizo|hicieron|construy)/], ['predial', /predial/], ['fortamun', /fortamun|fortalecimiento/], ['fismdf', /\bfais\b|fismdf|infraestructura social/],
       ['dep', /depend|mantenid|vive de|colgad|autonom/], ['propios', /propio|recaud|cobra por su cuenta|cobran ellos|genera/],
       ['part', /participacion|ramo 28/], ['aport', /aportacion|ramo 33/], ['egr', /gast|egres/],
       ['ing', /ingres|recib|dinero|presupuesto|lana|varo|feria|tiene|maneja|le (dan|llega|toca)/]];
@@ -212,7 +217,7 @@
     function edoMet(e, k, porHab) {
       var m = M[k] || {}, v = e[k], fu = [fuenteDe(k, e)], h = '';
       if (v == null && (k === 'sd' || k === 'ocp')) {
-        return { html: '<p><b>' + esc(e.n) + '</b> no se mide en el Sistema de Alertas: no tiene deuda inscrita en el Registro Público Único, y la Ley de Disciplina Financiera (art. 14) la cuenta como de endeudamiento sostenible. Por eso no tiene ese indicador.</p>',
+        return { html: '<p><b>' + esc(e.n) + '</b> no se mide en el Sistema de Alertas: no tiene deuda inscrita en el Registro Público Único, y el Sistema de Alertas solo evalúa a quien la tiene (Ley de Disciplina Financiera, art. 43). Por eso no tiene ese indicador.</p>',
           fu: [fuenteDe('deuda', e)], ci: [], tit: e.n + ': ' + m.n };
       }
       if (v == null && k !== 'sem') return { html: pendEdo(e, k), fu: [pendFu(e, k)], ci: [], tit: e.n + ': ' + m.n };
@@ -244,6 +249,9 @@
         h = '<p>Lo que <b>' + esc(e.n) + '</b> debía a corto plazo, a proveedores y a contratistas, menos lo que tenía en efectivo, bancos e inversiones temporales, equivale al ' + V + ' de sus ingresos totales de 2025.' +
           (v < 0 ? ' Sale negativo: tenía en caja más que esas deudas.' : '') + ' Es el tercer indicador del Sistema de Alertas de Hacienda.' + lugarTxt('ocp', e, 'de mayor a menor') + '</p>';
         fu.push(LUGAR);
+      } else if (k === 'sem' && !e.sem) {
+        h = '<p>Hacienda no le publica semáforo a <b>' + esc(e.n) + '</b>: no tiene deuda inscrita en el Registro Público Único, y el Sistema de Alertas solo evalúa a quien la tiene (Ley de Disciplina Financiera, art. 43). No se mide; no es lo mismo que estar en verde.</p>';
+        fu = [fuenteDe('deuda', e, 'Semáforo y deuda')];
       } else if (k === 'sem') {
         h = '<p>Hacienda tiene a <b>' + esc(e.n) + '</b> en semáforo <b>' + esc((e.sem || '').toLowerCase()) + '</b>' + semTxt(e.sem) + '. Debe <b>' + fmt(e.deuda, 'mdp') + '</b>' + (e.ild != null ? ', el ' + fmt(e.ild, 'pct') + ' de sus ingresos de libre disposición' : '') + '.</p>';
         fu = [fuenteDe('deuda', e, 'Semáforo y deuda')];
@@ -277,11 +285,19 @@
       } else if (k === 'propia') {
         h = '<p>En 2024, <b>' + esc(e.n) + '</b> recaudó por su cuenta ' + V + ': impuestos estatales, derechos, cuotas y otros cobros.' + lugarTxt('propia', e, 'de mayor a menor') + '</p>';
         fu.push(LUGAR);
+      } else if (k === 'inv' || k === 'invt') {
+        var veces = e.inv ? e.invt / e.inv : null;
+        h = (k === 'inv' ?
+          '<p>En 2024, el gobierno de <b>' + esc(e.n) + '</b> gastó ' + V + ' en obra que contrató o hizo por su cuenta (su capítulo de inversión pública): <b>$' + n(e.inv / e.egr * 100, 1) + ' de cada $100</b> de su egreso total (que cuenta también lo que quedó en caja al cierre).' + lugarTxt('inv', e, 'de mayor a menor') + '</p>' :
+          '<p>En 2024, el gobierno de <b>' + esc(e.n) + '</b> les pasó ' + V + ' a sus organismos de infraestructura (juntas de caminos, comisiones de agua, institutos de obra).' + lugarTxt('invt', e, 'de mayor a menor') + '</p>') +
+          '<p class="pa-ojo">Ojo: un gobierno estatal hace obra por dos vías. ' + (k === 'inv' ? 'Además de la suya, les pasó <b>' + fmt(e.invt, 'mdp') + '</b> a sus organismos de obra' : 'Además, hizo <b>' + fmt(e.inv, 'mdp') + '</b> de obra directa') +
+          (veces > 1 ? ', ' + n(veces, 1) + ' veces su obra directa' : '') + '. Las dos no se suman: con lo que reciben, esos organismos también pagan su nómina y su operación.</p>';
+        fu.push(fuenteDe(k === 'inv' ? 'invt' : 'inv', e), { que: 'De cada $100 de su egreso', e: 'derivado', op: 'inversión pública ÷ total de egresos de 2024 (' + fmt(e.egr, 'mdp') + ') × 100' }, LUGAR);
       } else if (k === 'pob') {
         h = '<p><b>' + esc(e.n) + '</b> tiene ' + V + ' a mitad de 2026, según el CONAPO.' + lugarTxt('pob', e, 'de mayor a menor') + '</p>';
         fu.push(LUGAR);
       }
-      return { html: h, fu: fu, val: k === 'sem' ? null : { v: v, u: m.u }, ci: [{ v: fmt(v, m.u) || e.sem, etq: m.n, e: m.e, op: m.op }], tit: e.n + ': ' + m.n };
+      return { html: h, fu: fu, val: k === 'sem' ? null : { v: v, u: m.u }, ci: [{ v: fmt(v, m.u) || e.sem || 'No se mide', etq: m.n, e: m.e, op: m.op }], tit: e.n + ': ' + m.n };
     }
 
     function edoResumen(e) {
@@ -296,9 +312,10 @@
     /* Cómo se dice cada cifra en «el estado con más…». */
     var RK = { deuda: 'deuda', ild: 'deuda frente a sus ingresos de libre disposición', sd: 'pago de deuda frente a sus ingresos de libre disposición', ocp: 'deudas de corto plazo frente a sus ingresos', asf: 'dinero por aclarar ante la ASF', aud: 'auditorías de la ASF',
       radar: 'dinero por aclarar de cada $100 revisados', gasto: 'dinero federal en 2026 (Ramos 28 y 33)', r28: 'participaciones', r33: 'aportaciones',
-      pc: 'dinero federal por habitante', dep: 'dependencia de la Federación', propia: 'recaudación propia', pob: 'población' };
+      pc: 'dinero federal por habitante', dep: 'dependencia de la Federación', propia: 'recaudación propia', pob: 'población',
+      inv: 'obra directa del gobierno del estado (2024)', invt: 'dinero a sus organismos de obra (2024)' };
     var RKM = { ing: 'ingresos', part: 'participaciones', aport: 'aportaciones', fortamun: 'FORTAMUN', fismdf: 'FAIS municipal', predial: 'cobro de predial',
-      propios: 'ingresos propios', egr: 'egresos', dep: 'dependencia de la Federación' };
+      propios: 'ingresos propios', egr: 'egresos', dep: 'dependencia de la Federación', inv: 'inversión pública (obra y proyectos productivos)' };
     function ranking(k, dir, cuantos, porHab) {
       var m = M[k], rk = RK[k] || m.n;
       var val = function (x) { return porHab && k !== 'pc' ? (x[k] != null && x.pob ? x[k] * 1e6 / x.pob : null) : x[k]; };
@@ -380,6 +397,14 @@
         h = '<p><b>' + nom + '</b> tuvo ingresos por <b>' + grande(ing, 1) + '</b> en 2024. De cada $100, <b>$' + n(mv(m, 'dep'), 1) + '</b> llegaron de la Federación (participaciones y aportaciones) y <b>$' + n(mv(m, 'propios') / ing * 100, 1) + '</b> los cobró por su cuenta.' +
           (mv(m, 'predial') ? ' Solo de predial juntó <b>' + grande(mv(m, 'predial'), 1) + '</b>.' : '') + (L.de > 1 ? ' Es el lugar <b>' + L.l + ' de ' + L.de + '</b> en ingresos de ' + esc(m.en) + '.' : '') + '</p>';
         fu.push(munFu('dep'), munFu('propios'), { que: 'Porcentajes y lugar', e: 'derivado', op: 'parte ÷ ingresos totales × 100; lugar entre los municipios del estado con cifra' });
+      } else if (k === 'inv' && mv(m, 'inv') != null) {
+        L = munLugar(m, 'inv');
+        var mi = mv(m, 'inv'), me = mv(m, 'egr');
+        h = mi === 0 ? '<p><b>' + nom + '</b> rindió su cuenta de 2024 al INEGI sin capítulo de inversión pública: reportó <b>$0</b> en obra pública y proyectos productivos.</p>' :
+          '<p>En 2024, <b>' + nom + '</b> pagó <b>' + grande(mi, 1) + '</b> de inversión pública: obra pública y proyectos productivos, con su dinero y con el que le llega (el FAIS municipal incluido). ' +
+          (me ? 'Son <b>$' + n(mi / me * 100, 1) + ' de cada $100</b> de su egreso total, que cuenta también lo que quedó en caja al cierre.' : '') +
+          (L.de > 1 ? ' Lugar <b>' + L.l + ' de ' + L.de + '</b> en ' + esc(m.en) + '.' : '') + '</p>';
+        fu.push(munFu('egr'), { que: 'De cada $100 y lugar', e: 'derivado', op: 'inversión pública ÷ egresos totales × 100; lugar entre los municipios del estado con cifra' });
       } else if (k === 'dep') {
         h = '<p>De cada $100 que ingresó <b>' + nom + '</b> en 2024, <b>$' + n(mv(m, 'dep'), 1) + '</b> llegaron de la Federación (participaciones y aportaciones). Lo que cobró por su cuenta fue $' + n(mv(m, 'propios') / ing * 100, 1) + ' de cada $100.</p>';
         fu.push(munFu('propios'));
@@ -1646,7 +1671,8 @@
         var km = metrica(t, MET_MUN) || (sigue && ctx.tipo === 'mun' ? ctx.met : '');
         if (!mm) return fin(conLiga(munRanking(km, dir, cuantos, es[0]), 'numeros-baja-al-territorio.html', 'Baja al territorio'), { tipo: 'mun', met: km });
         var rm = munMet(mm.m, km, mm.otros);
-        rm.ir = ['herramienta-inspector-entes.html#ente=municipal:' + mm.m.cve, 'su ficha técnica en el Auditor de entes públicos'];
+        rm.ir = km === 'inv' && mm.m.v ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html?ml=inv#mapa-municipios', 'sus municipios en el Planisferio']
+          : ['herramienta-inspector-entes.html#ente=municipal:' + mm.m.cve, 'su ficha técnica en el Auditor de entes públicos'];
         rm.ficha = B.fichas.filter(function (f) { return f.t === 'municipio' && f.ir[0].slice(-5) === mm.m.cve; })[0];
         return fin(rm, { tipo: 'mun', met: km, mun: mm.m });
       }
@@ -1686,6 +1712,8 @@
       if (k && PCT.test(t) && M[k] && M[k].suma && !porHab) return fin(conLiga(parte(e, k), MAPA[0], MAPA[1]), { tipo: 'edo', met: k, es: es });
       var re2 = k ? edoMet(e, k, porHab) : edoResumen(e);
       re2.ir = ['herramienta-inspector-entes.html#ente=estatal:' + e.a, 'su ficha técnica en el Auditor de entes públicos'];
+      // La inversión vive en su portal del Planisferio (planisferio.py, #inversion).
+      if (k === 'inv' || k === 'invt') re2.ir = ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html#inversion', 'su inversión en el Planisferio'];
       re2.ficha = B.fichas.filter(function (f) { return f.t === 'entidad' && f.tit === e.n; })[0];
       re2.tit = re2.tit || e.n;
       if (!k) re2.sug = ['¿Qué lugar ocupa ' + e.n + ' en deuda?', '¿Cuánto recibe ' + e.n + ' por habitante?', 'Municipios de ' + e.n + ' que más ingresan'];

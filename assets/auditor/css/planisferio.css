@@ -13,13 +13,13 @@
 .pl-cont-f { margin: 0; font-size: 13px; line-height: 1.5; color: #5a6782; }
 
 .pl-dims { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 12px; }
-.pl-dim { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 8px 14px; border-radius: 14px; border: 1px solid #c7d1e3; background: #fff; color: #0b2a63; font: inherit; font-weight: 700; cursor: pointer; text-align: left; }
+.pl-dim { display: inline-grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 8px; min-height: 48px; padding: 8px 14px; border-radius: 14px; border: 1px solid #c7d1e3; background: #fff; color: #0b2a63; font: inherit; font-weight: 700; cursor: pointer; text-align: left; }
 .pl-dim small { display: block; font-weight: 600; font-size: 12px; color: #5a6782; }
 .pl-dim-n { display: block; font-size: 16px; }
 .pl-dim[aria-selected="true"] { background: #0b2a63; border-color: #0b2a63; color: #fff; }
 .pl-dim[aria-selected="true"] small { color: #dfe7f6; }
 .pl-dim-prox { border-style: dashed; }
-.pl-dim-ico { font-size: 20px; }
+.pl-dim-ico { font-size: 20px; grid-row: span 2; }
 .pl-dim-aviso { margin: 0 0 12px; padding: 12px 14px; border-radius: 12px; background: #fff8e6; border: 1px solid #f0d98f; font-size: 15px; line-height: 1.5; color: #4a3a0c; }
 .pl-dim-aviso a { color: #0b2a63; font-weight: 700; }
 
@@ -109,3 +109,9 @@
 /* La dimensión de la deuda (03-11-2026). */
 .pl-dim-nota { margin: 12px 0 0; padding: 12px 14px; border-radius: 12px; background: #fdf1ef; border: 1px solid #f2b3aa; font-size: 16px; line-height: 1.55; color: #4a1a14; }
 .pl-piso-deuda { border-top-color: #b3261e; }
+.pl-piso-inv { border-top-color: #2e8a4c; }
+.pl-piso-asf { border-top-color: #e06f60; }
+/* Las reglas de su deuda y sus leyes del dinero (03-11-2026). */
+.pl-reglas { margin: 18px 0 0; padding: 14px 16px; border-left: 4px solid #b3261e; background: var(--bg-card, transparent); }
+.pl-reglas ul, .leg-niveles { margin: 8px 0 0; padding-left: 20px; }
+.pl-reglas li, .leg-niveles li { margin: 0 0 8px; line-height: 1.5; }

@@ -513,7 +513,7 @@
             '<small>Ramo 28: $' + n(e.r28, 1) + ' mdp · Ramo 33: $' + n(e.r33, 1) + ' mdp · $' + n(e.pc, 0) + ' por habitante</small></dd></div>' +
           '<div><dt>Por aclarar ante la ASF en el estado (CP 2024)</dt>' +
             '<dd><b class="ab-num">$' + n(e.asf, 1) + ' mdp</b> ' + chip('oficial') +
-            '<small>En ' + n(e.aud, 0) + ' auditorías al gasto federalizado · Deuda estatal: $' + n(e.deuda, 1) + ' mdp (semáforo ' + esc(e.sem) + ')</small></dd></div>' +
+            '<small>En ' + n(e.aud, 0) + ' auditorías al gasto federalizado · Deuda estatal: $' + n(e.deuda, 1) + ' mdp (' + (e.sem ? 'semáforo ' + esc(e.sem) : 'sin semáforo: no se mide') + ')</small></dd></div>' +
         '</dl>' +
         notaFiltro +
         '<div class="ab-ficha-obras">' + tarjetasObra + '</div>' +

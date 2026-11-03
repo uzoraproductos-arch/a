@@ -554,7 +554,10 @@
   },
   {
    "q": "¿Qué es la LGRA?",
-   "ir": "fuentes-oficiales.html#ref-lgra"
+   "ir": "marco-legal-tres-niveles.html#ley-lgra",
+   "dice": [
+    "en toda la República"
+   ]
   },
   {
    "q": "¿Cuánto gana un juez?",
@@ -1573,6 +1576,89 @@
    "ir": "herramienta-inspector-entes.html#ente=estatal:TLAX",
    "dice": [
     "no se mide en el Sistema de Alertas"
+   ]
+  },
+  {
+   "q": "¿Dónde se publica la ley de ingresos de Jalisco?",
+   "ir": "marco-legal-tres-niveles.html#edo-jal",
+   "dice": [
+    "El Estado de Jalisco"
+   ]
+  },
+  {
+   "q": "¿Quién aprueba la ley de ingresos de un municipio?",
+   "ir": "marco-legal-tres-niveles.html#municipal",
+   "dice": [
+    "congreso del estado"
+   ]
+  },
+  {
+   "q": "Ley de adquisiciones federal",
+   "ir": "marco-legal-tres-niveles.html#ley-laassp",
+   "dice": [
+    "abrogó la del 4 de enero de 2000"
+   ]
+  },
+  {
+   "q": "Ley de responsabilidad patrimonial del Estado",
+   "ir": "marco-legal-tres-niveles.html#ley-lfrpe"
+  },
+  {
+   "q": "Las leyes de ingresos de los tres niveles de gobierno",
+   "ir": "marco-legal-tres-niveles.html"
+  },
+  {
+   "q": "Ley Federal de Deuda Pública",
+   "ir": "marco-legal-tres-niveles.html#ley-lfdp",
+   "dice": [
+    "está en la LDF"
+   ]
+  },
+  {
+   "q": "¿En qué semáforo de deuda está Tlaxcala?",
+   "dice": [
+    "no le publica semáforo"
+   ]
+  },
+  {
+   "q": "Muéstrame la inversión de Yucatán en el planisferio",
+   "ir": "planisferio.html?d=inversion&e=YUC"
+  },
+  {
+   "q": "¿Cuánto invirtió Yucatán en obra pública?",
+   "ir": "planisferio-yuc.html#inversion",
+   "dice": [
+    "de cada $100",
+    "organismos de obra"
+   ]
+  },
+  {
+   "q": "¿Cuánto les pasó Jalisco a sus organismos de obra?",
+   "ir": "planisferio-jal.html#inversion",
+   "dice": [
+    "organismos de infraestructura",
+    "no se suman"
+   ]
+  },
+  {
+   "q": "¿Cuánto invirtió la Ciudad de México en obra pública?",
+   "ir": "planisferio-cdmx.html#inversion",
+   "dice": [
+    "no figura en la estadística estatal"
+   ]
+  },
+  {
+   "q": "¿Cuánto invirtió el municipio de Zapopan en obra pública?",
+   "ir": "planisferio-jal.html?ml=inv#mapa-municipios",
+   "dice": [
+    "de inversión pública",
+    "de cada $100"
+   ]
+  },
+  {
+   "q": "¿Qué municipios de Jalisco invierten más en obra pública?",
+   "dice": [
+    "inversión pública"
    ]
   }
  ]

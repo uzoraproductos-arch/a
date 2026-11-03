@@ -24,12 +24,13 @@ nunca dinero que se mueve en tiempo real).
 
 Cada entidad tiene su portal (planisferio-<clave>.html) con sus tres
 presupuestos, su ritmo, sus municipios uno por uno y la puerta a las otras
-dimensiones. Las dimensiones que aún no se pintan en el Planisferio (deuda,
-inversión, ambiental, legislativa, judicial) llevan a donde la Enciclopedia
-ya las tiene: un enlace roto detiene la generación.
+dimensiones. Ya se pintan la financiera, la deuda y la inversión; las que aún
+no (ambiental, legislativa, judicial) llevan a donde la Enciclopedia ya las
+tiene: un enlace roto detiene la generación.
 
 Lo usa apartados.generar(); lo interactivo vive en planisferio.js.
 """
+import html
 import json
 import os
 import subprocess
@@ -53,8 +54,8 @@ DIMENSIONES = [
      'Lo que debe cada gobierno estatal según el Sistema de Alertas de Hacienda, con sus tres indicadores y su semáforo.',
      'numeros-mapa-del-gasto-federalizado.html?l=deuda', 'numeros-mapa-del-gasto-federalizado.html?l=deuda&e=%s', True),
     ('inversion', '🏗️', 'Inversión',
-     'Las obras que tocan a cada estado y lo que la ASF dejó por aclarar del dinero federal que recibió.',
-     'numeros-mapa-del-gasto-federalizado.html?l=obras', 'numeros-mapa-del-gasto-federalizado.html?l=obras&e=%s', False),
+     'La obra que hace cada gobierno estatal, directa o por medio de sus organismos, y lo que la ASF dejó por aclarar del dinero federal que recibió.',
+     'numeros-mapa-del-gasto-federalizado.html?l=inv', 'numeros-mapa-del-gasto-federalizado.html?l=inv&e=%s', True),
     ('ambiental', '🌎', 'Ambiental',
      'Las megaobras y crisis con alerta ambiental, separando el gasto público de la inversión privada.',
      'datos-ambiente-megaobras.html#abMapaObras', 'datos-ambiente-megaobras.html?e=%s#abMapaObras', False),
@@ -116,7 +117,26 @@ LENTES_MUN = [
      'Lo que cada municipio cobró de impuesto predial en 2024: el impuesto que la Constitución le reserva (art. 115, fr. IV).'),
     ('dep', 'Dependencia de transferencias', 'rojo',
      'De cada $100 que ingresó en 2024, cuántos llegaron de fuera: (participaciones + aportaciones) ÷ ingreso total × 100.'),
+    ('inv', 'Inversión pública', 'verde',
+     'La obra pública y los proyectos productivos que pagó cada municipio en 2024: su capítulo de inversión pública. Un municipio con cuenta y sin ese capítulo reportó $0.'),
+    ('invp', 'Inversión de cada $100', 'verde',
+     'De cada $100 de su egreso de 2024, cuántos fueron a inversión pública: inversión ÷ egreso total × 100. El egreso total del INEGI cuenta también lo que quedó en caja al cierre. Ojo: donde el fondo de infraestructura social municipal (FAIS) pesa mucho, la proporción sube sola, porque la ley lo destina a obra para la población en pobreza (Ley de Coordinación Fiscal, art. 33).'),
 ]
+PCT_MUN = ('dep', 'invp')
+
+
+def inv_mun(padron):
+    """La inversión de cada municipio (municipios-inversion.js, la escribe
+    anclar_inversion_municipios.py). Se detiene si no trae justo a los
+    municipios del padrón que rindieron cuenta."""
+    t = open(os.path.join(RAIZ, 'assets', 'auditor', 'js', 'municipios-inversion.js'), encoding='utf-8').read()
+    i = t.index('window.AUDIT_MUN_INV =') + len('window.AUDIT_MUN_INV =')
+    iv = json.loads(t[i:t.rindex(';')])
+    con = {m['cve'] + r[0] for m in padron['ent'].values() for r in m['lista'] if len(r) >= 10}
+    if set(iv['mun']) != con or iv['anio'] != padron['anio']:
+        raise SystemExit('planisferio: municipios-inversion.js no trae a los mismos municipios con cuenta que el padrón (sobran %s; faltan %s)' % (
+            sorted(set(iv['mun']) - con)[:5], sorted(con - set(iv['mun']))[:5]))
+    return iv
 
 MAPA_MUN = """<div class="pl-lentes" role="radiogroup" aria-label="Qué ver en el mapa de los municipios">%s</div>
           <p class="pl-que" id="plMunQue"></p>
@@ -126,7 +146,7 @@ MAPA_MUN = """<div class="pl-lentes" role="radiogroup" aria-label="Qué ver en e
               <figcaption class="pl-leyenda" id="plMunLeyenda"></figcaption>
             </figure>
             <aside class="pl-ficha" id="plMunFicha" aria-live="polite">
-              <p class="pl-ficha-vacia"><b>Toca un municipio.</b> Verás lo que ingresó en %d, de dónde le llegó y la puerta a su ficha en el Auditor de entes.</p>
+              <p class="pl-ficha-vacia"><b>Toca un municipio.</b> Verás lo que ingresó en %d, de dónde le llegó, lo que invirtió y la puerta a su ficha en el Auditor de entes.</p>
             </aside>
           </div>
           <p class="pl-pie">Límites: %s (<a href="%s">descarga del INEGI</a>), integrados el %s; huella SHA-256 del archivo de origen <code>%s</code>. Simplificados para verse en pantalla. %s
@@ -134,7 +154,7 @@ MAPA_MUN = """<div class="pl-lentes" role="radiogroup" aria-label="Qué ver en e
           <script type="application/json" id="plMunDatos">%s</script>"""
 
 
-def _mapa_mun(e, m, g, ref, padron):
+def _mapa_mun(e, m, g, ref, padron, iv):
     """El mapa de los municipios de una entidad, con sus cifras del padrón."""
     cves_geo = {x['c'] for x in g['m']}
     # Las claves 990 y más del catálogo del INEGI («No especificado», en el
@@ -153,6 +173,8 @@ def _mapa_mun(e, m, g, ref, padron):
             x.update({'ing': round(ing / 1e6, 1), 'part': round(part / 1e6, 1), 'aport': round(aport / 1e6, 1),
                       'predial': round(predial / 1e6, 1), 'fort': round(fortamun / 1e6, 1), 'fis': round(fismdf / 1e6, 1),
                       'dep': round((part + aport) / ing * 100, 1) if ing else None})
+            v = iv['mun'][m['cve'] + r[0]]
+            x.update({'inv': round(v[0] / 1e6, 1), 'invp': round(v[0] / r[9] * 100, 1) if r[9] else None})
         datos.append(x)
     svg = '<svg class="pl-svg pl-svg-mun" viewBox="0 0 %s %s" role="group" aria-label="Los municipios de %s">%s</svg>' % (
         g['vb'][0], g['vb'][1], e['name'], ''.join(
@@ -163,7 +185,7 @@ def _mapa_mun(e, m, g, ref, padron):
     sin = None if m['conCifra'] else ('Las alcaldías de la Ciudad de México no rinden cuenta municipal al INEGI: '
                                       'su dinero va dentro del presupuesto de la Ciudad.')
     info = {'ent': e['abbr'], 'cve': m['cve'], 'pend': 'municipios-sin-cuenta', 'anio': padron['anio'], 'sin': sin,
-            'lentes': [{'id': i, 'nom': n, 'pal': p, 'que': q} for i, n, p, q in LENTES_MUN], 'm': datos}
+            'lentes': [{'id': i, 'nom': n, 'pal': p, 'que': q, 'u': 'pct' if i in PCT_MUN else 'mdp'} for i, n, p, q in LENTES_MUN], 'm': datos}
     return MAPA_MUN % (
         '' if sin else lentes, svg, padron['anio'], g['fuente'], g['url'], g['integrado'], g['sha256'][:12] + '…', g['aviso'],
         padron['anio'], ref('ref-inegi-efipem'),
@@ -217,7 +239,12 @@ def _datos(base, padron):
             # que no se mide (hoy Tlaxcala) no trae indicadores: queda en gris.
             'deuda': e['deuda'], 'dpc': round(e['deuda'] * 1e6 / e['pobPersonas']),
             'ild': e['deudaIld'] if _medida(e) else None, 'sd': e.get('deudaSd'), 'ocp': e.get('deudaOcp'),
-            'ildm': e.get('ildMdp'), 'sem': SEMAFORO[e['semaforoDeuda']],
+            'ildm': e.get('ildMdp'), 'sem': SEMAFORO[e['semaforoDeuda']] if _medida(e) else 'No se mide',
+            # La inversión (INEGI, finanzas estatales 2024; la Ciudad de México
+            # no figura en el conjunto estatal) y lo que dejó la ASF.
+            'inv': e.get('invPub'), 'invt': e.get('invInfra'),
+            'invp': round(e['invPub'] / e['egr2024'] * 100, 1) if e.get('invPub') is not None else None,
+            'asf': e['asfMontoObservado'], 'aud': e['asfAuditorias'],
         })
     return filas
 
@@ -261,6 +288,19 @@ LENTES = [
     {'id': 'ocp', 'dim': 'deuda', 'fmt': 'pct', 'nom': 'Deudas de corto plazo', 'pal': 'rojo', 'est': 'oficial', 'anio': 2025,
      'que': ('Tercer indicador: lo que debe a corto plazo, a proveedores y a contratistas, menos lo que tiene en efectivo, bancos e inversiones temporales, '
              'entre sus ingresos totales. Si sale negativo, tenía en caja más que esas deudas.')},
+    # La inversión (03-11-2026): las dos vías por las que un gobierno estatal
+    # hace obra, que no se suman, y lo que dejó por aclarar la ASF.
+    {'id': 'inv', 'dim': 'inversion', 'fmt': 'mdp', 'nom': 'Obra que hizo el estado', 'pal': 'verde', 'est': 'oficial', 'anio': 2024,
+     'que': ('Lo que el gobierno del estado gastó en su capítulo de inversión pública: la obra que contrató o hizo por su cuenta. '
+             'No cuenta la que hace por medio de sus organismos de obra: esa es otra lente, y no se suman.')},
+    {'id': 'invp', 'dim': 'inversion', 'fmt': 'pct', 'nom': 'De cada $100 de su egreso', 'pal': 'verde', 'est': 'derivado', 'anio': 2024,
+     'que': 'La misma obra directa, entre todo el egreso del gobierno del estado en el año: cuántos de cada $100 se fueron en obra que hizo él mismo. El egreso total del INEGI cuenta también lo que quedó en caja al cierre (disponibilidad final).'},
+    {'id': 'invt', 'dim': 'inversion', 'fmt': 'mdp', 'nom': 'A sus organismos de obra', 'pal': 'verde', 'est': 'oficial', 'anio': 2024,
+     'que': ('Lo que el gobierno del estado les pasó a sus organismos de infraestructura: juntas de caminos, comisiones de agua, institutos de obra. '
+             'Con eso hacen obra, pero también pagan su nómina y su operación.')},
+    {'id': 'asf', 'dim': 'inversion', 'fmt': 'mdp', 'nom': 'Por aclarar ante la ASF', 'pal': 'rojo', 'est': 'oficial', 'anio': 2024,
+     'que': ('Lo que la Auditoría Superior de la Federación dejó por aclarar del dinero federal que recibió cada estado (Cuenta Pública 2024). '
+             'Por aclarar no es robado: es dinero cuyo destino no quedó acreditado. Es todo el dinero federal auditado, no solo el de obra.')},
 ]
 
 
@@ -273,7 +313,12 @@ def _fuentes(ref, base=None):
             sorted(set(e['deudaFuente'] for e in E), key=len)[0], ref('ref-shcp-alertas'), doc['url'], doc['sha256'][:12], pagina)
         ind = (' Las tres mediciones y su resultado (sostenible, en observación o elevado) las define el Reglamento del Sistema de Alertas; '
                'el archivo las publica por entidad.')
-        extra = {'deuda': sda, 'ild': sda + ind, 'sd': sda + ind, 'ocp': sda + ind,
+        C = base['fiscalEntidades']['campos']
+        extra = {'inv': '%s %s.' % (C['invPub']['fuente'], ref(C['invPub']['ref'])),
+                 'invt': '%s %s.' % (C['invInfra']['fuente'], ref(C['invInfra']['ref'])),
+                 'invp': 'Inversión pública ÷ total de egresos del gobierno del estado en 2024 × 100; los dos del INEGI, finanzas públicas estatales %s. La división es nuestra.' % ref(C['egr2024']['ref']),
+                 'asf': '%s %s.' % (E[0]['asfFuente'], ref('ref-asf-mdb2024')),
+                 'deuda': sda, 'ild': sda + ind, 'sd': sda + ind, 'ocp': sda + ind,
                  'dpc': ('Deuda al cierre de 2025 (Sistema de Alertas %s) ÷ población a mitad de 2026 (CONAPO). La división es nuestra; '
                          'los años no coinciden porque es la deuda que hereda quien vive hoy en el estado.') % ref('ref-shcp-alertas')}
     return dict(extra, **{
@@ -339,21 +384,36 @@ def pagina_mapa(base, ref, tres, padron):
     }
     for i in ('ild', 'sd', 'ocp'):
         falta[i] = {'a': no_med, 'gris': 'no se mide', 'pend': None,
-                    'txt': ('%s no se mide: no tiene deuda inscrita en el Registro Público Único, y la Ley de Disciplina Financiera (art. 14) '
-                            'la cuenta como sostenible.') % ' ni '.join(nombre[a] for a in no_med)}
+                    'txt': ('%s no se mide: no tiene deuda inscrita en el Registro Público Único, y el Sistema de Alertas solo evalúa a quien '
+                            'la tiene (Ley de Disciplina Financiera, art. 43). Hacienda no le publica semáforo.') % ' ni '.join(nombre[a] for a in no_med)}
+    sin_inv = [f['a'] for f in filas if f['inv'] is None]
+    for i in ('inv', 'invp', 'invt'):
+        falta[i] = {'a': sin_inv, 'gris': 'sin cifra', 'pend': 'entidades-' + '-'.join(sin_inv).lower(),
+                    'txt': 'La Ciudad de México no figura en la estadística estatal del INEGI: su inversión sigue pendiente.'}
+    # El punto ciego de la inversión: el capítulo de inversión pública, solo,
+    # hace ver «sin obra» a quien la hace por medio de sus organismos.
+    con_inv = [f for f in filas if f['inv'] is not None]
+    mas = sorted((f for f in con_inv if f['invt'] > f['inv']), key=lambda f: -(f['invt'] / max(f['inv'], 0.1)))
+    nota_inv = ('<b>Lo que el capítulo de obra no dice.</b> Un gobierno estatal hace obra por dos vías: la que contrata él mismo (su capítulo de inversión pública) '
+                'y la que les encarga a sus organismos de infraestructura, a los que les pasa dinero como transferencia. En %d de las %d entidades con cifra, '
+                'lo que pasó a esos organismos fue más que su obra directa. %s hizo obra directa por %s %s y les pasó %s %s a sus organismos: '
+                'en el mapa de la obra directa sale en el lugar %d de %d. Por eso aquí van las dos lentes, separadas: lo de los organismos también paga su nómina y su operación, '
+                'así que sumarlas inflaría la obra.') % (
+                    len(mas), len(con_inv), mas[0]['n'], mdp(mas[0]['inv']), chip('oficial'), mdp(mas[0]['invt']), chip('oficial'),
+                    sorted(con_inv, key=lambda f: -f['inv']).index(mas[0]) + 1, len(con_inv))
     # El punto ciego del semáforo: si todas comparten color, el color no
     # distingue a la más endeudada de la menos. Se dice con las cifras.
     med = sorted((f for f in filas if f['ild'] is not None), key=lambda f: -f['ild'])
-    sems = sorted(set(f['sem'] for f in filas))
-    nota_deuda = ('<b>%s.</b> El semáforo de Hacienda pone a las %d en «%s»%s. Ese color junta a %s, que debe el equivalente a %s de sus ingresos de libre disposición, '
+    sems = sorted(set(f['sem'] for f in med))
+    nota_deuda = ('<b>%s.</b> El semáforo de Hacienda pone a las %d que mide en «%s»%s. Ese color junta a %s, que debe el equivalente a %s de sus ingresos de libre disposición, '
                   'con %s, que debe %s %s. Por eso el mapa no colorea por semáforo, sino por cifra: el verde quiere decir que, con esas tres mediciones, Hacienda considera sostenible su deuda, no que deban poco.' % (
                       'Lo que el semáforo no dice' if len(sems) == 1 else 'El semáforo no lo dice todo',
-                      len(filas), sems[0].lower() if len(sems) == 1 else ' y '.join(x.lower() for x in sems),
-                      ' (las que no se miden cuentan como sostenibles por ley)' if no_med else '',
+                      len(med), sems[0].lower() if len(sems) == 1 else ' y '.join(x.lower() for x in sems),
+                      ' (%s no se mide: no tiene deuda inscrita, LDF art. 43)' % ' ni '.join(nombre[a] for a in no_med) if no_med else '',
                       med[0]['n'], pct(med[0]['ild']), med[-1]['n'], pct(med[-1]['ild']), chip('oficial')))
     datos = {'lentes': [dict(l, fuente=fu[l['id']], falta=falta.get(l['id'])) for l in LENTES], 'e': filas,
              'dims': {i: {'n': nom, 'ir': ir, 'ire': ire, 'pinta': pinta} for i, _, nom, _, ir, ire, pinta in DIMENSIONES},
-             'notas': {'deuda': nota_deuda}}
+             'notas': {'deuda': nota_deuda, 'inversion': nota_inv}}
     svg = tm.mapa_svg(RAIZ).replace('tt-svg', 'pl-svg').replace('tt-edo', 'pl-edo').replace(
         'aria-label="Mapa de las 32 entidades"', 'aria-label="Planisferio: las 32 entidades de México"')
     indice = ''.join('<li><a href="%s">%s</a></li>' % (f['p'], f['n']) for f in sorted(filas, key=lambda x: clave(x['n'])))
@@ -389,8 +449,9 @@ def pagina_mapa(base, ref, tres, padron):
             {'id': 'mapa', 'titulo': 'El mapa: elige una dimensión',
              'texto': ('Hoy se pintan %s. La financiera son los tres pisos de la hacienda de cada entidad: lo que le baja de la Federación, lo que cobra por su cuenta y lo que ingresan sus municipios. '
                        'La deuda es lo que debe cada gobierno estatal y cuánto le pesa, con los tres indicadores del Sistema de Alertas de Hacienda. '
+                       'La inversión es la obra que hace cada gobierno estatal, directa o por medio de sus organismos, y lo que la Auditoría Superior dejó por aclarar. '
                        'Elige la dimensión y qué ver; el color compara a las 32 por quintiles (cinco grupos con el mismo número de entidades).') % (
-                           ('%d dimensiones: la %s' % (len(pintadas), ' y la '.join(d[2].lower() for d in pintadas))) if len(pintadas) > 1 else 'una dimensión'),
+                           ('%d dimensiones: la %s y la %s' % (len(pintadas), ', la '.join(d[2].lower() for d in pintadas[:-1]), pintadas[-1][2].lower())) if len(pintadas) > 1 else 'una dimensión'),
              'tarjetas': [], 'bloque': bloque_mapa},
             {'id': 'contadores', 'titulo': 'Los contadores del año',
              'texto': ('Los tres presupuestos de la Federación en 2026 (del Estado, nacional y social), lo que baja al territorio y lo que ingresan los municipios. '
@@ -450,15 +511,114 @@ def _deuda_portal(base, ref, e):
     else:
         p2 = ('<article class="pl-piso pl-piso-deuda"><p class="pl-piso-n">Cuánto le pesa · los tres indicadores</p>'
               '<p class="pl-piso-v"><b>No se mide</b> %s</p><p>%s no tiene deuda inscrita en el Registro Público Único, así que el Sistema de Alertas no le calcula '
-              'indicadores; la Ley de Disciplina Financiera (art. 14) la cuenta como de endeudamiento sostenible. No tener deuda inscrita no quiere decir no deberle '
+              'indicadores: la Ley de Disciplina Financiera (art. 43) solo manda evaluar a quien tiene deuda inscrita, y Hacienda no le publica semáforo. No tener deuda inscrita no quiere decir no deberle '
               'a nadie: los adeudos con proveedores, por ejemplo, no pasan por ese registro.</p><p class="pl-piso-f">%s</p></article>' % (
                   chip('oficial'), e['name'], fu['deuda']))
     ciego = ('<p class="pl-dim-nota">El semáforo verde quiere decir que, con sus tres mediciones, Hacienda considera sostenible su deuda, no que deba poco. El Sistema de Alertas solo mide la deuda inscrita '
              'en el Registro Público Único que se paga con ingresos de libre disposición; lo que se debe por otras vías no entra en estas cifras.</p>')
-    return '<div class="pl-pisos">%s%s</div>%s' % (p1, p2, ciego)
+    # Las reglas de su deuda (03-11-2026), cotejadas con su texto vigente.
+    import leyes_niveles as ln
+    techo = {'Verde': 15, 'Amarillo': 5, 'Rojo': 0}
+    if _medida(e):
+        t = techo[e['semaforoDeuda']]
+        r_techo = ('Con su nivel, la LDF (art. 46) le fija un techo de financiamiento neto de hasta el %d %% de sus ingresos de libre disposición '
+                   '(15 %% si es sostenible, 5 %% en observación, 0 %% si es elevado). Como referencia, el %d %% de los de 2025 es %s %s; '
+                   'el techo de cada año lo calcula Hacienda.') % (t, t, mdp(round(e['ildMdp'] * t / 100, 1)), chip('derivado'))
+    else:
+        r_techo = ('Para fijarle un techo de financiamiento sin deuda inscrita, la LDF (art. 46) le pide entregar a Hacienda la información que marca el Reglamento '
+                   'del Registro Público Único.')
+    reglas = ('<div class="pl-reglas"><p><b>Las reglas de su deuda</b></p><ul>'
+              '<li>Solo puede endeudarse para inversión pública productiva y para refinanciarla, nunca con acreedores extranjeros ni en moneda extranjera (%s, art. 117, fr. VIII).</li>'
+              '<li>%s</li>'
+              '<li>Hacienda la evalúa «única y exclusivamente» con la información que entrega el propio gobierno y la del Registro Público Único (%s, art. 43).</li>'
+              '<li>La deuda de sus municipios también la mide el Sistema de Alertas; aún no la integramos %s.</li>'
+              '<li>Su propia ley de deuda pública se publica en el %s. <a href="%s#fed-deuda">⚖️ Las leyes de la deuda en los tres niveles</a></li></ul></div>') % (
+        ln._a(ln.CPEUM, 'Constitución'), r_techo, ln._a(ln.pdf('LDFEFM.pdf'), 'LDF'),
+        '<span class="est-chip est-pendiente" data-pend="deuda-municipios">pendiente</span>', html.escape(ln.ESTADOS[a][0]), ln.ARCHIVO)
+    return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, reglas)
 
 
-def pagina_portal(base, ref, e, padron, prev, sig):
+def _inversion_mun(ref, e, m, iv, con_mapa):
+    """La obra de sus municipios, suma de los que rindieron cuenta (derivado)."""
+    if not m['conCifra']:
+        return ('<article class="pl-piso pl-piso-inv"><p class="pl-piso-n">3 · La obra de sus %d demarcaciones · 2024</p>'
+                '<p class="pl-piso-v"><b>Sin cuenta municipal</b> %s</p><p>Las alcaldías de la Ciudad de México no rinden cuenta municipal al INEGI: '
+                'su obra va dentro del presupuesto de la Ciudad. Ponerle cero falsearía la cifra.</p></article>' % (m['n'], chip('pendiente', 'municipios-sin-cuenta')))
+    filas = [(r, iv['mun'][m['cve'] + r[0]]) for r in m['lista'] if len(r) >= 10]
+    tot = sum(v[0] for _r, v in filas)
+    egr = sum(r[9] for r, _v in filas)
+    cero = sum(1 for _r, v in filas if v[0] == 0)
+    top_r, top_v = max(filas, key=lambda x: x[1][0])
+    ir = ('<p class="pl-ficha-ir"><a href="%s?ml=inv#mapa-municipios">Municipio por municipio, en el mapa ➔</a></p>' % portal(e['abbr'])) if con_mapa else ''
+    return ('<article class="pl-piso pl-piso-inv"><p class="pl-piso-n">3 · La obra de sus municipios · 2024</p>'
+            '<p class="pl-piso-v"><b class="num-tabular">%s</b> %s</p>'
+            '<dl class="pl-dl"><dt>Municipios con cuenta</dt><dd>%d de %d</dd>'
+            '<dt>De cada $100 de su egreso</dt><dd>%s %s <small>de un egreso total de %s</small></dd>'
+            '<dt>El que más invirtió</dt><dd>%s: %s %s</dd>%s</dl>'
+            '<p class="pl-piso-f">Suma del capítulo de inversión pública de cada municipio que rindió su cuenta: obra pública y proyectos productivos, '
+            'con su dinero propio y con el que le llega (el fondo de infraestructura social municipal incluido). INEGI, finanzas públicas municipales %d %s. '
+            'Es la obra de los ayuntamientos: no está dentro de la del gobierno del estado.</p>%s</article>' % (
+                mdp(tot / 1e6), chip('derivado'), len(filas), m['n'],
+                '$' + format(tot / egr * 100, '.1f') if egr else '—', chip('derivado'), mdp(egr / 1e6),
+                html.escape(top_r[1]), mdp(top_v[0] / 1e6), chip('oficial'),
+                ('<dt>En $0</dt><dd>%d %s <small>%s su cuenta sin capítulo de inversión pública</small></dd>' % (
+                    cero, 'municipio' if cero == 1 else 'municipios', 'rindió' if cero == 1 else 'rindieron')) if cero else '',
+                iv['anio'], ref('ref-inegi-efipem'), ir))
+
+
+def _inversion_portal(base, ref, e, pm=''):
+    """La inversión de la entidad (03-11-2026): su obra directa, lo que les
+    pasa a sus organismos de obra (no se suman), la de sus municipios y lo que
+    dejó la ASF."""
+    import leyes_niveles as ln
+    E = base['estados']
+    fu = _fuentes(ref, base)
+    a, nom = e['abbr'], e['name']
+    pend = 'entidades-' + a.lower()
+    if e.get('invPub') is None:
+        p1 = ('<article class="pl-piso pl-piso-inv"><p class="pl-piso-n">La obra que hizo el estado · 2024</p>'
+              '<p class="pl-piso-v"><b>Sin cifra cotejada</b> %s</p><p>%s. Ni su obra directa ni lo que pasa a sus organismos tienen todavía documento citado.</p></article>' % (
+                  chip('pendiente', pend), base['fiscalEntidades']['campos']['invPub']['motivo']))
+        ciego = ''
+    else:
+        l1, n1 = _lugar(E, a, 'invPub')
+        l2, n2 = _lugar(E, a, 'invInfra')
+        inv, invt = e['invPub'], e['invInfra']
+        p1 = ('<article class="pl-piso pl-piso-inv"><p class="pl-piso-n">1 · La obra que hizo el estado · 2024</p>'
+              '<p class="pl-piso-v"><b class="num-tabular">%s</b> %s</p>'
+              '<dl class="pl-dl"><dt>De cada $100 de su egreso</dt><dd>%s %s <small>de un egreso total de %s %s, que incluye lo que quedó en caja al cierre</small></dd>'
+              '<dt>Su lugar</dt><dd>%d.º de %d %s <small>de la que más obra directa hizo a la que menos</small></dd></dl>'
+              '<p class="pl-piso-f">%s</p></article>' % (
+                  mdp(inv), chip('oficial'), '$' + format(inv / e['egr2024'] * 100, '.1f'), chip('derivado'), mdp(e['egr2024']), chip('oficial'),
+                  l1, n1, chip('derivado'), fu['inv']))
+        p1 += ('<article class="pl-piso pl-piso-inv"><p class="pl-piso-n">2 · Lo que les pasó a sus organismos de obra · 2024</p>'
+               '<p class="pl-piso-v"><b class="num-tabular">%s</b> %s</p>'
+               '<dl class="pl-dl"><dt>Frente a su obra directa</dt><dd>%s</dd>'
+               '<dt>Su lugar</dt><dd>%d.º de %d %s</dd></dl>'
+               '<p class="pl-piso-f">%s</p></article>' % (
+                   mdp(invt), chip('oficial'),
+                   ('%s veces %s' % (format(invt / inv, '.1f'), chip('derivado'))) if inv and invt > inv else
+                   ('menos que su obra directa %s' % chip('derivado')) if invt < inv else 'lo mismo',
+                   l2, n2, chip('derivado'), fu['invt']))
+        ciego = ('<p class="pl-dim-nota">%s Juntas de caminos, comisiones de agua e institutos de obra reciben su dinero como transferencia: con él construyen, pero también '
+                 'pagan su nómina y su operación. Por eso las dos cifras no se suman, y la segunda no es «toda obra».</p>') % (
+                     ('En %s, lo que pasó a sus organismos fue más que la obra que hizo él mismo: mirar solo su capítulo de inversión pública lo haría ver como un estado que casi no invierte.' % nom)
+                     if invt > inv else ('En %s, la obra directa es la vía principal.' % nom))
+    p3 = ('<article class="pl-piso pl-piso-asf"><p class="pl-piso-n">Lo que la ASF dejó por aclarar · Cuenta Pública 2024</p>'
+          '<p class="pl-piso-v"><b class="num-tabular">%s</b> %s</p><p>%s</p>'
+          '<p class="pl-piso-f">Es todo el dinero federal que la ASF auditó en la entidad, no solo el de obra. Por aclarar no es robado: es dinero cuyo destino no quedó acreditado. %s</p></article>' % (
+              mdp(e['asfMontoObservado']), chip('oficial'), html.escape(e['asfTipologia']), fu['asf']))
+    reglas = ('<div class="pl-reglas"><p><b>Las reglas de su obra</b></p><ul>'
+              '<li>Si construye con dinero federal por convenio, contrata con la ley federal de obra pública; los fondos del Ramo 33 quedan fuera de ella y siguen la ley del estado (%s, art. 1, fr. VI).</li>'
+              '<li>Lo que pide prestado solo puede ir a inversión pública productiva (%s, art. 117, fr. VIII).</li>'
+              '<li>Su propia ley de obra pública se publica en el %s. <a href="%s#fed-adquisiciones">⚖️ Las leyes de compras y obra en los tres niveles</a></li></ul>'
+              '<p class="pl-ficha-ir"><a href="numeros-mapa-del-gasto-federalizado.html?l=inv&amp;e=%s">Las 32, en el mapa de la Enciclopedia ➔</a> '
+              '<a href="datos-ambiente-megaobras.html?e=%s#abMapaObras">Sus obras con alerta ambiental ➔</a></p></div>') % (
+        ln._a(ln.pdf('LOPSRM.pdf'), 'LOPSRM'), ln._a(ln.CPEUM, 'Constitución'), html.escape(ln.ESTADOS[a][0]), ln.ARCHIVO, quote(a), quote(a))
+    return '<div class="pl-pisos">%s%s%s</div>%s%s' % (p1, pm, p3, ciego, reglas)
+
+
+def pagina_portal(base, ref, e, padron, prev, sig, iv):
     a = e['abbr']
     C = base['fiscalEntidades']['campos']
     sin = set(C['recaudacionPropia'].get('sinFuente', []))
@@ -511,30 +671,32 @@ def pagina_portal(base, ref, e, padron, prev, sig):
                  e['gasto'], _pesos(s), chip('derivado'), mdp(e['gasto'])))
     # 2 bis · Su deuda (Sistema de Alertas, Cuenta Pública 2025)
     deuda = _deuda_portal(base, ref, e)
+    g = geo_mun(m['cve'])
+    inversion = _inversion_portal(base, ref, e, _inversion_mun(ref, e, m, iv, bool(g)))
     # 3 · Los municipios
     filas = []
     for r in m['lista']:
         if len(r) < 3:
-            filas.append('<tr data-c="%s" data-n="%s"><th scope="row">%s</th><td colspan="5" class="pl-sin">Sin cuenta de 2024 %s</td></tr>' % (
+            filas.append('<tr data-c="%s" data-n="%s"><th scope="row">%s</th><td colspan="6" class="pl-sin">Sin cuenta de 2024 %s</td></tr>' % (
                 r[0], json.dumps(r[1].lower(), ensure_ascii=False)[1:-1], r[1], chip('pendiente', 'municipios-sin-cuenta')))
             continue
         cve, n, ing, part, aport, fortamun, fismdf, predial, propios, egr = r[:10]
         dep = (part + aport) / ing * 100 if ing else None
-        filas.append('<tr data-c="%s" data-n="%s" data-ing="%d" data-predial="%d" data-dep="%s"><th scope="row">%s</th>'
-                     '<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (
-                         cve, json.dumps(n.lower(), ensure_ascii=False)[1:-1], ing, predial, '%.2f' % dep if dep is not None else '',
-                         n, mdp(ing / 1e6), mdp(part / 1e6), mdp(aport / 1e6), mdp(predial / 1e6), pct(dep) if dep is not None else '—'))
+        inv = iv['mun'][m['cve'] + cve][0]
+        filas.append('<tr data-c="%s" data-n="%s" data-ing="%d" data-predial="%d" data-dep="%s" data-inv="%d"><th scope="row">%s</th>'
+                     '<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (
+                         cve, json.dumps(n.lower(), ensure_ascii=False)[1:-1], ing, predial, '%.2f' % dep if dep is not None else '', inv,
+                         n, mdp(ing / 1e6), mdp(part / 1e6), mdp(aport / 1e6), mdp(predial / 1e6), pct(dep) if dep is not None else '—', mdp(inv / 1e6)))
     tabla = ('<div class="pl-mun-mandos"><label class="pl-sel"><span>Buscar municipio</span><input type="search" id="plMunBusca" placeholder="Escribe un nombre" autocomplete="off"></label>'
              '<label class="pl-sel"><span>Ordenar por</span><select id="plMunOrden"><option value="n">Nombre (A–Z)</option><option value="ing">Ingreso total</option>'
-             '<option value="predial">Predial cobrado</option><option value="dep">Dependencia de transferencias</option></select></label></div>'
+             '<option value="predial">Predial cobrado</option><option value="dep">Dependencia de transferencias</option><option value="inv">Inversión pública</option></select></label></div>'
              '<div class="pl-tabla-caja"><table class="pl-tabla" id="plMun"><caption>Los %d municipios de %s en el catálogo del INEGI, con sus cuentas de %d</caption>'
              '<thead><tr><th scope="col">Municipio</th><th scope="col">Ingreso total</th><th scope="col">Participaciones</th><th scope="col">Aportaciones</th>'
-             '<th scope="col">Predial</th><th scope="col">Dependencia</th></tr></thead><tbody>%s</tbody></table></div>'
+             '<th scope="col">Predial</th><th scope="col">Dependencia</th><th scope="col">Inversión pública</th></tr></thead><tbody>%s</tbody></table></div>'
              '<p class="pl-pie">Cifras de cada municipio: INEGI, finanzas públicas municipales %d %s, en millones de pesos (mdp) %s. '
-             'La dependencia es (participaciones + aportaciones) ÷ ingreso total × 100 %s: cuánto de lo que ingresó llegó de fuera.</p>' % (
+             'La dependencia es (participaciones + aportaciones) ÷ ingreso total × 100 %s: cuánto de lo que ingresó llegó de fuera. La inversión pública es su capítulo de egresos de obra y proyectos productivos.</p>' % (
                  m['n'], nom, padron['anio'], ''.join(filas), padron['anio'], ref('ref-inegi-efipem'), chip('oficial'), chip('derivado')))
-    g = geo_mun(m['cve'])
-    mapa_mun = _mapa_mun(e, m, g, ref, padron) if g else ''
+    mapa_mun = _mapa_mun(e, m, g, ref, padron, iv) if g else ''
     # 4 · Las otras dimensiones y el Auditor
     dl = _congresos(base)
     puertas = []
@@ -562,13 +724,15 @@ def pagina_portal(base, ref, e, padron, prev, sig):
     puertas_aud = ''.join('<a class="pl-puerta" href="%s"><span aria-hidden="true">%s</span><span><b>%s</b><small>%s</small></span></a>' % x for x in auditor)
     saltos = ('<nav class="pl-saltos" aria-label="Otras entidades"><a href="%s">← %s</a><a href="%s#mapa">🗺️ Volver al mapa</a><a href="%s">%s →</a></nav>' % (
         portal(prev['abbr']), prev['name'], ARCHIVO, portal(sig['abbr']), sig['name']))
+    import leyes_niveles
+    leyes = leyes_niveles.estado(e, leyes_niveles.municipios(padron, a))
     datos_e = '%s · capital: %s · %s habitantes a mitad de 2026 (CONAPO) %s' % (
         nom, e['capital'], format(e['pobPersonas'], ','), chip('derivado'))
     return {
         'archivo': portal(a), 'menu': nom, 'menu_archivo': ARCHIVO,
         'padre': (ARCHIVO, 'Planisferio'),
         'icono': '📍', 'titulo': nom, 'lema': 'Su portal en el Planisferio',
-        'entrada': ('Los tres presupuestos de %s, su deuda, sus municipios uno por uno y la puerta a sus otras dimensiones. '
+        'entrada': ('Los tres presupuestos de %s, su deuda, su inversión, sus leyes del dinero, sus municipios uno por uno y la puerta a sus otras dimensiones. '
                     'Cada cifra sale de la base de la Enciclopedia, con su fuente oficial y su etiqueta.' % nom),
         'estilos': ['numeros.css', 'planisferio.css'],
         'scripts': ['planisferio.js'],
@@ -582,10 +746,17 @@ def pagina_portal(base, ref, e, padron, prev, sig):
              'texto': ('Lo que debe el gobierno de %s y cuánto le pesa, medido por el Sistema de Alertas de Hacienda con la Cuenta Pública 2025. '
                        'Es la deuda del gobierno del estado; la de sus municipios la mide el mismo sistema y llegará al Planisferio en una próxima entrega.') % nom,
              'tarjetas': [], 'bloque': deuda},
+            {'id': 'inversion', 'titulo': 'Su inversión',
+             'texto': ('La obra que hizo el gobierno de %s en 2024, por las dos vías que usa un gobierno estatal (la que contrata él mismo y la que les encarga a sus organismos), '
+                       'la obra que pagaron sus municipios y lo que la Auditoría Superior dejó por aclarar del dinero federal que recibió.') % nom,
+             'tarjetas': [], 'bloque': inversion},
+            {'id': 'leyes', 'titulo': 'Sus leyes del dinero',
+             'texto': 'Con qué leyes cobra, compra, se endeuda y rinde cuentas %s, quién las aprueba y dónde se publican.' % nom,
+             'tarjetas': [], 'bloque': leyes},
         ] + ([
             {'id': 'mapa-municipios',
              'titulo': ('El mapa de sus %d municipios' if m['conCifra'] else 'El mapa de sus %d alcaldías') % len(g['m']),
-             'texto': ('Cada municipio en su lugar, con lo que ingresó en %d. Elige qué ver; el color compara a los municipios del estado por quintiles '
+             'texto': ('Cada municipio en su lugar, con lo que ingresó e invirtió en %d. Elige qué ver; el color compara a los municipios del estado por quintiles '
                        '(cinco grupos con el mismo número de municipios). Toca uno para ver su ficha.' % padron['anio'] if m['conCifra'] else
                        'Cada alcaldía en su lugar. No llevan color por cifra porque no rinden cuenta municipal al INEGI; '
                        'toca una para ir a su ficha en el Auditor de entes.'),
@@ -603,8 +774,9 @@ def pagina_portal(base, ref, e, padron, prev, sig):
 
 def paginas(base, ref, tres):
     padron = _padron()
+    iv = inv_mun(padron)
     E = sorted(base['estados'], key=lambda x: clave(x['name']))
     out = [pagina_mapa(base, ref, tres, padron)]
     for k, e in enumerate(E):
-        out.append(pagina_portal(base, ref, e, padron, E[k - 1], E[(k + 1) % len(E)]))
+        out.append(pagina_portal(base, ref, e, padron, E[k - 1], E[(k + 1) % len(E)], iv))
     return out
