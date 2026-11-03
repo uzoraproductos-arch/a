@@ -24,8 +24,8 @@ nunca dinero que se mueve en tiempo real).
 
 Cada entidad tiene su portal (planisferio-<clave>.html) con sus tres
 presupuestos, su ritmo, sus municipios uno por uno y la puerta a las otras
-dimensiones. Ya se pintan la financiera, la deuda y la inversión; las que aún
-no (ambiental, legislativa, judicial) llevan a donde la Enciclopedia ya las
+dimensiones. Ya se pintan la financiera, la deuda, la inversión, la
+legislativa y la judicial; la que aún no (ambiental) lleva a donde la Enciclopedia ya las
 tiene: un enlace roto detiene la generación.
 
 Lo usa apartados.generar(); lo interactivo vive en planisferio.js.
@@ -63,8 +63,8 @@ DIMENSIONES = [
      'Los 32 congresos locales: lo que gastó cada uno, cuántas personas legisladoras lo integran y cómo se compara con el tope de la Constitución.',
      'datos-poder-legislativo.html', 'radar-estado-de-cuenta.html?doc=%s', True),
     ('judicial', '⚖️', 'Judicial',
-     'El Poder Judicial: su presupuesto, la elección judicial y lo que resuelve con su dinero.',
-     'datos-poder-judicial.html', None, False),
+     'Los 32 poderes judiciales de los estados: lo que ejerció cada uno, lo que le llegó y lo que concluyó, cuánto le costó cada asunto y las causas penales que se le acumulan.',
+     'datos-judicial-gestion.html#jud-gestion_estados', None, True),
 ]
 
 
@@ -220,7 +220,9 @@ def _contador(id_, ico, nom, v, est, que, fuente):
 
 def _datos(base, padron):
     import asistente_legislativo as al
+    import gestion_judicial as gj
     cg = al.congresos_estados(base)
+    pj = gj.judiciales_estados(base)
     E = base['estados']
     C = base['fiscalEntidades']['campos']
     sin = set(C['recaudacionPropia'].get('sinFuente', []))
@@ -250,6 +252,11 @@ def _datos(base, padron):
             # Su congreso (INEGI, CNPLE 2025): lo que ejerció en 2024, sus
             # personas legisladoras y las dos divisiones nuestras.
             'leg': cg[e['abbr']]['g'], 'legn': cg[e['abbr']]['n'], 'legx': cg[e['abbr']]['x'], 'legp': cg[e['abbr']]['p'],
+            # Su Poder Judicial (INEGI, CNIJF-E 2025): lo que ejerció en 2024,
+            # lo que concluyó, el rezago penal y sus personas juzgadoras.
+            'jud': pj[e['abbr']]['g'], 'judc': pj[e['abbr']]['c100'], 'juda': pj[e['abbr']]['xa'],
+            'judr': pj[e['abbr']]['p'], 'judj': pj[e['abbr']]['j'],
+            'judi': pj[e['abbr']]['i'], 'judk': pj[e['abbr']]['c'],
         })
     return filas
 
@@ -321,6 +328,23 @@ LENTES = [
     {'id': 'legn', 'dim': 'legislativa', 'fmt': 'n', 'nom': 'Cuántos lo integran', 'pal': 'azul', 'est': 'oficial', 'anio': 2025,
      'que': ('Las personas legisladoras en activo de cada congreso al cierre del último periodo que reportó al censo del INEGI. '
              'La Constitución pone el piso: 7, 9 u 11 según la población del estado (art. 116, fr. II).')},
+    # La dimensión judicial (03-11-2026): los 32 poderes judiciales de los
+    # estados, con el censo del INEGI. El dinero va junto a lo que resolvió.
+    {'id': 'jud', 'dim': 'judicial', 'fmt': 'mdp', 'nom': 'Lo que ejerció', 'pal': 'azul', 'est': 'oficial', 'anio': 2024,
+     'que': ('El presupuesto que ejerció en 2024 el Poder Judicial de cada estado, según lo que le reportó al Censo Nacional de Impartición de Justicia del INEGI. '
+             'Paga todo el poder judicial: juzgados, tribunal superior, administración, edificios y personal de apoyo.')},
+    {'id': 'judc', 'dim': 'judicial', 'fmt': 'pct', 'nom': 'Concluyó de cada 100 que entraron', 'pal': 'verde', 'est': 'derivado', 'anio': 2024,
+     'que': ('Asuntos concluidos en primera instancia entre los que ingresaron, × 100. Más de 100 quiere decir que también cerró asuntos de años anteriores. '
+             'No es el rezago: en lo civil, familiar y mercantil el INEGI cuenta como ingresada toda demanda, también la que se desecha.')},
+    {'id': 'juda', 'dim': 'judicial', 'fmt': 'pesos', 'nom': 'Por asunto concluido', 'pal': 'azul', 'est': 'derivado', 'anio': 2024,
+     'que': ('Lo que ejerció entre los asuntos que concluyó en primera instancia. No es lo que cuesta un juicio: el presupuesto paga todo el poder judicial, '
+             'y un asunto concluido puede ser una sentencia o un desechamiento. Sirve para comparar, no para cobrar.')},
+    {'id': 'judr', 'dim': 'judicial', 'fmt': 'n', 'nom': 'Causas penales pendientes', 'pal': 'rojo', 'est': 'oficial', 'anio': 2024,
+     'que': ('Las causas penales del sistema acusatorio que quedaron pendientes de concluir al cierre de 2024. Es el único rezago que el censo publica completo; '
+             'en los estados, el INEGI cuenta a cada persona procesada, no cada expediente.')},
+    {'id': 'judj', 'dim': 'judicial', 'fmt': 'n', 'nom': 'Personas juzgadoras', 'pal': 'azul', 'est': 'oficial', 'anio': 2024,
+     'que': ('Las magistradas, magistrados, juezas y jueces de cada poder judicial estatal que reportó el censo, de todas las materias. '
+             'Desde la reforma de 2024, la Constitución pide que se elijan por voto directo (art. 116, fr. III).')},
 ]
 
 
@@ -349,6 +373,16 @@ def _fuentes(ref, base=None):
             'legp': ('Gasto del congreso en 2024 (%s, p. 11) ÷ total de egresos del gobierno del estado en 2024 (INEGI, finanzas públicas estatales %s) × 100. La división es nuestra. '
                      'El tope: Constitución, art. 116, fr. II, párrafo segundo, y transitorios quinto y octavo del decreto del DOF 23-04-2026 %s.') % (
                          cn, ref(C['egr2024']['ref']), ref('ref-cpeum')),
+        })
+        cj = 'INEGI, Censo Nacional de Impartición de Justicia Federal y Estatal 2025, reporte de resultados'
+        rj = ref('ref-inegi-cnijfe2025-rr')
+        extra.update({
+            'jud': '%s, presupuesto ejercido por cada poder judicial estatal en 2024, gráfica 7, p. 14 %s.' % (cj, rj),
+            'judc': ('Asuntos concluidos ÷ asuntos ingresados en primera instancia en 2024 × 100 (%s, tabla 23, p. 39, con sus notas 1 y 2 sobre qué cuenta cada uno) %s. '
+                     'La división es nuestra.') % (cj, rj),
+            'juda': 'Presupuesto ejercido en 2024 (gráfica 7, p. 14) ÷ asuntos concluidos en primera instancia (tabla 23, p. 39), los dos del %s %s. La división es nuestra.' % (cj, rj),
+            'judr': '%s, causas penales del sistema acusatorio pendientes de concluir al cierre de 2024, tabla 25 y su nota 3, p. 45 %s.' % (cj, rj),
+            'judj': '%s, personas juzgadoras de cada poder judicial estatal, tabla 6, p. 12 %s.' % (cj, rj),
         })
     return dict(extra, **{
         'fed': 'Ramo 28: Anexo 15 del acuerdo de distribución (DOF 12-12-2025) %s. Ramo 33: Anexo 16, versión modificada (DOF 09-07-2026) %s. La suma de los dos es nuestra.' % (
@@ -423,6 +457,7 @@ def pagina_mapa(base, ref, tres, padron):
     falta['legp'] = {'a': sin_egr, 'gris': 'sin cifra', 'pend': 'entidades-' + '-'.join(sin_egr).lower(),
                      'txt': 'La Ciudad de México no figura en la estadística estatal del INEGI: sin su egreso total no se puede hacer la división, aunque su congreso sí reportó su gasto.'}
     nota_leg = _nota_leg(filas)
+    nota_jud = _nota_jud(filas)
     # El punto ciego de la inversión: el capítulo de inversión pública, solo,
     # hace ver «sin obra» a quien la hace por medio de sus organismos.
     con_inv = [f for f in filas if f['inv'] is not None]
@@ -446,7 +481,7 @@ def pagina_mapa(base, ref, tres, padron):
                       med[0]['n'], pct(med[0]['ild']), med[-1]['n'], pct(med[-1]['ild']), chip('oficial')))
     datos = {'lentes': [dict(l, fuente=fu[l['id']], falta=falta.get(l['id'])) for l in LENTES], 'e': filas,
              'dims': {i: {'n': nom, 'ir': ir, 'ire': ire, 'pinta': pinta} for i, _, nom, _, ir, ire, pinta in DIMENSIONES},
-             'notas': {'deuda': nota_deuda, 'inversion': nota_inv, 'legislativa': nota_leg}}
+             'notas': {'deuda': nota_deuda, 'inversion': nota_inv, 'legislativa': nota_leg, 'judicial': nota_jud}}
     svg = tm.mapa_svg(RAIZ).replace('tt-svg', 'pl-svg').replace('tt-edo', 'pl-edo').replace(
         'aria-label="Mapa de las 32 entidades"', 'aria-label="Planisferio: las 32 entidades de México"')
     indice = ''.join('<li><a href="%s">%s</a></li>' % (f['p'], f['n']) for f in sorted(filas, key=lambda x: clave(x['n'])))
@@ -484,6 +519,7 @@ def pagina_mapa(base, ref, tres, padron):
                        'La deuda es lo que debe cada gobierno estatal y cuánto le pesa, con los tres indicadores del Sistema de Alertas de Hacienda. '
                        'La inversión es la obra que hace cada gobierno estatal, directa o por medio de sus organismos, y lo que la Auditoría Superior dejó por aclarar. '
                        'La legislativa son los 32 congresos locales: lo que gastó cada uno, cuánto cuesta por curul y cómo se compara con el tope del 0.70 %% de la Constitución. '
+                       'La judicial son los 32 poderes judiciales de los estados: lo que ejerció cada uno junto a lo que concluyó con ese dinero y las causas penales que se le acumulan. '
                        'Elige la dimensión y qué ver; el color compara a las 32 por quintiles (cinco grupos con el mismo número de entidades).') % (
                            ('%d dimensiones: la %s y la %s' % (len(pintadas), ', la '.join(d[2].lower() for d in pintadas[:-1]), pintadas[-1][2].lower())) if len(pintadas) > 1 else 'una dimensión'),
              'tarjetas': [], 'bloque': bloque_mapa},
@@ -497,6 +533,24 @@ def pagina_mapa(base, ref, tres, padron):
              'tarjetas': [], 'bloque': '<ul class="pl-otras">%s</ul>' % otras},
         ],
     }
+
+
+def _nota_jud(filas):
+    """Los puntos ciegos de los poderes judiciales, dichos con las cifras:
+    «concluyó de cada 100» no es el rezago, y el dinero por asunto no es lo
+    que cuesta un juicio."""
+    a = sorted(filas, key=lambda f: -f['juda'])
+    c = sorted(filas, key=lambda f: f['judc'])
+    r = sorted(filas, key=lambda f: -f['judr'])
+    return ('<b>Lo que un solo número no dice.</b> Por asunto concluido, %s ejerció %s %s y %s, %s %s: %s veces más. Pero un asunto concluido puede ser una sentencia '
+            'después de años de juicio o una demanda que se desechó el primer día, y el censo no los separa: la distancia es una pregunta, no un veredicto. '
+            '<b>Y lo que concluye no es lo que debe.</b> %s concluyó %s de cada 100 asuntos que le entraron %s, el más bajo del país, y es el lugar %d de 32 en causas penales pendientes '
+            '(%s %s, con %s personas juzgadoras en todas las materias). Pero en lo civil, familiar y mercantil el INEGI cuenta como ingresada toda demanda, '
+            'y cuántas quedaron sin resolver no lo publica %s. Son cifras que cada poder judicial le reporta de sí mismo al INEGI.') % (
+                a[0]['n'], _pesos(a[0]['juda']), chip('derivado'), a[-1]['n'], _pesos(a[-1]['juda']), chip('derivado'),
+                format(a[0]['juda'] / a[-1]['juda'], '.1f'),
+                c[0]['n'], pct(c[0]['judc']), chip('derivado'), r.index(c[0]) + 1, format(c[0]['judr'], ','), chip('oficial'), c[0]['judj'],
+                chip('pendiente', 'judicial-rezago-civil'))
 
 
 def _nota_leg(filas):
@@ -730,6 +784,65 @@ def _legislativa_portal(base, ref, e):
     return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, reglas)
 
 
+def _judicial_portal(base, ref, e):
+    """Su Poder Judicial (03-11-2026): lo que ejerció en 2024 junto a lo que
+    le entró y lo que concluyó, el rezago penal, sus personas juzgadoras, el
+    circuito federal con sede en el estado y sus reglas (art. 116, fr. III)."""
+    import gestion_judicial as gj
+    import indicadores_circuito as ic
+    import leyes_niveles as ln
+    pj = gj.judiciales_estados(base)
+    a, nom = e['abbr'], e['name']
+    j = pj[a]
+    lugar = lambda k, alto=True: sorted(pj, key=lambda x: -pj[x][k] if alto else pj[x][k]).index(a) + 1
+    nac_c100 = 100.0 * gj.EST_TOTAL[1] / gj.EST_TOTAL[0]
+    p1 = ('<article class="pl-piso pl-piso-jud"><p class="pl-piso-n">1 · Lo que ejerció su Poder Judicial · 2024</p>'
+          '<p class="pl-piso-v"><b class="num-tabular">%s</b> %s</p>'
+          '<dl class="pl-dl"><dt>Su lugar</dt><dd>%d.º de 32 %s <small>del que más ejerció al que menos</small></dd>'
+          '<dt>Le entraron</dt><dd>%s asuntos %s <small>en primera instancia: penal, adolescentes, civil, familiar y mercantil</small></dd>'
+          '<dt>Concluyó</dt><dd>%s asuntos %s <small>%s de cada 100 que entraron %s; en todo el país, %s; lugar %d de 32, del que más concluye al que menos</small></dd>'
+          '<dt>Por asunto concluido</dt><dd>%s %s <small>lugar %d de 32; no es lo que cuesta un juicio: el presupuesto paga todo el poder judicial</small></dd>'
+          '<dt>Personas juzgadoras</dt><dd>%d %s <small>de todas las materias; %s asuntos concluidos por cada una %s</small></dd>'
+          '<dt>Causas penales pendientes</dt><dd>%s %s <small>al cierre de 2024, lugar %d de 32; el INEGI cuenta a cada persona procesada, no cada expediente</small></dd>'
+          '<dt>Rezago civil, familiar y mercantil</dt><dd>Sin cifra %s <small>el reporte del censo no lo publica</small></dd>'
+          '</dl><p class="pl-piso-f">INEGI, Censo Nacional de Impartición de Justicia Federal y Estatal 2025, reporte de resultados: presupuesto ejercido, gráfica 7 (p. 14); '
+          'asuntos ingresados y concluidos, tabla 23 (p. 39, con sus notas 1 y 2); causas penales pendientes, tabla 25 (p. 45); personas juzgadoras, tabla 6 (p. 12) %s. '
+          'Las divisiones son nuestras.</p></article>') % (
+              mdp(j['g']), chip('oficial'), lugar('g'), chip('derivado'),
+              format(j['i'], ','), chip('oficial'),
+              format(j['c'], ','), chip('oficial'), pct(j['c100']), chip('derivado'), pct(nac_c100), lugar('c100'),
+              _pesos(j['xa']), chip('derivado'), lugar('xa'),
+              j['j'], chip('oficial'), format(j['cj'], ','), chip('derivado'),
+              format(j['p'], ','), chip('oficial'), lugar('p'),
+              chip('pendiente', 'judicial-rezago-civil'),
+              ref('ref-inegi-cnijfe2025-rr'))
+    n = ic.EDO.index(a) + 1
+    circ = 'datos-judicial-por-circuito.html#jud-circ_%d' % n
+    if 'id="jud-circ_%d"' % n not in open(os.path.join(RAIZ, circ.split('#')[0]), encoding='utf-8').read():
+        raise SystemExit('planisferio: %s no existe' % circ)
+    p2 = ('<article class="pl-piso pl-piso-asf"><p class="pl-piso-n">2 · La justicia federal en su territorio</p>'
+          '<p class="pl-piso-v"><b class="num-tabular">%s Circuito</b></p>'
+          '<p>Además de su Poder Judicial, en %s hay juzgados y tribunales federales: los del %s Circuito, con sede en el estado%s. Esos los paga la Federación, no el estado. '
+          'Cuántos asuntos les llegan por cada 100 mil habitantes, cuántos resuelven y cuántos se les acumulan, de 2021 a 2025:</p>'
+          '<p class="pl-ficha-ir"><a href="%s">Su circuito judicial federal ➔</a></p></article>') % (
+              ic.ORD[n - 1], html.escape(nom), ic.ORD[n - 1], (', que abarca %s %s' % (html.escape(ic.EDO_NOM[a]), ic.ALCANCE[n])) if n in ic.ALCANCE else '', circ)
+    ciego = ('<p class="pl-dim-nota"><b>Lo que un solo número no dice.</b> «Concluyó de cada 100» no es el rezago: en lo civil, familiar y mercantil el INEGI cuenta como ingresada '
+             'toda demanda, también la que se desecha o se manda corregir, y como concluida solo la que puso fin al pleito. Y un asunto concluido puede ser una sentencia después de años '
+             'o un desechamiento del primer día: el censo no los separa. Por eso el dinero va junto a lo que se resolvió con él, para preguntar, no para condenar. '
+             'Son cifras que el Poder Judicial de %s le reportó de sí mismo al INEGI.</p>') % html.escape(nom)
+    reglas = ('<div class="pl-reglas"><p><b>Las reglas de su Poder Judicial</b></p><ul>'
+              '<li>Sus magistradas, magistrados, juezas y jueces se eligen por voto directo y secreto de la ciudadanía, con las mismas bases que el Poder Judicial de la Federación, '
+              'y duran nueve años en el cargo (%s, art. 116, fr. III, reformada DOF 15-09-2024).</li>'
+              '<li>Debe tener un Tribunal de Disciplina Judicial y un órgano de administración judicial con independencia técnica y de gestión (%s, art. 116, fr. III).</li>'
+              '<li>Lo que cobran sus personas juzgadoras no puede ser mayor que lo que recibe la persona titular de la Presidencia de la República, ni disminuir durante su encargo (%s, art. 116, fr. III).</li>'
+              '<li>Su presupuesto va dentro del presupuesto de egresos del estado, que aprueba cada año su congreso; se publica en: %s. <a href="%s#edo-%s">⚖️ Sus leyes del dinero</a></li></ul>'
+              '<p class="pl-ficha-ir"><a href="planisferio.html?d=judicial&amp;e=%s">Los 32 poderes judiciales, en el mapa ➔</a> '
+              '<a href="datos-judicial-gestion.html#jud-gestion_estados">Lo que resuelve con su dinero, en la Enciclopedia ➔</a></p></div>') % (
+        ln._a(ln.CPEUM, 'Constitución'), ln._a(ln.CPEUM, 'Constitución'), ln._a(ln.CPEUM, 'Constitución'),
+        html.escape(ln.ESTADOS[a][0]), ln.ARCHIVO, clave(a), quote(a))
+    return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, reglas)
+
+
 def pagina_portal(base, ref, e, padron, prev, sig, iv):
     a = e['abbr']
     C = base['fiscalEntidades']['campos']
@@ -844,7 +957,7 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv):
         'archivo': portal(a), 'menu': nom, 'menu_archivo': ARCHIVO,
         'padre': (ARCHIVO, 'Planisferio'),
         'icono': '📍', 'titulo': nom, 'lema': 'Su portal en el Planisferio',
-        'entrada': ('Los tres presupuestos de %s, su deuda, su inversión, su congreso, sus leyes del dinero, sus municipios uno por uno y la puerta a sus otras dimensiones. '
+        'entrada': ('Los tres presupuestos de %s, su deuda, su inversión, su congreso, su Poder Judicial, sus leyes del dinero, sus municipios uno por uno y la puerta a sus otras dimensiones. '
                     'Cada cifra sale de la base de la Enciclopedia, con su fuente oficial y su etiqueta.' % nom),
         'estilos': ['numeros.css', 'planisferio.css'],
         'scripts': ['planisferio.js'],
@@ -866,6 +979,10 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv):
              'texto': ('Lo que gastó el congreso de %s en 2024, cuántas personas legisladoras lo integran, lo que cuesta por curul y cómo se compara con el tope que la Constitución '
                        'les pone desde abril de 2026. Las cifras son del censo de los congresos estatales del INEGI.') % nom,
              'tarjetas': [], 'bloque': _legislativa_portal(base, ref, e)},
+            {'id': 'judicial', 'titulo': 'Su Poder Judicial',
+             'texto': ('Lo que ejerció el Poder Judicial de %s en 2024, junto a lo que le llegó y lo que concluyó con ese dinero, las causas penales que se le acumulan '
+                       'y sus personas juzgadoras. Las cifras son del censo de impartición de justicia del INEGI.') % nom,
+             'tarjetas': [], 'bloque': _judicial_portal(base, ref, e)},
             {'id': 'leyes', 'titulo': 'Sus leyes del dinero',
              'texto': 'Con qué leyes cobra, compra, se endeuda y rinde cuentas %s, quién las aprueba y dónde se publican.' % nom,
              'tarjetas': [], 'bloque': leyes},

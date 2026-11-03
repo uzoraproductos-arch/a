@@ -140,8 +140,24 @@
         '<a class="pl-ficha-ir" href="' + esc(e.p) + '#legislativa">Ver su congreso en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
+    /* Su Poder Judicial: el dinero junto a lo que concluyó con él, el
+       rezago penal y sus personas juzgadoras (CNIJF-E 2025). */
+    function judicial(e, fijo) {
+      var d = function (id, nom) {
+        var l = lenteDe(id);
+        return '<dt>' + nom + '</dt><dd><b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est) + '</dd>';
+      };
+      ficha.innerHTML = '<h3>Poder Judicial de ' + esc(e.n) + '</h3><p class="pl-ficha-sub">Primera instancia, 2024 · censo de impartición de justicia del INEGI</p>' +
+        '<dl class="pl-ficha-dl">' + d('jud', 'Lo que ejerció') +
+        '<dt>Le entraron · concluyó</dt><dd><b class="num-tabular">' + num(e.judi, 0) + ' · ' + num(e.judk, 0) + '</b> ' + chip('oficial') + '</dd>' +
+        d('judc', 'Concluyó de cada 100') + d('juda', 'Por asunto concluido') + d('judr', 'Causas penales pendientes') + d('judj', 'Personas juzgadoras') + '</dl>' +
+        '<p class="pl-ficha-mun">Concluir no es lo mismo que no deber: el rezago civil, familiar y mercantil no lo publica el censo.</p>' +
+        '<a class="pl-ficha-ir" href="' + esc(e.p) + '#judicial">Ver su Poder Judicial en su portal ➔</a>' +
+        (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
+    }
     function muestra(e, fijo) {
       if (!e) return;
+      if (dimP === 'judicial') { judicial(e, fijo); return; }
       if (dimP === 'deuda') { deuda(e, fijo); return; }
       if (dimP === 'inversion') { inversion(e, fijo); return; }
       if (dimP === 'legislativa') { legislativa(e, fijo); return; }
@@ -215,7 +231,7 @@
     }
     var m = /[?&]e=([^&#]+)/.exec(location.search), pedida = null;
     try { pedida = m ? decodeURIComponent(m[1]) : null; } catch (err) { pedida = null; }
-    /* ?d=deuda, ?d=inversion o ?d=legislativa (desde el Auditor): abre el mapa en esa dimensión. */
+    /* ?d=deuda, ?d=inversion, ?d=legislativa o ?d=judicial (desde el Auditor): abre el mapa en esa dimensión. */
     var md = /[?&]d=([a-z]+)/.exec(location.search);
     if (md && D.dims[md[1]]) eligeDim(md[1]); else pinta();
     /* ?e=JAL&m=1 (desde el Auditor): si la entidad ya tiene el mapa de sus

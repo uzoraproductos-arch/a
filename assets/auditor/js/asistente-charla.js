@@ -328,7 +328,9 @@
       radar: 'dinero por aclarar de cada $100 revisados', gasto: 'dinero federal en 2026 (Ramos 28 y 33)', r28: 'participaciones', r33: 'aportaciones',
       pc: 'dinero federal por habitante', dep: 'dependencia de la Federación', propia: 'recaudación propia', pob: 'población',
       inv: 'obra directa del gobierno del estado (2024)', invt: 'dinero a sus organismos de obra (2024)',
-      cong: 'gasto de su congreso (2024)', congx: 'gasto de su congreso por curul (2024)', congp: 'gasto de su congreso frente al egreso del estado (2024)', congn: 'personas legisladoras en su congreso' };
+      cong: 'gasto de su congreso (2024)', congx: 'gasto de su congreso por curul (2024)', congp: 'gasto de su congreso frente al egreso del estado (2024)', congn: 'personas legisladoras en su congreso',
+      pjg: 'gasto de su Poder Judicial (2024)', pjc: 'asuntos concluidos de cada 100 que le entraron a su Poder Judicial (2024)', pja: 'gasto de su Poder Judicial por asunto concluido (2024)',
+      pjr: 'causas penales pendientes en su Poder Judicial (cierre de 2024)', pjj: 'personas juzgadoras en su Poder Judicial' };
     var RKM = { ing: 'ingresos', part: 'participaciones', aport: 'aportaciones', fortamun: 'FORTAMUN', fismdf: 'FAIS municipal', predial: 'cobro de predial',
       propios: 'ingresos propios', egr: 'egresos', dep: 'dependencia de la Federación', inv: 'inversión pública (obra y proyectos productivos)' };
     function ranking(k, dir, cuantos, porHab) {
@@ -1253,10 +1255,32 @@
         { que: 'Dinero por asunto concluido', e: 'derivado', op: '$' + n(r[1], 1) + ' millones ÷ ' + n(r[3]), fu: fc },
         { que: 'Asuntos concluidos por persona juzgadora', e: 'derivado', op: n(r[3]) + ' ÷ ' + n(r[5]), fu: fc }];
       fu.push(x.fu[x.fu.length - 1]);
-      return { html: h, fu: fu, tit: 'Lo que cuesta y lo que resuelve el Poder Judicial de ' + e.n, ir: x.ir,
+      return { html: h, fu: fu, tit: 'Lo que cuesta y lo que resuelve el Poder Judicial de ' + e.n,
+        ir: ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html#judicial', 'su Poder Judicial en el Planisferio'],
         ci: [{ v: n(p100, 1), etq: 'asuntos concluidos por cada 100 que entraron', e: 'derivado' }, { v: '$' + n(costo), etq: 'por asunto concluido', e: 'derivado' },
           { v: n(r[4]), etq: 'causas penales pendientes al cierre de 2024', e: 'oficial' }],
         sug: ['¿Cuánto rezago tienen los poderes judiciales de los estados?', '¿Cuánto rezago penal hay?', '¿Cuánto tarda la Suprema Corte en resolver?'] };
+    }
+    /* Los 32 poderes judiciales de los estados (03-11-2026, dimensión judicial del Planisferio): uno lleva a su ficha; sin estado, al ranking. */
+    var JLOC = /poder(es)? judicial(es)?|tribunal(es)? superior(es)?|juzgados?\b|jueces|juezas?\b|magistrad|juzgador/;
+    function judLocal(t, es, dir, cuantos) {
+      if (!JUD || !JLOC.test(t) || GANA.test(t) || es.length > 1) return null;
+      if (/federa|\bpjf\b|suprema corte|\bscjn\b|la corte\b|circuito|de distrito|colegiad|eleccion|elegir|elige|eligen|elegid|electo|votar|vota\b|candidat|reforma|electoral|disciplina|fideicomis|retiro|pension|tarda|dura\b|duracion|audiencia/.test(t)) return null;
+      if (es.length === 1) return judEstado(es[0]);
+      if (!/estatal|estatales|de los estados|locales?\b|cada estado|que estado|cual estado|en que estado/.test(t)) return null;
+      var k = /rezago|pendiente|acumul|atorad/.test(t) ? 'pjr' : /(por|cada) (asunto|caso|juicio|expediente)/.test(t) ? 'pja' : /jueces|juezas|juzgador|magistrad/.test(t) ? 'pjj' :
+        /concluy|resuelve|resuelven|resolvi|productiv/.test(t) ? 'pjc' : /gasta|gastan|gasto|cuesta|cuestan|costo|ejerci|presupuesto|dinero/.test(t) ? 'pjg' : null;
+      if (!k || !(RANK.test(t) || /que estado|cual|quien/.test(t))) return null;
+      if (/barat|economic/.test(t)) dir = 'min';
+      var r = ranking(k, dir, cuantos, false);
+      r.html += '<p class="pa-ojo">Ojo: ' + (k === 'pjc' ? 'concluir no es lo mismo que no deber: en lo civil, familiar y mercantil el INEGI cuenta como ingresada toda demanda, también la que se desecha, y el rezago de esas materias no lo publica el censo. ' :
+        k === 'pja' ? 'el dinero por asunto no es lo que cuesta un juicio: el presupuesto paga todo el poder judicial, y un asunto concluido puede ser una sentencia o un desechamiento. ' :
+        k === 'pjr' ? 'en los estados, el INEGI cuenta a cada persona procesada, no cada expediente: una causa con tres personas cuenta tres. ' : '') +
+        'Son cifras que cada poder judicial le reporta de sí mismo al INEGI.</p>';
+      r.ir = ['planisferio.html?d=judicial', 'los 32 poderes judiciales en el Planisferio'];
+      r.sug = ['¿Cuánto rezago tiene el Poder Judicial de Jalisco?', '¿Qué poder judicial estatal tiene más rezago penal?', '¿Cuánto rezago penal hay?'];
+      r.met = k;
+      return r;
     }
     /* El circuito judicial que se nombra en la pregunta: «tercer circuito», «circuito 3», «decimoquinto circuito». */
     function judCircuito(t) {
@@ -1592,6 +1616,8 @@
       /* El Poder Legislativo y las elecciones: curules, sesiones, fechas y reformas. */
       /* El Poder Judicial: la Corte, los circuitos, la elección, el amparo. */
       /* «Documentar para sancionar»: de la irregularidad a la sanción. */
+      var rjl = judLocal(t, es, dir, cuantos);
+      if (rjl) return fin(rjl, { tipo: 'jud' });
       var rn = nepResp(t);
       if (rn) return fin(rn, { tipo: 'nep' });
       var rs = sanResp(t);

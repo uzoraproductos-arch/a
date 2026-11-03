@@ -129,6 +129,15 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   presupuesto de egresos del estado. El gasto por curul no es lo que gana nadie.
   Se abre con `planisferio.html?d=legislativa` y cada portal la trae en
   `#legislativa`; en el chat, `congLocal()` va antes que las Cámaras federales.
+- **La judicial, quinta dimensión pintada** (03-11-2026). Los 32 poderes judiciales
+  de los estados: lo que ejerció cada uno en 2024 junto a lo que le entró y lo que
+  concluyó en primera instancia, el dinero por asunto concluido, las causas penales
+  pendientes y sus personas juzgadoras (CNIJF-E 2025). Todo sale de
+  `judiciales_estados()` de `gestion_judicial.py`, que leen el Planisferio y el chat.
+  **«Concluyó de cada 100» no es el rezago y el dinero por asunto no es lo que cuesta
+  un juicio**: se dice junto a la cifra. Se abre con `planisferio.html?d=judicial` y
+  cada portal la trae en `#judicial`; en el chat, `judLocal()` va antes que la ficha
+  del estado.
 - **Las leyes del dinero en los tres niveles** (03-11-2026,
   `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
   cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y

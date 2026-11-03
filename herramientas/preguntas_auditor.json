@@ -692,7 +692,7 @@
   },
   {
    "q": "¿Cuánto rezago tiene el Poder Judicial de Jalisco?",
-   "ir": "datos-judicial-gestion.html#jud-gestion_estados",
+   "ir": "planisferio-jal.html#judicial",
    "dice": [
     "64,628",
     "40,431"
@@ -1694,6 +1694,37 @@
   {
    "q": "¿Cuánto cuesta el Congreso de la Unión?",
    "ir": "herramienta-inspector-entes.html#ente=federal:legislativo"
+  },
+  {
+   "q": "¿Cuánto gasta el Poder Judicial de Jalisco?",
+   "ir": "planisferio-jal.html#judicial",
+   "dice": [
+    "$2,533.8 millones",
+    "por asunto concluido"
+   ]
+  },
+  {
+   "q": "¿Cuántos jueces tiene el poder judicial de Tabasco?",
+   "ir": "planisferio-tab.html#judicial",
+   "dice": [
+    "96 personas juzgadoras"
+   ]
+  },
+  {
+   "q": "¿Qué poder judicial estatal tiene más rezago penal?",
+   "ir": "planisferio.html?d=judicial",
+   "dice": [
+    "Estado de México",
+    "58,288"
+   ]
+  },
+  {
+   "q": "¿Qué poder judicial estatal concluye menos asuntos?",
+   "ir": "planisferio.html?d=judicial",
+   "dice": [
+    "Tabasco",
+    "no es lo mismo que no deber"
+   ]
   }
  ]
 }
