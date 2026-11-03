@@ -7344,6 +7344,19 @@ Pedido del autor: «continuemos» (con los pendientes; era el primero de la list
 - **Revisado** en el navegador a 390 y 1280 px: portal de Jalisco con `?ml=inv`, ficha de Zapopan, piso municipal, portal de la Ciudad de México, padrón de la Enciclopedia y ficha del Auditor de entes, sin errores de consola ni desborde.
 - **Pendiente:** las dimensiones ambiental, legislativa y judicial del Planisferio, los umbrales del semáforo, la deuda municipal (Sistema de Alertas, sin descarga desde este entorno) y las ligas estatales «por cotejar».
 
+## Entrega — 03-11-2026: la superficie forestal de cada estado (sello 20261103t)
+
+Pedido del autor: «intégralo y continuemos». Se integró el PR #123 (los incendios) y se siguió con lo propuesto: la superficie forestal de cada entidad, que faltaba para decir los incendios frente a su bosque.
+
+- **La fuente.** CONAFOR, «Estado que guarda el sector forestal en México 2023» (publicado en agosto de 2024, en `gob.mx`), copiado con su huella en `investigaciones/recursos-naturales/CONAFOR_EstadoSectorForestal2023.pdf`. Tabla 1 (p. 4): hectáreas por entidad de bosques, selvas, manglar, otras asociaciones, matorral xerófilo y otras áreas forestales; tabla 2 (pp. 10-11): vegetación primaria y secundaria. Las dos salen del Inventario Nacional Forestal y de Suelos 2015-2020 con la Serie VII de uso del suelo del INEGI (2018). Se transcribieron con un script desde el texto del PDF. No se halló una edición 2024; el SNIF y el portal de la SEMARNAT siguen sin responder.
+- **Lo que no cuadra en el documento, dicho.** El matorral de Chiapas y de la Ciudad de México viene impreso cortado («125.» y «978.»): se toman como el total menos las otras columnas (125.7 y 978.6 ha, derivado), y esa cuenta se coteja contra el total de la columna. La fila de Querétaro no suma su total por 0.9 ha (y la columna de otras asociaciones, por 1.0): así viene. `forestal()` se detiene si algo más deja de cuadrar, y si los cinco estados más forestales dejan de dar el 48.8 % que dice el texto.
+- **Lo derivado.** Lo arbolado (bosques + selvas + manglar + otras asociaciones, como lo define el documento): 66,653,875 ha, 48.1 %. Lo que el fuego de 2025 afectó frente a la superficie forestal: 0.9 de cada 100 ha del país; Tabasco 9.7 (el más alto, sexto por hectáreas), Ciudad de México 7.3, Morelos 5.5; Chihuahua, el de más hectáreas afectadas, 1.0.
+- **Página y chat.** `aprende-recursos-naturales.html` suma «Los bosques de cada estado: su superficie forestal» (tabla de las 32). En el chat, `rn_bosques`, y la ficha `rn_if_<clave>` de cada estado se vuelve «sus bosques y sus incendios forestales»; «¿cuánto bosque tiene Durango?» va al portal del estado.
+- **Planisferio.** Lentes `sfT` (superficie forestal, oficial, en verde) e `incP` (lo afectado de cada 100 ha forestales, derivado). Cada portal trae el piso «Su superficie forestal», antes del de incendios.
+- **Puntos ciegos.** (1) «Forestal» no es «bosque»: el 40.5 % es matorral xerófilo. (2) El mapa es de 2018: el desmonte de después no está restado. (3) Lo secundario no es lo perdido. (4) La proporción que tocó el fuego mezcla años y suma cada incendio aunque dos pasen por el mismo terreno: no es la parte que se perdió. Es el séptimo punto ciego de los incendios.
+- **Pendientes.** `ambiente-por-estado` se queda con las denuncias ante la PROFEPA y la pesca de cada estado.
+- **Revisado:** `revision.py` 8 de 8 (373 preguntas); en el navegador a 390 y 1280 px, sin errores ni desborde: el mapa con `?d=ambiental&l=sfT&e=CHIH` y `&l=incP&e=TAB`, la página de Aprende y los portales de Tabasco, Ciudad de México y Durango.
+
 ## Entrega — 03-11-2026: los incendios forestales, estado por estado (sello 20261103s)
 
 Pedido del autor: «intégralo y continuemos». Se integró el PR #122 y se siguió con lo propuesto: los bosques, con la cifra que la CONAFOR publica por entidad.

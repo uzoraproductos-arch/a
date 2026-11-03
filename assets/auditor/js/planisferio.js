@@ -208,7 +208,7 @@
     function mdps(v) { return v == null ? 'no figura en la nota' : '<b class="num-tabular">' + (v < 0 ? '−' : '+') + '$' + num(Math.abs(v), 1) + ' mdp</b> ' + chip('oficial'); }
     var PROD = { mayor: 'Una de las diez que dan el 94.9 % de la producción minera', menor: 'Entre las 17 que dan el 5.2 % de la producción minera' };
     function ambiental(e, fijo) {
-      var r = e.ref, m = e.min, w = e.acu, z = e.inc, refL = /^ref/.test(lente.id), minL = /^min/.test(lente.id), incL = /^inc/.test(lente.id);
+      var r = e.ref, m = e.min, w = e.acu, z = e.inc, b = e.sf, refL = /^ref/.test(lente.id), minL = /^min/.test(lente.id), incL = /^inc|^sf/.test(lente.id);
       var agua = w ?
         '<p class="pl-ficha-sub">💧 Sus acuíferos · corte dic 2022</p><dl class="pl-ficha-dl">' +
         '<dt>Sin agua para concesionar</dt><dd><b class="num-tabular">' + w.sin + ' de ' + w.n + '</b> ' + chip('oficial') + ' · ' + num(e.acuP, 1) + '% ' + chip('derivado') + '</dd>' +
@@ -216,12 +216,14 @@
         (w.s27.length ? '<dt>Sobreexplotados medidos con pozos</dt><dd>' + esc(w.s27.join(', ')) + ' ' + chip('oficial') + '</dd>' : '') + '</dl>' +
         '<p class="pl-ficha-mun">La disponibilidad es el agua que aún se puede concesionar, no la que queda, y no mide su calidad.</p>' : '';
       var fuego = z ?
-        '<p class="pl-ficha-sub">🔥 Sus incendios forestales · 2025</p><dl class="pl-ficha-dl">' +
+        '<p class="pl-ficha-sub">' + (/^sf/.test(lente.id) ? '🌲 Sus bosques y sus incendios forestales' : '🔥 Sus incendios forestales · 2025') + '</p><dl class="pl-ficha-dl">' +
         '<dt>Superficie afectada</dt><dd><b class="num-tabular">' + num(e.incH, 0) + ' ha</b> ' + chip('oficial') + ' · lugar ' + z.lh + ' de 32</dd>' +
         '<dt>Incendios</dt><dd><b class="num-tabular">' + num(e.incN, 0) + '</b> ' + chip('oficial') + ' · lugar ' + z.ln + ' de 32</dd>' +
         '<dt>De árboles, de cada 100 ha</dt><dd><b class="num-tabular">' + num(z.parb, 1) + '</b> ' + chip('derivado') + '</dd>' +
-        '<dt>Contra 2024</dt><dd>' + (z.cam > 0 ? '+' : z.cam < 0 ? '−' : '') + num(Math.abs(z.cam), 1) + '% ' + chip('derivado') + '</dd></dl>' +
-        '<p class="pl-ficha-mun">Superficie afectada no es bosque perdido: la mayor parte del fuego corre por pasto y matorral.</p>' : '';
+        '<dt>Contra 2024</dt><dd>' + (z.cam > 0 ? '+' : z.cam < 0 ? '−' : '') + num(Math.abs(z.cam), 1) + '% ' + chip('derivado') + '</dd>' +
+        (b ? '<dt>Su superficie forestal · mapa de 2018</dt><dd><b class="num-tabular">' + num(e.sfT, 0) + ' ha</b> ' + chip('oficial') + ' · lugar ' + b.lug + ' de 32</dd>' +
+        '<dt>Lo afectado, de cada 100 ha forestales</dt><dd><b class="num-tabular">' + (e.incP >= 0.05 ? num(e.incP, 1) : 'menos de 0.1') + '</b> ' + chip('derivado') + ' · lugar ' + b.lq + ' de 32</dd>' : '') + '</dl>' +
+        '<p class="pl-ficha-mun">Superficie afectada no es bosque perdido: la mayor parte del fuego corre por pasto y matorral, y «forestal» incluye el matorral.</p>' : '';
       var minas = m ?
         '<p class="pl-ficha-sub">⛏️ Concesiones mineras · marzo 2024</p><dl class="pl-ficha-dl">' +
         '<dt>Títulos vigentes</dt><dd><b class="num-tabular">' + num(e.minT, 0) + '</b> ' + chip('oficial') + ' · lugar ' + m.lug + ' de 30</dd>' +
