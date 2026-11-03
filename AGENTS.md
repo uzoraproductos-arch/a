@@ -185,6 +185,18 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   CONAPESCA (`PESCA`, con huella; si una fila o una columna no cuadran, se detiene): **lo registrado se dice como lo declarado
   en los avisos de arribo y de cosecha, nunca como todo lo pescado ni como salud de la especie**, y una entidad sin registro va
   en gris como «no registró», no como «sin pesca». Si el Anuario se contradice entre cuadros, se dice y se toman sus series.
+- **La salud pública, séptima dimensión pintada** (03-11-2026, pedido del autor: «sería
+  IMSS e ISSSTE»). Del **IMSS**, su Memoria Estadística 2025 por OOAD; del **ISSSTE**, el
+  registro «Recursos en Salud Sectorial» de la DGIS (Secretaría de Salud), porque su anuario
+  no responde. `herramientas/anclar_salud_estados.py <Excel de la Memoria> <ZIP de la DGIS>`
+  escribe `docs/salud/imss-issste-estados-2025.json` con las huellas; si las OOAD no suman el
+  total de su cuadro o la DGIS no trae los establecimientos de su nota de cierre, se detiene.
+  `salud_estados()` de `gestion_salud.py` lo leen el Planisferio, la Enciclopedia (tema
+  `estados`) y el chat (`salEdo()`, antes que las columnas). **Las dos fuentes no se mezclan**
+  (desde 2025 el IMSS de la DGIS incluye el antiguo IMSS-Bienestar programa), **los hospitales
+  de alta especialidad se cuentan donde están** y lo que el ISSSTE no publica por estado
+  (derechohabientes, consultas, cirugías) sigue con su ficha. Se abre con
+  `planisferio.html?d=salud` y cada portal la trae en `#salud`.
 - **Las leyes del dinero en los tres niveles** (03-11-2026,
   `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
   cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y

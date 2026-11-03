@@ -1480,11 +1480,44 @@
     /* ---------- Salud pública: lo que cuesta y lo que resuelve (27-10-2026) ---------- */
     var SAL = D.sal || null;
     function salTema(k) { var x = SAL.t[k]; return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug }; }
+    function salEstado(e, primero) {
+      var r = SAL.est.filter(function (x) { return x[0] === e.a; })[0];
+      if (!r) return null;
+      var x = SAL.t.estados, im = r[10], is = r[11];
+      var tot = SAL.est.reduce(function (s, y) { return [s[0] + y[1], s[1] + y[2], s[2] + y[7], s[3] + y[11][2]]; }, [0, 0, 0, 0]);
+      var hI = '<p><b>El IMSS en ' + esc(e.n) + '</b> tenía <b>' + n(r[1]) + ' personas adscritas</b> a una clínica familiar al cierre de 2025' + (r[12].length ? ' (suma de sus dos OOAD: ' + esc(r[12].join(' y ')) + ')' : '') + '. ' +
+        'Les dio <b>' + n(r[2]) + ' consultas</b>, ' + n(r[8], 2) + ' por persona (en el país, ' + n(tot[1] / tot[0], 2) + '), e hizo <b>' + n(r[6]) + ' intervenciones quirúrgicas</b>. ' +
+        'Tiene ' + n(r[7]) + ' camas de hospitalización: <b>' + n(r[9], 2) + ' por cada mil personas adscritas</b> (en el país, ' + n(1000 * tot[2] / tot[0], 2) + ').</p>';
+      var hS = '<p><b>El ISSSTE en ' + esc(e.n) + '</b> reporta <b>' + n(is[2]) + ' médicas y médicos</b> (' + n(100 * is[2] / tot[3], 1) + ' % de los del ISSSTE en el país), ' +
+        n(is[1]) + ' camas de hospitalización, ' + n(is[3]) + ' personas de enfermería en contacto con el paciente y ' + n(is[0]) + ' unidades. En el mismo registro, el IMSS reporta ' + n(im[2]) + ' médicos en el estado. ' +
+        'Cuántas personas atiende el ISSSTE ahí y qué les resolvió sigue ' + chip('pendiente', 'salud-issste-servicios') + ': su anuario estadístico no responde.</p>';
+      var h = (primero === 'is' ? hS + hI : hI + hS) + '<p class="pa-chico">Del IMSS, su Memoria Estadística 2025; del ISSSTE, el registro de recursos de la Secretaría de Salud (DGIS). No se mezclan: desde 2025 el IMSS de la DGIS incluye las unidades rurales del antiguo IMSS-Bienestar. ' +
+        'Y cuentan cuánto se hizo y con qué, no cuánto se esperó.</p>';
+      var fu = [x.fu[0], x.fu[1], { que: 'Consultas por persona adscrita y camas por cada mil', e: 'derivado', op: n(r[2]) + ' ÷ ' + n(r[1]) + '; ' + n(r[7]) + ' ÷ ' + n(r[1]) + ' × 1,000', fu: x.fu[0].fu }, x.fu[x.fu.length - 1]];
+      var ci = [{ v: n(r[1]), etq: 'personas adscritas al IMSS', e: 'oficial' }, { v: n(r[9], 2), etq: 'camas del IMSS por cada mil adscritos', e: 'derivado' }, { v: n(is[2]), etq: 'médicos del ISSSTE', e: 'oficial' }];
+      if (primero === 'is') ci.reverse();
+      return { html: h, fu: fu, ci: ci, tit: 'El IMSS y el ISSSTE en ' + e.n,
+        ir: ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html#salud', 'su salud pública en el Planisferio'],
+        sug: ['¿Qué estado tiene menos camas del IMSS?', '¿Cuántas consultas dio el IMSS en 2025?', '¿Qué sabemos del IMSS-Bienestar?'] };
+    }
+    /* El IMSS y el ISSSTE de un estado (03-11-2026, dimensión de salud del Planisferio): «¿cuántos médicos tiene el ISSSTE en Jalisco?».
+       asistente.js la pide antes que las columnas, que también hablan del IMSS. */
+    function salEdo(t) {
+      if (!SAL || !SAL.est || /imss ?bienestar/.test(t)) return null;
+      var imss = /\bimss\b|seguro social/.test(t), iss = /issste/.test(t);
+      if (!imss && !iss) return null;
+      var sEs = estados(t).e;
+      if (sEs.length === 1 && /consulta|cirug|operacion|egreso|hospital|camas?\b|medicos?\b|doctor|enfermer|unidades|clinicas?\b|adscrit|derechohabientes?|afiliad|cuant|tiene|hay\b/.test(t)) return salEstado(sEs[0], iss && !imss ? 'is' : 'im');
+      if (!sEs.length && /consulta|cirug|camas?\b|medicos?\b|hospital|adscrit|enfermer|unidades/.test(t) && /(que|cual|en que) estados?|cada estado|por estado|los estados|de los 32|entidad/.test(t)) return salTema('estados');
+      return null;
+    }
     function salResp(t) {
       if (!SAL) return null;
       if (/seguro popular|insabi|instituto de salud para el bienestar/.test(t)) return salTema('transicion');
       if (/imss ?bienestar/.test(t)) return salTema('imss_bienestar');
       var imss = /\bimss\b|seguro social/.test(t), iss = /issste/.test(t);
+      var rse = salEdo(t);
+      if (rse) return rse;
       var gestion = /consulta|cirug|operacion|egreso|hospitaliz|urgencia|atendi|atiende|atienden|resuelve|resolvio|espera|tarda|medicos?\b|doctor|especialista|camas?\b|quirofano|ocupacion|metas?\b|anunci|en salud|atencion medica|enfermedad y maternidad/;
       if (iss && gestion.test(t)) return salTema('issste');
       if (!imss || !gestion.test(t)) return null;
@@ -2016,6 +2049,7 @@
       juzga: function (claim, val) { var d = cifraDicha(norm(claim).replace(/[¿?¡!]/g, ' ')), j = d && juzgaDicho(d, val); return j ? { dicho: d, v: j } : null; },
       /* Salud pública antes que Verificamos: «¿es cierto que el IMSS hizo 1.78 millones de cirugías?» es un cotejo de salud (27-10-2026). */
       salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
+      saludEstado: function (q) { var r = salEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       nepotismo: function (q) { var r = nepResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'nep' }); },
       mapa: function (q) { var r = mapaResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'san' }); },
       promesa: function (q) { var r = promResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'prom' }); },

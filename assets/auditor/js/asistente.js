@@ -2128,6 +2128,9 @@
     if (ln) return ln;
     var mp = charla && charla.mapa && charla.mapa(q);
     if (mp) return mp;
+    /* El IMSS y el ISSSTE de un estado (03-11-2026): «¿qué estado tiene menos camas del IMSS?» no es la columna del IMSS. */
+    var sae = charla && charla.saludEstado && charla.saludEstado(q);
+    if (sae) return sae;
     var tc = tituloColumna(q);
     if (tc) return tc;
     var tm = temaColumna(q);

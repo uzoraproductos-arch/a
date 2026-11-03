@@ -65,6 +65,9 @@ DIMENSIONES = [
     ('judicial', '⚖️', 'Judicial',
      'Los 32 poderes judiciales de los estados: lo que ejerció cada uno, lo que le llegó y lo que concluyó, cuánto le costó cada asunto y las causas penales que se le acumulan.',
      'datos-judicial-gestion.html#jud-gestion_estados', None, True),
+    ('salud', '🩺', 'Salud pública',
+     'El IMSS y el ISSSTE en cada estado: cuántas personas tiene adscritas el IMSS, cuántas consultas y cirugías les dio y con cuántas camas, y con cuántos médicos, camas y unidades cuenta el ISSSTE.',
+     'datos-salud-sistema.html#sal-estados', None, True),
 ]
 
 
@@ -278,6 +281,8 @@ def _datos(base, padron):
     fo = rn.forestal([e['abbr'] for e in base['estados']])
     pe = rn.pesca([e['abbr'] for e in base['estados']])
     pj = gj.judiciales_estados(base)
+    import gestion_salud as gsal
+    sa = gsal.salud_estados(base)
     E = base['estados']
     C = base['fiscalEntidades']['campos']
     sin = set(C['recaudacionPropia'].get('sinFuente', []))
@@ -313,6 +318,14 @@ def _datos(base, padron):
             'judr': pj[e['abbr']]['p'], 'judj': pj[e['abbr']]['j'],
             'judi': pj[e['abbr']]['i'], 'judk': pj[e['abbr']]['c'],
         })
+        # Su IMSS (Memoria Estadística 2025, por OOAD) y su ISSSTE (registro
+        # sectorial de la DGIS 2025): las dos fuentes no se mezclan.
+        h = sa[e['abbr']]
+        filas[-1].update({'imA': h['ads'], 'imX': h['conx'], 'imQ': h['iq'], 'imK': h['camk'],
+                          'isM': h['is']['med'], 'isK': h['is']['cam'], 'isU': h['is']['u'], 'imM': h['im']['med'],
+                          'sal': {'con': h['con'], 'esp': h['esp'], 'urg': h['urg'], 'egr': h['egr'], 'camc': h['camc'], 'iqk': h['iqk'],
+                                  'ie': h['is']['enf'], 'ic': h['is']['cons'], 'mu': h['im']['u'], 'mk': h['im']['cam'], 'me': h['im']['enf'],
+                                  'oo': [n for n, _ in h.get('ooad', [])]}})
         # Su refinería de PEMEX, si tiene (Segundo Informe 2026 y estados
         # financieros de PEMEX 2025): una o ninguna por entidad.
         r = rf.get(e['abbr'])
@@ -427,6 +440,31 @@ LENTES = [
     {'id': 'judj', 'dim': 'judicial', 'fmt': 'n', 'nom': 'Personas juzgadoras', 'pal': 'azul', 'est': 'oficial', 'anio': 2024,
      'que': ('Las magistradas, magistrados, juezas y jueces de cada poder judicial estatal que reportó el censo, de todas las materias. '
              'Desde la reforma de 2024, la Constitución pide que se elijan por voto directo (art. 116, fr. III).')},
+    # La salud pública (03-11-2026, pedido del autor: «sería IMSS e ISSSTE»).
+    # Del IMSS, su Memoria por OOAD; del ISSSTE, el registro de la DGIS,
+    # porque su anuario no responde. Los dos documentos no se mezclan.
+    {'id': 'imA', 'dim': 'salud', 'fmt': 'n', 'nom': 'IMSS · Personas adscritas', 'pal': 'azul', 'est': 'oficial', 'anio': 2025,
+     'que': ('Las personas adscritas a una clínica de medicina familiar del IMSS en cada estado al 31 de diciembre de 2025: trabajadores, sus familias y pensionados. '
+             'Son las que el IMSS atiende en su primer nivel; no es la población del estado ni toda la que tiene derecho.')},
+    {'id': 'imX', 'dim': 'salud', 'fmt': 'dec2', 'nom': 'IMSS · Consultas por persona adscrita', 'pal': 'verde', 'est': 'derivado', 'anio': 2025,
+     'que': ('Todas las consultas que dio el IMSS en el estado en 2025 (de medicina familiar, especialidad, urgencias y dentales) entre sus personas adscritas. '
+             'Cuenta consultas, no si se resolvió el problema ni cuánto se esperó. Los hospitales de alta especialidad atienden a gente de otros estados y se cuentan donde están.')},
+    {'id': 'imQ', 'dim': 'salud', 'fmt': 'n', 'nom': 'IMSS · Cirugías', 'pal': 'azul', 'est': 'oficial', 'anio': 2025,
+     'que': ('Las intervenciones quirúrgicas que registró el IMSS en cada estado en 2025, según su Memoria. Ojo: el IMSS anunció «1.78 millones de cirugías» en el país y su Memoria '
+             'registra más intervenciones; son dos conteos que ningún documento explica.')},
+    {'id': 'imK', 'dim': 'salud', 'fmt': 'dec2', 'nom': 'IMSS · Camas por cada mil adscritos', 'pal': 'verde', 'est': 'derivado', 'anio': 2025,
+     'que': ('Las camas censables (las de hospitalización, sin urgencias ni recuperación) del IMSS en cada estado por cada mil personas adscritas. '
+             'Dice con cuánto cuenta, no cuántas están ocupadas ni si hay personal para usarlas.')},
+    {'id': 'isM', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Médicos', 'pal': 'oro', 'est': 'oficial', 'anio': 2025,
+     'que': ('Las médicas y médicos generales, especialistas y odontólogos del ISSSTE en cada estado, según el registro de recursos de la Secretaría de Salud (DGIS). '
+             'Cuántas personas atiende el ISSSTE en cada estado no se puede decir: su anuario no responde. Algunas unidades no reportaron personal.')},
+    {'id': 'isK', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Camas de hospital', 'pal': 'oro', 'est': 'oficial', 'anio': 2025,
+     'que': ('Las camas del área de hospitalización del ISSSTE en cada estado (registro de la DGIS). Sin cuántos derechohabientes tiene cada estado, no se puede decir si son pocas o muchas.')},
+    {'id': 'isU', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Unidades', 'pal': 'oro', 'est': 'oficial', 'anio': 2025,
+     'que': ('Los establecimientos del ISSSTE en cada estado (registro de la DGIS): clínicas, hospitales y unidades de apoyo. Muchas unidades chicas no es lo mismo que mucha atención.')},
+    {'id': 'imM', 'dim': 'salud', 'fmt': 'n', 'nom': 'IMSS · Médicos, en el mismo registro', 'pal': 'azul', 'est': 'oficial', 'anio': 2025,
+     'que': ('Las médicas y médicos del IMSS en cada estado según el mismo registro de la DGIS que el ISSSTE: así se comparan las dos instituciones con la misma regla. '
+             'Desde 2025 incluye las unidades rurales del antiguo programa IMSS-Bienestar, por eso no es la cifra de la Memoria.')},
     # La dimensión ambiental (03-11-2026): los recursos naturales, empezando
     # por las refinerías de PEMEX (recursos_naturales.py). Un estado sin
     # refinería va en gris como «sin refinería», nunca como «sin problema».
@@ -506,6 +544,25 @@ def _fuentes(ref, base=None):
             'juda': 'Presupuesto ejercido en 2024 (gráfica 7, p. 14) ÷ asuntos concluidos en primera instancia (tabla 23, p. 39), los dos del %s %s. La división es nuestra.' % (cj, rj),
             'judr': '%s, causas penales del sistema acusatorio pendientes de concluir al cierre de 2024, tabla 25 y su nota 3, p. 45 %s.' % (cj, rj),
             'judj': '%s, personas juzgadoras de cada poder judicial estatal, tabla 6, p. 12 %s.' % (cj, rj),
+        })
+        import gestion_salud as gsal
+        mem = ('IMSS, Memoria Estadística 2025, %s, por OOAD (<a href="%s">Memoria</a>; archivo de Excel del capítulo, huella SHA-256 <code>%s…</code>). '
+               'La Ciudad de México, el Estado de México y Veracruz tienen dos OOAD cada uno: su suma es nuestra')
+        dg = gsal.fuente_dgis()
+        sp = gsal._estados_doc()['dgis']['sinPersonal']
+        dgis = ('Secretaría de Salud, Dirección General de Información en Salud, Recursos en Salud Sectorial 2025, establecimientos del %s por entidad (<a href="%s">datos abiertos, ZIP</a>; '
+                'huella SHA-256 <code>%s…</code>). La suma por entidad es nuestra; el total de establecimientos cuadra con la nota de cierre de la DGIS')
+        def _mem(cuadro, cap):
+            return mem % (cuadro, gsal.MEMORIA, gsal.MEM[cap]['sha256'][:12])
+        extra.update({
+            'imA': _mem('cuadro II.10 «Población derechohabiente adscrita a unidad de medicina familiar»', 'II') + '.',
+            'imQ': _mem('cuadro IV.5 «Hospitalización», columna de intervenciones quirúrgicas de 2025', 'IV') + '.',
+            'imX': 'Consultas de 2025 (%s) ÷ población adscrita (%s). La división es nuestra.' % (_mem('cuadro IV.3', 'IV'), _mem('cuadro II.10', 'II')),
+            'imK': 'Camas censables (%s) ÷ población adscrita (%s) × 1,000. La división es nuestra.' % (_mem('cuadro XIII.11', 'XIII'), _mem('cuadro II.10', 'II')),
+            'isM': (dgis % ('ISSSTE', html.escape(dg['url']), dg['sha256'][:12])) + ', columna «Total médicos generales especialistas y odontólogos». El ISSSTE no le reportó personal de %d establecimientos.' % sp['issste'],
+            'isK': (dgis % ('ISSSTE', html.escape(dg['url']), dg['sha256'][:12])) + ', columna «Total camas área hospitalización».',
+            'isU': (dgis % ('ISSSTE', html.escape(dg['url']), dg['sha256'][:12])) + '.',
+            'imM': (dgis % ('IMSS', html.escape(dg['url']), dg['sha256'][:12])) + ', columna «Total médicos generales especialistas y odontólogos». El IMSS no le reportó personal de %d establecimientos.' % sp['imss'],
         })
     inf = ('Presidencia de la República, Segundo Informe de Gobierno 2025-2026, gráfica «Procesamiento de petróleo crudo en el Sistema Nacional de Refinación 2025-2026», '
            'p. 378, elaborada por la SENER con la Base de Datos Institucional de PEMEX %s') % ref('ref-presidencia-2ig')
@@ -661,6 +718,7 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
     nota_leg = _nota_leg(filas)
     nota_jud = _nota_jud(filas)
     nota_amb = _nota_amb(filas)
+    nota_sal = _nota_sal(filas)
     sin_ref = [f['a'] for f in filas if f['refj'] is None]
     for i in ('refj', 'refp', 'refu'):
         falta[i] = {'a': sin_ref, 'gris': 'sin refinería de PEMEX', 'pend': None,
@@ -699,7 +757,7 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
                       med[0]['n'], pct(med[0]['ild']), med[-1]['n'], pct(med[-1]['ild']), chip('oficial')))
     datos = {'lentes': [dict(l, fuente=fu[l['id']], falta=falta.get(l['id'])) for l in LENTES], 'e': filas,
              'dims': {i: {'n': nom, 'ir': ir, 'ire': ire, 'pinta': pinta} for i, _, nom, _, ir, ire, pinta in DIMENSIONES}}
-    notas = {'deuda': nota_deuda, 'inversion': nota_inv, 'legislativa': nota_leg, 'judicial': nota_jud, 'ambiental': nota_amb}
+    notas = {'deuda': nota_deuda, 'inversion': nota_inv, 'legislativa': nota_leg, 'judicial': nota_jud, 'ambiental': nota_amb, 'salud': nota_sal}
     # Lo que antes era un párrafo largo arriba del mapa y una nota debajo
     # (decisión del autor, 03-11-2026: «mucho contenido de narración»): cada
     # dimensión tiene su «Cómo leerla» y su «Lo que el mapa no dice» en la
@@ -711,6 +769,9 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         'inversion': 'La obra que hace cada gobierno estatal, directa o por medio de sus organismos, y lo que la Auditoría Superior dejó por aclarar.',
         'legislativa': 'Los 32 congresos locales: lo que gastó cada uno, cuánto cuesta por curul y cómo se compara con el tope del 0.70 % de la Constitución.',
         'judicial': 'Los 32 poderes judiciales de los estados: lo que ejerció cada uno junto a lo que concluyó con ese dinero y las causas penales que se le acumulan.',
+        'salud': ('El IMSS y el ISSSTE en cada estado. Del IMSS, lo que registra su Memoria Estadística 2025: a cuántas personas tiene adscritas, cuántas consultas y cirugías dio '
+                  'y cuántas camas tiene por cada mil. Del ISSSTE, con qué cuenta según el registro de la Secretaría de Salud: médicos, camas y unidades. '
+                  'La última lente pone a los médicos del IMSS en ese mismo registro, para comparar las dos con la misma regla.'),
         'ambiental': ('Los recursos naturales: los acuíferos de cada estado y cuántos ya no tienen agua para concesionar, su superficie forestal y sus incendios forestales, '
                       'su pesca y su acuacultura, sus concesiones mineras y las siete refinerías de PEMEX, cuánto crudo procesa cada una frente a su capacidad y cuánto valor '
                       'ganó o perdió en sus libros. En las lentes de refinación, el punto marca la entidad, no el sitio exacto.'),
@@ -829,6 +890,26 @@ def _nota_amb(filas):
         d25['n'].replace('Refinería ', 'refinería '), rn._mdps(d25['d25']), chip('oficial'),
         rn._y([f['n'] for f in filas if f.get('min') and f['min']['prod'] is None]), chip('pendiente', 'mineria-por-estado-2026'),
         format(rn.NAC26['t'], ','), chip('oficial'), format(rn.MINAS_TOT[0] - rn.NAC26['t'], ','), chip('derivado'))
+
+
+def _nota_sal(filas):
+    """Los puntos ciegos de la salud pública, dichos con las cifras: la cama
+    que no es igual en todos los estados, el ISSSTE concentrado en la capital
+    y lo que su anuario no deja ver."""
+    k = sorted(filas, key=lambda f: f['imK'])
+    tm = sum(f['isM'] for f in filas)
+    cd = max(filas, key=lambda f: f['isM'])
+    pr = sorted(filas, key=lambda f: f['isM'] / (f['isM'] + f['imM']))
+    return ('<b>La misma institución no da la misma cama en todos lados.</b> Por cada mil personas adscritas, el IMSS tiene %s camas de hospitalización en %s %s y %s en %s %s. '
+            'Parte de la diferencia es que los hospitales de alta especialidad se cuentan donde están y atienden a gente de otros estados; la otra parte es que no hay '
+            'la misma infraestructura en todos lados. <b>El ISSSTE, en la capital:</b> %s de sus %s médicos están en %s %s, %s de cada 100 %s. '
+            'Y donde menos pesa frente al IMSS es %s: de cada 100 médicos de las dos instituciones, %s son del ISSSTE %s. '
+            '<b>Lo que falta:</b> cuántas personas atiende el ISSSTE en cada estado y qué les resolvió %s. Sin eso, sus camas y sus médicos no se pueden poner por persona, '
+            'y este mapa no puede decir si el ISSSTE de un estado alcanza o no. Tampoco está quien no tiene seguridad social: el IMSS-Bienestar y los servicios estatales.') % (
+        format(k[-1]['imK'], '.2f'), k[-1]['n'], chip('derivado'), format(k[0]['imK'], '.2f'), k[0]['n'], chip('derivado'),
+        format(cd['isM'], ','), format(tm, ','), cd['n'], chip('oficial'), format(round(100.0 * cd['isM'] / tm)), chip('derivado'),
+        pr[0]['n'], format(100.0 * pr[0]['isM'] / (pr[0]['isM'] + pr[0]['imM']), '.1f'), chip('derivado'),
+        chip('pendiente', 'salud-issste-servicios'))
 
 
 def _nota_jud(filas):
@@ -1180,6 +1261,64 @@ def _judicial_portal(base, ref, e):
     return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, reglas)
 
 
+def _salud_portal(base, ref, e):
+    """Su salud pública (03-11-2026): el IMSS, con su Memoria Estadística 2025
+    por OOAD, y el ISSSTE, con el registro sectorial de la DGIS. Las dos
+    fuentes no se mezclan; lo que el ISSSTE no deja ver va con su ficha."""
+    import gestion_salud as gs
+    sa = gs.salud_estados(base)
+    a, nom = e['abbr'], e['name']
+    h = sa[a]
+    tot = gs._estados_doc()['memoria']['total']
+    lugar = lambda f, alto=True: sorted(sa, key=lambda x: -f(sa[x]) if alto else f(sa[x])).index(a) + 1
+    dos = ''
+    if h.get('ooad'):
+        dos = '<dt>Sus dos OOAD</dt><dd>%s %s <small>la Memoria las publica por separado; la suma es nuestra</small></dd>' % (
+            ' · '.join('%s: %s personas adscritas' % (html.escape(n), format(v['ads'], ',')) for n, v in h['ooad']), chip('oficial'))
+    p1 = ('<article class="pl-piso pl-piso-sal"><p class="pl-piso-n">1 · El IMSS en %s · 2025</p>'
+          '<p class="pl-piso-v"><b class="num-tabular">%s</b> personas adscritas %s</p>'
+          '<dl class="pl-dl"><dt>Su lugar</dt><dd>%d.º de 32 %s <small>de la que más personas adscritas tiene a la que menos; es el %s de las del país</small></dd>%s'
+          '<dt>Consultas</dt><dd>%s %s <small>%s por persona adscrita %s, lugar %d de 32 (en el país, %s); %s de especialidad y %s de urgencias</small></dd>'
+          '<dt>Egresos hospitalarios</dt><dd>%s %s</dd>'
+          '<dt>Cirugías</dt><dd>%s %s <small>%s por cada mil personas adscritas %s</small></dd>'
+          '<dt>Camas de hospitalización</dt><dd>%s %s <small>%s por cada mil personas adscritas %s, lugar %d de 32 (en el país, %s)</small></dd>'
+          '</dl><p class="pl-piso-f">IMSS, Memoria Estadística 2025, por OOAD: población adscrita a unidad de medicina familiar, cuadro II.10; consultas, cuadro IV.3; egresos e '
+          'intervenciones quirúrgicas, cuadro IV.5; camas censables, cuadro XIII.11 (<a href="%s">Memoria</a>). Las divisiones son nuestras.</p></article>') % (
+              html.escape(nom), format(h['ads'], ','), chip('oficial'), lugar(lambda r: r['ads']), chip('derivado'), pct(100.0 * h['ads'] / tot['ads']), dos,
+              format(h['con'], ','), chip('oficial'), format(h['conx'], '.2f'), chip('derivado'), lugar(lambda r: r['conx']), format(tot['con'] / tot['ads'], '.2f'),
+              format(h['esp'], ','), format(h['urg'], ','),
+              format(h['egr'], ','), chip('oficial'),
+              format(h['iq'], ','), chip('oficial'), format(h['iqk'], '.1f'), chip('derivado'),
+              format(h['camc'], ','), chip('oficial'), format(h['camk'], '.2f'), chip('derivado'), lugar(lambda r: r['camk']), format(1000.0 * tot['camc'] / tot['ads'], '.2f'),
+              gs.MEMORIA)
+    i, m = h['is'], h['im']
+    tm = sum(r['is']['med'] for r in sa.values())
+    p2 = ('<article class="pl-piso pl-piso-iss"><p class="pl-piso-n">2 · El ISSSTE en %s · 2025</p>'
+          '<p class="pl-piso-v"><b class="num-tabular">%s</b> médicas y médicos %s</p>'
+          '<dl class="pl-dl"><dt>Su lugar</dt><dd>%d.º de 32 %s <small>tiene el %s de los médicos del ISSSTE en el país</small></dd>'
+          '<dt>Unidades</dt><dd>%s %s <small>clínicas, hospitales y unidades de apoyo</small></dd>'
+          '<dt>Camas de hospitalización</dt><dd>%s %s</dd>'
+          '<dt>Enfermería en contacto con el paciente</dt><dd>%s %s</dd>'
+          '<dt>Consultorios</dt><dd>%s %s</dd>'
+          '<dt>Frente al IMSS, en el mismo registro</dt><dd>%s médicos del IMSS %s <small>el %s de los médicos de las dos instituciones en el estado son del ISSSTE %s</small></dd>'
+          '<dt>Cuántas personas atiende y qué les resolvió</dt><dd>Sin cifra %s <small>su anuario estadístico no responde</small></dd>'
+          '</dl><p class="pl-piso-f">Secretaría de Salud, DGIS, Recursos en Salud Sectorial 2025 (<a href="%s">datos abiertos</a>), establecimientos del ISSSTE y del IMSS en %s. '
+          'Las sumas y las divisiones son nuestras.</p></article>') % (
+              html.escape(nom), format(i['med'], ','), chip('oficial'), lugar(lambda r: r['is']['med']), chip('derivado'), pct(100.0 * i['med'] / tm),
+              format(i['u'], ','), chip('oficial'), format(i['cam'], ','), chip('oficial'), format(i['enf'], ','), chip('oficial'), format(i['cons'], ','), chip('oficial'),
+              format(m['med'], ','), chip('oficial'), pct(100.0 * i['med'] / (i['med'] + m['med'])), chip('derivado'),
+              chip('pendiente', 'salud-issste-servicios'), html.escape(gs.fuente_dgis()['url']), html.escape(nom))
+    ciego = ('<p class="pl-dim-nota"><b>Lo que estas cifras no dicen.</b> Cuentan cuánto se hizo y con qué, no si se hizo bien ni a tiempo: ni la Memoria del IMSS ni el registro '
+             'de la DGIS dicen cuánto se espera una consulta o una cirugía %s. Los hospitales de alta especialidad del IMSS se cuentan en el estado donde están y atienden a gente de otros. '
+             'Las dos fuentes no se mezclan: desde 2025 el IMSS del registro de la DGIS incluye las unidades rurales del antiguo programa IMSS-Bienestar. '
+             'Y quien no tiene seguridad social se atiende en el IMSS-Bienestar o en los servicios del estado, que no están en esta dimensión %s.</p>') % (
+                 chip('pendiente', 'salud-tiempos-espera'), chip('pendiente', 'salud-imss-bienestar'))
+    ir = ('<p class="pl-ficha-ir"><a href="planisferio.html?d=salud&amp;e=%s">El IMSS y el ISSSTE de los 32 estados, en el mapa ➔</a> '
+          '<a href="datos-salud-sistema.html#sal-estados">La tabla completa, en la Enciclopedia ➔</a> '
+          '<a href="datos-salud-imss.html">El IMSS en el país: lo que cuesta y lo que resuelve ➔</a></p>') % quote(a)
+    return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, ir)
+
+
 def _ambiental_portal(base, ref, e):
     """Sus recursos naturales (03-11-2026): sus acuíferos, sus incendios forestales, sus concesiones mineras, su refinería de PEMEX, si tiene,
     y los siete ramos de recursos con quién los explota y quién los audita,
@@ -1462,6 +1601,10 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
              'texto': ('Lo que ejerció el Poder Judicial de %s en 2024, junto a lo que le llegó y lo que concluyó con ese dinero, las causas penales que se le acumulan '
                        'y sus personas juzgadoras. Las cifras son del censo de impartición de justicia del INEGI.') % nom,
              'tarjetas': [], 'bloque': _judicial_portal(base, ref, e)},
+            {'id': 'salud', 'titulo': 'Su salud pública: el IMSS y el ISSSTE',
+             'texto': ('A cuántas personas tiene adscritas el IMSS en %s, cuántas consultas y cirugías les dio y con cuántas camas, y con cuántos médicos, camas y unidades '
+                       'cuenta el ISSSTE. Del IMSS, su Memoria Estadística 2025; del ISSSTE, el registro de recursos de la Secretaría de Salud, porque su anuario no responde.') % nom,
+             'tarjetas': [], 'bloque': _salud_portal(base, ref, e)},
             {'id': 'ambiental', 'titulo': 'Sus recursos naturales',
              'texto': ('Quién explota los recursos de %s y quién los audita. Empieza por lo que ya tiene cifra: sus acuíferos y cuántos ya no tienen agua para concesionar, '
                        'su superficie forestal y sus incendios forestales de 2025, su pesca y su acuacultura, sus concesiones mineras y la refinería de PEMEX, si la tiene, con el crudo que procesa y el valor que ganó o perdió en los libros de PEMEX.') % nom,
