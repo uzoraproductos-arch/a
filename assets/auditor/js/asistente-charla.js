@@ -1184,6 +1184,33 @@
     function mapaResp(t) {
       if (!SAN) return null;
       if (SAN.t.map_cuadre && /\b(no )?cuadra(n)?\b|incongruen|no coincide/.test(t) && /\b(estados?|entidad(es)?)\b/.test(t) && /federacion|inegi|cuenta publica|recib/.test(t)) return sanTema('map_cuadre');
+      /* Los recursos naturales, PEMEX y sus refinerías (03-11-2026, recursos_naturales.py): antes que las megaobras,
+         porque «refinería» y «Pemex» también salen ahí; «¿cuánto costó Dos Bocas?» sigue yendo a la obra. */
+      if (SAN.t.rn_capitulo) {
+        var RN_REF = [['salina_cruz', /salina cruz/], ['cadereyta', /cadereyta/], ['madero', /madero/], ['minatitlan', /minatitlan/],
+          ['salamanca', /salamanca/], ['tula', /\btula\b|miguel hidalgo/], ['olmeca', /olmeca|dos bocas/]];
+        if (/refiner/.test(t) && /\bmapa\b|planisferio|donde (estan|quedan|hay)|en que estados?/.test(t)) {
+          var mr = sanTema('rn_refinerias');
+          mr.ir = ['planisferio.html?d=ambiental', 'las siete refinerías en el Planisferio'];
+          return mr;
+        }
+        if (/refiner|dos bocas|olmeca/.test(t) && /crudo|procesa|barriles|refina\b|cuanto refina|deterioro|valor (en|de) (sus )?libros|perdio (mas )?valor|perdio valor|capacidad|lugar|ranking|cual(es)? (refineria|es la refineria)|cuantas refinerias/.test(t)) {
+          var un = RN_REF.filter(function (x) { return x[1].test(t); });
+          if (un.length === 1 && !/cada|todas|las siete|cual(es)? (refineria|es la refineria)|mas valor|que refineria/.test(t)) return sanTema('rn_ref_' + un[0][0]);
+          return sanTema('rn_refinerias');
+        }
+        if (/(que es|que significa|que quiere decir) (el |un )?deterioro/.test(t)) return sanTema('rn_refinerias');
+        if (/pemex/.test(t) && /(quien|quienes|como) (la |lo )?(audita|vigila|fiscaliza)|consejo de administracion|director general|subsidiari|empresa publica del estado|que cambio|que es pemex|ley de pemex|que se audita|organismos? subsidiari/.test(t)) return sanTema('rn_pemex');
+        if (/derecho economico|recursos? naturales?|no renovables?|recursos? renovables?/.test(t) && !/presupuesto|semarnat gast/.test(t)) {
+          if (/quien (los |las )?(puede|pueden)|como se explota|concesion/.test(t)) return sanTema('rn_regimen');
+          if (/subray|marcad|que (se )?audit|como (se )?audit/.test(t)) return sanTema('rn_auditar');
+          if (/punto(s)? ciego/.test(t)) return sanTema('rn_ciegos');
+          return sanTema('rn_capitulo');
+        }
+        if (/(se puede|pueden|puede|dan|otorgan) (dar |otorgar |tener )?(una )?concesion(es)? (de|del|sobre|para) (el |la )?(litio|uranio|petroleo|hidrocarburos|minerales radiactivos)/.test(t)) return sanTema('rn_regimen');
+        if (/(que|cual|cuales) ley(es)? (rige|rigen|regula|regulan|aplica|aplican) (a )?(la |el |los |las |al )?(mineria|minas|pesca|forestal|bosques|agua|aguas|petroleo|hidrocarburos|electricidad|energia electrica|litio|nuclear)/.test(t) ||
+            /ley (de|federal de|general de) (mineria|pesca|aguas nacionales|desarrollo forestal)/.test(t) && /que (dice|es|regula)|quien (la )?aplica/.test(t)) return sanTema('rn_ramos');
+      }
       if (SAN.t.serv_diligencia && /debida diligencia|antes de contratar|\b(como|quiero|puedo) (reviso|revisar|checo|checar|investigo|investigar|verifico|verificar) (a )?(un|una|mi|mis) (proveedor|proveedores|empresa)\b/.test(t)) return sanTema('serv_diligencia');
       return null;
     }

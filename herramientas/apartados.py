@@ -688,6 +688,14 @@ APARTADOS = [
                 'pagina': 'aprende-auditoria.html',
                 'pestana': ('🧭', 'Cómo se audita', 'Control interno, riesgos, fraude, prueba y lavado, con su fuente oficial'),
             },
+            {
+                # Pedido del autor, 03-11-2026: el capítulo 6 de su libro
+                # «Introducción al Derecho Económico» como metodología. La
+                # pagina la escribe recursos_naturales.py.
+                'id': 'recursos-naturales',
+                'pagina': 'aprende-recursos-naturales.html',
+                'pestana': ('🌎', 'Los recursos naturales', 'Renovables y no renovables, PEMEX y sus refinerías: qué se audita y con qué ley'),
+            },
             # «El Congreso y las elecciones» fue la cuarta pestaña de Aprende la
             # mañana del 23-10-2026; esa tarde (pedido del autor) se mudó a
             # Datos, como «Poder Legislativo» (poderes_paginas()).
@@ -5847,9 +5855,10 @@ def generar(sello=None):
     import datos_ambiente
     import periodistas, acceso
     import metodologia_auditoria
+    import recursos_naturales
     import planisferio
     import leyes_niveles
-    for extra in planisferio.paginas(base, ref, numeros_datos(base)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in planisferio.paginas(base, ref, numeros_datos(base)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

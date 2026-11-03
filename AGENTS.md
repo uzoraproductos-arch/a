@@ -138,6 +138,17 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   un juicio**: se dice junto a la cifra. Se abre con `planisferio.html?d=judicial` y
   cada portal la trae en `#judicial`; en el chat, `judLocal()` va antes que la ficha
   del estado.
+- **La ambiental, sexta dimensión pintada** (03-11-2026). Empieza por los recursos
+  no renovables: las siete refinerías de PEMEX, el crudo que procesa cada una
+  (Segundo Informe) y el valor que ganó o perdió en los libros de PEMEX. Todo sale
+  de `herramientas/recursos_naturales.py`, que es además la metodología del
+  capítulo 6 del libro del autor (`docs/libro/derecho-economico/`): **el libro es
+  guía de temas, no fuente**, y cada regla se coteja contra la ley vigente, porque
+  describe el marco de 1993-1994. **Una entidad sin refinería va en gris como «sin
+  refinería», nunca como «sin problema»**, y el deterioro se dice como estimación
+  contable, no como dinero que salió de la caja. Se abre con
+  `planisferio.html?d=ambiental` y cada portal la trae en `#ambiental`; en el chat,
+  los temas `rn_*` van en `mapaResp()`, antes que las megaobras.
 - **Las leyes del dinero en los tres niveles** (03-11-2026,
   `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
   cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y

@@ -1725,6 +1725,55 @@
     "Tabasco",
     "no es lo mismo que no deber"
    ]
+  },
+  {
+   "q": "¿Cuánto crudo procesa la refinería de Salina Cruz?",
+   "ir": "aprende-recursos-naturales.html#rn-refinerias",
+   "dice": [
+    "202 mil barriles diarios",
+    "Salina Cruz, Oaxaca"
+   ]
+  },
+  {
+   "q": "¿Qué refinería perdió más valor?",
+   "ir": "aprende-recursos-naturales.html#rn-refinerias",
+   "dice": [
+    "deterioro",
+    "no dinero que salió de la caja"
+   ]
+  },
+  {
+   "q": "¿Dónde están las refinerías de Pemex en el mapa?",
+   "ir": "planisferio.html?d=ambiental",
+   "dice": [
+    "siete refinerías"
+   ]
+  },
+  {
+   "q": "¿Quién audita a PEMEX?",
+   "ir": "aprende-recursos-naturales.html#rn-pemex",
+   "dice": [
+    "Comité de Auditoría",
+    "Auditoría Superior"
+   ]
+  },
+  {
+   "q": "¿Qué son los recursos naturales no renovables?",
+   "ir": "aprende-recursos-naturales.html#rn-capitulo",
+   "dice": [
+    "cuánto queda"
+   ]
+  },
+  {
+   "q": "¿Se puede dar una concesión de litio?",
+   "ir": "aprende-recursos-naturales.html#rn-regimen",
+   "dice": [
+    "litio"
+   ]
+  },
+  {
+   "q": "¿Qué ley rige la pesca?",
+   "ir": "aprende-recursos-naturales.html#rn-ramos"
   }
  ]
 }

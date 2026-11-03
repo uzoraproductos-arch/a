@@ -58,6 +58,8 @@
       if (l.fmt === 'pct2') return num(v, 2) + '%';
       if (l.fmt === 'pesos') return '$' + num(v, 0);
       if (l.fmt === 'n') return num(v, 0);
+      if (l.fmt === 'mbd') return num(v, 0) + ' mil b/d';
+      if (l.fmt === 'mbd1') return num(v, 1) + ' mil b/d';
       return mdp(v);
     }
     D.e.forEach(function (e) { porA[e.a] = e; });
@@ -74,7 +76,50 @@
       while (i < 4 && v >= c[i]) i++;
       return i;
     }
+    /* Las refinerías se marcan con un punto en el centro de su entidad (no en
+       el sitio exacto); el punto se toca igual que la entidad. */
+    var svg = document.querySelector('.pl-svg'), marcas = null;
+    function marca() {
+      if (!svg) return;
+      if (!marcas) {
+        marcas = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        marcas.setAttribute('class', 'pl-marcas');
+        Array.prototype.forEach.call(paths, function (p) {
+          var e = porA[p.getAttribute('data-a')];
+          if (!e || !e.ref) return;
+          /* El centro del recuadro puede caer fuera de una entidad curva
+             (Veracruz): se busca el punto más cercano a él que sí esté dentro. */
+          var b = p.getBBox(), c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          var cx = b.x + b.width / 2, cy = b.y + b.height / 2, mejor = null;
+          if (p.isPointInFill && svg.createSVGPoint) {
+            var pt = svg.createSVGPoint();
+            for (var i = 0; i <= 20; i++) for (var j = 0; j <= 20; j++) {
+              pt.x = b.x + b.width * i / 20; pt.y = b.y + b.height * j / 20;
+              var dd = (pt.x - cx) * (pt.x - cx) + (pt.y - cy) * (pt.y - cy);
+              if ((!mejor || dd < mejor[2]) && p.isPointInFill(pt)) mejor = [pt.x, pt.y, dd];
+            }
+          }
+          if (mejor) { cx = mejor[0]; cy = mejor[1]; }
+          c.setAttribute('cx', cx.toFixed(1));
+          c.setAttribute('cy', cy.toFixed(1));
+          c.setAttribute('r', '7');
+          c.setAttribute('class', 'pl-ind');
+          c.setAttribute('tabindex', '0');
+          c.setAttribute('role', 'button');
+          c.setAttribute('aria-label', e.ref.n + ', ' + e.n + ': ' + num(e.ref.jun, 0) + ' mil barriles diarios en junio de 2026');
+          var t = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+          t.textContent = e.ref.n + ' · ' + e.ref.sede;
+          c.appendChild(t);
+          c.addEventListener('click', function () { elige(e.a, true); });
+          c.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); elige(e.a, true); } });
+          marcas.appendChild(c);
+        });
+        svg.appendChild(marcas);
+      }
+      marcas.style.display = dimP === 'ambiental' ? '' : 'none';
+    }
     function pinta() {
+      marca();
       var c = cortes(), pal = PAL[lente.pal];
       Array.prototype.forEach.call(paths, function (p) {
         var e = porA[p.getAttribute('data-a')], k = e ? clase(e[lente.id], c) : -1;
@@ -155,8 +200,25 @@
         '<a class="pl-ficha-ir" href="' + esc(e.p) + '#judicial">Ver su Poder Judicial en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
+    /* Sus recursos naturales: su refinería de PEMEX, si tiene (Segundo
+       Informe 2026 y estados financieros de PEMEX 2025). */
+    function mdps(v) { return v == null ? 'no figura en la nota' : '<b class="num-tabular">' + (v < 0 ? '−' : '+') + '$' + num(Math.abs(v), 1) + ' mdp</b> ' + chip('oficial'); }
+    function ambiental(e, fijo) {
+      var r = e.ref, f = lenteDe('refj').falta;
+      ficha.innerHTML = '<h3>' + esc(e.n) + '</h3>' + (r ?
+        '<p class="pl-ficha-sub">🛢️ ' + esc(r.n) + ' · ' + esc(r.sede) + '</p><dl class="pl-ficha-dl">' +
+        '<dt>Crudo procesado · junio 2026</dt><dd><b class="num-tabular">' + num(r.jun, 0) + ' mil b/d</b> ' + chip('oficial') + ' · lugar ' + r.lug + ' de 7</dd>' +
+        '<dt>Promedio sep-25 a jun-26</dt><dd><b class="num-tabular">' + num(r.prom, 1) + ' mil b/d</b> ' + chip('derivado') + '</dd>' +
+        '<dt>Su mejor mes</dt><dd><b class="num-tabular">' + num(r.max, 0) + ' mil b/d</b> en ' + esc(r.mmax) + ' ' + chip('oficial') + '</dd>' +
+        '<dt>Valor ganado o perdido en libros · 2025</dt><dd>' + (r.id === 'olmeca' ? 'es de una filial y PEMEX la arrienda' : mdps(r.d25)) + '</dd></dl>' +
+        '<p class="pl-ficha-mun">Procesar no es producir gasolina, y el valor en libros es una estimación, no dinero que salió de la caja.</p>' :
+        '<p class="pl-ficha-sub">Sin refinería de PEMEX</p><p class="pl-ficha-mun">' + esc(f.txt) + '</p>') +
+        '<a class="pl-ficha-ir" href="' + esc(e.p) + '#ambiental">Ver sus recursos naturales en su portal ➔</a>' +
+        (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
+    }
     function muestra(e, fijo) {
       if (!e) return;
+      if (dimP === 'ambiental') { ambiental(e, fijo); return; }
       if (dimP === 'judicial') { judicial(e, fijo); return; }
       if (dimP === 'deuda') { deuda(e, fijo); return; }
       if (dimP === 'inversion') { inversion(e, fijo); return; }
@@ -231,7 +293,7 @@
     }
     var m = /[?&]e=([^&#]+)/.exec(location.search), pedida = null;
     try { pedida = m ? decodeURIComponent(m[1]) : null; } catch (err) { pedida = null; }
-    /* ?d=deuda, ?d=inversion, ?d=legislativa o ?d=judicial (desde el Auditor): abre el mapa en esa dimensión. */
+    /* ?d=deuda, ?d=inversion, ?d=ambiental, ?d=legislativa o ?d=judicial (desde el Auditor): abre el mapa en esa dimensión. */
     var md = /[?&]d=([a-z]+)/.exec(location.search);
     if (md && D.dims[md[1]]) eligeDim(md[1]); else pinta();
     /* ?e=JAL&m=1 (desde el Auditor): si la entidad ya tiene el mapa de sus
