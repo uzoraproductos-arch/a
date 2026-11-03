@@ -242,6 +242,55 @@ PROD_MAYOR = ['BCS', 'CHIH', 'COAH', 'COL', 'DGO', 'GRO', 'JAL', 'SLP', 'SON', '
 PROD_MENOR = ['AGS', 'BC', 'CAM', 'CHIS', 'MÉX', 'GTO', 'HGO', 'MICH', 'NAY', 'NL', 'OAX', 'PUE', 'QRO', 'SIN', 'TAM', 'VER', 'YUC']
 INF_MIN = 'p. 444 (p. 468 del PDF)'
 
+# El agua del subsuelo (03-11-2026, la primera cifra de un recurso renovable).
+# CONAGUA, «Acuerdo por el que se actualiza la disponibilidad media anual de
+# agua subterránea de los 653 acuíferos», DOF 09-11-2023, artículo primero,
+# con corte al 30 de diciembre de 2022: sus tablas, una fila por acuífero y
+# agrupadas por entidad, se copiaron tal cual a un CSV (clave, nombre,
+# entidad y los ocho términos, en millones de m³ al año). Por entidad:
+# (acuíferos, con disponibilidad, sin disponibilidad, suma de los déficits,
+# suma de lo disponible), en hm³. Si el CSV ya no da esto, se detiene.
+ACU = {'tx': 'Comisión Nacional del Agua, «Acuerdo por el que se actualiza la disponibilidad media anual de agua subterránea de los 653 acuíferos de los Estados Unidos Mexicanos», '
+             'DOF 09-11-2023, artículo primero (fecha de corte: 30 de diciembre de 2022)',
+       'url': 'https://dof.gob.mx/nota_detalle.php?codigo=5708074&fecha=09/11/2023',
+       'archivo': 'investigaciones/recursos-naturales/CONAGUA_DisponibilidadAcuiferos_DOF2023.csv',
+       'sha256': '1a230f536769b89307a35e99270b4973f1e9e3812c45d046f1d4414cdc1e6efa'}
+ACUIFEROS = {'AGS': (5, 0, 5, 134.3, 0.0), 'BC': (48, 32, 16, 603.3, 51.6), 'BCS': (39, 17, 22, 105.1, 15.9), 'CAM': (1, 1, 0, 0.0, 306.5),
+             'COAH': (28, 9, 19, 515.1, 69.8), 'COL': (11, 7, 4, 5.6, 14.0), 'CHIS': (15, 15, 0, 0.0, 2948.3), 'CHIH': (61, 23, 38, 3063.0, 424.6),
+             'CDMX': (1, 0, 1, 480.4, 0.0), 'DGO': (29, 17, 12, 288.8, 249.4), 'GTO': (18, 5, 13, 676.8, 134.3), 'GRO': (35, 32, 3, 2.7, 717.2),
+             'HGO': (21, 18, 3, 27.0, 190.6), 'JAL': (59, 24, 35, 454.4, 104.9), 'MÉX': (9, 1, 8, 562.3, 4.6), 'MICH': (22, 13, 9, 178.3, 281.1),
+             'MOR': (4, 3, 1, 0.7, 28.8), 'NAY': (12, 9, 3, 39.9, 83.7), 'NL': (23, 10, 13, 381.1, 109.5), 'OAX': (21, 19, 2, 10.9, 340.2),
+             'PUE': (6, 4, 2, 83.0, 113.9), 'QRO': (11, 4, 7, 173.1, 78.7), 'QROO': (2, 2, 0, 0.0, 207.2), 'SLP': (19, 8, 11, 308.8, 154.3),
+             'SIN': (14, 6, 8, 172.1, 171.1), 'SON': (60, 37, 23, 553.3, 269.6), 'TAB': (8, 8, 0, 0.0, 7526.1), 'TAM': (14, 10, 4, 35.7, 235.5),
+             'TLAX': (4, 4, 0, 0.0, 62.7), 'VER': (18, 14, 4, 64.5, 658.4), 'YUC': (1, 1, 0, 0.0, 2059.6), 'ZAC': (34, 14, 20, 396.1, 43.1)}
+ACU_TOT = (653, 367, 286)
+# Las dos sumas nacionales con los valores sin redondear del CSV (hm³ al año).
+ACU_SUMAS = (9316.4, 17655.2)
+# El Programa Nacional Hídrico 2026-2030 (DOF 18-05-2026) repite los 367 y
+# 286 de ese Acuerdo, y da en qué se usa el agua que se extrae de ellos.
+PNH = {'tx': 'Comisión Nacional del Agua, Programa Nacional Hídrico 2026-2030, DOF 18-05-2026, apartado de diagnóstico',
+       'url': 'https://dof.gob.mx/nota_detalle.php?codigo=5787687&fecha=18/05/2026'}
+USO_SUB = [('agrícola', 71.1), ('abastecimiento público', 20.9), ('industria', 6.9), ('energía eléctrica, sin hidroelectricidad', 1.1)]
+# Segundo Informe de Gobierno: los 27 acuíferos «en condición de
+# sobreexplotación» donde CONAGUA mide niveles con pozos (p. 513, nota 1/),
+# con la clave y el valor que les da el Acuerdo de 2023 (+ disponible, −
+# déficit); los títulos de agua revisados (p. 511) y lo que se cobró (p. 510).
+SOBRE27 = {'AGS': [('0103', 'El Llano', -6.257537), ('0105', 'Valle de Calvillo', -17.710928), ('0102', 'Valle de Chicalote', -13.796082), ('0101', 'Valle de Aguascalientes', -95.758309)],
+           'BCS': [('0306', 'Santo Domingo', -30.280721), ('0326', 'Alfredo V. Bonfil', 2.13557), ('0324', 'La Paz', -13.488404)],
+           'BC': [('0210', 'Valle de Mexicali', -432.044272)],
+           'CHIH': [('0831', 'Meoqui-Delicias', -167.118741), ('0801', 'Ascensión', -104.204731)],
+           'COAH': [('0511', 'Región Manzanera-Zapalinamé', -38.141433)],
+           'CDMX': [('0901', 'Zona Metropolitana de la Ciudad de México', -480.429914)],
+           'DGO': [('1001', 'Valle de Santiaguillo', -73.307923), ('1023', 'Ceballos', -18.677546)],
+           'JAL': [('1422', 'Encarnación', -61.947808)],
+           'NL': [('1919', 'Campo Cerritos', -2.708159)],
+           'QRO': [('2204', 'Valle de Buenavista', -13.877392), ('2205', 'Valle de Tequisquiapan', -5.149624), ('2202', 'Valle de Amazcala', -22.161829)],
+           'SLP': [('2409', 'Villa Hidalgo', 7.378531), ('2402', 'El Barril', -63.296591)],
+           'SON': [('2619', 'Costa de Hermosillo', -74.253541)],
+           'ZAC': [('3227', 'Guadalupe Bañuelos', -0.394701), ('3228', 'La Blanca', -10.653091), ('3229', 'Loreto', -49.416281), ('3214', 'Aguanaval', -89.538741), ('3210', 'Benito Juárez', -3.386465)]}
+AGUA26 = {'mon': 138, 'pozos': 3904, 'pozos_s': 772, 'bal': 189, 'tit': 538805, 'inc': 58938, 'rec': 24712.5, 'tram': 7868, 'res': 6094}
+INF_AGUA = {'s27': 'p. 513 (p. 537 del PDF), nota 1/', 'tit': 'p. 511 (p. 535 del PDF)', 'rec': 'p. 510 (p. 534 del PDF)'}
+
 
 def _huella(doc):
     """Si el documento está en el repositorio, su huella debe coincidir."""
@@ -320,6 +369,65 @@ def mineria(abbrs=None):
     return out
 
 
+def acuiferos(abbrs=None):
+    """Los acuíferos de cada entidad (CONAGUA, DOF 09-11-2023, corte al
+    30-12-2022) y lo derivado: cuántos de cada 100 no tienen disponibilidad y
+    su lugar por déficit. Se coteja contra el CSV de las 653 filas: si una
+    suma o un acuífero sobreexplotado del Informe ya no cuadra, se detiene."""
+    import csv
+    p = os.path.join(RAIZ, ACU['archivo'])
+    if os.path.exists(p):
+        _huella(ACU)
+        F = list(csv.DictReader(open(p, encoding='utf-8')))
+        if len(F) != ACU_TOT[0] or len({f['clave'] for f in F}) != ACU_TOT[0]:
+            raise SystemExit('recursos_naturales: el CSV de acuíferos no trae los %d acuíferos' % ACU_TOT[0])
+        por = {f['clave']: f for f in F}
+        nom = {v: k for k, v in ACU_ENT.items()}
+        agg = {}
+        for f in F:
+            x = agg.setdefault(ACU_ENT[f['entidad']], [0, 0, 0, 0.0, 0.0])
+            pos, neg = float(f['DMA_positiva']), float(f['DMA_negativa_deficit'])
+            x[0] += 1
+            x[1] += pos > 0
+            x[2] += neg < 0
+            x[3] -= neg
+            x[4] += pos
+        for a, v in ACUIFEROS.items():
+            w = agg.get(a)
+            if not w or tuple(w[:3]) != v[:3] or abs(round(w[3], 1) - v[3]) > 0.05 or abs(round(w[4], 1) - v[4]) > 0.05:
+                raise SystemExit('recursos_naturales: %s ya no da %s en el CSV de acuíferos (da %s)' % (a, v, w))
+        tot = (round(sum(-float(f['DMA_negativa_deficit']) for f in F), 1), round(sum(float(f['DMA_positiva']) for f in F), 1))
+        if tot != ACU_SUMAS:
+            raise SystemExit('recursos_naturales: las sumas nacionales del CSV de acuíferos dan %s, no %s' % (tot, ACU_SUMAS))
+        for a, xs in SOBRE27.items():
+            for c, n, d in xs:
+                f = por.get(c)
+                dma = float(f['DMA_positiva']) or float(f['DMA_negativa_deficit']) if f else None
+                if not f or ACU_ENT[f['entidad']] != a or abs(dma - d) > 1e-5:
+                    raise SystemExit('recursos_naturales: el acuífero %s (%s) del Informe ya no cuadra con el Acuerdo de 2023' % (c, n))
+    if sum(v[0] for v in ACUIFEROS.values()) != ACU_TOT[0] or sum(v[1] for v in ACUIFEROS.values()) != ACU_TOT[1] or \
+            sum(v[2] for v in ACUIFEROS.values()) != ACU_TOT[2] or any(v[0] != v[1] + v[2] for v in ACUIFEROS.values()):
+        raise SystemExit('recursos_naturales: los acuíferos por entidad ya no suman %d, %d con disponibilidad y %d sin ella' % ACU_TOT)
+    if sum(len(x) for x in SOBRE27.values()) != 27:
+        raise SystemExit('recursos_naturales: el Informe enlista 27 acuíferos sobreexplotados; aquí hay %d' % sum(len(x) for x in SOBRE27.values()))
+    if abbrs is not None and set(ACUIFEROS) != set(abbrs):
+        raise SystemExit('recursos_naturales: las entidades de los acuíferos no son las de la base: %s' % sorted(set(ACUIFEROS) ^ set(abbrs)))
+    orden = sorted(ACUIFEROS, key=lambda a: -ACUIFEROS[a][3])
+    out = {}
+    for a, (n, con, sin, de, di) in ACUIFEROS.items():
+        out[a] = {'n': n, 'con': con, 'sin': sin, 'ps': round(sin / n * 100, 1), 'def': de, 'disp': di,
+                  'lug': orden.index(a) + 1 if de > 0 else None, 's27': SOBRE27.get(a, [])}
+    return out
+
+
+# Cómo nombra el Acuerdo de 2023 a cada entidad, para leer su CSV.
+ACU_ENT = {'AGUASCALIENTES': 'AGS', 'BAJA CALIFORNIA': 'BC', 'BAJA CALIFORNIA SUR': 'BCS', 'CAMPECHE': 'CAM', 'COAHUILA': 'COAH', 'COLIMA': 'COL',
+           'CHIAPAS': 'CHIS', 'CHIHUAHUA': 'CHIH', 'CIUDAD DE MÉXICO': 'CDMX', 'DURANGO': 'DGO', 'GUANAJUATO': 'GTO', 'GUERRERO': 'GRO', 'HIDALGO': 'HGO',
+           'JALISCO': 'JAL', 'ESTADO DE MÉXICO': 'MÉX', 'MICHOACÁN': 'MICH', 'MORELOS': 'MOR', 'NAYARIT': 'NAY', 'NUEVO LEÓN': 'NL', 'OAXACA': 'OAX',
+           'PUEBLA': 'PUE', 'QUERÉTARO': 'QRO', 'QUINTANA ROO': 'QROO', 'SAN LUIS POTOSÍ': 'SLP', 'SINALOA': 'SIN', 'SONORA': 'SON', 'TABASCO': 'TAB',
+           'TAMAULIPAS': 'TAM', 'TLAXCALA': 'TLAX', 'VERACRUZ': 'VER', 'YUCATÁN': 'YUC', 'ZACATECAS': 'ZAC'}
+
+
 def _mdps(v):
     if v is None:
         return '—'
@@ -374,6 +482,26 @@ def tabla_mineria():
             'Junio de 2026: el Segundo Informe solo da cuatro estados y el total nacional (%s títulos).</small></td></tr></tfoot></table></div>') % (
         _chip('oficial'), _chip('oficial'), _chip('derivado'), _chip('derivado'), _chip('oficial'), _chip('oficial'), filas, len(M),
         _n(MINAS_TOT[0]), _n(MINAS_TOT[1]), _y([nom[a] for a in sorted(set(nom) - set(M))]), _n(NAC26['t']))
+
+
+def tabla_agua():
+    import auditorias
+    nom = {e['abbr']: e['name'] for e in auditorias.db()['estados']}
+    A = acuiferos(list(nom))
+    orden = sorted(A, key=lambda a: (-A[a]['def'], -A[a]['ps'], nom[a]))
+    filas = ''.join(
+        '<tr><th scope="row">%s</th><td class="num-tabular">%d</td><td class="num-tabular">%d</td><td class="num-tabular">%s</td><td class="num-tabular">%s</td>'
+        '<td class="num-tabular">%s</td><td>%s</td></tr>' % (
+            html.escape(nom[a]), A[a]['n'], A[a]['sin'], _n(A[a]['ps'], 1), _n(A[a]['def'], 1) if A[a]['def'] else '—', _n(A[a]['disp'], 1),
+            html.escape(_y([n for c, n, d in A[a]['s27']])) if A[a]['s27'] else '—')
+        for a in orden)
+    return ('<div class="leg-tabla-caja"><table class="leg-tabla"><caption>Los acuíferos de cada entidad, con corte al 30 de diciembre de 2022 (millones de m³ al año)</caption>'
+            '<thead><tr><th scope="col">Entidad</th><th scope="col">Acuíferos %s</th><th scope="col">Sin disponibilidad %s</th><th scope="col">De cada 100 %s</th>'
+            '<th scope="col">Suma de sus déficits %s</th><th scope="col">Suma de lo disponible %s</th><th scope="col">Sobreexplotados que se miden con pozos (2026) %s</th></tr></thead>'
+            '<tbody>%s</tbody><tfoot><tr><th scope="row">Las 32</th><td class="num-tabular">%s</td><td class="num-tabular">%s</td><td class="num-tabular">%s</td>'
+            '<td class="num-tabular">%s</td><td class="num-tabular">%s</td><td class="num-tabular">27</td></tr></tfoot></table></div>') % (
+        _chip('oficial'), _chip('oficial'), _chip('derivado'), _chip('derivado'), _chip('derivado'), _chip('oficial'), filas,
+        _n(ACU_TOT[0]), _n(ACU_TOT[2]), _n(ACU_TOT[2] / ACU_TOT[0] * 100, 1), _n(ACU_SUMAS[0], 1), _n(ACU_SUMAS[1], 1))
 
 
 def tabla_derechos():
@@ -521,10 +649,11 @@ def temas():
             '<b>La ley vigente también envejece.</b> La ley nuclear de 1985 sigue nombrando a la «Secretaría de Energía, Minas e Industria Paraestatal».',
             '<b>Procesar no es producir.</b> El crudo que entra a una refinería no es la gasolina que sale: la gasolina depende de cada planta.',
             '<b>Un deterioro no es dinero perdido en efectivo.</b> Es una estimación de lo que la refinería dejará de generar, con supuestos que PEMEX pone y que cambian cada año.',
-            '<b>Un estado sin refinería no es un estado sin problema ambiental.</b> El mapa marca dónde hay refinerías y concesiones mineras, no dónde hay daño. El agua y los bosques '
-            'de cada estado todavía no tienen cifra en la plataforma.',
+            '<b>Un estado sin refinería no es un estado sin problema ambiental.</b> El mapa marca dónde hay refinerías, concesiones mineras y acuíferos en déficit, no dónde hay daño. '
+            'Los bosques de cada estado todavía no tienen cifra en la plataforma.',
             '<b>La capacidad no es una meta.</b> Usar poco más de la mitad de una refinería, como hizo el sistema en esos diez meses, puede ser falta de crudo, mantenimiento o una planta que no arranca: el porcentaje dice cuánto, no por qué.',
-            '<b>El libro no trae el agua,</b> que es un recurso renovable en crisis en varios estados y se explota por concesión.']),
+            '<b>El libro no trae el agua,</b> que es un recurso renovable en crisis en varios estados y se explota por concesión. La plataforma la agrega con los 653 acuíferos '
+            'de la CONAGUA, y su corte es de 2022 aunque la ley pide revisarlo cada dos años.']),
         'fu': [_o('La ley nuclear vigente todavía nombra a la SEMIP', ley('lnuc', 'art. 3')),
                _o('Las leyes que cita el libro', _libro('pp. 83 a 94'), 'derivado')],
         'sug': ['¿Qué es el deterioro de un activo?', '¿Qué se audita en PEMEX?', '¿Qué ley rige el agua?']}
@@ -551,10 +680,12 @@ def temas():
             'fu': [_o('Crudo procesado por refinería y por mes', _f(INF, '')), _o('Capacidad de destilación al cierre de 2024', _f(AE, 'p. 48'))] + ([] if r['id'] == 'olmeca' else [_o('Deterioro y reversa por refinería, 2025 y 2024', _f(EF, 'pp. 59 y 63'))]),
             'sug': ['¿Cuánto crudo procesa cada refinería?', '¿Qué refinería perdió más valor?', '¿Quién audita a PEMEX?']}
     _temas_mineria(t)
+    _temas_agua(t)
     for k, x in t.items():
-        x['ir'] = [ARCHIVO + '#' + (k.replace('_', '-') if not k.startswith(('rn_ref_', 'rn_min_')) else 'rn-refinerias' if k.startswith('rn_ref_') else 'rn-mineria'), TITULO]
+        x['ir'] = [ARCHIVO + '#' + (k.replace('_', '-') if not k.startswith(('rn_ref_', 'rn_min_', 'rn_acu_')) else
+                                   'rn-refinerias' if k.startswith('rn_ref_') else 'rn-mineria' if k.startswith('rn_min_') else 'rn-agua'), TITULO]
         x['aqui'] = x['ir']
-        if k.startswith('rn_min_'):
+        if k.startswith(('rn_min_', 'rn_acu_')):
             x['ir'] = [x.pop('portal') + '#ambiental', 'sus recursos naturales en el Planisferio']
     return t
 
@@ -651,8 +782,107 @@ def _temas_mineria(t):
             'sug': ['¿Qué estado tiene más concesiones mineras?', '¿Cuánto paga una mina por su concesión?', '¿Cuánto crudo procesa cada refinería?']}
 
 
+def _hm3(v, d=1):
+    return format(v, ',.%df' % d) + ' hm³'
+
+
+def _temas_agua(t):
+    """El agua del subsuelo: el panorama nacional, sus puntos ciegos y una
+    ficha por entidad."""
+    import auditorias
+    import planisferio
+    E = auditorias.db()['estados']
+    nom = {e['abbr']: e['name'] for e in E}
+    A = acuiferos(list(nom))
+    fa = _f(ACU, 'artículo primero')
+    fp = {'tx': PNH['tx'], 'url': PNH['url']}
+    fi = lambda k: {'tx': 'Presidencia de la República, Segundo Informe de Gobierno 2025-2026, %s' % INF_AGUA[k], 'url': INF['url']}
+    de = sorted((a for a in A if A[a]['def'] > 0), key=lambda a: -A[a]['def'])
+    todos = sorted((a for a in A if A[a]['sin'] == A[a]['n']), key=lambda a: nom[a])
+    ninguno = sorted((a for a in A if A[a]['sin'] == 0), key=lambda a: nom[a])
+    tot_def = ACU_SUMAS[0]
+    dif = [(a, c, n, d) for a, xs in SOBRE27.items() for c, n, d in xs if d > 0]
+    s27 = sum(len(x) for x in SOBRE27.values())
+    t['rn_agua'] = {
+        'tit': 'El agua del subsuelo, estado por estado',
+        'h': ('<p>El agua del subsuelo es de la Nación y se usa por <b>concesión o asignación</b> de la Comisión Nacional del Agua (Constitución, art. 27, párrafo sexto). '
+              'Antes de dar una, la CONAGUA debe tomar en cuenta la <b>disponibilidad media anual</b> del acuífero: el agua que todavía se puede sacar además de la ya '
+              'concesionada y de la que la naturaleza necesita (Ley de Aguas Nacionales, art. 3, fr. XXIV, y art. 22). Si sale negativa, el acuífero tiene <b>déficit</b>: '
+              'en el papel ya se comprometió más agua de la que se recarga, descontada la que necesita la naturaleza.</p>'
+              '<p>El país tiene <b>%s acuíferos</b>. Con corte al 30 de diciembre de 2022, <b>%s tenían disponibilidad y %s no</b> %s. Sumados, los déficits dan '
+              '<b>%s al año</b> %s. <b>%s</b> tiene el mayor: %s de sus %s acuíferos sin disponibilidad, con %s de déficit %s. En %s ninguno tiene disponibilidad; '
+              'en %s, ninguno está en déficit.</p>'
+              '<p>Siete de cada diez litros que se sacan del subsuelo van al campo: en 2023, el %s %% fue para uso agrícola, el %s %% para el abastecimiento público, '
+              'el %s %% para la industria y el %s %% para generar electricidad %s.</p>'
+              '<p>Lo más nuevo está en el Segundo Informe: la CONAGUA midió con %s pozos los niveles de %s acuíferos, y en <b>%s de ellos, en condición de sobreexplotación</b>, '
+              'usó %s pozos %s; actualizó el balance de %s acuíferos, revisó <b>%s títulos de concesión</b> de agua y encontró <b>%s inconsistencias</b> %s. '
+              'De septiembre de 2025 a junio de 2026 se cobraron <b>$%s mdp</b> en derechos y aprovechamientos por aguas nacionales %s; ese cobro no se publica por estado.</p>') % (
+            _n(ACU_TOT[0]), _n(ACU_TOT[1]), _n(ACU_TOT[2]), _chip('oficial'), _hm3(tot_def), _chip('derivado'),
+            nom[de[0]], A[de[0]]['sin'], A[de[0]]['n'], _hm3(A[de[0]]['def']), _chip('derivado'), _y([nom[a] for a in todos]), _y([nom[a] for a in ninguno]),
+            _n(USO_SUB[0][1], 1), _n(USO_SUB[1][1], 1), _n(USO_SUB[2][1], 1), _n(USO_SUB[3][1], 1), _chip('oficial'),
+            _n(AGUA26['pozos']), AGUA26['mon'], s27, _n(AGUA26['pozos_s']), _chip('oficial'), AGUA26['bal'], _n(AGUA26['tit']), _n(AGUA26['inc']), _chip('oficial'),
+            _n(AGUA26['rec'], 1), _chip('oficial')),
+        'ci': [{'v': '%s de %s' % (_n(ACU_TOT[2]), _n(ACU_TOT[0])), 'etq': 'acuíferos sin disponibilidad, corte de diciembre de 2022', 'e': 'oficial'},
+               {'v': _hm3(tot_def), 'etq': 'suma de sus déficits, al año', 'e': 'derivado', 'op': 'suma de la disponibilidad negativa de los %d acuíferos en déficit' % ACU_TOT[2]},
+               {'v': _n(AGUA26['inc']), 'etq': 'inconsistencias en %s títulos de agua revisados' % _n(AGUA26['tit']), 'e': 'oficial'}],
+        'fu': [_o('Disponibilidad de los 653 acuíferos, por entidad; las sumas por estado y la nacional de los déficits son nuestras', fa),
+               _o('Acuíferos con y sin disponibilidad y usos del agua subterránea en 2023', fp),
+               _o('Los %d acuíferos sobreexplotados que se miden con pozos' % s27, fi('s27')), _o('Títulos de concesión revisados', fi('tit')),
+               _o('Derechos y aprovechamientos por aguas nacionales', fi('rec')),
+               _o('Disponibilidad y su revisión (arts. 3, fr. XXIV, y 22)', ley('lan', 'arts. 3 y 22'))],
+        'sug': ['¿Cuántos acuíferos de Chihuahua están en déficit?', '¿Qué acuíferos están sobreexplotados?', '¿Cuánta agua se le debe al subsuelo?']}
+    t['rn_agua_ciegos'] = {
+        'tit': 'Lo que el mapa del agua no dice',
+        'h': '<p>Cinco preguntas que conviene hacer antes de leer el mapa de los acuíferos:</p>%s' % _lista([
+            '<b>La disponibilidad no es el agua que hay.</b> Es lo que todavía se puede concesionar. Un acuífero en déficit no está vacío: tiene más agua comprometida en títulos '
+            'de la que se recarga. Y uno con disponibilidad puede estar contaminado: aquí se mide cantidad, no calidad.',
+            ('<b>Sin disponibilidad no es lo mismo que sobreexplotado.</b> El Segundo Informe cuenta en sobreexplotación a %s, y el Acuerdo de 2023 les da disponibilidad '
+             '(%s). No necesariamente se contradicen: la sobreexplotación se refiere a lo que se extrae, y la disponibilidad, a lo que está concesionado. Si se extrae más de lo concesionado, '
+             'hay pozos sin título o mediciones distintas; '
+             'es pregunta para la CONAGUA.') % (_y(['%s (%s)' % (n, nom[a]) for a, c, n, d in dif]), '; '.join('%s: +%s %s' % (n, _hm3(d, 2), _chip('oficial')) for a, c, n, d in dif)),
+            ('<b>El corte ya pasó del plazo de la ley.</b> La disponibilidad se debe revisar al menos cada dos años (Ley de Aguas Nacionales, art. 22, reformado el 11-12-2025; antes '
+             'decía tres). La última publicada es la del DOF del 9 de noviembre de 2023, con corte de 2022, y el Programa Nacional Hídrico de mayo de 2026 todavía la usa. El Informe dice '
+             'que se actualizaron %s balances, pero el acuerdo nuevo no se ha publicado %s.') % (AGUA26['bal'], _chip('pendiente', 'acuiferos-disponibilidad-nueva')),
+            '<b>Un acuífero no respeta fronteras.</b> El Acuerdo agrupa cada acuífero en una sola entidad, aunque su agua cruce los límites: la Península de Yucatán, por ejemplo, '
+            'sale en Yucatán.',
+            ('<b>Los %d de la lista son los que se miden, no todos los sobreexplotados.</b> La CONAGUA vigila con pozos los niveles de %s acuíferos; el Informe no publica cuántos '
+             'de los %s están sobreexplotados en total.') % (s27, AGUA26['mon'], _n(ACU_TOT[0]))]),
+        'fu': [_o('Disponibilidad de los 653 acuíferos', fa), _o('Acuíferos sobreexplotados medidos con pozos y balances actualizados', fi('s27')),
+               _o('Revisión de la disponibilidad «al menos cada dos años» (art. 22)', ley('lan', 'art. 22')), _o('El Programa Nacional Hídrico usa el corte de 2023', fp)],
+        'sug': ['¿Qué estado tiene más acuíferos en déficit?', '¿Qué ley rige el agua?', '¿Cuántas concesiones mineras tiene Sonora?']}
+    for a in nom:
+        x = A[a]
+        if x['def'] > 0:
+            lugar = 'el lugar %d de %d entidades con déficit %s' % (x['lug'], len(de), _chip('derivado'))
+            h1 = ('<p>Con corte al 30 de diciembre de 2022, <b>%s</b> tenía <b>%d acuíferos</b>: <b>%d sin disponibilidad</b> y %d con ella %s. De cada 100, %s no tenían '
+                  'agua para concesionar %s. Sumados, sus déficits dan <b>%s al año</b> %s: %s.</p>') % (
+                nom[a], x['n'], x['sin'], x['con'], _chip('oficial'), _n(x['ps'], 1), _chip('derivado'), _hm3(x['def']), _chip('derivado'), lugar)
+        else:
+            h1 = ('<p>Con corte al 30 de diciembre de 2022, <b>%s</b> tenía <b>%d %s</b> y %s en déficit %s: %s de disponibilidad al año %s. Eso dice que todavía hay agua '
+                  'para concesionar, no que esté limpia: la disponibilidad mide cantidad, no calidad.</p>') % (
+                nom[a], x['n'], 'acuífero' if x['n'] == 1 else 'acuíferos', 'no estaba' if x['n'] == 1 else 'ninguno estaba', _chip('oficial'), _hm3(x['disp']), _chip('derivado'))
+        h2 = ''
+        if x['s27']:
+            k = len(x['s27'])
+            h2 = ('<p>%s está%s entre los %d acuíferos sobreexplotados que la CONAGUA mide con pozos, según el Segundo Informe: %s %s.%s</p>') % (
+                'Uno de sus acuíferos' if k == 1 else '%s de sus acuíferos' % {2: 'Dos', 3: 'Tres', 4: 'Cuatro', 5: 'Cinco'}.get(k, str(k)), '' if k == 1 else 'n',
+                s27, _y([n for c, n, d in x['s27']]), _chip('oficial'),
+                ''.join(' Ojo: el Acuerdo de 2023 le da disponibilidad a %s (+%s): sobreexplotado y sin disponibilidad no son lo mismo.' % (n, _hm3(d, 2)) for c, n, d in x['s27'] if d > 0))
+        ci = [{'v': '%d de %d' % (x['sin'], x['n']), 'etq': 'acuíferos sin disponibilidad (corte 2022)', 'e': 'oficial'}]
+        if x['def'] > 0:
+            ci.append({'v': _hm3(x['def']), 'etq': 'suma de sus déficits, al año', 'e': 'derivado', 'op': 'suma de la disponibilidad negativa de sus acuíferos'})
+        fu = [_o('Disponibilidad de cada acuífero; las sumas y los porcentajes por estado son nuestros', fa)]
+        if x['s27']:
+            fu.append(_o('Acuíferos sobreexplotados medidos con pozos', fi('s27')))
+        t['rn_acu_' + planisferio.clave(a)] = {
+            'tit': '%s: sus acuíferos' % nom[a], 'h': h1 + h2 + '<p>La ley pide revisar la disponibilidad al menos cada dos años (art. 22); este corte es de 2022.</p>',
+            'ci': ci, 'fu': fu, 'portal': planisferio.portal(a), 'edo': a,
+            'sug': ['¿Qué estado tiene más acuíferos en déficit?', '¿Qué acuíferos están sobreexplotados?', '¿Cuántas concesiones mineras tiene %s?' % nom[a]]}
+
+
 SECCIONES = [('rn_capitulo', 'Renovables y no renovables'), ('rn_regimen', 'Las tres vías y las tres auditorías'),
-             ('rn_ramos', 'Los seis ramos, ayer y hoy'), ('rn_pemex', 'PEMEX, ayer y hoy'),
+             ('rn_ramos', 'Los seis ramos, ayer y hoy'), ('rn_agua', 'El agua del subsuelo, estado por estado'),
+             ('rn_agua_ciegos', 'Lo que el mapa del agua no dice'), ('rn_pemex', 'PEMEX, ayer y hoy'),
              ('rn_refinerias', 'Las refinerías de PEMEX'), ('rn_mineria', 'Las concesiones mineras, estado por estado'),
              ('rn_mineria_ciegos', 'Lo que el cuadro de las minas no dice'), ('rn_auditar', 'Lo subrayado: la guía del auditor'),
              ('rn_ciegos', 'Los puntos ciegos')]
@@ -664,6 +894,7 @@ def secciones():
              'rn_refinerias': tabla_refinerias() + '<p class="leg-mas"><a href="planisferio.html?d=ambiental">🗺️ Verlas en el Planisferio ➔</a> · '
                                                    '<a href="auditoria-dos-bocas.html">📖 La investigación de Dos Bocas ➔</a> · '
                                                    '<a href="auditoria-refineria-tula.html">📖 La de la refinería de Tula ➔</a></p>',
+             'rn_agua': tabla_agua() + '<p class="leg-mas"><a href="planisferio.html?d=ambiental&amp;l=acuP">🗺️ Los acuíferos en el Planisferio ➔</a></p>',
              'rn_mineria': tabla_mineria() + tabla_derechos() + '<p class="leg-mas"><a href="planisferio.html?d=ambiental&amp;l=minT">🗺️ Las concesiones en el Planisferio ➔</a></p>'}
     return [{'id': k.replace('_', '-'), 'titulo': html.escape(tit), 'texto': '', 'tarjetas': [],
              'bloque': bloque_tema(T[k], extra.get(k, ''), ARCHIVO)} for k, tit in SECCIONES]
@@ -671,6 +902,7 @@ def secciones():
 
 ENTRADA = ('El capítulo de recursos naturales del libro del autor, «Introducción al Derecho Económico», convertido en método de auditoría y puesto al día: '
            'qué recursos se renuevan y cuáles se agotan, de quién son, quién los explota y con qué ley, y a quién se audita en cada caso. '
+           'Empieza por el agua del subsuelo: los 653 acuíferos del país, cuáles ya no tienen agua para concesionar y cuáles se miden como sobreexplotados. '
            'Cada regla está cotejada contra el texto vigente, porque el libro describe las leyes de 1993-1994. Incluye la sección de PEMEX y sus siete refinerías, '
            'con lo que procesa cada una frente a su capacidad, y las concesiones mineras de cada estado, que también se ven en el Planisferio. Es la misma información con que contesta Pregúntale al Auditor.')
 
@@ -680,7 +912,7 @@ def pagina():
     return {
         'archivo': ARCHIVO, 'menu': TITULO, 'menu_archivo': 'aprende.html',
         'padre': ('aprende.html', 'Aprende'),
-        'icono': '🌎', 'titulo': TITULO, 'lema': 'Renovables y no renovables, PEMEX y sus refinerías, las minas de cada estado: qué se audita y con qué ley',
+        'icono': '🌎', 'titulo': TITULO, 'lema': 'Renovables y no renovables: el agua del subsuelo, las minas de cada estado y las refinerías de PEMEX, qué se audita y con qué ley',
         'estilos': ['asistente.css'], 'entrada': ENTRADA, 'secciones': secciones(),
     }
 
@@ -697,11 +929,17 @@ def pendientes():
                     'Mientras la Secretaría de Economía no publique el cuadro por entidad al día, el mapa usa el de marzo de 2024 y lo dice.'),
          'responsable': 'Secretaría de Economía (Dirección General de Minas)', 'enlace': 'https://www.gob.mx/se/acciones-y-programas/mineria',
          'enlace_txt': 'Secretaría de Economía, minería', 'aparece': ap},
+        {'id': 'acuiferos-disponibilidad-nueva', 'tema': 'Recursos naturales',
+         'que': 'La disponibilidad media anual de agua subterránea de los 653 acuíferos con un corte posterior a diciembre de 2022',
+         'porque': ('La Ley de Aguas Nacionales pide revisarla al menos cada dos años (art. 22, reformado el 11-12-2025; antes, cada tres). La última publicada en el DOF es la del '
+                    '9 de noviembre de 2023, con corte al 30 de diciembre de 2022, y el Programa Nacional Hídrico 2026-2030 (DOF 18-05-2026) todavía la usa. El Segundo Informe dice que '
+                    'se actualizaron los balances de 189 acuíferos, pero la CONAGUA no ha publicado el acuerdo nuevo, ni la lista completa de los sobreexplotados: solo los 27 que mide con pozos.'),
+         'responsable': 'Comisión Nacional del Agua (CONAGUA)', 'enlace': 'https://sigagis.conagua.gob.mx/gas1/sections/Disponibilidad_Acuiferos.html',
+         'enlace_txt': 'CONAGUA, disponibilidad de los acuíferos', 'aparece': ap},
         {'id': 'ambiente-por-estado', 'tema': 'Recursos naturales',
-         'que': 'El resto de la cifra ambiental de cada una de las 32 entidades: acuíferos sobreexplotados, superficie forestal y denuncias ante la PROFEPA',
-         'porque': ('El Informe de Actividades 2024 de la PROFEPA nombra estados pero no publica sus cifras por entidad. La disponibilidad de los acuíferos (CONAGUA) y la '
-                    'superficie forestal (CONAFOR) sí se publican por entidad y la plataforma aún no las integra. Las concesiones mineras ya están (03-11-2026); '
-                    'mientras tanto el mapa ambiental marca las refinerías y las minas, no el agua ni los bosques, y lo dice.'),
+         'que': 'El resto de la cifra ambiental de cada una de las 32 entidades: superficie forestal y denuncias ante la PROFEPA',
+         'porque': ('El Informe de Actividades 2024 de la PROFEPA nombra estados pero no publica sus cifras por entidad. La superficie forestal (CONAFOR) sí se publica por entidad '
+                    'y la plataforma aún no la integra. Las concesiones mineras y los acuíferos ya están (03-11-2026); mientras tanto el mapa ambiental no marca los bosques, y lo dice.'),
          'responsable': P.PLATAFORMA, 'enlace': 'https://www.inegi.org.mx/temas/ambiente/',
          'enlace_txt': 'INEGI, estadísticas de medio ambiente', 'aparece': ap},
     ]
