@@ -112,7 +112,13 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   organismos de obra nunca se suman**: con eso también se paga nómina. Se
   abre con `planisferio.html?d=inversion` y cada portal la trae en
   `#inversion`; en la Enciclopedia son las lentes `inv` e `invt` del mapa del
-  gasto federalizado.
+  gasto federalizado. **La de cada municipio vive en su propio archivo**
+  (`municipios-inversion.js`, que escribe
+  `herramientas/anclar_inversion_municipios.py <zip municipal del INEGI>`),
+  nunca como columna nueva del padrón, que se lee por posición; si no trae a
+  los mismos municipios con cuenta que el padrón, la generación se detiene.
+  El «egreso total» del INEGI incluye lo que quedó en caja: se dice «de cada
+  $100 de su egreso», no «de lo que gastó».
 - **Las leyes del dinero en los tres niveles** (03-11-2026,
   `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
   cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y

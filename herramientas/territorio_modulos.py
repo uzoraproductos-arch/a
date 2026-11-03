@@ -389,13 +389,13 @@ def municipios(base, ref, glos, raiz):
         <section class="pm" id="padron" aria-labelledby="ttMun4">
           <p class="pm-eq-n">4 de 4</p>
           <h2 class="pm-tit" id="ttMun4">Municipio por municipio</h2>
-          <p class="pm-txt">Los %s municipios del catálogo del INEGI, con lo que de verdad ingresó cada uno en %d: su predial, sus participaciones, sus dos fondos del Ramo 33 y qué tan dependiente resulta la suma. El que no rindió cuenta sigue en la lista, sin cifra: borrarlo falsearía el padrón y ponerle cero falsearía la cifra.</p>
+          <p class="pm-txt">Los %s municipios del catálogo del INEGI, con lo que de verdad ingresó cada uno en %d (su predial, sus participaciones, sus dos fondos del Ramo 33 y qué tan dependiente resulta la suma) y lo que pagó de inversión pública. El que no rindió cuenta sigue en la lista, sin cifra: borrarlo falsearía el padrón y ponerle cero falsearía la cifra.</p>
           <div class="tt-mun-mandos">
             <label class="tt-sel"><span>Entidad federativa</span><select id="ttMunSel"></select></label>
             <label class="tt-sel"><span>Buscar municipio</span><input type="search" id="ttMunBusca" placeholder="Escribe un nombre" autocomplete="off"></label>
             <label class="tt-sel"><span>Ordenar por</span><select id="ttMunOrden">
               <option value="nombre">Nombre (A–Z)</option><option value="ing">Ingreso total</option><option value="predial">Predial cobrado</option>
-              <option value="fortamun">FORTAMUN recibido</option><option value="fismdf">FISMDF recibido</option><option value="dep">Dependencia de transferencias</option></select></label>
+              <option value="fortamun">FORTAMUN recibido</option><option value="fismdf">FISMDF recibido</option><option value="dep">Dependencia de transferencias</option><option value="inv">Inversión pública</option></select></label>
           </div>
           <div id="ttMun" aria-live="polite"><noscript><p>El padrón necesita JavaScript. Los datos completos se descargan en <a href="descarga-los-datos.html">Datos</a>.</p></noscript></div>
         </section>

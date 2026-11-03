@@ -1646,6 +1646,20 @@
    "dice": [
     "no figura en la estadística estatal"
    ]
+  },
+  {
+   "q": "¿Cuánto invirtió el municipio de Zapopan en obra pública?",
+   "ir": "planisferio-jal.html?ml=inv#mapa-municipios",
+   "dice": [
+    "de inversión pública",
+    "de cada $100"
+   ]
+  },
+  {
+   "q": "¿Qué municipios de Jalisco invierten más en obra pública?",
+   "dice": [
+    "inversión pública"
+   ]
   }
  ]
 }

@@ -117,7 +117,26 @@ LENTES_MUN = [
      'Lo que cada municipio cobró de impuesto predial en 2024: el impuesto que la Constitución le reserva (art. 115, fr. IV).'),
     ('dep', 'Dependencia de transferencias', 'rojo',
      'De cada $100 que ingresó en 2024, cuántos llegaron de fuera: (participaciones + aportaciones) ÷ ingreso total × 100.'),
+    ('inv', 'Inversión pública', 'verde',
+     'La obra pública y los proyectos productivos que pagó cada municipio en 2024: su capítulo de inversión pública. Un municipio con cuenta y sin ese capítulo reportó $0.'),
+    ('invp', 'Inversión de cada $100', 'verde',
+     'De cada $100 de su egreso de 2024, cuántos fueron a inversión pública: inversión ÷ egreso total × 100. El egreso total del INEGI cuenta también lo que quedó en caja al cierre. Ojo: donde el fondo de infraestructura social municipal (FAIS) pesa mucho, la proporción sube sola, porque la ley lo destina a obra para la población en pobreza (Ley de Coordinación Fiscal, art. 33).'),
 ]
+PCT_MUN = ('dep', 'invp')
+
+
+def inv_mun(padron):
+    """La inversión de cada municipio (municipios-inversion.js, la escribe
+    anclar_inversion_municipios.py). Se detiene si no trae justo a los
+    municipios del padrón que rindieron cuenta."""
+    t = open(os.path.join(RAIZ, 'assets', 'auditor', 'js', 'municipios-inversion.js'), encoding='utf-8').read()
+    i = t.index('window.AUDIT_MUN_INV =') + len('window.AUDIT_MUN_INV =')
+    iv = json.loads(t[i:t.rindex(';')])
+    con = {m['cve'] + r[0] for m in padron['ent'].values() for r in m['lista'] if len(r) >= 10}
+    if set(iv['mun']) != con or iv['anio'] != padron['anio']:
+        raise SystemExit('planisferio: municipios-inversion.js no trae a los mismos municipios con cuenta que el padrón (sobran %s; faltan %s)' % (
+            sorted(set(iv['mun']) - con)[:5], sorted(con - set(iv['mun']))[:5]))
+    return iv
 
 MAPA_MUN = """<div class="pl-lentes" role="radiogroup" aria-label="Qué ver en el mapa de los municipios">%s</div>
           <p class="pl-que" id="plMunQue"></p>
@@ -127,7 +146,7 @@ MAPA_MUN = """<div class="pl-lentes" role="radiogroup" aria-label="Qué ver en e
               <figcaption class="pl-leyenda" id="plMunLeyenda"></figcaption>
             </figure>
             <aside class="pl-ficha" id="plMunFicha" aria-live="polite">
-              <p class="pl-ficha-vacia"><b>Toca un municipio.</b> Verás lo que ingresó en %d, de dónde le llegó y la puerta a su ficha en el Auditor de entes.</p>
+              <p class="pl-ficha-vacia"><b>Toca un municipio.</b> Verás lo que ingresó en %d, de dónde le llegó, lo que invirtió y la puerta a su ficha en el Auditor de entes.</p>
             </aside>
           </div>
           <p class="pl-pie">Límites: %s (<a href="%s">descarga del INEGI</a>), integrados el %s; huella SHA-256 del archivo de origen <code>%s</code>. Simplificados para verse en pantalla. %s
@@ -135,7 +154,7 @@ MAPA_MUN = """<div class="pl-lentes" role="radiogroup" aria-label="Qué ver en e
           <script type="application/json" id="plMunDatos">%s</script>"""
 
 
-def _mapa_mun(e, m, g, ref, padron):
+def _mapa_mun(e, m, g, ref, padron, iv):
     """El mapa de los municipios de una entidad, con sus cifras del padrón."""
     cves_geo = {x['c'] for x in g['m']}
     # Las claves 990 y más del catálogo del INEGI («No especificado», en el
@@ -154,6 +173,8 @@ def _mapa_mun(e, m, g, ref, padron):
             x.update({'ing': round(ing / 1e6, 1), 'part': round(part / 1e6, 1), 'aport': round(aport / 1e6, 1),
                       'predial': round(predial / 1e6, 1), 'fort': round(fortamun / 1e6, 1), 'fis': round(fismdf / 1e6, 1),
                       'dep': round((part + aport) / ing * 100, 1) if ing else None})
+            v = iv['mun'][m['cve'] + r[0]]
+            x.update({'inv': round(v[0] / 1e6, 1), 'invp': round(v[0] / r[9] * 100, 1) if r[9] else None})
         datos.append(x)
     svg = '<svg class="pl-svg pl-svg-mun" viewBox="0 0 %s %s" role="group" aria-label="Los municipios de %s">%s</svg>' % (
         g['vb'][0], g['vb'][1], e['name'], ''.join(
@@ -164,7 +185,7 @@ def _mapa_mun(e, m, g, ref, padron):
     sin = None if m['conCifra'] else ('Las alcaldías de la Ciudad de México no rinden cuenta municipal al INEGI: '
                                       'su dinero va dentro del presupuesto de la Ciudad.')
     info = {'ent': e['abbr'], 'cve': m['cve'], 'pend': 'municipios-sin-cuenta', 'anio': padron['anio'], 'sin': sin,
-            'lentes': [{'id': i, 'nom': n, 'pal': p, 'que': q} for i, n, p, q in LENTES_MUN], 'm': datos}
+            'lentes': [{'id': i, 'nom': n, 'pal': p, 'que': q, 'u': 'pct' if i in PCT_MUN else 'mdp'} for i, n, p, q in LENTES_MUN], 'm': datos}
     return MAPA_MUN % (
         '' if sin else lentes, svg, padron['anio'], g['fuente'], g['url'], g['integrado'], g['sha256'][:12] + '…', g['aviso'],
         padron['anio'], ref('ref-inegi-efipem'),
@@ -272,8 +293,8 @@ LENTES = [
     {'id': 'inv', 'dim': 'inversion', 'fmt': 'mdp', 'nom': 'Obra que hizo el estado', 'pal': 'verde', 'est': 'oficial', 'anio': 2024,
      'que': ('Lo que el gobierno del estado gastó en su capítulo de inversión pública: la obra que contrató o hizo por su cuenta. '
              'No cuenta la que hace por medio de sus organismos de obra: esa es otra lente, y no se suman.')},
-    {'id': 'invp', 'dim': 'inversion', 'fmt': 'pct', 'nom': 'De cada $100 que gastó', 'pal': 'verde', 'est': 'derivado', 'anio': 2024,
-     'que': 'La misma obra directa, entre todo lo que gastó el gobierno del estado en el año: cuántos de cada $100 se fueron en obra que hizo él mismo.'},
+    {'id': 'invp', 'dim': 'inversion', 'fmt': 'pct', 'nom': 'De cada $100 de su egreso', 'pal': 'verde', 'est': 'derivado', 'anio': 2024,
+     'que': 'La misma obra directa, entre todo el egreso del gobierno del estado en el año: cuántos de cada $100 se fueron en obra que hizo él mismo. El egreso total del INEGI cuenta también lo que quedó en caja al cierre (disponibilidad final).'},
     {'id': 'invt', 'dim': 'inversion', 'fmt': 'mdp', 'nom': 'A sus organismos de obra', 'pal': 'verde', 'est': 'oficial', 'anio': 2024,
      'que': ('Lo que el gobierno del estado les pasó a sus organismos de infraestructura: juntas de caminos, comisiones de agua, institutos de obra. '
              'Con eso hacen obra, pero también pagan su nómina y su operación.')},
@@ -517,9 +538,38 @@ def _deuda_portal(base, ref, e):
     return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, reglas)
 
 
-def _inversion_portal(base, ref, e):
+def _inversion_mun(ref, e, m, iv, con_mapa):
+    """La obra de sus municipios, suma de los que rindieron cuenta (derivado)."""
+    if not m['conCifra']:
+        return ('<article class="pl-piso pl-piso-inv"><p class="pl-piso-n">3 · La obra de sus %d demarcaciones · 2024</p>'
+                '<p class="pl-piso-v"><b>Sin cuenta municipal</b> %s</p><p>Las alcaldías de la Ciudad de México no rinden cuenta municipal al INEGI: '
+                'su obra va dentro del presupuesto de la Ciudad. Ponerle cero falsearía la cifra.</p></article>' % (m['n'], chip('pendiente', 'municipios-sin-cuenta')))
+    filas = [(r, iv['mun'][m['cve'] + r[0]]) for r in m['lista'] if len(r) >= 10]
+    tot = sum(v[0] for _r, v in filas)
+    egr = sum(r[9] for r, _v in filas)
+    cero = sum(1 for _r, v in filas if v[0] == 0)
+    top_r, top_v = max(filas, key=lambda x: x[1][0])
+    ir = ('<p class="pl-ficha-ir"><a href="%s?ml=inv#mapa-municipios">Municipio por municipio, en el mapa ➔</a></p>' % portal(e['abbr'])) if con_mapa else ''
+    return ('<article class="pl-piso pl-piso-inv"><p class="pl-piso-n">3 · La obra de sus municipios · 2024</p>'
+            '<p class="pl-piso-v"><b class="num-tabular">%s</b> %s</p>'
+            '<dl class="pl-dl"><dt>Municipios con cuenta</dt><dd>%d de %d</dd>'
+            '<dt>De cada $100 de su egreso</dt><dd>%s %s <small>de un egreso total de %s</small></dd>'
+            '<dt>El que más invirtió</dt><dd>%s: %s %s</dd>%s</dl>'
+            '<p class="pl-piso-f">Suma del capítulo de inversión pública de cada municipio que rindió su cuenta: obra pública y proyectos productivos, '
+            'con su dinero propio y con el que le llega (el fondo de infraestructura social municipal incluido). INEGI, finanzas públicas municipales %d %s. '
+            'Es la obra de los ayuntamientos: no está dentro de la del gobierno del estado.</p>%s</article>' % (
+                mdp(tot / 1e6), chip('derivado'), len(filas), m['n'],
+                '$' + format(tot / egr * 100, '.1f') if egr else '—', chip('derivado'), mdp(egr / 1e6),
+                html.escape(top_r[1]), mdp(top_v[0] / 1e6), chip('oficial'),
+                ('<dt>En $0</dt><dd>%d %s <small>%s su cuenta sin capítulo de inversión pública</small></dd>' % (
+                    cero, 'municipio' if cero == 1 else 'municipios', 'rindió' if cero == 1 else 'rindieron')) if cero else '',
+                iv['anio'], ref('ref-inegi-efipem'), ir))
+
+
+def _inversion_portal(base, ref, e, pm=''):
     """La inversión de la entidad (03-11-2026): su obra directa, lo que les
-    pasa a sus organismos de obra (no se suman) y lo que dejó la ASF."""
+    pasa a sus organismos de obra (no se suman), la de sus municipios y lo que
+    dejó la ASF."""
     import leyes_niveles as ln
     E = base['estados']
     fu = _fuentes(ref, base)
@@ -536,7 +586,7 @@ def _inversion_portal(base, ref, e):
         inv, invt = e['invPub'], e['invInfra']
         p1 = ('<article class="pl-piso pl-piso-inv"><p class="pl-piso-n">1 · La obra que hizo el estado · 2024</p>'
               '<p class="pl-piso-v"><b class="num-tabular">%s</b> %s</p>'
-              '<dl class="pl-dl"><dt>De cada $100 que gastó</dt><dd>%s %s <small>de un gasto total de %s %s</small></dd>'
+              '<dl class="pl-dl"><dt>De cada $100 de su egreso</dt><dd>%s %s <small>de un egreso total de %s %s, que incluye lo que quedó en caja al cierre</small></dd>'
               '<dt>Su lugar</dt><dd>%d.º de %d %s <small>de la que más obra directa hizo a la que menos</small></dd></dl>'
               '<p class="pl-piso-f">%s</p></article>' % (
                   mdp(inv), chip('oficial'), '$' + format(inv / e['egr2024'] * 100, '.1f'), chip('derivado'), mdp(e['egr2024']), chip('oficial'),
@@ -565,10 +615,10 @@ def _inversion_portal(base, ref, e):
               '<p class="pl-ficha-ir"><a href="numeros-mapa-del-gasto-federalizado.html?l=inv&amp;e=%s">Las 32, en el mapa de la Enciclopedia ➔</a> '
               '<a href="datos-ambiente-megaobras.html?e=%s#abMapaObras">Sus obras con alerta ambiental ➔</a></p></div>') % (
         ln._a(ln.pdf('LOPSRM.pdf'), 'LOPSRM'), ln._a(ln.CPEUM, 'Constitución'), html.escape(ln.ESTADOS[a][0]), ln.ARCHIVO, quote(a), quote(a))
-    return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p3, ciego, reglas)
+    return '<div class="pl-pisos">%s%s%s</div>%s%s' % (p1, pm, p3, ciego, reglas)
 
 
-def pagina_portal(base, ref, e, padron, prev, sig):
+def pagina_portal(base, ref, e, padron, prev, sig, iv):
     a = e['abbr']
     C = base['fiscalEntidades']['campos']
     sin = set(C['recaudacionPropia'].get('sinFuente', []))
@@ -621,31 +671,32 @@ def pagina_portal(base, ref, e, padron, prev, sig):
                  e['gasto'], _pesos(s), chip('derivado'), mdp(e['gasto'])))
     # 2 bis · Su deuda (Sistema de Alertas, Cuenta Pública 2025)
     deuda = _deuda_portal(base, ref, e)
-    inversion = _inversion_portal(base, ref, e)
+    g = geo_mun(m['cve'])
+    inversion = _inversion_portal(base, ref, e, _inversion_mun(ref, e, m, iv, bool(g)))
     # 3 · Los municipios
     filas = []
     for r in m['lista']:
         if len(r) < 3:
-            filas.append('<tr data-c="%s" data-n="%s"><th scope="row">%s</th><td colspan="5" class="pl-sin">Sin cuenta de 2024 %s</td></tr>' % (
+            filas.append('<tr data-c="%s" data-n="%s"><th scope="row">%s</th><td colspan="6" class="pl-sin">Sin cuenta de 2024 %s</td></tr>' % (
                 r[0], json.dumps(r[1].lower(), ensure_ascii=False)[1:-1], r[1], chip('pendiente', 'municipios-sin-cuenta')))
             continue
         cve, n, ing, part, aport, fortamun, fismdf, predial, propios, egr = r[:10]
         dep = (part + aport) / ing * 100 if ing else None
-        filas.append('<tr data-c="%s" data-n="%s" data-ing="%d" data-predial="%d" data-dep="%s"><th scope="row">%s</th>'
-                     '<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (
-                         cve, json.dumps(n.lower(), ensure_ascii=False)[1:-1], ing, predial, '%.2f' % dep if dep is not None else '',
-                         n, mdp(ing / 1e6), mdp(part / 1e6), mdp(aport / 1e6), mdp(predial / 1e6), pct(dep) if dep is not None else '—'))
+        inv = iv['mun'][m['cve'] + cve][0]
+        filas.append('<tr data-c="%s" data-n="%s" data-ing="%d" data-predial="%d" data-dep="%s" data-inv="%d"><th scope="row">%s</th>'
+                     '<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (
+                         cve, json.dumps(n.lower(), ensure_ascii=False)[1:-1], ing, predial, '%.2f' % dep if dep is not None else '', inv,
+                         n, mdp(ing / 1e6), mdp(part / 1e6), mdp(aport / 1e6), mdp(predial / 1e6), pct(dep) if dep is not None else '—', mdp(inv / 1e6)))
     tabla = ('<div class="pl-mun-mandos"><label class="pl-sel"><span>Buscar municipio</span><input type="search" id="plMunBusca" placeholder="Escribe un nombre" autocomplete="off"></label>'
              '<label class="pl-sel"><span>Ordenar por</span><select id="plMunOrden"><option value="n">Nombre (A–Z)</option><option value="ing">Ingreso total</option>'
-             '<option value="predial">Predial cobrado</option><option value="dep">Dependencia de transferencias</option></select></label></div>'
+             '<option value="predial">Predial cobrado</option><option value="dep">Dependencia de transferencias</option><option value="inv">Inversión pública</option></select></label></div>'
              '<div class="pl-tabla-caja"><table class="pl-tabla" id="plMun"><caption>Los %d municipios de %s en el catálogo del INEGI, con sus cuentas de %d</caption>'
              '<thead><tr><th scope="col">Municipio</th><th scope="col">Ingreso total</th><th scope="col">Participaciones</th><th scope="col">Aportaciones</th>'
-             '<th scope="col">Predial</th><th scope="col">Dependencia</th></tr></thead><tbody>%s</tbody></table></div>'
+             '<th scope="col">Predial</th><th scope="col">Dependencia</th><th scope="col">Inversión pública</th></tr></thead><tbody>%s</tbody></table></div>'
              '<p class="pl-pie">Cifras de cada municipio: INEGI, finanzas públicas municipales %d %s, en millones de pesos (mdp) %s. '
-             'La dependencia es (participaciones + aportaciones) ÷ ingreso total × 100 %s: cuánto de lo que ingresó llegó de fuera.</p>' % (
+             'La dependencia es (participaciones + aportaciones) ÷ ingreso total × 100 %s: cuánto de lo que ingresó llegó de fuera. La inversión pública es su capítulo de egresos de obra y proyectos productivos.</p>' % (
                  m['n'], nom, padron['anio'], ''.join(filas), padron['anio'], ref('ref-inegi-efipem'), chip('oficial'), chip('derivado')))
-    g = geo_mun(m['cve'])
-    mapa_mun = _mapa_mun(e, m, g, ref, padron) if g else ''
+    mapa_mun = _mapa_mun(e, m, g, ref, padron, iv) if g else ''
     # 4 · Las otras dimensiones y el Auditor
     dl = _congresos(base)
     puertas = []
@@ -697,7 +748,7 @@ def pagina_portal(base, ref, e, padron, prev, sig):
              'tarjetas': [], 'bloque': deuda},
             {'id': 'inversion', 'titulo': 'Su inversión',
              'texto': ('La obra que hizo el gobierno de %s en 2024, por las dos vías que usa un gobierno estatal (la que contrata él mismo y la que les encarga a sus organismos), '
-                       'y lo que la Auditoría Superior dejó por aclarar del dinero federal que recibió. Es la obra del gobierno del estado; la de sus municipios llegará en una próxima entrega.') % nom,
+                       'la obra que pagaron sus municipios y lo que la Auditoría Superior dejó por aclarar del dinero federal que recibió.') % nom,
              'tarjetas': [], 'bloque': inversion},
             {'id': 'leyes', 'titulo': 'Sus leyes del dinero',
              'texto': 'Con qué leyes cobra, compra, se endeuda y rinde cuentas %s, quién las aprueba y dónde se publican.' % nom,
@@ -705,7 +756,7 @@ def pagina_portal(base, ref, e, padron, prev, sig):
         ] + ([
             {'id': 'mapa-municipios',
              'titulo': ('El mapa de sus %d municipios' if m['conCifra'] else 'El mapa de sus %d alcaldías') % len(g['m']),
-             'texto': ('Cada municipio en su lugar, con lo que ingresó en %d. Elige qué ver; el color compara a los municipios del estado por quintiles '
+             'texto': ('Cada municipio en su lugar, con lo que ingresó e invirtió en %d. Elige qué ver; el color compara a los municipios del estado por quintiles '
                        '(cinco grupos con el mismo número de municipios). Toca uno para ver su ficha.' % padron['anio'] if m['conCifra'] else
                        'Cada alcaldía en su lugar. No llevan color por cifra porque no rinden cuenta municipal al INEGI; '
                        'toca una para ir a su ficha en el Auditor de entes.'),
@@ -723,8 +774,9 @@ def pagina_portal(base, ref, e, padron, prev, sig):
 
 def paginas(base, ref, tres):
     padron = _padron()
+    iv = inv_mun(padron)
     E = sorted(base['estados'], key=lambda x: clave(x['name']))
     out = [pagina_mapa(base, ref, tres, padron)]
     for k, e in enumerate(E):
-        out.append(pagina_portal(base, ref, e, padron, E[k - 1], E[(k + 1) % len(E)]))
+        out.append(pagina_portal(base, ref, e, padron, E[k - 1], E[(k + 1) % len(E)], iv))
     return out

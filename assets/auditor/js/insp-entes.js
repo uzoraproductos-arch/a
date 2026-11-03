@@ -116,7 +116,7 @@
   /* Carga al vuelo de los municipios, con el mismo sello de la página. */
   var munPromesa = null;
   function cargarMun() {
-    if (window.AUDIT_MUNICIPIOS && window.AUDIT_MUN_RENDICION) return Promise.resolve();
+    if (window.AUDIT_MUNICIPIOS && window.AUDIT_MUN_RENDICION && window.AUDIT_MUN_INV) return Promise.resolve();
     if (munPromesa) return munPromesa;
     var yo = document.querySelector('script[src*="insp-entes.js"]');
     var v = yo && /\?v=([^&]+)/.exec(yo.getAttribute('src'));
@@ -150,8 +150,10 @@
     var r = ente.pad;
     if (!r || r.length < 3) return null;
     var m = function (v) { return v / 1e6; };
+    var I = window.AUDIT_MUN_INV, iv = I && I.mun[ente.id];
     return { ing: m(r[2]), part: m(r[3]), aport: m(r[4]), fortamun: m(r[5]), fismdf: m(r[6]),
-      predial: m(r[7]), propios: m(r[8]), dep: r[2] > 0 ? (r[3] + r[4]) / r[2] * 100 : null };
+      predial: m(r[7]), propios: m(r[8]), dep: r[2] > 0 ? (r[3] + r[4]) / r[2] * 100 : null,
+      egr: m(r[9]), inv: iv ? m(iv[0]) : null, invp: iv && r[9] > 0 ? iv[0] / r[9] * 100 : null };
   }
 
   /* ---------------- Los tres ejes del índice ---------------- */
@@ -307,7 +309,9 @@
         v: c.dep.toFixed(1) + ' % de su ingreso vino de fuera',
         d: 'En 2024 ingresó ' + simMdp(c.ing) + ': ' + simMdp(c.part) + ' de participaciones y ' + simMdp(c.aport) + ' de aportaciones ' +
           '(entre ellas ' + simMdp(c.fortamun) + ' del FORTAMUN y ' + simMdp(c.fismdf) + ' del FAIS). Recaudó ' + simMdp(c.propios) +
-          ' por su cuenta, ' + simMdp(c.predial) + ' de ellos de predial. Depender mucho no es irregular: es fragilidad.',
+          ' por su cuenta, ' + simMdp(c.predial) + ' de ellos de predial. Depender mucho no es irregular: es fragilidad.' +
+          (c.inv == null ? '' : ' Ese año pagó ' + simMdp(c.inv) + ' de inversión pública (obra y proyectos productivos)' +
+            (c.invp == null ? '' : ': $' + c.invp.toFixed(1) + ' de cada $100 de su egreso ' + chip('derivado')) + (c.inv === 0 ? '; rindió su cuenta sin ese capítulo' : '') + '.'),
         f: refMun('inegi') });
     } else if (rd.u) {
       var dep = rd.u[1] > 0 ? (rd.u[2] + rd.u[3]) / rd.u[1] * 100 : 0;
