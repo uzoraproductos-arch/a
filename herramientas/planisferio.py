@@ -44,26 +44,26 @@ SEG_ANIO = 31536000
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # (id, icono, nombre, qué trae, dónde vive ya en la Enciclopedia, con su
-# estado: %s recibe la clave de la entidad). La primera es la que se pinta.
+# estado: %s recibe la clave de la entidad; si ya se pinta en el mapa).
 DIMENSIONES = [
     ('financiera', '💰', 'Financiera',
      'Los tres presupuestos de cada entidad: lo que baja de la Federación, lo que cobra el estado y lo que ingresan sus municipios.',
-     None, None),
+     None, None, True),
     ('deuda', '🏦', 'Deuda',
-     'Lo que debe cada gobierno estatal según el Sistema de Alertas de Hacienda, con su semáforo.',
-     'numeros-mapa-del-gasto-federalizado.html?l=deuda', 'numeros-mapa-del-gasto-federalizado.html?l=deuda&e=%s'),
+     'Lo que debe cada gobierno estatal según el Sistema de Alertas de Hacienda, con sus tres indicadores y su semáforo.',
+     'numeros-mapa-del-gasto-federalizado.html?l=deuda', 'numeros-mapa-del-gasto-federalizado.html?l=deuda&e=%s', True),
     ('inversion', '🏗️', 'Inversión',
      'Las obras que tocan a cada estado y lo que la ASF dejó por aclarar del dinero federal que recibió.',
-     'numeros-mapa-del-gasto-federalizado.html?l=obras', 'numeros-mapa-del-gasto-federalizado.html?l=obras&e=%s'),
+     'numeros-mapa-del-gasto-federalizado.html?l=obras', 'numeros-mapa-del-gasto-federalizado.html?l=obras&e=%s', False),
     ('ambiental', '🌎', 'Ambiental',
      'Las megaobras y crisis con alerta ambiental, separando el gasto público de la inversión privada.',
-     'datos-ambiente-megaobras.html#abMapaObras', 'datos-ambiente-megaobras.html?e=%s#abMapaObras'),
+     'datos-ambiente-megaobras.html#abMapaObras', 'datos-ambiente-megaobras.html?e=%s#abMapaObras', False),
     ('legislativa', '🏛️', 'Legislativa',
      'El Congreso de la Unión y los 32 congresos locales: quién los integra, cuánto cuestan y cómo se eligen.',
-     'datos-poder-legislativo.html', 'radar-estado-de-cuenta.html?doc=%s'),
+     'datos-poder-legislativo.html', 'radar-estado-de-cuenta.html?doc=%s', False),
     ('judicial', '⚖️', 'Judicial',
      'El Poder Judicial: su presupuesto, la elección judicial y lo que resuelve con su dinero.',
-     'datos-poder-judicial.html', None),
+     'datos-poder-judicial.html', None, False),
 ]
 
 
@@ -213,27 +213,75 @@ def _datos(base, padron):
             'dep': None if e['abbr'] in sin else e['dep'],
             'mun': round(m['tot']['ing'] / 1e6, 1) if con else None,
             'mn': m['n'], 'mc': con, 'mm': geo_mun(m['cve']) is not None,
+            # La deuda (Sistema de Alertas, Cuenta Pública 2025). La entidad
+            # que no se mide (hoy Tlaxcala) no trae indicadores: queda en gris.
+            'deuda': e['deuda'], 'dpc': round(e['deuda'] * 1e6 / e['pobPersonas']),
+            'ild': e['deudaIld'] if _medida(e) else None, 'sd': e.get('deudaSd'), 'ocp': e.get('deudaOcp'),
+            'ildm': e.get('ildMdp'), 'sem': SEMAFORO[e['semaforoDeuda']],
         })
     return filas
 
 
+# El color del semáforo, con el nombre que le da el Sistema de Alertas.
+SEMAFORO = {'Verde': 'Endeudamiento sostenible', 'Amarillo': 'Endeudamiento en observación', 'Rojo': 'Endeudamiento elevado'}
+
+
+def _medida(e):
+    """Si el Sistema de Alertas midió a la entidad (Tlaxcala no: no tiene
+    deuda inscrita en el Registro Público Único)."""
+    return e.get('deudaSd') is not None
+
+
+def _sda(base):
+    """El archivo del Sistema de Alertas del que salen las cifras, con su
+    huella: lo trae la ficha «deuda-estados» de los Expedientes."""
+    f = next(x for x in base['expedientes']['fichas'] if x['id'] == 'deuda-estados')
+    return f['documentos'][0], f['documentos'][1]['url']
+
+
 LENTES = [
-    {'id': 'fed', 'nom': '1 · Lo que baja de la Federación', 'pal': 'oro', 'est': 'derivado', 'anio': 2026,
+    {'id': 'fed', 'dim': 'financiera', 'fmt': 'mdp', 'nom': '1 · Lo que baja de la Federación', 'pal': 'oro', 'est': 'derivado', 'anio': 2026,
      'que': 'Participaciones (Ramo 28) más aportaciones (Ramo 33) que la Federación le entrega a cada entidad en 2026. Es el primer piso: el dinero federal que llega al territorio.'},
-    {'id': 'est', 'nom': '2 · Lo que cobra el estado', 'pal': 'azul', 'est': 'derivado', 'anio': 2024,
+    {'id': 'est', 'dim': 'financiera', 'fmt': 'mdp', 'nom': '2 · Lo que cobra el estado', 'pal': 'azul', 'est': 'derivado', 'anio': 2024,
      'que': 'Lo que el gobierno del estado recaudó por su cuenta en 2024: impuestos estatales, cuotas, derechos, productos y aprovechamientos. Es el segundo piso.'},
-    {'id': 'mun', 'nom': '3 · Lo que ingresan sus municipios', 'pal': 'verde', 'est': 'derivado', 'anio': 2024,
+    {'id': 'mun', 'dim': 'financiera', 'fmt': 'mdp', 'nom': '3 · Lo que ingresan sus municipios', 'pal': 'verde', 'est': 'derivado', 'anio': 2024,
      'que': 'Todo lo que ingresaron en 2024 los municipios del estado que rindieron su cuenta al INEGI: lo propio, lo que les llega del estado y de la Federación, y lo que pidieron prestado. Es el tercer piso.'},
+    # La dimensión de la deuda (03-11-2026): lo que debe cada gobierno estatal
+    # y los tres indicadores con que lo mide el Sistema de Alertas.
+    {'id': 'deuda', 'dim': 'deuda', 'fmt': 'mdp', 'nom': 'Lo que debe', 'pal': 'rojo', 'est': 'oficial', 'anio': 2025,
+     'que': 'La deuda pública y las obligaciones de cada gobierno estatal al cierre de 2025, según el Sistema de Alertas de Hacienda. Solo cuenta la que está inscrita en el Registro Público Único.'},
+    {'id': 'dpc', 'dim': 'deuda', 'fmt': 'pesos', 'nom': 'Por habitante', 'pal': 'rojo', 'est': 'derivado', 'anio': 2025,
+     'que': 'La misma deuda, repartida entre los habitantes de cada estado: así se comparan un estado grande y uno chico.'},
+    {'id': 'ild', 'dim': 'deuda', 'fmt': 'pct', 'nom': 'Deuda ÷ ingresos libres', 'pal': 'rojo', 'est': 'oficial', 'anio': 2025,
+     'que': ('Primer indicador del Sistema de Alertas: la deuda y las obligaciones entre los ingresos de libre disposición, los que el estado gasta en lo que decide '
+             '(sus cobros propios y las participaciones federales, lo que no llega etiquetado). Un 50 % quiere decir que debe el equivalente a medio año de esos ingresos.')},
+    {'id': 'sd', 'dim': 'deuda', 'fmt': 'pct', 'nom': 'Lo que se va en pagarla', 'pal': 'rojo', 'est': 'oficial', 'anio': 2025,
+     'que': ('Segundo indicador: lo que el estado pagó en el año por su deuda y sus obligaciones (capital, intereses y comisiones) entre sus ingresos de libre disposición. '
+             'Dice cuánto de su dinero libre ya no puede usar en otra cosa.')},
+    {'id': 'ocp', 'dim': 'deuda', 'fmt': 'pct', 'nom': 'Deudas de corto plazo', 'pal': 'rojo', 'est': 'oficial', 'anio': 2025,
+     'que': ('Tercer indicador: lo que debe a corto plazo, a proveedores y a contratistas, menos lo que tiene en efectivo, bancos e inversiones temporales, '
+             'entre sus ingresos totales. Si sale negativo, tenía en caja más que esas deudas.')},
 ]
 
 
-def _fuentes(ref):
-    return {
+def _fuentes(ref, base=None):
+    extra = {}
+    if base is not None:
+        E = base['estados']
+        doc, pagina = _sda(base)
+        sda = '%s %s (<a href="%s">archivo de variables por entidad, XLSX</a>; huella SHA-256 <code>%s…</code>; <a href="%s">página oficial</a>).' % (
+            sorted(set(e['deudaFuente'] for e in E), key=len)[0], ref('ref-shcp-alertas'), doc['url'], doc['sha256'][:12], pagina)
+        ind = (' Las tres mediciones y su resultado (sostenible, en observación o elevado) las define el Reglamento del Sistema de Alertas; '
+               'el archivo las publica por entidad.')
+        extra = {'deuda': sda, 'ild': sda + ind, 'sd': sda + ind, 'ocp': sda + ind,
+                 'dpc': ('Deuda al cierre de 2025 (Sistema de Alertas %s) ÷ población a mitad de 2026 (CONAPO). La división es nuestra; '
+                         'los años no coinciden porque es la deuda que hereda quien vive hoy en el estado.') % ref('ref-shcp-alertas')}
+    return dict(extra, **{
         'fed': 'Ramo 28: Anexo 15 del acuerdo de distribución (DOF 12-12-2025) %s. Ramo 33: Anexo 16, versión modificada (DOF 09-07-2026) %s. La suma de los dos es nuestra.' % (
             ref('ref-dof-distribucion-2026'), ref('ref-dof-distribucion-2026-mod')),
         'est': 'Suma de impuestos, cuotas de seguridad social, contribuciones de mejoras, derechos, productos y aprovechamientos de 2024. INEGI, finanzas públicas estatales, cifras definitivas %s.' % ref('ref-inegi-efipem-estatal'),
         'mun': 'Suma de los ingresos de 2024 de cada municipio que rindió su cuenta. INEGI, finanzas públicas municipales (EFIPEM), cifras definitivas %s. Los que no rindieron cuenta no se cuentan en cero: quedan sin cifra.' % ref('ref-inegi-efipem'),
-    }
+    })
 
 
 def pagina_mapa(base, ref, tres, padron):
@@ -257,31 +305,61 @@ def pagina_mapa(base, ref, tres, padron):
                   'INEGI, finanzas públicas municipales 2024 %s.' % ref('ref-inegi-efipem')),
     ])
     dims = []
-    for i, ico, nom, que, ir, _ in DIMENSIONES:
+    for k, (i, ico, nom, que, ir, _ire, pinta) in enumerate(DIMENSIONES):
         if ir and not _existe(ir):
             raise SystemExit('planisferio: la dimensión %s apunta a %s, que no existe' % (i, ir))
-        dims.append('<button type="button" class="pl-dim%s" role="tab" aria-selected="%s" data-dim="%s"%s>'
+        if pinta and not any(l['dim'] == i for l in LENTES):
+            raise SystemExit('planisferio: la dimensión %s se pinta pero no tiene lentes' % i)
+        dims.append('<button type="button" class="pl-dim%s" role="tab" aria-selected="%s" data-dim="%s">'
                     '<span class="pl-dim-ico" aria-hidden="true">%s</span><span class="pl-dim-n">%s</span>'
                     '<small>%s</small></button>' % (
-                        '' if ir is None else ' pl-dim-prox', 'true' if ir is None else 'false', i,
-                        (' data-ir="%s"' % ir) if ir else '', ico, nom, 'En el mapa' if ir is None else 'Próximamente'))
+                        '' if pinta else ' pl-dim-prox', 'true' if k == 0 else 'false', i,
+                        ico, nom, 'En el mapa' if pinta else 'Próximamente'))
     otras = ''.join('<li><span aria-hidden="true">%s</span> <b>%s.</b> %s <a href="%s">Ya está en la Enciclopedia ➔</a></li>' % (
-        ico, nom, que, ir) for _, ico, nom, que, ir, _ in DIMENSIONES if ir)
-    lentes = ''.join('<button type="button" class="pl-lente" role="radio" aria-checked="%s" data-l="%s">%s</button>' % (
-        'true' if k == 0 else 'false', l['id'], l['nom']) for k, l in enumerate(LENTES))
-    fu = _fuentes(ref)
+        ico, nom, que, ir) for _, ico, nom, que, ir, _, pinta in DIMENSIONES if ir and not pinta)
+    pintadas = [d for d in DIMENSIONES if d[6]]
+    primera = {}
+    for l in LENTES:
+        primera.setdefault(l['dim'], l['id'])
+    lentes = ''.join('<button type="button" class="pl-lente" role="radio" aria-checked="%s" data-l="%s" data-dim="%s"%s>%s</button>' % (
+        'true' if primera[l['dim']] == l['id'] else 'false', l['id'], l['dim'],
+        '' if l['dim'] == DIMENSIONES[0][0] else ' hidden', l['nom']) for l in LENTES)
+    fu = _fuentes(ref, base)
     sin_est = [f['a'] for f in filas if f['est'] is None]
     sin_mun = [f['a'] for f in filas if f['mun'] is None]
-    datos = {'lentes': [dict(l, fuente=fu[l['id']]) for l in LENTES], 'e': filas,
-             'falta': {'est': sin_est, 'mun': sin_mun},
-             'pend': {'est': 'entidades-' + '-'.join(sin_est).lower(), 'mun': 'municipios-sin-cuenta'},
-             'dims': {i: {'n': nom, 'ir': ir, 'ire': ire} for i, _, nom, _, ir, ire in DIMENSIONES}}
+    no_med = [f['a'] for f in filas if f['ild'] is None]
+    nombre = {f['a']: f['n'] for f in filas}
+    # Lo que no tiene cifra en cada lente, con su porqué: un pendiente lleva
+    # su ficha; lo que no se mide por ley no es pendiente, y se dice así.
+    falta = {
+        'est': {'a': sin_est, 'gris': 'sin cifra', 'pend': 'entidades-' + '-'.join(sin_est).lower(),
+                'txt': 'La Ciudad de México no figura en la estadística estatal del INEGI.'},
+        'mun': {'a': sin_mun, 'gris': 'sin cifra', 'pend': 'municipios-sin-cuenta',
+                'txt': 'Las alcaldías de la Ciudad de México no rinden cuenta municipal al INEGI.'},
+    }
+    for i in ('ild', 'sd', 'ocp'):
+        falta[i] = {'a': no_med, 'gris': 'no se mide', 'pend': None,
+                    'txt': ('%s no se mide: no tiene deuda inscrita en el Registro Público Único, y la Ley de Disciplina Financiera (art. 14) '
+                            'la cuenta como sostenible.') % ' ni '.join(nombre[a] for a in no_med)}
+    # El punto ciego del semáforo: si todas comparten color, el color no
+    # distingue a la más endeudada de la menos. Se dice con las cifras.
+    med = sorted((f for f in filas if f['ild'] is not None), key=lambda f: -f['ild'])
+    sems = sorted(set(f['sem'] for f in filas))
+    nota_deuda = ('<b>%s.</b> El semáforo de Hacienda pone a las %d en «%s»%s. Ese color junta a %s, que debe el equivalente a %s de sus ingresos de libre disposición, '
+                  'con %s, que debe %s %s. Por eso el mapa no colorea por semáforo, sino por cifra: el verde quiere decir que, con esas tres mediciones, Hacienda considera sostenible su deuda, no que deban poco.' % (
+                      'Lo que el semáforo no dice' if len(sems) == 1 else 'El semáforo no lo dice todo',
+                      len(filas), sems[0].lower() if len(sems) == 1 else ' y '.join(x.lower() for x in sems),
+                      ' (las que no se miden cuentan como sostenibles por ley)' if no_med else '',
+                      med[0]['n'], pct(med[0]['ild']), med[-1]['n'], pct(med[-1]['ild']), chip('oficial')))
+    datos = {'lentes': [dict(l, fuente=fu[l['id']], falta=falta.get(l['id'])) for l in LENTES], 'e': filas,
+             'dims': {i: {'n': nom, 'ir': ir, 'ire': ire, 'pinta': pinta} for i, _, nom, _, ir, ire, pinta in DIMENSIONES},
+             'notas': {'deuda': nota_deuda}}
     svg = tm.mapa_svg(RAIZ).replace('tt-svg', 'pl-svg').replace('tt-edo', 'pl-edo').replace(
         'aria-label="Mapa de las 32 entidades"', 'aria-label="Planisferio: las 32 entidades de México"')
     indice = ''.join('<li><a href="%s">%s</a></li>' % (f['p'], f['n']) for f in sorted(filas, key=lambda x: clave(x['n'])))
     bloque_mapa = '''<div class="pl-dims" role="tablist" aria-label="Dimensiones del Planisferio">%s</div>
           <p class="pl-dim-aviso" id="plDimAviso" hidden></p>
-          <div class="pl-lentes" role="radiogroup" aria-label="Cuál de los tres presupuestos ver">%s</div>
+          <div class="pl-lentes" role="radiogroup" aria-label="Qué ver en el mapa">%s</div>
           <p class="pl-que" id="plQue"></p>
           <div class="pl-rej">
             <figure class="pl-fig">
@@ -289,9 +367,10 @@ def pagina_mapa(base, ref, tres, padron):
               <figcaption class="pl-leyenda" id="plLeyenda"></figcaption>
             </figure>
             <aside class="pl-ficha" id="plFicha" aria-live="polite">
-              <p class="pl-ficha-vacia"><b>Toca una entidad.</b> Verás sus tres presupuestos y la puerta a su portal, con sus municipios.</p>
+              <p class="pl-ficha-vacia"><b>Toca una entidad.</b> Verás sus cifras de la dimensión que elegiste y la puerta a su portal, con sus municipios.</p>
             </aside>
           </div>
+          <p class="pl-dim-nota" id="plDimNota" hidden></p>
           <p class="pl-pie" id="plFuente"></p>
           <p class="pl-pie" id="plFalta"></p>
           <nav class="pl-indice" aria-label="Las 32 entidades, una por una"><h3>Las 32 entidades, en orden alfabético</h3><ul>%s</ul></nav>
@@ -307,9 +386,11 @@ def pagina_mapa(base, ref, tres, padron):
         'estilos': ['numeros.css', 'planisferio.css'],
         'scripts': ['planisferio.js'],
         'secciones': [
-            {'id': 'mapa', 'titulo': 'El mapa: los tres presupuestos de cada entidad',
-             'texto': ('Cada entidad vive en tres pisos de la hacienda: lo que le baja de la Federación, lo que cobra por su cuenta y lo que ingresan sus municipios. '
-                       'Elige el piso; el color compara a las 32 por quintiles (cinco grupos con el mismo número de entidades).'),
+            {'id': 'mapa', 'titulo': 'El mapa: elige una dimensión',
+             'texto': ('Hoy se pintan %s. La financiera son los tres pisos de la hacienda de cada entidad: lo que le baja de la Federación, lo que cobra por su cuenta y lo que ingresan sus municipios. '
+                       'La deuda es lo que debe cada gobierno estatal y cuánto le pesa, con los tres indicadores del Sistema de Alertas de Hacienda. '
+                       'Elige la dimensión y qué ver; el color compara a las 32 por quintiles (cinco grupos con el mismo número de entidades).') % (
+                           ('%d dimensiones: la %s' % (len(pintadas), ' y la '.join(d[2].lower() for d in pintadas))) if len(pintadas) > 1 else 'una dimensión'),
              'tarjetas': [], 'bloque': bloque_mapa},
             {'id': 'contadores', 'titulo': 'Los contadores del año',
              'texto': ('Los tres presupuestos de la Federación en 2026 (del Estado, nacional y social), lo que baja al territorio y lo que ingresan los municipios. '
@@ -321,6 +402,60 @@ def pagina_mapa(base, ref, tres, padron):
              'tarjetas': [], 'bloque': '<ul class="pl-otras">%s</ul>' % otras},
         ],
     }
+
+
+def _lugar(E, a, k, med=False):
+    """Su lugar entre las entidades, de la que más a la que menos (derivado)."""
+    v = [x for x in E if x.get(k) is not None and (not med or _medida(x))]
+    v.sort(key=lambda x: -x[k])
+    return next(i for i, x in enumerate(v) if x['abbr'] == a) + 1, len(v)
+
+
+def _deuda_portal(base, ref, e):
+    E = base['estados']
+    fu = _fuentes(ref, base)
+    a = e['abbr']
+    dpc = e['deuda'] * 1e6 / e['pobPersonas']
+    l1, n1 = _lugar(E, a, 'deuda')
+    # El total, tal cual lo suma la ficha de los Expedientes con las cifras sin
+    # redondear: sumar las cifras ya redondeadas daría una décima distinta.
+    f = next(x for x in base['expedientes']['fichas'] if x['id'] == 'deuda-estados')
+    tot = float(f['cifras'][0]['valor'].replace('$', '').replace(',', '').replace(' mdp', ''))
+    if abs(tot - sum(x['deuda'] for x in E)) > 1:
+        raise SystemExit('planisferio: la deuda de los estados no cuadra con la ficha deuda-estados')
+    p1 = ('<article class="pl-piso pl-piso-deuda"><p class="pl-piso-n">Lo que debe · cierre de 2025</p>'
+          '<p class="pl-piso-v"><b class="num-tabular">%s</b> %s</p>'
+          '<dl class="pl-dl"><dt>Por habitante</dt><dd>%s %s <small>la deuda entre la población a mitad de 2026</small></dd>'
+          '<dt>Su lugar entre las 32</dt><dd>%s %s <small>de la que más debe a la que menos</small></dd>'
+          '<dt>Su parte de la deuda de los 32 estados</dt><dd>%s %s <small>de %s que suman entre todos</small></dd></dl>'
+          '<p class="pl-piso-f">%s</p></article>' % (
+              mdp(e['deuda']), chip('oficial'), _pesos(dpc), chip('derivado'),
+              ('%d.º de %d' % (l1, n1)) if e['deuda'] else 'Sin deuda inscrita', chip('derivado') if e['deuda'] else '',
+              pct(e['deuda'] / tot * 100), chip('derivado'), mdp(tot), fu['deuda']))
+    if _medida(e):
+        l2, n2 = _lugar(E, a, 'deudaIld', med=True)
+        p2 = ('<article class="pl-piso pl-piso-deuda"><p class="pl-piso-n">Cuánto le pesa · los tres indicadores</p>'
+              '<p class="pl-piso-v"><b>%s</b> %s</p>'
+              '<dl class="pl-dl"><dt>1 · Deuda ÷ ingresos de libre disposición</dt><dd>%s %s <small>%d.º de %d estados medidos; sus ingresos de libre disposición fueron %s %s</small></dd>'
+              '<dt>2 · Lo que pagó por ella ÷ esos ingresos</dt><dd>%s %s <small>de cada $100 de su dinero libre, %s se fueron en pagar deuda y obligaciones</small></dd>'
+              '<dt>3 · Deudas de corto plazo, menos lo que tiene en caja, ÷ ingresos totales</dt><dd>%s %s <small>%s</small></dd></dl>'
+              '<p class="pl-piso-f">%s</p></article>' % (
+                  SEMAFORO[e['semaforoDeuda']], chip('oficial'),
+                  pct(e['deudaIld']), chip('oficial'), l2, n2, mdp(e['ildMdp']), chip('oficial'),
+                  pct(e['deudaSd']), chip('oficial'), '$' + format(e['deudaSd'], '.1f'),
+                  pct(e['deudaOcp']), chip('oficial'),
+                  'negativo: tenía en efectivo, bancos e inversiones temporales más de lo que debía a corto plazo' if e['deudaOcp'] < 0 else
+                  'lo que debía a corto plazo superaba lo que tenía en caja',
+                  fu['ild']))
+    else:
+        p2 = ('<article class="pl-piso pl-piso-deuda"><p class="pl-piso-n">Cuánto le pesa · los tres indicadores</p>'
+              '<p class="pl-piso-v"><b>No se mide</b> %s</p><p>%s no tiene deuda inscrita en el Registro Público Único, así que el Sistema de Alertas no le calcula '
+              'indicadores; la Ley de Disciplina Financiera (art. 14) la cuenta como de endeudamiento sostenible. No tener deuda inscrita no quiere decir no deberle '
+              'a nadie: los adeudos con proveedores, por ejemplo, no pasan por ese registro.</p><p class="pl-piso-f">%s</p></article>' % (
+                  chip('oficial'), e['name'], fu['deuda']))
+    ciego = ('<p class="pl-dim-nota">El semáforo verde quiere decir que, con sus tres mediciones, Hacienda considera sostenible su deuda, no que deba poco. El Sistema de Alertas solo mide la deuda inscrita '
+             'en el Registro Público Único que se paga con ingresos de libre disposición; lo que se debe por otras vías no entra en estas cifras.</p>')
+    return '<div class="pl-pisos">%s%s</div>%s' % (p1, p2, ciego)
 
 
 def pagina_portal(base, ref, e, padron, prev, sig):
@@ -374,6 +509,8 @@ def pagina_portal(base, ref, e, padron, prev, sig):
              '<p class="pl-cont-que">Operación: %s ÷ 31,536,000 segundos del año. Sirve para dimensionar la cifra: no es dinero que se mueva en tiempo real, '
              'ni dice cuándo llega cada pago (las participaciones se entregan cada mes y las aportaciones según su calendario).</p></article></div>' % (
                  e['gasto'], _pesos(s), chip('derivado'), mdp(e['gasto'])))
+    # 2 bis · Su deuda (Sistema de Alertas, Cuenta Pública 2025)
+    deuda = _deuda_portal(base, ref, e)
     # 3 · Los municipios
     filas = []
     for r in m['lista']:
@@ -401,7 +538,7 @@ def pagina_portal(base, ref, e, padron, prev, sig):
     # 4 · Las otras dimensiones y el Auditor
     dl = _congresos(base)
     puertas = []
-    for i, ico, dn, que, ir, ire in DIMENSIONES:
+    for i, ico, dn, que, ir, ire, _pinta in DIMENSIONES:
         if not ir:
             continue
         liga = ire % a if ire and '%s' in ire and i != 'legislativa' else ir
@@ -431,7 +568,7 @@ def pagina_portal(base, ref, e, padron, prev, sig):
         'archivo': portal(a), 'menu': nom, 'menu_archivo': ARCHIVO,
         'padre': (ARCHIVO, 'Planisferio'),
         'icono': '📍', 'titulo': nom, 'lema': 'Su portal en el Planisferio',
-        'entrada': ('Los tres presupuestos de %s, sus municipios uno por uno y la puerta a sus otras dimensiones. '
+        'entrada': ('Los tres presupuestos de %s, su deuda, sus municipios uno por uno y la puerta a sus otras dimensiones. '
                     'Cada cifra sale de la base de la Enciclopedia, con su fuente oficial y su etiqueta.' % nom),
         'estilos': ['numeros.css', 'planisferio.css'],
         'scripts': ['planisferio.js'],
@@ -441,6 +578,10 @@ def pagina_portal(base, ref, e, padron, prev, sig):
              'texto': 'Un piso por cada orden de gobierno. Los años no se mezclan: lo que baja es de 2026 y lo que cobran el estado y sus municipios, de 2024, el último con cifras definitivas del INEGI.',
              'tarjetas': [], 'bloque': '<div class="pl-pisos">%s%s%s</div>' % (p1, p2, p3)},
             {'id': 'ritmo', 'titulo': 'Su contador', 'texto': '', 'tarjetas': [], 'bloque': ritmo},
+            {'id': 'deuda', 'titulo': 'Su deuda',
+             'texto': ('Lo que debe el gobierno de %s y cuánto le pesa, medido por el Sistema de Alertas de Hacienda con la Cuenta Pública 2025. '
+                       'Es la deuda del gobierno del estado; la de sus municipios la mide el mismo sistema y llegará al Planisferio en una próxima entrega.') % nom,
+             'tarjetas': [], 'bloque': deuda},
         ] + ([
             {'id': 'mapa-municipios',
              'titulo': ('El mapa de sus %d municipios' if m['conCifra'] else 'El mapa de sus %d alcaldías') % len(g['m']),

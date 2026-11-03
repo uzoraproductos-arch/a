@@ -145,6 +145,11 @@ RECURSOS = [
     ('planisferio', '🗺️', 'Ver en el Planisferio', 'El Planisferio: México en un mapa', 'planisferio.html',
      'planisferio.html?e=%s', 'mapa',
      'planisferio mapa mexico republica tres presupuestos pisos federal estatal municipal municipios dimension dimensiones portal territorio'),
+    # Después del Planisferio general: en un empate («abre el planisferio»)
+    # gana el de arriba, y este solo cuando se pide la deuda.
+    ('pl-deuda', '🏦', 'Ver la deuda en el Planisferio', 'La deuda de los 32 estados y sus tres indicadores, en el Planisferio', 'planisferio.html?d=deuda',
+     'planisferio.html?d=deuda&e=%s', 'mapa',
+     'deuda deudas debe deben endeudado endeudamiento semaforo alertas planisferio indicadores servicio pagar corto plazo libre disposicion mapa'),
 ]
 
 

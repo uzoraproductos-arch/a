@@ -7214,7 +7214,8 @@ Pedido del autor: «La pestaña de enciclopedia la vamos a convertir en la cuart
 
 ### Pendientes del Planisferio
 - **El mapa de los municipios:** hecho para **las 32 entidades** el 03-11-2026 (abajo). Queda actualizarlo cuando el INEGI publique un Marco Geoestadístico nuevo (se vuelve a correr el script con el archivo nuevo; si cambian los municipios, la generación se detiene hasta que el padrón los traiga).
-- **Las otras cinco dimensiones** (deuda, inversión, ambiental, legislativa, judicial) todavía no se pintan en el mapa: hoy llevan a su página de la Enciclopedia.
+- **La deuda** se pinta desde el 03-11-2026 (abajo). **Las otras cuatro dimensiones** (inversión, ambiental, legislativa, judicial) todavía no se pintan en el mapa: hoy llevan a su página de la Enciclopedia.
+- **La deuda de los municipios:** el Sistema de Alertas también mide a los municipios con deuda inscrita; falta integrar su archivo (falta de la plataforma, no de Hacienda).
 - **Ciudad de México:** sin recaudación propia cotejada (`entidades-cdmx`) y sin cuenta municipal de sus 16 alcaldías (`municipios-sin-cuenta`), como en el resto de la plataforma.
 
 ## Entrega — 03-11-2026: el mapa de los municipios de Jalisco (sello 20261103a)
@@ -7272,3 +7273,16 @@ Pedido del autor: «ok bueno continua con el desarrollo» y «avísame cuando es
 | 30 | `30_veracruzignaciodelallave.zip` | 212 | 400 m | `5b021b37aa47…` | 141 KB |
 | 31 | `31_yucatan.zip` | 106 | 400 m | `cb97e3fd052e…` | 77 KB |
 | 32 | `32_zacatecas.zip` | 58 | 400 m | `e9213f9df2ac…` | 51 KB |
+
+## Entrega — 03-11-2026: la deuda en el Planisferio (sello 20261103d)
+
+Pedido del autor: «sigue con la dimensión de deuda en el mapa».
+
+- **Fuente:** SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29-06-2026), archivo «Información Variables SdA Entidades Federativas» (XLSX, SHA-256 `b76ba68b4d720e7cd73547bb2bcc832fe41c1cc12395e56fbe363ef857e34b16`). Ya estaba extraído en `investigaciones/expedientes-asf.json` (`extraer_expedientes_asf.py`): no se bajó de nuevo (el 03-11-2026 el servidor de Hacienda no completó la cadena de su certificado desde esta sesión).
+- **A la base:** `integrar_expedientes.py` escribe ahora en cada estado, además de `deuda`, `semaforoDeuda` y `deudaIld`, el segundo indicador (`deudaSd`: servicio de la deuda y obligaciones ÷ ingresos de libre disposición, %), el tercero (`deudaOcp`: obligaciones de corto plazo, proveedores y contratistas menos efectivo, bancos e inversiones temporales ÷ ingresos totales, %) y el denominador (`ildMdp`). Todos `oficial`. Tlaxcala, que no se mide, los lleva en `null`. El cambio solo agrega renglones.
+- **Mapa:** `DIMENSIONES` gana un séptimo campo (si se pinta). La deuda tiene cinco lentes (`LENTES`, con `dim` y `fmt`): lo que debe (mdp, oficial), por habitante (deuda ÷ población del CONAPO a mitad de 2026, derivado, con la nota de que los años no coinciden), y los tres indicadores (%, oficial). La paleta es roja. Lo que no tiene cifra se dice por lente (`falta`): pendiente con su ficha, o «no se mide» cuando es por ley.
+- **Punto ciego:** el semáforo pone a las 32 en «endeudamiento sostenible» y junta al estado más endeudado frente a sus ingresos libres (Nuevo León, 97.8 %) con el menos (Querétaro, 4.8 %). Por eso el mapa colorea por cifra y lo dice en la nota, armada con las cifras de la base (si un estado cambia de color, el texto cambia solo).
+- **Portal:** sección «Su deuda» (`#deuda`): lo que debe, por habitante, su lugar entre las 32, su parte del total (de $643,695.6 mdp, el mismo total de la ficha `deuda-estados`; si no cuadran, la generación se detiene) y los tres indicadores con su lugar y el resultado. Los umbrales de cada rango no se escriben: los fija el Reglamento del Sistema de Alertas y no se cotejaron en esta entrega.
+- **Chat:** métricas `sd` y `ocp` en `_charla()` y en `asistente-charla.js` («¿cuánto le cuesta a Nuevo León pagar su deuda?», «deudas de corto plazo de Coahuila»); Tlaxcala contesta que no se mide. Renglón `pl-deuda` en `RECURSOS` (`planisferio.html?d=deuda&e=%s`). Cuatro preguntas nuevas (318).
+- **Pendiente:** la deuda de los municipios (Sistema de Alertas de municipios) y los umbrales de los rangos, cotejados contra el Reglamento vigente.
+

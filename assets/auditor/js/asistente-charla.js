@@ -159,6 +159,8 @@
     var MET_EDO = [
       ['radar', /de cada (100|cien)|radar|bandera roja|proporcion a lo auditado/],
       ['sem', /semaforo|alerta/],
+      ['sd', /servicio de (la )?deuda|pagar (su |sus |la )?deudas?\b|pagos? de (su |la )?deuda/],
+      ['ocp', /corto plazo|deudas? (con|a) proveedores/],
       ['ild', /libre disposicion|ingresos de libre/],
       ['aud', /cuantas auditorias|numero de auditorias|auditorias (le )?(hizo|hicieron|practic)/],
       ['asf', /aclarar|\basf\b|auditoria superior|robo|robaron|roban|transa|desfalc|desvi|chingaron|clavaron|embols|volaron|moche|corrup|irregular|observ|huec|fiscaliz|perdio|perdieron|desapareci/],
@@ -209,6 +211,10 @@
 
     function edoMet(e, k, porHab) {
       var m = M[k] || {}, v = e[k], fu = [fuenteDe(k, e)], h = '';
+      if (v == null && (k === 'sd' || k === 'ocp')) {
+        return { html: '<p><b>' + esc(e.n) + '</b> no se mide en el Sistema de Alertas: no tiene deuda inscrita en el Registro Público Único, y la Ley de Disciplina Financiera (art. 14) la cuenta como de endeudamiento sostenible. Por eso no tiene ese indicador.</p>',
+          fu: [fuenteDe('deuda', e)], ci: [], tit: e.n + ': ' + m.n };
+      }
       if (v == null && k !== 'sem') return { html: pendEdo(e, k), fu: [pendFu(e, k)], ci: [], tit: e.n + ': ' + m.n };
       if (porHab && (k === 'deuda' || k === 'asf' || k === 'propia' || k === 'r28' || k === 'r33')) {
         var ph = v * 1e6 / e.pob;
@@ -231,6 +237,13 @@
       } else if (k === 'ild') {
         h = '<p>La deuda de <b>' + esc(e.n) + '</b> equivale al ' + V + ' de sus ingresos de libre disposición, es decir, del dinero que puede gastar en lo que quiera. En pesos, debe <b>' + fmt(e.deuda, 'mdp') + '</b>.' + lugarTxt('ild', e, 'de mayor a menor') + '</p>';
         fu.push(fuenteDe('deuda', e), LUGAR);
+      } else if (k === 'sd') {
+        h = '<p>En 2025, <b>' + esc(e.n) + '</b> destinó a pagar su deuda y sus obligaciones (capital, intereses y comisiones) el equivalente al ' + V + ' de sus ingresos de libre disposición: de cada $100 de su dinero libre, <b>$' + n(v, 1) + '</b> se fueron en pagar. Es el segundo indicador del Sistema de Alertas de Hacienda.' + lugarTxt('sd', e, 'de mayor a menor') + '</p>';
+        fu.push(LUGAR);
+      } else if (k === 'ocp') {
+        h = '<p>Lo que <b>' + esc(e.n) + '</b> debía a corto plazo, a proveedores y a contratistas, menos lo que tenía en efectivo, bancos e inversiones temporales, equivale al ' + V + ' de sus ingresos totales de 2025.' +
+          (v < 0 ? ' Sale negativo: tenía en caja más que esas deudas.' : '') + ' Es el tercer indicador del Sistema de Alertas de Hacienda.' + lugarTxt('ocp', e, 'de mayor a menor') + '</p>';
+        fu.push(LUGAR);
       } else if (k === 'sem') {
         h = '<p>Hacienda tiene a <b>' + esc(e.n) + '</b> en semáforo <b>' + esc((e.sem || '').toLowerCase()) + '</b>' + semTxt(e.sem) + '. Debe <b>' + fmt(e.deuda, 'mdp') + '</b>' + (e.ild != null ? ', el ' + fmt(e.ild, 'pct') + ' de sus ingresos de libre disposición' : '') + '.</p>';
         fu = [fuenteDe('deuda', e, 'Semáforo y deuda')];
@@ -281,7 +294,7 @@
     }
 
     /* Cómo se dice cada cifra en «el estado con más…». */
-    var RK = { deuda: 'deuda', ild: 'deuda frente a sus ingresos de libre disposición', asf: 'dinero por aclarar ante la ASF', aud: 'auditorías de la ASF',
+    var RK = { deuda: 'deuda', ild: 'deuda frente a sus ingresos de libre disposición', sd: 'pago de deuda frente a sus ingresos de libre disposición', ocp: 'deudas de corto plazo frente a sus ingresos', asf: 'dinero por aclarar ante la ASF', aud: 'auditorías de la ASF',
       radar: 'dinero por aclarar de cada $100 revisados', gasto: 'dinero federal en 2026 (Ramos 28 y 33)', r28: 'participaciones', r33: 'aportaciones',
       pc: 'dinero federal por habitante', dep: 'dependencia de la Federación', propia: 'recaudación propia', pob: 'población' };
     var RKM = { ing: 'ingresos', part: 'participaciones', aport: 'aportaciones', fortamun: 'FORTAMUN', fismdf: 'FAIS municipal', predial: 'cobro de predial',
