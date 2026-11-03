@@ -1833,6 +1833,60 @@
    "dice": [
     "285 mil barriles diarios"
    ]
+  },
+  {
+   "q": "¿Cuántos acuíferos de Chihuahua están en déficit?",
+   "ir": "planisferio-chih.html#ambiental",
+   "dice": [
+    "38 sin disponibilidad",
+    "3,063.0 hm³"
+   ]
+  },
+  {
+   "q": "¿Qué estado tiene más acuíferos en déficit?",
+   "ir": "aprende-recursos-naturales.html#rn-agua",
+   "dice": [
+    "286 no",
+    "Chihuahua"
+   ]
+  },
+  {
+   "q": "¿Cómo está el agua subterránea de Aguascalientes?",
+   "ir": "planisferio-ags.html#ambiental",
+   "dice": [
+    "5 sin disponibilidad",
+    "Valle de Aguascalientes"
+   ]
+  },
+  {
+   "q": "Acuíferos de Tabasco",
+   "ir": "planisferio-tab.html#ambiental",
+   "dice": [
+    "ninguno estaba en déficit"
+   ]
+  },
+  {
+   "q": "¿Qué acuíferos están sobreexplotados?",
+   "ir": "aprende-recursos-naturales.html#rn-agua",
+   "dice": [
+    "27 de ellos",
+    "538,805 títulos"
+   ]
+  },
+  {
+   "q": "¿Es lo mismo un acuífero sin disponibilidad que uno sobreexplotado? ¿qué no dice el mapa del agua?",
+   "ir": "aprende-recursos-naturales.html#rn-agua-ciegos",
+   "dice": [
+    "Alfredo V. Bonfil",
+    "cada dos años"
+   ]
+  },
+  {
+   "q": "¿Dónde están los acuíferos en déficit en el mapa?",
+   "ir": "planisferio.html?d=ambiental&l=acuP",
+   "dice": [
+    "653 acuíferos"
+   ]
   }
  ]
 }

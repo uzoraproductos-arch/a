@@ -153,6 +153,11 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   (`MINAS`, con su total: si no cuadra, se detiene) y **una concesión no se dice como mina
   trabajando ni como irregularidad**; la capacidad de cada refinería, del Anuario
   Estadístico de PEMEX. `&l=` abre el mapa en una lente.
+  **El agua del subsuelo** (03-11-2026) sale del Acuerdo de disponibilidad de los 653
+  acuíferos de la CONAGUA (DOF 09-11-2023), copiado a un CSV con huella: `acuiferos()` recalcula
+  las sumas de cada entidad y se detiene si no cuadran. **La disponibilidad se dice como el agua
+  que aún se puede concesionar, nunca como el agua que queda, y «sin disponibilidad» no se dice
+  «sobreexplotado»**: son dos mediciones distintas de la CONAGUA.
 - **Las leyes del dinero en los tres niveles** (03-11-2026,
   `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
   cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y

@@ -1210,6 +1210,20 @@
         if (/(se puede|pueden|puede|dan|otorgan) (dar |otorgar |tener )?(una )?concesion(es)? (de|del|sobre|para) (el |la )?(litio|uranio|petroleo|hidrocarburos|minerales radiactivos)/.test(t)) return sanTema('rn_regimen');
         if (/(que|cual|cuales) ley(es)? (rige|rigen|regula|regulan|aplica|aplican) (a )?(la |el |los |las |al )?(mineria|minas|pesca|forestal|bosques|agua|aguas|petroleo|hidrocarburos|electricidad|energia electrica|litio|nuclear)/.test(t) ||
             /ley (de|federal de|general de) (mineria|pesca|aguas nacionales|desarrollo forestal)/.test(t) && /que (dice|es|regula)|quien (la )?aplica/.test(t)) return sanTema('rn_ramos');
+        /* El agua del subsuelo (CONAGUA, DOF 09-11-2023, corte al 30-12-2022; el Segundo Informe, 2026): la de un estado, o el país. */
+        if (SAN.t.rn_agua && /acuifer|aguas? subterrane|aguas? del subsuelo|subsuelo.*\bagua|sobreexplot|disponibilidad (media anual )?del? agua|deficit (de agua|hidric)|(concesiones|titulos) de (concesion de )?agua/.test(t) &&
+            !/ley de aguas|ley general de aguas|forest|bosque|pesquer|pesca\b/.test(t)) {
+          if (/punto(s)? ciego|no dice|no cuadra|ojo con/.test(t)) return sanTema('rn_agua_ciegos');
+          var AE = Object.keys(SAN.t).filter(function (k) { return /^rn_acu_/.test(k); }).map(function (k) {
+            var nm = plano(SAN.t[k].tit.split(':')[0]).trim();
+            return [k, nm === 'estado de mexico' ? /estado de mexico|edomex|edo mex/ : new RegExp('\\b' + nm + '\\b'), nm.length];
+          }).sort(function (a, b) { return b[2] - a[2]; });
+          var ta = plano(t), ha = AE.filter(function (x) { return x[1].test(ta); })[0];
+          if (ha && !/cada estado|todos los estados|que estados?|cual(es)? estados?/.test(t)) return sanTema(ha[0]);
+          var am = sanTema('rn_agua');
+          if (/\bmapa\b|planisferio|donde (estan|quedan|hay)/.test(t)) am.ir = ['planisferio.html?d=ambiental&l=acuP', 'los acuíferos en el Planisferio'];
+          return am;
+        }
         /* Las concesiones mineras (DGM, marzo de 2024; el Segundo Informe, junio de 2026): la de un estado, o el país. */
         if (SAN.t.rn_mineria && /concesion(es)? miner|concesionad[ao]s? (a|para) (la )?miner|titulos? (de concesion )?miner|\bminas?\b|mineras?\b|mineria/.test(t) && !/ley minera|ley de mineria|fondo minero|litio|uranio|radiactiv/.test(t)) {
           if (/punto(s)? ciego|no dice|no cuadra|ojo con/.test(t)) return sanTema('rn_mineria_ciegos');
