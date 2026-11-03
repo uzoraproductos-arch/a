@@ -330,7 +330,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-ver.html` | Veracruz · Auditavisión | apartados.py | 86 | 0 | 39 | 50 | 11 |
 | `planisferio-yuc.html` | Yucatán · Auditavisión | apartados.py | 83 | 0 | 34 | 46 | 9 |
 | `planisferio-zac.html` | Zacatecas · Auditavisión | apartados.py | 84 | 0 | 36 | 48 | 8 |
-| `planisferio.html` | Planisferio · Auditavisión | apartados.py | 73 | 0 | 11 | 20 | 3 |
+| `planisferio.html` | Planisferio · Auditavisión | apartados.py | 95 | 0 | 16 | 33 | 4 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |

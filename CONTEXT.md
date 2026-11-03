@@ -7472,3 +7472,10 @@ Pedido del autor: «intégralo y continúa con las dimensiones pendientes». Se 
 - **Correcciones.** Las puertas de «Las reglas de…» (deuda, inversión y congreso) salían en texto oscuro sobre botón oscuro: cada liga es ahora su propio botón (`p.pl-ficha-ir a`). «Se publica en el Gaceta Oficial…» pasa a «se publica en: …».
 - **Revisado** en el navegador a 390 y 1280 px, sin errores ni desborde: el mapa con `?d=legislativa&e=TLAX`, los portales de Tlaxcala, Ciudad de México y Nuevo León, y la tabla de la Enciclopedia.
 - **Pendiente:** las dimensiones ambiental y judicial del Planisferio; el presupuesto aprobado 2026/2027 de cada congreso y del estado (la prueba de verdad del tope, en cada periódico oficial); las remuneraciones de los congresos locales; los umbrales del semáforo, la deuda municipal y las ligas estatales «por cotejar».
+
+### 03-11-2026 · sello 20261103za · El Planisferio, por pestañas y cajones
+
+- **Pedido del autor:** menos narración en la página del Planisferio, las dimensiones como pestañas y el desglose en cajón, y traer los tres presupuestos con su cuenta.
+- **Hecho:** la tira de dimensiones es de pestañas (se desliza en el celular); el párrafo de las seis dimensiones y las notas de puntos ciegos se mudaron a dos cajones por dimensión («Cómo leer esta dimensión» y «Lo que este mapa no dice»). Cada contador abre «Ver su desglose»: los tres presupuestos con sus finalidades y lo que son de cada $100 (`derivado`), el gasto federalizado por sus cuatro ramos (se detiene si no suman su total) y el ingreso municipal por participaciones, aportaciones, lo propio y lo demás (`derivado`, con la resta dicha). «La cuenta completa» es `numeros_tres()` de la Enciclopedia.
+- **La lista de pendientes** quedó guardada en ESTADO.md, «La lista de pendientes».
+

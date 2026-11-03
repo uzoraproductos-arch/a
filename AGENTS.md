@@ -74,6 +74,14 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   `herramientas/planisferio.py`): financiera, deuda, inversión, ambiental,
   legislativa y judicial. Toca una entidad y lleva a su **portal**
   (`planisferio-<clave>.html`, clave sin acentos: `mex`), con sus municipios.
+- **La página del mapa va por pestañas y cajones** (decisión del autor, 03-11-2026:
+  «hay mucho contenido de narración»). Las dimensiones son una tira de pestañas;
+  lo que cada una pinta («📏 Cómo leer esta dimensión») y sus puntos ciegos («👁️ Lo
+  que este mapa no dice») abren en la ventana lateral (`button[data-cajon]` de
+  `apartados.js`), y en la página solo queda una línea. **Una dimensión nueva que se
+  pinte necesita su texto en `leer` de `pagina_mapa()`**, o la generación se detiene.
+  Cada contador trae «Ver su desglose» y abajo va «La cuenta completa», que es
+  `numeros_tres()` de la Enciclopedia (la misma función, nunca una copia).
 - **No trae datos propios:** ordena en el territorio lo que la Enciclopedia
   ya cotejó (`AUDIT_DB`, `municipios-efipem.js`). Una cifra nueva entra
   primero a su módulo de la Enciclopedia y de ahí la lee el Planisferio.

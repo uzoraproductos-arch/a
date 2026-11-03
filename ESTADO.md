@@ -5,7 +5,7 @@ historia completa de cada decisión en [CONTEXT.md](CONTEXT.md), que pasa de
 7,000 renglones: aquí va solo lo que necesitas para no repetir trabajo ni
 pisar el de otro. **Se actualiza en el mismo commit que cambia lo que dice.**
 
-Última actualización: 03-11-2026 · sello `20261103z` · rama `claude/funny-turing-imtm54`.
+Última actualización: 03-11-2026 · sello `20261103za` · rama `claude/funny-turing-imtm54`.
 
 ## Antes de empezar y antes de empujar
 
@@ -142,6 +142,25 @@ que necesita navegador.
   (`informes-semestral-asf.html`, `herramientas/informe_semestral.py`).
 - **27-10-2026.** Informe especial «Documentar para sancionar»
   (`informes-documentar-para-sancionar.html`).
+
+## La lista de pendientes (guardada a pedido del autor, 03-11-2026)
+
+Lo que falta, quién lo debe y qué destraba cada uno. El detalle de cada ficha
+está en `pendientes.html` (lo escribe `herramientas/pendientes.py`).
+
+| # | Pendiente | Ficha | Lo debe / lo destraba | Qué se hace al llegar |
+|---|---|---|---|---|
+| 1 | **Lo que debe cada municipio** (el saldo al cierre) | `deuda-municipios` | El autor sube el Excel de Hacienda «Financiamientos de Municipios y sus Entes Públicos» (hoja «Saldo por municipios y tipo de acreedor») o el listado del Registro Público Único: el portal de disciplina financiera no responde desde el entorno | Huella SHA-256, cuadre contra los totales de Hacienda; al Planisferio, la Enciclopedia, la ficha del Auditor de entes y el chat |
+| 2 | **Justicia ambiental por estado** (PROFEPA) | `ambiente-por-estado` | El autor sube el archivo de la PROFEPA | Lente por estado en la dimensión ambiental |
+| 3 | **Disponibilidad de acuíferos nueva** | `acuiferos-disponibilidad-nueva` | CONAGUA: el corte vigente es de diciembre de 2022 y la ley pide revisarlo cada dos años (LAN, art. 22) | Cambiar el CSV de `recursos_naturales.py` y su huella |
+| 4 | **Concesiones mineras por estado, 2026** | `mineria-por-estado-2026` | Secretaría de Economía: solo ha dado al día cuatro estados | Cambiar `MINAS` y su total |
+| 5 | **Rezago civil, familiar y mercantil** | `judicial-rezago-civil` | INEGI: no publica cuántas demandas quedaron sin resolver | Lente en la dimensión judicial |
+| 6 | **Presupuesto aprobado y remuneraciones de los 32 congresos** | — | Cada congreso local: la prueba del tope del 0.70 % (art. 116, fr. II) es su presupuesto aprobado contra el egreso del estado | Pasar el tope de «referencia» a prueba |
+| 7 | **Umbrales del semáforo del Sistema de Alertas** | — | Plataforma: cotejar los rangos del Reglamento | Decir el rango de cada color en el mapa de la deuda |
+| 8 | **Ligas «por cotejar» de las leyes estatales** | `leyes-estatales` | Plataforma: periódicos oficiales y congresos que no respondieron al cotejo | Cambiar el renglón de `ESTADOS` en `leyes_niveles.py` |
+| 9 | **Cambiar las ligas a la Plataforma Nacional de Transparencia** por el portal de cada dependencia | — | Plataforma (§0 ter: ninguna cifra se apoya en una solicitud) | Una por una, con su enlace verificado |
+| 10 | **Bóveda: 23 portales sin cadena de certificado completa** | — | Plataforma: completar la cadena sin apagar la verificación | Volver a correr la bóveda |
+| 11 | **Informe semestral de la ASF, corte al 30-09-2026** | — | ASF (ver «Lo que espera fecha») | Cambiar `DOC` y `ANT` de `informe_semestral.py` |
 
 ## Lo que espera fecha
 

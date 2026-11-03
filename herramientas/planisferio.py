@@ -234,15 +234,36 @@ def _pesos(v):
     return '$' + format(round(v), ',')
 
 
-def _contador(id_, ico, nom, v, est, que, fuente):
+def _contador(id_, ico, nom, v, est, que, fuente, desglose):
+    """Un contador del año: la cifra, su ritmo y su fuente a la vista; lo que
+    es y su desglose, en la ventana lateral (decisión del autor, 03-11-2026:
+    menos narración en la página, el desglose como cajón)."""
     s = _ritmo(v)
+    tpl = 'plTplCont-' + id_
     return ('<article class="pl-cont" data-anual="%.1f">'
             '<p class="pl-cont-n"><span aria-hidden="true">%s</span> %s</p>'
             '<p class="pl-cont-v"><b class="num-tabular">%s</b> %s</p>'
             '<p class="pl-cont-s">A su ritmo anual, <b class="num-tabular">%s por segundo</b> %s</p>'
             '<p class="pl-cont-vivo" aria-live="off">Desde que abriste esta página: <b class="num-tabular pl-vivo">$0</b></p>'
-            '<p class="pl-cont-que">%s</p><p class="pl-cont-f">%s</p></article>' % (
-                v, ico, nom, mdp(v), chip(est), _pesos(s), chip('derivado'), que, fuente))
+            '<p class="pl-cont-f">%s</p>'
+            '<button type="button" class="pl-cont-b" data-cajon="%s" data-cajon-tit="%sTit" aria-haspopup="dialog">🔎 Ver su desglose</button>'
+            '<template id="%s">%s</template></article>' % (
+                v, ico, nom, mdp(v), chip(est), _pesos(s), chip('derivado'), fuente, tpl, tpl, tpl,
+                _cajon('🔎', 'El desglose', nom, tpl + 'Tit', '<section class="glos-drawer-sec"><h4>Qué es</h4><p>%s</p></section>%s' % (que, desglose),
+                       '<a class="glos-drawer-todo" href="numeros-gasto-tres-presupuestos.html" style="text-align:center; text-decoration:none;">📚 Verlo en la Enciclopedia ➔</a>')))
+
+
+def _cajon(ico, marca, titulo, tid, cuerpo, pie='', cat='Planisferio'):
+    """El molde de la ventana lateral de apartados.js (button[data-cajon])."""
+    return ('<header class="glos-drawer-cab"><span class="glos-drawer-marca"><span aria-hidden="true">%s</span> %s</span>'
+            '<button type="button" class="glos-drawer-x" aria-label="Cerrar">✕</button></header>'
+            '<div class="glos-drawer-cuerpo"><span class="glos-drawer-cat">%s</span><h3 id="%s" class="glos-drawer-tit">%s</h3>%s</div>%s') % (
+                ico, marca, cat, tid, titulo, cuerpo, ('<footer class="glos-drawer-pie">%s</footer>' % pie) if pie else '')
+
+
+def _filas(xs):
+    return '<ul class="pl-des">%s</ul>' % ''.join(
+        '<li><span>%s</span><b class="num-tabular">%s</b>%s</li>' % (n, v, (' ' + e) if e else '') for n, v, e in xs)
 
 
 def _datos(base, padron):
@@ -519,26 +540,65 @@ def _fuentes(ref, base=None):
     })
 
 
-def pagina_mapa(base, ref, tres, padron):
+def pagina_mapa(base, ref, tres, padron, cuenta):
     filas = _datos(base, padron)
     F = base['panoramaErario']['federalizado']
     s = {x['id']: x for x in tres['sale']}
     nac = padron['nacional']
+    tot = tres['total']
+
+    def des_tres(x):
+        filas = [(f['n'], ('%.1f pts. del PIB' % f['pib']) if 'pib' in f else mdp(f['v']), '') for f in x['filas']]
+        return ('<section class="glos-drawer-sec"><h4>De cada $100 del presupuesto</h4><p><b class="num-tabular">$%.2f</b> %s '
+                '(%s ÷ %s, el total del Presupuesto de Egresos 2026).</p></section>'
+                '<section class="glos-drawer-sec"><h4>En qué se va</h4>%s<p>%s</p></section>'
+                '<section class="glos-drawer-sec"><h4>Fuente</h4><p class="glos-drawer-ley">%s</p></section>') % (
+                    x['v'] / tot * 100, chip('derivado'), mdp(x['v']), mdp(tot), _filas(filas), x['op'],
+                    ' '.join(ref(f['url'].split('#')[1]) + ' ' + f['t'] for f in x['f']))
+    comp = F['componentes']
+    if abs(sum(c['montoMdp'] for c in comp) - F['totalMdp']) > 0.5:
+        raise SystemExit('planisferio: los componentes del gasto federalizado no suman su total')
+    des_fed = ('<section class="glos-drawer-sec"><h4>Por los cuatro ramos</h4>%s<p>%s</p></section>'
+               '<section class="glos-drawer-sec"><h4>Fuente</h4><p class="glos-drawer-ley">Presupuesto de Egresos de la Federación 2026, Anexo 1 %s.</p></section>') % (
+                   _filas([(c['nombre'], mdp(c['montoMdp']), chip(c['estado'])) for c in comp]),
+                   F['nota'], ref('ref-pef2026'))
+    m = lambda k: nac[k] / 1e6
+    resto = nac['ing'] - nac['part'] - nac['aport'] - nac['propios']
+    if resto < 0:
+        raise SystemExit('planisferio: participaciones, aportaciones y lo propio pasan del ingreso municipal')
+    des_mun = ('<section class="glos-drawer-sec"><h4>De dónde vino</h4>%s<p>Lo demás es el ingreso total menos las otras tres '
+               '(%s − %s − %s − %s), como derivado.</p></section>'
+               '<section class="glos-drawer-sec"><h4>Fuente</h4><p class="glos-drawer-ley">INEGI, finanzas públicas municipales %d, cifras definitivas %s. '
+               'Faltan los municipios que no rindieron cuenta y las alcaldías de la Ciudad de México %s.</p></section>') % (
+                   _filas([('Participaciones (Ramo 28)', mdp(m('part')), chip('derivado')),
+                           ('Aportaciones (Ramo 33)', mdp(m('aport')), chip('derivado')),
+                           ('· de ellas, del FORTAMUN', mdp(m('fortamun')), chip('derivado')),
+                           ('· de ellas, del FAIS municipal', mdp(m('fismdf')), chip('derivado')),
+                           ('Lo que cobraron por su cuenta', mdp(m('propios')), chip('derivado')),
+                           ('· de ello, predial', mdp(m('predial')), chip('derivado')),
+                           ('Lo demás de su ingreso', mdp(resto / 1e6), chip('derivado'))]),
+                   mdp(m('ing')), mdp(m('part')), mdp(m('aport')), mdp(m('propios')),
+                   padron['anio'], ref('ref-inegi-efipem'), chip('pendiente', 'municipios-sin-cuenta'))
     contadores = ''.join([
         _contador('estado', '🏛️', 'Presupuesto del Estado', s['estado']['v'], s['estado']['est'], s['estado']['que'],
-                  'Criterios 2027, clasificación funcional %s. %s' % (ref('ref-cgpe2027'), s['estado']['op'])),
+                  'Criterios 2027, clasificación funcional %s.' % ref('ref-cgpe2027'), des_tres(s['estado'])),
         _contador('nacional', '🏗️', 'Presupuesto nacional', s['nacional']['v'], s['nacional']['est'], s['nacional']['que'],
-                  'Criterios 2027, clasificación funcional %s.' % ref('ref-cgpe2027')),
+                  'Criterios 2027, clasificación funcional %s.' % ref('ref-cgpe2027'), des_tres(s['nacional'])),
         _contador('social', '🫂', 'Presupuesto social', s['social']['v'], s['social']['est'], s['social']['que'],
-                  'Criterios 2027, clasificación funcional %s.' % ref('ref-cgpe2027')),
+                  'Criterios 2027, clasificación funcional %s.' % ref('ref-cgpe2027'), des_tres(s['social'])),
         _contador('fed', '📍', 'Gasto federalizado', F['totalMdp'], 'oficial',
                   'Lo que la Federación transfiere a estados y municipios en 2026, por los cuatro ramos.',
-                  'Presupuesto de Egresos de la Federación 2026 %s.' % ref('ref-pef2026')),
+                  'Presupuesto de Egresos de la Federación 2026 %s.' % ref('ref-pef2026'), des_fed),
         _contador('mun', '🏘️', 'Lo que ingresaron los municipios', round(nac['ing'] / 1e6, 1), 'derivado',
                   'La suma de los ingresos de 2024 de los %s municipios que rindieron su cuenta, de %s en el catálogo.' % (
                       format(padron['conCifra'], ','), format(padron['catalogo'], ',')),
-                  'INEGI, finanzas públicas municipales 2024 %s.' % ref('ref-inegi-efipem')),
+                  'INEGI, finanzas públicas municipales 2024 %s.' % ref('ref-inegi-efipem'), des_mun),
     ])
+    cuenta_btn = ('<button type="button" class="pl-cuenta-b" data-cajon="plTplCuenta" data-cajon-tit="plTplCuentaTit" data-cajon-hash="cuenta" aria-haspopup="dialog">'
+                  '🧮 La cuenta completa: los tres presupuestos, lo ya comprometido y los fondos</button><template id="plTplCuenta">%s</template>') % _cajon(
+        '🧮', 'La cuenta completa', 'Los tres presupuestos de 2026', 'plTplCuentaTit', cuenta,
+        '<a class="glos-drawer-todo" href="numeros-gasto-tres-presupuestos.html" style="text-align:center; text-decoration:none;">📚 Verlo en la Enciclopedia ➔</a>',
+        'Enciclopedia · Números · Gasto público')
     dims = []
     for k, (i, ico, nom, que, ir, _ire, pinta) in enumerate(DIMENSIONES):
         if ir and not _existe(ir):
@@ -547,9 +607,9 @@ def pagina_mapa(base, ref, tres, padron):
             raise SystemExit('planisferio: la dimensión %s se pinta pero no tiene lentes' % i)
         dims.append('<button type="button" class="pl-dim%s" role="tab" aria-selected="%s" data-dim="%s">'
                     '<span class="pl-dim-ico" aria-hidden="true">%s</span><span class="pl-dim-n">%s</span>'
-                    '<small>%s</small></button>' % (
+                    '%s</button>' % (
                         '' if pinta else ' pl-dim-prox', 'true' if k == 0 else 'false', i,
-                        ico, nom, 'En el mapa' if pinta else 'Próximamente'))
+                        ico, nom, '' if pinta else '<small>Próximamente</small>'))
     otras = ''.join('<li><span aria-hidden="true">%s</span> <b>%s.</b> %s <a href="%s">Ya está en la Enciclopedia ➔</a></li>' % (
         ico, nom, que, ir) for _, ico, nom, que, ir, _, pinta in DIMENSIONES if ir and not pinta)
     pintadas = [d for d in DIMENSIONES if d[6]]
@@ -623,8 +683,41 @@ def pagina_mapa(base, ref, tres, padron):
                       ' (%s no se mide: no tiene deuda inscrita, LDF art. 43)' % ' ni '.join(nombre[a] for a in no_med) if no_med else '',
                       med[0]['n'], pct(med[0]['ild']), med[-1]['n'], pct(med[-1]['ild']), chip('oficial')))
     datos = {'lentes': [dict(l, fuente=fu[l['id']], falta=falta.get(l['id'])) for l in LENTES], 'e': filas,
-             'dims': {i: {'n': nom, 'ir': ir, 'ire': ire, 'pinta': pinta} for i, _, nom, _, ir, ire, pinta in DIMENSIONES},
-             'notas': {'deuda': nota_deuda, 'inversion': nota_inv, 'legislativa': nota_leg, 'judicial': nota_jud, 'ambiental': nota_amb}}
+             'dims': {i: {'n': nom, 'ir': ir, 'ire': ire, 'pinta': pinta} for i, _, nom, _, ir, ire, pinta in DIMENSIONES}}
+    notas = {'deuda': nota_deuda, 'inversion': nota_inv, 'legislativa': nota_leg, 'judicial': nota_jud, 'ambiental': nota_amb}
+    # Lo que antes era un párrafo largo arriba del mapa y una nota debajo
+    # (decisión del autor, 03-11-2026: «mucho contenido de narración»): cada
+    # dimensión tiene su «Cómo leerla» y su «Lo que el mapa no dice» en la
+    # ventana lateral, y la página deja solo las pestañas.
+    cuantil = 'El color compara a las 32 por quintiles: cinco grupos con el mismo número de entidades.'
+    leer = {
+        'financiera': 'Los tres pisos de la hacienda de cada entidad: lo que le baja de la Federación, lo que cobra por su cuenta y lo que ingresan sus municipios.',
+        'deuda': 'Lo que debe cada gobierno estatal y cuánto le pesa, con los tres indicadores del Sistema de Alertas de Hacienda.',
+        'inversion': 'La obra que hace cada gobierno estatal, directa o por medio de sus organismos, y lo que la Auditoría Superior dejó por aclarar.',
+        'legislativa': 'Los 32 congresos locales: lo que gastó cada uno, cuánto cuesta por curul y cómo se compara con el tope del 0.70 % de la Constitución.',
+        'judicial': 'Los 32 poderes judiciales de los estados: lo que ejerció cada uno junto a lo que concluyó con ese dinero y las causas penales que se le acumulan.',
+        'ambiental': ('Los recursos naturales: los acuíferos de cada estado y cuántos ya no tienen agua para concesionar, su superficie forestal y sus incendios forestales, '
+                      'su pesca y su acuacultura, sus concesiones mineras y las siete refinerías de PEMEX, cuánto crudo procesa cada una frente a su capacidad y cuánto valor '
+                      'ganó o perdió en sus libros. En las lentes de refinación, el punto marca la entidad, no el sitio exacto.'),
+    }
+    cajones, plantillas = [], []
+    for k, (i, ico, nom, _q, _ir, _ire, pinta) in enumerate(DIMENSIONES):
+        if not pinta:
+            continue
+        if i not in leer:
+            raise SystemExit('planisferio: la dimensión %s se pinta y no dice cómo leerla' % i)
+        oculto = '' if k == 0 else ' hidden'
+        ls = ''.join('<li>%s</li>' % html.escape(l['nom']) for l in LENTES if l['dim'] == i)
+        t = 'plTplLeer-' + i
+        cajones.append('<button type="button" class="pl-caj-b" data-dim="%s" data-cajon="%s" data-cajon-tit="%sTit" aria-haspopup="dialog"%s>📏 Cómo leer esta dimensión</button>' % (i, t, t, oculto))
+        plantillas.append('<template id="%s">%s</template>' % (t, _cajon(ico, 'Cómo leerla', 'Cómo leer la dimensión «%s»' % nom, t + 'Tit',
+            '<section class="glos-drawer-sec"><h4>Qué pinta</h4><p>%s</p></section><section class="glos-drawer-sec"><h4>Qué puedes ver</h4><ul class="pl-des-l">%s</ul>'
+            '<p>%s Toca una entidad para ver su ficha; tócala otra vez para entrar a su portal.</p></section>' % (leer[i], ls, cuantil))))
+        if notas.get(i):
+            t = 'plTplNota-' + i
+            cajones.append('<button type="button" class="pl-caj-b pl-caj-ojo" data-dim="%s" data-cajon="%s" data-cajon-tit="%sTit" aria-haspopup="dialog"%s>👁️ Lo que este mapa no dice</button>' % (i, t, t, oculto))
+            plantillas.append('<template id="%s">%s</template>' % (t, _cajon('👁️', 'Puntos ciegos', 'Lo que el mapa no dice · %s' % nom, t + 'Tit',
+                '<section class="glos-drawer-sec"><p>%s</p></section>' % notas[i])))
     svg = tm.mapa_svg(RAIZ).replace('tt-svg', 'pl-svg').replace('tt-edo', 'pl-edo').replace(
         'aria-label="Mapa de las 32 entidades"', 'aria-label="Planisferio: las 32 entidades de México"')
     indice = ''.join('<li><a href="%s">%s</a></li>' % (f['p'], f['n']) for f in sorted(filas, key=lambda x: clave(x['n'])))
@@ -632,6 +725,7 @@ def pagina_mapa(base, ref, tres, padron):
           <p class="pl-dim-aviso" id="plDimAviso" hidden></p>
           <div class="pl-lentes" role="radiogroup" aria-label="Qué ver en el mapa">%s</div>
           <p class="pl-que" id="plQue"></p>
+          <div class="pl-cajones">%s</div>%s
           <div class="pl-rej">
             <figure class="pl-fig">
               %s
@@ -641,37 +735,27 @@ def pagina_mapa(base, ref, tres, padron):
               <p class="pl-ficha-vacia"><b>Toca una entidad.</b> Verás sus cifras de la dimensión que elegiste y la puerta a su portal, con sus municipios.</p>
             </aside>
           </div>
-          <p class="pl-dim-nota" id="plDimNota" hidden></p>
           <p class="pl-pie" id="plFuente"></p>
           <p class="pl-pie" id="plFalta"></p>
           <nav class="pl-indice" aria-label="Las 32 entidades, una por una"><h3>Las 32 entidades, en orden alfabético</h3><ul>%s</ul></nav>
           <script type="application/json" id="plDatos">%s</script>
           <noscript><p>El mapa se colorea con JavaScript; sin él, cada entidad se abre desde la lista de arriba.</p></noscript>''' % (
-        ''.join(dims), lentes, svg, indice, _json(datos))
+        ''.join(dims), lentes, ''.join(cajones), ''.join(plantillas), svg, indice, _json(datos))
     return {
         'archivo': ARCHIVO, 'menu': 'Planisferio', 'menu_archivo': ARCHIVO,
         'icono': '🗺️', 'titulo': 'Planisferio', 'lema': 'México en un mapa: cada entidad, cada municipio, cada peso',
-        'entrada': ('El dinero público tiene domicilio. Aquí está México entero en un mapa: elige una dimensión, mira cómo se reparte '
-                    'y toca una entidad para entrar a su portal, con el mapa de sus municipios y cada uno con sus cuentas. Todo sale de la base de la '
-                    'Enciclopedia, con su fuente oficial y su etiqueta; el Planisferio solo lo pone en el territorio.'),
+        'entrada': ('El dinero público tiene domicilio. Elige una dimensión y toca una entidad para entrar a su portal, con sus municipios. '
+                    'Todo sale de la Enciclopedia, con su fuente oficial y su etiqueta.'),
         'estilos': ['numeros.css', 'planisferio.css'],
         'scripts': ['planisferio.js'],
         'secciones': [
-            {'id': 'mapa', 'titulo': 'El mapa: elige una dimensión',
-             'texto': ('Hoy se pintan %s. La financiera son los tres pisos de la hacienda de cada entidad: lo que le baja de la Federación, lo que cobra por su cuenta y lo que ingresan sus municipios. '
-                       'La deuda es lo que debe cada gobierno estatal y cuánto le pesa, con los tres indicadores del Sistema de Alertas de Hacienda. '
-                       'La inversión es la obra que hace cada gobierno estatal, directa o por medio de sus organismos, y lo que la Auditoría Superior dejó por aclarar. '
-                       'La legislativa son los 32 congresos locales: lo que gastó cada uno, cuánto cuesta por curul y cómo se compara con el tope del 0.70 %% de la Constitución. '
-                       'La judicial son los 32 poderes judiciales de los estados: lo que ejerció cada uno junto a lo que concluyó con ese dinero y las causas penales que se le acumulan. '
-                       'La ambiental son los recursos naturales: los acuíferos de cada estado y cuántos ya no tienen agua para concesionar, su superficie forestal y sus incendios forestales, su pesca y su acuacultura, sus concesiones mineras y las siete refinerías de PEMEX, cuánto crudo procesa cada una frente a su capacidad y cuánto valor ganó o perdió en sus libros; en las lentes de refinación, el punto marca la entidad, no el sitio exacto. '
-                       'Elige la dimensión y qué ver; el color compara a las 32 por quintiles (cinco grupos con el mismo número de entidades).') % (
-                           ('%d dimensiones: la %s y la %s' % (len(pintadas), ', la '.join(d[2].lower() for d in pintadas[:-1]), pintadas[-1][2].lower())) if len(pintadas) > 1 else 'una dimensión'),
+            {'id': 'mapa', 'titulo': 'Elige una dimensión',
+             'texto': 'Hoy se pintan %d. Cada una trae su «Cómo leerla» y lo que su mapa no dice.' % len(pintadas),
              'tarjetas': [], 'bloque': bloque_mapa},
-            {'id': 'contadores', 'titulo': 'Los contadores del año',
-             'texto': ('Los tres presupuestos de la Federación en 2026 (del Estado, nacional y social), lo que baja al territorio y lo que ingresan los municipios. '
-                       'El ritmo por segundo es la cifra anual entre los 31,536,000 segundos del año: sirve para dimensionarla, no es dinero que se mueva en tiempo real '
-                       'ni dice cuándo se gasta de verdad cada peso.'),
-             'tarjetas': [], 'bloque': '<div class="pl-conts">%s</div>' % contadores},
+            {'id': 'contadores', 'titulo': 'Los tres presupuestos y lo que baja al territorio',
+             'texto': ('Los tres presupuestos de la Federación en 2026, lo que transfiere a estados y municipios y lo que ingresaron los municipios. '
+                       'El ritmo por segundo es la cifra anual entre 31,536,000 segundos: sirve para dimensionarla, no es dinero que se mueva en tiempo real.'),
+             'tarjetas': [], 'bloque': '<div class="pl-conts">%s</div>%s' % (contadores, cuenta_btn)},
         ] + ([] if not otras else [
             {'id': 'dimensiones', 'titulo': 'Las dimensiones que vienen',
              'texto': ('El Planisferio crece por entregas, una dimensión a la vez y, después, municipio por municipio. Mientras llegan al mapa, cada una ya tiene su lugar en la Enciclopedia:'),
@@ -1389,12 +1473,12 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
     }
 
 
-def paginas(base, ref, tres):
+def paginas(base, ref, tres, cuenta):
     padron = _padron()
     iv = inv_mun(padron)
     dv = deu_mun(padron)
     E = sorted(base['estados'], key=lambda x: clave(x['name']))
-    out = [pagina_mapa(base, ref, tres, padron)]
+    out = [pagina_mapa(base, ref, tres, padron, cuenta)]
     for k, e in enumerate(E):
         out.append(pagina_portal(base, ref, e, padron, E[k - 1], E[(k + 1) % len(E)], iv, dv))
     return out
