@@ -621,6 +621,14 @@ APARTADOS = [
                 'pagina': 'datos-justicia-ambiental.html',
                 'pestana': ('🌳', 'Justicia ambiental', 'Lo que cuesta y lo que resuelve la PROFEPA: denuncias, rezago y multas: abre su página'),
             },
+            {
+                # Administración pública (03-11-2026, pedido del autor): los
+                # tres niveles, sus funciones y sus auditorías
+                # (administracion_publica.py).
+                'id': 'administracion-publica',
+                'pagina': 'datos-administracion-publica.html',
+                'pestana': ('🏢', 'Administración pública', 'Federal, estatal y municipal: lo que hace, lo que cuesta y quién la audita: abre su página'),
+            },
             # El Estado de cuenta administrativo fue la cuarta tarjeta de Datos
             # del 12-10-2026 al 22-10-2026; desde entonces (pedido del autor)
             # es la quinta aplicacion de la Calculadora Civica. Su ancla vieja
@@ -1323,6 +1331,7 @@ def poderes_paginas(base):
     import asistente_judicial as aj
     import gestion_salud as gs
     import gestion_ambiental as ga
+    import administracion_publica as adm
     paginas = []
     poderes = [
         (al, '🏛️', 'Curules, escaños, sesiones, el calendario del presupuesto y las elecciones de 2027',
@@ -1347,6 +1356,13 @@ def poderes_paginas(base):
          'Lo que dice su informe se coteja contra sus propias tablas, y lo que no publica va con su ficha en el Registro de pendientes. '
          'Cada tarjeta abre su propia página.',
          lambda temas: ga.secciones(base, temas), ga.PRE),
+        # Administración pública (03-11-2026): el Poder Ejecutivo de los tres
+        # niveles, con los censos de gobierno del INEGI y la Matriz de la ASF.
+        (adm, '🏢', 'Federal, estatal y municipal: lo que hace, cuánta gente, cuánto dinero, cómo contrata y quién la audita',
+         'La parte del gobierno que ejecuta, en los tres niveles: cuántas instituciones y personas tiene, cuánto ejerció en 2024, qué funciones le da la ley, '
+         'cuántos contratos dio sin concurso y qué le dejó por aclarar la Auditoría Superior de la Federación. Con los censos de gobierno del INEGI, la Constitución '
+         'y la Matriz de Datos Básicos de la ASF. Cada tarjeta abre su propia página.',
+         lambda temas: adm.secciones(base, temas), adm.PRE),
     ]
     for mod, ico, lema, entrada, secc, pre in poderes:
         partes = [(x[0], x[0], x[1], x[2]) for x in mod.PAGINAS]
@@ -5615,6 +5631,7 @@ def _hijas(base, ref):
     mismas listas que arman cada pagina, asi que una nueva aparece sola."""
     import estado_cuenta, presupuesto_modulos, cc_ticket, insp_asf, datos_ambiente, asistente
     import asistente_legislativo as al, asistente_judicial as aj, gestion_salud as gs, gestion_ambiental as ga
+    import administracion_publica as adm
     limpio = lambda t: re.sub('<[^>]+>', '', t)
     return {
         estado_cuenta.ARCHIVO: [(p['archivo'], limpio(p.get('menu') or p['titulo'])) for p in estado_cuenta.construir()[0]
@@ -5629,6 +5646,7 @@ def _hijas(base, ref):
         aj.PORTADA: [(x[0], x[2]) for x in aj.PAGINAS],
         gs.PORTADA: [(x[0], x[2]) for x in gs.PAGINAS],
         ga.PORTADA: [(x[0], x[2]) for x in ga.PAGINAS],
+        adm.PORTADA: [(x[0], x[2]) for x in adm.PAGINAS],
     }
 
 

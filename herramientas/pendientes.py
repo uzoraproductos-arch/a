@@ -208,11 +208,13 @@ PROPIOS = [
      'Instituto Mexicano del Seguro Social (IMSS): tiene el registro y no lo encontramos publicado', 'https://www.imss.gob.mx/conoce-al-imss/memoria-estadistica-2025',
      'Memoria Estadística 2025 (IMSS)',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-imss.html', 'Datos · Salud pública · El IMSS')]),
-    ('salud-issste-servicios', 'Salud', 'Consultas, egresos hospitalarios y cirugías del ISSSTE en 2025',
-     'El ISSSTE publica un anuario estadístico cada año (su página de anuarios lista el de 2025), pero el 27-10-2026 su servidor no respondió, ni directo ni a través de otra conexión, '
-     'y no se pudo cotejar. El gasto del ISSSTE sí está en la plataforma, con la Cuenta Pública 2025.',
+    ('salud-issste-servicios', 'Salud', 'Derechohabientes, consultas, egresos hospitalarios y cirugías del ISSSTE en 2025, en el país y en cada estado',
+     'El ISSSTE publica un anuario estadístico cada año (su página de anuarios lista el de 2025), pero el 27-10-2026 y otra vez el 03-11-2026 su servidor '
+     '(issste.gob.mx/datosabiertos) no respondió, y no se pudo cotejar. Sin él no se sabe cuántas personas atiende el ISSSTE en cada estado ni cuánto les resolvió. '
+     'El gasto del ISSSTE sí está en la plataforma, con la Cuenta Pública 2025, y sus unidades, camas, médicos y enfermería por estado, con el registro sectorial de la Secretaría de Salud (DGIS).',
      PLATAFORMA, 'https://www.gob.mx/issste/documentos/anuarios-estadisticos', 'Anuarios estadísticos (ISSSTE)',
-     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-sistema.html', 'Datos · Salud pública · Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE')]),
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-sistema.html', 'Datos · Salud pública · Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE'),
+      ('planisferio.html', 'Planisferio · Salud pública')]),
     ('salud-imss-bienestar', 'Salud', 'Consultas, egresos, cirugías y gasto del IMSS-Bienestar en 2025',
      'En conferencias se han dado cifras de las consultas de 2025 del IMSS-Bienestar, pero la plataforma no encontró un informe oficial con sus servicios y su gasto completo. '
      'El capítulo del IMSS-Bienestar de la Memoria Estadística 2025 del IMSS no se pudo descargar: su enlace devuelve una página web en lugar del archivo. '

@@ -1480,11 +1480,44 @@
     /* ---------- Salud pública: lo que cuesta y lo que resuelve (27-10-2026) ---------- */
     var SAL = D.sal || null;
     function salTema(k) { var x = SAL.t[k]; return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug }; }
+    function salEstado(e, primero) {
+      var r = SAL.est.filter(function (x) { return x[0] === e.a; })[0];
+      if (!r) return null;
+      var x = SAL.t.estados, im = r[10], is = r[11];
+      var tot = SAL.est.reduce(function (s, y) { return [s[0] + y[1], s[1] + y[2], s[2] + y[7], s[3] + y[11][2]]; }, [0, 0, 0, 0]);
+      var hI = '<p><b>El IMSS en ' + esc(e.n) + '</b> tenía <b>' + n(r[1]) + ' personas adscritas</b> a una clínica familiar al cierre de 2025' + (r[12].length ? ' (suma de sus dos OOAD: ' + esc(r[12].join(' y ')) + ')' : '') + '. ' +
+        'Les dio <b>' + n(r[2]) + ' consultas</b>, ' + n(r[8], 2) + ' por persona (en el país, ' + n(tot[1] / tot[0], 2) + '), e hizo <b>' + n(r[6]) + ' intervenciones quirúrgicas</b>. ' +
+        'Tiene ' + n(r[7]) + ' camas de hospitalización: <b>' + n(r[9], 2) + ' por cada mil personas adscritas</b> (en el país, ' + n(1000 * tot[2] / tot[0], 2) + ').</p>';
+      var hS = '<p><b>El ISSSTE en ' + esc(e.n) + '</b> reporta <b>' + n(is[2]) + ' médicas y médicos</b> (' + n(100 * is[2] / tot[3], 1) + ' % de los del ISSSTE en el país), ' +
+        n(is[1]) + ' camas de hospitalización, ' + n(is[3]) + ' personas de enfermería en contacto con el paciente y ' + n(is[0]) + ' unidades. En el mismo registro, el IMSS reporta ' + n(im[2]) + ' médicos en el estado. ' +
+        'Cuántas personas atiende el ISSSTE ahí y qué les resolvió sigue ' + chip('pendiente', 'salud-issste-servicios') + ': su anuario estadístico no responde.</p>';
+      var h = (primero === 'is' ? hS + hI : hI + hS) + '<p class="pa-chico">Del IMSS, su Memoria Estadística 2025; del ISSSTE, el registro de recursos de la Secretaría de Salud (DGIS). No se mezclan: desde 2025 el IMSS de la DGIS incluye las unidades rurales del antiguo IMSS-Bienestar. ' +
+        'Y cuentan cuánto se hizo y con qué, no cuánto se esperó.</p>';
+      var fu = [x.fu[0], x.fu[1], { que: 'Consultas por persona adscrita y camas por cada mil', e: 'derivado', op: n(r[2]) + ' ÷ ' + n(r[1]) + '; ' + n(r[7]) + ' ÷ ' + n(r[1]) + ' × 1,000', fu: x.fu[0].fu }, x.fu[x.fu.length - 1]];
+      var ci = [{ v: n(r[1]), etq: 'personas adscritas al IMSS', e: 'oficial' }, { v: n(r[9], 2), etq: 'camas del IMSS por cada mil adscritos', e: 'derivado' }, { v: n(is[2]), etq: 'médicos del ISSSTE', e: 'oficial' }];
+      if (primero === 'is') ci.reverse();
+      return { html: h, fu: fu, ci: ci, tit: 'El IMSS y el ISSSTE en ' + e.n,
+        ir: ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html#salud', 'su salud pública en el Planisferio'],
+        sug: ['¿Qué estado tiene menos camas del IMSS?', '¿Cuántas consultas dio el IMSS en 2025?', '¿Qué sabemos del IMSS-Bienestar?'] };
+    }
+    /* El IMSS y el ISSSTE de un estado (03-11-2026, dimensión de salud del Planisferio): «¿cuántos médicos tiene el ISSSTE en Jalisco?».
+       asistente.js la pide antes que las columnas, que también hablan del IMSS. */
+    function salEdo(t) {
+      if (!SAL || !SAL.est || /imss ?bienestar/.test(t)) return null;
+      var imss = /\bimss\b|seguro social/.test(t), iss = /issste/.test(t);
+      if (!imss && !iss) return null;
+      var sEs = estados(t).e;
+      if (sEs.length === 1 && /consulta|cirug|operacion|egreso|hospital|camas?\b|medicos?\b|doctor|enfermer|unidades|clinicas?\b|adscrit|derechohabientes?|afiliad|cuant|tiene|hay\b/.test(t)) return salEstado(sEs[0], iss && !imss ? 'is' : 'im');
+      if (!sEs.length && /consulta|cirug|camas?\b|medicos?\b|hospital|adscrit|enfermer|unidades/.test(t) && /(que|cual|en que) estados?|cada estado|por estado|los estados|de los 32|entidad/.test(t)) return salTema('estados');
+      return null;
+    }
     function salResp(t) {
       if (!SAL) return null;
       if (/seguro popular|insabi|instituto de salud para el bienestar/.test(t)) return salTema('transicion');
       if (/imss ?bienestar/.test(t)) return salTema('imss_bienestar');
       var imss = /\bimss\b|seguro social/.test(t), iss = /issste/.test(t);
+      var rse = salEdo(t);
+      if (rse) return rse;
       var gestion = /consulta|cirug|operacion|egreso|hospitaliz|urgencia|atendi|atiende|atienden|resuelve|resolvio|espera|tarda|medicos?\b|doctor|especialista|camas?\b|quirofano|ocupacion|metas?\b|anunci|en salud|atencion medica|enfermedad y maternidad/;
       if (iss && gestion.test(t)) return salTema('issste');
       if (!imss || !gestion.test(t)) return null;
@@ -1493,6 +1526,52 @@
       if (/medicos?\b|doctor|especialistas|camas?\b|quirofano|ocupacion|consultorios/.test(t)) return salTema('imss_recursos');
       if (/gasta|gasto|cuesta|dinero|presupuesto|enfermedad y maternidad|en salud/.test(t) && !/consulta|cirug|egreso|urgencia/.test(t)) return salTema('imss_dinero');
       return salTema('imss_servicios');
+    }
+
+    /* La administración pública en los tres niveles (administracion_publica.py, 03-11-2026): quién la forma, qué hace, cuánto cuesta, cómo contrata y quién la audita.
+       asistente.js pide apuEdo() antes que las columnas, que también hablan de gobiernos y contratos. */
+    var APU = D.apu || null;
+    function apuTema(k) { var x = APU.t[k]; return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug }; }
+    function apuEstado(e) {
+      var r = APU.est.filter(function (x) { return x[0] === e.a; })[0];
+      if (!r) return null;
+      var x = APU.t.estados, y = APU.t.auditorias, c = APU.t.contratos;
+      var tot = APU.est.reduce(function (s, z) { return [s[0] + z[2], s[1] + z[3]]; }, [0, 0]);
+      var h = '<p><b>El gobierno de ' + esc(e.n) + '</b> le reportó al INEGI <b>' + n(r[2]) + ' personas</b> en su administración al cierre de 2024 (' + n(r[6], 1) +
+        ' por cada mil habitantes) y <b>' + n(r[1]) + ' personas titulares</b> al frente de sus instituciones. Ejerció <b>$' + n(r[3], 1) + ' millones</b> en 2024 (' +
+        n(100 * r[3] / tot[1], 1) + ' % de lo que ejercieron los 32), y sus municipios, <b>$' + n(r[7], 1) + ' millones</b>.</p>' +
+        '<p>Hizo <b>' + n(r[4]) + ' contratos</b>, y <b>' + n(r[5], 1) + ' de cada 100 fueron por adjudicación directa</b>, sin concurso.</p>' +
+        '<p>La Auditoría Superior de la Federación, al revisar el dinero federal de la Cuenta Pública 2024, le hizo <b>' + n(r[8]) + ' auditorías al gobierno del estado</b>, ' +
+        'que dejaron <b>$' + n(r[9], 1) + ' millones por aclarar</b>, y <b>' + n(r[10]) + ' a sus municipios</b>, con <b>$' + n(r[11], 1) + ' millones por aclarar</b>.</p>' +
+        '<p class="pa-chico">Lo del INEGI es lo que cada gobierno reportó a su censo, no una auditoría, y el censo no dice qué organismos incluyó cada estado. ' +
+        'Un monto por aclarar no es un desfalco comprobado. El dinero propio del estado lo revisa su entidad de fiscalización local, que la plataforma aún no integra.</p>';
+      var fu = [x.fu[1], x.fu[2], x.fu[3], c.fu[0], x.fu[5], { que: 'Personal por cada mil habitantes', e: 'derivado', op: n(r[2]) + ' ÷ población × 1,000', fu: x.fu[1].fu }];
+      return { html: h, fu: fu, tit: 'La administración pública de ' + e.n,
+        ci: [{ v: n(r[2]), etq: 'personas en su administración', e: 'oficial' }, { v: n(r[5], 1) + ' %', etq: 'de sus contratos, por adjudicación directa', e: 'oficial' },
+             { v: '$' + n(r[9], 1) + ' millones', etq: 'por aclarar del gobierno ante la ASF', e: 'oficial' }],
+        ir: ['planisferio-' + e.a.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase() + '.html#administracion', 'su administración pública en el Planisferio'],
+        sug: ['¿Qué estado tiene más burócratas por habitante?', '¿Quién audita a la administración pública?', '¿Qué funciones tiene un municipio?'] };
+    }
+    var APU_RX = /administracion(es)? publicas?|burocrat|servidores? public|servidoras? public|trabaja(n|dores)? (en|para|del?) (el |los )?gobiernos?|empleados? (del?|de los) gobiernos?|personal del gobierno|poder ejecutivo (estatal|local|del estado)/;
+    function apuEdo(t) {
+      if (!APU || !APU.est) return null;
+      var sEs = estados(t).e, adj = /adjudicacion directa|sin licitar|sin licitacion|sin concurso/.test(t);
+      if (sEs.length === 1 && (APU_RX.test(t) || (adj && /gobierno|estado|contrat/.test(t)))) return apuEstado(sEs[0]);
+      if (!sEs.length && adj && /(que|cual) estados?|cada estado|por estado|los estados|de los 32|entidad|gobierno federal|federaci|\bapf\b/.test(t)) return apuTema('contratos');
+      if (!sEs.length && APU_RX.test(t) && /(que|cual) estados?|cada estado|por estado|los estados|de los 32|por habitante/.test(t)) return apuTema('estados');
+      return null;
+    }
+    function apuResp(t) {
+      if (!APU) return null;
+      var r = apuEdo(t);
+      if (r) return r;
+      var ap = APU_RX.test(t) || /\bapf\b|\bape\b/.test(t);
+      if (/funcion(es)?|que hace|servicios publicos|para que sirve|atribucion/.test(t) && (ap || /(un|el|los|del?) municipios?\b|ayuntamiento/.test(t)) && !/funcion publica/.test(t)) return apuTema('funciones');
+      if (/quien(es)? (audita|revisa|fiscaliza)|contralori|organos? internos? de control|auditorias? (internas?|a la administracion|a los municipios|a los gobiernos)/.test(t)) return apuTema('auditorias');
+      if (ap && /audit|fiscaliz|por aclarar|asf/.test(t)) return apuTema('auditorias');
+      if (ap && /contrat|adjudic|licita/.test(t)) return apuTema('contratos');
+      if (ap) return apuTema('niveles');
+      return null;
     }
 
     /* La PROFEPA: lo que cuesta y lo que resuelve (gestion_ambiental.py). Su presupuesto 2026 lo sigue contestando el bloque ambiental. */
@@ -1712,6 +1791,8 @@
       if (rsal) return fin(rsal, { tipo: 'sal' });
       var ramg = amgResp(t);
       if (ramg) return fin(ramg, { tipo: 'amg' });
+      var rapu = apuResp(t);
+      if (rapu) return fin(rapu, { tipo: 'apu' });
       var rprom = promResp(t);
       if (rprom) return fin(rprom, { tipo: 'prom' });
       if (!crudo && (PIDE_VER.test(t) || LIGA.test(q) || (q.length > 160 && /\d/.test(q) && /peso|millon|billon|mdp/.test(t)))) {
@@ -2016,6 +2097,8 @@
       juzga: function (claim, val) { var d = cifraDicha(norm(claim).replace(/[¿?¡!]/g, ' ')), j = d && juzgaDicho(d, val); return j ? { dicho: d, v: j } : null; },
       /* Salud pública antes que Verificamos: «¿es cierto que el IMSS hizo 1.78 millones de cirugías?» es un cotejo de salud (27-10-2026). */
       salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
+      administracion: function (q) { var r = apuEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'apu' }); },
+      saludEstado: function (q) { var r = salEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       nepotismo: function (q) { var r = nepResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'nep' }); },
       mapa: function (q) { var r = mapaResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'san' }); },
       promesa: function (q) { var r = promResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'prom' }); },

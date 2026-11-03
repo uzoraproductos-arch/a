@@ -2030,6 +2030,55 @@
   {
    "q": "¿Qué municipios de Nuevo León pagan más deuda?",
    "ir": "numeros-baja-al-territorio.html"
+  },
+  {
+   "q": "¿Cuántos médicos tiene el ISSSTE en Jalisco?",
+   "ir": "planisferio-jal.html#salud",
+   "dice": [
+    "1,044"
+   ]
+  },
+  {
+   "q": "¿Cuántas personas tiene adscritas el IMSS en la Ciudad de México?",
+   "ir": "planisferio-cdmx.html#salud",
+   "dice": [
+    "6,519,887"
+   ]
+  },
+  {
+   "q": "¿Qué estado tiene menos camas del IMSS?",
+   "ir": "datos-salud-sistema.html#sal-estados",
+   "dice": [
+    "Tlaxcala"
+   ]
+  },
+  {
+   "q": "¿Cuánta gente trabaja en el gobierno de Jalisco?",
+   "ir": "planisferio-jal.html#administracion",
+   "dice": [
+    "149,888"
+   ]
+  },
+  {
+   "q": "¿Qué estado da más contratos por adjudicación directa?",
+   "ir": "datos-administracion-publica-auditorias.html#adm-contratos",
+   "dice": [
+    "Sonora"
+   ]
+  },
+  {
+   "q": "¿Quién audita a los municipios?",
+   "ir": "datos-administracion-publica-auditorias.html#adm-auditorias",
+   "dice": [
+    "9,487"
+   ]
+  },
+  {
+   "q": "¿Qué funciones tiene un municipio?",
+   "ir": "datos-administracion-publica-niveles.html#adm-funciones",
+   "dice": [
+    "art. 115"
+   ]
   }
  ]
 }

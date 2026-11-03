@@ -84,7 +84,13 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   `numeros_tres()` de la Enciclopedia (la misma función, nunca una copia). Junto a
   ella van «💰 Cuánto dinero es» (`presupuesto_modulos.cuanto()`) y «🧾 Los 16
   orígenes del ingreso» (`numeros_renglones(..., lleno=True)`: ya contabilizados,
-  porque en la ventana no corre `numeros.js`).
+  porque en el Planisferio no corre `numeros.js`).
+  **El mapa es lo principal** (rediseño del autor, 03-11-2026): la página es una sola
+  sección, sin «En esta página»; tras la entrada vienen las dimensiones y su mapa.
+  Los contadores, «Cuánto dinero es» y «Los 16 orígenes» van integrados debajo del
+  mapa **solo en la dimensión financiera** (`.pl-solo-dim[data-dim]`, que
+  `planisferio.js` esconde en las demás), y las 32 entidades abren en la ventana
+  lateral con el botón «📍 Las 32 entidades».
 - **No trae datos propios:** ordena en el territorio lo que la Enciclopedia
   ya cotejó (`AUDIT_DB`, `municipios-efipem.js`). Una cifra nueva entra
   primero a su módulo de la Enciclopedia y de ahí la lee el Planisferio.
@@ -185,6 +191,19 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   CONAPESCA (`PESCA`, con huella; si una fila o una columna no cuadran, se detiene): **lo registrado se dice como lo declarado
   en los avisos de arribo y de cosecha, nunca como todo lo pescado ni como salud de la especie**, y una entidad sin registro va
   en gris como «no registró», no como «sin pesca». Si el Anuario se contradice entre cuadros, se dice y se toman sus series.
+- **La salud pública, séptima dimensión pintada** (03-11-2026, pedido del autor: «sería
+  IMSS e ISSSTE»). Del **IMSS**, su Memoria Estadística 2025 por OOAD; del **ISSSTE**, el
+  registro «Recursos en Salud Sectorial» de la DGIS (Secretaría de Salud), porque su anuario
+  no responde. `herramientas/anclar_salud_estados.py <Excel de la Memoria> <ZIP de la DGIS>`
+  escribe `docs/salud/imss-issste-estados-2025.json` con las huellas; si las OOAD no suman el
+  total de su cuadro o la DGIS no trae los establecimientos de su nota de cierre, se detiene.
+  `salud_estados()` de `gestion_salud.py` lo leen el Planisferio, la Enciclopedia (tema
+  `estados`) y el chat (`salEdo()`, antes que las columnas). **Las dos fuentes no se mezclan**
+  (desde 2025 el IMSS de la DGIS incluye el antiguo IMSS-Bienestar programa), **los hospitales
+  de alta especialidad se cuentan donde están** y lo que el ISSSTE no publica por estado
+  (derechohabientes, consultas, cirugías) sigue con su ficha. Se abre con
+  `planisferio.html?d=salud` y cada portal la trae en `#salud`.
+- **La administración pública, octava dimensión pintada** (03-11-2026, pedido del autor: «qué funciones tiene… sus auditorías… en los tres niveles»). El gobierno que ejecuta: la federal, las 32 estatales y las municipales. Todo sale de `herramientas/administracion_publica.py`, con los censos de gobierno del INEGI (CNGF-E 2025 y CNGMD 2025, con huella; si una tabla no suma el total que el reporte dice en su texto, se detiene) y la Matriz de la ASF que ya está en la base. Lo leen la Enciclopedia (Datos › Administración pública), el Planisferio (`?d=administracion`, `#administracion` en cada portal) y el chat (`D.apu`, `apuEdo()` antes que las columnas). **Lo del censo se dice como lo que cada gobierno reportó, nunca como auditoría**, y el personal de dos estados no se compara sin decir que el censo no dice qué organismos incluyó cada uno; **la adjudicación directa cuenta contratos, no pesos, y no se dice como irregularidad**; y lo que dejó la ASF es solo del dinero federal.
 - **Las leyes del dinero en los tres niveles** (03-11-2026,
   `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
   cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y
