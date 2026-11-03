@@ -540,7 +540,7 @@ def _fuentes(ref, base=None):
     })
 
 
-def pagina_mapa(base, ref, tres, padron, cuenta):
+def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
     filas = _datos(base, padron)
     F = base['panoramaErario']['federalizado']
     s = {x['id']: x for x in tres['sale']}
@@ -599,6 +599,21 @@ def pagina_mapa(base, ref, tres, padron, cuenta):
         '🧮', 'La cuenta completa', 'Los tres presupuestos de 2026', 'plTplCuentaTit', cuenta,
         '<a class="glos-drawer-todo" href="numeros-gasto-tres-presupuestos.html" style="text-align:center; text-decoration:none;">📚 Verlo en la Enciclopedia ➔</a>',
         'Enciclopedia · Números · Gasto público')
+    # «Cuánto dinero es» y «Los 16 orígenes del ingreso» (pedido del autor,
+    # 03-11-2026): las mismas funciones de la Enciclopedia, en su ventana.
+    # Cada una se antepone, asi que van al reves: quedan Cuánto, Orígenes y la cuenta.
+    for tid, ico, marca, tit, cuerpo, href, hsh in (
+            ('plTplOrigenes', '🧾', 'Los 16 orígenes del ingreso', 'De dónde sale cada peso de 2026', origenes, 'numeros-los-16-origenes.html', 'origenes'),
+            ('plTplCuanto', '💰', 'Cuánto dinero es', 'El total de 2026 y lo que baja al territorio', cuanto, 'numeros-cuanto-dinero-es.html', 'cuanto')):
+        if not cuerpo:
+            continue
+        if not _existe(href):
+            raise SystemExit('planisferio: «%s» apunta a %s, que no existe' % (marca, href))
+        cuenta_btn = ('<button type="button" class="pl-caj-b pl-cuenta-otra" data-cajon="%s" data-cajon-tit="%sTit" data-cajon-hash="%s" aria-haspopup="dialog">%s %s</button>'
+                      '<template id="%s">%s</template>') % (tid, tid, hsh, ico, marca, tid, _cajon(
+            ico, marca, tit, tid + 'Tit', cuerpo,
+            '<a class="glos-drawer-todo" href="%s" style="text-align:center; text-decoration:none;">📚 Verlo en la Enciclopedia ➔</a>' % href,
+            'Enciclopedia · Números · Presupuesto')) + cuenta_btn
     dims = []
     for k, (i, ico, nom, que, ir, _ire, pinta) in enumerate(DIMENSIONES):
         if ir and not _existe(ir):
@@ -746,16 +761,16 @@ def pagina_mapa(base, ref, tres, padron, cuenta):
         'icono': '🗺️', 'titulo': 'Planisferio', 'lema': 'México en un mapa: cada entidad, cada municipio, cada peso',
         'entrada': ('El dinero público tiene domicilio. Elige una dimensión y toca una entidad para entrar a su portal, con sus municipios. '
                     'Todo sale de la Enciclopedia, con su fuente oficial y su etiqueta.'),
-        'estilos': ['numeros.css', 'planisferio.css'],
+        'estilos': ['numeros.css', 'radar.css', 'planisferio.css'],
         'scripts': ['planisferio.js'],
         'secciones': [
             {'id': 'mapa', 'titulo': 'Elige una dimensión',
              'texto': 'Hoy se pintan %d. Cada una trae su «Cómo leerla» y lo que su mapa no dice.' % len(pintadas),
              'tarjetas': [], 'bloque': bloque_mapa},
-            {'id': 'contadores', 'titulo': 'Los tres presupuestos y lo que baja al territorio',
+            {'id': 'contadores', 'titulo': 'Cuánto dinero es, de dónde sale y lo que baja al territorio',
              'texto': ('Los tres presupuestos de la Federación en 2026, lo que transfiere a estados y municipios y lo que ingresaron los municipios. '
                        'El ritmo por segundo es la cifra anual entre 31,536,000 segundos: sirve para dimensionarla, no es dinero que se mueva en tiempo real.'),
-             'tarjetas': [], 'bloque': '<div class="pl-conts">%s</div>%s' % (contadores, cuenta_btn)},
+             'tarjetas': [], 'bloque': '<div class="pl-conts">%s</div><div class="pl-cuentas">%s</div>' % (contadores, cuenta_btn)},
         ] + ([] if not otras else [
             {'id': 'dimensiones', 'titulo': 'Las dimensiones que vienen',
              'texto': ('El Planisferio crece por entregas, una dimensión a la vez y, después, municipio por municipio. Mientras llegan al mapa, cada una ya tiene su lugar en la Enciclopedia:'),
@@ -1473,12 +1488,12 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
     }
 
 
-def paginas(base, ref, tres, cuenta):
+def paginas(base, ref, tres, cuenta, cuanto='', origenes=''):
     padron = _padron()
     iv = inv_mun(padron)
     dv = deu_mun(padron)
     E = sorted(base['estados'], key=lambda x: clave(x['name']))
-    out = [pagina_mapa(base, ref, tres, padron, cuenta)]
+    out = [pagina_mapa(base, ref, tres, padron, cuenta, cuanto, origenes)]
     for k, e in enumerate(E):
         out.append(pagina_portal(base, ref, e, padron, E[k - 1], E[(k + 1) % len(E)], iv, dv))
     return out
