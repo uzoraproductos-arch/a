@@ -4506,9 +4506,11 @@ def _mdp0(v):
     return ('-' if v < 0 else '') + '$' + format(abs(v), ',.1f') + ' mdp'
 
 
-def numeros_renglones(base, d):
+def numeros_renglones(base, d, lleno=False):
     """Los 16 origenes del ingreso, con contador (numeros.js): arrancan en
-    cero y cada renglon lleva a su pagina."""
+    cero y cada renglon lleva a su pagina. Con `lleno`, ya contabilizados y
+    sin el boton (la ventana lateral del Planisferio, donde numeros.js no
+    corre: 03-11-2026)."""
     p = base['panoramaErario']
     total = p['totalLIF']
     mayor = max(x['montoMdp'] for x in p['ingresos'])
@@ -4526,13 +4528,25 @@ def numeros_renglones(base, d):
                 '<span class="est-chip est-derivado" title="Suma de sus renglones">derivado</span>' if len(filas) > 1 else '<span class="est-chip est-oficial">oficial</span>',
                 ''.join('<li><a class="nr-fila" href="%s" data-v="%.1f" data-w="%.2f" data-pct="%.1f">'
                         '<span class="nr-ico" aria-hidden="true">%s</span><span class="nr-nom">%s</span>'
-                        '<span class="nr-barra" aria-hidden="true"><span class="nr-relleno"></span></span>'
+                        '<span class="nr-barra" aria-hidden="true"><span class="nr-relleno"%s></span></span>'
                         '<span class="nr-v">%s</span><span class="nr-pct">%s%%</span><span class="nr-ir" aria-hidden="true">➔</span></a></li>' % (
                             ingreso_archivo(x), x['montoMdp'], x['montoMdp'] / mayor * 100, x['montoMdp'] / total * 100,
-                            x['icono'], x['nombre'], _mdp0(x['montoMdp']), format(x['montoMdp'] / total * 100, '.1f'))
+                            x['icono'], x['nombre'], (' style="width:%.2f%%"' % (x['montoMdp'] / mayor * 100)) if lleno else '',
+                            _mdp0(x['montoMdp']), format(x['montoMdp'] / total * 100, '.1f'))
                         for x in filas)))
     ceros = ''.join('<li><span class="nr-cero-clave">LIF %s</span><b>%s</b><span class="nr-cero-v">$0.0 mdp</span><p>%s</p></li>' % c
                     for c in NUM_INGRESO_CERO)
+    if lleno:
+        return '''<section class="nr" aria-labelledby="nrTitL">
+          <p class="np-txt" id="nrTitL">Tal como los enumera el artículo 1o. de la Ley de Ingresos de la Federación 2026 %s, en cuatro familias. Toca un renglón para abrir su página en la Enciclopedia.</p>
+          <div class="nr-lista">%s</div>
+          <p class="np-pie">Cifras en millones de pesos (mdp), tal como las publica la ley. Cada barra se mide contra el renglón mayor (el ISR); el porcentaje es su parte del ingreso total, %s.</p>
+          <details class="nr-cero">
+            <summary>Y los que la ley enumera, pero deja en cero</summary>
+            <p>El artículo 1o. lista tres categorías más de impuesto, presupuestadas en <b>$0.0 mdp</b> para 2026 <span class="est-chip est-oficial">oficial</span>.</p>
+            <ul>%s</ul>
+          </details>
+        </section>''' % (nota_ref('ref-lif2026', 10, 'Ley de Ingresos de la Federación 2026'), ''.join(bloques), _mdp0(total), ceros)
     return '''<section class="nr" id="nrRenglones" aria-labelledby="nrTit">
           <div class="nr-cab">
             <h2 class="np-tit" id="nrTit">Los 16 orígenes del ingreso, renglón por renglón</h2>
@@ -5897,7 +5911,8 @@ def generar(sello=None):
     import recursos_naturales
     import planisferio
     import leyes_niveles
-    for extra in planisferio.paginas(base, ref, numeros_datos(base)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    import presupuesto_modulos
+    for extra in planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
