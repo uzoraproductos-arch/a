@@ -2097,6 +2097,21 @@
     return f && charla ? charla.deFicha(f) : null;
   }
 
+  var LEY_NIVEL = /\bley(es)? (de|del|federal|general)\b|\bperiodico oficial\b|\bgaceta oficial\b|\bboletin oficial\b/;
+  function leyNivel(q) {
+    var p = plano(q);
+    if (!charla || !LEY_NIVEL.test(p)) return null;
+    var Ls = B.fichas.filter(function (f) { return f.ir && /^marco-legal-tres-niveles\.html/.test(f.ir[0]); });
+    var pre = 'Las leyes del dinero de ';
+    var st = Ls.filter(function (f) { return f.tit.indexOf(pre) === 0 && p.indexOf(plano(f.tit.slice(pre.length))) >= 0; })
+      .sort(function (a, b) { return b.tit.length - a.tit.length; })[0];
+    if (st) return charla.deFicha(st);
+    var fed = Ls.filter(function (f) {
+      var m = /\(([^)]+)\)$/.exec(f.tit);
+      return m && (p.indexOf(plano(f.tit.slice(0, m.index))) >= 0 || p.indexOf(plano(m[1])) >= 0);
+    })[0];
+    return fed ? charla.deFicha(fed) : null;
+  }
   function respuesta(q, previas) {
     /* Una liga que ya está en la hemeroteca abre su cotejo antes que cualquier palabra de su dirección
        («pemex-perdidas-…-deuda» se iba al pendiente de la deuda de Pemex, 01-11-2026). */
@@ -2105,6 +2120,9 @@
     /* La memoria de promesas (01-11-2026): «¿qué pasó con lo que prometieron…?» antes que la nota o la obra del mismo tema. */
     var pm = charla && charla.promesa && charla.promesa(q);
     if (pm) return pm;
+    /* Las leyes del dinero en los tres niveles (03-11-2026): «ley de ingresos de Jalisco» pide sus leyes, no su estado de cuenta. */
+    var ln = leyNivel(q);
+    if (ln) return ln;
     var mp = charla && charla.mapa && charla.mapa(q);
     if (mp) return mp;
     var tc = tituloColumna(q);

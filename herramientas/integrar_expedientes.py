@@ -202,7 +202,7 @@ def estados(b, sda):
                       'deudaFuente': SDA_FUENTE}
         elif norm(st['name']) == 'tlaxcala':
             nuevos = {'deuda': 0, 'semaforoDeuda': 'Verde', 'deudaIld': 0, 'deudaSd': None, 'deudaOcp': None, 'ildMdp': None,
-                      'deudaFuente': SDA_FUENTE + '. Tlaxcala no es objeto de medición: no tiene financiamientos inscritos en el Registro Público Único; la Ley de Disciplina Financiera (art. 14) lo clasifica como sostenible.'}
+                      'deudaFuente': SDA_FUENTE + '. Tlaxcala no es objeto de medición: no tiene financiamientos inscritos en el Registro Público Único: el Sistema de Alertas solo evalúa a quien la tiene (Ley de Disciplina Financiera, art. 43), y Hacienda no le publica semáforo.'}
         else:
             sys.exit('Sin dato del Sistema de Alertas para %s' % st['name'])
         ini = b.index('"abbr": %s' % json.dumps(st['abbr'], ensure_ascii=False))

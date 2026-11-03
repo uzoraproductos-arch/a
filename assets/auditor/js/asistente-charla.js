@@ -212,7 +212,7 @@
     function edoMet(e, k, porHab) {
       var m = M[k] || {}, v = e[k], fu = [fuenteDe(k, e)], h = '';
       if (v == null && (k === 'sd' || k === 'ocp')) {
-        return { html: '<p><b>' + esc(e.n) + '</b> no se mide en el Sistema de Alertas: no tiene deuda inscrita en el Registro Público Único, y la Ley de Disciplina Financiera (art. 14) la cuenta como de endeudamiento sostenible. Por eso no tiene ese indicador.</p>',
+        return { html: '<p><b>' + esc(e.n) + '</b> no se mide en el Sistema de Alertas: no tiene deuda inscrita en el Registro Público Único, y el Sistema de Alertas solo evalúa a quien la tiene (Ley de Disciplina Financiera, art. 43). Por eso no tiene ese indicador.</p>',
           fu: [fuenteDe('deuda', e)], ci: [], tit: e.n + ': ' + m.n };
       }
       if (v == null && k !== 'sem') return { html: pendEdo(e, k), fu: [pendFu(e, k)], ci: [], tit: e.n + ': ' + m.n };

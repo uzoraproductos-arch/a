@@ -104,6 +104,15 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   porque el semáforo junta en verde a estados muy distintos, y lo dice. Lo
   que no se mide por ley va en gris como «no se mide», no como pendiente. Se
   abre con `planisferio.html?d=deuda` y cada portal la trae en `#deuda`.
+- **Las leyes del dinero en los tres niveles** (03-11-2026,
+  `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
+  cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y
+  municipal. **No copia leyes ni pone una liga que no respondió al cotejo**:
+  una dirección sin verificar va con su nombre y «liga por cotejar». Las
+  fechas federales salen del índice de la Cámara de Diputados; si una ley se
+  reforma, se cambia su renglón en `FEDERALES`. Cada portal del Planisferio
+  la lee en `#leyes` y en «Las reglas de su deuda». El chat la abre con
+  `leyNivel()` de `asistente.js` antes que la ficha del estado.
 - **Vive en el Auditor:** «Ver en el Planisferio» es un renglón de
   `RECURSOS` (`asistente_recursos.py`, con `?e=` para abrir el mapa con la
   entidad elegida) y «planisferio» cuenta como pedir un mapa (`TIPOS_REC` de

@@ -480,3 +480,11 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .pa-ciegos p { margin: 0 0 6px; }
 .pa-prom { list-style: none; margin: 8px 0; padding: 0; }
 .pa-prom li { margin: 0 0 8px; padding-left: 10px; border-left: 3px solid #1f4f8a; }
+/* Las leyes del dinero en los tres niveles (03-11-2026). */
+.leg-ciegos { padding-left: 22px; }
+.leg-ciegos li { margin: 0 0 14px; line-height: 1.5; }
+.leg-niveles { padding-left: 20px; }
+.leg-niveles li { margin: 0 0 8px; line-height: 1.5; }
+.leg-leyes { list-style: none; padding: 0; margin: 12px 0 0; }
+.leg-leyes li { padding: 12px 0; border-top: 1px solid var(--border, rgba(127,127,127,.25)); line-height: 1.5; }
+.leg-leyes li small { display: block; margin-top: 4px; }

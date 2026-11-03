@@ -6146,7 +6146,7 @@ window.AUDIT_DB = {
       "deudaSd": null,
       "deudaOcp": null,
       "ildMdp": null,
-      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026). Tlaxcala no es objeto de medición: no tiene financiamientos inscritos en el Registro Público Único; la Ley de Disciplina Financiera (art. 14) lo clasifica como sostenible.",
+      "deudaFuente": "SHCP, Sistema de Alertas, evaluación con la Cuenta Pública 2025 (publicada el 29 de junio de 2026). Tlaxcala no es objeto de medición: no tiene financiamientos inscritos en el Registro Público Único: el Sistema de Alertas solo evalúa a quien la tiene (Ley de Disciplina Financiera, art. 43), y Hacienda no le publica semáforo.",
       "asfMontoObservado": 418.3,
       "asfAuditorias": 82,
       "asfTipologia": "La ASF practicó 82 auditorías al dinero federal que recibió el estado y promovió 191 acciones, entre ellas 108 pliegos de observaciones y 68 promociones de responsabilidad administrativa. Quedaron $418.3 mdp por aclarar y se recuperaron $5.9 mdp durante las auditorías.",

@@ -30,6 +30,7 @@ ya las tiene: un enlace roto detiene la generación.
 
 Lo usa apartados.generar(); lo interactivo vive en planisferio.js.
 """
+import html
 import json
 import os
 import subprocess
@@ -217,7 +218,7 @@ def _datos(base, padron):
             # que no se mide (hoy Tlaxcala) no trae indicadores: queda en gris.
             'deuda': e['deuda'], 'dpc': round(e['deuda'] * 1e6 / e['pobPersonas']),
             'ild': e['deudaIld'] if _medida(e) else None, 'sd': e.get('deudaSd'), 'ocp': e.get('deudaOcp'),
-            'ildm': e.get('ildMdp'), 'sem': SEMAFORO[e['semaforoDeuda']],
+            'ildm': e.get('ildMdp'), 'sem': SEMAFORO[e['semaforoDeuda']] if _medida(e) else 'No se mide',
         })
     return filas
 
@@ -339,8 +340,8 @@ def pagina_mapa(base, ref, tres, padron):
     }
     for i in ('ild', 'sd', 'ocp'):
         falta[i] = {'a': no_med, 'gris': 'no se mide', 'pend': None,
-                    'txt': ('%s no se mide: no tiene deuda inscrita en el Registro Público Único, y la Ley de Disciplina Financiera (art. 14) '
-                            'la cuenta como sostenible.') % ' ni '.join(nombre[a] for a in no_med)}
+                    'txt': ('%s no se mide: no tiene deuda inscrita en el Registro Público Único, y el Sistema de Alertas solo evalúa a quien '
+                            'la tiene (Ley de Disciplina Financiera, art. 43). Hacienda no le publica semáforo.') % ' ni '.join(nombre[a] for a in no_med)}
     # El punto ciego del semáforo: si todas comparten color, el color no
     # distingue a la más endeudada de la menos. Se dice con las cifras.
     med = sorted((f for f in filas if f['ild'] is not None), key=lambda f: -f['ild'])
@@ -450,12 +451,31 @@ def _deuda_portal(base, ref, e):
     else:
         p2 = ('<article class="pl-piso pl-piso-deuda"><p class="pl-piso-n">Cuánto le pesa · los tres indicadores</p>'
               '<p class="pl-piso-v"><b>No se mide</b> %s</p><p>%s no tiene deuda inscrita en el Registro Público Único, así que el Sistema de Alertas no le calcula '
-              'indicadores; la Ley de Disciplina Financiera (art. 14) la cuenta como de endeudamiento sostenible. No tener deuda inscrita no quiere decir no deberle '
+              'indicadores: la Ley de Disciplina Financiera (art. 43) solo manda evaluar a quien tiene deuda inscrita, y Hacienda no le publica semáforo. No tener deuda inscrita no quiere decir no deberle '
               'a nadie: los adeudos con proveedores, por ejemplo, no pasan por ese registro.</p><p class="pl-piso-f">%s</p></article>' % (
                   chip('oficial'), e['name'], fu['deuda']))
     ciego = ('<p class="pl-dim-nota">El semáforo verde quiere decir que, con sus tres mediciones, Hacienda considera sostenible su deuda, no que deba poco. El Sistema de Alertas solo mide la deuda inscrita '
              'en el Registro Público Único que se paga con ingresos de libre disposición; lo que se debe por otras vías no entra en estas cifras.</p>')
-    return '<div class="pl-pisos">%s%s</div>%s' % (p1, p2, ciego)
+    # Las reglas de su deuda (03-11-2026), cotejadas con su texto vigente.
+    import leyes_niveles as ln
+    techo = {'Verde': 15, 'Amarillo': 5, 'Rojo': 0}
+    if _medida(e):
+        t = techo[e['semaforoDeuda']]
+        r_techo = ('Con su nivel, la LDF (art. 46) le fija un techo de financiamiento neto de hasta el %d %% de sus ingresos de libre disposición '
+                   '(15 %% si es sostenible, 5 %% en observación, 0 %% si es elevado). Como referencia, el %d %% de los de 2025 es %s %s; '
+                   'el techo de cada año lo calcula Hacienda.') % (t, t, mdp(round(e['ildMdp'] * t / 100, 1)), chip('derivado'))
+    else:
+        r_techo = ('Para fijarle un techo de financiamiento sin deuda inscrita, la LDF (art. 46) le pide entregar a Hacienda la información que marca el Reglamento '
+                   'del Registro Público Único.')
+    reglas = ('<div class="pl-reglas"><p><b>Las reglas de su deuda</b></p><ul>'
+              '<li>Solo puede endeudarse para inversión pública productiva y para refinanciarla, nunca con acreedores extranjeros ni en moneda extranjera (%s, art. 117, fr. VIII).</li>'
+              '<li>%s</li>'
+              '<li>Hacienda la evalúa «única y exclusivamente» con la información que entrega el propio gobierno y la del Registro Público Único (%s, art. 43).</li>'
+              '<li>La deuda de sus municipios también la mide el Sistema de Alertas; aún no la integramos %s.</li>'
+              '<li>Su propia ley de deuda pública se publica en el %s. <a href="%s#fed-deuda">⚖️ Las leyes de la deuda en los tres niveles</a></li></ul></div>') % (
+        ln._a(ln.CPEUM, 'Constitución'), r_techo, ln._a(ln.pdf('LDFEFM.pdf'), 'LDF'),
+        '<span class="est-chip est-pendiente" data-pend="deuda-municipios">pendiente</span>', html.escape(ln.ESTADOS[a][0]), ln.ARCHIVO)
+    return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, reglas)
 
 
 def pagina_portal(base, ref, e, padron, prev, sig):
@@ -562,13 +582,15 @@ def pagina_portal(base, ref, e, padron, prev, sig):
     puertas_aud = ''.join('<a class="pl-puerta" href="%s"><span aria-hidden="true">%s</span><span><b>%s</b><small>%s</small></span></a>' % x for x in auditor)
     saltos = ('<nav class="pl-saltos" aria-label="Otras entidades"><a href="%s">← %s</a><a href="%s#mapa">🗺️ Volver al mapa</a><a href="%s">%s →</a></nav>' % (
         portal(prev['abbr']), prev['name'], ARCHIVO, portal(sig['abbr']), sig['name']))
+    import leyes_niveles
+    leyes = leyes_niveles.estado(e, leyes_niveles.municipios(padron, a))
     datos_e = '%s · capital: %s · %s habitantes a mitad de 2026 (CONAPO) %s' % (
         nom, e['capital'], format(e['pobPersonas'], ','), chip('derivado'))
     return {
         'archivo': portal(a), 'menu': nom, 'menu_archivo': ARCHIVO,
         'padre': (ARCHIVO, 'Planisferio'),
         'icono': '📍', 'titulo': nom, 'lema': 'Su portal en el Planisferio',
-        'entrada': ('Los tres presupuestos de %s, su deuda, sus municipios uno por uno y la puerta a sus otras dimensiones. '
+        'entrada': ('Los tres presupuestos de %s, su deuda, sus leyes del dinero, sus municipios uno por uno y la puerta a sus otras dimensiones. '
                     'Cada cifra sale de la base de la Enciclopedia, con su fuente oficial y su etiqueta.' % nom),
         'estilos': ['numeros.css', 'planisferio.css'],
         'scripts': ['planisferio.js'],
@@ -582,6 +604,9 @@ def pagina_portal(base, ref, e, padron, prev, sig):
              'texto': ('Lo que debe el gobierno de %s y cuánto le pesa, medido por el Sistema de Alertas de Hacienda con la Cuenta Pública 2025. '
                        'Es la deuda del gobierno del estado; la de sus municipios la mide el mismo sistema y llegará al Planisferio en una próxima entrega.') % nom,
              'tarjetas': [], 'bloque': deuda},
+            {'id': 'leyes', 'titulo': 'Sus leyes del dinero',
+             'texto': 'Con qué leyes cobra, compra, se endeuda y rinde cuentas %s, quién las aprueba y dónde se publican.' % nom,
+             'tarjetas': [], 'bloque': leyes},
         ] + ([
             {'id': 'mapa-municipios',
              'titulo': ('El mapa de sus %d municipios' if m['conCifra'] else 'El mapa de sus %d alcaldías') % len(g['m']),

@@ -4124,7 +4124,8 @@ PAGINAS_BIBLIOTECA = [
     pagina_biblioteca(
         'marco-legal.html', 'Marco legal hacendario', 'Las reglas del dinero público, con su texto vigente',
         'Los preceptos que rigen cómo se planea, se cobra, se aprueba, se gasta y se revisa el dinero público. El texto de cada '
-        'uno se cotejó palabra por palabra con la versión vigente que publica la Cámara de Diputados o el DOF.',
+        'uno se cotejó palabra por palabra con la versión vigente que publica la Cámara de Diputados o el DOF. Cuál ley rige en cada nivel de gobierno, '
+        'quién la aprueba y dónde se publica está en <a href="marco-legal-tres-niveles.html">Las leyes del dinero en los tres niveles</a>.',
         'bibMarco', 'Cargando los preceptos…'),
     pagina_biblioteca(
         'fuentes-oficiales.html', 'Referencias', 'Compendio de fuentes oficiales: cada documento que sostiene una cifra',
@@ -5847,7 +5848,8 @@ def generar(sello=None):
     import periodistas, acceso
     import metodologia_auditoria
     import planisferio
-    for extra in planisferio.paginas(base, ref, numeros_datos(base)) + [DICCIONARIO, metodologia_auditoria.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    import leyes_niveles
+    for extra in planisferio.paginas(base, ref, numeros_datos(base)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

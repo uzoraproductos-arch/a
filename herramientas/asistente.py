@@ -635,7 +635,9 @@ def escribir_base():
     import asistente_personajes
     # Periodismo en riesgo (29-10-2026): las cifras del Mecanismo de Protección.
     import periodistas
-    fichas = _fichas(d) + asistente_personajes.fichas() + periodistas.fichas() + _pendientes() + _paginas()
+    # Las leyes del dinero en los tres niveles (03-11-2026).
+    import leyes_niveles
+    fichas = _fichas(d) + asistente_personajes.fichas() + periodistas.fichas() + leyes_niveles.fichas(d) + _pendientes() + _paginas()
     cuenta = {}
     for f in fichas:
         cuenta[f['t']] = cuenta.get(f['t'], 0) + 1
