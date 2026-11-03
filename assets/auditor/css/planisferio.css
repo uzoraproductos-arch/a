@@ -53,6 +53,10 @@
 .pl-ficha-dl dd b { color: #0b2a63; font-size: 18px; }
 .pl-ficha-ir { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 14px; border-radius: 12px; background: #0b2a63; color: #fff; font-weight: 800; text-decoration: none; text-align: center; }
 .pl-ficha-ir:hover, .pl-ficha-ir:focus-visible { background: #16408c; }
+/* Varias puertas juntas (las reglas de cada portal): cada liga es su propio botón. */
+p.pl-ficha-ir { background: none; padding: 0; min-height: 0; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin: 12px 0 0; }
+p.pl-ficha-ir a { flex: 1 1 220px; display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 14px; border-radius: 12px; background: #0b2a63; color: #fff; font-weight: 800; text-decoration: none; text-align: center; }
+p.pl-ficha-ir a:hover, p.pl-ficha-ir a:focus-visible { background: #16408c; }
 .pl-ficha-vacia { margin: 0; line-height: 1.5; }
 .pl-pie { margin: 10px 0 0; font-size: 14px; line-height: 1.55; color: #5a6782; }
 .pl-indice { margin: 18px 0 0; }
@@ -111,7 +115,15 @@
 .pl-piso-deuda { border-top-color: #b3261e; }
 .pl-piso-inv { border-top-color: #2e8a4c; }
 .pl-piso-asf { border-top-color: #e06f60; }
+.pl-piso-leg { border-top-color: #2f5fa8; }
+.pl-piso-jud { border-top-color: #6b4c9a; }
 /* Las reglas de su deuda y sus leyes del dinero (03-11-2026). */
 .pl-reglas { margin: 18px 0 0; padding: 14px 16px; border-left: 4px solid #b3261e; background: var(--bg-card, transparent); }
 .pl-reglas ul, .leg-niveles { margin: 8px 0 0; padding-left: 20px; }
 .pl-reglas li, .leg-niveles li { margin: 0 0 8px; line-height: 1.5; }
+.pl-piso-amb { border-top-color: #8a5a1c; }
+.pl-sectores { list-style: none; padding: 0; display: grid; gap: .6rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.pl-reglas .pl-sectores { padding-left: 0; }
+.pl-sectores li { border: 1px solid var(--civ-gris-borde, #dfe5f0); border-radius: 12px; padding: 10px 12px; margin: 0; }
+.pl-ind { fill: #8a5a1c; stroke: #fff; stroke-width: 1.5; cursor: pointer; }
+.pl-ind:focus, .pl-ind:hover { fill: #b3261e; }

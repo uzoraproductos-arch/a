@@ -119,6 +119,36 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   los mismos municipios con cuenta que el padrón, la generación se detiene.
   El «egreso total» del INEGI incluye lo que quedó en caja: se dice «de cada
   $100 de su egreso», no «de lo que gastó».
+- **La legislativa, cuarta dimensión pintada** (03-11-2026). Los 32 congresos
+  locales: lo que gastó cada uno en 2024 (CNPLE 2025), cuántos lo integran, el
+  gasto por curul y el gasto frente al egreso del estado. Todo sale de
+  `congresos_estados()` de `asistente_legislativo.py`, que leen el Planisferio,
+  la Enciclopedia y el chat. **El tope del 0.70 % (art. 116, fr. II) se dice como
+  referencia, nunca como incumplimiento** mientras se compare gasto de 2024 contra
+  el egreso del INEGI: la prueba es el presupuesto aprobado del congreso contra el
+  presupuesto de egresos del estado. El gasto por curul no es lo que gana nadie.
+  Se abre con `planisferio.html?d=legislativa` y cada portal la trae en
+  `#legislativa`; en el chat, `congLocal()` va antes que las Cámaras federales.
+- **La judicial, quinta dimensión pintada** (03-11-2026). Los 32 poderes judiciales
+  de los estados: lo que ejerció cada uno en 2024 junto a lo que le entró y lo que
+  concluyó en primera instancia, el dinero por asunto concluido, las causas penales
+  pendientes y sus personas juzgadoras (CNIJF-E 2025). Todo sale de
+  `judiciales_estados()` de `gestion_judicial.py`, que leen el Planisferio y el chat.
+  **«Concluyó de cada 100» no es el rezago y el dinero por asunto no es lo que cuesta
+  un juicio**: se dice junto a la cifra. Se abre con `planisferio.html?d=judicial` y
+  cada portal la trae en `#judicial`; en el chat, `judLocal()` va antes que la ficha
+  del estado.
+- **La ambiental, sexta dimensión pintada** (03-11-2026). Empieza por los recursos
+  no renovables: las siete refinerías de PEMEX, el crudo que procesa cada una
+  (Segundo Informe) y el valor que ganó o perdió en los libros de PEMEX. Todo sale
+  de `herramientas/recursos_naturales.py`, que es además la metodología del
+  capítulo 6 del libro del autor (`docs/libro/derecho-economico/`): **el libro es
+  guía de temas, no fuente**, y cada regla se coteja contra la ley vigente, porque
+  describe el marco de 1993-1994. **Una entidad sin refinería va en gris como «sin
+  refinería», nunca como «sin problema»**, y el deterioro se dice como estimación
+  contable, no como dinero que salió de la caja. Se abre con
+  `planisferio.html?d=ambiental` y cada portal la trae en `#ambiental`; en el chat,
+  los temas `rn_*` van en `mapaResp()`, antes que las megaobras.
 - **Las leyes del dinero en los tres niveles** (03-11-2026,
   `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
   cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y

@@ -405,9 +405,18 @@ def construir(base, ref, glos):
     cg = sorted(P['legislativo']['congresos2024'], key=lambda x: -x['ejercidoMdp'])
     tot_cg = sum(x['ejercidoMdp'] for x in cg)
     pend_l = ' · '.join('%s %s' % (chip('pendiente', 'poderes-legislativo-%d' % i), esc(t)) for i, t in enumerate(P['legislativo']['pendientes']))
-    cg_t = plegable('Los 32 congresos locales: gasto ejercido en 2024', '%s<p class="po-nota">%s cada congreso; %s la suma de las 32 filas, %s. Millones de pesos corrientes. %s</p>'
+    # Las personas legisladoras de cada congreso (CNPLE 2025, tabla 8) y el
+    # gasto por curul, derivado (03-11-2026; lo pinta el Planisferio).
+    import asistente_legislativo as al
+    por_n = {e['name']: e['abbr'] for e in base['estados']}
+    cgn = {x['entidad']: al.CONGRESOS[por_n[x['entidad']]] for x in cg}
+    cg_t = plegable('Los 32 congresos locales: gasto ejercido en 2024', '%s<p class="po-nota">%s el gasto de cada congreso y sus personas legisladoras en activo (tabla 8, p. 32); '
+                    '%s la suma de las 32 filas, %s, y el gasto por curul: gasto ÷ personas legisladoras. El gasto por curul no es lo que gana cada quien: es lo que cuesta la institución entera '
+                    '(personal, edificios, comisiones y órganos técnicos) por cada lugar del pleno. Millones de pesos corrientes. %s</p>'
                     '<p class="po-nota">%s.</p>' % (
-                        ''.join(fila(esc(x['entidad']), mdp(x['ejercidoMdp'] * 1e6), barra(x['ejercidoMdp'], cg[0]['ejercidoMdp'], 'po-v-leg')) for x in cg),
+                        ''.join(fila(esc(x['entidad']), '%s <small>· %d legisladores · %s por curul</small>' % (
+                            mdp(x['ejercidoMdp'] * 1e6), cgn[x['entidad']], mdp(x['ejercidoMdp'] * 1e6 / cgn[x['entidad']])),
+                            barra(x['ejercidoMdp'], cg[0]['ejercidoMdp'], 'po-v-leg')) for x in cg),
                         chip('oficial'), chip('derivado'), mdp(tot_cg * 1e6), fuente('CNPLE', 11), pend_l), None, '🏛️')
 
     ac = P['legislativo']['asfCongresos2024']

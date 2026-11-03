@@ -22067,8 +22067,7 @@ window.AUDIT_DB = {
         }
       ],
       "pendientes": [
-        "Remuneraciones individuales de los 32 congresos locales",
-        "N\u00famero de legisladores de cada congreso con su fuente, para el costo por legislador"
+        "Remuneraciones individuales de los 32 congresos locales"
       ]
     }
   },

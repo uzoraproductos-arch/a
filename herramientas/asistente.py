@@ -393,6 +393,11 @@ def _charla(d):
     sin = C['dep'].get('sinFuente', [])
     import insp_radar
     rad = insp_radar.datos(d['cuenta_publica_asf'])
+    import asistente_legislativo as al
+    cg = al.congresos_estados(d)
+    import gestion_judicial as gj
+    pj = gj.judiciales_estados(d)
+    fj = lambda donde: fu('INEGI, Censo Nacional de Impartición de Justicia Federal y Estatal 2025, reporte de resultados, ' + donde, 'ref-inegi-cnijfe2025-rr')
     # m: metrica -> nombre, unidad, estado, fuente, si se suma entre estados,
     # y si «mas» es peor (para «el peor» y «el mejor»).
     met = {
@@ -435,6 +440,29 @@ def _charla(d):
         'invt': {'n': 'lo que el gobierno del estado les pasó a sus organismos de obra en 2024', 'u': 'mdp', 'e': 'oficial', 'suma': 1,
                  'fu': fu('INEGI, Estadística de Finanzas Públicas Estatales (EFIPEM) 2024, subpartida «Instituciones y programas de infraestructura»', C['invInfra']['ref']),
                  'sin': C['invInfra']['sinFuente'], 'pend': 'entidades-' + '-'.join(C['invInfra']['sinFuente']).lower()},
+        # Los 32 congresos locales (03-11-2026, dimensión legislativa del
+        # Planisferio): INEGI, CNPLE 2025, y el tope del art. 116, fr. II.
+        'cong': {'n': 'lo que gastó su congreso en 2024', 'u': 'mdp', 'e': 'oficial', 'suma': 1, 'peor': 'max',
+                 'fu': fu('INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, gasto ejercido en 2024 por congreso, p. 11', 'ref-inegi-cnple2025')},
+        'congx': {'n': 'gasto de su congreso por curul en 2024', 'u': 'mdp', 'e': 'derivado', 'peor': 'max',
+                  'fu': fu('INEGI, Censo Nacional de Poderes Legislativos Estatales 2025 (p. 11 y tabla 8)', 'ref-inegi-cnple2025'),
+                  'op': 'gasto ejercido del congreso en 2024 ÷ personas legisladoras en activo'},
+        'congp': {'n': 'gasto de su congreso frente al egreso del gobierno del estado en 2024', 'u': 'pct2', 'e': 'derivado', 'peor': 'max',
+                  'fu': fu('INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, p. 11, y finanzas públicas estatales 2024', 'ref-inegi-cnple2025'),
+                  'op': 'gasto del congreso en 2024 ÷ total de egresos del gobierno del estado en 2024 × 100', 'tope': al.TOPE_116,
+                  'sin': [a for a, c in cg.items() if c['p'] is None], 'pend': 'entidades-' + '-'.join(a for a, c in cg.items() if c['p'] is None).lower()},
+        'congn': {'n': 'personas legisladoras de su congreso', 'u': 'ent', 'e': 'oficial', 'suma': 1,
+                  'fu': fu('INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, tabla 8', 'ref-inegi-cnple2025')},
+        # Los 32 poderes judiciales estatales (03-11-2026, dimensión judicial
+        # del Planisferio): INEGI, CNIJF-E 2025, primera instancia.
+        'pjg': {'n': 'lo que ejerció su Poder Judicial en 2024', 'u': 'mdp', 'e': 'oficial', 'suma': 1, 'peor': 'max', 'fu': fj('gráfica 7, p. 14')},
+        'pjc': {'n': 'asuntos que concluyó su Poder Judicial de cada 100 que le entraron en 2024', 'u': 'pct', 'e': 'derivado', 'peor': 'min',
+                'fu': fj('tabla 23, p. 39'), 'op': 'asuntos concluidos ÷ asuntos ingresados en primera instancia × 100'},
+        'pja': {'n': 'lo que ejerció su Poder Judicial por asunto concluido en 2024', 'u': 'pesos', 'e': 'derivado', 'peor': 'max',
+                'fu': fj('gráfica 7, p. 14, y tabla 23, p. 39'), 'op': 'presupuesto ejercido en 2024 ÷ asuntos concluidos en primera instancia'},
+        'pjr': {'n': 'causas penales pendientes de concluir en su Poder Judicial al cierre de 2024', 'u': 'ent', 'e': 'oficial', 'suma': 1, 'peor': 'max',
+                'fu': fj('tabla 25, p. 45')},
+        'pjj': {'n': 'personas juzgadoras de su Poder Judicial', 'u': 'ent', 'e': 'oficial', 'suma': 1, 'fu': fj('tabla 6, p. 12')},
         'pob': {'n': 'habitantes a mitad de 2026', 'u': 'gente', 'e': 'derivado', 'suma': 1,
                 'fu': fu('CONAPO, proyecciones de población 2020-2070', url=C['pob']['url'])},
     }
@@ -445,7 +473,9 @@ def _charla(d):
              'sd': e.get('deudaSd'), 'ocp': e.get('deudaOcp'),
              'asf': e.get('asfMontoObservado'), 'aud': e.get('asfAuditorias'), 'radar': round(r['v'][0], 2) if r else None,
              'gasto': e['gasto'], 'r28': e['ramo28'], 'r33': e['ramo33'], 'pc': e['pc'], 'pob': e.get('pobPersonas'),
-             'inv': e.get('invPub'), 'invt': e.get('invInfra'), 'egr': e.get('egr2024')}
+             'inv': e.get('invPub'), 'invt': e.get('invInfra'), 'egr': e.get('egr2024'),
+             'cong': cg[e['abbr']]['g'], 'congx': cg[e['abbr']]['x'], 'congp': cg[e['abbr']]['p'], 'congn': cg[e['abbr']]['n'],
+             'pjg': pj[e['abbr']]['g'], 'pjc': pj[e['abbr']]['c100'], 'pja': pj[e['abbr']]['xa'], 'pjr': pj[e['abbr']]['p'], 'pjj': pj[e['abbr']]['j']}
         for k in ('dep', 'propia'):
             x[k] = None if e['abbr'] in sin else e[{'dep': 'dep', 'propia': 'recaudacionPropia'}[k]]
         edo.append(x)

@@ -692,7 +692,7 @@
   },
   {
    "q": "¿Cuánto rezago tiene el Poder Judicial de Jalisco?",
-   "ir": "datos-judicial-gestion.html#jud-gestion_estados",
+   "ir": "planisferio-jal.html#judicial",
    "dice": [
     "64,628",
     "40,431"
@@ -1660,6 +1660,120 @@
    "dice": [
     "inversión pública"
    ]
+  },
+  {
+   "q": "¿Cuánto gasta el Congreso de Jalisco?",
+   "ir": "planisferio-jal.html#legislativa",
+   "dice": [
+    "$922.2 millones",
+    "por curul"
+   ]
+  },
+  {
+   "q": "¿Qué congreso local gasta más por curul?",
+   "ir": "planisferio.html?d=legislativa",
+   "dice": [
+    "Michoacán"
+   ]
+  },
+  {
+   "q": "¿Qué congresos rebasan el tope del 0.70 %?",
+   "ir": "planisferio.html?d=legislativa",
+   "dice": [
+    "no es un incumplimiento",
+    "transitorio octavo"
+   ]
+  },
+  {
+   "q": "¿Cuántos diputados tiene el congreso de Jalisco?",
+   "ir": "datos-legislativo-estados.html#leg-locales",
+   "dice": [
+    "38 personas legisladoras"
+   ]
+  },
+  {
+   "q": "¿Cuánto cuesta el Congreso de la Unión?",
+   "ir": "herramienta-inspector-entes.html#ente=federal:legislativo"
+  },
+  {
+   "q": "¿Cuánto gasta el Poder Judicial de Jalisco?",
+   "ir": "planisferio-jal.html#judicial",
+   "dice": [
+    "$2,533.8 millones",
+    "por asunto concluido"
+   ]
+  },
+  {
+   "q": "¿Cuántos jueces tiene el poder judicial de Tabasco?",
+   "ir": "planisferio-tab.html#judicial",
+   "dice": [
+    "96 personas juzgadoras"
+   ]
+  },
+  {
+   "q": "¿Qué poder judicial estatal tiene más rezago penal?",
+   "ir": "planisferio.html?d=judicial",
+   "dice": [
+    "Estado de México",
+    "58,288"
+   ]
+  },
+  {
+   "q": "¿Qué poder judicial estatal concluye menos asuntos?",
+   "ir": "planisferio.html?d=judicial",
+   "dice": [
+    "Tabasco",
+    "no es lo mismo que no deber"
+   ]
+  },
+  {
+   "q": "¿Cuánto crudo procesa la refinería de Salina Cruz?",
+   "ir": "aprende-recursos-naturales.html#rn-refinerias",
+   "dice": [
+    "202 mil barriles diarios",
+    "Salina Cruz, Oaxaca"
+   ]
+  },
+  {
+   "q": "¿Qué refinería perdió más valor?",
+   "ir": "aprende-recursos-naturales.html#rn-refinerias",
+   "dice": [
+    "deterioro",
+    "no dinero que salió de la caja"
+   ]
+  },
+  {
+   "q": "¿Dónde están las refinerías de Pemex en el mapa?",
+   "ir": "planisferio.html?d=ambiental",
+   "dice": [
+    "siete refinerías"
+   ]
+  },
+  {
+   "q": "¿Quién audita a PEMEX?",
+   "ir": "aprende-recursos-naturales.html#rn-pemex",
+   "dice": [
+    "Comité de Auditoría",
+    "Auditoría Superior"
+   ]
+  },
+  {
+   "q": "¿Qué son los recursos naturales no renovables?",
+   "ir": "aprende-recursos-naturales.html#rn-capitulo",
+   "dice": [
+    "cuánto queda"
+   ]
+  },
+  {
+   "q": "¿Se puede dar una concesión de litio?",
+   "ir": "aprende-recursos-naturales.html#rn-regimen",
+   "dice": [
+    "litio"
+   ]
+  },
+  {
+   "q": "¿Qué ley rige la pesca?",
+   "ir": "aprende-recursos-naturales.html#rn-ramos"
   }
  ]
 }

@@ -286,6 +286,8 @@ def bot(extra=None):
     t.update(informe_semestral.temas())
     import metodologia_auditoria
     t.update(metodologia_auditoria.temas())
+    import recursos_naturales
+    t.update(recursos_naturales.temas())
     t.update(extra or {})
     return {'t': t, 'fam': {k: v[1] for k, v in FAMILIAS.items()}, 'pag': [ARCHIVO, TITULO]}
 
