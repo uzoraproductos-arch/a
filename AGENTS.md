@@ -148,7 +148,11 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   refinería», nunca como «sin problema»**, y el deterioro se dice como estimación
   contable, no como dinero que salió de la caja. Se abre con
   `planisferio.html?d=ambiental` y cada portal la trae en `#ambiental`; en el chat,
-  los temas `rn_*` van en `mapaResp()`, antes que las megaobras.
+  los temas `rn_*` van en `mapaResp()`, antes que las megaobras. **Las concesiones
+  mineras** (03-11-2026) salen del cuadro por entidad de la Dirección General de Minas
+  (`MINAS`, con su total: si no cuadra, se detiene) y **una concesión no se dice como mina
+  trabajando ni como irregularidad**; la capacidad de cada refinería, del Anuario
+  Estadístico de PEMEX. `&l=` abre el mapa en una lente.
 - **Las leyes del dinero en los tres niveles** (03-11-2026,
   `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
   cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y

@@ -1744,7 +1744,7 @@
   },
   {
    "q": "¿Dónde están las refinerías de Pemex en el mapa?",
-   "ir": "planisferio.html?d=ambiental",
+   "ir": "planisferio.html?d=ambiental&l=refj",
    "dice": [
     "siete refinerías"
    ]
@@ -1774,6 +1774,65 @@
   {
    "q": "¿Qué ley rige la pesca?",
    "ir": "aprende-recursos-naturales.html#rn-ramos"
+  },
+  {
+   "q": "¿Cuántas concesiones mineras tiene Sonora?",
+   "ir": "planisferio-son.html#ambiental",
+   "dice": [
+    "4,029 títulos de concesión minera",
+    "3,643 títulos"
+   ]
+  },
+  {
+   "q": "¿Qué estado tiene más concesiones mineras?",
+   "ir": "aprende-recursos-naturales.html#rn-mineria",
+   "dice": [
+    "23,231 títulos",
+    "Sonora"
+   ]
+  },
+  {
+   "q": "Concesiones mineras en Baja California",
+   "ir": "planisferio-bc.html#ambiental",
+   "dice": [
+    "528 títulos"
+   ]
+  },
+  {
+   "q": "¿Hay minas en Quintana Roo?",
+   "ir": "planisferio-qroo.html#ambiental",
+   "dice": [
+    "no figura en el cuadro"
+   ]
+  },
+  {
+   "q": "¿Cuánto paga una mina por su concesión?",
+   "ir": "aprende-recursos-naturales.html#rn-mineria",
+   "dice": [
+    "cuota por hectárea"
+   ]
+  },
+  {
+   "q": "¿Dónde están las minas en el mapa?",
+   "ir": "planisferio.html?d=ambiental&l=minT",
+   "dice": [
+    "concesión"
+   ]
+  },
+  {
+   "q": "¿Qué refinería usa más su capacidad?",
+   "ir": "aprende-recursos-naturales.html#rn-refinerias",
+   "dice": [
+    "1,980 mil barriles diarios",
+    "Tula"
+   ]
+  },
+  {
+   "q": "¿Cuál es la capacidad de la refinería de Minatitlán?",
+   "ir": "aprende-recursos-naturales.html#rn-refinerias",
+   "dice": [
+    "285 mil barriles diarios"
+   ]
   }
  ]
 }
