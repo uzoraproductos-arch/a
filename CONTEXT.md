@@ -7344,6 +7344,13 @@ Pedido del autor: «continuemos» (con los pendientes; era el primero de la list
 - **Revisado** en el navegador a 390 y 1280 px: portal de Jalisco con `?ml=inv`, ficha de Zapopan, piso municipal, portal de la Ciudad de México, padrón de la Enciclopedia y ficha del Auditor de entes, sin errores de consola ni desborde.
 - **Pendiente:** las dimensiones ambiental, legislativa y judicial del Planisferio, los umbrales del semáforo, la deuda municipal (Sistema de Alertas, sin descarga desde este entorno) y las ligas estatales «por cotejar».
 
+## Entrega — 03-11-2026: la base de datos, duodécimo pilar (sello 20261103x)
+
+- **Pedido.** Al buscar las denuncias de la PROFEPA por estado, el autor descartó la Plataforma Nacional de Transparencia («no podemos contar o confiar con la plataforma de transparencia») y decidió: «la construcción de nuestra base de datos debe convertirse en ese pilar de transparencia».
+- **Hecho.** Pilar 8 de `PILARES_LISTA`, «Nuestra base de datos es un pilar de transparencia» (tras «Lo que falta, se señala con nombre»), con la Ley General de Transparencia (DOF 20-03-2025) como documento de que el INAI se extinguió. `BASE_PASOS` y la sección `#base` de `pilares.html`: seis pasos que dicen lo que el código ya hace (huellas SHA-256 en los módulos, cuadres que detienen la generación, chips, `pendientes.py`, datos abiertos). La página dice «doce pilares». Novedad en `NOVEDADES`. Regla en AGENTS.md §0 ter. Pregunta nueva: «¿Cómo arman su base de datos? ¿Por qué confiar en ella?» → `pilares.html` (380).
+- **Lo que no cambió.** Las fichas que ya enlazan a la PNT (p. ej. `asesores-congresos-locales` de `pendientes.py`, `nepotismo.py`, `fiscalizadores.py`) siguen ahí: la PNT es donde cada sujeto obligado carga sus obligaciones, no una solicitud. Conviene cambiarlas, una por una, por el portal de transparencia de cada dependencia cuando se coteje.
+- **Pendiente:** `ambiente-por-estado` (las denuncias de la PROFEPA por entidad). El Informe 2024 no las trae; el autor busca el CSV de datos.gob.mx o la tabla por entidad del Compendio de Estadísticas Ambientales de la SEMARNAT. Si ninguna las trae, el porqué de la ficha dirá que la PROFEPA no las publica.
+
 ## Entrega — 03-11-2026: la pesca y la acuacultura de cada estado (sello 20261103w)
 
 Pedido del autor: «intégralo y continuemos». Se integró el PR #124 (la superficie forestal) y se siguió con lo propuesto: la pesca, la otra mitad de `ambiente-por-estado`.

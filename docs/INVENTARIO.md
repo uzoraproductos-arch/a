@@ -297,7 +297,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 229 | 0 | 0 | 0 | 117 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 37 | 0 | 11 | 5 | 0 |
-| `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 46 | 0 | 1 | 0 | 0 |
+| `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 48 | 0 | 1 | 0 | 0 |
 | `planisferio-ags.html` | Aguascalientes · Auditavisión | apartados.py | 82 | 0 | 34 | 42 | 8 |
 | `planisferio-bc.html` | Baja California · Auditavisión | apartados.py | 82 | 0 | 34 | 42 | 8 |
 | `planisferio-bcs.html` | Baja California Sur · Auditavisión | apartados.py | 82 | 0 | 34 | 42 | 8 |

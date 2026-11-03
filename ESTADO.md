@@ -5,7 +5,7 @@ historia completa de cada decisión en [CONTEXT.md](CONTEXT.md), que pasa de
 7,000 renglones: aquí va solo lo que necesitas para no repetir trabajo ni
 pisar el de otro. **Se actualiza en el mismo commit que cambia lo que dice.**
 
-Última actualización: 03-11-2026 · sello `20261103w` · rama `claude/funny-turing-imtm54`.
+Última actualización: 03-11-2026 · sello `20261103x` · rama `claude/funny-turing-imtm54`.
 
 ## Antes de empezar y antes de empujar
 
@@ -16,7 +16,7 @@ python3 herramientas/revision.py --base origin/claude/funny-turing-imtm54   # al
 
 `revision.py` corre lo que pide AGENTS.md §5: `node --check`, los CR sueltos,
 que el sello haya subido si tocaste `assets/`, el inventario (enlaces rotos y
-cotejos sin evidencia), las **379 preguntas de prueba del Auditor**, la guardia
+cotejos sin evidencia), las **380 preguntas de prueba del Auditor**, la guardia
 de legibilidad y, si tocaste `supabase/`, la base de datos. GitHub la corre sola
 en cada envío (`.github/workflows/revision.yml`). Con `--rapida` se salta lo
 que necesita navegador.
@@ -41,6 +41,7 @@ que necesita navegador.
 
 ## Lo último que entró
 
+- **03-11-2026, sello 20261103x.** **La base de datos, duodécimo pilar** (decisión del autor: «la construcción de nuestra base de datos debe convertirse en ese pilar de transparencia»). `pilares.html` dice ahora «doce pilares» y suma la sección «Cómo se arma nuestra base de datos» (`BASE_PASOS`): solo lo publicado para todos, la huella del archivo, las cuentas rehechas, el chip, lo que falta con nombre y todo descargable. **Ninguna cifra se apoya en una solicitud de acceso, y un pendiente no se resuelve proponiendo una** (AGENTS.md §0 ter). Novedad en el índice y una pregunta nueva (380). `ambiente-por-estado` sigue abierto: el autor busca el CSV de la PROFEPA en datos.gob.mx o la tabla por entidad del Compendio de la SEMARNAT.
 - **03-11-2026, sello 20261103w.** **La pesca y la acuacultura de cada estado** (pedido del autor: «intégralo y continuemos», tras integrar la superficie forestal). CONAPESCA, Anuario Estadístico de Acuacultura y Pesca 2025 (cifras de 2025, series de los cuadros 2.5.6 a 2.5.12), en `investigaciones/recursos-naturales/` con su huella: 2,206,439 t en peso vivo (17.6 % de cultivo) y $61,941.5 mdp a precio de playa; Sonora, Sinaloa y las dos Baja California juntan el 81.6 %. `pesca()` se detiene si una fila o una columna no cuadran. **El propio Anuario cruza a Jalisco y Colima en sus cuadros 2.1.10 y 2.1.11, y el TOTAL del cuadro 2.5.8 repite el de la acuacultura**: se dice y se toman las series; si la CONAPESCA lo corrige, la generación se detiene. **Lo registrado es lo declarado en los avisos (LGPAS, art. 4), no todo lo pescado, y no dice si la especie aguanta** (Carta Nacional Pesquera, art. 32). Planisferio: lentes `peT` y `peV` y el piso «Su pesca y su acuacultura»; Nuevo León, que no registró en 2025, va en gris con su porqué. `ambiente-por-estado` se queda solo con la PROFEPA. Chat: seis preguntas nuevas (379).
 - **03-11-2026, sello 20261103t.** **La superficie forestal de cada estado** (pedido del autor: «intégralo y continuemos», tras integrar los incendios). CONAFOR, «Estado que guarda el sector forestal en México 2023» (tablas 1 y 2, con el Inventario Nacional Forestal y de Suelos 2015-2020 y el mapa de vegetación de 2018 del INEGI), en `investigaciones/recursos-naturales/` con su huella: 138,695,229.8 ha forestales, de las que el 40.5 % es matorral xerófilo y el 48.1 % arbolada; Chihuahua tiene la mayor. `forestal()` se detiene si una fila o una columna no cuadran (el documento imprime cortadas dos celdas y la fila de Querétaro no suma por 0.9 ha: se dice). Frente a ella, el fuego de 2025 tocó 0.9 de cada 100 ha del país y 9.7 en Tabasco, el más alto, aunque es sexto por hectáreas: **es una proporción con años distintos, no la parte que se perdió**. Planisferio: lentes `sfT` (oficial) e `incP` (derivado) y el piso «Su superficie forestal» en cada portal. `ambiente-por-estado` se queda con la PROFEPA y la pesca. Chat: cinco preguntas nuevas (373).
 - **03-11-2026, sello 20261103s.** **Los incendios forestales, estado por estado** (pedido del autor: «intégralo y continuemos», tras la propuesta de seguir con los bosques de la CONAFOR). Cierre estadístico 2025 de la CONAFOR (Gerencia de Manejo del Fuego, cuadro 4) y el de 2024, en `investigaciones/recursos-naturales/` con su huella: 7,002 incendios y 1,221,711.03 ha en 2025, 27 % menos que 2024 (el año más alto de la serie) pero 2.8 veces el promedio 1998-2024; solo 5.3 de cada 100 ha eran de árboles. `incendios()` se detiene si las filas no suman el cierre. Ley: LGDFS arts. 117 a 121 y 155 (municipio → estado → CONAFOR; restaurar en dos años). Planisferio: lentes `incH` (hectáreas) e `incN` (incendios) y el piso «Sus incendios forestales» en cada portal. Seis puntos ciegos, entre ellos que superficie afectada no es bosque perdido y que la CONAFOR da dos tiempos de detección distintos para 2024 (00:47 y 01:51). `ambiente-por-estado` se queda con la superficie forestal (sin ella no se dice qué parte del bosque se quemó) y la PROFEPA. Chat: seis preguntas nuevas (368).
