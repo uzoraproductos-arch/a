@@ -5,7 +5,7 @@ historia completa de cada decisión en [CONTEXT.md](CONTEXT.md), que pasa de
 7,000 renglones: aquí va solo lo que necesitas para no repetir trabajo ni
 pisar el de otro. **Se actualiza en el mismo commit que cambia lo que dice.**
 
-Última actualización: 04-11-2026 · sello `20261104i` · rama `claude/funny-turing-imtm54`.
+Última actualización: 04-11-2026 · sello `20261104j` · rama `claude/funny-turing-imtm54`.
 
 ## Antes de empezar y antes de empujar
 
@@ -41,6 +41,7 @@ que necesita navegador.
 
 ## Lo último que entró
 
+- **04-11-2026, sello 20261104j.** **Cada modo del Auditor contesta a su manera** (entrega b de los modos): bajo la respuesta, el Inspector suma «La revisión del Inspector» (de qué está hecha, sus documentos, lo que falta y por dónde seguir), el Ciudadano «En corto» (la respuesta en una oración y sus palabras difíciles con el glosario) y el Ambientalista «La mirada ambiental» (los proyectos con alerta ambiental del tema y quién los paga). Si la pregunta luce más en otro modo, el chat ofrece cambiarse. Sin cifras nuevas; tres preguntas de prueba.
 - **04-11-2026, sello 20261104i.** **Pendientes del Planisferio cerrados**: la administración pública queda en gris pizarra (elección del autor); la página de presupuestos de cada portal suma «No cuadra» como cuarto piso, con las dos sumas (INEGI y Cuenta Pública) y la liga al mapa. «Pequeñas presentaciones» sale de la lista, por decisión del autor.
 - **04-11-2026, sello 20261104h.** **Los dos mapas que faltaban, en el Planisferio**: «No cuadra» (lente `cua` de la financiera) y «Obras con alerta ambiental» (lente `obr` de la ambiental), con las mismas cuentas del mapa de la Enciclopedia; ya no queda ningún mapa de la Enciclopedia sin par. En el chat, las tarjetas armadas por otras respuestas (las megaobras de un estado) también se juntan en el renglón del Planisferio. Dos preguntas nuevas.
 - **04-11-2026, sello 20261104g.** **El Planisferio, matriz de los mapas**: en el chat, los mapas que viven en el Planisferio salen en un solo renglón, «Ver en el Planisferio», con las otras dimensiones al lado (antes, «¿cuánto debe Jalisco?» daba tres tarjetas casi iguales, dos al mapa de la Enciclopedia), y «el mapa de la deuda» se abre allá. El mapa de la Enciclopedia lleva «Ábrelo en el Planisferio» en la lente que tiene par (`PLANISFERIO` de `territorio_modulos.py`, que `matriz()` comprueba) y cada ficha, a su portal. Tres preguntas nuevas.

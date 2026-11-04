@@ -36,8 +36,15 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
   que circula, lo que sigue); **lo «privilegiado» es lo enterrado en documentos
   públicos, nunca un rumor**. El banco de pruebas acepta `modo`. **El modo cambia la forma de
   investigar y de contestar, nunca los datos** (§2). Por entregas: (a) el
-  selector, hecho; (b) la forma de responder de cada modo (Periodista, hecho);
-  (c) el dictamen de cada modo.
+  selector, hecho; (b) la forma de responder de cada modo, hecha (Periodista el
+  29-10-2026; los otros tres el 04-11-2026: `inspectorCapa()`, «🔍 La revisión del
+  Inspector»: de qué está hecha la respuesta por chip, sus documentos, lo que falta y
+  por dónde seguir; `ciudadanoCapa()`, «🙋 En corto»: la respuesta en una oración, sus
+  palabras difíciles con el glosario y su estado de cuenta cívico; `ambientalistaCapa()`,
+  «🌎 La mirada ambiental»: los proyectos con alerta ambiental del tema o del estado
+  y quién los paga. **Ninguna capa agrega cifras**. Cada modo ofrece pasarse al que le
+  toca, con `MODO_PAL` de `asistente.js`, y el banco de pruebas lee la capa de
+  cualquier modo con `capaModo()`); (c) el dictamen de cada modo.
 - **Las cuatro herramientas se mudaron a la Enciclopedia** (29-10-2026): su
   índice es la quinta tarjeta de Números, «Herramientas del Auditor»
   (`numeros-herramientas-del-auditor.html`, `HERR_INDICE` y `HERR_SITIO` de

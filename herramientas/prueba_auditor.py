@@ -43,14 +43,16 @@ PAGINA = 'herramienta-inspector-pregunta.html'
 # Lo mismo que hace el chat al contestar: respuesta(), y si espera una
 # descarga (la lista del SAT, ComprasMX), su promesa.
 # Con «modo» (29-10-2026), la pregunta se hace en ese modo y el texto suma
-# lo que el modo agrega a la respuesta (la nota del Periodista).
+# lo que el modo agrega a la respuesta (la nota del Periodista y, desde el
+# 04-11-2026, la capa del Inspector, del Ciudadano y del Ambientalista).
 PREGUNTA_JS = '''async (arg) => {
   const [q, modo] = Array.isArray(arg) ? arg : [arg, ''];
   const app = document.getElementById('paApp');
   if (app) app.setAttribute('data-modo', modo || 'ciudadano');
   let r = window.AuditorBot.respuesta(q, []);
   if (r && r.espera) r = await r.espera;
-  const n = modo === 'periodista' && window.AuditorBot.periodista ? window.AuditorBot.periodista(q, r) : null;
+  const n = modo && window.AuditorBot.capaModo ? window.AuditorBot.capaModo(q, r, modo)
+    : modo === 'periodista' && window.AuditorBot.periodista ? window.AuditorBot.periodista(q, r) : null;
   const t = (((r && r.html) || '') + ' ' + ((n && n.html) || '')).replace(/<[^>]+>/g, ' ').replace(/\\s+/g, ' ').trim();
   return { ir: (r && r.ir && r.ir[0]) || null, sin: !!(r && r.sin), texto: t };
 }'''

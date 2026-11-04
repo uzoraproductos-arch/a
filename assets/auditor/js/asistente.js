@@ -651,6 +651,111 @@
     var n = periodista(q, r);
     return n ? n.html + (n.web ? webHtml(n.web) : '') : '';
   }
+  /* Cada modo contesta a su manera (pedido del autor, 29-10-2026, entrega b;
+     hecha el 04-11-2026). Bajo la misma respuesta, cada modo suma su capa:
+     el Inspector, de qué está hecha y por dónde seguir; el Ciudadano, la
+     respuesta en una línea y sus palabras difíciles; el Ambientalista, los
+     proyectos con alerta ambiental del tema y quién los paga. Ninguna capa
+     agrega cifras: todo sale de la respuesta y de la base. */
+  function textoDe(h) { return String(h || '').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim(); }
+  function inspectorCapa(q, r) {
+    if (!r || r.sin || r.plat) return null;
+    var h = String(r.html || ''), cu = { oficial: 0, derivado: 0, pendiente: 0 };
+    (h.match(/est-chip est-(oficial|derivado|pendiente)/g) || []).forEach(function (m) { cu[m.split('est-').pop()]++; });
+    var f0 = r.ficha, fu = (f0 && f0.fu) || [], ab = entidadDe(q + ' ' + ((f0 && f0.tit) || ''));
+    var base = (r.ir || (f0 && f0.ir) || [''])[0].split('#')[0].split('?')[0];
+    var pends = F.filter(function (f) { return f.t === 'pendiente' && f.pend && base && (f.pend.ap || []).indexOf(base) >= 0; }).slice(0, 2);
+    var res = buscar(q), piso = res.length ? res[0].s * 0.5 : 0;
+    var exp = res.slice(0, 20).filter(function (x) { return x.f.t === 'expediente' && x.s >= piso; })[0];
+    var sigue = [];
+    if (ab) sigue.push('<li>🏢 <a href="herramienta-inspector-entes.html#ente=estatal:' + esc(ab) + '">La ficha técnica de ' + esc(NOMBRE[ab]) + ' en el Auditor de entes ➔</a></li>');
+    if (exp) sigue.push('<li>📂 <a href="' + esc(exp.f.ir[0]) + '">Su expediente de la ASF: ' + esc(recorta(exp.f.tit, 90)) + ' ➔</a></li>');
+    if (ab) sigue.push('<li>🗺️ <a href="planisferio.html?e=' + esc(ab) + '">' + esc(NOMBRE[ab]) + ' en el Planisferio, dimensión por dimensión ➔</a></li>');
+    sigue.push('<li>🧾 <a href="contratos-publicos.html">Sus contratos en ComprasMX</a> y la <a href="herramienta-inspector-pregunta.html?q=' + encodeURIComponent('lista negra del SAT') + '">lista negra del SAT</a>, si hay una empresa de por medio.</li>');
+    var tot = cu.oficial + cu.derivado + cu.pendiente;
+    var hh = '<div class="pa-capa pa-capa-inspector"><p class="pa-capa-t">🔍 La revisión del Inspector</p>' +
+      (tot ? '<p class="pa-rep-s">De qué está hecha esta respuesta</p><p>' +
+        [['oficial', 'tomados de su documento'], ['derivado', 'calculados por nosotros, con su operación dicha'], ['pendiente', 'que nadie ha publicado todavía']]
+          .filter(function (k) { return cu[k[0]]; }).map(function (k) { return '<b>' + cu[k[0]] + '</b> ' + chip({ e: k[0] }) + ' ' + k[1]; }).join(' · ') + '.</p>' : '') +
+      (fu.length ? '<p class="pa-rep-s">Sus documentos</p><ul class="pa-lista">' + fu.slice(0, 4).map(function (d) {
+        return '<li>📄 ' + (d.url ? '<a href="' + esc(d.url) + '" target="_blank" rel="noopener">' + esc(recorta(d.tx, 140)) + ' ↗</a>' : esc(recorta(d.tx, 160))) + '</li>';
+      }).join('') + '</ul>' : '') +
+      (pends.length ? '<p class="pa-rep-s">Lo que falta</p><ul class="pa-lista">' + pends.map(function (f) {
+        return '<li>' + chip({ e: 'pendiente', p: f.pend.id }) + ' ' + esc(recorta(f.tit, 140)) + (f.pend.quien ? '. Le toca a <b>' + esc(f.pend.quien) + '</b>' : '') + '.</li>';
+      }).join('') + '</ul>' : '') +
+      '<p class="pa-rep-s">Para seguir investigando</p><ul class="pa-lista">' + sigue.join('') + '</ul>' +
+      '<p class="pa-chico">El respaldo completo, con folio y huella, está en «Generar dictamen». Tener contratos o un expediente abierto no es una irregularidad: es por dónde se revisa.</p></div>';
+    return { html: hh };
+  }
+  function ciudadanoCapa(q, r) {
+    if (!r || r.sin || r.plat) return null;
+    /* La primera oración del primer párrafo: lo demás ya está arriba. */
+    var p1 = (String(r.html || '').match(/<p[^>]*>([\s\S]*?)<\/p>/) || [0, r.html])[1];
+    var t = textoDe(r.html).replace(/📎.*$/, '').trim(), t1 = textoDe(p1).replace(/📎.*$/, '').trim();
+    var corto = (t1.match(/^.*?[.!?](\s|$)/) || [t1])[0].trim().replace(/\s+([.,;:])/g, '$1');
+    if ((r.ficha && r.ficha.t === 'glosario') || /:$/.test(corto)) corto = '';
+    if (corto.length > 260) corto = recorta(corto, 240);
+    var pt = ' ' + plano(t) + ' ', vistos = {}, pals = [];
+    F.forEach(function (f) {
+      if (pals.length >= 3 || f.t !== 'glosario') return;
+      var n = plano(f.tit.split(' (')[0]).trim();
+      if (n.length < 4 || vistos[n] || f === r.ficha || (' ' + plano(q) + ' ').indexOf(' ' + n + ' ') >= 0) return;
+      if (pt.indexOf(' ' + n + ' ') >= 0) { vistos[n] = 1; pals.push(f); }
+    });
+    var hh = '<div class="pa-capa pa-capa-ciudadano"><p class="pa-capa-t">🙋 En corto</p>' +
+      (corto ? '<p class="pa-capa-corto">' + esc(corto) + '</p>' : '') +
+      (pals.length ? '<p class="pa-rep-s">Palabras que quizá no conoces</p><ul class="pa-lista">' + pals.map(function (f) {
+        return '<li><b>' + esc(f.tit) + ':</b> ' + esc(recorta(f.txt, 150)) + ' <a href="' + esc(f.ir[0]) + '">Glosario ➔</a></li>';
+      }).join('') + '</ul>' : '') +
+      '<p class="pa-rep-s">¿Y a ti en qué te toca?</p><p>Con tu sueldo, tu <a href="herramienta-calculadora-ticket.html">estado de cuenta cívico</a> te dice cuánto pagas de impuestos y a dónde va cada peso. ' +
+      'Si quieres ir a fondo, toca «Saber más» o cámbiame al modo Inspector.</p></div>';
+    return { html: hh };
+  }
+  function ambientalistaCapa(q, r) {
+    if (!r || r.sin || r.plat) return null;
+    var casos = MO.casosAmb || [], ab = entidadDe(q + ' ' + ((r.ficha && r.ficha.tit) || '')), pt = ' ' + plano(q + ' ' + textoDe(r.html)) + ' ';
+    var os = casos.filter(function (c) {
+      if (ab && (c.edos || []).indexOf(ab) >= 0) return true;
+      var w = plano(c.nombre).trim().split(' ').filter(function (x) { return x.length > 3; });
+      return w.length && w.every(function (x) { return pt.indexOf(' ' + x + ' ') >= 0; });
+    }).slice(0, 3);
+    var hh = '<div class="pa-capa pa-capa-ambientalista"><p class="pa-capa-t">🌎 La mirada ambiental</p>' +
+      (os.length ? '<p class="pa-rep-s">Proyectos con alerta ambiental' + (ab ? ' en ' + esc(NOMBRE[ab]) : '') + ', y quién los paga</p><ul class="pa-lista">' + os.map(function (c) {
+        return '<li>' + esc(c.ico) + ' <b>' + esc(c.nombre) + '</b>: ' + (c.paga === 'privado' ? '🏢 inversión privada, no es gasto público' : '🏛️ gasto público') +
+          '. 🌱 ' + esc(recorta(c.alerta, 150)) + ' <a href="' + esc(c.aud) + '">Ver la investigación ➔</a></li>';
+      }).join('') + '</ul>' :
+        '<p>Sobre esto no hay un proyecto con alerta ambiental en el mapa de megaobras' + (ab ? ' que toque ' + esc(NOMBRE[ab]) : '') + '. Eso no quiere decir que no haya daño: quiere decir que no lo tenemos documentado.</p>') +
+      '<p class="pa-rep-s">Para mirarlo con ojos de ambiente</p><ul class="pa-lista">' +
+      '<li>🗺️ <a href="planisferio.html?d=ambiental' + (ab ? '&amp;e=' + esc(ab) : '') + '">' + (ab ? esc(NOMBRE[ab]) + ' en' : 'Los 32 estados en') + ' la dimensión ambiental del Planisferio ➔</a></li>' +
+      '<li>⏱️ <a href="herramienta-ambiente-reloj.html">El reloj del daño ambiental</a> y <a href="datos-justicia-ambiental-denuncias.html">lo que resuelve la PROFEPA</a></li></ul>' +
+      '<p class="pa-chico">El deterioro del ambiente también es gasto público. Solo se suma lo que paga el gobierno; la inversión privada se dice con su nombre.</p></div>';
+    return { html: hh };
+  }
+  /* Cada modo ofrece pasarse al que le toca cuando la pregunta es de otro tema. */
+  var MODO_PAL = [
+    ['periodista', /\b(es cierto|dicen que|circula|rumor\w*)\b/],
+    ['ambientalista', /\b(ambient\w*|contamina\w*|basura|profepa|ecolog\w*|deforest\w*|selva|manglar\w*|acuifer\w*|incendios? forestal\w*|emisiones)\b/],
+    ['periodista', /\b(noticias?|nota de|que paso con|periodistas?)\b/],
+    ['inspector', /\b(rfc|folio|expedientes?|diagnostico|contratos?|proveedor\w*|lista negra|69 b|nepotismo|fraccionamiento)\b/],
+    ['ciudadano', /\b(me retienen|mi sueldo|gano|mi aguinaldo|mi estado de cuenta|cuanto pago)\b/]
+  ];
+  var MODO_NOM = { inspector: 'Inspector', periodista: 'Periodista', ciudadano: 'Ciudadano', ambientalista: 'Ambientalista' };
+  function modoSugerido(q) {
+    var p = ' ' + plano(q) + ' ', m = modoVivo(), s = null;
+    MODO_PAL.forEach(function (x) { if (!s && x[1].test(p)) s = x[0]; });
+    return s && s !== m ? s : null;
+  }
+  function capaModoHtml(q, r) {
+    var m = modoVivo(), c = m === 'inspector' ? inspectorCapa(q, r) : m === 'ciudadano' ? ciudadanoCapa(q, r) : m === 'ambientalista' ? ambientalistaCapa(q, r) : null;
+    var s = r && !r.sin ? modoSugerido(q) : null;
+    return (c ? c.html : '') + (s ? '<p class="pa-modo-sug-p"><button type="button" class="pa-boton pa-modo-sug" data-pa-modo-sug="' + s + '" data-pa-q="' + esc(q) + '">' +
+      MODO_ICO[s] + ' Esto luce más en el modo ' + MODO_NOM[s] + ': cámbiame y te lo cuento así ➔</button></p>' : '');
+  }
+  /* Para el banco de pruebas: la capa del modo pedido, en texto. */
+  function capaModo(q, r, m) {
+    var f = { inspector: inspectorCapa, ciudadano: ciudadanoCapa, ambientalista: ambientalistaCapa, periodista: periodista }[m];
+    return f ? f(q, r) : null;
+  }
   var TIPOS_REC = { planisferio: 'mapa', mapa: 'mapa', mapas: 'mapa', reloj: 'reloj', relojes: 'reloj', contador: 'reloj', contadores: 'reloj', simulador: 'simulador', simuladores: 'simulador', tablero: 'tablero' };
   function pideRecurso(q) {
     var p = plano(q), tipo = null;
@@ -2344,7 +2449,7 @@
       }
       if (r.anota && !ya) anota(q, 'sin');
       li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r, previas) +
-        periodistaHtml(q, r) +
+        periodistaHtml(q, r) + capaModoHtml(q, r) +
         appDe(r) +
         (r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r)))) +
         enciclopediaHtml(enciclopediaPara(q, r)) +
@@ -2412,7 +2517,7 @@
     }
   }
   if (dic) {
-    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista };
+    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo };
     armaDictamen();
     return;
   }
@@ -2438,6 +2543,8 @@
       if (mm && mm._mide) mm._mide();
       return;
     }
+    var ms = ev.target.closest ? ev.target.closest('[data-pa-modo-sug]') : null;
+    if (ms) { poneModo(ms.getAttribute('data-pa-modo-sug'), false); responde(ms.getAttribute('data-pa-q')); return; }
     var ia = ev.target.closest ? ev.target.closest('[data-pa-ia]') : null;
     if (ia) { if (!ia.disabled) pideIa(ia); return; }
     var wb = ev.target.closest ? ev.target.closest('[data-pa-web]') : null;
@@ -2664,7 +2771,7 @@
   })();
 
   /* Para revisar cómo puntúa una pregunta desde la consola. */
-  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista };
+  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo };
   pintaLista();
   if (canal) document.getElementById('paSinRespNota').innerHTML = 'La lista se guarda solo en tu navegador y no se envía sola: con «Enviarlas a Auditavisión» nos la haces llegar tú.';
   var ps = new URLSearchParams(location.search), pre = ps.get('q'), lista = ps.get('p');

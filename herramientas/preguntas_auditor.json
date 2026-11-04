@@ -1553,6 +1553,24 @@
    "ir": "planisferio.html?e=CDMX&m=1"
   },
   {
+   "q": "¿Cuánto debe Jalisco?",
+   "modo": "inspector",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:JAL",
+   "dice": ["La revisión del Inspector", "De qué está hecha esta respuesta", "Para seguir investigando"]
+  },
+  {
+   "q": "¿Cuánto le llega a Oaxaca de la Federación?",
+   "modo": "ciudadano",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:OAX",
+   "dice": ["En corto", "Palabras que quizá no conoces", "Ramo 28"]
+  },
+  {
+   "q": "¿Cuánto debe Veracruz?",
+   "modo": "ambientalista",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:VER",
+   "dice": ["La mirada ambiental", "Agronitrogenados", "gasto público"]
+  },
+  {
    "q": "El mapa de las obras con alerta ambiental de Veracruz",
    "ir": "datos-ambiente-megaobras.html?e=VER#abMapaObras"
   },
