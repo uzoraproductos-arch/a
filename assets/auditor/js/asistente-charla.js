@@ -110,7 +110,8 @@
       fortamun: 'FORTAMUN, la aportación para fortalecer al municipio', fismdf: 'FAIS municipal, para obras en zonas de pobreza',
       predial: 'lo que cobró de predial', propios: 'ingresos propios, lo que cobró por su cuenta', egr: 'egresos de 2024',
       dep: 'dependencia de la Federación', inv: 'inversión pública de 2024 (obra y proyectos productivos)',
-      deu: 'lo que pagó por sus créditos en 2024 (capital, intereses y comisiones)' };
+      deu: 'lo que pagó por sus créditos en 2024 (capital, intereses y comisiones)',
+      pob: 'población (Censo 2020)', iph: 'ingreso por habitante (2024 ÷ Censo 2020)' };
     /* Nombres de municipio que también son palabras comunes: solo cuentan si se dice «municipio». */
     var COMUN = ' centro reforma progreso victoria solidaridad libres union la union paz la paz general nacional independencia hidalgo morelos guerrero juarez allende zaragoza madero obregon mexico tabasco colima durango aguascalientes campeche chihuahua oaxaca puebla queretaro tlaxcala zacatecas tepic jalisco nuevo nombre jesus maria santiago san pedro trinidad libertad ';
     /* Nombres cortos que la gente dice sin su apellido («Tula» por Tula de Allende). */
@@ -133,8 +134,13 @@
     var MINV = window.AUDIT_MUN_INV || null;
     /* Y la deuda en su cuenta, también (municipios-deuda.js): lo que pagó y pidió en el año, no lo que debe. */
     var MDEU = window.AUDIT_MUN_DEUDA || null;
+    /* Y su población, del Censo 2020 (municipios-poblacion.js): la tienen también los que no rindieron cuenta. */
+    var MPOB = window.AUDIT_MUN_POB || null;
+    function pobDe(m) { var p = MPOB && MPOB.mun[m.cve]; return p ? p[0] : null; }
     function mv(m, k) {
+      if (k === 'pob') return pobDe(m);
       if (!m.v) return null;
+      if (k === 'iph') return pobDe(m) ? m.v[MCAMPO.ing] / pobDe(m) : null;
       if (k === 'inv') { var iv = MINV && MINV.mun[m.cve]; return iv ? iv[0] : null; }
       if (k === 'deu') { var dd = MDEU && MDEU.mun[m.cve]; return dd ? dd[1] + dd[2] + dd[3] : null; }
       if (k === 'dep') return m.v[MCAMPO.ing] ? (m.v[MCAMPO.part] + m.v[MCAMPO.aport]) / m.v[MCAMPO.ing] * 100 : null;
@@ -187,7 +193,8 @@
       ['pob', /poblacion|habitantes tiene|cuanta gente|cuantas personas|cuantos habitantes|cuantos viven/],
       ['gasto', /recib|le (dan|mandan|llega|llegan|toca|tocan|manda|pasan|da)|les (dan|mandan|llega|toca)|transfer|federaliz|ramos? 28 y 33|presupuesto|cuanto dinero|cuanta (lana|feria)|cuanto (varo|baro)|dinero (le|les)|lana|varo|feria|cuanto tiene/]
     ];
-    var MET_MUN = [['deu', /deud|debe[ns]?\b|endeud|prestam|presto|credito|emprestito|intereses/], ['inv', /invers|invierte|invirti|obra publica|obras? (que )?(hizo|hicieron|construy)/], ['predial', /predial/], ['fortamun', /fortamun|fortalecimiento/], ['fismdf', /\bfais\b|fismdf|infraestructura social/],
+    var MET_MUN = [['iph', /por (habitante|persona|cabeza)|per ?capita|por cada (habitante|persona)/],
+      ['pob', /poblacion|habitantes|poblad[oa]s?\b|cuanta gente|cuantas personas|cuantos viven/], ['deu', /deud|debe[ns]?\b|endeud|prestam|presto|credito|emprestito|intereses/], ['inv', /invers|invierte|invirti|obra publica|obras? (que )?(hizo|hicieron|construy)/], ['predial', /predial/], ['fortamun', /fortamun|fortalecimiento/], ['fismdf', /\bfais\b|fismdf|infraestructura social/],
       ['dep', /depend|mantenid|vive de|colgad|autonom/], ['propios', /propio|recaud|cobra por su cuenta|cobran ellos|genera/],
       ['part', /participacion|ramo 28/], ['aport', /aportacion|ramo 33/], ['egr', /gast|egres/],
       ['ing', /ingres|recib|dinero|presupuesto|lana|varo|feria|tiene|maneja|le (dan|llega|toca)/]];
@@ -337,7 +344,7 @@
       pjr: 'causas penales pendientes en su Poder Judicial (cierre de 2024)', pjj: 'personas juzgadoras en su Poder Judicial' };
     var RKM = { ing: 'ingresos', part: 'participaciones', aport: 'aportaciones', fortamun: 'FORTAMUN', fismdf: 'FAIS municipal', predial: 'cobro de predial',
       propios: 'ingresos propios', egr: 'egresos', dep: 'dependencia de la Federación', inv: 'inversión pública (obra y proyectos productivos)',
-      deu: 'pago de deuda en 2024 (capital, intereses y comisiones)' };
+      deu: 'pago de deuda en 2024 (capital, intereses y comisiones)', pob: 'habitantes (Censo 2020)', iph: 'ingreso por habitante' };
     function ranking(k, dir, cuantos, porHab) {
       var m = M[k], rk = RK[k] || m.n;
       var val = function (x) { return porHab && k !== 'pc' ? (x[k] != null && x.pob ? x[k] * 1e6 / x.pob : null) : x[k]; };
@@ -444,9 +451,32 @@
       var nom = esc(m.n) + ', ' + esc(m.en);
       var mas = otros && otros.length ? '<p class="pa-chico">Hay otro' + (otros.length > 1 ? 's' : '') + ' municipio' + (otros.length > 1 ? 's' : '') + ' con ese nombre: ' +
         otros.slice(0, 4).map(function (o) { return '<button type="button" class="pa-enlace" data-pa-pregunta="municipio ' + esc(o.n) + ' ' + esc(o.en) + '">' + esc(o.n) + ', ' + esc(o.en) + '</button>'; }).join(' · ') + '.</p>' : '';
+      var MPFU = MPOB ? { tx: 'INEGI, Censo de Población y Vivienda 2020, principales resultados por localidad (ITER)', url: MPOB.pagina } : null;
+      if (k === 'pob') {
+        var pb = pobDe(m);
+        if (pb == null) return { html: '<p><b>' + nom + '</b> no existía cuando se levantó el Censo de Población y Vivienda 2020: sus habitantes se contaron en el municipio del que se separó. El INEGI no ha publicado un conteo más reciente por municipio.</p>' + mas,
+          fu: [{ que: 'Los municipios que contó el Censo 2020', e: 'oficial', fu: MPFU }], tit: m.n + ': población', ci: [] };
+        var Lp = munLugar(m, 'pob');
+        return { html: '<p>En <b>' + nom + '</b> vivían <b>' + n(pb, 0) + ' personas</b> según el Censo de Población y Vivienda 2020 del INEGI, el último conteo completo.' +
+          (Lp.de > 1 ? ' Es el lugar <b>' + Lp.l + ' de ' + Lp.de + '</b> en población de ' + esc(m.en) + '.' : '') + '</p>' +
+          '<p class="pa-chico">La cifra es de 2020, no de hoy.</p>' + mas,
+          fu: [{ que: 'Población del municipio', e: 'oficial', fu: MPFU }, { que: 'Lugar en el estado', e: 'derivado', op: 'lugar entre los municipios del estado con población del Censo 2020' }],
+          val: { v: pb, u: 'personas' }, tit: m.n + ', ' + m.en + ': población', ci: [{ v: n(pb, 0), etq: 'personas (Censo 2020)', e: 'oficial' }] };
+      }
       if (!m.v) return { html: '<p><b>' + nom + '</b> no reportó sus cifras de 2024 a la estadística de finanzas municipales del INEGI, así que no tengo sus números. Puedes revisar su ficha técnica en el Auditor de entes públicos.</p>' + mas,
         fu: [{ que: 'Municipios sin cifra', e: 'pendiente', fu: MFU }], tit: m.n, ci: [] };
-      var ing = mv(m, 'ing'), h, fu = [munFu(k || 'ing')], L;
+      var ing = mv(m, 'ing'), h, fu = [munFu(k === 'iph' ? 'ing' : k || 'ing')], L;
+      if (k === 'iph') {
+        var pp = pobDe(m);
+        if (pp == null) return { html: '<p><b>' + nom + '</b> no existía en el Censo 2020, así que no puedo dividir su ingreso entre sus habitantes. Su ingreso de 2024 fue <b>' + grande(ing, 1) + '</b>.</p>' + mas,
+          fu: fu.concat([{ que: 'Los municipios que contó el Censo 2020', e: 'oficial', fu: MPFU }]), tit: m.n + ': ingreso por habitante', ci: [] };
+        L = munLugar(m, 'iph');
+        return { html: '<p><b>' + nom + '</b> ingresó <b>' + grande(ing, 1) + '</b> en 2024 y ahí vivían <b>' + n(pp, 0) + '</b> personas en 2020: son unos <b>$' + n(ing / pp, 0) + ' por habitante</b>.' +
+          (L.de > 1 ? ' Lugar <b>' + L.l + ' de ' + L.de + '</b> en ' + esc(m.en) + '.' : '') + '</p>' +
+          '<p class="pa-ojo">Ojo: mezcla el ingreso de 2024 con la población de 2020, porque el INEGI no ha publicado un conteo más reciente por municipio. Es para comparar municipios, no lo que le toca a cada persona.</p>' + mas,
+          fu: fu.concat([{ que: 'Población del municipio', e: 'oficial', fu: MPFU }, { que: 'Ingreso por habitante y lugar', e: 'derivado', op: 'ingreso total 2024 ÷ población del Censo 2020; lugar entre los municipios del estado con las dos cifras' }]),
+          val: { v: ing / pp, u: 'pesos' }, tit: m.n + ', ' + m.en + ': ingreso por habitante', ci: [{ v: '$' + n(ing / pp, 0), etq: 'ingreso 2024 por habitante de 2020', e: 'derivado', op: 'ingreso total 2024 ÷ población del Censo 2020' }] };
+      }
       if (!k || k === 'ing') {
         L = munLugar(m, 'ing');
         h = '<p><b>' + nom + '</b> tuvo ingresos por <b>' + grande(ing, 1) + '</b> en 2024. De cada $100, <b>$' + n(mv(m, 'dep'), 1) + '</b> llegaron de la Federación (participaciones y aportaciones) y <b>$' + n(mv(m, 'propios') / ing * 100, 1) + '</b> los cobró por su cuenta.' +
@@ -489,13 +519,15 @@
     function munRanking(k, dir, cuantos, e) {
       k = k || 'ing';
       var l = MUN.filter(function (x) { return (!e || x.a === e.a) && mv(x, k) != null; }).sort(function (a, b) { return dir === 'min' ? mv(a, k) - mv(b, k) : mv(b, k) - mv(a, k); });
-      var top = l.slice(0, Math.max(cuantos, 5)), u = k === 'dep' ? 'pct' : '';
+      var top = l.slice(0, Math.max(cuantos, 5)), u = k === 'dep' ? 'pct' : k === 'pob' ? 'per' : k === 'iph' ? 'pes' : '';
+      var vf = function (x) { return u === 'pct' ? n(mv(x, k), 1) + ' %' : u === 'per' ? n(mv(x, k), 0) + ' personas' : u === 'pes' ? '$' + n(mv(x, k), 0) + ' por habitante' : grande(mv(x, k), 1); };
       var h = '<p>' + (dir === 'min' ? 'Los municipios con menos' : 'Los municipios con más') + ' ' + esc(RKM[k]) + (e ? ' en <b>' + esc(e.n) + '</b>' : ' del país') + ':</p><ol class="pa-lista">' +
-        top.map(function (x) { return '<li><b>' + esc(x.n) + '</b>' + (e ? '' : ', ' + esc(x.en)) + ': ' + (u ? n(mv(x, k), 1) + ' %' : grande(mv(x, k), 1)) + '</li>'; }).join('') + '</ol>' +
-        '<p class="pa-chico">Entre ' + n(l.length) + ' municipios con cifras de 2024.</p>' +
+        top.map(function (x) { return '<li><b>' + esc(x.n) + '</b>' + (e ? '' : ', ' + esc(x.en)) + ': ' + vf(x) + '</li>'; }).join('') + '</ol>' +
+        '<p class="pa-chico">Entre ' + n(l.length) + ' municipios con ' + (k === 'pob' ? 'población del Censo 2020' : k === 'iph' ? 'cuenta de 2024 y población del Censo 2020 (ingreso 2024 ÷ población 2020)' : 'cifras de 2024') + '.</p>' +
         (k === 'deu' ? '<p class="pa-ojo">Ojo: es lo que pagaron por sus créditos en el año, no lo que deben. El saldo de cada municipio lo publica Hacienda y sigue ' + chip('pendiente', 'deuda-municipios') + '.</p>' : '');
-      return { html: h, fu: [munFu(k), { que: 'Orden', e: 'derivado', op: 'ordenamos los municipios con cifra' }], tit: 'Municipios: ' + MUN_NOM[k],
-        ci: top.map(function (x) { return { v: u ? n(mv(x, k), 1) + ' %' : grande(mv(x, k), 1), etq: x.n + ', ' + x.en, e: k === 'dep' ? 'derivado' : 'oficial' }; }) };
+      var fuk = k === 'pob' || k === 'iph' ? { que: 'Población del municipio', e: 'oficial', fu: MPOB ? { tx: 'INEGI, Censo de Población y Vivienda 2020, principales resultados por localidad (ITER)', url: MPOB.pagina } : null } : munFu(k);
+      return { html: h, fu: [fuk, { que: 'Orden', e: 'derivado', op: k === 'iph' ? 'ingreso total 2024 ÷ población del Censo 2020; ordenamos los municipios con las dos cifras' : 'ordenamos los municipios con cifra' }], tit: 'Municipios: ' + MUN_NOM[k],
+        ci: top.map(function (x) { return { v: vf(x), etq: x.n + ', ' + x.en, e: k === 'dep' || k === 'iph' ? 'derivado' : 'oficial' }; }) };
     }
 
     /* ---------- Sueldos de los cargos ---------- */
@@ -1984,7 +2016,8 @@
         var km = metrica(t, MET_MUN) || (sigue && ctx.tipo === 'mun' ? ctx.met : '');
         if (!mm) return fin(conLiga(munRanking(km, dir, cuantos, es[0]), 'numeros-baja-al-territorio.html', 'Baja al territorio'), { tipo: 'mun', met: km });
         var rm = munMet(mm.m, km, mm.otros);
-        rm.ir = km === 'inv' && mm.m.v ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html?ml=inv#mapa-municipios', 'sus municipios en el Planisferio']
+        rm.ir = (km === 'pob' || km === 'iph') && mv(mm.m, km) != null ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html?ml=' + km + '#mapa-municipios', 'sus municipios en el Planisferio']
+          : km === 'inv' && mm.m.v ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html?ml=inv#mapa-municipios', 'sus municipios en el Planisferio']
           : km === 'deu' && mm.m.v ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-deuda.html', 'la deuda de sus municipios en el Planisferio']
           : ['herramienta-inspector-entes.html#ente=municipal:' + mm.m.cve, 'su ficha técnica en el Auditor de entes públicos'];
         rm.ficha = B.fichas.filter(function (f) { return f.t === 'municipio' && f.ir[0].slice(-5) === mm.m.cve; })[0];

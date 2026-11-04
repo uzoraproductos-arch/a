@@ -114,7 +114,7 @@ TEMAS = [
     ('legislativa', '🏛️', 'Su congreso', 'Lo que gastó su congreso, cuántas curules tiene y el tope de la Constitución.'),
     ('judicial', '⚖️', 'Su Poder Judicial', 'Lo que ejerció, lo que le entró, lo que concluyó y sus causas pendientes.'),
     ('salud', '🩺', 'Su salud pública', 'El IMSS y el ISSSTE en el estado: personas, consultas, médicos, camas y unidades.'),
-    ('social', '🫂', 'Su pobreza y sus carencias', 'Cuántas personas viven en pobreza, sus seis carencias y lo que le aporta la Federación.'),
+    ('social', '🫂', 'Su pobreza y sus carencias', 'Cuántas personas viven en pobreza, sus seis carencias, lo que le aporta la Federación y su gente, municipio por municipio.'),
     ('administracion', '🏢', 'Su administración pública', 'El gobierno que ejecuta: su personal, lo que ejerció y sus contratos sin concurso.'),
     ('ambiental', '🌎', 'Sus recursos naturales', 'Sus acuíferos, bosques, incendios, pesca, minas y su refinería, si la tiene.'),
     ('leyes', '📜', 'Sus leyes del dinero', 'Con qué leyes cobra, compra, se endeuda y rinde cuentas, y dónde se publican.'),
@@ -162,12 +162,18 @@ LENTES_MUN = [
      'La obra pública y los proyectos productivos que pagó cada municipio en 2024: su capítulo de inversión pública. Un municipio con cuenta y sin ese capítulo reportó $0.'),
     ('invp', 'Inversión de cada $100', 'verde',
      'De cada $100 de su egreso de 2024, cuántos fueron a inversión pública: inversión ÷ egreso total × 100. El egreso total del INEGI cuenta también lo que quedó en caja al cierre. Ojo: donde el fondo de infraestructura social municipal (FAIS) pesa mucho, la proporción sube sola, porque la ley lo destina a obra para la población en pobreza (Ley de Coordinación Fiscal, art. 33).'),
+    ('pob', 'Población', 'azul',
+     'Cuántas personas vivían en cada municipio según el Censo de Población y Vivienda 2020 del INEGI, el último conteo completo. Es de 2020, no de hoy.'),
+    ('iph', 'Ingreso por habitante', 'verde',
+     'Cuánto ingresó cada municipio en 2024 por cada persona que vivía ahí en 2020: ingreso total 2024 ÷ población del Censo 2020. Mezcla dos años, porque el INEGI no ha publicado un conteo más reciente: es una referencia para comparar, no lo que le toca a cada quien.'),
     ('dpag', 'Pagó de deuda', 'rojo',
      'Lo que cada municipio pagó en 2024 por sus créditos: el capital que devolvió, los intereses y las comisiones. Es lo que pagó, no lo que debe. En el tono más claro, los que reportaron $0.'),
     ('emp', 'Pidió prestado', 'rojo',
      'Los préstamos que cada municipio recibió en 2024 (el concepto «Empréstitos» de su cuenta). Casi todos reportaron $0: van en el tono más claro.'),
 ]
 PCT_MUN = ('dep', 'invp')
+# Las lentes que no van en millones de pesos: su unidad y, si no es el del padrón, su año.
+UNI_MUN = {'pob': ('per', 2020), 'iph': ('pes', '2024 ÷ 2020')}
 # Las lentes donde el $0 es lo común: el $0 lleva su propio tono y los cortes
 # se sacan de los que sí reportaron algo.
 CERO_MUN = ('dpag', 'emp')
@@ -185,6 +191,25 @@ def inv_mun(padron):
         raise SystemExit('planisferio: municipios-inversion.js no trae a los mismos municipios con cuenta que el padrón (sobran %s; faltan %s)' % (
             sorted(set(iv['mun']) - con)[:5], sorted(con - set(iv['mun']))[:5]))
     return iv
+
+
+_POB = []
+
+
+def pob_mun(padron):
+    """La población de cada municipio (municipios-poblacion.js, la escribe
+    anclar_poblacion_municipios.py desde el Censo 2020). Se detiene si trae una
+    clave que no está en el padrón o si no suma el país."""
+    if _POB:
+        return _POB[0]
+    t = open(os.path.join(RAIZ, 'assets', 'auditor', 'js', 'municipios-poblacion.js'), encoding='utf-8').read()
+    i = t.index('window.AUDIT_MUN_POB =') + len('window.AUDIT_MUN_POB =')
+    pv = json.loads(t[i:t.rindex(';')])
+    pad = {m['cve'] + r[0] for m in padron['ent'].values() for r in m['lista']}
+    if not set(pv['mun']) <= pad or sum(v[0] for v in pv['mun'].values()) != pv['nacional']:
+        raise SystemExit('planisferio: municipios-poblacion.js no cuadra con el padrón (sobran %s)' % sorted(set(pv['mun']) - pad)[:5])
+    _POB.append(pv)
+    return pv
 
 
 def deu_mun(padron):
@@ -208,11 +233,11 @@ MAPA_MUN = """<div class="pl-lentes" role="radiogroup" aria-label="Qué ver en e
               <figcaption class="pl-leyenda" id="plMunLeyenda"></figcaption>
             </figure>
             <aside class="pl-ficha" id="plMunFicha" aria-live="polite">
-              <p class="pl-ficha-vacia"><b>Toca un municipio.</b> Verás lo que ingresó en %d, de dónde le llegó, lo que invirtió, lo que pagó de deuda y la puerta a su ficha en el Auditor de entes.</p>
+              <p class="pl-ficha-vacia"><b>Toca un municipio.</b> Verás cuántas personas viven ahí, lo que ingresó en %d, de dónde le llegó, lo que invirtió, lo que pagó de deuda y la puerta a su ficha en el Auditor de entes.</p>
             </aside>
           </div>
           <p class="pl-pie">Límites: %s (<a href="%s">descarga del INEGI</a>), integrados el %s; huella SHA-256 del archivo de origen <code>%s</code>. Simplificados para verse en pantalla. %s
-          Cifras: INEGI, finanzas públicas municipales %d %s. %s</p>
+          Cifras: INEGI, finanzas públicas municipales %d %s. Población: INEGI, Censo de Población y Vivienda 2020 %s (<a href="%s">datos abiertos</a>, huella <code>%s</code>); los municipios creados después del Censo no tienen esa cifra. %s</p>
           <script type="application/json" id="plMunDatos">%s</script>"""
 
 
@@ -230,6 +255,9 @@ def _mapa_mun(e, m, g, ref, padron, iv, dv):
         if r[0] >= '990':
             continue
         x = {'c': r[0], 'n': r[1]}
+        pb = pob_mun(padron)['mun'].get(m['cve'] + r[0])
+        if pb:
+            x['pob'] = pb[0]
         if len(r) >= 10:
             ing, part, aport, fortamun, fismdf, predial = r[2], r[3], r[4], r[5], r[6], r[7]
             x.update({'ing': round(ing / 1e6, 1), 'part': round(part / 1e6, 1), 'aport': round(aport / 1e6, 1),
@@ -239,6 +267,8 @@ def _mapa_mun(e, m, g, ref, padron, iv, dv):
             x.update({'inv': round(v[0] / 1e6, 1), 'invp': round(v[0] / r[9] * 100, 1) if r[9] else None})
             d = dv['mun'][m['cve'] + r[0]]
             x.update({'dpag': round((d[1] + d[2] + d[3]) / 1e6, 1), 'emp': round(d[5] / 1e6, 1), 'adef': round(d[4] / 1e6, 1)})
+            if pb:
+                x['iph'] = round(ing / pb[0])
         datos.append(x)
     svg = '<svg class="pl-svg pl-svg-mun" viewBox="0 0 %s %s" role="group" aria-label="Los municipios de %s">%s</svg>' % (
         g['vb'][0], g['vb'][1], e['name'], ''.join(
@@ -249,10 +279,12 @@ def _mapa_mun(e, m, g, ref, padron, iv, dv):
     sin = None if m['conCifra'] else ('Las alcaldías de la Ciudad de México no rinden cuenta municipal al INEGI: '
                                       'su dinero va dentro del presupuesto de la Ciudad.')
     info = {'ent': e['abbr'], 'cve': m['cve'], 'pend': 'municipios-sin-cuenta', 'anio': padron['anio'], 'sin': sin,
-            'lentes': [{'id': i, 'nom': n, 'pal': p, 'que': q, 'u': 'pct' if i in PCT_MUN else 'mdp', 'cero': i in CERO_MUN} for i, n, p, q in LENTES_MUN], 'm': datos}
+            'lentes': [dict({'id': i, 'nom': n, 'pal': p, 'que': q, 'u': 'pct' if i in PCT_MUN else 'mdp', 'cero': i in CERO_MUN},
+                           **({'u': UNI_MUN[i][0], 'anio': UNI_MUN[i][1]} if i in UNI_MUN else {})) for i, n, p, q in LENTES_MUN],
+            'pob': {'anio': 2020, 'ref': 'ref-inegi-censo-2020', 'url': pob_mun(padron)['pagina']}, 'm': datos}
     return MAPA_MUN % (
         '' if sin else lentes, svg, padron['anio'], g['fuente'], g['url'], g['integrado'], g['sha256'][:12] + '…', g['aviso'],
-        padron['anio'], ref('ref-inegi-efipem'),
+        padron['anio'], ref('ref-inegi-efipem'), ref('ref-inegi-censo-2020'), pob_mun(padron)['pagina'], pob_mun(padron)['sha256'][:12] + '…',
         ('En gris, todas, porque no rinden cuenta municipal %s.' % chip('pendiente', 'municipios-sin-cuenta') if sin else
          'En gris, los municipios que no rindieron su cuenta de %d %s.' % (padron['anio'], chip('pendiente', 'municipios-sin-cuenta'))),
         _json(info))
@@ -385,7 +417,7 @@ def _datos(base, padron):
         # federales de 2026 por persona en pobreza (derivado).
         z = so[e['abbr']]
         filas[-1].update({'soP': z['p'], 'soN': z['pers'], 'soX': z['x'], 'soI': z['ing'], 'soS': z['car']['seg'], 'soA': z['car']['sal'],
-                          'soR': z['car']['rez'], 'soQ': z['r33'],
+                          'soR': z['car']['rez'], 'soQ': z['r33'], 'soT': pob_mun(padron)['ent'][padron['ent'][e['abbr']]['cve']],
                           'soc': {'m': z['m'], 'ix': z['ingx'], 'v': z['car']['viv'], 'b': z['car']['bas'], 'al': z['car']['ali'], 'pt': z['pobT'], 'u': z['url']}})
         x = ap[e['abbr']]
         filas[-1].update({'apP': x['per'], 'apK': x['perk'], 'apX': x['pres'], 'apD': x['ad'], 'apG': x['gpa'], 'apM': x['mpres'], 'apA': x['mpa'],
@@ -544,6 +576,10 @@ LENTES = [
              '(educación, salud, seguridad social, vivienda, servicios en la vivienda o alimentación). Es lo que mide el INEGI en los hogares, no el resultado de un solo gobierno.')},
     {'id': 'soN', 'dim': 'social', 'fmt': 'n', 'nom': 'Personas en pobreza', 'pal': 'rosa', 'est': 'derivado', 'anio': 2024,
      'que': 'Cuántas personas: el porcentaje en pobreza × la población que el INEGI usó en su medición. Los estados grandes salen arriba por tamaño, aunque su porcentaje sea bajo.'},
+    {'id': 'soT', 'dim': 'social', 'fmt': 'n', 'nom': 'Población total', 'pal': 'rosa', 'est': 'oficial', 'anio': 2020,
+     'que': ('Cuántas personas vivían en cada estado según el Censo de Población y Vivienda 2020 del INEGI, el último conteo completo: la suma de sus municipios. '
+             'Ojo: hay tres poblaciones y no se mezclan. La medición de la pobreza 2024 usa la suya, estimada con la encuesta de hogares, y el chat dice la de hoy con las proyecciones del CONAPO; '
+             'esta es la única que se contó persona por persona, y la única que baja a cada municipio.')},
     {'id': 'soX', 'dim': 'social', 'fmt': 'pct', 'nom': 'Pobreza extrema', 'pal': 'rosa', 'est': 'oficial', 'anio': 2024,
      'que': ('De cada 100 personas, cuántas viven en pobreza extrema: su ingreso no alcanza ni para la canasta alimentaria y tienen tres o más carencias. '
              'En los estados donde es muy baja, el INEGI avisa que la cifra es menos precisa (su coeficiente de variación es moderado o bajo).')},
@@ -723,6 +759,9 @@ def _fuentes(ref, base=None):
     import dimension_social as dso
     so_f, so_p = dso.fuente()
     soc = ('%s (<a href="%s">presentación de resultados</a>; cada estado con su infografía y su huella SHA-256 en <code>docs/social/pobreza-entidades-2024.json</code>)') % (so_f, so_p)
+    pv = pob_mun(_padron())
+    extra['soT'] = ('INEGI, Censo de Población y Vivienda 2020, principales resultados por localidad (ITER) %s (<a href="%s">datos abiertos</a>; huella SHA-256 <code>%s…</code>). '
+                    'Sus municipios suman justo el total del estado.') % (ref('ref-inegi-censo-2020'), html.escape(pv['pagina']), pv['sha256'][:12])
     extra.update({'soP': soc + '.', 'soX': soc + '. Donde la cifra es baja, el INEGI la marca con coeficiente de variación moderado o bajo.', 'soI': soc + '.',
                   'soS': soc + '.', 'soA': soc + '.', 'soR': soc + '.',
                   'soN': 'Porcentaje en pobreza × población de la misma infografía (%s). La multiplicación es nuestra.' % soc})
@@ -942,7 +981,8 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
                   'La última lente pone a los médicos del IMSS en ese mismo registro, para comparar las dos con la misma regla.'),
         'social': ('La pobreza en cada estado, como la mide el INEGI con la Encuesta de Ingresos y Gastos de los Hogares 2024 y la metodología del CONEVAL: '
                    'cuántas personas la viven y cuántas en pobreza extrema, cuántas tienen un ingreso que no alcanza y las tres carencias que más pesan '
-                   '(seguridad social, servicios de salud y rezago educativo). La última lente pone junto a eso lo que la Federación le aporta a cada estado por persona en pobreza.'),
+                   '(seguridad social, servicios de salud y rezago educativo). La última lente pone junto a eso lo que la Federación le aporta a cada estado por persona en pobreza. '
+                   'Y su gente: cuántas personas vivían en cada estado en el Censo de Población y Vivienda 2020, el último conteo completo, que en cada portal se abre municipio por municipio.'),
         'administracion': ('El gobierno que ejecuta, en los tres niveles. De la administración de cada estado, lo que le reportó al censo del INEGI: cuánta gente tiene, '
                            'cuánto ejerció en 2024 y cuántos de sus contratos dio por adjudicación directa. De sus municipios, cuánto ejercieron. Y de los dos, lo que la '
                            'Auditoría Superior de la Federación dejó por aclarar del dinero federal de la Cuenta Pública 2024. La ficha trae además el nivel federal, para comparar.'),
@@ -1200,12 +1240,53 @@ def _social_portal(base, ref, e):
               ('$' + format(z['r33'], ',')) if z['r33'] else 'sin cifra', chip('derivado'), lug(lambda r: r['r33'] or 0),
               html.escape(z['url']), html.escape(nom), z['sha'][:12])
     p2 = '<article class="pl-piso"><h3>📋 Sus seis carencias sociales · 2024</h3><dl class="pl-dl">%s</dl><p class="pl-piso-f">De cada 100 personas del estado. Misma infografía del INEGI.</p></article>' % car
+    p3 = _gente_portal(ref, e)
     ciego = ('<p class="pl-dim-nota"><b>Lo que estas cifras no dicen.</b> La pobreza la mide el INEGI en los hogares y la mueven los tres niveles de gobierno, la economía y las remesas: '
              'no es la calificación de un gobierno. «Sin acceso a servicios de salud» mide la afiliación, no si la clínica tiene médico o medicina. Y las aportaciones por persona en pobreza '
              'no son lo que le llega a cada persona: el Ramo 33 paga sobre todo maestros y salud.</p>')
     ir = ('<p class="pl-ficha-ir"><a href="planisferio.html?d=social&amp;e=%s">La pobreza de los 32 estados, en el mapa ➔</a> '
           '<a href="contexto-dimensional-social.html">Los programas sociales del país, en el Contexto dimensional ➔</a></p>') % quote(a)
-    return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, ir)
+    return '<div class="pl-pisos">%s%s</div>%s%s%s' % (p1, p2, p3, ciego, ir)
+
+
+def _gente_portal(ref, e):
+    """Su gente, municipio por municipio (04-11-2026, pedido del autor): la
+    población del Censo 2020 de cada municipio y su ingreso 2024 por habitante.
+    Lo mismo que pinta el mapa de sus municipios con las lentes «Población» e
+    «Ingreso por habitante»."""
+    padron = _padron()
+    pv = pob_mun(padron)
+    a, nom = e['abbr'], e['name']
+    m = padron['ent'][a]
+    filas = []
+    for r in m['lista']:
+        if r[0] >= '990':
+            continue
+        p = pv['mun'].get(m['cve'] + r[0])
+        filas.append((r[1], p[0] if p else None, round(r[2] / p[0]) if p and len(r) >= 10 and r[2] else None))
+    con = sorted((f for f in filas if f[1]), key=lambda f: -f[1])
+    tot = pv['ent'][m['cve']]
+    nuevos = [f[0] for f in filas if f[1] is None]
+    cinco = lambda xs, k: ' · '.join('%s <small>(%s)</small>' % (html.escape(f[0]), k(f)) for f in xs)
+    ip = sorted((f for f in filas if f[2]), key=lambda f: -f[2])
+    gente = ('<dt>Población del estado (Censo 2020)</dt><dd>%s personas %s <small>en %d %s; los cinco más poblados juntan %s de cada 100</small></dd>'
+             '<dt>Los más poblados</dt><dd>%s</dd><dt>Los menos poblados</dt><dd>%s</dd>') % (
+        format(tot, ','), chip('oficial'), len(con), 'municipios' if m['conCifra'] else 'alcaldías', format(round(sum(f[1] for f in con[:5]) / tot * 100, 1), '.1f'),
+        cinco(con[:5], lambda f: format(f[1], ',')), cinco(con[::-1][:5], lambda f: format(f[1], ',')))
+    if ip:
+        gente += ('<dt>Ingreso por habitante: el más alto y el más bajo</dt><dd>%s %s <small>2024 ÷ Censo 2020</small></dd>') % (
+            cinco([ip[0], ip[-1]], lambda f: '$' + format(f[2], ',')), chip('derivado'))
+    pie = ('INEGI, Censo de Población y Vivienda 2020 %s (huella SHA-256 <code>%s…</code>), e ingresos municipales 2024 %s. '
+           'Los más poblados juntan: suma de los cinco ÷ población del estado × 100; el ingreso por habitante: ingreso total 2024 ÷ población de 2020. Las cuentas son nuestras.') % (
+        ref('ref-inegi-censo-2020'), pv['sha256'][:12], ref('ref-inegi-efipem'))
+    if nuevos:
+        pie += ' %s no existía%s en el Censo 2020: sus habitantes se contaron en el municipio del que se separó%s.' % (
+            ', '.join(html.escape(x) for x in nuevos), 'n' if len(nuevos) > 1 else '', 'n' if len(nuevos) > 1 else '')
+    if not m['conCifra']:
+        pie += ' Las alcaldías no rinden cuenta municipal al INEGI: no hay ingreso por habitante.'
+    return ('<article class="pl-piso"><h3>👥 Su gente, municipio por municipio</h3><dl class="pl-dl">%s</dl><p class="pl-piso-f">%s</p>'
+            '<p class="pl-piso-f"><a href="%s?ml=pob#mapa-municipios">Su población en el mapa de sus municipios ➔</a>%s</p></article>') % (
+        gente, pie, portal(a), '' if not m['conCifra'] else ' <a href="%s?ml=iph#mapa-municipios">Su ingreso por habitante ➔</a>' % portal(a))
 
 
 def _nota_apu(filas):
@@ -1992,7 +2073,8 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
              'tarjetas': [], 'bloque': _salud_portal(base, ref, e)},
             {'id': 'social', 'titulo': 'Su pobreza y sus carencias',
              'texto': ('Cuántas personas viven en pobreza en %s, cuántas en pobreza extrema, sus seis carencias sociales frente al país y lo que la Federación le aporta '
-                       'por persona en pobreza. Las cifras son de la medición de la pobreza 2024 del INEGI.') % nom,
+                       'por persona en pobreza, de la medición de la pobreza 2024 del INEGI. Y su gente, municipio por municipio: cuántas personas viven en cada uno según el Censo 2020 '
+                       'y cuánto ingresó cada municipio por habitante.') % nom,
              'tarjetas': [], 'bloque': _social_portal(base, ref, e)},
             {'id': 'administracion', 'titulo': 'Su administración pública',
              'texto': ('El gobierno que ejecuta, en los tres niveles: cuánta gente tiene la administración de %s, cuánto ejerció en 2024 y cuántos contratos dio sin concurso; '
