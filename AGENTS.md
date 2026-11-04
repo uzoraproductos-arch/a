@@ -204,6 +204,18 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   (derechohabientes, consultas, cirugías) sigue con su ficha. Se abre con
   `planisferio.html?d=salud` y cada portal la trae en `#salud`.
 - **La administración pública, octava dimensión pintada** (03-11-2026, pedido del autor: «qué funciones tiene… sus auditorías… en los tres niveles»). El gobierno que ejecuta: la federal, las 32 estatales y las municipales. Todo sale de `herramientas/administracion_publica.py`, con los censos de gobierno del INEGI (CNGF-E 2025 y CNGMD 2025, con huella; si una tabla no suma el total que el reporte dice en su texto, se detiene) y la Matriz de la ASF que ya está en la base. Lo leen la Enciclopedia (Datos › Administración pública), el Planisferio (`?d=administracion`, `#administracion` en cada portal) y el chat (`D.apu`, `apuEdo()` antes que las columnas). **Lo del censo se dice como lo que cada gobierno reportó, nunca como auditoría**, y el personal de dos estados no se compara sin decir que el censo no dice qué organismos incluyó cada uno; **la adjudicación directa cuenta contratos, no pesos, y no se dice como irregularidad**; y lo que dejó la ASF es solo del dinero federal.
+- **La social, novena dimensión pintada** (04-11-2026). La pobreza de cada estado, de las
+  infografías del INEGI, Pobreza multidimensional 2024 (`anclar_pobreza_estados.py` →
+  `docs/social/pobreza-entidades-2024.json`, con huellas; si moderada + extrema no da la pobreza
+  publicada o los 32 no suman el país, se detiene), y las aportaciones 2026 por persona en pobreza.
+  Todo sale de `herramientas/dimension_social.py`, que leen el Planisferio (`?d=social`, `#social`) y
+  el chat (`socEdo()`). **La pobreza no se dice como calificación de un gobierno, y las aportaciones
+  por persona en pobreza no son lo que le llega a cada persona.**
+- **Cada dimensión va vinculada al Contexto dimensional y al estado de resultados** (04-11-2026,
+  pedido del autor). `CONTEXTO` de `dimension_social.py` dice qué página del Contexto dimensional mira
+  cada dimensión a nivel federal: **una dimensión nueva necesita ahí su renglón**, o la generación se
+  detiene. El mapa, cada portal y cada ficha llevan además el estado de resultados del Gobierno y el
+  estado de cuenta del estado; el Contexto dimensional y el estado de resultados llevan de vuelta.
 - **Las leyes del dinero en los tres niveles** (03-11-2026,
   `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
   cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y
@@ -887,6 +899,12 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   contrato abierto el importe suele ser el máximo, no lo pagado. **Las personas
   físicas no se publican** (su RFC es un dato personal), y tener contratos no
   es una irregularidad: así se dice en cada respuesta.
+  **Las señales de fraccionamiento** (04-11-2026, `herramientas/fraccionamiento.py`, sección
+  `#fraccionamiento` y `fraccCmx()` del chat): adjudicaciones directas por monto de la misma unidad,
+  empresa y partida que en 90 días rebasan el tope del Anexo 9 del PEF (LAASSP art. 55; Reglamento
+  art. 111). **Se dicen siempre como señal para revisar, nunca como irregularidad**, sin nombrar a la
+  empresa; los topes de cada año van en `ANEXO9` y se cotejan contra el DOF; lo que depende del escalón
+  de cada dependencia queda pendiente (`fracc-escalon`).
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).

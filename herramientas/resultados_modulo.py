@@ -241,4 +241,10 @@ def construir(base, ref, glos):
         </div>
         %s
         %s
-      </div>''' % (cab, botones, '\n        '.join([p_pres, p_act, p_flu, p_sit, p_soc, p_con]), otra, correccion)
+        %s
+      </div>''' % (cab, botones, '\n        '.join([p_pres, p_act, p_flu, p_sit, p_soc, p_con]), otra, correccion,
+                   # La vuelta del Planisferio (04-11-2026): el mismo estado de
+                   # resultados, gobierno por gobierno.
+                   '<p class="er-pie"><b>🗺️ Gobierno por gobierno:</b> el estado de cuenta y de resultados de cada estado vive en su ficha del '
+                   '<a href="herramienta-inspector-entes.html">Auditor de entes</a>, y el <a href="planisferio.html">Planisferio</a> pone sus cifras en el mapa, '
+                   'dimensión por dimensión, con la puerta a su ficha.</p>')

@@ -171,3 +171,8 @@ p.pl-ficha-ir a:hover, p.pl-ficha-ir a:focus-visible { background: #16408c; }
 .pl-fin-mod h3 { margin: 0 0 4px; font-size: 20px; color: #0b2a63; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pl-fin-tit, :root:not([data-theme="light"]) .pl-fin-mod h3 { color: #c9d8f2; } }
 :root[data-theme="dark"] .pl-fin-tit, :root[data-theme="dark"] .pl-fin-mod h3 { color: #c9d8f2; }
+
+/* Los vínculos al Contexto dimensional y al estado de resultados (04-11-2026). */
+.pl-ctx { text-decoration: none; }
+.pl-ctx-l { margin: 14px 0 0; line-height: 1.9; }
+.pl-ctx-l a { margin-right: 10px; }

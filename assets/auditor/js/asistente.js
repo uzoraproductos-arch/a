@@ -1012,6 +1012,71 @@
     }, function () { return { html: '<p>No pude descargar ahora el catálogo de contratos.</p>', ir: [CMX_PAG, 'Contratos públicos'], sug: [], rec: [] }; }), tit: 'Contratistas en la lista 69-B' };
   }
 
+  /* Señales de fraccionamiento (03-11-2026): adjudicaciones directas por monto
+     de la misma unidad, empresa y partida que en 90 días rebasan el tope del
+     Anexo 9 del PEF. Lo escribe herramientas/fraccionamiento.py. Es una señal
+     para revisar, nunca una irregularidad, y no nombra a las empresas. */
+  var FRACC_PAG = CMX_PAG + '#fraccionamiento';
+  function fraccDatos() { return cargaJs('assets/auditor/data/fraccionamiento.js', function () { return window.CMX_FRACC; }); }
+  function fraccPide(p) {
+    if (/\bcontratos? partidos?\b/.test(p) || /\b(partir|partieron|parten|dividir|dividieron|dividen)\b.*\b(compras?|contratos?)\b/.test(p)) return true;
+    return /\bfraccion(amiento|amientos|ar|ada|adas|ado|ados|an|aron)\b/.test(p) && /\b(contrat\w*|compras?|adjudica\w*|senal\w*|señal\w*|topes?|comprasmx)\b/.test(p);
+  }
+  function fraccCaveat() {
+    return '<p class="pa-chico">⚖️ Es una <b>señal para revisar, no una irregularidad</b>: la partida junta bienes parecidos, no «exactamente los mismos»; el archivo no trae el área que los pidió, y si se pudieron prever juntos no se ve en los datos. No nombramos a las empresas: cada contrato lleva su liga a ComprasMX.</p>';
+  }
+  function fraccCmx(q) {
+    var p = plano(q);
+    if (!fraccPide(p)) return null;
+    return { espera: fraccDatos().then(function (D) {
+      var M = D.meta, T = D.tot, A = Object.keys(T).sort(), fu = cmxFuente(M), ci = [];
+      var fuentes = [fu].concat(A.map(function (a) { return { tx: M.anexo9[a].doc, url: M.anexo9[a].url }; })).concat([{ tx: M.reglamento.texto, url: M.reglamento.url }]);
+      var f = null;
+      D.i.forEach(function (x) {
+        if (f) return;
+        var s = plano(x.s).trim();
+        if (s.length > 2 && p.indexOf(' ' + s + ' ') >= 0) f = x;
+      });
+      if (!f) D.i.forEach(function (x) {
+        if (f) return;
+        var ws = plano(x.n).trim().split(' ').filter(function (w) { return w.length > 3; });
+        if (ws.length > 1 && ws.every(function (w) { return p.indexOf(' ' + w + ' ') >= 0; })) f = x;
+      });
+      var topes = A.map(function (a) { return a + ': de ' + pesosCmx(M.anexo9[a].min) + ' a ' + pesosCmx(M.anexo9[a].max); }).join('; ');
+      var h;
+      if (f) {
+        var nA = A.reduce(function (s, a) { return s + f[a].A[0]; }, 0);
+        h = '<p>🧩 <b>' + esc(f.n) + '</b> (' + esc(f.s) + ') tiene <b>' + nA + ' grupo' + (nA === 1 ? '' : 's') + '</b> de adjudicaciones directas por monto que, con la misma unidad compradora, la misma empresa y la misma partida, suman en ' + M.ventana + ' días más que el tope más alto del Anexo 9 ' + chip({ e: 'derivado' }) + '.</p><ul class="pa-lista">' +
+          A.map(function (a) { var x = f[a]; return '<li><b>' + a + '</b>: ' + x.A[0] + ' grupos, ' + x.A[1] + ' contratos, ' + pesosCmx(x.A[2]) + '. Otros ' + x.B[0] + ' grupos rebasan el tope más bajo; si son señal depende del escalón de la dependencia ' + chip({ e: 'pendiente', p: 'fracc-escalon' }) + '.' + (x.solos ? ' Además, ' + x.solos + ' contrato' + (x.solos === 1 ? '' : 's') + ' «por monto» que por sí solo' + (x.solos === 1 ? '' : 's') + ' rebasa' + (x.solos === 1 ? '' : 'n') + ' el tope más alto.' : '') + '</li>'; }).join('') + '</ul>';
+        var gs = [];
+        A.forEach(function (a) { f[a].g.forEach(function (g) { gs.push([a].concat(g)); }); });
+        gs.sort(function (x, y) { return y[3] - x[3]; });
+        if (gs.length) h += '<p>Los grupos mayores ' + chip({ e: 'oficial' }) + ' (cada contrato, con su liga):</p><ul class="pa-lista">' + gs.slice(0, 5).map(function (g) {
+          return '<li><b>' + pesosCmx(g[3]) + '</b> en ' + g[6].length + ' contratos, del ' + esc(g[4]) + ' al ' + esc(g[5]) + ' · partida ' + esc(g[2]) + '<br><span class="pa-chico">' + esc(g[1]) + '</span><br>' +
+            g[6].map(function (c) { return (c[3] ? '<a href="' + esc(M.detalle.replace('%s', c[3])) + '" target="_blank" rel="noopener">' + esc(c[0]) + ' ↗</a>' : esc(c[0])) + ' ' + pesosCmx(c[1]); }).join(' · ') + '</li>';
+        }).join('') + '</ul>' + (gs.length > 5 ? '<p class="pa-chico">Te muestro 5 de ' + gs.length + '.</p>' : '');
+        ci.push({ v: nA + ' grupos', etq: f.n + ' · señales de fraccionamiento, ' + A.join(' y '), e: 'derivado' });
+        gs.slice(0, 5).forEach(function (g) { ci.push({ v: pesosCmx(g[3]), etq: g[0] + ' · ' + g[1] + ' · ' + g[6].map(function (c) { return c[0]; }).join(', '), e: 'derivado' }); });
+      } else {
+        h = '<p>🧩 La ley prohíbe partir una compra en varias adjudicaciones directas para no pasar del tope (LAASSP, art. 55; su Reglamento, art. 111, dice cuándo hay fraccionamiento). Revisé en ComprasMX las adjudicaciones directas por monto a empresas, con la misma unidad compradora, la misma empresa y la misma partida, en ventanas de ' + M.ventana + ' días:</p><ul class="pa-lista">' +
+          A.map(function (a) { var t = T[a]; return '<li><b>' + a + '</b>: <b>' + t.A[0].toLocaleString('es-MX') + ' grupos</b> (' + t.A[1].toLocaleString('es-MX') + ' contratos, ' + pesosCmx(t.A[2]) + ') rebasan el tope más alto ' + chip({ e: 'derivado' }) + '; otros ' + t.B[0].toLocaleString('es-MX') + ' rebasan el más bajo y dependen del escalón de cada dependencia ' + chip({ e: 'pendiente', p: 'fracc-escalon' }) + '.</li>'; }).join('') + '</ul>' +
+          '<p>Los topes por operación, sin IVA, según el tamaño de la dependencia (Anexo 9 del PEF) ' + chip({ e: 'oficial' }) + ': ' + topes + '.</p>' +
+          '<p>Donde hay más señales:</p><ol class="pa-lista">' + D.i.slice(0, 5).map(function (x) {
+            var n = A.reduce(function (s, a) { return s + x[a].A[0]; }, 0), m = A.reduce(function (s, a) { return s + x[a].A[2]; }, 0);
+            return '<li><button type="button" class="pa-ej" data-pa-pregunta="' + esc('Señales de fraccionamiento de ' + x.s) + '">' + esc(x.n) + '</button> ' + n + ' grupos, ' + pesosCmx(m) + '</li>';
+          }).join('') + '</ol>';
+        A.forEach(function (a) { ci.push({ v: T[a].A[0].toLocaleString('es-MX') + ' grupos', etq: a + ' · rebasan el tope más alto del Anexo 9 en ' + M.ventana + ' días (' + pesosCmx(T[a].A[2]) + ')', e: 'derivado' }); });
+        A.forEach(function (a) { ci.push({ v: pesosCmx(M.anexo9[a].max), etq: a + ' · tope más alto de adjudicación directa, Anexo 9 del PEF', e: 'oficial' }); });
+      }
+      h += fraccCaveat();
+      h += charla && charla.deDonde ? charla.deDonde([{ que: 'Datos relevantes de los contratos de ComprasMX', e: 'oficial', fu: fu }, { que: 'Topes del Anexo 9 del PEF', e: 'oficial', fu: fuentes[1] }]) : '';
+      var tit = f ? 'Señales de fraccionamiento: ' + f.n : 'Señales de fraccionamiento en ComprasMX';
+      return { html: h, ir: [FRACC_PAG, 'Contratos públicos'], rec: [],
+        ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: fuentes, ir: [FRACC_PAG, 'Contratos públicos'] },
+        sug: f ? ['¿A quién le compra ' + f.s + '?', 'Señales de fraccionamiento en ComprasMX'] : ['Señales de fraccionamiento del IMSS', '¿A quién le compra el IMSS?'] };
+    }, function () { return { html: '<p>No pude descargar ahora las señales de fraccionamiento. Revisa tu conexión y vuelve a preguntarme.</p>', ir: [FRACC_PAG, 'Contratos públicos'], sug: [], rec: [] }; }),
+      tit: 'Señales de fraccionamiento' };
+  }
   /* --- Las demás: qué pide el lector y con qué la abrimos. --- */
   var FOLIO_RE = /\bAV-[A-Z0-9]{2,8}-[0-9A-F]{6,}\b|\b[0-9A-F]{64}\b/i, DICT_RE = /\b(DP|NT)-\d{8}-[0-9A-F]{8}\b/i;
   function enteFederal(t) {
@@ -2131,6 +2196,7 @@
     /* El IMSS y el ISSSTE de un estado (03-11-2026): «¿qué estado tiene menos camas del IMSS?» no es la columna del IMSS. */
     var sae = charla && charla.saludEstado && charla.saludEstado(q);
     if (sae) return sae;
+    var sso = charla && charla.social && charla.social(q); if (sso) return sso;
     var sap = charla && charla.administracion && charla.administracion(q); if (sap) return sap;
     var tc = tituloColumna(q);
     if (tc) return tc;
@@ -2148,7 +2214,7 @@
     if (sa) return sa;
     var vc = PIDE_COTEJO.test(plano(q)) && verificado(q);
     if (vc) return vc;
-    var cx = cruceSat(q) || contratosCmx(q);
+    var cx = fraccCmx(q) || cruceSat(q) || contratosCmx(q);
     if (cx) return cx;
     var pe = personaje(q);
     if (pe) return pe;

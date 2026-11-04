@@ -1777,7 +1777,9 @@ def _cmx_meta():
 def contratos_publicos():
     """Contratos publicos de ComprasMX (pedido del autor, 26-10-2026: «integra
     los contratos de ComprasMX» para seguir el dinero). El buscador y el
-    cruce los pinta contratos.js con los catalogos de actualizar_comprasmx.py."""
+    cruce los pinta contratos.js con los catalogos de actualizar_comprasmx.py.
+    Las senales de fraccionamiento (03-11-2026) las escribe fraccionamiento.py."""
+    import fraccionamiento
     m, cruce = _cmx_meta()
     arch = ''.join('<li><b>%s</b>: %s contratos <small>(sha256 %s…)</small></li>' % (a['archivo'], format(a['contratos'], ','), a['sha256'][:12])
                    for a in m['archivos'])
@@ -1788,7 +1790,7 @@ def contratos_publicos():
         'entrada': ('Los contratos que las dependencias federales y los gobiernos que usan ComprasMX reportaron en los expedientes de 2025 y 2026: '
                     '%s empresas y %s instituciones. Busca una empresa, su RFC o una institución, y ve cuántos contratos tiene, por cuánto, '
                     'por qué procedimiento y la liga de cada uno a ComprasMX. También puedes preguntárselo al Auditor: «contratos de Laboratorios Pisa», '
-                    '«¿a quién le compra el IMSS?».' % (format(m['proveedores'], ','), format(m['instituciones'], ','))),
+                    '«¿a quién le compra el IMSS?». Y revisa las señales de contratos partidos para no pasar del tope de la adjudicación directa.' % (format(m['proveedores'], ','), format(m['instituciones'], ','))),
         'estilos': ['contratos.css'],
         'scripts': ['contratos.js'],
         'secciones': [
@@ -1804,6 +1806,7 @@ def contratos_publicos():
              'texto': ('Cruzamos, por RFC, a cada proveedor con contratos contra el listado del artículo 69-B del SAT (empresas que facturan '
                        'operaciones inexistentes). Al corte de esta versión aparecen %d. Aparecer no es una condena: cada uno lleva su situación.' % cruce),
              'tarjetas': [], 'bloque': '<div class="cmx-cruce" id="cmxCruce"><p>Cargando el cruce…</p></div>'},
+            fraccionamiento.seccion(),
             {'id': 'metodo', 'titulo': 'De dónde salen los datos', 'texto': 'Lo que dice el documento y lo que no.', 'tarjetas': [],
              'bloque': ('<div class="cmx-metodo">\n'
                         '          <p>Fuente: <a href="%s" target="_blank" rel="noopener">ComprasMX, Datos Abiertos ↗</a>, «Datos relevantes de los contratos ingresados a la plataforma», '
