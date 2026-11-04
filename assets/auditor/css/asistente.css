@@ -483,6 +483,18 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .pa-reportero .pa-lista { padding-left: 20px; }
 .pa-reportero .pa-lista li { margin-bottom: 8px; }
 .pa-reportero small { font-size: 14px; color: #44526b; }
+/* La capa de cada modo (04-11-2026): Inspector, Ciudadano y Ambientalista, como la nota del Periodista. */
+.pa-capa { margin-top: 14px; padding: 14px 16px; border-left: 4px solid #0b2a63; background: #f4f7fc; border-radius: 0 12px 12px 0; }
+.pa-capa-t { margin: 0 0 6px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; font-size: 14px; color: #0b2a63; }
+.pa-capa-ciudadano { border-left-color: #a8801f; background: #fbf6e9; }
+.pa-capa-ciudadano .pa-capa-t { color: #6b4f0c; }
+.pa-capa-ambientalista { border-left-color: #2e8a4c; background: #eef7f0; }
+.pa-capa-ambientalista .pa-capa-t { color: #1d5e33; }
+.pa-capa-corto { font-size: 17px; font-weight: 600; color: #13284a; }
+.pa-capa .pa-lista { padding-left: 20px; }
+.pa-capa .pa-lista li { margin-bottom: 8px; }
+.pa-modo-sug-p { margin: 12px 0 0; }
+.pa-burbuja .pa-modo-sug { min-height: 44px; text-align: left; }
 /* «¿Sabías esto?» del Periodista (29-10-2026): va entre las preguntas de ejemplo, con su seña. */
 .pa-ej-sabias { border-color: #b3412e; background: #fbf7f2; border-radius: 18px; }
 .pa-ej-sena { display: block; font-size: 12px; font-weight: 800; color: #b3412e; letter-spacing: .02em; margin-bottom: 2px; }
