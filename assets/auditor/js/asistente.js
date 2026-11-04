@@ -202,19 +202,23 @@
       '<p><b>Por qué falta:</b> ' + esc(f.pend.pq) + '</p>' +
       '<p><b>A quién le toca:</b> ' + esc(f.pend.quien) + '</p>' +
       '<p><b>Dónde debería estar:</b> <a href="' + esc(f.pend.donde) + '" target="_blank" rel="noopener noreferrer">' + esc(f.pend.donde_tx) + ' ↗</a></p></div>' : '';
-    var ir = r.ir || f.ir;
+    var ir = r.ir || f.ir, m = modoVivo(), cm = MODO_ICO[m] ? capaModo(q, r, m) : null;
+    var capa = cm && cm.html ? cm.html.replace(/<button\b[^>]*>[\s\S]*?<\/button>/g, '') : '';
     var resp = r.html.replace(/<details class="pa-dedonde"/g, '<details class="pa-dedonde" open');
     return '<article class="pa-nota dic-doc">' +
       '<header class="dic-cab"><div class="dic-cab-marca"><img src="' + LOGO + '" alt="" width="62" height="48">' +
       '<div><b>Auditavisión</b><small>Plataforma ciudadana de fiscalización del gasto público</small></div></div>' +
       '<div class="dic-sello">' + sello(null, 'DICTAMEN') + '</div>' +
-      '<div class="dic-cab-tx"><span class="pa-nota-tipo">Dictamen cívico independiente · ' + esc(t[1]) + '</span>' +
+      '<div class="dic-cab-tx"><span class="pa-nota-tipo">Dictamen cívico independiente · ' + esc(t[1]) + (capa ? ' · ' + MODO_ICO[m] + ' Modo ' + MODO_NOM[m] : '') + '</span>' +
       '<dl><div><dt>Folio</dt><dd class="pa-folio">calculando…</dd></div><div><dt>Expedido</dt><dd>' + esc(hoy()) + '</dd></div>' +
       '<div><dt>Versión de la plataforma</dt><dd>' + esc(selloSitio()) + '</dd></div></dl></div></header>' +
       '<h2 class="dic-tit"><span aria-hidden="true">' + t[0] + '</span> ' + esc(f.tit) + '</h2>' +
       cap('Planteamiento') + '<p class="pa-nota-q"><span>La pregunta</span> «' + esc(q) + '»</p>' +
       (antes.length ? '<p class="dic-chico">Se hizo en la plática después de: ' + antes.map(function (x) { return '«' + esc(x) + '»'; }).join(' → ') + '.</p>' : '') +
       cap('Respuesta del Auditor') + '<div class="dic-resp">' + resp + '</div>' +
+      (capa ? cap('La lectura del modo ' + MODO_NOM[m]) +
+        '<p class="dic-chico">Pediste el dictamen en el modo ' + MODO_NOM[m] + ': esta es su forma de leer la misma respuesta. El modo cambia cómo se cuenta, nunca los datos: no agrega cifras y no entra a la huella.</p>' +
+        '<div class="dic-resp dic-modo">' + capa + '</div>' : '') +
       (f.txt && f.t !== 'calculo' ? '<p class="pa-nota-tx"><b>La ficha completa:</b> ' + esc(f.txt) + '</p>' : '') +
       (ci ? cap('Hallazgos: las cifras') + '<ul class="pa-cifras">' + ci + '</ul>' : '') +
       (f.cot && f.cot.length && charla ? cap('Cotejo de lo que circula') +
@@ -403,8 +407,13 @@
      plática: lleva la pregunta y las cuatro anteriores (las que siguen a otra,
      como «¿y Morelos?», necesitan su contexto). */
   var DICTAMEN = 'herramienta-inspector-dictamen.html', historial = [];
+  /* El dictamen sale con la forma del modo elegido (entrega c, 04-11-2026): el
+     enlace lleva &modo=, la página vuelve a contestar con la misma base y suma la
+     capa del modo como un capítulo. El modo no cambia los datos ni la huella. */
   function enlaceDictamen(q, previas) {
-    return DICTAMEN + '?q=' + encodeURIComponent(q) + previas.map(function (c) { return '&c=' + encodeURIComponent(c); }).join('');
+    var m = modoVivo();
+    return DICTAMEN + '?q=' + encodeURIComponent(q) + previas.map(function (c) { return '&c=' + encodeURIComponent(c); }).join('') +
+      (MODO_ICO[m] ? '&modo=' + m : '');
   }
   function chips(lista) {
     return lista && lista.length ? '<div class="pa-mas">' + lista.map(function (o) {
@@ -539,7 +548,8 @@
      modo; los datos, nunca. Una página cuyo título está completo en la
      pregunta va primero; las demás, solo si tocan el tema de cerca. */
   var MODO_ICO = { inspector: '🔍', periodista: '📰', ciudadano: '🙋', ambientalista: '🌎' };
-  function modoVivo() { var a = document.getElementById('paApp'); return a ? a.getAttribute('data-modo') : ''; }
+  var MODO_DIC = '';
+  function modoVivo() { var a = document.getElementById('paApp'); return a ? a.getAttribute('data-modo') : MODO_DIC; }
   function enciclopediaPara(q, r) {
     if (!r || r.sin || r.plat) return [];
     var ir = r.ir || (r.ficha && r.ficha.ir), base = ir ? sinParam(ir[0]) : '', pq = plano(q), modo = modoVivo();
@@ -2175,7 +2185,7 @@
     if (/ dictamen(es)? (civico|independiente|sellado)| (generar|genero|saco|hago|pido|sirve) (un |el )?dictamen|^ (que es )?(el |un )?dictamen $/.test(p))
       return {
         html: '<p>🧾 El <b>Dictamen cívico independiente</b> respalda una respuesta mía: trae las cifras, de qué documento sale cada una, su estado (oficial, derivado o pendiente), un folio y una huella digital para comprobar que nadie lo alteró.</p>' +
-          '<p>Para sacarlo, hazme una pregunta y, en la respuesta, toca <b>«🧾 Generar dictamen»</b>: se abre en otra pestaña, listo para imprimir o compartir. El enlace solo lleva tu pregunta y la página la vuelve a contestar con la misma base, así que nadie puede fabricar uno con cifras ajenas.</p>' +
+          '<p>Para sacarlo, hazme una pregunta y, en la respuesta, toca <b>«🧾 Generar dictamen»</b>: se abre en otra pestaña, listo para imprimir o compartir. El enlace solo lleva tu pregunta y el modo en que la hiciste, y la página la vuelve a contestar con la misma base, así que nadie puede fabricar uno con cifras ajenas. Sale con la forma de tu modo (la revisión del Inspector, la nota del Periodista, la versión en corto del Ciudadano o la mirada ambiental), que no cambia los datos ni la huella.</p>' +
           '<p class="pa-chico">No es un documento oficial ni un peritaje con validez ante una autoridad.</p>',
         ir: ['herramienta-inspector-dictamen.html', 'Dictamen cívico independiente'], rec: [], sug: ['¿Cuánto debe Jalisco?', 'Verifica un estado de cuenta']
       };
@@ -2484,6 +2494,8 @@
     var ps = new URLSearchParams(location.search), q = (ps.get('q') || '').trim().slice(0, 600);
     var antes = ps.getAll('c').map(function (x) { return x.trim().slice(0, 600); }).filter(Boolean).slice(-4);
     var doc = document.getElementById('dicDoc'), chat = 'herramienta-inspector-pregunta.html';
+    var pm = ps.get('modo') === 'reportero' ? 'periodista' : ps.get('modo');
+    if (MODO_ICO[pm]) MODO_DIC = pm;
     if (!q) {
       doc.innerHTML = '<p>El dictamen respalda una respuesta del Auditor. <a href="' + chat + '">Hazle una pregunta</a> y, en su respuesta, toca <b>«🧾 Generar dictamen»</b>.</p>';
       return;
