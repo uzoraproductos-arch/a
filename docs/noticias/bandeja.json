@@ -1,7 +1,448 @@
 {
- "actualizado": "3 de noviembre de 2026",
+ "actualizado": "4 de noviembre de 2026",
  "nota": "Titulares que junta herramientas/recolectar_noticias.py, sin verificar. Solo titular, medio, fecha y liga; nunca el texto de la nota.",
  "notas": [
+  {
+   "titulo": "Deuda pública de México alcanza 52.6% del PIB: qué significa para tu bolsillo",
+   "medio": "Mi Bolsillo",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.mibolsillo.com/noticias/deuda-publica-de-mexico-alcanza-52.6-del-pib-que-significa-para-tu-bolsillo-20261103-0064.html",
+   "tema": "deuda",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.mibolsillo.com/noticias/deuda-publica-de-mexico-alcanza-52.6-del-pib-que-significa-para-tu-bolsillo-20261103-0064.html"
+  },
+  {
+   "titulo": "ASF amplía investigación al INE y revisará 25 años de contratos del INE, IFE y OPLES",
+   "medio": "El Economista",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/politica/asf-amplia-investigacion-ine-revisara-25-anos-contratos-ine-ife-oples-20261104-842130.html",
+   "tema": "asf",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/politica/asf-amplia-investigacion-ine-revisara-25-anos-contratos-ine-ife-oples-20261104-842130.html"
+  },
+  {
+   "titulo": "Caso Guadalupe Taddei: ASF revela tres líneas de investigación en el INE",
+   "medio": "sdpnoticias",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.sdpnoticias.com/mexico/caso-guadalupe-taddei-asf-revela-tres-lineas-de-investigacion-en-el-ine/",
+   "tema": "asf",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.sdpnoticias.com/mexico/caso-guadalupe-taddei-asf-revela-tres-lineas-de-investigacion-en-el-ine/"
+  },
+  {
+   "titulo": "ASF va por revisión de INE y OPLES desde el año 2000; ve ‘irregularidades históricas’",
+   "medio": "La Razón de México",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.razon.com.mx/mexico/2026/11/04/asf-va-por-revision-de-ine-y-oples-desde-el-ano-2000-ve-irregularidades-historicas/",
+   "tema": "asf",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.razon.com.mx/mexico/2026/11/04/asf-va-por-revision-de-ine-y-oples-desde-el-ano-2000-ve-irregularidades-historicas/"
+  },
+  {
+   "titulo": "Noticias de hoy 4 de noviembre de 2026, en un minuto, hasta las 13:00 horas",
+   "medio": "UnoTV",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.unotv.com/todo-en-uno-tv/noticias-de-hoy-4-de-noviembre-de-2026-en-un-minuto-hasta-las-1300-horas/",
+   "tema": "asf",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.unotv.com/todo-en-uno-tv/noticias-de-hoy-4-de-noviembre-de-2026-en-un-minuto-hasta-las-1300-horas/"
+  },
+  {
+   "titulo": "Auditoría investigará irregularidades en contratos del INE de los últimos 25 años",
+   "medio": "Radio Fórmula",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.radioformula.com.mx/politica/auditoria-investigara-irregularidades-en-contratos-del-ine-de-los-ultimos-25-anos-20261104-0029.html",
+   "tema": "asf",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.radioformula.com.mx/politica/auditoria-investigara-irregularidades-en-contratos-del-ine-de-los-ultimos-25-anos-20261104-0029.html"
+  },
+  {
+   "titulo": "San Luis Potosí sin observaciones en auditorías federales de la Cuenta Pública 2025",
+   "medio": "El Economista",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/politica/san-luis-potosi-observaciones-auditorias-federales-cuenta-publica-20261104-842136.html",
+   "tema": "asf",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/politica/san-luis-potosi-observaciones-auditorias-federales-cuenta-publica-20261104-842136.html"
+  },
+  {
+   "titulo": "ASF pone bajo investigación 25 años de contrataciones del IFE, INE y OPLE por presuntas irregularidades",
+   "medio": "POSTA México",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.posta.com.mx/mexico/asf-pone-bajo-investigacion-25-anos-de-contrataciones-del-ife-ine-y-ople-por-presuntas-irregularidades/vl2275107",
+   "tema": "asf",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.posta.com.mx/mexico/asf-pone-bajo-investigacion-25-anos-de-contrataciones-del-ife-ine-y-ople-por-presuntas-irregularidades/vl2275107"
+  },
+  {
+   "titulo": "La ASF va tras 25 años de compras e irregularidades en el IFE, el INE y los OPLEs",
+   "medio": "TV Azteca",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.tvazteca.com/aztecanoticias/la-auditoria-superior-rastreara-25-anos-contratos-y-proveedores-en-el-ine-y/",
+   "tema": "asf",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.tvazteca.com/aztecanoticias/la-auditoria-superior-rastreara-25-anos-contratos-y-proveedores-en-el-ine-y/"
+  },
+  {
+   "titulo": "ASF revisará contratos del INE y organismos electorales de los últimos 25 años",
+   "medio": "Municipios Puebla",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://municipiospuebla.mx/nota/nacion/asf-revisara-contratos-del-ine-y-organismos-electorales-de-los-ultimos-25-anos",
+   "tema": "asf",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://municipiospuebla.mx/nota/nacion/asf-revisara-contratos-del-ine-y-organismos-electorales-de-los-ultimos-25-anos"
+  },
+  {
+   "titulo": "SAT y SCJN: plataformas de crowdfunding deben retener IVA e ISR a usuarios en México",
+   "medio": "Mi Bolsillo on MSN",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/otras/sat-y-scjn-plataformas-de-crowdfunding-deben-retener-iva-e-isr-a-usuarios-en-m%C3%A9xico/ar-AA2gKVZn",
+   "tema": "impuestos",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.msn.com/es-mx/noticias/otras/sat-y-scjn-plataformas-de-crowdfunding-deben-retener-iva-e-isr-a-usuarios-en-m%C3%A9xico/ar-AA2gKVZn"
+  },
+  {
+   "titulo": "SAT confirmó que los impuestos que pagan los mexicanos aportan mucho más al PIB superando a ingresos de Pemex para cubrir el gasto público",
+   "medio": "EL IMPARCIAL on MSN",
+   "fecha": "8 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/otras/sat-confirm%C3%B3-que-los-impuestos-que-pagan-los-mexicanos-aportan-mucho-m%C3%A1s-al-pib-superando-a-ingresos-de-pemex-para-cubrir-el-gasto-p%C3%BAblico/ar-AA2dRvJv",
+   "tema": "impuestos",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.msn.com/es-mx/noticias/otras/sat-confirm%C3%B3-que-los-impuestos-que-pagan-los-mexicanos-aportan-mucho-m%C3%A1s-al-pib-superando-a-ingresos-de-pemex-para-cubrir-el-gasto-p%C3%BAblico/ar-AA2dRvJv"
+  },
+  {
+   "titulo": "Serie «Los años heridos» recibió 84 mdp sin licitación; señalan vínculos con Jesús Ramírez Cuevas",
+   "medio": "Sociedad Noticias",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://sociedad-noticias.com/2026/11/04/serie-los-anos-heridos-recibio-84-mdp-sin-licitacion-senalan-vinculos-con-jesus-ramirez-cuevas/",
+   "tema": "contratos",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://sociedad-noticias.com/2026/11/04/serie-los-anos-heridos-recibio-84-mdp-sin-licitacion-senalan-vinculos-con-jesus-ramirez-cuevas/"
+  },
+  {
+   "titulo": "Pierden más de 100 proveedores licitaciones... pero les adjudican directamente las mismas obras",
+   "medio": "Vanguardia",
+   "fecha": "9 de diciembre de 2024",
+   "url": "https://vanguardia.com.mx/noticias/mexico/PIERDEN-MAS-DE-100-PROVEEDORES-LICITACIONES-PERO-LES-ADJUDICAN-DIRECTAMENTE-LAS-MISMAS-OBRAS-BE14329459",
+   "tema": "contratos",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://vanguardia.com.mx/noticias/mexico/PIERDEN-MAS-DE-100-PROVEEDORES-LICITACIONES-PERO-LES-ADJUDICAN-DIRECTAMENTE-LAS-MISMAS-OBRAS-BE14329459"
+  },
+  {
+   "titulo": "Tlalpan adjudica directamente 75% de sus contratos",
+   "medio": "El Universal Online on MSN",
+   "fecha": "19 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/otras/tlalpan-adjudica-directamente-75-de-sus-contratos/ar-AA2fy3SK",
+   "tema": "contratos",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.msn.com/es-mx/noticias/otras/tlalpan-adjudica-directamente-75-de-sus-contratos/ar-AA2fy3SK"
+  },
+  {
+   "titulo": "Sin recursos para hospital IMSS-ISSSTE en Chihuahua: Navarrete",
+   "medio": "Tiempo La Noticia Digital",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.tiempo.com.mx/local/hospitales-issste-chihuahua-sin-recursos-presupuesto-navarrete-noviembre-2026/",
+   "tema": "salud",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.tiempo.com.mx/local/hospitales-issste-chihuahua-sin-recursos-presupuesto-navarrete-noviembre-2026/"
+  },
+  {
+   "titulo": "ISSSTE e IMSS avanzan en plan de mejoras al sistema de salud",
+   "medio": "El Valle",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://elvalle.com.mx/2026/11/03/issste-e-imss-avanzan-en-plan-de-mejoras-al-sistema-de-salud/",
+   "tema": "salud",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://elvalle.com.mx/2026/11/03/issste-e-imss-avanzan-en-plan-de-mejoras-al-sistema-de-salud/"
+  },
+  {
+   "titulo": "Pensionados del IMSS e ISSSTE reciben aumento automático tras fallo de la Suprema Corte a favor de medida de la 4T",
+   "medio": "Ámbito Financiero",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.ambito.com/mexico/economia/pensionados-del-imss-e-issste-reciben-aumento-automatico-fallo-la-suprema-corte-favor-medida-la-4t-n6341369",
+   "tema": "salud",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.ambito.com/mexico/economia/pensionados-del-imss-e-issste-reciben-aumento-automatico-fallo-la-suprema-corte-favor-medida-la-4t-n6341369"
+  },
+  {
+   "titulo": "IMSS y el Servicio Universal de Salud, ¿más leña al fuego?",
+   "medio": "El Universal",
+   "fecha": "3 de noviembre de 2026",
+   "url": "https://www.eluniversal.com.mx/opinion/mariana-campos/imss-y-el-servicio-universal-de-salud-mas-lena-al-fuego/",
+   "tema": "salud",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.eluniversal.com.mx/opinion/mariana-campos/imss-y-el-servicio-universal-de-salud-mas-lena-al-fuego/"
+  },
+  {
+   "titulo": "Trabajadores del IMSS ya empezaron a recibir aumento salarial de 8%",
+   "medio": "La Jornada",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/2026/11/04/politica/017n1pol",
+   "tema": "salud",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/2026/11/04/politica/017n1pol"
+  },
+  {
+   "titulo": "IMSS e ISSSTE presentan avances para fortalecer atención médica; anuncian nuevas plazas y mejoras en hospitales",
+   "medio": "Milenio",
+   "fecha": "3 de noviembre de 2026",
+   "url": "https://www.milenio.com/politica/imss-e-issste-presentan-avances-para-fortalecer-atencion-medica",
+   "tema": "salud",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.milenio.com/politica/imss-e-issste-presentan-avances-para-fortalecer-atencion-medica"
+  },
+  {
+   "titulo": "Participaciones federales caen 1.4% en 2026: Hacienda activa fondo de compensación para estados",
+   "medio": "Mi Bolsillo on MSN",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.msn.com/es-mx/dinero/econom%C3%ADa/participaciones-federales-caen-1-4-en-2026-hacienda-activa-fondo-de-compensaci%C3%B3n-para-estados/ar-AA2gLJ1L",
+   "tema": "estados",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.msn.com/es-mx/dinero/econom%C3%ADa/participaciones-federales-caen-1-4-en-2026-hacienda-activa-fondo-de-compensaci%C3%B3n-para-estados/ar-AA2gLJ1L"
+  },
+  {
+   "titulo": "Cambio político en EU impulsa al peso y la Bolsa en México; Wall Street supera el uno por ciento de ganancias en apertura",
+   "medio": "La Jornada",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/noticia/2026/11/04/economia/cambio-politico-en-eu-impulsa-al-peso-y-la-bolsa-en-mexico-wall-street-supera-el-uno-por-ciento-de-ganancias-en-apertura",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/noticia/2026/11/04/economia/cambio-politico-en-eu-impulsa-al-peso-y-la-bolsa-en-mexico-wall-street-supera-el-uno-por-ciento-de-ganancias-en-apertura"
+  },
+  {
+   "titulo": "Amigos y el presupuesto",
+   "medio": "La Jornada",
+   "fecha": "3 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/noticia/2026/11/04/opinion/amigos-y-el-presupuesto",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/noticia/2026/11/04/opinion/amigos-y-el-presupuesto"
+  },
+  {
+   "titulo": "De fiesta con la Orquesta Mondragón y el gran Javier Gurruchaga",
+   "medio": "La Jornada",
+   "fecha": "3 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/2026/11/04/index.php?section=opinion",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/2026/11/04/index.php?section=opinion"
+  },
+  {
+   "titulo": "Gasto público en obras ha aumentado 8% en el año",
+   "medio": "La Jornada",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/2026/11/04/economia/020n3eco",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/2026/11/04/economia/020n3eco"
+  },
+  {
+   "titulo": "Diputados hacen “ajuste técnico” a la Ley del ISR",
+   "medio": "La Jornada",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/2026/11/04/economia/022n2eco",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/2026/11/04/economia/022n2eco"
+  },
+  {
+   "titulo": "Acción penal depende de la Auditoría Superior, aclara Sheinbaum",
+   "medio": "La Jornada",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/2026/11/04/politica/008n2pol",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/2026/11/04/politica/008n2pol"
+  },
+  {
+   "titulo": "En etapa final, proceso de solventación de observaciones de la cuenta pública 2025 en Veracruz",
+   "medio": "El Financiero",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.elfinanciero.com.mx/estados/2026/11/04/en-etapa-final-proceso-de-solventacion-de-observaciones-de-la-cuenta-publica-2025-en-veracruz/",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.elfinanciero.com.mx/estados/2026/11/04/en-etapa-final-proceso-de-solventacion-de-observaciones-de-la-cuenta-publica-2025-en-veracruz/"
+  },
+  {
+   "titulo": "En Hacienda hacen ‘malabares’ fiscales",
+   "medio": "El Financiero",
+   "fecha": "3 de noviembre de 2026",
+   "url": "https://www.elfinanciero.com.mx/opinion/victor-piz/2026/11/04/en-hacienda-hacen-malabares-fiscales/",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.elfinanciero.com.mx/opinion/victor-piz/2026/11/04/en-hacienda-hacen-malabares-fiscales/"
+  },
+  {
+   "titulo": "Sheinbaum gobierna con las migajas del presupuesto",
+   "medio": "El Financiero",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.elfinanciero.com.mx/opinion/alejo-sanchez-cano/2026/11/04/sheinbaum-gobierna-con-las-migajas-del-presupuesto/",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.elfinanciero.com.mx/opinion/alejo-sanchez-cano/2026/11/04/sheinbaum-gobierna-con-las-migajas-del-presupuesto/"
+  },
+  {
+   "titulo": "SAT confirma las diferencias entre embargo precautorio y definitivo, por las que podría quitarte tus bienes",
+   "medio": "El Informador",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxNOFdvdDZnOThicnJkZE13N3RuUnNHejRSc1J4UnFkaUpUaDE3LVhIblV2UEp2U1dZTDF4aTM0ZU1ZVkZYanhEWGNreVB1X3RKRGtCUDk0Q2d5aWVZLVhNVVdreG1YcHVteUZycGVnUkNYUDU3ODVNZE02dFBqSzZXMjd5b0l4aEN2RXMzMmlRN2ZfTFFRT1ltTzFabmphWXZKVklVTXIwMG44dnVrM2E1WUc1WTdjcDFrR1FoaFhFQWlFb0N4d2VHSm92UFFPT3hUeE1GMHJ0d2dCQWZUeVhKOTlHYjY0LUZSNGJlWW1QZWhWQdIB9wFBVV95cUxNbzFXOWIzTVBsaHpnOGYyS0g0bFFjdlZMMk1sNkJ0YU5ReVBKVE5lZUw0VVlZem1vVlJwUm9fbjdfUGVBSEpUcVJLVk8wVWtuMDdSNWJSYmNuRDhJSW81VTZpc1NFOWt6RjFJRlVSbzVmNEtVX3ZacERlaW9sN2VIcHFrZXBESFpzX1VFdlBKZllZRm5aZWNMd01zQVZvVlZobWl1NmtxeDFMM0ZuQ2pxa3dwQ0pJbXBlN3oxcDRCNnZ5bHdheGhqWmxaUVZ1bGl1U1lSUWZhLWkySWxna1Q0ZGxWeHlyNGx4XzFkai00TnRzRjJjcmxR?oc=5",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxNOFdvdDZnOThicnJkZE13N3RuUnNHejRSc1J4UnFkaUpUaDE3LVhIblV2UEp2U1dZTDF4aTM0ZU1ZVkZYanhEWGNreVB1X3RKRGtCUDk0Q2d5aWVZLVhNVVdreG1YcHVteUZycGVnUkNYUDU3ODVNZE02dFBqSzZXMjd5b0l4aEN2RXMzMmlRN2ZfTFFRT1ltTzFabmphWXZKVklVTXIwMG44dnVrM2E1WUc1WTdjcDFrR1FoaFhFQWlFb0N4d2VHSm92UFFPT3hUeE1GMHJ0d2dCQWZUeVhKOTlHYjY0LUZSNGJlWW1QZWhWQdIB9wFBVV95cUxNbzFXOWIzTVBsaHpnOGYyS0g0bFFjdlZMMk1sNkJ0YU5ReVBKVE5lZUw0VVlZem1vVlJwUm9fbjdfUGVBSEpUcVJLVk8wVWtuMDdSNWJSYmNuRDhJSW81VTZpc1NFOWt6RjFJRlVSbzVmNEtVX3ZacERlaW9sN2VIcHFrZXBESFpzX1VFdlBKZllZRm5aZWNMd01zQVZvVlZobWl1NmtxeDFMM0ZuQ2pxa3dwQ0pJbXBlN3oxcDRCNnZ5bHdheGhqWmxaUVZ1bGl1U1lSUWZhLWkySWxna1Q0ZGxWeHlyNGx4XzFkai00TnRzRjJjcmxR?oc=5"
+  },
+  {
+   "titulo": "Grandes empresas donarán agua a colonias necesitadas",
+   "medio": "El Informador",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQT2RHVFkxQWFXdGRYZHJTYWwzOTBLTC03VGVMU2lnMV8yMWI3NTFvbWRtZC1rYmdQOHk5bjQzeFdkdUFvV3BJRVhfbFA0eE05TzFrQW1nREJOSWhobVZPRDZ1aGJDMnBnNFE3VU1qMi1aOW9lMEU0VHppLXNESWhRZjctVnVucnVFOExoM0N6OWZ1WDJ6Y2kzc0dWMjh1ak5ZdGY0RVJxQkrSAa4BQVVfeXFMTlFBQU9iTWJYMTUzamFhSHc1cmVxM3dYSEJ5cmVNMmFydWFrM1h2SVJMRDg2SGk3Y1hIcDdRU252dl9uWGM4cDVRV3d2c1dqVzJBT0JBYlBSNjdiMlozOWRJSlBlZ0R1bTFqUmtZcnZNcmVMVXZEMEFKSXhwMTMzU003QklOb1RGU3FpQU9Qd25GM0hTM3RqU0VnVDlLd2k2TmtaSXB1TnpBajloSzNn?oc=5",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQT2RHVFkxQWFXdGRYZHJTYWwzOTBLTC03VGVMU2lnMV8yMWI3NTFvbWRtZC1rYmdQOHk5bjQzeFdkdUFvV3BJRVhfbFA0eE05TzFrQW1nREJOSWhobVZPRDZ1aGJDMnBnNFE3VU1qMi1aOW9lMEU0VHppLXNESWhRZjctVnVucnVFOExoM0N6OWZ1WDJ6Y2kzc0dWMjh1ak5ZdGY0RVJxQkrSAa4BQVVfeXFMTlFBQU9iTWJYMTUzamFhSHc1cmVxM3dYSEJ5cmVNMmFydWFrM1h2SVJMRDg2SGk3Y1hIcDdRU252dl9uWGM4cDVRV3d2c1dqVzJBT0JBYlBSNjdiMlozOWRJSlBlZ0R1bTFqUmtZcnZNcmVMVXZEMEFKSXhwMTMzU003QklOb1RGU3FpQU9Qd25GM0hTM3RqU0VnVDlLd2k2TmtaSXB1TnpBajloSzNn?oc=5"
+  },
+  {
+   "titulo": "¡Entra Jalisco…sale Guanajuato!",
+   "medio": "El Informador",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOYmR0dE9jRUsyN3dBRWRPdWVsUE4yV194ck05M3pfZG9DbTVwdTBYMzlnSG9zR180WHZRdGtRWG5PRWRLRTdOYmZQbDVuVjhYcFduQ1FpWGJEZGF0QUJ2T1ZYcWNkZFpJSnFNR3hHckR4TmpiWUhjeVhHWk1RazdSRTZRaUU2d9IBiwFBVV95cUxQanZNLWx1ZEZsNWc5RnRaNi1GT09nRFZFTjlHVEF1Z0NvaUF3aVJLcG1XZzRnUWNMSXYyWW05MWdVbGxGRUR1TjFkenhMQzlJWWo5a2pYZFlwQUlFZUpVMjk1T0tjS3ozN0Jfdnl6Z2ZWLTRKSG4zb3ZpRFN2RmZWaFp6bmxlVEY0R1U0?oc=5",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOYmR0dE9jRUsyN3dBRWRPdWVsUE4yV194ck05M3pfZG9DbTVwdTBYMzlnSG9zR180WHZRdGtRWG5PRWRLRTdOYmZQbDVuVjhYcFduQ1FpWGJEZGF0QUJ2T1ZYcWNkZFpJSnFNR3hHckR4TmpiWUhjeVhHWk1RazdSRTZRaUU2d9IBiwFBVV95cUxQanZNLWx1ZEZsNWc5RnRaNi1GT09nRFZFTjlHVEF1Z0NvaUF3aVJLcG1XZzRnUWNMSXYyWW05MWdVbGxGRUR1TjFkenhMQzlJWWo5a2pYZFlwQUlFZUpVMjk1T0tjS3ozN0Jfdnl6Z2ZWLTRKSG4zb3ZpRFN2RmZWaFp6bmxlVEY0R1U0?oc=5"
+  },
+  {
+   "titulo": "Diputados aprueban cambios a la Ley del ISR; pasa al Ejecutivo",
+   "medio": "El Informador",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZml3bXhwZFBxYzdqdU9xdHhjU1lKNno5QlpMdlpoQTZ5TVN3UW9fRzdsaEtobmF3SnROLVVkWmhEYmFZNHFOMTd0VDdlT19RWkx3T1NzWXd4U1ZnWHJRbmFrN0VQQ1NaR0t0QkN1bExhUGQ1R0pHS1dXOVA1RVVJdDFpWWtWeWM0Q0VuQ21rTXYzb0QzM0E2enp4R1RRcmJRNURHdjEyTGtmeUZoOXBFeElJSVlJd9IBuwFBVV95cUxOUThVYnVobkg0cVFheEtvT1U1VGRSUWpFeFRzSzdlZUpVWGtMOWRkbkx3cnJOS29QLVEyOHkxSlJqRlE1V2tzZC1OTWZ6VzhDTVYwTEp6THlMVzBvNktwQkhnWDVUN2kwVzY5YlhhSlJYbzN0S2JRaHFleGVzbnAzSjh5ZjVYZmhJZlFuQzFtZ2l6bVQ0UGtVSjE5MzRmUDUyTE1iY21aZ0FobWJkem9wNENvcFFTUE4xblJZ?oc=5",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZml3bXhwZFBxYzdqdU9xdHhjU1lKNno5QlpMdlpoQTZ5TVN3UW9fRzdsaEtobmF3SnROLVVkWmhEYmFZNHFOMTd0VDdlT19RWkx3T1NzWXd4U1ZnWHJRbmFrN0VQQ1NaR0t0QkN1bExhUGQ1R0pHS1dXOVA1RVVJdDFpWWtWeWM0Q0VuQ21rTXYzb0QzM0E2enp4R1RRcmJRNURHdjEyTGtmeUZoOXBFeElJSVlJd9IBuwFBVV95cUxOUThVYnVobkg0cVFheEtvT1U1VGRSUWpFeFRzSzdlZUpVWGtMOWRkbkx3cnJOS29QLVEyOHkxSlJqRlE1V2tzZC1OTWZ6VzhDTVYwTEp6THlMVzBvNktwQkhnWDVUN2kwVzY5YlhhSlJYbzN0S2JRaHFleGVzbnAzSjh5ZjVYZmhJZlFuQzFtZ2l6bVQ0UGtVSjE5MzRmUDUyTE1iY21aZ0FobWJkem9wNENvcFFTUE4xblJZ?oc=5"
+  },
+  {
+   "titulo": "Peso mexicano suma ocho semanas de pérdidas frente al dólar y cae 4 % en octubre",
+   "medio": "El Informador",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNZmtjdlVyckEyM3UxLTE0VTdCcGxWc0pvb3ZkRFRjcHBTTUdQa0hSV2Nic3ByNy1jSElOc3pYQmtqVWNFWk42bjNzdmxpSTVZLXNvMkRNam5rREVvcHdOcUUxN0RQVnBfMklzamc4cGxiV1gwTS1EQ29XNXpubFc3enBleXJaLUFwWThwVHFCUWFJZnNSM0dNeG5VSlBkTXVUVXBDbUVfaERCd3ZrLVozV2FuZjVBWW1QVU1FbU9PMmlQVU5pSlVXM3NvaFZQd9IB0wFBVV95cUxPQkJXUFduVENiYThCd2VGVk4yV0NKYkFfTDN2RVhSZGZWMG5GSnN1QmdYTEpjcTVLN0J4VlFXSm1tREFSeHZJbjNwbWxIdWdMSzBFMVg5ZDdKMDFXU1RqOUxYVlMwcUlPQ0hyM2IzQzQ2UWtycm9ld1pDNVk1ZjNSQjhvMGdxekJnQWNveXZnLUpUR0lmUUw3cEhpRXI4eVUySUpBbkF5dmJ5NVdVMnMxTWE4QUhuUHg2bTcwd3VicWVrRzUwbGxLeGhPLTF3LU10cWZV?oc=5",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNZmtjdlVyckEyM3UxLTE0VTdCcGxWc0pvb3ZkRFRjcHBTTUdQa0hSV2Nic3ByNy1jSElOc3pYQmtqVWNFWk42bjNzdmxpSTVZLXNvMkRNam5rREVvcHdOcUUxN0RQVnBfMklzamc4cGxiV1gwTS1EQ29XNXpubFc3enBleXJaLUFwWThwVHFCUWFJZnNSM0dNeG5VSlBkTXVUVXBDbUVfaERCd3ZrLVozV2FuZjVBWW1QVU1FbU9PMmlQVU5pSlVXM3NvaFZQd9IB0wFBVV95cUxPQkJXUFduVENiYThCd2VGVk4yV0NKYkFfTDN2RVhSZGZWMG5GSnN1QmdYTEpjcTVLN0J4VlFXSm1tREFSeHZJbjNwbWxIdWdMSzBFMVg5ZDdKMDFXU1RqOUxYVlMwcUlPQ0hyM2IzQzQ2UWtycm9ld1pDNVk1ZjNSQjhvMGdxekJnQWNveXZnLUpUR0lmUUw3cEhpRXI4eVUySUpBbkF5dmJ5NVdVMnMxTWE4QUhuUHg2bTcwd3VicWVrRzUwbGxLeGhPLTF3LU10cWZV?oc=5"
+  },
+  {
+   "titulo": "Sheinbaum detalla inversión en obras hídricas para Jalisco: 'Tomamos la decisión de apoyar'",
+   "medio": "El Informador",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOaDIxMHQ4TkUtY3NIZE1nOU4tZS1hS1pHQm9hUGpyZFFwSVVXb0xDSWxCX1AySmNVT1NJdDBiLVhLVTAxOEtIaktnQ1djdTBuUHBnR2Frby1TSFZfbDUyNjVnOGVCSnVPWjdkRXZFUFBaXy1zRnF6dlllT2JOV1dCdXJSOFZMc0JzcFZMOV9Xd2JMUi0zVndIYi1yeldpSWxXNldtYVQwbENSRldRTjhxTE5Vb0xtcVFwVWJ0VEZqVWNDZHVlN2o2ejR5TVNMVUhnZkpadHgyc9IB3AFBVV95cUxOcFVrTWpNSUxDTHVTU0QteGJQaDI3SUdGZElMZ1QySHdVMjhOWk5ablFxN2lCTGRma1BnR0FZQUVabDJQSF9naFBZRHZZNlpvdWJZWFZjODVOdTYtOU51RnlvRVFBQUxyM1Q4MXhUelVyOWNxajBlZlZmbVI5NEdFd3RSTmIzMG5EcEFwUVRxUmJHUnlOeHJkaDJEZk1EcWVleWJWVDl3S0NHenFjeEdJdjJKYW9uZWZMSjVLVXR3TWN0aHJLMnVwVFVOcGxfQ3hZS19FSkdTOXl2emd5?oc=5",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOaDIxMHQ4TkUtY3NIZE1nOU4tZS1hS1pHQm9hUGpyZFFwSVVXb0xDSWxCX1AySmNVT1NJdDBiLVhLVTAxOEtIaktnQ1djdTBuUHBnR2Frby1TSFZfbDUyNjVnOGVCSnVPWjdkRXZFUFBaXy1zRnF6dlllT2JOV1dCdXJSOFZMc0JzcFZMOV9Xd2JMUi0zVndIYi1yeldpSWxXNldtYVQwbENSRldRTjhxTE5Vb0xtcVFwVWJ0VEZqVWNDZHVlN2o2ejR5TVNMVUhnZkpadHgyc9IB3AFBVV95cUxOcFVrTWpNSUxDTHVTU0QteGJQaDI3SUdGZElMZ1QySHdVMjhOWk5ablFxN2lCTGRma1BnR0FZQUVabDJQSF9naFBZRHZZNlpvdWJZWFZjODVOdTYtOU51RnlvRVFBQUxyM1Q4MXhUelVyOWNxajBlZlZmbVI5NEdFd3RSTmIzMG5EcEFwUVRxUmJHUnlOeHJkaDJEZk1EcWVleWJWVDl3S0NHenFjeEdJdjJKYW9uZWZMSjVLVXR3TWN0aHJLMnVwVFVOcGxfQ3hZS19FSkdTOXl2emd5?oc=5"
+  },
+  {
+   "titulo": "Trabajadores de la Cámara de Diputados gozan de más de 46 prestaciones; equivalen a 19% del presupuesto",
+   "medio": "LatinUS",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://latinus.us/mexico/2026/11/4/trabajadores-de-la-camara-de-diputados-gozan-de-mas-de-46-prestaciones-equivalen-a-19-del-presupuesto-181468.html",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://latinus.us/mexico/2026/11/4/trabajadores-de-la-camara-de-diputados-gozan-de-mas-de-46-prestaciones-equivalen-a-19-del-presupuesto-181468.html"
+  },
+  {
+   "titulo": "Indicadores Cíclicos confirman mayor dinamismo económico de México en el tercer trimestre",
+   "medio": "El Economista",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/economia/indicadores-ciclicos-confirman-mayor-dinamismo-economico-mexico-tercer-trimestre-20261104-842164.html",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/economia/indicadores-ciclicos-confirman-mayor-dinamismo-economico-mexico-tercer-trimestre-20261104-842164.html"
+  },
+  {
+   "titulo": "¿Socio o acreedor? Cómo funcionan las acciones y los bonos corporativos en México",
+   "medio": "El Economista",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/finanzaspersonales/socio-acreedor-funcionan-acciones-bonos-corporativos-mexico-20261104-842017.html",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/finanzaspersonales/socio-acreedor-funcionan-acciones-bonos-corporativos-mexico-20261104-842017.html"
+  },
+  {
+   "titulo": "Meta capta 15,000 millones de dólares con una emisión de bonos en EU para expandirse en IA",
+   "medio": "El Economista",
+   "fecha": "3 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/mercados/meta-capta-15-000-millones-dolares-emision-bonos-eu-expandirse-ia-20261104-842101.html",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/mercados/meta-capta-15-000-millones-dolares-emision-bonos-eu-expandirse-ia-20261104-842101.html"
+  },
+  {
+   "titulo": "AMLO canceló Texcoco, pero la deuda sigue: pagan 566 millones de dólares y aún deben más de 3 mil millones",
+   "medio": "Proceso",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxNSkwtX01hazE1SmRHY1dOSktXWEVCbUxxaF9MX095MjRQMDdPVHdBSlg3VHVPWWk3dFk1RkZQUnFRQi1NSzlZMUVBNW5aYktWYmp3MlVjUU9icm9Gc2tZYUN3aThQOTBGSHlBTDVzazNwUUYyeGJEY3lfLW9zaHROaDRsaDRZdGlvWkFpM3lNMEdtMVF2NzNpbXd0UDM3ek44X0JhTE1FcUplYTRVU1RlNnBuQzc0MnhVQUxRYXNsNkNMa2xtRjBCZHRaVnRocDNMV3JZWS16Nm53V2prSENTS2lJeEdPcFhFVzZxdlpfcnRCSmhH?oc=5",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxNSkwtX01hazE1SmRHY1dOSktXWEVCbUxxaF9MX095MjRQMDdPVHdBSlg3VHVPWWk3dFk1RkZQUnFRQi1NSzlZMUVBNW5aYktWYmp3MlVjUU9icm9Gc2tZYUN3aThQOTBGSHlBTDVzazNwUUYyeGJEY3lfLW9zaHROaDRsaDRZdGlvWkFpM3lNMEdtMVF2NzNpbXd0UDM3ek44X0JhTE1FcUplYTRVU1RlNnBuQzc0MnhVQUxRYXNsNkNMa2xtRjBCZHRaVnRocDNMV3JZWS16Nm53V2prSENTS2lJeEdPcFhFVzZxdlpfcnRCSmhH?oc=5"
+  },
+  {
+   "titulo": "Lemus logra acuerdo con Sheinbaum: Federación y Jalisco invertirán casi 25 mil mdp en el agua de Guadalajara",
+   "medio": "Proceso",
+   "fecha": "29 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxOalBPMVNZRG9QUEhLM2tIWFVvUG9DMk50dGJ4SENiSTg3R2l6cmRsZ194ODRZVjdQd25TWmNxX3VLZHdnOEp2SDc4dGliVk5MNURJWWpOSU1YeWRlLXBaWTl2dnh3dklQaTFUSGlhMWFVNmNZSUZqRUNhUTIxTThlMlFfTTA2QzZ6T1RHZkJiS3ZUbkRVdlJOTFVMbGVRUEo3WHBRY2NsblI0ekoyYmxwc2NBSTF6eUJkQkZTQmtMMURnN0tHazQ3UTRQS3VVUzB6VnY4QmdTM1dEMTE0NzFmazQ2X0VNM3RJSE5adFRDdVoybjNkWlE?oc=5",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxOalBPMVNZRG9QUEhLM2tIWFVvUG9DMk50dGJ4SENiSTg3R2l6cmRsZ194ODRZVjdQd25TWmNxX3VLZHdnOEp2SDc4dGliVk5MNURJWWpOSU1YeWRlLXBaWTl2dnh3dklQaTFUSGlhMWFVNmNZSUZqRUNhUTIxTThlMlFfTTA2QzZ6T1RHZkJiS3ZUbkRVdlJOTFVMbGVRUEo3WHBRY2NsblI0ekoyYmxwc2NBSTF6eUJkQkZTQmtMMURnN0tHazQ3UTRQS3VVUzB6VnY4QmdTM1dEMTE0NzFmazQ2X0VNM3RJSE5adFRDdVoybjNkWlE?oc=5"
+  },
+  {
+   "titulo": "Cinco preguntas que compras debe hacerle a su proveedor de empaque antes de 2027",
+   "medio": "Proceso",
+   "fecha": "30 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNM3dmdEVoZGg2UUxiS3pFZUo0ZzZnR3BfdU5ZUmpEQmxqYjR2b1lLR2xfMjNQN0JtVjQ5WkszMkpDcEFJOWJHU1lmbDhuT0YyN0IzQk5BSVIwd2pISFExS3JmUlM3RkF3NVktWGZNT3Z4cmRYMUlVWV9hV2ZfS3l5QzQ4MmY4eHAxZDB2Z3BjUXJiZ0ZINVEtLXdYVDlOTjZwYzZmMUFJRnBfNlV1dVZLZHltUkdlX1VpejNOb3NyXzZmNTN6TUFBNVdOZGV3TEZSSVpyY25idEh2eEE?oc=5",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNM3dmdEVoZGg2UUxiS3pFZUo0ZzZnR3BfdU5ZUmpEQmxqYjR2b1lLR2xfMjNQN0JtVjQ5WkszMkpDcEFJOWJHU1lmbDhuT0YyN0IzQk5BSVIwd2pISFExS3JmUlM3RkF3NVktWGZNT3Z4cmRYMUlVWV9hV2ZfS3l5QzQ4MmY4eHAxZDB2Z3BjUXJiZ0ZINVEtLXdYVDlOTjZwYzZmMUFJRnBfNlV1dVZLZHltUkdlX1VpejNOb3NyXzZmNTN6TUFBNVdOZGV3TEZSSVpyY25idEh2eEE?oc=5"
+  },
+  {
+   "titulo": "Darán a conocer en diciembre resultados de evaluación a México sobre lavado de dinero",
+   "medio": "Proceso",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxObzh0MG43X2ljeEUxazVTWjRYbGhBeWs5TEZId2V4NHdnMHM5TjlqUS0ycXR5RmNiejdJV2F1VHlzRDNXMnA1R1F4enpPbEN6MVJCaWE3cDVTeHNMSWNGN0FFWUZZd0EtRURnNVlIOUhfRG1kVlVPNHFhUTlPTVBwbjFncFAwZHhGUmlQcWRGVDNuS2RUVmU5a1U1cHB5Vm91bENOMFZ5ZUdyV1hCVnpKcmJLQUJadFdRTTl5UWFhZXFxenhDaWh0RzQ3QWh2TU1NSUduY3VFOHZocEF5?oc=5",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxObzh0MG43X2ljeEUxazVTWjRYbGhBeWs5TEZId2V4NHdnMHM5TjlqUS0ycXR5RmNiejdJV2F1VHlzRDNXMnA1R1F4enpPbEN6MVJCaWE3cDVTeHNMSWNGN0FFWUZZd0EtRURnNVlIOUhfRG1kVlVPNHFhUTlPTVBwbjFncFAwZHhGUmlQcWRGVDNuS2RUVmU5a1U1cHB5Vm91bENOMFZ5ZUdyV1hCVnpKcmJLQUJadFdRTTl5UWFhZXFxenhDaWh0RzQ3QWh2TU1NSUduY3VFOHZocEF5?oc=5"
+  },
+  {
+   "titulo": "Cuando la tragedia entra en campaña",
+   "medio": "Proceso",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPa0dqZHNNUF9fWGtkNkpuMmpjVWM2SzJYRGEyNWtTV2dDajQ0UXYyNXZPcWEyaEZwc1BXQW1aYmZQUkxDZDlfNHJ0aTZWU01hbnJiQ1lzcFFpb0xCQ05BTFBUSmZ6MXlLR2VMc2pKY0JEcldSZzhJalNOUk1mNnVLdVpsNUVvN05jMWNUWjgyTmpCN0tUTnZr?oc=5",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPa0dqZHNNUF9fWGtkNkpuMmpjVWM2SzJYRGEyNWtTV2dDajQ0UXYyNXZPcWEyaEZwc1BXQW1aYmZQUkxDZDlfNHJ0aTZWU01hbnJiQ1lzcFFpb0xCQ05BTFBUSmZ6MXlLR2VMc2pKY0JEcldSZzhJalNOUk1mNnVLdVpsNUVvN05jMWNUWjgyTmpCN0tUTnZr?oc=5"
+  },
+  {
+   "titulo": "\"Puedes verlo todo” y \"Clayface\" lideran un flojo fin de semana de Halloween",
+   "medio": "Proceso",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOaDJXWkl4bDl3enFrVUI4WGg5OXJrblFUX0lWVzZxWkpqeEpGV2hGajRiMEpQbkRKZ1VhVUxOMUYwYVVVV3hfVkpRWW1LdnhtU0JMbjc1aHhwSmtkMVJPTmxfYmJVWGtlNG9ScEp1eG55R0RocXRLN1c2OGhzX0pwQ0M5ZE4yMnZ4ZjdTajMyYW1DSm1XTDlZaHJrcGpoZW9zUURjSXBvWW55cVNXdzdzZGpnT0V2VFZ0a2R2al9URlYxT2laV2hTZA?oc=5",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOaDJXWkl4bDl3enFrVUI4WGg5OXJrblFUX0lWVzZxWkpqeEpGV2hGajRiMEpQbkRKZ1VhVUxOMUYwYVVVV3hfVkpRWW1LdnhtU0JMbjc1aHhwSmtkMVJPTmxfYmJVWGtlNG9ScEp1eG55R0RocXRLN1c2OGhzX0pwQ0M5ZE4yMnZ4ZjdTajMyYW1DSm1XTDlZaHJrcGpoZW9zUURjSXBvWW55cVNXdzdzZGpnT0V2VFZ0a2R2al9URlYxT2laV2hTZA?oc=5"
+  },
+  {
+   "titulo": "El aeropuerto de Texcoco no se construyó, pero el AICM todavía debe 3,152 millones de dólares",
+   "medio": "Expansión",
+   "fecha": "3 de noviembre de 2026",
+   "url": "https://expansion.mx/empresas/2026/11/03/cancelar-aeropuerto-texcoco-aun-cuesta-aicm",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://expansion.mx/empresas/2026/11/03/cancelar-aeropuerto-texcoco-aun-cuesta-aicm"
+  },
+  {
+   "titulo": "INE suma 30 renuncias de directivos y cercanos al grupo Taddei; continúan consejeros revisión de cargos de primer nivel",
+   "medio": "Expansión Política",
+   "fecha": "3 de noviembre de 2026",
+   "url": "https://politica.expansion.mx/mexico/2026/11/03/ine-suma-30-renuncias-de-directivos-y-cercanos-grupo-taddei",
+   "tema": "medios",
+   "visto": "4 de noviembre de 2026",
+   "grupo": "https://politica.expansion.mx/mexico/2026/11/03/ine-suma-30-renuncias-de-directivos-y-cercanos-grupo-taddei"
+  },
   {
    "titulo": "Jalisco prepara casi 7 mil millones de pesos para atender la crisis hídrica en Guadalajara",
    "medio": "Reporte Índigo",
