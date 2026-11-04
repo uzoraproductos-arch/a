@@ -2155,6 +2155,87 @@
    "dice": [
     "16.3"
    ]
+  },
+  {
+   "q": "¿El gobierno le compró a empresas de la lista negra del SAT después de que el DOF las publicó?",
+   "ir": "herramienta-inspector-cruce.html#hallazgos",
+   "dice": ["Hallazgo", "señal para revisar", "24 de octubre de 2025"]
+  },
+  {
+   "q": "Cruce de contratos con la lista 69-B y la ASF",
+   "ir": "herramienta-inspector-cruce.html#hallazgos",
+   "dice": ["Cuenta Pública 2002"]
+  },
+  {
+   "q": "Contratos de SIC1505128V4",
+   "ir": "contratos-publicos.html?q=SIC1505128V4",
+   "dice": ["Señal para revisar", "Ver el cruce"]
+  },
+  {
+   "q": "Contratos de NCO1012101Z7",
+   "ir": "contratos-publicos.html?q=NCO1012101Z7",
+   "dice": ["Antecedente"]
+  },
+  {
+   "q": "Expedientes de casos de la ASF",
+   "modo": "inspector",
+   "ir": "herramienta-inspector-asf.html"
+  },
+  {
+   "q": "Diagnóstico de Pemex",
+   "modo": "inspector",
+   "ir": "herramienta-inspector-entes.html#ente=federal:pemex"
+  },
+  {
+   "q": "Contrasta una nota",
+   "modo": "inspector",
+   "ir": "herramienta-inspector-nota.html"
+  },
+  {
+   "q": "Lista negra del SAT",
+   "modo": "inspector",
+   "ir": "herramienta-inspector-efos.html"
+  },
+  {
+   "q": "Cruce de contratos con la lista 69-B y la ASF",
+   "modo": "inspector",
+   "ir": "herramienta-inspector-cruce.html#hallazgos"
+  },
+  {
+   "q": "Verifica un estado de cuenta",
+   "modo": "inspector",
+   "ir": "herramienta-inspector-verifica.html"
+  },
+  {
+   "q": "¿Hasta qué grado de parentesco es nepotismo?",
+   "modo": "inspector",
+   "ir": "herramienta-inspector-nepotismo.html"
+  },
+  {
+   "q": "¿El Modo Inspector es gratis?",
+   "ir": "herramienta-inspector.html#suscripcion",
+   "dice": ["gratis y lo seguirá siendo"]
+  },
+  {
+   "q": "¿Qué desbloquea la suscripción?",
+   "ir": "herramienta-inspector.html#suscripcion",
+   "dice": ["todavía no abre"]
+  },
+  {
+   "q": "¿Qué es el marco geoestadístico?",
+   "ir": "glosario.html#Marco-Geoestadistico"
+  },
+  {
+   "q": "¿Qué es un aviso de arribo?",
+   "ir": "glosario.html#Aviso-de-Arribo-y-Aviso-de-Cosecha"
+  },
+  {
+   "q": "¿Qué significa superficie forestal?",
+   "ir": "aprende-recursos-naturales.html#rn-bosques"
+  },
+  {
+   "q": "¿Qué es el fraccionamiento de contratos?",
+   "ir": "contratos-publicos.html#fraccionamiento"
   }
  ]
 }

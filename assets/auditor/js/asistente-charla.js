@@ -1297,6 +1297,8 @@
           return mm;
         }
       }
+      /* Qué es gratis y qué abriría la suscripción (04-11-2026, suscripcion.py). */
+      if (SAN.t.serv_suscripcion && /suscri|desbloque|\bpremium\b|version de pago|(modo inspector|auditavision|la plataforma|el auditor|las aplicaciones)\b.{0,40}\b(gratis|gratuit|de paga|cobra|cuesta)|\b(gratis|gratuit|de paga|cuanto cuesta)\b.{0,40}(modo inspector|auditavision|la plataforma|el auditor|las aplicaciones)/.test(t)) return sanTema('serv_suscripcion');
       if (SAN.t.serv_diligencia && /debida diligencia|antes de contratar|\b(como|quiero|puedo) (reviso|revisar|checo|checar|investigo|investigar|verifico|verificar) (a )?(un|una|mi|mis) (proveedor|proveedores|empresa)\b/.test(t)) return sanTema('serv_diligencia');
       return null;
     }

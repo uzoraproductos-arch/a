@@ -1,0 +1,67 @@
+/* Auditavisión · Modo Inspector › Contratos, lista 69-B y ASF (04-11-2026).
+   La página la escribe herramientas/cruce_contratos.py. Prefijo cr-. */
+.cr { padding-top: 22px; --cr: var(--rubro-inspector, #1d5fd6); --cr-senal: #b3261e; --cr-pre: #a9541a; --cr-sale: #2e7d4f; --cr-tinta: #1c2a44; --cr-tenue: #44526b; }
+.cr *, .cr *::before, .cr *::after { box-sizing: border-box; }
+.cr a { color: #1a56b8; }
+.cr-sec { margin: 0 0 40px; }
+.cr-tit { margin: 0 0 8px; font-size: 24px; line-height: 1.25; color: #0b2a63; }
+.cr-sub { margin: 22px 0 8px; font-size: 19px; color: #0b2a63; }
+.cr-txt { margin: 0 0 18px; max-width: 820px; font-size: 16px; line-height: 1.6; color: #33415c; }
+.cr-nota, .cr-chico { margin: 12px 0 0; font-size: 16px; line-height: 1.55; color: var(--cr-tenue); }
+.cr-legal { margin: 16px 0 0; padding: 14px 16px; border-radius: 12px; background: #f3f6fb; font-size: 16px; line-height: 1.6; color: #33415c; }
+
+/* Arriba: la pregunta y las cuatro cifras */
+.cr-hero { background: #ffffff; border: 1px solid #dfe5f0; border-top: 6px solid var(--cr); border-radius: 16px; padding: 22px 22px 18px; margin: 0 0 40px; }
+.cr-hero-tit { margin: 0 0 8px; font-size: 28px; line-height: 1.2; color: #0b2a63; }
+.cr-cifras { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 12px; margin: 0 0 16px; }
+.cr-cifras > div { border-radius: 14px; padding: 14px 16px; background: #f3f6fb; border: 1px solid #dfe5f0; }
+.cr-cifras b { display: block; font: 800 30px/1.1 'JetBrains Mono', ui-monospace, monospace; color: var(--cr-tinta); }
+.cr-cifras span { display: block; margin-top: 6px; font-size: 16px; line-height: 1.45; color: #33415c; }
+.cr-cifras .cr-c-senal { background: #fdf6f5; border-color: #f1c9c5; }
+.cr-cifras .cr-c-senal b { color: var(--cr-senal); }
+.cr-ir { display: flex; flex-wrap: wrap; gap: 8px; }
+.cr-ir a { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 16px; border-radius: 999px; border: 1px solid #c9d2e3; background: #f6f8fc; color: var(--cr-tinta); font-weight: 600; text-decoration: none; }
+.cr-ir a:focus-visible, .cr-tabla:focus-visible { outline: 3px solid color-mix(in srgb, var(--cr) 45%, transparent); outline-offset: 2px; }
+
+/* Fichas: señales y antecedentes */
+.cr-fichas { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.cr-ficha { --c: #8a97ad; background: #ffffff; border: 1px solid #dfe5f0; border-left: 6px solid var(--c); border-radius: 12px; padding: 14px 16px; font-size: 16px; line-height: 1.55; color: #33415c; min-width: 0; overflow-wrap: anywhere; }
+.cr-ficha p { margin: 0 0 6px; }
+.cr-ficha.cr-f { --c: var(--cr-senal); }
+.cr-ficha.cr-p { --c: var(--cr-pre); }
+.cr-ficha.cr-d, .cr-ficha.cr-s { --c: var(--cr-sale); }
+.cr-ficha code { font: 700 15px/1.2 'JetBrains Mono', ui-monospace, monospace; color: var(--cr-tinta); }
+.cr-ficha-tipo { font-weight: 700; color: var(--cr-tinta); }
+.cr-senal { display: inline-block; padding: 2px 10px; border-radius: 999px; background: #fdecea; color: var(--cr-senal); font-weight: 800; }
+.cr-vacio { margin: 6px 0; padding: 16px 18px; border-radius: 12px; background: #f1f8f3; border-left: 5px solid var(--cr-sale); color: #33415c; font-size: 16px; line-height: 1.55; }
+.cr-ficha:target { box-shadow: 0 0 0 3px color-mix(in srgb, var(--cr) 40%, transparent); }
+
+/* Año por año: la tabla se desliza dentro de su caja, no la página */
+.cr-tabla { max-width: 100%; overflow-x: auto; border: 1px solid #dfe5f0; border-radius: 12px; background: #ffffff; }
+.cr-tabla table { border-collapse: collapse; min-width: 980px; width: 100%; font-size: 16px; }
+.cr-tabla caption { caption-side: top; text-align: left; padding: 12px 14px; color: var(--cr-tinta); font-weight: 600; }
+.cr-tabla th, .cr-tabla td { padding: 8px 10px; border-top: 1px solid #eef2f8; text-align: right; font-variant-numeric: tabular-nums; vertical-align: top; }
+.cr-tabla thead th { background: #f3f6fb; color: var(--cr-tinta); text-align: right; }
+.cr-tabla th[scope="row"], .cr-tabla thead th:first-child { text-align: left; position: sticky; left: 0; background: #ffffff; }
+.cr-tabla thead th:first-child { background: #f3f6fb; }
+.cr-tabla td[colspan] { text-align: left; color: var(--cr-tenue); }
+.cr-num-senal { color: var(--cr-senal); }
+
+/* Método */
+.cr-pasos, .cr-lista { margin: 0; padding-left: 22px; font-size: 16px; line-height: 1.6; color: #33415c; max-width: 860px; }
+.cr-pasos li, .cr-lista li { margin: 0 0 8px; }
+
+/* Sigue la pista */
+.cr-hermanas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 10px; }
+.cr-hermanas a { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; min-height: 44px; padding: 14px 16px; border: 1px solid #dfe5f0; border-radius: 12px; background: #ffffff; text-decoration: none; color: var(--cr-tinta); }
+.cr-hermanas span { grid-row: span 2; }
+.cr-hermanas small { color: var(--cr-tenue); font-size: 16px; }
+
+@media (max-width: 560px) {
+  .cr-hero { padding: 18px 16px 14px; }
+  .cr-hero-tit { font-size: 24px; }
+  .cr-cifras b { font-size: 26px; }
+}
+.cr-contratos { margin: 6px 0 0; padding-left: 20px; }
+.cr-contratos li { margin: 0 0 8px; }
+.cr-contratos small { color: var(--cr-tenue); font-size: 16px; }

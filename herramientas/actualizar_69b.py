@@ -10,7 +10,8 @@ CFF)», que reúne a quienes presuntamente facturan operaciones inexistentes
 (EFOS). El archivo va en Latin-1, con dos renglones de encabezado antes de
 los nombres de columna. Aquí se conserva, por contribuyente, lo que un
 ciudadano necesita para citarlo: RFC, nombre, situación y el oficio y la
-fecha de publicación en el DOF de esa situación.
+fecha de publicación en el DOF de esa situación. Si ya no es presunto, se
+agregan al final la fecha en que se publicó como presunto y dónde (DOF o SAT).
 
 Tras regenerar, sube el sello: python3 herramientas/sello.py AAAAMMDDx
 """
@@ -69,7 +70,16 @@ def main():
         medio = "DOF" if f[c + 3].strip() else "SAT"
         o, d = (c + 2, c + 3) if medio == "DOF" else (c, c + 1)
         oficio = f[o].split(" de fecha")[0].strip()
-        registros.append([f[1].strip().upper(), " ".join(f[2].split()), clave, oficio, f[d].strip(), medio])
+        fila = [f[1].strip().upper(), " ".join(f[2].split()), clave, oficio, f[d].strip(), medio]
+        if clave != "P":
+            # Desde el 04-11-2026: también la fecha en que se publicó como
+            # presunto (DOF; si no, la página del SAT), para comparar contra la
+            # fecha de sus contratos (herramientas/cruce_contratos.py).
+            c0 = ETAPAS["Presunto"][1]
+            fp, mp = (f[c0 + 3].strip(), "DOF") if f[c0 + 3].strip() else (f[c0 + 1].strip(), "SAT")
+            if fp:
+                fila += [fp, mp]
+        registros.append(fila)
         cuenta[sit] = cuenta.get(sit, 0) + 1
 
     meta = {

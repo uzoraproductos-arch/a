@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """«Pregúntale al Auditor»: el bot interno de Auditavision (pedido del autor,
-11-10-2026). Vive en el Modo Inspector, aparte de las siete aplicaciones de
+11-10-2026). Vive en el Modo Inspector, aparte de las ocho aplicaciones de
 «Grandes investigaciones».
 
 Es un bot interno, no una IA generativa: no redacta cifras. Cada respuesta
@@ -550,17 +550,21 @@ def _charla(d):
     return {'nota': nota, 'met': met, 'edo': edo, 'cargos': cargos, 'smin': smin, 'adm': adm, 'admet': admet, 'expide': EXPIDE,
             'mapa': 'numeros-mapa-del-gasto-federalizado.html', 'num': num, 'datos': asistente_datos.datos(d, num, D),
             'leg': asistente_legislativo.legislativo(), 'jud': asistente_judicial.judicial(d),
-            'san': informe_sancion.bot(__import__('territorio_modulos').temas_bot(d)), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d), 'apu': __import__('administracion_publica').chat(d), 'soc': __import__('dimension_social').chat(d),
+            'san': informe_sancion.bot({**__import__('territorio_modulos').temas_bot(d), **__import__('suscripcion').temas()}), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d), 'apu': __import__('administracion_publica').chat(d), 'soc': __import__('dimension_social').chat(d),
             # Nepotismo y cargos publicos (28-10-2026): la tabla de la calculadora.
             'nep': nepotismo.bot(),
             # La memoria de promesas (01-11-2026): promesa → Presupuesto → Cuenta Pública → ASF.
             'prom': __import__('promesas').datos(),
+            # Contratos × lista 69-B × ASF (04-11-2026): el hallazgo o el antecedente, y su sección.
+            'cru': __import__('cruce_contratos').bot(),
+            # Lo que abriría la suscripción y el Servicio de cada aplicación (suscripcion.py, 04-11-2026).
+            'sus': __import__('suscripcion').chat_apps(),
             # Agenda del erario de Noticias (28-10-2026): las fechas que fija la ley.
             'agenda': __import__('noticias').AGENDA}
 
 
 def _inspector():
-    """Las siete aplicaciones del Modo Inspector, para usarlas desde el chat
+    """Las ocho aplicaciones del Modo Inspector, para usarlas desde el chat
     (pedido del autor, 24-10-2026). asistente.js las reconoce por su nombre
     o por lo que el lector trae (un RFC, un folio, una liga, un ente, un
     caso) y las abre en un marco de la respuesta; la lista negra del SAT la
@@ -833,7 +837,11 @@ MODOS = [
      ('inspector', 'obras'), (),
      '<p>Estoy en <b>modo Inspector</b>: investigo con toda la base de datos de la plataforma. Pégame un <b>RFC</b>, un <b>folio</b> o la liga de una nota, '
      'pídeme el <b>diagnóstico de un ente</b> («diagnóstico de Pemex»), un <b>expediente de la ASF</b> o la cuenta de una <b>megaobra</b>.</p>'
-     '<p>Te contesto con la cifra, la operación y sus documentos. Si quieres el respaldo completo, toca <b>«Generar dictamen»</b>.</p>'),
+     '<p>Te contesto con la cifra, la operación y sus documentos. Si quieres el respaldo completo, toca <b>«Generar dictamen»</b>.</p>'
+     # Homologado con la herramienta y con Servicios (04-11-2026, suscripcion.py).
+     '<p>Son las mismas aplicaciones del <a href="herramienta-inspector.html#puertas">Modo Inspector</a>, y la consulta es gratis. '
+     'Si un caso necesita ir más a fondo, te llevo a <a href="servicios.html">Servicios</a>; lo que abriría una suscripción lo ves en '
+     '<a href="herramienta-inspector.html#suscripcion">Gratis y con suscripción</a>.</p>'),
     # El objetivo del modo, en palabras del autor (29-10-2026): «el reportero
     # se convierte como en un chismoso… información que igual no puede
     # encontrar en cualquier otra parte… aquel que te transmite información
@@ -1022,7 +1030,7 @@ def pagina(cuenta, canal='', herramientas=()):
             <li><b>Te contesto en corto:</b> la cifra, qué quiere decir y en qué lugar queda. Sé de los 32 estados, de los municipios, de los sueldos de los cargos públicos, de cada sexenio desde 1989, de %s términos del glosario y de las páginas de la plataforma.</li>
             <li><b>Saco cuentas:</b> ordeno, comparo, sumo y saco porcentajes y márgenes. Cuando hago una cuenta, te digo cuál fue.</li>
             <li><b>Verifico lo que oyes:</b> «¿es cierto que…?», «dicen que…» o la liga de una nota. Comparo la cifra con su documento oficial y te digo si coincide, si se acerca o si no cuadra.</li>
-            <li><b>Investigo contigo, sin salir del chat.</b> Las siete aplicaciones del Modo Inspector se usan desde aquí: pégame un <b>RFC</b> o un nombre y te digo si está en la lista negra del SAT; un <b>folio</b> (AV-…) y compruebo el estado de cuenta; la <b>liga de una nota</b> y la contrasto; pídeme el <b>diagnóstico de un ente</b> («diagnóstico de Pemex»), un <b>expediente de la ASF</b> («expediente de Segalmex») o una <b>investigación a la medida</b>. La aplicación se abre en la respuesta con «▶️ Úsala aquí».</li>
+            <li><b>Investigo contigo, sin salir del chat.</b> Las ocho aplicaciones del Modo Inspector se usan desde aquí: pégame un <b>RFC</b> o un nombre y te digo si está en la lista negra del SAT; un <b>folio</b> (AV-…) y compruebo el estado de cuenta; la <b>liga de una nota</b> y la contrasto; pídeme el <b>diagnóstico de un ente</b> («diagnóstico de Pemex»), un <b>expediente de la ASF</b> («expediente de Segalmex») o una <b>investigación a la medida</b>. La aplicación se abre en la respuesta con «▶️ Úsala aquí».</li>
             <li><b>Sigo cada megaobra.</b> Pregúntame por el <b>Tren Maya</b>, <b>Dos Bocas</b>, el <b>AIFA</b> o el <b>FOBAPROA</b>: cuánto se aprobó, cuánto costó, su sobrecosto, si gana o pierde al año y qué dijo la ASF. También <b>en qué invirtió cada presidente</b> («obras de Calderón»), cuál tiene <b>más sobrecosto</b> y las cinco aplicaciones de Inversión y Megaobras, que también se abren aquí.</li>
             <li><b>Toca «📎 Fuente»</b> para ver la fuente de cada cifra y su estado: <span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">derivado</span> <span class="est-chip est-pendiente">pendiente</span>.</li>
             <li><b>¿Quieres ir a fondo?</b> «📖 Saber más» te lleva a la página de la plataforma donde está la información completa.</li>

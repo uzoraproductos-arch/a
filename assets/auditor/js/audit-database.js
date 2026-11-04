@@ -8213,6 +8213,42 @@ window.AUDIT_DB = {
       "definicion": "La que se ofrece cuando hace falta un conocimiento especial (contabilidad, ingeniería, informática) para examinar hechos, objetos o personas. El perito debe tener título oficial en la materia si esa profesión está reglamentada. El dictamen cívico de esta plataforma no es un peritaje.",
       "ley": "Arts. 368 y 369 · Código Nacional de Procedimientos Penales (última reforma DOF 28-11-2025)",
       "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Fraccionamiento de Contratos",
+      "definicion": "Partir una compra en varias más chicas para que cada una quede debajo del tope de la adjudicación directa y no haya que concursarla. La ley permite adjudicar directo solo si el importe de cada operación no rebasa el monto máximo del Presupuesto «siempre que las operaciones no se fraccionen». Hay fraccionamiento cuando las compras se fundan en ese artículo y juntas rebasan el tope, son de los mismos bienes o servicios, del mismo ejercicio, se pudieron prever en un solo procedimiento y las pide la misma área. En la plataforma, una suma así es una señal para revisar, nunca una irregularidad.",
+      "ley": "Art. 55 · Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público; art. 111 de su Reglamento (DOF 18-12-2025); art. 3, fr. X, y Anexo 9 del PEF 2025 y 2026",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Disponibilidad Media Anual de Agua Subterránea",
+      "definicion": "El agua de un acuífero que todavía se puede concesionar cada año: lo que se recarga, menos lo que debe quedarse para no dañar ríos, manantiales y humedales, y menos lo que ya está concesionado. No es el agua que queda bajo tierra. Un acuífero «sin disponibilidad» ya no puede dar concesiones nuevas; no quiere decir, por sí solo, que esté sobreexplotado: esa es otra medición de la CONAGUA.",
+      "ley": "CONAGUA, Acuerdo de disponibilidad media anual de agua subterránea de los 653 acuíferos (DOF 09-11-2023), artículo primero",
+      "categoria": "🌎 Medio Ambiente"
+    },
+    {
+      "termino": "Concesión Minera",
+      "definicion": "El título que da la Secretaría de Economía para explorar y explotar minerales en un terreno. Contarlas dice cuánto territorio está concesionado, no cuántas minas trabajan: muchas concesiones no producen. Tener una concesión tampoco es una irregularidad. Los minerales radiactivos y el litio no se concesionan.",
+      "ley": "Constitución, art. 27, párrafo sexto; Ley de Minería, arts. 1 y 5 Bis; Secretaría de Economía, Prontuario Estadístico de la Minería, enero-junio 2025",
+      "categoria": "🌎 Medio Ambiente"
+    },
+    {
+      "termino": "Superficie Forestal",
+      "definicion": "La tierra cubierta por vegetación forestal: bosques, selvas, manglar, matorral xerófilo y otras áreas forestales. «Forestal» no quiere decir «bosque»: en el norte del país casi toda la superficie forestal es matorral. Comparar lo que tocó el fuego en un año contra ella da una proporción entre documentos de años distintos, no la parte que se perdió.",
+      "ley": "CONAFOR, Estado que guarda el sector forestal en México 2023, tablas 1 y 2",
+      "categoria": "🌎 Medio Ambiente"
+    },
+    {
+      "termino": "Aviso de Arribo y Aviso de Cosecha",
+      "definicion": "Los reportes que la ley pide a quien pesca (aviso de arribo, al desembarcar) y a quien cultiva peces o mariscos en granjas (aviso de cosecha). Con ellos se arma el Anuario de la CONAPESCA: lo que dice es lo declarado, no todo lo que se pescó, ni la salud de una especie.",
+      "ley": "Ley General de Pesca y Acuacultura Sustentables, art. 63; CONAPESCA, Anuario Estadístico de Acuacultura y Pesca 2025",
+      "categoria": "🌎 Medio Ambiente"
+    },
+    {
+      "termino": "Marco Geoestadístico",
+      "definicion": "La división del territorio que hace el INEGI para levantar y ubicar su estadística: entidades, municipios, localidades y manzanas, con sus claves. Es la que dibuja los municipios del Planisferio. Sus límites son geoestadísticos: no son la fuente oficial de la división político-administrativa, que fijan las leyes y los congresos.",
+      "ley": "INEGI, Marco Geoestadístico 2024",
+      "categoria": "🏢 Instituciones"
     }
   ],
   "legislativo": {
@@ -11023,6 +11059,177 @@ window.AUDIT_DB = {
       "cita_apa": "Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2024 [PEF 2024]. Diario Oficial de la Federación (México).",
       "url": "https://dof.gob.mx/2023/SHCP/PEF_2024.html",
       "descripcion": "El decreto de 2024: un gasto neto total de $9,066,045.8 millones (artículo 1). Lo usan el contexto dimensional y el estado de resultados para distinguir lo autorizado de lo pagado."
+    },
+    {
+      "num": 160,
+      "id": "ref-asf-estadisticas-2002-2024",
+      "categoria": "fiscalizacion_auditoria",
+      "categoria_nombre": "Fiscalización Superior y Auditoría",
+      "cita_apa": "Auditoría Superior de la Federación. (2026). Estadísticas de la Fiscalización Superior de la Cuenta Pública en México 2002–2024 (corte al 31 de marzo de 2026). Secretaría General de Fiscalización Superior, Dirección General de Informes, Control y Registro. ASF.",
+      "url": "https://www.asf.gob.mx/uploads/217_transp_fraccion30/Estad%C3%ADsticas%20de%20Fiscalizacion%20Superior%20Corte%20al%2031%20de%20marzo%202026_VF.pdf",
+      "descripcion": "La serie de la ASF de cada Cuenta Pública fiscalizada de 2002 a 2024: 30,600 auditorías y cada tipo de acción por año. Sostiene la serie del cruce de contratos × lista 69-B × ASF del Modo Inspector; su huella SHA-256 está en el script que la lee, y si sus tablas no cuadran, la generación se detiene."
+    },
+    {
+      "num": 161,
+      "id": "ref-pef2025",
+      "categoria": "leyes_anuales",
+      "categoria_nombre": "Paquete Económico Anual",
+      "cita_apa": "Presupuesto de Egresos de la Federación para el Ejercicio Fiscal 2025 [PEF 2025]. Diario Oficial de la Federación, 24 de diciembre de 2024 (México). Artículo 3, fracción X, y Anexo 9.",
+      "url": "https://dof.gob.mx/2024/SHCP/PEF_2025.html",
+      "descripcion": "Los montos máximos de adjudicación directa e invitación a cuando menos tres personas de 2025 (Anexo 9), por escalón de presupuesto de cada dependencia. Junto con el del PEF 2026, son los topes contra los que se buscan las señales de fraccionamiento en ComprasMX."
+    },
+    {
+      "num": 162,
+      "id": "ref-reg-laassp",
+      "categoria": "adquisiciones_compras",
+      "categoria_nombre": "Compras Públicas y Contrataciones",
+      "cita_apa": "Reglamento de la Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público. Diario Oficial de la Federación, 18 de diciembre de 2025 (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LAASSP_orig_18dic25.doc",
+      "descripcion": "El artículo 111 dice cuándo hay fraccionamiento de una compra (misma base legal, mismos bienes, un solo ejercicio, que se pudieron prever juntos y la misma área que los pide) y el 41, apartado A, que el Comité de cada dependencia fija su escalón del Anexo 9."
+    },
+    {
+      "num": 163,
+      "id": "ref-inegi-cngfe2025",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estadística Oficial del Estado Mexicano",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (2025, 4 de diciembre). Censo Nacional de Gobierno Federal y Gobiernos Estatales 2025: Administración Pública. Reporte de resultados 52/25. INEGI.",
+      "url": "https://www.inegi.org.mx/contenidos/programas/cnge/2025/doc/cnge_2025_resultados_adm_pub.pdf",
+      "descripcion": "Lo que la administración pública federal y las 32 estatales reportaron de 2024: personas titulares, personal, presupuesto ejercido y contratos por procedimiento. Es lo que cada gobierno reportó, no una auditoría. Sostiene la dimensión de administración pública del Planisferio."
+    },
+    {
+      "num": 164,
+      "id": "ref-inegi-cngmd2025",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estadística Oficial del Estado Mexicano",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (2026, 19 de marzo). Censo Nacional de Gobiernos Municipales y Demarcaciones Territoriales de la Ciudad de México 2025. Reporte de resultados. INEGI.",
+      "url": "https://www.inegi.org.mx/contenidos/programas/cngmd/2025/doc/cngmd_2025_resultados.pdf",
+      "descripcion": "Las administraciones municipales de cada entidad: su presupuesto ejercido y sus instituciones por función. El archivo se sustituyó el 1 de abril de 2026 por la tabla de panteones. Sostiene el nivel municipal de la administración pública en el Planisferio."
+    },
+    {
+      "num": 165,
+      "id": "ref-inegi-pobreza2024",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estadística Oficial del Estado Mexicano",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (2025). Pobreza multidimensional 2024: presentación de resultados e infografías por entidad federativa. INEGI.",
+      "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_presentacion_2024.pdf",
+      "descripcion": "La pobreza, la pobreza extrema, las carencias y el ingreso de cada estado en 2024. Sostiene la dimensión social del Planisferio; la pobreza no se dice como calificación de un gobierno."
+    },
+    {
+      "num": 166,
+      "id": "ref-inegi-mg2024",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estadística Oficial del Estado Mexicano",
+      "cita_apa": "Instituto Nacional de Estadística y Geografía. (2024). Marco Geoestadístico 2024 [archivos digitales por entidad federativa]. INEGI.",
+      "url": "https://www.inegi.org.mx/temas/mg/",
+      "descripcion": "Los límites de los 2,478 municipios y alcaldías que pinta el Planisferio, cada archivo con su huella SHA-256. Son límites geoestadísticos, no la fuente oficial de la división político-administrativa, como advierte el propio INEGI."
+    },
+    {
+      "num": 167,
+      "id": "ref-imss-memoria2025",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estadística Oficial del Estado Mexicano",
+      "cita_apa": "Instituto Mexicano del Seguro Social. (2026). Memoria Estadística 2025 [archivos de Excel por capítulo]. IMSS.",
+      "url": "https://www.imss.gob.mx/conoce-al-imss/memoria-estadistica-2025",
+      "descripcion": "Por órgano de operación administrativa desconcentrada (OOAD): población derechohabiente, consultas, cirugías y camas del IMSS en cada estado. Sostiene la dimensión de salud pública del Planisferio."
+    },
+    {
+      "num": 168,
+      "id": "ref-dgis-recursos2025",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Estadística Oficial del Estado Mexicano",
+      "cita_apa": "Secretaría de Salud, Dirección General de Información en Salud. (2026). Recursos en Salud Sectorial 2025 [datos abiertos]. DGIS.",
+      "url": "http://www.dgis.salud.gob.mx/descargas/datosabiertos/recursosSalud/Recursos_Salud_Sectorial_2025.zip",
+      "descripcion": "Médicos, camas y unidades de cada institución en cada estado. De aquí sale el ISSSTE del Planisferio, porque su anuario no responde; sus cifras no se mezclan con las de la Memoria del IMSS."
+    },
+    {
+      "num": 169,
+      "id": "ref-conagua-acuiferos2023",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Comisión Nacional del Agua. (2023, 9 de noviembre). Acuerdo por el que se actualiza la disponibilidad media anual de agua subterránea de los 653 acuíferos de los Estados Unidos Mexicanos. Diario Oficial de la Federación (México).",
+      "url": "https://dof.gob.mx/nota_detalle.php?codigo=5708074&fecha=09/11/2023",
+      "descripcion": "La disponibilidad de cada acuífero, con corte al 30 de diciembre de 2022: el agua que aún se puede concesionar, no el agua que queda. Sostiene «El agua del subsuelo» de la dimensión ambiental del Planisferio."
+    },
+    {
+      "num": 170,
+      "id": "ref-pnh2026",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Comisión Nacional del Agua. (2026, 18 de mayo). Programa Nacional Hídrico 2026-2030. Diario Oficial de la Federación (México).",
+      "url": "https://dof.gob.mx/nota_detalle.php?codigo=5787687&fecha=18/05/2026",
+      "descripcion": "El diagnóstico oficial del agua en México para el sexenio. Acompaña la lectura de los acuíferos en Recursos naturales."
+    },
+    {
+      "num": 171,
+      "id": "ref-conafor-incendios2025",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Comisión Nacional Forestal, Gerencia de Manejo del Fuego. (2026). Cierre estadístico 2025 de incendios forestales (1 de enero al 31 de diciembre de 2025). CONAFOR.",
+      "url": "https://www.gob.mx/cms/uploads/attachment/file/1084029/Cierre_de_la_Temporada_2025.pdf",
+      "descripcion": "Los incendios y la superficie afectada de cada estado en 2025. Casi toda la superficie afectada es pasto y matorral: no se dice como bosque perdido."
+    },
+    {
+      "num": 172,
+      "id": "ref-conafor-incendios2024",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Comisión Nacional Forestal, Gerencia de Manejo del Fuego. (2025). Cierre estadístico 2024 de incendios forestales. CONAFOR.",
+      "url": "https://www.gob.mx/cms/uploads/attachment/file/965295/Cierre_de_la_Temporada_2024.pdf",
+      "descripcion": "El cierre del año anterior, para comparar la temporada 2025 estado por estado (cuadro 4)."
+    },
+    {
+      "num": 173,
+      "id": "ref-conafor-egsfm2023",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Comisión Nacional Forestal. (2024, agosto). Estado que guarda el sector forestal en México 2023. CONAFOR.",
+      "url": "https://www.gob.mx/cms/uploads/attachment/file/947878/2024_07_31_EGSFM_2023.pdf",
+      "descripcion": "La superficie forestal de cada estado (bosques, selvas, manglar, matorral y otras áreas), con el Inventario Nacional Forestal y de Suelos 2015-2020 y la Serie VII de uso del suelo del INEGI. «Forestal» no quiere decir «bosque»."
+    },
+    {
+      "num": 174,
+      "id": "ref-conapesca-anuario2025",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Comisión Nacional de Acuacultura y Pesca. (2026). Anuario Estadístico de Acuacultura y Pesca 2025. CONAPESCA.",
+      "url": "https://www.gob.mx/cms/uploads/attachment/file/1088921/ANUARIO_CONAPESCA_2025.pdf",
+      "descripcion": "Lo que se declaró en los avisos de arribo y de cosecha de cada estado en 2025: no es todo lo pescado ni dice la salud de una especie."
+    },
+    {
+      "num": 175,
+      "id": "ref-se-prontuario-mineria2025",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Secretaría de Economía. (2025). Prontuario Estadístico de la Minería, enero-junio 2025. Gobierno de México.",
+      "url": "https://www.gob.mx/cms/uploads/attachment/file/1042764/Prontuario_Ene-Jun_2025.pdf",
+      "descripcion": "El cuadro de la Dirección General de Minas con las concesiones mineras y su superficie por entidad. Una concesión no es una mina trabajando ni una irregularidad."
+    },
+    {
+      "num": 176,
+      "id": "ref-pemex-anuario2024",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Petróleos Mexicanos. (2025). Anuario Estadístico 2024. PEMEX.",
+      "url": "https://www.pemex.com/ri/Publicaciones/Anuario%20Estadistico%20Archivos/Anuario%20Estad%C3%ADstico%202024.pdf",
+      "descripcion": "El cuadro 3.6, capacidad de proceso de cada una de las siete refinerías del Sistema Nacional de Refinación en 2024."
+    },
+    {
+      "num": 177,
+      "id": "ref-mecanismo-mayo2026",
+      "categoria": "investigacion_civica",
+      "categoria_nombre": "Investigación & Contraloría Cívica",
+      "cita_apa": "Mecanismo de Protección para Personas Defensoras de Derechos Humanos y Periodistas, Secretaría de Gobernación. (2026). Informe estadístico mensual al 31 de mayo de 2026. Gobierno de México.",
+      "url": "https://www.gob.mx/cms/uploads/attachment/file/1086159/05._Informe_mensual_mayo_26.pdf",
+      "descripcion": "Las personas periodistas y defensoras que pidieron entrar al Mecanismo y las agresiones que reportaron. Cuenta a quienes pidieron protección, no a todas las personas periodistas. Sostiene «Periodismo en riesgo»."
+    },
+    {
+      "num": 178,
+      "id": "ref-fgr-feadle-sep2026",
+      "categoria": "investigacion_civica",
+      "categoria_nombre": "Investigación & Contraloría Cívica",
+      "cita_apa": "Fiscalía General de la República, Fiscalía Especial para la Atención de Delitos cometidos contra la Libertad de Expresión. (2026). Informe estadístico actualizado al 30 de septiembre de 2026. FGR.",
+      "url": "https://stastdgv2portfgr032.blob.core.windows.net/femdh/FEADLE/Informes/ReportesMensuales2026/ESTADISTICAS%20Sep%2026.pdf",
+      "descripcion": "Las averiguaciones, carpetas y sentencias de la FEADLE por delitos contra la libertad de expresión. Sostiene «Periodismo en riesgo»; no se nombra a las personas."
     }
   ],
   "preguntas_casillas": [

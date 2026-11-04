@@ -20,13 +20,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261104k">
-  <script src="assets/auditor/js/iconos.js?v=20261104k"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261104k"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261104k" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261104k">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261104k">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261104k">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261104r">
+  <script src="assets/auditor/js/iconos.js?v=20261104r"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261104r"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261104r" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261104r">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261104r">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261104r">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -209,9 +209,9 @@
         <h2 class="sr-only" id="resumen-tit">Lo que falta, en números</h2>
         <div class="apartado-bloque">
         <div class="pe-resumen">
-          <div><b>117</b><span>pendientes registrados</span></div>
+          <div><b>122</b><span>pendientes registrados</span></div>
           <div class="pe-r-d"><b>89</b><span>🏛️ los debe publicar una dependencia</span></div>
-          <div class="pe-r-p"><b>25</b><span>🧰 los debemos integrar nosotros</span></div>
+          <div class="pe-r-p"><b>30</b><span>🧰 los debemos integrar nosotros</span></div>
           <div class="pe-r-h"><b>3</b><span>📜 son históricos, sin quien responda hoy</span></div>
         </div>
         <p class="pe-regla">Un dato pendiente no se estima ni se rellena: se dice que falta, por qué falta y dónde debería estar. Si la falta es de una dependencia obligada, la nombramos. Si el documento existe y aún no lo integramos, lo decimos: la falta es nuestra. ¿Tienes el documento? <a href="comunidad-error.html" data-puerta="error">Cuéntanos y lo integramos</a>.</p>
@@ -649,6 +649,27 @@
             <p class="pe-donde"><a href="https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LAASSP_orig_18dic25.doc" target="_blank" rel="noopener">🔗 Dónde debería estar: Reglamento de la LAASSP (DOF 18-12-2025) ↗</a></p>
             <p class="pe-aparece">Aparece en: <a href="contratos-publicos.html#fraccionamiento">Contratos públicos · Señales de fraccionamiento</a> · <a class="pe-ancla" href="#fracc-escalon" aria-label="Enlace a este pendiente">#</a></p>
           </article>
+          <article class="pe-item pe-plataforma" id="cnet-historico">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Los contratos de CompraNet, de 2002 a 2024, para cruzarlos con la lista 69-B</h3>
+            <p class="pe-porque"><b>Por qué:</b> CompraNet fue la plataforma de compras del gobierno federal hasta abril de 2025, y sus Datos Abiertos traen un archivo de contratos por año. Su portal (upcp-compranet.hacienda.gob.mx) no respondió desde el servidor de la plataforma el 04-11-2026 (error 502 de Hacienda). El importador ya está listo: basta bajar los archivos y correr herramientas/actualizar_compranet.py. Mientras tanto, los años anteriores a 2025 no tienen contratos en el cruce.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://upcp-compranet.hacienda.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: CompraNet (Secretaría de Hacienda) ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-inspector-cruce.html#por-anio">Modo Inspector · Contratos, lista 69-B y ASF</a> · <a class="pe-ancla" href="#cnet-historico" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="cruce-fecha-firma">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> La fecha de firma de los contratos de ComprasMX con empresas de la lista 69-B</h3>
+            <p class="pe-porque"><b>Por qué:</b> ComprasMX publica la fecha de firma de cada contrato, pero el catálogo de la plataforma solo guardaba la de publicación. Ya se corrigió el programa (actualizar_comprasmx.py guarda «cruce69b» con la fecha de firma); falta volver a correrlo con los archivos de Datos Abiertos. Mientras tanto, el cruce compara la fecha de publicación contra la del DOF y lo dice.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://comprasmx.buengobierno.gob.mx/datos-abiertos" target="_blank" rel="noopener">🔗 Dónde debería estar: Datos Abiertos de ComprasMX ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-inspector-cruce.html#hallazgos">Modo Inspector · Contratos, lista 69-B y ASF</a> · <a class="pe-ancla" href="#cruce-fecha-firma" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="cruce-fecha-presunto">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> La fecha en que entraron como presuntas las empresas que ya salieron de la lista 69-B</h3>
+            <p class="pe-porque"><b>Por qué:</b> El listado completo del SAT trae, por contribuyente, la fecha de cada etapa (presunto, desvirtuado, definitivo, sentencia favorable). La plataforma solo guardaba la de su situación actual. Ya se corrigió el programa (actualizar_69b.py); falta volver a correrlo con el archivo del SAT, que no abrió desde el servidor de la plataforma el 04-11-2026. Sin esa fecha no se sabe si un contrato anterior a la salida fue mientras la empresa era presunta.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336" target="_blank" rel="noopener">🔗 Dónde debería estar: SAT, listados del artículo 69-B ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-inspector-cruce.html#metodo">Modo Inspector · Contratos, lista 69-B y ASF</a> · <a class="pe-ancla" href="#cruce-fecha-presunto" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
         </div>
         </div>
       </section>
@@ -660,6 +681,20 @@
         </div>
         <div class="apartado-bloque">
         <div class="pe-lista">
+          <article class="pe-item pe-plataforma" id="asf-cp-2000-2001">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Auditorías y acciones de la ASF de las Cuentas Públicas 2000 y 2001</h3>
+            <p class="pe-porque"><b>Por qué:</b> La serie estadística oficial de la Auditoría Superior («Estadísticas de la Fiscalización Superior de la Cuenta Pública en México», corte al 31-03-2026) empieza en la Cuenta Pública 2002. Las cifras de 2000 y 2001 hay que buscarlas en los informes de esos años, que la plataforma aún no ha revisado.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.asf.gob.mx/Section/58_Informes_de_auditoria" target="_blank" rel="noopener">🔗 Dónde debería estar: Informes de auditoría de la ASF ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-inspector-cruce.html#por-anio">Modo Inspector · Contratos, lista 69-B y ASF</a> · <a class="pe-ancla" href="#asf-cp-2000-2001" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
+          <article class="pe-item pe-plataforma" id="cruce-asf-empresa">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Qué empresas de la lista 69-B aparecen en los informes individuales de la ASF</h3>
+            <p class="pe-porque"><b>Por qué:</b> Las estadísticas de la ASF son por año, tipo de acción y sector, no por proveedor. Para saber si la ASF observó a una empresa de la lista hay que leer los informes individuales de cada Cuenta Pública, que están publicados y la plataforma aún no cruza.</p>
+            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
+            <p class="pe-donde"><a href="https://www.asf.gob.mx/Section/58_Informes_de_auditoria" target="_blank" rel="noopener">🔗 Dónde debería estar: Informes de auditoría de la ASF ↗</a></p>
+            <p class="pe-aparece">Aparece en: <a href="herramienta-inspector-cruce.html#por-anio">Modo Inspector · Contratos, lista 69-B y ASF</a> · <a class="pe-ancla" href="#cruce-asf-empresa" aria-label="Enlace a este pendiente">#</a></p>
+          </article>
           <article class="pe-item pe-dependencia" id="asf-matriz-2018">
             <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Matriz de Datos Básicos de la Cuenta Pública 2018</h3>
             <p class="pe-porque"><b>Por qué:</b> La ASF no publicó en su portal la matriz de la Cuenta Pública 2018, como sí lo hizo con las demás. Sin ella, la serie de montos por aclarar tiene un hueco en ese año.</p>
@@ -1265,11 +1300,11 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261104k</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261104r</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261104k"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261104k"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261104r"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261104r"></script>
 </body>
 </html>
