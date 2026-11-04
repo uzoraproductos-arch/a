@@ -182,16 +182,16 @@ p.pl-ficha-ir a:hover, p.pl-ficha-ir a:focus-visible { background: #16408c; }
    nuestro mapa interactivo»). */
 
 /* El encabezado: el paisaje al frente y la persona que lo mira, en sombra (la
-   foto va en espejo: la persona a la derecha, mirando el valle). Se desvanece
-   por la izquierda hacia el azul de la noche, donde va el texto; en celular el velo es parejo y deja ver el valle abajo. */
+   foto en su sentido original, pedido del autor: la persona a la izquierda,
+   bajo el texto, y el valle a la derecha). Se oscurece por la izquierda hacia
+   el azul de la noche; en celular el velo es parejo y deja ver el valle abajo. */
 .herr-cab.rubro-planisferio { --tarjeta: #c9a84c; padding: 30px 0 56px; min-height: 380px; }
 .herr-cab.rubro-planisferio::before {
-  background: #0d1f2b url('../img/planisferio-paisaje.webp') right 28% / max(1120px, 74vw) auto no-repeat;
+  background: #0d1f2b url('../img/planisferio-paisaje.webp') 30% 18% / cover no-repeat;
 }
 .herr-cab.rubro-planisferio::after {
   background:
-    radial-gradient(ellipse 15% 75% at 81% 62%, rgba(9, 24, 38, 0.5) 0%, rgba(9, 24, 38, 0) 100%),
-    linear-gradient(90deg, rgba(9, 24, 38, 1) 0%, rgba(9, 24, 38, 1) 22%, rgba(9, 24, 38, 0.82) 30%, rgba(9, 24, 38, 0.35) 46%, rgba(9, 24, 38, 0) 62%),
+    linear-gradient(90deg, rgba(9, 24, 38, 0.9) 0%, rgba(9, 24, 38, 0.78) 30%, rgba(9, 24, 38, 0.5) 45%, rgba(9, 24, 38, 0.08) 62%, rgba(9, 24, 38, 0) 75%),
     linear-gradient(0deg, rgba(9, 24, 38, 0.55) 0%, rgba(9, 24, 38, 0) 35%);
 }
 .herr-cab.rubro-planisferio .apartado-ancho > * { max-width: 620px; }
@@ -200,7 +200,7 @@ p.pl-ficha-ir a:hover, p.pl-ficha-ir a:focus-visible { background: #16408c; }
 .herr-cab.rubro-planisferio .apartado-titulo { text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45); }
 @media (max-width: 700px) {
   .herr-cab.rubro-planisferio { min-height: 0; padding-bottom: 120px; }
-  .herr-cab.rubro-planisferio::before { background-image: url('../img/planisferio-paisaje-movil.webp'); background-position: 30% 100%; }
+  .herr-cab.rubro-planisferio::before { background-image: url('../img/planisferio-paisaje-movil.webp'); background-position: 72% 64%; }
   .herr-cab.rubro-planisferio::after { background: linear-gradient(180deg, rgba(9, 24, 38, 0.93) 0%, rgba(9, 24, 38, 0.85) 62%, rgba(9, 24, 38, 0.2) 100%); }
 }
 

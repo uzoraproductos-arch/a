@@ -98,7 +98,7 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   lateral con el botón «📍 Las 32 entidades».
   **El mapa es el protagonista** (reestructura del autor, 04-11-2026: «lo que le llama al
   usuario a jugar con él»): encabezado con la foto del paisaje y la persona en sombra
-  (`planisferio-paisaje.webp`, en espejo, con su versión `-movil`), «cómo se juega» en
+  (`planisferio-paisaje.webp`, en su sentido original, con su versión `-movil`), «cómo se juega» en
   tres pasos, las nueve dimensiones como mosaico de color (`--dim` de `planisferio.css`)
   y el mapa en su tablero (`#plTablero`), que toma el color, el nombre y la descripción de
   la dimensión; «Para leerla bien» (los cajones) va al pie del tablero y lo financiero en
