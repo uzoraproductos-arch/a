@@ -990,7 +990,7 @@ def temas():
                                    'rn-incendios' if k.startswith('rn_if_') else 'rn-pesca' if k.startswith('rn_pe_') else 'rn-agua'), TITULO]
         x['aqui'] = x['ir']
         if k.startswith(('rn_min_', 'rn_acu_', 'rn_if_', 'rn_pe_')):
-            x['ir'] = [x.pop('portal') + '#ambiental', 'sus recursos naturales en el Planisferio']
+            x['ir'] = [x.pop('portal').replace('.html', '-ambiental.html'), 'sus recursos naturales en el Planisferio']
     return t
 
 
