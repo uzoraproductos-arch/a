@@ -120,6 +120,8 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   `QUE_CUADRE`, `QUE_OBRAS` de `territorio_modulos.py`), y el mapa ambiental de megaobras tiene su
   par en `OTROS_MAPAS`. El chat reconoce por su archivo y su `?l=` cualquier tarjeta que lleve a un
   mapa con par (`conPl()`), aunque la haya armado otra respuesta.
+  La página de presupuestos de cada portal trae «No cuadra» como cuarto piso, con la misma cuenta.
+  La administración pública va en **gris pizarra** (`#4a5a6a`, elegido por el autor el 04-11-2026).
 - **No trae datos propios:** ordena en el territorio lo que la Enciclopedia
   ya cotejó (`AUDIT_DB`, `municipios-efipem.js`). Una cifra nueva entra
   primero a su módulo de la Enciclopedia y de ahí la lee el Planisferio.
