@@ -277,7 +277,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-lo-que-la-cifra-no-dice.html` | Lo que la cifra grande no dice · Auditavisión | apartados.py | 52 | 0 | 0 | 4 | 1 |
 | `numeros-los-16-origenes.html` | Los 16 orígenes del ingreso · Auditavisión | apartados.py | 61 | 0 | 2 | 3 | 0 |
 | `numeros-los-municipios.html` | Los 2,479 municipios: predial y transferencias · Auditavisión | apartados.py | 55 | 0 | 3 | 4 | 1 |
-| `numeros-mapa-del-gasto-federalizado.html` | El mapa del gasto federalizado · Auditavisión | apartados.py | 42 | 0 | 1 | 1 | 0 |
+| `numeros-mapa-del-gasto-federalizado.html` | El mapa del gasto federalizado · Auditavisión | apartados.py | 43 | 0 | 1 | 1 | 0 |
 | `numeros-margen-del-presupuesto.html` | ¿Cuánto margen tiene el presupuesto? · Auditavisión | apartados.py | 52 | 0 | 3 | 10 | 0 |
 | `numeros-paquete-2027-cifras.html` | Cómo se ve 2027 · Auditavisión | apartados.py | 46 | 0 | 1 | 0 | 0 |
 | `numeros-paquete-2027-colchon.html` | Colchón y pasivos · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |

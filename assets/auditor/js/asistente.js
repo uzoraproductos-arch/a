@@ -483,11 +483,55 @@
     if (!iv || lista.some(function (o) { return sinParam(o.x.ir) === iv.x.ir; })) return lista;
     return [iv].concat(lista).slice(0, 5);
   }
+  /* El Planisferio es la matriz de los mapas (pedido del autor, 04-11-2026:
+     «que todo quedara en una misma línea… el planisferio va a ser nuestra
+     matriz»). Los mapas que viven en el Planisferio (pl, que escribe
+     asistente_recursos.py) no salen como tarjetas sueltas: se juntan en un
+     solo renglón que abre el Planisferio en su dimensión, con las otras
+     dimensiones al lado. Los que todavía no tienen par allá siguen como tarjeta. */
+  function ligaPl(x, ab) { return ab && x.ple ? x.ple.replace('%s', encodeURIComponent(ab)) : x.pl; }
+  function destinoRec(x, ab) { return x.pl ? ligaPl(x, ab) : ligaRec(x, ab); }
+  function sinRepetirPl(lista) {
+    var vistos = {};
+    return lista.filter(function (o) {
+      var x = o.x || o, k = x.pl ? 'pl:' + (x.plk || x.pl) : 'ir:' + x.ir;
+      if (vistos[k]) return false;
+      vistos[k] = 1;
+      return true;
+    });
+  }
+  function lineaPl(pls) {
+    if (!pls.length) return '';
+    var p = pls[0], ab = p.ab, que = p.x.pll ? 'Dimensión ' + p.x.pll.charAt(0).toLowerCase() + p.x.pll.slice(1) : p.x.n;
+    return '<div class="pa-pl"><a class="pa-pl-a" href="' + esc(ligaPl(p.x, ab)) + '"><span class="pa-rec-ico" aria-hidden="true">🗺️</span>' +
+      '<span><b>Ver en el Planisferio</b><small>' + esc(que) + (ab && p.x.ple ? ' · ' + esc(NOMBRE[ab]) : '') + '</small></span></a>' +
+      (pls.length > 1 ? '<span class="pa-pl-mas"><span class="pa-pl-t">También ahí:</span>' + pls.slice(1).map(function (o) {
+        return '<a class="pa-pl-chip" href="' + esc(ligaPl(o.x, o.ab)) + '">' + esc(o.x.pll || o.x.v) + '</a>';
+      }).join('') + '</span>' : '') + '</div>';
+  }
+  /* Una tarjeta armada a mano (las megaobras de un estado, por ejemplo) que
+     lleva a un mapa con par en el Planisferio toma ese par: se busca en el
+     catálogo por su archivo y su lente (?l=), y el estado sale de su ?e=. */
+  function lenteDe(u) { var m = /[?&]l=([A-Za-z]+)/.exec(String(u)); return m ? m[1] : ''; }
+  function conPl(o) {
+    if (!o || !o.x || o.x.pl || !o.x.ir) return o;
+    var par = null;
+    REC.forEach(function (r) { if (!par && r.pl && sinParam(r.ir) === sinParam(o.x.ir) && lenteDe(r.ir) === lenteDe(o.x.ir)) par = r; });
+    if (!par) return o;
+    var m = /[?&]e=([A-Za-z]+)/.exec(o.x.ir), ab = o.ab || (m && NOMBRE[m[1]] ? m[1] : null), x = {};
+    Object.keys(o.x).forEach(function (k) { x[k] = o.x[k]; });
+    ['pl', 'ple', 'pld', 'pll', 'plk'].forEach(function (k) { x[k] = par[k]; });
+    return { x: x, ab: ab };
+  }
   function recursosHtml(lista) {
-    return lista && lista.length ? '<div class="pa-rec"><p class="pa-mas-t">Explóralo a fondo</p><div class="pa-rec-lista">' + lista.map(function (o) {
+    lista = sinRepetirPl((lista || []).map(conPl));
+    var pls = lista.filter(function (o) { return o.x.pl; });
+    lista = lista.filter(function (o) { return !o.x.pl; });
+    var linea = lineaPl(pls);
+    return linea || lista.length ? '<div class="pa-rec"><p class="pa-mas-t">Explóralo a fondo</p>' + linea + (lista.length ? '<div class="pa-rec-lista">' + lista.map(function (o) {
       return '<a class="pa-rec-a" href="' + esc(ligaRec(o.x, o.ab)) + '"><span class="pa-rec-ico" aria-hidden="true">' + o.x.ico + '</span>' +
         '<span><b>' + esc(o.x.v) + '</b><small>' + esc(o.x.n) + (o.ab && o.x.ire ? ' · ' + esc(NOMBRE[o.ab]) : '') + '</small></span></a>';
-    }).join('') + '</div></div>' : '';
+    }).join('') + '</div>' : '') + '</div>' : '';
   }
   /* La Enciclopedia es la base de datos física del Auditor (pedido del autor,
      29-10-2026): al pie de cada respuesta van las páginas de la Enciclopedia
@@ -616,13 +660,15 @@
     var tema = ws.filter(function (w) { return (!TIPOS_REC[w] || w === 'planisferio') && !(ab && plano(NOMBRE[ab]).indexOf(' ' + w + ' ') >= 0); });
     delTipo.forEach(function (x) { var s = comunes(x._k, tema); if (s > ms) { ms = s; mejor = x; } });
     if (!mejor && tema.length > 1) return null;
-    var lista = function (xs) { return '<ul class="pa-lista">' + xs.map(function (x) { return '<li><a href="' + esc(ligaRec(x, ab)) + '">' + x.ico + ' <b>' + esc(x.n) + '</b></a></li>'; }).join('') + '</ul>'; };
+    var lista = function (xs) { return '<ul class="pa-lista">' + sinRepetirPl(xs).map(function (x) { return '<li><a href="' + esc(destinoRec(x, ab)) + '">' + x.ico + ' <b>' + esc(x.n) + '</b>' + (x.pl && x.pld ? ' · en el Planisferio' : '') + '</a></li>'; }).join('') + '</ul>'; };
     if (!mejor) return { html: '<p>Estos son los que tengo:</p>' + lista(delTipo) + '<p>Cada uno se abre en su página. Dime el tema y te llevo al que es.</p>', ir: [delTipo[0].ir, delTipo[0].n], sug: [], rec: [] };
-    var otros = delTipo.filter(function (x) { return x !== mejor; });
+    /* Un mapa que vive en el Planisferio se abre ahí, la matriz de los mapas (04-11-2026). */
+    var k = function (x) { return x.pl ? (x.plk || x.pl) : x.ir; };
+    var otros = delTipo.filter(function (x) { return x !== mejor && k(x) !== k(mejor); });
     return {
-      html: '<p>' + mejor.ico + ' Aquí está: <b>' + esc(mejor.n) + '</b>' + (ab && mejor.ire ? ', ya con ' + esc(NOMBRE[ab]) + ' elegido' : '') + '. Toca <b>«Saber más»</b> y se abre en su página.</p>' +
+      html: '<p>' + mejor.ico + ' Aquí está: <b>' + esc(mejor.n) + '</b>' + (mejor.pl && mejor.pld ? ', en el Planisferio' : '') + (ab && (mejor.ple || mejor.ire) ? ', ya con ' + esc(NOMBRE[ab]) + ' elegido' : '') + '. Toca <b>«Saber más»</b> y se abre en su página.</p>' +
         (otros.length ? '<p class="pa-chico">También tengo:</p>' + lista(otros) : ''),
-      ir: [ligaRec(mejor, ab), mejor.n], sug: [], rec: []
+      ir: [destinoRec(mejor, ab), mejor.pl && mejor.pll ? 'el Planisferio · dimensión ' + mejor.pll.charAt(0).toLowerCase() + mejor.pll.slice(1) : mejor.n], sug: [], rec: []
     };
   }
   function estadoDeCuenta(q, r) {

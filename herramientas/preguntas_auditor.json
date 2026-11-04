@@ -23,7 +23,7 @@
   },
   {
    "q": "Muéstrame el mapa de la deuda de los estados",
-   "ir": "numeros-mapa-del-gasto-federalizado.html?l=deuda"
+   "ir": "planisferio.html?d=deuda&l=deuda"
   },
   {
    "q": "Estado de cuenta de un diputado",
@@ -1551,6 +1551,23 @@
   {
    "q": "Mapa de las alcaldías de la Ciudad de México",
    "ir": "planisferio.html?e=CDMX&m=1"
+  },
+  {
+   "q": "El mapa de las obras con alerta ambiental de Veracruz",
+   "ir": "datos-ambiente-megaobras.html?e=VER#abMapaObras"
+  },
+  {
+   "q": "El mapa de la ASF de Oaxaca",
+   "ir": "planisferio.html?d=inversion&l=asf&e=OAX",
+   "dice": ["en el Planisferio"]
+  },
+  {
+   "q": "El mapa del gasto federalizado de Jalisco",
+   "ir": "planisferio.html?d=financiera&l=fed&e=JAL"
+  },
+  {
+   "q": "Mapa de lo que no cuadra",
+   "ir": "planisferio.html?d=financiera&l=cua"
   },
   {
    "q": "Muéstrame la deuda de Nuevo León en el planisferio",

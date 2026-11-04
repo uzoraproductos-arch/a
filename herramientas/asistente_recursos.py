@@ -168,6 +168,47 @@ def _existe(enlace):
     return True
 
 
+def _en_planisferio(ir, ire):
+    """Dónde vive este mapa en el Planisferio, la matriz de los mapas
+    (04-11-2026), o None: {'pl': enlace, 'ple': enlace con estado, 'pld':
+    nombre de la dimensión, 'pll': cómo se rotula, 'plk': la llave con que el
+    chat junta dos mapas que abren lo mismo}. Un mapa del Planisferio vive ahí
+    mismo; una lente del mapa de la Enciclopedia, en su par (PLANISFERIO y
+    OTROS_MAPAS de territorio_modulos.py). El chat junta en un solo renglón
+    los mapas que viven en el Planisferio."""
+    import planisferio
+    import territorio_modulos as tm
+    nombres = {i: nom for i, _, nom, *_r in planisferio.DIMENSIONES}
+    primera, nom_l = {}, {}
+    for l in planisferio.LENTES:
+        primera.setdefault(l['dim'], l['id'])
+        nom_l[l['id']] = re.sub(r'^\d+ · ', '', l['nom']).split(':')[0]
+
+    def sale(liga, ligae, d, l):
+        if not d:
+            return {'pl': liga, 'ple': ligae, 'pld': '', 'pll': '', 'plk': liga.split('?')[0].split('#')[0] + (ligae or '')}
+        l = l or primera[d]
+        rot = nombres[d] if l == primera[d] else '%s · %s' % (nombres[d], nom_l[l])
+        return {'pl': liga, 'ple': ligae, 'pld': nombres[d], 'pll': rot, 'plk': d + '/' + l}
+    archivo = ir.split('#')[0].split('?')[0]
+    if archivo.startswith('planisferio'):
+        d = re.search(r'[?&]d=([a-z]+)', ir)
+        l = re.search(r'[?&]l=([A-Za-z]+)', ir)
+        return sale(ir, ire, d.group(1) if d else None, l.group(1) if l else None)
+    if archivo in tm.OTROS_MAPAS:
+        d, l = tm.OTROS_MAPAS[archivo]
+    elif archivo == tm.MAPA:
+        m = re.search(r'[?&]l=([a-z]+)', ir)
+        p = tm.PLANISFERIO.get(m.group(1) if m else 'gasto')
+        if not p:
+            return None
+        d, l = p
+    else:
+        return None
+    liga = 'planisferio.html?d=%s&l=%s' % (d, l)
+    return sale(liga, liga + '&e=%s', d, l)
+
+
 def _docs_expide():
     s = open(os.path.join(RAIZ, EXPIDE), encoding='utf-8').read()
     C = json.loads(re.search(r'id="exCargos">(.*?)</script>', s, re.S).group(1))
@@ -202,7 +243,10 @@ def base(estados):
         for e in (ir, (ire % 'X') if ire else None):
             if e and not _existe(e):
                 malos.append(e)
-        rec.append({'id': i, 'q': q, 'ico': ico, 'v': verbo, 'n': nom, 'ir': ir, 'ire': ire, 'tipo': tipo, 'k': k})
+        x = {'id': i, 'q': q, 'ico': ico, 'v': verbo, 'n': nom, 'ir': ir, 'ire': ire, 'tipo': tipo, 'k': k}
+        if tipo == 'mapa':
+            x.update(_en_planisferio(ir, ire) or {})
+        rec.append(x)
     if malos:
         raise SystemExit('asistente_recursos: enlaces que no existen: ' + '; '.join(malos))
     return {'ec': ec, 'rec': rec, 'dl': dl}
