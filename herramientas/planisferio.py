@@ -108,7 +108,7 @@ def portal(a):
 # financiera es «presupuestos». Un tema nuevo del portal necesita aquí su
 # renglón: (id, ícono, nombre de la tarjeta, lo que trae).
 TEMAS = [
-    ('presupuestos', '💰', 'Sus tres presupuestos', 'Lo que le baja de la Federación, lo que cobra el estado, lo que ingresan sus municipios y su contador.'),
+    ('presupuestos', '💰', 'Sus tres presupuestos', 'Lo que le baja de la Federación, lo que cobra el estado, lo que ingresan sus municipios, lo que no cuadra y su contador.'),
     ('deuda', '🏦', 'Su deuda', 'Lo que debe el gobierno del estado, cuánto le pesa y lo que pagaron sus municipios por sus créditos.'),
     ('inversion', '🏗️', 'Su inversión', 'La obra del gobierno del estado y de sus municipios, y lo que la ASF dejó por aclarar.'),
     ('legislativa', '🏛️', 'Su congreso', 'Lo que gastó su congreso, cuántas curules tiene y el tope de la Constitución.'),
@@ -1873,6 +1873,27 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
               '<p class="pl-piso-v"><b>Sin cuenta municipal</b> %s</p><p>Las alcaldías de la Ciudad de México no rinden cuenta municipal al INEGI: '
               'su dinero va dentro del presupuesto de la Ciudad. Por eso aquí no hay suma, y ponerle cero falsearía la cifra.</p></article>' % (
                   m['n'], chip('pendiente', 'municipios-sin-cuenta')))
+    # «No cuadra» (04-11-2026, el Planisferio como matriz de los mapas): lo que
+    # el estado reportó al INEGI como recibido contra lo que la Cuenta Pública
+    # dice que la Federación le pagó, con la misma cuenta del mapa
+    # (cuadre_obras() de territorio_modulos.py).
+    cua = tm.cuadre_obras(base)[0][a]
+    x = base['inspector_estatal']['entidades'].get(a) or {}
+    if cua is None:
+        p4 = ('<article class="pl-piso pl-piso-cua"><p class="pl-piso-n">4 · No cuadra: lo recibido contra lo pagado · 2024</p>'
+              '<p class="pl-piso-v"><b>Sin cifra</b> %s</p><p>%s no figura en la estadística estatal del INEGI: no hay segunda cifra con que contrastar.</p></article>' % (
+                  chip('pendiente', 'entidades-' + a.lower()), html.escape(nom)))
+    else:
+        p4 = ('<article class="pl-piso pl-piso-cua"><p class="pl-piso-n">4 · No cuadra: lo recibido contra lo pagado · 2024</p>'
+              '<p class="pl-piso-v"><b class="num-tabular">%s</b> %s <small>de diferencia</small></p>'
+              '<dl class="pl-dl"><dt>Lo que el estado reportó al INEGI como recibido</dt><dd>%s %s</dd>'
+              '<dt>Lo que la Cuenta Pública dice que le pagó</dt><dd>%s %s</dd></dl>'
+              '<p>Ramos 28 y 33, sin convenios; cada lado es la suma de sus dos ramos. Una diferencia puede tener explicación (retenciones por adeudos, pagos a un fideicomiso de deuda, registros en otro año), '
+              'pero esa explicación tiene que darla el gobierno.</p>'
+              '<p class="pl-piso-f">%s <a href="planisferio.html?d=financiera&amp;l=cua&amp;e=%s">Las 32 en el mapa ➔</a></p></article>' % (
+                  format(cua, '.2f') + ' %', chip('derivado'),
+                  mdp(x['inegiPart'] + x['inegiAportSinConvenios']), chip('derivado'), mdp(x['cpR28'] + x['cpR33']), chip('derivado'),
+                  tm.fuente_cuadre(ref), quote(a)))
     # 2 · El ritmo
     s = _ritmo(e['gasto'])
     ritmo = ('<div class="pl-conts pl-conts-1"><article class="pl-cont" data-anual="%.1f">'
@@ -1945,8 +1966,9 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
         nom, e['capital'], format(e['pobPersonas'], ','), chip('derivado'))
     temas = [
             {'id': 'presupuestos', 'titulo': 'Sus tres presupuestos',
-             'texto': 'Un piso por cada orden de gobierno. Los años no se mezclan: lo que baja es de 2026 y lo que cobran el estado y sus municipios, de 2024, el último con cifras definitivas del INEGI.',
-             'tarjetas': [], 'bloque': '<div class="pl-pisos">%s%s%s</div>' % (p1, p2, p3)},
+             'texto': ('Un piso por cada orden de gobierno. Los años no se mezclan: lo que baja es de 2026 y lo que cobran el estado y sus municipios, de 2024, el último con cifras definitivas del INEGI. '
+                       'El cuarto pone lo que el estado dice que recibió en 2024 junto a lo que la Federación dice que le pagó.'),
+             'tarjetas': [], 'bloque': '<div class="pl-pisos">%s%s%s%s</div>' % (p1, p2, p3, p4)},
             {'id': 'ritmo', 'titulo': 'Su contador', 'texto': '', 'tarjetas': [], 'bloque': ritmo},
             {'id': 'deuda', 'titulo': 'Su deuda',
              'texto': ('Lo que debe el gobierno de %s y cuánto le pesa, medido por el Sistema de Alertas de Hacienda con la Cuenta Pública 2025. '
