@@ -442,44 +442,44 @@ LENTES = [
              'La Constitución pone el piso: 7, 9 u 11 según la población del estado (art. 116, fr. II).')},
     # La dimensión judicial (03-11-2026): los 32 poderes judiciales de los
     # estados, con el censo del INEGI. El dinero va junto a lo que resolvió.
-    {'id': 'jud', 'dim': 'judicial', 'fmt': 'mdp', 'nom': 'Lo que ejerció', 'pal': 'azul', 'est': 'oficial', 'anio': 2024,
+    {'id': 'jud', 'dim': 'judicial', 'fmt': 'mdp', 'nom': 'Lo que ejerció', 'pal': 'cafe', 'est': 'oficial', 'anio': 2024,
      'que': ('El presupuesto que ejerció en 2024 el Poder Judicial de cada estado, según lo que le reportó al Censo Nacional de Impartición de Justicia del INEGI. '
              'Paga todo el poder judicial: juzgados, tribunal superior, administración, edificios y personal de apoyo.')},
-    {'id': 'judc', 'dim': 'judicial', 'fmt': 'pct', 'nom': 'Concluyó de cada 100 que entraron', 'pal': 'verde', 'est': 'derivado', 'anio': 2024,
+    {'id': 'judc', 'dim': 'judicial', 'fmt': 'pct', 'nom': 'Concluyó de cada 100 que entraron', 'pal': 'cafe', 'est': 'derivado', 'anio': 2024,
      'que': ('Asuntos concluidos en primera instancia entre los que ingresaron, × 100. Más de 100 quiere decir que también cerró asuntos de años anteriores. '
              'No es el rezago: en lo civil, familiar y mercantil el INEGI cuenta como ingresada toda demanda, también la que se desecha.')},
-    {'id': 'juda', 'dim': 'judicial', 'fmt': 'pesos', 'nom': 'Por asunto concluido', 'pal': 'azul', 'est': 'derivado', 'anio': 2024,
+    {'id': 'juda', 'dim': 'judicial', 'fmt': 'pesos', 'nom': 'Por asunto concluido', 'pal': 'cafe', 'est': 'derivado', 'anio': 2024,
      'que': ('Lo que ejerció entre los asuntos que concluyó en primera instancia. No es lo que cuesta un juicio: el presupuesto paga todo el poder judicial, '
              'y un asunto concluido puede ser una sentencia o un desechamiento. Sirve para comparar, no para cobrar.')},
-    {'id': 'judr', 'dim': 'judicial', 'fmt': 'n', 'nom': 'Causas penales pendientes', 'pal': 'rojo', 'est': 'oficial', 'anio': 2024,
+    {'id': 'judr', 'dim': 'judicial', 'fmt': 'n', 'nom': 'Causas penales pendientes', 'pal': 'cafe', 'est': 'oficial', 'anio': 2024,
      'que': ('Las causas penales del sistema acusatorio que quedaron pendientes de concluir al cierre de 2024. Es el único rezago que el censo publica completo; '
              'en los estados, el INEGI cuenta a cada persona procesada, no cada expediente.')},
-    {'id': 'judj', 'dim': 'judicial', 'fmt': 'n', 'nom': 'Personas juzgadoras', 'pal': 'azul', 'est': 'oficial', 'anio': 2024,
+    {'id': 'judj', 'dim': 'judicial', 'fmt': 'n', 'nom': 'Personas juzgadoras', 'pal': 'cafe', 'est': 'oficial', 'anio': 2024,
      'que': ('Las magistradas, magistrados, juezas y jueces de cada poder judicial estatal que reportó el censo, de todas las materias. '
              'Desde la reforma de 2024, la Constitución pide que se elijan por voto directo (art. 116, fr. III).')},
     # La salud pública (03-11-2026, pedido del autor: «sería IMSS e ISSSTE»).
     # Del IMSS, su Memoria por OOAD; del ISSSTE, el registro de la DGIS,
     # porque su anuario no responde. Los dos documentos no se mezclan.
-    {'id': 'imA', 'dim': 'salud', 'fmt': 'n', 'nom': 'IMSS · Personas adscritas', 'pal': 'azul', 'est': 'oficial', 'anio': 2025,
+    {'id': 'imA', 'dim': 'salud', 'fmt': 'n', 'nom': 'IMSS · Personas adscritas', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
      'que': ('Las personas adscritas a una clínica de medicina familiar del IMSS en cada estado al 31 de diciembre de 2025: trabajadores, sus familias y pensionados. '
              'Son las que el IMSS atiende en su primer nivel; no es la población del estado ni toda la que tiene derecho.')},
-    {'id': 'imX', 'dim': 'salud', 'fmt': 'dec2', 'nom': 'IMSS · Consultas por persona adscrita', 'pal': 'verde', 'est': 'derivado', 'anio': 2025,
+    {'id': 'imX', 'dim': 'salud', 'fmt': 'dec2', 'nom': 'IMSS · Consultas por persona adscrita', 'pal': 'naranja', 'est': 'derivado', 'anio': 2025,
      'que': ('Todas las consultas que dio el IMSS en el estado en 2025 (de medicina familiar, especialidad, urgencias y dentales) entre sus personas adscritas. '
              'Cuenta consultas, no si se resolvió el problema ni cuánto se esperó. Los hospitales de alta especialidad atienden a gente de otros estados y se cuentan donde están.')},
-    {'id': 'imQ', 'dim': 'salud', 'fmt': 'n', 'nom': 'IMSS · Cirugías', 'pal': 'azul', 'est': 'oficial', 'anio': 2025,
+    {'id': 'imQ', 'dim': 'salud', 'fmt': 'n', 'nom': 'IMSS · Cirugías', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
      'que': ('Las intervenciones quirúrgicas que registró el IMSS en cada estado en 2025, según su Memoria. Ojo: el IMSS anunció «1.78 millones de cirugías» en el país y su Memoria '
              'registra más intervenciones; son dos conteos que ningún documento explica.')},
-    {'id': 'imK', 'dim': 'salud', 'fmt': 'dec2', 'nom': 'IMSS · Camas por cada mil adscritos', 'pal': 'verde', 'est': 'derivado', 'anio': 2025,
+    {'id': 'imK', 'dim': 'salud', 'fmt': 'dec2', 'nom': 'IMSS · Camas por cada mil adscritos', 'pal': 'naranja', 'est': 'derivado', 'anio': 2025,
      'que': ('Las camas censables (las de hospitalización, sin urgencias ni recuperación) del IMSS en cada estado por cada mil personas adscritas. '
              'Dice con cuánto cuenta, no cuántas están ocupadas ni si hay personal para usarlas.')},
-    {'id': 'isM', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Médicos', 'pal': 'oro', 'est': 'oficial', 'anio': 2025,
+    {'id': 'isM', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Médicos', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
      'que': ('Las médicas y médicos generales, especialistas y odontólogos del ISSSTE en cada estado, según el registro de recursos de la Secretaría de Salud (DGIS). '
              'Cuántas personas atiende el ISSSTE en cada estado no se puede decir: su anuario no responde. Algunas unidades no reportaron personal.')},
-    {'id': 'isK', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Camas de hospital', 'pal': 'oro', 'est': 'oficial', 'anio': 2025,
+    {'id': 'isK', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Camas de hospital', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
      'que': ('Las camas del área de hospitalización del ISSSTE en cada estado (registro de la DGIS). Sin cuántos derechohabientes tiene cada estado, no se puede decir si son pocas o muchas.')},
-    {'id': 'isU', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Unidades', 'pal': 'oro', 'est': 'oficial', 'anio': 2025,
+    {'id': 'isU', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Unidades', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
      'que': ('Los establecimientos del ISSSTE en cada estado (registro de la DGIS): clínicas, hospitales y unidades de apoyo. Muchas unidades chicas no es lo mismo que mucha atención.')},
-    {'id': 'imM', 'dim': 'salud', 'fmt': 'n', 'nom': 'IMSS · Médicos, en el mismo registro', 'pal': 'azul', 'est': 'oficial', 'anio': 2025,
+    {'id': 'imM', 'dim': 'salud', 'fmt': 'n', 'nom': 'IMSS · Médicos, en el mismo registro', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
      'que': ('Las médicas y médicos del IMSS en cada estado según el mismo registro de la DGIS que el ISSSTE: así se comparan las dos instituciones con la misma regla. '
              'Desde 2025 incluye las unidades rurales del antiguo programa IMSS-Bienestar, por eso no es la cifra de la Memoria.')},
     # La administración pública (03-11-2026, pedido del autor): el gobierno

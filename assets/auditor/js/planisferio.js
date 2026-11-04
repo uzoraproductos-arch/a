@@ -48,7 +48,9 @@
       oro: ['#fbf3dc', '#f0d98f', '#d9b34f', '#a8801f', '#6b4f0c'],
       azul: ['#e3ecf8', '#b4c9ea', '#6f95d2', '#2f5fa8', '#0b2a63'],
       verde: ['#e4f3e8', '#b3dcbd', '#6dba82', '#2e8a4c', '#0f5128'],
-      rojo: ['#fbe5e2', '#f2b3aa', '#e06f60', '#b3261e', '#6e1510']
+      rojo: ['#fbe5e2', '#f2b3aa', '#e06f60', '#b3261e', '#6e1510'],
+      cafe: ['#f5ecdc', '#e3c99b', '#c49a5c', '#8f6334', '#4e3318'],
+      naranja: ['#fdeedd', '#fbc995', '#f39a4a', '#d2661a', '#8a3a0a']
     };
     var porA = {}, lente = D.lentes[0], sel = null, dimP = lente.dim, ultima = {};
     function fmt(v, l) {
@@ -397,7 +399,9 @@
     var PAL = {
       verde: ['#e4f3e8', '#b3dcbd', '#6dba82', '#2e8a4c', '#0f5128'],
       azul: ['#e3ecf8', '#b4c9ea', '#6f95d2', '#2f5fa8', '#0b2a63'],
-      rojo: ['#fbe5e2', '#f2b3aa', '#e06f60', '#b3261e', '#6e1510']
+      rojo: ['#fbe5e2', '#f2b3aa', '#e06f60', '#b3261e', '#6e1510'],
+      cafe: ['#f5ecdc', '#e3c99b', '#c49a5c', '#8f6334', '#4e3318'],
+      naranja: ['#fdeedd', '#fbc995', '#f39a4a', '#d2661a', '#8a3a0a']
     };
     var porC = {}, lente = D.lentes[0], sel = null, ficha = document.getElementById('plMunFicha'), CERO = '#eeede6';
     D.m.forEach(function (x) { porC[x.c] = x; });
