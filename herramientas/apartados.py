@@ -5543,6 +5543,15 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('04-11-2026', 'La Biblioteca del Erario Público, al día. Referencias suma 19 fichas, de la [160] a la [178]: las estadísticas de la fiscalización superior 2002-2024 de la ASF, el Anexo 9 del Presupuesto 2025 y el Reglamento de la Ley de Adquisiciones, los censos de gobierno 2025 del INEGI, la pobreza 2024 y el Marco Geoestadístico, la Memoria Estadística 2025 del IMSS, los recursos en salud de la DGIS, los acuíferos y el Programa Nacional Hídrico de la CONAGUA, los incendios y el sector forestal de la CONAFOR, el Anuario de pesca de la CONAPESCA, el Prontuario de la minería, el Anuario de PEMEX, y los informes del Mecanismo de Protección y de la FEADLE sobre las agresiones a la prensa. El Diccionario suma seis términos: fraccionamiento de contratos, disponibilidad de agua subterránea, concesión minera, superficie forestal, avisos de arribo y de cosecha, y Marco Geoestadístico. Y este índice sigue ya las cinco pestañas: Auditor, Planisferio, Comunidad (con la Enciclopedia), Noticiero y Servicios.'),
+    ('04-11-2026', 'El Modo Inspector, el chat y Servicios hablan igual: cada aplicación dice qué es gratis siempre, qué abriría una suscripción (solo avisos, memoria de tus casos, cómputo y descargas institucionales: la información pública nunca se cobra) y qué Servicio la lleva más a fondo. La suscripción todavía no abre: todo dice «Próximamente», sin precio.'),
+    ('04-11-2026', 'El Modo Inspector suma su octava aplicación: contratos × lista 69-B × ASF. Cruza los contratos públicos con la lista del SAT, por RFC, y con las auditorías de la ASF, año por año. Lo que declaró la autoridad va como oficial; la coincidencia de fechas es nuestra, y la decimos como señal para revisar, nunca como irregularidad.'),
+    ('04-11-2026', 'Cada modo del Auditor contesta a su manera: el Inspector suma la revisión de su respuesta (de qué está hecha, sus documentos y lo que falta), el Ciudadano la dice en corto y con su glosario, y el Ambientalista suma la mirada ambiental. Ningún modo agrega cifras, y el dictamen trae la lectura del modo con que preguntaste.'),
+    ('04-11-2026', 'Contratos públicos: señales de fraccionamiento. Buscamos adjudicaciones directas de la misma unidad, a la misma empresa y en la misma partida que, en 90 días, rebasan el tope del Anexo 9 del Presupuesto. Son señales para revisar, nunca irregularidades, y no nombramos a la empresa.'),
+    ('04-11-2026', 'El Planisferio, con el mapa de protagonista: elige una de sus nueve dimensiones, juega con el mapa y abre el portal de tu estado, ahora por tarjetas (sus presupuestos, su deuda, su congreso, su salud, su pobreza, sus recursos naturales y sus leyes, cada uno en su página). Los mapas de la Enciclopedia que ya viven ahí llevan a él, y el Auditor te lo abre en un solo renglón.'),
+    ('03-11-2026', 'El Planisferio pinta nueve dimensiones: financiera, deuda, inversión, legislativa, judicial, ambiental (los 653 acuíferos, los bosques y sus incendios, la pesca, las concesiones mineras y las refinerías), salud pública (IMSS e ISSSTE), administración pública y social (la pobreza 2024 del INEGI). Y trae el mapa de los municipios de las 32 entidades, con los límites del Marco Geoestadístico 2024 del INEGI.'),
+    ('03-11-2026', 'Las leyes del dinero en los tres niveles: con qué ley cobra, compra, se endeuda y rinde cuentas la Federación, cada estado y cada municipio, quién la aprueba y dónde se publica.'),
+    ('02-11-2026', 'El menú queda en cinco pestañas: Auditor, Planisferio (nueva), Comunidad (la Enciclopedia es su cuarta tarjeta), Noticiero y Servicios. Ningún enlace cambia de dirección.'),
     ('03-11-2026', 'La deuda de los municipios llega al Planisferio y a la Enciclopedia: lo que cada uno pagó por sus créditos y pidió prestado en 2024, según su propia cuenta al INEGI. Es lo que pagó, no lo que debe: su saldo lo publica Hacienda y sigue pendiente, con el nombre de quien lo debe.'),
     ('03-11-2026', 'Nuestro duodécimo pilar: la base de datos es un pilar de transparencia. No dependemos de solicitudes que solo ve quien las pide: armamos la transparencia con lo que se publica para todos, con la huella digital de cada documento, las cuentas rehechas y lo que falta en el Registro de pendientes, con el nombre de quien lo debe. La página de los pilares explica, paso por paso, cómo entra una cifra a la plataforma.'),
     ('02-11-2026', 'El mapa del dinero: el mapa de las 32 entidades suma dos capas que puedes operar. «No cuadra» compara lo que cada estado dice que recibió con lo que la Federación dice que le pagó, y «Obras con alerta ambiental» cuenta los proyectos del mapa ambiental en cada estado. El Auditor abre cada capa directo («mapa de la deuda»). La Mesa de redacción sigue además a ocho medios por su nombre y junta la misma historia cuando varios la cuentan. Servicios suma «A quién servimos» y la revisión de un proveedor.'),
@@ -5771,7 +5780,33 @@ def indice(base, ref):
     nsec = {x[0]: x[2] for x in noticias.SECCIONES}
     diario = _rejilla([_grupo('📰', 'Noticias', [(noticias.ARCHIVO, 'Noticias', 'La pestaña: sus tres páginas en una sola puerta')], noticias.ARCHIVO)] +
                       [_grupo(ico, tit, [(arch, tit, lema)] + [('%s#%s' % (arch, i), '· ' + nsec[i], '') for i in secs], arch)
-                       for arch, ico, tit, lema, _t, secs in noticias.PARTES])
+                       for arch, ico, tit, lema, _t, secs in noticias.PARTES] +
+                      [_grupo('⏱️', 'Al momento, nota por nota', [(x['archivo'], x['titulo'], x['lema'].split(' · ')[1]) for x in noticias.paginas_al_momento()]),
+                       _grupo('🛡️', 'Periodismo en riesgo', [('periodismo-en-riesgo.html', 'Periodismo en riesgo', 'Las agresiones a la prensa, con el informe del Mecanismo de Protección')])])
+    # El Planisferio, segunda pestaña desde el 02-11-2026: el mapa, sus
+    # dimensiones (las de DIMENSIONES de planisferio.py, así una nueva aparece
+    # sola), los 32 portales con sus temas y las leyes de los tres niveles.
+    import planisferio as pl, suscripcion
+    planis = _rejilla([
+        _grupo('🗺️', 'El mapa, por dimensiones', [(pl.ARCHIVO, 'Planisferio', 'El mapa grande de México: toca una entidad y abre su portal')] +
+               [('%s?d=%s' % (pl.ARCHIVO, d[0]), '· %s %s' % (d[1], d[2]), '') for d in pl.DIMENSIONES], pl.ARCHIVO),
+        _grupo('📍', 'Los 32 portales', [(pl.portal(e['abbr']), e['name'], '') for e in sorted(auditorias.db()['estados'], key=lambda e: e['name'])]),
+        _grupo('🗂️', 'Lo que trae cada portal', [(pl.subpagina('JAL', t[0]), '%s %s' % (t[1], t[2]), t[3]) for t in pl.TEMAS] +
+               [('marco-legal-tres-niveles.html', '📜 Las leyes del dinero en los tres niveles', 'Federal, estatal y municipal: cuál rige, quién la aprueba y dónde se publica')]),
+    ])
+    # Servicios, quinta pestaña (02-11-2026), con la suscripción del Modo
+    # Inspector (suscripcion.py) y el cruce de las tres puertas.
+    servs = _rejilla([
+        _grupo('🧾', 'Servicios', [('servicios.html', 'Servicios', 'Investigación a la medida, con la misma regla de las cifras')] +
+               [('servicios.html#sv-%s' % x[0], '· %s %s' % (x[1], x[2]), '') for x in SERVICIOS], 'servicios.html'),
+        _grupo('🔓', 'Gratis y con suscripción', [
+            ('servicios.html#suscripcion', 'Gratis y con suscripción', 'Lo que es gratis siempre y lo que abriría la suscripción, por aplicación'),
+            ('servicios.html#puertas', 'Cada aplicación, tres puertas', 'La herramienta, el chat en modo Inspector y su Servicio'),
+            ('servicios.html#solicitud', 'Pide un servicio', 'El formulario arma tu solicitud')]),
+        _grupo('📑', 'Contratos públicos', [
+            ('contratos-publicos.html', 'Contratos públicos', 'El buscador de ComprasMX, el cruce con la lista 69-B y las señales de fraccionamiento'),
+            ('herramienta-inspector-cruce.html', 'Contratos × lista 69-B × ASF', 'Lo que declaró la autoridad y la señal para revisar')]),
+    ])
     metodologia = (
         '<div class="indice-metodo">\n'
         '          <p>Toda cifra de la plataforma lleva su fuente oficial y uno de tres estados:</p>\n'
@@ -5782,27 +5817,31 @@ def indice(base, ref):
         '          </ul>\n'
         '          <p>Las imágenes de las investigaciones son ilustraciones y lo dicen en una etiqueta: no son evidencia de ningún hecho. '
         'La evidencia está en los documentos de las <a href="fuentes-oficiales.html">Referencias</a> de la Biblioteca del Erario Público.</p>\n'
+        '          <p><a href="pilares.html"><b>🏛️ Nuestros pilares</b></a>: qué es Auditavisión y las reglas que valen para todo, de la evidencia con folio a la base de datos como pilar de transparencia.</p>\n'
         '          <p><a href="pendientes.html"><b>⏳ Registro de pendientes</b></a>: cada dato que falta, por qué falta, quién debe publicarlo y el enlace oficial donde debería estar.</p>\n'
         '          <h3 class="indice-grupo-tit">🆕 Novedades</h3>\n'
         '          <ul class="indice-lista indice-novedades">\n%s\n          </ul>\n'
         '        </div>') % '\n'.join('            <li><b>%s</b> %s</li>' % n for n in NOVEDADES)
     secc = [
-        ('auditor', '🔍 Auditor Virtual', 'El chat que te contesta todo, en sus cuatro modos, con su dictamen.', auditor),
-        ('enciclopedia', '📚 Enciclopedia', 'La parte de consulta: Números, sus Herramientas, Datos y Aprende.', enciclopedia),
+        ('auditor', '🔍 Auditor', 'El chat que te contesta todo, en sus cuatro modos, con su dictamen.', auditor),
+        ('planisferio', '🗺️ Planisferio', 'El mapa de México por dimensiones y el portal de cada entidad, con sus municipios.', planis),
+        ('comunidad', '🤝 Comunidad', 'La participación ciudadana: el Ágora, tus garantías, las donaciones y «Cuéntanos lo que viste». Su cuarta tarjeta es la Enciclopedia.', _rejilla(comunidad)),
+        ('enciclopedia', '📚 Comunidad · Enciclopedia', 'La parte de consulta: Números, sus Herramientas, Datos y Aprende.', enciclopedia),
         ('numeros', '💰 Enciclopedia · Números', 'El recorrido del dinero público, del impuesto a la rendición de cuentas, cada parte en su propia página.', numeros),
         ('herramientas', '🧰 Enciclopedia · Herramientas del Auditor', 'Cada herramienta y sus aplicaciones, con página propia.', herr),
         ('mas', '📊 Enciclopedia · Datos y Aprende', 'Las descargas, el radar, el ambiente, los Poderes de la Unión y la Biblioteca del Erario Público.', _rejilla(datos_aprende)),
-        ('comunidad', '🤝 Comunidad', 'La participación ciudadana: el Ágora, tus garantías, las donaciones y «Cuéntanos lo que viste».', _rejilla(comunidad)),
-        ('noticias', '📰 Noticias', 'Auditavisión Noticias, el verificador y el seguimiento de cada caso.', diario),
+        ('noticias', '📰 Noticiero', 'Auditavisión Noticias, el verificador y el seguimiento de cada caso.', diario),
+        ('servicios', '🧾 Servicios', 'La investigación a la medida, la suscripción del Modo Inspector y los contratos públicos.', servs),
         ('investigaciones', '🖼️ Auditoría en imágenes, por tema', 'Las investigaciones. Cada una explica el caso y lleva a sus números y a su evidencia.', investigaciones),
         ('metodologia', '🔎 Cómo verificamos', 'La regla que sigue cada cifra y lo último que cambió.', metodologia),
     ]
     return {
         'archivo': 'indice.html', 'menu': 'Índice general', 'menu_archivo': 'indice.html',
         'icono': '🗂️', 'titulo': 'Índice general', 'lema': 'Todo lo que hay en Auditavisión, en una página',
-        'entrada': ('Aquí está el mapa completo de la plataforma, en el orden de sus pestañas: el Auditor Virtual y sus modos; '
-                    'la Enciclopedia, con los capítulos de Números, cada herramienta con sus aplicaciones, los datos y la obra de consulta; '
-                    'Comunidad y Noticias. Al final, las investigaciones por tema y cómo verificamos cada cifra. '
+        'entrada': ('Aquí está el mapa completo de la plataforma, en el orden de sus cinco pestañas: el Auditor y sus modos; '
+                    'el Planisferio, con sus dimensiones y el portal de cada entidad; Comunidad, con la Enciclopedia '
+                    '(los capítulos de Números, cada herramienta con sus aplicaciones, los datos y la obra de consulta); '
+                    'el Noticiero y Servicios. Al final, las investigaciones por tema y cómo verificamos cada cifra. '
                     'Cada enlace abre su propia página.'),
         'secciones': [{'id': i, 'titulo': t, 'texto': x, 'tarjetas': [], 'bloque': b} for i, t, x, b in secc],
     }

@@ -2220,6 +2220,22 @@
    "q": "¿Qué desbloquea la suscripción?",
    "ir": "herramienta-inspector.html#suscripcion",
    "dice": ["todavía no abre"]
+  },
+  {
+   "q": "¿Qué es el marco geoestadístico?",
+   "ir": "glosario.html#Marco-Geoestadistico"
+  },
+  {
+   "q": "¿Qué es un aviso de arribo?",
+   "ir": "glosario.html#Aviso-de-Arribo-y-Aviso-de-Cosecha"
+  },
+  {
+   "q": "¿Qué significa superficie forestal?",
+   "ir": "aprende-recursos-naturales.html#rn-bosques"
+  },
+  {
+   "q": "¿Qué es el fraccionamiento de contratos?",
+   "ir": "contratos-publicos.html#fraccionamiento"
   }
  ]
 }
