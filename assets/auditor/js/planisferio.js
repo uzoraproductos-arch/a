@@ -50,7 +50,8 @@
       verde: ['#e4f3e8', '#b3dcbd', '#6dba82', '#2e8a4c', '#0f5128'],
       rojo: ['#fbe5e2', '#f2b3aa', '#e06f60', '#b3261e', '#6e1510'],
       cafe: ['#f5ecdc', '#e3c99b', '#c49a5c', '#8f6334', '#4e3318'],
-      naranja: ['#fdeedd', '#fbc995', '#f39a4a', '#d2661a', '#8a3a0a']
+      naranja: ['#fdeedd', '#fbc995', '#f39a4a', '#d2661a', '#8a3a0a'],
+      rosa: ['#fbe8f3', '#f3b9db', '#e07bb5', '#b8327f', '#6e0f47']
     };
     var porA = {}, lente = D.lentes[0], sel = null, dimP = lente.dim, ultima = {};
     function fmt(v, l) {
@@ -295,8 +296,35 @@
         '<a class="pl-ficha-ir" href="' + esc(e.p) + '#ambiental">Ver sus recursos naturales en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
+    /* Su pobreza (dimension_social.py): la medición del INEGI 2024 y lo que le
+       aporta la Federación por persona en pobreza. */
+    function social(e, fijo) {
+      var s = e.soc, d = function (id, nom) {
+        var l = lenteDe(id);
+        return '<dt>' + nom + '</dt><dd><b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est) + '</dd>';
+      };
+      ficha.innerHTML = '<h3>' + esc(e.n) + '</h3><p class="pl-ficha-sub">🫂 Pobreza multidimensional 2024 · INEGI</p><dl class="pl-ficha-dl">' +
+        d('soP', 'Población en pobreza') + d('soN', 'Personas en pobreza') +
+        '<dt>Moderada · extrema</dt><dd><b class="num-tabular">' + num(s.m, 1) + '% · ' + num(e.soX, 1) + '%</b> ' + chip('oficial') + '</dd>' +
+        d('soI', 'Ingreso bajo la línea de pobreza') + d('soS', 'Sin seguridad social') + d('soA', 'Sin acceso a servicios de salud') + d('soR', 'Rezago educativo') +
+        '<dt>Vivienda · servicios · alimentación</dt><dd><b class="num-tabular">' + num(s.v, 1) + '% · ' + num(s.b, 1) + '% · ' + num(s.al, 1) + '%</b> ' + chip('oficial') + '</dd>' +
+        d('soQ', 'Aportaciones 2026 por persona en pobreza') + '</dl>' +
+        '<p class="pl-ficha-mun">La pobreza la mide el INEGI en los hogares: no es la calificación de un gobierno.</p>' +
+        '<a class="pl-ficha-ir" href="' + esc(e.p) + '#social">Ver su pobreza en su portal ➔</a>' +
+        (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
+    }
+    /* Todas las fichas llevan su estado de cuenta y de resultados (04-11-2026). */
+    function cuentas(e) {
+      ficha.insertAdjacentHTML('beforeend', '<a class="pl-ficha-ir" href="herramienta-inspector-entes.html#ente=estatal:' + esc(e.a) + '">🏢 Su estado de cuenta y de resultados ➔</a>');
+    }
     function muestra(e, fijo) {
       if (!e) return;
+      muestra1(e, fijo);
+      cuentas(e);
+    }
+    function muestra1(e, fijo) {
+      if (!e) return;
+      if (dimP === 'social') { social(e, fijo); return; }
       if (dimP === 'ambiental') { ambiental(e, fijo); return; }
       if (dimP === 'judicial') { judicial(e, fijo); return; }
       if (dimP === 'salud') { salud(e, fijo); return; }
@@ -401,7 +429,8 @@
       azul: ['#e3ecf8', '#b4c9ea', '#6f95d2', '#2f5fa8', '#0b2a63'],
       rojo: ['#fbe5e2', '#f2b3aa', '#e06f60', '#b3261e', '#6e1510'],
       cafe: ['#f5ecdc', '#e3c99b', '#c49a5c', '#8f6334', '#4e3318'],
-      naranja: ['#fdeedd', '#fbc995', '#f39a4a', '#d2661a', '#8a3a0a']
+      naranja: ['#fdeedd', '#fbc995', '#f39a4a', '#d2661a', '#8a3a0a'],
+      rosa: ['#fbe8f3', '#f3b9db', '#e07bb5', '#b8327f', '#6e0f47']
     };
     var porC = {}, lente = D.lentes[0], sel = null, ficha = document.getElementById('plMunFicha'), CERO = '#eeede6';
     D.m.forEach(function (x) { porC[x.c] = x; });

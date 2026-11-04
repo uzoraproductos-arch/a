@@ -2095,6 +2095,28 @@
     "INSTITUTO MEXICANO DEL SEGURO SOCIAL",
     "C-2025-"
    ]
+  },
+  {
+   "q": "¿Cuánta pobreza hay en Chiapas?",
+   "ir": "planisferio-chis.html#social",
+   "dice": [
+    "66.0 de cada 100",
+    "pobreza extrema"
+   ]
+  },
+  {
+   "q": "Mapa de la pobreza por estado",
+   "ir": "planisferio.html?d=social",
+   "dice": [
+    "29.6 de cada 100"
+   ]
+  },
+  {
+   "q": "Pobreza extrema en Oaxaca",
+   "ir": "planisferio-oax.html#social",
+   "dice": [
+    "16.3"
+   ]
   }
  ]
 }

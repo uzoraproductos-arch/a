@@ -68,6 +68,10 @@ DIMENSIONES = [
     ('salud', '🩺', 'Salud pública',
      'El IMSS y el ISSSTE en cada estado: cuántas personas tiene adscritas el IMSS, cuántas consultas y cirugías les dio y con cuántas camas, y con cuántos médicos, camas y unidades cuenta el ISSSTE.',
      'datos-salud-sistema.html#sal-estados', None, True),
+    ('social', '🫂', 'Social',
+     'La pobreza en cada estado, medida por el INEGI: cuántas personas la viven, cuántas en pobreza extrema, cuántas no alcanzan a cubrir sus necesidades con su ingreso '
+     'y qué carencias pesan más, junto a lo que la Federación le aporta al estado por persona en pobreza.',
+     'contexto-dimensional-social.html', None, True),
     ('administracion', '🏢', 'Administración pública',
      'El gobierno que ejecuta, en los tres niveles: cuánta gente tiene la administración de cada estado, cuánto ejerció, cuántos contratos dio sin concurso, '
      'cuánto ejercieron sus municipios y qué les dejó por aclarar la Auditoría Superior de la Federación.',
@@ -293,6 +297,8 @@ def _datos(base, padron):
     sa = gsal.salud_estados(base)
     import administracion_publica as apu
     ap = apu.estados(base)
+    import dimension_social as dso
+    so = dso.estados(base)
     E = base['estados']
     C = base['fiscalEntidades']['campos']
     sin = set(C['recaudacionPropia'].get('sinFuente', []))
@@ -339,6 +345,12 @@ def _datos(base, padron):
         # Su administración pública (03-11-2026): lo que su gobierno le reportó
         # al censo del INEGI (CNGE 2025), lo que ejercieron sus municipios
         # (CNGMD 2025) y lo que la ASF dejó por aclarar a cada nivel (CP 2024).
+        # Su pobreza (INEGI, Pobreza multidimensional 2024) y sus aportaciones
+        # federales de 2026 por persona en pobreza (derivado).
+        z = so[e['abbr']]
+        filas[-1].update({'soP': z['p'], 'soN': z['pers'], 'soX': z['x'], 'soI': z['ing'], 'soS': z['car']['seg'], 'soA': z['car']['sal'],
+                          'soR': z['car']['rez'], 'soQ': z['r33'],
+                          'soc': {'m': z['m'], 'ix': z['ingx'], 'v': z['car']['viv'], 'b': z['car']['bas'], 'al': z['car']['ali'], 'pt': z['pobT'], 'u': z['url']}})
         x = ap[e['abbr']]
         filas[-1].update({'apP': x['per'], 'apK': x['perk'], 'apX': x['pres'], 'apD': x['ad'], 'apG': x['gpa'], 'apM': x['mpres'], 'apA': x['mpa'],
                           'apu': {'tit': x['tit'], 'con': x['con'], 'ga': x['ga'], 'ma': x['ma'], 'presp': x['presp'], 'mpresp': x['mpresp'],
@@ -484,6 +496,27 @@ LENTES = [
              'Desde 2025 incluye las unidades rurales del antiguo programa IMSS-Bienestar, por eso no es la cifra de la Memoria.')},
     # La administración pública (03-11-2026, pedido del autor): el gobierno
     # que ejecuta. Lo del INEGI es lo que cada gobierno reportó a su censo.
+    # La dimensión social (04-11-2026, pedido del autor): la pobreza del INEGI
+    # 2024 (dimension_social.py) y las aportaciones 2026 por persona en pobreza.
+    {'id': 'soP', 'dim': 'social', 'fmt': 'pct', 'nom': 'Población en pobreza', 'pal': 'rosa', 'est': 'oficial', 'anio': 2024,
+     'que': ('De cada 100 personas del estado, cuántas viven en pobreza según el INEGI: su ingreso no alcanza para lo básico y tienen al menos una de seis carencias '
+             '(educación, salud, seguridad social, vivienda, servicios en la vivienda o alimentación). Es lo que mide el INEGI en los hogares, no el resultado de un solo gobierno.')},
+    {'id': 'soN', 'dim': 'social', 'fmt': 'n', 'nom': 'Personas en pobreza', 'pal': 'rosa', 'est': 'derivado', 'anio': 2024,
+     'que': 'Cuántas personas: el porcentaje en pobreza × la población que el INEGI usó en su medición. Los estados grandes salen arriba por tamaño, aunque su porcentaje sea bajo.'},
+    {'id': 'soX', 'dim': 'social', 'fmt': 'pct', 'nom': 'Pobreza extrema', 'pal': 'rosa', 'est': 'oficial', 'anio': 2024,
+     'que': ('De cada 100 personas, cuántas viven en pobreza extrema: su ingreso no alcanza ni para la canasta alimentaria y tienen tres o más carencias. '
+             'En los estados donde es muy baja, el INEGI avisa que la cifra es menos precisa (su coeficiente de variación es moderado o bajo).')},
+    {'id': 'soI', 'dim': 'social', 'fmt': 'pct', 'nom': 'Ingreso bajo la línea de pobreza', 'pal': 'rosa', 'est': 'oficial', 'anio': 2024,
+     'que': 'De cada 100 personas, cuántas tienen un ingreso que no alcanza para la canasta alimentaria y la no alimentaria, aunque no tengan carencias. Es la pobreza por ingresos.'},
+    {'id': 'soS', 'dim': 'social', 'fmt': 'pct', 'nom': 'Sin seguridad social', 'pal': 'rosa', 'est': 'oficial', 'anio': 2024,
+     'que': 'De cada 100 personas, cuántas no tienen acceso a la seguridad social: ni empleo con IMSS o ISSSTE, ni pensión, ni la tienen por un familiar. Es la carencia más extendida del país.'},
+    {'id': 'soA', 'dim': 'social', 'fmt': 'pct', 'nom': 'Sin acceso a servicios de salud', 'pal': 'rosa', 'est': 'oficial', 'anio': 2024,
+     'que': 'De cada 100 personas, cuántas no están afiliadas ni tienen derecho a una institución pública o privada de salud. Mide la afiliación, no si la clínica tiene médico o medicina.'},
+    {'id': 'soR', 'dim': 'social', 'fmt': 'pct', 'nom': 'Rezago educativo', 'pal': 'rosa', 'est': 'oficial', 'anio': 2024,
+     'que': 'De cada 100 personas, cuántas no tienen la escolaridad obligatoria que les correspondía por su edad ni asisten a la escuela.'},
+    {'id': 'soQ', 'dim': 'social', 'fmt': 'pesos', 'nom': 'Aportaciones por persona en pobreza', 'pal': 'rosa', 'est': 'derivado', 'anio': '2026 ÷ 2024',
+     'que': ('Las aportaciones federales de 2026 (Ramo 33) ÷ las personas en pobreza de 2024. Sirve para comparar estados, no es lo que le llega a cada persona pobre: '
+             'el Ramo 33 paga sobre todo maestros y salud, y solo su fondo de infraestructura social (FAIS) va por ley a la población en pobreza.')},
     {'id': 'apP', 'dim': 'administracion', 'fmt': 'n', 'nom': 'Personal de su administración', 'pal': 'azul', 'est': 'oficial', 'anio': 2024,
      'que': ('Las personas que el gobierno de cada estado le reportó al INEGI en su administración pública al cierre de 2024, con sus titulares. '
              'Es lo que cada uno contestó al censo: el INEGI no dice qué organismos incluyó cada gobierno, y por eso hay diferencias que no son de tamaño.')},
@@ -640,6 +673,16 @@ def _fuentes(ref, base=None):
     pe = ('Comisión Nacional de Acuacultura y Pesca, Anuario Estadístico de Acuacultura y Pesca 2025, cuadros 2.5.6 «Serie histórica de la producción pesquera nacional en peso vivo» '
           'y 2.5.12 «Serie histórica del valor de la producción pesquera», pp. 171 y 177 (<a href="%s">PDF</a>; huella SHA-256 <code>%s…</code>)') % (
         html.escape(rn.PE_DOC['url']), rn.PE_DOC['sha256'][:12])
+    import dimension_social as dso
+    so_f, so_p = dso.fuente()
+    soc = ('%s (<a href="%s">presentación de resultados</a>; cada estado con su infografía y su huella SHA-256 en <code>docs/social/pobreza-entidades-2024.json</code>)') % (so_f, so_p)
+    extra.update({'soP': soc + '.', 'soX': soc + '. Donde la cifra es baja, el INEGI la marca con coeficiente de variación moderado o bajo.', 'soI': soc + '.',
+                  'soS': soc + '.', 'soA': soc + '.', 'soR': soc + '.',
+                  'soN': 'Porcentaje en pobreza × población de la misma infografía (%s). La multiplicación es nuestra.' % soc})
+    if base is not None:
+        C = base['fiscalEntidades']['campos']
+        extra['soQ'] = ('Aportaciones de 2026 (%s %s) ÷ personas en pobreza de 2024 (%s). La división es nuestra, y junta dos años: '
+                        'el INEGI mide la pobreza cada dos años y la de 2026 aún no existe.') % (C['ramo33']['fuente'], ref(C['ramo33']['ref']), soc)
     extra.update({'peT': pe + '.', 'peV': pe + '. Miles de pesos ÷ 1,000: la cuenta es nuestra.'})
     extra.update({'incH': ic + '.', 'incN': ic + '.', 'sfT': sf + '.',
                   'incP': 'Superficie afectada por los incendios de 2025 (%s) ÷ superficie forestal (%s) × 100. La división es nuestra.' % (ic, sf)})
@@ -772,6 +815,7 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
     nota_amb = _nota_amb(filas)
     nota_sal = _nota_sal(filas)
     nota_apu = _nota_apu(filas)
+    nota_soc = _nota_soc(filas)
     sin_ref = [f['a'] for f in filas if f['refj'] is None]
     for i in ('refj', 'refp', 'refu'):
         falta[i] = {'a': sin_ref, 'gris': 'sin refinería de PEMEX', 'pend': None,
@@ -810,7 +854,7 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
                       med[0]['n'], pct(med[0]['ild']), med[-1]['n'], pct(med[-1]['ild']), chip('oficial')))
     datos = {'lentes': [dict(l, fuente=fu[l['id']], falta=falta.get(l['id'])) for l in LENTES], 'e': filas,
              'dims': {i: {'n': nom, 'ir': ir, 'ire': ire, 'pinta': pinta} for i, _, nom, _, ir, ire, pinta in DIMENSIONES}}
-    notas = {'deuda': nota_deuda, 'inversion': nota_inv, 'legislativa': nota_leg, 'judicial': nota_jud, 'ambiental': nota_amb, 'salud': nota_sal, 'administracion': nota_apu}
+    notas = {'deuda': nota_deuda, 'inversion': nota_inv, 'legislativa': nota_leg, 'judicial': nota_jud, 'ambiental': nota_amb, 'salud': nota_sal, 'administracion': nota_apu, 'social': nota_soc}
     # Lo que antes era un párrafo largo arriba del mapa y una nota debajo
     # (decisión del autor, 03-11-2026: «mucho contenido de narración»): cada
     # dimensión tiene su «Cómo leerla» y su «Lo que el mapa no dice» en la
@@ -825,6 +869,9 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         'salud': ('El IMSS y el ISSSTE en cada estado. Del IMSS, lo que registra su Memoria Estadística 2025: a cuántas personas tiene adscritas, cuántas consultas y cirugías dio '
                   'y cuántas camas tiene por cada mil. Del ISSSTE, con qué cuenta según el registro de la Secretaría de Salud: médicos, camas y unidades. '
                   'La última lente pone a los médicos del IMSS en ese mismo registro, para comparar las dos con la misma regla.'),
+        'social': ('La pobreza en cada estado, como la mide el INEGI con la Encuesta de Ingresos y Gastos de los Hogares 2024 y la metodología del CONEVAL: '
+                   'cuántas personas la viven y cuántas en pobreza extrema, cuántas tienen un ingreso que no alcanza y las tres carencias que más pesan '
+                   '(seguridad social, servicios de salud y rezago educativo). La última lente pone junto a eso lo que la Federación le aporta a cada estado por persona en pobreza.'),
         'administracion': ('El gobierno que ejecuta, en los tres niveles. De la administración de cada estado, lo que le reportó al censo del INEGI: cuánta gente tiene, '
                            'cuánto ejerció en 2024 y cuántos de sus contratos dio por adjudicación directa. De sus municipios, cuánto ejercieron. Y de los dos, lo que la '
                            'Auditoría Superior de la Federación dejó por aclarar del dinero federal de la Cuenta Pública 2024. La ficha trae además el nivel federal, para comparar.'),
@@ -845,6 +892,7 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         plantillas.append('<template id="%s">%s</template>' % (t, _cajon(ico, 'Cómo leerla', 'Cómo leer la dimensión «%s»' % nom, t + 'Tit',
             '<section class="glos-drawer-sec"><h4>Qué pinta</h4><p>%s</p></section><section class="glos-drawer-sec"><h4>Qué puedes ver</h4><ul class="pl-des-l">%s</ul>'
             '<p>%s Toca una entidad para ver su ficha; tócala otra vez para entrar a su portal.</p></section>' % (leer[i], ls, cuantil))))
+        cajones.append(_ctx_botones(i, oculto))
         if notas.get(i):
             t = 'plTplNota-' + i
             cajones.append('<button type="button" class="pl-caj-b pl-caj-ojo" data-dim="%s" data-cajon="%s" data-cajon-tit="%sTit" aria-haspopup="dialog"%s>👁️ Lo que este mapa no dice</button>' % (i, t, t, oculto))
@@ -973,6 +1021,88 @@ def _nota_sal(filas):
         format(cd['isM'], ','), format(tm, ','), cd['n'], chip('oficial'), format(round(100.0 * cd['isM'] / tm)), chip('derivado'),
         pr[0]['n'], format(100.0 * pr[0]['isM'] / (pr[0]['isM'] + pr[0]['imM']), '.1f'), chip('derivado'),
         chip('pendiente', 'salud-issste-servicios'))
+
+
+def _ctx(i):
+    """Las páginas que miran la dimensión a nivel federal: su Contexto
+    dimensional y el estado de resultados del Gobierno (04-11-2026)."""
+    import dimension_social as dso
+    xs = dso.CONTEXTO.get(i)
+    if not xs:
+        raise SystemExit('planisferio: la dimensión %s no tiene su Contexto dimensional en dimension_social.CONTEXTO' % i)
+    for arch, _ in xs + [dso.RESULTADOS]:
+        if not _existe(arch):
+            raise SystemExit('planisferio: el Contexto dimensional de %s apunta a %s, que no existe' % (i, arch))
+    return xs, dso.RESULTADOS
+
+
+def _ctx_botones(i, oculto):
+    xs, (ra, rt) = _ctx(i)
+    return ''.join('<a class="pl-caj-b pl-ctx" data-dim="%s" href="%s" title="%s"%s>🧭 %s</a>' % (
+        i, arch, html.escape(t), oculto, html.escape(t.split(':')[0])) for arch, t in xs) + (
+        '<a class="pl-caj-b pl-ctx" data-dim="%s" href="%s" title="%s"%s>📊 Estado de resultados del Gobierno</a>' % (i, ra, html.escape(rt), oculto))
+
+
+def _ctx_portal(i, a, nom):
+    """El mismo vínculo en el portal de cada estado, con su propio estado de
+    cuenta y de resultados en el Auditor de entes."""
+    import dimension_social as dso
+    xs, (ra, rt) = _ctx(i)
+    return ('<p class="pl-ctx-l"><b>En el país y en sus cuentas:</b> %s <a href="%s">📊 %s ➔</a> '
+            '<a href="%s">🏢 El estado de cuenta y de resultados de %s ➔</a></p>') % (
+        ' '.join('<a href="%s">🧭 Contexto dimensional · %s ➔</a>' % (arch, html.escape(t)) for arch, t in xs),
+        ra, html.escape(rt), dso.RESULTADOS_EDO % a, html.escape(nom))
+
+
+def _nota_soc(filas):
+    """Los puntos ciegos de la dimensión social, dichos con las cifras: el
+    porcentaje contra el número de personas, la pobreza que no es el saldo de
+    un gobierno y las aportaciones que no siguen a la pobreza."""
+    p = sorted(filas, key=lambda f: -f['soP'])
+    n = sorted(filas, key=lambda f: -f['soN'])
+    q = sorted((f for f in filas if f['soQ']), key=lambda f: -f['soQ'])
+    lug = [f['a'] for f in p].index(n[0]['a']) + 1
+    return ('<b>El porcentaje y las personas cuentan historias distintas.</b> %s tiene la pobreza más alta, %s de cada 100 %s; pero donde más personas la viven es %s: '
+            '%s %s, aunque en porcentaje sale en el lugar %d. <b>La pobreza no es el saldo de un gobierno.</b> La mide el INEGI en los hogares: depende del ingreso y de seis carencias, '
+            'y a cada una la mueven la Federación, el estado, el municipio, la economía y las remesas. Por eso este mapa no califica a nadie. '
+            '<b>El dinero no sigue a la pobreza.</b> Por cada persona en pobreza, %s recibe %s de aportaciones federales y %s, %s %s: el Ramo 33 se reparte con fórmulas que pesan '
+            'la nómina educativa y de salud que ya existe, y solo su fondo de infraestructura social (FAIS) se reparte por pobreza (Ley de Coordinación Fiscal, arts. 32 a 34). '
+            'Además, esa división junta aportaciones de 2026 con pobreza de 2024. <b>Lo que falta:</b> cuánto de cada programa social llega a cada estado y a quién; '
+            'la Secretaría de Bienestar no publica sus padrones por entidad en un formato que se pueda cotejar.') % (
+        p[0]['n'], format(p[0]['soP'], '.1f'), chip('oficial'), n[0]['n'], format(n[0]['soN'], ','), chip('derivado'), lug,
+        q[0]['n'], '$' + format(q[0]['soQ'], ','), q[-1]['n'], '$' + format(q[-1]['soQ'], ','), chip('derivado'))
+
+
+def _social_portal(base, ref, e):
+    """Su pobreza (04-11-2026): la infografía del INEGI de su estado, con su
+    lugar entre los 32 y frente al país."""
+    import dimension_social as dso
+    so = dso.estados(base)
+    na = dso.nacional()
+    a, nom = e['abbr'], e['name']
+    z = so[a]
+    lug = lambda k: sorted(so, key=lambda b: -k(so[b])).index(a) + 1
+    car = ''.join('<dt>%s</dt><dd>%s %s <small>en el país, %s</small></dd>' % (t, pct(z['car'][c]), chip('oficial'), pct(na['car'][c])) for c, t in dso.CARENCIAS)
+    p1 = ('<article class="pl-piso"><h3>🫂 La pobreza en %s · 2024</h3>'
+          '<dl class="pl-dl"><dt>Población en pobreza</dt><dd>%s %s <small>lugar %d de 32; en el país, %s</small></dd>'
+          '<dt>Personas en pobreza</dt><dd>%s %s <small>%s × %s habitantes de la medición</small></dd>'
+          '<dt>Pobreza moderada · extrema</dt><dd>%s · %s %s</dd>'
+          '<dt>Ingreso bajo la línea de pobreza</dt><dd>%s %s <small>bajo la línea de pobreza extrema: %s</small></dd>'
+          '<dt>Aportaciones federales 2026 por persona en pobreza</dt><dd>%s %s <small>lugar %d de 32; Ramo 33 ÷ personas en pobreza de 2024</small></dd>'
+          '</dl><p class="pl-piso-f">INEGI, Pobreza multidimensional 2024, <a href="%s">infografía de %s</a> (huella SHA-256 <code>%s…</code>). '
+          'Las personas y la división son nuestras.</p></article>') % (
+              html.escape(nom), pct(z['p']), chip('oficial'), lug(lambda r: r['p']), pct(na['p']),
+              format(z['pers'], ','), chip('derivado'), pct(z['p']), format(z['pobT'], ','),
+              pct(z['m']), pct(z['x']), chip('oficial'), pct(z['ing']), chip('oficial'), pct(z['ingx']),
+              ('$' + format(z['r33'], ',')) if z['r33'] else 'sin cifra', chip('derivado'), lug(lambda r: r['r33'] or 0),
+              html.escape(z['url']), html.escape(nom), z['sha'][:12])
+    p2 = '<article class="pl-piso"><h3>📋 Sus seis carencias sociales · 2024</h3><dl class="pl-dl">%s</dl><p class="pl-piso-f">De cada 100 personas del estado. Misma infografía del INEGI.</p></article>' % car
+    ciego = ('<p class="pl-dim-nota"><b>Lo que estas cifras no dicen.</b> La pobreza la mide el INEGI en los hogares y la mueven los tres niveles de gobierno, la economía y las remesas: '
+             'no es la calificación de un gobierno. «Sin acceso a servicios de salud» mide la afiliación, no si la clínica tiene médico o medicina. Y las aportaciones por persona en pobreza '
+             'no son lo que le llega a cada persona: el Ramo 33 paga sobre todo maestros y salud.</p>')
+    ir = ('<p class="pl-ficha-ir"><a href="planisferio.html?d=social&amp;e=%s">La pobreza de los 32 estados, en el mapa ➔</a> '
+          '<a href="contexto-dimensional-social.html">Los programas sociales del país, en el Contexto dimensional ➔</a></p>') % quote(a)
+    return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, ir)
 
 
 def _nota_apu(filas):
@@ -1710,7 +1840,7 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
     leyes = leyes_niveles.estado(e, leyes_niveles.municipios(padron, a))
     datos_e = '%s · capital: %s · %s habitantes a mitad de 2026 (CONAPO) %s' % (
         nom, e['capital'], format(e['pobPersonas'], ','), chip('derivado'))
-    return {
+    out = {
         'archivo': portal(a), 'menu': nom, 'menu_archivo': ARCHIVO,
         'padre': (ARCHIVO, 'Planisferio'),
         'icono': '📍', 'titulo': nom, 'lema': 'Su portal en el Planisferio',
@@ -1744,6 +1874,10 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
              'texto': ('A cuántas personas tiene adscritas el IMSS en %s, cuántas consultas y cirugías les dio y con cuántas camas, y con cuántos médicos, camas y unidades '
                        'cuenta el ISSSTE. Del IMSS, su Memoria Estadística 2025; del ISSSTE, el registro de recursos de la Secretaría de Salud, porque su anuario no responde.') % nom,
              'tarjetas': [], 'bloque': _salud_portal(base, ref, e)},
+            {'id': 'social', 'titulo': 'Su pobreza y sus carencias',
+             'texto': ('Cuántas personas viven en pobreza en %s, cuántas en pobreza extrema, sus seis carencias sociales frente al país y lo que la Federación le aporta '
+                       'por persona en pobreza. Las cifras son de la medición de la pobreza 2024 del INEGI.') % nom,
+             'tarjetas': [], 'bloque': _social_portal(base, ref, e)},
             {'id': 'administracion', 'titulo': 'Su administración pública',
              'texto': ('El gobierno que ejecuta, en los tres niveles: cuánta gente tiene la administración de %s, cuánto ejerció en 2024 y cuántos contratos dio sin concurso; '
                        'cuánto ejercieron sus municipios; y lo que la Auditoría Superior de la Federación dejó por aclarar a cada uno. Arriba, la federal, para comparar.') % nom,
@@ -1772,6 +1906,13 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
              'tarjetas': [], 'bloque': '<div class="pl-puertas">%s%s</div>%s' % (puertas_aud, ''.join(puertas), saltos)},
         ],
     }
+    # Cada dimensión del portal, vinculada a su Contexto dimensional, al estado
+    # de resultados del Gobierno y al estado de cuenta del estado (04-11-2026).
+    for sec in out['secciones']:
+        i = 'financiera' if sec['id'] == 'presupuestos' else sec['id']
+        if any(d[0] == i for d in DIMENSIONES):
+            sec['bloque'] += _ctx_portal(i, a, nom)
+    return out
 
 
 def paginas(base, ref, tres, cuenta, cuanto='', origenes=''):

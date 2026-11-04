@@ -301,9 +301,23 @@ def construir():
                 (ant[5], '← Anterior', ant[1], ant[2]) if ant else (ARCHIVO, '← Volver a', ICONO, TITULO),
                 (sig[5], 'Siguiente →', sig[1], sig[2]) if sig else (ARCHIVO, 'Terminaste · volver a', ICONO, TITULO),
                 (ARCHIVO, '%s %s: sus seis tarjetas' % (ICONO, TITULO)) if ant else None),
-            'secciones': [{'id': i, 'titulo': nom, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': b}],
+            'secciones': [{'id': i, 'titulo': nom, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': b + planisferio(arch)}],
         })
     return paginas, filas_csv
+
+
+def planisferio(arch):
+    """La vuelta del Planisferio (04-11-2026): cada dimensión del Contexto
+    dimensional lleva a las dimensiones del mapa que la miran estado por
+    estado (dimension_social.CONTEXTO)."""
+    import dimension_social as dso
+    import planisferio as pl
+    nombre = {d[0]: (d[1], d[2]) for d in pl.DIMENSIONES}
+    dims = [i for i, xs in dso.CONTEXTO.items() if any(x[0] == arch for x in xs)]
+    if not dims:
+        return ''
+    return ('<p class="ec-fuente"><b>🗺️ Estado por estado, en el Planisferio:</b> %s</p>' % ' · '.join(
+        '<a href="planisferio.html?d=%s">%s %s ➔</a>' % (i, nombre[i][0], nombre[i][1]) for i in dims))
 
 
 def generar(sello):

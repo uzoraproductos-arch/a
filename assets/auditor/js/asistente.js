@@ -2196,6 +2196,7 @@
     /* El IMSS y el ISSSTE de un estado (03-11-2026): «¿qué estado tiene menos camas del IMSS?» no es la columna del IMSS. */
     var sae = charla && charla.saludEstado && charla.saludEstado(q);
     if (sae) return sae;
+    var sso = charla && charla.social && charla.social(q); if (sso) return sso;
     var sap = charla && charla.administracion && charla.administracion(q); if (sap) return sap;
     var tc = tituloColumna(q);
     if (tc) return tc;

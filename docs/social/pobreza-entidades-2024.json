@@ -1,0 +1,675 @@
+{
+ "fuente": "INEGI, Pobreza multidimensional 2024 (con base en la ENIGH 2024 y la metodología del CONEVAL), infografías por entidad federativa",
+ "presentacion": {
+  "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_presentacion_2024.pdf",
+  "sha": "3772644056accd093792766c8e2a690480ab2449962b24368fc1c5b49ecc9f5a"
+ },
+ "cotejos": 38,
+ "nacional": {
+  "titulo": "ESTADOS UNIDOS MEXICANOS",
+  "mod": 24.2,
+  "ext": 5.3,
+  "ing": 35.4,
+  "ingx": 9.3,
+  "pob": 130216079,
+  "car": {
+   "rez": 18.6,
+   "sal": 34.2,
+   "seg": 48.2,
+   "viv": 7.9,
+   "bas": 14.1,
+   "ali": 14.4
+  },
+  "pobPres": 29.6,
+  "sha": "7ea2eb0acb498a6a9a6f1c835d9f2728e5dbdf83328938d861307ffd37d871f4",
+  "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_00_2024.pdf"
+ },
+ "estados": {
+  "AGS": {
+   "titulo": "AGUASCALIENTES",
+   "mod": 16.5,
+   "ext": 0.6,
+   "ing": 24.8,
+   "ingx": 3.5,
+   "pob": 1496542,
+   "car": {
+    "rez": 15.0,
+    "sal": 25.2,
+    "seg": 32.8,
+    "viv": 2.9,
+    "bas": 2.0,
+    "ali": 8.7
+   },
+   "sha": "f0a86d29b4fedc02809658ba87f2fb9c6c7c768b1fe5882b23b756b03f842884",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_01_2024.pdf",
+   "clave": "01",
+   "pobPres": 17.1
+  },
+  "BC": {
+   "titulo": "BAJA CALIFORNIA",
+   "mod": 9.5,
+   "ext": 0.4,
+   "ing": 14.8,
+   "ingx": 1.1,
+   "pob": 3782596,
+   "car": {
+    "rez": 14.5,
+    "sal": 23.3,
+    "seg": 32.0,
+    "viv": 5.3,
+    "bas": 2.9,
+    "ali": 8.1
+   },
+   "sha": "77743c9327bc0fa083987431625e8190d91bb9d98adf7d6bd840ccb26655ad3e",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_02_2024.pdf",
+   "clave": "02",
+   "pobPres": 9.9
+  },
+  "BCS": {
+   "titulo": "BAJA CALIFORNIA SUR",
+   "mod": 8.9,
+   "ext": 1.2,
+   "ing": 14.2,
+   "ingx": 2.7,
+   "pob": 877910,
+   "car": {
+    "rez": 13.4,
+    "sal": 19.6,
+    "seg": 28.5,
+    "viv": 10.9,
+    "bas": 9.5,
+    "ali": 9.6
+   },
+   "sha": "3418d7953785a352754ec199ecd3df8583577f63038bc61c0be08f1165191cef",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_03_2024.pdf",
+   "clave": "03",
+   "pobPres": 10.2,
+   "milPres": 89.3
+  },
+  "CAM": {
+   "titulo": "CAMPECHE",
+   "mod": 30.9,
+   "ext": 5.8,
+   "ing": 44.1,
+   "ingx": 11.5,
+   "pob": 945467,
+   "car": {
+    "rez": 20.5,
+    "sal": 28.5,
+    "seg": 51.2,
+    "viv": 14.4,
+    "bas": 28.8,
+    "ali": 16.9
+   },
+   "sha": "a723b0e12812a522bd7f879352ef7ad9bbb03da45ad223a1dd7df268889ccb63",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_04_2024.pdf",
+   "clave": "04",
+   "pobPres": 36.7
+  },
+  "COAH": {
+   "titulo": "COAHUILA DE ZARAGOZA",
+   "mod": 11.6,
+   "ext": 0.8,
+   "ing": 22.3,
+   "ingx": 3.1,
+   "pob": 3406977,
+   "car": {
+    "rez": 13.3,
+    "sal": 20.3,
+    "seg": 23.4,
+    "viv": 2.5,
+    "bas": 1.9,
+    "ali": 9.0
+   },
+   "sha": "a9e5897a32f6e226beb753063ff3042a41a0e5a1612fc6c8891de3c7f2e4b4ca",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_05_2024.pdf",
+   "clave": "05",
+   "pobPres": 12.4
+  },
+  "COL": {
+   "titulo": "COLIMA",
+   "mod": 14.0,
+   "ext": 1.0,
+   "ing": 19.4,
+   "ingx": 3.2,
+   "pob": 726259,
+   "car": {
+    "rez": 15.0,
+    "sal": 24.0,
+    "seg": 37.3,
+    "viv": 6.0,
+    "bas": 5.3,
+    "ali": 10.1
+   },
+   "sha": "babb099f680d73e643cb2e6ef650b1e924bb40735510080088fe8e0464aa6954",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_06_2024.pdf",
+   "clave": "06",
+   "pobPres": 15.0
+  },
+  "CHIS": {
+   "titulo": "CHIAPAS",
+   "mod": 38.8,
+   "ext": 27.1,
+   "ing": 70.0,
+   "ingx": 35.3,
+   "pob": 5860365,
+   "car": {
+    "rez": 34.0,
+    "sal": 63.3,
+    "seg": 76.4,
+    "viv": 19.0,
+    "bas": 48.6,
+    "ali": 20.6
+   },
+   "sha": "ec2ed18de74f385b9f07ea4b4479169b2d5ab3b64992bd5ab100169a4a7dca87",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_07_2024.pdf",
+   "clave": "07",
+   "pobPres": 66.0
+  },
+  "CHIH": {
+   "titulo": "CHIHUAHUA",
+   "mod": 12.9,
+   "ext": 2.2,
+   "ing": 20.9,
+   "ingx": 4.8,
+   "pob": 3886063,
+   "car": {
+    "rez": 16.6,
+    "sal": 20.9,
+    "seg": 30.9,
+    "viv": 5.2,
+    "bas": 3.5,
+    "ali": 9.9
+   },
+   "sha": "35bcc8bb9c0668ed17d61db0daa6d97106d80198319e8313659959cdf8ac65dd",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_08_2024.pdf",
+   "clave": "08",
+   "pobPres": 15.1
+  },
+  "CDMX": {
+   "titulo": "CIUDAD DE MÉXICO",
+   "mod": 17.9,
+   "ext": 1.8,
+   "ing": 25.7,
+   "ingx": 4.5,
+   "pob": 9345564,
+   "car": {
+    "rez": 8.5,
+    "sal": 21.8,
+    "seg": 38.0,
+    "viv": 4.1,
+    "bas": 2.4,
+    "ali": 9.9
+   },
+   "sha": "1f7be151d7a6a7db7f0932fcfa99446d21a6edaaccd88ddf5732638c88d38f81",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_09_2024.pdf",
+   "clave": "09",
+   "pobPres": 19.7,
+   "milPres": 1843.5
+  },
+  "DGO": {
+   "titulo": "DURANGO",
+   "mod": 23.5,
+   "ext": 4.3,
+   "ing": 35.4,
+   "ingx": 10.0,
+   "pob": 1897120,
+   "car": {
+    "rez": 17.7,
+    "sal": 30.4,
+    "seg": 42.2,
+    "viv": 7.0,
+    "bas": 6.9,
+    "ali": 14.5
+   },
+   "sha": "9ed0eb21f17e4716ccdbecf3351762b40a432fc3a280163c7633461814c8bdff",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_10_2024.pdf",
+   "clave": "10",
+   "pobPres": 27.9
+  },
+  "GTO": {
+   "titulo": "GUANAJUATO",
+   "mod": 24.3,
+   "ext": 1.7,
+   "ing": 32.1,
+   "ingx": 5.0,
+   "pob": 6321059,
+   "car": {
+    "rez": 21.1,
+    "sal": 33.7,
+    "seg": 46.0,
+    "viv": 4.8,
+    "bas": 6.0,
+    "ali": 16.9
+   },
+   "sha": "aaa9094d464859bce6aafb22d52d0892809aa770f6076d5da9e4855e315db2e0",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_11_2024.pdf",
+   "clave": "11",
+   "pobPres": 26.0
+  },
+  "GRO": {
+   "titulo": "GUERRERO",
+   "mod": 36.7,
+   "ext": 21.3,
+   "ing": 60.8,
+   "ingx": 28.9,
+   "pob": 3604178,
+   "car": {
+    "rez": 28.3,
+    "sal": 38.9,
+    "seg": 72.6,
+    "viv": 26.1,
+    "bas": 47.4,
+    "ali": 27.9
+   },
+   "sha": "3438da61915694d6daf21365c9f83c1b2bcd0bdf4d159d3d6028515b0bb69f4d",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_12_2024.pdf",
+   "clave": "12",
+   "pobPres": 58.1,
+   "milPres": 2092.6
+  },
+  "HGO": {
+   "titulo": "HIDALGO",
+   "mod": 29.7,
+   "ext": 5.7,
+   "ing": 41.1,
+   "ingx": 10.2,
+   "pob": 3230028,
+   "car": {
+    "rez": 18.0,
+    "sal": 43.5,
+    "seg": 61.9,
+    "viv": 6.2,
+    "bas": 18.2,
+    "ali": 16.4
+   },
+   "sha": "f60e7a99f10afd7f90c9cbead06514f0e036efe25b656240e623ee11c3eebd64",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_13_2024.pdf",
+   "clave": "13",
+   "pobPres": 35.3,
+   "milPres": 1140.5
+  },
+  "JAL": {
+   "titulo": "JALISCO",
+   "mod": 17.3,
+   "ext": 1.3,
+   "ing": 24.1,
+   "ingx": 3.8,
+   "pob": 8729342,
+   "car": {
+    "rez": 19.1,
+    "sal": 32.0,
+    "seg": 40.3,
+    "viv": 3.2,
+    "bas": 2.6,
+    "ali": 8.0
+   },
+   "sha": "ad9f4f2d98f639bcedd4a981602f53adb2b15a1e33c8549decc48cc27d333785",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_14_2024.pdf",
+   "clave": "14",
+   "pobPres": 18.6,
+   "milPres": 1626.4
+  },
+  "MÉX": {
+   "titulo": "MÉXICO",
+   "mod": 27.5,
+   "ext": 3.7,
+   "ing": 38.3,
+   "ingx": 7.5,
+   "pob": 17727881,
+   "car": {
+    "rez": 14.4,
+    "sal": 40.2,
+    "seg": 48.8,
+    "viv": 5.6,
+    "bas": 8.4,
+    "ali": 14.6
+   },
+   "sha": "2df58b79cfcf470ed52e2f3697f2896585861ac9c94ef34ae0b6a3fb20abd463",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_15_2024.pdf",
+   "clave": "15",
+   "pobPres": 31.2
+  },
+  "MICH": {
+   "titulo": "MICHOACÁN DE OCAMPO",
+   "mod": 28.9,
+   "ext": 5.4,
+   "ing": 38.4,
+   "ingx": 9.4,
+   "pob": 4939131,
+   "car": {
+    "rez": 25.7,
+    "sal": 46.1,
+    "seg": 61.2,
+    "viv": 11.1,
+    "bas": 16.1,
+    "ali": 20.4
+   },
+   "sha": "3c7f54c97255fa1fb87b25e28b4a402e6d97b9cbda4e0ecaf6c0d0a24c2dc27a",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_16_2024.pdf",
+   "clave": "16",
+   "pobPres": 34.3,
+   "milPres": 1694.1
+  },
+  "MOR": {
+   "titulo": "MORELOS",
+   "mod": 30.5,
+   "ext": 4.9,
+   "ing": 41.3,
+   "ingx": 8.8,
+   "pob": 1972006,
+   "car": {
+    "rez": 17.4,
+    "sal": 44.0,
+    "seg": 54.7,
+    "viv": 8.0,
+    "bas": 12.7,
+    "ali": 16.9
+   },
+   "sha": "222075151bf599a66627665b434e44e433e2d8ca5b558539362ee21b9ae4a849",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_17_2024.pdf",
+   "clave": "17",
+   "pobPres": 35.4
+  },
+  "NAY": {
+   "titulo": "NAYARIT",
+   "mod": 19.8,
+   "ext": 3.7,
+   "ing": 28.1,
+   "ingx": 7.1,
+   "pob": 1242764,
+   "car": {
+    "rez": 18.4,
+    "sal": 25.7,
+    "seg": 49.0,
+    "viv": 7.7,
+    "bas": 9.8,
+    "ali": 12.9
+   },
+   "sha": "9fe2d43086302c98ba554695df1ffd9c9e864d0bd976c590e55eca27939289dd",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_18_2024.pdf",
+   "clave": "18",
+   "pobPres": 23.5
+  },
+  "NL": {
+   "titulo": "NUEVO LEÓN",
+   "mod": 10.1,
+   "ext": 0.5,
+   "ing": 17.9,
+   "ingx": 2.5,
+   "pob": 6129347,
+   "car": {
+    "rez": 13.3,
+    "sal": 15.8,
+    "seg": 24.7,
+    "viv": 2.6,
+    "bas": 1.9,
+    "ali": 9.3
+   },
+   "sha": "816946eaf900be859f4cd3c13841d64daba623cf8728c1f737e62b98049107d1",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_19_2024.pdf",
+   "clave": "19",
+   "pobPres": 10.6
+  },
+  "OAX": {
+   "titulo": "OAXACA",
+   "mod": 35.3,
+   "ext": 16.3,
+   "ing": 54.2,
+   "ingx": 22.3,
+   "pob": 4269179,
+   "car": {
+    "rez": 30.5,
+    "sal": 43.9,
+    "seg": 73.9,
+    "viv": 18.9,
+    "bas": 46.7,
+    "ali": 23.5
+   },
+   "sha": "910487b083dcba656837a65b8c65e243f97a31cb827d20419e49a0af38715112",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_20_2024.pdf",
+   "clave": "20",
+   "pobPres": 51.6
+  },
+  "PUE": {
+   "titulo": "PUEBLA",
+   "mod": 36.1,
+   "ext": 7.3,
+   "ing": 49.2,
+   "ingx": 13.5,
+   "pob": 6594918,
+   "car": {
+    "rez": 22.7,
+    "sal": 47.3,
+    "seg": 67.7,
+    "viv": 10.7,
+    "bas": 18.8,
+    "ali": 17.0
+   },
+   "sha": "955cc3824514e5a96b99a43c1aac306c45117484a395a0545e0f6bd9569d2378",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_21_2024.pdf",
+   "clave": "21",
+   "pobPres": 43.4
+  },
+  "QRO": {
+   "titulo": "QUERÉTARO",
+   "mod": 15.2,
+   "ext": 1.1,
+   "ing": 21.1,
+   "ingx": 3.8,
+   "pob": 2535837,
+   "car": {
+    "rez": 14.5,
+    "sal": 24.1,
+    "seg": 37.4,
+    "viv": 5.1,
+    "bas": 6.7,
+    "ali": 9.9
+   },
+   "sha": "ca6dddd0835e8ce07b0c96167072a070b007f57646957a4bba27f408db5cd14d",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_22_2024.pdf",
+   "clave": "22",
+   "pobPres": 16.3
+  },
+  "QROO": {
+   "titulo": "QUINTANA ROO",
+   "mod": 15.1,
+   "ext": 2.6,
+   "ing": 22.1,
+   "ingx": 4.4,
+   "pob": 1914903,
+   "car": {
+    "rez": 16.0,
+    "sal": 30.3,
+    "seg": 39.5,
+    "viv": 10.4,
+    "bas": 12.0,
+    "ali": 13.1
+   },
+   "sha": "58252bbd485f7ce48d3759e636f5c178f06038822babd3ec29da81dc05af6a35",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_23_2024.pdf",
+   "clave": "23",
+   "pobPres": 17.7
+  },
+  "SLP": {
+   "titulo": "SAN LUIS POTOSÍ",
+   "mod": 25.3,
+   "ext": 5.1,
+   "ing": 35.3,
+   "ingx": 10.0,
+   "pob": 2877302,
+   "car": {
+    "rez": 18.8,
+    "sal": 33.4,
+    "seg": 51.2,
+    "viv": 7.1,
+    "bas": 18.8,
+    "ali": 11.7
+   },
+   "sha": "706aecf946c6be49da18f273e5ec54f6c4a3e6bcd7def9399c3a5567212e3f62",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_24_2024.pdf",
+   "clave": "24",
+   "pobPres": 30.4
+  },
+  "SIN": {
+   "titulo": "SINALOA",
+   "mod": 15.5,
+   "ext": 1.5,
+   "ing": 23.3,
+   "ingx": 3.9,
+   "pob": 3136027,
+   "car": {
+    "rez": 15.5,
+    "sal": 24.7,
+    "seg": 36.9,
+    "viv": 5.9,
+    "bas": 5.6,
+    "ali": 12.2
+   },
+   "sha": "07a3bbc9cd83c3f92580c39ac9b46f400d53f0cf1cb4e084b965955e2be2ce70",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_25_2024.pdf",
+   "clave": "25",
+   "pobPres": 17.0
+  },
+  "SON": {
+   "titulo": "SONORA",
+   "mod": 12.6,
+   "ext": 1.5,
+   "ing": 18.6,
+   "ingx": 3.3,
+   "pob": 3058381,
+   "car": {
+    "rez": 13.7,
+    "sal": 24.1,
+    "seg": 31.4,
+    "viv": 7.3,
+    "bas": 6.8,
+    "ali": 14.2
+   },
+   "sha": "7f710e984bd3b7fd41ae9e0b6f8761f17d830167c0c1648acc115344279d89fb",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_26_2024.pdf",
+   "clave": "26",
+   "pobPres": 14.1
+  },
+  "TAB": {
+   "titulo": "TABASCO",
+   "mod": 28.3,
+   "ext": 6.5,
+   "ing": 39.3,
+   "ingx": 10.0,
+   "pob": 2532809,
+   "car": {
+    "rez": 17.9,
+    "sal": 35.1,
+    "seg": 54.8,
+    "viv": 9.8,
+    "bas": 33.8,
+    "ali": 32.7
+   },
+   "sha": "a7220eeb408142d938ebb0c7c26804ff3ee8e464b7397f6bfce9688b4808c539",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_27_2024.pdf",
+   "clave": "27",
+   "pobPres": 34.8
+  },
+  "TAM": {
+   "titulo": "TAMAULIPAS",
+   "mod": 18.7,
+   "ext": 1.5,
+   "ing": 26.9,
+   "ingx": 5.0,
+   "pob": 3574843,
+   "car": {
+    "rez": 15.2,
+    "sal": 25.1,
+    "seg": 37.9,
+    "viv": 4.3,
+    "bas": 4.8,
+    "ali": 9.7
+   },
+   "sha": "382a03da083657ec01ca4c73978b588a5939ec08ef4bcdf54df38e1f8ea176a7",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_28_2024.pdf",
+   "clave": "28",
+   "pobPres": 20.2
+  },
+  "TLAX": {
+   "titulo": "TLAXCALA",
+   "mod": 36.5,
+   "ext": 4.4,
+   "ing": 50.4,
+   "ingx": 12.0,
+   "pob": 1467176,
+   "car": {
+    "rez": 14.3,
+    "sal": 39.3,
+    "seg": 58.7,
+    "viv": 5.8,
+    "bas": 6.2,
+    "ali": 20.8
+   },
+   "sha": "25e043b8f37b949aeba4f6814e1ff0ffaf4282831ff8fc3eb0c4db7815d52a1b",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_29_2024.pdf",
+   "clave": "29",
+   "pobPres": 40.8
+  },
+  "VER": {
+   "titulo": "VERACRUZ DE IGNACIO",
+   "mod": 35.7,
+   "ext": 8.8,
+   "ing": 50.2,
+   "ingx": 14.6,
+   "pob": 8093850,
+   "car": {
+    "rez": 26.3,
+    "sal": 40.7,
+    "seg": 60.2,
+    "viv": 11.7,
+    "bas": 28.5,
+    "ali": 14.2
+   },
+   "sha": "7b9628e7c66a439b41ff82e0f3855e5a66332f94a7071add82e426abad85adf5",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_30_2024.pdf",
+   "clave": "30",
+   "pobPres": 44.5
+  },
+  "YUC": {
+   "titulo": "YUCATÁN",
+   "mod": 23.1,
+   "ext": 3.6,
+   "ing": 32.0,
+   "ingx": 6.5,
+   "pob": 2378523,
+   "car": {
+    "rez": 19.7,
+    "sal": 26.1,
+    "seg": 42.3,
+    "viv": 10.6,
+    "bas": 29.6,
+    "ali": 14.7
+   },
+   "sha": "37c748c03ad43d33bd71b3c57622c55be66905afabe5ce1eb0c933accfc39a77",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_31_2024.pdf",
+   "clave": "31",
+   "pobPres": 26.6
+  },
+  "ZAC": {
+   "titulo": "ZACATECAS",
+   "mod": 32.9,
+   "ext": 3.5,
+   "ing": 44.8,
+   "ingx": 13.0,
+   "pob": 1661732,
+   "car": {
+    "rez": 18.8,
+    "sal": 33.8,
+    "seg": 52.9,
+    "viv": 3.1,
+    "bas": 5.5,
+    "ali": 11.3
+   },
+   "sha": "964b4db5c7efb08a00b64189b48387b3588beefdf87e748af0a619c26dbab155",
+   "url": "https://www.inegi.org.mx/contenidos/desarrollosocial/pm/doc/pm_infog_32_2024.pdf",
+   "clave": "32",
+   "pobPres": 36.4
+  }
+ }
+}

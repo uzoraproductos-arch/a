@@ -49,6 +49,7 @@
       rojo: ['#fbe5e2', '#f2b3aa', '#e06f60', '#b3261e', '#6e1510'],
       cafe: ['#f5ecdc', '#e3c99b', '#c49a5c', '#8f6334', '#4e3318'],
       naranja: ['#fdeedd', '#fbc995', '#f39a4a', '#d2661a', '#8a3a0a'],
+      rosa: ['#fbe8f3', '#f3b9db', '#e07bb5', '#b8327f', '#6e0f47'],
       verde: ['#e4f3e8', '#b3dcbd', '#6dba82', '#2e8a4c', '#0f5128']
     };
     /* La lente que llega en ?l=deuda (desde el Auditor o una liga). */

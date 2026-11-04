@@ -1552,6 +1552,49 @@
         ir: ['planisferio-' + e.a.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase() + '.html#administracion', 'su administración pública en el Planisferio'],
         sug: ['¿Qué estado tiene más burócratas por habitante?', '¿Quién audita a la administración pública?', '¿Qué funciones tiene un municipio?'] };
     }
+    /* La pobreza de cada estado (dimension_social.py, 04-11-2026): la medición del INEGI 2024 y las aportaciones 2026 por persona en pobreza. */
+    var SOC = D.soc || null;
+    var SOC_RX = /pobreza|pobres?\b|carencias? social|rezago educativo|sin seguridad social/;
+    function socFu() { return { tx: SOC.fu.tx, url: SOC.fu.url }; }
+    function socEstado(e) {
+      var r = SOC.est.filter(function (x) { return x[0] === e.a; })[0];
+      if (!r) return null;
+      var orden = SOC.est.slice().sort(function (a, b) { return b[1] - a[1]; }).map(function (x) { return x[0]; });
+      var h = '<p><b>En ' + esc(e.n) + ', ' + n(r[1], 1) + ' de cada 100 personas viven en pobreza</b> según el INEGI (2024): unas <b>' + n(r[2]) + ' personas</b>. ' +
+        'Es el lugar ' + (orden.indexOf(e.a) + 1) + ' de 32; en el país son ' + n(SOC.nac[0], 1) + ' de cada 100.</p>' +
+        '<p>En pobreza extrema, ' + n(r[3], 1) + ' de cada 100. Con un ingreso que no alcanza para lo básico, ' + n(r[4], 1) + '. Sin seguridad social, ' + n(r[5], 1) +
+        '; sin acceso a servicios de salud, ' + n(r[6], 1) + '; con rezago educativo, ' + n(r[7], 1) + '.</p>' +
+        (r[8] ? '<p>La Federación le aporta en 2026 <b>$' + n(r[8]) + ' por cada persona en pobreza</b> (Ramo 33 ÷ personas en pobreza de 2024). No es lo que le llega a cada persona: ' +
+          'el Ramo 33 paga sobre todo maestros y salud, y solo su fondo de infraestructura social va por ley a la población en pobreza.</p>' : '') +
+        '<p class="pa-chico">La pobreza la mide el INEGI en los hogares y la mueven los tres niveles de gobierno, la economía y las remesas: no es la calificación de un gobierno.</p>';
+      var fu = [{ que: 'Pobreza, pobreza extrema y carencias de ' + e.n + ' (2024)', e: 'oficial', fu: { tx: 'INEGI, Pobreza multidimensional 2024, infografía de ' + e.n, url: r[9] } },
+        { que: 'Personas en pobreza', e: 'derivado', op: n(r[1], 1) + ' % × población de la medición', fu: socFu() },
+        { que: 'Aportaciones 2026 por persona en pobreza', e: 'derivado', op: 'Ramo 33 de 2026 ÷ personas en pobreza de 2024', fu: { tx: SOC.r33, url: '' } }];
+      return { html: h, fu: fu, tit: 'La pobreza en ' + e.n,
+        ci: [{ v: n(r[1], 1) + ' %', etq: 'de su población en pobreza', e: 'oficial' }, { v: n(r[3], 1) + ' %', etq: 'en pobreza extrema', e: 'oficial' }],
+        ir: ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html#social', 'su pobreza en el Planisferio'],
+        sug: ['¿Qué estado tiene más pobreza?', 'Estado de cuenta de ' + e.n, '¿Qué es la pobreza multidimensional?'] };
+    }
+    function socTodos() {
+      var o = SOC.est.slice().sort(function (a, b) { return b[1] - a[1]; });
+      var nom = function (a) { return porA[a] ? porA[a].n : a; };
+      var top = o.slice(0, 5).map(function (x) { return esc(nom(x[0])) + ' (' + n(x[1], 1) + ' %)'; }).join(', ');
+      var baj = o.slice(-3).map(function (x) { return esc(nom(x[0])) + ' (' + n(x[1], 1) + ' %)'; }).join(', ');
+      var h = '<p>En el país, <b>' + n(SOC.nac[0], 1) + ' de cada 100 personas viven en pobreza</b> según el INEGI (2024), y ' + n(SOC.nac[2], 1) + ' en pobreza extrema.</p>' +
+        '<p>Donde más pesa: ' + top + '. Donde menos: ' + baj + '.</p>' +
+        '<p class="pa-chico">El porcentaje y el número de personas cuentan historias distintas: un estado grande puede tener más personas en pobreza con un porcentaje menor. El mapa trae las dos.</p>';
+      return { html: h, fu: [{ que: 'Pobreza por entidad federativa, 2024', e: 'oficial', fu: socFu() }], tit: 'La pobreza en los 32 estados',
+        ci: [{ v: n(SOC.nac[0], 1) + ' %', etq: 'de la población del país en pobreza', e: 'oficial' }],
+        ir: ['planisferio.html?d=social', 'la pobreza de los 32 estados, en el Planisferio'],
+        sug: ['¿Cuánta pobreza hay en Chiapas?', '¿Cuánto le aporta la Federación a cada estado?', 'Contexto dimensional: la dimensión social'] };
+    }
+    function socEdo(t) {
+      if (!SOC || !SOC_RX.test(t)) return null;
+      var sEs = estados(t).e;
+      if (sEs.length === 1) return socEstado(sEs[0]);
+      if (!sEs.length && /(que|cual) estados?|cada estado|por estado|los estados|de los 32|entidad|mapa/.test(t)) return socTodos();
+      return null;
+    }
     var APU_RX = /administracion(es)? publicas?|burocrat|servidores? public|servidoras? public|trabaja(n|dores)? (en|para|del?) (el |los )?gobiernos?|empleados? (del?|de los) gobiernos?|personal del gobierno|poder ejecutivo (estatal|local|del estado)/;
     function apuEdo(t) {
       if (!APU || !APU.est) return null;
@@ -2097,6 +2140,7 @@
       juzga: function (claim, val) { var d = cifraDicha(norm(claim).replace(/[¿?¡!]/g, ' ')), j = d && juzgaDicho(d, val); return j ? { dicho: d, v: j } : null; },
       /* Salud pública antes que Verificamos: «¿es cierto que el IMSS hizo 1.78 millones de cirugías?» es un cotejo de salud (27-10-2026). */
       salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
+      social: function (q) { var r = socEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'soc' }); },
       administracion: function (q) { var r = apuEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'apu' }); },
       saludEstado: function (q) { var r = salEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       nepotismo: function (q) { var r = nepResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'nep' }); },
