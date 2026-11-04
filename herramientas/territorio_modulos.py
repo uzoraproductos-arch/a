@@ -36,6 +36,34 @@ MAPA = 'numeros-mapa-del-gasto-federalizado.html'
 ENTIDADES = 'numeros-las-32-entidades.html'
 MUNICIPIOS = 'numeros-los-municipios.html'
 
+# El Planisferio es la matriz de los mapas (pedido del autor, 04-11-2026: «el
+# planisferio va a ser nuestra matriz… que se vincula y se alimenta al mismo
+# tiempo con la información de la Enciclopedia»). Cada lente de este mapa que
+# ya se pinta en el Planisferio dice aquí en qué dimensión y lente vive allá
+# (?d=dimensión&l=lente). Este mapa lleva ahí con «Ábrelo en el Planisferio»
+# y el chat junta los dos en un solo renglón, que abre el Planisferio.
+# planisferio.py comprueba que cada dimensión y cada lente existan; si no, la
+# generación se detiene. Una lente sin renglón no tiene par allá todavía.
+PLANISFERIO = {
+    'gasto': ('financiera', 'fed'),
+    'deuda': ('deuda', 'deuda'),
+    'asf': ('inversion', 'asf'),
+    'inv': ('inversion', 'inv'),
+    'invt': ('inversion', 'invt'),
+}
+
+
+def _clave(a):
+    """MÉX → mex, como clave() de planisferio.py (que importa este módulo)."""
+    import unicodedata
+    return unicodedata.normalize('NFKD', a).encode('ascii', 'ignore').decode().lower()
+
+
+def liga_pl(lente):
+    """La dirección del Planisferio donde vive esta lente, o None."""
+    p = PLANISFERIO.get(lente)
+    return 'planisferio.html?d=%s&l=%s' % p if p else None
+
 
 def _json(x):
     # Dentro de <script type="application/json">: que nada cierre la etiqueta.
@@ -201,6 +229,8 @@ def mapa(base, ref, raiz):
          'fuente': 'Conteo nuestro de los proyectos de la herramienta Costo Ambiental (%s), cada uno con sus documentos.' % (
              '<a href="datos-ambiente-megaobras.html#abMapaObras">mapa ambiental de megaobras</a>')},
     ]
+    for l in lentes:
+        l['pl'] = liga_pl(l['id'])
     datos = {
         'lentes': lentes,
         'e': [{'a': e['abbr'], 'n': e['name'], 'gasto': e['gasto'], 'r28': e['ramo28'], 'r33': e['ramo33'], 'pc': e['pc'],
@@ -211,6 +241,8 @@ def mapa(base, ref, raiz):
                'opriv': obras.get(e['abbr'], {}).get('privado', 0)} for e in E],
         'sin_capa': 'Contaminación por estado: la plataforma todavía no tiene una cifra estatal cotejada; las cuentas ecológicas del INEGI que ya integra son nacionales.',
         'ent': ENTIDADES, 'mun': MUNICIPIOS,
+        # El portal de cada entidad en el Planisferio (planisferio-jal.html).
+        'portal': {e['abbr']: 'planisferio-%s.html' % _clave(e['abbr']) for e in E},
     }
     botones = ''.join('<button type="button" class="tt-lente" role="radio" aria-checked="%s" data-l="%s">%s</button>'
                       % ('true' if i == 0 else 'false', l['id'], l['nom']) for i, l in enumerate(lentes))
@@ -219,6 +251,7 @@ def mapa(base, ref, raiz):
           <p class="pm-txt">De los <b>%s</b> del gasto federalizado, la mayor parte viaja por dos ramos, las participaciones y las aportaciones. Elige qué quieres ver (cuánto llega, cuánto se debe, qué dejó la ASF por aclarar, qué no cuadra y dónde hay obras con alerta ambiental); el mapa y el cuadro de abajo cambian juntos. Toca un estado para ver su ficha.</p>
           <div class="tt-lentes" role="radiogroup" aria-label="Qué mostrar en el mapa">%s</div>
           <p class="tt-que" id="ttQue"></p>
+          <p class="tt-pl" id="ttPl"><a class="tt-pl-a" href="planisferio.html">🗺️ Ábrelo en el Planisferio ➔</a></p>
           <div class="tt-mapa-rej">
             <figure class="tt-fig">
               %s

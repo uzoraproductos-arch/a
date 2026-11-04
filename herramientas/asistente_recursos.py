@@ -168,6 +168,29 @@ def _existe(enlace):
     return True
 
 
+def _en_planisferio(ir, ire):
+    """Dónde vive este mapa en el Planisferio, la matriz de los mapas
+    (04-11-2026): (enlace, enlace con estado, nombre de la dimensión), o None.
+    Un mapa del Planisferio vive ahí mismo; una lente del mapa de la
+    Enciclopedia, en su par (PLANISFERIO de territorio_modulos.py). El chat
+    junta en un solo renglón los mapas que viven en el Planisferio."""
+    import planisferio
+    import territorio_modulos as tm
+    nombres = {i: nom for i, _, nom, *_r in planisferio.DIMENSIONES}
+    archivo = ir.split('#')[0].split('?')[0]
+    if archivo.startswith('planisferio'):
+        d = re.search(r'[?&]d=([a-z]+)', ir)
+        return {'pl': ir, 'ple': ire, 'pld': nombres.get(d.group(1), '') if d else ''}
+    if archivo != tm.MAPA:
+        return None
+    m = re.search(r'[?&]l=([a-z]+)', ir)
+    liga = tm.liga_pl(m.group(1) if m else 'gasto')
+    if not liga:
+        return None
+    d = tm.PLANISFERIO[m.group(1) if m else 'gasto'][0]
+    return {'pl': liga, 'ple': liga + '&e=%s', 'pld': nombres[d]}
+
+
 def _docs_expide():
     s = open(os.path.join(RAIZ, EXPIDE), encoding='utf-8').read()
     C = json.loads(re.search(r'id="exCargos">(.*?)</script>', s, re.S).group(1))
@@ -202,7 +225,10 @@ def base(estados):
         for e in (ir, (ire % 'X') if ire else None):
             if e and not _existe(e):
                 malos.append(e)
-        rec.append({'id': i, 'q': q, 'ico': ico, 'v': verbo, 'n': nom, 'ir': ir, 'ire': ire, 'tipo': tipo, 'k': k})
+        x = {'id': i, 'q': q, 'ico': ico, 'v': verbo, 'n': nom, 'ir': ir, 'ire': ire, 'tipo': tipo, 'k': k}
+        if tipo == 'mapa':
+            x.update(_en_planisferio(ir, ire) or {})
+        rec.append(x)
     if malos:
         raise SystemExit('asistente_recursos: enlaces que no existen: ' + '; '.join(malos))
     return {'ec': ec, 'rec': rec, 'dl': dl}

@@ -98,6 +98,15 @@
       var cu = document.getElementById('ttCuadre');
       cu.innerHTML = lente.cuadre || '';
       cu.hidden = !lente.cuadre;
+      /* El Planisferio es la matriz de los mapas (04-11-2026): la lente que tiene
+         par alla abre su dimension y su lente; las demas, el Planisferio. */
+      var pl = document.getElementById('ttPl');
+      if (pl) {
+        var u = lente.pl || 'planisferio.html';
+        if (sel) u += (u.indexOf('?') < 0 ? '?' : '&') + 'e=' + encodeURIComponent(sel);
+        pl.innerHTML = '<a class="tt-pl-a" href="' + esc(u) + '">🗺️ ' + (lente.pl ? 'Ábrelo en el Planisferio' : 'Ve las 32 en el Planisferio') + (sel && porA[sel] ? ' · ' + esc(porA[sel].n) : '') + ' ➔</a>' +
+          '<small>' + (lente.pl ? 'El Planisferio es la matriz de los mapas: esta lente vive allá, con sus otras dimensiones y los municipios de cada estado.' : 'Esta lente todavía vive solo aquí; en el Planisferio están sus otras dimensiones y los municipios de cada estado.') + '</small>';
+      }
       var sc = document.getElementById('ttSinCapa');
       if (sc) sc.textContent = D.sin_capa || '';
       resumen(o);
@@ -168,7 +177,7 @@
         '<dt>A sus organismos de obra (2024)</dt><dd>' + (e.invt == null ? chip('pendiente', 'entidades-' + e.a.toLowerCase()) : mdp(e.invt) + ' ' + chip('oficial')) + '</dd>' +
         '<dt>No cuadra (INEGI contra Cuenta Pública, 2024)</dt><dd>' + (e.cuadre == null ? chip('pendiente', 'entidades-' + e.a.toLowerCase()) : fmt(e.cuadre, 'pct') + ' ' + chip('derivado')) + '</dd>' +
         '<dt>Obras con alerta ambiental</dt><dd>' + e.obras + (e.obras ? ' (' + e.opub + ' con dinero público, ' + e.opriv + ' privadas)' : '') + ' ' + chip('derivado') + '</dd>' +
-        '</dl><p class="tt-ficha-ir"><a href="' + D.ent + '?e=' + encodeURIComponent(e.a) + '#circuito">Su circuito: de dónde viene cada peso ➔</a>' +
+        '</dl><p class="tt-ficha-ir">' + (D.portal && D.portal[e.a] ? '<a href="' + D.portal[e.a] + '">Su portal en el Planisferio, con sus municipios ➔</a>' : '') + '<a href="' + D.ent + '?e=' + encodeURIComponent(e.a) + '#circuito">Su circuito: de dónde viene cada peso ➔</a>' +
         '<a href="' + D.mun + '?e=' + encodeURIComponent(e.a) + '#padron">Sus municipios, uno por uno ➔</a>' +
         (e.obras ? '<a href="datos-ambiente-megaobras.html?e=' + encodeURIComponent(e.a) + '#abMapaObras">Sus obras en el mapa ambiental ➔</a>' : '') + '</p>';
     }

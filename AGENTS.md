@@ -104,6 +104,17 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   la dimensión; «Para leerla bien» (los cajones) va al pie del tablero y lo financiero en
   tres pestañas (`.pl-hoja-b`). **Una dimensión nueva necesita su color en `planisferio.css`**,
   o su mosaico sale azul. Se reordenó; no se quitó contenido.
+- **El Planisferio es la matriz de los mapas** (pedido del autor, 04-11-2026: «las cuestiones que
+  tienen que ver con los mapas quedan vinculadas con el planisferio… va a ser nuestra matriz, que se
+  vincula y se alimenta al mismo tiempo con la información de la Enciclopedia»). Cada lente del mapa de
+  la Enciclopedia (`numeros-mapa-del-gasto-federalizado.html`) que ya se pinta en el Planisferio dice en
+  `PLANISFERIO` de `territorio_modulos.py` en qué dimensión y lente vive allá; ese mapa lleva ahí con
+  «Ábrelo en el Planisferio» (y cada ficha, a su portal), y `matriz()` de `planisferio.py` detiene la
+  generación si una apunta a una dimensión o lente que no existe. **En el chat, los mapas que viven en el
+  Planisferio salen en un solo renglón** («Ver en el Planisferio», con las otras dimensiones al lado:
+  `lineaPl()` de `asistente.js`, con el `pl` que escribe `asistente_recursos.py`), nunca como tarjetas
+  sueltas que repiten el mismo mapa, y «el mapa de…» se abre allá. **Una lente nueva del mapa de la
+  Enciclopedia con par en el Planisferio necesita su renglón en `PLANISFERIO`.**
 - **No trae datos propios:** ordena en el territorio lo que la Enciclopedia
   ya cotejó (`AUDIT_DB`, `municipios-efipem.js`). Una cifra nueva entra
   primero a su módulo de la Enciclopedia y de ahí la lee el Planisferio.

@@ -724,7 +724,23 @@ def _fuentes(ref, base=None):
     })
 
 
+def matriz():
+    """El Planisferio es la matriz de los mapas (04-11-2026): cada lente del
+    mapa de la Enciclopedia que dice vivir aquí (PLANISFERIO de
+    territorio_modulos.py) apunta a una dimensión que se pinta y a una lente
+    suya. Si no, la generación se detiene: una liga del chat o de la
+    Enciclopedia abriría el Planisferio en el lugar equivocado."""
+    pinta = {i for i, *_r, p in DIMENSIONES if p}
+    lentes = {l['id']: l['dim'] for l in LENTES}
+    malos = ['%s → %s/%s' % (k, d, l) for k, (d, l) in tm.PLANISFERIO.items()
+             if d not in pinta or (l and lentes.get(l) != d)]
+    if malos:
+        raise SystemExit('planisferio: el mapa de la Enciclopedia apunta a dimensiones o lentes que no existen: ' + '; '.join(malos))
+    return {d for d, _ in tm.PLANISFERIO.values()}
+
+
 def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
+    matriz()
     filas = _datos(base, padron)
     F = base['panoramaErario']['federalizado']
     s = {x['id']: x for x in tres['sale']}
