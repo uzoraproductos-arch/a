@@ -74,6 +74,11 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   `herramientas/planisferio.py`): financiera, deuda, inversión, ambiental,
   legislativa y judicial. Toca una entidad y lleva a su **portal**
   (`planisferio-<clave>.html`, clave sin acentos: `mex`), con sus municipios.
+  **El portal va por tarjetas** (decisión del autor, 04-11-2026): arriba solo el mapa de sus
+  municipios y sus municipios uno por uno; cada tema vive en su página,
+  `planisferio-<clave>-<tema>.html` (`TEMAS` y `subpagina()` de `planisferio.py`, con su copia en
+  `planisferio.js`). **Un tema nuevo del portal necesita su renglón en `TEMAS`**, o la generación se
+  detiene; una liga a un tema apunta a su página, nunca a `#tema` del portal.
 - **La página del mapa va por pestañas y cajones** (decisión del autor, 03-11-2026:
   «hay mucho contenido de narración»). Las dimensiones son una tira de pestañas;
   lo que cada una pinta («📏 Cómo leer esta dimensión») y sus puntos ciegos («👁️ Lo

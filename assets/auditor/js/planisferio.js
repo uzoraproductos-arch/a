@@ -10,6 +10,15 @@
   'use strict';
 
   var SEG = 31536000;
+  // Cada tema del portal vive en su página (04-11-2026): planisferio-<clave>-<tema>.html.
+  var TEMAS = ['presupuestos', 'deuda', 'inversion', 'legislativa', 'judicial', 'salud', 'social', 'administracion', 'ambiental', 'leyes', 'dimensiones'];
+  function sub(e, d) { return e.p.replace(/\.html$/, '-' + (d === 'financiera' ? 'presupuestos' : d) + '.html'); }
+  (function () {
+    // Una liga vieja a un tema del portal (planisferio-jal.html#deuda) lleva a su página.
+    var h = location.hash.slice(1), m = location.pathname.match(/planisferio-([a-z]+)\.html$/);
+    if (h === 'ritmo') h = 'presupuestos';
+    if (m && TEMAS.indexOf(h) >= 0) location.replace('planisferio-' + m[1] + '-' + h + '.html');
+  })();
   function esc(v) {
     return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -164,7 +173,7 @@
         d('sd', 'Lo que se va en pagarla') + d('ocp', 'Deudas de corto plazo') +
         '<dt>Semáforo de Hacienda</dt><dd>' + esc(e.sem) + ' ' + chip('oficial') + '</dd></dl>' +
         (med ? '' : '<p class="pl-ficha-mun">' + esc(lenteDe('ild').falta.txt) + '</p>') +
-        '<a class="pl-ficha-ir" href="' + esc(e.p) + '#deuda">Ver su deuda en su portal ➔</a>' +
+        '<a class="pl-ficha-ir" href="' + esc(sub(e, 'deuda')) + '">Ver su deuda en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
     /* La inversión: la obra directa y lo de sus organismos van separadas
@@ -179,7 +188,7 @@
         '<dl class="pl-ficha-dl">' + d('inv', 'Obra que hizo el estado') + d('invp', 'De cada $100 de su egreso') + d('invt', 'A sus organismos de obra') +
         '<dt>Por aclarar ante la ASF</dt><dd><b class="num-tabular">' + mdp(e.asf) + '</b> · ' + e.aud + ' auditorías ' + chip('oficial') + '</dd></dl>' +
         (mas ? '<p class="pl-ficha-mun">Les pasó a sus organismos más que la obra que hizo él mismo: las dos cifras no se suman.</p>' : '') +
-        '<a class="pl-ficha-ir" href="' + esc(e.p) + '#inversion">Ver su inversión en su portal ➔</a>' +
+        '<a class="pl-ficha-ir" href="' + esc(sub(e, 'inversion')) + '">Ver su inversión en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
     /* Su congreso: lo que gastó, cuántos lo integran, por curul y la
@@ -192,7 +201,7 @@
       ficha.innerHTML = '<h3>Congreso de ' + esc(e.n) + '</h3><p class="pl-ficha-sub">Su gasto de 2024 · censo de los congresos del INEGI</p>' +
         '<dl class="pl-ficha-dl">' + d('leg', 'Lo que gastó') + d('legn', 'Personas legisladoras') + d('legx', 'Por curul') + d('legp', 'Frente al tope del 0.70 %') + '</dl>' +
         (e.legp != null && e.legp > 0.70 ? '<p class="pl-ficha-mun">Arriba del 0.70 % como referencia: el tope es de 2026 y su gasto, de 2024; no es un incumplimiento.</p>' : '') +
-        '<a class="pl-ficha-ir" href="' + esc(e.p) + '#legislativa">Ver su congreso en su portal ➔</a>' +
+        '<a class="pl-ficha-ir" href="' + esc(sub(e, 'legislativa')) + '">Ver su congreso en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
     /* Su Poder Judicial: el dinero junto a lo que concluyó con él, el
@@ -207,7 +216,7 @@
         '<dt>Le entraron · concluyó</dt><dd><b class="num-tabular">' + num(e.judi, 0) + ' · ' + num(e.judk, 0) + '</b> ' + chip('oficial') + '</dd>' +
         d('judc', 'Concluyó de cada 100') + d('juda', 'Por asunto concluido') + d('judr', 'Causas penales pendientes') + d('judj', 'Personas juzgadoras') + '</dl>' +
         '<p class="pl-ficha-mun">Concluir no es lo mismo que no deber: el rezago civil, familiar y mercantil no lo publica el censo.</p>' +
-        '<a class="pl-ficha-ir" href="' + esc(e.p) + '#judicial">Ver su Poder Judicial en su portal ➔</a>' +
+        '<a class="pl-ficha-ir" href="' + esc(sub(e, 'judicial')) + '">Ver su Poder Judicial en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
     /* Su salud pública: el IMSS con su Memoria Estadística 2025 (por OOAD) y el
@@ -226,7 +235,7 @@
         '<dt>Personas que atiende</dt><dd>Sin cifra ' + chip('pendiente', 'salud-issste-servicios') + '</dd></dl>';
       ficha.innerHTML = '<h3>' + esc(e.n) + '</h3>' + (/^is/.test(lente.id) ? iss + imss : imss + iss) +
         '<p class="pl-ficha-mun">Cuentan cuánto se hizo y con qué, no cuánto se esperó ni si alcanzó.</p>' +
-        '<a class="pl-ficha-ir" href="' + esc(e.p) + '#salud">Ver su salud pública en su portal ➔</a>' +
+        '<a class="pl-ficha-ir" href="' + esc(sub(e, 'salud')) + '">Ver su salud pública en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
     /* Su administración pública (administracion_publica.py): lo que su gobierno reportó al censo del INEGI, lo que ejercieron sus municipios y lo que la ASF dejó por aclarar. */
@@ -243,7 +252,7 @@
         d('apA', 'ASF · por aclarar', ' · ' + num(u.ma, 0) + ' auditorías') + '</dl>';
       ficha.innerHTML = '<h3>' + esc(e.n) + '</h3>' + (/^ap[MA]$/.test(lente.id) ? mun + est : est + mun) +
         '<p class="pl-ficha-mun">Lo del INEGI es lo que cada gobierno contestó a su censo; un monto por aclarar no es un desfalco comprobado.</p>' +
-        '<a class="pl-ficha-ir" href="' + esc(e.p) + '#administracion">Ver su administración pública en su portal ➔</a>' +
+        '<a class="pl-ficha-ir" href="' + esc(sub(e, 'administracion')) + '">Ver su administración pública en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
     /* Sus recursos naturales: sus acuíferos (CONAGUA, DOF 09-11-2023, corte 2022), sus incendios (CONAFOR, cierre 2025), sus concesiones mineras (DGM, marzo de 2024) y su
@@ -293,7 +302,7 @@
         '<p class="pl-ficha-mun">Procesar no es producir gasolina, y el valor en libros es una estimación, no dinero que salió de la caja.</p>' :
         '<p class="pl-ficha-sub">🛢️ Sin refinería de PEMEX</p>';
       ficha.innerHTML = '<h3>' + esc(e.n) + '</h3>' + (refL ? refi + agua + fuego + pesc + minas : minL ? minas + agua + fuego + pesc + refi : incL ? fuego + agua + pesc + minas + refi : peL ? pesc + agua + fuego + minas + refi : agua + fuego + pesc + minas + refi) +
-        '<a class="pl-ficha-ir" href="' + esc(e.p) + '#ambiental">Ver sus recursos naturales en su portal ➔</a>' +
+        '<a class="pl-ficha-ir" href="' + esc(sub(e, 'ambiental')) + '">Ver sus recursos naturales en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
     /* Su pobreza (dimension_social.py): la medición del INEGI 2024 y lo que le
@@ -310,7 +319,7 @@
         '<dt>Vivienda · servicios · alimentación</dt><dd><b class="num-tabular">' + num(s.v, 1) + '% · ' + num(s.b, 1) + '% · ' + num(s.al, 1) + '%</b> ' + chip('oficial') + '</dd>' +
         d('soQ', 'Aportaciones 2026 por persona en pobreza') + '</dl>' +
         '<p class="pl-ficha-mun">La pobreza la mide el INEGI en los hogares: no es la calificación de un gobierno.</p>' +
-        '<a class="pl-ficha-ir" href="' + esc(e.p) + '#social">Ver su pobreza en su portal ➔</a>' +
+        '<a class="pl-ficha-ir" href="' + esc(sub(e, 'social')) + '">Ver su pobreza en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
     /* Todas las fichas llevan su estado de cuenta y de resultados (04-11-2026). */
@@ -345,7 +354,7 @@
     function elige(a, abrir) {
       var e = porA[a];
       if (!e) return;
-      if (abrir && sel && sel.a === a) { location.href = e.p + (dimP === 'financiera' ? '' : '#' + dimP); return; }
+      if (abrir && sel && sel.a === a) { location.href = dimP === 'financiera' ? e.p : sub(e, dimP); return; }
       sel = e;
       pinta();
       muestra(e, true);

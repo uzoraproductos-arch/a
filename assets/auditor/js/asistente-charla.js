@@ -402,7 +402,7 @@
       if (es.length === 1) {
         var e = es[0];
         r = edoMet(e, k, false);
-        r.ir = ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html#legislativa', 'su congreso en el Planisferio'];
+        r.ir = ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-legislativa.html', 'su congreso en el Planisferio'];
         r.sug = ['¿Qué congreso local gasta más por curul?', '¿Qué congresos pasan del tope del 0.70 %?', '¿Cuánto debe ' + e.n + '?'];
       } else {
         if (/barat|economic/.test(t)) dir = 'min';
@@ -1369,7 +1369,7 @@
         { que: 'Asuntos concluidos por persona juzgadora', e: 'derivado', op: n(r[3]) + ' ÷ ' + n(r[5]), fu: fc }];
       fu.push(x.fu[x.fu.length - 1]);
       return { html: h, fu: fu, tit: 'Lo que cuesta y lo que resuelve el Poder Judicial de ' + e.n,
-        ir: ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html#judicial', 'su Poder Judicial en el Planisferio'],
+        ir: ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-judicial.html', 'su Poder Judicial en el Planisferio'],
         ci: [{ v: n(p100, 1), etq: 'asuntos concluidos por cada 100 que entraron', e: 'derivado' }, { v: '$' + n(costo), etq: 'por asunto concluido', e: 'derivado' },
           { v: n(r[4]), etq: 'causas penales pendientes al cierre de 2024', e: 'oficial' }],
         sug: ['¿Cuánto rezago tienen los poderes judiciales de los estados?', '¿Cuánto rezago penal hay?', '¿Cuánto tarda la Suprema Corte en resolver?'] };
@@ -1497,7 +1497,7 @@
       var ci = [{ v: n(r[1]), etq: 'personas adscritas al IMSS', e: 'oficial' }, { v: n(r[9], 2), etq: 'camas del IMSS por cada mil adscritos', e: 'derivado' }, { v: n(is[2]), etq: 'médicos del ISSSTE', e: 'oficial' }];
       if (primero === 'is') ci.reverse();
       return { html: h, fu: fu, ci: ci, tit: 'El IMSS y el ISSSTE en ' + e.n,
-        ir: ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html#salud', 'su salud pública en el Planisferio'],
+        ir: ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-salud.html', 'su salud pública en el Planisferio'],
         sug: ['¿Qué estado tiene menos camas del IMSS?', '¿Cuántas consultas dio el IMSS en 2025?', '¿Qué sabemos del IMSS-Bienestar?'] };
     }
     /* El IMSS y el ISSSTE de un estado (03-11-2026, dimensión de salud del Planisferio): «¿cuántos médicos tiene el ISSSTE en Jalisco?».
@@ -1549,7 +1549,7 @@
       return { html: h, fu: fu, tit: 'La administración pública de ' + e.n,
         ci: [{ v: n(r[2]), etq: 'personas en su administración', e: 'oficial' }, { v: n(r[5], 1) + ' %', etq: 'de sus contratos, por adjudicación directa', e: 'oficial' },
              { v: '$' + n(r[9], 1) + ' millones', etq: 'por aclarar del gobierno ante la ASF', e: 'oficial' }],
-        ir: ['planisferio-' + e.a.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase() + '.html#administracion', 'su administración pública en el Planisferio'],
+        ir: ['planisferio-' + e.a.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase() + '-administracion.html', 'su administración pública en el Planisferio'],
         sug: ['¿Qué estado tiene más burócratas por habitante?', '¿Quién audita a la administración pública?', '¿Qué funciones tiene un municipio?'] };
     }
     /* La pobreza de cada estado (dimension_social.py, 04-11-2026): la medición del INEGI 2024 y las aportaciones 2026 por persona en pobreza. */
@@ -1572,7 +1572,7 @@
         { que: 'Aportaciones 2026 por persona en pobreza', e: 'derivado', op: 'Ramo 33 de 2026 ÷ personas en pobreza de 2024', fu: { tx: SOC.r33, url: '' } }];
       return { html: h, fu: fu, tit: 'La pobreza en ' + e.n,
         ci: [{ v: n(r[1], 1) + ' %', etq: 'de su población en pobreza', e: 'oficial' }, { v: n(r[3], 1) + ' %', etq: 'en pobreza extrema', e: 'oficial' }],
-        ir: ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html#social', 'su pobreza en el Planisferio'],
+        ir: ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-social.html', 'su pobreza en el Planisferio'],
         sug: ['¿Qué estado tiene más pobreza?', 'Estado de cuenta de ' + e.n, '¿Qué es la pobreza multidimensional?'] };
     }
     function socTodos() {
@@ -1985,7 +1985,7 @@
         if (!mm) return fin(conLiga(munRanking(km, dir, cuantos, es[0]), 'numeros-baja-al-territorio.html', 'Baja al territorio'), { tipo: 'mun', met: km });
         var rm = munMet(mm.m, km, mm.otros);
         rm.ir = km === 'inv' && mm.m.v ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html?ml=inv#mapa-municipios', 'sus municipios en el Planisferio']
-          : km === 'deu' && mm.m.v ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html#deuda', 'la deuda de sus municipios en el Planisferio']
+          : km === 'deu' && mm.m.v ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-deuda.html', 'la deuda de sus municipios en el Planisferio']
           : ['herramienta-inspector-entes.html#ente=municipal:' + mm.m.cve, 'su ficha técnica en el Auditor de entes públicos'];
         rm.ficha = B.fichas.filter(function (f) { return f.t === 'municipio' && f.ir[0].slice(-5) === mm.m.cve; })[0];
         return fin(rm, { tipo: 'mun', met: km, mun: mm.m });
@@ -2019,7 +2019,7 @@
       var re2 = k ? edoMet(e, k, porHab) : edoResumen(e);
       re2.ir = ['herramienta-inspector-entes.html#ente=estatal:' + e.a, 'su ficha técnica en el Auditor de entes públicos'];
       // La inversión vive en su portal del Planisferio (planisferio.py, #inversion).
-      if (k === 'inv' || k === 'invt') re2.ir = ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html#inversion', 'su inversión en el Planisferio'];
+      if (k === 'inv' || k === 'invt') re2.ir = ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-inversion.html', 'su inversión en el Planisferio'];
       re2.ficha = B.fichas.filter(function (f) { return f.t === 'entidad' && f.tit === e.n; })[0];
       re2.tit = re2.tit || e.n;
       if (!k) re2.sug = ['¿Qué lugar ocupa ' + e.n + ' en deuda?', '¿Cuánto recibe ' + e.n + ' por habitante?', 'Municipios de ' + e.n + ' que más ingresan'];

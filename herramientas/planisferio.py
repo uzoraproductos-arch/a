@@ -101,6 +101,36 @@ def portal(a):
     return 'planisferio-%s.html' % clave(a)
 
 
+# Las tarjetas del portal (pedido del autor, 04-11-2026: «cada tarjeta tenga su
+# autonomía… al inicio… el mapa de sus municipios y sus municipios uno por
+# uno; todo lo demás… en sus respectivas tarjetas»). Cada tema del portal vive
+# en su propia página, planisferio-<clave>-<tema>.html. La dimensión
+# financiera es «presupuestos». Un tema nuevo del portal necesita aquí su
+# renglón: (id, ícono, nombre de la tarjeta, lo que trae).
+TEMAS = [
+    ('presupuestos', '💰', 'Sus tres presupuestos', 'Lo que le baja de la Federación, lo que cobra el estado, lo que ingresan sus municipios y su contador.'),
+    ('deuda', '🏦', 'Su deuda', 'Lo que debe el gobierno del estado, cuánto le pesa y lo que pagaron sus municipios por sus créditos.'),
+    ('inversion', '🏗️', 'Su inversión', 'La obra del gobierno del estado y de sus municipios, y lo que la ASF dejó por aclarar.'),
+    ('legislativa', '🏛️', 'Su congreso', 'Lo que gastó su congreso, cuántas curules tiene y el tope de la Constitución.'),
+    ('judicial', '⚖️', 'Su Poder Judicial', 'Lo que ejerció, lo que le entró, lo que concluyó y sus causas pendientes.'),
+    ('salud', '🩺', 'Su salud pública', 'El IMSS y el ISSSTE en el estado: personas, consultas, médicos, camas y unidades.'),
+    ('social', '🫂', 'Su pobreza y sus carencias', 'Cuántas personas viven en pobreza, sus seis carencias y lo que le aporta la Federación.'),
+    ('administracion', '🏢', 'Su administración pública', 'El gobierno que ejecuta: su personal, lo que ejerció y sus contratos sin concurso.'),
+    ('ambiental', '🌎', 'Sus recursos naturales', 'Sus acuíferos, bosques, incendios, pesca, minas y su refinería, si la tiene.'),
+    ('leyes', '📜', 'Sus leyes del dinero', 'Con qué leyes cobra, compra, se endeuda y rinde cuentas, y dónde se publican.'),
+    ('dimensiones', '🚪', 'En la Enciclopedia y en el Auditor', 'Su estado de cuenta, su circuito del dinero, lo que dejó la ASF y sus otras dimensiones.'),
+]
+TEMA_DIM = {'financiera': 'presupuestos'}
+
+
+def subpagina(a, tema):
+    """La página de un tema del portal; con una dimensión, la de su tema."""
+    tema = TEMA_DIM.get(tema, tema)
+    if tema not in [t[0] for t in TEMAS]:
+        raise SystemExit('planisferio: el portal no tiene el tema %s' % tema)
+    return 'planisferio-%s-%s.html' % (clave(a), tema)
+
+
 def _json(x):
     return json.dumps(x, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 
@@ -1840,16 +1870,7 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
     leyes = leyes_niveles.estado(e, leyes_niveles.municipios(padron, a))
     datos_e = '%s · capital: %s · %s habitantes a mitad de 2026 (CONAPO) %s' % (
         nom, e['capital'], format(e['pobPersonas'], ','), chip('derivado'))
-    out = {
-        'archivo': portal(a), 'menu': nom, 'menu_archivo': ARCHIVO,
-        'padre': (ARCHIVO, 'Planisferio'),
-        'icono': '📍', 'titulo': nom, 'lema': 'Su portal en el Planisferio',
-        'entrada': ('Los tres presupuestos de %s, su deuda, su inversión, su congreso, su Poder Judicial, sus recursos naturales, sus leyes del dinero, sus municipios uno por uno y la puerta a sus otras dimensiones. '
-                    'Cada cifra sale de la base de la Enciclopedia, con su fuente oficial y su etiqueta.' % nom),
-        'estilos': ['numeros.css', 'planisferio.css'],
-        'scripts': ['planisferio.js'],
-        'antes': '      <p class="pl-ent-datos">%s</p>' % datos_e,
-        'secciones': [
+    temas = [
             {'id': 'presupuestos', 'titulo': 'Sus tres presupuestos',
              'texto': 'Un piso por cada orden de gobierno. Los años no se mezclan: lo que baja es de 2026 y lo que cobran el estado y sus municipios, de 2024, el último con cifras definitivas del INEGI.',
              'tarjetas': [], 'bloque': '<div class="pl-pisos">%s%s%s</div>' % (p1, p2, p3)},
@@ -1889,7 +1910,36 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
             {'id': 'leyes', 'titulo': 'Sus leyes del dinero',
              'texto': 'Con qué leyes cobra, compra, se endeuda y rinde cuentas %s, quién las aprueba y dónde se publican.' % nom,
              'tarjetas': [], 'bloque': leyes},
-        ] + ([
+        {'id': 'dimensiones', 'titulo': 'En la Enciclopedia y en el Auditor',
+         'texto': 'Lo demás de %s que ya vive en la Enciclopedia y en el Auditor, con el estado elegido:' % nom,
+         'tarjetas': [], 'bloque': '<div class="pl-puertas">%s%s</div>' % (puertas_aud, ''.join(puertas))},
+    ]
+    # Cada dimensión, vinculada a su Contexto dimensional, al estado de
+    # resultados del Gobierno y al estado de cuenta del estado (04-11-2026).
+    for sec in temas:
+        i = 'financiera' if sec['id'] == 'presupuestos' else sec['id']
+        if any(d[0] == i for d in DIMENSIONES):
+            sec['bloque'] += _ctx_portal(i, a, nom)
+    # El contador va dentro de los presupuestos.
+    rit = next(x for x in temas if x['id'] == 'ritmo')
+    temas.remove(rit)
+    temas[0]['bloque'] += '<h3 class="pl-sub-tit">Su contador</h3>' + rit['bloque']
+    if [x['id'] for x in temas] != [t[0] for t in TEMAS]:
+        raise SystemExit('planisferio: los temas del portal no son los de TEMAS')
+    with open(os.path.join(RAIZ, 'assets', 'auditor', 'js', 'planisferio.js'), encoding='utf-8') as f:
+        if "var TEMAS = %s;" % json.dumps([t[0] for t in TEMAS]).replace('"', "'") not in f.read():
+            raise SystemExit('planisferio: TEMAS de planisferio.js no es el de planisferio.py')
+    info = {t[0]: t for t in TEMAS}
+    tarjetas = [(info[x['id']][1], info[x['id']][2], info[x['id']][3], subpagina(a, x['id']), None, None) for x in temas]
+    comun = {'menu': nom, 'menu_archivo': ARCHIVO, 'estilos': ['numeros.css', 'planisferio.css'], 'scripts': ['planisferio.js'],
+             'antes': '      <p class="pl-ent-datos">%s</p>' % datos_e}
+    out = [dict(comun, **{
+        'archivo': portal(a), 'padre': (ARCHIVO, 'Planisferio'),
+        'icono': '📍', 'titulo': nom, 'lema': 'Su portal en el Planisferio',
+        'entrada': ('El mapa de los municipios de %s y sus cuentas, uno por uno. Lo demás va en sus tarjetas, cada una con su página: sus tres presupuestos, su deuda, '
+                    'su inversión, su congreso, su Poder Judicial, su salud pública, su pobreza, su administración pública, sus recursos naturales y sus leyes del dinero. '
+                    'Cada cifra sale de la base de la Enciclopedia, con su fuente oficial y su etiqueta.' % nom),
+        'secciones': ([
             {'id': 'mapa-municipios',
              'titulo': ('El mapa de sus %d municipios' if m['conCifra'] else 'El mapa de sus %d alcaldías') % len(g['m']),
              'texto': ('Cada municipio en su lugar, con lo que ingresó e invirtió en %d. Elige qué ver; el color compara a los municipios del estado por quintiles '
@@ -1901,17 +1951,25 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
              'texto': ('El que no rindió cuenta sigue en la lista, sin cifra: borrarlo falsearía el padrón y ponerle cero falsearía la cifra. ' +
                        ('' if g else 'El mapa de sus municipios, con el Marco Geoestadístico del INEGI, llega en una próxima entrega del Planisferio, entidad por entidad.')),
              'tarjetas': [], 'bloque': tabla},
-            {'id': 'dimensiones', 'titulo': 'Sus otras dimensiones',
-             'texto': 'Mientras llegan al Planisferio, ya están en la Enciclopedia y en el Auditor, con %s elegido:' % nom,
-             'tarjetas': [], 'bloque': '<div class="pl-puertas">%s%s</div>%s' % (puertas_aud, ''.join(puertas), saltos)},
-        ],
-    }
-    # Cada dimensión del portal, vinculada a su Contexto dimensional, al estado
-    # de resultados del Gobierno y al estado de cuenta del estado (04-11-2026).
-    for sec in out['secciones']:
-        i = 'financiera' if sec['id'] == 'presupuestos' else sec['id']
-        if any(d[0] == i for d in DIMENSIONES):
-            sec['bloque'] += _ctx_portal(i, a, nom)
+            {'id': 'temas', 'titulo': 'Todo lo demás de %s, en sus tarjetas' % nom,
+             'texto': 'Cada tarjeta abre su página, con sus cifras, sus fuentes y lo que no dicen.',
+             'tarjetas': tarjetas},
+            {'id': 'otras-entidades', 'titulo': 'Otras entidades', 'sin_cab': True, 'texto': '', 'tarjetas': [], 'bloque': saltos},
+        ]})]
+    for x in temas:
+        t = info[x['id']]
+        sx = ('<nav class="pl-saltos" aria-label="El mismo tema en otras entidades"><a href="%s">← %s</a><a href="%s">📍 Volver al portal de %s</a><a href="%s">%s →</a></nav>' % (
+            subpagina(prev['abbr'], x['id']), prev['name'], portal(a), nom, subpagina(sig['abbr'], x['id']), sig['name']))
+        x = dict(x, bloque=x['bloque'] + sx)
+        out.append(dict(comun, **{
+            'archivo': subpagina(a, x['id']), 'padre': (ARCHIVO, 'Planisferio'), 'padre2': (portal(a), nom),
+            'menu': t[2],
+            'icono': t[1], 'titulo': '%s: %s' % (nom, t[2][0].lower() + t[2][1:]) if x['id'] != 'dimensiones' else '%s en la Enciclopedia y en el Auditor' % nom,
+            'lema': 'Su portal en el Planisferio', 'entrada': x['texto'],
+            'secciones': [dict(x, texto=''),
+                          {'id': 'otros-temas', 'titulo': 'Los demás temas de %s' % nom, 'texto': '',
+                           'tarjetas': [y for y in tarjetas if y[3] != subpagina(a, x['id'])]}],
+        }))
     return out
 
 
@@ -1922,5 +1980,5 @@ def paginas(base, ref, tres, cuenta, cuanto='', origenes=''):
     E = sorted(base['estados'], key=lambda x: clave(x['name']))
     out = [pagina_mapa(base, ref, tres, padron, cuenta, cuanto, origenes)]
     for k, e in enumerate(E):
-        out.append(pagina_portal(base, ref, e, padron, E[k - 1], E[(k + 1) % len(E)], iv, dv))
+        out.extend(pagina_portal(base, ref, e, padron, E[k - 1], E[(k + 1) % len(E)], iv, dv))
     return out

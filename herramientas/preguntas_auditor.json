@@ -692,7 +692,7 @@
   },
   {
    "q": "¿Cuánto rezago tiene el Poder Judicial de Jalisco?",
-   "ir": "planisferio-jal.html#judicial",
+   "ir": "planisferio-jal-judicial.html",
    "dice": [
     "64,628",
     "40,431"
@@ -1626,7 +1626,7 @@
   },
   {
    "q": "¿Cuánto invirtió Yucatán en obra pública?",
-   "ir": "planisferio-yuc.html#inversion",
+   "ir": "planisferio-yuc-inversion.html",
    "dice": [
     "de cada $100",
     "organismos de obra"
@@ -1634,7 +1634,7 @@
   },
   {
    "q": "¿Cuánto les pasó Jalisco a sus organismos de obra?",
-   "ir": "planisferio-jal.html#inversion",
+   "ir": "planisferio-jal-inversion.html",
    "dice": [
     "organismos de infraestructura",
     "no se suman"
@@ -1642,7 +1642,7 @@
   },
   {
    "q": "¿Cuánto invirtió la Ciudad de México en obra pública?",
-   "ir": "planisferio-cdmx.html#inversion",
+   "ir": "planisferio-cdmx-inversion.html",
    "dice": [
     "no figura en la estadística estatal"
    ]
@@ -1663,7 +1663,7 @@
   },
   {
    "q": "¿Cuánto gasta el Congreso de Jalisco?",
-   "ir": "planisferio-jal.html#legislativa",
+   "ir": "planisferio-jal-legislativa.html",
    "dice": [
     "$922.2 millones",
     "por curul"
@@ -1697,7 +1697,7 @@
   },
   {
    "q": "¿Cuánto gasta el Poder Judicial de Jalisco?",
-   "ir": "planisferio-jal.html#judicial",
+   "ir": "planisferio-jal-judicial.html",
    "dice": [
     "$2,533.8 millones",
     "por asunto concluido"
@@ -1705,7 +1705,7 @@
   },
   {
    "q": "¿Cuántos jueces tiene el poder judicial de Tabasco?",
-   "ir": "planisferio-tab.html#judicial",
+   "ir": "planisferio-tab-judicial.html",
    "dice": [
     "96 personas juzgadoras"
    ]
@@ -1777,7 +1777,7 @@
   },
   {
    "q": "¿Cuántas concesiones mineras tiene Sonora?",
-   "ir": "planisferio-son.html#ambiental",
+   "ir": "planisferio-son-ambiental.html",
    "dice": [
     "4,029 títulos de concesión minera",
     "3,643 títulos"
@@ -1793,14 +1793,14 @@
   },
   {
    "q": "Concesiones mineras en Baja California",
-   "ir": "planisferio-bc.html#ambiental",
+   "ir": "planisferio-bc-ambiental.html",
    "dice": [
     "528 títulos"
    ]
   },
   {
    "q": "¿Hay minas en Quintana Roo?",
-   "ir": "planisferio-qroo.html#ambiental",
+   "ir": "planisferio-qroo-ambiental.html",
    "dice": [
     "no figura en el cuadro"
    ]
@@ -1836,7 +1836,7 @@
   },
   {
    "q": "¿Cuántos acuíferos de Chihuahua están en déficit?",
-   "ir": "planisferio-chih.html#ambiental",
+   "ir": "planisferio-chih-ambiental.html",
    "dice": [
     "38 sin disponibilidad",
     "3,063.0 hm³"
@@ -1852,7 +1852,7 @@
   },
   {
    "q": "¿Cómo está el agua subterránea de Aguascalientes?",
-   "ir": "planisferio-ags.html#ambiental",
+   "ir": "planisferio-ags-ambiental.html",
    "dice": [
     "5 sin disponibilidad",
     "Valle de Aguascalientes"
@@ -1860,7 +1860,7 @@
   },
   {
    "q": "Acuíferos de Tabasco",
-   "ir": "planisferio-tab.html#ambiental",
+   "ir": "planisferio-tab-ambiental.html",
    "dice": [
     "ninguno estaba en déficit"
    ]
@@ -1890,7 +1890,7 @@
   },
   {
    "q": "¿Cuántos incendios forestales hubo en Chihuahua?",
-   "ir": "planisferio-chih.html#ambiental",
+   "ir": "planisferio-chih-ambiental.html",
    "dice": [
     "596 incendios forestales",
     "221,533.30 ha"
@@ -1906,7 +1906,7 @@
   },
   {
    "q": "Incendios forestales en Baja California Sur",
-   "ir": "planisferio-bcs.html#ambiental",
+   "ir": "planisferio-bcs-ambiental.html",
    "dice": [
     "7 incendios forestales",
     "80.4"
@@ -1937,7 +1937,7 @@
   },
   {
    "q": "¿Cuánto bosque tiene Durango?",
-   "ir": "planisferio-dgo.html#ambiental",
+   "ir": "planisferio-dgo-ambiental.html",
    "dice": [
     "Su superficie forestal",
     "10,618,110.3 ha"
@@ -1961,7 +1961,7 @@
   },
   {
    "q": "¿Qué parte del bosque de Tabasco se quemó?",
-   "ir": "planisferio-tab.html#ambiental",
+   "ir": "planisferio-tab-ambiental.html",
    "dice": [
     "9.7 de cada 100 hectáreas forestales"
    ]
@@ -1975,7 +1975,7 @@
   },
   {
    "q": "¿Cuánto pesca Sinaloa?",
-   "ir": "planisferio-sin.html#ambiental",
+   "ir": "planisferio-sin-ambiental.html",
    "dice": [
     "480,141 t",
     "de pesca y acuacultura en peso vivo"
@@ -2014,7 +2014,7 @@
   },
   {
    "q": "¿Cuánto pesca Nuevo León?",
-   "ir": "planisferio-nl.html#ambiental",
+   "ir": "planisferio-nl-ambiental.html",
    "dice": [
     "no registró producción pesquera ni acuícola en 2025"
    ]
@@ -2025,7 +2025,7 @@
   },
   {
    "q": "¿Cuánto pagó de deuda el municipio de Guadalajara?",
-   "ir": "planisferio-jal.html#deuda"
+   "ir": "planisferio-jal-deuda.html"
   },
   {
    "q": "¿Qué municipios de Nuevo León pagan más deuda?",
@@ -2033,14 +2033,14 @@
   },
   {
    "q": "¿Cuántos médicos tiene el ISSSTE en Jalisco?",
-   "ir": "planisferio-jal.html#salud",
+   "ir": "planisferio-jal-salud.html",
    "dice": [
     "1,044"
    ]
   },
   {
    "q": "¿Cuántas personas tiene adscritas el IMSS en la Ciudad de México?",
-   "ir": "planisferio-cdmx.html#salud",
+   "ir": "planisferio-cdmx-salud.html",
    "dice": [
     "6,519,887"
    ]
@@ -2054,7 +2054,7 @@
   },
   {
    "q": "¿Cuánta gente trabaja en el gobierno de Jalisco?",
-   "ir": "planisferio-jal.html#administracion",
+   "ir": "planisferio-jal-administracion.html",
    "dice": [
     "149,888"
    ]
@@ -2098,7 +2098,7 @@
   },
   {
    "q": "¿Cuánta pobreza hay en Chiapas?",
-   "ir": "planisferio-chis.html#social",
+   "ir": "planisferio-chis-social.html",
    "dice": [
     "66.0 de cada 100",
     "pobreza extrema"
@@ -2113,7 +2113,7 @@
   },
   {
    "q": "Pobreza extrema en Oaxaca",
-   "ir": "planisferio-oax.html#social",
+   "ir": "planisferio-oax-social.html",
    "dice": [
     "16.3"
    ]
