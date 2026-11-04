@@ -323,6 +323,7 @@
       };
       ficha.innerHTML = '<h3>' + esc(e.n) + '</h3><p class="pl-ficha-sub">🫂 Pobreza multidimensional 2024 · INEGI</p><dl class="pl-ficha-dl">' +
         d('soP', 'Población en pobreza') + d('soN', 'Personas en pobreza') +
+        d('soT', 'Población (Censo 2020)') +
         '<dt>Moderada · extrema</dt><dd><b class="num-tabular">' + num(s.m, 1) + '% · ' + num(e.soX, 1) + '%</b> ' + chip('oficial') + '</dd>' +
         d('soI', 'Ingreso bajo la línea de pobreza') + d('soS', 'Sin seguridad social') + d('soA', 'Sin acceso a servicios de salud') + d('soR', 'Rezago educativo') +
         '<dt>Vivienda · servicios · alimentación</dt><dd><b class="num-tabular">' + num(s.v, 1) + '% · ' + num(s.b, 1) + '% · ' + num(s.al, 1) + '%</b> ' + chip('oficial') + '</dd>' +
@@ -459,7 +460,16 @@
     var porC = {}, lente = D.lentes[0], sel = null, ficha = document.getElementById('plMunFicha'), CERO = '#eeede6';
     D.m.forEach(function (x) { porC[x.c] = x; });
     var paths = document.querySelectorAll('.pl-mun');
-    function fmt(v) { return v == null ? '—' : lente.u === 'pct' ? num(v, 1) + '%' : mdp(v); }
+    function fmt(v) {
+      return v == null ? '—' : lente.u === 'pct' ? num(v, 1) + '%' : lente.u === 'per' ? num(v, 0) + ' personas' :
+        lente.u === 'pes' ? '$' + num(v, 0) : mdp(v);
+    }
+    /* La población es del Censo 2020: el gris de esa lente son los municipios creados después. */
+    function gris() { return D.sin ? 'sin cuenta municipal' : lente.u === 'per' ? 'no existía en el Censo 2020' : lente.u === 'pes' ? 'sin cuenta o sin Censo 2020' : 'sin cuenta'; }
+    function persona(x) {
+      return x.pob == null ? '<dt>Población (Censo 2020)</dt><dd>No existía en el Censo 2020: sus habitantes se contaron en el municipio del que se separó.</dd>' :
+        '<dt>Población (Censo 2020)</dt><dd><b class="num-tabular">' + num(x.pob, 0) + '</b> personas ' + chip('oficial') + '</dd>';
+    }
     /* ?ml=inv abre el mapa con esa lente (el portal lleva así desde «Su inversión»). */
     var pedidaL = new URLSearchParams(location.search).get('ml');
     D.lentes.forEach(function (l) { if (l.id === pedidaL) lente = l; });
@@ -476,7 +486,7 @@
         if (v != null) { k = 0; while (k < 4 && v >= c[k]) k++; }
         p.style.fill = k < 0 ? '#d5dae3' : (lente.cero && v === 0) ? CERO : pal[k];
         p.classList.toggle('sel', !!sel && sel.c === p.getAttribute('data-c'));
-        if (x) p.setAttribute('aria-label', x.n + ': ' + (v == null ? (D.sin ? 'sin cuenta municipal' : 'sin cuenta de ' + D.anio) : fmt(v)));
+        if (x) p.setAttribute('aria-label', x.n + ': ' + (v == null ? gris() : fmt(v)));
       });
       var lim = [null].concat(c);
       if (D.sin) {
@@ -484,23 +494,24 @@
         document.getElementById('plMunQue').textContent = '';
         return;
       }
-      document.getElementById('plMunLeyenda').innerHTML = '<span class="pl-ley-tit">' + esc(lente.nom) + ' (' + D.anio + ')</span><span class="pl-ley-cls">' +
+      document.getElementById('plMunLeyenda').innerHTML = '<span class="pl-ley-tit">' + esc(lente.nom) + ' (' + (lente.anio || D.anio) + ')</span><span class="pl-ley-cls">' +
         (lente.cero ? '<span><i style="background:' + CERO + '"></i>$0 reportado</span>' : '') +
         pal.map(function (col, i) {
           var t = i === 0 ? (lente.cero ? 'más de $0 y ' : '') + 'menos de ' + fmt(lim[1]) : i === 4 ? fmt(lim[4]) + ' o más' : fmt(lim[i]) + ' a ' + fmt(lim[i + 1]);
           return '<span><i style="background:' + col + '"></i>' + t + '</span>';
-        }).join('') + '<span><i style="background:#d5dae3"></i>' + (D.sin ? 'sin cuenta municipal' : 'sin cuenta') + '</span></span>';
+        }).join('') + '<span><i style="background:#d5dae3"></i>' + gris() + '</span></span>';
       document.getElementById('plMunQue').textContent = lente.que;
     }
     function muestra(x) {
       var ente = 'herramienta-inspector-entes.html#ente=municipal:' + D.cve + x.c;
       if (x.ing == null) {
-        ficha.innerHTML = '<h3>' + esc(x.n) + '</h3><p>' + (D.sin ? esc(D.sin) + ' ' + chip('pendiente', D.pend) :
+        ficha.innerHTML = '<h3>' + esc(x.n) + '</h3><dl class="pl-ficha-dl">' + persona(x) + '</dl><p>' + (D.sin ? esc(D.sin) + ' ' + chip('pendiente', D.pend) :
           'No rindió su cuenta de ' + D.anio + ' al INEGI ' + chip('pendiente', D.pend) + ': sigue en el padrón, sin cifra.') + ' Ponerle cero falsearía la cifra.</p><a class="pl-ficha-ir" href="' + ente + '">Su ficha en el Auditor de entes ➔</a>';
         return;
       }
-      ficha.innerHTML = '<h3>' + esc(x.n) + '</h3><p class="pl-ficha-sub">Clave INEGI ' + D.cve + x.c + ' · cuentas de ' + D.anio + '</p><dl class="pl-ficha-dl">' +
+      ficha.innerHTML = '<h3>' + esc(x.n) + '</h3><p class="pl-ficha-sub">Clave INEGI ' + D.cve + x.c + ' · cuentas de ' + D.anio + '</p><dl class="pl-ficha-dl">' + persona(x) +
         '<dt>Ingreso total</dt><dd><b class="num-tabular">' + mdp(x.ing) + '</b> ' + chip('oficial') + '</dd>' +
+        (x.iph == null ? '' : '<dt>Ingreso por habitante (2024 ÷ Censo 2020)</dt><dd>$' + num(x.iph, 0) + ' ' + chip('derivado') + '</dd>') +
         '<dt>Participaciones</dt><dd>' + mdp(x.part) + ' ' + chip('oficial') + '</dd>' +
         '<dt>Aportaciones (FORTAMUN ' + mdp(x.fort) + ' · FISMDF ' + mdp(x.fis) + ')</dt><dd>' + mdp(x.aport) + ' ' + chip('oficial') + '</dd>' +
         '<dt>Predial cobrado</dt><dd>' + mdp(x.predial) + ' ' + chip('oficial') + '</dd>' +

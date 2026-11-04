@@ -1559,19 +1559,31 @@
    "q": "¿Cuánto debe Jalisco?",
    "modo": "inspector",
    "ir": "herramienta-inspector-entes.html#ente=estatal:JAL",
-   "dice": ["La revisión del Inspector", "De qué está hecha esta respuesta", "Para seguir investigando"]
+   "dice": [
+    "La revisión del Inspector",
+    "De qué está hecha esta respuesta",
+    "Para seguir investigando"
+   ]
   },
   {
    "q": "¿Cuánto le llega a Oaxaca de la Federación?",
    "modo": "ciudadano",
    "ir": "herramienta-inspector-entes.html#ente=estatal:OAX",
-   "dice": ["En corto", "Palabras que quizá no conoces", "Ramo 28"]
+   "dice": [
+    "En corto",
+    "Palabras que quizá no conoces",
+    "Ramo 28"
+   ]
   },
   {
    "q": "¿Cuánto debe Veracruz?",
    "modo": "ambientalista",
    "ir": "herramienta-inspector-entes.html#ente=estatal:VER",
-   "dice": ["La mirada ambiental", "Agronitrogenados", "gasto público"]
+   "dice": [
+    "La mirada ambiental",
+    "Agronitrogenados",
+    "gasto público"
+   ]
   },
   {
    "q": "El mapa de las obras con alerta ambiental de Veracruz",
@@ -1580,7 +1592,9 @@
   {
    "q": "El mapa de la ASF de Oaxaca",
    "ir": "planisferio.html?d=inversion&l=asf&e=OAX",
-   "dice": ["en el Planisferio"]
+   "dice": [
+    "en el Planisferio"
+   ]
   },
   {
    "q": "El mapa del gasto federalizado de Jalisco",
@@ -2154,6 +2168,34 @@
    "ir": "planisferio-oax-social.html",
    "dice": [
     "16.3"
+   ]
+  },
+  {
+   "q": "¿Cuántos habitantes tiene Zapopan?",
+   "ir": "planisferio-jal.html?ml=pob#mapa-municipios",
+   "dice": [
+    "1,476,491",
+    "Censo de Población y Vivienda 2020"
+   ]
+  },
+  {
+   "q": "¿Cuánto recibe por habitante Guadalajara?",
+   "ir": "planisferio-jal.html?ml=iph#mapa-municipios",
+   "dice": [
+    "8,600 por habitante",
+    "mezcla el ingreso de 2024"
+   ]
+  },
+  {
+   "q": "¿Qué municipio de Jalisco tiene más habitantes?",
+   "dice": [
+    "1,476,491 personas"
+   ]
+  },
+  {
+   "q": "¿Cuánta población tiene Las Vigas, Guerrero?",
+   "dice": [
+    "no existía cuando se levantó el Censo"
    ]
   }
  ]

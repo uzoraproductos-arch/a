@@ -20,15 +20,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261104k">
-  <script src="assets/auditor/js/iconos.js?v=20261104k"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261104k"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261104k" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261104k">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261104k">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261104k">
-  <link rel="stylesheet" href="assets/auditor/css/numeros.css?v=20261104k">
-  <link rel="stylesheet" href="assets/auditor/css/planisferio.css?v=20261104k">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261104l">
+  <script src="assets/auditor/js/iconos.js?v=20261104l"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261104l"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261104l" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261104l">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261104l">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261104l">
+  <link rel="stylesheet" href="assets/auditor/css/numeros.css?v=20261104l">
+  <link rel="stylesheet" href="assets/auditor/css/planisferio.css?v=20261104l">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -206,12 +206,12 @@
               <figcaption class="pl-leyenda" id="plMunLeyenda"></figcaption>
             </figure>
             <aside class="pl-ficha" id="plMunFicha" aria-live="polite">
-              <p class="pl-ficha-vacia"><b>Toca un municipio.</b> Verás lo que ingresó en 2024, de dónde le llegó, lo que invirtió, lo que pagó de deuda y la puerta a su ficha en el Auditor de entes.</p>
+              <p class="pl-ficha-vacia"><b>Toca un municipio.</b> Verás cuántas personas viven ahí, lo que ingresó en 2024, de dónde le llegó, lo que invirtió, lo que pagó de deuda y la puerta a su ficha en el Auditor de entes.</p>
             </aside>
           </div>
           <p class="pl-pie">Límites: INEGI, Marco Geoestadístico 2024 (versión por área geoestadística estatal), capa de áreas geoestadísticas municipales (<a href="https://www.inegi.org.mx/contenidos/productos/prod_serv/contenidos/espanol/bvinegi/productos/geografia/marcogeo/794551132173/09_ciudaddemexico.zip">descarga del INEGI</a>), integrados el 03-11-2026; huella SHA-256 del archivo de origen <code>c1fa076237b9…</code>. Simplificados para verse en pantalla. El INEGI advierte que estos límites son geoestadísticos, para referenciar censos y encuestas, y que no deben tomarse como la fuente oficial de la división político-administrativa del país.
-          Cifras: INEGI, finanzas públicas municipales 2024 <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-inegi-efipem" title="Instituto Nacional de Estadística y Geografía. (2025). Estadística de Finanzas Públicas Estatales y Municipales (EFIPEM). Conjunto de datos municipal, ejercicio">[63]</a></sup>. En gris, todas, porque no rinden cuenta municipal <span class="est-chip est-pendiente" data-pend="municipios-sin-cuenta">pendiente</span>.</p>
-          <script type="application/json" id="plMunDatos">{"ent":"CDMX","cve":"09","pend":"municipios-sin-cuenta","anio":2024,"sin":"Las alcaldías de la Ciudad de México no rinden cuenta municipal al INEGI: su dinero va dentro del presupuesto de la Ciudad.","lentes":[{"id":"ing","nom":"Ingreso total","pal":"verde","que":"Todo lo que ingresó cada municipio en 2024: lo propio, lo que le llegó del estado y de la Federación, y lo que pidió prestado.","u":"mdp","cero":false},{"id":"predial","nom":"Predial cobrado","pal":"azul","que":"Lo que cada municipio cobró de impuesto predial en 2024: el impuesto que la Constitución le reserva (art. 115, fr. IV).","u":"mdp","cero":false},{"id":"dep","nom":"Dependencia de transferencias","pal":"rojo","que":"De cada $100 que ingresó en 2024, cuántos llegaron de fuera: (participaciones + aportaciones) ÷ ingreso total × 100.","u":"pct","cero":false},{"id":"inv","nom":"Inversión pública","pal":"verde","que":"La obra pública y los proyectos productivos que pagó cada municipio en 2024: su capítulo de inversión pública. Un municipio con cuenta y sin ese capítulo reportó $0.","u":"mdp","cero":false},{"id":"invp","nom":"Inversión de cada $100","pal":"verde","que":"De cada $100 de su egreso de 2024, cuántos fueron a inversión pública: inversión ÷ egreso total × 100. El egreso total del INEGI cuenta también lo que quedó en caja al cierre. Ojo: donde el fondo de infraestructura social municipal (FAIS) pesa mucho, la proporción sube sola, porque la ley lo destina a obra para la población en pobreza (Ley de Coordinación Fiscal, art. 33).","u":"pct","cero":false},{"id":"dpag","nom":"Pagó de deuda","pal":"rojo","que":"Lo que cada municipio pagó en 2024 por sus créditos: el capital que devolvió, los intereses y las comisiones. Es lo que pagó, no lo que debe. En el tono más claro, los que reportaron $0.","u":"mdp","cero":true},{"id":"emp","nom":"Pidió prestado","pal":"rojo","que":"Los préstamos que cada municipio recibió en 2024 (el concepto «Empréstitos» de su cuenta). Casi todos reportaron $0: van en el tono más claro.","u":"mdp","cero":true}],"m":[{"c":"002","n":"Azcapotzalco"},{"c":"003","n":"Coyoacán"},{"c":"004","n":"Cuajimalpa de Morelos"},{"c":"005","n":"Gustavo A. Madero"},{"c":"006","n":"Iztacalco"},{"c":"007","n":"Iztapalapa"},{"c":"008","n":"La Magdalena Contreras"},{"c":"009","n":"Milpa Alta"},{"c":"010","n":"Álvaro Obregón"},{"c":"011","n":"Tláhuac"},{"c":"012","n":"Tlalpan"},{"c":"013","n":"Xochimilco"},{"c":"014","n":"Benito Juárez"},{"c":"015","n":"Cuauhtémoc"},{"c":"016","n":"Miguel Hidalgo"},{"c":"017","n":"Venustiano Carranza"}]}</script>
+          Cifras: INEGI, finanzas públicas municipales 2024 <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-inegi-efipem" title="Instituto Nacional de Estadística y Geografía. (2025). Estadística de Finanzas Públicas Estatales y Municipales (EFIPEM). Conjunto de datos municipal, ejercicio">[63]</a></sup>. Población: INEGI, Censo de Población y Vivienda 2020 <sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-inegi-censo-2020" title="Instituto Nacional de Estadística y Geografía [INEGI]. (2021). Censo de Población y Vivienda 2020: características educativas de la población. Resultados defini">[45]</a></sup> (<a href="https://www.inegi.org.mx/programas/ccpv/2020/#datos_abiertos">datos abiertos</a>, huella <code>9342fdbd45bd…</code>); los municipios creados después del Censo no tienen esa cifra. En gris, todas, porque no rinden cuenta municipal <span class="est-chip est-pendiente" data-pend="municipios-sin-cuenta">pendiente</span>.</p>
+          <script type="application/json" id="plMunDatos">{"ent":"CDMX","cve":"09","pend":"municipios-sin-cuenta","anio":2024,"sin":"Las alcaldías de la Ciudad de México no rinden cuenta municipal al INEGI: su dinero va dentro del presupuesto de la Ciudad.","lentes":[{"id":"ing","nom":"Ingreso total","pal":"verde","que":"Todo lo que ingresó cada municipio en 2024: lo propio, lo que le llegó del estado y de la Federación, y lo que pidió prestado.","u":"mdp","cero":false},{"id":"predial","nom":"Predial cobrado","pal":"azul","que":"Lo que cada municipio cobró de impuesto predial en 2024: el impuesto que la Constitución le reserva (art. 115, fr. IV).","u":"mdp","cero":false},{"id":"dep","nom":"Dependencia de transferencias","pal":"rojo","que":"De cada $100 que ingresó en 2024, cuántos llegaron de fuera: (participaciones + aportaciones) ÷ ingreso total × 100.","u":"pct","cero":false},{"id":"inv","nom":"Inversión pública","pal":"verde","que":"La obra pública y los proyectos productivos que pagó cada municipio en 2024: su capítulo de inversión pública. Un municipio con cuenta y sin ese capítulo reportó $0.","u":"mdp","cero":false},{"id":"invp","nom":"Inversión de cada $100","pal":"verde","que":"De cada $100 de su egreso de 2024, cuántos fueron a inversión pública: inversión ÷ egreso total × 100. El egreso total del INEGI cuenta también lo que quedó en caja al cierre. Ojo: donde el fondo de infraestructura social municipal (FAIS) pesa mucho, la proporción sube sola, porque la ley lo destina a obra para la población en pobreza (Ley de Coordinación Fiscal, art. 33).","u":"pct","cero":false},{"id":"pob","nom":"Población","pal":"azul","que":"Cuántas personas vivían en cada municipio según el Censo de Población y Vivienda 2020 del INEGI, el último conteo completo. Es de 2020, no de hoy.","u":"per","cero":false,"anio":2020},{"id":"iph","nom":"Ingreso por habitante","pal":"verde","que":"Cuánto ingresó cada municipio en 2024 por cada persona que vivía ahí en 2020: ingreso total 2024 ÷ población del Censo 2020. Mezcla dos años, porque el INEGI no ha publicado un conteo más reciente: es una referencia para comparar, no lo que le toca a cada quien.","u":"pes","cero":false,"anio":"2024 ÷ 2020"},{"id":"dpag","nom":"Pagó de deuda","pal":"rojo","que":"Lo que cada municipio pagó en 2024 por sus créditos: el capital que devolvió, los intereses y las comisiones. Es lo que pagó, no lo que debe. En el tono más claro, los que reportaron $0.","u":"mdp","cero":true},{"id":"emp","nom":"Pidió prestado","pal":"rojo","que":"Los préstamos que cada municipio recibió en 2024 (el concepto «Empréstitos» de su cuenta). Casi todos reportaron $0: van en el tono más claro.","u":"mdp","cero":true}],"pob":{"anio":2020,"ref":"ref-inegi-censo-2020","url":"https://www.inegi.org.mx/programas/ccpv/2020/#datos_abiertos"},"m":[{"c":"002","n":"Azcapotzalco","pob":432205},{"c":"003","n":"Coyoacán","pob":614447},{"c":"004","n":"Cuajimalpa de Morelos","pob":217686},{"c":"005","n":"Gustavo A. Madero","pob":1173351},{"c":"006","n":"Iztacalco","pob":404695},{"c":"007","n":"Iztapalapa","pob":1835486},{"c":"008","n":"La Magdalena Contreras","pob":247622},{"c":"009","n":"Milpa Alta","pob":152685},{"c":"010","n":"Álvaro Obregón","pob":759137},{"c":"011","n":"Tláhuac","pob":392313},{"c":"012","n":"Tlalpan","pob":699928},{"c":"013","n":"Xochimilco","pob":442178},{"c":"014","n":"Benito Juárez","pob":434153},{"c":"015","n":"Cuauhtémoc","pob":545884},{"c":"016","n":"Miguel Hidalgo","pob":414470},{"c":"017","n":"Venustiano Carranza","pob":443704}]}</script>
         </div>
       </section>
 
@@ -270,7 +270,7 @@
         <a class="apartado-tarjeta" href="planisferio-cdmx-social.html">
           <span class="apartado-tarjeta-icono" aria-hidden="true">🫂</span>
           <span class="apartado-tarjeta-nombre">Su pobreza y sus carencias</span>
-          <span class="apartado-tarjeta-desc">Cuántas personas viven en pobreza, sus seis carencias y lo que le aporta la Federación.</span>
+          <span class="apartado-tarjeta-desc">Cuántas personas viven en pobreza, sus seis carencias, lo que le aporta la Federación y su gente, municipio por municipio.</span>
           <span class="apartado-tarjeta-accion">Abrir ➔</span>
         </a>
         <a class="apartado-tarjeta" href="planisferio-cdmx-administracion.html">
@@ -315,12 +315,12 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261104k</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261104l</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261104k"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261104k"></script>
-  <script src="assets/auditor/js/planisferio.js?v=20261104k"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261104l"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261104l"></script>
+  <script src="assets/auditor/js/planisferio.js?v=20261104l"></script>
 </body>
 </html>

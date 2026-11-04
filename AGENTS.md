@@ -252,6 +252,17 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   Todo sale de `herramientas/dimension_social.py`, que leen el Planisferio (`?d=social`, `#social`) y
   el chat (`socEdo()`). **La pobreza no se dice como calificación de un gobierno, y las aportaciones
   por persona en pobreza no son lo que le llega a cada persona.**
+  **Su gente** (04-11-2026, pedido del autor tras revisar mapasdemexico.com.mx, que es guía de temas y
+  nunca fuente): la población de cada municipio del **Censo de Población y Vivienda 2020** del INEGI
+  (ITER), en su propio archivo, `municipios-poblacion.js` (`window.AUDIT_MUN_POB`), que escribe
+  `herramientas/anclar_poblacion_municipios.py <iter_00_cpv2020_csv.zip>` con su huella; si los
+  municipios no suman su estado o los estados el país, se detiene. La leen la dimensión social (lente
+  `soT` de cada estado y el piso «Su gente, municipio por municipio» de cada portal, `_gente_portal()`),
+  el mapa de municipios (lentes `pob` e `iph`) y el chat (`MET_MUN` de `asistente-charla.js`). **Hay tres
+  poblaciones y no se mezclan** (Censo 2020, la de la medición de la pobreza 2024 y la proyección del
+  CONAPO), **el ingreso por habitante mezcla 2024 con 2020 y se dice así**, y los nueve municipios
+  creados después del Censo van como «no existía en el Censo 2020», nunca en cero. El sitio del INEGI no
+  manda su certificado intermedio; `en.www.inegi.org.mx` sirve los mismos archivos con conexión verificada.
 - **Cada dimensión va vinculada al Contexto dimensional y al estado de resultados** (04-11-2026,
   pedido del autor). `CONTEXTO` de `dimension_social.py` dice qué página del Contexto dimensional mira
   cada dimensión a nivel federal: **una dimensión nueva necesita ahí su renglón**, o la generación se
