@@ -170,25 +170,43 @@ def _existe(enlace):
 
 def _en_planisferio(ir, ire):
     """Dónde vive este mapa en el Planisferio, la matriz de los mapas
-    (04-11-2026): (enlace, enlace con estado, nombre de la dimensión), o None.
-    Un mapa del Planisferio vive ahí mismo; una lente del mapa de la
-    Enciclopedia, en su par (PLANISFERIO de territorio_modulos.py). El chat
-    junta en un solo renglón los mapas que viven en el Planisferio."""
+    (04-11-2026), o None: {'pl': enlace, 'ple': enlace con estado, 'pld':
+    nombre de la dimensión, 'pll': cómo se rotula, 'plk': la llave con que el
+    chat junta dos mapas que abren lo mismo}. Un mapa del Planisferio vive ahí
+    mismo; una lente del mapa de la Enciclopedia, en su par (PLANISFERIO y
+    OTROS_MAPAS de territorio_modulos.py). El chat junta en un solo renglón
+    los mapas que viven en el Planisferio."""
     import planisferio
     import territorio_modulos as tm
     nombres = {i: nom for i, _, nom, *_r in planisferio.DIMENSIONES}
+    primera, nom_l = {}, {}
+    for l in planisferio.LENTES:
+        primera.setdefault(l['dim'], l['id'])
+        nom_l[l['id']] = re.sub(r'^\d+ · ', '', l['nom']).split(':')[0]
+
+    def sale(liga, ligae, d, l):
+        if not d:
+            return {'pl': liga, 'ple': ligae, 'pld': '', 'pll': '', 'plk': liga.split('?')[0].split('#')[0] + (ligae or '')}
+        l = l or primera[d]
+        rot = nombres[d] if l == primera[d] else '%s · %s' % (nombres[d], nom_l[l])
+        return {'pl': liga, 'ple': ligae, 'pld': nombres[d], 'pll': rot, 'plk': d + '/' + l}
     archivo = ir.split('#')[0].split('?')[0]
     if archivo.startswith('planisferio'):
         d = re.search(r'[?&]d=([a-z]+)', ir)
-        return {'pl': ir, 'ple': ire, 'pld': nombres.get(d.group(1), '') if d else ''}
-    if archivo != tm.MAPA:
+        l = re.search(r'[?&]l=([A-Za-z]+)', ir)
+        return sale(ir, ire, d.group(1) if d else None, l.group(1) if l else None)
+    if archivo in tm.OTROS_MAPAS:
+        d, l = tm.OTROS_MAPAS[archivo]
+    elif archivo == tm.MAPA:
+        m = re.search(r'[?&]l=([a-z]+)', ir)
+        p = tm.PLANISFERIO.get(m.group(1) if m else 'gasto')
+        if not p:
+            return None
+        d, l = p
+    else:
         return None
-    m = re.search(r'[?&]l=([a-z]+)', ir)
-    liga = tm.liga_pl(m.group(1) if m else 'gasto')
-    if not liga:
-        return None
-    d = tm.PLANISFERIO[m.group(1) if m else 'gasto'][0]
-    return {'pl': liga, 'ple': liga + '&e=%s', 'pld': nombres[d]}
+    liga = 'planisferio.html?d=%s&l=%s' % (d, l)
+    return sale(liga, liga + '&e=%s', d, l)
 
 
 def _docs_expide():

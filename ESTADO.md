@@ -5,7 +5,7 @@ historia completa de cada decisión en [CONTEXT.md](CONTEXT.md), que pasa de
 7,000 renglones: aquí va solo lo que necesitas para no repetir trabajo ni
 pisar el de otro. **Se actualiza en el mismo commit que cambia lo que dice.**
 
-Última actualización: 04-11-2026 · sello `20261104g` · rama `claude/funny-turing-imtm54`.
+Última actualización: 04-11-2026 · sello `20261104h` · rama `claude/funny-turing-imtm54`.
 
 ## Antes de empezar y antes de empujar
 
@@ -41,6 +41,7 @@ que necesita navegador.
 
 ## Lo último que entró
 
+- **04-11-2026, sello 20261104h.** **Los dos mapas que faltaban, en el Planisferio**: «No cuadra» (lente `cua` de la financiera) y «Obras con alerta ambiental» (lente `obr` de la ambiental), con las mismas cuentas del mapa de la Enciclopedia; ya no queda ningún mapa de la Enciclopedia sin par. En el chat, las tarjetas armadas por otras respuestas (las megaobras de un estado) también se juntan en el renglón del Planisferio. Dos preguntas nuevas.
 - **04-11-2026, sello 20261104g.** **El Planisferio, matriz de los mapas**: en el chat, los mapas que viven en el Planisferio salen en un solo renglón, «Ver en el Planisferio», con las otras dimensiones al lado (antes, «¿cuánto debe Jalisco?» daba tres tarjetas casi iguales, dos al mapa de la Enciclopedia), y «el mapa de la deuda» se abre allá. El mapa de la Enciclopedia lleva «Ábrelo en el Planisferio» en la lente que tiene par (`PLANISFERIO` de `territorio_modulos.py`, que `matriz()` comprueba) y cada ficha, a su portal. Tres preguntas nuevas.
 - **04-11-2026, sello 20261104f.** **El Planisferio, reestructurado con el mapa de protagonista**: encabezado con la foto del paisaje (la persona en sombra), tres pasos, las nueve dimensiones como mosaico de color, el mapa en un tablero que toma el color de la dimensión y lo financiero en tres pestañas. Sin quitar contenido.
 - **04-11-2026, sello 20261104e.** **El portal de cada estado, por tarjetas**: arriba solo el mapa de sus municipios y sus municipios uno por uno; cada tema (presupuestos, deuda, inversión, congreso, Poder Judicial, salud, pobreza, administración, recursos naturales, leyes y puertas) en su página `planisferio-<clave>-<tema>.html` (`TEMAS` de `planisferio.py`). Las ligas viejas con `#tema` se redirigen.

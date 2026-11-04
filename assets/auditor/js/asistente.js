@@ -494,7 +494,7 @@
   function sinRepetirPl(lista) {
     var vistos = {};
     return lista.filter(function (o) {
-      var x = o.x || o, k = x.pl ? 'pl:' + (x.pld || x.pl) : 'ir:' + x.ir;
+      var x = o.x || o, k = x.pl ? 'pl:' + (x.plk || x.pl) : 'ir:' + x.ir;
       if (vistos[k]) return false;
       vistos[k] = 1;
       return true;
@@ -502,15 +502,29 @@
   }
   function lineaPl(pls) {
     if (!pls.length) return '';
-    var p = pls[0], ab = p.ab, que = p.x.pld ? 'Dimensión ' + p.x.pld.toLowerCase() : p.x.n;
+    var p = pls[0], ab = p.ab, que = p.x.pll ? 'Dimensión ' + p.x.pll.charAt(0).toLowerCase() + p.x.pll.slice(1) : p.x.n;
     return '<div class="pa-pl"><a class="pa-pl-a" href="' + esc(ligaPl(p.x, ab)) + '"><span class="pa-rec-ico" aria-hidden="true">🗺️</span>' +
       '<span><b>Ver en el Planisferio</b><small>' + esc(que) + (ab && p.x.ple ? ' · ' + esc(NOMBRE[ab]) : '') + '</small></span></a>' +
       (pls.length > 1 ? '<span class="pa-pl-mas"><span class="pa-pl-t">También ahí:</span>' + pls.slice(1).map(function (o) {
-        return '<a class="pa-pl-chip" href="' + esc(ligaPl(o.x, o.ab)) + '">' + esc(o.x.pld || o.x.v) + '</a>';
+        return '<a class="pa-pl-chip" href="' + esc(ligaPl(o.x, o.ab)) + '">' + esc(o.x.pll || o.x.v) + '</a>';
       }).join('') + '</span>' : '') + '</div>';
   }
+  /* Una tarjeta armada a mano (las megaobras de un estado, por ejemplo) que
+     lleva a un mapa con par en el Planisferio toma ese par: se busca en el
+     catálogo por su archivo y su lente (?l=), y el estado sale de su ?e=. */
+  function lenteDe(u) { var m = /[?&]l=([A-Za-z]+)/.exec(String(u)); return m ? m[1] : ''; }
+  function conPl(o) {
+    if (!o || !o.x || o.x.pl || !o.x.ir) return o;
+    var par = null;
+    REC.forEach(function (r) { if (!par && r.pl && sinParam(r.ir) === sinParam(o.x.ir) && lenteDe(r.ir) === lenteDe(o.x.ir)) par = r; });
+    if (!par) return o;
+    var m = /[?&]e=([A-Za-z]+)/.exec(o.x.ir), ab = o.ab || (m && NOMBRE[m[1]] ? m[1] : null), x = {};
+    Object.keys(o.x).forEach(function (k) { x[k] = o.x[k]; });
+    ['pl', 'ple', 'pld', 'pll', 'plk'].forEach(function (k) { x[k] = par[k]; });
+    return { x: x, ab: ab };
+  }
   function recursosHtml(lista) {
-    lista = sinRepetirPl(lista || []);
+    lista = sinRepetirPl((lista || []).map(conPl));
     var pls = lista.filter(function (o) { return o.x.pl; });
     lista = lista.filter(function (o) { return !o.x.pl; });
     var linea = lineaPl(pls);
@@ -649,12 +663,12 @@
     var lista = function (xs) { return '<ul class="pa-lista">' + sinRepetirPl(xs).map(function (x) { return '<li><a href="' + esc(destinoRec(x, ab)) + '">' + x.ico + ' <b>' + esc(x.n) + '</b>' + (x.pl && x.pld ? ' · en el Planisferio' : '') + '</a></li>'; }).join('') + '</ul>'; };
     if (!mejor) return { html: '<p>Estos son los que tengo:</p>' + lista(delTipo) + '<p>Cada uno se abre en su página. Dime el tema y te llevo al que es.</p>', ir: [delTipo[0].ir, delTipo[0].n], sug: [], rec: [] };
     /* Un mapa que vive en el Planisferio se abre ahí, la matriz de los mapas (04-11-2026). */
-    var k = function (x) { return x.pl ? (x.pld || x.pl) : x.ir; };
+    var k = function (x) { return x.pl ? (x.plk || x.pl) : x.ir; };
     var otros = delTipo.filter(function (x) { return x !== mejor && k(x) !== k(mejor); });
     return {
       html: '<p>' + mejor.ico + ' Aquí está: <b>' + esc(mejor.n) + '</b>' + (mejor.pl && mejor.pld ? ', en el Planisferio' : '') + (ab && (mejor.ple || mejor.ire) ? ', ya con ' + esc(NOMBRE[ab]) + ' elegido' : '') + '. Toca <b>«Saber más»</b> y se abre en su página.</p>' +
         (otros.length ? '<p class="pa-chico">También tengo:</p>' + lista(otros) : ''),
-      ir: [destinoRec(mejor, ab), mejor.pl && mejor.pld ? 'el Planisferio · dimensión ' + mejor.pld.toLowerCase() : mejor.n], sug: [], rec: []
+      ir: [destinoRec(mejor, ab), mejor.pl && mejor.pll ? 'el Planisferio · dimensión ' + mejor.pll.charAt(0).toLowerCase() + mejor.pll.slice(1) : mejor.n], sug: [], rec: []
     };
   }
   function estadoDeCuenta(q, r) {

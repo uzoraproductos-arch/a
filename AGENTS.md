@@ -115,6 +115,11 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   `lineaPl()` de `asistente.js`, con el `pl` que escribe `asistente_recursos.py`), nunca como tarjetas
   sueltas que repiten el mismo mapa, y «el mapa de…» se abre allá. **Una lente nueva del mapa de la
   Enciclopedia con par en el Planisferio necesita su renglón en `PLANISFERIO`.**
+  «No cuadra» y «Obras con alerta ambiental» viven además en el Planisferio como lentes `cua`
+  (financiera) y `obr` (ambiental), con la misma cuenta y el mismo texto (`cuadre_obras()`,
+  `QUE_CUADRE`, `QUE_OBRAS` de `territorio_modulos.py`), y el mapa ambiental de megaobras tiene su
+  par en `OTROS_MAPAS`. El chat reconoce por su archivo y su `?l=` cualquier tarjeta que lleve a un
+  mapa con par (`conPl()`), aunque la haya armado otra respuesta.
 - **No trae datos propios:** ordena en el territorio lo que la Enciclopedia
   ya cotejó (`AUDIT_DB`, `municipios-efipem.js`). Una cifra nueva entra
   primero a su módulo de la Enciclopedia y de ahí la lee el Planisferio.

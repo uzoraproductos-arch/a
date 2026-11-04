@@ -50,6 +50,14 @@ PLANISFERIO = {
     'asf': ('inversion', 'asf'),
     'inv': ('inversion', 'inv'),
     'invt': ('inversion', 'invt'),
+    'cuadre': ('financiera', 'cua'),
+    'obras': ('ambiental', 'obr'),
+}
+# Los otros mapas de la Enciclopedia que ya tienen par en el Planisferio
+# (archivo → dimensión y lente). El mapa ambiental de megaobras es más rico
+# (cada proyecto, quién paga): la ficha del Planisferio lleva de vuelta a él.
+OTROS_MAPAS = {
+    'datos-ambiente-megaobras.html': ('ambiental', 'obr'),
 }
 
 
@@ -134,6 +142,46 @@ def mapa_svg(raiz):
 # ---------------------------------------------------------------------------
 # 1 · El mapa del gasto federalizado
 # ---------------------------------------------------------------------------
+# «No cuadra» y «Obras con alerta ambiental»: las leen este mapa y el
+# Planisferio (lentes «cua» y «obr»), con el mismo texto y la misma cuenta.
+QUE_CUADRE = ('Cuánto se aleja lo que el gobierno del estado reportó al INEGI como recibido en 2024 de lo que la Cuenta Pública dice que la Federación le pagó '
+              '(Ramos 28 y 33, sin convenios). Una diferencia puede tener explicación (retenciones por adeudos, pagos a un fideicomiso de deuda, registros en otro año), '
+              'pero esa explicación tiene que darla el gobierno.')
+QUE_OBRAS = ('Cuántos proyectos del mapa ambiental (megaobras, infraestructura y crisis con gasto público o inversión privada) tocan cada estado. '
+             'Es un conteo, no un monto: una obra que cruza cinco estados cuenta en los cinco. El detalle, con quién paga, está en el mapa ambiental.')
+FUENTE_OBRAS = 'Conteo nuestro de los proyectos de la herramienta Costo Ambiental (%s), cada uno con sus documentos.' % (
+    '<a href="datos-ambiente-megaobras.html#abMapaObras">mapa ambiental de megaobras</a>')
+
+
+def fuente_cuadre(ref):
+    return ('Diferencia, sin signo, entre la suma del INEGI y la de la Cuenta Pública, ÷ lo que registra la Cuenta Pública × 100. Cuenta Pública 2024, datos abiertos %s; '
+            'INEGI, finanzas públicas estatales 2024 %s. La operación es nuestra.' % (ref('ref-shcp-cp2024-datos'), ref('ref-inegi-efipem-estatal')))
+
+
+def cuadre_obras(base):
+    """({entidad: % que no cuadra, o None}, {entidad: {'publico': n, 'privado': n}}).
+    El cuadre sale de inspector_estatal (integrar_rendicion.py); las obras,
+    de OBRAS_MAPA (am_basura.py). Ninguna cifra se escribe aquí."""
+    E = base['estados']
+    IE = base['inspector_estatal']['entidades']
+
+    def pct_(a):
+        x = IE.get(a)
+        if not x or x.get('inegiPart') is None:
+            return None
+        fed = x['cpR28'] + x['cpR33']
+        return round(abs(x['inegiPart'] + x['inegiAportSinConvenios'] - fed) / fed * 100, 2)
+    import am_basura  # aquí: am_basura importa este módulo
+    obras = {}
+    for o in am_basura.OBRAS_MAPA:
+        for a in o['edos']:
+            obras.setdefault(a, {'publico': 0, 'privado': 0})[o['paga']] += 1
+    raros = set(obras) - set(e['abbr'] for e in E)
+    if raros:
+        raise SystemExit('territorio_modulos: OBRAS_MAPA trae claves de estado que no existen: ' + ', '.join(sorted(raros)))
+    return {e['abbr']: pct_(e['abbr']) for e in E}, obras
+
+
 def mapa(base, ref, raiz):
     E = base['estados']
     FE = base['fiscalEntidades']
@@ -155,24 +203,12 @@ def mapa(base, ref, raiz):
     # Tlaxcala no tiene semáforo (LDF, art. 43): no se cuenta entre los medidos.
     sems = sorted(set(e['semaforoDeuda'] for e in E if e['semaforoDeuda']))
     sin_sem = [e['name'] for e in E if not e['semaforoDeuda']]
-    IE = base['inspector_estatal']['entidades']
+    cuad, obras = cuadre_obras(base)
 
     def cuadra_pct(a):
-        x = IE.get(a)
-        if not x or x.get('inegiPart') is None:
-            return None
-        fed = x['cpR28'] + x['cpR33']
-        return round(abs(x['inegiPart'] + x['inegiAportSinConvenios'] - fed) / fed * 100, 2)
+        return cuad[a]
     sin_cuadre = [e['abbr'] for e in E if cuadra_pct(e["abbr"]) is None]
     sin_inv = [e['abbr'] for e in E if e.get('invPub') is None]
-    import am_basura  # aquí: am_basura importa este módulo
-    obras = {}
-    for o in am_basura.OBRAS_MAPA:
-        for a in o['edos']:
-            obras.setdefault(a, {'publico': 0, 'privado': 0})[o['paga']] += 1
-    raros = set(obras) - set(e['abbr'] for e in E)
-    if raros:
-        raise SystemExit('territorio_modulos: OBRAS_MAPA trae claves de estado que no existen: ' + ', '.join(sorted(raros)))
     lentes = [
         {'id': 'gasto', 'nom': 'Ramos 28 y 33', 'fmt': 'mdp', 'est': 'derivado', 'pal': 'oro', 'suma': True,
          'que': 'Lo que cada estado recibe en 2026 por participaciones (Ramo 28) y aportaciones (Ramo 33), las dos vías que fija la Ley de Coordinación Fiscal.',
@@ -216,18 +252,13 @@ def mapa(base, ref, raiz):
         # cuadre sale de inspector_estatal (integrar_rendicion.py) y las
         # obras, de OBRAS_MAPA (am_basura.py).
         {'id': 'cuadre', 'nom': 'No cuadra', 'fmt': 'pct', 'est': 'derivado', 'pal': 'rojo', 'suma': False,
-         'que': 'Cuánto se aleja lo que el gobierno del estado reportó al INEGI como recibido en 2024 de lo que la Cuenta Pública dice que la Federación le pagó '
-                '(Ramos 28 y 33, sin convenios). Una diferencia puede tener explicación (retenciones por adeudos, pagos a un fideicomiso de deuda, registros en otro año), '
-                'pero esa explicación tiene que darla el gobierno.',
-         'fuente': 'Diferencia, sin signo, entre la suma del INEGI y la de la Cuenta Pública, ÷ lo que registra la Cuenta Pública × 100. Cuenta Pública 2024, datos abiertos %s; '
-                   'INEGI, finanzas públicas estatales 2024 %s. La operación es nuestra.' % (ref('ref-shcp-cp2024-datos'), ref('ref-inegi-efipem-estatal')),
+         'que': QUE_CUADRE,
+         'fuente': fuente_cuadre(ref),
          'falta': sin_cuadre, 'falta_pend': 'entidades-' + '-'.join(sin_cuadre).lower(),
          'falta_txt': 'La Ciudad de México no figura en la estadística estatal del INEGI: no hay segunda cifra con que contrastar.'},
         {'id': 'obras', 'nom': 'Obras con alerta ambiental', 'fmt': 'n', 'est': 'derivado', 'pal': 'verde', 'suma': False,
-         'que': 'Cuántos proyectos del mapa ambiental (megaobras, infraestructura y crisis con gasto público o inversión privada) tocan cada estado. '
-                'Es un conteo, no un monto: una obra que cruza cinco estados cuenta en los cinco. El detalle, con quién paga, está en el mapa ambiental.',
-         'fuente': 'Conteo nuestro de los proyectos de la herramienta Costo Ambiental (%s), cada uno con sus documentos.' % (
-             '<a href="datos-ambiente-megaobras.html#abMapaObras">mapa ambiental de megaobras</a>')},
+         'que': QUE_OBRAS,
+         'fuente': FUENTE_OBRAS},
     ]
     for l in lentes:
         l['pl'] = liga_pl(l['id'])

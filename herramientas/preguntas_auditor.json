@@ -1553,6 +1553,10 @@
    "ir": "planisferio.html?e=CDMX&m=1"
   },
   {
+   "q": "El mapa de las obras con alerta ambiental de Veracruz",
+   "ir": "datos-ambiente-megaobras.html?e=VER#abMapaObras"
+  },
+  {
    "q": "El mapa de la ASF de Oaxaca",
    "ir": "planisferio.html?d=inversion&l=asf&e=OAX",
    "dice": ["en el Planisferio"]
@@ -1563,7 +1567,7 @@
   },
   {
    "q": "Mapa de lo que no cuadra",
-   "ir": "numeros-mapa-del-gasto-federalizado.html?l=cuadre"
+   "ir": "planisferio.html?d=financiera&l=cua"
   },
   {
    "q": "Muéstrame la deuda de Nuevo León en el planisferio",

@@ -332,6 +332,7 @@ def _datos(base, padron):
     E = base['estados']
     C = base['fiscalEntidades']['campos']
     sin = set(C['recaudacionPropia'].get('sinFuente', []))
+    cuad, obras = tm.cuadre_obras(base)
     filas = []
     for e in E:
         m = padron['ent'].get(e['abbr'])
@@ -363,6 +364,11 @@ def _datos(base, padron):
             'jud': pj[e['abbr']]['g'], 'judc': pj[e['abbr']]['c100'], 'juda': pj[e['abbr']]['xa'],
             'judr': pj[e['abbr']]['p'], 'judj': pj[e['abbr']]['j'],
             'judi': pj[e['abbr']]['i'], 'judk': pj[e['abbr']]['c'],
+            # Lo que no cuadra y sus obras con alerta ambiental (las mismas
+            # cuentas del mapa de la Enciclopedia).
+            'cua': cuad[e['abbr']],
+            'obr': sum(obras.get(e['abbr'], {}).values()),
+            'obp': obras.get(e['abbr'], {}).get('publico', 0), 'obv': obras.get(e['abbr'], {}).get('privado', 0),
         })
         # Su IMSS (Memoria Estadística 2025, por OOAD) y su ISSSTE (registro
         # sectorial de la DGIS 2025): las dos fuentes no se mezclan.
@@ -439,6 +445,11 @@ LENTES = [
      'que': 'Lo que el gobierno del estado recaudó por su cuenta en 2024: impuestos estatales, cuotas, derechos, productos y aprovechamientos. Es el segundo piso.'},
     {'id': 'mun', 'dim': 'financiera', 'fmt': 'mdp', 'nom': '3 · Lo que ingresan sus municipios', 'pal': 'verde', 'est': 'derivado', 'anio': 2024,
      'que': 'Todo lo que ingresaron en 2024 los municipios del estado que rindieron su cuenta al INEGI: lo propio, lo que les llega del estado y de la Federación, y lo que pidieron prestado. Es el tercer piso.'},
+    # «No cuadra» (04-11-2026, el Planisferio como matriz de los mapas): la
+    # lente del mapa de la Enciclopedia, con su misma cuenta y su mismo texto
+    # (cuadre_obras() y QUE_CUADRE de territorio_modulos.py).
+    {'id': 'cua', 'dim': 'financiera', 'fmt': 'pct2', 'nom': 'No cuadra: lo recibido contra lo pagado', 'pal': 'rojo', 'est': 'derivado', 'anio': 2024,
+     'que': tm.QUE_CUADRE},
     # La dimensión de la deuda (03-11-2026): lo que debe cada gobierno estatal
     # y los tres indicadores con que lo mide el Sistema de Alertas.
     {'id': 'deuda', 'dim': 'deuda', 'fmt': 'mdp', 'nom': 'Lo que debe', 'pal': 'rojo', 'est': 'oficial', 'anio': 2025,
@@ -608,6 +619,11 @@ LENTES = [
     {'id': 'refu', 'dim': 'ambiental', 'fmt': 'pct', 'nom': 'Cuánto usa de su capacidad', 'pal': 'oro', 'est': 'derivado', 'anio': 'sep-25 a jun-26',
      'que': ('El promedio de los diez meses entre la capacidad de destilación de la refinería al cierre de 2024, × 100. Dice cuánto usa, no por qué: '
              'falta de crudo, mantenimiento o una planta que no arranca se ven igual.')},
+    # «Obras con alerta ambiental» (04-11-2026): el conteo del mapa de la
+    # Enciclopedia, que sale del mapa ambiental de megaobras. Un conteo de 0 a
+    # 3 no se parte en quintiles: va por número (cortes fijos).
+    {'id': 'obr', 'dim': 'ambiental', 'fmt': 'n', 'nom': 'Obras con alerta ambiental', 'pal': 'verde', 'est': 'derivado', 'anio': 'conteo nuestro',
+     'cortes': [1, 2, 3, 4], 'que': tm.QUE_OBRAS},
 ]
 
 
@@ -626,6 +642,7 @@ def _fuentes(ref, base=None):
                  'invt': '%s %s.' % (C['invInfra']['fuente'], ref(C['invInfra']['ref'])),
                  'invp': 'Inversión pública ÷ total de egresos del gobierno del estado en 2024 × 100; los dos del INEGI, finanzas públicas estatales %s. La división es nuestra.' % ref(C['egr2024']['ref']),
                  'asf': '%s %s.' % (E[0]['asfFuente'], ref('ref-asf-mdb2024')),
+                 'cua': tm.fuente_cuadre(ref),
                  'deuda': sda, 'ild': sda + ind, 'sd': sda + ind, 'ocp': sda + ind,
                  'dpc': ('Deuda al cierre de 2025 (Sistema de Alertas %s) ÷ población a mitad de 2026 (CONAPO). La división es nuestra; '
                          'los años no coinciden porque es la deuda que hereda quien vive hoy en el estado.') % ref('ref-shcp-alertas')}
@@ -713,6 +730,7 @@ def _fuentes(ref, base=None):
         C = base['fiscalEntidades']['campos']
         extra['soQ'] = ('Aportaciones de 2026 (%s %s) ÷ personas en pobreza de 2024 (%s). La división es nuestra, y junta dos años: '
                         'el INEGI mide la pobreza cada dos años y la de 2026 aún no existe.') % (C['ramo33']['fuente'], ref(C['ramo33']['ref']), soc)
+    extra['obr'] = tm.FUENTE_OBRAS
     extra.update({'peT': pe + '.', 'peV': pe + '. Miles de pesos ÷ 1,000: la cuenta es nuestra.'})
     extra.update({'incH': ic + '.', 'incN': ic + '.', 'sfT': sf + '.',
                   'incP': 'Superficie afectada por los incendios de 2025 (%s) ÷ superficie forestal (%s) × 100. La división es nuestra.' % (ic, sf)})
@@ -732,7 +750,7 @@ def matriz():
     Enciclopedia abriría el Planisferio en el lugar equivocado."""
     pinta = {i for i, *_r, p in DIMENSIONES if p}
     lentes = {l['id']: l['dim'] for l in LENTES}
-    malos = ['%s → %s/%s' % (k, d, l) for k, (d, l) in tm.PLANISFERIO.items()
+    malos = ['%s → %s/%s' % (k, d, l) for k, (d, l) in list(tm.PLANISFERIO.items()) + list(tm.OTROS_MAPAS.items())
              if d not in pinta or (l and lentes.get(l) != d)]
     if malos:
         raise SystemExit('planisferio: el mapa de la Enciclopedia apunta a dimensiones o lentes que no existen: ' + '; '.join(malos))
@@ -856,6 +874,9 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
     for i in ('inv', 'invp', 'invt'):
         falta[i] = {'a': sin_inv, 'gris': 'sin cifra', 'pend': 'entidades-' + '-'.join(sin_inv).lower(),
                     'txt': 'La Ciudad de México no figura en la estadística estatal del INEGI: su inversión sigue pendiente.'}
+    sin_cua = [f['a'] for f in filas if f['cua'] is None]
+    falta['cua'] = {'a': sin_cua, 'gris': 'sin cifra', 'pend': 'entidades-' + '-'.join(sin_cua).lower(),
+                    'txt': 'La Ciudad de México no figura en la estadística estatal del INEGI: no hay segunda cifra con que contrastar.'}
     sin_egr = [f['a'] for f in filas if f['legp'] is None]
     falta['legp'] = {'a': sin_egr, 'gris': 'sin cifra', 'pend': 'entidades-' + '-'.join(sin_egr).lower(),
                      'txt': 'La Ciudad de México no figura en la estadística estatal del INEGI: sin su egreso total no se puede hacer la división, aunque su congreso sí reportó su gasto.'}
@@ -910,7 +931,8 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
     # ventana lateral, y la página deja solo las pestañas.
     cuantil = 'El color compara a las 32 por quintiles: cinco grupos con el mismo número de entidades.'
     leer = {
-        'financiera': 'Los tres pisos de la hacienda de cada entidad: lo que le baja de la Federación, lo que cobra por su cuenta y lo que ingresan sus municipios.',
+        'financiera': ('Los tres pisos de la hacienda de cada entidad: lo que le baja de la Federación, lo que cobra por su cuenta y lo que ingresan sus municipios. '
+                       'La cuarta lente, «No cuadra», pone lo que el estado dice que recibió junto a lo que la Federación dice que le pagó.'),
         'deuda': 'Lo que debe cada gobierno estatal y cuánto le pesa, con los tres indicadores del Sistema de Alertas de Hacienda.',
         'inversion': 'La obra que hace cada gobierno estatal, directa o por medio de sus organismos, y lo que la Auditoría Superior dejó por aclarar.',
         'legislativa': 'Los 32 congresos locales: lo que gastó cada uno, cuánto cuesta por curul y cómo se compara con el tope del 0.70 % de la Constitución.',
@@ -926,7 +948,8 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
                            'Auditoría Superior de la Federación dejó por aclarar del dinero federal de la Cuenta Pública 2024. La ficha trae además el nivel federal, para comparar.'),
         'ambiental': ('Los recursos naturales: los acuíferos de cada estado y cuántos ya no tienen agua para concesionar, su superficie forestal y sus incendios forestales, '
                       'su pesca y su acuacultura, sus concesiones mineras y las siete refinerías de PEMEX, cuánto crudo procesa cada una frente a su capacidad y cuánto valor '
-                      'ganó o perdió en sus libros. En las lentes de refinación, el punto marca la entidad, no el sitio exacto.'),
+                      'ganó o perdió en sus libros. En las lentes de refinación, el punto marca la entidad, no el sitio exacto. '
+                      'La lente de las obras con alerta ambiental cuenta los proyectos del mapa ambiental de megaobras que tocan cada estado.'),
     }
     cajones, plantillas = [], []
     for k, (i, ico, nom, _q, _ir, _ire, pinta) in enumerate(DIMENSIONES):

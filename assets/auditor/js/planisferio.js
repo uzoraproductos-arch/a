@@ -84,6 +84,8 @@
     var ficha = document.getElementById('plFicha'), aviso = document.getElementById('plDimAviso');
 
     function cortes() {
+      /* Un conteo chico (las obras con alerta ambiental, de 0 a 3) va por número, no por quintiles. */
+      if (lente.cortes) return lente.cortes;
       var v = D.e.map(function (e) { return e[lente.id]; }).filter(function (x) { return x != null; }).sort(function (a, b) { return a - b; });
       return [1, 2, 3, 4].map(function (k) { return v[Math.round(k * v.length / 5)]; });
     }
@@ -147,7 +149,9 @@
       var lim = [null].concat(c).concat([null]);
       document.getElementById('plLeyenda').innerHTML = '<span class="pl-ley-tit">' + esc(lente.nom) + ' (' + lente.anio + ')</span><span class="pl-ley-cls">' +
         pal.map(function (col, i) {
-          var t = i === 0 ? 'menos de ' + fmt(lim[1]) : i === 4 ? fmt(lim[4]) + ' o más' : fmt(lim[i]) + ' a ' + fmt(lim[i + 1]);
+          /* Con cortes fijos de uno en uno (un conteo), cada color es un número. */
+          var uno = lente.cortes && lim[2] - lim[1] === 1;
+          var t = i === 0 ? (uno ? 'ninguna' : 'menos de ' + fmt(lim[1])) : i === 4 ? fmt(lim[4]) + ' o más' : uno ? fmt(lim[i]) : fmt(lim[i]) + ' a ' + fmt(lim[i + 1]);
           return '<span><i style="background:' + col + '"></i>' + t + '</span>';
         }).join('') + (lente.falta && lente.falta.a.length ? '<span><i style="background:#d5dae3"></i>' + esc(lente.falta.gris) + '</span>' : '') + '</span>';
       document.getElementById('plQue').textContent = lente.que;
@@ -261,6 +265,11 @@
     function mdps(v) { return v == null ? 'no figura en la nota' : '<b class="num-tabular">' + (v < 0 ? '−' : '+') + '$' + num(Math.abs(v), 1) + ' mdp</b> ' + chip('oficial'); }
     var PROD = { mayor: 'Una de las diez que dan el 94.9 % de la producción minera', menor: 'Entre las 17 que dan el 5.2 % de la producción minera' };
     function ambiental(e, fijo) {
+      var obrL = lente.id === 'obr', obra = '<p class="pl-ficha-sub">🚧 Obras con alerta ambiental · conteo nuestro</p><dl class="pl-ficha-dl">' +
+        '<dt>Proyectos del mapa ambiental que la tocan</dt><dd><b class="num-tabular">' + num(e.obr, 0) + '</b> ' + chip('derivado') +
+        (e.obr ? ' · ' + e.obp + ' con dinero público, ' + e.obv + (e.obv === 1 ? ' privado' : ' privados') : '') + '</dd></dl>' +
+        (e.obr ? '<a class="pl-ficha-ir" href="datos-ambiente-megaobras.html?e=' + encodeURIComponent(e.a) + '#abMapaObras">Verlas en el mapa ambiental de megaobras ➔</a>' : '') +
+        '<p class="pl-ficha-mun">Es un conteo, no un monto ni una calificación: una obra que cruza cinco estados cuenta en los cinco.</p>';
       var r = e.ref, m = e.min, w = e.acu, z = e.inc, b = e.sf, refL = /^ref/.test(lente.id), minL = /^min/.test(lente.id), incL = /^inc|^sf/.test(lente.id), q = e.pe, peL = /^pe/.test(lente.id);
       var sg = function (v) { return (v > 0 ? '+' : v < 0 ? '−' : '') + num(Math.abs(v), 1) + '%'; };
       var pesc = q ? (e.peT != null ?
@@ -301,7 +310,7 @@
         '<dt>Valor ganado o perdido en libros · 2025</dt><dd>' + (r.id === 'olmeca' ? 'es de una filial y PEMEX la arrienda' : mdps(r.d25)) + '</dd></dl>' +
         '<p class="pl-ficha-mun">Procesar no es producir gasolina, y el valor en libros es una estimación, no dinero que salió de la caja.</p>' :
         '<p class="pl-ficha-sub">🛢️ Sin refinería de PEMEX</p>';
-      ficha.innerHTML = '<h3>' + esc(e.n) + '</h3>' + (refL ? refi + agua + fuego + pesc + minas : minL ? minas + agua + fuego + pesc + refi : incL ? fuego + agua + pesc + minas + refi : peL ? pesc + agua + fuego + minas + refi : agua + fuego + pesc + minas + refi) +
+      ficha.innerHTML = '<h3>' + esc(e.n) + '</h3>' + (obrL ? obra + agua + fuego + pesc + minas + refi : refL ? refi + agua + fuego + pesc + minas : minL ? minas + agua + fuego + pesc + refi : incL ? fuego + agua + pesc + minas + refi : peL ? pesc + agua + fuego + minas + refi : agua + fuego + pesc + minas + refi) +
         '<a class="pl-ficha-ir" href="' + esc(sub(e, 'ambiental')) + '">Ver sus recursos naturales en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
@@ -346,7 +355,8 @@
         fila('Le baja de la Federación', e.fed, 'derivado', 2026) +
         fila('Cobra el estado por su cuenta', e.est, 'derivado', 2024, lenteDe('est').falta.pend) +
         fila('Ingresan sus municipios', e.mun, 'derivado', 2024, lenteDe('mun').falta.pend) +
-        '</dl><p class="pl-ficha-mun">' + e.mn + (e.a === 'CDMX' ? ' demarcaciones' : ' municipios') + (e.mc ? ', ' + e.mc + ' con cuenta de 2024' : ', sin cuenta municipal') + '.</p>' +
+        '<dt>No cuadra · 2024</dt><dd>' + (e.cua == null ? 'Sin cifra ' + chip('pendiente', lenteDe('cua').falta.pend) : '<b class="num-tabular">' + fmt(e.cua, lenteDe('cua')) + '</b> ' + chip('derivado')) + '</dd>' +
+        '</dl>' + (lente.id === 'cua' ? '<p class="pl-ficha-mun">Lo que el estado dice que recibió contra lo que la Federación dice que le pagó. Una diferencia puede tener explicación, pero esa explicación tiene que darla el gobierno.</p>' : '') + '<p class="pl-ficha-mun">' + e.mn + (e.a === 'CDMX' ? ' demarcaciones' : ' municipios') + (e.mc ? ', ' + e.mc + ' con cuenta de 2024' : ', sin cuenta municipal') + '.</p>' +
         (e.mm ? '<p class="pl-ficha-mun">🗺️ Su portal ya trae el mapa de sus municipios.</p>' : '') +
         '<a class="pl-ficha-ir" href="' + esc(e.p) + '">Entrar al portal de ' + esc(e.n) + ' ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
