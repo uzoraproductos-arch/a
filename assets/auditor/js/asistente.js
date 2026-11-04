@@ -1126,6 +1126,7 @@
     if (d.sat) {
       var s = (IN.sat || {})[d.sat[0]] || { t: d.sat[0], txt: '' };
       h += '<p>' + (d.sat[0] === 'F' ? '⛔' : d.sat[0] === 'P' ? '⚠️' : 'ℹ️') + ' <b>Aparece en la lista 69-B del SAT</b> como <b>' + esc(s.t) + '</b> (oficio ' + esc(d.sat[1]) + ', ' + esc(d.sat[2]) + '). ' + esc(s.txt || '') + '</p>';
+      h += cruceUna(rfc);
     }
     var emp = PE.per.filter(function (x) { return x.emp; }).filter(function (x) { return x.al.some(function (a) { return plano(d.n).indexOf(' ' + a + ' ') >= 0; }); })[0];
     if (emp) h += '<p>📰 La plataforma también tiene a <b>' + esc(corta(emp.n)) + '</b> en Noticias relevantes: <button type="button" class="pa-ej" data-pa-pregunta="' + esc(corta(emp.n)) + '">Ver lo que sabemos</button></p>';
@@ -1158,6 +1159,47 @@
       ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: [fuente], ir: [CMX_PAG + '?i=' + encodeURIComponent(k), 'Contratos públicos'] },
       sug: d.p.slice(0, 2).map(function (x) { return 'Contratos de ' + x[1]; }) };
   }
+  /* Contratos × lista 69-B × ASF (04-11-2026, herramientas/cruce_contratos.py,
+     octava aplicación del Modo Inspector). El chat no rehace el cruce: solo
+     menciona el hallazgo («señal para revisar»), o el antecedente si hoy no hay
+     ninguno, y lleva a su sección de la página. */
+  var CRU = (B.dat && B.dat.cru) || null;
+  function cruceUna(rfc) {
+    if (!CRU) return '';
+    var hs = CRU.hall.filter(function (x) { return x.rfc === rfc; }), a = CRU.ant[rfc];
+    if (hs.length) return '<p>🚩 <b>Señal para revisar</b> ' + chip({ e: 'derivado' }) + ': ' + esc(hs[0].tx.toLowerCase()) + ', ' + hs[0].dias + ' días después de su publicación en el DOF. <a href="' + esc(CRU.pag) + '#e-' + esc(rfc) + '">Ver el cruce ›</a></p>';
+    if (a) return '<p>🗂️ <b>Antecedente</b>, sin señal: ' + esc(a.tx.toLowerCase()) + '. <a href="' + esc(CRU.pag) + '#e-' + esc(rfc) + '">Ver el cruce ›</a></p>';
+    return '';
+  }
+  var CRU_LISTA = '(69 ?b|lista negra|efos|fantasmas?|factureras?)', CRU_TIEMPO = '(asf|auditoria superior|dof|fecha|antes|despues|ano por ano|por ano|historic\\w*|desde)';
+  var CRU_RE = new RegExp('\\b(compranet|cruce de contratos|contratos lista 69 ?b y asf)\\b|' +
+    '\\b(contrat\\w*|proveedor\\w*|empresas?|compr[oa]\\w*)\\b.*\\b' + CRU_LISTA + '\\b.*\\b' + CRU_TIEMPO + '\\b|' +
+    '\\b' + CRU_TIEMPO + '\\b.*\\b' + CRU_LISTA + '\\b.*\\b(contrat\\w*|proveedor\\w*)\\b|' +
+    '\\b' + CRU_LISTA + '\\b.*\\b(contrat\\w*|proveedor\\w*)\\b.*\\b' + CRU_TIEMPO + '\\b');
+  function cruceAsf(q) {
+    var t = plano(q);
+    if (!CRU || !CRU_RE.test(t) || (q.match(RFC_RE) || []).length) return null;
+    var h, ir, fu = [{ que: 'Listado del artículo 69-B del Código Fiscal (corte al ' + CRU.sat.corte + ')', e: 'oficial', fu: { tx: 'SAT', url: CRU.sat.url } },
+      { que: CRU.asf.doc, e: 'oficial', fu: { tx: 'ASF', url: CRU.asf.url } }];
+    if (CRU.hall.length) {
+      var x = CRU.hall[0];
+      h = '<p>🚩 <b>Hallazgo</b> ' + chip({ e: 'derivado' }) + ': de las ' + CRU.nEmp + ' empresas de la lista 69-B con contratos integrados, ' +
+        (CRU.hall.length === 1 ? 'hay <b>1 contrato</b>' : 'hay <b>' + CRU.hall.length + ' contratos</b>') + ' hecho' + (CRU.hall.length === 1 ? '' : 's') + ' después de que el DOF publicó a la empresa. ' +
+        (CRU.hall.length === 1 ? 'Es' : 'El primero') + ': <b>' + esc(x.n) + '</b>, ' + esc(x.sit.toLowerCase()) + ' desde el ' + esc(x.dof) + '; contrato de ' + esc(x.inst) + ' del ' + esc(x.f) +
+        (x.campo === 'firma' ? '' : ' (fecha de publicación en ComprasMX)') + ', ' + x.dias + ' días después, por ' + pesosCmx(x.imp) + '.</p>' +
+        '<p>Es una <b>señal para revisar</b>, no una irregularidad: ' + (x.sit === 'Presunto' ? 'la empresa todavía puede desvirtuar la presunción, ' : '') + 'y estar en la lista no es una condena.</p>';
+      ir = [CRU.pag + '#hallazgos', 'las señales del cruce'];
+    } else {
+      h = '<p>🗂️ Hoy no hay ninguna señal: ningún contrato integrado se hizo con una empresa ya publicada como presunta o definitiva. Queda el <b>antecedente</b> ' + chip({ e: 'derivado' }) + ': ' +
+        Object.keys(CRU.ant).length + ' empresas que estuvieron en la lista y tienen contratos, fuera del orden que levanta una señal.</p>';
+      ir = [CRU.pag + '#antecedentes', 'los antecedentes del cruce'];
+    }
+    h += '<p class="pa-chico">' + (CRU.cnet ? '' : 'Por ahora con ComprasMX (2025 y 2026); CompraNet, de años anteriores, está pendiente. ') + 'La ASF va año por año desde la Cuenta Pública ' + CRU.asf.desde + '.</p>';
+    return { html: h, ir: ir, rec: [], fu: fu, tit: 'Contratos, lista 69-B y ASF',
+      ficha: { t: 'calculo', tit: 'Contratos, lista 69-B y ASF', txt: texto(h), ci: [], fu: fu, ir: ir },
+      sug: ['¿Qué contratistas están en la lista negra del SAT?', '¿Qué es la lista 69-B?'] };
+  }
+
   /* Contratistas que también están en la lista 69-B del SAT. */
   var CRUCE_RE = /\b(contratistas?|proveedor(es)?|empresas? con contratos?)\b.*\b(lista negra|69 ?b|efos|sat)\b|\b(lista negra|69 ?b|efos)\b.*\b(contratistas?|proveedor(es)?|contratos?)\b/;
   function cruceSat(q) {
@@ -2375,7 +2417,7 @@
     if (sa) return sa;
     var vc = PIDE_COTEJO.test(plano(q)) && verificado(q);
     if (vc) return vc;
-    var cx = fraccCmx(q) || cruceSat(q) || contratosCmx(q);
+    var cx = fraccCmx(q) || cruceAsf(q) || cruceSat(q) || contratosCmx(q);
     if (cx) return cx;
     var pe = personaje(q);
     if (pe) return pe;

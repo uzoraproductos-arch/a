@@ -826,7 +826,7 @@ HERRAMIENTAS = [
      'Expedientes de la Auditoría Superior de la Federación (ASF), adjudicaciones directas, empresas que facturan operaciones simuladas '
      '(EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.'
      ' Y si un caso necesita ir más a fondo, en la aplicación de Servicios puedes pedir una investigación a la medida: cada cifra con su documento y bajo una política de independencia.'
-     ' Las siete también las usas desde el chat del <a href="herramienta-inspector-pregunta.html">Auditor</a>, sin salir de la plática.',
+     ' Las ocho también las usas desde el chat del <a href="herramienta-inspector-pregunta.html">Auditor</a>, sin salir de la plática.',
 
      'verificador', [
          # «Que encontro la ASF» y «Expedientes de casos» se fusionaron el
@@ -842,6 +842,10 @@ HERRAMIENTAS = [
           'Pega la liga de una noticia, una revista o una publicación en redes: leemos sus cifras, las ponemos junto al documento oficial y te damos un veredicto, cifra por cifra.'),
          ('inspefos', '🧾', 'Lista negra del SAT', 'Busca y verifica',
           'Busca por RFC o por nombre en el listado del artículo 69-B del Código Fiscal: a quienes el SAT presume o declara emisores de facturas por operaciones inexistentes.'),
+         # Octava desde el 04-11-2026 (pedido del autor): contratos × lista
+         # 69-B × ASF, año por año (herramientas/cruce_contratos.py).
+         ('inspcruce', '🔗', 'Contratos, lista 69-B y ASF', 'Año por año',
+          'Cruzamos los contratos públicos con la lista negra del SAT y lo que fiscalizó la Auditoría Superior desde 2002. Separamos lo que ya declaró la autoridad de las señales que detectamos, como un contrato firmado después de que el DOF publicó a la empresa.'),
          ('inspverifica', '🔏', 'Verifica un estado de cuenta', 'Busca y verifica',
           '¿Te compartieron un estado de cuenta de Auditavisión? Escribe su folio o su huella digital y comprueba, cifra por cifra, que no se alteró.'),
          # Septima desde el 28-10-2026 (pedido del autor): el nepotismo, con su
@@ -895,7 +899,7 @@ HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las'), 'inspector':
 # Desde el 24-10-2026 (decisión del autor) «Grandes investigaciones» ES el
 # Modo Inspector: una sola página, herramienta-inspector.html, con las seis
 # aplicaciones. La vieja página de las investigaciones redirige ahí.
-HERR_DIVISION = {'inspector': ('Modo Inspector', 'Grandes investigaciones a través de siete aplicaciones. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
+HERR_DIVISION = {'inspector': ('Modo Inspector', 'Grandes investigaciones a través de ocho aplicaciones. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
 ASISTENTE = ('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor', 'Pregunta fácil, respuesta fácil',
              'El chat de Auditavisión. Pregúntale lo que quieras del dinero público, como lo dirías platicando: cuánto debe un estado, cuánto le llega a un municipio, cuánto gana un cargo o qué significa un término. Te contesta en corto y con datos oficiales, y si quieres el respaldo, te lleva a la página donde está la información y te arma el dictamen con su respaldo.')
 LOGO_IMG = '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62" height="48">'
@@ -924,7 +928,7 @@ MODULOS_PROPIOS = {'inspverifica'}
 # modulo de herramientas/ arma su pagina con construir(base, ref) y dice
 # sus ESTILOS y SCRIPTS (assets/auditor/css y js).
 INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspentes': 'insp_entes',
-                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'inspnepotismo': 'nepotismo',
+                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'inspnepotismo': 'nepotismo', 'inspcruce': 'cruce_contratos',
                 # Calculadora Civica (pedido del autor, 12-10-2026): sus tres
                 # aplicaciones que abrian el motor en un marco.
                 'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj',
@@ -1073,7 +1077,7 @@ def herramienta(h, n):
 
 def herramienta_divisiones(h, n, ruta):
     """Modo Inspector. Desde el 24-10-2026 (decisión del autor) es las Grandes
-    investigaciones: su página muestra directo sus aplicaciones (siete desde el 28-10-2026). El chat
+    investigaciones: su página muestra directo sus aplicaciones (ocho desde el 04-11-2026). El chat
     ya no es su «otra división»: es la portada del Auditor Virtual."""
     archivo, rubro, icono, titulo, sub, texto, modulo, temas = h
     division = HERR_DIVISION[rubro]
@@ -1270,7 +1274,7 @@ def nav_de_pagina(archivo, padre3=None, cap=None):
         # al Modo Inspector (las Grandes investigaciones) y a la Enciclopedia.
         return ('<nav class="herr-nav-min" aria-label="Moverte desde aquí">\n'
                 '        <a class="herr-min" href="%s"><span>🧰 Herramientas</span><small>Las cuatro, en la Enciclopedia</small></a>\n'
-                '        <a class="herr-min" href="%s"><span>🔍 Modo Inspector</span><small>Grandes investigaciones en siete aplicaciones</small></a>\n'
+                '        <a class="herr-min" href="%s"><span>🔍 Modo Inspector</span><small>Grandes investigaciones en ocho aplicaciones</small></a>\n'
                 '        <a class="herr-min" href="%s"><span>📚 Enciclopedia</span><small>Números, Datos y Aprende</small></a>\n'
                 '      </nav>' % (NUMEROS_HERR, MODO_INSPECTOR, ENCICLOPEDIA))
     return None

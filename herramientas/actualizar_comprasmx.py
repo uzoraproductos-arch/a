@@ -22,7 +22,10 @@ Lo que se escribe (todo se carga en el navegador solo cuando se pregunta):
                 instituciones les vende, sus 5 contratos mayores con su liga, y
                 su situacion en la lista 69-B del SAT si aparece.
   inst.js       por institucion: contratos, importe, adjudicaciones directas
-                y sus 10 proveedores mayores.
+                y sus 10 proveedores mayores; y «cruce69b»: todos los contratos
+                de quienes estan en la lista 69-B, con su fecha de firma
+                [codigo, institucion, importe, moneda, procedimiento, firma,
+                publicacion, liga] (los lee herramientas/cruce_contratos.py).
 
 Reglas de la plataforma (AGENTS.md, §2):
   - El importe de cada contrato es «oficial»: es el «Importe DRC», antes de
@@ -58,7 +61,8 @@ MAX_PROV_INST = 10
 
 # Columnas del archivo (diccionario de datos Compras MX, 73 columnas).
 C = {'orden': 0, 'ramo': 2, 'clave_inst': 4, 'siglas': 5, 'inst': 6, 'tipo_proc': 14, 'codigo': 35,
-     'titulo': 37, 'pub': 32, 'importe': 44, 'moneda': 45, 'rfc': 64, 'prov': 65, 'estrato': 70, 'url': 72}
+     'titulo': 37, 'pub': 32, 'firma': 43, 'importe': 44, 'moneda': 45, 'firma2': 49, 'rfc': 64, 'prov': 65,
+     'estrato': 70, 'url': 72}
 
 
 def tipo(t):
@@ -106,6 +110,7 @@ def main(rutas):
     inst = {}
     archivos = []
     vistos = set()
+    cruce69 = collections.defaultdict(list)
     for ruta in rutas:
         raw = open(ruta, 'rb').read()
         m = re.search(r'(\d{4})', os.path.basename(ruta))
@@ -166,6 +171,9 @@ def main(rutas):
                 p['inst'][ci][1] += imp
             p['k'].append((imp if mon == 'MXN' else 0, x[C['codigo']], ci, x[C['titulo']].strip()[:90], round(imp, 2), mon, tp,
                            x[C['pub']][:10], url_id(x[C['url']])))
+            if rfc in sat:  # todos sus contratos, con la fecha de firma, para el cruce
+                cruce69[rfc].append([x[C['codigo']], ci, round(imp, 2), mon, tp, (x[C['firma']] or x[C['firma2']])[:10],
+                                     x[C['pub']][:10], url_id(x[C['url']])])
 
     os.makedirs(SALIDA, exist_ok=True)
     for f in os.listdir(SALIDA):
@@ -213,7 +221,11 @@ def main(rutas):
             d['ot'] = {a: round(b, 2) for a, b in i['otras'].items()}
         ins[ci] = d
     cruce.sort(key=lambda r: -r[4])
-    open(os.path.join(SALIDA, 'inst.js'), 'w', encoding='utf-8').write(js('CMX_INST', None, {'meta': meta, 'i': ins, 'sat': cruce}))
+    # Desde el 04-11-2026: los contratos de quienes están en la lista 69-B, con
+    # su fecha de firma (si falta, la de publicación), para compararla contra
+    # la fecha del DOF en herramientas/cruce_contratos.py.
+    open(os.path.join(SALIDA, 'inst.js'), 'w', encoding='utf-8').write(js('CMX_INST', None, {
+        'meta': meta, 'i': ins, 'sat': cruce, 'cruce69b': {r: sorted(v, key=lambda t: t[5] or t[6]) for r, v in cruce69.items()}}))
 
     tam = sum(os.path.getsize(os.path.join(SALIDA, f)) for f in os.listdir(SALIDA))
     print('comprasmx: %d contratos, %d personas morales, %d instituciones, %d archivos (%.1f MB), %d proveedores en la lista 69-B'

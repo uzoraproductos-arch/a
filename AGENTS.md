@@ -55,8 +55,9 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
   `herramientas.html` solo redirige.
   **El Modo Inspector es las Grandes investigaciones** («realizar grandes
   investigaciones a través de seis aplicaciones»): una sola página,
-  `herramienta-inspector.html`, con sus aplicaciones (siete desde el
-  28-10-2026: la sexta es Nepotismo y parentesco). Ya no presenta al
+  `herramienta-inspector.html`, con sus aplicaciones (ocho desde el
+  04-11-2026: la sexta es Nepotismo y parentesco; la octava, el cruce de
+  contratos × lista 69-B × ASF). Ya no presenta al
   chat como su «otra división», y `herramienta-inspector-investigaciones.html`
   solo redirige ahí. Su imagen son las cámaras con ojos (elegida por el
   autor, dibujada desde el 27-10-2026: `herr-inspector-ilustracion.svg`); el
@@ -789,6 +790,13 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   nunca es prueba de parentesco**: un vínculo entra a la plataforma solo si lo
   dice un documento oficial, y a los familiares que no son servidores públicos
   no se les nombra.
+  El cruce de contratos × lista 69-B × ASF, por `herramientas/cruce_contratos.py`
+  (04-11-2026; octava aplicación del Modo Inspector, `herramienta-inspector-cruce.html`,
+  y `D.cru` del chat): **lo que declaró la autoridad va `oficial` y la señal es
+  nuestra (`derivado`, «señal para revisar»)**; una empresa desvirtuada o con
+  sentencia favorable nunca es señal. El chat solo menciona el hallazgo, o el
+  antecedente si no hay, y lleva a su sección. Contratos de CompraNet por
+  `actualizar_compranet.py`; serie de la ASF por `extraer_estadisticas_asf.py`.
   Las agresiones a la prensa, por `herramientas/periodistas.py` (29-10-2026;
   `periodismo-en-riesgo.html`, del modo Periodista), con el informe mensual del
   Mecanismo de Protección (Gobernación); **los homicidios y las sentencias son de

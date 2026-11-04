@@ -2155,6 +2155,26 @@
    "dice": [
     "16.3"
    ]
+  },
+  {
+   "q": "¿El gobierno le compró a empresas de la lista negra del SAT después de que el DOF las publicó?",
+   "ir": "herramienta-inspector-cruce.html#hallazgos",
+   "dice": ["Hallazgo", "señal para revisar", "24 de octubre de 2025"]
+  },
+  {
+   "q": "Cruce de contratos con la lista 69-B y la ASF",
+   "ir": "herramienta-inspector-cruce.html#hallazgos",
+   "dice": ["Cuenta Pública 2002"]
+  },
+  {
+   "q": "Contratos de SIC1505128V4",
+   "ir": "contratos-publicos.html?q=SIC1505128V4",
+   "dice": ["Señal para revisar", "Ver el cruce"]
+  },
+  {
+   "q": "Contratos de NCO1012101Z7",
+   "ir": "contratos-publicos.html?q=NCO1012101Z7",
+   "dice": ["Antecedente"]
   }
  ]
 }

@@ -35,7 +35,7 @@ Se actualiza cada vez que una nota deja un pendiente por un portal que no abre.
 | `www.ppef.hacienda.gob.mx` | Proyecto de Presupuesto 2027 por ramo y por empresa | `jalisco-gasto-federal-pef-2027`, `lfd-2027-dnr-defensa-tren-maya-aifa` |
 | `www.transparenciapresupuestaria.gob.mx` | Datos abiertos del gasto | varias |
 | `www.gob.mx` | Sener (permisos de importación), FGR, IPAB y Conagua (el comunicado de Presidencia del 28-10-2026 sobre el agua de Guadalajara ya quedó integrado el 02-11-2026) | `portacelis-permiso-diesel-sener`, `agua-guadalajara-14500-federal` |
-| `upcp-compranet.hacienda.gob.mx`, `comprasmx.buengobierno.gob.mx` | Contratos marco (nube pública 2024, Anexo 4 de proveedores acreditados) y el histórico de CompraNet 2019–2024; ComprasMX para bajar los datos abiertos al día | `huawei-gobierno-codigo-magenta` |
+| `upcp-compranet.hacienda.gob.mx`, `comprasmx.buengobierno.gob.mx` | Contratos marco (nube pública 2024, Anexo 4 de proveedores acreditados) y el histórico de CompraNet 2019–2024; ComprasMX para bajar los datos abiertos al día `huawei-gobierno-codigo-magenta`, `cnet-historico` (el 04-11-2026 dio 502; el importador `actualizar_compranet.py` ya está listo) |
 | `stastdgv2portfgr032.blob.core.windows.net` | Estadísticas de la FEADLE (FGR) sobre agresiones a periodistas (**Integrado el 02-11-2026** al corte de sep. 2026; cerrado `periodistas-feadle`) | — |
 
 ## Empresas públicas
