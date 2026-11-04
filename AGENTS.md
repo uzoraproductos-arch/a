@@ -887,6 +887,12 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   contrato abierto el importe suele ser el máximo, no lo pagado. **Las personas
   físicas no se publican** (su RFC es un dato personal), y tener contratos no
   es una irregularidad: así se dice en cada respuesta.
+  **Las señales de fraccionamiento** (04-11-2026, `herramientas/fraccionamiento.py`, sección
+  `#fraccionamiento` y `fraccCmx()` del chat): adjudicaciones directas por monto de la misma unidad,
+  empresa y partida que en 90 días rebasan el tope del Anexo 9 del PEF (LAASSP art. 55; Reglamento
+  art. 111). **Se dicen siempre como señal para revisar, nunca como irregularidad**, sin nombrar a la
+  empresa; los topes de cada año van en `ANEXO9` y se cotejan contra el DOF; lo que depende del escalón
+  de cada dependencia queda pendiente (`fracc-escalon`).
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).

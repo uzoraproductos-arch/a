@@ -59,6 +59,13 @@ MEGAOBRAS_PAGS = [('herramienta-megaobras-tabla.html', 'Megaobras · En qué inv
 # base). Cada uno: id, tema, que falta, por que, responsable, enlace oficial,
 # texto del enlace, donde aparece.
 PROPIOS = [
+    ('fracc-escalon', 'Contratos públicos', 'En qué escalón del Anexo 9 está cada dependencia (su tope de adjudicación directa)',
+     'El tope de la adjudicación directa depende del presupuesto de adquisiciones de cada dependencia: son 14 escalones en el Anexo 9 del PEF. '
+     'El Comité de Adquisiciones de cada una aprueba su escalón en su primera sesión del año, y no hay un documento que los reúna. '
+     'Sin ese dato, los grupos de contratos que rebasan el tope más bajo pero no el más alto no se pueden calificar como señal.',
+     'Ninguna dependencia está obligada a publicarlo en un solo lugar: cada Comité de Adquisiciones aprueba su escalón (Reglamento de la LAASSP, art. 41, apartado A)',
+     'https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LAASSP_orig_18dic25.doc',
+     'Reglamento de la LAASSP (DOF 18-12-2025)', [('contratos-publicos.html#fraccionamiento', 'Contratos públicos · Señales de fraccionamiento')]),
     ('asf-matriz-2018', 'Fiscalización', 'Matriz de Datos Básicos de la Cuenta Pública 2018',
      'La ASF no publicó en su portal la matriz de la Cuenta Pública 2018, como sí lo hizo con las demás. Sin ella, la serie de montos por aclarar tiene un hueco en ese año.',
      'Auditoría Superior de la Federación (ASF)', 'https://www.asf.gob.mx/Section/58_Informes_de_auditoria',
