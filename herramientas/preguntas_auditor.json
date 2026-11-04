@@ -2175,6 +2175,51 @@
    "q": "Contratos de NCO1012101Z7",
    "ir": "contratos-publicos.html?q=NCO1012101Z7",
    "dice": ["Antecedente"]
+  },
+  {
+   "q": "Expedientes de casos de la ASF",
+   "modo": "inspector",
+   "ir": "herramienta-inspector-asf.html"
+  },
+  {
+   "q": "Diagnóstico de Pemex",
+   "modo": "inspector",
+   "ir": "herramienta-inspector-entes.html#ente=federal:pemex"
+  },
+  {
+   "q": "Contrasta una nota",
+   "modo": "inspector",
+   "ir": "herramienta-inspector-nota.html"
+  },
+  {
+   "q": "Lista negra del SAT",
+   "modo": "inspector",
+   "ir": "herramienta-inspector-efos.html"
+  },
+  {
+   "q": "Cruce de contratos con la lista 69-B y la ASF",
+   "modo": "inspector",
+   "ir": "herramienta-inspector-cruce.html#hallazgos"
+  },
+  {
+   "q": "Verifica un estado de cuenta",
+   "modo": "inspector",
+   "ir": "herramienta-inspector-verifica.html"
+  },
+  {
+   "q": "¿Hasta qué grado de parentesco es nepotismo?",
+   "modo": "inspector",
+   "ir": "herramienta-inspector-nepotismo.html"
+  },
+  {
+   "q": "¿El Modo Inspector es gratis?",
+   "ir": "herramienta-inspector.html#suscripcion",
+   "dice": ["gratis y lo seguirá siendo"]
+  },
+  {
+   "q": "¿Qué desbloquea la suscripción?",
+   "ir": "herramienta-inspector.html#suscripcion",
+   "dice": ["todavía no abre"]
   }
  ]
 }

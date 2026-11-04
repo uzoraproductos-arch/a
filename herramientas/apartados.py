@@ -1100,10 +1100,34 @@ def herramienta_divisiones(h, n, ruta):
             'id': 'apps', 'titulo': 'Las %d aplicaciones' % len(temas), 'sin_cab': False,
             'texto': 'Recórrelas en orden o entra directo a la que te interesa. Cada una abre su propia página.',
             'tarjetas': [], 'bloque': ruta,
-        }],
+        }] + insp_suscripcion(archivo, temas),
         'pie_extra': herr_otras(archivo),
     }
     return principal
+
+
+def insp_apps(archivo, temas):
+    """Las aplicaciones del Modo Inspector que son suyas (sin Servicios),
+    como las leen las tablas de herramientas/suscripcion.py."""
+    import suscripcion
+    claves = [t[0] for t in temas if not t[0].endswith('.html')]
+    suscripcion.validar(claves)
+    return [(t[0], t[1], t[2], modulo_archivo(archivo, t[0])) for t in temas if t[0] in claves]
+
+
+def insp_suscripcion(archivo, temas):
+    """Las dos secciones que homologan el Modo Inspector con el chat y con
+    Servicios (pedido del autor, 04-11-2026)."""
+    import suscripcion
+    apps = insp_apps(archivo, temas)
+    return [
+        {'id': 'puertas', 'titulo': 'Cada aplicación, tres puertas',
+         'texto': 'La misma aplicación la abres aquí, se la pides al chat del Auditor en modo Inspector o la llevas más a fondo con un Servicio.',
+         'tarjetas': [], 'bloque': suscripcion.puertas(apps)},
+        {'id': suscripcion.ANCLA, 'titulo': 'Gratis y con suscripción',
+         'texto': 'La consulta es gratis y lo seguirá siendo. Esto es lo que una suscripción abriría en cada aplicación, y el encargo que la lleva más lejos.',
+         'tarjetas': [], 'bloque': suscripcion.tabla(apps)},
+    ]
 
 
 def herramienta_modulo(h, n, i, bloque=None):
@@ -1160,9 +1184,13 @@ def herramienta_modulo(h, n, i, bloque=None):
         'entrada': '<b>%s.</b> %s' % (frase, desc),
         'fondo': HERR_IMG[rubro],
         'rubro': rubro,
+        # La franja «Gratis y con suscripción» (suscripcion.py, 04-11-2026) va como
+        # sección: pagina() cambia el pie por las migas cuando las hay.
         'secciones': [{
             'id': 'modulo', 'titulo': nombre, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': marco,
-        }],
+        }] + ([{'id': 'gratis-y-suscripcion', 'titulo': 'Gratis y con suscripción', 'texto': '', 'sin_cab': True, 'tarjetas': [],
+                'bloque': __import__('suscripcion').banda(clave)}]
+              if rubro == 'inspector' and clave in __import__('suscripcion').APPS else []),
         'pie_extra': navegacion + '\n\n      ' + herr_otras(archivo),
     }
 
@@ -1911,19 +1939,22 @@ SERVICIOS = [
      'El uso de las herramientas y los datos de la plataforma dentro de tu institución.',
      'Licencia de uso, adaptación y acompañamiento.', 'Dependencias de gobierno, universidades, medios y organizaciones.'),
 ]
+# La suscripción al Modo Inspector (04-11-2026, pedido del autor): su renglón
+# y lo que abre en cada aplicación viven en herramientas/suscripcion.py.
+SERVICIOS.append(__import__('suscripcion').servicio())
 
 # A quién servimos (pedido del autor, 02-11-2026: «quedar con esa pestaña de
 # servicios de qué ofrecemos hacia esos sectores y en qué consisten»). Cada
 # sector dice lo que necesita y qué servicios de SERVICIOS lo atienden.
 SECTORES = [
     ('🏢', 'Empresas y sus contadores', 'Saber con quién contratan: un proveedor en la lista 69-B del SAT o sancionado es un riesgo fiscal y legal.',
-     ['diligencia', 'seguimiento']),
+     ['diligencia', 'seguimiento', 'suscripcion']),
     ('🧮', 'Auditores, despachos y órganos de control', 'Formarse con casos mexicanos reales: las 20 matrices de la ASF, el control interno y la prueba.',
      ['capacitacion', 'revision']),
     ('🏛️', 'Regidurías y congresos', 'Llegar a una sesión de cabildo o a la revisión de una cuenta pública con los documentos ya cruzados. El mismo servicio y la misma regla para todos los partidos.',
      ['expediente', 'seguimiento']),
     ('📰', 'Medios y periodistas', 'Cotejar rápido una cifra antes de publicarla y tener el documento que la sostiene.',
-     ['revision', 'licencia']),
+     ['revision', 'suscripcion', 'licencia']),
     ('🎓', 'Universidades y organizaciones civiles', 'Enseñar a leer el presupuesto y usar los datos en clase o en un proyecto.',
      ['capacitacion', 'licencia']),
     ('📋', 'Gobiernos y dependencias', 'Capacitar a su personal. Nunca a cambio de retirar, suavizar o retrasar lo que publicamos (política de independencia).',
@@ -2051,6 +2082,13 @@ def servicios():
         'secciones': [
             {'id': 'oferta', 'titulo': 'Qué podemos investigar', 'texto': '%s servicios, de una pregunta puntual a una licencia para tu institución.' % ['Cero', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho'][len(SERVICIOS)],
              'tarjetas': [], 'bloque': '<div class="sv-servicios">\n%s\n        </div>' % oferta},
+            # La misma tabla que el Modo Inspector (suscripcion.py, 04-11-2026).
+            {'id': 'suscripcion', 'titulo': 'Suscripción al Modo Inspector',
+             'texto': 'Lo que es gratis en cada aplicación, lo que una suscripción abriría y el encargo que la lleva más a fondo. Es la misma tabla del Modo Inspector.',
+             'tarjetas': [], 'bloque': __import__('suscripcion').tabla(insp_apps(MODO_INSPECTOR, next(h for h in HERRAMIENTAS if h[1] == 'inspector')[7]))},
+            {'id': 'puertas', 'titulo': 'Del Modo Inspector y del chat a un Servicio',
+             'texto': 'Cada Servicio parte de una aplicación que ya puedes usar gratis, en la herramienta o en el chat.',
+             'tarjetas': [], 'bloque': __import__('suscripcion').puertas(insp_apps(MODO_INSPECTOR, next(h for h in HERRAMIENTAS if h[1] == 'inspector')[7]))},
             {'id': 'sectores', 'titulo': 'A quién servimos', 'texto': 'Lo que necesita cada sector y qué servicio lo atiende. La consulta de la plataforma sigue siendo gratuita para todos.',
              'tarjetas': [], 'bloque': '<div class="sv-servicios">\n%s\n        </div>' % sectores},
             {'id': 'proceso', 'titulo': 'Cómo trabajamos', 'texto': 'Siete pasos. Nada se cobra antes de que aceptes la cotización.',

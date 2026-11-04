@@ -797,6 +797,15 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   sentencia favorable nunca es señal. El chat solo menciona el hallazgo, o el
   antecedente si no hay, y lleva a su sección. Contratos de CompraNet por
   `actualizar_compranet.py`; serie de la ASF por `extraer_estadisticas_asf.py`.
+  **El Modo Inspector, el chat y Servicios usan una sola tabla** (04-11-2026,
+  `herramientas/suscripcion.py`): por aplicación, lo gratis, lo que abriría la
+  suscripción y su Servicio, y cómo se le pide al chat en modo Inspector. **Una
+  aplicación nueva del Modo Inspector necesita su renglón en `APPS` y en `CHAT`**,
+  o la generación se detiene, y su pregunta de `CHAT` va al banco con
+  `"modo": "inspector"`. **Solo se desbloquea aviso, memoria, cómputo o descarga
+  institucional: nada de lo que hoy es gratis pasa a la suscripción.** Mientras
+  `ABIERTA` sea `False`, todo dice «Próximamente», y el precio no se escribe hasta
+  que salga de los pilotos.
   Las agresiones a la prensa, por `herramientas/periodistas.py` (29-10-2026;
   `periodismo-en-riesgo.html`, del modo Periodista), con el informe mensual del
   Mecanismo de Protección (Gobernación); **los homicidios y las sentencias son de

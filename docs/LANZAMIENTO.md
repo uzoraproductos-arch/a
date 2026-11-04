@@ -343,6 +343,11 @@ el aviso y el trabajo humano.
   plataforma **recuerde** a la persona (su municipio, sus alertas).
 - «Clientes»: empezar con **periodistas y organizaciones civiles** (90 días).
 
+**Ya anunciado en la plataforma (04-11-2026):** lo que la suscripción abriría en
+cada aplicación del Modo Inspector vive en `herramientas/suscripcion.py` y se
+lee igual en el Modo Inspector, en Servicios y en el chat, con «Próximamente»
+y sin precio (`ABIERTA = False`).
+
 #### Recomendación: C, las dos por etapas
 
 ```

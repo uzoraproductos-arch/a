@@ -550,13 +550,15 @@ def _charla(d):
     return {'nota': nota, 'met': met, 'edo': edo, 'cargos': cargos, 'smin': smin, 'adm': adm, 'admet': admet, 'expide': EXPIDE,
             'mapa': 'numeros-mapa-del-gasto-federalizado.html', 'num': num, 'datos': asistente_datos.datos(d, num, D),
             'leg': asistente_legislativo.legislativo(), 'jud': asistente_judicial.judicial(d),
-            'san': informe_sancion.bot(__import__('territorio_modulos').temas_bot(d)), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d), 'apu': __import__('administracion_publica').chat(d), 'soc': __import__('dimension_social').chat(d),
+            'san': informe_sancion.bot({**__import__('territorio_modulos').temas_bot(d), **__import__('suscripcion').temas()}), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d), 'apu': __import__('administracion_publica').chat(d), 'soc': __import__('dimension_social').chat(d),
             # Nepotismo y cargos publicos (28-10-2026): la tabla de la calculadora.
             'nep': nepotismo.bot(),
             # La memoria de promesas (01-11-2026): promesa → Presupuesto → Cuenta Pública → ASF.
             'prom': __import__('promesas').datos(),
             # Contratos × lista 69-B × ASF (04-11-2026): el hallazgo o el antecedente, y su sección.
             'cru': __import__('cruce_contratos').bot(),
+            # Lo que abriría la suscripción y el Servicio de cada aplicación (suscripcion.py, 04-11-2026).
+            'sus': __import__('suscripcion').chat_apps(),
             # Agenda del erario de Noticias (28-10-2026): las fechas que fija la ley.
             'agenda': __import__('noticias').AGENDA}
 
@@ -835,7 +837,11 @@ MODOS = [
      ('inspector', 'obras'), (),
      '<p>Estoy en <b>modo Inspector</b>: investigo con toda la base de datos de la plataforma. Pégame un <b>RFC</b>, un <b>folio</b> o la liga de una nota, '
      'pídeme el <b>diagnóstico de un ente</b> («diagnóstico de Pemex»), un <b>expediente de la ASF</b> o la cuenta de una <b>megaobra</b>.</p>'
-     '<p>Te contesto con la cifra, la operación y sus documentos. Si quieres el respaldo completo, toca <b>«Generar dictamen»</b>.</p>'),
+     '<p>Te contesto con la cifra, la operación y sus documentos. Si quieres el respaldo completo, toca <b>«Generar dictamen»</b>.</p>'
+     # Homologado con la herramienta y con Servicios (04-11-2026, suscripcion.py).
+     '<p>Son las mismas aplicaciones del <a href="herramienta-inspector.html#puertas">Modo Inspector</a>, y la consulta es gratis. '
+     'Si un caso necesita ir más a fondo, te llevo a <a href="servicios.html">Servicios</a>; lo que abriría una suscripción lo ves en '
+     '<a href="herramienta-inspector.html#suscripcion">Gratis y con suscripción</a>.</p>'),
     # El objetivo del modo, en palabras del autor (29-10-2026): «el reportero
     # se convierte como en un chismoso… información que igual no puede
     # encontrar en cualquier otra parte… aquel que te transmite información

@@ -682,6 +682,14 @@
     if (exp) sigue.push('<li>📂 <a href="' + esc(exp.f.ir[0]) + '">Su expediente de la ASF: ' + esc(recorta(exp.f.tit, 90)) + ' ➔</a></li>');
     if (ab) sigue.push('<li>🗺️ <a href="planisferio.html?e=' + esc(ab) + '">' + esc(NOMBRE[ab]) + ' en el Planisferio, dimensión por dimensión ➔</a></li>');
     sigue.push('<li>🧾 <a href="contratos-publicos.html">Sus contratos en ComprasMX</a> y la <a href="herramienta-inspector-pregunta.html?q=' + encodeURIComponent('lista negra del SAT') + '">lista negra del SAT</a>, si hay una empresa de por medio.</li>');
+    /* Más a fondo (04-11-2026, suscripcion.py): lo que abriría la suscripción en esta aplicación y su Servicio; sin cifras. */
+    var SUS = (B.dat && B.dat.sus) || null, sa = SUS && SUS.apps[base], fondo = '';
+    if (SUS) {
+      fondo = '<p class="pa-rep-s">Más a fondo</p><ul class="pa-lista">' +
+        (sa && sa.s.length ? '<li>🔓 <a href="' + esc(SUS.ir) + '">Con suscripción' + (SUS.abierta ? '' : ' (próximamente)') + '</a>: ' + sa.s.map(esc).join('; ') + '. Lo que ves hoy sigue gratis.</li>' : '') +
+        (sa && sa.e.length ? sa.e.map(function (e) { return '<li>🧾 Por encargo: <a href="' + esc(e[0]) + '">' + esc(e[1]) + ' ➔</a></li>'; }).join('') :
+          '<li>🧾 ¿Un caso que necesita ir más lejos? <a href="' + esc(SUS.sv) + '">Servicios de investigación ➔</a></li>') + '</ul>';
+    }
     var tot = cu.oficial + cu.derivado + cu.pendiente;
     var hh = '<div class="pa-capa pa-capa-inspector"><p class="pa-capa-t">🔍 La revisión del Inspector</p>' +
       (tot ? '<p class="pa-rep-s">De qué está hecha esta respuesta</p><p>' +
@@ -694,6 +702,7 @@
         return '<li>' + chip({ e: 'pendiente', p: f.pend.id }) + ' ' + esc(recorta(f.tit, 140)) + (f.pend.quien ? '. Le toca a <b>' + esc(f.pend.quien) + '</b>' : '') + '.</li>';
       }).join('') + '</ul>' : '') +
       '<p class="pa-rep-s">Para seguir investigando</p><ul class="pa-lista">' + sigue.join('') + '</ul>' +
+      fondo +
       '<p class="pa-chico">El respaldo completo, con folio y huella, está en «Generar dictamen». Tener contratos o un expediente abierto no es una irregularidad: es por dónde se revisa.</p></div>';
     return { html: hh };
   }

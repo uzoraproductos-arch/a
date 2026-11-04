@@ -26,6 +26,9 @@
   try {
     var tema = new URLSearchParams(location.search).get('tema');
     if (tema && !val('svTema')) $('svTema').value = tema.slice(0, 160);
+    /* El servicio también llega escrito: servicios.html?servicio=suscripcion (desde el Modo Inspector, 04-11-2026). */
+    var sv = new URLSearchParams(location.search).get('servicio'), sel = $('svServicio');
+    if (sv && sel && sel.querySelector('option[value="' + sv.replace(/[^a-z]/g, '') + '"]')) sel.value = sv.replace(/[^a-z]/g, '');
   } catch (e) { /* sin URLSearchParams: el lector lo escribe */ }
 
   function marcar(id, malo) {
