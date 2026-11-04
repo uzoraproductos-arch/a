@@ -96,6 +96,14 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   mapa **solo en la dimensión financiera** (`.pl-solo-dim[data-dim]`, que
   `planisferio.js` esconde en las demás), y las 32 entidades abren en la ventana
   lateral con el botón «📍 Las 32 entidades».
+  **El mapa es el protagonista** (reestructura del autor, 04-11-2026: «lo que le llama al
+  usuario a jugar con él»): encabezado con la foto del paisaje y la persona en sombra
+  (`planisferio-paisaje.webp`, en espejo, con su versión `-movil`), «cómo se juega» en
+  tres pasos, las nueve dimensiones como mosaico de color (`--dim` de `planisferio.css`)
+  y el mapa en su tablero (`#plTablero`), que toma el color, el nombre y la descripción de
+  la dimensión; «Para leerla bien» (los cajones) va al pie del tablero y lo financiero en
+  tres pestañas (`.pl-hoja-b`). **Una dimensión nueva necesita su color en `planisferio.css`**,
+  o su mosaico sale azul. Se reordenó; no se quitó contenido.
 - **No trae datos propios:** ordena en el territorio lo que la Enciclopedia
   ya cotejó (`AUDIT_DB`, `municipios-efipem.js`). Una cifra nueva entra
   primero a su módulo de la Enciclopedia y de ahí la lee el Planisferio.

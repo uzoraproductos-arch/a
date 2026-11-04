@@ -177,3 +177,109 @@ p.pl-ficha-ir a:hover, p.pl-ficha-ir a:focus-visible { background: #16408c; }
 .pl-ctx-l { margin: 14px 0 0; line-height: 1.9; }
 .pl-ctx-l a { margin-right: 10px; }
 .pl-sub-tit { margin: 22px 0 8px; }
+
+/* Rediseño del 04-11-2026 (pedido del autor: «nuestro protagonista debe ser
+   nuestro mapa interactivo»). */
+
+/* El encabezado: el paisaje al frente y la persona que lo mira, en sombra (la
+   foto va en espejo: la persona a la derecha, mirando el valle). Se desvanece
+   por la izquierda hacia el azul de la noche, donde va el texto; en celular el velo es parejo y deja ver el valle abajo. */
+.herr-cab.rubro-planisferio { --tarjeta: #c9a84c; padding: 30px 0 56px; min-height: 380px; }
+.herr-cab.rubro-planisferio::before {
+  background: #0d1f2b url('../img/planisferio-paisaje.webp') right 28% / max(1120px, 74vw) auto no-repeat;
+}
+.herr-cab.rubro-planisferio::after {
+  background:
+    radial-gradient(ellipse 15% 75% at 81% 62%, rgba(9, 24, 38, 0.5) 0%, rgba(9, 24, 38, 0) 100%),
+    linear-gradient(90deg, rgba(9, 24, 38, 1) 0%, rgba(9, 24, 38, 1) 22%, rgba(9, 24, 38, 0.82) 30%, rgba(9, 24, 38, 0.35) 46%, rgba(9, 24, 38, 0) 62%),
+    linear-gradient(0deg, rgba(9, 24, 38, 0.55) 0%, rgba(9, 24, 38, 0) 35%);
+}
+.herr-cab.rubro-planisferio .apartado-ancho > * { max-width: 620px; }
+.herr-cab.rubro-planisferio .apartado-migas { max-width: none; }
+.herr-cab.rubro-planisferio .apartado-lema { background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.4); }
+.herr-cab.rubro-planisferio .apartado-titulo { text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45); }
+@media (max-width: 700px) {
+  .herr-cab.rubro-planisferio { min-height: 0; padding-bottom: 120px; }
+  .herr-cab.rubro-planisferio::before { background-image: url('../img/planisferio-paisaje-movil.webp'); background-position: 30% 100%; }
+  .herr-cab.rubro-planisferio::after { background: linear-gradient(180deg, rgba(9, 24, 38, 0.93) 0%, rgba(9, 24, 38, 0.85) 62%, rgba(9, 24, 38, 0.2) 100%); }
+}
+
+/* El color de cada dimensión: el de su mosaico y el de su tablero. */
+.pl-dim[data-dim="financiera"], .pl-tablero[data-dim="financiera"] { --dim: #a8801f; }
+.pl-dim[data-dim="deuda"], .pl-tablero[data-dim="deuda"] { --dim: #b3261e; }
+.pl-dim[data-dim="inversion"], .pl-tablero[data-dim="inversion"] { --dim: #2f5fa8; }
+.pl-dim[data-dim="ambiental"], .pl-tablero[data-dim="ambiental"] { --dim: #2e8a4c; }
+.pl-dim[data-dim="legislativa"], .pl-tablero[data-dim="legislativa"] { --dim: #4b4f8f; }
+.pl-dim[data-dim="judicial"], .pl-tablero[data-dim="judicial"] { --dim: #8f6334; }
+.pl-dim[data-dim="salud"], .pl-tablero[data-dim="salud"] { --dim: #d2661a; }
+.pl-dim[data-dim="social"], .pl-tablero[data-dim="social"] { --dim: #b8327f; }
+.pl-dim[data-dim="administracion"], .pl-tablero[data-dim="administracion"] { --dim: #1f7a8c; }
+
+/* Cómo se juega, en tres pasos. */
+.pl-pasos { list-style: none; margin: 0 0 18px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; counter-reset: none; }
+.pl-pasos li { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: #f2f5fa; color: #0b2a63; }
+.pl-pasos b { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #0b2a63; color: #fff; font-size: 17px; }
+.pl-pasos strong { display: block; font-size: 16px; }
+.pl-pasos small { display: block; font-size: 14px; color: #4a5875; line-height: 1.35; }
+
+/* El mosaico de las nueve dimensiones (reemplaza la tira de pestañas, que en
+   pantalla ancha cortaba la última). */
+.pl-dims { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 8px; overflow: visible; margin: 0 0 16px; padding: 0; border-bottom: 0; }
+.pl-dim { --dim: #0b2a63; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 4px; min-height: 96px; padding: 12px 6px 10px; border-radius: 14px; border: 1px solid #d5dce8; border-top: 4px solid var(--dim); background: #fff; color: #0b2a63; text-align: center; transition: transform .15s ease, box-shadow .15s ease, background .15s ease; }
+.pl-dim:hover { background: #f7f9fd; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(11, 42, 99, 0.12); }
+.pl-dim-ico { grid-row: auto; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: color-mix(in srgb, var(--dim) 14%, #fff); color: var(--dim); font-size: 20px; }
+.pl-dim-n { font-size: 15px; line-height: 1.2; }
+.pl-dim small { font-size: 12px; font-weight: 600; color: #5a6782; }
+.pl-dim[aria-selected="true"], .pl-dim[aria-selected="true"]:hover { background: var(--dim); border-color: var(--dim); color: #fff; box-shadow: 0 8px 20px color-mix(in srgb, var(--dim) 35%, transparent); }
+.pl-dim[aria-selected="true"] .pl-dim-ico { background: rgba(255, 255, 255, 0.22); color: #fff; }
+.pl-dim[aria-selected="true"] small { color: rgba(255, 255, 255, 0.86); }
+.pl-dim:focus-visible { outline: 3px solid #c9a84c; outline-offset: 2px; }
+
+/* El tablero: el mapa, protagonista, en su marco del color de la dimensión. */
+.pl-tablero { --dim: #0b2a63; margin: 0; padding: 18px 18px 16px; border-radius: 20px; border: 1px solid #d5dce8; border-top: 6px solid var(--dim); background: #fff; box-shadow: 0 10px 30px rgba(11, 42, 99, 0.08); transition: border-color .3s ease; }
+.pl-tab-cab { margin: 0 0 12px; }
+.pl-tab-tit { margin: 0 0 4px; font-size: 24px; color: var(--dim); }
+.pl-tab-q { margin: 0; font-size: 16px; line-height: 1.5; color: #33415c; max-width: 72ch; }
+.pl-tablero .pl-rej { grid-template-columns: minmax(0, 1fr) 300px; }
+.pl-tablero .pl-ficha { border-top-color: var(--dim); }
+.pl-tablero .pl-lente[aria-checked="true"] { background: var(--dim); border-color: var(--dim); }
+.pl-tab-pie { margin: 16px 0 0; padding: 14px 0 0; border-top: 1px dashed #d5dce8; }
+.pl-tab-pie-t { margin: 0 0 8px; font: 700 12px/1.3 var(--font-mono, monospace); text-transform: uppercase; letter-spacing: .06em; color: #5a6782; }
+.pl-tab-pie .pl-cajones { margin: 0; }
+.pl-tab-pie .pl-indice-b { margin: 12px 0 0; }
+.pl-tab-pie .pl-indice-btn { width: 100%; background: #0b2a63; border-color: #0b2a63; color: #fff; font-size: 16px; }
+.pl-tab-pie .pl-indice-btn:hover { background: #16408c; }
+
+/* Lo de la dimensión financiera, en pestañas: una hoja a la vez. */
+.pl-cuaderno { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.pl-hoja-b { min-height: 48px; padding: 8px 16px; border-radius: 999px; border: 1px solid #c7d1e3; background: #fff; color: #0b2a63; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; }
+.pl-hoja-b:hover { border-color: #0b2a63; background: #eef2f9; }
+.pl-hoja-b[aria-selected="true"] { background: #a8801f; border-color: #a8801f; color: #fff; }
+.pl-hoja-b:focus-visible { outline: 3px solid #c9a84c; outline-offset: 2px; }
+.pl-hoja[hidden] { display: none; }
+.pl-hoja > .pl-fin-mod { margin-top: 0; }
+
+@media (max-width: 1100px) {
+  .pl-dims { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+@media (max-width: 860px) {
+  .pl-tablero .pl-rej { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .pl-pasos { grid-template-columns: 1fr; gap: 6px; }
+  .pl-pasos li { padding: 8px 12px; }
+  .pl-dims { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .pl-dim { min-height: 88px; padding: 10px 4px 8px; }
+  .pl-dim-n { font-size: 14px; }
+  .pl-tablero { padding: 14px 12px; border-radius: 16px; }
+  .pl-tab-tit { font-size: 21px; }
+}
+@media (prefers-reduced-motion: reduce) { .pl-dim { transition: none; } .pl-dim:hover { transform: none; } }
+
+/* Modo oscuro: el tablero y el mosaico sobre el fondo de la página. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .pl-tablero, :root:not([data-theme="light"]) .pl-dim:not([aria-selected="true"]), :root:not([data-theme="light"]) .pl-pasos li { background: var(--bg-card, #14213a); border-color: #2b3a57; color: #dfe7f6; }
+  :root:not([data-theme="light"]) .pl-tab-q, :root:not([data-theme="light"]) .pl-pasos small { color: #c3cde0; }
+}
+:root[data-theme="dark"] .pl-tablero, :root[data-theme="dark"] .pl-dim:not([aria-selected="true"]), :root[data-theme="dark"] .pl-pasos li { background: var(--bg-card, #14213a); border-color: #2b3a57; color: #dfe7f6; }
+:root[data-theme="dark"] .pl-tab-q, :root[data-theme="dark"] .pl-pasos small { color: #c3cde0; }

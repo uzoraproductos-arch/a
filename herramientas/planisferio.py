@@ -802,11 +802,14 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
             raise SystemExit('planisferio: la dimensión %s apunta a %s, que no existe' % (i, ir))
         if pinta and not any(l['dim'] == i for l in LENTES):
             raise SystemExit('planisferio: la dimensión %s se pinta pero no tiene lentes' % i)
-        dims.append('<button type="button" class="pl-dim%s" role="tab" aria-selected="%s" data-dim="%s">'
+        # Rediseño del 04-11-2026: las nueve dimensiones son un mosaico de
+        # color (su color es el del tablero del mapa cuando se eligen).
+        nl = sum(1 for l in LENTES if l['dim'] == i)
+        dims.append('<button type="button" class="pl-dim%s" role="tab" aria-selected="%s" aria-controls="plTablero" data-dim="%s">'
                     '<span class="pl-dim-ico" aria-hidden="true">%s</span><span class="pl-dim-n">%s</span>'
-                    '%s</button>' % (
+                    '<small>%s</small></button>' % (
                         '' if pinta else ' pl-dim-prox', 'true' if k == 0 else 'false', i,
-                        ico, nom, '' if pinta else '<small>Próximamente</small>'))
+                        ico, nom, ('%d %s' % (nl, 'lente' if nl == 1 else 'lentes')) if pinta else 'Próximamente'))
     otras = ''.join('<li><span aria-hidden="true">%s</span> <b>%s.</b> %s <a href="%s">Ya está en la Enciclopedia ➔</a></li>' % (
         ico, nom, que, ir) for _, ico, nom, que, ir, _, pinta in DIMENSIONES if ir and not pinta)
     pintadas = [d for d in DIMENSIONES if d[6]]
@@ -883,7 +886,7 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
                       ' (%s no se mide: no tiene deuda inscrita, LDF art. 43)' % ' ni '.join(nombre[a] for a in no_med) if no_med else '',
                       med[0]['n'], pct(med[0]['ild']), med[-1]['n'], pct(med[-1]['ild']), chip('oficial')))
     datos = {'lentes': [dict(l, fuente=fu[l['id']], falta=falta.get(l['id'])) for l in LENTES], 'e': filas,
-             'dims': {i: {'n': nom, 'ir': ir, 'ire': ire, 'pinta': pinta} for i, _, nom, _, ir, ire, pinta in DIMENSIONES}}
+             'dims': {i: {'n': nom, 'q': q, 'ir': ir, 'ire': ire, 'pinta': pinta} for i, _, nom, q, ir, ire, pinta in DIMENSIONES}}
     notas = {'deuda': nota_deuda, 'inversion': nota_inv, 'legislativa': nota_leg, 'judicial': nota_jud, 'ambiental': nota_amb, 'salud': nota_sal, 'administracion': nota_apu, 'social': nota_soc}
     # Lo que antes era un párrafo largo arriba del mapa y una nota debajo
     # (decisión del autor, 03-11-2026: «mucho contenido de narración»): cada
@@ -931,47 +934,78 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
     svg = tm.mapa_svg(RAIZ).replace('tt-svg', 'pl-svg').replace('tt-edo', 'pl-edo').replace(
         'aria-label="Mapa de las 32 entidades"', 'aria-label="Planisferio: las 32 entidades de México"')
     indice = ''.join('<li><a href="%s">%s</a></li>' % (f['p'], f['n']) for f in sorted(filas, key=lambda x: clave(x['n'])))
-    bloque_mapa = '''<div class="pl-dims" role="tablist" aria-label="Dimensiones del Planisferio">%s</div>
-          <p class="pl-dim-aviso" id="plDimAviso" hidden></p>
-          <div class="pl-lentes" role="radiogroup" aria-label="Qué ver en el mapa">%s</div>
-          <p class="pl-que" id="plQue"></p>
-          <div class="pl-cajones">%s</div>%s
-          <div class="pl-rej">
-            <figure class="pl-fig">
-              %s
-              <figcaption class="pl-leyenda" id="plLeyenda"></figcaption>
-            </figure>
-            <aside class="pl-ficha" id="plFicha" aria-live="polite">
-              <p class="pl-ficha-vacia"><b>Toca una entidad.</b> Verás sus cifras de la dimensión que elegiste y la puerta a su portal, con sus municipios.</p>
-            </aside>
-          </div>
-          <p class="pl-pie" id="plFuente"></p>
-          <p class="pl-pie" id="plFalta"></p>
-          <div class="pl-indice-b"><button type="button" class="pl-caj-b pl-indice-btn" data-cajon="plTplIndice" data-cajon-tit="plTplIndiceTit" data-cajon-hash="entidades" aria-haspopup="dialog">📍 Las 32 entidades: entra a su portal</button></div>
+    # Rediseño del 04-11-2026 (pedido del autor: «nuestro protagonista debe ser
+    # nuestro mapa interactivo»): cómo se juega en tres pasos, el mosaico de
+    # dimensiones, el mapa en su tablero (con lo de leerla bien debajo) y lo
+    # de la dimensión financiera en pestañas. No se quitó nada: se reordenó.
+    d0 = DIMENSIONES[0]
+    pasos = ('<ol class="pl-pasos" aria-label="Cómo se usa el Planisferio">'
+             '<li><b aria-hidden="true">1</b><span><strong>Elige una dimensión</strong><small>%d maneras de mirar el país</small></span></li>'
+             '<li><b aria-hidden="true">2</b><span><strong>Toca una entidad</strong><small>su ficha aparece junto al mapa</small></span></li>'
+             '<li><b aria-hidden="true">3</b><span><strong>Entra a su portal</strong><small>el mapa de sus municipios, uno por uno</small></span></li></ol>') % len(DIMENSIONES)
+    hojas = [('cont', '⏱️', 'Los contadores', '<div class="pl-conts">%s</div><div class="pl-cuentas">%s</div>' % (contadores, cuenta_btn))]
+    for mod in modulos:
+        hojas.append(('cuanto' if 'numeros-cuanto-dinero-es.html' in mod else 'origenes',
+                      '💰' if 'numeros-cuanto-dinero-es.html' in mod else '🧾',
+                      'Cuánto dinero es' if 'numeros-cuanto-dinero-es.html' in mod else 'Los 16 orígenes del ingreso', mod))
+    cuaderno = ('<div class="pl-cuaderno" role="tablist" aria-label="Lo de la dimensión financiera">%s</div>%s') % (
+        ''.join('<button type="button" class="pl-hoja-b" role="tab" id="plHojaB-%s" aria-controls="plHoja-%s" aria-selected="%s">'
+                '<span aria-hidden="true">%s</span> %s</button>' % (h, h, 'true' if k == 0 else 'false', ico, nom)
+                for k, (h, ico, nom, _c) in enumerate(hojas)),
+        ''.join('<div class="pl-hoja" role="tabpanel" id="plHoja-%s" aria-labelledby="plHojaB-%s">%s</div>' % (h, h, c)
+                for h, _i, _n, c in hojas))
+    bloque_mapa = '''%s
+          <div class="pl-dims" role="tablist" aria-label="Las dimensiones del Planisferio">%s</div>
+          <section class="pl-tablero" id="plTablero" data-dim="%s" aria-labelledby="plDimTit">
+            <header class="pl-tab-cab">
+              <h3 class="pl-tab-tit" id="plDimTit">Dimensión %s</h3>
+              <p class="pl-tab-q" id="plDimQ">%s</p>
+            </header>
+            <p class="pl-dim-aviso" id="plDimAviso" hidden></p>
+            <div class="pl-lentes" role="radiogroup" aria-label="Qué ver en el mapa">%s</div>
+            <p class="pl-que" id="plQue"></p>
+            <div class="pl-rej">
+              <figure class="pl-fig">
+                %s
+                <figcaption class="pl-leyenda" id="plLeyenda"></figcaption>
+              </figure>
+              <aside class="pl-ficha" id="plFicha" aria-live="polite">
+                <p class="pl-ficha-vacia"><b>Toca una entidad.</b> Verás sus cifras de la dimensión que elegiste y la puerta a su portal, con sus municipios.</p>
+              </aside>
+            </div>
+            <p class="pl-pie" id="plFuente"></p>
+            <p class="pl-pie" id="plFalta"></p>
+            <footer class="pl-tab-pie">
+              <p class="pl-tab-pie-t">Para leerla bien</p>
+              <div class="pl-cajones">%s</div>
+              <div class="pl-indice-b"><button type="button" class="pl-caj-b pl-indice-btn" data-cajon="plTplIndice" data-cajon-tit="plTplIndiceTit" data-cajon-hash="entidades" aria-haspopup="dialog">📍 Las 32 entidades: entra a su portal</button></div>
+            </footer>
+          </section>%s
           <template id="plTplIndice">%s</template>
           <div class="pl-solo-dim pl-fin" data-dim="financiera">
             <h3 class="pl-fin-tit">Cuánto dinero es, de dónde sale y lo que baja al territorio</h3>
             <p class="pl-fin-sub">Los tres presupuestos de la Federación en 2026, lo que transfiere a estados y municipios y lo que ingresaron los municipios. El ritmo por segundo es la cifra anual entre 31,536,000 segundos: sirve para dimensionarla, no es dinero que se mueva en tiempo real.</p>
-            <div class="pl-conts">%s</div>
-            <div class="pl-cuentas">%s</div>
             %s
           </div>
           <script type="application/json" id="plDatos">%s</script>
           <noscript><p>El mapa se colorea con JavaScript; sin él, cada entidad se abre desde la lista de arriba.</p></noscript>''' % (
-        ''.join(dims), lentes, ''.join(cajones), ''.join(plantillas), svg,
+        pasos, ''.join(dims), d0[0], d0[2].lower(), d0[3], lentes, svg, ''.join(cajones), ''.join(plantillas),
         _cajon('📍', 'Las 32 entidades', 'Elige una entidad para entrar a su portal', 'plTplIndiceTit',
                '<nav class="pl-indice" aria-label="Las 32 entidades, una por una"><ul>%s</ul></nav>' % indice),
-        contadores, cuenta_btn, ''.join(modulos), _json(datos))
+        cuaderno, _json(datos))
     return {
         'archivo': ARCHIVO, 'menu': 'Planisferio', 'menu_archivo': ARCHIVO,
         'icono': '🗺️', 'titulo': 'Planisferio', 'lema': 'México en un mapa: cada entidad, cada municipio, cada peso',
         'entrada': ('El dinero público tiene domicilio. Elige una dimensión y toca una entidad para entrar a su portal, con sus municipios. '
                     'Todo sale de la Enciclopedia, con su fuente oficial y su etiqueta.'),
+        # La imagen del encabezado (pedido del autor, 04-11-2026): el paisaje al
+        # frente y la persona que lo mira, en sombra. planisferio.css la pone.
+        'fondo': 'assets/auditor/img/planisferio-paisaje.webp', 'rubro': 'planisferio',
         'estilos': ['numeros.css', 'radar.css', 'planisferio.css'],
         'scripts': ['planisferio.js'],
         'secciones': [
-            {'id': 'mapa', 'titulo': 'Elige una dimensión',
-             'texto': 'Hoy se pintan %d. Cada una trae su «Cómo leerla» y lo que su mapa no dice.' % len(pintadas),
+            {'id': 'mapa', 'titulo': 'Juega con el mapa',
+             'texto': 'Hoy se pintan %d dimensiones. Cada una trae su «Cómo leerla» y lo que su mapa no dice.' % len(pintadas),
              'tarjetas': [], 'bloque': bloque_mapa},
         ] + ([] if not otras else [
             {'id': 'dimensiones', 'titulo': 'Las dimensiones que vienen',
