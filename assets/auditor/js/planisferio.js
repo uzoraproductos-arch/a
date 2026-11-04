@@ -383,8 +383,13 @@
     });
     /* Una dimensión que ya se pinta cambia el mapa con su primera lente (o
        la última que se eligió en ella). */
+    var tablero = document.getElementById('plTablero'), dTit = document.getElementById('plDimTit'), dQ = document.getElementById('plDimQ');
     function ponDim(id) {
       dimP = id;
+      /* El tablero toma el color y el nombre de la dimensión (rediseño del 04-11-2026). */
+      if (tablero) tablero.setAttribute('data-dim', id);
+      if (dTit) dTit.textContent = 'Dimensión ' + D.dims[id].n.toLowerCase();
+      if (dQ) dQ.textContent = D.dims[id].q || '';
       ponLente(ultima[id] || D.lentes.filter(function (l) { return l.dim === id; })[0].id);
       if (!sel) ficha.innerHTML = '<p class="pl-ficha-vacia"><b>Toca una entidad.</b> Verás sus cifras de la dimensión que elegiste y la puerta a su portal, con sus municipios.</p>';
     }
@@ -554,4 +559,29 @@
     busca.addEventListener('input', aplica);
     orden.addEventListener('change', aplica);
   })();
+})();
+
+/* Lo de la dimensión financiera en pestañas (rediseño del 04-11-2026): una
+   hoja a la vez. Sin JavaScript se ven las tres, una tras otra. */
+(function () {
+  var bs = document.querySelectorAll('.pl-hoja-b');
+  if (!bs.length) return;
+  function pon(b) {
+    Array.prototype.forEach.call(bs, function (x) {
+      var on = x === b, h = document.getElementById(x.getAttribute('aria-controls'));
+      x.setAttribute('aria-selected', on ? 'true' : 'false');
+      x.tabIndex = on ? 0 : -1;
+      if (h) h.hidden = !on;
+    });
+  }
+  Array.prototype.forEach.call(bs, function (b, k) {
+    b.addEventListener('click', function () { pon(b); });
+    b.addEventListener('keydown', function (ev) {
+      var d = ev.key === 'ArrowRight' ? 1 : ev.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      var n = bs[(k + d + bs.length) % bs.length];
+      pon(n); n.focus(); ev.preventDefault();
+    });
+  });
+  pon(document.querySelector('.pl-hoja-b[aria-selected="true"]') || bs[0]);
 })();
