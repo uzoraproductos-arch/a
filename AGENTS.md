@@ -44,7 +44,10 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
   «🌎 La mirada ambiental»: los proyectos con alerta ambiental del tema o del estado
   y quién los paga. **Ninguna capa agrega cifras**. Cada modo ofrece pasarse al que le
   toca, con `MODO_PAL` de `asistente.js`, y el banco de pruebas lee la capa de
-  cualquier modo con `capaModo()`); (c) el dictamen de cada modo.
+  cualquier modo con `capaModo()`); (c) el dictamen de cada modo, hecho (04-11-2026): el
+  enlace lleva `&modo=` y el dictamen suma la capa del modo como capítulo, «La lectura del
+  modo X», sin botones; la página vuelve a contestar con la base y **el modo no entra a la
+  huella**.
 - **Las cuatro herramientas se mudaron a la Enciclopedia** (29-10-2026): su
   índice es la quinta tarjeta de Números, «Herramientas del Auditor»
   (`numeros-herramientas-del-auditor.html`, `HERR_INDICE` y `HERR_SITIO` de
@@ -812,7 +815,7 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   información (el campo `ir` de la respuesta: una respuesta nueva sin `ir`
   no está terminada), y **«Generar dictamen»**, que abre en otra pestaña el
   «Dictamen cívico independiente» sellado (`herramienta-inspector-dictamen.html`). El
-  enlace del dictamen solo lleva la pregunta (`?q=`, y las previas en `&c=`):
+  enlace del dictamen solo lleva la pregunta (`?q=`, las previas en `&c=` y el modo en `&modo=`):
   la página vuelve a contestarla con la misma base, así que no se puede
   fabricar un dictamen con cifras ajenas. El dictamen dice que no es un
   documento oficial ni un peritaje con validez ante autoridad.

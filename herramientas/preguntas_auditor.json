@@ -550,7 +550,10 @@
   },
   {
    "q": "¿Qué es el dictamen cívico independiente?",
-   "ir": "herramienta-inspector-dictamen.html"
+   "ir": "herramienta-inspector-dictamen.html",
+   "dice": [
+    "la forma de tu modo"
+   ]
   },
   {
    "q": "¿Qué es la LGRA?",
