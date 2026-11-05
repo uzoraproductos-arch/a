@@ -164,6 +164,8 @@ la 69-B que dejó el lector) y **4. la ruta completa del impuesto**. Por
 cotejar del vigía: los 8 avisos de su primera corrida (en la bandeja). Qué pidió, qué ya existe y cómo encaja
 cada pieza: [docs/ENCARGO-VIGIA-Y-CFDI.md](docs/ENCARGO-VIGIA-Y-CFDI.md).
 
+**Plan de implementación (05-11-2026):** del pilar de transparencia al primer peso, por etapas, con el Vigía de proveedores (cartera de RFC contra la 69-B) como primer producto: [docs/PLAN-IMPLEMENTACION.md](docs/PLAN-IMPLEMENTACION.md).
+
 ## La lista de pendientes (guardada a pedido del autor, 03-11-2026)
 
 Lo que falta, quién lo debe y qué destraba cada uno. El detalle de cada ficha
