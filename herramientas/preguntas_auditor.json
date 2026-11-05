@@ -2197,6 +2197,34 @@
   {
    "q": "Lector de facturas CFDI",
    "ir": "herramienta-inspector-factura.html"
+  },
+  {
+   "q": "¿Cuál es el delito más frecuente en México?",
+   "ir": "aprende-fraude-en-numeros.html#fr-personas",
+   "dice": [
+    "fraude"
+   ]
+  },
+  {
+   "q": "¿Cuánto pierde una víctima de fraude?",
+   "ir": "aprende-fraude-en-numeros.html#fr-personas",
+   "dice": [
+    "7,551"
+   ]
+  },
+  {
+   "q": "¿Cuántas empresas son víctimas de un delito?",
+   "ir": "aprende-fraude-en-numeros.html#fr-empresas",
+   "dice": [
+    "27.2"
+   ]
+  },
+  {
+   "q": "¿Cuántas empresas fantasma hay en definitivo?",
+   "ir": "aprende-fraude-en-numeros.html#fr-facturas",
+   "dice": [
+    "11,270"
+   ]
   }
  ]
 }

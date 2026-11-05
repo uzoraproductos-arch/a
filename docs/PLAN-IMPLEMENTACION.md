@@ -155,6 +155,66 @@ quiere el cliente sin programar de más.
 
 ---
 
+## 4 bis. Hacia dónde va: «Mi Auditavisión», un tablero que no se queda con tus datos
+
+Pedido del autor, 05-11-2026: «hacer algo como WiseCricket y comernos a Legal
+Hunt… que el usuario pueda subir un estado de resultados o facturas y
+nosotros evaluarlas, sin retener información privada». Tiene dos ejemplos:
+la plataforma Fortuvision, del propio autor, y
+[getquin](https://www.getquin.com/), un rastreador gratuito de inversiones
+con comunidad, un plan de pago y servidores en la Unión Europea.
+
+**La idea:** un tablero de la salud fiscal de tu negocio. Funciona como
+getquin con un portafolio, pero el portafolio son tus facturas, tus
+proveedores y tu estado de resultados.
+
+```
+        LO QUE SUBES                    DÓNDE SE LEE              LO QUE VES
+┌──────────────────────────┐    ┌────────────────────┐    ┌──────────────────────────────┐
+│ Tus facturas (XML)        │──▶│                    │──▶│ Señales para revisar por      │
+│ Tu estado de resultados   │──▶│  EN TU NAVEGADOR   │──▶│ factura, por proveedor y por  │
+│ (Excel o CSV)             │    │  (no se sube nada) │    │ razón financiera              │
+│ Tu lista de proveedores   │──▶│                    │──▶│ Su cruce con la 69-B, los     │
+└──────────────────────────┘    └────────────────────┘    │ contratos públicos y la ASF   │
+                                         │                └──────────────────────────────┘
+                     solo si TÚ quieres  ▼
+                ┌──────────────────────────────────────┐
+                │ Guardar tu cartera de RFC para que el │  ← lo único que se guarda,
+                │ Vigía te avise cada semana            │    cifrado y con tu permiso
+                └──────────────────────────────────────┘
+```
+
+**Las reglas, para que la promesa «no retenemos tu información» sea cierta y
+se pueda comprobar:**
+
+1. **Lo que se lee en el navegador no sale de él.** Ya funciona así el Lector
+   de facturas (`insp-factura.js`). El estado de resultados seguiría el mismo
+   molde: un lector en JavaScript, con su gemelo en Python para las pruebas.
+2. **Lo único que se guarda es lo que el usuario decide guardar** (su cartera
+   de RFC para las alertas), con cuenta, cifrado y aviso de privacidad propio
+   (LFPDPPP). Nunca el XML, nunca el estado de resultados.
+3. **No se pide la CIEC ni la e.firma.** Esa es la diferencia con WiseCricket,
+   y también es una promesa de privacidad.
+4. **Sin certificación todavía, se dice así:** «no tenemos certificación ISO
+   27001; por eso tu información no se sube». Es más honesto que prometer
+   seguridad que no está auditada.
+5. **Señales, no dictámenes:** las razones financieras y las comparaciones son
+   `derivado` y se dicen «señal para revisar». La ley que aplica va citada,
+   como en el lector de facturas.
+
+**Por entregas (después de la etapa 1, porque necesita cuentas):**
+
+| Entrega | Qué | Depende de |
+|---|---|---|
+| A | **Lector de estado de resultados** en el navegador: razones básicas (margen, gasto sobre ingreso), con su fórmula a la vista y el aviso de que no es un dictamen | Nada: se puede hacer ya |
+| B | **Facturas por lote** en el navegador: cientos de XML, un resumen por proveedor y su cruce con la 69-B | Nada: crece del lector actual |
+| C | **Mi Auditavisión**: el tablero que junta A y B en una sola vista, guardado **solo en ese navegador** (IndexedDB) | A y B |
+| D | **La cartera en la nube** para las alertas del Vigía, con cuenta y pago | Etapa 2: hospedaje, cuentas, aviso propio |
+| E | **Comunidad**: preguntas entre usuarios en el Ágora, sin datos de nadie | Moderación (decisión del autor) |
+
+**Pendiente del autor:** contar qué hacía Fortuvision y qué funcionó, para no
+repetir lo que no sirvió.
+
 ## 5. La ruta del autor, en paralelo
 
 Las credenciales ayudan a vender, pero **la plataforma no depende de ellas**:

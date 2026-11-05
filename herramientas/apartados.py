@@ -697,6 +697,13 @@ APARTADOS = [
                 'pestana': ('🧭', 'Cómo se audita', 'Control interno, riesgos, fraude, prueba y lavado, con su fuente oficial'),
             },
             {
+                # Pedido del autor, 05-11-2026: «los números que hay de los
+                # fraudes… sería auditor». La pagina la escribe fraude.py.
+                'id': 'fraude-en-numeros',
+                'pagina': 'aprende-fraude-en-numeros.html',
+                'pestana': ('🚨', 'El fraude en números', 'El delito más frecuente, la cifra oculta y la lista 69-B, con su fuente oficial'),
+            },
+            {
                 # Pedido del autor, 03-11-2026: el capítulo 6 de su libro
                 # «Introducción al Derecho Económico» como metodología. La
                 # pagina la escribe recursos_naturales.py.
@@ -5952,11 +5959,12 @@ def generar(sello=None):
     import datos_ambiente
     import periodistas, acceso
     import metodologia_auditoria
+    import fraude
     import recursos_naturales
     import planisferio
     import leyes_niveles
     import presupuesto_modulos
-    for extra in planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), fraude.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():
