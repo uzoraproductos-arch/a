@@ -169,61 +169,107 @@ la plataforma. Es un buen candidato para un módulo con huella, como los demás.
 
 ## 3. La competencia: WiseCricket y Legal Hunt
 
-**Ojo:** desde este entorno no pudimos abrir sus sitios (la red de la sesión
-no los alcanza). Lo que sigue sale de **directorios y redes, sin verificar**.
-Antes de compararnos en público, hay que leer sus páginas oficiales.
+Leído el 05-11-2026 **en sus propios portales**, después de que el autor abrió
+la red de la sesión. Es lo que cada empresa dice de sí misma: es su
+publicidad, no un cotejo de que funcione así.
 
-### 3.1 WiseCricket (wisecricket.ai)
+### 3.1 WiseCricket (wisecricket.ai) · WISE CRICKET, S.A.P.I. de C.V.
 
-- **Qué dicen que hacen:** software de auditoría fiscal y contable con IA
-  para empresas. Según un perfil de inversionista, es un servicio en línea
-  para empresas (B2B SaaS) que audita en tiempo real contratos, facturas
-  (CFDI), pólizas contables y movimientos bancarios. Combina «un motor de
-  reglas determinístico con LLMs desarrollados in-house»
-  ([adn.vc](https://adn.vc/portafolio/wisecricket-software-auditoria-fiscal-y-contable/)).
-- **A quién le vende:** empezó con bienes raíces (FIBRAs y parques
-  industriales) y crece hacia manufactura y servicios financieros.
-- **Tamaño y dinero:** fundada en 2024 en la Ciudad de México, con un equipo
-  pequeño. Los directorios no coinciden en quiénes la financian
-  ([Crunchbase](https://www.crunchbase.com/organization/wisecricket),
-  [PitchBook](https://pitchbook.com/profiles/company/725069-80),
-  [Dealroom](https://app.dealroom.co/companies/wisecricket)).
-- **Precios:** no encontramos que los publique.
-- **Lectura:** le vende al área de finanzas de una empresa mediana o grande,
-  conectada a su contabilidad y a sus bancos. Es un producto de control
-  interno.
+**Cómo se presenta:** «Plataforma de inteligencia fiscal con IA para
+empresas». Promete conectar «cada transacción con su materialidad» y cruza
+«el SAT, tu ERP, tus bancos y tus contratos».
 
-### 3.2 Legal Hunt (legalhunt.com.mx, Guadalajara y Zapopan)
+| Módulo (como lo nombran) | Qué dicen que hace |
+|---|---|
+| Descarga y auditoría de CFDI | «Descarga todos tus CFDI, sin límite». Revisa cada factura «contra la ley» y dice «el artículo, el monto y cómo corregirlo». Presume detectar «riesgos que otros validadores (solo Anexo 20) dejan pasar». |
+| Complementos de pago | Detecta facturas pagadas sin complemento y se lo pide al proveedor por correo, en lote. |
+| Conciliación | Liga «cada movimiento bancario con su póliza y su factura, con reglas e IA». |
+| IVA e ISR | Determinación mensual del IVA, pagos provisionales de ISR y papeles de trabajo; compara el IVA precargado por el SAT contra la contabilidad. |
+| Auditoría contrato a cobro/pago | Convierte contratos escaneados en un calendario de obligaciones y los liga a facturas y pagos. |
+| Wiki de contratos | Base de datos de contratos, con preguntas en lenguaje natural y detección de cláusulas que se contraponen. |
+| Buzón tributario | Revisa a diario el buzón de cada RFC (hasta 80 buzones) y ordena las notificaciones por plazo (cita CFF arts. 134 y 135). |
+| Expediente de materialidad | Reúne el soporte de las operaciones para una carta invitación o una auditoría del SAT. |
 
-- **Qué dicen que hacen:** una plataforma de tecnología legal para que una
-  empresa administre sus libros corporativos, contratos, firmas electrónicas
-  con NOM-151 y cumplimiento regulatorio.
-- **SIGER 2.0:** dicen ser «la única plataforma en México» que se integra en
-  tiempo real con el SIGER 2.0. Es una afirmación suya, **sin verificar**.
-- **IA:** no encontramos que ofrezca funciones de IA.
-- **A quién le vende:** a PYMES
-  ([sitio](https://www.legalhunt.com.mx/),
-  [Instagram](https://www.instagram.com/legalhuntmx/)).
-- **Lectura:** le sirve a la empresa para tener en orden su vida corporativa,
-  no para revisar a sus proveedores. Puede ser **aliada antes que
-  competidora**: la empresa que lleva sus libros con ellos también necesita
-  saber si sus proveedores están en la 69-B.
+**Cómo se conecta:** al SAT con **RFC y CIEC**, y a la contabilidad por el ERP
+(nombran SAP, Oracle, CONTPAQi, Microsoft Dynamics, Intelisis, Odoo y Aspel).
+Los estados de cuenta se suben.
 
-### 3.3 Dónde queda Auditavisión (el hueco)
+**Lo demás que dicen:**
+- **A quién le vende:** a direcciones de finanzas con varios RFC y miles de
+  facturas al mes, y a despachos que llevan decenas o cientos de empresas.
+  Su portal muestra ocho clientes: fondos, FIBRAs, desarrolladores
+  industriales y servicios financieros.
+- **Seguridad:** dicen tener certificación ISO/IEC 27001:2022 y que la
+  información del cliente «nunca se utiliza para entrenar modelos de IA».
+- **Precio:** no lo publican. «Depende del volumen de información», con
+  usuarios ilimitados y prueba de 7 días.
+
+**Lo que no encontramos en su portal:** ninguna mención a la lista 69-B, a
+las EFOS, a los contratos públicos ni a la ASF. **WiseCricket mira la
+información del propio cliente, no a sus proveedores frente a los documentos
+públicos.**
+
+### 3.2 Legal Hunt (legalhunt.com.mx) · Legal Hunt Mex, S.A.P.I. de C.V.
+
+**Cómo se presenta:** «Gobierno corporativo sin papel». Ofrece tres cosas:
+
+- **Libros corporativos:** registro de accionistas, actas de asamblea,
+  sesiones de consejo y variaciones de capital, en Word, PDF y Excel.
+- **Firma electrónica con constancia NOM-151:** emitida por un prestador de
+  servicios de certificación, con validación biométrica.
+- **Conexión con el SIGER 2.0:** dice ser «la única plataforma en México que
+  integra en tiempo real» con él. Promete alertas «ante cualquier movimiento
+  registral: inscripciones, variaciones de capital, cambios de
+  representación», por correo y WhatsApp, y descarga de boletas. Es su
+  afirmación: no consta cómo se conecta.
+
+**Precios publicados (MXN al mes):**
+
+| Plan | Precio | Qué incluye |
+|---|---|---|
+| Kick-Off | $399 | 20 firmas, **10 búsquedas en listas negras** y 2 empresas con libros |
+| Sprint | $699 | 40 firmas, **15 búsquedas en listas negras** y 4 empresas |
+| Velocity | $2,099 | 60 firmas, **20 búsquedas en listas negras** y empresas ilimitadas |
+| Planes «Solo Firmas» | $1,299 a $9,999 más IVA | De 100 a 1,100 firmas |
+
+- **IA:** no la ofrece.
+- **Sus clientes:** empresas de entretenimiento, fintech, servicios
+  financieros, agroindustria, hotelería, SOFOM y notarías. Tiene domicilio en
+  Jalisco (WhatsApp con lada 33).
+
+### 3.3 Dónde queda Auditavisión (el hueco, ya con sus portales)
 
 | | WiseCricket | Legal Hunt | Auditavisión |
 |---|---|---|---|
-| Mira hacia | Dentro de la empresa (su contabilidad y sus bancos) | Dentro de la empresa (sus libros corporativos) | **Hacia afuera**: el proveedor, el contrato público, la ASF, el DOF |
-| Datos | Los del cliente | Los del cliente y el SIGER | **Públicos**, con huella y chip |
-| Cliente natural | Empresa mediana o grande | PYME | **Despachos contables y legales, PYMES, periodistas y OSC** |
-| Lo que no puede copiar fácil | — | — | **La independencia y la base pública cotejada** (12 pilares, réplica, fe de erratas) |
+| Mira hacia | Dentro: tus CFDI, tu ERP, tus bancos, tus contratos | Dentro: tus libros y tus firmas | **Afuera: tu proveedor y el dinero público**, con documentos oficiales |
+| La lista 69-B | No la menciona | «Búsquedas en listas negras» contadas por plan (10 a 20 al mes) | **Toda la lista, gratis y con huella**; el Vigía 69-B avisa cada semana |
+| Cambios de una empresa | — | Alertas del SIGER (su folio mercantil) | Cambios de razón social por RFC en la 69-B; contratos en ComprasMX |
+| Tus facturas | Las descarga del SAT con tu CIEC | — | **Se leen en tu navegador, no se suben** |
+| Precio | A cotizar, para corporativos | $399 a $2,099 al mes | Lo público, gratis; lo que se cobra es el trabajo, la memoria y el aviso |
 
-La recomendación es no competir en «IA que audita tu contabilidad», porque
-esa carrera la lleva quien tiene capital. Conviene competir en **«antes de
-pagarle a alguien, revisa lo que dicen de él los documentos públicos»**, con
-precio de despacho y no de corporativo.
+**Qué sacamos de esto:**
 
----
+1. **El hueco existe y es nuestro.** Ninguno de los dos cruza al proveedor
+   contra la 69-B, los contratos públicos, la ASF y el DOF. El **Vigía de
+   proveedores** (producto 1 del plan) no tiene competidor directo en estos
+   dos.
+2. **Legal Hunt da la referencia de precio.** Una PYME en Jalisco paga hoy de
+   $399 a $2,099 al mes por libros, firmas y un puñado de «búsquedas en listas
+   negras». Un vigía que revisa **toda la cartera cada semana** cabe en ese
+   rango y da más, porque no cuenta búsquedas.
+3. **A WiseCricket no se le compite en su terreno** (ERP, CIEC, conciliación y
+   pagos provisionales): exige certificación de seguridad, integraciones y
+   capital. Sí se le compite en su promesa de «materialidad». La parte
+   externa de la materialidad, que el proveedor existe, no está en la 69-B y
+   no tiene historial de contratos raros, es justo lo que sale de los
+   documentos públicos.
+4. **La auditoría interna privada** (revisar las facturas del propio cliente)
+   la haríamos a nuestro modo: **por lote y en el navegador, sin pedir la
+   CIEC**. Es otra promesa de privacidad, más modesta, y para despachos chicos
+   pesa.
+5. **Legal Hunt puede ser aliada.** Ellos llevan los libros de la empresa;
+   nosotros revisamos a sus proveedores. Pueden recomendarse uno al otro sin
+   pisarse.
 
 ## 4. Por qué dejar GitHub Pages, y a dónde
 
@@ -287,7 +333,7 @@ antes. Mudarse lleva un día: el sitio no se compila y es HTML estático.
 3. El total nacional de la CONDUSEF de 2025 (posible fraude, monto, cuánto se
    recuperó).
 4. El total nacional de carpetas por fraude del SESNSP de 2025.
-5. Leer los sitios oficiales de WiseCricket y Legal Hunt (desde aquí no
-   abrieron).
+5. Cotejar en la práctica lo que dicen WiseCricket y Legal Hunt (lo de §3 es
+   su publicidad); revisar sus avisos de privacidad y términos.
 6. Cotejar los términos de Cloudflare Pages (uso comercial en el plan
    gratuito) y los del PSM (consultas automáticas).
