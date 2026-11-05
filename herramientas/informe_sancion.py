@@ -277,12 +277,18 @@ def temas():
     return t
 
 
-def bot():
+def bot(extra=None):
     """Lo que lee asistente-charla.js (D.san): los temas y cómo se dice cada
-    tipo de irregularidad en la calle."""
+    tipo de irregularidad en la calle. `extra` suma temas de otros módulos
+    con el mismo molde (el mapa del dinero, 02-11-2026)."""
     import informe_semestral
     t = temas()
     t.update(informe_semestral.temas())
+    import metodologia_auditoria
+    t.update(metodologia_auditoria.temas())
+    import recursos_naturales
+    t.update(recursos_naturales.temas())
+    t.update(extra or {})
     return {'t': t, 'fam': {k: v[1] for k, v in FAMILIAS.items()}, 'pag': [ARCHIVO, TITULO]}
 
 

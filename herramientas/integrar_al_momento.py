@@ -711,15 +711,15 @@ def jalisco_gasto_federal():
 ASF_PORTAL = 'https://informe.asf.gob.mx/'
 AL_MOMENTO_PAG = 'noticias-al-momento-%s.html'
 ASF_MDB25A = 'https://www.asf.gob.mx/Trans/Informes/IR2025a/Documentos/Matriz/IR2025_Entrega_a.pdf'
+ASF_MDB25B = 'https://informe.asf.gob.mx/Documentos/Matriz/IR2025_Entrega_a.pdf'
 LFRCF = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LFRCF.pdf'
 PAJARO = 'https://www.instagram.com/pajaropolitico/'
-FALTA_ASF = ('Falta de la plataforma: la ASF entregó a la Cámara de Diputados su segunda entrega de la Cuenta Pública 2025 (la ley '
-             'la fija el último día hábil de octubre: el 30-10-2026), pero su portal no abre desde nuestro servidor y aún no integramos '
-             'su Matriz de Datos Básicos.')
+FALTA_ASF = ('Falta de la plataforma: la Matriz de Datos Básicos de la segunda entrega de la Cuenta Pública 2025 ya está integrada, '
+             'pero el informe individual específico y el texto de las denuncias ante la Fiscalía aún no se integran.')
 
 
 def _cp2025a():
-    """La primera entrega 2025 se lee de la base, no se copia a mano."""
+    """La primera y segunda entregas 2025 se leen de la base, no se copian a mano."""
     import integrar_cuenta_publica as icp
     a = icp.CP2025A
     if a['entrega'] != 'primera' or a['auditorias'] != 33:
@@ -732,6 +732,14 @@ def _cp2025a():
     return a
 
 
+def _cp2025b():
+    import integrar_cuenta_publica as icp
+    b = icp.CP2025B
+    if b['entrega'] != 'segunda' or b['auditorias'] != 374:
+        raise SystemExit('integrar_al_momento: la segunda entrega 2025 cambió; revisa la nota de la ASF')
+    return b
+
+
 def _municipios():
     t = (RAIZ / 'assets' / 'auditor' / 'js' / 'municipios-efipem.js').read_text(encoding='utf-8')
     if 'Los 2,479 municipios' not in t:
@@ -742,20 +750,23 @@ def _municipios():
 def asf_segunda_entrega_2025():
     from apartados import glosario_ancla
     a = _cp2025a()
+    b = _cp2025b()
     mun = _municipios()
-    pct = round(100 * 42 / mun, 1)
+    pct = round(100 * b['municipiosAuditados'] / mun, 1)
     acl, rec = a['porAclarar'] / 1e6, a['recuperaciones'] / 1e6
+    acl2, rec2 = b['porAclarar'] / 1e6, b['recuperaciones'] / 1e6
+    mun_acl = b['municipiosPorAclarar'] / 1e6
     g = lambda t: {'t': t.split(' (')[0], 'url': 'glosario.html#' + glosario_ancla(t)}
     return {
         'id': 'asf-segunda-entrega-cp2025',
         'seccion': 'Al momento',
         'icono': '🔎',
         'fecha': '30-10-2026',
-        'titulo': 'La ASF y los 9 mil millones «por aclarar» de 2025: lo que se sabe, lo que falta y lo que nadie te explica',
-        'balazo': ('La Auditoría Superior entregó su segunda tanda de informes de la Cuenta Pública 2025 y los medios coinciden en «más de 9 mil millones» '
-                   'pendientes de aclarar, más de la mitad en 42 municipios. Antes de compartirlo: «por aclarar» no es un robo probado, 42 municipios '
-                   'son menos del 2 % de los del país y las 40 denuncias no salieron todas de este informe. Las cifras exactas siguen pendientes hasta '
-                   'que integremos el documento de la ASF.'),
+        'titulo': 'La ASF y los 9 mil millones «por aclarar» de 2025: lo que dice la Matriz oficial, lo que falta y lo que nadie te explica',
+        'balazo': ('La Matriz de Datos Básicos de la segunda entrega de la Cuenta Pública 2025 confirma $%s millones por aclarar en %d auditorías, '
+                   'y $%s millones (el 58.2 %%) corresponden a %d municipios. Antes de compartirlo: «por aclarar» no es un robo probado, %d municipios '
+                   'son el %s %% de los del país y las 40 denuncias no salieron todas de este informe.'
+                   % (format(round(acl2, 1), ',.1f'), b['auditorias'], format(round(mun_acl, 1), ',.1f'), b['municipiosAuditados'], b['municipiosAuditados'], pct)),
         'nota': {'medio': 'Animal Político (@pajaropolitico, Instagram)',
                  'titulo': 'La ASF reportó más de 9 mil mdp pendientes de aclarar: 5 mil 200 mdp corresponden a 42 municipios',
                  'fecha': '31-10-2026', 'url': PAJARO},
@@ -766,10 +777,12 @@ def asf_segunda_entrega_2025():
             ('Qué pasó. El 30 de octubre, último día hábil del mes, la Auditoría Superior de la Federación (ASF) entregó a la Cámara de Diputados '
              'la segunda tanda de informes individuales de su revisión de la Cuenta Pública 2025. No es una fecha que eligió: la Ley de '
              'Fiscalización la fija así (art. 35), y la tercera tanda, con el Informe General, llega el 20 de febrero de 2027.'),
-            ('Lo que reportan los medios. Todos coinciden en «más de 9 mil millones de pesos» por aclarar en los tres órdenes de gobierno y en '
-             'que el bloque más grande está en 42 municipios, «más de 5 mil 200 millones». En el detalle no coinciden: una nota habla de 9,008 '
-             'millones; otra, de 9,600 al sumar la primera entrega de junio. Por eso aquí todavía no damos una cifra exacta: la daremos con la '
-             'Matriz de Datos Básicos de la ASF, que es el documento que manda.'),
+            ('Lo que dice el documento oficial. En su Matriz de Datos Básicos (corte octubre de 2026, p. 11), la ASF practicó %d auditorías '
+             'sobre una muestra de $1.04 billones (96.75 %% del universo seleccionado), promovió %d acciones (%d pliegos de observaciones y '
+             '%d promociones de responsabilidad administrativa), operó recuperaciones por $%s millones y dejó $%s millones por aclarar ($1,655.8 millones '
+             'en 36 auditorías del ámbito federal y $7,352.8 millones en 338 de gasto federalizado). En los 42 municipios auditados (pp. 12 y 25–27), '
+             'el monto por aclarar es de $%s millones en 128 pliegos de observaciones: el 99.6 %% de la muestra revisada en esos municipios.'
+             % (b['auditorias'], b['acciones'], b['PO'], b['PRAS'], format(round(rec2, 1), ',.1f'), format(round(acl2, 1), ',.1f'), format(round(mun_acl, 1), ',.1f'))),
             ('Lo que casi nadie explica. «Por aclarar» quiere decir que, al cierre de la auditoría, el gobierno no presentó los papeles que '
              'prueban en qué se gastó ese dinero. No es un daño comprobado: la ley le da 30 días hábiles para responder después de recibir su '
              'informe, y a la ASF 120 días hábiles para decidir si lo aclarado basta (arts. 39 y 41). Lo que no se aclare puede volverse un '
@@ -780,10 +793,10 @@ def asf_segunda_entrega_2025():
             ('Las denuncias. Las «40 denuncias» que circulan son, según la prensa, las que la ASF presentó en los seis meses de su actual '
              'titular, no las que salieron de este informe. Su estado oficial debe venir en el informe semestral de la ASF, que la ley le da '
              'hasta el 1 de noviembre (art. 38).'),
-            ('Lo que sí tenemos. De la primera entrega de la Cuenta Pública 2025 (junio de 2026: 33 auditorías a la distribución de las '
+            ('El cruce con la primera entrega. De la primera entrega de la Cuenta Pública 2025 (junio de 2026: 33 auditorías a la distribución de las '
              'participaciones federales), la Matriz de la ASF registra %s millones de pesos por aclarar y %s millones de recuperaciones. '
-             'Esa cifra no se parece a los «600 millones» de junio que suma una de las notas: es un punto que la ASF tendrá que aclarar con '
-             'su documento.' % (format(round(acl, 1), ',.1f'), format(round(rec, 1), ',.1f'))),
+             'Sumada a los $%s millones de la segunda entrega da $%s millones por aclarar, no los «9,600 millones» que calculó una de las notas.'
+             % (format(round(acl, 1), ',.1f'), format(round(rec, 1), ',.1f'), format(round(acl2, 1), ',.1f'), format(round(acl + acl2, 1), ',.1f'))),
         ],
         'ejemplo': {
             'tit': 'Del informe a la respuesta: el reloj que corre desde el 30 de octubre',
@@ -799,18 +812,18 @@ def asf_segunda_entrega_2025():
         },
         'cotejo': [
             {'dice': 'La ASF reportó más de 9 mil mdp pendientes de aclarar',
-             'res': 'pendiente',
-             'explica': ('Varios medios lo publicaron el 30 y 31 de octubre, pero con cifras distintas (9,008 o 9,600 millones). La cifra oficial está '
-                         'en la Matriz de Datos Básicos de la segunda entrega, que aún no integramos.'),
-             'fuente': 'ASF, Informe del Resultado de la Cuenta Pública 2025, segunda entrega', 'url': ASF_PORTAL,
-             'quien': FALTA_ASF, 'donde': ASF_PORTAL},
+             'res': 'consta',
+             'explica': ('La Matriz de Datos Básicos de la segunda entrega de la Cuenta Pública 2025 (corte octubre de 2026, p. 11) registra '
+                         '$9,008,649,917.27 por aclarar en 374 auditorías ($1,655.8 millones en el ámbito federal y $7,352.8 millones en el '
+                         'gasto federalizado), además de $1,527.2 millones recuperados durante las auditorías.'),
+             'fuente': 'ASF, Matriz de Datos Básicos de la Cuenta Pública 2025, segunda entrega (oct. 2026), p. 11', 'url': ASF_MDB25B},
             {'dice': '5 mil 200 mdp corresponden a 42 municipios que no acreditaron el destino del gasto',
-             'res': 'pendiente',
-             'explica': ('Lo reportan varios medios (uno precisa 5,243 millones). Dos matices que sí podemos dar: «no acreditaron» significa que '
-                         'al corte no presentaron documentación, y todavía tienen plazo para hacerlo; y 42 municipios son el %s %% de los %s del país '
+             'res': 'consta',
+             'explica': ('En los 42 municipios auditados (pp. 12 y 25–27 de la Matriz), la ASF revisó $5,262.7 millones y dejó $5,243,303,554.32 '
+                         'por aclarar en 128 pliegos de observaciones. Dos matices: «no acreditaron» significa que al corte no presentaron '
+                         'documentación y todavía tienen 30 días hábiles para hacerlo; y 42 municipios son el %s %% de los %s del país '
                          '(derivado: 42 ÷ %s × 100).' % (pct, format(mun, ','), format(mun, ','))),
-             'fuente': 'LFRCF, arts. 39 y 41; INEGI, padrón municipal en la base de la plataforma', 'url': LFRCF,
-             'quien': FALTA_ASF, 'donde': ASF_PORTAL},
+             'fuente': 'ASF, Matriz de Datos Básicos CP 2025, 2.ª entrega (oct. 2026), pp. 12 y 25–27; LFRCF, arts. 39 y 41', 'url': ASF_MDB25B},
             {'dice': 'Hay 40 denuncias por obras no hechas y equipo extraviado',
              'res': 'pendiente',
              'explica': ('Según la prensa, son las denuncias que la ASF presentó en seis meses ante la Fiscalía Anticorrupción, más tres penales: '
@@ -822,9 +835,20 @@ def asf_segunda_entrega_2025():
             {'dice': 'Sumados a los 600 millones de su primer paquete de informes de junio, son 9,600 millones (El Financiero)',
              'res': 'matiz',
              'explica': ('La Matriz de Datos Básicos de la primera entrega 2025 (p. 11) registra %s millones por aclarar y %s millones de '
-                         'recuperaciones en sus 33 auditorías: no aparecen 600 millones. Además, el titular indexado decía «9,600 mmdp», que '
-                         'serían miles de millones: mil veces más de lo que dice la propia nota.' % (format(round(acl, 1), ',.1f'), format(round(rec, 1), ',.1f'))),
-             'fuente': 'ASF, Matriz de Datos Básicos de la Cuenta Pública 2025, primera entrega (jun. 2026), p. 11', 'url': ASF_MDB25A},
+                         'recuperaciones en sus 33 auditorías: sumados a los $%s millones de la segunda entrega dan $%s millones por aclarar, '
+                         'no 9,600 millones. Además, el titular indexado decía «9,600 mmdp», que serían miles de millones: mil veces más de lo '
+                         'que dice la propia nota.' % (format(round(acl, 1), ',.1f'), format(round(rec, 1), ',.1f'), format(round(acl2, 1), ',.1f'), format(round(acl + acl2, 1), ',.1f'))),
+             'fuente': 'ASF, Matrices de Datos Básicos de la Cuenta Pública 2025, 1.ª y 2.ª entregas, p. 11', 'url': ASF_MDB25B},
+        ],
+        'cifras': [
+            {'valor': '$9,008.6 millones', 'etq': 'Monto por aclarar en la 2.ª entrega de la Cuenta Pública 2025 (374 auditorías)',
+             'estado': 'oficial', 'fuente': 'ASF, Matriz de Datos Básicos CP 2025, 2.ª entrega (oct. 2026), p. 11', 'url': ASF_MDB25B},
+            {'valor': '$5,243.3 millones', 'etq': 'Monto por aclarar en los 42 municipios auditados (128 pliegos de observaciones)',
+             'estado': 'oficial', 'fuente': 'ASF, Matriz de Datos Básicos CP 2025, 2.ª entrega, pp. 12 y 25–27', 'url': ASF_MDB25B},
+            {'valor': '$1,527.2 millones', 'etq': 'Recuperaciones operadas durante las auditorías de la 2.ª entrega',
+             'estado': 'oficial', 'fuente': 'ASF, Matriz de Datos Básicos CP 2025, 2.ª entrega, p. 11', 'url': ASF_MDB25B},
+            {'valor': '660 acciones', 'etq': '391 pliegos de observaciones, 153 PRAS, 55 avisos al SAT (PEFCF), 45 recomendaciones, 15 al desempeño y 1 solicitud de aclaración',
+             'estado': 'oficial', 'fuente': 'ASF, Matriz de Datos Básicos CP 2025, 2.ª entrega, p. 11', 'url': ASF_MDB25B},
         ],
         'medios': [
             {'medio': 'La Jornada', 'titulo': 'Sin aclarar, 9 mil mdp de la cuenta pública 2025: ASF', 'fecha': '31-10-2026',
@@ -878,13 +902,14 @@ def asf_segunda_entrega_2025():
             {'que': 'La tercera entrega y el Informe General de la Cuenta Pública 2025 (20-02-2027)', 'url': ASF_PORTAL},
         ],
         'fuentes': [
+            {'nombre': 'ASF, Matriz de Datos Básicos de la Cuenta Pública 2025, segunda entrega (octubre de 2026), pp. 11, 12 y 25–27', 'url': ASF_MDB25B},
             {'nombre': 'Ley de Fiscalización y Rendición de Cuentas de la Federación, arts. 35, 38, 39 y 41', 'url': LFRCF},
             {'nombre': 'ASF, Matriz de Datos Básicos de la Cuenta Pública 2025, primera entrega (junio de 2026), p. 11', 'url': ASF_MDB25A},
             {'nombre': 'INEGI, padrón de 2,479 municipios (EFIPEM 2024), en la base de la plataforma', 'url': 'numeros-baja-al-territorio.html'},
             {'nombre': 'ASF, portal del Informe del Resultado de la Cuenta Pública 2025', 'url': ASF_PORTAL},
             {'nombre': 'Punto de partida: @pajaropolitico (Animal Político), Instagram, 31-10-2026', 'url': PAJARO},
         ],
-        'actualizado': '31-10-2026',
+        'actualizado': '02-11-2026',
     }
 
 
@@ -1180,6 +1205,7 @@ def _estado(ab):
 def asf_nuevo_leon():
     from apartados import glosario_ancla
     nl, sin = _estado('NL'), _estado('SIN')
+    b = _cp2025b()
     g = lambda t: {'t': t.split(' (')[0], 'url': 'glosario.html#' + glosario_ancla(t)}
     m = lambda v: '$%s millones' % format(round(v, 1), ',.1f')
     return {
@@ -1188,11 +1214,11 @@ def asf_nuevo_leon():
         'icono': '🔎',
         'fecha': '31-10-2026',
         'temas': ['samuel garcia', 'triangulacion'],
-        'titulo': 'La ASF denuncia una presunta triangulación de 7 mil 200 millones en Nuevo León: lo que dice, lo que falta y por qué «desvió» todavía no es un hecho',
+        'titulo': 'La ASF denuncia una presunta triangulación de 7 mil 200 millones en Nuevo León: lo que dice la Matriz oficial, lo que falta y por qué «desvió» todavía no es un hecho',
         'balazo': ('Según la prensa, la Auditoría Superior presentó ante la Fiscalía una denuncia por una presunta triangulación de más de 7 mil millones '
-                   'de pesos desde el gobierno de Nuevo León, que llegaría en parte a un despacho ligado a la familia del gobernador Samuel García. '
-                   'Es una de las revisiones de la segunda entrega de la Cuenta Pública 2025. Una denuncia no es una condena, las cifras no coinciden '
-                   'entre medios y el documento de la ASF todavía no lo podemos abrir.'),
+                   'de pesos desde el gobierno de Nuevo León. En la Matriz de Datos Básicos de la segunda entrega de la Cuenta Pública 2025, Nuevo León '
+                   'registra $487.3 millones por aclarar ($36.1 millones en el Gobierno del Estado y $451.2 millones en 6 municipios), mientras que la '
+                   'denuncia penal que reportan los medios corresponde a carpetas de investigación reservadas. Una denuncia no es una condena.'),
         'nota': {'medio': 'La Jornada', 'titulo': 'Samuel García desvió 7 mil 200 mdp, denuncia la ASF', 'fecha': '31-10-2026', 'url': JORNADA_NL},
         'circula': {'red': 'Instagram', 'cuenta': '@lajornadaonline (La Jornada)', 'fecha': '31 de octubre de 2026',
                     'texto': ('Samuel García desvió 7 mil 200 millones de pesos, denuncia la Auditoría Superior de la Federación. La administración del '
@@ -1203,17 +1229,26 @@ def asf_nuevo_leon():
              'presentó una denuncia penal por una presunta triangulación desde el gobierno de Nuevo León: el dinero habría pasado del gobierno a una '
              'constructora, de ahí a otra empresa y, en parte, a un despacho jurídico que la prensa liga a la familia del gobernador Samuel García. '
              'Es la misma entrega de la nota sobre los 9 mil millones por aclarar.'),
-            ('Las cifras no coinciden. Todos los medios dicen «7 mil 200 millones» y «5 mil 851 millones a una constructora», pero lo que habría '
-             'llegado al despacho cambia según la nota: 385.3 millones en unas, 928.13 millones en otras. Hasta tener el informe individual de la ASF, '
-             'esas cifras son lo que reporta la prensa.'),
+            ('Lo que sí consta en la Matriz de la ASF. En la Matriz de Datos Básicos de la segunda entrega de la Cuenta Pública 2025 (p. 15), la ASF '
+             'practicó 16 auditorías en Nuevo León y dejó $%s millones por aclarar: $%s millones en 9 auditorías al Gobierno del Estado (con 1 pliego '
+             'de observaciones y 3 avisos al SAT, PEFCF) y $%s millones en 6 municipios (Monterrey, Guadalupe, General Escobedo, García, Cadereyta '
+             'Jiménez y Juárez, p. 26). Los 7,200 millones que cita la prensa no son el monto por aclarar de esta entrega, sino el monto de operaciones '
+             'señalado en una denuncia de hechos ante la Fiscalía a partir de auditorías forenses de ejercicios anteriores.'
+             % (format(round(b['nuevoLeonPorAclarar'] / 1e6, 1), ',.1f'), format(round(b['nuevoLeonGobiernoPorAclarar'] / 1e6, 1), ',.1f'),
+                format(round(b['nuevoLeonMunicipiosPorAclarar'] / 1e6, 1), ',.1f'))),
+            ('Las cifras de prensa no coinciden. Todos los medios dicen «7 mil 200 millones» y «5 mil 851 millones a una constructora», pero lo que habría '
+             'llegado al despacho cambia según la nota: 385.3 millones en unas, 928.13 millones en otras. Hasta tener el informe individual forense o '
+             'la denuncia pública, esas cifras son lo que reporta la prensa.'),
             ('«Desvió» es una conclusión que todavía no existe. La ASF denuncia; quien investiga es la Fiscalía y quien decide es un juez. Mientras '
              'tanto, rige la presunción de inocencia (Constitución, art. 20). Y hay un paso más que casi nadie explica: para proceder penalmente contra '
              'un gobernador en funciones por un delito federal, la Cámara de Diputados tiene que hacer una declaración de procedencia, que se comunica '
              'al Congreso del estado (Constitución, art. 111).'),
             ('La propiedad de mil millones. Que el gobernador comprara una propiedad de ese valor con este dinero lo dice la prensa; no encontramos un '
              'documento oficial abierto que lo sostenga.'),
-            ('Sinaloa. Según La Jornada, el mismo reporte incluye una investigación relacionada con el gobierno de Rubén Rocha Moya; otras notas dicen '
-             'que la constructora también movió recursos hacia personas cercanas a él. No hay detalle oficial que podamos abrir.'),
+            ('Sinaloa. En la Matriz de Datos Básicos de la segunda entrega 2025 (p. 16), el Gobierno del Estado de Sinaloa registra $0.00 por aclarar en '
+             'sus 9 auditorías ($2.8 millones recuperados y 11 avisos al SAT, PEFCF), mientras que el Municipio de Angostura tiene $%s millones por '
+             'aclarar (p. 27). Lo que la prensa reporta sobre operaciones de la constructora ligadas a Sinaloa corresponde a la denuncia ante la Fiscalía.'
+             % format(round(b['sinaloaMunicipiosPorAclarar'] / 1e6, 1), ',.1f')),
             ('Para darte la escala, con datos oficiales: en 2026 la Federación le reparte a Nuevo León %s de participaciones (Ramo 28) y %s de '
              'aportaciones (Ramo 33), según los acuerdos de distribución publicados en el Diario Oficial.' % (m(nl['ramo28']), m(nl['ramo33']))),
         ],
@@ -1291,12 +1326,13 @@ def asf_nuevo_leon():
             {'que': 'La respuesta del gobierno de Nuevo León a las observaciones (30 días hábiles, LFRCF art. 39)', 'url': LFRCF},
         ],
         'fuentes': [
+            {'nombre': 'ASF, Matriz de Datos Básicos de la Cuenta Pública 2025, segunda entrega (octubre de 2026), pp. 15, 16, 26 y 27', 'url': ASF_MDB25B},
             {'nombre': 'Constitución Política de los Estados Unidos Mexicanos, arts. 20 y 111', 'url': CPEUM},
             {'nombre': 'Acuerdos de distribución de participaciones y aportaciones 2026 (DOF), en la base de la plataforma', 'url': 'numeros-mapa-del-gasto-federalizado.html'},
             {'nombre': 'Ley de Fiscalización y Rendición de Cuentas de la Federación, art. 39', 'url': LFRCF},
             {'nombre': 'Punto de partida: La Jornada, «Samuel García desvió 7 mil 200 mdp, denuncia la ASF» (31-10-2026)', 'url': JORNADA_NL},
         ],
-        'actualizado': '01-11-2026',
+        'actualizado': '02-11-2026',
     }
 
 
@@ -1482,11 +1518,13 @@ def lfd_dnr_defensa():
 
 
 PEMEX_RI = 'https://www.pemex.com/'
+PEMEX_B86 = 'https://www.pemex.com/saladeprensa/boletines_nacionales/Paginas/2026_86_nacional.aspx'
+PEMEX_B69 = 'https://www.pemex.com/saladeprensa/boletines_nacionales/Paginas/2026_69_nacional.aspx'
 BMV = 'https://www.bmv.com.mx/'
 EFE_PEMEX = 'https://www.infobae.com/america/agencias/2026/10/30/pemex-pierde-605-millones-de-dolares-en-tercer-trimestre-de-2026-pese-a-mayores-ingresos/'
 EXP_PEMEX = 'https://expansion.mx/empresas/2026/10/30/pemex-perdidas-tercer-trimestre-2026-ingresos-deuda'
-FALTA_PEMEX = ('Falta de la plataforma: Pemex publica sus resultados trimestrales en su portal de relación con inversionistas y los '
-               'entrega a la Bolsa Mexicana de Valores; ninguno de los dos abre desde nuestra sesión.')
+FALTA_PEMEX = ('Falta de la plataforma: el Boletín nacional 86 de Pemex ya está integrado, pero el estado financiero completo enviado '
+               'a la Bolsa Mexicana de Valores con el renglón exacto de la pérdida neta aún no se integra.')
 
 
 def _pemex():
@@ -1515,11 +1553,12 @@ def pemex_3t_2026():
         'icono': '🛢️',
         'temas': ['tercer trimestre', 'perdio pemex', 'pierde pemex', 'perdida de pemex', 'perdida neta de pemex'],
         'fecha': '01-11-2026',
-        'titulo': 'Pemex vuelve a perder en el tercer trimestre: ¿10,792 o 10,795 millones?, y lo que esa pérdida no cuenta',
+        'titulo': 'Pemex vuelve a perder en el tercer trimestre: lo que dice su Boletín 86, el punto ciego de la pérdida neta y su deuda de 77.6 mil mdd',
         'balazo': ('Circula que Pemex perdió 10 mil 792 millones de pesos entre julio y septiembre, 82.4 %% menos que un año antes, por '
-                   'más ventas y menos deterioro de activos. La mayoría de los medios da 10,795 millones, y el reporte de Pemex no abre '
-                   'desde la plataforma: la cifra queda pendiente. La cuenta del 82.4 %% sí cuadra con las dos versiones, y lo que casi '
-                   'nadie dice es cuánto le cuestan al erario los intereses de Pemex: %s en 2026.' % m1(fin)),
+                   'más ventas y menos deterioro de activos. En su Boletín nacional 86 del 30 de octubre, Pemex confirma ingresos por '
+                   '487 mil millones de pesos (+28.5 %%), utilidad de operación de 98 mil millones, un saldo de deuda financiera de '
+                   '77.6 mil millones de dólares y una mejora cercana a 50 mil millones en el resultado neto, pero omite escribir el '
+                   'renglón exacto de la pérdida neta en el boletín. Y en 2026 los intereses de Pemex le cuestan al erario %s.' % m1(fin)),
         'nota': {'medio': 'EFE (vía Infobae)', 'titulo': 'Pemex pierde 605 millones de dólares en tercer trimestre de 2026 pese a mayores ingresos',
                  'fecha': '30-10-2026', 'url': EFE_PEMEX},
         'circula': {'red': 'Instagram', 'cuenta': 'un medio que remite a «el link de nuestra bio» (la publicación no trae el nombre de la cuenta)',
@@ -1529,24 +1568,29 @@ def pemex_3t_2026():
                               'de pesos registrados en el mismo periodo del año pasado; esto se debió a un incremento en ventas y disminución en '
                               'deterioro de activos.')},
         'cuerpo': [
-            ('Qué pasó. Pemex entregó el viernes 30 de octubre su reporte del tercer trimestre de 2026 (julio a septiembre). Según la '
-             'prensa, regresó a los números rojos después de la utilidad del segundo trimestre: perdió unos 10.8 mil millones de pesos. El '
-             'reporte mismo, en el portal de Pemex y en la Bolsa Mexicana de Valores, no abre desde la plataforma, así que todas las cifras '
-             'de esta nota que vienen de la prensa van como pendientes.'),
-            ('El primer punto ciego: ¿10,792 o 10,795? La publicación dice 10,792 millones, igual que Industry & Energy Magazine. EFE y '
-             'Expansión dicen 10,795. Para el mismo trimestre de 2025 la publicación dice 61,247 millones y otros medios, 61,242. Son '
-             'diferencias chicas, pero dos cifras distintas no pueden ser las dos «la de Pemex»: manda el reporte.'),
-            ('La cuenta del 82.4 % cuadra. Con las cifras de la publicación, 10,792 ÷ 61,247 = 0.176: la pérdida es 82.4 % menor. Con las '
-             'otras, 10,795 ÷ 61,242 también da 82.4 %. Y los dólares son una conversión: 605 millones de dólares implican unos 17.8 pesos '
-             'por dólar; otro medio convirtió a 596.9 millones. Pemex reporta en pesos.'),
+            ('Qué pasó y qué dice el documento de Pemex. Pemex publicó el viernes 30 de octubre su Boletín nacional 86 con los resultados del '
+             'tercer trimestre de 2026 (julio a septiembre). Ahí confirma oficialmente ingresos totales por 487 mil millones de pesos (+28.5 %% '
+             'frente al mismo trimestre de 2025), un costo de ventas de 341 mil millones (+10.3 %%), una utilidad de operación de 98 mil millones '
+             '(contra una pérdida operativa de 20 mil millones un año antes), un EBITDA de 124 mil millones (+32.8 %%) y un saldo de la deuda '
+             'financiera de 77.6 mil millones de dólares al 30 de septiembre de 2026 (en el segundo trimestre fue de 77.5 mil millones de dólares, '
+             'Boletín 69).'),
+            ('El primer punto ciego: el boletín omite escribir la pérdida neta. En lugar de dar el renglón del resultado neto, el Boletín 86 '
+             'dice que «el resultado neto registró una mejora cercana a 50 mil millones de pesos en comparación con el tercer trimestre de 2025, '
+             'apoyado en el sólido desempeño operativo y un menor deterioro de activos fijos». Esa mejora (~50.4 mil millones) calza con pasar '
+             'de una pérdida de ~61.2 mil millones a una pérdida de ~10.8 mil millones, pero para ver si el renglón exacto es 10,792 millones '
+             '(como dice la publicación) o 10,795 millones (EFE y Expansión) hace falta el estado financiero completo entregado a la Bolsa Mexicana '
+             'de Valores.'),
+            ('La cuenta del 82.4 %% cuadra. Con las cifras de la publicación, 10,792 ÷ 61,247 = 0.176: la pérdida es 82.4 %% menor. Con las '
+             'otras, 10,795 ÷ 61,242 también da 82.4 %%. Y los dólares son una conversión: 605 millones de dólares implican unos 17.8 pesos '
+             'por dólar; otro medio convirtió a 596.9 millones. Pemex reporta sus estados de resultados en pesos.'),
             ('Lo que la pérdida no cuenta. «Perdió menos» no quiere decir «ya no cuesta». En el Presupuesto de 2026, Pemex tiene %s de gasto '
              'programable y %s más de costo financiero, los intereses de su deuda: de cada 100 pesos que el Presupuesto le asigna, %.1f son '
              'intereses (derivado). Y en 2026 el Ramo 18 le dio a la política de hidrocarburos 263,476.0 millones; para 2027 se proponen '
              '81,100.0 millones, según los Criterios Generales.' % (m1(prog), m1(fin), 100 * fin / tot)),
-            ('Por qué perdió, según la prensa. EFE cita a la directora de Finanzas: la pérdida cambiaria fue de 16,391 millones, porque el '
-             'peso se depreció en el trimestre, y los ingresos subieron 28.5 %. Si eso es así, sin el efecto del tipo de cambio el trimestre '
-             'habría salido positivo; pero es una cuenta con cifras de prensa, así que no la damos como derivado. Y «menos deterioro» quiere '
-             'decir que Pemex le restó menos valor a sus activos que hace un año: es un registro contable, no dinero que entró.'),
+            ('Las causas sí constan en el boletín. El Boletín 86 confirma el incremento de 28.5 %% en ingresos totales (por el precio de la '
+             'mezcla mexicana, que promedió 69.7 dólares por barril, y mayores ventas internas de gasolinas, diésel y turbosina) y el «menor '
+             'deterioro de activos fijos». Ojo: «menos deterioro» quiere decir que Pemex le restó contablemente menos valor a sus activos que '
+             'hace un año; no es dinero en efectivo que entró a la caja.'),
         ],
         'ejemplo': {
             'tit': 'La cuenta, con números redondos',
@@ -1571,11 +1615,22 @@ def pemex_3t_2026():
                          'dos), pero las dos cifras de partida siguen sin documento abierto.'),
              'fuente': 'Pemex, reportes de resultados del tercer trimestre de 2025 y de 2026', 'url': PEMEX_RI,
              'quien': FALTA_PEMEX, 'donde': BMV},
-            {'dice': 'Se debió a un incremento en ventas y disminución en deterioro de activos', 'res': 'pendiente',
-             'explica': ('La prensa reporta ingresos 28.5 % más altos y una pérdida cambiaria de 16,391 millones. El deterioro de activos es un '
-                         'registro contable: si baja, la pérdida se achica aunque no entre más dinero. El desglose está en el reporte.'),
-             'fuente': 'Pemex, Reporte de resultados al 30 de septiembre de 2026', 'url': PEMEX_RI,
-             'quien': FALTA_PEMEX, 'donde': BMV},
+            {'dice': 'Se debió a un incremento en ventas y disminución en deterioro de activos', 'res': 'consta',
+             'explica': ('El Boletín nacional 86 de Pemex confirma que en el 3T 2026 los ingresos totales ascendieron a 487 mil millones de pesos '
+                         '(+28.5 % respecto al 3T 2025) y que la mejora cercana a 50 mil millones en el resultado neto estuvo apoyada en el '
+                         'desempeño operativo y en «un menor deterioro de activos fijos». El deterioro de activos es un registro contable: '
+                         'si baja, la pérdida se achica aunque no entre más efectivo.'),
+             'fuente': 'Pemex, Boletín nacional 86 (30-10-2026)', 'url': PEMEX_B86},
+        ],
+        'cifras': [
+            {'valor': '77.6 mil mdd', 'etq': 'Saldo de la deuda financiera de Pemex al cierre del 3T 2026 (30-09-2026)',
+             'estado': 'oficial', 'fuente': 'Pemex, Boletín nacional 86 (30-10-2026)', 'url': PEMEX_B86},
+            {'valor': '$487,000 millones', 'etq': 'Ingresos totales de Pemex en el 3T 2026 (+28.5 % respecto al 3T 2025)',
+             'estado': 'oficial', 'fuente': 'Pemex, Boletín nacional 86 (30-10-2026)', 'url': PEMEX_B86},
+            {'valor': '$98,000 millones', 'etq': 'Utilidad de operación en el 3T 2026 (EBITDA de $124,000 millones, +32.8 %)',
+             'estado': 'oficial', 'fuente': 'Pemex, Boletín nacional 86 (30-10-2026)', 'url': PEMEX_B86},
+            {'valor': m1(fin), 'etq': 'Costo financiero (intereses) aprobado para Pemex en el Presupuesto de Egresos 2026',
+             'estado': 'oficial', 'fuente': '%s, pp. %s' % (a1['fuente'], a1['paginas']), 'url': a1['url']},
         ],
         'medios': [
             {'medio': 'EFE (vía Infobae)', 'titulo': 'Pemex pierde 605 millones de dólares en tercer trimestre de 2026 pese a mayores ingresos',
@@ -1609,21 +1664,23 @@ def pemex_3t_2026():
                      g('Empresas Públicas del Estado')],
         'red': 'Pemex pérdida neta tercer trimestre 2026 reporte de resultados',
         'sigue': [
-            {'que': 'El reporte de resultados del tercer trimestre en la Bolsa: la pérdida exacta, el tipo de cambio y el deterioro', 'url': BMV},
-            {'que': 'El saldo de la deuda financiera de Pemex al 30 de septiembre (lo que la plataforma todavía no tiene)',
-             'url': 'pendientes.html#pemex-deuda'},
+            {'que': 'El estado financiero completo del tercer trimestre en la Bolsa: el renglón exacto de la pérdida neta y de la pérdida cambiaria', 'url': BMV},
+            {'que': 'La evolución del saldo de la deuda financiera de Pemex (77.6 mil mdd al 3T 2026) al cierre del ejercicio',
+             'url': PEMEX_B86},
             {'que': 'El Presupuesto de Egresos 2027 (a más tardar el 15 de noviembre): cuánto queda del apoyo del Ramo 18', 'url': PPEF},
             {'que': 'La Cuenta Pública 2026: lo que Pemex ejerció y lo que pagó de intereses', 'url': CUENTA_PUBLICA},
         ],
         'fuentes': [
+            {'nombre': 'Pemex, Boletín nacional 86: «En el tercer trimestre de 2026, PEMEX incrementa su producción de petrolíferos…» (30-10-2026)', 'url': PEMEX_B86},
+            {'nombre': 'Pemex, Boletín nacional 69: resultados del segundo trimestre de 2026 (31-07-2026)', 'url': PEMEX_B69},
             {'nombre': '%s, pp. %s, en la base de la plataforma' % (a1['fuente'], a1['paginas']), 'url': a1['url']},
             {'nombre': 'Criterios Generales de Política Económica 2027 (Ramo 18), en la base de la plataforma',
              'url': 'numeros-paquete-2027-puntos-ciegos.html'},
-            {'nombre': 'Pendiente: Pemex, Reporte de resultados al 30 de septiembre de 2026 (portal de Pemex y Bolsa Mexicana de Valores)',
+            {'nombre': 'Pendiente: Pemex, estado financiero completo al 30 de septiembre de 2026 en la Bolsa Mexicana de Valores',
              'url': BMV},
             {'nombre': 'Punto de partida: EFE, «Pemex pierde 605 millones de dólares en tercer trimestre de 2026…» (30-10-2026)', 'url': EFE_PEMEX},
         ],
-        'actualizado': '01-11-2026',
+        'actualizado': '02-11-2026',
     }
 
 
@@ -1670,10 +1727,12 @@ def servidores_exportacion():
              'dice que, de mantenerse el ritmo, los servidores «podrían» superar a todo el sector en el año completo: todavía no ha pasado. '
              'Y exportar mucho no es lo mismo que ganar mucho: si casi todo lo de adentro se importa, lo que se queda en el país es el '
              'ensamble.'),
-            ('El segundo: el «3 a 7 % mexicano» no tiene documento. Lo publicó Excélsior como estimación. La medida oficial más cercana es el '
-             'valor agregado de exportación de la manufactura global del INEGI, que para computadoras y equipo periférico ubicaría el '
-             'contenido nacional en 21 % en 2024, según otra nota de prensa. Son cosas distintas: una habla de servidores de 2026 y la otra '
-             'de toda la rama en 2024. El 39 % del automotriz tampoco pudimos abrirlo.'),
+            ('El segundo: el «3 a 7 %% mexicano» no tiene documento, y el comunicado del INEGI dice otra cosa. Lo publicó Excélsior como '
+             'estimación sin fuente oficial. En su Comunicado 155/25 (Valor Agregado de Exportación de la Manufactura Global 2024, 05-12-2025, '
+             'pp. 1 y 4), el INEGI reporta que el contenido nacional de toda la manufactura global fue de 44.2 %% ($3,648,915 millones de pesos '
+             'de valor agregado sobre $8,249,683 millones de producción), y que del total del VAEMG la fabricación de automóviles y camiones '
+             'aporta el 26.9 %%, autopartes el 18.6 %% y la fabricación de computadoras y equipo periférico el 3.8 %%. Ni el «3 a 7 %%» de '
+             'contenido nacional de servidores ni el «39 %%» automotriz constan en ese documento.'),
             ('El tercero: los 82,500 millones «que vienen» para centros de datos son la proyección de la Asociación Mexicana de Data Centers '
              '(MEXDC) para 2026 a 2031: unos 20,630 millones de inversión directa y 61,890 indirecta. Es un gremio de la industria, no un '
              'compromiso de inversión, y es dinero privado: no pasa por el Presupuesto.'),
@@ -1693,12 +1752,12 @@ def servidores_exportacion():
                          'podrían superarlos en el año completo. Sin la balanza del INEGI no lo podemos confirmar.'),
              'fuente': 'INEGI, Balanza comercial de mercancías de México', 'url': INEGI_BALANZA,
              'quien': FALTA_INEGI, 'donde': INEGI_BALANZA},
-            {'dice': 'De cada 100 dólares del servidor solo 3 a 7 son mexicanos, contra 39 % del automotriz', 'res': 'pendiente',
-             'explica': ('Es una estimación publicada por la prensa, sin documento oficial. La medida del INEGI, el valor agregado de '
-                         'exportación de la manufactura global, ubicaría el contenido nacional de computadoras y periféricos en 21 % en '
-                         '2024, según otra nota: es otra medida, de otro año y de toda la rama.'),
-             'fuente': 'INEGI, Valor agregado de exportación de la manufactura global 2024', 'url': INEGI_VAEMG,
-             'quien': FALTA_INEGI, 'donde': INEGI_VAEMG},
+            {'dice': 'De cada 100 dólares del servidor solo 3 a 7 son mexicanos, contra 39 % del automotriz', 'res': 'no consta',
+             'explica': ('Es una estimación publicada por la prensa sin documento oficial. En su Comunicado 155/25 (VAEMG 2024, pp. 1 y 4), el '
+                         'INEGI reporta un contenido nacional de 44.2 % en el total de la manufactura global ($3,648,915 mdp sobre $8,249,683 mdp) '
+                         'y la participación de cada rama en el VAEMG total (automóviles y camiones 26.9 %, autopartes 18.6 %, computadoras y '
+                         'equipo periférico 3.8 %), no un «3 a 7 %» de servidores en 2026.'),
+             'fuente': 'INEGI, Valor Agregado de Exportación de la Manufactura Global (VAEMG) 2024, comunicado 155/25 (05-12-2025), pp. 1–4', 'url': INEGI_VAEMG},
             {'dice': '93.9 % va a un solo cliente: Estados Unidos', 'res': 'pendiente',
              'explica': 'También es de S&P Global, según la prensa. El destino de las exportaciones por producto lo publica el INEGI.',
              'fuente': 'INEGI, Balanza comercial de mercancías de México', 'url': INEGI_BALANZA,
@@ -1747,13 +1806,13 @@ def servidores_exportacion():
             {'que': 'Los incentivos fiscales y la energía que el gobierno comprometa para centros de datos', 'url': DOF_BUSCA},
         ],
         'fuentes': [
+            {'nombre': 'INEGI, Valor Agregado de Exportación de la Manufactura Global (VAEMG) 2024, comunicado 155/25 (05-12-2025)', 'url': INEGI_VAEMG},
             {'nombre': 'La base: ficha de Querétaro (recaudación propia y dependencia del dinero federal)', 'url': QRO_ENTE},
             {'nombre': 'Pendiente: INEGI, Balanza comercial de mercancías de México', 'url': INEGI_BALANZA},
-            {'nombre': 'Pendiente: INEGI, Valor agregado de exportación de la manufactura global 2024', 'url': INEGI_VAEMG},
             {'nombre': 'Punto de partida: Imagen Radio, con datos de S&P Global Market Intelligence', 'url': IMAGEN_SERV},
             {'nombre': 'Lo que circula: publicación en Instagram (octubre de 2026)', 'url': SERV_POST},
         ],
-        'actualizado': '01-11-2026',
+        'actualizado': '02-11-2026',
     }
 
 
@@ -1806,35 +1865,42 @@ def agua_guadalajara_federal():
                               'de calidad; el gobierno federal invierte 14 mil 500 millones de pesos para consolidar obras hidráulicas sin '
                               'adquirir deuda.')},
         'cuerpo': [
-            ('Qué se anunció. El 28 de octubre, la Presidenta y el gobernador Pablo Lemus presentaron el plan: la Federación pone 14 mil 500 '
-             'millones y Jalisco unos 10 mil 200, según la prensa. Lo federal lo ejercería la Conagua: 9 mil 300 millones para el acueducto '
-             'Chapala–Guadalajara y 5 mil 200 para el sistema Calderón–San Gaspar. Las obras empezarían a principios de 2027 y las grandes '
-             'terminarían hacia finales de 2028; la operación seguiría con el SIAPA. El texto completo del comunicado no abre desde la '
-             'plataforma: el desglose y las fechas van como pendientes.'),
-            ('El primer punto ciego: «invierte» todavía es «invertirá». El comunicado oficial lo dice en futuro, y según Expansión la '
-             'Presidenta explicó que los recursos no vendrán etiquetados en el Presupuesto de Egresos 2027, que la Cámara aprueba a más tardar '
-             'el 15 de noviembre. Sin una partida a la vista, no se puede seguir de dónde saldrá cada peso ni compararlo después con lo '
-             'ejercido.'),
-            ('El segundo: la cifra creció en una semana. El 21 de octubre, en su conferencia, la Presidenta habló de «alrededor de» %s a %s; '
-             'el 28, de %s. Y el acueducto que la Federación pagaría con 9 mil 300 millones lo presupuestó el Gobierno de Jalisco en %s en '
-             'la iniciativa que mandó al Congreso local: con esos dos números, faltarían unos %s, y nadie ha dicho quién los pone '
-             '(cuenta con una cifra de prensa, sin chip derivado).'
-             % (m0(AGUA_FED[0]), m0(AGUA_FED[1]), m0(AGUA_FED_2810), m0(acu), m0(acu - 9300))),
+            ('Qué se anunció en el comunicado oficial. En el comunicado de Presidencia del 28 de octubre de 2026, la Presidenta Claudia '
+             'Sheinbaum y el gobernador Jesús Pablo Lemus Navarro presentaron el plan: la Federación invertirá a través de la Conagua '
+             '14 mil 500 millones de pesos durante 2027 y 2028 (con recursos fiscales y ahorros de otros proyectos de la Conagua), divididos '
+             'en 9 mil 300 millones para el nuevo acueducto Chapala–Guadalajara (de la planta de bombeo de Santa Cruz al tanque del Cerro '
+             'del Cuatro, 42 km de longitud y capacidad de hasta 8,000 litros por segundo) y 5 mil 200 millones para el acueducto '
+             'Calderón–San Gaspar (31 km y 3,500 litros por segundo) y la ampliación de la planta potabilizadora de San Gaspar. Por su '
+             'parte, el gobierno de Jalisco anunció 10 mil 200 millones de pesos (de ajustes presupuestales), incluidos 7 mil 500 millones '
+             'para renovar la planta potabilizadora No. 1 Miravalle, el saneamiento de Las Pintas y la planta No. 4 en Toluquilla. La '
+             'construcción de los acueductos estará a cargo del Gobierno de México y su operación y mantenimiento seguirá en manos del SIAPA.'),
+            ('El primer punto ciego: «invierte» todavía es «invertirá». El comunicado oficial lo dice en futuro («durante 2027 y 2028»), '
+             'y según Expansión la Presidenta explicó que los recursos no vendrán etiquetados en el Presupuesto de Egresos 2027, que la Cámara '
+             'aprueba a más tardar el 15 de noviembre. Sin una partida a la vista, no se puede seguir de dónde saldrá cada peso ni compararlo '
+             'después con lo ejercido.'),
+            ('El segundo: la cifra creció en una semana y difiere de la iniciativa estatal. El 21 de octubre, en su conferencia, la Presidenta '
+             'habló de «alrededor de» %s a %s; el 28, de %s. Y el acueducto Chapala–Guadalajara al que el comunicado federal asigna 9 mil 300 '
+             'millones lo presupuestó el Gobierno de Jalisco en %s en la iniciativa que mandó al Congreso local el 8 de octubre: una diferencia '
+             'de %s (%s − $9,300 millones, derivado).'
+             % (m0(AGUA_FED[0]), m0(AGUA_FED[1]), m0(AGUA_FED_2810), m0(acu), m0(acu - 9300), m0(acu))),
             ('El tercero: «sin adquirir deuda» quiere decir que Jalisco no se endeuda. El Presupuesto federal sí se financia en parte con '
              'deuda: de los %s de la Ley de Ingresos 2027, %s son financiamiento. El dinero no tiene etiqueta de origen: se puede decir que '
              'el estado no pedirá prestado, no que la obra se pague sin deuda pública.' % (_mmdp(P['total']), _mmdp(deuda))),
-            ('El cuarto: «agua potable de calidad» es la meta, no un dato. Salud Jalisco explicó cómo toma sus muestras, pero no ha publicado '
-             'los resultados de laboratorio; ese pendiente sigue abierto en Crisis ambientales.'),
+            ('El cuarto: «agua potable de calidad» es la meta, no un dato. En el comunicado, el director de la Conagua, Efraín Morales López, '
+             'detalló que hoy la ZMG se abastece 50 %% de Chapala, 28 %% de pozos y 22 %% de Zapotillo–San Gaspar, y que se detectaron 150 '
+             'descargas irregulares (80 ya clausuradas); pero Salud Jalisco sigue sin publicar los resultados de laboratorio del agua.'),
         ],
         'cotejo': [
             {'dice': 'El gobierno federal invierte 14 mil 500 millones de pesos', 'res': 'matiz',
-             'explica': ('Es lo que anunció Presidencia el 28 de octubre: el título de su comunicado dice «invertirá». Es un compromiso, no un '
-                         'gasto ejercido ni una partida aprobada; según la prensa, no vendrá etiquetado en el Presupuesto 2027.'),
+             'explica': ('Es lo que anunció Presidencia el 28 de octubre: su comunicado dice que los invertirá «durante 2027 y 2028» a través de '
+                         'la Conagua. Es un compromiso oficial, no un gasto ejercido ni una partida aprobada en el Presupuesto 2027.'),
              'fuente': 'Presidencia, comunicado del 28-10-2026', 'url': PRES_2810},
-            {'dice': '9,300 millones para el acueducto Chapala–Guadalajara y 5,200 para Calderón–San Gaspar', 'res': 'pendiente',
-             'explica': ('Los dos suman los 14,500, pero el desglose lo dio la prensa; el texto del comunicado no abre. El acueducto, según la '
-                         'iniciativa del Gobierno de Jalisco, cuesta %s.' % m0(acu)),
-             'fuente': 'Presidencia, comunicado del 28-10-2026', 'url': PRES_2810, 'quien': FALTA_AGUA, 'donde': PRES_2810},
+            {'dice': '9,300 millones para el acueducto Chapala–Guadalajara y 5,200 para Calderón–San Gaspar', 'res': 'consta',
+             'explica': ('El comunicado íntegro de Presidencia del 28 de octubre confirma ambos montos: 9 mil 300 millones para el nuevo '
+                         'acueducto Chapala–Guadalajara (42 km, hasta 8,000 l/s) y 5 mil 200 millones para el acueducto Calderón–San Gaspar '
+                         '(31 km, 3,500 l/s) y la ampliación de la planta potabilizadora de San Gaspar. En la iniciativa que el Gobierno de '
+                         'Jalisco envió al Congreso local el 8 de octubre, el acueducto sustituto se estimaba en %s.' % m0(acu)),
+             'fuente': 'Presidencia, comunicado del 28-10-2026', 'url': PRES_2810},
             {'dice': 'Para consolidar obras hidráulicas', 'res': 'pendiente',
              'explica': ('Las obras empezarían en 2027 y las grandes terminarían a finales de 2028, según la prensa. Las fechas y el '
                          'expediente de cada obra los debe publicar la Conagua, que las ejecutaría.'),
@@ -1893,7 +1959,7 @@ def agua_guadalajara_federal():
             {'nombre': 'Paquete Económico 2027 en la base de la plataforma', 'url': 'numeros-paquete-2027-cifras.html'},
             {'nombre': 'Lo que circula: @gobmexico, Instagram (29-10-2026)', 'url': GOBMX_AGUA},
         ],
-        'actualizado': '01-11-2026',
+        'actualizado': '02-11-2026',
     }
 
 
@@ -1906,6 +1972,7 @@ CM_GRAB = 'https://codigomagenta.com.mx/operacion-huawei-grabaciones-secretas/'
 CM_WASH = 'https://codigomagenta.com.mx/operacion-huawei-alerta-en-washington/'
 CM_AMLO = 'https://codigomagenta.com.mx/presume-huawei-favoritismo-de-amlo/'
 FCC_LISTA = 'https://www.fcc.gov/supplychain/coveredlist'
+NDAA_2019 = 'https://www.govinfo.gov/content/pkg/PLAW-115publ232/html/PLAW-115publ232.htm'
 CMX_DA = 'https://comprasmx.buengobierno.gob.mx/datos-abiertos'
 COMPRANET_CM = 'https://upcp-compranet.hacienda.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf'
 CONTRATOS_PAG = 'contratos-publicos.html'
@@ -2021,12 +2088,13 @@ def huawei_gobierno():
                          'marco, que no integramos todavía. En 2025 y 2026 solo el %s compró equipo de la marca, a otras empresas.' % hj),
              'fuente': 'ComprasMX, Datos Abiertos 2025 y 2026, en la base de la plataforma', 'url': CONTRATOS_PAG,
              'quien': FALTA_CMX, 'donde': COMPRANET_CM},
-            {'dice': 'Estados Unidos ya calificó a Huawei como una amenaza para la seguridad nacional', 'res': 'pendiente',
-             'explica': ('Varias fuentes reportan que la Comisión Federal de Comunicaciones de EE. UU. designó a Huawei como amenaza en junio '
-                         'de 2020 y la puso en su lista de equipo cubierto en 2021. Es un documento oficial de otro gobierno, y su portal no '
-                         'abre desde la plataforma: lo dejamos pendiente hasta leerlo.'),
-             'fuente': 'FCC, Covered List', 'url': FCC_LISTA,
-             'quien': 'Falta de la plataforma: el portal de la FCC no abre desde nuestra sesión.', 'donde': FCC_LISTA},
+            {'dice': 'Estados Unidos ya calificó a Huawei como una amenaza para la seguridad nacional', 'res': 'consta',
+             'explica': ('La Ley de Autorización de Defensa Nacional de EE. UU. para el año fiscal 2019 (Public Law 115-232, sección 889(f)(3)(A), '
+                         'promulgada el 13 de agosto de 2018) definió expresamente como «equipo o servicio de telecomunicaciones cubierto» el '
+                         'producido por Huawei Technologies Company o ZTE Corporation, prohibiendo a las agencias federales adquirirlo o contratar '
+                         'con entidades que lo usen como componente sustancial, base legal de la Covered List de la FCC.'),
+             'fuente': 'Congreso de EE. UU., Public Law 115-232 (John S. McCain NDAA FY2019), sec. 889(f)(3)(A) (13-08-2018)',
+             'url': NDAA_2019},
             {'dice': 'Sería peligroso para la relación con Estados Unidos', 'res': 'no consta',
              'explica': 'Es una opinión en condicional, no un dato: no se coteja. Ningún documento oficial de los dos gobiernos lo dice así.',
              'fuente': 'Lo que circula: @derechadiariomx', 'url': POST_HUAWEI},
@@ -2058,16 +2126,16 @@ def huawei_gobierno():
             {'que': 'Los contratos de 2019 a 2024 en el histórico de CompraNet: si Huawei, directamente o por medio de otras empresas, le vendió al IMSS, al SAT o a Aduanas', 'url': CMX_DA},
             {'que': 'El Anexo 4 del contrato marco de nube pública de 2024: qué proveedores quedaron acreditados', 'url': COMPRANET_CM},
             {'que': 'La respuesta de la Agencia de Transformación Digital y de las dependencias nombradas', 'url': 'https://www.gob.mx/atdt'},
-            {'que': 'La designación de la FCC y la Covered List, en su documento', 'url': FCC_LISTA},
         ],
         'fuentes': [
             {'nombre': 'ComprasMX, Datos Abiertos: Datos Relevantes de los Contratos 2025 y 2026 (descarga del 26-10-2026), en la base de la plataforma',
              'url': CMX_DA},
-            {'nombre': 'Pendiente: FCC, Covered List', 'url': FCC_LISTA},
+            {'nombre': 'Congreso de EE. UU., Public Law 115-232 (John S. McCain National Defense Authorization Act for Fiscal Year 2019), sec. 889(f)(3)(A) (13-08-2018)',
+             'url': NDAA_2019},
             {'nombre': 'Punto de partida: Código Magenta, serie «Operación Huawei»', 'url': CM_GRAB},
             {'nombre': 'Lo que circula: @derechadiariomx, Instagram (30-10-2026)', 'url': POST_HUAWEI},
         ],
-        'actualizado': '01-11-2026',
+        'actualizado': '02-11-2026',
     }
 
 NOTAS = [modalidad_40, senado_lif_2027, jalisco_gasto_federal, asf_segunda_entrega_2025, portacelis_diesel, carnaval_ensenada, asf_nuevo_leon, lfd_dnr_defensa, pemex_3t_2026, servidores_exportacion, agua_guadalajara_federal, huawei_gobierno]

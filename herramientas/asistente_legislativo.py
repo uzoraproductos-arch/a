@@ -297,6 +297,35 @@ def legislativo():
             'pag': [PAGINA + '#leg-locales', PAGINA_TIT]}
 
 
+# El tope del art. 116, fr. II, párrafo segundo (reforma DOF 23-04-2026),
+# cotejado contra el texto vigente de la Cámara de Diputados: «el presupuesto
+# anual de las legislaturas locales no exceda del cero punto setenta por ciento
+# del presupuesto de egresos de la entidad federativa». Transitorio quinto: las
+# reducciones surten efecto al iniciar la legislatura siguiente; octavo: la que
+# ya está en el tope o debajo no puede crecer en términos reales sobre 2026.
+TOPE_116 = 0.70
+
+
+def congresos_estados(base):
+    """Lo de cada congreso local por clave de entidad: lo que ejerció en 2024
+    (CNPLE 2025, p. 11, en DB.poderes), sus personas legisladoras (tabla 8),
+    el gasto por legislador y el gasto frente al egreso del gobierno del
+    estado (los dos derivados). Se detiene si falta una entidad."""
+    por_n = {e['name']: e for e in base['estados']}
+    out = {}
+    for x in base['poderes']['legislativo']['congresos2024']:
+        e = por_n.get(x['entidad'])
+        if e is None or x.get('estado') != 'oficial':
+            raise SystemExit('congresos: %r no es una entidad o no es oficial' % x['entidad'])
+        g, n = x['ejercidoMdp'], CONGRESOS[e['abbr']]
+        out[e['abbr']] = {'g': g, 'n': n, 'x': round(g / n, 2), 'egr': e.get('egr2024'),
+                          'p': round(g / e['egr2024'] * 100, 3) if e.get('egr2024') else None,
+                          'pag': x['pagina'], 'anio': x['ejercicio']}
+    if sorted(out) != sorted(CONGRESOS):
+        raise SystemExit('congresos: el gasto 2024 no trae a las 32 entidades')
+    return out
+
+
 def _chip(e, p=None):
     return '<span class="est-chip est-%s"%s>%s</span>' % (e, ' data-pend="%s"' % p if p else '', e)
 

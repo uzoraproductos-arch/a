@@ -387,6 +387,17 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .pa-rec-ico { display: inline-grid; place-items: center; flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--pa-claro); font-size: 18px; }
 .pa-rec-a b { display: block; font-size: 15px; }
 .pa-rec-a small { display: block; font-size: 13px; line-height: 1.3; color: #5a6782; }
+/* El Planisferio, matriz de los mapas (04-11-2026): sus mapas van en un solo renglon. */
+.pa-pl { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 8px; padding: 6px; border: 1px solid #e3d3a6; border-radius: 16px; background: #fbf6e9; }
+.pa-burbuja a.pa-pl-a { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 6px 14px 6px 8px; border-radius: 12px; background: #7a5c12; color: #fff; text-decoration: none; }
+.pa-burbuja a.pa-pl-a:hover, .pa-burbuja a.pa-pl-a:focus-visible { background: #5f470c; }
+.pa-pl-a .pa-rec-ico { background: rgba(255,255,255,.18); }
+.pa-pl-a b { display: block; font-size: 15px; }
+.pa-pl-a small { display: block; font-size: 13px; line-height: 1.3; color: #f4ead0; }
+.pa-pl-mas { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.pa-pl-t { font-size: 13px; color: #5c4a1e; }
+.pa-burbuja a.pa-pl-chip { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid #d9c48c; border-radius: 999px; background: #fff; color: #5c4510; font-size: 14px; font-weight: 700; text-decoration: none; }
+.pa-burbuja a.pa-pl-chip:hover, .pa-burbuja a.pa-pl-chip:focus-visible { border-color: #7a5c12; background: #f4ead0; }
 /* El Modo Inspector dentro del chat (24-10-2026): la aplicación que viene al
    caso, en una tarjeta de la respuesta; «Úsala aquí» la abre en un marco. */
 .pa-app { margin: 14px 0 0; border: 1px solid #c9d2e3; border-radius: 14px; background: #f7f8fa; padding: 12px 14px; }
@@ -472,6 +483,18 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .pa-reportero .pa-lista { padding-left: 20px; }
 .pa-reportero .pa-lista li { margin-bottom: 8px; }
 .pa-reportero small { font-size: 14px; color: #44526b; }
+/* La capa de cada modo (04-11-2026): Inspector, Ciudadano y Ambientalista, como la nota del Periodista. */
+.pa-capa { margin-top: 14px; padding: 14px 16px; border-left: 4px solid #0b2a63; background: #f4f7fc; border-radius: 0 12px 12px 0; }
+.pa-capa-t { margin: 0 0 6px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; font-size: 14px; color: #0b2a63; }
+.pa-capa-ciudadano { border-left-color: #a8801f; background: #fbf6e9; }
+.pa-capa-ciudadano .pa-capa-t { color: #6b4f0c; }
+.pa-capa-ambientalista { border-left-color: #2e8a4c; background: #eef7f0; }
+.pa-capa-ambientalista .pa-capa-t { color: #1d5e33; }
+.pa-capa-corto { font-size: 17px; font-weight: 600; color: #13284a; }
+.pa-capa .pa-lista { padding-left: 20px; }
+.pa-capa .pa-lista li { margin-bottom: 8px; }
+.pa-modo-sug-p { margin: 12px 0 0; }
+.pa-burbuja .pa-modo-sug { min-height: 44px; text-align: left; }
 /* «¿Sabías esto?» del Periodista (29-10-2026): va entre las preguntas de ejemplo, con su seña. */
 .pa-ej-sabias { border-color: #b3412e; background: #fbf7f2; border-radius: 18px; }
 .pa-ej-sena { display: block; font-size: 12px; font-weight: 800; color: #b3412e; letter-spacing: .02em; margin-bottom: 2px; }
@@ -480,3 +503,11 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .pa-ciegos p { margin: 0 0 6px; }
 .pa-prom { list-style: none; margin: 8px 0; padding: 0; }
 .pa-prom li { margin: 0 0 8px; padding-left: 10px; border-left: 3px solid #1f4f8a; }
+/* Las leyes del dinero en los tres niveles (03-11-2026). */
+.leg-ciegos { padding-left: 22px; }
+.leg-ciegos li { margin: 0 0 14px; line-height: 1.5; }
+.leg-niveles { padding-left: 20px; }
+.leg-niveles li { margin: 0 0 8px; line-height: 1.5; }
+.leg-leyes { list-style: none; padding: 0; margin: 12px 0 0; }
+.leg-leyes li { padding: 12px 0; border-top: 1px solid var(--border, rgba(127,127,127,.25)); line-height: 1.5; }
+.leg-leyes li small { display: block; margin-top: 4px; }

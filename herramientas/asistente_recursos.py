@@ -66,9 +66,28 @@ RECURSOS = [
     ('mapa-gasto', '🗺️', 'Ver mapa', 'El mapa del gasto federalizado', 'numeros-mapa-del-gasto-federalizado.html',
      'numeros-mapa-del-gasto-federalizado.html?e=%s', 'mapa',
      'estado estados entidad entidades participaciones aportaciones ramo 28 33 federalizado habitante dependencia estatal recibe llega'),
+    # Las lentes del mapa del dinero (02-11-2026): cada una abre el mapa ya
+    # puesto en lo que el lector pidió (?l=), y con su estado si lo nombró.
+    ('mapa-deuda', '🗺️', 'Ver mapa de la deuda', 'La deuda de los 32 estados, en el mapa', 'numeros-mapa-del-gasto-federalizado.html?l=deuda',
+     'numeros-mapa-del-gasto-federalizado.html?l=deuda&e=%s', 'mapa',
+     'deuda deudas debe deben endeudado endeudados endeudamiento semaforo alertas estatal estados entidad entidades mapa'),
+    ('mapa-asf', '🗺️', 'Ver mapa de la ASF', 'Lo que la ASF dejó por aclarar, estado por estado', 'numeros-mapa-del-gasto-federalizado.html?l=asf',
+     'numeros-mapa-del-gasto-federalizado.html?l=asf&e=%s', 'mapa',
+     'asf aclarar observado observaciones fiscalizacion auditoria estados entidad entidades mapa'),
+    ('mapa-cuadre', '🗺️', 'Ver qué no cuadra', 'No cuadra: lo que dice cada estado contra lo que dice la Federación', 'numeros-mapa-del-gasto-federalizado.html?l=cuadre',
+     'numeros-mapa-del-gasto-federalizado.html?l=cuadre&e=%s', 'mapa',
+     'cuadra cuadran incongruencia incongruencias diferencia diferencias transparencia opacidad inegi recibio pago estados entidad mapa'),
+    ('mapa-obras', '🗺️', 'Ver obras en el mapa', 'Obras con alerta ambiental, estado por estado', 'numeros-mapa-del-gasto-federalizado.html?l=obras',
+     'numeros-mapa-del-gasto-federalizado.html?l=obras&e=%s', 'mapa',
+     'obras obra alerta ambiental ambiente contaminacion inversion megaobras estados entidad entidades mapa'),
     ('circuito', '🔄', 'Ver su circuito', 'El circuito del dinero de cada estado', 'numeros-las-32-entidades.html#circuito',
      'numeros-las-32-entidades.html?e=%s#circuito', 'mapa',
      'estado estados entidad estatal recauda recaudacion propia convenios ramo 25 circuito'),
+    # El mapa de los municipios del Planisferio (03-11-2026): con un estado
+    # que ya tiene sus límites del INEGI, lleva directo a su portal (m=1).
+    ('mapa-mun', '🗺️', 'Ver el mapa de sus municipios', 'El mapa de los municipios de tu estado', 'planisferio.html#mapa',
+     'planisferio.html?e=%s&m=1', 'mapa',
+     'mapa municipios municipio municipal alcaldias alcaldia limites territorio'),
     ('padron', '🏘️', 'Ver sus municipios', 'Los municipios, uno por uno', 'numeros-los-municipios.html#padron',
      'numeros-los-municipios.html?e=%s#padron', 'mapa',
      'municipio municipios municipal alcaldia ayuntamiento predial fortamun fismdf padron'),
@@ -121,6 +140,19 @@ RECURSOS = [
     ('obras-huella', '🌳', 'Ver huella', 'La huella ambiental de las megaobras', 'datos-ambiente-megaobras.html',
      'datos-ambiente-megaobras.html?e=%s#abMapaObras', 'tablero',
      'obra obras megaobra megaobras tren maya dos bocas ambiental ambiente huella impacto selva deforestacion manifestacion'),
+    # El Planisferio (pedido del autor, 02-11-2026): la segunda pestaña, México
+    # en un mapa por dimensiones; con un estado, abre el mapa con él elegido.
+    ('planisferio', '🗺️', 'Ver en el Planisferio', 'El Planisferio: México en un mapa', 'planisferio.html',
+     'planisferio.html?e=%s', 'mapa',
+     'planisferio mapa mexico republica tres presupuestos pisos federal estatal municipal municipios dimension dimensiones portal territorio'),
+    # Después del Planisferio general: en un empate («abre el planisferio»)
+    # gana el de arriba, y este solo cuando se pide la deuda.
+    ('pl-deuda', '🏦', 'Ver la deuda en el Planisferio', 'La deuda de los 32 estados y sus tres indicadores, en el Planisferio', 'planisferio.html?d=deuda',
+     'planisferio.html?d=deuda&e=%s', 'mapa',
+     'deuda deudas debe deben endeudado endeudamiento semaforo alertas planisferio indicadores servicio pagar corto plazo libre disposicion mapa'),
+    ('pl-inversion', '🏗️', 'Ver la inversión en el Planisferio', 'La obra de los gobiernos estatales y lo que dejó la ASF, en el Planisferio', 'planisferio.html?d=inversion',
+     'planisferio.html?d=inversion&e=%s', 'mapa',
+     'inversion invierte invirtio obra obras publica infraestructura organismos caminos planisferio mapa'),
 ]
 
 
@@ -134,6 +166,47 @@ def _existe(enlace):
     if ancla and '=' not in ancla:
         return ('id="%s"' % ancla) in open(ruta, encoding='utf-8').read()
     return True
+
+
+def _en_planisferio(ir, ire):
+    """Dónde vive este mapa en el Planisferio, la matriz de los mapas
+    (04-11-2026), o None: {'pl': enlace, 'ple': enlace con estado, 'pld':
+    nombre de la dimensión, 'pll': cómo se rotula, 'plk': la llave con que el
+    chat junta dos mapas que abren lo mismo}. Un mapa del Planisferio vive ahí
+    mismo; una lente del mapa de la Enciclopedia, en su par (PLANISFERIO y
+    OTROS_MAPAS de territorio_modulos.py). El chat junta en un solo renglón
+    los mapas que viven en el Planisferio."""
+    import planisferio
+    import territorio_modulos as tm
+    nombres = {i: nom for i, _, nom, *_r in planisferio.DIMENSIONES}
+    primera, nom_l = {}, {}
+    for l in planisferio.LENTES:
+        primera.setdefault(l['dim'], l['id'])
+        nom_l[l['id']] = re.sub(r'^\d+ · ', '', l['nom']).split(':')[0]
+
+    def sale(liga, ligae, d, l):
+        if not d:
+            return {'pl': liga, 'ple': ligae, 'pld': '', 'pll': '', 'plk': liga.split('?')[0].split('#')[0] + (ligae or '')}
+        l = l or primera[d]
+        rot = nombres[d] if l == primera[d] else '%s · %s' % (nombres[d], nom_l[l])
+        return {'pl': liga, 'ple': ligae, 'pld': nombres[d], 'pll': rot, 'plk': d + '/' + l}
+    archivo = ir.split('#')[0].split('?')[0]
+    if archivo.startswith('planisferio'):
+        d = re.search(r'[?&]d=([a-z]+)', ir)
+        l = re.search(r'[?&]l=([A-Za-z]+)', ir)
+        return sale(ir, ire, d.group(1) if d else None, l.group(1) if l else None)
+    if archivo in tm.OTROS_MAPAS:
+        d, l = tm.OTROS_MAPAS[archivo]
+    elif archivo == tm.MAPA:
+        m = re.search(r'[?&]l=([a-z]+)', ir)
+        p = tm.PLANISFERIO.get(m.group(1) if m else 'gasto')
+        if not p:
+            return None
+        d, l = p
+    else:
+        return None
+    liga = 'planisferio.html?d=%s&l=%s' % (d, l)
+    return sale(liga, liga + '&e=%s', d, l)
 
 
 def _docs_expide():
@@ -170,7 +243,10 @@ def base(estados):
         for e in (ir, (ire % 'X') if ire else None):
             if e and not _existe(e):
                 malos.append(e)
-        rec.append({'id': i, 'q': q, 'ico': ico, 'v': verbo, 'n': nom, 'ir': ir, 'ire': ire, 'tipo': tipo, 'k': k})
+        x = {'id': i, 'q': q, 'ico': ico, 'v': verbo, 'n': nom, 'ir': ir, 'ire': ire, 'tipo': tipo, 'k': k}
+        if tipo == 'mapa':
+            x.update(_en_planisferio(ir, ire) or {})
+        rec.append(x)
     if malos:
         raise SystemExit('asistente_recursos: enlaces que no existen: ' + '; '.join(malos))
     return {'ec': ec, 'rec': rec, 'dl': dl}

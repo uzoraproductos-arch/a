@@ -24,7 +24,7 @@ MODOS_NOMBRE = {'inspector': 'Inspector', 'periodista': 'Periodista',
 MODOS_ICONO = {'inspector': '🔍', 'periodista': '📰', 'ciudadano': '🙋', 'ambientalista': '🌎'}
 
 REGLAS = [
-    ('ambientalista', r'ambient|basura|profepa|Medio ambiente|Justicia ambiental|Costo Ambiental'),
+    ('ambientalista', r'ambient|recursos-naturales|basura|profepa|Medio ambiente|Justicia ambiental|Costo Ambiental'),
     ('periodista', r'^noticias|^periodismo|^derecho-de-replica|^auditoria-|^pilares|Noticias'),
     ('ciudadano', r'^glosario|^diccionario|^marco-legal|^preguntas-frecuentes|^fuentes-oficiales|^aprende|^garantias|'
                   r'^estado-de-cuenta|Calculadora Cívica|Tu estado de cuenta|Baja al territorio|Biblioteca del Erario'),

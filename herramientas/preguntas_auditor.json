@@ -23,7 +23,7 @@
   },
   {
    "q": "Muéstrame el mapa de la deuda de los estados",
-   "ir": "numeros-mapa-del-gasto-federalizado.html"
+   "ir": "planisferio.html?d=deuda&l=deuda"
   },
   {
    "q": "Estado de cuenta de un diputado",
@@ -550,11 +550,17 @@
   },
   {
    "q": "¿Qué es el dictamen cívico independiente?",
-   "ir": "herramienta-inspector-dictamen.html"
+   "ir": "herramienta-inspector-dictamen.html",
+   "dice": [
+    "la forma de tu modo"
+   ]
   },
   {
    "q": "¿Qué es la LGRA?",
-   "ir": "fuentes-oficiales.html#ref-lgra"
+   "ir": "marco-legal-tres-niveles.html#ley-lgra",
+   "dice": [
+    "en toda la República"
+   ]
   },
   {
    "q": "¿Cuánto gana un juez?",
@@ -594,9 +600,9 @@
   },
   {
    "q": "¿Cuánto debe Pemex?",
-   "ir": "pendientes.html#pemex-deuda",
+   "ir": "noticias-auditavision.html#col-pemex-3t-2026-perdida-neta",
    "dice": [
-    "todavía no lo tengo con documento"
+    "77.6 mil millones de dólares"
    ]
   },
   {
@@ -621,9 +627,9 @@
   },
   {
    "q": "¿Cuál es la deuda de Pemex?",
-   "ir": "pendientes.html#pemex-deuda",
+   "ir": "noticias-auditavision.html#col-pemex-3t-2026-perdida-neta",
    "dice": [
-    "todavía no lo tengo con documento"
+    "77.6 mil millones de dólares"
    ]
   },
   {
@@ -689,7 +695,7 @@
   },
   {
    "q": "¿Cuánto rezago tiene el Poder Judicial de Jalisco?",
-   "ir": "datos-judicial-gestion.html#jud-gestion_estados",
+   "ir": "planisferio-jal-judicial.html",
    "dice": [
     "64,628",
     "40,431"
@@ -1135,7 +1141,15 @@
    "modo": "periodista",
    "ir": "periodismo-en-riesgo.html",
    "dice": [
-    "Aún no lo integramos",
+    "110 homicidios",
+    "FEADLE"
+   ]
+  },
+  {
+   "q": "¿Cuántos homicidios de periodistas registra la FEADLE?",
+   "ir": "periodismo-en-riesgo.html#pr-feadle",
+   "dice": [
+    "110",
     "FEADLE"
    ]
   },
@@ -1479,6 +1493,667 @@
    "q": "Dicen que el presupuesto de cultura tendría un recorte de 40 %",
    "dice": [
     "El condicional que esconde un rumor"
+   ]
+  },
+  {
+   "q": "¿Qué es el control interno?",
+   "ir": "aprende-auditoria.html#met-control"
+  },
+  {
+   "q": "¿Qué es el triángulo del fraude?",
+   "ir": "aprende-auditoria.html#met-fraude"
+  },
+  {
+   "q": "¿Qué es el riesgo inherente?",
+   "ir": "aprende-auditoria.html#met-riesgos"
+  },
+  {
+   "q": "¿Qué es la cadena de custodia?",
+   "ir": "aprende-auditoria.html#met-forense"
+  },
+  {
+   "q": "¿Qué es una actividad vulnerable?",
+   "ir": "aprende-auditoria.html#met-lavado"
+  },
+  {
+   "q": "¿Cómo audita Auditavisión?",
+   "ir": "aprende-auditoria.html#met-ruta"
+  },
+  {
+   "q": "¿Qué estados no cuadran con lo que les pagó la Federación?",
+   "ir": "numeros-mapa-del-gasto-federalizado.html?l=cuadre"
+  },
+  {
+   "q": "Muéstrame el mapa de obras con alerta ambiental por estado",
+   "ir": "datos-ambiente-megaobras.html#abMapaObras"
+  },
+  {
+   "q": "Quiero revisar a un proveedor antes de contratarlo",
+   "ir": "servicios.html#sv-diligencia"
+  },
+  {
+   "q": "Muéstrame el mapa de los tres presupuestos",
+   "ir": "planisferio.html"
+  },
+  {
+   "q": "Abre el planisferio",
+   "ir": "planisferio.html"
+  },
+  {
+   "q": "Ver Jalisco en el planisferio",
+   "ir": "planisferio.html?e=JAL"
+  },
+  {
+   "q": "Muéstrame el mapa de los municipios de Jalisco",
+   "ir": "planisferio.html?e=JAL&m=1"
+  },
+  {
+   "q": "Muéstrame el mapa de los municipios de Oaxaca",
+   "ir": "planisferio.html?e=OAX&m=1"
+  },
+  {
+   "q": "Mapa de las alcaldías de la Ciudad de México",
+   "ir": "planisferio.html?e=CDMX&m=1"
+  },
+  {
+   "q": "¿Cuánto debe Jalisco?",
+   "modo": "inspector",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:JAL",
+   "dice": ["La revisión del Inspector", "De qué está hecha esta respuesta", "Para seguir investigando"]
+  },
+  {
+   "q": "¿Cuánto le llega a Oaxaca de la Federación?",
+   "modo": "ciudadano",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:OAX",
+   "dice": ["En corto", "Palabras que quizá no conoces", "Ramo 28"]
+  },
+  {
+   "q": "¿Cuánto debe Veracruz?",
+   "modo": "ambientalista",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:VER",
+   "dice": ["La mirada ambiental", "Agronitrogenados", "gasto público"]
+  },
+  {
+   "q": "El mapa de las obras con alerta ambiental de Veracruz",
+   "ir": "datos-ambiente-megaobras.html?e=VER#abMapaObras"
+  },
+  {
+   "q": "El mapa de la ASF de Oaxaca",
+   "ir": "planisferio.html?d=inversion&l=asf&e=OAX",
+   "dice": ["en el Planisferio"]
+  },
+  {
+   "q": "El mapa del gasto federalizado de Jalisco",
+   "ir": "planisferio.html?d=financiera&l=fed&e=JAL"
+  },
+  {
+   "q": "Mapa de lo que no cuadra",
+   "ir": "planisferio.html?d=financiera&l=cua"
+  },
+  {
+   "q": "Muéstrame la deuda de Nuevo León en el planisferio",
+   "ir": "planisferio.html?d=deuda&e=NL"
+  },
+  {
+   "q": "¿Cuánto le cuesta a Nuevo León pagar su deuda?",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:NL",
+   "dice": [
+    "segundo indicador del Sistema de Alertas"
+   ]
+  },
+  {
+   "q": "Deudas de corto plazo de Coahuila",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:COAH",
+   "dice": [
+    "tercer indicador del Sistema de Alertas",
+    "tenía en caja más que esas deudas"
+   ]
+  },
+  {
+   "q": "¿Cuánto se le va a Tlaxcala en pagar su deuda?",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:TLAX",
+   "dice": [
+    "no se mide en el Sistema de Alertas"
+   ]
+  },
+  {
+   "q": "¿Dónde se publica la ley de ingresos de Jalisco?",
+   "ir": "marco-legal-tres-niveles.html#edo-jal",
+   "dice": [
+    "El Estado de Jalisco"
+   ]
+  },
+  {
+   "q": "¿Quién aprueba la ley de ingresos de un municipio?",
+   "ir": "marco-legal-tres-niveles.html#municipal",
+   "dice": [
+    "congreso del estado"
+   ]
+  },
+  {
+   "q": "Ley de adquisiciones federal",
+   "ir": "marco-legal-tres-niveles.html#ley-laassp",
+   "dice": [
+    "abrogó la del 4 de enero de 2000"
+   ]
+  },
+  {
+   "q": "Ley de responsabilidad patrimonial del Estado",
+   "ir": "marco-legal-tres-niveles.html#ley-lfrpe"
+  },
+  {
+   "q": "Las leyes de ingresos de los tres niveles de gobierno",
+   "ir": "marco-legal-tres-niveles.html"
+  },
+  {
+   "q": "Ley Federal de Deuda Pública",
+   "ir": "marco-legal-tres-niveles.html#ley-lfdp",
+   "dice": [
+    "está en la LDF"
+   ]
+  },
+  {
+   "q": "¿En qué semáforo de deuda está Tlaxcala?",
+   "dice": [
+    "no le publica semáforo"
+   ]
+  },
+  {
+   "q": "Muéstrame la inversión de Yucatán en el planisferio",
+   "ir": "planisferio.html?d=inversion&e=YUC"
+  },
+  {
+   "q": "¿Cuánto invirtió Yucatán en obra pública?",
+   "ir": "planisferio-yuc-inversion.html",
+   "dice": [
+    "de cada $100",
+    "organismos de obra"
+   ]
+  },
+  {
+   "q": "¿Cuánto les pasó Jalisco a sus organismos de obra?",
+   "ir": "planisferio-jal-inversion.html",
+   "dice": [
+    "organismos de infraestructura",
+    "no se suman"
+   ]
+  },
+  {
+   "q": "¿Cuánto invirtió la Ciudad de México en obra pública?",
+   "ir": "planisferio-cdmx-inversion.html",
+   "dice": [
+    "no figura en la estadística estatal"
+   ]
+  },
+  {
+   "q": "¿Cuánto invirtió el municipio de Zapopan en obra pública?",
+   "ir": "planisferio-jal.html?ml=inv#mapa-municipios",
+   "dice": [
+    "de inversión pública",
+    "de cada $100"
+   ]
+  },
+  {
+   "q": "¿Qué municipios de Jalisco invierten más en obra pública?",
+   "dice": [
+    "inversión pública"
+   ]
+  },
+  {
+   "q": "¿Cuánto gasta el Congreso de Jalisco?",
+   "ir": "planisferio-jal-legislativa.html",
+   "dice": [
+    "$922.2 millones",
+    "por curul"
+   ]
+  },
+  {
+   "q": "¿Qué congreso local gasta más por curul?",
+   "ir": "planisferio.html?d=legislativa",
+   "dice": [
+    "Michoacán"
+   ]
+  },
+  {
+   "q": "¿Qué congresos rebasan el tope del 0.70 %?",
+   "ir": "planisferio.html?d=legislativa",
+   "dice": [
+    "no es un incumplimiento",
+    "transitorio octavo"
+   ]
+  },
+  {
+   "q": "¿Cuántos diputados tiene el congreso de Jalisco?",
+   "ir": "datos-legislativo-estados.html#leg-locales",
+   "dice": [
+    "38 personas legisladoras"
+   ]
+  },
+  {
+   "q": "¿Cuánto cuesta el Congreso de la Unión?",
+   "ir": "herramienta-inspector-entes.html#ente=federal:legislativo"
+  },
+  {
+   "q": "¿Cuánto gasta el Poder Judicial de Jalisco?",
+   "ir": "planisferio-jal-judicial.html",
+   "dice": [
+    "$2,533.8 millones",
+    "por asunto concluido"
+   ]
+  },
+  {
+   "q": "¿Cuántos jueces tiene el poder judicial de Tabasco?",
+   "ir": "planisferio-tab-judicial.html",
+   "dice": [
+    "96 personas juzgadoras"
+   ]
+  },
+  {
+   "q": "¿Qué poder judicial estatal tiene más rezago penal?",
+   "ir": "planisferio.html?d=judicial",
+   "dice": [
+    "Estado de México",
+    "58,288"
+   ]
+  },
+  {
+   "q": "¿Qué poder judicial estatal concluye menos asuntos?",
+   "ir": "planisferio.html?d=judicial",
+   "dice": [
+    "Tabasco",
+    "no es lo mismo que no deber"
+   ]
+  },
+  {
+   "q": "¿Cuánto crudo procesa la refinería de Salina Cruz?",
+   "ir": "aprende-recursos-naturales.html#rn-refinerias",
+   "dice": [
+    "202 mil barriles diarios",
+    "Salina Cruz, Oaxaca"
+   ]
+  },
+  {
+   "q": "¿Qué refinería perdió más valor?",
+   "ir": "aprende-recursos-naturales.html#rn-refinerias",
+   "dice": [
+    "deterioro",
+    "no dinero que salió de la caja"
+   ]
+  },
+  {
+   "q": "¿Dónde están las refinerías de Pemex en el mapa?",
+   "ir": "planisferio.html?d=ambiental&l=refj",
+   "dice": [
+    "siete refinerías"
+   ]
+  },
+  {
+   "q": "¿Quién audita a PEMEX?",
+   "ir": "aprende-recursos-naturales.html#rn-pemex",
+   "dice": [
+    "Comité de Auditoría",
+    "Auditoría Superior"
+   ]
+  },
+  {
+   "q": "¿Qué son los recursos naturales no renovables?",
+   "ir": "aprende-recursos-naturales.html#rn-capitulo",
+   "dice": [
+    "cuánto queda"
+   ]
+  },
+  {
+   "q": "¿Se puede dar una concesión de litio?",
+   "ir": "aprende-recursos-naturales.html#rn-regimen",
+   "dice": [
+    "litio"
+   ]
+  },
+  {
+   "q": "¿Qué ley rige la pesca?",
+   "ir": "aprende-recursos-naturales.html#rn-ramos"
+  },
+  {
+   "q": "¿Cuántas concesiones mineras tiene Sonora?",
+   "ir": "planisferio-son-ambiental.html",
+   "dice": [
+    "4,029 títulos de concesión minera",
+    "3,643 títulos"
+   ]
+  },
+  {
+   "q": "¿Qué estado tiene más concesiones mineras?",
+   "ir": "aprende-recursos-naturales.html#rn-mineria",
+   "dice": [
+    "23,231 títulos",
+    "Sonora"
+   ]
+  },
+  {
+   "q": "Concesiones mineras en Baja California",
+   "ir": "planisferio-bc-ambiental.html",
+   "dice": [
+    "528 títulos"
+   ]
+  },
+  {
+   "q": "¿Hay minas en Quintana Roo?",
+   "ir": "planisferio-qroo-ambiental.html",
+   "dice": [
+    "no figura en el cuadro"
+   ]
+  },
+  {
+   "q": "¿Cuánto paga una mina por su concesión?",
+   "ir": "aprende-recursos-naturales.html#rn-mineria",
+   "dice": [
+    "cuota por hectárea"
+   ]
+  },
+  {
+   "q": "¿Dónde están las minas en el mapa?",
+   "ir": "planisferio.html?d=ambiental&l=minT",
+   "dice": [
+    "concesión"
+   ]
+  },
+  {
+   "q": "¿Qué refinería usa más su capacidad?",
+   "ir": "aprende-recursos-naturales.html#rn-refinerias",
+   "dice": [
+    "1,980 mil barriles diarios",
+    "Tula"
+   ]
+  },
+  {
+   "q": "¿Cuál es la capacidad de la refinería de Minatitlán?",
+   "ir": "aprende-recursos-naturales.html#rn-refinerias",
+   "dice": [
+    "285 mil barriles diarios"
+   ]
+  },
+  {
+   "q": "¿Cuántos acuíferos de Chihuahua están en déficit?",
+   "ir": "planisferio-chih-ambiental.html",
+   "dice": [
+    "38 sin disponibilidad",
+    "3,063.0 hm³"
+   ]
+  },
+  {
+   "q": "¿Qué estado tiene más acuíferos en déficit?",
+   "ir": "aprende-recursos-naturales.html#rn-agua",
+   "dice": [
+    "286 no",
+    "Chihuahua"
+   ]
+  },
+  {
+   "q": "¿Cómo está el agua subterránea de Aguascalientes?",
+   "ir": "planisferio-ags-ambiental.html",
+   "dice": [
+    "5 sin disponibilidad",
+    "Valle de Aguascalientes"
+   ]
+  },
+  {
+   "q": "Acuíferos de Tabasco",
+   "ir": "planisferio-tab-ambiental.html",
+   "dice": [
+    "ninguno estaba en déficit"
+   ]
+  },
+  {
+   "q": "¿Qué acuíferos están sobreexplotados?",
+   "ir": "aprende-recursos-naturales.html#rn-agua",
+   "dice": [
+    "27 de ellos",
+    "538,805 títulos"
+   ]
+  },
+  {
+   "q": "¿Es lo mismo un acuífero sin disponibilidad que uno sobreexplotado? ¿qué no dice el mapa del agua?",
+   "ir": "aprende-recursos-naturales.html#rn-agua-ciegos",
+   "dice": [
+    "Alfredo V. Bonfil",
+    "cada dos años"
+   ]
+  },
+  {
+   "q": "¿Dónde están los acuíferos en déficit en el mapa?",
+   "ir": "planisferio.html?d=ambiental&l=acuP",
+   "dice": [
+    "653 acuíferos"
+   ]
+  },
+  {
+   "q": "¿Cuántos incendios forestales hubo en Chihuahua?",
+   "ir": "planisferio-chih-ambiental.html",
+   "dice": [
+    "596 incendios forestales",
+    "221,533.30 ha"
+   ]
+  },
+  {
+   "q": "¿Qué estado tuvo más incendios forestales?",
+   "ir": "aprende-recursos-naturales.html#rn-incendios",
+   "dice": [
+    "7,002 incendios forestales",
+    "Jalisco tuvo más incendios"
+   ]
+  },
+  {
+   "q": "Incendios forestales en Baja California Sur",
+   "ir": "planisferio-bcs-ambiental.html",
+   "dice": [
+    "7 incendios forestales",
+    "80.4"
+   ]
+  },
+  {
+   "q": "¿Quién combate los incendios forestales?",
+   "ir": "aprende-recursos-naturales.html#rn-incendios",
+   "dice": [
+    "combate inicial",
+    "art. 119"
+   ]
+  },
+  {
+   "q": "¿Qué no dicen las cifras de incendios forestales?",
+   "ir": "aprende-recursos-naturales.html#rn-incendios-ciegos",
+   "dice": [
+    "no es bosque perdido",
+    "01:51"
+   ]
+  },
+  {
+   "q": "¿Dónde están los incendios forestales en el mapa?",
+   "ir": "planisferio.html?d=ambiental&l=incH",
+   "dice": [
+    "1,221,711.03 ha"
+   ]
+  },
+  {
+   "q": "¿Cuánto bosque tiene Durango?",
+   "ir": "planisferio-dgo-ambiental.html",
+   "dice": [
+    "Su superficie forestal",
+    "10,618,110.3 ha"
+   ]
+  },
+  {
+   "q": "¿Cuál es la superficie forestal de México?",
+   "ir": "aprende-recursos-naturales.html#rn-bosques",
+   "dice": [
+    "138,695,229.8 ha",
+    "matorral xerófilo"
+   ]
+  },
+  {
+   "q": "¿Qué estado tiene más superficie forestal?",
+   "ir": "aprende-recursos-naturales.html#rn-bosques",
+   "dice": [
+    "Chihuahua tiene la mayor superficie forestal",
+    "48.8 %"
+   ]
+  },
+  {
+   "q": "¿Qué parte del bosque de Tabasco se quemó?",
+   "ir": "planisferio-tab-ambiental.html",
+   "dice": [
+    "9.7 de cada 100 hectáreas forestales"
+   ]
+  },
+  {
+   "q": "¿Dónde están los bosques en el mapa?",
+   "ir": "planisferio.html?d=ambiental&l=sfT",
+   "dice": [
+    "138,695,229.8 ha"
+   ]
+  },
+  {
+   "q": "¿Cuánto pesca Sinaloa?",
+   "ir": "planisferio-sin-ambiental.html",
+   "dice": [
+    "480,141 t",
+    "de pesca y acuacultura en peso vivo"
+   ]
+  },
+  {
+   "q": "¿Qué estado pesca más?",
+   "ir": "aprende-recursos-naturales.html#rn-pesca",
+   "dice": [
+    "Sonora registró más que nadie",
+    "81.6 %"
+   ]
+  },
+  {
+   "q": "¿Cuánta acuacultura hay en México?",
+   "ir": "aprende-recursos-naturales.html#rn-pesca",
+   "dice": [
+    "2,206,439 t",
+    "17.6 fueron de cultivo"
+   ]
+  },
+  {
+   "q": "¿Qué no dicen las cifras de la pesca?",
+   "ir": "aprende-recursos-naturales.html#rn-pesca-ciegos",
+   "dice": [
+    "cruza a Jalisco y Colima",
+    "Carta Nacional Pesquera"
+   ]
+  },
+  {
+   "q": "¿Cuánto vale la pesca en el mapa?",
+   "ir": "planisferio.html?d=ambiental&l=peV",
+   "dice": [
+    "$61,941.5 mdp"
+   ]
+  },
+  {
+   "q": "¿Cuánto pesca Nuevo León?",
+   "ir": "planisferio-nl-ambiental.html",
+   "dice": [
+    "no registró producción pesquera ni acuícola en 2025"
+   ]
+  },
+  {
+   "q": "¿Por qué su base de datos es un pilar de transparencia?",
+   "ir": "pilares.html"
+  },
+  {
+   "q": "¿Cuánto pagó de deuda el municipio de Guadalajara?",
+   "ir": "planisferio-jal-deuda.html"
+  },
+  {
+   "q": "¿Qué municipios de Nuevo León pagan más deuda?",
+   "ir": "numeros-baja-al-territorio.html"
+  },
+  {
+   "q": "¿Cuántos médicos tiene el ISSSTE en Jalisco?",
+   "ir": "planisferio-jal-salud.html",
+   "dice": [
+    "1,044"
+   ]
+  },
+  {
+   "q": "¿Cuántas personas tiene adscritas el IMSS en la Ciudad de México?",
+   "ir": "planisferio-cdmx-salud.html",
+   "dice": [
+    "6,519,887"
+   ]
+  },
+  {
+   "q": "¿Qué estado tiene menos camas del IMSS?",
+   "ir": "datos-salud-sistema.html#sal-estados",
+   "dice": [
+    "Tlaxcala"
+   ]
+  },
+  {
+   "q": "¿Cuánta gente trabaja en el gobierno de Jalisco?",
+   "ir": "planisferio-jal-administracion.html",
+   "dice": [
+    "149,888"
+   ]
+  },
+  {
+   "q": "¿Qué estado da más contratos por adjudicación directa?",
+   "ir": "datos-administracion-publica-auditorias.html#adm-contratos",
+   "dice": [
+    "Sonora"
+   ]
+  },
+  {
+   "q": "¿Quién audita a los municipios?",
+   "ir": "datos-administracion-publica-auditorias.html#adm-auditorias",
+   "dice": [
+    "9,487"
+   ]
+  },
+  {
+   "q": "¿Qué funciones tiene un municipio?",
+   "ir": "datos-administracion-publica-niveles.html#adm-funciones",
+   "dice": [
+    "art. 115"
+   ]
+  },
+  {
+   "q": "¿Hay contratos partidos para no pasar del tope de la adjudicación directa?",
+   "ir": "contratos-publicos.html#fraccionamiento",
+   "dice": [
+    "señal para revisar, no una irregularidad",
+    "Anexo 9"
+   ]
+  },
+  {
+   "q": "Señales de fraccionamiento del IMSS",
+   "ir": "contratos-publicos.html#fraccionamiento",
+   "dice": [
+    "INSTITUTO MEXICANO DEL SEGURO SOCIAL",
+    "C-2025-"
+   ]
+  },
+  {
+   "q": "¿Cuánta pobreza hay en Chiapas?",
+   "ir": "planisferio-chis-social.html",
+   "dice": [
+    "66.0 de cada 100",
+    "pobreza extrema"
+   ]
+  },
+  {
+   "q": "Mapa de la pobreza por estado",
+   "ir": "planisferio.html?d=social",
+   "dice": [
+    "29.6 de cada 100"
+   ]
+  },
+  {
+   "q": "Pobreza extrema en Oaxaca",
+   "ir": "planisferio-oax-social.html",
+   "dice": [
+    "16.3"
    ]
   }
  ]

@@ -308,14 +308,25 @@ AUDITOR_VIRTUAL = 'herramienta-inspector-pregunta.html'
 NUMEROS_HERR = 'numeros-herramientas-del-auditor.html'
 HERR_SITIO = {'menu_archivo': 'sigue-el-dinero.html', 'padre': ('sigue-el-dinero.html', 'Números'),
               'padre2': (NUMEROS_HERR, 'Herramientas del Auditor')}
+# Las páginas de la Enciclopedia (Números, Datos y Aprende). Desde el
+# 02-11-2026 la Enciclopedia es la cuarta tarjeta de Comunidad (pedido del
+# autor), así que estas páginas marcan la pestaña Comunidad y sus migas
+# empiezan «Comunidad › Enciclopedia».
+ENCICLO_MARCAN = (ENCICLOPEDIA, 'sigue-el-dinero.html', 'descarga-los-datos.html', 'aprende.html')
+# El menú desde el 02-11-2026 (pedido del autor): «Auditor» (antes «Auditor
+# Virtual»), el Planisferio como segunda pestaña, Comunidad con la
+# Enciclopedia dentro, «Noticiero» (antes «Noticias») y Servicios. Ningún
+# archivo cambió de nombre.
+PLANISFERIO = 'planisferio.html'
 MENU = [
-    (AUDITOR_VIRTUAL, 'Auditor Virtual', ('herramientas.html',)),
-    (ENCICLOPEDIA, 'Enciclopedia', (ENCICLOPEDIA, 'sigue-el-dinero.html', 'descarga-los-datos.html', 'aprende.html')),
-    ('participa.html', 'Comunidad', ('participa.html',)),
-    # Cuarta pestaña (pedido del autor, 28-10-2026: «darle más protagonismo a
-    # las noticias relevantes… como una cuarta pestaña»). Antes colgaba de
-    # Aprende; su archivo no cambia de nombre.
-    ('noticias-relevantes.html', 'Noticias', ('noticias-relevantes.html',)),
+    (AUDITOR_VIRTUAL, 'Auditor', ('herramientas.html',)),
+    (PLANISFERIO, 'Planisferio', (PLANISFERIO,)),
+    ('participa.html', 'Comunidad', ('participa.html',) + ENCICLO_MARCAN),
+    # Pedido del autor, 28-10-2026: «darle más protagonismo a las noticias
+    # relevantes… como una cuarta pestaña». Desde el 02-11-2026 se llama
+    # «Noticiero»; su archivo no cambia de nombre.
+    ('noticias-relevantes.html', 'Noticiero', ('noticias-relevantes.html',)),
+    ('servicios.html', 'Servicios', ('servicios.html',)),
 ]
 
 # El índice de las cuatro herramientas. Desde el 29-10-2026 vive en
@@ -325,7 +336,7 @@ HERR_INDICE = {
     # Desde el 23-10-2026 la pestaña se llama «Auditor Virtual» (decisión
     # del autor); el archivo conserva su nombre para no romper enlaces.
     'menu': 'Herramientas',
-    'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+    'padre': (AUDITOR_VIRTUAL, 'Auditor'),
     'icono': '🧰',
     'titulo': 'Herramientas para seguir el dinero público',
     'lema': 'El gasto público, a la vista',
@@ -361,6 +372,9 @@ APARTADOS = [
         # (enciclopedia.html, retirada el 24-10-2026): aquí solo hay tres tarjetas.
         'archivo': ENCICLOPEDIA,
         'menu': 'Enciclopedia',
+        # Cuarta tarjeta de Comunidad desde el 02-11-2026 (pedido del autor).
+        'menu_archivo': 'participa.html',
+        'padre': ('participa.html', 'Comunidad'),
         'icono': '📚',
         'titulo': 'Enciclopedia',
         'lema': 'La obra de consulta del auditor',
@@ -607,6 +621,14 @@ APARTADOS = [
                 'pagina': 'datos-justicia-ambiental.html',
                 'pestana': ('🌳', 'Justicia ambiental', 'Lo que cuesta y lo que resuelve la PROFEPA: denuncias, rezago y multas: abre su página'),
             },
+            {
+                # Administración pública (03-11-2026, pedido del autor): los
+                # tres niveles, sus funciones y sus auditorías
+                # (administracion_publica.py).
+                'id': 'administracion-publica',
+                'pagina': 'datos-administracion-publica.html',
+                'pestana': ('🏢', 'Administración pública', 'Federal, estatal y municipal: lo que hace, lo que cuesta y quién la audita: abre su página'),
+            },
             # El Estado de cuenta administrativo fue la cuarta tarjeta de Datos
             # del 12-10-2026 al 22-10-2026; desde entonces (pedido del autor)
             # es la quinta aplicacion de la Calculadora Civica. Su ancla vieja
@@ -667,6 +689,21 @@ APARTADOS = [
                 'pagina': 'herramienta-inspector-nepotismo.html',
                 'pestana': ('👪', 'Nepotismo y cargos públicos', 'Qué parientes alcanza la ley y cómo se investiga un cargo'),
             },
+            {
+                # Pedido del autor, 02-11-2026: «integra nuestra base de datos
+                # como metodología». La pagina la escribe metodologia_auditoria.py.
+                'id': 'como-se-audita',
+                'pagina': 'aprende-auditoria.html',
+                'pestana': ('🧭', 'Cómo se audita', 'Control interno, riesgos, fraude, prueba y lavado, con su fuente oficial'),
+            },
+            {
+                # Pedido del autor, 03-11-2026: el capítulo 6 de su libro
+                # «Introducción al Derecho Económico» como metodología. La
+                # pagina la escribe recursos_naturales.py.
+                'id': 'recursos-naturales',
+                'pagina': 'aprende-recursos-naturales.html',
+                'pestana': ('🌎', 'Los recursos naturales', 'Renovables y no renovables, PEMEX y sus refinerías: qué se audita y con qué ley'),
+            },
             # «El Congreso y las elecciones» fue la cuarta pestaña de Aprende la
             # mañana del 23-10-2026; esa tarde (pedido del autor) se mudó a
             # Datos, como «Poder Legislativo» (poderes_paginas()).
@@ -680,9 +717,10 @@ APARTADOS = [
         'menu': 'Comunidad',
         'icono': '💬',
         'titulo': 'Comunidad',
-        'lema': 'Ágora cívica y canales oficiales',
+        'lema': 'Ágora cívica, canales oficiales y la Enciclopedia',
         'entrada': ('Contrasta posturas con fuentes, publica tu argumento y, si viste algo raro con el dinero público, '
-                    'llévalo al canal oficial que corresponde. Sin correos, teléfonos ni rastreo.'),
+                    'llévalo al canal oficial que corresponde. Aquí vive también la Enciclopedia, la obra de consulta de '
+                    'la plataforma. Sin correos, teléfonos ni rastreo.'),
         'pestanas': True,
         # «Servicios» paso al Modo Inspector (pedido del autor, 11-10-2026).
         'hash_a_pagina': {'agora': 'agora.html', 'garantias': 'garantias.html', 'servicios': 'servicios.html',
@@ -718,6 +756,14 @@ APARTADOS = [
                 'id': 'donaciones',
                 'pagina': 'donaciones.html',
                 'pestana': ('🐷', 'Donaciones', 'Ayuda a sostener la plataforma, a la vista de todos: abre su página'),
+            },
+            {
+                # Pedido del autor, 02-11-2026: la pestaña Enciclopedia se
+                # vuelve la cuarta tarjeta de Comunidad. Su página y las de
+                # Números, Datos y Aprende no cambian de nombre.
+                'id': 'enciclopedia',
+                'pagina': ENCICLOPEDIA,
+                'pestana': ('📚', 'Enciclopedia', 'Números, Datos y Aprende: la obra de consulta, con su fuente oficial: abre su página'),
             },
         ],
     },
@@ -1250,7 +1296,7 @@ def herramienta_asistente(bloque):
         'entrada': '<b>%s.</b> %s' % (ASISTENTE[2], ASISTENTE[3]),
         'fondo': FOTO_AUDITOR, 'rubro': rubro, 'foto_clase': 'foto-auditor',
         'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
-        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
+        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
         # Sin la fila de las cuatro herramientas: el chat ya es sus modos.
         'pie_extra': nav,
     }
@@ -1263,14 +1309,14 @@ def herramienta_dictamen(bloque):
     import asistente
     return {
         'archivo': asistente.DICTAMEN, 'menu': 'Dictamen cívico independiente', 'menu_archivo': 'herramientas.html',
-        'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+        'padre': (AUDITOR_VIRTUAL, 'Auditor'),
         'icono': '🧾', 'titulo': 'Dictamen cívico independiente de Auditavisión',
         'lema': '%s · el respaldo de una respuesta' % ASISTENTE[1], 'sin_icono_lema': True, 'icono_cab': LOGO_IMG,
         'entrada': ('<b>El respaldo de una respuesta del Auditor.</b> Tu pregunta, lo que se contestó, cada cifra con su estado, '
                     'sus fuentes oficiales y el método, con folio, sello y huella digital. Se arma de nuevo con los datos de la plataforma cada vez que se abre el enlace.'),
         'fondo': FOTO_AUDITOR, 'rubro': h[1], 'foto_clase': 'foto-auditor',
         'secciones': [{'id': 'dictamen', 'titulo': 'Dictamen cívico independiente de Auditavisión', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
-        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
+        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
     }
 
 
@@ -1285,6 +1331,7 @@ def poderes_paginas(base):
     import asistente_judicial as aj
     import gestion_salud as gs
     import gestion_ambiental as ga
+    import administracion_publica as adm
     paginas = []
     poderes = [
         (al, '🏛️', 'Curules, escaños, sesiones, el calendario del presupuesto y las elecciones de 2027',
@@ -1309,6 +1356,13 @@ def poderes_paginas(base):
          'Lo que dice su informe se coteja contra sus propias tablas, y lo que no publica va con su ficha en el Registro de pendientes. '
          'Cada tarjeta abre su propia página.',
          lambda temas: ga.secciones(base, temas), ga.PRE),
+        # Administración pública (03-11-2026): el Poder Ejecutivo de los tres
+        # niveles, con los censos de gobierno del INEGI y la Matriz de la ASF.
+        (adm, '🏢', 'Federal, estatal y municipal: lo que hace, cuánta gente, cuánto dinero, cómo contrata y quién la audita',
+         'La parte del gobierno que ejecuta, en los tres niveles: cuántas instituciones y personas tiene, cuánto ejerció en 2024, qué funciones le da la ley, '
+         'cuántos contratos dio sin concurso y qué le dejó por aclarar la Auditoría Superior de la Federación. Con los censos de gobierno del INEGI, la Constitución '
+         'y la Matriz de Datos Básicos de la ASF. Cada tarjeta abre su propia página.',
+         lambda temas: adm.secciones(base, temas), adm.PRE),
     ]
     for mod, ico, lema, entrada, secc, pre in poderes:
         partes = [(x[0], x[0], x[1], x[2]) for x in mod.PAGINAS]
@@ -1368,11 +1422,12 @@ def noticias(base, ref):
     import noticias as nt
     indice = {
     'archivo': NOTICIAS_ARCHIVO,
-    'menu': 'Noticias relevantes',
+    'menu': 'Noticiero',
     # Cuarta pestaña del menú desde el 28-10-2026 (pedido del autor): ya no
-    # cuelga de Aprende, aunque Aprende conserva su tarjeta hacia aquí.
+    # cuelga de Aprende, aunque Aprende conserva su tarjeta hacia aquí. Desde
+    # el 02-11-2026 se llama «Noticiero» (pedido del autor).
     'icono': '📰',
-    'titulo': 'Noticias relevantes',
+    'titulo': 'Noticiero',
     'lema': 'La noticia, el verificador y el seguimiento',
     'entrada': ('Las finanzas públicas de México, verificadas, en tres puertas: el periódico de la plataforma, el verificador para cotejar '
                 'lo que viste y el seguimiento de los casos que no se olvidan. Cada afirmación lleva el documento oficial que la sostiene.'),
@@ -1386,7 +1441,7 @@ def noticias(base, ref):
         verifica = arch == nt.VERIFICA
         paginas.append({
             'archivo': arch, 'menu': nom, 'menu_archivo': NOTICIAS_ARCHIVO,
-            'padre': (NOTICIAS_ARCHIVO, 'Noticias'),
+            'padre': (NOTICIAS_ARCHIVO, 'Noticiero'),
             'icono': ico, 'titulo': nom, 'lema': lema, 'entrada': entrada,
             'scripts': ['columnas.js'] + (list(insp_nota.SCRIPTS) if verifica else []) + nt.SCRIPTS,
             'estilos': ['columnas.css'] + (list(insp_nota.ESTILOS) if verifica else []) + nt.ESTILOS,
@@ -1433,6 +1488,16 @@ PILARES_LISTA = [
     ('⏳', 'Lo que falta, se señala con nombre',
      'Cuando un dato no está publicado, no lo inventamos ni lo estimamos a ojo: lo marcamos «pendiente», decimos por qué falta y '
      'quién debe publicarlo, y lo anotamos en el Registro de pendientes.'),
+    # Decision del autor, 03-11-2026: «la construccion de nuestra base de datos debe convertirse en ese pilar de
+    # transparencia», tras descartar la Plataforma Nacional de Transparencia como via («no podemos contar o confiar» en ella).
+    ('🗃️', 'Nuestra base de datos es un pilar de transparencia',
+     'No esperamos a que alguien conteste una solicitud. La respuesta a una solicitud solo la tiene quien la pidió, y desde 2025 ya no '
+     'la revisa un órgano autónomo: el INAI se extinguió y su tarea pasó al propio Gobierno (<a href="%s" target="_blank" rel="noopener">'
+     'Ley General de Transparencia, DOF 20-03-2025 ↗</a>). Nosotros armamos la transparencia con lo que se publica para todos: cada '
+     'documento oficial que integramos guarda su huella digital (SHA-256), para comprobar que es el mismo archivo; sus totales se vuelven '
+     'a sumar, y si no cuadran no se publica nada; cada cifra lleva su chip, su página y su enlace, y la base se '
+     '<a href="datos-abiertos.html">descarga</a> completa. Lo que el Gobierno no publica no se consigue por debajo de la mesa: se queda en '
+     'el <a href="pendientes.html">Registro de pendientes</a>, con el nombre de quien lo debe.' % 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTAIP.pdf'),
     ('🗺️', 'Que se entienda de un vistazo',
      'Mapas, contadores, simuladores y estados de cuenta para leer el dinero público de forma gráfica y sencilla, y siempre un '
      'camino a los canales oficiales y a descargar los datos.'),
@@ -1448,6 +1513,28 @@ PILARES_LISTA = [
 ]
 
 LEY_PERIODISTAS = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LPPDDHP.pdf'
+
+# Los pasos del duodecimo pilar (03-11-2026): como entra una cifra a la base. Dicen lo que ya hace el codigo
+# (huellas de herramientas/*.py, cuadres que detienen la generacion, chips, pendientes.py); si eso cambia, cambia aqui.
+BASE_PASOS = [
+    ('📄', 'Solo lo que se publica para todos',
+     'Una cifra entra solo si sale de un documento que cualquiera puede abrir: el DOF, la Cuenta Pública, la ASF, el INEGI, los informes '
+     'y anuarios de cada dependencia. Una respuesta a una solicitud, una filtración o una nota de prensa no son la fuente.'),
+    ('🔏', 'La huella del archivo',
+     'Guardamos la huella digital (SHA-256) del archivo de donde salió la cifra. Si alguien cambia el documento, la huella deja de '
+     'coincidir y se nota.'),
+    ('🧮', 'Las cuentas se vuelven a hacer',
+     'Copiamos las filas y volvemos a sumar: si las entidades no dan el total que publica la dependencia, la plataforma se detiene y '
+     'no publica nada hasta aclararlo.'),
+    ('🏷️', 'Cada cifra dice qué es',
+     '«Oficial» si está tal cual en su documento; «derivado» si la calculamos, con la operación dicha; «pendiente» si no está publicado. Y '
+     'siempre con su página y su enlace.'),
+    ('⏳', 'Lo que falta, con nombre',
+     'Si la dependencia no lo publica, no lo rellenamos: queda en el Registro de pendientes, con por qué falta, quién lo debe y dónde '
+     'debería estar.'),
+    ('💾', 'Todo se descarga',
+     'Las bases salen en CSV para que las revises en Excel, y el Auditor Virtual te lleva a la página y al documento de cada respuesta.'),
+]
 
 # Aviso de privacidad (paso 1.5 del plan v2, 26-10-2026). Cotejado contra la
 # LFPDPPP vigente (nueva ley, DOF 20-03-2025; ultima reforma DOF 14-11-2025):
@@ -1488,7 +1575,7 @@ AVISO = {
     'archivo': 'aviso-de-privacidad.html',
     'menu': 'Aviso de privacidad',
     'menu_archivo': AUDITOR_VIRTUAL,
-    'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+    'padre': (AUDITOR_VIRTUAL, 'Auditor'),
     'icono': '🔒',
     'titulo': 'Aviso de privacidad',
     'lema': 'Qué sabemos de ti: hoy, nada',
@@ -1561,7 +1648,7 @@ REPLICA = {
     'archivo': 'derecho-de-replica.html',
     'menu': 'Derecho de réplica',
     'menu_archivo': AUDITOR_VIRTUAL,
-    'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+    'padre': (AUDITOR_VIRTUAL, 'Auditor'),
     'icono': '✉️',
     'titulo': 'Derecho de réplica',
     'lema': 'Si te aludimos con un dato inexacto, tu aclaración se publica',
@@ -1644,21 +1731,26 @@ PILARES = {
     'archivo': 'pilares.html',
     'menu': 'Nuestros pilares',
     'menu_archivo': AUDITOR_VIRTUAL,
-    'padre': (AUDITOR_VIRTUAL, 'Auditor Virtual'),
+    'padre': (AUDITOR_VIRTUAL, 'Auditor'),
     'icono': '🏛️',
     'titulo': 'Nuestros pilares',
     'lema': 'El periodista virtual del gasto público',
     'estilos': ['pilares.css'],
-    'entrada': ('Auditavisión existe para seguir el dinero público y contarlo con documentos. Estos son los once pilares que sostienen '
+    'entrada': ('Auditavisión existe para seguir el dinero público y contarlo con documentos. Estos son los doce pilares que sostienen '
                 'cada página, cada respuesta del Auditor Virtual y cada dictamen. Ejercer el periodismo en México tiene riesgos que el '
                 'propio Estado reconoce: por eso existe, desde 2012, una ley para proteger a periodistas y a personas defensoras de '
                 'derechos humanos (<a href="%s" target="_blank" rel="noopener">Ley para la Protección de Personas Defensoras de Derechos '
                 'Humanos y Periodistas, DOF 25-06-2012 ↗</a>) %s.' % (LEY_PERIODISTAS, '<span class="est-chip est-oficial">oficial</span>')),
     'secciones': [
-        {'id': 'pilares', 'titulo': 'Los once pilares', 'texto': 'Lo que hacemos, y lo que nunca hacemos, con el dinero público y con la verdad.',
+        {'id': 'pilares', 'titulo': 'Los doce pilares', 'texto': 'Lo que hacemos, y lo que nunca hacemos, con el dinero público y con la verdad.',
          'tarjetas': [],
          'bloque': '<ol class="pil-lista">\n%s\n        </ol>' % '\n'.join(
              '          <li><span class="pil-ico" aria-hidden="true">%s</span><div><h3>%s</h3><p>%s</p></div></li>' % x for x in PILARES_LISTA)},
+        {'id': 'base', 'titulo': 'Cómo se arma nuestra base de datos',
+         'texto': 'El duodécimo pilar, paso por paso. Así entra una cifra a la plataforma, y así puedes comprobarla tú.',
+         'tarjetas': [],
+         'bloque': '<ol class="pil-lista">\n%s\n        </ol>' % '\n'.join(
+             '          <li><span class="pil-ico" aria-hidden="true">%s</span><div><h3>%s</h3><p>%s</p></div></li>' % x for x in BASE_PASOS)},
         {'id': 'donde', 'titulo': 'Dónde se ven', 'texto': 'Cada pilar tiene su herramienta.',
          'tarjetas': [
              ('🤖', 'Pregúntale al Auditor', 'El periodista virtual: busca, coteja, explica y genera el dictamen.', AUDITOR_VIRTUAL, None, None),
@@ -1685,7 +1777,9 @@ def _cmx_meta():
 def contratos_publicos():
     """Contratos publicos de ComprasMX (pedido del autor, 26-10-2026: «integra
     los contratos de ComprasMX» para seguir el dinero). El buscador y el
-    cruce los pinta contratos.js con los catalogos de actualizar_comprasmx.py."""
+    cruce los pinta contratos.js con los catalogos de actualizar_comprasmx.py.
+    Las senales de fraccionamiento (03-11-2026) las escribe fraccionamiento.py."""
+    import fraccionamiento
     m, cruce = _cmx_meta()
     arch = ''.join('<li><b>%s</b>: %s contratos <small>(sha256 %s…)</small></li>' % (a['archivo'], format(a['contratos'], ','), a['sha256'][:12])
                    for a in m['archivos'])
@@ -1696,7 +1790,7 @@ def contratos_publicos():
         'entrada': ('Los contratos que las dependencias federales y los gobiernos que usan ComprasMX reportaron en los expedientes de 2025 y 2026: '
                     '%s empresas y %s instituciones. Busca una empresa, su RFC o una institución, y ve cuántos contratos tiene, por cuánto, '
                     'por qué procedimiento y la liga de cada uno a ComprasMX. También puedes preguntárselo al Auditor: «contratos de Laboratorios Pisa», '
-                    '«¿a quién le compra el IMSS?».' % (format(m['proveedores'], ','), format(m['instituciones'], ','))),
+                    '«¿a quién le compra el IMSS?». Y revisa las señales de contratos partidos para no pasar del tope de la adjudicación directa.' % (format(m['proveedores'], ','), format(m['instituciones'], ','))),
         'estilos': ['contratos.css'],
         'scripts': ['contratos.js'],
         'secciones': [
@@ -1712,6 +1806,7 @@ def contratos_publicos():
              'texto': ('Cruzamos, por RFC, a cada proveedor con contratos contra el listado del artículo 69-B del SAT (empresas que facturan '
                        'operaciones inexistentes). Al corte de esta versión aparecen %d. Aparecer no es una condena: cada uno lleva su situación.' % cruce),
              'tarjetas': [], 'bloque': '<div class="cmx-cruce" id="cmxCruce"><p>Cargando el cruce…</p></div>'},
+            fraccionamiento.seccion(),
             {'id': 'metodo', 'titulo': 'De dónde salen los datos', 'texto': 'Lo que dice el documento y lo que no.', 'tarjetas': [],
              'bloque': ('<div class="cmx-metodo">\n'
                         '          <p>Fuente: <a href="%s" target="_blank" rel="noopener">ComprasMX, Datos Abiertos ↗</a>, «Datos relevantes de los contratos ingresados a la plataforma», '
@@ -1805,9 +1900,30 @@ SERVICIOS = [
     ('capacitacion', '🎓', 'Capacitación',
      'Talleres para leer el presupuesto y usar las herramientas de la plataforma.',
      'Taller de interpretación presupuestaria y uso del Modo Inspector.', 'Universidades públicas y privadas, organizaciones, equipos de trabajo y dependencias de gobierno.'),
+    ('diligencia', '🏢', 'Revisión de un proveedor',
+     'Lo que los documentos públicos dicen de una empresa: sus contratos con el gobierno, si está en la lista 69-B del SAT, en el directorio de sancionados o en un informe de la ASF.',
+     'Ficha del proveedor con cada hallazgo y su documento; con seguimiento, aviso cuando algo cambia.', 'Empresas, despachos contables y áreas de cumplimiento.'),
     ('licencia', '🔑', 'Licencia de las herramientas',
      'El uso de las herramientas y los datos de la plataforma dentro de tu institución.',
      'Licencia de uso, adaptación y acompañamiento.', 'Dependencias de gobierno, universidades, medios y organizaciones.'),
+]
+
+# A quién servimos (pedido del autor, 02-11-2026: «quedar con esa pestaña de
+# servicios de qué ofrecemos hacia esos sectores y en qué consisten»). Cada
+# sector dice lo que necesita y qué servicios de SERVICIOS lo atienden.
+SECTORES = [
+    ('🏢', 'Empresas y sus contadores', 'Saber con quién contratan: un proveedor en la lista 69-B del SAT o sancionado es un riesgo fiscal y legal.',
+     ['diligencia', 'seguimiento']),
+    ('🧮', 'Auditores, despachos y órganos de control', 'Formarse con casos mexicanos reales: las 20 matrices de la ASF, el control interno y la prueba.',
+     ['capacitacion', 'revision']),
+    ('🏛️', 'Regidurías y congresos', 'Llegar a una sesión de cabildo o a la revisión de una cuenta pública con los documentos ya cruzados. El mismo servicio y la misma regla para todos los partidos.',
+     ['expediente', 'seguimiento']),
+    ('📰', 'Medios y periodistas', 'Cotejar rápido una cifra antes de publicarla y tener el documento que la sostiene.',
+     ['revision', 'licencia']),
+    ('🎓', 'Universidades y organizaciones civiles', 'Enseñar a leer el presupuesto y usar los datos en clase o en un proyecto.',
+     ['capacitacion', 'licencia']),
+    ('📋', 'Gobiernos y dependencias', 'Capacitar a su personal. Nunca a cambio de retirar, suavizar o retrasar lo que publicamos (política de independencia).',
+     ['capacitacion', 'licencia']),
 ]
 
 PROCESO = [
@@ -1858,6 +1974,15 @@ def servicios():
         '            <p class="sv-que">%s</p>\n'
         '            <dl class="sv-dl"><dt>Entregable</dt><dd>%s</dd><dt>Para quién</dt><dd>%s</dd></dl>\n'
         '          </article>' % s for s in SERVICIOS)
+    nom = {x[0]: x[2] for x in SERVICIOS}
+    sectores = '\n'.join(
+        '          <article class="sv-servicio sv-sector">\n'
+        '            <span class="sv-ico" aria-hidden="true">%s</span>\n'
+        '            <h3 class="sv-tit">%s</h3>\n'
+        '            <p class="sv-que">%s</p>\n'
+        '            <p class="sv-que"><b>Te sirve:</b> %s.</p>\n'
+        '          </article>' % (ico, sec, nec, ', '.join('<a href="#sv-%s">%s</a>' % (i, nom[i]) for i in ids))
+        for ico, sec, nec, ids in SECTORES)
     pasos = '\n'.join(
         '          <li class="sv-paso"><span class="sv-paso-num" aria-hidden="true">%d</span>'
         '<span class="sv-paso-ico" aria-hidden="true">%s</span><b>%s</b><span>%s</span></li>' % ((n,) + p)
@@ -1907,9 +2032,9 @@ def servicios():
         '        <div class="sv-resumen" id="svResumen" hidden></div>',
         '        <noscript><p>El formulario necesita JavaScript.</p></noscript>'])
     return {
-        'archivo': 'servicios.html', 'menu': 'Servicios de investigación', **HERR_SITIO,
-        # Desde el 11-10-2026 es un modulo del Modo Inspector (pedido del autor).
-        'padre3': ('herramienta-inspector.html', 'Modo Inspector'),
+        # Quinta pestaña del menú desde el 02-11-2026 (pedido del autor); del
+        # 11-10-2026 a esa fecha fue un módulo del Modo Inspector.
+        'archivo': 'servicios.html', 'menu': 'Servicios de investigación', 'menu_archivo': 'servicios.html',
         'icono': '🔎', 'titulo': 'Servicios de investigación', 'lema': 'La consulta es gratuita; la investigación a la medida se cotiza',
         'entrada': ('Todo lo que publica Auditavisión es libre y lo seguirá siendo. Cuando necesites ir más a fondo en un caso, '
                     'podemos hacer por encargo una investigación documental con la misma regla de la plataforma: cada cifra con '
@@ -1920,8 +2045,10 @@ def servicios():
         'antes': ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> Los Servicios se abren con el lanzamiento de la '
                   'plataforma. Ya puedes armar tu solicitud y guardarla; el envío se activa entonces.</p>'),
         'secciones': [
-            {'id': 'oferta', 'titulo': 'Qué podemos investigar', 'texto': 'Cinco servicios, de una pregunta puntual a una licencia para tu institución.',
+            {'id': 'oferta', 'titulo': 'Qué podemos investigar', 'texto': '%s servicios, de una pregunta puntual a una licencia para tu institución.' % ['Cero', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho'][len(SERVICIOS)],
              'tarjetas': [], 'bloque': '<div class="sv-servicios">\n%s\n        </div>' % oferta},
+            {'id': 'sectores', 'titulo': 'A quién servimos', 'texto': 'Lo que necesita cada sector y qué servicio lo atiende. La consulta de la plataforma sigue siendo gratuita para todos.',
+             'tarjetas': [], 'bloque': '<div class="sv-servicios">\n%s\n        </div>' % sectores},
             {'id': 'proceso', 'titulo': 'Cómo trabajamos', 'texto': 'Siete pasos. Nada se cobra antes de que aceptes la cotización.',
              'tarjetas': [], 'bloque': '<ol class="sv-pasos">\n%s\n        </ol>' % pasos},
             {'id': 'precio', 'titulo': 'Cuánto cuesta', 'texto': 'Cada encargo se cotiza por escrito antes de empezar.', 'tarjetas': [],
@@ -4061,7 +4188,8 @@ PAGINAS_BIBLIOTECA = [
     pagina_biblioteca(
         'marco-legal.html', 'Marco legal hacendario', 'Las reglas del dinero público, con su texto vigente',
         'Los preceptos que rigen cómo se planea, se cobra, se aprueba, se gasta y se revisa el dinero público. El texto de cada '
-        'uno se cotejó palabra por palabra con la versión vigente que publica la Cámara de Diputados o el DOF.',
+        'uno se cotejó palabra por palabra con la versión vigente que publica la Cámara de Diputados o el DOF. Cuál ley rige en cada nivel de gobierno, '
+        'quién la aprueba y dónde se publica está en <a href="marco-legal-tres-niveles.html">Las leyes del dinero en los tres niveles</a>.',
         'bibMarco', 'Cargando los preceptos…'),
     pagina_biblioteca(
         'fuentes-oficiales.html', 'Referencias', 'Compendio de fuentes oficiales: cada documento que sostiene una cifra',
@@ -4397,9 +4525,11 @@ def _mdp0(v):
     return ('-' if v < 0 else '') + '$' + format(abs(v), ',.1f') + ' mdp'
 
 
-def numeros_renglones(base, d):
+def numeros_renglones(base, d, lleno=False):
     """Los 16 origenes del ingreso, con contador (numeros.js): arrancan en
-    cero y cada renglon lleva a su pagina."""
+    cero y cada renglon lleva a su pagina. Con `lleno`, ya contabilizados y
+    sin el boton (la ventana lateral del Planisferio, donde numeros.js no
+    corre: 03-11-2026)."""
     p = base['panoramaErario']
     total = p['totalLIF']
     mayor = max(x['montoMdp'] for x in p['ingresos'])
@@ -4417,13 +4547,25 @@ def numeros_renglones(base, d):
                 '<span class="est-chip est-derivado" title="Suma de sus renglones">derivado</span>' if len(filas) > 1 else '<span class="est-chip est-oficial">oficial</span>',
                 ''.join('<li><a class="nr-fila" href="%s" data-v="%.1f" data-w="%.2f" data-pct="%.1f">'
                         '<span class="nr-ico" aria-hidden="true">%s</span><span class="nr-nom">%s</span>'
-                        '<span class="nr-barra" aria-hidden="true"><span class="nr-relleno"></span></span>'
+                        '<span class="nr-barra" aria-hidden="true"><span class="nr-relleno"%s></span></span>'
                         '<span class="nr-v">%s</span><span class="nr-pct">%s%%</span><span class="nr-ir" aria-hidden="true">➔</span></a></li>' % (
                             ingreso_archivo(x), x['montoMdp'], x['montoMdp'] / mayor * 100, x['montoMdp'] / total * 100,
-                            x['icono'], x['nombre'], _mdp0(x['montoMdp']), format(x['montoMdp'] / total * 100, '.1f'))
+                            x['icono'], x['nombre'], (' style="width:%.2f%%"' % (x['montoMdp'] / mayor * 100)) if lleno else '',
+                            _mdp0(x['montoMdp']), format(x['montoMdp'] / total * 100, '.1f'))
                         for x in filas)))
     ceros = ''.join('<li><span class="nr-cero-clave">LIF %s</span><b>%s</b><span class="nr-cero-v">$0.0 mdp</span><p>%s</p></li>' % c
                     for c in NUM_INGRESO_CERO)
+    if lleno:
+        return '''<section class="nr" aria-labelledby="nrTitL">
+          <p class="np-txt" id="nrTitL">Tal como los enumera el artículo 1o. de la Ley de Ingresos de la Federación 2026 %s, en cuatro familias. Toca un renglón para abrir su página en la Enciclopedia.</p>
+          <div class="nr-lista">%s</div>
+          <p class="np-pie">Cifras en millones de pesos (mdp), tal como las publica la ley. Cada barra se mide contra el renglón mayor (el ISR); el porcentaje es su parte del ingreso total, %s.</p>
+          <details class="nr-cero">
+            <summary>Y los que la ley enumera, pero deja en cero</summary>
+            <p>El artículo 1o. lista tres categorías más de impuesto, presupuestadas en <b>$0.0 mdp</b> para 2026 <span class="est-chip est-oficial">oficial</span>.</p>
+            <ul>%s</ul>
+          </details>
+        </section>''' % (nota_ref('ref-lif2026', 10, 'Ley de Ingresos de la Federación 2026'), ''.join(bloques), _mdp0(total), ceros)
     return '''<section class="nr" id="nrRenglones" aria-labelledby="nrTit">
           <div class="nr-cab">
             <h2 class="np-tit" id="nrTit">Los 16 orígenes del ingreso, renglón por renglón</h2>
@@ -5067,7 +5209,7 @@ def numeros_preparar():
     import gasto_modulos as gm
     import poderes_modulo as pdm
     guion = {'gp-tres': [], 'eb-cuenta-federal': 'resultados.js', 'eb-salud': [], 'eb-egresos': [], 'eb-ciegos': [], 'poderes': [], 'eb-cuanto': ['numeros.js', 'radar.js'], 'nr-origenes': 'numeros.js', 'eb-mapa': 'territorio.js', 'territorio': 'territorio.js',
-             'municipios': ['municipios-efipem.js', 'territorio.js']}
+             'municipios': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'territorio.js']}
     for m in NUMEROS_MODULOS:
         NUMEROS_ABRIR[m[0]] = m[1]
         hecho = propios.get(m[0])
@@ -5242,9 +5384,12 @@ def pagina(a, sello):
     titulo_doc = '%s · Auditavisión' % re.sub('<[^>]+>', '', a['menu'])
     descripcion = re.sub('<[^>]+>', '', a['entrada'])
     padre = ('<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a['padre']) if a.get('padre') else ''
-    if (a.get('menu_archivo', a['archivo']) in MENU[1][2] and a['archivo'] != ENCICLOPEDIA
+    if (a.get('menu_archivo', a['archivo']) in ENCICLO_MARCAN and a['archivo'] != ENCICLOPEDIA
             and (a.get('padre') or (None,))[0] != ENCICLOPEDIA):
         padre = '<a href="%s">Enciclopedia</a> <span aria-hidden="true">›</span> %s' % (ENCICLOPEDIA, padre)
+    # La Enciclopedia vive en Comunidad desde el 02-11-2026: sus migas lo dicen.
+    if ENCICLOPEDIA in padre and 'participa.html' not in padre:
+        padre = '<a href="participa.html">Comunidad</a> <span aria-hidden="true">›</span> ' + padre
     for nivel in ('padre2', 'padre3'):
         if a.get(nivel):
             padre += '<a href="%s">%s</a> <span aria-hidden="true">›</span> ' % a[nivel]
@@ -5356,6 +5501,9 @@ def pagina(a, sello):
 # metodologia y las novedades. Se arma solo con las listas de este archivo y
 # de auditorias.py: al agregar una pagina ahi, aparece aqui.
 NOVEDADES = [
+    ('03-11-2026', 'La deuda de los municipios llega al Planisferio y a la Enciclopedia: lo que cada uno pagó por sus créditos y pidió prestado en 2024, según su propia cuenta al INEGI. Es lo que pagó, no lo que debe: su saldo lo publica Hacienda y sigue pendiente, con el nombre de quien lo debe.'),
+    ('03-11-2026', 'Nuestro duodécimo pilar: la base de datos es un pilar de transparencia. No dependemos de solicitudes que solo ve quien las pide: armamos la transparencia con lo que se publica para todos, con la huella digital de cada documento, las cuentas rehechas y lo que falta en el Registro de pendientes, con el nombre de quien lo debe. La página de los pilares explica, paso por paso, cómo entra una cifra a la plataforma.'),
+    ('02-11-2026', 'El mapa del dinero: el mapa de las 32 entidades suma dos capas que puedes operar. «No cuadra» compara lo que cada estado dice que recibió con lo que la Federación dice que le pagó, y «Obras con alerta ambiental» cuenta los proyectos del mapa ambiental en cada estado. El Auditor abre cada capa directo («mapa de la deuda»). La Mesa de redacción sigue además a ocho medios por su nombre y junta la misma historia cuando varios la cuentan. Servicios suma «A quién servimos» y la revisión de un proveedor.'),
     ('29-10-2026', 'El índice general sigue ahora el orden de las pestañas: el Auditor Virtual con sus cuatro modos, la Enciclopedia (Números, sus Herramientas, Datos y Aprende), Comunidad y Noticias, con sus tres páginas y sus secciones. Al final, las investigaciones por tema y cómo verificamos.'),
     ('28-10-2026', 'Noticias se rehace como periódico: Auditavisión Noticias. Separa la noticia (lo que pasó y lo que consta) de la opinión (la Columna del Erario, nuestro argumento con documentos) y suma cuatro secciones: Seguimiento, con los casos abiertos y lo que falta para cerrarlos; la Mesa de redacción, con los titulares que estamos jalando, sin verificar; la Agenda del erario, con las fechas que fija la ley, y Cómo trabajamos, el método del rumor al documento. Y el verificador ahora te dice quién aparece en la nota y te lleva a su estado de cuenta y su salud financiera.'),
     ('28-10-2026', 'El Modo Inspector suma su séptima aplicación: Nepotismo y parentesco. Elige un parentesco («mi cuñado», «mi suegra») y ve qué grado es y qué ley lo alcanza: darle una plaza, un contrato o su cargo en la elección. Trae el árbol de grados, cómo se investiga un cargo y por qué un apellido igual no prueba nada. Y en el chat del Auditor pregúntale «¿mi cuñado puede trabajar en mi oficina?». En Noticias, además, ya puedes verificar una noticia, proponernos una nota y leer las réplicas y posturas.'),
@@ -5486,6 +5634,7 @@ def _hijas(base, ref):
     mismas listas que arman cada pagina, asi que una nueva aparece sola."""
     import estado_cuenta, presupuesto_modulos, cc_ticket, insp_asf, datos_ambiente, asistente
     import asistente_legislativo as al, asistente_judicial as aj, gestion_salud as gs, gestion_ambiental as ga
+    import administracion_publica as adm
     limpio = lambda t: re.sub('<[^>]+>', '', t)
     return {
         estado_cuenta.ARCHIVO: [(p['archivo'], limpio(p.get('menu') or p['titulo'])) for p in estado_cuenta.construir()[0]
@@ -5500,6 +5649,7 @@ def _hijas(base, ref):
         aj.PORTADA: [(x[0], x[2]) for x in aj.PAGINAS],
         gs.PORTADA: [(x[0], x[2]) for x in gs.PAGINAS],
         ga.PORTADA: [(x[0], x[2]) for x in ga.PAGINAS],
+        adm.PORTADA: [(x[0], x[2]) for x in adm.PAGINAS],
     }
 
 
@@ -5778,7 +5928,12 @@ def generar(sello=None):
     open(os.path.join(RAIZ, ca.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     import datos_ambiente
     import periodistas, acceso
-    for extra in [DICCIONARIO, *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    import metodologia_auditoria
+    import recursos_naturales
+    import planisferio
+    import leyes_niveles
+    import presupuesto_modulos
+    for extra in planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

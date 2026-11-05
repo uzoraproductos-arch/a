@@ -269,6 +269,19 @@ def por_estado(d):
     return [[a, pje[a], i, c, p, j] for a, i, c, p, j in EST]
 
 
+def judiciales_estados(d):
+    """Para el Planisferio (03-11-2026, dimensión judicial): {entidad: {g
+    presupuesto ejercido 2024 en millones, i ingresados, c concluidos, p
+    causas penales pendientes, j personas juzgadoras, c100 concluidos por
+    cada 100 ingresados, xa pesos por asunto concluido, cj concluidos por
+    persona juzgadora}}. Las tres divisiones son nuestras (derivado)."""
+    out = {}
+    for a, g, i, c, p, j in por_estado(d):
+        out[a] = {'g': g, 'i': i, 'c': c, 'p': p, 'j': j, 'c100': round(100.0 * c / i, 1),
+                  'xa': round(g * 1e6 / c), 'cj': round(c / j)}
+    return out
+
+
 def extra(d, k):
     """Las tablas de la página, debajo del texto de cada tema."""
     from asistente_legislativo import _chip

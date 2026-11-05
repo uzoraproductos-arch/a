@@ -1,0 +1,1013 @@
+{
+ "dgis": {
+  "campos": [
+   "u",
+   "cam",
+   "med",
+   "enf",
+   "cons"
+  ],
+  "columnas": {
+   "cam": "TOTAL CAMAS AREA HOSPITALIZACIÓN",
+   "cons": "TOTAL DE CONSULTORIOS",
+   "enf": "Total enfermeras en contacto con el paciente",
+   "med": "Total médicos generales especialistas y odonólogos",
+   "u": null
+  },
+  "ent": {
+   "imss": {
+    "AGS": {
+     "cam": 564,
+     "cons": 340,
+     "enf": 2122,
+     "med": 1468,
+     "u": 19
+    },
+    "BC": {
+     "cam": 1424,
+     "cons": 650,
+     "enf": 3819,
+     "med": 2660,
+     "u": 59
+    },
+    "BCS": {
+     "cam": 350,
+     "cons": 216,
+     "enf": 1172,
+     "med": 900,
+     "u": 26
+    },
+    "CAM": {
+     "cam": 258,
+     "cons": 248,
+     "enf": 1001,
+     "med": 759,
+     "u": 62
+    },
+    "CDMX": {
+     "cam": 6330,
+     "cons": 2761,
+     "enf": 20199,
+     "med": 11857,
+     "u": 107
+    },
+    "CHIH": {
+     "cam": 1939,
+     "cons": 1008,
+     "enf": 5719,
+     "med": 3147,
+     "u": 227
+    },
+    "CHIS": {
+     "cam": 737,
+     "cons": 1016,
+     "enf": 2955,
+     "med": 2131,
+     "u": 645
+    },
+    "COAH": {
+     "cam": 1768,
+     "cons": 906,
+     "enf": 4885,
+     "med": 2988,
+     "u": 146
+    },
+    "COL": {
+     "cam": 309,
+     "cons": 161,
+     "enf": 1078,
+     "med": 784,
+     "u": 19
+    },
+    "DGO": {
+     "cam": 664,
+     "cons": 529,
+     "enf": 1939,
+     "med": 1295,
+     "u": 215
+    },
+    "GRO": {
+     "cam": 538,
+     "cons": 374,
+     "enf": 1609,
+     "med": 1180,
+     "u": 77
+    },
+    "GTO": {
+     "cam": 1535,
+     "cons": 761,
+     "enf": 4586,
+     "med": 3230,
+     "u": 56
+    },
+    "HGO": {
+     "cam": 728,
+     "cons": 628,
+     "enf": 2266,
+     "med": 1687,
+     "u": 269
+    },
+    "JAL": {
+     "cam": 3563,
+     "cons": 1586,
+     "enf": 9650,
+     "med": 6286,
+     "u": 136
+    },
+    "MICH": {
+     "cam": 1206,
+     "cons": 1038,
+     "enf": 3811,
+     "med": 2466,
+     "u": 449
+    },
+    "MOR": {
+     "cam": 546,
+     "cons": 303,
+     "enf": 1445,
+     "med": 1168,
+     "u": 35
+    },
+    "MÉX": {
+     "cam": 3610,
+     "cons": 2048,
+     "enf": 10890,
+     "med": 7743,
+     "u": 151
+    },
+    "NAY": {
+     "cam": 463,
+     "cons": 360,
+     "enf": 1763,
+     "med": 1243,
+     "u": 123
+    },
+    "NL": {
+     "cam": 2658,
+     "cons": 1270,
+     "enf": 7374,
+     "med": 4833,
+     "u": 78
+    },
+    "OAX": {
+     "cam": 644,
+     "cons": 866,
+     "enf": 2192,
+     "med": 1687,
+     "u": 567
+    },
+    "PUE": {
+     "cam": 1216,
+     "cons": 947,
+     "enf": 3968,
+     "med": 2701,
+     "u": 396
+    },
+    "QRO": {
+     "cam": 701,
+     "cons": 393,
+     "enf": 2343,
+     "med": 1634,
+     "u": 29
+    },
+    "QROO": {
+     "cam": 516,
+     "cons": 248,
+     "enf": 1658,
+     "med": 1214,
+     "u": 18
+    },
+    "SIN": {
+     "cam": 1224,
+     "cons": 718,
+     "enf": 3393,
+     "med": 2334,
+     "u": 177
+    },
+    "SLP": {
+     "cam": 985,
+     "cons": 664,
+     "enf": 2747,
+     "med": 1752,
+     "u": 290
+    },
+    "SON": {
+     "cam": 1476,
+     "cons": 722,
+     "enf": 4756,
+     "med": 3019,
+     "u": 88
+    },
+    "TAB": {
+     "cam": 337,
+     "cons": 252,
+     "enf": 1341,
+     "med": 950,
+     "u": 38
+    },
+    "TAM": {
+     "cam": 1292,
+     "cons": 795,
+     "enf": 4077,
+     "med": 2461,
+     "u": 171
+    },
+    "TLAX": {
+     "cam": 207,
+     "cons": 157,
+     "enf": 772,
+     "med": 623,
+     "u": 20
+    },
+    "VER": {
+     "cam": 2074,
+     "cons": 1704,
+     "enf": 6270,
+     "med": 4649,
+     "u": 712
+    },
+    "YUC": {
+     "cam": 890,
+     "cons": 572,
+     "enf": 2721,
+     "med": 1984,
+     "u": 130
+    },
+    "ZAC": {
+     "cam": 446,
+     "cons": 450,
+     "enf": 1363,
+     "med": 962,
+     "u": 199
+    }
+   },
+   "issste": {
+    "AGS": {
+     "cam": 71,
+     "cons": 78,
+     "enf": 294,
+     "med": 255,
+     "u": 12
+    },
+    "BC": {
+     "cam": 128,
+     "cons": 90,
+     "enf": 463,
+     "med": 479,
+     "u": 16
+    },
+    "BCS": {
+     "cam": 150,
+     "cons": 150,
+     "enf": 489,
+     "med": 431,
+     "u": 33
+    },
+    "CAM": {
+     "cam": 44,
+     "cons": 55,
+     "enf": 226,
+     "med": 152,
+     "u": 12
+    },
+    "CDMX": {
+     "cam": 1950,
+     "cons": 1485,
+     "enf": 7406,
+     "med": 6817,
+     "u": 93
+    },
+    "CHIH": {
+     "cam": 211,
+     "cons": 167,
+     "enf": 676,
+     "med": 545,
+     "u": 41
+    },
+    "CHIS": {
+     "cam": 201,
+     "cons": 161,
+     "enf": 565,
+     "med": 483,
+     "u": 42
+    },
+    "COAH": {
+     "cam": 395,
+     "cons": 196,
+     "enf": 495,
+     "med": 829,
+     "u": 27
+    },
+    "COL": {
+     "cam": 66,
+     "cons": 45,
+     "enf": 174,
+     "med": 181,
+     "u": 6
+    },
+    "DGO": {
+     "cam": 172,
+     "cons": 122,
+     "enf": 515,
+     "med": 480,
+     "u": 38
+    },
+    "GRO": {
+     "cam": 113,
+     "cons": 167,
+     "enf": 498,
+     "med": 398,
+     "u": 47
+    },
+    "GTO": {
+     "cam": 222,
+     "cons": 178,
+     "enf": 544,
+     "med": 684,
+     "u": 42
+    },
+    "HGO": {
+     "cam": 119,
+     "cons": 169,
+     "enf": 517,
+     "med": 475,
+     "u": 37
+    },
+    "JAL": {
+     "cam": 405,
+     "cons": 335,
+     "enf": 1197,
+     "med": 1044,
+     "u": 88
+    },
+    "MICH": {
+     "cam": 310,
+     "cons": 260,
+     "enf": 924,
+     "med": 951,
+     "u": 61
+    },
+    "MOR": {
+     "cam": 240,
+     "cons": 177,
+     "enf": 689,
+     "med": 1063,
+     "u": 31
+    },
+    "MÉX": {
+     "cam": 309,
+     "cons": 356,
+     "enf": 1147,
+     "med": 1082,
+     "u": 41
+    },
+    "NAY": {
+     "cam": 150,
+     "cons": 102,
+     "enf": 529,
+     "med": 442,
+     "u": 23
+    },
+    "NL": {
+     "cam": 172,
+     "cons": 143,
+     "enf": 813,
+     "med": 716,
+     "u": 30
+    },
+    "OAX": {
+     "cam": 198,
+     "cons": 169,
+     "enf": 750,
+     "med": 747,
+     "u": 47
+    },
+    "PUE": {
+     "cam": 211,
+     "cons": 195,
+     "enf": 828,
+     "med": 813,
+     "u": 41
+    },
+    "QRO": {
+     "cam": 99,
+     "cons": 53,
+     "enf": 269,
+     "med": 382,
+     "u": 14
+    },
+    "QROO": {
+     "cam": 49,
+     "cons": 69,
+     "enf": 298,
+     "med": 264,
+     "u": 11
+    },
+    "SIN": {
+     "cam": 232,
+     "cons": 196,
+     "enf": 740,
+     "med": 670,
+     "u": 38
+    },
+    "SLP": {
+     "cam": 125,
+     "cons": 124,
+     "enf": 546,
+     "med": 484,
+     "u": 30
+    },
+    "SON": {
+     "cam": 164,
+     "cons": 136,
+     "enf": 550,
+     "med": 568,
+     "u": 36
+    },
+    "TAB": {
+     "cam": 90,
+     "cons": 106,
+     "enf": 392,
+     "med": 384,
+     "u": 23
+    },
+    "TAM": {
+     "cam": 324,
+     "cons": 177,
+     "enf": 549,
+     "med": 737,
+     "u": 37
+    },
+    "TLAX": {
+     "cam": 73,
+     "cons": 69,
+     "enf": 283,
+     "med": 255,
+     "u": 7
+    },
+    "VER": {
+     "cam": 338,
+     "cons": 293,
+     "enf": 1031,
+     "med": 1102,
+     "u": 82
+    },
+    "YUC": {
+     "cam": 164,
+     "cons": 130,
+     "enf": 638,
+     "med": 612,
+     "u": 18
+    },
+    "ZAC": {
+     "cam": 74,
+     "cons": 107,
+     "enf": 397,
+     "med": 317,
+     "u": 31
+    }
+   }
+  },
+  "establecimientos": {
+   "imss": 5734,
+   "issste": 1135
+  },
+  "pagina": "http://www.dgis.salud.gob.mx/contenidos/basesdedatos/da_recursos_gobmx.html",
+  "sha256": "cea7529a75253d6212a6a79c5c0082048a6f104e361a9b5137345af29e3fe747",
+  "sinPersonal": {
+   "imss": 276,
+   "issste": 88
+  },
+  "tx": "Secretaría de Salud, Dirección General de Información en Salud, Recursos en Salud Sectorial 2025 (datos abiertos)",
+  "url": "http://www.dgis.salud.gob.mx/descargas/datosabiertos/recursosSalud/Recursos_Salud_Sectorial_2025.zip"
+ },
+ "memoria": {
+  "archivos": {
+   "II": {
+    "sha256": "960d6dd93e533a46123d7e2cc0c9a9e1fa05fd3545bcedc2842bc8cea8b83c9e",
+    "url": "https://www.imss.gob.mx/sites/all/statics/pdf/estadisticas/memoria/2025/02-PoblacionDerechohabiente.xlsx"
+   },
+   "IV": {
+    "sha256": "9a616879f00e160262147305b377a1c997f66f2d80cec8d98756ef20e9b9a89d",
+    "url": "https://www.imss.gob.mx/sites/all/statics/pdf/estadisticas/memoria/2025/04-PrestacionesMedicas.xlsx"
+   },
+   "XIII": {
+    "sha256": "88bcd2173b23d414848562a8408fd341006a8eb5699f2a8e01f1c56e718006e4",
+    "url": "https://www.imss.gob.mx/sites/all/statics/pdf/estadisticas/memoria/2025/13-RecursosHumanosMaterialesFinancieros.xlsx"
+   }
+  },
+  "campos": [
+   "ads",
+   "con",
+   "esp",
+   "urg",
+   "egr",
+   "iq",
+   "cam",
+   "camc",
+   "cons",
+   "quir"
+  ],
+  "cuadros": {
+   "ads": "II.10",
+   "cam": "XIII.11",
+   "camc": "XIII.11",
+   "con": "IV.3",
+   "cons": "XIII.11",
+   "egr": "IV.5",
+   "esp": "IV.3",
+   "iq": "IV.5",
+   "quir": "XIII.11",
+   "urg": "IV.3"
+  },
+  "ent": {
+   "AGS": {
+    "ads": 996929,
+    "cam": 912,
+    "camc": 564,
+    "con": 2865070,
+    "cons": 340,
+    "egr": 36880,
+    "esp": 582692,
+    "iq": 41435,
+    "quir": 25,
+    "urg": 294410
+   },
+   "BC": {
+    "ads": 2548150,
+    "cam": 2070,
+    "camc": 1446,
+    "con": 5886216,
+    "cons": 655,
+    "egr": 84127,
+    "esp": 1006351,
+    "iq": 74413,
+    "quir": 50,
+    "urg": 762561
+   },
+   "BCS": {
+    "ads": 570196,
+    "cam": 539,
+    "camc": 350,
+    "con": 1556402,
+    "cons": 216,
+    "egr": 26450,
+    "esp": 347283,
+    "iq": 22611,
+    "quir": 18,
+    "urg": 154902
+   },
+   "CAM": {
+    "ads": 387710,
+    "cam": 337,
+    "camc": 200,
+    "con": 1211505,
+    "cons": 160,
+    "egr": 13558,
+    "esp": 231734,
+    "iq": 15076,
+    "quir": 12,
+    "urg": 129999
+   },
+   "CDMX": {
+    "ads": 6519887,
+    "cam": 9063,
+    "camc": 6297,
+    "con": 19490497,
+    "cons": 2764,
+    "egr": 314348,
+    "esp": 5225485,
+    "iq": 349746,
+    "quir": 242,
+    "urg": 1634490
+   },
+   "CHIH": {
+    "ads": 2595285,
+    "cam": 2669,
+    "camc": 1847,
+    "con": 5917376,
+    "cons": 806,
+    "egr": 95475,
+    "esp": 1082096,
+    "iq": 68834,
+    "quir": 79,
+    "urg": 682693
+   },
+   "CHIS": {
+    "ads": 1062342,
+    "cam": 772,
+    "camc": 422,
+    "con": 2266573,
+    "cons": 315,
+    "egr": 27559,
+    "esp": 350713,
+    "iq": 25330,
+    "quir": 20,
+    "urg": 211219
+   },
+   "COAH": {
+    "ads": 2486283,
+    "cam": 2486,
+    "camc": 1714,
+    "con": 6532314,
+    "cons": 796,
+    "egr": 118708,
+    "esp": 1205093,
+    "iq": 98994,
+    "quir": 70,
+    "urg": 968156
+   },
+   "COL": {
+    "ads": 492646,
+    "cam": 507,
+    "camc": 309,
+    "con": 1333224,
+    "cons": 161,
+    "egr": 20406,
+    "esp": 272146,
+    "iq": 16780,
+    "quir": 12,
+    "urg": 189696
+   },
+   "DGO": {
+    "ads": 897699,
+    "cam": 890,
+    "camc": 582,
+    "con": 2760872,
+    "cons": 333,
+    "egr": 40828,
+    "esp": 424946,
+    "iq": 33319,
+    "quir": 23,
+    "urg": 383463
+   },
+   "GRO": {
+    "ads": 778403,
+    "cam": 773,
+    "camc": 509,
+    "con": 2400096,
+    "cons": 302,
+    "egr": 28708,
+    "esp": 416123,
+    "iq": 38308,
+    "quir": 22,
+    "urg": 273425
+   },
+   "GTO": {
+    "ads": 2920136,
+    "cam": 2278,
+    "camc": 1535,
+    "con": 6386597,
+    "cons": 761,
+    "egr": 102194,
+    "esp": 1156919,
+    "iq": 92252,
+    "quir": 72,
+    "urg": 715541
+   },
+   "HGO": {
+    "ads": 1109541,
+    "cam": 895,
+    "camc": 544,
+    "con": 2498338,
+    "cons": 343,
+    "egr": 33111,
+    "esp": 492143,
+    "iq": 29011,
+    "quir": 22,
+    "urg": 213250
+   },
+   "JAL": {
+    "ads": 5392241,
+    "cam": 5423,
+    "camc": 3571,
+    "con": 12533598,
+    "cons": 1587,
+    "egr": 211463,
+    "esp": 2638836,
+    "iq": 212195,
+    "quir": 137,
+    "urg": 1685713
+   },
+   "MICH": {
+    "ads": 1650686,
+    "cam": 1543,
+    "camc": 988,
+    "con": 4344249,
+    "cons": 606,
+    "egr": 68533,
+    "esp": 829129,
+    "iq": 60670,
+    "quir": 42,
+    "urg": 463275
+   },
+   "MOR": {
+    "ads": 881336,
+    "cam": 765,
+    "camc": 546,
+    "con": 2494731,
+    "cons": 303,
+    "egr": 37089,
+    "esp": 394021,
+    "iq": 34316,
+    "quir": 17,
+    "urg": 369549
+   },
+   "MÉX": {
+    "ads": 7800326,
+    "cam": 5379,
+    "camc": 3638,
+    "con": 16456132,
+    "cons": 1995,
+    "egr": 214482,
+    "esp": 2342932,
+    "iq": 190320,
+    "quir": 137,
+    "urg": 1335633
+   },
+   "NAY": {
+    "ads": 637491,
+    "cam": 755,
+    "camc": 433,
+    "con": 1815855,
+    "cons": 262,
+    "egr": 30567,
+    "esp": 382748,
+    "iq": 28011,
+    "quir": 24,
+    "urg": 241435
+   },
+   "NL": {
+    "ads": 4399248,
+    "cam": 3760,
+    "camc": 2658,
+    "con": 10907777,
+    "cons": 1270,
+    "egr": 148620,
+    "esp": 1939681,
+    "iq": 170898,
+    "quir": 99,
+    "urg": 1160037
+   },
+   "OAX": {
+    "ads": 828624,
+    "cam": 563,
+    "camc": 356,
+    "con": 1791018,
+    "cons": 223,
+    "egr": 27543,
+    "esp": 345721,
+    "iq": 23379,
+    "quir": 17,
+    "urg": 210827
+   },
+   "PUE": {
+    "ads": 2221482,
+    "cam": 1505,
+    "camc": 971,
+    "con": 4656398,
+    "cons": 536,
+    "egr": 73902,
+    "esp": 802828,
+    "iq": 58721,
+    "quir": 41,
+    "urg": 481693
+   },
+   "QRO": {
+    "ads": 1624763,
+    "cam": 1117,
+    "camc": 701,
+    "con": 3516016,
+    "cons": 393,
+    "egr": 52330,
+    "esp": 626270,
+    "iq": 43912,
+    "quir": 28,
+    "urg": 347144
+   },
+   "QROO": {
+    "ads": 1145822,
+    "cam": 812,
+    "camc": 516,
+    "con": 2267732,
+    "cons": 248,
+    "egr": 36678,
+    "esp": 407057,
+    "iq": 26829,
+    "quir": 23,
+    "urg": 301523
+   },
+   "SIN": {
+    "ads": 2025936,
+    "cam": 1723,
+    "camc": 1177,
+    "con": 5097059,
+    "cons": 588,
+    "egr": 80202,
+    "esp": 803515,
+    "iq": 57123,
+    "quir": 43,
+    "urg": 609232
+   },
+   "SLP": {
+    "ads": 1388541,
+    "cam": 1150,
+    "camc": 786,
+    "con": 3155903,
+    "cons": 382,
+    "egr": 46877,
+    "esp": 478520,
+    "iq": 40280,
+    "quir": 33,
+    "urg": 326359
+   },
+   "SON": {
+    "ads": 1913189,
+    "cam": 2303,
+    "camc": 1440,
+    "con": 5036567,
+    "cons": 690,
+    "egr": 84296,
+    "esp": 1098870,
+    "iq": 90019,
+    "quir": 67,
+    "urg": 626030
+   },
+   "TAB": {
+    "ads": 790786,
+    "cam": 592,
+    "camc": 337,
+    "con": 1902122,
+    "cons": 252,
+    "egr": 32441,
+    "esp": 333965,
+    "iq": 30092,
+    "quir": 20,
+    "urg": 214779
+   },
+   "TAM": {
+    "ads": 2113239,
+    "cam": 1892,
+    "camc": 1219,
+    "con": 5782792,
+    "cons": 668,
+    "egr": 57806,
+    "esp": 836622,
+    "iq": 55731,
+    "quir": 58,
+    "urg": 415622
+   },
+   "TLAX": {
+    "ads": 528931,
+    "cam": 328,
+    "camc": 207,
+    "con": 1337883,
+    "cons": 157,
+    "egr": 18671,
+    "esp": 225997,
+    "iq": 16586,
+    "quir": 7,
+    "urg": 167967
+   },
+   "VER": {
+    "ads": 2883936,
+    "cam": 2866,
+    "camc": 1862,
+    "con": 8445287,
+    "cons": 1095,
+    "egr": 120374,
+    "esp": 1495881,
+    "iq": 111506,
+    "quir": 76,
+    "urg": 1075410
+   },
+   "YUC": {
+    "ads": 1315908,
+    "cam": 1161,
+    "camc": 794,
+    "con": 3616073,
+    "cons": 417,
+    "egr": 49105,
+    "esp": 635084,
+    "iq": 44132,
+    "quir": 28,
+    "urg": 345754
+   },
+   "ZAC": {
+    "ads": 690851,
+    "cam": 497,
+    "camc": 305,
+    "con": 1775331,
+    "cons": 235,
+    "egr": 21823,
+    "esp": 262553,
+    "iq": 15391,
+    "quir": 12,
+    "urg": 202005
+   }
+  },
+  "ooad": {
+   "CDMX": [
+    "CDMX Norte",
+    "CDMX Sur"
+   ],
+   "MÉX": [
+    "México Oriente",
+    "México Poniente"
+   ],
+   "VER": [
+    "Veracruz Norte",
+    "Veracruz Sur"
+   ]
+  },
+  "porOoad": {
+   "CDMX Norte": {
+    "ads": 2675017,
+    "cam": 4367,
+    "camc": 3142,
+    "con": 8690913,
+    "cons": 1248,
+    "egr": 151256,
+    "esp": 2220219,
+    "iq": 163018,
+    "quir": 114,
+    "urg": 691768
+   },
+   "CDMX Sur": {
+    "ads": 3844870,
+    "cam": 4696,
+    "camc": 3155,
+    "con": 10799584,
+    "cons": 1516,
+    "egr": 163092,
+    "esp": 3005266,
+    "iq": 186728,
+    "quir": 128,
+    "urg": 942722
+   },
+   "México Oriente": {
+    "ads": 5063311,
+    "cam": 3130,
+    "camc": 2110,
+    "con": 10500414,
+    "cons": 1289,
+    "egr": 127713,
+    "esp": 1392069,
+    "iq": 102617,
+    "quir": 78,
+    "urg": 791083
+   },
+   "México Poniente": {
+    "ads": 2737015,
+    "cam": 2249,
+    "camc": 1528,
+    "con": 5955718,
+    "cons": 706,
+    "egr": 86769,
+    "esp": 950863,
+    "iq": 87703,
+    "quir": 59,
+    "urg": 544550
+   },
+   "Veracruz Norte": {
+    "ads": 1709373,
+    "cam": 1693,
+    "camc": 1149,
+    "con": 4609334,
+    "cons": 610,
+    "egr": 66277,
+    "esp": 782507,
+    "iq": 56833,
+    "quir": 44,
+    "urg": 549142
+   },
+   "Veracruz Sur": {
+    "ads": 1174563,
+    "cam": 1173,
+    "camc": 713,
+    "con": 3835953,
+    "cons": 485,
+    "egr": 54097,
+    "esp": 713374,
+    "iq": 54673,
+    "quir": 32,
+    "urg": 526268
+   }
+  },
+  "total": {
+   "ads": 63598543,
+   "cam": 58325,
+   "camc": 38824,
+   "con": 158037603,
+   "cons": 19859,
+   "egr": 2355154,
+   "esp": 29673954,
+   "iq": 2216220,
+   "quir": 1576,
+   "urg": 17193792
+  },
+  "tx": "IMSS, Memoria Estadística 2025",
+  "url": "https://www.imss.gob.mx/conoce-al-imss/memoria-estadistica-2025"
+ },
+ "nota": "Lo escribe herramientas/anclar_salud_estados.py; no se edita a mano."
+}

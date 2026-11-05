@@ -28,7 +28,7 @@ import resultados_modulo as rm
 
 CGPE_URL = 'https://gaceta.diputados.gob.mx/PDF/66/2026/sep/20260908-C.pdf'
 CGPE = 'SHCP, Criterios Generales de Política Económica 2027 (Gaceta Parlamentaria 7121, 8-09-2026)'
-REVISION = '10-10-2026'
+REVISION = '02-11-2026'
 ARCHIVO = 'estado-de-cuenta.html'
 TITULO = 'Contexto dimensional'
 ICONO = '🧭'
@@ -114,16 +114,21 @@ def construir():
                'un peso de 2024 no vale lo mismo que uno de 2027, y la economía también crece. Junto a cada porcentaje van los '
                'millones de pesos que publica Hacienda. Las columnas no son de la misma etapa: <b>2024 es lo observado</b>, '
                '<b>2026 trae lo aprobado y el cierre que Hacienda estima</b>, y <b>2027 es la propuesta</b> que la Cámara de '
-               'Diputados todavía puede cambiar hasta el 15 de noviembre. Los pesos de 2024 están pendientes: los cuadros de los '
-               'Criterios solo dan su porcentaje del PIB, y la Cuenta Pública 2024 aún no la cotejamos.</div>')
+               'Diputados todavía puede cambiar hasta el 15 de noviembre. Los pesos de 2024 provienen del Tomo I de la Cuenta '
+               'Pública 2024 y del Informe del 4T 2024 de Hacienda; los de 2026 y 2027, de los Criterios Generales 2027.</div>')
 
     presupuestaria = lectura + tabla(pres) + barras(
         'Lo que entra y lo que se paga, en % del PIB',
         [('Ingresos', 'ec-ing', comp['ingresos']['pib']), ('Gasto', 'ec-gas', comp['gasto']['pib'])], 30,
         'La distancia entre las dos barras es el déficit presupuestario de cada año. ' + chip('oficial')) + (
-        '<p class="ec-fuente">%s Sector público presupuestario. 2024: cuadro «Ingresos y gasto del Sector Público» (p. 55). '
+        '<p class="ec-fuente">%s Sector público presupuestario. 2024 (%% del PIB): cuadro «Ingresos y gasto del Sector Público» (p. 55); '
+        '2024 (millones de pesos): Cuenta Pública 2024, Tomo I (%s · %s · %s). '
         '2026 y 2027: cuadro II.6 «Estimación de las finanzas públicas 2026-2027» (p. 67). El cambio se calcula restando el '
-        'porcentaje de 2024 al de 2027.</p>' % fuente_cgpe('55 y 67')) + (
+        'porcentaje de 2024 al de 2027.</p>' % (
+            fuente_cgpe('55 y 67'),
+            doc(comp['ingresos']['url_2024_mdp'], 'Ingresos p. 4 ↗'),
+            doc(comp['gasto']['url_2024_mdp'], 'Gasto p. 6 ↗'),
+            doc(comp['balance']['url_2024_mdp'], 'Balance p. 7 ↗'))) + (
         '<p class="ec-fuente"><b>Para no confundir:</b> el presupuesto que aprobó la Cámara para 2024 fue de <b>%s mdp</b> de gasto neto '
         'total %s (%s). Es otra medida: lo autorizado, no lo pagado. %s</p>' % (
             mdp(cif['aprobado']['mdp']), chip('oficial'), 'Decreto del PEF 2024, art. 1', doc(cif['aprobado']['url'])))
@@ -132,8 +137,9 @@ def construir():
         'La deuda amplia (SHRFSP), en % del PIB',
         [('Deuda', 'ec-deu', comp['shrfsp']['pib'])], 60,
         'La deuda pasa de 51.9% del PIB en 2024 a 55.0% en la propuesta de 2027. ' + chip('oficial')) + (
-        '<p class="ec-fuente">%s SHRFSP de 2024: cuadro de requerimientos financieros (p. 52). Lo demás: cuadros de las pp. 55 y 67.</p>'
-        % fuente_cgpe('52, 55 y 67')) + (
+        '<p class="ec-fuente">%s SHRFSP de 2024: cuadro de requerimientos financieros (p. 52) y %s para los pesos al cierre de 2024. '
+        'Lo demás: cuadros de las pp. 55 y 67.</p>'
+        % (fuente_cgpe('52, 55 y 67'), doc(comp['shrfsp']['url_2024_mdp'], 'Comunicado No. 4 SHCP 4T 2024, p. 8 ↗'))) + (
         '<h3 class="ec-sub">La contabilidad del Gobierno Federal en 2024</h3>'
         '<table class="ec-tabla ec-mini"><tbody>%s</tbody></table>'
         '<p class="ec-fuente">%s</p>') % (
@@ -202,12 +208,13 @@ def construir():
         '<span>%s auditorías. Un monto por aclarar no es un desfalco comprobado: es gasto cuya justificación la ASF aún no acepta. %s %s, p. %s %s</span></div>'
         '<div class="ec-renglon ec-r-amb"><span class="ec-r-tit">🌎 Daño ambiental (2024)</span><b>%s mdp</b>'
         '<span>Agotamiento y degradación, %s del PIB. %s</span></div>'
-        '<div class="ec-renglon ec-r-pen"><span class="ec-r-tit">⏳ Subejercicio (2024)</span><b>pendiente</b>'
-        '<span>Se calcula con el modificado y el devengado de la Cuenta Pública 2024, que la plataforma aún no coteja. %s</span></div>'
+        '<div class="ec-renglon ec-r-pen"><span class="ec-r-tit">⏳ Subejercicio del Gobierno Federal (2024)</span><b>$2,081.9 mdp</b>'
+        '<span>Gobierno Federal (Tomo II): $7,485,281.2 mdp modificado menos $7,483,199.3 mdp devengado (economías presupuestarias). %s %s</span></div>'
         '</div>') % (
         pct(comp['balance']['pib']['2024']), pct(comp['balance']['pib']['2026e']), pct(comp['balance']['pib']['2027']), chip('oficial'),
         mdp(t['porAclarar'] / 1e6), format(t['auditorias'], ','), mdb['corto'], doc(mdb['url']), asf['cp2024']['pagina'], chip('oficial'),
-        mdp(eco['ctada']['total_mdp']), pct(eco['ctada']['pct_pib']), chip('oficial'), chip('pendiente'))
+        mdp(eco['ctada']['total_mdp']), pct(eco['ctada']['pct_pib']), chip('oficial'),
+        doc(cif['devengado']['url'], 'Cuenta Pública 2024, Tomo II, p. 2 ↗'), chip('oficial'))
 
     descarga = (
         '<p>El estado de cuenta completo, renglón por renglón, con su periodo, alcance, estado, fuente y página. Se abre en Excel.</p>'
@@ -230,8 +237,11 @@ def construir():
             filas_csv.append([f['dimension'], f['concepto'], '% del PIB', anio, etapa, f['pib'][k], 'oficial', CGPE,
                               'p. %d' % (f['pagina_hist'] if k == '2024' else 67), CGPE_URL, REVISION])
             if k in f['mdp']:
-                filas_csv.append([f['dimension'], f['concepto'], 'millones de pesos', anio, etapa, f['mdp'][k], 'oficial', CGPE,
-                                  'p. 67', CGPE_URL, REVISION])
+                fu_mdp = f.get('fuente_2024_mdp', CGPE) if k == '2024' else CGPE
+                pag_mdp = '' if k == '2024' else 'p. 67'
+                url_mdp = f.get('url_2024_mdp', CGPE_URL) if k == '2024' else CGPE_URL
+                filas_csv.append([f['dimension'], f['concepto'], 'millones de pesos', anio, etapa, f['mdp'][k], 'oficial', fu_mdp,
+                                  pag_mdp, url_mdp, REVISION])
             else:
                 filas_csv.append([f['dimension'], f['concepto'], 'millones de pesos', anio, etapa, '', 'pendiente',
                                   'Pendiente: está en el Tomo II de la Cuenta Pública 2024, que la plataforma aún no coteja', '', 'https://www.cuentapublica.hacienda.gob.mx/es/CP/2024', REVISION])
@@ -291,9 +301,23 @@ def construir():
                 (ant[5], '← Anterior', ant[1], ant[2]) if ant else (ARCHIVO, '← Volver a', ICONO, TITULO),
                 (sig[5], 'Siguiente →', sig[1], sig[2]) if sig else (ARCHIVO, 'Terminaste · volver a', ICONO, TITULO),
                 (ARCHIVO, '%s %s: sus seis tarjetas' % (ICONO, TITULO)) if ant else None),
-            'secciones': [{'id': i, 'titulo': nom, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': b}],
+            'secciones': [{'id': i, 'titulo': nom, 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': b + planisferio(arch)}],
         })
     return paginas, filas_csv
+
+
+def planisferio(arch):
+    """La vuelta del Planisferio (04-11-2026): cada dimensión del Contexto
+    dimensional lleva a las dimensiones del mapa que la miran estado por
+    estado (dimension_social.CONTEXTO)."""
+    import dimension_social as dso
+    import planisferio as pl
+    nombre = {d[0]: (d[1], d[2]) for d in pl.DIMENSIONES}
+    dims = [i for i, xs in dso.CONTEXTO.items() if any(x[0] == arch for x in xs)]
+    if not dims:
+        return ''
+    return ('<p class="ec-fuente"><b>🗺️ Estado por estado, en el Planisferio:</b> %s</p>' % ' · '.join(
+        '<a href="planisferio.html?d=%s">%s %s ➔</a>' % (i, nombre[i][0], nombre[i][1]) for i in dims))
 
 
 def generar(sello):

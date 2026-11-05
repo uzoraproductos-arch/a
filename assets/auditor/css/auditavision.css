@@ -1266,6 +1266,7 @@ nav.tabbar button.active .num {
 .ent-sem.sem-verde { color: #4ec07a; border-color: rgba(78,192,122,0.45); }
 .ent-sem.sem-amarillo { color: #e2a53c; border-color: rgba(226,165,60,0.45); }
 .ent-sem.sem-rojo { color: var(--crimson-bright); border-color: rgba(212,56,44,0.5); }
+.ent-sem.sem-nomide { color: var(--text-dim); border-color: var(--border, rgba(138,143,152,0.45)); }
 
 .ent-barra-bg {
   height: 13px; border-radius: 3px; overflow: hidden;

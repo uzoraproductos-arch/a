@@ -41,7 +41,7 @@ AUTORIDADES = [
      'Revisa la Cuenta Pública: el gasto de los tres Poderes, los órganos autónomos, las empresas del Estado y el dinero federal que reciben estados y municipios.',
      'Informes individuales de auditoría, en tres entregas al año (junio, octubre y 20 de febrero), su Matriz de Datos Básicos y el Informe General.',
      'https://www.asf.gob.mx/Section/58_Informes_de_auditoria', 'ref-asf-mdb2024', 'si',
-     'Integrados la Cuenta Pública 2024 completa y la primera entrega de 2025: <a href="herramienta-inspector-asf-cifras.html">sus cifras</a>, <a href="herramienta-inspector-asf-estado.html">tu estado</a> y <a href="expedientes.html">los casos</a>.'),
+     'Integrados la Cuenta Pública 2024 completa y la primera y segunda entregas de 2025: <a href="herramienta-inspector-asf-cifras.html">sus cifras</a>, <a href="herramienta-inspector-asf-estado.html">tu estado</a> y <a href="expedientes.html">los casos</a>.'),
     ('uec', 'externa', '🔎', 'Unidad de Evaluación y Control (UEC) de la Cámara de Diputados', 'LFRCF, arts. 102 a 104',
      'Vigila a la propia ASF, por encargo de la Comisión de Vigilancia: que sus auditores cumplan la ley.',
      'Evaluaciones del desempeño de la ASF y análisis de sus informes.',
@@ -121,7 +121,7 @@ ENTREGAS = [
 ]
 
 # Que entregas ya tienen sus cifras en la base de la plataforma.
-INTEGRADAS = {'cp2024-asf3', 'cp2025-asf1'}
+INTEGRADAS = {'cp2024-asf3', 'cp2025-asf1', 'cp2025-asf2'}
 
 MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto',
          'septiembre', 'octubre', 'noviembre', 'diciembre']

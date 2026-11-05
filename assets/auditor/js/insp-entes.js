@@ -116,7 +116,7 @@
   /* Carga al vuelo de los municipios, con el mismo sello de la página. */
   var munPromesa = null;
   function cargarMun() {
-    if (window.AUDIT_MUNICIPIOS && window.AUDIT_MUN_RENDICION) return Promise.resolve();
+    if (window.AUDIT_MUNICIPIOS && window.AUDIT_MUN_RENDICION && window.AUDIT_MUN_INV && window.AUDIT_MUN_DEUDA) return Promise.resolve();
     if (munPromesa) return munPromesa;
     var yo = document.querySelector('script[src*="insp-entes.js"]');
     var v = yo && /\?v=([^&]+)/.exec(yo.getAttribute('src'));
@@ -150,8 +150,13 @@
     var r = ente.pad;
     if (!r || r.length < 3) return null;
     var m = function (v) { return v / 1e6; };
+    var I = window.AUDIT_MUN_INV, iv = I && I.mun[ente.id];
+    /* Su deuda en la cuenta (municipios-deuda.js): [capítulo, amortización, intereses, comisiones y gastos, ADEFAS, empréstitos], en pesos. */
+    var DV = window.AUDIT_MUN_DEUDA, dd = DV && DV.mun[ente.id];
     return { ing: m(r[2]), part: m(r[3]), aport: m(r[4]), fortamun: m(r[5]), fismdf: m(r[6]),
-      predial: m(r[7]), propios: m(r[8]), dep: r[2] > 0 ? (r[3] + r[4]) / r[2] * 100 : null };
+      predial: m(r[7]), propios: m(r[8]), dep: r[2] > 0 ? (r[3] + r[4]) / r[2] * 100 : null,
+      egr: m(r[9]), inv: iv ? m(iv[0]) : null, invp: iv && r[9] > 0 ? iv[0] / r[9] * 100 : null,
+      dcap: dd ? m(dd[1]) : null, dint: dd ? m(dd[2] + dd[3]) : null, adef: dd ? m(dd[4]) : null, emp: dd ? m(dd[5]) : null };
   }
 
   /* ---------------- Los tres ejes del índice ---------------- */
@@ -170,7 +175,7 @@
           expl: 'Lo observado por la ASF equivale al ' + obsPct.toFixed(2) + '% de lo que recibe en un año por los Ramos 28 y 33. ' +
             'Observado no es robado: es dinero cuyo destino no quedó acreditado y que hay que aclarar.' },
         { et: 'Holgura frente a la deuda', ico: '⚖️', v: acot(100 - deudaPct * 2),
-          crudo: simMdp(e.deuda) + ' de deuda · semáforo ' + e.semaforoDeuda,
+          crudo: simMdp(e.deuda) + ' de deuda · ' + (e.semaforoDeuda ? 'semáforo ' + e.semaforoDeuda : 'sin semáforo: no se mide'),
           expl: 'Su deuda equivale al ' + deudaPct.toFixed(1) + '% de lo que recibe en un año por los Ramos 28 y 33. ' +
             'El semáforo es el del Sistema de Alertas de la SHCP, no nuestro.' }
       ];
@@ -268,7 +273,8 @@
     var sem = (e.semaforoDeuda || '').toLowerCase();
     out.push({ k: 'deuda', ico: '⚖️', q: '¿Puede con su deuda?',
       e: sem === 'verde' ? 'ok' : sem === 'amarillo' ? 'alerta' : sem === 'rojo' ? 'grave' : 'sin',
-      v: e.semaforoDeuda ? 'Semáforo ' + sem + ' de Hacienda' : 'Sin evaluación',
+      v: e.semaforoDeuda ? 'Semáforo ' + sem + ' de Hacienda' : e.deuda === 0 ? 'Sin deuda inscrita en el Registro Público Único' : 'Sin evaluación',
+      ch: !e.semaforoDeuda && e.deuda === 0 ? 'oficial' : '', t: !e.semaforoDeuda && e.deuda === 0 ? 'No se mide' : '',
       d: 'Debe ' + simMdp(e.deuda) + '. ' + (e.deudaIld ? 'Su deuda equivale al ' + e.deudaIld + ' % de sus ingresos de libre disposición. ' : '') +
         'El color no es de Auditavisión: es el que asigna el Sistema de Alertas de la SHCP (' + (e.deudaFuente || 'SHCP') + ').', f: '' });
     return out;
@@ -306,8 +312,22 @@
         v: c.dep.toFixed(1) + ' % de su ingreso vino de fuera',
         d: 'En 2024 ingresó ' + simMdp(c.ing) + ': ' + simMdp(c.part) + ' de participaciones y ' + simMdp(c.aport) + ' de aportaciones ' +
           '(entre ellas ' + simMdp(c.fortamun) + ' del FORTAMUN y ' + simMdp(c.fismdf) + ' del FAIS). Recaudó ' + simMdp(c.propios) +
-          ' por su cuenta, ' + simMdp(c.predial) + ' de ellos de predial. Depender mucho no es irregular: es fragilidad.',
+          ' por su cuenta, ' + simMdp(c.predial) + ' de ellos de predial. Depender mucho no es irregular: es fragilidad.' +
+          (c.inv == null ? '' : ' Ese año pagó ' + simMdp(c.inv) + ' de inversión pública (obra y proyectos productivos)' +
+            (c.invp == null ? '' : ': $' + c.invp.toFixed(1) + ' de cada $100 de su egreso ' + chip('derivado')) + (c.inv === 0 ? '; rindió su cuenta sin ese capítulo' : '') + '.'),
         f: refMun('inegi') });
+      /* Su deuda, en su propia cuenta de 2024 (03-11-2026). Pagar no es deber: el saldo es de Hacienda. */
+      if (c.dcap != null) {
+        var pago = c.dcap + c.dint;
+        out.push({ k: 'deuda', ico: '🏦', q: '¿Cuánto pagó por su deuda?', e: 'ok',
+          v: pago > 0 ? simMdp(pago) + ' por sus créditos en 2024' : 'Sin pagos de créditos en 2024',
+          d: (pago > 0 ? 'En su cuenta de 2024 al INEGI pagó ' + simMdp(c.dcap) + ' de capital y ' + simMdp(c.dint) + ' de intereses y comisiones ' + chip('oficial') + '. ' :
+            'En su cuenta de 2024 al INEGI no reportó pagos de capital ni de intereses ' + chip('oficial') + '. ') +
+            (c.emp > 0 ? 'Ese año pidió prestados ' + simMdp(c.emp) + '. ' : 'Ese año no recibió préstamos. ') +
+            (c.adef > 0 ? 'Pagó además ' + simMdp(c.adef) + ' de adeudos de años anteriores (ADEFAS), sobre todo a proveedores: no es un crédito. ' : '') +
+            'Es lo que pagó y pidió en el año, no lo que debe: su saldo lo publica Hacienda en el Sistema de Alertas y sigue ' + chip('pendiente', 'deuda-municipios') + '.',
+          f: refMun('inegi') });
+      }
     } else if (rd.u) {
       var dep = rd.u[1] > 0 ? (rd.u[2] + rd.u[3]) / rd.u[1] * 100 : 0;
       out.push({ k: 'vive', ico: '🪙', q: '¿De qué vive?', e: 'sin', pend: 'municipios-sin-cuenta',
@@ -771,8 +791,8 @@
     return '<ol class="ie-senales">' + dg.map(function (x) {
       return '<li class="ie-senal s-' + x.e + '" id="ie-q-' + x.k + '">' +
         '<p class="ie-senal-q"><span aria-hidden="true">' + x.ico + '</span> ' + x.q + '</p>' +
-        '<p class="ie-senal-v"><span class="ie-sem-et">' + SEM[x.e].ico + ' ' + SEM[x.e].t + ':</span> <b>' + x.v + '</b> ' +
-        chip(x.e === 'sin' ? 'pendiente' : 'derivado', x.e === 'sin' ? x.pend : '') + '</p>' +
+        '<p class="ie-senal-v"><span class="ie-sem-et">' + SEM[x.e].ico + ' ' + (x.t || SEM[x.e].t) + ':</span> <b>' + x.v + '</b> ' +
+        chip(x.ch || (x.e === 'sin' ? 'pendiente' : 'derivado'), x.ch ? '' : x.e === 'sin' ? x.pend : '') + '</p>' +
         '<p class="ie-senal-d">' + x.d + (x.f ? ' ' + x.f : '') + '</p></li>';
     }).join('') + '</ol>';
   }

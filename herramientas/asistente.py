@@ -393,12 +393,23 @@ def _charla(d):
     sin = C['dep'].get('sinFuente', [])
     import insp_radar
     rad = insp_radar.datos(d['cuenta_publica_asf'])
+    import asistente_legislativo as al
+    cg = al.congresos_estados(d)
+    import gestion_judicial as gj
+    pj = gj.judiciales_estados(d)
+    fj = lambda donde: fu('INEGI, Censo Nacional de Impartición de Justicia Federal y Estatal 2025, reporte de resultados, ' + donde, 'ref-inegi-cnijfe2025-rr')
     # m: metrica -> nombre, unidad, estado, fuente, si se suma entre estados,
     # y si «mas» es peor (para «el peor» y «el mejor»).
     met = {
         'deuda': {'n': 'deuda pública', 'u': 'mdp', 'e': 'oficial', 'suma': 1, 'peor': 'max',
                   'fu': fu(sorted(set(e['deudaFuente'] for e in E), key=len)[0], 'ref-shcp-alertas')},
         'ild': {'n': 'deuda entre ingresos de libre disposición', 'u': 'pct', 'e': 'oficial', 'peor': 'max',
+                'fu': fu(sorted(set(e['deudaFuente'] for e in E), key=len)[0], 'ref-shcp-alertas')},
+        # Los otros dos indicadores del Sistema de Alertas (03-11-2026, los
+        # pinta el Planisferio en su dimensión de deuda).
+        'sd': {'n': 'pago de la deuda y obligaciones entre ingresos de libre disposición', 'u': 'pct', 'e': 'oficial', 'peor': 'max',
+               'fu': fu(sorted(set(e['deudaFuente'] for e in E), key=len)[0], 'ref-shcp-alertas')},
+        'ocp': {'n': 'deudas de corto plazo, con proveedores y contratistas, menos lo que tiene en caja, entre ingresos totales', 'u': 'pct', 'e': 'oficial', 'peor': 'max',
                 'fu': fu(sorted(set(e['deudaFuente'] for e in E), key=len)[0], 'ref-shcp-alertas')},
         'asf': {'n': 'monto por aclarar ante la ASF (Cuenta Pública 2024)', 'u': 'mdp', 'e': 'oficial', 'suma': 1, 'peor': 'max',
                 'fu': fu(E[0]['asfFuente'], 'ref-asf-mdb2024')},
@@ -421,6 +432,37 @@ def _charla(d):
                    'fu': fu('INEGI, Estadística de Finanzas Públicas Estatales (EFIPEM) 2024', C['recaudacionPropia']['ref']),
                    'op': 'impuestos + cuotas de seguridad social + contribuciones de mejoras + derechos + productos + aprovechamientos', 'sin': sin,
                    'pend': 'entidades-' + '-'.join(sin).lower()},
+        # La inversión del gobierno del estado (03-11-2026, dimensión del
+        # Planisferio): las dos vías no se suman.
+        'inv': {'n': 'obra que hizo el gobierno del estado en 2024 (su capítulo de inversión pública)', 'u': 'mdp', 'e': 'oficial', 'suma': 1,
+                'fu': fu('INEGI, Estadística de Finanzas Públicas Estatales (EFIPEM) 2024, capítulo «Inversión pública»', C['invPub']['ref']),
+                'sin': C['invPub']['sinFuente'], 'pend': 'entidades-' + '-'.join(C['invPub']['sinFuente']).lower()},
+        'invt': {'n': 'lo que el gobierno del estado les pasó a sus organismos de obra en 2024', 'u': 'mdp', 'e': 'oficial', 'suma': 1,
+                 'fu': fu('INEGI, Estadística de Finanzas Públicas Estatales (EFIPEM) 2024, subpartida «Instituciones y programas de infraestructura»', C['invInfra']['ref']),
+                 'sin': C['invInfra']['sinFuente'], 'pend': 'entidades-' + '-'.join(C['invInfra']['sinFuente']).lower()},
+        # Los 32 congresos locales (03-11-2026, dimensión legislativa del
+        # Planisferio): INEGI, CNPLE 2025, y el tope del art. 116, fr. II.
+        'cong': {'n': 'lo que gastó su congreso en 2024', 'u': 'mdp', 'e': 'oficial', 'suma': 1, 'peor': 'max',
+                 'fu': fu('INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, gasto ejercido en 2024 por congreso, p. 11', 'ref-inegi-cnple2025')},
+        'congx': {'n': 'gasto de su congreso por curul en 2024', 'u': 'mdp', 'e': 'derivado', 'peor': 'max',
+                  'fu': fu('INEGI, Censo Nacional de Poderes Legislativos Estatales 2025 (p. 11 y tabla 8)', 'ref-inegi-cnple2025'),
+                  'op': 'gasto ejercido del congreso en 2024 ÷ personas legisladoras en activo'},
+        'congp': {'n': 'gasto de su congreso frente al egreso del gobierno del estado en 2024', 'u': 'pct2', 'e': 'derivado', 'peor': 'max',
+                  'fu': fu('INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, p. 11, y finanzas públicas estatales 2024', 'ref-inegi-cnple2025'),
+                  'op': 'gasto del congreso en 2024 ÷ total de egresos del gobierno del estado en 2024 × 100', 'tope': al.TOPE_116,
+                  'sin': [a for a, c in cg.items() if c['p'] is None], 'pend': 'entidades-' + '-'.join(a for a, c in cg.items() if c['p'] is None).lower()},
+        'congn': {'n': 'personas legisladoras de su congreso', 'u': 'ent', 'e': 'oficial', 'suma': 1,
+                  'fu': fu('INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, tabla 8', 'ref-inegi-cnple2025')},
+        # Los 32 poderes judiciales estatales (03-11-2026, dimensión judicial
+        # del Planisferio): INEGI, CNIJF-E 2025, primera instancia.
+        'pjg': {'n': 'lo que ejerció su Poder Judicial en 2024', 'u': 'mdp', 'e': 'oficial', 'suma': 1, 'peor': 'max', 'fu': fj('gráfica 7, p. 14')},
+        'pjc': {'n': 'asuntos que concluyó su Poder Judicial de cada 100 que le entraron en 2024', 'u': 'pct', 'e': 'derivado', 'peor': 'min',
+                'fu': fj('tabla 23, p. 39'), 'op': 'asuntos concluidos ÷ asuntos ingresados en primera instancia × 100'},
+        'pja': {'n': 'lo que ejerció su Poder Judicial por asunto concluido en 2024', 'u': 'pesos', 'e': 'derivado', 'peor': 'max',
+                'fu': fj('gráfica 7, p. 14, y tabla 23, p. 39'), 'op': 'presupuesto ejercido en 2024 ÷ asuntos concluidos en primera instancia'},
+        'pjr': {'n': 'causas penales pendientes de concluir en su Poder Judicial al cierre de 2024', 'u': 'ent', 'e': 'oficial', 'suma': 1, 'peor': 'max',
+                'fu': fj('tabla 25, p. 45')},
+        'pjj': {'n': 'personas juzgadoras de su Poder Judicial', 'u': 'ent', 'e': 'oficial', 'suma': 1, 'fu': fj('tabla 6, p. 12')},
         'pob': {'n': 'habitantes a mitad de 2026', 'u': 'gente', 'e': 'derivado', 'suma': 1,
                 'fu': fu('CONAPO, proyecciones de población 2020-2070', url=C['pob']['url'])},
     }
@@ -428,8 +470,12 @@ def _charla(d):
     for e in E:
         r = rad['est'].get(e['abbr'])
         x = {'a': e['abbr'], 'n': e['name'], 'deuda': e.get('deuda'), 'ild': e.get('deudaIld'), 'sem': e.get('semaforoDeuda'),
+             'sd': e.get('deudaSd'), 'ocp': e.get('deudaOcp'),
              'asf': e.get('asfMontoObservado'), 'aud': e.get('asfAuditorias'), 'radar': round(r['v'][0], 2) if r else None,
-             'gasto': e['gasto'], 'r28': e['ramo28'], 'r33': e['ramo33'], 'pc': e['pc'], 'pob': e.get('pobPersonas')}
+             'gasto': e['gasto'], 'r28': e['ramo28'], 'r33': e['ramo33'], 'pc': e['pc'], 'pob': e.get('pobPersonas'),
+             'inv': e.get('invPub'), 'invt': e.get('invInfra'), 'egr': e.get('egr2024'),
+             'cong': cg[e['abbr']]['g'], 'congx': cg[e['abbr']]['x'], 'congp': cg[e['abbr']]['p'], 'congn': cg[e['abbr']]['n'],
+             'pjg': pj[e['abbr']]['g'], 'pjc': pj[e['abbr']]['c100'], 'pja': pj[e['abbr']]['xa'], 'pjr': pj[e['abbr']]['p'], 'pjj': pj[e['abbr']]['j']}
         for k in ('dep', 'propia'):
             x[k] = None if e['abbr'] in sin else e[{'dep': 'dep', 'propia': 'recaudacionPropia'}[k]]
         edo.append(x)
@@ -504,7 +550,7 @@ def _charla(d):
     return {'nota': nota, 'met': met, 'edo': edo, 'cargos': cargos, 'smin': smin, 'adm': adm, 'admet': admet, 'expide': EXPIDE,
             'mapa': 'numeros-mapa-del-gasto-federalizado.html', 'num': num, 'datos': asistente_datos.datos(d, num, D),
             'leg': asistente_legislativo.legislativo(), 'jud': asistente_judicial.judicial(d),
-            'san': informe_sancion.bot(), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d),
+            'san': informe_sancion.bot(__import__('territorio_modulos').temas_bot(d)), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d), 'apu': __import__('administracion_publica').chat(d), 'soc': __import__('dimension_social').chat(d),
             # Nepotismo y cargos publicos (28-10-2026): la tabla de la calculadora.
             'nep': nepotismo.bot(),
             # La memoria de promesas (01-11-2026): promesa → Presupuesto → Cuenta Pública → ASF.
@@ -628,7 +674,9 @@ def escribir_base():
     import asistente_personajes
     # Periodismo en riesgo (29-10-2026): las cifras del Mecanismo de Protección.
     import periodistas
-    fichas = _fichas(d) + asistente_personajes.fichas() + periodistas.fichas() + _pendientes() + _paginas()
+    # Las leyes del dinero en los tres niveles (03-11-2026).
+    import leyes_niveles
+    fichas = _fichas(d) + asistente_personajes.fichas() + periodistas.fichas() + leyes_niveles.fichas(d) + _pendientes() + _paginas()
     cuenta = {}
     for f in fichas:
         cuenta[f['t']] = cuenta.get(f['t'], 0) + 1

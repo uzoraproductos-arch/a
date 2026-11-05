@@ -36,8 +36,18 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
   que circula, lo que sigue); **lo «privilegiado» es lo enterrado en documentos
   públicos, nunca un rumor**. El banco de pruebas acepta `modo`. **El modo cambia la forma de
   investigar y de contestar, nunca los datos** (§2). Por entregas: (a) el
-  selector, hecho; (b) la forma de responder de cada modo (Periodista, hecho);
-  (c) el dictamen de cada modo.
+  selector, hecho; (b) la forma de responder de cada modo, hecha (Periodista el
+  29-10-2026; los otros tres el 04-11-2026: `inspectorCapa()`, «🔍 La revisión del
+  Inspector»: de qué está hecha la respuesta por chip, sus documentos, lo que falta y
+  por dónde seguir; `ciudadanoCapa()`, «🙋 En corto»: la respuesta en una oración, sus
+  palabras difíciles con el glosario y su estado de cuenta cívico; `ambientalistaCapa()`,
+  «🌎 La mirada ambiental»: los proyectos con alerta ambiental del tema o del estado
+  y quién los paga. **Ninguna capa agrega cifras**. Cada modo ofrece pasarse al que le
+  toca, con `MODO_PAL` de `asistente.js`, y el banco de pruebas lee la capa de
+  cualquier modo con `capaModo()`); (c) el dictamen de cada modo, hecho (04-11-2026): el
+  enlace lleva `&modo=` y el dictamen suma la capa del modo como capítulo, «La lectura del
+  modo X», sin botones; la página vuelve a contestar con la base y **el modo no entra a la
+  huella**.
 - **Las cuatro herramientas se mudaron a la Enciclopedia** (29-10-2026): su
   índice es la quinta tarjeta de Números, «Herramientas del Auditor»
   (`numeros-herramientas-del-auditor.html`, `HERR_INDICE` y `HERR_SITIO` de
@@ -57,6 +67,210 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
   error (ver §5 ter).
 - Comunidad queda aparte, como la tercera pestaña, y **Noticias** es la
   cuarta desde el 28-10-2026 (ver §5 bis).
+
+### 0 quater. El menú de cinco pestañas y el Planisferio
+
+**Decisión del autor, 02-11-2026.** El menú (`MENU` de `apartados.py` y su
+copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
+**Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras
+Ágora, Garantías y Donaciones), **Noticiero** (antes «Noticias») y
+**Servicios** (`servicios.html`, que fue módulo del Modo Inspector). Ningún
+archivo cambió de nombre. Las páginas de Números, Datos y Aprende marcan
+Comunidad (`ENCICLO_MARCAN`) y sus migas empiezan «Comunidad › Enciclopedia».
+Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
+
+- **El Planisferio es la segunda herramienta en funcionalidad**, después del
+  Auditor: un mapa grande de México por **dimensiones** (`DIMENSIONES` de
+  `herramientas/planisferio.py`): financiera, deuda, inversión, ambiental,
+  legislativa y judicial. Toca una entidad y lleva a su **portal**
+  (`planisferio-<clave>.html`, clave sin acentos: `mex`), con sus municipios.
+  **El portal va por tarjetas** (decisión del autor, 04-11-2026): arriba solo el mapa de sus
+  municipios y sus municipios uno por uno; cada tema vive en su página,
+  `planisferio-<clave>-<tema>.html` (`TEMAS` y `subpagina()` de `planisferio.py`, con su copia en
+  `planisferio.js`). **Un tema nuevo del portal necesita su renglón en `TEMAS`**, o la generación se
+  detiene; una liga a un tema apunta a su página, nunca a `#tema` del portal.
+- **La página del mapa va por pestañas y cajones** (decisión del autor, 03-11-2026:
+  «hay mucho contenido de narración»). Las dimensiones son una tira de pestañas;
+  lo que cada una pinta («📏 Cómo leer esta dimensión») y sus puntos ciegos («👁️ Lo
+  que este mapa no dice») abren en la ventana lateral (`button[data-cajon]` de
+  `apartados.js`), y en la página solo queda una línea. **Una dimensión nueva que se
+  pinte necesita su texto en `leer` de `pagina_mapa()`**, o la generación se detiene.
+  Cada contador trae «Ver su desglose» y abajo va «La cuenta completa», que es
+  `numeros_tres()` de la Enciclopedia (la misma función, nunca una copia). Junto a
+  ella van «💰 Cuánto dinero es» (`presupuesto_modulos.cuanto()`) y «🧾 Los 16
+  orígenes del ingreso» (`numeros_renglones(..., lleno=True)`: ya contabilizados,
+  porque en el Planisferio no corre `numeros.js`).
+  **El mapa es lo principal** (rediseño del autor, 03-11-2026): la página es una sola
+  sección, sin «En esta página»; tras la entrada vienen las dimensiones y su mapa.
+  Los contadores, «Cuánto dinero es» y «Los 16 orígenes» van integrados debajo del
+  mapa **solo en la dimensión financiera** (`.pl-solo-dim[data-dim]`, que
+  `planisferio.js` esconde en las demás), y las 32 entidades abren en la ventana
+  lateral con el botón «📍 Las 32 entidades».
+  **El mapa es el protagonista** (reestructura del autor, 04-11-2026: «lo que le llama al
+  usuario a jugar con él»): encabezado con la foto del paisaje y la persona en sombra
+  (`planisferio-paisaje.webp`, en su sentido original, con su versión `-movil`), «cómo se juega» en
+  tres pasos, las nueve dimensiones como mosaico de color (`--dim` de `planisferio.css`)
+  y el mapa en su tablero (`#plTablero`), que toma el color, el nombre y la descripción de
+  la dimensión; «Para leerla bien» (los cajones) va al pie del tablero y lo financiero en
+  tres pestañas (`.pl-hoja-b`). **Una dimensión nueva necesita su color en `planisferio.css`**,
+  o su mosaico sale azul. Se reordenó; no se quitó contenido.
+- **El Planisferio es la matriz de los mapas** (pedido del autor, 04-11-2026: «las cuestiones que
+  tienen que ver con los mapas quedan vinculadas con el planisferio… va a ser nuestra matriz, que se
+  vincula y se alimenta al mismo tiempo con la información de la Enciclopedia»). Cada lente del mapa de
+  la Enciclopedia (`numeros-mapa-del-gasto-federalizado.html`) que ya se pinta en el Planisferio dice en
+  `PLANISFERIO` de `territorio_modulos.py` en qué dimensión y lente vive allá; ese mapa lleva ahí con
+  «Ábrelo en el Planisferio» (y cada ficha, a su portal), y `matriz()` de `planisferio.py` detiene la
+  generación si una apunta a una dimensión o lente que no existe. **En el chat, los mapas que viven en el
+  Planisferio salen en un solo renglón** («Ver en el Planisferio», con las otras dimensiones al lado:
+  `lineaPl()` de `asistente.js`, con el `pl` que escribe `asistente_recursos.py`), nunca como tarjetas
+  sueltas que repiten el mismo mapa, y «el mapa de…» se abre allá. **Una lente nueva del mapa de la
+  Enciclopedia con par en el Planisferio necesita su renglón en `PLANISFERIO`.**
+  «No cuadra» y «Obras con alerta ambiental» viven además en el Planisferio como lentes `cua`
+  (financiera) y `obr` (ambiental), con la misma cuenta y el mismo texto (`cuadre_obras()`,
+  `QUE_CUADRE`, `QUE_OBRAS` de `territorio_modulos.py`), y el mapa ambiental de megaobras tiene su
+  par en `OTROS_MAPAS`. El chat reconoce por su archivo y su `?l=` cualquier tarjeta que lleve a un
+  mapa con par (`conPl()`), aunque la haya armado otra respuesta.
+  La página de presupuestos de cada portal trae «No cuadra» como cuarto piso, con la misma cuenta.
+  La administración pública va en **gris pizarra** (`#4a5a6a`, elegido por el autor el 04-11-2026).
+- **No trae datos propios:** ordena en el territorio lo que la Enciclopedia
+  ya cotejó (`AUDIT_DB`, `municipios-efipem.js`). Una cifra nueva entra
+  primero a su módulo de la Enciclopedia y de ahí la lee el Planisferio.
+- **Por entregas.** Primera (02-11-2026): la dimensión financiera, los tres
+  presupuestos de cada entidad (lo que baja de la Federación, lo que cobra el
+  estado, lo que ingresan sus municipios) y los contadores de la Enciclopedia
+  (ritmo por segundo = cifra anual ÷ 31,536,000 s, `derivado`). Las demás
+  dimensiones salen «Próximamente» y llevan a donde ya viven; un enlace roto
+  detiene la generación.
+- **El mapa de los municipios de las 32 entidades** (03-11-2026: Jalisco
+  primero y, el mismo día, las otras 31; 2,478 municipios y alcaldías). Sus
+  límites salen del **Marco Geoestadístico 2024 del INEGI**: `herramientas/integrar_mg_municipios.py <ent>_<nombre>.zip` (se
+  corre a mano con `pyshp`) escribe `docs/geo/mg2024-mun-<cve>.json`, con la
+  huella SHA-256 del archivo de origen, y `planisferio.py` lo pinta en el
+  portal (`#mapa-municipios`) si existe. **Si sus claves no coinciden con las
+  del padrón municipal, la generación se detiene** (salvo las claves 990 y
+  más, «No especificado», que no son territorio). La simplificación baja de
+  400 m a 80 m en las entidades chicas. Las alcaldías de la Ciudad de México
+  van en gris, porque no rinden cuenta municipal. La página repite el aviso
+  del INEGI: esos límites son geoestadísticos, no la fuente oficial de la
+  división político-administrativa. El chat lleva ahí con
+  `planisferio.html?e=JAL&m=1` (renglón `mapa-mun` de `RECURSOS`).
+- **La deuda, segunda dimensión pintada** (03-11-2026). Cada dimensión de
+  `DIMENSIONES` dice si se pinta, y sus lentes viven en `LENTES` con su
+  `dim` y su formato. La deuda lee del Sistema de Alertas (`deuda`,
+  `deudaIld`, `deudaSd`, `deudaOcp`, `ildMdp` de `DB.estados`, que escribe
+  `integrar_expedientes.py`); **el mapa colorea por cifra, no por semáforo**,
+  porque el semáforo junta en verde a estados muy distintos, y lo dice. Lo
+  que no se mide por ley va en gris como «no se mide», no como pendiente. Se
+  abre con `planisferio.html?d=deuda` y cada portal la trae en `#deuda`.
+  **La de los municipios** (03-11-2026) sale de su propia cuenta al INEGI
+  (`municipios-deuda.js`, que escribe `herramientas/anclar_deuda_municipios.py`):
+  **lo que pagaron y pidieron prestado en el año, nunca lo que deben** (el saldo es
+  del Sistema de Alertas y sigue pendiente), los ADEFAS no se dicen como crédito y
+  el capítulo «Financiamiento» del INEGI no se dice como deuda nueva: casi todo es
+  «Déficit», su renglón de cuadre.
+- **La inversión, tercera dimensión pintada** (03-11-2026). Lee `invPub`,
+  `invInfra` y `egr2024` de `DB.estados` (los escribe
+  `herramientas/anclar_egresos_entidades.py` desde la estadística estatal del
+  INEGI, con su tabla dentro del script y `--csv` para cotejarla contra el
+  archivo) y lo que dejó la ASF. **La obra directa y lo que pasa a los
+  organismos de obra nunca se suman**: con eso también se paga nómina. Se
+  abre con `planisferio.html?d=inversion` y cada portal la trae en
+  `#inversion`; en la Enciclopedia son las lentes `inv` e `invt` del mapa del
+  gasto federalizado. **La de cada municipio vive en su propio archivo**
+  (`municipios-inversion.js`, que escribe
+  `herramientas/anclar_inversion_municipios.py <zip municipal del INEGI>`),
+  nunca como columna nueva del padrón, que se lee por posición; si no trae a
+  los mismos municipios con cuenta que el padrón, la generación se detiene.
+  El «egreso total» del INEGI incluye lo que quedó en caja: se dice «de cada
+  $100 de su egreso», no «de lo que gastó».
+- **La legislativa, cuarta dimensión pintada** (03-11-2026). Los 32 congresos
+  locales: lo que gastó cada uno en 2024 (CNPLE 2025), cuántos lo integran, el
+  gasto por curul y el gasto frente al egreso del estado. Todo sale de
+  `congresos_estados()` de `asistente_legislativo.py`, que leen el Planisferio,
+  la Enciclopedia y el chat. **El tope del 0.70 % (art. 116, fr. II) se dice como
+  referencia, nunca como incumplimiento** mientras se compare gasto de 2024 contra
+  el egreso del INEGI: la prueba es el presupuesto aprobado del congreso contra el
+  presupuesto de egresos del estado. El gasto por curul no es lo que gana nadie.
+  Se abre con `planisferio.html?d=legislativa` y cada portal la trae en
+  `#legislativa`; en el chat, `congLocal()` va antes que las Cámaras federales.
+- **La judicial, quinta dimensión pintada** (03-11-2026). Los 32 poderes judiciales
+  de los estados: lo que ejerció cada uno en 2024 junto a lo que le entró y lo que
+  concluyó en primera instancia, el dinero por asunto concluido, las causas penales
+  pendientes y sus personas juzgadoras (CNIJF-E 2025). Todo sale de
+  `judiciales_estados()` de `gestion_judicial.py`, que leen el Planisferio y el chat.
+  **«Concluyó de cada 100» no es el rezago y el dinero por asunto no es lo que cuesta
+  un juicio**: se dice junto a la cifra. Se abre con `planisferio.html?d=judicial` y
+  cada portal la trae en `#judicial`; en el chat, `judLocal()` va antes que la ficha
+  del estado.
+- **La ambiental, sexta dimensión pintada** (03-11-2026). Empieza por los recursos
+  no renovables: las siete refinerías de PEMEX, el crudo que procesa cada una
+  (Segundo Informe) y el valor que ganó o perdió en los libros de PEMEX. Todo sale
+  de `herramientas/recursos_naturales.py`, que es además la metodología del
+  capítulo 6 del libro del autor (`docs/libro/derecho-economico/`): **el libro es
+  guía de temas, no fuente**, y cada regla se coteja contra la ley vigente, porque
+  describe el marco de 1993-1994. **Una entidad sin refinería va en gris como «sin
+  refinería», nunca como «sin problema»**, y el deterioro se dice como estimación
+  contable, no como dinero que salió de la caja. Se abre con
+  `planisferio.html?d=ambiental` y cada portal la trae en `#ambiental`; en el chat,
+  los temas `rn_*` van en `mapaResp()`, antes que las megaobras. **Las concesiones
+  mineras** (03-11-2026) salen del cuadro por entidad de la Dirección General de Minas
+  (`MINAS`, con su total: si no cuadra, se detiene) y **una concesión no se dice como mina
+  trabajando ni como irregularidad**; la capacidad de cada refinería, del Anuario
+  Estadístico de PEMEX. `&l=` abre el mapa en una lente.
+  **El agua del subsuelo** (03-11-2026) sale del Acuerdo de disponibilidad de los 653
+  acuíferos de la CONAGUA (DOF 09-11-2023), copiado a un CSV con huella: `acuiferos()` recalcula
+  las sumas de cada entidad y se detiene si no cuadran. **La disponibilidad se dice como el agua
+  que aún se puede concesionar, nunca como el agua que queda, y «sin disponibilidad» no se dice
+  «sobreexplotado»**: son dos mediciones distintas de la CONAGUA.
+  **Los incendios forestales** (03-11-2026) salen del cierre estadístico anual de la CONAFOR
+  (`INC25`, `INC24`, con huella; si las filas no suman el cierre, se detiene). **La superficie afectada
+  no se dice como bosque perdido**: casi toda es pasto y matorral. **La superficie forestal** (03-11-2026) sale del
+  «Estado que guarda el sector forestal en México 2023» de la CONAFOR (`SF`, con huella; si una fila o una columna
+  no cuadran, se detiene): **«forestal» no se dice como «bosque»** (incluye el matorral), y lo que el fuego tocó
+  frente a ella es una proporción con años distintos, nunca la parte que se perdió.
+  **La pesca y la acuacultura** (03-11-2026) salen de las series del Anuario Estadístico de Acuacultura y Pesca de la
+  CONAPESCA (`PESCA`, con huella; si una fila o una columna no cuadran, se detiene): **lo registrado se dice como lo declarado
+  en los avisos de arribo y de cosecha, nunca como todo lo pescado ni como salud de la especie**, y una entidad sin registro va
+  en gris como «no registró», no como «sin pesca». Si el Anuario se contradice entre cuadros, se dice y se toman sus series.
+- **La salud pública, séptima dimensión pintada** (03-11-2026, pedido del autor: «sería
+  IMSS e ISSSTE»). Del **IMSS**, su Memoria Estadística 2025 por OOAD; del **ISSSTE**, el
+  registro «Recursos en Salud Sectorial» de la DGIS (Secretaría de Salud), porque su anuario
+  no responde. `herramientas/anclar_salud_estados.py <Excel de la Memoria> <ZIP de la DGIS>`
+  escribe `docs/salud/imss-issste-estados-2025.json` con las huellas; si las OOAD no suman el
+  total de su cuadro o la DGIS no trae los establecimientos de su nota de cierre, se detiene.
+  `salud_estados()` de `gestion_salud.py` lo leen el Planisferio, la Enciclopedia (tema
+  `estados`) y el chat (`salEdo()`, antes que las columnas). **Las dos fuentes no se mezclan**
+  (desde 2025 el IMSS de la DGIS incluye el antiguo IMSS-Bienestar programa), **los hospitales
+  de alta especialidad se cuentan donde están** y lo que el ISSSTE no publica por estado
+  (derechohabientes, consultas, cirugías) sigue con su ficha. Se abre con
+  `planisferio.html?d=salud` y cada portal la trae en `#salud`.
+- **La administración pública, octava dimensión pintada** (03-11-2026, pedido del autor: «qué funciones tiene… sus auditorías… en los tres niveles»). El gobierno que ejecuta: la federal, las 32 estatales y las municipales. Todo sale de `herramientas/administracion_publica.py`, con los censos de gobierno del INEGI (CNGF-E 2025 y CNGMD 2025, con huella; si una tabla no suma el total que el reporte dice en su texto, se detiene) y la Matriz de la ASF que ya está en la base. Lo leen la Enciclopedia (Datos › Administración pública), el Planisferio (`?d=administracion`, `#administracion` en cada portal) y el chat (`D.apu`, `apuEdo()` antes que las columnas). **Lo del censo se dice como lo que cada gobierno reportó, nunca como auditoría**, y el personal de dos estados no se compara sin decir que el censo no dice qué organismos incluyó cada uno; **la adjudicación directa cuenta contratos, no pesos, y no se dice como irregularidad**; y lo que dejó la ASF es solo del dinero federal.
+- **La social, novena dimensión pintada** (04-11-2026). La pobreza de cada estado, de las
+  infografías del INEGI, Pobreza multidimensional 2024 (`anclar_pobreza_estados.py` →
+  `docs/social/pobreza-entidades-2024.json`, con huellas; si moderada + extrema no da la pobreza
+  publicada o los 32 no suman el país, se detiene), y las aportaciones 2026 por persona en pobreza.
+  Todo sale de `herramientas/dimension_social.py`, que leen el Planisferio (`?d=social`, `#social`) y
+  el chat (`socEdo()`). **La pobreza no se dice como calificación de un gobierno, y las aportaciones
+  por persona en pobreza no son lo que le llega a cada persona.**
+- **Cada dimensión va vinculada al Contexto dimensional y al estado de resultados** (04-11-2026,
+  pedido del autor). `CONTEXTO` de `dimension_social.py` dice qué página del Contexto dimensional mira
+  cada dimensión a nivel federal: **una dimensión nueva necesita ahí su renglón**, o la generación se
+  detiene. El mapa, cada portal y cada ficha llevan además el estado de resultados del Gobierno y el
+  estado de cuenta del estado; el Contexto dimensional y el estado de resultados llevan de vuelta.
+- **Las leyes del dinero en los tres niveles** (03-11-2026,
+  `herramientas/leyes_niveles.py`, página `marco-legal-tres-niveles.html`):
+  cuál ley rige, quién la aprueba y dónde se publica, federal, estatal y
+  municipal. **No copia leyes ni pone una liga que no respondió al cotejo**:
+  una dirección sin verificar va con su nombre y «liga por cotejar». Las
+  fechas federales salen del índice de la Cámara de Diputados; si una ley se
+  reforma, se cambia su renglón en `FEDERALES`. Cada portal del Planisferio
+  la lee en `#leyes` y en «Las reglas de su deuda». El chat la abre con
+  `leyNivel()` de `asistente.js` antes que la ficha del estado.
+- **Vive en el Auditor:** «Ver en el Planisferio» es un renglón de
+  `RECURSOS` (`asistente_recursos.py`, con `?e=` para abrir el mapa con la
+  entidad elegida) y «planisferio» cuenta como pedir un mapa (`TIPOS_REC` de
+  `asistente.js`). Una dimensión nueva que se pinte necesita su pregunta en
+  `preguntas_auditor.json`.
 
 ### 0 bis. Una sola plataforma: la Enciclopedia antigua se retiró
 
@@ -79,7 +293,7 @@ el documento oficial (§2) y entra a su página de Auditavisión y al bot
 ### 0 ter. Los pilares: el periodista virtual del gasto público
 
 **Decisión del autor, 26-10-2026.** Auditavisión es el periodista virtual que
-sigue el gasto público. Sus once pilares están dichos al lector en
+sigue el gasto público. Sus doce pilares están dichos al lector en
 `pilares.html` (`PILARES_LISTA` de `herramientas/apartados.py`) y valen para
 todo cambio: que la verdad sea incómoda no la vuelve falsa; evidencia con
 folio; contrapeso, no propaganda (las mismas reglas para todos los gobiernos);
@@ -88,6 +302,20 @@ fuente de cifras; lo que falta se señala con nombre; que se entienda de un
 vistazo; el ambiente también es gasto público; y el caso no se olvida (cada
 columna de Verificamos trae «Lo que sigue» y se puede seguir: al cambiar su
 `actualizado`, quien la sigue ve el aviso). Un pilar nuevo se agrega ahí.
+
+**La base de datos es el pilar de transparencia** (decisión del autor,
+03-11-2026: «la construcción de nuestra base de datos debe convertirse en ese
+pilar de transparencia», tras «no podemos contar o confiar con la plataforma de
+transparencia»). Es el duodécimo pilar, y la página lo explica en seis pasos
+(`BASE_PASOS` de `apartados.py`, sección `#base` de `pilares.html`). **Ninguna
+cifra se apoya en una respuesta a una solicitud de acceso** (la Plataforma
+Nacional de Transparencia, sin órgano autónomo desde la Ley General de
+Transparencia, DOF 20-03-2025): solo entra lo que la dependencia publica para
+todos, con la huella SHA-256 del archivo, su cuadre (si no cuadra, se detiene),
+su chip y su enlace. **Un pendiente no se resuelve proponiendo una solicitud**:
+su enlace es el portal donde la dependencia debía publicarlo, y si no lo
+publica, se queda con su nombre. Lo que diga una solicitud ajena, si alguna vez
+llega, es punto de partida, como una nota de prensa.
 
 **Competimos siendo el mejor auditor, no el más rápido** (decisión del autor,
 01-11-2026: «podríamos ser considerados competidores de todos estos medios
@@ -578,14 +806,16 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   `sem_*`). **Cada semestre (1 de mayo y 1 de noviembre) se cambian sus cifras
   y su `DOC` por las del informe nuevo**, con el anterior en `ANT` para el
   cambio del semestre. Un documento de doctrina o una guía oficial es metodología:
-  se explica en sencillo con su página, no se copia entero.
+  se explica en sencillo con su página, no se copia entero. La metodología de auditoría (control interno, riesgos, fraude, prueba y lavado) vive en `aprende-auditoria.html`, por
+  `herramientas/metodologia_auditoria.py`, cotejada contra el Marco Integrado de Control Interno de la ASF, la LFPIORPI y el
+  CNPP: **un temario o un folleto de curso nunca es fuente**, solo guía de temas.
 - **Responde como chat:** claro, corto y contundente, con la cifra, qué
   quiere decir y su fuente a la vista. Cada respuesta con datos lleva
   **«Saber más»**, que abre la página de la plataforma donde está la
   información (el campo `ir` de la respuesta: una respuesta nueva sin `ir`
   no está terminada), y **«Generar dictamen»**, que abre en otra pestaña el
   «Dictamen cívico independiente» sellado (`herramienta-inspector-dictamen.html`). El
-  enlace del dictamen solo lleva la pregunta (`?q=`, y las previas en `&c=`):
+  enlace del dictamen solo lleva la pregunta (`?q=`, las previas en `&c=` y el modo en `&modo=`):
   la página vuelve a contestarla con la misma base, así que no se puede
   fabricar un dictamen con cifras ajenas. El dictamen dice que no es un
   documento oficial ni un peritaje con validez ante autoridad.
@@ -710,6 +940,12 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   contrato abierto el importe suele ser el máximo, no lo pagado. **Las personas
   físicas no se publican** (su RFC es un dato personal), y tener contratos no
   es una irregularidad: así se dice en cada respuesta.
+  **Las señales de fraccionamiento** (04-11-2026, `herramientas/fraccionamiento.py`, sección
+  `#fraccionamiento` y `fraccCmx()` del chat): adjudicaciones directas por monto de la misma unidad,
+  empresa y partida que en 90 días rebasan el tope del Anexo 9 del PEF (LAASSP art. 55; Reglamento
+  art. 111). **Se dicen siempre como señal para revisar, nunca como irregularidad**, sin nombrar a la
+  empresa; los topes de cada año van en `ANEXO9` y se cotejan contra el DOF; lo que depende del escalón
+  de cada dependencia queda pendiente (`fracc-escalon`).
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).

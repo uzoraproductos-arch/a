@@ -202,19 +202,23 @@
       '<p><b>Por qué falta:</b> ' + esc(f.pend.pq) + '</p>' +
       '<p><b>A quién le toca:</b> ' + esc(f.pend.quien) + '</p>' +
       '<p><b>Dónde debería estar:</b> <a href="' + esc(f.pend.donde) + '" target="_blank" rel="noopener noreferrer">' + esc(f.pend.donde_tx) + ' ↗</a></p></div>' : '';
-    var ir = r.ir || f.ir;
+    var ir = r.ir || f.ir, m = modoVivo(), cm = MODO_ICO[m] ? capaModo(q, r, m) : null;
+    var capa = cm && cm.html ? cm.html.replace(/<button\b[^>]*>[\s\S]*?<\/button>/g, '') : '';
     var resp = r.html.replace(/<details class="pa-dedonde"/g, '<details class="pa-dedonde" open');
     return '<article class="pa-nota dic-doc">' +
       '<header class="dic-cab"><div class="dic-cab-marca"><img src="' + LOGO + '" alt="" width="62" height="48">' +
       '<div><b>Auditavisión</b><small>Plataforma ciudadana de fiscalización del gasto público</small></div></div>' +
       '<div class="dic-sello">' + sello(null, 'DICTAMEN') + '</div>' +
-      '<div class="dic-cab-tx"><span class="pa-nota-tipo">Dictamen cívico independiente · ' + esc(t[1]) + '</span>' +
+      '<div class="dic-cab-tx"><span class="pa-nota-tipo">Dictamen cívico independiente · ' + esc(t[1]) + (capa ? ' · ' + MODO_ICO[m] + ' Modo ' + MODO_NOM[m] : '') + '</span>' +
       '<dl><div><dt>Folio</dt><dd class="pa-folio">calculando…</dd></div><div><dt>Expedido</dt><dd>' + esc(hoy()) + '</dd></div>' +
       '<div><dt>Versión de la plataforma</dt><dd>' + esc(selloSitio()) + '</dd></div></dl></div></header>' +
       '<h2 class="dic-tit"><span aria-hidden="true">' + t[0] + '</span> ' + esc(f.tit) + '</h2>' +
       cap('Planteamiento') + '<p class="pa-nota-q"><span>La pregunta</span> «' + esc(q) + '»</p>' +
       (antes.length ? '<p class="dic-chico">Se hizo en la plática después de: ' + antes.map(function (x) { return '«' + esc(x) + '»'; }).join(' → ') + '.</p>' : '') +
       cap('Respuesta del Auditor') + '<div class="dic-resp">' + resp + '</div>' +
+      (capa ? cap('La lectura del modo ' + MODO_NOM[m]) +
+        '<p class="dic-chico">Pediste el dictamen en el modo ' + MODO_NOM[m] + ': esta es su forma de leer la misma respuesta. El modo cambia cómo se cuenta, nunca los datos: no agrega cifras y no entra a la huella.</p>' +
+        '<div class="dic-resp dic-modo">' + capa + '</div>' : '') +
       (f.txt && f.t !== 'calculo' ? '<p class="pa-nota-tx"><b>La ficha completa:</b> ' + esc(f.txt) + '</p>' : '') +
       (ci ? cap('Hallazgos: las cifras') + '<ul class="pa-cifras">' + ci + '</ul>' : '') +
       (f.cot && f.cot.length && charla ? cap('Cotejo de lo que circula') +
@@ -403,8 +407,13 @@
      plática: lleva la pregunta y las cuatro anteriores (las que siguen a otra,
      como «¿y Morelos?», necesitan su contexto). */
   var DICTAMEN = 'herramienta-inspector-dictamen.html', historial = [];
+  /* El dictamen sale con la forma del modo elegido (entrega c, 04-11-2026): el
+     enlace lleva &modo=, la página vuelve a contestar con la misma base y suma la
+     capa del modo como un capítulo. El modo no cambia los datos ni la huella. */
   function enlaceDictamen(q, previas) {
-    return DICTAMEN + '?q=' + encodeURIComponent(q) + previas.map(function (c) { return '&c=' + encodeURIComponent(c); }).join('');
+    var m = modoVivo();
+    return DICTAMEN + '?q=' + encodeURIComponent(q) + previas.map(function (c) { return '&c=' + encodeURIComponent(c); }).join('') +
+      (MODO_ICO[m] ? '&modo=' + m : '');
   }
   function chips(lista) {
     return lista && lista.length ? '<div class="pa-mas">' + lista.map(function (o) {
@@ -483,11 +492,55 @@
     if (!iv || lista.some(function (o) { return sinParam(o.x.ir) === iv.x.ir; })) return lista;
     return [iv].concat(lista).slice(0, 5);
   }
+  /* El Planisferio es la matriz de los mapas (pedido del autor, 04-11-2026:
+     «que todo quedara en una misma línea… el planisferio va a ser nuestra
+     matriz»). Los mapas que viven en el Planisferio (pl, que escribe
+     asistente_recursos.py) no salen como tarjetas sueltas: se juntan en un
+     solo renglón que abre el Planisferio en su dimensión, con las otras
+     dimensiones al lado. Los que todavía no tienen par allá siguen como tarjeta. */
+  function ligaPl(x, ab) { return ab && x.ple ? x.ple.replace('%s', encodeURIComponent(ab)) : x.pl; }
+  function destinoRec(x, ab) { return x.pl ? ligaPl(x, ab) : ligaRec(x, ab); }
+  function sinRepetirPl(lista) {
+    var vistos = {};
+    return lista.filter(function (o) {
+      var x = o.x || o, k = x.pl ? 'pl:' + (x.plk || x.pl) : 'ir:' + x.ir;
+      if (vistos[k]) return false;
+      vistos[k] = 1;
+      return true;
+    });
+  }
+  function lineaPl(pls) {
+    if (!pls.length) return '';
+    var p = pls[0], ab = p.ab, que = p.x.pll ? 'Dimensión ' + p.x.pll.charAt(0).toLowerCase() + p.x.pll.slice(1) : p.x.n;
+    return '<div class="pa-pl"><a class="pa-pl-a" href="' + esc(ligaPl(p.x, ab)) + '"><span class="pa-rec-ico" aria-hidden="true">🗺️</span>' +
+      '<span><b>Ver en el Planisferio</b><small>' + esc(que) + (ab && p.x.ple ? ' · ' + esc(NOMBRE[ab]) : '') + '</small></span></a>' +
+      (pls.length > 1 ? '<span class="pa-pl-mas"><span class="pa-pl-t">También ahí:</span>' + pls.slice(1).map(function (o) {
+        return '<a class="pa-pl-chip" href="' + esc(ligaPl(o.x, o.ab)) + '">' + esc(o.x.pll || o.x.v) + '</a>';
+      }).join('') + '</span>' : '') + '</div>';
+  }
+  /* Una tarjeta armada a mano (las megaobras de un estado, por ejemplo) que
+     lleva a un mapa con par en el Planisferio toma ese par: se busca en el
+     catálogo por su archivo y su lente (?l=), y el estado sale de su ?e=. */
+  function lenteDe(u) { var m = /[?&]l=([A-Za-z]+)/.exec(String(u)); return m ? m[1] : ''; }
+  function conPl(o) {
+    if (!o || !o.x || o.x.pl || !o.x.ir) return o;
+    var par = null;
+    REC.forEach(function (r) { if (!par && r.pl && sinParam(r.ir) === sinParam(o.x.ir) && lenteDe(r.ir) === lenteDe(o.x.ir)) par = r; });
+    if (!par) return o;
+    var m = /[?&]e=([A-Za-z]+)/.exec(o.x.ir), ab = o.ab || (m && NOMBRE[m[1]] ? m[1] : null), x = {};
+    Object.keys(o.x).forEach(function (k) { x[k] = o.x[k]; });
+    ['pl', 'ple', 'pld', 'pll', 'plk'].forEach(function (k) { x[k] = par[k]; });
+    return { x: x, ab: ab };
+  }
   function recursosHtml(lista) {
-    return lista && lista.length ? '<div class="pa-rec"><p class="pa-mas-t">Explóralo a fondo</p><div class="pa-rec-lista">' + lista.map(function (o) {
+    lista = sinRepetirPl((lista || []).map(conPl));
+    var pls = lista.filter(function (o) { return o.x.pl; });
+    lista = lista.filter(function (o) { return !o.x.pl; });
+    var linea = lineaPl(pls);
+    return linea || lista.length ? '<div class="pa-rec"><p class="pa-mas-t">Explóralo a fondo</p>' + linea + (lista.length ? '<div class="pa-rec-lista">' + lista.map(function (o) {
       return '<a class="pa-rec-a" href="' + esc(ligaRec(o.x, o.ab)) + '"><span class="pa-rec-ico" aria-hidden="true">' + o.x.ico + '</span>' +
         '<span><b>' + esc(o.x.v) + '</b><small>' + esc(o.x.n) + (o.ab && o.x.ire ? ' · ' + esc(NOMBRE[o.ab]) : '') + '</small></span></a>';
-    }).join('') + '</div></div>' : '';
+    }).join('') + '</div>' : '') + '</div>' : '';
   }
   /* La Enciclopedia es la base de datos física del Auditor (pedido del autor,
      29-10-2026): al pie de cada respuesta van las páginas de la Enciclopedia
@@ -495,7 +548,8 @@
      modo; los datos, nunca. Una página cuyo título está completo en la
      pregunta va primero; las demás, solo si tocan el tema de cerca. */
   var MODO_ICO = { inspector: '🔍', periodista: '📰', ciudadano: '🙋', ambientalista: '🌎' };
-  function modoVivo() { var a = document.getElementById('paApp'); return a ? a.getAttribute('data-modo') : ''; }
+  var MODO_DIC = '';
+  function modoVivo() { var a = document.getElementById('paApp'); return a ? a.getAttribute('data-modo') : MODO_DIC; }
   function enciclopediaPara(q, r) {
     if (!r || r.sin || r.plat) return [];
     var ir = r.ir || (r.ficha && r.ficha.ir), base = ir ? sinParam(ir[0]) : '', pq = plano(q), modo = modoVivo();
@@ -564,6 +618,7 @@
     var nadie = [], iv = invDe(q, r);
     /* Nepotismo (pedido del autor, 29-10-2026): lo que la ley todavía no alcanza, y la regla del apellido. */
     if (base === 'herramienta-inspector-nepotismo.html') nadie.push('<li>🔦 <b>Los puntos ciegos:</b> la prohibición del nepotismo electoral se aplica a partir de las elecciones de 2030, el «yo contrato a tu sobrino y tú a mi hija» entre dependencias no es el caso del art. 63 Bis, y los datos de la familia en la declaración están en reserva. <a href="herramienta-inspector-nepotismo.html#puntos-ciegos">Ver los puntos ciegos ➔</a> Y ojo: <b>un apellido igual nunca es prueba de parentesco</b>; un vínculo entra a la plataforma solo si lo dice un documento oficial.</li>');
+    if (base === 'periodismo-en-riesgo.html') nadie.push('<li>🛡️ <b>Lo que registran Gobernación y la FEADLE:</b> 40.7 % de los probables agresores señalados ante el Mecanismo son servidores públicos (374 de 918), y de 2000 a septiembre de 2026 la FEADLE registra 110 homicidios de periodistas, 1,940 indagatorias y 53 sentencias condenatorias. <a href="periodismo-en-riesgo.html#pr-feadle">Ver cifras de la FEADLE ➔</a></li>');
     if (iv) nadie.push('<li>📖 <b>Lo investigamos a fondo:</b> <a href="' + esc(iv.x.ir) + '">' + esc(iv.x.n) + ' ➔</a>, en Auditoría en imágenes.</li>');
     exps.forEach(function (f) {
       nadie.push('<li>📂 <b>La ASF lo dejó por aclarar.</b> ' + esc(recorta(f.txt, 220)) + ' <a href="' + esc(f.ir[0]) + '">Ver el expediente ➔</a></li>');
@@ -606,22 +661,129 @@
     var n = periodista(q, r);
     return n ? n.html + (n.web ? webHtml(n.web) : '') : '';
   }
-  var TIPOS_REC = { mapa: 'mapa', mapas: 'mapa', reloj: 'reloj', relojes: 'reloj', contador: 'reloj', contadores: 'reloj', simulador: 'simulador', simuladores: 'simulador', tablero: 'tablero' };
+  /* Cada modo contesta a su manera (pedido del autor, 29-10-2026, entrega b;
+     hecha el 04-11-2026). Bajo la misma respuesta, cada modo suma su capa:
+     el Inspector, de qué está hecha y por dónde seguir; el Ciudadano, la
+     respuesta en una línea y sus palabras difíciles; el Ambientalista, los
+     proyectos con alerta ambiental del tema y quién los paga. Ninguna capa
+     agrega cifras: todo sale de la respuesta y de la base. */
+  function textoDe(h) { return String(h || '').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim(); }
+  function inspectorCapa(q, r) {
+    if (!r || r.sin || r.plat) return null;
+    var h = String(r.html || ''), cu = { oficial: 0, derivado: 0, pendiente: 0 };
+    (h.match(/est-chip est-(oficial|derivado|pendiente)/g) || []).forEach(function (m) { cu[m.split('est-').pop()]++; });
+    var f0 = r.ficha, fu = (f0 && f0.fu) || [], ab = entidadDe(q + ' ' + ((f0 && f0.tit) || ''));
+    var base = (r.ir || (f0 && f0.ir) || [''])[0].split('#')[0].split('?')[0];
+    var pends = F.filter(function (f) { return f.t === 'pendiente' && f.pend && base && (f.pend.ap || []).indexOf(base) >= 0; }).slice(0, 2);
+    var res = buscar(q), piso = res.length ? res[0].s * 0.5 : 0;
+    var exp = res.slice(0, 20).filter(function (x) { return x.f.t === 'expediente' && x.s >= piso; })[0];
+    var sigue = [];
+    if (ab) sigue.push('<li>🏢 <a href="herramienta-inspector-entes.html#ente=estatal:' + esc(ab) + '">La ficha técnica de ' + esc(NOMBRE[ab]) + ' en el Auditor de entes ➔</a></li>');
+    if (exp) sigue.push('<li>📂 <a href="' + esc(exp.f.ir[0]) + '">Su expediente de la ASF: ' + esc(recorta(exp.f.tit, 90)) + ' ➔</a></li>');
+    if (ab) sigue.push('<li>🗺️ <a href="planisferio.html?e=' + esc(ab) + '">' + esc(NOMBRE[ab]) + ' en el Planisferio, dimensión por dimensión ➔</a></li>');
+    sigue.push('<li>🧾 <a href="contratos-publicos.html">Sus contratos en ComprasMX</a> y la <a href="herramienta-inspector-pregunta.html?q=' + encodeURIComponent('lista negra del SAT') + '">lista negra del SAT</a>, si hay una empresa de por medio.</li>');
+    var tot = cu.oficial + cu.derivado + cu.pendiente;
+    var hh = '<div class="pa-capa pa-capa-inspector"><p class="pa-capa-t">🔍 La revisión del Inspector</p>' +
+      (tot ? '<p class="pa-rep-s">De qué está hecha esta respuesta</p><p>' +
+        [['oficial', 'tomados de su documento'], ['derivado', 'calculados por nosotros, con su operación dicha'], ['pendiente', 'que nadie ha publicado todavía']]
+          .filter(function (k) { return cu[k[0]]; }).map(function (k) { return '<b>' + cu[k[0]] + '</b> ' + chip({ e: k[0] }) + ' ' + k[1]; }).join(' · ') + '.</p>' : '') +
+      (fu.length ? '<p class="pa-rep-s">Sus documentos</p><ul class="pa-lista">' + fu.slice(0, 4).map(function (d) {
+        return '<li>📄 ' + (d.url ? '<a href="' + esc(d.url) + '" target="_blank" rel="noopener">' + esc(recorta(d.tx, 140)) + ' ↗</a>' : esc(recorta(d.tx, 160))) + '</li>';
+      }).join('') + '</ul>' : '') +
+      (pends.length ? '<p class="pa-rep-s">Lo que falta</p><ul class="pa-lista">' + pends.map(function (f) {
+        return '<li>' + chip({ e: 'pendiente', p: f.pend.id }) + ' ' + esc(recorta(f.tit, 140)) + (f.pend.quien ? '. Le toca a <b>' + esc(f.pend.quien) + '</b>' : '') + '.</li>';
+      }).join('') + '</ul>' : '') +
+      '<p class="pa-rep-s">Para seguir investigando</p><ul class="pa-lista">' + sigue.join('') + '</ul>' +
+      '<p class="pa-chico">El respaldo completo, con folio y huella, está en «Generar dictamen». Tener contratos o un expediente abierto no es una irregularidad: es por dónde se revisa.</p></div>';
+    return { html: hh };
+  }
+  function ciudadanoCapa(q, r) {
+    if (!r || r.sin || r.plat) return null;
+    /* La primera oración del primer párrafo: lo demás ya está arriba. */
+    var p1 = (String(r.html || '').match(/<p[^>]*>([\s\S]*?)<\/p>/) || [0, r.html])[1];
+    var t = textoDe(r.html).replace(/📎.*$/, '').trim(), t1 = textoDe(p1).replace(/📎.*$/, '').trim();
+    var corto = (t1.match(/^.*?[.!?](\s|$)/) || [t1])[0].trim().replace(/\s+([.,;:])/g, '$1');
+    if ((r.ficha && r.ficha.t === 'glosario') || /:$/.test(corto)) corto = '';
+    if (corto.length > 260) corto = recorta(corto, 240);
+    var pt = ' ' + plano(t) + ' ', vistos = {}, pals = [];
+    F.forEach(function (f) {
+      if (pals.length >= 3 || f.t !== 'glosario') return;
+      var n = plano(f.tit.split(' (')[0]).trim();
+      if (n.length < 4 || vistos[n] || f === r.ficha || (' ' + plano(q) + ' ').indexOf(' ' + n + ' ') >= 0) return;
+      if (pt.indexOf(' ' + n + ' ') >= 0) { vistos[n] = 1; pals.push(f); }
+    });
+    var hh = '<div class="pa-capa pa-capa-ciudadano"><p class="pa-capa-t">🙋 En corto</p>' +
+      (corto ? '<p class="pa-capa-corto">' + esc(corto) + '</p>' : '') +
+      (pals.length ? '<p class="pa-rep-s">Palabras que quizá no conoces</p><ul class="pa-lista">' + pals.map(function (f) {
+        return '<li><b>' + esc(f.tit) + ':</b> ' + esc(recorta(f.txt, 150)) + ' <a href="' + esc(f.ir[0]) + '">Glosario ➔</a></li>';
+      }).join('') + '</ul>' : '') +
+      '<p class="pa-rep-s">¿Y a ti en qué te toca?</p><p>Con tu sueldo, tu <a href="herramienta-calculadora-ticket.html">estado de cuenta cívico</a> te dice cuánto pagas de impuestos y a dónde va cada peso. ' +
+      'Si quieres ir a fondo, toca «Saber más» o cámbiame al modo Inspector.</p></div>';
+    return { html: hh };
+  }
+  function ambientalistaCapa(q, r) {
+    if (!r || r.sin || r.plat) return null;
+    var casos = MO.casosAmb || [], ab = entidadDe(q + ' ' + ((r.ficha && r.ficha.tit) || '')), pt = ' ' + plano(q + ' ' + textoDe(r.html)) + ' ';
+    var os = casos.filter(function (c) {
+      if (ab && (c.edos || []).indexOf(ab) >= 0) return true;
+      var w = plano(c.nombre).trim().split(' ').filter(function (x) { return x.length > 3; });
+      return w.length && w.every(function (x) { return pt.indexOf(' ' + x + ' ') >= 0; });
+    }).slice(0, 3);
+    var hh = '<div class="pa-capa pa-capa-ambientalista"><p class="pa-capa-t">🌎 La mirada ambiental</p>' +
+      (os.length ? '<p class="pa-rep-s">Proyectos con alerta ambiental' + (ab ? ' en ' + esc(NOMBRE[ab]) : '') + ', y quién los paga</p><ul class="pa-lista">' + os.map(function (c) {
+        return '<li>' + esc(c.ico) + ' <b>' + esc(c.nombre) + '</b>: ' + (c.paga === 'privado' ? '🏢 inversión privada, no es gasto público' : '🏛️ gasto público') +
+          '. 🌱 ' + esc(recorta(c.alerta, 150)) + ' <a href="' + esc(c.aud) + '">Ver la investigación ➔</a></li>';
+      }).join('') + '</ul>' :
+        '<p>Sobre esto no hay un proyecto con alerta ambiental en el mapa de megaobras' + (ab ? ' que toque ' + esc(NOMBRE[ab]) : '') + '. Eso no quiere decir que no haya daño: quiere decir que no lo tenemos documentado.</p>') +
+      '<p class="pa-rep-s">Para mirarlo con ojos de ambiente</p><ul class="pa-lista">' +
+      '<li>🗺️ <a href="planisferio.html?d=ambiental' + (ab ? '&amp;e=' + esc(ab) : '') + '">' + (ab ? esc(NOMBRE[ab]) + ' en' : 'Los 32 estados en') + ' la dimensión ambiental del Planisferio ➔</a></li>' +
+      '<li>⏱️ <a href="herramienta-ambiente-reloj.html">El reloj del daño ambiental</a> y <a href="datos-justicia-ambiental-denuncias.html">lo que resuelve la PROFEPA</a></li></ul>' +
+      '<p class="pa-chico">El deterioro del ambiente también es gasto público. Solo se suma lo que paga el gobierno; la inversión privada se dice con su nombre.</p></div>';
+    return { html: hh };
+  }
+  /* Cada modo ofrece pasarse al que le toca cuando la pregunta es de otro tema. */
+  var MODO_PAL = [
+    ['periodista', /\b(es cierto|dicen que|circula|rumor\w*)\b/],
+    ['ambientalista', /\b(ambient\w*|contamina\w*|basura|profepa|ecolog\w*|deforest\w*|selva|manglar\w*|acuifer\w*|incendios? forestal\w*|emisiones)\b/],
+    ['periodista', /\b(noticias?|nota de|que paso con|periodistas?)\b/],
+    ['inspector', /\b(rfc|folio|expedientes?|diagnostico|contratos?|proveedor\w*|lista negra|69 b|nepotismo|fraccionamiento)\b/],
+    ['ciudadano', /\b(me retienen|mi sueldo|gano|mi aguinaldo|mi estado de cuenta|cuanto pago)\b/]
+  ];
+  var MODO_NOM = { inspector: 'Inspector', periodista: 'Periodista', ciudadano: 'Ciudadano', ambientalista: 'Ambientalista' };
+  function modoSugerido(q) {
+    var p = ' ' + plano(q) + ' ', m = modoVivo(), s = null;
+    MODO_PAL.forEach(function (x) { if (!s && x[1].test(p)) s = x[0]; });
+    return s && s !== m ? s : null;
+  }
+  function capaModoHtml(q, r) {
+    var m = modoVivo(), c = m === 'inspector' ? inspectorCapa(q, r) : m === 'ciudadano' ? ciudadanoCapa(q, r) : m === 'ambientalista' ? ambientalistaCapa(q, r) : null;
+    var s = r && !r.sin ? modoSugerido(q) : null;
+    return (c ? c.html : '') + (s ? '<p class="pa-modo-sug-p"><button type="button" class="pa-boton pa-modo-sug" data-pa-modo-sug="' + s + '" data-pa-q="' + esc(q) + '">' +
+      MODO_ICO[s] + ' Esto luce más en el modo ' + MODO_NOM[s] + ': cámbiame y te lo cuento así ➔</button></p>' : '');
+  }
+  /* Para el banco de pruebas: la capa del modo pedido, en texto. */
+  function capaModo(q, r, m) {
+    var f = { inspector: inspectorCapa, ciudadano: ciudadanoCapa, ambientalista: ambientalistaCapa, periodista: periodista }[m];
+    return f ? f(q, r) : null;
+  }
+  var TIPOS_REC = { planisferio: 'mapa', mapa: 'mapa', mapas: 'mapa', reloj: 'reloj', relojes: 'reloj', contador: 'reloj', contadores: 'reloj', simulador: 'simulador', simuladores: 'simulador', tablero: 'tablero' };
   function pideRecurso(q) {
     var p = plano(q), tipo = null;
     Object.keys(TIPOS_REC).forEach(function (w) { if (p.indexOf(' ' + w + ' ') >= 0) tipo = TIPOS_REC[w]; });
     if (!tipo || / estados? de cuenta /.test(p)) return null;
     var ws = conSinon(q), ab = entidadDe(q), mejor = null, ms = 0, delTipo = REC.filter(function (x) { return x.tipo === tipo; });
-    var tema = ws.filter(function (w) { return !TIPOS_REC[w] && !(ab && plano(NOMBRE[ab]).indexOf(' ' + w + ' ') >= 0); });
+    var tema = ws.filter(function (w) { return (!TIPOS_REC[w] || w === 'planisferio') && !(ab && plano(NOMBRE[ab]).indexOf(' ' + w + ' ') >= 0); });
     delTipo.forEach(function (x) { var s = comunes(x._k, tema); if (s > ms) { ms = s; mejor = x; } });
     if (!mejor && tema.length > 1) return null;
-    var lista = function (xs) { return '<ul class="pa-lista">' + xs.map(function (x) { return '<li><a href="' + esc(ligaRec(x, ab)) + '">' + x.ico + ' <b>' + esc(x.n) + '</b></a></li>'; }).join('') + '</ul>'; };
+    var lista = function (xs) { return '<ul class="pa-lista">' + sinRepetirPl(xs).map(function (x) { return '<li><a href="' + esc(destinoRec(x, ab)) + '">' + x.ico + ' <b>' + esc(x.n) + '</b>' + (x.pl && x.pld ? ' · en el Planisferio' : '') + '</a></li>'; }).join('') + '</ul>'; };
     if (!mejor) return { html: '<p>Estos son los que tengo:</p>' + lista(delTipo) + '<p>Cada uno se abre en su página. Dime el tema y te llevo al que es.</p>', ir: [delTipo[0].ir, delTipo[0].n], sug: [], rec: [] };
-    var otros = delTipo.filter(function (x) { return x !== mejor; });
+    /* Un mapa que vive en el Planisferio se abre ahí, la matriz de los mapas (04-11-2026). */
+    var k = function (x) { return x.pl ? (x.plk || x.pl) : x.ir; };
+    var otros = delTipo.filter(function (x) { return x !== mejor && k(x) !== k(mejor); });
     return {
-      html: '<p>' + mejor.ico + ' Aquí está: <b>' + esc(mejor.n) + '</b>' + (ab && mejor.ire ? ', ya con ' + esc(NOMBRE[ab]) + ' elegido' : '') + '. Toca <b>«Saber más»</b> y se abre en su página.</p>' +
+      html: '<p>' + mejor.ico + ' Aquí está: <b>' + esc(mejor.n) + '</b>' + (mejor.pl && mejor.pld ? ', en el Planisferio' : '') + (ab && (mejor.ple || mejor.ire) ? ', ya con ' + esc(NOMBRE[ab]) + ' elegido' : '') + '. Toca <b>«Saber más»</b> y se abre en su página.</p>' +
         (otros.length ? '<p class="pa-chico">También tengo:</p>' + lista(otros) : ''),
-      ir: [ligaRec(mejor, ab), mejor.n], sug: [], rec: []
+      ir: [destinoRec(mejor, ab), mejor.pl && mejor.pll ? 'el Planisferio · dimensión ' + mejor.pll.charAt(0).toLowerCase() + mejor.pll.slice(1) : mejor.n], sug: [], rec: []
     };
   }
   function estadoDeCuenta(q, r) {
@@ -895,6 +1057,8 @@
     var p = plano(q);
     if (!CMX_RE.test(p) || SAT_PAL.test(p) || /^ (que|q) (es|son|significa)\b/.test(p)) return null;
     var rfcs = (q.match(RFC_RE) || []).map(function (x) { return x.toUpperCase(); });
+    /* «¿Cómo reviso a un proveedor antes de contratarlo?» pide el método, no a una empresa: lo contesta map/serv_diligencia (D.san). */
+    if (!rfcs.length && /\b(antes de contratar\w*|debida diligencia)\b/.test(p)) return null;
     /* «¿Qué pasa si no le cobran la pena al contratista?» no busca a una empresa: lo contesta «Documentar para sancionar». */
     if (!rfcs.length && /\b(penas?|multas?|sancion\w*|incumpl\w*|no cumplio|clausulas?|pruebo|que documentos)\b/.test(p)) return null;
     var nombre = p.trim().split(' ').filter(function (w) { return w.length > 1 && CMX_FUERA.indexOf(w) < 0; }).join(' ');
@@ -1009,6 +1173,71 @@
     }, function () { return { html: '<p>No pude descargar ahora el catálogo de contratos.</p>', ir: [CMX_PAG, 'Contratos públicos'], sug: [], rec: [] }; }), tit: 'Contratistas en la lista 69-B' };
   }
 
+  /* Señales de fraccionamiento (03-11-2026): adjudicaciones directas por monto
+     de la misma unidad, empresa y partida que en 90 días rebasan el tope del
+     Anexo 9 del PEF. Lo escribe herramientas/fraccionamiento.py. Es una señal
+     para revisar, nunca una irregularidad, y no nombra a las empresas. */
+  var FRACC_PAG = CMX_PAG + '#fraccionamiento';
+  function fraccDatos() { return cargaJs('assets/auditor/data/fraccionamiento.js', function () { return window.CMX_FRACC; }); }
+  function fraccPide(p) {
+    if (/\bcontratos? partidos?\b/.test(p) || /\b(partir|partieron|parten|dividir|dividieron|dividen)\b.*\b(compras?|contratos?)\b/.test(p)) return true;
+    return /\bfraccion(amiento|amientos|ar|ada|adas|ado|ados|an|aron)\b/.test(p) && /\b(contrat\w*|compras?|adjudica\w*|senal\w*|señal\w*|topes?|comprasmx)\b/.test(p);
+  }
+  function fraccCaveat() {
+    return '<p class="pa-chico">⚖️ Es una <b>señal para revisar, no una irregularidad</b>: la partida junta bienes parecidos, no «exactamente los mismos»; el archivo no trae el área que los pidió, y si se pudieron prever juntos no se ve en los datos. No nombramos a las empresas: cada contrato lleva su liga a ComprasMX.</p>';
+  }
+  function fraccCmx(q) {
+    var p = plano(q);
+    if (!fraccPide(p)) return null;
+    return { espera: fraccDatos().then(function (D) {
+      var M = D.meta, T = D.tot, A = Object.keys(T).sort(), fu = cmxFuente(M), ci = [];
+      var fuentes = [fu].concat(A.map(function (a) { return { tx: M.anexo9[a].doc, url: M.anexo9[a].url }; })).concat([{ tx: M.reglamento.texto, url: M.reglamento.url }]);
+      var f = null;
+      D.i.forEach(function (x) {
+        if (f) return;
+        var s = plano(x.s).trim();
+        if (s.length > 2 && p.indexOf(' ' + s + ' ') >= 0) f = x;
+      });
+      if (!f) D.i.forEach(function (x) {
+        if (f) return;
+        var ws = plano(x.n).trim().split(' ').filter(function (w) { return w.length > 3; });
+        if (ws.length > 1 && ws.every(function (w) { return p.indexOf(' ' + w + ' ') >= 0; })) f = x;
+      });
+      var topes = A.map(function (a) { return a + ': de ' + pesosCmx(M.anexo9[a].min) + ' a ' + pesosCmx(M.anexo9[a].max); }).join('; ');
+      var h;
+      if (f) {
+        var nA = A.reduce(function (s, a) { return s + f[a].A[0]; }, 0);
+        h = '<p>🧩 <b>' + esc(f.n) + '</b> (' + esc(f.s) + ') tiene <b>' + nA + ' grupo' + (nA === 1 ? '' : 's') + '</b> de adjudicaciones directas por monto que, con la misma unidad compradora, la misma empresa y la misma partida, suman en ' + M.ventana + ' días más que el tope más alto del Anexo 9 ' + chip({ e: 'derivado' }) + '.</p><ul class="pa-lista">' +
+          A.map(function (a) { var x = f[a]; return '<li><b>' + a + '</b>: ' + x.A[0] + ' grupos, ' + x.A[1] + ' contratos, ' + pesosCmx(x.A[2]) + '. Otros ' + x.B[0] + ' grupos rebasan el tope más bajo; si son señal depende del escalón de la dependencia ' + chip({ e: 'pendiente', p: 'fracc-escalon' }) + '.' + (x.solos ? ' Además, ' + x.solos + ' contrato' + (x.solos === 1 ? '' : 's') + ' «por monto» que por sí solo' + (x.solos === 1 ? '' : 's') + ' rebasa' + (x.solos === 1 ? '' : 'n') + ' el tope más alto.' : '') + '</li>'; }).join('') + '</ul>';
+        var gs = [];
+        A.forEach(function (a) { f[a].g.forEach(function (g) { gs.push([a].concat(g)); }); });
+        gs.sort(function (x, y) { return y[3] - x[3]; });
+        if (gs.length) h += '<p>Los grupos mayores ' + chip({ e: 'oficial' }) + ' (cada contrato, con su liga):</p><ul class="pa-lista">' + gs.slice(0, 5).map(function (g) {
+          return '<li><b>' + pesosCmx(g[3]) + '</b> en ' + g[6].length + ' contratos, del ' + esc(g[4]) + ' al ' + esc(g[5]) + ' · partida ' + esc(g[2]) + '<br><span class="pa-chico">' + esc(g[1]) + '</span><br>' +
+            g[6].map(function (c) { return (c[3] ? '<a href="' + esc(M.detalle.replace('%s', c[3])) + '" target="_blank" rel="noopener">' + esc(c[0]) + ' ↗</a>' : esc(c[0])) + ' ' + pesosCmx(c[1]); }).join(' · ') + '</li>';
+        }).join('') + '</ul>' + (gs.length > 5 ? '<p class="pa-chico">Te muestro 5 de ' + gs.length + '.</p>' : '');
+        ci.push({ v: nA + ' grupos', etq: f.n + ' · señales de fraccionamiento, ' + A.join(' y '), e: 'derivado' });
+        gs.slice(0, 5).forEach(function (g) { ci.push({ v: pesosCmx(g[3]), etq: g[0] + ' · ' + g[1] + ' · ' + g[6].map(function (c) { return c[0]; }).join(', '), e: 'derivado' }); });
+      } else {
+        h = '<p>🧩 La ley prohíbe partir una compra en varias adjudicaciones directas para no pasar del tope (LAASSP, art. 55; su Reglamento, art. 111, dice cuándo hay fraccionamiento). Revisé en ComprasMX las adjudicaciones directas por monto a empresas, con la misma unidad compradora, la misma empresa y la misma partida, en ventanas de ' + M.ventana + ' días:</p><ul class="pa-lista">' +
+          A.map(function (a) { var t = T[a]; return '<li><b>' + a + '</b>: <b>' + t.A[0].toLocaleString('es-MX') + ' grupos</b> (' + t.A[1].toLocaleString('es-MX') + ' contratos, ' + pesosCmx(t.A[2]) + ') rebasan el tope más alto ' + chip({ e: 'derivado' }) + '; otros ' + t.B[0].toLocaleString('es-MX') + ' rebasan el más bajo y dependen del escalón de cada dependencia ' + chip({ e: 'pendiente', p: 'fracc-escalon' }) + '.</li>'; }).join('') + '</ul>' +
+          '<p>Los topes por operación, sin IVA, según el tamaño de la dependencia (Anexo 9 del PEF) ' + chip({ e: 'oficial' }) + ': ' + topes + '.</p>' +
+          '<p>Donde hay más señales:</p><ol class="pa-lista">' + D.i.slice(0, 5).map(function (x) {
+            var n = A.reduce(function (s, a) { return s + x[a].A[0]; }, 0), m = A.reduce(function (s, a) { return s + x[a].A[2]; }, 0);
+            return '<li><button type="button" class="pa-ej" data-pa-pregunta="' + esc('Señales de fraccionamiento de ' + x.s) + '">' + esc(x.n) + '</button> ' + n + ' grupos, ' + pesosCmx(m) + '</li>';
+          }).join('') + '</ol>';
+        A.forEach(function (a) { ci.push({ v: T[a].A[0].toLocaleString('es-MX') + ' grupos', etq: a + ' · rebasan el tope más alto del Anexo 9 en ' + M.ventana + ' días (' + pesosCmx(T[a].A[2]) + ')', e: 'derivado' }); });
+        A.forEach(function (a) { ci.push({ v: pesosCmx(M.anexo9[a].max), etq: a + ' · tope más alto de adjudicación directa, Anexo 9 del PEF', e: 'oficial' }); });
+      }
+      h += fraccCaveat();
+      h += charla && charla.deDonde ? charla.deDonde([{ que: 'Datos relevantes de los contratos de ComprasMX', e: 'oficial', fu: fu }, { que: 'Topes del Anexo 9 del PEF', e: 'oficial', fu: fuentes[1] }]) : '';
+      var tit = f ? 'Señales de fraccionamiento: ' + f.n : 'Señales de fraccionamiento en ComprasMX';
+      return { html: h, ir: [FRACC_PAG, 'Contratos públicos'], rec: [],
+        ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: fuentes, ir: [FRACC_PAG, 'Contratos públicos'] },
+        sug: f ? ['¿A quién le compra ' + f.s + '?', 'Señales de fraccionamiento en ComprasMX'] : ['Señales de fraccionamiento del IMSS', '¿A quién le compra el IMSS?'] };
+    }, function () { return { html: '<p>No pude descargar ahora las señales de fraccionamiento. Revisa tu conexión y vuelve a preguntarme.</p>', ir: [FRACC_PAG, 'Contratos públicos'], sug: [], rec: [] }; }),
+      tit: 'Señales de fraccionamiento' };
+  }
   /* --- Las demás: qué pide el lector y con qué la abrimos. --- */
   var FOLIO_RE = /\bAV-[A-Z0-9]{2,8}-[0-9A-F]{6,}\b|\b[0-9A-F]{64}\b/i, DICT_RE = /\b(DP|NT)-\d{8}-[0-9A-F]{8}\b/i;
   function enteFederal(t) {
@@ -1559,6 +1788,9 @@
     var pideMapa = /\b(mapa|estados|entidades|donde estan|en que estados)\b/.test(p);
     if (!ab && !((pideAmb && (pideObra || pideMapa)) || (pideMapa && pideObra))) return null;
     if (ab && !pideObra && !(pideAmb && pideMapa)) return null;
+    // La inversión de un gobierno estatal (su obra directa o lo que pasa a sus
+    // organismos) la contesta la charla con el INEGI, no el mapa ambiental.
+    if (ab && !pideAmb && /invers|invierte|invirti|obra publica|organismos? de (obra|infraestructura)/.test(p)) return null;
 
     var fmtMdp = function (v) { return '$' + Number(v || 0).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp'; };
     if (ab) {
@@ -1953,7 +2185,7 @@
     if (/ dictamen(es)? (civico|independiente|sellado)| (generar|genero|saco|hago|pido|sirve) (un |el )?dictamen|^ (que es )?(el |un )?dictamen $/.test(p))
       return {
         html: '<p>🧾 El <b>Dictamen cívico independiente</b> respalda una respuesta mía: trae las cifras, de qué documento sale cada una, su estado (oficial, derivado o pendiente), un folio y una huella digital para comprobar que nadie lo alteró.</p>' +
-          '<p>Para sacarlo, hazme una pregunta y, en la respuesta, toca <b>«🧾 Generar dictamen»</b>: se abre en otra pestaña, listo para imprimir o compartir. El enlace solo lleva tu pregunta y la página la vuelve a contestar con la misma base, así que nadie puede fabricar uno con cifras ajenas.</p>' +
+          '<p>Para sacarlo, hazme una pregunta y, en la respuesta, toca <b>«🧾 Generar dictamen»</b>: se abre en otra pestaña, listo para imprimir o compartir. El enlace solo lleva tu pregunta y el modo en que la hiciste, y la página la vuelve a contestar con la misma base, así que nadie puede fabricar uno con cifras ajenas. Sale con la forma de tu modo (la revisión del Inspector, la nota del Periodista, la versión en corto del Ciudadano o la mirada ambiental), que no cambia los datos ni la huella.</p>' +
           '<p class="pa-chico">No es un documento oficial ni un peritaje con validez ante una autoridad.</p>',
         ir: ['herramienta-inspector-dictamen.html', 'Dictamen cívico independiente'], rec: [], sug: ['¿Cuánto debe Jalisco?', 'Verifica un estado de cuenta']
       };
@@ -2061,13 +2293,13 @@
       var rt = charla.contesta(q);
       if (rt && rt.ir && rt.ir[0] === 'datos-salud-sistema.html#sal-transicion') { rt.sug = ['¿Es cierto que con el Seguro Popular se atendieron más de 51 millones?', '¿Cuánta gente se quedó sin acceso a servicios de salud?']; return rt; }
     }
-    /* La deuda de Pemex no la tiene la plataforma: se dice, con su pendiente,
-       en vez de contestar con su presupuesto (27-10-2026). */
+    /* Saldo de la deuda financiera de Pemex: boletines nacionales 86 (30-10-2026, 3T 2026)
+       y 69 (31-07-2026, 2T 2026), más el costo financiero en el PEF 2026. */
     if (/ pemex /.test(p) && (/ (debe|adeuda|deuda|endeudamiento|pasivos?) /.test(p)) && !/ (intereses|costo financiero|paga) /.test(p))
       return {
-        html: '<p>⚪ <b>Cuánto debe Pemex, todavía no lo tengo con documento</b> ' + chip({ e: 'pendiente', p: 'pemex-deuda' }) + '. Pemex publica su deuda en sus reportes trimestrales; la plataforma aún no la coteja ni la integra, así que no te doy una cifra.</p>' +
-          '<p>Lo que sí tengo: lo que Pemex paga de intereses en 2026. Pregúntame «¿cuánto paga Pemex de intereses?».</p>',
-        ir: ['pendientes.html#pemex-deuda', 'Registro de pendientes'], rec: [], sug: ['¿Cuánto paga Pemex de intereses?', 'Diagnóstico de Pemex'], anota: 1
+        html: '<p><b>Al cierre del tercer trimestre de 2026 (30 de septiembre de 2026), el saldo de la deuda financiera de Pemex fue de 77.6 mil millones de dólares</b> ' + chip({ e: 'oficial' }) + ' (<a href="https://www.pemex.com/saladeprensa/boletines_nacionales/Paginas/2026_86_nacional.aspx" target="_blank" rel="noopener">Pemex, Boletín nacional 86, 30 de octubre de 2026 ↗</a>).</p>' +
+          '<p>Al cierre del segundo trimestre (30 de junio de 2026) se ubicaba en <b>77.5 mil millones de dólares</b>, una disminución de <b>9.1 %</b> respecto al cierre de 2025 ' + chip({ e: 'oficial' }) + ' (<a href="https://www.pemex.com/saladeprensa/boletines_nacionales/Paginas/2026_69_nacional.aspx" target="_blank" rel="noopener">Pemex, Boletín nacional 69, 31 de julio de 2026 ↗</a>). Además, en el Presupuesto de Egresos 2026 Pemex tiene aprobados <b>$190,838.8 millones de pesos</b> para su costo financiero (intereses y comisiones).</p>',
+        ir: ['noticias-auditavision.html#col-pemex-3t-2026-perdida-neta', 'Pemex en el 3T 2026'], rec: [], sug: ['¿Cuánto paga Pemex de intereses?', 'Pemex en el 3T 2026: lo que dice la nota y lo que falta del reporte', 'Diagnóstico de Pemex'], anota: 1
       };
     return null;
   }
@@ -2094,6 +2326,21 @@
     return f && charla ? charla.deFicha(f) : null;
   }
 
+  var LEY_NIVEL = /\bley(es)? (de|del|federal|general)\b|\bperiodico oficial\b|\bgaceta oficial\b|\bboletin oficial\b/;
+  function leyNivel(q) {
+    var p = plano(q);
+    if (!charla || !LEY_NIVEL.test(p)) return null;
+    var Ls = B.fichas.filter(function (f) { return f.ir && /^marco-legal-tres-niveles\.html/.test(f.ir[0]); });
+    var pre = 'Las leyes del dinero de ';
+    var st = Ls.filter(function (f) { return f.tit.indexOf(pre) === 0 && p.indexOf(plano(f.tit.slice(pre.length))) >= 0; })
+      .sort(function (a, b) { return b.tit.length - a.tit.length; })[0];
+    if (st) return charla.deFicha(st);
+    var fed = Ls.filter(function (f) {
+      var m = /\(([^)]+)\)$/.exec(f.tit);
+      return m && (p.indexOf(plano(f.tit.slice(0, m.index))) >= 0 || p.indexOf(plano(m[1])) >= 0);
+    })[0];
+    return fed ? charla.deFicha(fed) : null;
+  }
   function respuesta(q, previas) {
     /* Una liga que ya está en la hemeroteca abre su cotejo antes que cualquier palabra de su dirección
        («pemex-perdidas-…-deuda» se iba al pendiente de la deuda de Pemex, 01-11-2026). */
@@ -2102,6 +2349,16 @@
     /* La memoria de promesas (01-11-2026): «¿qué pasó con lo que prometieron…?» antes que la nota o la obra del mismo tema. */
     var pm = charla && charla.promesa && charla.promesa(q);
     if (pm) return pm;
+    /* Las leyes del dinero en los tres niveles (03-11-2026): «ley de ingresos de Jalisco» pide sus leyes, no su estado de cuenta. */
+    var ln = leyNivel(q);
+    if (ln) return ln;
+    var mp = charla && charla.mapa && charla.mapa(q);
+    if (mp) return mp;
+    /* El IMSS y el ISSSTE de un estado (03-11-2026): «¿qué estado tiene menos camas del IMSS?» no es la columna del IMSS. */
+    var sae = charla && charla.saludEstado && charla.saludEstado(q);
+    if (sae) return sae;
+    var sso = charla && charla.social && charla.social(q); if (sso) return sso;
+    var sap = charla && charla.administracion && charla.administracion(q); if (sap) return sap;
     var tc = tituloColumna(q);
     if (tc) return tc;
     var tm = temaColumna(q);
@@ -2118,7 +2375,7 @@
     if (sa) return sa;
     var vc = PIDE_COTEJO.test(plano(q)) && verificado(q);
     if (vc) return vc;
-    var cx = cruceSat(q) || contratosCmx(q);
+    var cx = fraccCmx(q) || cruceSat(q) || contratosCmx(q);
     if (cx) return cx;
     var pe = personaje(q);
     if (pe) return pe;
@@ -2202,7 +2459,7 @@
       }
       if (r.anota && !ya) anota(q, 'sin');
       li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r, previas) +
-        periodistaHtml(q, r) +
+        periodistaHtml(q, r) + capaModoHtml(q, r) +
         appDe(r) +
         (r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r)))) +
         enciclopediaHtml(enciclopediaPara(q, r)) +
@@ -2237,6 +2494,8 @@
     var ps = new URLSearchParams(location.search), q = (ps.get('q') || '').trim().slice(0, 600);
     var antes = ps.getAll('c').map(function (x) { return x.trim().slice(0, 600); }).filter(Boolean).slice(-4);
     var doc = document.getElementById('dicDoc'), chat = 'herramienta-inspector-pregunta.html';
+    var pm = ps.get('modo') === 'reportero' ? 'periodista' : ps.get('modo');
+    if (MODO_ICO[pm]) MODO_DIC = pm;
     if (!q) {
       doc.innerHTML = '<p>El dictamen respalda una respuesta del Auditor. <a href="' + chat + '">Hazle una pregunta</a> y, en su respuesta, toca <b>«🧾 Generar dictamen»</b>.</p>';
       return;
@@ -2270,7 +2529,7 @@
     }
   }
   if (dic) {
-    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista };
+    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo };
     armaDictamen();
     return;
   }
@@ -2296,6 +2555,8 @@
       if (mm && mm._mide) mm._mide();
       return;
     }
+    var ms = ev.target.closest ? ev.target.closest('[data-pa-modo-sug]') : null;
+    if (ms) { poneModo(ms.getAttribute('data-pa-modo-sug'), false); responde(ms.getAttribute('data-pa-q')); return; }
     var ia = ev.target.closest ? ev.target.closest('[data-pa-ia]') : null;
     if (ia) { if (!ia.disabled) pideIa(ia); return; }
     var wb = ev.target.closest ? ev.target.closest('[data-pa-web]') : null;
@@ -2522,7 +2783,7 @@
   })();
 
   /* Para revisar cómo puntúa una pregunta desde la consola. */
-  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista };
+  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo };
   pintaLista();
   if (canal) document.getElementById('paSinRespNota').innerHTML = 'La lista se guarda solo en tu navegador y no se envía sola: con «Enviarlas a Auditavisión» nos la haces llegar tú.';
   var ps = new URLSearchParams(location.search), pre = ps.get('q'), lista = ps.get('p');

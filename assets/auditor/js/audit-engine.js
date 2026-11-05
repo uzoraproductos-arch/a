@@ -157,6 +157,7 @@
   // Semáforo del Sistema de Alertas (LDF, arts. 43 a 46)
   const SEMAFORO_MAPA = [['Verde', '#1e824c', 'sostenible'], ['Amarillo', '#e67e22', 'en observación'],
     ['Rojo', '#d4382c', 'elevado']];
+  const SIN_SEMAFORO = '#8a8f98';
 
   function escalaMapa(metricKey) {
     return ESCALAS_MAPA[metricKey] || ESCALAS_MAPA.monto;
@@ -164,8 +165,9 @@
 
   function getMetricColor(st, metricKey) {
     if (metricKey === 'deuda') {
+      // Sin semáforo (Tlaxcala: no tiene deuda inscrita, LDF art. 43) va en gris, no en verde.
       const s = SEMAFORO_MAPA.find(x => x[0] === st.semaforoDeuda);
-      return s ? s[1] : SEMAFORO_MAPA[0][1];
+      return s ? s[1] : SIN_SEMAFORO;
     }
     const L = LENTES[metricKey] || LENTES.gasto;
     const val = L.campo(st), E = escalaMapa(metricKey);
@@ -188,7 +190,9 @@
     if (metric === 'deuda') {
       clases = SEMAFORO_MAPA.map(([nom, color, nivel]) => ({
         color, txt: nom + ' · endeudamiento ' + nivel,
-        n: estados.filter(st => (st.semaforoDeuda || 'Verde') === nom).length }));
+        n: estados.filter(st => st.semaforoDeuda === nom).length }));
+      const sinSem = estados.filter(st => !st.semaforoDeuda).length;
+      if (sinSem) clases.push({ color: SIN_SEMAFORO, txt: 'No se mide · sin deuda inscrita', n: sinSem });
     } else {
       const E = escalaMapa(metric);
       const f = v => E.unidad === 'pct' ? v + ' %' : E.unidad === 'pesos' ? '$' + formatNumber(v) : '$' + formatNumber(v) + ' mdp';
@@ -321,7 +325,7 @@
             
             let valLabel = '';
             if (state.currentMetric === 'deuda') {
-              valLabel = st.semaforoDeuda;
+              valLabel = st.semaforoDeuda || 'No se mide';
             } else if (state.currentMetric === 'asf') {
               valLabel = '$' + Math.round(st.asfMontoObservado) + 'm';
             } else if (state.currentMetric === 'pc') {
@@ -381,7 +385,7 @@
       </div>
       <div style="display:flex; justify-content:space-between; font-size:12px; margin:3px 0;">
         <span style="color:var(--text-secondary);">Semáforo Deuda:</span>
-        <strong style="font-family:var(--font-mono); color:${st.semaforoDeuda === 'Verde' ? 'var(--emerald-bright)' : 'var(--amber)'};">${st.semaforoDeuda}</strong>
+        <strong style="font-family:var(--font-mono); color:${st.semaforoDeuda === 'Verde' ? 'var(--emerald-bright)' : st.semaforoDeuda ? 'var(--amber)' : 'var(--text-dim)'};">${st.semaforoDeuda || 'No se mide'}</strong>
       </div>
       <div style="font-size:10px; color:var(--text-dim); margin-top:8px; text-align:center; border-top:1px solid rgba(255,255,255,0.05); padding-top:4px;">
         Haz clic para abrir el expediente municipal completo ↗
@@ -421,7 +425,7 @@
     if (metricKey === 'ramo33') return formatMoneyMdp(st.ramo33);
     if (metricKey === 'pc') return '$' + formatNumber(st.pc) + ' / hab';
     if (metricKey === 'asf') return '$' + formatNumber(st.asfMontoObservado) + ' mdp por aclarar';
-    if (metricKey === 'deuda') return st.semaforoDeuda + ' ($' + formatNumber(st.deuda) + ' mdp)';
+    if (metricKey === 'deuda') return (st.semaforoDeuda || 'No se mide') + ' ($' + formatNumber(st.deuda) + ' mdp)';
     if (metricKey === 'dep') return st.dep + '% de dependencia';
     return '';
   }
@@ -605,7 +609,7 @@
           '<span class="ent-ident">' +
             '<b class="ent-abbr">' + st.abbr + '</b>' +
             '<span class="ent-nom">' + st.name + (L.clave && campoSinFuente(L.clave, st.abbr) ? ' ' + chipEstado('pendiente') : '') + '</span>' +
-            (L.semaforo ? '<span class="ent-sem sem-' + st.semaforoDeuda.toLowerCase() + '">' + st.semaforoDeuda + '</span>' : '') +
+            (L.semaforo ? '<span class="ent-sem sem-' + (st.semaforoDeuda || 'nomide').toLowerCase() + '">' + (st.semaforoDeuda || 'No se mide') + '</span>' : '') +
           '</span>' +
           '<span class="ent-barra-bg">' +
             '<span class="ent-barra" data-anim-w="' + ancho.toFixed(2) + '" ' +
@@ -784,7 +788,7 @@
     document.getElementById('dRamo28').innerHTML = formatMoneyMdp(st.ramo28) + campoEntidadChip('ramo28');
     document.getElementById('dRamo33').innerHTML = formatMoneyMdp(st.ramo33) + campoEntidadChip('ramo33');
     document.getElementById('dRecaudacionPropia').innerHTML = formatMoneyMdp(st.recaudacionPropia) + campoEntidadChip('recaudacionPropia', st.abbr);
-    document.getElementById('dDeuda').innerText = `$${formatNumber(st.deuda)} mdp (${st.semaforoDeuda}${st.deudaIld ? ' · ' + st.deudaIld + ' % de sus ingresos libres' : ''})`;
+    document.getElementById('dDeuda').innerText = `$${formatNumber(st.deuda)} mdp (${st.semaforoDeuda || 'sin semáforo: no se mide'}${st.deudaIld ? ' · ' + st.deudaIld + ' % de sus ingresos libres' : ''})`;
     document.getElementById('dDependencia').innerHTML = `${st.dep}% de sus ingresos` + campoEntidadChip('dep', st.abbr);
 
     // Lista de Municipios
@@ -7532,7 +7536,7 @@
         <div><span class="ec-rk">Le bajan por los Ramos 28 y 33${campoEntidadChip('gasto')}</span><span class="ec-rv" data-anim-v="${recibido}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span></div>
         <div><span class="ec-rk">Cobr\u00f3 por su cuenta en 2024${campoEntidadChip('recaudacionPropia', e.abbr)}</span><span class="ec-rv" data-anim-v="${propio}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span></div>
         <div><span class="ec-rk">En 2024, por cada peso propio recibi\u00f3 de la Federaci\u00f3n${campoEntidadChip('federal2024', e.abbr)}</span><span class="ec-rv">${razon}</span></div>
-        <div><span class="ec-rk">Deuda registrada</span><span class="ec-rv"><span data-anim-v="${e.deuda || 0}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span> \u00b7 ${e.semaforoDeuda}</span></div>
+        <div><span class="ec-rk">Deuda registrada</span><span class="ec-rv"><span data-anim-v="${e.deuda || 0}" data-anim-f="mdpfijo">${formatMdpFijo(0)}</span> \u00b7 ${e.semaforoDeuda || 'No se mide'}</span></div>
       </div>
       <p class="ec-nota">
         El Ramo 28 y el Ramo 33 salen del acuerdo con que Hacienda reparte ambos ramos entre las entidades,
@@ -23714,7 +23718,7 @@
           expl: 'Lo observado por la ASF equivale al ' + obsPct.toFixed(2) + '% de lo que recibe en un año por los Ramos 28 y 33. ' +
                 'Observado no es robado: es dinero cuyo destino no quedó acreditado y que hay que aclarar.' },
         { k: 'holgura', et: 'Holgura frente a la deuda', ico: '⚖️', v: inspPct(100 - deudaPct * 2),
-          crudo: simMdp(e.deuda) + ' de deuda · semáforo ' + e.semaforoDeuda,
+          crudo: simMdp(e.deuda) + ' de deuda · ' + (e.semaforoDeuda ? 'semáforo ' + e.semaforoDeuda : 'sin semáforo: no se mide'),
           expl: 'Su deuda equivale al ' + deudaPct.toFixed(1) + '% de lo que recibe en un año por los Ramos 28 y 33. ' +
                 'El semáforo es el del Sistema de Alertas de la SHCP, no nuestro.' }
       ];
@@ -23942,7 +23946,7 @@
     const sem = (e.semaforoDeuda || '').toLowerCase();
     out.push({ k: 'deuda', ico: '⚖️', q: '¿Puede con su deuda?',
       e: sem === 'verde' ? 'ok' : sem === 'amarillo' ? 'alerta' : sem === 'rojo' ? 'grave' : 'sin',
-      v: e.semaforoDeuda ? 'Semáforo ' + e.semaforoDeuda.toLowerCase() + ' de Hacienda' : 'Sin evaluación',
+      v: e.semaforoDeuda ? 'Semáforo ' + e.semaforoDeuda.toLowerCase() + ' de Hacienda' : e.deuda === 0 ? 'No se mide: sin deuda inscrita' : 'Sin evaluación',
       d: 'Debe ' + simMdp(e.deuda) + '. ' + (e.deudaIld ? 'Su deuda equivale al ' + e.deudaIld + ' % de sus ingresos de libre disposición. ' : '') +
         'El color no es de Auditavisión: es el que asigna el Sistema de Alertas de la SHCP (' + (e.deudaFuente || 'SHCP') + ').', f: '' });
     return out;

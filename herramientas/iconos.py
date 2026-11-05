@@ -44,7 +44,7 @@ ICONOS = [
     ('📚', 'library', 'biblioteca'), ('📄', 'file-text', 'documento'), ('🟡', 'circle', 'amarillo', 'ambar r'),
     ('📑', 'files', 'documentos'), ('🛡️', 'shield', 'protección'), ('📋', 'clipboard-list', 'lista'),
     ('🗳️', 'vote', 'voto'), ('🌎', 'earth', 'mundo'), ('⏳', 'hourglass', 'en espera'),
-    ('🔴', 'circle', 'rojo', 'rojo r'), ('🛢️', 'barrel', 'petróleo'), ('💸', 'banknote-arrow-down', 'gasto'),
+    ('🔴', 'circle', 'rojo', 'rojo r'), ('🛢️', 'barrel', 'petróleo'), ('☢️', 'radiation', 'radiactivo'), ('🐟', 'fish', 'pesca'), ('💸', 'banknote-arrow-down', 'gasto'),
     ('📂', 'folder-open', 'carpeta'), ('🚆', 'train-front', 'tren'), ('🏥', 'hospital', 'hospital'),
     ('⛽', 'fuel', 'combustible'), ('🗑️', 'trash-2', 'borrar'), ('📏', 'ruler', 'medida'),
     ('🎯', 'target', 'objetivo'), ('🏘️', 'house', 'municipio'), ('🌐', 'globe', 'en línea'),

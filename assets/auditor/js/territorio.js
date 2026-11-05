@@ -25,6 +25,7 @@
     if (v == null) return '—';
     if (f === 'pesos') return '$' + num(Math.round(v), 0);
     if (f === 'pct') return num(v, 1) + '%';
+    if (f === 'n') return num(v, v % 1 ? 1 : 0);
     return mdp(v);
   }
   function chip(e, pend) {
@@ -45,9 +46,15 @@
     var PAL = {
       oro: ['#fbf3dc', '#f0d98f', '#d9b34f', '#a8801f', '#6b4f0c'],
       azul: ['#e3ecf8', '#b4c9ea', '#6f95d2', '#2f5fa8', '#0b2a63'],
-      rojo: ['#fbe5e2', '#f2b3aa', '#e06f60', '#b3261e', '#6e1510']
+      rojo: ['#fbe5e2', '#f2b3aa', '#e06f60', '#b3261e', '#6e1510'],
+      cafe: ['#f5ecdc', '#e3c99b', '#c49a5c', '#8f6334', '#4e3318'],
+      naranja: ['#fdeedd', '#fbc995', '#f39a4a', '#d2661a', '#8a3a0a'],
+      rosa: ['#fbe8f3', '#f3b9db', '#e07bb5', '#b8327f', '#6e0f47'],
+      verde: ['#e4f3e8', '#b3dcbd', '#6dba82', '#2e8a4c', '#0f5128']
     };
-    var lente = D.lentes[0], sel = null;
+    /* La lente que llega en ?l=deuda (desde el Auditor o una liga). */
+    var pideL = /[?&]l=([a-z]+)/.exec(location.search);
+    var lente = D.lentes.filter(function (l) { return pideL && l.id === pideL[1]; })[0] || D.lentes[0], sel = null;
     var porA = {};
     D.e.forEach(function (e) { porA[e.a] = e; });
 
@@ -58,6 +65,8 @@
     /* Cinco clases con el mismo número de entidades (quintiles): así el
        color compara posiciones, no lo deforma un solo estado enorme. */
     function cortes(o) {
+      /* Un conteo (obras) va por número, no por quintiles: casi todos son 0, 1 o 2. */
+      if (lente.fmt === 'n') return [1, 2, 3, 4];
       var v = o.map(function (e) { return e[lente.id]; }).sort(function (a, b) { return a - b; });
       return [1, 2, 3, 4].map(function (k) { return v[Math.round(k * v.length / 5)]; });
     }
@@ -81,7 +90,7 @@
         '<span class="tt-ley-tit">' + esc(lente.nom) + '</span><span class="tt-ley-cls">' +
         pal.map(function (col, i) {
           return '<span><i style="background:' + col + '"></i>' + (i ? 'desde ' : '') + fmt(lim[i], lente.fmt) + '</span>';
-        }).join('') + '</span><span class="tt-ley-pie">De menos a más: cada color agrupa a seis o siete entidades.' +
+        }).join('') + '</span><span class="tt-ley-pie">' + (lente.fmt === 'n' ? 'De menos a más: cada color es un número de proyectos.' : 'De menos a más: cada color agrupa a seis o siete entidades.') +
         (lente.falta ? ' Con rayas, sin dato.' : '') + '</span>';
       document.getElementById('ttQue').innerHTML = esc(lente.que) + ' ' + chip(lente.est);
       document.getElementById('ttFuente').innerHTML = '<b>Fuente:</b> ' + lente.fuente +
@@ -89,6 +98,17 @@
       var cu = document.getElementById('ttCuadre');
       cu.innerHTML = lente.cuadre || '';
       cu.hidden = !lente.cuadre;
+      /* El Planisferio es la matriz de los mapas (04-11-2026): la lente que tiene
+         par alla abre su dimension y su lente; las demas, el Planisferio. */
+      var pl = document.getElementById('ttPl');
+      if (pl) {
+        var u = lente.pl || 'planisferio.html';
+        if (sel) u += (u.indexOf('?') < 0 ? '?' : '&') + 'e=' + encodeURIComponent(sel);
+        pl.innerHTML = '<a class="tt-pl-a" href="' + esc(u) + '">🗺️ ' + (lente.pl ? 'Ábrelo en el Planisferio' : 'Ve las 32 en el Planisferio') + (sel && porA[sel] ? ' · ' + esc(porA[sel].n) : '') + ' ➔</a>' +
+          '<small>' + (lente.pl ? 'El Planisferio es la matriz de los mapas: esta lente vive allá, con sus otras dimensiones y los municipios de cada estado.' : 'Esta lente todavía vive solo aquí; en el Planisferio están sus otras dimensiones y los municipios de cada estado.') + '</small>';
+      }
+      var sc = document.getElementById('ttSinCapa');
+      if (sc) sc.textContent = D.sin_capa || '';
       resumen(o);
       ranking(o);
       ficha();
@@ -152,13 +172,21 @@
         '<dt>Ramo 28 · participaciones</dt><dd>' + mdp(e.r28) + ' ' + chip('oficial') + '</dd>' +
         '<dt>Ramo 33 · aportaciones</dt><dd>' + mdp(e.r33) + ' ' + chip('oficial') + '</dd>' +
         '<dt>Por aclarar ante la ASF (2024)</dt><dd>' + mdp(e.asf) + ' · ' + e.aud + ' auditorías ' + chip('oficial') + '</dd>' +
-        '<dt>Deuda registrada</dt><dd>' + mdp(e.deuda) + ' · semáforo ' + esc(e.sem.toLowerCase()) + ' ' + chip('oficial') + '</dd>' +
-        '</dl><p class="tt-ficha-ir"><a href="' + D.ent + '?e=' + encodeURIComponent(e.a) + '#circuito">Su circuito: de dónde viene cada peso ➔</a>' +
-        '<a href="' + D.mun + '?e=' + encodeURIComponent(e.a) + '#padron">Sus municipios, uno por uno ➔</a></p>';
+        '<dt>Deuda registrada</dt><dd>' + mdp(e.deuda) + (e.sem ? ' · semáforo ' + esc(e.sem.toLowerCase()) : ' · sin semáforo: no se mide') + ' ' + chip('oficial') + '</dd>' +
+        '<dt>Obra que hizo el estado (2024)</dt><dd>' + (e.inv == null ? chip('pendiente', 'entidades-' + e.a.toLowerCase()) : mdp(e.inv) + ' ' + chip('oficial')) + '</dd>' +
+        '<dt>A sus organismos de obra (2024)</dt><dd>' + (e.invt == null ? chip('pendiente', 'entidades-' + e.a.toLowerCase()) : mdp(e.invt) + ' ' + chip('oficial')) + '</dd>' +
+        '<dt>No cuadra (INEGI contra Cuenta Pública, 2024)</dt><dd>' + (e.cuadre == null ? chip('pendiente', 'entidades-' + e.a.toLowerCase()) : fmt(e.cuadre, 'pct') + ' ' + chip('derivado')) + '</dd>' +
+        '<dt>Obras con alerta ambiental</dt><dd>' + e.obras + (e.obras ? ' (' + e.opub + ' con dinero público, ' + e.opriv + ' privadas)' : '') + ' ' + chip('derivado') + '</dd>' +
+        '</dl><p class="tt-ficha-ir">' + (D.portal && D.portal[e.a] ? '<a href="' + D.portal[e.a] + '">Su portal en el Planisferio, con sus municipios ➔</a>' : '') + '<a href="' + D.ent + '?e=' + encodeURIComponent(e.a) + '#circuito">Su circuito: de dónde viene cada peso ➔</a>' +
+        '<a href="' + D.mun + '?e=' + encodeURIComponent(e.a) + '#padron">Sus municipios, uno por uno ➔</a>' +
+        (e.obras ? '<a href="datos-ambiente-megaobras.html?e=' + encodeURIComponent(e.a) + '#abMapaObras">Sus obras en el mapa ambiental ➔</a>' : '') + '</p>';
     }
 
     function elige(a) { sel = a; pinta(); }
 
+    Array.prototype.forEach.call(raiz.querySelectorAll('.tt-lente'), function (x) {
+      x.setAttribute('aria-checked', x.getAttribute('data-l') === lente.id ? 'true' : 'false');
+    });
     raiz.querySelector('.tt-lentes').addEventListener('click', function (ev) {
       var b = ev.target.closest('.tt-lente');
       if (!b) return;
@@ -223,7 +251,7 @@
         '<div class="pm-kpi"><span class="pm-kpi-k">Le bajan por los Ramos 28 y 33 ' + chip('derivado') + '</span><b class="pm-kpi-v num-tabular">' + mdp(baja) + '</b><small>2026</small></div>' +
         '<div class="pm-kpi pm-green"><span class="pm-kpi-k">Cobró por su cuenta ' + (sinDato ? chip('pendiente', D.pend) : chip('derivado')) + '</span><b class="pm-kpi-v num-tabular">' + (sinDato ? '—' : mdp(e.propia)) + '</b><small>2024</small></div>' +
         '<div class="pm-kpi"><span class="pm-kpi-k">Por cada peso propio recibió de la Federación ' + (razon ? chip('derivado') : chip('pendiente', D.pend)) + '</span><b class="pm-kpi-v num-tabular">' + (razon || '—') + '</b><small>' + (razon ? 'Federal 2024 ÷ propio 2024' : 'Sin cifras de 2024') + '</small></div>' +
-        '<div class="pm-kpi pm-red"><span class="pm-kpi-k">Deuda registrada ' + chip('oficial') + '</span><b class="pm-kpi-v num-tabular">' + mdp(e.deuda) + '</b><small>Semáforo ' + esc(e.sem.toLowerCase()) + ' del Sistema de Alertas</small></div>' +
+        '<div class="pm-kpi pm-red"><span class="pm-kpi-k">Deuda registrada ' + chip('oficial') + '</span><b class="pm-kpi-v num-tabular">' + mdp(e.deuda) + '</b><small>' + (e.sem ? 'Semáforo ' + esc(e.sem.toLowerCase()) + ' del Sistema de Alertas' : 'El Sistema de Alertas no la mide') + '</small></div>' +
         '</div>' +
         (sinDato ? '<p class="pm-ciego">La Ciudad de México no figura en la estadística estatal del INEGI: sus convenios, su recaudación propia y su dependencia de 2024 siguen pendientes.</p>' : '') +
         '<p class="tt-circ-ir"><a href="' + D.mapa + '?e=' + encodeURIComponent(e.a) + '">📍 Verlo en el mapa ➔</a><a href="' + D.mun + '?e=' + encodeURIComponent(e.a) + '#padron">🏘️ Sus municipios, uno por uno ➔</a></p>';
@@ -258,9 +286,15 @@
         var hay = f.length === 10, ing = hay ? f[2] / 1e6 : null;
         return { cve: e.cve + f[0], nom: f[1], hay: hay, ing: ing, part: hay ? f[3] / 1e6 : null,
           fortamun: hay ? f[5] / 1e6 : null, fismdf: hay ? f[6] / 1e6 : null, predial: hay ? f[7] / 1e6 : null,
-          dep: (hay && ing > 0) ? (f[3] + f[4]) / f[2] * 100 : null };
+          dep: (hay && ing > 0) ? (f[3] + f[4]) / f[2] * 100 : null,
+          inv: hay && IV && IV.mun[e.cve + f[0]] ? IV.mun[e.cve + f[0]][0] / 1e6 : null,
+          dpag: hay && DV && DV.mun[e.cve + f[0]] ? (DV.mun[e.cve + f[0]][1] + DV.mun[e.cve + f[0]][2] + DV.mun[e.cve + f[0]][3]) / 1e6 : null };
       });
     }
+    /* La inversión pública de cada municipio (municipios-inversion.js, INEGI). */
+    var IV = window.AUDIT_MUN_INV || null;
+    /* Lo que pagó por sus créditos en el año (municipios-deuda.js, INEGI): capital, intereses y comisiones, no lo que debe. */
+    var DV = window.AUDIT_MUN_DEUDA || null;
     function celda(v) { return v == null ? '<td class="tt-nada">—</td>' : '<td>$' + num(v, 1) + '</td>'; }
     function pinta() {
       var a = s.value, e = F.ent[a], q = plano(busca.value || ''), c = ord.value;
@@ -273,6 +307,8 @@
       });
       var t = e.tot || {}, sinRep = e.n - e.conCifra;
       var depEnt = t.ing > 0 ? (t.part + t.aport) / t.ing * 100 : null;
+      var invEnt = IV ? filas(a).reduce(function (s, m) { return m.inv == null ? s : s + m.inv * 1e6; }, 0) : null;
+      var dpEnt = DV ? filas(a).reduce(function (s, m) { return m.dpag == null ? s : s + m.dpag * 1e6; }, 0) : null;
       var h = '<div class="tt-mun-res"><h3>' + esc(NOM[a] || a) + '</h3><p>' + e.n + ' ' + voz + ' en el catálogo del INEGI' +
         (e.conCifra ? ' · <b>' + e.conCifra + '</b> rindieron cuenta en ' + F.anio : '') +
         (e.conCifra && sinRep ? ' · <span class="tt-falta">' + sinRep + ' sin reporte</span> ' + chip('pendiente', D.pend) : '') + '</p>';
@@ -283,7 +319,7 @@
           'y aquí aparecen sin cifra en lugar de en ceros.</p>';
       } else if (e.conCifra) {
         h += '<div class="pm-kpis tt-kpis">' + [['Ingreso total', t.ing], ['Participaciones', t.part], ['Predial cobrado', t.predial],
-          ['FORTAMUN', t.fortamun], ['FISMDF', t.fismdf]].map(function (k) {
+          ['FORTAMUN', t.fortamun], ['FISMDF', t.fismdf]].concat(IV ? [['Inversión pública', invEnt]] : []).concat(DV ? [['Pagó de deuda', dpEnt]] : []).map(function (k) {
           return '<div class="pm-kpi"><span class="pm-kpi-k">' + k[0] + ' ' + chip('derivado') + '</span><b class="pm-kpi-v num-tabular">$' + num(k[1] / 1e6, 1) + '</b><small>mdp, suma de sus municipios</small></div>';
         }).join('') + '</div>' +
         '<p class="tt-mun-dep">Dependencia de transferencias de sus municipios: <b>' + num(depEnt, 1) + '%</b> ' + chip('derivado') +
@@ -297,16 +333,18 @@
       h += '<div class="tt-tabla-marco"><table class="tt-tabla"><caption class="sr-only">Ingresos de los ' + voz + ' de ' + esc(NOM[a] || a) +
         ' en ' + F.anio + ', en millones de pesos</caption><thead><tr><th scope="col">Municipio</th><th scope="col">Ingreso total</th>' +
         '<th scope="col">Participaciones</th><th scope="col">Predial</th><th scope="col">FORTAMUN</th><th scope="col">FISMDF</th>' +
-        '<th scope="col">Dependencia</th></tr></thead><tbody>' + l.map(function (m) {
+        '<th scope="col">Dependencia</th>' + (IV ? '<th scope="col">Inversión pública</th>' : '') + (DV ? '<th scope="col">Pagó de deuda</th>' : '') + '</tr></thead><tbody>' + l.map(function (m) {
           if (!m.hay) {
-            return '<tr class="tt-sin"><th scope="row"><small>' + m.cve + '</small>' + esc(m.nom) + '</th><td colspan="6">' +
+            return '<tr class="tt-sin"><th scope="row"><small>' + m.cve + '</small>' + esc(m.nom) + '</th><td colspan="' + (6 + (IV ? 1 : 0) + (DV ? 1 : 0)) + '">' +
               (cdmx ? 'Su presupuesto lo aprueba el Congreso de la Ciudad' : 'No rindió cuenta pública ' + F.anio + ' ante el INEGI') + '</td></tr>';
           }
           return '<tr><th scope="row"><small>' + m.cve + '</small>' + esc(m.nom) + '</th>' + celda(m.ing) + celda(m.part) + celda(m.predial) +
             celda(m.fortamun) + celda(m.fismdf) + '<td class="tt-dep-c"><span class="tt-dep-b"><span style="width:' + Math.min(100, m.dep || 0).toFixed(1) +
-            '%"></span></span>' + (m.dep == null ? '—' : num(m.dep, 1) + '%') + '</td></tr>';
+            '%"></span></span>' + (m.dep == null ? '—' : num(m.dep, 1) + '%') + '</td>' + (IV ? celda(m.inv) : '') + (DV ? celda(m.dpag) : '') + '</tr>';
         }).join('') + '</tbody></table></div>' +
-        '<p class="pm-pie">' + esc(F.fuente) + ' Cifras en millones de pesos. La <b>dependencia</b> es cuánto de cada $100 que ingresó el municipio vino de participaciones y aportaciones, no de lo que cobró por su cuenta ' + chip('derivado') + '.</p>' +
+        '<p class="pm-pie">' + esc(F.fuente) + ' Cifras en millones de pesos. La <b>dependencia</b> es cuánto de cada $100 que ingresó el municipio vino de participaciones y aportaciones, no de lo que cobró por su cuenta ' + chip('derivado') + '.' +
+          (IV ? ' La <b>inversión pública</b> es su capítulo de egresos de obra pública y proyectos productivos ' + chip('oficial') + '; quien rindió su cuenta sin ese capítulo aparece en $0.' : '') +
+          (DV ? ' <b>Pagó de deuda</b> es el capital, los intereses y las comisiones de sus créditos en ' + F.anio + ' ' + chip('derivado') + ': lo que pagó, no lo que debe; su saldo lo publica Hacienda y sigue ' + chip('pendiente', 'deuda-municipios') + '.' : '') + '</p>' +
         '<p class="tt-circ-ir"><a href="' + D.ent + '?e=' + encodeURIComponent(a) + '#circuito">🗺️ El circuito del estado ➔</a><a href="' + D.mapa + '?e=' + encodeURIComponent(a) + '">📍 Verlo en el mapa ➔</a></p>';
       cont.innerHTML = h;
     }

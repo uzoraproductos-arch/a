@@ -59,11 +59,13 @@ MEGAOBRAS_PAGS = [('herramienta-megaobras-tabla.html', 'Megaobras · En qué inv
 # base). Cada uno: id, tema, que falta, por que, responsable, enlace oficial,
 # texto del enlace, donde aparece.
 PROPIOS = [
-    ('pemex-deuda', 'Deuda', 'Cuánto debe Pemex: el saldo de su deuda financiera',
-     'Pemex publica el saldo de su deuda en sus reportes trimestrales de resultados y en sus boletines, pero la plataforma todavía no lo ha cotejado ni integrado. '
-     'Lo que sí tiene es lo que Pemex paga de intereses en 2026: $190,838.8 millones (Presupuesto de Egresos 2026, anexo 1.E).',
-     PLATAFORMA, 'https://www.pemex.com/saladeprensa/boletines_nacionales/Paginas/2026_69_nacional.aspx',
-     'Pemex, resultados del segundo trimestre de 2026', [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor')]),
+    ('fracc-escalon', 'Contratos públicos', 'En qué escalón del Anexo 9 está cada dependencia (su tope de adjudicación directa)',
+     'El tope de la adjudicación directa depende del presupuesto de adquisiciones de cada dependencia: son 14 escalones en el Anexo 9 del PEF. '
+     'El Comité de Adquisiciones de cada una aprueba su escalón en su primera sesión del año, y no hay un documento que los reúna. '
+     'Sin ese dato, los grupos de contratos que rebasan el tope más bajo pero no el más alto no se pueden calificar como señal.',
+     'Ninguna dependencia está obligada a publicarlo en un solo lugar: cada Comité de Adquisiciones aprueba su escalón (Reglamento de la LAASSP, art. 41, apartado A)',
+     'https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LAASSP_orig_18dic25.doc',
+     'Reglamento de la LAASSP (DOF 18-12-2025)', [('contratos-publicos.html#fraccionamiento', 'Contratos públicos · Señales de fraccionamiento')]),
     ('asf-matriz-2018', 'Fiscalización', 'Matriz de Datos Básicos de la Cuenta Pública 2018',
      'La ASF no publicó en su portal la matriz de la Cuenta Pública 2018, como sí lo hizo con las demás. Sin ella, la serie de montos por aclarar tiene un hueco en ese año.',
      'Auditoría Superior de la Federación (ASF)', 'https://www.asf.gob.mx/Section/58_Informes_de_auditoria',
@@ -86,9 +88,6 @@ PROPIOS = [
      'Ningún documento oficial publica el subsidio por usuario de las obras. La plataforma lo marca como pendiente hasta que la dependencia que opera cada obra publique su costo de operación y su número de usuarios.',
      'Las dependencias que operan cada obra (Sedena, Pemex, Fonatur, SICT)', 'https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta',
      'Obra Pública Abierta (Hacienda)', [('herramienta-megaobras-sector.html', 'Megaobras · Obra por obra, por industria')]),
-    ('estado-cuenta-pesos-2024', 'Cuenta Pública 2024', 'Pesos de 2024 en el Estado de Cuenta y el subejercicio de 2024',
-     'Los Criterios Generales 2027 dan 2024 solo en por ciento del PIB. Los pesos y el subejercicio (modificado menos devengado) están en el Tomo II de la Cuenta Pública 2024, que la plataforma aún no coteja: el portal de Hacienda no se pudo abrir con conexión verificada.',
-     PLATAFORMA, CP2024, 'Cuenta Pública 2024 (Hacienda)', [('estado-de-cuenta.html', 'Contexto dimensional')]),
     ('radar-1989', 'Historia', 'Ingresos, gasto, inversión y costo financiero de 1989, el primer año de Salinas',
      'Las Estadísticas Oportunas de Hacienda, que usa el Radar, empiezan en 1990, y el Anexo Estadístico del 5.º Informe en 1995. '
      'La Cuenta Pública de 1989 existe, pero la plataforma aún no la integra. Mientras tanto, Salinas se mide con cinco de sus seis años '
@@ -136,9 +135,6 @@ PROPIOS = [
      'Falta de transparencia de CENAPRED.',
      'Centro Nacional de Prevención de Desastres (CENAPRED)', 'https://www.cenapred.gob.mx/es/Publicaciones/archivos/521-RESUMENEJECUTIVOIMPACTO2024.PDF',
      'Impacto socioeconómico 2024 (CENAPRED)', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
-    ('fonden-2021-2025', 'Desastres', 'Fondo de Desastres Naturales aprobado en los Presupuestos 2021 a 2025',
-     'Los Presupuestos de esos años están publicados; la plataforma aún no integra el renglón del Ramo 23.',
-     PLATAFORMA, 'https://www.diputados.gob.mx/LeyesBiblio/', 'Leyes federales (Cámara de Diputados)', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
     # El Poder Legislativo en el bot (23-10-2026).
     ('elecciones-2027-cargos', 'Elecciones', 'Cuáles son las 17 gubernaturas de 2027 y cuántos cargos locales se eligen (diputaciones locales por principio y ayuntamientos)',
      'El INE confirma en un acuerdo publicado en el Diario Oficial (INE/CG469/2026) que en 2027 habrá elecciones en las 32 entidades y 17 gubernaturas, pero la lista por estado y el conteo de cargos '
@@ -219,11 +215,13 @@ PROPIOS = [
      'Instituto Mexicano del Seguro Social (IMSS): tiene el registro y no lo encontramos publicado', 'https://www.imss.gob.mx/conoce-al-imss/memoria-estadistica-2025',
      'Memoria Estadística 2025 (IMSS)',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-imss.html', 'Datos · Salud pública · El IMSS')]),
-    ('salud-issste-servicios', 'Salud', 'Consultas, egresos hospitalarios y cirugías del ISSSTE en 2025',
-     'El ISSSTE publica un anuario estadístico cada año (su página de anuarios lista el de 2025), pero el 27-10-2026 su servidor no respondió, ni directo ni a través de otra conexión, '
-     'y no se pudo cotejar. El gasto del ISSSTE sí está en la plataforma, con la Cuenta Pública 2025.',
+    ('salud-issste-servicios', 'Salud', 'Derechohabientes, consultas, egresos hospitalarios y cirugías del ISSSTE en 2025, en el país y en cada estado',
+     'El ISSSTE publica un anuario estadístico cada año (su página de anuarios lista el de 2025), pero el 27-10-2026 y otra vez el 03-11-2026 su servidor '
+     '(issste.gob.mx/datosabiertos) no respondió, y no se pudo cotejar. Sin él no se sabe cuántas personas atiende el ISSSTE en cada estado ni cuánto les resolvió. '
+     'El gasto del ISSSTE sí está en la plataforma, con la Cuenta Pública 2025, y sus unidades, camas, médicos y enfermería por estado, con el registro sectorial de la Secretaría de Salud (DGIS).',
      PLATAFORMA, 'https://www.gob.mx/issste/documentos/anuarios-estadisticos', 'Anuarios estadísticos (ISSSTE)',
-     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-sistema.html', 'Datos · Salud pública · Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE')]),
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-sistema.html', 'Datos · Salud pública · Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE'),
+      ('planisferio.html', 'Planisferio · Salud pública')]),
     ('salud-imss-bienestar', 'Salud', 'Consultas, egresos, cirugías y gasto del IMSS-Bienestar en 2025',
      'En conferencias se han dado cifras de las consultas de 2025 del IMSS-Bienestar, pero la plataforma no encontró un informe oficial con sus servicios y su gasto completo. '
      'El capítulo del IMSS-Bienestar de la Memoria Estadística 2025 del IMSS no se pudo descargar: su enlace devuelve una página web en lugar del archivo. '
@@ -431,6 +429,14 @@ def recolectar():
         out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
     import periodistas
     for x in periodistas.pendientes():
+        out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
+    # Las leyes del dinero en los tres niveles y la deuda municipal (03-11-2026).
+    import leyes_niveles
+    for x in leyes_niveles.pendientes():
+        out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
+    # Los recursos naturales y las refinerías de PEMEX (03-11-2026).
+    import recursos_naturales
+    for x in recursos_naturales.pendientes():
         out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
     # 10. Lo que circula en redes y quedó pendiente en su cotejo (Noticias
     # relevantes · Verificamos, 26-10-2026).

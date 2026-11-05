@@ -13,7 +13,8 @@ enlistan en cada ficha, o se toman del Sistema de Alertas de la SHCP. Los
 textos se arman con esas mismas cifras para que no se desfasen.
 
 También pone en DB.estados la deuda y el semáforo del Sistema de Alertas
-(Cuenta Pública 2025), que sustituyen valores sin fuente.
+(Cuenta Pública 2025), que sustituyen valores sin fuente, con sus tres
+indicadores y los ingresos de libre disposición (los lee el Planisferio).
 
 Es idempotente: si la colección existe, la reemplaza.
 """
@@ -183,6 +184,12 @@ def ficha_deuda(sda):
     }
 
 
+# Lo que se escribe tras «semaforoDeuda»: los tres indicadores del Sistema de
+# Alertas (deuda, servicio de la deuda y obligaciones de corto plazo, en %),
+# los ingresos de libre disposición que usa de denominador y la fuente.
+EXTRA = ('deudaIld', 'deudaSd', 'deudaOcp', 'ildMdp', 'deudaFuente')
+
+
 def estados(b, sda):
     """Deuda y semaforo del Sistema de Alertas en DB.estados."""
     db, _ = json.JSONDecoder().raw_decode(b[b.index('{', b.index('window.AUDIT_DB')):])
@@ -191,16 +198,17 @@ def estados(b, sda):
         e = next((x for x in sda['entidades'] if norm(x['entidad']) == norm(st['name']) or norm(x['entidad']).startswith(norm(st['name']) + ' ')), None)
         if e:
             nuevos = {'deuda': round(e['dyo'] / 1e6, 1), 'semaforoDeuda': color[e['resultado']], 'deudaIld': round(e['dyoIld'] * 100, 1),
+                      'deudaSd': round(e['sdIld'] * 100, 1), 'deudaOcp': round(e['ocpIt'] * 100, 1), 'ildMdp': round(e['ild'] / 1e6, 1),
                       'deudaFuente': SDA_FUENTE}
         elif norm(st['name']) == 'tlaxcala':
-            nuevos = {'deuda': 0, 'semaforoDeuda': 'Verde', 'deudaIld': 0,
-                      'deudaFuente': SDA_FUENTE + '. Tlaxcala no es objeto de medición: no tiene financiamientos inscritos en el Registro Público Único; la Ley de Disciplina Financiera (art. 14) lo clasifica como sostenible.'}
+            nuevos = {'deuda': 0, 'semaforoDeuda': None, 'deudaIld': 0, 'deudaSd': None, 'deudaOcp': None, 'ildMdp': None,
+                      'deudaFuente': SDA_FUENTE + '. Tlaxcala no es objeto de medición: no tiene financiamientos inscritos en el Registro Público Único: el Sistema de Alertas solo evalúa a quien la tiene (Ley de Disciplina Financiera, art. 43), y Hacienda no le publica semáforo.'}
         else:
             sys.exit('Sin dato del Sistema de Alertas para %s' % st['name'])
         ini = b.index('"abbr": %s' % json.dumps(st['abbr'], ensure_ascii=False))
         fin = b.index('"asfMontoObservado"', ini)
         trozo = b[ini:fin]
-        for k in ('deudaIld', 'deudaFuente'):
+        for k in EXTRA:
             trozo = re.sub(r'\r\n +"%s": .*?,(?=\r\n)' % k, '', trozo)
         for k, v in nuevos.items():
             if k in ('deuda', 'semaforoDeuda'):
@@ -208,7 +216,7 @@ def estados(b, sda):
                 if n != 1:
                     sys.exit('No encuentro %s en %s' % (k, st['name']))
         sang = re.search(r'\r\n( +)"semaforoDeuda"', trozo).group(1)
-        extra = ''.join('\r\n%s"%s": %s,' % (sang, k, json.dumps(nuevos[k], ensure_ascii=False)) for k in ('deudaIld', 'deudaFuente'))
+        extra = ''.join('\r\n%s"%s": %s,' % (sang, k, json.dumps(nuevos[k], ensure_ascii=False)) for k in EXTRA)
         cierre = trozo.index('\r\n', trozo.index('"semaforoDeuda"'))
         trozo = trozo[:cierre] + extra + trozo[cierre:]
         b = b[:ini] + trozo + b[fin:]

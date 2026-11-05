@@ -149,12 +149,17 @@
       '<a class="nt-btn nt-btn-chico nt-btn-sec" href="comunidad-tema.html" data-puerta="tema">💡 Proponer</a></span></li>';
   }
   var mesa = $('noticiasMesa'), tema = D.mesa[0];
+  /* El tema «medios» sigue a cada medio por su dominio (noticias.MEDIOS). */
+  function qDe(t) {
+    return t.id === 'medios' && D.medios ? '(' + D.medios.map(function (m) { return 'site:' + m.d; }).join(' OR ') + ') ' + D.temasMedios : t.q;
+  }
   function pintaMesa() {
     mesa.innerHTML =
       '<div class="nt-mesa-temas" role="group" aria-label="Temas de la mesa">' + D.mesa.map(function (m) {
         return '<button type="button" class="nt-chip" data-tema="' + esc(m.id) + '" aria-pressed="' + (m === tema) + '">' + esc(m.t) + '</button>';
       }).join('') + '</div>' +
-      '<div class="nt-mesa-cuerpo"><p class="nt-mesa-q">Buscamos: «' + esc(tema.q) + '»</p>' +
+      '<div class="nt-mesa-cuerpo"><p class="nt-mesa-q">' + (tema.id === 'medios' && D.medios ? 'Seguimos a ' + esc(D.medios.map(function (m) { return m.n; }).join(', ')) +
+          ' en lo que publican de presupuesto, deuda, la ASF, licitaciones y Hacienda. La misma historia contada por varios medios se junta en una sola.' : 'Buscamos: «' + esc(tema.q) + '»') + '</p>' +
         '<p class="nt-acciones"><button type="button" class="nt-btn" id="noticiasTraer">📡 Traer los titulares de hoy</button></p>' +
         '<p class="nt-pie">Los pedimos a Bing Noticias y, si no responde, a Google Noticias, a través de un lector externo (allorigins), desde tu navegador. ' +
         'No guardamos lo que buscas. De cada nota te mostramos el titular, el medio y la liga: <b>no lo verificamos</b> hasta que pasa por el verificador.</p>' +
@@ -166,8 +171,8 @@
     var caja = $('noticiasTitulares'), btn = $('noticiasTraer');
     btn.disabled = true;
     caja.innerHTML = '<p class="nt-pie">Trayendo titulares…</p>';
-    trae(rssBing(tema.q)).then(lee).then(function (l) { if (!l.length) throw new Error('vacio'); return l; })
-      .catch(function () { return trae(rssGoogle(tema.q)).then(lee); })
+    trae(rssBing(qDe(tema))).then(lee).then(function (l) { if (!l.length) throw new Error('vacio'); return l; })
+      .catch(function () { return trae(rssGoogle(qDe(tema))).then(lee); })
       .then(function (l) {
         btn.disabled = false;
         var vistos = {};
@@ -179,7 +184,7 @@
       })
       .catch(function () {
         btn.disabled = false;
-        caja.innerHTML = '<p class="nt-mesa-falla">No pudimos traer los titulares desde tu navegador: el lector externo no respondió. Búscalos tú, ya está armada la búsqueda:</p>' + busquedas(tema.q);
+        caja.innerHTML = '<p class="nt-mesa-falla">No pudimos traer los titulares desde tu navegador: el lector externo no respondió. Búscalos tú, ya está armada la búsqueda:</p>' + busquedas(qDe(tema));
       });
   }
   /* Lo que junta la recolección automática (herramientas/recolectar_noticias.py). */
@@ -187,9 +192,24 @@
     var el = $('noticiasBandeja');
     if (!el || !window.fetch) return;
     fetch(D.bandeja, { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (b) {
-      var notas = b && b.notas ? b.notas.filter(function (x) { return x.tema === tema.id; }).slice(0, 10) : [];
+      /* La misma historia en varios medios (mismo «grupo») se muestra una vez,
+         con los demás medios que la contaron. */
+      var todas = b && b.notas ? b.notas : [], otros = {};
+      todas.forEach(function (x) { var g = x.grupo || x.url; (otros[g] = otros[g] || []).push(x); });
+      var vistos = {}, notas = todas.filter(function (x) {
+        var g = x.grupo || x.url;
+        if (x.tema !== tema.id || vistos[g]) return false;
+        vistos[g] = 1;
+        return true;
+      }).slice(0, tema.id === 'medios' ? 20 : 10);
       el.innerHTML = notas.length
-        ? '<h3 class="nt-sub">🗃️ Lo que juntó nuestra recolección <small>(' + esc(b.actualizado) + ')</small></h3><ol class="nt-titulares">' + notas.map(titular).join('') + '</ol>'
+        ? '<h3 class="nt-sub">🗃️ Lo que juntó nuestra recolección <small>(' + esc(b.actualizado) + ')</small></h3><ol class="nt-titulares">' + notas.map(function (x) {
+          var mas = (otros[x.grupo || x.url] || []).filter(function (y) { return y !== x && y.medio && y.medio !== x.medio; });
+          var li = titular(x);
+          return mas.length ? li.replace('</small>', ' · también la contaron: ' + mas.map(function (y) {
+            return '<a href="' + esc(y.url) + '" target="_blank" rel="noopener noreferrer nofollow">' + esc(y.medio) + '</a>';
+          }).join(', ') + '</small>') : li;
+        }).join('') + '</ol>'
         : '';
     }, function () { /* sin bandeja: solo la búsqueda en vivo */ });
   }

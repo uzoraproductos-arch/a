@@ -12,10 +12,13 @@
   },
   "pib_hist_2026a": 22.5,
   "mdp": {
+   "2024": 7492928.9,
    "2026a": 8721057.3,
    "2026e": 8537298.7,
    "2027": 9156528.9
   },
+  "fuente_2024_mdp": "SHCP, Cuenta Pública 2024, Tomo I, Ingresos Presupuestarios del Sector Público, p. 4",
+  "url_2024_mdp": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/I/I50.06.IPP.pdf",
   "pagina_hist": 55,
   "pagina_ii6": 67
  },
@@ -32,10 +35,13 @@
   },
   "pib_hist_2026a": 15.1,
   "mdp": {
+   "2024": 4953324.2,
    "2026a": 5838571.0,
    "2026e": 5730891.9,
    "2027": 6263886.8
   },
+  "fuente_2024_mdp": "SHCP, Cuenta Pública 2024, Tomo I, Ingresos Presupuestarios del Sector Público, p. 4",
+  "url_2024_mdp": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/I/I50.06.IPP.pdf",
   "pagina_hist": 55,
   "pagina_ii6": 67
  },
@@ -52,10 +58,13 @@
   },
   "pib_hist_2026a": 3.1,
   "mdp": {
+   "2024": 958914.7,
    "2026a": 1204277.7,
    "2026e": 1113958.1,
    "2027": 984539.7
   },
+  "fuente_2024_mdp": "SHCP, Cuenta Pública 2024, Tomo I, Ingresos Presupuestarios del Sector Público, p. 4",
+  "url_2024_mdp": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/I/I50.06.IPP.pdf",
   "pagina_hist": 55,
   "pagina_ii6": 67
  },
@@ -72,10 +81,13 @@
   },
   "pib_hist_2026a": 26.1,
   "mdp": {
+   "2024": 9161561.0,
    "2026a": 10114827.9,
    "2026e": 9874777.8,
    "2027": 10515087.7
   },
+  "fuente_2024_mdp": "SHCP, Cuenta Pública 2024, Tomo I, Gasto Presupuestario del Sector Público, p. 6",
+  "url_2024_mdp": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/I/I50.06.GPF.pdf",
   "pagina_hist": 55,
   "pagina_ii6": 67
  },
@@ -92,10 +104,13 @@
   },
   "pib_hist_2026a": 18.3,
   "mdp": {
+   "2024": 6771551.0,
    "2026a": 7094708.8,
    "2026e": 7084505.4,
    "2027": 7432529.7
   },
+  "fuente_2024_mdp": "SHCP, Cuenta Pública 2024, Tomo I, Gasto Presupuestario del Sector Público, p. 6",
+  "url_2024_mdp": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/I/I50.06.GPF.pdf",
   "pagina_hist": 55,
   "pagina_ii6": 67
  },
@@ -112,10 +127,13 @@
   },
   "pib_hist_2026a": 3.8,
   "mdp": {
+   "2024": 1253784.6,
    "2026a": 1456045.9,
    "2026e": 1435643.7,
    "2027": 1547607.9
   },
+  "fuente_2024_mdp": "SHCP, Cuenta Pública 2024, Tomo I, Gasto Presupuestario del Sector Público, p. 6",
+  "url_2024_mdp": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/I/I50.06.GPF.pdf",
   "pagina_hist": 55,
   "pagina_ii6": 67
  },
@@ -132,10 +150,13 @@
   },
   "pib_hist_2026a": -3.6,
   "mdp": {
+   "2024": -1668632.1,
    "2026a": -1393770.6,
    "2026e": -1337479.1,
    "2027": -1358558.8
   },
+  "fuente_2024_mdp": "SHCP, Cuenta Pública 2024, Tomo I, Panorama Económico y Resultado de las Finanzas Públicas, p. 7",
+  "url_2024_mdp": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/I/I50.06.PFF.pdf",
   "pagina_hist": 55,
   "pagina_ii6": 67
  },
@@ -152,10 +173,13 @@
   },
   "pib_hist_2026a": 4.1,
   "mdp": {
+   "2024": 1150427.1,
    "2026a": 1572073.3,
    "2026e": 1364484.4,
    "2027": 1574950.2
   },
+  "fuente_2024_mdp": "SHCP, Cuenta Pública 2024, Tomo I, Gasto Presupuestario del Sector Público, p. 6",
+  "url_2024_mdp": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/I/I50.06.GPF.pdf",
   "pagina_hist": 55,
   "pagina_ii6": 67
  },
@@ -172,10 +196,13 @@
   },
   "pib_hist_2026a": 0.5,
   "mdp": {
+   "2024": -518205.0,
    "2026a": 178802.6,
    "2026e": 27505.3,
    "2027": 216891.3
   },
+  "fuente_2024_mdp": "SHCP, Cuenta Pública 2024, Tomo I, Panorama Económico y Resultado de las Finanzas Públicas, p. 7",
+  "url_2024_mdp": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/I/I50.06.PFF.pdf",
   "pagina_hist": 55,
   "pagina_ii6": 67
  },
@@ -192,10 +219,13 @@
   },
   "pib_hist_2026a": 52.3,
   "mdp": {
+   "2024": 17425500.0,
    "2026a": 20259590.7,
    "2026e": 20062321.6,
    "2027": 21665995.8
   },
+  "fuente_2024_mdp": "SHCP, Comunicado No. 4 Informes sobre la Situación Económica, las Finanzas Públicas y la Deuda Pública al 4T 2024, p. 8 (17,425.5 miles de millones de pesos)",
+  "url_2024_mdp": "https://www.gob.mx/cms/uploads/attachment/file/972113/Comunicado_No._4_Informes_sobre_la_Situaci_n_Econ_mica_las_Finanzas_P_blicas_y_la_Deuda_P_blica_al_cuarto_trimestre_de_2024.pdf",
   "pagina_hist": 52,
   "pagina_ii6": 67
  }

@@ -31,6 +31,8 @@ Datos) y asistente.py (D.sal del chat).
 """
 
 import html
+import json
+import os
 
 from asistente_legislativo import _chip, bloque_tema
 
@@ -123,8 +125,8 @@ PAGINAS = [
      ['imss_dinero', 'imss_servicios', 'imss_recursos', 'imss_cotejo']),
     ('datos-salud-sistema.html', '🏥', 'Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE', 'Quién atiende a quién, qué cambió y lo que nadie ha publicado',
      'Qué pasó con el Seguro Popular, por qué las series de salud se rompen en 2020 y en 2023, y qué sabemos del IMSS-Bienestar y del ISSSTE. '
-     'Lo que todavía no se puede auditar va con su ficha en el Registro de pendientes.',
-     ['transicion', 'imss_bienestar', 'issste']),
+     'Y el IMSS y el ISSSTE estado por estado. Lo que todavía no se puede auditar va con su ficha en el Registro de pendientes.',
+     ['transicion', 'imss_bienestar', 'issste', 'estados']),
 ]
 PAGINA_DE = {k: (p[0], p[2]) for p in PAGINAS for k in p[5]}
 PRE = 'sal-'
@@ -135,6 +137,77 @@ PEND_ISSSTE = {'que': 'Consultas, egresos y cirugías del ISSSTE en 2025', 'e': 
                'fu': {'tx': 'ISSSTE, anuarios estadísticos', 'url': 'https://www.gob.mx/issste/documentos/anuarios-estadisticos'}}
 PEND_BIEN = {'que': 'Consultas, egresos, cirugías y gasto del IMSS-Bienestar en 2025', 'e': 'pendiente', 'p': 'salud-imss-bienestar',
              'fu': {'tx': 'Servicios de Salud del IMSS-Bienestar', 'url': 'https://www.gob.mx/imssbienestar'}}
+
+
+# El IMSS y el ISSSTE en cada estado (03-11-2026, sexta dimensión del
+# Planisferio, pedido del autor: «sería IMSS e ISSSTE»). Lo escribe
+# anclar_salud_estados.py desde la Memoria (cuadros por OOAD) y el registro
+# sectorial de la DGIS; aquí se vuelve a cuadrar antes de leerlo.
+ESTADOS_JSON = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'docs', 'salud', 'imss-issste-estados-2025.json')
+_EST = {}
+
+
+def _estados_doc():
+    if not _EST:
+        x = json.load(open(ESTADOS_JSON, encoding='utf-8'))
+        m, g = x['memoria'], x['dgis']
+        for c in m['campos']:
+            if sum(v[c] for v in m['ent'].values()) != m['total'][c]:
+                raise SystemExit('gestion_salud: las entidades del IMSS no suman el total de su cuadro (%s)' % c)
+        for cap in ('II', 'IV', 'XIII'):
+            if m['archivos'][cap]['sha256'] != MEM[cap]['sha256']:
+                raise SystemExit('gestion_salud: las cifras por estado no salen de la Memoria que coteja este módulo (%s)' % cap)
+        if m['total']['ads'] != ADSCRITA[1]:
+            raise SystemExit('gestion_salud: la población adscrita por estado no suma la nacional')
+        for k, n in g['establecimientos'].items():
+            if sum(v['u'] for v in g['ent'][k].values()) != n:
+                raise SystemExit('gestion_salud: la DGIS no trae los %d establecimientos de su nota de cierre (%s)' % (n, k))
+        if len(m['ent']) != 32 or len(g['ent']['imss']) != 32 or len(g['ent']['issste']) != 32:
+            raise SystemExit('gestion_salud: faltan entidades en las cifras de salud por estado')
+        _EST.update(x)
+    return _EST
+
+
+def fuente_memoria(cuadros):
+    return {'tx': 'IMSS, Memoria Estadística 2025, %s (por OOAD; las de la Ciudad de México, el Estado de México y Veracruz se suman)' % cuadros, 'url': MEMORIA}
+
+
+def fuente_dgis():
+    g = _estados_doc()['dgis']
+    return {'tx': g['tx'], 'url': g['url'], 'sha256': g['sha256']}
+
+
+def salud_estados(d):
+    """Para el Planisferio y el chat: {entidad: {ads, con, esp, urg, egr, iq,
+    cam, camc, cons, quir (IMSS, Memoria 2025), conx consultas por persona
+    adscrita, camk camas censables por cada 1,000 adscritos, iqk cirugías
+    por cada 1,000 adscritos (derivado), im y is: {u, cam, med, enf, cons}
+    del IMSS y del ISSSTE en el registro de la DGIS, y ooad: las dos OOAD de
+    la entidad, si tiene dos}}."""
+    x = _estados_doc()
+    m, g = x['memoria'], x['dgis']
+    ab = [e['abbr'] for e in d['estados']]
+    if sorted(ab) != sorted(m['ent']):
+        raise SystemExit('gestion_salud: las entidades de la base no son las de las cifras de salud')
+    out = {}
+    for a in ab:
+        r = dict(m['ent'][a])
+        r.update({'conx': round(r['con'] / r['ads'], 2), 'camk': round(1000.0 * r['camc'] / r['ads'], 2), 'iqk': round(1000.0 * r['iq'] / r['ads'], 1),
+                  'im': g['ent']['imss'][a], 'is': g['ent']['issste'][a]})
+        if a in m['ooad']:
+            r['ooad'] = [(n, m['porOoad'][n]) for n in m['ooad'][a]]
+        out[a] = r
+    return out
+
+
+def _chat_estados(d):
+    """Lo que el chat necesita para contestar «¿cuántos médicos tiene el
+    ISSSTE en Jalisco?»: [a, ads, con, esp, urg, egr, iq, camc, conx, camk,
+    im[u, cam, med, enf], is[u, cam, med, enf], ooad]."""
+    se = salud_estados(d)
+    return [[a, r['ads'], r['con'], r['esp'], r['urg'], r['egr'], r['iq'], r['camc'], r['conx'], r['camk'],
+             [r['im'][k] for k in ('u', 'cam', 'med', 'enf')], [r['is'][k] for k in ('u', 'cam', 'med', 'enf')],
+             [n for n, _ in r.get('ooad', [])]] for a, r in se.items()]
 
 
 def _o(que, fu, op=None, e=None):
@@ -269,11 +342,82 @@ def salud(d):
         'fu': [_o('Gasto ejercido del ISSSTE en 2025', CP), PEND_ISSSTE],
         'ci': [{'v': _mdp(cp_issste * 1e6), 'etq': 'ejerció el ISSSTE en 2025', 'e': 'oficial'}],
         'sug': ['¿Cuánto gasta el IMSS en salud?', '¿Qué pasó con el Seguro Popular?']}
+    t['estados'] = _tema_estados(d)
     assert sorted(t) == sorted(PAGINA_DE)
     for k, x in t.items():
         x['ir'] = [PAGINA_DE[k][0] + '#' + PRE + k, PAGINA_DE[k][1]]
         x['aqui'] = x['ir']
-    return {'t': t, 'pag': [PORTADA, PORTADA_TIT]}
+    return {'t': t, 'pag': [PORTADA, PORTADA_TIT], 'est': _chat_estados(d)}
+
+
+def _tema_estados(d):
+    """El IMSS y el ISSSTE en cada estado: lo que dice cada documento y lo que
+    no se puede decir con él. Las cifras se calculan aquí, no se escriben."""
+    se = salud_estados(d)
+    nom = {e['abbr']: e['name'] for e in d['estados']}
+    g = _estados_doc()['dgis']
+    o = sorted(se, key=lambda a: se[a]['camk'])
+    c = sorted(se, key=lambda a: se[a]['conx'])
+    tm = sum(r['is']['med'] for r in se.values())
+    ti = sum(r['im']['med'] for r in se.values())
+    top = max(se, key=lambda a: se[a]['is']['med'])
+    nac_k = 1000.0 * sum(r['camc'] for r in se.values()) / ADSCRITA[1]
+    h = ('<p>El mapa de la salud pública tiene <b>dos instituciones y dos documentos</b>. Del <b>IMSS</b>, su Memoria Estadística 2025 dice, estado por estado, '
+         'cuántas personas tiene adscritas a una clínica familiar, cuántas consultas y cirugías dio y con cuántas camas. Del <b>ISSSTE</b> solo se puede decir con qué cuenta '
+         '(unidades, camas, médicos y enfermería) y se toma del registro sectorial de la Secretaría de Salud (DGIS), porque su anuario estadístico no responde: '
+         '<b>cuántas personas atiende en cada estado y qué les resolvió sigue pendiente</b> %s.</p>'
+         '<p>Lo que pocos dicen: <b>no en todos los estados el IMSS tiene la misma cama para cada quien</b>. Por cada mil personas adscritas, %s tiene %s camas de hospitalización '
+         'y %s, %s (en el país, %s). En consultas pasa igual: %s dio %s por persona adscrita en 2025 y %s, %s.</p>'
+         '<p>Y en el ISSSTE, <b>%s de cada 100 médicos</b> que reporta están en %s (%s de %s). En el mismo registro, el IMSS reporta %s médicos y el ISSSTE %s: '
+         'por cada médico del ISSSTE hay %s del IMSS.</p>'
+         '<p class="pa-chico">Ojo con tres cosas. Uno: los hospitales de alta especialidad del IMSS se cuentan en el estado donde están, y ahí llega gente de otros estados; '
+         'por eso la Ciudad de México sale arriba. Dos: desde 2025 el IMSS del registro de la DGIS incluye las unidades rurales del antiguo programa IMSS-Bienestar, mientras que la Memoria advierte '
+         'que sus servicios no incluyen lo que se dio al IMSS-Bienestar; por eso las dos fuentes no se mezclan. Tres: %s establecimientos del IMSS y %s del ISSSTE no le reportaron personal a la DGIS, así que sus médicos y su enfermería se quedan cortos.</p>') % (
+        _chip('pendiente', 'salud-issste-servicios'),
+        html.escape(nom[o[-1]]), format(se[o[-1]]['camk'], '.2f'), html.escape(nom[o[0]]), format(se[o[0]]['camk'], '.2f'), format(nac_k, '.2f'),
+        html.escape(nom[c[-1]]), format(se[c[-1]]['conx'], '.2f'), html.escape(nom[c[0]]), format(se[c[0]]['conx'], '.2f'),
+        _n(100.0 * se[top]['is']['med'] / tm), html.escape(nom[top]), _n(se[top]['is']['med']), _n(tm), _n(ti), _n(tm), format(ti / tm, '.1f'),
+        _n(g['sinPersonal']['imss']), _n(g['sinPersonal']['issste']))
+    fm = fuente_memoria('cuadros II.10, IV.3, IV.5 y XIII.11')
+    fd = fuente_dgis()
+    return {
+        'tit': 'El IMSS y el ISSSTE en cada estado',
+        'h': h,
+        'fu': [_o('Población adscrita, consultas, egresos, intervenciones quirúrgicas y camas del IMSS por estado, 2025', fm),
+               _o('Unidades, camas de hospitalización, médicos y enfermería del IMSS y del ISSSTE por estado, 2025', fd),
+               _o('Camas censables por cada mil personas adscritas y consultas por persona adscrita', fm,
+                  'camas censables ÷ población adscrita × 1,000; consultas ÷ población adscrita'),
+               _o('Médicos del ISSSTE en un estado, de cada 100, y médicos del IMSS por cada uno del ISSSTE', fd,
+                  'médicos del estado ÷ médicos del ISSSTE en el país × 100; médicos del IMSS ÷ médicos del ISSSTE, los dos del mismo registro'),
+               PEND_ISSSTE],
+        'ci': [{'v': format(se[o[-1]]['camk'], '.2f') + ' y ' + format(se[o[0]]['camk'], '.2f'),
+                'etq': 'camas del IMSS por cada mil personas adscritas en %s y en %s' % (nom[o[-1]], nom[o[0]]), 'e': 'derivado'},
+               {'v': _n(tm), 'etq': 'médicos del ISSSTE en el registro de la DGIS (2025)', 'e': 'oficial'},
+               {'v': _n(100.0 * se[top]['is']['med'] / tm) + ' de cada 100', 'etq': 'médicos del ISSSTE que están en %s' % nom[top], 'e': 'derivado'}],
+        'sug': ['¿Cuántos médicos tiene el ISSSTE en Jalisco?', '¿Qué estado tiene menos camas del IMSS?', '¿Cuántas consultas dio el IMSS en 2025?']}
+
+
+def tabla_estados(d):
+    """La tabla de los 32 estados, para la página de Datos."""
+    se = salud_estados(d)
+    nom = {e['abbr']: e['name'] for e in d['estados']}
+    filas = ''.join('<tr><th scope="row">%s</th><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (
+        html.escape(nom[a]) + (' <small>(%s)</small>' % ' + '.join(n for n, _ in r['ooad']) if 'ooad' in r else ''),
+        _n(r['ads']), _n(r['con']), format(r['conx'], '.2f'), _n(r['iq']), format(r['camk'], '.2f'), _n(r['is']['med']), _n(r['is']['cam']))
+        for a, r in sorted(se.items(), key=lambda x: nom[x[0]]))
+    m = _estados_doc()['memoria']['total']
+    tm = sum(r['is']['med'] for r in se.values())
+    tc = sum(r['is']['cam'] for r in se.values())
+    return ('<div class="leg-tabla-caja"><table class="leg-tabla"><caption>El IMSS y el ISSSTE en cada estado, 2025</caption>'
+            '<thead><tr><th scope="col">Estado</th><th scope="col">IMSS: personas adscritas %s</th><th scope="col">IMSS: consultas %s</th>'
+            '<th scope="col">Consultas por persona %s</th><th scope="col">IMSS: cirugías %s</th><th scope="col">Camas por cada mil %s</th>'
+            '<th scope="col">ISSSTE: médicos %s</th><th scope="col">ISSSTE: camas %s</th></tr></thead><tbody>%s</tbody>'
+            '<tfoot><tr><th scope="row">Nacional</th><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr></tfoot></table></div>'
+            '<p class="pa-chico">IMSS: Memoria Estadística 2025, cuadros II.10, IV.3, IV.5 (intervenciones quirúrgicas) y XIII.11 (camas censables), por OOAD; '
+            'en la Ciudad de México, el Estado de México y Veracruz la suma de sus dos OOAD es nuestra. ISSSTE: registro sectorial de la DGIS 2025 '
+            '(médicos generales, especialistas y odontólogos; camas del área de hospitalización). Las divisiones son nuestras.</p>') % (
+        _chip('oficial'), _chip('oficial'), _chip('derivado'), _chip('oficial'), _chip('derivado'), _chip('oficial'), _chip('oficial'), filas,
+        _n(m['ads']), _n(m['con']), format(m['con'] / m['ads'], '.2f'), _n(m['iq']), format(1000.0 * m['camc'] / m['ads'], '.2f'), _n(tm), _n(tc))
 
 
 def secciones(d, temas):
@@ -298,6 +442,8 @@ def secciones(d, temas):
             extra = ('<div class="leg-tabla-caja"><table class="leg-tabla"><caption>Recursos del IMSS %s</caption>'
                      '<thead><tr><th scope="col">Recurso</th><th scope="col">2025</th><th scope="col">Contra 2018 %s</th><th scope="col">2018</th></tr></thead>'
                      '<tbody>%s</tbody></table></div>') % (_chip('oficial'), _chip('derivado'), filas)
+        elif k == 'estados':
+            extra = tabla_estados(d)
         elif k == 'imss_cotejo':
             filas = ''.join('<li><b>%s</b> → <b>%s</b>. %s</li>' % (html.escape(a), html.escape(r), html.escape(e)) for a, r, e in COTEJO)
             extra = ('<h3>El boletín 023/2026 contra la Memoria Estadística 2025</h3><ul class="pa-lista">%s</ul>'

@@ -1,0 +1,290 @@
+/* Auditavisión · Planisferio (02-11-2026). Las páginas las escribe
+   herramientas/planisferio.py; planisferio.js mueve el mapa, los contadores
+   y la tabla de municipios. Sin cifras aquí. */
+.pl-conts { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.pl-conts-1 { grid-template-columns: minmax(0, 560px); }
+.pl-cont { background: #fff; border: 1px solid var(--civ-gris-borde, #dfe5f0); border-top: 4px solid #c9a84c; border-radius: 16px; padding: 16px; color: #2a3a57; }
+.pl-cont-n { margin: 0 0 6px; font-weight: 800; color: #0b2a63; font-size: 16px; }
+.pl-cont-v { margin: 0 0 6px; }
+.pl-cont-v b { font-size: 22px; color: #0b2a63; }
+.pl-cont-s, .pl-cont-vivo { margin: 0 0 4px; font-size: 15px; }
+.pl-cont-vivo b { color: #8a6d1f; }
+.pl-cont-que { margin: 8px 0 4px; font-size: 15px; line-height: 1.5; }
+.pl-cont-f { margin: 0; font-size: 13px; line-height: 1.5; color: #5a6782; }
+
+.pl-dims { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 12px; }
+.pl-dim { display: inline-grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 8px; min-height: 48px; padding: 8px 14px; border-radius: 14px; border: 1px solid #c7d1e3; background: #fff; color: #0b2a63; font: inherit; font-weight: 700; cursor: pointer; text-align: left; }
+.pl-dim small { display: block; font-weight: 600; font-size: 12px; color: #5a6782; }
+.pl-dim-n { display: block; font-size: 16px; }
+.pl-dim[aria-selected="true"] { background: #0b2a63; border-color: #0b2a63; color: #fff; }
+.pl-dim[aria-selected="true"] small { color: #dfe7f6; }
+.pl-dim-prox { border-style: dashed; }
+.pl-dim-ico { font-size: 20px; grid-row: span 2; }
+.pl-dim-aviso { margin: 0 0 12px; padding: 12px 14px; border-radius: 12px; background: #fff8e6; border: 1px solid #f0d98f; font-size: 15px; line-height: 1.5; color: #4a3a0c; }
+.pl-dim-aviso a { color: #0b2a63; font-weight: 700; }
+
+.pl-lentes { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 10px; }
+.pl-lente { min-height: 44px; padding: 8px 14px; border-radius: 999px; border: 1px solid #c7d1e3; background: #fff; color: #0b2a63; font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; }
+.pl-lente[aria-checked="true"] { background: #0b2a63; border-color: #0b2a63; color: #fff; }
+.pl-que { margin: 0 0 12px; font-size: 16px; line-height: 1.55; color: #33415c; }
+.pl-rej { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 18px; align-items: start; }
+.pl-fig { margin: 0; }
+.pl-svg { display: block; width: 100%; height: auto; }
+.pl-edo { stroke: #fff; stroke-width: .8; cursor: pointer; transition: fill .35s ease; }
+.pl-edo:hover, .pl-edo:focus-visible { stroke: #0b2a63; stroke-width: 1.8; outline: none; }
+.pl-edo.sel { stroke: #b3261e; stroke-width: 2.6; }
+.pl-mun { stroke: #fff; stroke-width: .6; cursor: pointer; transition: fill .35s ease; vector-effect: non-scaling-stroke; }
+.pl-mun:hover, .pl-mun:focus-visible { stroke: #0b2a63; stroke-width: 1.6; outline: none; }
+.pl-mun.sel { stroke: #b3261e; stroke-width: 2.4; }
+.pl-svg-mun { max-height: 640px; }
+.pl-tabla tr.sel th, .pl-tabla tr.sel td { background: #fff3d6; }
+.pl-th-ir { cursor: pointer; color: #0b2a63; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.pl-leyenda { display: grid; gap: 6px; margin-top: 10px; font-size: 14px; color: #33415c; }
+.pl-ley-tit { font-weight: 800; color: #0b2a63; }
+.pl-ley-cls { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.pl-ley-cls span { display: inline-flex; align-items: center; gap: 6px; font-variant-numeric: tabular-nums; }
+.pl-ley-cls i { width: 22px; height: 12px; border-radius: 3px; border: 1px solid rgba(11,42,99,.15); }
+.pl-ficha { padding: 16px; border-radius: 14px; background: #f7f9fd; border-top: 4px solid #0b2a63; font-size: 15px; color: #2a3a57; position: sticky; top: 12px; }
+.pl-ficha h3 { margin: 0 0 4px; font-size: 21px; color: #0b2a63; }
+.pl-ficha-sub, .pl-ficha-mun, .pl-ficha-pista { margin: 0 0 10px; font-size: 14px; color: #5a6782; }
+.pl-ficha-dl { display: grid; gap: 4px; margin: 0 0 10px; }
+.pl-ficha-dl dt { font: 700 12px/1.3 var(--font-mono, monospace); text-transform: uppercase; letter-spacing: .05em; color: #5a6782; }
+.pl-ficha-dl dd { margin: 0 0 6px; font-size: 16px; }
+.pl-ficha-dl dd b { color: #0b2a63; font-size: 18px; }
+.pl-ficha-ir { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 14px; border-radius: 12px; background: #0b2a63; color: #fff; font-weight: 800; text-decoration: none; text-align: center; }
+.pl-ficha-ir:hover, .pl-ficha-ir:focus-visible { background: #16408c; }
+/* Varias puertas juntas (las reglas de cada portal): cada liga es su propio botón. */
+p.pl-ficha-ir { background: none; padding: 0; min-height: 0; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin: 12px 0 0; }
+p.pl-ficha-ir a { flex: 1 1 220px; display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 10px 14px; border-radius: 12px; background: #0b2a63; color: #fff; font-weight: 800; text-decoration: none; text-align: center; }
+p.pl-ficha-ir a:hover, p.pl-ficha-ir a:focus-visible { background: #16408c; }
+.pl-ficha-vacia { margin: 0; line-height: 1.5; }
+.pl-pie { margin: 10px 0 0; font-size: 14px; line-height: 1.55; color: #5a6782; }
+.pl-indice { margin: 18px 0 0; }
+.pl-indice h3 { margin: 0 0 8px; font-size: 17px; color: #0b2a63; }
+.pl-indice ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 4px 12px; }
+.pl-indice a { display: inline-flex; align-items: center; min-height: 44px; color: #0b2a63; font-weight: 600; font-size: 16px; }
+.pl-otras { margin: 0; padding: 0 0 0 4px; list-style: none; display: grid; gap: 10px; }
+.pl-otras li { font-size: 16px; line-height: 1.55; }
+.pl-otras a { font-weight: 700; color: #0b2a63; }
+
+.pl-ent-datos { margin: 0 0 14px; font-size: 16px; color: #33415c; }
+.pl-pisos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+.pl-piso { background: #fff; border: 1px solid var(--civ-gris-borde, #dfe5f0); border-radius: 16px; padding: 16px; border-top: 5px solid #c9a84c; font-size: 15px; line-height: 1.5; color: #2a3a57; }
+.pl-piso-est { border-top-color: #2f5fa8; }
+.pl-piso-mun { border-top-color: #2e8a4c; }
+.pl-piso-cua { border-top-color: #b3261e; }
+.pl-piso-n { margin: 0 0 6px; font-weight: 800; color: #0b2a63; font-size: 16px; }
+.pl-piso-v { margin: 0 0 10px; }
+.pl-piso-v b { font-size: 24px; color: #0b2a63; }
+.pl-dl { display: grid; gap: 2px; margin: 0 0 10px; }
+.pl-dl dt { font-weight: 700; font-size: 14px; color: #5a6782; }
+.pl-dl dd { margin: 0 0 6px; font-variant-numeric: tabular-nums; }
+.pl-dl small { display: block; color: #5a6782; font-size: 13px; }
+.pl-piso-f { margin: 0; font-size: 13px; color: #5a6782; }
+
+.pl-mun-mandos { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 12px; }
+.pl-sel { display: grid; gap: 4px; font-weight: 700; font-size: 14px; color: #0b2a63; }
+.pl-sel input, .pl-sel select { min-height: 44px; padding: 8px 12px; border: 1px solid #c7d1e3; border-radius: 10px; font: inherit; font-size: 16px; background: #fff; }
+.pl-tabla-caja { overflow-x: auto; border: 1px solid var(--civ-gris-borde, #dfe5f0); border-radius: 12px; }
+.pl-tabla { width: 100%; border-collapse: collapse; font-size: 15px; font-variant-numeric: tabular-nums; }
+.pl-tabla caption { text-align: left; padding: 10px 12px; font-weight: 700; color: #0b2a63; }
+.pl-tabla th, .pl-tabla td { padding: 8px 12px; border-top: 1px solid #eef2f8; text-align: right; white-space: nowrap; }
+.pl-tabla th[scope="row"], .pl-tabla thead th:first-child { text-align: left; white-space: normal; }
+.pl-tabla thead th { background: #f2f5fa; color: #0b2a63; font-size: 14px; }
+.pl-tabla td.pl-sin { text-align: left; color: #5a6782; }
+.pl-puertas { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.pl-puerta { display: flex; gap: 10px; align-items: flex-start; min-height: 44px; padding: 14px; border-radius: 14px; border: 1px solid #c7d1e3; background: #fff; color: #0b2a63; text-decoration: none; }
+.pl-puerta > span:first-child { font-size: 22px; }
+.pl-puerta b { display: block; font-size: 16px; }
+.pl-puerta small { display: block; font-size: 14px; line-height: 1.45; color: #5a6782; }
+.pl-puerta:hover, .pl-puerta:focus-visible { border-color: #0b2a63; background: #f7f9fd; }
+.pl-saltos { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; margin: 18px 0 0; }
+.pl-saltos a { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 14px; border-radius: 12px; background: #f2f5fa; color: #0b2a63; font-weight: 700; text-decoration: none; }
+
+@media (max-width: 860px) {
+  .pl-rej { grid-template-columns: 1fr; }
+  .pl-ficha { position: static; }
+}
+@media (max-width: 640px) {
+  .pl-cont-v b { font-size: 20px; }
+  .pl-cont-f, .pl-piso-f { font-size: 14px; }
+}
+
+/* La dimensión de la deuda (03-11-2026). */
+.pl-piso-deuda { border-top-color: #b3261e; }
+.pl-piso-inv { border-top-color: #2e8a4c; }
+.pl-piso-asf { border-top-color: #e06f60; }
+.pl-piso-leg { border-top-color: #2f5fa8; }
+.pl-piso-jud { border-top-color: #6b4c9a; }
+.pl-piso-sal { border-top-color: #1f7a8c; }
+.pl-piso-iss { border-top-color: #a8801f; }
+.pl-piso-fed { border-top-color: #5b5f97; }
+.pl-piso-ape { border-top-color: #4a5a6a; }
+.pl-piso-apm { border-top-color: #a8801f; }
+/* Las reglas de su deuda y sus leyes del dinero (03-11-2026). */
+.pl-reglas { margin: 18px 0 0; padding: 14px 16px; border-left: 4px solid #b3261e; background: var(--bg-card, transparent); }
+.pl-reglas ul, .leg-niveles { margin: 8px 0 0; padding-left: 20px; }
+.pl-reglas li, .leg-niveles li { margin: 0 0 8px; line-height: 1.5; }
+.pl-piso-amb { border-top-color: #8a5a1c; }
+.pl-sectores { list-style: none; padding: 0; display: grid; gap: .6rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.pl-reglas .pl-sectores { padding-left: 0; }
+.pl-sectores li { border: 1px solid var(--civ-gris-borde, #dfe5f0); border-radius: 12px; padding: 10px 12px; margin: 0; }
+.pl-ind { fill: #8a5a1c; stroke: #fff; stroke-width: 1.5; cursor: pointer; }
+.pl-ind:focus, .pl-ind:hover { fill: #b3261e; }
+
+/* Las dimensiones como pestañas (decisión del autor, 03-11-2026): una tira
+   que se desliza en el celular; lo que era párrafo vive en la ventana lateral. */
+.pl-dims { flex-wrap: nowrap; gap: 4px; overflow-x: auto; margin: 0 0 14px; padding: 0 0 0 2px; border-bottom: 3px solid #0b2a63; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+.pl-dim { flex: 0 0 auto; min-height: 48px; border-radius: 12px 12px 0 0; border-bottom: 0; background: #eef2f9; }
+.pl-dim:hover { background: #dfe7f6; }
+.pl-dim[aria-selected="true"]:hover { background: #0b2a63; }
+.pl-dim:focus-visible { outline: 3px solid #c9a84c; outline-offset: -3px; }
+.pl-cajones { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+.pl-caj-b, .pl-cont-b, .pl-cuenta-b { min-height: 44px; padding: 8px 14px; border-radius: 999px; border: 1px solid #c7d1e3; background: #fff; color: #0b2a63; font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; }
+.pl-caj-b:hover, .pl-cont-b:hover, .pl-cuenta-b:hover { border-color: #0b2a63; background: #eef2f9; }
+.pl-caj-ojo { border-color: #f2b3aa; background: #fdf1ef; color: #4a1a14; }
+.pl-caj-b[hidden] { display: none; }
+.pl-cont-b { margin-top: 10px; width: 100%; }
+.pl-cuenta-b { display: block; width: 100%; margin: 16px 0 0; min-height: 52px; border-radius: 14px; background: #0b2a63; border-color: #0b2a63; color: #fff; font-size: 16px; }
+.pl-cuenta-b:hover { background: #12397f; }
+.pl-cuentas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.pl-cuentas .pl-cuenta-otra { flex: 1 1 240px; min-height: 52px; border-radius: 14px; font-size: 16px; }
+.pl-cuentas .pl-cuenta-b { margin: 0; }
+.glos-drawer .rd-hoy { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.pl-des { list-style: none; margin: 0 0 10px; padding: 0; display: grid; gap: 6px; }
+.pl-des li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 10px; padding: 8px 0; border-bottom: 1px solid #e3e8f1; font-size: 15px; line-height: 1.45; }
+.pl-des li b { white-space: nowrap; }
+.pl-des-l { margin: 0 0 10px; padding-left: 20px; font-size: 15px; line-height: 1.55; }
+.glos-drawer .np3-rej { grid-template-columns: minmax(0, 1fr); }
+.pl-cont { display: flex; flex-direction: column; }
+.pl-cont-b { margin-top: auto; }
+.pl-cont-f { margin-bottom: 10px; }
+/* Rediseño del 03-11-2026: el mapa primero. Las 32 entidades abren en la
+   ventana lateral, y lo de la dimensión financiera va debajo del mapa. */
+.pl-indice-b { margin: 16px 0 0; }
+.pl-indice-btn { min-height: 52px; }
+.glos-drawer .pl-indice ul { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.pl-fin { margin: 28px 0 0; padding-top: 20px; border-top: 2px solid #d5dae3; }
+.pl-fin[hidden] { display: none; }
+.pl-fin-tit { margin: 0 0 6px; font-size: 22px; color: #0b2a63; }
+.pl-fin-sub { margin: 0 0 14px; }
+.pl-fin-mod { margin: 24px 0 0; padding: 18px 16px; border: 1px solid #d5dae3; border-radius: 16px; background: var(--bg-card, transparent); }
+.pl-fin-mod h3 { margin: 0 0 4px; font-size: 20px; color: #0b2a63; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pl-fin-tit, :root:not([data-theme="light"]) .pl-fin-mod h3 { color: #c9d8f2; } }
+:root[data-theme="dark"] .pl-fin-tit, :root[data-theme="dark"] .pl-fin-mod h3 { color: #c9d8f2; }
+
+/* Los vínculos al Contexto dimensional y al estado de resultados (04-11-2026). */
+.pl-ctx { text-decoration: none; }
+.pl-ctx-l { margin: 14px 0 0; line-height: 1.9; }
+.pl-ctx-l a { margin-right: 10px; }
+.pl-sub-tit { margin: 22px 0 8px; }
+
+/* Rediseño del 04-11-2026 (pedido del autor: «nuestro protagonista debe ser
+   nuestro mapa interactivo»). */
+
+/* El encabezado: el paisaje al frente y la persona que lo mira, en sombra (la
+   foto en su sentido original, pedido del autor: la persona a la izquierda,
+   bajo el texto, y el valle a la derecha). Se oscurece por la izquierda hacia
+   el azul de la noche; en celular el velo es parejo y deja ver el valle abajo. */
+.herr-cab.rubro-planisferio { --tarjeta: #c9a84c; padding: 30px 0 56px; min-height: 380px; }
+.herr-cab.rubro-planisferio::before {
+  background: #0d1f2b url('../img/planisferio-paisaje.webp') 30% 18% / cover no-repeat;
+}
+.herr-cab.rubro-planisferio::after {
+  background:
+    linear-gradient(90deg, rgba(9, 24, 38, 0.9) 0%, rgba(9, 24, 38, 0.78) 30%, rgba(9, 24, 38, 0.5) 45%, rgba(9, 24, 38, 0.08) 62%, rgba(9, 24, 38, 0) 75%),
+    linear-gradient(0deg, rgba(9, 24, 38, 0.55) 0%, rgba(9, 24, 38, 0) 35%);
+}
+.herr-cab.rubro-planisferio .apartado-ancho > * { max-width: 620px; }
+.herr-cab.rubro-planisferio .apartado-migas { max-width: none; }
+.herr-cab.rubro-planisferio .apartado-lema { background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.4); }
+.herr-cab.rubro-planisferio .apartado-titulo { text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45); }
+@media (max-width: 700px) {
+  .herr-cab.rubro-planisferio { min-height: 0; padding-bottom: 120px; }
+  .herr-cab.rubro-planisferio::before { background-image: url('../img/planisferio-paisaje-movil.webp'); background-position: 72% 64%; }
+  .herr-cab.rubro-planisferio::after { background: linear-gradient(180deg, rgba(9, 24, 38, 0.93) 0%, rgba(9, 24, 38, 0.85) 62%, rgba(9, 24, 38, 0.2) 100%); }
+}
+
+/* El color de cada dimensión: el de su mosaico y el de su tablero. */
+.pl-dim[data-dim="financiera"], .pl-tablero[data-dim="financiera"] { --dim: #a8801f; }
+.pl-dim[data-dim="deuda"], .pl-tablero[data-dim="deuda"] { --dim: #b3261e; }
+.pl-dim[data-dim="inversion"], .pl-tablero[data-dim="inversion"] { --dim: #2f5fa8; }
+.pl-dim[data-dim="ambiental"], .pl-tablero[data-dim="ambiental"] { --dim: #2e8a4c; }
+.pl-dim[data-dim="legislativa"], .pl-tablero[data-dim="legislativa"] { --dim: #4b4f8f; }
+.pl-dim[data-dim="judicial"], .pl-tablero[data-dim="judicial"] { --dim: #8f6334; }
+.pl-dim[data-dim="salud"], .pl-tablero[data-dim="salud"] { --dim: #d2661a; }
+.pl-dim[data-dim="social"], .pl-tablero[data-dim="social"] { --dim: #b8327f; }
+/* Administración pública: gris pizarra (elegido por el autor, 04-11-2026). Más oscuro que el gris claro
+   de «sin cifra» del mapa (#d5dae3), para no confundirse con él; en modo oscuro su título se aclara. */
+.pl-dim[data-dim="administracion"], .pl-tablero[data-dim="administracion"] { --dim: #4a5a6a; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pl-tablero[data-dim="administracion"] .pl-tab-tit { color: #b4c0cc; } }
+:root[data-theme="dark"] .pl-tablero[data-dim="administracion"] .pl-tab-tit { color: #b4c0cc; }
+
+/* Cómo se juega, en tres pasos. */
+.pl-pasos { list-style: none; margin: 0 0 18px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; counter-reset: none; }
+.pl-pasos li { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: #f2f5fa; color: #0b2a63; }
+.pl-pasos b { flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #0b2a63; color: #fff; font-size: 17px; }
+.pl-pasos strong { display: block; font-size: 16px; }
+.pl-pasos small { display: block; font-size: 14px; color: #4a5875; line-height: 1.35; }
+
+/* El mosaico de las nueve dimensiones (reemplaza la tira de pestañas, que en
+   pantalla ancha cortaba la última). */
+.pl-dims { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 8px; overflow: visible; margin: 0 0 16px; padding: 0; border-bottom: 0; }
+.pl-dim { --dim: #0b2a63; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 4px; min-height: 96px; padding: 12px 6px 10px; border-radius: 14px; border: 1px solid #d5dce8; border-top: 4px solid var(--dim); background: #fff; color: #0b2a63; text-align: center; transition: transform .15s ease, box-shadow .15s ease, background .15s ease; }
+.pl-dim:hover { background: #f7f9fd; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(11, 42, 99, 0.12); }
+.pl-dim-ico { grid-row: auto; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: color-mix(in srgb, var(--dim) 14%, #fff); color: var(--dim); font-size: 20px; }
+.pl-dim-n { font-size: 15px; line-height: 1.2; }
+.pl-dim small { font-size: 12px; font-weight: 600; color: #5a6782; }
+.pl-dim[aria-selected="true"], .pl-dim[aria-selected="true"]:hover { background: var(--dim); border-color: var(--dim); color: #fff; box-shadow: 0 8px 20px color-mix(in srgb, var(--dim) 35%, transparent); }
+.pl-dim[aria-selected="true"] .pl-dim-ico { background: rgba(255, 255, 255, 0.22); color: #fff; }
+.pl-dim[aria-selected="true"] small { color: rgba(255, 255, 255, 0.86); }
+.pl-dim:focus-visible { outline: 3px solid #c9a84c; outline-offset: 2px; }
+
+/* El tablero: el mapa, protagonista, en su marco del color de la dimensión. */
+.pl-tablero { --dim: #0b2a63; margin: 0; padding: 18px 18px 16px; border-radius: 20px; border: 1px solid #d5dce8; border-top: 6px solid var(--dim); background: #fff; box-shadow: 0 10px 30px rgba(11, 42, 99, 0.08); transition: border-color .3s ease; }
+.pl-tab-cab { margin: 0 0 12px; }
+.pl-tab-tit { margin: 0 0 4px; font-size: 24px; color: var(--dim); }
+.pl-tab-q { margin: 0; font-size: 16px; line-height: 1.5; color: #33415c; max-width: 72ch; }
+.pl-tablero .pl-rej { grid-template-columns: minmax(0, 1fr) 300px; }
+.pl-tablero .pl-ficha { border-top-color: var(--dim); }
+.pl-tablero .pl-lente[aria-checked="true"] { background: var(--dim); border-color: var(--dim); }
+.pl-tab-pie { margin: 16px 0 0; padding: 14px 0 0; border-top: 1px dashed #d5dce8; }
+.pl-tab-pie-t { margin: 0 0 8px; font: 700 12px/1.3 var(--font-mono, monospace); text-transform: uppercase; letter-spacing: .06em; color: #5a6782; }
+.pl-tab-pie .pl-cajones { margin: 0; }
+.pl-tab-pie .pl-indice-b { margin: 12px 0 0; }
+.pl-tab-pie .pl-indice-btn { width: 100%; background: #0b2a63; border-color: #0b2a63; color: #fff; font-size: 16px; }
+.pl-tab-pie .pl-indice-btn:hover { background: #16408c; }
+
+/* Lo de la dimensión financiera, en pestañas: una hoja a la vez. */
+.pl-cuaderno { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.pl-hoja-b { min-height: 48px; padding: 8px 16px; border-radius: 999px; border: 1px solid #c7d1e3; background: #fff; color: #0b2a63; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; }
+.pl-hoja-b:hover { border-color: #0b2a63; background: #eef2f9; }
+.pl-hoja-b[aria-selected="true"] { background: #a8801f; border-color: #a8801f; color: #fff; }
+.pl-hoja-b:focus-visible { outline: 3px solid #c9a84c; outline-offset: 2px; }
+.pl-hoja[hidden] { display: none; }
+.pl-hoja > .pl-fin-mod { margin-top: 0; }
+
+@media (max-width: 1100px) {
+  .pl-dims { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+@media (max-width: 860px) {
+  .pl-tablero .pl-rej { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .pl-pasos { grid-template-columns: 1fr; gap: 6px; }
+  .pl-pasos li { padding: 8px 12px; }
+  .pl-dims { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .pl-dim { min-height: 88px; padding: 10px 4px 8px; }
+  .pl-dim-n { font-size: 14px; }
+  .pl-tablero { padding: 14px 12px; border-radius: 16px; }
+  .pl-tab-tit { font-size: 21px; }
+}
+@media (prefers-reduced-motion: reduce) { .pl-dim { transition: none; } .pl-dim:hover { transform: none; } }
+
+/* Modo oscuro: el tablero y el mosaico sobre el fondo de la página. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .pl-tablero, :root:not([data-theme="light"]) .pl-dim:not([aria-selected="true"]), :root:not([data-theme="light"]) .pl-pasos li { background: var(--bg-card, #14213a); border-color: #2b3a57; color: #dfe7f6; }
+  :root:not([data-theme="light"]) .pl-tab-q, :root:not([data-theme="light"]) .pl-pasos small { color: #c3cde0; }
+}
+:root[data-theme="dark"] .pl-tablero, :root[data-theme="dark"] .pl-dim:not([aria-selected="true"]), :root[data-theme="dark"] .pl-pasos li { background: var(--bg-card, #14213a); border-color: #2b3a57; color: #dfe7f6; }
+:root[data-theme="dark"] .pl-tab-q, :root[data-theme="dark"] .pl-pasos small { color: #c3cde0; }
