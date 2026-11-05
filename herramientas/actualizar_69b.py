@@ -57,8 +57,10 @@ def leer(ruta):
         return r.read()
 
 
-def main():
-    raw = leer(sys.argv[1] if len(sys.argv) > 1 else None)
+def registros_de(raw):
+    """Lee el CSV del SAT (bytes) y devuelve (registros, cuenta por situación,
+    corte). La usan main() y el vigía de la 69-B (herramientas/vigia_69b.py),
+    para que los dos lean el archivo igual."""
     texto = raw.decode("latin-1")
     filas = list(csv.reader(io.StringIO(texto)))
     corte = re.search(r"actualizada al ([^;]+);", filas[0][0])
@@ -86,12 +88,18 @@ def main():
         registros.append([f[1].strip().upper(), " ".join(f[2].split()), clave, oficio, f[d].strip(), medio,
                           fecha_etapa(f, 4), fecha_etapa(f, 12)])
         cuenta[sit] = cuenta.get(sit, 0) + 1
+    return registros, cuenta, (corte.group(1).strip() if corte else "")
+
+
+def main():
+    raw = leer(sys.argv[1] if len(sys.argv) > 1 else None)
+    registros, cuenta, corte = registros_de(raw)
 
     meta = {
         "fuente": "SAT, Listado completo de contribuyentes (Artículo 69-B del CFF)",
         "url": URL_PAGINA,
         "csv": URL_CSV,
-        "corte": corte.group(1).strip() if corte else "",
+        "corte": corte,
         "descarga": datetime.date.today().isoformat(),
         "sha256": hashlib.sha256(raw).hexdigest(),
         "total": len(registros),

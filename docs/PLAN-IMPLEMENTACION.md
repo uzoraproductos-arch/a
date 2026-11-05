@@ -114,8 +114,8 @@ se construye la etapa 2 tal cual; se ajusta el producto.
 | Paso | Qué | Quién |
 |---|---|---|
 | 0.1 | **Forma jurídica y RFC** (asociación civil o persona física con actividad empresarial). Sin esto no hay factura, ni pasarela, ni donativo con recibo | **Autor**, con un contador |
-| 0.2 | Conectar el formulario de Servicios a la base (la función `recibir-formulario` ya acepta `solicitud`; hoy el formulario solo arma el texto) | Agente |
-| 0.3 | La lista 69-B se baja sola cada semana y deja una bandeja de **altas y cambios** (presunto → definitivo, desvirtuado), con el molde del vigía legislativo | Agente |
+| 0.2 | Conectar el formulario de Servicios a la base (la función `recibir-formulario` ya acepta `solicitud`; hoy el formulario solo arma el texto). **Hecho el 05-11-2026**: manda con folio y antispam, solo si se acepta el aviso | Agente |
+| 0.3 | La lista 69-B se baja sola cada semana y deja una bandeja de **altas y cambios** (presunto → definitivo, desvirtuado), con el molde del vigía legislativo. **Hecho el 05-11-2026**: `vigia_69b.py`, cada miércoles, y también avisa de los cambios de razón social por RFC | Agente |
 | 0.4 | Página de venta del Vigía de proveedores, con un ejemplo **ficticio** | Agente redacta, autor aprueba |
 | 0.5 | Analítica sin cookies, para saber qué páginas se usan | Agente |
 | 0.6 | Fecha para quitar el candado (Google no ve el contenido mientras esté puesto) | **Autor** |
@@ -138,7 +138,7 @@ quiere el cliente sin programar de más.
 
 | Paso | Qué |
 |---|---|
-| 2.1 | Pasar el sitio a un hospedaje que permita cobrar (Vercel Pro, como dice LANZAMIENTO.md; GitHub Pages no es para negocios) y Supabase Pro |
+| 2.1 | Pasar el sitio a un hospedaje que permita cobrar (recomendado: Cloudflare Pages + Supabase Pro; comparación y costos en [FRAUDE-MERCADO-Y-HOSPEDAJE.md](FRAUDE-MERCADO-Y-HOSPEDAJE.md) §4) |
 | 2.2 | Cuentas sin contraseña (liga al correo) y «Mi Auditavisión»: tu cartera de RFC y tus avisos |
 | 2.3 | Avisos por correo cuando la bandeja semanal de la 69-B toca un RFC de tu cartera |
 | 2.4 | Pasarela (tarjeta y OXXO) y CFDI de cada cobro; la liga de donaciones en `CANAL_DONACION` |

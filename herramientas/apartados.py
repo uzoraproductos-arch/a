@@ -1997,9 +1997,24 @@ def servicios():
     campo = lambda i, et, ctl, ayuda='': (
         '            <div class="sv-campo"><label for="%s">%s</label>%s%s</div>'
         % (i, et, ctl, ('<small id="%s-ay">%s</small>' % (i, ayuda)) if ayuda else ''))
+    # Paso 0.2 de docs/PLAN-IMPLEMENTACION.md (05-11-2026): con FUNCIONES
+    # lleno, «Enviar» manda la solicitud a recibir-formulario (tipo
+    # «solicitud»), con el antispam, igual que los formularios de Comunidad
+    # (_form_cm). Como lleva nombre y correo, solo se envía si el lector
+    # acepta el aviso de privacidad.
+    envio, privado, acepta = '', ('🔒 Esta página no guarda ni envía nada por su cuenta: tu solicitud se arma en tu '
+                                  'navegador y tú decides cuándo mandarla.'), ''
+    if FUNCIONES:
+        envio = ' data-funcion="%s/recibir-formulario" data-tipo="solicitud"%s' % (
+            esc_attr(FUNCIONES.rstrip('/')), (' data-turnstile="%s"' % esc_attr(TURNSTILE_SITIO)) if TURNSTILE_SITIO else '')
+        privado = ('🔒 Primero ves tu solicitud tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar» y aceptas el '
+                   '<a href="aviso-de-privacidad.html">aviso de privacidad</a>, porque lleva tu nombre y tu correo para responderte.')
+        acepta = ('          <label class="sv-check"><input type="checkbox" id="svAcepta" data-acepta> Acepto el '
+                  '<a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi solicitud y mi correo '
+                  '(solo hace falta para enviarla).</label>')
     formulario = '\n'.join([
-        '<form class="sv-form" id="svForm" data-canal="%s" novalidate>' % esc_attr(CANAL_SOLICITUD),
-        '          <p class="sv-privado">🔒 Esta página no guarda ni envía nada por su cuenta: tu solicitud se arma en tu navegador y tú decides cuándo mandarla.</p>',
+        '<form class="sv-form" id="svForm" data-canal="%s"%s novalidate>' % (esc_attr(CANAL_SOLICITUD), envio),
+        '          <p class="sv-privado">%s</p>' % privado,
         '          <fieldset class="sv-grupo"><legend>Qué quieres investigar</legend>',
         campo('svServicio', 'Servicio', '<select id="svServicio" name="servicio">\n%s\n                <option value="no-se">No sé, ayúdenme a definirlo</option>\n              </select>' % opciones),
         campo('svTema', 'Tema <span class="sv-req">obligatorio</span>', '<input id="svTema" name="tema" type="text" maxlength="160" required aria-describedby="svTema-ay">',
@@ -2030,6 +2045,7 @@ def servicios():
         '          </fieldset>',
         '          <label class="sv-check"><input type="checkbox" id="svPolitica" required> Leí la <a href="#independencia">política de independencia</a>.</label>',
         '          <label class="sv-check"><input type="checkbox" id="svAlcance" required> Entiendo que es investigación documental y análisis de indicios, no un dictamen pericial ni asesoría legal.</label>',
+        acepta,
         '          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi solicitud</button>'
         '<button type="reset" class="sz-btn">Empezar de nuevo</button></div>',
         '          <p class="sv-error" id="svError" role="alert" hidden></p>',
@@ -2127,7 +2143,9 @@ if FUNCIONES:
                 'nuestra base de datos (Supabase), con: el tipo de mensaje, el asunto, el texto que escribiste, la página desde donde lo '
                 'mandaste, el enlace al documento que citaste, tu correo <b>solo si lo escribes y aceptas este aviso</b>, y una huella '
                 'cifrada de tu conexión (no tu dirección IP) para frenar el spam. Para qué: atender tu reporte, corregir el dato o '
-                'investigar el tema, y responderte. ' + AVISO_CONSERVACION.strip())
+                'investigar el tema, y responderte. En la <b>solicitud de un servicio</b> (página Servicios), tu nombre u organización y tu '
+                'correo van dentro del texto, porque sin ellos no podemos cotizarte: por eso solo se envía si aceptas este aviso. '
+                + AVISO_CONSERVACION.strip())
     AVISO['entrada'] = _cambia(AVISO['entrada'], 'y hoy ningún dato tuyo sale de tu navegador',
                                                 'y solo lo que tú decides enviar sale de tu navegador')
     AVISO['lema'] = 'Qué sabemos de ti: solo lo que tú nos mandas'

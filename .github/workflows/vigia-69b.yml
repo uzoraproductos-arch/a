@@ -1,0 +1,41 @@
+# Vigía de la lista 69-B (paso 0.3 de docs/PLAN-IMPLEMENTACION.md, 05-11-2026):
+# baja el listado completo del SAT, lo compara contra la copia de la plataforma
+# y deja en docs/sat69b/bandeja.json las altas, los cambios de situación y las
+# bajas (herramientas/vigia_69b.py). No escribe en la base: solo propone. Corre
+# cada miércoles a las 9:41 de la Ciudad de México y a mano desde Actions.
+name: Vigía 69-B
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '41 15 * * 3'   # miércoles, 15:41 UTC = 9:41 en la Ciudad de México
+
+permissions:
+  contents: write
+
+jobs:
+  vigia:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/funny-turing-imtm54
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Comparar la lista del SAT
+        run: python herramientas/vigia_69b.py
+      - name: Guardar la bandeja
+        run: |
+          git add -N docs/sat69b/bandeja.json
+          if git diff --quiet -- docs/sat69b/bandeja.json; then
+            echo "Sin cambios."
+            exit 0
+          fi
+          git config user.name "Vigía 69-B"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/sat69b/bandeja.json
+          git commit -m "Vigía 69-B: cambios en la lista del SAT al $(date +%d-%m-%Y)"
+          git pull --rebase origin claude/funny-turing-imtm54
+          git push origin HEAD:claude/funny-turing-imtm54

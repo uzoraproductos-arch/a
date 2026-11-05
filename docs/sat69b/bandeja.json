@@ -1,0 +1,38 @@
+{
+ "que_es": "Lo que cambió en la lista 69-B del SAT frente a la copia de la plataforma. Detecta y propone: nada de aquí entra a la base hasta correr actualizar_69b.py y subir el sello.",
+ "fuente": "SAT, Listado completo de contribuyentes (Artículo 69-B del CFF)",
+ "url": "https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336",
+ "csv": "http://omawww.sat.gob.mx/cifras_sat/Documents/Listado_Completo_69-B.csv",
+ "plataforma": {
+  "corte": "31 de diciembre de 2025",
+  "sha256": "54b95d41c9ca0ea1296f2885d1234e58a562620e76ac2437d2521fc2bbf36685",
+  "total": 14234
+ },
+ "sat": {
+  "corte": "31 de diciembre de 2025",
+  "sha256": "54b95d41c9ca0ea1296f2885d1234e58a562620e76ac2437d2521fc2bbf36685",
+  "total": 14234,
+  "porSituacion": {
+   "Sentencia Favorable": 1638,
+   "Desvirtuado": 340,
+   "Definitivo": 11270,
+   "Presunto": 986
+  }
+ },
+ "mismo_archivo": true,
+ "resumen": {
+  "altas": 0,
+  "cambios": 0,
+  "bajas": 0,
+  "nombres": 0,
+  "altasPorSituacion": {},
+  "cambiosA": {}
+ },
+ "privacidad": "Personas físicas: RFC recortado y sin nombre. La lista completa está en la liga del SAT.",
+ "para_integrar": "python3 herramientas/actualizar_69b.py && python3 herramientas/sello.py --siguiente",
+ "altas": [],
+ "cambios": [],
+ "bajas": [],
+ "nombres": [],
+ "revisado": "2026-11-05"
+}

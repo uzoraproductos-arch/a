@@ -7,6 +7,13 @@
    herramientas/apartados.py); mientras tanto dice que se abre con el
    lanzamiento.
 
+   Desde el 05-11-2026 (paso 0.2 de docs/PLAN-IMPLEMENTACION.md), si el
+   formulario trae data-funcion (FUNCIONES de apartados.py), «Enviar» manda
+   el mismo texto que el lector revisó a la funcion recibir-formulario de
+   Supabase (tipo «solicitud»), con el antispam de Turnstile, y le devuelve
+   su folio. Lleva nombre y correo, asi que solo se envia si el lector acepta
+   el aviso de privacidad. Si la red falla, el texto se queda para copiarlo.
+
    Pagina: servicios.html (herramientas/apartados.py, servicios()). */
 (function () {
   'use strict';
@@ -16,6 +23,61 @@
   var error = document.getElementById('svError');
   if (!form || !resumen || !error) return;
   var canal = form.getAttribute('data-canal') || '';
+  var funcion = form.getAttribute('data-funcion') || '';
+  var llaveTs = form.getAttribute('data-turnstile') || '';
+  var tsCarga = null;
+
+  function turnstile(caja) {
+    if (!llaveTs) return Promise.resolve(null);
+    if (!tsCarga) {
+      tsCarga = new Promise(function (ok, mal) {
+        var s = document.createElement('script');
+        s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+        s.async = true;
+        s.onload = function () { ok(window.turnstile); };
+        s.onerror = mal;
+        document.head.appendChild(s);
+      });
+    }
+    return tsCarga.then(function (ts) { return ts.render(caja, { sitekey: llaveTs }); });
+  }
+
+  function enviar(t, boton, wid) {
+    var acepta = $('svAcepta');
+    if (!acepta || !acepta.checked) {
+      avisar('Para enviarla, marca «Acepto el aviso de privacidad» arriba: tu solicitud lleva tu nombre y tu correo.');
+      if (acepta) acepta.focus();
+      return;
+    }
+    var datos = {
+      tipo: form.getAttribute('data-tipo') || 'solicitud',
+      asunto: ('Solicitud de investigación: ' + val('svTema')).slice(0, 200),
+      texto: t,
+      pagina: 'servicios.html',
+      documento: null,
+      correo: val('svCorreo') || null,
+      acepta_aviso: true,
+      turnstile: wid != null && window.turnstile ? window.turnstile.getResponse(wid) : null
+    };
+    boton.disabled = true;
+    avisar('Enviando…');
+    var respaldo = ' Tu solicitud sigue aquí: cópiala o descárgala para no perderla.';
+    fetch(funcion, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) })
+      .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+      .then(function (j) {
+        if (j && j.ok && j.folio) {
+          avisar('✓ Recibida. Tu folio es ' + j.folio + ': guárdalo. Te respondemos al correo que escribiste.');
+          return;
+        }
+        boton.disabled = false;
+        avisar(((j && j.error) || 'No pudimos recibirla.') + respaldo);
+        if (wid != null && window.turnstile) window.turnstile.reset(wid);
+      })
+      .catch(function () {
+        boton.disabled = false;
+        avisar('No hay conexión con el servidor.' + respaldo);
+      });
+  }
 
   function $(id) { return document.getElementById(id); }
   function val(id) { var el = $(id); return el ? el.value.trim() : ''; }
@@ -143,7 +205,19 @@
     area.setAttribute('aria-labelledby', 'svResTit');
     var acc = document.createElement('div');
     acc.className = 'sv-acciones';
-    if (canal) {
+    var cajaTs = null, wid = null;
+    if (funcion) {
+      var envia = boton('✉️ Enviar solicitud', 'sz-btn-of');
+      envia.addEventListener('click', function () { enviar(t, envia, wid); });
+      acc.appendChild(envia);
+      if (llaveTs) {
+        cajaTs = document.createElement('div');
+        cajaTs.className = 'cm-turnstile';
+        turnstile(cajaTs).then(function (w) { wid = w; }, function () {
+          avisar('No cargó el antispam; si «Enviar» falla, copia o descarga tu solicitud.');
+        });
+      }
+    } else if (canal) {
       var env = document.createElement('a');
       env.className = 'sz-btn sz-btn-of';
       env.textContent = '✉️ Enviar solicitud';
@@ -162,8 +236,9 @@
     resumen.appendChild(h);
     resumen.appendChild(nota);
     resumen.appendChild(area);
+    if (cajaTs) resumen.appendChild(cajaTs);
     resumen.appendChild(acc);
-    if (!canal) {
+    if (!canal && !funcion) {
       var sin = document.createElement('p');
       sin.className = 'sv-sincanal';
       sin.id = 'svSinCanal';
