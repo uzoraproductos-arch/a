@@ -854,6 +854,10 @@ HERRAMIENTAS = [
          # (herramientas/insp_factura.py).
          ('inspfactura', '📑', 'Lector de facturas CFDI', 'Busca y verifica',
           'Elige el XML de una o varias facturas: las leemos en tu navegador, sin subirlas, rehacemos su cuenta y cruzamos al emisor con la lista 69-B del SAT, separando lo que declaró la autoridad de las señales para revisar.'),
+         # Novena desde el 05-11-2026 (pedido del autor): revisa un estado de
+         # resultados en el navegador, en seis dimensiones (insp_resultados.py).
+         ('inspresultados', '📊', 'Revisa tu estado de resultados', 'Busca y verifica',
+          'Sube el estado de resultados de tu empresa: lo leemos en tu navegador, sin subirlo, y lo revisamos en seis dimensiones (cuadre, estructura, rentabilidad, tendencia a 3 y 5 años, impuestos y deuda), con señales para revisar.'),
          ('inspverifica', '🔏', 'Verifica un estado de cuenta', 'Busca y verifica',
           '¿Te compartieron un estado de cuenta de Auditavisión? Escribe su folio o su huella digital y comprueba, cifra por cifra, que no se alteró.'),
          # Septima desde el 28-10-2026 (pedido del autor): el nepotismo, con su
@@ -936,7 +940,7 @@ MODULOS_PROPIOS = {'inspverifica'}
 # modulo de herramientas/ arma su pagina con construir(base, ref) y dice
 # sus ESTILOS y SCRIPTS (assets/auditor/css y js).
 INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspentes': 'insp_entes',
-                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'inspnepotismo': 'nepotismo', 'inspfactura': 'insp_factura',
+                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'inspnepotismo': 'nepotismo', 'inspfactura': 'insp_factura', 'inspresultados': 'insp_resultados',
                 # Calculadora Civica (pedido del autor, 12-10-2026): sus tres
                 # aplicaciones que abrian el motor en un marco.
                 'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj',

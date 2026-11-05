@@ -959,7 +959,13 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   flujo semanal) compara la lista del SAT contra `sat-69b.js` por RFC y deja en
   `docs/sat69b/bandeja.json` altas, cambios de situación, bajas y cambios de razón
   social; tampoco escribe en la base, y a las personas físicas las deja con el RFC
-  recortado y sin nombre.
+  recortado y sin nombre. **Revisa tu estado de resultados** (05-11-2026,
+  `insp_resultados.py`, `insp-resultados.js` y su gemelo `lector_resultados.py`, con
+  la prueba en `revision.py`) lee un CSV o lo pegado de Excel **en el navegador**, sin
+  subirlo, y lo revisa en seis dimensiones (cuadre, estructura, rentabilidad, tendencia
+  a 3 y 5 años, impuestos y deuda): todo es `derivado` y «señal para revisar». **Los
+  patrones de los renglones viven en `CONCEPTOS` de `lector_resultados.py`** y la página
+  se los pasa al JavaScript: una regla nueva se escribe en los dos y se prueba allá.
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).

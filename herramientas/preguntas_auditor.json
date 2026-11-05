@@ -2225,6 +2225,14 @@
    "dice": [
     "124.3"
    ]
+  },
+  {
+   "q": "Revisa mi estado de resultados",
+   "ir": "herramienta-inspector-resultados.html"
+  },
+  {
+   "q": "Quiero analizar los estados financieros de mi empresa",
+   "ir": "herramienta-inspector-resultados.html"
   }
  ]
 }

@@ -166,7 +166,7 @@ cada pieza: [docs/ENCARGO-VIGIA-Y-CFDI.md](docs/ENCARGO-VIGIA-Y-CFDI.md).
 
 **Plan de implementación (05-11-2026):** del pilar de transparencia al primer peso, por etapas, con el Vigía de proveedores (cartera de RFC contra la 69-B) como primer producto: [docs/PLAN-IMPLEMENTACION.md](docs/PLAN-IMPLEMENTACION.md).
 
-**Fraude, registro de empresas, competencia y hospedaje (05-11-2026):** las cifras oficiales del fraude (ENVIPE 2026, ENVE 2024, 69-B), qué se puede seguir del SIGER y el PSM, WiseCricket y Legal Hunt leídos en sus portales (sin 69-B en WiseCricket; Legal Hunt de $399 a $2,099 al mes), y por qué y a dónde dejar GitHub Pages: [docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md](docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md). Hechos los pasos 0.2 (Servicios envía a la base) y 0.3 (Vigía 69-B semanal, `docs/sat69b/bandeja.json`).
+**Fraude, registro de empresas, competencia y hospedaje (05-11-2026):** las cifras oficiales del fraude (ENVIPE 2026, ENVE 2024, 69-B), qué se puede seguir del SIGER y el PSM, WiseCricket y Legal Hunt leídos en sus portales (sin 69-B en WiseCricket; Legal Hunt de $399 a $2,099 al mes), y por qué y a dónde dejar GitHub Pages: [docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md](docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md). Hechos los pasos 0.2 (Servicios envía a la base) y 0.3 (Vigía 69-B semanal, `docs/sat69b/bandeja.json`). Además: «El fraude en números» (Aprende y el Auditor) y la novena aplicación del Modo Inspector, «Revisa tu estado de resultados» (en el navegador, seis dimensiones; entrega A de «Mi Auditavisión», PLAN-IMPLEMENTACION.md §4 bis).
 
 ## La lista de pendientes (guardada a pedido del autor, 03-11-2026)
 

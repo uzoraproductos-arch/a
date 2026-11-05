@@ -1295,6 +1295,13 @@
         '<p>📰 Leo la nota aquí mismo con <b>Contrasta una nota</b>: busco sus cifras en pesos, las pongo junto a su documento oficial y te doy el veredicto, cifra por cifra, con su semáforo. Puede tardar unos segundos.</p>' +
         '<p class="pa-chico">Lo que no empata con un documento queda «sin contrastar» y no cuenta como falso. Si la página no se deja leer, ahí mismo puedes pegar el texto.</p>');
     }
+    /* 2a. Un estado de resultados propio (05-11-2026): «revisa mi estado de resultados», «analiza los estados
+       financieros de mi empresa». «El estado de resultados del Gobierno» no entra aquí: no dice mi, empresa ni revisa. */
+    if (APP.inspresultados && /estados? de resultados|estados? financieros/.test(p) && /\b(mi|mis|nuestro|nuestros|empresa|negocio|cliente|revisa|revisar|revisame|analiza|analizar|evalua|evaluar|sube|subir)\b/.test(p) && !/gobierno|federal|nacion|del estado de\b/.test(p)) {
+      return respApp('inspresultados', APP.inspresultados.url,
+        '<p>📊 Te abro <b>Revisa tu estado de resultados</b> aquí abajo. Sube tu CSV o pega las celdas de Excel: lo leo en tu navegador, sin subirlo a ningún lado, y lo reviso en seis dimensiones: cuadre, estructura, rentabilidad, tendencia a 3 y 5 años, impuestos y deuda.</p>' +
+        '<p class="pa-chico">Todo sale como derivado, con su operación a la vista, y lo que llama la atención va como «señal para revisar», nunca como irregularidad. No es una auditoría ni un dictamen.</p>');
+    }
     /* 2b. Una factura (05-11-2026): «revisa mi factura», «tengo un XML», «¿esta factura es de una
        empresa fantasma?». Abre el Lector de facturas CFDI; un RFC suelto lo sigue contestando la lista negra. */
     if (APP.inspfactura && /\b(facturas?|cfdi|xml|comprobantes? fiscal(es)?)\b/.test(p) && !RFC_RE.test(t) && !/^\s*(que|q) (es|son|significa)\b|que quiere decir/.test(p)) {
@@ -1378,6 +1385,7 @@
     inspnota: 'Pégame la liga de la nota, o «¿es cierto que…?» con la cifra que oíste.',
     inspefos: 'Escríbeme un RFC o un nombre: «¿está en la lista negra la empresa…?».',
     inspfactura: 'Dime «revisa mi factura» y elige el XML: lo leo sin subirlo y lo cruzo con la lista 69-B.',
+    inspresultados: 'Dime «revisa mi estado de resultados» y sube tu CSV: lo leo sin subirlo y lo reviso en seis dimensiones.',
     inspverifica: 'Pégame el folio (AV-…) o la huella digital del documento.',
     'servicios.html': 'Cuéntame el caso y te llevo al formulario, con el tema ya escrito.'
   };

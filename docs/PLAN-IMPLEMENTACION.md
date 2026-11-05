@@ -206,14 +206,15 @@ se pueda comprobar:**
 
 | Entrega | Qué | Depende de |
 |---|---|---|
-| A | **Lector de estado de resultados** en el navegador: razones básicas (margen, gasto sobre ingreso), con su fórmula a la vista y el aviso de que no es un dictamen | Nada: se puede hacer ya |
+| A | **Lector de estado de resultados** en el navegador: razones básicas (margen, gasto sobre ingreso), con su fórmula a la vista y el aviso de que no es un dictamen. **Hecho el 05-11-2026**: `herramienta-inspector-resultados.html`, seis dimensiones | Nada: se puede hacer ya |
 | B | **Facturas por lote** en el navegador: cientos de XML, un resumen por proveedor y su cruce con la 69-B | Nada: crece del lector actual |
 | C | **Mi Auditavisión**: el tablero que junta A y B en una sola vista, guardado **solo en ese navegador** (IndexedDB) | A y B |
 | D | **La cartera en la nube** para las alertas del Vigía, con cuenta y pago | Etapa 2: hospedaje, cuentas, aviso propio |
 | E | **Comunidad**: preguntas entre usuarios en el Ágora, sin datos de nadie | Moderación (decisión del autor) |
 
-**Pendiente del autor:** contar qué hacía Fortuvision y qué funcionó, para no
-repetir lo que no sirvió.
+**Lo que hacía Fortuvision** (el autor, 05-11-2026): el usuario subía el estado de cuenta de sus inversiones y la plataforma
+lo evaluaba en varias dimensiones, por mercado y con horizontes de 3 y 5 años. Aquí se toma el mecanismo (subir, evaluar por
+dimensiones y por horizonte) para la **auditoría**; las inversiones quedan fuera por ahora, como otra línea de negocio.
 
 ## 5. La ruta del autor, en paralelo
 
