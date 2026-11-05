@@ -154,6 +154,15 @@ que necesita navegador.
 - **27-10-2026.** Informe especial «Documentar para sancionar»
   (`informes-documentar-para-sancionar.html`).
 
+## Encargos en cola (05-11-2026)
+
+El autor pidió, en este orden: **1. vigía legislativo** (DOF, Diputados y
+Senado → bandeja «por cotejar», y aviso cuando un módulo cite una reforma
+vieja), **2. lector de facturas CFDI 4.0** como aplicación del Modo Inspector
+(en el navegador, cruzado con la 69-B), y en cola **3. CompraNet × 69-B × ASF**
+y **4. la ruta completa del impuesto**. Qué pidió, qué ya existe y cómo encaja
+cada pieza: [docs/ENCARGO-VIGIA-Y-CFDI.md](docs/ENCARGO-VIGIA-Y-CFDI.md).
+
 ## La lista de pendientes (guardada a pedido del autor, 03-11-2026)
 
 Lo que falta, quién lo debe y qué destraba cada uno. El detalle de cada ficha
