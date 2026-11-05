@@ -252,10 +252,11 @@
     if (!ok_.length) return;
     const pv = proveedores(), mal = ok_.filter(x => cuadra(x.f).length).length;
     const en = pv.filter(p => p.c && (p.c.r[2] === 'F' || p.c.r[2] === 'P'));
-    const lineas = [ok_.length + ' facturas de ' + pv.length + ' emisores; ' + (mal ? mal + ' no cuadran.' : 'todas cuadran.')]
+    const pl = (n, a, b) => n + ' ' + (n === 1 ? a : b);
+    const lineas = [pl(ok_.length, 'factura', 'facturas') + ' de ' + pl(pv.length, 'emisor', 'emisores') + '; ' + (mal ? pl(mal, 'no cuadra.', 'no cuadran.') : (ok_.length === 1 ? 'cuadra.' : 'todas cuadran.'))]
       .concat(en.map(p => quien(p.rfc, p.nom) + ' (' + tapa(p.rfc) + '): ' + p.c.s.t + ' en la lista 69-B, ' + p.n + ' facturas por ' + pesos(p.total) + '.'));
     const senales = mal + pv.reduce((a, p) => a + p.sen, 0) + en.length;
-    const g = miaGuardar({ tipo: 'facturas', fecha: new Date().toISOString().slice(0, 10), titulo: 'Facturas · ' + ok_.length + ' revisadas',
+    const g = miaGuardar({ tipo: 'facturas', fecha: new Date().toISOString().slice(0, 10), titulo: 'Facturas · ' + pl(ok_.length, 'revisada', 'revisadas'),
       lineas: lineas, senales: senales, ir: 'herramienta-inspector-factura.html' }, pv.map(p => p.rfc).filter(r => !fisica(r)));
     estado.textContent = g ? '📌 Guardado en Mi Auditavisión, con sus emisores en «Mis proveedores» (solo en este navegador; las personas físicas no se guardan).' : 'Tu navegador no deja guardar aquí (modo privado o datos bloqueados).';
   });

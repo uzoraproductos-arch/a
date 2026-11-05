@@ -208,7 +208,7 @@ se pueda comprobar:**
 |---|---|---|
 | A | **Lector de estado de resultados** en el navegador: razones básicas (margen, gasto sobre ingreso), con su fórmula a la vista y el aviso de que no es un dictamen. **Hecho el 05-11-2026**: `herramienta-inspector-resultados.html`, seis dimensiones | Nada: se puede hacer ya |
 | B | **Facturas por lote** en el navegador: cientos de XML, un resumen por proveedor y su cruce con la 69-B. **Hecho el 05-11-2026**: hasta 500 a la vez en el Lector de facturas, con «Por proveedor», su CSV y `--proveedores` en `lector_cfdi.py` | Nada: crece del lector actual |
-| C | **Mi Auditavisión**: el tablero que junta A y B en una sola vista, guardado **solo en ese navegador** (IndexedDB) | A y B |
+| C | **Mi Auditavisión**: el tablero que junta A y B en una sola vista, guardado **solo en ese navegador**. **Hecho el 05-11-2026**: `herramienta-inspector-mia.html` (localStorage `av-mia`), con «Mis proveedores» contra la 69-B y «Mis revisiones» | A y B |
 | D | **La cartera en la nube** para las alertas del Vigía, con cuenta y pago | Etapa 2: hospedaje, cuentas, aviso propio |
 | E | **Comunidad**: preguntas entre usuarios en el Ágora, sin datos de nadie | Moderación (decisión del autor) |
 

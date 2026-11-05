@@ -65,7 +65,7 @@
     const t = leerTablero(), caja = $('miaRev');
     if (!t.rev.length) { caja.innerHTML = '<p class="cf-nota">Todavía no guardas revisiones.</p>'; return; }
     caja.innerHTML = t.rev.map((r, i) => '<article class="cf-fac' + (r.senales ? ' cf-fac-mal' : '') + '"><h3>' + (r.tipo === 'facturas' ? '📑' : '📊') + ' ' + esc(r.titulo) + '</h3>' +
-      '<p class="cf-nota">Guardado el ' + esc(r.fecha) + ' · ' + (r.senales ? '<b>' + r.senales + ' señales para revisar</b>' : 'sin señales') + '</p>' +
+      '<p class="cf-nota">Guardado el ' + esc(r.fecha) + ' · ' + (r.senales ? '<b>' + r.senales + (r.senales === 1 ? ' señal para revisar' : ' señales para revisar') + '</b>' : 'sin señales') + '</p>' +
       '<ul>' + (r.lineas || []).slice(0, 8).map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>' +
       '<p class="ef-busca-fila"><a class="ef-btn ef-btn-sec" href="' + esc(r.ir) + '">Abrir la herramienta</a> <button type="button" class="ef-btn ef-btn-sec" data-quita-rev="' + i + '">Quitar</button></p></article>').join('');
   }
@@ -76,7 +76,7 @@
     const t = leerTablero();
     const antes = t.prov.length;
     t.prov = Array.from(new Set(t.prov.concat(nuevos))).slice(0, 500);
-    if (guardar(t)) $('miaEstado').textContent = '✓ ' + (t.prov.length - antes) + ' agregados. Se guardaron solo en este navegador.';
+    if (guardar(t)) $('miaEstado').textContent = '✓ ' + (t.prov.length - antes === 1 ? '1 agregado' : (t.prov.length - antes) + ' agregados') + '. Se guarda solo en este navegador.';
     $('miaRfc').value = '';
     pintarProv();
   });

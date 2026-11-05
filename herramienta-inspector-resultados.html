@@ -20,15 +20,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261105e">
-  <script src="assets/auditor/js/iconos.js?v=20261105e"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261105e"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261105e" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261105e">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261105e">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261105e">
-  <link rel="stylesheet" href="assets/auditor/css/insp-efos.css?v=20261105e">
-  <link rel="stylesheet" href="assets/auditor/css/insp-factura.css?v=20261105e">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261105g">
+  <script src="assets/auditor/js/iconos.js?v=20261105g"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261105g"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261105g" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261105g">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261105g">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261105g">
+  <link rel="stylesheet" href="assets/auditor/css/insp-efos.css?v=20261105g">
+  <link rel="stylesheet" href="assets/auditor/css/insp-factura.css?v=20261105g">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -174,7 +174,7 @@
     <header class="apartado-cab herr-cab herr-foto rubro-inspector">
       <div class="apartado-ancho">
         <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <a href="participa.html">Comunidad</a> <span aria-hidden="true">›</span> <a href="enciclopedia-auditavision.html">Enciclopedia</a> <span aria-hidden="true">›</span> <a href="sigue-el-dinero.html">Números</a> <span aria-hidden="true">›</span> <a href="numeros-herramientas-del-auditor.html">Herramientas del Auditor</a> <span aria-hidden="true">›</span> <a href="herramienta-inspector.html">Modo Inspector</a> <span aria-hidden="true">›</span> <span>Revisa tu estado de resultados</span></nav>
-        <span class="apartado-lema">Modo Inspector · aplicación 6 de 9</span>
+        <span class="apartado-lema">Modo Inspector · aplicación 6 de 10</span>
         <h1 class="apartado-titulo"><span class="herr-cab-ico" aria-hidden="true">📊</span><span class="herr-cab-tit">Revisa tu estado de resultados</span></h1>
         <p class="apartado-entrada"><b>Busca y verifica.</b> Sube el estado de resultados de tu empresa: lo leemos en tu navegador, sin subirlo, y lo revisamos en seis dimensiones (cuadre, estructura, rentabilidad, tendencia a 3 y 5 años, impuestos y deuda), con señales para revisar.</p>
         <span class="herr-cab-credito">Imagen ilustrativa</span><a class="apartado-auditor" href="herramienta-inspector-pregunta.html?modo=inspector&amp;q=Revisa%20tu%20estado%20de%20resultados" data-modo="inspector"><span aria-hidden="true">🔍</span><span>Pregúntale al Auditor · <b>Modo Inspector</b></span></a>
@@ -218,6 +218,7 @@
     <noscript><p class="ef-estado">Para revisarlo aquí hace falta JavaScript. Si sabes Python, la misma revisión está en herramientas/lector_resultados.py del repositorio.</p></noscript>
     <div class="cf-res" id="erRes" aria-live="polite"></div>
     <div class="ef-busca-fila" id="erAcciones" hidden>
+      <button type="button" class="ef-btn" id="erMia">📌 Guardar el resumen en Mi Auditavisión</button>
       <button type="button" class="ef-btn ef-btn-sec" id="erLimpiar">🗑️ Borrar todo</button>
     </div>
   </section>
@@ -253,8 +254,8 @@
 
       <nav class="herr-nav-min" aria-label="Moverte desde aquí">
         <a class="herr-min ant" href="herramienta-inspector-factura.html"><span>← Aplicación anterior</span><small>📑 Lector de facturas CFDI</small></a>
-        <a class="herr-min" href="herramienta-inspector.html"><span>Las 9 aplicaciones</span><small>Modo Inspector</small></a>
-        <a class="herr-min sig" href="herramienta-inspector-verifica.html"><span>Aplicación siguiente →</span><small>🔏 Verifica un estado de cuenta</small></a>
+        <a class="herr-min" href="herramienta-inspector.html"><span>Las 10 aplicaciones</span><small>Modo Inspector</small></a>
+        <a class="herr-min sig" href="herramienta-inspector-mia.html"><span>Aplicación siguiente →</span><small>📌 Mi Auditavisión</small></a>
         <a class="herr-min" href="indice.html"><span>Índice</span><small>Todo Auditavisión</small></a>
       </nav>
     </div>
@@ -264,12 +265,12 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261105e</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261105g</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261105e"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261105e"></script>
-  <script src="assets/auditor/js/insp-resultados.js?v=20261105e"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261105g"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261105g"></script>
+  <script src="assets/auditor/js/insp-resultados.js?v=20261105g"></script>
 </body>
 </html>

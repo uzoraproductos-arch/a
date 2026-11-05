@@ -968,6 +968,10 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   a 3 y 5 años, impuestos y deuda): todo es `derivado` y «señal para revisar». **Los
   patrones de los renglones viven en `CONCEPTOS` de `lector_resultados.py`** y la página
   se los pasa al JavaScript: una regla nueva se escribe en los dos y se prueba allá.
+  **Mi Auditavisión** (05-11-2026, `insp_mia.py`, `insp-mia.js`) es el tablero: «Mis
+  proveedores» contra la 69-B y «Mis revisiones», **guardado solo en el navegador**
+  (localStorage `av-mia`; los dos lectores escriben ahí con `miaGuardar()`, solo el
+  resumen y nunca el archivo; las personas físicas no entran a la lista).
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).
