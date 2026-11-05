@@ -236,6 +236,29 @@
     }, () => { estado.innerHTML = chip('pendiente') + ' No se pudo traer la factura de ejemplo.'; });
   });
   $('cfLimpiar').addEventListener('click', () => { facturas.length = 0; pintar(); });
+  /* Mi Auditavisión (05-11-2026): guarda el RESUMEN en el navegador del lector,
+     clave «av-mia» (el formato lo lee insp-mia.js). Nunca el archivo. */
+  function miaGuardar(rev, prov) {
+    try {
+      const t = JSON.parse(localStorage.getItem('av-mia') || '{}');
+      t.prov = Array.from(new Set((t.prov || []).concat(prov || []))).slice(0, 500);
+      t.rev = [rev].concat(t.rev || []).slice(0, 30);
+      localStorage.setItem('av-mia', JSON.stringify(t));
+      return true;
+    } catch (e) { return false; }
+  }
+  $('cfMia').addEventListener('click', () => {
+    const ok_ = facturas.filter(x => !x.error);
+    if (!ok_.length) return;
+    const pv = proveedores(), mal = ok_.filter(x => cuadra(x.f).length).length;
+    const en = pv.filter(p => p.c && (p.c.r[2] === 'F' || p.c.r[2] === 'P'));
+    const lineas = [ok_.length + ' facturas de ' + pv.length + ' emisores; ' + (mal ? mal + ' no cuadran.' : 'todas cuadran.')]
+      .concat(en.map(p => quien(p.rfc, p.nom) + ' (' + tapa(p.rfc) + '): ' + p.c.s.t + ' en la lista 69-B, ' + p.n + ' facturas por ' + pesos(p.total) + '.'));
+    const senales = mal + pv.reduce((a, p) => a + p.sen, 0) + en.length;
+    const g = miaGuardar({ tipo: 'facturas', fecha: new Date().toISOString().slice(0, 10), titulo: 'Facturas · ' + ok_.length + ' revisadas',
+      lineas: lineas, senales: senales, ir: 'herramienta-inspector-factura.html' }, pv.map(p => p.rfc).filter(r => !fisica(r)));
+    estado.textContent = g ? '📌 Guardado en Mi Auditavisión, con sus emisores en «Mis proveedores» (solo en este navegador; las personas físicas no se guardan).' : 'Tu navegador no deja guardar aquí (modo privado o datos bloqueados).';
+  });
   $('cfCsvProv').addEventListener('click', () => {
     const q = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
     const filas = proveedores().map(p => [tapa(p.rfc), quien(p.rfc, p.nom), p.n, p.total.toFixed(2), Array.from(p.monedas).join(', '), p.mal,

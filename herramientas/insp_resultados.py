@@ -78,6 +78,7 @@ def construir(base, ref):
     <noscript><p class="ef-estado">Para revisarlo aquí hace falta JavaScript. Si sabes Python, la misma revisión está en herramientas/lector_resultados.py del repositorio.</p></noscript>
     <div class="cf-res" id="erRes" aria-live="polite"></div>
     <div class="ef-busca-fila" id="erAcciones" hidden>
+      <button type="button" class="ef-btn" id="erMia">📌 Guardar el resumen en Mi Auditavisión</button>
       <button type="button" class="ef-btn ef-btn-sec" id="erLimpiar">🗑️ Borrar todo</button>
     </div>
   </section>

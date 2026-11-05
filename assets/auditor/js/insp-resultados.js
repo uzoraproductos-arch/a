@@ -215,10 +215,24 @@
     $('erAcciones').hidden = false;
   }
 
+  /* Mi Auditavisión (05-11-2026): guarda el RESUMEN en el navegador del lector,
+     clave «av-mia» (el formato lo lee insp-mia.js). Nunca el archivo. */
+  function miaGuardar(rev, prov) {
+    try {
+      const t = JSON.parse(localStorage.getItem('av-mia') || '{}');
+      t.prov = Array.from(new Set((t.prov || []).concat(prov || []))).slice(0, 500);
+      t.rev = [rev].concat(t.rev || []).slice(0, 30);
+      localStorage.setItem('av-mia', JSON.stringify(t));
+      return true;
+    } catch (e) { return false; }
+  }
+  let ultimo = null;
   function estado(t) { $('erEstado').textContent = t; }
   function usar(texto, nombre, ejemplo) {
     try {
-      pintar(analizar(texto), nombre, ejemplo);
+      const r = analizar(texto);
+      pintar(r, nombre, ejemplo);
+      ultimo = { r: r, nombre: nombre };
       estado('Listo. Se leyó en tu navegador: no se subió ni se guardó.');
     } catch (err) {
       $('erRes').innerHTML = '';
@@ -248,6 +262,15 @@
     a.download = 'plantilla-estado-de-resultados.csv';
     document.body.appendChild(a); a.click();
     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 0);
+  });
+  $('erMia').addEventListener('click', () => {
+    if (!ultimo) return;
+    const r = ultimo.r, a = r.anios[r.anios.length - 1], m = r.rentabilidad[a];
+    const lineas = ['Márgenes de ' + a + ': bruto ' + (m.bruto === null ? '—' : fp(m.bruto) + ' %') + ', de operación ' + (m.operacion === null ? '—' : fp(m.operacion) + ' %') + ', neto ' + (m.neto === null ? '—' : fp(m.neto) + ' %') + '.']
+      .concat(r.senales.map(s => s.dim + ': ' + s.txt));
+    const ok = miaGuardar({ tipo: 'resultados', fecha: new Date().toISOString().slice(0, 10), titulo: 'Estado de resultados · ' + ultimo.nombre + ' (' + r.anios[0] + '–' + a + ')',
+      lineas: lineas, senales: r.senales.length, ir: 'herramienta-inspector-resultados.html' }, []);
+    estado(ok ? '📌 Guardado en Mi Auditavisión (solo en este navegador).' : 'Tu navegador no deja guardar aquí (modo privado o datos bloqueados).');
   });
   $('erLimpiar').addEventListener('click', () => {
     $('erRes').innerHTML = ''; $('erTexto').value = ''; $('erArchivo').value = ''; $('erAcciones').hidden = true;

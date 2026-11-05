@@ -2233,6 +2233,10 @@
   {
    "q": "Quiero analizar los estados financieros de mi empresa",
    "ir": "herramienta-inspector-resultados.html"
+  },
+  {
+   "q": "Mi Auditavisión",
+   "ir": "herramienta-inspector-mia.html"
   }
  ]
 }

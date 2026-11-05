@@ -101,6 +101,7 @@ def construir(base, ref):
     <div class="ef-busca-fila" id="cfAcciones" hidden>
       <button type="button" class="ef-btn" id="cfCsv">⬇️ Descargar la tabla (CSV)</button>
       <button type="button" class="ef-btn" id="cfCsvProv">⬇️ Descargar el resumen por proveedor (CSV)</button>
+      <button type="button" class="ef-btn" id="cfMia">📌 Guardar el resumen en Mi Auditavisión</button>
       <button type="button" class="ef-btn ef-btn-sec" id="cfLimpiar">🗑️ Borrar todo</button>
     </div>
   </section>
