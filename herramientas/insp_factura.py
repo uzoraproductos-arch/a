@@ -51,6 +51,7 @@ PASOS = [
     ('🔎', 'Los leemos aquí mismo', 'En tu navegador: el UUID del timbre, la fecha, el emisor, el receptor, los conceptos, los impuestos y el total.'),
     ('🧮', 'Rehacemos la cuenta', 'Subtotal menos descuento, más impuestos trasladados, menos retenidos: ¿da el total? ¿Los conceptos suman el subtotal?'),
     ('🧾', 'La cruzamos con la lista 69-B', 'Si el emisor aparece, te decimos lo que publicó el SAT y, aparte, las señales que salen de comparar fechas.'),
+    ('🏢', 'Las juntamos por proveedor', 'Con dos o más (hasta 500 a la vez), un resumen por emisor: cuántas facturas, cuánto suman, cuántas no cuadran y si está en la lista 69-B.'),
 ]
 
 
@@ -99,6 +100,7 @@ def construir(base, ref):
     <div class="cf-res" id="cfRes" aria-live="polite"></div>
     <div class="ef-busca-fila" id="cfAcciones" hidden>
       <button type="button" class="ef-btn" id="cfCsv">⬇️ Descargar la tabla (CSV)</button>
+      <button type="button" class="ef-btn" id="cfCsvProv">⬇️ Descargar el resumen por proveedor (CSV)</button>
       <button type="button" class="ef-btn ef-btn-sec" id="cfLimpiar">🗑️ Borrar todo</button>
     </div>
   </section>

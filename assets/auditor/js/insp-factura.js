@@ -161,8 +161,48 @@
           '</td><td>' + (cuadra(x.f).length ? '⚠️ no cuadra' : '✅') + '</td><td>' + (c ? c.s.i + ' ' + esc(c.s.t) : '—') + '</td></tr>'; }).join('') + '</tbody></table></div>';
   }
 
+  /* Facturas por lote (05-11-2026, entrega B de «Mi Auditavisión»): el resumen
+     por emisor, con las mismas reglas que por_proveedor() de lector_cfdi.py.
+     Primero los que están en la lista 69-B y luego por monto. */
+  const ORDEN = { F: 0, P: 1, S: 2, D: 3 };
+  function proveedores() {
+    const g = new Map();
+    facturas.filter(x => !x.error).forEach(x => {
+      const f = x.f;
+      const p = g.get(f.emRfc) || { rfc: f.emRfc, nom: f.emNom, n: 0, total: 0, monedas: new Set(), mal: 0, sen: 0 };
+      p.n += 1; p.total += f.total; p.monedas.add(f.moneda || 'MXN');
+      if (cuadra(f).length) p.mal += 1;
+      const c = cruce(f.emRfc, f.fecha);
+      if (c) p.sen += c.sen.filter(s => s[0] === 'senal').length;
+      g.set(f.emRfc, p);
+    });
+    return Array.from(g.values()).map(p => Object.assign(p, { c: cruce(p.rfc, '') }))
+      .sort((a, b) => ((a.c ? ORDEN[a.c.r[2]] : 9) - (b.c ? ORDEN[b.c.r[2]] : 9)) || (b.total - a.total));
+  }
+  function tablaProv() {
+    const ok = facturas.filter(x => !x.error);
+    if (ok.length < 2) return '';
+    const pv = proveedores(), en = pv.filter(p => p.c && (p.c.r[2] === 'F' || p.c.r[2] === 'P')).length;
+    return '<div class="cf-tabla-caja"><h3>🏢 Por proveedor</h3><p><b>' + pv.length + '</b> emisores · <b>' + en + '</b> en la lista 69-B como definitivo o presunto ' + chip('oficial') +
+      '. Montos: suma de los totales de sus facturas, sin convertir monedas ' + chip('derivado') + '.</p>' +
+      '<table class="cf-tabla"><thead><tr><th scope="col">Emisor</th><th scope="col">Facturas</th><th scope="col">Suma</th><th scope="col">No cuadran</th>' +
+      '<th scope="col">Lista 69-B</th><th scope="col">Señales de fecha</th></tr></thead><tbody>' +
+      pv.map(p => '<tr><td>' + esc(quien(p.rfc, p.nom)) + '<br><code>' + esc(tapa(p.rfc)) + '</code></td><td>' + p.n + '</td><td>' + pesos(p.total) +
+        (p.monedas.size > 1 || !p.monedas.has('MXN') ? ' <small>(' + esc(Array.from(p.monedas).join(', ')) + ')</small>' : '') + '</td><td>' + (p.mal ? '⚠️ ' + p.mal : '—') +
+        '</td><td>' + (p.c ? p.c.s.i + ' ' + esc(p.c.s.t) : 'no aparece') + '</td><td>' + (p.sen ? '⚠️ ' + p.sen : '—') + '</td></tr>').join('') +
+      '</tbody></table></div>';
+  }
+
+  /* Con muchas facturas, las tarjetas de las que no traen señal se pliegan. */
+  const conSenal = x => x.error || cuadra(x.f).length || cruce(x.f.emRfc, x.f.fecha) || cruce(x.f.reRfc, x.f.fecha);
   function pintar() {
-    res.innerHTML = tabla() + facturas.map(tarjeta).join('');
+    let cuerpo;
+    if (facturas.length > 20) {
+      const si = facturas.filter(conSenal), no = facturas.filter(x => !conSenal(x));
+      cuerpo = (si.length ? '<h3>⚠️ ' + (si.length === 1 ? 'La factura' : 'Las ' + si.length + ' facturas') + ' con algo que revisar</h3>' + si.map(tarjeta).join('') : '<p>✅ Ninguna factura trae algo que revisar.</p>') +
+        (no.length ? '<details class="cf-con"><summary>Ver ' + (no.length === 1 ? 'la factura' : 'las ' + no.length + ' facturas') + ' sin señales</summary>' + no.map(tarjeta).join('') + '</details>' : '');
+    } else cuerpo = facturas.map(tarjeta).join('');
+    res.innerHTML = tablaProv() + tabla() + cuerpo;
     acciones.hidden = !facturas.length;
   }
 
@@ -196,6 +236,18 @@
     }, () => { estado.innerHTML = chip('pendiente') + ' No se pudo traer la factura de ejemplo.'; });
   });
   $('cfLimpiar').addEventListener('click', () => { facturas.length = 0; pintar(); });
+  $('cfCsvProv').addEventListener('click', () => {
+    const q = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+    const filas = proveedores().map(p => [tapa(p.rfc), quien(p.rfc, p.nom), p.n, p.total.toFixed(2), Array.from(p.monedas).join(', '), p.mal,
+      p.c ? p.c.s.t + ' · oficio ' + p.c.r[3] + ' del ' + p.c.r[4] : 'no aparece', p.sen].map(q).join(','));
+    const blob = new Blob(['\ufeff' + ['emisor_rfc,emisor_nombre,facturas,total,monedas,no_cuadran,lista_69b,senales'].concat(filas).join('\r\n')], { type: 'text/csv;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'proveedores-auditavision.csv';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 0);
+  });
   /* La tabla en CSV se arma aquí y se descarga directo: no pasa por ningún servidor. */
   $('cfCsv').addEventListener('click', () => {
     const cols = ['archivo', 'version', 'uuid', 'fecha', 'tipo', 'emisor_rfc', 'emisor_nombre', 'receptor_rfc', 'receptor_nombre', 'subtotal', 'trasladados', 'retenidos', 'total', 'moneda', 'cuenta', 'lista_69b_emisor'];

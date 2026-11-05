@@ -12,6 +12,7 @@ navegador con assets/auditor/js/insp-factura.js). Sirve para dos cosas:
 
     python3 herramientas/lector_cfdi.py factura1.xml factura2.xml > tabla.csv
     python3 herramientas/lector_cfdi.py carpeta/*.xml --salida tabla.csv
+    python3 herramientas/lector_cfdi.py carpeta/*.xml --proveedores   # resumen por emisor
     python3 herramientas/lector_cfdi.py --prueba      # con la factura ficticia de docs/ejemplos/
 
 Reglas (AGENTS.md §2 y §2 bis):
@@ -207,6 +208,37 @@ def renglon(nombre, f, lista):
     return {k: fila[k] for k in COLUMNAS}
 
 
+PROV_COLUMNAS = ['emisor_rfc', 'emisor_nombre', 'facturas', 'total', 'monedas', 'no_cuadran', 'lista_69b', 'senales']
+ORDEN_69B = {'F': 0, 'P': 1, 'S': 2, 'D': 3}
+
+
+def por_proveedor(leidas, lista):
+    """Facturas por lote (entrega B de «Mi Auditavisión», 05-11-2026): el
+    resumen por emisor. leidas es [(nombre, factura)]. Primero los que están en
+    la lista 69-B (definitivo, presunto…) y luego por monto. La suma es de los
+    totales tal como vienen, sin convertir monedas (derivado)."""
+    g = {}
+    for _nombre, f in leidas:
+        rfc = f['emisor_rfc']
+        x = g.setdefault(rfc, {'rfc': rfc, 'nombre': f['emisor_nombre'], 'facturas': 0, 'total': 0.0, 'monedas': set(),
+                               'no_cuadran': 0, 'senales': 0})
+        x['facturas'] += 1
+        x['total'] += f['total']
+        x['monedas'].add(f['moneda'] or 'MXN')
+        x['no_cuadran'] += 1 if cuadra(f) else 0
+        x['senales'] += sum(1 for s in cruce(rfc, f['fecha'], lista)['senales'] if s.startswith('Señal'))
+    out = []
+    for rfc, x in g.items():
+        r = lista.get(rfc)
+        out.append({'emisor_rfc': tapa(rfc) if es_fisica(rfc) else rfc,
+                    'emisor_nombre': '(persona física: nombre oculto)' if es_fisica(rfc) else x['nombre'],
+                    'facturas': x['facturas'], 'total': '%.2f' % x['total'], 'monedas': ', '.join(sorted(x['monedas'])),
+                    'no_cuadran': x['no_cuadran'], 'senales': x['senales'],
+                    'lista_69b': cruce(rfc, '', lista)['oficial'] or 'no aparece', '_o': (ORDEN_69B.get(r[2], 9) if r else 9, -x['total'])})
+    out.sort(key=lambda x: x.pop('_o'))
+    return out
+
+
 def prueba():
     """La revisa revision.py: la factura ficticia se lee, cuadra y se cruza con
     una lista de mentiras (nunca con un contribuyente real)."""
@@ -237,6 +269,13 @@ def prueba():
     fila = renglon('ejemplo.xml', f, {})
     if fila['receptor_rfc'] != 'XAXX••••••000' or 'oculto' not in fila['receptor_nombre'] or fila['lista_69b_emisor'] != 'no aparece':
         fallas.append('renglón: %r' % fila)
+    # Facturas por lote: dos del emisor ficticio (una alterada) y una de otro.
+    otro = dict(f, emisor_rfc='BBB010101BBB', emisor_nombre='OTRA FICTICIA', total=500.0, subtotal=500.0, trasladados=0.0, conceptos=[])
+    falsa['AAA010101AAA'][2] = 'F'
+    pv = por_proveedor([('a.xml', f), ('b.xml', malo), ('c.xml', otro)], falsa)
+    if [(x['emisor_rfc'], x['facturas'], x['no_cuadran']) for x in pv] != [('AAA010101AAA', 2, 1), ('BBB010101BBB', 1, 0)] \
+            or pv[0]['total'] != '23300.00' or not pv[0]['lista_69b'].startswith('Definitivo') or pv[0]['senales'] != 2:
+        fallas.append('por proveedor: %r' % pv)
     # Y que la lista real tenga las fechas por etapa que necesita el cruce.
     meta, lista = cargar_69b()
     if len(next(iter(lista.values()))) < 8:
@@ -259,14 +298,19 @@ def main(args):
         print(__doc__)
         return 1
     _meta, lista = cargar_69b()
+    prov = '--proveedores' in args
+    args = [a for a in args if a != '--proveedores']
     out = open(salida, 'w', newline='', encoding='utf-8-sig') if salida else sys.stdout   # utf-8-sig: Excel lee bien los acentos
-    w = csv.DictWriter(out, fieldnames=COLUMNAS)
+    w = csv.DictWriter(out, fieldnames=PROV_COLUMNAS if prov else COLUMNAS)
     w.writeheader()
+    leidas = []
     for ruta in args:
         try:
-            w.writerow(renglon(os.path.basename(ruta), leer(open(ruta, 'rb').read()), lista))
+            leidas.append((os.path.basename(ruta), leer(open(ruta, 'rb').read())))
         except (ValueError, ET.ParseError) as e:
             print('%s: no se pudo leer (%s)' % (ruta, e), file=sys.stderr)
+    for fila in (por_proveedor(leidas, lista) if prov else [renglon(n, f, lista) for n, f in leidas]):
+        w.writerow(fila)
     if salida:
         out.close()
     return 0

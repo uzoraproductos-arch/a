@@ -955,7 +955,9 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   **Lector de facturas CFDI** (`insp_factura.py`, `insp-factura.js`, y su
   gemelo `lector_cfdi.py`) lee el XML **en el navegador, sin subirlo**: lo que
   dice la 69-B es `oficial`; comparar fechas o rehacer la cuenta es `derivado`
-  y se dice «señal para revisar», nunca «irregularidad». **El Vigía 69-B** (`herramientas/vigia_69b.py`,
+  y se dice «señal para revisar», nunca «irregularidad». Con dos o más facturas
+  (hasta 500) suma el resumen **por proveedor** (`proveedores()` de `insp-factura.js` y
+  `por_proveedor()` de `lector_cfdi.py`, con las mismas reglas). **El Vigía 69-B** (`herramientas/vigia_69b.py`,
   flujo semanal) compara la lista del SAT contra `sat-69b.js` por RFC y deja en
   `docs/sat69b/bandeja.json` altas, cambios de situación, bajas y cambios de razón
   social; tampoco escribe en la base, y a las personas físicas las deja con el RFC
