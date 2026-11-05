@@ -946,6 +946,16 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   art. 111). **Se dicen siempre como señal para revisar, nunca como irregularidad**, sin nombrar a la
   empresa; los topes de cada año van en `ANEXO9` y se cotejan contra el DOF; lo que depende del escalón
   de cada dependencia queda pendiente (`fracc-escalon`).
+- **El vigía legislativo y el lector de facturas** (05-11-2026,
+  `docs/ENCARGO-VIGIA-Y-CFDI.md`). `herramientas/vigia_legislativo.py` lee el
+  DOF y el índice de Diputados y deja en `docs/legislativo/bandeja.json` lo
+  que hay **por cotejar** y los módulos que citan una reforma vieja: **detecta
+  y propone, nunca escribe en la base**. Una ley nueva que la plataforma cite
+  va en su `LEYES` (con cómo la nombramos), o su cita no se revisa. El
+  **Lector de facturas CFDI** (`insp_factura.py`, `insp-factura.js`, y su
+  gemelo `lector_cfdi.py`) lee el XML **en el navegador, sin subirlo**: lo que
+  dice la 69-B es `oficial`; comparar fechas o rehacer la cuenta es `derivado`
+  y se dice «señal para revisar», nunca «irregularidad».
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).

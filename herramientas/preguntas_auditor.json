@@ -1559,19 +1559,31 @@
    "q": "¿Cuánto debe Jalisco?",
    "modo": "inspector",
    "ir": "herramienta-inspector-entes.html#ente=estatal:JAL",
-   "dice": ["La revisión del Inspector", "De qué está hecha esta respuesta", "Para seguir investigando"]
+   "dice": [
+    "La revisión del Inspector",
+    "De qué está hecha esta respuesta",
+    "Para seguir investigando"
+   ]
   },
   {
    "q": "¿Cuánto le llega a Oaxaca de la Federación?",
    "modo": "ciudadano",
    "ir": "herramienta-inspector-entes.html#ente=estatal:OAX",
-   "dice": ["En corto", "Palabras que quizá no conoces", "Ramo 28"]
+   "dice": [
+    "En corto",
+    "Palabras que quizá no conoces",
+    "Ramo 28"
+   ]
   },
   {
    "q": "¿Cuánto debe Veracruz?",
    "modo": "ambientalista",
    "ir": "herramienta-inspector-entes.html#ente=estatal:VER",
-   "dice": ["La mirada ambiental", "Agronitrogenados", "gasto público"]
+   "dice": [
+    "La mirada ambiental",
+    "Agronitrogenados",
+    "gasto público"
+   ]
   },
   {
    "q": "El mapa de las obras con alerta ambiental de Veracruz",
@@ -1580,7 +1592,9 @@
   {
    "q": "El mapa de la ASF de Oaxaca",
    "ir": "planisferio.html?d=inversion&l=asf&e=OAX",
-   "dice": ["en el Planisferio"]
+   "dice": [
+    "en el Planisferio"
+   ]
   },
   {
    "q": "El mapa del gasto federalizado de Jalisco",
@@ -2155,6 +2169,34 @@
    "dice": [
     "16.3"
    ]
+  },
+  {
+   "q": "¿Qué leyes cambiaron esta semana?",
+   "ir": "marco-legal-tres-niveles.html#reformas-recientes"
+  },
+  {
+   "q": "¿Hubo reformas nuevas a las leyes del dinero?",
+   "ir": "marco-legal-tres-niveles.html#reformas-recientes"
+  },
+  {
+   "q": "¿Cuándo se reformó el Código Fiscal?",
+   "ir": "marco-legal-tres-niveles.html#ley-cff"
+  },
+  {
+   "q": "¿Esta factura es de una empresa fantasma?",
+   "ir": "herramienta-inspector-factura.html"
+  },
+  {
+   "q": "Revisa mi factura",
+   "ir": "herramienta-inspector-factura.html"
+  },
+  {
+   "q": "Tengo un XML de una factura, ¿lo puedes leer?",
+   "ir": "herramienta-inspector-factura.html"
+  },
+  {
+   "q": "Lector de facturas CFDI",
+   "ir": "herramienta-inspector-factura.html"
   }
  ]
 }

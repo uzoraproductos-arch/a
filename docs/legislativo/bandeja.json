@@ -1,0 +1,332 @@
+{
+ "actualizado": "05-11-2026",
+ "nota": "Lo que junta herramientas/vigia_legislativo.py del sumario del DOF y del índice de Leyes Federales Vigentes de la Cámara de Diputados, sin verificar: solo título, fecha y liga, nunca el texto de la reforma. Cada hallazgo queda «por cotejar» hasta que una persona lo revisa; los avisos dicen qué módulo de Auditavisión cita una reforma anterior a la vigente.",
+ "fuentes": {
+  "dof": "https://dof.gob.mx/sumario.xml",
+  "diputados": "https://www.diputados.gob.mx/LeyesBiblio/index.htm"
+ },
+ "hallazgos": [],
+ "leyes": {
+  "cpeum": {
+   "nombre": "CONSTITUCIÓN Política de los Estados Unidos Mexicanos",
+   "publicada": "05-02-1917",
+   "reforma": "07-10-2026",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpeum.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+  },
+  "cff": {
+   "nombre": "CÓDIGO Fiscal de la Federación",
+   "publicada": "31-12-1981",
+   "reforma": "09-04-2026",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cff.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf"
+  },
+  "lisr": {
+   "nombre": "LEY del Impuesto sobre la Renta",
+   "publicada": "11-12-2013",
+   "reforma": "01-04-2024",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
+  },
+  "liva": {
+   "nombre": "LEY del Impuesto al Valor Agregado",
+   "publicada": "29-12-1978",
+   "reforma": "12-11-2021",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/liva.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIVA.pdf"
+  },
+  "lieps": {
+   "nombre": "LEY del Impuesto Especial sobre Producción y Servicios",
+   "publicada": "30-12-1980",
+   "reforma": "22-12-2025",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lieps.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIEPS.pdf"
+  },
+  "lfd": {
+   "nombre": "LEY Federal de Derechos",
+   "publicada": "31-12-1981",
+   "reforma": "28-12-2025",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfd.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFD.pdf"
+  },
+  "lif": {
+   "nombre": "LEY de Ingresos de la Federación para el Ejercicio Fiscal de 2026",
+   "publicada": "07-11-2025",
+   "reforma": "07-11-2025",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lif_2026.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf"
+  },
+  "lfprh": {
+   "nombre": "LEY Federal de Presupuesto y Responsabilidad Hacendaria",
+   "publicada": "30-03-2006",
+   "reforma": "09-04-2026",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfprh.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPRH.pdf"
+  },
+  "ldf": {
+   "nombre": "LEY de Disciplina Financiera de las Entidades Federativas y los Municipios",
+   "publicada": "27-04-2016",
+   "reforma": "10-05-2022",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/ldfefm.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LDFEFM.pdf"
+  },
+  "lgcg": {
+   "nombre": "LEY General de Contabilidad Gubernamental",
+   "publicada": "31-12-2008",
+   "reforma": "14-05-2026",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lgcg.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGCG.pdf"
+  },
+  "lfrcf": {
+   "nombre": "LEY de Fiscalización y Rendición de Cuentas de la Federación",
+   "publicada": "18-07-2016",
+   "reforma": "15-05-2026",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfrcf.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFRCF.pdf"
+  },
+  "lgra": {
+   "nombre": "LEY General de Responsabilidades Administrativas",
+   "publicada": "18-07-2016",
+   "reforma": "15-12-2025",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lgra.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGRA.pdf"
+  },
+  "laassp": {
+   "nombre": "LEY de Adquisiciones, Arrendamientos y Servicios del Sector Público",
+   "publicada": "16-04-2025",
+   "reforma": "16-04-2025",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/laassp.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAASSP.pdf"
+  },
+  "lopsrm": {
+   "nombre": "LEY de Obras Públicas y Servicios Relacionados con las Mismas",
+   "publicada": "04-01-2000",
+   "reforma": "14-11-2025",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lopsrm.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LOPSRM.pdf"
+  },
+  "lritf": {
+   "nombre": "LEY para Regular las Instituciones de Tecnología Financiera",
+   "publicada": "09-03-2018",
+   "reforma": "14-11-2025",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lritf.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LRITF.pdf"
+  },
+  "lfpiorpi": {
+   "nombre": "LEY Federal para la Prevención e Identificación de Operaciones con Recursos de Procedencia Ilícita",
+   "publicada": "17-10-2012",
+   "reforma": "16-07-2025",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfpiorpi.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPIORPI.pdf"
+  },
+  "lfpdppp": {
+   "nombre": "LEY Federal de Protección de Datos Personales en Posesión de los Particulares",
+   "publicada": "20-03-2025",
+   "reforma": "14-11-2025",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfpdppp.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf"
+  },
+  "lcf": {
+   "nombre": "LEY de Coordinación Fiscal",
+   "publicada": "27-12-1978",
+   "reforma": "03-01-2024",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lcf.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LCF.pdf"
+  },
+  "lih": {
+   "nombre": "LEY de Ingresos sobre Hidrocarburos",
+   "publicada": "11-08-2014",
+   "reforma": "28-12-2025",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lih.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIH.pdf"
+  },
+  "lgtaip": {
+   "nombre": "LEY General de Transparencia y Acceso a la Información Pública",
+   "publicada": "20-03-2025",
+   "reforma": "20-03-2025",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lgtaip.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGTAIP.pdf"
+  },
+  "lgpdppso": {
+   "nombre": "LEY General de Protección de Datos Personales en Posesión de Sujetos Obligados",
+   "publicada": "20-03-2025",
+   "reforma": "14-11-2025",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lgpdppso.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGPDPPSO.pdf"
+  },
+  "lamp": {
+   "nombre": "LEY de Amparo, Reglamentaria de los artículos 103 y 107 de la Constitución Política de los Estados Unidos Mexicanos",
+   "publicada": "02-04-2013",
+   "reforma": "16-10-2025",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lamp.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAmp.pdf"
+  },
+  "lgipe": {
+   "nombre": "LEY General de Instituciones y Procedimientos Electorales",
+   "publicada": "23-05-2014",
+   "reforma": "02-06-2026",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lgipe.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGIPE.pdf"
+  },
+  "lgpp": {
+   "nombre": "LEY General de Partidos Políticos",
+   "publicada": "23-05-2014",
+   "reforma": "24-11-2023",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lgpp.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGPP.pdf"
+  },
+  "lss": {
+   "nombre": "LEY del Seguro Social",
+   "publicada": "21-12-1995",
+   "reforma": "15-01-2026",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lss.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf"
+  },
+  "lgs": {
+   "nombre": "LEY General de Salud",
+   "publicada": "07-02-1984",
+   "reforma": "15-01-2026",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lgs.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf"
+  },
+  "lft": {
+   "nombre": "LEY Federal del Trabajo",
+   "publicada": "01-04-1970",
+   "reforma": "14-05-2026",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lft.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf"
+  },
+  "loapf": {
+   "nombre": "LEY Orgánica de la Administración Pública Federal",
+   "publicada": "29-12-1976",
+   "reforma": "07-05-2026",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/loapf.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LOAPF.pdf"
+  },
+  "lgeepa": {
+   "nombre": "LEY General del Equilibrio Ecológico y la Protección al Ambiente",
+   "publicada": "28-01-1988",
+   "reforma": "19-01-2026",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lgeepa.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGEEPA.pdf"
+  },
+  "lgpgir": {
+   "nombre": "LEY General para la Prevención y Gestión Integral de los Residuos",
+   "publicada": "08-10-2003",
+   "reforma": "19-01-2026",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lgpgir.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGPGIR.pdf"
+  },
+  "replica": {
+   "nombre": "LEY Reglamentaria del artículo 6o., párrafo primero, de la Constitución Política de los Estados Unidos Mexicanos, en materia del Derecho de Réplica",
+   "publicada": "04-11-2015",
+   "reforma": "14-11-2025",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lrart6_mdr.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LRArt6_MDR.pdf"
+  },
+  "cpf": {
+   "nombre": "CÓDIGO Penal Federal",
+   "publicada": "14-08-1931",
+   "reforma": "13-03-2026",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpf.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPF.pdf"
+  },
+  "ccf": {
+   "nombre": "CÓDIGO Civil Federal",
+   "publicada": "26-05-1928",
+   "reforma": "14-11-2025",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/ccf.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CCF.pdf"
+  },
+  "cnpp": {
+   "nombre": "CÓDIGO Nacional de Procedimientos Penales",
+   "publicada": "05-03-2014",
+   "reforma": "28-11-2025",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cnpp.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CNPP.pdf"
+  }
+ },
+ "avisos": [
+  {
+   "archivo": "herramientas/asistente_legislativo.py",
+   "renglon": 72,
+   "ley": "lgpp",
+   "nombre": "Ley General de Partidos Políticos",
+   "cita": "02-03-2023",
+   "vigente": "24-11-2023",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lgpp.htm"
+  },
+  {
+   "archivo": "herramientas/informe_sancion.py",
+   "renglon": 28,
+   "ley": "lfrcf",
+   "nombre": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
+   "cita": "14-05-2026",
+   "vigente": "15-05-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfrcf.htm"
+  },
+  {
+   "archivo": "herramientas/informe_sancion.py",
+   "renglon": 54,
+   "ley": "lfrcf",
+   "nombre": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
+   "cita": "14-05-2026",
+   "vigente": "15-05-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfrcf.htm"
+  },
+  {
+   "archivo": "herramientas/informe_semestral.py",
+   "renglon": 39,
+   "ley": "lfrcf",
+   "nombre": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
+   "cita": "14-05-2026",
+   "vigente": "15-05-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfrcf.htm"
+  },
+  {
+   "archivo": "herramientas/integrar_cuenta_publica.py",
+   "renglon": 61,
+   "ley": "lfrcf",
+   "nombre": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
+   "cita": "14-05-2026",
+   "vigente": "15-05-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfrcf.htm"
+  },
+  {
+   "archivo": "herramientas/integrar_glosario_semestral.py",
+   "renglon": 18,
+   "ley": "lfrcf",
+   "nombre": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
+   "cita": "14-05-2026",
+   "vigente": "15-05-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfrcf.htm"
+  },
+  {
+   "archivo": "herramientas/integrar_huachicol_ley.py",
+   "renglon": 5,
+   "ley": "lieps",
+   "nombre": "Ley del Impuesto Especial sobre Producción y Servicios",
+   "cita": "07-11-2025",
+   "vigente": "22-12-2025",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lieps.htm"
+  },
+  {
+   "archivo": "herramientas/integrar_huachicol_ley.py",
+   "renglon": 29,
+   "ley": "lieps",
+   "nombre": "Ley del Impuesto Especial sobre Producción y Servicios",
+   "cita": "07-11-2025",
+   "vigente": "22-12-2025",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lieps.htm"
+  }
+ ],
+ "fallas": []
+}

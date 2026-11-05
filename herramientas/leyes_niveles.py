@@ -303,6 +303,26 @@ def _estados_tabla(base, padron):
             % (COTEJO, ''.join(filas)))
 
 
+# Reformas recientes: lo que junta el vigía legislativo (vigia_legislativo.py,
+# 05-11-2026). La lista la pinta vigia-legislativo.js al abrir la página,
+# leyendo la bandeja que el flujo de GitHub actualiza cada día; así no hay que
+# regenerar la página para ver lo nuevo. Todo va «por cotejar»: el vigía
+# detecta y propone, nunca escribe en la base (AGENTS.md §2).
+BANDEJA = 'docs/legislativo/bandeja.json'
+REFORMAS = {
+    'id': 'reformas-recientes', 'titulo': '🛰️ Reformas recientes, por cotejar',
+    'texto': ('Cada día, nuestro vigía legislativo lee el sumario del Diario Oficial de la Federación y el índice de Leyes Federales Vigentes de la '
+              'Cámara de Diputados, y apunta lo que toca a las leyes del dinero: el Código Fiscal, los impuestos, el presupuesto, la deuda, las compras, '
+              'la fiscalización, las responsabilidades, el antilavado, la Ley Fintech y los datos personales. Lo que aparece aquí está <b>sin verificar</b>: '
+              'es el título, la fecha y la liga a su documento, nunca el texto de la reforma. Entra a la plataforma solo después de cotejarse, con su vigencia.'),
+    'tarjetas': [],
+    'bloque': ('<div id="vigiaLegislativo" data-bandeja="%s"><p>La lista se carga al abrir la página. Si no aparece, consulta el %s y el %s.</p></div>'
+               '<p class="pa-chico">El Senado no está en la lista: su portal no da un índice que se pueda leer sin adivinar. Lo que aprueba llega '
+               'igual al DOF cuando se publica, que es cuando obliga.</p>') % (
+        BANDEJA, _a('https://dof.gob.mx/', 'Diario Oficial de la Federación'), _a(INDICE, 'índice de Leyes Federales Vigentes')),
+}
+
+
 def pagina(base, padron):
     """El diccionario de la página para apartados.py."""
     for a in (e['abbr'] for e in base['estados']):
@@ -322,6 +342,7 @@ def pagina(base, padron):
     ]
     for t, ico, nom, lema in TEMAS:
         secc.append({'id': 'fed-' + t, 'titulo': '%s Federal · %s' % (ico, nom), 'texto': lema + '.', 'tarjetas': [], 'bloque': _fed_tabla(t)})
+    secc.append(REFORMAS)
     secc += [
         {'id': 'estatal', 'titulo': 'Los 32 estados: dónde están sus leyes',
          'texto': ('Cada estado tiene sus propias leyes de ingresos, hacienda, adquisiciones, obra pública y deuda; la LGRA, la LDF y la LGCG ya los obligan '
@@ -345,7 +366,7 @@ def pagina(base, padron):
         'archivo': ARCHIVO, 'menu': TITULO, 'menu_archivo': 'aprende.html',
         'padre': ('aprende.html', 'Aprende'), 'padre2': ('marco-legal.html', 'Marco Legal Hacendario'),
         'icono': '⚖️', 'titulo': TITULO, 'lema': 'Ingresos, deuda, compras, patrimonio y responsabilidades: federal, estatal y municipal',
-        'estilos': ['asistente.css'],
+        'estilos': ['asistente.css'], 'scripts': ['vigia-legislativo.js'],
         'entrada': ('Cada nivel de gobierno cobra, gasta, compra, se endeuda y rinde cuentas con sus propias leyes. Aquí está cuál rige, quién la aprueba, '
                     'dónde se publica y desde cuándo, con la liga a su texto vigente: %d leyes federales, los periódicos oficiales y congresos de las 32 '
                     'entidades y la regla de los municipios.') % len(FEDERALES),
@@ -366,7 +387,17 @@ def fichas(base):
                         f['que'], ALCANCE[f['alc']], f['pub'], 'última reforma DOF ' + f['ult'] if f['ult'] else 'sin reforma'),
                     'ci': [], 'fu': [{'tx': 'Cámara de Diputados, Leyes Federales Vigentes: ' + f['sig'], 'url': pdf(f['pdf'])}],
                     'ir': ['%s#ley-%s' % (ARCHIVO, f['id']), TITULO],
-                    'k': '%s %s ley federal%s' % (f['nom'], f['sig'], pal[f['tema']])})
+                    # «¿Cuándo se reformó…?» (05-11-2026, vigía legislativo): la ficha también contesta la fecha.
+                    'k': '%s %s ley federal cuando se reformo ultima reforma%s' % (f['nom'], f['sig'], pal[f['tema']])})
+    out.append({'t': 'ficha', 'tit': 'Reformas recientes: qué leyes cambiaron (vigía legislativo)',
+                'txt': ('Cada día, nuestro vigía legislativo lee el sumario del Diario Oficial de la Federación y el índice de Leyes Federales Vigentes '
+                        'de la Cámara de Diputados, y apunta las reformas que tocan las leyes del dinero. La lista está en la sección «Reformas '
+                        'recientes», sin verificar hasta su cotejo; también dice qué partes de Auditavisión citan una reforma anterior a la vigente.'),
+                'ci': [], 'fu': [{'tx': 'Diario Oficial de la Federación, sumario del día', 'url': 'https://dof.gob.mx/'},
+                                 {'tx': 'Cámara de Diputados, Leyes Federales Vigentes', 'url': INDICE}],
+                'ir': ['%s#reformas-recientes' % ARCHIVO, TITULO],
+                'k': ('reformas recientes leyes cambiaron cambio esta semana hoy nuevas reformas ultimas reformas publicadas dof diario oficial '
+                      'vigia legislativo decreto reforma ley camara de diputados senado')})
     for e in base['estados']:
         po, url_po, url_co = ESTADOS[e['abbr']]
         fu = [{'tx': po, 'url': url_po}] if url_po else []

@@ -909,7 +909,7 @@
   }
 
   /* --- La lista negra del SAT, en el chat (los 14 mil registros del 69-B se
-     descargan la primera vez que se pregunta: 1.5 MB). --- */
+     descargan la primera vez que se pregunta: 1.9 MB). --- */
   var SAT = { p: null }, ultimaSat = null;
   function cargaSat() {
     if (window.SAT_69B) return Promise.resolve(window.SAT_69B);
@@ -948,7 +948,7 @@
     var termino = rfcs.length ? rfcs.join(' ') : nombre;
     var liga = APP.inspefos.url + '?q=' + encodeURIComponent(rfcs.length ? rfcs[0] : nombre);
     return { espera: cargaSat().then(function (S) { return respSat(S, rfcs, nombre, liga); }, function () {
-      return respApp('inspefos', liga, '<p>No pude descargar ahora la lista oficial del SAT (1.5 MB). Revisa tu conexión y vuelve a preguntarme, o búscalo en la aplicación aquí abajo.</p>');
+      return respApp('inspefos', liga, '<p>No pude descargar ahora la lista oficial del SAT (1.9 MB). Revisa tu conexión y vuelve a preguntarme, o búscalo en la aplicación aquí abajo.</p>');
     }), tit: 'Lista negra del SAT: ' + termino };
   }
   function respSat(S, rfcs, nombre, liga) {
@@ -1295,6 +1295,15 @@
         '<p>📰 Leo la nota aquí mismo con <b>Contrasta una nota</b>: busco sus cifras en pesos, las pongo junto a su documento oficial y te doy el veredicto, cifra por cifra, con su semáforo. Puede tardar unos segundos.</p>' +
         '<p class="pa-chico">Lo que no empata con un documento queda «sin contrastar» y no cuenta como falso. Si la página no se deja leer, ahí mismo puedes pegar el texto.</p>');
     }
+    /* 2b. Una factura (05-11-2026): «revisa mi factura», «tengo un XML», «¿esta factura es de una
+       empresa fantasma?». Abre el Lector de facturas CFDI; un RFC suelto lo sigue contestando la lista negra. */
+    if (APP.inspfactura && /\b(facturas?|cfdi|xml|comprobantes? fiscal(es)?)\b/.test(p) && !RFC_RE.test(t) && !/^\s*(que|q) (es|son|significa)\b|que quiere decir/.test(p)) {
+      RFC_RE.lastIndex = 0;
+      return respApp('inspfactura', APP.inspfactura.url,
+        '<p>📑 Te abro el <b>Lector de facturas CFDI</b> aquí abajo. Elige el XML de tu factura (o varios): lo leo en tu navegador, sin subirlo a ningún lado, rehago su cuenta y cruzo al emisor con la lista 69-B del SAT.</p>' +
+        '<p class="pa-chico">Separo lo que declaró el SAT (oficial) de las señales que salen de comparar fechas (derivado, «señal para revisar»). No te digo si la factura está cancelada: eso lo dice el verificador del SAT con su UUID.</p>');
+    }
+    RFC_RE.lastIndex = 0;
     /* 3. La lista negra del SAT. */
     var sat = listaNegra(q);
     if (sat) return sat;
@@ -1343,7 +1352,7 @@
     if (/^\s*(que|q) (es|son|significa|hace)\b/.test(p) && id !== '*') return null;
     if (id === '*') {
       return {
-        html: '<p>🔍 El <b>Modo Inspector</b> son seis aplicaciones para grandes investigaciones, y todas las usas desde aquí, sin salir del chat. Dime cuál, o pásame directo lo que traes:</p><ul class="pa-lista">' +
+        html: '<p>🔍 El <b>Modo Inspector</b> son ' + IN.apps.length + ' aplicaciones para grandes investigaciones, y todas las usas desde aquí, sin salir del chat. Dime cuál, o pásame directo lo que traes:</p><ul class="pa-lista">' +
           IN.apps.map(function (a) { return '<li><span aria-hidden="true">' + a.ico + '</span> <b>' + esc(a.n) + '.</b> ' + esc(a.frase) + '. <span class="pa-chico">' + esc(EJ_APP[a.id] || '') + '</span></li>'; }).join('') + '</ul>',
         ir: [IN.pagina, 'el Modo Inspector'], sug: IN.apps.map(function (a) { return a.n; }), rec: []
       };
@@ -1368,6 +1377,7 @@
     inspentes: 'Pídeme un diagnóstico: «diagnóstico de Pemex», «salud financiera de Jalisco», «Zapopan».',
     inspnota: 'Pégame la liga de la nota, o «¿es cierto que…?» con la cifra que oíste.',
     inspefos: 'Escríbeme un RFC o un nombre: «¿está en la lista negra la empresa…?».',
+    inspfactura: 'Dime «revisa mi factura» y elige el XML: lo leo sin subirlo y lo cruzo con la lista 69-B.',
     inspverifica: 'Pégame el folio (AV-…) o la huella digital del documento.',
     'servicios.html': 'Cuéntame el caso y te llevo al formulario, con el tema ya escrito.'
   };

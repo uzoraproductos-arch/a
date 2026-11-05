@@ -3422,7 +3422,7 @@
      contribuyente factura operaciones inexistentes (lo que se conoce como
      EFOS), notificarlo y, si no lo desvirtua, declararlo en definitiva.
      El SAT publica la lista completa; aqui se consulta sin salir de la
-     pagina. La lista pesa cerca de 1.5 MB y solo se descarga cuando el
+     pagina. La lista pesa cerca de 1.9 MB y solo se descarga cuando el
      lector la pide. Estar en la lista no es una condena penal, y dos de
      sus cuatro situaciones significan justamente lo contrario.
      ==================================================================== */
@@ -3472,7 +3472,7 @@
     if (!el) return;
     if (efos.estado === 'cargando') { el.innerHTML = 'Descargando la lista del SAT…'; return; }
     if (efos.estado === 'error') { el.innerHTML = chipEstado('pendiente') + tuUd(' No se pudo cargar la lista. Revise su conexión e intente de nuevo.', ' No se pudo cargar la lista. Revisa tu conexión e intenta de nuevo.'); return; }
-    if (efos.estado !== 'listo') { el.innerHTML = 'La lista se descarga al escribir la primera búsqueda (1.5 MB).'; return; }
+    if (efos.estado !== 'listo') { el.innerHTML = 'La lista se descarga al escribir la primera búsqueda (1.9 MB).'; return; }
     const m = window.SAT_69B.meta, c = m.porSituacion;
     el.innerHTML = chipEstado('oficial') + ' <strong>' + formatNumber(m.total) + '</strong> registros · corte del SAT al ' + escHtml(m.corte) +
       ' · Definitivos ' + formatNumber(c['Definitivo'] || 0) + ', presuntos ' + formatNumber(c['Presunto'] || 0) +

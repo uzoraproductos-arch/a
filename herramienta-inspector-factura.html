@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<!-- Página generada por herramientas/apartados.py: no la edites a mano. -->
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lector de facturas CFDI · Auditavisión</title>
+  <meta name="description" content="Busca y verifica. Elige el XML de una o varias facturas: las leemos en tu navegador, sin subirlas, rehacemos su cuenta y cruzamos al emisor con la lista 69-B del SAT, separando lo que declaró la autoridad de las señales para revisar.">
+  <link rel="canonical" href="https://auditavision.com.mx/herramienta-inspector-factura.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Auditavisión">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:url" content="https://auditavision.com.mx/herramienta-inspector-factura.html">
+  <meta property="og:title" content="Lector de facturas CFDI · Auditavisión">
+  <meta property="og:description" content="Busca y verifica. Elige el XML de una o varias facturas: las leemos en tu navegador, sin subirlas, rehacemos su cuenta y cruzamos al emisor con la lista 69-B del SAT, separando lo que declaró la autoridad de las señales para revisar.">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#0b2a63">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='12' fill='%23ffffff' stroke='%231d5fd6' stroke-width='4'/%3E%3Cg fill='%23ffffff' stroke='%234f6286' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M20 37 C14 28 9 23 3 22 C6 30 9 34 13 37 C9 36 6 37 4 39 C9 41 14 41 19 41 Z'/%3E%3Cpath d='M44 37 C50 28 55 23 61 22 C58 30 55 34 51 37 C55 36 58 37 60 39 C55 41 50 41 45 41 Z'/%3E%3C/g%3E%3Ccircle cx='32' cy='39' r='15' fill='%23d9a21a' stroke='%237a5206' stroke-width='2'/%3E%3Ccircle cx='32' cy='39' r='11' fill='%23f7cf45' stroke='%23a8740c' stroke-width='1.2'/%3E%3Cpath d='M27 44 Q32 47 37 44' fill='none' stroke='%235a3a02' stroke-width='1.8' stroke-linecap='round'/%3E%3Ccircle cx='28' cy='38' r='1.9' fill='%2310202e'/%3E%3Ccircle cx='36' cy='38' r='1.9' fill='%2310202e'/%3E%3Cg transform='rotate(-8 32 22)'%3E%3Cellipse cx='32' cy='24.5' rx='14' ry='3' fill='%231b2433'/%3E%3Cpath d='M23 24.5 C23 14 25 11 32 11 C39 11 41 14 41 24.5 Z' fill='%231b2433'/%3E%3Crect x='23.2' y='19.5' width='17.6' height='3.4' fill='%23d4a826'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261105a">
+  <script src="assets/auditor/js/iconos.js?v=20261105a"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261105a"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261105a" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261105a">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261105a">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261105a">
+  <link rel="stylesheet" href="assets/auditor/css/insp-efos.css?v=20261105a">
+  <link rel="stylesheet" href="assets/auditor/css/insp-factura.css?v=20261105a">
+</head>
+<body data-pagina="apartado">
+  <nav class="site-top-nav" aria-label="Navegación principal">
+    <div class="nav-brand-group">
+      <button type="button" class="brand-logo-btn" id="apartadoPresentacion" title="Quiénes somos: qué es Auditavisión" aria-label="Quiénes somos: abrir la presentación de Auditavisión"><img src="assets/auditor/img/logo-auditavision.svg" alt="" width="72" height="56"></button>
+      <a class="nav-brand-text" href="index.html" title="Ir a la página principal">
+        <span class="nav-brand-title">Auditavisión</span>
+        <span class="nav-brand-sub">El gasto público, a la vista</span>
+      </a>
+    </div>
+
+    <button type="button" class="nav-hamburguesa" id="navHamburguesa" aria-expanded="false" aria-controls="navIndiceMovil" aria-label="Abrir el menú">
+      <span class="nav-hamb-rayas" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="nav-hamb-txt">Menú</span>
+    </button>
+
+    <div class="nav-indice" id="navIndiceMovil">
+    <div class="nav-center-links">
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="herramienta-inspector-pregunta.html">Auditor</a></div>
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="planisferio.html">Planisferio</a></div>
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="participa.html" aria-current="page">Comunidad</a></div>
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="noticias-relevantes.html">Noticiero</a></div>
+      <div class="nav-menu-item"><a class="mega-menu-trigger" href="servicios.html">Servicios</a></div>
+      <div class="nav-menu-item nav-menu-cuentanos"><a class="mega-menu-trigger nav-cuentanos" href="comunidad.html" data-puerta>📢 Cuéntanos lo que viste</a></div>
+    </div>
+
+    <div class="nav-right-container">
+      <div class="nav-right-actions">
+        <a class="nav-action-btn nav-feedback-btn" href="comunidad.html" data-puerta title="Cuéntanos lo que viste: algo raro con el dinero público, un dato mal, un tema para investigar, compartir y fe de erratas">
+          <span>📢</span>
+          <span>Cuéntanos lo que viste</span>
+        </a>
+        <button type="button" class="nav-action-btn nav-share-btn" id="apartadoCompartir" title="Compartir esta página o copiar su enlace">
+          <span>🔗</span>
+          <span>Compartir</span>
+        </button>
+        <a href="diccionario.html" class="nav-action-btn nav-creator-badge" title="Creado por Inspector Meteoro · Biblioteca del Erario Público">
+          <span>🪐</span>
+          <span>Inspector Meteoro</span>
+        </a>
+      </div>
+    </div>
+    </div>
+  </nav>
+  <div class="pt-velo" id="ptVelo" hidden></div>
+  <aside class="pt-cajon" id="ptCajon" role="dialog" aria-modal="true" aria-labelledby="ptTit" hidden>
+    <div class="pt-cab">
+      <div>
+        <span class="pt-kicker">📢 Cuéntanos lo que viste</span>
+        <h2 class="pt-tit" id="ptTit">¿Qué viste?</h2>
+        <p class="pt-sub">Elige una de las cinco rutas. Nada se envía ni se guarda por su cuenta: el texto se arma en tu navegador y tú decides si lo copias, lo descargas o nos lo mandas.</p>
+      </div>
+      <button type="button" class="pt-cerrar" data-pt-cerrar aria-label="Cerrar">✕</button>
+    </div>
+    <div class="pt-cuerpo">
+      <details class="pt-ruta" name="pt-ruta" data-ruta="reporta">
+        <summary><span class="pt-ico" aria-hidden="true">🏗️</span><span class="pt-sum"><b>Algo raro con el dinero público</b><span>Una obra que no cuadra, un contrato o una compra sospechosa, un programa social usado en campaña, un cobro indebido.</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        <form class="sv-form cm-form" id="ptReporte" data-canal="" data-asunto="Reporte ciudadano" data-funcion="https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1/recibir-formulario" data-tipo="reporte" data-turnstile="0x4AAAAAAFvaChN1BsDAhY5L" novalidate>
+          <p class="sv-privado">🔒 Primero ves el texto tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar». Puedes firmar con seudónimo; el correo es opcional, solo sirve para responderte y se guarda únicamente si aceptas el <a href="aviso-de-privacidad.html">aviso de privacidad</a>.</p>
+          <p class="sv-privado pt-aviso">⚠️ No escribas datos bancarios, documentos de identidad ni información de terceros que pueda ponerlos en riesgo.</p>
+            <div class="sv-campo"><label for="ptRepQue">Qué fue <span class="sv-req">obligatorio</span></label><select id="ptRepQue" required><option value="">Elige una opción</option><option>Una obra que no cuadra</option><option>Un contrato o una compra sospechosa</option><option>Uso electoral de un programa social</option><option>Un cobro o trámite indebido</option><option>Una duda sobre gasto o presupuesto</option></select></div>
+            <div class="sv-campo"><label for="ptRepDonde">Dónde <span class="sv-req">obligatorio</span></label><input id="ptRepDonde" type="text" maxlength="200" required><small>Entidad, municipio, colonia y una referencia física. Una dirección vale más que un adjetivo.</small></div>
+            <div class="sv-campo"><label for="ptRepCuando">Cuándo</label><input id="ptRepCuando" type="text" maxlength="80"><small>La fecha o el periodo: los fondos se fiscalizan por ejercicio anual.</small></div>
+            <div class="sv-campo"><label for="ptRepVio">Qué viste <span class="sv-req">obligatorio</span></label><textarea id="ptRepVio" rows="4" maxlength="1500" required></textarea><small>La obra, el contrato, el programa o el trámite, con su nombre tal como aparece en la placa o en el recibo.</small></div>
+            <div class="sv-campo"><label for="ptRepDinero">Con qué dinero</label><input id="ptRepDinero" type="text" maxlength="160"><small>Si lo sabes: Ramo 33, FISMDF, FORTAMUN, recurso estatal o propio del municipio.</small></div>
+            <div class="sv-campo"><label for="ptRepPrueba">Con qué prueba</label><input id="ptRepPrueba" type="text" maxlength="300"><small>Una foto con fecha, un número de contrato, una factura, un acta de entrega.</small></div>
+            <div class="sv-campo"><label for="ptRepFirma">Firma o seudónimo</label><input id="ptRepFirma" type="text" maxlength="80"></div>
+            <div class="sv-campo"><label for="ptRepCorreo">Correo (opcional)</label><input id="ptRepCorreo" type="email" maxlength="160"></div>
+            <label class="sv-check"><input type="checkbox" id="ptRepAcepta" data-acepta> Acepto el <a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi correo</label>
+          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi reporte</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
+          <p class="sv-error cm-error" role="alert" hidden></p>
+        </form>
+        <div class="sv-resumen cm-resumen" hidden></div>
+          <p class="pt-nota">Esto ordena tu reporte, pero <b>no es una denuncia</b>. La única vía con efecto jurídico es un canal oficial: <a href="garantias-brujula.html">la brújula de las seis puertas</a> te dice cuál toca, si admite anonimato y qué tener a la mano.</p>
+        </div>
+      </details>
+      <details class="pt-ruta" name="pt-ruta" data-ruta="error">
+        <summary><span class="pt-ico" aria-hidden="true">✏️</span><span class="pt-sum"><b>Un dato mal en esta plataforma</b><span>Una cifra que no coincide con su documento oficial. Si tienes razón, se corrige y entra a la fe de erratas.</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        <form class="sv-form cm-form" id="ptError" data-canal="" data-asunto="Señalamiento de error" data-funcion="https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1/recibir-formulario" data-tipo="errata" data-turnstile="0x4AAAAAAFvaChN1BsDAhY5L" novalidate>
+          <p class="sv-privado">🔒 Primero ves el texto tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar». Puedes firmar con seudónimo; el correo es opcional, solo sirve para responderte y se guarda únicamente si aceptas el <a href="aviso-de-privacidad.html">aviso de privacidad</a>.</p>
+            <div class="sv-campo"><label for="ptErrPagina">Página <span class="sv-req">obligatorio</span></label><input id="ptErrPagina" class="cm-pagina" type="text" maxlength="200" required><small>Si abriste esto desde una página, ya está escrita.</small></div>
+            <div class="sv-campo"><label for="ptErrDato">Qué dato está mal <span class="sv-req">obligatorio</span></label><textarea id="ptErrDato" rows="2" maxlength="800" required></textarea></div>
+            <div class="sv-campo"><label for="ptErrDice">Qué dice el documento oficial <span class="sv-req">obligatorio</span></label><textarea id="ptErrDice" rows="2" maxlength="800" required></textarea></div>
+            <div class="sv-campo"><label for="ptErrFuente">Enlace al documento <span class="sv-req">obligatorio</span></label><input id="ptErrFuente" type="url" maxlength="400" required placeholder="https://"><small>Sin documento no podemos corregir: es la misma regla que seguimos nosotros.</small></div>
+            <div class="sv-campo"><label for="ptErrFirma">Firma o seudónimo</label><input id="ptErrFirma" type="text" maxlength="80"></div>
+            <div class="sv-campo"><label for="ptErrCorreo">Correo (opcional)</label><input id="ptErrCorreo" type="email" maxlength="160"></div>
+            <label class="sv-check"><input type="checkbox" id="ptErrAcepta" data-acepta> Acepto el <a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi correo</label>
+          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi señalamiento</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
+          <p class="sv-error cm-error" role="alert" hidden></p>
+        </form>
+        <div class="sv-resumen cm-resumen" hidden></div>
+        </div>
+      </details>
+      <details class="pt-ruta" name="pt-ruta" data-ruta="tema">
+        <summary><span class="pt-ico" aria-hidden="true">💡</span><span class="pt-sum"><b>Un tema que deberíamos investigar</b><span>Lo que te gustaría que revisáramos, con los documentos que conozcas.</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        <form class="sv-form cm-form" id="ptTema" data-canal="" data-asunto="Propuesta de tema" data-funcion="https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1/recibir-formulario" data-tipo="tema" data-turnstile="0x4AAAAAAFvaChN1BsDAhY5L" novalidate>
+          <p class="sv-privado">🔒 Primero ves el texto tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar». Puedes firmar con seudónimo; el correo es opcional, solo sirve para responderte y se guarda únicamente si aceptas el <a href="aviso-de-privacidad.html">aviso de privacidad</a>.</p>
+            <div class="sv-campo"><label for="ptTemaQue">Tema <span class="sv-req">obligatorio</span></label><input id="ptTemaQue" type="text" maxlength="160" required><small>Por ejemplo: las compras de un hospital, una obra de tu municipio, un fideicomiso.</small></div>
+            <div class="sv-campo"><label for="ptTemaPor">Por qué importa <span class="sv-req">obligatorio</span></label><textarea id="ptTemaPor" rows="3" maxlength="1200" required></textarea></div>
+            <div class="sv-campo"><label for="ptTemaDonde">Entidad o municipio</label><input id="ptTemaDonde" type="text" maxlength="120"></div>
+            <div class="sv-campo"><label for="ptTemaDocs">Documentos oficiales que conozcas</label><textarea id="ptTemaDocs" rows="2" maxlength="800"></textarea><small>Ligas a la Auditoría Superior, Compranet, el DOF o Transparencia. Si no tienes, no pasa nada.</small></div>
+            <div class="sv-campo"><label for="ptTemaFirma">Firma o seudónimo</label><input id="ptTemaFirma" type="text" maxlength="80"></div>
+            <div class="sv-campo"><label for="ptTemaCorreo">Correo (opcional)</label><input id="ptTemaCorreo" type="email" maxlength="160"></div>
+            <label class="sv-check"><input type="checkbox" id="ptTemaAcepta" data-acepta> Acepto el <a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi correo</label>
+          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi propuesta</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
+          <p class="sv-error cm-error" role="alert" hidden></p>
+        </form>
+        <div class="sv-resumen cm-resumen" hidden></div>
+        </div>
+      </details>
+      <details class="pt-ruta" name="pt-ruta" data-ruta="compartir">
+        <summary><span class="pt-ico" aria-hidden="true">📣</span><span class="pt-sum"><b>Comparte el Estado de Cuenta</b><span>Un enlace para que más gente vea de dónde sale el dinero público y en qué se gasta.</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        <div class="cm-compartir" data-url="https://auditavision.com.mx/estado-de-cuenta.html" data-texto="El contexto dimensional de las cuentas de México: de dónde sale el dinero público y en qué se gasta, con fuentes oficiales.">
+          <p>El <a href="estado-de-cuenta.html">Contexto dimensional</a> resume 2024, 2026 y 2027 en cuatro dimensiones, cada cifra con su fuente. Compártelo: entre más gente lo lea, más difícil es que el dinero público pase sin que nadie lo vea.</p>
+          <div class="sv-acciones cm-redes"></div>
+          <p class="cm-nota">Si sacaste tu cuenta personal en la <a href="herramienta-calculadora-ticket.html">Calculadora Cívica</a>, compartimos solo el enlace: tu ingreso nunca sale de tu navegador.</p>
+          <noscript><p>Para compartir, copia esta dirección: https://auditavision.com.mx/estado-de-cuenta.html</p></noscript>
+        </div>
+        </div>
+      </details>
+      <details class="pt-ruta" name="pt-ruta" data-ruta="erratas">
+        <summary><span class="pt-ico" aria-hidden="true">📋</span><span class="pt-sum"><b>Fe de erratas</b><span>Cada corrección que hemos hecho: qué estaba mal y qué cambió.</span></span></summary>
+        <div class="pt-ruta-cuerpo">
+        <ol class="cm-erratas">
+            <li class="cm-errata"><span class="cm-errata-fecha">24-10-2026</span><b>Referencias y Gasto público</b><span><span class="cm-errata-et">Estaba mal:</span> La ficha [11] del Presupuesto de Egresos 2026 y la página «¿Quién lo aprueba?» decían que se publicó en el DOF el 28 de noviembre de 2025.</span><span><span class="cm-errata-et">Qué hicimos:</span> Se publicó el 21 de noviembre de 2025: así lo dice el propio documento de la Cámara de Diputados. Se corrigieron las dos.</span> <a href="fuentes-oficiales.html#ref-pef2026">Ver la página ➔</a></li>
+            <li class="cm-errata"><span class="cm-errata-fecha">10-10-2026</span><b>Calculadora Cívica</b><span><span class="cm-errata-et">Estaba mal:</span> El comparador «Tú contra ellos» usaba un ingreso de referencia de $15,000 que no salía de ningún documento.</span><span><span class="cm-errata-et">Qué hicimos:</span> Se retiró. Ahora, si no escribes tu ingreso, usa el salario mínimo general mensual de 2026 ($9,451.20, CONASAMI), rotulado como ejemplo oficial.</span> <a href="herramienta-calculadora.html">Ver la página ➔</a></li>
+            <li class="cm-errata"><span class="cm-errata-fecha">10-10-2026</span><b>Tren Maya</b><span><span class="cm-errata-et">Estaba mal:</span> El recuadro del peritaje mostraba 515,487 mdp sin cotejo contra su documento.</span><span><span class="cm-errata-et">Qué hicimos:</span> Se retiró la cifra; el dato quedó como retirado, con su motivo y el enlace al expediente de la Auditoría Superior.</span> <a href="auditoria-tren-maya.html">Ver la página ➔</a></li>
+            <li class="cm-errata"><span class="cm-errata-fecha">10-10-2026</span><b>Programas sociales</b><span><span class="cm-errata-et">Estaba mal:</span> La pensión (S176) mostraba 465,048 mdp como devengado, cuando es el aprobado; IMSS-Bienestar traía 128,900 mdp sin documento; las becas eran un solo renglón de 87,540 mdp sin documento.</span><span><span class="cm-errata-et">Qué hicimos:</span> Se retiraron las tres. Las becas se separaron en S072 y S311 con aprobado y devengado de la Cuenta Pública 2024; la pensión e IMSS-Bienestar quedaron pendientes.</span> <a href="pendientes.html">Ver la página ➔</a></li>
+            <li class="cm-errata"><span class="cm-errata-fecha">09-10-2026</span><b>Marco legal hacendario</b><span><span class="cm-errata-et">Estaba mal:</span> Había dos «preceptos» de la Ley de Ingresos que no existen, y la extinción de los fideicomisos judiciales se atribuía al transitorio Cuarto, con «13 fideicomisos» y «$15,434 mdp» que el decreto no menciona.</span><span><span class="cm-errata-et">Qué hicimos:</span> Se retiraron los dos preceptos, se corrigió el transitorio (es el Décimo) y se quitaron las cifras. Cada precepto se cotejó palabra por palabra con su texto vigente.</span> <a href="marco-legal.html">Ver la página ➔</a></li>
+            <li class="cm-errata"><span class="cm-errata-fecha">27-09-2026</span><b>Personajes relevantes</b><span><span class="cm-errata-et">Estaba mal:</span> Las fichas de personajes de la antigua Enciclopedia no citaban fuentes.</span><span><span class="cm-errata-et">Qué hicimos:</span> Se retiraron. Lo que se rescató después se verificó afirmación por afirmación contra documentos oficiales.</span></li>
+          </ol>
+        </div>
+      </details>
+      <p class="pt-pie">Todo esto vive también en su página: <a href="comunidad.html">Cuéntanos lo que viste</a> · <a href="garantias.html">Garantías cívicas: a qué puerta tocar</a></p>
+    </div>
+  </aside>
+
+  <main class="apartado" id="contenido">
+    <header class="apartado-cab herr-cab herr-foto rubro-inspector">
+      <div class="apartado-ancho">
+        <nav class="apartado-migas" aria-label="Estás en"><a href="index.html">Inicio</a> <span aria-hidden="true">›</span> <a href="participa.html">Comunidad</a> <span aria-hidden="true">›</span> <a href="enciclopedia-auditavision.html">Enciclopedia</a> <span aria-hidden="true">›</span> <a href="sigue-el-dinero.html">Números</a> <span aria-hidden="true">›</span> <a href="numeros-herramientas-del-auditor.html">Herramientas del Auditor</a> <span aria-hidden="true">›</span> <a href="herramienta-inspector.html">Modo Inspector</a> <span aria-hidden="true">›</span> <span>Lector de facturas CFDI</span></nav>
+        <span class="apartado-lema">Modo Inspector · aplicación 5 de 8</span>
+        <h1 class="apartado-titulo"><span class="herr-cab-ico" aria-hidden="true">📑</span><span class="herr-cab-tit">Lector de facturas CFDI</span></h1>
+        <p class="apartado-entrada"><b>Busca y verifica.</b> Elige el XML de una o varias facturas: las leemos en tu navegador, sin subirlas, rehacemos su cuenta y cruzamos al emisor con la lista 69-B del SAT, separando lo que declaró la autoridad de las señales para revisar.</p>
+        <span class="herr-cab-credito">Imagen ilustrativa</span><a class="apartado-auditor" href="herramienta-inspector-pregunta.html?modo=inspector&amp;q=Lector%20de%20facturas%20CFDI" data-modo="inspector"><span aria-hidden="true">🔍</span><span>Pregúntale al Auditor · <b>Modo Inspector</b></span></a>
+      </div>
+    </header>
+
+    <div class="apartado-ancho apartado-cuerpo">
+
+      
+      <section class="apartado-seccion" id="modulo" aria-labelledby="modulo-tit">
+        <h2 class="sr-only" id="modulo-tit">Lector de facturas CFDI</h2>
+        <div class="apartado-bloque">
+        
+<div class="ef cf" id="cf">
+  <script type="application/json" id="cfDatos">{"corte":"31 de diciembre de 2025","total":14234,"sit":{"F":{"t":"Definitivo","c":"def","i":"⛔","corto":"Señal fuerte"},"P":{"t":"Presunto","c":"pre","i":"⚠️","corto":"Sospecha en curso"},"D":{"t":"Desvirtuado","c":"des","i":"✅","corto":"Salió de la presunción"},"S":{"t":"Sentencia favorable","c":"sen","i":"⚖️","corto":"Le dieron la razón"}},"cff":"https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf"}</script>
+
+  <section class="ef-hero" aria-labelledby="cf-tit">
+    <h2 class="ef-hero-tit" id="cf-tit">¿Esta factura es de una empresa en la lista negra del SAT?</h2>
+    <p class="ef-hero-txt">Elige el XML de una factura electrónica (CFDI 4.0, o 3.3 si es anterior a 2022). La leemos, rehacemos su cuenta y cruzamos al emisor con los <b>14,234</b> registros <span class="est-chip est-oficial">oficial</span> del listado del artículo 69-B del Código Fiscal<sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-cff" title="Código Fiscal de la Federación [CFF]. Diario Oficial de la Federación, 31 de diciembre de 1981 (México). Última reforma publicada el 9 de abril de 2026. Artícul">[09]</a></sup>, con corte del SAT al <b>31 de diciembre de 2025</b><sup class="apartado-libro-llamado"><a href="fuentes-oficiales.html#ref-sat-69b" title="Servicio de Administración Tributaria. (s. f.). Notificación a contribuyentes con operaciones presuntamente inexistentes y listados definitivos [artículo 69-B d">[102]</a></sup>.</p>
+    <p class="cf-privado" id="cfPrivado">🔒 <b>Tu factura no sale de tu equipo.</b> Se lee aquí, en tu navegador: no la subimos a ningún servidor ni la guardamos. Al cerrar la página, se borra.</p>
+
+    <div class="cf-entrada">
+      <label class="ef-lbl" for="cfArchivos">Tus facturas en XML (puedes elegir varias)</label>
+      <div class="cf-suelta" id="cfSuelta">
+        <input type="file" id="cfArchivos" class="cf-archivo" accept=".xml,text/xml,application/xml" multiple>
+        <p>o arrástralas aquí</p>
+      </div>
+      <details class="cf-pegar">
+        <summary>¿Solo tienes el texto? Pega el XML</summary>
+        <label class="ef-lbl" for="cfTexto">El contenido del XML</label>
+        <textarea id="cfTexto" class="ef-area" rows="6" spellcheck="false" placeholder="&lt;cfdi:Comprobante …"></textarea>
+        <button type="button" class="ef-btn" id="cfLeerTexto">Leer este XML</button>
+      </details>
+      <p><button type="button" class="ef-btn ef-btn-sec" id="cfEjemplo">🧪 Probar con una factura ficticia</button></p>
+    </div>
+
+    <p class="ef-estado" id="cfEstado" role="status">La lista 69-B (1.9 MB) se descarga cuando eliges tu primera factura.</p>
+    <noscript><p class="ef-estado">Para leer facturas aquí hace falta JavaScript. Si sabes Python, la misma revisión está en herramientas/lector_cfdi.py del repositorio.</p></noscript>
+    <div class="cf-res" id="cfRes" aria-live="polite"></div>
+    <div class="ef-busca-fila" id="cfAcciones" hidden>
+      <button type="button" class="ef-btn" id="cfCsv">⬇️ Descargar la tabla (CSV)</button>
+      <button type="button" class="ef-btn ef-btn-sec" id="cfLimpiar">🗑️ Borrar todo</button>
+    </div>
+  </section>
+
+  <section class="ef-sec" aria-labelledby="cf-como">
+    <h2 id="cf-como">Cómo funciona</h2>
+    <ol class="cf-pasos"><li class="cf-paso"><span class="cf-paso-ico" aria-hidden="true">📂</span><b>Elige tus XML</b><p>Uno o varios a la vez (así trabaja un despacho). También puedes arrastrarlos o pegar el texto de uno.</p></li><li class="cf-paso"><span class="cf-paso-ico" aria-hidden="true">🔎</span><b>Los leemos aquí mismo</b><p>En tu navegador: el UUID del timbre, la fecha, el emisor, el receptor, los conceptos, los impuestos y el total.</p></li><li class="cf-paso"><span class="cf-paso-ico" aria-hidden="true">🧮</span><b>Rehacemos la cuenta</b><p>Subtotal menos descuento, más impuestos trasladados, menos retenidos: ¿da el total? ¿Los conceptos suman el subtotal?</p></li><li class="cf-paso"><span class="cf-paso-ico" aria-hidden="true">🧾</span><b>La cruzamos con la lista 69-B</b><p>Si el emisor aparece, te decimos lo que publicó el SAT y, aparte, las señales que salen de comparar fechas.</p></li></ol>
+  </section>
+
+  <section class="ef-sec" aria-labelledby="cf-separa">
+    <h2 id="cf-separa">Lo que dice el SAT y lo que nosotros señalamos</h2>
+    <ul class="cf-dos">
+      <li><p class="cf-dos-t"><span class="est-chip est-oficial">oficial</span> Lo que declaró la autoridad</p><p>Si el RFC del emisor está en la lista 69-B: su situación (presunto, definitivo, desvirtuado o sentencia favorable), el oficio y la fecha en que el SAT lo publicó. Es lo que dice el listado, palabra por palabra.</p></li>
+      <li><p class="cf-dos-t"><span class="est-chip est-derivado">derivado</span> Señales para revisar</p><p>Lo que sale de comparar: la factura se emitió <b>después</b> de que el emisor salió publicado como presunto o como definitivo, o su cuenta no cuadra. Es una pregunta que conviene hacer, <b>no una irregularidad</b> ni una acusación.</p></li>
+      <li><p class="cf-dos-t">✅ A favor del contribuyente</p><p>Desvirtuado y sentencia favorable quieren decir lo contrario de una sospecha: demostró ante el SAT que sus operaciones existieron, o un tribunal le dio la razón.</p></li>
+    </ul>
+  </section>
+
+  <section class="ef-sec" aria-labelledby="cf-ley">
+    <h2 id="cf-ley">Lo que dice el artículo 69-B del Código Fiscal</h2>
+    <p>En sencillo, párrafo por párrafo (texto vigente, última reforma DOF 09-04-2026; <a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf" target="_blank" rel="noopener">Cámara de Diputados ↗</a>).</p>
+    <ul class="leg-ciegos"><li><b>Primer párrafo.</b> Si el SAT detecta que alguien factura sin activos, personal, infraestructura o capacidad material para dar lo que factura, o que no está localizable, presume que esas operaciones no existieron.</li><li><b>Segundo párrafo.</b> Se lo notifica por buzón tributario y lo publica en la página del SAT y en el DOF: es el listado de «presuntos». Tiene quince días para desvirtuarlo.</li><li><b>Cuarto párrafo.</b> Si no lo desvirtúa, el SAT lo publica en el listado de «definitivos», nunca antes de treinta días después de notificarle la resolución.</li><li><b>Quinto párrafo.</b> Publicado como definitivo, las operaciones de sus comprobantes «no producen ni produjeron efecto fiscal alguno», con efectos generales: también las facturas anteriores a la publicación.</li><li><b>Sexto párrafo.</b> El SAT también publica, cada trimestre, a quienes desvirtuaron o ganaron una sentencia firme: salen de la presunción.</li><li><b>Octavo párrafo.</b> Quien dio efecto fiscal a esas facturas tiene treinta días tras la publicación del definitivo para acreditar que sí recibió el bien o el servicio, o para corregir su situación con declaraciones complementarias.</li></ul>
+  </section>
+
+  <section class="ef-sec" aria-labelledby="cf-no">
+    <h2 id="cf-no">Lo que esta aplicación no dice</h2>
+    <ul>
+      <li><b>No dice si la factura está vigente o cancelada.</b> Eso solo lo sabe el SAT: consúltalo con el UUID en su verificador de comprobantes fiscales digitales.</li>
+      <li><b>No valida el sello ni el certificado.</b> Leemos lo que el XML dice; un archivo alterado a mano se leería igual. La estructura del CFDI la fija el <a href="http://omawww.sat.gob.mx/tramitesyservicios/Paginas/anexo_20.htm" target="_blank" rel="noopener">Anexo 20 del SAT ↗</a> (<a href="http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd" target="_blank" rel="noopener">esquema del CFDI 4.0 ↗</a>).</li>
+      <li><b>No califica al receptor</b> ni dice si la operación existió: eso se acredita ante el SAT con documentos (art. 69-B, octavo párrafo).</li>
+      <li>La lista tiene corte al 31 de diciembre de 2025. Alguien que el SAT publicó después no aparece todavía.</li>
+      <li>Si el emisor o el receptor es persona física, su RFC sale tapado y su nombre no se muestra: es un dato personal.</li>
+    </ul>
+  </section>
+</div>
+        </div>
+      </section>
+
+      <nav class="herr-nav-min" aria-label="Moverte desde aquí">
+        <a class="herr-min ant" href="herramienta-inspector-efos.html"><span>← Aplicación anterior</span><small>🧾 Lista negra del SAT</small></a>
+        <a class="herr-min" href="herramienta-inspector.html"><span>Las 8 aplicaciones</span><small>Modo Inspector</small></a>
+        <a class="herr-min sig" href="herramienta-inspector-verifica.html"><span>Aplicación siguiente →</span><small>🔏 Verifica un estado de cuenta</small></a>
+        <a class="herr-min" href="indice.html"><span>Índice</span><small>Todo Auditavisión</small></a>
+      </nav>
+    </div>
+  </main>
+
+  <footer class="apartado-pie">
+    <div class="apartado-ancho">
+      <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
+      <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261105a</b></span>
+    </div>
+  </footer>
+
+  <script src="assets/auditor/js/apartados.js?v=20261105a"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261105a"></script>
+  <script src="assets/auditor/js/insp-factura.js?v=20261105a"></script>
+</body>
+</html>

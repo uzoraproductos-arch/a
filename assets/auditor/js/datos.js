@@ -17,7 +17,7 @@
   /* El auditor le habla de tú al lector (AGENTS.md §6). */
   function tuUd(usted, tu) { return tu; }
 
-  /* La lista 69-B del SAT pesa cerca de 1.5 MB: se baja solo al pedir su CSV. */
+  /* La lista 69-B del SAT pesa cerca de 1.9 MB: se baja solo al pedir su CSV. */
   let efosPromesa = null;
   function efosCargar() {
     if (window.SAT_69B) return Promise.resolve();

@@ -7,7 +7,8 @@ qué ya existe en el código y cómo encaja cada pieza**, para que no haya que
 volver a preguntárselo.
 
 Orden pedido por el autor: **1. vigía legislativo**, **2. lector de facturas
-(CFDI)**. Después, en cola: 3. CompraNet × 69-B × ASF y 4. la ruta completa
+(CFDI)**. **Los dos quedaron hechos el 05-11-2026 (sello 20261105a)**; lo que
+se decidió al construirlos está al final, en «Cómo quedó». Después, en cola: 3. CompraNet × 69-B × ASF y 4. la ruta completa
 del impuesto.
 
 ---
@@ -159,3 +160,30 @@ que ya las cotejan; ninguna se escribe a mano.
 `python3 herramientas/revision.py --base origin/claude/funny-turing-imtm54`,
 sello si se toca `assets/`, preguntas de prueba nuevas, `ESTADO.md` al día y
 decir qué quedó pendiente y por qué.
+
+---
+
+## Cómo quedó (05-11-2026, sello 20261105a)
+
+**Vigía legislativo.** `herramientas/vigia_legislativo.py` (`--prueba` sin red,
+`--citas` solo el cruce). Direcciones verificadas al construirlo: el sumario del
+DOF es un RSS en `https://dof.gob.mx/sumario.xml` (sin `www`: el certificado de
+`www.dof.gob.mx` no corresponde) y trae solo la edición del día, por eso el flujo
+corre diario y la bandeja acumula; el índice de Diputados es
+`LeyesBiblio/index.htm`, en ISO-8859-1, con la clave de cada ley en su liga
+`ref/<clave>.htm`. El Senado respondió 403: queda fuera, y lo que aprueba llega
+al DOF. Además de las 18 leyes del encargo vigila las 17 que la plataforma ya
+cita (Amparo, LGIPE, LSS, LFT…), para que el cruce las cubra. La sección para el
+lector quedó en **Aprende › Marco legal** (`marco-legal-tres-niveles.html#reformas-recientes`),
+junto a la tabla de las leyes federales con su fecha; si el autor la prefiere en
+Noticias › Seguimiento, se mueve `REFORMAS` de `leyes_niveles.py`.
+
+**Lector de facturas.** Aplicación `inspfactura` del Modo Inspector
+(`insp_factura.py`, `insp-factura.js`, `insp-factura.css`) y su gemelo
+`lector_cfdi.py`. No valida sellos ni dice si una factura está cancelada (eso lo
+dice el verificador del SAT con el UUID; no respondió desde el entorno, así que
+se nombra sin liga). Las señales son dos, ambas `derivado`: la factura es
+posterior a la publicación del emisor como definitivo, o como presunto. El
+párrafo quinto del 69-B dice que las operaciones del definitivo «no producen ni
+produjeron efecto fiscal alguno»: por eso la página aclara que también alcanza a
+las facturas anteriores, y la fecha solo ordena qué revisar primero.

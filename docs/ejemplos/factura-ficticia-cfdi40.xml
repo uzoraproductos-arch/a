@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- FACTURA FICTICIA para aprender a leer un CFDI 4.0 (Auditavisión, 05-11-2026).
+     Nada en ella es real: el RFC del emisor (AAA010101AAA) es el de ejemplo que
+     usa el SAT en sus guías, el del receptor (XAXX010101000) es el RFC genérico
+     de «público en general», el UUID está inventado y no hay sello ni
+     certificado de verdad. No sirve para deducir nada ante el SAT.
+     La lee herramientas/lector_cfdi.py y la aplicación «Lector de facturas CFDI». -->
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4"
+    xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd"
+    Version="4.0" Serie="EJ" Folio="1" Fecha="2026-03-15T10:30:00"
+    FormaPago="03" MetodoPago="PUE" Moneda="MXN" TipoDeComprobante="I" Exportacion="01"
+    LugarExpedicion="44100" SubTotal="10000.00" Total="11600.00"
+    NoCertificado="00000000000000000000" Certificado="" Sello="">
+  <cfdi:Emisor Rfc="AAA010101AAA" Nombre="EMPRESA FICTICIA DE EJEMPLO" RegimenFiscal="601"/>
+  <cfdi:Receptor Rfc="XAXX010101000" Nombre="PUBLICO EN GENERAL" DomicilioFiscalReceptor="44100"
+      RegimenFiscalReceptor="616" UsoCFDI="S01"/>
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="80101500" Cantidad="1" ClaveUnidad="E48" Descripcion="Consultoría de ejemplo"
+        ValorUnitario="6000.00" Importe="6000.00" ObjetoImp="02">
+      <cfdi:Impuestos><cfdi:Traslados>
+        <cfdi:Traslado Base="6000.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="960.00"/>
+      </cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="81111500" Cantidad="2" ClaveUnidad="E48" Descripcion="Soporte técnico de ejemplo"
+        ValorUnitario="2000.00" Importe="4000.00" ObjetoImp="02">
+      <cfdi:Impuestos><cfdi:Traslados>
+        <cfdi:Traslado Base="4000.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="640.00"/>
+      </cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="1600.00">
+    <cfdi:Traslados>
+      <cfdi:Traslado Base="10000.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="1600.00"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital Version="1.1" UUID="AAAAAAAA-0000-4000-8000-000000000001"
+        FechaTimbrado="2026-03-15T10:31:02" RfcProvCertif="AAA010101AAA" SelloCFD="" NoCertificadoSAT="00000000000000000000" SelloSAT=""/>
+  </cfdi:Complemento>
+</cfdi:Comprobante>

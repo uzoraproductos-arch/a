@@ -1,0 +1,39 @@
+/* Modo Inspector › Lector de facturas CFDI (05-11-2026, herramientas/insp_factura.py).
+   Se apoya en insp-efos.css (la misma familia visual de la lista negra). */
+.cf-privado { margin: 14px 0; padding: 12px 14px; border-radius: 12px; background: #eef6f0; border: 1px solid #b9dcc4; color: #1e4d2f; line-height: 1.5; }
+.cf-entrada { margin: 16px 0 8px; }
+.cf-suelta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 18px; border: 2px dashed #c9d2e3; border-radius: 14px; background: #f6f8fc; }
+.cf-suelta p { margin: 0; color: var(--ef-tenue); }
+.cf-suelta.cf-sobre { border-color: var(--ef); background: #eaf1fd; }
+.cf-archivo { min-height: 44px; max-width: 100%; }
+.cf-pegar { margin: 14px 0; }
+.cf-pegar summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 600; color: var(--ef-tinta); }
+.cf-res { margin-top: 18px; }
+.cf-fac { border: 1px solid #dfe5f0; border-left: 6px solid var(--ef); border-radius: 12px; padding: 16px 18px; margin: 0 0 18px; background: #ffffff; }
+.cf-fac-mal { border-left-color: var(--ef-pre); }
+.cf-fac h3 { margin: 0 0 10px; overflow-wrap: anywhere; }
+.cf-nota { color: var(--ef-tenue); }
+.cf-datos { list-style: none; padding: 0; margin: 0 0 12px; line-height: 1.6; }
+.cf-datos code, .cf-tabla code { overflow-wrap: anywhere; }
+.cf-cuenta { border-collapse: collapse; margin: 6px 0 10px; min-width: 260px; }
+.cf-cuenta th { text-align: left; font-weight: 500; padding: 4px 18px 4px 0; }
+.cf-cuenta td { text-align: right; font-variant-numeric: tabular-nums; padding: 4px 0; }
+.cf-total th, .cf-total td { font-weight: 700; border-top: 2px solid #c9d2e3; padding-top: 8px; }
+.cf-con summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 600; }
+.cf-69b { margin: 12px 0 0; padding: 12px 14px; border-radius: 10px; background: #fff7ea; border: 1px solid #f0d3a4; }
+.cf-69b p { margin: 0 0 8px; line-height: 1.5; }
+.cf-dos { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.cf-dos li { border: 1px solid #dfe5f0; border-radius: 12px; padding: 14px 16px; background: #ffffff; }
+.cf-dos-t { font-weight: 700; margin: 0 0 6px; }
+.cf-pasos { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+.cf-paso { border: 1px solid #dfe5f0; border-radius: 12px; padding: 14px 16px; background: #ffffff; }
+.cf-paso-ico { display: block; margin-bottom: 6px; }
+.cf-paso p { margin: 6px 0 0; line-height: 1.5; }
+.cf-badge { display: inline-block; font-weight: 700; border-radius: 999px; padding: 2px 10px; margin-left: 4px; color: #ffffff; }
+.cf-def { background: var(--ef-def); }
+.cf-pre { background: var(--ef-pre); }
+.cf-des { background: var(--ef-des); }
+.cf-sen { background: var(--ef-sen); }
+.cf-tabla-caja { overflow-x: auto; margin: 0 0 18px; }
+.cf-tabla { border-collapse: collapse; width: 100%; min-width: 560px; }
+.cf-tabla th, .cf-tabla td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #dfe5f0; vertical-align: top; }
