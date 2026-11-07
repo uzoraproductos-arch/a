@@ -157,7 +157,7 @@ Puntos ciegos que se dicen junto a la cifra:
      CONDUSEF sobre lo que reportan las instituciones): millones. La prensa
      dice 2.48 millones en el primer semestre de 2025, con 10,714 millones de
      pesos reclamados y 2,556 millones abonados.
-- **Ninguna entra todavía.** El 07-11-2026 el portal de la CONDUSEF respondió
+- **Las de 2025 no entran todavía.** El 07-11-2026 el portal de la CONDUSEF respondió
   con error 503 (y reinicio de conexión) a todas sus direcciones, también a sus
   PDF de transparencia; sin el documento no hay huella ni cotejo, y las cifras de
   arriba son del buscador y de la prensa, **sin verificar**.
@@ -170,6 +170,25 @@ Puntos ciegos que se dicen junto a la cifra:
   fragmento **no entra** y el pendiente `fraude-condusef` enlaza a la página de
   estadísticas de la CONDUSEF. (Corrección: el commit 39397cfa la dio como
   documento existente sin haberla abierto.)
+- **Lo que sí entró: las cifras nacionales de 2026** (07-11-2026, a pedido del
+  autor: «intégralo»). Los comunicados de la CONDUSEF en gob.mx sí responden, y
+  son documento oficial de la propia CONDUSEF. `anclar_condusef_fraude.py` ancla
+  la huella del texto de tres:
+  - **081 (28-05-2026):** de enero a marzo de 2026, 22,199 reclamaciones
+    recibidas a nivel nacional; el 37.4 % por posible fraude, y de ésas el 94 %
+    contra la banca múltiple.
+  - **090 (18-06-2026):** de enero a mayo de 2026, «más de 35 mil»
+    reclamaciones por posible fraude; 18 % más que en el mismo periodo de 2025
+    en la banca múltiple, y cerca de 49 % más en Sofipos y Sofomes.
+  - **096 (09-07-2026):** de enero a junio, 43,871 «asuntos relacionados con
+    posibles afectaciones financieras». **No dice fraude**: la cifra de «43,871
+    en un semestre» que repite la prensa como fraudes viene de aquí.
+- **Puntos ciegos de esas cifras:** son parciales y de 2026, no el total de
+  2025; ninguna da dinero reclamado ni devuelto; y el 081 y el 090 no cuadran a
+  simple vista (37.4 % de 22,199 da unas 8,300 en tres meses, y en cinco ya son
+  más de 35 mil), sin que los comunicados digan si cuentan lo mismo. Por eso no
+  se restan ni se suman, y el pendiente `fraude-condusef` se queda por el total
+  de 2025 y los montos.
 - **Cómo cerrarlo:** encontrar en el portal de la CONDUSEF el documento con el
   total de 2025 (su informe anual, o los dos semestrales),
   con su estadística de reclamaciones, cuando el portal responda, o que el autor los baje desde su navegador y los suba al

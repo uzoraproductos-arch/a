@@ -1,0 +1,47 @@
+{
+ "fuente": "CONDUSEF, comunicados de prensa en gob.mx",
+ "comunicados": [
+  {
+   "numero": "081",
+   "fecha": "2026-05-28",
+   "titulo": "CONDUSEF alerta sobre incremento de fraudes y llama a fortalecer la educación financiera",
+   "url": "https://www.gob.mx/condusef/prensa/condusef-alerta-sobre-incremento-de-fraudes-y-llama-a-fortalecer-la-educacion-financiera",
+   "periodo": "enero-marzo de 2026",
+   "sha_texto": "7bdaff03710bf04573b254d28b03affbdf58e45e62b01119d05cc406614242bc",
+   "reclamaciones": 22199,
+   "citas": [
+    "En el periodo de enero-marzo de 2026 de las 22,199reclamaciones recibidas en CONDUSEF a nivel nacional, el 37.4% estuvieron relacionadas con un posible fraude, de éstas, el 94% corresponden a Banca Múltiple."
+   ],
+   "fraude_pct": 37.4,
+   "banca_pct": 94
+  },
+  {
+   "numero": "090",
+   "fecha": "2026-06-18",
+   "titulo": "CONDUSEF y SEPROBAN unen esfuerzos para fortalecer el combate al fraude financiero y proteger a las personas usuarias",
+   "url": "https://www.gob.mx/condusef/prensa/condusef-y-seproban-unen-esfuerzos-para-fortalecer-el-combate-al-fraude-financiero-y-proteger-a-las-personas-usuarias-428880",
+   "periodo": "enero-mayo de 2026",
+   "sha_texto": "b8ee7d1bd6a01cfde2742117a260fd0b403eef3f1c31e90431e6b6a283f39d19",
+   "fraude_mas_de_mil": 35,
+   "citas": [
+    "Más de 35 mil reclamaciones por posible fraude financiero se registraron entre enero y mayo de 2026.",
+    "Entre enero y mayo de 2026, las reclamaciones por posible fraude registradas ante la CONDUSEF aumentaron 18% en la banca múltiple respecto al mismo periodo del año anterior.",
+    "En el caso de las Sociedades Financieras Populares (Sofipos) y las Sociedades Financieras de Objeto Múltiple (Sofomes), el incremento fue cercano al 49%, reflejando una expansión del fenómeno hacia nuevos segmentos de usuarios y servicios financieros."
+   ],
+   "banca_cambio_pct": 18,
+   "sofi_cambio_pct": 49
+  },
+  {
+   "numero": "096",
+   "fecha": "2026-07-09",
+   "titulo": "Más coordinación, más prevención: UIF y CONDUSEF firman convenio para fortalecer la seguridad del sistema financiero",
+   "url": "https://www.gob.mx/condusef/prensa/mas-coordinacion-mas-prevencion-uif-y-condusef-firman-convenio-para-fortalecer-la-seguridad-del-sistema-financiero",
+   "periodo": "enero-junio de 2026",
+   "sha_texto": "f59eea7a4272a1f68937a4e758a6d60793a09eee117fcea6966c3680e4fb04fe",
+   "asuntos": 43871,
+   "citas": [
+    "En el periodo de enero-junio de 2026, la CONDUSEF registró 43 mil 871 asuntos relacionados con posibles afectaciones financieras reportadas por usuarios, cuya información estadística y de análisis permitirá identificar tendencias, modalidades de operación, sectores con mayor incidencia, zonas geográficas y otros elementos relevantes para fortalecer las acciones institucionales."
+   ]
+  }
+ ]
+}

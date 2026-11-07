@@ -2269,6 +2269,13 @@
    "dice": [
     "1.6 billones"
    ]
+  },
+  {
+   "q": "¿Cuántas reclamaciones por fraude recibe la CONDUSEF?",
+   "ir": "aprende-fraude-en-numeros.html#fr-reclamaciones",
+   "dice": [
+    "37.4"
+   ]
   }
  ]
 }

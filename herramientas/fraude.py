@@ -20,6 +20,10 @@ docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md §1. Cotejado contra el documento oficial:
 - SAT, comunicado del 25-06-2019 («SAT combate la evasión fiscal por
   operaciones simuladas»): lo único oficial sobre cuánto facturaron las EFOS,
   anclado con la huella de su texto por anclar_sat_efos.py (07-11-2026).
+- CONDUSEF, comunicados 081 (28-05-2026), 090 (18-06-2026) y 096 (09-07-2026):
+  las reclamaciones por posible fraude a nivel nacional en 2026, ancladas con la
+  huella de su texto por anclar_condusef_fraude.py (07-11-2026). El 096 habla de
+  «asuntos relacionados con posibles afectaciones financieras», no de fraudes.
 
 Cada cifra sirve para una sola idea: el fraude es frecuente, casi nadie lo
 denuncia y por eso conviene revisar antes de pagar. **La plataforma no dice que
@@ -80,6 +84,17 @@ def efos():
         return json.load(f)
 
 
+def condusef():
+    """Las reclamaciones por posible fraude de los comunicados de la CONDUSEF de
+    2026, del archivo anclado por anclar_condusef_fraude.py (081, 090 y 096)."""
+    with open(os.path.join(RAIZ, 'docs', 'seguridad', 'condusef-fraude-2026.json'), encoding='utf-8') as f:
+        d = json.load(f)
+    c = {x['numero']: x for x in d['comunicados']}
+    if sorted(c) != ['081', '090', '096']:
+        raise SystemExit('fraude.py: faltan comunicados de la CONDUSEF en condusef-fraude-2026.json')
+    return c
+
+
 def lista_69b():
     """La cuenta de la 69-B sobre la copia de la plataforma: por situación y por
     tipo de persona. Sale del archivo, nunca de un número escrito a mano."""
@@ -112,13 +127,14 @@ def pendientes():
                          'le faltaría a sus tabulados del costo del delito'),
          'enlace': 'https://www.inegi.org.mx/rnm/index.php/catalog/1058', 'enlace_txt': 'ENVE 2024, catálogo de microdatos (INEGI)', 'aparece': aqui},
         {'id': 'fraude-condusef', 'tema': 'El fraude en números',
-         'que': 'Las reclamaciones por posible fraude de 2025 en todo el país: cuántas, por cuánto y cuánto se devolvió (CONDUSEF)',
+         'que': 'Las reclamaciones por posible fraude de todo 2025 en el país, y de cualquier año cuánto dinero se reclamó y cuánto se devolvió (CONDUSEF)',
          'porque': ('Son dos cifras que no se suman: las reclamaciones que llegan a la CONDUSEF (decenas de miles al semestre, en su '
                     'Informe de Autoevaluación) y las que la gente presenta ante su propio banco (millones, en la estadística de la '
                     'CONDUSEF). Un buscador dio la dirección de un «Informe de Autoevaluación enero-diciembre 2025», pero no la '
                     'pudimos abrir (el 07-11-2026 el portal de la CONDUSEF respondió con error 503 o cortó la conexión) y, abierta '
-                    'desde México ese mismo día, la página dice que no existe. Así que no tenemos ningún documento de la CONDUSEF '
-                    'con el total de 2025: las cifras que repite la prensa, o el fragmento que da un buscador, no entran.'),
+                    'desde México ese mismo día, la página dice que no existe. De 2026 sí hay cifras nacionales en sus comunicados '
+                    '(081 y 090), pero son parciales y no dan montos. Así que no tenemos ningún documento de la CONDUSEF con el '
+                    'total de 2025 ni con el dinero: las cifras que repite la prensa, o el fragmento que da un buscador, no entran.'),
          'responsable': 'Falta de la plataforma: no hemos podido abrir ni cotejar un documento de la CONDUSEF con el total de 2025 (07-11-2026)',
          'enlace': 'https://www.condusef.gob.mx/?p=estadisticas',
          'enlace_txt': 'CONDUSEF, Estadísticas', 'aparece': aqui},
@@ -162,6 +178,8 @@ def cifras():
     vt = ('INEGI, ENVE 2024, tabulados en datos abiertos (1.8, 1.16 y 3.4)', n['zip']['url'])
     vp = ('INEGI, ENVE 2024, presentación de resultados, lámina «Costo del delito según tipo de delito»', n['pdf']['url'])
     f = efos()
+    c = condusef()
+    c81, c90 = c['081'], c['090']
     l = (SAT_TX + (', corte «%s»' % corte if corte else ''), s['meta']['url'])
     return [
         ('primero', 'El delito más frecuente en México', 'El fraude',
@@ -209,6 +227,14 @@ def cifras():
          'en %s facturas falsas de %s empresas que facturan operaciones simuladas, de 2014 al 25 de junio de 2019, según el SAT, que lo dio '
          'como «monto aproximado» y calculó una evasión de $%s millones, el %s %% del PIB. Es la única vez que el SAT ha publicado ese monto'
          % (_n(f['facturas']), _n(f['efos']), _n(f['evasion_mdp']), f['evasion_pib']), 'oficial', '', 'facturas', (f['fuente'], f['url'])),
+        ('condusef_t1', 'Cuántas quejas (reclamaciones) por fraude llegan a la CONDUSEF', '%s %%' % c81['fraude_pct'],
+         'de las %s reclamaciones que recibió la CONDUSEF en todo el país de enero a marzo de 2026 fueron por posible fraude; de ésas, '
+         'el %s %% contra la banca múltiple' % (_n(c81['reclamaciones']), c81['banca_pct']), 'oficial', '', 'reclamaciones',
+         ('CONDUSEF, Comunicado %s (%s)' % (c81['numero'], '28-05-2026'), c81['url'])),
+        ('condusef_may', 'Cuántas reclamaciones por fraude van en 2026', 'Más de %s mil' % c90['fraude_mas_de_mil'],
+         'reclamaciones por posible fraude ante la CONDUSEF de enero a mayo de 2026: en la banca múltiple, %s %% más que en el mismo '
+         'periodo de 2025, y cerca de %s %% más en Sofipos y Sofomes' % (c90['banca_cambio_pct'], c90['sofi_cambio_pct']), 'oficial', '',
+         'reclamaciones', ('CONDUSEF, Comunicado %s (%s)' % (c90['numero'], '18-06-2026'), c90['url'])),
     ]
 
 
@@ -219,7 +245,7 @@ CONTEXTO = ('Por eso conviene revisar antes de pagar: lo que no se denuncia no l
 def fichas():
     """Fichas del chat, con la misma cifra, su estado y su documento."""
     k = (' fraude fraudes estafa estafas defraudacion victimas delito delitos denuncia cifra negra cifra oculta envipe enve inegi empresas '
-         'negocios facturas falsas empresas fantasma factureras 69-b efos cuanto pierde costo del delito')
+         'negocios facturas falsas empresas fantasma factureras 69-b efos cuanto pierde costo del delito condusef reclamaciones quejas banco bancos')
     out = []
     for clave, tit, v, etq, e, op, sec, fu in cifras():
         c = {'v': v, 'etq': etq, 'e': e}
@@ -244,7 +270,7 @@ def _pend(p):
     return '<li>%s %s<br><small>%s</small></li>' % (html.escape(p['que']), _chip('pendiente', p['id']), html.escape(p['porque']))
 
 
-ENTRADA = ('El fraude es el delito que más le pasa a la gente en México, y casi nadie lo denuncia. Aquí están las cifras que el INEGI y el SAT '
+ENTRADA = ('El fraude es el delito que más le pasa a la gente en México, y casi nadie lo denuncia. Aquí están las cifras que el INEGI, el SAT y la CONDUSEF '
            'publican, con su documento, y lo que todavía nadie ha publicado. Sirven para una sola idea: <b>conviene revisar antes de pagar</b>.')
 
 
@@ -254,7 +280,7 @@ def pagina():
     return {
         'archivo': ARCHIVO, 'menu': TITULO, 'menu_archivo': 'aprende.html',
         'padre': ('aprende.html', 'Aprende'),
-        'icono': '🚨', 'titulo': TITULO, 'lema': 'Lo que el INEGI y el SAT registran del fraude, y lo que nadie ha publicado',
+        'icono': '🚨', 'titulo': TITULO, 'lema': 'Lo que el INEGI, el SAT y la CONDUSEF registran del fraude, y lo que nadie ha publicado',
         'estilos': ['asistente.css'], 'entrada': ENTRADA,
         'secciones': [
             {'id': 'fr-personas', 'titulo': 'A las personas: el delito más frecuente', 'texto': 'Encuesta de victimización del INEGI, datos de 2025.', 'tarjetas': [],
@@ -264,6 +290,17 @@ def pagina():
              'bloque': ('<ul class="leg-cifras">%s%s</ul><p>Una carpeta es una investigación, no una víctima: puede juntar a varias. Y más carpetas en un estado puede '
                         'querer decir más denuncia, no más fraude. <a href="planisferio.html?d=penal&amp;l=pnC">Las carpetas de cada estado, en el Planisferio</a>.</p>%s')
                        % (_cifra('carpetas'), _cifra('carpetas100'), _fuente((_sesnsp()['tx'], _sesnsp()['url'])))},
+            {'id': 'fr-reclamaciones', 'titulo': 'Lo que llega a la CONDUSEF: las reclamaciones', 'texto': 'Lo que la CONDUSEF ha dicho del país en sus comunicados de 2026.', 'tarjetas': [],
+             'bloque': ('<ul class="leg-cifras">%s%s</ul><p>Son de 2026 y de meses distintos: el total de 2025, y cuánto dinero se reclamó y se '
+                        'devolvió, siguen %s. Las dos cifras no cuadran a simple vista: con el %s %% de %s, en tres meses serían unas 8,300, y en '
+                        'cinco ya son más de %s mil; los comunicados no dicen si cuentan lo mismo, así que no se restan ni se suman. Los '
+                        '«%s asuntos» de enero a junio que repite la prensa son, en palabras de la CONDUSEF, «asuntos relacionados con posibles '
+                        'afectaciones financieras», no fraudes. Y una reclamación es una queja contra una institución financiera, no una '
+                        'denuncia: no se compara con las carpetas de las fiscalías.</p>%s%s')
+                       % (_cifra('condusef_t1'), _cifra('condusef_may'), _chip('pendiente', 'fraude-condusef'), condusef()['081']['fraude_pct'],
+                          _n(condusef()['081']['reclamaciones']), condusef()['090']['fraude_mas_de_mil'], _n(condusef()['096']['asuntos']),
+                          _fuente(('CONDUSEF, Comunicado 081 (28-05-2026)', condusef()['081']['url'])),
+                          _fuente(('CONDUSEF, Comunicado 090 (18-06-2026)', condusef()['090']['url'])))},
             {'id': 'fr-empresas', 'titulo': 'A las empresas: una de cada cuatro', 'texto': 'Encuesta de victimización de empresas del INEGI, datos de 2023.', 'tarjetas': [],
              'bloque': ('<ul class="leg-cifras">%s%s%s%s%s</ul><p>En las empresas el delito más frecuente fue la extorsión. Los costos de la ENVE '
                         'están en pesos de julio de 2018, para compararlos entre años: no se suman con pesos de hoy. Cuánto costó el fraude '
@@ -287,7 +324,7 @@ def pagina():
                         '<li><a href="aprende-auditoria.html">Cómo se audita</a>: los tres factores del fraude y la prueba que aguanta un juicio.</li>\n'
                         '<li>¿Necesitas revisar a muchos proveedores? <a href="servicios.html">Pide un servicio</a>.</li>\n</ol>')},
             {'id': 'fr-no-dice', 'titulo': 'Lo que estas cifras no dicen', 'texto': 'Para leerlas bien.', 'tarjetas': [],
-             'bloque': ('<ul>\n<li>Las encuestas del INEGI cuentan lo que las personas y las empresas <b>dicen</b> haber sufrido; las carpetas del SESNSP, lo que llegó a una fiscalía. Son dos mediciones distintas.</li>\n'
+             'bloque': ('<ul>\n<li>Las encuestas del INEGI cuentan lo que las personas y las empresas <b>dicen</b> haber sufrido; las carpetas del SESNSP, lo que llegó a una fiscalía; las reclamaciones de la CONDUSEF, las quejas contra una institución financiera. Son tres mediciones distintas.</li>\n'
                         '<li>Estar en la lista 69-B en situación de presunto <b>no es una condena</b>: tiene 15 días para desvirtuarlo (CFF art. 69-B, párrafo segundo).</li>\n'
                         '<li>Revisar la lista y las facturas da <b>señales para revisar</b>: no evita un fraude ni sustituye la asesoría de un profesional.</li>\n'
                         '<li>Las cifras de personas son de 2025 y las de empresas de 2023: no se suman ni se comparan entre sí.</li>\n</ul>')},
