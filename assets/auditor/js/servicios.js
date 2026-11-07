@@ -88,6 +88,10 @@
   try {
     var tema = new URLSearchParams(location.search).get('tema');
     if (tema && !val('svTema')) $('svTema').value = tema.slice(0, 160);
+    // Cada perfil y cada servicio llegan con servicios.html?servicio=<id>.
+    var serv = new URLSearchParams(location.search).get('servicio');
+    var sel = $('svServicio');
+    if (serv && sel && sel.querySelector('option[value="' + serv.replace(/[^a-z-]/g, '') + '"]')) sel.value = serv;
   } catch (e) { /* sin URLSearchParams: el lector lo escribe */ }
 
   function marcar(id, malo) {

@@ -33,4 +33,84 @@
   .sv-servicios, .sv-dos { grid-template-columns: 1fr; }
   .sv-precio, .sv-politica { padding: 14px; }
 }
+/* Reestructura del 07-11-2026: portada, cifras, perfiles, lineas, formas,
+   encaje, diferencias, lienzo de nueve bloques y preguntas frecuentes. */
+.sv-hero { background: linear-gradient(135deg, #0b2a63 0%, #1d4fa3 100%); color: #fff; border-radius: 20px; padding: 26px 24px; display: grid; gap: 14px; }
+.sv-hero-pre { margin: 0; font-size: 14px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #bcd3ff; }
+.sv-hero-tit { margin: 0; font-size: 24px; line-height: 1.35; font-weight: 800; }
+.sv-hero-acc { display: flex; flex-wrap: wrap; gap: 10px; }
+.sv-hero-acc .sz-btn { min-height: 44px; display: inline-flex; align-items: center; }
+.sv-hero-acc .sz-btn:not(.sz-btn-of) { background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.5); }
+.sv-hero-prom { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.sv-hero-prom li { background: rgba(255,255,255,.1); border-radius: 12px; padding: 10px 12px; font-size: 16px; line-height: 1.45; }
+.sv-hero-prom span { margin-right: 6px; }
+.sv-datos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.sv-dato { background: #fff; border: 1px solid #dfe5f0; border-top: 4px solid #c0392b; border-radius: 14px; padding: 14px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.sv-dato p { margin: 0; }
+.sv-dato-tit { font-weight: 800; color: #5a6782; font-size: 15px; }
+.sv-dato-cifra { font-size: 28px; font-weight: 800; color: #0b2a63; line-height: 1.2; }
+.sv-dato-cifra .est-chip { vertical-align: middle; }
+.sv-dato-tx { color: #33415c; font-size: 15px; line-height: 1.5; }
+.sv-dato-fu { font-size: 14px; color: #5a6782; overflow-wrap: anywhere; }
+.sv-perfiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+.sv-perfil { background: #fff; border: 1px solid var(--civ-gris-borde, #c9d9ee); border-radius: 16px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.sv-perfil .sv-ico { font-size: 22px; }
+.sv-quien { margin: 0 0 8px; color: #5a6782; font-size: 15px; line-height: 1.5; }
+.sv-gratis { margin: 0 0 12px; padding: 10px 12px; background: #eef7ef; border-radius: 10px; color: #1f4d2b; line-height: 1.55; }
+.sv-perfil-btn { margin-top: auto; align-self: flex-start; min-height: 44px; display: inline-flex; align-items: center; }
+.sv-lineas { display: grid; gap: 22px; }
+.sv-linea-tit { margin: 0; font-size: 19px; font-weight: 800; color: #0b2a63; }
+.sv-linea-tx { margin: 2px 0 10px; color: #5a6782; }
+.sv-pide { display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px; font-weight: 800; color: #1d4fa3; text-decoration: none; }
+.sv-pide:hover { text-decoration: underline; }
+.sv-formas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 16px; }
+.sv-forma { background: #fff; border: 1px solid #dfe5f0; border-radius: 16px; padding: 16px 18px; min-width: 0; }
+.sv-forma-et { display: inline-block; margin: 0 0 8px; padding: 2px 10px; border-radius: 999px; background: #e8efff; color: #1d4fa3; font-weight: 800; font-size: 14px; }
+.sv-tabla-env { overflow-x: auto; }
+.sv-tabla { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #dfe5f0; border-radius: 14px; overflow: hidden; }
+.sv-tabla th, .sv-tabla td { padding: 10px 12px; border-bottom: 1px solid #edf1f7; text-align: left; vertical-align: top; line-height: 1.5; }
+.sv-tabla thead th { background: #0b2a63; color: #fff; }
+.sv-tabla tbody th { color: #0b2a63; font-weight: 700; }
+.sv-nota { margin: 10px 0 0; color: #5a6782; line-height: 1.55; }
+.sv-encaje { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.sv-encaje-lado { border-radius: 16px; padding: 16px 18px; border: 1px solid #dfe5f0; background: #fff; min-width: 0; }
+.sv-encaje-fuera { border: 2px solid #1d4fa3; background: #f3f7ff; }
+.sv-encaje-tit { margin: 0; font-size: 19px; font-weight: 800; color: #0b2a63; }
+.sv-encaje-quien { margin: 2px 0 8px; color: #5a6782; }
+.sv-encaje-lado ul { margin: 0; padding-left: 20px; line-height: 1.6; color: #24324d; }
+.sv-encaje-cierre { margin: 12px 0 0; padding: 12px 14px; border-left: 4px solid #1d4fa3; background: #fff; border-radius: 0 12px 12px 0; line-height: 1.6; color: #24324d; }
+.sv-difs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.sv-dif { background: #fff; border: 1px solid #dfe5f0; border-radius: 14px; padding: 14px; display: grid; gap: 4px; line-height: 1.5; color: #33415c; }
+.sv-dif b { color: #0b2a63; font-size: 16.5px; }
+.sv-lienzo { display: grid; gap: 8px; grid-template-columns: repeat(10, minmax(0, 1fr));
+  grid-template-areas: "so so ac ac pr pr re re se se" "so so rc rc pr pr ca ca se se" "co co co co co in in in in in"; }
+.sv-bloque { background: #fff; border: 1px solid #c9d9ee; border-radius: 12px; padding: 12px; display: grid; gap: 4px; align-content: start; line-height: 1.5; color: #33415c; position: relative; min-width: 0; }
+.sv-bloque b { color: #0b2a63; padding-right: 22px; }
+.sv-bloque-num { position: absolute; top: 8px; right: 10px; font-weight: 800; color: #9aa7bf; font-size: 14px; }
+.sv-b-socios { grid-area: so; } .sv-b-actividades { grid-area: ac; } .sv-b-recursos { grid-area: rc; }
+.sv-b-propuesta { grid-area: pr; background: #0b2a63; border-color: #0b2a63; color: #e8efff; }
+.sv-b-propuesta b { color: #fff; } .sv-b-propuesta .sv-bloque-num { color: #bcd3ff; }
+.sv-b-relaciones { grid-area: re; } .sv-b-canales { grid-area: ca; } .sv-b-segmentos { grid-area: se; }
+.sv-b-costos { grid-area: co; background: #fdf3f2; } .sv-b-ingresos { grid-area: in; background: #eef7ef; }
+.sv-faqs { display: grid; gap: 8px; }
+.sv-faq, .sv-pol-det { background: #fff; border: 1px solid #dfe5f0; border-radius: 12px; padding: 0 16px; }
+.sv-faq summary, .sv-pol-det summary { min-height: 44px; display: flex; align-items: center; font-weight: 800; color: #0b2a63; cursor: pointer; }
+.sv-faq p { margin: 0 0 14px; line-height: 1.6; color: #33415c; }
+.sv-pol-det { padding: 0; border: 0; }
+.sv-pol-det[open] summary { margin-bottom: 10px; }
+@media (max-width: 900px) {
+  .sv-datos, .sv-difs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sv-lienzo { grid-template-columns: 1fr 1fr; grid-template-areas: "pr pr" "se re" "ca ac" "rc so" "in co"; }
+}
+@media (max-width: 720px) {
+  .sv-hero { padding: 20px 16px; }
+  .sv-hero-tit { font-size: 20px; }
+  .sv-hero-prom, .sv-datos, .sv-difs, .sv-formas, .sv-encaje { grid-template-columns: 1fr; }
+  .sv-lienzo { grid-template-columns: 1fr; grid-template-areas: "pr" "se" "re" "ca" "ac" "rc" "so" "in" "co"; }
+  .sv-tabla thead { display: none; }
+  .sv-tabla, .sv-tabla tbody, .sv-tabla tr, .sv-tabla th, .sv-tabla td { display: block; width: 100%; }
+  .sv-tabla tr { border-bottom: 1px solid #dfe5f0; padding: 6px 0; }
+  .sv-tabla th, .sv-tabla td { border: 0; padding: 4px 12px; }
+  .sv-tabla td::before { content: attr(data-et) ": "; font-weight: 800; color: #5a6782; }
+}
 /* Comunidad (comunidad.html; entrega 7, 10-10-2026). */

@@ -1907,43 +1907,145 @@ def simulador():
 # (por ejemplo 'mailto:investigaciones@tu-dominio.mx') y corre sello.py.
 CANAL_SOLICITUD = ''
 
+# Reestructura de la pestaña (pedido del autor, 07-11-2026: «reestructura la
+# pestaña de servicios de forma profesional, fácil de consumir, para la
+# atracción de nuestros clientes… tomando en cuenta también el modelo de
+# negocios y los nueve bloques»). La página sigue el lienzo de
+# docs/MODELO-DE-NEGOCIO.md: propuesta de valor (portada), segmentos
+# (PERFILES, por carrera y especialidad), la oferta en tres líneas (LINEAS),
+# relaciones (FORMAS), ingresos (GRATIS_PAGO y «Cuánto cuesta»), recursos y
+# actividades (DIFERENCIA y PROCESO), y el lienzo completo a la vista (LIENZO).
+# Ninguna cifra se escribe aquí: «Por qué revisar antes de pagar» las lee de
+# fraude.cifras(), con su chip y su fuente. Los ids de SERVICIOS no cambian:
+# otras páginas y el chat enlazan a #sv-<id> y ?servicio=<id>.
 SERVICIOS = [
-    ('revision', '📄', 'Revisión documental puntual',
-     'Una pregunta delimitada, revisada contra los documentos públicos que la responden.',
-     'Hallazgos, fuentes y límites de la revisión.', 'Periodistas, organizaciones, despachos y empresas.'),
-    ('expediente', '🗂️', 'Expediente de investigación',
-     'Un caso completo: quién, cuánto, cuándo y qué documento lo acredita.',
-     'Cronología, documentos, relaciones verificadas y análisis de inconsistencias.', 'Medios, organizaciones, equipos profesionales y dependencias públicas.'),
-    ('seguimiento', '📡', 'Seguimiento periódico',
-     'Vigilancia de un tema que cambia: contratos, proveedores, presupuesto o auditorías.',
-     'Reporte de cambios relevantes con su documento.', 'Quien necesita estar al día de un tema de forma recurrente.'),
-    ('capacitacion', '🎓', 'Capacitación',
-     'Talleres para leer el presupuesto y usar las herramientas de la plataforma.',
-     'Taller de interpretación presupuestaria y uso del Modo Inspector.', 'Universidades públicas y privadas, organizaciones, equipos de trabajo y dependencias de gobierno.'),
+    # (id, ícono, nombre, qué es, entregable, para quién, línea)
     ('diligencia', '🏢', 'Revisión de un proveedor',
      'Lo que los documentos públicos dicen de una empresa: sus contratos con el gobierno, si está en la lista 69-B del SAT, en el directorio de sancionados o en un informe de la ASF.',
-     'Ficha del proveedor con cada hallazgo y su documento; con seguimiento, aviso cuando algo cambia.', 'Empresas, despachos contables y áreas de cumplimiento.'),
+     'Ficha del proveedor con cada hallazgo, su documento y su etiqueta.', 'Empresas, despachos contables y áreas de cumplimiento.', 'prevencion'),
+    ('seguimiento', '📡', 'Vigía y seguimiento periódico',
+     'Tu cartera de proveedores revisada contra la lista 69-B cada semana, o un tema que cambia (contratos, presupuesto, auditorías) vigilado por ti.',
+     'Aviso de cada cambio relevante, con el documento que lo respalda y, en la 69-B, el párrafo y el plazo que aplican.', 'Quien necesita enterarse a tiempo, no meses después.', 'prevencion'),
+    ('facturas', '🧾', 'Revisión de facturas por lote',
+     'Cientos de facturas (XML) revisadas de una vez: un resumen por proveedor, su cruce con la lista 69-B y las señales que conviene revisar.',
+     'Resumen por proveedor con cada señal y su regla. Si prefieres no compartir tus archivos, el lector gratuito hace lo mismo en tu navegador.', 'Despachos contables y áreas de finanzas.', 'prevencion'),
+    ('revision', '📄', 'Revisión documental puntual',
+     'Una pregunta delimitada, revisada contra los documentos públicos que la responden.',
+     'Hallazgos, fuentes y límites de la revisión.', 'Periodistas, organizaciones, despachos y empresas.', 'investigacion'),
+    ('expediente', '🗂️', 'Expediente de investigación',
+     'Un caso completo: quién, cuánto, cuándo y qué documento lo acredita.',
+     'Cronología, documentos, relaciones verificadas y análisis de inconsistencias.', 'Medios, organizaciones, regidurías, congresos y equipos profesionales.', 'investigacion'),
+    ('capacitacion', '🎓', 'Talleres y capacitación',
+     'Talleres con casos mexicanos reales: «Documentar para sancionar» (las 20 matrices de la ASF), facturas y la lista 69-B, y cómo leer el presupuesto.',
+     'Taller con su material, ejercicios con casos de la base y el uso del Modo Inspector.', 'Universidades, despachos, órganos de control, organizaciones y dependencias.', 'formacion'),
     ('licencia', '🔑', 'Licencia de las herramientas',
      'El uso de las herramientas y los datos de la plataforma dentro de tu institución.',
-     'Licencia de uso, adaptación y acompañamiento.', 'Dependencias de gobierno, universidades, medios y organizaciones.'),
+     'Licencia de uso, adaptación y acompañamiento.', 'Dependencias de gobierno, universidades, medios y organizaciones.', 'formacion'),
 ]
 
-# A quién servimos (pedido del autor, 02-11-2026: «quedar con esa pestaña de
-# servicios de qué ofrecemos hacia esos sectores y en qué consisten»). Cada
-# sector dice lo que necesita y qué servicios de SERVICIOS lo atienden.
-SECTORES = [
-    ('🏢', 'Empresas y sus contadores', 'Saber con quién contratan: un proveedor en la lista 69-B del SAT o sancionado es un riesgo fiscal y legal.',
-     ['diligencia', 'seguimiento']),
-    ('🧮', 'Auditores, despachos y órganos de control', 'Formarse con casos mexicanos reales: las 20 matrices de la ASF, el control interno y la prueba.',
-     ['capacitacion', 'revision']),
-    ('🏛️', 'Regidurías y congresos', 'Llegar a una sesión de cabildo o a la revisión de una cuenta pública con los documentos ya cruzados. El mismo servicio y la misma regla para todos los partidos.',
-     ['expediente', 'seguimiento']),
-    ('📰', 'Medios y periodistas', 'Cotejar rápido una cifra antes de publicarla y tener el documento que la sostiene.',
-     ['revision', 'licencia']),
-    ('🎓', 'Universidades y organizaciones civiles', 'Enseñar a leer el presupuesto y usar los datos en clase o en un proyecto.',
-     ['capacitacion', 'licencia']),
-    ('📋', 'Gobiernos y dependencias', 'Capacitar a su personal. Nunca a cambio de retirar, suavizar o retrasar lo que publicamos (política de independencia).',
-     ['capacitacion', 'licencia']),
+LINEAS = [
+    ('prevencion', '🛡️', 'Prevención y debida diligencia', 'Antes de pagar o de firmar: saber con quién tratas.'),
+    ('investigacion', '🔎', 'Investigación a la medida', 'Cuando una pregunta necesita documentos cruzados y una respuesta por escrito.'),
+    ('formacion', '🎓', 'Formación e instituciones', 'Para que tu equipo, tus alumnos o tu dependencia lo hagan por su cuenta.'),
+]
+
+# A quién servimos, por carrera y especialidad (pedido del autor, 02-11-2026:
+# «qué ofrecemos hacia esos sectores y en qué consisten»; 07-11-2026: «la de
+# carreras y especialidades»). Cada perfil: quién es, su reto (con la ley que
+# lo obliga cuando la hay), los servicios que lo atienden y las aplicaciones
+# gratuitas con las que puede empezar hoy. Una liga gratuita que deje de
+# existir detiene la generación (servicios()).
+PERFILES = [
+    ('🧮', 'Contaduría y despachos contables', 'Contadoras y contadores públicos, fiscalistas y despachos.',
+     'Si un proveedor sale definitivo en la lista 69-B, sus facturas «no producen ni produjeron efecto fiscal alguno» (CFF, art. 69-B) y tu cliente tiene que acreditar la operación o corregir.',
+     ['facturas', 'seguimiento', 'diligencia'],
+     [('herramienta-inspector-efos.html', 'Busca un RFC en la lista 69-B'), ('herramienta-inspector-factura.html', 'Lee una factura sin subirla'),
+      ('herramienta-inspector-resultados.html', 'Revisa un estado de resultados')]),
+    ('⚖️', 'Derecho y cumplimiento', 'Abogadas y abogados corporativos, oficiales de cumplimiento y prevención de lavado (PLD).',
+     'Conocer a tu cliente y a tu proveedor en actividades vulnerables (LFPIORPI) y llegar a una negociación o a un litigio con los documentos públicos ya reunidos.',
+     ['diligencia', 'expediente', 'seguimiento'],
+     [('contratos-publicos.html', 'Contratos públicos de una empresa'), ('herramienta-inspector-efos.html', 'Busca un RFC en la lista 69-B')]),
+    ('🔍', 'Auditoría, control interno y auditoría forense', 'Auditores externos e internos, órganos internos de control y despachos de auditoría.',
+     'Formarse y practicar con casos mexicanos: cómo documenta la ASF una irregularidad para que se pueda sancionar, y dónde se repite cada año.',
+     ['capacitacion', 'revision'],
+     [('aprende-auditoria.html', 'Cómo se audita'), ('informes-documentar-para-sancionar.html', 'Las 20 matrices de la ASF'),
+      ('herramienta-inspector-asf.html', 'Auditorías de la ASF')]),
+    ('📰', 'Periodismo e investigación', 'Reporteras, reporteros, editores y equipos de datos.',
+     'Cotejar rápido una cifra antes de publicarla y tener a la mano el documento que la sostiene, para no exponerse a una réplica.',
+     ['revision', 'expediente', 'licencia'],
+     [('herramienta-inspector-nota.html', 'Contrasta una nota'), ('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor')]),
+    ('🏛️', 'Regidurías, congresos y su asesoría', 'Regidoras, regidores, diputaciones locales y su equipo técnico, de cualquier partido.',
+     'Llegar a una sesión de cabildo o a la revisión de una cuenta pública con los documentos ya cruzados. El mismo servicio y la misma regla para todos los partidos.',
+     ['expediente', 'seguimiento'],
+     [('herramienta-inspector-entes.html', 'El Auditor de entes'), ('planisferio.html', 'El Planisferio')]),
+    ('🎓', 'Universidades y academia', 'Contaduría, Derecho, Economía, Administración y políticas públicas, Ciencia política y Periodismo.',
+     'Enseñar a leer el presupuesto y a fiscalizar con datos reales y citables, en clase, en un servicio social o en una tesis.',
+     ['capacitacion', 'licencia'],
+     [('enciclopedia-auditavision.html', 'La Enciclopedia'), ('planisferio.html', 'El Planisferio')]),
+    ('📋', 'Gobiernos y dependencias', 'Tesorerías, contralorías y áreas de transparencia.',
+     'Capacitar a su personal con las observaciones que la ASF repite. Nunca a cambio de retirar, suavizar o retrasar lo que publicamos (política de independencia).',
+     ['capacitacion', 'licencia'],
+     [('herramienta-inspector-asf.html', 'Auditorías de la ASF'), ('aprende-auditoria.html', 'Cómo se audita')]),
+]
+
+# Por qué revisar antes de pagar: claves de fraude.cifras(). Se leen de ahí
+# con su valor, su chip y su fuente; nunca se copian.
+POR_QUE = ['oculta', 'empresas', 'definitivos', 'condusef_t1']
+
+# Relaciones con clientes (bloque 4 del lienzo).
+FORMAS = [
+    ('🙋', 'Por tu cuenta', 'Gratis, siempre',
+     'La Enciclopedia, el Planisferio, el Noticiero, el Auditor y sus cuatro modos, los estados de cuenta, el dictamen, buscar un RFC en la 69-B y leer una factura.',
+     'enciclopedia-auditavision.html', 'Empieza a consultar'),
+    ('🤝', 'Por encargo', 'Se cotiza por escrito',
+     'Una persona investiga por ti: revisión puntual, expediente, ficha de proveedor o revisión de facturas por lote.',
+     '#solicitud', 'Pide una cotización'),
+    ('🏢', 'Para tu institución', 'Talleres y licencias',
+     'Acompañamiento dedicado: talleres con casos reales y licencia de las herramientas para tu equipo.',
+     'servicios.html?servicio=capacitacion#solicitud', 'Agenda un taller'),
+]
+
+# La línea que no se cruza (docs/PLAN-IMPLEMENTACION.md §2).
+GRATIS_PAGO = [
+    ('La información pública', 'Gratis, siempre', 'Nunca se cobra'),
+    ('Buscar un RFC en la 69-B, leer una factura, el dictamen', 'Gratis, siempre', 'Nunca se cobra'),
+    ('El trabajo: que una persona investigue, revise o enseñe por ti', 'Lo haces tú con las herramientas', 'Servicio cotizado'),
+    ('La memoria: tu cartera de proveedores guardada', 'En tu navegador (Mi Auditavisión)', 'Con el Vigía, al abrir'),
+    ('El aviso: enterarte cuando algo cambia', 'Lo revisas tú cuando quieras', 'Con el Vigía, al abrir'),
+    ('El cómputo: lotes grandes de facturas', 'Hasta 500 facturas, en tu navegador', 'Servicio cotizado'),
+]
+
+DIFERENCIA = [
+    ('🧾', 'Cada cifra con su documento', 'Y una de tres etiquetas: oficial, derivado o pendiente. Lo que no se puede sostener se dice, no se rellena.'),
+    ('🌐', 'Miramos hacia afuera', 'A tu proveedor y al dinero público: la lista 69-B, los contratos de ComprasMX, la ASF y el DOF, cruzados en un solo lugar.'),
+    ('🔒', 'Tus archivos no se suben', 'Las facturas y los estados de resultados se leen en tu navegador. No te pedimos tu contraseña del SAT.'),
+    ('🆕', 'Una IA que no inventa', 'Redacta solo con las fichas de la base, y cada cifra de su respuesta se coteja: la que no aparece, se tira.'),
+    ('⚖️', 'Las mismas reglas para todos', 'Para cada cliente, cada partido y cada gobierno. Quien encarga define la pregunta, no la respuesta.'),
+    ('🗃️', 'Memoria que no se borra', 'Cada documento que respalda un dato queda con su huella digital (SHA-256), aunque después lo cambien o lo retiren.'),
+]
+
+# El lienzo de los nueve bloques (docs/MODELO-DE-NEGOCIO.md), dicho al
+# cliente. El orden es el del lienzo; `area` es su lugar en la cuadrícula.
+LIENZO = [
+    ('socios', '8', 'Aliados', 'Buscamos universidades, organizaciones civiles, despachos y medios. Los proveedores de tecnología (hospedaje, base de datos, IA, antispam) no deciden qué se publica.'),
+    ('actividades', '7', 'Lo que hacemos', 'Cotejar documentos, cruzarlos, vigilar lo que cambia y explicarlo en sencillo.'),
+    ('recursos', '6', 'Con qué lo hacemos', 'La base cotejada con huella digital, el método de tres etiquetas y las herramientas del Modo Inspector.'),
+    ('propuesta', '2', 'Lo que te ofrecemos', 'Revisar a tu proveedor y al dinero público con documentos oficiales, y decirte lo que encontramos, lo que falta y quién lo debe.'),
+    ('relaciones', '4', 'Cómo te acompañamos', 'Por tu cuenta (gratis), por encargo (una persona investiga por ti) o para tu institución (talleres y licencias).'),
+    ('canales', '3', 'Dónde nos encuentras', 'El sitio y el Auditor, el formulario de solicitud y los talleres. Todo funciona desde el celular.'),
+    ('segmentos', '1', 'A quién servimos', 'A la ciudadanía, gratis; y a despachos, cumplimiento, auditoría, medios, regidurías, academia y gobiernos.'),
+    ('costos', '9', 'Lo que cuesta sostenerlo', 'Las horas de investigación y de revisión, las fuentes, el cómputo de la IA y el hospedaje.'),
+    ('ingresos', '5', 'Cómo nos sostenemos', 'Servicios cotizados, talleres, licencias y donaciones. Nunca la información pública ni la publicidad.'),
+]
+
+PREGUNTAS = [
+    ('¿Cobran por la información?', 'No. Lo que se ve en el sitio es gratis y lo seguirá siendo. Se cobra que lo hagamos por ti, que lo recordemos o que te avisemos.'),
+    ('¿El entregable es un dictamen o un peritaje?', 'No. Es investigación documental y análisis de indicios: señalamos lo que dicen los documentos públicos y las inconsistencias, sin acusar a nadie. Un encargo que requiera dictamen pericial se cotiza aparte, con su responsable profesional.'),
+    ('¿Qué pasa si no encuentran lo que yo esperaba?', 'El entregable lo dice. Quien encarga define la pregunta, no la respuesta, y las conclusiones no se negocian.'),
+    ('¿Mis facturas o mis datos se publican?', 'No. Tu encargo es confidencial y no publicamos quién encargó qué sin su permiso. Con las herramientas gratuitas, tus archivos ni siquiera salen de tu navegador.'),
+    ('¿Cuánto tarda y cuánto cuesta?', 'Depende del alcance. Antes de empezar recibes por escrito el costo y el plazo; si no te conviene, ahí termina y no pagas nada.'),
+    ('¿Atienden a gobiernos y a partidos?', 'Sí, con la misma regla para todos: el mismo servicio y el mismo precio, y nunca a cambio de cambiar lo que publicamos. Si quien solicita es parte del caso, se dice en la cotización.'),
+    ('¿Cuándo abren?', 'Con el lanzamiento de la plataforma. Ya puedes armar tu solicitud; el envío se activa entonces.'),
 ]
 
 PROCESO = [
@@ -1955,6 +2057,24 @@ PROCESO = [
     ('📦', 'Entrega', 'Recibes el entregable con sus fuentes, sus etiquetas y sus límites.'),
     ('🔁', 'Seguimiento', 'Resolvemos dudas y, si lo pediste, seguimos el tema.'),
 ]
+
+# Dónde encajamos (pedido del autor, 07-11-2026: «considera WiseCricket»).
+# Sale de docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md §3: las plataformas de
+# inteligencia fiscal miran la información del propio cliente (sus CFDI con su
+# CIEC, su ERP, sus bancos); Auditavisión mira hacia afuera. En la página no se
+# nombra a ninguna empresa: se describe la categoría, sin calificarla, y se dice
+# que se complementan.
+ENCAJE = (
+    ('🏠', 'Hacia dentro', 'Plataformas de inteligencia fiscal y tu sistema contable',
+     ['Descargan y validan tus facturas con tu contraseña del SAT', 'Concilian tus bancos, pólizas y facturas',
+      'Calculan IVA e ISR y vigilan tu buzón tributario', 'Arman el soporte de tus propias operaciones']),
+    ('🌐', 'Hacia afuera', 'Auditavisión',
+     ['Tu proveedor frente a la lista 69-B, cada semana', 'Sus contratos con el gobierno (ComprasMX) y lo que dijo la ASF',
+      'Señales de fraccionamiento en las compras públicas', 'Sin pedirte tu contraseña del SAT: tus archivos se leen en tu navegador']),
+    'La materialidad completa necesita las dos miradas: que la operación está bien soportada por dentro, y que tu proveedor existe, '
+    'no está en la lista 69-B y no tiene un historial raro por fuera. Si ya usas una plataforma para tu contabilidad, no la sustituimos: '
+    'revisamos lo que queda afuera.',
+)
 
 INDEPENDENCIA = [
     ('La consulta cívica es gratuita y lo seguirá siendo.',
@@ -1976,7 +2096,7 @@ INDEPENDENCIA = [
     ('De qué respondemos y de qué no.',
      'Respondemos de que cada dato coincida con el documento oficial que citamos, y si nos equivocamos lo corregimos en público, diciendo qué cambió. No respondemos del contenido de los documentos oficiales, que es de la dependencia que los emite, ni de las decisiones que alguien tome con la información.'),
     ('Solo fuentes lícitas.',
-     'Documentos públicos y solicitudes de acceso a la información. No obtenemos datos personales ni información reservada por vías indebidas.'),
+     'Documentos que las autoridades publican para todos. Ninguna cifra se apoya en una solicitud de acceso, y no obtenemos datos personales ni información reservada por vías indebidas.'),
     ('Nuestro método y nuestras herramientas son nuestros.',
      'El entregable de un encargo es de quien lo encarga. Las herramientas, el método y la base de la plataforma son de Auditavisión: se pueden licenciar, pero una licencia no da control sobre lo que la plataforma publica.'),
     ('Tus datos y tu encargo son confidenciales.',
@@ -1987,26 +2107,119 @@ INDEPENDENCIA = [
 
 
 def servicios():
-    oferta = '\n'.join(
-        '          <article class="sv-servicio" id="sv-%s">\n'
-        '            <span class="sv-ico" aria-hidden="true">%s</span>\n'
-        '            <h3 class="sv-tit">%s</h3>\n'
-        '            <p class="sv-que">%s</p>\n'
-        '            <dl class="sv-dl"><dt>Entregable</dt><dd>%s</dd><dt>Para quién</dt><dd>%s</dd></dl>\n'
-        '          </article>' % s for s in SERVICIOS)
+    import fraude
     nom = {x[0]: x[2] for x in SERVICIOS}
-    sectores = '\n'.join(
-        '          <article class="sv-servicio sv-sector">\n'
+    ir = lambda i: '<a href="#sv-%s">%s</a>' % (i, nom[i])
+    for p in PERFILES:
+        for i in p[4]:
+            if i not in nom:
+                raise SystemExit('Servicios: el perfil «%s» pide el servicio «%s», que no existe' % (p[1], i))
+        for liga, _ in p[5]:
+            if not os.path.exists(os.path.join(RAIZ, liga)):
+                raise SystemExit('Servicios: el perfil «%s» enlaza a %s, que no existe' % (p[1], liga))
+    if {s[6] for s in SERVICIOS} != {l[0] for l in LINEAS}:
+        raise SystemExit('Servicios: cada servicio necesita una línea de LINEAS, y cada línea, un servicio')
+
+    # La portada: la propuesta de valor, tres botones y tres promesas.
+    portada = '\n'.join([
+        '<div class="sv-hero">',
+        '          <p class="sv-hero-pre">Prevención, debida diligencia e investigación documental</p>',
+        '          <p class="sv-hero-tit">Revisamos a tu proveedor y al dinero público con documentos oficiales, '
+        'y te decimos lo que encontramos, lo que falta y quién lo debe.</p>',
+        '          <div class="sv-hero-acc">'
+        '<a class="sz-btn sz-btn-of" href="#solicitud">Pide una cotización</a>'
+        '<a class="sz-btn" href="#sectores">Elige tu perfil</a>'
+        '<a class="sz-btn" href="herramienta-inspector-efos.html">Prueba gratis: busca un RFC</a></div>',
+        '          <ul class="sv-hero-prom">',
+        '            <li><span aria-hidden="true">🧾</span><b>Cada cifra con su documento</b> y su etiqueta</li>',
+        '            <li><span aria-hidden="true">🔒</span><b>Tus archivos no se suben</b>: se leen en tu navegador</li>',
+        '            <li><span aria-hidden="true">🔓</span><b>La consulta es gratis</b> y lo seguirá siendo</li>',
+        '          </ul>',
+        '        </div>'])
+
+    # Por qué revisar antes de pagar: las cifras de «El fraude en números».
+    cf = {c[0]: c for c in fraude.cifras()}
+    falta = [k for k in POR_QUE if k not in cf]
+    if falta:
+        raise SystemExit('Servicios: fraude.cifras() ya no trae %s' % ', '.join(falta))
+    porque = '\n'.join(
+        '          <article class="sv-dato">\n'
+        '            <p class="sv-dato-tit">%s</p>\n'
+        '            <p class="sv-dato-cifra">%s %s</p>\n'
+        '            <p class="sv-dato-tx">%s%s</p>\n'
+        '            <p class="sv-dato-fu">Fuente: <a href="%s" target="_blank" rel="noopener">%s ↗</a></p>\n'
+        '          </article>' % (html.escape(c[1]), html.escape(c[2]), '<span class="est-chip est-%s">%s</span>' % (c[4], c[4]),
+                                  html.escape(c[3]), (' <small>(%s)</small>' % html.escape(c[5])) if c[5] else '', esc_attr(c[7][1]), html.escape(c[7][0]))
+        for c in (cf[k] for k in POR_QUE))
+
+    perfiles = '\n'.join(
+        '          <article class="sv-perfil">\n'
+        '            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">%s</span> %s</h3>\n'
+        '            <p class="sv-quien">%s</p>\n'
+        '            <p class="sv-que"><b>Tu reto:</b> %s</p>\n'
+        '            <p class="sv-que"><b>Te sirve:</b> %s.</p>\n'
+        '            <p class="sv-gratis"><b>Empieza gratis:</b> %s</p>\n'
+        '            <a class="sz-btn sv-perfil-btn" href="servicios.html?servicio=%s#solicitud">Cotiza para tu caso</a>\n'
+        '          </article>' % (ico, sec, quien, reto, ', '.join(ir(i) for i in ids),
+                                  ' · '.join('<a href="%s">%s</a>' % l for l in libres), ids[0])
+        for ico, sec, quien, reto, ids, libres in PERFILES)
+
+    oferta = '\n'.join(
+        '          <div class="sv-linea">\n'
+        '            <p class="sv-linea-tit"><span aria-hidden="true">%s</span> %s</p>\n'
+        '            <p class="sv-linea-tx">%s</p>\n'
+        '            <div class="sv-servicios">\n%s\n            </div>\n'
+        '          </div>' % (ico, tit, tx, '\n'.join(
+            '              <article class="sv-servicio" id="sv-%s">\n'
+            '                <span class="sv-ico" aria-hidden="true">%s</span>\n'
+            '                <h3 class="sv-tit">%s</h3>\n'
+            '                <p class="sv-que">%s</p>\n'
+            '                <dl class="sv-dl"><dt>Entregable</dt><dd>%s</dd><dt>Para quién</dt><dd>%s</dd></dl>\n'
+            '                <a class="sv-pide" href="servicios.html?servicio=%s#solicitud">Solicitar este servicio ➔</a>\n'
+            '              </article>' % (s[0], s[1], s[2], s[3], s[4], s[5], s[0])
+            for s in SERVICIOS if s[6] == lid))
+        for lid, ico, tit, tx in LINEAS)
+
+    formas = '\n'.join(
+        '          <article class="sv-forma">\n'
         '            <span class="sv-ico" aria-hidden="true">%s</span>\n'
         '            <h3 class="sv-tit">%s</h3>\n'
+        '            <p class="sv-forma-et">%s</p>\n'
         '            <p class="sv-que">%s</p>\n'
-        '            <p class="sv-que"><b>Te sirve:</b> %s.</p>\n'
-        '          </article>' % (ico, sec, nec, ', '.join('<a href="#sv-%s">%s</a>' % (i, nom[i]) for i in ids))
-        for ico, sec, nec, ids in SECTORES)
+        '            <a class="sv-pide" href="%s">%s ➔</a>\n'
+        '          </article>' % f for f in FORMAS)
+    linea = ('<div class="sv-tabla-env"><table class="sv-tabla">\n'
+             '            <thead><tr><th scope="col">Qué</th><th scope="col">Gratis</th><th scope="col">De pago</th></tr></thead>\n'
+             '            <tbody>\n%s\n            </tbody>\n          </table></div>\n'
+             '          <p class="sv-nota">La prueba de la línea: si alguien pregunta «¿cobran por la información?», la respuesta siempre es '
+             '«no»: se cobra que lo hagamos por ti, que lo recordemos o que te avisemos. El Vigía con aviso y memoria se abre con el lanzamiento.</p>'
+             % '\n'.join('              <tr><th scope="row">%s</th><td data-et="Gratis">%s</td><td data-et="De pago">%s</td></tr>' % g
+                         for g in GRATIS_PAGO))
+
+    dentro, fuera, cierre = ENCAJE
+    encaje = ('<div class="sv-encaje">\n%s\n        </div>\n'
+              '        <p class="sv-encaje-cierre">%s</p>') % ('\n'.join(
+        '          <article class="sv-encaje-lado sv-encaje-%s">\n'
+        '            <p class="sv-encaje-tit"><span aria-hidden="true">%s</span> %s</p>\n'
+        '            <p class="sv-encaje-quien">%s</p>\n'
+        '            <ul>%s</ul>\n'
+        '          </article>' % (cl, ico, tit, quien, ''.join('<li>%s</li>' % x for x in items))
+        for cl, (ico, tit, quien, items) in (('dentro', dentro), ('fuera', fuera))), cierre)
+
+    diferencia = '\n'.join(
+        '          <li class="sv-dif"><span class="sv-ico" aria-hidden="true">%s</span><b>%s</b><span>%s</span></li>' % d
+        for d in DIFERENCIA)
     pasos = '\n'.join(
         '          <li class="sv-paso"><span class="sv-paso-num" aria-hidden="true">%d</span>'
         '<span class="sv-paso-ico" aria-hidden="true">%s</span><b>%s</b><span>%s</span></li>' % ((n,) + p)
         for n, p in enumerate(PROCESO, 1))
+    lienzo = ('<div class="sv-lienzo" role="list">\n%s\n        </div>\n'
+              '        <p class="sv-nota">Es el lienzo de modelo de negocio de nueve bloques (Osterwalder y Pigneur, 2010). '
+              'Lo publicamos porque rendimos cuentas de cómo nos sostenemos, igual que pedimos a los gobiernos.</p>') % '\n'.join(
+        '          <div class="sv-bloque sv-b-%s" role="listitem"><span class="sv-bloque-num" aria-hidden="true">%s</span>'
+        '<b>%s</b><span>%s</span></div>' % b for b in LIENZO)
+    preguntas = '\n'.join(
+        '          <details class="sv-faq"><summary>%s</summary><p>%s</p></details>' % q for q in PREGUNTAS)
     politica = '\n'.join('            <li><b>%s</b> %s</li>' % p for p in INDEPENDENCIA)
     opciones = '\n'.join('                <option value="%s">%s</option>' % (s[0], s[2]) for s in SERVICIOS)
     campo = lambda i, et, ctl, ayuda='': (
@@ -2067,39 +2280,59 @@ def servicios():
         '        </form>',
         '        <div class="sv-resumen" id="svResumen" hidden></div>',
         '        <noscript><p>El formulario necesita JavaScript.</p></noscript>'])
+    bloque_sec = lambda i, t, tx, b, **k: dict({'id': i, 'titulo': t, 'texto': tx, 'tarjetas': [], 'bloque': b}, **k)
     return {
         # Quinta pestaña del menú desde el 02-11-2026 (pedido del autor); del
-        # 11-10-2026 a esa fecha fue un módulo del Modo Inspector.
+        # 11-10-2026 a esa fecha fue un módulo del Modo Inspector. Reestructurada
+        # el 07-11-2026 sobre el lienzo de nueve bloques (arriba, SERVICIOS).
         'archivo': 'servicios.html', 'menu': 'Servicios de investigación', 'menu_archivo': 'servicios.html',
-        'icono': '🔎', 'titulo': 'Servicios de investigación', 'lema': 'La consulta es gratuita; la investigación a la medida se cotiza',
-        'entrada': ('Todo lo que publica Auditavisión es libre y lo seguirá siendo. Cuando necesites ir más a fondo en un caso, '
-                    'podemos hacer por encargo una investigación documental con la misma regla de la plataforma: cada cifra con '
-                    'su documento y su etiqueta. Los Servicios son trabajo a la medida y, cuando se abran, las '
-                    '<a href="donaciones.html">donaciones</a> también ayudan. Ninguna de las dos vías compra lo que publicamos.'),
+        'icono': '🔎', 'titulo': 'Servicios', 'lema': 'Prevención, debida diligencia e investigación, con cada cifra en su documento',
+        'entrada': ('Todo lo que publica Auditavisión es libre y lo seguirá siendo. Cuando necesites ir más a fondo, revisar a un '
+                    'proveedor, vigilar tu cartera o formar a tu equipo, lo hacemos por encargo con la misma regla de la plataforma. '
+                    'Los Servicios y las <a href="donaciones.html">donaciones</a> sostienen el trabajo; ninguna de las dos vías compra lo que publicamos.'),
         'estilos': ['servicios.css'],
         'scripts': ['servicios.js'],
         'antes': ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> Los Servicios se abren con el lanzamiento de la '
                   'plataforma. Ya puedes armar tu solicitud y guardarla; el envío se activa entonces.</p>'),
         'secciones': [
-            {'id': 'oferta', 'titulo': 'Qué podemos investigar', 'texto': '%s servicios, de una pregunta puntual a una licencia para tu institución.' % ['Cero', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho'][len(SERVICIOS)],
-             'tarjetas': [], 'bloque': '<div class="sv-servicios">\n%s\n        </div>' % oferta},
-            {'id': 'sectores', 'titulo': 'A quién servimos', 'texto': 'Lo que necesita cada sector y qué servicio lo atiende. La consulta de la plataforma sigue siendo gratuita para todos.',
-             'tarjetas': [], 'bloque': '<div class="sv-servicios">\n%s\n        </div>' % sectores},
-            {'id': 'proceso', 'titulo': 'Cómo trabajamos', 'texto': 'Siete pasos. Nada se cobra antes de que aceptes la cotización.',
-             'tarjetas': [], 'bloque': '<ol class="sv-pasos">\n%s\n        </ol>' % pasos},
-            {'id': 'precio', 'titulo': 'Cuánto cuesta', 'texto': 'Cada encargo se cotiza por escrito antes de empezar.', 'tarjetas': [],
-             'bloque': ('<div class="sv-precio">\n'
+            bloque_sec('propuesta', 'Lo que te ofrecemos', '', portada, sin_cab=True),
+            bloque_sec('por-que', 'Por qué revisar antes de pagar',
+                       'Lo que no se denuncia no llega a ninguna estadística: la prevención vale más que la denuncia. Las cifras salen de '
+                       '<a href="aprende-fraude-en-numeros.html">El fraude en números</a>, cada una con su documento.',
+                       '<div class="sv-datos">\n%s\n        </div>' % porque),
+            bloque_sec('sectores', 'Elige tu perfil',
+                       'Por carrera y especialidad: lo que te pide tu trabajo, el servicio que lo atiende y con qué puedes empezar hoy, gratis.',
+                       '<div class="sv-perfiles">\n%s\n        </div>' % perfiles),
+            bloque_sec('oferta', 'Los servicios',
+                       '%s servicios en tres líneas, de una pregunta puntual a una licencia para tu institución.'
+                       % ['Cero', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve'][len(SERVICIOS)],
+                       '<div class="sv-lineas">\n%s\n        </div>' % oferta),
+            bloque_sec('formas', 'Tres formas de trabajar con nosotros', 'Gratis por tu cuenta, por encargo o para tu institución.',
+                       '<div class="sv-formas">\n%s\n        </div>\n        %s' % (formas, linea)),
+            bloque_sec('encaje', 'Dónde encajamos',
+                       'Las plataformas de inteligencia fiscal miran tu información por dentro; nosotros, a tu proveedor y al dinero público por fuera.',
+                       encaje),
+            bloque_sec('diferencia', 'Por qué Auditavisión', 'Seis razones que puedes comprobar en la plataforma antes de contratar.',
+                       '<ul class="sv-difs">\n%s\n        </ul>' % diferencia),
+            bloque_sec('proceso', 'Cómo trabajamos', 'Siete pasos. Nada se cobra antes de que aceptes la cotización.',
+                       '<ol class="sv-pasos">\n%s\n        </ol>' % pasos),
+            bloque_sec('precio', 'Cuánto cuesta', 'Cada encargo se cotiza por escrito antes de empezar.',
+                       ('<div class="sv-precio">\n'
                         '          <p>Todavía no hay tarifa publicada, y no vamos a inventarla: las primeras saldrán de encargos piloto. '
                         'Cuando las haya, se publicarán aquí. La cotización se arma con cuatro cosas:</p>\n'
                         '          <ul class="sv-lista"><li>las horas de investigación y de revisión;</li>'
                         '<li>el costo de las fuentes (copias certificadas, bases de datos o trámites);</li>'
                         '<li>la forma de entrega;</li><li>un margen para sostener la plataforma.</li></ul>\n'
-                        '        </div>')},
-            {'id': 'independencia', 'titulo': 'Política de independencia', 'texto': '%d compromisos que valen para cada cliente y cada donante, sin excepción.' % len(INDEPENDENCIA),
-             'tarjetas': [], 'bloque': '<div class="sv-politica">\n          <ol class="sv-pol">\n%s\n          </ol>\n'
-                                       '          <p class="sv-version">Versión 2 · 10 de octubre de 2026.</p>\n        </div>' % politica},
-            {'id': 'solicitud', 'titulo': 'Solicita una investigación', 'texto': 'Cuéntanos qué quieres saber. Te mostramos tu solicitud antes de mandarla.',
-             'tarjetas': [], 'bloque': formulario},
+                        '        </div>')),
+            bloque_sec('modelo', 'Nuestro modelo, a la vista', 'Los nueve bloques de cómo funciona y se sostiene Auditavisión.', lienzo),
+            bloque_sec('preguntas', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.',
+                       '<div class="sv-faqs">\n%s\n        </div>' % preguntas),
+            bloque_sec('independencia', 'Política de independencia',
+                       '%d compromisos que valen para cada cliente y cada donante, sin excepción.' % len(INDEPENDENCIA),
+                       '<div class="sv-politica">\n          <details class="sv-pol-det"><summary>Lee los %d compromisos</summary>\n'
+                       '          <ol class="sv-pol">\n%s\n          </ol>\n          </details>\n'
+                       '          <p class="sv-version">Versión 3 · 7 de noviembre de 2026.</p>\n        </div>' % (len(INDEPENDENCIA), politica)),
+            bloque_sec('solicitud', 'Solicita una cotización', 'Cuéntanos qué quieres saber. Te mostramos tu solicitud antes de mandarla.', formulario),
             # Hasta el 24-10-2026 aqui iba el Pase del Auditor Civico.
             {'id': 'pase', 'titulo': 'Donaciones', 'texto': 'Si lo que quieres es sostener la consulta gratuita, puedes donar. Se abre con el lanzamiento.',
              'tarjetas': [('🐷', 'Donaciones', 'Ayuda a sostener la plataforma, a la vista de todos.', 'donaciones.html', None, None)]},

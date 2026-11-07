@@ -297,7 +297,7 @@ def _pendientes():
 PAGINA_K = {
     'index.html': ' sistema civico de fiscalizacion plataforma',
     'donaciones.html': ' apoyar apoyo sostener sostenerla donar donativo aportar ayudar plataforma pase civico auditor',
-    'servicios.html': ' contratar contrato medida servicio servicios investigacion encargo cotizacion suscripcion creditos sostener plataforma',
+    'servicios.html': ' contratar contrato medida servicio servicios investigacion encargo cotizacion suscripcion creditos sostener plataforma despacho despachos contador contadores abogado abogados cumplimiento taller talleres debida diligencia vigia proveedores perfil',
     'comunidad.html': ' participa participar reportar denunciar error corregir proponer tema',
     'informes-documentar-para-sancionar.html': ' sancion sancionar sanciones castigo impunidad responsabilidad administrativa falta grave desvio abuso de funciones desacato ipra expediente matrices irregularidad',
     'derecho-de-replica.html': ' replica rectificacion aclaracion aclarar corregir me aludieron me mencionaron me nombraron nombran difamacion inexacto falso agravio prensa periodistas personas privadas responder',

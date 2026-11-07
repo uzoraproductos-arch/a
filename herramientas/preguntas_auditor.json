@@ -2276,6 +2276,14 @@
    "dice": [
     "37.4"
    ]
+  },
+  {
+   "q": "¿Qué servicios ofrecen para despachos contables?",
+   "ir": "servicios.html"
+  },
+  {
+   "q": "¿Dan talleres para auditores?",
+   "ir": "servicios.html"
   }
  ]
 }

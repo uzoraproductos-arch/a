@@ -1352,7 +1352,7 @@
     if (!id) {
       if (/\bcontrast(a|ar|ame)\b.*\b(nota|noticia)|\b(verifica|verificar|checa|checar|revisa|revisar)(me)? (una|esta|la|esa) (nota|noticia|publicacion)\b/.test(p) && !/\d/.test(p)) id = 'inspnota';
       else if (/\b(verific|comprob|valid)\w* (un |una |el |la |mi |este |esta )?(estado de cuenta|folio|ficha tecnica|documento)\b|\bes (autentico|original|falso)\b.*\b(estado de cuenta|documento)\b/.test(p)) id = 'inspverifica';
-      else if (/\b(servicios? de investigacion|investigacion a la medida|(contratar|solicitar|pedir|encargar|encargarles|cotizar)( una| un)? (investigacion|servicio|revision|expediente)|quiero que investiguen|investiguen (esto|un caso|a))\b/.test(p)) id = 'servicios.html';
+      else if (/\b(servicios? de investigacion|investigacion a la medida|(contratar|solicitar|pedir|encargar|encargarles|cotizar)( una| un)? (investigacion|servicio|revision|expediente)|quiero que investiguen|investiguen (esto|un caso|a)|(que )?servicios (ofrecen|tienen|dan|venden|hay)|(dan|ofrecen|tienen|imparten) (talleres|capacitacion|cursos)|talleres? (para|de) (auditores|contadores|despachos|abogados))\b/.test(p)) id = 'servicios.html';
       else if (/\b(que encontro la asf|expedientes de (la )?asf|casos de la asf|expedientes de casos)\b/.test(p)) id = 'inspasf';
       else if (/\b(modo inspector|grandes investigaciones|(seis|6) aplicaciones|que (puedo|puedes) investigar|como investigo)\b/.test(p)) id = '*';
     }
@@ -1370,7 +1370,7 @@
     }
     /* El tema de una investigación: lo que el lector dijo después de pedirla
        («…sobre el Tren Maya») o, si dice «esto», su pregunta anterior. */
-    var tema = id !== 'servicios.html' ? '' : (/\b(sobre|de|del|acerca de|para)\s+(.{3,})$/i.exec(t.replace(/^.*?investigaci[oó]n\b/i, '').replace(/[?¿!¡.]+$/, '')) || [])[2] || '';
+    var tema = id !== 'servicios.html' || !/investig/i.test(t) ? '' : (/\b(sobre|de|del|acerca de|para)\s+(.{3,})$/i.exec(t.replace(/^.*?investigaci[oó]n\b/i, '').replace(/[?¿!¡.]+$/, '')) || [])[2] || '';
     if (/^(esto|eso|este caso|ese caso|lo anterior|lo mismo)$/i.test(tema.trim())) tema = '';
     if (id === 'servicios.html' && !tema && /\b(esto|eso|este caso|ese caso|lo anterior|lo mismo)\b/.test(p) && previas && previas.length) tema = previas[previas.length - 1];
 
