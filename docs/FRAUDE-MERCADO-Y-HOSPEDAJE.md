@@ -78,9 +78,18 @@ el costo deflactado no da los 124.3 mil millones de la presentación.
 - **El fraude contra empresas no es el de las personas.** La ENVE cuenta
   unidades económicas; la ENVIPE, personas en sus hogares. No se suman.
 
-**Pendiente:** el total del fraude contra empresas. Se puede sacar de los
-microdatos de la ENVE con sus factores de expansión; la falta es de la
-plataforma.
+**Pendiente:** el total del fraude contra empresas. **No se puede sacar de los
+microdatos** (revisado el 07-11-2026): el catálogo del INEGI
+(<https://www.inegi.org.mx/rnm/index.php/catalog/1058>, ficha de acceso a los
+datos) dice que «los microdatos de proyectos estadísticos en establecimientos
+no están abiertos al público en general», por la confidencialidad del art. 37
+de la Ley del SNIEG. Solo se procesan en el Laboratorio de microdatos (personas
+servidoras públicas, investigadores y estudiantes de posgrado acreditados) o
+como tabulado especial con costo. Ninguno de los dos es «publicado para todos»,
+así que no sirve de fuente (§2 y pilar 12 de AGENTS.md). El 07-11-2026 se había
+escrito que los microdatos eran públicos: fue un error nuestro y se corrigió
+el mismo día. Ninguna ley obliga al INEGI a publicar ese total, así que la
+ficha no culpa a nadie.
 
 ### 1.3 Las facturas falsas (SAT, lista 69-B)
 
@@ -384,7 +393,7 @@ antes. Mudarse lleva un día: el sitio no se compila y es HTML estático.
 ## 6. Pendientes que deja
 
 1. ~~Cotejar la tasa total de fraude 2025~~: hecho, 8,290 (presentación nacional).
-2. El costo del fraude contra empresas (ENVE 2024): el promedio ya entró (07-11-2026); falta el total, que sale de los microdatos.
+2. El costo del fraude contra empresas (ENVE 2024): el promedio ya entró (07-11-2026); el total no se puede sacar: los microdatos de empresas no son públicos.
 3. El total nacional de la CONDUSEF de 2025 (posible fraude, monto, cuánto se
    recuperó): revisado el 07-11-2026, su portal no respondió (§1.4).
 4. ~~El total nacional de carpetas por fraude del SESNSP de 2025~~: hecho, 108,736 (§1.5).

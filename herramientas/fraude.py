@@ -95,9 +95,12 @@ def pendientes():
          'porque': ('El INEGI publica lo que costó en promedio el fraude (${:,} en pesos de julio de 2018), pero no el total ni si ese promedio '
                     'es por delito o por empresa víctima. Multiplicarlo por los fraudes no sirve: hecho con los nueve delitos que se llaman '
                     'igual en la lámina y en los tabulados da ${:.1f} mil millones, más que los ${:.1f} mil millones que perdieron las empresas '
-                    'por todos los delitos. El total se puede sacar de los microdatos de la encuesta, con sus factores de expansión, y aún '
-                    'no lo hacemos.').format(enve()['costo_promedio']['Fraude']['2023'], enve()['producto_9'] / 1e9, enve()['perdidas_2018'] / 1e9),
-         'responsable': plat, 'enlace': 'https://www.inegi.org.mx/programas/enve/2024/', 'enlace_txt': 'ENVE 2024, microdatos (INEGI)', 'aparece': aqui},
+                    'por todos los delitos. Y los microdatos de la encuesta no son públicos: el INEGI los guarda por confidencialidad (Ley del SNIEG, '
+                    'art. 37) y solo los abre en su Laboratorio de microdatos a personas acreditadas, o como tabulado especial con costo '
+                    '(revisado el 07-11-2026 en su catálogo).').format(enve()['costo_promedio']['Fraude']['2023'], enve()['producto_9'] / 1e9, enve()['perdidas_2018'] / 1e9),
+         'responsable': ('Nadie lo publica, y no se puede reprochar como omisión: ninguna ley obliga al INEGI a dar ese total. Es la cifra que '
+                         'le faltaría a sus tabulados del costo del delito'),
+         'enlace': 'https://www.inegi.org.mx/rnm/index.php/catalog/1058', 'enlace_txt': 'ENVE 2024, catálogo de microdatos (INEGI)', 'aparece': aqui},
         {'id': 'fraude-condusef', 'tema': 'El fraude en números',
          'que': 'Las reclamaciones por posible fraude de 2025 en todo el país: cuántas, por cuánto y cuánto se devolvió (CONDUSEF)',
          'porque': ('Son dos cifras que no se suman: las reclamaciones que llegan a la CONDUSEF (decenas de miles al semestre, en su '
