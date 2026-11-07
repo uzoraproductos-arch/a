@@ -2237,6 +2237,10 @@
   {
    "q": "Mi Auditavisión",
    "ir": "herramienta-inspector-mia.html"
+  },
+  {
+   "q": "Mapa del fraude por estado",
+   "ir": "planisferio.html?d=penal"
   }
  ]
 }

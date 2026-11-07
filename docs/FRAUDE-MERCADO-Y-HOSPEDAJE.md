@@ -30,12 +30,10 @@ comunicado.
 | Delitos que no se denunciaron o no se investigaron (cifra oculta) | **93.4 %** de 33.8 millones | oficial |
 | Costo del delito para los hogares | $267.3 mil millones (1.06 % del PIB) | oficial |
 
-La prensa publicó una tasa total de fraude de 8,290 por cada 100 mil
-habitantes ([ADN40](https://www.adn40.mx/seguridad/2026-09-10/fraude-y-extorsion-lideran-delitos-en-mexico-en-2025-envip-del-inegi)).
-Esa cifra **no está en el comunicado**. Para usarla hay que cotejarla en los
-tabulados de la ENVIPE 2026, así que por ahora queda como **pendiente de
-cotejo**. La falta es de la plataforma, porque el INEGI sí publica los
-tabulados.
+La tasa total de fraude de 2025 es **8,290 por cada 100 mil habitantes**
+(7,574 en 2024), **oficial**: viene en la gráfica de los delitos más frecuentes
+de la [presentación nacional de la ENVIPE 2026](https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_presentacion_nacional.pdf)
+(cotejo del 07-11-2026). El comunicado solo la daba por sexo.
 
 ### 1.2 Las empresas (INEGI, ENVE 2024, datos de 2023)
 
@@ -328,7 +326,7 @@ antes. Mudarse lleva un día: el sitio no se compila y es HTML estático.
 
 ## 6. Pendientes que deja
 
-1. Cotejar la tasa total de fraude 2025 en los tabulados de la ENVIPE 2026.
+1. ~~Cotejar la tasa total de fraude 2025~~: hecho, 8,290 (presentación nacional).
 2. Sacar de los tabulados de la ENVE 2024 el costo del fraude contra empresas.
 3. El total nacional de la CONDUSEF de 2025 (posible fraude, monto, cuánto se
    recuperó).

@@ -11,7 +11,7 @@
 
   var SEG = 31536000;
   // Cada tema del portal vive en su página (04-11-2026): planisferio-<clave>-<tema>.html.
-  var TEMAS = ['presupuestos', 'deuda', 'inversion', 'legislativa', 'judicial', 'salud', 'social', 'administracion', 'ambiental', 'leyes', 'dimensiones'];
+  var TEMAS = ['presupuestos', 'deuda', 'inversion', 'legislativa', 'judicial', 'salud', 'social', 'administracion', 'penal', 'ambiental', 'leyes', 'dimensiones'];
   function sub(e, d) { return e.p.replace(/\.html$/, '-' + (d === 'financiera' ? 'presupuestos' : d) + '.html'); }
   (function () {
     // Una liga vieja a un tema del portal (planisferio-jal.html#deuda) lleva a su página.
@@ -331,6 +331,17 @@
         '<a class="pl-ficha-ir" href="' + esc(sub(e, 'social')) + '">Ver su pobreza en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
+    /* Su fraude y su cifra oculta (dimension_penal.py): la ENVIPE 2026 del INEGI. */
+    function penal(e, fijo) {
+      var p = e.pen, lf = lenteDe('pnF'), lo = lenteDe('pnO');
+      ficha.innerHTML = '<h3>' + esc(e.n) + '</h3><p class="pl-ficha-sub">🚨 Encuesta de victimización 2026 · INEGI · datos de 2025</p><dl class="pl-ficha-dl">' +
+        '<dt>Fraudes por cada 100 mil habitantes</dt><dd>' + (e.pnF == null ? esc(lf.falta.gris) + ' ' + chip('pendiente', lf.falta.pend) : '<b class="num-tabular">' + fmt(e.pnF, lf) + '</b> ' + chip('oficial')) + '</dd>' +
+        '<dt>Cifra oculta</dt><dd><b class="num-tabular">' + fmt(e.pnO, lo) + '</b> ' + chip('oficial') + '</dd>' +
+        (p.d ? '<dt>El delito que destaca su ficha</dt><dd>' + esc(p.d) + '</dd>' : '') + '</dl>' +
+        '<p class="pl-ficha-mun">Es lo que la gente dice haber sufrido, no las denuncias. Más fraude no es peor gobierno: lo cometen particulares.</p>' +
+        '<a class="pl-ficha-ir" href="' + esc(sub(e, 'penal')) + '">Ver su fraude y su cifra oculta en su portal ➔</a>' +
+        (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
+    }
     /* Todas las fichas llevan su estado de cuenta y de resultados (04-11-2026). */
     function cuentas(e) {
       ficha.insertAdjacentHTML('beforeend', '<a class="pl-ficha-ir" href="herramienta-inspector-entes.html#ente=estatal:' + esc(e.a) + '">🏢 Su estado de cuenta y de resultados ➔</a>');
@@ -343,6 +354,7 @@
     function muestra1(e, fijo) {
       if (!e) return;
       if (dimP === 'social') { social(e, fijo); return; }
+      if (dimP === 'penal') { penal(e, fijo); return; }
       if (dimP === 'ambiental') { ambiental(e, fijo); return; }
       if (dimP === 'judicial') { judicial(e, fijo); return; }
       if (dimP === 'salud') { salud(e, fijo); return; }

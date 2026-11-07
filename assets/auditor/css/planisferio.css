@@ -214,11 +214,14 @@ p.pl-ficha-ir a:hover, p.pl-ficha-ir a:focus-visible { background: #16408c; }
 .pl-dim[data-dim="judicial"], .pl-tablero[data-dim="judicial"] { --dim: #8f6334; }
 .pl-dim[data-dim="salud"], .pl-tablero[data-dim="salud"] { --dim: #d2661a; }
 .pl-dim[data-dim="social"], .pl-tablero[data-dim="social"] { --dim: #b8327f; }
+.pl-dim[data-dim="penal"], .pl-tablero[data-dim="penal"] { --dim: #6e1510; }
 /* Administración pública: gris pizarra (elegido por el autor, 04-11-2026). Más oscuro que el gris claro
    de «sin cifra» del mapa (#d5dae3), para no confundirse con él; en modo oscuro su título se aclara. */
 .pl-dim[data-dim="administracion"], .pl-tablero[data-dim="administracion"] { --dim: #4a5a6a; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pl-tablero[data-dim="administracion"] .pl-tab-tit { color: #b4c0cc; } }
 :root[data-theme="dark"] .pl-tablero[data-dim="administracion"] .pl-tab-tit { color: #b4c0cc; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pl-tablero[data-dim="penal"] .pl-tab-tit { color: #f2b3aa; } }
+:root[data-theme="dark"] .pl-tablero[data-dim="penal"] .pl-tab-tit { color: #f2b3aa; }
 
 /* Cómo se juega, en tres pasos. */
 .pl-pasos { list-style: none; margin: 0 0 18px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; counter-reset: none; }

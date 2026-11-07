@@ -33,6 +33,8 @@ ENVE_TX = 'INEGI, ENVE 2024, Comunicado de prensa 780/24 (10-12-2024), datos de 
 SAT_TX = 'SAT, Listado completo de contribuyentes del artículo 69-B del CFF'
 
 # ENVIPE 2026 (comunicado 50/26).
+ENVIPE_FRAUDE, ENVIPE_FRAUDE_24 = 8290, 7574  # tasa total por cada 100 mil, 2025 y 2024 (presentación nacional, gráfica de los delitos más frecuentes)
+ENVIPE_PRES = 'https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_presentacion_nacional.pdf'
 ENVIPE_FRAUDE_M, ENVIPE_FRAUDE_H = 7947, 8688  # tasa de fraude por cada 100 mil mujeres y hombres (gráfica 1)
 ENVIPE_PERDIDA = 7551                          # pesos que perdió en promedio cada víctima de fraude
 ENVIPE_OCULTA, ENVIPE_DELITOS = 93.4, 33.8     # % no denunciado o no investigado, de millones de delitos
@@ -73,10 +75,6 @@ def pendientes():
     aqui = [(ARCHIVO, 'Aprende · El fraude en números')]
     plat = 'Falta de la plataforma: el documento existe y aún no lo integramos'
     return [
-        {'id': 'fraude-envipe-tasa', 'tema': 'El fraude en números',
-         'que': 'La tasa total de fraude de 2025 por cada 100 mil habitantes (ENVIPE 2026)',
-         'porque': 'El comunicado del INEGI da la tasa por sexo, no la total. La prensa publicó 8,290, pero hay que cotejarla en los tabulados.',
-         'responsable': plat, 'enlace': 'https://www.inegi.org.mx/programas/envipe/2026/', 'enlace_txt': 'ENVIPE 2026, tabulados (INEGI)', 'aparece': aqui},
         {'id': 'fraude-enve-costo', 'tema': 'El fraude en números',
          'que': 'Cuánto del costo del delito contra las empresas corresponde al fraude (ENVE 2024)',
          'porque': 'El comunicado agrupa el fraude («bancario y al consumo del establecimiento») sin dar su costo aparte; el desglose está en los tabulados.',
@@ -110,8 +108,9 @@ def cifras():
         ('primero', 'El delito más frecuente en México', 'El fraude',
          'es el delito más frecuente contra las personas en 2025, por delante de la extorsión y del robo en la calle o en el transporte (incluye el fraude bancario y el fraude al consumidor)',
          'oficial', '', 'personas', e),
-        ('tasa', 'Qué tanto pasa el fraude', '%s y %s' % (_n(ENVIPE_FRAUDE_H), _n(ENVIPE_FRAUDE_M)),
-         'fraudes por cada 100 mil hombres y por cada 100 mil mujeres en 2025', 'oficial', '', 'personas', e),
+        ('tasa', 'Qué tanto pasa el fraude', _n(ENVIPE_FRAUDE),
+         'fraudes por cada 100 mil habitantes en 2025 (en 2024 fueron %s; el INEGI marca el cambio como estadísticamente significativo). Por sexo: %s por cada 100 mil hombres y %s por cada 100 mil mujeres'
+         % (_n(ENVIPE_FRAUDE_24), _n(ENVIPE_FRAUDE_H), _n(ENVIPE_FRAUDE_M)), 'oficial', '', 'personas', ('INEGI, ENVIPE 2026, presentación nacional de resultados', ENVIPE_PRES)),
         ('perdida', 'Cuánto pierde una víctima de fraude', '$%s' % _n(ENVIPE_PERDIDA),
          'perdió en promedio cada víctima de fraude en 2025', 'oficial', '', 'personas', e),
         ('oculta', 'Cuántos delitos no se denuncian', '%s %%' % ENVIPE_OCULTA,

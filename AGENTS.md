@@ -252,6 +252,14 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   Todo sale de `herramientas/dimension_social.py`, que leen el Planisferio (`?d=social`, `#social`) y
   el chat (`socEdo()`). **La pobreza no se dice como calificación de un gobierno, y las aportaciones
   por persona en pobreza no son lo que le llega a cada persona.**
+- **La penal, décima dimensión pintada** (07-11-2026, pedido del autor: «una dimensión de penal»).
+  La ENVIPE 2026 del INEGI por entidad (datos de 2025): la tasa de fraude por cada 100 mil habitantes
+  y la cifra oculta, del texto de cada ficha estatal (`anclar_envipe_estados.py` →
+  `docs/seguridad/envipe-2026-entidades.json`, con huellas; se corre a mano con `pdftotext`). Todo sale
+  de `herramientas/dimension_penal.py` (`?d=penal`, `#penal` y su página en cada portal). **Más fraude
+  registrado no se dice como peor gobierno** (lo cometen particulares y es una encuesta en los hogares),
+  y **la cifra oculta no se dice como la eficacia de la fiscalía**. Las cinco entidades cuya ficha da
+  la tasa de fraude solo en gráfica van en gris con su pendiente (`penal-fraude-graficas`): nunca se leen a ojo.
 - **Cada dimensión va vinculada al Contexto dimensional y al estado de resultados** (04-11-2026,
   pedido del autor). `CONTEXTO` de `dimension_social.py` dice qué página del Contexto dimensional mira
   cada dimensión a nivel federal: **una dimensión nueva necesita ahí su renglón**, o la generación se
