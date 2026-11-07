@@ -115,10 +115,13 @@ def pendientes():
          'que': 'Las reclamaciones por posible fraude de 2025 en todo el país: cuántas, por cuánto y cuánto se devolvió (CONDUSEF)',
          'porque': ('Son dos cifras que no se suman: las reclamaciones que llegan a la CONDUSEF (decenas de miles al semestre, en su '
                     'Informe de Autoevaluación) y las que la gente presenta ante su propio banco (millones, en la estadística de la '
-                    'CONDUSEF). El 07-11-2026 el portal de la CONDUSEF respondió con error 503 y no pudimos bajar ni cotejar sus '
-                    'documentos; las cifras que repite la prensa no entran sin documento.'),
-         'responsable': 'Falta de la plataforma: los documentos existen, pero el servidor de la CONDUSEF no respondió al cotejo (07-11-2026)',
-         'enlace': 'https://www.condusef.gob.mx', 'enlace_txt': 'CONDUSEF, estadística', 'aparece': aqui},
+                    'CONDUSEF). El documento que trae las de todo 2025 ya está ubicado: el Informe de Autoevaluación enero-diciembre '
+                    '2025 de la CONDUSEF. Pero el 07-11-2026 su portal respondió con error 503 o cortó la conexión en cada intento, y '
+                    'no pudimos bajarlo ni sacar su huella; las cifras que repite la prensa, o el fragmento que da un buscador, no '
+                    'entran sin el documento.'),
+         'responsable': 'Falta de la plataforma: el documento existe, pero el servidor de la CONDUSEF no respondió al cotejo (07-11-2026)',
+         'enlace': 'https://www.condusef.gob.mx/documentos/transparencia/IA-ENE-DIC-2025.pdf',
+         'enlace_txt': 'CONDUSEF, Informe de Autoevaluación enero-diciembre 2025', 'aparece': aqui},
         {'id': 'fraude-efos-monto', 'tema': 'El fraude en números',
          'que': 'Cuánto han facturado las empresas de la lista 69-B (operaciones simuladas), con cifra exacta y al día',
          'porque': ('Lo único oficial es un comunicado del SAT del 25-06-2019: «un monto aproximado de {} billones de pesos» en {:,} facturas '
