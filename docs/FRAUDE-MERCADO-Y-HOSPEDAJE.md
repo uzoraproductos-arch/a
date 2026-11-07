@@ -161,17 +161,18 @@ Puntos ciegos que se dicen junto a la cifra:
   con error 503 (y reinicio de conexión) a todas sus direcciones, también a sus
   PDF de transparencia; sin el documento no hay huella ni cotejo, y las cifras de
   arriba son del buscador y de la prensa, **sin verificar**.
-- **El informe anual ya está ubicado** (segundo intento, 07-11-2026): el buscador
-  encontró `condusef.gob.mx/documentos/transparencia/IA-ENE-DIC-2025.pdf`, el
-  Informe de Autoevaluación enero-diciembre 2025. Su fragmento habla de 72,873
-  reclamaciones por posible fraude (67,651 de la banca), pero un fragmento de
-  buscador no es el documento: **no entra**. El portal siguió cortando la
-  conexión, un lector externo recibió error 503, y el Internet Archive y
-  datos.gob.mx no están permitidos en la red de esta sesión. El pendiente
-  `fraude-condusef` ya enlaza directo a ese PDF.
-- **Cómo cerrarlo:** bajar el Informe de Autoevaluación anual 2025 (o los dos
-  semestrales) y la estadística de reclamaciones del portal de la CONDUSEF
-  cuando responda, o que el autor los baje desde su navegador y los suba al
+- **El informe anual no está confirmado** (07-11-2026). El buscador dio la
+  dirección `condusef.gob.mx/documentos/transparencia/IA-ENE-DIC-2025.pdf`
+  («Informe de Autoevaluación enero-diciembre 2025»), con un fragmento de
+  72,873 reclamaciones por posible fraude (67,651 de la banca). Desde esta
+  sesión el portal cortó la conexión, y **el autor la abrió desde su navegador:
+  la página dice que no existe**. Así que esa dirección no se da por buena, el
+  fragmento **no entra** y el pendiente `fraude-condusef` enlaza a la página de
+  estadísticas de la CONDUSEF. (Corrección: el commit 39397cfa la dio como
+  documento existente sin haberla abierto.)
+- **Cómo cerrarlo:** encontrar en el portal de la CONDUSEF el documento con el
+  total de 2025 (su informe anual, o los dos semestrales),
+  con su estadística de reclamaciones, cuando el portal responda, o que el autor los baje desde su navegador y los suba al
   repositorio; con eso se ancla con su huella como las carpetas del SESNSP.
 
 ### 1.5 Las carpetas de investigación por fraude (SESNSP)
