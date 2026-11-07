@@ -329,6 +329,34 @@ las EFOS, a los contratos públicos ni a la ASF. **WiseCricket mira la
 información del propio cliente, no a sus proveedores frente a los documentos
 públicos.**
 
+**Releída el 07-11-2026** (pedido del autor, para la pestaña Servicios; se
+abrió `wisecricket.ai` con el navegador, porque la página se arma con
+JavaScript). Lo nuevo frente al 05-11:
+
+- **Cómo vende.** Titular corto («Simplificamos los impuestos»), un botón
+  gratis que actúa sobre los datos del cliente («Audita mis CFDI»: conecta tu
+  RFC con la CIEC y ve tus hallazgos en 24 horas) y un **ejemplo de factura
+  revisada** con «datos de ejemplo», donde cada hallazgo cita su artículo.
+- **«Hoy → con WiseCricket»**: cinco dolores de los equipos fiscales (el buzón
+  en Excel, el descargador que se corta, la carta invitación, los pagos
+  provisionales, los complementos pendientes) contra su solución.
+- **Cómo funciona en tres tiempos:** día 1 conectas, en 24 horas la IA cruza,
+  cada día actúas.
+- **Prueba social:** ocho clientes por nombre, ISO/IEC 27001:2022, fondos de
+  capital que la respaldan y dos reconocimientos de 2025 y 2026. Es lo que ellos
+  dicen; no se cotejó.
+- **Cierre con cuatro puertas:** gratis, agenda una asesoría, WhatsApp y
+  formulario.
+- **Siguen sin mencionar** la lista 69-B, los contratos públicos o la ASF. Su
+  «materialidad» liga contratos, facturas y pagos del propio cliente.
+
+**Qué tomó Auditavisión** (`servicios.html`): el ejemplo de revisión
+(`DEMO`, ficticio y rotulado así, sin RFC, montos ni fechas), la tabla «Hoy /
+Con Auditavisión» (`ANTES_DESPUES`, solo con lo que existe o se dice «abre con
+el lanzamiento») y el cierre con cuatro puertas (`EMPIEZA`). **Lo que no se
+toma:** la prueba social que no tenemos (no hay clientes ni certificación que
+presumir) y pedir la contraseña del SAT.
+
 ### 3.2 Legal Hunt (legalhunt.com.mx) · Legal Hunt Mex, S.A.P.I. de C.V.
 
 **Cómo se presenta:** «Gobierno corporativo sin papel». Ofrece tres cosas:

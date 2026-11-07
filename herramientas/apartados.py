@@ -2048,6 +2048,42 @@ PREGUNTAS = [
     ('¿Cuándo abren?', 'Con el lanzamiento de la plataforma. Ya puedes armar tu solicitud; el envío se activa entonces.'),
 ]
 
+# Lo que se tomó de la página de WiseCricket (leída el 07-11-2026, pedido del
+# autor; docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md §3.1): enseñar el producto con un
+# ejemplo, el «hoy contra con nosotros» y un cierre con varias puertas. El
+# ejemplo (DEMO) es ficticio y lo dice en la tarjeta: no trae RFC, montos ni
+# fechas, porque un dato inventado que parezca real desacredita (AGENTS §2).
+# Cada hallazgo cita su artículo, como en la plataforma.
+DEMO = {
+    'empresa': 'Constructora Ejemplo, S.A. de C.V.',
+    'hallazgos': [
+        ('1 · Lista 69-B', 'Aparece como presunta. Si queda definitiva, sus facturas «no producen ni produjeron efecto fiscal alguno» '
+         'y quien las usó tendría 30 días para acreditar la operación o corregir.', 'CFF, art. 69-B, párrafos quinto y octavo', 'alerta'),
+        ('2 · Contratos públicos', 'Tiene contratos con dependencias federales registrados en ComprasMX. Tener contratos no es una irregularidad.',
+         'ComprasMX, datos abiertos', 'info'),
+        ('3 · Fraccionamiento', 'Señal para revisar: adjudicaciones directas de la misma unidad y partida que en 90 días rebasan el tope del Anexo 9 del PEF.',
+         'LAASSP, art. 55; Reglamento, art. 111', 'alerta'),
+        ('4 · Lo que esta revisión no dice', 'Si la operación existió ni si hubo un delito: eso lo acredita tu soporte y lo decide la autoridad.',
+         'Constitución, art. 20, B, fr. I', 'limite'),
+    ],
+    'veredicto': 'Dos señales para revisar antes de pagar, cada una con su documento.',
+}
+
+ANTES_DESPUES = [
+    ('Revisas el portal del SAT RFC por RFC, cuando te acuerdas.', 'Buscas cualquier RFC en la lista 69-B completa, gratis, y el Vigía compara la lista cada semana.'),
+    ('Te enteras de que un proveedor quedó definitivo cuando ya llegó la revisión.', 'Con el Vigía de tu cartera (abre con el lanzamiento), el aviso llega con el párrafo del 69-B y el plazo que corre.'),
+    ('Para saber si una empresa le vende al gobierno, buscas en varios portales.', 'Sus contratos de ComprasMX, sus señales de fraccionamiento y lo que dijo la ASF, en una sola ficha.'),
+    ('Para revisar tus facturas tienes que entregarlas o dar tu contraseña del SAT.', 'Las lees en tu navegador, hasta 500 a la vez, sin subirlas.'),
+    ('Una nota trae una cifra y no sabes si es cierta.', 'La contrastas contra el documento oficial, con su etiqueta: oficial, derivado o pendiente.'),
+]
+
+EMPIEZA = [
+    ('🔓', 'Gratis', 'Revisa un proveedor', 'Busca su RFC en la lista 69-B, ahora mismo.', 'herramienta-inspector-efos.html', 'Empezar'),
+    ('💬', 'Gratis', 'Pregúntale al Auditor', 'Escribe tu duda como se la dirías a alguien.', 'herramienta-inspector-pregunta.html?modo=inspector', 'Abrir el chat'),
+    ('📝', 'Se cotiza', 'Pide una cotización', 'Cuéntanos el caso; recibes costo y plazo por escrito.', '#solicitud', 'Ir al formulario'),
+    ('🎓', 'Se cotiza', 'Agenda un taller', 'Para tu despacho, tu órgano de control o tu salón.', 'servicios.html?servicio=capacitacion#solicitud', 'Elegir taller'),
+]
+
 PROCESO = [
     ('📝', 'Solicitud', 'Nos cuentas qué quieres saber con el formulario de abajo.'),
     ('🎯', 'Alcance', 'Acordamos la pregunta, el periodo, el territorio y lo que queda fuera.'),
@@ -2129,7 +2165,7 @@ def servicios():
         '          <div class="sv-hero-acc">'
         '<a class="sz-btn sz-btn-of" href="#solicitud">Pide una cotización</a>'
         '<a class="sz-btn" href="#sectores">Elige tu perfil</a>'
-        '<a class="sz-btn" href="herramienta-inspector-efos.html">Prueba gratis: busca un RFC</a></div>',
+        '<a class="sz-btn" href="herramienta-inspector-efos.html">Revisa un proveedor gratis</a></div>',
         '          <ul class="sv-hero-prom">',
         '            <li><span aria-hidden="true">🧾</span><b>Cada cifra con su documento</b> y su etiqueta</li>',
         '            <li><span aria-hidden="true">🔒</span><b>Tus archivos no se suben</b>: se leen en tu navegador</li>',
@@ -2218,6 +2254,22 @@ def servicios():
               'Lo publicamos porque rendimos cuentas de cómo nos sostenemos, igual que pedimos a los gobiernos.</p>') % '\n'.join(
         '          <div class="sv-bloque sv-b-%s" role="listitem"><span class="sv-bloque-num" aria-hidden="true">%s</span>'
         '<b>%s</b><span>%s</span></div>' % b for b in LIENZO)
+    demo = ('<div class="sv-demo">\n'
+            '          <div class="sv-demo-cab"><span class="sv-demo-et">Datos de ejemplo: la empresa y los hallazgos son ficticios</span>'
+            '<p class="sv-demo-tit"><span aria-hidden="true">🏢</span> %s</p><p class="sv-demo-sub">Revisión de un proveedor · fuentes públicas</p></div>\n'
+            '          <ol class="sv-demo-lista">\n%s\n          </ol>\n'
+            '          <p class="sv-demo-ver"><b>Resultado:</b> %s</p>\n'
+            '        </div>') % (DEMO['empresa'], '\n'.join(
+        '            <li class="sv-h sv-h-%s"><b>%s</b><span>%s</span><small>%s</small></li>' % (cl, tit, tx, ley)
+        for tit, tx, ley, cl in DEMO['hallazgos']), DEMO['veredicto'])
+    antes = ('<div class="sv-tabla-env"><table class="sv-tabla sv-ad">\n'
+             '            <thead><tr><th scope="col">Hoy</th><th scope="col">Con Auditavisión</th></tr></thead>\n'
+             '            <tbody>\n%s\n            </tbody>\n          </table></div>') % '\n'.join(
+        '              <tr><td data-et="Hoy">%s</td><td data-et="Con Auditavisión">%s</td></tr>' % x for x in ANTES_DESPUES)
+    empieza = '<div class="sv-empieza">\n%s\n        </div>' % '\n'.join(
+        '          <a class="sv-puerta" href="%s"><span class="sv-ico" aria-hidden="true">%s</span><span class="sv-forma-et">%s</span>'
+        '<b>%s</b><span>%s</span><span class="sv-pide">%s ➔</span></a>' % (liga, ico, et, tit, tx, boton)
+        for ico, et, tit, tx, liga, boton in EMPIEZA)
     preguntas = '\n'.join(
         '          <details class="sv-faq"><summary>%s</summary><p>%s</p></details>' % q for q in PREGUNTAS)
     politica = '\n'.join('            <li><b>%s</b> %s</li>' % p for p in INDEPENDENCIA)
@@ -2296,10 +2348,13 @@ def servicios():
                   'plataforma. Ya puedes armar tu solicitud y guardarla; el envío se activa entonces.</p>'),
         'secciones': [
             bloque_sec('propuesta', 'Lo que te ofrecemos', '', portada, sin_cab=True),
+            bloque_sec('ejemplo', 'Así se ve una revisión',
+                       'Un proveedor revisado contra los documentos públicos: cada hallazgo con su artículo, y lo que la revisión no dice.', demo),
             bloque_sec('por-que', 'Por qué revisar antes de pagar',
                        'Lo que no se denuncia no llega a ninguna estadística: la prevención vale más que la denuncia. Las cifras salen de '
                        '<a href="aprende-fraude-en-numeros.html">El fraude en números</a>, cada una con su documento.',
                        '<div class="sv-datos">\n%s\n        </div>' % porque),
+            bloque_sec('hoy', 'De revisar a mano a revisar con documentos', 'Lo que hoy cuesta horas y lo que cambia con la plataforma.', antes),
             bloque_sec('sectores', 'Elige tu perfil',
                        'Por carrera y especialidad: lo que te pide tu trabajo, el servicio que lo atiende y con qué puedes empezar hoy, gratis.',
                        '<div class="sv-perfiles">\n%s\n        </div>' % perfiles),
@@ -2332,6 +2387,7 @@ def servicios():
                        '<div class="sv-politica">\n          <details class="sv-pol-det"><summary>Lee los %d compromisos</summary>\n'
                        '          <ol class="sv-pol">\n%s\n          </ol>\n          </details>\n'
                        '          <p class="sv-version">Versión 3 · 7 de noviembre de 2026.</p>\n        </div>' % (len(INDEPENDENCIA), politica)),
+            bloque_sec('empieza', 'Empieza como prefieras', 'Por tu cuenta, gratis, o con una persona que investigue por ti.', empieza),
             bloque_sec('solicitud', 'Solicita una cotización', 'Cuéntanos qué quieres saber. Te mostramos tu solicitud antes de mandarla.', formulario),
             # Hasta el 24-10-2026 aqui iba el Pase del Auditor Civico.
             {'id': 'pase', 'titulo': 'Donaciones', 'texto': 'Si lo que quieres es sostener la consulta gratuita, puedes donar. Se abre con el lanzamiento.',

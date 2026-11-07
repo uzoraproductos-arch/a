@@ -113,4 +113,30 @@
   .sv-tabla th, .sv-tabla td { border: 0; padding: 4px 12px; }
   .sv-tabla td::before { content: attr(data-et) ": "; font-weight: 800; color: #5a6782; }
 }
+/* Ejemplo de revision, «hoy contra con Auditavision» y puertas de entrada
+   (07-11-2026, tras leer la pagina de WiseCricket). */
+.sv-demo { background: #fff; border: 1px solid #c9d9ee; border-radius: 18px; box-shadow: 0 10px 30px rgba(11,42,99,.10); overflow: hidden; max-width: 820px; }
+.sv-demo-cab { background: #f3f7ff; border-bottom: 1px solid #dfe5f0; padding: 14px 18px; }
+.sv-demo-et { display: inline-block; padding: 2px 10px; border-radius: 999px; background: #fff3d6; color: #6b4b00; font-weight: 800; font-size: 14px; }
+.sv-demo-tit { margin: 8px 0 0; font-size: 19px; font-weight: 800; color: #0b2a63; }
+.sv-demo-sub { margin: 2px 0 0; color: #5a6782; }
+.sv-demo-lista { list-style: none; margin: 0; padding: 8px 18px; display: grid; gap: 0; }
+.sv-h { display: grid; gap: 2px; padding: 12px 0 12px 14px; border-bottom: 1px solid #edf1f7; border-left: 4px solid #9aa7bf; line-height: 1.5; color: #24324d; }
+.sv-h:last-child { border-bottom: 0; }
+.sv-h b { color: #0b2a63; text-transform: uppercase; letter-spacing: .03em; font-size: 14.5px; }
+.sv-h small { color: #5a6782; font-size: 14px; }
+.sv-h-alerta { border-left-color: #c77700; }
+.sv-h-info { border-left-color: #1d4fa3; }
+.sv-h-limite { border-left-color: #9aa7bf; }
+.sv-demo-ver { margin: 0; padding: 12px 18px; background: #0b2a63; color: #fff; line-height: 1.5; }
+.sv-ad td:first-child { color: #6b2a24; background: #fdf6f5; }
+.sv-ad td:last-child { color: #1f4d2b; background: #f3faf4; }
+.sv-empieza { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.sv-puerta { background: #fff; border: 1px solid #dfe5f0; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: #33415c; line-height: 1.5; min-width: 0; }
+.sv-puerta:hover { border-color: #1d4fa3; box-shadow: 0 6px 18px rgba(11,42,99,.10); }
+.sv-puerta .sv-forma-et { align-self: flex-start; margin: 0; }
+.sv-puerta b { color: #0b2a63; font-size: 17px; }
+.sv-puerta .sv-pide { margin-top: auto; }
+@media (max-width: 900px) { .sv-empieza { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) { .sv-empieza { grid-template-columns: 1fr; } }
 /* Comunidad (comunidad.html; entrega 7, 10-10-2026). */
