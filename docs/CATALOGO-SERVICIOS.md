@@ -122,3 +122,36 @@ Lo que no: publicidad y carteras compartidas.
 2. Si los **planes** se muestran en la página sin precio («se cotiza») o se esperan a los pilotos.
 3. Si el plan Profesional guarda la cartera en nuestra base (y el cambio al aviso de privacidad).
 4. La **entrega de datos** como suscripción: si pasa la prueba de la línea a su juicio.
+
+---
+
+## 7. La operación, lista y apagada (07-11-2026)
+
+Pedido del autor: «instalar toda la operación para que al momento en que te
+diga "ya"… lancemos la monetización». Quedó así:
+
+| Pieza | Dónde | Estado |
+|---|---|---|
+| El interruptor `MONETIZACION` (apagado) y `CANAL_PAGO` (vacío) | `herramientas/monetizacion.py` | Listo |
+| Los cinco planes, con su «qué agrega»; precio `None` hasta los pilotos | `PLANES` del mismo archivo | Listo, sin precio |
+| La sección «Elige tu plan» de `servicios.html` | `servicios()` de `apartados.py` | Aparece sola al encender; si un plan de pago no tiene precio o falta el canal, **la generación se detiene** |
+| Los contadores de la base (69-B, contratos, proveedores, bóveda) | `contadores()`, sección `#base` | Publicado; se cuentan al generar |
+| «¿Cómo nos sostenemos?» | `SOSTEN`, `NUNCA`, `HOY`; sección `#sostenemos`; el chat (`serv_sosten`) | Publicado |
+| La base: planes, clientes, contrataciones, cartera del Vigía (solo personas morales), avisos y pagos con CFDI | `supabase/migrations/20261107000001_monetizacion.sql` | Escrita y probada (`prueba_base_datos.py`); falta aplicarla en Supabase |
+| El aviso del Vigía a cada cliente que sigue un RFC | `anotar_aviso()` | Listo; falta el correo que lo manda |
+| La cuenta pública de lo que entró por vía (servicios, planes, donaciones) | `ingresos_por_via(año)` | Lista |
+| `?plan=` llena la solicitud | `servicios.js` | Listo |
+
+**El día del «ya»**, en orden (lo dice `python3 herramientas/monetizacion.py`):
+
+1. Forma jurídica y CFDI propio.
+2. Pasarela de pago → su dirección en `CANAL_PAGO`.
+3. Precio de cada plan de pago en `PLANES` (y en `planes.precio_mxn` con `publicado = true`).
+4. Aviso de privacidad: qué guarda el Vigía (RFC de personas morales y el correo del cliente).
+5. Aplicar la migración (flujo «Sube la base de datos»).
+6. Quitar el candado (`CANDADO = False` en `acceso.py`).
+7. `MONETIZACION = True`, `sello.py --siguiente` y publicar.
+
+**Falta construir** (no depende de decisiones): el envío por correo de los
+avisos del Vigía y la carta al proveedor.
+

@@ -92,6 +92,9 @@
     var serv = new URLSearchParams(location.search).get('servicio');
     var sel = $('svServicio');
     if (serv && sel && sel.querySelector('option[value="' + serv.replace(/[^a-z-]/g, '') + '"]')) sel.value = serv;
+    // Con los planes abiertos (monetizacion.py), cada plan llega con ?plan=<id>.
+    var plan = (new URLSearchParams(location.search).get('plan') || '').replace(/[^a-z]/g, '');
+    if (plan && !val('svTema')) $('svTema').value = 'Quiero el plan ' + plan;
   } catch (e) { /* sin URLSearchParams: el lector lo escribe */ }
 
   function marcar(id, malo) {

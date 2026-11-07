@@ -2253,6 +2253,44 @@ def servicios():
         '          </ul>',
         '        </div>'])
 
+    # La base, contada (idea de getquin, docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md
+    # §3.4): cada número se cuenta de su archivo al generar (monetizacion.py).
+    import monetizacion
+    monetizacion.revisar()
+    base = ('<div class="sv-base">\n%s\n        </div>\n'
+            '        <p class="sv-nota">Son conteos de los archivos de la plataforma al generar esta página (<span class="est-chip est-derivado">derivado</span>); '
+            'cada uno dice de qué documento sale.</p>') % '\n'.join(
+        '          <a class="sv-base-n" href="%s">\n'
+        '            <span class="sv-base-cifra">%s</span>\n'
+        '            <span class="sv-base-et">%s</span>\n'
+        '            <span class="sv-base-fu">%s. Fuente: %s</span>\n'
+        '          </a>' % (liga, format(v, ','), html.escape(et), html.escape(op[0].upper() + op[1:]), html.escape(fu))
+        for _, v, et, op, fu, _url, liga in monetizacion.contadores())
+
+    # ¿Cómo nos sostenemos? (monetizacion.py: SOSTEN, NUNCA, HOY).
+    sosten = ('<div class="sv-sosten">\n%s\n        </div>\n'
+              '        <div class="sv-nunca">\n          <p class="sv-nunca-tit">Lo que nunca cobramos ni vendemos</p>\n'
+              '          <ul>%s</ul>\n        </div>\n'
+              '        <p class="sv-nota">%s Lo que rige cada peso está en la <a href="#independencia">Política de independencia</a>.</p>') % (
+        '\n'.join('          <a class="sv-sosten-via" href="%s"><span class="sv-ico" aria-hidden="true">%s</span><b>%s</b><span>%s</span></a>'
+                  % (liga, ico, tit, tx) for ico, tit, tx, liga in monetizacion.SOSTEN),
+        ''.join('<li>%s</li>' % x for x in monetizacion.NUNCA), monetizacion.HOY)
+
+    # Los planes: solo con el interruptor encendido (y entonces con su precio).
+    planes = ''
+    if monetizacion.MONETIZACION:
+        precio = lambda p: ('Gratis' if p['precio'] == 0 else 'Se cotiza' if p['precio'] is None
+                            else '$%s MXN más IVA / %s' % (format(p['precio'], ',.0f'), p['periodo']))
+        planes = '<div class="sv-planes">\n%s\n        </div>' % '\n'.join(
+            '          <article class="sv-plan">\n            <h3 class="sv-tit">%s</h3>\n            <p class="sv-plan-precio">%s</p>\n'
+            '            <p class="sv-quien">%s</p>\n            <ul class="sv-lista">%s</ul>\n'
+            '            <a class="sz-btn%s" href="%s">%s</a>\n          </article>'
+            % (p['nombre'], precio(p), p['para'], ''.join('<li>%s</li>' % x for x in p['agrega']),
+               ' sz-btn-of' if p['id'] == 'profesional' else '',
+               'enciclopedia-auditavision.html' if p['id'] == 'gratis' else 'servicios.html?plan=%s#solicitud' % p['id'],
+               'Empieza gratis' if p['id'] == 'gratis' else 'Lo quiero')
+            for p in monetizacion.PLANES)
+
     # Por qué revisar antes de pagar: las cifras de «El fraude en números».
     cf = {c[0]: c for c in fraude.cifras()}
     falta = [k for k in POR_QUE if k not in cf]
@@ -2443,11 +2481,12 @@ def servicios():
         'estilos': ['servicios.css'],
         'scripts': ['servicios.js'],
         'saltos': {'ejemplo': 'Ejemplo', 'modulos': 'Qué puedes hacer', 'como': 'Cómo funciona', 'sectores': 'Perfiles',
-                   'oferta': 'Servicios', 'preguntas': 'Preguntas', 'solicitud': 'Cotiza'},
+                   'oferta': 'Servicios', 'sostenemos': 'Cómo nos sostenemos', 'preguntas': 'Preguntas', 'solicitud': 'Cotiza'},
         'antes': ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> Los Servicios se abren con el lanzamiento de la '
                   'plataforma. Ya puedes armar tu solicitud y guardarla; el envío se activa entonces.</p>'),
         'secciones': [
             bloque_sec('propuesta', 'Lo que te ofrecemos', '', portada, sin_cab=True),
+            bloque_sec('base', 'Nuestra base de datos, contada hoy', 'Lo que ya puedes revisar, gratis, con su documento.', base, pre='La base'),
             bloque_sec('ejemplo', 'Un proveedor, revisado contra los documentos',
                        'Cada hallazgo con su artículo, y lo que la revisión no dice.', demo, pre='Así se ve una revisión'),
             bloque_sec('revisor', REVISOR['tit'], '', revisor, pre='Tu revisor de proveedores'),
@@ -2467,6 +2506,8 @@ def servicios():
                        '%s servicios en tres líneas, de una pregunta puntual a una licencia para tu institución.'
                        % ['Cero', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve'][len(SERVICIOS)],
                        '<div class="sv-lineas">\n%s\n        </div>' % oferta, pre='Los servicios'),
+        ] + ([bloque_sec('planes', 'Elige tu plan', 'Lo público es gratis siempre. Pagas por el aviso, la memoria y el trabajo.', planes,
+                         pre='Planes')] if planes else []) + [
             bloque_sec('formas', 'Tres formas de trabajar con nosotros', 'Gratis por tu cuenta, por encargo o para tu institución.',
                        '<div class="sv-formas">\n%s\n        </div>\n        %s' % (formas, linea)),
             bloque_sec('proceso', 'Cómo trabajamos por encargo', 'Siete pasos. Nada se cobra antes de que aceptes la cotización.',
@@ -2490,6 +2531,8 @@ def servicios():
                        encaje, pre='Nuestro lugar'),
             bloque_sec('novedades', 'Lo más nuevo de la plataforma', 'Cada semana sumamos algo. Esto es lo último, con su fecha.', novedades,
                        pre='Últimos lanzamientos'),
+            bloque_sec('sostenemos', '¿Cómo nos sostenemos?',
+                       'Tres vías, a la vista. Ninguna compra lo que publicamos.', sosten, pre='Cuentas claras'),
             bloque_sec('modelo', 'Nuestro modelo, a la vista', 'Los nueve bloques de cómo funciona y se sostiene Auditavisión.', lienzo),
             bloque_sec('preguntas', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.',
                        '<div class="sv-faqs">\n%s\n        </div>' % preguntas),

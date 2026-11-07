@@ -2292,6 +2292,14 @@
   {
    "q": "revisar complementos de pago de mis facturas",
    "ir": "herramienta-inspector-factura.html"
+  },
+  {
+   "q": "¿Cómo se sostiene Auditavisión?",
+   "ir": "servicios.html#sostenemos"
+  },
+  {
+   "q": "¿de qué vive auditavision?",
+   "ir": "servicios.html#sostenemos"
   }
  ]
 }

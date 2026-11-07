@@ -31,6 +31,7 @@ import os
 import re
 
 from presupuesto_modulos import chip, mdp, pct, bill, _seg, COLOR_FED
+import monetizacion
 
 MAPA = 'numeros-mapa-del-gasto-federalizado.html'
 ENTIDADES = 'numeros-las-32-entidades.html'
@@ -525,5 +526,15 @@ def temas_bot(d):
         'fu': [{'que': 'Lista de contribuyentes con operaciones presuntamente inexistentes (art. 69-B)', 'e': 'oficial',
                 'fu': {'tx': 'Código Fiscal de la Federación, art. 69-B', 'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf'}}],
         'sug': ['¿Está en la lista negra del SAT?', '¿Qué contratos tiene una empresa con el gobierno?', '¿Qué servicios ofrece Auditavisión?'],
-        'ir': ['servicios.html#sv-diligencia', 'Revisión de un proveedor']}}
+        'ir': ['servicios.html#sv-diligencia', 'Revisión de un proveedor']},
+        # ¿Cómo nos sostenemos? (07-11-2026): lo lee de monetizacion.py, igual que servicios.html.
+        'serv_sosten': {
+        'tit': '¿Cómo se sostiene Auditavisión?',
+        'h': '<p>Por tres vías, a la vista:</p><ol>%s</ol><p><b>Lo que nunca cobramos ni vendemos:</b></p><ul>%s</ul><p>%s</p>' % (
+            ''.join('<li><b>%s:</b> %s</li>' % (t, x) for _, t, x, _l in monetizacion.SOSTEN),
+            ''.join('<li>%s</li>' % x for x in monetizacion.NUNCA), monetizacion.HOY),
+        'ci': [],
+        'fu': [],
+        'sug': ['¿Qué servicios ofrece Auditavisión?', '¿Cómo reviso a un proveedor antes de contratarlo?', '¿Cómo puedo donar?'],
+        'ir': ['servicios.html#sostenemos', '¿Cómo nos sostenemos?']}}
 

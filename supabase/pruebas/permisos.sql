@@ -384,4 +384,39 @@ set role service_role;
 select pg_temp.igual((public.revisar_codigo_admin('55501234') = '00000000-0000-0000-0000-0000000000ad')::int, 1, 'y ese número ya abre como código maestro');
 reset role;
 
+-- 16. La operación para cobrar (07-11-2026): todo cerrado al público.
+set role anon;
+select pg_temp.igual((select count(*) from public.planes), 0, 'el público no ve planes mientras ninguno está publicado');
+select pg_temp.debe_fallar($$select * from public.clientes$$, 'el público lee los clientes');
+select pg_temp.debe_fallar($$select * from public.vigia_cartera$$, 'el público lee la cartera del Vigía');
+select pg_temp.debe_fallar($$select * from public.pagos$$, 'el público lee los pagos');
+select pg_temp.debe_fallar($$select public.anotar_aviso('AAA010101AAA', 'alta_69b', 'x')$$, 'el público anota un aviso');
+reset role;
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
+select pg_temp.igual((select count(*) from public.clientes), 0, 'una persona con cuenta no ve clientes');
+select pg_temp.debe_fallar($$insert into public.clientes (tipo, nombre, correo, acepta_aviso) values ('moral', 'Mía SA', 'm@x.mx', true)$$, 'una persona con cuenta crea un cliente');
+update public.planes set publicado = true, precio_mxn = 1 where id = 'profesional';
+reset role;
+select pg_temp.igual((select count(*) from public.planes where publicado), 0, 'una persona con cuenta no puede publicar un precio');
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+set role authenticated;
+select pg_temp.debe_fallar($$update public.planes set publicado = true where id = 'profesional'$$, 'publicar un plan de pago sin precio');
+insert into public.clientes (tipo, nombre, correo, rfc, acepta_aviso) values ('moral', 'Ejemplo SA de CV', 'pagos@ejemplo.mx', 'EJE010101AB1', true);
+select pg_temp.debe_fallar($$insert into public.clientes (tipo, nombre, correo, acepta_aviso) values ('moral', 'Sin aviso', 's@x.mx', false)$$, 'un cliente sin aceptar el aviso de privacidad');
+insert into public.contrataciones (cliente_id, plan_id) select id, 'profesional' from public.clientes where rfc = 'EJE010101AB1';
+insert into public.vigia_cartera (cliente_id, rfc) select id, 'PRO020202XY9' from public.clientes where rfc = 'EJE010101AB1';
+select pg_temp.debe_fallar($$insert into public.vigia_cartera (cliente_id, rfc) select id, 'PEPJ800101AB1' from public.clientes limit 1$$, 'guardar el RFC de una persona física en la cartera');
+select pg_temp.debe_fallar($$insert into public.pagos (via, monto_mxn) values ('publicidad', 100)$$, 'un pago por publicidad');
+insert into public.pagos (via, monto_mxn, fecha) values ('servicio', 1500, '2026-11-07');
+reset role;
+reset request.jwt.claim.sub;
+set role service_role;
+select pg_temp.igual(public.anotar_aviso('pro020202xy9', 'alta_69b', 'Entró como presunto a la lista 69-B.', 'https://www.gob.mx/sat'), 1, 'el Vigía anota un aviso al cliente que sigue ese RFC');
+select pg_temp.igual(public.anotar_aviso('OTR030303ZZ0', 'alta_69b', 'Nada.'), 0, 'y ninguno a quien no lo sigue');
+reset role;
+set role anon;
+select pg_temp.igual((select pagos from public.ingresos_por_via(2026) where via = 'servicio'), 1, 'la cuenta pública por vía se puede leer sin datos del cliente');
+reset role;
+
 \echo 'Todas las pruebas de permisos pasaron.'
