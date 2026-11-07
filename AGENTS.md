@@ -263,7 +263,14 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   a ojo**: desde el 07-11-2026 su tasa sale del tabulado básico del INEGI, cuadro 1.13 (con su huella), y el
   script se detiene si el cuadro no da lo mismo que las otras 27 fichas y que el país (8,290). Cada entidad
   dice de dónde salió su tasa (`fraude_de`); si una ENVIPE nueva deja alguna sin ella, vuelve a gris con
-  su pendiente (`penal-fraude-graficas`).
+  su pendiente (`penal-fraude-graficas`). **Las carpetas por fraude del SESNSP** (07-11-2026, pedido del autor)
+  salen de sus datos abiertos estatales (`anclar_sesnsp_fraude.py <ZIP>` → `docs/seguridad/sesnsp-fraude-estatal.json`,
+  con huella; el ZIP se baja de su SharePoint, `sspcgob-my.sharepoint.com`), y van como lentes `pnN` (oficial) y
+  `pnC` (por cada 100 mil, derivado, con la población del CONAPO a mitad de 2026) y en «El fraude en números».
+  **Una carpeta no se dice como una víctima ni como un fraude, más carpetas no se dice como más fraude, y las
+  carpetas no se restan de la ENVIPE**: la proporción del país (carpetas por cada 100 fraudes estimados, cuadro
+  1.20 del tabulado) es derivada y no es «la cifra oculta del fraude». Cuando el SESNSP publique otro corte, se
+  vuelve a correr el script con el ZIP nuevo.
 - **Cada dimensión va vinculada al Contexto dimensional y al estado de resultados** (04-11-2026,
   pedido del autor). `CONTEXTO` de `dimension_social.py` dice qué página del Contexto dimensional mira
   cada dimensión a nivel federal: **una dimensión nueva necesita ahí su renglón**, o la generación se

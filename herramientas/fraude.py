@@ -9,6 +9,9 @@ docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md §1. Cotejado contra el documento oficial:
 
 - INEGI, ENVIPE 2026 (datos de 2025), Comunicado de prensa 50/26, 10-09-2026.
 - INEGI, ENVE 2024 (datos de 2023), Comunicado de prensa 780/24, 10-12-2024.
+- SESNSP, incidencia delictiva del fuero común (datos abiertos, estatal): las
+  carpetas por fraude, ancladas con su huella por anclar_sesnsp_fraude.py y
+  leídas de dimension_penal.py (07-11-2026), igual que el Planisferio.
 - SAT, Listado completo del artículo 69-B del CFF: la cuenta se hace aquí
   mismo sobre `assets/auditor/data/sat-69b.js` (la copia con huella), así que
   cambia sola cuando se actualiza la lista.
@@ -84,11 +87,6 @@ def pendientes():
          'porque': 'La CONDUSEF publica sus cifras por entidad; no encontramos su total nacional de 2025, y las notas de prensa no cuadran entre sí.',
          'responsable': 'CONDUSEF: publica comunicados por estado, pero no encontramos el total nacional de 2025 en su portal',
          'enlace': 'https://www.condusef.gob.mx', 'enlace_txt': 'CONDUSEF, estadística', 'aparece': aqui},
-        {'id': 'fraude-sesnsp', 'tema': 'El fraude en números',
-         'que': 'Las carpetas de investigación por fraude de 2025 en todo el país (SESNSP)',
-         'porque': 'Sale de sumar el subtipo «Fraude» en los datos abiertos de incidencia del fuero común.',
-         'responsable': plat, 'enlace': 'https://www.gob.mx/sesnsp/acciones-y-programas/datos-abiertos-de-incidencia-delictiva',
-         'enlace_txt': 'SESNSP, datos abiertos de incidencia delictiva', 'aparece': aqui},
         {'id': 'fraude-efos-monto', 'tema': 'El fraude en números',
          'que': 'Cuánto facturaron las empresas de la lista 69-B (operaciones simuladas)',
          'porque': 'La prensa repite de 1.6 a 2 billones de pesos, pero no encontramos el documento del SAT que lo sostenga. Ni el SAT ni Hacienda lo han publicado: falta de transparencia de esas dependencias.',
@@ -97,9 +95,24 @@ def pendientes():
     ]
 
 
+def _sesnsp():
+    """Las carpetas por fraude del SESNSP y los fraudes que estima la ENVIPE,
+    de los mismos archivos anclados que lee el Planisferio."""
+    import dimension_penal as dpe
+    d = dpe.sesnsp()
+    ef = dpe.nacional()['delitos_fraude']
+    n, n0 = d['nacional'][dpe.ANIO], d['nacional'][dpe.ANT]
+    env = ef['bancario'] + ef['consumidor']
+    return {'n': n, 'n0': n0, 'cam': round((n - n0) * 100.0 / n0, 1), 'env': env, 'c100': round(n * 100.0 / env, 1),
+            'serie': d['nacional'], 'tx': 'SESNSP, incidencia delictiva del fuero común, datos abiertos estatales (archivo %s, corte %s)' % (d['archivo'], d['corte']),
+            'url': d['pagina'], 'tab': dpe.tabulado()['url']}
+
+
 def cifras():
     """(clave, título, valor, etiqueta, estado, operación, sección, fuente)."""
     s = lista_69b()
+    k = _sesnsp()
+    a0 = min(k['serie'])
     corte = s['meta'].get('corte', '')
     e = (ENVIPE_TX, ENVIPE)
     v = (ENVE_TX, ENVE)
@@ -115,6 +128,13 @@ def cifras():
          'perdió en promedio cada víctima de fraude en 2025', 'oficial', '', 'personas', e),
         ('oculta', 'Cuántos delitos no se denuncian', '%s %%' % ENVIPE_OCULTA,
          'de los %s millones de delitos de 2025 no se denunció o no se investigó (la cifra oculta)' % ENVIPE_DELITOS, 'oficial', '', 'personas', e),
+        ('carpetas', 'Cuántas denuncias por fraude llegan a una fiscalía', _n(k['n']),
+         'carpetas de investigación por fraude abrieron las fiscalías de los estados en 2025 (%s en 2024; %s en %s)' % (_n(k['n0']), _n(k['serie'][a0]), a0),
+         'oficial', '', 'denuncias', (k['tx'], k['url'])),
+        ('carpetas100', 'De cada 100 fraudes, cuántos llegan a una carpeta', 'Unas %s' % k['c100'],
+         'carpetas por cada 100 fraudes que estima la encuesta del INEGI en 2025 (%s fraudes bancarios y al consumidor). No se restan: la encuesta cuenta a personas adultas en sus hogares y las carpetas incluyen a empresas'
+         % _n(k['env']), 'derivado', '%s carpetas (SESNSP) × 100 ÷ %s fraudes estimados (INEGI, ENVIPE 2026, tabulado básico, cuadro 1.20)' % (_n(k['n']), _n(k['env'])),
+         'denuncias', (k['tx'] + ' · INEGI, ENVIPE 2026, tabulados básicos', k['url'])),
         ('empresas', 'Cuántas empresas sufren un delito', '%s %%' % ENVE_PCT,
          'de las unidades económicas del país (%s millones) fue víctima de algún delito en 2023; entre las grandes, el %s %%' % (ENVE_UE, ENVE_GRANDES),
          'oficial', '', 'empresas', v),
@@ -180,6 +200,10 @@ def pagina():
             {'id': 'fr-personas', 'titulo': 'A las personas: el delito más frecuente', 'texto': 'Encuesta de victimización del INEGI, datos de 2025.', 'tarjetas': [],
              'bloque': '<ul class="leg-cifras">%s%s%s%s</ul>%s' % (_cifra('primero'), _cifra('tasa'), _cifra('perdida'), _cifra('oculta'),
                                                                  _fuente((ENVIPE_TX, ENVIPE)))},
+            {'id': 'fr-denuncias', 'titulo': 'Lo que llega a una fiscalía: casi nada', 'texto': 'Las carpetas de investigación por fraude que reportan las fiscalías de los estados (SESNSP).', 'tarjetas': [],
+             'bloque': ('<ul class="leg-cifras">%s%s</ul><p>Una carpeta es una investigación, no una víctima: puede juntar a varias. Y más carpetas en un estado puede '
+                        'querer decir más denuncia, no más fraude. <a href="planisferio.html?d=penal&amp;l=pnC">Las carpetas de cada estado, en el Planisferio</a>.</p>%s')
+                       % (_cifra('carpetas'), _cifra('carpetas100'), _fuente((_sesnsp()['tx'], _sesnsp()['url'])))},
             {'id': 'fr-empresas', 'titulo': 'A las empresas: una de cada cuatro', 'texto': 'Encuesta de victimización de empresas del INEGI, datos de 2023.', 'tarjetas': [],
              'bloque': ('<ul class="leg-cifras">%s%s%s</ul><p>En las empresas el delito más frecuente fue la extorsión; el fraude se cuenta junto '
                         'con otros delitos sin costo aparte, y ese desglose sigue %s.</p>%s')
@@ -199,7 +223,7 @@ def pagina():
                         '<li><a href="aprende-auditoria.html">Cómo se audita</a>: los tres factores del fraude y la prueba que aguanta un juicio.</li>\n'
                         '<li>¿Necesitas revisar a muchos proveedores? <a href="servicios.html">Pide un servicio</a>.</li>\n</ol>')},
             {'id': 'fr-no-dice', 'titulo': 'Lo que estas cifras no dicen', 'texto': 'Para leerlas bien.', 'tarjetas': [],
-             'bloque': ('<ul>\n<li>Las encuestas del INEGI cuentan lo que las personas y las empresas <b>dicen</b> haber sufrido; no son carpetas de investigación.</li>\n'
+             'bloque': ('<ul>\n<li>Las encuestas del INEGI cuentan lo que las personas y las empresas <b>dicen</b> haber sufrido; las carpetas del SESNSP, lo que llegó a una fiscalía. Son dos mediciones distintas.</li>\n'
                         '<li>Estar en la lista 69-B en situación de presunto <b>no es una condena</b>: tiene 15 días para desvirtuarlo (CFF art. 69-B, párrafo segundo).</li>\n'
                         '<li>Revisar la lista y las facturas da <b>señales para revisar</b>: no evita un fraude ni sustituye la asesoría de un profesional.</li>\n'
                         '<li>Las cifras de personas son de 2025 y las de empresas de 2023: no se suman ni se comparan entre sí.</li>\n</ul>')},

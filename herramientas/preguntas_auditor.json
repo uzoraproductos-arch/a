@@ -2241,6 +2241,20 @@
   {
    "q": "Mapa del fraude por estado",
    "ir": "planisferio.html?d=penal"
+  },
+  {
+   "q": "¿Cuántas denuncias por fraude hubo en 2025?",
+   "ir": "aprende-fraude-en-numeros.html#fr-denuncias",
+   "dice": [
+    "108,736"
+   ]
+  },
+  {
+   "q": "¿De cada 100 fraudes cuántos llegan a una carpeta de investigación?",
+   "ir": "aprende-fraude-en-numeros.html#fr-denuncias",
+   "dice": [
+    "1.3"
+   ]
   }
  ]
 }

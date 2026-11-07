@@ -29,7 +29,9 @@ una no cuadra, se detiene. Se necesita openpyxl.
 
 Escribe docs/seguridad/envipe-2026-entidades.json con la huella SHA-256 de
 cada PDF y del tabulado, y en cada entidad de dónde salió su tasa de fraude
-(«ficha» o «tabulado»). Si falta una entidad, una cifra oculta o una tasa de
+(«ficha» o «tabulado»). Del mismo tabulado, cuadro 1.20, toma los fraudes que
+la encuesta estima en el país (bancario y al consumidor), para compararlos con
+las carpetas del SESNSP. Si falta una entidad, una cifra oculta o una tasa de
 fraude, se detiene.
 """
 import hashlib
@@ -95,6 +97,21 @@ def fraude_tabulado(ruta):
     return out
 
 
+def fraudes_pais(ruta):
+    """Cuadro 1.20 del tabulado: los delitos de fraude que estima la encuesta
+    en el país en 2025, bancario y al consumidor."""
+    import openpyxl
+    ws = openpyxl.load_workbook(ruta, read_only=True, data_only=True)['1.20']
+    out = {}
+    for r in ws.iter_rows(min_row=1, max_row=30, values_only=True):
+        r = [c for c in r if c is not None]
+        if len(r) >= 2 and r[0] in ('Fraude bancario', 'Fraude al consumidor') and isinstance(r[1], (int, float)):
+            out['bancario' if 'bancario' in r[0] else 'consumidor'] = int(r[1])
+    if len(out) != 2:
+        sys.exit('El cuadro 1.20 del tabulado ya no trae el fraude bancario y al consumidor')
+    return out
+
+
 def main(carpeta, tabulado):
     estados = {}
     for c, a in CLAVES.items():
@@ -134,9 +151,11 @@ def main(carpeta, tabulado):
     doc = {'fuente': 'INEGI, Encuesta Nacional de Victimización y Percepción sobre Seguridad Pública (ENVIPE) 2026, datos de 2025: '
                      'principales resultados por entidad federativa',
            'nacional': {'fraude': 8290, 'fraude2024': 7574, 'oculta': 93.4,
-                        'url': URL % 'presentacion_nacional', 'sha': sha(nac)},
+                        'url': URL % 'presentacion_nacional', 'sha': sha(nac),
+                        'delitos_fraude': fraudes_pais(tabulado)},
            'tabulado': {'titulo': 'Tabulados básicos, I. Nivel de victimización y delincuencia, cuadro 1.13: tasa de incidencia delictiva por '
-                                  'entidad federativa de ocurrencia por cada cien mil habitantes y los cinco delitos más frecuentes, 2025',
+                                  'entidad federativa de ocurrencia por cada cien mil habitantes y los cinco delitos más frecuentes, 2025; '
+                                  'cuadro 1.20: total de delitos ocurridos por tipo de delito, 2025',
                         'url': URL_TAB, 'sha': sha(tabulado)},
            'estados': estados}
     os.makedirs(os.path.dirname(SALIDA), exist_ok=True)

@@ -90,9 +90,24 @@ falta de transparencia de esa dependencia.
 ### 1.5 Las carpetas de investigación por fraude (SESNSP)
 
 El Secretariado Ejecutivo publica cada mes la incidencia del fuero común, y
-el fraude es uno de sus subtipos. **El total nacional de 2025 es pendiente.**
-Sale de sumar el subtipo «Fraude» en sus datos abiertos, y eso es trabajo de
-la plataforma. Es un buen candidato para un módulo con huella, como los demás.
+el fraude es uno de sus tipos. **Integrado el 07-11-2026**
+(`herramientas/anclar_sesnsp_fraude.py` → `docs/seguridad/sesnsp-fraude-estatal.json`,
+con la huella del ZIP «2015 - 2025 (Fuero Común - Delitos). Incidencia delictiva
+estatal», corte septiembre de 2026, que el SESNSP sirve desde su SharePoint):
+
+| Año | Carpetas por fraude en el país | Estado |
+|---|---|---|
+| 2015 | 59,416 | oficial (suma de los 12 meses y las 32 entidades) |
+| 2024 | 113,824 | oficial |
+| 2025 | 108,736 | oficial |
+| Por cada 100 fraudes que estima la ENVIPE 2026 (8,136,513: 4,551,884 bancarios y 3,584,629 al consumidor, tabulado básico, cuadro 1.20) | unas 1.3 carpetas | derivado: 108,736 × 100 ÷ 8,136,513 |
+
+**Punto ciego:** las dos cifras no se restan. La ENVIPE cuenta a personas de 18
+años y más en sus hogares; las carpetas incluyen a empresas y a todas las edades,
+y una carpeta puede juntar varias víctimas. La proporción da idea de cuánto
+llega a una fiscalía, no es «la cifra oculta del fraude». Por estado van en la
+dimensión penal del Planisferio, en total y por cada 100 mil habitantes (con la
+población del CONAPO a mitad de 2026: se dice que junta dos años).
 
 ### 1.6 Qué dicen estos números para vender, sin exagerar
 
@@ -330,7 +345,7 @@ antes. Mudarse lleva un día: el sitio no se compila y es HTML estático.
 2. Sacar de los tabulados de la ENVE 2024 el costo del fraude contra empresas.
 3. El total nacional de la CONDUSEF de 2025 (posible fraude, monto, cuánto se
    recuperó).
-4. El total nacional de carpetas por fraude del SESNSP de 2025.
+4. ~~El total nacional de carpetas por fraude del SESNSP de 2025~~: hecho, 108,736 (§1.5).
 5. Cotejar en la práctica lo que dicen WiseCricket y Legal Hunt (lo de §3 es
    su publicidad); revisar sus avisos de privacidad y términos.
 6. Cotejar los términos de Cloudflare Pages (uso comercial en el plan

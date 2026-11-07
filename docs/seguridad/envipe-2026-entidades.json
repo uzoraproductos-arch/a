@@ -5,10 +5,14 @@
   "fraude2024": 7574,
   "oculta": 93.4,
   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_presentacion_nacional.pdf",
-  "sha": "d198839b32796ace3ad2ec117e90a1e9dab72927b7be6b3e7507174dea75aa2d"
+  "sha": "d198839b32796ace3ad2ec117e90a1e9dab72927b7be6b3e7507174dea75aa2d",
+  "delitos_fraude": {
+   "bancario": 4551884,
+   "consumidor": 3584629
+  }
  },
  "tabulado": {
-  "titulo": "Tabulados básicos, I. Nivel de victimización y delincuencia, cuadro 1.13: tasa de incidencia delictiva por entidad federativa de ocurrencia por cada cien mil habitantes y los cinco delitos más frecuentes, 2025",
+  "titulo": "Tabulados básicos, I. Nivel de victimización y delincuencia, cuadro 1.13: tasa de incidencia delictiva por entidad federativa de ocurrencia por cada cien mil habitantes y los cinco delitos más frecuentes, 2025; cuadro 1.20: total de delitos ocurridos por tipo de delito, 2025",
   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/tabulados/I_nivel_victimizacion_2026_est.xlsx",
   "sha": "0a4b86a7fbf1794986e8452f1ce8b0c67191dcc19f8487f0bf666a15f36b76d3"
  },
