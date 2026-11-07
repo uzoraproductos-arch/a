@@ -153,6 +153,10 @@ RECURSOS = [
     ('pl-inversion', '🏗️', 'Ver la inversión en el Planisferio', 'La obra de los gobiernos estatales y lo que dejó la ASF, en el Planisferio', 'planisferio.html?d=inversion',
      'planisferio.html?d=inversion&e=%s', 'mapa',
      'inversion invierte invirtio obra obras publica infraestructura organismos caminos planisferio mapa'),
+    # La dimensión penal (07-11-2026): la ENVIPE por estado.
+    ('pl-penal', '🚨', 'Ver el fraude en el Planisferio', 'El fraude y la cifra oculta de los 32 estados, en el Planisferio', 'planisferio.html?d=penal',
+     'planisferio.html?d=penal&e=%s', 'mapa',
+     'fraude fraudes estafa estafas delito delitos penal victimas victimizacion envipe cifra oculta negra denuncia denuncian seguridad planisferio mapa'),
 ]
 
 
