@@ -357,6 +357,23 @@ el lanzamiento») y el cierre con cuatro puertas (`EMPIEZA`). **Lo que no se
 toma:** la prueba social que no tenemos (no hay clientes ni certificación que
 presumir) y pedir la contraseña del SAT.
 
+**Lo que puede hacer WiseCricket y lo que podemos hacer nosotros** (pregunta
+del autor, 07-11-2026). Sus módulos, uno por uno:
+
+| Módulo de WiseCricket | Auditavisión | Por qué |
+|---|---|---|
+| Auditoría de cada CFDI contra la ley | **Hecho** (07-11-2026) | `revisar()` de `lector_cfdi.py` e `insp-factura.js`: régimen y tipo de persona, método y forma de pago, retención de IVA, cada regla con su artículo, en el navegador. |
+| Complementos de pago pendientes | **Hecho** (07-11-2026) | Si el lote trae los complementos, se empatan por UUID. |
+| Pide correcciones al proveedor | Por hacer | Un borrador de carta para que el lector la mande; no mandamos correos a su nombre. |
+| Conciliación banco, póliza y CFDI | Por etapas | El molde de «Revisa tu estado de resultados» (CSV en el navegador). |
+| Materialidad | Guía y servicio | Es lo que pide el art. 69-B, octavo párrafo. |
+| Descarga masiva del SAT y buzón tributario | **No** | Exigen la CIEC o la e.firma del cliente: romperían «tus archivos no se suben» y nos obligarían a custodiar credenciales. |
+| IVA, ISR y pagos provisionales | **No** | Es trabajo de despacho, con la responsabilidad de la declaración, y nos haría competir con nuestros clientes. |
+
+Y la **arquitectura de su página** pasó a `servicios.html` con nuestros
+formatos (`REVISOR`, `MODULOS`, `COMO`, `SV_NOVEDADES`, `CIERRE` de
+`apartados.py`), sin su prueba social.
+
 ### 3.2 Legal Hunt (legalhunt.com.mx) · Legal Hunt Mex, S.A.P.I. de C.V.
 
 **Cómo se presenta:** «Gobierno corporativo sin papel». Ofrece tres cosas:

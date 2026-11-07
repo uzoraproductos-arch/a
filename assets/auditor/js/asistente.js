@@ -1309,8 +1309,8 @@
     if (APP.inspfactura && /\b(facturas?|cfdi|xml|comprobantes? fiscal(es)?)\b/.test(p) && !RFC_RE.test(t) && !/^\s*(que|q) (es|son|significa)\b|que quiere decir/.test(p)) {
       RFC_RE.lastIndex = 0;
       return respApp('inspfactura', APP.inspfactura.url,
-        '<p>📑 Te abro el <b>Lector de facturas CFDI</b> aquí abajo. Elige el XML de tu factura (o varios): lo leo en tu navegador, sin subirlo a ningún lado, rehago su cuenta y cruzo al emisor con la lista 69-B del SAT.</p>' +
-        '<p class="pa-chico">Separo lo que declaró el SAT (oficial) de las señales que salen de comparar fechas (derivado, «señal para revisar»). No te digo si la factura está cancelada: eso lo dice el verificador del SAT con su UUID.</p>');
+        '<p>📑 Te abro el <b>Lector de facturas CFDI</b> aquí abajo. Elige el XML de tu factura (o varios): lo leo en tu navegador, sin subirlo a ningún lado, rehago su cuenta, la reviso contra la ley (régimen fiscal, método y forma de pago, complemento de pago y retención de IVA, cada regla con su artículo) y cruzo al emisor con la lista 69-B del SAT. Si cargas también los complementos de pago, los empato con sus facturas.</p>' +
+        '<p class="pa-chico">Separo lo que declaró el SAT (oficial) de las señales que salen de comparar fechas o de revisar el XML (derivado, «señal para revisar»). No te digo si la factura está cancelada: eso lo dice el verificador del SAT con su UUID.</p>');
     }
     RFC_RE.lastIndex = 0;
     /* 3. La lista negra del SAT. */

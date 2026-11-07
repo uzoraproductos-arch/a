@@ -21,6 +21,7 @@ import html
 import json
 
 import insp_efos
+import lector_cfdi
 from presupuesto_modulos import chip
 
 ESTILOS = ['insp-efos.css', 'insp-factura.css']
@@ -50,6 +51,7 @@ PASOS = [
     ('📂', 'Elige tus XML', 'Uno o varios a la vez (así trabaja un despacho). También puedes arrastrarlos o pegar el texto de uno.'),
     ('🔎', 'Los leemos aquí mismo', 'En tu navegador: el UUID del timbre, la fecha, el emisor, el receptor, los conceptos, los impuestos y el total.'),
     ('🧮', 'Rehacemos la cuenta', 'Subtotal menos descuento, más impuestos trasladados, menos retenidos: ¿da el total? ¿Los conceptos suman el subtotal?'),
+    ('⚖️', 'La revisamos contra la ley', 'Régimen fiscal contra el tipo de persona, método y forma de pago, complemento de pago y retención de IVA a personas físicas, cada regla con su artículo.'),
     ('🧾', 'La cruzamos con la lista 69-B', 'Si el emisor aparece, te decimos lo que publicó el SAT y, aparte, las señales que salen de comparar fechas.'),
     ('🏢', 'Las juntamos por proveedor', 'Con dos o más (hasta 500 a la vez), un resumen por emisor: cuántas facturas, cuánto suman, cuántas no cuadran y si está en la lista 69-B.'),
 ]
@@ -68,7 +70,8 @@ def construir(base, ref):
     m = insp_efos.meta()
     sit = {k: {'t': (nom if k != 'S' else 'Sentencia favorable'), 'c': cl, 'i': ico, 'corto': corto}
            for k, nom, cl, ico, corto, _txt in insp_efos.SITUACIONES}
-    datos = {'corte': m['corte'], 'total': m['total'], 'sit': sit, 'cff': CFF}
+    datos = {'corte': m['corte'], 'total': m['total'], 'sit': sit, 'cff': CFF, 'reglas': lector_cfdi.REGLAS,
+             'reg': {k: [n, f, mo] for k, (n, f, mo) in lector_cfdi.REGIMENES.items()}}
     pasos = ''.join('<li class="cf-paso"><span class="cf-paso-ico" aria-hidden="true">%s</span><b>%s</b><p>%s</p></li>' % p for p in PASOS)
     ley = ''.join('<li><b>%s.</b> %s</li>' % (html.escape(p), html.escape(t)) for p, t in LEY)
     return '''
@@ -115,7 +118,7 @@ def construir(base, ref):
     <h2 id="cf-separa">Lo que dice el SAT y lo que nosotros señalamos</h2>
     <ul class="cf-dos">
       <li><p class="cf-dos-t">%(chip_of)s Lo que declaró la autoridad</p><p>Si el RFC del emisor está en la lista 69-B: su situación (presunto, definitivo, desvirtuado o sentencia favorable), el oficio y la fecha en que el SAT lo publicó. Es lo que dice el listado, palabra por palabra.</p></li>
-      <li><p class="cf-dos-t">%(chip_de)s Señales para revisar</p><p>Lo que sale de comparar: la factura se emitió <b>después</b> de que el emisor salió publicado como presunto o como definitivo, o su cuenta no cuadra. Es una pregunta que conviene hacer, <b>no una irregularidad</b> ni una acusación.</p></li>
+      <li><p class="cf-dos-t">%(chip_de)s Señales para revisar</p><p>Lo que sale de comparar: la factura se emitió <b>después</b> de que el emisor salió publicado como presunto o como definitivo, su cuenta no cuadra, o el XML no sigue una regla del SAT o de la ley (régimen, forma de pago, complemento de pago, retención de IVA). Es una pregunta que conviene hacer, <b>no una irregularidad</b> ni una acusación.</p></li>
       <li><p class="cf-dos-t">✅ A favor del contribuyente</p><p>Desvirtuado y sentencia favorable quieren decir lo contrario de una sospecha: demostró ante el SAT que sus operaciones existieron, o un tribunal le dio la razón.</p></li>
     </ul>
   </section>
@@ -131,6 +134,8 @@ def construir(base, ref):
     <ul>
       <li><b>No dice si la factura está vigente o cancelada.</b> Eso solo lo sabe el SAT: consúltalo con el UUID en su verificador de comprobantes fiscales digitales.</li>
       <li><b>No valida el sello ni el certificado.</b> Leemos lo que el XML dice; un archivo alterado a mano se leería igual. La estructura del CFDI la fija el %(anexo)s (%(xsd)s).</li>
+      <li><b>No sabe qué se compró.</b> La retención de IVA depende de si fue un servicio profesional, una comisión, un arrendamiento o una venta, y el XML no siempre lo dice: por eso la señal dice «si es…».</li>
+      <li><b>No revisa todas las reglas del SAT.</b> Revisa cuatro, cada una con su artículo: régimen y tipo de persona, método y forma de pago, complemento de pago y retención de IVA. Lo demás lo valida el SAT al timbrar.</li>
       <li><b>No califica al receptor</b> ni dice si la operación existió: eso se acredita ante el SAT con documentos (art. 69-B, octavo párrafo).</li>
       <li>La lista tiene corte al %(corte)s. Alguien que el SAT publicó después no aparece todavía.</li>
       <li>Si el emisor o el receptor es persona física, su RFC sale tapado y su nombre no se muestra: es un dato personal.</li>

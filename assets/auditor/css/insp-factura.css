@@ -37,3 +37,7 @@
 .cf-tabla-caja { overflow-x: auto; margin: 0 0 18px; }
 .cf-tabla { border-collapse: collapse; width: 100%; min-width: 560px; }
 .cf-tabla th, .cf-tabla td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #dfe5f0; vertical-align: top; }
+.cf-ley { margin: 12px 0 0; padding: 12px 14px; border-radius: 10px; background: #f3f6fc; border: 1px solid #c9d5ea; }
+.cf-ley ul { margin: 0 0 8px; padding-left: 20px; }
+.cf-ley li { margin: 0 0 10px; line-height: 1.5; }
+.cf-fund { color: var(--ef-tenue); }

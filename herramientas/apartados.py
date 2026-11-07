@@ -2084,6 +2084,77 @@ EMPIEZA = [
     ('🎓', 'Se cotiza', 'Agenda un taller', 'Para tu despacho, tu órgano de control o tu salón.', 'servicios.html?servicio=capacitacion#solicitud', 'Elegir taller'),
 ]
 
+# La arquitectura de la página de WiseCricket (pedido del autor, 07-11-2026:
+# «busco una arquitectura similar… manteniendo nuestros formatos»): portada,
+# ejemplo, el revisor, lo que puedes hacer, cómo funciona en tres pasos, hoy y
+# con nosotros, la evidencia, para quién, el encargo, la confianza, lo más
+# nuevo y un cierre con dos botones. Cada liga se coteja al generar.
+REVISOR = {
+    'tit': 'Quien paga a proveedores no tiene que ser auditor.',
+    'tx': 'Con Auditavisión, quien revisa facturas o da de alta proveedores tiene a la mano lo que un auditor miraría: '
+          'la lista 69-B del SAT, los contratos públicos y la factura contra la ley. Tú decides qué hacer con lo que encuentras.',
+    'puntos': [('🧾', 'Revisa cada factura contra la ley', 'Régimen, forma de pago, complemento de pago, retención de IVA y lista 69-B.'),
+               ('⚖️', 'Explica con fundamento', 'Cada señal trae su artículo y el enlace al documento vigente.'),
+               ('🧭', 'Te dice lo que falta', 'Y quién lo debe: lo que no se puede sostener se dice, no se rellena.')],
+}
+
+# Lo que puedes hacer: (etiqueta, ícono, título, texto, liga, acceso).
+MODULOS = [
+    ('Lista 69-B', '🧾', 'Busca cualquier RFC en la lista negra del SAT',
+     'Presuntos, definitivos, desvirtuados y sentencias favorables, con el oficio y la fecha de cada publicación.', 'herramienta-inspector-efos.html', 'Gratis'),
+    ('Nuevo · Facturas', '📄', 'Revisa tus facturas contra la ley',
+     'Régimen fiscal, método y forma de pago, retención de IVA y lista 69-B, cada señal con su artículo. Hasta 500 XML, sin subirlos.',
+     'herramienta-inspector-factura.html', 'Gratis'),
+    ('Nuevo · REP', '🔁', 'Empata tus complementos de pago',
+     'Carga tus facturas PPD con sus complementos: ves cuáles ya tienen pago registrado, cuánto les queda y cuáles no tienen ninguno.',
+     'herramienta-inspector-factura.html', 'Gratis'),
+    ('Proveedores', '📌', 'Tu cartera de proveedores',
+     'Mi Auditavisión guarda tus proveedores y el resumen de tus revisiones en tu navegador, para volver a ellos.', 'herramienta-inspector-mia.html', 'Gratis'),
+    ('Contratos', '🏛️', 'Qué le vende al gobierno',
+     'Los contratos de ComprasMX de cada empresa, por institución, con su importe y su fecha.', 'contratos-publicos.html', 'Gratis'),
+    ('Fraccionamiento', '✂️', 'Señales de compras partidas',
+     'Adjudicaciones directas de la misma unidad, empresa y partida que en 90 días rebasan el tope del PEF. Señal para revisar, no irregularidad.',
+     'contratos-publicos.html#fraccionamiento', 'Gratis'),
+    ('Estados financieros', '📊', 'Revisa tu estado de resultados',
+     'Cuadre, estructura, rentabilidad, tendencia, impuestos y deuda, desde un CSV o lo pegado de Excel, en tu navegador.',
+     'herramienta-inspector-resultados.html', 'Gratis'),
+    ('Vigía', '🔔', 'Vigila tu cartera',
+     'Te avisamos cuando un proveedor cambia de situación en la lista 69-B, con el párrafo del artículo y el plazo que corre.', '#sv-seguimiento', 'Con el lanzamiento'),
+    ('Investigación', '🔎', 'Un expediente a la medida',
+     'Una persona investiga tu pregunta con documentos públicos y te entrega fuentes, etiquetas y límites.', '#sv-expediente', 'Por encargo'),
+]
+
+# Cómo funciona: (etapa, título, texto, lo que entra o con qué se cruza).
+COMO = [
+    ('Paso 1', 'Traes lo que tienes', 'Un RFC, tus facturas en XML, tu estado de resultados o tu pregunta. No te pedimos tu contraseña del SAT.',
+     ['RFC', 'XML', 'CSV o Excel', 'Tu pregunta']),
+    ('Paso 2', 'Lo cruzamos con documentos', 'Contra la lista 69-B, los contratos de ComprasMX, la ASF, el DOF y la ley vigente, cada uno con su documento.',
+     ['Lista 69-B', 'ComprasMX', 'ASF', 'DOF', 'Leyes']),
+    ('Paso 3', 'Actúas sobre lo importante', 'Ves primero lo que trae señales, con su artículo, lo que falta y quién lo debe. Si quieres ir más a fondo, lo hacemos por encargo.',
+     []),
+]
+
+# Lo más nuevo: (fecha, etiqueta, título, texto, liga). Fechas de AGENTS.md.
+SV_NOVEDADES = [
+    ('7 nov 2026', 'Nuevo · Facturas', 'Revisión de facturas contra la ley',
+     'Régimen y tipo de persona, método y forma de pago, complemento de pago y retención de IVA, con su artículo.', 'herramienta-inspector-factura.html'),
+    ('5 nov 2026', 'Facturas', 'Lector de facturas CFDI', 'Hasta 500 XML en tu navegador, con el resumen por proveedor y el cruce con la lista 69-B.',
+     'herramienta-inspector-factura.html'),
+    ('5 nov 2026', 'Estados financieros', 'Revisa tu estado de resultados', 'Seis dimensiones de revisión, sin subir tu archivo.',
+     'herramienta-inspector-resultados.html'),
+    ('5 nov 2026', 'Proveedores', 'Mi Auditavisión', 'Tus proveedores y tus revisiones, guardados solo en tu navegador.', 'herramienta-inspector-mia.html'),
+    ('4 nov 2026', 'Contratos', 'Señales de fraccionamiento', 'Compras directas partidas que rebasan el tope del Anexo 9 del PEF.',
+     'contratos-publicos.html#fraccionamiento'),
+]
+
+CIERRE = {
+    'tit': 'Ve hoy si tus proveedores están en la lista 69-B.',
+    'tx': 'Elige tus facturas en XML: las leemos en tu navegador, las revisamos contra la ley y te mostramos primero lo que trae señales, '
+          'con su artículo. Gratis y sin contraseña del SAT.',
+    'botones': [('Revisar mis facturas', 'herramienta-inspector-factura.html', True), ('Prefiero que me contacten', '#solicitud', False)],
+    'nota': 'O pide una cotización y una persona lo revisa por ti.',
+}
+
 PROCESO = [
     ('📝', 'Solicitud', 'Nos cuentas qué quieres saber con el formulario de abajo.'),
     ('🎯', 'Alcance', 'Acordamos la pregunta, el periodo, el territorio y lo que queda fuera.'),
@@ -2155,17 +2226,26 @@ def servicios():
                 raise SystemExit('Servicios: el perfil «%s» enlaza a %s, que no existe' % (p[1], liga))
     if {s[6] for s in SERVICIOS} != {l[0] for l in LINEAS}:
         raise SystemExit('Servicios: cada servicio necesita una línea de LINEAS, y cada línea, un servicio')
+    for liga in [m[4] for m in MODULOS] + [n[4] for n in SV_NOVEDADES] + [b[1] for b in CIERRE['botones']]:
+        arch, _, ancla = liga.partition('#')
+        if arch and not os.path.exists(os.path.join(RAIZ, arch)):
+            raise SystemExit('Servicios: %s no existe' % liga)
+        if not arch and ancla.startswith('sv-') and ancla[3:] not in nom:
+            raise SystemExit('Servicios: %s no es un servicio' % liga)
+        if arch and ancla and ('id="%s"' % ancla) not in open(os.path.join(RAIZ, arch), encoding='utf-8').read():
+            raise SystemExit('Servicios: %s no tiene el ancla #%s' % (arch, ancla))
 
     # La portada: la propuesta de valor, tres botones y tres promesas.
     portada = '\n'.join([
         '<div class="sv-hero">',
         '          <p class="sv-hero-pre">Prevención, debida diligencia e investigación documental</p>',
-        '          <p class="sv-hero-tit">Revisamos a tu proveedor y al dinero público con documentos oficiales, '
-        'y te decimos lo que encontramos, lo que falta y quién lo debe.</p>',
+        '          <p class="sv-hero-tit">Revisa a tu proveedor antes de pagarle.</p>',
+        '          <p class="sv-hero-tx">Cruzamos su RFC y sus facturas con la lista 69-B del SAT, los contratos públicos, la ASF y la ley. '
+        'Te decimos lo que encontramos, lo que falta y quién lo debe, con cada cifra en su documento.</p>',
         '          <div class="sv-hero-acc">'
-        '<a class="sz-btn sz-btn-of" href="#solicitud">Pide una cotización</a>'
-        '<a class="sz-btn" href="#sectores">Elige tu perfil</a>'
-        '<a class="sz-btn" href="herramienta-inspector-efos.html">Revisa un proveedor gratis</a></div>',
+        '<a class="sz-btn sz-btn-of" href="herramienta-inspector-factura.html">Revisa tus facturas gratis</a>'
+        '<a class="sz-btn" href="#solicitud">Pide una cotización</a>'
+        '<a class="sz-btn" href="#sectores">Elige tu perfil</a></div>',
         '          <ul class="sv-hero-prom">',
         '            <li><span aria-hidden="true">🧾</span><b>Cada cifra con su documento</b> y su etiqueta</li>',
         '            <li><span aria-hidden="true">🔒</span><b>Tus archivos no se suben</b>: se leen en tu navegador</li>',
@@ -2262,6 +2342,23 @@ def servicios():
             '        </div>') % (DEMO['empresa'], '\n'.join(
         '            <li class="sv-h sv-h-%s"><b>%s</b><span>%s</span><small>%s</small></li>' % (cl, tit, tx, ley)
         for tit, tx, ley, cl in DEMO['hallazgos']), DEMO['veredicto'])
+    revisor = ('<div class="sv-revisor">\n          <p class="sv-revisor-tx">%s</p>\n          <ul class="sv-revisor-pts">\n%s\n          </ul>\n        </div>') % (
+        REVISOR['tx'], '\n'.join('            <li><span class="sv-ico" aria-hidden="true">%s</span><b>%s</b><span>%s</span></li>' % x for x in REVISOR['puntos']))
+    acc_cl = {'Gratis': 'gratis', 'Por encargo': 'encargo'}
+    modulos = '<div class="sv-modulos">\n%s\n        </div>' % '\n'.join(
+        '          <a class="sv-modulo" href="%s"><span class="sv-mod-et">%s</span><span class="sv-ico" aria-hidden="true">%s</span>'
+        '<b>%s</b><span class="sv-mod-tx">%s</span><span class="sv-acceso sv-acceso-%s">%s</span></a>'
+        % (esc_attr(liga), et, ico, tit, tx, acc_cl.get(acc, 'pronto'), acc) for et, ico, tit, tx, liga, acc in MODULOS)
+    como = '<ol class="sv-como">\n%s\n        </ol>' % '\n'.join(
+        '          <li class="sv-como-paso"><span class="sv-como-et">%s</span><b>%s</b><span>%s</span>%s</li>' % (
+            et, tit, tx, ('<span class="sv-como-fu">%s</span>' % ''.join('<span>%s</span>' % f for f in fu)) if fu else '')
+        for et, tit, tx, fu in COMO)
+    novedades = '<ul class="sv-novedades">\n%s\n        </ul>' % '\n'.join(
+        '          <li><a class="sv-nov" href="%s"><span class="sv-mod-et">%s</span><b>%s</b><span>%s</span><small>%s</small></a></li>'
+        % (esc_attr(liga), et, tit, tx, fecha) for fecha, et, tit, tx, liga in SV_NOVEDADES)
+    cierre = ('<div class="sv-cierre">\n          <p class="sv-cierre-tit">%s</p>\n          <p>%s</p>\n          <div class="sv-hero-acc">%s</div>\n'
+              '          <p class="sv-nota">%s</p>\n        </div>') % (CIERRE['tit'], CIERRE['tx'], ''.join(
+        '<a class="sz-btn%s" href="%s">%s</a>' % (' sz-btn-of' if prim else '', esc_attr(liga), t) for t, liga, prim in CIERRE['botones']), CIERRE['nota'])
     antes = ('<div class="sv-tabla-env"><table class="sv-tabla sv-ad">\n'
              '            <thead><tr><th scope="col">Hoy</th><th scope="col">Con Auditavisión</th></tr></thead>\n'
              '            <tbody>\n%s\n            </tbody>\n          </table></div>') % '\n'.join(
@@ -2336,58 +2433,68 @@ def servicios():
     return {
         # Quinta pestaña del menú desde el 02-11-2026 (pedido del autor); del
         # 11-10-2026 a esa fecha fue un módulo del Modo Inspector. Reestructurada
-        # el 07-11-2026 sobre el lienzo de nueve bloques (arriba, SERVICIOS).
+        # el 07-11-2026 sobre el lienzo de nueve bloques (arriba, SERVICIOS) y,
+        # el mismo día, con la arquitectura de la página de WiseCricket (REVISOR).
+        # «En esta página» lleva solo los saltos de `saltos`.
         'archivo': 'servicios.html', 'menu': 'Servicios de investigación', 'menu_archivo': 'servicios.html',
         'icono': '🔎', 'titulo': 'Servicios', 'lema': 'Prevención, debida diligencia e investigación, con cada cifra en su documento',
-        'entrada': ('Todo lo que publica Auditavisión es libre y lo seguirá siendo. Cuando necesites ir más a fondo, revisar a un '
-                    'proveedor, vigilar tu cartera o formar a tu equipo, lo hacemos por encargo con la misma regla de la plataforma. '
-                    'Los Servicios y las <a href="donaciones.html">donaciones</a> sostienen el trabajo; ninguna de las dos vías compra lo que publicamos.'),
+        'entrada': ('La consulta es libre y lo seguirá siendo. Cuando quieras ir más a fondo, lo hacemos por encargo, con la misma regla. '
+                    'Los Servicios y las <a href="donaciones.html">donaciones</a> sostienen el trabajo; ninguno compra lo que publicamos.'),
         'estilos': ['servicios.css'],
         'scripts': ['servicios.js'],
+        'saltos': {'ejemplo': 'Ejemplo', 'modulos': 'Qué puedes hacer', 'como': 'Cómo funciona', 'sectores': 'Perfiles',
+                   'oferta': 'Servicios', 'preguntas': 'Preguntas', 'solicitud': 'Cotiza'},
         'antes': ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> Los Servicios se abren con el lanzamiento de la '
                   'plataforma. Ya puedes armar tu solicitud y guardarla; el envío se activa entonces.</p>'),
         'secciones': [
             bloque_sec('propuesta', 'Lo que te ofrecemos', '', portada, sin_cab=True),
-            bloque_sec('ejemplo', 'Así se ve una revisión',
-                       'Un proveedor revisado contra los documentos públicos: cada hallazgo con su artículo, y lo que la revisión no dice.', demo),
+            bloque_sec('ejemplo', 'Un proveedor, revisado contra los documentos',
+                       'Cada hallazgo con su artículo, y lo que la revisión no dice.', demo, pre='Así se ve una revisión'),
+            bloque_sec('revisor', REVISOR['tit'], '', revisor, pre='Tu revisor de proveedores'),
+            bloque_sec('modulos', 'Qué puedes hacer con Auditavisión',
+                       'Cada herramienta cruza documentos públicos distintos. Por eso encuentra lo que una revisión a mano no ve.', modulos, pre='La plataforma'),
+            bloque_sec('como', 'Sin contraseñas y sin subir archivos', 'Tres pasos, desde tu navegador.', como, pre='Cómo funciona'),
+            bloque_sec('hoy', 'De revisar a mano a revisar con documentos', 'Lo que hoy cuesta horas y lo que cambia con la plataforma.', antes,
+                       pre='Hoy y con Auditavisión'),
             bloque_sec('por-que', 'Por qué revisar antes de pagar',
                        'Lo que no se denuncia no llega a ninguna estadística: la prevención vale más que la denuncia. Las cifras salen de '
                        '<a href="aprende-fraude-en-numeros.html">El fraude en números</a>, cada una con su documento.',
-                       '<div class="sv-datos">\n%s\n        </div>' % porque),
-            bloque_sec('hoy', 'De revisar a mano a revisar con documentos', 'Lo que hoy cuesta horas y lo que cambia con la plataforma.', antes),
-            bloque_sec('sectores', 'Elige tu perfil',
+                       '<div class="sv-datos">\n%s\n        </div>' % porque, pre='La evidencia'),
+            bloque_sec('sectores', 'Hecho para quien responde por el dinero',
                        'Por carrera y especialidad: lo que te pide tu trabajo, el servicio que lo atiende y con qué puedes empezar hoy, gratis.',
-                       '<div class="sv-perfiles">\n%s\n        </div>' % perfiles),
-            bloque_sec('oferta', 'Los servicios',
+                       '<div class="sv-perfiles">\n%s\n        </div>' % perfiles, pre='Elige tu perfil'),
+            bloque_sec('oferta', 'Cuando quieres que lo hagamos por ti',
                        '%s servicios en tres líneas, de una pregunta puntual a una licencia para tu institución.'
                        % ['Cero', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve'][len(SERVICIOS)],
-                       '<div class="sv-lineas">\n%s\n        </div>' % oferta),
+                       '<div class="sv-lineas">\n%s\n        </div>' % oferta, pre='Los servicios'),
             bloque_sec('formas', 'Tres formas de trabajar con nosotros', 'Gratis por tu cuenta, por encargo o para tu institución.',
                        '<div class="sv-formas">\n%s\n        </div>\n        %s' % (formas, linea)),
-            bloque_sec('encaje', 'Dónde encajamos',
-                       'Las plataformas de inteligencia fiscal miran tu información por dentro; nosotros, a tu proveedor y al dinero público por fuera.',
-                       encaje),
-            bloque_sec('diferencia', 'Por qué Auditavisión', 'Seis razones que puedes comprobar en la plataforma antes de contratar.',
-                       '<ul class="sv-difs">\n%s\n        </ul>' % diferencia),
-            bloque_sec('proceso', 'Cómo trabajamos', 'Siete pasos. Nada se cobra antes de que aceptes la cotización.',
-                       '<ol class="sv-pasos">\n%s\n        </ol>' % pasos),
-            bloque_sec('precio', 'Cuánto cuesta', 'Cada encargo se cotiza por escrito antes de empezar.',
-                       ('<div class="sv-precio">\n'
-                        '          <p>Todavía no hay tarifa publicada, y no vamos a inventarla: las primeras saldrán de encargos piloto. '
-                        'Cuando las haya, se publicarán aquí. La cotización se arma con cuatro cosas:</p>\n'
+            bloque_sec('proceso', 'Cómo trabajamos por encargo', 'Siete pasos. Nada se cobra antes de que aceptes la cotización.',
+                       ('<ol class="sv-pasos">\n%s\n        </ol>\n'
+                        '        <div class="sv-precio" id="precio">\n'
+                        '          <p><b>Cuánto cuesta.</b> Todavía no hay tarifa publicada, y no vamos a inventarla: las primeras saldrán de encargos piloto. '
+                        'Cuando las haya, se publicarán aquí. Cada encargo se cotiza por escrito antes de empezar, con cuatro cosas:</p>\n'
                         '          <ul class="sv-lista"><li>las horas de investigación y de revisión;</li>'
                         '<li>el costo de las fuentes (copias certificadas, bases de datos o trámites);</li>'
                         '<li>la forma de entrega;</li><li>un margen para sostener la plataforma.</li></ul>\n'
-                        '        </div>')),
-            bloque_sec('modelo', 'Nuestro modelo, a la vista', 'Los nueve bloques de cómo funciona y se sostiene Auditavisión.', lienzo),
-            bloque_sec('preguntas', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.',
-                       '<div class="sv-faqs">\n%s\n        </div>' % preguntas),
+                        '        </div>') % pasos, pre='El encargo'),
+            bloque_sec('diferencia', 'Tu información, protegida por diseño', 'Seis razones que puedes comprobar en la plataforma antes de contratar.',
+                       '<ul class="sv-difs">\n%s\n        </ul>' % diferencia, pre='Confianza'),
             bloque_sec('independencia', 'Política de independencia',
                        '%d compromisos que valen para cada cliente y cada donante, sin excepción.' % len(INDEPENDENCIA),
                        '<div class="sv-politica">\n          <details class="sv-pol-det"><summary>Lee los %d compromisos</summary>\n'
                        '          <ol class="sv-pol">\n%s\n          </ol>\n          </details>\n'
                        '          <p class="sv-version">Versión 3 · 7 de noviembre de 2026.</p>\n        </div>' % (len(INDEPENDENCIA), politica)),
-            bloque_sec('empieza', 'Empieza como prefieras', 'Por tu cuenta, gratis, o con una persona que investigue por ti.', empieza),
+            bloque_sec('encaje', 'Dónde encajamos',
+                       'Las plataformas de inteligencia fiscal miran tu información por dentro; nosotros, a tu proveedor y al dinero público por fuera.',
+                       encaje, pre='Nuestro lugar'),
+            bloque_sec('novedades', 'Lo más nuevo de la plataforma', 'Cada semana sumamos algo. Esto es lo último, con su fecha.', novedades,
+                       pre='Últimos lanzamientos'),
+            bloque_sec('modelo', 'Nuestro modelo, a la vista', 'Los nueve bloques de cómo funciona y se sostiene Auditavisión.', lienzo),
+            bloque_sec('preguntas', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.',
+                       '<div class="sv-faqs">\n%s\n        </div>' % preguntas),
+            bloque_sec('cierre', CIERRE['tit'], '', cierre, sin_cab=True),
+            bloque_sec('empieza', 'Empieza como prefieras', 'Por tu cuenta, gratis, o con una persona que investigue por ti.', empieza, pre='Contáctanos'),
             bloque_sec('solicitud', 'Solicita una cotización', 'Cuéntanos qué quieres saber. Te mostramos tu solicitud antes de mandarla.', formulario),
             # Hasta el 24-10-2026 aqui iba el Pase del Auditor Civico.
             {'id': 'pase', 'titulo': 'Donaciones', 'texto': 'Si lo que quieres es sostener la consulta gratuita, puedes donar. Se abre con el lanzamiento.',
@@ -5619,10 +5726,11 @@ def pagina(a, sello):
             cab = '\n        <h2 class="sr-only" id="%s-tit">%s</h2>' % (s['id'], s['titulo'])
         elif s['titulo']:
             cab = '''
-        <div class="apartado-seccion-cab">
+        <div class="apartado-seccion-cab">%s
           <h2 class="apartado-seccion-titulo" id="%s-tit">%s<span class="sr-only">%s</span>%s</h2>
           <p class="apartado-seccion-texto">%s</p>
-        </div>''' % (s['id'], num, titulo, s['titulo'], s['texto'])
+        </div>''' % ((('\n          <p class="apartado-seccion-pre">%s</p>' % s['pre']) if s.get('pre') else ''),
+                     s['id'], num, titulo, s['titulo'], s['texto'])
         else:
             cab = ''
         if s.get('mosaico'):
@@ -5678,8 +5786,9 @@ def pagina(a, sello):
       </nav>%s''' % (' data-primera="1"' if a.get('primera') else '', '\n'.join(boton(s) for s in a['secciones']), pista)
     elif len(a['secciones']) > 1:
         saltos = '\n'.join('          <a href="#%s">%s%s</a>' % (
-            s['id'], ('<span class="apartado-cap-num" aria-hidden="true">%d</span>' % s['num']) if s.get('num') else '', s['titulo'])
-            for s in a['secciones'])
+            s['id'], ('<span class="apartado-cap-num" aria-hidden="true">%d</span>' % s['num']) if s.get('num') else '',
+            a['saltos'][s['id']] if isinstance(a.get('saltos'), dict) else s['titulo'])
+            for s in a['secciones'] if not a.get('saltos') or s['id'] in a['saltos'])
         en_pagina = '''      <nav class="apartado-saltos" aria-label="En esta página">
           <span class="apartado-saltos-tit">En esta página:</span>
 %s

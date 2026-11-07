@@ -49,6 +49,70 @@ NS = {
 TFD = 'http://www.sat.gob.mx/TimbreFiscalDigital'
 
 TIPOS = {'I': 'Ingreso', 'E': 'Egreso', 'T': 'Traslado', 'N': 'Nómina', 'P': 'Pago'}
+# El complemento para recepción de pagos (REP): 2.0 con el CFDI 4.0 y 1.0 con el 3.3.
+PAGOS_NS = ('http://www.sat.gob.mx/Pagos20', 'http://www.sat.gob.mx/Pagos')
+GENERICOS = ('XAXX010101000', 'XEXX010101000')   # público en general y extranjero: no son personas
+
+# Catálogo c_RegimenFiscal del SAT: clave → (nombre, aplica a persona física,
+# aplica a persona moral). Copiado del catálogo de CFDI 4.0 que publica el SAT
+# en la página del Anexo 20 (catCFDI_V_4_20261106.xls, hoja c_RegimenFiscal,
+# SHA-256 6249e37275ce164a1c4ac44e726dcd60858dac5c5604ff6c9ab06005a9199e1a,
+# cotejado el 07-11-2026). Si el SAT agrega una clave, se agrega aquí.
+REGIMENES = {
+    '601': ('General de Ley Personas Morales', False, True),
+    '603': ('Personas Morales con Fines no Lucrativos', False, True),
+    '605': ('Sueldos y Salarios e Ingresos Asimilados a Salarios', True, False),
+    '606': ('Arrendamiento', True, False),
+    '607': ('Régimen de Enajenación o Adquisición de Bienes', True, False),
+    '608': ('Demás ingresos', True, False),
+    '610': ('Residentes en el Extranjero sin Establecimiento Permanente en México', True, True),
+    '611': ('Ingresos por Dividendos (socios y accionistas)', True, False),
+    '612': ('Personas Físicas con Actividades Empresariales y Profesionales', True, False),
+    '614': ('Ingresos por intereses', True, False),
+    '615': ('Régimen de los ingresos por obtención de premios', True, False),
+    '616': ('Sin obligaciones fiscales', True, False),
+    '620': ('Sociedades Cooperativas de Producción que optan por diferir sus ingresos', False, True),
+    '621': ('Incorporación Fiscal', True, False),
+    '622': ('Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras', False, True),
+    '623': ('Opcional para Grupos de Sociedades', False, True),
+    '624': ('Coordinados', False, True),
+    '625': ('Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas', True, False),
+    '626': ('Régimen Simplificado de Confianza', True, True),
+}
+
+# La revisión contra la ley (07-11-2026, pedido del autor tras leer la página
+# de WiseCricket: «lo que puede hacer… lo podemos hacer nosotros»). Cada regla
+# con su fundamento, cotejado ese día contra el documento vigente:
+# - Guía de llenado del CFDI, Anexo 20 del SAT (Anexo_20_Guia_de_llenado_CFDI.pdf,
+#   SHA-256 70e0c92df44b4f36975e4a0a5b1f0609f83c62deb029eda440fe4df6e2265a25).
+# - CFF, última reforma DOF 09-04-2026; LIVA, última reforma DOF 12-11-2021;
+#   Reglamento de la LIVA, última reforma DOF 25-09-2014 (índice de Diputados).
+# Todo lo que sale de aquí es «derivado» y se dice «señal para revisar»: el XML
+# no dice qué se compró de verdad ni si ya se corrigió. La lee también la
+# página (insp_factura.py la pasa a insp-factura.js): el texto vive aquí.
+GUIA20 = 'http://omawww.sat.gob.mx/tramitesyservicios/Paginas/documentos/Anexo_20_Guia_de_llenado_CFDI.pdf'
+ANEXO20 = 'http://omawww.sat.gob.mx/tramitesyservicios/Paginas/anexo_20.htm'
+CFF_PDF = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf'
+LIVA_PDF = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LIVA.pdf'
+RLIVA_PDF = 'https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LIVA_250914.pdf'
+REGLAS = {
+    'regimen': {'t': 'Régimen fiscal y tipo de persona',
+                'f': 'Catálogo c_RegimenFiscal del SAT (Anexo 20): cada régimen dice si es para persona física, moral o las dos',
+                'u': ANEXO20},
+    'forma99': {'t': 'Método y forma de pago',
+                'f': 'Guía de llenado del CFDI (Anexo 20), campo FormaPago: si el pago no se recibe al emitir, '
+                     'la forma es «99» (Por definir) y el método «PPD»',
+                'u': GUIA20},
+    'rep': {'t': 'Complemento de pago (REP)',
+            'f': 'Código Fiscal, art. 29-A, fracción VII, inciso b): si no se paga en una sola exhibición, '
+                 'se expide un CFDI por cada pago que se reciba',
+            'u': CFF_PDF},
+    'ret_iva': {'t': 'Retención de IVA a personas físicas',
+                'f': 'Ley del IVA, art. 1o.-A, fracción II, inciso a), y su Reglamento, art. 3, fracción I: la persona moral '
+                     'retiene dos terceras partes del IVA por servicios personales independientes, comisiones o arrendamiento '
+                     'que le presta una persona física',
+                'u': LIVA_PDF, 'u2': RLIVA_PDF},
+}
 SITUACION = {'P': 'Presunto', 'D': 'Desvirtuado', 'F': 'Definitivo', 'S': 'Sentencia favorable'}
 TOLERANCIA = 0.01   # un centavo: el CFDI redondea a dos decimales
 
@@ -82,6 +146,9 @@ def leer(xml_bytes):
     # colgado directo del Comprobante. find('c:Impuestos') sin más busca solo
     # entre los hijos directos, que es el que queremos.
     imp = raiz.find('c:Impuestos', ns)
+    # El IVA (impuesto «002») del total, trasladado y retenido.
+    iva = lambda ruta: sum(num(x.attrib.get('Importe')) for x in raiz.findall('c:Impuestos/' + ruta, ns)
+                           if x.attrib.get('Impuesto') == '002')
     # El timbre va dentro de <cfdi:Complemento>; «.//» busca a cualquier profundidad.
     timbre = raiz.find('.//t:TimbreFiscalDigital', ns)
     conceptos = raiz.findall('c:Conceptos/c:Concepto', ns)
@@ -106,6 +173,14 @@ def leer(xml_bytes):
         'trasladados': num(imp.attrib.get('TotalImpuestosTrasladados')) if imp is not None else 0.0,
         'retenidos': num(imp.attrib.get('TotalImpuestosRetenidos')) if imp is not None else 0.0,
         'total': num(a('Total')),
+        'metodo': a('MetodoPago', ''),
+        'forma': a('FormaPago', ''),
+        'receptor_regimen': receptor.attrib.get('RegimenFiscalReceptor', '') if receptor is not None else '',
+        'iva_trasladado': iva('c:Traslados/c:Traslado'),
+        'iva_retenido': iva('c:Retenciones/c:Retencion'),
+        # Si es un complemento de pago: a qué facturas (UUID) paga y cuánto.
+        'pagos': [((d.attrib.get('IdDocumento') or '').upper(), num(d.attrib.get('ImpPagado')))
+                  for pns in PAGOS_NS for d in raiz.iter('{%s}DoctoRelacionado' % pns)],
         'conceptos': [{'descripcion': c.attrib.get('Descripcion', ''), 'cantidad': num(c.attrib.get('Cantidad')),
                        'importe': num(c.attrib.get('Importe'))} for c in conceptos],
     }
@@ -125,6 +200,60 @@ def cuadra(f):
         suma = sum(c['importe'] for c in f['conceptos'])
         if abs(suma - f['subtotal']) > TOLERANCIA:
             out.append('los conceptos suman %.2f y el subtotal dice %.2f' % (suma, f['subtotal']))
+    return out
+
+
+def pagos_del_lote(leidas):
+    """Junta los complementos de pago del lote: UUID de la factura → [suma
+    pagada, cuántos pagos]. None si el lote no trae ningún complemento (así no
+    se dice «sin complemento» de lo que el lector no cargó)."""
+    pg, hay = {}, False
+    for _n, f in leidas:
+        for uuid, imp in f.get('pagos') or []:
+            hay = True
+            x = pg.setdefault(uuid, [0.0, 0])
+            x[0] += imp
+            x[1] += 1
+    return pg if hay else None
+
+
+def revisar(f, pagos=None):
+    """La revisión contra la ley (REGLAS). Devuelve [(id de regla, 'senal' o
+    'nota', texto)]. Todo es derivado: «señal para revisar», nunca irregularidad."""
+    out = []
+    for rol, rfc, reg in (('emisor', f['emisor_rfc'], f['emisor_regimen']), ('receptor', f['receptor_rfc'], f.get('receptor_regimen', ''))):
+        if not reg or rfc in GENERICOS or len(rfc) not in (12, 13):
+            continue
+        r = REGIMENES.get(reg)
+        if not r:
+            out.append(('regimen', 'senal', 'El régimen %s del %s no está en el catálogo c_RegimenFiscal del SAT.' % (reg, rol)))
+        elif not (r[1] if es_fisica(rfc) else r[2]):
+            out.append(('regimen', 'senal', 'El %s tiene RFC de persona %s y su régimen es %s (%s), que el catálogo del SAT da solo a personas %s.'
+                        % (rol, 'física' if es_fisica(rfc) else 'moral', reg, r[0], 'morales' if es_fisica(rfc) else 'físicas')))
+    ingreso = f['tipo'] == 'Ingreso'
+    metodo, forma = f.get('metodo', ''), f.get('forma', '')
+    if ingreso and metodo == 'PPD' and forma and forma != '99':
+        out.append(('forma99', 'senal', 'Dice pago en parcialidades o diferido (PPD) con forma de pago %s; con PPD, la forma debe ser «99» (Por definir).' % forma))
+    if ingreso and metodo == 'PUE' and forma == '99':
+        out.append(('forma99', 'senal', 'Dice pago en una sola exhibición (PUE) con forma «99» (Por definir); si ya se pagó, la forma es la que se usó.'))
+    if ingreso and metodo == 'PPD':
+        p = (pagos or {}).get((f['uuid'] or '').upper())
+        if pagos is None:
+            out.append(('rep', 'nota', 'Es PPD: cada pago que reciba necesita su complemento de pago. Si cargas los complementos junto con la factura, los empato.'))
+        elif not p:
+            out.append(('rep', 'senal', 'Es PPD y ninguno de los complementos de pago que cargaste la cita. Si ya se pagó, falta su complemento.'))
+        else:
+            falta = f['total'] - p[0]
+            out.append(('rep', 'nota', '%d complemento%s de pago la cita%s por $%s en total%s.' % (
+                p[1], '' if p[1] == 1 else 's', '' if p[1] == 1 else 'n', format(round(p[0], 2), ',.2f'),
+                (', y le quedan $%s según el total de la factura' % format(round(falta, 2), ',.2f')) if falta > TOLERANCIA else '')))
+    emf, rem = f['emisor_rfc'], f['receptor_rfc']
+    if (ingreso and es_fisica(emf) and emf not in GENERICOS and len(rem) == 12 and rem not in GENERICOS
+            and f.get('iva_trasladado', 0) > TOLERANCIA and f.get('iva_retenido', 0) <= TOLERANCIA):
+        dos = round(f['iva_trasladado'] * 2 / 3, 2)
+        out.append(('ret_iva', 'senal', 'Una persona física le factura a una persona moral IVA por $%s sin IVA retenido. Si es un servicio '
+                    'profesional, una comisión o un arrendamiento, la persona moral retiene dos terceras partes: $%s (IVA × 2 ÷ 3). '
+                    'Si es venta de bienes, no aplica.' % (format(f['iva_trasladado'], ',.2f'), format(dos, ',.2f'))))
     return out
 
 
@@ -190,15 +319,16 @@ def cruce(rfc, fecha_factura, lista):
 
 
 COLUMNAS = ['archivo', 'version', 'uuid', 'fecha', 'tipo', 'emisor_rfc', 'emisor_nombre', 'receptor_rfc', 'receptor_nombre',
-            'subtotal', 'trasladados', 'retenidos', 'total', 'moneda', 'cuenta', 'lista_69b_emisor', 'senales']
+            'subtotal', 'trasladados', 'retenidos', 'total', 'moneda', 'cuenta', 'lista_69b_emisor', 'senales', 'revision']
 
 
-def renglon(nombre, f, lista):
+def renglon(nombre, f, lista, pagos=None):
     """Una fila de la tabla. Las personas físicas van con el RFC tapado y sin nombre."""
     c = cruce(f['emisor_rfc'], f['fecha'], lista)
     dif = cuadra(f)
     fila = dict(f, archivo=nombre, cuenta='cuadra' if not dif else 'no cuadra: ' + '; '.join(dif),
-                lista_69b_emisor=c['oficial'] or 'no aparece', senales=' | '.join(c['senales']))
+                lista_69b_emisor=c['oficial'] or 'no aparece', senales=' | '.join(c['senales']),
+                revision=' | '.join(('Señal para revisar: ' if k == 'senal' else '') + t for _r, k, t in revisar(f, pagos)))
     for k in ('emisor', 'receptor'):
         if es_fisica(fila[k + '_rfc']):
             fila[k + '_rfc'] = tapa(fila[k + '_rfc'])
@@ -208,7 +338,7 @@ def renglon(nombre, f, lista):
     return {k: fila[k] for k in COLUMNAS}
 
 
-PROV_COLUMNAS = ['emisor_rfc', 'emisor_nombre', 'facturas', 'total', 'monedas', 'no_cuadran', 'lista_69b', 'senales']
+PROV_COLUMNAS = ['emisor_rfc', 'emisor_nombre', 'facturas', 'total', 'monedas', 'no_cuadran', 'lista_69b', 'senales', 'revision']
 ORDEN_69B = {'F': 0, 'P': 1, 'S': 2, 'D': 3}
 
 
@@ -218,22 +348,24 @@ def por_proveedor(leidas, lista):
     la lista 69-B (definitivo, presunto…) y luego por monto. La suma es de los
     totales tal como vienen, sin convertir monedas (derivado)."""
     g = {}
+    pagos = pagos_del_lote(leidas)
     for _nombre, f in leidas:
         rfc = f['emisor_rfc']
         x = g.setdefault(rfc, {'rfc': rfc, 'nombre': f['emisor_nombre'], 'facturas': 0, 'total': 0.0, 'monedas': set(),
-                               'no_cuadran': 0, 'senales': 0})
+                               'no_cuadran': 0, 'senales': 0, 'revision': 0})
         x['facturas'] += 1
         x['total'] += f['total']
         x['monedas'].add(f['moneda'] or 'MXN')
         x['no_cuadran'] += 1 if cuadra(f) else 0
         x['senales'] += sum(1 for s in cruce(rfc, f['fecha'], lista)['senales'] if s.startswith('Señal'))
+        x['revision'] += sum(1 for _r, k, _t in revisar(f, pagos) if k == 'senal')
     out = []
     for rfc, x in g.items():
         r = lista.get(rfc)
         out.append({'emisor_rfc': tapa(rfc) if es_fisica(rfc) else rfc,
                     'emisor_nombre': '(persona física: nombre oculto)' if es_fisica(rfc) else x['nombre'],
                     'facturas': x['facturas'], 'total': '%.2f' % x['total'], 'monedas': ', '.join(sorted(x['monedas'])),
-                    'no_cuadran': x['no_cuadran'], 'senales': x['senales'],
+                    'no_cuadran': x['no_cuadran'], 'senales': x['senales'], 'revision': x['revision'],
                     'lista_69b': cruce(rfc, '', lista)['oficial'] or 'no aparece', '_o': (ORDEN_69B.get(r[2], 9) if r else 9, -x['total'])})
     out.sort(key=lambda x: x.pop('_o'))
     return out
@@ -276,6 +408,35 @@ def prueba():
     if [(x['emisor_rfc'], x['facturas'], x['no_cuadran']) for x in pv] != [('AAA010101AAA', 2, 1), ('BBB010101BBB', 1, 0)] \
             or pv[0]['total'] != '23300.00' or not pv[0]['lista_69b'].startswith('Definitivo') or pv[0]['senales'] != 2:
         fallas.append('por proveedor: %r' % pv)
+    # La revisión contra la ley (07-11-2026). La ficticia (PUE, forma 03, emisor
+    # moral en 601, receptor genérico) no da ninguna.
+    if (f['metodo'], f['forma'], f['receptor_regimen'], f['iva_trasladado'], f['iva_retenido'], f['pagos']) != ('PUE', '03', '616', 1600.0, 0.0, []) \
+            or revisar(f):
+        fallas.append('revisión de la ficticia: %r' % (revisar(f),))
+    ids = lambda g, p=None: [(r, k) for r, k, _t in revisar(g, p)]
+    if ids(dict(f, receptor_rfc='BBB010101BBB', receptor_regimen='612')) != [('regimen', 'senal')]:
+        fallas.append('régimen de persona física con RFC de moral')
+    if ids(dict(f, emisor_regimen='699')) != [('regimen', 'senal')]:
+        fallas.append('régimen fuera del catálogo')
+    if ids(dict(f, metodo='PPD', forma='03')) != [('forma99', 'senal'), ('rep', 'nota')]:
+        fallas.append('PPD con forma distinta de 99: %r' % ids(dict(f, metodo='PPD', forma='03')))
+    if ids(dict(f, forma='99')) != [('forma99', 'senal')]:
+        fallas.append('PUE con forma 99')
+    ppd = dict(f, metodo='PPD', forma='99')
+    if ids(ppd, {'OTRO': [1.0, 1]}) != [('rep', 'senal')] or ids(ppd, {f['uuid']: [11600.0, 2]}) != [('rep', 'nota')] \
+            or 'le quedan $6,600.00' not in revisar(ppd, {f['uuid']: [5000.0, 1]})[0][2]:
+        fallas.append('empate de complementos de pago')
+    pf = dict(f, emisor_rfc='AAAA010101AA1', emisor_regimen='612', receptor_rfc='BBB010101BBB', receptor_regimen='601')
+    r = revisar(pf)
+    if [(x[0], x[1]) for x in r] != [('ret_iva', 'senal')] or '$1,066.67' not in r[0][2] or revisar(dict(pf, iva_retenido=1066.67)):
+        fallas.append('retención de IVA: %r' % r)
+    # Un complemento de pago se lee: el mismo XML con un DoctoRelacionado.
+    rep = open(EJEMPLO, 'rb').read().replace(b'<cfdi:Complemento>', b'<cfdi:Complemento><pago20:Pagos xmlns:pago20="http://www.sat.gob.mx/Pagos20" Version="2.0">'
+                                              b'<pago20:Pago><pago20:DoctoRelacionado IdDocumento="aaaaaaaa-0000-4000-8000-000000000009" ImpPagado="500.00"/>'
+                                              b'</pago20:Pago></pago20:Pagos>')
+    if pagos_del_lote([('p.xml', leer(rep)), ('f.xml', f)]) != {'AAAAAAAA-0000-4000-8000-000000000009': [500.0, 1]} \
+            or pagos_del_lote([('f.xml', f)]) is not None:
+        fallas.append('lectura del complemento de pago')
     # Y que la lista real tenga las fechas por etapa que necesita el cruce.
     meta, lista = cargar_69b()
     if len(next(iter(lista.values()))) < 8:
@@ -309,7 +470,8 @@ def main(args):
             leidas.append((os.path.basename(ruta), leer(open(ruta, 'rb').read())))
         except (ValueError, ET.ParseError) as e:
             print('%s: no se pudo leer (%s)' % (ruta, e), file=sys.stderr)
-    for fila in (por_proveedor(leidas, lista) if prov else [renglon(n, f, lista) for n, f in leidas]):
+    pagos = pagos_del_lote(leidas)
+    for fila in (por_proveedor(leidas, lista) if prov else [renglon(n, f, lista, pagos) for n, f in leidas]):
         w.writerow(fila)
     if salida:
         out.close()

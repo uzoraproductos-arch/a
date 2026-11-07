@@ -2284,6 +2284,14 @@
   {
    "q": "¿Dan talleres para auditores?",
    "ir": "servicios.html"
+  },
+  {
+   "q": "¿Cómo reviso si una factura trae bien la retención de IVA?",
+   "ir": "herramienta-inspector-factura.html"
+  },
+  {
+   "q": "revisar complementos de pago de mis facturas",
+   "ir": "herramienta-inspector-factura.html"
   }
  ]
 }
