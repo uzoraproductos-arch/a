@@ -46,15 +46,41 @@ Fuente: INEGI, Comunicado de prensa 780/24, 10-12-2024. Se leyó el PDF.
 | Delitos contra unidades económicas | 2.9 millones (2.2 por unidad víctima) | oficial |
 | Delitos más frecuentes | Extorsión (1,562 por cada 10 mil), robo de mercancía (1,030), robo hormiga (1,002) | oficial |
 | Delitos contra unidades económicas que no se denunciaron o no se investigaron | **90.3 %** | oficial |
-| Costo total del delito para las unidades económicas | **$124.3 mil millones (0.51 % del PIB)** | oficial |
+| Costo total del delito para las unidades económicas | **$124.3 mil millones (0.51 % del PIB)**, en pesos de julio de 2018 | oficial |
 | Lo que gastaron en protegerse | $67.2 mil millones (54.0 % del costo) | oficial |
-| Cuánto del costo corresponde al fraude contra empresas | — | **pendiente** |
+| El mismo costo en pesos de 2023 (tabulado 6.1) | $160.6 mil millones; pérdidas $73.8 mil millones, protección $86.8 mil millones | oficial |
+| Fraudes contra unidades económicas (tabulado 1.16) | **249,715**, el 8.5 % de 2,924,093 delitos | oficial |
+| Tasa de fraude (tabulado 1.8) | 522 por cada 10 mil unidades económicas | oficial |
+| Cifra negra del fraude contra empresas (tabulado 3.4) | **93.9 %** (234,570 fraudes sin carpeta) | oficial |
+| Costo promedio del fraude (presentación, lámina «Costo del delito según tipo de delito») | **$18,370** en pesos de julio de 2018 (2021: $27,244; el INEGI no marca el cambio como significativo) | oficial |
+| Cuánto costó el fraude en total a las empresas | — | **pendiente** |
 
-**Pendiente:** el comunicado agrupa el fraude («fraude bancario y fraude al
-consumo del establecimiento») sin dar su costo aparte. El desglose debe estar
-en los tabulados de la ENVE 2024 del INEGI
-(<https://www.inegi.org.mx/programas/enve/2024/>). La falta es de la
-plataforma: hay que integrarlo.
+**Integrado el 07-11-2026** con `herramientas/anclar_enve_fraude.py`, que ancla
+con su huella SHA-256 los dos archivos del INEGI (los tabulados en datos
+abiertos, `conjunto_de_datos_enve_2024_csv.zip`, y la presentación de
+resultados, `enve_2024_presentacion_ejecutiva.pdf`) y escribe
+`docs/seguridad/enve-2024-fraude.json`. Se detiene si los tipos de delito no
+suman el total, si el tabulado 3.4 no trae los mismos fraudes que el 1.16 o si
+el costo deflactado no da los 124.3 mil millones de la presentación.
+
+**Puntos ciegos que encontramos:**
+
+- **Los 124.3 mil millones están en pesos de julio de 2018.** El comunicado lo
+  dice en letra chica; la prensa lo repite como si fueran pesos de hoy. En
+  pesos de 2023 fueron 160.6 mil millones. Antes la plataforma tampoco lo
+  decía: ya lo dice.
+- **El costo del fraude es un promedio, no un total.** La lámina del INEGI da
+  lo que costó en promedio cada tipo de delito, pero no dice si el promedio es
+  por delito o por empresa víctima. Multiplicar promedio × delitos no sirve:
+  con los nueve delitos que se llaman igual en la lámina y en el tabulado 1.16
+  da $73.7 mil millones, más que los $57.1 mil millones de pérdidas por
+  **todos** los delitos (tabulado 6.8). Por eso no se calcula.
+- **El fraude contra empresas no es el de las personas.** La ENVE cuenta
+  unidades económicas; la ENVIPE, personas en sus hogares. No se suman.
+
+**Pendiente:** el total del fraude contra empresas. Se puede sacar de los
+microdatos de la ENVE con sus factores de expansión; la falta es de la
+plataforma.
 
 ### 1.3 Las facturas falsas (SAT, lista 69-B)
 
@@ -358,7 +384,7 @@ antes. Mudarse lleva un día: el sitio no se compila y es HTML estático.
 ## 6. Pendientes que deja
 
 1. ~~Cotejar la tasa total de fraude 2025~~: hecho, 8,290 (presentación nacional).
-2. Sacar de los tabulados de la ENVE 2024 el costo del fraude contra empresas.
+2. El costo del fraude contra empresas (ENVE 2024): el promedio ya entró (07-11-2026); falta el total, que sale de los microdatos.
 3. El total nacional de la CONDUSEF de 2025 (posible fraude, monto, cuánto se
    recuperó): revisado el 07-11-2026, su portal no respondió (§1.4).
 4. ~~El total nacional de carpetas por fraude del SESNSP de 2025~~: hecho, 108,736 (§1.5).

@@ -1,0 +1,96 @@
+{
+ "fuente": "INEGI, Encuesta Nacional de Victimización de Empresas (ENVE) 2024, datos de 2023",
+ "pagina": "https://www.inegi.org.mx/programas/enve/2024/",
+ "zip": {
+  "url": "https://www.inegi.org.mx/contenidos/programas/enve/2024/datosabiertos/conjunto_de_datos_enve_2024_csv.zip",
+  "archivo": "conjunto_de_datos_enve_2024_csv.zip",
+  "sha": "5b2c5efccd0dfc2e196c37c5004976a67b62248a0d159ca2384dbfb0f1b0cf33"
+ },
+ "pdf": {
+  "url": "https://www.inegi.org.mx/contenidos/programas/enve/2024/doc/enve_2024_presentacion_ejecutiva.pdf",
+  "archivo": "enve_2024_presentacion_ejecutiva.pdf",
+  "sha": "806a2da6fd3f63b3bdc2e179696fa22fa37c3621e67b03ae150deb9ee1bb4b67"
+ },
+ "delitos": 2924093,
+ "fraudes": 249715,
+ "fraude_pct": 8.5,
+ "fraude_tasa": 522,
+ "fraude_sin_carpeta": 234570,
+ "fraude_cifra_negra": 93.9,
+ "costo_promedio": {
+  "Robo total de vehículo": {
+   "2023": 264399,
+   "2021": 218453,
+   "significativo": false
+  },
+  "Otro tipo de robo": {
+   "2023": 169000,
+   "2021": 9537,
+   "significativo": true
+  },
+  "Secuestro de algún(a) propietario(a)": {
+   "2023": 97055,
+   "2021": 334483,
+   "significativo": true
+  },
+  "Robo de mercancía en tránsito": {
+   "2023": 94226,
+   "2021": 60936,
+   "significativo": false
+  },
+  "Delitos informáticos": {
+   "2023": 57299,
+   "2021": 22015,
+   "significativo": true
+  },
+  "Robo de accesorios de vehículo": {
+   "2023": 25529,
+   "2021": 24295,
+   "significativo": false
+  },
+  "Robo o asalto de mercancía, dinero, insumos o bienes": {
+   "2023": 24030,
+   "2021": 30885,
+   "significativo": false
+  },
+  "Daños a instalaciones, maquinaria o equipo": {
+   "2023": 19771,
+   "2021": 14173,
+   "significativo": false
+  },
+  "Fraude": {
+   "2023": 18370,
+   "2021": 27244,
+   "significativo": false
+  },
+  "Robo hormiga": {
+   "2023": 15652,
+   "2021": 14749,
+   "significativo": false
+  },
+  "Otros delitos": {
+   "2023": 15621,
+   "2021": 15261,
+   "significativo": false
+  },
+  "Actos de corrupción": {
+   "2023": 10391,
+   "2021": 10578,
+   "significativo": false
+  },
+  "Extorsión": {
+   "2023": 8967,
+   "2021": 5665,
+   "significativo": false
+  }
+ },
+ "precios_costo_promedio": "pesos de la segunda quincena de julio de 2018",
+ "costo_total_2018": 124258035097,
+ "perdidas_2018": 57103341992,
+ "prevencion_2018": 67154693105,
+ "costo_total_corrientes": 160640373580,
+ "perdidas_corrientes": 73823010183,
+ "prevencion_corrientes": 86817363397,
+ "pib_pct": 0.51,
+ "producto_9": 73711852461
+}

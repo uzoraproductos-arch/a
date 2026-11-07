@@ -8,7 +8,9 @@ investigación completa, con lo que dice la prensa y por qué no se usa, está e
 docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md §1. Cotejado contra el documento oficial:
 
 - INEGI, ENVIPE 2026 (datos de 2025), Comunicado de prensa 50/26, 10-09-2026.
-- INEGI, ENVE 2024 (datos de 2023), Comunicado de prensa 780/24, 10-12-2024.
+- INEGI, ENVE 2024 (datos de 2023), Comunicado de prensa 780/24, 10-12-2024, y
+  el fraude contra las empresas de sus tabulados y su presentación de resultados,
+  anclados con su huella por anclar_enve_fraude.py (07-11-2026).
 - SESNSP, incidencia delictiva del fuero común (datos abiertos, estatal): las
   carpetas por fraude, ancladas con su huella por anclar_sesnsp_fraude.py y
   leídas de dimension_penal.py (07-11-2026), igual que el Planisferio.
@@ -58,6 +60,16 @@ def _chip(e, p=None):
     return '<span class="est-chip est-%s"%s>%s</span>' % (e, ' data-pend="%s"' % p if p else '', e)
 
 
+def enve():
+    """El fraude contra las empresas de la ENVE 2024, del archivo anclado por
+    anclar_enve_fraude.py (tabulados en CSV y presentación, con sus huellas)."""
+    with open(os.path.join(RAIZ, 'docs', 'seguridad', 'enve-2024-fraude.json'), encoding='utf-8') as f:
+        d = json.load(f)
+    if round(d['costo_total_2018'] / 1e9, 1) != ENVE_COSTO or round(d['prevencion_2018'] / 1e9, 1) != ENVE_PREV:
+        raise SystemExit('fraude.py: los tabulados de la ENVE no dan el costo del comunicado (%s y %s)' % (ENVE_COSTO, ENVE_PREV))
+    return d
+
+
 def lista_69b():
     """La cuenta de la 69-B sobre la copia de la plataforma: por situación y por
     tipo de persona. Sale del archivo, nunca de un número escrito a mano."""
@@ -79,9 +91,13 @@ def pendientes():
     plat = 'Falta de la plataforma: el documento existe y aún no lo integramos'
     return [
         {'id': 'fraude-enve-costo', 'tema': 'El fraude en números',
-         'que': 'Cuánto del costo del delito contra las empresas corresponde al fraude (ENVE 2024)',
-         'porque': 'El comunicado agrupa el fraude («bancario y al consumo del establecimiento») sin dar su costo aparte; el desglose está en los tabulados.',
-         'responsable': plat, 'enlace': 'https://www.inegi.org.mx/programas/enve/2024/', 'enlace_txt': 'ENVE 2024, tabulados (INEGI)', 'aparece': aqui},
+         'que': 'Cuánto le costó el fraude, en total, a las empresas en 2023 (ENVE 2024)',
+         'porque': ('El INEGI publica lo que costó en promedio el fraude (${:,} en pesos de julio de 2018), pero no el total ni si ese promedio '
+                    'es por delito o por empresa víctima. Multiplicarlo por los fraudes no sirve: hecho con los nueve delitos que se llaman '
+                    'igual en la lámina y en los tabulados da ${:.1f} mil millones, más que los ${:.1f} mil millones que perdieron las empresas '
+                    'por todos los delitos. El total se puede sacar de los microdatos de la encuesta, con sus factores de expansión, y aún '
+                    'no lo hacemos.').format(enve()['costo_promedio']['Fraude']['2023'], enve()['producto_9'] / 1e9, enve()['perdidas_2018'] / 1e9),
+         'responsable': plat, 'enlace': 'https://www.inegi.org.mx/programas/enve/2024/', 'enlace_txt': 'ENVE 2024, microdatos (INEGI)', 'aparece': aqui},
         {'id': 'fraude-condusef', 'tema': 'El fraude en números',
          'que': 'Las reclamaciones por posible fraude de 2025 en todo el país: cuántas, por cuánto y cuánto se devolvió (CONDUSEF)',
          'porque': ('Son dos cifras que no se suman: las reclamaciones que llegan a la CONDUSEF (decenas de miles al semestre, en su '
@@ -119,6 +135,10 @@ def cifras():
     corte = s['meta'].get('corte', '')
     e = (ENVIPE_TX, ENVIPE)
     v = (ENVE_TX, ENVE)
+    n = enve()
+    nf = n['costo_promedio']['Fraude']
+    vt = ('INEGI, ENVE 2024, tabulados en datos abiertos (1.8, 1.16 y 3.4)', n['zip']['url'])
+    vp = ('INEGI, ENVE 2024, presentación de resultados, lámina «Costo del delito según tipo de delito»', n['pdf']['url'])
     l = (SAT_TX + (', corte «%s»' % corte if corte else ''), s['meta']['url'])
     return [
         ('primero', 'El delito más frecuente en México', 'El fraude',
@@ -142,10 +162,20 @@ def cifras():
          'de las unidades económicas del país (%s millones) fue víctima de algún delito en 2023; entre las grandes, el %s %%' % (ENVE_UE, ENVE_GRANDES),
          'oficial', '', 'empresas', v),
         ('costo_empresas', 'Cuánto le cuesta el delito a las empresas', '$%s mil millones' % ENVE_COSTO,
-         'costó la inseguridad y el delito a las unidades económicas en 2023, el %s %% del PIB; $%s mil millones fueron gasto en protegerse'
-         % (ENVE_PIB, ENVE_PREV), 'oficial', '', 'empresas', v),
+         'costó la inseguridad y el delito a las unidades económicas en 2023, en pesos de julio de 2018 (en pesos de 2023 fueron $%.1f mil millones), '
+         'el %s %% del PIB; $%s mil millones fueron gasto en protegerse y $%.1f mil millones, pérdidas por los delitos'
+         % (n['costo_total_corrientes'] / 1e9, ENVE_PIB, ENVE_PREV, n['perdidas_2018'] / 1e9), 'oficial', '', 'empresas',
+         (ENVE_TX + ' · tabulados 6.1 y 6.8', ENVE)),
+        ('fraude_empresas', 'Cuántos fraudes sufren las empresas', _n(n['fraudes']),
+         'fraudes contra unidades económicas en 2023 (bancarios y al consumo del establecimiento): el %s %% de los %s delitos contra empresas, '
+         '%s por cada 10 mil unidades económicas' % (n['fraude_pct'], _n(n['delitos']), n['fraude_tasa']), 'oficial', '', 'empresas', vt),
+        ('costo_fraude_empresas', 'Cuánto le cuesta un fraude a una empresa', '$%s' % _n(nf['2023']),
+         'costó en promedio el fraude a las empresas en 2023, en pesos de julio de 2018 (en 2021, $%s; el INEGI %s el cambio como '
+         'estadísticamente significativo). Es un promedio: el INEGI no publica cuánto costó el fraude en total'
+         % (_n(nf['2021']), 'marca' if nf['significativo'] else 'no marca'), 'oficial', '', 'empresas', vp),
         ('oculta_empresas', 'Cuántos delitos contra empresas no se denuncian', '%s %%' % ENVE_OCULTA,
-         'de los delitos contra unidades económicas de 2023 no se denunció o no se abrió carpeta de investigación', 'oficial', '', 'empresas', v),
+         'de los delitos contra unidades económicas de 2023 no se denunció o no se abrió carpeta de investigación; en el fraude, el %s %% (%s fraudes)'
+         % (n['fraude_cifra_negra'], _n(n['fraude_sin_carpeta'])), 'oficial', '', 'empresas', (ENVE_TX + ' · tabulado 3.4', ENVE)),
         ('definitivos', 'Empresas fantasma en definitivo (lista 69-B)', _n(s['F']),
          'contribuyentes en situación definitiva en la lista 69-B (%s empresas y %s personas físicas): sus facturas «no producen ni produjeron efecto fiscal alguno» (CFF art. 69-B, párrafo quinto)'
          % (_n(s['Fm']), _n(s['Ff'])), 'derivado', 'conteo de los renglones con situación «Definitivo» en el listado del SAT', 'facturas', l),
@@ -208,10 +238,12 @@ def pagina():
                         'querer decir más denuncia, no más fraude. <a href="planisferio.html?d=penal&amp;l=pnC">Las carpetas de cada estado, en el Planisferio</a>.</p>%s')
                        % (_cifra('carpetas'), _cifra('carpetas100'), _fuente((_sesnsp()['tx'], _sesnsp()['url'])))},
             {'id': 'fr-empresas', 'titulo': 'A las empresas: una de cada cuatro', 'texto': 'Encuesta de victimización de empresas del INEGI, datos de 2023.', 'tarjetas': [],
-             'bloque': ('<ul class="leg-cifras">%s%s%s</ul><p>En las empresas el delito más frecuente fue la extorsión; el fraude se cuenta junto '
-                        'con otros delitos sin costo aparte, y ese desglose sigue %s.</p>%s')
-                       % (_cifra('empresas'), _cifra('costo_empresas'), _cifra('oculta_empresas'), _chip('pendiente', 'fraude-enve-costo'),
-                          _fuente((ENVE_TX, ENVE)))},
+             'bloque': ('<ul class="leg-cifras">%s%s%s%s%s</ul><p>En las empresas el delito más frecuente fue la extorsión. Los costos de la ENVE '
+                        'están en pesos de julio de 2018, para compararlos entre años: no se suman con pesos de hoy. Cuánto costó el fraude '
+                        'en total sigue %s: el INEGI da solo el promedio, y un promedio por el número de fraudes no da el total.</p>%s%s')
+                       % (_cifra('empresas'), _cifra('fraude_empresas'), _cifra('costo_empresas'), _cifra('costo_fraude_empresas'),
+                          _cifra('oculta_empresas'), _chip('pendiente', 'fraude-enve-costo'), _fuente((ENVE_TX, ENVE)),
+                          _fuente(('INEGI, ENVE 2024, tabulados y presentación de resultados', enve()['pagina'])))},
             {'id': 'fr-facturas', 'titulo': 'Las facturas de empresas fantasma', 'texto': 'La lista 69-B del SAT, contada sobre la copia de la plataforma.', 'tarjetas': [],
              'bloque': ('<ul class="leg-cifras">%s%s</ul><p>Una factura de un contribuyente en definitivo no sirve para deducir, y la lista cambia: '
                         'el Vigía 69-B la compara cada semana. <a href="herramienta-inspector-efos.html">Busca un RFC en la lista</a> o '
