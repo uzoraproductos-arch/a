@@ -15,8 +15,11 @@ Reglas:
   en los hogares, con su margen de error, y el fraude lo cometen particulares.
 - **La cifra oculta no es la eficacia de la fiscalía**: junta lo que la gente
   no denunció y lo que la autoridad no investigó.
-- Cinco fichas estatales dan la tasa de fraude solo en una gráfica (imagen):
-  van en gris como pendiente, con su ficha en el Registro, nunca leídas a ojo.
+- Cinco fichas estatales (Chiapas, Guerrero, Estado de México, Oaxaca y
+  Puebla) dan la tasa de fraude solo en una gráfica (imagen). Nunca se lee a
+  ojo: la suya sale del tabulado básico del INEGI (cuadro 1.13), que cuadra
+  entero con las otras 27 fichas y con el país. Cada entidad dice de dónde
+  salió su tasa en «fraude_de».
 """
 import json
 import os
@@ -31,7 +34,11 @@ def doc():
         d = json.load(f)
     if len(d['estados']) != 32:
         raise SystemExit('dimension_penal: la ENVIPE no trae a las 32 entidades')
+    if not d.get('tabulado', {}).get('sha') or not d['tabulado'].get('url'):
+        raise SystemExit('dimension_penal: falta la huella o el enlace del tabulado de la ENVIPE')
     for a, x in d['estados'].items():
+        if x['fraude'] is not None and x.get('fraude_de') not in ('ficha', 'tabulado'):
+            raise SystemExit('dimension_penal: %s no dice de dónde salió su tasa de fraude' % a)
         if not x.get('sha') or not x.get('url') or x.get('oculta') is None:
             raise SystemExit('dimension_penal: %s no trae su cifra oculta, su huella o su enlace' % a)
         if not (50 <= x['oculta'] <= 100) or (x['fraude'] is not None and not (1000 <= x['fraude'] <= 40000)):
@@ -59,12 +66,23 @@ def fuente():
     return d['fuente'], d['nacional']['url']
 
 
+def tabulado():
+    """El tabulado del INEGI de donde salen las tasas que la ficha da en gráfica."""
+    return doc()['tabulado']
+
+
+def del_tabulado():
+    return sorted(a for a, x in doc()['estados'].items() if x.get('fraude_de') == 'tabulado')
+
+
 def sin_fraude():
     return sorted(a for a, x in doc()['estados'].items() if x['fraude'] is None)
 
 
 def pendientes():
-    """Para el Registro de pendientes (pendientes.py)."""
+    """Para el Registro de pendientes (pendientes.py). Desde el 07-11-2026 las
+    32 tienen su tasa (las cinco que faltaban, del cuadro 1.13 del tabulado);
+    si una ENVIPE nueva vuelve a dejar alguna sin ella, su ficha regresa sola."""
     sin = sin_fraude()
     if not sin:
         return []
@@ -79,9 +97,9 @@ def pendientes():
 
 def chat(base):
     """Lo que lee el chat (D.pen): [abbr, tasa de fraude o null, cifra oculta,
-    delito que destaca su ficha, liga], el país y la fuente."""
+    delito que destaca su ficha, liga, de dónde salió la tasa], el país y la fuente."""
     E = estados(base)
     n = nacional()
     f, u = fuente()
-    return {'est': [[a, x['fraude'], x['oculta'], x['destaca'], x['url']] for a, x in sorted(E.items())],
+    return {'est': [[a, x['fraude'], x['oculta'], x['destaca'], x['url'], x.get('fraude_de')] for a, x in sorted(E.items())],
             'nac': [n['fraude'], n['oculta']], 'fu': {'tx': f, 'url': u}}

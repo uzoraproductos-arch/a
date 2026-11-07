@@ -259,7 +259,11 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   de `herramientas/dimension_penal.py` (`?d=penal`, `#penal` y su página en cada portal). **Más fraude
   registrado no se dice como peor gobierno** (lo cometen particulares y es una encuesta en los hogares),
   y **la cifra oculta no se dice como la eficacia de la fiscalía**. Las cinco entidades cuya ficha da
-  la tasa de fraude solo en gráfica van en gris con su pendiente (`penal-fraude-graficas`): nunca se leen a ojo.
+  la tasa de fraude solo en gráfica (Chiapas, Guerrero, Estado de México, Oaxaca y Puebla) **nunca se leen
+  a ojo**: desde el 07-11-2026 su tasa sale del tabulado básico del INEGI, cuadro 1.13 (con su huella), y el
+  script se detiene si el cuadro no da lo mismo que las otras 27 fichas y que el país (8,290). Cada entidad
+  dice de dónde salió su tasa (`fraude_de`); si una ENVIPE nueva deja alguna sin ella, vuelve a gris con
+  su pendiente (`penal-fraude-graficas`).
 - **Cada dimensión va vinculada al Contexto dimensional y al estado de resultados** (04-11-2026,
   pedido del autor). `CONTEXTO` de `dimension_social.py` dice qué página del Contexto dimensional mira
   cada dimensión a nivel federal: **una dimensión nueva necesita ahí su renglón**, o la generación se

@@ -338,6 +338,7 @@
         '<dt>Fraudes por cada 100 mil habitantes</dt><dd>' + (e.pnF == null ? esc(lf.falta.gris) + ' ' + chip('pendiente', lf.falta.pend) : '<b class="num-tabular">' + fmt(e.pnF, lf) + '</b> ' + chip('oficial')) + '</dd>' +
         '<dt>Cifra oculta</dt><dd><b class="num-tabular">' + fmt(e.pnO, lo) + '</b> ' + chip('oficial') + '</dd>' +
         (p.d ? '<dt>El delito que destaca su ficha</dt><dd>' + esc(p.d) + '</dd>' : '') + '</dl>' +
+        (p.t ? '<p class="pl-ficha-mun">Su ficha da la tasa de fraude solo en gráfica: la tomamos del tabulado del INEGI (cuadro 1.13), no a ojo.</p>' : '') +
         '<p class="pl-ficha-mun">Es lo que la gente dice haber sufrido, no las denuncias. Más fraude no es peor gobierno: lo cometen particulares.</p>' +
         '<a class="pl-ficha-ir" href="' + esc(sub(e, 'penal')) + '">Ver su fraude y su cifra oculta en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');

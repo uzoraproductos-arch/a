@@ -398,7 +398,7 @@ def _datos(base, padron):
                           'soc': {'m': z['m'], 'ix': z['ingx'], 'v': z['car']['viv'], 'b': z['car']['bas'], 'al': z['car']['ali'], 'pt': z['pobT'], 'u': z['url']}})
         # Su fraude y su cifra oculta (INEGI, ENVIPE 2026, datos de 2025).
         w = pn[e['abbr']]
-        filas[-1].update({'pnF': w['fraude'], 'pnO': w['oculta'], 'pen': {'d': w['destaca'], 'u': w['url']}})
+        filas[-1].update({'pnF': w['fraude'], 'pnO': w['oculta'], 'pen': {'d': w['destaca'], 'u': w['url'], 't': w['fraude_de'] == 'tabulado'}})
         x = ap[e['abbr']]
         filas[-1].update({'apP': x['per'], 'apK': x['perk'], 'apX': x['pres'], 'apD': x['ad'], 'apG': x['gpa'], 'apM': x['mpres'], 'apA': x['mpa'],
                           'apu': {'tit': x['tit'], 'con': x['con'], 'ga': x['ga'], 'ma': x['ma'], 'presp': x['presp'], 'mpresp': x['mpresp'],
@@ -753,7 +753,10 @@ def _fuentes(ref, base=None):
     import dimension_penal as dpe
     pe_f, pe_u = dpe.fuente()
     pen = ('%s (<a href="%s">presentación nacional</a>; cada estado con su ficha y su huella SHA-256 en <code>docs/seguridad/envipe-2026-entidades.json</code>)') % (pe_f, pe_u)
-    extra.update({'pnF': pen + '. Se toma del texto de cada ficha estatal.', 'pnO': pen + '.'})
+    tb = dpe.tabulado()
+    extra.update({'pnF': pen + ('. Se toma del texto de cada ficha estatal; la de %s, cuya ficha la da solo en gráfica, del <a href="%s">tabulado básico del INEGI</a>, '
+                                'cuadro 1.13 (huella SHA-256 <code>%s…</code>), que da las mismas cifras que las otras 27 fichas.') % (
+                      ', '.join(dpe.del_tabulado()), tb['url'], tb['sha'][:12]), 'pnO': pen + '.'})
     extra['obr'] = tm.FUENTE_OBRAS
     extra.update({'peT': pe + '.', 'peV': pe + '. Miles de pesos ÷ 1,000: la cuenta es nuestra.'})
     extra.update({'incH': ic + '.', 'incN': ic + '.', 'sfT': sf + '.',
@@ -912,9 +915,10 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
     nota_soc = _nota_soc(filas)
     nota_pen = _nota_pen(filas)
     import dimension_penal as dpe
-    falta['pnF'] = {'a': dpe.sin_fraude(), 'gris': 'solo en gráfica', 'pend': dpe.PEND,
-                    'txt': ('En la ficha estatal del INEGI de estas entidades el delito que se destaca es otro, y su tasa de fraude viene solo en una gráfica. '
-                            'No la leemos a ojo: queda pendiente hasta tomarla de los tabulados de la ENVIPE.')}
+    if dpe.sin_fraude():
+        falta['pnF'] = {'a': dpe.sin_fraude(), 'gris': 'solo en gráfica', 'pend': dpe.PEND,
+                        'txt': ('En la ficha estatal del INEGI de estas entidades el delito que se destaca es otro, y su tasa de fraude viene solo en una gráfica. '
+                                'No la leemos a ojo: queda pendiente hasta tomarla de los tabulados de la ENVIPE.')}
     sin_ref = [f['a'] for f in filas if f['refj'] is None]
     for i in ('refj', 'refp', 'refu'):
         falta[i] = {'a': sin_ref, 'gris': 'sin refinería de PEMEX', 'pend': None,
@@ -1217,11 +1221,10 @@ def _nota_pen(filas):
     return ('<b>Más fraude registrado no es peor gobierno.</b> %s tiene la tasa más alta, %s fraudes por cada 100 mil habitantes %s (en el país, %s), y %s la más baja, %s. '
             'El fraude lo cometen particulares, y la ENVIPE es una encuesta en los hogares con su margen de error: donde la gente usa más la banca y el comercio en línea, '
             'también hay más con qué defraudarla. <b>La cifra oculta no es la eficacia de la fiscalía.</b> Va de %s %% en %s a %s %% en %s %s, y junta lo que la gente '
-            'no denunció con lo que la autoridad no investigó. <b>Lo que falta:</b> la tasa de fraude de %d entidades, que su ficha da solo en gráfica %s, y las carpetas '
-            'por fraude de las fiscalías (SESNSP), que aún no integramos.') % (
+            'no denunció con lo que la autoridad no investigó. <b>Lo que falta:</b> %slas carpetas por fraude de las fiscalías (SESNSP), que aún no integramos.') % (
         f[0]['n'], format(f[0]['pnF'], ','), chip('oficial'), format(n['fraude'], ','), f[-1]['n'], format(f[-1]['pnF'], ','),
         format(o[-1]['pnO'], '.1f'), o[-1]['n'], format(o[0]['pnO'], '.1f'), o[0]['n'], chip('oficial'),
-        len(dpe.sin_fraude()), chip('pendiente', dpe.PEND))
+        ('la tasa de fraude de %d entidades, que su ficha da solo en gráfica %s, y ' % (len(dpe.sin_fraude()), chip('pendiente', dpe.PEND))) if dpe.sin_fraude() else '')
 
 
 def _penal_portal(base, ref, e):
@@ -1232,16 +1235,20 @@ def _penal_portal(base, ref, e):
     a, nom = e['abbr'], e['name']
     z = pn[a]
     con = [b for b in pn if pn[b]['fraude'] is not None]
-    fr = ('%s %s <small>lugar %d de %d con cifra; en el país, %s</small>' % (format(z['fraude'], ','), chip('oficial'),
+    fr = ('%s %s <small>lugar %d de %d; en el país, %s</small>' % (format(z['fraude'], ','), chip('oficial'),
           sorted(con, key=lambda b: -pn[b]['fraude']).index(a) + 1, len(con), format(na['fraude'], ','))
           if z['fraude'] is not None else 'Su ficha la da solo en gráfica %s' % chip('pendiente', dpe.PEND))
+    tb = dpe.tabulado()
+    de_tab = ('; su tasa de fraude, que su ficha da solo en gráfica, del <a href="%s">tabulado básico, cuadro 1.13</a> (huella <code>%s…</code>)' % (
+        html.escape(tb['url']), tb['sha'][:12])) if z.get('fraude_de') == 'tabulado' else ''
+
     p1 = ('<article class="pl-piso"><h3>🚨 Fraude y cifra oculta en %s · 2025</h3>'
           '<dl class="pl-dl"><dt>Fraudes por cada 100 mil habitantes</dt><dd>%s</dd>'
           '<dt>Cifra oculta</dt><dd>%s %s <small>lugar %d de 32; en el país, %s</small></dd>'
           '<dt>El delito que destaca su ficha</dt><dd>%s</dd></dl>'
-          '<p class="pl-piso-f">INEGI, ENVIPE 2026, <a href="%s">principales resultados de %s</a> (huella SHA-256 <code>%s…</code>).</p></article>') % (
+          '<p class="pl-piso-f">INEGI, ENVIPE 2026, <a href="%s">principales resultados de %s</a> (huella SHA-256 <code>%s…</code>)%s.</p></article>') % (
               html.escape(nom), fr, pct(z['oculta']), chip('oficial'), sorted(pn, key=lambda b: -pn[b]['oculta']).index(a) + 1, pct(na['oculta']),
-              html.escape(z['destaca'] or 'sin dato'), html.escape(z['url']), html.escape(nom), z['sha'][:12])
+              html.escape(z['destaca'] or 'sin dato'), html.escape(z['url']), html.escape(nom), z['sha'][:12], de_tab)
     ciego = ('<p class="pl-dim-nota"><b>Lo que estas cifras no dicen.</b> La ENVIPE cuenta lo que la gente dice haber sufrido, no las denuncias. Más fraude registrado '
              'no es peor gobierno: lo cometen particulares. Y la cifra oculta junta lo que no se denunció con lo que no se investigó.</p>')
     ir = ('<p class="pl-ficha-ir"><a href="planisferio.html?d=penal&amp;e=%s">El fraude de los 32 estados, en el mapa ➔</a> '
