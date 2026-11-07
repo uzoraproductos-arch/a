@@ -99,6 +99,15 @@ y la metodología con fundamento de cada señal.
 
 ---
 
+## 4 bis. Lo que tomamos de getquin
+
+Su estudio está en `docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md` §3.4. Lo que entra al
+catálogo: **planes con su lista de «qué agrega»** a la vista, la pregunta
+**«¿Cómo nos sostenemos?»**, **contadores de la base** en la portada, una
+**página por función** para Google, **«Deja el Excel de proveedores»**,
+**seguir** a un ente o un proveedor y un **calendario de plazos** del 69-B.
+Lo que no: publicidad y carteras compartidas.
+
 ## 5. Puntos ciegos
 
 1. **No hay precios ni clientes.** Ningún paquete tiene precio hasta 3 a 5 pilotos con cotización escrita.

@@ -436,6 +436,90 @@ formatos (`REVISOR`, `MODULOS`, `COMO`, `SV_NOVEDADES`, `CIERRE` de
    nosotros revisamos a sus proveedores. Pueden recomendarse uno al otro sin
    pisarse.
 
+### 3.4 getquin (getquin.com) · QUIN Technologies GmbH, Berlín
+
+**Leída el 07-11-2026** (pedido del autor: «un estudio de esta página que nos
+pueda servir»). Se abrieron con el navegador la portada, `/pricing/`,
+`/getquin-ai/`, `/security/`, `/stock-forum/`, `/about-us/` y
+`/spreadsheet-tracker/`. **No es competidor**: es una plataforma alemana de
+patrimonio personal (inversiones, dividendos, jubilación). Sirve por **cómo
+vende, cómo cobra y cómo explica su seguridad**. Todo lo de abajo es lo que
+ellos dicen; no se cotejó.
+
+**Cómo se presenta:** «Your entire wealth. One platform.» Fundada en 2020;
+dice tener «+500k Users», «+20 B € Tracked on getquin» y «10,000+ 5-Star
+Ratings».
+
+**La arquitectura de su portada, en orden:** contadores arriba (usuarios y
+dinero seguido) → titular de seis palabras y un solo botón («Start now») →
+«Featured on» (prensa) → seis bloques de función, cada uno con antetítulo,
+título, dos líneas y el mismo botón (importar, analítica, seguimiento en
+tiempo real, ingresos y gastos, jubilación, agentes de IA) → seguridad →
+reseñas de la App Store → «en todos tus dispositivos» → un pie con una
+**página por función** (Portfolio Tracker, Dividend Tracker, Stock Forum,
+Spreadsheet Tracker…), que son sus puertas desde Google.
+
+**Sus planes, con precio publicado** (por año, sin impuestos):
+
+| Plan | Precio | Qué agrega |
+|---|---|---|
+| Free | 0 € | Conexiones ilimitadas a bancos y casas de bolsa, datos en tiempo real, patrimonio neto y análisis básico |
+| Premium | 89,99 € | Análisis con IA, pronóstico de dividendos, analítica avanzada y desglose de la cartera |
+| Wealth | 149,99 € | Plan financiero, metas, plan de retiro y «Unlimited access to AI financial agents» |
+
+**Su comunidad:** un foro por cada acción («Thousands of forums such as the
+Tesla stock forum»), seguir acciones y personas, y compartir tu cartera:
+«the default mode is "private"»; si la compartes, se ven los nombres de lo
+que compras, «won't be able to see the exact amount».
+
+**Su página de seguridad, en seis bloques:** servidores en Alemania y Europa
+(PCI-DSS); «No data sharing or selling»; datos mínimos («need-to-know»);
+tres formas de importar (API de solo lectura, a mano o PDF; cifrado
+AES-256); borrar todo cuando quieras; y una pregunta frecuente que casi nadie
+pone: **«How does getquin make money?»** («Premium subscriptions… We also
+generate revenue through advertising within the app»).
+
+**Su página «Say goodbye to spreadsheets»:** le habla a quien lleva su
+cartera en Excel y le enseña, punto por punto, qué hace la app que el Excel
+no.
+
+**Puntos ciegos de su discurso:**
+
+1. **«No one can access your data – not even us»** convive con un agente de
+   IA que «knows your data» y con publicidad dentro de la app. Las dos cosas
+   pueden ser ciertas a la vez, pero la frase promete más de lo que explica.
+2. **«We do not request personal data»**, y su conexión rápida pide «log in
+   to your broker via getquin and save your PIN». Su FAQ matiza: las
+   contraseñas no se guardan «without your consent». Es justo lo que
+   nosotros no pedimos (la CIEC).
+3. **Las cifras de portada son suyas** (usuarios, euros, reseñas); su
+   portada repite las mismas tres reseñas.
+4. **«Expert advice»** e IA que te dice «if it's time to harvest losses» rozan
+   la asesoría de inversión. En Auditavisión el equivalente sería opinar
+   sobre si pagar o no a un proveedor: **no lo hacemos**; damos la señal y
+   su artículo.
+5. **El dinero que levantó no consta en un documento suyo.** La ronda Serie A
+   de 2022 (15 millones de dólares, encabezada por Portage Ventures) la
+   reporta su despacho, Jones Day; la de mayo de 2026, solo agregadores que
+   no coinciden en el monto.
+
+**Qué nos sirve, y cómo, con nuestras reglas:**
+
+| Lo de getquin | Para Auditavisión | Regla que lo limita |
+|---|---|---|
+| Contadores en la portada | Contadores **de la base**: documentos con huella, RFC de la 69-B, contratos, municipios. Salen del inventario, no se escriben a mano | §2: cada número con su chip |
+| Tres planes con precio a la vista | Nuestros cinco planes (`docs/CATALOGO-SERVICIOS.md` §3) con su lista de «qué agrega» | Sin precio hasta los pilotos |
+| «How does getquin make money?» | **«¿Cómo nos sostenemos?»** en Seguridad y en Preguntas: servicios y donaciones, **sin publicidad** | Política de independencia |
+| Página de seguridad en seis bloques | «Tu información, protegida por diseño», ampliada: qué se queda en tu navegador, qué guardamos (solo si pides el Vigía), cómo borrarlo | Aviso de privacidad |
+| «Say goodbye to spreadsheets» | **«Deja el Excel de proveedores»**: una página para quien revisa la 69-B a mano | Sin cifras de ahorro inventadas |
+| Una página por función | Páginas de entrada para Google: «Verificar un RFC en la 69-B», «Revisar facturas sin subirlas», «Contratos de un proveedor con el gobierno» | Se indexan solo sin candado |
+| Foro por acción, seguir | **Seguir a un ente, un municipio o un proveedor** y ver su línea de tiempo (notas Al momento, ASF, 69-B). Ya existe «seguir» en las columnas | No se nombra a personas privadas |
+| Cartera compartida sin montos | No se adopta: una cartera de proveedores es información del cliente | Privacidad |
+| Calendario de dividendos | **Calendario de plazos**: los 30 días del art. 69-B de cada proveedor señalado y la Agenda del erario | Cada plazo con su artículo |
+| Agentes de IA en el plan caro | La IA del Auditor por créditos, solo con fichas | Ya funciona así (§5 ter) |
+| Publicidad, «Advertise with us» | **No** | Independencia |
+| Programa de socios | Sí: despachos que recomiendan el Vigía | Por escrito y a la vista |
+
 ## 4. Por qué dejar GitHub Pages, y a dónde
 
 ### 4.1 El porqué
