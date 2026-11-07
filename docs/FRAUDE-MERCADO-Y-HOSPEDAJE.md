@@ -83,9 +83,25 @@ falta de transparencia de esa dependencia.
 - **No encontramos su total nacional de 2025.** Las notas de prensa dan
   cifras que no cuadran entre sí: 1.57 millones de reclamaciones en un
   trimestre, 43,871 en un semestre y «más de ocho millones» en 2024.
-- Las cifras de la CONDUSEF quedan **pendientes**: hay que bajar sus
-  comunicados y su estadística (<https://www.condusef.gob.mx>) y cotejarlas
-  una por una. Hoy el servidor de su estadística respondió con error 503.
+- **Son dos universos que no se suman** (revisado el 07-11-2026, a pedido del
+  autor: «continúa con las reclamaciones»):
+  1. Las reclamaciones que **llegan a la CONDUSEF**: decenas de miles al
+     semestre. Su Informe de Autoevaluación de enero a junio de 2025
+     (`condusef.gob.mx/documentos/transparencia/IA-ENE-JUN-2025.pdf`) da,
+     según el buscador, 37,582 por posible fraude (28 % de las atendidas).
+  2. Las que la gente presenta **ante su propio banco** (estadística de la
+     CONDUSEF sobre lo que reportan las instituciones): millones. La prensa
+     dice 2.48 millones en el primer semestre de 2025, con 10,714 millones de
+     pesos reclamados y 2,556 millones abonados.
+- **Ninguna entra todavía.** El 07-11-2026 el portal de la CONDUSEF respondió
+  con error 503 (y reinicio de conexión) a todas sus direcciones, también a sus
+  PDF de transparencia; sin el documento no hay huella ni cotejo, y las cifras de
+  arriba son del buscador y de la prensa, **sin verificar**. Tampoco existe aún,
+  que sepamos, el informe de enero a diciembre de 2025.
+- **Cómo cerrarlo:** bajar el Informe de Autoevaluación anual 2025 (o los dos
+  semestrales) y la estadística de reclamaciones del portal de la CONDUSEF
+  cuando responda, o que el autor los baje desde su navegador y los suba al
+  repositorio; con eso se ancla con su huella como las carpetas del SESNSP.
 
 ### 1.5 Las carpetas de investigación por fraude (SESNSP)
 
@@ -344,7 +360,7 @@ antes. Mudarse lleva un día: el sitio no se compila y es HTML estático.
 1. ~~Cotejar la tasa total de fraude 2025~~: hecho, 8,290 (presentación nacional).
 2. Sacar de los tabulados de la ENVE 2024 el costo del fraude contra empresas.
 3. El total nacional de la CONDUSEF de 2025 (posible fraude, monto, cuánto se
-   recuperó).
+   recuperó): revisado el 07-11-2026, su portal no respondió (§1.4).
 4. ~~El total nacional de carpetas por fraude del SESNSP de 2025~~: hecho, 108,736 (§1.5).
 5. Cotejar en la práctica lo que dicen WiseCricket y Legal Hunt (lo de §3 es
    su publicidad); revisar sus avisos de privacidad y términos.

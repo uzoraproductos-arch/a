@@ -83,9 +83,12 @@ def pendientes():
          'porque': 'El comunicado agrupa el fraude («bancario y al consumo del establecimiento») sin dar su costo aparte; el desglose está en los tabulados.',
          'responsable': plat, 'enlace': 'https://www.inegi.org.mx/programas/enve/2024/', 'enlace_txt': 'ENVE 2024, tabulados (INEGI)', 'aparece': aqui},
         {'id': 'fraude-condusef', 'tema': 'El fraude en números',
-         'que': 'Las reclamaciones nacionales por posible fraude de 2025: cuántas, por cuánto y cuánto se recuperó (CONDUSEF)',
-         'porque': 'La CONDUSEF publica sus cifras por entidad; no encontramos su total nacional de 2025, y las notas de prensa no cuadran entre sí.',
-         'responsable': 'CONDUSEF: publica comunicados por estado, pero no encontramos el total nacional de 2025 en su portal',
+         'que': 'Las reclamaciones por posible fraude de 2025 en todo el país: cuántas, por cuánto y cuánto se devolvió (CONDUSEF)',
+         'porque': ('Son dos cifras que no se suman: las reclamaciones que llegan a la CONDUSEF (decenas de miles al semestre, en su '
+                    'Informe de Autoevaluación) y las que la gente presenta ante su propio banco (millones, en la estadística de la '
+                    'CONDUSEF). El 07-11-2026 el portal de la CONDUSEF respondió con error 503 y no pudimos bajar ni cotejar sus '
+                    'documentos; las cifras que repite la prensa no entran sin documento.'),
+         'responsable': 'Falta de la plataforma: los documentos existen, pero el servidor de la CONDUSEF no respondió al cotejo (07-11-2026)',
          'enlace': 'https://www.condusef.gob.mx', 'enlace_txt': 'CONDUSEF, estadística', 'aparece': aqui},
         {'id': 'fraude-efos-monto', 'tema': 'El fraude en números',
          'que': 'Cuánto facturaron las empresas de la lista 69-B (operaciones simuladas)',
