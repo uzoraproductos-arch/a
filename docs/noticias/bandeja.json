@@ -1,7 +1,907 @@
 {
- "actualizado": "4 de noviembre de 2026",
+ "actualizado": "7 de noviembre de 2026",
  "nota": "Titulares que junta herramientas/recolectar_noticias.py, sin verificar. Solo titular, medio, fecha y liga; nunca el texto de la nota.",
  "notas": [
+  {
+   "titulo": "¡México gastará más de 10 billones de pesos! ¿Más bienestar para las familias o solamente más dinero para el gobierno?",
+   "medio": "sdpnoticias",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://www.sdpnoticias.com/opinion/mexico-gastara-mas-de-10-billones-de-pesos-mas-bienestar-para-las-familias-o-solamente-mas-dinero-para-el-gobierno/",
+   "tema": "presupuesto",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://www.sdpnoticias.com/opinion/mexico-gastara-mas-de-10-billones-de-pesos-mas-bienestar-para-las-familias-o-solamente-mas-dinero-para-el-gobierno/"
+  },
+  {
+   "titulo": "Aumenta 180% inversión en infraestructura de salud: Hacienda",
+   "medio": "Puente Libre",
+   "fecha": "7 de noviembre de 2026",
+   "url": "https://puentelibre.mx/local/aumenta-180-inversion-en-infraestructura-de-salud-hacienda/",
+   "tema": "deuda",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://puentelibre.mx/local/aumenta-180-inversion-en-infraestructura-de-salud-hacienda/"
+  },
+  {
+   "titulo": "Reporta Hacienda crecimiento en inversión para salud, educación y vivienda",
+   "medio": "enblancoynegro",
+   "fecha": "7 de noviembre de 2026",
+   "url": "https://enblancoynegro.com.mx/2026/11/07/reporta-hacienda-crecimiento-en-inversion-para-salud-educacion-y-vivienda/",
+   "tema": "deuda",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://enblancoynegro.com.mx/2026/11/07/reporta-hacienda-crecimiento-en-inversion-para-salud-educacion-y-vivienda/"
+  },
+  {
+   "titulo": "Deuda pública crecerá más que los ingresos, gastos y la economía en el 2027",
+   "medio": "El Economista",
+   "fecha": "5 de octubre de 2026",
+   "url": "https://www.eleconomista.com.mx/economia/deuda-publica-crecera-ingresos-gastos-economia-20261005-837053.html",
+   "tema": "deuda",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/economia/deuda-publica-crecera-ingresos-gastos-economia-20261005-837053.html"
+  },
+  {
+   "titulo": "Sheinbaum frena el ritmo de la deuda, asegura Hacienda",
+   "medio": "Diario Presente",
+   "fecha": "7 de octubre de 2026",
+   "url": "https://www.diariopresente.mx/mexico/crecimiento-deuda-gobierno-sheinbaum-y-estrategia-fiscal/469223",
+   "tema": "deuda",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://www.diariopresente.mx/mexico/crecimiento-deuda-gobierno-sheinbaum-y-estrategia-fiscal/469223"
+  },
+  {
+   "titulo": "En un “mapa de relaciones de investigación”, la ASF expone 89 vínculos entre contratistas del INE",
+   "medio": "Cambio de Michoacán",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://cambiodemichoacan.com.mx/2026/11/06/en-un-mapa-de-relaciones-de-investigacion-la-asf-expone-89-vinculos-entre-contratistas-del-ine/",
+   "tema": "asf",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://cambiodemichoacan.com.mx/2026/11/06/en-un-mapa-de-relaciones-de-investigacion-la-asf-expone-89-vinculos-entre-contratistas-del-ine/"
+  },
+  {
+   "titulo": "La SIOP de Nahle da contratos millonarios a empresas consentidas en Veracruz",
+   "medio": "e-veracruz",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://e-veracruz.mx/estado/la-siop-de-nahle-da-contratos-millonarios-a-empresas-consentidas-en-veracruz",
+   "tema": "contratos",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://e-veracruz.mx/estado/la-siop-de-nahle-da-contratos-millonarios-a-empresas-consentidas-en-veracruz"
+  },
+  {
+   "titulo": "ISSSTE e IMSS confirman fechas de pago para pensionados en diciembre de 2026",
+   "medio": "Debate on MSN",
+   "fecha": "7 de noviembre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/otras/issste-e-imss-confirman-fechas-de-pago-para-pensionados-en-diciembre-de-2026/ar-AA2gYeaz",
+   "tema": "salud",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://www.msn.com/es-mx/noticias/otras/issste-e-imss-confirman-fechas-de-pago-para-pensionados-en-diciembre-de-2026/ar-AA2gYeaz"
+  },
+  {
+   "titulo": "IMSS e ISSSTE rinden cuentas: más camas, menos rezago y 13 robots quirúrgicos",
+   "medio": "sumedico.com",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://www.sumedico.com/especialidades/otras-enfermedades/2026/11/6/imss-e-issste-rinden-cuentas-mas-camas-menos-rezago-y-13-robots-quirurgicos-53944.html",
+   "tema": "salud",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://www.sumedico.com/especialidades/otras-enfermedades/2026/11/6/imss-e-issste-rinden-cuentas-mas-camas-menos-rezago-y-13-robots-quirurgicos-53944.html"
+  },
+  {
+   "titulo": "Gozarán estados y ayuntamientos de $3 billones en 2027",
+   "medio": "Milenio.com (español) on MSN",
+   "fecha": "7 de noviembre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/mexico/gozar%C3%A1n-estados-y-ayuntamientos-de-3-billones-en-2027/ar-AA2gWyso",
+   "tema": "estados",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://www.msn.com/es-mx/noticias/mexico/gozar%C3%A1n-estados-y-ayuntamientos-de-3-billones-en-2027/ar-AA2gWyso"
+  },
+  {
+   "titulo": "Pumas y América chocan en CU; la liguilla y el liderato, en juego",
+   "medio": "La Jornada",
+   "fecha": "7 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/noticia/2026/11/07/deportes/pumas-y-america-chocan-en-cu-la-liguilla-y-el-liderato-en-juego",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/noticia/2026/11/07/deportes/pumas-y-america-chocan-en-cu-la-liguilla-y-el-liderato-en-juego"
+  },
+  {
+   "titulo": "Reduce Hacienda 38.84% subsidio especial al diésel; mantiene exención del IEPS",
+   "medio": "La Jornada",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/noticia/2026/11/06/economia/reduce-hacienda-3884-subsidio-especial-al-diesel-mantiene-exencion-del-ieps",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/noticia/2026/11/06/economia/reduce-hacienda-3884-subsidio-especial-al-diesel-mantiene-exencion-del-ieps"
+  },
+  {
+   "titulo": "Diputados prevén nuevo recorte de mil mdp al INE",
+   "medio": "La Jornada",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/noticia/2026/11/06/politica/comision-de-diputados-avala-recorte-al-ine-en-presupuesto-2027",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/noticia/2026/11/06/politica/comision-de-diputados-avala-recorte-al-ine-en-presupuesto-2027"
+  },
+  {
+   "titulo": "Guanajuato: renuncia subsecretario de Diversidad Sexual por falta de presupuesto",
+   "medio": "La Jornada",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/noticia/2026/11/06/estados/guanajuato-renuncia-subsecretario-de-diversidad-sexual-por-subejercicio-presupuestal",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/noticia/2026/11/06/estados/guanajuato-renuncia-subsecretario-de-diversidad-sexual-por-subejercicio-presupuestal"
+  },
+  {
+   "titulo": "Avalan diputados nuevo recorte a los recursos del organismo electoral",
+   "medio": "La Jornada",
+   "fecha": "7 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/2026/11/07/politica/005n1pol",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/2026/11/07/politica/005n1pol"
+  },
+  {
+   "titulo": "Diputados aplican más recortes a presupuesto del INE para 2027: ¿Cómo queda su gasto?",
+   "medio": "El Financiero",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://www.elfinanciero.com.mx/nacional/2026/11/06/diputados-aplican-mas-recortes-a-presupuesto-del-ine-para-2027-como-queda-su-gasto/",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://www.elfinanciero.com.mx/nacional/2026/11/06/diputados-aplican-mas-recortes-a-presupuesto-del-ine-para-2027-como-queda-su-gasto/"
+  },
+  {
+   "titulo": "Claudia Sheinbaum respalda reducción de cinco mil millones al INE",
+   "medio": "El Informador",
+   "fecha": "7 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQOWpYXzViTFkyOUpVMk5YeHE3djZJb2xnZXY4aDNzclhqY1cxNDBQY25xR2J4RkxzbDl4djBKU1VfbUkxM2ptMjhTMUVhb2E2c2xwd1F2VUlJZ3lIVnZiLWlBZloxMW1WUzVoT0dOT3lGTk1FZ3Y4bGtqcG8xQUlKajExZjhwUjhtRS15VGFsN1lZc3ROdEF3cTZ3eU5CZXhrWXFtS2NpN05Tc2ZvRERwZWpNT2kydWh4UGVOUWtzYVhjd9IBxwFBVV95cUxPYWZHTmVPNVE3aTk0Qi05UFl0WWJaTldTVExZdGVvbzZJUXRXUklOcWljazJURndRTFdUa0oxXzJEX1QtTmIwSVZvbFVUSDhBNXFpckZXWjN6c0VGTUNDcTdjek1qZWxTalNvWUVpME5DeVBmMGFBOENlVGVlWHRiUHYxRHNoRVBfWWZUc0JzTVhkMWR3S0x2TXUzejAxLTk3QUNqMGhwY0tSMFMtbms3ZGszMVNGZGFDRk1ZZm5oUWE2RTR3ZFRB?oc=5",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQOWpYXzViTFkyOUpVMk5YeHE3djZJb2xnZXY4aDNzclhqY1cxNDBQY25xR2J4RkxzbDl4djBKU1VfbUkxM2ptMjhTMUVhb2E2c2xwd1F2VUlJZ3lIVnZiLWlBZloxMW1WUzVoT0dOT3lGTk1FZ3Y4bGtqcG8xQUlKajExZjhwUjhtRS15VGFsN1lZc3ROdEF3cTZ3eU5CZXhrWXFtS2NpN05Tc2ZvRERwZWpNT2kydWh4UGVOUWtzYVhjd9IBxwFBVV95cUxPYWZHTmVPNVE3aTk0Qi05UFl0WWJaTldTVExZdGVvbzZJUXRXUklOcWljazJURndRTFdUa0oxXzJEX1QtTmIwSVZvbFVUSDhBNXFpckZXWjN6c0VGTUNDcTdjek1qZWxTalNvWUVpME5DeVBmMGFBOENlVGVlWHRiUHYxRHNoRVBfWWZUc0JzTVhkMWR3S0x2TXUzejAxLTk3QUNqMGhwY0tSMFMtbms3ZGszMVNGZGFDRk1ZZm5oUWE2RTR3ZFRB?oc=5"
+  },
+  {
+   "titulo": "Fraudes con tarjetas de crédito elevan las reclamaciones bancarias en Jalisco",
+   "medio": "El Informador",
+   "fecha": "1 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPX29waVJrNHJTdjd2NHIzLUgxMlJWN2ZRWHFwQlFIa2VmZ3FVX3JqWUFVbkU0elM2TFo4TXFMQVQ3dmtUSjRGOURMSXMxYU02RnhXMGliTGo1WGowZWVSU3JFcmxnSEpiMF9nWjdyQ2hLLTRGU2JkUGdiSEVkQ2tpcFN1MFk5WDg3UWxFWFNDRlloZ0tTczgtcFB4R2IxZWY2TzRBck1UVlRhUVI3MDlYU0RubHpPakdsSzF1VlF4QVpuRXloZmdZQ1h30gHPAUFVX3lxTFBXcVBDdVNTNVFieHJ6b2JGMmlUNTNEeVpYdDZ0eFh1U3cyQTlfQjY2UHRjankwejRaWHpMTEpucDNyLWtpNG5XVVdlQlRzT0tER3pqZFB3azc4d3l0QTdHZDhHTHVtYkloWjZSSTRpdllIREpJT2VRU085OEVaTEdXZVRUNUxfMlVTRVByQnR4REZ1M2RXdGdZbk0wV0xTbjAySHNEbkttTmJHMld6ampXd092WDN6UVNXZXBZZFBOdzQ3bHJxelFSSWwwaDdWUQ?oc=5",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPX29waVJrNHJTdjd2NHIzLUgxMlJWN2ZRWHFwQlFIa2VmZ3FVX3JqWUFVbkU0elM2TFo4TXFMQVQ3dmtUSjRGOURMSXMxYU02RnhXMGliTGo1WGowZWVSU3JFcmxnSEpiMF9nWjdyQ2hLLTRGU2JkUGdiSEVkQ2tpcFN1MFk5WDg3UWxFWFNDRlloZ0tTczgtcFB4R2IxZWY2TzRBck1UVlRhUVI3MDlYU0RubHpPakdsSzF1VlF4QVpuRXloZmdZQ1h30gHPAUFVX3lxTFBXcVBDdVNTNVFieHJ6b2JGMmlUNTNEeVpYdDZ0eFh1U3cyQTlfQjY2UHRjankwejRaWHpMTEpucDNyLWtpNG5XVVdlQlRzT0tER3pqZFB3azc4d3l0QTdHZDhHTHVtYkloWjZSSTRpdllIREpJT2VRU085OEVaTEdXZVRUNUxfMlVTRVByQnR4REZ1M2RXdGdZbk0wV0xTbjAySHNEbkttTmJHMld6ampXd092WDN6UVNXZXBZZFBOdzQ3bHJxelFSSWwwaDdWUQ?oc=5"
+  },
+  {
+   "titulo": "Lista de colonias con cortes de agua HOY viernes en el AMG por los tandeos",
+   "medio": "El Informador",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQRVkwZTBmLW1ucmJsblVLbnd4a0JOamE1X3FaMnYxeTk0bGFYbC1BZFJEUzlOUURtcXBVaWFYcmtxb2lDVlk0aV9ldHo2ejR3d2FrTEw4ZFE5QXZ2dWJGTFU1YWxxNVFlWktPQThacHItdk9KSFpmcG5sYlFHYzdLdWdFUFgzdnpwRzU3NDhoVkdaQ01xV2RVc3FyaTJsSjhYNUh2bW83YUxoU3EtZ3AwVmFUMkxUczk3MDZKRWFHZEZtdkNwMW9ndnpPdWJfV2x2ZW9BcTA2VdIB3AFBVV95cUxONDdpV1lnVkhTZExqS2tNQk5fWXdTYkduS2NzZnA4clNsSEVTS3hmblN2ZnVDcXpaWFRLR3B1Y1RSSmpKWm9yNnd4RVFZVk9XX0ZmLW5CS29uTVBqeElrRzNNNGxKQ24xb3RfSkF4T091a19tUmVKSGZRT1pBRGNLZGhoUUtwVldWaXNLQXdoQzJqWWJSX0FvX25BOW9GVl81amRGWHVVVno1cGVJQWc2MGptS3RxUmdOa2pBVEQ0N2Q5OVpfNXRQUnM2OU42LXJybHYwMDFCenViV2VT?oc=5",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQRVkwZTBmLW1ucmJsblVLbnd4a0JOamE1X3FaMnYxeTk0bGFYbC1BZFJEUzlOUURtcXBVaWFYcmtxb2lDVlk0aV9ldHo2ejR3d2FrTEw4ZFE5QXZ2dWJGTFU1YWxxNVFlWktPQThacHItdk9KSFpmcG5sYlFHYzdLdWdFUFgzdnpwRzU3NDhoVkdaQ01xV2RVc3FyaTJsSjhYNUh2bW83YUxoU3EtZ3AwVmFUMkxUczk3MDZKRWFHZEZtdkNwMW9ndnpPdWJfV2x2ZW9BcTA2VdIB3AFBVV95cUxONDdpV1lnVkhTZExqS2tNQk5fWXdTYkduS2NzZnA4clNsSEVTS3hmblN2ZnVDcXpaWFRLR3B1Y1RSSmpKWm9yNnd4RVFZVk9XX0ZmLW5CS29uTVBqeElrRzNNNGxKQ24xb3RfSkF4T091a19tUmVKSGZRT1pBRGNLZGhoUUtwVldWaXNLQXdoQzJqWWJSX0FvX25BOW9GVl81amRGWHVVVno1cGVJQWc2MGptS3RxUmdOa2pBVEQ0N2Q5OVpfNXRQUnM2OU42LXJybHYwMDFCenViV2VT?oc=5"
+  },
+  {
+   "titulo": "Alejandro Moreno alista denuncias contra Taddei ante la UIF, Auditoría y FGR",
+   "medio": "El Informador",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPSEhyQWtIb19iSzNlbFljd0U4a0VNUFlneWxrNGhoM0hFcVBYS2FjUDNSaXRvMGZwTkpBbkJvQnNfNktaZ25vMnp0SHMzcVpHQmVtLUZmY21MMkJBem5ucU03MzFtVXZKanRETV9xR0NVY18zZFo5SjRpNmNGdEUtaDlyQTFUMDRqaEh4Z1dWcDE0WExlUlBJVkJxQzVLa1phREwtU3kwZzAwQS1Zcl9BVFYtaGQ3bXVRTlAxY0RVOUFVaVI1aEMySnd5QdIB0AFBVV95cUxQakp2bXBfQVFyQ0Y2RlRveGlFNFE5bWd2WktCSEZYRlJyN3NzejZsYlVvanIzX1J6WnZJcHNKeFNnXzFMQ0ZRRmRoTUhzX3BmYk5fQkVWZUJ1VmkxUzQwVTMzZ3V3WGZzaFI2MjJ6R00xTno0N0tNeUNycE5Ia3Y5cURISjRlT2ZBVHZpNTVRT0V5XzdkSm15aml2UG1hNXlkdkc5Rkp0OG56Z3hKQXlXTTdqSFlzZlRMUlhqV1VqMU9pSVQyaFV1LVM0UzAwa1ZR?oc=5",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPSEhyQWtIb19iSzNlbFljd0U4a0VNUFlneWxrNGhoM0hFcVBYS2FjUDNSaXRvMGZwTkpBbkJvQnNfNktaZ25vMnp0SHMzcVpHQmVtLUZmY21MMkJBem5ucU03MzFtVXZKanRETV9xR0NVY18zZFo5SjRpNmNGdEUtaDlyQTFUMDRqaEh4Z1dWcDE0WExlUlBJVkJxQzVLa1phREwtU3kwZzAwQS1Zcl9BVFYtaGQ3bXVRTlAxY0RVOUFVaVI1aEMySnd5QdIB0AFBVV95cUxQakp2bXBfQVFyQ0Y2RlRveGlFNFE5bWd2WktCSEZYRlJyN3NzejZsYlVvanIzX1J6WnZJcHNKeFNnXzFMQ0ZRRmRoTUhzX3BmYk5fQkVWZUJ1VmkxUzQwVTMzZ3V3WGZzaFI2MjJ6R00xTno0N0tNeUNycE5Ia3Y5cURISjRlT2ZBVHZpNTVRT0V5XzdkSm15aml2UG1hNXlkdkc5Rkp0OG56Z3hKQXlXTTdqSFlzZlRMUlhqV1VqMU9pSVQyaFV1LVM0UzAwa1ZR?oc=5"
+  },
+  {
+   "titulo": "Las reglas de oro de Profeco para comprar en línea de forma segura este Buen Fin",
+   "medio": "El Informador",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNdXVuUjBUdVhqT1IyelladWUyNlE3eWwxNEV5Y2IxUXdVWkIyWmt6VVFob0tEb2hMcmhyeS1uSnZ2YWpoREhyX0NKcHZtUGo3Ml84TVNvT0t2U1BUbGNRZFdQei1aazc0T09ZN0J5MnI4NkdQMzIzMEhUXzJLOE1uQnBlNVdTNXVUczVpd2FqLTJTS0VyVDBwbUcyRV9Ka3AzU1pUa05iLXRPZFVOLTAzZXpNTXFYR3A2b3FSYVY4RUNSZG9INnfSAcsBQVVfeXFMTnpLcXdDRHBkd0Z0LWhJaU1BNkRLbEROQlFoZUZJb0taMUQySndCbTdQendtNTBNRWxiYUJfZF9ZNzR0M3YzQ01kN0lMUVctRTItVjRfMnhCbldENnZTUlJwSWF6NGpmSUNIN2wwN0QzMW1WMzU1d0J4YWVCYk1LTFRLMlUtSGNWV3NGVjV6TThUM2dVRjR6VnVXck9zbVVOR3l1MkQ0dFBpWXpGNUphWDZZVnJSaFlXdEprNFYzZk5rSHBZeHdKMGJSclE?oc=5",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNdXVuUjBUdVhqT1IyelladWUyNlE3eWwxNEV5Y2IxUXdVWkIyWmt6VVFob0tEb2hMcmhyeS1uSnZ2YWpoREhyX0NKcHZtUGo3Ml84TVNvT0t2U1BUbGNRZFdQei1aazc0T09ZN0J5MnI4NkdQMzIzMEhUXzJLOE1uQnBlNVdTNXVUczVpd2FqLTJTS0VyVDBwbUcyRV9Ka3AzU1pUa05iLXRPZFVOLTAzZXpNTXFYR3A2b3FSYVY4RUNSZG9INnfSAcsBQVVfeXFMTnpLcXdDRHBkd0Z0LWhJaU1BNkRLbEROQlFoZUZJb0taMUQySndCbTdQendtNTBNRWxiYUJfZF9ZNzR0M3YzQ01kN0lMUVctRTItVjRfMnhCbldENnZTUlJwSWF6NGpmSUNIN2wwN0QzMW1WMzU1d0J4YWVCYk1LTFRLMlUtSGNWV3NGVjV6TThUM2dVRjR6VnVXck9zbVVOR3l1MkQ0dFBpWXpGNUphWDZZVnJSaFlXdEprNFYzZk5rSHBZeHdKMGJSclE?oc=5"
+  },
+  {
+   "titulo": "Del “no somos iguales” al “los de antes también robaban”",
+   "medio": "El Informador",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNS1J2RWxQd0ItS3NYTS1JaW9SS01LYWFiYnE1eGtDc2wxQlFYd1AyeUhsSmNRaVdWNmpOR3poR0RXZHluNU5rcmdCUWpRejctLThOUzc0NXFrV2RQR29PMHQ1anZXVVVIc09LT3IxU0RxTlVUd25PRUtzVnBFTnFoQWp0THBNU0ZOQVliSXBDcTJIVnFzWlRfcUNsOTNBV3RILWxUNl9ZZ0o4dWozZHNSUndYU3Z1X0N6VmhMb19wNNIBxAFBVV95cUxPR2tHbzNVZTBmenBPNnU1eGZ6dUlZaG5pT05SOWViaHA0cnI5WmhrcDR1RmRrY29ER1djN0FaU0o2RWk4ZTR0bjduZEZfSTRLbXhDcm9NSVVrRlFvbmFWOWlMQjhPYWZoYXpOWVc5cVZkRXM3clNCcWVKVjZmYzdTdjM5UE5TRzZ4d2JoV1dURVVlVV9CWlE2UF9yODhiY2s0a1JfY0V6WVZhaDY0Y0lfZUdPMmEzanNVb095V05qemVSS2pN?oc=5",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNS1J2RWxQd0ItS3NYTS1JaW9SS01LYWFiYnE1eGtDc2wxQlFYd1AyeUhsSmNRaVdWNmpOR3poR0RXZHluNU5rcmdCUWpRejctLThOUzc0NXFrV2RQR29PMHQ1anZXVVVIc09LT3IxU0RxTlVUd25PRUtzVnBFTnFoQWp0THBNU0ZOQVliSXBDcTJIVnFzWlRfcUNsOTNBV3RILWxUNl9ZZ0o4dWozZHNSUndYU3Z1X0N6VmhMb19wNNIBxAFBVV95cUxPR2tHbzNVZTBmenBPNnU1eGZ6dUlZaG5pT05SOWViaHA0cnI5WmhrcDR1RmRrY29ER1djN0FaU0o2RWk4ZTR0bjduZEZfSTRLbXhDcm9NSVVrRlFvbmFWOWlMQjhPYWZoYXpOWVc5cVZkRXM3clNCcWVKVjZmYzdTdjM5UE5TRzZ4d2JoV1dURVVlVV9CWlE2UF9yODhiY2s0a1JfY0V6WVZhaDY0Y0lfZUdPMmEzanNVb095V05qemVSS2pN?oc=5"
+  },
+  {
+   "titulo": "Comienza el proceso electoral en Veracruz en medio de la peor crisis de credibilidad del OPLE",
+   "medio": "LatinUS",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://latinus.us/mexico/2026/11/6/comienza-el-proceso-electoral-en-veracruz-en-medio-de-la-peor-crisis-de-credibilidad-del-ople-181720.html",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://latinus.us/mexico/2026/11/6/comienza-el-proceso-electoral-en-veracruz-en-medio-de-la-peor-crisis-de-credibilidad-del-ople-181720.html"
+  },
+  {
+   "titulo": "“Si no es por consenso, nueva presidenta del INE no le servirá al organismo autónomo”, admite Monreal",
+   "medio": "LatinUS",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://latinus.us/mexico/2026/11/6/si-no-es-por-consenso-nueva-presidenta-del-ine-no-le-servira-al-organismo-autonomo-admite-monreal-181708.html",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://latinus.us/mexico/2026/11/6/si-no-es-por-consenso-nueva-presidenta-del-ine-no-le-servira-al-organismo-autonomo-admite-monreal-181708.html"
+  },
+  {
+   "titulo": "Ley de Economía Digital: 7 movimientos financieros que puedes hacer desde hoy",
+   "medio": "El Economista",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/finanzaspersonales/ley-economia-digital-7-movimientos-financieros-puedes-hoy-20261106-842491.html",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/finanzaspersonales/ley-economia-digital-7-movimientos-financieros-puedes-hoy-20261106-842491.html"
+  },
+  {
+   "titulo": "IMPEPAC",
+   "medio": "Proceso",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFB6Wk5IUmE4Njl0ek5qdWdnbmxmV2d3M3hVcjQ0WS1GeXJoNkFnSmxEZzFmc2U2RnJxdFUyNTk2QkE2aHBZZmhLUkNQcVE2Z0M5U2dwaWVGYTZucUwzaHBFVw?oc=5",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFB6Wk5IUmE4Njl0ek5qdWdnbmxmV2d3M3hVcjQ0WS1GeXJoNkFnSmxEZzFmc2U2RnJxdFUyNTk2QkE2aHBZZmhLUkNQcVE2Z0M5U2dwaWVGYTZucUwzaHBFVw?oc=5"
+  },
+  {
+   "titulo": "Sheinbaum arremete contra Lorenzo Córdova: \"No hizo nada contra duopolio en el INE\"",
+   "medio": "Proceso",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQWFRPenc2blU0dndnX2YtYWhBTmRRRnZja2hRUENROUpheWpmZDdPY3FQbHgtQlp3Tm15bDlzU3ZyXzRhazA1TE1ydXNKMndCc0M0bnhscG92MlQtelZHS3VOZFBJM2Q0R1hQYkp1T09EMUZlN241ZE1ZX2x2ZWkzak56RGhBNnBoUS1rMmhiV0prY05TTXJlZ0UwVnN2OXB0dmZFRzl5UUZMMXFfeVZqQl9qbGtmZEd6dUpjOHpiTzhMbFhIVlpTSnEzN0c0blN0eUNLbg?oc=5",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxQLVFJUEZvNkpndDlOVzdlV1ZZSlNySHlpcWpDR2JJeS1GR2kydGFOYlVrZE11d3lSVmFrcWNKVWUtY1pISy1LVUw3Y3Y3SmRoX1kzOVJxSnBtWHlRdG10WHUxU05TeHotWU8xbXVZWHpkWHZ4S1NGRFpJZXRjWGNhbFgxYnNucXhzd19nZHdOR2RaeEh2em9LLWdSckhHcEsxUHJWWEtpYWZKZ0kxOXVQTTV0NmREXy1Zc081Mi1SaEdkV19RS2EtUjdxYlQ2S0RibVREeHExSmljcnF3RnBacjd4RWJQREI1WWdic3FqUdIB9AFBVV95cUxPbEtodEJPZWNpMjlfX0dRZnd4OFoyVWJKbFlTRGl0VjFkYjY4Y1dkTWRpSHFRU1lDSUpva0VrTkU4dnpnYTc0a3BUNHdBRW96SnVQZlRuU2xKNkxQTlJ2dmJ2UTk5NDl2UlB0cWYtZWVQajNEM0xndDNzVHN6M0pXV2JHTDF3bmxyWWFZaUhoU1JheTRYNmpkMUVyTE1UdmpOS0R3TXRMbDZGdVlrc1RxLXVqMzlwNmxqLVFabW9PbG9aTUc2c2FBYktfSHFZcF8zWko0YUpfR3BkN2FHaF83T1Jkb0J4OGNlZFQtMEstZ2ZzcjRu?oc=5"
+  },
+  {
+   "titulo": "INE aprueba medidas para “limpiar la casa”",
+   "medio": "Proceso",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQZV9hckVIdGk2YnJYb3VDSndicUNiclEyS29xQ3R1TWliTXRUMDNxQ25aeF92NFR3SVpFZGxBWDRWdzZaQ21OcjUyZWhRVmx3QWhSWWdzMWl0amFLZnl3R09OMHZiS19sNE5VVXZiNGtQRUY3WkRENHVHR1B3RUt5S2taWGlFMTZlLXpKeW5CdEkzMnhMamJaQjltYzJNOGQ5VXNzb0Nwc29YbFE?oc=5",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQZV9hckVIdGk2YnJYb3VDSndicUNiclEyS29xQ3R1TWliTXRUMDNxQ25aeF92NFR3SVpFZGxBWDRWdzZaQ21OcjUyZWhRVmx3QWhSWWdzMWl0amFLZnl3R09OMHZiS19sNE5VVXZiNGtQRUY3WkRENHVHR1B3RUt5S2taWGlFMTZlLXpKeW5CdEkzMnhMamJaQjltYzJNOGQ5VXNzb0Nwc29YbFE?oc=5"
+  },
+  {
+   "titulo": "Empresa inhabilitada y multada por la Cofepris gana contrato millonario con la Sedena",
+   "medio": "Proceso",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQalNaZVVYMTBjeE15ZWRvRndTd3QxMEZadS1aRzdUZDQyUnRNRGxiWWhkNlZBTWQ0aEhUS0tWbkJYQXJ1WWZfaVp1Y3dHSmo0X0ZFSURWMV9oLVNESTJCYUgwRVRkZlpiTFBraTFiZ3VNVFNTYk5zZWwtZHhWakVqRkNHYkVQeDlXMUNlTVZ1T1dQbHNzRENRMHFFdFNUS0RpNTRaTXR5Vko2LVNycFlEVlEzeFNsV2ZuTm1fS1BkVEJVVG45U25uNkhtbUlTMXdJZUtnVkRQaU1OeUE?oc=5",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQalNaZVVYMTBjeE15ZWRvRndTd3QxMEZadS1aRzdUZDQyUnRNRGxiWWhkNlZBTWQ0aEhUS0tWbkJYQXJ1WWZfaVp1Y3dHSmo0X0ZFSURWMV9oLVNESTJCYUgwRVRkZlpiTFBraTFiZ3VNVFNTYk5zZWwtZHhWakVqRkNHYkVQeDlXMUNlTVZ1T1dQbHNzRENRMHFFdFNUS0RpNTRaTXR5Vko2LVNycFlEVlEzeFNsV2ZuTm1fS1BkVEJVVG45U25uNkhtbUlTMXdJZUtnVkRQaU1OeUE?oc=5"
+  },
+  {
+   "titulo": "La serie del vocero (VIDEO)",
+   "medio": "Proceso",
+   "fecha": "3 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPQTZwWVRFNmozb25VREhRVUV3RDFjNGZCNGM5b1g4NkNkZVhXZmR5WnpGZDRJUUZ1UFNiR1NuQ1FkVUFZcmVJTVZSSDdhcEhCY2RTZTgzOUVKV2Y0WUkySDhGWXJBenFLX0xURzNFTW44dV9laTk5Zk0tdGVjSmtYM1YwbnJkR0lxRkl3dmZB?oc=5",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPQTZwWVRFNmozb25VREhRVUV3RDFjNGZCNGM5b1g4NkNkZVhXZmR5WnpGZDRJUUZ1UFNiR1NuQ1FkVUFZcmVJTVZSSDdhcEhCY2RTZTgzOUVKV2Y0WUkySDhGWXJBenFLX0xURzNFTW44dV9laTk5Zk0tdGVjSmtYM1YwbnJkR0lxRkl3dmZB?oc=5"
+  },
+  {
+   "titulo": "Brugada anuncia que eliminará el cobro de intereses en créditos de Fondeso",
+   "medio": "Proceso",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPQzU1YWNXNW1HN3BqdXYwZWJUUDB5MXNLcTVzb0c3Wm9VVGRZMTBWMUN1a09LbHptbkdVWWQ0UTladndBWllnbmR3Si1LeS1PbzhNSzVpYjZfckI3OGYzS1BaQWVob0R4UUVCYzdEYUNUWVFlZGVWM0FCbUVST2VQdFNkVm11SHFtM1lobXpqYjJvY2YzSnFjNkFURHpiWnU5a2tDZXhBbGpMU1BrUlBZck5tcHhpZFU3WTJjOGdSVHBLNzhnR09IX2FoRDRRX1FBdEk0?oc=5",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPQzU1YWNXNW1HN3BqdXYwZWJUUDB5MXNLcTVzb0c3Wm9VVGRZMTBWMUN1a09LbHptbkdVWWQ0UTladndBWllnbmR3Si1LeS1PbzhNSzVpYjZfckI3OGYzS1BaQWVob0R4UUVCYzdEYUNUWVFlZGVWM0FCbUVST2VQdFNkVm11SHFtM1lobXpqYjJvY2YzSnFjNkFURHpiWnU5a2tDZXhBbGpMU1BrUlBZck5tcHhpZFU3WTJjOGdSVHBLNzhnR09IX2FoRDRRX1FBdEk0?oc=5"
+  },
+  {
+   "titulo": "Hacienda sube IEPS a gasolinas, mientras la cuota cero del diésel va por su novena semana consecutiva",
+   "medio": "Expansión",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://expansion.mx/economia/2026/11/06/impuesto-gasolinas-sube-magna-premium-diesel-cero",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://expansion.mx/economia/2026/11/06/impuesto-gasolinas-sube-magna-premium-diesel-cero"
+  },
+  {
+   "titulo": "Los legisladores de la Comisión de Presupuesto aprobaron en lo general y en lo particular el dictamen del gasto público 2027, el cual iniciará su discusión en el pleno el ...",
+   "medio": "Expansión",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://expansion.mx/economia/2026/11/06/diputados-6000-millones-ine-educacion-mujeres-turismo",
+   "tema": "medios",
+   "visto": "7 de noviembre de 2026",
+   "grupo": "https://expansion.mx/economia/2026/11/06/diputados-6000-millones-ine-educacion-mujeres-turismo"
+  },
+  {
+   "titulo": "Diputados aprueban en lo general el Presupuesto 2027 por 10.6 billones de pesos",
+   "medio": "Infobae",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://www.infobae.com/mexico/2026/11/06/diputados-aprueban-en-lo-general-el-presupuesto-2027-por-106-billones-de-pesos/",
+   "tema": "presupuesto",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://www.elfinanciero.com.mx/nacional/2026/11/05/presupuesto-2027-diputados-aprueban-en-comision-gasto-de-106-billones-de-pesos/"
+  },
+  {
+   "titulo": "Presupuesto de Egresos 2027 avanza en comisiones de la Cámara de Diputados entre críticas por deuda",
+   "medio": "Periódico Zócalo",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.zocalo.com.mx/presupuesto-de-egresos-2027-avanza-en-comisiones-de-la-camara-de-diputados-entre-criticas-por-deuda/",
+   "tema": "presupuesto",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://www.zocalo.com.mx/presupuesto-de-egresos-2027-avanza-en-comisiones-de-la-camara-de-diputados-entre-criticas-por-deuda/"
+  },
+  {
+   "titulo": "Mario Zamora exige al Congreso voltear a ver a Sinaloa: ‘El presupuesto 2027 olvida seguridad, campo, carreteras y a la UAS’",
+   "medio": "Los Noticieristas",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://losnoticieristas.com/politica/2026/11/mario-zamora-exige-al-congreso-voltear-a-ver-a-sinaloa-el-presupuesto-2027-olvida-seguridad-campo-carreteras-y-a-la-uas-1161938/",
+   "tema": "presupuesto",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://losnoticieristas.com/politica/2026/11/mario-zamora-exige-al-congreso-voltear-a-ver-a-sinaloa-el-presupuesto-2027-olvida-seguridad-campo-carreteras-y-a-la-uas-1161938/"
+  },
+  {
+   "titulo": "Comisión de San Lázaro aprueba en lo general el Presupuesto de Egresos 2027",
+   "medio": "La Jornada",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/noticia/2026/11/05/politica/comision-de-presupuesto-de-san-lazaro-aprueba-en-lo-general-el-presupuesto-de-egresos-2027",
+   "tema": "presupuesto",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/noticia/2026/11/05/politica/comision-de-presupuesto-de-san-lazaro-aprueba-en-lo-general-el-presupuesto-de-egresos-2027"
+  },
+  {
+   "titulo": "Diputados aprueban en lo general y en Comisión el proyecto del gasto público para 2027",
+   "medio": "Expansión on MSN",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/otras/diputados-aprueban-en-lo-general-y-en-comisi%C3%B3n-el-proyecto-del-gasto-p%C3%BAblico-para-2027/ar-AA2gRdD2",
+   "tema": "presupuesto",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://www.msn.com/es-mx/noticias/otras/diputados-aprueban-en-lo-general-y-en-comisi%C3%B3n-el-proyecto-del-gasto-p%C3%BAblico-para-2027/ar-AA2gRdD2"
+  },
+  {
+   "titulo": "Comisiones avalan Proyecto de Egresos 2027; contempla 5 mil mdp menos para el INE",
+   "medio": "SinEmbargo MX",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://www.sinembargo.mx/4899544/comisiones-avalan-proyecto-de-egresos-2027-contempla-5-mil-mdp-menos-para-el-ine/",
+   "tema": "presupuesto",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://www.sinembargo.mx/4899544/comisiones-avalan-proyecto-de-egresos-2027-contempla-5-mil-mdp-menos-para-el-ine/"
+  },
+  {
+   "titulo": "Recorte de Banxico podría presionar costo financiero de la deuda: Sura Investments",
+   "medio": "El Economista",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/sectorfinanciero/recorte-banxico-presionar-costo-financiero-deuda-sura-investments-20261105-842461.html",
+   "tema": "deuda",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/sectorfinanciero/recorte-banxico-presionar-costo-financiero-deuda-sura-investments-20261105-842461.html"
+  },
+  {
+   "titulo": "Auditoría Superior investiga al INE por irregularidades en gasto público de 2000 a 2025",
+   "medio": "Periódico AM",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.am.com.mx/nacional/2026/11/05/investiga-asf-al-ine-por-irregularidades-en-gasto-publico-de-2000-a-2025-1863009.html",
+   "tema": "asf",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://periodicolavoz.com.mx/nacion/auditoria-superior-de-la-federacion-investiga-al-ine/385312"
+  },
+  {
+   "titulo": "INE deja nueva 'tarea' a la Auditoría: solicita una revisión de las adquisiciones de 2016 a 2026",
+   "medio": "Radio Fórmula",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.radioformula.com.mx/politica/ine-deja-nueva-tarea-a-la-auditoria-solicita-una-revision-de-las-adquisiciones-de-2016-a-2026-20261105-0125.html",
+   "tema": "asf",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://www.radioformula.com.mx/politica/ine-deja-nueva-tarea-a-la-auditoria-solicita-una-revision-de-las-adquisiciones-de-2016-a-2026-20261105-0125.html"
+  },
+  {
+   "titulo": "Auditoría Superior confirma vínculos entre personas relacionadas con el INE y empresas de proveedores favoritos de Guadalupe Taddei",
+   "medio": "Proyecto Puente",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://proyectopuente.com.mx/2026/11/05/auditoria-superior-confirma-vinculos-entre-personas-relacionadas-con-el-ine-y-empresas-de-proveedores-favoritos-de-guadalupe-taddei/",
+   "tema": "asf",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://proyectopuente.com.mx/2026/11/05/auditoria-superior-confirma-vinculos-entre-personas-relacionadas-con-el-ine-y-empresas-de-proveedores-favoritos-de-guadalupe-taddei/"
+  },
+  {
+   "titulo": "Auditorias para transparencia en la contratación de servicios y proveedores de recursos electorales",
+   "medio": "Milenio on MSN",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/mexico/sheinbaum-confirma-auditorias-para-transparencia-en-la-contrataci%C3%B3n-de-servicios-y-proveedores-de-recursos-electorales/ar-AA2gQLzb",
+   "tema": "asf",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://www.msn.com/es-mx/noticias/mexico/sheinbaum-confirma-auditorias-para-transparencia-en-la-contrataci%C3%B3n-de-servicios-y-proveedores-de-recursos-electorales/ar-AA2gQLzb"
+  },
+  {
+   "titulo": "IFSE alista más denuncias penales contra municipios por adjudicaciones directas",
+   "medio": "ANTENA SAN LUIS",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://antenasanluis.mx/ifse-denuncias-adjudicacion-directa-municipios/",
+   "tema": "contratos",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://antenasanluis.mx/ifse-denuncias-adjudicacion-directa-municipios/"
+  },
+  {
+   "titulo": "Pensión IMSS vs. Pensión ISSSTE: ¿Cuáles son las diferencias y dónde es mejor jubilarte?",
+   "medio": "Milenio.com (español) on MSN",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.msn.com/es-mx/dinero/other/pensi%C3%B3n-imss-vs-pensi%C3%B3n-issste-cu%C3%A1les-son-las-diferencias-y-d%C3%B3nde-es-mejor-jubilarte/ar-AA2gQcqP",
+   "tema": "salud",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://www.msn.com/es-mx/dinero/other/pensi%C3%B3n-imss-vs-pensi%C3%B3n-issste-cu%C3%A1les-son-las-diferencias-y-d%C3%B3nde-es-mejor-jubilarte/ar-AA2gQcqP"
+  },
+  {
+   "titulo": "Respalda diputado Andrade mayor gasto federal para estados y municipios",
+   "medio": "Quadratin Hidalgo",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://hidalgo.quadratin.com.mx/politica/respalda-diputado-andrade-mayor-gasto-federal-para-estados-y-municipios/",
+   "tema": "estados",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://hidalgo.quadratin.com.mx/politica/respalda-diputado-andrade-mayor-gasto-federal-para-estados-y-municipios/"
+  },
+  {
+   "titulo": "Daniel Andrade apoya aumento de recursos federales para estados y municipios",
+   "medio": "vocalesonline.com.mx",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.vocalesonline.com.mx/index.php/estatal/item/25619-daniel-andrade-apoya-aumento-de-recursos-federales-para-estados-y-municipios",
+   "tema": "estados",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://www.vocalesonline.com.mx/index.php/estatal/item/25619-daniel-andrade-apoya-aumento-de-recursos-federales-para-estados-y-municipios"
+  },
+  {
+   "titulo": "La multitud rebelde, numen de Preljocaj",
+   "medio": "La Jornada",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/2026/11/06/opinion",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/2026/11/06/opinion"
+  },
+  {
+   "titulo": "Presupuesto 2027: Diputados aprueban en comisión gasto de 10.6 billones de pesos",
+   "medio": "El Financiero",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.elfinanciero.com.mx/nacional/2026/11/05/presupuesto-2027-diputados-aprueban-en-comision-gasto-de-106-billones-de-pesos/",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://www.elfinanciero.com.mx/nacional/2026/11/05/presupuesto-2027-diputados-aprueban-en-comision-gasto-de-106-billones-de-pesos/"
+  },
+  {
+   "titulo": "Pagar sin efectivo: ¿avance o riesgo?",
+   "medio": "El Financiero",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.elfinanciero.com.mx/opinion/luis-wertman-zaslav/2026/11/06/pagar-sin-efectivo-avance-o-riesgo/",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://www.elfinanciero.com.mx/opinion/luis-wertman-zaslav/2026/11/06/pagar-sin-efectivo-avance-o-riesgo/"
+  },
+  {
+   "titulo": "Comisión de Presupuesto, que preside Mery Pozos, reasigna 6 mil 500 mdp para obras hídricas de Jalisco",
+   "medio": "El Informador",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxQSXdJMXA4enpmYldVVm9tUi01Q3FCUDdjdUZoejdJR2ZETDVsV3V4Xy1wZXpUWjhOcE9FajN3bUlxMWNFR28wQlNULV9tRGZSY25VMldxakxRNmY5eXNibkVmMFBPQkhqa3Zpc0JFdURINFdkZ2pfWndnOElpZjBsRktTNDlBM0Z0Y2U4cFJGTUZoNTF6X29iX2J0dnpMZGZfalVabDBOTTdPUFJ1bU1RZlEtOEdTRlM5Z3JzMTlYYmcyNXE5Nlhla3dKR0RNOUp2ekZLUjhwZ3B1SW5kMlVIX1NHM3plOU5KNzNncm4wMDU2VWlBZVZMVXVOV0NwSFUzMm9TVEZnaHFzcmvSAZACQVVfeXFMTWlZek9VNjNlbXpKdGhuWUpCWklhLUpCWG5UZlVIbzZRTEZEbVpSRm5fSjFkN1h6RUlMcVNqVG5sSWM4MXA2blpBRW0tVTFhYkhNOExEand3SFpDRkRwQVlCSWZXOFN0MWdycnNneWo1TDFPb2laeVZKRVg3WmxhN21ubHBHOUwxNXRnUFdiVXRIcGdDUC1aR012dTFfR0Nhd0lMN3dLckgzS3BKX0lVY09MTXRlcmNtNm5tYVAxT25yT3kyaWxrZ2YtUU05aklveFhMbkJISjgzd3pBSmtIaTRjUUc2VS1IV0diUzhGdXNRRUdtM1FKbDMydnNGZUhaOUMzUWNROE1xTmtWUHcybG4?oc=5",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxQSXdJMXA4enpmYldVVm9tUi01Q3FCUDdjdUZoejdJR2ZETDVsV3V4Xy1wZXpUWjhOcE9FajN3bUlxMWNFR28wQlNULV9tRGZSY25VMldxakxRNmY5eXNibkVmMFBPQkhqa3Zpc0JFdURINFdkZ2pfWndnOElpZjBsRktTNDlBM0Z0Y2U4cFJGTUZoNTF6X29iX2J0dnpMZGZfalVabDBOTTdPUFJ1bU1RZlEtOEdTRlM5Z3JzMTlYYmcyNXE5Nlhla3dKR0RNOUp2ekZLUjhwZ3B1SW5kMlVIX1NHM3plOU5KNzNncm4wMDU2VWlBZVZMVXVOV0NwSFUzMm9TVEZnaHFzcmvSAZACQVVfeXFMTWlZek9VNjNlbXpKdGhuWUpCWklhLUpCWG5UZlVIbzZRTEZEbVpSRm5fSjFkN1h6RUlMcVNqVG5sSWM4MXA2blpBRW0tVTFhYkhNOExEand3SFpDRkRwQVlCSWZXOFN0MWdycnNneWo1TDFPb2laeVZKRVg3WmxhN21ubHBHOUwxNXRnUFdiVXRIcGdDUC1aR012dTFfR0Nhd0lMN3dLckgzS3BKX0lVY09MTXRlcmNtNm5tYVAxT25yT3kyaWxrZ2YtUU05aklveFhMbkJISjgzd3pBSmtIaTRjUUc2VS1IV0diUzhGdXNRRUdtM1FKbDMydnNGZUhaOUMzUWNROE1xTmtWUHcybG4?oc=5"
+  },
+  {
+   "titulo": "ASF denuncia a Talleres Gráficos ante la FGR; detecta irregularidades de más de 60 MDP",
+   "medio": "El Informador",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNbkQyRFJMNkNNck1ac1EtbEFtcWxaV3VuMkRKd05GX0FSQUpWZ29iejkwbHlqUzBodkd1a1BoV0lnVmpSSGpIMVhEcEJPR09zdnQ4UGtuRUVJS3hSNzZ2TG1QVFhDVVpMbW5ySkNPamkyT2RGckNIdDFHSkVfX3BNc3JGZjBIZE50OGJZRG1YMXlkYWx1alh3aWxjVDExZm9OeGV6UWtZODJBc3hZVHJUUUVfNWRMYUh2M2hMd2cxOWQtVVVjS015YzZfSXgwU09SdmxN0gHYAUFVX3lxTE5SWGlKOUZIZ1N4NjNEOXhsQVE0MmlrS3hPTTFlNEUtR254WHAtVkRtUlJMVHRSSW9ZUzRMX254UFhZWlhadjNCdWRFcUg3Z040OGNUSkFJSlcwZG9QLWhEWklsby1oaDB0dldMMFY2WVB1NFVBY1lCX2dhZVA1d1Ywclg2M2hiUGltYV9MU3MzMWx3WTJ1RG54VWFMYkhZWWRTRGlGY2lHNXE1dlRZY01iTW5NcllhclBUTUphN2hWSnlHd3F5c1Rxclh2MElQUThOLU9XX3g1Nw?oc=5",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNbkQyRFJMNkNNck1ac1EtbEFtcWxaV3VuMkRKd05GX0FSQUpWZ29iejkwbHlqUzBodkd1a1BoV0lnVmpSSGpIMVhEcEJPR09zdnQ4UGtuRUVJS3hSNzZ2TG1QVFhDVVpMbW5ySkNPamkyT2RGckNIdDFHSkVfX3BNc3JGZjBIZE50OGJZRG1YMXlkYWx1alh3aWxjVDExZm9OeGV6UWtZODJBc3hZVHJUUUVfNWRMYUh2M2hMd2cxOWQtVVVjS015YzZfSXgwU09SdmxN0gHYAUFVX3lxTE5SWGlKOUZIZ1N4NjNEOXhsQVE0MmlrS3hPTTFlNEUtR254WHAtVkRtUlJMVHRSSW9ZUzRMX254UFhZWlhadjNCdWRFcUg3Z040OGNUSkFJSlcwZG9QLWhEWklsby1oaDB0dldMMFY2WVB1NFVBY1lCX2dhZVA1d1Ywclg2M2hiUGltYV9MU3MzMWx3WTJ1RG54VWFMYkhZWWRTRGlGY2lHNXE1dlRZY01iTW5NcllhclBUTUphN2hWSnlHd3F5c1Rxclh2MElQUThOLU9XX3g1Nw?oc=5"
+  },
+  {
+   "titulo": "¡Dinero garantizado!",
+   "medio": "El Informador",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE45YVVCdWtZVm9tbkg5LUhxYTFUOVJibjlUWDExOWUwYkVlbG8yY2Y1OHhoUlQ5YTBsWG5kQmVGS3E2ZVZmV0xPT21pX2tHZ1MzRGM2aWhvZHhVVi1rRFNXdV9aanNxWVNjR2Vld0RibmxPaXBpR2dGc9IBfkFVX3lxTE1kLVo0Z3hoR2hyYk1ZZldxTjJ2OFJCUTl1YVo0c3lVSkFqX2Q2OWVBMkQ2bVZ2Y2J0S0xWUDJXUFpoQnk2RTFoZHJCTTgtMW05ZENRTjQwd0hHbjI1aDlENVhnTWdhc0I3TWhsWDhYMl9YejJ1ZkY2bTlBY18zQQ?oc=5",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMieEFVX3lxTE45YVVCdWtZVm9tbkg5LUhxYTFUOVJibjlUWDExOWUwYkVlbG8yY2Y1OHhoUlQ5YTBsWG5kQmVGS3E2ZVZmV0xPT21pX2tHZ1MzRGM2aWhvZHhVVi1rRFNXdV9aanNxWVNjR2Vld0RibmxPaXBpR2dGc9IBfkFVX3lxTE1kLVo0Z3hoR2hyYk1ZZldxTjJ2OFJCUTl1YVo0c3lVSkFqX2Q2OWVBMkQ2bVZ2Y2J0S0xWUDJXUFpoQnk2RTFoZHJCTTgtMW05ZENRTjQwd0hHbjI1aDlENVhnTWdhc0I3TWhsWDhYMl9YejJ1ZkY2bTlBY18zQQ?oc=5"
+  },
+  {
+   "titulo": "La FGR advierte lo que pasará con Inés Gómez Mont si cruza la frontera hacia México",
+   "medio": "El Informador",
+   "fecha": "3 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPV0pXcDVNbUcyVjFsZFBFaDRjejNUdVRLblc0azJfbUJKWENqcWZqUXZjU2VwUEFiU2JQSWtGMDZiWUI5VERJNllfRVJYQUc3Sm1LbWtzTFZBX0pWTl9BdU5GbXE2RFJieW53V0JFUUVpUjdKek1Iam81UW94NDZRSEVPdWRQb2d2bk1qNUdFSkFyaGNvNW13aEtiZDdteXo2UUFZZ1JJRDh1Z05IZ0lrNEZxalowMVcyQTBlSjNOTnVpV1QxSVBsNWNyMVlmM0Jw0gHWAUFVX3lxTFBhQVlOaHBvUUhPZzhwbF8zOVFvMGo5ZFhndE52ZUw5RFJPekk5a0tlWTNhcmtMQ3l4Y29PRUZ3MFBJZmpja3pfcHRQT2tpbGV1aU83djZUV2V0bGd6U052dlp3ODFTUFdueGY4MEFuZ2hBOUZQbE1nWElnNWxoS181b2lVdW9QT0VNVnh2elpNbkVzRUNZSEhvR2FaV3BuMEprTGtzeTZoUWQ2SXdzV0tBbzFjVHcySF9mUGV4S1BkTHRRWEI1T0xZakEzWjFVaTJ5eHY0cHc?oc=5",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPV0pXcDVNbUcyVjFsZFBFaDRjejNUdVRLblc0azJfbUJKWENqcWZqUXZjU2VwUEFiU2JQSWtGMDZiWUI5VERJNllfRVJYQUc3Sm1LbWtzTFZBX0pWTl9BdU5GbXE2RFJieW53V0JFUUVpUjdKek1Iam81UW94NDZRSEVPdWRQb2d2bk1qNUdFSkFyaGNvNW13aEtiZDdteXo2UUFZZ1JJRDh1Z05IZ0lrNEZxalowMVcyQTBlSjNOTnVpV1QxSVBsNWNyMVlmM0Jw0gHWAUFVX3lxTFBhQVlOaHBvUUhPZzhwbF8zOVFvMGo5ZFhndE52ZUw5RFJPekk5a0tlWTNhcmtMQ3l4Y29PRUZ3MFBJZmpja3pfcHRQT2tpbGV1aU83djZUV2V0bGd6U052dlp3ODFTUFdueGY4MEFuZ2hBOUZQbE1nWElnNWxoS181b2lVdW9QT0VNVnh2elpNbkVzRUNZSEhvR2FaV3BuMEprTGtzeTZoUWQ2SXdzV0tBbzFjVHcySF9mUGV4S1BkTHRRWEI1T0xZakEzWjFVaTJ5eHY0cHc?oc=5"
+  },
+  {
+   "titulo": "UIF congela las cuentas de Guadalupe Taddei y los hermanos Hernández Casillas",
+   "medio": "El Informador",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQczY4NGdrQWl0aFNHdTQ2dGg5U0NRYXF5OXBYc1hSVEd1N0JQWE44WHNLc0JaSkhHdV9FWG5EeXpPWjJUNkdfZG1xVkEwaU5HeDViamtEQWhqbmxKZ1lfajNNYkZCN1VrMGJaTU5KcmgzU2NUTlBmQ0twY290dnNMSEdxWGJqaGVpQ0twUk84Vm9YVHpVY2NoTjZTV1BYc0t5TkVIWExhSUZ5OG1uUGljYlpyNUhxdDhaVGdhZDdOa2lQUktHVkNvaTRuelpFQdIB0wFBVV95cUxNSGFrLS1LLTdEdkxLQ3cydm53U0xuT2xCX1JFU0xlYjVjR1J5T2Z0VmJYa05tZlZubV9Wa1dpUTBFNjdZY19nbWpLTm5Tbk10RUF1RkNUekVzbzZyVE51bFV6RGd1Y05zWkZTdTJweklQM1ozekc5UjBtVnlaczNtR2x5NDBUQUNrdmlMYjNaMTJLSjFPWEVjcF9wQVNNc2tCRzVpaVFKbjFqSm5wSk1yRHNvUzBNZndBSDJSMXA2SlI0UnlWTVhLZGNlV1kteWN5dTZj?oc=5",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQczY4NGdrQWl0aFNHdTQ2dGg5U0NRYXF5OXBYc1hSVEd1N0JQWE44WHNLc0JaSkhHdV9FWG5EeXpPWjJUNkdfZG1xVkEwaU5HeDViamtEQWhqbmxKZ1lfajNNYkZCN1VrMGJaTU5KcmgzU2NUTlBmQ0twY290dnNMSEdxWGJqaGVpQ0twUk84Vm9YVHpVY2NoTjZTV1BYc0t5TkVIWExhSUZ5OG1uUGljYlpyNUhxdDhaVGdhZDdOa2lQUktHVkNvaTRuelpFQdIB0wFBVV95cUxNSGFrLS1LLTdEdkxLQ3cydm53U0xuT2xCX1JFU0xlYjVjR1J5T2Z0VmJYa05tZlZubV9Wa1dpUTBFNjdZY19nbWpLTm5Tbk10RUF1RkNUekVzbzZyVE51bFV6RGd1Y05zWkZTdTJweklQM1ozekc5UjBtVnlaczNtR2x5NDBUQUNrdmlMYjNaMTJLSjFPWEVjcF9wQVNNc2tCRzVpaVFKbjFqSm5wSk1yRHNvUzBNZndBSDJSMXA2SlI0UnlWTVhLZGNlV1kteWN5dTZj?oc=5"
+  },
+  {
+   "titulo": "ASF amplía investigación por corrupción en el INE: auditará contratos desde la era del IFE",
+   "medio": "El Informador",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxONjc1NUxLZFBXU2ZLN3FsQmgxMzY2SlAyNE4xZk9XVm1DeXJMSkpFNlhBcDdZNHZ0Q3BTLWZ2R2I3Y1hHZjEzZkRYVzZiTnhuVGw4bHlKWjFOV3FxdGZsU1NnOHNYQ1BnT0Y2VC1WZkRNWHpORGE5OHlyZnRHTldTYk5CZHE5WFdYNWVOTFpkWExPSmI5RFhGYkxGS2lLSlhZbEF5eGdfVGkxTGxDdXg0YjVmLWJhSnZTUGtRNTlhS1lvVFloMmNWakN3Z2dlQ3V1cV92dUNCdmrSAd4BQVVfeXFMTmJoUE1SUjlmZEt4MExONDgwZXZPb0d1QmotRkt0by1uczNFSkMtN3l2LWE3bWhsckM3dEtQMmRia0R1NmNBSlpSX0hsaVJWMEg3TEl5WUJvblBBS0xPSlZtRkFRdjRzeng2MWlsV19xaFBjSmY1ZDFIcXJYY0I2OGpDVEViMTNub01hTFpZVnFjbGZWMUZsUHFteTV4MEF2NFFTZ3JRd21kLVdFci1EMkMtak1aQzV3SkVUNjJFcVB0LVFaQlVIZVFGa3NfTURDd2lmWTdfNE9vbzIzVTl3?oc=5",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxONjc1NUxLZFBXU2ZLN3FsQmgxMzY2SlAyNE4xZk9XVm1DeXJMSkpFNlhBcDdZNHZ0Q3BTLWZ2R2I3Y1hHZjEzZkRYVzZiTnhuVGw4bHlKWjFOV3FxdGZsU1NnOHNYQ1BnT0Y2VC1WZkRNWHpORGE5OHlyZnRHTldTYk5CZHE5WFdYNWVOTFpkWExPSmI5RFhGYkxGS2lLSlhZbEF5eGdfVGkxTGxDdXg0YjVmLWJhSnZTUGtRNTlhS1lvVFloMmNWakN3Z2dlQ3V1cV92dUNCdmrSAd4BQVVfeXFMTmJoUE1SUjlmZEt4MExONDgwZXZPb0d1QmotRkt0by1uczNFSkMtN3l2LWE3bWhsckM3dEtQMmRia0R1NmNBSlpSX0hsaVJWMEg3TEl5WUJvblBBS0xPSlZtRkFRdjRzeng2MWlsV19xaFBjSmY1ZDFIcXJYY0I2OGpDVEViMTNub01hTFpZVnFjbGZWMUZsUHFteTV4MEF2NFFTZ3JRd21kLVdFci1EMkMtak1aQzV3SkVUNjJFcVB0LVFaQlVIZVFGa3NfTURDd2lmWTdfNE9vbzIzVTl3?oc=5"
+  },
+  {
+   "titulo": "\"Morena le dice a Andy, ‘el presupuesto a tus pies, chamaquito’ tras aprobarse con los votos de Diputados de la 4T y MC los egresos para el 2027\", afirma el PAN",
+   "medio": "LatinUS",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://latinus.us/mexico/2026/11/5/morena-le-dice-a-andy-el-presupuesto-a-tus-pies-chamaquito-tras-aprobarse-con-los-votos-de-diputados-de-la-4t-y-mc-los-egresos-par-181620.html",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://latinus.us/mexico/2026/11/5/morena-le-dice-a-andy-el-presupuesto-a-tus-pies-chamaquito-tras-aprobarse-con-los-votos-de-diputados-de-la-4t-y-mc-los-egresos-par-181620.html"
+  },
+  {
+   "titulo": "¿Podrán los grupos de vigilancia de bonos prevenir la próxima crisis de deuda?",
+   "medio": "El Economista",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/opinion/podran-grupos-vigilancia-bonos-prevenir-proxima-crisis-deuda-20261105-842494.html",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/opinion/podran-grupos-vigilancia-bonos-prevenir-proxima-crisis-deuda-20261105-842494.html"
+  },
+  {
+   "titulo": "Recomendado por el INE de Taddei, Hernández Casillas copó licitación millonaria en Morelos",
+   "medio": "Proceso",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOUHM5MG9RUTY2SWxlVWZOYnY5a1RYQ214Z2JHZ2thbUkzLU9qanduTGxORU9oTkNzYlFkS2VxODM0TFhTM0t3NVJLTWhLUl92OW53cnY1TW13cVYyUUc2LW5OV1NXU1RyUzVpc1BaZ200LVFWUDNyS20xdWpJdDFvZUVIU0tweDQ0TG5aYzF0MU9KaDVCanMzVGtBRUZqeFZSZ2JlUGhxbVM2UzJZZlVqMm82THVFMDJtR1Mxc0dmR1hpYVIyRThFbTgxMFlZZFc4NzBYMEZzLUhDSjVRNnBwUA?oc=5",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOUHM5MG9RUTY2SWxlVWZOYnY5a1RYQ214Z2JHZ2thbUkzLU9qanduTGxORU9oTkNzYlFkS2VxODM0TFhTM0t3NVJLTWhLUl92OW53cnY1TW13cVYyUUc2LW5OV1NXU1RyUzVpc1BaZ200LVFWUDNyS20xdWpJdDFvZUVIU0tweDQ0TG5aYzF0MU9KaDVCanMzVGtBRUZqeFZSZ2JlUGhxbVM2UzJZZlVqMm82THVFMDJtR1Mxc0dmR1hpYVIyRThFbTgxMFlZZFc4NzBYMEZzLUhDSjVRNnBwUA?oc=5"
+  },
+  {
+   "titulo": "Morena y MC empujan en comisiones el presupuesto 2027 pese a reclamos opositores",
+   "medio": "Proceso",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQLTlNY3c1YjNOQWs5ODhvVVR4Y0U1MGtCakV6bkx3cDcyRjlpejdCN3A1Nm93NE9LalBXTF9RY0RpaExDR1NfeEhnbUJCakprSWRuaVJmTmZlWnVtUEdDNVB2QzIxNldZWDV6U1VZMUQyV2RNMUdTS2tJRUkzLVVQLUZucmtrVlBmUTM5ODBfUDdodS1ad243aThWWlQ3anVwVElSUERxNUkyYkpBZVJVSFQzdkJWMEE3Tk9YRFk5ZVJvZkdxc0tOVURqWktNUU54S0FOai1vSnlmT0tkQ2oyaA?oc=5",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxQLTlNY3c1YjNOQWs5ODhvVVR4Y0U1MGtCakV6bkx3cDcyRjlpejdCN3A1Nm93NE9LalBXTF9RY0RpaExDR1NfeEhnbUJCakprSWRuaVJmTmZlWnVtUEdDNVB2QzIxNldZWDV6U1VZMUQyV2RNMUdTS2tJRUkzLVVQLUZucmtrVlBmUTM5ODBfUDdodS1ad243aThWWlQ3anVwVElSUERxNUkyYkpBZVJVSFQzdkJWMEE3Tk9YRFk5ZVJvZkdxc0tOVURqWktNUU54S0FOai1vSnlmT0tkQ2oyaA?oc=5"
+  },
+  {
+   "titulo": "Moody's eleva calificación crediticia de Hidalgo a su nivel más alto en la historia",
+   "medio": "Proceso",
+   "fecha": "6 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNb0RQNVlCSWt3V0N6VDJ2YTFGbjVJTFo5ODZFeUxpaUhrZFhCSzg3TWdRWWRaTUhXazZqMENDcjNJX0REVU53czhzWEhFRmFnbHE2bi1QbEpwZzRCSGxZUGxjZzZwS1VJaGdIRW10aW9mWmZRVXprc2h1WjkxWnZ2OFVKTld4RFkzYVZMelZxTzZORVFmMXVDTG5aeWYtWWtwcGJIbkFiX0xqSmV1SG5FTzkwa3V5R3NaOGJBNUg3OHFVR3M0WVZ5X1h1U1FOWFRUR2VGQUpVSQ?oc=5",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNb0RQNVlCSWt3V0N6VDJ2YTFGbjVJTFo5ODZFeUxpaUhrZFhCSzg3TWdRWWRaTUhXazZqMENDcjNJX0REVU53czhzWEhFRmFnbHE2bi1QbEpwZzRCSGxZUGxjZzZwS1VJaGdIRW10aW9mWmZRVXprc2h1WjkxWnZ2OFVKTld4RFkzYVZMelZxTzZORVFmMXVDTG5aeWYtWWtwcGJIbkFiX0xqSmV1SG5FTzkwa3V5R3NaOGJBNUg3OHFVR3M0WVZ5X1h1U1FOWFRUR2VGQUpVSQ?oc=5"
+  },
+  {
+   "titulo": "Convocatoria para renovación en el INE será la próxima semana: Monreal",
+   "medio": "Proceso",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNM3hnbEl6ekRJclk2ZzN1VGpKUXJoTGU2OUlUbHgwLWl0Q3JkelpMbm9EYUFsdXpJNWY4eVQtX0YxdzEwRjZPTGxFRW0wU1Q1clU2N0NPOW9fZHhSSnpjd1ZRM0FRZDVaTnNxM0lwYlFGT1BWT2RJUmh2c0xWUVNqYnVzMm1MeUdWOEpLZk80N05vbTJHNXpXRG9ZNl92cmYzTnZXTTBRMmJGbFlHOS1CVTFKV3o1TVVnUzJiVmU0Z0Z2dGNYT3FQeFViUkVRYmdPVHc?oc=5",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxNM3hnbEl6ekRJclk2ZzN1VGpKUXJoTGU2OUlUbHgwLWl0Q3JkelpMbm9EYUFsdXpJNWY4eVQtX0YxdzEwRjZPTGxFRW0wU1Q1clU2N0NPOW9fZHhSSnpjd1ZRM0FRZDVaTnNxM0lwYlFGT1BWT2RJUmh2c0xWUVNqYnVzMm1MeUdWOEpLZk80N05vbTJHNXpXRG9ZNl92cmYzTnZXTTBRMmJGbFlHOS1CVTFKV3o1TVVnUzJiVmU0Z0Z2dGNYT3FQeFViUkVRYmdPVHc?oc=5"
+  },
+  {
+   "titulo": "Proceso",
+   "medio": "Proceso",
+   "fecha": "25 de febrero de 2010",
+   "url": "https://news.google.com/rss/articles/CBMiQEFVX3lxTE02TVNHWl8tSDhYSjJ0bTM4a2gtMkNidG5HVDBjZDVKczk4bjBZcU5BX1c4TE9MZm1lc3ZkX0ZqdnY?oc=5",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMiQEFVX3lxTE02TVNHWl8tSDhYSjJ0bTM4a2gtMkNidG5HVDBjZDVKczk4bjBZcU5BX1c4TE9MZm1lc3ZkX0ZqdnY?oc=5"
+  },
+  {
+   "titulo": "Escándalo en Colima: ASF detecta pagos a maestros fallecidos y comisionados del SNTE con fondos educativos",
+   "medio": "Proceso",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMigAJBVV95cUxOZ0Zvc0NWSTdWc1lUdjUtdHE5MDJBOW9MYW9RTFlkVFp3NGotMk1pLTk3enREYmp3SlZZMzVVSldqVUlVd211NzVINnZ1RlZtMGJhUmNJU0JLTkEtNlNtSlF3THN5ZDI2TDFJZFlGNmU1Y2RfTVFYTEVLRmx0ZnZCQ0lYVUJxdlZ6YjY4TFU3a1NrNTBIYkNYNkE4QlRyWnJhYUxCNHA2SXVaU1JlNjk5NGRRaEVZSkoyaTBNSzdRaDBEWG9OVVo5MWtwQUdjRWZTTHkySVhXaTBFZlhMcDUxTkxiRVh0RWltZWRBblFyS0Z3R3VhODJZRWNPRWx0RURp?oc=5",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMigAJBVV95cUxOZ0Zvc0NWSTdWc1lUdjUtdHE5MDJBOW9MYW9RTFlkVFp3NGotMk1pLTk3enREYmp3SlZZMzVVSldqVUlVd211NzVINnZ1RlZtMGJhUmNJU0JLTkEtNlNtSlF3THN5ZDI2TDFJZFlGNmU1Y2RfTVFYTEVLRmx0ZnZCQ0lYVUJxdlZ6YjY4TFU3a1NrNTBIYkNYNkE4QlRyWnJhYUxCNHA2SXVaU1JlNjk5NGRRaEVZSkoyaTBNSzdRaDBEWG9OVVo5MWtwQUdjRWZTTHkySVhXaTBFZlhMcDUxTkxiRVh0RWltZWRBblFyS0Z3R3VhODJZRWNPRWx0RURp?oc=5"
+  },
+  {
+   "titulo": "De cada 100 pesos del gasto público en 2027, 14 provendrán de deuda",
+   "medio": "Expansión",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://expansion.mx/economia/2026/11/05/de-cada-100-pesos-del-gasto-publico-en-2027-14-provendran-de-deuda",
+   "tema": "medios",
+   "visto": "6 de noviembre de 2026",
+   "grupo": "https://expansion.mx/economia/2026/11/05/de-cada-100-pesos-del-gasto-publico-en-2027-14-provendran-de-deuda"
+  },
+  {
+   "titulo": "Estiman comenzar discusión del Presupuesto de Egresos 2027 en el Pleno de San Lázaro el próximo lunes",
+   "medio": "88.9 Noticias",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://889noticias.mx/noticias/estiman-comenzar-discusion-del-presupuesto-de-egresos-2027-en-el-pleno-de-san-lazaro-el-proximo-lunes/",
+   "tema": "presupuesto",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://889noticias.mx/noticias/estiman-comenzar-discusion-del-presupuesto-de-egresos-2027-en-el-pleno-de-san-lazaro-el-proximo-lunes/"
+  },
+  {
+   "titulo": "Hacienda califica al Paquete Económico 2026 de \"presupuesto humanista\"",
+   "medio": "El Economista",
+   "fecha": "10 de septiembre de 2025",
+   "url": "https://www.eleconomista.com.mx/videos/hacienda-califica-paquete-economico-2026-presupuesto-humanista-20250910-776591.html",
+   "tema": "presupuesto",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/videos/hacienda-califica-paquete-economico-2026-presupuesto-humanista-20250910-776591.html"
+  },
+  {
+   "titulo": "México emitió la mayor deuda en 2025 entre los países de ingreso medio y bajo: Banco Mundial",
+   "medio": "LatinUS",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://latinus.us/economia/2026/11/5/mexico-emitio-la-mayor-deuda-en-2025-entre-los-paises-de-ingreso-medio-y-bajo-banco-mundial-181574.html",
+   "tema": "deuda",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://latinus.us/economia/2026/11/5/mexico-emitio-la-mayor-deuda-en-2025-entre-los-paises-de-ingreso-medio-y-bajo-banco-mundial-181574.html"
+  },
+  {
+   "titulo": "Alta deuda para apoyo a Pemex solo trasladó el riesgo al soberano sin reducir pasivos: Banco Mundial",
+   "medio": "La Jornada",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/noticia/2026/11/05/economia/alta-deuda-para-apoyo-a-pemex-solo-traslado-el-riesgo-al-soberano-sin-reducir-pasivos-banco-mundial",
+   "tema": "deuda",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/noticia/2026/11/05/economia/alta-deuda-para-apoyo-a-pemex-solo-traslado-el-riesgo-al-soberano-sin-reducir-pasivos-banco-mundial"
+  },
+  {
+   "titulo": "México, atrapado por la deuda",
+   "medio": "Crónica",
+   "fecha": "2 de noviembre de 2026",
+   "url": "https://www.cronica.com.mx/opinion/2026/11/03/mexico-atrapado-por-la-deuda/",
+   "tema": "deuda",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://www.cronica.com.mx/opinion/2026/11/03/mexico-atrapado-por-la-deuda/"
+  },
+  {
+   "titulo": "Auditoría Superior de la Federación confirma triangulación en finanzas en gobierno de Rocha Moya",
+   "medio": "Forbes México",
+   "fecha": "3 de noviembre de 2026",
+   "url": "https://forbes.com.mx/auditoria-superior-de-la-federacion-confirma-triangulacion-en-finanzas-en-gobierno-de-rocha-moya/",
+   "tema": "asf",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://forbes.com.mx/auditoria-superior-de-la-federacion-confirma-triangulacion-en-finanzas-en-gobierno-de-rocha-moya/"
+  },
+  {
+   "titulo": "Deslinda CSP a Gobierno federal de indagatorias a Samuel",
+   "medio": "El Diario",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://diario.mx/nacional/2026/nov/05/deslinda-csp-a-gobierno-federal-de-indagatorias-a-samuel-1147199.html",
+   "tema": "asf",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://diario.mx/nacional/2026/nov/05/deslinda-csp-a-gobierno-federal-de-indagatorias-a-samuel-1147199.html"
+  },
+  {
+   "titulo": "Es una propuesta del auditor, no del gobierno de México: Sheinbaum sobre reforma a la ASF; tiene facultades para hacerlo, afirma",
+   "medio": "El Universal on MSN",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/other/es-una-propuesta-del-auditor-no-del-gobierno-de-m%C3%A9xico-sheinbaum-sobre-reforma-a-la-asf-tiene-facultades-para-hacerlo-afirma/ar-AA2gPV9R",
+   "tema": "asf",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://www.msn.com/es-mx/noticias/other/es-una-propuesta-del-auditor-no-del-gobierno-de-m%C3%A9xico-sheinbaum-sobre-reforma-a-la-asf-tiene-facultades-para-hacerlo-afirma/ar-AA2gPV9R"
+  },
+  {
+   "titulo": "Al gobierno federal no le corresponde sancionar presunto desvío millonario de Samuel García, dice Sheinbaum",
+   "medio": "La Jornada",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/noticia/2026/11/05/politica/al-gobierno-federal-no-le-corresponde-sancionar-millonario-desvio-de-samuel-garcia-dice-sheinbaum",
+   "tema": "asf",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/noticia/2026/11/05/politica/al-gobierno-federal-no-le-corresponde-sancionar-millonario-desvio-de-samuel-garcia-dice-sheinbaum"
+  },
+  {
+   "titulo": "Pide Libia García certeza en el INE rumbo a elecciones de 2027",
+   "medio": "OEM",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://oem.com.mx/elsoldeleon/local/pide-libia-garcia-certeza-en-el-ine-rumbo-a-elecciones-de-2027-32981116",
+   "tema": "asf",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://oem.com.mx/elsoldeleon/local/pide-libia-garcia-certeza-en-el-ine-rumbo-a-elecciones-de-2027-32981116"
+  },
+  {
+   "titulo": "SAT: gasto en pensiones de 1.8 billones de pesos absorbe más del 40% de la recaudación de impuestos",
+   "medio": "EL CEO",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://elceo.com/economia/sat-gasto-pensiones-absorbe-recaudacion-impuestos/",
+   "tema": "impuestos",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://elceo.com/economia/sat-gasto-pensiones-absorbe-recaudacion-impuestos/"
+  },
+  {
+   "titulo": "Inteligencia Artificial en el SAT: La nueva era de la fiscalización y recaudación tributaria en México",
+   "medio": "cadenapolitica",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://cadenapolitica.com/2026/11/05/inteligencia-artificial-en-el-sat-nueva-era-fiscalizacion-recaudacion-mexico/",
+   "tema": "impuestos",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://cadenapolitica.com/2026/11/05/inteligencia-artificial-en-el-sat-nueva-era-fiscalizacion-recaudacion-mexico/"
+  },
+  {
+   "titulo": "Investigan a Jesús Ramírez Cuevas por adjudicación directa de 84 millones de pesos para la serie “Los años heridos”",
+   "medio": "TV Azteca",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.tvazteca.com/aztecanoticias/investigan-a-jesus-ramirez-cuevas-por-adjudicacion-directa-de-84-millones-de-pesos-para-la-serie-los-anos-heridos/",
+   "tema": "contratos",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://www.tvazteca.com/aztecanoticias/investigan-a-jesus-ramirez-cuevas-por-adjudicacion-directa-de-84-millones-de-pesos-para-la-serie-los-anos-heridos/"
+  },
+  {
+   "titulo": "Cinco estados concentran más de la mitad de la deuda nacional",
+   "medio": "MEGANOTICIAS",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.meganoticias.mx/cdmx/noticia/cinco-estados-concentran-m%C3%A1s-de-la-mitad-de-la-deuda-nacional/785215",
+   "tema": "estados",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://www.meganoticias.mx/cdmx/noticia/cinco-estados-concentran-m%C3%A1s-de-la-mitad-de-la-deuda-nacional/785215"
+  },
+  {
+   "titulo": "Transferencias federales a estados crecerían 3.0% el próximo año",
+   "medio": "El Economista",
+   "fecha": "9 de septiembre de 2025",
+   "url": "https://www.eleconomista.com.mx/estados/transferencias-federales-estados-crecerian-3-0-proximo-ano-20250910-776539.html",
+   "tema": "estados",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/estados/transferencias-federales-estados-crecerian-3-0-proximo-ano-20250910-776539.html"
+  },
+  {
+   "titulo": "ASF vs Orfis: 10 municipios de Veracruz en la mira por manejo de más de mil millones de 2025",
+   "medio": "La Silla Rota",
+   "fecha": "3 de noviembre de 2026",
+   "url": "https://lasillarota.com/veracruz/reportajes/2026/11/3/asf-vs-orfis-10-municipios-de-veracruz-en-la-mira-por-manejo-de-mas-de-mil-millones-de-2025-535897.html",
+   "tema": "estados",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://lasillarota.com/veracruz/reportajes/2026/11/3/asf-vs-orfis-10-municipios-de-veracruz-en-la-mira-por-manejo-de-mas-de-mil-millones-de-2025-535897.html"
+  },
+  {
+   "titulo": "El Dow Jones ganó 1.5 billones de dólares",
+   "medio": "La Jornada",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.jornada.com.mx/2026/11/05/index.php?section=economia",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://www.jornada.com.mx/2026/11/05/index.php?section=economia"
+  },
+  {
+   "titulo": "UIF bloquea cuentas de Guadalupe Taddei., 24 personas y 15 empresas relacionadas con el INE",
+   "medio": "El Financiero",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxNN3RPbnNTejZ1Zy1mOXFKbnhxVFNUXzZqYV9laUJySnZ6dDZrbGE0NTV1TXo2amluaG1EUVBzLWFXUkVqSWktdThUVDhfZk5tLUZESUQ4MlNSdVNQRTg5WDNWR2N3YWxlTkRGV1M4VEQwTnRtV0JucGxJc2Z0YzlaS3FCMzBrZXRQQzNscHQ3N2VVZzJha09keFloWFY2RzQwa0xRWGpzbFFpWC1VdVBFbU5XV1VlbVRxdWNtbnZ3XzFKS2U1QjRqcURQbG5ZQVdtdzR2bC1QUHFubm5uMXF1ZGlfSGR5U3VBNDdzTUFrcXFCNWJZeWYzblN3NUQ1Zm8?oc=5",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxNN3RPbnNTejZ1Zy1mOXFKbnhxVFNUXzZqYV9laUJySnZ6dDZrbGE0NTV1TXo2amluaG1EUVBzLWFXUkVqSWktdThUVDhfZk5tLUZESUQ4MlNSdVNQRTg5WDNWR2N3YWxlTkRGV1M4VEQwTnRtV0JucGxJc2Z0YzlaS3FCMzBrZXRQQzNscHQ3N2VVZzJha09keFloWFY2RzQwa0xRWGpzbFFpWC1VdVBFbU5XV1VlbVRxdWNtbnZ3XzFKS2U1QjRqcURQbG5ZQVdtdzR2bC1QUHFubm5uMXF1ZGlfSGR5U3VBNDdzTUFrcXFCNWJZeWYzblN3NUQ1Zm8?oc=5"
+  },
+  {
+   "titulo": "Texcoco no despegó, pero dejó una deuda millonaria: ¿Cuánto falta por pagar del aeropuerto cancelado?",
+   "medio": "El Financiero",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxPMVdsb1hJX3ZnUnR0R0V5QmlqaHBhSTR0MHBfaElWLTFDdE9lSU14eXp4QTVsUlJMdU44U2M3YmkxWVZ0UTZqVUhNTjNycGg2XzV2RzhvcElCemJxTGFfN1FEeTBHWnY5WVJQMl9RLWZjdEk2bFpLRjM2RFRWbnNFSnVhTTFtUWx5UFFOOWhRQXBQQ0R5Q3gwUUdmeHI5RzZwUmVIX3pnbXp0OUh3ZG5vVzVFMUtDZEhlRC1DeGhrRDdOb0pQemNQU1Jhc0hRSHBFbHVLZnVqY1cwdHY2SEotS1docVo?oc=5",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxPMVdsb1hJX3ZnUnR0R0V5QmlqaHBhSTR0MHBfaElWLTFDdE9lSU14eXp4QTVsUlJMdU44U2M3YmkxWVZ0UTZqVUhNTjNycGg2XzV2RzhvcElCemJxTGFfN1FEeTBHWnY5WVJQMl9RLWZjdEk2bFpLRjM2RFRWbnNFSnVhTTFtUWx5UFFOOWhRQXBQQ0R5Q3gwUUdmeHI5RzZwUmVIX3pnbXp0OUh3ZG5vVzVFMUtDZEhlRC1DeGhrRDdOb0pQemNQU1Jhc0hRSHBFbHVLZnVqY1cwdHY2SEotS1docVo?oc=5"
+  },
+  {
+   "titulo": "El sprint final de 2026 para la inversión pública",
+   "medio": "El Financiero",
+   "fecha": "3 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNY1lRX01aY2tkS1dHQ1lWZTdLTjNQNjM5aUw2OGQ5NFFOSEwwbXZTU195cktTRmo2bFVpUE5ncEFETklDQ2pDeHlPWE5ESklYU1FBUzNkQUFfUmU2SUZLaV9WTkRtQ04zWDkyaXMtRlotNkVyTTlXWDVWZlhDSENwU1JlMVNpX0N3Q1F5NDhJcHhGNmhCWFRMN19vdFJjWXh5cEZDbzNFdENVYk5uZ29qV1pWYlNqTmFxa3c?oc=5",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNY1lRX01aY2tkS1dHQ1lWZTdLTjNQNjM5aUw2OGQ5NFFOSEwwbXZTU195cktTRmo2bFVpUE5ncEFETklDQ2pDeHlPWE5ESklYU1FBUzNkQUFfUmU2SUZLaV9WTkRtQ04zWDkyaXMtRlotNkVyTTlXWDVWZlhDSENwU1JlMVNpX0N3Q1F5NDhJcHhGNmhCWFRMN19vdFJjWXh5cEZDbzNFdENVYk5uZ29qV1pWYlNqTmFxa3c?oc=5"
+  },
+  {
+   "titulo": "Zoé Robledo gana más que Sheinbaum: Así son los salarios de los funcionarios federales mejor pagados",
+   "medio": "El Financiero",
+   "fecha": "3 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQTVdPY2pxbUgzWlFnSkhfN2tWbng2VjQ2YVJjOUdMMEpkdkREZ3FBNWs2Z3J0bHUzRTQwb2RvMFNmWlp3QlRpRG1vR3Bhd3dlMXVGcHZNMHE4VFVKU0NiRlpCRDM2WTU3NXNKMzdmVmFjSzlTWlhRYzhTdlFMcVo1NTZCYnpWQjhFUUhpQmVsdFpTVE10UmV3bXMzNFdOMTVxZDNSajl0TnlPMWpIdmpFTkZleVM5Qm9SaWpYZGJ3WlMxMkg5WjNEVTV3VU1wU1k0QldUMzZua1Bmb2pkVWYtQ3VqaF9DbHc?oc=5",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQTVdPY2pxbUgzWlFnSkhfN2tWbng2VjQ2YVJjOUdMMEpkdkREZ3FBNWs2Z3J0bHUzRTQwb2RvMFNmWlp3QlRpRG1vR3Bhd3dlMXVGcHZNMHE4VFVKU0NiRlpCRDM2WTU3NXNKMzdmVmFjSzlTWlhRYzhTdlFMcVo1NTZCYnpWQjhFUUhpQmVsdFpTVE10UmV3bXMzNFdOMTVxZDNSajl0TnlPMWpIdmpFTkZleVM5Qm9SaWpYZGJ3WlMxMkg5WjNEVTV3VU1wU1k0QldUMzZua1Bmb2pkVWYtQ3VqaF9DbHc?oc=5"
+  },
+  {
+   "titulo": "ASF halla ‘irregularidades históricas’ en el INE: Advierte que revisará contrataciones de últimos 25 años",
+   "medio": "El Financiero",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQTlRJdTRIRno4ZzExREtCUXJTbXl4alN2ZHlkMVFIb2V1eGNzU2VHT3FFamt2WUdOSGltSm1FUnB1SFE5cm1lQ3I5WUFTRk1KYXloNHJ6dW9EZExwc1NmRmFmX2NSa295WGZVanRnVmVQdWVoZ2tFbEpDZ1pZVGtYNE03WFJndHdENEJyNXNOYkFkOElTZDZNZnkxUmg0OW1PLWtDWFB0cGdsX3h4Q255TldhMDRCeWUzVlZlbjB6UFdnNUcwaHFxc0hoaE9HejNGMDJOWTRjV05YSTQzSmxuOVFZYlRmYUUzX0hz?oc=5",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQTlRJdTRIRno4ZzExREtCUXJTbXl4alN2ZHlkMVFIb2V1eGNzU2VHT3FFamt2WUdOSGltSm1FUnB1SFE5cm1lQ3I5WUFTRk1KYXloNHJ6dW9EZExwc1NmRmFmX2NSa295WGZVanRnVmVQdWVoZ2tFbEpDZ1pZVGtYNE03WFJndHdENEJyNXNOYkFkOElTZDZNZnkxUmg0OW1PLWtDWFB0cGdsX3h4Q255TldhMDRCeWUzVlZlbjB6UFdnNUcwaHFxc0hoaE9HejNGMDJOWTRjV05YSTQzSmxuOVFZYlRmYUUzX0hz?oc=5"
+  },
+  {
+   "titulo": "Así funcionaban las empresas que defraudaron al INE: Simulaban competencia y se repartían contratos",
+   "medio": "El Financiero",
+   "fecha": "31 de octubre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxOSnR0OHFSdTJQYTY5bWtDTm9LcnQxZUxZWVpoNDg5cEFEUl9PT2NheG00aU9OeXQweEpYQ3d4VlpwTU16NTFkWW1RTlZHeHZzRkZXMHRscW1iRXhTNUhXM1IyYmo1LUNyLTlRZGlqSDFNTnBXYkFlcEFZNjE3eWxua0FWNlJpZ3pLM2RFd2xtSlFhVzc5X1ZXeTBLOUthS0V0TjBtVWxnVlFRU0kyMmoyVlV6QVl4eXc4andKWGZLMlNyWWNwWlM3aF96RFJQbERhTVM4Uktvazh4T1I0M1pqZ0pfOHA0UQ?oc=5",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxOSnR0OHFSdTJQYTY5bWtDTm9LcnQxZUxZWVpoNDg5cEFEUl9PT2NheG00aU9OeXQweEpYQ3d4VlpwTU16NTFkWW1RTlZHeHZzRkZXMHRscW1iRXhTNUhXM1IyYmo1LUNyLTlRZGlqSDFNTnBXYkFlcEFZNjE3eWxua0FWNlJpZ3pLM2RFd2xtSlFhVzc5X1ZXeTBLOUthS0V0TjBtVWxnVlFRU0kyMmoyVlV6QVl4eXc4andKWGZLMlNyWWNwWlM3aF96RFJQbERhTVM4Uktvazh4T1I0M1pqZ0pfOHA0UQ?oc=5"
+  },
+  {
+   "titulo": "El amor se demuestra con presupuesto, pero no así",
+   "medio": "El Informador",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPWkZOdzZZeWowZTdhdFlSdkhDQ0Y5cmFYdHcwTGJrSzNhSktwU0ZaTGFIek9ZWDJDbTdZTG5xX1o2NEZCT1pldU5nbUFsMzdGZ1hQbFNpTXFIUWFMOFl3bWhIdEVIRUphOG5UWmFWQXlqc1BrT0NpR2s0REdBSWJ1MUk1bHpZMTktMnBsWjdDcmVhdkZjcTdPTXVuekU4V18z0gGmAUFVX3lxTE5PU0JlNnpLUllaNFNROFBQd2ZjVlI2RjFzanR3X0JQdWVhMzZWMkpsUzRtTzdrRWs3V3VBc080SWlVOHl3cUUtdFh3ampNU3hUdWZkb0tobkVLV05xZEJSemxxTjdWMmFoVmczeGpUNW9aejh6SmFzeURZeFlUUDhXc3hoN1FMVjlGYThSTlJ4aGptLWdscWV2Tko1aG4xS25DZ0s1OEE?oc=5",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPWkZOdzZZeWowZTdhdFlSdkhDQ0Y5cmFYdHcwTGJrSzNhSktwU0ZaTGFIek9ZWDJDbTdZTG5xX1o2NEZCT1pldU5nbUFsMzdGZ1hQbFNpTXFIUWFMOFl3bWhIdEVIRUphOG5UWmFWQXlqc1BrT0NpR2s0REdBSWJ1MUk1bHpZMTktMnBsWjdDcmVhdkZjcTdPTXVuekU4V18z0gGmAUFVX3lxTE5PU0JlNnpLUllaNFNROFBQd2ZjVlI2RjFzanR3X0JQdWVhMzZWMkpsUzRtTzdrRWs3V3VBc080SWlVOHl3cUUtdFh3ampNU3hUdWZkb0tobkVLV05xZEJSemxxTjdWMmFoVmczeGpUNW9aejh6SmFzeURZeFlUUDhXc3hoN1FMVjlGYThSTlJ4aGptLWdscWV2Tko1aG4xS25DZ0s1OEE?oc=5"
+  },
+  {
+   "titulo": "\"Se pueden hacer ahorros\": Sheinbaum plantea recortes al INE para 2027 tras escándalos de corrupción",
+   "medio": "El Informador",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPTFNvSlVRVzByc1VTelFxZ09lbjBoM0xLV0gtN0xmTjR4R3IzUU1PUEdwVmFuZUtldTNyM004NjRUd0E3aFFlY3pRZ2thYlkzYk5wOTNKdlhFRGx0ZTYwQV9saUF1YTFJa1p6bmZSemNFdzJlVFhjVUxmc25aZnpLVEY3aDBPMXFKdXl5OGxDVmdxemtIcGxxaTJwRE9BN0dfc09VNm1XUGM0b2lVcUNwZFVMZTJJM2RPLU5fWWxXVVlkMU9YU0lGMy1NMTU0bWJvYVBIVHBLajhDdm5rN2o1Z294NW1GbWZKaVFwc0JB0gHzAUFVX3lxTFBwdDlqYTNCV2FMZzJ3cGRIWVVQM0tHMm9OYUllX0lIUWRhMEhjOWVhb2ljWWhudDRZUW5OdFowa29LUXRUT0hkOGFaNTVHTGYzTkZUQ05EcnhiczdoN3A5bmhZdEtzN2JxNWlEcW9rTFBHb01CN1JRWW5iRDVkNlpzdGNuSVA0b1dWLWZNYmNYODVhM3Jxb2VOM21FUXJrRGVQMHJMT3JpU3Q0SjA1WjhiUWhZVTVBcnZsbTh4enE5SUx3Q0piQTJJVW1OMjVlZmFLcFZnRDNJYjFVakxDTC1iQWdpbGlnX2NNOUdtcjNSMEgzMA?oc=5",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPTFNvSlVRVzByc1VTelFxZ09lbjBoM0xLV0gtN0xmTjR4R3IzUU1PUEdwVmFuZUtldTNyM004NjRUd0E3aFFlY3pRZ2thYlkzYk5wOTNKdlhFRGx0ZTYwQV9saUF1YTFJa1p6bmZSemNFdzJlVFhjVUxmc25aZnpLVEY3aDBPMXFKdXl5OGxDVmdxemtIcGxxaTJwRE9BN0dfc09VNm1XUGM0b2lVcUNwZFVMZTJJM2RPLU5fWWxXVVlkMU9YU0lGMy1NMTU0bWJvYVBIVHBLajhDdm5rN2o1Z294NW1GbWZKaVFwc0JB0gHzAUFVX3lxTFBwdDlqYTNCV2FMZzJ3cGRIWVVQM0tHMm9OYUllX0lIUWRhMEhjOWVhb2ljWWhudDRZUW5OdFowa29LUXRUT0hkOGFaNTVHTGYzTkZUQ05EcnhiczdoN3A5bmhZdEtzN2JxNWlEcW9rTFBHb01CN1JRWW5iRDVkNlpzdGNuSVA0b1dWLWZNYmNYODVhM3Jxb2VOM21FUXJrRGVQMHJMT3JpU3Q0SjA1WjhiUWhZVTVBcnZsbTh4enE5SUx3Q0piQTJJVW1OMjVlZmFLcFZnRDNJYjFVakxDTC1iQWdpbGlnX2NNOUdtcjNSMEgzMA?oc=5"
+  },
+  {
+   "titulo": "Diputados de Jalisco piden más recursos federales para el campo",
+   "medio": "El Informador",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNUFo3bkkyS1ZWenhwdWdNeEI5WXlBbkE0cmFsS1dQamcwV3dTTzNleHFsYjFoTzZuVDllNjdiZzA3SE9JNmd1X0duN0ZnTVhpY1AwMTdJVU4zMVlZanhHNHpVdHRvZ0JKdEVOd0JaWWUwNlpZUm1YMThRdmtScDRoTHlaOFlXUTZON2VFdFB3YXVVVUlhOThtQXFFRmEweDNENktNRGF0NVh2MHBjUW1xRFEzS3h0ZU3SAbwBQVVfeXFMT016N21SS3M2bEZaZlpjOG84N1BaRERubmt1d0FSQXlNdzBrd2RISVlvLTc2ZTJvUS1uRG16UE9jMWlzcFJzUXR3WWxXelFCZWNUQWJCeENqSjQ4QjdnZjNEQVA2bDNyQ05WOTJZQVZsNFoyOGRlaDRkQUUxX1JYR0MwdVNpU19weWNMdDgtbUVXU3NqTWJVMnFSMUlZTDFNUmpBbTBVR3V6SEtyd1c3RlJWNFhKelI3VkI5Mm4?oc=5",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNUFo3bkkyS1ZWenhwdWdNeEI5WXlBbkE0cmFsS1dQamcwV3dTTzNleHFsYjFoTzZuVDllNjdiZzA3SE9JNmd1X0duN0ZnTVhpY1AwMTdJVU4zMVlZanhHNHpVdHRvZ0JKdEVOd0JaWWUwNlpZUm1YMThRdmtScDRoTHlaOFlXUTZON2VFdFB3YXVVVUlhOThtQXFFRmEweDNENktNRGF0NVh2MHBjUW1xRFEzS3h0ZU3SAbwBQVVfeXFMT016N21SS3M2bEZaZlpjOG84N1BaRERubmt1d0FSQXlNdzBrd2RISVlvLTc2ZTJvUS1uRG16UE9jMWlzcFJzUXR3WWxXelFCZWNUQWJCeENqSjQ4QjdnZjNEQVA2bDNyQ05WOTJZQVZsNFoyOGRlaDRkQUUxX1JYR0MwdVNpU19weWNMdDgtbUVXU3NqTWJVMnFSMUlZTDFNUmpBbTBVR3V6SEtyd1c3RlJWNFhKelI3VkI5Mm4?oc=5"
+  },
+  {
+   "titulo": "UIF bloquea a 43 personas ligadas a proveedores electorales",
+   "medio": "El Informador",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNOUF3RWM4d01Cd3Y4YlQ2UUdraV9tYzBJOUVsY3hLN0VTaGU0M0Y1UE9QbXFWMTFEMmhuQldINnF5WkdaY1cweE9GMUdoNWxvdnNPYlJad3duTmxaUGh6UGV0WU9MWEJaMmtLQUN4UV9Cd2ZKYzlRbUlNLWZGX1R3V1d2REg0UGRSazgxNFdqV2JwN205WG5kN2dIMWl0WFV5NUZleEw3cU5CbXhHc3g2cElvVlR5UdIBuwFBVV95cUxNVm14YUR5bURkbFJtQ0gzVXdIRDBpelhuVjVQT2RnQ0tLTXJ0QnVHQkZBMU5jVVNGZTYwMFNwUFBjcEJlN3Zfc25QeVIyajQ4d28xTkxCVjlWWGpvS1Rtd2JoUWd3OVpHRGxXYjN1Tzg3bE5jM0E2QlgyTzJ5Wk5lU1pNcEhUUXVnbWJibzBBRDFuWG9tLWxScWlDVmd6d0U4ZkVTZzFKUnlCYkhuNzl3blh2OTZDUlV6Y3JB?oc=5",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNOUF3RWM4d01Cd3Y4YlQ2UUdraV9tYzBJOUVsY3hLN0VTaGU0M0Y1UE9QbXFWMTFEMmhuQldINnF5WkdaY1cweE9GMUdoNWxvdnNPYlJad3duTmxaUGh6UGV0WU9MWEJaMmtLQUN4UV9Cd2ZKYzlRbUlNLWZGX1R3V1d2REg0UGRSazgxNFdqV2JwN205WG5kN2dIMWl0WFV5NUZleEw3cU5CbXhHc3g2cElvVlR5UdIBuwFBVV95cUxNVm14YUR5bURkbFJtQ0gzVXdIRDBpelhuVjVQT2RnQ0tLTXJ0QnVHQkZBMU5jVVNGZTYwMFNwUFBjcEJlN3Zfc25QeVIyajQ4d28xTkxCVjlWWGpvS1Rtd2JoUWd3OVpHRGxXYjN1Tzg3bE5jM0E2QlgyTzJ5Wk5lU1pNcEhUUXVnbWJibzBBRDFuWG9tLWxScWlDVmd6d0U4ZkVTZzFKUnlCYkhuNzl3blh2OTZDUlV6Y3JB?oc=5"
+  },
+  {
+   "titulo": "Estas colonias integran la Zona 4 del esquema de tandeos del SIAPA",
+   "medio": "El Informador",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQbEh4RzktT0FtTzd5OWVHYUVad2VJNHpIaVVnUF9oclRrZmxLUjhvb1R1UXV6T0dyRjB1NkpyN1p5S1NVQjhIYl85NHotbnNjcVNZMWIzYmlWX2NQNVZ5cnNadDFZSHktbDczRTB4VGdLdG8zMXNPbzVldjMzVU5XdXJ0dEZoYWRhSDQtSDIzeHhWbzl1b3kyUjJlekUxek5TUVRGQVkyZUxrUF9qNmlhYWRDNGI3NU1FUS1FYWRseGpRc3puXzVTX2Yxd1BIXy04a1AyMXRTdVJlZlJhb0hON29NRm1vUHZaY1HSAe8BQVVfeXFMTmp4OG9XbDFLb2UwT2Y4S0lZM0FySW1RMEswQnNhLXB0Sm9nOUNmN3ZBalRFSTRzemJfdGZobktXdVZhTHgyV3ROUlhZOFZYWkp4YUltaW81Q2pIZFF0RWxNNXJrSmpHT0wtREtDQXNRZUxkalZxOVM3NWxIMUZWTkViT1pzSWFQbXFuUkRBRXY1ZG5tWjV1TmRXM01zMXRzLUU2NzFGNE15dnpQNXpibURvZDdCX0Z6Y1N4TG1JYVZOSF9lVjZvSmwyZWtuQjJJS1Zkay1KdURmTWdoQUVlZW9sQ1p2b0FhVlcwbzZEams?oc=5",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQbEh4RzktT0FtTzd5OWVHYUVad2VJNHpIaVVnUF9oclRrZmxLUjhvb1R1UXV6T0dyRjB1NkpyN1p5S1NVQjhIYl85NHotbnNjcVNZMWIzYmlWX2NQNVZ5cnNadDFZSHktbDczRTB4VGdLdG8zMXNPbzVldjMzVU5XdXJ0dEZoYWRhSDQtSDIzeHhWbzl1b3kyUjJlekUxek5TUVRGQVkyZUxrUF9qNmlhYWRDNGI3NU1FUS1FYWRseGpRc3puXzVTX2Yxd1BIXy04a1AyMXRTdVJlZlJhb0hON29NRm1vUHZaY1HSAe8BQVVfeXFMTmp4OG9XbDFLb2UwT2Y4S0lZM0FySW1RMEswQnNhLXB0Sm9nOUNmN3ZBalRFSTRzemJfdGZobktXdVZhTHgyV3ROUlhZOFZYWkp4YUltaW81Q2pIZFF0RWxNNXJrSmpHT0wtREtDQXNRZUxkalZxOVM3NWxIMUZWTkViT1pzSWFQbXFuUkRBRXY1ZG5tWjV1TmRXM01zMXRzLUU2NzFGNE15dnpQNXpibURvZDdCX0Z6Y1N4TG1JYVZOSF9lVjZvSmwyZWtuQjJJS1Zkay1KdURmTWdoQUVlZW9sQ1p2b0FhVlcwbzZEams?oc=5"
+  },
+  {
+   "titulo": "Sheinbaum arremete contra Lorenzo Córdova por omisiones en el INE",
+   "medio": "El Informador",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxQLVFJUEZvNkpndDlOVzdlV1ZZSlNySHlpcWpDR2JJeS1GR2kydGFOYlVrZE11d3lSVmFrcWNKVWUtY1pISy1LVUw3Y3Y3SmRoX1kzOVJxSnBtWHlRdG10WHUxU05TeHotWU8xbXVZWHpkWHZ4S1NGRFpJZXRjWGNhbFgxYnNucXhzd19nZHdOR2RaeEh2em9LLWdSckhHcEsxUHJWWEtpYWZKZ0kxOXVQTTV0NmREXy1Zc081Mi1SaEdkV19RS2EtUjdxYlQ2S0RibVREeHExSmljcnF3RnBacjd4RWJQREI1WWdic3FqUdIB9AFBVV95cUxPbEtodEJPZWNpMjlfX0dRZnd4OFoyVWJKbFlTRGl0VjFkYjY4Y1dkTWRpSHFRU1lDSUpva0VrTkU4dnpnYTc0a3BUNHdBRW96SnVQZlRuU2xKNkxQTlJ2dmJ2UTk5NDl2UlB0cWYtZWVQajNEM0xndDNzVHN6M0pXV2JHTDF3bmxyWWFZaUhoU1JheTRYNmpkMUVyTE1UdmpOS0R3TXRMbDZGdVlrc1RxLXVqMzlwNmxqLVFabW9PbG9aTUc2c2FBYktfSHFZcF8zWko0YUpfR3BkN2FHaF83T1Jkb0J4OGNlZFQtMEstZ2ZzcjRu?oc=5",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxQLVFJUEZvNkpndDlOVzdlV1ZZSlNySHlpcWpDR2JJeS1GR2kydGFOYlVrZE11d3lSVmFrcWNKVWUtY1pISy1LVUw3Y3Y3SmRoX1kzOVJxSnBtWHlRdG10WHUxU05TeHotWU8xbXVZWHpkWHZ4S1NGRFpJZXRjWGNhbFgxYnNucXhzd19nZHdOR2RaeEh2em9LLWdSckhHcEsxUHJWWEtpYWZKZ0kxOXVQTTV0NmREXy1Zc081Mi1SaEdkV19RS2EtUjdxYlQ2S0RibVREeHExSmljcnF3RnBacjd4RWJQREI1WWdic3FqUdIB9AFBVV95cUxPbEtodEJPZWNpMjlfX0dRZnd4OFoyVWJKbFlTRGl0VjFkYjY4Y1dkTWRpSHFRU1lDSUpva0VrTkU4dnpnYTc0a3BUNHdBRW96SnVQZlRuU2xKNkxQTlJ2dmJ2UTk5NDl2UlB0cWYtZWVQajNEM0xndDNzVHN6M0pXV2JHTDF3bmxyWWFZaUhoU1JheTRYNmpkMUVyTE1UdmpOS0R3TXRMbDZGdVlrc1RxLXVqMzlwNmxqLVFabW9PbG9aTUc2c2FBYktfSHFZcF8zWko0YUpfR3BkN2FHaF83T1Jkb0J4OGNlZFQtMEstZ2ZzcjRu?oc=5"
+  },
+  {
+   "titulo": "Peso mexicano se deprecia frente al dólar; espera anuncio de política monetaria del Banxico",
+   "medio": "El Economista",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/mercados/precio-dolar-hoy-5-noviembre-2026-cuanto-cotiza-20261105-842340.html",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/mercados/precio-dolar-hoy-5-noviembre-2026-cuanto-cotiza-20261105-842340.html"
+  },
+  {
+   "titulo": "BCE alerta sobre los riesgos de la deuda y las entidades no bancarias para la política monetaria",
+   "medio": "El Economista",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/sectorfinanciero/bce-alerta-sobre-riesgos-deuda-entidades-bancarias-politica-monetaria-20261105-842316.html",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/sectorfinanciero/bce-alerta-sobre-riesgos-deuda-entidades-bancarias-politica-monetaria-20261105-842316.html"
+  },
+  {
+   "titulo": "Sheinbaum prepara decreto para fortalecer a Talleres Gráficos de México de cara a elecciones 2027",
+   "medio": "Proceso",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.proceso.com.mx/nacional/2026/11/5/sheinbaum-prepara-decreto-para-fortalecer-a-talleres-graficos-de-mexico-de-cara-a-elecciones-2027-383193.html",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://www.proceso.com.mx/nacional/2026/11/5/sheinbaum-prepara-decreto-para-fortalecer-a-talleres-graficos-de-mexico-de-cara-a-elecciones-2027-383193.html"
+  },
+  {
+   "titulo": "UMSNH: la lucha por el voto confiscado",
+   "medio": "Proceso",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://www.proceso.com.mx/opinion/2026/11/5/umsnh-la-lucha-por-el-voto-confiscado-383176.html",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://www.proceso.com.mx/opinion/2026/11/5/umsnh-la-lucha-por-el-voto-confiscado-383176.html"
+  },
+  {
+   "titulo": "Ley de economía digital: los riesgos que enfrentarán los usuarios con más pagos con QR y transferencias",
+   "medio": "Expansión",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://expansion.mx/economia/2026/11/05/ley-de-economia-digital-los-riesgos-que-enfrentaran-los-usuarios-con-mas-pagos-con-qr-y-transferencias",
+   "tema": "medios",
+   "visto": "5 de noviembre de 2026",
+   "grupo": "https://expansion.mx/economia/2026/11/05/ley-de-economia-digital-los-riesgos-que-enfrentaran-los-usuarios-con-mas-pagos-con-qr-y-transferencias"
+  },
   {
    "titulo": "Deuda pública de México alcanza 52.6% del PIB: qué significa para tu bolsillo",
    "medio": "Mi Bolsillo",
@@ -2584,182 +3484,6 @@
    "fecha": "27 de octubre de 2026",
    "url": "https://siete24.mx/mexico/legisladores-contemplan-presupuesto-2027-de-2-38-billones-para-salud/",
    "tema": "salud",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "En 2027, SSM contaría con presupuesto similar al de 2026, prevé Elías Ibarra",
-   "medio": "Noventa Grados",
-   "fecha": "30 de octubre de 2026",
-   "url": "https://www.noventagrados.com.mx/salud/en-2027-ssm-contaria-con-presupuesto-similar-al-de-2026-preve-elias-ibarra.htm",
-   "tema": "salud",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Acuerdan diputados de la Comisión de Seguridad Social otorgar recursos adicionales a IMSS e ISSSTE para 2027",
-   "medio": "Reporte Índigo",
-   "fecha": "15 de octubre de 2026",
-   "url": "https://www.reporteindigo.com/nacional/acuerdan-diputados-de-la-comision-de-seguridad-social-otorgar-recursos-adicionales-a-imss-e-issste-para-2027-20261015-0133.html",
-   "tema": "salud",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "IMSS tendría mil millones de pesos extra en 2027; esta es la propuesta que planteran los diputados",
-   "medio": "TV Azteca",
-   "fecha": "15 de octubre de 2026",
-   "url": "https://www.tvazteca.com/aztecanoticias/imss-2027-diputados-proponen-mil-millones-pesos-adicionales-al-presupuesto/",
-   "tema": "salud",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Realmente ha disminuido el presupuesto de salud?”",
-   "medio": "Quadratin Hidalgo",
-   "fecha": "22 de octubre de 2026",
-   "url": "https://hidalgo.quadratin.com.mx/opinion/realmente-ha-disminuido-el-presupuesto-de-salud/",
-   "tema": "salud",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Presupuesto de Salud 2027",
-   "medio": "La Silla Rota",
-   "fecha": "23 de octubre de 2026",
-   "url": "https://lasillarota.com/opinion/columnas/2026/10/23/presupuesto-de-salud-2027-534285.html",
-   "tema": "salud",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Diputados recomiendan reasignar mil mdp a prestaciones sociales en el IMSS",
-   "medio": "Milenio on MSN",
-   "fecha": "15 de octubre de 2026",
-   "url": "https://www.msn.com/es-mx/noticias/other/diputados-recomiendan-reasignar-mil-mdp-a-prestaciones-sociales-en-el-imss/ar-AA2ekF7U",
-   "tema": "salud",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Decreto presidencial amenaza al IMSS y al ISSSTE: diputado",
-   "medio": "El Siglo de Torreón",
-   "fecha": "10 de abril de 2026",
-   "url": "https://www.elsiglodetorreon.com.mx/noticia/2026/decreto-presidencial-amenaza-al-imss-y-al-issste-diputado.html",
-   "tema": "salud",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "¿Cuándo depositan el aguinaldo a pensionados del IMSS e ISSSTE?",
-   "medio": "El Informador",
-   "fecha": "29 de octubre de 2026",
-   "url": "https://www.informador.mx/mexico/aguinaldo-pensionados-imss-e-issste-2026-cuando-lo-depositan-20261029-0212.html",
-   "tema": "salud",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Aguinaldo 2026: fechas de pago para pensionados IMSS, ISSSTE, sector público y privado en México",
-   "medio": "Mi Bolsillo on MSN",
-   "fecha": "29 de octubre de 2026",
-   "url": "https://www.msn.com/es-mx/noticias/otras/aguinaldo-2026-fechas-de-pago-para-pensionados-imss-issste-sector-p%C3%BAblico-y-privado-en-m%C3%A9xico/ar-AA2gmXml",
-   "tema": "salud",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Pensión IMSS e ISSSTE: fecha exacta del depósito del aguinaldo 2026 y quiénes lo reciben primero",
-   "medio": "Eje Central",
-   "fecha": "5 de octubre de 2026",
-   "url": "https://www.ejecentral.com.mx/nuestro-eje/pension-imss-e-issste-fecha-exacta-del-deposito-del-aguinaldo-2026-y-quienes-lo-reciben-primero",
-   "tema": "salud",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Pensión del IMSS e ISSSTE en noviembre: estas son las fechas de pago y cuándo recibirán el aguinaldo",
-   "medio": "Expansión",
-   "fecha": "25 de octubre de 2026",
-   "url": "https://expansion.mx/finanzas-personales/2026/10/25/pension-imss-issste-noviembre-fecha-cuanto-aguinaldo",
-   "tema": "salud",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Rescatan estados con gasto público",
-   "medio": "El Mañana de Reynosa",
-   "fecha": "3 de mayo de 2021",
-   "url": "https://www.elmanana.com/rescatan-estados-con-gasto-publico/5339012",
-   "tema": "estados",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Recortes a participaciones federales obligan a Ciudad Valles a considerar préstamo para cierre 2026",
-   "medio": "ANTENA SAN LUIS",
-   "fecha": "29 de octubre de 2026",
-   "url": "https://antenasanluis.mx/recortes-participaciones-ciudad-valles-prestamo/",
-   "tema": "estados",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Participaciones federales registran su primera disminución desde el 2020",
-   "medio": "El Economista",
-   "fecha": "18 de octubre de 2026",
-   "url": "https://www.eleconomista.com.mx/estados/participaciones-federales-registran-primera-disminucion-20261019-839461.html",
-   "tema": "estados",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Estados y municipios enfrentan presiones financieras: Moody's",
-   "medio": "El Economista",
-   "fecha": "23 de julio de 2026",
-   "url": "https://www.eleconomista.com.mx/estados/estados-municipios-enfrentan-presiones-financieras-moody-s-20260724-824825.html",
-   "tema": "estados",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Alcaldes panistas urgen a gobierno entregar a estados y municipios 26 mmdp en participaciones federales antes de que concluya el actual ejercicio fiscal",
-   "medio": "Indigo",
-   "fecha": "13 de octubre de 2026",
-   "url": "https://www.reporteindigo.com/nacional/alcaldes-panistas-urgen-a-gobierno-entregar-a-estados-y-municipios-26-mmdp-en-participaciones-federales-antes-de-que-concluya-el-actual-ejercicio-fiscal-20261013-0114.html",
-   "tema": "estados",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Pierde Ciudad Victoria 20 mdp en participaciones federales",
-   "medio": "ABC Noticias",
-   "fecha": "22 de octubre de 2026",
-   "url": "https://abcnoticias.mx/tamaulipas/2026/10/22/pierde-ciudad-victoria-20-mdp-en-participaciones-federales-293187.html",
-   "tema": "estados",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Recortes en participaciones federales han sido pocos para el municipio: tesorero de Torreón",
-   "medio": "Milenio",
-   "fecha": "17 de septiembre de 2026",
-   "url": "https://www.milenio.com/estados/torreon-registra-recortes-participaciones-federales-2026",
-   "tema": "estados",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Nuevo León activará fondo para proteger a municipios ante caída de participaciones federales",
-   "medio": "SDPnoticias",
-   "fecha": "14 de julio de 2026",
-   "url": "https://www.sdpnoticias.com/estados/nuevo-leon/nuevo-leon-activara-fondo-para-proteger-a-municipios-ante-caida-de-participaciones-federales/",
-   "tema": "estados",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Hacienda activa fondo de estabilización para subsanar recursos a estados y municipios; medida busca alinearse al PEF",
-   "medio": "El Universal on MSN",
-   "fecha": "20 de octubre de 2026",
-   "url": "https://www.msn.com/es-mx/noticias/otras/hacienda-activa-fondo-de-estabilizaci%C3%B3n-para-subsanar-recursos-a-estados-y-municipios-medida-busca-alinearse-al-pef/ar-AA2fH1QN",
-   "tema": "estados",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Llegaron a Tamaulipas más recursos federales",
-   "medio": "Milenio",
-   "fecha": "24 de octubre de 2026",
-   "url": "https://www.milenio.com/estados/tamaulipas-recibe-32-mil-millones-pesos-recursos-federales",
-   "tema": "estados",
-   "visto": "30 de octubre de 2026"
-  },
-  {
-   "titulo": "Patea ASF fiscalización a federación, estados y municipios",
-   "medio": "El Universal",
-   "fecha": "29 de junio de 2026",
-   "url": "https://www.eluniversal.com.mx/nacion/patea-asf-fiscalizacion-a-federacion-estados-y-municipios/?outputType=amp",
-   "tema": "estados",
    "visto": "30 de octubre de 2026"
   }
  ]
