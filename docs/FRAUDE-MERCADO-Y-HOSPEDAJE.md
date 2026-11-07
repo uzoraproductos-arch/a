@@ -105,10 +105,39 @@ diciembre de 2025»). Las cuentas son nuestras sobre el archivo oficial.
 | Desvirtuado | 340 | derivado |
 | **Total en la lista** | **14,234** | derivado |
 
-**El monto facturado por las empresas fantasma es pendiente.** La prensa
-repite cifras de 1.6 a 2 billones de pesos, pero no encontramos el documento
-del SAT que las sostenga. Al SAT le toca publicarlo, y no lo ha hecho:
-falta de transparencia de esa dependencia.
+**Lo que facturaron las empresas fantasma: una sola cifra oficial, de 2019**
+(integrada el 07-11-2026). El SAT lo dijo en su comunicado del 25-06-2019,
+«SAT combate la evasión fiscal por operaciones simuladas»
+(https://www.gob.mx/sat/prensa/sat-combate-la-evasion-fiscal-por-operaciones-simuladas_com035):
+
+> «de 2014 a la fecha, fueron identificadas 8 mil 204 empresas que facturan
+> operaciones simuladas y que han generado 8 millones 827 mil 390 facturas
+> falsas por un monto aproximado de 1.6 billones de pesos, lo cual, supone una
+> evasión fiscal de 354 mil 512 millones de pesos que representa 1.4% del
+> Producto Interno Bruto.»
+
+`herramientas/anclar_sat_efos.py` lo ancla en `docs/seguridad/sat-efos-2019.json`.
+La página de gob.mx cambia en cada descarga, así que la huella SHA-256 es la
+**del texto del comunicado** (`1b97c317…faa1`); dos descargas dieron la misma.
+Va como `oficial` porque consta que el SAT lo publicó.
+
+Puntos ciegos que se dicen junto a la cifra:
+
+- **Es «aproximado» y redondo:** 1.6 billones, no un monto al peso. Una
+  presentación de esa conferencia que circula en sitios privados da
+  1,611,418 millones, pero no está en gob.mx y no entra.
+- **Es de 2014 a junio de 2019**, y no dice si las 8,204 son las definitivas
+  de la lista o todas las identificadas. Hoy hay 11,270 definitivos: los dos
+  números no se comparan.
+- **La evasión de 354,512 millones es una estimación del SAT**, no dinero
+  recuperado ni sentenciado.
+- **Las cifras de «2 billones» o más que repite la prensa** no tienen
+  documento del SAT y no entran.
+- El SAT no ha vuelto a publicar el monto: no está en su sala de prensa ni en
+  el Informe Tributario y de Gestión (revisado el del primer trimestre
+  de 2024). Por eso el pendiente `fraude-efos-monto` sigue, ahora por la
+  cifra exacta y al día, y nombra al SAT como la única dependencia que tiene
+  esas facturas, sin decir que una ley lo obliga a publicarla.
 
 ### 1.4 Las quejas por fraude financiero (CONDUSEF)
 

@@ -1904,7 +1904,7 @@
       }
 
       /* La pestaña Datos: la lista 69-B, las descargas, los plazos de la ASF y el peso. */
-      if (/\b69 ?b\b|\befos\b|lista negra del sat|empresas fantasma|factureras|operaciones (simuladas|inexistentes)/.test(t) && !/\bdonde\b/.test(t)) { var r69 = lista69(t); if (r69) return fin(r69, { tipo: '' }); }
+      if (/\b69 ?b\b|\befos\b|lista negra del sat|empresas fantasma|factureras|operaciones (simuladas|inexistentes)/.test(t) && !/\bdonde\b/.test(t) && !/\b(cuanto|monto|montos|dinero|billones|evasion|evadieron)\b/.test(t)) { var r69 = lista69(t); if (r69) return fin(r69, { tipo: '' }); }
       if (/descarg|\bcsv\b|excel|datos abiertos|bases? de datos|bajar (los )?datos/.test(t) && !/pilar/.test(t) && !es.length) return fin(descargas(t), { tipo: '' });
       if (/plazo|cuanto tiempo|cuantos dias/.test(t) && /asf|auditoria|observac|pliego|solvent|respond|aclarar|informe individual/.test(t)) return fin(plazosAsf(), { tipo: '' });
       if (!es.length) { var rp = pesoResp(t, q); if (rp) return fin(rp, { tipo: 'peso' }); }

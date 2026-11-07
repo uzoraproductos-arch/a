@@ -17,6 +17,9 @@ docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md §1. Cotejado contra el documento oficial:
 - SAT, Listado completo del artículo 69-B del CFF: la cuenta se hace aquí
   mismo sobre `assets/auditor/data/sat-69b.js` (la copia con huella), así que
   cambia sola cuando se actualiza la lista.
+- SAT, comunicado del 25-06-2019 («SAT combate la evasión fiscal por
+  operaciones simuladas»): lo único oficial sobre cuánto facturaron las EFOS,
+  anclado con la huella de su texto por anclar_sat_efos.py (07-11-2026).
 
 Cada cifra sirve para una sola idea: el fraude es frecuente, casi nadie lo
 denuncia y por eso conviene revisar antes de pagar. **La plataforma no dice que
@@ -70,6 +73,13 @@ def enve():
     return d
 
 
+def efos():
+    """Lo que facturaron las EFOS según el SAT (comunicado del 25-06-2019), del
+    archivo anclado por anclar_sat_efos.py con la huella del texto."""
+    with open(os.path.join(RAIZ, 'docs', 'seguridad', 'sat-efos-2019.json'), encoding='utf-8') as f:
+        return json.load(f)
+
+
 def lista_69b():
     """La cuenta de la 69-B sobre la copia de la plataforma: por situación y por
     tipo de persona. Sale del archivo, nunca de un número escrito a mano."""
@@ -110,9 +120,15 @@ def pendientes():
          'responsable': 'Falta de la plataforma: los documentos existen, pero el servidor de la CONDUSEF no respondió al cotejo (07-11-2026)',
          'enlace': 'https://www.condusef.gob.mx', 'enlace_txt': 'CONDUSEF, estadística', 'aparece': aqui},
         {'id': 'fraude-efos-monto', 'tema': 'El fraude en números',
-         'que': 'Cuánto facturaron las empresas de la lista 69-B (operaciones simuladas)',
-         'porque': 'La prensa repite de 1.6 a 2 billones de pesos, pero no encontramos el documento del SAT que lo sostenga. Ni el SAT ni Hacienda lo han publicado: falta de transparencia de esas dependencias.',
-         'responsable': 'SAT', 'enlace': 'https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336',
+         'que': 'Cuánto han facturado las empresas de la lista 69-B (operaciones simuladas), con cifra exacta y al día',
+         'porque': ('Lo único oficial es un comunicado del SAT del 25-06-2019: «un monto aproximado de {} billones de pesos» en {:,} facturas '
+                    'falsas de {:,} empresas, de 2014 a esa fecha. Es una cifra redonda, de hace más de siete años, y no dice si esas '
+                    'empresas son las definitivas de la lista. Desde entonces el SAT no ha vuelto a publicar el monto (revisado el '
+                    '07-11-2026 en su sala de prensa y en su Informe Tributario y de Gestión), aunque la lista sigue creciendo. Las '
+                    'cifras de 2 billones o más que repite la prensa no tienen documento del SAT.').format(
+                        efos()['monto_billones'], efos()['facturas'], efos()['efos']),
+         'responsable': ('SAT: es la única dependencia que tiene esas facturas. Lo dijo una vez, en 2019, y no ha publicado la cifra '
+                         'exacta ni su actualización'), 'enlace': 'https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336',
          'enlace_txt': 'SAT, listados del artículo 69-B', 'aparece': aqui},
     ]
 
@@ -142,6 +158,7 @@ def cifras():
     nf = n['costo_promedio']['Fraude']
     vt = ('INEGI, ENVE 2024, tabulados en datos abiertos (1.8, 1.16 y 3.4)', n['zip']['url'])
     vp = ('INEGI, ENVE 2024, presentación de resultados, lámina «Costo del delito según tipo de delito»', n['pdf']['url'])
+    f = efos()
     l = (SAT_TX + (', corte «%s»' % corte if corte else ''), s['meta']['url'])
     return [
         ('primero', 'El delito más frecuente en México', 'El fraude',
@@ -185,6 +202,10 @@ def cifras():
         ('lista', 'Cuántos hay en la lista 69-B', _n(s['total']),
          'contribuyentes en la lista: %s definitivos, %s presuntos, %s con sentencia favorable y %s desvirtuados'
          % (_n(s['F']), _n(s['P']), _n(s['S']), _n(s['D'])), 'derivado', 'conteo de los renglones del listado del SAT, por situación', 'facturas', l),
+        ('monto_efos', 'Cuánto facturaron las empresas fantasma', 'Unos $%s billones' % f['monto_billones'],
+         'en %s facturas falsas de %s empresas que facturan operaciones simuladas, de 2014 al 25 de junio de 2019, según el SAT, que lo dio '
+         'como «monto aproximado» y calculó una evasión de $%s millones, el %s %% del PIB. Es la única vez que el SAT ha publicado ese monto'
+         % (_n(f['facturas']), _n(f['efos']), _n(f['evasion_mdp']), f['evasion_pib']), 'oficial', '', 'facturas', (f['fuente'], f['url'])),
     ]
 
 
@@ -247,11 +268,13 @@ def pagina():
                        % (_cifra('empresas'), _cifra('fraude_empresas'), _cifra('costo_empresas'), _cifra('costo_fraude_empresas'),
                           _cifra('oculta_empresas'), _chip('pendiente', 'fraude-enve-costo'), _fuente((ENVE_TX, ENVE)),
                           _fuente(('INEGI, ENVE 2024, tabulados y presentación de resultados', enve()['pagina'])))},
-            {'id': 'fr-facturas', 'titulo': 'Las facturas de empresas fantasma', 'texto': 'La lista 69-B del SAT, contada sobre la copia de la plataforma.', 'tarjetas': [],
+            {'id': 'fr-facturas', 'titulo': 'Las facturas de empresas fantasma', 'texto': 'La lista 69-B del SAT, contada sobre la copia de la plataforma, y lo único que el SAT ha dicho de cuánto facturaron.', 'tarjetas': [],
              'bloque': ('<ul class="leg-cifras">%s%s</ul><p>Una factura de un contribuyente en definitivo no sirve para deducir, y la lista cambia: '
                         'el Vigía 69-B la compara cada semana. <a href="herramienta-inspector-efos.html">Busca un RFC en la lista</a> o '
                         '<a href="herramienta-inspector-factura.html">lee una factura sin subirla</a>.</p>%s')
-                       % (_cifra('definitivos'), _cifra('lista'), _fuente((SAT_TX, s['meta']['url'])))},
+                       % (_cifra('definitivos'), _cifra('lista'), _fuente((SAT_TX, s['meta']['url'])))
+                       + ('<ul class="leg-cifras">%s</ul><p>Esa cifra tiene más de siete años y es redonda: la exacta y la de hoy siguen %s.</p>%s'
+                          % (_cifra('monto_efos'), _chip('pendiente', 'fraude-efos-monto'), _fuente((efos()['fuente'], efos()['url']))))},
             {'id': 'fr-pendientes', 'titulo': 'Lo que todavía nadie ha publicado', 'texto': 'Cada uno con su ficha en el Registro de pendientes.', 'tarjetas': [],
              'bloque': '<ul>%s</ul>' % ''.join(_pend(p) for p in pendientes())},
             {'id': 'fr-revisar', 'titulo': 'Antes de pagarle a alguien', 'texto': 'Lo que puedes revisar hoy, gratis y con documento oficial.', 'tarjetas': [],

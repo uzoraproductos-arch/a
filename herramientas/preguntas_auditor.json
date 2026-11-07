@@ -2262,6 +2262,13 @@
    "dice": [
     "1.3"
    ]
+  },
+  {
+   "q": "¿Cuánto facturaron las empresas fantasma?",
+   "ir": "aprende-fraude-en-numeros.html#fr-facturas",
+   "dice": [
+    "1.6 billones"
+   ]
   }
  ]
 }

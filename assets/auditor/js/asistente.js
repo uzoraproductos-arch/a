@@ -934,6 +934,8 @@
   function listaNegra(q) {
     var p = plano(q), rfcs = (q.match(RFC_RE) || []).map(function (x) { return x.toUpperCase(); }).filter(function (x, i, l) { return l.indexOf(x) === i; });
     if (!rfcs.length && !SAT_PAL.test(p)) return null;
+    /* «¿Cuánto facturaron las empresas fantasma?» pide una cifra, no un nombre: la contesta «El fraude en números». */
+    if (!rfcs.length && /\b(cuanto|monto|montos|dinero|billones|evasion|evadieron)\b/.test(p)) return null;
     var nombre = '';
     if (!rfcs.length) {
       nombre = p.trim().split(' ').filter(function (w) { return w.length > 1 && SAT_FUERA.indexOf(w) < 0; }).join(' ');
@@ -1355,6 +1357,8 @@
       else if (/\b(modo inspector|grandes investigaciones|(seis|6) aplicaciones|que (puedo|puedes) investigar|como investigo)\b/.test(p)) id = '*';
     }
     if (!id) return null;
+    /* «¿Cuánto facturaron las empresas fantasma?» pide la cifra, no la aplicación (igual que en listaNegra). */
+    if (id === 'inspefos' && /\b(cuanto|monto|montos|dinero|billones|evasion|evadieron)\b/.test(p)) return null;
     /* «¿Qué es…?» lo contesta el glosario o la página; aquí, quien quiere usarla. */
     if (/^\s*(que|q) (es|son|significa|hace)\b/.test(p) && id !== '*') return null;
     if (id === '*') {

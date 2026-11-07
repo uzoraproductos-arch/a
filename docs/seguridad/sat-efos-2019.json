@@ -1,0 +1,13 @@
+{
+ "fuente": "SAT, comunicado «SAT combate la evasión fiscal por operaciones simuladas», 25-06-2019",
+ "url": "https://www.gob.mx/sat/prensa/sat-combate-la-evasion-fiscal-por-operaciones-simuladas_com035",
+ "fecha": "2019-06-25",
+ "periodo": "de 2014 al 25-06-2019",
+ "sha_texto": "1b97c317ae4fb64bc181203e3786c550ec367e77c80435a8085751055837faa1",
+ "cita": "La Jefa del SAT también explicó que, de 2014 a la fecha, fueron identificadas 8 mil 204 empresas que facturan operaciones simuladas y que han generado 8 millones 827 mil 390 facturas falsas por un monto aproximado de 1.6 billones de pesos, lo cual, supone una evasión fiscal de 354 mil 512 millones de pesos que representa 1.4% del Producto Interno Bruto.",
+ "efos": 8204,
+ "facturas": 8827390,
+ "monto_billones": 1.6,
+ "evasion_mdp": 354512,
+ "evasion_pib": 1.4
+}
