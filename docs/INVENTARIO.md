@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 295 |
+| Páginas revisadas | 296 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -217,6 +217,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `noticias-al-momento-imss-modalidad-40-gestores.html` | El IMSS acota la Modalidad 40: lo que dice el Diario Oficial y lo que falta probar · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 3 |
 | `noticias-al-momento-jalisco-gasto-federal-pef-2027.html` | Jalisco y el gasto federal: aporta el 7.5 % del PIB y recibe el 6.1 % de lo que la Federación reparte a los estados · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-lfd-2027-dnr-defensa-tren-maya-aifa.html` | ¿18 mil millones «en subsidios» para el Tren Maya y el AIFA? Es el cobro a los turistas extranjeros, y el 57 % es la parte de la Defensa, no un aumento · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 2 |
+| `noticias-al-momento-pef-2027-comision-agua-jalisco-6500.html` | Los 6,500 millones para el agua de Jalisco: es menos de la mitad de lo prometido, va en un dictamen de comisión y todavía no es el Presupuesto aprobado · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-pemex-3t-2026-perdida-neta.html` | Pemex vuelve a perder en el tercer trimestre: ¿10,792 o 10,795 millones?, y lo que esa pérdida no cuenta · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 4 |
 | `noticias-al-momento-portacelis-permiso-diesel-sener.html` | Portacelis y el permiso para importar 52 millones de litros de diésel: lo que dice MCCI, lo que consta y lo que es puro adjetivo · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-senado-ley-de-ingresos-2027.html` | El Senado aprueba la Ley de Ingresos 2027: de sus 10.6 billones, casi 1.5 son dinero prestado · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 2 |
@@ -224,7 +225,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `noticias-auditavision.html` | Auditavisión Noticias · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `noticias-relevantes.html` | Noticias relevantes · Auditavisión | apartados.py | 37 | 0 | 0 | 0 | 0 |
 | `noticias-seguimiento.html` | Seguimiento: el caso no se olvida · Auditavisión | apartados.py | 44 | 0 | 8 | 4 | 6 |
-| `noticias-verifica.html` | Verifica una noticia · Auditavisión | apartados.py | 74 | 0 | 0 | 0 | 0 |
+| `noticias-verifica.html` | Verifica una noticia · Auditavisión | apartados.py | 75 | 0 | 0 | 0 | 0 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 55 | 0 | 0 | 5 | 1 |
 | `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 0 |
 | `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 52 | 0 | 4 | 0 | 0 |
@@ -292,7 +293,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 234 | 0 | 0 | 0 | 125 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 236 | 0 | 0 | 0 | 127 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 36 | 0 | 6 | 3 | 1 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 45 | 0 | 1 | 0 | 0 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
@@ -363,7 +364,7 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-124 fichas, cada una con su porqué, su responsable y su enlace oficial.
+126 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 

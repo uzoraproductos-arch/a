@@ -1304,6 +1304,92 @@
         sug: PROM.p.map(function (p) { return '¿Qué pasó con lo que prometieron de ' + p.temas[0] + '?'; }).slice(0, 3) };
     }
 
+    /* ---------- La lectura de una nota que el usuario pega (pedido del autor, 07-11-2026) ----------
+       «No agarra el sentido de la información que debe interpretar»: una nota completa (texto, con o sin liga) ya no se
+       empata con la columna que comparta una palabra. Se lee: lo que afirma y sus cifras, si ya la cotejamos, si toca una
+       promesa que seguimos (y cuánto de lo prometido llega), sus puntos ciegos y lo que sigue. */
+    var LIGAS = /https?:\/\/[^\s<>"']+/gi;
+    function sinLiga(q) { return String(q || '').replace(LIGAS, ' ').replace(/\s+/g, ' ').trim(); }
+    function esNota(q) {
+      var tx = sinLiga(q), con = LIGAS.test(q);
+      LIGAS.lastIndex = 0;
+      if (/^\s*[¿?]/.test(tx) && tx.length < 220) return false;
+      var frases = tx.split(/[.!?\n]+/).filter(function (s) { return s.trim().length > 25; }).length;
+      return (tx.length >= 140 && frases >= 2) || (con && tx.length >= 60);
+    }
+    /* El orden importa: «Comisión de Presupuesto y Cuenta Pública» no habla de lo gastado. */
+    var ETAPA_PAL = [['presupuesto', /presupuesto de egresos|\bpef\b|dictamen|reasign|etiquetad|partida/],
+      ['asf', /auditoria superior|\basf\b|pliego|por aclarar/], ['gasto', /cuenta publica 20\d\d|ejercid|se gasto|gastaron|pagad/]];
+    var CIEGO_LEAD = { promesa: 'es un anuncio, todavía no un gasto', 'en-lo-general': 'todavía no es definitivo',
+      condicional: 'lo supone, no lo afirma', juicio: 'trae adjetivos que juzgan antes de probar', quien: 'no dice qué documento lo sostiene' };
+    function millones(v) { return '$' + Math.round(v).toLocaleString('es-MX') + ' millones'; }
+    function promesaDe(t) {
+      if (!PROM) return null;
+      return PROM.p.filter(function (p) {
+        return p.temas.some(function (w) { return t.indexOf(w) >= 0; }) ||
+          (p.temas_y || []).some(function (par) { return par.every(function (w) { return t.indexOf(w) >= 0; }); });
+      })[0] || null;
+    }
+    function lectura(q, col) {
+      var tx = sinLiga(q), t = plano(tx), url = (String(q).match(LIGAS) || [])[0];
+      LIGAS.lastIndex = 0;
+      var ext = VER ? VER.analiza({ texto: tx, titulo: '' }) : { cifras: [] }, fu = [], partes = [], lead = [];
+      var NOM = {}, ICO = {};
+      if (PROM) PROM.etapas.forEach(function (e) { ICO[e[0]] = e[1]; NOM[e[0]] = e[2]; });
+      /* 1. Lo que afirma. */
+      var vistas = {}, cif = ext.cifras.filter(function (c) {
+        var k = c.mdp ? 'm' + c.mdp : c.bruto;
+        if (!c.bruto || vistas[k]) return false;
+        vistas[k] = 1;
+        return true;
+      }).slice(0, 4);
+      if (cif.length) partes.push('<p class="pa-rep-s">🧾 Lo que afirma, en cifras</p><ul class="pa-lista">' + cif.map(function (c) {
+        var o = c.v && c.v.tipo !== 'gris' && VER.porId[c.sel];
+        if (o) fu.push({ que: o.n, e: o.e, fu: { tx: o.f || 'documento', url: o.u } });
+        return '<li>«' + esc(c.bruto) + '»: ' + (o ? VEMO[c.v.tipo] + ' <b>' + esc(c.v.tit) + '</b> (el documento dice ' + esc(VER.fmt(o.v)) + ', ' + esc(o.n) + ').'
+          : 'todavía no tengo un documento con qué compararla; no cuenta como falsa.') + '</li>';
+      }).join('') + '</ul>');
+      /* 2. Lo que ya seguimos: la memoria de promesas. */
+      var p = promesaDe(t);
+      if (p) {
+        var et = (ETAPA_PAL.filter(function (x) { return x[1].test(t); })[0] || [])[0], st = et && p.etapas.filter(function (x) { return x.et === et; })[0];
+        var dicho = cif.filter(function (c) { return c.mdp && !c.dolar; })[0], h = '';
+        h += '<p class="pa-rep-s">📣 Esto ya lo seguimos: la memoria de promesas</p><p><b>' + esc(p.tit) + '.</b> La última promesa: <b>' + esc(millones(p.prometido)) + '</b> ' + chip('oficial') + '.</p>';
+        if (dicho && p.prometido) {
+          var pct = dicho.mdp / p.prometido * 100;
+          h += '<p>Lo que dice tu nota, <b>«' + esc(dicho.bruto) + '»</b>, es el <b>' + pct.toLocaleString('es-MX', { maximumFractionDigits: 1 }) + ' %</b> de lo prometido' +
+            (dicho.mdp < p.prometido ? '; faltarían <b>' + esc(millones(p.prometido - dicho.mdp)) + '</b>' : '') + ' (cuenta con la cifra de la nota: ' +
+            dicho.mdp.toLocaleString('es-MX') + ' ÷ ' + p.prometido.toLocaleString('es-MX') + ' × 100).</p>';
+          lead.push('«' + dicho.bruto + '» es el ' + pct.toLocaleString('es-MX', { maximumFractionDigits: 1 }) + ' % de lo que se prometió');
+        }
+        if (st) {
+          h += '<p>Para seguir el dinero, esto es la etapa <b>' + ICO[st.et] + ' ' + esc(NOM[st.et]) + '</b>' + (st.fecha ? ' (' + esc(st.fecha) + ')' : '') + ' ' + chip(st.e, st.pend) + '. ' + esc(st.tx) + '</p>';
+          if (st.e === 'pendiente' && et === 'presupuesto') lead.push('todavía no es definitivo');
+        }
+        h += '<p><b>Lo que sigue:</b> ' + esc(p.sigue) + ' <a href="' + esc(PROM.pag.replace('#promesas', '#promesa-' + p.id)) + '">Ver la promesa completa ➔</a></p>';
+        partes.push(h);
+        fu.push({ que: 'Memoria de promesas: ' + p.tit, e: 'oficial', fu: { tx: p.etapas[0].fu, url: p.etapas[0].url } });
+      }
+      /* 3. Si ya la cotejamos. */
+      if (col && col.html) partes.push('<p class="pa-rep-s">🔍 Ya la cotejamos, afirmación por afirmación</p>' + col.html.replace(/<details class="pa-dedonde">[\s\S]*$/, ''));
+      /* 4. Los puntos ciegos. Si la nota no toca nada que sigamos, la frase central sale de ellos. */
+      var pc = ciegosDe(tx);
+      (VER && VER.ciegos ? VER.ciegos({ texto: tx }) : []).forEach(function (x) {
+        var l = CIEGO_LEAD[x.r.id];
+        if (l && lead.length < 2 && lead.indexOf(l) < 0) lead.push(l);
+      });
+      if (pc) partes.push(pc);
+      var nada = !p && !(col && col.html) && !fu.length;
+      if (nada) partes.push('<p>Todavía no tengo un documento con qué cotejar esta nota, ni la tengo en seguimiento. No te digo que sea falsa: te digo qué preguntarle (arriba) y cómo seguirla.</p>' +
+        '<p><a class="pa-boton" href="comunidad-tema.html" data-puerta="tema">💡 Propónnosla para cotejarla</a>' +
+        (url ? ' <a class="pa-boton" href="' + esc(D.nota.pagina + '?liga=' + encodeURIComponent(url)) + '">🔎 Leerla completa con el verificador</a>' : '') + '</p>');
+      if (!pc && !p && !col) partes.push('<p class="pa-chico">No encontré puntos ciegos por las palabras; eso no quiere decir que no los tenga.</p>');
+      var h0 = '<p>📋 <b>Leí tu nota.</b> Esto es lo que encuentro' + (lead.length ? ': <b>' + esc(lead.join(', y ')) + '</b>.' : '.') + '</p>';
+      return { html: h0 + partes.join(''), fu: fu, ci: [], tit: 'Lectura de una nota: ' + tx.slice(0, 80), lect: 1, lead: lead,
+        ir: col && col.ir ? col.ir : p ? [PROM.pag.replace('#promesas', '#promesa-' + p.id), 'la memoria de promesas'] : [D.nota.pagina, 'el verificador de notas'],
+        sug: ['¿Qué es un punto ciego?', '¿Qué es la memoria de promesas?'] };
+    }
+
     function lista69(t) {
       var pag = B.fichas.filter(function (f) { return f.t === 'pagina' && f.ir && f.ir[0] === 'herramienta-inspector-efos.html'; })[0];
       var d = (DT.desc || []).filter(function (x) { return /69-B/.test(x.n); })[0];
@@ -1778,6 +1864,8 @@
       salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       nepotismo: function (q) { var r = nepResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'nep' }); },
       promesa: function (q) { var r = promResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'prom' }); },
+      esNota: esNota, sinLiga: sinLiga,
+      lectura: function (q, col) { ultima = q; var r = lectura(q, col); var f = fin(r, { tipo: 'lect' }); f.lect = 1; f.lead = r.lead; return f; },
       ambiente: function (q) { var r = amgResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'amg' }); },
       deFicha: deFicha, deDonde: deDonde, olvida: function () { ctx = {}; }, ctx: function () { return ctx; }
 

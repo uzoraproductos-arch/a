@@ -118,6 +118,11 @@ filtración, un dato personal ni un rumor**. Se construye en entregas:
    etapa sin documento es «pendiente» con su ficha (`pendientes()`), y la que
    todavía no toca dice su fecha legal. **Una nota «Al momento» que anuncie
    una cifra de gasto agrega su promesa ahí**, con su pregunta de prueba.
+   **Una nota pegada se lee, no se empata** (07-11-2026): `lectura()` de
+   `asistente-charla.js` (y `promHtml()` del verificador) dice lo que afirma,
+   si ya la cotejamos, qué promesa toca y cuánto de lo prometido trae, en qué
+   etapa va, sus puntos ciegos y lo que sigue. Un ejemplo que pase el autor
+   entra con su texto tal cual a `preguntas_auditor.json`.
 3. **Abrir la red** (del autor): los portales de `docs/RED-PENDIENTE.md`.
 
 ---

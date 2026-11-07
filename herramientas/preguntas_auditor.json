@@ -1487,6 +1487,55 @@
     "previstos (aprobados o, si no se publicó el presupuesto, anunciados)",
     "Pagado de más sobre lo previsto"
    ]
+  },
+  {
+   "q": "Aprueban reasignar 6 mil 500 mdp a obras hídricas en Jalisco\n\nLa Comisión de Presupuesto y Cuenta Pública de la Cámara de Diputados, presidida por la morenista @merypozos, aprobó en lo general el dictamen del Presupuesto de Egresos de la Federación 2027.\n\nEl documento incluye la reasignación de 6 mil 500 millones de pesos destinados al inicio de obras de infraestructura hídrica para el estado de Jalisco.  https://www.instagram.com/p/DfYty0lDZKs/?dlrf=MWl0c25oYTRzNWUxcA%3D%3D",
+   "modo": "periodista",
+   "ir": "noticias-auditavision.html#col-pef-2027-comision-agua-jalisco-6500",
+   "dice": [
+    "Leí tu nota",
+    "44.8 %",
+    "todavía no es definitivo",
+    "Lo que aprobó el Presupuesto",
+    "La nota, en una línea"
+   ],
+   "no_dice": [
+    "Huawei"
+   ]
+  },
+  {
+   "q": "Aprueban reasignar 6 mil 500 mdp a obras hídricas en Jalisco\n\nLa Comisión de Presupuesto y Cuenta Pública de la Cámara de Diputados, presidida por la morenista @merypozos, aprobó en lo general el dictamen del Presupuesto de Egresos de la Federación 2027.\n\nEl documento incluye la reasignación de 6 mil 500 millones de pesos destinados al inicio de obras de infraestructura hídrica para el estado de Jalisco.",
+   "dice": [
+    "44.8 %",
+    "Lo que aprobó el Presupuesto",
+    "Aprobado en comisión no es aprobado"
+   ],
+   "no_dice": [
+    "Lo que se gastó (a más tardar"
+   ]
+  },
+  {
+   "q": "El Gobierno de México anunció que destinará 30 mil millones de pesos para los estadios del Mundial 2026. La Secretaría de Hacienda no ha explicado de qué partida saldrá el dinero, y la oposición dice que es un despilfarro.",
+   "modo": "periodista",
+   "dice": [
+    "Leí tu nota",
+    "es un anuncio, todavía no un gasto",
+    "Propónnosla"
+   ],
+   "no_dice": [
+    "Huawei",
+    "Nuevo León"
+   ]
+  },
+  {
+   "q": "¿Qué hay detrás del presupuesto del IMSS-Bienestar?",
+   "modo": "periodista",
+   "no_dice": [
+    "Huawei"
+   ],
+   "dice": [
+    "La nota del Periodista"
+   ]
   }
  ]
 }

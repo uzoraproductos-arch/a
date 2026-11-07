@@ -5,7 +5,7 @@ historia completa de cada decisión en [CONTEXT.md](CONTEXT.md), que pasa de
 7,000 renglones: aquí va solo lo que necesitas para no repetir trabajo ni
 pisar el de otro. **Se actualiza en el mismo commit que cambia lo que dice.**
 
-Última actualización: 02-11-2026 · sello `20261102f` · rama `claude/funny-turing-imtm54`.
+Última actualización: 07-11-2026 · sello `20261107b` · rama `claude/funny-turing-imtm54`.
 
 ## Antes de empezar y antes de empujar
 
@@ -21,6 +21,7 @@ de legibilidad y, si tocaste `supabase/`, la base de datos. GitHub la corre sola
 en cada envío (`.github/workflows/revision.yml`). Con `--rapida` se salta lo
 que necesita navegador.
 
+- **07-11-2026, sello 20261107b.** **El Auditor lee la nota que le pegas, y el Periodista ya no mezcla temas.** El autor: el modo Periodista «no agarra el sentido» y la verificación no ofrece lo que debe. Ahora una nota pegada (texto, con o sin liga) se lee entera (`lectura()` de `asistente-charla.js`): lo que afirma en cifras, si ya la cotejamos, si toca una promesa que seguimos y cuánto de lo prometido trae, en qué etapa va, sus puntos ciegos y lo que sigue, con una frase central («es el 44.8 % de lo que se prometió, y todavía no es definitivo»). El verificador de notas hace el mismo cruce con la memoria de promesas. El Periodista ya no cuela pendientes de otras notas (antes salía Huawei en el IMSS y en Nuevo León). Con el ejemplo del autor: nota «Al momento» `pef-2027-comision-agua-jalisco-6500` (bandeja 12), la memoria de promesas del agua avanza a la etapa Presupuesto (6,500 de 14,500 millones, en comisión) y la regla 14 del detector: «Aprobado en comisión no es aprobado». Cuatro preguntas de prueba con sus textos (303).
 - **02-11-2026, sello 20261102f.** **Megaobras: los totales dicen «previsto», no «aprobado».** Decisión del autor. La suma de lo «aprobado» de las 11 obras incluía lo anunciado de Dos Bocas; ahora el total, la brecha («pagado de más sobre lo previsto») y el sobrecosto del conjunto («erogado ÷ previsto») se llaman así en Las cuatro cifras, Pulso y cuenta, Sector, la tabla, Investiga, Auditoría en imágenes y el chat, que lo explica: «previstos (aprobados o, si no se publicó el presupuesto, anunciados)». Cada obra conserva su etiqueta («Aprobado» o «Anunciado en 2019»). Las cifras no cambian. Una pregunta de prueba.
 - **Las preguntas de prueba** viven en `herramientas/preguntas_auditor.json`.
   Si un cambio mueve una respuesta a propósito, se corrige su renglón en el

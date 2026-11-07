@@ -66,13 +66,18 @@ def _agua():
     import integrar_al_momento as im
     lo, hi = im.AGUA_FED
     ult = im.AGUA_FED_2810
+    com = im.AGUA_PEF27_COMISION
     dmin, dmax = ult - hi, ult - lo
     return {
         'id': 'agua-guadalajara', 'ico': '🚰',
         'tit': 'El agua de Guadalajara: de «alrededor de 12 a 13 mil» a 14,500 millones en una semana',
         'quien': 'Gobierno de México (Presidencia); lo ejercería la Conagua',
         'temas': ['agua de guadalajara', 'agua en guadalajara', 'acueducto', 'chapala', 'san gaspar', 'agua potable de guadalajara'],
+        # Pares de palabras que, juntas, también nombran el caso («obras hídricas en Jalisco»).
+        'temas_y': [['hidric', 'jalisco'], ['agua', 'jalisco'], ['agua', 'guadalajara']],
         'nota': AL_MOMENTO % 'agua-guadalajara-14500-federal',
+        # La cifra contra la que se compara lo que llegue después: la última promesa.
+        'prometido': ult,
         'etapas': [
             {'et': 'promesa', 'fecha': '21-10-2026', 'cifra': 'Entre %s y %s' % (m(lo), m(hi)), 'e': 'oficial',
              'tx': 'En su conferencia, la Presidenta habló de «alrededor de» 12 mil a 13 mil millones federales para el agua de la zona metropolitana.',
@@ -80,11 +85,14 @@ def _agua():
             {'et': 'promesa', 'fecha': '28-10-2026', 'cifra': m(ult), 'e': 'oficial',
              'tx': 'El comunicado de Presidencia dice que el Gobierno de México «invertirá» esa cifra, sin deuda. Es un compromiso, no una partida aprobada.',
              'fu': 'Presidencia, comunicado del 28-10-2026', 'url': im.PRES_2810},
-            {'et': 'presupuesto', 'fecha': 'a más tardar el 15-11-2026', 'cifra': 'Todavía no toca', 'e': 'pendiente',
-             'pend': 'promesa-agua-guadalajara-pef', 'url': im.PPEF, 'fu': 'Proyecto de Presupuesto 2027 (Hacienda)',
-             'tx': ('La Cámara de Diputados aprueba el Presupuesto 2027 a más tardar el 15 de noviembre (Constitución, art. 74, fr. IV). '
-                    'Según la prensa, la Presidenta dijo que el dinero no vendrá etiquetado: si no aparece en el ramo de la Conagua, '
-                    'no se podrá seguir de dónde sale.')},
+            {'et': 'presupuesto', 'fecha': '05-11-2026, en comisión; el Pleno, a más tardar el 15-11-2026',
+             'cifra': '%s en el dictamen, según la prensa' % m(com), 'mdp': com, 'prensa': True, 'e': 'pendiente',
+             'pend': 'promesa-agua-guadalajara-pef', 'url': im.GACETA_DIP, 'fu': 'Gaceta Parlamentaria (Cámara de Diputados)',
+             'tx': ('La Comisión de Presupuesto aprobó en lo general un dictamen del Presupuesto 2027 que, según la prensa, reasigna esa cifra '
+                    'para iniciar los acueductos Calderón–San Gaspar y Chapala–Guadalajara. No es definitivo: falta lo particular, el Pleno '
+                    '(a más tardar el 15 de noviembre, Constitución, art. 74, fr. IV) y el Diario Oficial. El dictamen no abre desde la '
+                    'plataforma, y de qué partida sale el dinero todavía no está confirmado.'),
+             'nota': AL_MOMENTO % 'pef-2027-comision-agua-jalisco-6500'},
             {'et': 'gasto', 'fecha': 'a más tardar el 30-04-2028', 'cifra': 'Todavía no toca', 'e': 'pendiente',
              'pend': 'promesa-agua-guadalajara-ejercido', 'url': im.CUENTA_PUBLICA, 'fu': 'Cuenta Pública (Hacienda)',
              'tx': 'Lo gastado en 2027 lo dirá la Cuenta Pública 2027, que el Ejecutivo entrega a más tardar el 30 de abril de 2028 (Constitución, art. 74, fr. VI).'},
@@ -96,7 +104,12 @@ def _agua():
                    'e': 'derivado', 'op': '%s − %s = %s y %s − %s = %s; punto medio (%s + %s) ÷ 2' % (
                        format(ult, ','), format(hi, ','), format(dmin, ','), format(ult, ','), format(lo, ','), format(dmax, ','),
                        format(dmin, ','), format(dmax, ','))},
-        'sigue': 'Que los 14,500 millones aparezcan en el Presupuesto 2027, en el ramo de la Conagua, con su programa y su monto.',
+        'avance': {'tx': ('Del dinero prometido, el dictamen en comisión trae %s: el %.1f %%. Faltarían %s, y nadie ha dicho si llegan en '
+                          'otro año o por otra vía (cuenta con la cifra de la prensa, sin chip derivado: se rehace al abrir el dictamen).'
+                          % (m(com), com / ult * 100, m(ult - com))),
+                   'op': '%s ÷ %s × 100 y %s − %s' % (format(com, ','), format(ult, ','), format(ult, ','), format(com, ','))},
+        'sigue': ('Que el Pleno apruebe el Presupuesto 2027 (a más tardar el 15 de noviembre) con los %s, en el ramo de la Conagua y con su '
+                  'programa, y quién pone los %s restantes.' % (m(com), m(ult - com))),
     }
 
 
@@ -206,9 +219,10 @@ def pendientes():
     return [
         {'id': 'promesa-agua-guadalajara-pef', 'tema': 'Memoria de promesas',
          'que': 'Si los 14,500 millones federales para el agua de Guadalajara aparecen en el Presupuesto 2027',
-         'porque': ('Todavía no toca: la Cámara de Diputados aprueba el Presupuesto 2027 a más tardar el 15 de noviembre de 2026 '
-                    '(Constitución, art. 74, fr. IV). Según la prensa, la Presidenta dijo que el dinero no vendrá etiquetado; si no aparece '
-                    'en el ramo de la Conagua con su programa, Hacienda y la Conagua tendrán que decir de dónde sale.'),
+         'porque': ('El 5 de noviembre de 2026 la Comisión de Presupuesto aprobó en lo general un dictamen que, según la prensa, reasigna '
+                    '6,500 millones para iniciar las obras; el dictamen no abre desde la plataforma (falta de la plataforma) y todavía no es '
+                    'definitivo: la Cámara de Diputados aprueba el Presupuesto 2027 a más tardar el 15 de noviembre de 2026 (Constitución, '
+                    'art. 74, fr. IV) y Hacienda lo publica en el DOF. Falta saber de qué partida sale y quién pone el resto de los 14,500.'),
          'responsable': 'Cámara de Diputados (aprobación) y Secretaría de Hacienda (publicación en el DOF)',
          'enlace': 'https://www.ppef.hacienda.gob.mx/', 'enlace_txt': 'Proyecto de Presupuesto 2027 (Hacienda)', 'aparece': ap},
         {'id': 'promesa-agua-guadalajara-ejercido', 'tema': 'Memoria de promesas',
@@ -238,11 +252,13 @@ def seccion(esc, chip):
                 '    <h3 class="nt-sub"><span aria-hidden="true">%s</span> %s</h3>\n'
                 '    <p class="nt-prom-quien">Quién lo dijo: %s</p>\n'
                 '    <ol class="nt-prom-etapas">\n%s\n    </ol>\n'
-                '    <p class="nt-prom-cambio"><b>Lo que cambió:</b> %s %s <span class="nt-prom-op">(%s)</span>%s</p>\n'
+                '    <p class="nt-prom-cambio"><b>Lo que cambió:</b> %s %s <span class="nt-prom-op">(%s)</span>%s</p>\n%s'
                 '    <p><b>Lo que sigue:</b> %s <a href="%s">Ver el caso completo</a>.</p>\n'
                 '  </article>') % (
             p['id'], p['ico'], esc(p['tit']), esc(p['quien']), '\n'.join(etapa(x) for x in p['etapas']),
             esc(c['tx']), chip(c['e']), esc(c['op']), (' ' + chip('pendiente', c['pend'])) if c.get('pend') else '',
+            ('    <p class="nt-prom-cambio"><b>Cuánto ha llegado:</b> %s <span class="nt-prom-op">(%s)</span></p>\n'
+             % (esc(p['avance']['tx']), esc(p['avance']['op']))) if p.get('avance') else '',
             esc(p['sigue']), esc(p['nota']))
 
     pasos = ' → '.join('%s %s' % (i, n) for _k, i, n in ETAPAS)

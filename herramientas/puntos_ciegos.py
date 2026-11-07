@@ -122,6 +122,12 @@ REGLAS = [
             'confirmado sin decirlo.'),
      'pr': '¿Quién lo confirma, y con qué documento? Si nadie, es una hipótesis, no una noticia.',
      'de': [('huawei-gobierno-codigo-magenta', '«Tendrían total acceso» y «sería peligroso»: la publicación supone, y los contratos de 2025 y 2026 no lo muestran.')]},
+    {'id': 'en-lo-general', 'ico': '🗳️', 'n': 'Aprobado en comisión no es aprobado',
+     're': r'(en lo general|en comisiones?|primera lectura)',
+     'ex': ('«Aprobó en lo general» o «en comisiones» es un paso, no el final: falta votar lo particular, el Pleno y, en un '
+            'presupuesto o una ley, su publicación en el Diario Oficial. Hasta entonces, la cifra puede cambiar.'),
+     'pr': '¿Ya lo votó el Pleno? ¿Ya se publicó en el Diario Oficial? ¿Qué cambió en lo particular?',
+     'de': [('pef-2027-comision-agua-jalisco-6500', '«Aprobó en lo general el dictamen»: lo aprobó una comisión, y el Pleno tiene hasta el 15 de noviembre.')]},
 ]
 
 # Lo que el detector no puede ver con un solo texto: se dice en la página.

@@ -294,7 +294,7 @@
     if (!pc.length) return '';
     return '<section class="in-ciegos" aria-labelledby="inCiegosTit"><h3 class="in-sub" id="inCiegosTit">🔦 Puntos ciegos: lo que conviene preguntar (' + pc.length + ')</h3>' +
       '<p class="in-txt">No son errores ni cuentan en el veredicto: son lugares donde una nota sobre el dinero público suele esconder algo. ' +
-      'Los encontramos por las palabras, así que pueden fallar. <a href="noticias-verifica.html#puntos-ciegos">Los doce puntos ciegos</a>.</p><ul class="in-ciegos-l">' +
+      'Los encontramos por las palabras, así que pueden fallar. <a href="noticias-verifica.html#puntos-ciegos">Los ' + (D.ciegos || []).length + ' puntos ciegos</a>.</p><ul class="in-ciegos-l">' +
       pc.map(function (x) {
         var de = x.r.de[0];
         return '<li><p class="in-ciego-n"><span aria-hidden="true">' + esc(x.r.ico) + '</span> <b>' + esc(x.r.n) + '</b></p>' +
@@ -302,6 +302,30 @@
           '<p class="in-txt">' + esc(x.r.ex) + '</p><p class="in-txt"><b>Qué preguntar:</b> ' + esc(x.r.pr) + '</p>' +
           (de ? '<p class="in-ciego-de">Así lo vimos: <a href="' + esc(de.h) + '">' + esc(de.t) + '</a></p>' : '') + '</li>';
       }).join('') + '</ul></section>';
+  }
+  /* La memoria de promesas (07-11-2026): si la nota toca una promesa que seguimos, se dice cuánto de lo prometido
+     trae y en qué etapa va. La cuenta usa la cifra de la nota: no entra al veredicto. */
+  var ETAPA_PAL = [['presupuesto', /presupuesto de egresos|\bpef\b|dictamen|reasign|etiquetad|partida/],
+    ['asf', /auditoria superior|\basf\b|pliego|por aclarar/], ['gasto', /cuenta publica 20\d\d|ejercid|se gasto|gastaron|pagad/]];
+  function promHtml(n, ext) {
+    var P = D.prom, t = plano((n.titulo || '') + ' ' + (n.texto || ''));
+    if (!P) return '';
+    var p = P.p.filter(function (x) {
+      return x.temas.some(function (w) { return t.indexOf(w) >= 0; }) ||
+        (x.temas_y || []).some(function (par) { return par.every(function (w) { return t.indexOf(w) >= 0; }); });
+    })[0];
+    if (!p) return '';
+    var NOM = {}, ICO = {}, mil = function (v) { return '$' + Math.round(v).toLocaleString('es-MX') + ' millones'; };
+    P.etapas.forEach(function (e) { ICO[e[0]] = e[1]; NOM[e[0]] = e[2]; });
+    var dicho = ext.cifras.filter(function (c) { return c.mdp && !c.dolar; })[0];
+    var et = (ETAPA_PAL.filter(function (x) { return x[1].test(t); })[0] || [])[0], st = et && p.etapas.filter(function (x) { return x.et === et; })[0];
+    var pct = dicho && p.prometido ? dicho.mdp / p.prometido * 100 : null;
+    return '<section class="in-ciegos" aria-labelledby="inPromTit"><h3 class="in-sub" id="inPromTit">📣 Esto ya lo seguimos: la memoria de promesas</h3>' +
+      '<p class="in-txt"><b>' + esc(p.tit) + '.</b> La última promesa: <b>' + esc(mil(p.prometido)) + '</b> <span class="est-chip est-oficial">oficial</span>.</p>' +
+      (pct !== null ? '<p class="in-txt">La nota dice <b>«' + esc(dicho.bruto) + '»</b>: es el <b>' + pct.toLocaleString('es-MX', { maximumFractionDigits: 1 }) + ' %</b> de lo prometido' +
+        (dicho.mdp < p.prometido ? '; faltarían <b>' + esc(mil(p.prometido - dicho.mdp)) + '</b>' : '') + ' (cuenta con la cifra de la nota; no entra al veredicto).</p>' : '') +
+      (st ? '<p class="in-txt">Para seguir el dinero, esto es la etapa <b>' + ICO[st.et] + ' ' + esc(NOM[st.et]) + '</b>' + (st.fecha ? ' (' + esc(st.fecha) + ')' : '') + '. ' + esc(st.tx) + '</p>' : '') +
+      '<p class="in-txt"><b>Lo que sigue:</b> ' + esc(p.sigue) + ' <a href="' + esc(P.pag.replace('#promesas', '#promesa-' + p.id)) + '">Ver la promesa completa ➔</a></p></section>';
   }
   function pinta(n) {
     var ext = analiza(n), pc = ciegos(n), r = conjunto(ext), rel = relevancia(n), cont = $('inVeredicto');
@@ -362,7 +386,7 @@
           '. Cada una que coincide vale 1; la que se acerca, ½; la que no coincide, 0. El resultado es el promedio sobre 100 ' + chip('derivado') + '.</p>' : '') +
       '</div>' +
       (just ? '<h3 class="in-sub">Por qué, cifra por cifra</h3><ol class="in-justs" id="inJusts">' + just + '</ol>' : '') +
-      ciegosHtml(pc) + sinHtml + dolHtml + temas + quienesHtml(n, tema) + dictamenPie() + '</article>' +
+      promHtml(n, ext) + ciegosHtml(pc) + sinHtml + dolHtml + temas + quienesHtml(n, tema) + dictamenPie() + '</article>' +
       '<div class="in-acciones">' +
         '<button type="button" class="in-boton" id="inCopiar"><span aria-hidden="true">📋</span> Copiar el veredicto</button>' +
         '<button type="button" class="in-boton in-sec" id="inOtra"><span aria-hidden="true">↺</span> Verificar otra nota</button>' +

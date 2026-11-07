@@ -47,6 +47,182 @@
   var RES = { 'consta': ['✅', 'Consta'], 'matiz': ['⚠️', 'Consta, con matices'], 'no consta': ['❌', 'Sin documento oficial'], 'pendiente': ['⏳', 'Pendiente'] };
   var COLUMNAS = [
  {
+  "id": "pef-2027-comision-agua-jalisco-6500",
+  "seccion": "Al momento",
+  "icono": "🚰",
+  "temas": [
+   "obras hidricas en jalisco",
+   "obras hidricas de jalisco",
+   "infraestructura hidrica",
+   "reasignar 6 mil 500",
+   "6 mil 500 millones",
+   "6 mil 500 mdp",
+   "reasignacion para jalisco"
+  ],
+  "fecha": "07-11-2026",
+  "titulo": "Los 6,500 millones para el agua de Jalisco: es menos de la mitad de lo prometido, va en un dictamen de comisión y todavía no es el Presupuesto aprobado",
+  "balazo": "Circula que la Cámara de Diputados «aprueba reasignar» 6,500 millones a obras hídricas en Jalisco. Lo que aprobó, según la prensa, fue la Comisión de Presupuesto, en lo general, el 5 de noviembre: falta lo particular, el Pleno (a más tardar el 15 de noviembre) y el Diario Oficial. Y la cifra es el 44.8 % de los $14,500 millones que el Gobierno de México prometió el 28 de octubre.",
+  "nota": {
+   "medio": "Político MX",
+   "titulo": "Aprueban reasignar 6 mil 500 mdp a obras hídricas en Jalisco",
+   "fecha": "06-11-2026",
+   "url": "https://politico.mx/2026/11/06/aprueban-reasignar-6-mil-500-mdp-a-obras-hidricas-en-jalisco/"
+  },
+  "circula": {
+   "red": "Instagram",
+   "cuenta": "publicación con liga (mismo titular que Político MX)",
+   "fecha": "6 de noviembre de 2026",
+   "texto": "Aprueban reasignar 6 mil 500 mdp a obras hídricas en Jalisco. La Comisión de Presupuesto y Cuenta Pública de la Cámara de Diputados, presidida por la morenista @merypozos, aprobó en lo general el dictamen del Presupuesto de Egresos de la Federación 2027. El documento incluye la reasignación de 6 mil 500 millones de pesos destinados al inicio de obras de infraestructura hídrica para el estado de Jalisco."
+  },
+  "cuerpo": [
+   "Lo que pasó. El 5 de noviembre, la Comisión de Presupuesto y Cuenta Pública, que preside la diputada Merilyn Gómez Pozos, aprobó en lo general el dictamen del Presupuesto de Egresos 2027, según varios medios. Según la diputada, el dictamen trae 6,500 millones para iniciar dos acueductos: Calderón–San Gaspar y Chapala–Guadalajara. El dictamen está en la Gaceta Parlamentaria, que no abre desde la plataforma: la cifra va como pendiente.",
+   "El primer punto ciego: «aprueban» todavía no es el Presupuesto. Lo aprobó una comisión, y en lo general. Falta votar lo particular, que lo apruebe el Pleno de la Cámara a más tardar el 15 de noviembre (Constitución, art. 74, fr. IV) y que se publique en el Diario Oficial. Hasta entonces, la cifra puede cambiar.",
+   "El segundo, el que casi nadie cuenta: es menos de la mitad de lo prometido. El 28 de octubre, el Gobierno de México dijo que «invertirá» $14,500 millones en el agua de Guadalajara. Los $6,500 millones del dictamen son el 44.8 %; faltarían $8,000 millones, y nadie ha dicho si llegan en otro año o por otra vía (cuenta con la cifra de la prensa, sin chip derivado). La seguimos en la memoria de promesas.",
+   "El tercero: «reasignar» quiere decir quitar de un lado para poner en otro. Una nota dice que el dinero sale de la propia Conagua, pero no lo confirma ningún documento que hayamos abierto: de qué programa sale cada peso es lo que hay que buscar en el dictamen."
+  ],
+  "cotejo": [
+   {
+    "dice": "Aprueban reasignar 6 mil 500 mdp a obras hídricas en Jalisco",
+    "res": "matiz",
+    "explica": "Lo aprobó la Comisión de Presupuesto, en lo general, no la Cámara: falta lo particular, el Pleno (a más tardar el 15 de noviembre) y la publicación en el Diario Oficial.",
+    "fuente": "Constitución, art. 74, fr. IV",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+   },
+   {
+    "dice": "La Comisión de Presupuesto aprobó en lo general el dictamen del PEF 2027",
+    "res": "pendiente",
+    "explica": "Lo reportan varios medios con la fecha del 5 de noviembre. El dictamen y la votación están en la Gaceta Parlamentaria.",
+    "fuente": "Gaceta Parlamentaria (Cámara de Diputados)",
+    "url": "https://gaceta.diputados.gob.mx/",
+    "quien": "Falta de la plataforma: el dictamen del Presupuesto 2027 está en la Gaceta Parlamentaria de la Cámara de Diputados, que no abre desde nuestra sesión.",
+    "donde": "https://gaceta.diputados.gob.mx/"
+   },
+   {
+    "dice": "El documento incluye la reasignación de 6 mil 500 millones para el inicio de obras de infraestructura hídrica en Jalisco",
+    "res": "pendiente",
+    "explica": "Es lo que dijo la presidenta de la comisión, según la prensa: para los acueductos Calderón–San Gaspar y Chapala–Guadalajara. Falta abrir el dictamen para ver el ramo, el programa y de dónde sale el dinero. Equivale al 44.8 % de los $14,500 millones prometidos.",
+    "fuente": "Gaceta Parlamentaria (Cámara de Diputados)",
+    "url": "https://gaceta.diputados.gob.mx/",
+    "quien": "Falta de la plataforma: el dictamen del Presupuesto 2027 está en la Gaceta Parlamentaria de la Cámara de Diputados, que no abre desde nuestra sesión.",
+    "donde": "https://gaceta.diputados.gob.mx/"
+   }
+  ],
+  "medios": [
+   {
+    "medio": "Instagram (la publicación que circula)",
+    "titulo": "Aprueban reasignar 6 mil 500 mdp a obras hídricas en Jalisco",
+    "fecha": "06-11-2026",
+    "url": "https://www.instagram.com/p/DfYty0lDZKs/"
+   },
+   {
+    "medio": "Político MX",
+    "titulo": "Aprueban reasignar 6 mil 500 mdp a obras hídricas en Jalisco",
+    "fecha": "06-11-2026",
+    "url": "https://politico.mx/2026/11/06/aprueban-reasignar-6-mil-500-mdp-a-obras-hidricas-en-jalisco/"
+   },
+   {
+    "medio": "El Informador",
+    "titulo": "Comisión de presupuesto, que preside Mery Pozos, reasigna 6 mil 500 millones de pesos para obras hídricas de Jalisco",
+    "fecha": "05-11-2026",
+    "url": "https://www.informador.mx/jalisco/guadalajara-comision-de-presupuesto-que-preside-mery-pozos-reasigna-6-mil-500-millones-de-pesos-para-obras-hidricas-de-jalisco-20261105-0198.html"
+   },
+   {
+    "medio": "El Informador",
+    "titulo": "Mery Pozos impulsa la reasignación de 6 mil 500 millones del PEF 2027 para obras hídricas en Jalisco",
+    "fecha": "30-10-2026",
+    "url": "https://www.informador.mx/jalisco/mery-pozos-impulsa-la-reasignacion-de-6-mil-500-millones-del-pef-2027-para-obras-hidricas-en-jalisco-20261030-0167.html"
+   },
+   {
+    "medio": "Notisistema",
+    "titulo": "Avanzan en San Lázaro los recursos para obras hídricas en ZMG",
+    "fecha": "",
+    "url": "https://www.notisistema.com/noticias/comision-en-san-lazaro-aprueba-reasignar-recursos-para-obras-hidricas-en-zmg/"
+   },
+   {
+    "medio": "La Jornada",
+    "titulo": "Comisión de Presupuesto de San Lázaro aprueba en lo general el Presupuesto de Egresos 2027",
+    "fecha": "05-11-2026",
+    "url": "https://www.jornada.com.mx/noticia/2026/11/05/politica/comision-de-presupuesto-de-san-lazaro-aprueba-en-lo-general-el-presupuesto-de-egresos-2027"
+   },
+   {
+    "medio": "La Política Online",
+    "titulo": "MC respaldó el Presupuesto 2027 en Diputados, que incluye fondos para obras en Jalisco y Nuevo León",
+    "fecha": "",
+    "url": "https://www.lapoliticaonline.com/mexico/congreso-mx/mc-respaldo-el-presupuesto-2027-en-diputados-que-incluye-fondos-para-obras-en-jalisco-y-nuevo-leon/"
+   },
+   {
+    "medio": "Conciencia Pública",
+    "titulo": "Comisión de Presupuesto, presidida por Mery Pozos, avala reasignación de 6 mil 500 mdp para obras hídricas en Jalisco",
+    "fecha": "05-11-2026",
+    "url": "https://concienciapublica.com.mx/2026/11/05/comision-presupuesto/"
+   }
+  ],
+  "datos": [
+   {
+    "ico": "📣",
+    "tx": "Memoria de promesas: el agua de Guadalajara",
+    "url": "noticias-seguimiento.html#promesa-agua-guadalajara",
+    "de": "Lo prometido, lo que llega al Presupuesto, lo que se gasta y lo que revisa la Auditoría."
+   },
+   {
+    "ico": "🚰",
+    "tx": "El agua de Guadalajara: los 14,500 millones «sin deuda»",
+    "url": "noticias-al-momento-agua-guadalajara-14500-federal.html",
+    "de": "La nota del anuncio federal y sus puntos ciegos."
+   },
+   {
+    "ico": "🗓️",
+    "tx": "Agenda del erario",
+    "url": "noticias-seguimiento.html#agenda",
+    "de": "Cuándo se aprueba el Presupuesto y cuándo se sabe lo que de verdad se gastó."
+   }
+  ],
+  "glosario": [
+   {
+    "t": "Paquete Económico",
+    "url": "glosario.html#Paquete-Economico"
+   }
+  ],
+  "red": "PEF 2027 comisión de presupuesto 6 mil 500 millones obras hídricas Jalisco",
+  "sigue": [
+   {
+    "que": "La votación en el Pleno del Presupuesto 2027 (a más tardar el 15 de noviembre): si los 6,500 millones siguen ahí",
+    "url": "https://gaceta.diputados.gob.mx/"
+   },
+   {
+    "que": "El dictamen: en qué ramo y programa van, y de dónde se reasignan",
+    "url": "https://gaceta.diputados.gob.mx/"
+   },
+   {
+    "que": "El Presupuesto 2027 publicado en el Diario Oficial",
+    "url": "https://dof.gob.mx/"
+   },
+   {
+    "que": "Quién pone los $8,000 millones que faltan de lo prometido",
+    "url": "noticias-seguimiento.html#promesa-agua-guadalajara"
+   }
+  ],
+  "fuentes": [
+   {
+    "nombre": "Memoria de promesas: Presidencia, comunicado del 28-10-2026 (14,500 millones)",
+    "url": "https://www.gob.mx/presidencia/prensa/gobierno-de-mexico-invertira-14-mil-500-mdp-para-garantizar-agua-en-guadalajara-sin-deuda-ni-privatizacion-presidenta-claudia-sheinbaum"
+   },
+   {
+    "nombre": "Pendiente: dictamen del Presupuesto 2027 en la Gaceta Parlamentaria",
+    "url": "https://gaceta.diputados.gob.mx/"
+   },
+   {
+    "nombre": "Punto de partida: Político MX, El Informador y La Jornada (05 y 06-11-2026)",
+    "url": "https://politico.mx/2026/11/06/aprueban-reasignar-6-mil-500-mdp-a-obras-hidricas-en-jalisco/"
+   },
+   {
+    "nombre": "Lo que circula: publicación en Instagram (06-11-2026)",
+    "url": "https://www.instagram.com/p/DfYty0lDZKs/"
+   }
+  ],
+  "actualizado": "07-11-2026"
+ },
+ {
   "id": "huawei-gobierno-codigo-magenta",
   "seccion": "Al momento",
   "icono": "📡",

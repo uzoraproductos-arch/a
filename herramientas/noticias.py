@@ -79,7 +79,7 @@ SECCIONES = [
     # El detector de puntos ciegos (pedido del autor, 01-11-2026): lo que las
     # notas suelen esconder, en reglas que el verificador y el chat aplican solos.
     ('puntos-ciegos', '🔦', 'Puntos ciegos', 'Puntos ciegos: lo que una nota suele esconder',
-     'Trece preguntas que conviene hacerle a cualquier nota sobre el dinero público antes de creerle. El verificador y el Auditor las '
+     'Catorce preguntas que conviene hacerle a cualquier nota sobre el dinero público antes de creerle. El verificador y el Auditor las '
      'buscan solos en lo que pegues.'),
     # La hemeroteca (pedido del autor, 31-10-2026: «seguimiento como Animal
     # Político, La Jornada… vincular toda la información que gira sobre

@@ -480,8 +480,8 @@
     var cols = cerca.filter(function (f) { return f.t === 'columna' && (f === f0 || (fuerte.indexOf(f) >= 0 && hablaDe(f))); }).slice(0, 2);
     /* Primero, lo que falta en la página misma de la respuesta. */
     var base = (r.ir || (f0 && f0.ir) || [''])[0].split('#')[0].split('?')[0];
-    var pends = F.filter(function (f) { return f.t === 'pendiente' && f.pend && base && (f.pend.ap || []).indexOf(base) >= 0; }).slice(0, 2);
-    cerca.forEach(function (f) { if (pends.length < 2 && f.t === 'pendiente' && f.pend && fuerte.indexOf(f) >= 0 && pends.indexOf(f) < 0) pends.push(f); });
+    var pends = F.filter(function (f) { return f.t === 'pendiente' && f.pend && base && (f.pend.ap || []).indexOf(base) >= 0 && (!/^(noticias-|pendientes\.html|indice\.html)/.test(base) || hablaDe(f)); }).slice(0, 2);
+    cerca.forEach(function (f) { if (pends.length < 2 && f.t === 'pendiente' && f.pend && fuerte.indexOf(f) >= 0 && pends.indexOf(f) < 0 && (!r.lect || hablaDe(f))) pends.push(f); });
     var exps = cerca.filter(function (f) { return f.t === 'expediente'; }).slice(0, 1);
     var nadie = [], iv = invDe(q, r);
     /* Nepotismo (pedido del autor, 29-10-2026): lo que la ley todavía no alcanza, y la regla del apellido. */
@@ -513,6 +513,7 @@
     });
     var sigue = [];
     cols.forEach(function (f) { (f.sigue || []).slice(0, 2 - sigue.length).forEach(function (s) { sigue.push('<li>🗓️ ' + (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.tx) + ' ↗</a>' : esc(s.tx)) + '</li>'); }); });
+    if (r.lect && r.lead && r.lead.length) nadie.unshift('<li>📰 <b>La nota, en una línea:</b> ' + esc(r.lead.join(', y ')) + '. Eso es lo que casi ningún titular dice.</li>');
     var nada = !nadie.length && !ruido.length;
     var h = '<div class="pa-reportero"><p class="pa-rep-t">📰 La nota del Periodista</p>' +
       (nadie.length ? '<p class="pa-rep-s">🕵️ Lo que casi nadie te cuenta</p><ul class="pa-lista">' + nadie.slice(0, 4).join('') + '</ul>' : '') +
@@ -2019,6 +2020,12 @@
     /* Una liga que ya está en la hemeroteca abre su cotejo antes que cualquier palabra de su dirección
        («pemex-perdidas-…-deuda» se iba al pendiente de la deuda de Pemex, 01-11-2026). */
     var lg = (/https?:\/\/[^\s<>"']+/i.exec(String(q)) || [])[0], hm = lg && hemeroteca(lg);
+    /* Una nota pegada (texto, con o sin liga) se lee entera: lo que afirma, si ya la cotejamos, la promesa que toca,
+       sus puntos ciegos y lo que sigue (pedido del autor, 07-11-2026). La columna que ya la coteja va dentro. */
+    if (charla && charla.esNota && charla.esNota(q)) {
+      var tx0 = charla.sinLiga(q);
+      return charla.lectura(q, hm || tituloColumna(tx0) || temaColumna(tx0));
+    }
     if (hm) return hm;
     /* La memoria de promesas (01-11-2026): «¿qué pasó con lo que prometieron…?» antes que la nota o la obra del mismo tema. */
     var pm = charla && charla.promesa && charla.promesa(q);

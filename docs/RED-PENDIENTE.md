@@ -21,7 +21,7 @@ Se actualiza cada vez que una nota deja un pendiente por un portal que no abre.
 | Dominio | Qué destraba | Notas que lo esperan |
 |---|---|---|
 | `asf.gob.mx`, `informe.asf.gob.mx` | Informes individuales y denuncias de la segunda entrega de la Cuenta Pública 2025; Matriz de Datos Básicos | `asf-segunda-entrega-cp2025`, `asf-nuevo-leon-triangulacion-cp2025` |
-| `gaceta.diputados.gob.mx`, `www.diputados.gob.mx` | Dictámenes, reservas y votaciones; leyes vigentes (LeyesBiblio) | `lfd-2027-dnr-defensa-tren-maya-aifa`, `senado-ley-de-ingresos-2027` |
+| `gaceta.diputados.gob.mx`, `www.diputados.gob.mx` | Dictámenes, reservas y votaciones; leyes vigentes (LeyesBiblio) | `lfd-2027-dnr-defensa-tren-maya-aifa`, `senado-ley-de-ingresos-2027`, `pef-2027-comision-agua-jalisco-6500` (dictamen del PEF 2027) |
 | `www.senado.gob.mx`, `comunicacion.senado.gob.mx` | Gaceta del Senado y votación de la Ley Federal de Derechos 2027 | `senado-ley-de-ingresos-2027`, `lfd-2027-dnr-defensa-tren-maya-aifa` |
 | `www.canaldelcongreso.gob.mx` | Notas oficiales de las votaciones (ya se citan; hay que copiar su huella a la bóveda) | `senado-ley-de-ingresos-2027`, `lfd-2027-dnr-defensa-tren-maya-aifa` |
 | `sil.gobernacion.gob.mx` | Perfiles legislativos (Sistema de Información Legislativa) | `garcia-luna-y-garcia-harfuch` |
