@@ -697,6 +697,13 @@ APARTADOS = [
                 'pestana': ('🧭', 'Cómo se audita', 'Control interno, riesgos, fraude, prueba y lavado, con su fuente oficial'),
             },
             {
+                # Pedido del autor, 05-11-2026: «los números que hay de los
+                # fraudes… sería auditor». La pagina la escribe fraude.py.
+                'id': 'fraude-en-numeros',
+                'pagina': 'aprende-fraude-en-numeros.html',
+                'pestana': ('🚨', 'El fraude en números', 'El delito más frecuente, la cifra oculta y la lista 69-B, con su fuente oficial'),
+            },
+            {
                 # Pedido del autor, 03-11-2026: el capítulo 6 de su libro
                 # «Introducción al Derecho Económico» como metodología. La
                 # pagina la escribe recursos_naturales.py.
@@ -826,7 +833,7 @@ HERRAMIENTAS = [
      'Expedientes de la Auditoría Superior de la Federación (ASF), adjudicaciones directas, empresas que facturan operaciones simuladas '
      '(EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.'
      ' Y si un caso necesita ir más a fondo, en la aplicación de Servicios puedes pedir una investigación a la medida: cada cifra con su documento y bajo una política de independencia.'
-     ' Las siete también las usas desde el chat del <a href="herramienta-inspector-pregunta.html">Auditor</a>, sin salir de la plática.',
+     ' Las ocho también las usas desde el chat del <a href="herramienta-inspector-pregunta.html">Auditor</a>, sin salir de la plática.',
 
      'verificador', [
          # «Que encontro la ASF» y «Expedientes de casos» se fusionaron el
@@ -842,6 +849,19 @@ HERRAMIENTAS = [
           'Pega la liga de una noticia, una revista o una publicación en redes: leemos sus cifras, las ponemos junto al documento oficial y te damos un veredicto, cifra por cifra.'),
          ('inspefos', '🧾', 'Lista negra del SAT', 'Busca y verifica',
           'Busca por RFC o por nombre en el listado del artículo 69-B del Código Fiscal: a quienes el SAT presume o declara emisores de facturas por operaciones inexistentes.'),
+         # Octava desde el 05-11-2026 (encargo del autor): lee facturas CFDI
+         # en el navegador y cruza al emisor con la lista 69-B
+         # (herramientas/insp_factura.py).
+         ('inspfactura', '📑', 'Lector de facturas CFDI', 'Busca y verifica',
+          'Elige el XML de una o varias facturas: las leemos en tu navegador, sin subirlas, rehacemos su cuenta y cruzamos al emisor con la lista 69-B del SAT, separando lo que declaró la autoridad de las señales para revisar.'),
+         # Novena desde el 05-11-2026 (pedido del autor): revisa un estado de
+         # resultados en el navegador, en seis dimensiones (insp_resultados.py).
+         ('inspresultados', '📊', 'Revisa tu estado de resultados', 'Busca y verifica',
+          'Sube el estado de resultados de tu empresa: lo leemos en tu navegador, sin subirlo, y lo revisamos en seis dimensiones (cuadre, estructura, rentabilidad, tendencia a 3 y 5 años, impuestos y deuda), con señales para revisar.'),
+         # Decima desde el 05-11-2026: el tablero que junta las demas, guardado
+         # solo en el navegador del lector (insp_mia.py).
+         ('inspmia', '📌', 'Mi Auditavisión', 'Tu tablero',
+          'Tu lista de proveedores cruzada con la lista 69-B y los resúmenes que guardaste de tus facturas y tus estados de resultados, en una sola vista. Se guarda solo en tu navegador: no hay cuenta ni servidor.'),
          ('inspverifica', '🔏', 'Verifica un estado de cuenta', 'Busca y verifica',
           '¿Te compartieron un estado de cuenta de Auditavisión? Escribe su folio o su huella digital y comprueba, cifra por cifra, que no se alteró.'),
          # Septima desde el 28-10-2026 (pedido del autor): el nepotismo, con su
@@ -895,7 +915,7 @@ HERR_PALABRA = {'ambiente': ('aplicación', 'aplicaciones', 'Las'), 'inspector':
 # Desde el 24-10-2026 (decisión del autor) «Grandes investigaciones» ES el
 # Modo Inspector: una sola página, herramienta-inspector.html, con las seis
 # aplicaciones. La vieja página de las investigaciones redirige ahí.
-HERR_DIVISION = {'inspector': ('Modo Inspector', 'Grandes investigaciones a través de siete aplicaciones. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
+HERR_DIVISION = {'inspector': ('Modo Inspector', 'Grandes investigaciones a través de ocho aplicaciones. Recórrelas en orden o entra directo a la que te interesa: cada una abre su propia página.')}
 ASISTENTE = ('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor', 'Pregunta fácil, respuesta fácil',
              'El chat de Auditavisión. Pregúntale lo que quieras del dinero público, como lo dirías platicando: cuánto debe un estado, cuánto le llega a un municipio, cuánto gana un cargo o qué significa un término. Te contesta en corto y con datos oficiales, y si quieres el respaldo, te lleva a la página donde está la información y te arma el dictamen con su respaldo.')
 LOGO_IMG = '<img src="assets/auditor/img/logo-auditavision.svg" alt="" width="62" height="48">'
@@ -924,7 +944,7 @@ MODULOS_PROPIOS = {'inspverifica'}
 # modulo de herramientas/ arma su pagina con construir(base, ref) y dice
 # sus ESTILOS y SCRIPTS (assets/auditor/css y js).
 INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspentes': 'insp_entes',
-                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'inspnepotismo': 'nepotismo',
+                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'inspnepotismo': 'nepotismo', 'inspfactura': 'insp_factura', 'inspresultados': 'insp_resultados', 'inspmia': 'insp_mia',
                 # Calculadora Civica (pedido del autor, 12-10-2026): sus tres
                 # aplicaciones que abrian el motor en un marco.
                 'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj',
@@ -1270,7 +1290,7 @@ def nav_de_pagina(archivo, padre3=None, cap=None):
         # al Modo Inspector (las Grandes investigaciones) y a la Enciclopedia.
         return ('<nav class="herr-nav-min" aria-label="Moverte desde aquí">\n'
                 '        <a class="herr-min" href="%s"><span>🧰 Herramientas</span><small>Las cuatro, en la Enciclopedia</small></a>\n'
-                '        <a class="herr-min" href="%s"><span>🔍 Modo Inspector</span><small>Grandes investigaciones en siete aplicaciones</small></a>\n'
+                '        <a class="herr-min" href="%s"><span>🔍 Modo Inspector</span><small>Grandes investigaciones en ocho aplicaciones</small></a>\n'
                 '        <a class="herr-min" href="%s"><span>📚 Enciclopedia</span><small>Números, Datos y Aprende</small></a>\n'
                 '      </nav>' % (NUMEROS_HERR, MODO_INSPECTOR, ENCICLOPEDIA))
     return None
@@ -1992,9 +2012,24 @@ def servicios():
     campo = lambda i, et, ctl, ayuda='': (
         '            <div class="sv-campo"><label for="%s">%s</label>%s%s</div>'
         % (i, et, ctl, ('<small id="%s-ay">%s</small>' % (i, ayuda)) if ayuda else ''))
+    # Paso 0.2 de docs/PLAN-IMPLEMENTACION.md (05-11-2026): con FUNCIONES
+    # lleno, «Enviar» manda la solicitud a recibir-formulario (tipo
+    # «solicitud»), con el antispam, igual que los formularios de Comunidad
+    # (_form_cm). Como lleva nombre y correo, solo se envía si el lector
+    # acepta el aviso de privacidad.
+    envio, privado, acepta = '', ('🔒 Esta página no guarda ni envía nada por su cuenta: tu solicitud se arma en tu '
+                                  'navegador y tú decides cuándo mandarla.'), ''
+    if FUNCIONES:
+        envio = ' data-funcion="%s/recibir-formulario" data-tipo="solicitud"%s' % (
+            esc_attr(FUNCIONES.rstrip('/')), (' data-turnstile="%s"' % esc_attr(TURNSTILE_SITIO)) if TURNSTILE_SITIO else '')
+        privado = ('🔒 Primero ves tu solicitud tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar» y aceptas el '
+                   '<a href="aviso-de-privacidad.html">aviso de privacidad</a>, porque lleva tu nombre y tu correo para responderte.')
+        acepta = ('          <label class="sv-check"><input type="checkbox" id="svAcepta" data-acepta> Acepto el '
+                  '<a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi solicitud y mi correo '
+                  '(solo hace falta para enviarla).</label>')
     formulario = '\n'.join([
-        '<form class="sv-form" id="svForm" data-canal="%s" novalidate>' % esc_attr(CANAL_SOLICITUD),
-        '          <p class="sv-privado">🔒 Esta página no guarda ni envía nada por su cuenta: tu solicitud se arma en tu navegador y tú decides cuándo mandarla.</p>',
+        '<form class="sv-form" id="svForm" data-canal="%s"%s novalidate>' % (esc_attr(CANAL_SOLICITUD), envio),
+        '          <p class="sv-privado">%s</p>' % privado,
         '          <fieldset class="sv-grupo"><legend>Qué quieres investigar</legend>',
         campo('svServicio', 'Servicio', '<select id="svServicio" name="servicio">\n%s\n                <option value="no-se">No sé, ayúdenme a definirlo</option>\n              </select>' % opciones),
         campo('svTema', 'Tema <span class="sv-req">obligatorio</span>', '<input id="svTema" name="tema" type="text" maxlength="160" required aria-describedby="svTema-ay">',
@@ -2025,6 +2060,7 @@ def servicios():
         '          </fieldset>',
         '          <label class="sv-check"><input type="checkbox" id="svPolitica" required> Leí la <a href="#independencia">política de independencia</a>.</label>',
         '          <label class="sv-check"><input type="checkbox" id="svAlcance" required> Entiendo que es investigación documental y análisis de indicios, no un dictamen pericial ni asesoría legal.</label>',
+        acepta,
         '          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi solicitud</button>'
         '<button type="reset" class="sz-btn">Empezar de nuevo</button></div>',
         '          <p class="sv-error" id="svError" role="alert" hidden></p>',
@@ -2122,7 +2158,9 @@ if FUNCIONES:
                 'nuestra base de datos (Supabase), con: el tipo de mensaje, el asunto, el texto que escribiste, la página desde donde lo '
                 'mandaste, el enlace al documento que citaste, tu correo <b>solo si lo escribes y aceptas este aviso</b>, y una huella '
                 'cifrada de tu conexión (no tu dirección IP) para frenar el spam. Para qué: atender tu reporte, corregir el dato o '
-                'investigar el tema, y responderte. ' + AVISO_CONSERVACION.strip())
+                'investigar el tema, y responderte. En la <b>solicitud de un servicio</b> (página Servicios), tu nombre u organización y tu '
+                'correo van dentro del texto, porque sin ellos no podemos cotizarte: por eso solo se envía si aceptas este aviso. '
+                + AVISO_CONSERVACION.strip())
     AVISO['entrada'] = _cambia(AVISO['entrada'], 'y hoy ningún dato tuyo sale de tu navegador',
                                                 'y solo lo que tú decides enviar sale de tu navegador')
     AVISO['lema'] = 'Qué sabemos de ti: solo lo que tú nos mandas'
@@ -5929,11 +5967,12 @@ def generar(sello=None):
     import datos_ambiente
     import periodistas, acceso
     import metodologia_auditoria
+    import fraude
     import recursos_naturales
     import planisferio
     import leyes_niveles
     import presupuesto_modulos
-    for extra in planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), fraude.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

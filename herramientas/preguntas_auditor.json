@@ -1559,19 +1559,31 @@
    "q": "¿Cuánto debe Jalisco?",
    "modo": "inspector",
    "ir": "herramienta-inspector-entes.html#ente=estatal:JAL",
-   "dice": ["La revisión del Inspector", "De qué está hecha esta respuesta", "Para seguir investigando"]
+   "dice": [
+    "La revisión del Inspector",
+    "De qué está hecha esta respuesta",
+    "Para seguir investigando"
+   ]
   },
   {
    "q": "¿Cuánto le llega a Oaxaca de la Federación?",
    "modo": "ciudadano",
    "ir": "herramienta-inspector-entes.html#ente=estatal:OAX",
-   "dice": ["En corto", "Palabras que quizá no conoces", "Ramo 28"]
+   "dice": [
+    "En corto",
+    "Palabras que quizá no conoces",
+    "Ramo 28"
+   ]
   },
   {
    "q": "¿Cuánto debe Veracruz?",
    "modo": "ambientalista",
    "ir": "herramienta-inspector-entes.html#ente=estatal:VER",
-   "dice": ["La mirada ambiental", "Agronitrogenados", "gasto público"]
+   "dice": [
+    "La mirada ambiental",
+    "Agronitrogenados",
+    "gasto público"
+   ]
   },
   {
    "q": "El mapa de las obras con alerta ambiental de Veracruz",
@@ -1580,7 +1592,9 @@
   {
    "q": "El mapa de la ASF de Oaxaca",
    "ir": "planisferio.html?d=inversion&l=asf&e=OAX",
-   "dice": ["en el Planisferio"]
+   "dice": [
+    "en el Planisferio"
+   ]
   },
   {
    "q": "El mapa del gasto federalizado de Jalisco",
@@ -2154,6 +2168,92 @@
    "ir": "planisferio-oax-social.html",
    "dice": [
     "16.3"
+   ]
+  },
+  {
+   "q": "¿Qué leyes cambiaron esta semana?",
+   "ir": "marco-legal-tres-niveles.html#reformas-recientes"
+  },
+  {
+   "q": "¿Hubo reformas nuevas a las leyes del dinero?",
+   "ir": "marco-legal-tres-niveles.html#reformas-recientes"
+  },
+  {
+   "q": "¿Cuándo se reformó el Código Fiscal?",
+   "ir": "marco-legal-tres-niveles.html#ley-cff"
+  },
+  {
+   "q": "¿Esta factura es de una empresa fantasma?",
+   "ir": "herramienta-inspector-factura.html"
+  },
+  {
+   "q": "Revisa mi factura",
+   "ir": "herramienta-inspector-factura.html"
+  },
+  {
+   "q": "Tengo un XML de una factura, ¿lo puedes leer?",
+   "ir": "herramienta-inspector-factura.html"
+  },
+  {
+   "q": "Lector de facturas CFDI",
+   "ir": "herramienta-inspector-factura.html"
+  },
+  {
+   "q": "¿Cuál es el delito más frecuente en México?",
+   "ir": "aprende-fraude-en-numeros.html#fr-personas",
+   "dice": [
+    "fraude"
+   ]
+  },
+  {
+   "q": "¿Cuánto pierde una víctima de fraude?",
+   "ir": "aprende-fraude-en-numeros.html#fr-personas",
+   "dice": [
+    "7,551"
+   ]
+  },
+  {
+   "q": "¿Cuántas empresas son víctimas de un delito?",
+   "ir": "aprende-fraude-en-numeros.html#fr-empresas",
+   "dice": [
+    "27.2"
+   ]
+  },
+  {
+   "q": "¿Cuánto le cuesta el delito a las empresas?",
+   "ir": "aprende-fraude-en-numeros.html#fr-empresas",
+   "dice": [
+    "124.3"
+   ]
+  },
+  {
+   "q": "Revisa mi estado de resultados",
+   "ir": "herramienta-inspector-resultados.html"
+  },
+  {
+   "q": "Quiero analizar los estados financieros de mi empresa",
+   "ir": "herramienta-inspector-resultados.html"
+  },
+  {
+   "q": "Mi Auditavisión",
+   "ir": "herramienta-inspector-mia.html"
+  },
+  {
+   "q": "Mapa del fraude por estado",
+   "ir": "planisferio.html?d=penal"
+  },
+  {
+   "q": "¿Cuántas denuncias por fraude hubo en 2025?",
+   "ir": "aprende-fraude-en-numeros.html#fr-denuncias",
+   "dice": [
+    "108,736"
+   ]
+  },
+  {
+   "q": "¿De cada 100 fraudes cuántos llegan a una carpeta de investigación?",
+   "ir": "aprende-fraude-en-numeros.html#fr-denuncias",
+   "dice": [
+    "1.3"
    ]
   }
  ]

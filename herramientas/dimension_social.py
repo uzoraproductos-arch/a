@@ -46,6 +46,7 @@ CONTEXTO = {
     'salud': [('contexto-dimensional-social.html', 'Dimensión social: a dónde llegan los programas y qué se sabe de sus resultados')],
     'administracion': [('contexto-dimensional-renglones.html', 'Renglones que no se suman: lo que la ASF dejó por aclarar y el subejercicio')],
     'social': [('contexto-dimensional-social.html', 'Dimensión social: a dónde llegan los programas y qué se sabe de sus resultados')],
+    'penal': [('contexto-dimensional-presupuestaria.html', 'Dimensión presupuestaria: lo que entra, lo que se gasta y lo que falta')],
 }
 RESULTADOS = ('numeros-estado-de-resultados.html', 'El estado de resultados del Gobierno Federal: lo que entró, lo que gastó y lo que quedó')
 # El de cada estado vive en su ficha del Auditor de entes.

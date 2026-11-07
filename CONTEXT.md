@@ -7514,3 +7514,11 @@ Pedido del autor: «intégralo y continúa con las dimensiones pendientes». Se 
 - **Lo que no se dijo.** Un primer borrador explicaba la diferencia de personal entre estados con «sus maestros y médicos están en organismos»: ningún documento lo dice, así que se cambió por lo que sí consta (el censo no dice qué incluyó cada gobierno). Por entidad, el INEGI publica personas titulares, no instituciones (las instituciones solo van por rangos en su mapa 1); se dicen como titulares.
 - **Enciclopedia, Planisferio y chat.** Datos › Administración pública (como un Poder más en `poderes_paginas()`), dimensión `administracion` con siete lentes y la sección `#administracion` de cada portal, `D.apu` en el chat.
 - **Pendiente:** los informes de las entidades de fiscalización superior de los estados (el dinero propio de estados y municipios); el personal y las instituciones municipales por entidad (el reporte del CNGMD solo da el total nacional; están en sus tabulados); el valor de los contratos, no solo su número.
+
+
+### 05-11-2026 · sello 20261105a · El vigía legislativo y el lector de facturas CFDI
+
+- **Pedido del autor** (`docs/ENCARGO-VIGIA-Y-CFDI.md`, pasos 1 y 2): un vigía de leyes y reformas que alimente la base, y el lector de facturas en la plataforma, cruzado con la 69-B.
+- **Vigía:** `vigia_legislativo.py` → `docs/legislativo/bandeja.json` (hallazgos por cotejar, índice de 35 leyes y avisos de citas viejas); flujo diario `vigia-legislativo.yml`; sección `marco-legal-tres-niveles.html#reformas-recientes` y ficha del chat. Primera corrida: 0 publicaciones del día sobre las leyes vigiladas y 8 avisos (LFRCF ×5, LIEPS ×2, LGPP).
+- **Lector:** octava aplicación del Modo Inspector, `herramienta-inspector-factura.html`; todo en el navegador, nada se sube. `actualizar_69b.py` conserva ahora la fecha de presunto y de definitivo de cada RFC (dos columnas al final; el CSV es el mismo, SHA-256 `54b95d41…`).
+- **Pendiente:** cotejar los 8 avisos contra el DOF y corregir cada módulo con su fecha (plataforma); el Senado, si un día publica un índice legible; la validación del sello digital y la consulta de vigencia (cancelación) de cada CFDI, que solo da el SAT.

@@ -10,7 +10,8 @@ CFF)», que reúne a quienes presuntamente facturan operaciones inexistentes
 (EFOS). El archivo va en Latin-1, con dos renglones de encabezado antes de
 los nombres de columna. Aquí se conserva, por contribuyente, lo que un
 ciudadano necesita para citarlo: RFC, nombre, situación y el oficio y la
-fecha de publicación en el DOF de esa situación.
+fecha de publicación en el DOF de esa situación, y además la fecha en que se
+publicó como presunto y como definitivo (las usa el lector de facturas).
 
 Tras regenerar, sube el sello: python3 herramientas/sello.py AAAAMMDDx
 """
@@ -41,6 +42,13 @@ ETAPAS = {
 }
 
 
+def fecha_etapa(f, c):
+    """La fecha en que se publicó una etapa (4 = presunto, 12 = definitivo):
+    la del DOF si ya salió ahí y, si no, la de la página del SAT. Vacía si el
+    contribuyente no pasó por esa etapa (un presunto aún no es definitivo)."""
+    return f[c + 3].strip() or f[c + 1].strip()
+
+
 def leer(ruta):
     if ruta:
         with open(ruta, "rb") as f:
@@ -49,8 +57,10 @@ def leer(ruta):
         return r.read()
 
 
-def main():
-    raw = leer(sys.argv[1] if len(sys.argv) > 1 else None)
+def registros_de(raw):
+    """Lee el CSV del SAT (bytes) y devuelve (registros, cuenta por situación,
+    corte). La usan main() y el vigía de la 69-B (herramientas/vigia_69b.py),
+    para que los dos lean el archivo igual."""
     texto = raw.decode("latin-1")
     filas = list(csv.reader(io.StringIO(texto)))
     corte = re.search(r"actualizada al ([^;]+);", filas[0][0])
@@ -69,18 +79,33 @@ def main():
         medio = "DOF" if f[c + 3].strip() else "SAT"
         o, d = (c + 2, c + 3) if medio == "DOF" else (c, c + 1)
         oficio = f[o].split(" de fecha")[0].strip()
-        registros.append([f[1].strip().upper(), " ".join(f[2].split()), clave, oficio, f[d].strip(), medio])
+        # Desde el 05-11-2026 (lector de facturas CFDI) se guardan además dos
+        # fechas: cuándo se publicó como presunto y cuándo como definitivo.
+        # Hacen falta para comparar la fecha de una factura contra cada etapa
+        # (una factura de un emisor ya publicado como presunto es una «señal
+        # para revisar»). Se agregan al final del renglón para no mover las
+        # columnas que ya leen insp-efos.js, datos.js y el chat.
+        registros.append([f[1].strip().upper(), " ".join(f[2].split()), clave, oficio, f[d].strip(), medio,
+                          fecha_etapa(f, 4), fecha_etapa(f, 12)])
         cuenta[sit] = cuenta.get(sit, 0) + 1
+    return registros, cuenta, (corte.group(1).strip() if corte else "")
+
+
+def main():
+    raw = leer(sys.argv[1] if len(sys.argv) > 1 else None)
+    registros, cuenta, corte = registros_de(raw)
 
     meta = {
         "fuente": "SAT, Listado completo de contribuyentes (Artículo 69-B del CFF)",
         "url": URL_PAGINA,
         "csv": URL_CSV,
-        "corte": corte.group(1).strip() if corte else "",
+        "corte": corte,
         "descarga": datetime.date.today().isoformat(),
         "sha256": hashlib.sha256(raw).hexdigest(),
         "total": len(registros),
         "porSituacion": cuenta,
+        "columnas": ["RFC", "nombre", "situación", "oficio de la situación", "fecha de la situación", "medio (DOF o SAT)",
+                     "fecha de publicación como presunto", "fecha de publicación como definitivo"],
         "situaciones": {
             "P": "Presunto", "D": "Desvirtuado", "F": "Definitivo", "S": "Sentencia Favorable",
         },

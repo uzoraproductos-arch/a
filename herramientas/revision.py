@@ -13,7 +13,8 @@ Revisa:
   1. node --check de cada .js de assets/auditor/.
   2. Los CR sueltos que deben conservarse (AGENTS.md §4).
   3. Que el sello haya subido si el cambio tocó assets/ (con --base).
-  4. El inventario: enlaces rotos y cotejos sin evidencia.
+  4. El inventario: enlaces rotos y cotejos sin evidencia; las pruebas sin red
+     de los puntos ciegos, del vigía legislativo y del lector de facturas.
   5. Las preguntas de prueba del Auditor (prueba_auditor.py) y que cada
      página de la Enciclopedia esté en el Auditor, en su modo
      (cobertura_auditor.py).
@@ -97,6 +98,11 @@ def main():
         revisiones.append(('sello', lambda: r_sello(a.base)))
     revisiones.append(('inventario', lambda: corre('inventario.py')))
     revisiones.append(('puntos ciegos', lambda: corre('prueba_puntos_ciegos.py')))
+    # Encargo del 05-11-2026: el vigía legislativo y el lector de facturas,
+    # cada uno con su prueba sin red (ejemplos fijos y una factura ficticia).
+    revisiones.append(('vigía legislativo', lambda: corre('vigia_legislativo.py', '--prueba')))
+    revisiones.append(('lector de facturas CFDI', lambda: corre('lector_cfdi.py', '--prueba')))
+    revisiones.append(('lector de estado de resultados', lambda: corre('lector_resultados.py', '--prueba')))
     if not a.rapida:
         revisiones.append(('preguntas del Auditor', lambda: corre('prueba_auditor.py')))
         revisiones.append(('la Enciclopedia en el Auditor', lambda: corre('cobertura_auditor.py')))

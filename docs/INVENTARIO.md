@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 686 |
+| Páginas revisadas | 722 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -19,8 +19,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `administracion-codigos.html` | Administración de códigos · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `agora.html` | Ágora cívica · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `aprende-auditoria.html` | Cómo se audita · Auditavisión | apartados.py | 55 | 0 | 20 | 0 | 0 |
+| `aprende-fraude-en-numeros.html` | El fraude en números · Auditavisión | apartados.py | 47 | 0 | 8 | 3 | 4 |
 | `aprende-recursos-naturales.html` | Los recursos naturales · Auditavisión | apartados.py | 63 | 0 | 127 | 66 | 1 |
-| `aprende.html` | Aprende · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
+| `aprende.html` | Aprende · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 | `auditoria-agronitrogenados.html` | Plantas de fertilizantes Agronitrogenados · Auditoría en imágenes · Auditavisión | auditorias.py | 84 | 0 | 4 | 2 | 2 |
 | `auditoria-aifa.html` | Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditoría en imágenes · Auditavisión | auditorias.py | 84 | 0 | 2 | 4 | 1 |
 | `auditoria-bunker-garcia-luna.html` | El Búnker de Seguridad de García Luna (SSPC) · Auditoría en imágenes · Auditavisión | auditorias.py | 84 | 0 | 4 | 2 | 2 |
@@ -58,7 +59,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `contexto-dimensional-ambiental.html` | Dimensión ambiental · Auditavisión | apartados.py | 44 | 0 | 4 | 1 | 0 |
 | `contexto-dimensional-descarga.html` | Descarga y metodología · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `contexto-dimensional-financiera.html` | Dimensión financiera · Auditavisión | apartados.py | 44 | 0 | 6 | 1 | 0 |
-| `contexto-dimensional-presupuestaria.html` | Dimensión presupuestaria · Auditavisión | apartados.py | 46 | 0 | 3 | 1 | 0 |
+| `contexto-dimensional-presupuestaria.html` | Dimensión presupuestaria · Auditavisión | apartados.py | 47 | 0 | 3 | 1 | 0 |
 | `contexto-dimensional-renglones.html` | Renglones que no se suman · Auditavisión | apartados.py | 45 | 0 | 4 | 0 | 0 |
 | `contexto-dimensional-social.html` | Dimensión social · Auditavisión | apartados.py | 45 | 0 | 6 | 0 | 1 |
 | `contratos-publicos.html` | Contratos públicos · Auditavisión | apartados.py | 44 | 0 | 3 | 6 | 3 |
@@ -182,7 +183,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-efos.html` | Lista negra del SAT · Auditavisión | apartados.py | 51 | 0 | 2 | 7 | 0 |
 | `herramienta-inspector-entes-directorio.html` | Directorio de entes públicos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-entes.html` | Auditor de entes públicos · Auditavisión | apartados.py | 59 | 0 | 49 | 3 | 0 |
+| `herramienta-inspector-factura.html` | Lector de facturas CFDI · Auditavisión | apartados.py | 46 | 0 | 2 | 1 | 0 |
 | `herramienta-inspector-investigaciones.html` | Grandes investigaciones · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector-mia.html` | Mi Auditavisión · Auditavisión | apartados.py | 47 | 0 | 1 | 1 | 0 |
 | `herramienta-inspector-nepotismo.html` | Nepotismo y parentesco · Auditavisión | apartados.py | 46 | 0 | 0 | 1 | 0 |
 | `herramienta-inspector-nota-cifras.html` | Contrasta una nota · las cifras · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-nota-liga.html` | Contrasta una nota · la nota · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
@@ -190,8 +193,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-nota.html` | Contrasta una nota · Auditavisión | apartados.py | 52 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-pregunta.html` | Auditor Virtual · Auditavisión | apartados.py | 38 | 0 | 1 | 1 | 1 |
 | `herramienta-inspector-radar.html` | Radar por entidad · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector-resultados.html` | Revisa tu estado de resultados · Auditavisión | apartados.py | 45 | 0 | 0 | 2 | 0 |
 | `herramienta-inspector-verifica.html` | Verifica un estado de cuenta · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector.html` | Modo Inspector · Auditavisión | apartados.py | 50 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector.html` | Modo Inspector · Auditavisión | apartados.py | 53 | 0 | 0 | 0 | 0 |
 | `herramienta-megaobras-cero.html` | Las cuatro cifras y los rescates · Auditavisión | apartados.py | 55 | 0 | 35 | 55 | 7 |
 | `herramienta-megaobras-investiga.html` | Haz tu propia investigación · Auditavisión | apartados.py | 116 | 0 | 59 | 94 | 22 |
 | `herramienta-megaobras-pulso-calculo.html` | Cómo se calcula · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
@@ -206,7 +210,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 53 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 66 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 319 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 323 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `informes-documentar-para-sancionar.html` | Informe especial: Documentar para sancionar · Auditavisión | apartados.py | 53 | 0 | 40 | 8 | 2 |
@@ -298,394 +302,426 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 231 | 0 | 0 | 0 | 118 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 234 | 0 | 0 | 0 | 121 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 37 | 0 | 11 | 5 | 0 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 48 | 0 | 1 | 0 | 0 |
-| `planisferio-ags-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-ags-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 11 | 18 | 3 |
-| `planisferio-ags-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-ags-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-ags-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-ags-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-ags-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-ags-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-ags-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-ags-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-ags-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-ags.html` | Aguascalientes · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-bc-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-bc-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 11 | 18 | 3 |
-| `planisferio-bc-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-bc-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-bc-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-bc-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-bc-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-bc-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-bc-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-bc-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-bc-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-bc.html` | Baja California · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-bcs-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-bcs-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 11 | 18 | 3 |
-| `planisferio-bcs-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-bcs-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-bcs-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-bcs-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-bcs-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-bcs-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-bcs-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-bcs-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-bcs-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-bcs.html` | Baja California Sur · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-cam-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-cam-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 58 | 0 | 10 | 17 | 3 |
-| `planisferio-cam-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-cam-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-cam-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-cam-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-cam-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-cam-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-cam-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-cam-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-cam-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-cam.html` | Campeche · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-cdmx-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-cdmx-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 58 | 0 | 9 | 15 | 2 |
-| `planisferio-cdmx-deuda.html` | Su deuda · Auditavisión | apartados.py | 57 | 0 | 6 | 5 | 2 |
-| `planisferio-cdmx-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-cdmx-inversion.html` | Su inversión · Auditavisión | apartados.py | 59 | 0 | 1 | 1 | 2 |
-| `planisferio-cdmx-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-cdmx-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 2 | 3 | 2 |
-| `planisferio-cdmx-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-cdmx-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 56 | 0 | 2 | 4 | 3 |
-| `planisferio-cdmx-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 12 | 7 | 3 |
-| `planisferio-cdmx-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-cdmx.html` | Ciudad de México · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 17 |
-| `planisferio-chih-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-chih-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 12 | 19 | 2 |
-| `planisferio-chih-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-chih-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-chih-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-chih-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-chih-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-chih-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-chih-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-chih-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-chih-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-chih.html` | Chihuahua · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 2 |
-| `planisferio-chis-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-chis-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 58 | 0 | 10 | 17 | 3 |
-| `planisferio-chis-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-chis-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-chis-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-chis-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-chis-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-chis-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-chis-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-chis-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-chis-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-chis.html` | Chiapas · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 4 |
-| `planisferio-coah-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-coah-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 11 | 18 | 3 |
-| `planisferio-coah-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-coah-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-coah-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-coah-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-coah-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-coah-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-coah-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-coah-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-coah-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-coah.html` | Coahuila · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-col-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-col-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 58 | 0 | 10 | 18 | 3 |
-| `planisferio-col-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-col-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-col-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-col-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-col-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-col-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-col-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-col-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-col-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-col.html` | Colima · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-dgo-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-dgo-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 12 | 19 | 2 |
-| `planisferio-dgo-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-dgo-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-dgo-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-dgo-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-dgo-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-dgo-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-dgo-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-dgo-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-dgo-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-dgo.html` | Durango · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-gro-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-gro-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 58 | 0 | 10 | 18 | 3 |
-| `planisferio-gro-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-gro-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-gro-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-gro-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-gro-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-gro-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-gro-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-gro-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-gro-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-gro.html` | Guerrero · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 12 |
-| `planisferio-gto-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-gto-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 61 | 0 | 14 | 21 | 3 |
-| `planisferio-gto-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-gto-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-gto-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-gto-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-gto-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-gto-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-gto-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-gto-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-gto-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-gto.html` | Guanajuato · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-hgo-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-hgo-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 62 | 0 | 15 | 21 | 3 |
-| `planisferio-hgo-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-hgo-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-hgo-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-hgo-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-hgo-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-hgo-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-hgo-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-hgo-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-hgo-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-hgo.html` | Hidalgo · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-jal-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-jal-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 11 | 18 | 3 |
-| `planisferio-jal-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-jal-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-jal-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-jal-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-jal-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-jal-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-jal-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-jal-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-jal-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-jal.html` | Jalisco · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 14 |
-| `planisferio-mex-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-mex-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 58 | 0 | 10 | 18 | 3 |
-| `planisferio-mex-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-mex-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-mex-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-mex-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-mex-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-mex-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-mex-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-mex-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 12 | 7 | 3 |
-| `planisferio-mex-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-mex.html` | Estado de México · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 2 |
-| `planisferio-mich-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-mich-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 58 | 0 | 10 | 18 | 3 |
-| `planisferio-mich-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-mich-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-mich-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-mich-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-mich-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-mich-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-mich-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-mich-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-mich-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-mich.html` | Michoacán · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 3 |
-| `planisferio-mor-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-mor-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 58 | 0 | 10 | 18 | 3 |
-| `planisferio-mor-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-mor-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-mor-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-mor-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-mor-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-mor-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-mor-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-mor-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-mor-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-mor.html` | Morelos · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-nay-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-nay-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 58 | 0 | 10 | 18 | 3 |
-| `planisferio-nay-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-nay-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-nay-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-nay-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-nay-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-nay-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-nay-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-nay-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-nay-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-nay.html` | Nayarit · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-nl-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-nl-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 62 | 0 | 15 | 18 | 3 |
-| `planisferio-nl-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-nl-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-nl-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-nl-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-nl-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 7 | 4 | 1 |
-| `planisferio-nl-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-nl-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-nl-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-nl-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-nl.html` | Nuevo León · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 6 |
-| `planisferio-oax-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-oax-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 61 | 0 | 15 | 21 | 3 |
-| `planisferio-oax-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-oax-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-oax-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-oax-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-oax-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-oax-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-oax-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-oax-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-oax-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-oax.html` | Oaxaca · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 26 |
-| `planisferio-pue-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-pue-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 58 | 0 | 10 | 18 | 3 |
-| `planisferio-pue-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-pue-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-pue-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-pue-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-pue-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-pue-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-pue-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-pue-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-pue-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-pue.html` | Puebla · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 17 |
-| `planisferio-qro-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-qro-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 11 | 18 | 3 |
-| `planisferio-qro-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-qro-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-qro-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-qro-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-qro-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-qro-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-qro-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-qro-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-qro-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-qro.html` | Querétaro · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-qroo-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-qroo-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 57 | 0 | 8 | 14 | 2 |
-| `planisferio-qroo-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-qroo-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-qroo-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-qroo-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-qroo-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-qroo-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-qroo-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-qroo-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-qroo-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-qroo.html` | Quintana Roo · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-sin-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-sin-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 58 | 0 | 10 | 18 | 3 |
-| `planisferio-sin-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-sin-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-sin-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-sin-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-sin-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-sin-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-sin-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-sin-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-sin-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-sin.html` | Sinaloa · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 3 |
-| `planisferio-slp-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-slp-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 11 | 18 | 3 |
-| `planisferio-slp-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-slp-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-slp-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-slp-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-slp-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-slp-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-slp-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-slp-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-slp-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-slp.html` | San Luis Potosí · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 2 |
-| `planisferio-son-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-son-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 12 | 19 | 2 |
-| `planisferio-son-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-son-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-son-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-son-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-son-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-son-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-son-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-son-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-son-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-son.html` | Sonora · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-tab-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-tab-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 62 | 0 | 13 | 20 | 3 |
-| `planisferio-tab-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-tab-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-tab-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-tab-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-tab-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-tab-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-tab-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-tab-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-tab-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-tab.html` | Tabasco · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-tam-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-tam-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 61 | 0 | 15 | 21 | 3 |
-| `planisferio-tam-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-tam-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-tam-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-tam-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-tam-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-tam-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-tam-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-tam-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-tam-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-tam.html` | Tamaulipas · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 2 |
-| `planisferio-tlax-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-tlax-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 58 | 0 | 10 | 17 | 3 |
-| `planisferio-tlax-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 2 | 6 | 2 |
-| `planisferio-tlax-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-tlax-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-tlax-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-tlax-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 8 | 4 | 1 |
-| `planisferio-tlax-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-tlax-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-tlax-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-tlax-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-tlax.html` | Tlaxcala · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-ver-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-ver-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 61 | 0 | 15 | 21 | 3 |
-| `planisferio-ver-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-ver-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-ver-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-ver-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-ver-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-ver-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-ver-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-ver-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 12 | 7 | 3 |
-| `planisferio-ver-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-ver.html` | Veracruz · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 3 |
-| `planisferio-yuc-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-yuc-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 58 | 0 | 10 | 17 | 3 |
-| `planisferio-yuc-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-yuc-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-yuc-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-yuc-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-yuc-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-yuc-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-yuc-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-yuc-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-yuc-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-yuc.html` | Yucatán · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio-zac-administracion.html` | Su administración pública · Auditavisión | apartados.py | 57 | 0 | 14 | 5 | 0 |
-| `planisferio-zac-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 12 | 19 | 2 |
-| `planisferio-zac-deuda.html` | Su deuda · Auditavisión | apartados.py | 59 | 0 | 7 | 10 | 2 |
-| `planisferio-zac-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 63 | 0 | 0 | 1 | 0 |
-| `planisferio-zac-inversion.html` | Su inversión · Auditavisión | apartados.py | 63 | 0 | 5 | 7 | 0 |
-| `planisferio-zac-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 59 | 0 | 5 | 5 | 1 |
-| `planisferio-zac-legislativa.html` | Su congreso · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 1 |
-| `planisferio-zac-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 52 | 0 | 0 | 1 | 1 |
-| `planisferio-zac-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 61 | 0 | 3 | 10 | 0 |
-| `planisferio-zac-salud.html` | Su salud pública · Auditavisión | apartados.py | 57 | 0 | 11 | 7 | 3 |
-| `planisferio-zac-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 56 | 0 | 9 | 3 | 0 |
-| `planisferio-zac.html` | Zacatecas · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `planisferio.html` | Planisferio · Auditavisión | apartados.py | 142 | 0 | 26 | 49 | 5 |
+| `planisferio-ags-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-ags-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 11 | 18 | 3 |
+| `planisferio-ags-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-ags-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-ags-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-ags-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-ags-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-ags-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-ags-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-ags-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-ags-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-ags-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-ags.html` | Aguascalientes · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-bc-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-bc-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 11 | 18 | 3 |
+| `planisferio-bc-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-bc-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-bc-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-bc-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-bc-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-bc-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-bc-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-bc-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-bc-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-bc-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-bc.html` | Baja California · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-bcs-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-bcs-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 11 | 18 | 3 |
+| `planisferio-bcs-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-bcs-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-bcs-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-bcs-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-bcs-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-bcs-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-bcs-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-bcs-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-bcs-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-bcs-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-bcs.html` | Baja California Sur · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-cam-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-cam-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 17 | 3 |
+| `planisferio-cam-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-cam-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-cam-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-cam-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-cam-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-cam-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-cam-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-cam-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-cam-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-cam-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-cam.html` | Campeche · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-cdmx-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-cdmx-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 9 | 15 | 2 |
+| `planisferio-cdmx-deuda.html` | Su deuda · Auditavisión | apartados.py | 58 | 0 | 6 | 5 | 2 |
+| `planisferio-cdmx-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-cdmx-inversion.html` | Su inversión · Auditavisión | apartados.py | 60 | 0 | 1 | 1 | 2 |
+| `planisferio-cdmx-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-cdmx-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 2 | 3 | 2 |
+| `planisferio-cdmx-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-cdmx-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-cdmx-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 57 | 0 | 2 | 4 | 3 |
+| `planisferio-cdmx-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 12 | 7 | 3 |
+| `planisferio-cdmx-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-cdmx.html` | Ciudad de México · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 17 |
+| `planisferio-chih-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-chih-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 12 | 19 | 2 |
+| `planisferio-chih-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-chih-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-chih-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-chih-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-chih-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-chih-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-chih-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-chih-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-chih-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-chih-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-chih.html` | Chihuahua · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 2 |
+| `planisferio-chis-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-chis-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 17 | 3 |
+| `planisferio-chis-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-chis-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-chis-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-chis-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-chis-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-chis-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-chis-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-chis-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-chis-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-chis-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-chis.html` | Chiapas · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 4 |
+| `planisferio-coah-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-coah-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 11 | 18 | 3 |
+| `planisferio-coah-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-coah-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-coah-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-coah-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-coah-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-coah-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-coah-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-coah-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-coah-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-coah-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-coah.html` | Coahuila · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-col-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-col-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
+| `planisferio-col-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-col-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-col-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-col-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-col-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-col-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-col-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-col-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-col-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-col-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-col.html` | Colima · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-dgo-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-dgo-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 12 | 19 | 2 |
+| `planisferio-dgo-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-dgo-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-dgo-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-dgo-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-dgo-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-dgo-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-dgo-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-dgo-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-dgo-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-dgo-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-dgo.html` | Durango · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-gro-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-gro-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
+| `planisferio-gro-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-gro-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-gro-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-gro-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-gro-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-gro-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-gro-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-gro-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-gro-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-gro-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-gro.html` | Guerrero · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 12 |
+| `planisferio-gto-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-gto-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 62 | 0 | 14 | 21 | 3 |
+| `planisferio-gto-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-gto-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-gto-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-gto-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-gto-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-gto-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-gto-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-gto-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-gto-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-gto-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-gto.html` | Guanajuato · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-hgo-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-hgo-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 63 | 0 | 15 | 21 | 3 |
+| `planisferio-hgo-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-hgo-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-hgo-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-hgo-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-hgo-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-hgo-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-hgo-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-hgo-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-hgo-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-hgo-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-hgo.html` | Hidalgo · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-jal-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-jal-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 11 | 18 | 3 |
+| `planisferio-jal-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-jal-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-jal-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-jal-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-jal-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-jal-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-jal-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-jal-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-jal-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-jal-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-jal.html` | Jalisco · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 14 |
+| `planisferio-mex-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-mex-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
+| `planisferio-mex-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-mex-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-mex-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-mex-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-mex-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-mex-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-mex-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-mex-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-mex-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 12 | 7 | 3 |
+| `planisferio-mex-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-mex.html` | Estado de México · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 2 |
+| `planisferio-mich-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-mich-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
+| `planisferio-mich-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-mich-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-mich-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-mich-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-mich-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-mich-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-mich-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-mich-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-mich-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-mich-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-mich.html` | Michoacán · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 3 |
+| `planisferio-mor-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-mor-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
+| `planisferio-mor-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-mor-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-mor-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-mor-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-mor-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-mor-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-mor-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-mor-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-mor-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-mor-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-mor.html` | Morelos · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-nay-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-nay-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
+| `planisferio-nay-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-nay-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-nay-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-nay-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-nay-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-nay-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-nay-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-nay-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-nay-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-nay-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-nay.html` | Nayarit · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-nl-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-nl-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 63 | 0 | 15 | 18 | 3 |
+| `planisferio-nl-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-nl-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-nl-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-nl-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-nl-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 4 | 1 |
+| `planisferio-nl-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-nl-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-nl-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-nl-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-nl-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-nl.html` | Nuevo León · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 6 |
+| `planisferio-oax-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-oax-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 62 | 0 | 15 | 21 | 3 |
+| `planisferio-oax-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-oax-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-oax-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-oax-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-oax-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-oax-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-oax-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-oax-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-oax-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-oax-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-oax.html` | Oaxaca · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 26 |
+| `planisferio-pue-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-pue-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
+| `planisferio-pue-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-pue-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-pue-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-pue-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-pue-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-pue-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-pue-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-pue-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-pue-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-pue-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-pue.html` | Puebla · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 17 |
+| `planisferio-qro-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-qro-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 11 | 18 | 3 |
+| `planisferio-qro-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-qro-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-qro-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-qro-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-qro-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-qro-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-qro-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-qro-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-qro-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-qro-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-qro.html` | Querétaro · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-qroo-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-qroo-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 58 | 0 | 8 | 14 | 2 |
+| `planisferio-qroo-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-qroo-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-qroo-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-qroo-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-qroo-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-qroo-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-qroo-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-qroo-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-qroo-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-qroo-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-qroo.html` | Quintana Roo · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-sin-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-sin-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
+| `planisferio-sin-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-sin-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-sin-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-sin-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-sin-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-sin-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-sin-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-sin-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-sin-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-sin-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-sin.html` | Sinaloa · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 3 |
+| `planisferio-slp-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-slp-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 11 | 18 | 3 |
+| `planisferio-slp-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-slp-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-slp-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-slp-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-slp-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-slp-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-slp-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-slp-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-slp-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-slp-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-slp.html` | San Luis Potosí · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 2 |
+| `planisferio-son-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-son-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 12 | 19 | 2 |
+| `planisferio-son-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-son-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-son-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-son-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-son-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-son-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-son-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-son-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-son-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-son-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-son.html` | Sonora · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-tab-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-tab-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 63 | 0 | 13 | 20 | 3 |
+| `planisferio-tab-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-tab-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-tab-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-tab-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-tab-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-tab-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-tab-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-tab-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-tab-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-tab-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-tab.html` | Tabasco · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-tam-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-tam-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 62 | 0 | 15 | 21 | 3 |
+| `planisferio-tam-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-tam-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-tam-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-tam-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-tam-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-tam-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-tam-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-tam-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-tam-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-tam-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-tam.html` | Tamaulipas · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 2 |
+| `planisferio-tlax-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-tlax-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 17 | 3 |
+| `planisferio-tlax-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 2 | 6 | 2 |
+| `planisferio-tlax-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-tlax-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-tlax-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-tlax-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 8 | 4 | 1 |
+| `planisferio-tlax-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-tlax-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-tlax-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-tlax-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-tlax-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-tlax.html` | Tlaxcala · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-ver-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-ver-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 62 | 0 | 15 | 21 | 3 |
+| `planisferio-ver-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-ver-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-ver-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-ver-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-ver-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-ver-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-ver-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-ver-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-ver-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 12 | 7 | 3 |
+| `planisferio-ver-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-ver.html` | Veracruz · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 3 |
+| `planisferio-yuc-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-yuc-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 17 | 3 |
+| `planisferio-yuc-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-yuc-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-yuc-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-yuc-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-yuc-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-yuc-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-yuc-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-yuc-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-yuc-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-yuc-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-yuc.html` | Yucatán · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-zac-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
+| `planisferio-zac-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 12 | 19 | 2 |
+| `planisferio-zac-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-zac-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
+| `planisferio-zac-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
+| `planisferio-zac-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 60 | 0 | 5 | 5 | 1 |
+| `planisferio-zac-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-zac-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
+| `planisferio-zac-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
+| `planisferio-zac-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
+| `planisferio-zac-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
+| `planisferio-zac-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
+| `planisferio-zac.html` | Zacatecas · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio.html` | Planisferio · Auditavisión | apartados.py | 144 | 0 | 31 | 51 | 5 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
@@ -699,7 +735,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `radar-presupuesto-en-curso.html` | Hoy: el presupuesto en curso · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-reloj.html` | El reloj de cada administración · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `radar-tablero.html` | El tablero · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
-| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
+| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 
@@ -754,11 +790,11 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-117 fichas, cada una con su porqué, su responsable y su enlace oficial.
+120 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 
-Documentos en `docs/boveda/evidencias.json`: 273 copiado, 37 no abrió, 8 sin copia.
+Documentos en `docs/boveda/evidencias.json`: 277 copiado, 35 no abrió, 8 sin copia.
 
 Todos los cotejos «consta» y «matiz» tienen su evidencia.
 

@@ -33,7 +33,7 @@
   }
 
   function pintarEstado() {
-    if (L.estado === 'cargando') { estado.textContent = '⏳ Descargando la lista oficial del SAT (1.5 MB)…'; return; }
+    if (L.estado === 'cargando') { estado.textContent = '⏳ Descargando la lista oficial del SAT (1.9 MB)…'; return; }
     if (L.estado === 'error') {
       estado.innerHTML = chip('pendiente') + ' No se pudo descargar la lista. Revisa tu conexión y <button type="button" class="ef-reintentar" id="efReintentar">vuelve a intentar</button>.';
       $('efReintentar').addEventListener('click', cargar);

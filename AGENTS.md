@@ -252,6 +252,25 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   Todo sale de `herramientas/dimension_social.py`, que leen el Planisferio (`?d=social`, `#social`) y
   el chat (`socEdo()`). **La pobreza no se dice como calificación de un gobierno, y las aportaciones
   por persona en pobreza no son lo que le llega a cada persona.**
+- **La penal, décima dimensión pintada** (07-11-2026, pedido del autor: «una dimensión de penal»).
+  La ENVIPE 2026 del INEGI por entidad (datos de 2025): la tasa de fraude por cada 100 mil habitantes
+  y la cifra oculta, del texto de cada ficha estatal (`anclar_envipe_estados.py` →
+  `docs/seguridad/envipe-2026-entidades.json`, con huellas; se corre a mano con `pdftotext`). Todo sale
+  de `herramientas/dimension_penal.py` (`?d=penal`, `#penal` y su página en cada portal). **Más fraude
+  registrado no se dice como peor gobierno** (lo cometen particulares y es una encuesta en los hogares),
+  y **la cifra oculta no se dice como la eficacia de la fiscalía**. Las cinco entidades cuya ficha da
+  la tasa de fraude solo en gráfica (Chiapas, Guerrero, Estado de México, Oaxaca y Puebla) **nunca se leen
+  a ojo**: desde el 07-11-2026 su tasa sale del tabulado básico del INEGI, cuadro 1.13 (con su huella), y el
+  script se detiene si el cuadro no da lo mismo que las otras 27 fichas y que el país (8,290). Cada entidad
+  dice de dónde salió su tasa (`fraude_de`); si una ENVIPE nueva deja alguna sin ella, vuelve a gris con
+  su pendiente (`penal-fraude-graficas`). **Las carpetas por fraude del SESNSP** (07-11-2026, pedido del autor)
+  salen de sus datos abiertos estatales (`anclar_sesnsp_fraude.py <ZIP>` → `docs/seguridad/sesnsp-fraude-estatal.json`,
+  con huella; el ZIP se baja de su SharePoint, `sspcgob-my.sharepoint.com`), y van como lentes `pnN` (oficial) y
+  `pnC` (por cada 100 mil, derivado, con la población del CONAPO a mitad de 2026) y en «El fraude en números».
+  **Una carpeta no se dice como una víctima ni como un fraude, más carpetas no se dice como más fraude, y las
+  carpetas no se restan de la ENVIPE**: la proporción del país (carpetas por cada 100 fraudes estimados, cuadro
+  1.20 del tabulado) es derivada y no es «la cifra oculta del fraude». Cuando el SESNSP publique otro corte, se
+  vuelve a correr el script con el ZIP nuevo.
 - **Cada dimensión va vinculada al Contexto dimensional y al estado de resultados** (04-11-2026,
   pedido del autor). `CONTEXTO` de `dimension_social.py` dice qué página del Contexto dimensional mira
   cada dimensión a nivel federal: **una dimensión nueva necesita ahí su renglón**, o la generación se
@@ -946,6 +965,32 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   art. 111). **Se dicen siempre como señal para revisar, nunca como irregularidad**, sin nombrar a la
   empresa; los topes de cada año van en `ANEXO9` y se cotejan contra el DOF; lo que depende del escalón
   de cada dependencia queda pendiente (`fracc-escalon`).
+- **El vigía legislativo y el lector de facturas** (05-11-2026,
+  `docs/ENCARGO-VIGIA-Y-CFDI.md`). `herramientas/vigia_legislativo.py` lee el
+  DOF y el índice de Diputados y deja en `docs/legislativo/bandeja.json` lo
+  que hay **por cotejar** y los módulos que citan una reforma vieja: **detecta
+  y propone, nunca escribe en la base**. Una ley nueva que la plataforma cite
+  va en su `LEYES` (con cómo la nombramos), o su cita no se revisa. El
+  **Lector de facturas CFDI** (`insp_factura.py`, `insp-factura.js`, y su
+  gemelo `lector_cfdi.py`) lee el XML **en el navegador, sin subirlo**: lo que
+  dice la 69-B es `oficial`; comparar fechas o rehacer la cuenta es `derivado`
+  y se dice «señal para revisar», nunca «irregularidad». Con dos o más facturas
+  (hasta 500) suma el resumen **por proveedor** (`proveedores()` de `insp-factura.js` y
+  `por_proveedor()` de `lector_cfdi.py`, con las mismas reglas). **El Vigía 69-B** (`herramientas/vigia_69b.py`,
+  flujo semanal) compara la lista del SAT contra `sat-69b.js` por RFC y deja en
+  `docs/sat69b/bandeja.json` altas, cambios de situación, bajas y cambios de razón
+  social; tampoco escribe en la base, y a las personas físicas las deja con el RFC
+  recortado y sin nombre. **Revisa tu estado de resultados** (05-11-2026,
+  `insp_resultados.py`, `insp-resultados.js` y su gemelo `lector_resultados.py`, con
+  la prueba en `revision.py`) lee un CSV o lo pegado de Excel **en el navegador**, sin
+  subirlo, y lo revisa en seis dimensiones (cuadre, estructura, rentabilidad, tendencia
+  a 3 y 5 años, impuestos y deuda): todo es `derivado` y «señal para revisar». **Los
+  patrones de los renglones viven en `CONCEPTOS` de `lector_resultados.py`** y la página
+  se los pasa al JavaScript: una regla nueva se escribe en los dos y se prueba allá.
+  **Mi Auditavisión** (05-11-2026, `insp_mia.py`, `insp-mia.js`) es el tablero: «Mis
+  proveedores» contra la 69-B y «Mis revisiones», **guardado solo en el navegador**
+  (localStorage `av-mia`; los dos lectores escriben ahí con `miaGuardar()`, solo el
+  resumen y nunca el archivo; las personas físicas no entran a la lista).
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).

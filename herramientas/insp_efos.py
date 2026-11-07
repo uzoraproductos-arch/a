@@ -145,7 +145,7 @@ def construir(base, ref):
       <div class="ef-lote" id="efLote" aria-live="polite"></div>
     </div>
 
-    <p class="ef-estado" id="efEstado" role="status">La lista oficial (1.5 MB) se descarga sola en cuanto la página está lista; si no tienes JavaScript, consúltala en el %(fuente_sat)s.</p>
+    <p class="ef-estado" id="efEstado" role="status">La lista oficial (1.9 MB) se descarga sola en cuanto la página está lista; si no tienes JavaScript, consúltala en el %(fuente_sat)s.</p>
     <noscript><p class="ef-estado">Para buscar aquí hace falta JavaScript. Puedes descargar el %(fuente_csv)s del SAT.</p></noscript>
   </section>
 

@@ -1,0 +1,41 @@
+# Vigía legislativo (05-11-2026, encargo del autor): lee el sumario del DOF y
+# el índice de Leyes Federales Vigentes de la Cámara de Diputados, y deja en
+# docs/legislativo/bandeja.json lo que hay «por cotejar» y los módulos que
+# citan una reforma vieja (herramientas/vigia_legislativo.py). No escribe en
+# la base: solo propone. Corre cada día a las 10:47 de la Ciudad de México
+# (después de que el DOF publica su edición matutina) y a mano desde Actions.
+name: Vigía legislativo
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '47 16 * * *'   # 16:47 UTC = 10:47 en la Ciudad de México
+
+permissions:
+  contents: write
+
+jobs:
+  vigia:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/funny-turing-imtm54
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Leer el DOF y el índice de Diputados
+        run: python herramientas/vigia_legislativo.py
+      - name: Guardar la bandeja
+        run: |
+          if git diff --quiet -- docs/legislativo/bandeja.json; then
+            echo "Sin cambios."
+            exit 0
+          fi
+          git config user.name "Vigía legislativo"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/legislativo/bandeja.json
+          git commit -m "Vigía legislativo: publicaciones por cotejar del $(date +%d-%m-%Y)"
+          git pull --rebase origin claude/funny-turing-imtm54
+          git push origin HEAD:claude/funny-turing-imtm54

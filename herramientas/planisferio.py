@@ -76,6 +76,12 @@ DIMENSIONES = [
      'El gobierno que ejecuta, en los tres niveles: cuánta gente tiene la administración de cada estado, cuánto ejerció, cuántos contratos dio sin concurso, '
      'cuánto ejercieron sus municipios y qué les dejó por aclarar la Auditoría Superior de la Federación.',
      'datos-administracion-publica-niveles.html#adm-estados', None, True),
+    # Pedido del autor, 05-11-2026: «una dimensión de penal». La ENVIPE 2026
+    # del INEGI por entidad (dimension_penal.py).
+    ('penal', '🚨', 'Penal',
+     'Lo que la gente dice que sufrió en cada estado, según la encuesta de victimización del INEGI: cuánto fraude hubo por cada 100 mil habitantes '
+     'y cuántos delitos no se denunciaron o no se investigaron (la cifra oculta); y las carpetas por fraude que abrieron sus fiscalías (SESNSP).',
+     'aprende-fraude-en-numeros.html', None, True),
 ]
 
 
@@ -116,6 +122,7 @@ TEMAS = [
     ('salud', '🩺', 'Su salud pública', 'El IMSS y el ISSSTE en el estado: personas, consultas, médicos, camas y unidades.'),
     ('social', '🫂', 'Su pobreza y sus carencias', 'Cuántas personas viven en pobreza, sus seis carencias y lo que le aporta la Federación.'),
     ('administracion', '🏢', 'Su administración pública', 'El gobierno que ejecuta: su personal, lo que ejerció y sus contratos sin concurso.'),
+    ('penal', '🚨', 'Su fraude y su cifra oculta', 'Cuánto fraude dice sufrir su gente, cuántas carpetas abrió su fiscalía y cuántos delitos no llegan a una.'),
     ('ambiental', '🌎', 'Sus recursos naturales', 'Sus acuíferos, bosques, incendios, pesca, minas y su refinería, si la tiene.'),
     ('leyes', '📜', 'Sus leyes del dinero', 'Con qué leyes cobra, compra, se endeuda y rinde cuentas, y dónde se publican.'),
     ('dimensiones', '🚪', 'En la Enciclopedia y en el Auditor', 'Su estado de cuenta, su circuito del dinero, lo que dejó la ASF y sus otras dimensiones.'),
@@ -329,6 +336,9 @@ def _datos(base, padron):
     ap = apu.estados(base)
     import dimension_social as dso
     so = dso.estados(base)
+    import dimension_penal as dpe
+    pn = dpe.estados(base)
+    pc = dpe.carpetas(base)
     E = base['estados']
     C = base['fiscalEntidades']['campos']
     sin = set(C['recaudacionPropia'].get('sinFuente', []))
@@ -387,6 +397,11 @@ def _datos(base, padron):
         filas[-1].update({'soP': z['p'], 'soN': z['pers'], 'soX': z['x'], 'soI': z['ing'], 'soS': z['car']['seg'], 'soA': z['car']['sal'],
                           'soR': z['car']['rez'], 'soQ': z['r33'],
                           'soc': {'m': z['m'], 'ix': z['ingx'], 'v': z['car']['viv'], 'b': z['car']['bas'], 'al': z['car']['ali'], 'pt': z['pobT'], 'u': z['url']}})
+        # Su fraude y su cifra oculta (INEGI, ENVIPE 2026, datos de 2025).
+        w = pn[e['abbr']]
+        k = pc[e['abbr']]
+        filas[-1].update({'pnF': w['fraude'], 'pnO': w['oculta'], 'pnN': k['n'], 'pnC': k['t'],
+                          'pen': {'d': w['destaca'], 'u': w['url'], 't': w['fraude_de'] == 'tabulado', 'n0': k['n24'], 'cam': k['cam']}})
         x = ap[e['abbr']]
         filas[-1].update({'apP': x['per'], 'apK': x['perk'], 'apX': x['pres'], 'apD': x['ad'], 'apG': x['gpa'], 'apM': x['mpres'], 'apA': x['mpa'],
                           'apu': {'tit': x['tit'], 'con': x['con'], 'ga': x['ga'], 'ma': x['ma'], 'presp': x['presp'], 'mpresp': x['mpresp'],
@@ -558,6 +573,21 @@ LENTES = [
     {'id': 'soQ', 'dim': 'social', 'fmt': 'pesos', 'nom': 'Aportaciones por persona en pobreza', 'pal': 'rosa', 'est': 'derivado', 'anio': '2026 ÷ 2024',
      'que': ('Las aportaciones federales de 2026 (Ramo 33) ÷ las personas en pobreza de 2024. Sirve para comparar estados, no es lo que le llega a cada persona pobre: '
              'el Ramo 33 paga sobre todo maestros y salud, y solo su fondo de infraestructura social (FAIS) va por ley a la población en pobreza.')},
+    # La dimensión penal (05-11-2026, pedido del autor): la ENVIPE 2026 por
+    # entidad (dimension_penal.py). Es una encuesta en los hogares.
+    {'id': 'pnF', 'dim': 'penal', 'fmt': 'n', 'nom': 'Fraude por cada 100 mil habitantes', 'pal': 'rojo', 'est': 'oficial', 'anio': 2025,
+     'que': ('Cuántos fraudes (bancario y al consumidor) hubo por cada 100 mil habitantes, según lo que la gente contó en la encuesta de victimización del INEGI. '
+             'Es lo que se sufrió, no lo que se denunció. El fraude lo cometen particulares: no es la calificación de un gobierno.')},
+    {'id': 'pnO', 'dim': 'penal', 'fmt': 'pct', 'nom': 'Cifra oculta', 'pal': 'rojo', 'est': 'oficial', 'anio': 2025,
+     'que': ('De cada 100 delitos que sufrió la gente, cuántos no se denunciaron o no llegaron a una carpeta de investigación. Junta las dos cosas: '
+             'lo que la gente no denunció y lo que la autoridad no investigó, así que no mide por sí sola a la fiscalía.')},
+    # Las carpetas por fraude del SESNSP (07-11-2026, pedido del autor).
+    {'id': 'pnC', 'dim': 'penal', 'fmt': 'dec1', 'nom': 'Carpetas por fraude por cada 100 mil habitantes', 'pal': 'rojo', 'est': 'derivado', 'anio': 2025,
+     'que': ('Las carpetas de investigación por fraude que abrió la fiscalía del estado en 2025 por cada 100 mil habitantes. Es lo que llegó a la autoridad, '
+             'no lo que pasó: más carpetas puede ser más denuncia, no más fraude. Junta carpetas de 2025 con la población del CONAPO a mitad de 2026.')},
+    {'id': 'pnN', 'dim': 'penal', 'fmt': 'n', 'nom': 'Carpetas por fraude', 'pal': 'rojo', 'est': 'oficial', 'anio': 2025,
+     'que': ('Cuántas carpetas de investigación por fraude reportó la fiscalía del estado al SESNSP en 2025. Una carpeta es una investigación, no una víctima: '
+             'puede juntar varias. Los estados grandes tienen más carpetas por tener más gente: para comparar, mira la lente por cada 100 mil habitantes.')},
     {'id': 'apP', 'dim': 'administracion', 'fmt': 'n', 'nom': 'Personal de su administración', 'pal': 'azul', 'est': 'oficial', 'anio': 2024,
      'que': ('Las personas que el gobierno de cada estado le reportó al INEGI en su administración pública al cierre de 2024, con sus titulares. '
              'Es lo que cada uno contestó al censo: el INEGI no dice qué organismos incluyó cada gobierno, y por eso hay diferencias que no son de tamaño.')},
@@ -730,6 +760,18 @@ def _fuentes(ref, base=None):
         C = base['fiscalEntidades']['campos']
         extra['soQ'] = ('Aportaciones de 2026 (%s %s) ÷ personas en pobreza de 2024 (%s). La división es nuestra, y junta dos años: '
                         'el INEGI mide la pobreza cada dos años y la de 2026 aún no existe.') % (C['ramo33']['fuente'], ref(C['ramo33']['ref']), soc)
+    import dimension_penal as dpe
+    pe_f, pe_u = dpe.fuente()
+    pen = ('%s (<a href="%s">presentación nacional</a>; cada estado con su ficha y su huella SHA-256 en <code>docs/seguridad/envipe-2026-entidades.json</code>)') % (pe_f, pe_u)
+    tb = dpe.tabulado()
+    extra.update({'pnF': pen + ('. Se toma del texto de cada ficha estatal; la de %s, cuya ficha la da solo en gráfica, del <a href="%s">tabulado básico del INEGI</a>, '
+                                'cuadro 1.13 (huella SHA-256 <code>%s…</code>), que da las mismas cifras que las otras 27 fichas.') % (
+                      ', '.join(dpe.del_tabulado()), tb['url'], tb['sha'][:12]), 'pnO': pen + '.'})
+    sp = dpe.sesnsp()
+    ses = ('%s (<a href="%s">datos abiertos</a>, archivo %s, corte %s, huella SHA-256 <code>%s…</code>; en <code>docs/seguridad/sesnsp-fraude-estatal.json</code>)') % (
+        sp['fuente'], sp['pagina'], sp['archivo'], sp['corte'], sp['sha'][:12])
+    extra.update({'pnN': ses + '. Suma de los doce meses de 2025 del tipo «Fraude».',
+                  'pnC': ses + '. Carpetas de 2025 × 100,000 ÷ población a mitad de 2026 (CONAPO, la de la base). La división es nuestra, y junta dos años.'})
     extra['obr'] = tm.FUENTE_OBRAS
     extra.update({'peT': pe + '.', 'peV': pe + '. Miles de pesos ÷ 1,000: la cuenta es nuestra.'})
     extra.update({'incH': ic + '.', 'incN': ic + '.', 'sfT': sf + '.',
@@ -886,6 +928,12 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
     nota_sal = _nota_sal(filas)
     nota_apu = _nota_apu(filas)
     nota_soc = _nota_soc(filas)
+    nota_pen = _nota_pen(filas, base)
+    import dimension_penal as dpe
+    if dpe.sin_fraude():
+        falta['pnF'] = {'a': dpe.sin_fraude(), 'gris': 'solo en gráfica', 'pend': dpe.PEND,
+                        'txt': ('En la ficha estatal del INEGI de estas entidades el delito que se destaca es otro, y su tasa de fraude viene solo en una gráfica. '
+                                'No la leemos a ojo: queda pendiente hasta tomarla de los tabulados de la ENVIPE.')}
     sin_ref = [f['a'] for f in filas if f['refj'] is None]
     for i in ('refj', 'refp', 'refu'):
         falta[i] = {'a': sin_ref, 'gris': 'sin refinería de PEMEX', 'pend': None,
@@ -924,7 +972,7 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
                       med[0]['n'], pct(med[0]['ild']), med[-1]['n'], pct(med[-1]['ild']), chip('oficial')))
     datos = {'lentes': [dict(l, fuente=fu[l['id']], falta=falta.get(l['id'])) for l in LENTES], 'e': filas,
              'dims': {i: {'n': nom, 'q': q, 'ir': ir, 'ire': ire, 'pinta': pinta} for i, _, nom, q, ir, ire, pinta in DIMENSIONES}}
-    notas = {'deuda': nota_deuda, 'inversion': nota_inv, 'legislativa': nota_leg, 'judicial': nota_jud, 'ambiental': nota_amb, 'salud': nota_sal, 'administracion': nota_apu, 'social': nota_soc}
+    notas = {'deuda': nota_deuda, 'inversion': nota_inv, 'legislativa': nota_leg, 'judicial': nota_jud, 'ambiental': nota_amb, 'salud': nota_sal, 'administracion': nota_apu, 'social': nota_soc, 'penal': nota_pen}
     # Lo que antes era un párrafo largo arriba del mapa y una nota debajo
     # (decisión del autor, 03-11-2026: «mucho contenido de narración»): cada
     # dimensión tiene su «Cómo leerla» y su «Lo que el mapa no dice» en la
@@ -946,6 +994,11 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         'administracion': ('El gobierno que ejecuta, en los tres niveles. De la administración de cada estado, lo que le reportó al censo del INEGI: cuánta gente tiene, '
                            'cuánto ejerció en 2024 y cuántos de sus contratos dio por adjudicación directa. De sus municipios, cuánto ejercieron. Y de los dos, lo que la '
                            'Auditoría Superior de la Federación dejó por aclarar del dinero federal de la Cuenta Pública 2024. La ficha trae además el nivel federal, para comparar.'),
+        'penal': ('Lo que la gente de cada estado dice haber sufrido en 2025, según la Encuesta Nacional de Victimización del INEGI (ENVIPE 2026): '
+                  'cuántos fraudes hubo por cada 100 mil habitantes y, de todos los delitos, cuántos no se denunciaron o no se investigaron. '
+                  'Es una encuesta en los hogares, con su margen de error: sirve para preguntar, no para calificar a un gobierno. '
+                  'Junto, lo que llegó a la autoridad: las carpetas de investigación por fraude que su fiscalía reportó al SESNSP en 2025, '
+                  'en total y por cada 100 mil habitantes. Una carpeta no es una víctima, y más carpetas puede ser más denuncia.'),
         'ambiental': ('Los recursos naturales: los acuíferos de cada estado y cuántos ya no tienen agua para concesionar, su superficie forestal y sus incendios forestales, '
                       'su pesca y su acuacultura, sus concesiones mineras y las siete refinerías de PEMEX, cuánto crudo procesa cada una frente a su capacidad y cuánto valor '
                       'ganó o perdió en sus libros. En las lentes de refinación, el punto marca la entidad, no el sitio exacto. '
@@ -1174,6 +1227,78 @@ def _nota_soc(filas):
             'la Secretaría de Bienestar no publica sus padrones por entidad en un formato que se pueda cotejar.') % (
         p[0]['n'], format(p[0]['soP'], '.1f'), chip('oficial'), n[0]['n'], format(n[0]['soN'], ','), chip('derivado'), lug,
         q[0]['n'], '$' + format(q[0]['soQ'], ','), q[-1]['n'], '$' + format(q[-1]['soQ'], ','), chip('derivado'))
+
+
+def _nota_pen(filas, base):
+    """Los puntos ciegos de la dimensión penal, dichos con las cifras."""
+    import dimension_penal as dpe
+    n = dpe.nacional()
+    f = sorted((x for x in filas if x['pnF'] is not None), key=lambda x: -x['pnF'])
+    o = sorted(filas, key=lambda x: -x['pnO'])
+    c = sorted(filas, key=lambda x: -x['pnC'])
+    P = dpe.carpetas_pais(base)
+    # El salto más grande, entre las que reportaron al menos 100 carpetas en 2024.
+    s_ = max((x for x in filas if x['pen']['n0'] >= 100), key=lambda x: abs(x['pen']['cam']))
+    return ('<b>Más fraude registrado no es peor gobierno.</b> %s tiene la tasa más alta, %s fraudes por cada 100 mil habitantes %s (en el país, %s), y %s la más baja, %s. '
+            'El fraude lo cometen particulares, y la ENVIPE es una encuesta en los hogares con su margen de error: donde la gente usa más la banca y el comercio en línea, '
+            'también hay más con qué defraudarla. <b>La cifra oculta no es la eficacia de la fiscalía.</b> Va de %s %% en %s a %s %% en %s %s, y junta lo que la gente '
+            'no denunció con lo que la autoridad no investigó. <b>Lo que llega a una fiscalía es casi nada.</b> En 2025 las fiscalías abrieron %s carpetas por fraude %s, '
+            'y la ENVIPE estima %s fraudes %s: unas %s carpetas por cada 100 fraudes %s. No se restan: la encuesta cuenta a personas adultas en sus hogares y las carpetas '
+            'incluyen a empresas. Y una tasa alta de carpetas puede ser más denuncia, no más fraude: %s abrió %s por cada 100 mil habitantes y %s, %s %s. '
+            'Además, cada fiscalía clasifica y reporta sus carpetas, y el SESNSP las publica como se las entregan: %s pasó de %s carpetas por fraude en 2024 a %s en 2025 %s, '
+            'un salto que pide preguntar a su fiscalía antes de leerlo como menos fraude.%s') % (
+        f[0]['n'], format(f[0]['pnF'], ','), chip('oficial'), format(n['fraude'], ','), f[-1]['n'], format(f[-1]['pnF'], ','),
+        format(o[-1]['pnO'], '.1f'), o[-1]['n'], format(o[0]['pnO'], '.1f'), o[0]['n'], chip('oficial'),
+        format(P['n'], ','), chip('oficial'), format(P['env'], ','), chip('oficial'), format(P['c100'], '.1f'), chip('derivado'),
+        c[0]['n'], format(c[0]['pnC'], '.1f'), c[-1]['n'], format(c[-1]['pnC'], '.1f'), chip('derivado'),
+        s_['n'], format(s_['pen']['n0'], ','), format(s_['pnN'], ','), chip('oficial'),
+        (' <b>Lo que falta:</b> la tasa de fraude de %d entidades, que su ficha da solo en gráfica %s.' % (len(dpe.sin_fraude()), chip('pendiente', dpe.PEND))) if dpe.sin_fraude() else '')
+
+
+def _penal_portal(base, ref, e):
+    """Su fraude y su cifra oculta (05-11-2026): la ficha estatal de la ENVIPE."""
+    import dimension_penal as dpe
+    pn = dpe.estados(base)
+    na = dpe.nacional()
+    a, nom = e['abbr'], e['name']
+    z = pn[a]
+    con = [b for b in pn if pn[b]['fraude'] is not None]
+    fr = ('%s %s <small>lugar %d de %d; en el país, %s</small>' % (format(z['fraude'], ','), chip('oficial'),
+          sorted(con, key=lambda b: -pn[b]['fraude']).index(a) + 1, len(con), format(na['fraude'], ','))
+          if z['fraude'] is not None else 'Su ficha la da solo en gráfica %s' % chip('pendiente', dpe.PEND))
+    tb = dpe.tabulado()
+    de_tab = ('; su tasa de fraude, que su ficha da solo en gráfica, del <a href="%s">tabulado básico, cuadro 1.13</a> (huella <code>%s…</code>)' % (
+        html.escape(tb['url']), tb['sha'][:12])) if z.get('fraude_de') == 'tabulado' else ''
+
+    p1 = ('<article class="pl-piso"><h3>🚨 Fraude y cifra oculta en %s · 2025</h3>'
+          '<dl class="pl-dl"><dt>Fraudes por cada 100 mil habitantes</dt><dd>%s</dd>'
+          '<dt>Cifra oculta</dt><dd>%s %s <small>lugar %d de 32; en el país, %s</small></dd>'
+          '<dt>El delito que destaca su ficha</dt><dd>%s</dd></dl>'
+          '<p class="pl-piso-f">INEGI, ENVIPE 2026, <a href="%s">principales resultados de %s</a> (huella SHA-256 <code>%s…</code>)%s.</p></article>') % (
+              html.escape(nom), fr, pct(z['oculta']), chip('oficial'), sorted(pn, key=lambda b: -pn[b]['oculta']).index(a) + 1, pct(na['oculta']),
+              html.escape(z['destaca'] or 'sin dato'), html.escape(z['url']), html.escape(nom), z['sha'][:12], de_tab)
+    pc = dpe.carpetas(base)
+    P = dpe.carpetas_pais(base)
+    k = pc[a]
+    cam = ('%s%s %% frente a 2024 (%s) %s' % ('+' if k['cam'] > 0 else '', format(k['cam'], '.1f'), format(k['n24'], ','), chip('derivado'))
+           if k['cam'] is not None else 'en 2024 no reportó carpetas por fraude')
+    p2 = ('<article class="pl-piso"><h3>📂 Las carpetas por fraude de su fiscalía · 2025</h3>'
+          '<dl class="pl-dl"><dt>Carpetas de investigación por fraude</dt><dd>%s %s <small>%s; lugar %d de 32; en el país, %s</small></dd>'
+          '<dt>Por cada 100 mil habitantes</dt><dd>%s %s <small>lugar %d de 32; en el país, %s</small></dd></dl>'
+          '<p class="pl-piso-f">%s, archivo <a href="%s">%s</a> (corte %s, huella SHA-256 <code>%s…</code>), suma de los doce meses del tipo «Fraude». '
+          'La tasa divide entre su población a mitad de 2026 (CONAPO): la división es nuestra.</p></article>') % (
+              format(k['n'], ','), chip('oficial'), cam, sorted(pc, key=lambda b: -pc[b]['n']).index(a) + 1, format(P['n'], ','),
+              format(k['t'], '.1f'), chip('derivado'), sorted(pc, key=lambda b: -pc[b]['t']).index(a) + 1, format(P['t'], '.1f'),
+              html.escape(P['fuente']), html.escape(P['pagina']), html.escape(P['archivo']), html.escape(P['corte']), P['sha'][:12])
+    ciego = ('<p class="pl-dim-nota"><b>Lo que estas cifras no dicen.</b> La ENVIPE cuenta lo que la gente dice haber sufrido, no las denuncias. Más fraude registrado '
+             'no es peor gobierno: lo cometen particulares. Y la cifra oculta junta lo que no se denunció con lo que no se investigó. Las carpetas son lo que llegó '
+             'a la fiscalía: una carpeta es una investigación, no una víctima, y más carpetas puede ser más denuncia. En el país, por cada 100 fraudes que estima la '
+             'encuesta hubo unas %s carpetas %s; no se restan, porque la encuesta cuenta a personas adultas en sus hogares y las carpetas incluyen a empresas.</p>') % (
+                 format(P['c100'], '.1f'), chip('derivado'))
+    ir = ('<p class="pl-ficha-ir"><a href="planisferio.html?d=penal&amp;e=%s">El fraude de los 32 estados, en el mapa ➔</a> '
+          '<a href="aprende-fraude-en-numeros.html">El fraude en números, en la Enciclopedia ➔</a> '
+          '<a href="herramienta-inspector-efos.html">Busca un RFC en la lista 69-B ➔</a></p>') % quote(a)
+    return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, ir)
 
 
 def _social_portal(base, ref, e):
@@ -1998,6 +2123,10 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
              'texto': ('El gobierno que ejecuta, en los tres niveles: cuánta gente tiene la administración de %s, cuánto ejerció en 2024 y cuántos contratos dio sin concurso; '
                        'cuánto ejercieron sus municipios; y lo que la Auditoría Superior de la Federación dejó por aclarar a cada uno. Arriba, la federal, para comparar.') % nom,
              'tarjetas': [], 'bloque': _administracion_portal(base, ref, e)},
+            {'id': 'penal', 'titulo': 'Su fraude y su cifra oculta',
+             'texto': ('Cuánto fraude dice haber sufrido la gente de %s en 2025 y cuántos delitos no se denunciaron o no se investigaron, según la encuesta de '
+                       'victimización del INEGI (ENVIPE 2026).') % nom,
+             'tarjetas': [], 'bloque': _penal_portal(base, ref, e)},
             {'id': 'ambiental', 'titulo': 'Sus recursos naturales',
              'texto': ('Quién explota los recursos de %s y quién los audita. Empieza por lo que ya tiene cifra: sus acuíferos y cuántos ya no tienen agua para concesionar, '
                        'su superficie forestal y sus incendios forestales de 2025, su pesca y su acuacultura, sus concesiones mineras y la refinería de PEMEX, si la tiene, con el crudo que procesa y el valor que ganó o perdió en los libros de PEMEX.') % nom,

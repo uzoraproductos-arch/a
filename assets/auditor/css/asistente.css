@@ -511,3 +511,6 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .leg-leyes { list-style: none; padding: 0; margin: 12px 0 0; }
 .leg-leyes li { padding: 12px 0; border-top: 1px solid var(--border, rgba(127,127,127,.25)); line-height: 1.5; }
 .leg-leyes li small { display: block; margin-top: 4px; }
+/* Vigia legislativo: lo que el DOF y Diputados publican, por cotejar (05-11-2026). */
+.vig-sinv { display: inline-block; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #7a4a00; background: #fff1d6; border: 1px solid #e8c37a; border-radius: 4px; padding: 2px 6px; margin-right: 4px; }
+.vig-sub { margin: 22px 0 6px; }

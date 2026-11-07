@@ -1,0 +1,277 @@
+{
+ "fuente": "INEGI, Encuesta Nacional de Victimización y Percepción sobre Seguridad Pública (ENVIPE) 2026, datos de 2025: principales resultados por entidad federativa",
+ "nacional": {
+  "fraude": 8290,
+  "fraude2024": 7574,
+  "oculta": 93.4,
+  "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_presentacion_nacional.pdf",
+  "sha": "d198839b32796ace3ad2ec117e90a1e9dab72927b7be6b3e7507174dea75aa2d",
+  "delitos_fraude": {
+   "bancario": 4551884,
+   "consumidor": 3584629
+  }
+ },
+ "tabulado": {
+  "titulo": "Tabulados básicos, I. Nivel de victimización y delincuencia, cuadro 1.13: tasa de incidencia delictiva por entidad federativa de ocurrencia por cada cien mil habitantes y los cinco delitos más frecuentes, 2025; cuadro 1.20: total de delitos ocurridos por tipo de delito, 2025",
+  "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/tabulados/I_nivel_victimizacion_2026_est.xlsx",
+  "sha": "0a4b86a7fbf1794986e8452f1ce8b0c67191dcc19f8487f0bf666a15f36b76d3"
+ },
+ "estados": {
+  "AGS": {
+   "oculta": 88.4,
+   "fraude": 8273,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_ags.pdf",
+   "sha": "f7b52af7b05c0be9b9f03de84c968fbe77249045c6e3f98f703c41248085c1de"
+  },
+  "BC": {
+   "oculta": 91.3,
+   "fraude": 8332,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_bc.pdf",
+   "sha": "c6ee1e324b6adb91b872d46fd73ee9609769ae60c60ad875d8522f089af792f6"
+  },
+  "BCS": {
+   "oculta": 89.9,
+   "fraude": 7677,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_bcs.pdf",
+   "sha": "10f3f0c4d30bea08ddf75545bc83907d48d5213b2c12c1465a8219106b5eb518"
+  },
+  "CAM": {
+   "oculta": 93.6,
+   "fraude": 7762,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_camp.pdf",
+   "sha": "976a03b0450b1575804813a5e88aad2071cded5ec2e79e1ded4ec4187b617bb1"
+  },
+  "COAH": {
+   "oculta": 90.2,
+   "fraude": 4699,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_coah.pdf",
+   "sha": "f99308840ce7ae89aab2a32d160a7d5cd80851e1904d36f2f31ae5498835d5a7"
+  },
+  "COL": {
+   "oculta": 91.1,
+   "fraude": 6690,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_col.pdf",
+   "sha": "2e605613c00081b6eb837b3c26de5af4bfb4632848ba3fe0068d0d345f4564aa"
+  },
+  "CHIS": {
+   "oculta": 92.6,
+   "fraude": 3592,
+   "fraude_de": "tabulado",
+   "destaca": "extorsión",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_chis.pdf",
+   "sha": "bfb9c061bb8994eacf1ad86637c6d6da38684e2cf495f7ec529176766df1cf26"
+  },
+  "CHIH": {
+   "oculta": 94.0,
+   "fraude": 9576,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_chih.pdf",
+   "sha": "5c276d48c4bf6bcc0669aec36cbe7066c2f6c9223e4f0adef15e204610974646"
+  },
+  "CDMX": {
+   "oculta": 93.7,
+   "fraude": 15065,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_cdmx.pdf",
+   "sha": "2a0069f09224faa1235492804a3d905c338d6adf97757d95629f336d7b9b6d04"
+  },
+  "DGO": {
+   "oculta": 90.1,
+   "fraude": 6734,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_dgo.pdf",
+   "sha": "4240cc6728e1befd4cc05736e2175d16301923e6c666b1bc73a92b64af45e235"
+  },
+  "GTO": {
+   "oculta": 92.3,
+   "fraude": 6834,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_gto.pdf",
+   "sha": "361aa33e229add23effa6919a594397093f62bebd9da50d92338cd5563013916"
+  },
+  "GRO": {
+   "oculta": 96.2,
+   "fraude": 6062,
+   "fraude_de": "tabulado",
+   "destaca": "extorsión",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_gro.pdf",
+   "sha": "3133e25cdcd973b0438de1efa7d470f3294f194e724f623de24650c4d52ce18c"
+  },
+  "HGO": {
+   "oculta": 92.7,
+   "fraude": 8169,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_hgo.pdf",
+   "sha": "54e333d4e8411e6a87d9be69da1b76d57cab570c1e507cdd537ff3d5f3843138"
+  },
+  "JAL": {
+   "oculta": 92.2,
+   "fraude": 8189,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_jal.pdf",
+   "sha": "0c4597c8dd20c1f1a118bf2978a2caeb28ee5f952e5c4a12f0b27510c3b70677"
+  },
+  "MÉX": {
+   "oculta": 94.0,
+   "fraude": 7244,
+   "fraude_de": "tabulado",
+   "destaca": "robo o asalto en calle o transporte público",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_mex.pdf",
+   "sha": "bf8ace50875e629bcc88a9746f1c7657c6bf7888762c9c0bc4ed4397e59d5b58"
+  },
+  "MICH": {
+   "oculta": 94.3,
+   "fraude": 6885,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_mich.pdf",
+   "sha": "59a5e7622c14f577f2c61f696574658f9be2205fe61704e56f8fe684a2e8888a"
+  },
+  "MOR": {
+   "oculta": 92.4,
+   "fraude": 7917,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_mor.pdf",
+   "sha": "c78ae2457839a23a3acfce2f74e66cb911b7adc17e67c598248caf57db29abb1"
+  },
+  "NAY": {
+   "oculta": 93.9,
+   "fraude": 6483,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_nay.pdf",
+   "sha": "fd2dbb3353fb601c5d78ab6a0e16a2d64aab4dd0c02aff2eb122f6a996d045f3"
+  },
+  "NL": {
+   "oculta": 92.4,
+   "fraude": 11503,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_nl.pdf",
+   "sha": "f0cb0e012e87d3cfa1a51f6bb83621a19c5b559b46f022bdeead23875ba3a41e"
+  },
+  "OAX": {
+   "oculta": 94.8,
+   "fraude": 7155,
+   "fraude_de": "tabulado",
+   "destaca": "extorsión",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_oax.pdf",
+   "sha": "1e8575479159664a44c5bf972be81def42e5b5b662fb2e67b983dc4eb3dfceea"
+  },
+  "PUE": {
+   "oculta": 93.1,
+   "fraude": 7528,
+   "fraude_de": "tabulado",
+   "destaca": "robo o asalto en calle o transporte público",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_pue.pdf",
+   "sha": "1e8266ca2ea1f05c79c8dcd23707d87b48c2cbbb3e0bc7f835ca081a9489d08a"
+  },
+  "QRO": {
+   "oculta": 93.6,
+   "fraude": 11183,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_qro.pdf",
+   "sha": "4206a8cd6d3106987c0dfd5811940d25800c6d4da2cd2ebc2cca046d4d9c7b75"
+  },
+  "QROO": {
+   "oculta": 94.6,
+   "fraude": 12886,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_qroo.pdf",
+   "sha": "60bd81de954029ee95af07bd6ca01502549fa0cce728b890e7ea6675a55be5fa"
+  },
+  "SLP": {
+   "oculta": 93.2,
+   "fraude": 9495,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_slp.pdf",
+   "sha": "fe0395a8258333273dd8b781ef6030e334d7e997017d10ea4585ae6f878d1893"
+  },
+  "SIN": {
+   "oculta": 94.8,
+   "fraude": 7448,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_sin.pdf",
+   "sha": "41f99e1bbb93ff718966f770acb5a47b5cdd90ff3c7fa787deb45ccdae77a1eb"
+  },
+  "SON": {
+   "oculta": 94.6,
+   "fraude": 8872,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_son.pdf",
+   "sha": "1b76783bcfa03f6f7a9cf7106ed14ac291549a5206250fe879730a94c5e6f713"
+  },
+  "TAB": {
+   "oculta": 93.9,
+   "fraude": 6657,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_tab.pdf",
+   "sha": "027a7aac0bf104391c5f242045bf80604c7eeda564e73ef6f2c09aa82a2a4289"
+  },
+  "TAM": {
+   "oculta": 94.5,
+   "fraude": 7454,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_tamps.pdf",
+   "sha": "a50ef7e08c52a700dfb0ded7adfa7e7bcb8ccb84f01a3c36a2c2f0f4bba7345e"
+  },
+  "TLAX": {
+   "oculta": 91.5,
+   "fraude": 7758,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_tlax.pdf",
+   "sha": "013e9ab7c8b6ab8cfce621312cd1889ed91757cf88aae19be10b262655473aa1"
+  },
+  "VER": {
+   "oculta": 96.3,
+   "fraude": 7239,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_ver.pdf",
+   "sha": "44bec9c39d57263824d5c1a9b44d6f78a6540146dd0784df38854ae705c75abb"
+  },
+  "YUC": {
+   "oculta": 91.0,
+   "fraude": 9894,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_yuc.pdf",
+   "sha": "b1945e5c01183cc9aef3a45591514348c2677ba31012fe8361fde67201def8bd"
+  },
+  "ZAC": {
+   "oculta": 92.6,
+   "fraude": 5898,
+   "fraude_de": "ficha",
+   "destaca": "fraude",
+   "url": "https://www.inegi.org.mx/contenidos/programas/envipe/2026/doc/envipe2026_zac.pdf",
+   "sha": "4c36c64d90cd2dbc1950e55cb75a10daf874b914b0a7036c438abe597aa5870a"
+  }
+ }
+}

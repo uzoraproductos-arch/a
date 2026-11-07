@@ -5,7 +5,7 @@ historia completa de cada decisión en [CONTEXT.md](CONTEXT.md), que pasa de
 7,000 renglones: aquí va solo lo que necesitas para no repetir trabajo ni
 pisar el de otro. **Se actualiza en el mismo commit que cambia lo que dice.**
 
-Última actualización: 04-11-2026 · sello `20261104k` · rama `claude/funny-turing-imtm54`.
+Última actualización: 05-11-2026 · sello `20261105a` · rama `claude/funny-turing-imtm54`.
 
 ## Antes de empezar y antes de empujar
 
@@ -16,7 +16,7 @@ python3 herramientas/revision.py --base origin/claude/funny-turing-imtm54   # al
 
 `revision.py` corre lo que pide AGENTS.md §5: `node --check`, los CR sueltos,
 que el sello haya subido si tocaste `assets/`, el inventario (enlaces rotos y
-cotejos sin evidencia), las **394 preguntas de prueba del Auditor**, la guardia
+cotejos sin evidencia), las pruebas sin red del vigía legislativo y del lector de facturas, las **408 preguntas de prueba del Auditor**, la guardia
 de legibilidad y, si tocaste `supabase/`, la base de datos. GitHub la corre sola
 en cada envío (`.github/workflows/revision.yml`). Con `--rapida` se salta lo
 que necesita navegador.
@@ -41,6 +41,7 @@ que necesita navegador.
 
 ## Lo último que entró
 
+- **05-11-2026, sello 20261105a.** **El vigía legislativo y el lector de facturas CFDI** (encargo del autor, `docs/ENCARGO-VIGIA-Y-CFDI.md`, pasos 1 y 2). (1) `herramientas/vigia_legislativo.py` lee el sumario del DOF (`dof.gob.mx/sumario.xml`) y el índice de Leyes Federales Vigentes de la Cámara de Diputados, y escribe `docs/legislativo/bandeja.json`: las publicaciones que tocan 35 leyes del dinero, **por cotejar** (solo título, fecha y liga), y **los avisos de los módulos que citan una reforma anterior a la vigente** (busca cada «última reforma DOF…» en `herramientas/*.py` y la tabla de `leyes_niveles.py`). Corre cada día a las 10:47 de la Ciudad de México (`.github/workflows/vigia-legislativo.yml`); nunca escribe en la base. Al lector: `marco-legal-tres-niveles.html#reformas-recientes` (Aprende › Marco legal), que pinta `vigia-legislativo.js`; el chat la abre con «¿qué leyes cambiaron?». El Senado no entra: su portal respondió 403 y no da un índice legible. **Primera corrida: 8 avisos** (la LFRCF se cita con reforma del 14-05-2026 y Diputados registra el 15-05-2026; la LIEPS, 07-11-2025 contra 22-12-2025; la LGPP, 02-03-2023 contra 24-11-2023): quedan por cotejar contra el DOF, no se corrigieron a ciegas. (2) **Lector de facturas CFDI**, octava aplicación del Modo Inspector (`herramienta-inspector-factura.html`, `insp_factura.py` + `insp-factura.js`): lee uno o varios XML (CFDI 4.0 y 3.3) **en el navegador, sin subirlos**, rehace la cuenta (subtotal − descuento + trasladados − retenidos = total) y cruza al emisor y al receptor con la lista 69-B, separando lo **oficial** (situación, oficio y fecha del SAT) de las **señales para revisar** (`derivado`: factura posterior a la publicación como presunto o como definitivo). El art. 69-B del CFF se explica párrafo por párrafo (cotejado con el texto vigente, reforma DOF 09-04-2026). RFC de persona física tapado y su nombre oculto. Su gemelo en Python, para despachos y para aprender: `herramientas/lector_cfdi.py`, con la factura ficticia `docs/ejemplos/factura-ficticia-cfdi40.xml`. Para el cruce de fechas, `sat-69b.js` guarda ahora las fechas de presunto y de definitivo (columnas 6 y 7; mismo CSV del SAT, misma huella `54b95d41…`, los mismos 14,234 registros). Las dos piezas tienen su prueba sin red en `revision.py`; 7 preguntas de prueba nuevas.
 - **04-11-2026, sello 20261104k.** **El dictamen sale con la forma del modo** (entrega c, la última de los modos): «Generar dictamen» lleva `&modo=` y el dictamen suma, como capítulo «La lectura del modo X», la capa del modo con que se preguntó. La cuenta se rehace con la base y la huella es la misma en los cuatro modos. Sin cifras nuevas; una pregunta de prueba ajustada.
 - **04-11-2026, sello 20261104j.** **Cada modo del Auditor contesta a su manera** (entrega b de los modos): bajo la respuesta, el Inspector suma «La revisión del Inspector» (de qué está hecha, sus documentos, lo que falta y por dónde seguir), el Ciudadano «En corto» (la respuesta en una oración y sus palabras difíciles con el glosario) y el Ambientalista «La mirada ambiental» (los proyectos con alerta ambiental del tema y quién los paga). Si la pregunta luce más en otro modo, el chat ofrece cambiarse. Sin cifras nuevas; tres preguntas de prueba.
 - **04-11-2026, sello 20261104i.** **Pendientes del Planisferio cerrados**: la administración pública queda en gris pizarra (elección del autor); la página de presupuestos de cada portal suma «No cuadra» como cuarto piso, con las dos sumas (INEGI y Cuenta Pública) y la liga al mapa. «Pequeñas presentaciones» sale de la lista, por decisión del autor.
@@ -153,6 +154,19 @@ que necesita navegador.
   (`informes-semestral-asf.html`, `herramientas/informe_semestral.py`).
 - **27-10-2026.** Informe especial «Documentar para sancionar»
   (`informes-documentar-para-sancionar.html`).
+
+## Encargos en cola (05-11-2026)
+
+El autor pidió, en este orden: **1. vigía legislativo** y **2. lector de
+facturas CFDI 4.0** (hechos el 05-11-2026, sello 20261105a), y en cola
+**3. CompraNet × 69-B × ASF** (ya puede usar la comparación de fechas contra
+la 69-B que dejó el lector) y **4. la ruta completa del impuesto**. Por
+cotejar del vigía: los 8 avisos de su primera corrida (en la bandeja). Qué pidió, qué ya existe y cómo encaja
+cada pieza: [docs/ENCARGO-VIGIA-Y-CFDI.md](docs/ENCARGO-VIGIA-Y-CFDI.md).
+
+**Plan de implementación (05-11-2026):** del pilar de transparencia al primer peso, por etapas, con el Vigía de proveedores (cartera de RFC contra la 69-B) como primer producto: [docs/PLAN-IMPLEMENTACION.md](docs/PLAN-IMPLEMENTACION.md).
+
+**Fraude, registro de empresas, competencia y hospedaje (05-11-2026):** las cifras oficiales del fraude (ENVIPE 2026, ENVE 2024, 69-B), qué se puede seguir del SIGER y el PSM, WiseCricket y Legal Hunt leídos en sus portales (sin 69-B en WiseCricket; Legal Hunt de $399 a $2,099 al mes), y por qué y a dónde dejar GitHub Pages: [docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md](docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md). Hechos los pasos 0.2 (Servicios envía a la base) y 0.3 (Vigía 69-B semanal, `docs/sat69b/bandeja.json`). Además: «El fraude en números» (Aprende y el Auditor) y la novena aplicación del Modo Inspector, «Revisa tu estado de resultados» (en el navegador, seis dimensiones; entrega A de «Mi Auditavisión», PLAN-IMPLEMENTACION.md §4 bis). Y la entrega B: el Lector de facturas resume hasta 500 facturas por proveedor. Y la C: el tablero «Mi Auditavisión», guardado solo en el navegador. Y la dimensión penal del Planisferio (07-11-2026): fraude y cifra oculta de la ENVIPE 2026 por estado; las 32 con su tasa de fraude desde el mismo día (las cinco que su ficha da solo en gráfica, del cuadro 1.13 del tabulado del INEGI, que cuadra con las otras 27), y las carpetas por fraude del SESNSP por estado y en el país (108,736 en 2025: unas 1.3 por cada 100 fraudes que estima la ENVIPE).
 
 ## La lista de pendientes (guardada a pedido del autor, 03-11-2026)
 

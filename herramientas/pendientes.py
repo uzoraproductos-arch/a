@@ -430,6 +430,14 @@ def recolectar():
     import periodistas
     for x in periodistas.pendientes():
         out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
+    # La dimensión penal del Planisferio (05-11-2026).
+    import dimension_penal
+    for x in dimension_penal.pendientes():
+        out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
+    # El fraude en números (05-11-2026).
+    import fraude
+    for x in fraude.pendientes():
+        out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
     # Las leyes del dinero en los tres niveles y la deuda municipal (03-11-2026).
     import leyes_niveles
     for x in leyes_niveles.pendientes():
