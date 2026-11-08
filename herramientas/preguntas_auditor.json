@@ -1536,6 +1536,38 @@
    "dice": [
     "La nota del Periodista"
    ]
+  },
+  {
+   "q": "https://www.instagram.com/p/Dfc07qxDZo1/?obrf=ZDNuaDJvbWx0ZWNu",
+   "dice": [
+    "Instagram no deja que nadie de fuera lea sus publicaciones",
+    "pégalo aquí junto con la liga"
+   ],
+   "no_dice": [
+    "Leo la nota aquí mismo"
+   ]
+  },
+  {
+   "q": "https://www.instagram.com/p/Dfc07qxDZo1/?obrf=ZDNuaDJvbWx0ZWNu",
+   "modo": "periodista",
+   "dice": [
+    "Instagram no deja que nadie de fuera lea sus publicaciones"
+   ],
+   "no_dice": [
+    "Huawei"
+   ]
+  },
+  {
+   "q": "https://x.com/alguien/status/1234567890",
+   "dice": [
+    "X no deja que nadie de fuera lea sus publicaciones"
+   ]
+  },
+  {
+   "q": "https://www.instagram.com/p/DfYty0lDZKs/?dlrf=MWl0c25oYTRzNWUxcA%3D%3D",
+   "dice": [
+    "Esa nota ya está en nuestra hemeroteca"
+   ]
   }
  ]
 }

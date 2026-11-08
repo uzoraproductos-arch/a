@@ -983,6 +983,17 @@
     /* 2a. La hemeroteca (31-10-2026): si la liga es de una nota que ya cotejamos, se dice y se abre su cotejo. */
     var hem = liga && hemeroteca(liga);
     if (hem) return hem;
+    /* 2 bis. La liga sola de una red social (08-11-2026, ejemplo del autor): Instagram, Facebook,
+       X o TikTok no dejan que un lector externo abra la publicación, así que no se promete leerla:
+       se pide el texto, que con la liga entra a lectura() y se lee aquí mismo. */
+    var red = liga && /^https?:\/\/(?:[a-z0-9-]+\.)*(instagram\.com|facebook\.com|fb\.watch|x\.com|twitter\.com|tiktok\.com|threads\.net)\//i.exec(liga);
+    if (red && t.replace(liga, '').replace(/\s+/g, ' ').trim().length < 60) {
+      var rn = { 'instagram.com': 'Instagram', 'facebook.com': 'Facebook', 'fb.watch': 'Facebook', 'x.com': 'X', 'twitter.com': 'X', 'tiktok.com': 'TikTok', 'threads.net': 'Threads' }[red[1].toLowerCase()];
+      return { html: '<p>🔒 <b>' + rn + ' no deja que nadie de fuera lea sus publicaciones</b>, ni nosotros: sin el texto no puedo decirte qué afirma ni compararlo con un documento, y no voy a adivinarlo.</p>' +
+        '<p>📋 <b>Copia el texto de la publicación</b> (el pie de foto o lo que dice el video) y pégalo aquí <b>junto con la liga</b>. Con eso te digo lo que afirma en cifras, si ya lo cotejamos, qué promesa toca, en qué etapa va y qué preguntas le faltan.</p>' +
+        '<p class="pa-chico">Revisé la liga contra nuestra hemeroteca y no está entre las notas que ya cotejamos. Si es un video sin texto, cuéntame con tus palabras qué dice y quién lo dice.</p>',
+        ir: [APP.inspnota.url + '?liga=' + encodeURIComponent(liga), APP.inspnota.n], sug: [], rec: [], red: 1 };
+    }
     /* 2. La liga de una nota: «Contrasta una nota» la lee aquí mismo. */
     if (liga) {
       return respApp('inspnota', APP.inspnota.url + '?liga=' + encodeURIComponent(liga),
