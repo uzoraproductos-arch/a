@@ -258,11 +258,12 @@ p.pl-ficha-ir a:hover, p.pl-ficha-ir a:focus-visible { background: #16408c; }
 .pl-tab-pie .pl-indice-btn { width: 100%; background: #0b2a63; border-color: #0b2a63; color: #fff; font-size: 16px; }
 .pl-tab-pie .pl-indice-btn:hover { background: #16408c; }
 
-/* Lo de la dimensión financiera, en pestañas: una hoja a la vez. */
+/* Lo de las dimensiones con cuaderno en pestañas (financiera y judicial): una hoja a la vez. */
 .pl-cuaderno { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
 .pl-hoja-b { min-height: 48px; padding: 8px 16px; border-radius: 999px; border: 1px solid #c7d1e3; background: #fff; color: #0b2a63; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; }
 .pl-hoja-b:hover { border-color: #0b2a63; background: #eef2f9; }
 .pl-hoja-b[aria-selected="true"] { background: #a8801f; border-color: #a8801f; color: #fff; }
+.pl-solo-dim[data-dim="judicial"] .pl-hoja-b[aria-selected="true"] { background: #8f6334; border-color: #8f6334; color: #fff; }
 .pl-hoja-b:focus-visible { outline: 3px solid #c9a84c; outline-offset: 2px; }
 .pl-hoja[hidden] { display: none; }
 .pl-hoja > .pl-fin-mod { margin-top: 0; }

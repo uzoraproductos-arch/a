@@ -63,7 +63,7 @@ DIMENSIONES = [
      'Los 32 congresos locales: lo que gastó cada uno, cuántas personas legisladoras lo integran y cómo se compara con el tope de la Constitución.',
      'datos-poder-legislativo.html', 'radar-estado-de-cuenta.html?doc=%s', True),
     ('judicial', '⚖️', 'Judicial',
-     'Los 32 poderes judiciales de los estados: lo que ejerció cada uno, lo que le llegó y lo que concluyó, cuánto le costó cada asunto y las causas penales que se le acumulan.',
+     'Los 32 poderes judiciales de los estados y los 32 circuitos federales en dos sectores: sus números de productividad, cargas y rezago frente al gasto de su presupuesto, sueldos, prestaciones y contadores en tiempo real.',
      'datos-judicial-gestion.html#jud-gestion_estados', None, True),
     ('salud', '🩺', 'Salud pública',
      'El IMSS y el ISSSTE en cada estado: cuántas personas tiene adscritas el IMSS, cuántas consultas y cirugías les dio y con cuántas camas, y con cuántos médicos, camas y unidades cuenta el ISSSTE.',
@@ -118,7 +118,7 @@ TEMAS = [
     ('deuda', '🏦', 'Su deuda', 'Lo que debe el gobierno del estado, cuánto le pesa y lo que pagaron sus municipios por sus créditos.'),
     ('inversion', '🏗️', 'Su inversión', 'La obra del gobierno del estado y de sus municipios, y lo que la ASF dejó por aclarar.'),
     ('legislativa', '🏛️', 'Su congreso', 'Lo que gastó su congreso, cuántas curules tiene y el tope de la Constitución.'),
-    ('judicial', '⚖️', 'Su Poder Judicial', 'Lo que ejerció, lo que le entró, lo que concluyó y sus causas pendientes.'),
+    ('judicial', '⚖️', 'Su Poder Judicial', 'Dos sectores: productividad, cargas y rezago (local y circuito federal) y su presupuesto, gasto en tiempo real, sueldos y prestaciones.'),
     ('salud', '🩺', 'Su salud pública', 'El IMSS y el ISSSTE en el estado: personas, consultas, médicos, camas y unidades.'),
     ('social', '🫂', 'Su pobreza y sus carencias', 'Cuántas personas viven en pobreza, sus seis carencias y lo que le aporta la Federación.'),
     ('administracion', '🏢', 'Su administración pública', 'El gobierno que ejecuta: su personal, lo que ejerció y sus contratos sin concurso.'),
@@ -286,7 +286,7 @@ def _pesos(v):
     return '$' + format(round(v), ',')
 
 
-def _contador(id_, ico, nom, v, est, que, fuente, desglose):
+def _contador(id_, ico, nom, v, est, que, fuente, desglose, href='numeros-gasto-tres-presupuestos.html', href_txt='📚 Verlo en la Enciclopedia ➔'):
     """Un contador del año: la cifra, su ritmo y su fuente a la vista; lo que
     es y su desglose, en la ventana lateral (decisión del autor, 03-11-2026:
     menos narración en la página, el desglose como cajón)."""
@@ -302,7 +302,7 @@ def _contador(id_, ico, nom, v, est, que, fuente, desglose):
             '<template id="%s">%s</template></article>' % (
                 v, ico, nom, mdp(v), chip(est), _pesos(s), chip('derivado'), fuente, tpl, tpl, tpl,
                 _cajon('🔎', 'El desglose', nom, tpl + 'Tit', '<section class="glos-drawer-sec"><h4>Qué es</h4><p>%s</p></section>%s' % (que, desglose),
-                       '<a class="glos-drawer-todo" href="numeros-gasto-tres-presupuestos.html" style="text-align:center; text-decoration:none;">📚 Verlo en la Enciclopedia ➔</a>')))
+                       '<a class="glos-drawer-todo" href="%s" style="text-align:center; text-decoration:none;">%s</a>' % (href, href_txt))))
 
 
 def _cajon(ico, marca, titulo, tid, cuerpo, pie='', cat='Planisferio'):
@@ -330,6 +330,18 @@ def _datos(base, padron):
     fo = rn.forestal([e['abbr'] for e in base['estados']])
     pe = rn.pesca([e['abbr'] for e in base['estados']])
     pj = gj.judiciales_estados(base)
+    import indicadores_circuito as ic_dgej
+    ic_dgej.chequeo()
+    jdf_lit = ic_dgej.get('2', 3, 5, '2025')
+    jdf_ing = ic_dgej.get('2', 3, 7, '2025')
+    jdf_tas = ic_dgej.get('2', 3, 12, '2025')
+    jdf_pen = ic_dgej.get('2', 3, 10, '2025')
+    jdf_dur = ic_dgej.get('2', 5, 15, '2025')
+    tcc_ing = ic_dgej.get('4', 3, 7, '2025')
+    tcc_tas = ic_dgej.get('4', 3, 12, '2025')
+    tcc_pen = ic_dgej.get('4', 3, 10, '2025')
+    tcc_dur = ic_dgej.get('4', 5, 1, '2025')
+    cir_oaj = {c['n']: c for c in base['poderes']['judicial']['circuitos']}
     import gestion_salud as gsal
     sa = gsal.salud_estados(base)
     import administracion_publica as apu
@@ -369,11 +381,21 @@ def _datos(base, padron):
             # Su congreso (INEGI, CNPLE 2025): lo que ejerció en 2024, sus
             # personas legisladoras y las dos divisiones nuestras.
             'leg': cg[e['abbr']]['g'], 'legn': cg[e['abbr']]['n'], 'legx': cg[e['abbr']]['x'], 'legp': cg[e['abbr']]['p'],
-            # Su Poder Judicial (INEGI, CNIJF-E 2025): lo que ejerció en 2024,
-            # lo que concluyó, el rezago penal y sus personas juzgadoras.
+            # Su Poder Judicial (INEGI, CNIJF-E 2025) y su Circuito Judicial
+            # Federal (DGEJ 2025 y OAJ 2.º trim. 2026): los dos sectores
+            # (productividad y rezago + gasto del presupuesto).
             'jud': pj[e['abbr']]['g'], 'judc': pj[e['abbr']]['c100'], 'juda': pj[e['abbr']]['xa'],
-            'judr': pj[e['abbr']]['p'], 'judj': pj[e['abbr']]['j'],
+            'judx': pj[e['abbr']]['cj'], 'judr': pj[e['abbr']]['p'], 'judj': pj[e['abbr']]['j'],
             'judi': pj[e['abbr']]['i'], 'judk': pj[e['abbr']]['c'],
+            'jdfL': round(jdf_lit['c'][str(ic_dgej.EDO.index(e['abbr']) + 1)], 1),
+            'jdfD': round(jdf_dur['c'][str(ic_dgej.EDO.index(e['abbr']) + 1)], 1),
+            'jdfC': (lambda cn: {
+                'n': cn, 'ord': ic_dgej.ORD[cn - 1],
+                'jdi': int(jdf_ing['c'][str(cn)]), 'jdt': round(jdf_tas['c'][str(cn)], 2), 'jdp': int(jdf_pen['c'][str(cn)]),
+                'tci': int(tcc_ing['c'][str(cn)]), 'tct': round(tcc_tas['c'][str(cn)], 2), 'tcp': int(tcc_pen['c'][str(cn)]),
+                'tcd': round(tcc_dur['c'][str(cn)], 1),
+                'pag': round(cir_oaj[cn]['pagado'] / 1e6, 2),
+            })(ic_dgej.EDO.index(e['abbr']) + 1),
             # Lo que no cuadra y sus obras con alerta ambiental (las mismas
             # cuentas del mapa de la Enciclopedia).
             'cua': cuad[e['abbr']],
@@ -508,8 +530,9 @@ LENTES = [
     {'id': 'legn', 'dim': 'legislativa', 'fmt': 'n', 'nom': 'Cuántos lo integran', 'pal': 'azul', 'est': 'oficial', 'anio': 2025,
      'que': ('Las personas legisladoras en activo de cada congreso al cierre del último periodo que reportó al censo del INEGI. '
              'La Constitución pone el piso: 7, 9 u 11 según la población del estado (art. 116, fr. II).')},
-    # La dimensión judicial (03-11-2026): los 32 poderes judiciales de los
-    # estados, con el censo del INEGI. El dinero va junto a lo que resolvió.
+    # La dimensión judicial (03-11-2026; potenciada el 09-11-2026 en dos
+    # sectores: gasto del presupuesto y números de productividad/rezago, tanto
+    # en los 32 poderes judiciales estatales como en los 32 circuitos federales).
     {'id': 'jud', 'dim': 'judicial', 'fmt': 'mdp', 'nom': 'Lo que ejerció', 'pal': 'cafe', 'est': 'oficial', 'anio': 2024,
      'que': ('El presupuesto que ejerció en 2024 el Poder Judicial de cada estado, según lo que le reportó al Censo Nacional de Impartición de Justicia del INEGI. '
              'Paga todo el poder judicial: juzgados, tribunal superior, administración, edificios y personal de apoyo.')},
@@ -519,12 +542,21 @@ LENTES = [
     {'id': 'juda', 'dim': 'judicial', 'fmt': 'pesos', 'nom': 'Por asunto concluido', 'pal': 'cafe', 'est': 'derivado', 'anio': 2024,
      'que': ('Lo que ejerció entre los asuntos que concluyó en primera instancia. No es lo que cuesta un juicio: el presupuesto paga todo el poder judicial, '
              'y un asunto concluido puede ser una sentencia o un desechamiento. Sirve para comparar, no para cobrar.')},
+    {'id': 'judx', 'dim': 'judicial', 'fmt': 'n', 'nom': 'Concluidos por persona juzgadora', 'pal': 'cafe', 'est': 'derivado', 'anio': 2024,
+     'que': ('Los asuntos concluidos en primera instancia en 2024 entre las personas juzgadoras de ese poder judicial estatal. '
+             'Mide cuántos asuntos cerró en promedio cada juzgador o magistratura local al año, sumando todas las materias.')},
     {'id': 'judr', 'dim': 'judicial', 'fmt': 'n', 'nom': 'Causas penales pendientes', 'pal': 'cafe', 'est': 'oficial', 'anio': 2024,
      'que': ('Las causas penales del sistema acusatorio que quedaron pendientes de concluir al cierre de 2024. Es el único rezago que el censo publica completo; '
              'en los estados, el INEGI cuenta a cada persona procesada, no cada expediente.')},
     {'id': 'judj', 'dim': 'judicial', 'fmt': 'n', 'nom': 'Personas juzgadoras', 'pal': 'cafe', 'est': 'oficial', 'anio': 2024,
      'que': ('Las magistradas, magistrados, juezas y jueces de cada poder judicial estatal que reportó el censo, de todas las materias. '
              'Desde la reforma de 2024, la Constitución pide que se elijan por voto directo (art. 116, fr. III).')},
+    {'id': 'jdfL', 'dim': 'judicial', 'fmt': 'dec1', 'nom': 'Circuito federal · Litigiosidad por 100 mil hab.', 'pal': 'cafe', 'est': 'oficial', 'anio': 2025,
+     'que': ('Los asuntos que entraron en 2025 a los juzgados de distrito del circuito judicial federal con sede en el estado, por cada 100 mil habitantes, '
+             'según los Indicadores Estadísticos Judiciales de la propia judicatura federal (DGEJ).')},
+    {'id': 'jdfD', 'dim': 'judicial', 'fmt': 'dec1', 'nom': 'Circuito federal · Días de un amparo indirecto', 'pal': 'cafe', 'est': 'oficial', 'anio': 2025,
+     'que': ('Los días promedio que tardó en 2025 un juicio de amparo indirecto, del ingreso a la sentencia, en los juzgados de distrito del circuito federal '
+             'con sede en el estado (DGEJ).')},
     # La salud pública (03-11-2026, pedido del autor: «sería IMSS e ISSSTE»).
     # Del IMSS, su Memoria por OOAD; del ISSSTE, el registro de la DGIS,
     # porque su anuario no responde. Los dos documentos no se mezclan.
@@ -687,13 +719,21 @@ def _fuentes(ref, base=None):
         })
         cj = 'INEGI, Censo Nacional de Impartición de Justicia Federal y Estatal 2025, reporte de resultados'
         rj = ref('ref-inegi-cnijfe2025-rr')
+        import indicadores_circuito as ic_dgej
+        jl_ = ic_dgej.get('2', 3, 5, '2025')
+        jd_ = ic_dgej.get('2', 5, 15, '2025')
         extra.update({
             'jud': '%s, presupuesto ejercido por cada poder judicial estatal en 2024, gráfica 7, p. 14 %s.' % (cj, rj),
             'judc': ('Asuntos concluidos ÷ asuntos ingresados en primera instancia en 2024 × 100 (%s, tabla 23, p. 39, con sus notas 1 y 2 sobre qué cuenta cada uno) %s. '
                      'La división es nuestra.') % (cj, rj),
             'juda': 'Presupuesto ejercido en 2024 (gráfica 7, p. 14) ÷ asuntos concluidos en primera instancia (tabla 23, p. 39), los dos del %s %s. La división es nuestra.' % (cj, rj),
+            'judx': 'Asuntos concluidos en primera instancia (tabla 23, p. 39) ÷ personas juzgadoras de cada poder judicial estatal (tabla 6, p. 12), los dos del %s %s. La división es nuestra.' % (cj, rj),
             'judr': '%s, causas penales del sistema acusatorio pendientes de concluir al cierre de 2024, tabla 25 y su nota 3, p. 45 %s.' % (cj, rj),
             'judj': '%s, personas juzgadoras de cada poder judicial estatal, tabla 6, p. 12 %s.' % (cj, rj),
+            'jdfL': ('Órgano de Administración Judicial, DGEJ, Indicadores Estadísticos Judiciales 2025, Juzgados de Distrito, nivel 3: «%s» (<a href="%s">cuadro oficial</a>; '
+                     'huella SHA-256 <code>%s…</code>). Cada circuito se asigna al estado donde tiene su sede.') % (html.escape(jl_['nombre']), html.escape(jl_['url']), jl_['sha256'][:12]),
+            'jdfD': ('Órgano de Administración Judicial, DGEJ, Indicadores Estadísticos Judiciales 2025, Juzgados de Distrito, nivel 5: «%s» (<a href="%s">cuadro oficial</a>; '
+                     'huella SHA-256 <code>%s…</code>). Cada circuito se asigna al estado donde tiene su sede.') % (html.escape(jd_['nombre']), html.escape(jd_['url']), jd_['sha256'][:12]),
         })
         import gestion_salud as gsal
         mem = ('IMSS, Memoria Estadística 2025, %s, por OOAD (<a href="%s">Memoria</a>; archivo de Excel del capítulo, huella SHA-256 <code>%s…</code>). '
@@ -797,6 +837,254 @@ def matriz():
     if malos:
         raise SystemExit('planisferio: el mapa de la Enciclopedia apunta a dimensiones o lentes que no existen: ' + '; '.join(malos))
     return {d for d, _ in tm.PLANISFERIO.values()}
+
+
+def _bloque_judicial_mapa(base, ref, filas):
+    """Los dos sectores de la dimensión Judicial bajo el mapa (09-11-2026,
+    pedido del autor: «potencializar el esquema y estructura de la información,
+    evaluados dos sectores: los números de productividad y el gasto del
+    presupuesto y sus prestaciones, ingresos en tiempo real, etc.»):
+    1 · Presupuesto y gasto en tiempo real (contadores por segundo del Ramo 03,
+        nómina y prestaciones Cap. 1000, los 32 poderes judiciales estatales y
+        fideicomisos enterados a TESOFE).
+    2 · Sueldos, prestaciones e ingresos al día y por hora (tabulador 2026 del
+        PJF frente al tope constitucional del art. 127 y prestaciones).
+    3 · Números de productividad, cargas de trabajo, rezago y tiempos (censo
+        INEGI CNIJF-E 2025, DGEJ 2021-2025 y antes y después de la reforma)."""
+    import asistente_judicial as aj
+    import estadistica_judicial as ej
+    import gestion_judicial as gj
+    import indicadores_circuito as ic
+    po = base['poderes']
+    F = po['fuentes']
+    r03 = po['ramos2026']['judicial']
+    ur = {u['id']: u for u in r03['unidades']}
+    caps = po['judicial']['capitulosPorUR']['RAMO03']
+    c1000 = next(c for c in caps if c['cap'] == '1000')['aprobado']
+    ago = po['judicial']['scjnAgosto']
+    r03_mdp = round(r03['aprobado'] / 1e6, 1)
+    proy_mdp = round(r03['proyecto'] / 1e6, 1)
+    rec_mdp = round((r03['proyecto'] - r03['aprobado']) / 1e6, 1)
+    c1000_mdp = round(c1000 / 1e6, 1)
+    est_g = round(sum(f['jud'] for f in filas), 1)
+    fu_pef = '<a href="%s">%s</a> %s.' % (html.escape(F['PEF']['url']), html.escape(F['PEF']['corto']), ref('ref-pef2026'))
+    fu_cog = '<a href="%s">%s</a> %s.' % (html.escape(F['COG']['url']), html.escape(F['COG']['corto']), ref('ref-pef2026'))
+    fu_man = '<a href="%s">%s</a>.' % (html.escape(F['MANUAL']['url']), html.escape(F['MANUAL']['doc']))
+    # 1 · Los cuatro contadores judiciales en tiempo real
+    des_r03 = ('<section class="glos-drawer-sec"><h4>Por unidad responsable · 2026</h4>%s'
+               '<p>Pidió <b class="num-tabular">%s</b> %s; la Cámara de Diputados le recortó <b class="num-tabular">%s</b> %s.</p></section>'
+               '<section class="glos-drawer-sec"><h4>Avance de la Suprema Corte al 31 de agosto de 2026</h4>'
+               '<p>De un modificado de <b class="num-tabular">%s</b> %s, llevaba ejercidos <b class="num-tabular">%s</b> (%s) %s.</p></section>'
+               '<section class="glos-drawer-sec"><h4>Fuente</h4><p class="glos-drawer-ley">%s <a href="%s">%s</a>.</p></section>') % (
+        _filas([('Órgano de Administración Judicial (UR 120)', mdp(ur['oaj']['aprobado'] / 1e6), chip('oficial')),
+                ('Suprema Corte de Justicia de la Nación (UR 100)', mdp(ur['scjn']['aprobado'] / 1e6), chip('oficial')),
+                ('Tribunal Electoral del PJF (UR 210 y 211)', mdp(ur['tepjf']['aprobado'] / 1e6), chip('oficial')),
+                ('Tribunal de Disciplina Judicial (UR 300)', mdp(ur['tdj']['aprobado'] / 1e6), chip('oficial'))]),
+        mdp(proy_mdp), chip('oficial'), mdp(rec_mdp), chip('derivado'),
+        mdp(ago['modificado'] / 1e6), chip('oficial'), mdp(ago['ejercido'] / 1e6), pct(ago['ejercido'] / ago['modificado'] * 100), chip('derivado'),
+        fu_pef, html.escape(F['SCJN_AGO']['url']), html.escape(F['SCJN_AGO']['doc']))
+    des_nom = ('<section class="glos-drawer-sec"><h4>El gasto del Ramo 03 por capítulo · 2026</h4>%s'
+               '<p>De cada $100 aprobados al Poder Judicial de la Federación, <b class="num-tabular">$%s</b> %s van al Capítulo 1000 '
+               '(sueldos, aguinaldo de 40 días, prima vacacional, pago por riesgo, asignaciones adicionales y seguridad social).</p></section>'
+               '<section class="glos-drawer-sec"><h4>Fuente</h4><p class="glos-drawer-ley">%s</p></section>') % (
+        _filas([('Cap. %s · %s' % (c['cap'], c['concepto']), mdp(c['aprobado'] / 1e6), chip('oficial')) for c in caps]),
+        format(c1000 / r03['aprobado'] * 100, '.1f'), chip('derivado'), fu_cog)
+    top5_est = sorted(filas, key=lambda x: -x['jud'])[:5]
+    des_est = ('<section class="glos-drawer-sec"><h4>Los 5 poderes judiciales estatales que más ejercieron · 2024</h4>%s'
+               '<p>Entre los 32 poderes judiciales estatales ejercieron <b class="num-tabular">%s</b> %s, atendieron <b class="num-tabular">%s</b> asuntos ingresados '
+               'y concluyeron <b class="num-tabular">%s</b> en primera instancia %s.</p></section>'
+               '<section class="glos-drawer-sec"><h4>Fuente</h4><p class="glos-drawer-ley">%s</p></section>') % (
+        _filas([(f['n'], mdp(f['jud']), chip('oficial')) for f in top5_est]),
+        mdp(est_g), chip('derivado'), format(gj.EST_TOTAL[0], ','), format(gj.EST_TOTAL[1], ','), chip('oficial'),
+        _fuentes(ref, base)['jud'])
+    des_fid = ('<section class="glos-drawer-sec"><h4>Los 5 fideicomisos extinguidos de la SCJN · 2 de abril de 2025</h4>%s'
+               '<p>Concentrados por Nacional Financiera en la Tesorería de la Federación ($6,654,149,428.48: $6,652.5 mdp de saldo al 31 de marzo más $1.7 mdp de rendimientos). '
+               'El cierre definitivo de los fideicomisos del extinto Consejo de la Judicatura Federal sigue sin publicarse %s.</p></section>'
+               '<section class="glos-drawer-sec"><h4>Fuente</h4><p class="glos-drawer-ley"><a href="%s">%s</a> (huella SHA-256 <code>%s…</code>).</p></section>') % (
+        _filas([('80690 · Pensiones complementarias (mandos medios y operativo)', '$3,594.2 mdp', chip('oficial')),
+                ('80687 · Remanentes presupuestales', '$1,680.0 mdp', chip('oficial')),
+                ('80691 · Pensiones complementarias (mandos superiores)', '$1,004.8 mdp', chip('oficial')),
+                ('80689 · Publicaciones', '$200.6 mdp', chip('oficial')),
+                ('80688 · Plan de prestaciones médicas', '$174.6 mdp', chip('oficial'))]),
+        chip('pendiente', 'judicial-fideicomisos-monto'),
+        html.escape(aj.SCJN_FID_DOF['url']), html.escape(aj.SCJN_FID_DOF['tx']), aj.SCJN_FID_DOF['sha256'][:12])
+    conts_jud = ''.join([
+        _contador('judFed', '⚖️', 'Poder Judicial de la Federación · 2026', r03_mdp, 'oficial',
+                  'El presupuesto aprobado para todo el Ramo 03 (Poder Judicial) en el PEF 2026.',
+                  'PEF 2026, Ramo 03 %s' % ref('ref-pef2026'), des_r03,
+                  'datos-judicial-presupuesto.html', '🏦 Ver el presupuesto del Poder Judicial en la Enciclopedia ➔'),
+        _contador('judNom', '👥', 'Nómina y prestaciones del PJF · 2026', c1000_mdp, 'oficial',
+                  'El Capítulo 1000 (Servicios Personales) del Ramo 03 en 2026: el %s %% de todo su presupuesto.' % format(c1000 / r03['aprobado'] * 100, '.1f'),
+                  'SHCP, Ramo 03 por capítulo de gasto %s' % ref('ref-pef2026'), des_nom,
+                  'datos-judicial-sueldos.html', '💵 Ver sueldos, prestaciones y el tope del 127 ➔'),
+        _contador('judEst', '🏛️', 'Los 32 poderes judiciales estatales · 2024', est_g, 'derivado',
+                  'La suma del presupuesto ejercido en 2024 por los 32 poderes judiciales locales (CNIJF-E 2025).',
+                  'INEGI, CNIJF-E 2025, gráfica 7 %s' % ref('ref-inegi-cnijfe2025-rr'), des_est,
+                  'datos-judicial-gestion.html#jud-gestion_estados', '📊 Ver los 32 poderes judiciales en la Enciclopedia ➔'),
+        _contador('judFid', '🏦', 'Fideicomisos SCJN enterados a TESOFE · 2025', 6654.1, 'oficial',
+                  'Lo que los cinco fideicomisos de la Suprema Corte devolvieron a la Tesorería de la Federación el 2 de abril de 2025.',
+                  'SCJN, informe en el <a href="%s">DOF 15-07-2025</a>' % html.escape(aj.SCJN_FID_DOF['url']), des_fid,
+                  'datos-judicial-presupuesto.html#jud-fideicomisos', '🏦 Ver qué pasó con los fideicomisos ➔'),
+    ])
+    hoja_gasto = ('<div class="pl-conts">%s</div>'
+                  '<p class="pl-pie">El ritmo por segundo es la cifra anual dividida entre los 31,536,000 segundos del año %s: '
+                  'sirve para dimensionar la velocidad del presupuesto y de la nómina judicial, no son transferencias bancarias en vivo. '
+                  'No se suman el Ramo 03 (2026) y los poderes judiciales estatales (2024) porque corresponden a ejercicios distintos.</p>') % (
+        conts_jud, chip('derivado'))
+    # 2 · Sueldos, prestaciones e ingresos por año, mes, día y hora
+    cs = base['comparador_salarial']
+    perfiles = {p['id']: p for p in cs['cargos']}
+    orden_p = ['presidencia', 'ministro', 'magistrado', 'juez', 'secretario_estudio', 'asesor_scjn', 'proyectista_tribunal', 'proyectista_juzgado']
+    filas_s = []
+    for pid in orden_p:
+        p = perfiles[pid]
+        m_max = p['mensual']['max']
+        ag = p.get('aguinaldoPrima')
+        ag_v = (_pesos(ag['max']) + ' ' + chip('oficial')) if ag else 'Incluido en anual'
+        pr_v = (p.get('pagoRiesgo') or 0) + ((p.get('asignaciones') or {}).get('max') or 0)
+        anual = p['anual']
+        dia = round(anual / 365)
+        hora = round(anual / 8760)
+        filas_s.append('<tr><th scope="row">%s <small>(%s)</small></th>'
+                       '<td class="num-tabular">%s %s</td>'
+                       '<td class="num-tabular">%s</td>'
+                       '<td class="num-tabular">%s</td>'
+                       '<td class="num-tabular"><b>%s</b> %s</td>'
+                       '<td class="num-tabular">%s · %s %s</td></tr>' % (
+                           html.escape(p['cargo']), html.escape(p['detalle']),
+                           _pesos(m_max), chip(p['mensualEstado']),
+                           ag_v,
+                           (_pesos(pr_v) + ' ' + chip('oficial')) if pr_v else '—',
+                           _pesos(anual), chip(p['anualEstado']),
+                           _pesos(dia) + '/día', _pesos(hora) + '/h', chip('derivado')))
+    filas_pr = ''.join('<tr><th scope="row">%s</th><td>%s %s</td><td>%s %s</td><td>%s %s</td></tr>' % (
+        html.escape(r['concepto']),
+        html.escape(r['celdas']['lft']['tx']), chip(r['celdas']['lft']['estado']),
+        html.escape(r['celdas']['pr']['tx']), chip(r['celdas']['pr']['estado']),
+        html.escape(r['celdas']['pjf']['tx']), chip(r['celdas']['pjf']['estado']))
+        for r in cs['prestaciones']['filas'])
+    hoja_sueldos = (
+        '<article class="pl-fin-mod">'
+        '<h3><span aria-hidden="true">💵</span> Tabulador de sueldos, prestaciones e ingreso por día y por hora · 2026</h3>'
+        '<p class="pl-fin-sub">Cuánto cobra en neto cada cargo del Poder Judicial de la Federación frente al límite de la Presidencia de la República '
+        '(art. 127 constitucional: <b class="num-tabular">$134,290</b> netos al mes %s). El tabulador de una ministra o ministro marca <b class="num-tabular">$134,310</b> netos al mes '
+        '(<b class="num-tabular">$20 arriba</b> %s). Sumando aguinaldo (40 días), prima vacacional (10 días), pago por riesgo y asignaciones adicionales, '
+        'aquí está su ingreso anual neto y a cuánto equivale cada día del año (÷ 365) y cada hora (÷ 8,760) %s:</p>'
+        '<div class="pl-tabla-caja"><table class="pl-tabla"><caption>Remuneraciones netas del Poder Judicial de la Federación y tope presidencial · 2026</caption>'
+        '<thead><tr><th scope="col">Cargo</th><th scope="col">Sueldo mensual neto</th><th scope="col">Aguinaldo y prima vac. (anual)</th>'
+        '<th scope="col">Pago por riesgo y asignaciones</th><th scope="col">Total anual neto</th><th scope="col">Equivalente por día y por hora</th></tr></thead>'
+        '<tbody>%s</tbody></table></div>'
+        '<h4>Prestaciones de ley frente a una persona trabajadora (Ley Federal del Trabajo)</h4>'
+        '<div class="pl-tabla-caja"><table class="pl-tabla"><caption>Comparativo de prestaciones: Ley Federal del Trabajo, Presidencia y Poder Judicial · 2026</caption>'
+        '<thead><tr><th scope="col">Prestación</th><th scope="col">Ley Federal del Trabajo</th><th scope="col">Presidencia (PEF 2026)</th><th scope="col">Poder Judicial (Manual 2026)</th></tr></thead>'
+        '<tbody>%s</tbody></table></div>'
+        '<p class="pl-pie">Fuentes: %s Presidenta: PEF 2026, Anexo 23.1.2 %s. El tabulador es el límite normativo del puesto, no el recibo individual de nómina. '
+        'La reforma de 2024 eliminó el haber de retiro vitalicio para quienes no se postularon o no resultaron electos en 2025 (transitorio séptimo).</p>'
+        '<p class="pl-ficha-ir"><a href="datos-judicial-sueldos.html">💵 Ver sueldos y el tope del 127 en la Enciclopedia ➔</a> '
+        '<a href="herramienta-calculadora-compara.html">⚖️ Comparar tu ingreso en «Tú contra ellos» ➔</a></p></article>'
+    ) % (chip('oficial'), chip('derivado'), chip('derivado'), ''.join(filas_s), filas_pr, fu_man, ref('ref-pef2026'))
+    # 3 · Números de productividad, cargas de trabajo, rezago y tiempos
+    filas_fed = []
+    for k in ('scjn', 'oaj', 'tepjf'):
+        ing, egr_a, donde = gj.FED[k]
+        pr = gj.PRES_FED[k]
+        tasa = 100.0 * egr_a / ing
+        xa = pr * 1e6 / egr_a
+        filas_fed.append('<tr><th scope="row">%s <small>(%s)</small></th>'
+                         '<td class="num-tabular">%s %s</td><td class="num-tabular">%s %s</td><td class="num-tabular">%s %s</td>'
+                         '<td class="num-tabular">%s %s</td><td class="num-tabular"><b>%s</b> %s</td></tr>' % (
+                             html.escape(gj.FED_NOMBRE[k]), html.escape(donde),
+                             mdp(pr), chip('oficial'), format(ing, ','), chip('oficial'), format(egr_a, ','), chip('oficial'),
+                             pct(tasa), chip('derivado'), _pesos(xa), chip('derivado')))
+    est_ing, est_con, est_pen, est_juz = gj.EST_TOTAL
+    est_tasa = 100.0 * est_con / est_ing
+    est_xa = est_g * 1e6 / est_con
+    filas_fed.append('<tr><th scope="row"><b>Los 32 poderes judiciales estatales</b> <small>(primera instancia, tabla 23)</small></th>'
+                     '<td class="num-tabular"><b>%s</b> %s</td><td class="num-tabular"><b>%s</b> %s</td><td class="num-tabular"><b>%s</b> %s</td>'
+                     '<td class="num-tabular"><b>%s</b> %s</td><td class="num-tabular"><b>%s</b> %s</td></tr>' % (
+                         mdp(est_g), chip('derivado'), format(est_ing, ','), chip('oficial'), format(est_con, ','), chip('oficial'),
+                         pct(est_tasa), chip('derivado'), _pesos(est_xa), chip('derivado')))
+    filas_mat = ''.join('<tr><th scope="row">%s</th><td class="num-tabular">%s %s</td><td class="num-tabular">%s %s</td>'
+                        '<td class="num-tabular">%s %s</td><td class="num-tabular">%s %% %s</td></tr>' % (
+                            html.escape(m), format(i, ','), chip('oficial'), format(c, ','), chip('oficial'),
+                            pct(100.0 * c / i), chip('derivado'), format(100.0 * i / est_ing, '.1f'), chip('derivado'))
+                        for m, i, c in gj.MATERIAS)
+    # Antes y después de la reforma judicial (DGEJ 2025-1 vs 2025-2)
+    m1 = ej.MOV['2025-1']
+    m2 = ej.MOV['2025-2']
+    ing_d, egr_d = m2[1] - m1[1], m2[3] - m1[3]
+    jd_d = ic.get('2', 5, 15, '2025')['nac']
+    tc_d = ic.get('4', 5, 1, '2025')['nac']
+    jd_l = ic.get('2', 3, 5, '2025')['nac']
+    hoja_prod = (
+        '<article class="pl-fin-mod">'
+        '<h3><span aria-hidden="true">📊</span> Productividad, cargas de trabajo, rezago y tiempos de resolución</h3>'
+        '<p class="pl-fin-sub">El dinero ejercido puesto junto a lo que entró, lo que se resolvió y lo que quedó pendiente en los tribunales federales y en los 32 poderes judiciales estatales. '
+        '«Dinero por asunto concluido» divide el presupuesto total del órgano entre sus asuntos concluidos %s: sirve para comparar cargas y escalas, no es el costo de un juicio.</p>'
+        '<h4>1 · Presupuesto ejercido frente a asuntos ingresados y concluidos · 2024 (CNIJF-E 2025)</h4>'
+        '<div class="pl-tabla-caja"><table class="pl-tabla"><caption>Presupuesto ejercido, asuntos ingresados, concluidos y dinero por asunto concluido · 2024</caption>'
+        '<thead><tr><th scope="col">Órgano / orden</th><th scope="col">Presupuesto ejercido (2024)</th><th scope="col">Asuntos ingresados</th>'
+        '<th scope="col">Asuntos concluidos</th><th scope="col">Concluyó de cada 100</th><th scope="col">Presupuesto ÷ asunto concluido</th></tr></thead>'
+        '<tbody>%s</tbody></table></div>'
+        '<h4>2 · En qué materias se concentran los juicios de los 32 estados · primera instancia 2024</h4>'
+        '<div class="pl-tabla-caja"><table class="pl-tabla"><caption>Asuntos ingresados y concluidos por materia en los 32 poderes judiciales estatales · 2024</caption>'
+        '<thead><tr><th scope="col">Materia</th><th scope="col">Asuntos ingresados</th><th scope="col">Asuntos concluidos</th>'
+        '<th scope="col">Concluyó de cada 100</th><th scope="col">Peso en los ingresos</th></tr></thead>'
+        '<tbody>%s</tbody></table></div>'
+        '<h4>3 · Rezago penal, tiempos de resolución y antes y después de la reforma judicial (DGEJ 2025)</h4>'
+        '<div class="pl-pisos">'
+        '<article class="pl-piso pl-piso-jud"><p class="pl-piso-n">Causas penales pendientes de concluir · cierre de 2024</p>'
+        '<p class="pl-piso-v"><b class="num-tabular">%s</b> en sistema acusatorio %s</p>'
+        '<dl class="pl-dl">'
+        '<dt>En los 32 poderes judiciales estatales</dt><dd><b class="num-tabular">%s</b> %s <small>(subió de %s al cierre de 2023)</small></dd>'
+        '<dt>En juzgados federales (CJF)</dt><dd><b class="num-tabular">%s</b> %s <small>(subió de %s al cierre de 2023)</small></dd>'
+        '<dt>En el sistema tradicional (antes de la reforma penal)</dt><dd><b class="num-tabular">%s</b> pendientes %s <small>(%s en estados y %s en el fuero federal)</small></dd>'
+        '<dt>Rezago civil, familiar y mercantil en estados</dt><dd>No publicado por el censo %s</dd></dl></article>'
+        '<article class="pl-piso pl-piso-jud"><p class="pl-piso-n">Tiempos de resolución y antes y después de la reforma · 2025</p>'
+        '<p class="pl-piso-v"><b class="num-tabular">%s días</b> amparo indirecto · <b class="num-tabular">%s días</b> amparo directo %s</p>'
+        '<dl class="pl-dl">'
+        '<dt>Litigiosidad nacional en Juzgados de Distrito (2025)</dt><dd><b class="num-tabular">%s</b> asuntos por cada 100 mil habitantes %s</dd>'
+        '<dt>Antes del cambio de titulares (16-11-2024 a 30-06-2025, %d días)</dt><dd>Entraron <b class="num-tabular">%s</b> y salieron <b class="num-tabular">%s</b> %s <small>(%s egresos por día natural %s)</small></dd>'
+        '<dt>Tramo posterior (01-07-2025 a 15-11-2025, %d días, resta 2025-2 − 2025-1)</dt><dd>Entraron <b class="num-tabular">%s</b> y salieron <b class="num-tabular">%s</b> %s <small>(%s egresos por día natural; incluye julio y agosto, antes de la protesta del 1-09-2025)</small></dd>'
+        '<dt>Expedientes en trámite al cierre de 2025 en órganos federales</dt><dd><b class="num-tabular">%s</b> %s <small>(subió desde %s al cierre de 2021)</small></dd>'
+        '<dt>Suprema Corte (2024, Pleno)</dt><dd>Acción de inconstitucionalidad: <b class="num-tabular">522 días</b> · Controversia constitucional: <b class="num-tabular">300 días</b> · Amparo en revisión administrativo: <b class="num-tabular">644 días</b> %s</dd>'
+        '</dl></article></div>'
+        '<p class="pl-pie">Fuentes: INEGI, CNIJF-E 2025, reporte de resultados %s (huella SHA-256 <code>%s…</code>); '
+        'Órgano de Administración Judicial, DGEJ, <a href="%s">Anexos Estadísticos 2021–2025</a> e <a href="%s">Indicadores Estadísticos Judiciales 2025</a>. '
+        'El desempeño separado entre personas juzgadoras electas y en funciones sigue pendiente %s, igual que la estadística de la nueva integración de la Corte %s.</p>'
+        '<p class="pl-ficha-ir"><a href="datos-judicial-gestion.html">📊 Lo que cuesta y lo que resuelve ➔</a> '
+        '<a href="datos-judicial-reforma.html">🔁 Antes y después de la reforma ➔</a> '
+        '<a href="datos-judicial-por-circuito.html">🗺️ Indicadores de los 32 circuitos ➔</a></p></article>'
+    ) % (
+        chip('derivado'), ''.join(filas_fed), filas_mat,
+        format(gj.PEND_PENAL['total'][1], ','), chip('oficial'),
+        format(gj.PEND_PENAL['pje'][1], ','), chip('oficial'), format(gj.PEND_PENAL['pje'][0], ','),
+        format(gj.PEND_PENAL['cjf'][1], ','), chip('oficial'), format(gj.PEND_PENAL['cjf'][0], ','),
+        format(gj.PEND_TRAD['total'], ','), chip('oficial'), format(gj.PEND_TRAD['pje'], ','), format(gj.PEND_TRAD['cjf'], ','),
+        chip('pendiente', 'judicial-rezago-civil'),
+        format(jd_d, '.1f'), format(tc_d, '.1f'), chip('oficial'),
+        format(jd_l, ',.2f'), chip('oficial'),
+        ej.DIAS_ANTES, format(m1[1], ','), format(m1[3], ','), chip('oficial'), format(round(m1[3] / ej.DIAS_ANTES), ','), chip('derivado'),
+        ej.DIAS_DESPUES, format(ing_d, ','), format(egr_d, ','), chip('derivado'), format(round(egr_d / ej.DIAS_DESPUES), ','),
+        format(m2[4], ','), chip('oficial'), format(ej.MOV['2021'][4], ','),
+        chip('oficial'),
+        ref('ref-inegi-cnijfe2025-rr'), gj.SHA[:12], html.escape(ej.DGEJ), html.escape(ic.SISTEMA),
+        chip('pendiente', 'judicial-electos-por-organo'), chip('pendiente', 'scjn-estadistica-nueva-corte'))
+    hojas_j = [
+        ('judCont', '⏱️', '1 · Presupuesto y gasto en tiempo real', hoja_gasto),
+        ('judSueldos', '💵', '2 · Sueldos, prestaciones e ingresos al día', hoja_sueldos),
+        ('judProd', '📊', '3 · Números de productividad, rezago y tiempos', hoja_prod),
+    ]
+    cuaderno_j = ('<div class="pl-cuaderno" role="tablist" aria-label="Los dos sectores de la dimensión judicial">%s</div>%s') % (
+        ''.join('<button type="button" class="pl-hoja-b" role="tab" id="plHojaB-%s" aria-controls="plHoja-%s" aria-selected="%s">'
+                '<span aria-hidden="true">%s</span> %s</button>' % (h, h, 'true' if k == 0 else 'false', ico, nom)
+                for k, (h, ico, nom, _c) in enumerate(hojas_j)),
+        ''.join('<div class="pl-hoja" role="tabpanel" id="plHoja-%s" aria-labelledby="plHojaB-%s"%s>%s</div>' % (
+            h, h, '' if k == 0 else ' hidden', c) for k, (h, _i, _n, c) in enumerate(hojas_j)))
+    return ('<h3 class="pl-fin-tit">Los dos sectores del Poder Judicial: presupuesto y prestaciones en tiempo real, y números de productividad</h3>'
+            '<p class="pl-fin-sub">Arriba en el mapa puedes alternar las 8 lentes territoriales (6 de los poderes judiciales estatales y 2 de los circuitos federales). '
+            'Aquí abajo están los dos sectores completos a nivel nacional: el reloj en vivo del presupuesto judicial, el tabulador de sueldos y prestaciones por año, día y hora, '
+            'y la radiografía de productividad, rezago y tiempos de resolución.</p>' + cuaderno_j)
 
 
 def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
@@ -984,7 +1272,10 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         'deuda': 'Lo que debe cada gobierno estatal y cuánto le pesa, con los tres indicadores del Sistema de Alertas de Hacienda.',
         'inversion': 'La obra que hace cada gobierno estatal, directa o por medio de sus organismos, y lo que la Auditoría Superior dejó por aclarar.',
         'legislativa': 'Los 32 congresos locales: lo que gastó cada uno, cuánto cuesta por curul y cómo se compara con el tope del 0.70 % de la Constitución.',
-        'judicial': 'Los 32 poderes judiciales de los estados: lo que ejerció cada uno junto a lo que concluyó con ese dinero y las causas penales que se le acumulan.',
+        'judicial': ('Dos sectores evaluados en las 32 entidades y en sus circuitos federales: '
+                     '1) Números de productividad, cargas de trabajo, rezago y tiempos (asuntos concluidos de cada 100, concluidos por persona juzgadora, causas penales pendientes, '
+                     'litigiosidad federal por cada 100 mil habitantes y días que tarda un amparo indirecto); y '
+                     '2) Presupuesto ejercido, gasto por asunto concluido, contadores en tiempo real por segundo y el tabulador de sueldos, prestaciones e ingresos por año, día y hora frente al tope del artículo 127.'),
         'salud': ('El IMSS y el ISSSTE en cada estado. Del IMSS, lo que registra su Memoria Estadística 2025: a cuántas personas tiene adscritas, cuántas consultas y cirugías dio '
                   'y cuántas camas tiene por cada mil. Del ISSSTE, con qué cuenta según el registro de la Secretaría de Salud: médicos, camas y unidades. '
                   'La última lente pone a los médicos del IMSS en ese mismo registro, para comparar las dos con la misma regla.'),
@@ -1079,12 +1370,15 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
             <p class="pl-fin-sub">Los tres presupuestos de la Federación en 2026, lo que transfiere a estados y municipios y lo que ingresaron los municipios. El ritmo por segundo es la cifra anual entre 31,536,000 segundos: sirve para dimensionarla, no es dinero que se mueva en tiempo real.</p>
             %s
           </div>
+          <div class="pl-solo-dim pl-fin" data-dim="judicial" hidden>
+            %s
+          </div>
           <script type="application/json" id="plDatos">%s</script>
           <noscript><p>El mapa se colorea con JavaScript; sin él, cada entidad se abre desde la lista de arriba.</p></noscript>''' % (
         pasos, ''.join(dims), d0[0], d0[2].lower(), d0[3], lentes, svg, ''.join(cajones), ''.join(plantillas),
         _cajon('📍', 'Las 32 entidades', 'Elige una entidad para entrar a su portal', 'plTplIndiceTit',
                '<nav class="pl-indice" aria-label="Las 32 entidades, una por una"><ul>%s</ul></nav>' % indice),
-        cuaderno, _json(datos))
+        cuaderno, _bloque_judicial_mapa(base, ref, filas), _json(datos))
     return {
         'archivo': ARCHIVO, 'menu': 'Planisferio', 'menu_archivo': ARCHIVO,
         'icono': '🗺️', 'titulo': 'Planisferio', 'lema': 'México en un mapa: cada entidad, cada municipio, cada peso',
@@ -1354,20 +1648,25 @@ def _nota_apu(filas):
 
 def _nota_jud(filas):
     """Los puntos ciegos de los poderes judiciales, dichos con las cifras:
-    «concluyó de cada 100» no es el rezago, y el dinero por asunto no es lo
-    que cuesta un juicio."""
+    «concluyó de cada 100» no es el rezago, el dinero por asunto no es lo
+    que cuesta un juicio, y el circuito federal responde a su propia carga."""
     a = sorted(filas, key=lambda f: -f['juda'])
     c = sorted(filas, key=lambda f: f['judc'])
     r = sorted(filas, key=lambda f: -f['judr'])
+    d = sorted(filas, key=lambda f: -f['jdfD'])
     return ('<b>Lo que un solo número no dice.</b> Por asunto concluido, %s ejerció %s %s y %s, %s %s: %s veces más. Pero un asunto concluido puede ser una sentencia '
             'después de años de juicio o una demanda que se desechó el primer día, y el censo no los separa: la distancia es una pregunta, no un veredicto. '
-            '<b>Y lo que concluye no es lo que debe.</b> %s concluyó %s de cada 100 asuntos que le entraron %s, el más bajo del país, y es el lugar %d de 32 en causas penales pendientes '
+            '<b>Lo que concluye no es lo que debe.</b> %s concluyó %s de cada 100 asuntos que le entraron %s, el más bajo del país, y es el lugar %d de 32 en causas penales pendientes '
             '(%s %s, con %s personas juzgadoras en todas las materias). Pero en lo civil, familiar y mercantil el INEGI cuenta como ingresada toda demanda, '
-            'y cuántas quedaron sin resolver no lo publica %s. Son cifras que cada poder judicial le reporta de sí mismo al INEGI.') % (
+            'y cuántas quedaron sin resolver no lo publica %s. '
+            '<b>En el circuito federal</b>, un amparo indirecto tardó en promedio %s días en %s y %s días en %s %s, pero cada circuito atiende materias y cargas distintas, '
+            'y el Órgano de Administración Judicial no reparte la nómina por circuito %s.') % (
                 a[0]['n'], _pesos(a[0]['juda']), chip('derivado'), a[-1]['n'], _pesos(a[-1]['juda']), chip('derivado'),
                 format(a[0]['juda'] / a[-1]['juda'], '.1f'),
                 c[0]['n'], pct(c[0]['judc']), chip('derivado'), r.index(c[0]) + 1, format(c[0]['judr'], ','), chip('oficial'), c[0]['judj'],
-                chip('pendiente', 'judicial-rezago-civil'))
+                chip('pendiente', 'judicial-rezago-civil'),
+                format(d[0]['jdfD'], '.1f'), d[0]['n'], format(d[-1]['jdfD'], '.1f'), d[-1]['n'], chip('oficial'),
+                chip('pendiente', 'poderes-judicial-0'))
 
 
 def _nota_leg(filas):
@@ -1643,9 +1942,11 @@ def _legislativa_portal(base, ref, e):
 
 
 def _judicial_portal(base, ref, e):
-    """Su Poder Judicial (03-11-2026): lo que ejerció en 2024 junto a lo que
-    le entró y lo que concluyó, el rezago penal, sus personas juzgadoras, el
-    circuito federal con sede en el estado y sus reglas (art. 116, fr. III)."""
+    """Su Poder Judicial (03-11-2026; ampliado el 09-11-2026 en dos sectores:
+    1 · Números de productividad, cargas de trabajo, rezago y tiempos [poder
+        judicial estatal y Circuito Judicial Federal con sede en el estado];
+    2 · Presupuesto, gasto por asunto, contador en tiempo real por segundo y
+        remuneraciones/prestaciones frente al tope constitucional)."""
     import gestion_judicial as gj
     import indicadores_circuito as ic
     import leyes_niveles as ln
@@ -1654,51 +1955,144 @@ def _judicial_portal(base, ref, e):
     j = pj[a]
     lugar = lambda k, alto=True: sorted(pj, key=lambda x: -pj[x][k] if alto else pj[x][k]).index(a) + 1
     nac_c100 = 100.0 * gj.EST_TOTAL[1] / gj.EST_TOTAL[0]
-    p1 = ('<article class="pl-piso pl-piso-jud"><p class="pl-piso-n">1 · Lo que ejerció su Poder Judicial · 2024</p>'
-          '<p class="pl-piso-v"><b class="num-tabular">%s</b> %s</p>'
-          '<dl class="pl-dl"><dt>Su lugar</dt><dd>%d.º de 32 %s <small>del que más ejerció al que menos</small></dd>'
-          '<dt>Le entraron</dt><dd>%s asuntos %s <small>en primera instancia: penal, adolescentes, civil, familiar y mercantil</small></dd>'
-          '<dt>Concluyó</dt><dd>%s asuntos %s <small>%s de cada 100 que entraron %s; en todo el país, %s; lugar %d de 32, del que más concluye al que menos</small></dd>'
-          '<dt>Por asunto concluido</dt><dd>%s %s <small>lugar %d de 32; no es lo que cuesta un juicio: el presupuesto paga todo el poder judicial</small></dd>'
-          '<dt>Personas juzgadoras</dt><dd>%d %s <small>de todas las materias; %s asuntos concluidos por cada una %s</small></dd>'
-          '<dt>Causas penales pendientes</dt><dd>%s %s <small>al cierre de 2024, lugar %d de 32; el INEGI cuenta a cada persona procesada, no cada expediente</small></dd>'
-          '<dt>Rezago civil, familiar y mercantil</dt><dd>Sin cifra %s <small>el reporte del censo no lo publica</small></dd>'
-          '</dl><p class="pl-piso-f">INEGI, Censo Nacional de Impartición de Justicia Federal y Estatal 2025, reporte de resultados: presupuesto ejercido, gráfica 7 (p. 14); '
-          'asuntos ingresados y concluidos, tabla 23 (p. 39, con sus notas 1 y 2); causas penales pendientes, tabla 25 (p. 45); personas juzgadoras, tabla 6 (p. 12) %s. '
-          'Las divisiones son nuestras.</p></article>') % (
-              mdp(j['g']), chip('oficial'), lugar('g'), chip('derivado'),
+    nac_cj = round(gj.EST_TOTAL[1] / gj.EST_TOTAL[3])
+    # Contador en tiempo real del Poder Judicial del estado
+    s_jud = _ritmo(j['g'])
+    dia_jud = j['g'] * 1e6 / 365
+    hab_jud = j['g'] * 1e6 / e['pobPersonas']
+    reloj = ('<div class="pl-conts pl-conts-1"><article class="pl-cont" data-anual="%.1f">'
+             '<p class="pl-cont-n"><span aria-hidden="true">⏱️</span> El presupuesto de su Poder Judicial, en tiempo real · 2024</p>'
+             '<p class="pl-cont-v"><b class="num-tabular">%s</b> al año %s · <b class="num-tabular">%s por segundo</b> %s</p>'
+             '<p class="pl-cont-vivo" aria-live="off">Desde que abriste esta página: <b class="num-tabular pl-vivo">$0</b></p>'
+             '<p class="pl-cont-que">Equivale a <b class="num-tabular">%s al día</b> y a <b class="num-tabular">%s por habitante al año</b> %s. '
+             'Operación: %s ÷ 31,536,000 segundos del año. Sirve para dimensionar la cifra anual del censo del INEGI, no son transferencias en vivo.</p></article></div>') % (
+                 j['g'], mdp(j['g']), chip('oficial'), _pesos(s_jud), chip('derivado'),
+                 _pesos(dia_jud), _pesos(hab_jud), chip('derivado'), mdp(j['g']))
+    # Sector 1 · Piso 1: Productividad, cargas y rezago del Poder Judicial Estatal
+    p1 = ('<article class="pl-piso pl-piso-jud"><p class="pl-piso-n">1 · Productividad y rezago de su Poder Judicial estatal · 2024</p>'
+          '<p class="pl-piso-v"><b class="num-tabular">%s</b> concluidos de cada 100 %s</p>'
+          '<dl class="pl-dl">'
+          '<dt>Asuntos que le entraron</dt><dd><b class="num-tabular">%s</b> %s <small>en primera instancia: familiar, civil, mercantil, penal y adolescentes</small></dd>'
+          '<dt>Asuntos que concluyó</dt><dd><b class="num-tabular">%s</b> %s <small>%d.º de 32 en tasa de conclusión (promedio nacional: %s)</small></dd>'
+          '<dt>Personas juzgadoras</dt><dd><b class="num-tabular">%d</b> %s <small>lugar %d de 32 por plantilla en todas las materias</small></dd>'
+          '<dt>Carga concluida por persona juzgadora</dt><dd><b class="num-tabular">%s asuntos al año</b> %s <small>(%s al mes; lugar %d de 32; promedio nacional: %s al año)</small></dd>'
+          '<dt>Causas penales pendientes (sistema acusatorio)</dt><dd><b class="num-tabular">%s</b> %s <small>al cierre de 2024, lugar %d de 32 (%s por persona juzgadora %s); el INEGI cuenta cada persona procesada</small></dd>'
+          '<dt>Rezago civil, familiar y mercantil</dt><dd>Sin cifra %s <small>el reporte del censo del INEGI no publica cuántos quedaron en trámite</small></dd>'
+          '</dl><p class="pl-piso-f">INEGI, CNIJF-E 2025, reporte de resultados: asuntos ingresados y concluidos, tabla 23 (p. 39); '
+          'causas penales pendientes, tabla 25 (p. 45); personas juzgadoras, tabla 6 (p. 12) %s. Las divisiones son nuestras.</p></article>') % (
+              pct(j['c100']), chip('derivado'),
               format(j['i'], ','), chip('oficial'),
-              format(j['c'], ','), chip('oficial'), pct(j['c100']), chip('derivado'), pct(nac_c100), lugar('c100'),
-              _pesos(j['xa']), chip('derivado'), lugar('xa'),
-              j['j'], chip('oficial'), format(j['cj'], ','), chip('derivado'),
-              format(j['p'], ','), chip('oficial'), lugar('p'),
+              format(j['c'], ','), chip('oficial'), lugar('c100'), pct(nac_c100),
+              j['j'], chip('oficial'), lugar('j'),
+              format(j['cj'], ','), chip('derivado'), format(round(j['cj'] / 12, 1), '.1f'), lugar('cj'), format(nac_cj, ','),
+              format(j['p'], ','), chip('oficial'), lugar('p'), format(round(j['p'] / j['j'], 1), '.1f') if j['j'] else '—', chip('derivado'),
               chip('pendiente', 'judicial-rezago-civil'),
               ref('ref-inegi-cnijfe2025-rr'))
+    # Sector 1 · Piso 2: Productividad, litigiosidad y tiempos en su Circuito Judicial Federal
     n = ic.EDO.index(a) + 1
     circ = 'datos-judicial-por-circuito.html#jud-circ_%d' % n
     if 'id="jud-circ_%d"' % n not in open(os.path.join(RAIZ, circ.split('#')[0]), encoding='utf-8').read():
         raise SystemExit('planisferio: %s no existe' % circ)
-    p2 = ('<article class="pl-piso pl-piso-asf"><p class="pl-piso-n">2 · La justicia federal en su territorio</p>'
-          '<p class="pl-piso-v"><b class="num-tabular">%s Circuito</b></p>'
-          '<p>Además de su Poder Judicial, en %s hay juzgados y tribunales federales: los del %s Circuito, con sede en el estado%s. Esos los paga la Federación, no el estado. '
-          'Cuántos asuntos les llegan por cada 100 mil habitantes, cuántos resuelven y cuántos se les acumulan, de 2021 a 2025:</p>'
-          '<p class="pl-ficha-ir"><a href="%s">Su circuito judicial federal ➔</a></p></article>') % (
-              ic.ORD[n - 1], html.escape(nom), ic.ORD[n - 1], (', que abarca %s %s' % (html.escape(ic.EDO_NOM[a]), ic.ALCANCE[n])) if n in ic.ALCANCE else '', circ)
+    c_lit = ic.get('2', 3, 5, '2025')
+    c_jdi = ic.get('2', 3, 7, '2025')
+    c_jdt = ic.get('2', 3, 12, '2025')
+    c_jdp = ic.get('2', 3, 10, '2025')
+    c_jdd = ic.get('2', 5, 15, '2025')
+    c_tci = ic.get('4', 3, 7, '2025')
+    c_tct = ic.get('4', 3, 12, '2025')
+    c_tcp = ic.get('4', 3, 10, '2025')
+    c_tcd = ic.get('4', 5, 1, '2025')
+    lug_lit = sorted(range(1, 33), key=lambda k: -c_lit['c'][str(k)]).index(n) + 1
+    lug_jdd = sorted(range(1, 33), key=lambda k: -c_jdd['c'][str(k)]).index(n) + 1
+    p2 = ('<article class="pl-piso pl-piso-jud"><p class="pl-piso-n">2 · Productividad y tiempos de la justicia federal en su territorio · 2025</p>'
+          '<p class="pl-piso-v"><b class="num-tabular">%s Circuito</b> · <b class="num-tabular">%s días</b> en amparo indirecto %s</p>'
+          '<p>Además del Poder Judicial local, en %s operan los Juzgados de Distrito y Tribunales Colegiados del <b>%s Circuito</b>%s:</p>'
+          '<dl class="pl-dl">'
+          '<dt>Litigiosidad federal (Juzgados de Distrito)</dt><dd><b class="num-tabular">%s</b> asuntos por cada 100 mil habitantes %s <small>(lugar %d de 32; en el país: %s)</small></dd>'
+          '<dt>Juzgados de Distrito · carga y salida</dt><dd>Entraron <b class="num-tabular">%s</b> · salieron <b class="num-tabular">%s</b> por cada 100 que entraron %s · quedaron <b class="num-tabular">%s</b> en trámite %s</dd>'
+          '<dt>Duración del amparo indirecto (Juzgados de Distrito)</dt><dd><b class="num-tabular">%s días</b> en promedio %s <small>(lugar %d de 32, del que más tarda al que menos; en el país: %s días)</small></dd>'
+          '<dt>Tribunales Colegiados · carga y salida</dt><dd>Entraron <b class="num-tabular">%s</b> · salieron <b class="num-tabular">%s</b> por cada 100 que entraron %s · quedaron <b class="num-tabular">%s</b> en trámite %s</dd>'
+          '<dt>Duración del amparo directo (Tribunales Colegiados)</dt><dd><b class="num-tabular">%s días</b> en promedio %s <small>(en el país: %s días)</small></dd>'
+          '</dl><p class="pl-piso-f">Órgano de Administración Judicial, DGEJ, <a href="%s">Indicadores Estadísticos Judiciales 2025</a> '
+          '(huellas SHA-256 <code>%s…</code> y <code>%s…</code>). <a href="%s">Ver la serie 2021–2025 de su circuito ➔</a></p></article>') % (
+              ic.ORD[n - 1], format(c_jdd['c'][str(n)], '.1f'), chip('oficial'),
+              html.escape(nom), ic.ORD[n - 1], (', que abarca %s %s' % (html.escape(ic.EDO_NOM[a]), ic.ALCANCE[n])) if n in ic.ALCANCE else '',
+              format(c_lit['c'][str(n)], ',.2f'), chip('oficial'), lug_lit, format(c_lit['nac'], ',.2f'),
+              format(round(c_jdi['c'][str(n)]), ','), format(c_jdt['c'][str(n)] * 100, '.1f'), chip('derivado'), format(round(c_jdp['c'][str(n)]), ','), chip('oficial'),
+              format(c_jdd['c'][str(n)], '.1f'), chip('oficial'), lug_jdd, format(c_jdd['nac'], '.1f'),
+              format(round(c_tci['c'][str(n)]), ','), format(c_tct['c'][str(n)] * 100, '.1f'), chip('derivado'), format(round(c_tcp['c'][str(n)]), ','), chip('oficial'),
+              format(c_tcd['c'][str(n)], '.1f'), chip('oficial'), format(c_tcd['nac'], '.1f'),
+              html.escape(ic.SISTEMA), c_lit['sha256'][:12], c_jdd['sha256'][:12], circ)
+    # Sector 2 · Piso 3: Presupuesto ejercido, peso en el gasto del estado, costo por asunto y pagos federales en el circuito
+    egr_est = e.get('egr2024')
+    if egr_est:
+        peso_egr = ('<dt>Frente al egreso total del estado (2024)</dt><dd><b class="num-tabular">%s</b> %s '
+                    '<small>de un egreso estatal de %s %s (INEGI)</small></dd>') % (
+                        pct(j['g'] / egr_est * 100, 2), chip('derivado'), mdp(egr_est), chip('oficial'))
+    else:
+        peso_egr = ('<dt>Frente al egreso total del estado</dt><dd>Sin cifra %s <small>la Ciudad de México no figura en la estadística estatal del INEGI</small></dd>') % (
+            chip('pendiente', 'entidades-' + a.lower()))
+    cir_map = {c['n']: c for c in base['poderes']['judicial']['circuitos']}
+    pag_cir = cir_map[n]['pagado'] / 1e6 if n in cir_map else 0.0
+    fu_oaj = base['poderes']['fuentes']['OAJ_UEG']
+    p3 = ('<article class="pl-piso pl-piso-jud"><p class="pl-piso-n">3 · Presupuesto ejercido, gasto por asunto y circuito federal</p>'
+          '<p class="pl-piso-v"><b class="num-tabular">%s</b> ejercidos en 2024 %s</p>'
+          '<dl class="pl-dl">'
+          '<dt>Su lugar entre los 32 poderes judiciales</dt><dd><b class="num-tabular">%d.º de 32</b> %s <small>del que más presupuesto ejerció al que menos</small></dd>'
+          '%s'
+          '<dt>Presupuesto ÷ asunto concluido</dt><dd><b class="num-tabular">%s</b> %s <small>lugar %d de 32; no es lo que cuesta un juicio: el presupuesto paga también segunda instancia, administración y defensoría</small></dd>'
+          '<dt>Presupuesto ÷ persona juzgadora</dt><dd><b class="num-tabular">%s</b> al año %s <small>todo el presupuesto de la institución entre sus %d personas juzgadoras, no es su sueldo</small></dd>'
+          '<dt>Pagos en oficinas del %s Circuito Federal (abr–jun 2026)</dt><dd><b class="num-tabular">%s</b> %s <small>gasto operativo pagado en la unidad «Circuito Judicial»; la nómina federal se paga centralizada %s</small></dd>'
+          '</dl><p class="pl-piso-f">Poder Judicial estatal: INEGI, CNIJF-E 2025, gráfica 7 (p. 14) %s. '
+          'Circuito federal: <a href="%s">%s</a>.</p></article>') % (
+              mdp(j['g']), chip('oficial'), lugar('g'), chip('derivado'), peso_egr,
+              _pesos(j['xa']), chip('derivado'), lugar('xa'),
+              mdp(j['g'] / j['j']) if j['j'] else '—', chip('derivado'), j['j'],
+              ic.ORD[n - 1], mdp(pag_cir), chip('oficial'), chip('pendiente', 'poderes-judicial-0'),
+              ref('ref-inegi-cnijfe2025-rr'), html.escape(fu_oaj['url']), html.escape(fu_oaj['doc']))
+    # Sector 2 · Piso 4: Remuneraciones, prestaciones y tope constitucional en su territorio
+    cs = {p['id']: p for p in base['comparador_salarial']['cargos']}
+    mag, jue, pry = cs['magistrado'], cs['juez'], cs['proyectista_juzgado']
+    fu_man = base['poderes']['fuentes']['MANUAL']
+    p4 = ('<article class="pl-piso pl-piso-jud"><p class="pl-piso-n">4 · Sueldos, prestaciones e ingresos al día en su territorio · 2026</p>'
+          '<p class="pl-piso-v">Tope constitucional: <b class="num-tabular">$134,290</b> netos al mes %s</p>'
+          '<p>Ninguna persona juzgadora —federal ni del Poder Judicial de %s— puede ganar más que la titular de la Presidencia de la República '
+          '(Constitución, arts. 116, fr. III, y 127). Esto cobran en neto quienes juzgan en el <b>%s Circuito Federal</b> con sede en %s, '
+          'sumando sueldo mensual, aguinaldo (40 días), prima vacacional (10 días), pago por riesgo y asignaciones:</p>'
+          '<dl class="pl-dl">'
+          '<dt>Magistratura de Circuito</dt><dd><b class="num-tabular">%s</b> netos al mes %s · <b class="num-tabular">%s</b> netos al año %s <small>(%s al día · %s por hora %s)</small></dd>'
+          '<dt>Jueza o juez de Distrito</dt><dd><b class="num-tabular">%s</b> netos al mes %s · <b class="num-tabular">%s</b> netos al año %s <small>(%s al día · %s por hora %s)</small></dd>'
+          '<dt>Secretaría proyectista de Juzgado</dt><dd><b class="num-tabular">%s</b> netos al mes %s · <b class="num-tabular">%s</b> netos al año %s <small>(%s al día · %s por hora %s)</small></dd>'
+          '<dt>Prestaciones del tabulador federal</dt><dd>Aguinaldo de <b>40 días</b>, prima vacacional de <b>10 días por semestre</b>, seguro de vida de <b>40 meses</b> y asignaciones adicionales %s</dd>'
+          '<dt>Tabulador del Poder Judicial de %s</dt><dd>Se aprueba cada año en el Presupuesto de Egresos del Estado y se publica en: <b>%s</b></dd>'
+          '</dl><p class="pl-piso-f"><a href="%s">%s</a>, anexo B. Límite presidencial: PEF 2026, Anexo 23.1.2 %s. '
+          '<a href="datos-judicial-sueldos.html">💵 Ver todos los sueldos judiciales ➔</a> · '
+          '<a href="herramienta-calculadora-compara.html">⚖️ Comparar en «Tú contra ellos» ➔</a></p></article>') % (
+              chip('oficial'), html.escape(nom), ic.ORD[n - 1], html.escape(nom),
+              _pesos(mag['mensual']['max']), chip('oficial'), _pesos(mag['anual']), chip(mag['anualEstado']), _pesos(round(mag['anual'] / 365)), _pesos(round(mag['anual'] / 8760)), chip('derivado'),
+              _pesos(jue['mensual']['max']), chip('oficial'), _pesos(jue['anual']), chip(jue['anualEstado']), _pesos(round(jue['anual'] / 365)), _pesos(round(jue['anual'] / 8760)), chip('derivado'),
+              _pesos(pry['mensual']['max']), chip('oficial'), _pesos(pry['anual']), chip(pry['anualEstado']), _pesos(round(pry['anual'] / 365)), _pesos(round(pry['anual'] / 8760)), chip('derivado'),
+              chip('oficial'), html.escape(nom), html.escape(ln.ESTADOS[a][0]),
+              html.escape(fu_man['url']), html.escape(fu_man['doc']), ref('ref-pef2026'))
     ciego = ('<p class="pl-dim-nota"><b>Lo que un solo número no dice.</b> «Concluyó de cada 100» no es el rezago: en lo civil, familiar y mercantil el INEGI cuenta como ingresada '
              'toda demanda, también la que se desecha o se manda corregir, y como concluida solo la que puso fin al pleito. Y un asunto concluido puede ser una sentencia después de años '
              'o un desechamiento del primer día: el censo no los separa. Por eso el dinero va junto a lo que se resolvió con él, para preguntar, no para condenar. '
-             'Son cifras que el Poder Judicial de %s le reportó de sí mismo al INEGI.</p>') % html.escape(nom)
+             'Son cifras que el Poder Judicial de %s le reportó de sí mismo al INEGI y que la DGEJ publica para su circuito federal.</p>') % html.escape(nom)
     reglas = ('<div class="pl-reglas"><p><b>Las reglas de su Poder Judicial</b></p><ul>'
               '<li>Sus magistradas, magistrados, juezas y jueces se eligen por voto directo y secreto de la ciudadanía, con las mismas bases que el Poder Judicial de la Federación, '
-              'y duran nueve años en el cargo (%s, art. 116, fr. III, reformada DOF 15-09-2024).</li>'
+              'y duran nueve años en el cargo (%s, art. 116, fr. III, reformada DOF 15-09-2024; la renovación local debe concluir a más tardar en la elección de 2028).</li>'
               '<li>Debe tener un Tribunal de Disciplina Judicial y un órgano de administración judicial con independencia técnica y de gestión (%s, art. 116, fr. III).</li>'
               '<li>Lo que cobran sus personas juzgadoras no puede ser mayor que lo que recibe la persona titular de la Presidencia de la República, ni disminuir durante su encargo (%s, art. 116, fr. III).</li>'
               '<li>Su presupuesto va dentro del presupuesto de egresos del estado, que aprueba cada año su congreso; se publica en: %s. <a href="%s#edo-%s">⚖️ Sus leyes del dinero</a></li></ul>'
               '<p class="pl-ficha-ir"><a href="planisferio.html?d=judicial&amp;e=%s">Los 32 poderes judiciales, en el mapa ➔</a> '
-              '<a href="datos-judicial-gestion.html#jud-gestion_estados">Lo que resuelve con su dinero, en la Enciclopedia ➔</a></p></div>') % (
+              '<a href="datos-judicial-gestion.html#jud-gestion_estados">Lo que resuelve con su dinero, en la Enciclopedia ➔</a> '
+              '<a href="%s">Su circuito judicial federal ➔</a></p></div>') % (
         ln._a(ln.CPEUM, 'Constitución'), ln._a(ln.CPEUM, 'Constitución'), ln._a(ln.CPEUM, 'Constitución'),
-        html.escape(ln.ESTADOS[a][0]), ln.ARCHIVO, clave(a), quote(a))
-    return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, reglas)
+        html.escape(ln.ESTADOS[a][0]), ln.ARCHIVO, clave(a), quote(a), circ)
+    return ('%s<h3 class="pl-sub-tit">Sector 1 · Números de productividad, cargas de trabajo, rezago y tiempos</h3>'
+            '<div class="pl-pisos">%s%s</div>'
+            '<h3 class="pl-sub-tit">Sector 2 · Presupuesto ejercido, gasto por asunto, sueldos y prestaciones</h3>'
+            '<div class="pl-pisos">%s%s</div>%s%s') % (reloj, p1, p2, p3, p4, ciego, reglas)
 
 
 def _salud_portal(base, ref, e):
@@ -2107,9 +2501,10 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
              'texto': ('Lo que gastó el congreso de %s en 2024, cuántas personas legisladoras lo integran, lo que cuesta por curul y cómo se compara con el tope que la Constitución '
                        'les pone desde abril de 2026. Las cifras son del censo de los congresos estatales del INEGI.') % nom,
              'tarjetas': [], 'bloque': _legislativa_portal(base, ref, e)},
-            {'id': 'judicial', 'titulo': 'Su Poder Judicial',
-             'texto': ('Lo que ejerció el Poder Judicial de %s en 2024, junto a lo que le llegó y lo que concluyó con ese dinero, las causas penales que se le acumulan '
-                       'y sus personas juzgadoras. Las cifras son del censo de impartición de justicia del INEGI.') % nom,
+            {'id': 'judicial', 'titulo': 'Su Poder Judicial y su circuito federal',
+             'texto': ('Dos sectores evaluados en %s: 1) los números de productividad, cargas de trabajo, rezago y tiempos de resolución de su Poder Judicial estatal (CNIJF-E 2025) '
+                       'y del Circuito Judicial Federal con sede en el estado (DGEJ 2025); y 2) el gasto de su presupuesto en tiempo real por segundo, el dinero por asunto concluido '
+                       'y los sueldos, prestaciones e ingresos al día frente al tope constitucional.') % nom,
              'tarjetas': [], 'bloque': _judicial_portal(base, ref, e)},
             {'id': 'salud', 'titulo': 'Su salud pública: el IMSS y el ISSSTE',
              'texto': ('A cuántas personas tiene adscritas el IMSS en %s, cuántas consultas y cirugías les dio y con cuántas camas, y con cuántos médicos, camas y unidades '

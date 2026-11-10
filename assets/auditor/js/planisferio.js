@@ -208,19 +208,31 @@
         '<a class="pl-ficha-ir" href="' + esc(sub(e, 'legislativa')) + '">Ver su congreso en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
-    /* Su Poder Judicial: el dinero junto a lo que concluyó con él, el
-       rezago penal y sus personas juzgadoras (CNIJF-E 2025). */
+    /* Su Poder Judicial: dos sectores evaluados (productividad local y federal +
+       presupuesto, ritmo por segundo y gasto por asunto; CNIJF-E 2025 y DGEJ 2025). */
     function judicial(e, fijo) {
-      var d = function (id, nom) {
+      var d = function (id, nom, extra) {
         var l = lenteDe(id);
-        return '<dt>' + nom + '</dt><dd><b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est) + '</dd>';
+        return '<dt>' + nom + '</dt><dd><b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est) + (extra || '') + '</dd>';
       };
-      ficha.innerHTML = '<h3>Poder Judicial de ' + esc(e.n) + '</h3><p class="pl-ficha-sub">Primera instancia, 2024 · censo de impartición de justicia del INEGI</p>' +
-        '<dl class="pl-ficha-dl">' + d('jud', 'Lo que ejerció') +
+      var seg = Math.round(e.jud * 1e6 / SEG), c = e.jdfC || {};
+      var prod = '<p class="pl-ficha-sub">📊 Productividad · Poder Judicial estatal (2024)</p><dl class="pl-ficha-dl">' +
         '<dt>Le entraron · concluyó</dt><dd><b class="num-tabular">' + num(e.judi, 0) + ' · ' + num(e.judk, 0) + '</b> ' + chip('oficial') + '</dd>' +
-        d('judc', 'Concluyó de cada 100') + d('juda', 'Por asunto concluido') + d('judr', 'Causas penales pendientes') + d('judj', 'Personas juzgadoras') + '</dl>' +
-        '<p class="pl-ficha-mun">Concluir no es lo mismo que no deber: el rezago civil, familiar y mercantil no lo publica el censo.</p>' +
-        '<a class="pl-ficha-ir" href="' + esc(sub(e, 'judicial')) + '">Ver su Poder Judicial en su portal ➔</a>' +
+        d('judc', 'Concluyó de cada 100') +
+        d('judx', 'Concluidos por juzgador(a)', ' · ' + num(e.judj, 0) + ' juzgadores') +
+        d('judr', 'Causas penales pendientes') + '</dl>';
+      var fed = '<p class="pl-ficha-sub">⚖️ Justicia federal · ' + esc(c.ord || '') + ' Circuito (2025)</p><dl class="pl-ficha-dl">' +
+        d('jdfL', 'Litigiosidad (por 100 mil hab.)') +
+        d('jdfD', 'Duración amparo indirecto', c.tcd != null ? ' · directo ' + num(c.tcd, 1) + ' d' : '') +
+        (c.jdt != null ? '<dt>Salen por cada 100 · JD y TCC</dt><dd><b class="num-tabular">' + num(c.jdt * 100, 1) + '% · ' + num(c.tct * 100, 1) + '%</b> ' + chip('derivado') + '</dd>' : '') + '</dl>';
+      var pres = '<p class="pl-ficha-sub">⏱️ Presupuesto, ritmo y gasto por asunto</p><dl class="pl-ficha-dl">' +
+        d('jud', 'Presupuesto ejercido (2024)', ' · <b class="num-tabular">$' + num(seg, 0) + '/s</b> ' + chip('derivado')) +
+        d('juda', 'Presupuesto ÷ asunto concluido') +
+        (c.pag != null ? '<dt>Pagos en su Circuito Federal (2T 2026)</dt><dd><b class="num-tabular">' + mdp(c.pag) + '</b> ' + chip('oficial') + '</dd>' : '') + '</dl>';
+      ficha.innerHTML = '<h3>Poder Judicial · ' + esc(e.n) + '</h3>' +
+        (/^jdf/.test(lente.id) ? fed + prod + pres : /^jud(a)?$/.test(lente.id) ? pres + prod + fed : prod + fed + pres) +
+        '<p class="pl-ficha-mun">Concluir de cada 100 no es el rezago, y el dinero por asunto no es lo que cuesta un juicio.</p>' +
+        '<a class="pl-ficha-ir" href="' + esc(sub(e, 'judicial')) + '">Ver los dos sectores y su reloj en vivo en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
     /* Su salud pública: el IMSS con su Memoria Estadística 2025 (por OOAD) y el
@@ -586,27 +598,29 @@
   })();
 })();
 
-/* Lo de la dimensión financiera en pestañas (rediseño del 04-11-2026): una
-   hoja a la vez. Sin JavaScript se ven las tres, una tras otra. */
+/* Cada cuaderno de pestañas bajo el mapa (financiera y judicial): una hoja a
+   la vez dentro de su propio contenedor. Sin JavaScript se ven todas. */
 (function () {
-  var bs = document.querySelectorAll('.pl-hoja-b');
-  if (!bs.length) return;
-  function pon(b) {
-    Array.prototype.forEach.call(bs, function (x) {
-      var on = x === b, h = document.getElementById(x.getAttribute('aria-controls'));
-      x.setAttribute('aria-selected', on ? 'true' : 'false');
-      x.tabIndex = on ? 0 : -1;
-      if (h) h.hidden = !on;
+  Array.prototype.forEach.call(document.querySelectorAll('.pl-cuaderno'), function (cuad) {
+    var bs = cuad.querySelectorAll('.pl-hoja-b');
+    if (!bs.length) return;
+    function pon(b) {
+      Array.prototype.forEach.call(bs, function (x) {
+        var on = x === b, h = document.getElementById(x.getAttribute('aria-controls'));
+        x.setAttribute('aria-selected', on ? 'true' : 'false');
+        x.tabIndex = on ? 0 : -1;
+        if (h) h.hidden = !on;
+      });
+    }
+    Array.prototype.forEach.call(bs, function (b, k) {
+      b.addEventListener('click', function () { pon(b); });
+      b.addEventListener('keydown', function (ev) {
+        var d = ev.key === 'ArrowRight' ? 1 : ev.key === 'ArrowLeft' ? -1 : 0;
+        if (!d) return;
+        var n = bs[(k + d + bs.length) % bs.length];
+        pon(n); n.focus(); ev.preventDefault();
+      });
     });
-  }
-  Array.prototype.forEach.call(bs, function (b, k) {
-    b.addEventListener('click', function () { pon(b); });
-    b.addEventListener('keydown', function (ev) {
-      var d = ev.key === 'ArrowRight' ? 1 : ev.key === 'ArrowLeft' ? -1 : 0;
-      if (!d) return;
-      var n = bs[(k + d + bs.length) % bs.length];
-      pon(n); n.focus(); ev.preventDefault();
-    });
+    pon(cuad.querySelector('.pl-hoja-b[aria-selected="true"]') || bs[0]);
   });
-  pon(document.querySelector('.pl-hoja-b[aria-selected="true"]') || bs[0]);
 })();
