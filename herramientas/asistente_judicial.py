@@ -57,6 +57,12 @@ INE564 = {'tx': 'INE, Acuerdo INE/CG564/2025: declaración de validez de la elec
 LAMP = {'tx': 'Ley de Amparo, Reglamentaria de los artículos 103 y 107 de la Constitución, texto vigente (Cámara de Diputados, última reforma DOF 16-10-2025)',
         'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LAmp.pdf',
         'sha256': '05560493ac2b17b9e77eeb9741843176ee0fde76f05e75f853465b13621be78d'}
+SCJN_FID_DOF = {'tx': 'SCJN, Informe del estado de los fideicomisos en los que la Suprema Corte fue fideicomitente y su extinción del primer trimestre de 2025 (DOF 15-07-2025)',
+                'url': 'https://dof.gob.mx/nota_detalle.php?codigo=5762925&fecha=15/07/2025',
+                'sha256': '7f4cd1bc4ecee2c408d2bbe2798d64f1f8012386ed0794e0dc86b5f6423ff122'}
+INE_PART_2025 = {'tx': 'INE, Comunicado 192: estimación muestral de participación ciudadana en la jornada electoral del PEEPJF 2024-2025, entre 12.57 % y 13.32 % (02-06-2025)',
+                 'url': 'https://centralelectoral.ine.mx/2025/06/02/porcentaje-de-participacion-ciudadana-en-la-jornada-electoral-del-peepjf-2024-2025-esta-entre-el-12-57-y-el-13-32/',
+                 'sha256': '333dd3c1a47bc6574bd309a0fa524279d5da3c04f5c06c4a7f723bbfb889c254'}
 TRANS = 'Transitorios de la reforma judicial (DOF 15-09-2024), en el texto vigente de la Constitución'
 
 # Las nueve personas que asignó el INE (acuerdo INE/CG563/2025, punto
@@ -321,11 +327,17 @@ def judicial(d):
         'h': '<p>La reforma de 2024 ordenó <b>extinguir</b> los fondos y fideicomisos del Poder Judicial que no estuvieran previstos en una ley, y devolver lo que tuvieran a la '
              '<b>Tesorería de la Federación</b> en un máximo de <b>90 días</b>. Desde entonces la Constitución prohíbe crear otros.</p>'
              '<p>Las pensiones complementarias, los apoyos médicos y demás obligaciones laborales que pagaban se deben cubrir con el presupuesto de cada año.</p>'
-             '<p><b>Cuánto dinero se devolvió</b> todavía no lo hemos cotejado con un documento oficial. Las cifras que circulan no aparecen en el decreto.</p>',
+             '<p><b>Lo que devolvió la Suprema Corte:</b> según el informe publicado en el Diario Oficial el <b>15 de julio de 2025</b>, el <b>2 de abril de 2025</b> Nacional Financiera concentró en la Tesorería de la Federación '
+             '<b>$6,654.1 millones</b> ($6,654,149,428.48: $6,652.5 millones de saldo al 31 de marzo más $1.7 millones de rendimientos) de los <b>cinco fideicomisos de la SCJN</b> '
+             '(80690 Pensiones Complementarias de Mandos Medios y Personal Operativo, $3,594.2 millones; 80687 Remanentes Presupuestales, $1,680.0 millones; 80691 Pensiones Complementarias de Mandos Superiores, $1,004.8 millones; '
+             '80689 Publicaciones, $200.6 millones, y 80688 Plan de Prestaciones Médicas, $174.6 millones), que quedaron en ceros y firmaron sus convenios de extinción el 8 de mayo de 2025. '
+             'Sigue pendiente de publicarse el cierre definitivo de liquidación de los fideicomisos del antiguo Consejo de la Judicatura Federal, tras las suspensiones que frenaron su entrega.</p>',
         'fu': [_o('Extinción y entero a la Tesorería (transitorio décimo)', {'tx': TRANS, 'url': CPEUM['url']}),
                _o('Prohibición de nuevos fideicomisos (art. 100, último párrafo)', CPEUM),
-               {'que': 'Cuánto se devolvió a la Tesorería', 'e': 'pendiente', 'p': 'judicial-fideicomisos-monto',
-                'fu': {'tx': 'Tesorería de la Federación, informes', 'url': 'https://www.gob.mx/tesofe'}}],
+               _o('$6,654,149,428.48 concentrados en la Tesorería el 02-04-2025 y extinción de los 5 fideicomisos de la SCJN', SCJN_FID_DOF),
+               {'que': 'Cierre definitivo de liquidación de los fideicomisos del extinto Consejo de la Judicatura Federal', 'e': 'pendiente', 'p': 'judicial-fideicomisos-monto',
+                'fu': {'tx': 'Órgano de Administración Judicial y Tesorería de la Federación', 'url': 'https://www.gob.mx/tesofe'}}],
+        'ci': [{'v': '$6,654.1 mdp', 'etq': 'enterados a la Tesorería por los 5 fideicomisos de la SCJN (02-04-2025)', 'e': 'oficial'}],
         'sug': ['¿Cuánto cuesta el Poder Judicial?', '¿Qué pasó con el haber de retiro?']}
     cargos = ''.join('<li><b>%s</b> (%s): %d</li>' % (html.escape(c), html.escape(a), m + h) for c, a, m, h in CARGOS2025)
     t['eleccion2025'] = {
@@ -334,15 +346,18 @@ def judicial(d):
              '<ul class="pa-lista">%s</ul>'
              '<p>Las campañas duraron 60 días, sin precampañas y <b>sin dinero público ni privado</b>; los partidos no podían hacer proselitismo. Las personas electas tomaron protesta el '
              '<b>1 de septiembre de 2025</b>.</p>'
-             '<p>Lo que todavía no tenemos cotejado: la <b>participación</b> final y <b>cuánto costó</b>. Para organizarla, el INE aprobó un presupuesto precautorio de '
-             '$13,205.1 millones, que incluía una eventual consulta popular; no es lo que se gastó.</p>' % cargos,
+             '<p>En su estimación muestral de la noche del 2 de junio de 2025, el INE ubicó la participación ciudadana entre <b>12.57 %% y 13.32 %%</b> de la Lista Nominal. '
+             'Lo que todavía no tenemos cotejado: el <b>porcentaje definitivo</b> de los cómputos distritales (cuyo portal dejó de resolver) y <b>cuánto costó al final</b>; '
+             'para organizarla, el INE aprobó un presupuesto precautorio de $13,205.1 millones, que incluía una eventual consulta popular.</p>' % cargos,
         'fu': [_o('Cargos a elegir en 2025 (considerando 25)', INE564),
                _o('Jornada el primer domingo de junio de 2025 y protesta el 1 de septiembre (transitorio segundo)', {'tx': TRANS, 'url': CPEUM['url']}, 'el primer domingo de junio de 2025 cayó en día 1'),
                _o('Campañas sin financiamiento ni precampañas (art. 96)', CPEUM),
                _o('Presupuesto precautorio del INE, acuerdo INE/CG2321/2024 (antecedente XIV)', INE563),
-               {'que': 'Participación ciudadana final', 'e': 'pendiente', 'p': 'judicial-2025-participacion', 'fu': {'tx': 'INE, cómputos distritales', 'url': 'https://www.ine.mx/voto-y-elecciones/computos-distritales/'}},
+               _o('Estimación muestral de participación ciudadana: entre 12.57 % y 13.32 %', INE_PART_2025),
+               {'que': 'Participación ciudadana definitiva del cómputo nacional', 'e': 'pendiente', 'p': 'judicial-2025-participacion', 'fu': {'tx': 'INE, cómputos distritales', 'url': 'https://www.ine.mx/voto-y-elecciones/computos-distritales/'}},
                {'que': 'Cuánto costó al final', 'e': 'pendiente', 'p': 'judicial-2025-costo', 'fu': {'tx': 'INE, transparencia', 'url': 'https://www.ine.mx/transparencia/'}}],
-        'ci': [{'v': '881', 'etq': 'cargos elegidos en 2025', 'e': 'oficial'}, {'v': '1 de junio de 2025', 'etq': 'jornada', 'e': 'derivado'}],
+        'ci': [{'v': '881', 'etq': 'cargos elegidos en 2025', 'e': 'oficial'}, {'v': '12.57–13.32 %', 'etq': 'participación estimada por muestra del INE', 'e': 'oficial'},
+               {'v': '1 de junio de 2025', 'etq': 'jornada', 'e': 'derivado'}],
         'sug': ['¿Cuándo es la próxima elección judicial?', '¿Quiénes son los ministros de la Corte?', '¿Cuántos circuitos judiciales hay?']}
     t['eleccion2028'] = {
         'tit': 'La segunda elección judicial: junio de 2028',

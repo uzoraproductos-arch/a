@@ -42,7 +42,7 @@
   }
   function pesos2(v) { return '$' + v.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
   function chip(e, pend) {
-    return '<span class="est-chip est-' + e + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + e + '</span>';
+    return '<span class="est-chip est-' + e + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + (e === 'derivado' ? 'auditada' : e) + '</span>';
   }
   var FACTOR_TX = { dia: '1/365', mes: '1/12', trimestre: '1/4', semestre: '1/2', ano: '1' };
 

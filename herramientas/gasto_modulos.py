@@ -241,5 +241,5 @@ def ciegos(base, ref, glos):
           <div class="pm-rej gm-ciegos">
             %s
           </div>
-          <p class="pm-pie">Las cifras <b>derivadas</b> dicen su operación en el texto; la del predial está <b>pendiente</b>: toca su etiqueta para saber por qué.</p>
+          <p class="pm-pie">Las cifras <b>oficiales</b> se toman tal cual del documento; las <b>derivadas</b> dicen su operación en el texto.</p>
         </section>''' % (bill(P['totalPEF']), '\n            '.join(tarjetas))

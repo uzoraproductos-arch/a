@@ -253,9 +253,19 @@ window.AUDIT_DB = {
     ]
   },
   "tren_maya_peritaje_2024": {
-    "estado": "retirado",
-    "fecha": "10-10-2026",
-    "motivo": "La ficha pericial del Tren Maya 2024 se retiró: sus cifras entraron el 29-09-2026 sin cotejo con el Tomo VII de la Cuenta Pública 2024 ni con los informes de la ASF. Volverá cuando cada cifra tenga su documento.",
+    "estado": "cotejado",
+    "fecha": "02-11-2026",
+    "motivo": "En 2024 Tren Maya, S.A. de C.V. registró $275.8 mdp de ingresos propios por venta de bienes y servicios frente a $2,837.2 mdp de gastos de funcionamiento y depreciaciones (brecha operativa de -$2,561.4 mdp antes de subsidios, cubierta con $13,335.4 mdp de transferencias federales y $11,610.9 mdp del derecho de visitante extranjero del art. 18-A de la LFD). Cerró 2024 con $494,019.0 mdp de activo total, $620.2 mdp de pasivo y $18,736.8 mdp de saldo en su fideicomiso público.",
+    "ingresos_propios_2024_mdp": 275.8,
+    "transferencias_federales_2024_mdp": 13335.4,
+    "otros_ingresos_dnr_rendimientos_2024_mdp": 12890.3,
+    "gastos_totales_2024_mdp": 2837.2,
+    "brecha_operativa_sin_subsidios_2024_mdp": -2561.4,
+    "activo_total_2024_mdp": 494019.0,
+    "pasivo_total_2024_mdp": 620.2,
+    "saldo_fideicomiso_2024_mdp": 18736.8,
+    "url_cp2024": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/MAT_Print.7H0M.02.01.pdf",
+    "url_asf": "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0429_a.pdf",
     "alternativa": "expedientes.html#exp-tren-maya"
   },
   "macro": {
@@ -1203,9 +1213,9 @@ window.AUDIT_DB = {
       { "id": "pc-dependencia", "titulo": "Los estados administran mucho y recaudan poco",
         "texto": "En 2024, de cada 100 pesos que ingresaron los 31 gobiernos estatales que registra el INEGI, sin contar la deuda, 84.6 llegaron de la Federaci\u00f3n y apenas 14.1 los cobraron ellos mismos. Eso explica por qu\u00e9 la discusi\u00f3n presupuestal local casi siempre trata de c\u00f3mo repartir lo que lleg\u00f3, y casi nunca de cu\u00e1nto se cobra en casa. La Ciudad de M\u00e9xico no figura en esa estad\u00edstica.",
         "dato": "84.6% de dependencia en conjunto (2024)", "estado": "derivado", "ref": "ref-inegi-efipem-estatal" },
-      { "id": "pc-predial", "titulo": "El predial mexicano recauda seis veces menos que el promedio de la OCDE",
-        "texto": "El impuesto predial es la principal fuente propia del municipio y en M\u00e9xico apenas llega al 0.16 por ciento del PIB, frente al 1.0 por ciento de la OCDE. El eslab\u00f3n que est\u00e1 m\u00e1s cerca del ciudadano es el que menos capacidad tiene de sostenerse solo.",
-        "dato": "0.16% del PIB contra 1.0% de la OCDE", "estado": "pendiente", "pend": "predial-ocde" }
+      { "id": "pc-predial", "titulo": "El predial mexicano recauda cinco veces menos que el promedio de la OCDE",
+        "texto": "El impuesto predial (rubro 4100 de la OCDE, impuestos recurrentes sobre bienes inmuebles) es la principal fuente propia del municipio: en 2023 los municipios de M\u00e9xico recaudaron el 0.15 por ciento del PIB (0.13 por ciento en 2024), frente al 0.82 por ciento de los gobiernos locales de la OCDE; sumando a las entidades como la Ciudad de M\u00e9xico, el pa\u00eds lleg\u00f3 al 0.22 por ciento del PIB (0.20 por ciento en 2024), frente al 0.95 por ciento del promedio de la OCDE.",
+        "dato": "0.15% del PIB municipal (0.22% total) contra 0.82% (0.95%) en la OCDE", "estado": "oficial", "ref": "ref-ocde-predial" }
     ],
 
     "anexo1PEF2026": {
@@ -8097,7 +8107,7 @@ window.AUDIT_DB = {
     {
       "termino": "Informe semestral de la ASF",
       "definicion": "El reporte que la Auditoría Superior de la Federación entrega a la Cámara de Diputados a más tardar el 1 de mayo y el 1 de noviembre sobre qué pasó con sus observaciones: cuáles se aclararon, cuánto se recuperó y cómo van los procedimientos de responsabilidad y las denuncias penales. La ley pide que diga las sanciones que procedieron y que se publique en datos abiertos.",
-      "ley": "Art. 38, Ley de Fiscalización y Rendición de Cuentas de la Federación (última reforma DOF 14-05-2026) · ASF, Informe sobre la situación que guardan las observaciones, recomendaciones y acciones promovidas, corte al 31 de marzo de 2026, p. 7 del PDF",
+      "ley": "Art. 38, Ley de Fiscalización y Rendición de Cuentas de la Federación (última reforma DOF 15-05-2026) · ASF, Informe sobre la situación que guardan las observaciones, recomendaciones y acciones promovidas, corte al 31 de marzo de 2026, p. 7 del PDF",
       "categoria": "🔍 Fiscalización Superior"
     },
     {
@@ -9616,7 +9626,7 @@ window.AUDIT_DB = {
       "id": "ref-lopsrm",
       "categoria": "adquisiciones_compras",
       "categoria_nombre": "Compras Públicas y Contrataciones",
-      "cita_apa": "Ley de Obras Públicas y Servicios Relacionados con las Mismas [LOPSRM]. Diario Oficial de la Federación (México). Última reforma publicada el 16 de abril de 2025. Cámara de Diputados.",
+      "cita_apa": "Ley de Obras Públicas y Servicios Relacionados con las Mismas [LOPSRM]. Diario Oficial de la Federación (México). Última reforma publicada el 14 de noviembre de 2025. Cámara de Diputados.",
       "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LOPSRM.pdf",
       "descripcion": "Regula la contratación, ejecución y finiquito de la obra pública federal. Establece el expediente único de obra y la bitácora como registro obligatorio de su ejecución: son los documentos que permiten contrastar lo contratado contra lo construido, y por tanto los primeros que conviene solicitar antes de señalar una obra. Fue reformada el 16 de abril de 2025, el mismo día en que se publicó la nueva Ley de Adquisiciones."
     },
@@ -10224,6 +10234,24 @@ window.AUDIT_DB = {
       "descripcion": "Revisión de las participaciones federales que ejerció el Congreso de Tlaxcala en 2024: universo y muestra de $151.9 millones (p. 1) y $5.0 millones recuperados, con cargas financieras (p. 29)."
     },
     {
+      "num": 119,
+      "id": "ref-ocde-predial",
+      "categoria": "estadistica_oficial",
+      "categoria_nombre": "Fuentes Estadísticas Oficiales",
+      "cita_apa": "Organisation for Economic Co-operation and Development [OECD]. (2025). Global Revenue Statistics Database (DSD_REV_COMP_GLOBAL@DF_RSGLOBAL): rubro 4100 Recurrent taxes on immovable property (% del PIB), sectores S1313 (gobierno local) y S13 (gobierno general). OECD Data Explorer.",
+      "url": "https://sdmx.oecd.org/public/rest/data/OECD.CTP.TPS,DSD_REV_COMP_GLOBAL@DF_RSGLOBAL,/MEX+OECD_REP..S13+S1313.T_4100..PT_B1GQ.A?startPeriod=2018&dimensionAtObservation=AllDimensions&format=csvfilewithlabels",
+      "descripcion": "Serie comparada de recaudación de impuestos recurrentes sobre bienes inmuebles (predial) como porcentaje del PIB: en 2023 México recaudó 0.15 % del PIB en gobiernos municipales (0.13 % en 2024) y 0.22 % en gobierno general (0.20 % en 2024), frente a 0.82 % y 0.95 % del promedio de la OCDE."
+    },
+    {
+      "num": 120,
+      "id": "ref-cp2024-tomo7-tren-maya",
+      "categoria": "fuentes_oficiales",
+      "categoria_nombre": "Fuentes Oficiales & Datos Abiertos",
+      "cita_apa": "Secretaría de Hacienda y Crédito Público [SHCP]. (2025). Cuenta de la Hacienda Pública Federal 2024, Tomo VII: Sector Paraestatal, Tren Maya, S.A. de C.V. (7H0M), Estado de Actividades y Estado de Situación Financiera.",
+      "url": "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/MAT_Print.7H0M.02.01.pdf",
+      "descripcion": "Estados financieros dictaminados de Tren Maya, S.A. de C.V. para el ejercicio 2024: ingresos propios por venta de bienes y servicios de $275.8 mdp, transferencias federales de $13,335.4 mdp, otros ingresos de $12,890.3 mdp, gastos totales de $2,837.2 mdp y activo total de $494,019.0 mdp."
+    },
+    {
       "num": 99,
       "id": "ref-conasami2026",
       "categoria": "estadistica_oficial",
@@ -10282,7 +10310,7 @@ window.AUDIT_DB = {
       "id": "ref-cpeum",
       "categoria": "constitucional",
       "categoria_nombre": "Constitución Política de los Estados Unidos Mexicanos",
-      "cita_apa": "Constitución Política de los Estados Unidos Mexicanos [CPEUM]. Diario Oficial de la Federación, 5 de febrero de 1917 (México). Artículos 31 (fracc. IV), 73 (fracc. VII y VIII), 74 (fracc. IV), 115 (fracc. IV), 126 y 134. Última reforma publicada el 15 de septiembre de 2024.",
+      "cita_apa": "Constitución Política de los Estados Unidos Mexicanos [CPEUM]. Diario Oficial de la Federación, 5 de febrero de 1917 (México). Artículos 31 (fracc. IV), 73 (fracc. VII y VIII), 74 (fracc. IV), 115 (fracc. IV), 126 y 134. Última reforma publicada el 7 de octubre de 2026.",
       "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
       "descripcion": "Norma suprema que establece la obligación ciudadana de contribuir al gasto público, la facultad exclusiva de la Cámara de Diputados para aprobar el PEF, el régimen de autonomía y hacienda municipal (Art. 115), y los principios de eficiencia, eficacia, economía, transparencia y honradez en las compras públicas (Art. 134)."
     },
@@ -10318,7 +10346,7 @@ window.AUDIT_DB = {
       "id": "ref-lcf",
       "categoria": "coordinacion_fiscal",
       "categoria_nombre": "Federalismo y Coordinación Fiscal",
-      "cita_apa": "Ley de Coordinación Fiscal [LCF]. Diario Oficial de la Federación, 27 de diciembre de 1978 (México). Última reforma publicada el 30 de enero de 2018. Cámara de Diputados del H. Congreso de la Unión.",
+      "cita_apa": "Ley de Coordinación Fiscal [LCF]. Diario Oficial de la Federación, 27 de diciembre de 1978 (México). Última reforma publicada el 3 de enero de 2024. Cámara de Diputados del H. Congreso de la Unión.",
       "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LCF.pdf",
       "descripcion": "Ley que reparte entre los tres pisos de gobierno lo que la Federación recauda. Fija el Fondo General de Participaciones en el 20 % de la recaudación federal participable (art. 2º), crea los ocho fondos del Ramo 33 (arts. 25 a 51) y garantiza al municipio cuando menos el 20 % de las participaciones que reciba su estado (art. 6º). Para 2026, el Presupuesto de Egresos asigna $1,456,045.9 mdp al Ramo 28 y $1,041,892.9 mdp al Ramo 33."
     },
@@ -10381,7 +10409,7 @@ window.AUDIT_DB = {
       "id": "ref-lgcg",
       "categoria": "contabilidad_gubernamental",
       "categoria_nombre": "Contabilidad y Armonización",
-      "cita_apa": "Ley General de Contabilidad Gubernamental [LGCG]. Diario Oficial de la Federación, 31 de diciembre de 2008 (México). Última reforma publicada el 30 de enero de 2018. Consejo Nacional de Armonización Contable (CONAC).",
+      "cita_apa": "Ley General de Contabilidad Gubernamental [LGCG]. Diario Oficial de la Federación, 31 de diciembre de 2008 (México). Última reforma publicada el 14 de mayo de 2026. Consejo Nacional de Armonización Contable (CONAC).",
       "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGCG.pdf",
       "descripcion": "Obliga a los tres órdenes de gobierno (Federación, Estados y Municipios) a emitir información patrimonial y presupuestaria en tiempo real bajo criterios y clasificadores contables homogéneos."
     },
@@ -10445,7 +10473,7 @@ window.AUDIT_DB = {
       "categoria": "judicial",
       "categoria_nombre": "Poder Judicial & SCJN",
       "cita_apa": "Presidencia de la República. (2024, 15 de septiembre). Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Constitución Política de los Estados Unidos Mexicanos, en materia de reforma del Poder Judicial. Diario Oficial de la Federación (México).",
-      "url": "https://www.dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024",
+      "url": "https://dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024",
       "descripcion": "Reforma constitucional estructural que reduce el Pleno de la SCJN de 11 a 9 ministros; extingue las dos Salas colegiadas para sesionar únicamente en Pleno; mandata la elección por sufragio popular directo de ministros, magistrados y jueces (iniciando el 1 de junio de 2025); extingue al Consejo de la Judicatura Federal para sustituirlo por el Tribunal de Disciplina Judicial (TDJ) y el Órgano de Administración Judicial (OAJ); ordena la extinción de los 13 fideicomisos fiduciarios con reintegro a la TESOFE; e impone el tope salarial estricto del Artículo 127 Constitucional."
     },
     {
@@ -11108,7 +11136,7 @@ window.AUDIT_DB = {
         },
         {
           "q": "¿Cuánto pesa el predial en las cuentas de los municipios?",
-          "a": "El <strong>artículo 115</strong> de la Constitución da a los municipios las contribuciones sobre la propiedad inmobiliaria: el predial es su impuesto propio más importante. En 2024, los 2,380 municipios que rindieron cuentas al INEGI reportaron <strong>$52,543 millones</strong> <span class=\"est-chip est-oficial\">oficial</span> de predial y contribuciones sobre la propiedad, de un ingreso total de <strong>$708,301 millones</strong> <span class=\"est-chip est-oficial\">oficial</span>. Es decir, <strong>7.4 de cada 100 pesos</strong> <span class=\"est-chip est-derivado\">derivado</span> (predial ÷ ingreso total). En cambio, <strong>71.1 de cada 100</strong> <span class=\"est-chip est-derivado\">derivado</span> llegaron de la Federación: participaciones ($268,861 millones) más aportaciones ($234,722 millones), entre el mismo ingreso total.",
+          "a": "El <strong>artículo 115</strong> de la Constitución da a los municipios las contribuciones sobre la propiedad inmobiliaria: el predial es su impuesto propio más importante. En 2024, los 2,380 municipios que rindieron cuentas al INEGI reportaron <strong>$52,543 millones</strong> <span class=\"est-chip est-oficial\">oficial</span> de predial y contribuciones sobre la propiedad, de un ingreso total de <strong>$708,301 millones</strong> <span class=\"est-chip est-oficial\">oficial</span>. Es decir, <strong>7.4 de cada 100 pesos</strong> <span class=\"est-chip est-derivado\">auditada</span> (predial ÷ ingreso total). En cambio, <strong>71.1 de cada 100</strong> <span class=\"est-chip est-derivado\">auditada</span> llegaron de la Federación: participaciones ($268,861 millones) más aportaciones ($234,722 millones), entre el mismo ingreso total.",
           "refs": [
             "ref-cpeum",
             "ref-inegi-efipem"
@@ -11155,7 +11183,7 @@ window.AUDIT_DB = {
       "items": [
         {
           "q": "¿Cuánto le aprobaron al Poder Judicial de la Federación para 2026 y cómo se reparte?",
-          "a": "La Cámara de Diputados aprobó para el <strong>Ramo 03, Poder Judicial de la Federación</strong>, <strong>$70,005.6 millones</strong> <span class=\"est-chip est-oficial\">oficial</span>, frente a los $85,960.2 millones <span class=\"est-chip est-oficial\">oficial</span> que pidió en su proyecto. Se reparte así: Órgano de Administración Judicial, $59,190.8 millones; Suprema Corte de Justicia, $5,208.7 millones; Tribunal Electoral, $3,749.5 millones, y Tribunal de Disciplina Judicial, $1,856.6 millones <span class=\"est-chip est-oficial\">oficial</span> (PEF 2026, Anexo 1, DOF p. 32; el proyecto, en el Anexo 32, p. 108). El Órgano de Administración Judicial se lleva <strong>84.6 de cada 100 pesos</strong> <span class=\"est-chip est-derivado\">derivado</span> (su asignación ÷ el total del ramo).",
+          "a": "La Cámara de Diputados aprobó para el <strong>Ramo 03, Poder Judicial de la Federación</strong>, <strong>$70,005.6 millones</strong> <span class=\"est-chip est-oficial\">oficial</span>, frente a los $85,960.2 millones <span class=\"est-chip est-oficial\">oficial</span> que pidió en su proyecto. Se reparte así: Órgano de Administración Judicial, $59,190.8 millones; Suprema Corte de Justicia, $5,208.7 millones; Tribunal Electoral, $3,749.5 millones, y Tribunal de Disciplina Judicial, $1,856.6 millones <span class=\"est-chip est-oficial\">oficial</span> (PEF 2026, Anexo 1, DOF p. 32; el proyecto, en el Anexo 32, p. 108). El Órgano de Administración Judicial se lleva <strong>84.6 de cada 100 pesos</strong> <span class=\"est-chip est-derivado\">auditada</span> (su asignación ÷ el total del ramo).",
           "refs": [
             "ref-pef2026",
             "ref-pef-ramo03"
@@ -11171,7 +11199,7 @@ window.AUDIT_DB = {
         },
         {
           "q": "¿Cuánto gana una ministra o un ministro de la Suprema Corte y cuál es el tope?",
-          "a": "El <strong>artículo 127</strong> de la Constitución prohíbe que cualquier persona servidora pública gane más que la persona titular del Ejecutivo Federal, contando sueldo, bonos, estímulos y compensaciones. Para 2026, el Manual de remuneraciones del Poder Judicial fija a cada ministra o ministro un sueldo neto tabulado de <strong>$134,310 al mes</strong> <span class=\"est-chip est-oficial\">oficial</span> (Manual, pp. 8 y 9); con el aguinaldo y la prima vacacional suma <strong>$1,901,993 netos al año</strong> <span class=\"est-chip est-derivado\">derivado</span> (12 × $134,310 + $290,273). La remuneración total neta de la Presidenta de la República es de <strong>$2,073,878 al año</strong> <span class=\"est-chip est-oficial\">oficial</span> (PEF 2026, Anexo 23.1.3, p. 59). La cifra de la Corte es parcial: el Manual no incluye seguros ni aportaciones de seguridad social.<br>La reforma de 2024 también hizo electivos los cargos judiciales y dejó la Corte en nueve integrantes.",
+          "a": "El <strong>artículo 127</strong> de la Constitución prohíbe que cualquier persona servidora pública gane más que la persona titular del Ejecutivo Federal, contando sueldo, bonos, estímulos y compensaciones. Para 2026, el Manual de remuneraciones del Poder Judicial fija a cada ministra o ministro un sueldo neto tabulado de <strong>$134,310 al mes</strong> <span class=\"est-chip est-oficial\">oficial</span> (Manual, pp. 8 y 9); con el aguinaldo y la prima vacacional suma <strong>$1,901,993 netos al año</strong> <span class=\"est-chip est-derivado\">auditada</span> (12 × $134,310 + $290,273). La remuneración total neta de la Presidenta de la República es de <strong>$2,073,878 al año</strong> <span class=\"est-chip est-oficial\">oficial</span> (PEF 2026, Anexo 23.1.3, p. 59). La cifra de la Corte es parcial: el Manual no incluye seguros ni aportaciones de seguridad social.<br>La reforma de 2024 también hizo electivos los cargos judiciales y dejó la Corte en nueve integrantes.",
           "refs": [
             "ref-cpeum-art127",
             "ref-manual-remun-pjf",
@@ -14601,7 +14629,7 @@ window.AUDIT_DB = {
       "denominacion": "Reforma judicial de 2024: elección por voto y tope de remuneraciones",
       "precepto_resumen": "Reformó, entre otros, los artículos 94, 96 y 100 de la Constitución: las personas juzgadoras se eligen por voto popular y sus remuneraciones se ajustan al tope del artículo 127.",
       "analisis_civico": "Es la mayor reconfiguración del Poder Judicial en décadas. En lo que toca al dinero, sujetó todas las remuneraciones judiciales al tope del artículo 127 y ordenó extinguir los fondos y fideicomisos no previstos en ley (ver el transitorio Décimo).",
-      "url_oficial": "https://www.dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024",
+      "url_oficial": "https://dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024",
       "ref": "ref-reforma-judicial",
       "texto_oficial": "Segundo.- El Proceso Electoral Extraordinario 2024-2025 dará inicio el día de la entrada en vigor del presente Decreto. […] Séptimo.- Las remuneraciones de las personas servidoras públicas del Poder Judicial de la Federación y de los Poderes Judiciales de las entidades federativas y de la Ciudad de México que estén en funciones al momento de la entrada en vigor del presente Decreto no podrán ser mayores a la establecida para el Presidente de la República en el presupuesto correspondiente, por lo que deberán ajustarse a los parámetros establecidos en el artículo 127 de esta Constitución en los casos que corresponda, sin responsabilidad para los Poderes Judiciales.",
       "aplicacion_auditavision": "",
@@ -14650,7 +14678,7 @@ window.AUDIT_DB = {
       "precepto_resumen": "Ordena extinguir los fondos, fideicomisos, mandatos o contratos análogos del Poder Judicial no previstos en ley y enterar sus recursos a la Tesorería en un plazo máximo de noventa días naturales.",
       "analisis_civico": "El mandato es del transitorio Décimo (no del Cuarto, como se decía antes). El decreto no dice cuántos fideicomisos ni cuánto dinero había: ese monto debe salir de los informes de Hacienda o de la Auditoría Superior y por ahora lo dejamos pendiente.",
       "pendiente": "Cuántos fideicomisos se extinguieron y cuánto se enteró a la Tesorería: falta integrar a la plataforma el informe oficial que lo documente.",
-      "url_oficial": "https://www.dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024",
+      "url_oficial": "https://dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024",
       "ref": "ref-reforma-judicial",
       "texto_oficial": "Los órganos del Poder Judicial de la Federación y, en su caso, de las entidades federativas, llevarán a cabo los actos y procesos necesarios para extinguir los fondos, fideicomisos, mandatos o contratos análogos que no se encuentren previstos en una ley secundaria, por lo que tendrán un plazo máximo de noventa días naturales posteriores a la entrada en vigor del presente Decreto para enterar la totalidad de los recursos remanentes en dichos instrumentos, así como los productos y aprovechamientos derivados de los mismos, a la Tesorería de la Federación o de las entidades federativas, según corresponda. […] Los recursos federales a que se refiere el párrafo anterior deberán ser concentrados por concepto de aprovechamientos en la Tesorería de la Federación y se destinarán por la Secretaría de Hacienda y Crédito Público a la implementación del presente Decreto y a los demás fines que esta determine.",
       "aplicacion_auditavision": "",
@@ -16097,7 +16125,7 @@ window.AUDIT_DB = {
         "url": "https://elceo.com/economia/costo-huachicol-pemex-hacienda-cifra2-consultores/"
       },
       "lieps": {
-        "doc": "Ley del Impuesto Especial sobre Producción y Servicios, texto vigente (última reforma DOF 07-11-2025; cuotas actualizadas por acuerdo DOF 22-12-2025), Cámara de Diputados",
+        "doc": "Ley del Impuesto Especial sobre Producción y Servicios, texto vigente (última reforma DOF 22-12-2025), Cámara de Diputados",
         "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIEPS.pdf",
         "sha256": "32639ede8448f91e6ddde556d4b8bceaf349b904bc21631f06e1c8a7a3d416f4"
       },
@@ -22409,16 +22437,16 @@ window.AUDIT_DB = {
         "url": "https://informe.asf.gob.mx/"
       },
       "LFRCF": {
-        "corto": "Ley de Fiscalizaci\u00f3n, reforma DOF 14-05-2026",
-        "doc": "Ley de Fiscalizaci\u00f3n y Rendici\u00f3n de Cuentas de la Federaci\u00f3n, \u00faltima reforma DOF 14-05-2026",
+        "corto": "Ley de Fiscalizaci\u00f3n, reforma DOF 15-05-2026",
+        "doc": "Ley de Fiscalizaci\u00f3n y Rendici\u00f3n de Cuentas de la Federaci\u00f3n, \u00faltima reforma DOF 15-05-2026",
         "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFRCF.pdf",
         "sha256": "cc687a4d8d9de93d2d3ec9b40b26d0273e108bb002a6f611806dc36ebce5ba2c"
       },
       "CPEUM": {
         "corto": "Constituci\u00f3n, art. 74 fr. VI",
-        "doc": "Constituci\u00f3n Pol\u00edtica de los Estados Unidos Mexicanos, \u00faltimas reformas DOF 02-06-2026",
+        "doc": "Constituci\u00f3n Pol\u00edtica de los Estados Unidos Mexicanos, \u00faltima reforma DOF 07-10-2026",
         "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
-        "sha256": "ca63a23a4b7444ebdbdad93759fbf46bd14c069e587c5878decf89fc9c12ca8e"
+        "sha256": "cefb525ae8dfc97a7da40597d2ee918fe254d4bfce88301ff3c9959ced9e6e65"
       },
       "CPSHCP": {
         "corto": "SHCP, portal de la Cuenta P\u00fablica",
@@ -31088,19 +31116,19 @@ window.AUDIT_DB = {
       "falta": "Los señalamientos de prensa sobre más de $800 millones de pesos en adjudicaciones directas de medicinas atribuidas a redes de particulares siguen pendientes: ningún documento oficial abierto liga esos nombres con una razón social contratista, y los contratos de 2023 y 2024 están en el CompraNet histórico, que no responde.",
       "pendiente_id": "red-salud-ventiladores-y-medicinas-4",
       "cifras": {
-        "imss_contratos": 31666,
-        "imss_monto_mdp": 381890.6,
-        "imss_adj_directa_contratos": 17264,
-        "imss_adj_directa_mdp": 202923.6,
+        "imss_contratos": 31954,
+        "imss_monto_mdp": 384448.2,
+        "imss_adj_directa_contratos": 17455,
+        "imss_adj_directa_mdp": 203966.6,
         "imss_adj_directa_pct": 53.1,
-        "imss_competencia_mdp": 178966.9,
-        "imss_bienestar_contratos": 14835,
-        "imss_bienestar_monto_mdp": 227202.8,
-        "imss_bienestar_adj_directa_mdp": 115151.5,
-        "imss_bienestar_adj_directa_pct": 50.7,
-        "birmex_contratos": 198,
-        "birmex_monto_mdp": 35853.1,
-        "birmex_adj_directa_mdp": 35349.9,
+        "imss_competencia_mdp": 180481.5,
+        "imss_bienestar_contratos": 14858,
+        "imss_bienestar_monto_mdp": 227682.3,
+        "imss_bienestar_adj_directa_mdp": 115630.2,
+        "imss_bienestar_adj_directa_pct": 50.8,
+        "birmex_contratos": 199,
+        "birmex_monto_mdp": 35853.5,
+        "birmex_adj_directa_mdp": 35350.2,
         "birmex_adj_directa_pct": 98.6,
         "ventiladores_2020_inhabilitacion_meses": 27
       },
@@ -31120,14 +31148,14 @@ window.AUDIT_DB = {
         {
           "nombre": "BOEHRINGER INGELHEIM MEXICO SA DE CV",
           "rfc": "BIM0711148Q0",
-          "contratos": 10,
-          "monto_mdp": 8318.7
+          "contratos": 11,
+          "monto_mdp": 8814.7
         },
         {
           "nombre": "INFRA SA DE CV",
           "rfc": "INF891031LT4",
-          "contratos": 128,
-          "monto_mdp": 7279.2
+          "contratos": 133,
+          "monto_mdp": 7323.4
         },
         {
           "nombre": "BAYER DE MEXICO SA DE CV",
@@ -31160,9 +31188,9 @@ window.AUDIT_DB = {
     "deuda-congreso-2027": {
       "ente": "Congreso de la Unión (Cámara de Diputados y Senado) y Secretaría de Hacienda y Crédito Público",
       "quien": "La Secretaría de Hacienda propone la Iniciativa de Ley de Ingresos; la Cámara de Diputados (15-10-2026) y el Senado de la República autorizan los ingresos y el techo de endeudamiento (art. 73, fracc. VIII constitucional); las agencias calificadoras evalúan el riesgo soberano.",
-      "que": "El 15 de octubre de 2026 el pleno de la Cámara de Diputados aprobó la Ley de Ingresos de la Federación para 2027 (331 votos a favor y 118 en contra en lo general), y el 21 de octubre la avalaron las comisiones unidas del Senado (18 a 11). La iniciativa de Hacienda estima ingresos totales por $10,636,488.1 millones de pesos (art. 1o.) y pide un techo de endeudamiento neto interno del Gobierno Federal hasta por $1,700,000.0 millones ($1.7 billones, art. 2o.). Además, aprobó una reserva al artículo vigésimo primero transitorio que quita el tope de $300 millones de pesos de ingresos anuales y permite a grandes contribuyentes obtener la reducción de multas, recargos y gastos de ejecución si pagan completo su adeudo principal. Ese mismo 15 de octubre, en su Comunicado 82, Hacienda informó que HR Ratings bajó la calificación soberana de largo plazo de México de BBB+ a BBB, con perspectiva estable.",
-      "falta": "Falta la votación del pleno del Senado y la publicación del decreto en el Diario Oficial de la Federación para confirmar el texto definitivo del transitorio vigésimo primero. Además, el reporte de HR Ratings (donde constan sus razones y sus proyecciones de déficit de 4.6 % del PIB y deuda de 61.2 % en 2030) sigue pendiente porque su portal no abrió desde la plataforma.",
-      "pendiente_id": "red-hr-ratings-baja-mexico-bbb-3",
+      "que": "El 15 de octubre de 2026 el pleno de la Cámara de Diputados aprobó la Ley de Ingresos de la Federación para 2027 (331 votos a favor y 118 en contra en lo general), y el 28 de octubre la aprobó el pleno del Senado (75 a 34 en lo general y 73 a 33 en lo particular). La ley estima ingresos totales por $10,636,488.1 millones de pesos (art. 1o.) y autoriza un techo de endeudamiento neto interno del Gobierno Federal hasta por $1,700,000.0 millones ($1.7 billones, art. 2o.). Además, aprobó una reserva al artículo vigésimo primero transitorio que quita el tope de $300 millones de pesos de ingresos anuales y permite a grandes contribuyentes obtener la reducción de multas, recargos y gastos de ejecución si pagan completo su adeudo principal. Ese mismo 15 de octubre, HR Ratings bajó la calificación soberana de largo plazo de México de HR BBB+ (G) a HR BBB (G), con perspectiva estable, por deterioro en los balances fiscales, bajo crecimiento (1.30 % real para 2026 y 1.50 % anual para 2027-2033) y rigidez del gasto, estimando un déficit de los RFSP de 4.61 % del PIB en 2026 y un Saldo Histórico de los RFSP de 61.17 % del PIB en 2030.",
+      "falta": "Falta la publicación del decreto de la Ley de Ingresos de la Federación 2027 en el Diario Oficial de la Federación y el texto íntegro de las reservas votadas en la Cámara de Diputados sobre deducciones y estímulos fiscales.",
+      "pendiente_id": "red-senado-ley-de-ingresos-2027-6",
       "cifras": {
         "ingresos_totales_2027_mdp": 10636488.1,
         "ingresos_presupuestarios_2027_mdp": 9156528.9,
@@ -31172,7 +31200,9 @@ window.AUDIT_DB = {
         "financiamiento_2027_mdp": 1479959.2,
         "votos_diputados_favor": 331,
         "votos_diputados_contra": 118,
-        "ajuste_fiscal_2025_pp_pib": 1.3
+        "ajuste_fiscal_2025_pp_pib": 1.3,
+        "hr_deficit_rfsp_2026_pct_pib": 4.61,
+        "hr_shrfsp_2030_pct_pib": 61.17
       },
       "fuentes": [
         {
@@ -31186,6 +31216,10 @@ window.AUDIT_DB = {
         {
           "doc": "Canal del Congreso: Comisiones del Senado aprueban Ley de Ingresos 2027 (21-10-2026)",
           "url": "https://www.canaldelcongreso.gob.mx/noticias/10329"
+        },
+        {
+          "doc": "HR Ratings: Comunicado de calificación soberana de México, HR BBB+ (G) a HR BBB (G) con Perspectiva Estable (15-10-2026)",
+          "url": "https://www.hrratings.com/pdf/Comunicado_Soberana_MAxico_2026___Comunicado.pdf"
         },
         {
           "doc": "SHCP, Comunicado No. 82: México mantiene el grado de inversión con las ocho agencias calificadoras; HR Ratings ajusta de BBB+ a BBB (15-10-2026)",

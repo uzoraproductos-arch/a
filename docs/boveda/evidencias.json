@@ -94,9 +94,9 @@
     "cifra:limantour-superavit-y-peso-oro",
     "fuente:limantour-superavit-y-peso-oro"
    ],
-   "consultado": "2026-11-04",
+   "consultado": "2026-11-09",
    "estado": "no abrió",
-   "error": "[Errno -2] Name or service not known"
+   "error": "[Errno 11001] getaddrinfo failed"
   },
   "https://centralelectoral.ine.mx/2023/03/31/lorenzo-cordova-adriana-favela-ciro-murayama-y-jose-roberto-ruiz-se-despiden-de-la-herradura-de-la-democracia/": {
    "primera_vez": "2026-10-28",
@@ -112,6 +112,20 @@
    "tipo": "text/html",
    "http": 200,
    "copiado": "2026-11-02"
+  },
+  "https://centralelectoral.ine.mx/2025/06/02/porcentaje-de-participacion-ciudadana-en-la-jornada-electoral-del-peepjf-2024-2025-esta-entre-el-12-57-y-el-13-32/": {
+   "primera_vez": "2026-11-09",
+   "historial": [],
+   "usos": [
+    "judicial:eleccion2025_participacion"
+   ],
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "333dd3c1a47bc6574bd309a0fa524279d5da3c04f5c06c4a7f723bbfb889c254",
+   "bytes": 197692,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://centralelectoral.ine.mx/2026/10/22/version-estenografica-de-la-sesion-extraordinaria-del-consejo-general-del-ine-22-de-octubre-de-2026": {
    "primera_vez": "2026-10-27",
@@ -132,7 +146,9 @@
    "historial": [],
    "usos": [
     "auditoria:ine-contratos",
+    "cotejo:ine-oic-auditorias-consejerias:0",
     "cotejo:taddei-renuncia-ine-contratos:1",
+    "fuente:ine-contratos-desde-cordova",
     "fuente:taddei-renuncia-ine-contratos"
    ],
    "consultado": "2026-10-27",
@@ -227,7 +243,8 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "auditoria:medicamentos-imss"
+    "auditoria:medicamentos-imss",
+    "fuente:huawei-gobierno-codigo-magenta"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -366,6 +383,20 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5762925&fecha=15/07/2025": {
+   "primera_vez": "2026-11-09",
+   "historial": [],
+   "usos": [
+    "judicial:fideicomisos_scjn"
+   ],
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "7f4cd1bc4ecee2c408d2bbe2798d64f1f8012386ed0794e0dc86b5f6423ff122",
+   "bytes": 73985,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-09"
+  },
   "https://dof.gob.mx/nota_detalle.php?codigo=5768224&fecha=19/09/2025": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -384,7 +415,8 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "biblioteca:ref-dof-distribucion-2026"
+    "biblioteca:ref-dof-distribucion-2026",
+    "cotejo:jalisco-gasto-federal-pef-2027:1"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -468,15 +500,44 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "biblioteca:ref-ine-cg469-2026"
+    "biblioteca:ref-ine-cg469-2026",
+    "legislativo:INE469"
    ],
-   "consultado": "2026-10-27",
+   "consultado": "2026-11-09",
    "estado": "copiado",
-   "sha256": "defd674b7bf8c9951507db0fb646c43c98169efd2606d9a93a66f79eac1d3556",
-   "bytes": 160236,
+   "sha256": "1c0e7ba5e0d2c635506b7027e313345895655446ec8177a492aa194450e10628",
+   "bytes": 157775,
    "tipo": "text/html",
    "http": 200,
-   "copiado": "2026-10-27"
+   "copiado": "2026-11-09"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5797204&fecha=26/08/2026": {
+   "primera_vez": "2026-11-09",
+   "historial": [],
+   "usos": [
+    "legislativo:INE478"
+   ],
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "278d811a169c963497d20a645641ac07e2901b30f6f68f252afbeba95d732644",
+   "bytes": 190143,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-09"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5797731&fecha=02/09/2026": {
+   "primera_vez": "2026-11-09",
+   "historial": [],
+   "usos": [
+    "legislativo:INE480"
+   ],
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "7537dc6eb86fbe84ec517f88684df621842d27d5550d78c22517ff121da4efa7",
+   "bytes": 370434,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://dof.gob.mx/nota_detalle.php?codigo=5801000&fecha=13/10/2026": {
    "primera_vez": "2026-10-27",
@@ -526,9 +587,13 @@
    "usos": [
     "biblioteca:ref-fgr-femcc"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "22667aa641ecfa86efda09bcd3cdfbae6cd625e818329407028fc0c431a4a860",
+   "bytes": 33761,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://gaceta.diputados.gob.mx/Gaceta/57/1999/sep/19990923-I.html": {
    "primera_vez": "2026-10-27",
@@ -549,7 +614,9 @@
    "historial": [],
    "usos": [
     "columna:hr-ratings-baja-mexico-bbb:cotejo:5",
-    "columna:hr-ratings-baja-mexico-bbb:fuentes"
+    "columna:hr-ratings-baja-mexico-bbb:fuentes",
+    "cotejo:hr-ratings-baja-mexico-bbb:4",
+    "fuente:hr-ratings-baja-mexico-bbb"
    ],
    "consultado": "2026-11-02",
    "estado": "copiado",
@@ -607,7 +674,8 @@
    "historial": [],
    "usos": [
     "auditoria:deuda-congreso-2027",
-    "biblioteca:ref-cgpe2027"
+    "biblioteca:ref-cgpe2027",
+    "cotejo:agua-guadalajara-14500-federal:3"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -621,7 +689,8 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "biblioteca:ref-lfd2027"
+    "biblioteca:ref-lfd2027",
+    "fuente:lfd-2027-dnr-defensa-tren-maya-aifa"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -660,6 +729,20 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://iecoah.org.mx/archivos/procesos-electorales-locales/2026-2027/acuerdos-ine/1.%20INE.CG480.2026%20Acuerdo%20PyCIPEL%202026-2027.pdf": {
+   "primera_vez": "2026-11-09",
+   "historial": [],
+   "usos": [
+    "legislativo:INE480_pdf"
+   ],
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "19c2d2a768f75e8ed21c2751fa4287859f42c4aae10167fbb5c91560932c0401",
+   "bytes": 721695,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
+  },
   "https://imco.org.mx/finanzas-publicas/": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -673,6 +756,20 @@
    "tipo": "text/html",
    "http": 200,
    "copiado": "2026-11-02"
+  },
+  "https://ine.mx/voto-y-elecciones/elecciones-2027/": {
+   "primera_vez": "2026-11-09",
+   "historial": [],
+   "usos": [
+    "legislativo:elecciones"
+   ],
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "97e5f448ba7d937e35e412ea9595034099a09fe9ade03c15c4267ae985699c55",
+   "bytes": 329436,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://ine.mx/wp-content/uploads/2025/02/lp-ine-001-2025-fallo.pdf": {
    "primera_vez": "2026-10-27",
@@ -706,7 +803,8 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "auditoria:inversion-megaobras"
+    "auditoria:inversion-megaobras",
+    "fuente:asf-segunda-entrega-cp2025"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -798,7 +896,7 @@
    "usos": [
     "biblioteca:ref-conapo-proyecciones"
    ],
-   "consultado": "2026-11-04",
+   "consultado": "2026-11-09",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -808,9 +906,23 @@
    "usos": [
     "biblioteca:ref-sat-padron-rfc"
    ],
-   "consultado": "2026-11-04",
+   "consultado": "2026-11-09",
    "estado": "no abrió",
    "error": "Forbidden"
+  },
+  "https://sdmx.oecd.org/public/rest/data/OECD.CTP.TPS,DSD_REV_COMP_GLOBAL@DF_RSGLOBAL,/MEX+OECD_REP..S13+S1313.T_4100..PT_B1GQ.A?startPeriod=2018&dimensionAtObservation=AllDimensions&format=csvfilewithlabels": {
+   "primera_vez": "2026-11-09",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-ocde-predial"
+   ],
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "0b40fb7b07b784388ac2bcc753300d984e2f789f048e417daf5cf0f8a6a03664",
+   "bytes": 9159,
+   "tipo": "text/csv",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://sidof.segob.gob.mx/notas/5801708": {
    "primera_vez": "2026-10-28",
@@ -831,7 +943,9 @@
   "https://sigas.isaf.gob.mx/api/File/Informe/22455": {
    "primera_vez": "2026-10-28",
    "historial": [],
-   "usos": [],
+   "usos": [
+    "fuente:isssteson-oxigeno-pensiones-fallecidos"
+   ],
    "consultado": "2026-10-28",
    "estado": "copiado",
    "sha256": "08f505d9f345ae33de81699e3f8abb71d3422be4d84d6a81ff3044e8778bf45d",
@@ -843,7 +957,15 @@
   "https://sigas.isaf.gob.mx/api/File/Informe/24290": {
    "primera_vez": "2026-10-28",
    "historial": [],
-   "usos": [],
+   "usos": [
+    "cifra:isssteson-oxigeno-pensiones-fallecidos",
+    "cotejo:isssteson-oxigeno-pensiones-fallecidos:0",
+    "cotejo:isssteson-oxigeno-pensiones-fallecidos:1",
+    "cotejo:isssteson-oxigeno-pensiones-fallecidos:2",
+    "cotejo:isssteson-oxigeno-pensiones-fallecidos:3",
+    "cotejo:isssteson-oxigeno-pensiones-fallecidos:5",
+    "fuente:isssteson-oxigeno-pensiones-fallecidos"
+   ],
    "consultado": "2026-10-28",
    "estado": "copiado",
    "sha256": "a74aa480028a17f3e408df3c11465e596de99b55645904717ab81f83d03c9e22",
@@ -859,9 +981,13 @@
     "cifra:garcia-luna-y-garcia-harfuch",
     "fuente:garcia-luna-y-garcia-harfuch"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "416956b2eedcab55e39e1a7bacae12ce66170e785625cd6d2d8f8506e69665a3",
+   "bytes": 60954,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://stastdgv2portfgr032.blob.core.windows.net/femdh/FEADLE/Informes/ReportesMensuales2026/ESTADISTICAS%20Sep%2026.pdf": {
    "primera_vez": "2026-11-02",
@@ -1161,6 +1287,7 @@
    "primera_vez": "2026-10-28",
    "historial": [],
    "usos": [
+    "auditoria:seguro-popular",
     "cifra:seguro-popular-51-millones",
     "cotejo:seguro-popular-51-millones:0",
     "cotejo:seguro-popular-51-millones:4",
@@ -1390,6 +1517,20 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_0429_a.pdf": {
+   "primera_vez": "2026-11-09",
+   "historial": [],
+   "usos": [
+    "tren_maya_2024:asf_2024_0429"
+   ],
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "494d0793c968a83ca2311a5e9f05546b4a37e132417800163cb12847c005f7d0",
+   "bytes": 364806,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
+  },
   "https://www.asf.gob.mx/Trans/Informes/IR2024c/Documentos/Auditorias/2024_1084_a.pdf": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -1466,7 +1607,8 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "biblioteca:ref-asf-mdb2025a"
+    "biblioteca:ref-asf-mdb2025a",
+    "fuente:asf-segunda-entrega-cp2025"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -1766,7 +1908,11 @@
    "historial": [],
    "usos": [
     "cifra:senado-ley-de-ingresos-2027",
+    "cotejo:lfd-2027-dnr-defensa-tren-maya-aifa:0",
+    "cotejo:lfd-2027-dnr-defensa-tren-maya-aifa:3",
+    "cotejo:lfd-2027-dnr-defensa-tren-maya-aifa:5",
     "cotejo:senado-ley-de-ingresos-2027:4",
+    "fuente:lfd-2027-dnr-defensa-tren-maya-aifa",
     "fuente:senado-ley-de-ingresos-2027"
    ],
    "consultado": "2026-10-29",
@@ -1785,7 +1931,8 @@
     "cifra:lif-2027-deuda-y-multas",
     "cotejo:lif-2027-deuda-y-multas:0",
     "cotejo:lif-2027-deuda-y-multas:1",
-    "fuente:lif-2027-deuda-y-multas"
+    "fuente:lif-2027-deuda-y-multas",
+    "fuente:senado-ley-de-ingresos-2027"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -1881,9 +2028,9 @@
    "usos": [
     "biblioteca:ref-oaj-trimestre2026"
    ],
-   "consultado": "2026-11-04",
+   "consultado": "2026-11-09",
    "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1010)"
   },
   "https://www.comunicacionpef.hacienda.gob.mx/work/models/COMUNICACION_DEL_PEF/Documentos/2026/distribucion_gasto_UR/r03_apurog.pdf": {
    "primera_vez": "2026-10-27",
@@ -1891,9 +2038,13 @@
    "usos": [
     "biblioteca:ref-shcp-ramo03-ur"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "67e210034dee0e3a304b122d088a5da286e6c5139c2b8404de86e7e8d0a2ee7a",
+   "bytes": 19161,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.courtlistener.com/docket/16559363/united-states-v-garcia-luna/": {
    "primera_vez": "2026-10-27",
@@ -1929,9 +2080,13 @@
    "usos": [
     "biblioteca:ref-shcp-cuentapublica"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "b4d42b2c0cb0a186297559e4b529f6fe26ea114746cafd655c47520e4765e588",
+   "bytes": 10685,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.cuentapublica.hacienda.gob.mx/": {
    "primera_vez": "2026-10-27",
@@ -1939,9 +2094,13 @@
    "usos": [
     "auditoria:inversion-megaobras"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "b4d42b2c0cb0a186297559e4b529f6fe26ea114746cafd655c47520e4765e588",
+   "bytes": 10685,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/I/I50.06.GPF.pdf": {
    "primera_vez": "2026-11-02",
@@ -1997,9 +2156,13 @@
    "usos": [
     "biblioteca:ref-shcp-cp2024-ea-gf"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "772ba2727defe2d4d5b61d41e8317fbbd036b8cbc13aa24973ecf260b9701ce4",
+   "bytes": 72819,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/II/MAT_Print.I50.02.CON_EFE_GF.pdf": {
    "primera_vez": "2026-11-02",
@@ -2071,9 +2234,13 @@
    "usos": [
     "biblioteca:ref-shcp-cp2024-birmex"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "085ef8bd4e9339914130cc9ff34f23ec5a899883d645d08f28ee3f76cfc83350",
+   "bytes": 17920,
+   "tipo": "application/vnd.ms-excel",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/7H0M.02.01.xls": {
    "primera_vez": "2026-10-27",
@@ -2095,9 +2262,98 @@
     "biblioteca:ref-shcp-cp2024-aifa",
     "fuente:lfd-2027-dnr-defensa-tren-maya-aifa"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "f6c7ac5f2a686476a750af0b8f4916bb2fd9f7cb6298ff4b03d3d0931c391a41",
+   "bytes": 17920,
+   "tipo": "application/vnd.ms-excel",
+   "http": 200,
+   "copiado": "2026-11-09"
+  },
+  "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/MAT_Print.7H0M.01.INTRO.pdf": {
+   "primera_vez": "2026-11-09",
+   "historial": [],
+   "usos": [
+    "tren_maya_2024:intro"
+   ],
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "46e5a8d8e7ca6e114dca7acc75f2513bfd5a5896bd2236d1d49a3ba81bc57749",
+   "bytes": 187335,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
+  },
+  "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/MAT_Print.7H0M.02.01.pdf": {
+   "primera_vez": "2026-11-09",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-cp2024-tomo7-tren-maya",
+    "tren_maya_2024:estado_actividades"
+   ],
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "e873047c3ee706f8726a2c0ec9f7175857fe9e5913d4fff70bf47e7e20387b67",
+   "bytes": 72601,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
+  },
+  "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/MAT_Print.7H0M.02.02.pdf": {
+   "primera_vez": "2026-11-09",
+   "historial": [],
+   "usos": [
+    "tren_maya_2024:estado_situacion_financiera"
+   ],
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "e31824f3831eb04bc4984f73313e652d80bc437df0dc7ddbb1e14e4f7f58382b",
+   "bytes": 72473,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
+  },
+  "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/MAT_Print.7H0M.02.03.pdf": {
+   "primera_vez": "2026-11-09",
+   "historial": [],
+   "usos": [
+    "tren_maya_2024:estado_cambios"
+   ],
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "b2777912c9d0032e3a24c926e66e820312ee56e5c977f6854a104e90e1075d08",
+   "bytes": 72175,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
+  },
+  "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/MAT_Print.7H0M.02.04.pdf": {
+   "primera_vez": "2026-11-09",
+   "historial": [],
+   "usos": [
+    "tren_maya_2024:estado_variacion"
+   ],
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "407d0b370121c6e8b8469a2b76a738ceb47912ba011a6d22d86e289ad7be93bf",
+   "bytes": 71422,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
+  },
+  "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VII/MAT_Print.7H0M.02.NEF.pdf": {
+   "primera_vez": "2026-11-09",
+   "historial": [],
+   "usos": [
+    "tren_maya_2024:notas_estados_financieros"
+   ],
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "e64657cefa9ce7ddb6f8329bf4e44839f59fd9ffbed457dbd35b4b60d5d489e2",
+   "bytes": 714597,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2024/tomo/VIII/52T9M.05.DAR.pdf": {
    "primera_vez": "2026-10-27",
@@ -2105,9 +2361,13 @@
    "usos": [
     "biblioteca:ref-pti-cp2024"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "b326741b89e7ad809fe17df118e400a20e70d1e79f49ea7b9350d1218a38a90d",
+   "bytes": 14090651,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.cuentapublica.hacienda.gob.mx/work/models/CP/2025/tomo/VIII/52TYY.05.DAR.pdf": {
    "primera_vez": "2026-10-27",
@@ -2115,9 +2375,13 @@
    "usos": [
     "biblioteca:ref-pemex-cp2025"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "0a6fe9e89e0d94714ea441134ac3c1ee7446c4c4713baaf9e62d8ebd554b86b2",
+   "bytes": 4736462,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.datos.gob.mx/dataset/presidentas_presidentes_municipales": {
    "primera_vez": "2026-10-27",
@@ -2125,7 +2389,7 @@
    "usos": [
     "biblioteca:ref-inafed-presidencias"
    ],
-   "consultado": "2026-11-04",
+   "consultado": "2026-11-09",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -2274,7 +2538,9 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "fuente:garcia-luna-testigos-y-la-ley-mexicana"
+    "biblioteca:ref-cnpp",
+    "fuente:garcia-luna-testigos-y-la-ley-mexicana",
+    "fuente:portacelis-permiso-diesel-sener"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -2291,7 +2557,11 @@
     "biblioteca:ref-cpeum",
     "biblioteca:ref-cpeum-art127",
     "biblioteca:ref-cpeum-control-constitucional",
-    "fuente:partida-secreta"
+    "cotejo:portacelis-permiso-diesel-sener:0",
+    "fuente:asf-nuevo-leon-triangulacion-cp2025",
+    "fuente:ine-oic-auditorias-consejerias",
+    "fuente:partida-secreta",
+    "fuente:portacelis-permiso-diesel-sener"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -2421,7 +2691,9 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "biblioteca:ref-lfrcf"
+    "biblioteca:ref-lfrcf",
+    "fuente:asf-nuevo-leon-triangulacion-cp2025",
+    "fuente:asf-segunda-entrega-cp2025"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -2463,7 +2735,9 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "biblioteca:ref-lgcg"
+    "biblioteca:ref-lgcg",
+    "cotejo:carnaval-ensenada-2026-imcudhe:1",
+    "fuente:carnaval-ensenada-2026-imcudhe"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -2491,7 +2765,9 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "biblioteca:ref-lgipe"
+    "biblioteca:ref-lgipe",
+    "cotejo:ine-oic-auditorias-consejerias:2",
+    "fuente:ine-oic-auditorias-consejerias"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -2547,7 +2823,10 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "biblioteca:ref-lgs"
+    "auditoria:seguro-popular",
+    "biblioteca:ref-lgs",
+    "cotejo:seguro-popular-51-millones:3",
+    "fuente:seguro-popular-51-millones"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -2697,9 +2976,13 @@
     "auditoria:ine-contratos",
     "biblioteca:ref-pef2026",
     "cifra:fobaproa-ipab",
+    "cifra:imss-modalidad-40-gestores",
     "cifra:origen-ramo-33",
+    "cifra:pemex-3t-2026-perdida-neta",
     "fuente:fobaproa-ipab",
-    "fuente:origen-ramo-33"
+    "fuente:imss-modalidad-40-gestores",
+    "fuente:origen-ramo-33",
+    "fuente:pemex-3t-2026-perdida-neta"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -2940,9 +3223,13 @@
    "usos": [
     "biblioteca:ref-shcp-alertas"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "dcadcd856360d2503f5d2a794c19a7373b2b6ac1d1b5098a86bd8f598957f813",
+   "bytes": 19360,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024": {
    "primera_vez": "2026-10-27",
@@ -2950,9 +3237,9 @@
    "usos": [
     "biblioteca:ref-reforma-judicial"
    ],
-   "consultado": "2026-11-04",
+   "consultado": "2026-11-09",
    "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.dof.gob.mx'. (_ssl.c:1011)"
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'www.dof.gob.mx'. (_ssl.c:1010)"
   },
   "https://www.elfinanciero.com.mx/nacional/2026/10/27/claudia-sheinbaum-mananera-temas-hoy-27-de-octubre-de-2026-en-vivo/": {
    "primera_vez": "2026-10-28",
@@ -3040,9 +3327,13 @@
     "auditoria:farac-carretero",
     "biblioteca:ref-shcp-informe-4t2025"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "51a632d59c855ae50c994eafdc40a645fa91237c36faad27108fefd07e39e732",
+   "bytes": 1017764,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.gob.mx/agn/articulos/agnrecuerda-el-150-aniversario-del-triunfo-de-la-republica-liberal": {
    "primera_vez": "2026-10-27",
@@ -3310,7 +3601,7 @@
    "usos": [
     "auditoria:inversion-megaobras"
    ],
-   "consultado": "2026-11-04",
+   "consultado": "2026-11-09",
    "estado": "no abrió",
    "error": "Not Found"
   },
@@ -3378,11 +3669,14 @@
    "usos": [
     "auditoria:guaymas-gas",
     "cifra:guaymas-comodato-amigo-gnl",
+    "cifra:jalisco-gasto-federal-pef-2027",
     "cotejo:guaymas-comodato-amigo-gnl:1",
     "cotejo:guaymas-comodato-amigo-gnl:2",
     "cotejo:guaymas-comodato-amigo-gnl:3",
     "cotejo:guaymas-comodato-amigo-gnl:4",
-    "fuente:guaymas-comodato-amigo-gnl"
+    "fuente:agua-guadalajara-14500-federal",
+    "fuente:guaymas-comodato-amigo-gnl",
+    "fuente:jalisco-gasto-federal-pef-2027"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -3442,7 +3736,8 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "biblioteca:ref-sat-69b"
+    "biblioteca:ref-sat-69b",
+    "fuente:portacelis-permiso-diesel-sener"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -3605,7 +3900,9 @@
    "historial": [],
    "usos": [
     "columna:huawei-gobierno-codigo-magenta:cotejo:4",
-    "columna:huawei-gobierno-codigo-magenta:fuentes"
+    "columna:huawei-gobierno-codigo-magenta:fuentes",
+    "cotejo:huawei-gobierno-codigo-magenta:3",
+    "fuente:huawei-gobierno-codigo-magenta"
    ],
    "consultado": "2026-11-02",
    "estado": "copiado",
@@ -3614,6 +3911,25 @@
    "tipo": "text/html",
    "http": 200,
    "copiado": "2026-11-02"
+  },
+  "https://www.hrratings.com/pdf/Comunicado_Soberana_MAxico_2026___Comunicado.pdf": {
+   "primera_vez": "2026-11-09",
+   "historial": [],
+   "usos": [
+    "auditoria:deuda-congreso-2027",
+    "cifra:hr-ratings-baja-mexico-bbb",
+    "cotejo:hr-ratings-baja-mexico-bbb:0",
+    "cotejo:hr-ratings-baja-mexico-bbb:1",
+    "cotejo:hr-ratings-baja-mexico-bbb:2",
+    "fuente:hr-ratings-baja-mexico-bbb"
+   ],
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "8f4030afa2215f99e2415b7d936931a0873e3866322306e6e3181a2ddd64657c",
+   "bytes": 547675,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.imagenradio.com.mx/finanzas/exportacion-servidores-podria-superar-autos-mexico-alcanza-82-mil-900-mdd": {
    "primera_vez": "2026-11-02",
@@ -3675,6 +3991,7 @@
    "primera_vez": "2026-10-28",
    "historial": [],
    "usos": [
+    "auditoria:seguro-popular",
     "fuente:seguro-popular-51-millones"
    ],
    "consultado": "2026-10-28",
@@ -3775,7 +4092,10 @@
    "primera_vez": "2026-10-27",
    "historial": [],
    "usos": [
-    "biblioteca:ref-inegi-pib-2024"
+    "biblioteca:ref-inegi-pib-2024",
+    "cifra:jalisco-gasto-federal-pef-2027",
+    "cotejo:jalisco-gasto-federal-pef-2027:0",
+    "fuente:jalisco-gasto-federal-pef-2027"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -3803,6 +4123,7 @@
    "primera_vez": "2026-10-28",
    "historial": [],
    "usos": [
+    "auditoria:seguro-popular",
     "cifra:seguro-popular-51-millones",
     "cotejo:seguro-popular-51-millones:2",
     "cotejo:seguro-popular-51-millones:5",
@@ -3849,7 +4170,8 @@
    "historial": [],
    "usos": [
     "biblioteca:ref-inegi-efipem",
-    "biblioteca:ref-inegi-efipem-estatal"
+    "biblioteca:ref-inegi-efipem-estatal",
+    "fuente:carnaval-ensenada-2026-imcudhe"
    ],
    "consultado": "2026-10-27",
    "estado": "copiado",
@@ -4065,7 +4387,7 @@
    "usos": [
     "fuente:imss-modalidad-40-gestores"
    ],
-   "consultado": "2026-11-04",
+   "consultado": "2026-11-09",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -4151,9 +4473,13 @@
     "cifra:gordillo-la-sentencia-reservada",
     "fuente:gordillo-la-sentencia-reservada"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "timed out"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "a7bcaca8556c2750e070af7739d48ea8f6122a2a82cb8eca6e0c9057afa0ad6f",
+   "bytes": 96184,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.oaj.gob.mx/documentos/notasInformativas/docsNotasInformativas/2014/notaInformativa55.pdf": {
    "primera_vez": "2026-10-27",
@@ -4161,9 +4487,13 @@
    "usos": [
     "fuente:gordillo-la-sentencia-reservada"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "timed out"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "b22171e06e5d59bc479fb2fcf5633118411c398cda76986c7bf4551a7582b24c",
+   "bytes": 103583,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.pef.hacienda.gob.mx/work/models/P3f26115/PEF2026/y6k1r4r1/docs/03/r03_aae.pdf": {
    "primera_vez": "2026-10-27",
@@ -4171,9 +4501,13 @@
    "usos": [
     "biblioteca:ref-pef-ramo03"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "0c5f10de300c4734f10854acb842e46f95bb2ad444072f2c3a375b75010b984b",
+   "bytes": 3289,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.pemex.com/saladeprensa/boletines_nacionales/Paginas/2026_69_nacional.aspx": {
    "primera_vez": "2026-11-02",
@@ -4212,9 +4546,13 @@
     "biblioteca:ref-pnt",
     "biblioteca:ref-pnt-asesores-scjn"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "Forbidden"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "e94260196a177b241af0f6e70821dcd4e6fc55c3245ae6a6bed06da6519b5a6b",
+   "bytes": 12144,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.sat.gob.mx/aplicacion/operacion/50409/denuncias-sat": {
    "primera_vez": "2026-10-27",
@@ -4222,7 +4560,7 @@
    "usos": [
     "biblioteca:ref-sat-denuncias"
    ],
-   "consultado": "2026-11-04",
+   "consultado": "2026-11-09",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -4331,7 +4669,7 @@
    "usos": [
     "biblioteca:ref-presidencia-2ig"
    ],
-   "consultado": "2026-11-04",
+   "consultado": "2026-11-09",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -4355,9 +4693,13 @@
    "usos": [
     "biblioteca:ref-transparencia-presupuestaria"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "3281031d89aa0589f89bb8a124855bc64e9aaf4231101a87d22ee208c281ba86",
+   "bytes": 68013,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.transparenciapresupuestaria.gob.mx/Datos-Abiertos": {
    "primera_vez": "2026-10-27",
@@ -4365,9 +4707,13 @@
    "usos": [
     "auditoria:fobaproa"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "1c6311e84862d56da428ff2832eb70b26090919ae0f93c6e07c0bbeded24cfd1",
+   "bytes": 2451,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.transparenciapresupuestaria.gob.mx/Obra-Publica-Abierta": {
    "primera_vez": "2026-10-27",
@@ -4376,9 +4722,13 @@
     "auditoria:inversion-megaobras",
     "biblioteca:ref-shcp-obra-publica-abierta"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "aacd85633145f0abf6f8c8f078028a148f8d1e32266ceb006bbb752d0de6905d",
+   "bytes": 27704,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/BD_Cuenta_Publica/CSV/cuenta_publica_2024_gf_ecd_epe.csv": {
    "primera_vez": "2026-10-27",
@@ -4386,9 +4736,13 @@
    "usos": [
     "biblioteca:ref-shcp-cp2024-datos"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "94cd87dfb1f0dbcb27886d5792046c9c6d96eeab2878f898c8a9813ef1fdf6de",
+   "bytes": 104728959,
+   "tipo": "text/csv",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/BD_Cuenta_Publica/CSV/cuenta_publica_2025_gf_ecd_epe.csv": {
    "primera_vez": "2026-10-27",
@@ -4408,9 +4762,13 @@
    "usos": [
     "biblioteca:ref-shcp-pef2026-datos"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "6dec5f3ad52126c3257a74e7e177eada0c591ed8109d861becf767e959c86c03",
+   "bytes": 76940800,
+   "tipo": "text/csv",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/CSV/pef_ac01_avance_2t_2026.csv": {
    "primera_vez": "2026-10-27",
@@ -4418,9 +4776,13 @@
    "usos": [
     "biblioteca:ref-shcp-avance-2t2026"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "faa3a3de57981aa117828d2569aa5c8144db11e3f8d290e68d97aaf73467c511",
+   "bytes": 113348326,
+   "tipo": "text/csv",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Bases_de_datos_presupuesto/XLSX/PPEF_2027.xlsx": {
    "primera_vez": "2026-10-27",
@@ -4428,9 +4790,13 @@
    "usos": [
     "biblioteca:ref-shcp-ppef2027-datos"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "8cb9cd83fc2e2b9f2ff0beb46fe33337ee266b02c813d0d6eeccad14842bc327",
+   "bytes": 18582847,
+   "tipo": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.transparenciapresupuestaria.gob.mx/work/models/PTP/DatosAbiertos/Entidades_Federativas/2024/ejercicio_del_gasto_2024.zip": {
    "primera_vez": "2026-10-27",
@@ -4438,9 +4804,13 @@
    "usos": [
     "biblioteca:ref-shcp-srft-2024"
    ],
-   "consultado": "2026-11-04",
-   "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1011)"
+   "consultado": "2026-11-09",
+   "estado": "copiado",
+   "sha256": "4fedbafdb67afde3c78a6d30c9e0da84e17b73f86905c5103165ec9992f7ce43",
+   "bytes": 3398238,
+   "tipo": "application/zip",
+   "http": 200,
+   "copiado": "2026-11-09"
   },
   "https://www.uscourts.gov/sites/default/files/2025-02/federal-rules-of-evidence-dec-1-2024_0.pdf": {
    "primera_vez": "2026-10-27",

@@ -30,7 +30,7 @@
   let lista = null, promesa = null;
 
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
-  const chip = e => '<span class="est-chip est-' + e + '">' + e + '</span>';
+  const chip = e => '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'auditada' : e) + '</span>';
   const pesos = v => '$' + Number(v).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const num = v => { const n = parseFloat(v); return isNaN(n) ? 0 : n; };
   const fisica = rfc => rfc.length === 13;

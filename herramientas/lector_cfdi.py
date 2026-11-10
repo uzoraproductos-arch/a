@@ -85,8 +85,8 @@ REGIMENES = {
 # con su fundamento, cotejado ese día contra el documento vigente:
 # - Guía de llenado del CFDI, Anexo 20 del SAT (Anexo_20_Guia_de_llenado_CFDI.pdf,
 #   SHA-256 70e0c92df44b4f36975e4a0a5b1f0609f83c62deb029eda440fe4df6e2265a25).
-# - CFF, última reforma DOF 09-04-2026; LIVA, última reforma DOF 12-11-2021;
-#   Reglamento de la LIVA, última reforma DOF 25-09-2014 (índice de Diputados).
+# - CFF, última reforma DOF 09-04-2026;
+# - LIVA, última reforma DOF 12-11-2021, y su Reglamento (RLIVA, DOF 25-09-2014).
 # Todo lo que sale de aquí es «derivado» y se dice «señal para revisar»: el XML
 # no dice qué se compró de verdad ni si ya se corrigió. La lee también la
 # página (insp_factura.py la pasa a insp-factura.js): el texto vive aquí.

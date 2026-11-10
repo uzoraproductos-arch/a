@@ -3955,7 +3955,7 @@
   "cuerpo": [
    "Según el comunicado 82 de la Secretaría de Hacienda, del 15 de octubre de 2026, HR Ratings bajó la calificación de largo plazo de la deuda soberana de México de BBB+ a BBB, mantuvo la perspectiva estable y ratificó la de corto plazo en HR3. Hacienda subraya que México conserva el grado de inversión con las ocho agencias que califican su deuda.",
    "En su respuesta, Hacienda recuerda que en 2025 hizo un ajuste fiscal de 1.3 puntos del PIB, el mayor desde 1990; que cerca del 80 % de la deuda del Gobierno Federal está en moneda nacional y a tasa fija; que las reservas internacionales superan los 256 mil millones de dólares, y que existe una Línea de Crédito Flexible del FMI por 24 mil millones de dólares.",
-   "Las razones y las proyecciones de la propia calificadora, un déficit de 4.6 % del PIB en 2026 y una deuda de 61.2 % del PIB en 2030, están en el reporte de HR Ratings, que no pudimos abrir desde la plataforma. Hasta cotejarlas, van como pendientes. Algunos medios citan otra proyección (65.6 % en 2033), y por eso no conviene repetir ninguna sin el reporte.",
+   "En el reporte de HR Ratings del 15 de octubre de 2026 constan tanto las razones como las proyecciones: la calificadora atribuye el ajuste de HR BBB+ (G) a HR BBB (G) al deterioro observado en los principales balances fiscales, al menor crecimiento económico esperado (1.30 % real en 2026 frente al 1.5 % estimado por Hacienda, y 1.50 % anual en 2027-2033) y a la rigidez del gasto del Gobierno Federal (cuyo costo financiero de 3.7 % del PIB en 2025 y 2026 supera las participaciones a estados y municipios). Proyecta un déficit de los RFSP de 4.61 % del PIB en 2026 (4.6 % redondeado, quinto año consecutivo por encima de 4.0 %) y estima que el Saldo Histórico de los RFSP suba de 52.63 % del PIB en 2025 a 54.51 % en 2026, 61.17 % en 2030 (61.2 % redondeado) y 65.56 % en 2033.",
    "Qué quiere decir: BBB sigue siendo grado de inversión, el escalón más bajo antes de dejar de serlo es BBB-. Una calificación más baja suele encarecer lo que paga el país por pedir prestado, pero cuánto lo encarece no lo dice ningún documento oficial."
   ],
   "dato_curioso": "En octubre de 2025, HR Ratings había ratificado a México en BBB+ y mejorado su perspectiva de negativa a estable. Un año después, mantuvo la perspectiva estable pero bajó un escalón la nota.",
@@ -3964,8 +3964,22 @@
     "valor": "BBB+ → BBB",
     "etq": "Calificación de largo plazo de la deuda soberana, según HR Ratings (perspectiva estable)",
     "estado": "oficial",
-    "fuente": "SHCP, comunicado 82 (15-10-2026)",
-    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+    "fuente": "HR Ratings, reporte de calificación soberana de México (15-10-2026)",
+    "url": "https://www.hrratings.com/pdf/Comunicado_Soberana_MAxico_2026___Comunicado.pdf"
+   },
+   {
+    "valor": "4.61 % del PIB",
+    "etq": "Déficit de los RFSP estimado por HR Ratings para 2026 (4.6 % redondeado; -$1,711 mil mdp)",
+    "estado": "oficial",
+    "fuente": "HR Ratings, reporte de calificación soberana de México, pp. 1 y 5 (15-10-2026)",
+    "url": "https://www.hrratings.com/pdf/Comunicado_Soberana_MAxico_2026___Comunicado.pdf"
+   },
+   {
+    "valor": "61.17 % del PIB",
+    "etq": "Saldo Histórico de los RFSP proyectado por HR Ratings para 2030 (61.2 % redondeado; 65.56 % en 2033)",
+    "estado": "oficial",
+    "fuente": "HR Ratings, reporte de calificación soberana de México, pp. 3 y 4 (15-10-2026)",
+    "url": "https://www.hrratings.com/pdf/Comunicado_Soberana_MAxico_2026___Comunicado.pdf"
    },
    {
     "valor": "1.3 pp del PIB",
@@ -3993,27 +4007,23 @@
    {
     "dice": "HR Ratings redujo la calificación de largo plazo de México de BBB+ a BBB.",
     "res": "consta",
-    "explica": "Lo informa la propia Secretaría de Hacienda: de BBB+ a BBB, con perspectiva estable; la de corto plazo se ratificó en HR3.",
-    "fuente": "SHCP, comunicado 82 (15-10-2026)",
-    "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
+    "explica": "Consta en el reporte de HR Ratings y en el comunicado 82 de Hacienda: de HR BBB+ (G) a HR BBB (G), con perspectiva estable; la de corto plazo se ratificó en HR3 (G).",
+    "fuente": "HR Ratings, reporte de calificación soberana de México (15-10-2026)",
+    "url": "https://www.hrratings.com/pdf/Comunicado_Soberana_MAxico_2026___Comunicado.pdf"
    },
    {
     "dice": "Fue por deterioro fiscal, bajo crecimiento económico y rigidez del gasto.",
-    "res": "pendiente",
-    "explica": "Son las razones de la calificadora; están en su reporte, que no pudimos abrir: falta de la plataforma.",
-    "fuente": "HR Ratings",
-    "url": "https://www.hrratings.com/",
-    "quien": "Falta de la plataforma: el reporte de HR Ratings existe y aún no lo integramos",
-    "donde": "https://www.hrratings.com/"
+    "res": "consta",
+    "explica": "En las páginas 1 a 3 de su reporte, HR Ratings explica que la revisión a la baja obedece al deterioro observado en los principales balances fiscales, al menor crecimiento económico estimado (1.30 % en 2026 y 1.50 % anual en 2027-2033) y a la rigidez del gasto del Gobierno Federal, cuyo costo financiero (3.7 % del PIB en 2025 y 2026) supera las participaciones a estados y municipios.",
+    "fuente": "HR Ratings, reporte de calificación soberana de México, pp. 1-3 (15-10-2026)",
+    "url": "https://www.hrratings.com/pdf/Comunicado_Soberana_MAxico_2026___Comunicado.pdf"
    },
    {
     "dice": "Estima un déficit de los RFSP de 4.6 % del PIB para 2026 y deuda de 61.2 % del PIB en 2030.",
-    "res": "pendiente",
-    "explica": "Son proyecciones de HR Ratings, no de Hacienda. Los medios citan cifras distintas y el reporte no lo pudimos abrir: falta de la plataforma.",
-    "fuente": "HR Ratings",
-    "url": "https://www.hrratings.com/",
-    "quien": "Falta de la plataforma: el reporte de HR Ratings existe y aún no lo integramos",
-    "donde": "https://www.hrratings.com/"
+    "res": "consta",
+    "explica": "En las páginas 1, 3, 4 y 5 (Anexos 2.1 y 2.2), HR Ratings proyecta un déficit de los RFSP de 4.61 % del PIB en 2026 (4.6 % redondeado, -$1,711 mil millones de pesos) y estima que el Saldo Histórico de los RFSP llegará a 61.17 % del PIB en 2030 (61.2 % redondeado, $28,514 mil millones) y a 65.56 % en 2033.",
+    "fuente": "HR Ratings, reporte de calificación soberana de México, pp. 1-5 (15-10-2026)",
+    "url": "https://www.hrratings.com/pdf/Comunicado_Soberana_MAxico_2026___Comunicado.pdf"
    },
    {
     "dice": "Hacienda destacó un ajuste fiscal previo de 1.3 puntos del PIB, la deuda en moneda nacional a tasa fija y las reservas internacionales.",
@@ -4032,11 +4042,15 @@
   ],
   "sigue": [
    {
-    "que": "Abrir el reporte de HR Ratings para cotejar sus razones y sus proyecciones de déficit y deuda",
-    "url": "https://www.hrratings.com/"
+    "que": "Revisar en los Informes sobre la Situación Económica, las Finanzas Públicas y la Deuda Pública de cierre de 2026 si el déficit de los RFSP se acerca al 4.1 % estimado por Hacienda o al 4.61 % proyectado por HR Ratings",
+    "url": "https://www.finanzaspublicas.hacienda.gob.mx/"
    }
   ],
   "fuentes": [
+   {
+    "nombre": "HR Ratings: Comunicado de calificación soberana de México, HR BBB+ (G) a HR BBB (G) con Perspectiva Estable (15-10-2026)",
+    "url": "https://www.hrratings.com/pdf/Comunicado_Soberana_MAxico_2026___Comunicado.pdf"
+   },
    {
     "nombre": "SHCP, comunicado No. 82: HR Ratings ratificó la calificación soberana de corto plazo de México en HR3 (15-10-2026)",
     "url": "https://www.gob.mx/shcp/prensa/comunicado-no-82"
@@ -4050,7 +4064,7 @@
     "url": "https://gaceta.diputados.gob.mx/Gaceta/66/2025/mar/20250312.html"
    }
   ],
-  "actualizado": "2 de noviembre de 2026"
+  "actualizado": "02-11-2026"
  },
  {
   "id": "garcia-luna-las-dos-cortes",
@@ -5612,7 +5626,7 @@
     });
   }
   function chip(estado) {
-    return '<span class="est-chip est-' + esc(estado) + '">' + esc(estado) + '</span>';
+    return '<span class="est-chip est-' + esc(estado) + '">' + esc(estado === 'derivado' ? 'auditada' : estado) + '</span>';
   }
   function figura(c, grande) {
     if (c.imagen) {

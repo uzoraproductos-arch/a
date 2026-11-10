@@ -40,7 +40,7 @@
   }
   function chip(e) {
     var t = (e === 'oficial' || e === 'pendiente') ? e : 'derivado';
-    return '<span class="est-chip est-' + t + '">' + t + '</span>';
+    return '<span class="est-chip est-' + t + '">' + (t === 'derivado' ? 'auditada' : t) + '</span>';
   }
   function mdp(pesos) {
     return '$' + (pesos / 1e6).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp';

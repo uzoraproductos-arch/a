@@ -30,8 +30,8 @@ Se actualiza cada vez que una nota deja un pendiente por un portal que no abre.
 
 | Dominio | Qué destraba | Notas que lo esperan |
 |---|---|---|
-| `dof.gob.mx`, `www.dof.gob.mx` | Decretos publicados: Ley Federal de Derechos 2027, acuerdos de la Sener | `lfd-2027-dnr-defensa-tren-maya-aifa`, `portacelis-permiso-diesel-sener` |
-| `www.cuentapublica.hacienda.gob.mx` | Estados financieros de las empresas públicas (Tren Maya, AIFA, Dos Bocas) y Tomo VII (**Integrados el 02-11-2026** el Tomo I y el Tomo II completos del Gobierno Federal 2024; cerrados `cp2024-tomo2` y `estado-cuenta-pesos-2024`) | `lfd-2027-dnr-defensa-tren-maya-aifa` |
+| `dof.gob.mx`, `www.dof.gob.mx` | Decretos publicados: Ley Federal de Derechos 2027, acuerdos de la Sener (**Integrados el 09-11-2026** los acuerdos INE/CG469, 478 y 480/2026 para `elecciones-2027-cargos` y el informe de extinción de los 5 fideicomisos de la SCJN del 15-07-2025 para `judicial-fideicomisos-monto`) | `lfd-2027-dnr-defensa-tren-maya-aifa`, `portacelis-permiso-diesel-sener` |
+| `www.cuentapublica.hacienda.gob.mx` | Estados financieros de las empresas públicas (AIFA, Dos Bocas) (**Integrados el 02-11-2026** los Tomos I y II del Gobierno Federal 2024, y **el 09-11-2026** el Tomo VII de Tren Maya, S.A. de C.V. `7H0M` junto con la Auditoría 429 de la ASF; cerrado `tren-maya-ficha`) | `lfd-2027-dnr-defensa-tren-maya-aifa` |
 | `www.ppef.hacienda.gob.mx` | Proyecto de Presupuesto 2027 por ramo y por empresa | `jalisco-gasto-federal-pef-2027`, `lfd-2027-dnr-defensa-tren-maya-aifa` |
 | `www.transparenciapresupuestaria.gob.mx` | Datos abiertos del gasto | varias |
 | `www.gob.mx` | Sener (permisos de importación), FGR, IPAB y Conagua (el comunicado de Presidencia del 28-10-2026 sobre el agua de Guadalajara ya quedó integrado el 02-11-2026) | `portacelis-permiso-diesel-sener`, `agua-guadalajara-14500-federal` |
@@ -59,7 +59,8 @@ Se actualiza cada vez que una nota deja un pendiente por un portal que no abre.
 |---|---|
 | `www.inegi.org.mx` | Actualizar EFIPEM, PIB por entidad e INPC; balanza comercial por producto y valor agregado de exportación (`servidores-ia-exportaciones-contenido-nacional`) |
 | `www.banxico.org.mx` | Tipo de cambio FIX (para cotejar conversiones a dólares) |
-| `centralelectoral.ine.mx` | Comunicados del INE (`ine-contratos-desde-cordova`) |
+| `centralelectoral.ine.mx`, `ine.mx` | Comunicados del INE (`ine-contratos-desde-cordova`; **integrados el 09-11-2026** el portal de Elecciones 2027 para cerrar `elecciones-2027-cargos` y el Comunicado 192 de participación muestral en la elección judicial de 2025) |
+| `sdmx.oecd.org`, `www.hrratings.com` | **Integrados el 09-11-2026:** serie de predial de la OCDE (`predial-ocde`) y comunicado de calificación soberana de HR Ratings (`red-hr-ratings-baja-mexico-bbb-2` y `-3`) |
 
 ## Prensa y organizaciones (punto de partida, no fuente)
 

@@ -225,7 +225,7 @@ def _mdp(v):
 
 def _chip(e, pend=None):
     e = e if e in ('oficial', 'pendiente') else 'derivado'
-    return '<span class="est-chip est-%s"%s>%s</span>' % (e, ' data-pend="%s"' % pend if pend else '', e)
+    return '<span class="est-chip est-%s"%s>%s</span>' % (e, ' data-pend="%s"' % pend if pend else '', 'auditada' if e == 'derivado' else e)
 
 
 def _doc(texto, url):
@@ -313,11 +313,11 @@ def _datos(id_):
             ]
         elif id_ == 'deuda-congreso-2027':
             cuanto = [
-                (_mdp(c['ingresos_totales_2027_mdp']), 'ingresos totales estimados en la Ley de Ingresos 2027 aprobada por Diputados (15-10-2026)', 'oficial', None),
-                (_mdp(c['techo_deuda_interna_2027_mdp']), 'techo de endeudamiento interno neto autorizado para 2027 (%d votos a favor y %d en contra)' % (c['votos_diputados_favor'], c['votos_diputados_contra']), 'oficial', None),
+                (_mdp(c['ingresos_totales_2027_mdp']), 'ingresos totales estimados en la Ley de Ingresos 2027 aprobada por Diputados y Senado', 'oficial', None),
+                (_mdp(c['techo_deuda_interna_2027_mdp']), 'techo de endeudamiento interno neto autorizado para 2027 (%d votos a favor y %d en contra en Diputados)' % (c['votos_diputados_favor'], c['votos_diputados_contra']), 'oficial', None),
                 (_mdp(c['costo_financiero_2027_mdp']), 'costo financiero de la deuda propuesto para 2027 en el Paquete Económico', 'oficial', None),
-                ('BBB+ → BBB', 'ajuste de HR Ratings a la nota soberana de largo plazo reconocido por Hacienda (Comunicado 82)', 'oficial', None),
-                ('Por cotejar', 'proyecciones del reporte de HR Ratings (déficit de 4.6 % del PIB y deuda a 2030)', 'pendiente', x['pendiente_id']),
+                ('BBB+ → BBB (déficit 4.61 % del PIB en 2026; deuda 61.17 % en 2030)', 'ajuste y proyecciones del reporte soberano de HR Ratings (15-10-2026)', 'oficial', None),
+                ('Por publicar', 'decreto de la Ley de Ingresos 2027 en el DOF y texto íntegro de las reservas votadas', 'pendiente', x['pendiente_id']),
             ]
         elif id_ == 'inversion-megaobras':
             cuanto = [
@@ -370,7 +370,7 @@ def temas(actual):
         for ico, tit, ids in sorted(TEMAS, key=lambda t: actual not in t[2]))
     return ('        <div class="au-temas">\n%s\n        </div>\n'
             '        <p class="au-metodo"><span aria-hidden="true">🔎</span> <b>Cómo verificamos:</b> cada cifra lleva su fuente oficial y su estado: '
-            '<span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">derivado</span> '
+            '<span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">auditada</span> '
             '<span class="est-chip est-pendiente">pendiente</span>. Las imágenes son ilustraciones, no evidencia. '
             '<a href="indice.html#metodologia">Lee la metodología y las novedades ➔</a></p>') % grupos
 

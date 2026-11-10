@@ -1,5 +1,5 @@
 {
- "actualizado": "05-11-2026",
+ "actualizado": "09-11-2026",
  "nota": "Lo que junta herramientas/vigia_legislativo.py del sumario del DOF y del índice de Leyes Federales Vigentes de la Cámara de Diputados, sin verificar: solo título, fecha y liga, nunca el texto de la reforma. Cada hallazgo queda «por cotejar» hasta que una persona lo revisa; los avisos dicen qué módulo de Auditavisión cita una reforma anterior a la vigente.",
  "fuentes": {
   "dof": "https://dof.gob.mx/sumario.xml",
@@ -246,87 +246,6 @@
    "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CNPP.pdf"
   }
  },
- "avisos": [
-  {
-   "archivo": "herramientas/asistente_legislativo.py",
-   "renglon": 72,
-   "ley": "lgpp",
-   "nombre": "Ley General de Partidos Políticos",
-   "cita": "02-03-2023",
-   "vigente": "24-11-2023",
-   "tipo": "vieja",
-   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lgpp.htm"
-  },
-  {
-   "archivo": "herramientas/informe_sancion.py",
-   "renglon": 28,
-   "ley": "lfrcf",
-   "nombre": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
-   "cita": "14-05-2026",
-   "vigente": "15-05-2026",
-   "tipo": "vieja",
-   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfrcf.htm"
-  },
-  {
-   "archivo": "herramientas/informe_sancion.py",
-   "renglon": 54,
-   "ley": "lfrcf",
-   "nombre": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
-   "cita": "14-05-2026",
-   "vigente": "15-05-2026",
-   "tipo": "vieja",
-   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfrcf.htm"
-  },
-  {
-   "archivo": "herramientas/informe_semestral.py",
-   "renglon": 39,
-   "ley": "lfrcf",
-   "nombre": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
-   "cita": "14-05-2026",
-   "vigente": "15-05-2026",
-   "tipo": "vieja",
-   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfrcf.htm"
-  },
-  {
-   "archivo": "herramientas/integrar_cuenta_publica.py",
-   "renglon": 61,
-   "ley": "lfrcf",
-   "nombre": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
-   "cita": "14-05-2026",
-   "vigente": "15-05-2026",
-   "tipo": "vieja",
-   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfrcf.htm"
-  },
-  {
-   "archivo": "herramientas/integrar_glosario_semestral.py",
-   "renglon": 18,
-   "ley": "lfrcf",
-   "nombre": "Ley de Fiscalización y Rendición de Cuentas de la Federación",
-   "cita": "14-05-2026",
-   "vigente": "15-05-2026",
-   "tipo": "vieja",
-   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfrcf.htm"
-  },
-  {
-   "archivo": "herramientas/integrar_huachicol_ley.py",
-   "renglon": 5,
-   "ley": "lieps",
-   "nombre": "Ley del Impuesto Especial sobre Producción y Servicios",
-   "cita": "07-11-2025",
-   "vigente": "22-12-2025",
-   "tipo": "vieja",
-   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lieps.htm"
-  },
-  {
-   "archivo": "herramientas/integrar_huachicol_ley.py",
-   "renglon": 29,
-   "ley": "lieps",
-   "nombre": "Ley del Impuesto Especial sobre Producción y Servicios",
-   "cita": "07-11-2025",
-   "vigente": "22-12-2025",
-   "tipo": "vieja",
-   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lieps.htm"
-  }
- ],
+ "avisos": [],
  "fallas": []
 }

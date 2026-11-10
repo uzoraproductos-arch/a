@@ -36,7 +36,7 @@ DOC = {'tx': 'ASF, «Informe sobre la situación que guardan las observaciones, 
 ANT = {'tx': 'ASF, informe semestral con corte al 30 de septiembre de 2025',
        'url': 'https://www.asf.gob.mx/uploads/56_Informes_especiales_de_auditoria/IS_30_09_2025.pdf',
        'sha256': '864d5a7a09153ffd14542ff27661b35092064613186809c6dba459b12e9c71d1'}
-LFRCF = {'tx': 'Ley de Fiscalización y Rendición de Cuentas de la Federación, texto vigente (Cámara de Diputados, última reforma DOF 14-05-2026)',
+LFRCF = {'tx': 'Ley de Fiscalización y Rendición de Cuentas de la Federación, texto vigente (Cámara de Diputados, última reforma DOF 15-05-2026)',
          'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LFRCF.pdf'}
 INDICE = 'https://www.asf.gob.mx/Section/59_Informes_especiales_de_auditoria'
 PEND = 'asf-sanciones-efectividad'

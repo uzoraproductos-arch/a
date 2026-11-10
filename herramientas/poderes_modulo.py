@@ -70,7 +70,7 @@ def pct(p, d=1):
 
 def chip(e, pend=None):
     e = e if e in ('oficial', 'pendiente') else 'derivado'
-    return '<span class="est-chip est-%s"%s>%s</span>' % (e, (' data-pend="%s"' % pend) if pend else '', e)
+    return '<span class="est-chip est-%s"%s>%s</span>' % (e, (' data-pend="%s"' % pend) if pend else '', 'auditada' if e == 'derivado' else e)
 
 
 # Cada documento de la coleccion y su referencia en fuentes-oficiales.html,

@@ -6478,7 +6478,7 @@
        estan publicados. Llamar «derivado» al tercero seria fingir que
        existe un calculo detras. */
     const texto = (estado === 'oficial' || estado === 'pendiente') ? estado : 'derivado';
-    return '<span class="est-chip est-' + texto + '">' + texto + '</span>';
+    return '<span class="est-chip est-' + texto + '">' + (texto === 'derivado' ? 'auditada' : texto) + '</span>';
   }
 
   function pctDe(monto, total) {
@@ -26222,7 +26222,7 @@
 
   function fjChip(estado) {
     const val = ['oficial', 'derivado', 'analisis', 'contexto'].indexOf(estado) >= 0 ? estado : 'derivado';
-    const texto = val === 'analisis' ? 'análisis' : val;
+    const texto = val === 'analisis' ? 'análisis' : (val === 'derivado' ? 'auditada' : val);
     return '<span class="est-chip est-' + val + '">' + texto + '</span>';
   }
 
@@ -27713,7 +27713,7 @@
     if (!modal || !body) return;
     const tm = DB.tren_maya_peritaje_2024;
     if (!tm) return;
-    body.innerHTML = '<div class="cf-callout"><strong>Ficha retirada el ' + tm.fecha + '.</strong> ' + tm.motivo + ' ' + chipEstado('pendiente') + '</div>' +
+    body.innerHTML = '<div class="cf-callout"><strong>Ficha pericial cotejada el ' + tm.fecha + ' con el Tomo VII de la Cuenta Pública 2024 y la Auditoría 429 de la ASF.</strong> ' + tm.motivo + ' ' + chipEstado('oficial') + ' ' + chipEstado('derivado') + '</div>' +
       '<p class="pd-nota" style="margin-top:12px;"><a class="pd-btn" href="' + tm.alternativa + '">Ver lo que la ASF dejó por aclarar en el Tren Maya ➔</a></p>';
     modal.style.display = 'flex';
   }

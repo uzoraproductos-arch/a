@@ -134,7 +134,7 @@
   }
   function chip(e, pid) {
     var t = (e === 'oficial' || e === 'pendiente') ? e : 'derivado';
-    return '<span class="est-chip est-' + t + '"' + (pid ? ' data-pend="' + esc(pid) + '"' : '') + '>' + t + '</span>';
+    return '<span class="est-chip est-' + t + '"' + (pid ? ' data-pend="' + esc(pid) + '"' : '') + '>' + (t === 'derivado' ? 'auditada' : t) + '</span>';
   }
   /* Sin dato: «pendiente» lleva a su ficha del Registro; lo que no aplica
      (la ASF no existía, no hay serie comparable) lo dice sin chip. */

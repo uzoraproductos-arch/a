@@ -261,7 +261,7 @@ def construir(base, ref, archivo=DIARIO):
         'metodo': _metodo(),
         'puntos-ciegos': puntos_ciegos.seccion(lambda t: __import__('html').escape(str(t or ''), quote=False)),
         'promesas': promesas.seccion(lambda t: __import__('html').escape(str(t or ''), quote=False),
-                                     lambda e, p=None: '<span class="est-chip est-%s"%s>%s</span>' % (e, (' data-pend="%s"' % p) if p else '', e)),
+                                     lambda e, p=None: '<span class="est-chip est-%s"%s>%s</span>' % (e, (' data-pend="%s"' % p) if p else '', 'auditada' if e == 'derivado' else e)),
     }
     clases = {'columnas': ' nt-sec-opinion', 'verifica': ' nt-sec-verifica', 'portada': ' nt-sec-portada'}
     partes = [_sec(i, ico, t, e, cuerpos[i], clases.get(i, '')) for i, ico, _n, t, e in mias]
@@ -277,7 +277,7 @@ def construir(base, ref, archivo=DIARIO):
 
 
 def insp_nota_chip(estado):
-    return '<span class="est-chip est-%s">%s</span>' % (estado, estado)
+    return '<span class="est-chip est-%s">%s</span>' % (estado, 'auditada' if estado == 'derivado' else estado)
 
 
 # Cada nota «Al momento» con su página propia (pedido del autor, 31-10-2026:

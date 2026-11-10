@@ -25,7 +25,7 @@ Lo que se tomó de él:
 Lo que la plataforma agregó, cotejado con su texto vigente: la Ley General
 de Responsabilidades Administrativas (última reforma DOF 15-12-2025: arts. 3,
 54, 57, 63, 71, 74, 78 y 79) y la Ley de Fiscalización y Rendición de Cuentas
-de la Federación (última reforma DOF 14-05-2026: art. 38, el informe
+de la Federación (última reforma DOF 15-05-2026: art. 38, el informe
 semestral de cómo van las acciones).
 
 El documento no trae ni una cifra de cuántas observaciones terminan en
@@ -51,7 +51,7 @@ DOC = {'tx': 'ASF, «Documentar para sancionar. De la irregularidad a la sanció
 LGRA = {'tx': 'Ley General de Responsabilidades Administrativas, texto vigente (Cámara de Diputados, última reforma DOF 15-12-2025)',
         'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGRA.pdf',
         'sha256': '1289ec6964e48c84990572ca6080ca05c9d6210e5b0ff5af6d8c9d935fc5fcc8'}
-LFRCF = {'tx': 'Ley de Fiscalización y Rendición de Cuentas de la Federación, texto vigente (Cámara de Diputados, última reforma DOF 14-05-2026)',
+LFRCF = {'tx': 'Ley de Fiscalización y Rendición de Cuentas de la Federación, texto vigente (Cámara de Diputados, última reforma DOF 15-05-2026)',
          'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LFRCF.pdf',
          'sha256': 'cc687a4d8d9de93d2d3ec9b40b26d0273e108bb002a6f611806dc36ebce5ba2c'}
 PEND = 'asf-sanciones-efectividad'

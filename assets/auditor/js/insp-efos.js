@@ -16,7 +16,7 @@
 
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const fmt = v => Number(v).toLocaleString('es-MX');
-  const chip = e => '<span class="est-chip est-' + e + '">' + e + '</span>';
+  const chip = e => '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'auditada' : e) + '</span>';
   function norm(s) {
     return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '')
       .toUpperCase().replace(/[^A-Z0-9& ]/g, ' ').replace(/\s+/g, ' ').trim();

@@ -7,7 +7,7 @@ Uso:
 
 Cada definición sale de su fuente, citada en «ley»:
 - Ley de Fiscalización y Rendición de Cuentas de la Federación, última
-  reforma DOF 14-05-2026, art. 38.
+  reforma DOF 15-05-2026, art. 38.
 - ASF, informe semestral con corte al 31 de marzo de 2026, pp. 23, 30 y 35.
 
 Usa las mismas funciones de integrar_glosario_fiscalizacion.py: es
@@ -15,7 +15,7 @@ idempotente y no duplica términos ni fichas.
 """
 import integrar_glosario_fiscalizacion as g
 
-LFRCF38 = 'Art. 38, Ley de Fiscalización y Rendición de Cuentas de la Federación (última reforma DOF 14-05-2026)'
+LFRCF38 = 'Art. 38, Ley de Fiscalización y Rendición de Cuentas de la Federación (última reforma DOF 15-05-2026)'
 DOC = 'ASF, Informe sobre la situación que guardan las observaciones, recomendaciones y acciones promovidas, corte al 31 de marzo de 2026'
 
 g.TERMINOS = [

@@ -52,7 +52,7 @@
   function mdpPesos(p) { return fmt(p / 1e6, 'mdp1'); }
   function chip(e, pend) {
     var t = (e === 'oficial' || e === 'pendiente') ? e : 'derivado';
-    return '<span class="est-chip est-' + t + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + t + '</span>';
+    return '<span class="est-chip est-' + t + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + (t === 'derivado' ? 'auditada' : t) + '</span>';
   }
   function suma(l, c) { return l.reduce(function (a, x) { return a + (x[c] || 0); }, 0); }
   function acc(l, c) { return l.reduce(function (a, x) { return a + ((x.acciones && x.acciones[c]) || 0); }, 0); }
@@ -399,8 +399,8 @@
         { ico: '🧾', tit: 'Ingresos totales 2027', v: c.ingresos_totales_2027_mdp, f: 'mdp1', etq: 'estimados en la Ley de Ingresos aprobada por Diputados (15-10-2026)', est: 'oficial' },
         { ico: '🏛️', tit: 'Techo de deuda interna', v: c.techo_deuda_interna_2027_mdp, f: 'mdp1', etq: 'endeudamiento interno neto máximo autorizado (' + c.votos_diputados_favor + ' votos a favor)', est: 'oficial' },
         { ico: '💸', tit: 'Costo financiero 2027', v: c.costo_financiero_2027_mdp, f: 'mdp1', etq: 'intereses y comisiones propuestos en el Paquete Económico 2027', est: 'oficial' },
-        { ico: '📉', tit: 'Nota soberana HR Ratings', txt: 'BBB+ → BBB', etq: 'ajuste con perspectiva estable reconocido en el Comunicado 82 de Hacienda', est: 'oficial' },
-        { ico: '⏳', tit: 'Reporte de HR Ratings', txt: 'Por cotejar', etq: 'las proyecciones de 4.6% de déficit y 61.2% de deuda siguen pendientes', est: 'pendiente', pend: A.pendiente_id }
+        { ico: '📉', tit: 'Nota soberana HR Ratings', txt: 'BBB+ → BBB', etq: 'déficit de 4.61% del PIB en 2026 y deuda de 61.17% en 2030 en su reporte (15-10-2026)', est: 'oficial' },
+        { ico: '⏳', tit: 'Decreto en el DOF', txt: 'Por publicar', etq: 'el decreto de la Ley de Ingresos 2027 y el texto íntegro de las reservas siguen pendientes', est: 'pendiente', pend: A.pendiente_id }
       ],
       rastroTit: 'Las grandes cifras del Paquete Económico y la Ley de Ingresos 2027', rastroEst: 'oficial',
       rastro: [

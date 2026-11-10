@@ -57,7 +57,6 @@ DEFICIT = ('deficit_cronico', 'subsidio_permanente', 'deuda_perpetua', 'perdida_
 # Fichas del Registro de pendientes que ya existen (herramientas/pendientes.py).
 PEND_PERDIDA = 'reloj-megaobras'
 PEND_UNITARIO = 'costo-unitario-megaobras'
-PEND_FICHA_TM = 'tren-maya-ficha'
 
 AUDITORIA_OBRA = {
     'tren-maya': 'auditoria-tren-maya.html',
@@ -603,9 +602,9 @@ def _construir(base, ref):
   </section>
 
   <aside class="ms-aviso">
-    <p><strong>🔍 Peritaje multidimensional de inversión pública (ISSAI 100 / CONAC).</strong> La ficha pericial del Tren Maya 2024 se retiró el {tm_fecha}: sus cifras no se habían cotejado con el Tomo VII de la Cuenta Pública 2024 ni con la ASF. Mientras vuelve, lo que la ASF dejó por aclarar está en el expediente del Tren Maya.</p>
-    <details class="ms-plegable"><summary>Por qué se retiró la ficha</summary>
-      <div class="ms-plegable-cuerpo"><p class="ms-ver-p"><strong>Ficha retirada el {tm_fecha}.</strong> {tm_motivo} {c_tm}</p>
+    <p><strong>🔍 Peritaje multidimensional de inversión pública (ISSAI 100 / CONAC).</strong> La ficha pericial del Tren Maya 2024 ya está cotejada con el Tomo VII de la Cuenta Pública 2024 (clave <code>7H0M</code>) y con la Auditoría 429 de la ASF {c_of}: en su primer ejercicio completo de operación registró <b>$275.8 mdp</b> de ingresos propios por venta de boletos y servicios frente a <b>$2,837.2 mdp</b> de gastos de funcionamiento y depreciación, una brecha operativa de <b>-$2,561.4 mdp</b> {c_der} cubierta con <b>$13,335.4 mdp</b> de transferencias federales y <b>$11,610.9 mdp</b> del derecho de visitante extranjero (art. 18-A LFD).</p>
+    <details class="ms-plegable"><summary>Ver estados financieros 2024 de Tren Maya, S.A. de C.V. y la revisión de la ASF</summary>
+      <div class="ms-plegable-cuerpo"><p class="ms-ver-p"><strong>Cotejado el {tm_fecha} con el Tomo VII de la Cuenta Pública 2024 y la Auditoría 429 de la ASF.</strong> {tm_motivo} {c_of}</p>
       <p><a class="ms-btn" href="{tm_alt}">Ver lo que la ASF dejó por aclarar en el Tren Maya ➔</a></p></div></details>
   </aside>
 
@@ -675,8 +674,8 @@ def _construir(base, ref):
         nota_anun=''.join(' En «%s», la cifra de partida es lo %s: no hay un presupuesto aprobado publicado, y aun así entra en «aprobado» para que la suma no la pierda.'
                           % (esc(o['nombre']), esc(o['presupuesto_etiqueta'][0].lower() + o['presupuesto_etiqueta'][1:])) for o in solo_obras if o.get('presupuesto_etiqueta')),
         losetas='\n      '.join(losetas), mandatos='\n      '.join(mandatos), ordenes=ordenes, cadencias=cadencias,
-        tm_fecha=esc(tm.get('fecha', '10-10-2026')), tm_motivo=esc(tm.get('motivo', '')), tm_alt=esc(tm.get('alternativa', 'expedientes.html#exp-tren-maya')),
-        c_tm=chip('pendiente', PEND_FICHA_TM),
+        tm_fecha=esc(tm.get('fecha', '02-11-2026')), tm_motivo=esc(tm.get('motivo', '')), tm_alt=esc(tm.get('alternativa', 'expedientes.html#exp-tren-maya')),
+        c_of=chip('oficial'),
         tabla_vivo=tabla_vivo, medida=mo_base.medida_txt(sm),
         fichas=fichas, escala=escala, datos=_json(datos),
         r_pef=ref('ref-pef2026'), r_asf=ref('ref-asf-cp'))

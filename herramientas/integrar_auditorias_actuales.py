@@ -571,19 +571,20 @@ def construir(d):
             'quien': 'La Secretaría de Hacienda propone la Iniciativa de Ley de Ingresos; la Cámara de Diputados (15-10-2026) y el Senado de la República autorizan los ingresos y el techo de endeudamiento (art. 73, fracc. VIII constitucional); las agencias calificadoras evalúan el riesgo soberano.',
             'que': (
                 'El 15 de octubre de 2026 el pleno de la Cámara de Diputados aprobó la Ley de Ingresos de la Federación para 2027 (331 votos a '
-                'favor y 118 en contra en lo general), y el 21 de octubre la avalaron las comisiones unidas del Senado (18 a 11). La iniciativa '
-                'de Hacienda estima ingresos totales por $10,636,488.1 millones de pesos (art. 1o.) y pide un techo de endeudamiento neto interno '
+                'favor y 118 en contra en lo general), y el 28 de octubre la aprobó el pleno del Senado (75 a 34 en lo general y 73 a 33 en lo particular). La ley '
+                'estima ingresos totales por $10,636,488.1 millones de pesos (art. 1o.) y autoriza un techo de endeudamiento neto interno '
                 'del Gobierno Federal hasta por $1,700,000.0 millones ($1.7 billones, art. 2o.). Además, aprobó una reserva al artículo vigésimo primero transitorio que '
                 'quita el tope de $300 millones de pesos de ingresos anuales y permite a grandes contribuyentes obtener la reducción de multas, '
-                'recargos y gastos de ejecución si pagan completo su adeudo principal. Ese mismo 15 de octubre, en su Comunicado 82, Hacienda '
-                'informó que HR Ratings bajó la calificación soberana de largo plazo de México de BBB+ a BBB, con perspectiva estable.'
+                'recargos y gastos de ejecución si pagan completo su adeudo principal. Ese mismo 15 de octubre, HR Ratings bajó la calificación '
+                'soberana de largo plazo de México de HR BBB+ (G) a HR BBB (G), con perspectiva estable, por deterioro en los balances fiscales, '
+                'bajo crecimiento (1.30 % real para 2026 y 1.50 % anual para 2027-2033) y rigidez del gasto, estimando un déficit de los RFSP de '
+                '4.61 % del PIB en 2026 y un Saldo Histórico de los RFSP de 61.17 % del PIB en 2030.'
             ),
             'falta': (
-                'Falta la votación del pleno del Senado y la publicación del decreto en el Diario Oficial de la Federación para confirmar el texto '
-                'definitivo del transitorio vigésimo primero. Además, el reporte de HR Ratings (donde constan sus razones y sus proyecciones de '
-                'déficit de 4.6 % del PIB y deuda de 61.2 % en 2030) sigue pendiente porque su portal no abrió desde la plataforma.'
+                'Falta la publicación del decreto de la Ley de Ingresos de la Federación 2027 en el Diario Oficial de la Federación y el texto '
+                'íntegro de las reservas votadas en la Cámara de Diputados sobre deducciones y estímulos fiscales.'
             ),
-            'pendiente_id': 'red-hr-ratings-baja-mexico-bbb-3',
+            'pendiente_id': 'red-senado-ley-de-ingresos-2027-6',
             'cifras': {
                 'ingresos_totales_2027_mdp': 10636488.1,
                 'ingresos_presupuestarios_2027_mdp': 9156528.9,
@@ -594,6 +595,8 @@ def construir(d):
                 'votos_diputados_favor': 331,
                 'votos_diputados_contra': 118,
                 'ajuste_fiscal_2025_pp_pib': 1.3,
+                'hr_deficit_rfsp_2026_pct_pib': 4.61,
+                'hr_shrfsp_2030_pct_pib': 61.17,
             },
             'fuentes': [
                 {
@@ -607,6 +610,10 @@ def construir(d):
                 {
                     'doc': 'Canal del Congreso: Comisiones del Senado aprueban Ley de Ingresos 2027 (21-10-2026)',
                     'url': 'https://www.canaldelcongreso.gob.mx/noticias/10329',
+                },
+                {
+                    'doc': 'HR Ratings: Comunicado de calificación soberana de México, HR BBB+ (G) a HR BBB (G) con Perspectiva Estable (15-10-2026)',
+                    'url': 'https://www.hrratings.com/pdf/Comunicado_Soberana_MAxico_2026___Comunicado.pdf',
                 },
                 {
                     'doc': 'SHCP, Comunicado No. 82: México mantiene el grado de inversión con las ocho agencias calificadoras; HR Ratings ajusta de BBB+ a BBB (15-10-2026)',
@@ -931,6 +938,8 @@ def main():
     raw = open(DB, 'rb').read().decode('utf-8')
     d = json.loads(raw[raw.index('{'):raw.rindex('}') + 1])
     datos = construir(d)
+    for k, v in (d.get('auditorias_actuales') or {}).items():
+        datos.setdefault(k, v)
     nl = '\r\n'
     txt = json.dumps(datos, ensure_ascii=False, indent=2)
     txt = '\n  '.join(txt.split('\n')).replace('\n', nl)

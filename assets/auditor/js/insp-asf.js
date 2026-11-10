@@ -24,7 +24,7 @@
     return Number(v).toLocaleString('en-US', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 });
   }
   function mdp(p) { return '$' + fmt(p / 1e6, 1) + ' mdp'; }
-  function chip(e) { return '<span class="est-chip est-' + e + '">' + e + '</span>'; }
+  function chip(e) { return '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'auditada' : e) + '</span>'; }
   function barra(v, mx, sel) {
     var w = mx ? Math.max(0, Math.min(100, v / mx * 100)) : 0;
     return '<span class="ia-barra' + (sel ? ' ia-barra-sel' : '') + '" aria-hidden="true"><i style="--w:' + w.toFixed(2) + '%"></i></span>';

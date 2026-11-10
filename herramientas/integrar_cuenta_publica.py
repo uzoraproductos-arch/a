@@ -57,15 +57,15 @@ FUENTES = {
         'doc': 'Auditoría Superior de la Federación, Informe del Resultado de la Fiscalización Superior de la Cuenta Pública 2025, segunda entrega',
         'url': 'https://informe.asf.gob.mx/'},
     'LFRCF': {
-        'corto': 'Ley de Fiscalización, reforma DOF 14-05-2026',
-        'doc': 'Ley de Fiscalización y Rendición de Cuentas de la Federación, última reforma DOF 14-05-2026',
+        'corto': 'Ley de Fiscalización, reforma DOF 15-05-2026',
+        'doc': 'Ley de Fiscalización y Rendición de Cuentas de la Federación, última reforma DOF 15-05-2026',
         'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LFRCF.pdf',
         'sha256': 'cc687a4d8d9de93d2d3ec9b40b26d0273e108bb002a6f611806dc36ebce5ba2c'},
     'CPEUM': {
         'corto': 'Constitución, art. 74 fr. VI',
-        'doc': 'Constitución Política de los Estados Unidos Mexicanos, últimas reformas DOF 02-06-2026',
+        'doc': 'Constitución Política de los Estados Unidos Mexicanos, última reforma DOF 07-10-2026',
         'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf',
-        'sha256': 'ca63a23a4b7444ebdbdad93759fbf46bd14c069e587c5878decf89fc9c12ca8e'},
+        'sha256': 'cefb525ae8dfc97a7da40597d2ee918fe254d4bfce88301ff3c9959ced9e6e65'},
     'CPSHCP': {
         'corto': 'SHCP, portal de la Cuenta Pública',
         'doc': 'Secretaría de Hacienda y Crédito Público, Cuenta Pública (portal oficial, ejercicios 1996 a 2025)',

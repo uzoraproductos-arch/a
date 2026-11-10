@@ -51,7 +51,7 @@ def chip(e, pend='estado-cuenta-pesos-2024'):
     """Las etiquetas «pendiente» llevan a su ficha del Registro de pendientes."""
     e = e if e in ('oficial', 'pendiente') else 'derivado'
     extra = ' data-pend="%s"' % pend if e == 'pendiente' and pend else ''
-    return '<span class="est-chip est-%s"%s>%s</span>' % (e, extra, e)
+    return '<span class="est-chip est-%s"%s>%s</span>' % (e, extra, 'auditada' if e == 'derivado' else e)
 
 
 def pct(x):

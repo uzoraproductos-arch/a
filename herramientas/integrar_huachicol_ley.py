@@ -2,7 +2,7 @@
 """Integra al auditor el marco legal del huachicol fiscal, cotejado contra los
 textos vigentes que publica la Cámara de Diputados (27-09-2026):
 
-- Ley del IEPS (última reforma DOF 07-11-2025): art. 2o., fr. I, inciso D),
+- Ley del IEPS (última reforma DOF 22-12-2025): art. 2o., fr. I, inciso D),
   cuotas por litro actualizadas por acuerdo DOF 22-12-2025; art. 2o.-A,
   cuotas por litro que se reparten a estados y municipios.
 - Ley de Coordinación Fiscal (última reforma DOF 03-01-2024): art. 2o.
@@ -26,7 +26,7 @@ BASE = RAIZ / 'assets' / 'auditor' / 'js' / 'audit-database.js'
 
 FUENTES = {
     "lieps": {
-        "doc": "Ley del Impuesto Especial sobre Producción y Servicios, texto vigente (última reforma DOF 07-11-2025; cuotas actualizadas por acuerdo DOF 22-12-2025), Cámara de Diputados",
+        "doc": "Ley del Impuesto Especial sobre Producción y Servicios, texto vigente (última reforma DOF 22-12-2025), Cámara de Diputados",
         "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIEPS.pdf",
         "sha256": "32639ede8448f91e6ddde556d4b8bceaf349b904bc21631f06e1c8a7a3d416f4"
     },

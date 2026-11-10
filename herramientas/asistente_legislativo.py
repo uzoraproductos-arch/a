@@ -58,9 +58,14 @@ LFPRH = {'tx': 'Ley Federal de Presupuesto y Responsabilidad Hacendaria, art. 42
 DOF2014 = {'tx': 'DOF 10-02-2014, reforma político-electoral: artículo 59 y transitorio décimo primero',
            'url': 'https://dof.gob.mx/nota_detalle.php?codigo=5332025&fecha=10/02/2014'}
 INE469 = {'tx': 'INE, Acuerdo INE/CG469/2026, modelo de casilla única 2026-2027, considerandos 25 y 29 (DOF 19-08-2026)',
-          'url': 'https://dof.gob.mx/nota_detalle.php?codigo=5796656&fecha=19/08/2026'}
+          'url': 'https://dof.gob.mx/nota_detalle.php?codigo=5796656&fecha=19/08/2026',
+          'sha256': '1c0e7ba5e0d2c635506b7027e313345895655446ec8177a492aa194450e10628'}
 INE478 = {'tx': 'INE, Resolución INE/CG478/2026, fechas homologadas de las precampañas en las 32 entidades (DOF 26-08-2026)',
-          'url': 'https://dof.gob.mx/nota_detalle.php?codigo=5797204&fecha=26/08/2026'}
+          'url': 'https://dof.gob.mx/nota_detalle.php?codigo=5797204&fecha=26/08/2026',
+          'sha256': '278d811a169c963497d20a645641ac07e2901b30f6f68f252afbeba95d732644'}
+INE480 = {'tx': 'INE, Acuerdo INE/CG480/2026, Plan Integral y Calendarios de Coordinación de los Procesos Electorales Locales Concurrentes con el Federal 2026-2027 (DOF 02-09-2026)',
+          'url': 'https://dof.gob.mx/nota_detalle.php?codigo=5797731&fecha=02/09/2026',
+          'sha256': '7537dc6eb86fbe84ec517f88684df621842d27d5550d78c22517ff121da4efa7'}
 INEPRE = {'tx': 'INE, Acuerdo de criterios y plazos de las precampañas del Proceso Electoral Federal 2026-2027, punto cuarto (DOF 16-10-2026)',
           'url': 'https://dof.gob.mx/nota_detalle.php?codigo=5801398&fecha=16/10/2026'}
 INECL = {'tx': 'INE, Acuerdo de designación de los Consejos Locales para el Proceso Electoral Federal 2026-2027 (DOF 13-10-2026): el proceso arrancó el 10 de septiembre de 2026',
@@ -69,7 +74,10 @@ CNPLE = {'tx': 'INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, re
          'url': 'https://www.inegi.org.mx/contenidos/saladeprensa/boletines/2026/cnple/CNPLE_2025_RR.pdf',
          'sha256': '04305b1e81ec07b93d19ecb5ceb8d9da17aa45062d4c17ba00a8d3335a6c2524'}
 INE_PEF = 'https://ine.mx/voto-y-elecciones/elecciones-2027/'
-LGPP = {'tx': 'Ley General de Partidos Políticos, art. 79 (última reforma DOF 02-03-2023)',
+INE_PEF_DOC = {'tx': 'INE, Proceso Electoral Federal y Elecciones Locales 2026-2027: cargos a elegir por entidad federativa',
+               'url': INE_PEF,
+               'sha256': '97e5f448ba7d937e35e412ea9595034099a09fe9ade03c15c4267ae985699c55'}
+LGPP = {'tx': 'Ley General de Partidos Políticos, art. 79 (última reforma DOF 24-11-2023)',
         'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGPP.pdf',
         'sha256': '9163f0826f44c965b6d478e69c2bf0deb8795108104c3d7dddf6d11e511199b3'}
 LGRA = {'tx': 'Ley General de Responsabilidades Administrativas, arts. 29 y 32 (última reforma DOF 15-12-2025)',
@@ -192,20 +200,25 @@ def legislativo():
         'tit': 'Las próximas elecciones: 6 de junio de 2027',
         'h': '<p>Las próximas elecciones son el <b>domingo 6 de junio de 2027</b>. El proceso federal arrancó el <b>10 de septiembre de 2026</b>.</p><ul class="pa-lista">'
              '<li><b>Federal:</b> se renuevan las <b>500 diputaciones</b> federales (300 de mayoría y 200 plurinominales). No se vota Senado ni Presidencia: esos tocan en 2030.</li>'
-             '<li><b>Local:</b> hay elecciones en las <b>32 entidades</b>, todas el mismo día y en casilla única. Se eligen <b>17 gubernaturas</b>, además de congresos locales y ayuntamientos.</li>'
+             '<li><b>Local:</b> hay elecciones en las <b>32 entidades</b>, todas el mismo día y en casilla única, con <b>19,561 cargos locales</b> en juego (<b>20,061</b> en total con la Cámara federal): '
+             '<b>17 gubernaturas</b> (Aguascalientes, Baja California, Baja California Sur, Campeche, Chihuahua, Colima, Guerrero, Michoacán, Nayarit, Nuevo León, Querétaro, Quintana Roo, San Luis Potosí, Sinaloa, Sonora, Tlaxcala y Zacatecas), '
+             '<b>1,098 diputaciones locales</b> en 31 estados (664 de mayoría relativa y 434 de representación proporcional; todas las entidades salvo Coahuila, que renovó su congreso en 2026), '
+             'y en 30 entidades (todas salvo Durango y Veracruz) <b>1,786 presidencias municipales</b> y <b>16 alcaldías</b> de la Ciudad de México, <b>1,864 sindicaturas</b>, <b>14,139 regidurías</b>, <b>204 concejalías</b> y <b>437 cargos auxiliares</b> (juntas municipales en Campeche y presidencias de comunidad en Tlaxcala).</li>'
              '<li><b>Precampañas</b> federales: del <b>4 de enero al 12 de febrero de 2027</b>.</li>'
              '<li><b>Campañas</b> federales: 60 días que terminan el <b>2 de junio</b>; del 3 al 5 de junio no hay actos de campaña (la veda).</li></ul>'
              '<p><b>Ojo:</b> la elección de juezas, jueces y magistraturas <b>ya no es en 2027</b>. Una reforma la movió al <b>primer domingo de junio de 2028</b>.</p>',
         'fu': [_o('Jornada electoral: 6 de junio de 2027', LGIPE, 'el art. 22 fija el primer domingo de junio; en 2027 cae el día 6'),
                _o('Inicio del Proceso Electoral Federal 2026-2027', INECL),
                _o('Concurrencia en las 32 entidades y 17 gubernaturas', INE469),
+               _o('Plan Integral y Calendarios de Coordinación de los Procesos Electorales Locales 2026-2027', INE480),
+               _o('Cuáles son las 17 gubernaturas y desglose de cargos locales por entidad', INE_PEF_DOC),
+               _o('1,098 diputaciones locales (664 MR + 434 RP) y 19,561 cargos locales (20,061 con las 500 federales)', INE_PEF_DOC,
+                  'suma de los cargos publicados por entidad en el portal oficial del INE: 17 gubernaturas + 664 diputaciones MR + 434 RP + 1,786 presidencias municipales + 16 alcaldías + 1,864 sindicaturas + 14,139 regidurías + 204 concejalías + 437 cargos auxiliares = 19,561'),
                _o('Precampañas del 4 de enero al 12 de febrero de 2027', INEPRE),
                _o('Campañas y veda', LGIPE, 'el art. 251 da 60 días a las campañas cuando solo se elige la Cámara y las cierra tres días antes de la jornada: terminan el 2 de junio y la veda va del 3 al 5'),
-               _o('Elección judicial en 2028 (transitorios segundo y tercero, DOF 02-06-2026)', CPEUM),
-               {'que': 'Cuáles son las 17 gubernaturas y cuántos cargos locales se eligen', 'e': 'pendiente', 'p': 'elecciones-2027-cargos',
-                'fu': {'tx': 'INE, Proceso Electoral Federal 2026-2027', 'url': INE_PEF}}],
+               _o('Elección judicial en 2028 (transitorios segundo y tercero, DOF 02-06-2026)', CPEUM)],
         'ci': [{'v': '6 de junio de 2027', 'etq': 'jornada electoral', 'e': 'derivado'}, {'v': '500', 'etq': 'diputaciones federales en juego', 'e': 'oficial'},
-               {'v': '17', 'etq': 'gubernaturas', 'e': 'oficial'}],
+               {'v': '17', 'etq': 'gubernaturas', 'e': 'oficial'}, {'v': '19,561', 'etq': 'cargos locales en las 32 entidades', 'e': 'derivado', 'op': '17 + 1,098 + 1,802 + 1,864 + 14,139 + 204 + 437'}],
         'sug': ['¿Cuándo es la elección judicial?', '¿Se pueden reelegir los diputados?', '¿Cuántos diputados hay?']}
     # Rescatados de la Enciclopedia antigua (pedido del autor, 24-10-2026):
     # «la ruta crítica del proceso electoral» y «cómo evaluar a una candidata
@@ -327,7 +340,7 @@ def congresos_estados(base):
 
 
 def _chip(e, p=None):
-    return '<span class="est-chip est-%s"%s>%s</span>' % (e, ' data-pend="%s"' % p if p else '', e)
+    return '<span class="est-chip est-%s"%s>%s</span>' % (e, ' data-pend="%s"' % p if p else '', 'auditada' if e == 'derivado' else e)
 
 
 def _fuentes(fu):

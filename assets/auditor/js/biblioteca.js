@@ -17,7 +17,7 @@
 
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
   function norm(s) { return String(s || '').replace(/<[^>]+>/g, ' ').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ').trim(); }
-  function chip(e) { var t = (e === 'oficial' || e === 'pendiente') ? e : 'derivado'; return '<span class="est-chip est-' + t + '">' + t + '</span>'; }
+  function chip(e) { var t = (e === 'oficial' || e === 'pendiente') ? e : 'derivado'; return '<span class="est-chip est-' + t + '">' + (t === 'derivado' ? 'auditada' : t) + '</span>'; }
   function nf(n) { return Number(n).toLocaleString('es-MX'); }
 
   var REFS = {};

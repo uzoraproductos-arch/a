@@ -98,9 +98,6 @@ PROPIOS = [
      'La plataforma aún no integra esos tabuladores, así que el estado de cuenta de la diputación local no dice cuánto cobran sus asesores.',
      PLATAFORMA, 'https://www.plataformadetransparencia.org.mx/', 'Plataforma Nacional de Transparencia',
      [('radar-estado-de-cuenta.html#expide', 'Radar · Estado de cuenta de la diputación local')]),
-    ('tren-maya-ficha', 'Megaobras', 'Ficha pericial del Tren Maya 2024',
-     'Se retiró el 10-10-2026 porque sus cifras no se habían cotejado con el Tomo VII de la Cuenta Pública 2024 ni con la ASF. Volverá cuando cada cifra tenga su documento.',
-     PLATAFORMA, CP2024, 'Cuenta Pública 2024, Tomo VII (Hacienda)', [('expedientes.html#exp-tren-maya', 'Expediente del Tren Maya')]),
     # Crisis ambientales, quinta aplicacion de Costo Ambiental (11-10-2026).
     ('otis-diferencia', 'Desastres', 'Qué pasó con los $26,296 mdp anunciados para Otis que no aparecen como gastados',
      'Hacienda anunció el 1 de noviembre de 2023 un plan de $61,313 mdp para Acapulco y Coyuca de Benítez; la secretaria de Bienestar informó el 13 de septiembre de 2024 '
@@ -135,18 +132,11 @@ PROPIOS = [
      'Falta de transparencia de CENAPRED.',
      'Centro Nacional de Prevención de Desastres (CENAPRED)', 'https://www.cenapred.gob.mx/es/Publicaciones/archivos/521-RESUMENEJECUTIVOIMPACTO2024.PDF',
      'Impacto socioeconómico 2024 (CENAPRED)', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
-    # El Poder Legislativo en el bot (23-10-2026).
-    ('elecciones-2027-cargos', 'Elecciones', 'Cuáles son las 17 gubernaturas de 2027 y cuántos cargos locales se eligen (diputaciones locales por principio y ayuntamientos)',
-     'El INE confirma en un acuerdo publicado en el Diario Oficial (INE/CG469/2026) que en 2027 habrá elecciones en las 32 entidades y 17 gubernaturas, pero la lista por estado y el conteo de cargos '
-     'están en su calendario de coordinación con los institutos locales (INE/CG480/2026), que la plataforma aún no integra: el portal del INE no se pudo abrir con conexión verificada. '
-     'Las cifras que circulan («más de 19,600 cargos», «1,098 diputaciones locales») no se publican mientras no se cotejen con ese documento.',
-     PLATAFORMA, 'https://ine.mx/voto-y-elecciones/elecciones-2027/', 'Proceso Electoral Federal 2026-2027 (INE)',
-     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-legislativo-elecciones.html', 'Datos · Poder Legislativo · Las elecciones')]),
     # El Poder Judicial en el bot y en Datos (23-10-2026).
-    ('judicial-2025-participacion', 'Elecciones', 'Cuánta gente votó en la elección judicial del 1 de junio de 2025 (participación ciudadana final)',
-     'El INE publica la participación en su página de cómputos distritales, pero el entorno donde se arma la plataforma no puede abrir los sitios del INE, '
-     'y los acuerdos del INE que sí publica el Diario Oficial (INE/CG563/2025, INE/CG564/2025, INE/CG568/2025, INE/CG574/2025 e INE/CG1529/2025) no traen el porcentaje nacional. '
-     'Las cifras de prensa («12.7 %», «13 %») no se publican mientras no se cotejen con el INE.',
+    ('judicial-2025-participacion', 'Elecciones', 'Porcentaje definitivo de participación ciudadana del cómputo nacional de la elección judicial del 1 de junio de 2025',
+     'La plataforma ya integra la estimación muestral que informó el INE el 2 de junio de 2025 (entre 12.57 % y 13.32 % de la Lista Nominal, Comunicado 192), '
+     'pero el portal de los cómputos distritales definitivos (computospjf2025.ine.mx) dejó de resolver en DNS y los acuerdos publicados en el Diario Oficial '
+     '(INE/CG563/2025 e INE/CG564/2025) traen la suma de votos por candidatura sin el porcentaje nacional definitivo de participación.',
      PLATAFORMA, 'https://www.ine.mx/voto-y-elecciones/computos-distritales/', 'Cómputos distritales (INE)',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-eleccion.html', 'Datos · Poder Judicial · La elección judicial')]),
     ('judicial-2025-costo', 'Elecciones', 'Cuánto costó al final la elección judicial de 2025',
@@ -154,10 +144,11 @@ PROPIOS = [
      'pero eso es lo que pidió, no lo que gastó. El informe del gasto ejercido existe en los reportes del INE y la plataforma aún no lo integra.',
      PLATAFORMA, 'https://www.ine.mx/transparencia/', 'Transparencia del INE',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-eleccion.html', 'Datos · Poder Judicial · La elección judicial')]),
-    ('judicial-fideicomisos-monto', 'Poderes', 'Cuánto dinero devolvieron a la Tesorería los fideicomisos extinguidos del Poder Judicial',
-     'La reforma judicial (transitorio décimo, DOF 15-09-2024) ordenó extinguirlos y enterar sus recursos a la Tesorería en 90 días, sin decir cuánto había. '
-     'Las cifras que circulan («$15,434 millones en 13 fideicomisos») no aparecen en el decreto, y la plataforma aún no ha cotejado el informe oficial del entero.',
-     PLATAFORMA, 'https://www.gob.mx/tesofe', 'Tesorería de la Federación',
+    ('judicial-fideicomisos-monto', 'Poderes', 'Cierre definitivo de liquidación de los fideicomisos del extinto Consejo de la Judicatura Federal',
+     'La Suprema Corte ya publicó en el Diario Oficial (15-07-2025) que el 2 de abril de 2025 Nacional Financiera concentró en la Tesorería de la Federación $6,654.1 millones '
+     'de sus cinco fideicomisos, que quedaron extinguidos y en ceros. Del antiguo Consejo de la Judicatura Federal, en cambio, las entregas se frenaron por suspensiones '
+     'judiciales y el Órgano de Administración Judicial no ha publicado un informe equivalente con el entero final de liquidación en el Diario Oficial.',
+     'Órgano de Administración Judicial (antes Consejo de la Judicatura Federal) y Tesorería de la Federación', 'https://www.gob.mx/tesofe', 'Tesorería de la Federación',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-presupuesto.html', 'Datos · Poder Judicial · El presupuesto')]),
     # La auditoría de gestión del Poder Judicial (27-10-2026).
     ('judicial-tiempos-juzgados', 'Poderes', 'Cuánto tarda un juzgado o tribunal en resolver un asunto y en celebrar una audiencia, federal y estatal',
@@ -267,11 +258,6 @@ PROPIOS = [
      'Informes semestrales a la Cámara de Diputados (ASF, art. 38 LFRCF)',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('informes-documentar-para-sancionar.html', 'Datos · Informes oficiales · Informe especial'),
       ('informes-semestral-asf.html', 'Datos · Informes oficiales · Informe semestral')]),
-    ('predial-ocde', 'Estados y municipios', 'El predial como parte del PIB: 0.16% en México y 1.0% en la OCDE',
-     'Las dos cifras vienen de las Estadísticas Tributarias de la OCDE, pero la plataforma no guardó el cuadro ni la edición de donde salieron y no pudo volver a abrirlo para cotejarlas. '
-     'Quedan como pendientes hasta integrar el documento.',
-     PLATAFORMA, 'https://www.oecd.org/en/topics/tax-revenues.html', 'Estadísticas tributarias (OCDE)',
-     [('numeros-lo-que-la-cifra-no-dice.html', 'Números · Lo que la cifra grande no dice')]),
 ]
 
 

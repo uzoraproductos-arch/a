@@ -35,7 +35,7 @@
   function plano(t) { return String(t).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
   function chip(e, pend) {
     var t = (e === 'oficial' || e === 'pendiente') ? e : 'derivado';
-    return '<span class="est-chip est-' + t + '"' + (pend ? ' data-pend="' + pend + '"' : '') + '>' + t + '</span>';
+    return '<span class="est-chip est-' + t + '"' + (pend ? ' data-pend="' + pend + '"' : '') + '>' + (t === 'derivado' ? 'auditada' : t) + '</span>';
   }
   /* La llamada [nn] a fuentes-oficiales.html, como la pinta apartados.py. */
   function ref(rid) {
