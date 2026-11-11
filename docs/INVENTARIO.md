@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 722 |
+| Páginas revisadas | 723 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -735,7 +735,8 @@ La Enciclopedia queda fuera porque está congelada.
 | `radar-presupuesto-en-curso.html` | Hoy: el presupuesto en curso · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-reloj.html` | El reloj de cada administración · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `radar-tablero.html` | El tablero · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
-| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 95 | 0 | 3 | 2 | 0 |
+| `servicios-por-que.html` | Servicios de investigación · Auditavisión | apartados.py | 69 | 0 | 3 | 2 | 0 |
+| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 85 | 0 | 0 | 0 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 

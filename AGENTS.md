@@ -74,7 +74,7 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
 copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
 **Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras
 Ágora, Garantías y Donaciones), **Noticiero** (antes «Noticias») y
-**Servicios** (`servicios.html`, que fue módulo del Modo Inspector). Ningún
+**Servicios** (`servicios.html`, que fue módulo del Modo Inspector). Desde el 11-11-2026 va en cuatro familias (`LINEAS` de `apartados.py`), cada servicio con su forma de cobro en `COBRO` (**nunca un monto sin pilotos**), y sus argumentos y cuentas viven en `servicios-por-que.html`: **un servicio nuevo necesita su renglón en `COBRO`**, o la generación se detiene. Ningún
 archivo cambió de nombre. Las páginas de Números, Datos y Aprende marcan
 Comunidad (`ENCICLO_MARCAN`) y sus migas empiezan «Comunidad › Enciclopedia».
 Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.

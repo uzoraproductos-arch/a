@@ -536,5 +536,5 @@ def temas_bot(d):
         'ci': [],
         'fu': [],
         'sug': ['¿Qué servicios ofrece Auditavisión?', '¿Cómo reviso a un proveedor antes de contratarlo?', '¿Cómo puedo donar?'],
-        'ir': ['servicios.html#sostenemos', '¿Cómo nos sostenemos?']}}
+        'ir': ['servicios-por-que.html#sostenemos', '¿Cómo nos sostenemos?']}}
 
