@@ -35,7 +35,7 @@
     if (f === 'negkg') return (Math.round(v) < 0 ? '−' : '') + Math.abs(Math.round(v)).toLocaleString('es-MX') + ' kg';
     return pesosRef(v);
   }
-  function chip(e) { return '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'calculada' : e) + '</span>'; }
+  function chip(e) { return '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'auditada' : e) + '</span>'; }
   function leer(t) {
     var s = String(t == null ? '' : t).trim().toLowerCase().replace(/\s+/g, '');
     var mult = 1;

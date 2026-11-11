@@ -20,14 +20,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261111a">
-  <script src="assets/auditor/js/iconos.js?v=20261111a"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261111a"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261111a" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261111a">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261111a">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261111a">
-  <link rel="stylesheet" href="assets/auditor/css/numeros.css?v=20261111a">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261111b">
+  <script src="assets/auditor/js/iconos.js?v=20261111b"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261111b"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261111b" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261111b">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261111b">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261111b">
+  <link rel="stylesheet" href="assets/auditor/css/numeros.css?v=20261111b">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -237,7 +237,7 @@
           </div></div>
             <div class="pm-res" id="peSimResultado" aria-live="polite"><noscript><p>El simulador necesita JavaScript; los coeficientes están a la izquierda, con su cita.</p></noscript></div>
           </div>
-          <p class="pm-pie"><b>El límite de este simulador, dicho por la fuente.</b> Los Criterios advierten que sus sensibilidades «son indicativas, dentro de un rango de variación acotado, y consideran el efecto <b>aislado</b> de cada variable, sin incorporar sus posibles interacciones». Esta calculadora hereda esa limitación a propósito: añadir interacciones exigiría inventar coeficientes que nadie publicó. El PIB nominal también se mantiene fijo por la misma razón. Los resultados son <span class="est-chip est-derivado">calculada</span>: aplican los coeficientes oficiales a la diferencia contra el supuesto de los Criterios.</p>
+          <p class="pm-pie"><b>El límite de este simulador, dicho por la fuente.</b> Los Criterios advierten que sus sensibilidades «son indicativas, dentro de un rango de variación acotado, y consideran el efecto <b>aislado</b> de cada variable, sin incorporar sus posibles interacciones». Esta calculadora hereda esa limitación a propósito: añadir interacciones exigiría inventar coeficientes que nadie publicó. El PIB nominal también se mantiene fijo por la misma razón. Los resultados son <span class="est-chip est-derivado">auditada</span>: aplican los coeficientes oficiales a la diferencia contra el supuesto de los Criterios.</p>
           <script type="application/json" id="peDatos">{"s": [{"id": "s-crec", "n": "Crecimiento económico", "icono": "📈", "base": 2.0, "min": 0.0, "max": 4.0, "paso": 0.1, "unidad": "% real anual", "dec": 1, "tramo": 0.5, "coef": 30200.0, "destino": "ingresos", "cita": "Efecto de un incremento de medio punto real de crecimiento económico sobre los ingresos tributarios: 30.2 mmp.", "porque": "Más actividad económica significa más IVA y más ISR sin cambiar una sola tasa."}, {"id": "s-precio", "n": "Precio de la mezcla mexicana", "icono": "🛢️", "base": 61.8, "min": 25.0, "max": 110.0, "paso": 1.0, "unidad": "dólares por barril", "dec": 1, "tramo": 1.0, "coef": 9600.0, "destino": "ingresos", "cita": "Efecto de un dólar adicional en promedio anual del precio del petróleo sobre los ingresos petroleros: 9.6 mmp.", "porque": "Sube lo que se cobra por exportar crudo más de lo que sube el costo de importar hidrocarburos."}, {"id": "s-plataforma", "n": "Plataforma de producción", "icono": "⛽", "base": 1800.0, "min": 1400.0, "max": 2200.0, "paso": 25.0, "unidad": "miles de barriles diarios", "dec": 0, "tramo": 50.0, "coef": 21800.0, "destino": "ingresos", "cita": "Efecto de un aumento de 50 mil barriles diarios de extracción de crudo sobre los ingresos petroleros: 21.8 mmp.", "porque": "Más barriles extraídos, más ventas. La meta de 1.8 millones se repite sin cambio de 2026 a 2032."}, {"id": "s-tipocambio", "n": "Tipo de cambio promedio", "icono": "💱", "base": 17.9, "min": 14.0, "max": 26.0, "paso": 0.1, "unidad": "pesos por dólar", "dec": 2, "tramo": 0.2, "coef": 8100.0, "coef2": 2100.0, "destino": "ambos", "cita": "Efecto de una apreciación de 20 centavos en el tipo de cambio promedio: −6.0 mmp netos. Ingresos petroleros −8.1; costo financiero +2.1.", "porque": "Un peso más fuerte vale menos crudo exportado, pero también abarata en pesos la deuda contratada en dólares. Gana el primer efecto."}, {"id": "s-tasa", "n": "Tasa de interés", "icono": "🏦", "base": 6.1, "min": 2.0, "max": 14.0, "paso": 0.25, "unidad": "% Cetes 28 días, promedio", "dec": 2, "tramo": 1.0, "coef": 37900.0, "destino": "costofin", "cita": "Efecto de un aumento de 100 puntos base en la tasa de interés sobre el costo financiero: 37.9 mmp.", "porque": "Encarece la deuda a tasa variable y el refinanciamiento de la que va venciendo. Es la palanca más cara del cuadro."}, {"id": "s-inflacion", "n": "Inflación", "icono": "🌡️", "base": 3.2, "min": 0.0, "max": 12.0, "paso": 0.1, "unidad": "% promedio anual", "dec": 1, "tramo": 1.0, "coef": 1300.0, "destino": "costofin", "cita": "Efecto de un aumento de 100 puntos base en la tasa de inflación sobre el costo financiero: 1.3 mmp.", "porque": "Encarece los Udibonos y la deuda indexada a la unidad de inversión."}], "b": {"ingresos": 9156528.9, "costofin": 1574950.2, "balance": -1358558.8, "extrapres": -197097.0, "rfsp": -1555655.8, "pib": 39419400.0, "gastoNeto": 10636488.1, "tolerancia": 212729.762, "meta": -3.9, "metaBalance": -3.4}, "e": [{"id": "pe-base", "n": "Como lo proyecta Hacienda", "icono": "📋", "v": {}, "d": "Las seis variables en el valor que los Criterios suponen para 2027."}, {"id": "pe-tasas", "n": "Choque de tasas", "icono": "📈", "v": {"s-tasa": 8.6}, "d": "La tasa de referencia sube 250 puntos base y no baja en todo el año."}, {"id": "pe-crudo", "n": "Petróleo a 45 dólares", "icono": "🛢️", "v": {"s-precio": 45, "s-plataforma": 1700}, "d": "La mezcla cae a 45 dólares y la plataforma se queda cien mil barriles por debajo de la meta."}, {"id": "pe-frenon", "n": "Frenón económico", "icono": "🔻", "v": {"s-crec": 0.5, "s-tasa": 7.1, "s-tipocambio": 19.5}, "d": "El PIB crece medio punto, el peso se deprecia a 19.50 y la tasa sube cien puntos base."}, {"id": "pe-cola", "n": "Viento de cola", "icono": "🌞", "v": {"s-crec": 3.0, "s-precio": 78, "s-tasa": 5.1}, "d": "Crecimiento de 3%, petróleo en 78 dólares y cien puntos base menos de tasa."}]}</script>
         </section>
         </div>
@@ -259,12 +259,12 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261111a</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261111b</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261111a"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261111a"></script>
-  <script src="assets/auditor/js/presupuesto.js?v=20261111a"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261111b"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261111b"></script>
+  <script src="assets/auditor/js/presupuesto.js?v=20261111b"></script>
 </body>
 </html>

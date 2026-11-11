@@ -225,7 +225,7 @@ def _mdp(v):
 
 def _chip(e, pend=None):
     e = e if e in ('oficial', 'pendiente') else 'derivado'
-    return '<span class="est-chip est-%s"%s>%s</span>' % (e, ' data-pend="%s"' % pend if pend else '', 'calculada' if e == 'derivado' else e)
+    return '<span class="est-chip est-%s"%s>%s</span>' % (e, ' data-pend="%s"' % pend if pend else '', 'auditada' if e == 'derivado' else e)
 
 
 def _doc(texto, url):
@@ -370,7 +370,7 @@ def temas(actual):
         for ico, tit, ids in sorted(TEMAS, key=lambda t: actual not in t[2]))
     return ('        <div class="au-temas">\n%s\n        </div>\n'
             '        <p class="au-metodo"><span aria-hidden="true">🔎</span> <b>Cómo verificamos:</b> cada cifra lleva su fuente oficial y su estado: '
-            '<span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">calculada</span> '
+            '<span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">auditada</span> '
             '<span class="est-chip est-pendiente">pendiente</span>. Las imágenes son ilustraciones, no evidencia. '
             '<a href="indice.html#metodologia">Lee la metodología y las novedades ➔</a></p>') % grupos
 

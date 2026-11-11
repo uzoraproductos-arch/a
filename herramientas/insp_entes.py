@@ -80,7 +80,7 @@ def _json(x):
 
 def chip(e, pend=None):
     e = e if e in ('oficial', 'pendiente') else 'derivado'
-    return '<span class="est-chip est-%s"%s>%s</span>' % (e, (' data-pend="%s"' % pend) if pend else '', 'calculada' if e == 'derivado' else e)
+    return '<span class="est-chip est-%s"%s>%s</span>' % (e, (' data-pend="%s"' % pend) if pend else '', 'auditada' if e == 'derivado' else e)
 
 
 def _num(x):

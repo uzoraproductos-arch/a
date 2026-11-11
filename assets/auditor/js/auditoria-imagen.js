@@ -52,7 +52,7 @@
   function mdpPesos(p) { return fmt(p / 1e6, 'mdp1'); }
   function chip(e, pend) {
     var t = (e === 'oficial' || e === 'pendiente') ? e : 'derivado';
-    return '<span class="est-chip est-' + t + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + (t === 'derivado' ? 'calculada' : t) + '</span>';
+    return '<span class="est-chip est-' + t + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + (t === 'derivado' ? 'auditada' : t) + '</span>';
   }
   function suma(l, c) { return l.reduce(function (a, x) { return a + (x[c] || 0); }, 0); }
   function acc(l, c) { return l.reduce(function (a, x) { return a + ((x.acciones && x.acciones[c]) || 0); }, 0); }

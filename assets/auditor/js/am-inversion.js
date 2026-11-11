@@ -18,7 +18,7 @@
   }
   function mdp(v) { return '$' + n(v, v < 100 ? 1 : 0) + ' mdp'; }
   function grande(v) { return v >= 1e6 ? '$' + n(v / 1e6, 2) + ' billones' : mdp(v); }
-  function chip(e) { return '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'calculada' : e) + '</span>'; }
+  function chip(e) { return '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'auditada' : e) + '</span>'; }
   function esc(v) {
     return String(v).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];

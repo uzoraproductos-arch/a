@@ -68,7 +68,7 @@
        estan publicados. Llamar «derivado» al tercero seria fingir que
        existe un calculo detras. */
     const texto = (estado === 'oficial' || estado === 'pendiente') ? estado : 'derivado';
-    return '<span class="est-chip est-' + texto + '">' + (texto === 'derivado' ? 'calculada' : texto) + '</span>';
+    return '<span class="est-chip est-' + texto + '">' + (texto === 'derivado' ? 'auditada' : texto) + '</span>';
   }
 
   function dlMunicipios() {

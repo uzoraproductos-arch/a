@@ -433,9 +433,10 @@ Esto es una plataforma de fiscalización del gasto público:
 - Los estados de un dato son tres: `oficial` (tomado de su documento),
   `derivado` (calculado a partir de datos oficiales, con la operación dicha)
   y `pendiente`. La función `chipEstado(estado)` los pinta. El recuadro de
-  `derivado` se lee **«calculada»** (11-11-2026; del 09 al 11-11 dijo
-  «auditada», que se confundía con «revisada por una autoridad»): la clave
-  interna y la clase `.est-derivado` no cambian.
+  `derivado` se lee **«auditada»** (decisión del autor, 09-11-2026,
+  confirmada el 11-11-2026: ese día dijo «calculada» por unas horas y el
+  autor pidió regresarla): la clave interna y la clase `.est-derivado` no
+  cambian.
 - Las estructuras derogadas se marcan con su vigencia en lugar de borrarse.
 - **Un `pendiente` dice por qué y señala a quién** (decisión del autor,
   09-10-2026). No basta con «no hay documento oficial»: casi siempre falta

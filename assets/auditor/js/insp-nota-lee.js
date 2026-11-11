@@ -40,7 +40,7 @@
   }
   function fmt(mdp) { return (mdp < 0 ? '−' : '') + '$' + Math.abs(Number(mdp)).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp'; }
   function pctTx(p) { return (p >= 0 ? '+' : '−') + Math.abs(p).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' %'; }
-  function chip(e) { return '<span class="est-chip est-' + esc(e) + '">' + esc(e === 'derivado' ? 'calculada' : e) + '</span>'; }
+  function chip(e) { return '<span class="est-chip est-' + esc(e) + '">' + esc(e === 'derivado' ? 'auditada' : e) + '</span>'; }
   function fuente(o) {
     return o.u ? '<a href="' + esc(o.u) + '" target="_blank" rel="noopener">' + esc(o.f || 'documento') + ' ↗</a>' : esc(o.f || '');
   }

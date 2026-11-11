@@ -56,7 +56,7 @@
   }
   function chip(e, pid) {
     var t = (e === 'oficial' || e === 'pendiente') ? e : 'derivado';
-    return '<span class="est-chip est-' + t + '"' + (pid ? ' data-pend="' + esc(pid) + '"' : '') + '>' + (t === 'derivado' ? 'calculada' : t) + '</span>';
+    return '<span class="est-chip est-' + t + '"' + (pid ? ' data-pend="' + esc(pid) + '"' : '') + '>' + (t === 'derivado' ? 'auditada' : t) + '</span>';
   }
   function tieneV(x) { return x && typeof x.v === 'number'; }
   function val(a, m) { return (D.valores[a] || {})[m] || { pend: 'Sin dato.' }; }
