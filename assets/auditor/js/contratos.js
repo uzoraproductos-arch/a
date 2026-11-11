@@ -44,7 +44,7 @@
     if (Math.abs(v) >= 1e6) return '$' + (v / 1e6).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp';
     return '$' + Math.round(v).toLocaleString('es-MX');
   }
-  function chip(e) { return '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'calculada' : e) + '</span>'; }
+  function chip(e) { return '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'auditada' : e) + '</span>'; }
   function n(v) { return Number(v).toLocaleString('es-MX'); }
   function pct(a, b) { return b ? (Math.round(a / b * 1000) / 10).toLocaleString('es-MX') : '0'; }
   var RFC = /^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$/;

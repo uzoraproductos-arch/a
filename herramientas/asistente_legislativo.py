@@ -340,7 +340,7 @@ def congresos_estados(base):
 
 
 def _chip(e, p=None):
-    return '<span class="est-chip est-%s"%s>%s</span>' % (e, ' data-pend="%s"' % p if p else '', 'calculada' if e == 'derivado' else e)
+    return '<span class="est-chip est-%s"%s>%s</span>' % (e, ' data-pend="%s"' % p if p else '', 'auditada' if e == 'derivado' else e)
 
 
 def _fuentes(fu):

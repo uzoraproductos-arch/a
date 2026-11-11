@@ -133,7 +133,7 @@
     var cotejo = '';
     if (oficialIntacto) {
       var bo = EJ.totales.balance[st.origen], dif = Math.round((b - bo) * 10) / 10;
-      cotejo = '<p class="sz-cotejo"><span class="est-chip est-derivado">calculada</span> Entradas menos salidas da ' + dinero(b) +
+      cotejo = '<p class="sz-cotejo"><span class="est-chip est-derivado">auditada</span> Entradas menos salidas da ' + dinero(b) +
         '. El cuadro publica un balance presupuestario de ' + dinero(bo) + ' <span class="est-chip est-oficial">oficial</span>' +
         (dif ? ': la diferencia de ' + num(Math.abs(dif)) + ' es de redondeo, como advierte el propio cuadro («las sumas parciales pueden no coincidir»).' : ', igual.') +
         ' Ese faltante es el déficit, y se cubre con deuda.</p>';
@@ -158,7 +158,7 @@
         return '<div class="sz-bar"><span class="sz-bar-n">' + esc(f.nombre) + '</span>' +
           '<span class="sz-bar-t"><span class="sz-bar-r" style="width:' + p.toFixed(2) + '%"></span></span>' +
           '<span class="sz-bar-v">' + p.toFixed(1) + ' %</span></div>';
-      }).join('') + '<p class="sz-nota">Porcentaje = importe del destino ÷ total que sale (' + dinero(s) + ') × 100. <span class="est-chip est-derivado">calculada</span></p>';
+      }).join('') + '<p class="sz-nota">Porcentaje = importe del destino ÷ total que sale (' + dinero(s) + ') × 100. <span class="est-chip est-derivado">auditada</span></p>';
     }
 
     document.getElementById('szOps').innerHTML = operaciones().map(function (o) {

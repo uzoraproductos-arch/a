@@ -344,7 +344,7 @@ def seccion():
     d = datos()
     M, T = d['meta'], d['tot']
     of = '<span class="est-chip est-oficial">oficial</span>'
-    de = '<span class="est-chip est-derivado">calculada</span>'
+    de = '<span class="est-chip est-derivado">auditada</span>'
     pe = '<span class="est-chip est-pendiente" data-pend="%s">pendiente</span>' % PEND
     anios = sorted(T)
     cifras = ''.join(

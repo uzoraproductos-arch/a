@@ -118,8 +118,8 @@
       }).join('') + '</ul>' : '';
       det.innerHTML = '<div class="gp-det-cab" style="--c:' + x.color + '">' + (x.ico ? '<span class="gp-det-ico" aria-hidden="true">' + x.ico + '</span>' : '') +
         '<h3>' + esc(x.nom) + '</h3></div>' +
-        '<div class="gp-det-cifras"><p><b>$' + num(x.v, 1) + ' mdp</b> <span class="est-chip est-' + x.est + '">' + (x.est === 'derivado' ? 'calculada' : x.est) + '</span></p>' +
-        (id === 'total' ? '' : '<p class="gp-det-cien">De cada $100 que se gastan<b>$' + num(x.v / total * 100, 2) + '</b> <span class="est-chip est-derivado">calculada</span></p>') + '</div>' +
+        '<div class="gp-det-cifras"><p><b>$' + num(x.v, 1) + ' mdp</b> <span class="est-chip est-' + x.est + '">' + (x.est === 'derivado' ? 'auditada' : x.est) + '</span></p>' +
+        (id === 'total' ? '' : '<p class="gp-det-cien">De cada $100 que se gastan<b>$' + num(x.v / total * 100, 2) + '</b> <span class="est-chip est-derivado">auditada</span></p>') + '</div>' +
         '<p class="gp-det-que">' + esc(x.que) + '</p>' +
         (x.op ? '<p class="gp-det-op">Operación: ' + esc(x.op) + '</p>' : '') + lista +
         (x.p ? '<p class="gp-det-irp"><a href="' + x.p + '">Abrir la página de «' + esc(x.nom) + '» ➔</a></p>' : '');

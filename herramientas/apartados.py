@@ -1833,7 +1833,7 @@ def contratos_publicos():
                         'de la Secretaría Anticorrupción y Buen Gobierno. Descargados el %s:</p>\n          <ul>%s</ul>\n'
                         '          <ul>\n'
                         '            <li><b>El importe de cada contrato es oficial</b> <span class="est-chip est-oficial">oficial</span>: el «Importe DRC», antes de impuestos, tal como lo reportó la institución. '
-                        'Las sumas y los porcentajes son <span class="est-chip est-derivado">calculada</span>: se suman solo los contratos en pesos; los de otras monedas se muestran aparte, sin convertir.</li>\n'
+                        'Las sumas y los porcentajes son <span class="est-chip est-derivado">auditada</span>: se suman solo los contratos en pesos; los de otras monedas se muestran aparte, sin convertir.</li>\n'
                         '            <li><b>No es lo pagado.</b> En un contrato abierto el importe suele ser el máximo. ComprasMX no publica pagos: lo pagado se rinde en la Cuenta Pública.</li>\n'
                         '            <li><b>El año es el del expediente</b>, no el del pago: el archivo de 2025 trae contratos firmados en 2026.</li>\n'
                         '            <li><b>Solo lo que se reporta en ComprasMX.</b> Los estados y municipios que no la usan no aparecen, y los años anteriores a 2025 están en el CompraNet histórico, que aún no integramos.</li>\n'
@@ -2258,7 +2258,7 @@ def servicios():
     import monetizacion
     monetizacion.revisar()
     base = ('<div class="sv-base">\n%s\n        </div>\n'
-            '        <p class="sv-nota">Son conteos de los archivos de la plataforma al generar esta página (<span class="est-chip est-derivado">calculada</span>); '
+            '        <p class="sv-nota">Son conteos de los archivos de la plataforma al generar esta página (<span class="est-chip est-derivado">auditada</span>); '
             'cada uno dice de qué documento sale.</p>') % '\n'.join(
         '          <a class="sv-base-n" href="%s">\n'
         '            <span class="sv-base-cifra">%s</span>\n'
@@ -2302,7 +2302,7 @@ def servicios():
         '            <p class="sv-dato-cifra">%s %s</p>\n'
         '            <p class="sv-dato-tx">%s%s</p>\n'
         '            <p class="sv-dato-fu">Fuente: <a href="%s" target="_blank" rel="noopener">%s ↗</a></p>\n'
-        '          </article>' % (html.escape(c[1]), html.escape(c[2]), '<span class="est-chip est-%s">%s</span>' % (c[4], 'calculada' if c[4] == 'derivado' else c[4]),
+        '          </article>' % (html.escape(c[1]), html.escape(c[2]), '<span class="est-chip est-%s">%s</span>' % (c[4], 'auditada' if c[4] == 'derivado' else c[4]),
                                   html.escape(c[3]), (' <small>(%s)</small>' % html.escape(c[5])) if c[5] else '', esc_attr(c[7][1]), html.escape(c[7][0]))
         for c in (cf[k] for k in POR_QUE))
 
@@ -3496,7 +3496,7 @@ RADAR_OJO_MDP = RADAR_OJO_MON['nom']
 # (plantillas/radar.html), con las mismas fuentes y chips.
 def _hoy(ico, cifra, que, fuente, chip='oficial', pend=''):
     return ('          <div class="rd-hoy-c"><span class="rd-hoy-que">%s %s</span><b>%s</b> <span class="est-chip est-%s"%s>%s</span><small>📄 %s</small></div>'
-            % (ico, que, cifra, chip, (' data-pend="%s"' % pend) if pend else '', 'calculada' if chip == 'derivado' else chip, fuente))
+            % (ico, que, cifra, chip, (' data-pend="%s"' % pend) if pend else '', 'auditada' if chip == 'derivado' else chip, fuente))
 
 
 # El contador (pedido del autor, 10-10-2026): las cifras arrancan en cero y
@@ -4682,7 +4682,7 @@ GUIA = '''<section class="apartado-guia" aria-labelledby="guiaTitulo">
         <ol class="apartado-pasos">
           <li><span class="apartado-paso-num" aria-hidden="true">1</span><span><b>Elige una herramienta y pulsa «Comenzar».</b> Cada color es un tema: las obras, tus impuestos, lo que revisó la Auditoría y el ambiente. Cada una abre su propia página y te cuenta qué trae.</span></li>
           <li><span class="apartado-paso-num" aria-hidden="true">2</span><span><b>Elige un módulo.</b> Cada herramienta se recorre en módulos numerados y cada uno abre su propia página; adentro hay juegos y cuentas para descubrir las cifras tú mismo.</span></li>
-          <li><span class="apartado-paso-num" aria-hidden="true">3</span><span><b>Mira la etiqueta de cada cifra.</b> <span class="est-chip est-oficial">oficial</span> viene de un documento del gobierno; <span class="est-chip est-derivado">calculada</span> lo calculamos con datos oficiales y te decimos cómo; <span class="est-chip est-pendiente">pendiente</span> la dependencia responsable no lo ha transparentado en un documento oficial, y te decimos cuál.</span></li>
+          <li><span class="apartado-paso-num" aria-hidden="true">3</span><span><b>Mira la etiqueta de cada cifra.</b> <span class="est-chip est-oficial">oficial</span> viene de un documento del gobierno; <span class="est-chip est-derivado">auditada</span> lo calculamos con datos oficiales y te decimos cómo; <span class="est-chip est-pendiente">pendiente</span> la dependencia responsable no lo ha transparentado en un documento oficial, y te decimos cuál.</span></li>
         </ol>
       </section>'''
 
@@ -4903,7 +4903,7 @@ def numeros_tres(d):
                 '<p class="np3-cifra"><b>%s</b> <span class="est-chip est-%s">%s</span></p>'
                 '<p class="np3-cien">De cada $100: <b>$%.2f</b></p>'
                 '<p class="np3-que">%s</p><ul class="np3-filas">%s</ul><p class="np3-op">%s %s</p></article>'
-                % (x['id'], x['ico'], x['nom'], _mdp(x['v']), x['est'], 'calculada' if x['est'] == 'derivado' else x['est'], x['v'] / tot * 100,
+                % (x['id'], x['ico'], x['nom'], _mdp(x['v']), x['est'], 'auditada' if x['est'] == 'derivado' else x['est'], x['v'] / tot * 100,
                    x['que'], filas, x['op'], ' '.join(nota_ref(f['url'].split('#')[1], f['n'], f['t']) for f in x['f'])))
     return '''<div class="np3">
           <p class="np3-intro">La doctrina del derecho económico lee el presupuesto en tres renglones %s. Hacienda no los publica con esos nombres, pero sí su <b>clasificación funcional</b>: cada uno corresponde a una de sus finalidades. Aquí se juntan, con la operación a la vista.</p>
@@ -4917,7 +4917,7 @@ def numeros_tres(d):
         nota_ref('ref-gomez-granillo-1995', 119, 'Gómez Granillo y Gutiérrez Rosas (1995)'),
         ''.join(tarjeta(s[k]) for k in ('estado', 'nacional', 'social')),
         'Ley General de Contabilidad Gubernamental ' + nota_ref('ref-lgcg', 12, 'Ley General de Contabilidad Gubernamental'),
-        s['comprometido']['ico'], s['comprometido']['nom'], _mdp(s['comprometido']['v']), s['comprometido']['est'], 'calculada' if s['comprometido']['est'] == 'derivado' else s['comprometido']['est'],
+        s['comprometido']['ico'], s['comprometido']['nom'], _mdp(s['comprometido']['v']), s['comprometido']['est'], 'auditada' if s['comprometido']['est'] == 'derivado' else s['comprometido']['est'],
         s['comprometido']['que'], s['comprometido']['v'] / tot * 100, s['comprometido']['op'],
         ''.join('<li><a href="glosario.html#%s">%s</a><b>%s</b></li>' % (f['g'], f['n'], _mdp(f['v'])) for f in s['comprometido']['filas']),
         _mdp(s['fondos']['v']), '$%.2f' % (s['fondos']['v'] / tot * 100), glos('Fondo Mexicano del Petróleo (FMP)', 'fondos de estabilización'),
@@ -5021,7 +5021,7 @@ def numeros_renglones(base, d, lleno=False):
         bloques.append(
             '<div class="nr-grupo"><h3 class="nr-grupo-tit"><span>%s</span><span class="nr-grupo-v">%s · %s%% %s</span></h3><ol class="nr-filas">%s</ol></div>' % (
                 nombre, _mdp0(suma), format(suma / total * 100, '.1f'),
-                '<span class="est-chip est-derivado" title="Suma de sus renglones">calculada</span>' if len(filas) > 1 else '<span class="est-chip est-oficial">oficial</span>',
+                '<span class="est-chip est-derivado" title="Suma de sus renglones">auditada</span>' if len(filas) > 1 else '<span class="est-chip est-oficial">oficial</span>',
                 ''.join('<li><a class="nr-fila" href="%s" data-v="%.1f" data-w="%.2f" data-pct="%.1f">'
                         '<span class="nr-ico" aria-hidden="true">%s</span><span class="nr-nom">%s</span>'
                         '<span class="nr-barra" aria-hidden="true"><span class="nr-relleno"%s></span></span>'
@@ -5092,7 +5092,7 @@ def ingreso_pagina(x, n, lista, total, refs, glosario):
     bloque = '''<div class="ni">
           <div class="ni-cifra">
             <p class="ni-monto"><b>%s</b> <span class="est-chip est-%s">%s</span></p>
-            <p class="ni-datos"><span>De cada $100 que entran: <b>$%.2f</b> <span class="est-chip est-derivado">calculada</span></span>
+            <p class="ni-datos"><span>De cada $100 que entran: <b>$%.2f</b> <span class="est-chip est-derivado">auditada</span></span>
             <span>Familia: <b>%s</b></span><span>Clave en el art. 1o. de la ley: <b>%s</b></span></p>
             <p class="np-pie">Monto autorizado por la %s %s. «De cada $100» = %s ÷ %s × 100.</p>
           </div>
@@ -5103,7 +5103,7 @@ def ingreso_pagina(x, n, lista, total, refs, glosario):
           </div>
           <section class="ni-desg"><h2>Qué trae por dentro</h2>%s</section>
         </div>''' % (
-        _mdp0(x['montoMdp']), x['estado'], 'calculada' if x['estado'] == 'derivado' else x['estado'], x['montoMdp'] / total * 100, x['grupo'], x['claveLIF'],
+        _mdp0(x['montoMdp']), x['estado'], 'auditada' if x['estado'] == 'derivado' else x['estado'], x['montoMdp'] / total * 100, x['grupo'], x['claveLIF'],
         glos('LIF (Ley de Ingresos de la Federación)', 'Ley de Ingresos de la Federación 2026, art. 1o.'),
         nota_ref('ref-lif2026', 10, 'Ley de Ingresos de la Federación 2026'), _mdp0(x['montoMdp']), _mdp0(total),
         'grava' if x['grupo'] == 'Impuestos' else 'es', x['quePaga'], x['efecto'], x['ley'],
@@ -5393,7 +5393,7 @@ def gasto_reparte(base, d):
             <span class="gp-rep-atajos">%s</span>
           </div>
           <ol class="gp-rep" id="gpRep">%s</ol>
-          <p class="np-pie" id="gpRepPie">Operación: cantidad × (renglón ÷ %s) <span class="est-chip est-derivado">calculada</span>. Los ocho renglones suman %s; los %s que faltan para el total son redondeo de la fuente, que publica la clasificación funcional en miles de millones. Cifras de la clasificación funcional de los Criterios 2027 %s y del PEF 2026 %s.</p>
+          <p class="np-pie" id="gpRepPie">Operación: cantidad × (renglón ÷ %s) <span class="est-chip est-derivado">auditada</span>. Los ocho renglones suman %s; los %s que faltan para el total son redondeo de la fuente, que publica la clasificación funcional en miles de millones. Cifras de la clasificación funcional de los Criterios 2027 %s y del PEF 2026 %s.</p>
           <script type="application/json" id="gpDatos">%s</script>
           <noscript><p>La cuenta necesita JavaScript. Los ocho renglones, con su cifra y su fuente, están en sus páginas.</p></noscript>
         </section>''' % (
@@ -5541,7 +5541,7 @@ def egreso_pagina(x, n, lista, total, refs, glosario):
     bloque = '''<div class="ni" style="--c:%s">
           <div class="ni-cifra">
             <p class="ni-monto"><b>%s</b> <span class="est-chip est-%s">%s</span></p>
-            <p class="ni-datos"><span>De cada $100 que se gastan: <b>$%.2f</b> <span class="est-chip est-derivado">calculada</span></span>
+            <p class="ni-datos"><span>De cada $100 que se gastan: <b>$%.2f</b> <span class="est-chip est-derivado">auditada</span></span>
             <span>Tipo: <b>gasto %s</b></span><span>Dónde está: <b>%s</b></span></p>
             <p class="np-pie">«De cada $100» = %s ÷ %s × 100.</p>
           </div>
@@ -5552,7 +5552,7 @@ def egreso_pagina(x, n, lista, total, refs, glosario):
           <section class="ni-desg"><h2>Por qué importa</h2><p>%s</p></section>
           %s%s
         </div>''' % (
-        GP_COLOR[x['id']], _mdp0(x['montoMdp']), x['estado'], 'calculada' if x['estado'] == 'derivado' else x['estado'], x['montoMdp'] / total * 100, x['grupo'].lower(), x['clave'],
+        GP_COLOR[x['id']], _mdp0(x['montoMdp']), x['estado'], 'auditada' if x['estado'] == 'derivado' else x['estado'], x['montoMdp'] / total * 100, x['grupo'].lower(), x['clave'],
         _mdp0(x['montoMdp']), _mdp0(total), x['queCubre'], x['ley'],
         nota_ref(x['refKey'], r['num'], re.sub('<[^>]+>', '', r.get('cita_apa', ''))[:160].replace('"', '&quot;')),
         ('<p><a href="glosario.html#%s">📖 El concepto, en el glosario</a></p>' % glosario_ancla(term)) if term else '',
@@ -6214,7 +6214,7 @@ def indice(base, ref):
         '          <p>Toda cifra de la plataforma lleva su fuente oficial y uno de tres estados:</p>\n'
         '          <ul class="indice-lista indice-estados">\n'
         '            <li><span class="est-chip est-oficial">oficial</span> La tomamos tal cual de su documento (DOF, SHCP, ASF, INEGI, Banxico), con la liga para que la revises.</li>\n'
-        '            <li><span class="est-chip est-derivado">calculada</span> La calculamos a partir de cifras oficiales y te decimos la operación.</li>\n'
+        '            <li><span class="est-chip est-derivado">auditada</span> La calculamos a partir de cifras oficiales y te decimos la operación.</li>\n'
         '            <li><span class="est-chip est-pendiente">pendiente</span> El dato no está en un documento que podamos citar. Decimos por qué y, si la dependencia obligada no lo ha publicado, la nombramos. Nunca lo estimamos.</li>\n'
         '          </ul>\n'
         '          <p>Las imágenes de las investigaciones son ilustraciones y lo dicen en una etiqueta: no son evidencia de ningún hecho. '

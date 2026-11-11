@@ -39,7 +39,7 @@
       if (a >= 1e6) return s + h(v / 1e6) + ' millones';
       return s + h(v);
     }
-    function chip(e, p) { return '<span class="est-chip est-' + esc(e) + '"' + (p ? ' data-pend="' + esc(p) + '"' : '') + '>' + esc(e === 'derivado' ? 'calculada' : e) + '</span>'; }
+    function chip(e, p) { return '<span class="est-chip est-' + esc(e) + '"' + (p ? ' data-pend="' + esc(p) + '"' : '') + '>' + esc(e === 'derivado' ? 'auditada' : e) + '</span>'; }
     function liga(f) { return f && f.url ? '<a href="' + esc(f.url) + '" target="_blank" rel="noopener noreferrer">' + esc(f.tx) + ' ↗</a>' : esc(f && f.tx || ''); }
     /* «De dónde sale»: los chips a la vista y las fuentes a un toque. */
     function deDonde(lista) {

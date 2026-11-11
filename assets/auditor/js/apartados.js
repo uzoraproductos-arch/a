@@ -324,7 +324,7 @@
      motor, que estas páginas no cargan: si cambia uno, cambia el otro. */
   var logo = document.getElementById('apartadoPresentacion');
   var cajOv = null, cajDr = null, cajOrigen = null;
-  function chip(e) { return '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'calculada' : e) + '</span>'; }
+  function chip(e) { return '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'auditada' : e) + '</span>'; }
   function sec(tit, h) { return '<section class="glos-drawer-sec"><h4>' + tit + '</h4>' + h + '</section>'; }
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
   function cerrarCajon() {

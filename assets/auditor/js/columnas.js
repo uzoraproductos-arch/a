@@ -5626,7 +5626,7 @@
     });
   }
   function chip(estado) {
-    return '<span class="est-chip est-' + esc(estado) + '">' + esc(estado === 'derivado' ? 'calculada' : estado) + '</span>';
+    return '<span class="est-chip est-' + esc(estado) + '">' + esc(estado === 'derivado' ? 'auditada' : estado) + '</span>';
   }
   function figura(c, grande) {
     if (c.imagen) {

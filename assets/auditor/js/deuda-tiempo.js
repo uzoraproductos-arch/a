@@ -140,7 +140,7 @@
   }
   function chip(e) {
     var t = (e === 'oficial' || e === 'pendiente') ? e : 'derivado';
-    return '<span class="est-chip est-' + t + '">' + (t === 'derivado' ? 'calculada' : t) + '</span>';
+    return '<span class="est-chip est-' + t + '">' + (t === 'derivado' ? 'auditada' : t) + '</span>';
   }
   function fuente(k) {
     var f = F[k];

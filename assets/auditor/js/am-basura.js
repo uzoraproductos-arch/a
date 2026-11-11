@@ -32,7 +32,7 @@
   }
   function pct(v, d) { return n(v, d == null ? 1 : d) + ' %'; }
   function mdp(pesos) { return '$' + n(pesos / 1e6, 1) + ' mdp'; }
-  function chip(e) { return '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'calculada' : e) + '</span>'; }
+  function chip(e) { return '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'auditada' : e) + '</span>'; }
   function esc(v) {
     return String(v).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
