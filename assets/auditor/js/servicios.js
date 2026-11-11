@@ -283,3 +283,44 @@
     form.querySelectorAll('[aria-invalid]').forEach(function (el) { el.removeAttribute('aria-invalid'); });
   });
 })();
+
+/* Pestañas de la página (11-11-2026): las familias de servicios y los perfiles
+   se ven de una en una. Sin JavaScript se ven todas. Un enlace a #sv-<id> o a
+   #fam-<id> abre la pestaña donde vive. */
+(function () {
+  'use strict';
+  var grupos = document.querySelectorAll('[data-sv-tabs]');
+  if (!grupos.length) return;
+  function elegir(grupo, clave) {
+    grupo.querySelectorAll('[data-sv-tab]').forEach(function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-sv-tab') === clave ? 'true' : 'false');
+    });
+    grupo.querySelectorAll('[data-sv-panel]').forEach(function (p) {
+      p.hidden = p.getAttribute('data-sv-panel') !== clave;
+    });
+  }
+  grupos.forEach(function (grupo) {
+    var primero = grupo.querySelector('[data-sv-tab]');
+    if (!primero) return;
+    grupo.classList.add('sv-tabs-on');
+    elegir(grupo, primero.getAttribute('data-sv-tab'));
+    grupo.addEventListener('click', function (ev) {
+      var b = ev.target.closest('[data-sv-tab]');
+      if (b) elegir(grupo, b.getAttribute('data-sv-tab'));
+    });
+  });
+  function porAncla(mover) {
+    var id = decodeURIComponent(location.hash.slice(1));
+    var el = id && document.getElementById(id);
+    var panel = el && el.closest('[data-sv-panel]');
+    if (!panel) return;
+    elegir(panel.closest('[data-sv-tabs]'), panel.getAttribute('data-sv-panel'));
+    if (mover) el.scrollIntoView();
+  }
+  window.addEventListener('hashchange', function () { porAncla(true); });
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest('a[href^="#sv-"], a[href^="#fam-"]');
+    if (a && a.getAttribute('href') === location.hash) porAncla(true);
+  });
+  porAncla(true);
+})();

@@ -736,7 +736,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `radar-reloj.html` | El reloj de cada administración · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `radar-tablero.html` | El tablero · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `servicios-por-que.html` | Servicios de investigación · Auditavisión | apartados.py | 69 | 0 | 3 | 2 | 0 |
-| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 85 | 0 | 0 | 0 | 0 |
+| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 94 | 0 | 2 | 2 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 
