@@ -116,7 +116,7 @@
       'Con un ingreso neto de ' + pesos(anualNeto) + ' anuales, equivale a <strong>' + n(dias, 1) + ' días</strong> de todo lo que ganas';
     if (isr) html += '; y frente a los ' + pesos(isr) + ' que pagas de ISR, es <strong>' + n(pers / isr, 2) + ' veces</strong> esa cantidad.';
     else html += '.';
-    out.innerHTML = html + ' <span class="est-chip est-derivado">auditada</span>';
+    out.innerHTML = html + ' <span class="est-chip est-derivado">calculada</span>';
   }
   [tuIngreso, tuIsr].forEach(function (el) {
     el.addEventListener('input', function () { personal(dentro().reduce(function (a, r) { return a + r.anual * 1e6; }, 0) / personas()); });

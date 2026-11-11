@@ -46,6 +46,16 @@ ENCICLOPEDIA_EXTRA = {'noticias-relevantes.html', 'noticias-auditavision.html', 
                       'garantias.html', 'garantias-brujula.html', 'estado-de-cuenta.html'}
 
 
+def es_enciclopedia(archivo, migas):
+    """Si la pagina es de la Enciclopedia: lo dicen sus migas («Inicio ›
+    Comunidad › Enciclopedia › …» desde el 02-11-2026; antes, «Inicio ›
+    Enciclopedia › …») o esta en ENCICLOPEDIA_EXTRA. Lo leen asistente.py y
+    cobertura_auditor.py: una sola regla, para que la prueba y el chat no se
+    separen (11-11-2026: al mudarse a Comunidad, los dos dejaron de verla y
+    la prueba pasaba revisando 10 paginas)."""
+    return 'Enciclopedia' in migas.split(' › ')[1:3] or archivo in ENCICLOPEDIA_EXTRA
+
+
 # La pregunta del boton es el titulo de la pagina, salvo cuando el titulo no
 # basta para que el chat la encuentre: una sola palabra que dice mucho
 # («Datos») o mayusculas que el chat lee como nombre propio.

@@ -47,7 +47,7 @@
     return '$' + (Math.round(v * 100) / 100).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
   function finos(v) { return Math.abs(v) < 1000 ? pesos2(v) : pesos(v); }
-  function chip(e) { return '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'auditada' : e) + '</span>'; }
+  function chip(e) { return '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'calculada' : e) + '</span>'; }
   function leer(txt) {
     var n = parseFloat(String(txt == null ? '' : txt).replace(/[^0-9.\-]/g, ''));
     return isFinite(n) && n > 0 ? n : 0;

@@ -29,7 +29,7 @@
     return mdp(v);
   }
   function chip(e, pend) {
-    return '<span class="est-chip est-' + e + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + (e === 'derivado' ? 'auditada' : e) + '</span>';
+    return '<span class="est-chip est-' + e + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + (e === 'derivado' ? 'calculada' : e) + '</span>';
   }
   /* El estado que llega en ?e=AGS (desde el mapa) o en #e-AGS. */
   function pedida() {

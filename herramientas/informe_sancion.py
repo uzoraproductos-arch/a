@@ -246,12 +246,12 @@ def temas():
              '<li><b>Expedientes débiles:</b> no prueban con precisión el tiempo, el lugar, el modo, el monto y a la persona responsable.</li>'
              '<li><b>Coordinación:</b> la cadena pasa por varias autoridades, y si cada una no sabe lo que necesita la siguiente, la prueba se pierde en el camino.</li></ul>'
              '<p><b>Lo que la guía no dice:</b> cuántas observaciones terminan, de verdad, en sanción firme. La ley manda decirlo en el <a href="informes-semestral-asf.html">informe '
-             'semestral de la ASF</a>, y ahí tampoco está: de sus 2,395 procedimientos, los 2,201 que mandó al tribunal solo aparecen como «Remitido al TFJA», y de sus 1,196 '
+             'semestral de la ASF</a>, y ahí tampoco está: de sus 2,576 procedimientos, los 2,494 que mandó al tribunal solo aparecen como «Remitido al TFJA», y de sus 1,225 '
              'denuncias penales, 32 tienen sentencia, sin decir cuál. %s</p>' % _chip('pendiente', PEND),
         'fu': [_o('Las cuatro áreas de oportunidad (cap. 2)', _p('5 a 7')),
                _o('Informe semestral del estado de la solventación, con los procedimientos de responsabilidad promovidos, en datos abiertos (art. 38)', LFRCF),
-               _o('2,395 procedimientos (2,201 remitidos al TFJA) y 1,196 denuncias (32 con sentencia), corte al 31-03-2026',
-                  {'tx': 'ASF, informe semestral con corte al 31 de marzo de 2026, pp. 35 y 59', 'url': 'https://www.asf.gob.mx/uploads/56_Informes_especiales_de_auditoria/IS_31_03_2026.pdf'}),
+               _o('2,576 procedimientos (2,494 remitidos al TFJA) y 1,225 denuncias (32 con sentencia), corte al 30-09-2026',
+                  {'tx': 'ASF, informe semestral con corte al 30 de septiembre de 2026, pp. 35 y 62', 'url': 'https://www.asf.gob.mx/uploads/56_Informes_especiales_de_auditoria/IS_30_09_2026.pdf'}),
                _o('Cuántas observaciones terminan en sanción firme', {'tx': 'Registro de pendientes', 'url': ''}, 'pendiente')],
         'sug': ['¿Qué pasa después de que la ASF observa algo?', '¿Qué tiene que probar la ASF para que sancionen a alguien?']}
     t['diagnostico']['fu'][-1]['p'] = PEND

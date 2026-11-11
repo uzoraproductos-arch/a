@@ -32,7 +32,7 @@
   function pesos(v) { return '$' + Math.round(v).toLocaleString('es-MX'); }
   function num(v, d) { return Number(v).toLocaleString('es-MX', { minimumFractionDigits: d, maximumFractionDigits: d }); }
   function chip(e, pend) {
-    return '<span class="est-chip est-' + e + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + (e === 'derivado' ? 'auditada' : e) + '</span>';
+    return '<span class="est-chip est-' + e + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + (e === 'derivado' ? 'calculada' : e) + '</span>';
   }
   function leerNumero(t) {
     var n = parseFloat(String(t == null ? '' : t).replace(/[^0-9.\-]/g, ''));

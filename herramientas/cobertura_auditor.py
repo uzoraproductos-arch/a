@@ -40,6 +40,10 @@ from prueba_auditor import PAGINA, servidor  # noqa: E402
 
 RAIZ = Path(__file__).resolve().parent.parent
 INFORME = RAIZ / 'docs' / 'COBERTURA-AUDITOR.md'
+# Piso: del 02 al 11-11-2026 esta prueba pasó revisando 10 páginas de 218,
+# porque dejó de reconocer las migas de la Enciclopedia. Si ve menos que
+# esto, lo que falló es la prueba, y lo dice.
+MINIMO = 200
 
 PREGUNTA_JS = '''async ([q, modo]) => {
   document.getElementById('paApp').setAttribute('data-modo', modo);
@@ -60,7 +64,7 @@ def paginas():
         m = re.search(r'class="apartado-auditor" href="([^"]+)"', s)
         mg = re.search(r'<nav class="apartado-migas".*?</nav>', s, re.S)
         migas = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', mg.group(0))).strip() if mg else ''
-        en = 'Enciclopedia' in migas.split(' › ')[1:2] or p.name in modos.ENCICLOPEDIA_EXTRA
+        en = modos.es_enciclopedia(p.name, migas)
         if not en:
             continue
         if not m:
@@ -82,6 +86,9 @@ def main():
         sys.exit('Falta Playwright: pip install playwright && python3 -m playwright install chromium')
 
     lista = paginas()
+    if len(lista) < MINIMO:
+        sys.exit('cobertura del Auditor: solo encontré %d páginas de la Enciclopedia (el piso es %d). '
+                 'Revisa modos.es_enciclopedia(): la prueba dejó de reconocerlas.' % (len(lista), MINIMO))
     srv = servidor()
     filas, fallas, errores = [], [], []
     with sync_playwright() as pw:

@@ -250,9 +250,9 @@ PROPIOS = [
     # «Documentar para sancionar», el informe especial de la ASF (27-10-2026).
     ('asf-sanciones-efectividad', 'Fiscalización', 'Cuántas observaciones de la ASF terminan en una sanción firme',
      'El artículo 38 de la Ley de Fiscalización y Rendición de Cuentas de la Federación manda que el informe semestral de la ASF dé «las sanciones que al efecto hayan '
-     'procedido», la pena de las denuncias penales y todo en datos abiertos. El de corte al 31 de marzo de 2026, que ya integra la plataforma, no lo hace: de sus 2,395 '
-     'procedimientos de responsabilidad, los 2,201 que mandó al Tribunal Federal de Justicia Administrativa solo dicen «Remitido al TFJA», sin resolución ni sanción; de sus '
-     '1,196 denuncias, 32 dicen «Sentencia» sin decir si fue condenatoria ni la pena, y de las 9,812 promociones a los órganos internos de control no se sabe qué resultó. '
+     'procedido», la pena de las denuncias penales y todo en datos abiertos. El de corte al 30 de septiembre de 2026, que ya integra la plataforma, no lo hace: de sus 2,576 '
+     'procedimientos de responsabilidad, los 2,494 que mandó al Tribunal Federal de Justicia Administrativa solo dicen «Remitido al TFJA», sin resolución ni sanción; de sus '
+     '1,225 denuncias, 32 dicen «Sentencia» sin decir si fue condenatoria ni la pena, y de las 11,070 promociones a los órganos internos de control no se sabe qué resultó. '
      'Solo está en PDF. Falta de transparencia de la ASF, que es la obligada a informarlo.',
      'Auditoría Superior de la Federación (ASF)', 'https://www.asf.gob.mx/Section/59_Informes_especiales_de_auditoria',
      'Informes semestrales a la Cámara de Diputados (ASF, art. 38 LFRCF)',
