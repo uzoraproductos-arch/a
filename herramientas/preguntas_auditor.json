@@ -2288,6 +2288,10 @@
    "ir": "servicios.html"
   },
   {
+   "q": "¿Qué servicios ofrecen para la temporada electoral?",
+   "ir": "servicios.html"
+  },
+  {
    "q": "¿Dan talleres para auditores?",
    "ir": "servicios.html"
   },
@@ -2301,11 +2305,11 @@
   },
   {
    "q": "¿Cómo se sostiene Auditavisión?",
-   "ir": "servicios.html#sostenemos"
+   "ir": "servicios-por-que.html#sostenemos"
   },
   {
    "q": "¿de qué vive auditavision?",
-   "ir": "servicios.html#sostenemos"
+   "ir": "servicios-por-que.html#sostenemos"
   }
  ]
 }
