@@ -34,7 +34,7 @@
     });
   }
   function chip(e, pend) {
-    return '<span class="est-chip est-' + e + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + (e === 'derivado' ? 'auditada' : e) + '</span>';
+    return '<span class="est-chip est-' + e + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + (e === 'derivado' ? 'calculada' : e) + '</span>';
   }
   function num(v) { return Number(v).toLocaleString('es-MX'); }
   /* simMdp() del motor, letra por letra. */

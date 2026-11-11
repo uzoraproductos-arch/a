@@ -50,7 +50,7 @@ CANJE = 'canjea-tu-codigo.html'
 PANEL = 'administracion-codigos.html'
 # Las páginas que abren sin código: la del canje, el panel y lo que la ley
 # obliga a tener siempre a la vista.
-LIBRES = [CANJE, PANEL, 'aviso-de-privacidad.html', 'derecho-de-replica.html']  # réplica: art. 7, siempre a la vista (02-11-2026)
+LIBRES = [CANJE, PANEL, 'aviso-de-privacidad.html', 'derecho-de-replica.html', 'servicios.html']  # réplica: art. 7, siempre a la vista (02-11-2026); servicios: la página de venta no puede pedir código (11-11-2026)
 
 # Las duraciones del panel (intervalos de PostgreSQL) y cómo se leen.
 DURACIONES = [

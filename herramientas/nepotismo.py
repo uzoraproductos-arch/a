@@ -51,7 +51,7 @@ DECLARANET = 'https://declaranet.gob.mx/'
 UMA_DIA = 117.31  # INEGI, UMA 2026 (DOF 09-01-2026)
 
 OF = '<span class="est-chip est-oficial">oficial</span>'
-DER = '<span class="est-chip est-derivado">auditada</span>'
+DER = '<span class="est-chip est-derivado">calculada</span>'
 
 
 def esc(t):

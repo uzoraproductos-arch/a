@@ -23,7 +23,7 @@
   function mdp(v) { return '$' + num(v, 1) + ' mdp'; }
   function bill(v) { return '$' + num(v / 1e6, 2) + ' billones'; }
   function cien(v) { var x = v / D.total * 100; return x > 0 && x < 0.005 ? 'menos de $0.01' : '$' + num(x, 2); }
-  function chip(e) { return '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'auditada' : e) + '</span>'; }
+  function chip(e) { return '<span class="est-chip est-' + e + '">' + (e === 'derivado' ? 'calculada' : e) + '</span>'; }
   function busca(lado, id) {
     var l = D[lado];
     for (var i = 0; i < l.length; i++) if (l[i].id === id) return l[i];

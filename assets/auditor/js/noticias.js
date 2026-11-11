@@ -79,8 +79,8 @@
         '<p class="nt-ag-que">' + esc(x.que) + '</p>' +
         '<p class="nt-ag-quien">' + esc(x.quien) + ' · ' + (x.ult ? 'el último día hábil de ' + MESES[x.m - 1] + ' · ' : '') +
           '<a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.ley) + ' ↗</a></p>' +
-        (x.cuenta ? '<p class="nt-ag-nota"><span class="est-chip est-derivado">auditada</span> La ley dice «' + esc(x.cuenta) + '»; la fecha es nuestra cuenta.</p>' : '') +
-        (x.ult ? '<p class="nt-ag-nota"><span class="est-chip est-derivado">auditada</span> Contamos el último día entre semana; un día inhábil oficial puede adelantarlo.</p>' : '') +
+        (x.cuenta ? '<p class="nt-ag-nota"><span class="est-chip est-derivado">calculada</span> La ley dice «' + esc(x.cuenta) + '»; la fecha es nuestra cuenta.</p>' : '') +
+        (x.ult ? '<p class="nt-ag-nota"><span class="est-chip est-derivado">calculada</span> Contamos el último día entre semana; un día inhábil oficial puede adelantarlo.</p>' : '') +
         (x.nota ? '<p class="nt-ag-nota">' + esc(x.nota) + '</p>' : '') +
       '</div></li>';
   }

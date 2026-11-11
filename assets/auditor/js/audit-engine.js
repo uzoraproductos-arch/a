@@ -6478,7 +6478,7 @@
        estan publicados. Llamar «derivado» al tercero seria fingir que
        existe un calculo detras. */
     const texto = (estado === 'oficial' || estado === 'pendiente') ? estado : 'derivado';
-    return '<span class="est-chip est-' + texto + '">' + (texto === 'derivado' ? 'auditada' : texto) + '</span>';
+    return '<span class="est-chip est-' + texto + '">' + (texto === 'derivado' ? 'calculada' : texto) + '</span>';
   }
 
   function pctDe(monto, total) {
@@ -26222,7 +26222,7 @@
 
   function fjChip(estado) {
     const val = ['oficial', 'derivado', 'analisis', 'contexto'].indexOf(estado) >= 0 ? estado : 'derivado';
-    const texto = val === 'analisis' ? 'análisis' : (val === 'derivado' ? 'auditada' : val);
+    const texto = val === 'analisis' ? 'análisis' : (val === 'derivado' ? 'calculada' : val);
     return '<span class="est-chip est-' + val + '">' + texto + '</span>';
   }
 

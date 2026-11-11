@@ -63,7 +63,7 @@
   function pesos(v) { return '$' + fnum(Math.round(v)); }
   function sg(x) { return x > 0 ? '+' : ''; }
   function chip(e, pend) {
-    return '<span class="est-chip est-' + e + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + (e === 'derivado' ? 'auditada' : e) + '</span>';
+    return '<span class="est-chip est-' + e + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + (e === 'derivado' ? 'calculada' : e) + '</span>';
   }
   function chC(o, campo) {
     var e = (o.ec || {})[campo] || 'pendiente';

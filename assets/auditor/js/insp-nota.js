@@ -75,7 +75,7 @@
   }
   function fmt(mdp) { return (mdp < 0 ? '−' : '') + '$' + Math.abs(Number(mdp)).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp'; }
   function chip(e, pend) {
-    return '<span class="est-chip est-' + e + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + (e === 'derivado' ? 'auditada' : e) + '</span>';
+    return '<span class="est-chip est-' + e + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + (e === 'derivado' ? 'calculada' : e) + '</span>';
   }
   function fuente(o) {
     return o.u ? '<a href="' + esc(o.u) + '" target="_blank" rel="noopener">' + esc(o.f || 'documento') + ' ↗</a>' : esc(o.f || '');

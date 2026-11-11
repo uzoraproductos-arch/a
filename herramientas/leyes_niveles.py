@@ -215,7 +215,7 @@ def municipios(padron, abbr=None):
 
 def _chip(e, pend=None):
     p = ' data-pend="%s"' % pend if pend else ''
-    return '<span class="est-chip est-%s"%s>%s</span>' % (e, p, 'auditada' if e == 'derivado' else e)
+    return '<span class="est-chip est-%s"%s>%s</span>' % (e, p, 'calculada' if e == 'derivado' else e)
 
 
 def _a(url, tx):

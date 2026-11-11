@@ -55,7 +55,7 @@
     });
   }
   function chip(e, pend) {
-    return '<span class="est-chip est-' + e + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + (e === 'derivado' ? 'auditada' : e) + '</span>';
+    return '<span class="est-chip est-' + e + '"' + (pend ? ' data-pend="' + esc(pend) + '"' : '') + '>' + (e === 'derivado' ? 'calculada' : e) + '</span>';
   }
   function guarda(k, v) { try { localStorage.setItem('av-mo-sector-' + k, v); } catch (e) { /* sin almacenamiento */ } }
   function lee(k) { try { return localStorage.getItem('av-mo-sector-' + k); } catch (e) { return null; } }

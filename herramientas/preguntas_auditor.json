@@ -258,11 +258,17 @@
   },
   {
    "q": "¿Cuánto dinero ha recuperado la ASF?",
-   "ir": "informes-semestral-asf.html#sem-recuperaciones"
+   "ir": "informes-semestral-asf.html#sem-recuperaciones",
+   "dice": [
+    "136,100.9"
+   ]
   },
   {
    "q": "¿Cómo van las denuncias penales de la ASF?",
-   "ir": "informes-semestral-asf.html#sem-denuncias"
+   "ir": "informes-semestral-asf.html#sem-denuncias",
+   "dice": [
+    "1,225"
+   ]
   },
   {
    "q": "¿Qué no dice el informe semestral?",

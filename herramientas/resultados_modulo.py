@@ -20,7 +20,7 @@ import json
 
 
 def chip(e, pend=None):
-    return '<span class="est-chip est-%s"%s>%s</span>' % (e, (' data-pend="%s"' % pend) if pend else '', 'auditada' if e == 'derivado' else e)
+    return '<span class="est-chip est-%s"%s>%s</span>' % (e, (' data-pend="%s"' % pend) if pend else '', 'calculada' if e == 'derivado' else e)
 
 
 def mdp(v, d=1):
