@@ -1344,6 +1344,12 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
               <h3 class="pl-tab-tit" id="plDimTit">Dimensión %s</h3>
               <p class="pl-tab-q" id="plDimQ">%s</p>
             </header>
+            <div class="pl-barra">
+              <label class="pl-busca"><span>🔎 Busca tu estado</span>
+                <input type="search" id="plBusca" list="plEnts" placeholder="Escribe su nombre: Jalisco, Oaxaca…" autocomplete="off" enterkeyhint="search"></label>
+              <datalist id="plEnts">__ENTS__</datalist>
+              <button type="button" class="pl-caj-b pl-copia" id="plCopia" hidden><span aria-hidden="true">🔗</span> <span id="plCopiaT">Copiar el enlace de esta vista</span></button>
+            </div>
             <p class="pl-dim-aviso" id="plDimAviso" hidden></p>
             <div class="pl-lentes" role="radiogroup" aria-label="Qué ver en el mapa">%s</div>
             <p class="pl-que" id="plQue"></p>
@@ -1356,12 +1362,14 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
                 <p class="pl-ficha-vacia"><b>Toca una entidad.</b> Verás sus cifras de la dimensión que elegiste y la puerta a su portal, con sus municipios.</p>
               </aside>
             </div>
+            <section class="pl-rank" id="plRank" aria-live="polite" hidden></section>
             <p class="pl-pie" id="plFuente"></p>
             <p class="pl-pie" id="plFalta"></p>
             <footer class="pl-tab-pie">
               <p class="pl-tab-pie-t">Para leerla bien</p>
               <div class="pl-cajones">%s</div>
               <div class="pl-indice-b"><button type="button" class="pl-caj-b pl-indice-btn" data-cajon="plTplIndice" data-cajon-tit="plTplIndiceTit" data-cajon-hash="entidades" aria-haspopup="dialog">📍 Las 32 entidades: entra a su portal</button></div>
+              <p class="pl-puente" id="plPuente">🧾 ¿Lo necesitas en un solo documento, con cada cifra y su fuente? Es un servicio: <a href="servicios.html#sv-radiografia">Radiografía de tu municipio o de tu estado ➔</a></p>
             </footer>
           </section>%s
           <template id="plTplIndice">%s</template>
@@ -1379,6 +1387,10 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         _cajon('📍', 'Las 32 entidades', 'Elige una entidad para entrar a su portal', 'plTplIndiceTit',
                '<nav class="pl-indice" aria-label="Las 32 entidades, una por una"><ul>%s</ul></nav>' % indice),
         cuaderno, _bloque_judicial_mapa(base, ref, filas), _json(datos))
+    for _l in ('servicios.html',):
+        if not os.path.exists(os.path.join(RAIZ, _l)):
+            raise SystemExit('planisferio: el puente a Servicios apunta a %s, que no existe' % _l)
+    bloque_mapa = bloque_mapa.replace('__ENTS__', ''.join('<option value="%s"></option>' % html.escape(f['n']) for f in sorted(filas, key=lambda x: clave(x['n']))))
     return {
         'archivo': ARCHIVO, 'menu': 'Planisferio', 'menu_archivo': ARCHIVO,
         'icono': '🗺️', 'titulo': 'Planisferio', 'lema': 'México en un mapa: cada entidad, cada municipio, cada peso',

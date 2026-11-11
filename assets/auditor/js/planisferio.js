@@ -162,7 +162,62 @@
          (apartados.js, button[data-cajon]): solo se ven los de la dimensión elegida. */
       /* Lo de una sola dimensión (los contadores, «Cuánto dinero es» y «Los 16 orígenes» son de la financiera) se ve solo en ella. */
       Array.prototype.forEach.call(document.querySelectorAll('.pl-cajones [data-dim], .pl-solo-dim[data-dim]'), function (b) { b.hidden = b.getAttribute('data-dim') !== dimP; });
+      rank();
+      puente();
+      guarda();
     }
+    /* Mejoras del 11-11-2026: el orden de la lente (los cinco de arriba y los cinco de abajo, con la mediana),
+       el lugar de la entidad elegida, la dirección que guarda la vista y el puente a Servicios.
+       El orden es el de la cifra de la lente: nunca se dice como calificación. No agrega cifras. */
+    function orden() {
+      return D.e.filter(function (e) { return e[lente.id] != null; }).sort(function (a, b) { return b[lente.id] - a[lente.id]; });
+    }
+    function lugar(e) {
+      var v = e[lente.id];
+      if (v == null) return null;
+      var o = orden(), may = 0, ig = 0;
+      o.forEach(function (x) { if (x[lente.id] > v) may++; else if (x[lente.id] === v) ig++; });
+      return { n: may + 1, de: o.length, emp: ig - 1 };
+    }
+    function rank() {
+      var c = document.getElementById('plRank');
+      if (!c) return;
+      var o = orden(), n = o.length, id = lente.id;
+      /* Con menos de tres cifras, o con un empate justo en el corte de los cinco, no hay orden que sostener. */
+      if (n < 3 || (n > 10 && (o[4][id] === o[5][id] || o[n - 5][id] === o[n - 6][id]))) { c.hidden = true; c.innerHTML = ''; return; }
+      var item = function (e, i) {
+        return '<li><button type="button" class="pl-rank-b' + (sel && sel.a === e.a ? ' sel' : '') + '" data-a="' + esc(e.a) + '" aria-label="' + esc(e.n) + ', lugar ' + (i + 1) + ': ' + esc(fmt(e[id])) + '">' +
+          '<span class="pl-rank-n">' + (i + 1) + '</span><span class="pl-rank-e">' + esc(e.n) + '</span><b class="num-tabular">' + esc(fmt(e[id])) + '</b></button></li>';
+      };
+      var lista = function (tit, xs, desde) {
+        return '<div class="pl-rank-col"><h4>' + tit + '</h4><ol>' + xs.map(function (e, i) { return item(e, desde + i); }).join('') + '</ol></div>';
+      };
+      var med = n % 2 ? 'La de en medio de las ' + n + ' entidades con cifra: <b class="num-tabular">' + esc(fmt(o[(n - 1) / 2][id])) + '</b>'
+        : 'Las dos de en medio de las ' + n + ' entidades con cifra: <b class="num-tabular">' + esc(fmt(o[n / 2][id])) + '</b> y <b class="num-tabular">' + esc(fmt(o[n / 2 - 1][id])) + '</b>';
+      c.innerHTML = '<h3 class="pl-rank-tit">📊 El orden de esta lente: ' + esc(lente.nom) + ' (' + esc(lente.anio) + ')</h3><div class="pl-rank-rej">' +
+        (n <= 10 ? lista('Las ' + n + ' entidades con cifra, de la más alta a la más baja', o, 0)
+          : lista('Las 5 con la cifra más alta', o.slice(0, 5), 0) + lista('Las 5 con la cifra más baja', o.slice(n - 5), n - 5)) +
+        '</div><p class="pl-rank-nota">' + med + '. El orden es el de la cifra de esta lente, no una calificación: lee «Cómo leer esta dimensión» antes de comparar.</p>';
+      c.hidden = false;
+    }
+    function puente() {
+      var p = document.getElementById('plPuente');
+      if (!p) return;
+      p.innerHTML = dimP === 'penal'
+        ? '🛡️ ¿Necesitas revisar a un proveedor o a un cliente antes de pagar o de firmar? Es un servicio: <a href="servicios.html#riesgo">Prevención de fraude y de lavado de dinero ➔</a>'
+        : '🧾 ¿Necesitas lo de ' + (sel ? esc(sel.n) : 'tu estado o tu municipio') + ' en un solo documento, con cada cifra y su fuente? Es un servicio: <a href="servicios.html#sv-radiografia">Radiografía de tu municipio o de tu estado ➔</a>';
+    }
+    var listo = false;
+    function guarda() {
+      if (!listo || !history.replaceState) return;
+      try { history.replaceState(null, '', location.pathname + '?d=' + dimP + '&l=' + lente.id + (sel ? '&e=' + encodeURIComponent(sel.a) : '') + location.hash); } catch (err) { /* sin historial, la vista sigue igual */ }
+    }
+    function suelta() {
+      sel = null;
+      pinta();
+      ficha.innerHTML = VACIA;
+    }
+    var VACIA = '<p class="pl-ficha-vacia"><b>Toca una entidad.</b> Verás sus cifras de la dimensión que elegiste y la puerta a su portal, con sus municipios.</p>';
     function fila(nom, v, est, anio, pend) {
       return '<dt>' + nom + ' · ' + anio + '</dt><dd>' + (v == null ? 'Sin cifra ' + chip('pendiente', pend) : '<b class="num-tabular">' + mdp(v) + '</b> ' + chip(est)) + '</dd>';
     }
@@ -365,7 +420,17 @@
       if (!e) return;
       muestra1(e, fijo);
       cuentas(e);
+      var lg = lugar(e), h = ficha.querySelector('h3');
+      if (lg && h) h.insertAdjacentHTML('afterend', '<p class="pl-ficha-lugar">Lugar <b>' + lg.n + '</b> de ' + lg.de + ' en «' + esc(lente.nom) + '», de la cifra más alta a la más baja' +
+        (lg.emp > 0 ? ' (lo comparte con ' + lg.emp + (lg.emp === 1 ? ' entidad' : ' entidades') + ')' : '') + ' ' + chip('derivado') + '</p>');
+      if (fijo) ficha.insertAdjacentHTML('beforeend', '<button type="button" class="pl-suelta" data-suelta>Soltar esta entidad</button>');
     }
+    ficha.addEventListener('click', function (ev) { if (ev.target.closest && ev.target.closest('[data-suelta]')) suelta(); });
+    var rk = document.getElementById('plRank');
+    if (rk) rk.addEventListener('click', function (ev) {
+      var b = ev.target.closest && ev.target.closest('.pl-rank-b');
+      if (b) { elige(b.getAttribute('data-a'), false); ficha.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+    });
     function muestra1(e, fijo) {
       if (!e) return;
       if (dimP === 'social') { social(e, fijo); return; }
@@ -428,7 +493,7 @@
       if (dTit) dTit.textContent = 'Dimensión ' + D.dims[id].n.toLowerCase();
       if (dQ) dQ.textContent = D.dims[id].q || '';
       ponLente(ultima[id] || D.lentes.filter(function (l) { return l.dim === id; })[0].id);
-      if (!sel) ficha.innerHTML = '<p class="pl-ficha-vacia"><b>Toca una entidad.</b> Verás sus cifras de la dimensión que elegiste y la puerta a su portal, con sus municipios.</p>';
+      if (!sel) ficha.innerHTML = VACIA;
     }
     /* Las dimensiones que todavía no se pintan llevan a donde ya viven. */
     var dim = null;
@@ -466,6 +531,33 @@
     else if (pedida) {
       var p = plano(pedida);
       D.e.forEach(function (e) { if (plano(e.n) === p) elige(e.a, false); });
+    }
+    listo = true;
+    var busca = document.getElementById('plBusca');
+    if (busca) {
+      var buscaYa = function (exacto) {
+        var q = plano(busca.value).trim();
+        if (!q) return;
+        var hay = D.e.filter(function (e) { return plano(e.n) === q; });
+        if (!hay.length && !exacto) hay = D.e.filter(function (e) { return plano(e.n).indexOf(q) >= 0; });
+        if (hay.length !== 1) return;
+        elige(hay[0].a, false);
+        busca.value = hay[0].n;
+        ficha.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      };
+      busca.addEventListener('input', function () { buscaYa(true); });
+      busca.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); buscaYa(false); } });
+    }
+    var copia = document.getElementById('plCopia'), copiaT = document.getElementById('plCopiaT');
+    if (copia && copiaT && navigator.clipboard && navigator.clipboard.writeText) {
+      copia.hidden = false;
+      copia.addEventListener('click', function () {
+        listo = true; guarda();
+        navigator.clipboard.writeText(location.href).then(function () {
+          copiaT.textContent = 'Enlace copiado: abre el mapa tal como lo ves';
+          setTimeout(function () { copiaT.textContent = 'Copiar el enlace de esta vista'; }, 2600);
+        }, function () { copiaT.textContent = 'No se pudo copiar: usa la dirección del navegador'; });
+      });
     }
   })();
 

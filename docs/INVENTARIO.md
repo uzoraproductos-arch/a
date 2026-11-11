@@ -721,7 +721,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-zac-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
 | `planisferio-zac-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
 | `planisferio-zac.html` | Zacatecas · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
-| `planisferio.html` | Planisferio · Auditavisión | apartados.py | 161 | 0 | 125 | 100 | 11 |
+| `planisferio.html` | Planisferio · Auditavisión | apartados.py | 162 | 0 | 125 | 100 | 11 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
