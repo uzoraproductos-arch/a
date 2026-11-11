@@ -1976,7 +1976,7 @@ COBRO = {
 # plataforma tiene junto (el territorio, la memoria de promesas y el
 # verificador), ordenado alrededor del calendario electoral.
 LINEAS = [
-    ('prevencion', '🛡️', 'Prevención para empresas y despachos', 'Antes de pagar o de firmar: saber con quién tratas.'),
+    ('prevencion', '🛡️', 'Prevención de fraude y de lavado de dinero', 'Antes de pagar, de firmar o de aceptar a un cliente: saber con quién tratas.'),
     ('electoral', '🗳️', 'Temporada electoral', 'Antes de votar, de prometer o de recibir un gobierno: sus números, con su documento. El mismo servicio y el mismo precio para todos.'),
     ('formacion', '🎓', 'Formación', 'Para que tu equipo, tus alumnos o tu dependencia lo hagan por su cuenta.'),
     ('investigacion', '🔎', 'Instituciones e investigación a la medida', 'Cuando una pregunta necesita documentos cruzados, o tu institución quiere las herramientas dentro.'),
@@ -2035,9 +2035,41 @@ PERFILES = [
      [('herramienta-inspector-asf.html', 'Auditorías de la ASF'), ('aprende-auditoria.html', 'Cómo se audita')]),
 ]
 
+# El nombre corto de cada perfil, para su pestaña (en el orden de PERFILES).
+PERFILES_CORTO = ['Contaduría', 'Derecho y PLD', 'Auditoría', 'Periodismo', 'Candidaturas', 'Regidurías y congresos', 'Universidades', 'Gobiernos']
+
 # Por qué revisar antes de pagar: claves de fraude.cifras(). Se leen de ahí
 # con su valor, su chip y su fuente; nunca se copian.
 POR_QUE = ['oculta', 'empresas', 'definitivos', 'condusef_t1']
+
+# Fraude y lavado de dinero, como discurso de venta (pedido del autor,
+# 11-11-2026: «no vi la parte de fraudes, prevención de lavado de dinero»).
+# Las cifras se leen de fraude.cifras(); la ley, de lo que ya cotejó
+# metodologia_auditoria.py (LFPIORPI, arts. 17 y 18) y del CFF, art. 69-B.
+# **Nunca se dice que la plataforma «evita el fraude» ni que cumple por el
+# cliente**: da señales para revisar, con su documento.
+RIESGO_CIFRAS = ['fraude_empresas', 'oculta_empresas', 'definitivos']
+# (ícono, riesgo, lo que te pide la ley o lo que pasa, lo que hacemos, servicios, liga gratuita)
+RIESGOS = [
+    ('🧾', 'Facturas de empresas fantasma',
+     'Si tu proveedor queda definitivo en la lista 69-B del SAT, sus facturas «no producen ni produjeron efecto fiscal alguno» (CFF, art. 69-B): '
+     'te toca acreditar la operación o corregir.',
+     'Buscamos cada RFC en la lista completa, leemos tus facturas por lote y el Vigía compara la lista cada semana.',
+     ['facturas', 'seguimiento'], ('herramienta-inspector-efos.html', 'Busca un RFC, gratis')),
+    ('🧺', 'Lavado de dinero: conoce a tu cliente y a tu proveedor',
+     'Si haces una actividad vulnerable, la ley te obliga a identificar a tu cliente, a su beneficiario controlador si es una empresa, '
+     'y a guardar los documentos (LFPIORPI, arts. 17 y 18).',
+     'Reunimos lo que los documentos públicos dicen de esa empresa: la lista 69-B, sus contratos con el gobierno, el directorio de sancionados y la ASF. '
+     'Complementa tu expediente; no lo sustituye ni presenta tus avisos.',
+     ['diligencia', 'expediente'], ('aprende-auditoria.html#met-lavado', 'Qué es una actividad vulnerable')),
+    ('🕵️', 'Fraude: las señales, antes de pagar',
+     'Casi ningún delito contra una empresa llega a una fiscalía. Lo que no revisas antes, rara vez se recupera después.',
+     'Te damos señales con su regla: compras partidas, facturas que no cuadran con la ley y un estado de resultados que no cierra. '
+     'Y un taller de control interno con casos mexicanos.',
+     ['revision', 'capacitacion'], ('aprende-auditoria.html#met-fraude', 'El triángulo del fraude')),
+]
+RIESGO_LIMITE = ('No decimos que evitamos el fraude ni que cumplimos por ti. Te damos señales para revisar, cada una con su documento, '
+                 'y te decimos lo que falta. Una señal no es una irregularidad, y una acusación no es una condena.')
 
 # Relaciones con clientes (bloque 4 del lienzo).
 FORMAS = [
@@ -2277,6 +2309,8 @@ def servicios():
         for liga, _ in p[5]:
             if not os.path.exists(os.path.join(RAIZ, liga.partition('#')[0])):
                 raise SystemExit('Servicios: el perfil «%s» enlaza a %s, que no existe' % (p[1], liga))
+    if len(PERFILES_CORTO) != len(PERFILES):
+        raise SystemExit('Servicios: PERFILES_CORTO y PERFILES no traen los mismos perfiles')
     if set(COBRO) != set(nom):
         raise SystemExit('Servicios: COBRO y SERVICIOS no traen los mismos servicios')
     if {s[6] for s in SERVICIOS} != {l[0] for l in LINEAS}:
@@ -2292,28 +2326,54 @@ def servicios():
 
     # La portada: la propuesta de valor y un selector por necesidad, que lleva
     # a cada familia (11-11-2026).
-    puertas = [('prevencion', 'Revisar a un proveedor'), ('electoral', 'Entender a mi municipio o a mi estado'),
+    puertas = [('prevencion', 'Prevenir fraude y lavado'), ('electoral', 'Entender a mi municipio o a mi estado'),
                ('formacion', 'Capacitar a mi equipo'), ('investigacion', 'Una investigación o una licencia')]
+    import monetizacion
+    monetizacion.revisar()
+    # Diseño del 11-11-2026 (pedido del autor: «no es algo fácil para el
+    # usuario su vista y consumo… nos podemos basar en getquin o WiseCricket»):
+    # portada en dos columnas con el producto a la vista, la base contada en
+    # una tira, y las familias y los perfiles por pestañas (servicios.js).
+    mini = ('<div class="sv-demo sv-demo-mini" id="ejemplo">\n'
+            '            <div class="sv-demo-cab"><span class="sv-demo-et">Datos de ejemplo: la empresa y los hallazgos son ficticios</span>'
+            '<p class="sv-demo-tit"><span aria-hidden="true">🏢</span> %s</p><p class="sv-demo-sub">Revisión de un proveedor · fuentes públicas</p></div>\n'
+            '            <ol class="sv-demo-lista">\n%s\n            </ol>\n'
+            '            <p class="sv-demo-ver"><b>Resultado:</b> %s</p>\n'
+            '          </div>') % (DEMO['empresa'], '\n'.join(
+        '              <li class="sv-h sv-h-%s"><b>%s</b><span>%s</span><small>%s</small></li>' % (cl, tit, tx, ley)
+        for tit, tx, ley, cl in DEMO['hallazgos']), DEMO['veredicto'])
+    tira = '\n'.join(
+        '            <a class="sv-tira-n" href="%s"><span class="sv-tira-cifra">%s</span><span class="sv-tira-et">%s</span></a>'
+        % (liga, format(v, ','), html.escape(et)) for _, v, et, _op, _fu, _url, liga in monetizacion.contadores())
     portada = '\n'.join([
-        '<div class="sv-hero">',
-        '          <p class="sv-hero-pre">Prevención, temporada electoral, formación e investigación documental</p>',
-        '          <p class="sv-hero-tit">Lo que dicen los documentos, antes de que decidas.</p>',
-        '          <p class="sv-hero-tx">Antes de pagarle a un proveedor, de votar, de prometer o de recibir un gobierno: cruzamos la lista 69-B del SAT, '
-        'los contratos públicos, la ASF, las cuentas de cada estado y municipio y la ley. Te decimos lo que encontramos, lo que falta y quién lo debe.</p>',
-        '          <p class="sv-hero-pre">¿Qué necesitas?</p>',
-        '          <div class="sv-hero-acc">%s</div>' % ''.join(
-            '<a class="sz-btn%s" href="#fam-%s">%s</a>' % (' sz-btn-of' if n == 0 else '', fid, tx) for n, (fid, tx) in enumerate(puertas)),
-        '          <ul class="sv-hero-prom">',
-        '            <li><span aria-hidden="true">🧾</span><b>Cada cifra con su documento</b> y su etiqueta</li>',
-        '            <li><span aria-hidden="true">⚖️</span><b>Las mismas reglas</b> para cada cliente, partido y gobierno</li>',
-        '            <li><span aria-hidden="true">🔓</span><b>La consulta es gratis</b> y lo seguirá siendo</li>',
-        '          </ul>',
-        '        </div>'])
+        '<div class="sv-hero sv-hero2">',
+        '          <div class="sv-hero-izq">',
+        '            <p class="sv-hero-pre">Prevención de fraude y de lavado · temporada electoral · formación · investigación</p>',
+        '            <p class="sv-hero-tit">Lo que dicen los documentos, antes de que decidas.</p>',
+        '            <p class="sv-hero-tx">Antes de pagarle a un proveedor, de aceptar a un cliente, de votar o de recibir un gobierno: '
+        'cruzamos la lista 69-B del SAT, los contratos públicos, la ASF y la ley. Te decimos lo que encontramos, lo que falta y quién lo debe.</p>',
+        '            <div class="sv-hero-acc"><a class="sz-btn sz-btn-of" href="herramienta-inspector-efos.html">Revisa un RFC, gratis</a>'
+        '<a class="sz-btn" href="#solicitud">Pide una cotización</a></div>',
+        '            <ul class="sv-hero-prom">',
+        '              <li><span aria-hidden="true">🧾</span><b>Cada cifra con su documento</b></li>',
+        '              <li><span aria-hidden="true">⚖️</span><b>Las mismas reglas</b> para todos</li>',
+        '              <li><span aria-hidden="true">🔓</span><b>La consulta es gratis</b></li>',
+        '            </ul>',
+        '          </div>',
+        '          ' + mini,
+        '        </div>',
+        '        <div class="sv-tira">',
+        tira,
+        '        </div>',
+        '        <p class="sv-nota sv-tira-nota">Lo que ya puedes revisar hoy. Son conteos de los archivos de la plataforma al generar esta página '
+        '(<span class="est-chip est-derivado">auditada</span>); de qué documento sale cada uno está en <a href="%s#base">Por qué Auditavisión</a>.</p>' % SV_PORQUE,
+        '        <p class="sv-que-nec">¿Qué necesitas?</p>',
+        '        <div class="sv-puertas">%s</div>' % ''.join(
+            '<a class="sv-puerta2" href="#fam-%s"><span aria-hidden="true">%s</span><b>%s</b><span class="sv-pide">Ver ➔</span></a>'
+            % (fid, [l[1] for l in LINEAS if l[0] == fid][0], tx) for fid, tx in puertas)])
 
     # La base, contada (idea de getquin, docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md
     # §3.4): cada número se cuenta de su archivo al generar (monetizacion.py).
-    import monetizacion
-    monetizacion.revisar()
     base = ('<div class="sv-base">\n%s\n        </div>\n'
             '        <p class="sv-nota">Son conteos de los archivos de la plataforma al generar esta página (<span class="est-chip est-derivado">auditada</span>); '
             'cada uno dice de qué documento sale.</p>') % '\n'.join(
@@ -2364,32 +2424,75 @@ def servicios():
         for c in (cf[k] for k in POR_QUE))
 
     perfiles = '\n'.join(
-        '          <article class="sv-perfil">\n'
+        '          <article class="sv-perfil" data-sv-panel="p%d">\n'
         '            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">%s</span> %s</h3>\n'
         '            <p class="sv-quien">%s</p>\n'
         '            <p class="sv-que"><b>Tu reto:</b> %s</p>\n'
         '            <p class="sv-que"><b>Te sirve:</b> %s.</p>\n'
         '            <p class="sv-gratis"><b>Empieza gratis:</b> %s</p>\n'
         '            <a class="sz-btn sv-perfil-btn" href="servicios.html?servicio=%s#solicitud">Cotiza para tu caso</a>\n'
-        '          </article>' % (ico, sec, quien, reto, ', '.join(ir(i) for i in ids),
+        '          </article>' % (n, ico, sec, quien, reto, ', '.join(ir(i) for i in ids),
                                   ' · '.join('<a href="%s">%s</a>' % l for l in libres), ids[0])
-        for ico, sec, quien, reto, ids, libres in PERFILES)
+        for n, (ico, sec, quien, reto, ids, libres) in enumerate(PERFILES))
 
     oferta = '\n'.join(
-        '          <div class="sv-linea" id="fam-%s">\n'
+        '          <div class="sv-linea" id="fam-%s" data-sv-panel="%s">\n'
         '            <p class="sv-linea-tit"><span aria-hidden="true">%s</span> %s</p>\n'
         '            <p class="sv-linea-tx">%s</p>\n'
         '            <div class="sv-servicios">\n%s\n            </div>\n'
-        '          </div>' % (lid, ico, tit, tx, '\n'.join(
+        '          </div>' % (lid, lid, ico, tit, tx, '\n'.join(
             '              <article class="sv-servicio" id="sv-%s">\n'
-            '                <span class="sv-ico" aria-hidden="true">%s</span>\n'
-            '                <h3 class="sv-tit">%s</h3>\n'
+            '                <div class="sv-serv-cab"><span class="sv-ico" aria-hidden="true">%s</span><h3 class="sv-tit">%s</h3></div>\n'
             '                <p class="sv-que">%s</p>\n'
-            '                <dl class="sv-dl"><dt>Entregable</dt><dd>%s</dd><dt>Para quién</dt><dd>%s</dd><dt>Cómo se cobra</dt><dd>%s</dd></dl>\n'
+            '                <p class="sv-cobro"><span aria-hidden="true">💳</span> %s</p>\n'
+            '                <details class="sv-mas"><summary>Qué recibes y para quién</summary>'
+            '<dl class="sv-dl"><dt>Recibes</dt><dd>%s</dd><dt>Para quién</dt><dd>%s</dd></dl></details>\n'
             '                <a class="sv-pide" href="servicios.html?servicio=%s#solicitud">Solicitar este servicio ➔</a>\n'
-            '              </article>' % (s[0], s[1], s[2], s[3], s[4], s[5], COBRO[s[0]], s[0])
+            '              </article>' % (s[0], s[1], s[2], s[3], COBRO[s[0]], s[4], s[5], s[0])
             for s in SERVICIOS if s[6] == lid))
         for lid, ico, tit, tx in LINEAS)
+    pestanas = lambda nombre, pares: (
+        '<div class="sv-tabs-barra" role="group" aria-label="%s">%s</div>' % (nombre, ''.join(
+            '<button type="button" class="sv-tab" data-sv-tab="%s" aria-pressed="%s">%s</button>' % (k, 'true' if n == 0 else 'false', t)
+            for n, (k, t) in enumerate(pares))))
+    oferta = '<div class="sv-tabs" data-sv-tabs>\n          %s\n          <div class="sv-lineas">\n%s\n          </div>\n        </div>' % (
+        pestanas('Familias de servicios', [(lid, '<span aria-hidden="true">%s</span> %s' % (ico, corto)) for (lid, ico, _t, _x), corto in
+                                           zip(LINEAS, ['Fraude y lavado', 'Temporada electoral', 'Formación', 'Instituciones e investigación'])]), oferta)
+
+    # Fraude y lavado de dinero: el argumento de venta, con sus cifras.
+    falta = [k for k in RIESGO_CIFRAS if k not in {c[0] for c in fraude.cifras()}]
+    if falta:
+        raise SystemExit('Servicios: fraude.cifras() ya no trae %s' % ', '.join(falta))
+    for r in RIESGOS:
+        for i in r[4]:
+            if i not in nom:
+                raise SystemExit('Servicios: el riesgo «%s» pide el servicio «%s», que no existe' % (r[1], i))
+        arch, _, ancla = r[5][0].partition('#')
+        if not os.path.exists(os.path.join(RAIZ, arch)) or (ancla and ('id="%s"' % ancla) not in open(os.path.join(RAIZ, arch), encoding='utf-8').read()):
+            raise SystemExit('Servicios: el riesgo «%s» enlaza a %s, que no existe' % (r[1], r[5][0]))
+    rc = {c[0]: c for c in fraude.cifras()}
+    riesgo = ('<div class="sv-datos sv-datos3">\n%s\n        </div>\n'
+              '        <div class="sv-riesgos">\n%s\n        </div>\n'
+              '        <p class="sv-limite"><span aria-hidden="true">⚖️</span> %s</p>\n'
+              '        <p class="sv-nota">Todas las cifras, con su documento, están en <a href="aprende-fraude-en-numeros.html">El fraude en números</a>.</p>') % (
+        '\n'.join(
+            '          <article class="sv-dato">\n'
+            '            <p class="sv-dato-tit">%s</p>\n'
+            '            <p class="sv-dato-cifra">%s %s</p>\n'
+            '            <p class="sv-dato-tx">%s%s</p>\n'
+            '            <p class="sv-dato-fu">Fuente: <a href="%s" target="_blank" rel="noopener">%s ↗</a></p>\n'
+            '          </article>' % (html.escape(c[1]), html.escape(c[2]), '<span class="est-chip est-%s">%s</span>' % (c[4], 'auditada' if c[4] == 'derivado' else c[4]),
+                                      html.escape(c[3]), (' <small>(%s)</small>' % html.escape(c[5])) if c[5] else '', esc_attr(c[7][1]), html.escape(c[7][0]))
+            for c in (rc[k] for k in RIESGO_CIFRAS)),
+        '\n'.join(
+            '          <article class="sv-riesgo">\n'
+            '            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">%s</span> %s</h3>\n'
+            '            <p class="sv-riesgo-p"><b>El riesgo</b>%s</p>\n'
+            '            <p class="sv-riesgo-p sv-riesgo-si"><b>Lo que hacemos</b>%s</p>\n'
+            '            <p class="sv-riesgo-ir">%s · <a href="%s">%s</a></p>\n'
+            '          </article>' % (ico, tit, pide, hace, ' · '.join(ir(i) for i in ids), liga[0], liga[1])
+            for ico, tit, pide, hace, ids, liga in RIESGOS),
+        RIESGO_LIMITE)
 
     formas = '\n'.join(
         '          <article class="sv-forma">\n'
@@ -2557,33 +2660,34 @@ def servicios():
         # del autor: «haz la reestructura de la pestaña»), en cuatro familias y
         # once secciones: lo demás vive en SV_PORQUE, sin borrar nada.
         'archivo': 'servicios.html', 'titulo': 'Servicios',
-        'lema': 'Prevención, temporada electoral, formación e investigación, con cada cifra en su documento',
+        'lema': 'Prevención de fraude y de lavado, temporada electoral, formación e investigación',
         'entrada': ('La consulta es libre y lo seguirá siendo. Cuando quieras ir más a fondo, lo hacemos por encargo, con la misma regla. '
                     'Los Servicios y las <a href="donaciones.html">donaciones</a> sostienen el trabajo; ninguno compra lo que publicamos.'),
         'scripts': ['servicios.js'],
-        'saltos': {'oferta': 'Servicios', 'cobro': 'Cómo se cobra', 'ejemplo': 'Ejemplo', 'modulos': 'Empieza gratis', 'calendario': 'Calendario',
-                   'sectores': 'Perfiles', 'preguntas': 'Preguntas', 'solicitud': 'Cotiza'},
+        'saltos': {'riesgo': 'Fraude y lavado', 'oferta': 'Servicios', 'sectores': 'Tu perfil', 'modulos': 'Empieza gratis', 'cobro': 'Cómo se cobra',
+                   'calendario': 'Calendario', 'preguntas': 'Preguntas', 'solicitud': 'Cotiza'},
         'antes': ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> Los Servicios se abren con el lanzamiento de la '
                   'plataforma. Ya puedes armar tu solicitud y guardarla; el envío se activa entonces.</p>'),
         'secciones': [
             bloque_sec('propuesta', 'Lo que te ofrecemos', '', portada, sin_cab=True),
-            bloque_sec('oferta', 'Cuatro familias de servicios',
-                       '%s servicios, de revisar a un proveedor a entender las cuentas del gobierno que vas a votar o a recibir.'
+            bloque_sec('riesgo', 'Fraude y lavado de dinero: revísalo antes de pagar',
+                       'El fraude es frecuente y casi nunca se denuncia. Por eso la revisión va antes del pago, no después.', riesgo, pre='Por qué revisar'),
+            bloque_sec('oferta', 'Elige lo que necesitas',
+                       '%s servicios en cuatro familias. Toca una familia para ver los suyos.'
                        % ['Cero', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve', 'Diez', 'Once', 'Doce'][len(SERVICIOS)],
-                       '<div class="sv-lineas">\n%s\n        </div>' % oferta, pre='Los servicios'),
+                       oferta, pre='Los servicios'),
         ] + ([bloque_sec('planes', 'Elige tu plan', 'Lo público es gratis siempre. Pagas por el aviso, la memoria y el trabajo.', planes,
                          pre='Planes')] if planes else []) + [
-            bloque_sec('cobro', 'Cómo se cobra cada servicio', 'Sabes cómo se cobra antes de escribirnos. Solo la investigación a la medida se cotiza.',
-                       cobro, pre='Precios'),
-            bloque_sec('ejemplo', 'Un proveedor, revisado contra los documentos',
-                       'Cada hallazgo con su artículo, y lo que la revisión no dice. Para ver de qué está hecha una Radiografía, abre cualquier estado en el '
-                       '<a href="planisferio.html">Planisferio</a>.', demo, pre='Así se ve una revisión'),
+            bloque_sec('sectores', '¿A qué te dedicas?',
+                       'Elige tu perfil: lo que te pide tu trabajo, el servicio que lo atiende y con qué puedes empezar hoy, gratis.',
+                       '<div class="sv-tabs" data-sv-tabs>\n          %s\n          <div class="sv-perfiles">\n%s\n          </div>\n        </div>' % (
+                           pestanas('Perfiles', [('p%d' % n, '<span aria-hidden="true">%s</span> %s' % (p[0], c)) for n, (p, c) in enumerate(zip(PERFILES, PERFILES_CORTO))]),
+                           perfiles), pre='Tu perfil'),
             bloque_sec('modulos', 'Empieza gratis, hoy', 'Las herramientas que ya puedes usar sin pagar y sin subir tus archivos.', gratis + '\n        ' + mas,
                        pre='La plataforma'),
+            bloque_sec('cobro', 'Cómo se cobra cada servicio', 'Sabes cómo se cobra antes de escribirnos. Solo la investigación a la medida se cotiza.',
+                       cobro, pre='Precios'),
             bloque_sec('calendario', 'Qué abre y cuándo', 'La prevención sirve todo el año; la temporada electoral tiene fecha.', calendario, pre='Calendario'),
-            bloque_sec('sectores', 'Hecho para quien responde por el dinero',
-                       'Por carrera y especialidad: lo que te pide tu trabajo, el servicio que lo atiende y con qué puedes empezar hoy, gratis.',
-                       '<div class="sv-perfiles">\n%s\n        </div>' % perfiles, pre='Elige tu perfil'),
             bloque_sec('proceso', 'Cómo trabajamos por encargo', 'Siete pasos. Nada se cobra antes de que aceptes la cotización.',
                        '<ol class="sv-pasos">\n%s\n        </ol>' % pasos, pre='El encargo'),
             bloque_sec('independencia', 'Política de independencia',
