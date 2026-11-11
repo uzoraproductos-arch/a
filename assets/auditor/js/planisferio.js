@@ -203,9 +203,13 @@
     function puente() {
       var p = document.getElementById('plPuente');
       if (!p) return;
-      p.innerHTML = dimP === 'penal'
-        ? '🛡️ ¿Necesitas revisar a un proveedor o a un cliente antes de pagar o de firmar? Es un servicio: <a href="servicios.html#riesgo">Prevención de fraude y de lavado de dinero ➔</a>'
-        : '🧾 ¿Necesitas lo de ' + (sel ? esc(sel.n) : 'tu estado o tu municipio') + ' en un solo documento, con cada cifra y su fuente? Es un servicio: <a href="servicios.html#sv-radiografia">Radiografía de tu municipio o de tu estado ➔</a>';
+      var pen = dimP === 'penal';
+      p.innerHTML = '<div class="pl-puente-t"><p class="pl-puente-e">Servicio de Auditavisión</p>' + (pen
+        ? '<p class="pl-puente-h">🛡️ ¿Vas a pagarle o a firmarle a un proveedor o a un cliente?</p><p class="pl-puente-d">Revísalo antes contra los documentos públicos. Recibes señales para revisar, cada una con su fuente; la decisión sigue siendo tuya.</p></div>' +
+          '<div class="pl-puente-a"><a class="pl-puente-b" href="servicios.html#riesgo">Prevención de fraude y de lavado ➔</a>'
+        : '<p class="pl-puente-h">🧾 ¿Necesitas lo de ' + (sel ? esc(sel.n) : 'tu estado o tu municipio') + ' en un solo documento?</p><p class="pl-puente-d">La Radiografía reúne lo que los documentos públicos dicen de su gobierno: cada cifra con su documento y su etiqueta, y lo que falta, con el nombre de quien lo debe.</p></div>' +
+          '<div class="pl-puente-a"><a class="pl-puente-b" href="servicios.html#sv-radiografia">Ver la Radiografía ➔</a>') +
+        '<a class="pl-puente-o" href="servicios.html">Todos los servicios</a></div>';
     }
     var listo = false;
     function guarda() {
@@ -423,7 +427,8 @@
       var lg = lugar(e), h = ficha.querySelector('h3');
       if (lg && h) h.insertAdjacentHTML('afterend', '<p class="pl-ficha-lugar">Lugar <b>' + lg.n + '</b> de ' + lg.de + ' en «' + esc(lente.nom) + '», de la cifra más alta a la más baja' +
         (lg.emp > 0 ? ' (lo comparte con ' + lg.emp + (lg.emp === 1 ? ' entidad' : ' entidades') + ')' : '') + ' ' + chip('derivado') + '</p>');
-      if (fijo) ficha.insertAdjacentHTML('beforeend', '<button type="button" class="pl-suelta" data-suelta>Soltar esta entidad</button>');
+      if (fijo) ficha.insertAdjacentHTML('beforeend', '<a class="pl-ficha-serv" href="servicios.html#' + (dimP === 'penal' ? 'riesgo">🛡️ Servicio: revisa a un proveedor antes de pagar ➔' : 'sv-radiografia">🧾 Servicio: la Radiografía de ' + esc(e.n) + ' en un documento ➔') + '</a>' +
+        '<button type="button" class="pl-suelta" data-suelta>Soltar esta entidad</button>');
     }
     ficha.addEventListener('click', function (ev) { if (ev.target.closest && ev.target.closest('[data-suelta]')) suelta(); });
     var rk = document.getElementById('plRank');

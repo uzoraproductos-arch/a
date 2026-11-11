@@ -1369,8 +1369,11 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
               <p class="pl-tab-pie-t">Para leerla bien</p>
               <div class="pl-cajones">%s</div>
               <div class="pl-indice-b"><button type="button" class="pl-caj-b pl-indice-btn" data-cajon="plTplIndice" data-cajon-tit="plTplIndiceTit" data-cajon-hash="entidades" aria-haspopup="dialog">📍 Las 32 entidades: entra a su portal</button></div>
-              <p class="pl-puente" id="plPuente">🧾 ¿Lo necesitas en un solo documento, con cada cifra y su fuente? Es un servicio: <a href="servicios.html#sv-radiografia">Radiografía de tu municipio o de tu estado ➔</a></p>
             </footer>
+            <aside class="pl-puente" id="plPuente" aria-label="Servicios de Auditavisión">
+              <div class="pl-puente-t"><p class="pl-puente-e">Servicio de Auditavisión</p><p class="pl-puente-h">🧾 ¿Necesitas lo de tu estado o tu municipio en un solo documento?</p><p class="pl-puente-d">La Radiografía reúne lo que los documentos públicos dicen de su gobierno: cada cifra con su documento y su etiqueta, y lo que falta, con el nombre de quien lo debe.</p></div>
+              <div class="pl-puente-a"><a class="pl-puente-b" href="servicios.html#sv-radiografia">Ver la Radiografía ➔</a><a class="pl-puente-o" href="servicios.html">Todos los servicios</a></div>
+            </aside>
           </section>%s
           <template id="plTplIndice">%s</template>
           <div class="pl-solo-dim pl-fin" data-dim="financiera">
