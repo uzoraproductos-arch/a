@@ -94,9 +94,9 @@
     "cifra:limantour-superavit-y-peso-oro",
     "fuente:limantour-superavit-y-peso-oro"
    ],
-   "consultado": "2026-11-09",
+   "consultado": "2026-11-11",
    "estado": "no abrió",
-   "error": "[Errno 11001] getaddrinfo failed"
+   "error": "[Errno -2] Name or service not known"
   },
   "https://centralelectoral.ine.mx/2023/03/31/lorenzo-cordova-adriana-favela-ciro-murayama-y-jose-roberto-ruiz-se-despiden-de-la-herradura-de-la-democracia/": {
    "primera_vez": "2026-10-28",
@@ -382,6 +382,20 @@
    "tipo": "text/html",
    "http": 200,
    "copiado": "2026-10-27"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5738985&fecha=15/09/2024": {
+   "primera_vez": "2026-11-11",
+   "historial": [],
+   "usos": [
+    "biblioteca:ref-reforma-judicial"
+   ],
+   "consultado": "2026-11-11",
+   "estado": "copiado",
+   "sha256": "56e33378d2d7983b6e2caaeba5d793edf22014869eaf472d4e21217af9300e18",
+   "bytes": 274992,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-11"
   },
   "https://dof.gob.mx/nota_detalle.php?codigo=5762925&fecha=15/07/2025": {
    "primera_vez": "2026-11-09",
@@ -896,7 +910,7 @@
    "usos": [
     "biblioteca:ref-conapo-proyecciones"
    ],
-   "consultado": "2026-11-09",
+   "consultado": "2026-11-11",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -906,7 +920,7 @@
    "usos": [
     "biblioteca:ref-sat-padron-rfc"
    ],
-   "consultado": "2026-11-09",
+   "consultado": "2026-11-11",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -2040,9 +2054,9 @@
    "usos": [
     "biblioteca:ref-oaj-trimestre2026"
    ],
-   "consultado": "2026-11-09",
+   "consultado": "2026-11-11",
    "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1010)"
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1011)"
   },
   "https://www.comunicacionpef.hacienda.gob.mx/work/models/COMUNICACION_DEL_PEF/Documentos/2026/distribucion_gasto_UR/r03_apurog.pdf": {
    "primera_vez": "2026-10-27",
@@ -2401,7 +2415,7 @@
    "usos": [
     "biblioteca:ref-inafed-presidencias"
    ],
-   "consultado": "2026-11-09",
+   "consultado": "2026-11-11",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -3613,7 +3627,7 @@
    "usos": [
     "auditoria:inversion-megaobras"
    ],
-   "consultado": "2026-11-09",
+   "consultado": "2026-11-11",
    "estado": "no abrió",
    "error": "Not Found"
   },
@@ -4399,7 +4413,7 @@
    "usos": [
     "fuente:imss-modalidad-40-gestores"
    ],
-   "consultado": "2026-11-09",
+   "consultado": "2026-11-11",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -4572,7 +4586,7 @@
    "usos": [
     "biblioteca:ref-sat-denuncias"
    ],
-   "consultado": "2026-11-09",
+   "consultado": "2026-11-11",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -4681,7 +4695,7 @@
    "usos": [
     "biblioteca:ref-presidencia-2ig"
    ],
-   "consultado": "2026-11-09",
+   "consultado": "2026-11-11",
    "estado": "no abrió",
    "error": "Forbidden"
   },
