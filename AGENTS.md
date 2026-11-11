@@ -117,7 +117,8 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
 - **El tablero ordena y recuerda** (11-11-2026): cada lente trae su orden (`rank()` de `planisferio.js`: las cinco
   cifras más altas y las cinco más bajas, y el lugar de la entidad en su ficha), **que nunca se dice como
   calificación** y se esconde si hay empate en el corte; la dirección guarda la vista (`?d=&l=&e=`); hay buscador de
-  estado, y el pie lleva a Servicios (`#plPuente`). Nada de eso agrega cifras.
+  estado, y el pie lleva a Servicios (`#plPuente`: una franja de venta con su botón, y el servicio también en la ficha
+  de la entidad elegida, `.pl-ficha-serv`; **nunca un monto**). El encabezado es bajo para que el mapa suba. Nada de eso agrega cifras.
 - **El Planisferio es la matriz de los mapas** (pedido del autor, 04-11-2026: «las cuestiones que
   tienen que ver con los mapas quedan vinculadas con el planisferio… va a ser nuestra matriz, que se
   vincula y se alimenta al mismo tiempo con la información de la Enciclopedia»). Cada lente del mapa de
