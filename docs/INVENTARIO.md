@@ -803,7 +803,7 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Bóveda de evidencias
 
-Documentos en `docs/boveda/evidencias.json`: 317 copiado, 11 no abrió, 8 sin copia.
+Documentos en `docs/boveda/evidencias.json`: 318 copiado, 11 no abrió, 8 sin copia.
 
 Todos los cotejos «consta» y «matiz» tienen su evidencia.
 
