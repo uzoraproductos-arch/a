@@ -302,7 +302,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 227 | 0 | 0 | 0 | 117 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 229 | 0 | 0 | 0 | 119 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 37 | 0 | 11 | 5 | 0 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 48 | 0 | 1 | 0 | 0 |
 | `planisferio-ags-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
@@ -311,7 +311,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-ags-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-ags-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-ags-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-ags-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-ags-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-ags-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-ags-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-ags-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -324,7 +324,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-bc-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-bc-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-bc-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-bc-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-bc-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-bc-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-bc-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-bc-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -337,7 +337,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-bcs-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-bcs-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-bcs-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-bcs-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-bcs-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-bcs-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-bcs-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-bcs-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -350,7 +350,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-cam-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-cam-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-cam-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-cam-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-cam-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-cam-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-cam-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-cam-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -363,7 +363,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-cdmx-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-cdmx-inversion.html` | Su inversión · Auditavisión | apartados.py | 60 | 0 | 1 | 1 | 2 |
 | `planisferio-cdmx-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 18 | 17 | 3 |
-| `planisferio-cdmx-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 2 | 3 | 2 |
+| `planisferio-cdmx-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 6 | 5 | 2 |
 | `planisferio-cdmx-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-cdmx-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-cdmx-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 57 | 0 | 2 | 4 | 3 |
@@ -376,7 +376,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-chih-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-chih-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-chih-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-chih-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-chih-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-chih-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-chih-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-chih-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -389,7 +389,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-chis-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-chis-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-chis-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-chis-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-chis-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-chis-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-chis-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-chis-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -402,7 +402,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-coah-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-coah-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-coah-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-coah-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-coah-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-coah-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-coah-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-coah-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -415,7 +415,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-col-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-col-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-col-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-col-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-col-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-col-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-col-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-col-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -428,7 +428,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-dgo-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-dgo-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-dgo-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-dgo-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-dgo-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-dgo-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-dgo-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-dgo-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -441,7 +441,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-gro-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-gro-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-gro-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-gro-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-gro-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-gro-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-gro-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-gro-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -454,7 +454,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-gto-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-gto-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-gto-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-gto-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-gto-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-gto-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-gto-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-gto-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -467,7 +467,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-hgo-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-hgo-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-hgo-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-hgo-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-hgo-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-hgo-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-hgo-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-hgo-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -480,7 +480,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-jal-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-jal-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-jal-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-jal-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-jal-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-jal-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-jal-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-jal-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -493,7 +493,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-mex-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-mex-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-mex-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-mex-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-mex-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-mex-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-mex-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-mex-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -506,7 +506,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-mich-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-mich-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-mich-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-mich-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-mich-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-mich-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-mich-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-mich-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -519,7 +519,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-mor-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-mor-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-mor-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-mor-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-mor-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-mor-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-mor-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-mor-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -532,7 +532,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-nay-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-nay-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-nay-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-nay-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-nay-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-nay-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-nay-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-nay-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -545,7 +545,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-nl-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-nl-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-nl-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-nl-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 4 | 1 |
+| `planisferio-nl-legislativa.html` | Su congreso · Auditavisión | apartados.py | 62 | 0 | 11 | 6 | 1 |
 | `planisferio-nl-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-nl-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-nl-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -558,7 +558,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-oax-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-oax-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-oax-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-oax-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-oax-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-oax-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-oax-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-oax-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -571,7 +571,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-pue-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-pue-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-pue-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-pue-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-pue-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-pue-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-pue-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-pue-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -584,7 +584,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-qro-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-qro-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-qro-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-qro-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-qro-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-qro-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-qro-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-qro-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -597,7 +597,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-qroo-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-qroo-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-qroo-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-qroo-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-qroo-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-qroo-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-qroo-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-qroo-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -610,7 +610,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-sin-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-sin-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-sin-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-sin-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-sin-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-sin-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-sin-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-sin-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -623,7 +623,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-slp-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-slp-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-slp-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-slp-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-slp-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-slp-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-slp-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-slp-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -636,7 +636,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-son-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-son-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-son-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-son-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-son-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-son-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-son-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-son-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -649,7 +649,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-tab-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-tab-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-tab-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-tab-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-tab-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-tab-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-tab-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-tab-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -662,7 +662,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-tam-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-tam-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-tam-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-tam-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-tam-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-tam-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-tam-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-tam-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -675,7 +675,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-tlax-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-tlax-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-tlax-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-tlax-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 8 | 4 | 1 |
+| `planisferio-tlax-legislativa.html` | Su congreso · Auditavisión | apartados.py | 62 | 0 | 12 | 6 | 1 |
 | `planisferio-tlax-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-tlax-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-tlax-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -688,7 +688,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-ver-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-ver-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-ver-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-ver-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-ver-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-ver-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-ver-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-ver-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -701,7 +701,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-yuc-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-yuc-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-yuc-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-yuc-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-yuc-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-yuc-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-yuc-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-yuc-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -714,7 +714,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-zac-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-zac-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-zac-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
-| `planisferio-zac-legislativa.html` | Su congreso · Auditavisión | apartados.py | 60 | 0 | 3 | 4 | 1 |
+| `planisferio-zac-legislativa.html` | Su congreso · Auditavisión | apartados.py | 61 | 0 | 7 | 6 | 1 |
 | `planisferio-zac-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 53 | 0 | 0 | 1 | 1 |
 | `planisferio-zac-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 58 | 0 | 3 | 4 | 0 |
 | `planisferio-zac-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 62 | 0 | 3 | 10 | 0 |
@@ -799,7 +799,7 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-116 fichas, cada una con su porqué, su responsable y su enlace oficial.
+118 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 
