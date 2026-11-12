@@ -771,29 +771,76 @@
   }
 
   /* ---------------- El expediente ---------------- */
-  function resumenHtml(dg) {
+  /* La lectura en pantalla (12-11-2026, pedido del autor: «sintetizarlo y
+     expresarlo de una mejor manera»). La ficha abre con «De un vistazo» (el
+     círculo de salud y cada pregunta ya con su respuesta) y lo demás va por
+     pestañas; las preguntas sin señal llegan plegadas. Nada de esto agrega ni
+     quita cifras: al imprimir salen todas las secciones y todas las respuestas
+     abiertas, y la huella firma el mismo texto de siempre (cuerpoFicha). */
+  function vistazoHtml(dg, ej, i) {
     var c = cuenta(dg);
     var cl = c.grave ? 's-grave' : c.alerta ? 's-alerta' : 's-ok';
     var t = (c.grave ? c.grave + ' señal' + (c.grave > 1 ? 'es' : '') + ' fuerte' + (c.grave > 1 ? 's' : '') : '') +
       (c.grave && c.alerta ? ' y ' : '') + (c.alerta ? c.alerta + ' a revisar' : '') +
       (!c.grave && !c.alerta ? 'Sin señales en las ' + dg.length + ' preguntas' : '');
-    return '<div class="ie-resumen ' + cl + '">' +
+    var v = ej && i !== null ? veredicto(i) : null;
+    var salud = v
+      ? '<button type="button" class="ie-vz-salud ' + v.c + '" data-pan-ir="salud" aria-label="Salud financiera: ' + Math.round(i) + ' de 100, ' + esc(v.t) + '. Ver los tres ejes">' +
+        circuloSVG(i, v) + '<b>' + v.ico + ' ' + v.t + '</b><small>Ver los tres ejes ›</small></button>'
+      : '';
+    return '<section class="ie-vz ' + cl + (salud ? ' ie-vz-con' : '') + '" aria-label="De un vistazo">' +
+      '<p class="ie-vz-k">De un vistazo</p>' +
       '<p class="ie-resumen-t">' + (c.grave ? '🔴 ' : c.alerta ? '🟠 ' : '🟢 ') + t + '</p>' +
+      '<div class="ie-vz-c">' + salud +
       '<ol class="ie-mini">' + dg.map(function (x) {
-        return '<li><a href="#ie-q-' + x.k + '" class="s-' + x.e + '"><span class="ie-pt s-' + x.e + '" aria-hidden="true"></span>' +
-          '<span class="ie-mini-q">' + x.q + '</span><span class="ie-mini-v">' + SEM[x.e].t + '</span></a></li>';
-      }).join('') + '</ol>' +
+        return '<li><a href="#ie-q-' + x.k + '" class="s-' + x.e + '"><span class="ie-mini-cab"><span class="ie-pt s-' + x.e + '" aria-hidden="true"></span>' +
+          '<span class="ie-mini-v">' + (x.t || SEM[x.e].t) + '</span></span>' +
+          '<span class="ie-mini-q">' + x.q + '</span><b class="ie-mini-r">' + esc(x.v) + '</b></a></li>';
+      }).join('') + '</ol></div>' +
       '<p class="ie-resumen-d">Preguntas que cualquiera puede hacerle a una autoridad, respondidas con sus propios reportes y con lo que encontró la Auditoría Superior. ' +
-      'Una señal no es una acusación: es algo que la autoridad debe explicar.</p></div>';
+      'Toca una para leer su explicación. Una señal no es una acusación: es algo que la autoridad debe explicar.</p></section>';
+  }
+
+  /* Las pestañas de la ficha: l = [[clave, ícono, etiqueta, contenido]]. */
+  function pestanas(l, extra) {
+    l = l.filter(function (p) { return p[3]; });
+    return '<div class="ie-tabs-caja"><div class="ie-tabs" role="tablist" aria-label="Secciones de la ficha">' + l.map(function (p, n) {
+      return '<button type="button" role="tab" class="ie-tab' + (n ? '' : ' on') + '" id="ieFt-' + p[0] + '" data-pan-ir="' + p[0] + '" aria-selected="' + (n ? 'false' : 'true') +
+        '" aria-controls="iePan-' + p[0] + '"' + (n ? ' tabindex="-1"' : '') + '><span aria-hidden="true">' + p[1] + '</span> ' + p[2] + '</button>';
+    }).join('') + '</div>' + (extra || '') + '</div>' +
+      l.map(function (p, n) {
+        return '<section class="ie-pan' + (n ? ' ie-pan-off' : '') + '" id="iePan-' + p[0] + '" role="tabpanel" aria-labelledby="ieFt-' + p[0] + '" data-pan="' + p[0] + '">' + p[3] + '</section>';
+      }).join('');
+  }
+  function verPan(k, enfocar) {
+    var cont = document.getElementById('ieExp'), pan = cont.querySelector('.ie-pan[data-pan="' + k + '"]');
+    if (!pan) return null;
+    [].forEach.call(cont.querySelectorAll('.ie-pan'), function (x) { x.classList.toggle('ie-pan-off', x !== pan); });
+    [].forEach.call(cont.querySelectorAll('.ie-tab'), function (b) {
+      var on = b.getAttribute('data-pan-ir') === k;
+      b.classList.toggle('on', on); b.setAttribute('aria-selected', on ? 'true' : 'false');
+      if (on) { b.removeAttribute('tabindex'); if (enfocar) b.focus({ preventScroll: true }); } else b.setAttribute('tabindex', '-1');
+    });
+    animar(pan);
+    return pan;
+  }
+  function abrePregunta(li, abrir) {
+    li.classList.toggle('ie-ab', abrir);
+    var b = li.querySelector('.ie-senal-b');
+    if (b) b.setAttribute('aria-expanded', abrir ? 'true' : 'false');
   }
 
   function senalesHtml(dg) {
-    return '<ol class="ie-senales">' + dg.map(function (x) {
-      return '<li class="ie-senal s-' + x.e + '" id="ie-q-' + x.k + '">' +
-        '<p class="ie-senal-q"><span aria-hidden="true">' + x.ico + '</span> ' + x.q + '</p>' +
+    var plegadas = dg.filter(function (x) { return x.e === 'ok'; }).length;
+    return (plegadas && dg.length > 1 ? '<p class="ie-senal-ctl"><button type="button" class="ie-enlace" data-senal-todas="1" aria-pressed="false">Abrir todas las respuestas</button></p>' : '') +
+      '<ol class="ie-senales">' + dg.map(function (x) {
+      var ab = x.e !== 'ok';
+      return '<li class="ie-senal s-' + x.e + (ab ? ' ie-ab' : '') + '" id="ie-q-' + x.k + '">' +
+        '<p class="ie-senal-q"><button type="button" class="ie-senal-b" data-senal="1" aria-expanded="' + (ab ? 'true' : 'false') + '" aria-controls="ie-qc-' + x.k + '">' +
+        '<span aria-hidden="true">' + x.ico + '</span> <span class="ie-senal-qt">' + x.q + '</span><span class="ie-senal-fl" aria-hidden="true">▾</span></button></p>' +
         '<p class="ie-senal-v"><span class="ie-sem-et">' + SEM[x.e].ico + ' ' + (x.t || SEM[x.e].t) + ':</span> <b>' + x.v + '</b> ' +
         chip(x.ch || (x.e === 'sin' ? 'pendiente' : 'derivado'), x.ch ? '' : x.e === 'sin' ? x.pend : '') + '</p>' +
-        '<p class="ie-senal-d">' + x.d + (x.f ? ' ' + x.f : '') + '</p></li>';
+        '<div class="ie-senal-c" id="ie-qc-' + x.k + '"><p class="ie-senal-d">' + x.d + (x.f ? ' ' + x.f : '') + '</p></div></li>';
     }).join('') + '</ol>';
   }
 
@@ -1017,13 +1064,14 @@
       (f.cotejos || []).forEach(function (cj) { [cj.a[2], cj.b[2]].forEach(function (k) { if (usadas.indexOf(k) === -1 && !D.fF[k]) usadas.push(k); }); });
     }
     return cabecera(ente, 'Expediente federal · ' + D.poderes[ente.poder][0] + ' · Ramo ' + f.ramo, f.tipo) +
-      resumenHtml(dg) +
-      incHtml(dg, f.padre ? 'el propio órgano, que es quien reporta las dos cifras' : 'el propio ente, que reporta ambas cifras a Hacienda') +
-      '<h3 class="ie-h3">Su dinero, en millones de pesos</h3>' + celdas(c) +
-      rel +
-      '<h3 class="ie-h3">Las preguntas, una por una</h3>' + senalesHtml(dg) +
-      fedAuditorias(f) +
-      (exps ? '<div class="ie-nota"><b>Expedientes de la ASF sobre este ente.</b> Informe por informe, con sus claves de auditoría: <span class="ie-chipas">' + exps + '</span></div>' : '') +
+      auditorias(ente, vistazoHtml(dg, null, null) +
+      pestanas([
+        ['preguntas', '🔎', 'Las preguntas', '<h3 class="ie-h3">Las preguntas, una por una</h3>' + senalesHtml(dg) +
+          incHtml(dg, f.padre ? 'el propio órgano, que es quien reporta las dos cifras' : 'el propio ente, que reporta ambas cifras a Hacienda')],
+        ['dinero', '💰', 'Su dinero', '<h3 class="ie-h3">Su dinero, en millones de pesos</h3>' + celdas(c) + rel],
+        ['asf', '🏛️', 'Auditorías y expedientes', (fedAuditorias(f) +
+          (exps ? '<div class="ie-nota"><b>Expedientes de la ASF sobre este ente.</b> Informe por informe, con sus claves de auditoría: <span class="ie-chipas">' + exps + '</span></div>' : ''))]
+      ]), dg.length) +
       pie(esc(D.fF.cp2025.corto) + refFed('cp2025') + ' · ' + esc(D.fF.av2026.corto) + refFed('av2026') + ' · ' + esc(D.fF.asf2024.corto) + refFed('asf2024') +
         usadas.map(function (k) { return ' · ' + esc(D.fP[k].corto) + refFed(k); }).join('') + '.', ente);
   }
@@ -1053,16 +1101,11 @@
       : 'Estado de cuenta del municipio ' + ente.nombre + ', ' + (ente.est ? ente.est.name : ente.abbr);
   }
   function docsHtml(ente) {
-    return '<nav class="ie-docs" aria-label="Sus documentos"><b class="ie-docs-et">Sus documentos</b><span class="ie-chipas">' +
-      '<button type="button" class="ie-chipa" data-salta="ieSecCuenta"><span aria-hidden="true">🧾</span> Estado de cuenta</button>' +
-      '<button type="button" class="ie-chipa" data-salta="ieSecSalud"><span aria-hidden="true">🩺</span> Salud financiera</button>' +
-      '<button type="button" class="ie-chipa" data-salta="ieSecVivo"><span aria-hidden="true">⏱️</span> En vivo</button>' +
-      '<a class="ie-chipa" href="' + DICTAMEN + '?q=' + encodeURIComponent(preguntaDictamen(ente)) + '" target="_blank" rel="noopener"><span aria-hidden="true">📜</span> Generar dictamen</a>' +
-      '</span></nav>';
+    return '<a class="ie-chipa ie-tab-doc" href="' + DICTAMEN + '?q=' + encodeURIComponent(preguntaDictamen(ente)) + '" target="_blank" rel="noopener"><span aria-hidden="true">📜</span> Generar dictamen</a>';
   }
   function vivoHtml(ente) {
     var r = ritmo(ente);
-    var tit = '<h3 class="ie-h3" id="ieSecVivo" tabindex="-1">El ritmo, en vivo</h3>';
+    var tit = '<h3 class="ie-h3">El ritmo, en vivo</h3>';
     if (!r) return tit + '<div class="ie-nota"><b>Sin contador.</b> Hace falta su cifra anual oficial, y ' +
       (ente.abbr === 'CDMX' ? 'las alcaldías no rinden cuenta municipal ante el INEGI.' : 'este municipio no entregó su cuenta de 2024 al INEGI.') + '</div>';
     var pesos = r.anual * 1e6, dia = pesos / 365, hora = dia / 24, min = hora / 60, seg = pesos / SEG_ANO;
@@ -1129,23 +1172,129 @@
       : '<div class="ie-nota"><b>Para seguir:</b> <span class="ie-chipas">' + (e ? '<a class="ie-chipa" href="#ente=estatal:' + e.abbr + '">🗺️ El gobierno de ' + esc(e.name) + '</a>' : '') +
         '<a class="ie-chipa" href="numeros-los-municipios.html">🏙️ Los municipios, en Números</a></span></div>';
     return cabecera(ente, 'Expediente ' + (esEstado ? 'estatal' : 'municipal'), ente.sub) +
-      docsHtml(ente) +
-      resumenHtml(dg) +
-      incHtml(dg, esEstado ? 'el gobierno del estado y a Hacienda, que deben conciliar sus registros' : 'el ayuntamiento, que firmó los dos reportes') +
-      '<h3 class="ie-h3" id="ieSecCuenta" tabindex="-1">Su estado de cuenta</h3>' + celdas(ident) +
-      (esEstado ? estPoderes(e) : '') +
-      '<h3 class="ie-h3">Las preguntas, una por una</h3>' + senalesHtml(dg) +
-      (esEstado ? radarHtml(e) : '') +
-      '<h3 class="ie-h3" id="ieSecSalud" tabindex="-1">El círculo de salud financiera</h3>' + circuloHtml(ej, i, esEstado) +
-      vivoHtml(ente) +
+      auditorias(ente, vistazoHtml(dg, ej, i) +
+      pestanas([
+        ['preguntas', '🔎', 'Las preguntas', '<h3 class="ie-h3">Las preguntas, una por una</h3>' + senalesHtml(dg) +
+          incHtml(dg, esEstado ? 'el gobierno del estado y a Hacienda, que deben conciliar sus registros' : 'el ayuntamiento, que firmó los dos reportes')],
+        ['cuenta', '🧾', 'Estado de cuenta', '<h3 class="ie-h3">Su estado de cuenta</h3>' + celdas(ident) + (esEstado ? estPoderes(e) : '')],
+        ['radar', '🚩', 'Radar de la ASF', esEstado ? radarHtml(e) : ''],
+        ['salud', '🩺', 'Salud financiera', '<h3 class="ie-h3">El círculo de salud financiera</h3>' + circuloHtml(ej, i, esEstado)],
+        ['vivo', '⏱️', 'En vivo', vivoHtml(ente)]
+      ], docsHtml(ente)), dg.length) +
       verMas + pie(fuentes, ente);
   }
 
+  /* ---------------- Las dos auditorías de la ficha ---------------- */
+  /* Decisión del autor (12-11-2026): toda institución pública se audita en dos
+     funciones, sus finanzas públicas y su productividad. La de finanzas es lo
+     que la ficha ya traía; la de productividad lee D.prod (insp_entes.py), que
+     toma lo que la Enciclopedia ya cotejó. Donde aún no hay documento
+     integrado, se dice pendiente con su porqué: nunca se rellena. */
+  var PROD = D.prod || { fed: {}, est: {}, ver: {} };
+  function prodDe(ente) {
+    if (ente.nivel === 'federal') return PROD.fed[ente.id] || null;
+    if (ente.nivel === 'estatal') return PROD.est[ente.id] || null;
+    return null;
+  }
+  function prodFilas(ente, p) {
+    var est = ente.nivel === 'estatal';
+    var l = [['Asuntos que le entraron en 2024', fmt(p.i), 'oficial'],
+      [est ? 'Asuntos que concluyó en primera instancia' : 'Asuntos que resolvió', fmt(p.c), 'oficial'],
+      ['Concluyó de cada 100 que le entraron', p.c100.toFixed(1), 'derivado', 'Concluidos ÷ ingresados × 100. No es el rezago: no cuenta lo que venía de años anteriores.'],
+      ['Presupuesto que ejerció en 2024', mdpF(p.g), 'oficial'],
+      ['Dinero por asunto concluido', '$' + fmt(p.xa), 'derivado', 'Presupuesto ejercido ÷ asuntos concluidos. No es lo que cuesta un juicio: con ese dinero también se paga todo lo demás que hace el órgano.']];
+    if (est) l.push(['Causas penales pendientes al cierre del año', fmt(p.p), 'oficial'], ['Personas juzgadoras', fmt(p.j), 'oficial'],
+      ['Asuntos concluidos por persona juzgadora', fmt(p.cj), 'derivado', 'Concluidos ÷ personas juzgadoras.']);
+    return l;
+  }
+  /* La productividad por sector (12-11-2026): salud, justicia ambiental… Cada
+     ente lee lo que su módulo de la Enciclopedia ya cotejó (PROD.sec). */
+  function secDe(ente) { return ente.nivel === 'federal' && PROD.sec && PROD.sec[ente.id] || null; }
+  function secHtml(ente, x) {
+    var ver = PROD.ver[ente.id], h = '<h3 class="ie-h3">Qué hizo con su dinero</h3>';
+    if (x.filas.length) {
+      h += '<p class="ie-nota-p">' + (x.intro || '') + ' El dinero va siempre junto a lo que se hizo con él.</p>' +
+        celdas(x.filas.map(function (r) {
+          return [esc(r[0]) + ' ' + chip(r[2]), '<b>' + esc(r[1]) + '</b>' + (r[3] ? '<br><small>' + esc(r[3]) + '</small>' : '')];
+        })) +
+        '<p class="ie-nota-p">Fuente: <a href="' + esc(x.f[1]) + '" target="_blank" rel="noopener noreferrer">' + esc(x.f[0]) + ' ↗</a>. ' +
+        (x.nota ? esc(x.nota) + ' ' : '') + 'Estas cifras no califican a nadie: dicen lo que se hizo y con cuánto.</p>';
+    }
+    h += '<div class="ie-nota"><b>' + (x.filas.length ? 'Lo que aún falta de su productividad.' : 'Su auditoría de productividad está pendiente.') + '</b> ' +
+      chip('pendiente', x.pid) + ' ' + esc(x.falta) +
+      (x.filas.length ? '' : ' Dónde debería estar: <a href="' + esc(x.f[1]) + '" target="_blank" rel="noopener noreferrer">' + esc(x.f[0]) + ' ↗</a>.') +
+      (ver ? ' <span class="ie-chipas"><a class="ie-chipa" href="' + esc(ver[0]) + '">📚 Lo que ya hay de su sector: ' + esc(ver[1]) + '</a></span>' : '') + '</div>';
+    return h;
+  }
+  /* El Congreso del estado: sus iniciativas (INEGI, CNPLE 2025, tabla 20). */
+  function congDe(ente) { return ente.nivel === 'estatal' && PROD.cong && PROD.cong[ente.id] || null; }
+  function congFilas(c) {
+    return [['Iniciativas que se presentaron en su Congreso', fmt(c.ini), 'oficial', 'En los periodos que reportó del primer año de su legislatura actual.'],
+      ['Dictaminadas en el mismo periodo', fmt(c.idic), 'derivado', 'Aprobadas + en dictamen + desechadas: así las cuenta el INEGI. La que se dictaminó después no cuenta aquí.'],
+      ['De cada 100 presentadas, se dictaminaron', c.idp.toFixed(1), 'oficial'],
+      ['Aprobadas o procedentes', fmt(c.iapr), 'oficial'],
+      ['Seguían en estudio al terminar el periodo', fmt(c.iest), 'oficial']];
+  }
+  function congHtml(ente) {
+    var c = congDe(ente);
+    if (!c) return '';
+    return '<p class="ie-nota-p">De su <b>Congreso</b>, lo que trabajó en el primer año de su legislatura.</p>' +
+      celdas(congFilas(c).map(function (r) {
+        return [r[0] + ' ' + chip(r[2]), '<b>' + r[1] + '</b>' + (r[3] ? '<br><small>' + r[3] + '</small>' : '')];
+      })) +
+      '<p class="ie-nota-p">Fuente: <a href="' + esc(PROD.fc[1]) + '" target="_blank" rel="noopener noreferrer">' + esc(PROD.fc[0]) + ' ↗</a>. ' +
+      'Más iniciativas no es mejor trabajo, y los periodos de cada congreso no son los mismos.</p>';
+  }
+  function conProd(ente) { var x = secDe(ente); return !!prodDe(ente) || !!x && x.filas.length > 0; }
+  function prodHtml(ente) {
+    var p = prodDe(ente), ver = ente.nivel === 'federal' && PROD.ver[ente.id];
+    if (secDe(ente)) return secHtml(ente, secDe(ente));
+    var h = '<h3 class="ie-h3">Qué hizo con su dinero</h3>';
+    if (p) {
+      h += '<p class="ie-nota-p">' + (ente.nivel === 'estatal' ? 'Del gobierno de ' + esc(ente.nombre) + ', hoy la plataforma tiene cotejada la productividad de su <b>Poder Judicial</b>.' :
+        'Lo que este órgano recibió y lo que resolvió con ello, del mismo censo.') + ' El dinero va siempre junto a lo que se hizo con él.</p>' +
+        celdas(prodFilas(ente, p).map(function (r) {
+          return [r[0] + ' ' + chip(r[2]), '<b>' + r[1] + '</b>' + (r[3] ? '<br><small>' + r[3] + '</small>' : '')];
+        })) +
+        '<p class="ie-nota-p">Fuente: <a href="' + esc(PROD.f[1]) + '" target="_blank" rel="noopener noreferrer">' + esc(PROD.f[0]) + (p.donde ? ', ' + esc(p.donde) : '') + ' ↗</a>. ' +
+        'Estas cifras no califican a nadie: comparan lo que entró con lo que salió.</p>';
+    }
+    h += congHtml(ente);
+    h += '<div class="ie-nota"><b>' + (p ? 'Lo que aún falta de su productividad.' : 'Su auditoría de productividad está pendiente.') + '</b> ' + chip('pendiente', PROD.pend) + ' ' +
+      (ente.nivel === 'federal'
+        ? (p ? 'Sus tiempos de resolución y sus metas no están integrados.' : 'Hacienda publica los indicadores de desempeño de los programas federales y la ASF sus auditorías de desempeño: el documento existe y la plataforma aún no lo integra a esta ficha.')
+        : ente.nivel === 'estatal'
+          ? 'Los resultados del Ejecutivo del estado y las sesiones de su Congreso no están integrados: la plataforma aún no localiza un documento oficial que reúna los del Ejecutivo.'
+          : 'La plataforma aún no localiza un documento oficial que reúna los resultados de cada municipio. Mientras no lo haya, no se rellena.') +
+      (ver ? ' <span class="ie-chipas"><a class="ie-chipa" href="' + esc(ver[0]) + '">📚 Lo que ya hay de su sector: ' + esc(ver[1]) + '</a></span>' : '') + '</div>';
+    return h;
+  }
+  function auditorias(ente, fin, nPreg) {
+    var p = conProd(ente), x = secDe(ente);
+    function b(k, ico, t, sub, on) {
+      return '<button type="button" role="tab" class="ie-aud-b' + (on ? ' on' : '') + '" id="ieAudB-' + k + '" data-aud-ir="' + k + '" aria-selected="' + (on ? 'true' : 'false') +
+        '" aria-controls="ieAud-' + k + '"><span class="ie-aud-i" aria-hidden="true">' + ico + '</span><span><b>' + t + '</b><small>' + sub + '</small></span></button>';
+    }
+    return '<div class="ie-aud" role="tablist" aria-label="Las dos auditorías de la ficha">' +
+      b('fin', '💰', 'Auditoría de finanzas públicas', 'De dónde vino su dinero y si rindió cuentas · ' + nPreg + ' preguntas', true) +
+      b('prod', '📈', 'Auditoría de productividad', 'Qué hizo con ese dinero · ' + (p ? 'con datos de ' + (x ? x.anio : 2024) : 'pendiente'), false) + '</div>' +
+      '<div class="ie-aud-p" id="ieAud-fin" role="tabpanel" aria-labelledby="ieAudB-fin" data-aud="fin"><p class="ie-aud-t">💰 Auditoría de finanzas públicas</p>' + fin + '</div>' +
+      '<div class="ie-aud-p ie-aud-off" id="ieAud-prod" role="tabpanel" aria-labelledby="ieAudB-prod" data-aud="prod"><p class="ie-aud-t">📈 Auditoría de productividad</p>' + prodHtml(ente) + '</div>';
+  }
+  function verAud(k) {
+    var cont = document.getElementById('ieExp');
+    [].forEach.call(cont.querySelectorAll('.ie-aud-p'), function (x) { x.classList.toggle('ie-aud-off', x.getAttribute('data-aud') !== k); });
+    [].forEach.call(cont.querySelectorAll('.ie-aud-b'), function (x) {
+      var on = x.getAttribute('data-aud-ir') === k;
+      x.classList.toggle('on', on); x.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
+
   function animar(cont) {
-    var aro = cont.querySelector('.ie-circ-aro');
+    var aros = cont.querySelectorAll('.ie-circ-aro');
     var barras = cont.querySelectorAll('.ie-eje-barra');
     var fin = function () {
-      if (aro) aro.setAttribute('stroke-dashoffset', aro.getAttribute('data-fin'));
+      [].forEach.call(aros, function (aro) { aro.setAttribute('stroke-dashoffset', aro.getAttribute('data-fin')); });
       [].forEach.call(barras, function (b) { b.style.width = b.getAttribute('data-w') + '%'; });
     };
     if (reducido) fin(); else requestAnimationFrame(function () { requestAnimationFrame(fin); });
@@ -1254,6 +1403,21 @@
       t += '• Quién tiene que aclararlo: ' + r.d.map(function (d) { return d[0] + ' ' + mdpF(d[3] / 1e6); }).join('; ') + '.\n';
       t += '• Universo ' + mdpF(r.t[1] / 1e6) + '; muestra ' + mdpF(r.t[2] / 1e6) + '; ' + fmt(r.t[4]) + ' pliegos de observaciones; ' + fmt(r.t[5]) +
         ' promociones de responsabilidad; recuperado ' + mdpF(r.t[6] / 1e6) + '.\n';
+    }
+    var pr = prodDe(ente);
+    if (pr) {
+      t += '\nAUDITORÍA DE PRODUCTIVIDAD (2024)\n';
+      prodFilas(ente, pr).forEach(function (r) { t += '• ' + r[0] + ': ' + r[1] + (r[3] ? ' (' + r[3] + ')' : '') + '\n'; });
+    }
+    var cgx = congDe(ente);
+    if (cgx) {
+      t += '\nPRODUCTIVIDAD DE SU CONGRESO (primer año de su legislatura)\n';
+      congFilas(cgx).forEach(function (r) { t += '• ' + r[0] + ': ' + r[1] + '\n'; });
+    }
+    var sx = secDe(ente);
+    if (sx && sx.filas.length) {
+      t += '\nAUDITORÍA DE PRODUCTIVIDAD (' + sx.anio + (sx.organo ? ', ' + sx.organo : '') + ')\n';
+      sx.filas.forEach(function (r) { t += '• ' + r[0] + ': ' + r[1] + (r[3] ? ' (' + r[3] + ')' : '') + '\n'; });
     }
     var ej = ejes(ente), i = indice(ej);
     if (i !== null) {
@@ -1379,7 +1543,29 @@
     if (b.hasAttribute('data-reintentar')) { pintarLista(); return; }
     if (b.hasAttribute('data-cerrar')) { cerrar(); return; }
     if (b.hasAttribute('data-pdf')) { window.print(); return; }
-    if (b.hasAttribute('data-salta')) { var d = document.getElementById(b.getAttribute('data-salta')); if (d) { irA(d); d.focus({ preventScroll: true }); } return; }
+    if (b.hasAttribute('data-aud-ir')) { verAud(b.getAttribute('data-aud-ir')); return; }
+    if (b.hasAttribute('data-pan-ir')) {
+      var pan = verPan(b.getAttribute('data-pan-ir'), !b.classList.contains('ie-tab'));
+      if (pan && !b.classList.contains('ie-tab')) irA(document.querySelector('#ieExp .ie-tabs-caja'));
+      return;
+    }
+    if (b.hasAttribute('data-senal')) { var li = b.closest('.ie-senal'); abrePregunta(li, !li.classList.contains('ie-ab')); return; }
+    if (b.hasAttribute('data-senal-todas')) {
+      var ab = b.getAttribute('aria-pressed') !== 'true';
+      [].forEach.call(document.querySelectorAll('#ieExp .ie-senal'), function (x) { abrePregunta(x, ab); });
+      b.setAttribute('aria-pressed', ab ? 'true' : 'false');
+      b.textContent = ab ? 'Plegar las que no traen señal' : 'Abrir todas las respuestas';
+      if (!ab) [].forEach.call(document.querySelectorAll('#ieExp .ie-senal:not(.s-ok)'), function (x) { abrePregunta(x, true); });
+      return;
+    }
+    if (b.hasAttribute('data-ej')) { q.value = b.getAttribute('data-ej'); qx.hidden = false; q.focus(); sugerencias(); aplicarBusqueda(); return; }
+    /* Una pregunta del vistazo: abre su pestaña, despliega su respuesta y sube hasta ella. */
+    if (b.tagName === 'A' && /^#ie-q-/.test(b.getAttribute('href') || '')) {
+      ev.preventDefault();
+      var dest = document.getElementById(b.getAttribute('href').slice(1));
+      if (dest) { verPan('preguntas'); abrePregunta(dest, true); irA(dest); var bq = dest.querySelector('.ie-senal-b'); if (bq) bq.focus({ preventScroll: true }); }
+      return;
+    }
     if (b.getAttribute('data-copiar') === 'ficha') { copiar(textoFicha(), '✓ Ficha del expediente copiada. Pégala donde quieras.'); return; }
     if (b.getAttribute('data-copiar') === 'enlace') { copiar(location.href, '✓ Enlace copiado: abre directo este expediente.'); return; }
   });
@@ -1393,6 +1579,13 @@
     var id = a.getAttribute('href').slice(1);
     var det = id !== 'ie-metodo' && document.querySelector('.glos-drawer #' + id);
     if (det) { det.open = true; setTimeout(function () { det.scrollIntoView({ block: 'start' }); }, 60); }
+  });
+  raiz.addEventListener('keydown', function (ev) {
+    var t = ev.target.closest && ev.target.closest('.ie-tab');
+    if (!t || (ev.key !== 'ArrowRight' && ev.key !== 'ArrowLeft')) return;
+    var l = [].slice.call(t.parentNode.querySelectorAll('.ie-tab')), n = l.indexOf(t) + (ev.key === 'ArrowRight' ? 1 : -1);
+    ev.preventDefault();
+    verPan(l[(n + l.length) % l.length].getAttribute('data-pan-ir'), true);
   });
   raiz.addEventListener('change', function (ev) {
     if (ev.target.id === 'ieOrden') { st.orden = ev.target.value; st.tope = 60; pintarLista(); }

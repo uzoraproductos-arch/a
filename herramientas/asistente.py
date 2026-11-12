@@ -453,6 +453,12 @@ def _charla(d):
                   'sin': [a for a, c in cg.items() if c['p'] is None], 'pend': 'entidades-' + '-'.join(a for a, c in cg.items() if c['p'] is None).lower()},
         'congn': {'n': 'personas legisladoras de su congreso', 'u': 'ent', 'e': 'oficial', 'suma': 1,
                   'fu': fu('INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, tabla 8', 'ref-inegi-cnple2025')},
+        # Lo que trabajó cada congreso local (12-11-2026): tabla 20 del mismo censo.
+        'congi': {'n': 'iniciativas presentadas en su congreso (primer año de su legislatura)', 'u': 'ent', 'e': 'oficial', 'suma': 1,
+                  'fu': fu(al.CNPLE_INI['tx'], 'ref-inegi-cnple2025')},
+        'congd': {'n': 'iniciativas que su congreso dictaminó en el mismo periodo en que se presentaron', 'u': 'ent', 'e': 'derivado', 'suma': 1,
+                  'fu': fu(al.CNPLE_INI['tx'], 'ref-inegi-cnple2025'),
+                  'op': 'aprobadas o procedentes + en dictamen + desechadas o improcedentes, como las cuenta el INEGI'},
         # Los 32 poderes judiciales estatales (03-11-2026, dimensión judicial
         # del Planisferio): INEGI, CNIJF-E 2025, primera instancia.
         'pjg': {'n': 'lo que ejerció su Poder Judicial en 2024', 'u': 'mdp', 'e': 'oficial', 'suma': 1, 'peor': 'max', 'fu': fj('gráfica 7, p. 14')},
@@ -474,7 +480,7 @@ def _charla(d):
              'asf': e.get('asfMontoObservado'), 'aud': e.get('asfAuditorias'), 'radar': round(r['v'][0], 2) if r else None,
              'gasto': e['gasto'], 'r28': e['ramo28'], 'r33': e['ramo33'], 'pc': e['pc'], 'pob': e.get('pobPersonas'),
              'inv': e.get('invPub'), 'invt': e.get('invInfra'), 'egr': e.get('egr2024'),
-             'cong': cg[e['abbr']]['g'], 'congx': cg[e['abbr']]['x'], 'congp': cg[e['abbr']]['p'], 'congn': cg[e['abbr']]['n'],
+             'cong': cg[e['abbr']]['g'], 'congx': cg[e['abbr']]['x'], 'congp': cg[e['abbr']]['p'], 'congn': cg[e['abbr']]['n'], 'congi': cg[e['abbr']]['ini'], 'congd': cg[e['abbr']]['idic'], 'congdp': cg[e['abbr']]['idp'], 'congia': cg[e['abbr']]['iapr'],
              'pjg': pj[e['abbr']]['g'], 'pjc': pj[e['abbr']]['c100'], 'pja': pj[e['abbr']]['xa'], 'pjr': pj[e['abbr']]['p'], 'pjj': pj[e['abbr']]['j']}
         for k in ('dep', 'propia'):
             x[k] = None if e['abbr'] in sin else e[{'dep': 'dep', 'propia': 'recaudacionPropia'}[k]]

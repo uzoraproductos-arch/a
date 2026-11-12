@@ -165,6 +165,108 @@ def _catalogo_municipal():
         return None
 
 
+# La auditoría de productividad (decisión del autor, 12-11-2026: «auditorías
+# tanto de finanzas públicas como de productividad de toda institución pública
+# de los tres niveles»). La ficha no trae datos propios: lee lo que la
+# Enciclopedia ya cotejó. Hoy eso es la gestión judicial (gestion_judicial.py);
+# un sector nuevo se agrega aquí, leyendo de su módulo, nunca con cifras a mano.
+# PROD_VER: dónde vive ya, en la Enciclopedia, la gestión del sector de un ente
+# que todavía no tiene su auditoría de productividad en la ficha.
+PROD_VER = {
+    'imss': ('datos-salud-imss.html', 'Datos › Salud pública › IMSS'),
+    'issste': ('datos-salud-publica.html', 'Datos › Salud pública'),
+    'semarnat': ('datos-justicia-ambiental.html', 'Datos › Justicia ambiental (PROFEPA)'),
+    'judicial': ('datos-poder-judicial.html', 'Datos › Poder Judicial'),
+}
+
+
+def _productividad(base):
+    import gestion_judicial as gj
+    est = gj.judiciales_estados(base)
+    fed = {}
+    for k, (i, c, donde) in gj.FED.items():
+        g = gj.PRES_FED[k]
+        fed[k] = {'g': g, 'i': i, 'c': c, 'c100': round(100.0 * c / i, 1), 'xa': round(g * 1e6 / c), 'donde': donde}
+    ids = {f['id'] for f in base['inspector_federal']['entes']} | {o['id'] for o in (base.get('inspector_poderes') or {}).get('organos', [])}
+    for k in list(fed) + list(PROD_VER):
+        if k not in ids:
+            raise SystemExit('insp_entes: la productividad nombra a «%s», que no es un ente federal del Auditor.' % k)
+    for k, (arch, _) in PROD_VER.items():
+        if not os.path.exists(os.path.join(RAIZ, arch)):
+            raise SystemExit('insp_entes: PROD_VER apunta a %s, que no existe.' % arch)
+    import asistente_legislativo as al
+    cong = {a: {k: c[k] for k in ('ini', 'idic', 'idp', 'iapr', 'iest')} for a, c in al.congresos_estados(base).items()}
+    return {'fed': fed, 'est': est, 'cong': cong, 'fc': [al.CNPLE_INI['tx'], al.CNPLE_INI['url']], 'sec': _sectores(ids), 'ver': {k: list(v) for k, v in PROD_VER.items()},
+            'f': [gj.CENSO, gj.URL], 'pend': 'productividad-entes'}
+
+
+def _sectores(ids):
+    """La productividad por sector (pedido del autor, 12-11-2026): cada ente
+    lee de su modulo de la Enciclopedia. Renglon: [que, cifra ya escrita,
+    estado, la letra chica]. Ninguna cifra se escribe aqui a mano."""
+    import gestion_salud as gs
+    import gestion_ambiental as ga
+    n = lambda v: format(int(round(v)), ',')
+    mdp = lambda v: '$%s millones' % format(v / 1e6, ',.1f')
+    antes = lambda v: 'En 2018: %s.' % n(v)
+    serv = {x[0]: x for x in gs.SERV}
+    con, egr, iq = serv['Consultas, en total'], serv['Egresos hospitalarios'], serv['Intervenciones quirúrgicas']
+    por_dh = gs.SEM['funcionamiento'] / gs.ADSCRITA[1]
+    den = ga.DEN[-1]
+    pres = ga.PRES[-1]
+    proc = ga.PROC[-1]
+    fgr = ga.FGR[-1]
+    assert den[0] == pres[0] == proc[0] == fgr[0] == 2024
+    sec = {
+        'imss': {
+            'anio': 2025, 'intro': 'Lo que el IMSS atendió en 2025 y lo que gastó en operar su seguro de salud, de su propia Memoria Estadística.',
+            'filas': [
+                ['Consultas que dio en 2025', n(con[3]), 'oficial', antes(con[1])],
+                ['Egresos hospitalarios', n(egr[3]), 'oficial', antes(egr[1])],
+                ['Cirugías', n(iq[3]), 'oficial', antes(iq[1])],
+                ['Ocupación de sus hospitales', '%s %%' % gs.OCUPACION[1], 'oficial', 'En 2018: %s %%.' % gs.OCUPACION[0]],
+                ['Días promedio de estancia', '%s' % gs.ESTANCIA[1], 'oficial', 'En 2018: %s.' % gs.ESTANCIA[0]],
+                ['Personas adscritas a una unidad de medicina familiar', n(gs.ADSCRITA[1]), 'oficial', antes(gs.ADSCRITA[0])],
+                ['Gasto de operación del Seguro de Enfermedad y Maternidad', mdp(gs.SEM['funcionamiento']), 'oficial',
+                 'Servicios personales, materiales y generales. Es la contabilidad del IMSS, no la Cuenta Pública.'],
+                ['Gasto de operación por persona adscrita', '$' + n(por_dh), 'derivado',
+                 'Gasto de operación ÷ personas adscritas. No es lo que cuesta atender a una persona: muchas no usaron el servicio y otras lo usaron mucho.'],
+            ],
+            'f': [gs.MEM['IV']['tx'] + ' (y capítulos II, XIII y XV)', gs.MEMORIA],
+            'falta': 'Cuánto espera una persona una consulta de especialidad o una cirugía: el IMSS no lo publica en su Memoria Estadística.',
+            'pid': gs.PEND_ESPERA['p'],
+            'nota': 'Los servicios no incluyen lo que el IMSS dio al IMSS-Bienestar, como advierte la Memoria.'},
+        'issste': {
+            'anio': 2025, 'intro': '', 'filas': [],
+            'f': [gs.PEND_ISSSTE['fu']['tx'], gs.PEND_ISSSTE['fu']['url']],
+            'falta': 'Sus consultas, egresos y cirugías de 2025: el anuario estadístico del ISSSTE no responde, y sin su documento no se rellena.',
+            'pid': gs.PEND_ISSSTE['p']},
+        'semarnat': {
+            'anio': 2024, 'organo': 'PROFEPA',
+            'intro': 'De la Semarnat, hoy la plataforma tiene cotejada la productividad de su procuraduría, la <b>PROFEPA</b>: las denuncias que recibió y lo que resolvió, de su Informe de Actividades.',
+            'filas': [
+                ['Denuncias populares que recibió en 2024', n(den[1]), 'oficial', ''],
+                ['· que admitió', n(den[3]), 'oficial', 'Las demás no eran de su competencia: %s.' % n(den[2])],
+                ['Denuncias que concluyó en el año', n(den[4]), 'oficial', 'Incluye las que no admitió. En trámite quedaron %s.' % n(den[5])],
+                ['· de las que admitió, concluyó', n(ga._admitidas_concluidas(den)), 'derivado',
+                 'Concluidas − no admitidas: %s − %s, si las que turnó a otra autoridad cuentan como concluidas (LGEEPA, art. 199, fr. I). La PROFEPA no publica por qué causa concluyó cada una.' % (n(den[4]), n(den[2]))],
+                ['Procedimientos de inspección que concluyó', n(proc[1]), 'oficial',
+                 'Del año, %s; de años anteriores, %s.' % (n(proc[2]), n(proc[3]))],
+                ['Multas de inspección industrial', n(ga.MULTAS_IND_2024[0]), 'oficial',
+                 'Por $%s millones impuestos. Lo que de verdad se cobró no está publicado.' % format(ga.MULTAS_IND_2024[1], ',.2f')],
+                ['Denuncias, querellas y coadyuvancias ante la FGR', n(fgr[1]), 'oficial', ''],
+                ['Presupuesto que ejerció la PROFEPA', '$%s millones' % format(pres[2], ',.2f'), 'oficial', 'Se le aprobaron $%s millones.' % format(pres[1], ',.2f')],
+            ],
+            'f': [ga.INF[2024]['tx'], ga.INF[2024]['url']],
+            'falta': 'Cuántos procedimientos de inspección quedaron sin resolver al cierre de 2024, y lo que hicieron las demás áreas de la Semarnat.',
+            'pid': ga.PEND_REZ['p']},
+    }
+    for k in sec:
+        if k not in ids:
+            raise SystemExit('insp_entes: la productividad por sector nombra a «%s», que no es un ente federal del Auditor.' % k)
+    return sec
+
+
 def datos(base):
     F = base['inspector_federal']
     P = base.get('inspector_poderes') or {}
@@ -230,6 +332,7 @@ def datos(base):
         'mun': {'n': _catalogo_municipal(), 'src': MUN_ARCHIVOS},
         # El Radar por entidad, fusionado con la ficha estatal (21-10-2026).
         'radar': insp_radar.datos(base['cuenta_publica_asf']),
+        'prod': _productividad(base),
     }
 
 
@@ -326,6 +429,15 @@ def _paginas(base, ref):
         nfed=_num(nfed), nraiz=nfed - norg, norg=norg, nest=nest, nmun=_num(nmun) if nmun else 'los',
         pest=pest, tarjetas=tarjetas, metodo=metodo, fuentes=fuentes,
         fgasto=esc(fe['gasto'].get('fuente', '')), rgasto=ref(fe['gasto']['ref']) if fe['gasto'].get('ref') else '', pag=PAGINA)
+    # Los ejemplos del buscador: nombres que el directorio si trae (si uno
+    # deja de estar, la generacion se detiene en vez de ofrecer una busqueda vacia).
+    nombres = ' '.join(f['nombre'] + ' ' + f['id'] for f in D['fed']) + ' ' + ' '.join(e['name'] for e in D['est'])
+    ejs = []
+    for ej in ('Salud', 'Pemex', 'Suprema Corte', 'Jalisco', 'Oaxaca'):
+        if ej.lower() not in nombres.lower():
+            raise SystemExit('insp_entes: el ejemplo del buscador «%s» ya no esta en el directorio' % ej)
+        ejs.append('          <button type="button" class="ie-ej" data-ej="%s">%s</button>' % (esc(ej), esc(ej)))
+    args['ejs'] = '\n'.join(ejs)
     cajon = _cajon(metodo, fuentes, args)
     args['cajon'] = cajon
     return {'principal': """<div class="ie" id="ie" data-auditor="{pag}">
@@ -351,6 +463,9 @@ def _paginas(base, ref):
           <ul class="ie-sug" id="ieSug" role="listbox" aria-label="Sugerencias" hidden></ul>
           <p class="ie-busca-nota" id="ieQnota" aria-live="polite">Los municipios se cargan al buscar o al abrir su nivel (son {nmun}; tarda un instante).</p>
         </div>
+        <p class="ie-ejs"><span>Prueba con:</span>
+{ejs}
+        </p>
         <ol class="ie-pasos">
           <li><b>1</b> Pulsa un nivel para desplegar su directorio, o escribe un nombre.</li>
           <li><b>2</b> Filtra y ordena la lista.</li>
@@ -358,6 +473,18 @@ def _paginas(base, ref):
           <li><b>4</b> Descárgala en PDF, cópiala o comparte el enlace.</li>
         </ol>
         <p class="ie-salva">⚖️ <b>Una señal no es una acusación</b>: es algo que la autoridad debe explicar. Y <b>«por aclarar» no es «robado»</b>: es dinero cuyo destino no quedó acreditado ante la Auditoría Superior.</p>
+      </section>
+
+      <section class="ie-trae" aria-labelledby="ieTraeTit">
+        <h2 class="ie-trae-t" id="ieTraeTit">Qué trae cada ficha técnica</h2>
+        <ul class="ie-trae-l">
+          <li><span aria-hidden="true">👁️</span><b>De un vistazo</b>Cada pregunta con su semáforo y su respuesta en una línea.</li>
+          <li><span aria-hidden="true">🔎</span><b>Las preguntas</b>La explicación de cada una, con su documento.</li>
+          <li><span aria-hidden="true">🧾</span><b>Su dinero</b>El estado de cuenta: lo aprobado, lo recibido y lo ejercido.</li>
+          <li><span aria-hidden="true">🚩</span><b>Radar de la ASF</b>En los estados: su lugar entre los 32 y quién debe aclarar.</li>
+          <li><span aria-hidden="true">🩺</span><b>Salud financiera</b>En estados y municipios: el círculo y sus tres ejes.</li>
+          <li><span aria-hidden="true">🔏</span><b>Sello con folio</b>Su huella digital, para comprobar que nadie la alteró.</li>
+        </ul>
       </section>
 
 {cajon}

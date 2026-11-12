@@ -166,6 +166,7 @@
     /* ---------- Qué se pregunta ---------- */
     var MET_EDO = [
       /* Los congresos locales (CNPLE 2025): van primero, porque «cuánto gasta el congreso» no es lo que recibe el estado. */
+      ['congi', /(iniciativas?|dictamin[a-z]*|productividad|trabajo legislativo).*(congres|legislatura|diputad[oa]s? local)|(congres|legislatura|diputad[oa]s? local).*(iniciativas?|dictamin[a-z]*|productividad)/],
       ['congp', /(tope|limite|0 70|cero punto setenta).*(congres|legislatura)|(congres|legislatura).*(tope|limite|0 70|cero punto setenta)/],
       ['congx', /(congres|legislatura|diputad[oa]s? local|legislador(es)? local).*(por (cada )?(curul|diputad|legislador)|cada (curul|diputad|legislador))|(cuesta|cuestan|costo|gasta|gastan) (cada|por) (curul|diputad|legislador)[a-z]* local/],
       ['congn', /(cuant[oa]s|numero de|integrantes) .*(diputad[oa]s? locales|legisladores locales)|(congres|legislatura).*(cuant[oa]s (diputad|legislador|integrantes)|integrantes|integra|tamano)/],
@@ -303,6 +304,11 @@
           '<p class="pa-ojo">Ojo: un gobierno estatal hace obra por dos vías. ' + (k === 'inv' ? 'Además de la suya, les pasó <b>' + fmt(e.invt, 'mdp') + '</b> a sus organismos de obra' : 'Además, hizo <b>' + fmt(e.inv, 'mdp') + '</b> de obra directa') +
           (veces > 1 ? ', ' + n(veces, 1) + ' veces su obra directa' : '') + '. Las dos no se suman: con lo que reciben, esos organismos también pagan su nómina y su operación.</p>';
         fu.push(fuenteDe(k === 'inv' ? 'invt' : 'inv', e), { que: 'De cada $100 de su egreso', e: 'derivado', op: 'inversión pública ÷ total de egresos de 2024 (' + fmt(e.egr, 'mdp') + ') × 100' }, LUGAR);
+      } else if (k === 'congi' || k === 'congd') {
+        h = '<p>En el primer año de su legislatura actual, en el Congreso de <b>' + esc(e.n) + '</b> se presentaron <b>' + n(e.congi) + ' iniciativas</b>, según lo que reportó al censo de los congresos estatales del INEGI. ' +
+          'De ellas, <b>' + n(e.congd) + '</b> se dictaminaron en el mismo periodo de sesiones en que se presentaron (el <b>' + n(e.congdp, 1) + ' %</b>), y <b>' + n(e.congia) + '</b> quedaron aprobadas o procedentes.</p>' +
+          '<p class="pa-ojo">Ojo: es el estatus que tenía cada iniciativa al terminar el periodo en que se presentó; la que se dictaminó después no cuenta aquí. Más iniciativas no es mejor trabajo, y los periodos que reportó cada congreso no son los mismos.</p>';
+        fu = [fuenteDe('congi', e), fuenteDe('congd', e), { que: 'Porcentaje de iniciativas dictaminadas', e: 'oficial' }];
       } else if (k === 'cong' || k === 'congx' || k === 'congp' || k === 'congn') {
         h = '<p>En 2024, el Congreso de <b>' + esc(e.n) + '</b> gastó <b>' + fmt(e.cong, 'mdp') + '</b>, según lo que reportó al censo de los congresos estatales del INEGI.' + lugarTxt('cong', e, 'entre los congresos que más gastaron') +
           ' Lo integran <b>' + n(e.congn) + ' personas legisladoras</b>, así que cuesta <b>' + fmt(e.congx, 'mdp') + ' por curul</b>.' + lugarTxt('congx', e, 'entre los que más cuestan por curul') + '</p>' +
@@ -332,7 +338,7 @@
       radar: 'dinero por aclarar de cada $100 revisados', gasto: 'dinero federal en 2026 (Ramos 28 y 33)', r28: 'participaciones', r33: 'aportaciones',
       pc: 'dinero federal por habitante', dep: 'dependencia de la Federación', propia: 'recaudación propia', pob: 'población',
       inv: 'obra directa del gobierno del estado (2024)', invt: 'dinero a sus organismos de obra (2024)',
-      cong: 'gasto de su congreso (2024)', congx: 'gasto de su congreso por curul (2024)', congp: 'gasto de su congreso frente al egreso del estado (2024)', congn: 'personas legisladoras en su congreso',
+      cong: 'gasto de su congreso (2024)', congx: 'gasto de su congreso por curul (2024)', congp: 'gasto de su congreso frente al egreso del estado (2024)', congi: 'iniciativas presentadas en su congreso', congd: 'iniciativas dictaminadas en su congreso', congn: 'personas legisladoras en su congreso',
       pjg: 'gasto de su Poder Judicial (2024)', pjc: 'asuntos concluidos de cada 100 que le entraron a su Poder Judicial (2024)', pja: 'gasto de su Poder Judicial por asunto concluido (2024)',
       pjr: 'causas penales pendientes en su Poder Judicial (cierre de 2024)', pjj: 'personas juzgadoras en su Poder Judicial' };
     var RKM = { ing: 'ingresos', part: 'participaciones', aport: 'aportaciones', fortamun: 'FORTAMUN', fismdf: 'FAIS municipal', predial: 'cobro de predial',

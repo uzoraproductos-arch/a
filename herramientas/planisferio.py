@@ -1953,7 +1953,20 @@ def _legislativa_portal(base, ref, e):
               '<a href="numeros-lo-que-cuestan-los-poderes.html#pd-congreso">Lo que cuestan los Poderes, en la Enciclopedia ➔</a></p></div>') % (
         ln._a(ln.CPEUM, 'Constitución'), ln._a(ln.CPEUM, 'Constitución'), chip('pendiente', 'asesores-congresos-locales'),
         html.escape(ln.ESTADOS[a][0]), ln.ARCHIVO, clave(a), quote(a))
-    return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, reglas)
+    # Lo que trabajo (12-11-2026): las iniciativas de la tabla 20 del mismo censo.
+    f = lambda v: format(v, ',')
+    p3 = ('<article class="pl-piso pl-piso-leg" id="iniciativas"><p class="pl-piso-n">%d · Lo que trabajó su congreso · primer año de su legislatura</p>'
+          '<p class="pl-piso-v"><b class="num-tabular">%s iniciativas</b> %s</p>'
+          '<dl class="pl-dl"><dt>Dictaminadas en el mismo periodo</dt><dd>%s %s <small>el %s %% de las presentadas %s; el INEGI cuenta así las que quedaron en dictamen, aprobadas o desechadas</small></dd>'
+          '<dt>· aprobadas o procedentes</dt><dd>%s %s</dd>'
+          '<dt>Seguían en estudio</dt><dd>%s %s</dd>'
+          '<dt>Con otro estatus</dt><dd>%s %s <small>ingreso, desistimiento, otro o no disponible</small></dd></dl>'
+          '<p class="pl-piso-f">Son las iniciativas de los periodos que el congreso reportó, con el estatus que tenían al terminar el periodo en que se presentaron: '
+          'la que se dictaminó después no cuenta aquí. Más iniciativas no es mejor trabajo, y los periodos de cada congreso no son los mismos. '
+          'INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, tabla 20, p. 50 %s.</p></article>') % (
+              3 if p2 else 2, f(c['ini']), chip('oficial'), f(c['idic']), chip('derivado'), c['idp'], chip('oficial'),
+              f(c['iapr']), chip('oficial'), f(c['iest']), chip('oficial'), f(c['iotro']), chip('derivado'), ref('ref-inegi-cnple2025'))
+    return '<div class="pl-pisos">%s%s%s</div>%s%s' % (p1, p2, p3, ciego, reglas)
 
 
 def _judicial_portal(base, ref, e):
