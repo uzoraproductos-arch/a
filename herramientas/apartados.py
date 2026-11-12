@@ -704,6 +704,13 @@ APARTADOS = [
                 'pestana': ('🚨', 'El fraude en números', 'El delito más frecuente, la cifra oculta y la lista 69-B, con su fuente oficial'),
             },
             {
+                # Pedido del autor, 12-11-2026: «podríamos integrar este
+                # servicio también». La pagina la escribe ahorro_protegido.py.
+                'id': 'quien-protege-tu-ahorro',
+                'pagina': 'aprende-quien-protege-tu-ahorro.html',
+                'pestana': ('🏦', '¿Quién responde por tu ahorro?', 'Banco, SOFIPO, casa de bolsa o aplicación: qué ley protege tu dinero y hasta cuánto'),
+            },
+            {
                 # Pedido del autor, 03-11-2026: el capítulo 6 de su libro
                 # «Introducción al Derecho Económico» como metodología. La
                 # pagina la escribe recursos_naturales.py.
@@ -2067,6 +2074,13 @@ RIESGOS = [
      'Te damos señales con su regla: compras partidas, facturas que no cuadran con la ley y un estado de resultados que no cierra. '
      'Y un taller de control interno con casos mexicanos.',
      ['revision', 'capacitacion'], ('aprende-auditoria.html#met-fraude', 'El triángulo del fraude')),
+    # Pedido del autor, 12-11-2026. Las reglas se leen de ahorro_protegido.py.
+    ('🏦', 'Tu dinero en una aplicación, una SOFIPO o una casa de bolsa',
+     'Quién responde si la institución quiebra depende de su figura legal: un banco tiene el seguro del IPAB (LPAB, art. 11), una SOFIPO su Fondo de Protección '
+     '(LACP, art. 105), y una casa de bolsa o una aplicación de pagos no tienen seguro de depósito.',
+     'Revisamos contra la ley y los padrones oficiales qué figura tiene cada institución donde tu empresa o tu organización guarda su dinero, y cuánto queda fuera del tope. '
+     'No decimos dónde invertir ni cuál es más segura.',
+     ['revision'], ('aprende-quien-protege-tu-ahorro.html#ap-tres', 'Cuatro figuras, cuatro reglas')),
 ]
 RIESGO_LIMITE = ('No decimos que evitamos el fraude ni que cumplimos por ti. Te damos señales para revisar, cada una con su documento, '
                  'y te decimos lo que falta. Una señal no es una irregularidad, y una acusación no es una condena.')
@@ -6691,11 +6705,12 @@ def generar(sello=None):
     import periodistas, acceso
     import metodologia_auditoria
     import fraude
+    import ahorro_protegido
     import recursos_naturales
     import planisferio
     import leyes_niveles
     import presupuesto_modulos
-    for extra in planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), fraude.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), *servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), fraude.pagina(), ahorro_protegido.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), *servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

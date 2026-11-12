@@ -676,7 +676,7 @@ def escribir_base():
     import periodistas
     # Las leyes del dinero en los tres niveles (03-11-2026).
     import leyes_niveles
-    fichas = _fichas(d) + asistente_personajes.fichas() + periodistas.fichas() + __import__('fraude').fichas() + leyes_niveles.fichas(d) + _pendientes() + _paginas()
+    fichas = _fichas(d) + asistente_personajes.fichas() + periodistas.fichas() + __import__('fraude').fichas() + __import__('ahorro_protegido').fichas() + leyes_niveles.fichas(d) + _pendientes() + _paginas()
     cuenta = {}
     for f in fichas:
         cuenta[f['t']] = cuenta.get(f['t'], 0) + 1

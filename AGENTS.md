@@ -817,6 +817,12 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   nunca es prueba de parentesco**: un vínculo entra a la plataforma solo si lo
   dice un documento oficial, y a los familiares que no son servidores públicos
   no se les nombra.
+  El ahorro protegido (banco, SOFIPO, casa de bolsa e ITF), por `herramientas/ahorro_protegido.py`
+  (12-11-2026; `aprende-quien-protege-tu-ahorro.html` y `ahorroProt()` del chat), cotejado contra la LPAB, la
+  LACP, la LMV, la LRITF, la LISR y la LIF vigentes, con la huella de cada PDF: **no se nombra a ninguna
+  empresa mientras no se integre el padrón de la CNBV, y nunca se dice que el dinero «está seguro»**: se dice
+  qué ley responde, hasta cuánto y lo que no cubre. Los topes en pesos son `derivado`, con la UDI de Banxico
+  y su fecha (`UDI`, `UDI_FECHA`), que se cambian al actualizarla.
   Las agresiones a la prensa, por `herramientas/periodistas.py` (29-10-2026;
   `periodismo-en-riesgo.html`, del modo Periodista), con el informe mensual del
   Mecanismo de Protección (Gobernación); **los homicidios y las sentencias son de
