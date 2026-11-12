@@ -7035,6 +7035,10 @@ ot-07 integrada en AUDIT_DB.noticias (Modo Inspector).
    - Sello de versión incrementado a **20260927ze** mediante `herramientas/sello.py`.
    - Saltos de línea CRLF preservados y cuentas de lone CR inmutables: `index.html` (56), `assets/auditor/js/audit-engine.js` (2), `assets/auditor/js/audit-database.js` (2), `assets/auditor/css/auditavision.css` (1).
 
+## Entrega — 12-11-2026: ¿Quién responde por tu ahorro? (sello 20261112b)
+
+Pedido del autor («podríamos integrar este servicio también»). `herramientas/ahorro_protegido.py` escribe la página de Aprende, las fichas del chat y sus pendientes; en Servicios es un riesgo más de `RIESGOS`. Detalle en ESTADO.md. **Pendiente:** integrar con huella el padrón de la CNBV, la lista de bancos del IPAB y la de SOFIPO del Fondo de Protección (`ahorro-padron`), los indicadores de las SOFIPO (`ahorro-indicadores`), el patrimonio del fondo (`ahorro-fondo-saldo`) y la custodia de valores extranjeros (`ahorro-extranjero`); cotejar las leyes de cooperativas, SOFOM y afores; y los portales que no respondieron el 12-11-2026 (Fondo de Protección, SIPRES e Indeval).
+
 ## Entrega documental — 28-09-2026: búsqueda de las 25 fuentes
 
 Se entregan originales y trazabilidad en `investigaciones/entregas/README.md`,

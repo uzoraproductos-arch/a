@@ -424,6 +424,10 @@ def recolectar():
     import fraude
     for x in fraude.pendientes():
         out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
+    # ¿Quién responde por tu ahorro? (12-11-2026).
+    import ahorro_protegido
+    for x in ahorro_protegido.pendientes():
+        out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
     # Las leyes del dinero en los tres niveles y la deuda municipal (03-11-2026).
     import leyes_niveles
     for x in leyes_niveles.pendientes():

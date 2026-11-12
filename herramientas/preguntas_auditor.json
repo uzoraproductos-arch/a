@@ -2314,6 +2314,39 @@
   {
    "q": "¿de qué vive auditavision?",
    "ir": "servicios-por-que.html#sostenemos"
+  },
+  {
+   "q": "¿Hasta cuánto protege el IPAB mi dinero en un banco?",
+   "ir": "aprende-quien-protege-tu-ahorro.html#ap-tres",
+   "dice": [
+    "400,000 UDIS"
+   ]
+  },
+  {
+   "q": "¿Cuánto cubre el seguro de una SOFIPO?",
+   "ir": "aprende-quien-protege-tu-ahorro.html#ap-tres",
+   "dice": [
+    "25,000 UDIS"
+   ]
+  },
+  {
+   "q": "¿Una casa de bolsa tiene seguro de depósito?",
+   "ir": "aprende-quien-protege-tu-ahorro.html#ap-tres",
+   "dice": [
+    "No tiene"
+   ]
+  },
+  {
+   "q": "¿Cuánto es en pesos el seguro del IPAB?",
+   "ir": "aprende-quien-protege-tu-ahorro.html#ap-pesos"
+  },
+  {
+   "q": "¿Quién responde por mi ahorro si quiebra una SOFIPO?",
+   "ir": "aprende-quien-protege-tu-ahorro.html#ap-tres"
+  },
+  {
+   "q": "¿Hasta qué saldo no pagan impuesto los intereses de una SOFIPO?",
+   "ir": "aprende-quien-protege-tu-ahorro.html#ap-impuestos"
   }
  ]
 }

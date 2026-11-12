@@ -241,7 +241,7 @@
 .sv-datos3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .sv-datos3 .sv-dato { border-radius: 18px; padding: 18px; }
 .sv-datos3 .sv-dato-cifra { font-size: 36px; }
-.sv-riesgos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 14px; }
+.sv-riesgos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 14px; }
 .sv-riesgo { background: #fff; border: 1px solid #dfe5f0; border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
 .sv-riesgo .sv-tit { margin: 0; }
 .sv-riesgo-p { margin: 0; padding: 10px 12px; border-radius: 12px; background: #fdf6f5; color: #4a2420; line-height: 1.5; }

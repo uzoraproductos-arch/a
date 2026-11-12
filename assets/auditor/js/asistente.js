@@ -2348,6 +2348,16 @@
     return f && charla ? charla.deFicha(f) : null;
   }
 
+  /* ¿Quién responde por tu ahorro? (ahorro_protegido.py, 12-11-2026). Las palabras del seguro de depósitos
+     abren sus fichas antes que el IPAB del presupuesto (Ramo 34) y que el rescate bancario. */
+  var AHORRO = /\b(sofipos?|prosofipo|seguro de depositos?|fondo de proteccion|casas? de bolsa|indeval|udis)\b|\bipab\b.*\b(ahorro|dinero|banco|bancos|protege|cubre|seguro|cuenta)\b|\b(ahorro|dinero|banco|bancos|protege|cubre|seguro|cuenta)\b.*\bipab\b|\bquiebra\b.*\b(banco|app|aplicacion|fintech)\b|\b(banco|app|aplicacion|fintech)\b.*\bquiebra\b/;
+  function ahorroProt(q) {
+    var p = plano(q);
+    if (!charla || /https?:\/\//i.test(q) || !AHORRO.test(p) || /fobaproa|rescate|ramo 34|megaobra/.test(p)) return null;
+    var r = buscar(q).filter(function (x) { return x.f.t === 'ficha' && x.f.ir && x.f.ir[0].indexOf('aprende-quien-protege-tu-ahorro.html') === 0; })[0];
+    return r && r.s >= 3 ? charla.deFicha(r.f) : null;
+  }
+
   var LEY_NIVEL = /\bley(es)? (de|del|federal|general)\b|\bperiodico oficial\b|\bgaceta oficial\b|\bboletin oficial\b/;
   function leyNivel(q) {
     var p = plano(q);
@@ -2374,6 +2384,9 @@
     /* Las leyes del dinero en los tres niveles (03-11-2026): «ley de ingresos de Jalisco» pide sus leyes, no su estado de cuenta. */
     var ln = leyNivel(q);
     if (ln) return ln;
+    /* El ahorro protegido (12-11-2026): «¿hasta cuánto cubre el IPAB?» pide el seguro de depósitos, no el Ramo 34 ni el FOBAPROA. */
+    var ah = ahorroProt(q);
+    if (ah) return ah;
     var mp = charla && charla.mapa && charla.mapa(q);
     if (mp) return mp;
     /* El IMSS y el ISSSTE de un estado (03-11-2026): «¿qué estado tiene menos camas del IMSS?» no es la columna del IMSS. */

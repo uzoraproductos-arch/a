@@ -85,6 +85,10 @@ LEYES = [
     ('laassp', 'Ley de Adquisiciones, Arrendamientos y Servicios del Sector Público', 'laassp', [r'ley de adquisiciones, arrendamientos', r'\blaassp\b']),
     ('lopsrm', 'Ley de Obras Públicas y Servicios Relacionados con las Mismas', 'lopsrm', [r'ley de obras publicas y servicios', r'\blopsrm\b']),
     ('lritf', 'Ley para Regular las Instituciones de Tecnología Financiera (Ley Fintech)', 'lritf', [r'instituciones de tecnologia financiera', r'ley fintech', r'\blritf\b']),
+    # ¿Quién responde por tu ahorro? (ahorro_protegido.py, 12-11-2026)
+    ('lpab', 'Ley de Protección al Ahorro Bancario', 'lpab', [r'proteccion al ahorro bancario', r'\blpab\b']),
+    ('lacp', 'Ley de Ahorro y Crédito Popular', 'lacp', [r'ahorro y credito popular', r'\blacp\b']),
+    ('lmv', 'Ley del Mercado de Valores', 'lmv', [r'ley del mercado de valores', r'\blmv\b']),
     ('lfpiorpi', 'Ley Federal para la Prevención e Identificación de Operaciones con Recursos de Procedencia Ilícita (antilavado)', 'lfpiorpi',
      [r'recursos de procedencia ilicita', r'\blfpiorpi\b']),
     ('lfpdppp', 'Ley Federal de Protección de Datos Personales en Posesión de los Particulares', 'lfpdppp',
