@@ -326,6 +326,15 @@ def _paginas(base, ref):
         nfed=_num(nfed), nraiz=nfed - norg, norg=norg, nest=nest, nmun=_num(nmun) if nmun else 'los',
         pest=pest, tarjetas=tarjetas, metodo=metodo, fuentes=fuentes,
         fgasto=esc(fe['gasto'].get('fuente', '')), rgasto=ref(fe['gasto']['ref']) if fe['gasto'].get('ref') else '', pag=PAGINA)
+    # Los ejemplos del buscador: nombres que el directorio si trae (si uno
+    # deja de estar, la generacion se detiene en vez de ofrecer una busqueda vacia).
+    nombres = ' '.join(f['nombre'] + ' ' + f['id'] for f in D['fed']) + ' ' + ' '.join(e['name'] for e in D['est'])
+    ejs = []
+    for ej in ('Salud', 'Pemex', 'Suprema Corte', 'Jalisco', 'Oaxaca'):
+        if ej.lower() not in nombres.lower():
+            raise SystemExit('insp_entes: el ejemplo del buscador «%s» ya no esta en el directorio' % ej)
+        ejs.append('          <button type="button" class="ie-ej" data-ej="%s">%s</button>' % (esc(ej), esc(ej)))
+    args['ejs'] = '\n'.join(ejs)
     cajon = _cajon(metodo, fuentes, args)
     args['cajon'] = cajon
     return {'principal': """<div class="ie" id="ie" data-auditor="{pag}">
@@ -351,6 +360,9 @@ def _paginas(base, ref):
           <ul class="ie-sug" id="ieSug" role="listbox" aria-label="Sugerencias" hidden></ul>
           <p class="ie-busca-nota" id="ieQnota" aria-live="polite">Los municipios se cargan al buscar o al abrir su nivel (son {nmun}; tarda un instante).</p>
         </div>
+        <p class="ie-ejs"><span>Prueba con:</span>
+{ejs}
+        </p>
         <ol class="ie-pasos">
           <li><b>1</b> Pulsa un nivel para desplegar su directorio, o escribe un nombre.</li>
           <li><b>2</b> Filtra y ordena la lista.</li>
@@ -358,6 +370,18 @@ def _paginas(base, ref):
           <li><b>4</b> Descárgala en PDF, cópiala o comparte el enlace.</li>
         </ol>
         <p class="ie-salva">⚖️ <b>Una señal no es una acusación</b>: es algo que la autoridad debe explicar. Y <b>«por aclarar» no es «robado»</b>: es dinero cuyo destino no quedó acreditado ante la Auditoría Superior.</p>
+      </section>
+
+      <section class="ie-trae" aria-labelledby="ieTraeTit">
+        <h2 class="ie-trae-t" id="ieTraeTit">Qué trae cada ficha técnica</h2>
+        <ul class="ie-trae-l">
+          <li><span aria-hidden="true">👁️</span><b>De un vistazo</b>Cada pregunta con su semáforo y su respuesta en una línea.</li>
+          <li><span aria-hidden="true">🔎</span><b>Las preguntas</b>La explicación de cada una, con su documento.</li>
+          <li><span aria-hidden="true">🧾</span><b>Su dinero</b>El estado de cuenta: lo aprobado, lo recibido y lo ejercido.</li>
+          <li><span aria-hidden="true">🚩</span><b>Radar de la ASF</b>En los estados: su lugar entre los 32 y quién debe aclarar.</li>
+          <li><span aria-hidden="true">🩺</span><b>Salud financiera</b>En estados y municipios: el círculo y sus tres ejes.</li>
+          <li><span aria-hidden="true">🔏</span><b>Sello con folio</b>Su huella digital, para comprobar que nadie la alteró.</li>
+        </ul>
       </section>
 
 {cajon}

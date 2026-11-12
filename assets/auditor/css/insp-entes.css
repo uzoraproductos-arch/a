@@ -291,9 +291,6 @@
   color: var(--ie-azul) !important; font-weight: 600; font-size: 15px; text-decoration: none; }
 .ie-chipa:hover { border-color: var(--ie-acento); }
 /* Sus documentos y el ritmo, en vivo (24-10-2026). */
-.ie-docs { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; margin: 14px 0 0; }
-.ie-docs-et { font-size: 15px; color: var(--ie-suave); }
-.ie-docs .ie-chipas { margin-top: 0; }
 button.ie-chipa { cursor: pointer; font-family: inherit; }
 .ie-h3[tabindex] { scroll-margin-top: 90px; }
 .ie-h3[tabindex]:focus { outline: none; }
@@ -353,6 +350,72 @@ button.ie-chipa { cursor: pointer; font-family: inherit; }
   .ie-inc-par { grid-template-columns: 1fr; }
   .ie-vivo-num { font-size: 26px; }
 }
+/* --- La lectura en pantalla de la ficha (12-11-2026): «De un vistazo»,
+   pestañas y respuestas plegables. Al imprimir sale todo abierto. --- */
+.ie-vz { margin: 4px 0 0; padding: 16px 18px; border-radius: 16px; background: linear-gradient(160deg, #0b2a63 0%, #163d86 100%); color: #ffffff; border-left: 8px solid currentColor; }
+.ie-vz.s-grave { border-left-color: #f0786f; } .ie-vz.s-alerta { border-left-color: #f2b45c; } .ie-vz.s-ok { border-left-color: #5fcf95; }
+.ie-vz-k { margin: 0 0 2px; font: 700 13px/1.2 Inter, system-ui, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #f2c94c; }
+.ie-vz .ie-resumen-t { margin: 0 0 12px; color: #ffffff; }
+.ie-vz .ie-resumen-d { color: #dbe5f7; }
+.ie-vz-c { display: grid; gap: 12px; }
+.ie-vz-con .ie-vz-c { grid-template-columns: 176px minmax(0, 1fr); align-items: stretch; }
+.ie-vz-salud { display: grid; justify-items: center; align-content: center; gap: 4px; padding: 10px 8px; border: 0; border-radius: 12px; background: #ffffff; font-family: inherit; text-align: center; cursor: pointer; }
+.ie-vz-salud:hover { background: #eaf1fd; }
+.ie-vz-salud .ie-circ { width: 112px; height: 112px; }
+.ie-vz-salud b { font-size: 15px; line-height: 1.25; }
+.ie-vz-salud small { font-size: 14px; color: var(--ie-enlace); font-weight: 600; }
+.ie-vz .ie-mini { grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); }
+.ie-vz .ie-mini a { flex-direction: column; gap: 4px; background: #ffffff; border-top: 4px solid currentColor; }
+.ie-vz .ie-mini a:hover { background: #eaf1fd; }
+.ie-mini-cab { display: flex; align-items: center; gap: 6px; }
+.ie-vz .ie-mini .ie-pt { margin-top: 0; }
+.ie-vz .ie-mini-q { flex: 0 0 auto; font-size: 14px; color: var(--ie-suave); }
+.ie-mini-r { font-size: 16px; line-height: 1.3; color: var(--ie-tinta); }
+
+.ie-tabs-caja { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 18px 0 0; padding-bottom: 0; border-bottom: 2px solid var(--ie-borde); }
+.ie-tabs { display: flex; gap: 4px; flex: 1 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: thin; }
+.ie-tab { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; min-height: 46px; padding: 8px 14px; margin-bottom: -2px; border: 0; border-bottom: 4px solid transparent; border-radius: 10px 10px 0 0;
+  background: none; color: var(--ie-suave); font: 600 16px/1.2 Inter, system-ui, sans-serif; cursor: pointer; white-space: nowrap; }
+.ie-tab:hover { background: var(--ie-fondo); color: var(--ie-azul); }
+.ie-tab.on { color: var(--ie-azul); font-weight: 800; border-bottom-color: #f2b705; background: var(--ie-fondo); }
+.ie-tab-doc { margin-bottom: 6px; }
+.ie-pan { padding-top: 2px; }
+.ie-pan-off { display: none; }
+.ie-pan > .ie-h3:first-child, .ie-pan > section:first-child > .ie-h3:first-child { margin-top: 16px; }
+
+.ie-senal-ctl { margin: -6px 0 4px; text-align: right; }
+.ie-senal-q { margin: 0; }
+.ie-senal-b { display: flex; align-items: flex-start; gap: 8px; width: 100%; min-height: 44px; padding: 8px 0; border: 0; background: none; color: var(--ie-azul);
+  font: 700 18px/1.35 Inter, system-ui, sans-serif; text-align: left; cursor: pointer; }
+.ie-senal-qt { flex: 1 1 auto; }
+.ie-senal-fl { flex: 0 0 auto; font-size: 18px; color: var(--ie-suave); transition: transform .2s; }
+.ie-senal.ie-ab .ie-senal-fl { transform: rotate(180deg); }
+.ie-senal:not(.ie-ab) .ie-senal-c { display: none; }
+.ie-senal:not(.ie-ab) .ie-senal-v { margin-bottom: 2px; }
+
+/* --- Lo que trae cada ficha y los ejemplos del buscador (portada) --- */
+.ie-ejs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 10px 0 14px; font-size: 15px; color: #dbe5f7; }
+.ie-ej { min-height: 44px; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .45); background: rgba(255, 255, 255, .1); color: #ffffff;
+  font: 600 15px/1.2 Inter, system-ui, sans-serif; cursor: pointer; }
+.ie-ej:hover { background: rgba(255, 255, 255, .22); }
+.ie-trae { margin: -14px 0 12px; padding: 16px 18px; border: 1px solid var(--ie-borde); border-radius: 14px; background: #ffffff; }
+.ie-trae-t { margin: 0 0 10px; font-size: 20px; line-height: 1.3; color: var(--ie-azul); }
+.ie-trae-l { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
+.ie-trae-l li { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; padding: 10px 12px; border-radius: 12px; background: var(--ie-fondo); font-size: 15px; line-height: 1.45; color: var(--ie-suave); }
+.ie-trae-l li > span { grid-row: 1 / 3; font-size: 22px; color: var(--ie-acento); }
+.ie-trae-l b { font-size: 16px; color: var(--ie-tinta); }
+.ie-trae + .ie-como { margin-top: 0; }
+@media (max-width: 720px) {
+  .ie-vz { padding: 14px 12px; }
+  .ie-vz-con .ie-vz-c { grid-template-columns: 1fr; }
+  .ie-vz-salud { grid-template-columns: auto 1fr; justify-items: start; text-align: left; column-gap: 12px; }
+  .ie-vz-salud .ie-circ { grid-row: 1 / 3; width: 84px; height: 84px; }
+  .ie-vz .ie-mini { grid-template-columns: 1fr 1fr; }
+  .ie-tabs { flex-wrap: wrap; overflow: visible; }
+  .ie-tab { padding: 8px 10px; font-size: 15px; border-radius: 10px; margin-bottom: 0; }
+  .ie-tabs-caja { padding-bottom: 8px; }
+  .ie-tab-doc { flex: 1 1 100%; justify-content: center; }
+}
 /* Descargar en PDF: solo la hoja de la ficha técnica, sin botones ni página alrededor. */
 @media print {
   @page { margin: 12mm; }
@@ -368,7 +431,16 @@ button.ie-chipa { cursor: pointer; font-family: inherit; }
   .ie-ft-sello { grid-template-columns: 96px 1fr; justify-items: start; text-align: left; }
   .ie-ft-sello-svg { width: 92px; height: 92px; }
   .ie-exp-marco details { break-inside: avoid; }
-  .ie-docs { display: none !important; }
+  .ie-tabs-caja, .ie-senal-ctl, .ie-senal-fl, .ie-vz-salud { display: none !important; }
+  .ie-vz-con .ie-vz-c { grid-template-columns: 1fr; }
+  .ie-vz .ie-mini { grid-template-columns: repeat(3, 1fr); }
+  .ie-vz { break-inside: avoid; }
+  .ie-exp-marco .ie-senal-b { display: flex !important; min-height: 0; padding: 0 0 4px; }
+  .ie-pan-off { display: block; }
+  .ie-senal:not(.ie-ab) .ie-senal-c { display: block; }
+  .ie-vz { background: none; color: var(--ie-tinta); border: 2px solid currentColor; }
+  .ie-vz .ie-resumen-t { color: var(--ie-tinta); } .ie-vz .ie-resumen-d, .ie-vz-k { color: var(--ie-suave); }
+  .ie-vz .ie-mini a, .ie-vz-salud { border: 1px solid var(--ie-borde); }
 }
 @media (prefers-reduced-motion: reduce) {
   .ie-circ-aro, .ie-eje-barra, .ie-tarj, .ie-aviso { transition: none; }
