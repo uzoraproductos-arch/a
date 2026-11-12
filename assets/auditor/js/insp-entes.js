@@ -1064,14 +1064,14 @@
       (f.cotejos || []).forEach(function (cj) { [cj.a[2], cj.b[2]].forEach(function (k) { if (usadas.indexOf(k) === -1 && !D.fF[k]) usadas.push(k); }); });
     }
     return cabecera(ente, 'Expediente federal · ' + D.poderes[ente.poder][0] + ' · Ramo ' + f.ramo, f.tipo) +
-      vistazoHtml(dg, null, null) +
+      auditorias(ente, vistazoHtml(dg, null, null) +
       pestanas([
         ['preguntas', '🔎', 'Las preguntas', '<h3 class="ie-h3">Las preguntas, una por una</h3>' + senalesHtml(dg) +
           incHtml(dg, f.padre ? 'el propio órgano, que es quien reporta las dos cifras' : 'el propio ente, que reporta ambas cifras a Hacienda')],
         ['dinero', '💰', 'Su dinero', '<h3 class="ie-h3">Su dinero, en millones de pesos</h3>' + celdas(c) + rel],
         ['asf', '🏛️', 'Auditorías y expedientes', (fedAuditorias(f) +
           (exps ? '<div class="ie-nota"><b>Expedientes de la ASF sobre este ente.</b> Informe por informe, con sus claves de auditoría: <span class="ie-chipas">' + exps + '</span></div>' : ''))]
-      ]) +
+      ]), dg.length) +
       pie(esc(D.fF.cp2025.corto) + refFed('cp2025') + ' · ' + esc(D.fF.av2026.corto) + refFed('av2026') + ' · ' + esc(D.fF.asf2024.corto) + refFed('asf2024') +
         usadas.map(function (k) { return ' · ' + esc(D.fP[k].corto) + refFed(k); }).join('') + '.', ente);
   }
@@ -1172,7 +1172,7 @@
       : '<div class="ie-nota"><b>Para seguir:</b> <span class="ie-chipas">' + (e ? '<a class="ie-chipa" href="#ente=estatal:' + e.abbr + '">🗺️ El gobierno de ' + esc(e.name) + '</a>' : '') +
         '<a class="ie-chipa" href="numeros-los-municipios.html">🏙️ Los municipios, en Números</a></span></div>';
     return cabecera(ente, 'Expediente ' + (esEstado ? 'estatal' : 'municipal'), ente.sub) +
-      vistazoHtml(dg, ej, i) +
+      auditorias(ente, vistazoHtml(dg, ej, i) +
       pestanas([
         ['preguntas', '🔎', 'Las preguntas', '<h3 class="ie-h3">Las preguntas, una por una</h3>' + senalesHtml(dg) +
           incHtml(dg, esEstado ? 'el gobierno del estado y a Hacienda, que deben conciliar sus registros' : 'el ayuntamiento, que firmó los dos reportes')],
@@ -1180,8 +1180,73 @@
         ['radar', '🚩', 'Radar de la ASF', esEstado ? radarHtml(e) : ''],
         ['salud', '🩺', 'Salud financiera', '<h3 class="ie-h3">El círculo de salud financiera</h3>' + circuloHtml(ej, i, esEstado)],
         ['vivo', '⏱️', 'En vivo', vivoHtml(ente)]
-      ], docsHtml(ente)) +
+      ], docsHtml(ente)), dg.length) +
       verMas + pie(fuentes, ente);
+  }
+
+  /* ---------------- Las dos auditorías de la ficha ---------------- */
+  /* Decisión del autor (12-11-2026): toda institución pública se audita en dos
+     funciones, sus finanzas públicas y su productividad. La de finanzas es lo
+     que la ficha ya traía; la de productividad lee D.prod (insp_entes.py), que
+     toma lo que la Enciclopedia ya cotejó. Donde aún no hay documento
+     integrado, se dice pendiente con su porqué: nunca se rellena. */
+  var PROD = D.prod || { fed: {}, est: {}, ver: {} };
+  function prodDe(ente) {
+    if (ente.nivel === 'federal') return PROD.fed[ente.id] || null;
+    if (ente.nivel === 'estatal') return PROD.est[ente.id] || null;
+    return null;
+  }
+  function prodFilas(ente, p) {
+    var est = ente.nivel === 'estatal';
+    var l = [['Asuntos que le entraron en 2024', fmt(p.i), 'oficial'],
+      [est ? 'Asuntos que concluyó en primera instancia' : 'Asuntos que resolvió', fmt(p.c), 'oficial'],
+      ['Concluyó de cada 100 que le entraron', p.c100.toFixed(1), 'derivado', 'Concluidos ÷ ingresados × 100. No es el rezago: no cuenta lo que venía de años anteriores.'],
+      ['Presupuesto que ejerció en 2024', mdpF(p.g), 'oficial'],
+      ['Dinero por asunto concluido', '$' + fmt(p.xa), 'derivado', 'Presupuesto ejercido ÷ asuntos concluidos. No es lo que cuesta un juicio: con ese dinero también se paga todo lo demás que hace el órgano.']];
+    if (est) l.push(['Causas penales pendientes al cierre del año', fmt(p.p), 'oficial'], ['Personas juzgadoras', fmt(p.j), 'oficial'],
+      ['Asuntos concluidos por persona juzgadora', fmt(p.cj), 'derivado', 'Concluidos ÷ personas juzgadoras.']);
+    return l;
+  }
+  function prodHtml(ente) {
+    var p = prodDe(ente), ver = ente.nivel === 'federal' && PROD.ver[ente.id];
+    var h = '<h3 class="ie-h3">Qué hizo con su dinero</h3>';
+    if (p) {
+      h += '<p class="ie-nota-p">' + (ente.nivel === 'estatal' ? 'Del gobierno de ' + esc(ente.nombre) + ', hoy la plataforma tiene cotejada la productividad de su <b>Poder Judicial</b>.' :
+        'Lo que este órgano recibió y lo que resolvió con ello, del mismo censo.') + ' El dinero va siempre junto a lo que se hizo con él.</p>' +
+        celdas(prodFilas(ente, p).map(function (r) {
+          return [r[0] + ' ' + chip(r[2]), '<b>' + r[1] + '</b>' + (r[3] ? '<br><small>' + r[3] + '</small>' : '')];
+        })) +
+        '<p class="ie-nota-p">Fuente: <a href="' + esc(PROD.f[1]) + '" target="_blank" rel="noopener noreferrer">' + esc(PROD.f[0]) + (p.donde ? ', ' + esc(p.donde) : '') + ' ↗</a>. ' +
+        'Estas cifras no califican a nadie: comparan lo que entró con lo que salió.</p>';
+    }
+    h += '<div class="ie-nota"><b>' + (p ? 'Lo que aún falta de su productividad.' : 'Su auditoría de productividad está pendiente.') + '</b> ' + chip('pendiente', PROD.pend) + ' ' +
+      (ente.nivel === 'federal'
+        ? (p ? 'Sus tiempos de resolución y sus metas no están integrados.' : 'Hacienda publica los indicadores de desempeño de los programas federales y la ASF sus auditorías de desempeño: el documento existe y la plataforma aún no lo integra a esta ficha.')
+        : ente.nivel === 'estatal'
+          ? 'Los resultados del Ejecutivo y del Congreso del estado no están integrados: la plataforma aún no localiza un documento oficial que los reúna.'
+          : 'La plataforma aún no localiza un documento oficial que reúna los resultados de cada municipio. Mientras no lo haya, no se rellena.') +
+      (ver ? ' <span class="ie-chipas"><a class="ie-chipa" href="' + esc(ver[0]) + '">📚 Lo que ya hay de su sector: ' + esc(ver[1]) + '</a></span>' : '') + '</div>';
+    return h;
+  }
+  function auditorias(ente, fin, nPreg) {
+    var p = prodDe(ente);
+    function b(k, ico, t, sub, on) {
+      return '<button type="button" role="tab" class="ie-aud-b' + (on ? ' on' : '') + '" id="ieAudB-' + k + '" data-aud-ir="' + k + '" aria-selected="' + (on ? 'true' : 'false') +
+        '" aria-controls="ieAud-' + k + '"><span class="ie-aud-i" aria-hidden="true">' + ico + '</span><span><b>' + t + '</b><small>' + sub + '</small></span></button>';
+    }
+    return '<div class="ie-aud" role="tablist" aria-label="Las dos auditorías de la ficha">' +
+      b('fin', '💰', 'Auditoría de finanzas públicas', 'De dónde vino su dinero y si rindió cuentas · ' + nPreg + ' preguntas', true) +
+      b('prod', '📈', 'Auditoría de productividad', 'Qué hizo con ese dinero · ' + (p ? 'con datos de 2024' : 'pendiente'), false) + '</div>' +
+      '<div class="ie-aud-p" id="ieAud-fin" role="tabpanel" aria-labelledby="ieAudB-fin" data-aud="fin"><p class="ie-aud-t">💰 Auditoría de finanzas públicas</p>' + fin + '</div>' +
+      '<div class="ie-aud-p ie-aud-off" id="ieAud-prod" role="tabpanel" aria-labelledby="ieAudB-prod" data-aud="prod"><p class="ie-aud-t">📈 Auditoría de productividad</p>' + prodHtml(ente) + '</div>';
+  }
+  function verAud(k) {
+    var cont = document.getElementById('ieExp');
+    [].forEach.call(cont.querySelectorAll('.ie-aud-p'), function (x) { x.classList.toggle('ie-aud-off', x.getAttribute('data-aud') !== k); });
+    [].forEach.call(cont.querySelectorAll('.ie-aud-b'), function (x) {
+      var on = x.getAttribute('data-aud-ir') === k;
+      x.classList.toggle('on', on); x.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
   }
 
   function animar(cont) {
@@ -1297,6 +1362,11 @@
       t += '• Quién tiene que aclararlo: ' + r.d.map(function (d) { return d[0] + ' ' + mdpF(d[3] / 1e6); }).join('; ') + '.\n';
       t += '• Universo ' + mdpF(r.t[1] / 1e6) + '; muestra ' + mdpF(r.t[2] / 1e6) + '; ' + fmt(r.t[4]) + ' pliegos de observaciones; ' + fmt(r.t[5]) +
         ' promociones de responsabilidad; recuperado ' + mdpF(r.t[6] / 1e6) + '.\n';
+    }
+    var pr = prodDe(ente);
+    if (pr) {
+      t += '\nAUDITORÍA DE PRODUCTIVIDAD (2024)\n';
+      prodFilas(ente, pr).forEach(function (r) { t += '• ' + r[0] + ': ' + r[1] + (r[3] ? ' (' + r[3] + ')' : '') + '\n'; });
     }
     var ej = ejes(ente), i = indice(ej);
     if (i !== null) {
@@ -1422,6 +1492,7 @@
     if (b.hasAttribute('data-reintentar')) { pintarLista(); return; }
     if (b.hasAttribute('data-cerrar')) { cerrar(); return; }
     if (b.hasAttribute('data-pdf')) { window.print(); return; }
+    if (b.hasAttribute('data-aud-ir')) { verAud(b.getAttribute('data-aud-ir')); return; }
     if (b.hasAttribute('data-pan-ir')) {
       var pan = verPan(b.getAttribute('data-pan-ir'), !b.classList.contains('ie-tab'));
       if (pan && !b.classList.contains('ie-tab')) irA(document.querySelector('#ieExp .ie-tabs-caja'));

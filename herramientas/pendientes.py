@@ -70,6 +70,14 @@ PROPIOS = [
      'La ASF no publicó en su portal la matriz de la Cuenta Pública 2018, como sí lo hizo con las demás. Sin ella, la serie de montos por aclarar tiene un hueco en ese año.',
      'Auditoría Superior de la Federación (ASF)', 'https://www.asf.gob.mx/Section/58_Informes_de_auditoria',
      'Informes de auditoría de la ASF', [('herramienta-inspector-asf.html', 'Expedientes de casos de la ASF')]),
+    ('productividad-entes', 'Productividad', 'Auditoría de productividad de cada ente público',
+     'La ficha técnica de cada ente lleva dos auditorías: la de finanzas públicas y la de productividad (qué hizo con su dinero). '
+     'La de productividad solo está integrada para la Suprema Corte, los juzgados y tribunales federales, el Tribunal Electoral y los 32 poderes judiciales estatales, con el censo del INEGI. '
+     'Para los demás entes federales, Hacienda publica los indicadores de desempeño de sus programas y la ASF sus auditorías de desempeño: el documento existe y la plataforma aún no lo integra. '
+     'Para los gobiernos estatales y los municipios, la plataforma todavía no localiza un documento oficial que reúna sus resultados; mientras no lo haya, no se rellena.',
+     'Auditavisión: falta de la plataforma, que aún no integra los indicadores de desempeño',
+     'https://www.transparenciapresupuestaria.gob.mx/', 'Transparencia Presupuestaria (Hacienda)',
+     [('herramienta-inspector-entes.html', 'Auditor de entes públicos')]),
     ('municipios-sin-cuenta', 'Estados y municipios', 'Cuenta pública 2024 de los municipios que no la entregaron al INEGI',
      'De los 2,479 municipios del catálogo, 83 no reportaron sus finanzas de 2024 a la estadística del INEGI, y las 16 demarcaciones de la Ciudad de México no rinden cuenta municipal. Sin ese reporte no se sabe cuánto ingresaron ni en qué gastaron.',
      'Los ayuntamientos que no reportaron', 'https://www.inegi.org.mx/programas/finanzas/',

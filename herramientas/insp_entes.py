@@ -165,6 +165,39 @@ def _catalogo_municipal():
         return None
 
 
+# La auditoría de productividad (decisión del autor, 12-11-2026: «auditorías
+# tanto de finanzas públicas como de productividad de toda institución pública
+# de los tres niveles»). La ficha no trae datos propios: lee lo que la
+# Enciclopedia ya cotejó. Hoy eso es la gestión judicial (gestion_judicial.py);
+# un sector nuevo se agrega aquí, leyendo de su módulo, nunca con cifras a mano.
+# PROD_VER: dónde vive ya, en la Enciclopedia, la gestión del sector de un ente
+# que todavía no tiene su auditoría de productividad en la ficha.
+PROD_VER = {
+    'imss': ('datos-salud-imss.html', 'Datos › Salud pública › IMSS'),
+    'issste': ('datos-salud-publica.html', 'Datos › Salud pública'),
+    'semarnat': ('datos-justicia-ambiental.html', 'Datos › Justicia ambiental (PROFEPA)'),
+    'judicial': ('datos-poder-judicial.html', 'Datos › Poder Judicial'),
+}
+
+
+def _productividad(base):
+    import gestion_judicial as gj
+    est = gj.judiciales_estados(base)
+    fed = {}
+    for k, (i, c, donde) in gj.FED.items():
+        g = gj.PRES_FED[k]
+        fed[k] = {'g': g, 'i': i, 'c': c, 'c100': round(100.0 * c / i, 1), 'xa': round(g * 1e6 / c), 'donde': donde}
+    ids = {f['id'] for f in base['inspector_federal']['entes']} | {o['id'] for o in (base.get('inspector_poderes') or {}).get('organos', [])}
+    for k in list(fed) + list(PROD_VER):
+        if k not in ids:
+            raise SystemExit('insp_entes: la productividad nombra a «%s», que no es un ente federal del Auditor.' % k)
+    for k, (arch, _) in PROD_VER.items():
+        if not os.path.exists(os.path.join(RAIZ, arch)):
+            raise SystemExit('insp_entes: PROD_VER apunta a %s, que no existe.' % arch)
+    return {'fed': fed, 'est': est, 'ver': {k: list(v) for k, v in PROD_VER.items()},
+            'f': [gj.CENSO, gj.URL], 'pend': 'productividad-entes'}
+
+
 def datos(base):
     F = base['inspector_federal']
     P = base.get('inspector_poderes') or {}
@@ -230,6 +263,7 @@ def datos(base):
         'mun': {'n': _catalogo_municipal(), 'src': MUN_ARCHIVOS},
         # El Radar por entidad, fusionado con la ficha estatal (21-10-2026).
         'radar': insp_radar.datos(base['cuenta_publica_asf']),
+        'prod': _productividad(base),
     }
 
 
