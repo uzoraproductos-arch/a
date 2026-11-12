@@ -80,9 +80,10 @@ PROPIOS = [
      [('herramienta-inspector-entes.html', 'Auditor de entes públicos')]),
     ('productividad-administraciones', 'Productividad', 'Productividad de cada administración presidencial',
      'El estado de cuenta de una administración lleva dos funciones: finanzas públicas y productividad (qué hizo con ese dinero). '
-     'La de productividad está pendiente: cada gobierno rinde su Informe de Gobierno y sus informes de ejecución del Plan Nacional de Desarrollo, '
-     'Hacienda publica los indicadores de desempeño de los programas y la ASF sus auditorías de desempeño. Los documentos existen y la plataforma aún no los integra; '
-     'tampoco está decidido qué indicadores cuentan como productividad de una administración, y no se eligen a ojo.',
+     'La de productividad se lee por las dimensiones del Planisferio y por tres indicadores (decisión del autor, 12-11-2026): las metas del Plan Nacional de Desarrollo que se cumplieron, '
+     'los indicadores de desempeño de los programas presupuestarios y lo que concluyeron las auditorías de desempeño de la ASF. Las dimensiones ya llevan a su mapa y a su página federal, '
+     'pero muestran el país de hoy, no lo que dejó cada sexenio; los tres indicadores siguen pendientes: cada gobierno rinde su Informe de Gobierno y sus informes de ejecución del Plan, '
+     'Hacienda publica los indicadores y la ASF sus auditorías. Los documentos existen y la plataforma aún no los integra.',
      'Auditavisión: falta de la plataforma, que aún no integra los informes de ejecución ni los indicadores de desempeño',
      'https://www.transparenciapresupuestaria.gob.mx/', 'Transparencia Presupuestaria (Hacienda)',
      [('radar-estado-de-cuenta.html', 'Estado de cuenta administrativo')]),

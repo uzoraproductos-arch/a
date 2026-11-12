@@ -409,7 +409,12 @@
       if (typeof r === 'string') r = { t: r, est: 'pendiente', pid: pr.pid };
       return '<tr><th scope="row">' + esc(r.t) + '</th><td>' + valorC(r, N.add('<b>' + esc(r.t) + '.</b> ' + (notaC(N, r) || esc(pr.falta || '')))) + '</td></tr>';
     }).join('');
-    return caja('📈 Productividad: qué se hizo con ese dinero', tabla(filas, ['Concepto', 'Cifra']) +
+    /* Una administración se lee por las dimensiones del Planisferio (decisión del autor, 12-11-2026). */
+    var dims = pr.dims ? caja('🧭 Su gestión, dimensión por dimensión', '<p class="ex-fun-falta">La productividad de una administración se lee en las mismas dimensiones del Planisferio. Cada una abre su mapa y su página federal:</p><ul class="ex-dims">' +
+      pr.dims.map(function (d) {
+        return '<li><b>' + d.ico + ' ' + esc(d.n) + '</b><small>' + esc(d.que) + '</small><span><a href="' + esc(d.pl) + '">Ver en el Planisferio</a> · <a href="' + esc(d.ctx) + '">' + esc(d.ctxT) + '</a></span></li>';
+      }).join('') + '</ul>', true) : '';
+    return dims + caja('📈 Productividad: qué se hizo con ese dinero', tabla(filas, ['Concepto', 'Cifra']) +
       (pr.falta ? '<p class="ex-fun-falta"><b>' + (conProd(pr) ? 'Lo que aún falta.' : 'Por qué está pendiente.') + '</b> ' + esc(pr.falta) + '</p>' : ''), true);
   }
   function abreNotas(doc, abrir) {

@@ -3914,9 +3914,33 @@ RADAR_PROD = {'pid': 'productividad-administraciones',
               'filas': ['Metas del Plan Nacional de Desarrollo que se cumplieron',
                         'Indicadores de desempeño de los programas presupuestarios',
                         'Lo que concluyeron las auditorías de desempeño de la ASF'],
-              'falta': ('Cada gobierno rinde su Informe de Gobierno y sus informes de ejecución del Plan Nacional de Desarrollo, Hacienda publica '
-                        'los indicadores de desempeño de los programas y la ASF sus auditorías de desempeño: los documentos existen y la '
-                        'plataforma aún no los integra. Qué indicadores cuentan como productividad de una administración es una decisión editorial que aún no se toma.')}
+              'falta': ('Las dimensiones del Planisferio muestran el país de hoy, no lo que dejó cada sexenio. Para separarlo por administración faltan sus '
+                        'Informes de Gobierno, los informes de ejecución del Plan Nacional de Desarrollo y las auditorías de desempeño de la ASF: '
+                        'los documentos existen y la plataforma aún no los integra.')}
+def radar_prod():
+    """La productividad de una administracion se lee por las dimensiones
+    del Planisferio (decision del autor, 12-11-2026: «viene siendo lo de
+    planisferio en sus dimensiones»). No trae cifras: lleva a cada dimension
+    en el mapa y a su pagina federal del Contexto dimensional."""
+    import planisferio as pl
+    import dimension_social as ds
+    dims = []
+    for x in pl.DIMENSIONES:
+        k, ico, nom, que = x[0], x[1], x[2], x[3]
+        if not x[-1]:
+            continue
+        if k not in ds.CONTEXTO:
+            raise SystemExit('radar_prod: la dimensión %s no tiene su renglón en CONTEXTO' % k)
+        ctx = ds.CONTEXTO[k][0]
+        for arch in (ctx[0],):
+            if not os.path.exists(os.path.join(RAIZ, arch.split('#')[0])):
+                raise SystemExit('radar_prod: %s no existe' % arch)
+        dims.append({'ico': ico, 'n': nom, 'que': que.split(':')[0].split('.')[0] + '.', 'pl': 'planisferio.html?d=' + k, 'ctx': ctx[0], 'ctxT': ctx[1].split(':')[0]})
+    r = dict(RADAR_PROD)
+    r['dims'] = dims
+    return r
+
+
 RADAR_LEY17 = {'txt': ('La Ley Federal de Presupuesto y Responsabilidad Hacendaria (art. 17, vigente desde 2006) pide que el gasto contribuya '
                        'al equilibrio presupuestario, y permite un déficit solo de manera circunstancial, por las condiciones económicas '
                        'y sociales del país, con la justificación del Ejecutivo ante el Congreso.'),
@@ -4729,7 +4753,7 @@ def radar():
     peso['admins'] = _peso_admins(ps, RADAR_ADMINS)
     datos = json.dumps({'admins': admins, 'valores': valores, 'metricas': metricas, 'dims': dims, 'obras': obras,
                         'fuentes': fuentes, 'reloj': reloj, 'inicial': 'amlo', 'monedas': monedas, 'peso': peso,
-                        'corte': fs['consulta'], 'semaforo': RADAR_SEMAFORO, 'ley17': RADAR_LEY17, 'prod': RADAR_PROD,
+                        'corte': fs['consulta'], 'semaforo': RADAR_SEMAFORO, 'ley17': RADAR_LEY17, 'prod': radar_prod(),
                         'duelo': ['ingresos_pib', 'inversion_pib', 'gasto_pib', 'costo_financiero_pib',
                                   'inversion_mdp:hoy', 'costo_financiero_mdp:hoy', 'deuda_fin', 'deuda_cambio', 'asf_aud', 'asf_rec']},
                        ensure_ascii=False).replace('</', '<\\/')
