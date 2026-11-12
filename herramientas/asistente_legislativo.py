@@ -94,6 +94,33 @@ CONGRESOS = {'MÉX': 75, 'CDMX': 65, 'VER': 50, 'GRO': 46, 'NL': 42, 'OAX': 42, 
              'QRO': 25, 'QROO': 25, 'TLAX': 25, 'BCS': 21, 'MOR': 20}
 CONGRESOS_TOTAL = 1122  # «EUM» de la misma tabla
 
+# Tabla 20 del CNPLE 2025 (p. 50): las iniciativas presentadas en los periodos
+# que cada congreso reportó del primer año de su legislatura actual, según su
+# estatus al término del periodo de sesiones en que se presentaron:
+# (total, en estudio, aprobada o procedente, ingreso, dictamen, desechada o
+# improcedente, desistimiento, otro estatus, no disponible, % dictaminadas).
+# «Dictaminadas», como las define el INEGI: dictamen + aprobada + desechada.
+INICIATIVAS = {
+    'PUE': (818, 752, 66, 0, 0, 0, 0, 0, 0, 8.1), 'MICH': (787, 564, 215, 0, 0, 8, 0, 0, 0, 28.3),
+    'JAL': (702, 36, 60, 68, 24, 0, 0, 514, 0, 12.0), 'NL': (693, 693, 0, 0, 0, 0, 0, 0, 0, 0.0),
+    'MÉX': (692, 469, 223, 0, 0, 0, 0, 0, 0, 32.2), 'CHIH': (687, 470, 208, 0, 0, 2, 0, 5, 2, 30.6),
+    'BC': (604, 566, 24, 2, 0, 0, 12, 0, 0, 4.0), 'OAX': (556, 489, 62, 0, 0, 5, 0, 0, 0, 12.1),
+    'TAM': (530, 276, 222, 0, 29, 2, 0, 1, 0, 47.7), 'AGS': (529, 309, 77, 0, 106, 36, 1, 0, 0, 41.4),
+    'HGO': (528, 365, 142, 0, 0, 0, 0, 21, 0, 26.9), 'CDMX': (422, 374, 40, 0, 0, 0, 8, 0, 0, 9.5),
+    'DGO': (418, 0, 108, 0, 0, 0, 0, 310, 0, 25.8), 'MOR': (395, 395, 0, 0, 0, 0, 0, 0, 0, 0.0),
+    'SIN': (374, 35, 69, 225, 45, 0, 0, 0, 0, 30.5), 'SLP': (323, 0, 71, 0, 0, 9, 6, 237, 0, 24.8),
+    'GRO': (296, 176, 120, 0, 0, 0, 0, 0, 0, 40.5), 'TAB': (275, 213, 62, 0, 0, 0, 0, 0, 0, 22.5),
+    'QRO': (263, 152, 81, 0, 21, 0, 9, 0, 0, 38.8), 'GTO': (249, 224, 25, 0, 0, 0, 0, 0, 0, 10.0),
+    'SON': (222, 135, 82, 0, 4, 1, 0, 0, 0, 39.2), 'TLAX': (210, 96, 113, 0, 0, 1, 0, 0, 0, 54.3),
+    'QROO': (206, 131, 73, 0, 1, 0, 0, 1, 0, 35.9), 'ZAC': (179, 102, 77, 0, 0, 0, 0, 0, 0, 43.0),
+    'YUC': (173, 132, 41, 0, 0, 0, 0, 0, 0, 23.7), 'CAM': (148, 53, 92, 3, 0, 0, 0, 0, 0, 62.2),
+    'COL': (141, 32, 106, 0, 0, 2, 1, 0, 0, 76.6), 'NAY': (141, 81, 56, 4, 0, 0, 0, 0, 0, 39.7),
+    'BCS': (114, 82, 30, 0, 0, 0, 0, 2, 0, 26.3), 'VER': (104, 78, 26, 0, 0, 0, 0, 0, 0, 25.0),
+    'CHIS': (102, 12, 90, 0, 0, 0, 0, 0, 0, 88.2), 'COAH': (86, 78, 7, 0, 0, 0, 1, 0, 0, 8.1),
+}
+INICIATIVAS_TOTAL = (11967, 7570, 2668, 302, 230, 66, 38, 1091, 2, 24.8)
+CNPLE_INI = dict(CNPLE, tx='INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, reporte de resultados, tabla 20, p. 50 (27-04-2026)')
+
 # Donde se lee todo esto (pedido del autor, 23-10-2026: cada respuesta del bot
 # lleva «Saber mas» a la pagina donde esta la informacion). Desde la tarde del
 # mismo dia (pedido del autor) vive en la pestaña Datos, una pagina por grupo
@@ -320,7 +347,9 @@ TOPE_116 = 0.70
 
 
 def congresos_estados(base):
-    """Lo de cada congreso local por clave de entidad: lo que ejerció en 2024
+    """Lo de cada congreso local por clave de entidad (y sus iniciativas: ini
+    presentadas, iest en estudio, iapr aprobadas, idic dictaminadas, idp su
+    porcentaje publicado, iotro las demás): lo que ejerció en 2024
     (CNPLE 2025, p. 11, en DB.poderes), sus personas legisladoras (tabla 8),
     el gasto por legislador y el gasto frente al egreso del gobierno del
     estado (los dos derivados). Se detiene si falta una entidad."""
@@ -336,6 +365,17 @@ def congresos_estados(base):
                           'pag': x['pagina'], 'anio': x['ejercicio']}
     if sorted(out) != sorted(CONGRESOS):
         raise SystemExit('congresos: el gasto 2024 no trae a las 32 entidades')
+    # Las iniciativas (tabla 20): si una fila o una columna no cuadra, se detiene.
+    if sorted(INICIATIVAS) != sorted(CONGRESOS):
+        raise SystemExit('congresos: la tabla de iniciativas no trae a las 32 entidades')
+    for a, v in INICIATIVAS.items():
+        dic = v[2] + v[4] + v[5]
+        if sum(v[1:9]) != v[0] or round(100.0 * dic / v[0], 1) != v[9]:
+            raise SystemExit('congresos: las iniciativas de %s no cuadran con su total o con su porcentaje publicado' % a)
+        out[a].update({'ini': v[0], 'iest': v[1], 'iapr': v[2], 'idic': dic, 'idp': v[9], 'iotro': v[0] - v[1] - dic})
+    for j in range(9):
+        if sum(v[j] for v in INICIATIVAS.values()) != INICIATIVAS_TOTAL[j]:
+            raise SystemExit('congresos: la columna %d de las iniciativas no suma el total del país' % j)
     return out
 
 

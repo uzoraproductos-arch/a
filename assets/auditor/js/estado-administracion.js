@@ -380,6 +380,38 @@
       if (a && !a.classList.contains('ex-toca')) { a.classList.add('ex-toca'); a.tabIndex = 0; a.setAttribute('aria-expanded', 'false'); }
     });
   }
+  /* Las dos funciones del estado de cuenta (pedido del autor, 12-11-2026):
+     finanzas públicas y productividad. En pantalla se elige una; impresas van las dos. */
+  function funciones(fin, prod, conDato) {
+    function b(k, ico, t, sub, on) {
+      return '<button type="button" role="tab" class="ex-fun-b' + (on ? ' on' : '') + '" data-fun-ir="' + k + '" aria-selected="' + (on ? 'true' : 'false') +
+        '"><span class="ex-fun-i" aria-hidden="true">' + ico + '</span><span><b>' + t + '</b><small>' + sub + '</small></span></button>';
+    }
+    return '<div class="ex-fun ex-sp" role="tablist" aria-label="Las dos funciones del estado de cuenta">' +
+      b('fin', '💰', 'Finanzas públicas', 'De dónde vino el dinero y cómo se usó', true) +
+      b('prod', '📈', 'Productividad', 'Qué se hizo con ese dinero · ' + (conDato ? 'con datos de 2024' : 'pendiente'), false) + '</div>' +
+      '<div class="ex-fun-p" data-fun="fin"><p class="ex-fun-t">💰 Finanzas públicas</p>' + fin + '</div>' +
+      '<div class="ex-fun-p ex-fun-off" data-fun="prod"><p class="ex-fun-t">📈 Productividad</p>' + prod + '</div>';
+  }
+  function verFun(doc, k) {
+    Array.prototype.forEach.call(doc.querySelectorAll('.ex-fun-p'), function (x) { x.classList.toggle('ex-fun-off', x.getAttribute('data-fun') !== k); });
+    Array.prototype.forEach.call(doc.querySelectorAll('.ex-fun-b'), function (x) {
+      var on = x.getAttribute('data-fun-ir') === k;
+      x.classList.toggle('on', on); x.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
+  function conProd(pr) { return !!pr && pr.filas.some(function (r) { return typeof r.v === 'number' || r.txt; }); }
+  /* La caja de productividad: con cifras, cada renglón con su nota; sin ellas, lo que falta y por qué. */
+  function prodCaja(pr, N) {
+    if (!pr) return '';
+    N.sec('Productividad: qué se hizo con ese dinero', esc(pr.nota || ''));
+    var filas = pr.filas.map(function (r) {
+      if (typeof r === 'string') r = { t: r, est: 'pendiente', pid: pr.pid };
+      return '<tr><th scope="row">' + esc(r.t) + '</th><td>' + valorC(r, N.add('<b>' + esc(r.t) + '.</b> ' + (notaC(N, r) || esc(pr.falta || '')))) + '</td></tr>';
+    }).join('');
+    return caja('📈 Productividad: qué se hizo con ese dinero', tabla(filas, ['Concepto', 'Cifra']) +
+      (pr.falta ? '<p class="ex-fun-falta"><b>' + (conProd(pr) ? 'Lo que aún falta.' : 'Por qué está pendiente.') + '</b> ' + esc(pr.falta) + '</p>' : ''), true);
+  }
   function abreNotas(doc, abrir) {
     var rev = doc.querySelector('.ex-reverso'), b = doc.querySelector('.ex-rev-abre');
     if (!rev || !b) return;
@@ -420,9 +452,13 @@
       var k = ir.getAttribute('data-ir'), d;
       if (k === 'notas') { abreNotas(doc, true); d = doc.querySelector('.ex-reverso'); }
       else d = k === 'sello' ? doc.querySelector('.ex-sello') : doc.querySelector('[data-sec="' + k + '"]');
+      var pf = d && d.closest('.ex-fun-p');
+      if (pf) verFun(doc, pf.getAttribute('data-fun'));
       if (d) d.scrollIntoView({ behavior: 'smooth', block: 'start' });
       return;
     }
+    var fb = e.target.closest('[data-fun-ir]');
+    if (fb) { if (e.type === 'click') verFun(doc, fb.getAttribute('data-fun-ir')); return; }
     if (e.target.closest('.ex-rev-abre')) { if (e.type === 'click') abreNotas(doc); return; }
     var a = e.target.closest('.ex-toca');
     if (a) { if (e.type === 'keydown') e.preventDefault(); notaDe(doc, a); }
@@ -462,6 +498,7 @@
       { t: 'La deuda, de principio a fin', h: valor(m.deuda[2].x, m.deuda[2].u) },
       { t: 'Por aclarar ante la ASF', h: valor(m.asf[2].x, m.asf[2].u) }]);
 
+    var hCab = h; h = '';
     /* El termostato */
     N.sec('El termostato: qué mide cada indicador y cómo se le pone color',
       'El termostato compara con reglas escritas; no es una calificación oficial ni un juicio sobre la persona, y no suma los colores en una nota global. ' +
@@ -495,6 +532,7 @@
       [simple('🔎', 'Ante la Auditoría Superior de la Federación', m.asf,
         'Sin color en el termostato: la ASF mide el monto por aclarar con esta definición solo desde la Cuenta Pública 2019, y las cuentas viejas llevan más años de solventación. No es daño comprobado.')]));
 
+    h = hCab + funciones(h, prodCaja(D.prod, N), conProd(D.prod));
     var rev = '<div class="ex-rev-cols">' + N.html(1) +
       '<section class="ex-rsec"><h4><span>' + (N.secs.length + 1) + '</span> Fundamento legal</h4><p class="ex-nota">' + esc(D.ley17.txt) +
       ' <a href="' + esc(D.ley17.url) + '" target="_blank" rel="noopener noreferrer">' + esc(D.ley17.corto) + ' ↗</a></p></section>' +
@@ -533,16 +571,20 @@
     function f(r) { if (r.f && ks.indexOf(r.f) < 0) ks.push(r.f); }
     d.senales.forEach(function (s) { f(s.x); s.extra.forEach(f); f({ f: C.senales[s.id].ley }); });
     d.secciones.forEach(function (s) { s.filas.forEach(f); });
+    if (d.prod) d.prod.filas.forEach(f);
     return ks;
   }
   /* Las cifras que firma el sello, en un orden fijo. */
   function cifrasC(d) {
     function v(r) { return typeof r.v === 'number' ? (typeof r.v2 === 'number' ? [r.v, r.v2] : r.v) : r.u === 'txt' ? r.txt || 'sin dato' : 'sin dato'; }
-    return {
+    var o = {
       doc: 'Auditavisión · ' + d.tipoTx, id: d.id, corte: d.corte,
       senales: d.senales.map(function (s) { return [s.id, v(s.x), s.c || 'sin color']; }),
       secciones: d.secciones.map(function (s) { return [s.tit, s.filas.map(function (r) { return [r.t, v(r), r.est]; })]; })
     };
+    /* La productividad entra a la huella solo donde trae cifras: los demás folios no cambian. */
+    if (conProd(d.prod)) o.productividad = d.prod.filas.map(function (r) { return [r.t, v(r), r.est]; });
+    return o;
   }
   /* La institución como órgano (10-10-2026): lo que nos cuesta, en tres
      cifras grandes, y del dinero que ejerció a lo que falta aclarar, en barras
@@ -588,6 +630,7 @@
       });
     });
     h += vistazo(vz);
+    var hCab = h; h = '';
     N.sec('Las dos señales con regla de ley', 'Las señales comparan con reglas escritas en la ley; no son una calificación oficial ni un juicio sobre ninguna persona. ' +
       'Donde la cifra es parcial o falta, la señal se queda sin color en lugar de suponer.');
     h += '<section class="ex-termo"><h4>🌡️ Termostato: dos señales con regla de ley</h4><div class="ex-termo-in">' +
@@ -623,6 +666,7 @@
       return { larga: true, h: caja(esc(s.tit), '<div class="ex-t2">' + tabla(filas.slice(0, mitad).join(''), ['Concepto', 'Cifra']) +
         tabla(filas.slice(mitad).join(''), ['Concepto', 'Cifra']) + '</div>', true) };
     }));
+    h = hCab + funciones(h, prodCaja(d.prod, N), conProd(d.prod));
     var leyes = [];
     d.senales.forEach(function (s) { var l = C.fuentes[C.senales[s.id].ley]; if (l && leyes.indexOf(l) < 0) leyes.push(l); });
     var rev = '<div class="ex-rev-cols">' + N.html(1) +

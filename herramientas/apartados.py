@@ -3907,6 +3907,16 @@ RADAR_SEMAFORO = [
      'que': 'Todo lo que entró al sector público, sin deuda, en promedio al año. Más ingreso propio da más margen para gastar sin endeudarse.',
      'op': 'Promedio anual de los ingresos presupuestarios, en % del PIB.'},
 ]
+# La segunda funcion del estado de cuenta de una administracion: la
+# productividad (pedido del autor, 12-11-2026). Sin documento integrado, va
+# pendiente con su porque; nunca con indicadores elegidos a ojo.
+RADAR_PROD = {'pid': 'productividad-administraciones',
+              'filas': ['Metas del Plan Nacional de Desarrollo que se cumplieron',
+                        'Indicadores de desempeño de los programas presupuestarios',
+                        'Lo que concluyeron las auditorías de desempeño de la ASF'],
+              'falta': ('Cada gobierno rinde su Informe de Gobierno y sus informes de ejecución del Plan Nacional de Desarrollo, Hacienda publica '
+                        'los indicadores de desempeño de los programas y la ASF sus auditorías de desempeño: los documentos existen y la '
+                        'plataforma aún no los integra. Qué indicadores cuentan como productividad de una administración es una decisión editorial que aún no se toma.')}
 RADAR_LEY17 = {'txt': ('La Ley Federal de Presupuesto y Responsabilidad Hacendaria (art. 17, vigente desde 2006) pide que el gasto contribuya '
                        'al equilibrio presupuestario, y permite un déficit solo de manera circunstancial, por las condiciones económicas '
                        'y sociales del país, con la justificación del Ejecutivo ante el Congreso.'),
@@ -4457,6 +4467,62 @@ def radar_cargos(base):
         ]})
     usa('CPEUM')
     usa('LGTAIP')
+    # Las dos funciones del estado de cuenta (pedido del autor, 12-11-2026):
+    # finanzas publicas (todo lo de arriba) y productividad (que hizo con ese
+    # dinero). La productividad lee de su modulo; nunca lleva cifras a mano.
+    import gestion_judicial as gj
+    CARGOS_FUENTES['CNIJF'] = {'corto': gj.CENSO, 'url': gj.URL}
+    import asistente_legislativo as al_
+    CARGOS_FUENTES['CNPLE_INI'] = {'corto': al_.CNPLE_INI['tx'], 'url': al_.CNPLE_INI['url']}
+    cg_loc = al_.congresos_estados(base)
+    ab_de = {e['name']: e['abbr'] for e in base['estados']}
+    for d in docs:
+        if d['tipo'] == 'scjn':
+            i, c, donde = gj.FED['scjn']
+            g = round(gj.PRES_FED['scjn'] * 1e6)
+            fs = [
+                fila('Asuntos que le entraron en 2024', i, 'ent', 'oficial', 'CNIJF', donde),
+                fila('Asuntos que concluyó en 2024', c, 'ent', 'oficial', 'CNIJF', donde),
+                fila('Concluyó de cada 100 que le entraron', round(100.0 * c / i, 1), 'pct100', 'derivado', 'CNIJF', donde,
+                     op='%s concluidos ÷ %s que entraron × 100.' % (format(c, ','), format(i, ',')),
+                     nota='No es el rezago: lo concluido en un año incluye asuntos que entraron en años anteriores.'),
+                fila('Presupuesto que ejerció en 2024', g, '$g', 'oficial', 'CNIJF', 'gráfica 6, p. 13'),
+                fila('Dinero por asunto concluido', round(g / c), '$', 'derivado', 'CNIJF', 'gráfica 6, p. 13',
+                     op='%s ejercidos ÷ %s asuntos concluidos.' % (pesos(g), format(c, ',')),
+                     nota='No es lo que cuesta un juicio: el presupuesto paga todo el órgano, no solo sus sentencias.'),
+            ]
+            for nom, pl, s1, s2 in gj.DUR_SCJN:
+                r = fila('Días para resolver: ' + nom.lower(), None, 'txt', 'oficial', 'CNIJF', 'tabla 13, p. 23',
+                         nota='Duración promedio en días naturales. Donde no aparece una Sala o el Pleno, no resolvió asuntos de ese tipo en 2024.')
+                r['txt'] = ' · '.join('%s %s' % (et, format(v, ',')) for et, v in (('Pleno', pl), ('1.ª Sala', s1), ('2.ª Sala', s2)) if v)
+                fs.append(r)
+            d['prod'] = {'filas': fs, 'nota': 'Lo que la Corte recibió y lo que resolvió con ello, del censo del INEGI. Estas cifras no califican a nadie: comparan lo que entró con lo que salió.'}
+        elif d['tipo'] == 'dip-loc':
+            c = cg_loc[ab_de[d['ent']]]
+            d['prod'] = {'filas': [
+                fila('Iniciativas que se presentaron', c['ini'], 'ent', 'oficial', 'CNPLE_INI'),
+                fila('Dictaminadas en el mismo periodo', c['idic'], 'ent', 'derivado', 'CNPLE_INI',
+                     op='Aprobadas o procedentes + en dictamen + desechadas o improcedentes: así las cuenta el INEGI.'),
+                fila('De cada 100 presentadas, se dictaminaron', c['idp'], 'pct100', 'oficial', 'CNPLE_INI'),
+                fila('Aprobadas o procedentes', c['iapr'], 'ent', 'oficial', 'CNPLE_INI'),
+                fila('Seguían en estudio al terminar el periodo', c['iest'], 'ent', 'oficial', 'CNPLE_INI'),
+                fila('Gasto del congreso en 2024', round(c['g'] * 1e6), '$g', 'oficial', 'CNPLE_INI',
+                     nota='Del mismo censo, p. 11. El gasto es de 2024 y las iniciativas, del primer año de la legislatura actual: no se dividen entre sí.'),
+                fila('Sesiones que se celebraron', None, 'ent', 'pendiente', '', pid='productividad-legislativo'),
+                fila('Asistencia a las sesiones', None, 'ent', 'pendiente', '', pid='productividad-legislativo')],
+                'falta': 'Las sesiones y la asistencia de este congreso: el censo del INEGI las levanta, y la plataforma aún no las integra.',
+                'nota': ('Son las iniciativas de los periodos que el congreso reportó del primer año de su legislatura, con el estatus que tenían al terminar el periodo en que se presentaron: '
+                         'la que se dictaminó después no cuenta aquí. Más iniciativas no es mejor trabajo, y los periodos de cada congreso no son los mismos.')}
+        else:
+            loc_ = False
+            d['prod'] = {'filas': [
+                fila(t, None, 'ent', 'pendiente', '', pid='productividad-legislativo')
+                for t in ('Iniciativas que se presentaron', 'Iniciativas que se dictaminaron y se aprobaron',
+                          'Sesiones que se celebraron', 'Asistencia a las sesiones')],
+                'falta': ('El INEGI publica el trabajo de cada congreso local en su censo de poderes legislativos estatales: el documento existe y la plataforma aún no lo integra.'
+                          if loc_ else
+                          'Cada Cámara publica su trabajo en su Gaceta Parlamentaria y Gobernación lo reúne en el Sistema de Información Legislativa: el documento existe y la plataforma aún no lo integra.'),
+                'nota': 'Mientras no se integre el documento oficial, la productividad no se rellena.'}
     return {'tipos': [{'id': t[0], 'ico': t[1], 'n': t[2], 'sub': t[3]} for t in CARGOS_TIPOS],
             'senales': CARGOS_SENALES, 'notaLocal': loc['nota'], 'docs': docs, 'fuentes': fuentes}
 
@@ -4663,7 +4729,7 @@ def radar():
     peso['admins'] = _peso_admins(ps, RADAR_ADMINS)
     datos = json.dumps({'admins': admins, 'valores': valores, 'metricas': metricas, 'dims': dims, 'obras': obras,
                         'fuentes': fuentes, 'reloj': reloj, 'inicial': 'amlo', 'monedas': monedas, 'peso': peso,
-                        'corte': fs['consulta'], 'semaforo': RADAR_SEMAFORO, 'ley17': RADAR_LEY17,
+                        'corte': fs['consulta'], 'semaforo': RADAR_SEMAFORO, 'ley17': RADAR_LEY17, 'prod': RADAR_PROD,
                         'duelo': ['ingresos_pib', 'inversion_pib', 'gasto_pib', 'costo_financiero_pib',
                                   'inversion_mdp:hoy', 'costo_financiero_mdp:hoy', 'deuda_fin', 'deuda_cambio', 'asf_aud', 'asf_rec']},
                        ensure_ascii=False).replace('</', '<\\/')

@@ -311,3 +311,21 @@ tr.ex-nota-ab > td { padding: 0 0 6px; white-space: normal; }
   body { background: #fff !important; }
   .ex-print { display: block; }
 }
+
+/* Las dos funciones del estado de cuenta: finanzas públicas y productividad (12-11-2026). */
+.ex-fun { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.ex-fun-b { display: flex; align-items: center; gap: 10px; min-height: 60px; padding: 10px 14px; border-radius: 14px; border: 2px solid #c9d3e6; background: #f4f7fc; color: #0b2a63; font: inherit; text-align: left; cursor: pointer; }
+.ex-fun-b b { display: block; font-size: 16px; }
+.ex-fun-b small { display: block; font-size: 14px; color: #44506a; }
+.ex-fun-i { font-size: 22px; flex: none; }
+.ex-fun-b:hover { border-color: #0b2a63; }
+.ex-fun-b.on { background: #0b2a63; border-color: #0b2a63; color: #fff; }
+.ex-fun-b.on small { color: #dbe5f7; }
+.ex-fun-b:focus-visible { outline: 3px solid #f0b429; outline-offset: 2px; }
+.ex-fun-off { display: none; }
+.ex-fun-t { display: none; margin: 12px 0 0; font-size: 14px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #0b2a63; }
+.ex-fun-falta { margin: 10px 0 0; font-size: 16px; line-height: 1.5; }
+.ex-print .ex-fun-off { display: block; }
+.ex-print .ex-fun-t { display: block; }
+.ex-print .ex-fun-falta { font-size: inherit; }
+@media (max-width: 640px) { .ex-fun { grid-template-columns: 1fr; } }

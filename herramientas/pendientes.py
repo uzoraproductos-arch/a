@@ -72,12 +72,28 @@ PROPIOS = [
      'Informes de auditoría de la ASF', [('herramienta-inspector-asf.html', 'Expedientes de casos de la ASF')]),
     ('productividad-entes', 'Productividad', 'Auditoría de productividad de cada ente público',
      'La ficha técnica de cada ente lleva dos auditorías: la de finanzas públicas y la de productividad (qué hizo con su dinero). '
-     'La de productividad solo está integrada para la Suprema Corte, los juzgados y tribunales federales, el Tribunal Electoral y los 32 poderes judiciales estatales, con el censo del INEGI. '
+     'La de productividad solo está integrada para la Suprema Corte, los juzgados y tribunales federales, el Tribunal Electoral y los 32 poderes judiciales estatales, con el censo del INEGI; para el IMSS, con su Memoria Estadística; para la PROFEPA (en la ficha de la Semarnat), con su Informe de Actividades; y para los 32 congresos locales (sus iniciativas), con el censo del INEGI. '
      'Para los demás entes federales, Hacienda publica los indicadores de desempeño de sus programas y la ASF sus auditorías de desempeño: el documento existe y la plataforma aún no lo integra. '
      'Para los gobiernos estatales y los municipios, la plataforma todavía no localiza un documento oficial que reúna sus resultados; mientras no lo haya, no se rellena.',
      'Auditavisión: falta de la plataforma, que aún no integra los indicadores de desempeño',
      'https://www.transparenciapresupuestaria.gob.mx/', 'Transparencia Presupuestaria (Hacienda)',
      [('herramienta-inspector-entes.html', 'Auditor de entes públicos')]),
+    ('productividad-administraciones', 'Productividad', 'Productividad de cada administración presidencial',
+     'El estado de cuenta de una administración lleva dos funciones: finanzas públicas y productividad (qué hizo con ese dinero). '
+     'La de productividad está pendiente: cada gobierno rinde su Informe de Gobierno y sus informes de ejecución del Plan Nacional de Desarrollo, '
+     'Hacienda publica los indicadores de desempeño de los programas y la ASF sus auditorías de desempeño. Los documentos existen y la plataforma aún no los integra; '
+     'tampoco está decidido qué indicadores cuentan como productividad de una administración, y no se eligen a ojo.',
+     'Auditavisión: falta de la plataforma, que aún no integra los informes de ejecución ni los indicadores de desempeño',
+     'https://www.transparenciapresupuestaria.gob.mx/', 'Transparencia Presupuestaria (Hacienda)',
+     [('radar-estado-de-cuenta.html', 'Estado de cuenta administrativo')]),
+    ('productividad-legislativo', 'Productividad', 'Productividad de las Cámaras federales y de los congresos locales',
+     'El estado de cuenta de una diputación o una senaduría lleva dos funciones: finanzas públicas y productividad. '
+     'De los 32 congresos locales ya están integradas las iniciativas presentadas y dictaminadas (INEGI, censo de poderes legislativos estatales 2025, tabla 20); faltan sus sesiones y su asistencia, que el mismo censo levanta. '
+     'De las dos Cámaras federales falta todo (iniciativas presentadas, dictaminadas y aprobadas, sesiones y asistencia): cada Cámara lo publica en su Gaceta Parlamentaria y '
+     'Gobernación lo reúne en el Sistema de Información Legislativa. Los documentos existen y la plataforma aún no los integra.',
+     'Auditavisión: falta de la plataforma, que aún no integra el trabajo legislativo',
+     'https://sil.gobernacion.gob.mx/', 'Sistema de Información Legislativa (Gobernación)',
+     [('radar-estado-de-cuenta.html', 'Estado de cuenta administrativo')]),
     ('municipios-sin-cuenta', 'Estados y municipios', 'Cuenta pública 2024 de los municipios que no la entregaron al INEGI',
      'De los 2,479 municipios del catálogo, 83 no reportaron sus finanzas de 2024 a la estadística del INEGI, y las 16 demarcaciones de la Ciudad de México no rinden cuenta municipal. Sin ese reporte no se sabe cuánto ingresaron ni en qué gastaron.',
      'Los ayuntamientos que no reportaron', 'https://www.inegi.org.mx/programas/finanzas/',

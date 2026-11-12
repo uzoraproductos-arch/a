@@ -1207,8 +1207,48 @@
       ['Asuntos concluidos por persona juzgadora', fmt(p.cj), 'derivado', 'Concluidos ÷ personas juzgadoras.']);
     return l;
   }
+  /* La productividad por sector (12-11-2026): salud, justicia ambiental… Cada
+     ente lee lo que su módulo de la Enciclopedia ya cotejó (PROD.sec). */
+  function secDe(ente) { return ente.nivel === 'federal' && PROD.sec && PROD.sec[ente.id] || null; }
+  function secHtml(ente, x) {
+    var ver = PROD.ver[ente.id], h = '<h3 class="ie-h3">Qué hizo con su dinero</h3>';
+    if (x.filas.length) {
+      h += '<p class="ie-nota-p">' + (x.intro || '') + ' El dinero va siempre junto a lo que se hizo con él.</p>' +
+        celdas(x.filas.map(function (r) {
+          return [esc(r[0]) + ' ' + chip(r[2]), '<b>' + esc(r[1]) + '</b>' + (r[3] ? '<br><small>' + esc(r[3]) + '</small>' : '')];
+        })) +
+        '<p class="ie-nota-p">Fuente: <a href="' + esc(x.f[1]) + '" target="_blank" rel="noopener noreferrer">' + esc(x.f[0]) + ' ↗</a>. ' +
+        (x.nota ? esc(x.nota) + ' ' : '') + 'Estas cifras no califican a nadie: dicen lo que se hizo y con cuánto.</p>';
+    }
+    h += '<div class="ie-nota"><b>' + (x.filas.length ? 'Lo que aún falta de su productividad.' : 'Su auditoría de productividad está pendiente.') + '</b> ' +
+      chip('pendiente', x.pid) + ' ' + esc(x.falta) +
+      (x.filas.length ? '' : ' Dónde debería estar: <a href="' + esc(x.f[1]) + '" target="_blank" rel="noopener noreferrer">' + esc(x.f[0]) + ' ↗</a>.') +
+      (ver ? ' <span class="ie-chipas"><a class="ie-chipa" href="' + esc(ver[0]) + '">📚 Lo que ya hay de su sector: ' + esc(ver[1]) + '</a></span>' : '') + '</div>';
+    return h;
+  }
+  /* El Congreso del estado: sus iniciativas (INEGI, CNPLE 2025, tabla 20). */
+  function congDe(ente) { return ente.nivel === 'estatal' && PROD.cong && PROD.cong[ente.id] || null; }
+  function congFilas(c) {
+    return [['Iniciativas que se presentaron en su Congreso', fmt(c.ini), 'oficial', 'En los periodos que reportó del primer año de su legislatura actual.'],
+      ['Dictaminadas en el mismo periodo', fmt(c.idic), 'derivado', 'Aprobadas + en dictamen + desechadas: así las cuenta el INEGI. La que se dictaminó después no cuenta aquí.'],
+      ['De cada 100 presentadas, se dictaminaron', c.idp.toFixed(1), 'oficial'],
+      ['Aprobadas o procedentes', fmt(c.iapr), 'oficial'],
+      ['Seguían en estudio al terminar el periodo', fmt(c.iest), 'oficial']];
+  }
+  function congHtml(ente) {
+    var c = congDe(ente);
+    if (!c) return '';
+    return '<p class="ie-nota-p">De su <b>Congreso</b>, lo que trabajó en el primer año de su legislatura.</p>' +
+      celdas(congFilas(c).map(function (r) {
+        return [r[0] + ' ' + chip(r[2]), '<b>' + r[1] + '</b>' + (r[3] ? '<br><small>' + r[3] + '</small>' : '')];
+      })) +
+      '<p class="ie-nota-p">Fuente: <a href="' + esc(PROD.fc[1]) + '" target="_blank" rel="noopener noreferrer">' + esc(PROD.fc[0]) + ' ↗</a>. ' +
+      'Más iniciativas no es mejor trabajo, y los periodos de cada congreso no son los mismos.</p>';
+  }
+  function conProd(ente) { var x = secDe(ente); return !!prodDe(ente) || !!x && x.filas.length > 0; }
   function prodHtml(ente) {
     var p = prodDe(ente), ver = ente.nivel === 'federal' && PROD.ver[ente.id];
+    if (secDe(ente)) return secHtml(ente, secDe(ente));
     var h = '<h3 class="ie-h3">Qué hizo con su dinero</h3>';
     if (p) {
       h += '<p class="ie-nota-p">' + (ente.nivel === 'estatal' ? 'Del gobierno de ' + esc(ente.nombre) + ', hoy la plataforma tiene cotejada la productividad de su <b>Poder Judicial</b>.' :
@@ -1219,24 +1259,25 @@
         '<p class="ie-nota-p">Fuente: <a href="' + esc(PROD.f[1]) + '" target="_blank" rel="noopener noreferrer">' + esc(PROD.f[0]) + (p.donde ? ', ' + esc(p.donde) : '') + ' ↗</a>. ' +
         'Estas cifras no califican a nadie: comparan lo que entró con lo que salió.</p>';
     }
+    h += congHtml(ente);
     h += '<div class="ie-nota"><b>' + (p ? 'Lo que aún falta de su productividad.' : 'Su auditoría de productividad está pendiente.') + '</b> ' + chip('pendiente', PROD.pend) + ' ' +
       (ente.nivel === 'federal'
         ? (p ? 'Sus tiempos de resolución y sus metas no están integrados.' : 'Hacienda publica los indicadores de desempeño de los programas federales y la ASF sus auditorías de desempeño: el documento existe y la plataforma aún no lo integra a esta ficha.')
         : ente.nivel === 'estatal'
-          ? 'Los resultados del Ejecutivo y del Congreso del estado no están integrados: la plataforma aún no localiza un documento oficial que los reúna.'
+          ? 'Los resultados del Ejecutivo del estado y las sesiones de su Congreso no están integrados: la plataforma aún no localiza un documento oficial que reúna los del Ejecutivo.'
           : 'La plataforma aún no localiza un documento oficial que reúna los resultados de cada municipio. Mientras no lo haya, no se rellena.') +
       (ver ? ' <span class="ie-chipas"><a class="ie-chipa" href="' + esc(ver[0]) + '">📚 Lo que ya hay de su sector: ' + esc(ver[1]) + '</a></span>' : '') + '</div>';
     return h;
   }
   function auditorias(ente, fin, nPreg) {
-    var p = prodDe(ente);
+    var p = conProd(ente), x = secDe(ente);
     function b(k, ico, t, sub, on) {
       return '<button type="button" role="tab" class="ie-aud-b' + (on ? ' on' : '') + '" id="ieAudB-' + k + '" data-aud-ir="' + k + '" aria-selected="' + (on ? 'true' : 'false') +
         '" aria-controls="ieAud-' + k + '"><span class="ie-aud-i" aria-hidden="true">' + ico + '</span><span><b>' + t + '</b><small>' + sub + '</small></span></button>';
     }
     return '<div class="ie-aud" role="tablist" aria-label="Las dos auditorías de la ficha">' +
       b('fin', '💰', 'Auditoría de finanzas públicas', 'De dónde vino su dinero y si rindió cuentas · ' + nPreg + ' preguntas', true) +
-      b('prod', '📈', 'Auditoría de productividad', 'Qué hizo con ese dinero · ' + (p ? 'con datos de 2024' : 'pendiente'), false) + '</div>' +
+      b('prod', '📈', 'Auditoría de productividad', 'Qué hizo con ese dinero · ' + (p ? 'con datos de ' + (x ? x.anio : 2024) : 'pendiente'), false) + '</div>' +
       '<div class="ie-aud-p" id="ieAud-fin" role="tabpanel" aria-labelledby="ieAudB-fin" data-aud="fin"><p class="ie-aud-t">💰 Auditoría de finanzas públicas</p>' + fin + '</div>' +
       '<div class="ie-aud-p ie-aud-off" id="ieAud-prod" role="tabpanel" aria-labelledby="ieAudB-prod" data-aud="prod"><p class="ie-aud-t">📈 Auditoría de productividad</p>' + prodHtml(ente) + '</div>';
   }
@@ -1367,6 +1408,16 @@
     if (pr) {
       t += '\nAUDITORÍA DE PRODUCTIVIDAD (2024)\n';
       prodFilas(ente, pr).forEach(function (r) { t += '• ' + r[0] + ': ' + r[1] + (r[3] ? ' (' + r[3] + ')' : '') + '\n'; });
+    }
+    var cgx = congDe(ente);
+    if (cgx) {
+      t += '\nPRODUCTIVIDAD DE SU CONGRESO (primer año de su legislatura)\n';
+      congFilas(cgx).forEach(function (r) { t += '• ' + r[0] + ': ' + r[1] + '\n'; });
+    }
+    var sx = secDe(ente);
+    if (sx && sx.filas.length) {
+      t += '\nAUDITORÍA DE PRODUCTIVIDAD (' + sx.anio + (sx.organo ? ', ' + sx.organo : '') + ')\n';
+      sx.filas.forEach(function (r) { t += '• ' + r[0] + ': ' + r[1] + (r[3] ? ' (' + r[3] + ')' : '') + '\n'; });
     }
     var ej = ejes(ente), i = indice(ej);
     if (i !== null) {

@@ -1743,6 +1743,22 @@
    ]
   },
   {
+   "q": "¿Cuántas iniciativas se presentaron en el Congreso de Jalisco?",
+   "ir": "planisferio-jal-legislativa.html",
+   "dice": [
+    "702 iniciativas",
+    "Más iniciativas no es mejor trabajo"
+   ]
+  },
+  {
+   "q": "¿Qué congreso local presentó más iniciativas?",
+   "ir": "planisferio.html?d=legislativa",
+   "dice": [
+    "Puebla",
+    "818"
+   ]
+  },
+  {
    "q": "¿Cuántos diputados tiene el congreso de Jalisco?",
    "ir": "datos-legislativo-estados.html#leg-locales",
    "dice": [
