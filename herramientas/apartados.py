@@ -2081,7 +2081,7 @@ FORMAS = [
      '#solicitud', 'Pide una cotización'),
     ('🏢', 'Para tu institución', 'Talleres y licencias',
      'Acompañamiento dedicado: talleres con casos reales y licencia de las herramientas para tu equipo.',
-     'servicios.html?servicio=capacitacion#solicitud', 'Agenda un taller'),
+     'servicios-cotiza.html?servicio=capacitacion#solicitud', 'Agenda un taller'),
 ]
 
 # La línea que no se cruza (docs/PLAN-IMPLEMENTACION.md §2).
@@ -2160,7 +2160,7 @@ EMPIEZA = [
     ('🔓', 'Gratis', 'Revisa un proveedor', 'Busca su RFC en la lista 69-B, ahora mismo.', 'herramienta-inspector-efos.html', 'Empezar'),
     ('💬', 'Gratis', 'Pregúntale al Auditor', 'Escribe tu duda como se la dirías a alguien.', 'herramienta-inspector-pregunta.html?modo=inspector', 'Abrir el chat'),
     ('📝', 'Se cotiza', 'Pide una cotización', 'Cuéntanos el caso; recibes costo y plazo por escrito.', '#solicitud', 'Ir al formulario'),
-    ('🎓', 'Se cotiza', 'Agenda un taller', 'Para tu despacho, tu órgano de control o tu salón.', 'servicios.html?servicio=capacitacion#solicitud', 'Elegir taller'),
+    ('🎓', 'Se cotiza', 'Agenda un taller', 'Para tu despacho, tu órgano de control o tu salón.', 'servicios-cotiza.html?servicio=capacitacion#solicitud', 'Elegir taller'),
 ]
 
 # La arquitectura de la página de WiseCricket (pedido del autor, 07-11-2026:
@@ -2295,6 +2295,42 @@ INDEPENDENCIA = [
 
 
 SV_PORQUE = 'servicios-por-que.html'
+# Las tarjetas de Servicios (pedido del autor, 11-11-2026: «cada una tenga su
+# bloque tarjeta… nos remita la información dentro de una nueva página y se
+# quiten los desgloses»). servicios.html queda como tablero y cada tarjeta es
+# su página: (sección, archivo, ícono, nombre corto, título, frase).
+SV_COTIZA = 'servicios-cotiza.html'
+SV_CATALOGO = 'servicios-catalogo.html'
+SV_PAGINAS = [
+    ('riesgo', 'servicios-fraude-y-lavado.html', '🛡️', 'Fraude y lavado', 'Fraude y lavado de dinero: revísalo antes de pagar',
+     'El fraude es frecuente y casi nunca se denuncia: los riesgos, sus cifras y lo que hacemos con cada uno.'),
+    ('oferta', SV_CATALOGO, '🧰', 'Servicios', 'Elige lo que necesitas', 'Todos los servicios, en cuatro familias: qué es cada uno, qué recibes y cómo se cobra.'),
+    ('sectores', 'servicios-tu-perfil.html', '👤', 'Tu perfil', '¿A qué te dedicas?',
+     'Lo que te pide tu trabajo, el servicio que lo atiende y con qué empezar hoy, gratis.'),
+    ('modulos', 'servicios-empieza-gratis.html', '🔓', 'Empieza gratis', 'Empieza gratis, hoy',
+     'Las herramientas que ya puedes usar sin pagar y sin subir tus archivos.'),
+    ('cobro', 'servicios-como-se-cobra.html', '💳', 'Cómo se cobra', 'Cómo se cobra cada servicio',
+     'Sabes cómo se cobra antes de escribirnos, y dónde está la línea entre lo gratis y lo de pago.'),
+    ('calendario', 'servicios-calendario.html', '📅', 'Calendario', 'Qué abre y cuándo', 'La prevención sirve todo el año; la temporada electoral tiene fecha.'),
+    ('preguntas', 'servicios-preguntas.html', '❓', 'Preguntas', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.'),
+    ('solicitud', SV_COTIZA, '📝', 'Cotiza', 'Solicita una cotización',
+     'Cuéntanos qué quieres saber: ves tu solicitud antes de mandarla. Con cómo trabajamos y la política de independencia.'),
+]
+# Dónde vive cada ancla que antes estaba en servicios.html: las ligas viejas
+# (servicios.html#solicitud, #sv-<id>, #fam-<id>…) se mandan solas a su página.
+SV_ANCLAS = dict([(p[0], p[1]) for p in SV_PAGINAS] + [
+    ('precio', 'servicios-como-se-cobra.html'), ('planes', 'servicios-como-se-cobra.html'),
+    ('proceso', SV_COTIZA), ('independencia', SV_COTIZA), ('sv-*', SV_CATALOGO), ('fam-*', SV_CATALOGO)])
+
+
+def sv_liga(html_, archivo):
+    """Las ligas internas (#ancla) de un bloque de Servicios, a la página donde
+    vive su ancla; las que viven en `archivo` se quedan como están."""
+    def cambia(m):
+        h = m.group(1)
+        dest = SV_ANCLAS.get(h) or SV_ANCLAS.get(h.split('-')[0] + '-*') or 'servicios.html'
+        return m.group(0) if dest == archivo else 'href="%s#%s"' % (dest, h)
+    return re.sub(r'href="#([\w-]+)"', cambia, html_)
 
 
 def servicios():
@@ -2404,7 +2440,7 @@ def servicios():
             '            <a class="sz-btn%s" href="%s">%s</a>\n          </article>'
             % (p['nombre'], precio(p), p['para'], ''.join('<li>%s</li>' % x for x in p['agrega']),
                ' sz-btn-of' if p['id'] == 'profesional' else '',
-               'enciclopedia-auditavision.html' if p['id'] == 'gratis' else 'servicios.html?plan=%s#solicitud' % p['id'],
+               'enciclopedia-auditavision.html' if p['id'] == 'gratis' else 'servicios-cotiza.html?plan=%s#solicitud' % p['id'],
                'Empieza gratis' if p['id'] == 'gratis' else 'Lo quiero')
             for p in monetizacion.PLANES)
 
@@ -2430,7 +2466,7 @@ def servicios():
         '            <p class="sv-que"><b>Tu reto:</b> %s</p>\n'
         '            <p class="sv-que"><b>Te sirve:</b> %s.</p>\n'
         '            <p class="sv-gratis"><b>Empieza gratis:</b> %s</p>\n'
-        '            <a class="sz-btn sv-perfil-btn" href="servicios.html?servicio=%s#solicitud">Cotiza para tu caso</a>\n'
+        '            <a class="sz-btn sv-perfil-btn" href="servicios-cotiza.html?servicio=%s#solicitud">Cotiza para tu caso</a>\n'
         '          </article>' % (n, ico, sec, quien, reto, ', '.join(ir(i) for i in ids),
                                   ' · '.join('<a href="%s">%s</a>' % l for l in libres), ids[0])
         for n, (ico, sec, quien, reto, ids, libres) in enumerate(PERFILES))
@@ -2445,9 +2481,8 @@ def servicios():
             '                <div class="sv-serv-cab"><span class="sv-ico" aria-hidden="true">%s</span><h3 class="sv-tit">%s</h3></div>\n'
             '                <p class="sv-que">%s</p>\n'
             '                <p class="sv-cobro"><span aria-hidden="true">💳</span> %s</p>\n'
-            '                <details class="sv-mas"><summary>Qué recibes y para quién</summary>'
-            '<dl class="sv-dl"><dt>Recibes</dt><dd>%s</dd><dt>Para quién</dt><dd>%s</dd></dl></details>\n'
-            '                <a class="sv-pide" href="servicios.html?servicio=%s#solicitud">Solicitar este servicio ➔</a>\n'
+            '                <dl class="sv-dl"><dt>Recibes</dt><dd>%s</dd><dt>Para quién</dt><dd>%s</dd></dl>\n'
+            '                <a class="sv-pide" href="servicios-cotiza.html?servicio=%s#solicitud">Solicitar este servicio ➔</a>\n'
             '              </article>' % (s[0], s[1], s[2], s[3], COBRO[s[0]], s[4], s[5], s[0])
             for s in SERVICIOS if s[6] == lid))
         for lid, ico, tit, tx in LINEAS)
@@ -2650,54 +2685,102 @@ def servicios():
         % (esc_attr(liga), et, ico, tit, tx, acc) for et, ico, tit, tx, liga, acc in MODULOS if acc == 'Gratis')
     mas = ('<p class="sv-nota">¿Quieres ver cómo funciona, por qué revisar antes de pagar, dónde encajamos y cómo nos sostenemos? '
            'Está en <a href="%s">Por qué Auditavisión</a>.</p>' % SV_PORQUE)
-    # A la otra página van las ligas que aquí eran internas.
-    fuera = lambda h: re.sub(r'href="#', 'href="servicios.html#', h)
+    # A las otras páginas van las ligas que aquí eran internas: cada ancla, a
+    # la página donde vive (SV_ANCLAS).
+    fuera = lambda h: sv_liga(h, SV_PORQUE)
     comun = {'menu': 'Servicios de investigación', 'menu_archivo': 'servicios.html', 'icono': '🔎', 'estilos': ['servicios.css']}
+    aviso = ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> Los Servicios se abren con el lanzamiento de la '
+             'plataforma. Ya puedes armar tu solicitud y guardarla; el envío se activa entonces.</p>')
+    numero = lambda n: ['Cero', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve', 'Diez', 'Once', 'Doce'][n]
+    politica_html = ('<div class="sv-politica">\n          <ol class="sv-pol">\n%s\n          </ol>\n'
+                     '          <p class="sv-version">Versión 4 · 11 de noviembre de 2026.</p>\n        </div>' % politica)
+    # Lo que va en cada página: sus secciones (id, título, texto, bloque, pre).
+    contenido = {
+        'riesgo': [('riesgo', 'Fraude y lavado de dinero: revísalo antes de pagar',
+                    'El fraude es frecuente y casi nunca se denuncia. Por eso la revisión va antes del pago, no después.', riesgo, 'Por qué revisar')],
+        'oferta': [('oferta', 'Elige lo que necesitas', '%s servicios en cuatro familias. Toca una familia para ver los suyos.' % numero(len(SERVICIOS)),
+                    oferta, 'Los servicios')],
+        'sectores': [('sectores', '¿A qué te dedicas?',
+                      'Elige tu perfil: lo que te pide tu trabajo, el servicio que lo atiende y con qué puedes empezar hoy, gratis.',
+                      '<div class="sv-tabs" data-sv-tabs>\n          %s\n          <div class="sv-perfiles">\n%s\n          </div>\n        </div>' % (
+                          pestanas('Perfiles', [('p%d' % n, '<span aria-hidden="true">%s</span> %s' % (p[0], c)) for n, (p, c) in enumerate(zip(PERFILES, PERFILES_CORTO))]),
+                          perfiles), 'Tu perfil')],
+        'modulos': [('modulos', 'Empieza gratis, hoy', 'Las herramientas que ya puedes usar sin pagar y sin subir tus archivos.', gratis + '\n        ' + mas,
+                     'La plataforma')],
+        'cobro': [('cobro', 'Cómo se cobra cada servicio', 'Sabes cómo se cobra antes de escribirnos. Solo la investigación a la medida se cotiza.',
+                   cobro, 'Precios')] + ([('planes', 'Elige tu plan', 'Lo público es gratis siempre. Pagas por el aviso, la memoria y el trabajo.', planes,
+                                           'Planes')] if planes else []),
+        'calendario': [('calendario', 'Qué abre y cuándo', 'La prevención sirve todo el año; la temporada electoral tiene fecha.', calendario, 'Calendario')],
+        'preguntas': [('preguntas', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.',
+                       '<div class="sv-faqs">\n%s\n        </div>' % preguntas, None)],
+        'solicitud': [('solicitud', 'Solicita una cotización', 'Cuéntanos qué quieres saber. Te mostramos tu solicitud antes de mandarla.', formulario, None),
+                      ('proceso', 'Cómo trabajamos por encargo', 'Siete pasos. Nada se cobra antes de que aceptes la cotización.',
+                       '<ol class="sv-pasos">\n%s\n        </ol>' % pasos, 'El encargo'),
+                      ('independencia', 'Política de independencia',
+                       '%d compromisos que valen para cada cliente y cada donante, sin excepción.' % len(INDEPENDENCIA), politica_html, None)],
+    }
+    if set(contenido) != {p[0] for p in SV_PAGINAS}:
+        raise SystemExit('Servicios: cada tarjeta de SV_PAGINAS necesita su contenido, y cada contenido, su tarjeta')
+    partes = [(p[0], p[1], p[2], p[3]) for p in SV_PAGINAS]
+    subpaginas = []
+    for sid, archivo, ico, corto, tit, frase in SV_PAGINAS:
+        secs = contenido[sid]
+        subpaginas.append(dict(comun, **{
+            'archivo': archivo, 'menu': corto if corto != 'Servicios' else 'Catálogo', 'titulo': tit, 'icono': ico,
+            'padre': ('servicios.html', 'Servicios'),
+            'lema': 'Servicios · ' + (corto if corto != 'Servicios' else 'catálogo'), 'entrada': frase,
+            'scripts': ['servicios.js'],
+            'antes': aviso if sid == 'solicitud' else '',
+            'saltos': {s[0]: s[1] for s in secs} if len(secs) > 1 else None,
+            'secciones': [bloque_sec(i, t, tx, sv_liga(b, archivo), sin_cab=(len(secs) == 1), **({'pre': pre} if pre else {}))
+                          for i, t, tx, b, pre in secs],
+            'pie_extra': partes_nav('Servicios', 'servicios.html', '🔎', partes, archivo),
+        }))
+
+    # El tablero (pedido del autor, 11-11-2026): la portada, una tarjeta por
+    # página y los servicios de un vistazo. Ya no se despliega nada aquí.
+    cuenta = {'riesgo': '%d riesgos' % len(RIESGOS), 'oferta': '%d servicios' % len(SERVICIOS), 'sectores': '%d perfiles' % len(PERFILES),
+              'modulos': '%d herramientas' % sum(1 for m in MODULOS if m[5] == 'Gratis'), 'cobro': '%d formas de cobro' % len(SERVICIOS),
+              'calendario': '%d etapas' % len(CALENDARIO), 'preguntas': '%d preguntas' % len(PREGUNTAS), 'solicitud': 'Sin costo'}
+    tablero = '<nav class="sv-hub" aria-label="Las páginas de Servicios">\n%s\n        </nav>' % '\n'.join(
+        '          <a class="sv-hub-t sv-hub-%s" href="%s">\n'
+        '            <span class="sv-hub-cab"><span class="sv-hub-ico" aria-hidden="true">%s</span><span class="sv-hub-n">%s</span></span>\n'
+        '            <b class="sv-hub-tit">%s</b>\n'
+        '            <span class="sv-hub-tx">%s</span>\n'
+        '            <span class="sv-pide">Abrir ➔</span>\n'
+        '          </a>' % (sid, archivo, ico, cuenta[sid], corto, frase) for sid, archivo, ico, corto, _t, frase in SV_PAGINAS)
+    vistazo = '<div class="sv-vista">\n%s\n        </div>\n        %s' % ('\n'.join(
+        '          <div class="sv-vista-fam">\n'
+        '            <p class="sv-vista-tit"><a href="%s#fam-%s"><span aria-hidden="true">%s</span> %s</a></p>\n'
+        '            <ul>\n%s\n            </ul>\n'
+        '          </div>' % (SV_CATALOGO, lid, lico, ltit, '\n'.join(
+            '              <li><a href="%s#sv-%s"><span class="sv-ico" aria-hidden="true">%s</span><span><b>%s</b><small>%s</small></span></a></li>'
+            % (SV_CATALOGO, s[0], s[1], s[2], COBRO[s[0]]) for s in SERVICIOS if s[6] == lid))
+        for lid, lico, ltit, _x in LINEAS), sv_liga(mas, 'servicios.html'))
+    # Las ligas viejas a una sección que se mudó, y las que traen el tema o el
+    # servicio (?tema=, ?servicio=, ?plan=), se mandan a su página.
+    redir = ('<script>(function () { var m = %s, h = decodeURIComponent(location.hash.slice(1)), q = location.search, '
+             'd = m[h] || (/^(sv|fam)-/.test(h) ? m[h.split(\'-\')[0] + \'-*\'] : \'\'); '
+             'if (d) { location.replace(d + q + \'#\' + h); return; } '
+             'if (/[?&](tema|servicio|plan)=/.test(q)) location.replace(m.solicitud + q + \'#solicitud\'); })();</script>' % json.dumps(SV_ANCLAS))
     venta = dict(comun, **{
         # Quinta pestaña del menú desde el 02-11-2026 (pedido del autor); del
         # 11-10-2026 a esa fecha fue un módulo del Modo Inspector. Reestructurada
-        # el 07-11-2026 sobre el lienzo de nueve bloques y, el 11-11-2026 (pedido
-        # del autor: «haz la reestructura de la pestaña»), en cuatro familias y
-        # once secciones: lo demás vive en SV_PORQUE, sin borrar nada.
+        # el 07-11-2026 sobre el lienzo de nueve bloques; el 11-11-2026, en
+        # cuatro familias y, el mismo día, en tablero: cada sección es su página
+        # (SV_PAGINAS) y lo demás vive en SV_PORQUE, sin borrar nada.
         'archivo': 'servicios.html', 'titulo': 'Servicios',
         'lema': 'Prevención de fraude y de lavado, temporada electoral, formación e investigación',
         'entrada': ('La consulta es libre y lo seguirá siendo. Cuando quieras ir más a fondo, lo hacemos por encargo, con la misma regla. '
                     'Los Servicios y las <a href="donaciones.html">donaciones</a> sostienen el trabajo; ninguno compra lo que publicamos.'),
-        'scripts': ['servicios.js'],
-        'saltos': {'riesgo': 'Fraude y lavado', 'oferta': 'Servicios', 'sectores': 'Tu perfil', 'modulos': 'Empieza gratis', 'cobro': 'Cómo se cobra',
-                   'calendario': 'Calendario', 'preguntas': 'Preguntas', 'solicitud': 'Cotiza'},
-        'antes': ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> Los Servicios se abren con el lanzamiento de la '
-                  'plataforma. Ya puedes armar tu solicitud y guardarla; el envío se activa entonces.</p>'),
+        'sin_saltos': True, 'redirige': redir,
+        'antes': aviso,
         'secciones': [
-            bloque_sec('propuesta', 'Lo que te ofrecemos', '', portada, sin_cab=True),
-            bloque_sec('riesgo', 'Fraude y lavado de dinero: revísalo antes de pagar',
-                       'El fraude es frecuente y casi nunca se denuncia. Por eso la revisión va antes del pago, no después.', riesgo, pre='Por qué revisar'),
-            bloque_sec('oferta', 'Elige lo que necesitas',
-                       '%s servicios en cuatro familias. Toca una familia para ver los suyos.'
-                       % ['Cero', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve', 'Diez', 'Once', 'Doce'][len(SERVICIOS)],
-                       oferta, pre='Los servicios'),
-        ] + ([bloque_sec('planes', 'Elige tu plan', 'Lo público es gratis siempre. Pagas por el aviso, la memoria y el trabajo.', planes,
-                         pre='Planes')] if planes else []) + [
-            bloque_sec('sectores', '¿A qué te dedicas?',
-                       'Elige tu perfil: lo que te pide tu trabajo, el servicio que lo atiende y con qué puedes empezar hoy, gratis.',
-                       '<div class="sv-tabs" data-sv-tabs>\n          %s\n          <div class="sv-perfiles">\n%s\n          </div>\n        </div>' % (
-                           pestanas('Perfiles', [('p%d' % n, '<span aria-hidden="true">%s</span> %s' % (p[0], c)) for n, (p, c) in enumerate(zip(PERFILES, PERFILES_CORTO))]),
-                           perfiles), pre='Tu perfil'),
-            bloque_sec('modulos', 'Empieza gratis, hoy', 'Las herramientas que ya puedes usar sin pagar y sin subir tus archivos.', gratis + '\n        ' + mas,
-                       pre='La plataforma'),
-            bloque_sec('cobro', 'Cómo se cobra cada servicio', 'Sabes cómo se cobra antes de escribirnos. Solo la investigación a la medida se cotiza.',
-                       cobro, pre='Precios'),
-            bloque_sec('calendario', 'Qué abre y cuándo', 'La prevención sirve todo el año; la temporada electoral tiene fecha.', calendario, pre='Calendario'),
-            bloque_sec('proceso', 'Cómo trabajamos por encargo', 'Siete pasos. Nada se cobra antes de que aceptes la cotización.',
-                       '<ol class="sv-pasos">\n%s\n        </ol>' % pasos, pre='El encargo'),
-            bloque_sec('independencia', 'Política de independencia',
-                       '%d compromisos que valen para cada cliente y cada donante, sin excepción.' % len(INDEPENDENCIA),
-                       '<div class="sv-politica">\n          <details class="sv-pol-det"><summary>Lee los %d compromisos</summary>\n'
-                       '          <ol class="sv-pol">\n%s\n          </ol>\n          </details>\n'
-                       '          <p class="sv-version">Versión 4 · 11 de noviembre de 2026.</p>\n        </div>' % (len(INDEPENDENCIA), politica)),
-            bloque_sec('preguntas', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.',
-                       '<div class="sv-faqs">\n%s\n        </div>' % preguntas),
-            bloque_sec('solicitud', 'Solicita una cotización', 'Cuéntanos qué quieres saber. Te mostramos tu solicitud antes de mandarla.', formulario),
+            bloque_sec('propuesta', 'Lo que te ofrecemos', '', sv_liga(portada, 'servicios.html'), sin_cab=True),
+            bloque_sec('explora', 'Todo Servicios, en tarjetas', 'Toca una tarjeta: cada una abre su página.', tablero, pre='Explora'),
+            bloque_sec('vistazo', 'Los servicios, de un vistazo',
+                       '%s servicios en cuatro familias, con su forma de cobro. Toca uno para ver qué recibes.' % numero(len(SERVICIOS)),
+                       vistazo, pre='La oferta'),
         ],
         'pie_extra': herr_otras('herramienta-inspector.html'),
     })
@@ -2740,7 +2823,7 @@ def servicios():
              'tarjetas': [('🐷', 'Donaciones', 'Ayuda a sostener la plataforma, a la vista de todos.', 'donaciones.html', None, None)]},
         ],
     })
-    return [venta, porque_pag]
+    return [venta] + subpaginas + [porque_pag]
 
 
 # Comunidad, primera version (propuesta de Astra, punto 11; entrega 7,
@@ -3389,7 +3472,7 @@ def donaciones():
             autorizadas (<a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf" target="_blank" rel="noopener noreferrer">artículo 151, fracción III ↗</a>).
             Donas como apoyo cívico, sin beneficio fiscal.</div></li>
         </ul>
-        <p class="dn-nota">Estas reglas vienen de la <a href="servicios.html#independencia">política de independencia</a> de la plataforma, que vale igual para cada donante.
+        <p class="dn-nota">Estas reglas vienen de la <a href="servicios-cotiza.html#independencia">política de independencia</a> de la plataforma, que vale igual para cada donante.
           ¿Necesitas una investigación a la medida? Esa es la otra vía para sostener la plataforma: los <a href="servicios.html">Servicios de investigación</a>.</p>'''.format(
         items='\n'.join('          <li><span class="dn-regla-ico" aria-hidden="true">%s</span><div><b>%s</b> %s</div></li>' % (i, t, pol[t])
                         for i, t in reglas_items))
@@ -6023,7 +6106,7 @@ def pagina(a, sello):
             en_pagina = '''      <nav class="apartado-pestanas" role="tablist" aria-label="Pestañas de esta página"%s>
 %s
       </nav>%s''' % (' data-primera="1"' if a.get('primera') else '', '\n'.join(boton(s) for s in a['secciones']), pista)
-    elif len(a['secciones']) > 1:
+    elif len(a['secciones']) > 1 and not a.get('sin_saltos'):
         saltos = '\n'.join('          <a href="#%s">%s%s</a>' % (
             s['id'], ('<span class="apartado-cap-num" aria-hidden="true">%d</span>' % s['num']) if s.get('num') else '',
             a['saltos'][s['id']] if isinstance(a.get('saltos'), dict) else s['titulo'])
@@ -6096,6 +6179,9 @@ def pagina(a, sello):
                     'if (m[h]) { location.replace(m[h] + (/[?#]/.test(m[h]) ? \'\' : location.search)); return; } '
                     'for (var k in m) if (k.slice(-1) === \'*\' && h && h.indexOf(k.slice(0, -1)) === 0) { location.replace(m[k] + \'#\' + h); return; } '
                     '})();</script>' % json.dumps(a['hash_a_pagina']))
+    if a.get('redirige'):
+        # Un guion propio para mandar ligas viejas (Servicios, 11-11-2026).
+        redirige += '\n  ' + a['redirige']
     if a.get('abrir_a_pagina'):
         # ?abrir=eb-bloque (Numeros, 11-10-2026): la tarjeta de ese bloque ya
         # vive en otra pagina; se manda alla con el mismo ?abrir.

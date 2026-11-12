@@ -1376,7 +1376,7 @@
 
     var a = APP[id];
 
-    var url = a.url + (id === 'servicios.html' && tema ? '?tema=' + encodeURIComponent(tema.slice(0, 160)) : '');
+    var url = id === 'servicios.html' && tema ? 'servicios-cotiza.html?tema=' + encodeURIComponent(tema.slice(0, 160)) + '#solicitud' : a.url;
     return respApp(id, url, '<p><span aria-hidden="true">' + a.ico + '</span> <b>' + esc(a.n) + '.</b> ' + esc(a.desc.replace(/\s*Tiene su propia página\./, '')) + '</p>' +
       '<p>' + (tema ? 'Te abro el formulario aquí abajo, ya con el tema: «' + esc(tema.slice(0, 120)) + '». Revísalo y completa lo demás.' :
         (EJ_APP[id] ? esc(EJ_APP[id]) + ' ' : '') + 'O úsala aquí abajo, sin salir del chat.') + '</p>');

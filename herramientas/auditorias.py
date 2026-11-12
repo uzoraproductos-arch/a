@@ -484,7 +484,7 @@ def servicio(titulo):
     return ('      <aside class="au-servicio" aria-label="Servicio de investigación">\n'
             '        <p><b>🔎 ¿Necesitas ir más a fondo en este caso?</b> Podemos hacer por encargo una investigación documental '
             'con la misma regla de esta página: cada cifra con su documento. La consulta sigue siendo gratuita.</p>\n'
-            '        <a class="camino-ir" href="servicios.html?tema=%s#solicitud">Solicita una investigación ➔</a>\n'
+            '        <a class="camino-ir" href="servicios-cotiza.html?tema=%s#solicitud">Solicita una investigación ➔</a>\n'
             '      </aside>') % quote(tema)
 
 # Desde el 23-10-2026 (pedido del autor) cada imagen de la portada abre el
