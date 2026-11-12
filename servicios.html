@@ -20,14 +20,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261111h">
-  <script src="assets/auditor/js/iconos.js?v=20261111h"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261111h"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261111h" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261111h">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261111h">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261111h">
-  <link rel="stylesheet" href="assets/auditor/css/servicios.css?v=20261111h">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261112a">
+  <script src="assets/auditor/js/iconos.js?v=20261112a"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261112a"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261112a" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261112a">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261112a">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261112a">
+  <link rel="stylesheet" href="assets/auditor/css/servicios.css?v=20261112a">
+  <script>(function () { var m = {"riesgo": "servicios-fraude-y-lavado.html", "oferta": "servicios-catalogo.html", "sectores": "servicios-tu-perfil.html", "modulos": "servicios-empieza-gratis.html", "cobro": "servicios-como-se-cobra.html", "calendario": "servicios-calendario.html", "preguntas": "servicios-preguntas.html", "solicitud": "servicios-cotiza.html", "precio": "servicios-como-se-cobra.html", "planes": "servicios-como-se-cobra.html", "proceso": "servicios-cotiza.html", "independencia": "servicios-cotiza.html", "sv-*": "servicios-catalogo.html", "fam-*": "servicios-catalogo.html"}, h = decodeURIComponent(location.hash.slice(1)), q = location.search, d = m[h] || (/^(sv|fam)-/.test(h) ? m[h.split('-')[0] + '-*'] : ''); if (d) { location.replace(d + q + '#' + h); return; } if (/[?&](tema|servicio|plan)=/.test(q)) location.replace(m.solicitud + q + '#solicitud'); })();</script>
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -183,17 +184,7 @@
     <div class="apartado-ancho apartado-cuerpo">
       <p class="sv-aviso"><span class="sz-et">Próximamente</span> Los Servicios se abren con el lanzamiento de la plataforma. Ya puedes armar tu solicitud y guardarla; el envío se activa entonces.</p>
 
-      <nav class="apartado-saltos" aria-label="En esta página">
-          <span class="apartado-saltos-tit">En esta página:</span>
-          <a href="#riesgo">Fraude y lavado</a>
-          <a href="#oferta">Servicios</a>
-          <a href="#sectores">Tu perfil</a>
-          <a href="#modulos">Empieza gratis</a>
-          <a href="#cobro">Cómo se cobra</a>
-          <a href="#calendario">Calendario</a>
-          <a href="#preguntas">Preguntas</a>
-          <a href="#solicitud">Cotiza</a>
-      </nav>
+
       
       <section class="apartado-seccion" id="propuesta" aria-labelledby="propuesta-tit">
         <h2 class="sr-only" id="propuesta-tit">Lo que te ofrecemos</h2>
@@ -203,7 +194,7 @@
             <p class="sv-hero-pre">Prevención de fraude y de lavado · temporada electoral · formación · investigación</p>
             <p class="sv-hero-tit">Lo que dicen los documentos, antes de que decidas.</p>
             <p class="sv-hero-tx">Antes de pagarle a un proveedor, de aceptar a un cliente, de votar o de recibir un gobierno: cruzamos la lista 69-B del SAT, los contratos públicos, la ASF y la ley. Te decimos lo que encontramos, lo que falta y quién lo debe.</p>
-            <div class="sv-hero-acc"><a class="sz-btn sz-btn-of" href="herramienta-inspector-efos.html">Revisa un RFC, gratis</a><a class="sz-btn" href="#solicitud">Pide una cotización</a></div>
+            <div class="sv-hero-acc"><a class="sz-btn sz-btn-of" href="herramienta-inspector-efos.html">Revisa un RFC, gratis</a><a class="sz-btn" href="servicios-cotiza.html#solicitud">Pide una cotización</a></div>
             <ul class="sv-hero-prom">
               <li><span aria-hidden="true">🧾</span><b>Cada cifra con su documento</b></li>
               <li><span aria-hidden="true">⚖️</span><b>Las mismas reglas</b> para todos</li>
@@ -229,449 +220,110 @@
         </div>
         <p class="sv-nota sv-tira-nota">Lo que ya puedes revisar hoy. Son conteos de los archivos de la plataforma al generar esta página (<span class="est-chip est-derivado">auditada</span>); de qué documento sale cada uno está en <a href="servicios-por-que.html#base">Por qué Auditavisión</a>.</p>
         <p class="sv-que-nec">¿Qué necesitas?</p>
-        <div class="sv-puertas"><a class="sv-puerta2" href="#fam-prevencion"><span aria-hidden="true">🛡️</span><b>Prevenir fraude y lavado</b><span class="sv-pide">Ver ➔</span></a><a class="sv-puerta2" href="#fam-electoral"><span aria-hidden="true">🗳️</span><b>Entender a mi municipio o a mi estado</b><span class="sv-pide">Ver ➔</span></a><a class="sv-puerta2" href="#fam-formacion"><span aria-hidden="true">🎓</span><b>Capacitar a mi equipo</b><span class="sv-pide">Ver ➔</span></a><a class="sv-puerta2" href="#fam-investigacion"><span aria-hidden="true">🔎</span><b>Una investigación o una licencia</b><span class="sv-pide">Ver ➔</span></a></div>
+        <div class="sv-puertas"><a class="sv-puerta2" href="servicios-catalogo.html#fam-prevencion"><span aria-hidden="true">🛡️</span><b>Prevenir fraude y lavado</b><span class="sv-pide">Ver ➔</span></a><a class="sv-puerta2" href="servicios-catalogo.html#fam-electoral"><span aria-hidden="true">🗳️</span><b>Entender a mi municipio o a mi estado</b><span class="sv-pide">Ver ➔</span></a><a class="sv-puerta2" href="servicios-catalogo.html#fam-formacion"><span aria-hidden="true">🎓</span><b>Capacitar a mi equipo</b><span class="sv-pide">Ver ➔</span></a><a class="sv-puerta2" href="servicios-catalogo.html#fam-investigacion"><span aria-hidden="true">🔎</span><b>Una investigación o una licencia</b><span class="sv-pide">Ver ➔</span></a></div>
         </div>
       </section>
 
-      <section class="apartado-seccion" id="riesgo" aria-labelledby="riesgo-tit">
+      <section class="apartado-seccion" id="explora" aria-labelledby="explora-tit">
         <div class="apartado-seccion-cab">
-          <p class="apartado-seccion-pre">Por qué revisar</p>
-          <h2 class="apartado-seccion-titulo" id="riesgo-tit"><span class="sr-only"></span>Fraude y lavado de dinero: revísalo antes de pagar</h2>
-          <p class="apartado-seccion-texto">El fraude es frecuente y casi nunca se denuncia. Por eso la revisión va antes del pago, no después.</p>
+          <p class="apartado-seccion-pre">Explora</p>
+          <h2 class="apartado-seccion-titulo" id="explora-tit"><span class="sr-only"></span>Todo Servicios, en tarjetas</h2>
+          <p class="apartado-seccion-texto">Toca una tarjeta: cada una abre su página.</p>
         </div>
         <div class="apartado-bloque">
-        <div class="sv-datos sv-datos3">
-          <article class="sv-dato">
-            <p class="sv-dato-tit">Cuántos fraudes sufren las empresas</p>
-            <p class="sv-dato-cifra">249,715 <span class="est-chip est-oficial">oficial</span></p>
-            <p class="sv-dato-tx">fraudes contra unidades económicas en 2023 (bancarios y al consumo del establecimiento): el 8.5 % de los 2,924,093 delitos contra empresas, 522 por cada 10 mil unidades económicas</p>
-            <p class="sv-dato-fu">Fuente: <a href="https://www.inegi.org.mx/contenidos/programas/enve/2024/datosabiertos/conjunto_de_datos_enve_2024_csv.zip" target="_blank" rel="noopener">INEGI, ENVE 2024, tabulados en datos abiertos (1.8, 1.16 y 3.4) ↗</a></p>
-          </article>
-          <article class="sv-dato">
-            <p class="sv-dato-tit">Cuántos delitos contra empresas no se denuncian</p>
-            <p class="sv-dato-cifra">90.3 % <span class="est-chip est-oficial">oficial</span></p>
-            <p class="sv-dato-tx">de los delitos contra unidades económicas de 2023 no se denunció o no se abrió carpeta de investigación; en el fraude, el 93.9 % (234,570 fraudes)</p>
-            <p class="sv-dato-fu">Fuente: <a href="https://inegi.org.mx/contenidos/saladeprensa/boletines/2024/ENVE/ENVE24.pdf" target="_blank" rel="noopener">INEGI, ENVE 2024, Comunicado de prensa 780/24 (10-12-2024), datos de 2023 · tabulado 3.4 ↗</a></p>
-          </article>
-          <article class="sv-dato">
-            <p class="sv-dato-tit">Empresas fantasma en definitivo (lista 69-B)</p>
-            <p class="sv-dato-cifra">11,270 <span class="est-chip est-derivado">auditada</span></p>
-            <p class="sv-dato-tx">contribuyentes en situación definitiva en la lista 69-B (8,642 empresas y 2,628 personas físicas): sus facturas «no producen ni produjeron efecto fiscal alguno» (CFF art. 69-B, párrafo quinto) <small>(conteo de los renglones con situación «Definitivo» en el listado del SAT)</small></p>
-            <p class="sv-dato-fu">Fuente: <a href="https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336" target="_blank" rel="noopener">SAT, Listado completo de contribuyentes del artículo 69-B del CFF, corte «31 de diciembre de 2025» ↗</a></p>
-          </article>
-        </div>
-        <div class="sv-riesgos">
-          <article class="sv-riesgo">
-            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">🧾</span> Facturas de empresas fantasma</h3>
-            <p class="sv-riesgo-p"><b>El riesgo</b>Si tu proveedor queda definitivo en la lista 69-B del SAT, sus facturas «no producen ni produjeron efecto fiscal alguno» (CFF, art. 69-B): te toca acreditar la operación o corregir.</p>
-            <p class="sv-riesgo-p sv-riesgo-si"><b>Lo que hacemos</b>Buscamos cada RFC en la lista completa, leemos tus facturas por lote y el Vigía compara la lista cada semana.</p>
-            <p class="sv-riesgo-ir"><a href="#sv-facturas">Revisión de facturas por lote</a> · <a href="#sv-seguimiento">Vigía y seguimiento periódico</a> · <a href="herramienta-inspector-efos.html">Busca un RFC, gratis</a></p>
-          </article>
-          <article class="sv-riesgo">
-            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">🧺</span> Lavado de dinero: conoce a tu cliente y a tu proveedor</h3>
-            <p class="sv-riesgo-p"><b>El riesgo</b>Si haces una actividad vulnerable, la ley te obliga a identificar a tu cliente, a su beneficiario controlador si es una empresa, y a guardar los documentos (LFPIORPI, arts. 17 y 18).</p>
-            <p class="sv-riesgo-p sv-riesgo-si"><b>Lo que hacemos</b>Reunimos lo que los documentos públicos dicen de esa empresa: la lista 69-B, sus contratos con el gobierno, el directorio de sancionados y la ASF. Complementa tu expediente; no lo sustituye ni presenta tus avisos.</p>
-            <p class="sv-riesgo-ir"><a href="#sv-diligencia">Revisión de un proveedor</a> · <a href="#sv-expediente">Expediente de investigación</a> · <a href="aprende-auditoria.html#met-lavado">Qué es una actividad vulnerable</a></p>
-          </article>
-          <article class="sv-riesgo">
-            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">🕵️</span> Fraude: las señales, antes de pagar</h3>
-            <p class="sv-riesgo-p"><b>El riesgo</b>Casi ningún delito contra una empresa llega a una fiscalía. Lo que no revisas antes, rara vez se recupera después.</p>
-            <p class="sv-riesgo-p sv-riesgo-si"><b>Lo que hacemos</b>Te damos señales con su regla: compras partidas, facturas que no cuadran con la ley y un estado de resultados que no cierra. Y un taller de control interno con casos mexicanos.</p>
-            <p class="sv-riesgo-ir"><a href="#sv-revision">Revisión documental puntual</a> · <a href="#sv-capacitacion">Talleres y capacitación</a> · <a href="aprende-auditoria.html#met-fraude">El triángulo del fraude</a></p>
-          </article>
-        </div>
-        <p class="sv-limite"><span aria-hidden="true">⚖️</span> No decimos que evitamos el fraude ni que cumplimos por ti. Te damos señales para revisar, cada una con su documento, y te decimos lo que falta. Una señal no es una irregularidad, y una acusación no es una condena.</p>
-        <p class="sv-nota">Todas las cifras, con su documento, están en <a href="aprende-fraude-en-numeros.html">El fraude en números</a>.</p>
+        <nav class="sv-hub" aria-label="Las páginas de Servicios">
+          <a class="sv-hub-t sv-hub-riesgo" href="servicios-fraude-y-lavado.html">
+            <span class="sv-hub-cab"><span class="sv-hub-ico" aria-hidden="true">🛡️</span><span class="sv-hub-n">3 riesgos</span></span>
+            <b class="sv-hub-tit">Fraude y lavado</b>
+            <span class="sv-hub-tx">El fraude es frecuente y casi nunca se denuncia: los riesgos, sus cifras y lo que hacemos con cada uno.</span>
+            <span class="sv-pide">Abrir ➔</span>
+          </a>
+          <a class="sv-hub-t sv-hub-oferta" href="servicios-catalogo.html">
+            <span class="sv-hub-cab"><span class="sv-hub-ico" aria-hidden="true">🧰</span><span class="sv-hub-n">10 servicios</span></span>
+            <b class="sv-hub-tit">Servicios</b>
+            <span class="sv-hub-tx">Todos los servicios, en cuatro familias: qué es cada uno, qué recibes y cómo se cobra.</span>
+            <span class="sv-pide">Abrir ➔</span>
+          </a>
+          <a class="sv-hub-t sv-hub-sectores" href="servicios-tu-perfil.html">
+            <span class="sv-hub-cab"><span class="sv-hub-ico" aria-hidden="true">👤</span><span class="sv-hub-n">8 perfiles</span></span>
+            <b class="sv-hub-tit">Tu perfil</b>
+            <span class="sv-hub-tx">Lo que te pide tu trabajo, el servicio que lo atiende y con qué empezar hoy, gratis.</span>
+            <span class="sv-pide">Abrir ➔</span>
+          </a>
+          <a class="sv-hub-t sv-hub-modulos" href="servicios-empieza-gratis.html">
+            <span class="sv-hub-cab"><span class="sv-hub-ico" aria-hidden="true">🔓</span><span class="sv-hub-n">7 herramientas</span></span>
+            <b class="sv-hub-tit">Empieza gratis</b>
+            <span class="sv-hub-tx">Las herramientas que ya puedes usar sin pagar y sin subir tus archivos.</span>
+            <span class="sv-pide">Abrir ➔</span>
+          </a>
+          <a class="sv-hub-t sv-hub-cobro" href="servicios-como-se-cobra.html">
+            <span class="sv-hub-cab"><span class="sv-hub-ico" aria-hidden="true">💳</span><span class="sv-hub-n">10 formas de cobro</span></span>
+            <b class="sv-hub-tit">Cómo se cobra</b>
+            <span class="sv-hub-tx">Sabes cómo se cobra antes de escribirnos, y dónde está la línea entre lo gratis y lo de pago.</span>
+            <span class="sv-pide">Abrir ➔</span>
+          </a>
+          <a class="sv-hub-t sv-hub-calendario" href="servicios-calendario.html">
+            <span class="sv-hub-cab"><span class="sv-hub-ico" aria-hidden="true">📅</span><span class="sv-hub-n">4 etapas</span></span>
+            <b class="sv-hub-tit">Calendario</b>
+            <span class="sv-hub-tx">La prevención sirve todo el año; la temporada electoral tiene fecha.</span>
+            <span class="sv-pide">Abrir ➔</span>
+          </a>
+          <a class="sv-hub-t sv-hub-preguntas" href="servicios-preguntas.html">
+            <span class="sv-hub-cab"><span class="sv-hub-ico" aria-hidden="true">❓</span><span class="sv-hub-n">7 preguntas</span></span>
+            <b class="sv-hub-tit">Preguntas</b>
+            <span class="sv-hub-tx">Lo que casi todos preguntan antes de contratar.</span>
+            <span class="sv-pide">Abrir ➔</span>
+          </a>
+          <a class="sv-hub-t sv-hub-solicitud" href="servicios-cotiza.html">
+            <span class="sv-hub-cab"><span class="sv-hub-ico" aria-hidden="true">📝</span><span class="sv-hub-n">Sin costo</span></span>
+            <b class="sv-hub-tit">Cotiza</b>
+            <span class="sv-hub-tx">Cuéntanos qué quieres saber: ves tu solicitud antes de mandarla. Con cómo trabajamos y la política de independencia.</span>
+            <span class="sv-pide">Abrir ➔</span>
+          </a>
+        </nav>
         </div>
       </section>
 
-      <section class="apartado-seccion" id="oferta" aria-labelledby="oferta-tit">
+      <section class="apartado-seccion" id="vistazo" aria-labelledby="vistazo-tit">
         <div class="apartado-seccion-cab">
-          <p class="apartado-seccion-pre">Los servicios</p>
-          <h2 class="apartado-seccion-titulo" id="oferta-tit"><span class="sr-only"></span>Elige lo que necesitas</h2>
-          <p class="apartado-seccion-texto">Diez servicios en cuatro familias. Toca una familia para ver los suyos.</p>
+          <p class="apartado-seccion-pre">La oferta</p>
+          <h2 class="apartado-seccion-titulo" id="vistazo-tit"><span class="sr-only"></span>Los servicios, de un vistazo</h2>
+          <p class="apartado-seccion-texto">Diez servicios en cuatro familias, con su forma de cobro. Toca uno para ver qué recibes.</p>
         </div>
         <div class="apartado-bloque">
-        <div class="sv-tabs" data-sv-tabs>
-          <div class="sv-tabs-barra" role="group" aria-label="Familias de servicios"><button type="button" class="sv-tab" data-sv-tab="prevencion" aria-pressed="true"><span aria-hidden="true">🛡️</span> Fraude y lavado</button><button type="button" class="sv-tab" data-sv-tab="electoral" aria-pressed="false"><span aria-hidden="true">🗳️</span> Temporada electoral</button><button type="button" class="sv-tab" data-sv-tab="formacion" aria-pressed="false"><span aria-hidden="true">🎓</span> Formación</button><button type="button" class="sv-tab" data-sv-tab="investigacion" aria-pressed="false"><span aria-hidden="true">🔎</span> Instituciones e investigación</button></div>
-          <div class="sv-lineas">
-          <div class="sv-linea" id="fam-prevencion" data-sv-panel="prevencion">
-            <p class="sv-linea-tit"><span aria-hidden="true">🛡️</span> Prevención de fraude y de lavado de dinero</p>
-            <p class="sv-linea-tx">Antes de pagar, de firmar o de aceptar a un cliente: saber con quién tratas.</p>
-            <div class="sv-servicios">
-              <article class="sv-servicio" id="sv-diligencia">
-                <div class="sv-serv-cab"><span class="sv-ico" aria-hidden="true">🏢</span><h3 class="sv-tit">Revisión de un proveedor</h3></div>
-                <p class="sv-que">Lo que los documentos públicos dicen de una empresa: sus contratos con el gobierno, si está en la lista 69-B del SAT, en el directorio de sancionados o en un informe de la ASF.</p>
-                <p class="sv-cobro"><span aria-hidden="true">💳</span> Precio fijo por ficha</p>
-                <details class="sv-mas"><summary>Qué recibes y para quién</summary><dl class="sv-dl"><dt>Recibes</dt><dd>Ficha del proveedor con cada hallazgo, su documento y su etiqueta.</dd><dt>Para quién</dt><dd>Empresas, despachos contables y áreas de cumplimiento.</dd></dl></details>
-                <a class="sv-pide" href="servicios.html?servicio=diligencia#solicitud">Solicitar este servicio ➔</a>
-              </article>
-              <article class="sv-servicio" id="sv-seguimiento">
-                <div class="sv-serv-cab"><span class="sv-ico" aria-hidden="true">📡</span><h3 class="sv-tit">Vigía y seguimiento periódico</h3></div>
-                <p class="sv-que">Tu cartera de proveedores revisada contra la lista 69-B cada semana, o un tema que cambia (contratos, presupuesto, auditorías) vigilado por ti.</p>
-                <p class="sv-cobro"><span aria-hidden="true">💳</span> Suscripción mensual, según cuántos RFC vigilas</p>
-                <details class="sv-mas"><summary>Qué recibes y para quién</summary><dl class="sv-dl"><dt>Recibes</dt><dd>Aviso de cada cambio relevante, con el documento que lo respalda y, en la 69-B, el párrafo y el plazo que aplican.</dd><dt>Para quién</dt><dd>Quien necesita enterarse a tiempo, no meses después.</dd></dl></details>
-                <a class="sv-pide" href="servicios.html?servicio=seguimiento#solicitud">Solicitar este servicio ➔</a>
-              </article>
-              <article class="sv-servicio" id="sv-facturas">
-                <div class="sv-serv-cab"><span class="sv-ico" aria-hidden="true">🧾</span><h3 class="sv-tit">Revisión de facturas por lote</h3></div>
-                <p class="sv-que">Cientos de facturas (XML) revisadas de una vez: un resumen por proveedor, su cruce con la lista 69-B y las señales que conviene revisar.</p>
-                <p class="sv-cobro"><span aria-hidden="true">💳</span> Precio por lote, según su tamaño</p>
-                <details class="sv-mas"><summary>Qué recibes y para quién</summary><dl class="sv-dl"><dt>Recibes</dt><dd>Resumen por proveedor con cada señal y su regla. Si prefieres no compartir tus archivos, el lector gratuito hace lo mismo en tu navegador.</dd><dt>Para quién</dt><dd>Despachos contables y áreas de finanzas.</dd></dl></details>
-                <a class="sv-pide" href="servicios.html?servicio=facturas#solicitud">Solicitar este servicio ➔</a>
-              </article>
-            </div>
+        <div class="sv-vista">
+          <div class="sv-vista-fam">
+            <p class="sv-vista-tit"><a href="servicios-catalogo.html#fam-prevencion"><span aria-hidden="true">🛡️</span> Prevención de fraude y de lavado de dinero</a></p>
+            <ul>
+              <li><a href="servicios-catalogo.html#sv-diligencia"><span class="sv-ico" aria-hidden="true">🏢</span><span><b>Revisión de un proveedor</b><small>Precio fijo por ficha</small></span></a></li>
+              <li><a href="servicios-catalogo.html#sv-seguimiento"><span class="sv-ico" aria-hidden="true">📡</span><span><b>Vigía y seguimiento periódico</b><small>Suscripción mensual, según cuántos RFC vigilas</small></span></a></li>
+              <li><a href="servicios-catalogo.html#sv-facturas"><span class="sv-ico" aria-hidden="true">🧾</span><span><b>Revisión de facturas por lote</b><small>Precio por lote, según su tamaño</small></span></a></li>
+            </ul>
           </div>
-          <div class="sv-linea" id="fam-electoral" data-sv-panel="electoral">
-            <p class="sv-linea-tit"><span aria-hidden="true">🗳️</span> Temporada electoral</p>
-            <p class="sv-linea-tx">Antes de votar, de prometer o de recibir un gobierno: sus números, con su documento. El mismo servicio y el mismo precio para todos.</p>
-            <div class="sv-servicios">
-              <article class="sv-servicio" id="sv-radiografia">
-                <div class="sv-serv-cab"><span class="sv-ico" aria-hidden="true">🗳️</span><h3 class="sv-tit">Radiografía de tu municipio o de tu estado</h3></div>
-                <p class="sv-que">Lo que los documentos públicos dicen de un gobierno, en un solo documento: lo que le entra y lo que gasta, su deuda, su inversión, lo que dejó por aclarar ante la ASF en su estado y lo que no cuadra entre un portal y otro.</p>
-                <p class="sv-cobro"><span aria-hidden="true">💳</span> Precio fijo y público por documento: el mismo para todos</p>
-                <details class="sv-mas"><summary>Qué recibes y para quién</summary><dl class="sv-dl"><dt>Recibes</dt><dd>Documento estándar, sin opinión: cada cifra con su documento y su etiqueta, y lo que falta, con el nombre de quien lo debe. Es el mismo para quien lo pida.</dd><dt>Para quién</dt><dd>Candidaturas de cualquier partido, medios locales, cámaras empresariales y organizaciones.</dd></dl></details>
-                <a class="sv-pide" href="servicios.html?servicio=radiografia#solicitud">Solicitar este servicio ➔</a>
-              </article>
-              <article class="sv-servicio" id="sv-temporada">
-                <div class="sv-serv-cab"><span class="sv-ico" aria-hidden="true">📰</span><h3 class="sv-tit">Licencia de temporada para redacciones</h3></div>
-                <p class="sv-que">El verificador de notas y la memoria de promesas para tu redacción durante la campaña: cada promesa de gasto, con su fecha, seguida hasta el Presupuesto, la Cuenta Pública y la ASF.</p>
-                <p class="sv-cobro"><span aria-hidden="true">💳</span> Precio por temporada</p>
-                <details class="sv-mas"><summary>Qué recibes y para quién</summary><dl class="sv-dl"><dt>Recibes</dt><dd>Acceso de temporada, acompañamiento en noches de debate y el cotejo de cada cifra contra su documento.</dd><dt>Para quién</dt><dd>Medios locales y nacionales, y equipos de datos.</dd></dl></details>
-                <a class="sv-pide" href="servicios.html?servicio=temporada#solicitud">Solicitar este servicio ➔</a>
-              </article>
-              <article class="sv-servicio" id="sv-entrega">
-                <div class="sv-serv-cab"><span class="sv-ico" aria-hidden="true">🤝</span><h3 class="sv-tit">Lo que recibes: kit de entrega-recepción</h3></div>
-                <p class="sv-que">Para el gobierno que entra y para su cabildo: lo que los documentos públicos dicen de lo que recibe, antes de firmar la entrega-recepción.</p>
-                <p class="sv-cobro"><span aria-hidden="true">💳</span> Precio fijo por gobierno</p>
-                <details class="sv-mas"><summary>Qué recibes y para quién</summary><dl class="sv-dl"><dt>Recibes</dt><dd>Radiografía del gobierno que recibes, la lista de lo que falta con quién lo debe, y un taller para leer el presupuesto.</dd><dt>Para quién</dt><dd>Presidencias municipales electas, regidurías, síndicos y equipos de transición.</dd></dl></details>
-                <a class="sv-pide" href="servicios.html?servicio=entrega#solicitud">Solicitar este servicio ➔</a>
-              </article>
-            </div>
+          <div class="sv-vista-fam">
+            <p class="sv-vista-tit"><a href="servicios-catalogo.html#fam-electoral"><span aria-hidden="true">🗳️</span> Temporada electoral</a></p>
+            <ul>
+              <li><a href="servicios-catalogo.html#sv-radiografia"><span class="sv-ico" aria-hidden="true">🗳️</span><span><b>Radiografía de tu municipio o de tu estado</b><small>Precio fijo y público por documento: el mismo para todos</small></span></a></li>
+              <li><a href="servicios-catalogo.html#sv-temporada"><span class="sv-ico" aria-hidden="true">📰</span><span><b>Licencia de temporada para redacciones</b><small>Precio por temporada</small></span></a></li>
+              <li><a href="servicios-catalogo.html#sv-entrega"><span class="sv-ico" aria-hidden="true">🤝</span><span><b>Lo que recibes: kit de entrega-recepción</b><small>Precio fijo por gobierno</small></span></a></li>
+            </ul>
           </div>
-          <div class="sv-linea" id="fam-formacion" data-sv-panel="formacion">
-            <p class="sv-linea-tit"><span aria-hidden="true">🎓</span> Formación</p>
-            <p class="sv-linea-tx">Para que tu equipo, tus alumnos o tu dependencia lo hagan por su cuenta.</p>
-            <div class="sv-servicios">
-              <article class="sv-servicio" id="sv-capacitacion">
-                <div class="sv-serv-cab"><span class="sv-ico" aria-hidden="true">🎓</span><h3 class="sv-tit">Talleres y capacitación</h3></div>
-                <p class="sv-que">Talleres con casos mexicanos reales: «Documentar para sancionar» (las 20 matrices de la ASF), facturas y la lista 69-B, y cómo leer el presupuesto.</p>
-                <p class="sv-cobro"><span aria-hidden="true">💳</span> Precio por taller</p>
-                <details class="sv-mas"><summary>Qué recibes y para quién</summary><dl class="sv-dl"><dt>Recibes</dt><dd>Taller con su material, ejercicios con casos de la base y el uso del Modo Inspector.</dd><dt>Para quién</dt><dd>Universidades, despachos, órganos de control, organizaciones y dependencias.</dd></dl></details>
-                <a class="sv-pide" href="servicios.html?servicio=capacitacion#solicitud">Solicitar este servicio ➔</a>
-              </article>
-            </div>
+          <div class="sv-vista-fam">
+            <p class="sv-vista-tit"><a href="servicios-catalogo.html#fam-formacion"><span aria-hidden="true">🎓</span> Formación</a></p>
+            <ul>
+              <li><a href="servicios-catalogo.html#sv-capacitacion"><span class="sv-ico" aria-hidden="true">🎓</span><span><b>Talleres y capacitación</b><small>Precio por taller</small></span></a></li>
+            </ul>
           </div>
-          <div class="sv-linea" id="fam-investigacion" data-sv-panel="investigacion">
-            <p class="sv-linea-tit"><span aria-hidden="true">🔎</span> Instituciones e investigación a la medida</p>
-            <p class="sv-linea-tx">Cuando una pregunta necesita documentos cruzados, o tu institución quiere las herramientas dentro.</p>
-            <div class="sv-servicios">
-              <article class="sv-servicio" id="sv-revision">
-                <div class="sv-serv-cab"><span class="sv-ico" aria-hidden="true">📄</span><h3 class="sv-tit">Revisión documental puntual</h3></div>
-                <p class="sv-que">Una pregunta delimitada, revisada contra los documentos públicos que la responden.</p>
-                <p class="sv-cobro"><span aria-hidden="true">💳</span> Cotización por escrito</p>
-                <details class="sv-mas"><summary>Qué recibes y para quién</summary><dl class="sv-dl"><dt>Recibes</dt><dd>Hallazgos, fuentes y límites de la revisión.</dd><dt>Para quién</dt><dd>Periodistas, organizaciones, despachos y empresas.</dd></dl></details>
-                <a class="sv-pide" href="servicios.html?servicio=revision#solicitud">Solicitar este servicio ➔</a>
-              </article>
-              <article class="sv-servicio" id="sv-expediente">
-                <div class="sv-serv-cab"><span class="sv-ico" aria-hidden="true">🗂️</span><h3 class="sv-tit">Expediente de investigación</h3></div>
-                <p class="sv-que">Un caso completo: quién, cuánto, cuándo y qué documento lo acredita.</p>
-                <p class="sv-cobro"><span aria-hidden="true">💳</span> Cotización por escrito</p>
-                <details class="sv-mas"><summary>Qué recibes y para quién</summary><dl class="sv-dl"><dt>Recibes</dt><dd>Cronología, documentos, relaciones verificadas y análisis de inconsistencias.</dd><dt>Para quién</dt><dd>Medios, organizaciones, regidurías, congresos y equipos profesionales.</dd></dl></details>
-                <a class="sv-pide" href="servicios.html?servicio=expediente#solicitud">Solicitar este servicio ➔</a>
-              </article>
-              <article class="sv-servicio" id="sv-licencia">
-                <div class="sv-serv-cab"><span class="sv-ico" aria-hidden="true">🔑</span><h3 class="sv-tit">Licencia de las herramientas</h3></div>
-                <p class="sv-que">El uso de las herramientas y los datos de la plataforma dentro de tu institución.</p>
-                <p class="sv-cobro"><span aria-hidden="true">💳</span> Convenio anual</p>
-                <details class="sv-mas"><summary>Qué recibes y para quién</summary><dl class="sv-dl"><dt>Recibes</dt><dd>Licencia de uso, adaptación y acompañamiento.</dd><dt>Para quién</dt><dd>Dependencias de gobierno, universidades, medios y organizaciones.</dd></dl></details>
-                <a class="sv-pide" href="servicios.html?servicio=licencia#solicitud">Solicitar este servicio ➔</a>
-              </article>
-            </div>
+          <div class="sv-vista-fam">
+            <p class="sv-vista-tit"><a href="servicios-catalogo.html#fam-investigacion"><span aria-hidden="true">🔎</span> Instituciones e investigación a la medida</a></p>
+            <ul>
+              <li><a href="servicios-catalogo.html#sv-revision"><span class="sv-ico" aria-hidden="true">📄</span><span><b>Revisión documental puntual</b><small>Cotización por escrito</small></span></a></li>
+              <li><a href="servicios-catalogo.html#sv-expediente"><span class="sv-ico" aria-hidden="true">🗂️</span><span><b>Expediente de investigación</b><small>Cotización por escrito</small></span></a></li>
+              <li><a href="servicios-catalogo.html#sv-licencia"><span class="sv-ico" aria-hidden="true">🔑</span><span><b>Licencia de las herramientas</b><small>Convenio anual</small></span></a></li>
+            </ul>
           </div>
-          </div>
-        </div>
-        </div>
-      </section>
-
-      <section class="apartado-seccion" id="sectores" aria-labelledby="sectores-tit">
-        <div class="apartado-seccion-cab">
-          <p class="apartado-seccion-pre">Tu perfil</p>
-          <h2 class="apartado-seccion-titulo" id="sectores-tit"><span class="sr-only"></span>¿A qué te dedicas?</h2>
-          <p class="apartado-seccion-texto">Elige tu perfil: lo que te pide tu trabajo, el servicio que lo atiende y con qué puedes empezar hoy, gratis.</p>
-        </div>
-        <div class="apartado-bloque">
-        <div class="sv-tabs" data-sv-tabs>
-          <div class="sv-tabs-barra" role="group" aria-label="Perfiles"><button type="button" class="sv-tab" data-sv-tab="p0" aria-pressed="true"><span aria-hidden="true">🧮</span> Contaduría</button><button type="button" class="sv-tab" data-sv-tab="p1" aria-pressed="false"><span aria-hidden="true">⚖️</span> Derecho y PLD</button><button type="button" class="sv-tab" data-sv-tab="p2" aria-pressed="false"><span aria-hidden="true">🔍</span> Auditoría</button><button type="button" class="sv-tab" data-sv-tab="p3" aria-pressed="false"><span aria-hidden="true">📰</span> Periodismo</button><button type="button" class="sv-tab" data-sv-tab="p4" aria-pressed="false"><span aria-hidden="true">🗳️</span> Candidaturas</button><button type="button" class="sv-tab" data-sv-tab="p5" aria-pressed="false"><span aria-hidden="true">🏛️</span> Regidurías y congresos</button><button type="button" class="sv-tab" data-sv-tab="p6" aria-pressed="false"><span aria-hidden="true">🎓</span> Universidades</button><button type="button" class="sv-tab" data-sv-tab="p7" aria-pressed="false"><span aria-hidden="true">📋</span> Gobiernos</button></div>
-          <div class="sv-perfiles">
-          <article class="sv-perfil" data-sv-panel="p0">
-            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">🧮</span> Contaduría y despachos contables</h3>
-            <p class="sv-quien">Contadoras y contadores públicos, fiscalistas y despachos.</p>
-            <p class="sv-que"><b>Tu reto:</b> Si un proveedor sale definitivo en la lista 69-B, sus facturas «no producen ni produjeron efecto fiscal alguno» (CFF, art. 69-B) y tu cliente tiene que acreditar la operación o corregir.</p>
-            <p class="sv-que"><b>Te sirve:</b> <a href="#sv-facturas">Revisión de facturas por lote</a>, <a href="#sv-seguimiento">Vigía y seguimiento periódico</a>, <a href="#sv-diligencia">Revisión de un proveedor</a>.</p>
-            <p class="sv-gratis"><b>Empieza gratis:</b> <a href="herramienta-inspector-efos.html">Busca un RFC en la lista 69-B</a> · <a href="herramienta-inspector-factura.html">Lee una factura sin subirla</a> · <a href="herramienta-inspector-resultados.html">Revisa un estado de resultados</a></p>
-            <a class="sz-btn sv-perfil-btn" href="servicios.html?servicio=facturas#solicitud">Cotiza para tu caso</a>
-          </article>
-          <article class="sv-perfil" data-sv-panel="p1">
-            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">⚖️</span> Derecho y cumplimiento</h3>
-            <p class="sv-quien">Abogadas y abogados corporativos, oficiales de cumplimiento y prevención de lavado (PLD).</p>
-            <p class="sv-que"><b>Tu reto:</b> Conocer a tu cliente y a tu proveedor en actividades vulnerables (LFPIORPI) y llegar a una negociación o a un litigio con los documentos públicos ya reunidos.</p>
-            <p class="sv-que"><b>Te sirve:</b> <a href="#sv-diligencia">Revisión de un proveedor</a>, <a href="#sv-expediente">Expediente de investigación</a>, <a href="#sv-seguimiento">Vigía y seguimiento periódico</a>.</p>
-            <p class="sv-gratis"><b>Empieza gratis:</b> <a href="contratos-publicos.html">Contratos públicos de una empresa</a> · <a href="herramienta-inspector-efos.html">Busca un RFC en la lista 69-B</a></p>
-            <a class="sz-btn sv-perfil-btn" href="servicios.html?servicio=diligencia#solicitud">Cotiza para tu caso</a>
-          </article>
-          <article class="sv-perfil" data-sv-panel="p2">
-            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">🔍</span> Auditoría, control interno y auditoría forense</h3>
-            <p class="sv-quien">Auditores externos e internos, órganos internos de control y despachos de auditoría.</p>
-            <p class="sv-que"><b>Tu reto:</b> Formarse y practicar con casos mexicanos: cómo documenta la ASF una irregularidad para que se pueda sancionar, y dónde se repite cada año.</p>
-            <p class="sv-que"><b>Te sirve:</b> <a href="#sv-capacitacion">Talleres y capacitación</a>, <a href="#sv-revision">Revisión documental puntual</a>.</p>
-            <p class="sv-gratis"><b>Empieza gratis:</b> <a href="aprende-auditoria.html">Cómo se audita</a> · <a href="informes-documentar-para-sancionar.html">Las 20 matrices de la ASF</a> · <a href="herramienta-inspector-asf.html">Auditorías de la ASF</a></p>
-            <a class="sz-btn sv-perfil-btn" href="servicios.html?servicio=capacitacion#solicitud">Cotiza para tu caso</a>
-          </article>
-          <article class="sv-perfil" data-sv-panel="p3">
-            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">📰</span> Periodismo e investigación</h3>
-            <p class="sv-quien">Reporteras, reporteros, editores y equipos de datos.</p>
-            <p class="sv-que"><b>Tu reto:</b> Cotejar rápido una cifra antes de publicarla y tener a la mano el documento que la sostiene, para no exponerse a una réplica.</p>
-            <p class="sv-que"><b>Te sirve:</b> <a href="#sv-temporada">Licencia de temporada para redacciones</a>, <a href="#sv-revision">Revisión documental puntual</a>, <a href="#sv-expediente">Expediente de investigación</a>.</p>
-            <p class="sv-gratis"><b>Empieza gratis:</b> <a href="herramienta-inspector-nota.html">Contrasta una nota</a> · <a href="herramienta-inspector-pregunta.html">Pregúntale al Auditor</a></p>
-            <a class="sz-btn sv-perfil-btn" href="servicios.html?servicio=temporada#solicitud">Cotiza para tu caso</a>
-          </article>
-          <article class="sv-perfil" data-sv-panel="p4">
-            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">🗳️</span> Candidaturas y equipos de campaña</h3>
-            <p class="sv-quien">De cualquier partido, coalición o candidatura independiente.</p>
-            <p class="sv-que"><b>Tu reto:</b> Proponer con los números reales de tu municipio o de tu estado, y no con los que circulan. El mismo documento y el mismo precio para todas las candidaturas, con factura y sin cortesías.</p>
-            <p class="sv-que"><b>Te sirve:</b> <a href="#sv-radiografia">Radiografía de tu municipio o de tu estado</a>, <a href="#sv-capacitacion">Talleres y capacitación</a>.</p>
-            <p class="sv-gratis"><b>Empieza gratis:</b> <a href="planisferio.html">El Planisferio</a> · <a href="noticias-seguimiento.html#promesas">La memoria de promesas</a></p>
-            <a class="sz-btn sv-perfil-btn" href="servicios.html?servicio=radiografia#solicitud">Cotiza para tu caso</a>
-          </article>
-          <article class="sv-perfil" data-sv-panel="p5">
-            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">🏛️</span> Regidurías, congresos y su asesoría</h3>
-            <p class="sv-quien">Regidoras, regidores, diputaciones locales y su equipo técnico, de cualquier partido.</p>
-            <p class="sv-que"><b>Tu reto:</b> Llegar a una sesión de cabildo o a la revisión de una cuenta pública con los documentos ya cruzados. El mismo servicio y la misma regla para todos los partidos.</p>
-            <p class="sv-que"><b>Te sirve:</b> <a href="#sv-entrega">Lo que recibes: kit de entrega-recepción</a>, <a href="#sv-expediente">Expediente de investigación</a>, <a href="#sv-seguimiento">Vigía y seguimiento periódico</a>.</p>
-            <p class="sv-gratis"><b>Empieza gratis:</b> <a href="herramienta-inspector-entes.html">El Auditor de entes</a> · <a href="planisferio.html">El Planisferio</a></p>
-            <a class="sz-btn sv-perfil-btn" href="servicios.html?servicio=entrega#solicitud">Cotiza para tu caso</a>
-          </article>
-          <article class="sv-perfil" data-sv-panel="p6">
-            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">🎓</span> Universidades y academia</h3>
-            <p class="sv-quien">Contaduría, Derecho, Economía, Administración y políticas públicas, Ciencia política y Periodismo.</p>
-            <p class="sv-que"><b>Tu reto:</b> Enseñar a leer el presupuesto y a fiscalizar con datos reales y citables, en clase, en un servicio social o en una tesis.</p>
-            <p class="sv-que"><b>Te sirve:</b> <a href="#sv-capacitacion">Talleres y capacitación</a>, <a href="#sv-licencia">Licencia de las herramientas</a>.</p>
-            <p class="sv-gratis"><b>Empieza gratis:</b> <a href="enciclopedia-auditavision.html">La Enciclopedia</a> · <a href="planisferio.html">El Planisferio</a></p>
-            <a class="sz-btn sv-perfil-btn" href="servicios.html?servicio=capacitacion#solicitud">Cotiza para tu caso</a>
-          </article>
-          <article class="sv-perfil" data-sv-panel="p7">
-            <h3 class="sv-tit"><span class="sv-ico" aria-hidden="true">📋</span> Gobiernos y dependencias</h3>
-            <p class="sv-quien">Tesorerías, contralorías y áreas de transparencia.</p>
-            <p class="sv-que"><b>Tu reto:</b> Capacitar a su personal con las observaciones que la ASF repite. Nunca a cambio de retirar, suavizar o retrasar lo que publicamos (política de independencia).</p>
-            <p class="sv-que"><b>Te sirve:</b> <a href="#sv-capacitacion">Talleres y capacitación</a>, <a href="#sv-licencia">Licencia de las herramientas</a>.</p>
-            <p class="sv-gratis"><b>Empieza gratis:</b> <a href="herramienta-inspector-asf.html">Auditorías de la ASF</a> · <a href="aprende-auditoria.html">Cómo se audita</a></p>
-            <a class="sz-btn sv-perfil-btn" href="servicios.html?servicio=capacitacion#solicitud">Cotiza para tu caso</a>
-          </article>
-          </div>
-        </div>
-        </div>
-      </section>
-
-      <section class="apartado-seccion" id="modulos" aria-labelledby="modulos-tit">
-        <div class="apartado-seccion-cab">
-          <p class="apartado-seccion-pre">La plataforma</p>
-          <h2 class="apartado-seccion-titulo" id="modulos-tit"><span class="sr-only"></span>Empieza gratis, hoy</h2>
-          <p class="apartado-seccion-texto">Las herramientas que ya puedes usar sin pagar y sin subir tus archivos.</p>
-        </div>
-        <div class="apartado-bloque">
-        <div class="sv-modulos">
-          <a class="sv-modulo" href="herramienta-inspector-efos.html"><span class="sv-mod-et">Lista 69-B</span><span class="sv-ico" aria-hidden="true">🧾</span><b>Busca cualquier RFC en la lista negra del SAT</b><span class="sv-mod-tx">Presuntos, definitivos, desvirtuados y sentencias favorables, con el oficio y la fecha de cada publicación.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
-          <a class="sv-modulo" href="herramienta-inspector-factura.html"><span class="sv-mod-et">Nuevo · Facturas</span><span class="sv-ico" aria-hidden="true">📄</span><b>Revisa tus facturas contra la ley</b><span class="sv-mod-tx">Régimen fiscal, método y forma de pago, retención de IVA y lista 69-B, cada señal con su artículo. Hasta 500 XML, sin subirlos.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
-          <a class="sv-modulo" href="herramienta-inspector-factura.html"><span class="sv-mod-et">Nuevo · REP</span><span class="sv-ico" aria-hidden="true">🔁</span><b>Empata tus complementos de pago</b><span class="sv-mod-tx">Carga tus facturas PPD con sus complementos: ves cuáles ya tienen pago registrado, cuánto les queda y cuáles no tienen ninguno.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
-          <a class="sv-modulo" href="herramienta-inspector-mia.html"><span class="sv-mod-et">Proveedores</span><span class="sv-ico" aria-hidden="true">📌</span><b>Tu cartera de proveedores</b><span class="sv-mod-tx">Mi Auditavisión guarda tus proveedores y el resumen de tus revisiones en tu navegador, para volver a ellos.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
-          <a class="sv-modulo" href="contratos-publicos.html"><span class="sv-mod-et">Contratos</span><span class="sv-ico" aria-hidden="true">🏛️</span><b>Qué le vende al gobierno</b><span class="sv-mod-tx">Los contratos de ComprasMX de cada empresa, por institución, con su importe y su fecha.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
-          <a class="sv-modulo" href="contratos-publicos.html#fraccionamiento"><span class="sv-mod-et">Fraccionamiento</span><span class="sv-ico" aria-hidden="true">✂️</span><b>Señales de compras partidas</b><span class="sv-mod-tx">Adjudicaciones directas de la misma unidad, empresa y partida que en 90 días rebasan el tope del PEF. Señal para revisar, no irregularidad.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
-          <a class="sv-modulo" href="herramienta-inspector-resultados.html"><span class="sv-mod-et">Estados financieros</span><span class="sv-ico" aria-hidden="true">📊</span><b>Revisa tu estado de resultados</b><span class="sv-mod-tx">Cuadre, estructura, rentabilidad, tendencia, impuestos y deuda, desde un CSV o lo pegado de Excel, en tu navegador.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
         </div>
         <p class="sv-nota">¿Quieres ver cómo funciona, por qué revisar antes de pagar, dónde encajamos y cómo nos sostenemos? Está en <a href="servicios-por-que.html">Por qué Auditavisión</a>.</p>
-        </div>
-      </section>
-
-      <section class="apartado-seccion" id="cobro" aria-labelledby="cobro-tit">
-        <div class="apartado-seccion-cab">
-          <p class="apartado-seccion-pre">Precios</p>
-          <h2 class="apartado-seccion-titulo" id="cobro-tit"><span class="sr-only"></span>Cómo se cobra cada servicio</h2>
-          <p class="apartado-seccion-texto">Sabes cómo se cobra antes de escribirnos. Solo la investigación a la medida se cotiza.</p>
-        </div>
-        <div class="apartado-bloque">
-        <div class="sv-tabla-env"><table class="sv-tabla">
-            <thead><tr><th scope="col">Servicio</th><th scope="col">Cómo se cobra</th><th scope="col">Para quién</th></tr></thead>
-            <tbody>
-              <tr><th scope="row"><a href="#sv-diligencia">Revisión de un proveedor</a></th><td data-et="Cómo se cobra">Precio fijo por ficha</td><td data-et="Para quién">Empresas, despachos contables y áreas de cumplimiento.</td></tr>
-              <tr><th scope="row"><a href="#sv-seguimiento">Vigía y seguimiento periódico</a></th><td data-et="Cómo se cobra">Suscripción mensual, según cuántos RFC vigilas</td><td data-et="Para quién">Quien necesita enterarse a tiempo, no meses después.</td></tr>
-              <tr><th scope="row"><a href="#sv-facturas">Revisión de facturas por lote</a></th><td data-et="Cómo se cobra">Precio por lote, según su tamaño</td><td data-et="Para quién">Despachos contables y áreas de finanzas.</td></tr>
-              <tr><th scope="row"><a href="#sv-radiografia">Radiografía de tu municipio o de tu estado</a></th><td data-et="Cómo se cobra">Precio fijo y público por documento: el mismo para todos</td><td data-et="Para quién">Candidaturas de cualquier partido, medios locales, cámaras empresariales y organizaciones.</td></tr>
-              <tr><th scope="row"><a href="#sv-temporada">Licencia de temporada para redacciones</a></th><td data-et="Cómo se cobra">Precio por temporada</td><td data-et="Para quién">Medios locales y nacionales, y equipos de datos.</td></tr>
-              <tr><th scope="row"><a href="#sv-entrega">Lo que recibes: kit de entrega-recepción</a></th><td data-et="Cómo se cobra">Precio fijo por gobierno</td><td data-et="Para quién">Presidencias municipales electas, regidurías, síndicos y equipos de transición.</td></tr>
-              <tr><th scope="row"><a href="#sv-revision">Revisión documental puntual</a></th><td data-et="Cómo se cobra">Cotización por escrito</td><td data-et="Para quién">Periodistas, organizaciones, despachos y empresas.</td></tr>
-              <tr><th scope="row"><a href="#sv-expediente">Expediente de investigación</a></th><td data-et="Cómo se cobra">Cotización por escrito</td><td data-et="Para quién">Medios, organizaciones, regidurías, congresos y equipos profesionales.</td></tr>
-              <tr><th scope="row"><a href="#sv-capacitacion">Talleres y capacitación</a></th><td data-et="Cómo se cobra">Precio por taller</td><td data-et="Para quién">Universidades, despachos, órganos de control, organizaciones y dependencias.</td></tr>
-              <tr><th scope="row"><a href="#sv-licencia">Licencia de las herramientas</a></th><td data-et="Cómo se cobra">Convenio anual</td><td data-et="Para quién">Dependencias de gobierno, universidades, medios y organizaciones.</td></tr>
-            </tbody>
-          </table></div>
-          <div class="sv-precio" id="precio">
-          <p><b>Cuánto cuesta.</b> Todavía no hay tarifa publicada, y no vamos a inventarla: las primeras saldrán de encargos piloto. Cuando las haya, se publicarán aquí, iguales para todos. Lo que se cotiza lleva por escrito cuatro cosas:</p>
-          <ul class="sv-lista"><li>las horas de investigación y de revisión;</li><li>el costo de las fuentes (copias certificadas, bases de datos o trámites);</li><li>la forma de entrega;</li><li>un margen para sostener la plataforma.</li></ul>
-        </div>
-          <h3 class="sv-tit">La línea entre lo gratis y lo de pago</h3>
-          <div class="sv-tabla-env"><table class="sv-tabla">
-            <thead><tr><th scope="col">Qué</th><th scope="col">Gratis</th><th scope="col">De pago</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">La información pública</th><td data-et="Gratis">Gratis, siempre</td><td data-et="De pago">Nunca se cobra</td></tr>
-              <tr><th scope="row">Buscar un RFC en la 69-B, leer una factura, el dictamen</th><td data-et="Gratis">Gratis, siempre</td><td data-et="De pago">Nunca se cobra</td></tr>
-              <tr><th scope="row">El trabajo: que una persona investigue, revise o enseñe por ti</th><td data-et="Gratis">Lo haces tú con las herramientas</td><td data-et="De pago">Servicio cotizado</td></tr>
-              <tr><th scope="row">La memoria: tu cartera de proveedores guardada</th><td data-et="Gratis">En tu navegador (Mi Auditavisión)</td><td data-et="De pago">Con el Vigía, al abrir</td></tr>
-              <tr><th scope="row">El aviso: enterarte cuando algo cambia</th><td data-et="Gratis">Lo revisas tú cuando quieras</td><td data-et="De pago">Con el Vigía, al abrir</td></tr>
-              <tr><th scope="row">El cómputo: lotes grandes de facturas</th><td data-et="Gratis">Hasta 500 facturas, en tu navegador</td><td data-et="De pago">Servicio cotizado</td></tr>
-            </tbody>
-          </table></div>
-          <p class="sv-nota">La prueba de la línea: si alguien pregunta «¿cobran por la información?», la respuesta siempre es «no»: se cobra que lo hagamos por ti, que lo recordemos o que te avisemos. El Vigía con aviso y memoria se abre con el lanzamiento.</p>
-        </div>
-      </section>
-
-      <section class="apartado-seccion" id="calendario" aria-labelledby="calendario-tit">
-        <div class="apartado-seccion-cab">
-          <p class="apartado-seccion-pre">Calendario</p>
-          <h2 class="apartado-seccion-titulo" id="calendario-tit"><span class="sr-only"></span>Qué abre y cuándo</h2>
-          <p class="apartado-seccion-texto">La prevención sirve todo el año; la temporada electoral tiene fecha.</p>
-        </div>
-        <div class="apartado-bloque">
-        <ol class="sv-como">
-          <li class="sv-como-paso"><span class="sv-como-et">Hoy</span><b>La consulta y las herramientas</b><span>Gratis: el Auditor, el Planisferio, la lista 69-B, el lector de facturas y el verificador de notas.</span></li>
-          <li class="sv-como-paso"><span class="sv-como-et">Con el lanzamiento</span><b>Prevención, talleres y encargos</b><span>El Vigía con aviso, la ficha del proveedor, los lotes de facturas, los talleres y las cotizaciones.</span></li>
-          <li class="sv-como-paso"><span class="sv-como-et">Antes del 6 de junio de 2027</span><b>Radiografías y licencia de temporada</b><span>Ese domingo se eligen la Cámara de Diputados, gubernaturas, congresos locales y ayuntamientos. Cada promesa de gasto de campaña entra a la memoria de promesas, con su fecha.</span></li>
-          <li class="sv-como-paso"><span class="sv-como-et">Después de la elección</span><b>Lo que recibes</b><span>El kit de entrega-recepción y el taller para leer el presupuesto, para los gobiernos y cabildos que entran.</span></li>
-        </ol>
-        <p class="sv-nota">La jornada del 6 de junio de 2027 sale de la ley electoral (LGIPE, art. 22: el primer domingo de junio). La elección judicial se movió a junio de 2028; lo explica el <a href="herramienta-inspector-pregunta.html">Auditor</a>.</p>
-        </div>
-      </section>
-
-      <section class="apartado-seccion" id="proceso" aria-labelledby="proceso-tit">
-        <div class="apartado-seccion-cab">
-          <p class="apartado-seccion-pre">El encargo</p>
-          <h2 class="apartado-seccion-titulo" id="proceso-tit"><span class="sr-only"></span>Cómo trabajamos por encargo</h2>
-          <p class="apartado-seccion-texto">Siete pasos. Nada se cobra antes de que aceptes la cotización.</p>
-        </div>
-        <div class="apartado-bloque">
-        <ol class="sv-pasos">
-          <li class="sv-paso"><span class="sv-paso-num" aria-hidden="true">1</span><span class="sv-paso-ico" aria-hidden="true">📝</span><b>Solicitud</b><span>Nos cuentas qué quieres saber con el formulario de abajo.</span></li>
-          <li class="sv-paso"><span class="sv-paso-num" aria-hidden="true">2</span><span class="sv-paso-ico" aria-hidden="true">🎯</span><b>Alcance</b><span>Acordamos la pregunta, el periodo, el territorio y lo que queda fuera.</span></li>
-          <li class="sv-paso"><span class="sv-paso-num" aria-hidden="true">3</span><span class="sv-paso-ico" aria-hidden="true">💬</span><b>Cotización</b><span>Recibes por escrito el costo y el plazo antes de empezar. Si no te conviene, ahí termina.</span></li>
-          <li class="sv-paso"><span class="sv-paso-num" aria-hidden="true">4</span><span class="sv-paso-ico" aria-hidden="true">🔍</span><b>Investigación</b><span>Revisamos documentos públicos con la misma regla de la plataforma.</span></li>
-          <li class="sv-paso"><span class="sv-paso-num" aria-hidden="true">5</span><span class="sv-paso-ico" aria-hidden="true">✅</span><b>Revisión</b><span>Una segunda persona coteja cada cifra contra su documento.</span></li>
-          <li class="sv-paso"><span class="sv-paso-num" aria-hidden="true">6</span><span class="sv-paso-ico" aria-hidden="true">📦</span><b>Entrega</b><span>Recibes el entregable con sus fuentes, sus etiquetas y sus límites.</span></li>
-          <li class="sv-paso"><span class="sv-paso-num" aria-hidden="true">7</span><span class="sv-paso-ico" aria-hidden="true">🔁</span><b>Seguimiento</b><span>Resolvemos dudas y, si lo pediste, seguimos el tema.</span></li>
-        </ol>
-        </div>
-      </section>
-
-      <section class="apartado-seccion" id="independencia" aria-labelledby="independencia-tit">
-        <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="independencia-tit"><span class="sr-only"></span>Política de independencia</h2>
-          <p class="apartado-seccion-texto">14 compromisos que valen para cada cliente y cada donante, sin excepción.</p>
-        </div>
-        <div class="apartado-bloque">
-        <div class="sv-politica">
-          <details class="sv-pol-det"><summary>Lee los 14 compromisos</summary>
-          <ol class="sv-pol">
-            <li><b>La consulta cívica es gratuita y lo seguirá siendo.</b> Ningún dato publicado en la plataforma se esconde detrás de un pago. Los Servicios, las licencias y las donaciones sostienen el trabajo; no compran acceso a la información pública.</li>
-            <li><b>Abierta a todos, con las mismas reglas para todos.</b> Pueden usarla, contratar un servicio o licenciar sus herramientas la ciudadanía, organizaciones, medios, empresas, universidades públicas y privadas y también gobiernos y dependencias. Nadie queda excluido; nadie tiene trato especial.</li>
-            <li><b>Lo que no está en venta: las conclusiones y lo que publicamos.</b> Ningún cliente, donante, gobierno ni partido puede pedir que se retire, se suavice o se retrase una publicación, ni decidir qué se investiga en la plataforma pública.</li>
-            <li><b>Quien encarga define la pregunta, no la respuesta.</b> Si los documentos no sostienen lo que esperabas encontrar, el entregable lo dice. Las conclusiones no se negocian.</li>
-            <li><b>Los conflictos de interés se dicen antes de empezar.</b> Si quien solicita es parte del caso (proveedor, dependencia o persona servidora pública involucrada, o contraparte en un litigio), se señala en la cotización. Si compromete la independencia, el encargo se declina.</li>
-            <li><b>Las donaciones no compran contenido.</b> Se agradecen y se reciben de cualquiera que comparta el propósito, pero no dan derecho a decidir qué se investiga, qué se publica ni cómo se dice.</li>
-            <li><b>La misma regla para todo.</b> Cada cifra lleva su documento y una de tres etiquetas: oficial, derivado o pendiente. Lo que no se puede sostener se queda pendiente, también en un encargo.</li>
-            <li><b>Es investigación documental y análisis de indicios, no un dictamen.</b> Revisamos documentos públicos y señalamos inconsistencias. No es un peritaje, no es asesoría legal y no acusa a nadie de un delito: eso le corresponde a las autoridades. Un encargo que requiera dictamen pericial se cotiza aparte, con su alcance, su metodología y su responsable profesional.</li>
-            <li><b>De qué respondemos y de qué no.</b> Respondemos de que cada dato coincida con el documento oficial que citamos, y si nos equivocamos lo corregimos en público, diciendo qué cambió. No respondemos del contenido de los documentos oficiales, que es de la dependencia que los emite, ni de las decisiones que alguien tome con la información.</li>
-            <li><b>Solo fuentes lícitas.</b> Documentos que las autoridades publican para todos. Ninguna cifra se apoya en una solicitud de acceso, y no obtenemos datos personales ni información reservada por vías indebidas.</li>
-            <li><b>Nuestro método y nuestras herramientas son nuestros.</b> El entregable de un encargo es de quien lo encarga. Las herramientas, el método y la base de la plataforma son de Auditavisión: se pueden licenciar, pero una licencia no da control sobre lo que la plataforma publica.</li>
-            <li><b>Tus datos y tu encargo son confidenciales.</b> No publicamos quién encargó qué sin su permiso, y lo que la plataforma publique después sale solo de fuentes públicas.</li>
-            <li><b>En campaña, el mismo documento y el mismo precio para todas las candidaturas.</b> La Radiografía de un municipio o de un estado es un documento estándar, sin opinión, idéntico para quien lo pida. Se cobra a precio público, con factura, sin descuentos ni cortesías para nadie. En campaña no aceptamos encargos para investigar a una candidatura rival, y lo que la plataforma publica de cada gobierno no cambia por quién compró qué.</li>
-            <li><b>Rendimos cuentas de cómo nos sostenemos.</b> Cada año publicaremos cuántos encargos recibimos, por tipo de cliente (incluidos los gobiernos), y cuánto entró por cada vía: Servicios, licencias y donaciones. Si el gobierno falla en transparentar, nosotros ponemos el ejemplo.</li>
-          </ol>
-          </details>
-          <p class="sv-version">Versión 4 · 11 de noviembre de 2026.</p>
-        </div>
-        </div>
-      </section>
-
-      <section class="apartado-seccion" id="preguntas" aria-labelledby="preguntas-tit">
-        <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="preguntas-tit"><span class="sr-only"></span>Preguntas frecuentes</h2>
-          <p class="apartado-seccion-texto">Lo que casi todos preguntan antes de contratar.</p>
-        </div>
-        <div class="apartado-bloque">
-        <div class="sv-faqs">
-          <details class="sv-faq"><summary>¿Cobran por la información?</summary><p>No. Lo que se ve en el sitio es gratis y lo seguirá siendo. Se cobra que lo hagamos por ti, que lo recordemos o que te avisemos.</p></details>
-          <details class="sv-faq"><summary>¿El entregable es un dictamen o un peritaje?</summary><p>No. Es investigación documental y análisis de indicios: señalamos lo que dicen los documentos públicos y las inconsistencias, sin acusar a nadie. Un encargo que requiera dictamen pericial se cotiza aparte, con su responsable profesional.</p></details>
-          <details class="sv-faq"><summary>¿Qué pasa si no encuentran lo que yo esperaba?</summary><p>El entregable lo dice. Quien encarga define la pregunta, no la respuesta, y las conclusiones no se negocian.</p></details>
-          <details class="sv-faq"><summary>¿Mis facturas o mis datos se publican?</summary><p>No. Tu encargo es confidencial y no publicamos quién encargó qué sin su permiso. Con las herramientas gratuitas, tus archivos ni siquiera salen de tu navegador.</p></details>
-          <details class="sv-faq"><summary>¿Cuánto tarda y cuánto cuesta?</summary><p>Cada servicio dice cómo se cobra: por ficha, por mes, por documento, por taller o por cotización. Todavía no hay tarifas publicadas, y no vamos a inventarlas: saldrán de los primeros encargos piloto. Antes de empezar recibes por escrito el costo y el plazo; si no te conviene, ahí termina y no pagas nada.</p></details>
-          <details class="sv-faq"><summary>¿Atienden a gobiernos y a partidos?</summary><p>Sí, con la misma regla para todos: el mismo servicio y el mismo precio, con factura y sin cortesías, y nunca a cambio de cambiar lo que publicamos. En campaña no investigamos por encargo a una candidatura rival. Si quien solicita es parte del caso, se dice en la cotización.</p></details>
-          <details class="sv-faq"><summary>¿Cuándo abren?</summary><p>Con el lanzamiento de la plataforma. Ya puedes armar tu solicitud; el envío se activa entonces.</p></details>
-        </div>
-        </div>
-      </section>
-
-      <section class="apartado-seccion" id="solicitud" aria-labelledby="solicitud-tit">
-        <div class="apartado-seccion-cab">
-          <h2 class="apartado-seccion-titulo" id="solicitud-tit"><span class="sr-only"></span>Solicita una cotización</h2>
-          <p class="apartado-seccion-texto">Cuéntanos qué quieres saber. Te mostramos tu solicitud antes de mandarla.</p>
-        </div>
-        <div class="apartado-bloque">
-        <form class="sv-form" id="svForm" data-canal="" data-funcion="https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1/recibir-formulario" data-tipo="solicitud" data-turnstile="0x4AAAAAAFvaChN1BsDAhY5L" novalidate>
-          <p class="sv-privado">🔒 Primero ves tu solicitud tal como se mandaría; solo llega a Auditavisión si pulsas «Enviar» y aceptas el <a href="aviso-de-privacidad.html">aviso de privacidad</a>, porque lleva tu nombre y tu correo para responderte.</p>
-          <fieldset class="sv-grupo"><legend>Qué quieres investigar</legend>
-            <div class="sv-campo"><label for="svServicio">Servicio</label><select id="svServicio" name="servicio">
-                <option value="diligencia">Revisión de un proveedor</option>
-                <option value="seguimiento">Vigía y seguimiento periódico</option>
-                <option value="facturas">Revisión de facturas por lote</option>
-                <option value="radiografia">Radiografía de tu municipio o de tu estado</option>
-                <option value="temporada">Licencia de temporada para redacciones</option>
-                <option value="entrega">Lo que recibes: kit de entrega-recepción</option>
-                <option value="revision">Revisión documental puntual</option>
-                <option value="expediente">Expediente de investigación</option>
-                <option value="capacitacion">Talleres y capacitación</option>
-                <option value="licencia">Licencia de las herramientas</option>
-                <option value="no-se">No sé, ayúdenme a definirlo</option>
-              </select></div>
-            <div class="sv-campo"><label for="svTema">Tema <span class="sv-req">obligatorio</span></label><input id="svTema" name="tema" type="text" maxlength="160" required aria-describedby="svTema-ay"><small id="svTema-ay">Por ejemplo: la compra de medicamentos de un hospital, un contrato de obra, el Ramo 33 de tu municipio.</small></div>
-            <div class="sv-campo"><label for="svPregunta">Tu pregunta <span class="sv-req">obligatorio</span></label><textarea id="svPregunta" name="pregunta" rows="4" maxlength="1500" required aria-describedby="svPregunta-ay"></textarea><small id="svPregunta-ay">Entre más concreta, mejor: «¿A quién se le pagó y cuánto?» rinde más que «investiguen todo».</small></div>
-            <div class="sv-dos">
-            <div class="sv-campo"><label for="svAmbito">Ámbito</label><select id="svAmbito" name="ambito"><option>Federal</option><option>Estatal</option><option>Municipal</option><option>Varios</option></select></div>
-            <div class="sv-campo"><label for="svLugar">Entidad o municipio</label><input id="svLugar" name="lugar" type="text" maxlength="120"></div>
-            </div>
-            <div class="sv-dos">
-            <div class="sv-campo"><label for="svPeriodo">Periodo</label><input id="svPeriodo" name="periodo" type="text" maxlength="60" placeholder="2019 a 2024"></div>
-            <div class="sv-campo"><label for="svPlazo">Para cuándo lo necesitas</label><input id="svPlazo" name="plazo" type="text" maxlength="60"></div>
-            </div>
-            <div class="sv-campo"><label for="svDocs">Documentos que ya tienes</label><textarea id="svDocs" name="documentos" rows="2" maxlength="800"></textarea><small id="svDocs-ay">Ligas, números de contrato o de auditoría. Es opcional.</small></div>
-          </fieldset>
-          <fieldset class="sv-grupo"><legend>Quién lo solicita</legend>
-            <div class="sv-dos">
-            <div class="sv-campo"><label for="svNombre">Nombre u organización <span class="sv-req">obligatorio</span></label><input id="svNombre" name="nombre" type="text" maxlength="120" required autocomplete="name"></div>
-            <div class="sv-campo"><label for="svCorreo">Correo para responderte <span class="sv-req">obligatorio</span></label><input id="svCorreo" name="correo" type="email" maxlength="160" required autocomplete="email"></div>
-            </div>
-            <div class="sv-campo"><label for="svUso">Para qué lo usarás</label><select id="svUso" name="uso"><option>Periodismo</option><option>Organización civil</option><option>Empresa o despacho</option><option>Universidad o academia</option><option>Gobierno o dependencia</option><option>Uso personal</option><option>Otro</option></select></div>
-            <div class="sv-campo" role="radiogroup" aria-labelledby="svParteEt"><span class="sv-et" id="svParteEt">¿Eres parte del caso? <span class="sv-req">obligatorio</span></span>
-              <label class="sv-radio"><input type="radio" name="parte" value="No"> No</label>
-              <label class="sv-radio"><input type="radio" name="parte" value="Sí"> Sí (proveedor, persona servidora pública involucrada o contraparte en un litigio)</label>
-            </div>
-          </fieldset>
-          <label class="sv-check"><input type="checkbox" id="svPolitica" required> Leí la <a href="#independencia">política de independencia</a>.</label>
-          <label class="sv-check"><input type="checkbox" id="svAlcance" required> Entiendo que es investigación documental y análisis de indicios, no un dictamen pericial ni asesoría legal.</label>
-          <label class="sv-check"><input type="checkbox" id="svAcepta" data-acepta> Acepto el <a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi solicitud y mi correo (solo hace falta para enviarla).</label>
-          <div class="sv-acciones"><button type="submit" class="sz-btn sz-btn-of">Revisar mi solicitud</button><button type="reset" class="sz-btn">Empezar de nuevo</button></div>
-          <p class="sv-error" id="svError" role="alert" hidden></p>
-        </form>
-        <div class="sv-resumen" id="svResumen" hidden></div>
-        <noscript><p>El formulario necesita JavaScript.</p></noscript>
         </div>
       </section>
 
@@ -687,12 +339,11 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261111h</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261112a</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261111h"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261111h"></script>
-  <script src="assets/auditor/js/servicios.js?v=20261111h"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261112a"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261112a"></script>
 </body>
 </html>

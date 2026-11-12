@@ -53,7 +53,7 @@
       tipo: form.getAttribute('data-tipo') || 'solicitud',
       asunto: ('Solicitud de investigación: ' + val('svTema')).slice(0, 200),
       texto: t,
-      pagina: 'servicios.html',
+      pagina: 'servicios-cotiza.html',
       documento: null,
       correo: val('svCorreo') || null,
       acepta_aviso: true,
