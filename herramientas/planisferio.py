@@ -1372,7 +1372,7 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
             </footer>
             <aside class="pl-puente" id="plPuente" aria-label="Servicios de Auditavisión">
               <div class="pl-puente-t"><p class="pl-puente-e">Servicio de Auditavisión</p><p class="pl-puente-h">🧾 ¿Necesitas lo de tu estado o tu municipio en un solo documento?</p><p class="pl-puente-d">La Radiografía reúne lo que los documentos públicos dicen de su gobierno: cada cifra con su documento y su etiqueta, y lo que falta, con el nombre de quien lo debe.</p></div>
-              <div class="pl-puente-a"><a class="pl-puente-b" href="servicios.html#sv-radiografia">Ver la Radiografía ➔</a><a class="pl-puente-o" href="servicios.html">Todos los servicios</a></div>
+              <div class="pl-puente-a"><a class="pl-puente-b" href="servicios-catalogo.html#sv-radiografia">Ver la Radiografía ➔</a><a class="pl-puente-o" href="servicios.html">Todos los servicios</a></div>
             </aside>
           </section>%s
           <template id="plTplIndice">%s</template>

@@ -4,7 +4,7 @@
    La configuración la escribe herramientas/acceso.py entre sus marcas: no la
    edites a mano. Las páginas del canje y del panel usan acceso-paginas.js. */
 (function () {
-  var C = /*config*/{"candado":true,"funciones":"https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1","supabase":"https://nuqiyzcilbrrlezmesnf.supabase.co","anon":"sb_publishable_gf28FUrT1zcoaGl4C2f_aQ_exkzAQ9g","canje":"canjea-tu-codigo.html","panel":"administracion-codigos.html","libres":["canjea-tu-codigo.html","administracion-codigos.html","aviso-de-privacidad.html","derecho-de-replica.html","servicios.html","servicios-por-que.html"]}/*fin-config*/;
+  var C = /*config*/{"candado":true,"funciones":"https://nuqiyzcilbrrlezmesnf.supabase.co/functions/v1","supabase":"https://nuqiyzcilbrrlezmesnf.supabase.co","anon":"sb_publishable_gf28FUrT1zcoaGl4C2f_aQ_exkzAQ9g","canje":"canjea-tu-codigo.html","panel":"administracion-codigos.html","libres":["canjea-tu-codigo.html","administracion-codigos.html","aviso-de-privacidad.html","derecho-de-replica.html","servicios.html","servicios-por-que.html","servicios-fraude-y-lavado.html","servicios-catalogo.html","servicios-tu-perfil.html","servicios-empieza-gratis.html","servicios-como-se-cobra.html","servicios-calendario.html","servicios-preguntas.html","servicios-cotiza.html"]}/*fin-config*/;
   var CLAVE = 'av-pase';
   var DIA = 12 * 3600 * 1000;  // cada cuánto se vuelve a preguntar a la base (por si se revocó)
 
