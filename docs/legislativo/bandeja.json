@@ -1,11 +1,54 @@
 {
- "actualizado": "09-11-2026",
+ "actualizado": "13-11-2026",
  "nota": "Lo que junta herramientas/vigia_legislativo.py del sumario del DOF y del índice de Leyes Federales Vigentes de la Cámara de Diputados, sin verificar: solo título, fecha y liga, nunca el texto de la reforma. Cada hallazgo queda «por cotejar» hasta que una persona lo revisa; los avisos dicen qué módulo de Auditavisión cita una reforma anterior a la vigente.",
  "fuentes": {
   "dof": "https://dof.gob.mx/sumario.xml",
   "diputados": "https://www.diputados.gob.mx/LeyesBiblio/index.htm"
  },
- "hallazgos": [],
+ "hallazgos": [
+  {
+   "id": "dof-5803757",
+   "fuente": "dof",
+   "leyes": [
+    "lif"
+   ],
+   "fecha": "13-11-2026",
+   "titulo": "Decreto por el que se expide la Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027.",
+   "articulos": "",
+   "liga": "https://dof.gob.mx/nota_detalle.php?codigo=5803757&fecha=13/11/2026",
+   "seccion": "PODER EJECUTIVO PRESIDENCIA DE LA REPUBLICA",
+   "estado": "por cotejar",
+   "visto": "13-11-2026"
+  },
+  {
+   "id": "dof-5803758",
+   "fuente": "dof",
+   "leyes": [
+    "lisr"
+   ],
+   "fecha": "13-11-2026",
+   "titulo": "Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Ley del Impuesto sobre la Renta y se expiden disposiciones de vigencia transitoria.",
+   "articulos": "",
+   "liga": "https://dof.gob.mx/nota_detalle.php?codigo=5803758&fecha=13/11/2026",
+   "seccion": "PODER EJECUTIVO PRESIDENCIA DE LA REPUBLICA",
+   "estado": "por cotejar",
+   "visto": "13-11-2026"
+  },
+  {
+   "id": "dof-5803759",
+   "fuente": "dof",
+   "leyes": [
+    "lfd"
+   ],
+   "fecha": "13-11-2026",
+   "titulo": "Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Ley Federal de Derechos.",
+   "articulos": "",
+   "liga": "https://dof.gob.mx/nota_detalle.php?codigo=5803759&fecha=13/11/2026",
+   "seccion": "PODER EJECUTIVO PRESIDENCIA DE LA REPUBLICA",
+   "estado": "por cotejar",
+   "visto": "13-11-2026"
+  }
+ ],
  "leyes": {
   "cpeum": {
    "nombre": "CONSTITUCIÓN Política de los Estados Unidos Mexicanos",
