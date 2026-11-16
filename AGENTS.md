@@ -102,10 +102,12 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   porque en el Planisferio no corre `numeros.js`).
   **El mapa es lo principal** (rediseño del autor, 03-11-2026): la página es una sola
   sección, sin «En esta página»; tras la entrada vienen las dimensiones y su mapa.
-  Los contadores, «Cuánto dinero es» y «Los 16 orígenes» van integrados debajo del
-  mapa **solo en la dimensión financiera** (`.pl-solo-dim[data-dim]`, que
-  `planisferio.js` esconde en las demás), y las 32 entidades abren en la ventana
-  lateral con el botón «📍 Las 32 entidades».
+  Los contadores, «Cuánto dinero es» y «Los 16 orígenes» fueron integrados debajo del
+  mapa en la dimensión financiera hasta el 16-11-2026; **desde ese día viven en su página**,
+  `planisferio-dinero.html` (`DINERO` de `planisferio.py`; pedido del autor: «que quede como una
+  tarjeta… que nos dirija a una nueva página»), y en el Planisferio queda su tarjeta (`.pl-dinero`),
+  arriba de «Juega con el mapa». **Lo financiero nuevo va a esa página, no bajo el mapa.** Las 32
+  entidades abren en la ventana lateral con el botón «📍 Las 32 entidades».
   **El mapa es el protagonista** (reestructura del autor, 04-11-2026: «lo que le llama al
   usuario a jugar con él»): encabezado con la foto del paisaje y la persona en sombra
   (`planisferio-paisaje.webp`, en su sentido original, con su versión `-movil`), «cómo se juega» en
