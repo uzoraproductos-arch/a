@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 731 |
+| Páginas revisadas | 732 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -435,6 +435,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-dgo-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
 | `planisferio-dgo-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
 | `planisferio-dgo.html` | Durango · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `planisferio-dinero.html` | Cuánto dinero es · Auditavisión | apartados.py | 93 | 0 | 15 | 28 | 1 |
 | `planisferio-gro-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-gro-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
 | `planisferio-gro-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
@@ -721,7 +722,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-zac-salud.html` | Su salud pública · Auditavisión | apartados.py | 58 | 0 | 11 | 7 | 3 |
 | `planisferio-zac-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
 | `planisferio-zac.html` | Zacatecas · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
-| `planisferio.html` | Planisferio · Auditavisión | apartados.py | 163 | 0 | 125 | 100 | 11 |
+| `planisferio.html` | Planisferio · Auditavisión | apartados.py | 110 | 0 | 110 | 72 | 10 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |

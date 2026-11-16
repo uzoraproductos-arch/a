@@ -85,6 +85,10 @@ DIMENSIONES = [
 ]
 
 
+DINERO = 'planisferio-dinero.html'
+DINERO_TIT = 'Cuánto dinero es, de dónde sale y lo que baja al territorio'
+
+
 def clave(a):
     """MÉX → mex: la clave del archivo, sin acentos."""
     return unicodedata.normalize('NFKD', a).encode('ascii', 'ignore').decode().lower()
@@ -1422,11 +1426,6 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
             </aside>
           </section>%s
           <template id="plTplIndice">%s</template>
-          <div class="pl-solo-dim pl-fin" data-dim="financiera">
-            <h3 class="pl-fin-tit">Cuánto dinero es, de dónde sale y lo que baja al territorio</h3>
-            <p class="pl-fin-sub">Los tres presupuestos de la Federación en 2026, lo que transfiere a estados y municipios y lo que ingresaron los municipios. El ritmo por segundo es la cifra anual entre 31,536,000 segundos: sirve para dimensionarla, no es dinero que se mueva en tiempo real.</p>
-            %s
-          </div>
           <div class="pl-solo-dim pl-fin" data-dim="judicial" hidden>
             %s
           </div>
@@ -1435,13 +1434,30 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         pasos, ''.join(dims), d0[0], d0[2].lower(), d0[3], lentes, svg, ''.join(cajones), ''.join(plantillas),
         _cajon('📍', 'Las 32 entidades', 'Elige una entidad para entrar a su portal', 'plTplIndiceTit',
                '<nav class="pl-indice" aria-label="Las 32 entidades, una por una"><ul>%s</ul></nav>' % indice),
-        cuaderno, _bloque_judicial_mapa(base, ref, filas), _json(datos))
+        _bloque_judicial_mapa(base, ref, filas), _json(datos))
     for _l in ('servicios.html',):
         if not os.path.exists(os.path.join(RAIZ, _l)):
             raise SystemExit('planisferio: el puente a Servicios apunta a %s, que no existe' % _l)
     bloque_mapa = bloque_mapa.replace('__ENTS__', ''.join('<option value="%s"></option>' % html.escape(f['n']) for f in sorted(filas, key=lambda x: clave(x['n']))))
     bloque_mapa = bloque_mapa.replace('__TEMAS__', temas)
-    return {
+    # «Cuánto dinero es, de dónde sale y lo que baja al territorio» (pedido del
+    # autor, 16-11-2026): deja de desglosarse bajo el mapa y vive en su página;
+    # en el Planisferio queda su tarjeta, arriba de «Juega con el mapa».
+    tarjeta_dinero = ('<a class="pl-dinero" href="%s"><span class="pl-dinero-ico" aria-hidden="true">💰</span>'
+                      '<span class="pl-dinero-tx"><b>%s</b><small>Los contadores de los tres presupuestos de 2026, cuánto dinero es y los 16 orígenes del ingreso.</small></span>'
+                      '<span class="pl-dinero-ir" aria-hidden="true">➔</span></a>') % (DINERO, DINERO_TIT)
+    dinero = {
+        'archivo': DINERO, 'padre': (ARCHIVO, 'Planisferio'), 'menu': 'Cuánto dinero es', 'menu_archivo': ARCHIVO,
+        'icono': '💰', 'titulo': DINERO_TIT, 'lema': 'La dimensión financiera del Planisferio, en números',
+        'entrada': ('Los tres presupuestos de la Federación en 2026, lo que transfiere a estados y municipios y lo que ingresaron los municipios. '
+                    'El ritmo por segundo es la cifra anual entre 31,536,000 segundos: sirve para dimensionarla, no es dinero que se mueva en tiempo real.'),
+        'estilos': ['numeros.css', 'radar.css', 'planisferio.css'], 'scripts': ['planisferio.js'],
+        'secciones': [
+            {'id': 'dinero', 'titulo': DINERO_TIT, 'sin_cab': True, 'texto': '', 'tarjetas': [],
+             'bloque': '<div class="pl-fin pl-fin-pag">%s</div><nav class="pl-saltos" aria-label="Volver al mapa"><a href="%s">🗺️ Volver al mapa del Planisferio</a></nav>' % (cuaderno, ARCHIVO)},
+        ],
+    }
+    return [{
         'archivo': ARCHIVO, 'menu': 'Planisferio', 'menu_archivo': ARCHIVO,
         'icono': '🗺️', 'titulo': 'Planisferio', 'lema': 'México en un mapa: cada entidad, cada municipio, cada peso',
         'entrada': ('El dinero público tiene domicilio. Elige una dimensión y toca una entidad para entrar a su portal, con sus municipios. '
@@ -1451,7 +1467,9 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         'fondo': 'assets/auditor/img/planisferio-paisaje.webp', 'rubro': 'planisferio',
         'estilos': ['numeros.css', 'radar.css', 'planisferio.css'],
         'scripts': ['planisferio.js'],
+        'sin_saltos': True,
         'secciones': [
+            {'id': 'dinero', 'titulo': DINERO_TIT, 'sin_cab': True, 'texto': '', 'tarjetas': [], 'bloque': tarjeta_dinero},
             {'id': 'mapa', 'titulo': 'Juega con el mapa',
              'texto': 'Hoy se pintan %d dimensiones. Cada una trae su «Cómo leerla» y lo que su mapa no dice.' % len(pintadas),
              'tarjetas': [], 'bloque': bloque_mapa},
@@ -1460,7 +1478,7 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
              'texto': ('El Planisferio crece por entregas, una dimensión a la vez y, después, municipio por municipio. Mientras llegan al mapa, cada una ya tiene su lugar en la Enciclopedia:'),
              'tarjetas': [], 'bloque': '<ul class="pl-otras">%s</ul>' % otras},
         ]),
-    }
+    }, dinero]
 
 
 def _nota_amb(filas):
@@ -2672,7 +2690,7 @@ def paginas(base, ref, tres, cuenta, cuanto='', origenes=''):
     iv = inv_mun(padron)
     dv = deu_mun(padron)
     E = sorted(base['estados'], key=lambda x: clave(x['name']))
-    out = [pagina_mapa(base, ref, tres, padron, cuenta, cuanto, origenes)]
+    out = pagina_mapa(base, ref, tres, padron, cuenta, cuanto, origenes)
     for k, e in enumerate(E):
         out.extend(pagina_portal(base, ref, e, padron, E[k - 1], E[(k + 1) % len(E)], iv, dv))
     return out
