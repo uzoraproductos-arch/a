@@ -181,9 +181,10 @@
   function dictamenHtml(q, r, f, antes) {
     var t = TIPO[f.t] || ['📄', 'Ficha'], k = 0;
     function cap(tit) { return '<h3 class="dic-cap"><span>' + ROMANO[k++] + '.</span> ' + tit + '</h3>'; }
-    var ci = (f.ci || []).map(function (c) {
-      return '<li><b>' + esc(c.v) + '</b><span>' + esc(c.etq) + '</span>' + chip(c) +
-        (c.op ? '<small class="pa-op"><b>Operación:</b> ' + esc(c.op) + '</small>' : '') + '</li>';
+    /* Las cifras van en tabla (16-11-2026): cifra, qué es, su estado y su operación. */
+    var ci = (f.ci || []).map(function (c, i) {
+      return '<tr><td class="dic-n">' + (i + 1) + '</td><td class="dic-v">' + esc(c.v) + '</td><td>' + esc(c.etq) +
+        (c.op ? '<small class="pa-op"><b>Operación:</b> ' + esc(c.op) + '</small>' : '') + '</td><td>' + chip(c) + '</td></tr>';
     }).join('');
     var fu = (f.fu || []).map(function (x, i) {
       return '<li><b>F' + (i + 1) + '.</b> ' + (x.url ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.tx) + ' ↗</a>' : esc(x.tx)) + '</li>';
@@ -205,6 +206,23 @@
     var ir = r.ir || f.ir, m = modoVivo(), cm = MODO_ICO[m] ? capaModo(q, r, m) : null;
     var capa = cm && cm.html ? cm.html.replace(/<button\b[^>]*>[\s\S]*?<\/button>/g, '') : '';
     var resp = r.html.replace(/<details class="pa-dedonde"/g, '<details class="pa-dedonde" open');
+    /* «De un vistazo» (16-11-2026): qué trae el dictamen antes de leerlo. Cuenta
+       lo que ya está en la ficha; no agrega cifras ni entra a la huella. */
+    var nE = { oficial: 0, derivado: 0, pendiente: 0 };
+    (f.ci || []).forEach(function (c) { if (nE[c.e] != null) nE[c.e]++; });
+    var xf = f.t === 'investigacion' && f.ex ? f : invToca(q, r);
+    var mira = '<aside class="dic-mirada" aria-label="De un vistazo"><b class="dic-mirada-t">De un vistazo</b><dl>' +
+      '<div><dt>Cifras</dt><dd>' + (f.ci || []).length + '</dd></div>' +
+      ['oficial', 'derivado', 'pendiente'].filter(function (e) { return nE[e]; }).map(function (e) {
+        return '<div><dt>' + chip({ e: e }) + '</dt><dd>' + nE[e] + '</dd></div>'; }).join('') +
+      '<div><dt>Documentos citados</dt><dd>' + (f.fu || []).length + '</dd></div>' +
+      (f.cot && f.cot.length ? '<div><dt>Afirmaciones cotejadas</dt><dd>' + f.cot.length + '</dd></div>' : '') +
+      (xf ? '<div class="dic-mirada-exp"><dt>Expediente</dt><dd>' + esc(xf.exn) + (xf.ab ? ' · abierto' : ' · documentado') + '</dd></div>' : '') +
+      '</dl></aside>';
+    var expCap = xf ? '<p>Esta respuesta toca una de las grandes investigaciones de la plataforma. Su expediente, <b>' + esc(xf.exn) + ' · ' + esc(xf.tit) + '</b>, ' +
+      'junta el caso en cinco preguntas, su bitácora, lo que sigue y lo que falta' + (xf.nov ? '; el último registro de su bitácora es del ' + esc(xf.nov) : '') + '. ' +
+      '<a href="' + esc(xf.ex) + '">Abrir el expediente ➔</a></p>' +
+      '<p class="dic-chico">El expediente se arma solo con la base de la plataforma; no forma parte de la huella de este dictamen.</p>' : '';
     return '<article class="pa-nota dic-doc">' +
       '<header class="dic-cab"><div class="dic-cab-marca"><img src="' + LOGO + '" alt="" width="62" height="48">' +
       '<div><b>Auditavisión</b><small>Plataforma ciudadana de fiscalización del gasto público</small></div></div>' +
@@ -212,7 +230,7 @@
       '<div class="dic-cab-tx"><span class="pa-nota-tipo">Dictamen cívico independiente · ' + esc(t[1]) + (capa ? ' · ' + MODO_ICO[m] + ' Modo ' + MODO_NOM[m] : '') + '</span>' +
       '<dl><div><dt>Folio</dt><dd class="pa-folio">calculando…</dd></div><div><dt>Expedido</dt><dd>' + esc(hoy()) + '</dd></div>' +
       '<div><dt>Versión de la plataforma</dt><dd>' + esc(selloSitio()) + '</dd></div></dl></div></header>' +
-      '<h2 class="dic-tit"><span aria-hidden="true">' + t[0] + '</span> ' + esc(f.tit) + '</h2>' +
+      '<h2 class="dic-tit"><span aria-hidden="true">' + t[0] + '</span> ' + esc(f.tit) + '</h2>' + mira +
       cap('Planteamiento') + '<p class="pa-nota-q"><span>La pregunta</span> «' + esc(q) + '»</p>' +
       (antes.length ? '<p class="dic-chico">Se hizo en la plática después de: ' + antes.map(function (x) { return '«' + esc(x) + '»'; }).join(' → ') + '.</p>' : '') +
       cap('Respuesta del Auditor') + '<div class="dic-resp">' + resp + '</div>' +
@@ -220,7 +238,7 @@
         '<p class="dic-chico">Pediste el dictamen en el modo ' + MODO_NOM[m] + ': esta es su forma de leer la misma respuesta. El modo cambia cómo se cuenta, nunca los datos: no agrega cifras y no entra a la huella.</p>' +
         '<div class="dic-resp dic-modo">' + capa + '</div>' : '') +
       (f.txt && f.t !== 'calculo' ? '<p class="pa-nota-tx"><b>La ficha completa:</b> ' + esc(f.txt) + '</p>' : '') +
-      (ci ? cap('Hallazgos: las cifras') + '<ul class="pa-cifras">' + ci + '</ul>' : '') +
+      (ci ? cap('Hallazgos: las cifras') + '<div class="dic-tabla"><table><thead><tr><th>#</th><th>Cifra</th><th>Qué es</th><th>Estado</th></tr></thead><tbody>' + ci + '</tbody></table></div>' : '') +
       (f.cot && f.cot.length && charla ? cap('Cotejo de lo que circula') +
         '<p class="dic-chico">Cada afirmación que circula se comparó con el documento oficial. «Consta» quiere decir que el documento la sostiene; «con matices», que la sostiene en parte; «sin documento oficial», que solo la dice la prensa o las redes, y no la afirmamos ni la negamos.</p>' +
         charla.cotejo(f, true) : '') +
@@ -228,6 +246,7 @@
         'Para ver el resultado, o para que otra persona lo compruebe, abre la aplicación desde este enlace: <a href="' + esc(f.app.url) + '">' + esc(f.app.pag) + (f.app.par ? ' con tus datos' : '') + ' ➔</a>.</p>' +
         '<p class="dic-chico">La aplicación calcula con la base de la plataforma vigente, así que con el mismo enlace y la misma versión da el mismo resultado.</p>' : '') +
       (pend ? cap('Lo que falta') + pend : '') +
+      (expCap ? cap('Expediente relacionado') + expCap : '') +
       cap('Fundamento documental') + (fu ? '<ol class="dic-fuentes">' + fu + '</ol>' + (f.app && f.app.mas ? '<p class="dic-chico">Y ' + f.app.mas + ' documentos más, citados en la página de la aplicación.</p>' : '') : '<p>Esta respuesta no cita cifras: lleva a una página de la plataforma, donde cada dato trae su fuente.</p>') +
       cap('Método') + '<ol class="dic-metodo">' +
       '<li><b>Localización.</b> El Auditor buscó la respuesta en la base de la plataforma (' + B.fichas.length.toLocaleString('es-MX') + ' fichas), que solo guarda datos ya publicados con su documento.</li>' +
@@ -363,14 +382,14 @@
     var l = leeLista(), k = plano(q), hoy = new Date().toISOString().slice(0, 10), x = null;
     l.forEach(function (o) { if (plano(o.q) === k && o.m === motivo) x = o; });
     if (x) { x.n = (x.n || 1) + 1; x.f = hoy; if (tit) x.t = tit; }
-    else { l.unshift({ q: q, m: motivo, t: tit || '', f: hoy, n: 1 }); reporta(q, motivo, tit); }
+    else { l.unshift({ q: q, m: motivo, t: tit || '', f: hoy, n: 1, mo: modoVivo() || '' }); reporta(q, motivo, tit); }
     guardaLista(l.slice(0, MAX));
     pintaLista();
   }
   function textoLista(l) {
     return 'Preguntas que el bot de Auditavisión no supo contestar\n' + l.map(function (o, i) {
       return (i + 1) + '. «' + o.q + '» · ' + (o.m === 'noera' ? 'la nota no respondía' + (o.t ? ' (dio: ' + o.t + ')' : '') : 'sin respuesta') +
-        ' · ' + o.f + (o.n > 1 ? ' · ' + o.n + ' veces' : '');
+        (o.mo && MODO_NOM[o.mo] ? ' · modo ' + MODO_NOM[o.mo] : '') + ' · ' + o.f + (o.n > 1 ? ' · ' + o.n + ' veces' : '');
     }).join('\n') + '\n' + location.href.split('?')[0];
   }
   function pintaLista() {
@@ -750,16 +769,46 @@
     ['ciudadano', /\b(me retienen|mi sueldo|gano|mi aguinaldo|mi estado de cuenta|cuanto pago)\b/]
   ];
   var MODO_NOM = { inspector: 'Inspector', periodista: 'Periodista', ciudadano: 'Ciudadano', ambientalista: 'Ambientalista' };
-  function modoSugerido(q) {
+  function modoSugerido(q, cual) {
     var p = ' ' + plano(q) + ' ', m = modoVivo(), s = null;
     MODO_PAL.forEach(function (x) { if (!s && x[1].test(p)) s = x[0]; });
-    return s && s !== m ? s : null;
+    return s && (cual || s !== m) ? s : null;
   }
   function capaModoHtml(q, r) {
     var m = modoVivo(), c = m === 'inspector' ? inspectorCapa(q, r) : m === 'ciudadano' ? ciudadanoCapa(q, r) : m === 'ambientalista' ? ambientalistaCapa(q, r) : null;
-    var s = r && !r.sin ? modoSugerido(q) : null;
-    return (c ? c.html : '') + (s ? '<p class="pa-modo-sug-p"><button type="button" class="pa-boton pa-modo-sug" data-pa-modo-sug="' + s + '" data-pa-q="' + esc(q) + '">' +
-      MODO_ICO[s] + ' Esto luce más en el modo ' + MODO_NOM[s] + ': cámbiame y te lo cuento así ➔</button></p>' : '');
+    return c ? c.html : '';
+  }
+  /* Cada modo contesta lo suyo y remite lo ajeno (pedido del autor, 16-11-2026:
+     «en caso que corresponda a otro modo, mencionarlo y remitirlo al chat de
+     aquel modo»). A qué modo le toca una respuesta sale de las palabras de la
+     pregunta (MODO_PAL) o, si no, del modo con que la base clasificó su ficha
+     o su página (modos.py). El Inspector es el modo por omisión de la base: por
+     eso una ficha «de Inspector» no remite sola; hace falta que lo pida la
+     pregunta. La remisión va arriba de la respuesta; los datos son los mismos. */
+  var MODO_COMO = {
+    inspector: 'allá la reviso con sus documentos, lo que falta y por dónde seguir',
+    periodista: 'allá la cuento como nota, con lo que casi nadie cuenta y lo que circula',
+    ciudadano: 'allá te la digo en corto, con sus palabras difíciles y lo que toca a tu bolsillo',
+    ambientalista: 'allá la leo por su costo y su daño ambiental, y quién lo paga'
+  };
+  var MODO_DE_PAG = null;
+  function modoToca(q, r) {
+    if (!r || r.sin || r.plat) return null;
+    var s = modoSugerido(q, true);
+    if (s) return s;
+    var f = r.ficha, m = f && f.m, ir = r.ir || (f && f.ir);
+    if (!m && ir) {
+      if (!MODO_DE_PAG) { MODO_DE_PAG = {}; B.fichas.forEach(function (x) { if (x.t === 'pagina' && x.m && x.ir) MODO_DE_PAG[sinParam(x.ir[0]).split('#')[0]] = x.m; }); }
+      m = MODO_DE_PAG[sinParam(ir[0]).split('#')[0]];
+    }
+    return m && m !== 'inspector' && MODO_ICO[m] ? m : null;
+  }
+  function remiteHtml(q, r) {
+    var t = modoToca(q, r), m = modoVivo();
+    if (!t || t === m || !MODO_ICO[m]) return '';
+    return '<div class="pa-remite pa-remite-' + t + '"><p><span aria-hidden="true">' + MODO_ICO[t] + '</span> <b>Esto le toca al modo ' + MODO_NOM[t] + '.</b> ' +
+      'Te lo contesto aquí con los mismos datos; ' + MODO_COMO[t] + '.</p>' +
+      '<button type="button" class="pa-boton pa-modo-sug" data-pa-modo-sug="' + t + '" data-pa-q="' + esc(q) + '">' + MODO_ICO[t] + ' Pasar al modo ' + MODO_NOM[t] + ' ➔</button></div>';
   }
   /* Para el banco de pruebas: la capa del modo pedido, en texto. */
   function capaModo(q, r, m) {
@@ -2368,6 +2417,8 @@
        («pemex-perdidas-…-deuda» se iba al pendiente de la deuda de Pemex, 01-11-2026). */
     var lg = (/https?:\/\/[^\s<>"']+/i.exec(String(q)) || [])[0], hm = lg && hemeroteca(lg);
     if (hm) return hm;
+    var xi = expInvResp(q);
+    if (xi) return xi;
     /* La memoria de promesas (01-11-2026): «¿qué pasó con lo que prometieron…?» antes que la nota o la obra del mismo tema. */
     var pm = charla && charla.promesa && charla.promesa(q);
     if (pm) return pm;
@@ -2460,6 +2511,96 @@
     return r;
   }
 
+  /* El esquema de la respuesta (pedido del autor, 16-11-2026: «que el formato de
+     las respuestas… se potencialice… mejor esquematizada»). La respuesta se lee
+     por pisos: de qué está hecha (su tipo y sus chips), lo esencial, el detalle
+     plegado cuando es largo, sus acciones, su expediente si lo tiene, y las
+     puertas en paneles que se abren. Nada de esto cambia un dato: solo ordena. */
+  function cabResp(r) {
+    var f = r.ficha, t = f && TIPO[f.t], est = {};
+    (r.html.match(/est-chip est-(oficial|derivado|pendiente)/g) || []).forEach(function (m) { est[m.slice(13)] = 1; });
+    var chs = ['oficial', 'derivado', 'pendiente'].filter(function (e) { return est[e]; });
+    var mt = (r.q && modoToca(r.q, r)) || modoVivo();
+    if (!t && !chs.length) return '';
+    return '<p class="pa-cab">' + (t ? '<span class="pa-cab-tipo"><span aria-hidden="true">' + t[0] + '</span> ' + esc(t[1]) + '</span>' : '') +
+      (MODO_ICO[mt] ? '<span class="pa-cab-modo" title="El modo al que pertenece esta respuesta">' + MODO_ICO[mt] + ' ' + MODO_NOM[mt] + '</span>' : '') +
+      (chs.length ? '<span class="pa-cab-est"><span class="pa-cab-de">Hecha con datos</span> ' + chs.map(function (e) { return chip({ e: e }); }).join(' ') + '</span>' : '') + '</p>';
+  }
+  function esquema(html) {
+    var d = document.createElement('div');
+    d.innerHTML = html;
+    var suelto = Array.prototype.some.call(d.childNodes, function (n) { return n.nodeType === 3 && n.textContent.trim(); });
+    if (suelto || d.querySelector('iframe, form, input, textarea, .pa-app')) return html;
+    var pie = [], cuerpo = [];
+    Array.prototype.forEach.call(d.children, function (k) { (k.classList.contains('pa-dedonde') ? pie : cuerpo).push(k); });
+    var largo = cuerpo.reduce(function (s, k) { return s + k.textContent.length; }, 0);
+    if (cuerpo.length < 4 || largo < 900) return html;
+    var ver = [], ac = 0;
+    while (cuerpo.length > 2 && ver.length < 3 && (!ver.length || ac < 280)) { ac += cuerpo[0].textContent.length; ver.push(cuerpo.shift()); }
+    if (cuerpo.length < 2) return html;
+    var fuera = function (l) { return l.map(function (k) { return k.outerHTML; }).join(''); };
+    return fuera(ver) + '<details class="pa-detalle"><summary><span>📋 Ver el detalle completo</span><small>' + cuerpo.length + ' apartados más</small></summary>' +
+      '<div class="pa-detalle-c">' + fuera(cuerpo) + '</div></details>' + fuera(pie);
+  }
+  /* Las puertas de una respuesta van en paneles: se ve cuántas hay y se abren
+     con un toque. Con pocas, el panel ya viene abierto. */
+  function panel(h, ico, tit, abre) {
+    if (!h) return '';
+    var n = (h.match(/class="pa-rec-a"|class="pa-pl-a"|class="pa-pl-chip"/g) || []).length;
+    return '<details class="pa-panel"' + (abre || (n && n <= 3) ? ' open' : '') + '><summary><span>' + ico + ' ' + tit + '</span>' + (n ? '<small>' + n + '</small>' : '') + '</summary>' +
+      h.replace(/<p class="pa-mas-t">[^<]*<\/p>/, '') + '</details>';
+  }
+  /* El expediente de la investigación (16-11-2026): cuando la plática toca una de
+     las grandes investigaciones, la respuesta trae la tarjeta de su expediente,
+     que arma herramientas/expedientes_inv.py con la base. */
+  var EXP_INDICE = 'expedientes-investigacion.html';
+  function invToca(q, r) {
+    var p = plano(q + ' ' + ((r && r.ficha && r.ficha.tit) || (r && r.tit) || '')), hit = null;
+    INV.forEach(function (f) { if (!hit && f.ex && f._k.some(function (x) { return p.indexOf(x) >= 0; })) hit = f; });
+    return hit;
+  }
+  function expInvHtml(q, r) {
+    if (r.plat) return '';
+    var f = r.ficha && r.ficha.t === 'investigacion' && r.ficha.ex ? r.ficha : invToca(q, r);
+    if (!f) return '';
+    var det = [f.nd + ' documento' + (f.nd === 1 ? '' : 's')];
+    if (f.nb) det.push(f.nb + ' en su bitácora');
+    if (f.np) det.push(f.np + ' pendiente' + (f.np === 1 ? '' : 's'));
+    if (f.nov) det.push('último registro: ' + f.nov);
+    return '<a class="pa-exp" href="' + esc(f.ex) + '"><span class="pa-exp-ico" aria-hidden="true">🗂️</span>' +
+      '<span class="pa-exp-tx"><small>' + esc(f.exn) + ' · Expediente de investigación · ' + (f.ab ? '🟠 Abierto' : '🟢 Documentado') + '</small>' +
+      '<b>' + esc(f.tit) + '</b><small>' + esc(det.join(' · ')) + '</small></span><span class="pa-exp-ir">Abrir ➔</span></a>';
+  }
+  function pideExpHtml() {
+    return '<p class="pa-chico pa-exp-pide">🗂️ ¿Es un caso grande? Revisa los <a href="' + EXP_INDICE + '">expedientes de investigación</a> o ' +
+      '<a href="servicios-cotiza.html?servicio=expediente">pide el tuyo</a>.</p>';
+  }
+  /* «Expediente del Tren Maya», «expedientes de investigación»: abre el de la
+     Biblioteca. Los casos de la ASF («expediente de Segalmex», «casos por aclarar
+     del AIFA») siguen en su aplicación. */
+  function expInvResp(q) {
+    var p = plano(q);
+    if (!charla || !/ expedientes? /.test(p) || / (asf|casos?|pliegos?|por aclarar) /.test(p)) return null;
+    var f = invToca(q, null);
+    if (f) {
+      var r = charla.deFicha(f);
+      r.ir = [f.ex, 'su expediente'];
+      r.html = '<p>🗂️ Es el <b>expediente ' + esc(f.exn) + '</b> de la Biblioteca del Erario Público: todo lo que la plataforma sabe del caso, en un solo lugar, ' +
+        (f.ab ? 'y <b>sigue abierto</b>' : 'ya <b>documentado</b>') + (f.nov ? '. El último registro de su bitácora es del ' + esc(f.nov) : '') + '.</p>' + r.html.replace(/<p>Es una de las investigaciones[\s\S]*?<\/p>/, '');
+      r.sug = ['Expedientes de investigación', '¿Cómo pido un expediente?'];
+      return r;
+    }
+    if (!/ expedientes? de (las )?(grandes )?investigacion(es)? | grandes investigaciones | expedientes? de la biblioteca /.test(p)) return null;
+    var ab = INV.filter(function (x) { return x.ex && x.ab; }).length, tot = INV.filter(function (x) { return x.ex; }).length;
+    var nuevos = INV.filter(function (x) { return x.ex && x.nov; }).slice(0, 5);
+    return { tit: 'Expedientes de investigación', ir: [EXP_INDICE, 'los Expedientes'], rec: [],
+      html: '<p>🗂️ Los <b>Expedientes</b> son la quinta tarjeta de la Biblioteca del Erario Público: cada gran investigación en un solo lugar, con el caso en cinco preguntas, su bitácora, lo que sigue y lo que falta.</p>' +
+        '<p>Hay <b>' + tot + '</b>: <b>' + ab + '</b> abiertos y <b>' + (tot - ab) + '</b> documentados. Se arman solos con la base de datos y se ponen al día cada vez que la plataforma publica.</p>' +
+        (nuevos.length ? '<p>Con registro fechado en su bitácora:</p><ul class="pa-lista">' + nuevos.map(function (x) {
+          return '<li><a href="' + esc(x.ex) + '">' + esc(x.exn) + ' · ' + esc(x.tit) + '</a> · ' + esc(x.nov) + '</li>'; }).join('') + '</ul>' : '') +
+        '<p>Dime «expediente del Tren Maya» y te abro el suyo. Si tu caso no está, <a href="servicios-cotiza.html?servicio=expediente">puedes pedirlo</a>.</p>',
+      sug: INV.filter(function (x) { return x.ex; }).slice(0, 3).map(function (x) { return 'Expediente de ' + x.tit; }) };
+  }
   function responde(q, quieto, ya) {
     q = String(q || '').trim().slice(0, 600);
     if (!q) return;
@@ -2475,16 +2616,18 @@
     var espera = r.espera ? r.espera.then(function (x) { r = x; }) : null;
     var pinta = function (li) {
       if (r.sin) {
-        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + iaHtml(q) + (r.web ? webHtml(r.web) : fueraHtml(q));
+        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + pideExpHtml() + iaHtml(q) + (r.web ? webHtml(r.web) : fueraHtml(q));
         if (!ya) anota(q, 'sin');
         return;
       }
       if (r.anota && !ya) anota(q, 'sin');
-      li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r, previas) +
+      r.q = q;
+      li.querySelector('.pa-burbuja').innerHTML = cabResp(r) + remiteHtml(q, r) + '<div class="pa-resp">' + esquema(r.html) + '</div>' + acciones(q, r, previas) +
+        expInvHtml(q, r) +
         periodistaHtml(q, r) + capaModoHtml(q, r) +
         appDe(r) +
-        (r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r)))) +
-        enciclopediaHtml(enciclopediaPara(q, r)) +
+        panel(r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r))), '🧭', 'Explóralo a fondo') +
+        panel(enciclopediaHtml(enciclopediaPara(q, r)), '📚', 'En la Enciclopedia') +
         (r.web ? webHtml(r.web) : '') +
         (r.sug && r.sug.length ? '<p class="pa-mas-t">' + (r.tambien ? 'También te puede servir' : 'Sigue preguntando') + '</p>' + chips(r.sug) : '');
       var caja = li.querySelector('.pa-app[data-pa-abre]');

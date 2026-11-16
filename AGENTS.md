@@ -865,6 +865,22 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   la página vuelve a contestarla con la misma base, así que no se puede
   fabricar un dictamen con cifras ajenas. El dictamen dice que no es un
   documento oficial ni un peritaje con validez ante autoridad.
+- **Los Expedientes de investigación** (pedido del autor, 16-11-2026: «grandes investigaciones que se irán dando seguimiento de forma
+  autónoma, automatizada e independiente, alimentándose de nuestra base de datos y al día», y «que el usuario también nos puede solicitar»).
+  Son la quinta tarjeta de la Biblioteca del Erario Público: `expedientes-investigacion.html` y un `expediente-<id>.html` por cada
+  investigación de Auditoría en imágenes. Los arma `herramientas/expedientes_inv.py` y **nadie los escribe a mano ni traen cifras propias**:
+  cruzan por las frases de `TEMA_BOT` la lectura breve, las notas del Noticiero y la memoria de promesas (la bitácora), los «Lo que sigue» y
+  el Registro de pendientes. «En el radar» lee en el navegador la bandeja de la Mesa de redacción: **solo titular, medio, fecha y liga,
+  «sin verificar»; un titular nunca entra como dato**. **Una investigación nueva tiene su expediente sola**; «abierto» quiere decir que hay
+  pendientes o un «lo que sigue», nunca una acusación. Se piden con el servicio `expediente` (se cotiza, **nunca un monto**) o proponiendo un
+  caso. `expedientes.html` sigue siendo los casos de la ASF: «expediente de Segalmex» abre esa aplicación; «expediente del Tren Maya», el de
+  la Biblioteca (`expInvResp()` de `asistente.js`).
+- **La respuesta va esquematizada y los modos remiten** (pedido del autor, 16-11-2026). Cada respuesta abre con su cabecera (`cabResp()`: tipo de
+  ficha, modo al que pertenece y chips), pliega el detalle largo (`esquema()`), trae la tarjeta de su expediente (`expInvHtml()`) y guarda
+  «Explóralo a fondo» y «En la Enciclopedia» en paneles (`panel()`). **Si la pregunta le toca a otro modo, la respuesta lo dice arriba y ofrece
+  pasar** (`modoToca()` y `remiteHtml()`: por las palabras de `MODO_PAL` o por el modo con que `modos.py` clasificó la página); la contesta igual,
+  con los mismos datos. El dictamen abre con «De un vistazo», trae las cifras en tabla y el capítulo «Expediente relacionado». **Nada de esto
+  agrega cifras ni entra a la huella.**
 - **Se ve y se usa como el mejor producto** (rediseño del 24-10-2026): un
   solo logo (el de la cabecera del chat; las burbujas no llevan avatar), cada
   respuesta en cuatro capas (texto, panel de fuente, acciones, «Sigue

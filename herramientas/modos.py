@@ -24,6 +24,8 @@ MODOS_NOMBRE = {'inspector': 'Inspector', 'periodista': 'Periodista',
 MODOS_ICONO = {'inspector': '🔍', 'periodista': '📰', 'ciudadano': '🙋', 'ambientalista': '🌎'}
 
 REGLAS = [
+    # Los expedientes de investigación se leen como Inspector (16-11-2026).
+    ('inspector', r'^expediente-|^expedientes-investigacion'),
     ('ambientalista', r'ambient|recursos-naturales|basura|profepa|Medio ambiente|Justicia ambiental|Costo Ambiental'),
     ('periodista', r'^noticias|^periodismo|^derecho-de-replica|^auditoria-|^pilares|Noticias'),
     ('ciudadano', r'^glosario|^diccionario|^marco-legal|^preguntas-frecuentes|^fuentes-oficiales|^aprende|^garantias|'

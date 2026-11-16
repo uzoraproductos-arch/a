@@ -275,6 +275,10 @@ BIBLIOTECA = [
      'El ciclo del dinero público artículo por artículo: Constitución, Ley de Ingresos 2026, LFPRH, Coordinación Fiscal, Disciplina Financiera y Poder Judicial, con el texto vigente cotejado.'),
     ('preguntas-frecuentes.html', '💡', 'Preguntas Frecuentes', 'En casillas didácticas',
      'Cómo funciona el gasto público, la deuda, el dinero de estados y municipios, qué revisa la Auditoría Superior y cuánto cuesta el Poder Judicial. Cada respuesta con sus fuentes.'),
+    # Quinta tarjeta (pedido del autor, 16-11-2026): las grandes investigaciones
+    # con seguimiento. Las arma herramientas/expedientes_inv.py con la base.
+    ('expedientes-investigacion.html', '🗂️', 'Expedientes', 'Las grandes investigaciones, con seguimiento',
+     'Cada gran investigación en un solo lugar: el caso en cinco preguntas, su bitácora, lo que sigue y lo que falta. Se arman solos con la base de datos, se ponen al día con cada publicación y también se pueden pedir.'),
 ]
 DIC_ENLACE = ('<p class="bib-sello">📚 Forma parte de la <a href="diccionario.html">%s</a>, '
               'la obra de consulta de la plataforma.</p>' % BIB_NOMBRE)
@@ -285,7 +289,7 @@ def tarjetas_biblioteca():
 
 
 def bib_nav(actual):
-    """Barra al pie de cada pagina de la Biblioteca, con sus cuatro apartados."""
+    """Barra al pie de cada pagina de la Biblioteca, con sus cinco apartados."""
     return ('<nav class="bib-nav" aria-label="%s">\n'
             '        <a class="bib-nav-tit" href="diccionario.html">📚 %s</a>\n'
             '        <div class="bib-nav-fila">\n%s\n        </div>\n      </nav>' % (BIB_NOMBRE, BIB_NOMBRE, '\n'.join(
@@ -1859,15 +1863,16 @@ DICCIONARIO = {
     'padre': ('aprende.html', 'Aprende'),
     'icono': '📚',
     'titulo': BIB_NOMBRE,
-    'lema': 'Las palabras, las referencias, las leyes y las preguntas del erario',
-    'entrada': ('La obra de consulta de la plataforma, en cuatro apartados: el <b>Diccionario</b> con los términos hacendarios, '
+    'lema': 'Las palabras, las referencias, las leyes, las preguntas y los expedientes del erario',
+    'entrada': ('La obra de consulta de la plataforma, en cinco apartados: el <b>Diccionario</b> con los términos hacendarios, '
                 'las <b>Referencias</b> con cada documento oficial que sostiene una cifra, el <b>Marco Legal Hacendario</b> con su '
-                'texto vigente y las <b>Preguntas Frecuentes</b> en casillas didácticas. Cada tarjeta abre su propia página.'),
+                'texto vigente, las <b>Preguntas Frecuentes</b> en casillas didácticas y los <b>Expedientes</b> de las grandes '
+                'investigaciones, con su seguimiento. Cada tarjeta abre su propia página.'),
     'hash_a_pagina': {'preguntas': 'preguntas-frecuentes.html', 'glosario': 'glosario.html',
                       'marco-legal': 'marco-legal.html', 'fuentes': 'fuentes-oficiales.html',
                       'referencias': 'fuentes-oficiales.html', 'pase': 'donaciones.html'},
     'secciones': [{
-        'id': 'apartados', 'titulo': 'Los cuatro apartados',
+        'id': 'apartados', 'titulo': 'Los cinco apartados',
         'texto': 'Elige uno: cada tarjeta abre su página.',
         'tarjetas': tarjetas_biblioteca(),
     }],
@@ -6788,6 +6793,12 @@ def redireccion(destino, nombre, texto):
 
 
 def generar(sello=None):
+    # Los expedientes de investigación (16-11-2026): su módulo lee auditorias.py,
+    # que importa este; por eso entra aquí y no arriba.
+    import expedientes_inv
+    import modos as _modos
+    _modos.PREGUNTA.update({expedientes_inv.INDICE: 'Expedientes de investigación'})
+    _modos.PREGUNTA.update({expedientes_inv.archivo(_i): expedientes_inv.pregunta(_i) for _i in expedientes_inv.auditorias.TEMA_BOT})
     numeros_preparar()
     if sello is None:
         d = open(os.path.join(RAIZ, 'index.html'), 'rb').read().decode('utf-8')
@@ -6849,7 +6860,7 @@ def generar(sello=None):
     import planisferio
     import leyes_niveles
     import presupuesto_modulos
-    for extra in planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), fraude.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), *servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), fraude.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), *servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA + [dict(x, pie_extra=bib_nav(expedientes_inv.INDICE)) for x in expedientes_inv.paginas()]:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

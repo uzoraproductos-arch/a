@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 732 |
+| Páginas revisadas | 756 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -137,20 +137,44 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-salud-sistema.html` | Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE · Auditavisión | apartados.py | 47 | 0 | 12 | 6 | 4 |
 | `derecho-de-replica.html` | Derecho de réplica · Auditavisión | apartados.py | 39 | 0 | 1 | 0 | 0 |
 | `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
-| `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
+| `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 | `donaciones.html` | Donaciones · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
 | `enciclopedia-auditavision.html` | Enciclopedia · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
 | `enciclopedia.html` | La Enciclopedia antigua · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `estado-de-cuenta.html` | Contexto dimensional · Auditavisión | apartados.py | 49 | 0 | 0 | 0 | 0 |
+| `expediente-agronitrogenados.html` | Expediente: Plantas de fertilizantes Agronitrogenados · Auditavisión | apartados.py | 53 | 0 | 3 | 1 | 2 |
+| `expediente-aifa.html` | Expediente: Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditavisión | apartados.py | 60 | 0 | 1 | 3 | 2 |
+| `expediente-bunker-garcia-luna.html` | Expediente: El Búnker de Seguridad de García Luna (SSPC) · Auditavisión | apartados.py | 54 | 0 | 3 | 1 | 3 |
+| `expediente-deuda-congreso-2027.html` | Expediente: Diputados aprobó la deuda de 2027: Ley de Ingresos y nota soberana · Auditavisión | apartados.py | 64 | 0 | 4 | 0 | 2 |
+| `expediente-deuda-soberana.html` | Expediente: Los intereses de la deuda pública · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
+| `expediente-dos-bocas.html` | Expediente: Refinería Olmeca (Dos Bocas) · Auditavisión | apartados.py | 57 | 0 | 1 | 3 | 3 |
+| `expediente-enciclomedia.html` | Expediente: Programa Enciclomedia · Auditavisión | apartados.py | 51 | 0 | 4 | 1 | 0 |
+| `expediente-estela-luz.html` | Expediente: Estela de Luz (Bicentenario) · Auditavisión | apartados.py | 53 | 0 | 3 | 1 | 2 |
+| `expediente-farac-carretero.html` | Expediente: FARAC (Rescate Carretero de 1997) · Auditavisión | apartados.py | 51 | 0 | 3 | 2 | 0 |
+| `expediente-fertinal.html` | Expediente: Compra de Grupo Fertinal · Auditavisión | apartados.py | 51 | 0 | 5 | 0 | 0 |
+| `expediente-fobaproa.html` | Expediente: FOBAPROA / IPAB (Rescate Bancario de 1998) · Auditavisión | apartados.py | 52 | 0 | 3 | 2 | 0 |
+| `expediente-guaymas-gas.html` | Expediente: Guaymas y la Gaceta Parlamentaria: el proyecto de gas y su revisión ambiental · Auditavisión | apartados.py | 62 | 0 | 3 | 1 | 2 |
+| `expediente-huachicol-fiscal.html` | Expediente: Huachicol fiscal: el impuesto que no entra · Auditavisión | apartados.py | 55 | 0 | 1 | 1 | 4 |
+| `expediente-ine-contratos.html` | Expediente: El INE: su presupuesto, lo auditado y los contratos en revisión · Auditavisión | apartados.py | 66 | 0 | 3 | 0 | 3 |
+| `expediente-inversion-megaobras.html` | Expediente: Inversión en megaobras y rescates: 11 obras, 2 rescates y 6 sexenios · Auditavisión | apartados.py | 66 | 0 | 0 | 4 | 15 |
+| `expediente-lego-cienega.html` | Expediente: Ciénega de Flores: el dinero público alrededor de LEGO · Auditavisión | apartados.py | 52 | 0 | 1 | 2 | 0 |
+| `expediente-medicamentos-imss.html` | Expediente: Compras de medicamentos y contratos del sector salud · Auditavisión | apartados.py | 58 | 0 | 3 | 1 | 2 |
+| `expediente-megafarmacia.html` | Expediente: Megafarmacia del Bienestar (Huehuetoca) · Auditavisión | apartados.py | 54 | 0 | 3 | 1 | 1 |
+| `expediente-ramo-33.html` | Expediente: Ramo 33: el dinero para estados y municipios · Auditavisión | apartados.py | 52 | 0 | 3 | 0 | 0 |
+| `expediente-refineria-tula.html` | Expediente: Refinería Bicentenario en Tula (Barda Perimetral) · Auditavisión | apartados.py | 51 | 0 | 3 | 2 | 0 |
+| `expediente-seguro-popular.html` | Expediente: Seguro Popular: 53.5 millones de afiliados y lo que pasó después · Auditavisión | apartados.py | 59 | 0 | 5 | 1 | 2 |
+| `expediente-tren-maya.html` | Expediente: Tren Maya · Auditavisión | apartados.py | 59 | 0 | 1 | 2 | 1 |
+| `expediente-tren-toluca.html` | Expediente: Tren Interurbano México-Toluca «El Insurgente» · Auditavisión | apartados.py | 54 | 0 | 1 | 3 | 1 |
+| `expedientes-investigacion.html` | Expedientes · Auditavisión | apartados.py | 71 | 0 | 0 | 0 | 0 |
 | `expedientes.html` | Los casos por aclarar · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `fuentes-del-auditor.html` | Fuentes del auditor · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `fuentes-oficiales.html` | Referencias · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
+| `fuentes-oficiales.html` | Referencias · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `garantias-brujula.html` | La brújula: ¿a qué puerta toco? · Auditavisión | apartados.py | 47 | 0 | 0 | 0 | 0 |
 | `garantias-derechos.html` | Tus diez garantías · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 | `garantias-puertas.html` | Las seis puertas oficiales · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `garantias-reto.html` | ¿Mito o realidad? · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `garantias.html` | Garantías cívicas · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
-| `glosario.html` | Diccionario · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
+| `glosario.html` | Diccionario · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `herramienta-ambiente-auditor.html` | Auditor ambiental · Auditavisión | apartados.py | 51 | 0 | 73 | 41 | 0 |
 | `herramienta-ambiente-basura.html` | Basura y protección · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-ambiente-crisis.html` | Crisis ambientales · Auditavisión | apartados.py | 62 | 0 | 23 | 7 | 19 |
@@ -210,14 +234,14 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 53 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 66 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 323 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 324 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `informes-documentar-para-sancionar.html` | Informe especial: Documentar para sancionar · Auditavisión | apartados.py | 53 | 0 | 40 | 8 | 2 |
 | `informes-oficiales.html` | Informes oficiales · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `informes-semestral-asf.html` | Informe semestral de la ASF · Auditavisión | apartados.py | 52 | 0 | 32 | 6 | 4 |
 | `marco-legal-tres-niveles.html` | Las leyes del dinero en los tres niveles · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 2 |
-| `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
+| `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
 | `nepotismo-y-cargos-publicos.html` | Nepotismo y cargos públicos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `noticias-al-momento-agua-guadalajara-14500-federal.html` | El agua de Guadalajara: la Federación anuncia 14,500 millones «sin deuda», pero el dinero todavía no aparece en el Presupuesto 2027 · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-asf-nuevo-leon-triangulacion-cp2025.html` | La ASF denuncia una presunta triangulación de 7 mil 200 millones en Nuevo León: lo que dice la Matriz oficial, lo que falta y por qué «desvió» todavía no es un hecho · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 3 |
@@ -723,7 +747,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-zac-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 57 | 0 | 9 | 3 | 0 |
 | `planisferio-zac.html` | Zacatecas · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
 | `planisferio.html` | Planisferio · Auditavisión | apartados.py | 110 | 0 | 110 | 72 | 10 |
-| `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
+| `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `radar-estado-de-cuenta.html` | Estado de cuenta administrativo · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |

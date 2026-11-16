@@ -2330,6 +2330,23 @@
   {
    "q": "¿de qué vive auditavision?",
    "ir": "servicios-por-que.html#sostenemos"
+  },
+  {
+   "q": "Expediente del Tren Maya",
+   "ir": "expediente-tren-maya.html",
+   "dice": ["EXP-001"]
+  },
+  {
+   "q": "expediente de huachicol",
+   "ir": "expediente-huachicol-fiscal.html"
+  },
+  {
+   "q": "Expedientes de investigación",
+   "ir": "expedientes-investigacion.html"
+  },
+  {
+   "q": "casos por aclarar del AIFA",
+   "ir": "expedientes.html#exp-aifa"
   }
  ]
 }
