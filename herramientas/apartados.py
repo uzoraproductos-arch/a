@@ -2328,6 +2328,47 @@ SV_ANCLAS = dict([(p[0], p[1]) for p in SV_PAGINAS] + [
     ('proceso', SV_COTIZA), ('independencia', SV_COTIZA), ('sv-*', SV_CATALOGO), ('fam-*', SV_CATALOGO)])
 
 
+# La cotización con opciones a un toque (pedido del autor, 16-11-2026: «que el
+# llenado sea ya con opciones predeterminadas… sencillas y fáciles de escoger,
+# incluso como ejemplos y opciones libres»). Cada servicio trae ejemplos de
+# tema y de pregunta que se tocan y se cambian al caso propio: (tema, pregunta).
+# Son ejemplos de redacción, sin cifras ni nombres. **Un servicio nuevo necesita
+# aquí sus ejemplos**, o la generación se detiene.
+SV_EJEMPLOS = {
+    'diligencia': [('Un proveedor nuevo antes de firmarle', '¿Está en la lista 69-B del SAT, tiene sanciones o contratos públicos, y qué documento lo dice?'),
+                   ('Un cliente en una actividad vulnerable', '¿Qué dicen de esta empresa los documentos públicos antes de aceptarla como cliente?')],
+    'seguimiento': [('Mi cartera de proveedores contra la lista 69-B', '¿Me avisan cada semana si alguno de mis proveedores entra o cambia de situación en la lista?'),
+                    ('Los contratos de una dependencia', '¿Me avisan cuando esta dependencia publique contratos nuevos de este tipo?')],
+    'facturas': [('Las facturas de un trimestre de mi empresa', '¿Qué proveedores de este lote están en la lista 69-B y qué facturas conviene revisar?'),
+                 ('Las facturas de un cliente de mi despacho', '¿Qué señales trae este lote, por proveedor, y con qué regla se detectó cada una?')],
+    'radiografia': [('Las finanzas de mi municipio', '¿Cuánto le entra, en qué lo gasta, cuánto debe y qué dejó por aclarar ante la ASF?'),
+                    ('Las finanzas de mi estado', '¿Qué dicen los documentos públicos de su deuda, su inversión y lo que no cuadra entre portales?')],
+    'temporada': [('El verificador para mi redacción en campaña', '¿Cómo cotejamos las cifras de los debates y seguimos cada promesa de gasto?'),
+                  ('Las promesas de gasto de las candidaturas de mi estado', '¿Qué prometió cada candidatura y qué dice el presupuesto vigente?')],
+    'entrega': [('El gobierno municipal que voy a recibir', '¿Qué dicen los documentos públicos de lo que recibo, y qué falta por publicar?'),
+                ('La entrega-recepción de mi cabildo', '¿Qué deuda, qué obras y qué observaciones de auditoría quedan abiertas?')],
+    'revision': [('Un contrato de obra pública', '¿A quién se le adjudicó, por cuánto, con qué procedimiento y qué documento lo acredita?'),
+                 ('Una cifra antes de publicarla', '¿Esta cifra consta en un documento oficial, y cuál es?'),
+                 ('La compra de medicamentos de un hospital', '¿A quién se le pagó y cuánto, según los contratos publicados?')],
+    'expediente': [('Un programa o una obra con observaciones de la ASF', '¿Quién, cuánto, cuándo y qué documento lo acredita, en orden?'),
+                   ('Los contratos de una empresa con el gobierno', '¿Qué contratos tiene, con qué dependencias, y qué inconsistencias hay entre los documentos?')],
+    'capacitacion': [('Taller «Documentar para sancionar»', '¿Pueden darle a mi equipo el taller de las 20 matrices de la ASF?'),
+                     ('Taller de facturas y la lista 69-B', '¿Pueden capacitar a mi despacho para revisar facturas y proveedores?'),
+                     ('Taller para leer el presupuesto', '¿Pueden enseñar a mi grupo a leer el presupuesto de su municipio o de su estado?')],
+    'licencia': [('Las herramientas dentro de mi institución', '¿Cómo podemos usar el verificador y los datos de la plataforma en nuestra organización?'),
+                 ('La plataforma en mi universidad', '¿Cómo la usamos en clase, en servicio social o en tesis?')],
+    'no-se': [('Algo raro con el dinero público de mi municipio', '¿Por dónde conviene empezar a revisarlo, y con qué documentos?'),
+              ('Una empresa con la que voy a tratar', '¿Qué puedo saber de ella con documentos públicos?')],
+}
+SV_PERIODOS = ['2025', '2024', '2019 a 2024', 'De 2024 a hoy']
+SV_PLAZOS = ['Sin prisa', 'En un mes', 'En dos semanas', 'Esta semana']
+SV_DOCS = ['Todavía no tengo documentos', 'Tengo las ligas', 'Tengo números de contrato', 'Tengo el número de auditoría']
+SV_ENTIDADES = ['Aguascalientes', 'Baja California', 'Baja California Sur', 'Campeche', 'Chiapas', 'Chihuahua', 'Ciudad de México', 'Coahuila',
+                'Colima', 'Durango', 'Estado de México', 'Guanajuato', 'Guerrero', 'Hidalgo', 'Jalisco', 'Michoacán', 'Morelos', 'Nayarit',
+                'Nuevo León', 'Oaxaca', 'Puebla', 'Querétaro', 'Quintana Roo', 'San Luis Potosí', 'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas',
+                'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas']
+
+
 def sv_liga(html_, archivo):
     """Las ligas internas (#ancla) de un bloque de Servicios, a la página donde
     vive su ancla; las que viven en `archivo` se quedan como están."""
@@ -2609,9 +2650,23 @@ def servicios():
         '          <details class="sv-faq"><summary>%s</summary><p>%s</p></details>' % q for q in PREGUNTAS)
     politica = '\n'.join('            <li><b>%s</b> %s</li>' % p for p in INDEPENDENCIA)
     opciones = '\n'.join('                <option value="%s">%s</option>' % (s[0], s[2]) for s in SERVICIOS)
+    sin_ej = [s[0] for s in SERVICIOS if s[0] not in SV_EJEMPLOS]
+    if sin_ej:
+        raise SystemExit('apartados.py: faltan los ejemplos de cotización (SV_EJEMPLOS) de: %s' % ', '.join(sin_ej))
     campo = lambda i, et, ctl, ayuda='': (
         '            <div class="sv-campo"><label for="%s">%s</label>%s%s</div>'
         % (i, et, ctl, ('<small id="%s-ay">%s</small>' % (i, ayuda)) if ayuda else ''))
+    # Las opciones a un toque: cada botón pone su valor en el campo `para`
+    # (servicios.js). Con `elige`, el campo es una lista y los botones la
+    # sustituyen a la vista; sin él, llenan un campo que sigue siendo libre.
+    ops = lambda para, pares, nombre, elige=False: (
+        '<div class="sv-ops" data-para="%s"%s role="group" aria-label="%s">%s</div>' % (
+            para, ' data-elige' if elige else '', esc_attr(nombre), ''.join(
+                '<button type="button" class="sv-op" data-valor="%s" aria-pressed="false">%s</button>' % (esc_attr(v), t) for v, t in pares)))
+    mismas = lambda xs: [(x, x) for x in xs]
+    serv_ops = ops('svServicio', [(s[0], '<span aria-hidden="true">%s</span> %s' % (s[1], s[2])) for s in SERVICIOS] +
+                   [('no-se', '<span aria-hidden="true">🤔</span> No sé, ayúdenme a definirlo')], 'Servicio', True)
+    usos = ['Periodismo', 'Organización civil', 'Empresa o despacho', 'Universidad o academia', 'Gobierno o dependencia', 'Uso personal', 'Otro']
     # Paso 0.2 de docs/PLAN-IMPLEMENTACION.md (05-11-2026): con FUNCIONES
     # lleno, «Enviar» manda la solicitud a recibir-formulario (tipo
     # «solicitud»), con el antispam, igual que los formularios de Comunidad
@@ -2631,20 +2686,24 @@ def servicios():
         '<form class="sv-form" id="svForm" data-canal="%s"%s novalidate>' % (esc_attr(CANAL_SOLICITUD), envio),
         '          <p class="sv-privado">%s</p>' % privado,
         '          <fieldset class="sv-grupo"><legend>Qué quieres investigar</legend>',
-        campo('svServicio', 'Servicio', '<select id="svServicio" name="servicio">\n%s\n                <option value="no-se">No sé, ayúdenme a definirlo</option>\n              </select>' % opciones),
-        campo('svTema', 'Tema <span class="sv-req">obligatorio</span>', '<input id="svTema" name="tema" type="text" maxlength="160" required aria-describedby="svTema-ay">',
-              'Por ejemplo: la compra de medicamentos de un hospital, un contrato de obra, el Ramo 33 de tu municipio.'),
-        campo('svPregunta', 'Tu pregunta <span class="sv-req">obligatorio</span>', '<textarea id="svPregunta" name="pregunta" rows="4" maxlength="1500" required aria-describedby="svPregunta-ay"></textarea>',
+        campo('svServicio', '1. ¿Qué necesitas? Toca una opción', serv_ops + '<select id="svServicio" name="servicio">\n%s\n                <option value="no-se">No sé, ayúdenme a definirlo</option>\n              </select>' % opciones),
+        '            <div class="sv-ejemplos" id="svEjemplos" hidden><span class="sv-et">💡 Ejemplos: toca uno y cámbialo a tu caso</span><div class="sv-ops" id="svEjemplosOps"></div></div>',
+        '            <script type="application/json" id="svEjemplosDatos">%s</script>' % json.dumps(SV_EJEMPLOS, ensure_ascii=False).replace('</', '<\\/'),
+        campo('svTema', '2. Tema <span class="sv-req">obligatorio</span>', '<input id="svTema" name="tema" type="text" maxlength="160" required aria-describedby="svTema-ay">',
+              'Toca un ejemplo de arriba o escríbelo con tus palabras.'),
+        campo('svPregunta', '3. Tu pregunta <span class="sv-req">obligatorio</span>', '<textarea id="svPregunta" name="pregunta" rows="4" maxlength="1500" required aria-describedby="svPregunta-ay"></textarea>',
               'Entre más concreta, mejor: «¿A quién se le pagó y cuánto?» rinde más que «investiguen todo».'),
         '            <div class="sv-dos">',
-        campo('svAmbito', 'Ámbito', '<select id="svAmbito" name="ambito"><option>Federal</option><option>Estatal</option><option>Municipal</option><option>Varios</option></select>'),
-        campo('svLugar', 'Entidad o municipio', '<input id="svLugar" name="lugar" type="text" maxlength="120">'),
+        campo('svAmbito', 'Ámbito', ops('svAmbito', mismas(['Federal', 'Estatal', 'Municipal', 'Varios']), 'Ámbito', True) +
+              '<select id="svAmbito" name="ambito"><option>Federal</option><option>Estatal</option><option>Municipal</option><option>Varios</option></select>'),
+        campo('svLugar', 'Entidad o municipio', '<input id="svLugar" name="lugar" type="text" maxlength="120" list="svLugares" placeholder="Elige un estado o escribe tu municipio" aria-describedby="svLugar-ay">'
+              '<datalist id="svLugares">%s</datalist>' % ''.join('<option value="%s">' % e for e in SV_ENTIDADES), 'Es opcional.'),
         '            </div>',
         '            <div class="sv-dos">',
-        campo('svPeriodo', 'Periodo', '<input id="svPeriodo" name="periodo" type="text" maxlength="60" placeholder="2019 a 2024">'),
-        campo('svPlazo', 'Para cuándo lo necesitas', '<input id="svPlazo" name="plazo" type="text" maxlength="60">'),
+        campo('svPeriodo', 'Periodo', ops('svPeriodo', mismas(SV_PERIODOS), 'Periodo') + '<input id="svPeriodo" name="periodo" type="text" maxlength="60" placeholder="O escribe otro">'),
+        campo('svPlazo', 'Para cuándo lo necesitas', ops('svPlazo', mismas(SV_PLAZOS), 'Para cuándo lo necesitas') + '<input id="svPlazo" name="plazo" type="text" maxlength="60" placeholder="O escribe una fecha">'),
         '            </div>',
-        campo('svDocs', 'Documentos que ya tienes', '<textarea id="svDocs" name="documentos" rows="2" maxlength="800"></textarea>',
+        campo('svDocs', 'Documentos que ya tienes', ops('svDocs', mismas(SV_DOCS), 'Documentos que ya tienes') + '<textarea id="svDocs" name="documentos" rows="2" maxlength="800" placeholder="O pega aquí las ligas o los números"></textarea>',
               'Ligas, números de contrato o de auditoría. Es opcional.'),
         '          </fieldset>',
         '          <fieldset class="sv-grupo"><legend>Quién lo solicita</legend>',
@@ -2652,7 +2711,7 @@ def servicios():
         campo('svNombre', 'Nombre u organización <span class="sv-req">obligatorio</span>', '<input id="svNombre" name="nombre" type="text" maxlength="120" required autocomplete="name">'),
         campo('svCorreo', 'Correo para responderte <span class="sv-req">obligatorio</span>', '<input id="svCorreo" name="correo" type="email" maxlength="160" required autocomplete="email">'),
         '            </div>',
-        campo('svUso', 'Para qué lo usarás', '<select id="svUso" name="uso"><option>Periodismo</option><option>Organización civil</option><option>Empresa o despacho</option><option>Universidad o academia</option><option>Gobierno o dependencia</option><option>Uso personal</option><option>Otro</option></select>'),
+        campo('svUso', 'Para qué lo usarás', ops('svUso', mismas(usos), 'Para qué lo usarás', True) + '<select id="svUso" name="uso">%s</select>' % ''.join('<option>%s</option>' % u for u in usos)),
         '            <div class="sv-campo" role="radiogroup" aria-labelledby="svParteEt"><span class="sv-et" id="svParteEt">¿Eres parte del caso? <span class="sv-req">obligatorio</span></span>',
         '              <label class="sv-radio"><input type="radio" name="parte" value="No"> No</label>',
         '              <label class="sv-radio"><input type="radio" name="parte" value="Sí"> Sí (proveedor, persona servidora pública involucrada o contraparte en un litigio)</label>',
