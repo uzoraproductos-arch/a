@@ -231,10 +231,10 @@ La Enciclopedia queda fuera porque está congelada.
 | `noticias-al-momento-portacelis-permiso-diesel-sener.html` | Portacelis y el permiso para importar 52 millones de litros de diésel: lo que dice MCCI, lo que consta y lo que es puro adjetivo · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-senado-ley-de-ingresos-2027.html` | El Senado aprueba la Ley de Ingresos 2027: de sus 10.6 billones, casi 1.5 son dinero prestado · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-servidores-ia-exportaciones-contenido-nacional.html` | ¿México ya exporta más servidores que autos? Lo dice una consultora privada, no el INEGI, y el «3 a 7 % mexicano» no tiene documento · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 4 |
-| `noticias-auditavision.html` | Auditavisión Noticias · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
-| `noticias-relevantes.html` | Noticiero · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
-| `noticias-seguimiento.html` | Seguimiento: el caso no se olvida · Auditavisión | apartados.py | 45 | 0 | 8 | 4 | 6 |
-| `noticias-verifica.html` | Verifica una noticia · Auditavisión | apartados.py | 75 | 0 | 0 | 0 | 0 |
+| `noticias-auditavision.html` | Auditavisión Noticias · Auditavisión | apartados.py | 50 | 0 | 0 | 0 | 0 |
+| `noticias-relevantes.html` | Noticiero · Auditavisión | apartados.py | 64 | 0 | 0 | 0 | 0 |
+| `noticias-seguimiento.html` | Seguimiento: el caso no se olvida · Auditavisión | apartados.py | 53 | 0 | 8 | 4 | 6 |
+| `noticias-verifica.html` | Verifica una noticia · Auditavisión | apartados.py | 83 | 0 | 0 | 0 | 0 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 57 | 0 | 0 | 5 | 1 |
 | `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 54 | 0 | 4 | 0 | 0 |

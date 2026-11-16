@@ -730,6 +730,16 @@ mudando a su página; no se agregan desgloses nuevos.
   aludida dijo en su propio documento: se publica en sus palabras, con su liga,
   y no se califica. La página es la función `noticias(base, ref)` de
   `apartados.py`.
+- **El Noticiero es un tablero y sus páginas van por pestañas** (reestructura del autor, 16-11-2026: «teniendo en
+  cuenta las novedades de los servicios… y el objetivo… del modo Periodista»). `noticias-relevantes.html` trae una
+  tarjeta por sección, en tres grupos (Lee, Verifica, Sigue; `TARJETA` y `tablero()` de `noticias.py`: **una sección
+  nueva necesita ahí su línea de tarjeta**, o la generación se detiene), «Lo último, verificado» (`ultimas()`) y el
+  puente. En las tres páginas **la barra son pestañas: se ve una sección a la vez** (`irA()` de `noticias.js`); las
+  direcciones no cambian, y un ancla de adentro (`#col-<id>`, `#propon`, `#ciego-<id>`, `#promesa-<id>`) abre su
+  sección. Los puntos ciegos y lo que falta de cada caso abierto van plegados. **El puente** (`PUENTE` y `puente()`)
+  cierra cada página con el modo Periodista (preguntas que el chat ya contesta) y los servicios que vienen al caso,
+  leídos de `SERVICIOS` y `COBRO`: **nunca un monto**. Cada nota trae «📰 Pregúntale al Periodista». El cabezal del
+  periódico va solo en el diario. Se reordenó; no se quitó contenido.
 - **Noticias es un periódico: «Auditavisión Noticias»** (pedido del autor,
   28-10-2026: «una nueva reestructuración tanto de diseño como de la
   información… partiendo de una metodología u objetivo»). **Objetivo: que

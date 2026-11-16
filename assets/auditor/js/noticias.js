@@ -26,23 +26,47 @@
     h.textContent = t.charAt(0).toUpperCase() + t.slice(1);
   }
 
-  /* ---------- La barra: marca la sección que estás leyendo ---------- */
-  var ligas = [].slice.call(document.querySelectorAll('.nt-barra a'));
-  if ('IntersectionObserver' in window && ligas.length) {
-    var io = new IntersectionObserver(function (ents) {
-      ents.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        ligas.forEach(function (a) {
-          if (a.getAttribute('href') === '#' + en.target.id) {
-            a.setAttribute('aria-current', 'true');
-            if (a.scrollIntoView && a.parentNode.scrollWidth > a.parentNode.clientWidth) {
-              a.parentNode.scrollTo({ left: a.offsetLeft - 16, behavior: 'smooth' });
-            }
-          } else a.removeAttribute('aria-current');
-        });
-      });
-    }, { rootMargin: '-35% 0px -60% 0px' });
-    [].forEach.call(document.querySelectorAll('.nt-sec'), function (s) { io.observe(s); });
+  /* ---------- La barra son pestañas: una sección a la vez (16-11-2026) ----------
+     Cada página mostraba todas sus secciones una bajo otra (hasta 32,000 px
+     en celular). Ahora la barra elige cuál se ve. Las direcciones no cambian:
+     #seccion la abre, y un ancla de adentro (#col-<id>, #propon, #ciego-<id>,
+     #promesa-<id>) abre su sección y baja hasta ella. Sin JavaScript se ven
+     todas, como antes. */
+  var diario = document.querySelector('.nt-diario');
+  var secs = [].slice.call(document.querySelectorAll('.nt-diario .nt-sec'));
+  var tabs = [].slice.call(document.querySelectorAll('.nt-barra a[data-nt-tab]'));
+  function activa(sec) {
+    secs.forEach(function (s) { s.hidden = s !== sec; });
+    tabs.forEach(function (a) {
+      if (a.getAttribute('data-nt-tab') === sec.id) {
+        a.setAttribute('aria-current', 'true');
+        if (a.parentNode.scrollWidth > a.parentNode.clientWidth) a.parentNode.scrollLeft = Math.max(0, a.offsetLeft - 16);
+      } else a.removeAttribute('aria-current');
+    });
+  }
+  function irA(id, baja) {
+    var el = id ? document.getElementById(id) : null;
+    var sec = el && el.closest ? el.closest('.nt-sec') : null;
+    if (!sec || secs.indexOf(sec) < 0) return false;
+    activa(sec);
+    var det = el.matches('details') ? el : el.querySelector(':scope > details') || el.closest('details');
+    if (det && el !== sec) det.open = true;
+    /* Las columnas (#col-<id>) las abre y las acomoda columnas.js. */
+    if (baja && id.indexOf('col-') !== 0) {
+      setTimeout(function () { (el === sec ? (document.querySelector('.nt-barra') || sec) : el).scrollIntoView({ block: 'start' }); }, 30);
+    }
+    return true;
+  }
+  function delHash() { try { return decodeURIComponent(location.hash.slice(1)); } catch (e) { return ''; } }
+  if (diario && secs.length) {
+    diario.classList.add('nt-tabs');
+    if (!irA(delHash(), true)) activa(secs[0]);
+    window.addEventListener('hashchange', function () { irA(delHash(), true); });
+    /* Tocar la pestaña que ya está en la dirección no dispara «hashchange». */
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+      if (a && a.getAttribute('href').slice(1) === delHash()) irA(delHash(), true);
+    });
   }
 
   /* La barra se pega justo debajo de la cabecera del sitio, que cambia de alto. */
@@ -219,8 +243,7 @@
     if (t) t.click();
     u.value = liga;
     if (f.requestSubmit) f.requestSubmit(); else f.dispatchEvent(new Event('submit', { cancelable: true }));
-    var v = $('verifica');
-    if (v) v.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (location.hash === '#verifica') irA('verifica', true); else location.hash = 'verifica';
   }
   if (mesa) {
     pintaMesa();

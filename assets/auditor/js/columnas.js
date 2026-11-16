@@ -5753,21 +5753,6 @@
       }).join('');
   }
 
-  /* La franja «Al momento»: las notas breves, de la más nueva a la más vieja. */
-  function fechaN(f) { var p = String(f || '').split('-'); return p.length === 3 ? +(p[2] + p[1] + p[0]) : 0; }
-  function franja() {
-    var b = COLUMNAS.filter(function (c) { return c.seccion === 'Al momento'; })
-      .sort(function (x, y) { return fechaN(y.fecha) - fechaN(x.fecha); });
-    if (!b.length) return '';
-    return '<section class="col-franja" aria-labelledby="colFranjaTit"><h4 class="col-franja-tit" id="colFranjaTit">⏱️ Al momento <small>Lo que está pasando, verificado</small></h4><ol>' +
-      b.slice(0, 6).map(function (c) {
-        var pend = (c.cotejo || []).filter(function (x) { return x.res === 'pendiente'; }).length;
-        var ok = (c.cotejo || []).filter(function (x) { return x.res === 'consta' || x.res === 'matiz'; }).length;
-        return '<li><time>' + esc(c.fecha) + '</time><a href="' + COL + '#col-' + esc(c.id) + '">' + esc(c.titulo) + '</a>' +
-          '<small>' + ok + ' con documento · ' + pend + ' por probar' + (c.nota ? ' · a partir de ' + esc(c.nota.medio) : '') + '</small></li>';
-      }).join('') + '</ol></section>';
-  }
-
   function articulo(c, i) {
     var cifras = (c.cifras || []).map(function (x) {
       return '<li><strong>' + esc(x.valor) + '</strong><span>' + esc(x.etq) + '</span>' +
@@ -5819,6 +5804,7 @@
         '<div class="col-acciones">' +
           btnSeguir(c) +
           (c.seccion === 'Al momento' ? '<a class="col-propia" href="noticias-al-momento-' + esc(c.id) + '.html">📄 Página de la nota</a>' : '') +
+          '<a class="col-propia" href="herramienta-inspector-pregunta.html?modo=periodista&amp;q=' + encodeURIComponent(c.titulo) + '">📰 Pregúntale al Periodista</a>' +
           '<button type="button" class="col-copiar" data-id="' + esc(c.id) + '">🔗 Copiar enlace</button>' +
           '<button type="button" class="col-cerrar">Cerrar la columna ▴</button>' +
         '</div>' +
@@ -5875,7 +5861,7 @@
     if (!raizP) return;
     var nt = suyas('n'), op = suyas('o');
     var lead = nt[0];
-    raizP.innerHTML = franja() +
+    raizP.innerHTML =
       '<div class="nt-portada">' +
         (lead ? '<article class="nt-lead">' +
           '<a class="nt-lead-a" href="' + COL + '#col-' + esc(lead.id) + '">' + figura(lead, true) +
@@ -5903,9 +5889,9 @@
         return '<li class="nt-caso"><div class="nt-caso-cab"><span class="col-kicker">' + esc(c.seccion === 'Verificado' ? 'Verificamos' : c.seccion) + '</span>' +
           '<a href="' + COL + '#col-' + esc(c.id) + '"><b>' + esc(c.titulo) + '</b></a>' +
           '<small>Revisado al ' + esc(c.actualizado || c.fecha || 'sin fecha') + ' · ' + c.sigue.length + (c.sigue.length === 1 ? ' documento' : ' documentos') + ' por llegar</small></div>' +
-          '<ul class="nt-caso-falta">' + c.sigue.slice(0, 3).map(function (x) {
+          '<details class="nt-caso-det"><summary>Qué falta para cerrarlo</summary><ul class="nt-caso-falta">' + c.sigue.slice(0, 3).map(function (x) {
             return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.que) + ' ↗</a></li>';
-          }).join('') + (c.sigue.length > 3 ? '<li><a href="' + COL + '#col-' + esc(c.id) + '">y ' + (c.sigue.length - 3) + ' más en la nota ➔</a></li>' : '') + '</ul>' +
+          }).join('') + (c.sigue.length > 3 ? '<li><a href="' + COL + '#col-' + esc(c.id) + '">y ' + (c.sigue.length - 3) + ' más en la nota ➔</a></li>' : '') + '</ul></details>' +
           btnSeguir(c) + '</li>';
       }).join('') + '</ol>';
   }

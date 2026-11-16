@@ -162,9 +162,9 @@ def datos():
 def seccion(esc):
     """El cuerpo de la sección «Puntos ciegos» de noticias-verifica.html."""
     lis = '\n'.join(
-        '    <li class="nt-ciego" id="ciego-%s"><p class="nt-ciego-n"><span aria-hidden="true">%s</span> <b>%s</b></p>\n'
+        '    <li class="nt-ciego" id="ciego-%s"><details><summary class="nt-ciego-n"><span aria-hidden="true">%s</span> <b>%s</b></summary>\n'
         '      <p>%s</p>\n      <p><b>Qué preguntar:</b> %s</p>\n'
-        '      <p class="nt-ciego-de">Así lo vimos: %s</p></li>' % (
+        '      <p class="nt-ciego-de">Así lo vimos: %s</p></details></li>' % (
             r['id'], r['ico'], esc(r['n']), esc(r['ex']), esc(r['pr']),
             ' · '.join('<a href="%s">%s</a>' % (AL_MOMENTO % i, esc(t)) for i, t in r['de']))
         for r in REGLAS)

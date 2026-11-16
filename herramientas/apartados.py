@@ -1449,12 +1449,17 @@ def noticias(base, ref):
     'icono': '📰',
     'titulo': 'Noticiero',
     'lema': 'La noticia, el verificador y el seguimiento',
-    'entrada': ('Las finanzas públicas de México, verificadas, en tres puertas: el periódico de la plataforma, el verificador para cotejar '
-                'lo que viste y el seguimiento de los casos que no se olvidan. Cada afirmación lleva el documento oficial que la sostiene.'),
+    'entrada': ('Que ninguna noticia sobre el dinero público se quede sin cotejar. Aquí lees la noticia ya verificada, cotejas la que viste '
+                'y sigues el caso hasta que llegue su documento. Elige una tarjeta.'),
+    # Tablero de tarjetas por grupo desde el 16-11-2026 (reestructura del autor):
+    # cada sección tiene su tarjeta (nt.tablero()), y abajo van lo último, el
+    # modo Periodista y los servicios para redacciones (nt.cierre_indice()).
     'pestanas': True,
-    'pista': 'Cada tarjeta abre su propia página.',
+    'pista': 'Cada tarjeta abre su sección.',
     'hash_a_pagina': nt.ANCLAS,
-    'secciones': [{'id': arch[:-5], 'pagina': arch, 'pestana': (ico, nom, lema)} for arch, ico, nom, lema, _e, _s in nt.PARTES],
+    'estilos': nt.ESTILOS,
+    'secciones': [dict({'id': i, 'pagina': pag, 'pestana': pest}, **({'grupo': g} if g else {})) for g, i, pag, pest in nt.tablero()],
+    'cierre': nt.cierre_indice(),
     }
     paginas = [indice]
     for arch, ico, nom, lema, entrada, _s in nt.PARTES:
