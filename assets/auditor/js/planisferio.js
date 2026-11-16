@@ -222,14 +222,14 @@
       ficha.innerHTML = VACIA;
     }
     var VACIA = '<p class="pl-ficha-vacia"><b>Toca una entidad.</b> Verás sus cifras de la dimensión que elegiste y la puerta a su portal, con sus municipios.</p>';
-    function fila(nom, v, est, anio, pend) {
-      return '<dt>' + nom + ' · ' + anio + '</dt><dd>' + (v == null ? 'Sin cifra ' + chip('pendiente', pend) : '<b class="num-tabular">' + mdp(v) + '</b> ' + chip(est)) + '</dd>';
+    function fila(nom, v, est, anio, pend, id) {
+      return '<dt' + (id ? ' data-l="' + id + '"' : '') + '>' + nom + ' · ' + anio + '</dt><dd>' + (v == null ? 'Sin cifra ' + chip('pendiente', pend) : '<b class="num-tabular">' + mdp(v) + '</b> ' + chip(est)) + '</dd>';
     }
     function lenteDe(id) { return D.lentes.filter(function (l) { return l.id === id; })[0]; }
     function deuda(e, fijo) {
       var med = e.ild != null, d = function (id, nom) {
         var l = lenteDe(id);
-        return '<dt>' + nom + '</dt><dd>' + (e[id] == null ? esc(l.falta.gris) : '<b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est)) + '</dd>';
+        return '<dt data-l="' + id + '">' + nom + '</dt><dd>' + (e[id] == null ? esc(l.falta.gris) : '<b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est)) + '</dd>';
       };
       ficha.innerHTML = '<h3>' + esc(e.n) + '</h3><p class="pl-ficha-sub">Su deuda al cierre de 2025 · Sistema de Alertas</p>' +
         '<dl class="pl-ficha-dl">' + d('deuda', 'Lo que debe') + d('dpc', 'Por habitante') + d('ild', 'Deuda ÷ ingresos libres') +
@@ -244,7 +244,7 @@
     function inversion(e, fijo) {
       var d = function (id, nom) {
         var l = lenteDe(id);
-        return '<dt>' + nom + '</dt><dd>' + (e[id] == null ? 'Sin cifra ' + chip('pendiente', l.falta && l.falta.pend) : '<b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est)) + '</dd>';
+        return '<dt data-l="' + id + '">' + nom + '</dt><dd>' + (e[id] == null ? 'Sin cifra ' + chip('pendiente', l.falta && l.falta.pend) : '<b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est)) + '</dd>';
       };
       var mas = e.inv != null && e.invt > e.inv;
       ficha.innerHTML = '<h3>' + esc(e.n) + '</h3><p class="pl-ficha-sub">La obra de su gobierno en 2024 · INEGI y ASF</p>' +
@@ -259,7 +259,7 @@
     function legislativa(e, fijo) {
       var d = function (id, nom) {
         var l = lenteDe(id);
-        return '<dt>' + nom + '</dt><dd>' + (e[id] == null ? 'Sin cifra ' + chip('pendiente', l.falta && l.falta.pend) : '<b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est)) + '</dd>';
+        return '<dt data-l="' + id + '">' + nom + '</dt><dd>' + (e[id] == null ? 'Sin cifra ' + chip('pendiente', l.falta && l.falta.pend) : '<b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est)) + '</dd>';
       };
       ficha.innerHTML = '<h3>Congreso de ' + esc(e.n) + '</h3><p class="pl-ficha-sub">Su gasto de 2024 · censo de los congresos del INEGI</p>' +
         '<dl class="pl-ficha-dl">' + d('leg', 'Lo que gastó') + d('legn', 'Personas legisladoras') + d('legx', 'Por curul') + d('legp', 'Frente al tope del 0.70 %') + '</dl>' +
@@ -272,7 +272,7 @@
     function judicial(e, fijo) {
       var d = function (id, nom, extra) {
         var l = lenteDe(id);
-        return '<dt>' + nom + '</dt><dd><b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est) + (extra || '') + '</dd>';
+        return '<dt data-l="' + id + '">' + nom + '</dt><dd><b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est) + (extra || '') + '</dd>';
       };
       var seg = Math.round(e.jud * 1e6 / SEG), c = e.jdfC || {};
       var prod = '<p class="pl-ficha-sub">📊 Productividad · Poder Judicial estatal (2024)</p><dl class="pl-ficha-dl">' +
@@ -290,7 +290,7 @@
         (c.pag != null ? '<dt>Pagos en su Circuito Federal (2T 2026)</dt><dd><b class="num-tabular">' + mdp(c.pag) + '</b> ' + chip('oficial') + '</dd>' : '') + '</dl>';
       ficha.innerHTML = '<h3>Poder Judicial · ' + esc(e.n) + '</h3>' +
         (/^jdf/.test(lente.id) ? fed + prod + pres : /^jud(a)?$/.test(lente.id) ? pres + prod + fed : prod + fed + pres) +
-        '<p class="pl-ficha-mun">Concluir de cada 100 no es el rezago, y el dinero por asunto no es lo que cuesta un juicio.</p>' +
+        '<p class="pl-ficha-mun pl-ficha-gen">Concluir de cada 100 no es el rezago, y el dinero por asunto no es lo que cuesta un juicio.</p>' +
         '<a class="pl-ficha-ir" href="' + esc(sub(e, 'judicial')) + '">Ver los dos sectores y su reloj en vivo en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
@@ -299,7 +299,7 @@
     function salud(e, fijo) {
       var s = e.sal, d = function (id, nom) {
         var l = lenteDe(id);
-        return '<dt>' + nom + '</dt><dd><b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est) + '</dd>';
+        return '<dt data-l="' + id + '">' + nom + '</dt><dd><b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est) + '</dd>';
       };
       var imss = '<p class="pl-ficha-sub">🩺 El IMSS · Memoria Estadística 2025</p><dl class="pl-ficha-dl">' + d('imA', 'Personas adscritas') +
         '<dt>Consultas</dt><dd><b class="num-tabular">' + num(s.con, 0) + '</b> ' + chip('oficial') + '</dd>' +
@@ -309,7 +309,7 @@
         '<dt>Médicos del IMSS, mismo registro</dt><dd><b class="num-tabular">' + num(e.imM, 0) + '</b> ' + chip('oficial') + '</dd>' +
         '<dt>Personas que atiende</dt><dd>Sin cifra ' + chip('pendiente', 'salud-issste-servicios') + '</dd></dl>';
       ficha.innerHTML = '<h3>' + esc(e.n) + '</h3>' + (/^is/.test(lente.id) ? iss + imss : imss + iss) +
-        '<p class="pl-ficha-mun">Cuentan cuánto se hizo y con qué, no cuánto se esperó ni si alcanzó.</p>' +
+        '<p class="pl-ficha-mun pl-ficha-gen">Cuentan cuánto se hizo y con qué, no cuánto se esperó ni si alcanzó.</p>' +
         '<a class="pl-ficha-ir" href="' + esc(sub(e, 'salud')) + '">Ver su salud pública en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
@@ -317,7 +317,7 @@
     function administracion(e, fijo) {
       var u = e.apu, d = function (id, nom, extra) {
         var l = lenteDe(id);
-        return '<dt>' + nom + '</dt><dd><b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est) + (extra || '') + '</dd>';
+        return '<dt data-l="' + id + '">' + nom + '</dt><dd><b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est) + (extra || '') + '</dd>';
       };
       var est = '<p class="pl-ficha-sub">🏢 Su gobierno · censo del INEGI 2025</p><dl class="pl-ficha-dl">' + d('apP', 'Personal') + d('apK', 'Por cada mil habitantes') +
         '<dt>Personas titulares</dt><dd><b class="num-tabular">' + num(u.tit, 0) + '</b> ' + chip('oficial') + '</dd>' + d('apX', 'Lo que ejerció en 2024') +
@@ -326,7 +326,7 @@
       var mun = '<p class="pl-ficha-sub">🏘️ Sus ' + (e.a === 'CDMX' ? 'alcaldías' : 'municipios') + '</p><dl class="pl-ficha-dl">' + d('apM', 'Lo que ejercieron en 2024') +
         d('apA', 'ASF · por aclarar', ' · ' + num(u.ma, 0) + ' auditorías') + '</dl>';
       ficha.innerHTML = '<h3>' + esc(e.n) + '</h3>' + (/^ap[MA]$/.test(lente.id) ? mun + est : est + mun) +
-        '<p class="pl-ficha-mun">Lo del INEGI es lo que cada gobierno contestó a su censo; un monto por aclarar no es un desfalco comprobado.</p>' +
+        '<p class="pl-ficha-mun pl-ficha-gen">Lo del INEGI es lo que cada gobierno contestó a su censo; un monto por aclarar no es un desfalco comprobado.</p>' +
         '<a class="pl-ficha-ir" href="' + esc(sub(e, 'administracion')) + '">Ver su administración pública en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
@@ -337,7 +337,7 @@
     var PROD = { mayor: 'Una de las diez que dan el 94.9 % de la producción minera', menor: 'Entre las 17 que dan el 5.2 % de la producción minera' };
     function ambiental(e, fijo) {
       var obrL = lente.id === 'obr', obra = '<p class="pl-ficha-sub">🚧 Obras con alerta ambiental · conteo nuestro</p><dl class="pl-ficha-dl">' +
-        '<dt>Proyectos del mapa ambiental que la tocan</dt><dd><b class="num-tabular">' + num(e.obr, 0) + '</b> ' + chip('derivado') +
+        '<dt data-l="obr">Proyectos del mapa ambiental que la tocan</dt><dd><b class="num-tabular">' + num(e.obr, 0) + '</b> ' + chip('derivado') +
         (e.obr ? ' · ' + e.obp + ' con dinero público, ' + e.obv + (e.obv === 1 ? ' privado' : ' privados') : '') + '</dd></dl>' +
         (e.obr ? '<a class="pl-ficha-ir" href="datos-ambiente-megaobras.html?e=' + encodeURIComponent(e.a) + '#abMapaObras">Verlas en el mapa ambiental de megaobras ➔</a>' : '') +
         '<p class="pl-ficha-mun">Es un conteo, no un monto ni una calificación: una obra que cruza cinco estados cuenta en los cinco.</p>';
@@ -345,39 +345,39 @@
       var sg = function (v) { return (v > 0 ? '+' : v < 0 ? '−' : '') + num(Math.abs(v), 1) + '%'; };
       var pesc = q ? (e.peT != null ?
         '<p class="pl-ficha-sub">🐟 Su pesca y su acuacultura · 2025</p><dl class="pl-ficha-dl">' +
-        '<dt>Toneladas en peso vivo</dt><dd><b class="num-tabular">' + num(e.peT, 0) + ' t</b> ' + chip('oficial') + ' · lugar ' + q.lt + '</dd>' +
-        '<dt>Su valor, a precio de playa</dt><dd><b class="num-tabular">' + mdp(e.peV) + '</b> ' + chip('oficial') + ' · lugar ' + q.lv + '</dd>' +
+        '<dt data-l="peT">Toneladas en peso vivo</dt><dd><b class="num-tabular">' + num(e.peT, 0) + ' t</b> ' + chip('oficial') + ' · lugar ' + q.lt + '</dd>' +
+        '<dt data-l="peV">Su valor, a precio de playa</dt><dd><b class="num-tabular">' + mdp(e.peV) + '</b> ' + chip('oficial') + ' · lugar ' + q.lv + '</dd>' +
         '<dt>De cultivo, de cada 100 t</dt><dd><b class="num-tabular">' + num(q.pacu, 1) + '</b> ' + chip('derivado') + '</dd>' +
         '<dt>Contra 2024</dt><dd>toneladas ' + sg(q.ct) + ' · valor ' + sg(q.cv) + ' ' + chip('derivado') + '</dd></dl>' +
         '<p class="pl-ficha-mun">Es lo que se declaró en los avisos de arribo y de cosecha, no todo lo que se pescó, y no dice si las especies aguantan.</p>' :
         '<p class="pl-ficha-sub">🐟 No registró pesca ni acuacultura en 2025</p><p class="pl-ficha-mun">En 2024 registró ' + num(q.t24, 0) + ' t. No registrar no es lo mismo que no tener pesca.</p>') : '';
       var agua = w ?
         '<p class="pl-ficha-sub">💧 Sus acuíferos · corte dic 2022</p><dl class="pl-ficha-dl">' +
-        '<dt>Sin agua para concesionar</dt><dd><b class="num-tabular">' + w.sin + ' de ' + w.n + '</b> ' + chip('oficial') + ' · ' + num(e.acuP, 1) + '% ' + chip('derivado') + '</dd>' +
-        '<dt>Suma de sus déficits</dt><dd>' + (e.acuD > 0 ? '<b class="num-tabular">' + num(e.acuD, 1) + ' hm³</b> al año ' + chip('derivado') + ' · lugar ' + w.lug : 'ninguno en déficit') + '</dd>' +
+        '<dt data-l="acuP">Sin agua para concesionar</dt><dd><b class="num-tabular">' + w.sin + ' de ' + w.n + '</b> ' + chip('oficial') + ' · ' + num(e.acuP, 1) + '% ' + chip('derivado') + '</dd>' +
+        '<dt data-l="acuD">Suma de sus déficits</dt><dd>' + (e.acuD > 0 ? '<b class="num-tabular">' + num(e.acuD, 1) + ' hm³</b> al año ' + chip('derivado') + ' · lugar ' + w.lug : 'ninguno en déficit') + '</dd>' +
         (w.s27.length ? '<dt>Sobreexplotados medidos con pozos</dt><dd>' + esc(w.s27.join(', ')) + ' ' + chip('oficial') + '</dd>' : '') + '</dl>' +
         '<p class="pl-ficha-mun">La disponibilidad es el agua que aún se puede concesionar, no la que queda, y no mide su calidad.</p>' : '';
       var fuego = z ?
         '<p class="pl-ficha-sub">' + (/^sf/.test(lente.id) ? '🌲 Sus bosques y sus incendios forestales' : '🔥 Sus incendios forestales · 2025') + '</p><dl class="pl-ficha-dl">' +
-        '<dt>Superficie afectada</dt><dd><b class="num-tabular">' + num(e.incH, 0) + ' ha</b> ' + chip('oficial') + ' · lugar ' + z.lh + ' de 32</dd>' +
-        '<dt>Incendios</dt><dd><b class="num-tabular">' + num(e.incN, 0) + '</b> ' + chip('oficial') + ' · lugar ' + z.ln + ' de 32</dd>' +
+        '<dt data-l="incH">Superficie afectada</dt><dd><b class="num-tabular">' + num(e.incH, 0) + ' ha</b> ' + chip('oficial') + ' · lugar ' + z.lh + ' de 32</dd>' +
+        '<dt data-l="incN">Incendios</dt><dd><b class="num-tabular">' + num(e.incN, 0) + '</b> ' + chip('oficial') + ' · lugar ' + z.ln + ' de 32</dd>' +
         '<dt>De árboles, de cada 100 ha</dt><dd><b class="num-tabular">' + num(z.parb, 1) + '</b> ' + chip('derivado') + '</dd>' +
         '<dt>Contra 2024</dt><dd>' + (z.cam > 0 ? '+' : z.cam < 0 ? '−' : '') + num(Math.abs(z.cam), 1) + '% ' + chip('derivado') + '</dd>' +
-        (b ? '<dt>Su superficie forestal · mapa de 2018</dt><dd><b class="num-tabular">' + num(e.sfT, 0) + ' ha</b> ' + chip('oficial') + ' · lugar ' + b.lug + ' de 32</dd>' +
-        '<dt>Lo afectado, de cada 100 ha forestales</dt><dd><b class="num-tabular">' + (e.incP >= 0.05 ? num(e.incP, 1) : 'menos de 0.1') + '</b> ' + chip('derivado') + ' · lugar ' + b.lq + ' de 32</dd>' : '') + '</dl>' +
+        (b ? '<dt data-l="sfT">Su superficie forestal · mapa de 2018</dt><dd><b class="num-tabular">' + num(e.sfT, 0) + ' ha</b> ' + chip('oficial') + ' · lugar ' + b.lug + ' de 32</dd>' +
+        '<dt data-l="incP">Lo afectado, de cada 100 ha forestales</dt><dd><b class="num-tabular">' + (e.incP >= 0.05 ? num(e.incP, 1) : 'menos de 0.1') + '</b> ' + chip('derivado') + ' · lugar ' + b.lq + ' de 32</dd>' : '') + '</dl>' +
         '<p class="pl-ficha-mun">Superficie afectada no es bosque perdido: la mayor parte del fuego corre por pasto y matorral, y «forestal» incluye el matorral.</p>' : '';
       var minas = m ?
         '<p class="pl-ficha-sub">⛏️ Concesiones mineras · marzo 2024</p><dl class="pl-ficha-dl">' +
-        '<dt>Títulos vigentes</dt><dd><b class="num-tabular">' + num(e.minT, 0) + '</b> ' + chip('oficial') + ' · lugar ' + m.lug + ' de 30</dd>' +
-        '<dt>Hectáreas que amparan</dt><dd><b class="num-tabular">' + num(e.minH, 0) + ' ha</b> ' + chip('oficial') + '</dd>' +
+        '<dt data-l="minT">Títulos vigentes</dt><dd><b class="num-tabular">' + num(e.minT, 0) + '</b> ' + chip('oficial') + ' · lugar ' + m.lug + ' de 30</dd>' +
+        '<dt data-l="minH">Hectáreas que amparan</dt><dd><b class="num-tabular">' + num(e.minH, 0) + ' ha</b> ' + chip('oficial') + '</dd>' +
         (m.t26 != null ? '<dt>Al 30 de junio de 2026</dt><dd><b class="num-tabular">' + num(m.t26, 0) + '</b> ' + chip('oficial') + '</dd>' : '') + '</dl>' +
         '<p class="pl-ficha-mun">' + (PROD[m.prod] || 'No aparece entre las entidades con producción minera: tener concesiones no es tener minas trabajando') + '.</p>' :
         '<p class="pl-ficha-sub">⛏️ No figura en el cuadro de concesiones mineras</p>';
       var refi = r ?
         '<p class="pl-ficha-sub">🛢️ ' + esc(r.n) + ' · ' + esc(r.sede) + '</p><dl class="pl-ficha-dl">' +
-        '<dt>Crudo procesado · junio 2026</dt><dd><b class="num-tabular">' + num(r.jun, 0) + ' mil b/d</b> ' + chip('oficial') + ' · lugar ' + r.lug + ' de 7</dd>' +
-        '<dt>Promedio sep-25 a jun-26</dt><dd><b class="num-tabular">' + num(r.prom, 1) + ' mil b/d</b> ' + chip('derivado') + '</dd>' +
-        '<dt>Capacidad · uso promedio</dt><dd><b class="num-tabular">' + num(r.cap, 0) + ' mil b/d · ' + num(r.uso, 1) + '%</b> ' + chip('derivado') + '</dd>' +
+        '<dt data-l="refj">Crudo procesado · junio 2026</dt><dd><b class="num-tabular">' + num(r.jun, 0) + ' mil b/d</b> ' + chip('oficial') + ' · lugar ' + r.lug + ' de 7</dd>' +
+        '<dt data-l="refp">Promedio sep-25 a jun-26</dt><dd><b class="num-tabular">' + num(r.prom, 1) + ' mil b/d</b> ' + chip('derivado') + '</dd>' +
+        '<dt data-l="refu">Capacidad · uso promedio</dt><dd><b class="num-tabular">' + num(r.cap, 0) + ' mil b/d · ' + num(r.uso, 1) + '%</b> ' + chip('derivado') + '</dd>' +
         '<dt>Valor ganado o perdido en libros · 2025</dt><dd>' + (r.id === 'olmeca' ? 'es de una filial y PEMEX la arrienda' : mdps(r.d25)) + '</dd></dl>' +
         '<p class="pl-ficha-mun">Procesar no es producir gasolina, y el valor en libros es una estimación, no dinero que salió de la caja.</p>' :
         '<p class="pl-ficha-sub">🛢️ Sin refinería de PEMEX</p>';
@@ -390,7 +390,7 @@
     function social(e, fijo) {
       var s = e.soc, d = function (id, nom) {
         var l = lenteDe(id);
-        return '<dt>' + nom + '</dt><dd><b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est) + '</dd>';
+        return '<dt data-l="' + id + '">' + nom + '</dt><dd><b class="num-tabular">' + fmt(e[id], l) + '</b> ' + chip(l.est) + '</dd>';
       };
       ficha.innerHTML = '<h3>' + esc(e.n) + '</h3><p class="pl-ficha-sub">🫂 Pobreza multidimensional 2024 · INEGI</p><dl class="pl-ficha-dl">' +
         d('soP', 'Población en pobreza') + d('soN', 'Personas en pobreza') +
@@ -398,7 +398,7 @@
         d('soI', 'Ingreso bajo la línea de pobreza') + d('soS', 'Sin seguridad social') + d('soA', 'Sin acceso a servicios de salud') + d('soR', 'Rezago educativo') +
         '<dt>Vivienda · servicios · alimentación</dt><dd><b class="num-tabular">' + num(s.v, 1) + '% · ' + num(s.b, 1) + '% · ' + num(s.al, 1) + '%</b> ' + chip('oficial') + '</dd>' +
         d('soQ', 'Aportaciones 2026 por persona en pobreza') + '</dl>' +
-        '<p class="pl-ficha-mun">La pobreza la mide el INEGI en los hogares: no es la calificación de un gobierno.</p>' +
+        '<p class="pl-ficha-mun pl-ficha-gen">La pobreza la mide el INEGI en los hogares: no es la calificación de un gobierno.</p>' +
         '<a class="pl-ficha-ir" href="' + esc(sub(e, 'social')) + '">Ver su pobreza en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
@@ -406,13 +406,13 @@
     function penal(e, fijo) {
       var p = e.pen, lf = lenteDe('pnF'), lo = lenteDe('pnO');
       ficha.innerHTML = '<h3>' + esc(e.n) + '</h3><p class="pl-ficha-sub">🚨 Encuesta de victimización 2026 · INEGI · datos de 2025</p><dl class="pl-ficha-dl">' +
-        '<dt>Fraudes por cada 100 mil habitantes</dt><dd>' + (e.pnF == null ? esc(lf.falta.gris) + ' ' + chip('pendiente', lf.falta.pend) : '<b class="num-tabular">' + fmt(e.pnF, lf) + '</b> ' + chip('oficial')) + '</dd>' +
-        '<dt>Cifra oculta</dt><dd><b class="num-tabular">' + fmt(e.pnO, lo) + '</b> ' + chip('oficial') + '</dd>' +
-        '<dt>Carpetas por fraude en su fiscalía</dt><dd><b class="num-tabular">' + fmt(e.pnN, lenteDe('pnN')) + '</b> ' + chip('oficial') +
+        '<dt data-l="pnF">Fraudes por cada 100 mil habitantes</dt><dd>' + (e.pnF == null ? esc(lf.falta.gris) + ' ' + chip('pendiente', lf.falta.pend) : '<b class="num-tabular">' + fmt(e.pnF, lf) + '</b> ' + chip('oficial')) + '</dd>' +
+        '<dt data-l="pnO">Cifra oculta</dt><dd><b class="num-tabular">' + fmt(e.pnO, lo) + '</b> ' + chip('oficial') + '</dd>' +
+        '<dt data-l="pnN">Carpetas por fraude en su fiscalía</dt><dd><b class="num-tabular">' + fmt(e.pnN, lenteDe('pnN')) + '</b> ' + chip('oficial') +
           ' <small>' + fmt(e.pnC, lenteDe('pnC')) + ' por cada 100 mil habitantes</small> ' + chip('derivado') + '</dd>' +
         (p.d ? '<dt>El delito que destaca su ficha</dt><dd>' + esc(p.d) + '</dd>' : '') + '</dl>' +
         (p.t ? '<p class="pl-ficha-mun">Su ficha da la tasa de fraude solo en gráfica: la tomamos del tabulado del INEGI (cuadro 1.13), no a ojo.</p>' : '') +
-        '<p class="pl-ficha-mun">El fraude y la cifra oculta son lo que la gente dice haber sufrido; las carpetas, lo que llegó a la fiscalía (SESNSP). Más fraude no es peor gobierno: lo cometen particulares.</p>' +
+        '<p class="pl-ficha-mun pl-ficha-gen">El fraude y la cifra oculta son lo que la gente dice haber sufrido; las carpetas, lo que llegó a la fiscalía (SESNSP). Más fraude no es peor gobierno: lo cometen particulares.</p>' +
         '<a class="pl-ficha-ir" href="' + esc(sub(e, 'penal')) + '">Ver su fraude y su cifra oculta en su portal ➔</a>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>');
     }
@@ -420,17 +420,89 @@
     function cuentas(e) {
       ficha.insertAdjacentHTML('beforeend', '<a class="pl-ficha-ir" href="herramienta-inspector-entes.html#ente=estatal:' + esc(e.a) + '">🏢 Su estado de cuenta y de resultados ➔</a>');
     }
+    /* La ficha, esquematizada (reestructura del 16-11-2026, pedido del autor:
+       «muestra mucha información que no es tan fácil de comprender»). Las
+       funciones de arriba siguen armando el contenido; aquí se ordena: arriba
+       la cifra de la lente y su lugar entre las 32, luego cada tema en un
+       acordeón (abre solo el de la lente) y al pie las puertas. Una fila que
+       es lente se toca y el mapa cambia a ella. No agrega cifras. */
+    function tira(e) {
+      var o = orden(), lg = lugar(e);
+      if (!lg || o.length < 2) return '';
+      var pos = (lg.n - 1) / (o.length - 1) * 100;
+      return '<div class="pl-tira" role="img" aria-label="Lugar ' + lg.n + ' de ' + lg.de + '"><span class="pl-tira-l">más alta</span>' +
+        '<span class="pl-tira-b"><i style="left:' + pos.toFixed(1) + '%"></i></span><span class="pl-tira-l">más baja</span></div>' +
+        '<p class="pl-ficha-lugar">Lugar <b>' + lg.n + '</b> de ' + lg.de + (lg.emp > 0 ? ' (lo comparte con ' + lg.emp + (lg.emp === 1 ? ' entidad' : ' entidades') + ')' : '') +
+        ' ' + chip('derivado') + ' <span class="pl-lugar-n">Es el orden de la cifra, no una calificación.</span></p>';
+    }
+    function esquema(e, fijo) {
+      var h = ficha.querySelector('h3'), nodos = Array.prototype.slice.call(ficha.children), secs = [], acc = [], gen = [], cur = null, k;
+      for (k = 0; k < nodos.length; k++) {
+        var n = nodos[k], c = n.classList;
+        if (n === h) continue;
+        if (c.contains('pl-ficha-sub')) { cur = { t: n.innerHTML, c: [] }; secs.push(cur); continue; }
+        if (c.contains('pl-ficha-pista')) continue;
+        if (c.contains('pl-ficha-gen')) { gen.push(n); continue; }
+        if (n.tagName === 'A') {
+          var sigue = nodos.slice(k + 1).some(function (x) { return x.classList.contains('pl-ficha-sub'); });
+          if (!sigue) { acc.push(n); continue; }
+        }
+        if (!cur) { cur = { t: '', c: [] }; secs.push(cur); }
+        cur.c.push(n);
+      }
+      /* Las filas que son lente se vuelven botones: tocarlas cambia el mapa. */
+      Array.prototype.forEach.call(ficha.querySelectorAll('dt[data-l]'), function (dt) {
+        var id = dt.getAttribute('data-l'), es = id === lente.id;
+        dt.innerHTML = '<button type="button" class="pl-fila-b" data-ver="' + id + '" aria-pressed="' + es + '" title="Pintar el mapa con esta cifra">' + dt.innerHTML + '</button>';
+        if (es) { dt.classList.add('es'); if (dt.nextElementSibling) dt.nextElementSibling.classList.add('es'); }
+      });
+      var v = e[lente.id], cab = '<div class="pl-ficha-cab"><h3>' + h.innerHTML + '</h3>' +
+        (fijo ? '<button type="button" class="pl-ficha-x" data-suelta aria-label="Soltar esta entidad" title="Soltar esta entidad">✕</button>' : '') + '</div>' +
+        '<div class="pl-heroe"><p class="pl-heroe-l">' + esc(lente.nom) + (lente.anio ? ' · ' + lente.anio : '') + '</p>' +
+        '<p class="pl-heroe-v">' + (v == null ? '<span class="pl-heroe-s">' + esc((lente.falta && lente.falta.gris) || 'Sin cifra') + '</span>' : '<b class="num-tabular">' + fmt(v, lente) + '</b> ' + chip(lente.est)) + '</p>' +
+        tira(e) + '</div>';
+      var caja = document.createElement('div');
+      caja.className = 'pl-secs';
+      secs.forEach(function (s, i) {
+        var uno = secs.length < 2, el = document.createElement(uno ? 'div' : 'details');
+        el.className = 'pl-sec';
+        if (!uno) {
+          if (i === 0) el.open = true;
+          el.setAttribute('name', 'plSec');
+          var prev = '';
+          s.c.some(function (x) { var b = x.querySelector && x.querySelector('dd b'); if (b) prev = b.textContent; return !!b; });
+          var sm = document.createElement('summary');
+          sm.innerHTML = '<span class="pl-sec-t">' + s.t + '</span>' + (prev ? '<span class="pl-sec-p num-tabular">' + esc(prev) + '</span>' : '');
+          el.appendChild(sm);
+        } else if (s.t) {
+          var p = document.createElement('p'); p.className = 'pl-ficha-sub'; p.innerHTML = s.t; el.appendChild(p);
+        }
+        s.c.forEach(function (x) { el.appendChild(x); });
+        caja.appendChild(el);
+      });
+      ficha.innerHTML = cab;
+      ficha.appendChild(caja);
+      gen.forEach(function (x) { ficha.appendChild(x); });
+      var pie = document.createElement('div');
+      pie.className = 'pl-ficha-pie';
+      if (acc[0]) pie.appendChild(acc[0]);
+      var mas = '<a class="pl-ficha-o" href="herramienta-inspector-entes.html#ente=estatal:' + esc(e.a) + '">🏢 Su estado de cuenta y de resultados</a>';
+      if (fijo) mas += '<a class="pl-ficha-o pl-ficha-serv" href="' + (dimP === 'penal' ? 'servicios-fraude-y-lavado.html#riesgo">🛡️ Servicio: revisa a un proveedor antes de pagar' : 'servicios-catalogo.html#sv-radiografia">🧾 Servicio: la Radiografía de ' + esc(e.n)) + '</a>';
+      pie.insertAdjacentHTML('beforeend', '<div class="pl-ficha-mas">' + mas + '</div>' +
+        (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>'));
+      ficha.appendChild(pie);
+    }
     function muestra(e, fijo) {
       if (!e) return;
       muestra1(e, fijo);
-      cuentas(e);
-      var lg = lugar(e), h = ficha.querySelector('h3');
-      if (lg && h) h.insertAdjacentHTML('afterend', '<p class="pl-ficha-lugar">Lugar <b>' + lg.n + '</b> de ' + lg.de + ' en «' + esc(lente.nom) + '», de la cifra más alta a la más baja' +
-        (lg.emp > 0 ? ' (lo comparte con ' + lg.emp + (lg.emp === 1 ? ' entidad' : ' entidades') + ')' : '') + ' ' + chip('derivado') + '</p>');
-      if (fijo) ficha.insertAdjacentHTML('beforeend', '<a class="pl-ficha-serv" href="' + (dimP === 'penal' ? 'servicios-fraude-y-lavado.html#riesgo">🛡️ Servicio: revisa a un proveedor antes de pagar ➔' : 'servicios-catalogo.html#sv-radiografia">🧾 Servicio: la Radiografía de ' + esc(e.n) + ' en un documento ➔') + '</a>' +
-        '<button type="button" class="pl-suelta" data-suelta>Soltar esta entidad</button>');
+      esquema(e, fijo);
     }
-    ficha.addEventListener('click', function (ev) { if (ev.target.closest && ev.target.closest('[data-suelta]')) suelta(); });
+    ficha.addEventListener('click', function (ev) {
+      if (!ev.target.closest) return;
+      if (ev.target.closest('[data-suelta]')) { suelta(); guarda(); return; }
+      var b = ev.target.closest('[data-ver]');
+      if (b && lenteDe(b.getAttribute('data-ver'))) { ponLente(b.getAttribute('data-ver')); guarda(); }
+    });
     var rk = document.getElementById('plRank');
     if (rk) rk.addEventListener('click', function (ev) {
       var b = ev.target.closest && ev.target.closest('.pl-rank-b');
@@ -449,10 +521,10 @@
       if (dimP === 'legislativa') { legislativa(e, fijo); return; }
       ficha.innerHTML = '<h3>' + esc(e.n) + '</h3><p class="pl-ficha-sub">Capital: ' + esc(e.cap) + ' · ' + num(e.pob, 0) + ' habitantes</p>' +
         '<dl class="pl-ficha-dl">' +
-        fila('Le baja de la Federación', e.fed, 'derivado', 2026) +
-        fila('Cobra el estado por su cuenta', e.est, 'derivado', 2024, lenteDe('est').falta.pend) +
-        fila('Ingresan sus municipios', e.mun, 'derivado', 2024, lenteDe('mun').falta.pend) +
-        '<dt>No cuadra · 2024</dt><dd>' + (e.cua == null ? 'Sin cifra ' + chip('pendiente', lenteDe('cua').falta.pend) : '<b class="num-tabular">' + fmt(e.cua, lenteDe('cua')) + '</b> ' + chip('derivado')) + '</dd>' +
+        fila('Le baja de la Federación', e.fed, 'derivado', 2026, null, 'fed') +
+        fila('Cobra el estado por su cuenta', e.est, 'derivado', 2024, lenteDe('est').falta.pend, 'est') +
+        fila('Ingresan sus municipios', e.mun, 'derivado', 2024, lenteDe('mun').falta.pend, 'mun') +
+        '<dt data-l="cua">No cuadra · 2024</dt><dd>' + (e.cua == null ? 'Sin cifra ' + chip('pendiente', lenteDe('cua').falta.pend) : '<b class="num-tabular">' + fmt(e.cua, lenteDe('cua')) + '</b> ' + chip('derivado')) + '</dd>' +
         '</dl>' + (lente.id === 'cua' ? '<p class="pl-ficha-mun">Lo que el estado dice que recibió contra lo que la Federación dice que le pagó. Una diferencia puede tener explicación, pero esa explicación tiene que darla el gobierno.</p>' : '') + '<p class="pl-ficha-mun">' + e.mn + (e.a === 'CDMX' ? ' demarcaciones' : ' municipios') + (e.mc ? ', ' + e.mc + ' con cuenta de 2024' : ', sin cuenta municipal') + '.</p>' +
         (e.mm ? '<p class="pl-ficha-mun">🗺️ Su portal ya trae el mapa de sus municipios.</p>' : '') +
         '<a class="pl-ficha-ir" href="' + esc(e.p) + '">Entrar al portal de ' + esc(e.n) + ' ➔</a>' +
@@ -475,16 +547,36 @@
       p.addEventListener('focus', function () { if (!sel) muestra(porA[a], false); });
     });
     var botones = document.querySelectorAll('.pl-lentes .pl-lente[data-dim]');
+    var temasC = document.getElementById('plTemas'), temasB = document.querySelectorAll('.pl-temas .pl-tema'), ultimaT = {};
     function ponLente(id) {
       lente = lenteDe(id) || lente;
       ultima[lente.dim] = lente.id;
+      /* Los temas (16-11-2026): una dimensión con muchas lentes enseña solo
+         las del tema elegido. */
+      var g = '';
+      Array.prototype.forEach.call(botones, function (x) { if (x.getAttribute('data-l') === lente.id) g = x.getAttribute('data-g') || ''; });
       Array.prototype.forEach.call(botones, function (x) {
         x.setAttribute('aria-checked', x.getAttribute('data-l') === lente.id ? 'true' : 'false');
-        x.hidden = x.getAttribute('data-dim') !== lente.dim;
+        x.hidden = x.getAttribute('data-dim') !== lente.dim || (x.getAttribute('data-g') || '') !== g;
       });
+      var hayT = false;
+      Array.prototype.forEach.call(temasB, function (x) {
+        x.hidden = x.getAttribute('data-dim') !== lente.dim;
+        if (!x.hidden) hayT = true;
+        x.setAttribute('aria-pressed', x.getAttribute('data-g') === g ? 'true' : 'false');
+      });
+      if (temasC) temasC.hidden = !hayT;
+      if (g) ultimaT[lente.dim + ':' + g] = lente.id;
       pinta();
       if (sel) muestra(sel, true);
     }
+    Array.prototype.forEach.call(temasB, function (b) {
+      b.addEventListener('click', function () {
+        var d = b.getAttribute('data-dim'), g = b.getAttribute('data-g'), id = ultimaT[d + ':' + g];
+        if (!id) Array.prototype.forEach.call(botones, function (x) { if (!id && x.getAttribute('data-dim') === d && x.getAttribute('data-g') === g) id = x.getAttribute('data-l'); });
+        if (id) { ponLente(id); guarda(); }
+      });
+    });
     Array.prototype.forEach.call(botones, function (b) {
       b.addEventListener('click', function () { ponLente(b.getAttribute('data-l')); });
     });

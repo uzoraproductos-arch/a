@@ -365,3 +365,80 @@ p.pl-ficha-ir a:hover, p.pl-ficha-ir a:focus-visible { background: #16408c; }
 }
 :root[data-theme="dark"] .pl-puente { background: #10264f; }
 :root[data-theme="dark"] .pl-ficha-serv { background: #2a2512; color: #f0e3b4; }
+
+/* La ficha esquematizada y los temas de las lentes (reestructura del 16-11-2026).
+   Arriba la cifra de la lente y su lugar; cada tema, en un acordeón; las filas
+   que son lente se tocan y el mapa cambia. */
+.pl-tablero .pl-rej { grid-template-columns: minmax(0, 1fr) 340px; }
+.pl-temas { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 10px; padding: 0 0 10px; border-bottom: 1px dashed #c7d1e3; }
+.pl-temas[hidden] { display: none; }
+.pl-tema { min-height: 44px; padding: 8px 14px; border-radius: 12px; border: 1px solid transparent; background: color-mix(in srgb, var(--dim, #0b2a63) 9%, #fff); color: #0b2a63; font: inherit; font-weight: 800; font-size: 15px; cursor: pointer; }
+.pl-tema:hover { border-color: var(--dim, #0b2a63); }
+.pl-tema[aria-pressed="true"] { background: #fff; border-color: var(--dim, #0b2a63); box-shadow: inset 0 -3px 0 var(--dim, #0b2a63); }
+.pl-tablero .pl-ficha { padding: 14px; max-height: calc(100vh - 24px); overflow-y: auto; overscroll-behavior: contain; }
+.pl-ficha-cab { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.pl-ficha-cab h3 { margin: 0; }
+.pl-ficha-x { flex: 0 0 44px; width: 44px; height: 44px; margin: -6px -6px 0 0; border: 0; border-radius: 50%; background: transparent; color: #5a6782; font: inherit; font-size: 18px; cursor: pointer; }
+.pl-ficha-x:hover, .pl-ficha-x:focus-visible { background: #e6ecf7; color: #0b2a63; }
+.pl-heroe { margin: 8px 0 12px; padding: 12px; border-radius: 12px; background: color-mix(in srgb, var(--dim, #0b2a63) 10%, #fff); }
+.pl-heroe-l { margin: 0 0 2px; font-size: 14px; font-weight: 700; color: #33415c; }
+.pl-heroe-v { margin: 0 0 8px; }
+.pl-heroe-v b { font-size: 28px; line-height: 1.15; color: #0b2a63; }
+.pl-heroe-s { font-size: 16px; color: #5a6782; }
+.pl-tira { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; }
+.pl-tira-l { font-size: 12px; color: #5a6782; white-space: nowrap; }
+.pl-tira-b { position: relative; flex: 1; height: 8px; border-radius: 999px; background: linear-gradient(90deg, var(--dim, #0b2a63), color-mix(in srgb, var(--dim, #0b2a63) 12%, #fff)); }
+.pl-tira-b i { position: absolute; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: #fff; border: 3px solid #0b2a63; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: left .35s ease; }
+.pl-heroe .pl-ficha-lugar { margin: 0; padding: 0; background: none; font-size: 15px; }
+.pl-lugar-n { display: block; font-size: 13px; color: #5a6782; }
+.pl-secs { display: grid; gap: 8px; margin: 0 0 10px; }
+.pl-sec { border-radius: 12px; background: #fff; border: 1px solid #dfe5f0; }
+div.pl-sec { padding: 10px 12px; }
+.pl-sec > summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 8px 12px; cursor: pointer; list-style: none; font-weight: 800; color: #0b2a63; }
+.pl-sec > summary::-webkit-details-marker { display: none; }
+.pl-sec > summary::after { content: '▾'; flex: 0 0 auto; color: #5a6782; transition: transform .2s; }
+.pl-sec[open] > summary::after { transform: rotate(180deg); }
+.pl-sec[open] > summary { border-bottom: 1px solid #e6ecf7; }
+.pl-sec-t { flex: 1; font-size: 15px; }
+.pl-sec-p { font-size: 14px; font-weight: 700; color: #33415c; white-space: nowrap; }
+.pl-sec[open] .pl-sec-p { display: none; }
+details.pl-sec > :not(summary) { margin-left: 12px; margin-right: 12px; }
+details.pl-sec > dl { margin-top: 8px; }
+.pl-sec .pl-ficha-dl { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 0; align-items: stretch; margin-bottom: 8px; }
+.pl-sec .pl-ficha-dl dt { font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1.3; text-transform: none; letter-spacing: 0; color: #33415c; padding: 7px 8px 7px 0; border-top: 1px solid #eef2f9; display: flex; align-items: center; overflow-wrap: anywhere; }
+.pl-sec .pl-ficha-dl dd { margin: 0; padding: 7px 6px 7px 0; overflow-wrap: anywhere; border-top: 1px solid #eef2f9; text-align: right; font-size: 15px; }
+.pl-sec .pl-ficha-dl dt:first-of-type, .pl-sec .pl-ficha-dl dt:first-of-type + dd { border-top: 0; }
+.pl-sec .pl-ficha-dl dd b { font-size: 16px; }
+.pl-sec .pl-ficha-dl dt.es, .pl-sec .pl-ficha-dl dd.es { background: color-mix(in srgb, var(--dim, #0b2a63) 8%, #fff); }
+.pl-sec .pl-ficha-dl dt.es { box-shadow: inset 3px 0 0 var(--dim, #0b2a63); padding-left: 8px; }
+.pl-sec .pl-ficha-dl dt:has(.pl-fila-b) { padding-top: 0; padding-bottom: 0; }
+.pl-sec .pl-ficha-dl dt:has(.pl-fila-b) .pl-fila-b { margin: 0; }
+.pl-fila-b { display: flex; align-items: center; gap: 6px; width: 100%; min-height: 44px; margin: -7px 0; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; text-decoration: underline dotted; text-underline-offset: 3px; }
+.pl-fila-b::before { content: ''; flex: 0 0 8px; width: 8px; height: 8px; border-radius: 50%; border: 2px solid var(--dim, #0b2a63); }
+.pl-fila-b[aria-pressed="true"]::before { background: var(--dim, #0b2a63); }
+.pl-fila-b:hover { color: #0b2a63; }
+.pl-sec .pl-ficha-mun, .pl-ficha-gen { margin: 0 0 10px; padding: 8px 10px; border-radius: 8px; background: #f4f6fb; font-size: 14px; }
+.pl-sec .pl-ficha-ir { margin-bottom: 10px; }
+.pl-ficha-pie { display: grid; gap: 8px; }
+.pl-ficha-mas { display: grid; gap: 6px; }
+.pl-ficha-o { display: flex; align-items: center; min-height: 44px; padding: 6px 12px; border-radius: 10px; border: 1px solid #c7d1e3; background: #fff; color: #0b2a63; font-weight: 700; font-size: 15px; text-decoration: none; }
+.pl-ficha-o:hover, .pl-ficha-o:focus-visible { border-color: #0b2a63; }
+.pl-ficha-o.pl-ficha-serv { margin: 0; justify-content: flex-start; min-height: 44px; }
+@media (max-width: 1100px) { .pl-tablero .pl-rej { grid-template-columns: minmax(0, 1fr) 300px; } }
+@media (max-width: 860px) {
+  .pl-tablero .pl-rej { grid-template-columns: 1fr; }
+  .pl-tablero .pl-ficha { max-height: none; overflow: visible; }
+  .pl-temas { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+  .pl-tema { flex: 0 0 auto; }
+}
+@media (prefers-reduced-motion: reduce) { .pl-tira-b i, .pl-sec > summary::after { transition: none; } }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .pl-sec, :root:not([data-theme="light"]) .pl-ficha-o, :root:not([data-theme="light"]) .pl-heroe, :root:not([data-theme="light"]) .pl-tema { background: var(--bg-card, #14213a); border-color: #2b3a57; color: #dfe7f6; }
+  :root:not([data-theme="light"]) .pl-sec > summary, :root:not([data-theme="light"]) .pl-heroe-v b, :root:not([data-theme="light"]) .pl-sec .pl-ficha-dl dt, :root:not([data-theme="light"]) .pl-heroe-l, :root:not([data-theme="light"]) .pl-sec-p { color: #c9d8f2; }
+  :root:not([data-theme="light"]) .pl-sec .pl-ficha-dl dt, :root:not([data-theme="light"]) .pl-sec .pl-ficha-dl dd, :root:not([data-theme="light"]) .pl-sec[open] > summary { border-color: #2b3a57; }
+  :root:not([data-theme="light"]) .pl-sec .pl-ficha-dl dt.es, :root:not([data-theme="light"]) .pl-sec .pl-ficha-dl dd.es, :root:not([data-theme="light"]) .pl-sec .pl-ficha-mun, :root:not([data-theme="light"]) .pl-ficha-gen { background: #1b2a47; color: #dfe7f6; }
+}
+:root[data-theme="dark"] .pl-sec, :root[data-theme="dark"] .pl-ficha-o, :root[data-theme="dark"] .pl-heroe, :root[data-theme="dark"] .pl-tema { background: var(--bg-card, #14213a); border-color: #2b3a57; color: #dfe7f6; }
+:root[data-theme="dark"] .pl-sec > summary, :root[data-theme="dark"] .pl-heroe-v b, :root[data-theme="dark"] .pl-sec .pl-ficha-dl dt, :root[data-theme="dark"] .pl-heroe-l, :root[data-theme="dark"] .pl-sec-p { color: #c9d8f2; }
+:root[data-theme="dark"] .pl-sec .pl-ficha-dl dt, :root[data-theme="dark"] .pl-sec .pl-ficha-dl dd, :root[data-theme="dark"] .pl-sec[open] > summary { border-color: #2b3a57; }
+:root[data-theme="dark"] .pl-sec .pl-ficha-dl dt.es, :root[data-theme="dark"] .pl-sec .pl-ficha-dl dd.es, :root[data-theme="dark"] .pl-sec .pl-ficha-mun, :root[data-theme="dark"] .pl-ficha-gen { background: #1b2a47; color: #dfe7f6; }

@@ -1087,6 +1087,47 @@ def _bloque_judicial_mapa(base, ref, filas):
             'y la radiografía de productividad, rezago y tiempos de resolución.</p>' + cuaderno_j)
 
 
+# Los temas de las lentes (reestructura del 16-11-2026, pedido del autor: «veo
+# mucha información sin estar bien esquematizada»). Una dimensión con muchas
+# lentes las ordena por tema: primero se elige el tema y luego la lente. Solo
+# ordena; no agrega cifras. **Una lente nueva de estas dimensiones necesita su
+# tema aquí**, o la generación se detiene (temas_lentes()).
+TEMAS_LENTES = {
+    'judicial': [('dinero', '💰 Su dinero', ['jud', 'juda']),
+                 ('resolvio', '📊 Lo que resolvió', ['judc', 'judx', 'judr', 'judj']),
+                 ('federal', '⚖️ Justicia federal', ['jdfL', 'jdfD'])],
+    'salud': [('imss', '🩺 IMSS · su Memoria', ['imA', 'imX', 'imQ', 'imK']),
+              ('dgis', '🏥 ISSSTE e IMSS · registro de la DGIS', ['isM', 'isK', 'isU', 'imM'])],
+    'social': [('pobreza', '🫂 Pobreza', ['soP', 'soN', 'soX', 'soI']),
+               ('carencias', '🧩 Carencias', ['soS', 'soA', 'soR']),
+               ('aporta', '💵 Aportaciones', ['soQ'])],
+    'administracion': [('gobierno', '🏢 Su gobierno', ['apP', 'apK', 'apX', 'apD', 'apG']),
+                       ('municipios', '🏘️ Sus municipios', ['apM', 'apA'])],
+    'ambiental': [('agua', '💧 Agua', ['acuP', 'acuD']),
+                  ('bosques', '🌲 Bosques e incendios', ['sfT', 'incP', 'incH', 'incN']),
+                  ('pesca', '🐟 Pesca', ['peT', 'peV']),
+                  ('mineria', '⛏️ Minería', ['minT', 'minH']),
+                  ('refinerias', '🛢️ Refinerías', ['refj', 'refp', 'refu']),
+                  ('obras', '🚧 Obras', ['obr'])],
+}
+
+
+def temas_lentes():
+    """{id de lente: tema}. Se detiene si una dimensión con temas tiene una
+    lente sin tema, repetida o que no existe."""
+    de = {}
+    for dim, gs in TEMAS_LENTES.items():
+        suyas = [l['id'] for l in LENTES if l['dim'] == dim]
+        puestas = [i for _, _, ids in gs for i in ids]
+        if sorted(puestas) != sorted(suyas):
+            raise SystemExit('planisferio.py: los temas de «%s» no cubren sus lentes una sola vez: sobran o faltan %s'
+                             % (dim, ', '.join(sorted(set(puestas) ^ set(suyas))) or 'repetidas'))
+        for g, _, ids in gs:
+            for i in ids:
+                de[i] = g
+    return de
+
+
 def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
     matriz()
     filas = _datos(base, padron)
@@ -1180,8 +1221,12 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
     primera = {}
     for l in LENTES:
         primera.setdefault(l['dim'], l['id'])
-    lentes = ''.join('<button type="button" class="pl-lente" role="radio" aria-checked="%s" data-l="%s" data-dim="%s"%s>%s</button>' % (
+    tema_de = temas_lentes()
+    temas = ''.join('<button type="button" class="pl-tema" aria-pressed="false" data-g="%s" data-dim="%s" hidden>%s</button>' % (g, dim, nom)
+                    for dim, gs in TEMAS_LENTES.items() for g, nom, _ in gs)
+    lentes = ''.join('<button type="button" class="pl-lente" role="radio" aria-checked="%s" data-l="%s" data-dim="%s"%s%s>%s</button>' % (
         'true' if primera[l['dim']] == l['id'] else 'false', l['id'], l['dim'],
+        (' data-g="%s"' % tema_de[l['id']]) if l['id'] in tema_de else '',
         '' if l['dim'] == DIMENSIONES[0][0] else ' hidden', l['nom']) for l in LENTES)
     fu = _fuentes(ref, base)
     sin_est = [f['a'] for f in filas if f['est'] is None]
@@ -1351,6 +1396,7 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
               <button type="button" class="pl-caj-b pl-copia" id="plCopia" hidden><span aria-hidden="true">🔗</span> <span id="plCopiaT">Copiar el enlace de esta vista</span></button>
             </div>
             <p class="pl-dim-aviso" id="plDimAviso" hidden></p>
+            <div class="pl-temas" id="plTemas" role="group" aria-label="Los temas de esta dimensión" hidden>__TEMAS__</div>
             <div class="pl-lentes" role="radiogroup" aria-label="Qué ver en el mapa">%s</div>
             <p class="pl-que" id="plQue"></p>
             <div class="pl-rej">
@@ -1394,6 +1440,7 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         if not os.path.exists(os.path.join(RAIZ, _l)):
             raise SystemExit('planisferio: el puente a Servicios apunta a %s, que no existe' % _l)
     bloque_mapa = bloque_mapa.replace('__ENTS__', ''.join('<option value="%s"></option>' % html.escape(f['n']) for f in sorted(filas, key=lambda x: clave(x['n']))))
+    bloque_mapa = bloque_mapa.replace('__TEMAS__', temas)
     return {
         'archivo': ARCHIVO, 'menu': 'Planisferio', 'menu_archivo': ARCHIVO,
         'icono': '🗺️', 'titulo': 'Planisferio', 'lema': 'México en un mapa: cada entidad, cada municipio, cada peso',

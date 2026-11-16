@@ -119,6 +119,12 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   calificación** y se esconde si hay empate en el corte; la dirección guarda la vista (`?d=&l=&e=`); hay buscador de
   estado, y el pie lleva a Servicios (`#plPuente`: una franja de venta con su botón, y el servicio también en la ficha
   de la entidad elegida, `.pl-ficha-serv`; **nunca un monto**). El encabezado es bajo para que el mapa suba. Nada de eso agrega cifras.
+- **La ficha va esquematizada y las lentes, por tema** (reestructura del autor, 16-11-2026: «muestra mucha información
+  que no es tan fácil de comprender»). Al tocar una entidad, la ficha abre con la cifra de la lente y su lugar entre las 32
+  (`esquema()` y `tira()` de `planisferio.js`), sigue con cada tema en un acordeón (abre solo el de la lente) y cierra con sus
+  puertas; **una fila que es lente (`dt[data-l]`) se toca y el mapa cambia a ella**. Las dimensiones con muchas lentes las
+  ordenan por tema (`TEMAS_LENTES` de `planisferio.py`): **una lente nueva de esas dimensiones necesita ahí su tema**, o la
+  generación se detiene. La advertencia general de una dimensión lleva `pl-ficha-gen` para quedar siempre a la vista. Nada de eso agrega cifras.
 - **El Planisferio es la matriz de los mapas** (pedido del autor, 04-11-2026: «las cuestiones que
   tienen que ver con los mapas quedan vinculadas con el planisferio… va a ser nuestra matriz, que se
   vincula y se alimenta al mismo tiempo con la información de la Enciclopedia»). Cada lente del mapa de
