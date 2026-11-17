@@ -880,6 +880,11 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   **El expediente es una gran investigación hecha de dictámenes**: lista los dictámenes de su caso y lleva su sello, con folio y huella SHA-256 de su
   contenido (`_huella()`), que cambia cuando cambia una cifra, un documento, la bitácora o un pendiente. No es un documento oficial, y lo dice.
   **El registro por modo vive en Supabase** (`preguntas_bot.modo` y `modo_toca`, vista `preguntas_por_modo`): solo de las preguntas sin respuesta.
+  **Todo queda vinculado al expediente** (17-11-2026): cada investigación de Auditoría en imágenes lleva a su expediente (`expediente_puerta()` de
+  `auditorias.py`); una nota o columna entra a la bitácora si nombra el caso (título, `temas` o su clave), si ella misma cita la investigación con su
+  liga (`auditoria-<id>.html`) o si está en `VINCULOS` (`_cita()`): **el cuerpo no se lee por palabras, porque mencionar de paso no es pertenecer al caso**.
+  Los dictámenes que el lector genera en el chat y tocan una investigación se listan en su expediente, «Tus dictámenes de este caso», **guardados solo en su
+  navegador** (`av-dics`, `guardaDic()` de `asistente.js`): nunca van a un servidor ni entran a la huella.
   **Se arman cada día** (17-11-2026, flujo «Expedientes al día», `.github/workflows/expedientes.yml`, 8:53 de la Ciudad de México y a mano): vuelve a correr
   `apartados.py` y publica solo si algo cambió; su reporte (`resumen()`) cuenta los titulares por cotejar de cada caso, que **nunca entran solos**. Por eso
   **la generación debe dar lo mismo dos veces seguidas**: un orden que salga de un `set` se desempata (`key=lambda x: (-len(x), x)`), o el flujo publicaría ruido.
