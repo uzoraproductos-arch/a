@@ -165,7 +165,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `expediente-seguro-popular.html` | Expediente: Seguro Popular: 53.5 millones de afiliados y lo que pasó después · Auditavisión | apartados.py | 61 | 0 | 5 | 1 | 2 |
 | `expediente-tren-maya.html` | Expediente: Tren Maya · Auditavisión | apartados.py | 61 | 0 | 1 | 2 | 1 |
 | `expediente-tren-toluca.html` | Expediente: Tren Interurbano México-Toluca «El Insurgente» · Auditavisión | apartados.py | 55 | 0 | 1 | 3 | 1 |
-| `expedientes-investigacion.html` | Expedientes · Auditavisión | apartados.py | 71 | 0 | 0 | 0 | 0 |
+| `expedientes-investigacion.html` | Expedientes internos · Auditavisión | apartados.py | 71 | 0 | 0 | 0 | 0 |
 | `expedientes.html` | Los casos por aclarar · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `fuentes-del-auditor.html` | Fuentes del auditor · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `fuentes-oficiales.html` | Referencias · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |

@@ -277,7 +277,7 @@ BIBLIOTECA = [
      'Cómo funciona el gasto público, la deuda, el dinero de estados y municipios, qué revisa la Auditoría Superior y cuánto cuesta el Poder Judicial. Cada respuesta con sus fuentes.'),
     # Quinta tarjeta (pedido del autor, 16-11-2026): las grandes investigaciones
     # con seguimiento. Las arma herramientas/expedientes_inv.py con la base.
-    ('expedientes-investigacion.html', '🗂️', 'Expedientes', 'Las grandes investigaciones, con seguimiento',
+    ('expedientes-investigacion.html', '🗂️', 'Expedientes internos', 'Las grandes investigaciones, con seguimiento',
      'Cada gran investigación en un solo lugar: el caso en cinco preguntas, su bitácora, lo que sigue y lo que falta. Se arman solos con la base de datos, se ponen al día cada día y también se pueden pedir.'),
 ]
 DIC_ENLACE = ('<p class="bib-sello">📚 Forma parte de la <a href="diccionario.html">%s</a>, '
@@ -1866,7 +1866,7 @@ DICCIONARIO = {
     'lema': 'Las palabras, las referencias, las leyes, las preguntas y los expedientes del erario',
     'entrada': ('La obra de consulta de la plataforma, en cinco apartados: el <b>Diccionario</b> con los términos hacendarios, '
                 'las <b>Referencias</b> con cada documento oficial que sostiene una cifra, el <b>Marco Legal Hacendario</b> con su '
-                'texto vigente, las <b>Preguntas Frecuentes</b> en casillas didácticas y los <b>Expedientes</b> de las grandes '
+                'texto vigente, las <b>Preguntas Frecuentes</b> en casillas didácticas y los <b>Expedientes internos</b> de las grandes '
                 'investigaciones, con su seguimiento. Cada tarjeta abre su propia página.'),
     'hash_a_pagina': {'preguntas': 'preguntas-frecuentes.html', 'glosario': 'glosario.html',
                       'marco-legal': 'marco-legal.html', 'fuentes': 'fuentes-oficiales.html',
@@ -6797,7 +6797,7 @@ def generar(sello=None):
     # que importa este; por eso entra aquí y no arriba.
     import expedientes_inv
     import modos as _modos
-    _modos.PREGUNTA.update({expedientes_inv.INDICE: 'Expedientes de investigación'})
+    _modos.PREGUNTA.update({expedientes_inv.INDICE: 'Expedientes internos'})
     _modos.PREGUNTA.update({expedientes_inv.archivo(_i): expedientes_inv.pregunta(_i) for _i in expedientes_inv.auditorias.TEMA_BOT})
     numeros_preparar()
     if sello is None:

@@ -367,7 +367,7 @@ def pagina(e):
     def sec(id_, titulo, texto, bloque):
         return {'id': id_, 'titulo': titulo, 'texto': texto, 'tarjetas': [], 'bloque': bloque}
     return dict(_migas(), **{
-        'archivo': archivo(e['id']), 'menu': 'Expediente: ' + e['tit'], 'padre3': (INDICE, 'Expedientes'),
+        'archivo': archivo(e['id']), 'menu': 'Expediente: ' + e['tit'], 'padre3': (INDICE, 'Expedientes internos'),
         'icono': '🗂️', 'titulo': 'Expediente: ' + e['tit'],
         'lema': '%s · %s' % (e['num'], 'abierto, en seguimiento' if e['abierto'] else 'documentado'),
         'entrada': ('Todo lo que la plataforma sabe de este caso, en un solo lugar: el caso en cinco preguntas, su bitácora, '
@@ -446,7 +446,7 @@ def indice():
              '          <p class="xi-vacio" id="xiNada" hidden>Ningún expediente coincide. Prueba con otra palabra o <a href="#pide">pide el tuyo</a>.</p>\n'
              '        </div>') % (len(ex), abiertos, len(ex) - abiertos)
     return dict(_migas(), **{
-        'archivo': INDICE, 'menu': 'Expedientes', 'icono': '🗂️', 'titulo': 'Expedientes',
+        'archivo': INDICE, 'menu': 'Expedientes internos', 'icono': '🗂️', 'titulo': 'Expedientes internos',
         'lema': 'Las grandes investigaciones, con seguimiento',
         'entrada': ('El archivero digital de la plataforma: aquí se arman y se guardan las grandes investigaciones, las nuestras y las que '
                     'nos piden. Cada expediente junta el caso en cinco preguntas, su bitácora, sus dictámenes, lo que sigue y lo que falta. '

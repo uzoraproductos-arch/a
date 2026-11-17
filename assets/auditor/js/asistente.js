@@ -2592,11 +2592,11 @@
       r.sug = ['Expedientes de investigación', '¿Cómo pido un expediente?'];
       return r;
     }
-    if (!/ expedientes? de (las )?(grandes )?investigacion(es)? | grandes investigaciones | expedientes? de la biblioteca /.test(p)) return null;
+    if (!/ expedientes? de (las )?(grandes )?investigacion(es)? | grandes investigaciones | expedientes? de la biblioteca | expedientes? internos? /.test(p)) return null;
     var ab = INV.filter(function (x) { return x.ex && x.ab; }).length, tot = INV.filter(function (x) { return x.ex; }).length;
     var nuevos = INV.filter(function (x) { return x.ex && x.nov; }).slice(0, 5);
-    return { tit: 'Expedientes de investigación', ir: [EXP_INDICE, 'los Expedientes'], rec: [],
-      html: '<p>🗂️ Los <b>Expedientes</b> son la quinta tarjeta de la Biblioteca del Erario Público: cada gran investigación en un solo lugar, con el caso en cinco preguntas, su bitácora, lo que sigue y lo que falta.</p>' +
+    return { tit: 'Expedientes internos', ir: [EXP_INDICE, 'los Expedientes internos'], rec: [],
+      html: '<p>🗂️ Los <b>Expedientes internos</b> son la quinta tarjeta de la Biblioteca del Erario Público: cada gran investigación en un solo lugar, con el caso en cinco preguntas, su bitácora, lo que sigue y lo que falta.</p>' +
         '<p>Hay <b>' + tot + '</b>: <b>' + ab + '</b> abiertos y <b>' + (tot - ab) + '</b> documentados. Se arman solos con la base de datos y se ponen al día cada día.</p>' +
         (nuevos.length ? '<p>Con registro fechado en su bitácora:</p><ul class="pa-lista">' + nuevos.map(function (x) {
           return '<li><a href="' + esc(x.ex) + '">' + esc(x.exn) + ' · ' + esc(x.tit) + '</a> · ' + esc(x.nov) + '</li>'; }).join('') + '</ul>' : '') +
