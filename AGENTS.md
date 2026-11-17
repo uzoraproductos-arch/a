@@ -835,6 +835,12 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   nunca es prueba de parentesco**: un vínculo entra a la plataforma solo si lo
   dice un documento oficial, y a los familiares que no son servidores públicos
   no se les nombra.
+  **Los deudores alimentarios y las candidaturas** (17-11-2026, pedido del autor «por el momento electoral»): tema `deudores` de
+  `asistente_legislativo.py`, cotejado con el art. 38, fr. VII de la Constitución y los arts. 135 Bis a 135 Septies de la LGDNNA.
+  **El Registro Nacional de Obligaciones Alimentarias no se copia ni se publica un solo nombre** (son particulares y sus acreedores,
+  menores; decisión del autor, que además descartó cobrar por consultarlo): se explica, se da su liga y se cita solo lo que una
+  autoridad electoral haga público en un documento. El **RUG** (garantías mobiliarias, Código de Comercio) va en el glosario: **no es
+  una lista de fianzas ni de sancionados**, y su consulta pide cuenta de usuario.
   Las agresiones a la prensa, por `herramientas/periodistas.py` (29-10-2026;
   `periodismo-en-riesgo.html`, del modo Periodista), con el informe mensual del
   Mecanismo de Protección (Gobernación); **los homicidios y las sentencias son de
@@ -1015,6 +1021,13 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   contrato abierto el importe suele ser el máximo, no lo pagado. **Las personas
   físicas no se publican** (su RFC es un dato personal), y tener contratos no
   es una irregularidad: así se dice en cada respuesta.
+  **Los grupos y sus filiales** (17-11-2026, `herramientas/empresas_grupos.py`, sección `#grupos` y `grupoEmp()` del chat; pedido del
+  autor: «le pregunté al chat por Grupo Prodi y no salió información»). Muchos grupos no contratan con su nombre: `GRUPOS` dice con qué
+  empresas (por RFC) aparece cada uno en ComprasMX. **Ninguna cifra se escribe ahí**; **el vínculo entre el grupo y la filial es `pendiente`
+  mientras solo lo diga la prensa**; lo que falta cotejar va sin montos y con el portal donde debe estar; **contrato, concesión y permiso
+  no se confunden** (`FIGURAS`: ComprasMX trae contratos, una concesión se acredita con su título), y **nunca se dice el partido de un
+  gobierno**. Una empresa por su nombre, sin la palabra «contratos», se busca en ComprasMX (`empresaNombre()` y `quizaEmpresa()`); si no
+  está, se dice, y no se contesta con lo que se le parece. **Un grupo nuevo necesita su renglón en `GRUPOS`** y su pregunta de prueba.
   **Las señales de fraccionamiento** (04-11-2026, `herramientas/fraccionamiento.py`, sección
   `#fraccionamiento` y `fraccCmx()` del chat): adjudicaciones directas por monto de la misma unidad,
   empresa y partida que en 90 días rebasan el tope del Anexo 9 del PEF (LAASSP art. 55; Reglamento

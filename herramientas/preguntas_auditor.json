@@ -2351,6 +2351,97 @@
   {
    "q": "casos por aclarar del AIFA",
    "ir": "expedientes.html#exp-aifa"
+  },
+  {
+   "q": "Grupo Prodi",
+   "ir": "contratos-publicos.html#grupo-prodi",
+   "dice": [
+    "MOTA-ENGIL MEXICO",
+    "pendiente",
+    "Contrato, concesión y permiso no son lo mismo"
+   ],
+   "no_dice": [
+    "49"
+   ]
+  },
+  {
+   "q": "¿Grupo PRODI es concesionaria del gobierno?",
+   "ir": "contratos-publicos.html#grupo-prodi",
+   "dice": [
+    "Lo que falta cotejar",
+    "no un partido"
+   ]
+  },
+  {
+   "q": "Mota-Engil",
+   "ir": "contratos-publicos.html#grupo-prodi",
+   "dice": [
+    "licitación pública"
+   ]
+  },
+  {
+   "q": "Laboratorios Pisa",
+   "ir": "contratos-publicos.html?q=LPI830527KJ2"
+  },
+  {
+   "q": "la empresa ICA",
+   "ir": "contratos-publicos.html?q=ica",
+   "dice": [
+    "¿Cuál buscas?"
+   ]
+  },
+  {
+   "q": "¿es concesionaria Laboratorios Pisa?",
+   "ir": "contratos-publicos.html?q=LPI830527KJ2",
+   "dice": [
+    "ComprasMX trae contratos, no concesiones"
+   ]
+  },
+  {
+   "q": "Grupo Carso",
+   "ir": "contratos-publicos.html#grupos",
+   "dice": [
+    "No encontré",
+    "filial"
+   ]
+  },
+  {
+   "q": "¿Qué es una concesión?",
+   "ir": "glosario.html#Concesion"
+  },
+  {
+   "q": "grupo fertinal",
+   "ir": "herramienta-megaobras-sector.html#obra-fertinal"
+  },
+  {
+   "q": "¿Puede ser candidato un deudor alimentario?",
+   "ir": "datos-legislativo-elecciones.html#leg-deudores",
+   "dice": [
+    "no puede ser registrado como candidato",
+    "rnoa.dif.gob.mx"
+   ]
+  },
+  {
+   "q": "mi candidato debe pensión alimenticia, ¿puede competir?",
+   "ir": "datos-legislativo-elecciones.html#leg-deudores",
+   "dice": [
+    "no copia ese registro ni publica nombres"
+   ]
+  },
+  {
+   "q": "certificado de no deudor alimentario",
+   "ir": "datos-legislativo-elecciones.html#leg-deudores"
+  },
+  {
+   "q": "¿Qué es el RUG?",
+   "ir": "glosario.html#Registro-Unico-de-Garantias-Mobiliarias",
+   "dice": [
+    "No es una lista de fianzas"
+   ]
+  },
+  {
+   "q": "requisitos para ser candidato",
+   "ir": "datos-legislativo-elecciones.html#leg-candidatos"
   }
  ]
 }

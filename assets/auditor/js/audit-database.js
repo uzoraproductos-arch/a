@@ -8223,6 +8223,24 @@ window.AUDIT_DB = {
       "definicion": "La que se ofrece cuando hace falta un conocimiento especial (contabilidad, ingeniería, informática) para examinar hechos, objetos o personas. El perito debe tener título oficial en la materia si esa profesión está reglamentada. El dictamen cívico de esta plataforma no es un peritaje.",
       "ley": "Arts. 368 y 369 · Código Nacional de Procedimientos Penales (última reforma DOF 28-11-2025)",
       "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Concesión",
+      "definicion": "El acto por el que un gobierno da a una empresa, por un plazo, el derecho de construir, operar y explotar un bien o un servicio público, como una autopista de cuota. No es un contrato de obra: en el contrato el gobierno paga a la empresa; en la concesión la empresa invierte y cobra a quien usa la obra. Por eso una concesión no aparece en ComprasMX: se acredita con su título de concesión. La de caminos y puentes federales dura hasta 30 años; la de inmuebles federales, hasta 50. No da la propiedad del bien: solo el derecho de usarlo o explotarlo en los términos del título. A quien la recibe se le llama concesionaria.",
+      "ley": "Art. 6o. Ley de Caminos, Puentes y Autotransporte Federal · Arts. 16 y 73 Ley General de Bienes Nacionales",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Deudor Alimentario Moroso",
+      "definicion": "La persona a quien un juez declaró en incumplimiento de la pensión de alimentos que debe, casi siempre a sus hijas e hijos. Se inscribe en el Registro Nacional de Obligaciones Alimentarias, a cargo del Sistema Nacional DIF, con su nombre, su CURP, su RFC, el juzgado y el expediente. Mientras lo sea, no puede registrarse como candidato a un cargo de elección popular ni ser nombrado en el servicio público, y se le puede exigir el certificado de no inscripción para el pasaporte, la licencia de conducir o ante notario. El certificado lo pide cada persona, gratis. Auditavisión no copia ese registro ni publica nombres.",
+      "ley": "Art. 38, fr. VII Constitución (DOF 29-05-2023) · Arts. 135 Bis a 135 Septies Ley General de los Derechos de Niñas, Niños y Adolescentes (DOF 08-05-2023)",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Registro Único de Garantías Mobiliarias (RUG)",
+      "definicion": "El registro de la Secretaría de Economía donde se inscriben las garantías sobre bienes muebles que respaldan un crédito o una obligación mercantil. No es una lista de fianzas de contratos con el gobierno ni de personas sancionadas. Ahí van la prenda sin transmisión de posesión, el arrendamiento y el factoraje financieros, la reserva de dominio, el fideicomiso de garantía y los embargos sobre bienes muebles, entre otros. Inscribirlas hace que valgan frente a terceros y les da prelación. Es una sección del Registro Público de Comercio y funciona en línea; la consulta pide cuenta de usuario, y las certificaciones se pagan.",
+      "ley": "Arts. 32 bis 1 a 32 bis 9 Código de Comercio (sección adicionada DOF 27-08-2009, reformada DOF 13-06-2014)",
+      "categoria": "🔍 Fiscalización Superior"
     }
   ],
   "legislativo": {

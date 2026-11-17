@@ -1211,6 +1211,122 @@
       ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: [fuente], ir: [CMX_PAG + '?i=' + encodeURIComponent(k), 'Contratos públicos'] },
       sug: d.p.slice(0, 2).map(function (x) { return 'Contratos de ' + x[1]; }) };
   }
+  /* --- Grupos empresariales y sus filiales (pedido del autor, 17-11-2026: «le
+     pregunté al chat por Grupo Prodi y no salió información»). Muchos grupos no
+     contratan con su nombre: contrata una filial. El catálogo lo escribe
+     herramientas/empresas_grupos.py, sin cifras: los contratos se leen de
+     ComprasMX por el RFC de cada filial. El vínculo que solo dice la prensa va
+     como pendiente, y lo que falta cotejar no lleva montos. --- */
+  var GR = (B.dat && B.dat.gru) || { g: [], fig: [], nota: '' };
+  function figHtml() {
+    return GR.fig.length ? '<p>📑 <b>Contrato, concesión y permiso no son lo mismo:</b></p><ul class="pa-lista">' + GR.fig.map(function (f) {
+      return '<li><b>' + esc(f.n) + '.</b> ' + esc(f.tx) + ' <span class="pa-chico">(' + esc(f.ley) + ')</span></li>';
+    }).join('') + '</ul>' : '';
+  }
+  function grupoEmp(q) {
+    var p = plano(q), g = GR.g.filter(function (x) { return x.al.some(function (a) { return p.indexOf(' ' + a + ' ') >= 0; }); })[0];
+    if (!g || SAT_PAL.test(p) || (q.match(RFC_RE) || []).length) return null;
+    var prom = cmxIdx().then(function (I) {
+      return Promise.all(g.emp.map(cmxProv)).then(function (ds) { return respGrupo(g, ds, I.meta); });
+    }).then(null, function () { return respGrupo(g, [], null); });
+    return { espera: prom, tit: 'Grupo empresarial: ' + g.n };
+  }
+  function respGrupo(g, ds, M) {
+    var ci = [], fu = M ? [cmxFuente(M)] : [];
+    var h = '<p>🏢 <b>' + esc(g.n) + '.</b> ' + g.que + '</p>' +
+      '<p>🔗 <b>El vínculo:</b> ' + esc(g.vin.tx) + ' ' + chip({ e: 'pendiente', p: g.vin.p }) + '. ' + esc(g.vin.x) + '</p>';
+    ds.forEach(function (d, i) {
+      var rfc = g.emp[i];
+      if (!d) return;
+      var tp = d.tp || {}, mtp = d.mtp || {};
+      var partes = ['AD', 'LP', 'I3', 'OT'].filter(function (k) { return tp[k]; }).map(function (k) {
+        return '<b>' + tp[k].toLocaleString('es-MX') + '</b> por ' + TIPO_CMX[k] + (mtp[k] ? ' (' + pesosCmx(mtp[k]) + ')' : '');
+      });
+      h += '<p>🧾 <b>' + esc(d.n) + '</b> (<code>' + esc(rfc) + '</code>) tiene <b>' + d.c.toLocaleString('es-MX') + ' contrato' + (d.c === 1 ? '' : 's') + '</b> en ComprasMX, en los expedientes de 2025 y 2026, por <b>' + pesosCmx(d.m) + '</b> antes de impuestos ' + chip({ e: 'derivado' }) + '. Por procedimiento: ' + partes.join('; ') + '.</p>' +
+        '<p>Sus contratos mayores ' + chip({ e: 'oficial' }) + ':</p><ul class="pa-lista">' + d.k.slice(0, 5).map(function (k) {
+          return '<li>' + pesosCmx(k[3]) + (k[4] !== 'MXN' ? ' ' + esc(k[4]) : '') + ' · <b>' + esc(k[1]) + '</b> · ' + esc(TIPO_CMX[k[5]] || '') + (k[6] ? ' · ' + esc(k[6]) : '') + '<br><span class="pa-chico">' + esc(k[2]) + '</span>' +
+            (k[7] ? ' <a href="' + esc(M.detalle.replace('%s', k[7])) + '" target="_blank" rel="noopener">Ver en ComprasMX ↗</a>' : '') + '</li>';
+        }).join('') + '</ul>' +
+        '<p><button type="button" class="pa-ej" data-pa-pregunta="' + esc('Contratos de ' + rfc) + '">Ver todos sus contratos</button></p>';
+      ci.push({ v: d.c.toLocaleString('es-MX') + ' contratos', etq: d.n + ' · RFC ' + rfc + ' · expedientes 2025 y 2026', e: 'oficial' });
+      ci.push({ v: pesosCmx(d.m), etq: 'Importe antes de impuestos, suma de sus contratos en pesos', e: 'derivado' });
+      d.k.slice(0, 5).forEach(function (k) { ci.push({ v: pesosCmx(k[3]) + (k[4] !== 'MXN' ? ' ' + k[4] : ''), etq: k[0] + ' · ' + k[1] + ' · ' + k[2], e: 'oficial' }); });
+    });
+    if (!M) h += '<p class="pa-chico">No pude descargar ahora el catálogo de ComprasMX para decirte sus contratos. Revisa tu conexión y vuelve a preguntarme.</p>';
+    h += figHtml();
+    if (g.cot.length) h += '<p>🔎 <b>Lo que falta cotejar</b> (sin montos hasta tener el documento):</p><ul class="pa-lista">' + g.cot.map(function (c) {
+      ci.push({ v: c.fig, etq: c.tx, e: 'pendiente', p: c.p });
+      return '<li><b>' + esc(c.fig) + '.</b> ' + esc(c.tx) + ' ' + chip({ e: 'pendiente', p: c.p }) + '<br><span class="pa-chico">' + esc(c.x) + ' Dónde debe estar: <a href="' + esc(c.url) + '" target="_blank" rel="noopener">' + esc(c.ut) + ' ↗</a></span></li>';
+    }).join('') + '</ul>';
+    if (g.pr.length) h += '<p>📰 <b>Cómo lo contó la prensa</b> (sin verificar: solo titular y liga; una nota no es fuente):</p><ul class="pa-lista">' + g.pr.map(function (x) {
+      return '<li><a href="' + esc(x.u) + '" target="_blank" rel="noopener">' + esc(x.t) + ' ↗</a> <span class="pa-chico">(' + esc(x.m) + ')</span></li>';
+    }).join('') + '</ul>';
+    h += '<p class="pa-chico">⚖️ ' + esc(GR.nota) + ' El importe es el que reportó cada institución, antes de impuestos; en un contrato abierto suele ser el máximo, no lo pagado.</p>';
+    var tit = 'Grupo empresarial: ' + g.n;
+    if (M) h += charla && charla.deDonde ? charla.deDonde([{ que: 'Datos relevantes de los contratos de ComprasMX', e: 'oficial', fu: fu[0] }]) : '';
+    return { html: h, ir: [g.ir, 'Grupos y filiales'], rec: [],
+      ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: fu, ir: [g.ir, 'Grupos y filiales'] },
+      sug: g.emp.slice(0, 2).map(function (r) { return '¿Está en la lista negra del SAT el RFC ' + r + '?'; }).concat(['¿Qué es una concesión?']) };
+  }
+  /* Una empresa por su nombre, sin la palabra «contratos» («Grupo Carso», «la empresa
+     ICA», «X, S.A. de C.V.», «¿es concesionaria X?»): se busca en ComprasMX y, si no
+     está, la pregunta sigue su camino de siempre (sinEmp evita volver a entrar). */
+  var EMP_RE = /^ (?:(?:quien(?:es)? (?:es|son)|que es|que se sabe de|que hay de|dime de|busca|investiga) )?(?:a )?(?:la |el )?(?:empresa|grupo|constructora|concesionaria|consorcio|corporativo|laboratorios?|comercializadora) \S/;
+  var EMP_SUF = / (?:s a de c v|sa de cv|s a p i de c v|sapi de cv|s de r l de c v|s a b de c v|sab de cv) $/;
+  var EMP_CON = /^ (?:(?:que|cuales|cuantas) )?concesion(?:es)? (?:tiene|de|del|a) \S| (?:es|son) (?:una )?concesionarias? /;
+  var EMP_FUERA = 'concesion concesiones concesionaria concesionarias una un se sabe consorcio corporativo'.split(' ');
+  var sinEmp = false;
+  function sigueSinEmp(q, previas) {
+    sinEmp = true;
+    try { var r = respuesta0(q, previas); return r && r.espera ? r.espera : r; } finally { sinEmp = false; }
+  }
+  function cmxPorNombre(I, ws) {
+    var provs = I.r.filter(function (r) { var n = ' ' + satNorm(r[1]) + ' '; return ws.every(function (w) { return n.indexOf(' ' + w + ' ') >= 0; }); });
+    var exacto = provs.filter(function (r) { return satNorm(r[1]).replace(/\b(S ?A|DE|C ?V|S ?A ?P ?I|R ?L|S ?C|S ?A ?B)\b/g, '').replace(/ +/g, ' ').trim() === ws.join(' '); });
+    return { todos: provs, uno: provs.length === 1 ? provs[0] : exacto.length === 1 ? exacto[0] : null };
+  }
+  function cualEmp(provs, nombre) {
+    return { html: '<p>Encontré <b>' + provs.length.toLocaleString('es-MX') + '</b> empresas con «' + esc(nombre) + '» en el nombre entre los proveedores de ComprasMX. ¿Cuál buscas?</p><p>' +
+      provs.slice(0, 8).map(function (r) { return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc('Contratos de ' + r[0]) + '">' + esc(r[1]) + '</button>'; }).join(' ') + '</p>' +
+      (provs.length > 8 ? '<p class="pa-chico">Te muestro 8. Con el RFC la búsqueda es exacta.</p>' : ''),
+      ir: [CMX_PAG + '?q=' + encodeURIComponent(nombre), 'Contratos públicos'], sug: [], rec: [] };
+  }
+  function empresaNombre(q, previas) {
+    var p = plano(q), con = EMP_CON.test(p);
+    if (sinEmp || CMX_RE.test(p) || SAT_PAL.test(p) || (q.match(RFC_RE) || []).length) return null;
+    if (!EMP_RE.test(p) && !EMP_SUF.test(p) && !con) return null;
+    if (/\b(fantasmas?|productivas?|parlamentarios?|vulnerables?|publicas?|paraestatal(es)?|del estado|mineras?|de agua|radio|television)\b/.test(p)) return null;
+    var nombre = p.trim().split(' ').filter(function (w) { return w.length > 1 && CMX_FUERA.indexOf(w) < 0 && EMP_FUERA.indexOf(w) < 0; }).join(' ');
+    var ws = satNorm(nombre).split(' ').filter(function (w) { return w; });
+    if (!ws.length || ws.length > 6) return null;
+    var prom = cmxIdx().then(function (I) {
+      var m = cmxPorNombre(I, ws);
+      if (!m.todos.length || (!m.uno && m.todos.length > 60)) return Promise.resolve(sigueSinEmp(q, previas)).then(function (r) {
+        /* Si lo demás de la plataforma tampoco la tiene, se dice: no se contesta con lo que se le parece. */
+        if (r && !r.sin && !r.tambien && !/^<p>Eso lo encuentras en/.test(r.html || '')) return r;
+        return { html: '<p>◻️ No encontré a «' + esc(nombre) + '» entre los <b>' + I.meta.proveedores.toLocaleString('es-MX') + '</b> proveedores (personas morales) con contratos en ComprasMX, en los expedientes de 2025 y 2026, ni en el resto de la plataforma.</p>' +
+          '<p>Eso no quiere decir que no tenga contratos: muchos grupos contratan con el nombre de una filial o de un consorcio, sus contratos pueden ser de otros años, o pueden ser de gobiernos que no usan ComprasMX. Y una <b>concesión</b> no aparece ahí: se acredita con su título. Con el <b>RFC</b> de la empresa la búsqueda es exacta.</p>',
+          ir: [GR.pag || CMX_PAG, 'Grupos y filiales'], sug: ['¿Qué es una concesión?', '¿Qué contratistas están en la lista negra del SAT?'], rec: [], web: nombre, anota: true };
+      });
+      var nota = con ? '<p>📑 <b>ComprasMX trae contratos, no concesiones.</b> Una concesión se acredita con su título, que publica el gobierno que la otorga. Esto es lo que la plataforma tiene de sus contratos:</p>' : '';
+      if (m.uno) return cmxProv(m.uno[0]).then(function (d) { var r = respProv(m.uno[0], d, I.meta); r.html = nota + r.html + (con ? figHtml() : ''); return r; });
+      var r = cualEmp(m.todos, nombre); r.html = nota + r.html; return r;
+    }, function () { return sigueSinEmp(q, previas); });
+    return { espera: prom, tit: 'Empresa en ComprasMX: ' + nombre };
+  }
+  /* Un nombre propio que la plataforma no tiene («Laboratorios Pisa» a secas): antes
+     de decir «no lo sé», se revisa si es una empresa con contratos en ComprasMX. */
+  function quizaEmpresa(q, r) {
+    if (sinEmp || !r || r.espera || !(r.sin || (r.tambien && r.web))) return r;
+    var ws = satNorm(q).split(' ').filter(function (w) { return w.length > 1; });
+    if (!ws.length || ws.length > 5 || /[?¿]/.test(q) || /\b(QUE|CUANTO|CUANTOS|CUANTA|CUANTAS|COMO|QUIEN|QUIENES|CUAL|CUALES|DONDE|CUANDO|POR|ES|SON|HAY)\b/.test(' ' + ws.join(' ') + ' ')) return r;
+    var prom = cmxIdx().then(function (I) {
+      var m = cmxPorNombre(I, ws);
+      if (m.uno) return cmxProv(m.uno[0]).then(function (d) { return respProv(m.uno[0], d, I.meta); });
+      return ws.length > 1 && m.todos.length > 1 && m.todos.length <= 8 ? cualEmp(m.todos, ws.join(' ').toLowerCase()) : r;
+    }, function () { return r; });
+    return { espera: prom, tit: 'Empresa en ComprasMX: ' + q };
+  }
   /* Contratistas que también están en la lista 69-B del SAT. */
   var CRUCE_RE = /\b(contratistas?|proveedor(es)?|empresas? con contratos?)\b.*\b(lista negra|69 ?b|efos|sat)\b|\b(lista negra|69 ?b|efos)\b.*\b(contratistas?|proveedor(es)?|contratos?)\b/;
   function cruceSat(q) {
@@ -2414,11 +2530,14 @@
     })[0];
     return fed ? charla.deFicha(fed) : null;
   }
-  function respuesta(q, previas) {
+  function respuesta(q, previas) { return quizaEmpresa(q, respuesta0(q, previas)); }
+  function respuesta0(q, previas) {
     /* Una liga que ya está en la hemeroteca abre su cotejo antes que cualquier palabra de su dirección
        («pemex-perdidas-…-deuda» se iba al pendiente de la deuda de Pemex, 01-11-2026). */
     var lg = (/https?:\/\/[^\s<>"']+/i.exec(String(q)) || [])[0], hm = lg && hemeroteca(lg);
     if (hm) return hm;
+    var ge = grupoEmp(q);
+    if (ge) return ge;
     var xi = expInvResp(q);
     if (xi) return xi;
     /* La memoria de promesas (01-11-2026): «¿qué pasó con lo que prometieron…?» antes que la nota o la obra del mismo tema. */
@@ -2450,7 +2569,7 @@
     if (sa) return sa;
     var vc = PIDE_COTEJO.test(plano(q)) && verificado(q);
     if (vc) return vc;
-    var cx = fraccCmx(q) || cruceSat(q) || contratosCmx(q);
+    var cx = fraccCmx(q) || cruceSat(q) || contratosCmx(q) || empresaNombre(q, previas);
     if (cx) return cx;
     var pe = personaje(q);
     if (pe) return pe;

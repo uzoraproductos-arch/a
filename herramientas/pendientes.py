@@ -457,6 +457,10 @@ def recolectar():
     import recursos_naturales
     for x in recursos_naturales.pendientes():
         out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
+    # Los grupos empresariales y sus filiales (17-11-2026).
+    import empresas_grupos
+    for x in empresas_grupos.pendientes():
+        out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
     # 10. Lo que circula en redes y quedó pendiente en su cotejo (Noticias
     # relevantes · Verificamos, 26-10-2026).
     au_red = {

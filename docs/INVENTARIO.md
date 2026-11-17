@@ -62,7 +62,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `contexto-dimensional-presupuestaria.html` | Dimensión presupuestaria · Auditavisión | apartados.py | 47 | 0 | 3 | 1 | 0 |
 | `contexto-dimensional-renglones.html` | Renglones que no se suman · Auditavisión | apartados.py | 45 | 0 | 4 | 0 | 0 |
 | `contexto-dimensional-social.html` | Dimensión social · Auditavisión | apartados.py | 45 | 0 | 6 | 0 | 1 |
-| `contratos-publicos.html` | Contratos públicos · Auditavisión | apartados.py | 44 | 0 | 3 | 6 | 3 |
+| `contratos-publicos.html` | Contratos públicos · Auditavisión | apartados.py | 45 | 0 | 3 | 6 | 7 |
 | `datos-abiertos.html` | Datos abiertos · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 0 |
 | `datos-administracion-publica-auditorias.html` | Quién la audita y cómo contrata · Auditavisión | apartados.py | 45 | 0 | 7 | 4 | 0 |
 | `datos-administracion-publica-niveles.html` | Los tres niveles y lo que hacen · Auditavisión | apartados.py | 46 | 0 | 24 | 2 | 0 |
@@ -126,7 +126,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-justicia-ambiental.html` | Justicia ambiental · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 0 |
 | `datos-legislativo-calendario.html` | Sesiones, presupuesto y reformas · Auditavisión | apartados.py | 49 | 0 | 5 | 0 | 0 |
 | `datos-legislativo-camaras.html` | Las Cámaras · Auditavisión | apartados.py | 50 | 0 | 13 | 5 | 0 |
-| `datos-legislativo-elecciones.html` | Las elecciones · Auditavisión | apartados.py | 51 | 0 | 21 | 8 | 0 |
+| `datos-legislativo-elecciones.html` | Las elecciones · Auditavisión | apartados.py | 52 | 0 | 27 | 8 | 0 |
 | `datos-legislativo-estados.html` | Congresos locales y ayuntamientos · Auditavisión | apartados.py | 47 | 0 | 5 | 0 | 0 |
 | `datos-medio-ambiente.html` | Medio ambiente · Auditavisión | apartados.py | 50 | 0 | 0 | 0 | 0 |
 | `datos-municipios.html` | Base de Datos Municipal EFIPEM (INEGI) · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
@@ -143,7 +143,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `enciclopedia.html` | La Enciclopedia antigua · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `estado-de-cuenta.html` | Contexto dimensional · Auditavisión | apartados.py | 49 | 0 | 0 | 0 | 0 |
 | `expediente-agronitrogenados.html` | Expediente: Plantas de fertilizantes Agronitrogenados · Auditavisión | apartados.py | 56 | 0 | 3 | 1 | 2 |
-| `expediente-aifa.html` | Expediente: Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditavisión | apartados.py | 62 | 0 | 1 | 3 | 2 |
+| `expediente-aifa.html` | Expediente: Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditavisión | apartados.py | 63 | 0 | 1 | 3 | 3 |
 | `expediente-bunker-garcia-luna.html` | Expediente: El Búnker de Seguridad de García Luna (SSPC) · Auditavisión | apartados.py | 55 | 0 | 3 | 1 | 3 |
 | `expediente-deuda-congreso-2027.html` | Expediente: Diputados aprobó la deuda de 2027: Ley de Ingresos y nota soberana · Auditavisión | apartados.py | 68 | 0 | 4 | 0 | 2 |
 | `expediente-deuda-soberana.html` | Expediente: Los intereses de la deuda pública · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
@@ -163,7 +163,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `expediente-ramo-33.html` | Expediente: Ramo 33: el dinero para estados y municipios · Auditavisión | apartados.py | 68 | 0 | 3 | 0 | 0 |
 | `expediente-refineria-tula.html` | Expediente: Refinería Bicentenario en Tula (Barda Perimetral) · Auditavisión | apartados.py | 52 | 0 | 3 | 2 | 0 |
 | `expediente-seguro-popular.html` | Expediente: Seguro Popular: 53.5 millones de afiliados y lo que pasó después · Auditavisión | apartados.py | 61 | 0 | 5 | 1 | 2 |
-| `expediente-tren-maya.html` | Expediente: Tren Maya · Auditavisión | apartados.py | 61 | 0 | 1 | 2 | 1 |
+| `expediente-tren-maya.html` | Expediente: Tren Maya · Auditavisión | apartados.py | 62 | 0 | 1 | 2 | 2 |
 | `expediente-tren-toluca.html` | Expediente: Tren Interurbano México-Toluca «El Insurgente» · Auditavisión | apartados.py | 55 | 0 | 1 | 3 | 1 |
 | `expedientes-investigacion.html` | Expedientes de control interno · Auditavisión | apartados.py | 71 | 0 | 0 | 0 | 0 |
 | `expedientes.html` | Los casos por aclarar · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
@@ -326,7 +326,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 229 | 0 | 0 | 0 | 119 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 233 | 0 | 0 | 0 | 123 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 37 | 0 | 11 | 5 | 0 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 48 | 0 | 1 | 0 | 0 |
 | `planisferio-ags-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
@@ -824,7 +824,7 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-118 fichas, cada una con su porqué, su responsable y su enlace oficial.
+122 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 
