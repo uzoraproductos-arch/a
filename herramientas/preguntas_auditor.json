@@ -2345,6 +2345,10 @@
    "ir": "expedientes-investigacion.html"
   },
   {
+   "q": "Expedientes de control interno",
+   "ir": "expedientes-investigacion.html"
+  },
+  {
    "q": "casos por aclarar del AIFA",
    "ir": "expedientes.html#exp-aifa"
   }

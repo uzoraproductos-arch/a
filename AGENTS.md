@@ -867,7 +867,7 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   documento oficial ni un peritaje con validez ante autoridad.
 - **Los Expedientes de investigación** (pedido del autor, 16-11-2026: «grandes investigaciones que se irán dando seguimiento de forma
   autónoma, automatizada e independiente, alimentándose de nuestra base de datos y al día», y «que el usuario también nos puede solicitar»).
-  Son la quinta tarjeta de la Biblioteca del Erario Público: `expedientes-investigacion.html` y un `expediente-<id>.html` por cada
+  Son la quinta tarjeta de la Biblioteca del Erario Público, **con el nombre «Expedientes de control interno»** (decisión del autor, 17-11-2026; los archivos no cambian de nombre): `expedientes-investigacion.html` y un `expediente-<id>.html` por cada
   investigación de Auditoría en imágenes. Los arma `herramientas/expedientes_inv.py` y **nadie los escribe a mano ni traen cifras propias**:
   cruzan por las frases de `TEMA_BOT` la lectura breve, las notas del Noticiero y la memoria de promesas (la bitácora), los «Lo que sigue» y
   el Registro de pendientes. «En el radar» lee en el navegador la bandeja de la Mesa de redacción: **solo titular, medio, fecha y liga,
