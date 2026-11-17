@@ -108,7 +108,8 @@ def _g(id_, n, al, que, emp, doc, e='pendiente', porque=None):
     """Un grupo sin actos por cotejar ni notas de prensa: solo sus filiales en ComprasMX."""
     url, ut = doc
     vin = {'id': 'grupo-%s-vinculo' % id_, 'e': e,
-           'que': ('Su propia denominación dice que pertenece a %s' if e == 'oficial' else 'El documento que acredite qué empresas forman parte de %s') % n,
+           'que': (('Su reporte ante la Bolsa Mexicana de Valores acredita qué empresas forman parte de %s' if porque else
+                    'Su propia denominación dice que pertenece a %s') if e == 'oficial' else 'El documento que acredite qué empresas forman parte de %s') % n,
            'porque': porque or ('Consta en la denominación de la empresa que ComprasMX reporta.' if e == 'oficial' else
                       'La plataforma las asocia porque su nombre las identifica y porque así se las conoce, pero aún no coteja el '
                       'documento del grupo que lista sus subsidiarias, así que no lo afirma. No es omisión de una dependencia.'),
@@ -130,7 +131,8 @@ GRUPOS += [
        'De Grupo Salinas aparecen <b>Total Play</b> y <b>Seguros Azteca Daños</b>. Otras empresas con «Azteca» en el nombre '
        '(Molinos Azteca, Estudios Churubusco Azteca) <b>no son del grupo</b>.',
        ['TPT890516JP5', 'SAD050124Q50'], BMV_ANEXON, e='oficial',
-       porque='Total Play acredita en su Reporte Anual ante la BMV (p. 52, sha256 6a4d5301b7e3…) ser empresa de Grupo Salinas.'),
+       porque=('Total Play acredita en su Reporte Anual ante la BMV (p. 52, sha256 6a4d5301b7e3…) ser empresa de Grupo Salinas. '
+               'Ese documento no habla de Seguros Azteca Daños: su vínculo con el grupo queda por cotejar.')),
     _g('ica', 'Empresas ICA', ['empresas ica', 'grupo ica', 'ica constructora', 'ingenieros civiles asociados'],
        'Empresas ICA contrata con <b>ICA Constructora</b>. Otras con «ICA» en el nombre (ICA Interior, ICA Consultores América) '
        'no se asocian al grupo.',
