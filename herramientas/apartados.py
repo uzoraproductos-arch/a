@@ -275,6 +275,10 @@ BIBLIOTECA = [
      'El ciclo del dinero público artículo por artículo: Constitución, Ley de Ingresos 2026, LFPRH, Coordinación Fiscal, Disciplina Financiera y Poder Judicial, con el texto vigente cotejado.'),
     ('preguntas-frecuentes.html', '💡', 'Preguntas Frecuentes', 'En casillas didácticas',
      'Cómo funciona el gasto público, la deuda, el dinero de estados y municipios, qué revisa la Auditoría Superior y cuánto cuesta el Poder Judicial. Cada respuesta con sus fuentes.'),
+    # Quinta tarjeta (pedido del autor, 16-11-2026): las grandes investigaciones
+    # con seguimiento. Las arma herramientas/expedientes_inv.py con la base.
+    ('expedientes-investigacion.html', '🗂️', 'Expedientes', 'Las grandes investigaciones, con seguimiento',
+     'Cada gran investigación en un solo lugar: el caso en cinco preguntas, su bitácora, lo que sigue y lo que falta. Se arman solos con la base de datos, se ponen al día cada día y también se pueden pedir.'),
 ]
 DIC_ENLACE = ('<p class="bib-sello">📚 Forma parte de la <a href="diccionario.html">%s</a>, '
               'la obra de consulta de la plataforma.</p>' % BIB_NOMBRE)
@@ -285,7 +289,7 @@ def tarjetas_biblioteca():
 
 
 def bib_nav(actual):
-    """Barra al pie de cada pagina de la Biblioteca, con sus cuatro apartados."""
+    """Barra al pie de cada pagina de la Biblioteca, con sus cinco apartados."""
     return ('<nav class="bib-nav" aria-label="%s">\n'
             '        <a class="bib-nav-tit" href="diccionario.html">📚 %s</a>\n'
             '        <div class="bib-nav-fila">\n%s\n        </div>\n      </nav>' % (BIB_NOMBRE, BIB_NOMBRE, '\n'.join(
@@ -1449,12 +1453,17 @@ def noticias(base, ref):
     'icono': '📰',
     'titulo': 'Noticiero',
     'lema': 'La noticia, el verificador y el seguimiento',
-    'entrada': ('Las finanzas públicas de México, verificadas, en tres puertas: el periódico de la plataforma, el verificador para cotejar '
-                'lo que viste y el seguimiento de los casos que no se olvidan. Cada afirmación lleva el documento oficial que la sostiene.'),
+    'entrada': ('Que ninguna noticia sobre el dinero público se quede sin cotejar. Aquí lees la noticia ya verificada, cotejas la que viste '
+                'y sigues el caso hasta que llegue su documento. Elige una tarjeta.'),
+    # Tablero de tarjetas por grupo desde el 16-11-2026 (reestructura del autor):
+    # cada sección tiene su tarjeta (nt.tablero()), y abajo van lo último, el
+    # modo Periodista y los servicios para redacciones (nt.cierre_indice()).
     'pestanas': True,
-    'pista': 'Cada tarjeta abre su propia página.',
+    'pista': 'Cada tarjeta abre su sección.',
     'hash_a_pagina': nt.ANCLAS,
-    'secciones': [{'id': arch[:-5], 'pagina': arch, 'pestana': (ico, nom, lema)} for arch, ico, nom, lema, _e, _s in nt.PARTES],
+    'estilos': nt.ESTILOS,
+    'secciones': [dict({'id': i, 'pagina': pag, 'pestana': pest}, **({'grupo': g} if g else {})) for g, i, pag, pest in nt.tablero()],
+    'cierre': nt.cierre_indice(),
     }
     paginas = [indice]
     for arch, ico, nom, lema, entrada, _s in nt.PARTES:
@@ -1854,15 +1863,16 @@ DICCIONARIO = {
     'padre': ('aprende.html', 'Aprende'),
     'icono': '📚',
     'titulo': BIB_NOMBRE,
-    'lema': 'Las palabras, las referencias, las leyes y las preguntas del erario',
-    'entrada': ('La obra de consulta de la plataforma, en cuatro apartados: el <b>Diccionario</b> con los términos hacendarios, '
+    'lema': 'Las palabras, las referencias, las leyes, las preguntas y los expedientes del erario',
+    'entrada': ('La obra de consulta de la plataforma, en cinco apartados: el <b>Diccionario</b> con los términos hacendarios, '
                 'las <b>Referencias</b> con cada documento oficial que sostiene una cifra, el <b>Marco Legal Hacendario</b> con su '
-                'texto vigente y las <b>Preguntas Frecuentes</b> en casillas didácticas. Cada tarjeta abre su propia página.'),
+                'texto vigente, las <b>Preguntas Frecuentes</b> en casillas didácticas y los <b>Expedientes</b> de las grandes '
+                'investigaciones, con su seguimiento. Cada tarjeta abre su propia página.'),
     'hash_a_pagina': {'preguntas': 'preguntas-frecuentes.html', 'glosario': 'glosario.html',
                       'marco-legal': 'marco-legal.html', 'fuentes': 'fuentes-oficiales.html',
                       'referencias': 'fuentes-oficiales.html', 'pase': 'donaciones.html'},
     'secciones': [{
-        'id': 'apartados', 'titulo': 'Los cuatro apartados',
+        'id': 'apartados', 'titulo': 'Los cinco apartados',
         'texto': 'Elige uno: cada tarjeta abre su página.',
         'tarjetas': tarjetas_biblioteca(),
     }],
@@ -2323,6 +2333,47 @@ SV_ANCLAS = dict([(p[0], p[1]) for p in SV_PAGINAS] + [
     ('proceso', SV_COTIZA), ('independencia', SV_COTIZA), ('sv-*', SV_CATALOGO), ('fam-*', SV_CATALOGO)])
 
 
+# La cotización con opciones a un toque (pedido del autor, 16-11-2026: «que el
+# llenado sea ya con opciones predeterminadas… sencillas y fáciles de escoger,
+# incluso como ejemplos y opciones libres»). Cada servicio trae ejemplos de
+# tema y de pregunta que se tocan y se cambian al caso propio: (tema, pregunta).
+# Son ejemplos de redacción, sin cifras ni nombres. **Un servicio nuevo necesita
+# aquí sus ejemplos**, o la generación se detiene.
+SV_EJEMPLOS = {
+    'diligencia': [('Un proveedor nuevo antes de firmarle', '¿Está en la lista 69-B del SAT, tiene sanciones o contratos públicos, y qué documento lo dice?'),
+                   ('Un cliente en una actividad vulnerable', '¿Qué dicen de esta empresa los documentos públicos antes de aceptarla como cliente?')],
+    'seguimiento': [('Mi cartera de proveedores contra la lista 69-B', '¿Me avisan cada semana si alguno de mis proveedores entra o cambia de situación en la lista?'),
+                    ('Los contratos de una dependencia', '¿Me avisan cuando esta dependencia publique contratos nuevos de este tipo?')],
+    'facturas': [('Las facturas de un trimestre de mi empresa', '¿Qué proveedores de este lote están en la lista 69-B y qué facturas conviene revisar?'),
+                 ('Las facturas de un cliente de mi despacho', '¿Qué señales trae este lote, por proveedor, y con qué regla se detectó cada una?')],
+    'radiografia': [('Las finanzas de mi municipio', '¿Cuánto le entra, en qué lo gasta, cuánto debe y qué dejó por aclarar ante la ASF?'),
+                    ('Las finanzas de mi estado', '¿Qué dicen los documentos públicos de su deuda, su inversión y lo que no cuadra entre portales?')],
+    'temporada': [('El verificador para mi redacción en campaña', '¿Cómo cotejamos las cifras de los debates y seguimos cada promesa de gasto?'),
+                  ('Las promesas de gasto de las candidaturas de mi estado', '¿Qué prometió cada candidatura y qué dice el presupuesto vigente?')],
+    'entrega': [('El gobierno municipal que voy a recibir', '¿Qué dicen los documentos públicos de lo que recibo, y qué falta por publicar?'),
+                ('La entrega-recepción de mi cabildo', '¿Qué deuda, qué obras y qué observaciones de auditoría quedan abiertas?')],
+    'revision': [('Un contrato de obra pública', '¿A quién se le adjudicó, por cuánto, con qué procedimiento y qué documento lo acredita?'),
+                 ('Una cifra antes de publicarla', '¿Esta cifra consta en un documento oficial, y cuál es?'),
+                 ('La compra de medicamentos de un hospital', '¿A quién se le pagó y cuánto, según los contratos publicados?')],
+    'expediente': [('Un programa o una obra con observaciones de la ASF', '¿Quién, cuánto, cuándo y qué documento lo acredita, en orden?'),
+                   ('Los contratos de una empresa con el gobierno', '¿Qué contratos tiene, con qué dependencias, y qué inconsistencias hay entre los documentos?')],
+    'capacitacion': [('Taller «Documentar para sancionar»', '¿Pueden darle a mi equipo el taller de las 20 matrices de la ASF?'),
+                     ('Taller de facturas y la lista 69-B', '¿Pueden capacitar a mi despacho para revisar facturas y proveedores?'),
+                     ('Taller para leer el presupuesto', '¿Pueden enseñar a mi grupo a leer el presupuesto de su municipio o de su estado?')],
+    'licencia': [('Las herramientas dentro de mi institución', '¿Cómo podemos usar el verificador y los datos de la plataforma en nuestra organización?'),
+                 ('La plataforma en mi universidad', '¿Cómo la usamos en clase, en servicio social o en tesis?')],
+    'no-se': [('Algo raro con el dinero público de mi municipio', '¿Por dónde conviene empezar a revisarlo, y con qué documentos?'),
+              ('Una empresa con la que voy a tratar', '¿Qué puedo saber de ella con documentos públicos?')],
+}
+SV_PERIODOS = ['2025', '2024', '2019 a 2024', 'De 2024 a hoy']
+SV_PLAZOS = ['Sin prisa', 'En un mes', 'En dos semanas', 'Esta semana']
+SV_DOCS = ['Todavía no tengo documentos', 'Tengo las ligas', 'Tengo números de contrato', 'Tengo el número de auditoría']
+SV_ENTIDADES = ['Aguascalientes', 'Baja California', 'Baja California Sur', 'Campeche', 'Chiapas', 'Chihuahua', 'Ciudad de México', 'Coahuila',
+                'Colima', 'Durango', 'Estado de México', 'Guanajuato', 'Guerrero', 'Hidalgo', 'Jalisco', 'Michoacán', 'Morelos', 'Nayarit',
+                'Nuevo León', 'Oaxaca', 'Puebla', 'Querétaro', 'Quintana Roo', 'San Luis Potosí', 'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas',
+                'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas']
+
+
 def sv_liga(html_, archivo):
     """Las ligas internas (#ancla) de un bloque de Servicios, a la página donde
     vive su ancla; las que viven en `archivo` se quedan como están."""
@@ -2604,9 +2655,23 @@ def servicios():
         '          <details class="sv-faq"><summary>%s</summary><p>%s</p></details>' % q for q in PREGUNTAS)
     politica = '\n'.join('            <li><b>%s</b> %s</li>' % p for p in INDEPENDENCIA)
     opciones = '\n'.join('                <option value="%s">%s</option>' % (s[0], s[2]) for s in SERVICIOS)
+    sin_ej = [s[0] for s in SERVICIOS if s[0] not in SV_EJEMPLOS]
+    if sin_ej:
+        raise SystemExit('apartados.py: faltan los ejemplos de cotización (SV_EJEMPLOS) de: %s' % ', '.join(sin_ej))
     campo = lambda i, et, ctl, ayuda='': (
         '            <div class="sv-campo"><label for="%s">%s</label>%s%s</div>'
         % (i, et, ctl, ('<small id="%s-ay">%s</small>' % (i, ayuda)) if ayuda else ''))
+    # Las opciones a un toque: cada botón pone su valor en el campo `para`
+    # (servicios.js). Con `elige`, el campo es una lista y los botones la
+    # sustituyen a la vista; sin él, llenan un campo que sigue siendo libre.
+    ops = lambda para, pares, nombre, elige=False: (
+        '<div class="sv-ops" data-para="%s"%s role="group" aria-label="%s">%s</div>' % (
+            para, ' data-elige' if elige else '', esc_attr(nombre), ''.join(
+                '<button type="button" class="sv-op" data-valor="%s" aria-pressed="false">%s</button>' % (esc_attr(v), t) for v, t in pares)))
+    mismas = lambda xs: [(x, x) for x in xs]
+    serv_ops = ops('svServicio', [(s[0], '<span aria-hidden="true">%s</span> %s' % (s[1], s[2])) for s in SERVICIOS] +
+                   [('no-se', '<span aria-hidden="true">🤔</span> No sé, ayúdenme a definirlo')], 'Servicio', True)
+    usos = ['Periodismo', 'Organización civil', 'Empresa o despacho', 'Universidad o academia', 'Gobierno o dependencia', 'Uso personal', 'Otro']
     # Paso 0.2 de docs/PLAN-IMPLEMENTACION.md (05-11-2026): con FUNCIONES
     # lleno, «Enviar» manda la solicitud a recibir-formulario (tipo
     # «solicitud»), con el antispam, igual que los formularios de Comunidad
@@ -2626,20 +2691,24 @@ def servicios():
         '<form class="sv-form" id="svForm" data-canal="%s"%s novalidate>' % (esc_attr(CANAL_SOLICITUD), envio),
         '          <p class="sv-privado">%s</p>' % privado,
         '          <fieldset class="sv-grupo"><legend>Qué quieres investigar</legend>',
-        campo('svServicio', 'Servicio', '<select id="svServicio" name="servicio">\n%s\n                <option value="no-se">No sé, ayúdenme a definirlo</option>\n              </select>' % opciones),
-        campo('svTema', 'Tema <span class="sv-req">obligatorio</span>', '<input id="svTema" name="tema" type="text" maxlength="160" required aria-describedby="svTema-ay">',
-              'Por ejemplo: la compra de medicamentos de un hospital, un contrato de obra, el Ramo 33 de tu municipio.'),
-        campo('svPregunta', 'Tu pregunta <span class="sv-req">obligatorio</span>', '<textarea id="svPregunta" name="pregunta" rows="4" maxlength="1500" required aria-describedby="svPregunta-ay"></textarea>',
+        campo('svServicio', '1. ¿Qué necesitas? Toca una opción', serv_ops + '<select id="svServicio" name="servicio">\n%s\n                <option value="no-se">No sé, ayúdenme a definirlo</option>\n              </select>' % opciones),
+        '            <div class="sv-ejemplos" id="svEjemplos" hidden><span class="sv-et">💡 Ejemplos: toca uno y cámbialo a tu caso</span><div class="sv-ops" id="svEjemplosOps"></div></div>',
+        '            <script type="application/json" id="svEjemplosDatos">%s</script>' % json.dumps(SV_EJEMPLOS, ensure_ascii=False).replace('</', '<\\/'),
+        campo('svTema', '2. Tema <span class="sv-req">obligatorio</span>', '<input id="svTema" name="tema" type="text" maxlength="160" required aria-describedby="svTema-ay">',
+              'Toca un ejemplo de arriba o escríbelo con tus palabras.'),
+        campo('svPregunta', '3. Tu pregunta <span class="sv-req">obligatorio</span>', '<textarea id="svPregunta" name="pregunta" rows="4" maxlength="1500" required aria-describedby="svPregunta-ay"></textarea>',
               'Entre más concreta, mejor: «¿A quién se le pagó y cuánto?» rinde más que «investiguen todo».'),
         '            <div class="sv-dos">',
-        campo('svAmbito', 'Ámbito', '<select id="svAmbito" name="ambito"><option>Federal</option><option>Estatal</option><option>Municipal</option><option>Varios</option></select>'),
-        campo('svLugar', 'Entidad o municipio', '<input id="svLugar" name="lugar" type="text" maxlength="120">'),
+        campo('svAmbito', 'Ámbito', ops('svAmbito', mismas(['Federal', 'Estatal', 'Municipal', 'Varios']), 'Ámbito', True) +
+              '<select id="svAmbito" name="ambito"><option>Federal</option><option>Estatal</option><option>Municipal</option><option>Varios</option></select>'),
+        campo('svLugar', 'Entidad o municipio', '<input id="svLugar" name="lugar" type="text" maxlength="120" list="svLugares" placeholder="Elige un estado o escribe tu municipio" aria-describedby="svLugar-ay">'
+              '<datalist id="svLugares">%s</datalist>' % ''.join('<option value="%s">' % e for e in SV_ENTIDADES), 'Es opcional.'),
         '            </div>',
         '            <div class="sv-dos">',
-        campo('svPeriodo', 'Periodo', '<input id="svPeriodo" name="periodo" type="text" maxlength="60" placeholder="2019 a 2024">'),
-        campo('svPlazo', 'Para cuándo lo necesitas', '<input id="svPlazo" name="plazo" type="text" maxlength="60">'),
+        campo('svPeriodo', 'Periodo', ops('svPeriodo', mismas(SV_PERIODOS), 'Periodo') + '<input id="svPeriodo" name="periodo" type="text" maxlength="60" placeholder="O escribe otro">'),
+        campo('svPlazo', 'Para cuándo lo necesitas', ops('svPlazo', mismas(SV_PLAZOS), 'Para cuándo lo necesitas') + '<input id="svPlazo" name="plazo" type="text" maxlength="60" placeholder="O escribe una fecha">'),
         '            </div>',
-        campo('svDocs', 'Documentos que ya tienes', '<textarea id="svDocs" name="documentos" rows="2" maxlength="800"></textarea>',
+        campo('svDocs', 'Documentos que ya tienes', ops('svDocs', mismas(SV_DOCS), 'Documentos que ya tienes') + '<textarea id="svDocs" name="documentos" rows="2" maxlength="800" placeholder="O pega aquí las ligas o los números"></textarea>',
               'Ligas, números de contrato o de auditoría. Es opcional.'),
         '          </fieldset>',
         '          <fieldset class="sv-grupo"><legend>Quién lo solicita</legend>',
@@ -2647,7 +2716,7 @@ def servicios():
         campo('svNombre', 'Nombre u organización <span class="sv-req">obligatorio</span>', '<input id="svNombre" name="nombre" type="text" maxlength="120" required autocomplete="name">'),
         campo('svCorreo', 'Correo para responderte <span class="sv-req">obligatorio</span>', '<input id="svCorreo" name="correo" type="email" maxlength="160" required autocomplete="email">'),
         '            </div>',
-        campo('svUso', 'Para qué lo usarás', '<select id="svUso" name="uso"><option>Periodismo</option><option>Organización civil</option><option>Empresa o despacho</option><option>Universidad o academia</option><option>Gobierno o dependencia</option><option>Uso personal</option><option>Otro</option></select>'),
+        campo('svUso', 'Para qué lo usarás', ops('svUso', mismas(usos), 'Para qué lo usarás', True) + '<select id="svUso" name="uso">%s</select>' % ''.join('<option>%s</option>' % u for u in usos)),
         '            <div class="sv-campo" role="radiogroup" aria-labelledby="svParteEt"><span class="sv-et" id="svParteEt">¿Eres parte del caso? <span class="sv-req">obligatorio</span></span>',
         '              <label class="sv-radio"><input type="radio" name="parte" value="No"> No</label>',
         '              <label class="sv-radio"><input type="radio" name="parte" value="Sí"> Sí (proveedor, persona servidora pública involucrada o contraparte en un litigio)</label>',
@@ -6724,6 +6793,12 @@ def redireccion(destino, nombre, texto):
 
 
 def generar(sello=None):
+    # Los expedientes de investigación (16-11-2026): su módulo lee auditorias.py,
+    # que importa este; por eso entra aquí y no arriba.
+    import expedientes_inv
+    import modos as _modos
+    _modos.PREGUNTA.update({expedientes_inv.INDICE: 'Expedientes de investigación'})
+    _modos.PREGUNTA.update({expedientes_inv.archivo(_i): expedientes_inv.pregunta(_i) for _i in expedientes_inv.auditorias.TEMA_BOT})
     numeros_preparar()
     if sello is None:
         d = open(os.path.join(RAIZ, 'index.html'), 'rb').read().decode('utf-8')
@@ -6785,7 +6860,7 @@ def generar(sello=None):
     import planisferio
     import leyes_niveles
     import presupuesto_modulos
-    for extra in planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), fraude.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), *servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA:
+    for extra in planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), fraude.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), *servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA + [dict(x, pie_extra=bib_nav(expedientes_inv.INDICE)) for x in expedientes_inv.paginas()]:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

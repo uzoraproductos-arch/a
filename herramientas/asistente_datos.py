@@ -37,7 +37,7 @@ INF = 'informes-cuenta-publica.html'
 
 
 def _al(*xs):
-    return sorted({plano(x) for x in xs if len(plano(x)) >= 3}, key=len, reverse=True)
+    return sorted({plano(x) for x in xs if len(plano(x)) >= 3}, key=lambda x: (-len(x), x))
 
 
 def _n(v, dec=0):

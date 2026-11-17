@@ -565,12 +565,13 @@ def bot_fichas():
         if not TEMA_BOT.get(id_):
             raise SystemExit('auditorias.py: la investigacion %s no tiene sus frases en TEMA_BOT' % id_)
         d = _datos(id_)
-        out.append({'t': 'investigacion', 'tit': re.sub('<[^>]+>', '', a[5]), 'txt': d['que'],
+        import expedientes_inv
+        out.append(dict(expedientes_inv.para_bot(id_), **{'t': 'investigacion', 'tit': re.sub('<[^>]+>', '', a[5]), 'txt': d['que'],
                     'ci': [dict({'v': v, 'etq': etq, 'e': e}, **({'p': pend} if pend else {})) for v, etq, e, pend in d['cuanto']],
                     'fu': _docs_planos(d['docs']), 'qs': [q for q in (pq.get(id_), a[6]) if q],
                     'ir': [archivo(id_), 'la investigación en imágenes'],
                     'exp': ('expedientes.html#exp-' + EXPEDIENTE[id_]) if id_ in EXPEDIENTE else '',
-                    'k': TEMA_BOT.get(id_, [])})
+                    'k': TEMA_BOT.get(id_, [])}))
     return out
 
 

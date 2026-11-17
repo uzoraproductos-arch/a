@@ -2081,10 +2081,18 @@
       }
       if (f.t === 'investigacion') {
         var cv = (f.ci || []).slice(0, 4);
-        h = '<p>Es una de las investigaciones de <b>Auditoría en imágenes</b>: <b>' + esc(f.tit) + '</b>.</p><p>' + esc(corto(f.txt, 360)) + '</p>' +
-          (cv.length ? '<ul class="pa-lista">' + cv.map(function (c) { return '<li><b>' + esc(c.v) + '</b> · ' + esc(c.etq) + '</li>'; }).join('') + '</ul>' : '') +
-          '<p>Toca <b>«Saber más»</b> y te llevo a su página: el dinero paso a paso, quién interviene y qué falta saber, con cada cifra y su fuente.' +
-          (f.exp ? ' Los documentos de la Auditoría Superior están en <a href="' + esc(f.exp) + '">su expediente</a>.' : '') + '</p>';
+        /* El caso en cuatro casillas (16-11-2026): qué pasó, cuánto dinero, quién
+           interviene y qué falta saber, como la lectura breve de su página. */
+        var cas = function (ico, tit, cuerpo) { return cuerpo ? '<div class="pa-cinco-f"><dt><span aria-hidden="true">' + ico + '</span> ' + tit + '</dt><dd>' + cuerpo + '</dd></div>' : ''; };
+        h = '<p>Es una de las investigaciones de <b>Auditoría en imágenes</b>: <b>' + esc(f.tit) + '</b>.</p>' +
+          '<dl class="pa-cinco">' +
+          cas('🔎', 'Qué pasó', esc(corto(f.txt, 360))) +
+          cas('💰', 'Cuánto dinero', cv.length ? '<ul class="pa-lista">' + cv.map(function (c) { return '<li><b>' + esc(c.v) + '</b> · ' + esc(c.etq) + ' ' + chip(c.e, c.p) + '</li>'; }).join('') + '</ul>' : '') +
+          cas('🏛️', 'Quién interviene', f.qn ? esc(corto(f.qn, 260)) : '') +
+          cas('❓', 'Qué falta saber', f.fal ? esc(corto(f.fal, 300)) : '') +
+          '</dl>' +
+          '<p>Toca <b>«Saber más»</b> y te llevo a su página: el dinero paso a paso, con cada cifra y su fuente.' +
+          (f.exp ? ' Los documentos de la Auditoría Superior están en <a href="' + esc(f.exp) + '">su caso de la ASF</a>.' : '') + '</p>';
         cv.forEach(function (c) { fu.push({ que: c.etq, e: c.e, p: c.p, fu: (f.fu || [])[0] }); });
         return { html: h + deDonde(fu), ficha: f, ir: f.ir, sug: [] };
       }

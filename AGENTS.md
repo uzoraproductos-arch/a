@@ -74,7 +74,7 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
 copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
 **Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras
 Ágora, Garantías y Donaciones), **Noticiero** (antes «Noticias») y
-**Servicios** (`servicios.html`, que fue módulo del Modo Inspector). Desde el 11-11-2026 va en cuatro familias (`LINEAS` de `apartados.py`), cada servicio con su forma de cobro en `COBRO` (**nunca un monto sin pilotos**), y sus argumentos y cuentas viven en `servicios-por-que.html`: **un servicio nuevo necesita su renglón en `COBRO`**, o la generación se detiene. Las familias y los perfiles se ven por pestañas (`data-sv-tabs` de `servicios.js`; **un perfil nuevo necesita su nombre corto en `PERFILES_CORTO`**), y el argumento de fraude y lavado vive en `RIESGOS` (`#riesgo`): **nunca dice que la plataforma evita el fraude ni que cumple por el cliente**. Desde el 12-11-2026 `servicios.html` es un **tablero de tarjetas**: cada sección vive en su página (`SV_PAGINAS` de `apartados.py`) y las ligas viejas a sus anclas se mandan solas allá (`SV_ANCLAS`); **una sección nueva de Servicios es una tarjeta con su página, no un desglose en el tablero**. Ningún
+**Servicios** (`servicios.html`, que fue módulo del Modo Inspector). Desde el 11-11-2026 va en cuatro familias (`LINEAS` de `apartados.py`), cada servicio con su forma de cobro en `COBRO` (**nunca un monto sin pilotos**), y sus argumentos y cuentas viven en `servicios-por-que.html`: **un servicio nuevo necesita su renglón en `COBRO`**, o la generación se detiene. Las familias y los perfiles se ven por pestañas (`data-sv-tabs` de `servicios.js`; **un perfil nuevo necesita su nombre corto en `PERFILES_CORTO`**), y el argumento de fraude y lavado vive en `RIESGOS` (`#riesgo`): **nunca dice que la plataforma evita el fraude ni que cumple por el cliente**. Desde el 12-11-2026 `servicios.html` es un **tablero de tarjetas**: cada sección vive en su página (`SV_PAGINAS` de `apartados.py`) y las ligas viejas a sus anclas se mandan solas allá (`SV_ANCLAS`); **una sección nueva de Servicios es una tarjeta con su página, no un desglose en el tablero**. **La cotización se llena con opciones a un toque** (pedido del autor, 16-11-2026): el servicio, el ámbito, el periodo, el plazo y el uso son botones (`.sv-ops` de `servicios.js`), y cada servicio trae ejemplos de tema y pregunta que se tocan y se cambian (`SV_EJEMPLOS` de `apartados.py`: **un servicio nuevo necesita ahí sus ejemplos**, sin cifras ni nombres, o la generación se detiene); todo campo sigue siendo libre. Ningún
 archivo cambió de nombre. Las páginas de Números, Datos y Aprende marcan
 Comunidad (`ENCICLO_MARCAN`) y sus migas empiezan «Comunidad › Enciclopedia».
 Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
@@ -730,6 +730,16 @@ mudando a su página; no se agregan desgloses nuevos.
   aludida dijo en su propio documento: se publica en sus palabras, con su liga,
   y no se califica. La página es la función `noticias(base, ref)` de
   `apartados.py`.
+- **El Noticiero es un tablero y sus páginas van por pestañas** (reestructura del autor, 16-11-2026: «teniendo en
+  cuenta las novedades de los servicios… y el objetivo… del modo Periodista»). `noticias-relevantes.html` trae una
+  tarjeta por sección, en tres grupos (Lee, Verifica, Sigue; `TARJETA` y `tablero()` de `noticias.py`: **una sección
+  nueva necesita ahí su línea de tarjeta**, o la generación se detiene), «Lo último, verificado» (`ultimas()`) y el
+  puente. En las tres páginas **la barra son pestañas: se ve una sección a la vez** (`irA()` de `noticias.js`); las
+  direcciones no cambian, y un ancla de adentro (`#col-<id>`, `#propon`, `#ciego-<id>`, `#promesa-<id>`) abre su
+  sección. Los puntos ciegos y lo que falta de cada caso abierto van plegados. **El puente** (`PUENTE` y `puente()`)
+  cierra cada página con el modo Periodista (preguntas que el chat ya contesta) y los servicios que vienen al caso,
+  leídos de `SERVICIOS` y `COBRO`: **nunca un monto**. Cada nota trae «📰 Pregúntale al Periodista». El cabezal del
+  periódico va solo en el diario. Se reordenó; no se quitó contenido.
 - **Noticias es un periódico: «Auditavisión Noticias»** (pedido del autor,
   28-10-2026: «una nueva reestructuración tanto de diseño como de la
   información… partiendo de una metodología u objetivo»). **Objetivo: que
@@ -855,6 +865,30 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   la página vuelve a contestarla con la misma base, así que no se puede
   fabricar un dictamen con cifras ajenas. El dictamen dice que no es un
   documento oficial ni un peritaje con validez ante autoridad.
+- **Los Expedientes de investigación** (pedido del autor, 16-11-2026: «grandes investigaciones que se irán dando seguimiento de forma
+  autónoma, automatizada e independiente, alimentándose de nuestra base de datos y al día», y «que el usuario también nos puede solicitar»).
+  Son la quinta tarjeta de la Biblioteca del Erario Público: `expedientes-investigacion.html` y un `expediente-<id>.html` por cada
+  investigación de Auditoría en imágenes. Los arma `herramientas/expedientes_inv.py` y **nadie los escribe a mano ni traen cifras propias**:
+  cruzan por las frases de `TEMA_BOT` la lectura breve, las notas del Noticiero y la memoria de promesas (la bitácora), los «Lo que sigue» y
+  el Registro de pendientes. «En el radar» lee en el navegador la bandeja de la Mesa de redacción: **solo titular, medio, fecha y liga,
+  «sin verificar»; un titular nunca entra como dato**. **Una investigación nueva tiene su expediente sola**; «abierto» quiere decir que hay
+  pendientes o un «lo que sigue», nunca una acusación. Se piden con el servicio `expediente` (se cotiza, **nunca un monto**) o proponiendo un
+  caso. `expedientes.html` sigue siendo los casos de la ASF: «expediente de Segalmex» abre esa aplicación; «expediente del Tren Maya», el de
+  la Biblioteca (`expInvResp()` de `asistente.js`).
+  **Son el archivero digital** (17-11-2026): las investigaciones propias y las pedidas pasan por las mismas etapas (`ETAPAS`); un pedido aceptado va en
+  `SOLICITADOS`, **sin decir quién lo pidió y sin cifras** (las cifras entran por su módulo), y la lista no se rellena con solicitudes inventadas.
+  **El expediente es una gran investigación hecha de dictámenes**: lista los dictámenes de su caso y lleva su sello, con folio y huella SHA-256 de su
+  contenido (`_huella()`), que cambia cuando cambia una cifra, un documento, la bitácora o un pendiente. No es un documento oficial, y lo dice.
+  **El registro por modo vive en Supabase** (`preguntas_bot.modo` y `modo_toca`, vista `preguntas_por_modo`): solo de las preguntas sin respuesta.
+  **Se arman cada día** (17-11-2026, flujo «Expedientes al día», `.github/workflows/expedientes.yml`, 8:53 de la Ciudad de México y a mano): vuelve a correr
+  `apartados.py` y publica solo si algo cambió; su reporte (`resumen()`) cuenta los titulares por cotejar de cada caso, que **nunca entran solos**. Por eso
+  **la generación debe dar lo mismo dos veces seguidas**: un orden que salga de un `set` se desempata (`key=lambda x: (-len(x), x)`), o el flujo publicaría ruido.
+- **La respuesta va esquematizada y los modos remiten** (pedido del autor, 16-11-2026). Cada respuesta abre con su cabecera (`cabResp()`: tipo de
+  ficha, modo al que pertenece y chips), pliega el detalle largo (`esquema()`), trae la tarjeta de su expediente (`expInvHtml()`) y guarda
+  «Explóralo a fondo» y «En la Enciclopedia» en paneles (`panel()`). **Si la pregunta le toca a otro modo, la respuesta lo dice arriba y ofrece
+  pasar** (`modoToca()` y `remiteHtml()`: por las palabras de `MODO_PAL` o por el modo con que `modos.py` clasificó la página); la contesta igual,
+  con los mismos datos. El dictamen abre con «De un vistazo», trae las cifras en tabla y el capítulo «Expediente relacionado». **Nada de esto
+  agrega cifras ni entra a la huella.**
 - **Se ve y se usa como el mejor producto** (rediseño del 24-10-2026): un
   solo logo (el de la cabecera del chat; las burbujas no llevan avatar), cada
   respuesta en cuatro capas (texto, panel de fuente, acciones, «Sigue

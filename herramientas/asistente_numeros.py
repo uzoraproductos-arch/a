@@ -138,7 +138,7 @@ def datos(d):
         k = plano(nom)
         out = [k, plano(nom.split(' (')[0]), re.sub(r'^(secretaria|instituto|comision|tribunal(es)?|agencia|consejeria|fiscalia|oficina) (de (la |los |las |el )?|del |federal de |nacional de |general de )?', '', k)]
         out += [plano(x) for x in extra]
-        return sorted({x for x in out if len(x) >= 3}, key=len, reverse=True)
+        return sorted({x for x in out if len(x) >= 3}, key=lambda x: (-len(x), x))
 
     filas, grupos = [], {}
 

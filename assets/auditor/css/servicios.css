@@ -314,3 +314,19 @@
 .sv-vista li small { display: block; font-size: 14px; color: #5a6782; }
 @media (max-width: 1000px) { .sv-hub, .sv-vista { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .sv-hub, .sv-vista { grid-template-columns: 1fr; } }
+
+/* La cotización con opciones a un toque (16-11-2026). */
+.sv-ops { display: flex; flex-wrap: wrap; gap: 8px; margin: 2px 0 4px; }
+.sv-op { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 6px 14px; border: 1.5px solid #c9d4e6; border-radius: 999px; background: #f6f9fe; color: #0f2a55; font: 600 15px 'Inter', system-ui, sans-serif; text-align: left; cursor: pointer; }
+.sv-op:hover { border-color: #1f4f8a; background: #eaf1fb; }
+.sv-op:focus-visible { outline: 3px solid #f2b63d; outline-offset: 2px; }
+.sv-op[aria-pressed="true"] { background: #0f2a55; border-color: #0f2a55; color: #ffffff; }
+.sv-op-ej { border-style: dashed; background: #fffaf0; border-color: #e0c78a; font-weight: 500; }
+.sv-op-ej[aria-pressed="true"] { border-style: solid; }
+.sv-ejemplos { display: grid; gap: 4px; background: #fffaf0; border: 1px solid #f0e2bd; border-radius: 12px; padding: 10px 12px; }
+.sv-ejemplos[hidden] { display: none; }
+.sv-oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.sv-campo { position: relative; }
+[data-theme="dark"] .sv-op { background: #16233a; border-color: #2a3b57; color: #e8eefa; }
+[data-theme="dark"] .sv-op[aria-pressed="true"] { background: #f2b63d; border-color: #f2b63d; color: #101a2c; }
+[data-theme="dark"] .sv-ejemplos, [data-theme="dark"] .sv-op-ej { background: #1d2740; border-color: #4a4630; }
