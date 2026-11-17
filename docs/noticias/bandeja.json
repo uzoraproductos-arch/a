@@ -1,7 +1,187 @@
 {
- "actualizado": "15 de noviembre de 2026",
+ "actualizado": "16 de noviembre de 2026",
  "nota": "Titulares que junta herramientas/recolectar_noticias.py, sin verificar. Solo titular, medio, fecha y liga; nunca el texto de la nota.",
  "notas": [
+  {
+   "titulo": "Presupuesto de Egresos de la Federación (PEF) 2027: Claves de cómo quedó el paquete económico",
+   "medio": "El Economista",
+   "fecha": "15 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/politica/presupuesto-egresos-federacion-pef-2027-claves-quedo-paquete-economico-20261115-844121.html",
+   "tema": "presupuesto",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/politica/presupuesto-egresos-federacion-pef-2027-claves-quedo-paquete-economico-20261115-844121.html"
+  },
+  {
+   "titulo": "El presupuesto que México destina a sus mares y costas",
+   "medio": "La Silla Rota",
+   "fecha": "12 de noviembre de 2026",
+   "url": "https://lasillarota.com/opinion/columnas/2026/11/12/el-presupuesto-que-mexico-destina-a-sus-mares-y-costas-537197.html",
+   "tema": "presupuesto",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://lasillarota.com/opinion/columnas/2026/11/12/el-presupuesto-que-mexico-destina-a-sus-mares-y-costas-537197.html"
+  },
+  {
+   "titulo": "FMI advierte que México está perdiendo credibilidad fiscal por el aumento del gasto social y alerta que la deuda pública seguirá creciendo en 2027",
+   "medio": "EL IMPARCIAL on MSN",
+   "fecha": "16 de noviembre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/otras/fmi-advierte-que-m%C3%A9xico-est%C3%A1-perdiendo-credibilidad-fiscal-por-el-aumento-del-gasto-social-y-alerta-que-la-deuda-p%C3%BAblica-seguir%C3%A1-creciendo-en-2027/ar-AA2hyfFP",
+   "tema": "deuda",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://www.msn.com/es-mx/noticias/otras/fmi-advierte-que-m%C3%A9xico-est%C3%A1-perdiendo-credibilidad-fiscal-por-el-aumento-del-gasto-social-y-alerta-que-la-deuda-p%C3%BAblica-seguir%C3%A1-creciendo-en-2027/ar-AA2hyfFP"
+  },
+  {
+   "titulo": "Aumenta la deuda pública de México a 21.7 billones de pesos para 2027",
+   "medio": "elcongresista",
+   "fecha": "16 de noviembre de 2026",
+   "url": "https://www.elcongresista.mx/politica/nacional/aumento-deuda-publica-mexico-2027",
+   "tema": "deuda",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://laopinion.net/deuda-publica-supera-los-19-billones-de-pesos-en-mexico/"
+  },
+  {
+   "titulo": "Deuda pública de México superaría los 21 billones de pesos en 2027",
+   "medio": "24 Horas on MSN",
+   "fecha": "16 de noviembre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/mexico/deuda-p%C3%BAblica-de-m%C3%A9xico-superar%C3%ADa-los-21-billones-de-pesos-en-2027/ar-AA2hxXi7",
+   "tema": "deuda",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://laopinion.net/deuda-publica-supera-los-19-billones-de-pesos-en-mexico/"
+  },
+  {
+   "titulo": "Deuda pública de México llegará a 55% del PIB en 2027, prevé Hacienda",
+   "medio": "El Imparcial",
+   "fecha": "30 de septiembre de 2026",
+   "url": "https://www.elimparcial.com/mexico/2026/09/30/deuda-publica-de-mexico-llegara-a-55-del-pib-en-2027-preve-hacienda/",
+   "tema": "deuda",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://www.elimparcial.com/mexico/2026/09/30/deuda-publica-de-mexico-llegara-a-55-del-pib-en-2027-preve-hacienda/"
+  },
+  {
+   "titulo": "Instituto Electoral de Sonora pedirá a la ASF investigar empresas vinculadas a Taddei",
+   "medio": "sdpnoticias",
+   "fecha": "16 de noviembre de 2026",
+   "url": "https://www.sdpnoticias.com/mexico/instituto-electoral-de-sonora-pedira-a-la-asf-investigar-empresas-vinculadas-a-taddei/",
+   "tema": "asf",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://www.sdpnoticias.com/mexico/instituto-electoral-de-sonora-pedira-a-la-asf-investigar-empresas-vinculadas-a-taddei/"
+  },
+  {
+   "titulo": "Auditoría Superior de la Federación va por 66 revisiones en Tamaulipas",
+   "medio": "Milenio on MSN",
+   "fecha": "23 de octubre de 2026",
+   "url": "https://www.msn.com/es-mx/noticias/mexico/auditor%C3%ADa-superior-de-la-federaci%C3%B3n-va-por-66-revisiones-en-tamaulipas/ar-AA2fWIml",
+   "tema": "asf",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://www.msn.com/es-mx/noticias/mexico/auditor%C3%ADa-superior-de-la-federaci%C3%B3n-va-por-66-revisiones-en-tamaulipas/ar-AA2fWIml"
+  },
+  {
+   "titulo": "SAT: gasto en pensiones de 1.8 billones de pesos absorbe más del 40% de la recaudación de impuestos",
+   "medio": "EL CEO",
+   "fecha": "5 de noviembre de 2026",
+   "url": "https://elceo.com/economia/sat-gasto-pensiones-absorbe-recaudacion-impuestos/",
+   "tema": "impuestos",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://elceo.com/economia/sat-gasto-pensiones-absorbe-recaudacion-impuestos/"
+  },
+  {
+   "titulo": "Gobierno de AMLO en la CDMX sí otorgó contratos directos a Rioboó: Verificado 2018",
+   "medio": "Proceso",
+   "fecha": "12 de junio de 2018",
+   "url": "https://www.proceso.com.mx/nacional/2018/6/13/gobierno-de-amlo-en-la-cdmx-si-otorgo-contratos-directos-rioboo-verificado-2018-206678.html",
+   "tema": "contratos",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://www.proceso.com.mx/nacional/2018/6/13/gobierno-de-amlo-en-la-cdmx-si-otorgo-contratos-directos-rioboo-verificado-2018-206678.html"
+  },
+  {
+   "titulo": "Deuda con proveedores: Pemex tiene pendiente de facturar 30 mil mdp",
+   "medio": "Excélsior",
+   "fecha": "16 de noviembre de 2026",
+   "url": "https://www.excelsior.com.mx/finanzas/deuda-con-proveedores-pemex-tiene-pendiente-facturar-30-mil-mdp",
+   "tema": "empresas",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://www.excelsior.com.mx/finanzas/deuda-con-proveedores-pemex-tiene-pendiente-facturar-30-mil-mdp"
+  },
+  {
+   "titulo": "Pemex y CFE: la factura que no aparece en el recibo",
+   "medio": "sdpnoticias",
+   "fecha": "15 de noviembre de 2026",
+   "url": "https://www.sdpnoticias.com/opinion/pemex-y-cfe-la-factura-que-no-aparece-en-el-recibo/",
+   "tema": "empresas",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://www.sdpnoticias.com/opinion/pemex-y-cfe-la-factura-que-no-aparece-en-el-recibo/"
+  },
+  {
+   "titulo": "Pensiones saturan al IMSS y al ISSSTE",
+   "medio": "Plano Informativo",
+   "fecha": "16 de noviembre de 2026",
+   "url": "https://planoinformativo.com/1182304/pensiones-saturan-al-imss-y-al-issste",
+   "tema": "salud",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://grupoenconcreto.com/noticias/pensiones-presionan-las-finanzas-del-imss-y-el-issste/"
+  },
+  {
+   "titulo": "El presupuesto 2027 deja fuera los recursos solicitados para un nuevo hospital del Issste en Hermosillo y mantiene la rehabilitación del Ocaranza",
+   "medio": "EL IMPARCIAL",
+   "fecha": "16 de noviembre de 2026",
+   "url": "https://www.elimparcial.com/son/hermosillo/2026/11/16/el-presupuesto-2027-deja-fuera-los-recursos-solicitados-para-un-nuevo-hospital-del-issste-en-hermosillo-y-mantiene-la-rehabilitacion-del-ocaranza/",
+   "tema": "salud",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://www.elimparcial.com/son/hermosillo/2026/11/16/el-presupuesto-2027-deja-fuera-los-recursos-solicitados-para-un-nuevo-hospital-del-issste-en-hermosillo-y-mantiene-la-rehabilitacion-del-ocaranza/"
+  },
+  {
+   "titulo": "Calendario Pensión ISSSTE 2026: Fecha de pago de diciembre y segunda parte del aguinaldo",
+   "medio": "El Informador",
+   "fecha": "16 de noviembre de 2026",
+   "url": "https://www.informador.mx/economia/calendario-pension-issste-2026-fecha-de-pago-de-diciembre-y-segunda-parte-del-aguinaldo-20261116-0095.html",
+   "tema": "salud",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://www.informador.mx/economia/calendario-pension-issste-2026-fecha-de-pago-de-diciembre-y-segunda-parte-del-aguinaldo-20261116-0095.html"
+  },
+  {
+   "titulo": "Estados y municipios no devuelven dinero de subejercicios; SHCP los presionará",
+   "medio": "Al Calor Político",
+   "fecha": "15 de noviembre de 2026",
+   "url": "https://www.alcalorpolitico.com/informacion/estados-y-municipios-no-devuelven-dinero-de-subejercicios-shcp-los-presionara-453493.html",
+   "tema": "estados",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://www.alcalorpolitico.com/informacion/estados-y-municipios-no-devuelven-dinero-de-subejercicios-shcp-los-presionara-453493.html"
+  },
+  {
+   "titulo": "Advierte Moody's caída de participaciones federales",
+   "medio": "reforma",
+   "fecha": "23 de julio de 2026",
+   "url": "https://www.reforma.com/advierte-moody-s-caida-de-participaciones-federales/ar3245509",
+   "tema": "estados",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://www.reforma.com/advierte-moody-s-caida-de-participaciones-federales/ar3245509"
+  },
+  {
+   "titulo": "Respalda diputado Andrade mayor gasto federal para estados y municipios",
+   "medio": "Quadratin Hidalgo",
+   "fecha": "4 de noviembre de 2026",
+   "url": "https://hidalgo.quadratin.com.mx/politica/respalda-diputado-andrade-mayor-gasto-federal-para-estados-y-municipios/",
+   "tema": "estados",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://hidalgo.quadratin.com.mx/politica/respalda-diputado-andrade-mayor-gasto-federal-para-estados-y-municipios/"
+  },
+  {
+   "titulo": "SAT confirma multas de hasta 35 mil pesos para quienes presten esta cantidad a amigos",
+   "medio": "El Informador",
+   "fecha": "16 de noviembre de 2026",
+   "url": "https://www.informador.mx/economia/sat-confirma-multas-de-hasta-35-mil-pesos-para-quienes-presten-esta-cantidad-a-amigos-20261116-0070.html",
+   "tema": "medios",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://www.informador.mx/economia/sat-confirma-multas-de-hasta-35-mil-pesos-para-quienes-presten-esta-cantidad-a-amigos-20261116-0070.html"
+  },
+  {
+   "titulo": "Los gastos hormiga pueden ser parte de tu presupuesto: ¿cómo integrarlos sin afectar tu bolsillo?",
+   "medio": "El Economista",
+   "fecha": "16 de noviembre de 2026",
+   "url": "https://www.eleconomista.com.mx/finanzaspersonales/gastos-hormiga-parte-presupuesto-integrarlos-afectar-bolsillo-20261116-843044.html",
+   "tema": "medios",
+   "visto": "16 de noviembre de 2026",
+   "grupo": "https://www.eleconomista.com.mx/finanzaspersonales/gastos-hormiga-parte-presupuesto-integrarlos-afectar-bolsillo-20261116-843044.html"
+  },
   {
    "titulo": "Presupuesto de Egresos 2024 aumenta 1.3% pero queda estancado",
    "medio": "elcongresista",
@@ -3421,186 +3601,6 @@
    "tema": "medios",
    "visto": "7 de noviembre de 2026",
    "grupo": "https://www.eleconomista.com.mx/finanzaspersonales/ley-economia-digital-7-movimientos-financieros-puedes-hoy-20261106-842491.html"
-  },
-  {
-   "titulo": "IMPEPAC",
-   "medio": "Proceso",
-   "fecha": "6 de noviembre de 2026",
-   "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFB6Wk5IUmE4Njl0ek5qdWdnbmxmV2d3M3hVcjQ0WS1GeXJoNkFnSmxEZzFmc2U2RnJxdFUyNTk2QkE2aHBZZmhLUkNQcVE2Z0M5U2dwaWVGYTZucUwzaHBFVw?oc=5",
-   "tema": "medios",
-   "visto": "7 de noviembre de 2026",
-   "grupo": "https://news.google.com/rss/articles/CBMiYEFVX3lxTFB6Wk5IUmE4Njl0ek5qdWdnbmxmV2d3M3hVcjQ0WS1GeXJoNkFnSmxEZzFmc2U2RnJxdFUyNTk2QkE2aHBZZmhLUkNQcVE2Z0M5U2dwaWVGYTZucUwzaHBFVw?oc=5"
-  },
-  {
-   "titulo": "Sheinbaum arremete contra Lorenzo Córdova: \"No hizo nada contra duopolio en el INE\"",
-   "medio": "Proceso",
-   "fecha": "4 de noviembre de 2026",
-   "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQWFRPenc2blU0dndnX2YtYWhBTmRRRnZja2hRUENROUpheWpmZDdPY3FQbHgtQlp3Tm15bDlzU3ZyXzRhazA1TE1ydXNKMndCc0M0bnhscG92MlQtelZHS3VOZFBJM2Q0R1hQYkp1T09EMUZlN241ZE1ZX2x2ZWkzak56RGhBNnBoUS1rMmhiV0prY05TTXJlZ0UwVnN2OXB0dmZFRzl5UUZMMXFfeVZqQl9qbGtmZEd6dUpjOHpiTzhMbFhIVlpTSnEzN0c0blN0eUNLbg?oc=5",
-   "tema": "medios",
-   "visto": "7 de noviembre de 2026",
-   "grupo": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxQLVFJUEZvNkpndDlOVzdlV1ZZSlNySHlpcWpDR2JJeS1GR2kydGFOYlVrZE11d3lSVmFrcWNKVWUtY1pISy1LVUw3Y3Y3SmRoX1kzOVJxSnBtWHlRdG10WHUxU05TeHotWU8xbXVZWHpkWHZ4S1NGRFpJZXRjWGNhbFgxYnNucXhzd19nZHdOR2RaeEh2em9LLWdSckhHcEsxUHJWWEtpYWZKZ0kxOXVQTTV0NmREXy1Zc081Mi1SaEdkV19RS2EtUjdxYlQ2S0RibVREeHExSmljcnF3RnBacjd4RWJQREI1WWdic3FqUdIB9AFBVV95cUxPbEtodEJPZWNpMjlfX0dRZnd4OFoyVWJKbFlTRGl0VjFkYjY4Y1dkTWRpSHFRU1lDSUpva0VrTkU4dnpnYTc0a3BUNHdBRW96SnVQZlRuU2xKNkxQTlJ2dmJ2UTk5NDl2UlB0cWYtZWVQajNEM0xndDNzVHN6M0pXV2JHTDF3bmxyWWFZaUhoU1JheTRYNmpkMUVyTE1UdmpOS0R3TXRMbDZGdVlrc1RxLXVqMzlwNmxqLVFabW9PbG9aTUc2c2FBYktfSHFZcF8zWko0YUpfR3BkN2FHaF83T1Jkb0J4OGNlZFQtMEstZ2ZzcjRu?oc=5"
-  },
-  {
-   "titulo": "INE aprueba medidas para “limpiar la casa”",
-   "medio": "Proceso",
-   "fecha": "6 de noviembre de 2026",
-   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQZV9hckVIdGk2YnJYb3VDSndicUNiclEyS29xQ3R1TWliTXRUMDNxQ25aeF92NFR3SVpFZGxBWDRWdzZaQ21OcjUyZWhRVmx3QWhSWWdzMWl0amFLZnl3R09OMHZiS19sNE5VVXZiNGtQRUY3WkRENHVHR1B3RUt5S2taWGlFMTZlLXpKeW5CdEkzMnhMamJaQjltYzJNOGQ5VXNzb0Nwc29YbFE?oc=5",
-   "tema": "medios",
-   "visto": "7 de noviembre de 2026",
-   "grupo": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQZV9hckVIdGk2YnJYb3VDSndicUNiclEyS29xQ3R1TWliTXRUMDNxQ25aeF92NFR3SVpFZGxBWDRWdzZaQ21OcjUyZWhRVmx3QWhSWWdzMWl0amFLZnl3R09OMHZiS19sNE5VVXZiNGtQRUY3WkRENHVHR1B3RUt5S2taWGlFMTZlLXpKeW5CdEkzMnhMamJaQjltYzJNOGQ5VXNzb0Nwc29YbFE?oc=5"
-  },
-  {
-   "titulo": "Empresa inhabilitada y multada por la Cofepris gana contrato millonario con la Sedena",
-   "medio": "Proceso",
-   "fecha": "6 de noviembre de 2026",
-   "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQalNaZVVYMTBjeE15ZWRvRndTd3QxMEZadS1aRzdUZDQyUnRNRGxiWWhkNlZBTWQ0aEhUS0tWbkJYQXJ1WWZfaVp1Y3dHSmo0X0ZFSURWMV9oLVNESTJCYUgwRVRkZlpiTFBraTFiZ3VNVFNTYk5zZWwtZHhWakVqRkNHYkVQeDlXMUNlTVZ1T1dQbHNzRENRMHFFdFNUS0RpNTRaTXR5Vko2LVNycFlEVlEzeFNsV2ZuTm1fS1BkVEJVVG45U25uNkhtbUlTMXdJZUtnVkRQaU1OeUE?oc=5",
-   "tema": "medios",
-   "visto": "7 de noviembre de 2026",
-   "grupo": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQalNaZVVYMTBjeE15ZWRvRndTd3QxMEZadS1aRzdUZDQyUnRNRGxiWWhkNlZBTWQ0aEhUS0tWbkJYQXJ1WWZfaVp1Y3dHSmo0X0ZFSURWMV9oLVNESTJCYUgwRVRkZlpiTFBraTFiZ3VNVFNTYk5zZWwtZHhWakVqRkNHYkVQeDlXMUNlTVZ1T1dQbHNzRENRMHFFdFNUS0RpNTRaTXR5Vko2LVNycFlEVlEzeFNsV2ZuTm1fS1BkVEJVVG45U25uNkhtbUlTMXdJZUtnVkRQaU1OeUE?oc=5"
-  },
-  {
-   "titulo": "La serie del vocero (VIDEO)",
-   "medio": "Proceso",
-   "fecha": "3 de noviembre de 2026",
-   "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPQTZwWVRFNmozb25VREhRVUV3RDFjNGZCNGM5b1g4NkNkZVhXZmR5WnpGZDRJUUZ1UFNiR1NuQ1FkVUFZcmVJTVZSSDdhcEhCY2RTZTgzOUVKV2Y0WUkySDhGWXJBenFLX0xURzNFTW44dV9laTk5Zk0tdGVjSmtYM1YwbnJkR0lxRkl3dmZB?oc=5",
-   "tema": "medios",
-   "visto": "7 de noviembre de 2026",
-   "grupo": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPQTZwWVRFNmozb25VREhRVUV3RDFjNGZCNGM5b1g4NkNkZVhXZmR5WnpGZDRJUUZ1UFNiR1NuQ1FkVUFZcmVJTVZSSDdhcEhCY2RTZTgzOUVKV2Y0WUkySDhGWXJBenFLX0xURzNFTW44dV9laTk5Zk0tdGVjSmtYM1YwbnJkR0lxRkl3dmZB?oc=5"
-  },
-  {
-   "titulo": "Brugada anuncia que eliminará el cobro de intereses en créditos de Fondeso",
-   "medio": "Proceso",
-   "fecha": "6 de noviembre de 2026",
-   "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPQzU1YWNXNW1HN3BqdXYwZWJUUDB5MXNLcTVzb0c3Wm9VVGRZMTBWMUN1a09LbHptbkdVWWQ0UTladndBWllnbmR3Si1LeS1PbzhNSzVpYjZfckI3OGYzS1BaQWVob0R4UUVCYzdEYUNUWVFlZGVWM0FCbUVST2VQdFNkVm11SHFtM1lobXpqYjJvY2YzSnFjNkFURHpiWnU5a2tDZXhBbGpMU1BrUlBZck5tcHhpZFU3WTJjOGdSVHBLNzhnR09IX2FoRDRRX1FBdEk0?oc=5",
-   "tema": "medios",
-   "visto": "7 de noviembre de 2026",
-   "grupo": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPQzU1YWNXNW1HN3BqdXYwZWJUUDB5MXNLcTVzb0c3Wm9VVGRZMTBWMUN1a09LbHptbkdVWWQ0UTladndBWllnbmR3Si1LeS1PbzhNSzVpYjZfckI3OGYzS1BaQWVob0R4UUVCYzdEYUNUWVFlZGVWM0FCbUVST2VQdFNkVm11SHFtM1lobXpqYjJvY2YzSnFjNkFURHpiWnU5a2tDZXhBbGpMU1BrUlBZck5tcHhpZFU3WTJjOGdSVHBLNzhnR09IX2FoRDRRX1FBdEk0?oc=5"
-  },
-  {
-   "titulo": "Hacienda sube IEPS a gasolinas, mientras la cuota cero del diésel va por su novena semana consecutiva",
-   "medio": "Expansión",
-   "fecha": "6 de noviembre de 2026",
-   "url": "https://expansion.mx/economia/2026/11/06/impuesto-gasolinas-sube-magna-premium-diesel-cero",
-   "tema": "medios",
-   "visto": "7 de noviembre de 2026",
-   "grupo": "https://expansion.mx/economia/2026/11/06/impuesto-gasolinas-sube-magna-premium-diesel-cero"
-  },
-  {
-   "titulo": "Los legisladores de la Comisión de Presupuesto aprobaron en lo general y en lo particular el dictamen del gasto público 2027, el cual iniciará su discusión en el pleno el ...",
-   "medio": "Expansión",
-   "fecha": "6 de noviembre de 2026",
-   "url": "https://expansion.mx/economia/2026/11/06/diputados-6000-millones-ine-educacion-mujeres-turismo",
-   "tema": "medios",
-   "visto": "7 de noviembre de 2026",
-   "grupo": "https://expansion.mx/economia/2026/11/06/diputados-6000-millones-ine-educacion-mujeres-turismo"
-  },
-  {
-   "titulo": "Diputados aprueban en lo general el Presupuesto 2027 por 10.6 billones de pesos",
-   "medio": "Infobae",
-   "fecha": "6 de noviembre de 2026",
-   "url": "https://www.infobae.com/mexico/2026/11/06/diputados-aprueban-en-lo-general-el-presupuesto-2027-por-106-billones-de-pesos/",
-   "tema": "presupuesto",
-   "visto": "6 de noviembre de 2026",
-   "grupo": "https://www.elfinanciero.com.mx/nacional/2026/11/05/presupuesto-2027-diputados-aprueban-en-comision-gasto-de-106-billones-de-pesos/"
-  },
-  {
-   "titulo": "Presupuesto de Egresos 2027 avanza en comisiones de la Cámara de Diputados entre críticas por deuda",
-   "medio": "Periódico Zócalo",
-   "fecha": "5 de noviembre de 2026",
-   "url": "https://www.zocalo.com.mx/presupuesto-de-egresos-2027-avanza-en-comisiones-de-la-camara-de-diputados-entre-criticas-por-deuda/",
-   "tema": "presupuesto",
-   "visto": "6 de noviembre de 2026",
-   "grupo": "https://www.zocalo.com.mx/presupuesto-de-egresos-2027-avanza-en-comisiones-de-la-camara-de-diputados-entre-criticas-por-deuda/"
-  },
-  {
-   "titulo": "Mario Zamora exige al Congreso voltear a ver a Sinaloa: ‘El presupuesto 2027 olvida seguridad, campo, carreteras y a la UAS’",
-   "medio": "Los Noticieristas",
-   "fecha": "5 de noviembre de 2026",
-   "url": "https://losnoticieristas.com/politica/2026/11/mario-zamora-exige-al-congreso-voltear-a-ver-a-sinaloa-el-presupuesto-2027-olvida-seguridad-campo-carreteras-y-a-la-uas-1161938/",
-   "tema": "presupuesto",
-   "visto": "6 de noviembre de 2026",
-   "grupo": "https://losnoticieristas.com/politica/2026/11/mario-zamora-exige-al-congreso-voltear-a-ver-a-sinaloa-el-presupuesto-2027-olvida-seguridad-campo-carreteras-y-a-la-uas-1161938/"
-  },
-  {
-   "titulo": "Comisión de San Lázaro aprueba en lo general el Presupuesto de Egresos 2027",
-   "medio": "La Jornada",
-   "fecha": "5 de noviembre de 2026",
-   "url": "https://www.jornada.com.mx/noticia/2026/11/05/politica/comision-de-presupuesto-de-san-lazaro-aprueba-en-lo-general-el-presupuesto-de-egresos-2027",
-   "tema": "presupuesto",
-   "visto": "6 de noviembre de 2026",
-   "grupo": "https://www.jornada.com.mx/noticia/2026/11/05/politica/comision-de-presupuesto-de-san-lazaro-aprueba-en-lo-general-el-presupuesto-de-egresos-2027"
-  },
-  {
-   "titulo": "Diputados aprueban en lo general y en Comisión el proyecto del gasto público para 2027",
-   "medio": "Expansión on MSN",
-   "fecha": "5 de noviembre de 2026",
-   "url": "https://www.msn.com/es-mx/noticias/otras/diputados-aprueban-en-lo-general-y-en-comisi%C3%B3n-el-proyecto-del-gasto-p%C3%BAblico-para-2027/ar-AA2gRdD2",
-   "tema": "presupuesto",
-   "visto": "6 de noviembre de 2026",
-   "grupo": "https://www.msn.com/es-mx/noticias/otras/diputados-aprueban-en-lo-general-y-en-comisi%C3%B3n-el-proyecto-del-gasto-p%C3%BAblico-para-2027/ar-AA2gRdD2"
-  },
-  {
-   "titulo": "Comisiones avalan Proyecto de Egresos 2027; contempla 5 mil mdp menos para el INE",
-   "medio": "SinEmbargo MX",
-   "fecha": "6 de noviembre de 2026",
-   "url": "https://www.sinembargo.mx/4899544/comisiones-avalan-proyecto-de-egresos-2027-contempla-5-mil-mdp-menos-para-el-ine/",
-   "tema": "presupuesto",
-   "visto": "6 de noviembre de 2026",
-   "grupo": "https://www.sinembargo.mx/4899544/comisiones-avalan-proyecto-de-egresos-2027-contempla-5-mil-mdp-menos-para-el-ine/"
-  },
-  {
-   "titulo": "Recorte de Banxico podría presionar costo financiero de la deuda: Sura Investments",
-   "medio": "El Economista",
-   "fecha": "5 de noviembre de 2026",
-   "url": "https://www.eleconomista.com.mx/sectorfinanciero/recorte-banxico-presionar-costo-financiero-deuda-sura-investments-20261105-842461.html",
-   "tema": "deuda",
-   "visto": "6 de noviembre de 2026",
-   "grupo": "https://www.eleconomista.com.mx/sectorfinanciero/recorte-banxico-presionar-costo-financiero-deuda-sura-investments-20261105-842461.html"
-  },
-  {
-   "titulo": "Auditoría Superior investiga al INE por irregularidades en gasto público de 2000 a 2025",
-   "medio": "Periódico AM",
-   "fecha": "5 de noviembre de 2026",
-   "url": "https://www.am.com.mx/nacional/2026/11/05/investiga-asf-al-ine-por-irregularidades-en-gasto-publico-de-2000-a-2025-1863009.html",
-   "tema": "asf",
-   "visto": "6 de noviembre de 2026",
-   "grupo": "https://periodicolavoz.com.mx/nacion/auditoria-superior-de-la-federacion-investiga-al-ine/385312"
-  },
-  {
-   "titulo": "INE deja nueva 'tarea' a la Auditoría: solicita una revisión de las adquisiciones de 2016 a 2026",
-   "medio": "Radio Fórmula",
-   "fecha": "5 de noviembre de 2026",
-   "url": "https://www.radioformula.com.mx/politica/ine-deja-nueva-tarea-a-la-auditoria-solicita-una-revision-de-las-adquisiciones-de-2016-a-2026-20261105-0125.html",
-   "tema": "asf",
-   "visto": "6 de noviembre de 2026",
-   "grupo": "https://www.radioformula.com.mx/politica/ine-deja-nueva-tarea-a-la-auditoria-solicita-una-revision-de-las-adquisiciones-de-2016-a-2026-20261105-0125.html"
-  },
-  {
-   "titulo": "Auditoría Superior confirma vínculos entre personas relacionadas con el INE y empresas de proveedores favoritos de Guadalupe Taddei",
-   "medio": "Proyecto Puente",
-   "fecha": "5 de noviembre de 2026",
-   "url": "https://proyectopuente.com.mx/2026/11/05/auditoria-superior-confirma-vinculos-entre-personas-relacionadas-con-el-ine-y-empresas-de-proveedores-favoritos-de-guadalupe-taddei/",
-   "tema": "asf",
-   "visto": "6 de noviembre de 2026",
-   "grupo": "https://proyectopuente.com.mx/2026/11/05/auditoria-superior-confirma-vinculos-entre-personas-relacionadas-con-el-ine-y-empresas-de-proveedores-favoritos-de-guadalupe-taddei/"
-  },
-  {
-   "titulo": "Auditorias para transparencia en la contratación de servicios y proveedores de recursos electorales",
-   "medio": "Milenio on MSN",
-   "fecha": "5 de noviembre de 2026",
-   "url": "https://www.msn.com/es-mx/noticias/mexico/sheinbaum-confirma-auditorias-para-transparencia-en-la-contrataci%C3%B3n-de-servicios-y-proveedores-de-recursos-electorales/ar-AA2gQLzb",
-   "tema": "asf",
-   "visto": "6 de noviembre de 2026",
-   "grupo": "https://www.msn.com/es-mx/noticias/mexico/sheinbaum-confirma-auditorias-para-transparencia-en-la-contrataci%C3%B3n-de-servicios-y-proveedores-de-recursos-electorales/ar-AA2gQLzb"
-  },
-  {
-   "titulo": "IFSE alista más denuncias penales contra municipios por adjudicaciones directas",
-   "medio": "ANTENA SAN LUIS",
-   "fecha": "5 de noviembre de 2026",
-   "url": "https://antenasanluis.mx/ifse-denuncias-adjudicacion-directa-municipios/",
-   "tema": "contratos",
-   "visto": "6 de noviembre de 2026",
-   "grupo": "https://antenasanluis.mx/ifse-denuncias-adjudicacion-directa-municipios/"
   }
  ]
 }
