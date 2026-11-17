@@ -2513,6 +2513,26 @@
    "dice": [
     "Puerto Peñasco"
    ]
+  },
+  {
+   "q": "¿A quién le debe Nuevo León?",
+   "ir": "planisferio-nl-deuda.html",
+   "dice": ["Banobras", "Registro Público Único"]
+  },
+  {
+   "q": "¿Cuánto le deben los estados a Banobras?",
+   "ir": "planisferio.html?d=deuda",
+   "dice": ["Ciudad de México", "Banobras"]
+  },
+  {
+   "q": "¿A quién le debe el municipio de Caborca?",
+   "ir": "planisferio-son-deuda.html",
+   "dice": ["Efficiency Matters Corporation", "no es un préstamo de banco"]
+  },
+  {
+   "q": "¿Con qué bancos está endeudado Jalisco?",
+   "ir": "planisferio-jal-deuda.html",
+   "dice": ["Banorte"]
   }
  ]
 }

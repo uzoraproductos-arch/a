@@ -181,6 +181,13 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   del Sistema de Alertas y sigue pendiente), los ADEFAS no se dicen como crédito y
   el capítulo «Financiamiento» del INEGI no se dice como deuda nueva: casi todo es
   «Déficit», su renglón de cuadre.
+  **A quién le debe** (17-11-2026, pedido del autor: «las deudas»): el Registro Público Único de Hacienda, crédito por
+  crédito (`herramientas/anclar_rpu.py <registro_deuda.xlsx>` → `assets/auditor/data/deuda-rpu.js`, con huella; el servidor pide el
+  intermedio YR1 en `--cacert`). Va en la página de deuda de cada portal (cuarto piso) y en el chat (`deudaRpu()` de `asistente.js`:
+  «¿a quién le debe Nuevo León?», «¿cuánto le deben a Banobras?»). **Cada crédito es oficial y las sumas, derivado; su saldo (corte
+  trimestral) no se suma ni se compara con el del Sistema de Alertas; en una emisión bursátil el acreedor anotado es el fiduciario, una APP
+  no es préstamo de banco y «refinanciamiento sin autorización» no quiere decir ilegal (LDF, art. 23).** Un acreedor que no sea
+  institución ni empresa detiene el script (§2 bis).
 - **La inversión, tercera dimensión pintada** (03-11-2026). Lee `invPub`,
   `invInfra` y `egr2024` de `DB.estados` (los escribe
   `herramientas/anclar_egresos_entidades.py` desde la estadística estatal del
