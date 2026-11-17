@@ -2493,6 +2493,26 @@
    "dice": [
     "Directorio de Proveedores y Contratistas Sancionados"
    ]
+  },
+  {
+   "q": "¿Qué municipios tienen deuda elevada?",
+   "ir": "planisferio.html?d=deuda",
+   "dice": [
+    "Caborca",
+    "Tlahualilo",
+    "endeudamiento elevado"
+   ]
+  },
+  {
+   "q": "municipios más endeudados",
+   "ir": "planisferio.html?d=deuda"
+  },
+  {
+   "q": "¿Qué municipios de Sonora están en el semáforo rojo de deuda?",
+   "ir": "planisferio-son-deuda.html",
+   "dice": [
+    "Puerto Peñasco"
+   ]
   }
  ]
 }

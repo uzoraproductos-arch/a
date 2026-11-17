@@ -497,6 +497,44 @@
       }
       return { html: h + mas, fu: fu, val: k === 'dep' ? { v: mv(m, 'dep'), u: 'pct' } : { v: mv(m, k || 'ing'), u: 'pesos' }, tit: m.n + ', ' + m.en + ': ' + MUN_NOM[k || 'ing'], ci: [{ v: grande(mv(m, k || 'ing'), 1), etq: MUN_NOM[k || 'ing'], e: 'oficial' }] };
     }
+    /* El semáforo del Sistema de Alertas de los municipios (pedido del autor, 17-11-2026: «agrega lo de municipios con deuda
+       elevada»). Lo escribe anclar_deuda_municipios.py desde los libros de Hacienda (Cuenta Pública 2025); aquí solo se ordena.
+       El nivel es la clasificación de Hacienda (LDF, arts. 43 y 44) y el techo, el del art. 46: no es una calificación nuestra. */
+    var SEM_NOM = { 1: 'endeudamiento sostenible', 2: 'endeudamiento en observación', 3: 'endeudamiento elevado' };
+    var SEM_TECHO = { 1: 'hasta el 15 %', 2: 'hasta el 5 %', 3: 'cero' };
+    var MCVE = null;
+    function munSemaforo(t, e) {
+      var S = MDEU && MDEU.sda;
+      if (!S || !S.m) return null;
+      if (!MCVE) { MCVE = {}; MUN.forEach(function (x) { MCVE[x.cve] = x; }); }
+      var R = S.resumen || {}, L = Object.keys(S.m).map(function (c) { return { c: c, v: S.m[c], m: MCVE[c] }; })
+        .filter(function (x) { return x.m && (!e || x.m.a === e.a); });
+      var de = function (s) { return L.filter(function (x) { return x.v[0] === s; }).sort(function (a, b) { return b.v[3] - a.v[3] || (a.c < b.c ? -1 : 1); }); };
+      var rojo = de(3), amar = de(2), sin = de(0), verde = de(1);
+      var li = function (x) {
+        return '<li><b>' + esc(x.m.n) + '</b>' + (e ? '' : ', ' + esc(x.m.en)) + ': debe <b>$' + n(x.v[1], 1) + ' millones</b> en deuda y obligaciones, el <b>' + n(x.v[3], 1) +
+          ' %</b> de sus ingresos de libre disposición</li>';
+      };
+      var donde = e ? ' de <b>' + esc(e.n) + '</b>' : '';
+      var h = '<p>En el <b>Sistema de Alertas de Hacienda</b> (Cuenta Pública 2025), ' + (e ? 'de los municipios' + donde + ' con deuda inscrita, ' : 'de los <b>' + n(R.inscritos) + '</b> municipios con deuda inscrita en el Registro Público Único, ') +
+        '<b>' + n(rojo.length) + '</b> ' + (rojo.length === 1 ? 'está' : 'están') + ' en <b>endeudamiento elevado</b>, <b>' + n(amar.length) + '</b> en observación y <b>' + n(verde.length) + '</b> en sostenible ' + chip('oficial') +
+        '. Otros <b>' + n(sin.length) + '</b> no entregaron información suficiente para medirlos ' + chip('pendiente', 'deuda-municipios') + '.</p>';
+      if (rojo.length) h += '<p>🔴 <b>Endeudamiento elevado</b> (su techo para endeudarse más es <b>cero</b>):</p><ol class="pa-lista">' + rojo.map(li).join('') + '</ol>';
+      if (amar.length) h += '<p>🟡 <b>En observación</b> (solo pueden endeudarse más hasta el 5 % de sus ingresos de libre disposición)' + (amar.length > 10 ? '; los 10 con la deuda más alta frente a sus ingresos' : '') + ':</p><ol class="pa-lista">' + amar.slice(0, 10).map(li).join('') + '</ol>' +
+        (amar.length > 10 ? '<p class="pa-chico">Y ' + n(amar.length - 10) + ' más. Pregúntame por uno con su nombre para ver su ficha.</p>' : '');
+      if (!rojo.length && !amar.length) h += '<p>Ninguno' + donde + ' está en observación ni en endeudamiento elevado.</p>';
+      h += '<p class="pa-ojo">Ojo: el semáforo es la clasificación que hace Hacienda con tres indicadores (la deuda, su pago y las obligaciones de corto plazo, frente a los ingresos); de ella sale cuánto más ' +
+        'puede endeudarse cada municipio: hasta el 15 % de sus ingresos de libre disposición en sostenible, 5 % en observación y cero en elevado. No mide si la deuda se usó bien, ni califica a su gobierno. ' +
+        'Los municipios sin deuda inscrita no se miden.</p>';
+      var fuS = { tx: S.fuente + ' (libros de variables y resultados, sha256 ' + String(S.sha256).slice(0, 12) + '… y ' + String(S.sha256Resultados).slice(0, 12) + '…)', url: S.pagina };
+      return { html: h, tit: 'Municipios con deuda elevada o en observación' + (e ? ' en ' + e.n : ''),
+        fu: [{ que: 'Nivel del semáforo, deuda y obligaciones e indicador de deuda sobre ingresos de libre disposición de cada municipio', e: 'oficial', fu: fuS },
+          { que: 'Techo de financiamiento neto de cada nivel (art. 46) y los tres indicadores (art. 44)', e: 'oficial', fu: { tx: 'Ley de Disciplina Financiera de las Entidades Federativas y los Municipios (última reforma DOF 10-05-2022)', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LDFEFM.pdf' } },
+          { que: 'Cuántos hay en cada nivel y el orden', e: 'derivado', op: 'contamos los municipios de cada nivel y los ordenamos por su indicador de deuda sobre ingresos de libre disposición, de mayor a menor' }],
+        ci: rojo.concat(amar.slice(0, 10)).map(function (x) { return { v: '$' + n(x.v[1], 1) + ' millones', etq: x.m.n + ', ' + x.m.en + ' · ' + SEM_NOM[x.v[0]], e: 'oficial' }; }),
+        ir: e ? ['planisferio-' + e.a.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase() + '-deuda.html', 'la deuda de sus municipios en el Planisferio'] : ['planisferio.html?d=deuda', 'la deuda en el Planisferio'],
+        sug: rojo.slice(0, 2).map(function (x) { return '¿Cuánto debe el municipio de ' + x.m.n + '?'; }).concat(['¿Qué es el Sistema de Alertas?']) };
+    }
     function munRanking(k, dir, cuantos, e) {
       k = k || 'ing';
       var l = MUN.filter(function (x) { return (!e || x.a === e.a) && mv(x, k) != null; }).sort(function (a, b) { return dir === 'min' ? mv(a, k) - mv(b, k) : mv(b, k) - mv(a, k); });
@@ -1858,6 +1896,13 @@
       var sigue = /^\s*(y|e|ahora|tambien|y que tal|y en|y de|y el|y la|y los|y las|y si)\b/.test(t) || t.trim().split(/\s+/).length <= 3;
 
       var ES = estados(t), es = ES.e, resto = ES.resto;
+      /* El semáforo de la deuda de los municipios (17-11-2026): «¿qué municipios tienen deuda elevada?». */
+      if (!/^\s*(que|q) (es|son|significa)\b/.test(t) && /municipi|alcaldi|ayuntamiento/.test(t) && /deuda|endeud|sistema de alertas|semaforo/.test(t) &&
+          /elevad|\brojo|\balta\b|\balto\b|observacion|amarill|semaforo|alerta|mas endeudad|riesgo|no entregaron|sin (informacion|medir)/.test(t) &&
+          /\b(que|cuales|cuantos|lista|todos)\b|mas endeudad/.test(t)) {
+        var smf = munSemaforo(t, es.length === 1 ? es[0] : null);
+        if (smf) return fin(smf, { tipo: 'mun', met: 'deu' });
+      }
       var porHab = POR_HAB.test(t);
       var dir = /\b(menos|menor|minimo|ultimo|ultimos)\b/.test(t) ? 'min' : 'max';
       var cuantos = (/\btop ?(\d+)|\blos (\d+)|\b(\d+) (estados|municipios|que)/.exec(t) || []).slice(1).filter(Boolean)[0];
