@@ -2597,7 +2597,7 @@
     var nuevos = INV.filter(function (x) { return x.ex && x.nov; }).slice(0, 5);
     return { tit: 'Expedientes de investigación', ir: [EXP_INDICE, 'los Expedientes'], rec: [],
       html: '<p>🗂️ Los <b>Expedientes</b> son la quinta tarjeta de la Biblioteca del Erario Público: cada gran investigación en un solo lugar, con el caso en cinco preguntas, su bitácora, lo que sigue y lo que falta.</p>' +
-        '<p>Hay <b>' + tot + '</b>: <b>' + ab + '</b> abiertos y <b>' + (tot - ab) + '</b> documentados. Se arman solos con la base de datos y se ponen al día cada vez que la plataforma publica.</p>' +
+        '<p>Hay <b>' + tot + '</b>: <b>' + ab + '</b> abiertos y <b>' + (tot - ab) + '</b> documentados. Se arman solos con la base de datos y se ponen al día cada día.</p>' +
         (nuevos.length ? '<p>Con registro fechado en su bitácora:</p><ul class="pa-lista">' + nuevos.map(function (x) {
           return '<li><a href="' + esc(x.ex) + '">' + esc(x.exn) + ' · ' + esc(x.tit) + '</a> · ' + esc(x.nov) + '</li>'; }).join('') + '</ul>' : '') +
         '<p>Dime «expediente del Tren Maya» y te abro el suyo. Si tu caso no está, <a href="servicios-cotiza.html?servicio=expediente">puedes pedirlo</a>.</p>',

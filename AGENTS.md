@@ -880,6 +880,9 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   **El expediente es una gran investigación hecha de dictámenes**: lista los dictámenes de su caso y lleva su sello, con folio y huella SHA-256 de su
   contenido (`_huella()`), que cambia cuando cambia una cifra, un documento, la bitácora o un pendiente. No es un documento oficial, y lo dice.
   **El registro por modo vive en Supabase** (`preguntas_bot.modo` y `modo_toca`, vista `preguntas_por_modo`): solo de las preguntas sin respuesta.
+  **Se arman cada día** (17-11-2026, flujo «Expedientes al día», `.github/workflows/expedientes.yml`, 8:53 de la Ciudad de México y a mano): vuelve a correr
+  `apartados.py` y publica solo si algo cambió; su reporte (`resumen()`) cuenta los titulares por cotejar de cada caso, que **nunca entran solos**. Por eso
+  **la generación debe dar lo mismo dos veces seguidas**: un orden que salga de un `set` se desempata (`key=lambda x: (-len(x), x)`), o el flujo publicaría ruido.
 - **La respuesta va esquematizada y los modos remiten** (pedido del autor, 16-11-2026). Cada respuesta abre con su cabecera (`cabResp()`: tipo de
   ficha, modo al que pertenece y chips), pliega el detalle largo (`esquema()`), trae la tarjeta de su expediente (`expInvHtml()`) y guarda
   «Explóralo a fondo» y «En la Enciclopedia» en paneles (`panel()`). **Si la pregunta le toca a otro modo, la respuesta lo dice arriba y ofrece

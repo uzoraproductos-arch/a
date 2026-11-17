@@ -1,0 +1,60 @@
+# Expedientes al día (17-11-2026, decisión del autor: «haz el flujo de
+# expedientes cada día sin esperar una publicación»). Vuelve a armar las
+# páginas con lo que la base tiene hoy (herramientas/apartados.py, que llama a
+# expedientes_inv.py). Si un expediente cambió, lo publica con su folio nuevo;
+# si nada cambió, no toca el repositorio. No trae cifras de fuera: solo lee la
+# base. El reporte de cada corrida queda en su resumen, con los titulares de la
+# Mesa de redacción que esperan cotejo (sin verificar; ninguno entra solo).
+name: Expedientes al día
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '53 14 * * *'   # cada día, 8:53 en la Ciudad de México, tras la Mesa de redacción
+
+permissions:
+  contents: write
+
+concurrency:
+  group: expedientes
+  cancel-in-progress: false
+
+jobs:
+  expedientes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/funny-turing-imtm54
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Volver a armar los expedientes con la base de hoy
+        run: python herramientas/apartados.py
+      - name: Reporte
+        run: |
+          python herramientas/expedientes_inv.py $(git diff --name-only -- 'expediente-*.html') >> "$GITHUB_STEP_SUMMARY"
+      - name: Publicar si algo cambió
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Sin cambios: los expedientes ya están al día con la base."
+            exit 0
+          fi
+          # Las fichas del chat llevan el folio de cada expediente: si cambió
+          # algo de assets/, sube el sello para que el lector no vea la copia vieja.
+          if [ -n "$(git status --porcelain -- assets/)" ]; then
+            python herramientas/sello.py --siguiente
+          fi
+          node --check assets/auditor/js/asistente-base.js
+          python herramientas/inventario.py
+          python herramientas/prueba_puntos_ciegos.py
+          git config user.name "Expedientes al día"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Expedientes al día: vueltos a armar con la base del $(date +%d-%m-%Y)"
+          git pull --rebase origin claude/funny-turing-imtm54
+          git push origin HEAD:claude/funny-turing-imtm54

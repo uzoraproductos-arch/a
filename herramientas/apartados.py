@@ -278,7 +278,7 @@ BIBLIOTECA = [
     # Quinta tarjeta (pedido del autor, 16-11-2026): las grandes investigaciones
     # con seguimiento. Las arma herramientas/expedientes_inv.py con la base.
     ('expedientes-investigacion.html', '🗂️', 'Expedientes', 'Las grandes investigaciones, con seguimiento',
-     'Cada gran investigación en un solo lugar: el caso en cinco preguntas, su bitácora, lo que sigue y lo que falta. Se arman solos con la base de datos, se ponen al día con cada publicación y también se pueden pedir.'),
+     'Cada gran investigación en un solo lugar: el caso en cinco preguntas, su bitácora, lo que sigue y lo que falta. Se arman solos con la base de datos, se ponen al día cada día y también se pueden pedir.'),
 ]
 DIC_ENLACE = ('<p class="bib-sello">📚 Forma parte de la <a href="diccionario.html">%s</a>, '
               'la obra de consulta de la plataforma.</p>' % BIB_NOMBRE)

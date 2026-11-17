@@ -344,7 +344,7 @@ def _puertas(e):
 AL_DIA = ('<div class="xi-aldia">\n'
           '          <h3>🔄 Cómo se mantiene al día</h3>\n'
           '          <ul>\n'
-          '            <li><b>Se arma solo.</b> Nadie lo escribe a mano: cada vez que la plataforma publica, el expediente se vuelve a armar con lo que la base tiene de este caso.</li>\n'
+          '            <li><b>Se arma solo.</b> Nadie lo escribe a mano: cada día, y cada vez que la plataforma publica, el expediente se vuelve a armar con lo que la base tiene de este caso. Si nada cambió en la base, queda igual, con el mismo folio.</li>\n'
           '            <li><b>Se alimenta de la base.</b> Las cifras, los documentos, las notas y los pendientes son los mismos de sus módulos: si cambian allá, cambian aquí.</li>\n'
           '            <li><b>Vigila cada día.</b> La Mesa de redacción junta titulares a diario; los de este caso salen abajo, <b>sin verificar</b>, como aviso de que hay algo por cotejar.</li>\n'
           '            <li><b>Nada entra sin cotejo.</b> Un titular nunca es fuente: una cifra entra al expediente solo cuando se coteja contra su documento oficial.</li>\n'
@@ -450,7 +450,7 @@ def indice():
         'lema': 'Las grandes investigaciones, con seguimiento',
         'entrada': ('El archivero digital de la plataforma: aquí se arman y se guardan las grandes investigaciones, las nuestras y las que '
                     'nos piden. Cada expediente junta el caso en cinco preguntas, su bitácora, sus dictámenes, lo que sigue y lo que falta. '
-                    '<b>Se arman solos con la base de datos</b> y se ponen al día cada vez que la plataforma publica.'),
+                    '<b>Se arman solos con la base de datos</b> y se ponen al día cada día, sin esperar a una publicación.'),
         'estilos': ESTILOS, 'scripts': SCRIPTS, 'sin_saltos': True,
         'pie_extra': None,
         'secciones': [
@@ -467,3 +467,47 @@ def indice():
 
 def paginas():
     return [indice()] + [pagina(e) for e in todos()]
+
+
+def radar(e, bandeja):
+    """Los titulares de la bandeja que tocan el caso, con la misma regla que
+    expedientes-inv.js: solo se cuentan; nunca entran al expediente."""
+    ks = [_plano(k).strip() for k in auditorias.TEMA_BOT[e['id']]]
+    vistos = set()
+    for x in (bandeja or {}).get('notas') or []:
+        g = x.get('grupo') or x.get('url')
+        if g in vistos or not re.match(r'https?://', x.get('url') or ''):
+            continue
+        t = _plano(x.get('titulo'))
+        if any(' ' + k + ' ' in t for k in ks):
+            vistos.add(g)
+    return len(vistos)
+
+
+def resumen(cambiaron=()):
+    """El reporte del flujo «Expedientes al día» (Markdown): cómo quedó cada
+    expediente y cuántos titulares sin verificar esperan cotejo."""
+    try:
+        bandeja = json.load(open(os.path.join(RAIZ, BANDEJA), encoding='utf-8'))
+    except (OSError, ValueError):
+        bandeja = {}
+    ex = todos()
+    cambiaron = set(cambiaron)
+    out = ['## Expedientes al día', '',
+           '%d expedientes: %d abiertos y %d documentados. Cambiaron hoy: %d.' % (
+               len(ex), sum(1 for e in ex if e['abierto']), sum(1 for e in ex if not e['abierto']),
+               sum(1 for e in ex if archivo(e['id']) in cambiaron)), '',
+           '| Folio | Expediente | Estado | Último registro | Pendientes | Titulares por cotejar | Cambió hoy |',
+           '|---|---|---|---|---|---|---|']
+    for e in ex:
+        out.append('| %s-%s | %s | %s | %s | %d | %d | %s |' % (
+            e['num'], e['hx'][:8].upper(), e['tit'], 'abierto' if e['abierto'] else 'documentado', e['nov'] or 'sin fecha',
+            len(e['pend']), radar(e, bandeja), 'sí' if archivo(e['id']) in cambiaron else 'no'))
+    out += ['', 'Los titulares son de la Mesa de redacción%s: **sin verificar**. Solo se cuentan; ninguno entra al expediente sin cotejo.' % (
+        (' del ' + bandeja['actualizado']) if bandeja.get('actualizado') else '')]
+    return '\n'.join(out)
+
+
+if __name__ == '__main__':
+    import sys
+    print(resumen(sys.argv[1:]))
