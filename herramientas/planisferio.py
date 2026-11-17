@@ -1842,7 +1842,47 @@ def _deuda_portal(base, ref, e, pm=''):
               '<li>Su propia ley de deuda pública se publica en: %s. <a href="%s#fed-deuda">⚖️ Las leyes de la deuda en los tres niveles</a></li></ul></div>') % (
         ln._a(ln.CPEUM, 'Constitución'), r_techo, ln._a(ln.pdf('LDFEFM.pdf'), 'LDF'),
         '<span class="est-chip est-pendiente" data-pend="deuda-municipios">pendiente</span>', html.escape(ln.ESTADOS[a][0]), ln.ARCHIVO)
-    return '<div class="pl-pisos">%s%s%s</div>%s%s' % (p1, p2, pm, ciego, reglas)
+    return '<div class="pl-pisos">%s%s%s%s</div>%s%s' % (p1, p2, pm, _rpu_piso(e), ciego, reglas)
+
+
+def _rpu_piso(e):
+    """A quién le debe: el Registro Público Único de Hacienda, crédito por
+    crédito (anclar_rpu.py). Cada crédito es oficial; las sumas, derivado."""
+    import anclar_rpu
+    D = anclar_rpu.cargar()
+    if not D:
+        return ''
+    M = D['meta']
+    r = anclar_rpu.resumen_estado(D, e['abbr'])
+    tit = '4 · A quién le debe · Registro Público Único, saldo al %s' % M['corteTxt']
+    fu = ('%s, <a href="%s">registro diario</a> descargado el %s (huella SHA-256 <code>%s…</code>). '
+          'El saldo de cada crédito es el que reporta cada gobierno a Hacienda cada trimestre.') % (
+        M['fuente'], M['url'], M['descarga'], M['sha256'][:12])
+    if not r['con']:
+        return ('<article class="pl-piso pl-piso-deuda"><p class="pl-piso-n">%s</p><p class="pl-piso-v"><b>Sin saldo reportado</b> %s</p>'
+                '<p>De sus %d créditos inscritos, ninguno reporta saldo al corte.</p><p class="pl-piso-f">%s</p></article>') % (tit, chip('oficial'), r['n'], fu)
+    nom = {'e': 'el gobierno del estado', 'm': 'sus municipios', 'o': 'sus organismos (agua, transporte, fideicomisos…)'}
+    if e['abbr'] == 'CDMX':
+        nom['e'] = 'el gobierno de la Ciudad'
+    quien = '; '.join('%s %s' % (nom[k], mdp(r['k'][k])) for k in ('e', 'm', 'o') if r['k'].get(k))
+    acre = ''.join('<dt>%s</dt><dd>%s %s <small>%s de lo que debe</small></dd>' % (
+        html.escape(c), mdp(v), chip('derivado'), pct(v / r['saldo'] * 100)) for c, v in r['acre'][:5])
+    extra = []
+    if r['bur']:
+        extra.append('%s en emisiones bursátiles: ahí el registro anota al fiduciario, no a quienes compraron los certificados' % mdp(r['bur']))
+    if r['app']:
+        extra.append('%s en obligaciones de asociaciones público-privadas: es lo comprometido con la empresa que construyó u opera la obra, no un préstamo de banco' % mdp(r['app']))
+    if r['cp']:
+        extra.append('%d préstamo%s de corto plazo con saldo, para cubrir faltas de liquidez (LDF, art. 31)' % (r['cp'], '' if r['cp'] == 1 else 's'))
+    return ('<article class="pl-piso pl-piso-deuda"><p class="pl-piso-n">%s</p>'
+            '<p class="pl-piso-v"><b class="num-tabular">%s</b> %s <small>en %d créditos con saldo de %d inscritos</small></p>'
+            '<p>Lo deben %s.</p><dl class="pl-dl">%s</dl>%s'
+            '<p class="pl-piso-f">%s Suma de los saldos de los créditos de la entidad, ordenados por acreedor con el nombre con que se firmaron (BBVA Bancomer es hoy BBVA México). '
+            'No se compara con el Sistema de Alertas: aquel mide al cierre de 2025 solo lo que se paga con ingresos de libre disposición. '
+            '<a href="herramienta-inspector-pregunta.html?q=%s">Pregúntale al Auditor a quién le debe</a></p></article>') % (
+        tit, mdp(r['saldo']), chip('derivado'), r['con'], r['n'], quien, acre,
+        ('<p><small>%s.</small></p>' % (lambda t: t[:1].upper() + t[1:])('; '.join(extra))) if extra else '', fu,
+        html.escape(__import__('urllib.parse').parse.quote('¿A quién le debe %s?' % e['name'])))
 
 
 def _deuda_mun(ref, e, m, dv, con_mapa):

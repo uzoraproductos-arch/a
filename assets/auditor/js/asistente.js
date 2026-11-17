@@ -1476,6 +1476,104 @@
     }, function () { return { html: '<p>No pude descargar ahora las señales de fraccionamiento. Revisa tu conexión y vuelve a preguntarme.</p>', ir: [FRACC_PAG, 'Contratos públicos'], sug: [], rec: [] }; }),
       tit: 'Señales de fraccionamiento' };
   }
+  /* --- A quién le deben los estados y los municipios (17-11-2026, pedido del autor:
+     «prosigue con estos pendientes y las deudas»). El Registro Público Único de
+     Hacienda, crédito por crédito (herramientas/anclar_rpu.py escribe
+     assets/auditor/data/deuda-rpu.js; se descarga solo al preguntar). Cada crédito
+     es «oficial»; las sumas y los órdenes, «derivado». El Sistema de Alertas dice
+     cuánto debe y cuánto le pesa; el registro dice a quién, a qué tasa y para qué. --- */
+  function rpuDatos() { return cargaJs('assets/auditor/data/deuda-rpu.js', function () { return window.AUDIT_RPU; }); }
+  var RPU_BANCO = [['banobras', 'Banobras'], ['banorte', 'Banorte'], ['bbva', 'BBVA'], ['bancomer', 'BBVA'], ['santander', 'Santander'], ['banamex', 'Banamex'],
+    ['invex', 'Invex'], ['hsbc', 'HSBC'], ['bajio', 'BanBajío'], ['bansi', 'Bansí'], ['multiva', 'Multiva'], ['mifel', 'Mifel'], ['scotiabank', 'Scotiabank'],
+    ['banco azteca', 'Banco Azteca'], ['afirme', 'Afirme'], ['cibanco', 'CIBanco'], ['nafin', 'Nafin'], ['interacciones', 'Interacciones']];
+  function rpuPide(p) {
+    if (/ (que|q) (es|son|significa) /.test(p) && !/ (debe|deben|deuda|credit|prest)/.test(p)) return false;
+    var banco = RPU_BANCO.filter(function (b) { return p.indexOf(' ' + b[0] + ' ') >= 0; })[0];
+    if (banco && / (debe|deben|deuda|deudas|credito|creditos|presta|prestan|presto|prestamo|prestamos|endeud\w*) /.test(p)) return { banco: banco[1] };
+    if (/ (a|con) quien(es)? (le |les )?(debe|deben|esta endeudad\w*|estan endeudad\w*)| acreedor(es)? | registro publico unico | rpu | (que|cuales|con que|cuantos) bancos? | bancos? (le |les )?(presta|prestan|prestaron|presto) /.test(p) ||
+      / (sus |los |la |de )?(creditos|prestamos) (bancarios |de la deuda )?(de|del) / .test(p) && /(estado|municipi|gobierno|deuda|[a-z]{4,})/.test(p)) return { banco: null };
+    return false;
+  }
+  function rpuMdp(v) { return '$' + Number(v).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' millones'; }
+  function rpuOjo(D, L) {
+    var T = D.tipo, hay = function (s) { return L.some(function (x) { return x[8] && T[x[5]] === s; }); }, n = D.meta.tipoNota, o = [];
+    if (hay('Emisión bursátil')) o.push('en una <b>emisión bursátil</b> ' + esc(n['Emisión bursátil']));
+    if (hay('Obligación relacionada con asociaciones público - privadas')) o.push('una <b>APP</b> es ' + esc(n['Obligación relacionada con asociaciones público - privadas']));
+    if (hay('Obligación a corto plazo')) o.push('el <b>corto plazo</b> es ' + esc(n['Obligación a corto plazo']));
+    if (L.some(function (x) { return D.dest[x[11]] === 'Refinanciamiento sin autorización'; })) o.push('«refinanciamiento sin autorización» es el nombre del registro para el refinanciamiento que, por mejorar las condiciones, no necesita el voto del Congreso local (LDF, art. 23): no quiere decir que sea ilegal');
+    o.push('BBVA Bancomer es el nombre que BBVA México tenía hasta 2019, y el registro conserva el nombre con que se firmó cada crédito');
+    return '<p class="pa-ojo">Ojo: ' + o.join('; ') + '. Tener deuda no es una irregularidad, y este registro no dice si se usó bien. El saldo es el que cada gobierno le reporta a Hacienda cada trimestre, y no se suma con el del Sistema de Alertas, que mide al cierre de 2025 solo lo que se paga con ingresos de libre disposición.</p>';
+  }
+  function rpuLi(D, x, conDeudor) {
+    var I = D.inst[x[4]], t = D.tipo[x[5]];
+    return '<li>' + (conDeudor ? '<b>' + esc(x[2]) + '</b> con ' : '') + '<b>' + esc(I[0]) + '</b>: ' + (x[8] ? 'debe <b>' + rpuMdp(x[8]) + '</b>' : 'sin saldo reportado') +
+      ' de ' + rpuMdp(x[7]) + ' contratados' + (x[6] ? ' el ' + esc(x[6].split('-').reverse().join('-')) : '') + ' · ' + esc(t.toLowerCase()) +
+      (x[9] != null ? ' · tasa efectiva ' + Number(x[9]).toLocaleString('es-MX') + ' %' : '') + (x[10] ? ' · vence ' + esc(x[10].split('-').reverse().join('-')) : '') +
+      '<br><span class="pa-chico">Para: ' + esc(D.dest[x[11]]) + (D.fte[x[12]] !== '—' && D.fte[x[12]] !== '-' ? ' · se paga con: ' + esc(D.fte[x[12]]) : '') + '</span></li>';
+  }
+  function deudaRpu(q) {
+    var p = plano(q), pide = rpuPide(p);
+    if (!pide) return null;
+    var lu = charla && charla.lugar ? charla.lugar(q) : { e: [], m: null }, e = lu.e.length === 1 ? lu.e[0] : null, m = lu.m;
+    return { espera: rpuDatos().then(function (D) {
+      var M = D.meta, R = D.r, h, tit, ci = [], sug = [];
+      var porBanco = function (x) { return !pide.banco || D.inst[x[4]][0].indexOf(pide.banco) === 0; };
+      var suma = function (L) { return L.reduce(function (s, x) { return s + (x[8] || 0); }, 0); };
+      var agrupa = function (L, k) { var o = {}; L.forEach(function (x) { if (x[8]) { var c = k(x); o[c] = (o[c] || 0) + x[8]; } }); return Object.keys(o).map(function (c) { return [c, o[c]]; }).sort(function (a, b) { return b[1] - a[1] || (a[0] < b[0] ? -1 : 1); }); };
+      var L;
+      if (m) {
+        L = R.filter(function (x) { return x[3] === m.cve && porBanco(x); }).sort(function (a, b) { return (b[8] || 0) - (a[8] || 0); });
+        tit = 'A quién le debe ' + m.n + ', ' + m.en;
+        if (!L.length) h = '<p>El municipio de <b>' + esc(m.n) + '</b>, ' + esc(m.en) + ', no tiene ' + (pide.banco ? 'créditos con ' + esc(pide.banco) : 'créditos ni obligaciones') + ' inscritos en el <b>Registro Público Único</b> de Hacienda ' + chip({ e: 'oficial' }) + '. Eso no quiere decir que no le deba a nadie: los adeudos con proveedores, por ejemplo, no pasan por ese registro.</p>';
+        else {
+          var con = L.filter(function (x) { return x[8]; });
+          h = '<p>🏦 El municipio de <b>' + esc(m.n) + '</b>, ' + esc(m.en) + ', tiene <b>' + L.length + '</b> crédito' + (L.length === 1 ? '' : 's') + ' u obligaci' + (L.length === 1 ? 'ón' : 'ones') + (pide.banco ? ' con ' + esc(pide.banco) : '') + ' inscrit' + (L.length === 1 ? 'o' : 'os') + ' en el Registro Público Único ' + chip({ e: 'oficial' }) +
+            (con.length ? '; con saldo al ' + esc(M.corteTxt) + ' debe <b>' + rpuMdp(suma(con)) + '</b> ' + chip({ e: 'derivado' }) : '; ninguno reporta saldo al ' + esc(M.corteTxt)) + ':</p><ol class="pa-lista">' + L.slice(0, 8).map(function (x) { return rpuLi(D, x); }).join('') + '</ol>' +
+            (L.length > 8 ? '<p class="pa-chico">Te muestro 8 de ' + L.length + '.</p>' : '');
+          con.slice(0, 5).forEach(function (x) { ci.push({ v: rpuMdp(x[8]), etq: m.n + ' · ' + D.inst[x[4]][0] + ' · ' + D.tipo[x[5]], e: 'oficial' }); });
+        }
+        sug = ['¿Cuánto debe el municipio de ' + m.n + '?', '¿A quién le debe ' + m.en + '?'];
+      } else if (e) {
+        L = R.filter(function (x) { return x[0] === e.a && porBanco(x); });
+        var con2 = L.filter(function (x) { return x[8]; }), tot = suma(con2), k = agrupa(L, function (x) { return x[1]; }), kn = { e: e.a === 'CDMX' ? 'el gobierno de la Ciudad' : 'el gobierno del estado', m: 'sus municipios', o: 'sus organismos (agua, transporte, fideicomisos…)' };
+        tit = 'A quién le debe ' + e.n + (pide.banco ? ' · ' + pide.banco : '');
+        var ac = agrupa(L, function (x) { return D.inst[x[4]][0]; });
+        var gob = con2.filter(function (x) { return x[1] === 'e'; }).sort(function (a, b) { return b[8] - a[8]; });
+        h = '<p>🏦 En <b>' + esc(e.n) + '</b>, el Registro Público Único de Hacienda tiene <b>' + L.length + '</b> créditos y obligaciones inscritos' + (pide.banco ? ' con <b>' + esc(pide.banco) + '</b>' : '') + ' ' + chip({ e: 'oficial' }) + '; <b>' + con2.length + '</b> reportan saldo al ' + esc(M.corteTxt) + ' y suman <b>' + rpuMdp(tot) + '</b> ' + chip({ e: 'derivado' }) + '.</p>' +
+          (k.length ? '<p>Lo deben ' + k.map(function (x) { return kn[x[0]] + ' (' + rpuMdp(x[1]) + ')'; }).join(', ') + '.</p>' : '') +
+          (!pide.banco && ac.length ? '<p>A quién ' + chip({ e: 'derivado' }) + ':</p><ol class="pa-lista">' + ac.slice(0, 6).map(function (x) { return '<li><b>' + esc(x[0]) + '</b>: ' + rpuMdp(x[1]) + ', el ' + (x[1] / tot * 100).toLocaleString('es-MX', { maximumFractionDigits: 1 }) + ' %</li>'; }).join('') + '</ol>' : '') +
+          (gob.length ? '<p>Los créditos más grandes del gobierno ' + (e.a === 'CDMX' ? 'de la Ciudad' : 'del estado') + ' ' + chip({ e: 'oficial' }) + ':</p><ol class="pa-lista">' + gob.slice(0, 5).map(function (x) { return rpuLi(D, x); }).join('') + '</ol>' : '');
+        if (pide.banco && !gob.length) h += '<ol class="pa-lista">' + con2.sort(function (a, b) { return b[8] - a[8]; }).slice(0, 6).map(function (x) { return rpuLi(D, x, true); }).join('') + '</ol>';
+        ci.push({ v: rpuMdp(tot), etq: e.n + ' · saldo de sus créditos inscritos en el Registro Público Único al ' + M.corteTxt, e: 'derivado' });
+        ac.slice(0, 5).forEach(function (x) { ci.push({ v: rpuMdp(x[1]), etq: e.n + ' · le debe a ' + x[0], e: 'derivado' }); });
+        sug = ['¿Cuánto debe ' + e.n + '?', '¿Qué municipios de ' + e.n + ' tienen deuda elevada?'];
+      } else {
+        L = R.filter(porBanco);
+        var con3 = L.filter(function (x) { return x[8]; }), tot3 = suma(con3), en = agrupa(L, function (x) { return x[0]; });
+        var nomE = function (a) { return M.ent[a] || a; };
+        tit = pide.banco ? 'Lo que le deben a ' + pide.banco + ' los estados y los municipios' : 'A quién le deben los estados y los municipios';
+        h = '<p>🏦 En el <b>Registro Público Único</b> de Hacienda hay <b>' + L.length.toLocaleString('es-MX') + '</b> créditos y obligaciones de estados, municipios y sus organismos' + (pide.banco ? ' con <b>' + esc(pide.banco) + '</b>' : '') + ' ' + chip({ e: 'oficial' }) + '; <b>' + con3.length.toLocaleString('es-MX') + '</b> reportan saldo al ' + esc(M.corteTxt) + ' y suman <b>' + rpuMdp(tot3) + '</b> ' + chip({ e: 'derivado' }) + '.</p>';
+        if (!pide.banco) {
+          var ac3 = agrupa(L, function (x) { return D.inst[x[4]][0]; });
+          h += '<p>A quién le deben más ' + chip({ e: 'derivado' }) + ':</p><ol class="pa-lista">' + ac3.slice(0, 6).map(function (x) { return '<li><b>' + esc(x[0]) + '</b>: ' + rpuMdp(x[1]) + ', el ' + (x[1] / tot3 * 100).toLocaleString('es-MX', { maximumFractionDigits: 1 }) + ' %</li>'; }).join('') + '</ol>';
+          ac3.slice(0, 5).forEach(function (x) { ci.push({ v: rpuMdp(x[1]), etq: 'Estados y municipios le deben a ' + x[0], e: 'derivado' }); });
+        }
+        h += '<p>Las entidades donde más se debe' + (pide.banco ? ' a ' + esc(pide.banco) : '') + ', sumando gobierno, municipios y organismos ' + chip({ e: 'derivado' }) + ':</p><ol class="pa-lista">' + en.slice(0, 5).map(function (x) {
+          return '<li><button type="button" class="pa-ej" data-pa-pregunta="' + esc('¿A quién le debe ' + nomE(x[0]) + '?') + '">' + esc(nomE(x[0])) + '</button> ' + rpuMdp(x[1]) + '</li>'; }).join('') + '</ol>';
+        ci.push({ v: rpuMdp(tot3), etq: (pide.banco ? 'Lo que le deben a ' + pide.banco : 'Saldo de los créditos de estados y municipios') + ' en el Registro Público Único al ' + M.corteTxt, e: 'derivado' });
+        sug = en.slice(0, 2).map(function (x) { return '¿A quién le debe ' + nomE(x[0]) + '?'; }).concat(['¿Qué municipios tienen deuda elevada?']);
+      }
+      h += rpuOjo(D, L || []);
+      var fu = { tx: M.fuente + ', registro diario descargado el ' + M.descarga.split('-').reverse().join('-') + ' (saldo al ' + M.corteTxt + ', sha256 ' + M.sha256.slice(0, 12) + '…)', url: M.pagina };
+      var fus = [{ que: 'Cada crédito: deudor, acreedor, tipo, monto, saldo, tasa, vencimiento, destino y fuente de pago', e: 'oficial', fu: fu },
+        { que: 'Totales y órdenes', e: 'derivado', op: 'sumamos el saldo de los créditos que lo reportan y los agrupamos por acreedor o por entidad; los que Hacienda publica con «-» no suman' }];
+      h += charla && charla.deDonde ? charla.deDonde(fus) : '';
+      var clave = e ? e.a.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase() : m ? m.a.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase() : '';
+      var ir = clave ? ['planisferio-' + clave + '-deuda.html', 'la deuda de ' + (e ? e.n : m.en) + ' en el Planisferio'] : ['planisferio.html?d=deuda', 'la deuda en el Planisferio'];
+      return { html: h, ir: ir, rec: [], ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: [fu], ir: ir }, sug: sug };
+    }, function () { return { html: '<p>No pude descargar ahora el Registro Público Único. Revisa tu conexión y vuelve a preguntarme.</p>', ir: ['planisferio.html?d=deuda', 'la deuda en el Planisferio'], sug: [], rec: [] }; }),
+      tit: 'A quién le deben' };
+  }
   /* --- Las demás: qué pide el lector y con qué la abrimos. --- */
   var FOLIO_RE = /\bAV-[A-Z0-9]{2,8}-[0-9A-F]{6,}\b|\b[0-9A-F]{64}\b/i, DICT_RE = /\b(DP|NT)-\d{8}-[0-9A-F]{8}\b/i;
   function enteFederal(t) {
@@ -2638,6 +2736,8 @@
     if (sa) return sa;
     var vc = PIDE_COTEJO.test(plano(q)) && verificado(q);
     if (vc) return vc;
+    var dr = deudaRpu(q);
+    if (dr) return dr;
     var cx = fraccCmx(q) || cruceSat(q) || sancionesCmx(q) || contratosCmx(q) || empresaNombre(q, previas);
     if (cx) return cx;
     var pe = personaje(q);

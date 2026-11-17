@@ -2213,6 +2213,8 @@
       mapa: function (q) { var r = mapaResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'san' }); },
       promesa: function (q) { var r = promResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'prom' }); },
       ambiente: function (q) { var r = amgResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'amg' }); },
+      /* El estado y el municipio que nombra una pregunta (para el Registro Publico Unico, que vive en asistente.js). */
+      lugar: function (q) { var t = plano(q), ES = estados(t), m = /municipi|alcaldi|ayuntamiento/.test(t) ? municipio(ES.resto, true, ES.e) : null; return { e: ES.e, m: m && m.m }; },
       deFicha: deFicha, deDonde: deDonde, olvida: function () { ctx = {}; }, ctx: function () { return ctx; }
 
     };
