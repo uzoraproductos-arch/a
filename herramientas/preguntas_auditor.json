@@ -406,7 +406,10 @@
   },
   {
    "q": "Contratos de Grupo Carso",
-   "ir": "contratos-publicos.html?q=grupo%20carso"
+   "ir": "contratos-publicos.html#grupo-carso",
+   "dice": [
+    "OPERADORA CICSA"
+   ]
   },
   {
    "q": "¿Quién es Andrés Manuel López Obrador?",
@@ -2398,7 +2401,7 @@
    ]
   },
   {
-   "q": "Grupo Carso",
+   "q": "la empresa Odebrecht",
    "ir": "contratos-publicos.html#grupos",
    "dice": [
     "No encontré",
@@ -2442,6 +2445,39 @@
   {
    "q": "requisitos para ser candidato",
    "ir": "datos-legislativo-elecciones.html#leg-candidatos"
+  },
+  {
+   "q": "Telmex",
+   "ir": "contratos-publicos.html#grupo-america-movil",
+   "dice": [
+    "RADIOMOVIL DIPSA",
+    "pendiente"
+   ]
+  },
+  {
+   "q": "Grupo Salinas",
+   "ir": "contratos-publicos.html#grupo-salinas",
+   "dice": [
+    "no son del grupo"
+   ]
+  },
+  {
+   "q": "Seguros Inbursa",
+   "ir": "contratos-publicos.html#grupo-inbursa",
+   "dice": [
+    "Su propia denominación dice que pertenece"
+   ]
+  },
+  {
+   "q": "Grupo Pisa",
+   "ir": "contratos-publicos.html#grupo-pisa",
+   "dice": [
+    "DIMESA"
+   ]
+  },
+  {
+   "q": "Ferromex",
+   "ir": "contratos-publicos.html#grupo-grupo-mexico"
   }
  ]
 }

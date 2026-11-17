@@ -1234,7 +1234,7 @@
   function respGrupo(g, ds, M) {
     var ci = [], fu = M ? [cmxFuente(M)] : [];
     var h = '<p>🏢 <b>' + esc(g.n) + '.</b> ' + g.que + '</p>' +
-      '<p>🔗 <b>El vínculo:</b> ' + esc(g.vin.tx) + ' ' + chip({ e: 'pendiente', p: g.vin.p }) + '. ' + esc(g.vin.x) + '</p>';
+      '<p>🔗 <b>El vínculo:</b> ' + esc(g.vin.tx) + ' ' + (g.vin.e === 'oficial' ? chip({ e: 'oficial' }) : chip({ e: 'pendiente', p: g.vin.p })) + '. ' + esc(g.vin.x) + '</p>';
     ds.forEach(function (d, i) {
       var rfc = g.emp[i];
       if (!d) return;

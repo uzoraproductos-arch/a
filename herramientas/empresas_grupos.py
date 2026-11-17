@@ -97,6 +97,60 @@ GRUPOS = [
      ]},
 ]
 
+
+# Más grupos (pedido del autor, 17-11-2026: «agrega más grupos empresariales al catálogo»). Cada filial
+# se eligió porque su nombre en ComprasMX la identifica; se descartaron las que solo comparten una
+# palabra (Molinos Azteca, Estudios Churubusco Azteca, La Ideal, Pisa Software). Mientras el vínculo no
+# se coteje en el documento del grupo, va como pendiente; en los grupos financieros consta en la propia
+# denominación que reporta ComprasMX.
+CNBV = ('https://www.gob.mx/cnbv', 'CNBV: reportes anuales de las emisoras de valores')
+RPC = ('https://rpc.economia.gob.mx/', 'Registro Público de Comercio (Secretaría de Economía)')
+
+
+def _g(id_, n, al, que, emp, doc, e='pendiente'):
+    """Un grupo sin actos por cotejar ni notas de prensa: solo sus filiales en ComprasMX."""
+    url, ut = doc
+    vin = {'id': 'grupo-%s-vinculo' % id_, 'e': e,
+           'que': ('Su propia denominación dice que pertenece a %s' if e == 'oficial' else 'El documento que acredite qué empresas forman parte de %s') % n,
+           'porque': ('Consta en la denominación de la empresa que ComprasMX reporta.' if e == 'oficial' else
+                      'La plataforma las asocia porque su nombre las identifica y porque así se las conoce, pero aún no coteja el '
+                      'documento del grupo que lista sus subsidiarias, así que no lo afirma. No es omisión de una dependencia.'),
+           'url': url, 'url_txt': ut}
+    return {'id': id_, 'n': n, 'al': al, 'que': que, 'emp': emp, 'vin': vin, 'cotejar': [], 'prensa': []}
+
+
+GRUPOS += [
+    _g('carso', 'Grupo Carso', ['grupo carso', 'carso', 'cicsa', 'operadora cicsa', 'grupo sanborns'],
+       'Grupo Carso contrata sobre todo con su constructora, <b>Operadora CICSA</b>; también aparece <b>Grupo Sanborns</b>.',
+       ['OCI810921EI3', 'GSA990413H80'], CNBV),
+    _g('america-movil', 'América Móvil (Telmex y Telcel)', ['america movil', 'telmex', 'telefonos de mexico', 'telcel', 'radiomovil dipsa', 'triara', 'scitum'],
+       'América Móvil no aparece con su nombre: contratan <b>Teléfonos de México</b>, <b>Radiomóvil Dipsa</b> (Telcel) y las empresas de '
+       'centros de datos y ciberseguridad <b>Triara.com</b> y <b>Scitum</b>.',
+       ['TME840315KT6', 'RDI841003QJ4', 'TCO0009128J1', 'SCI001208M74'], CNBV),
+    _g('salinas', 'Grupo Salinas', ['grupo salinas', 'total play', 'totalplay', 'seguros azteca'],
+       'De Grupo Salinas aparecen <b>Total Play</b> y <b>Seguros Azteca Daños</b>. Otras empresas con «Azteca» en el nombre '
+       '(Molinos Azteca, Estudios Churubusco Azteca) <b>no son del grupo</b>.',
+       ['TPT890516JP5', 'SAD050124Q50'], CNBV),
+    _g('ica', 'Empresas ICA', ['empresas ica', 'grupo ica', 'ica constructora', 'ingenieros civiles asociados'],
+       'Empresas ICA contrata con <b>ICA Constructora</b>. Otras con «ICA» en el nombre (ICA Interior, ICA Consultores América) '
+       'no se asocian al grupo.',
+       ['ICO170407UI6'], RPC),
+    _g('pisa', 'Grupo Pisa', ['grupo pisa', 'dimesa'],
+       'Grupo Pisa vende sobre todo con <b>Laboratorios Pisa</b> y con su distribuidora, <b>DIMESA</b> (Distribuidora Internacional '
+       'de Medicamentos y Equipo Médico). Pisa Software no se asocia al grupo.',
+       ['LPI830527KJ2', 'DIM010319S79'], RPC),
+    _g('cemex', 'Cemex', ['cemex', 'cemex concretos'],
+       'Cemex aparece con <b>Cemex Concretos</b> y con la propia <b>Cemex, S.A.B. de C.V.</b>',
+       ['CCO7409189M1', 'CEM880726UZA'], CNBV),
+    _g('grupo-mexico', 'Grupo México', ['grupo mexico', 'ferromex', 'ferrocarril mexicano', 'trafcom'],
+       'De Grupo México aparecen <b>Ferrocarril Mexicano</b> (Ferromex) y <b>Trafcom Grupo México</b>.',
+       ['FME971022Q44', 'TGM120125T41'], CNBV),
+    _g('inbursa', 'Grupo Financiero Inbursa', ['grupo financiero inbursa', 'inbursa', 'seguros inbursa'],
+       'Del Grupo Financiero Inbursa aparece <b>Seguros Inbursa</b>.', ['SIN9408027L7'], CNBV, e='oficial'),
+    _g('banorte', 'Grupo Financiero Banorte', ['grupo financiero banorte', 'banorte', 'seguros banorte'],
+       'Del Grupo Financiero Banorte aparece <b>Seguros Banorte</b>.', ['SBG971124PL2'], CNBV, e='oficial'),
+]
+
 NOTA = ('Tener contratos, concesiones o permisos no es una irregularidad. Los documentos dicen qué gobierno firmó y en qué año, '
         'no un partido: las mismas reglas valen para todos los gobiernos.')
 
@@ -151,7 +205,7 @@ def datos():
     fn = {f['id']: f['n'] for f in FIGURAS}
     return {
         'g': [{'id': g['id'], 'n': g['n'], 'al': g['al'], 'que': g['que'], 'emp': [x['rfc'] for x in g['emp']], 'ir': PAGINA + '#' + ancla(g),
-               'vin': {'tx': g['vin']['que'], 'x': g['vin']['porque'], 'p': g['vin']['id'], 'url': g['vin']['url'], 'ut': g['vin']['url_txt']},
+               'vin': {'tx': g['vin']['que'], 'x': g['vin']['porque'], 'p': g['vin']['id'], 'e': g['vin'].get('e', 'pendiente'), 'url': g['vin']['url'], 'ut': g['vin']['url_txt']},
                'cot': [{'tx': c['que'], 'x': c['porque'], 'fig': fn[c['fig']], 'p': c['id'], 'url': c['url'], 'ut': c['url_txt']} for c in g['cotejar']],
                'pr': [{'m': m, 't': t, 'u': u} for m, t, u in g['prensa']]} for g in todos()],
         'fig': [{'n': f['n'], 'tx': f['tx'], 'ley': f['ley']} for f in FIGURAS], 'nota': NOTA, 'pag': PAGINA + '#grupos'}
@@ -162,7 +216,7 @@ def pendientes():
     out = []
     for g in todos():
         ap = [(PAGINA + '#' + ancla(g), 'Contratos públicos · Grupos y filiales: ' + g['n'])]
-        for x in [g['vin']] + g['cotejar']:
+        for x in ([g['vin']] if g['vin'].get('e', 'pendiente') == 'pendiente' else []) + g['cotejar']:
             out.append({'id': x['id'], 'tema': 'Grupos empresariales y sus filiales', 'que': x['que'], 'porque': x['porque'],
                         'responsable': PLATAFORMA, 'enlace': x['url'], 'enlace_txt': x['url_txt'], 'aparece': ap})
     return out
@@ -175,6 +229,7 @@ def seccion():
     fn = {f['id']: f['n'] for f in FIGURAS}
     figs = ''.join('<li><b>%s.</b> %s <small>(%s)</small></li>' % (e(f['n']), e(f['tx']), e(f['ley'])) for f in FIGURAS)
     grupos = []
+    of = '<span class="est-chip est-oficial">oficial</span>'
     for g in todos():
         emp = ''.join('<li><a href="%s?q=%s"><b>%s</b></a> <small>(RFC %s)</small>: sus contratos de ComprasMX, con el importe y la liga de cada uno.</li>'
                       % (PAGINA, x['rfc'], e(x['n']), x['rfc']) for x in g['emp'])
@@ -186,10 +241,13 @@ def seccion():
             '<h3 id="%s">%s</h3>\n          <p>%s</p>\n'
             '          <p><b>El vínculo:</b> %s %s<br><small>%s</small></p>\n'
             '          <p><b>Con qué empresas aparece en ComprasMX:</b></p>\n          <ul>%s</ul>\n'
-            '          <p><b>Lo que falta cotejar</b> (sin montos hasta tener el documento):</p>\n          <ul>%s</ul>\n'
-            '          <p><b>Cómo lo contó la prensa</b> (solo titular y liga; una nota no es fuente):</p>\n          <ul>%s</ul>\n'
+            '%s%s'
             '          <p><small>Pregúntale al Auditor: «%s».</small></p>'
-            % (ancla(g), e(g['n']), g['que'], e(g['vin']['que']), pe % g['vin']['id'], e(g['vin']['porque']), emp, cot, pr, e(g['n'])))
+            % (ancla(g), e(g['n']), g['que'], e(g['vin']['que']),
+               of if g['vin'].get('e') == 'oficial' else pe % g['vin']['id'], e(g['vin']['porque']), emp,
+               ('          <p><b>Lo que falta cotejar</b> (sin montos hasta tener el documento):</p>\n          <ul>%s</ul>\n' % cot) if cot else '',
+               ('          <p><b>Cómo lo contó la prensa</b> (solo titular y liga; una nota no es fuente):</p>\n          <ul>%s</ul>\n' % pr) if pr else '',
+               e(g['n'])))
     return {
         'id': 'grupos', 'titulo': 'Grupos y filiales: quién está detrás del nombre',
         'texto': ('Muchos grupos no contratan con su nombre: contrata una filial o un consorcio. Aquí decimos con qué empresas aparece '
@@ -202,4 +260,4 @@ def seccion():
 
 if __name__ == '__main__':
     for g in todos():
-        print(g['n'], '→', ', '.join('%s (%s)' % (x['n'], x['rfc']) for x in g['emp']), '· pendientes:', 1 + len(g['cotejar']))
+        print(g['n'], '→', ', '.join('%s (%s)' % (x['n'], x['rfc']) for x in g['emp']), '· pendientes:', (g['vin'].get('e', 'pendiente') == 'pendiente') + len(g['cotejar']))
