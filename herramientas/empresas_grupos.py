@@ -67,12 +67,8 @@ GRUPOS = [
              'porque': ('La prensa lo reporta citando el informe anual de la empresa matriz, Mota-Engil. La plataforma aún no coteja '
                         'ese informe ni el Registro Público de Comercio, así que no lo afirma. No es omisión de una dependencia.'),
              'url': 'https://www.mota-engil.com/', 'url_txt': 'Mota-Engil: informes anuales de la empresa'},
+     'asf': [(2022, 111, 'Tren Maya, Tramo 1 (Palenque-Escárcega)')],
      'cotejar': [
-         {'id': 'grupo-prodi-tren-maya', 'fig': 'contrato',
-          'que': 'Tren Maya, Tramo 1 (Palenque-Escárcega): el contrato del consorcio que encabeza Mota-Engil México y lo que observó la ASF',
-          'porque': ('Es un contrato de 2020, anterior a los expedientes de ComprasMX que la plataforma tiene (2025 y 2026). La ASF lo auditó; '
-                     'falta integrar su informe con el número de contrato y su importe.'),
-          'url': 'https://informe.asf.gob.mx/', 'url_txt': 'ASF: informes de auditoría de la Cuenta Pública'},
          {'id': 'grupo-prodi-tultepec', 'fig': 'concesion',
           'que': 'Autopista Tultepec-AIFA-Pirámides: el título de concesión, qué gobierno lo otorgó, en qué fecha y por cuántos años',
           'porque': ('Proyectos México la tiene registrada como proyecto de un gobierno estatal adjudicado a Mota-Engil México. '
@@ -167,9 +163,14 @@ def _indice():
     return {r[0]: r[1] for r in d['r']}
 
 
+def _asf_map():
+    d = json.load(open(os.path.join(RAIZ, 'investigaciones', 'expedientes-asf.json'), encoding='utf-8'))
+    return {(x['cp'], x['num']): x for x in d['informes']}
+
+
 def todos():
     """El catálogo, validado: cada RFC existe en ComprasMX y nada se repite."""
-    idx, figs, vistos, ids = _indice(), {f['id'] for f in FIGURAS}, {}, set()
+    idx, figs, vistos, ids, amap = _indice(), {f['id'] for f in FIGURAS}, {}, set(), _asf_map()
     out = []
     for g in GRUPOS:
         emp = []
@@ -192,7 +193,24 @@ def todos():
             if x['id'] in ids or not (x['que'] and x['porque'] and x['url']):
                 raise SystemExit('empresas_grupos: el pendiente «%s» está repetido o le falta su porqué o su enlace (AGENTS.md §2).' % x['id'])
             ids.add(x['id'])
-        out.append(dict(g, emp=emp))
+        asf_items = []
+        for cp, num, etq in g.get('asf', []):
+            inf = amap.get((cp, num))
+            if not inf or not inf.get('extractos'):
+                raise SystemExit('empresas_grupos: falta la auditoría (%s, %s) o sus extractos en expedientes-asf.json' % (cp, num))
+            ext = inf['extractos']
+            asf_items.append({
+                'etq': etq, 'cp': cp, 'num': num, 'clave': inf['claveAuditoria'], 'ente': inf['ente'],
+                'contrato': ext['contrato'], 'fecha': ext['fechaContrato'],
+                'consorcio': ext['consorcio'], 'integrantes': ext['integrantes'],
+                'orig_mdp': round(ext['tramo1Original'] / 1e6, 1),
+                'conv_mdp': round(ext['tramo1Convenios'] / 1e6, 1),
+                'tot_mdp': round(ext['tramo1Total'] / 1e6, 1),
+                'ej22_mdp': round(ext['tramo1Ejercido2022'] / 1e6, 1),
+                'aclarar_mdp': round((inf.get('porAclarar') or 0) / 1e6, 1),
+                'url': inf['url'], 'sha': inf['sha256'][:12],
+            })
+        out.append(dict(g, emp=emp, asf_items=asf_items))
     return out
 
 
@@ -201,11 +219,12 @@ def ancla(g):
 
 
 def datos():
-    """Lo que lee el chat (D.gru). Sin cifras: los contratos los carga de ComprasMX al preguntar."""
+    """Lo que lee el chat (D.gru). Sin cifras escritas aquí: los contratos los carga de ComprasMX y las auditorías de expedientes-asf.json."""
     fn = {f['id']: f['n'] for f in FIGURAS}
     return {
         'g': [{'id': g['id'], 'n': g['n'], 'al': g['al'], 'que': g['que'], 'emp': [x['rfc'] for x in g['emp']], 'ir': PAGINA + '#' + ancla(g),
                'vin': {'tx': g['vin']['que'], 'x': g['vin']['porque'], 'p': g['vin']['id'], 'e': g['vin'].get('e', 'pendiente'), 'url': g['vin']['url'], 'ut': g['vin']['url_txt']},
+               'asf': g['asf_items'],
                'cot': [{'tx': c['que'], 'x': c['porque'], 'fig': fn[c['fig']], 'p': c['id'], 'url': c['url'], 'ut': c['url_txt']} for c in g['cotejar']],
                'pr': [{'m': m, 't': t, 'u': u} for m, t, u in g['prensa']]} for g in todos()],
         'fig': [{'n': f['n'], 'tx': f['tx'], 'ley': f['ley']} for f in FIGURAS], 'nota': NOTA, 'pag': PAGINA + '#grupos'}
@@ -226,13 +245,24 @@ def seccion():
     """La sección «Grupos y filiales» de contratos-publicos.html."""
     e = html.escape
     pe = '<span class="est-chip est-pendiente" data-pend="%s">pendiente</span>'
+    of = '<span class="est-chip est-oficial">oficial</span>'
     fn = {f['id']: f['n'] for f in FIGURAS}
     figs = ''.join('<li><b>%s.</b> %s <small>(%s)</small></li>' % (e(f['n']), e(f['tx']), e(f['ley'])) for f in FIGURAS)
     grupos = []
-    of = '<span class="est-chip est-oficial">oficial</span>'
     for g in todos():
         emp = ''.join('<li><a href="%s?q=%s"><b>%s</b></a> <small>(RFC %s)</small>: sus contratos de ComprasMX, con el importe y la liga de cada uno.</li>'
                       % (PAGINA, x['rfc'], e(x['n']), x['rfc']) for x in g['emp'])
+        asf_li = ''.join(
+            '<li><b>%s</b> (contrato <code>%s</code>, firmado el %s con <b>%s</b>, integrado por %s): '
+            'importe original <b>$%s mdp</b> %s, convenios modificatorios por <b>+$%s mdp</b>, '
+            'total contratado <b>$%s mdp</b> %s (%s ejercidos en %d) y <b>$%s mdp</b> pendientes por aclarar en la '
+            '<a href="%s" target="_blank" rel="noopener">Auditoría %d de la Cuenta Pública %d (%s) ↗</a> <small>(sha256 %s…)</small>.</li>'
+            % (e(a['etq']), e(a['contrato']), e(a['fecha']), e(a['consorcio']), e(a['integrantes']),
+               format(a['orig_mdp'], ',.1f'), of, format(a['conv_mdp'], ',.1f'), format(a['tot_mdp'], ',.1f'), of,
+               '$%s mdp' % format(a['ej22_mdp'], ',.1f'), a['cp'], format(a['aclarar_mdp'], ',.1f'),
+               e(a['url']), a['num'], a['cp'], e(a['clave']), e(a['sha']))
+            for a in g['asf_items'])
+        asf_bloque = ('          <p><b>Lo que auditó la ASF (contratos de años anteriores a ComprasMX 2025-2026):</b></p>\n          <ul>%s</ul>\n' % asf_li) if asf_li else ''
         cot = ''.join('<li><b>%s.</b> %s %s<br><small>%s Dónde debe estar: <a href="%s" target="_blank" rel="noopener">%s ↗</a></small></li>'
                       % (e(fn[c['fig']]), e(c['que']), pe % c['id'], e(c['porque']), e(c['url']), e(c['url_txt'])) for c in g['cotejar'])
         pr = ''.join('<li><a href="%s" target="_blank" rel="noopener">%s ↗</a> <small>(%s, sin verificar)</small></li>' % (e(u), e(t), e(m))
@@ -241,10 +271,10 @@ def seccion():
             '<h3 id="%s">%s</h3>\n          <p>%s</p>\n'
             '          <p><b>El vínculo:</b> %s %s<br><small>%s</small></p>\n'
             '          <p><b>Con qué empresas aparece en ComprasMX:</b></p>\n          <ul>%s</ul>\n'
-            '%s%s'
+            '%s%s%s'
             '          <p><small>Pregúntale al Auditor: «%s».</small></p>'
             % (ancla(g), e(g['n']), g['que'], e(g['vin']['que']),
-               of if g['vin'].get('e') == 'oficial' else pe % g['vin']['id'], e(g['vin']['porque']), emp,
+               of if g['vin'].get('e') == 'oficial' else pe % g['vin']['id'], e(g['vin']['porque']), emp, asf_bloque,
                ('          <p><b>Lo que falta cotejar</b> (sin montos hasta tener el documento):</p>\n          <ul>%s</ul>\n' % cot) if cot else '',
                ('          <p><b>Cómo lo contó la prensa</b> (solo titular y liga; una nota no es fuente):</p>\n          <ul>%s</ul>\n' % pr) if pr else '',
                e(g['n'])))
@@ -260,4 +290,4 @@ def seccion():
 
 if __name__ == '__main__':
     for g in todos():
-        print(g['n'], '→', ', '.join('%s (%s)' % (x['n'], x['rfc']) for x in g['emp']), '· pendientes:', (g['vin'].get('e', 'pendiente') == 'pendiente') + len(g['cotejar']))
+        print(g['n'], '→', ', '.join('%s (%s)' % (x['n'], x['rfc']) for x in g['emp']), '· ASF:', len(g['asf_items']), '· pendientes:', (g['vin'].get('e', 'pendiente') == 'pendiente') + len(g['cotejar']))

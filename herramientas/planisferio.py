@@ -241,6 +241,9 @@ def _mapa_mun(e, m, g, ref, padron, iv, dv):
         if r[0] >= '990':
             continue
         x = {'c': r[0], 'n': r[1]}
+        sda_m = (dv.get('sda') or {}).get('m', {}).get(m['cve'] + r[0])
+        if sda_m:
+            x['sda'] = sda_m
         if len(r) >= 10:
             ing, part, aport, fortamun, fismdf, predial = r[2], r[3], r[4], r[5], r[6], r[7]
             x.update({'ing': round(ing / 1e6, 1), 'part': round(part / 1e6, 1), 'aport': round(aport / 1e6, 1),
@@ -1835,7 +1838,7 @@ def _deuda_portal(base, ref, e, pm=''):
               '<li>Solo puede endeudarse para inversión pública productiva y para refinanciarla, nunca con acreedores extranjeros ni en moneda extranjera (%s, art. 117, fr. VIII).</li>'
               '<li>%s</li>'
               '<li>Hacienda la evalúa «única y exclusivamente» con la información que entrega el propio gobierno y la del Registro Público Único (%s, art. 43).</li>'
-              '<li>La deuda de sus municipios también la mide el Sistema de Alertas: lo que pagaron y pidieron prestado en 2024 ya está arriba, con su cuenta; su saldo aún no lo integramos %s.</li>'
+              '<li>La deuda de sus municipios se revisa por dos vías oficiales: lo que pagaron y pidieron prestado en 2024 (cuenta pública al INEGI) y su saldo al cierre de 2025 y semáforo en el Sistema de Alertas de Hacienda; solo quedan pendientes los 41 municipios del país con deuda inscrita que no entregaron su información a Hacienda %s.</li>'
               '<li>Su propia ley de deuda pública se publica en: %s. <a href="%s#fed-deuda">⚖️ Las leyes de la deuda en los tres niveles</a></li></ul></div>') % (
         ln._a(ln.CPEUM, 'Constitución'), r_techo, ln._a(ln.pdf('LDFEFM.pdf'), 'LDF'),
         '<span class="est-chip est-pendiente" data-pend="deuda-municipios">pendiente</span>', html.escape(ln.ESTADOS[a][0]), ln.ARCHIVO)
@@ -1843,10 +1846,9 @@ def _deuda_portal(base, ref, e, pm=''):
 
 
 def _deuda_mun(ref, e, m, dv, con_mapa):
-    """La deuda en la cuenta de sus municipios, 2024 (03-11-2026): lo que
-    pagaron por sus créditos y lo que pidieron prestado, suma de los que
-    rindieron cuenta (derivado). El saldo sigue pendiente."""
-    tit = '3 · La deuda en la cuenta de sus municipios · 2024'
+    """La deuda en la cuenta de sus municipios, 2024 (INEGI) y su saldo y
+    semáforo al cierre de 2025 en el Sistema de Alertas de Hacienda (SHCP)."""
+    tit = '3 · La deuda de sus municipios: pagos de 2024 (INEGI) y saldo al cierre de 2025 (SHCP)'
     pend = chip('pendiente', 'deuda-municipios')
     if not m['conCifra']:
         return ('<article class="pl-piso pl-piso-deuda"><p class="pl-piso-n">%s</p>'
@@ -1861,26 +1863,54 @@ def _deuda_mun(ref, e, m, dv, con_mapa):
     n_emp = sum(1 for _r, d in filas if d[5])
     adef = sum(d[4] for _r, d in filas)
     n_pago = sum(1 for x in pago if x)
+    # Saldo al cierre de 2025 en el Sistema de Alertas de Hacienda (SHCP)
+    sda = dv.get('sda') or {}
+    sda_m = sda.get('m') or {}
+    sda_edo = [(r[1], sda_m[m['cve'] + r[0]]) for r in m['lista'] if (m['cve'] + r[0]) in sda_m]
+    med_edo = [(nom_m, s) for nom_m, s in sda_edo if s[0] in (1, 2, 3)]
+    sin_edo = [nom_m for nom_m, s in sda_edo if s[0] == 0]
+    dyo_edo = sum(s[1] for _n, s in med_edo)
+    v_edo = sum(1 for _n, s in med_edo if s[0] == 1)
+    a_edo = sum(1 for _n, s in med_edo if s[0] == 2)
+    r_edo = sum(1 for _n, s in med_edo if s[0] == 3)
+    if sda_edo:
+        top_sda = max(med_edo, key=lambda x: x[1][1]) if med_edo else None
+        sem_txt = '%d en sostenible (verde), %d en observación (amarillo) y %d en elevado (rojo)' % (v_edo, a_edo, r_edo)
+        if sin_edo:
+            sem_txt += '; %d no entregó información a Hacienda (%s) %s' % (len(sin_edo), ', '.join(html.escape(x) for x in sin_edo[:4]), pend)
+        bloque_sda = (
+            '<dt>Saldo de deuda y obligaciones al cierre de 2025 (SHCP)</dt>'
+            '<dd><b class="num-tabular">%s</b> %s <small>en %d de %d municipios inscritos en el Registro Público Único</small></dd>'
+            '<dt>Semáforo municipal del Sistema de Alertas (CP 2025)</dt><dd>%s</dd>' % (
+                mdp(dyo_edo), chip('derivado'), len(med_edo), len(sda_edo), sem_txt) +
+            ('<dt>Municipio con mayor saldo al cierre de 2025</dt><dd>%s: <b class="num-tabular">%s</b> %s <small>(%s%% de sus ingresos libres)</small></dd>' % (
+                html.escape(top_sda[0]), mdp(top_sda[1][1]), chip('oficial'), format(top_sda[1][3], '.1f')) if top_sda and top_sda[1][1] > 0 else '')
+        )
+    else:
+        bloque_sda = ('<dt>Saldo al cierre de 2025 en el Sistema de Alertas (SHCP)</dt>'
+                      '<dd>Ningún municipio con deuda inscrita en el Registro Público Único %s</dd>' % chip('oficial'))
     ir = ('<p class="pl-ficha-ir"><a href="%s?ml=dpag#mapa-municipios">Municipio por municipio, en el mapa ➔</a></p>' % portal(e['abbr'])) if con_mapa else ''
     if tot:
         top_r, top_d = max(filas, key=lambda x: x[1][1] + x[1][2] + x[1][3])
-        top = '<dt>El que más pagó</dt><dd>%s: %s %s</dd>' % (html.escape(top_r[1]), mdp((top_d[1] + top_d[2] + top_d[3]) / 1e6), chip('oficial'))
-        desglose = ('<dt>Capital que devolvieron</dt><dd>%s %s</dd><dt>Intereses y comisiones</dt><dd>%s %s <small>lo que les costó deber</small></dd>' % (
+        top = '<dt>El que más pagó en 2024</dt><dd>%s: %s %s</dd>' % (html.escape(top_r[1]), mdp((top_d[1] + top_d[2] + top_d[3]) / 1e6), chip('oficial'))
+        desglose = ('<dt>Capital que devolvieron en 2024</dt><dd>%s %s</dd><dt>Intereses y comisiones en 2024</dt><dd>%s %s <small>lo que les costó deber</small></dd>' % (
             mdp(cap / 1e6), chip('derivado'), mdp(inte / 1e6), chip('derivado')))
     else:
         top = desglose = ''
     return ('<article class="pl-piso pl-piso-deuda"><p class="pl-piso-n">%s</p>'
-            '<p class="pl-piso-v"><b class="num-tabular">%s</b> %s <small>pagaron por sus créditos</small></p>'
-            '<dl class="pl-dl"><dt>Municipios que pagaron créditos</dt><dd>%d de %d con cuenta <small>(%d en total)</small></dd>%s'
-            '<dt>Pidieron prestado en el año</dt><dd>%s %s <small>%s</small></dd>'
-            '<dt>Adeudos de años anteriores (ADEFAS)</dt><dd>%s %s <small>lo que quedó a deber el año anterior, sobre todo a proveedores, y pagó en 2024: no es un crédito</small></dd>%s</dl>'
-            '<p class="pl-piso-f">Suma de lo que cada municipio con cuenta reportó en su capítulo de deuda pública (capital, intereses, comisiones y gastos) y en sus empréstitos. '
-            'INEGI, finanzas públicas municipales %d %s. <b>Es lo que pagaron y pidieron en el año, no lo que deben:</b> el saldo de cada municipio lo publica Hacienda en el Sistema de Alertas, '
-            'y aún no lo integramos %s. Un municipio que reportó $0 puede deber a proveedores o tener un crédito sin pagos ese año.</p>%s</article>' % (
-                tit, mdp(tot / 1e6), chip('derivado'), n_pago, len(filas), m['n'], desglose,
+            '<p class="pl-piso-v"><b class="num-tabular">%s</b> %s <small>pagaron en 2024 · </small><b class="num-tabular">%s</b> %s <small>de saldo al cierre de 2025</small></p>'
+            '<dl class="pl-dl">%s<dt>Municipios que pagaron créditos en 2024 (INEGI)</dt><dd>%d de %d con cuenta <small>(%d en total)</small></dd>%s'
+            '<dt>Pidieron prestado en 2024</dt><dd>%s %s <small>%s</small></dd>'
+            '<dt>Adeudos de años anteriores (ADEFAS 2024)</dt><dd>%s %s <small>lo que quedó a deber el año anterior, sobre todo a proveedores: no es un crédito</small></dd>%s</dl>'
+            '<p class="pl-piso-f">Pagos y empréstitos de 2024: INEGI, finanzas públicas municipales %d %s. '
+            'Saldo al cierre de 2025 y semáforo: SHCP, Sistema de Alertas de los Municipios, evaluación de la Cuenta Pública 2025 (<a href="%s">variables por municipio, XLSX</a>; huella SHA-256 <code>%s…</code>) %s. '
+            'Los municipios que no aparecen en el Sistema de Alertas no tienen financiamientos inscritos en el Registro Público Único (LDF, art. 43); en el país, 41 municipios con deuda inscrita no entregaron su información a Hacienda %s.</p>%s</article>' % (
+                tit, mdp(tot / 1e6), chip('derivado'), mdp(dyo_edo), chip('derivado'),
+                bloque_sda, n_pago, len(filas), m['n'], desglose,
                 mdp(emp / 1e6), chip('derivado'),
                 'ninguno recibió préstamos' if not n_emp else ('%d %s' % (n_emp, 'municipio recibió préstamos' if n_emp == 1 else 'municipios recibieron préstamos')),
-                mdp(adef / 1e6), chip('derivado'), top, dv['anio'], ref('ref-inegi-efipem'), pend, ir))
+                mdp(adef / 1e6), chip('derivado'), top, dv['anio'], ref('ref-inegi-efipem'),
+                html.escape(sda.get('url', '')), (sda.get('sha256') or '')[:12], ref('ref-shcp-alertas'), pend, ir))
 
 
 def _inversion_mun(ref, e, m, iv, con_mapa):

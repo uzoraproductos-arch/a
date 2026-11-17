@@ -151,12 +151,12 @@
     if (!r || r.length < 3) return null;
     var m = function (v) { return v / 1e6; };
     var I = window.AUDIT_MUN_INV, iv = I && I.mun[ente.id];
-    /* Su deuda en la cuenta (municipios-deuda.js): [capítulo, amortización, intereses, comisiones y gastos, ADEFAS, empréstitos], en pesos. */
-    var DV = window.AUDIT_MUN_DEUDA, dd = DV && DV.mun[ente.id];
+    /* Su deuda en la cuenta (municipios-deuda.js): [capítulo, amortización, intereses, comisiones y gastos, ADEFAS, empréstitos], en pesos; y sda.m[id] en mdp. */
+    var DV = window.AUDIT_MUN_DEUDA, dd = DV && DV.mun[ente.id], sdaM = DV && DV.sda && DV.sda.m && DV.sda.m[ente.id];
     return { ing: m(r[2]), part: m(r[3]), aport: m(r[4]), fortamun: m(r[5]), fismdf: m(r[6]),
       predial: m(r[7]), propios: m(r[8]), dep: r[2] > 0 ? (r[3] + r[4]) / r[2] * 100 : null,
       egr: m(r[9]), inv: iv ? m(iv[0]) : null, invp: iv && r[9] > 0 ? iv[0] / r[9] * 100 : null,
-      dcap: dd ? m(dd[1]) : null, dint: dd ? m(dd[2] + dd[3]) : null, adef: dd ? m(dd[4]) : null, emp: dd ? m(dd[5]) : null };
+      dcap: dd ? m(dd[1]) : null, dint: dd ? m(dd[2] + dd[3]) : null, adef: dd ? m(dd[4]) : null, emp: dd ? m(dd[5]) : null, sda: sdaM || null };
   }
 
   /* ---------------- Los tres ejes del índice ---------------- */
@@ -316,16 +316,21 @@
           (c.inv == null ? '' : ' Ese año pagó ' + simMdp(c.inv) + ' de inversión pública (obra y proyectos productivos)' +
             (c.invp == null ? '' : ': $' + c.invp.toFixed(1) + ' de cada $100 de su egreso ' + chip('derivado')) + (c.inv === 0 ? '; rindió su cuenta sin ese capítulo' : '') + '.'),
         f: refMun('inegi') });
-      /* Su deuda, en su propia cuenta de 2024 (03-11-2026). Pagar no es deber: el saldo es de Hacienda. */
+      /* Su deuda, en su propia cuenta de 2024 (INEGI) y su saldo al cierre de 2025 en el Sistema de Alertas (SHCP). */
       if (c.dcap != null) {
-        var pago = c.dcap + c.dint;
-        out.push({ k: 'deuda', ico: '🏦', q: '¿Cuánto pagó por su deuda?', e: 'ok',
-          v: pago > 0 ? simMdp(pago) + ' por sus créditos en 2024' : 'Sin pagos de créditos en 2024',
+        var pago = c.dcap + c.dint, sda = c.sda;
+        var sdaTxt = !sda ? 'En el Sistema de Alertas de Hacienda (Cuenta Pública 2025) no figura con financiamientos inscritos en el Registro Público Único (no se mide, LDF art. 43) ' + chip('oficial') + '.' :
+          (sda[0] > 0 ? 'Al cierre de 2025, en el Sistema de Alertas de Hacienda (Cuenta Pública 2025), registra un saldo de deuda y obligaciones de ' + simMdp(sda[1]) + ' ' + chip('oficial') +
+            ' (deuda directa: ' + simMdp(sda[2]) + '), con semáforo en ' + ['', 'endeudamiento sostenible (verde)', 'endeudamiento en observación (amarillo)', 'endeudamiento elevado (rojo)'][sda[0]] +
+            ' (' + sda[3].toFixed(1) + ' % de sus ingresos de libre disposición).' :
+            'Tiene deuda inscrita en el Registro Público Único, pero no entregó información suficiente a Hacienda para la evaluación de la Cuenta Pública 2025 ' + chip('pendiente', 'deuda-municipios') + '.');
+        out.push({ k: 'deuda', ico: '🏦', q: '¿Cuánto pagó por su deuda y cuánto debe?', e: sda && sda[0] === 3 ? 'grave' : (sda && (sda[0] === 2 || sda[0] === 0) ? 'alerta' : 'ok'),
+          v: (pago > 0 ? simMdp(pago) + ' pagados en 2024' : 'Sin pagos en 2024') + (sda && sda[0] > 0 ? ' · ' + simMdp(sda[1]) + ' de saldo (2025)' : ''),
           d: (pago > 0 ? 'En su cuenta de 2024 al INEGI pagó ' + simMdp(c.dcap) + ' de capital y ' + simMdp(c.dint) + ' de intereses y comisiones ' + chip('oficial') + '. ' :
             'En su cuenta de 2024 al INEGI no reportó pagos de capital ni de intereses ' + chip('oficial') + '. ') +
             (c.emp > 0 ? 'Ese año pidió prestados ' + simMdp(c.emp) + '. ' : 'Ese año no recibió préstamos. ') +
             (c.adef > 0 ? 'Pagó además ' + simMdp(c.adef) + ' de adeudos de años anteriores (ADEFAS), sobre todo a proveedores: no es un crédito. ' : '') +
-            'Es lo que pagó y pidió en el año, no lo que debe: su saldo lo publica Hacienda en el Sistema de Alertas y sigue ' + chip('pendiente', 'deuda-municipios') + '.',
+            sdaTxt,
           f: refMun('inegi') });
       }
     } else if (rd.u) {

@@ -722,10 +722,14 @@
         '<dt>Predial cobrado</dt><dd>' + mdp(x.predial) + ' ' + chip('oficial') + '</dd>' +
         '<dt>Dependencia de transferencias</dt><dd>' + (x.dep == null ? '—' : num(x.dep, 1) + '%') + ' ' + chip('derivado') + '</dd>' +
         (x.inv == null ? '' : '<dt>Inversión pública' + (x.invp == null ? '' : ' ($' + num(x.invp, 1) + ' de cada $100 de su egreso ' + chip('derivado') + ')') + '</dt><dd>' + mdp(x.inv) + ' ' + chip('oficial') + '</dd>') +
-        (x.dpag == null ? '' : '<dt>Pagó por sus créditos (capital, intereses y comisiones)</dt><dd>' + mdp(x.dpag) + ' ' + chip('derivado') + '</dd>' +
-          '<dt>Pidió prestado en el año</dt><dd>' + mdp(x.emp) + ' ' + chip('oficial') + '</dd>' +
-          '<dt>Adeudos de años anteriores (ADEFAS)</dt><dd>' + mdp(x.adef) + ' ' + chip('oficial') + '</dd>') + '</dl>' +
-        (x.dpag == null ? '' : '<p class="pl-ficha-sub">Es lo que pagó y pidió en el año, no lo que debe: su saldo lo publica Hacienda y sigue ' + chip('pendiente', 'deuda-municipios') + '.</p>') +
+        (x.dpag == null ? '' : '<dt>Pagó por sus créditos en 2024 (capital, intereses y comisiones)</dt><dd>' + mdp(x.dpag) + ' ' + chip('derivado') + '</dd>' +
+          '<dt>Pidió prestado en 2024</dt><dd>' + mdp(x.emp) + ' ' + chip('oficial') + '</dd>' +
+          '<dt>Adeudos de años anteriores (ADEFAS 2024)</dt><dd>' + mdp(x.adef) + ' ' + chip('oficial') + '</dd>') +
+        (x.sda ? (x.sda[0] > 0 ?
+          '<dt>Saldo de deuda y obligaciones · cierre 2025 (SHCP)</dt><dd><b class="num-tabular">' + mdp(x.sda[1]) + '</b> ' + chip('oficial') +
+          ' <small>(' + ['', 'Sostenible (verde)', 'En observación (amarillo)', 'Elevado (rojo)'][x.sda[0]] + ' · ' + num(x.sda[3], 1) + '% de sus ingresos libres)</small></dd>' :
+          '<dt>Saldo al cierre de 2025 (SHCP)</dt><dd>No entregó información suficiente a Hacienda ' + chip('pendiente', 'deuda-municipios') + '</dd>') :
+          '<dt>Saldo en el Sistema de Alertas · 2025 (SHCP)</dt><dd>Sin deuda inscrita en el RPU (no se mide, LDF art. 43) ' + chip('oficial') + '</dd>') + '</dl>' +
         '<a class="pl-ficha-ir" href="' + ente + '">Su estado de cuenta y salud financiera ➔</a>';
     }
     function elige(c) {

@@ -244,11 +244,12 @@ def pendientes():
          'porque': 'Las aprueba el congreso de cada estado y se publican en su periódico oficial; la plataforma aún no las integra municipio por municipio.',
          'responsable': P.PLATAFORMA, 'enlace': OJN, 'enlace_txt': 'Orden Jurídico Nacional (Gobernación), ámbito estatal',
          'aparece': ap},
-        {'id': 'deuda-municipios', 'tema': 'Deuda', 'que': 'El saldo de la deuda de cada municipio (lo que debe) en el Sistema de Alertas, municipio por municipio',
-         'porque': ('Hacienda mide también a los municipios con deuda inscrita (LDF, art. 43). Lo que cada municipio pagó por sus créditos y pidió prestado en 2024 ya '
-                    'está integrado, con su cuenta pública al INEGI (anclar_deuda_municipios.py); lo que debe al cierre, no: el archivo del Sistema de Alertas no se pudo '
-                    'descargar en el cotejo del %s (el portal de disciplina financiera no respondió) y no se escribe una cifra sin su documento.') % COTEJO,
-         'responsable': P.PLATAFORMA, 'enlace': SDA_PAGINA, 'enlace_txt': 'Sistema de Alertas (SHCP)',
+        {'id': 'deuda-municipios', 'tema': 'Deuda', 'que': 'El saldo de la deuda y los indicadores de los 41 municipios con deuda inscrita que no entregaron información al Sistema de Alertas (Cuenta Pública 2025)',
+         'porque': ('El Sistema de Alertas de Hacienda (Cuenta Pública 2025, integrado con su huella SHA-256 en municipios-deuda.js) evalúa a los 670 municipios con financiamientos inscritos en el Registro Público Único: '
+                    '629 quedaron medidos ($36,279.2 mdp de deuda y obligaciones; 609 en sostenible, 18 en observación y 2 en elevado), pero 41 municipios no entregaron información (31) o la entregaron incompleta (10), '
+                    'por lo que Hacienda no puede publicar su saldo ni su semáforo (LDF, arts. 43 y 57).'),
+         'responsable': 'Los 41 ayuntamientos con deuda inscrita que no entregaron información suficiente a la SHCP para la evaluación de la Cuenta Pública 2025',
+         'enlace': 'https://www.disciplinafinanciera.hacienda.gob.mx/es/DISCIPLINA_FINANCIERA/Municipios_2025', 'enlace_txt': 'Sistema de Alertas de los Municipios (SHCP)',
          'aparece': [('planisferio.html', 'Planisferio · cada portal, «Su deuda» y el mapa de sus municipios')]},
     ]
 

@@ -519,7 +519,7 @@ def temas_bot(d):
              '<li><b>Sus contratos con el gobierno:</b> búscalo por nombre o RFC en <a href="contratos-publicos.html">Contratos públicos</a> (ComprasMX).</li>'
              '<li><b>La lista negra del SAT:</b> pregúntame «¿está en la lista negra del SAT?» con su RFC o su nombre. Si un proveedor está en la lista 69-B como definitivo, '
              'sus facturas pueden dejar de servirte para deducir (Código Fiscal de la Federación, art. 69-B).</li>'
-             '<li><b>Sanciones e informes:</b> en su ficha te armo las búsquedas en el directorio de proveedores sancionados, el DOF y la ASF.</li></ol>'
+             '<li><b>Sanciones e informes:</b> en <a href="contratos-publicos.html#sancionados">Contratos públicos › Proveedores sancionados</a> ya cruzamos el Directorio de Proveedores y Contratistas Sancionados de Buen Gobierno, y en su ficha te armo las búsquedas en el DOF y la ASF.</li></ol>'
              '<p>Si necesitas una ficha completa, con cada hallazgo y su documento, y un aviso cuando algo cambie, eso es el servicio <b>Revisión de un proveedor</b>. '
              'Tener contratos con el gobierno no es una irregularidad, y estar en una lista no prueba un delito.</p>',
         'ci': [],

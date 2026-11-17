@@ -33,10 +33,21 @@
   }
   function idx() { return carga('indice.js', function () { return window.CMX_IDX; }); }
   function inst() { return carga('inst.js', function () { return window.CMX_INST; }); }
+  function sanc() { return carga('../sancionados.js', function () { return window.AUDIT_SANCIONADOS; }).catch(function () { return null; }); }
   function prov(rfc) {
     var pre = rfc.slice(0, 2);
     return carga('p-' + pre.replace(/[^A-Z0-9]/g, '_') + '.js', function () { return window.CMX_P && window.CMX_P[pre]; })
       .then(function (L) { return L[rfc] || null; });
+  }
+  function sancHtml(rfc, S) {
+    var exps = S && S.r && S.r[rfc];
+    if (!exps || !exps.length) return '';
+    return '<div class="cmx-sat"><p>⛔ <b>En el Directorio de Proveedores y Contratistas Sancionados</b> (' + n(exps.length) + ' expediente' + (exps.length === 1 ? '' : 's') + ' al corte del ' + esc(S.corte) + ') ' + chip('oficial') + ':</p>' +
+      '<ul class="cmx-lista">' + exps.map(function (x) {
+        return '<li><b>' + esc(x[0]) + '</b> · ' + esc(x[1] || 'Órgano Interno de Control') + ' (' + esc(x[2]) + ')' +
+          (x[5] ? ' · inhabilitación: <b>' + esc(x[5]) + '</b> (' + esc(x[3]) + ' a ' + esc(x[4]) + ')' : (x[3] || x[4] ? ' · vigencia: ' + esc(x[3]) + ' a ' + esc(x[4]) : '')) +
+          (x[6] ? ' · multa: <b>' + pesos(x[6]) + '</b>' : '') + (x[7] ? ' · DOF ' + esc(x[7]) : '') + '</li>';
+      }).join('') + '</ul><p class="cmx-nota">Aparecer en el Directorio y tener contratos en ComprasMX no prueba que se haya contratado durante la inhabilitación: hay que comparar la fecha del contrato con la vigencia de la sanción o si hubo suspensión judicial.</p></div>';
   }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function norm(s) { return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase().replace(/[^A-Z0-9& ]/g, ' ').replace(/\s+/g, ' ').trim(); }
@@ -55,8 +66,15 @@
     return '<p class="cmx-nota">⚖️ Tener contratos con el gobierno no es una irregularidad. El importe es el que reportó cada institución, antes de impuestos; en un contrato abierto suele ser el máximo, no lo pagado.</p>';
   }
 
-  function fichaProv(rfc, d, M) {
-    if (!d) return '<p>◻️ El RFC <code>' + esc(rfc) + '</code> no tiene contratos en los expedientes de 2025 y 2026 de ComprasMX. Eso no certifica nada: puede tenerlos en otros años o con gobiernos que no usan ComprasMX.</p>';
+  function fichaProv(rfc, d, M, S) {
+    var sh = sancHtml(rfc, S);
+    if (!d) {
+      if (sh && S && S.n && S.n[rfc]) {
+        return '<article class="cmx-ficha"><h3>🏢 ' + esc(S.n[rfc]) + ' <small><code>' + esc(rfc) + '</code></small></h3>' +
+          sh + '<p>◻️ No tiene contratos en los expedientes de 2025 y 2026 de ComprasMX. Eso no certifica nada: puede tenerlos en otros años o con gobiernos que no usan ComprasMX.</p></article>';
+      }
+      return '<p>◻️ El RFC <code>' + esc(rfc) + '</code> no tiene contratos en los expedientes de 2025 y 2026 de ComprasMX ni aparece en el Directorio de Proveedores y Contratistas Sancionados. Eso no certifica nada: puede tenerlos en otros años o con gobiernos que no usan ComprasMX.</p>';
+    }
     var tp = d.tp || {}, mtp = d.mtp || {};
     var h = '<article class="cmx-ficha"><h3>🏢 ' + esc(d.n) + ' <small><code>' + esc(rfc) + '</code></small></h3>' +
       '<div class="cmx-cifras">' +
@@ -68,6 +86,7 @@
       '<p>Por procedimiento: ' + ['AD', 'LP', 'I3', 'OT'].filter(function (k) { return tp[k]; }).map(function (k) { return '<b>' + n(tp[k]) + '</b> por ' + TIPO[k] + (mtp[k] ? ' (' + pesos(mtp[k]) + ')' : ''); }).join('; ') + '.</p>' +
       (d.o ? '<p class="cmx-nota">En otras monedas, sin convertir: ' + Object.keys(d.o).map(function (k) { return n(Math.round(d.o[k])) + ' ' + esc(k); }).join(', ') + '.</p>' : '') +
       (d.sat ? '<p class="cmx-sat">' + (SIT[d.sat[0]] || ['', d.sat[0], ''])[0] + ' <b>En la lista 69-B del SAT: ' + esc((SIT[d.sat[0]] || ['', d.sat[0]])[1]) + '</b> (oficio ' + esc(d.sat[1]) + ', ' + esc(d.sat[2]) + '). ' + esc((SIT[d.sat[0]] || ['', '', ''])[2]) + '</p>' : '') +
+      sh +
       '<h4>A quién le vende</h4><ul class="cmx-lista">' + d.i.map(function (x) {
         return '<li><button type="button" class="cmx-ir" data-i="' + esc(x[0]) + '">' + esc(x[1]) + '</button> ' + n(x[3]) + ' contrato' + (x[3] === 1 ? '' : 's') + ', ' + pesos(x[4]) + '</li>';
       }).join('') + '</ul>' +
@@ -95,7 +114,7 @@
   function verRfc(rfc) {
     pinta('<p class="cmx-cargando">Buscando…</p>');
     if (rfc.length === 13) { pinta('<p>🔒 Es el RFC de una <b>persona física</b>. La plataforma no publica a las personas físicas que le venden al gobierno: su RFC es un dato personal.</p>'); return; }
-    Promise.all([prov(rfc), idx()]).then(function (D) { pinta(fichaProv(rfc, D[0], D[1].meta)); }, falla);
+    Promise.all([prov(rfc), idx(), sanc()]).then(function (D) { pinta(fichaProv(rfc, D[0], D[1].meta, D[2])); }, falla);
   }
   function verInst(k) {
     pinta('<p class="cmx-cargando">Buscando…</p>');
@@ -109,13 +128,19 @@
     var up = q.toUpperCase().replace(/\s+/g, '');
     if (RFC.test(up)) { verRfc(up); return; }
     pinta('<p class="cmx-cargando">Buscando…</p>');
-    Promise.all([idx(), inst()]).then(function (D) {
-      var ws = norm(q).split(' '), I = D[0], T = D[1];
+    Promise.all([idx(), inst(), sanc()]).then(function (D) {
+      var ws = norm(q).split(' '), I = D[0], T = D[1], S = D[2];
       var ins = Object.keys(T.i).filter(function (k) {
         var s = norm(T.i[k].s).replace(/ /g, ''), nn = ' ' + norm(T.i[k].n) + ' ';
         return s === ws.join('') || ws.every(function (w) { return nn.indexOf(' ' + w + ' ') >= 0; });
       }).sort(function (a, b) { return T.i[b].m - T.i[a].m; });
       var ps = I.r.filter(function (r) { var nn = ' ' + norm(r[1]) + ' '; return ws.every(function (w) { return nn.indexOf(' ' + w + ' ') >= 0; }); });
+      if (!ps.length && S && S.n) {
+        ps = Object.keys(S.n).filter(function (rfc) {
+          var nn = ' ' + norm(S.n[rfc]) + ' ';
+          return ws.every(function (w) { return nn.indexOf(' ' + w + ' ') >= 0; });
+        }).map(function (rfc) { return [rfc, S.n[rfc]]; });
+      }
       var exacta = ins.filter(function (k) { return norm(T.i[k].s).replace(/ /g, '') === ws.join(''); });
       if (exacta.length === 1) { verInst(exacta[0]); return; }
       if (ps.length === 1 && !ins.length) { verRfc(ps[0][0]); return; }
@@ -153,6 +178,24 @@
       '<p class="cmx-nota">«Desvirtuado» y «sentencia favorable» quieren decir que salió de la presunción; «presunto» es un proceso abierto y solo «definitivo» es una determinación firme del SAT.</p>';
     cruce.addEventListener('click', function (e) { var b = e.target.closest('.cmx-ir'); if (b) { verRfc(b.getAttribute('data-r')); raiz.scrollIntoView({ behavior: 'smooth' }); } });
   }, function () { cruce.innerHTML = '<p>No pude descargar el cruce.</p>'; });
+
+  /* El cruce con el Directorio de Proveedores y Contratistas Sancionados. */
+  var elSanc = document.getElementById('cmxSancionados');
+  if (elSanc) sanc().then(function (S) {
+    if (!S) { elSanc.innerHTML = '<p>No pude descargar el directorio de sancionados.</p>'; return; }
+    var R = S.resumen;
+    elSanc.innerHTML = '<p>El Directorio de Buen Gobierno reúne <b>' + n(R.expedientes) + '</b> expedientes de sanción (' + n(R.expedientesMorales) + ' de <b>' + n(R.empresasUnicas) + '</b> personas morales y ' + n(R.personasFisicasOcultas) + ' de personas físicas que no se nombran) por <b>$' + R.multasMdp.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp</b> en multas ' + chip('oficial') + '. De esas empresas, <b>' + n(R.enComprasMx) + '</b> tienen contratos en ComprasMX 2025-2026 y <b>' + n(R.enSat69b) + '</b> están también en la lista 69-B del SAT ' + chip('derivado') + ':</p>' +
+      '<h4>Con contratos en ComprasMX 2025-2026 (' + n(S.cruceComprasMx.length) + ')</h4><ul class="cmx-lista">' + S.cruceComprasMx.map(function (r) {
+        return '<li>⛔ <button type="button" class="cmx-ir" data-r="' + esc(r[0]) + '">' + esc(r[1]) + '</button> <code>' + esc(r[0]) + '</code> · ' + n(r[2]) + ' sanción' + (r[2] === 1 ? '' : 'es') + ' (' + esc(r[3]) + ', ' + esc(r[4]) + ')' +
+          (r[5] || r[6] ? ' · vigencia ' + esc(r[5]) + ' a ' + esc(r[6]) : '') + (r[7] ? ' · multa ' + pesos(r[7]) : '') + '</li>';
+      }).join('') + '</ul>' +
+      (S.cruceSat69b.length ? '<h4>También en la lista 69-B del SAT (' + n(S.cruceSat69b.length) + ')</h4><ul class="cmx-lista">' + S.cruceSat69b.map(function (r) {
+        var s = SIT[r[2]] || ['', r[2], ''];
+        return '<li>' + s[0] + ' <button type="button" class="cmx-ir" data-r="' + esc(r[0]) + '">' + esc(r[1]) + '</button> <code>' + esc(r[0]) + '</code> · 69-B: <b>' + esc(s[1]) + '</b> · ' + n(r[3]) + ' sanción' + (r[3] === 1 ? '' : 'es') + '</li>';
+      }).join('') + '</ul>' : '') +
+      '<p class="cmx-nota">⚖️ ' + esc(S.nota) + '</p>';
+    elSanc.addEventListener('click', function (e) { var b = e.target.closest('.cmx-ir'); if (b) { verRfc(b.getAttribute('data-r')); raiz.scrollIntoView({ behavior: 'smooth' }); } });
+  });
 
   var pr = new URLSearchParams(location.search);
   if (pr.get('i')) verInst(pr.get('i'));

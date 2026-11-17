@@ -84,6 +84,12 @@ EXTRACTOS = {
         ('longitudKm', r'con una longitud de ([\d,\.]+) kilómetros, un desnivel', 1),
         ('usuarios', r'Monterrey y su Zona Conurbada, en beneficio de un total de ([\d,]+) usuarios', 1),
     ],
+    (2022, 111): [  # Fonatur: Tren Maya, Tramo 1 (Palenque-Escarcega), contrato TM-TRAMO 1/20-OI-01
+        ('tramo1Original', r'Grupo Cosh, S\.A\. DE C\.V\. ([\d,\.]+) 30/04/20', 1e3),
+        ('tramo1Convenios', r'no considerados en el Proyecto Original\. 16/02/22 ([\d,\.]+) 12/09/27', 1e3),
+        ('tramo1Total', r'Monto total contratado\. ([\d,\.]+) 2,999 d\.n\.', 1e3),
+        ('tramo1Ejercido2022', r'Ejercido en 2022\. ([\d,\.]+) Pendiente de erogar\.', 1e3),
+    ],
 }
 
 def pesos(t):

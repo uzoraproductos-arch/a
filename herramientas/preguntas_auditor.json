@@ -2478,6 +2478,21 @@
   {
    "q": "Ferromex",
    "ir": "contratos-publicos.html#grupo-grupo-mexico"
+  },
+  {
+   "q": "¿Qué proveedores están sancionados o inhabilitados?",
+   "ir": "contratos-publicos.html#sancionados",
+   "dice": [
+    "2,408",
+    "89 empresas"
+   ]
+  },
+  {
+   "q": "Contratos de EYA840229LX3",
+   "ir": "contratos-publicos.html?q=EYA840229LX3",
+   "dice": [
+    "Directorio de Proveedores y Contratistas Sancionados"
+   ]
   }
  ]
 }

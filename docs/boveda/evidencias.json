@@ -94,9 +94,9 @@
     "cifra:limantour-superavit-y-peso-oro",
     "fuente:limantour-superavit-y-peso-oro"
    ],
-   "consultado": "2026-11-11",
+   "consultado": "2026-11-17",
    "estado": "no abrió",
-   "error": "[Errno -2] Name or service not known"
+   "error": "[Errno 11001] getaddrinfo failed"
   },
   "https://centralelectoral.ine.mx/2023/03/31/lorenzo-cordova-adriana-favela-ciro-murayama-y-jose-roberto-ruiz-se-despiden-de-la-herradura-de-la-democracia/": {
    "primera_vez": "2026-10-28",
@@ -910,7 +910,7 @@
    "usos": [
     "biblioteca:ref-conapo-proyecciones"
    ],
-   "consultado": "2026-11-11",
+   "consultado": "2026-11-17",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -920,7 +920,7 @@
    "usos": [
     "biblioteca:ref-sat-padron-rfc"
    ],
-   "consultado": "2026-11-11",
+   "consultado": "2026-11-17",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -1014,6 +1014,20 @@
    "tipo": "application/pdf",
    "http": 200,
    "copiado": "2026-11-02"
+  },
+  "https://upcp-compranet.buengobierno.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf": {
+   "primera_vez": "2026-11-17",
+   "historial": [],
+   "usos": [
+    "fuente:huawei-gobierno-codigo-magenta"
+   ],
+   "consultado": "2026-11-17",
+   "estado": "copiado",
+   "sha256": "ad5a29d1044eaa71f015cfd406b4fcd99de578164229ca8460fbd4c83783c984",
+   "bytes": 545365,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-17"
   },
   "https://www.asf.gob.mx/": {
    "primera_vez": "2026-10-27",
@@ -2054,9 +2068,9 @@
    "usos": [
     "biblioteca:ref-oaj-trimestre2026"
    ],
-   "consultado": "2026-11-11",
+   "consultado": "2026-11-17",
    "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1011)"
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1010)"
   },
   "https://www.comunicacionpef.hacienda.gob.mx/work/models/COMUNICACION_DEL_PEF/Documentos/2026/distribucion_gasto_UR/r03_apurog.pdf": {
    "primera_vez": "2026-10-27",
@@ -2415,9 +2429,13 @@
    "usos": [
     "biblioteca:ref-inafed-presidencias"
    ],
-   "consultado": "2026-11-11",
-   "estado": "no abrió",
-   "error": "Forbidden"
+   "consultado": "2026-11-17",
+   "estado": "copiado",
+   "sha256": "d59880c105f9df00e12b0d4f80785b5a9be429a8ba7703b3e2c4e8a4fa4fc609",
+   "bytes": 25616,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-17"
   },
   "https://www.diputados.gob.mx/LeyesBiblio/abro/LPCGPF_abro.pdf": {
    "primera_vez": "2026-10-27",
@@ -3627,7 +3645,7 @@
    "usos": [
     "auditoria:inversion-megaobras"
    ],
-   "consultado": "2026-11-11",
+   "consultado": "2026-11-17",
    "estado": "no abrió",
    "error": "Not Found"
   },
@@ -4413,7 +4431,7 @@
    "usos": [
     "fuente:imss-modalidad-40-gestores"
    ],
-   "consultado": "2026-11-11",
+   "consultado": "2026-11-17",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -4586,7 +4604,7 @@
    "usos": [
     "biblioteca:ref-sat-denuncias"
    ],
-   "consultado": "2026-11-11",
+   "consultado": "2026-11-17",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -4695,7 +4713,7 @@
    "usos": [
     "biblioteca:ref-presidencia-2ig"
    ],
-   "consultado": "2026-11-11",
+   "consultado": "2026-11-17",
    "estado": "no abrió",
    "error": "Forbidden"
   },

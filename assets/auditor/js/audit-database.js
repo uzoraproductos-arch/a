@@ -24689,7 +24689,17 @@ window.AUDIT_DB = {
             "sha256": "c1579fa88c7a76ea4ba6b35d6f2b2861f80f64bbf43f4ecc47abe4cb071ea1a0",
             "paginas": 18,
             "universo": 14391101500.0,
-            "muestra": 10135587900.0
+            "muestra": 10135587900.0,
+            "extractos": {
+              "tramo1Original": 15538133100.0,
+              "tramo1Convenios": 17941530200.0,
+              "tramo1Total": 33479663300.0,
+              "tramo1Ejercido2022": 14124129500.0,
+              "contrato": "TM-TRAMO 1/20-OI-01",
+              "fechaContrato": "30/04/2020",
+              "consorcio": "Consorcio LAMAT Tramo 1, S.A.P.I. de C.V.",
+              "integrantes": "Mota-Engil M\u00e9xico, S.A.P.I. de C.V.; China Communications Construction Company, Ltd.; Gavil Ingenier\u00eda, S.A. de C.V.; EYASA, S. de R.L. de C.V.; Grupo Cosh, S.A. de C.V."
+            }
           },
           {
             "cp": 2022,

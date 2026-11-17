@@ -1804,6 +1804,24 @@ def _cmx_meta():
     return d['meta'], len(d['sat'])
 
 
+def _sanc_meta():
+    """Resumen del Directorio de Proveedores y Contratistas Sancionados (anclar_sancionados.py)."""
+    ruta = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets', 'auditor', 'data', 'sancionados.js')
+    t = open(ruta, encoding='utf-8').read()
+    d = json.loads(t[t.index('{'):t.rindex('}') + 1])
+    r = d['resumen']
+    return {
+        'registros': r['expedientes'],
+        'personas_morales': r['empresasUnicas'],
+        'en_comprasmx': r['enComprasMx'],
+        'en_sat69b': r['enSat69b'],
+        'multas_mdp': r['multasMdp'],
+        'corte': d['corte'],
+        'url': d['url'],
+        'sha256': d['sha256'],
+    }
+
+
 def contratos_publicos():
     """Contratos publicos de ComprasMX (pedido del autor, 26-10-2026: «integra
     los contratos de ComprasMX» para seguir el dinero). El buscador y el
@@ -1811,6 +1829,7 @@ def contratos_publicos():
     Las senales de fraccionamiento (03-11-2026) las escribe fraccionamiento.py."""
     import fraccionamiento
     m, cruce = _cmx_meta()
+    sm = _sanc_meta()
     arch = ''.join('<li><b>%s</b>: %s contratos <small>(sha256 %s…)</small></li>' % (a['archivo'], format(a['contratos'], ','), a['sha256'][:12])
                    for a in m['archivos'])
     return {
@@ -1820,7 +1839,9 @@ def contratos_publicos():
         'entrada': ('Los contratos que las dependencias federales y los gobiernos que usan ComprasMX reportaron en los expedientes de 2025 y 2026: '
                     '%s empresas y %s instituciones. Busca una empresa, su RFC o una institución, y ve cuántos contratos tiene, por cuánto, '
                     'por qué procedimiento y la liga de cada uno a ComprasMX. También puedes preguntárselo al Auditor: «contratos de Laboratorios Pisa», '
-                    '«¿a quién le compra el IMSS?». Revisa las señales de contratos partidos para no pasar del tope de la adjudicación directa, y qué empresas están detrás de cada grupo.' % (format(m['proveedores'], ','), format(m['instituciones'], ','))),
+                    '«¿a quién le compra el IMSS?». Revisa el cruce con la lista 69-B del SAT, el Directorio de Proveedores y Contratistas Sancionados (%s empresas sancionadas, %d con contratos en 2025-2026), '
+                    'las señales de contratos partidos para no pasar del tope de la adjudicación directa, y qué empresas están detrás de cada grupo.' % (
+                        format(m['proveedores'], ','), format(m['instituciones'], ','), format(sm['personas_morales'], ','), sm['en_comprasmx'])),
         'estilos': ['contratos.css'],
         'scripts': ['contratos.js'],
         'secciones': [
@@ -1836,12 +1857,19 @@ def contratos_publicos():
              'texto': ('Cruzamos, por RFC, a cada proveedor con contratos contra el listado del artículo 69-B del SAT (empresas que facturan '
                        'operaciones inexistentes). Al corte de esta versión aparecen %d. Aparecer no es una condena: cada uno lleva su situación.' % cruce),
              'tarjetas': [], 'bloque': '<div class="cmx-cruce" id="cmxCruce"><p>Cargando el cruce…</p></div>'},
+            {'id': 'sancionados', 'titulo': 'Proveedores sancionados e inhabilitados (Buen Gobierno)',
+             'texto': ('Cruzamos el Directorio de Proveedores y Contratistas Sancionados de la Secretaría Anticorrupción y Buen Gobierno '
+                       '(%s registros vigentes de %s personas morales, con $%s mdp en multas al corte del %s) contra los proveedores de ComprasMX '
+                       'y contra la lista 69-B del SAT: %d empresas sancionadas tienen contratos en los expedientes de 2025 y 2026, y %d aparecen también en la lista 69-B. '
+                       'Una inhabilitación impide recibir contratos nuevos durante su plazo; un contrato firmado antes o durante una suspensión judicial puede ser legal.' % (
+                           format(sm['registros'], ','), format(sm['personas_morales'], ','), format(sm['multas_mdp'], ',.1f'), sm['corte'], sm['en_comprasmx'], sm['en_sat69b'])),
+             'tarjetas': [], 'bloque': '<div class="cmx-cruce" id="cmxSancionados"><p>Cargando el directorio de sancionados…</p></div>'},
             fraccionamiento.seccion(),
             __import__('empresas_grupos').seccion(),
             {'id': 'metodo', 'titulo': 'De dónde salen los datos', 'texto': 'Lo que dice el documento y lo que no.', 'tarjetas': [],
              'bloque': ('<div class="cmx-metodo">\n'
                         '          <p>Fuente: <a href="%s" target="_blank" rel="noopener">ComprasMX, Datos Abiertos ↗</a>, «Datos relevantes de los contratos ingresados a la plataforma», '
-                        'de la Secretaría Anticorrupción y Buen Gobierno. Descargados el %s:</p>\n          <ul>%s</ul>\n'
+                        'de la Secretaría Anticorrupción y Buen Gobierno. Descargados el %s:</p>\n          <ul>%s<li><b>Directorio de Proveedores y Contratistas Sancionados</b> (<a href="%s" target="_blank" rel="noopener">Buen Gobierno ↗</a>, corte %s): %s registros (%s personas morales) <small>(sha256 %s…)</small></li></ul>\n'
                         '          <ul>\n'
                         '            <li><b>El importe de cada contrato es oficial</b> <span class="est-chip est-oficial">oficial</span>: el «Importe DRC», antes de impuestos, tal como lo reportó la institución. '
                         'Las sumas y los porcentajes son <span class="est-chip est-derivado">auditada</span>: se suman solo los contratos en pesos; los de otras monedas se muestran aparte, sin convertir.</li>\n'
@@ -1851,8 +1879,8 @@ def contratos_publicos():
                         '            <li><b>Las personas físicas no se publican</b> con nombre ni RFC: su RFC es un dato personal. Solo cuentan en los totales de cada institución.</li>\n'
                         '            <li><b>Tener contratos no es una irregularidad.</b> La plataforma no califica a nadie: muestra lo reportado y la liga al documento.</li>\n'
                         '          </ul>\n'
-                        '          <p>Para actualizarlo: <code>python3 herramientas/actualizar_comprasmx.py</code> con los archivos descargados de la misma página.</p>\n'
-                        '        </div>') % (m['url'], m['descarga'], arch)},
+                        '          <p>Para actualizarlo: <code>python3 herramientas/actualizar_comprasmx.py</code> y <code>python3 herramientas/anclar_sancionados.py</code> con los archivos descargados de las mismas páginas.</p>\n'
+                        '        </div>') % (m['url'], m['descarga'], arch, sm['url'], sm['corte'], format(sm['registros'], ','), format(sm['personas_morales'], ','), sm['sha256'][:12])},
         ],
         'pie_extra': herr_otras('herramienta-inspector.html'),
     }
