@@ -215,7 +215,7 @@ def main():
         cab = json.dumps(info, ensure_ascii=False)[1:-1]
         val = actual['mun']
         filas = ',\n'.join('    "%s":%s' % (c, json.dumps(val[c])) for c in sorted(val))
-        SALIDA.write_text((CABEZA % info['anio']) + 'window.AUDIT_MUN_DEUDA = {\n  ' + cab + ',\n  "mun": {\n' + filas + '\n  }\n};\n',
+        SALIDA.write_text((CABEZA % info['anio']) + 'window.AUDIT_MUN_DEUDA = {\n  ' + cab + ',\n  "mun": {\n' + filas + '\n  }\n};\n', newline='\n',
                           encoding='utf-8')
         r = sda['resumen']
         print('municipios-deuda.js + SdA 2025 CP: %d inscritos (%d medidos: %d verde, %d amarillo, %d rojo; %d sin info); saldo DyO $%s mdp (deuda directa $%s mdp)' % (
@@ -262,7 +262,7 @@ def main():
     }
     cab = json.dumps(info, ensure_ascii=False)[1:-1]
     filas = ',\n'.join('    "%s":%s' % (c, json.dumps([val[c][k] for k in GUARDA])) for c in sorted(val))
-    SALIDA.write_text((CABEZA % ANIO) + 'window.AUDIT_MUN_DEUDA = {\n  ' + cab + ',\n  "mun": {\n' + filas + '\n  }\n};\n',
+    SALIDA.write_text((CABEZA % ANIO) + 'window.AUDIT_MUN_DEUDA = {\n  ' + cab + ',\n  "mun": {\n' + filas + '\n  }\n};\n', newline='\n',
                       encoding='utf-8')
     print('municipios-deuda.js: %d municipios; pagaron deuda %d, pidieron prestado %d; capítulo %s, empréstitos %s, déficit %s pesos' % (
         len(val), cuantos['dp'], cuantos['emp'], format(nac['dp'], ','), format(nac['emp'], ','), format(nac['def'], ',')))

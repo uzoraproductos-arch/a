@@ -174,7 +174,7 @@ def main():
     }
     js = ('/* Generado por herramientas/anclar_sancionados.py. No editar a mano. */\n'
           'window.AUDIT_SANCIONADOS = ' + json.dumps(salida_obj, ensure_ascii=False, separators=(',', ':')) + ';\n')
-    SALIDA.write_text(js, encoding='utf-8')
+    SALIDA.write_text(js, encoding='utf-8', newline='\n')
     r = salida_obj['resumen']
     print('sancionados.js: %d expedientes (%d de %d empresas morales, %d PF ocultas); multas $%s mdp; %d en ComprasMX y %d en 69-B' % (
         r['expedientes'], r['expedientesMorales'], r['empresasUnicas'], r['personasFisicasOcultas'],

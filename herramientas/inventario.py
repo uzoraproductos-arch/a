@@ -103,7 +103,7 @@ def main():
         out += ['', '%d cifras oficiales sin copia todavía (su sitio no abrió donde se corrió la bóveda):' % len(avisos), '']
         out += ['- %s de `%s` → %s' % (n, c, u) for c, n, u, _ in avisos]
     os.makedirs(os.path.join(RAIZ, 'docs'), exist_ok=True)
-    open(os.path.join(RAIZ, 'docs', 'INVENTARIO.md'), 'w', encoding='utf-8').write('\n'.join(out) + '\n')
+    open(os.path.join(RAIZ, 'docs', 'INVENTARIO.md'), 'w', encoding='utf-8', newline='\n').write('\n'.join(out) + '\n')
     print('inventario: %d páginas, %d enlaces rotos, %d redirecciones, %d cotejos sin evidencia' % (len(paginas), len(rotos), len(redirige), len(sin_evid)))
     return 1 if rotos or sin_evid else 0
 
