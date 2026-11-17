@@ -1,5 +1,5 @@
 {
- "actualizado": "14-11-2026",
+ "actualizado": "17-11-2026",
  "nota": "Lo que junta herramientas/vigia_legislativo.py del sumario del DOF y del índice de Leyes Federales Vigentes de la Cámara de Diputados, sin verificar: solo título, fecha y liga, nunca el texto de la reforma. Cada hallazgo queda «por cotejar» hasta que una persona lo revisa; los avisos dicen qué módulo de Auditavisión cita una reforma anterior a la vigente.",
  "fuentes": {
   "dof": "https://dof.gob.mx/sumario.xml",
@@ -332,6 +332,26 @@
   }
  },
  "avisos": [
+  {
+   "archivo": "herramientas/integrar_glosario_registros.py",
+   "renglon": 11,
+   "ley": "cpeum",
+   "nombre": "Constitución Política de los Estados Unidos Mexicanos",
+   "cita": "15-01-2026",
+   "vigente": "07-10-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpeum.htm"
+  },
+  {
+   "archivo": "herramientas/integrar_glosario_registros.py",
+   "renglon": 12,
+   "ley": "cpeum",
+   "nombre": "Constitución Política de los Estados Unidos Mexicanos",
+   "cita": "14-11-2025",
+   "vigente": "07-10-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpeum.htm"
+  },
   {
    "archivo": "herramientas/leyes_niveles.py",
    "renglon": null,
