@@ -158,16 +158,10 @@ PROPIOS = [
      'Centro Nacional de Prevención de Desastres (CENAPRED)', 'https://www.cenapred.gob.mx/es/Publicaciones/archivos/521-RESUMENEJECUTIVOIMPACTO2024.PDF',
      'Impacto socioeconómico 2024 (CENAPRED)', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
     # El Poder Judicial en el bot y en Datos (23-10-2026).
-    ('judicial-2025-participacion', 'Elecciones', 'Porcentaje definitivo de participación ciudadana del cómputo nacional de la elección judicial del 1 de junio de 2025',
-     'La plataforma ya integra la estimación muestral que informó el INE el 2 de junio de 2025 (entre 12.57 % y 13.32 % de la Lista Nominal, Comunicado 192), '
-     'pero el portal de los cómputos distritales definitivos (computospjf2025.ine.mx) dejó de resolver en DNS y los acuerdos publicados en el Diario Oficial '
-     '(INE/CG563/2025 e INE/CG564/2025) traen la suma de votos por candidatura sin el porcentaje nacional definitivo de participación.',
-     PLATAFORMA, 'https://www.ine.mx/voto-y-elecciones/computos-distritales/', 'Cómputos distritales (INE)',
-     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-eleccion.html', 'Datos · Poder Judicial · La elección judicial')]),
-    ('judicial-2025-costo', 'Elecciones', 'Cuánto costó al final la elección judicial de 2025',
-     'El acuerdo INE/CG563/2025 cita el presupuesto precautorio que el INE aprobó para organizarla ($13,205.1 millones, con una eventual consulta popular incluida), '
-     'pero eso es lo que pidió, no lo que gastó. El informe del gasto ejercido existe en los reportes del INE y la plataforma aún no lo integra.',
-     PLATAFORMA, 'https://www.ine.mx/transparencia/', 'Transparencia del INE',
+    ('judicial-2025-costo', 'Elecciones', 'Cuánto costó al final la elección judicial de 2025 (cierre ejercido en Cuenta Pública 2025)',
+     'La plataforma ya integra el presupuesto aprobado para el Proceso Electoral Extraordinario ($6,219,213,262 según Numeralia del INE, tras el presupuesto precautorio inicial de $13,205.1 millones). '
+     'El informe del gasto ejercido definitivo se audita en la Cuenta Pública 2025 y la plataforma aún no lo integra.',
+     PLATAFORMA, 'https://www.transparenciapresupuestaria.gob.mx/', 'Transparencia Presupuestaria (Cuenta Pública 2025)',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-eleccion.html', 'Datos · Poder Judicial · La elección judicial')]),
     ('judicial-fideicomisos-monto', 'Poderes', 'Cierre definitivo de liquidación de los fideicomisos del extinto Consejo de la Judicatura Federal',
      'La Suprema Corte ya publicó en el Diario Oficial (15-07-2025) que el 2 de abril de 2025 Nacional Financiera concentró en la Tesorería de la Federación $6,654.1 millones '

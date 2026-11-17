@@ -99,16 +99,17 @@ GRUPOS = [
 # palabra (Molinos Azteca, Estudios Churubusco Azteca, La Ideal, Pisa Software). Mientras el vínculo no
 # se coteje en el documento del grupo, va como pendiente; en los grupos financieros consta en la propia
 # denominación que reporta ComprasMX.
+BMV_ANEXON = ('https://www.bmv.com.mx/', 'Bolsa Mexicana de Valores: reportes anuales y Anexo N de emisoras')
 CNBV = ('https://www.gob.mx/cnbv', 'CNBV: reportes anuales de las emisoras de valores')
 RPC = ('https://rpc.economia.gob.mx/', 'Registro Público de Comercio (Secretaría de Economía)')
 
 
-def _g(id_, n, al, que, emp, doc, e='pendiente'):
+def _g(id_, n, al, que, emp, doc, e='pendiente', porque=None):
     """Un grupo sin actos por cotejar ni notas de prensa: solo sus filiales en ComprasMX."""
     url, ut = doc
     vin = {'id': 'grupo-%s-vinculo' % id_, 'e': e,
            'que': ('Su propia denominación dice que pertenece a %s' if e == 'oficial' else 'El documento que acredite qué empresas forman parte de %s') % n,
-           'porque': ('Consta en la denominación de la empresa que ComprasMX reporta.' if e == 'oficial' else
+           'porque': porque or ('Consta en la denominación de la empresa que ComprasMX reporta.' if e == 'oficial' else
                       'La plataforma las asocia porque su nombre las identifica y porque así se las conoce, pero aún no coteja el '
                       'documento del grupo que lista sus subsidiarias, así que no lo afirma. No es omisión de una dependencia.'),
            'url': url, 'url_txt': ut}
@@ -118,15 +119,18 @@ def _g(id_, n, al, que, emp, doc, e='pendiente'):
 GRUPOS += [
     _g('carso', 'Grupo Carso', ['grupo carso', 'carso', 'cicsa', 'operadora cicsa', 'grupo sanborns'],
        'Grupo Carso contrata sobre todo con su constructora, <b>Operadora CICSA</b>; también aparece <b>Grupo Sanborns</b>.',
-       ['OCI810921EI3', 'GSA990413H80'], CNBV),
+       ['OCI810921EI3', 'GSA990413H80'], BMV_ANEXON, e='oficial',
+       porque='Consta en el Anexo N oficial de Grupo Carso ante la BMV (anexon_1554814_2025_1, sha256 51ab57c0ea75…) como subsidiarias del grupo.'),
     _g('america-movil', 'América Móvil (Telmex y Telcel)', ['america movil', 'telmex', 'telefonos de mexico', 'telcel', 'radiomovil dipsa', 'triara', 'scitum'],
        'América Móvil no aparece con su nombre: contratan <b>Teléfonos de México</b>, <b>Radiomóvil Dipsa</b> (Telcel) y las empresas de '
        'centros de datos y ciberseguridad <b>Triara.com</b> y <b>Scitum</b>.',
-       ['TME840315KT6', 'RDI841003QJ4', 'TCO0009128J1', 'SCI001208M74'], CNBV),
+       ['TME840315KT6', 'RDI841003QJ4', 'TCO0009128J1', 'SCI001208M74'], BMV_ANEXON, e='oficial',
+       porque='Consta en el Reporte Anual de América Móvil ante la BMV (infoanua_1552461_2025_1, p. 156, sha256 44fbdcafe880…) e Informe de Sustentabilidad (p. 194, sha256 58205f2d5e2f…).'),
     _g('salinas', 'Grupo Salinas', ['grupo salinas', 'total play', 'totalplay', 'seguros azteca'],
        'De Grupo Salinas aparecen <b>Total Play</b> y <b>Seguros Azteca Daños</b>. Otras empresas con «Azteca» en el nombre '
        '(Molinos Azteca, Estudios Churubusco Azteca) <b>no son del grupo</b>.',
-       ['TPT890516JP5', 'SAD050124Q50'], CNBV),
+       ['TPT890516JP5', 'SAD050124Q50'], BMV_ANEXON, e='oficial',
+       porque='Total Play acredita en su Reporte Anual ante la BMV (p. 52, sha256 6a4d5301b7e3…) ser empresa de Grupo Salinas.'),
     _g('ica', 'Empresas ICA', ['empresas ica', 'grupo ica', 'ica constructora', 'ingenieros civiles asociados'],
        'Empresas ICA contrata con <b>ICA Constructora</b>. Otras con «ICA» en el nombre (ICA Interior, ICA Consultores América) '
        'no se asocian al grupo.',
@@ -137,7 +141,8 @@ GRUPOS += [
        ['LPI830527KJ2', 'DIM010319S79'], RPC),
     _g('cemex', 'Cemex', ['cemex', 'cemex concretos'],
        'Cemex aparece con <b>Cemex Concretos</b> y con la propia <b>Cemex, S.A.B. de C.V.</b>',
-       ['CCO7409189M1', 'CEM880726UZA'], CNBV),
+       ['CCO7409189M1', 'CEM880726UZA'], BMV_ANEXON, e='oficial',
+       porque='Consta en el Anexo N oficial de Cemex ante la BMV (anexon_1551477_2025_1, sha256 4a7f7317d2d6…) como subsidiaria del grupo.'),
     _g('grupo-mexico', 'Grupo México', ['grupo mexico', 'ferromex', 'ferrocarril mexicano', 'trafcom'],
        'De Grupo México aparecen <b>Ferrocarril Mexicano</b> (Ferromex) y <b>Trafcom Grupo México</b>.',
        ['FME971022Q44', 'TGM120125T41'], CNBV),

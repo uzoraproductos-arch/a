@@ -63,6 +63,12 @@ SCJN_FID_DOF = {'tx': 'SCJN, Informe del estado de los fideicomisos en los que l
 INE_PART_2025 = {'tx': 'INE, Comunicado 192: estimación muestral de participación ciudadana en la jornada electoral del PEEPJF 2024-2025, entre 12.57 % y 13.32 % (02-06-2025)',
                  'url': 'https://centralelectoral.ine.mx/2025/06/02/porcentaje-de-participacion-ciudadana-en-la-jornada-electoral-del-peepjf-2024-2025-esta-entre-el-12-57-y-el-13-32/',
                  'sha256': '333dd3c1a47bc6574bd309a0fa524279d5da3c04f5c06c4a7f723bbfb889c254'}
+INE_COMPUTOS_2025 = {'tx': 'INE, Cómputos distritales definitivos de la elección del Poder Judicial 2024-2025 (corte 09-06-2025, 100 % actas computadas, 20250609_2050_COMPUTOS.zip)',
+                     'url': 'https://computospj2025.ine.mx/',
+                     'sha256': '4b76fd996473415604a6cfe2f722fec3812bd0bc40b48bdeb26c7ef1bcb6b81a'}
+INE_NUMERALIA_2025 = {'tx': 'INE, Numeralia Proceso Electoral Extraordinario del Poder Judicial Federal 2024-2025 (corte 15-08-2025, pp. 116-117)',
+                      'url': 'https://repositoriodocumental.ine.mx/xmlui/bitstream/handle/123456789/178861/Numeralia-PJF-2024-2025.pdf',
+                      'sha256': 'c2ea8131bc5a9287ce69c435d55654625d1f382f8eecd4e7bca026e035d78ce2'}
 TRANS = 'Transitorios de la reforma judicial (DOF 15-09-2024), en el texto vigente de la Constitución'
 
 # Las nueve personas que asignó el INE (acuerdo INE/CG563/2025, punto
@@ -346,17 +352,20 @@ def judicial(d):
              '<ul class="pa-lista">%s</ul>'
              '<p>Las campañas duraron 60 días, sin precampañas y <b>sin dinero público ni privado</b>; los partidos no podían hacer proselitismo. Las personas electas tomaron protesta el '
              '<b>1 de septiembre de 2025</b>.</p>'
-             '<p>En su estimación muestral de la noche del 2 de junio de 2025, el INE ubicó la participación ciudadana entre <b>12.57 %% y 13.32 %%</b> de la Lista Nominal. '
-             'Lo que todavía no tenemos cotejado: el <b>porcentaje definitivo</b> de los cómputos distritales (cuyo portal dejó de resolver) y <b>cuánto costó al final</b>; '
-             'para organizarla, el INE aprobó un presupuesto precautorio de $13,205.1 millones, que incluía una eventual consulta popular.</p>' % cargos,
+             '<p>En los cómputos distritales definitivos del INE (100 %% de actas computadas), la participación ciudadana oficial fue de <b>13.0184 %%</b> '
+             '(12,965,574 personas votantes de una Lista Nominal de 99,594,010 en la elección de ministras y ministros de la Suprema Corte). '
+             'Para organizar el proceso, el INE aprobó inicialmente un presupuesto precautorio de $13,205.1 millones y, tras los ajustes presupuestales del ejercicio 2025, '
+             'fijó un presupuesto aprobado de <b>$6,219.2 millones</b> ($6,219,213,262 según la Numeralia del INE); el gasto ejercido definitivo se audita en la Cuenta Pública 2025.</p>' % cargos,
         'fu': [_o('Cargos a elegir en 2025 (considerando 25)', INE564),
                _o('Jornada el primer domingo de junio de 2025 y protesta el 1 de septiembre (transitorio segundo)', {'tx': TRANS, 'url': CPEUM['url']}, 'el primer domingo de junio de 2025 cayó en día 1'),
                _o('Campañas sin financiamiento ni precampañas (art. 96)', CPEUM),
-               _o('Presupuesto precautorio del INE, acuerdo INE/CG2321/2024 (antecedente XIV)', INE563),
-               _o('Estimación muestral de participación ciudadana: entre 12.57 % y 13.32 %', INE_PART_2025),
-               {'que': 'Participación ciudadana definitiva del cómputo nacional', 'e': 'pendiente', 'p': 'judicial-2025-participacion', 'fu': {'tx': 'INE, cómputos distritales', 'url': 'https://www.ine.mx/voto-y-elecciones/computos-distritales/'}},
-               {'que': 'Cuánto costó al final', 'e': 'pendiente', 'p': 'judicial-2025-costo', 'fu': {'tx': 'INE, transparencia', 'url': 'https://www.ine.mx/transparencia/'}}],
-        'ci': [{'v': '881', 'etq': 'cargos elegidos en 2025', 'e': 'oficial'}, {'v': '12.57–13.32 %', 'etq': 'participación estimada por muestra del INE', 'e': 'oficial'},
+               _o('Presupuesto precautorio inicial del INE, acuerdo INE/CG2321/2024 (antecedente XIV)', INE563),
+               _o('Participación ciudadana definitiva del 13.0184 % (12,965,574 votos emitidos en SCJN)', INE_COMPUTOS_2025),
+               _o('Presupuesto aprobado 2025 del PEEPJF: $6,219,213,262', INE_NUMERALIA_2025),
+               {'que': 'Cierre del gasto ejercido definitivo en Cuenta Pública 2025', 'e': 'pendiente', 'p': 'judicial-2025-costo', 'fu': {'tx': 'INE y Cuenta Pública 2025 (Hacienda)', 'url': 'https://www.transparenciapresupuestaria.gob.mx/'}}],
+        'ci': [{'v': '881', 'etq': 'cargos elegidos en 2025', 'e': 'oficial'},
+               {'v': '13.0184 %', 'etq': 'participación ciudadana definitiva cómputos distritales INE', 'e': 'oficial'},
+               {'v': '$6,219.2 mdp', 'etq': 'presupuesto aprobado INE 2025 para elección judicial', 'e': 'oficial'},
                {'v': '1 de junio de 2025', 'etq': 'jornada', 'e': 'derivado'}],
         'sug': ['¿Cuándo es la próxima elección judicial?', '¿Quiénes son los ministros de la Corte?', '¿Cuántos circuitos judiciales hay?']}
     t['eleccion2028'] = {

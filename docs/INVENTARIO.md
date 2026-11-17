@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 756 |
+| Páginas revisadas | 762 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -16,12 +16,14 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Página | Título | Generador | Enlaces internos | Módulos embebidos | oficial | derivado | pendiente |
 |---|---|---|---:|---:|---:|---:|---:|
+| `Plan_Maestro_Auditor_Civico_20260927.html` | MEGA PLAN MAESTRO INTEGRAL — Auditor Cívico (Auditavisión) | a mano | 0 | 0 | 0 | 0 | 0 |
 | `administracion-codigos.html` | Administración de códigos · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `agora.html` | Ágora cívica · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `aprende-auditoria.html` | Cómo se audita · Auditavisión | apartados.py | 55 | 0 | 20 | 0 | 0 |
 | `aprende-fraude-en-numeros.html` | El fraude en números · Auditavisión | apartados.py | 47 | 0 | 13 | 3 | 6 |
 | `aprende-recursos-naturales.html` | Los recursos naturales · Auditavisión | apartados.py | 63 | 0 | 127 | 66 | 1 |
 | `aprende.html` | Aprende · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
+| `auditavision.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 1 | 0 | 0 | 0 | 0 |
 | `auditoria-agronitrogenados.html` | Plantas de fertilizantes Agronitrogenados · Auditoría en imágenes · Auditavisión | auditorias.py | 85 | 0 | 4 | 2 | 2 |
 | `auditoria-aifa.html` | Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditoría en imágenes · Auditavisión | auditorias.py | 85 | 0 | 2 | 4 | 1 |
 | `auditoria-bunker-garcia-luna.html` | El Búnker de Seguridad de García Luna (SSPC) · Auditoría en imágenes · Auditavisión | auditorias.py | 85 | 0 | 4 | 2 | 2 |
@@ -62,7 +64,8 @@ La Enciclopedia queda fuera porque está congelada.
 | `contexto-dimensional-presupuestaria.html` | Dimensión presupuestaria · Auditavisión | apartados.py | 47 | 0 | 3 | 1 | 0 |
 | `contexto-dimensional-renglones.html` | Renglones que no se suman · Auditavisión | apartados.py | 45 | 0 | 4 | 0 | 0 |
 | `contexto-dimensional-social.html` | Dimensión social · Auditavisión | apartados.py | 45 | 0 | 6 | 0 | 1 |
-| `contratos-publicos.html` | Contratos públicos · Auditavisión | apartados.py | 62 | 0 | 7 | 6 | 13 |
+| `contratos-publicos.html` | Contratos públicos · Auditavisión | apartados.py | 62 | 0 | 11 | 6 | 9 |
+| `crecimiento_gasto_sexenal.html` | Crecimiento Real del Gasto Sexenal en México — Radiografía del Poder Presupuestario | a mano | 0 | 0 | 0 | 0 | 0 |
 | `datos-abiertos.html` | Datos abiertos · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 0 |
 | `datos-administracion-publica-auditorias.html` | Quién la audita y cómo contrata · Auditavisión | apartados.py | 45 | 0 | 7 | 4 | 0 |
 | `datos-administracion-publica-niveles.html` | Los tres niveles y lo que hacen · Auditavisión | apartados.py | 46 | 0 | 24 | 2 | 0 |
@@ -113,7 +116,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-judicial-circuitos-colegiados.html` | Tribunales colegiados por circuito · Auditavisión | apartados.py | 87 | 0 | 20 | 1 | 3 |
 | `datos-judicial-circuitos-distrito.html` | Juzgados de distrito por circuito · Auditavisión | apartados.py | 87 | 0 | 19 | 1 | 3 |
 | `datos-judicial-como-decide.html` | Cómo decide un juez · Auditavisión | apartados.py | 94 | 0 | 16 | 0 | 0 |
-| `datos-judicial-eleccion.html` | La elección judicial · Auditavisión | apartados.py | 87 | 0 | 8 | 2 | 2 |
+| `datos-judicial-eleccion.html` | La elección judicial · Auditavisión | apartados.py | 87 | 0 | 10 | 2 | 1 |
 | `datos-judicial-estructura.html` | Quién es quién y los 32 circuitos · Auditavisión | apartados.py | 90 | 0 | 19 | 3 | 2 |
 | `datos-judicial-gestion.html` | Lo que cuesta y lo que resuelve · Auditavisión | apartados.py | 89 | 0 | 24 | 11 | 5 |
 | `datos-judicial-por-circuito.html` | Tu circuito judicial · Auditavisión | apartados.py | 149 | 0 | 320 | 0 | 32 |
@@ -137,6 +140,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-salud-sistema.html` | Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE · Auditavisión | apartados.py | 47 | 0 | 12 | 6 | 4 |
 | `derecho-de-replica.html` | Derecho de réplica · Auditavisión | apartados.py | 39 | 0 | 1 | 0 | 0 |
 | `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
+| `diagrama_comparativo (1).html` | Radiografía del Erario: Sexenios del Siglo XXI en México | a mano | 0 | 0 | 0 | 0 | 0 |
 | `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 | `donaciones.html` | Donaciones · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
 | `enciclopedia-auditavision.html` | Enciclopedia · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
@@ -235,11 +239,13 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 66 | 0 | 3 | 6 | 1 |
 | `indice.html` | Índice general · Auditavisión | apartados.py | 324 | 0 | 1 | 1 | 1 |
+| `infografia_fiscal_mx.html` | Arquitectura Fiscal de México — Radiografía Tributaria en Tres Niveles de Gobierno | a mano | 0 | 0 | 0 | 0 | 0 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `informes-documentar-para-sancionar.html` | Informe especial: Documentar para sancionar · Auditavisión | apartados.py | 53 | 0 | 40 | 8 | 2 |
 | `informes-oficiales.html` | Informes oficiales · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `informes-semestral-asf.html` | Informe semestral de la ASF · Auditavisión | apartados.py | 52 | 0 | 32 | 6 | 4 |
+| `mapa_mexico (1).html` | Mapa Interactivo — Gasto Federalizado por Entidad Federativa · PEF 2026 | a mano | 0 | 0 | 0 | 0 | 0 |
 | `marco-legal-tres-niveles.html` | Las leyes del dinero en los tres niveles · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 2 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
 | `nepotismo-y-cargos-publicos.html` | Nepotismo y cargos públicos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
@@ -251,7 +257,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `noticias-al-momento-imss-modalidad-40-gestores.html` | El IMSS acota la Modalidad 40: lo que dice el Diario Oficial y lo que falta probar · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 3 |
 | `noticias-al-momento-jalisco-gasto-federal-pef-2027.html` | Jalisco y el gasto federal: aporta el 7.5 % del PIB y recibe el 6.1 % de lo que la Federación reparte a los estados · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-lfd-2027-dnr-defensa-tren-maya-aifa.html` | ¿18 mil millones «en subsidios» para el Tren Maya y el AIFA? Es el cobro a los turistas extranjeros, y el 57 % es la parte de la Defensa, no un aumento · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 2 |
-| `noticias-al-momento-pemex-3t-2026-perdida-neta.html` | Pemex vuelve a perder en el tercer trimestre: lo que dice su Boletín 86, el punto ciego de la pérdida neta y su deuda de 77.6 mil mdd · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 3 |
+| `noticias-al-momento-pemex-3t-2026-perdida-neta.html` | Pemex vuelve a perder en el tercer trimestre: lo que dice su Boletín 86, el punto ciego de la pérdida neta y su deuda de 77.6 mil mdd · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 0 |
 | `noticias-al-momento-portacelis-permiso-diesel-sener.html` | Portacelis y el permiso para importar 52 millones de litros de diésel: lo que dice MCCI, lo que consta y lo que es puro adjetivo · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-senado-ley-de-ingresos-2027.html` | El Senado aprueba la Ley de Ingresos 2027: de sus 10.6 billones, casi 1.5 son dinero prestado · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-servidores-ia-exportaciones-contenido-nacional.html` | ¿México ya exporta más servidores que autos? Lo dice una consultora privada, no el INEGI, y el «3 a 7 % mexicano» no tiene documento · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 4 |
@@ -326,7 +332,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 239 | 0 | 0 | 0 | 129 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 230 | 0 | 0 | 0 | 121 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 37 | 0 | 11 | 5 | 0 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 48 | 0 | 1 | 0 | 0 |
 | `planisferio-ags-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
@@ -824,7 +830,7 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-128 fichas, cada una con su porqué, su responsable y su enlace oficial.
+120 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 

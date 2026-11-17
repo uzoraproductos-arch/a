@@ -1600,21 +1600,24 @@ def pemex_3t_2026():
             'nota': 'Es un ejemplo derivado con el Anexo 1 del Decreto de Presupuesto de Egresos 2026, que la plataforma tiene en su base.',
         },
         'cotejo': [
-            {'dice': 'Pemex reportó una pérdida neta de 10 mil 792 millones de pesos en el tercer trimestre', 'res': 'pendiente',
-             'explica': ('Casi todos los medios dan 10,795 millones (EFE, Expansión) y solo uno 10,792. Manda el reporte de Pemex a la Bolsa, '
-                         'que no pudimos abrir.'),
-             'fuente': 'Pemex, Reporte de resultados al 30 de septiembre de 2026', 'url': PEMEX_RI,
-             'quien': FALTA_PEMEX, 'donde': BMV},
-            {'dice': '(605 millones de dólares)', 'res': 'pendiente',
-             'explica': ('Es una conversión: 605 millones de dólares equivalen a unos 17.8 pesos por dólar. Otro medio convirtió a 596.9 millones. '
-                         'El tipo de cambio que usó Pemex vendrá en su reporte.'),
-             'fuente': 'Pemex, Reporte de resultados al 30 de septiembre de 2026', 'url': PEMEX_RI,
-             'quien': FALTA_PEMEX, 'donde': BMV},
-            {'dice': 'Un 82.4 % menos que los 61 mil 247 millones del mismo periodo del año pasado', 'res': 'pendiente',
-             'explica': ('La resta cuadra con las dos versiones de la prensa (10,792 contra 61,247, o 10,795 contra 61,242: 82.4 % menos en las '
-                         'dos), pero las dos cifras de partida siguen sin documento abierto.'),
-             'fuente': 'Pemex, reportes de resultados del tercer trimestre de 2025 y de 2026', 'url': PEMEX_RI,
-             'quien': FALTA_PEMEX, 'donde': BMV},
+            {'dice': 'Pemex reportó una pérdida neta de 10 mil 792 millones de pesos en el tercer trimestre', 'res': 'consta',
+             'explica': ('El reporte financiero oficial en formato XBRL entregado por Pemex a la Bolsa Mexicana de Valores (3T 2026, '
+                         'ifrsxbrl_1600278_2026-03_1.zip, sha256 74dcbef3cfbb…) confirma ambas cifras de la prensa: la pérdida neta '
+                         'consolidada total fue de 10,795.0 millones de pesos (frente a 61,242.4 millones en el 3T 2025), y la pérdida neta '
+                         'atribuible a la participación controladora fue exactamente de 10,792.1 millones de pesos (frente a 61,246.6 millones). '
+                         'Ambas versiones de la prensa son oficiales.'),
+             'fuente': 'Pemex, Información Financiera 3T 2026 (XBRL, BMV, sha256 74dcbef3cfbb…)', 'url': BMV},
+            {'dice': '(605 millones de dólares)', 'res': 'consta',
+             'explica': ('El reporte oficial a la Bolsa Mexicana de Valores señala un tipo de cambio de cierre de $17.8413 por dólar al '
+                         '30 de septiembre de 2026. Con ese tipo de cambio oficial, los 10,795.0 millones de pérdida consolidada equivalen '
+                         'exactamente a 605.1 millones de dólares (y los 10,792.1 millones de la controladora a 604.9 millones de dólares).'),
+             'fuente': 'Pemex, Información Financiera 3T 2026 (XBRL, BMV, sha256 74dcbef3cfbb…)', 'url': BMV},
+            {'dice': 'Un 82.4 % menos que los 61 mil 247 millones del mismo periodo del año pasado', 'res': 'matiz',
+             'explica': ('El reporte oficial en la Bolsa confirma que la pérdida consolidada pasó de 61,242.4 a 10,795.0 millones de pesos, '
+                         'una reducción exacta de 82.37 % (82.4 %). En la controladora pasó de 61,246.6 a 10,792.1 millones (82.38 % menos). '
+                         'El matiz es que la cifra de partida del año anterior en el reporte oficial es 61,242 o 61,247 según el redondeo de los '
+                         'diferentes rubros contables reportados.'),
+             'fuente': 'Pemex, Información Financiera 3T 2026 (XBRL, BMV, sha256 74dcbef3cfbb…)', 'url': BMV},
             {'dice': 'Se debió a un incremento en ventas y disminución en deterioro de activos', 'res': 'consta',
              'explica': ('El Boletín nacional 86 de Pemex confirma que en el 3T 2026 los ingresos totales ascendieron a 487 mil millones de pesos '
                          '(+28.5 % respecto al 3T 2025) y que la mejora cercana a 50 mil millones en el resultado neto estuvo apoyada en el '
