@@ -1015,6 +1015,13 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   contrato abierto el importe suele ser el máximo, no lo pagado. **Las personas
   físicas no se publican** (su RFC es un dato personal), y tener contratos no
   es una irregularidad: así se dice en cada respuesta.
+  **Los grupos y sus filiales** (17-11-2026, `herramientas/empresas_grupos.py`, sección `#grupos` y `grupoEmp()` del chat; pedido del
+  autor: «le pregunté al chat por Grupo Prodi y no salió información»). Muchos grupos no contratan con su nombre: `GRUPOS` dice con qué
+  empresas (por RFC) aparece cada uno en ComprasMX. **Ninguna cifra se escribe ahí**; **el vínculo entre el grupo y la filial es `pendiente`
+  mientras solo lo diga la prensa**; lo que falta cotejar va sin montos y con el portal donde debe estar; **contrato, concesión y permiso
+  no se confunden** (`FIGURAS`: ComprasMX trae contratos, una concesión se acredita con su título), y **nunca se dice el partido de un
+  gobierno**. Una empresa por su nombre, sin la palabra «contratos», se busca en ComprasMX (`empresaNombre()` y `quizaEmpresa()`); si no
+  está, se dice, y no se contesta con lo que se le parece. **Un grupo nuevo necesita su renglón en `GRUPOS`** y su pregunta de prueba.
   **Las señales de fraccionamiento** (04-11-2026, `herramientas/fraccionamiento.py`, sección
   `#fraccionamiento` y `fraccCmx()` del chat): adjudicaciones directas por monto de la misma unidad,
   empresa y partida que en 90 días rebasan el tope del Anexo 9 del PEF (LAASSP art. 55; Reglamento

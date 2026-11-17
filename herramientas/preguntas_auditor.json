@@ -2351,6 +2351,67 @@
   {
    "q": "casos por aclarar del AIFA",
    "ir": "expedientes.html#exp-aifa"
+  },
+  {
+   "q": "Grupo Prodi",
+   "ir": "contratos-publicos.html#grupo-prodi",
+   "dice": [
+    "MOTA-ENGIL MEXICO",
+    "pendiente",
+    "Contrato, concesión y permiso no son lo mismo"
+   ],
+   "no_dice": [
+    "49"
+   ]
+  },
+  {
+   "q": "¿Grupo PRODI es concesionaria del gobierno?",
+   "ir": "contratos-publicos.html#grupo-prodi",
+   "dice": [
+    "Lo que falta cotejar",
+    "no un partido"
+   ]
+  },
+  {
+   "q": "Mota-Engil",
+   "ir": "contratos-publicos.html#grupo-prodi",
+   "dice": [
+    "licitación pública"
+   ]
+  },
+  {
+   "q": "Laboratorios Pisa",
+   "ir": "contratos-publicos.html?q=LPI830527KJ2"
+  },
+  {
+   "q": "la empresa ICA",
+   "ir": "contratos-publicos.html?q=ica",
+   "dice": [
+    "¿Cuál buscas?"
+   ]
+  },
+  {
+   "q": "¿es concesionaria Laboratorios Pisa?",
+   "ir": "contratos-publicos.html?q=LPI830527KJ2",
+   "dice": [
+    "ComprasMX trae contratos, no concesiones"
+   ]
+  },
+  {
+   "q": "Grupo Carso",
+   "ir": "contratos-publicos.html#grupos",
+   "dice": [
+    "No encontré",
+    "filial"
+   ]
+  },
+  {
+   "q": "¿Qué es una concesión?",
+   "ir": "glosario.html#Concesion"
+  },
+  {
+   "q": "grupo fertinal",
+   "ir": "herramienta-megaobras-sector.html#obra-fertinal"
   }
  ]
 }

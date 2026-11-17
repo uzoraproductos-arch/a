@@ -710,6 +710,8 @@ def escribir_base():
     dat['mo'] = asistente_megaobras.datos(d, dat['datos']['peso'])
     # Los personajes de Noticias relevantes y las búsquedas en internet.
     dat['per'] = asistente_personajes.datos()
+    # Los grupos empresariales y sus filiales (17-11-2026).
+    dat['gru'] = __import__('empresas_grupos').datos()
     # Las fuentes de cada aplicacion, para su dictamen cuando se usa en el chat.
     refs = {r['id']: r for r in d['referencias_legales']}
     for k in ('insp', 'mo', 'amb', 'calc'):

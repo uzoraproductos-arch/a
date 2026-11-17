@@ -1820,7 +1820,7 @@ def contratos_publicos():
         'entrada': ('Los contratos que las dependencias federales y los gobiernos que usan ComprasMX reportaron en los expedientes de 2025 y 2026: '
                     '%s empresas y %s instituciones. Busca una empresa, su RFC o una institución, y ve cuántos contratos tiene, por cuánto, '
                     'por qué procedimiento y la liga de cada uno a ComprasMX. También puedes preguntárselo al Auditor: «contratos de Laboratorios Pisa», '
-                    '«¿a quién le compra el IMSS?». Y revisa las señales de contratos partidos para no pasar del tope de la adjudicación directa.' % (format(m['proveedores'], ','), format(m['instituciones'], ','))),
+                    '«¿a quién le compra el IMSS?». Revisa las señales de contratos partidos para no pasar del tope de la adjudicación directa, y qué empresas están detrás de cada grupo.' % (format(m['proveedores'], ','), format(m['instituciones'], ','))),
         'estilos': ['contratos.css'],
         'scripts': ['contratos.js'],
         'secciones': [
@@ -1837,6 +1837,7 @@ def contratos_publicos():
                        'operaciones inexistentes). Al corte de esta versión aparecen %d. Aparecer no es una condena: cada uno lleva su situación.' % cruce),
              'tarjetas': [], 'bloque': '<div class="cmx-cruce" id="cmxCruce"><p>Cargando el cruce…</p></div>'},
             fraccionamiento.seccion(),
+            __import__('empresas_grupos').seccion(),
             {'id': 'metodo', 'titulo': 'De dónde salen los datos', 'texto': 'Lo que dice el documento y lo que no.', 'tarjetas': [],
              'bloque': ('<div class="cmx-metodo">\n'
                         '          <p>Fuente: <a href="%s" target="_blank" rel="noopener">ComprasMX, Datos Abiertos ↗</a>, «Datos relevantes de los contratos ingresados a la plataforma», '

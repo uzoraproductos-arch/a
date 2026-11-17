@@ -8223,6 +8223,12 @@ window.AUDIT_DB = {
       "definicion": "La que se ofrece cuando hace falta un conocimiento especial (contabilidad, ingeniería, informática) para examinar hechos, objetos o personas. El perito debe tener título oficial en la materia si esa profesión está reglamentada. El dictamen cívico de esta plataforma no es un peritaje.",
       "ley": "Arts. 368 y 369 · Código Nacional de Procedimientos Penales (última reforma DOF 28-11-2025)",
       "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Concesión",
+      "definicion": "El acto por el que un gobierno da a una empresa, por un plazo, el derecho de construir, operar y explotar un bien o un servicio público, como una autopista de cuota. No es un contrato de obra: en el contrato el gobierno paga a la empresa; en la concesión la empresa invierte y cobra a quien usa la obra. Por eso una concesión no aparece en ComprasMX: se acredita con su título de concesión. La de caminos y puentes federales dura hasta 30 años; la de inmuebles federales, hasta 50. No da la propiedad del bien: solo el derecho de usarlo o explotarlo en los términos del título. A quien la recibe se le llama concesionaria.",
+      "ley": "Art. 6o. Ley de Caminos, Puentes y Autotransporte Federal · Arts. 16 y 73 Ley General de Bienes Nacionales",
+      "categoria": "🔍 Fiscalización Superior"
     }
   ],
   "legislativo": {
