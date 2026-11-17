@@ -126,7 +126,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-justicia-ambiental.html` | Justicia ambiental · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 0 |
 | `datos-legislativo-calendario.html` | Sesiones, presupuesto y reformas · Auditavisión | apartados.py | 49 | 0 | 5 | 0 | 0 |
 | `datos-legislativo-camaras.html` | Las Cámaras · Auditavisión | apartados.py | 50 | 0 | 13 | 5 | 0 |
-| `datos-legislativo-elecciones.html` | Las elecciones · Auditavisión | apartados.py | 51 | 0 | 21 | 8 | 0 |
+| `datos-legislativo-elecciones.html` | Las elecciones · Auditavisión | apartados.py | 52 | 0 | 27 | 8 | 0 |
 | `datos-legislativo-estados.html` | Congresos locales y ayuntamientos · Auditavisión | apartados.py | 47 | 0 | 5 | 0 | 0 |
 | `datos-medio-ambiente.html` | Medio ambiente · Auditavisión | apartados.py | 50 | 0 | 0 | 0 | 0 |
 | `datos-municipios.html` | Base de Datos Municipal EFIPEM (INEGI) · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |

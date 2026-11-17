@@ -49,6 +49,12 @@ from urllib.parse import quote
 CPEUM = {'tx': 'Constitución Política de los Estados Unidos Mexicanos, texto vigente (Cámara de Diputados, última reforma DOF 07-10-2026)',
          'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf',
          'sha256': 'cefb525ae8dfc97a7da40597d2ee918fe254d4bfce88301ff3c9959ced9e6e65'}
+# El Registro Nacional de Obligaciones Alimentarias (17-11-2026, pedido del autor «por el momento
+# electoral»): arts. 135 Bis a 135 Septies, adicionados DOF 08-05-2023, cotejados contra el texto vigente.
+LGDNNA = {'tx': 'Ley General de los Derechos de Niñas, Niños y Adolescentes, arts. 135 Bis a 135 Septies (adicionados DOF 08-05-2023; última reforma DOF 15-01-2026)',
+          'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGDNNA.pdf',
+          'sha256': '475861976811f45ac5676ccd6b9db68c61b41d7f8d85e4d3d267914ab3fe3822'}
+RNOA = {'tx': 'Sistema Nacional DIF, Registro Nacional de Obligaciones Alimentarias: certificado de no inscripción', 'url': 'https://rnoa.dif.gob.mx/'}
 LGIPE = {'tx': 'Ley General de Instituciones y Procedimientos Electorales (última reforma DOF 02-06-2026)',
          'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGIPE.pdf',
          'sha256': '8d6253c7ac28c654543484bac172ca12bbda8db41564b07f27ca5bbea0b4cf80'}
@@ -138,7 +144,7 @@ PAGINAS = [
     ('datos-legislativo-elecciones.html', '🗳️', 'Las elecciones', 'El 6 de junio de 2027, sus etapas, cómo evaluar candidaturas y la reelección',
      'Qué se vota el 6 de junio de 2027, por qué etapas pasa el proceso, cómo evaluar a una candidata o candidato, quién puede reelegirse '
      'y por qué la elección de juezas y jueces se movió a 2028.',
-     ['elecciones', 'ruta', 'candidatos', 'reeleccion', 'judicial']),
+     ['elecciones', 'ruta', 'candidatos', 'deudores', 'reeleccion', 'judicial']),
     ('datos-legislativo-estados.html', '📍', 'Congresos locales y ayuntamientos', 'Los 32 congresos y cómo se integra un ayuntamiento',
      'Cuántas personas legisladoras tiene cada uno de los 32 congresos locales y cómo se integra el ayuntamiento que gobierna tu municipio.',
      ['locales', 'ayuntamientos']),
@@ -272,7 +278,7 @@ def legislativo():
         'h': '<p>Antes de votar, puedes revisar cuatro cosas, cada una con la ley en la mano:</p><ol class="pa-lista">'
              '<li><b>¿Puede ser candidato?</b> Para una diputación federal se necesitan, entre otras cosas, <b>18 años</b> cumplidos el día de la elección y ser originario del estado o vecino '
              'con más de <b>seis meses</b> de residencia. Y no puede registrarse nadie con sentencia firme por delitos contra la vida, sexuales, violencia familiar o violencia política contra las mujeres, '
-             'ni quien esté declarado <b>deudor alimentario moroso</b>.</li>'
+             'ni quien esté declarado <b>deudor alimentario moroso</b>; la ley prevé que se le pida el certificado de no inscripción en el Registro Nacional de Obligaciones Alimentarias.</li>'
              '<li><b>¿Cuánto gasta y quién lo paga?</b> El INE fija un <b>tope de gasto</b> para cada campaña, y los partidos le reportan lo que gasta cada candidatura; la persona candidata responde '
              'junto con su partido. Si una campaña rebasa su tope en un <b>5 %</b>, la elección se puede anular, siempre que la violación sea grave, dolosa y determinante.</li>'
              '<li><b>¿Ya es servidor público?</b> Si ya ocupa un cargo (por ejemplo, si busca reelegirse), está obligado a presentar sus <b>declaraciones patrimonial y de intereses</b>, y esas son públicas, '
@@ -285,7 +291,29 @@ def legislativo():
                _o('Nulidad si se rebasa el tope en 5 %, con violaciones graves, dolosas y determinantes (art. 41, fr. VI)', CPEUM),
                _o('Todo servidor público declara patrimonio e intereses, y las declaraciones son públicas salvo datos personales (arts. 29 y 32)', LGRA),
                _o('Votaciones de cada sesión', GACETA_VOT)],
-        'sug': ['¿Se pueden reelegir los diputados?', '¿Cuándo son las próximas elecciones?', '¿Cómo es el proceso electoral?']}
+        'sug': ['¿Puede ser candidato un deudor alimentario?', '¿Se pueden reelegir los diputados?', '¿Cuándo son las próximas elecciones?']}
+    t['deudores'] = {
+        'tit': 'Deudores alimentarios: no pueden ser candidatos',
+        'h': '<p>Desde la reforma de 2023 conocida como «3 de 3 contra la violencia», quien sea declarado <b>persona deudora alimentaria morosa</b> '
+             '<b>no puede ser registrado como candidato</b> a ningún cargo de elección popular <b>ni ser nombrado</b> para un empleo, cargo o comisión '
+             'en el servicio público. Lo mismo vale para quien tenga sentencia firme por delitos contra la vida, sexuales, violencia familiar o violencia '
+             'política contra las mujeres.</p>'
+             '<p>📋 <b>Dónde consta:</b> en el <b>Registro Nacional de Obligaciones Alimentarias</b>, a cargo del Sistema Nacional DIF. Lo alimentan los '
+             'tribunales de cada estado, se actualiza cada mes, y la calidad de deudor moroso se difunde ahí, con las reglas de protección de datos '
+             'personales. Cada persona puede pedir gratis su <b>certificado de no inscripción</b>, y la ley prevé que se exija para registrarse como '
+             'candidato, para aspirar a juez o magistrado, para sacar pasaporte o licencia de conducir y ante notario.</p>'
+             '<p>🔎 <b>Cómo revisarlo:</b> pregunta si tu candidata o candidato presentó su certificado de no inscripción; el registro oficial está en '
+             '<a href="https://rnoa.dif.gob.mx/" target="_blank" rel="noopener">rnoa.dif.gob.mx ↗</a>.</p>'
+             '<p class="pa-chico">🔒 Auditavisión <b>no copia ese registro ni publica nombres</b>: casi todas las personas inscritas son particulares, y sus '
+             'acreedores son niñas, niños y adolescentes. Si una autoridad electoral niega o cancela un registro por esta causa en un documento '
+             'público, eso sí se cita, con su documento. Estar inscrito no es un delito: es una deuda declarada por un juez, que se cancela al pagarse.</p>',
+        'fu': [_o('Suspensión de derechos: no puede ser registrada como candidata ni nombrada en el servicio público (art. 38, fr. VII, adicionada DOF 29-05-2023)', CPEUM),
+               _o('El registro, a cargo del SNDIF; lo alimentan los tribunales; es público conforme a la ley de datos personales; se actualiza cada mes (art. 135 Bis)', LGDNNA),
+               _o('Qué se inscribe: nombre, CURP y RFC, el juzgado, la cuantía y el expediente (art. 135 Quáter)', LGDNNA),
+               _o('Certificado de no inscripción gratuito, en un sitio web (art. 135 Quinquies)', LGDNNA),
+               _o('Trámites que pueden exigirlo: licencia, pasaporte, candidaturas, cargos judiciales, notario y matrimonio (art. 135 Sexties)', LGDNNA),
+               _o('Portal del registro', RNOA)],
+        'sug': ['¿Cómo evalúo a un candidato?', '¿Cuándo son las próximas elecciones?', '¿Qué es un deudor alimentario moroso?']}
     t['judicial'] = {
         'tit': 'La elección judicial pasó a 2028',
         'h': '<p>La segunda elección del Poder Judicial <b>ya no será en 2027</b>. La reforma publicada el <b>2 de junio de 2026</b> la movió al '

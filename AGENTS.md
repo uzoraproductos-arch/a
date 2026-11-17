@@ -835,6 +835,12 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   nunca es prueba de parentesco**: un vínculo entra a la plataforma solo si lo
   dice un documento oficial, y a los familiares que no son servidores públicos
   no se les nombra.
+  **Los deudores alimentarios y las candidaturas** (17-11-2026, pedido del autor «por el momento electoral»): tema `deudores` de
+  `asistente_legislativo.py`, cotejado con el art. 38, fr. VII de la Constitución y los arts. 135 Bis a 135 Septies de la LGDNNA.
+  **El Registro Nacional de Obligaciones Alimentarias no se copia ni se publica un solo nombre** (son particulares y sus acreedores,
+  menores; decisión del autor, que además descartó cobrar por consultarlo): se explica, se da su liga y se cita solo lo que una
+  autoridad electoral haga público en un documento. El **RUG** (garantías mobiliarias, Código de Comercio) va en el glosario: **no es
+  una lista de fianzas ni de sancionados**, y su consulta pide cuenta de usuario.
   Las agresiones a la prensa, por `herramientas/periodistas.py` (29-10-2026;
   `periodismo-en-riesgo.html`, del modo Periodista), con el informe mensual del
   Mecanismo de Protección (Gobernación); **los homicidios y las sentencias son de

@@ -1123,7 +1123,8 @@
     function legResp(t, es, dir, cuantos) {
       if (!LEG) return null;
       if (/cuando se (aprueba|vota|entrega|presenta|discute)|fecha (limite|para)|a mas tardar|calendario/.test(t) && /presupuesto|paquete|ley de ingresos|\bpef\b|\blif\b/.test(t)) return legTema('paquete');
-      if (/(evaluar|evaluo|conocer|investigar|revisar|reviso|checar|checo|en que me fijo|como (escojo|elijo|saber)).*(candidat|aspirante)|(candidat|aspirante)s?.*(confiable|evaluar|puede ser|declaracion)|requisitos para ser (diputad|candidat)|(puede|pueden) ser candidat|deudor(es)? alimentari|topes? de (gasto|campana)/.test(t)) return legTema('candidatos');
+      if (/(evaluar|evaluo|conocer|investigar|revisar|reviso|checar|checo|en que me fijo|como (escojo|elijo|saber)).*(candidat|aspirante)|(candidat|aspirante)s?.*(confiable|evaluar|puede ser|declaracion)|requisitos para ser (diputad|candidat)|(puede|pueden) ser candidat|topes? de (gasto|campana)/.test(t) && !/deudor|alimentari|pension alimenti/.test(t)) return legTema('candidatos');
+      if (/deudor(es|as)? alimentari|deudora? moros|obligaciones alimentarias|\brnoa\b|no deudor alimentario|pension(es)? alimenti\w* .*(candidat|cargo|servidor|eleccion)|(candidat|cargo|servidor|eleccion)\w* .*pension(es)? alimenti/.test(t) && !/^ (que|q) (es|son|significa)\b/.test(' ' + t)) return legTema('deudores');
       if (DINERO.test(t)) return null;
       var cuenta = /cuant[oa]s|numero de|integrantes|integra|tamano|grande|chico|pequeno|\bmas (diputad|legislador)|\bmenos (diputad|legislador)/;
       var local = /congresos? (local|locales|estatal|estatales|de los estados)|diputad[oa]s? locales?|legislaturas? (local|locales|estatal|estatales)|legisladores locales/.test(t);

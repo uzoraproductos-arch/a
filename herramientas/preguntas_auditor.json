@@ -2412,6 +2412,36 @@
   {
    "q": "grupo fertinal",
    "ir": "herramienta-megaobras-sector.html#obra-fertinal"
+  },
+  {
+   "q": "¿Puede ser candidato un deudor alimentario?",
+   "ir": "datos-legislativo-elecciones.html#leg-deudores",
+   "dice": [
+    "no puede ser registrado como candidato",
+    "rnoa.dif.gob.mx"
+   ]
+  },
+  {
+   "q": "mi candidato debe pensión alimenticia, ¿puede competir?",
+   "ir": "datos-legislativo-elecciones.html#leg-deudores",
+   "dice": [
+    "no copia ese registro ni publica nombres"
+   ]
+  },
+  {
+   "q": "certificado de no deudor alimentario",
+   "ir": "datos-legislativo-elecciones.html#leg-deudores"
+  },
+  {
+   "q": "¿Qué es el RUG?",
+   "ir": "glosario.html#Registro-Unico-de-Garantias-Mobiliarias",
+   "dice": [
+    "No es una lista de fianzas"
+   ]
+  },
+  {
+   "q": "requisitos para ser candidato",
+   "ir": "datos-legislativo-elecciones.html#leg-candidatos"
   }
  ]
 }
