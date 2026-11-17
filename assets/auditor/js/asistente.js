@@ -222,6 +222,7 @@
     var expCap = xf ? '<p>Esta respuesta toca una de las grandes investigaciones de la plataforma. Su expediente, <b>' + esc(xf.exn) + ' · ' + esc(xf.tit) + '</b>, ' +
       'junta el caso en cinco preguntas, su bitácora, lo que sigue y lo que falta' + (xf.nov ? '; el último registro de su bitácora es del ' + esc(xf.nov) : '') + '. ' +
       '<a href="' + esc(xf.ex) + '">Abrir el expediente ➔</a></p>' +
+      '<p>Este dictamen es una de sus piezas: el expediente junta los dictámenes del caso bajo su propio folio (<b>' + esc(xf.fo) + '</b>), como una sola investigación.</p>' +
       '<p class="dic-chico">El expediente se arma solo con la base de la plataforma; no forma parte de la huella de este dictamen.</p>' : '';
     return '<article class="pa-nota dic-doc">' +
       '<header class="dic-cab"><div class="dic-cab-marca"><img src="' + LOGO + '" alt="" width="62" height="48">' +
@@ -292,7 +293,8 @@
     if (!funcionBot || !window.fetch) return;
     try {
       fetch(funcionBot, { method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
-        body: JSON.stringify({ pregunta: String(q).slice(0, 600), motivo: motivo === 'noera' ? 'noera' : 'sin', ficha: tit || null, version: selloSitio() })
+        body: JSON.stringify({ pregunta: String(q).slice(0, 600), motivo: motivo === 'noera' ? 'noera' : 'sin', ficha: tit || null, version: selloSitio(),
+          modo: MODO_ICO[modoVivo()] ? modoVivo() : null, modo_toca: modoSugerido(q, true) })
       }).catch(function () {});
     } catch (e) {}
   }

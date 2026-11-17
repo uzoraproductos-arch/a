@@ -37,6 +37,10 @@
     });
   }
 
+  /* El dictamen integrado se imprime o se guarda como PDF. */
+  var imp = document.getElementById('xiImprime');
+  if (imp) imp.addEventListener('click', function () { window.print(); });
+
   /* El radar de un expediente. */
   var radar = document.getElementById('xiRadar');
   if (!radar) return;

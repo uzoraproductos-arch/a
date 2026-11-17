@@ -875,6 +875,11 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   pendientes o un «lo que sigue», nunca una acusación. Se piden con el servicio `expediente` (se cotiza, **nunca un monto**) o proponiendo un
   caso. `expedientes.html` sigue siendo los casos de la ASF: «expediente de Segalmex» abre esa aplicación; «expediente del Tren Maya», el de
   la Biblioteca (`expInvResp()` de `asistente.js`).
+  **Son el archivero digital** (17-11-2026): las investigaciones propias y las pedidas pasan por las mismas etapas (`ETAPAS`); un pedido aceptado va en
+  `SOLICITADOS`, **sin decir quién lo pidió y sin cifras** (las cifras entran por su módulo), y la lista no se rellena con solicitudes inventadas.
+  **El expediente es una gran investigación hecha de dictámenes**: lista los dictámenes de su caso y lleva su sello, con folio y huella SHA-256 de su
+  contenido (`_huella()`), que cambia cuando cambia una cifra, un documento, la bitácora o un pendiente. No es un documento oficial, y lo dice.
+  **El registro por modo vive en Supabase** (`preguntas_bot.modo` y `modo_toca`, vista `preguntas_por_modo`): solo de las preguntas sin respuesta.
 - **La respuesta va esquematizada y los modos remiten** (pedido del autor, 16-11-2026). Cada respuesta abre con su cabecera (`cabResp()`: tipo de
   ficha, modo al que pertenece y chips), pliega el detalle largo (`esquema()`), trae la tarjeta de su expediente (`expInvHtml()`) y guarda
   «Explóralo a fondo» y «En la Enciclopedia» en paneles (`panel()`). **Si la pregunta le toca a otro modo, la respuesta lo dice arriba y ofrece

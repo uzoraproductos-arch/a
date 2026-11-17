@@ -82,3 +82,31 @@
 [data-theme="dark"] .xi-car-preg, [data-theme="dark"] .xi-bloque h3, [data-theme="dark"] .xi-grupo, [data-theme="dark"] .xi-aldia h3, [data-theme="dark"] .xi-pide h3, [data-theme="dark"] .xi-sigue-caja h3, [data-theme="dark"] .xi-ficha dd, [data-theme="dark"] .xi-cifra, [data-theme="dark"] .xi-bitacora time { color: #cfe0ff; }
 [data-theme="dark"] .xi-t-tx small, [data-theme="dark"] .xi-puerta small, [data-theme="dark"] .xi-ficha dt, [data-theme="dark"] .xi-t-pie, [data-theme="dark"] .xi-t-num, [data-theme="dark"] .xi-bit-que, [data-theme="dark"] .xi-chico { color: #a9b8d3; }
 [data-theme="dark"] .xi-falta { background: #2a2414; }
+/* El archivero y el dictamen integrado (16-11-2026). */
+.xi-etapas { list-style: none; margin: 0 0 8px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; counter-reset: xi; }
+.xi-etapa { counter-increment: xi; display: grid; gap: 4px; padding: 14px; border: 1px solid #dfe5f0; border-top: 4px solid #0b2a63; border-radius: 0 0 14px 14px; background: #ffffff; font-size: 16px; line-height: 1.5; }
+.xi-etapa b::before { content: counter(xi) '. '; color: #5a6782; }
+.xi-etapa-ico { font-size: 22px; }
+.xi-solicitados { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.xi-solicitados li { padding: 12px 14px; border: 1px solid #dfe5f0; border-radius: 12px; background: #ffffff; font-size: 16px; }
+.xi-solicitados small { display: block; margin-top: 4px; font-size: 14px; color: #5a6782; }
+.xi-dics p { margin: 0 0 10px; font-size: 16px; }
+.xi-dics-lista { margin: 0 0 16px; padding-left: 0; list-style: none; display: grid; gap: 8px; counter-reset: xd; }
+.xi-dics-lista li { counter-increment: xd; }
+.xi-dics-lista a { display: block; min-height: 48px; padding: 10px 14px; border: 1px solid #dfe5f0; border-radius: 12px; background: #ffffff; font-size: 16px; line-height: 1.45; font-weight: 600; text-decoration: none; color: #13284a; }
+.xi-dics-lista a:hover, .xi-dics-lista a:focus-visible { border-color: #0b2a63; background: #f4f7fc; }
+.xi-dic-de { display: block; font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #5a6782; }
+.xi-dic-de::before { content: 'Dictamen ' counter(xd) ' · '; }
+.xi-sello { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; padding: 16px; border: 3px double #c9d2e3; border-radius: 14px; background: #ffffff; }
+.xi-sello > div { flex: 1 1 320px; min-width: 0; }
+.xi-sello b { color: #0b2a63; }
+.xi-sello p { margin: 4px 0 0; font-size: 16px; line-height: 1.5; }
+.xi-folio { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.xi-huella code { font-size: 14px; overflow-wrap: anywhere; }
+.xi-imprime { cursor: pointer; font: inherit; font-weight: 800; }
+[data-theme="dark"] .xi-etapa, [data-theme="dark"] .xi-solicitados li, [data-theme="dark"] .xi-dics-lista a, [data-theme="dark"] .xi-sello { background: #142036; border-color: #2a3a58; color: #e6ecf7; }
+[data-theme="dark"] .xi-sello b { color: #cfe0ff; }
+@media print {
+  .site-top-nav, .apartado-migas, .apartado-pie, .xi-puertas, .xi-radar, .xi-aldia, .xi-imprime, .bib-nav, .apartado-auditor, #radar { display: none !important; }
+  .xi-bloque, .xi-sello, .xi-caratula { break-inside: avoid; }
+}

@@ -142,29 +142,29 @@ La Enciclopedia queda fuera porque está congelada.
 | `enciclopedia-auditavision.html` | Enciclopedia · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
 | `enciclopedia.html` | La Enciclopedia antigua · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `estado-de-cuenta.html` | Contexto dimensional · Auditavisión | apartados.py | 49 | 0 | 0 | 0 | 0 |
-| `expediente-agronitrogenados.html` | Expediente: Plantas de fertilizantes Agronitrogenados · Auditavisión | apartados.py | 53 | 0 | 3 | 1 | 2 |
-| `expediente-aifa.html` | Expediente: Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditavisión | apartados.py | 60 | 0 | 1 | 3 | 2 |
-| `expediente-bunker-garcia-luna.html` | Expediente: El Búnker de Seguridad de García Luna (SSPC) · Auditavisión | apartados.py | 54 | 0 | 3 | 1 | 3 |
-| `expediente-deuda-congreso-2027.html` | Expediente: Diputados aprobó la deuda de 2027: Ley de Ingresos y nota soberana · Auditavisión | apartados.py | 64 | 0 | 4 | 0 | 2 |
-| `expediente-deuda-soberana.html` | Expediente: Los intereses de la deuda pública · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 1 |
-| `expediente-dos-bocas.html` | Expediente: Refinería Olmeca (Dos Bocas) · Auditavisión | apartados.py | 57 | 0 | 1 | 3 | 3 |
-| `expediente-enciclomedia.html` | Expediente: Programa Enciclomedia · Auditavisión | apartados.py | 51 | 0 | 4 | 1 | 0 |
-| `expediente-estela-luz.html` | Expediente: Estela de Luz (Bicentenario) · Auditavisión | apartados.py | 53 | 0 | 3 | 1 | 2 |
-| `expediente-farac-carretero.html` | Expediente: FARAC (Rescate Carretero de 1997) · Auditavisión | apartados.py | 51 | 0 | 3 | 2 | 0 |
-| `expediente-fertinal.html` | Expediente: Compra de Grupo Fertinal · Auditavisión | apartados.py | 51 | 0 | 5 | 0 | 0 |
-| `expediente-fobaproa.html` | Expediente: FOBAPROA / IPAB (Rescate Bancario de 1998) · Auditavisión | apartados.py | 52 | 0 | 3 | 2 | 0 |
-| `expediente-guaymas-gas.html` | Expediente: Guaymas y la Gaceta Parlamentaria: el proyecto de gas y su revisión ambiental · Auditavisión | apartados.py | 62 | 0 | 3 | 1 | 2 |
-| `expediente-huachicol-fiscal.html` | Expediente: Huachicol fiscal: el impuesto que no entra · Auditavisión | apartados.py | 55 | 0 | 1 | 1 | 4 |
-| `expediente-ine-contratos.html` | Expediente: El INE: su presupuesto, lo auditado y los contratos en revisión · Auditavisión | apartados.py | 66 | 0 | 3 | 0 | 3 |
-| `expediente-inversion-megaobras.html` | Expediente: Inversión en megaobras y rescates: 11 obras, 2 rescates y 6 sexenios · Auditavisión | apartados.py | 66 | 0 | 0 | 4 | 15 |
-| `expediente-lego-cienega.html` | Expediente: Ciénega de Flores: el dinero público alrededor de LEGO · Auditavisión | apartados.py | 52 | 0 | 1 | 2 | 0 |
-| `expediente-medicamentos-imss.html` | Expediente: Compras de medicamentos y contratos del sector salud · Auditavisión | apartados.py | 58 | 0 | 3 | 1 | 2 |
-| `expediente-megafarmacia.html` | Expediente: Megafarmacia del Bienestar (Huehuetoca) · Auditavisión | apartados.py | 54 | 0 | 3 | 1 | 1 |
-| `expediente-ramo-33.html` | Expediente: Ramo 33: el dinero para estados y municipios · Auditavisión | apartados.py | 52 | 0 | 3 | 0 | 0 |
-| `expediente-refineria-tula.html` | Expediente: Refinería Bicentenario en Tula (Barda Perimetral) · Auditavisión | apartados.py | 51 | 0 | 3 | 2 | 0 |
-| `expediente-seguro-popular.html` | Expediente: Seguro Popular: 53.5 millones de afiliados y lo que pasó después · Auditavisión | apartados.py | 59 | 0 | 5 | 1 | 2 |
-| `expediente-tren-maya.html` | Expediente: Tren Maya · Auditavisión | apartados.py | 59 | 0 | 1 | 2 | 1 |
-| `expediente-tren-toluca.html` | Expediente: Tren Interurbano México-Toluca «El Insurgente» · Auditavisión | apartados.py | 54 | 0 | 1 | 3 | 1 |
+| `expediente-agronitrogenados.html` | Expediente: Plantas de fertilizantes Agronitrogenados · Auditavisión | apartados.py | 54 | 0 | 3 | 1 | 2 |
+| `expediente-aifa.html` | Expediente: Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditavisión | apartados.py | 62 | 0 | 1 | 3 | 2 |
+| `expediente-bunker-garcia-luna.html` | Expediente: El Búnker de Seguridad de García Luna (SSPC) · Auditavisión | apartados.py | 55 | 0 | 3 | 1 | 3 |
+| `expediente-deuda-congreso-2027.html` | Expediente: Diputados aprobó la deuda de 2027: Ley de Ingresos y nota soberana · Auditavisión | apartados.py | 68 | 0 | 4 | 0 | 2 |
+| `expediente-deuda-soberana.html` | Expediente: Los intereses de la deuda pública · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
+| `expediente-dos-bocas.html` | Expediente: Refinería Olmeca (Dos Bocas) · Auditavisión | apartados.py | 58 | 0 | 1 | 3 | 3 |
+| `expediente-enciclomedia.html` | Expediente: Programa Enciclomedia · Auditavisión | apartados.py | 52 | 0 | 4 | 1 | 0 |
+| `expediente-estela-luz.html` | Expediente: Estela de Luz (Bicentenario) · Auditavisión | apartados.py | 54 | 0 | 3 | 1 | 2 |
+| `expediente-farac-carretero.html` | Expediente: FARAC (Rescate Carretero de 1997) · Auditavisión | apartados.py | 52 | 0 | 3 | 2 | 0 |
+| `expediente-fertinal.html` | Expediente: Compra de Grupo Fertinal · Auditavisión | apartados.py | 52 | 0 | 5 | 0 | 0 |
+| `expediente-fobaproa.html` | Expediente: FOBAPROA / IPAB (Rescate Bancario de 1998) · Auditavisión | apartados.py | 54 | 0 | 3 | 2 | 0 |
+| `expediente-guaymas-gas.html` | Expediente: Guaymas y la Gaceta Parlamentaria: el proyecto de gas y su revisión ambiental · Auditavisión | apartados.py | 64 | 0 | 3 | 1 | 2 |
+| `expediente-huachicol-fiscal.html` | Expediente: Huachicol fiscal: el impuesto que no entra · Auditavisión | apartados.py | 56 | 0 | 1 | 1 | 4 |
+| `expediente-ine-contratos.html` | Expediente: El INE: su presupuesto, lo auditado y los contratos en revisión · Auditavisión | apartados.py | 69 | 0 | 3 | 0 | 3 |
+| `expediente-inversion-megaobras.html` | Expediente: Inversión en megaobras y rescates: 11 obras, 2 rescates y 6 sexenios · Auditavisión | apartados.py | 67 | 0 | 0 | 4 | 15 |
+| `expediente-lego-cienega.html` | Expediente: Ciénega de Flores: el dinero público alrededor de LEGO · Auditavisión | apartados.py | 53 | 0 | 1 | 2 | 0 |
+| `expediente-medicamentos-imss.html` | Expediente: Compras de medicamentos y contratos del sector salud · Auditavisión | apartados.py | 60 | 0 | 3 | 1 | 2 |
+| `expediente-megafarmacia.html` | Expediente: Megafarmacia del Bienestar (Huehuetoca) · Auditavisión | apartados.py | 55 | 0 | 3 | 1 | 1 |
+| `expediente-ramo-33.html` | Expediente: Ramo 33: el dinero para estados y municipios · Auditavisión | apartados.py | 54 | 0 | 3 | 0 | 0 |
+| `expediente-refineria-tula.html` | Expediente: Refinería Bicentenario en Tula (Barda Perimetral) · Auditavisión | apartados.py | 52 | 0 | 3 | 2 | 0 |
+| `expediente-seguro-popular.html` | Expediente: Seguro Popular: 53.5 millones de afiliados y lo que pasó después · Auditavisión | apartados.py | 61 | 0 | 5 | 1 | 2 |
+| `expediente-tren-maya.html` | Expediente: Tren Maya · Auditavisión | apartados.py | 61 | 0 | 1 | 2 | 1 |
+| `expediente-tren-toluca.html` | Expediente: Tren Interurbano México-Toluca «El Insurgente» · Auditavisión | apartados.py | 55 | 0 | 1 | 3 | 1 |
 | `expedientes-investigacion.html` | Expedientes · Auditavisión | apartados.py | 71 | 0 | 0 | 0 | 0 |
 | `expedientes.html` | Los casos por aclarar · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `fuentes-del-auditor.html` | Fuentes del auditor · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |

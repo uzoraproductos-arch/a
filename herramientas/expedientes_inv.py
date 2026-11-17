@@ -45,6 +45,37 @@ BANDEJA = 'docs/noticias/bandeja.json'
 SERVICIO = 'expediente'
 
 
+# El archivero (pedido del autor, 16-11-2026: «ir armando, construyendo nuestras
+# grandes investigaciones… así como las que nos soliciten, en nuestro archivero
+# digital»). Un expediente pasa por cuatro etapas. Los de Auditoría en imágenes
+# ya están publicados; uno pedido entra aquí cuando se acepta y avanza de etapa.
+ETAPAS = [
+    ('recibido', '📥', 'Recibido', 'Llegó la solicitud y se revisó que el caso se pueda sostener con documentos públicos.'),
+    ('cotejo', '🔎', 'En cotejo', 'Se buscan los documentos oficiales y se coteja cada afirmación contra ellos.'),
+    ('armado', '🧱', 'En construcción', 'Las cifras cotejadas entran a la base, con su chip y su fuente, y el expediente se arma.'),
+    ('publicado', '🗂️', 'Publicado', 'Tiene su página, su bitácora y su sello; desde aquí se le da seguimiento solo.'),
+]
+# Los expedientes pedidos que la plataforma aceptó. Cada uno:
+#   {'id', 'tit', 'fecha' (dd-mm-aaaa en que se aceptó), 'etapa' (clave de
+#    ETAPAS), 'que' (una línea, sin cifras), 'ex' (id del expediente publicado,
+#    si ya lo está)}.
+# Nunca se escribe quién lo pidió (§2 bis: a las personas privadas no se les
+# nombra) ni una cifra: las cifras entran por su módulo, ya cotejadas. La lista
+# empieza vacía: no se inventa una solicitud.
+SOLICITADOS = []
+
+
+def _valida_solicitados():
+    claves = {e[0] for e in ETAPAS}
+    for x in SOLICITADOS:
+        if x.get('etapa') not in claves or not _fecha(x.get('fecha')) or not x.get('tit') or not x.get('que'):
+            raise SystemExit('expedientes_inv.py: el solicitado %r necesita tit, que, fecha dd-mm-aaaa y una etapa de ETAPAS' % x.get('id'))
+        if re.search(r'\$\s?\d|\d\s?(mdp|millones|%)', x['que'] + x['tit']):
+            raise SystemExit('expedientes_inv.py: el solicitado %r trae una cifra; las cifras entran por su módulo' % x.get('id'))
+        if x.get('ex') and x['ex'] not in auditorias.TEMA_BOT:
+            raise SystemExit('expedientes_inv.py: el solicitado %r apunta a un expediente que no existe' % x.get('id'))
+
+
 def archivo(id_):
     return 'expediente-%s.html' % id_
 
@@ -149,6 +180,52 @@ def expediente(id_):
             'asf': ('expedientes.html#exp-' + auditorias.EXPEDIENTE[id_]) if id_ in auditorias.EXPEDIENTE else ''}
 
 
+def _huella(e):
+    """SHA-256 del contenido del expediente: si cambia una cifra, un documento,
+    la bitácora o un pendiente, cambia la huella."""
+    import hashlib
+    d = e['d']
+    obj = {'id': e['id'], 'que': d['que'], 'cuanto': [list(x) for x in d['cuanto']], 'quien': d['quien'],
+           'docs': d['docs'], 'falta': d['falta'], 'bit': [[x['f'], x['tit'], x['url']] for x in e['bit']],
+           'sigue': [[x['que'], x['url']] for x in e['sigue']], 'pend': [p['id'] for p in e['pend']]}
+    return hashlib.sha256(json.dumps(obj, ensure_ascii=False, sort_keys=True).encode('utf-8')).hexdigest()
+
+
+def _dictamenes(e):
+    """Las preguntas cuyo dictamen compone el expediente: la del caso y la de
+    cada nota de su bitácora que el chat contesta por su título."""
+    qs = [(e['preg'], 'El caso')]
+    vistos = {e['preg']}
+    for x in e['bit']:
+        if x['que'].startswith('Memoria de promesas') or x['tit'] in vistos:
+            continue
+        vistos.add(x['tit'])
+        qs.append((x['tit'], x['que']))
+    return qs[:7]
+
+
+def _sello(e):
+    hx = e['hx']
+    dics = ''.join(
+        '<li><a href="%s?q=%s&amp;modo=inspector" target="_blank" rel="noopener"><span class="xi-dic-de">%s</span>%s <span aria-hidden="true">➔</span></a></li>'
+        % (DICTAMEN, quote(q), _esc(de), _esc(q)) for q, de in _dictamenes(e))
+    return ('<div class="xi-dics">\n'
+            '          <p>Cada pregunta del caso tiene su <b>dictamen cívico</b>, con folio y huella. Juntos forman el expediente:</p>\n'
+            '          <ol class="xi-dics-lista">%s</ol>\n'
+            '        </div>\n'
+            '        <div class="xi-sello">\n'
+            '          <div>\n'
+            '            <b>Dictamen integrado del expediente</b>\n'
+            '            <p>Folio <b class="xi-folio">%s-%s</b> · %d dictámenes · %d cifras · %d documentos</p>\n'
+            '            <p class="xi-huella">Huella digital (SHA-256 del expediente): <code>%s</code></p>\n'
+            '            <p class="xi-chico">La huella se calcula sobre las cifras, los documentos, la bitácora y los pendientes: si cambia uno, cambia la huella y el folio. '
+            '<b>No es un documento oficial ni un peritaje con validez ante una autoridad</b>: es el respaldo documental de una investigación, para que cualquiera revise de dónde sale cada dato.</p>\n'
+            '          </div>\n'
+            '          <button type="button" class="xi-boton xi-imprime" id="xiImprime">🖨️ Imprimir o guardar PDF</button>\n'
+            '        </div>') % (dics, e['num'], hx[:8].upper(), len(_dictamenes(e)), len(e['d']['cuanto']), len(e['d']['docs']),
+                                 ' '.join(hx[i:i + 16] for i in range(0, 64, 16)))
+
+
 _TODOS = None
 
 
@@ -158,6 +235,8 @@ def todos():
         _TODOS = [expediente(a[0]) for a in auditorias.AUDITORIAS]
         for n, e in enumerate(_TODOS, 1):
             e['num'] = 'EXP-%03d' % n
+            e['hx'] = _huella(e)
+        _valida_solicitados()
     return _TODOS
 
 
@@ -170,7 +249,7 @@ def para_bot(id_):
     e = de(id_)
     return {'ex': archivo(id_), 'exn': e['num'], 'nov': _fecha_tx(e['nov']), 'ab': 1 if e['abierto'] else 0,
             'nd': len(e['d']['docs']), 'nb': len(e['bit']), 'np': len(e['pend']),
-            'qn': e['d']['quien'], 'fal': e['d']['falta']}
+            'qn': e['d']['quien'], 'fal': e['d']['falta'], 'fo': e['num'] + '-' + e['hx'][:8].upper()}
 
 
 def _chip(e, pend=None):
@@ -300,6 +379,7 @@ def pagina(e):
             sec('bitacora', '🕰️ Bitácora', 'Lo que la plataforma ha publicado sobre el caso, de lo más nuevo a lo más viejo.', _bitacora(e)),
             sec('sigue', '🧭 Lo que sigue y lo que falta', 'El caso no se olvida: esto es lo que queda por revisar.',
                 '<div class="xi-sigue-caja">\n          %s\n        </div>' % _sigue(e)),
+            sec('dictamenes', '🧾 Los dictámenes del expediente', 'El expediente es una gran investigación hecha de dictámenes.', _sello(e)),
             sec('radar', '📡 En el radar: titulares por cotejar', 'Lo que juntó hoy la recolección automática. Sin verificar.',
                 _radar(e) + '\n        ' + AL_DIA),
         ],
@@ -330,6 +410,23 @@ PIDE = ('<div class="xi-pide">\n'
         '        </div>') % SERVICIO
 
 
+def _archivero():
+    pasos = ''.join('<li class="xi-etapa"><span class="xi-etapa-ico" aria-hidden="true">%s</span><b>%s</b><span>%s</span></li>' % x[1:] for x in ETAPAS)
+    nom = {x[0]: x for x in ETAPAS}
+    if SOLICITADOS:
+        filas = ''.join(
+            '<li><span class="xi-estado xi-abierto">%s %s</span> <b>%s</b><small>%s · aceptado el %s</small>%s</li>' % (
+                nom[x['etapa']][1], nom[x['etapa']][2], _esc(x['tit']), _esc(x['que']), _fecha_tx(x['fecha']),
+                (' <a href="%s">Abrir su expediente ➔</a>' % archivo(x['ex'])) if x.get('ex') else '')
+            for x in sorted(SOLICITADOS, key=lambda x: _fecha(x['fecha']), reverse=True))
+        lista = '<ul class="xi-solicitados">%s</ul>' % filas
+    else:
+        lista = ('<p class="xi-vacio">Todavía no hay expedientes pedidos en construcción. Cuando aceptemos uno, aparecerá aquí con su etapa, '
+                 'sin decir quién lo pidió. <a href="#pide">Pide el tuyo</a>.</p>')
+    return ('<ol class="xi-etapas">%s</ol>\n        <h3 class="xi-grupo">📥 Pedidos, en construcción <small>%d</small></h3>\n        %s'
+            % (pasos, len(SOLICITADOS), lista))
+
+
 def indice():
     ex = todos()
     grupos = []
@@ -351,14 +448,16 @@ def indice():
     return dict(_migas(), **{
         'archivo': INDICE, 'menu': 'Expedientes', 'icono': '🗂️', 'titulo': 'Expedientes',
         'lema': 'Las grandes investigaciones, con seguimiento',
-        'entrada': ('Cada gran investigación de la plataforma tiene su expediente: el caso en cinco preguntas, su bitácora, lo que '
-                    'sigue y lo que falta, con cada documento. <b>Se arman solos con la base de datos</b> y se ponen al día cada vez '
-                    'que la plataforma publica. Si tu caso no está, puedes pedirlo.'),
+        'entrada': ('El archivero digital de la plataforma: aquí se arman y se guardan las grandes investigaciones, las nuestras y las que '
+                    'nos piden. Cada expediente junta el caso en cinco preguntas, su bitácora, sus dictámenes, lo que sigue y lo que falta. '
+                    '<b>Se arman solos con la base de datos</b> y se ponen al día cada vez que la plataforma publica.'),
         'estilos': ESTILOS, 'scripts': SCRIPTS, 'sin_saltos': True,
         'pie_extra': None,
         'secciones': [
             {'id': 'expedientes', 'titulo': '🗂️ Los expedientes', 'texto': 'Toca uno para abrirlo. Los que tienen el registro más reciente en su bitácora van primero.',
              'tarjetas': [], 'bloque': barra + '\n        <div id="xiLista">\n          ' + '\n          '.join(grupos) + '\n        </div>'},
+            {'id': 'archivero', 'titulo': '🗃️ El archivero: cómo se construye un expediente',
+             'texto': 'Las investigaciones propias y las que nos piden pasan por las mismas cuatro etapas.', 'tarjetas': [], 'bloque': _archivero()},
             {'id': 'pide', 'titulo': '✍️ Pide un expediente', 'texto': 'También investigamos a pedido.', 'tarjetas': [], 'bloque': PIDE},
             {'id': 'al-dia', 'titulo': '🔄 Seguimiento automático', 'texto': 'Qué quiere decir que un expediente esté «al día».',
              'tarjetas': [], 'bloque': AL_DIA},

@@ -32,6 +32,8 @@ insert into public.envios (tipo, asunto, texto, pagina, estado) values
   ('errata', 'Cifra del PEF', 'La cifra del anexo no coincide con el DOF.', 'numeros-gasto-publico.html', 'publicado'),
   ('solicitud', 'Investigar contrato', 'Quiero que revisen el contrato de la obra.', null, 'nuevo');
 insert into public.preguntas_bot (pregunta, motivo, version) values ('¿cuánto costó la barda?', 'sin', '20261024r'), ('¿Cuánto  costó la barda?', 'sin', '20261024r');
+insert into public.preguntas_bot (pregunta, motivo, version, modo, modo_toca) values ('¿es cierto lo del contrato?', 'sin', '20261116e', 'ciudadano', 'periodista');
+select pg_temp.debe_fallar($$insert into public.preguntas_bot (pregunta, motivo, version, modo) values ('¿y esto?', 'sin', '20261116e', 'chismoso')$$, 'una pregunta con un modo que no existe');
 select pg_temp.debe_fallar($$insert into public.envios (tipo, asunto, texto, correo) values ('tema','Hola','Texto suficiente aquí','x@y.mx')$$, 'un correo sin aceptar el aviso de privacidad');
 select pg_temp.debe_fallar($$insert into public.envios (tipo, asunto, texto, pagina) values ('tema','Hola','Texto suficiente aquí','https://otro.sitio/x')$$, 'una página que no es de la plataforma');
 select pg_temp.debe_fallar($$insert into public.consultas_ia (pregunta, fichas, version, verificada, rechazo) values ('x?', '{1}', '20261024r', true, 'formato')$$, 'una consulta verificada y rechazada a la vez');
@@ -45,6 +47,7 @@ set role anon;
 select pg_temp.igual((select count(*) from public.envios), 0, 'envíos que ve el público');
 select pg_temp.igual((select count(*) from public.envios_publicos), 1, 'erratas publicadas que ve el público');
 select pg_temp.igual((select count(*) from public.preguntas_bot), 0, 'preguntas del bot que ve el público');
+select pg_temp.debe_fallar($$select * from public.preguntas_por_modo$$, 'que el público lea el registro por modo');
 select pg_temp.igual((select count(*) from public.donaciones), 0, 'donaciones (públicas, aún vacías)');
 select pg_temp.debe_fallar($$insert into public.envios (tipo, asunto, texto) values ('tema','Directo','Sin pasar por la función')$$, 'que el público escriba directo en envíos');
 select pg_temp.debe_fallar($$insert into public.donaciones (monto, comprobante) values (100, 'falso')$$, 'que el público invente una donación');
@@ -81,6 +84,7 @@ select pg_temp.igual((select count(*) from public.envios), 2, 'envíos que ve la
 update public.foro_hilos set aprobado = true;
 update public.envios set estado = 'en_revision', respuesta = 'Lo revisamos' where tipo = 'solicitud';
 select pg_temp.igual((select veces from public.preguntas_por_atender limit 1), 2, 'veces de la pregunta más repetida (sin importar mayúsculas ni espacios)');
+select pg_temp.igual((select veces from public.preguntas_por_modo where le_toca = 'periodista' and se_pregunto_en = 'ciudadano'), 1, 'preguntas que le tocaban al modo Periodista y se hicieron en Ciudadano');
 reset role;
 
 set role anon;

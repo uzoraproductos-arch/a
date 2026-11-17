@@ -188,3 +188,5 @@ deno test supabase/pruebas/
 - **La bóveda corre sola cada miércoles** (`.github/workflows/boveda.yml`, 30-10-2026):
   desde la red de GitHub revisa las direcciones oficiales que respaldan los datos y guarda
   su huella en `docs/boveda/evidencias.json`. No cambia ninguna cifra.
+
+- **El registro por modo (17-11-2026).** `preguntas_bot` guarda además `modo` (el modo del chat en que se preguntó) y `modo_toca` (el modo al que le tocaba, por las palabras de la pregunta). La vista `preguntas_por_modo` dice qué le falta a cada modo. No cambia qué se guarda: solo las preguntas sin respuesta o marcadas «No era lo que buscaba», sin nombre ni correo. Migración `20261116000001_preguntas_por_modo.sql`; se sube con el flujo «Sube la base de datos».
