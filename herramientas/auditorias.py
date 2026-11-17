@@ -471,9 +471,27 @@ def pagina(a, sello):
 </html>
 '''.format(titulo_doc=re.sub('<[^>]+>', '', titulo), pregunta_attr=esc_attr(pregunta), favicon=FAVICON,
            sello=sello, cabecera=cabecera(archivo(id_), sello), img=img, alt=esc_attr(alt), nota_img=nota_img,
-           titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), temas=temas(id_), extra=extra, ruta=ruta(id_), lectura=lectura(id_), servicio=servicio(titulo),
+           titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), temas=temas(id_), extra=extra, ruta=ruta(id_), lectura=lectura(id_), servicio=expediente_puerta(id_) + '\n' + servicio(titulo),
            sociales=sociales(archivo(id_), re.sub('<[^>]+>', '', titulo) + ' · Auditavisión', pregunta, img))
 
+
+
+def expediente_puerta(id_):
+    """La puerta de cada investigación a su expediente de control interno
+    (pedido del autor, 17-11-2026: «que quede vinculado»). No repite cifras."""
+    import expedientes_inv
+    b = expedientes_inv.para_bot(id_)
+    det = ['%d documento%s' % (b['nd'], '' if b['nd'] == 1 else 's')]
+    if b['nb']:
+        det.append('%d en su bitácora' % b['nb'])
+    if b['np']:
+        det.append('%d pendiente%s' % (b['np'], '' if b['np'] == 1 else 's'))
+    return ('      <aside class="au-servicio au-expediente" aria-label="Expediente de control interno">\n'
+            '        <p><b>🗂️ Su expediente de control interno: %s.</b> Junta este caso con su bitácora del Noticiero, lo que sigue, '
+            'lo que falta y sus dictámenes (%s). Se pone al día cada día y %s.</p>\n'
+            '        <a class="camino-ir" href="%s">Abrir el expediente ➔</a>\n'
+            '      </aside>') % (b['exn'], ', '.join(det),
+                                 'sigue abierto' if b['ab'] else 'está documentado', expedientes_inv.archivo(id_))
 
 
 def servicio(titulo):

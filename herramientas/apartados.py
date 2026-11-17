@@ -1596,6 +1596,7 @@ _AV_NAVEGADOR = [
     ('La plática con el Auditor', 'av-chat', 'Se guarda en la pestaña (sessionStorage) y se borra al cerrarla, o antes con «🗑️ Limpiar».'),
     ('«Lo que aún no sé»', 'auditavision.bot.sinRespuesta', 'Las preguntas que el Auditor no supo contestar, hasta 50. Solo las ves tú; si quieres, las copias y nos las mandas.'),
     ('Tu código de acceso', 'av-pase', 'Solo si canjeas un código de la versión de prueba: un número al azar que identifica a este navegador y hasta cuándo abre. En la base queda que ese número canjeó un código, cuándo, y los días en que abrió la plataforma (solo la fecha); nada que diga quién eres.'),
+    ('Tus dictámenes de cada expediente', 'av-dics', 'La pregunta, el folio y el enlace de los dictámenes que generas y tocan una investigación, hasta 60, para listarlos en su expediente. Los borras ahí mismo.'),
     ('Las columnas que sigues', 'av-sigo', 'Cuáles casos de Verificamos sigues y qué versión viste, para avisarte cuando cambian.'),
     ('Ágora cívica', 'auditavision_foro_debates y otras', 'Tus hilos, tus apoyos y el seudónimo que elijas. No se publican: viven solo en tu navegador.'),
     ('Preferencias de las herramientas', 'av-am-reloj, crReloj y otras', 'Cómo dejaste un reloj, una unidad o un filtro.'),

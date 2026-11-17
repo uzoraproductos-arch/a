@@ -2657,6 +2657,21 @@
 
   /* La página del dictamen: vuelve a contestar la pregunta del enlace (y las
      previas, para el contexto) con la misma base y arma el dictamen. */
+  /* El dictamen que toca una investigación queda anotado en su expediente de
+     control interno, solo en este navegador (av-dics): la pregunta, el folio y
+     el enlace que lo vuelve a armar. Nada se manda a un servidor. */
+  function guardaDic(q, r, f, fol) {
+    var xf = f.t === 'investigacion' && f.ex ? f : invToca(q, r);
+    if (!xf || !xf.ex) return;
+    try {
+      var l = JSON.parse(localStorage.getItem('av-dics') || '[]');
+      if (!Array.isArray(l)) l = [];
+      l = l.filter(function (x) { return x && !(x.ex === xf.ex && x.q === q); });
+      l.unshift({ ex: xf.ex, q: q, fo: fol || '', f: hoy(), m: MODO_DIC || '', u: location.search.slice(0, 3000) });
+      localStorage.setItem('av-dics', JSON.stringify(l.slice(0, 60)));
+    } catch (e) { /* sin almacenamiento, el dictamen sirve igual */ }
+  }
+
   function armaDictamen() {
     var ps = new URLSearchParams(location.search), q = (ps.get('q') || '').trim().slice(0, 600);
     var antes = ps.getAll('c').map(function (x) { return x.trim().slice(0, 600); }).filter(Boolean).slice(-4);
@@ -2684,6 +2699,7 @@
       Array.prototype.forEach.call(doc.querySelectorAll('.pa-folio'), function (el) { el.textContent = fol || 'no disponible en este navegador'; });
       doc.querySelector('.pa-huella code').textContent = hx ? hx.replace(/(.{16})/g, '$1 ').trim() : 'no disponible en este navegador';
       Array.prototype.forEach.call(doc.querySelectorAll('.dic-sello'), function (el) { el.innerHTML = sello(fol, 'DICTAMEN'); });
+      guardaDic(q, r, f, fol);
     });
     var im = document.getElementById('dicImprime'), en = document.getElementById('dicEnlace');
     im.hidden = en.hidden = false;

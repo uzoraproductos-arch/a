@@ -41,6 +41,31 @@
   var imp = document.getElementById('xiImprime');
   if (imp) imp.addEventListener('click', function () { window.print(); });
 
+  /* «Tus dictámenes de este caso»: los que generaste en el chat y tocan este
+     expediente. Viven solo en este navegador (av-dics, lo escribe asistente.js). */
+  var mios = document.getElementById('xiMios');
+  if (mios) {
+    var lee = function () {
+      try { var l = JSON.parse(localStorage.getItem('av-dics') || '[]'); return Array.isArray(l) ? l : []; } catch (e) { return []; }
+    };
+    var pintaMios = function () {
+      var ex = mios.getAttribute('data-ex'), l = lee().filter(function (x) { return x && x.ex === ex && x.q && /^\?/.test(x.u || ''); });
+      mios.hidden = !l.length;
+      if (!l.length) { mios.innerHTML = ''; return; }
+      mios.innerHTML = '<p><b>🧾 Tus dictámenes de este caso</b> · ' + l.length + '</p>' +
+        '<p class="xi-chico">Los que generaste en el chat y tocan este expediente. Se guardan solo en este navegador: nadie más los ve.</p>' +
+        '<ol class="xi-dics-lista">' + l.map(function (x) {
+          return '<li><a href="' + esc(mios.getAttribute('data-dic') + x.u) + '" target="_blank" rel="noopener"><span class="xi-dic-de">' +
+            esc((x.fo ? x.fo + ' · ' : '') + (x.f || '')) + '</span>' + esc(x.q) + ' <span aria-hidden="true">➔</span></a></li>';
+        }).join('') + '</ol><button type="button" class="xi-boton xi-mios-borra" id="xiMiosBorra">🗑️ Borrar mi lista de este caso</button>';
+      document.getElementById('xiMiosBorra').addEventListener('click', function () {
+        try { localStorage.setItem('av-dics', JSON.stringify(lee().filter(function (x) { return x && x.ex !== ex; }))); } catch (e) { /* nada */ }
+        pintaMios();
+      });
+    };
+    pintaMios();
+  }
+
   /* El radar de un expediente. */
   var radar = document.getElementById('xiRadar');
   if (!radar) return;

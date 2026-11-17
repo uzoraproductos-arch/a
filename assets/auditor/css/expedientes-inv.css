@@ -110,3 +110,5 @@
   .site-top-nav, .apartado-migas, .apartado-pie, .xi-puertas, .xi-radar, .xi-aldia, .xi-imprime, .bib-nav, .apartado-auditor, #radar { display: none !important; }
   .xi-bloque, .xi-sello, .xi-caratula { break-inside: avoid; }
 }
+.xi-mios { margin-top: 4px; }
+.xi-mios-borra { min-height: 44px; }

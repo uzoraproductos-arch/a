@@ -91,6 +91,24 @@ def _plano(s):
     return ' ' + re.sub(r'[^a-z0-9ñ]+', ' ', s).strip() + ' '
 
 
+# Notas que pertenecen a un caso aunque su título no lo nombre: lo dice la
+# propia nota (su «lo que sigue» remite al caso). Se validan en todos().
+VINCULOS = {
+    'ine-oic-auditorias-consejerias': ['ine-contratos'],
+}
+
+
+def _cita(id_, c):
+    """La nota toca el caso si lo nombra (título, temas o su clave), si ella
+    misma cita la investigación con su liga, o si está en VINCULOS. El cuerpo
+    no se lee por palabras: mencionar de paso no es pertenecer al caso."""
+    if id_ in VINCULOS.get(c.get('id'), ()):
+        return True
+    if _toca(id_, ' '.join([c.get('titulo', ''), ' '.join(c.get('temas') or []), c.get('id', '')])):
+        return True
+    return ('"%s' % auditorias.archivo(id_)) in json.dumps(c, ensure_ascii=False)
+
+
 def _toca(id_, texto):
     p = _plano(texto)
     return any(_plano(k) in p for k in auditorias.TEMA_BOT[id_])
@@ -146,7 +164,7 @@ def expediente(id_):
     tit = re.sub('<[^>]+>', '', a[5])
     bit, sigue = [], []
     for c in _columnas():
-        if not _toca(id_, ' '.join([c.get('titulo', ''), ' '.join(c.get('temas') or [])])):
+        if not _cita(id_, c):
             continue
         f = c.get('actualizado') or c.get('fecha') or ''
         bit.append({'f': f, 'ico': c.get('icono') or '📰', 'que': c.get('seccion', 'Noticiero'),
@@ -213,6 +231,7 @@ def _sello(e):
             '          <p>Cada pregunta del caso tiene su <b>dictamen cívico</b>, con folio y huella. Juntos forman el expediente:</p>\n'
             '          <ol class="xi-dics-lista">%s</ol>\n'
             '        </div>\n'
+            '        <div class="xi-dics xi-mios" id="xiMios" data-ex="%s" data-dic="%s" hidden></div>\n'
             '        <div class="xi-sello">\n'
             '          <div>\n'
             '            <b>Dictamen integrado del expediente</b>\n'
@@ -222,7 +241,7 @@ def _sello(e):
             '<b>No es un documento oficial ni un peritaje con validez ante una autoridad</b>: es el respaldo documental de una investigación, para que cualquiera revise de dónde sale cada dato.</p>\n'
             '          </div>\n'
             '          <button type="button" class="xi-boton xi-imprime" id="xiImprime">🖨️ Imprimir o guardar PDF</button>\n'
-            '        </div>') % (dics, e['num'], hx[:8].upper(), len(_dictamenes(e)), len(e['d']['cuanto']), len(e['d']['docs']),
+            '        </div>') % (dics, archivo(e['id']), DICTAMEN, e['num'], hx[:8].upper(), len(_dictamenes(e)), len(e['d']['cuanto']), len(e['d']['docs']),
                                  ' '.join(hx[i:i + 16] for i in range(0, 64, 16)))
 
 
@@ -237,6 +256,11 @@ def todos():
             e['num'] = 'EXP-%03d' % n
             e['hx'] = _huella(e)
         _valida_solicitados()
+        cols = {c.get('id') for c in _columnas()}
+        casos = {e['id'] for e in _TODOS}
+        for c, ids in VINCULOS.items():
+            if c not in cols or not set(ids) <= casos:
+                raise SystemExit('expedientes_inv: VINCULOS nombra una nota o un caso que no existe: %s' % c)
     return _TODOS
 
 
