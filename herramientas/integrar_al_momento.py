@@ -1607,16 +1607,17 @@ def pemex_3t_2026():
                          'atribuible a la participación controladora fue exactamente de 10,792.1 millones de pesos (frente a 61,246.6 millones). '
                          'Ambas versiones de la prensa son oficiales.'),
              'fuente': 'Pemex, Información Financiera 3T 2026 (XBRL, BMV, sha256 74dcbef3cfbb…)', 'url': BMV},
-            {'dice': '(605 millones de dólares)', 'res': 'consta',
-             'explica': ('El reporte oficial a la Bolsa Mexicana de Valores señala un tipo de cambio de cierre de $17.8413 por dólar al '
-                         '30 de septiembre de 2026. Con ese tipo de cambio oficial, los 10,795.0 millones de pérdida consolidada equivalen '
-                         'exactamente a 605.1 millones de dólares (y los 10,792.1 millones de la controladora a 604.9 millones de dólares).'),
+            {'dice': '(605 millones de dólares)', 'res': 'matiz',
+             'explica': ('El reporte de Pemex a la Bolsa Mexicana de Valores trae un tipo de cambio de cierre de $17.8413 por dólar al '
+                         '30 de septiembre de 2026. Con él, los 605 millones de dólares salen de la pérdida consolidada total (10,795.0 '
+                         'millones de pesos ÷ 17.8413 = 605.1), no de los 10,792 millones que la misma nota cita, que son la pérdida de la '
+                         'controladora y equivalen a 604.9 millones de dólares. La diferencia es menor, pero la nota mezcla dos conceptos.'),
              'fuente': 'Pemex, Información Financiera 3T 2026 (XBRL, BMV, sha256 74dcbef3cfbb…)', 'url': BMV},
-            {'dice': 'Un 82.4 % menos que los 61 mil 247 millones del mismo periodo del año pasado', 'res': 'matiz',
-             'explica': ('El reporte oficial en la Bolsa confirma que la pérdida consolidada pasó de 61,242.4 a 10,795.0 millones de pesos, '
-                         'una reducción exacta de 82.37 % (82.4 %). En la controladora pasó de 61,246.6 a 10,792.1 millones (82.38 % menos). '
-                         'El matiz es que la cifra de partida del año anterior en el reporte oficial es 61,242 o 61,247 según el redondeo de los '
-                         'diferentes rubros contables reportados.'),
+            {'dice': 'Un 82.4 % menos que los 61 mil 247 millones del mismo periodo del año pasado', 'res': 'consta',
+             'explica': ('En el reporte a la Bolsa, la pérdida atribuible a la controladora pasó de 61,246.6 millones en el 3T 2025 '
+                         '(los «61 mil 247» de la nota) a 10,792.1 millones en el 3T 2026: 82.4 % menos. La pérdida consolidada total '
+                         'pasó de 61,242.4 a 10,795.0 millones, también 82.4 % menos. Son dos conceptos distintos del mismo estado de '
+                         'resultados, no un redondeo; la nota usa los dos de la controladora.'),
              'fuente': 'Pemex, Información Financiera 3T 2026 (XBRL, BMV, sha256 74dcbef3cfbb…)', 'url': BMV},
             {'dice': 'Se debió a un incremento en ventas y disminución en deterioro de activos', 'res': 'consta',
              'explica': ('El Boletín nacional 86 de Pemex confirma que en el 3T 2026 los ingresos totales ascendieron a 487 mil millones de pesos '
