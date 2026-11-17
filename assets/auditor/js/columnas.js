@@ -57,7 +57,7 @@
   ],
   "fecha": "01-11-2026",
   "titulo": "¿Huawei «digitaliza» al gobierno con acceso total al IMSS, al SAT y a Aduanas? En los contratos federales de 2025 y 2026, Huawei no aparece como proveedor",
-  "balazo": "Circula que Morena «recurre a Huawei» y que sus ejecutivos «tendrían total acceso» a los sistemas más sensibles del gobierno, según audios que publicó Código Magenta. Los audios son de un ejecutivo comercial que presume clientes: no son un contrato. En los 215,121 contratos federales de ComprasMX de 2025 y 2026, ningún proveedor se llama Huawei; lo que sí hay son dos compras de equipo de esa marca a otras empresas, las dos del Hospital Juárez de México. Lo de años anteriores está pendiente.",
+  "balazo": "Circula que Morena «recurre a Huawei» y que sus ejecutivos «tendrían total acceso» a los sistemas más sensibles del gobierno, según audios que publicó Código Magenta. Los audios son de un ejecutivo comercial que presume clientes: no son un contrato. En los 217,127 contratos federales de ComprasMX de 2025 y 2026, ningún proveedor se llama Huawei; lo que sí hay son dos compras de equipo de esa marca a otras empresas, las dos del Hospital Juárez de México. Lo de años anteriores está pendiente.",
   "nota": {
    "medio": "Código Magenta",
    "titulo": "Operación Huawei: Grabaciones secretas",
@@ -72,10 +72,10 @@
   },
   "cuerpo": [
    "De dónde sale. Código Magenta publicó una serie, «Operación Huawei», con grabaciones que atribuye a un ejecutivo comercial de Huawei en México. Según las notas que la retoman, en ellas el ejecutivo dice que su empresa es el mayor proveedor tecnológico del IMSS, del SAT, de la Agencia Nacional de Aduanas y de la Conagua, que construyó centros de datos para el IMSS y que su gente ayudó a redactar un contrato marco de servicios tecnológicos. Es lo que dice un vendedor de sus clientes: no es un contrato, y no conocemos una autenticación de los audios. La serie no abre desde la plataforma.",
-   "Lo que dicen los contratos. Cruzamos la base de ComprasMX que tiene la plataforma: los 215,121 contratos que las dependencias federales reportaron en 2025 y 2026 (descarga del 26-10-2026). Ningún proveedor se llama Huawei. Lo que sí aparece son dos compras de equipo de la marca a otras empresas, las dos del Hospital Juárez de México: $36,108,967.10 por «Servicio de infraestructura tecnológica de la marca Huawei 2026 - 2027» (IKUSI MEXICO SA DE CV, licitación pública) y $5,051,932.24 por «Licenciamiento, póliza de servicio y soporte técnico para equipos Huawei» (GLOBAL TELECOMUNICATION GROUP SA DE CV, invitación a cuando menos tres personas). En total, $41,160,899.34 antes de impuestos (derivado). Tener contratos no es una irregularidad.",
+   "Lo que dicen los contratos. Cruzamos la base de ComprasMX que tiene la plataforma: los 217,127 contratos que las dependencias federales reportaron en 2025 y 2026 (descarga del 2026-11-04). Ningún proveedor se llama Huawei. Lo que sí aparece son dos compras de equipo de la marca a otras empresas, las dos del Hospital Juárez de México: $36,108,967.10 por «Servicio de infraestructura tecnológica de la marca Huawei 2026 - 2027» (IKUSI MEXICO SA DE CV, licitación pública) y $5,051,932.24 por «Licenciamiento, póliza de servicio y soporte técnico para equipos Huawei» (GLOBAL TELECOMUNICATION GROUP SA DE CV, invitación a cuando menos tres personas). En total, $41,160,899.34 antes de impuestos (derivado). Tener contratos no es una irregularidad.",
    "El primer punto ciego: el condicional. «Tendrían total acceso», «el control que tendría», «sería peligroso»: la publicación no afirma un hecho, lo supone. Y «total acceso» no es lo que se cita de los audios, que hablan de ser proveedor. Vender equipo o construir un centro de datos no es lo mismo que controlar un sistema: eso depende de quién lo opera y de qué dice el contrato.",
    "El segundo: «Morena recurre». Un partido no contrata servicios del gobierno; contratan las dependencias, y cada contrato queda en ComprasMX con su número. Los audios hablan de dependencias y de funcionarios, no de una decisión del partido.",
-   "El tercero: lo que todavía no vemos. Nuestra búsqueda de la marca en los títulos solo cubre los cinco contratos más grandes de cada proveedor que guarda la plataforma, y no tenemos el histórico de CompraNet de 2019 a 2024 ni el contrato marco de nube de 2024: ahí podría estar lo que dice el ejecutivo. Una compra por medio de otra empresa tampoco lleva el nombre de Huawei como proveedor. Por eso lo de años anteriores queda pendiente, y una acusación no es una condena."
+   "El tercero: lo que dice el Contrato Marco de Nube Pública de 2024 y lo que todavía no vemos. En el Contrato Marco para la Prestación de Servicios de Nube Pública firmado el 18 de abril de 2024 por la Secretaría de la Función Pública y la Coordinación de Estrategia Digital Nacional (pág. 36, sha256 ad5a29d1044e…), los 11 posibles proveedores firmantes son Amazon Web Services, Axtel, B-Drive IT, Bufete de Soluciones Integrales, E-Ngenium Infraestructura, Google LLC, Insaite, Intellilabs, Hola Innovación, Sitinformación y Triara.com: Huawei no figura con su razón social entre los 11 firmantes iniciales. Sin embargo, nuestra búsqueda de la marca en los títulos solo cubre los cinco contratos más grandes de cada proveedor que guarda la plataforma, y no tenemos el histórico de CompraNet de 2019 a 2024 ni los convenios de adhesión posteriores: ahí podría estar lo que dice el ejecutivo, o una compra por medio de un integrador. Por eso lo de años anteriores queda pendiente, y una acusación no es una condena."
   ],
   "ejemplo": {
    "tit": "La cuenta, con los contratos que sí aparecen",
@@ -103,7 +103,7 @@
    {
     "dice": "Morena recurre a Huawei para digitalizar al gobierno",
     "res": "no consta",
-    "explica": "Ningún documento oficial muestra un contrato del gobierno, y menos de un partido, con Huawei para «digitalizar al gobierno». En los 215,121 contratos federales de ComprasMX de 2025 y 2026 no hay ningún proveedor llamado Huawei.",
+    "explica": "Ningún documento oficial muestra un contrato del gobierno, y menos de un partido, con Huawei para «digitalizar al gobierno». En los 217,127 contratos federales de ComprasMX de 2025 y 2026 no hay ningún proveedor llamado Huawei.",
     "fuente": "ComprasMX, Datos Abiertos 2025 y 2026 (Secretaría Anticorrupción y Buen Gobierno), en la base de la plataforma",
     "url": "https://comprasmx.buengobierno.gob.mx/datos-abiertos"
    },
@@ -113,7 +113,7 @@
     "explica": "Lo dice en condicional, y se apoya en audios que el medio atribuye a un ejecutivo comercial de Huawei: lo que dice de sus clientes no es un documento. No conocemos una autenticación de los audios, y eso no los vuelve falsos: falta ver los contratos de esos años.",
     "fuente": "Código Magenta, «Operación Huawei: Grabaciones secretas»",
     "url": "https://codigomagenta.com.mx/operacion-huawei-grabaciones-secretas/",
-    "quien": "Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026, no el histórico de CompraNet de 2019 a 2024 ni los contratos marco; esos portales no abren desde nuestra sesión.",
+    "quien": "Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026 y el Contrato Marco de Servicios de Nube Pública del 18-04-2024, pero no el histórico de CompraNet de 2019 a 2024 ni los convenios de adhesión posteriores.",
     "donde": "https://comprasmx.buengobierno.gob.mx/datos-abiertos"
    },
    {
@@ -122,8 +122,8 @@
     "explica": "En 2025 y 2026 ninguna de esas dependencias le contrató directamente a Huawei. Lo que el ejecutivo dice de años anteriores, o de compras por medio de otras empresas, se vería en el histórico de CompraNet y en los contratos marco, que no integramos todavía. En 2025 y 2026 solo el Hospital Juárez de México compró equipo de la marca, a otras empresas.",
     "fuente": "ComprasMX, Datos Abiertos 2025 y 2026, en la base de la plataforma",
     "url": "contratos-publicos.html",
-    "quien": "Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026, no el histórico de CompraNet de 2019 a 2024 ni los contratos marco; esos portales no abren desde nuestra sesión.",
-    "donde": "https://upcp-compranet.hacienda.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf"
+    "quien": "Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026 y el Contrato Marco de Servicios de Nube Pública del 18-04-2024, pero no el histórico de CompraNet de 2019 a 2024 ni los convenios de adhesión posteriores.",
+    "donde": "https://upcp-compranet.buengobierno.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf"
    },
    {
     "dice": "Estados Unidos ya calificó a Huawei como una amenaza para la seguridad nacional",
@@ -226,7 +226,7 @@
    },
    {
     "que": "El Anexo 4 del contrato marco de nube pública de 2024: qué proveedores quedaron acreditados",
-    "url": "https://upcp-compranet.hacienda.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf"
+    "url": "https://upcp-compranet.buengobierno.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf"
    },
    {
     "que": "La respuesta de la Agencia de Transformación Digital y de las dependencias nombradas",
@@ -237,6 +237,10 @@
    {
     "nombre": "ComprasMX, Datos Abiertos: Datos Relevantes de los Contratos 2025 y 2026 (descarga del 26-10-2026), en la base de la plataforma",
     "url": "https://comprasmx.buengobierno.gob.mx/datos-abiertos"
+   },
+   {
+    "nombre": "Secretaría de la Función Pública y Coordinación de Estrategia Digital Nacional, Contrato Marco para la Prestación de Servicios de Nube Pública (18-04-2024, pág. 36, sha256 ad5a29d1044e…)",
+    "url": "https://upcp-compranet.buengobierno.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf"
    },
    {
     "nombre": "Congreso de EE. UU., Public Law 115-232 (John S. McCain National Defense Authorization Act for Fiscal Year 2019), sec. 889(f)(3)(A) (13-08-2018)",

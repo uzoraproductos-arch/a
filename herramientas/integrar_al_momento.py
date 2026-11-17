@@ -1974,10 +1974,10 @@ CM_AMLO = 'https://codigomagenta.com.mx/presume-huawei-favoritismo-de-amlo/'
 FCC_LISTA = 'https://www.fcc.gov/supplychain/coveredlist'
 NDAA_2019 = 'https://www.govinfo.gov/content/pkg/PLAW-115publ232/html/PLAW-115publ232.htm'
 CMX_DA = 'https://comprasmx.buengobierno.gob.mx/datos-abiertos'
-COMPRANET_CM = 'https://upcp-compranet.hacienda.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf'
+COMPRANET_CM = 'https://upcp-compranet.buengobierno.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf'
 CONTRATOS_PAG = 'contratos-publicos.html'
-FALTA_CMX = ('Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026, no el histórico de CompraNet de 2019 a 2024 ni '
-             'los contratos marco; esos portales no abren desde nuestra sesión.')
+FALTA_CMX = ('Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026 y el Contrato Marco de Servicios de Nube Pública '
+             'del 18-04-2024, pero no el histórico de CompraNet de 2019 a 2024 ni los convenios de adhesión posteriores.')
 
 
 def _huawei_cmx():
@@ -2056,10 +2056,14 @@ def huawei_gobierno():
              'o construir un centro de datos no es lo mismo que controlar un sistema: eso depende de quién lo opera y de qué dice el contrato.'),
             ('El segundo: «Morena recurre». Un partido no contrata servicios del gobierno; contratan las dependencias, y cada contrato '
              'queda en ComprasMX con su número. Los audios hablan de dependencias y de funcionarios, no de una decisión del partido.'),
-            ('El tercero: lo que todavía no vemos. Nuestra búsqueda de la marca en los títulos solo cubre los cinco contratos más grandes '
-             'de cada proveedor que guarda la plataforma, y no tenemos el histórico de CompraNet de 2019 a 2024 ni el contrato marco de nube '
-             'de 2024: ahí podría estar lo que dice el ejecutivo. Una compra por medio de otra empresa tampoco lleva el nombre de Huawei '
-             'como proveedor. Por eso lo de años anteriores queda pendiente, y una acusación no es una condena.'),
+            ('El tercero: lo que dice el Contrato Marco de Nube Pública de 2024 y lo que todavía no vemos. En el Contrato Marco para la '
+             'Prestación de Servicios de Nube Pública firmado el 18 de abril de 2024 por la Secretaría de la Función Pública y la Coordinación '
+             'de Estrategia Digital Nacional (pág. 36, sha256 ad5a29d1044e…), los 11 posibles proveedores firmantes son Amazon Web Services, '
+             'Axtel, B-Drive IT, Bufete de Soluciones Integrales, E-Ngenium Infraestructura, Google LLC, Insaite, Intellilabs, Hola Innovación, '
+             'Sitinformación y Triara.com: Huawei no figura con su razón social entre los 11 firmantes iniciales. Sin embargo, nuestra búsqueda '
+             'de la marca en los títulos solo cubre los cinco contratos más grandes de cada proveedor que guarda la plataforma, y no tenemos el '
+             'histórico de CompraNet de 2019 a 2024 ni los convenios de adhesión posteriores: ahí podría estar lo que dice el ejecutivo, o una '
+             'compra por medio de un integrador. Por eso lo de años anteriores queda pendiente, y una acusación no es una condena.'),
         ],
         'ejemplo': {
             'tit': 'La cuenta, con los contratos que sí aparecen',
@@ -2130,6 +2134,8 @@ def huawei_gobierno():
         'fuentes': [
             {'nombre': 'ComprasMX, Datos Abiertos: Datos Relevantes de los Contratos 2025 y 2026 (descarga del 26-10-2026), en la base de la plataforma',
              'url': CMX_DA},
+            {'nombre': 'Secretaría de la Función Pública y Coordinación de Estrategia Digital Nacional, Contrato Marco para la Prestación de Servicios de Nube Pública (18-04-2024, pág. 36, sha256 ad5a29d1044e…)',
+             'url': COMPRANET_CM},
             {'nombre': 'Congreso de EE. UU., Public Law 115-232 (John S. McCain National Defense Authorization Act for Fiscal Year 2019), sec. 889(f)(3)(A) (13-08-2018)',
              'url': NDAA_2019},
             {'nombre': 'Punto de partida: Código Magenta, serie «Operación Huawei»', 'url': CM_GRAB},

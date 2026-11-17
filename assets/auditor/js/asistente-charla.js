@@ -467,8 +467,11 @@
           (L.de > 1 ? ' Lugar <b>' + L.l + ' de ' + L.de + '</b> en ' + esc(m.en) + '.' : '') + '</p>';
         fu.push(munFu('egr'), { que: 'De cada $100 y lugar', e: 'derivado', op: 'inversión pública ÷ egresos totales × 100; lugar entre los municipios del estado con cifra' });
       } else if (k === 'deu' && mv(m, 'deu') != null) {
-        /* La deuda en su cuenta (anclar_deuda_municipios.py): lo que pagó y pidió en 2024. El saldo es de Hacienda y sigue pendiente. */
-        var dd = MDEU.mun[m.cve], md = function (x) { return grande(x, 1); };
+        /* La deuda en su cuenta (anclar_deuda_municipios.py): lo que pagó y pidió en 2024 (INEGI) y su saldo al cierre de 2025 en el Sistema de Alertas (SHCP). */
+        var dd = MDEU.mun[m.cve], sdaM = MDEU.sda && MDEU.sda.m && MDEU.sda.m[m.cve], md = function (x) { return grande(x, 1); };
+        var txtSda = !sdaM ? 'En el Sistema de Alertas de Hacienda (Cuenta Pública 2025), <b>' + nom + '</b> no figura con financiamientos inscritos en el Registro Público Único (no se mide, LDF art. 43).' :
+          (sdaM[0] > 0 ? 'Al cierre de 2025, en el Sistema de Alertas de Hacienda (Cuenta Pública 2025), <b>' + nom + '</b> registra un saldo de deuda y obligaciones de <b>$' + n(sdaM[1], 1) + ' millones</b> (deuda directa: $' + n(sdaM[2], 1) + ' millones), con semáforo en <b>' + ['', 'endeudamiento sostenible (verde)', 'endeudamiento en observación (amarillo)', 'endeudamiento elevado (rojo)'][sdaM[0]] + '</b> (' + n(sdaM[3], 1) + ' % de sus ingresos de libre disposición).' :
+          'En el Sistema de Alertas de Hacienda (Cuenta Pública 2025), <b>' + nom + '</b> tiene deuda inscrita en el Registro Público Único, pero no entregó información suficiente para su evaluación ' + chip('pendiente', 'deuda-municipios') + '.');
         L = munLugar(m, 'deu');
         h = (mv(m, 'deu') === 0 ?
           '<p>En su cuenta de 2024 al INEGI, <b>' + nom + '</b> reportó <b>$0</b> en pagos de créditos: ni capital ni intereses.</p>' :
@@ -476,11 +479,13 @@
             (L.de > 1 ? ' Lugar <b>' + L.l + ' de ' + L.de + '</b> en ' + esc(m.en) + '.' : '') + '</p>') +
           '<p>' + (dd[5] ? 'Ese año pidió prestados <b>' + md(dd[5]) + '</b>.' : 'Ese año no recibió préstamos.') +
           (dd[4] ? ' Además pagó <b>' + md(dd[4]) + '</b> de adeudos de años anteriores (ADEFAS): lo que quedó a deber, sobre todo a proveedores; no es un crédito.' : '') + '</p>' +
-          '<p class="pa-ojo">Ojo: es lo que pagó y pidió en el año, no lo que debe. Su saldo lo publica Hacienda en el Sistema de Alertas y la plataforma todavía no lo integra ' + chip('pendiente', 'deuda-municipios') + '. ' +
-          'Y el renglón «Financiamiento» del INEGI no es deuda nueva: casi todo es «Déficit», con que se cuadra el ingreso con el egreso.</p>';
-        fu = [{ que: 'Su capítulo de deuda pública y sus empréstitos', e: 'oficial', fu: MFU },
+          '<p>' + txtSda + '</p>' +
+          '<p class="pa-ojo">Ojo: lo del INEGI (2024) es lo que pagó y pidió en el año; lo del Sistema de Alertas de Hacienda (cierre de 2025) mide el saldo inscrito en el Registro Público Único. ' +
+          'El renglón «Financiamiento» del INEGI no es deuda nueva: casi todo es «Déficit», con que se cuadra el ingreso con el egreso.</p>';
+        fu = [{ que: 'Su capítulo de deuda pública y sus empréstitos (2024)', e: 'oficial', fu: MFU },
           { que: 'Lo que pagó por sus créditos y su lugar', e: 'derivado', op: 'amortización + intereses + comisiones y gastos de la deuda; lugar entre los municipios del estado con cifra' },
-          { que: 'Lo que debe al cierre', e: 'pendiente', p: 'deuda-municipios' }];
+          sdaM && sdaM[0] === 0 ? { que: 'Saldo al cierre de 2025 en el Sistema de Alertas (no entregó información)', e: 'pendiente', p: 'deuda-municipios' } :
+            { que: 'Saldo y semáforo al cierre de 2025 en el Sistema de Alertas', e: 'oficial', fu: { tx: (MDEU.sda && MDEU.sda.fuente) || 'SHCP, Sistema de Alertas de los Municipios, Cuenta Pública 2025', url: (MDEU.sda && MDEU.sda.pagina) || 'https://www.disciplinafinanciera.hacienda.gob.mx/es/DISCIPLINA_FINANCIERA/Municipios_2025' } }];
       } else if (k === 'dep') {
         h = '<p>De cada $100 que ingresó <b>' + nom + '</b> en 2024, <b>$' + n(mv(m, 'dep'), 1) + '</b> llegaron de la Federación (participaciones y aportaciones). Lo que cobró por su cuenta fue $' + n(mv(m, 'propios') / ing * 100, 1) + ' de cada $100.</p>';
         fu.push(munFu('propios'));
@@ -499,7 +504,7 @@
       var h = '<p>' + (dir === 'min' ? 'Los municipios con menos' : 'Los municipios con más') + ' ' + esc(RKM[k]) + (e ? ' en <b>' + esc(e.n) + '</b>' : ' del país') + ':</p><ol class="pa-lista">' +
         top.map(function (x) { return '<li><b>' + esc(x.n) + '</b>' + (e ? '' : ', ' + esc(x.en)) + ': ' + (u ? n(mv(x, k), 1) + ' %' : grande(mv(x, k), 1)) + '</li>'; }).join('') + '</ol>' +
         '<p class="pa-chico">Entre ' + n(l.length) + ' municipios con cifras de 2024.</p>' +
-        (k === 'deu' ? '<p class="pa-ojo">Ojo: es lo que pagaron por sus créditos en el año, no lo que deben. El saldo de cada municipio lo publica Hacienda y sigue ' + chip('pendiente', 'deuda-municipios') + '.</p>' : '');
+        (k === 'deu' ? '<p class="pa-ojo">Ojo: este orden es por lo que pagaron por sus créditos en 2024 (INEGI). El saldo al cierre de 2025 en el Sistema de Alertas de Hacienda suma $36,279.2 millones en 629 municipios medidos (41 con deuda inscrita no entregaron su información a Hacienda ' + chip('pendiente', 'deuda-municipios') + ').</p>' : '');
       return { html: h, fu: [munFu(k), { que: 'Orden', e: 'derivado', op: 'ordenamos los municipios con cifra' }], tit: 'Municipios: ' + MUN_NOM[k],
         ci: top.map(function (x) { return { v: u ? n(mv(x, k), 1) + ' %' : grande(mv(x, k), 1), etq: x.n + ', ' + x.en, e: k === 'dep' ? 'derivado' : 'oficial' }; }) };
     }

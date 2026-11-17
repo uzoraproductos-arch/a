@@ -344,7 +344,7 @@
         }).join('') + '</tbody></table></div>' +
         '<p class="pm-pie">' + esc(F.fuente) + ' Cifras en millones de pesos. La <b>dependencia</b> es cuánto de cada $100 que ingresó el municipio vino de participaciones y aportaciones, no de lo que cobró por su cuenta ' + chip('derivado') + '.' +
           (IV ? ' La <b>inversión pública</b> es su capítulo de egresos de obra pública y proyectos productivos ' + chip('oficial') + '; quien rindió su cuenta sin ese capítulo aparece en $0.' : '') +
-          (DV ? ' <b>Pagó de deuda</b> es el capital, los intereses y las comisiones de sus créditos en ' + F.anio + ' ' + chip('derivado') + ': lo que pagó, no lo que debe; su saldo lo publica Hacienda y sigue ' + chip('pendiente', 'deuda-municipios') + '.' : '') + '</p>' +
+          (DV ? ' <b>Pagó de deuda</b> es el capital, los intereses y las comisiones de sus créditos en ' + F.anio + ' ' + chip('derivado') + ': lo que pagó en su cuenta al INEGI (el saldo al cierre de 2025 y el semáforo del Sistema de Alertas de Hacienda están en el portal de cada estado en el Planisferio; solo 41 municipios con deuda inscrita no entregaron su información a Hacienda ' + chip('pendiente', 'deuda-municipios') + ').' : '') + '</p>' +
         '<p class="tt-circ-ir"><a href="' + D.ent + '?e=' + encodeURIComponent(a) + '#circuito">🗺️ El circuito del estado ➔</a><a href="' + D.mapa + '?e=' + encodeURIComponent(a) + '">📍 Verlo en el mapa ➔</a></p>';
       cont.innerHTML = h;
     }

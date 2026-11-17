@@ -20,13 +20,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261117g">
-  <script src="assets/auditor/js/iconos.js?v=20261117g"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261117g"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261117g" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261117g">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261117g">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261117g">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261117h">
+  <script src="assets/auditor/js/iconos.js?v=20261117h"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261117h"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261117h" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261117h">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261117h">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261117h">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -212,9 +212,9 @@
         <h2 class="sr-only" id="resumen-tit">Lo que falta, en números</h2>
         <div class="apartado-bloque">
         <div class="pe-resumen">
-          <div><b>122</b><span>pendientes registrados</span></div>
+          <div><b>121</b><span>pendientes registrados</span></div>
           <div class="pe-r-d"><b>98</b><span>🏛️ los debe publicar una dependencia</span></div>
-          <div class="pe-r-p"><b>21</b><span>🧰 los debemos integrar nosotros</span></div>
+          <div class="pe-r-p"><b>20</b><span>🧰 los debemos integrar nosotros</span></div>
           <div class="pe-r-h"><b>3</b><span>📜 son históricos, sin quien responda hoy</span></div>
         </div>
         <p class="pe-regla">Un dato pendiente no se estima ni se rellena: se dice que falta, por qué falta y dónde debería estar. Si la falta es de una dependencia obligada, la nombramos. Si el documento existe y aún no lo integramos, lo decimos: la falta es nuestra. ¿Tienes el documento? <a href="comunidad-error.html" data-puerta="error">Cuéntanos y lo integramos</a>.</p>
@@ -976,11 +976,11 @@
         </div>
         <div class="apartado-bloque">
         <div class="pe-lista">
-          <article class="pe-item pe-plataforma" id="deuda-municipios">
-            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> El saldo de la deuda de cada municipio (lo que debe) en el Sistema de Alertas, municipio por municipio</h3>
-            <p class="pe-porque"><b>Por qué:</b> Hacienda mide también a los municipios con deuda inscrita (LDF, art. 43). Lo que cada municipio pagó por sus créditos y pidió prestado en 2024 ya está integrado, con su cuenta pública al INEGI (anclar_deuda_municipios.py); lo que debe al cierre, no: el archivo del Sistema de Alertas no se pudo descargar en el cotejo del 03-11-2026 (el portal de disciplina financiera no respondió) y no se escribe una cifra sin su documento.</p>
-            <p class="pe-quien"><b>🧰 Responsable:</b> Falta de la plataforma: el documento existe y aún no lo integramos</p>
-            <p class="pe-donde"><a href="https://www.disciplinafinanciera.hacienda.gob.mx/es/DISCIPLINA_FINANCIERA/Entidades_Federativas_2025" target="_blank" rel="noopener">🔗 Dónde debería estar: Sistema de Alertas (SHCP) ↗</a></p>
+          <article class="pe-item pe-dependencia" id="deuda-municipios">
+            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> El saldo de la deuda y los indicadores de los 41 municipios con deuda inscrita que no entregaron información al Sistema de Alertas (Cuenta Pública 2025)</h3>
+            <p class="pe-porque"><b>Por qué:</b> El Sistema de Alertas de Hacienda (Cuenta Pública 2025, integrado con su huella SHA-256 en municipios-deuda.js) evalúa a los 670 municipios con financiamientos inscritos en el Registro Público Único: 629 quedaron medidos ($36,279.2 mdp de deuda y obligaciones; 609 en sostenible, 18 en observación y 2 en elevado), pero 41 municipios no entregaron información (31) o la entregaron incompleta (10), por lo que Hacienda no puede publicar su saldo ni su semáforo (LDF, arts. 43 y 57).</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Los 41 ayuntamientos con deuda inscrita que no entregaron información suficiente a la SHCP para la evaluación de la Cuenta Pública 2025</p>
+            <p class="pe-donde"><a href="https://www.disciplinafinanciera.hacienda.gob.mx/es/DISCIPLINA_FINANCIERA/Municipios_2025" target="_blank" rel="noopener">🔗 Dónde debería estar: Sistema de Alertas de los Municipios (SHCP) ↗</a></p>
             <p class="pe-aparece">Aparece en: <a href="planisferio.html">Planisferio · cada portal, «Su deuda» y el mapa de sus municipios</a> · <a class="pe-ancla" href="#deuda-municipios" aria-label="Enlace a este pendiente">#</a></p>
           </article>
         </div>
@@ -1033,13 +1033,6 @@
             <p class="pe-donde"><a href="https://www.mota-engil.com/" target="_blank" rel="noopener">🔗 Dónde debería estar: Mota-Engil: informes anuales de la empresa ↗</a></p>
             <p class="pe-aparece">Aparece en: <a href="contratos-publicos.html#grupo-prodi">Contratos públicos · Grupos y filiales: Grupo PRODI</a> · <a class="pe-ancla" href="#grupo-prodi-vinculo" aria-label="Enlace a este pendiente">#</a></p>
           </article>
-          <article class="pe-item pe-dependencia" id="grupo-prodi-tren-maya">
-            <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Tren Maya, Tramo 1 (Palenque-Escárcega): el contrato del consorcio que encabeza Mota-Engil México y lo que observó la ASF</h3>
-            <p class="pe-porque"><b>Por qué:</b> Es un contrato de 2020, anterior a los expedientes de ComprasMX que la plataforma tiene (2025 y 2026). La ASF lo auditó; falta integrar su informe con el número de contrato y su importe.</p>
-            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Auditavisión: falta de la plataforma, que aún no coteja ese documento</p>
-            <p class="pe-donde"><a href="https://informe.asf.gob.mx/" target="_blank" rel="noopener">🔗 Dónde debería estar: ASF: informes de auditoría de la Cuenta Pública ↗</a></p>
-            <p class="pe-aparece">Aparece en: <a href="contratos-publicos.html#grupo-prodi">Contratos públicos · Grupos y filiales: Grupo PRODI</a> · <a class="pe-ancla" href="#grupo-prodi-tren-maya" aria-label="Enlace a este pendiente">#</a></p>
-          </article>
           <article class="pe-item pe-dependencia" id="grupo-prodi-tultepec">
             <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Autopista Tultepec-AIFA-Pirámides: el título de concesión, qué gobierno lo otorgó, en qué fecha y por cuántos años</h3>
             <p class="pe-porque"><b>Por qué:</b> Proyectos México la tiene registrada como proyecto de un gobierno estatal adjudicado a Mota-Engil México. Falta cotejar el título de concesión y su publicación oficial.</p>
@@ -1068,15 +1061,15 @@
           <article class="pe-item pe-dependencia" id="red-huawei-gobierno-codigo-magenta-2">
             <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Ejecutivos chinos de alto nivel de Huawei tendrían total acceso para digitalizar los sistemas más sensibles</h3>
             <p class="pe-porque"><b>Por qué:</b> Lo dice en condicional, y se apoya en audios que el medio atribuye a un ejecutivo comercial de Huawei: lo que dice de sus clientes no es un documento. No conocemos una autenticación de los audios, y eso no los vuelve falsos: falta ver los contratos de esos años.</p>
-            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026, no el histórico de CompraNet de 2019 a 2024 ni los contratos marco; esos portales no abren desde nuestra sesión.</p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026 y el Contrato Marco de Servicios de Nube Pública del 18-04-2024, pero no el histórico de CompraNet de 2019 a 2024 ni los convenios de adhesión posteriores.</p>
             <p class="pe-donde"><a href="https://comprasmx.buengobierno.gob.mx/datos-abiertos" target="_blank" rel="noopener">🔗 Dónde debería estar: Código Magenta, «Operación Huawei: Grabaciones secretas» ↗</a></p>
             <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-huawei-gobierno-codigo-magenta">Noticias relevantes · ¿Huawei «digitaliza» al gobierno con acceso total al IMSS, al SAT y a Aduanas? En los contratos federales de 2025 y 2026, Huawei no aparece como proveedor</a> · <a class="pe-ancla" href="#red-huawei-gobierno-codigo-magenta-2" aria-label="Enlace a este pendiente">#</a></p>
           </article>
           <article class="pe-item pe-dependencia" id="red-huawei-gobierno-codigo-magenta-3">
             <h3 class="pe-que"><span class="est-chip est-pendiente">pendiente</span> Desde IMSS, SAT, ISSSTE, Aduanas y hasta aeropuertos</h3>
             <p class="pe-porque"><b>Por qué:</b> En 2025 y 2026 ninguna de esas dependencias le contrató directamente a Huawei. Lo que el ejecutivo dice de años anteriores, o de compras por medio de otras empresas, se vería en el histórico de CompraNet y en los contratos marco, que no integramos todavía. En 2025 y 2026 solo el Hospital Juárez de México compró equipo de la marca, a otras empresas.</p>
-            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026, no el histórico de CompraNet de 2019 a 2024 ni los contratos marco; esos portales no abren desde nuestra sesión.</p>
-            <p class="pe-donde"><a href="https://upcp-compranet.hacienda.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: ComprasMX, Datos Abiertos 2025 y 2026, en la base de la plataforma ↗</a></p>
+            <p class="pe-quien"><b>🏛️ Debe publicarlo:</b> Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026 y el Contrato Marco de Servicios de Nube Pública del 18-04-2024, pero no el histórico de CompraNet de 2019 a 2024 ni los convenios de adhesión posteriores.</p>
+            <p class="pe-donde"><a href="https://upcp-compranet.buengobierno.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf" target="_blank" rel="noopener">🔗 Dónde debería estar: ComprasMX, Datos Abiertos 2025 y 2026, en la base de la plataforma ↗</a></p>
             <p class="pe-aparece">Aparece en: <a href="noticias-auditavision.html#col-huawei-gobierno-codigo-magenta">Noticias relevantes · ¿Huawei «digitaliza» al gobierno con acceso total al IMSS, al SAT y a Aduanas? En los contratos federales de 2025 y 2026, Huawei no aparece como proveedor</a> · <a class="pe-ancla" href="#red-huawei-gobierno-codigo-magenta-3" aria-label="Enlace a este pendiente">#</a></p>
           </article>
           <article class="pe-item pe-dependencia" id="red-agua-guadalajara-14500-federal-3">
@@ -1336,11 +1329,11 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261117g</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261117h</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261117g"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261117g"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261117h"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261117h"></script>
 </body>
 </html>

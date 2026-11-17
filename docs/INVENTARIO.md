@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 756 |
+| Páginas revisadas | 762 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -16,12 +16,14 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Página | Título | Generador | Enlaces internos | Módulos embebidos | oficial | derivado | pendiente |
 |---|---|---|---:|---:|---:|---:|---:|
+| `Plan_Maestro_Auditor_Civico_20260927.html` | MEGA PLAN MAESTRO INTEGRAL — Auditor Cívico (Auditavisión) | a mano | 0 | 0 | 0 | 0 | 0 |
 | `administracion-codigos.html` | Administración de códigos · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `agora.html` | Ágora cívica · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `aprende-auditoria.html` | Cómo se audita · Auditavisión | apartados.py | 55 | 0 | 20 | 0 | 0 |
 | `aprende-fraude-en-numeros.html` | El fraude en números · Auditavisión | apartados.py | 47 | 0 | 13 | 3 | 6 |
 | `aprende-recursos-naturales.html` | Los recursos naturales · Auditavisión | apartados.py | 63 | 0 | 127 | 66 | 1 |
 | `aprende.html` | Aprende · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
+| `auditavision.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 1 | 0 | 0 | 0 | 0 |
 | `auditoria-agronitrogenados.html` | Plantas de fertilizantes Agronitrogenados · Auditoría en imágenes · Auditavisión | auditorias.py | 85 | 0 | 4 | 2 | 2 |
 | `auditoria-aifa.html` | Aeropuerto Internacional Felipe Ángeles (AIFA) · Auditoría en imágenes · Auditavisión | auditorias.py | 85 | 0 | 2 | 4 | 1 |
 | `auditoria-bunker-garcia-luna.html` | El Búnker de Seguridad de García Luna (SSPC) · Auditoría en imágenes · Auditavisión | auditorias.py | 85 | 0 | 4 | 2 | 2 |
@@ -62,7 +64,8 @@ La Enciclopedia queda fuera porque está congelada.
 | `contexto-dimensional-presupuestaria.html` | Dimensión presupuestaria · Auditavisión | apartados.py | 47 | 0 | 3 | 1 | 0 |
 | `contexto-dimensional-renglones.html` | Renglones que no se suman · Auditavisión | apartados.py | 45 | 0 | 4 | 0 | 0 |
 | `contexto-dimensional-social.html` | Dimensión social · Auditavisión | apartados.py | 45 | 0 | 6 | 0 | 1 |
-| `contratos-publicos.html` | Contratos públicos · Auditavisión | apartados.py | 45 | 0 | 3 | 6 | 7 |
+| `contratos-publicos.html` | Contratos públicos · Auditavisión | apartados.py | 45 | 0 | 5 | 6 | 6 |
+| `crecimiento_gasto_sexenal.html` | Crecimiento Real del Gasto Sexenal en México — Radiografía del Poder Presupuestario | a mano | 0 | 0 | 0 | 0 | 0 |
 | `datos-abiertos.html` | Datos abiertos · Auditavisión | apartados.py | 40 | 0 | 0 | 0 | 0 |
 | `datos-administracion-publica-auditorias.html` | Quién la audita y cómo contrata · Auditavisión | apartados.py | 45 | 0 | 7 | 4 | 0 |
 | `datos-administracion-publica-niveles.html` | Los tres niveles y lo que hacen · Auditavisión | apartados.py | 46 | 0 | 24 | 2 | 0 |
@@ -137,6 +140,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-salud-sistema.html` | Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE · Auditavisión | apartados.py | 47 | 0 | 12 | 6 | 4 |
 | `derecho-de-replica.html` | Derecho de réplica · Auditavisión | apartados.py | 39 | 0 | 1 | 0 | 0 |
 | `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
+| `diagrama_comparativo (1).html` | Radiografía del Erario: Sexenios del Siglo XXI en México | a mano | 0 | 0 | 0 | 0 | 0 |
 | `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 | `donaciones.html` | Donaciones · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
 | `enciclopedia-auditavision.html` | Enciclopedia · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
@@ -163,7 +167,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `expediente-ramo-33.html` | Expediente: Ramo 33: el dinero para estados y municipios · Auditavisión | apartados.py | 68 | 0 | 3 | 0 | 0 |
 | `expediente-refineria-tula.html` | Expediente: Refinería Bicentenario en Tula (Barda Perimetral) · Auditavisión | apartados.py | 52 | 0 | 3 | 2 | 0 |
 | `expediente-seguro-popular.html` | Expediente: Seguro Popular: 53.5 millones de afiliados y lo que pasó después · Auditavisión | apartados.py | 61 | 0 | 5 | 1 | 2 |
-| `expediente-tren-maya.html` | Expediente: Tren Maya · Auditavisión | apartados.py | 62 | 0 | 1 | 2 | 2 |
+| `expediente-tren-maya.html` | Expediente: Tren Maya · Auditavisión | apartados.py | 61 | 0 | 1 | 2 | 1 |
 | `expediente-tren-toluca.html` | Expediente: Tren Interurbano México-Toluca «El Insurgente» · Auditavisión | apartados.py | 55 | 0 | 1 | 3 | 1 |
 | `expedientes-investigacion.html` | Expedientes de control interno · Auditavisión | apartados.py | 71 | 0 | 0 | 0 | 0 |
 | `expedientes.html` | Los casos por aclarar · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
@@ -235,11 +239,13 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 66 | 0 | 3 | 6 | 1 |
 | `indice.html` | Índice general · Auditavisión | apartados.py | 324 | 0 | 1 | 1 | 1 |
+| `infografia_fiscal_mx.html` | Arquitectura Fiscal de México — Radiografía Tributaria en Tres Niveles de Gobierno | a mano | 0 | 0 | 0 | 0 | 0 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `informes-documentar-para-sancionar.html` | Informe especial: Documentar para sancionar · Auditavisión | apartados.py | 53 | 0 | 40 | 8 | 2 |
 | `informes-oficiales.html` | Informes oficiales · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `informes-semestral-asf.html` | Informe semestral de la ASF · Auditavisión | apartados.py | 52 | 0 | 32 | 6 | 4 |
+| `mapa_mexico (1).html` | Mapa Interactivo — Gasto Federalizado por Entidad Federativa · PEF 2026 | a mano | 0 | 0 | 0 | 0 | 0 |
 | `marco-legal-tres-niveles.html` | Las leyes del dinero en los tres niveles · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 2 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
 | `nepotismo-y-cargos-publicos.html` | Nepotismo y cargos públicos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
@@ -326,12 +332,12 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 233 | 0 | 0 | 0 | 123 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 232 | 0 | 0 | 0 | 122 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 37 | 0 | 11 | 5 | 0 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 48 | 0 | 1 | 0 | 0 |
 | `planisferio-ags-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-ags-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 11 | 18 | 3 |
-| `planisferio-ags-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-ags-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 2 |
 | `planisferio-ags-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-ags-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-ags-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -344,7 +350,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-ags.html` | Aguascalientes · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
 | `planisferio-bc-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-bc-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 11 | 18 | 3 |
-| `planisferio-bc-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-bc-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 2 |
 | `planisferio-bc-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-bc-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-bc-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -357,7 +363,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-bc.html` | Baja California · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
 | `planisferio-bcs-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-bcs-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 11 | 18 | 3 |
-| `planisferio-bcs-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-bcs-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 2 |
 | `planisferio-bcs-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-bcs-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-bcs-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -370,7 +376,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-bcs.html` | Baja California Sur · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
 | `planisferio-cam-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-cam-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 17 | 3 |
-| `planisferio-cam-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-cam-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 2 |
 | `planisferio-cam-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-cam-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-cam-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -396,7 +402,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-cdmx.html` | Ciudad de México · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 17 |
 | `planisferio-chih-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-chih-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 12 | 19 | 2 |
-| `planisferio-chih-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-chih-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 3 |
 | `planisferio-chih-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-chih-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-chih-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -409,7 +415,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-chih.html` | Chihuahua · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 2 |
 | `planisferio-chis-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-chis-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 17 | 3 |
-| `planisferio-chis-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-chis-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 2 |
 | `planisferio-chis-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-chis-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-chis-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -422,7 +428,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-chis.html` | Chiapas · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 4 |
 | `planisferio-coah-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-coah-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 11 | 18 | 3 |
-| `planisferio-coah-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-coah-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 2 |
 | `planisferio-coah-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-coah-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-coah-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -435,7 +441,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-coah.html` | Coahuila · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
 | `planisferio-col-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-col-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
-| `planisferio-col-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-col-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 2 |
 | `planisferio-col-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-col-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-col-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -448,7 +454,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-col.html` | Colima · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
 | `planisferio-dgo-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-dgo-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 12 | 19 | 2 |
-| `planisferio-dgo-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-dgo-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 2 |
 | `planisferio-dgo-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-dgo-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-dgo-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -462,7 +468,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-dinero.html` | Cuánto dinero es · Auditavisión | apartados.py | 93 | 0 | 15 | 28 | 1 |
 | `planisferio-gro-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-gro-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
-| `planisferio-gro-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-gro-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 3 |
 | `planisferio-gro-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-gro-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-gro-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -475,7 +481,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-gro.html` | Guerrero · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 12 |
 | `planisferio-gto-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-gto-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 62 | 0 | 14 | 21 | 3 |
-| `planisferio-gto-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-gto-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 2 |
 | `planisferio-gto-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-gto-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-gto-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -488,7 +494,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-gto.html` | Guanajuato · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
 | `planisferio-hgo-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-hgo-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 63 | 0 | 15 | 21 | 3 |
-| `planisferio-hgo-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-hgo-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 7 | 12 | 2 |
 | `planisferio-hgo-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-hgo-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-hgo-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -501,7 +507,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-hgo.html` | Hidalgo · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
 | `planisferio-jal-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-jal-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 11 | 18 | 3 |
-| `planisferio-jal-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-jal-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 3 |
 | `planisferio-jal-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-jal-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-jal-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -514,7 +520,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-jal.html` | Jalisco · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 14 |
 | `planisferio-mex-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-mex-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
-| `planisferio-mex-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-mex-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 3 |
 | `planisferio-mex-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-mex-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-mex-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -527,7 +533,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-mex.html` | Estado de México · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 2 |
 | `planisferio-mich-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-mich-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
-| `planisferio-mich-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-mich-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 3 |
 | `planisferio-mich-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-mich-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-mich-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -540,7 +546,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-mich.html` | Michoacán · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 3 |
 | `planisferio-mor-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-mor-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
-| `planisferio-mor-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-mor-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 3 |
 | `planisferio-mor-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-mor-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-mor-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -553,7 +559,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-mor.html` | Morelos · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
 | `planisferio-nay-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-nay-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
-| `planisferio-nay-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-nay-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 2 |
 | `planisferio-nay-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-nay-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-nay-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -566,7 +572,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-nay.html` | Nayarit · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
 | `planisferio-nl-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-nl-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 63 | 0 | 15 | 18 | 3 |
-| `planisferio-nl-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-nl-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 3 |
 | `planisferio-nl-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-nl-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-nl-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -579,7 +585,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-nl.html` | Nuevo León · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 6 |
 | `planisferio-oax-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-oax-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 62 | 0 | 15 | 21 | 3 |
-| `planisferio-oax-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-oax-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 7 | 12 | 3 |
 | `planisferio-oax-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-oax-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-oax-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -592,7 +598,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-oax.html` | Oaxaca · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 26 |
 | `planisferio-pue-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-pue-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
-| `planisferio-pue-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-pue-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 2 |
 | `planisferio-pue-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-pue-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-pue-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -605,7 +611,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-pue.html` | Puebla · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 17 |
 | `planisferio-qro-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-qro-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 11 | 18 | 3 |
-| `planisferio-qro-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-qro-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 11 | 2 |
 | `planisferio-qro-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-qro-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-qro-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -618,7 +624,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-qro.html` | Querétaro · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
 | `planisferio-qroo-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-qroo-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 58 | 0 | 8 | 14 | 2 |
-| `planisferio-qroo-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-qroo-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 2 |
 | `planisferio-qroo-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-qroo-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-qroo-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -631,7 +637,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-qroo.html` | Quintana Roo · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
 | `planisferio-sin-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-sin-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 18 | 3 |
-| `planisferio-sin-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-sin-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 3 |
 | `planisferio-sin-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-sin-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-sin-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -644,7 +650,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-sin.html` | Sinaloa · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 3 |
 | `planisferio-slp-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-slp-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 11 | 18 | 3 |
-| `planisferio-slp-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-slp-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 2 |
 | `planisferio-slp-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-slp-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-slp-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -657,7 +663,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-slp.html` | San Luis Potosí · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 2 |
 | `planisferio-son-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-son-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 12 | 19 | 2 |
-| `planisferio-son-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-son-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 3 |
 | `planisferio-son-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-son-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-son-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -670,7 +676,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-son.html` | Sonora · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
 | `planisferio-tab-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-tab-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 63 | 0 | 13 | 20 | 3 |
-| `planisferio-tab-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-tab-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 2 |
 | `planisferio-tab-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-tab-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-tab-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -683,7 +689,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-tab.html` | Tabasco · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
 | `planisferio-tam-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-tam-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 62 | 0 | 15 | 21 | 3 |
-| `planisferio-tam-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-tam-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 3 |
 | `planisferio-tam-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-tam-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-tam-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -696,7 +702,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-tam.html` | Tamaulipas · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 2 |
 | `planisferio-tlax-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-tlax-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 17 | 3 |
-| `planisferio-tlax-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 2 | 6 | 2 |
+| `planisferio-tlax-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 2 | 8 | 3 |
 | `planisferio-tlax-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-tlax-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-tlax-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -709,7 +715,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-tlax.html` | Tlaxcala · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
 | `planisferio-ver-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-ver-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 62 | 0 | 15 | 21 | 3 |
-| `planisferio-ver-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-ver-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 3 |
 | `planisferio-ver-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-ver-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-ver-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -722,7 +728,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-ver.html` | Veracruz · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 3 |
 | `planisferio-yuc-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-yuc-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 10 | 17 | 3 |
-| `planisferio-yuc-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-yuc-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 3 |
 | `planisferio-yuc-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-yuc-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-yuc-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -735,7 +741,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-yuc.html` | Yucatán · Auditavisión | apartados.py | 54 | 0 | 1 | 2 | 1 |
 | `planisferio-zac-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-zac-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 12 | 19 | 2 |
-| `planisferio-zac-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 7 | 10 | 2 |
+| `planisferio-zac-deuda.html` | Su deuda · Auditavisión | apartados.py | 61 | 0 | 8 | 12 | 2 |
 | `planisferio-zac-dimensiones.html` | En la Enciclopedia y en el Auditor · Auditavisión | apartados.py | 65 | 0 | 0 | 1 | 0 |
 | `planisferio-zac-inversion.html` | Su inversión · Auditavisión | apartados.py | 64 | 0 | 5 | 7 | 0 |
 | `planisferio-zac-judicial.html` | Su Poder Judicial · Auditavisión | apartados.py | 65 | 0 | 19 | 18 | 2 |
@@ -824,11 +830,11 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-122 fichas, cada una con su porqué, su responsable y su enlace oficial.
+121 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 
-Documentos en `docs/boveda/evidencias.json`: 318 copiado, 11 no abrió, 8 sin copia.
+Documentos en `docs/boveda/evidencias.json`: 320 copiado, 10 no abrió, 8 sin copia.
 
 Todos los cotejos «consta» y «matiz» tienen su evidencia.
 
