@@ -158,6 +158,7 @@ def construir(base, ref):
     tm = cc['tarifa_mensual']
     im = cc['imss_obrero']
     se = par['subsidio_empleo']
+    iss = base['calculadora_civica']['issste']
     uma = par['uma']
 
     datos = {
@@ -168,6 +169,8 @@ def construir(base, ref):
         'sm': {'general': sm['mensual_general'], 'frontera': sm['mensual_frontera'], 'diario': sm['general']},
         'isr': {'renglones': tm['renglones'], 'tope_uma': im['tope_sbc_uma'], 'ramos': [{'pct': r['pct'], 'base': r['base']} for r in im['ramos']],
                 'uma_diaria': uma['diaria'], 'uma_mensual': uma['mensual'], 'sub_pct': se['pct_uma'], 'sub_tope': se['tope_ingreso_mensual']},
+        # Quien trabaja para el gobierno cotiza al ISSSTE (18-11-2026): Ley del ISSSTE, arts. 17, 42, 102, 140 y 199.
+        'issste': {'pct': round(sum(x['pct'] for x in iss['trabajador']), 4), 'piso': iss['piso_sm'], 'tope': iss['tope_sm']},
     }
 
     return '''<div class="at" id="atRaiz">
@@ -195,6 +198,10 @@ def construir(base, ref):
       <div class="at-seg" role="group" aria-label="Neto o bruto">
         <button type="button" class="at-seg-b" data-tipo="neto" aria-pressed="true">Neto (lo que te llega)</button>
         <button type="button" class="at-seg-b" data-tipo="bruto" aria-pressed="false">Bruto (antes de impuestos)</button>
+      </div>
+      <div class="at-seg" role="group" aria-label="Quién te paga" id="atPt" hidden>
+        <button type="button" class="at-seg-b" data-pt="imss" aria-pressed="true">Empresa · IMSS</button>
+        <button type="button" class="at-seg-b" data-pt="issste" aria-pressed="false">Gobierno · ISSSTE</button>
       </div>
     </div>
     <label class="at-campo" for="atIngreso"><span id="atIngresoEt">Tu ingreso neto al mes</span>
@@ -255,7 +262,7 @@ def construir(base, ref):
     <h2 class="at-tit" id="atLeeTit"><span aria-hidden="true">🔍</span> ¿Cómo se lee este ticket?</h2>
     <p>{nota} Los días y los meses dividen cada cargo entre tu ingreso {chip_d}.</p>
     <p>Los cargos del año juntan cifras de años distintos: los intereses son los aprobados para 2026 y el daño ambiental es el último que publicó el INEGI, el de 2024. Se suman para darte un orden de magnitud, y cada renglón dice su año.</p>
-    <p>Si escribes un bruto, tu neto se calcula como el de quien trabaja en nómina (sueldos y salarios): la tarifa mensual del ISR ({r_isr}) menos el subsidio para el empleo ({r_sub}) y las cuotas obreras del IMSS ({r_imss}). El salario mínimo no paga ISR ni cuota obrera: su neto es igual a su bruto. Si cobras por honorarios, RESICO u otro régimen, escribe tu neto.</p>
+    <p>Si escribes un bruto, tu neto se calcula como el de quien trabaja en nómina (sueldos y salarios): la tarifa mensual del ISR ({r_isr}) menos el subsidio para el empleo ({r_sub}) y las cuotas obreras del IMSS ({r_imss}); si trabajas para el gobierno, el 10.625% de tu sueldo básico que se descuenta para el ISSSTE (Ley del ISSSTE, arts. 17, 42, 102, 140 y 199). El salario mínimo no paga ISR; en el IMSS tampoco cuota obrera, y en el ISSSTE sí. Si cobras por honorarios, RESICO u otro régimen, escribe tu neto.</p>
     <p>Lo que todavía nos deben las dependencias está en el <a href="pendientes.html">Registro de pendientes</a>. Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>.</p>
     <p class="at-hermanas">Sigue con Costo Ambiental: <a href="herramienta-ambiente-reloj.html">⏱️ El reloj y el año</a> · <a href="herramienta-ambiente-pib.html">📈 ¿Cuánto del crecimiento es real?</a> · <a href="herramienta-ambiente-inversion.html">🌱 Simulador de inversión ambiental</a> · <a href="herramienta-ambiente-auditor.html">🔍 Auditor ambiental</a> · <a href="herramienta-ambiente-crisis.html">🌀 Crisis ambientales</a></p>
     <p class="at-hermanas">Y con la Calculadora: <a href="herramienta-calculadora-ticket.html">🧾 Tu estado de cuenta</a> · <a href="herramienta-calculadora-reloj.html">⏱️ El reloj de la deuda</a></p>

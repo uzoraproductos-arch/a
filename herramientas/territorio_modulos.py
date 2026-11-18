@@ -527,6 +527,23 @@ def temas_bot(d):
                 'fu': {'tx': 'Código Fiscal de la Federación, art. 69-B', 'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf'}}],
         'sug': ['¿Está en la lista negra del SAT?', '¿Qué contratos tiene una empresa con el gobierno?', '¿Qué servicios ofrece Auditavisión?'],
         'ir': ['servicios-catalogo.html#sv-diligencia', 'Revisión de un proveedor']},
+        # Revisar una nómina (18-11-2026): lo gratis primero (la calculadora y el lector), y el servicio.
+        'serv_nomina': {
+        'tit': 'Cómo revisar una nómina',
+        'h': '<p>Lo básico lo puedes hacer gratis, aquí mismo:</p><ol>'
+             '<li><b>Lo que te retienen y lo que pone tu patrón:</b> la <a href="herramienta-calculadora-ticket-retienen.html">Calculadora Cívica</a> saca el ISR, '
+             'tus cuotas y lo que paga el patrón al IMSS y al INFONAVIT, o tu dependencia al ISSSTE y al FOVISSSTE si trabajas para el gobierno, con el costo de tu plaza.</li>'
+             '<li><b>Un recibo de nómina:</b> el <a href="herramienta-inspector-factura.html">Lector de facturas CFDI</a> lee el XML en tu navegador, sin subirlo, y revisa que cuadre, '
+             'el ISR contra la tarifa del artículo 96, el subsidio para el empleo y el salario base de cotización.</li>'
+             '<li><b>Quien te maquila la nómina:</b> búscalo por RFC en <a href="herramienta-inspector-padron.html">Revisa a tu contraparte</a>.</li></ol>'
+             '<p>Si necesitas revisar todos los recibos de un periodo, eso es el servicio <b>Revisión de nómina</b>: una segunda mirada a lo que calculó tu sistema o tu maquilador. '
+             'Una señal no es una irregularidad, y no sustituye a tu contador ni a tu dictamen.</p>',
+        'ci': [],
+        'fu': [{'que': 'Retención del ISR a los salarios', 'e': 'oficial', 'fu': {'tx': 'Ley del ISR, art. 96', 'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf'}},
+               {'que': 'Cuotas al Seguro Social', 'e': 'oficial', 'fu': {'tx': 'Ley del Seguro Social', 'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf'}},
+               {'que': 'Cuotas al ISSSTE', 'e': 'oficial', 'fu': {'tx': 'Ley del ISSSTE', 'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LISSSTE.pdf'}}],
+        'sug': ['Trabajo en el gobierno y gano 20 mil al mes, ¿cuánto me retienen?', 'Revisa mi recibo de nómina', '¿Qué son las cuotas al ISSSTE?'],
+        'ir': ['servicios-catalogo.html#sv-nomina', 'Revisión de nómina']},
         # ¿Cómo nos sostenemos? (07-11-2026): lo lee de monetizacion.py, igual que servicios.html.
         'serv_sosten': {
         'tit': '¿Cómo se sostiene Auditavisión?',

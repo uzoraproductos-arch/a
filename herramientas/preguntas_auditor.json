@@ -385,6 +385,26 @@
    "ir": "herramienta-calculadora-ticket-retienen.html?m=15000&p=mes&n=bruto"
   },
   {
+   "q": "Trabajo en el gobierno y gano 20 mil al mes, ¿cuánto me retienen?",
+   "ir": "herramienta-calculadora-ticket-retienen.html?m=20000&p=mes&n=bruto&r=sueldos&pt=issste"
+  },
+  {
+   "q": "¿Qué son las cuotas al ISSSTE?",
+   "ir": "glosario.html#Cuotas-al-ISSSTE"
+  },
+  {
+   "q": "¿Qué es el salario base de cotización?",
+   "ir": "glosario.html#Salario-Base-de-Cotizacion"
+  },
+  {
+   "q": "Revisa mi recibo de nómina",
+   "ir": "herramienta-inspector-factura.html"
+  },
+  {
+   "q": "Quiero que revisen la nómina de mi empresa",
+   "ir": "servicios-catalogo.html#sv-nomina"
+  },
+  {
    "q": "La calculadora",
    "ir": "herramienta-calculadora.html"
   },

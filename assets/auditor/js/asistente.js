@@ -1640,10 +1640,10 @@
     }
     /* 2b. Una factura (05-11-2026): «revisa mi factura», «tengo un XML», «¿esta factura es de una
        empresa fantasma?». Abre el Lector de facturas CFDI; un RFC suelto lo sigue contestando la lista negra. */
-    if (APP.inspfactura && /\b(facturas?|cfdi|xml|comprobantes? fiscal(es)?)\b/.test(p) && !RFC_RE.test(t) && !/^\s*(que|q) (es|son|significa)\b|que quiere decir/.test(p)) {
+    if (APP.inspfactura && /\b(facturas?|cfdi|xml|comprobantes? fiscal(es)?|recibos? de nomina)\b/.test(p) && !RFC_RE.test(t) && !/^\s*(que|q) (es|son|significa)\b|que quiere decir/.test(p)) {
       RFC_RE.lastIndex = 0;
       return respApp('inspfactura', APP.inspfactura.url,
-        '<p>📑 Te abro el <b>Lector de facturas CFDI</b> aquí abajo. Elige el XML de tu factura (o varios): lo leo en tu navegador, sin subirlo a ningún lado, rehago su cuenta, la reviso contra la ley (régimen fiscal, método y forma de pago, complemento de pago y retención de IVA, cada regla con su artículo) y cruzo al emisor con la lista 69-B del SAT. Si cargas también los complementos de pago, los empato con sus facturas.</p>' +
+        '<p>📑 Te abro el <b>Lector de facturas CFDI</b> aquí abajo. Elige el XML de tu factura (o varios): lo leo en tu navegador, sin subirlo a ningún lado, rehago su cuenta, la reviso contra la ley (régimen fiscal, método y forma de pago, complemento de pago y retención de IVA, cada regla con su artículo) y cruzo al emisor con la lista 69-B del SAT. Si cargas también los complementos de pago, los empato con sus facturas. Si es un recibo de nómina, reviso además su ISR contra la tarifa, el subsidio para el empleo y el salario base de cotización, sin mostrar el nombre de quien trabaja.</p>' +
         '<p class="pa-chico">Separo lo que declaró el SAT (oficial) de las señales que salen de comparar fechas o de revisar el XML (derivado, «señal para revisar»). No te digo si la factura está cancelada: eso lo dice el verificador del SAT con su UUID.</p>');
     }
     RFC_RE.lastIndex = 0;
@@ -1785,10 +1785,13 @@
     ['sueldos', /\b(sueldos? y salarios?|nomina|asalariad[oa]|mi patron|mi empresa me paga|empleado de)\b/]
   ];
   var PLATA = [['hospedaje', /\b(airbnb|booking|hospedaje)\b/], ['bienes', /\b(mercado libre|amazon|vendo|ventas?)\b/], ['transporte', /./]];
+  /* Quien trabaja para el gobierno cotiza al ISSSTE (18-11-2026): la calculadora lo distingue con &pt=issste. */
+  var GOBIERNO = /\b(issste|burocrata|servidora? publica?|trabajo (en|para) (el |la |una )?(gobierno|dependencia|federacion|secretaria)|soy del gobierno|empleado (del|de) gobierno|me paga el gobierno)\b/;
   function regimenDe(p) {
     var r = REGIMEN.filter(function (x) { return x[1].test(p); })[0], pl = null;
     if (r && r[0] === 'plataformas') pl = PLATA.filter(function (x) { return x[1].test(p); })[0][0];
-    return { r: r ? r[0] : '', pl: pl };
+    var gob = GOBIERNO.test(p) && (!r || r[0] === 'sueldos');
+    return { r: r ? r[0] : (gob ? 'sueldos' : ''), pl: pl, pt: gob ? 'issste' : '' };
   }
   function herramienta(q) {
     if (!HA.apps.length) return null;
@@ -1799,14 +1802,15 @@
       /* Por quincena: la calculadora trabaja por mes, y un mes son dos quincenas (derivado, se dice la operación). */
       if (quin) { m = Math.round(m * 2 * 100) / 100; per = 'mes'; }
       if (sem) m = 0;
-      var liga = 'herramienta-calculadora-ticket-retienen.html' + (m ? '?m=' + m + '&p=' + per + '&n=' + nat + (rg.r ? '&r=' + rg.r : '') + (rg.pl ? '&pl=' + rg.pl : '') : '');
+      var liga = 'herramienta-calculadora-ticket-retienen.html' + (m ? '?m=' + m + '&p=' + per + '&n=' + nat + (rg.r ? '&r=' + rg.r : '') + (rg.pl ? '&pl=' + rg.pl : '') + (rg.pt ? '&pt=' + rg.pt : '') : '');
       var regN = rg.r && CR.reg ? CR.reg[rg.r] : '', plN = rg.pl && CR.plat ? CR.plat[rg.pl] : '';
       var hijos = /\b(hijos?|hijas?|dependientes?|esposa|esposo|familia)\b/.test(p);
       return respApp('ccticket', liga, '<p><span aria-hidden="true">🧾</span> Esa cuenta la hace <b>' + esc(cc.n) + '</b>, de la ' + esc(cc.grupo) + ': ' +
         (m ? 'ya le puse tu ingreso de <b>$' + m.toLocaleString('es-MX') + (per === 'ano' ? ' al año' : ' al mes') + '</b>, ' + (nat === 'neto' ? 'después' : 'antes') + ' de descuentos' +
-          (regN ? ', en <b>' + esc(regN) + '</b>' + (plN ? ' (' + esc(plN.toLowerCase()) + ')' : '') : '') + '. ' :
+          (regN ? ', en <b>' + esc(regN) + '</b>' + (plN ? ' (' + esc(plN.toLowerCase()) + ')' : '') : '') + (rg.pt ? ', como quien trabaja para el gobierno y cotiza al <b>ISSSTE</b>' : '') + '. ' :
           sem ? 'la calculadora trabaja por mes o por año, así que escribe ahí lo que juntas al mes (no convierto semanas: los meses no tienen semanas exactas). ' : 'escribe lo que ganas. ') +
-        'Te dice cuánto te retienen, con la tarifa oficial del ISR, y a dónde va cada peso de tu impuesto, en un documento con folio y huella.</p>' +
+        'Te dice cuánto te retienen, con la tarifa oficial del ISR, lo que pone tu patrón ' + (rg.pt ? '(tu dependencia, al ISSSTE y al FOVISSSTE)' : '(al IMSS y al INFONAVIT)') + ' y cuánto cuesta tu plaza, y a dónde va cada peso de tu impuesto, en un documento con folio y huella.</p>' +
+        (rg.pt ? '<p class="pa-chico">Las cuotas salen de la Ley del ISSSTE (10.625% de tu sueldo básico). Si tu estado o tu municipio tiene su propio instituto de seguridad social, tus cuotas son otras.</p>' : '') +
         (quin ? '<p class="pa-chico">' + chip({ e: 'derivado' }) + ' <b>Operación:</b> $' + m0.toLocaleString('es-MX') + ' a la quincena × 2 quincenas = $' + m.toLocaleString('es-MX') + ' al mes.</p>' : '') +
         (hijos ? '<p class="pa-chico">Tus hijos o tu familia no cambian lo que te retienen cada mes: la tarifa del artículo 96 de la Ley del ISR no tiene descuento por dependientes. Algunos gastos de la familia, como los médicos y hospitalarios, se deducen en la declaración anual (artículo 151), que esta cuenta no hace.</p>' : '') +
         '<p class="pa-chico">La cuenta la hace la calculadora con las tarifas publicadas. ' + (regN ? 'Si tu régimen es otro, cámbialo ahí mismo, en «1 · Tu ingreso».' : /\bfacturo\b/.test(p) ? 'Como facturas, elige en «1 · Tu ingreso» si estás en el RESICO o en actividad empresarial, porque cambia mucho lo que pagas; mientras, supuse sueldos y salarios.' : 'Supuse que trabajas con un patrón (sueldos y salarios); si no es así, cámbialo ahí mismo, en «1 · Tu ingreso».') + '</p>',

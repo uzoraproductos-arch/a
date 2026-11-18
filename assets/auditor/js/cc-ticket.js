@@ -33,7 +33,7 @@
   var regPorId = {};
   D.regimenes.forEach(function (r) { regPorId[r.id] = r; });
 
-  var est = { m: 0, per: 'mes', nat: 'bruto', reg: 'sueldos', plat: 'transporte', ded: 0, iva: 50, rper: 'ano',
+  var est = { m: 0, per: 'mes', nat: 'bruto', reg: 'sueldos', plat: 'transporte', ded: 0, iva: 50, rper: 'ano', pt: 'imss', rt: 'I',
               calculado: false, res: null, folio: null, huella: null, verifica: null };
 
   /* ---------------- utilerías ---------------- */
@@ -79,6 +79,59 @@
     return { detalle: det, total: det.reduce(function (a, x) { return a + x.monto; }, 0), base: base, topeMes: topeMes, topado: sbc > topeMes };
   }
 
+  /* Quien trabaja para el gobierno cotiza al ISSSTE (18-11-2026): 10.625% de su
+     Sueldo Basico, entre uno y diez salarios minimos (Ley del ISSSTE, art. 17). */
+  function cuotasISSSTE(sb) {
+    var I = D.issste, sm = par.sm.general * DIAS_MES, piso = I.piso * sm, topeMes = I.tope * sm;
+    var base = Math.min(Math.max(0, sb) > 0 ? Math.max(sb, piso) : 0, topeMes);
+    var det = I.trab.map(function (r) {
+      return { ramo: r.ramo, pct: r.pct, ley: 'Ley del ISSSTE, ' + r.ley.charAt(0).toLowerCase() + r.ley.slice(1), base: base, monto: base * r.pct / 100 };
+    });
+    return { detalle: det, total: det.reduce(function (a, x) { return a + x.monto; }, 0), base: base, topeMes: topeMes,
+             topado: sb > topeMes, pisado: sb > 0 && sb < piso, issste: true };
+  }
+
+  /* El renglon de la tabla de cesantia y vejez de 2026 en que cae el salario. */
+  function cvRenglon(sbc) {
+    var cv = D.pat.cv, dia = sbc / DIAS_MES;
+    if (dia <= par.sm.general + 0.005) return cv[0];
+    var veces = Math.round(dia / par.uma.diaria * 100) / 100;
+    for (var i = 1; i < cv.length; i++) if (cv[i].h === null || veces <= cv[i].h) return cv[i];
+    return cv[cv.length - 1];
+  }
+
+  /* Lo que pone el patron: la otra mitad de la nomina, que el recibo no
+     muestra. Para el IMSS, la cuota fija por trabajador, los ramos sobre el
+     salario base, la cesantia de la tabla de 2026, el riesgo de trabajo de la
+     clase elegida y el INFONAVIT; para el ISSSTE, las aportaciones de la
+     dependencia. Las cuotas sociales del Gobierno no se suman. */
+  function patronal(r) {
+    var det = [], b = r.cuotas.base;
+    if (r.cuotas.issste) {
+      det = D.issste.dep.map(function (x) {
+        return { ramo: x.ramo, pct: x.pct, ley: 'Ley del ISSSTE, ' + x.ley.charAt(0).toLowerCase() + x.ley.slice(1), monto: b * x.pct / 100 };
+      });
+    } else {
+      var tresUma = 3 * par.uma.diaria * DIAS_MES;
+      det.push({ ramo: 'Enfermedades y maternidad · cuota fija por trabajador', pct: null, monto: par.uma.diaria * DIAS_MES * D.pat.fija / 100,
+                 ley: D.pat.fija + '% de la UMA diaria por 30 días, sin importar el salario. ' + D.pat.fijaLey });
+      D.pat.ramos.forEach(function (x) {
+        det.push({ ramo: x.ramo, pct: x.pct, ley: x.ley, monto: (x.base === 'excedente_3_uma' ? Math.max(0, b - tresUma) : b) * x.pct / 100 });
+      });
+      var cv = cvRenglon(b);
+      det.push({ ramo: 'Cesantía en edad avanzada y vejez', pct: cv.pct, monto: b * cv.pct / 100,
+                 ley: 'Tu renglón de 2026: ' + cv.rango + '. ' + D.pat.cvLey });
+      var rt = D.pat.rt.filter(function (x) { return x.id === est.rt; })[0] || D.pat.rt[0];
+      det.push({ ramo: 'Riesgos de trabajo · prima media de la clase ' + rt.id, pct: rt.pct, monto: b * rt.pct / 100, ley: D.pat.rtLey });
+      if (r.cuotas.exenta) {
+        var ob = cuotasIMSS(r.bruto).total;
+        det.push({ ramo: 'Tu cuota obrera, que también paga el patrón', pct: null, monto: ob, ley: D.pat.art36 });
+      }
+    }
+    var tot = det.reduce(function (a, x) { return a + x.monto; }, 0);
+    return { detalle: det, total: tot, costo: r.bruto + tot, issste: !!r.cuotas.issste, base: b };
+  }
+
   function subsidio(m) {
     if (!(m > 0) || m > par.sub.tope) return 0;
     return par.uma.mensual * par.sub.pct / 100;
@@ -103,13 +156,17 @@
       r.renglon = t.renglon; r.ri = t.i; r.isrTarifa = t.isr;
       r.subsidio = Math.min(subsidio(bruto), t.isr);
       r.isr = Math.max(0, t.isr - r.subsidio);
-      r.cuotas = cuotasIMSS(bruto);
+      r.cuotas = est.pt === 'issste' ? cuotasISSSTE(bruto) : cuotasIMSS(bruto);
       r.salarioMinimo = bruto > 0 && bruto <= par.sm.mensual_general + 0.005;
       if (r.salarioMinimo) {
         r.isr = 0; r.subsidio = 0;
-        r.cuotas.detalle.forEach(function (x) { x.monto = 0; });
-        r.cuotas.total = 0; r.cuotas.exenta = true;
+        /* El art. 36 de la LSS (el patron paga la cuota obrera) no tiene par en la Ley del ISSSTE. */
+        if (!r.cuotas.issste) {
+          r.cuotas.detalle.forEach(function (x) { x.monto = 0; });
+          r.cuotas.total = 0; r.cuotas.exenta = true;
+        }
       }
+      if (bruto > 0) r.patron = patronal(r);
     } else if (reg.id === 'resico') {
       var tr = resicoRenglon(bruto);
       r.tasa = tr.tasa; r.isr = bruto * tr.tasa / 100; r.isrTarifa = r.isr;
@@ -164,7 +221,8 @@
     return {
       mes: mes,
       ano: { bruto: x(mes.bruto), isr: x(mes.isr), cuotasTotal: x(mes.cuotasTotal), subsidio: x(mes.subsidio),
-             retenido: x(mes.retenido), neto: x(mes.neto), base: x(mes.base), deducido: x(mes.deducido), retCliente: x(mes.retCliente) },
+             retenido: x(mes.retenido), neto: x(mes.neto), base: x(mes.base), deducido: x(mes.deducido), retCliente: x(mes.retCliente),
+             patron: mes.patron ? x(mes.patron.total) : 0, costo: mes.patron ? x(mes.patron.costo) : 0 },
       reparto: reparto(x(mes.isr))
     };
   }
@@ -211,7 +269,10 @@
     [].forEach.call(document.querySelectorAll('[data-nat]'), function (b) { b.setAttribute('aria-pressed', String(b.dataset.nat === est.nat)); });
     [].forEach.call(document.querySelectorAll('[data-reg]'), function (b) { b.setAttribute('aria-pressed', String(b.dataset.reg === est.reg)); });
     [].forEach.call(document.querySelectorAll('[data-plat]'), function (b) { b.setAttribute('aria-pressed', String(b.dataset.plat === est.plat)); });
+    [].forEach.call(document.querySelectorAll('[data-pt]'), function (b) { b.setAttribute('aria-pressed', String(b.dataset.pt === est.pt)); });
     var efe = efectivo();
+    $('ctOpPt').hidden = efe.id !== 'sueldos';
+    $('ctVImssEt').textContent = efe.id === 'sueldos' && est.pt === 'issste' ? 'ISSSTE' : 'IMSS';
     $('ctOpHon').hidden = efe.id !== 'honorarios';
     $('ctOpPlat').hidden = efe.id !== 'plataformas';
     $('ctOpNose').hidden = est.reg !== 'nose';
@@ -238,8 +299,9 @@
     if (est.verifica) return;   /* una liga ajena no pisa lo que este equipo recuerda */
     try {
       if (est.m > 0) {
-        localStorage.setItem(COMPARTIDA, JSON.stringify({ monto: est.m, periodo: est.per === 'ano' ? 'anio' : 'mes', tipo: est.nat }));
-        localStorage.setItem(CLAVE, JSON.stringify({ reg: est.reg, plat: est.plat, ded: est.ded, iva: est.iva }));
+        localStorage.setItem(COMPARTIDA, JSON.stringify({ monto: est.m, periodo: est.per === 'ano' ? 'anio' : 'mes', tipo: est.nat,
+                                                          pt: efectivo().id === 'sueldos' ? est.pt : 'imss' }));
+        localStorage.setItem(CLAVE, JSON.stringify({ reg: est.reg, plat: est.plat, ded: est.ded, iva: est.iva, pt: est.pt, rt: est.rt }));
       } else {
         localStorage.removeItem(COMPARTIDA);
         localStorage.removeItem(CLAVE);
@@ -252,6 +314,7 @@
       var g = JSON.parse(localStorage.getItem(CLAVE) || 'null') || {};
       if (!s || !(leer(s.monto) > 0)) return false;
       g.m = s.monto; g.per = s.periodo === 'anio' ? 'ano' : 'mes'; g.nat = s.tipo;
+      if (!g.pt && s.pt) g.pt = s.pt;
       aplicar(g);
       return true;
     } catch (e) { return false; }
@@ -264,6 +327,8 @@
     var pl = (regPorId.plataformas || {}).tasas || [];
     if (pl.some(function (x) { return x.id === g.plat; })) est.plat = g.plat;
     est.ded = leer(g.ded);
+    if (g.pt === 'imss' || g.pt === 'issste') est.pt = g.pt;
+    if (D.pat.rt.some(function (x) { return x.id === g.rt; })) est.rt = g.rt;
     var iv = parseInt(g.iva, 10);
     if (iv >= 0 && iv <= 100) est.iva = iv;
   }
@@ -302,11 +367,12 @@
     var b = ev.target.closest('button');
     if (!b) return;
     var d = b.dataset;
-    if (d.per || d.nat || d.reg || d.plat || d.monto) usuario();
+    if (d.per || d.nat || d.reg || d.plat || d.pt || d.monto) usuario();
     if (d.per) { est.per = d.per; rango.value = montoARango(est.m); }
     else if (d.nat) est.nat = d.nat;
     else if (d.reg) est.reg = d.reg;
     else if (d.plat) est.plat = d.plat;
+    else if (d.pt) est.pt = d.pt;
     else if (d.monto) {
       est.m = parseFloat(d.monto); est.per = 'mes';
       if (d.oficial) { est.nat = 'bruto'; est.reg = 'sueldos'; }
@@ -347,7 +413,8 @@
     $('ctResumen').innerHTML =
       caja('ct-r-bruto', 'Ingreso bruto ' + per, v.bruto, 'Antes de cualquier descuento', 'ctRB') +
       caja('ct-r-isr', 'Impuesto sobre la renta', v.isr, 'Tasa efectiva sobre el bruto: <b>' + m.pctIsr.toFixed(2) + '%</b>', 'ctRI') +
-      (m.cuotas ? caja('ct-r-imss', 'Cuotas al Seguro Social', v.cuotasTotal, 'Cuota obrera: 2.375% del salario base más 0.40% del excedente de tres UMA', 'ctRS')
+      (m.cuotas && m.cuotas.issste ? caja('ct-r-imss', 'Cuotas al ISSSTE', v.cuotasTotal, '10.625% de tu sueldo básico, entre uno y diez salarios mínimos', 'ctRS') :
+       m.cuotas ? caja('ct-r-imss', 'Cuotas al Seguro Social', v.cuotasTotal, 'Cuota obrera: 2.375% del salario base más 0.40% del excedente de tres UMA', 'ctRS')
                 : caja('ct-r-imss ct-r-nula', 'Cuotas al Seguro Social', 0, 'Este régimen no cotiza por sí mismo', 'ctRS')) +
       caja('ct-r-neto', 'Te queda ' + per, v.neto, 'Se te va el <b>' + m.pctRetenido.toFixed(2) + '%</b> de lo que ganas', 'ctRN');
     contar($('ctRB'), v.bruto, pesos2, 700);
@@ -409,7 +476,9 @@
     var esResico = reg.id === 'resico';
     $('ctTarifaDet').hidden = !m.renglon;
     $('ctResicoDet').hidden = !esResico;
-    $('ctImssDet').hidden = !m.cuotas;
+    $('ctImssDet').hidden = !m.cuotas || !!m.cuotas.issste;
+    $('ctIsssteDet').hidden = !(m.cuotas && m.cuotas.issste);
+    pintarNomina();
     [].forEach.call($('ctTarifa').querySelectorAll('tbody tr'), function (tr) {
       var si = parseInt(tr.dataset.i, 10) === m.ri;
       tr.classList.toggle('ct-tr-tuyo', si);
@@ -429,12 +498,18 @@
       h += '<p class="ct-aviso"><b>Ojo con la retención del cliente.</b> Si quien te paga es una persona moral, te retendrá ' + pesos2(m.retCliente * f) + ' ' + per +
         ' —el 10% de lo facturado, sin deducción alguna—. <b>Eso no es el impuesto: es un anticipo</b> que se acredita contra lo que aquí aparece. ' + esc(reg.punto_ciego) + '</p>';
     }
-    if (m.salarioMinimo) {
+    if (m.salarioMinimo && m.cuotas && m.cuotas.issste) {
+      h += '<p class="ct-aviso"><b>No te retienen ISR, pero sí las cuotas al ISSSTE.</b> El último párrafo del artículo 96 de la Ley del ISR prohíbe retener el impuesto a quien en el mes únicamente percibe un salario mínimo, hoy ' +
+        pesos2(par.sm.general) + ' diarios. La Ley del ISSSTE no tiene una regla como la del artículo 36 de la Ley del Seguro Social: las cuotas se te descuentan igual, y nunca sobre menos de un salario mínimo (art. 17).</p>';
+    } else if (m.salarioMinimo) {
       h += '<p class="ct-aviso ct-aviso-bueno"><b>No te retienen nada, y por dos leyes distintas.</b> Tu ingreso equivale a un salario mínimo general, hoy ' + pesos2(par.sm.general) +
         ' diarios. El último párrafo del artículo 96 de la Ley del ISR prohíbe retener el impuesto a quien en el mes únicamente percibe un salario mínimo, y el artículo 36 de la Ley del Seguro Social ordena que en ese caso el patrón pague íntegramente también la cuota obrera. <b>Lo bruto y lo neto coinciden.</b> En la Zona Libre de la Frontera Norte el mínimo es ' +
         pesos2(par.sm.frontera_norte) + ' diarios y la misma regla opera a partir de ' + pesos2(par.sm.mensual_frontera) + ' al mes; esta cuenta usa el mínimo general del resto del país.</p>';
     }
-    if (m.cuotas && m.cuotas.topado) {
+    if (m.cuotas && m.cuotas.issste && m.cuotas.topado) {
+      h += '<p class="ct-aviso"><b>Tu sueldo rebasa el tope de cotización del ISSSTE.</b> El artículo 17 de su ley lo fija en diez salarios mínimos, hoy ' +
+        pesos2(m.cuotas.topeMes) + ' al mes: de ahí hacia arriba, las cuotas ya no suben.</p>';
+    } else if (m.cuotas && m.cuotas.topado) {
       h += '<p class="ct-aviso"><b>Tu salario rebasa el tope de cotización.</b> El artículo 28 de la Ley del Seguro Social fija el límite superior en veinticinco veces la referencia diaria, hoy ' +
         pesos2(m.cuotas.topeMes) + ' al mes. De ahí hacia arriba el sueldo sube y la cuota ya no: por eso la carga de seguridad social pesa proporcionalmente más sobre los salarios bajos.</p>';
     }
@@ -445,6 +520,48 @@
     h += '<p class="ct-pie-reg">' + esc(reg.punto_ciego) + '</p>';
     $('ctAvisos').innerHTML = h;
   }
+
+  /* Tu nomina completa (18-11-2026): lo que te descuentan, lo que pone tu
+     patron y lo que cuesta tu plaza. Todo derivado de tu ingreso y de la ley. */
+  function pintarNomina() {
+    var caj = $('ctNomina'), m = est.res && est.res.mes;
+    if (!caj) return;
+    if (!m || !m.patron) { caj.hidden = true; caj.innerHTML = ''; return; }
+    var anual = est.per === 'ano', f = anual ? 12 : 1, per = anual ? 'al año' : 'al mes', P = m.patron, iss = P.issste;
+    var filas = P.detalle.map(function (x) {
+      return '<li><span class="ct-nl-ramo">' + esc(x.ramo) + (x.pct == null ? '' : ' · ' + x.pct + '%') + '</span><b>' + pesos2(x.monto * f) + '</b>' +
+        '<small>' + esc(x.ley) + '</small></li>';
+    }).join('');
+    var rt = iss ? '' : '<label class="ct-et" for="ctRt">Clase de riesgo de la empresa</label> <select id="ctRt" class="ct-select">' +
+      D.pat.rt.map(function (x) { return '<option value="' + x.id + '"' + (x.id === est.rt ? ' selected' : '') + '>Clase ' + x.id + ' · ' + x.pct + '%</option>'; }).join('') +
+      '</select> <span class="ct-pista">La prima media del art. 73; la de tu empresa puede ser otra.</span>';
+    var h = '<h3 class="ct-sub-tit"><span aria-hidden="true">' + (iss ? '🏛️' : '🏢') + '</span> Tu nómina completa: lo que pone ' + (iss ? 'tu dependencia' : 'tu patrón') + ' ' + chip('derivado') + '</h3>' +
+      '<div class="ct-nom-kpis">' +
+        '<div><span>Tu sueldo bruto</span><b>' + pesos2(m.bruto * f) + '</b></div>' +
+        '<div><span>Pone ' + (iss ? 'tu dependencia' : 'tu patrón') + (iss ? ' al ISSSTE y al FOVISSSTE' : ' al IMSS y al INFONAVIT') + '</span><b>' + pesos2(P.total * f) + '</b></div>' +
+        '<div class="ct-nom-costo"><span>Cuesta tu plaza ' + per + '</span><b>' + pesos2(P.costo * f) + '</b><small>' + (m.bruto > 0 ? (P.costo / m.bruto * 100 - 100).toFixed(1) + '% más que tu sueldo' : '') + '</small></div>' +
+      '</div>' +
+      '<p class="ct-pista">' + (iss
+        ? 'Tu plaza la pagan los contribuyentes: el sueldo y estas aportaciones salen del presupuesto de tu dependencia. Base: ' + pesos2(P.base) + ' al mes, tu sueldo básico entre uno y diez salarios mínimos. ' + esc(D.issste.social)
+        : 'Base: ' + pesos2(P.base) + ' al mes, tu ingreso tomado como salario base de cotización hasta el tope de 25 UMA. ' + esc(D.pat.noIncluye)) + '</p>' +
+      (rt ? '<p class="ct-rt">' + rt + '</p>' : '') +
+      '<details class="ct-tabla-det"><summary>Renglón por renglón, ' + per + '</summary><ul class="ct-nl">' +
+        filas + '<li class="ct-nl-tot"><span class="ct-nl-ramo">Total</span><b>' + pesos2(P.total * f) + '</b></li></ul></details>';
+    if (iss) {
+      h += '<p class="ct-aviso ct-aviso-suave">' + esc(D.issste.quien) + '</p>';
+      if (D.pres && m.bruto * 12 > D.pres.brutoAnual) {
+        h += '<p class="ct-aviso ct-aviso-error"><b>Señal para revisar: el artículo 127.</b> Tu sueldo bruto al año, ' + pesos(m.bruto * 12) + ', rebasa la remuneración bruta anual de la Presidencia de la República en el PEF 2026, ' +
+          pesos(D.pres.brutoAnual) + ' ' + chip('oficial') + ' (Anexo 23' + (D.pres.pagina ? ', ' + esc(D.pres.pagina) : '') + '). ' + esc(D.issste.art127) +
+          ' Es una comparación de cifras, no una acusación.</p>';
+      }
+    } else {
+      h += '<p class="ct-pista">¿Trabajas para el gobierno? Elige «El gobierno · ISSSTE» en tu ingreso: las cuotas y lo que pone el patrón son otros.</p>';
+    }
+    caj.innerHTML = h; caj.hidden = false;
+  }
+  $('ctRaiz').addEventListener('change', function (ev) {
+    if (ev.target && ev.target.id === 'ctRt') { usuario(); est.rt = ev.target.value; if (est.calculado) calcular(false); }
+  });
 
   function pintarIva() {
     if (!est.res) return;
@@ -513,6 +630,7 @@
       periodo: anual ? 'Ejercicio 2026 · anual' : 'Ejercicio 2026 · mensual',
       regimen: reg.nombre,
       bruto: p.bruto, isr: p.isr, cuotas: p.cuotasTotal, neto: p.neto,
+      seg: res.mes.cuotas ? (res.mes.cuotas.issste ? 'ISSSTE' : 'IMSS') : '', patron: res.ano.patron * (anual ? 1 : 1 / 12), costo: res.ano.costo * (anual ? 1 : 1 / 12),
       movimientos: res.reparto.map(function (x) { return { id: x.id, icono: x.icono, nombre: x.nombre, pct: x.pct, monto: x.monto * factor }; }),
       poderes: poderes,
       ellos: D.dip && res.ano.neto > 0 ? { cargo: D.dip.cargo, veces: D.dip.netoAnual / res.ano.neto, netoAnual: D.dip.netoAnual, pagina: D.dip.pagina } : null,
@@ -525,6 +643,8 @@
      siempre el mismo folio. */
   function entrada() {
     var e = { m: Math.round(est.m * 100) / 100, p: est.per, n: est.nat, r: est.reg };
+    if (efectivo().id === 'sueldos' && est.pt === 'issste') e.pt = 'issste';
+    if (efectivo().id === 'sueldos' && est.pt !== 'issste' && est.rt !== 'I') e.rt = est.rt;
     if (efectivo().id === 'plataformas') e.pl = est.plat;
     if (efectivo().id === 'honorarios') e.d = Math.round(est.ded * 100) / 100;
     return e;
@@ -532,8 +652,9 @@
   function firmable(d) {
     var c2 = function (v) { return (Math.round(v * 100) / 100).toFixed(2); };
     return {
-      doc: 'Auditavisión · Estado de cuenta cívico', v: 1, entrada: entrada(),
-      cifras: [['bruto', c2(d.bruto)], ['isr', c2(d.isr)], ['cuotas', c2(d.cuotas)], ['neto', c2(d.neto)]],
+      doc: 'Auditavisión · Estado de cuenta cívico', v: 2, entrada: entrada(),
+      cifras: [['bruto', c2(d.bruto)], ['isr', c2(d.isr)], ['cuotas', c2(d.cuotas)], ['neto', c2(d.neto)]].concat(
+        d.patron > 0 ? [['patron', c2(d.patron)], ['costo', c2(d.costo)]] : []),
       movimientos: d.movimientos.map(function (x) { return [x.id, c2(x.monto)]; }),
       poderes: d.poderes.map(function (x) { return [x.k, c2(x.monto)]; }),
       ellos: d.ellos ? [d.ellos.cargo, d.ellos.veces.toFixed(1)] : null
@@ -551,6 +672,8 @@
     q.set('verifica', est.folio || '');
     q.set('m', e.m); q.set('p', e.p); q.set('n', e.n); q.set('r', e.r);
     if (e.pl) q.set('pl', e.pl);
+    if (e.pt) q.set('pt', e.pt);
+    if (e.rt) q.set('rt', e.rt);
     if (e.d != null) q.set('d', e.d);
     return location.origin + location.pathname + '?' + q.toString();
   }
@@ -611,9 +734,12 @@
       '<div class="ct-doc-kpis">' +
         '<div class="ct-kpi"><span>Ingreso bruto</span><b>' + pesos(d.bruto) + '</b><small>' + d.cad + ' · ' + esc(d.regimen) + '</small></div>' +
         '<div class="ct-kpi ct-kpi-isr"><span>ISR pagado</span><b>' + pesos(d.isr) + '</b><small>impuesto: se reparte abajo</small></div>' +
-        '<div class="ct-kpi ct-kpi-imss"><span>Cuotas IMSS</span><b>' + pesos(d.cuotas) + '</b><small>aportación con destino propio</small></div>' +
+        '<div class="ct-kpi ct-kpi-imss"><span>Cuotas ' + (d.seg || 'IMSS') + '</span><b>' + pesos(d.cuotas) + '</b><small>aportación con destino propio</small></div>' +
         '<div class="ct-kpi ct-kpi-neto"><span>Te queda</span><b>' + pesos(d.neto) + '</b><small>ingreso neto ' + d.cad + '</small></div>' +
       '</div>' +
+      (d.patron > 0 ? '<div class="ct-doc-sec ct-doc-nom"><p class="ct-doc-sec-tit">Tu nómina completa ' + chip('derivado') + '</p>' +
+        '<p>Además de tu sueldo, ' + (d.seg === 'ISSSTE' ? 'tu dependencia aporta' : 'tu patrón paga') + ' <b>' + pesos(d.patron) + '</b> ' + d.cad + ' al ' + (d.seg === 'ISSSTE' ? 'ISSSTE y al FOVISSSTE' : 'IMSS y al INFONAVIT') +
+        ': tu plaza cuesta <b>' + pesos(d.costo) + '</b> ' + d.cad + '.' + (d.seg === 'ISSSTE' ? ' Sale del presupuesto público.' : '') + '</p></div>' : '') +
       '<div class="ct-doc-sec"><p class="ct-doc-sec-tit">Movimientos: a dónde fue tu ISR ' + chip('derivado') + '</p><div class="ct-movs">' + movs + '</div></div>' +
       pod + ellos +
       '<footer class="ct-doc-pie">' +
@@ -682,6 +808,7 @@
     var d = datosDoc(); if (!d) return;
     var t = '🇲🇽 MI ESTADO DE CUENTA CÍVICO 2026 (Auditavisión)\n';
     t += 'De mi sueldo de ' + pesos(d.bruto) + ' ' + d.cad + ', Hacienda me retiene ' + pesos(d.isr) + ' de ISR.\n';
+    if (d.patron > 0) t += 'Mi plaza cuesta ' + pesos(d.costo) + ' ' + d.cad + ': ' + (d.seg === 'ISSSTE' ? 'mi dependencia aporta ' : 'mi patrón paga ') + pesos(d.patron) + ' al ' + d.seg + '.\n';
     t += 'Así se reparte cada peso de mi esfuerzo en el Presupuesto Federal:\n';
     d.movimientos.forEach(function (x) { t += '• ' + x.icono + ' ' + x.nombre + ': ' + pesos(x.monto) + ' (' + x.pct.toFixed(1) + '%)\n'; });
     d.poderes.forEach(function (x) { t += '   de ahí, ' + x.nombre + ': ' + finos(x.monto) + '\n'; });
@@ -762,7 +889,7 @@
         texto(g, m[0], x, 298, '600 16px ' + mono, C.suave);
         texto(g, m[1], x, 326, '600 22px ' + sans, C.txt);
       });
-      var kpis = [['INGRESO BRUTO', d.bruto, C.txt], ['ISR PAGADO', d.isr, C.oro], ['CUOTAS IMSS', d.cuotas, C.cian], ['TE QUEDA', d.neto, C.txt]];
+      var kpis = [['INGRESO BRUTO', d.bruto, C.txt], ['ISR PAGADO', d.isr, C.oro], ['CUOTAS ' + (d.seg || 'IMSS'), d.cuotas, C.cian], ['TE QUEDA', d.neto, C.txt]];
       var kw = (W - 2 * M - 3 * 16) / 4;
       kpis.forEach(function (k, i) {
         var x = M + i * (kw + 16), y = 356;
@@ -869,10 +996,10 @@
   var q = new URLSearchParams(location.search);
   if (q.get('verifica')) {
     est.verifica = q.get('verifica').trim();
-    aplicar({ m: q.get('m'), per: q.get('p'), nat: q.get('n'), reg: q.get('r'), plat: q.get('pl'), ded: q.get('d') });
+    aplicar({ m: q.get('m'), per: q.get('p'), nat: q.get('n'), reg: q.get('r'), plat: q.get('pl'), ded: q.get('d'), pt: q.get('pt') || 'imss', rt: q.get('rt') || 'I' });
   } else if (q.get('m')) {
     /* El Auditor Virtual trae el ingreso que le dijeron, y el régimen si lo dijo (?m=&p=&n=&r=&pl=, 24-10-2026). */
-    aplicar({ m: q.get('m'), per: q.get('p'), nat: q.get('n'), reg: q.get('r'), plat: q.get('pl') });
+    aplicar({ m: q.get('m'), per: q.get('p'), nat: q.get('n'), reg: q.get('r'), plat: q.get('pl'), pt: q.get('pt') || 'imss' });
   } else {
     recuperar();
   }

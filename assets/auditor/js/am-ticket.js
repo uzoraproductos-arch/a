@@ -17,7 +17,7 @@
   if (!raiz) return;
 
   var COMPARTIDA = 'auditavision_cc_sueldo';
-  var est = { m: 0, per: 'mes', tipo: 'neto', emitido: false, ajena: false, origen: '' };
+  var est = { m: 0, per: 'mes', tipo: 'neto', emitido: false, ajena: false, origen: '', pt: 'imss' };
   var quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- Formato ---------- */
@@ -62,11 +62,17 @@
       return a + (r.base === 'excedente_3_uma' ? Math.max(0, b - tres) : b) * r.pct / 100;
     }, 0);
   }
+  /* ISSSTE: el mismo porcentaje para todo sueldo, entre uno y diez salarios minimos (art. 17). */
+  function cuotasIssste(b) {
+    if (!(b > 0)) return 0;
+    var S = D.issste;
+    return Math.min(Math.max(b, S.piso * D.sm.general), S.tope * D.sm.general) * S.pct / 100;
+  }
   function desdeBruto(b) {
-    var t = tarifa(b);
+    var t = tarifa(b), gob = est.pt === 'issste';
     var sub = (b > 0 && b <= I.sub_tope) ? Math.min(I.uma_mensual * I.sub_pct / 100, t) : 0;
-    var r = { bruto: b, isr: Math.max(0, t - sub), cuotas: cuotas(b), exento: false };
-    if (b > 0 && b <= D.sm.general + 0.005) { r.isr = 0; r.cuotas = 0; r.exento = true; }
+    var r = { bruto: b, isr: Math.max(0, t - sub), cuotas: gob ? cuotasIssste(b) : cuotas(b), exento: false, gob: gob };
+    if (b > 0 && b <= D.sm.general + 0.005) { r.isr = 0; if (!gob) r.cuotas = 0; r.exento = true; }
     r.neto = b - r.isr - r.cuotas;
     return r;
   }
@@ -93,7 +99,7 @@
   function guardar() {
     if (est.ajena) return;   /* una liga ajena no pisa lo que este equipo recuerda */
     try {
-      if (est.m > 0) localStorage.setItem(COMPARTIDA, JSON.stringify({ monto: est.m, periodo: est.per, tipo: est.tipo }));
+      if (est.m > 0) localStorage.setItem(COMPARTIDA, JSON.stringify({ monto: est.m, periodo: est.per, tipo: est.tipo, pt: est.pt }));
       else localStorage.removeItem(COMPARTIDA);
     } catch (e) { /* sin almacenamiento: no pasa nada */ }
   }
@@ -104,6 +110,7 @@
       est.m = Number(s.monto);
       est.per = (s.periodo === 'anio' || s.periodo === 'ano') ? 'anio' : 'mes';
       est.tipo = s.tipo === 'bruto' ? 'bruto' : 'neto';
+      est.pt = s.pt === 'issste' ? 'issste' : 'imss';
       est.origen = 'Tomado de lo que guardaste en la Calculadora Cívica de este navegador (' + est.tipo + ', ' + (est.per === 'anio' ? 'al año' : 'al mes') + '). Cámbialo si quieres.';
       return true;
     } catch (e) { return false; }
@@ -114,6 +121,7 @@
     var v = leer(q.get('ingreso'));
     if (!(v > 0)) return false;
     est.m = v; est.per = q.get('p') === 'anio' ? 'anio' : 'mes'; est.tipo = q.get('t') === 'bruto' ? 'bruto' : 'neto';
+    est.pt = q.get('pt') === 'issste' ? 'issste' : 'imss';
     est.ajena = true;
     est.origen = 'Abriste una liga compartida con este ingreso. No se guarda en tu navegador hasta que lo cambies.';
     return true;
@@ -124,6 +132,8 @@
   function pintarMandos() {
     [].forEach.call(raiz.querySelectorAll('[data-per]'), function (b) { b.setAttribute('aria-pressed', String(b.dataset.per === est.per)); });
     [].forEach.call(raiz.querySelectorAll('[data-tipo]'), function (b) { b.setAttribute('aria-pressed', String(b.dataset.tipo === est.tipo)); });
+    [].forEach.call(raiz.querySelectorAll('[data-pt]'), function (b) { b.setAttribute('aria-pressed', String(b.dataset.pt === est.pt)); });
+    $('atPt').hidden = est.tipo !== 'bruto';
     $('atIngresoEt').textContent = 'Tu ingreso ' + est.tipo + (est.per === 'anio' ? ' al año' : ' al mes');
     rango.max = est.per === 'anio' ? 2400000 : 200000;
     rango.step = est.per === 'anio' ? 6000 : 500;
@@ -133,8 +143,9 @@
     if (est.tipo === 'bruto') {
       var r = desdeBruto(est.per === 'anio' ? est.m / 12 : est.m);
       n.innerHTML = 'Tu neto al mes: <b>' + pesosRef(r.neto) + '</b> ' + chip('derivado') + ' <small>' +
-        (r.exento ? 'Hasta el salario mínimo no se paga ISR ni cuota obrera del IMSS: el neto es igual al bruto.' :
-          'Bruto ' + pesosRef(r.bruto) + ' menos ISR ' + pesosRef(r.isr) + ' y cuotas del IMSS ' + pesosRef(r.cuotas) + ', como quien trabaja en nómina.') + '</small>';
+        (r.exento && !r.gob ? 'Hasta el salario mínimo no se paga ISR ni cuota obrera del IMSS: el neto es igual al bruto.' :
+          'Bruto ' + pesosRef(r.bruto) + ' menos ISR ' + pesosRef(r.isr) + ' y cuotas ' + (r.gob ? 'al ISSSTE' : 'del IMSS') + ' ' + pesosRef(r.cuotas) +
+          (r.gob ? ', como quien trabaja para el gobierno.' : ', como quien trabaja en nómina.')) + '</small>';
     } else if (est.per === 'anio') {
       n.innerHTML = 'Al mes: <b>' + pesosRef(v) + '</b> <small>(lo anual entre 12)</small>';
     } else n.innerHTML = '';
@@ -167,6 +178,7 @@
     if (!b || !raiz.contains(b)) return;
     if (b.dataset.per) { est.per = b.dataset.per; tocar(); }
     else if (b.dataset.tipo) { est.tipo = b.dataset.tipo; tocar(); }
+    else if (b.dataset.pt) { est.pt = b.dataset.pt; tocar(); }
     else if (b.dataset.ej) {
       var fr = b.dataset.ej === 'frontera';
       est.m = fr ? D.sm.frontera : D.sm.general; est.per = 'mes'; est.tipo = 'neto';
@@ -370,6 +382,7 @@
     q.set('ingreso', String(Math.round(est.m * 100) / 100));
     if (est.per === 'anio') q.set('p', 'anio');
     if (est.tipo === 'bruto') q.set('t', 'bruto');
+    if (est.tipo === 'bruto' && est.pt === 'issste') q.set('pt', 'issste');
     return location.origin + location.pathname + '?' + q.toString();
   }
   function copiar() { if (mesNeto() > 0) alPortapapeles(textoTicket(), 'Ticket copiado con sus fuentes.'); }

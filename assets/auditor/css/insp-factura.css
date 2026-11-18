@@ -41,3 +41,5 @@
 .cf-ley ul { margin: 0 0 8px; padding-left: 20px; }
 .cf-ley li { margin: 0 0 10px; line-height: 1.5; }
 .cf-fund { color: var(--ef-tenue); }
+.cf-nom { margin: 12px 0 0; padding: 12px 14px; border-radius: 10px; background: #f1f8f4; border: 1px solid #b9dcc6; }
+.cf-nom small { font-size: 16px; }

@@ -85,7 +85,9 @@
   /* ---------- Guardar y leer el sueldo (solo en este navegador) ---------- */
   function guardar() {
     try {
-      if (est.monto > 0) localStorage.setItem(CLAVE, JSON.stringify({ monto: est.monto, periodo: est.periodo, tipo: est.tipo }));
+      /* Lo que dijo la Calculadora Civica de quien paga (IMSS o ISSSTE) se conserva. */
+      var prev = null; try { prev = JSON.parse(localStorage.getItem(CLAVE) || 'null'); } catch (e2) { prev = null; }
+      if (est.monto > 0) localStorage.setItem(CLAVE, JSON.stringify({ monto: est.monto, periodo: est.periodo, tipo: est.tipo, pt: prev && prev.pt === 'issste' ? 'issste' : 'imss' }));
       else localStorage.removeItem(CLAVE);
     } catch (e) { /* sin almacenamiento: no se recuerda */ }
   }

@@ -1348,6 +1348,7 @@
         }
       }
       if (SAN.t.serv_sosten && /\bcomo (se )?(sostiene|financia|mantiene|gana dinero|ganan dinero)\b|\bde que vive|\bquien (los|la|le) (paga|financia|sostiene)|\bmodelo de negocio de auditavision/.test(t)) return sanTema('serv_sosten');
+      if (SAN.t.serv_nomina && /\b(revis\w*|audit\w*|checa\w*|verific\w*) (de )?(la |mi |nuestra |las |mis )?nominas?\b|\b(revisen|auditen|chequen) (la |mi |nuestra )?nomina|\bauditoria de (la )?nomina|\brevision de (la )?nomina/.test(t) && !/\brecibos?\b|\bxml\b|\bcfdi\b/.test(t)) return sanTema('serv_nomina');
       if (SAN.t.serv_diligencia && /debida diligencia|antes de contratar|\b(como|quiero|puedo) (reviso|revisar|checo|checar|investigo|investigar|verifico|verificar) (a )?(un|una|mi|mis) (proveedor|proveedores|empresa)\b/.test(t)) return sanTema('serv_diligencia');
       return null;
     }

@@ -35,6 +35,9 @@ import xml.etree.ElementTree as ET
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LISTA_69B = os.path.join(RAIZ, 'assets', 'auditor', 'data', 'sat-69b.js')
 EJEMPLO = os.path.join(RAIZ, 'docs', 'ejemplos', 'factura-ficticia-cfdi40.xml')
+EJEMPLO_NOMINA = os.path.join(RAIZ, 'docs', 'ejemplos', 'nomina-ficticia-cfdi40.xml')
+NOMINA_NS = 'http://www.sat.gob.mx/nomina12'   # complemento de nómina 1.2 (18-11-2026)
+MES = 30.4   # días de un mes para llevar el periodo pagado a la tarifa mensual (cuenta nuestra, derivada)
 
 # Los «espacios de nombres» del XML. Una factura escribe <cfdi:Comprobante>,
 # pero «cfdi:» es solo un apodo: lo que cuenta es la dirección a la que apunta
@@ -113,6 +116,29 @@ REGLAS = {
                      'que le presta una persona física',
                 'u': LIVA_PDF, 'u2': RLIVA_PDF},
 }
+LISR_PDF = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf'
+LSS_PDF = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf'
+CPEUM_PDF = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf'
+REGLAS.update({
+    'nom_cuadre': {'t': 'Cuadre del recibo de nómina',
+                   'f': 'Guía de llenado del complemento de nómina: percepciones más otros pagos dan el subtotal, las deducciones dan '
+                        'el descuento, y cada total es la suma de sus renglones', 'u': GUIA20},
+    'nom_isr': {'t': 'ISR retenido',
+                'f': 'Ley del ISR, art. 96: el patrón retiene con la tarifa mensual (Anexo 8 de la RMF 2026) y no retiene a quien gana '
+                     'solo el salario mínimo', 'u': LISR_PDF},
+    'nom_sub': {'t': 'Subsidio para el empleo',
+                'f': 'Decreto que otorga el subsidio para el empleo (DOF 31-12-2025): 15.02% de la UMA mensual, solo para ingresos de '
+                     'hasta $11,492.66 al mes', 'u': LISR_PDF},
+    'nom_sbc': {'t': 'Salario base de cotización',
+                'f': 'Ley del Seguro Social, art. 28: se cotiza con el salario mínimo como límite inferior y 25 veces la UMA como superior',
+                'u': LSS_PDF},
+    'nom_pub': {'t': 'Nómina pública',
+                'f': 'Complemento de nómina, nodo EntidadSNCF: lo llenan las entidades del Sistema Nacional de Coordinación Fiscal '
+                     'y dice con qué recurso pagan', 'u': GUIA20},
+    'nom_127': {'t': 'Tope de remuneración (art. 127)',
+                'f': 'Constitución, art. 127, fracción II: ningún servidor público recibe más que la Presidencia de la República en el '
+                     'Presupuesto; la fracción III admite excepciones', 'u': CPEUM_PDF},
+})
 SITUACION = {'P': 'Presunto', 'D': 'Desvirtuado', 'F': 'Definitivo', 'S': 'Sentencia favorable'}
 TOLERANCIA = 0.01   # un centavo: el CFDI redondea a dos decimales
 
@@ -183,8 +209,105 @@ def leer(xml_bytes):
                   for pns in PAGOS_NS for d in raiz.iter('{%s}DoctoRelacionado' % pns)],
         'conceptos': [{'descripcion': c.attrib.get('Descripcion', ''), 'cantidad': num(c.attrib.get('Cantidad')),
                        'importe': num(c.attrib.get('Importe'))} for c in conceptos],
+        'nomina': leer_nomina(raiz),
     }
     return f
+
+
+def leer_nomina(raiz):
+    """El complemento de nómina 1.2, si lo trae. Nunca la CURP, el número de
+    seguridad social ni el nombre de quien trabaja."""
+    n = raiz.find('.//{%s}Nomina' % NOMINA_NS)
+    if n is None:
+        return None
+    q = lambda nom: n.find('{%s}%s' % (NOMINA_NS, nom))
+    a = lambda el, k: el.attrib.get(k, '') if el is not None else ''
+    em, re_, pe, de, op = q('Emisor'), q('Receptor'), q('Percepciones'), q('Deducciones'), q('OtrosPagos')
+    sncf = em.find('{%s}EntidadSNCF' % NOMINA_NS) if em is not None else None
+    hijos = lambda el, nom: el.findall('{%s}%s' % (NOMINA_NS, nom)) if el is not None else []
+    per = [{'t': a(x, 'TipoPercepcion'), 'g': num(a(x, 'ImporteGravado')), 'e': num(a(x, 'ImporteExento'))} for x in hijos(pe, 'Percepcion')]
+    ded = [{'t': a(x, 'TipoDeduccion'), 'i': num(a(x, 'Importe'))} for x in hijos(de, 'Deduccion')]
+    otros = [{'t': a(x, 'TipoOtroPago'), 'i': num(a(x, 'Importe'))} for x in hijos(op, 'OtroPago')]
+    return {'tipo': a(n, 'TipoNomina'), 'dias': num(a(n, 'NumDiasPagados')), 'pago': a(n, 'FechaPago'),
+            'tot_per': num(a(n, 'TotalPercepciones')), 'tot_ded': num(a(n, 'TotalDeducciones')), 'tot_otros': num(a(n, 'TotalOtrosPagos')),
+            'reg_pat': a(em, 'RegistroPatronal'), 'origen': a(sncf, 'OrigenRecurso'),
+            'regimen': a(re_, 'TipoRegimen'), 'sbc': num(a(re_, 'SalarioBaseCotApor')),
+            'gravado': num(a(pe, 'TotalGravado')), 'exento': num(a(pe, 'TotalExento')), 'per': per, 'ded': ded, 'otros': otros,
+            'isr': sum(x['i'] for x in ded if x['t'] == '002'), 'seg_soc': sum(x['i'] for x in ded if x['t'] == '001'),
+            'subsidio': sum(x['i'] for x in otros if x['t'] == '002')}
+
+
+def parametros_nomina(base=None):
+    """Lo que la revisión del recibo necesita, leído de la base (calculadora_civica
+    y el Anexo 23 del PEF): nunca escrito aquí. Lo usa también insp_factura.py."""
+    if base is None:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import auditorias
+        base = auditorias.db()
+    c = base['calculadora_civica']
+    p = c['parametros']
+    pres = next((x for x in (base.get('poderes') or {}).get('remuneraciones2026') or [] if x.get('id') == 'presidencia'), None)
+    return {'tarifa': c['tarifa_mensual']['renglones'], 'smDia': p['salario_minimo']['general'], 'umaDia': p['uma']['diaria'],
+            'umaMes': p['uma']['mensual'], 'subPct': p['subsidio_empleo']['pct_uma'], 'subTope': p['subsidio_empleo']['tope_ingreso_mensual'],
+            'pres': pres['brutoAnual'] if pres else None}
+
+
+def _isr_tarifa(base, tarifa):
+    if not base > 0:
+        return 0.0
+    for r in tarifa:
+        if r['ls'] is None or base <= r['ls']:
+            return max(0.0, r['cf'] + (base - r['li']) * r['pct'] / 100)
+    return 0.0
+
+
+def _p(v):
+    return '$' + format(round(v, 2), ',.2f')
+
+
+def revisar_nomina(f, par):
+    """La revisión del recibo de nómina: las mismas reglas que revisarNomina() de
+    insp-factura.js. Todo es derivado: «señal para revisar», nunca irregularidad."""
+    n, out = f.get('nomina'), []
+    if not n:
+        return out
+    dif = []
+    sp, sd = sum(x['g'] + x['e'] for x in n['per']), sum(x['i'] for x in n['ded'])
+    if n['per'] and abs(sp - (n['gravado'] + n['exento'])) > TOLERANCIA:
+        dif.append('las percepciones suman %s y gravado + exento da %s' % (_p(sp), _p(n['gravado'] + n['exento'])))
+    if n['ded'] and abs(sd - n['tot_ded']) > TOLERANCIA:
+        dif.append('las deducciones suman %s y el total dice %s' % (_p(sd), _p(n['tot_ded'])))
+    if abs(n['tot_per'] + n['tot_otros'] - f['subtotal']) > TOLERANCIA:
+        dif.append('percepciones + otros pagos dan %s y el subtotal dice %s' % (_p(n['tot_per'] + n['tot_otros']), _p(f['subtotal'])))
+    if abs(n['tot_ded'] - f['descuento']) > TOLERANCIA:
+        dif.append('las deducciones dan %s y el descuento dice %s' % (_p(n['tot_ded']), _p(f['descuento'])))
+    if dif:
+        out.append(('nom_cuadre', 'senal', 'El recibo no cuadra por dentro: %s.' % '; '.join(dif)))
+    if n['dias'] > 0 and n['tipo'] == 'O' and n['regimen'] in ('02', ''):
+        mes = n['gravado'] * MES / n['dias']
+        isr = _isr_tarifa(mes, par['tarifa']) * n['dias'] / MES
+        sub = min(par['umaMes'] * par['subPct'] / 100 * n['dias'] / MES, isr) if mes <= par['subTope'] else 0.0
+        esperado = max(0.0, isr - sub)
+        if mes <= par['smDia'] * MES + TOLERANCIA:
+            out.append(('nom_isr', 'nota', 'Gana el salario mínimo o menos: el art. 96 de la Ley del ISR prohíbe retenerle el impuesto.'
+                        + (' Aun así, el recibo retiene %s: conviene preguntar por qué.' % _p(n['isr']) if n['isr'] > TOLERANCIA else '')))
+        elif n['isr'] <= TOLERANCIA and esperado > 1:
+            out.append(('nom_isr', 'senal', 'El recibo no retiene ISR; la tarifa daría unos %s.' % _p(esperado)))
+        elif abs(n['isr'] - esperado) > max(100, esperado * 0.10):
+            out.append(('nom_isr', 'nota', 'La tarifa daría unos %s y el recibo retiene %s: es una cuenta aproximada nuestra.' % (_p(esperado), _p(n['isr']))))
+        if n['subsidio'] > TOLERANCIA and mes > par['subTope']:
+            out.append(('nom_sub', 'senal', 'Da subsidio para el empleo a un ingreso que equivale a %s al mes, arriba del tope.' % _p(mes)))
+    if n['sbc'] > 0 and not n['origen']:
+        if n['sbc'] + TOLERANCIA < par['smDia']:
+            out.append(('nom_sbc', 'senal', 'El salario base de cotización es menor que el salario mínimo.'))
+        elif n['sbc'] > par['umaDia'] * 25 + TOLERANCIA:
+            out.append(('nom_sbc', 'senal', 'El salario base de cotización rebasa el tope de 25 UMA.'))
+    if n['origen']:
+        out.append(('nom_pub', 'nota', 'Es nómina pública (nodo EntidadSNCF, recurso %s).' % n['origen']))
+        anual = (n['tot_per'] + n['tot_otros']) * 365 / n['dias'] if n['dias'] > 0 else 0
+        if par.get('pres') and n['tipo'] == 'O' and anual > par['pres']:
+            out.append(('nom_127', 'senal', 'Equivale a %s al año, más que la remuneración bruta anual de la Presidencia en el PEF 2026.' % _p(anual)))
+    return out
 
 
 def cuadra(f):
@@ -254,7 +377,18 @@ def revisar(f, pagos=None):
         out.append(('ret_iva', 'senal', 'Una persona física le factura a una persona moral IVA por $%s sin IVA retenido. Si es un servicio '
                     'profesional, una comisión o un arrendamiento, la persona moral retiene dos terceras partes: $%s (IVA × 2 ÷ 3). '
                     'Si es venta de bienes, no aplica.' % (format(f['iva_trasladado'], ',.2f'), format(dos, ',.2f'))))
+    if f.get('nomina'):
+        out += revisar_nomina(f, _par_nomina())
     return out
+
+
+_PAR = []
+
+
+def _par_nomina():
+    if not _PAR:
+        _PAR.append(parametros_nomina())
+    return _PAR[0]
 
 
 def es_fisica(rfc):
@@ -437,6 +571,29 @@ def prueba():
     if pagos_del_lote([('p.xml', leer(rep)), ('f.xml', f)]) != {'AAAAAAAA-0000-4000-8000-000000000009': [500.0, 1]} \
             or pagos_del_lote([('f.xml', f)]) is not None:
         fallas.append('lectura del complemento de pago')
+    # El recibo de nómina ficticio (18-11-2026): se lee, cuadra y su ISR coincide con la tarifa.
+    par = parametros_nomina()
+    nm = leer(open(EJEMPLO_NOMINA, 'rb').read())
+    n = nm['nomina'] or {}
+    if (nm['tipo'], n.get('dias'), n.get('isr'), n.get('seg_soc'), n.get('gravado'), nm['total']) != ('Nómina', 15.0, 1204.25, 256.38, 10000.0, 8539.37):
+        fallas.append('lectura del recibo de nómina: %r' % (n,))
+    if cuadra(nm) or revisar_nomina(nm, par):
+        fallas.append('el recibo ficticio debería cuadrar y no dar señales: %r %r' % (cuadra(nm), revisar_nomina(nm, par)))
+    sin_isr = dict(nm, nomina=dict(n, isr=0.0))
+    ids_n = lambda g: [(r, k) for r, k, _t in revisar_nomina(g, par)]
+    if ids_n(sin_isr) != [('nom_isr', 'senal')]:
+        fallas.append('ISR en cero: %r' % ids_n(sin_isr))
+    if ids_n(dict(nm, descuento=1000.0)) != [('nom_cuadre', 'senal')]:
+        fallas.append('recibo que no cuadra')
+    if ids_n(dict(nm, nomina=dict(n, subsidio=50.0, tot_otros=50.0), subtotal=10050.0)) != [('nom_sub', 'senal')]:
+        fallas.append('subsidio arriba del tope: %r' % ids_n(dict(nm, nomina=dict(n, subsidio=50.0, tot_otros=50.0), subtotal=10050.0)))
+    if ids_n(dict(nm, nomina=dict(n, sbc=100.0))) != [('nom_sbc', 'senal')]:
+        fallas.append('salario base debajo del mínimo')
+    gob = dict(nm, nomina=dict(n, origen='IF', tot_per=200000.0, gravado=200000.0, per=[{'t': '001', 'g': 200000.0, 'e': 0.0}]), subtotal=200000.0)
+    if [x for x in ids_n(gob) if x[0] in ('nom_pub', 'nom_127')] != [('nom_pub', 'nota'), ('nom_127', 'senal')]:
+        fallas.append('nómina pública y art. 127: %r' % ids_n(gob))
+    if leer(open(EJEMPLO, 'rb').read())['nomina'] is not None:
+        fallas.append('una factura sin complemento no es recibo de nómina')
     # Y que la lista real tenga las fechas por etapa que necesita el cruce.
     meta, lista = cargar_69b()
     if len(next(iter(lista.values()))) < 8:

@@ -1974,6 +1974,13 @@ SERVICIOS = [
     ('facturas', '🧾', 'Revisión de facturas por lote',
      'Cientos de facturas (XML) revisadas de una vez: un resumen por proveedor, su cruce con la lista 69-B y las señales que conviene revisar.',
      'Resumen por proveedor con cada señal y su regla. Si prefieres no compartir tus archivos, el lector gratuito hace lo mismo en tu navegador.', 'Despachos contables y áreas de finanzas.', 'prevencion'),
+    # 18-11-2026, pedido del autor tras ver una plataforma de nómina: «calcular la nómina… y tener las distinciones entre
+    # trabajadores del gobierno, ISSSTE, y trabajadores para empresas, IMSS». Quien calcula la nómina no la audita: aquí se revisa.
+    ('nomina', '💼', 'Revisión de nómina',
+     'Una segunda mirada a la nómina que ya calculó tu sistema o tu maquilador: los recibos (XML) contra la tarifa del ISR, el subsidio y el salario base de cotización, '
+     'las cuotas del IMSS o del ISSSTE contra su ley, quien maquila la nómina contra las listas del SAT, y en la nómina pública, el tope del artículo 127.',
+     'Señales por recibo y por trabajador, sin nombres, cada una con su artículo. El lector gratuito revisa un recibo en tu navegador.',
+     'Empresas, despachos contables, tesorerías y órganos internos de control.', 'prevencion'),
     ('radiografia', '🗳️', 'Radiografía de tu municipio o de tu estado',
      'Lo que los documentos públicos dicen de un gobierno, en un solo documento: lo que le entra y lo que gasta, su deuda, su inversión, lo que dejó por aclarar ante la ASF en su estado y lo que no cuadra entre un portal y otro.',
      'Documento estándar, sin opinión: cada cifra con su documento y su etiqueta, y lo que falta, con el nombre de quien lo debe. Es el mismo para quien lo pida.',
@@ -2007,6 +2014,7 @@ COBRO = {
     'diligencia': 'Precio fijo por ficha',
     'seguimiento': 'Suscripción mensual, según cuántos RFC vigilas',
     'facturas': 'Precio por lote, según su tamaño',
+    'nomina': 'Precio por periodo de nómina, según cuántos recibos',
     'radiografia': 'Precio fijo y público por documento: el mismo para todos',
     'temporada': 'Precio por temporada',
     'entrega': 'Precio fijo por gobierno',
@@ -2046,7 +2054,7 @@ CALENDARIO = [
 PERFILES = [
     ('🧮', 'Contaduría y despachos contables', 'Contadoras y contadores públicos, fiscalistas y despachos.',
      'Si un proveedor sale definitivo en la lista 69-B, sus facturas «no producen ni produjeron efecto fiscal alguno» (CFF, art. 69-B) y tu cliente tiene que acreditar la operación o corregir.',
-     ['facturas', 'seguimiento', 'diligencia'],
+     ['facturas', 'nomina', 'seguimiento', 'diligencia'],
      [('herramienta-inspector-efos.html', 'Busca un RFC en la lista 69-B'), ('herramienta-inspector-factura.html', 'Lee una factura sin subirla'),
       ('herramienta-inspector-resultados.html', 'Revisa un estado de resultados')]),
     ('⚖️', 'Derecho y cumplimiento', 'Abogadas y abogados corporativos, oficiales de cumplimiento y prevención de lavado (PLD).',
@@ -2075,8 +2083,9 @@ PERFILES = [
      ['capacitacion', 'licencia'],
      [('enciclopedia-auditavision.html', 'La Enciclopedia'), ('planisferio.html', 'El Planisferio')]),
     ('📋', 'Gobiernos y dependencias', 'Tesorerías, contralorías y áreas de transparencia.',
-     'Capacitar a su personal con las observaciones que la ASF repite. Nunca a cambio de retirar, suavizar o retrasar lo que publicamos (política de independencia).',
-     ['capacitacion', 'licencia'],
+     'Capacitar a su personal con las observaciones que la ASF repite, y revisar su nómina contra la Ley del ISSSTE y el tope del artículo 127. '
+     'Nunca a cambio de retirar, suavizar o retrasar lo que publicamos (política de independencia).',
+     ['capacitacion', 'nomina', 'licencia'],
      [('herramienta-inspector-asf.html', 'Auditorías de la ASF'), ('aprende-auditoria.html', 'Cómo se audita')]),
 ]
 
@@ -2110,8 +2119,8 @@ RIESGOS = [
     ('🕵️', 'Fraude: las señales, antes de pagar',
      'Casi ningún delito contra una empresa llega a una fiscalía. Lo que no revisas antes, rara vez se recupera después.',
      'Te damos señales con su regla: compras partidas, facturas que no cuadran con la ley y un estado de resultados que no cierra. '
-     'Y un taller de control interno con casos mexicanos.',
-     ['revision', 'capacitacion'], ('aprende-auditoria.html#met-fraude', 'El triángulo del fraude')),
+     'Y un taller de control interno con casos mexicanos. En la nómina, una segunda mirada a lo que calculó tu sistema.',
+     ['revision', 'nomina', 'capacitacion'], ('aprende-auditoria.html#met-fraude', 'El triángulo del fraude')),
 ]
 RIESGO_LIMITE = ('No decimos que evitamos el fraude ni que cumplimos por ti. Te damos señales para revisar, cada una con su documento, '
                  'y te decimos lo que falta. Una señal no es una irregularidad, y una acusación no es una condena.')
@@ -2379,6 +2388,8 @@ SV_EJEMPLOS = {
                    ('Un cliente en una actividad vulnerable', '¿Qué dicen de esta empresa los documentos públicos antes de aceptarla como cliente?')],
     'seguimiento': [('Mi cartera de proveedores contra la lista 69-B', '¿Me avisan cada semana si alguno de mis proveedores entra o cambia de situación en la lista?'),
                     ('Los contratos de una dependencia', '¿Me avisan cuando esta dependencia publique contratos nuevos de este tipo?')],
+    'nomina': [('La nómina de una quincena de mi empresa', '¿El ISR, el subsidio y las cuotas de estos recibos cuadran con la ley, y quién nos maquila la nómina está en alguna lista del SAT?'),
+               ('La nómina de una dependencia o un municipio', '¿Las cuotas al ISSSTE cuadran con su ley y alguna remuneración rebasa el tope del artículo 127?')],
     'facturas': [('Las facturas de un trimestre de mi empresa', '¿Qué proveedores de este lote están en la lista 69-B y qué facturas conviene revisar?'),
                  ('Las facturas de un cliente de mi despacho', '¿Qué señales trae este lote, por proveedor, y con qué regla se detectó cada una?')],
     'radiografia': [('Las finanzas de mi municipio', '¿Cuánto le entra, en qué lo gasta, cuánto debe y qué dejó por aclarar ante la ASF?'),

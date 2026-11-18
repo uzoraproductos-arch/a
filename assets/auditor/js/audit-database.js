@@ -7949,6 +7949,30 @@ window.AUDIT_DB = {
       "categoria": "👷 Trabajo y Salario"
     },
     {
+      "termino": "Cuota Patronal del IMSS",
+      "definicion": "Lo que el patrón paga al Seguro Social y al INFONAVIT por cada trabajador, además del sueldo, y que no aparece en el recibo de nómina: una cuota fija por trabajador, los porcentajes de cada seguro sobre el salario base de cotización, la cesantía y vejez (que sube cada año hasta 2030), el riesgo de trabajo según la clase de la empresa y el 5 % de vivienda. La Calculadora Cívica la saca con tu sueldo.",
+      "ley": "Arts. 25, 36, 73, 106, 107, 147, 168 y 211 Ley del Seguro Social · Segundo transitorio del decreto DOF 16-12-2020 · Art. 29 Ley del INFONAVIT",
+      "categoria": "👷 Trabajo y Salario"
+    },
+    {
+      "termino": "Cuotas al ISSSTE",
+      "definicion": "Lo que se descuenta a quien trabaja para el gobierno federal (o para un gobierno con convenio): 10.625 % de su sueldo básico, por salud, retiro, invalidez y vida y servicios sociales. Su dependencia aporta además 20.145 %, vivienda (FOVISSSTE) incluida, y el Gobierno Federal paga cuotas sociales. Se calculan entre uno y diez salarios mínimos. Muchos estados y municipios tienen su propio instituto, con otras cuotas.",
+      "ley": "Arts. 17, 42, 75, 102, 140, 194 y 199 Ley del ISSSTE (última reforma DOF 15-01-2026)",
+      "categoria": "👷 Trabajo y Salario"
+    },
+    {
+      "termino": "Salario Base de Cotización",
+      "definicion": "El salario con el que se calculan las cuotas al Seguro Social: lo que se paga en efectivo por día más las prestaciones que la ley integra (aguinaldo, prima vacacional y otras). Tiene un piso (el salario mínimo) y un techo (25 veces la UMA diaria); arriba del techo el sueldo sube y la cuota ya no.",
+      "ley": "Arts. 27 y 28 Ley del Seguro Social",
+      "categoria": "👷 Trabajo y Salario"
+    },
+    {
+      "termino": "Recibo de Nómina (CFDI de nómina)",
+      "definicion": "La factura electrónica que el patrón timbra por cada pago de sueldo, con el complemento de nómina: percepciones gravadas y exentas, deducciones (ISR y seguridad social), otros pagos como el subsidio para el empleo y el salario base de cotización. Si el patrón es una entidad de gobierno, dice con qué recurso paga. Es la prueba de lo que te retuvieron.",
+      "ley": "Art. 99, fr. III Ley del ISR · Art. 29 Código Fiscal de la Federación · Complemento de nómina 1.2 del SAT",
+      "categoria": "👷 Trabajo y Salario"
+    },
+    {
       "termino": "Secretaría de Hacienda y Crédito Público (SHCP)",
       "definicion": "La dependencia del Ejecutivo que calcula los ingresos de la Federación, redacta las iniciativas de leyes fiscales y de ingresos, maneja la deuda pública y formula el proyecto de Presupuesto de Egresos. De ella dependen el SAT y la Tesorería de la Federación, y es quien publica los informes trimestrales, la Cuenta Pública y los datos abiertos del presupuesto.",
       "ley": "Art. 31 frs. II, III, V y XV Ley Orgánica de la Administración Pública Federal",
@@ -20033,6 +20057,83 @@ window.AUDIT_DB = {
       { "ramo": "Vivienda (INFONAVIT)", "pct": 5.00, "ley": "Art. 29 de la Ley del INFONAVIT: aportaci\u00f3n patronal del 5% sobre el salario base." },
       { "ramo": "Riesgos de trabajo", "pct": null, "ley": "Arts. 70 a 74: prima variable seg\u00fan la siniestralidad de cada empresa, a cargo del patr\u00f3n." }
     ]
+  },
+
+  "imss_patronal": {
+    "titulo": "Lo que el patrón paga al Seguro Social y al INFONAVIT por cada trabajador",
+    "fuente": "Ley del Seguro Social, última reforma DOF 15-01-2026, y su decreto del DOF 16-12-2020 (artículo Segundo transitorio, tabla de 2026)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf",
+    "sha256": "8a28a16e1dce1f8e666f4cce5ed19745bc912b2ab1ca49787d5d4bef229398ed",
+    "decreto_url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lss/LSS_ref25_16dic20.pdf",
+    "decreto_sha256": "1078f08acbda8435d830c36c1699c8feb97f670dba9394419673c618d8027e92",
+    "estado": "oficial",
+    "cuota_fija_pct_uma": 20.40,
+    "cuota_fija_ley": "Art. 106, fracción I, leído con el artículo Décimo Noveno transitorio de 1995: la cuota patronal por cada asegurado arrancó en 13.9% de un salario mínimo diario y subió sesenta y cinco centésimas cada 1º de julio de 1998 a 2007, hasta quedar en 20.40%. Desde la reforma de desindexación de 2016 se calcula sobre la UMA.",
+    "ramos": [
+      { "ramo": "Enfermedades y maternidad · excedente de tres UMA", "pct": 1.10, "base": "excedente_3_uma",
+        "ley": "Art. 106, fracción II, con el Décimo Noveno transitorio de 1995: la cuota patronal arrancó en 6% y bajó cuarenta y nueve centésimas cada 1º de julio de 1998 a 2007, hasta quedar en 1.10% de lo que excede tres veces la referencia diaria." },
+      { "ramo": "Enfermedades y maternidad · prestaciones en dinero", "pct": 0.70, "base": "sbc",
+        "ley": "Art. 107, fracción I: al patrón le toca el 70% de la cuota total del 1%." },
+      { "ramo": "Gastos médicos de personas pensionadas", "pct": 1.05, "base": "sbc",
+        "ley": "Art. 25: de la cuota conjunta de 1.5%, al patrón le corresponde 1.05%." },
+      { "ramo": "Invalidez y vida", "pct": 1.75, "base": "sbc", "ley": "Art. 147: patrón 1.75%." },
+      { "ramo": "Retiro", "pct": 2.00, "base": "sbc", "ley": "Art. 168, fracción I: 2% a cargo del patrón." },
+      { "ramo": "Guarderías y prestaciones sociales", "pct": 1.00, "base": "sbc", "ley": "Arts. 211 y 212: prima de 1% que el patrón cubre íntegra." },
+      { "ramo": "Vivienda (INFONAVIT)", "pct": 5.00, "base": "sbc", "ley": "Art. 29 de la Ley del INFONAVIT: aportación patronal del 5% sobre el salario base." }
+    ],
+    "cesantia_2026": {
+      "ley": "Art. 168, fracción II, inciso a), con la tabla del artículo Segundo transitorio del decreto publicado en el DOF el 16 de diciembre de 2020: la cuota sube cada 1º de enero hasta 2030.",
+      "renglones": [
+        { "hasta_uma": null, "sm": true, "pct": 3.150, "rango": "1.00 salario mínimo" },
+        { "hasta_uma": 1.50, "pct": 3.676, "rango": "1.01 salario mínimo a 1.50 UMA" },
+        { "hasta_uma": 2.00, "pct": 4.851, "rango": "1.51 a 2.00 UMA" },
+        { "hasta_uma": 2.50, "pct": 5.556, "rango": "2.01 a 2.50 UMA" },
+        { "hasta_uma": 3.00, "pct": 6.026, "rango": "2.51 a 3.00 UMA" },
+        { "hasta_uma": 3.50, "pct": 6.361, "rango": "3.01 a 3.50 UMA" },
+        { "hasta_uma": 4.00, "pct": 6.613, "rango": "3.51 a 4.00 UMA" },
+        { "hasta_uma": null, "pct": 7.513, "rango": "4.01 UMA en adelante" }
+      ]
+    },
+    "riesgo_trabajo": {
+      "ley": "Art. 73: la empresa que se inscribe por primera vez paga la prima media de su clase; después, la que resulte de su propia siniestralidad (arts. 72 y 74).",
+      "clases": [
+        { "id": "I", "pct": 0.54355 }, { "id": "II", "pct": 1.13065 }, { "id": "III", "pct": 2.59840 },
+        { "id": "IV", "pct": 4.65325 }, { "id": "V", "pct": 7.58875 }
+      ]
+    },
+    "art36": "Art. 36: cuando el trabajador percibe como cuota diaria el salario mínimo, el patrón paga también la cuota obrera.",
+    "no_incluye": "No se incluyen el impuesto estatal sobre nóminas (cada congreso local fija su tasa), el aguinaldo, las vacaciones ni las prestaciones del contrato: el costo real de la plaza es mayor."
+  },
+
+  "issste": {
+    "titulo": "Lo que se descuenta a quien trabaja para el gobierno y lo que aporta su dependencia",
+    "fuente": "Ley del ISSSTE, última reforma publicada en el DOF el 15 de enero de 2026",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISSSTE.pdf",
+    "sha256": "aa6e0e437331debd80d0086155e2d99885ea5e22cb13353c44eb0b1090f0b4d5",
+    "estado": "oficial",
+    "base": "Sueldo Básico: el sueldo del tabulador regional del puesto (art. 17). No incluye compensaciones ni otras percepciones.",
+    "piso_sm": 1, "tope_sm": 10,
+    "tope_ley": "Art. 17: las cuotas y aportaciones se calculan sobre el Sueldo Básico, con un salario mínimo como límite inferior y diez salarios mínimos como límite superior. La ley dice «salario mínimo»: aquí se usa el general vigente, sin convertirlo a UMA.",
+    "trabajador": [
+      { "ramo": "Seguro de salud · trabajadores en activo", "pct": 2.75, "ley": "Art. 42, fracción I, inciso a)." },
+      { "ramo": "Seguro de salud · pensionados", "pct": 0.625, "ley": "Art. 42, fracción I, inciso b)." },
+      { "ramo": "Retiro, cesantía en edad avanzada y vejez", "pct": 6.125, "ley": "Art. 102, fracción I." },
+      { "ramo": "Invalidez y vida", "pct": 0.625, "ley": "Art. 140, fracción I." },
+      { "ramo": "Servicios sociales y culturales", "pct": 0.50, "ley": "Art. 199, fracción I." }
+    ],
+    "dependencia": [
+      { "ramo": "Seguro de salud · trabajadores en activo", "pct": 7.375, "ley": "Art. 42, fracción II, inciso a)." },
+      { "ramo": "Seguro de salud · pensionados", "pct": 0.72, "ley": "Art. 42, fracción II, inciso b)." },
+      { "ramo": "Riesgos del trabajo", "pct": 0.75, "ley": "Art. 75." },
+      { "ramo": "Retiro", "pct": 2.00, "ley": "Art. 102, fracción II." },
+      { "ramo": "Cesantía en edad avanzada y vejez", "pct": 3.175, "ley": "Art. 102, fracción II." },
+      { "ramo": "Invalidez y vida", "pct": 0.625, "ley": "Art. 140, fracción II." },
+      { "ramo": "Servicios sociales y culturales", "pct": 0.50, "ley": "Art. 199, fracción II." },
+      { "ramo": "Vivienda (FOVISSSTE)", "pct": 5.00, "ley": "Art. 194." }
+    ],
+    "cuota_social": "Además, el Gobierno Federal paga por cada trabajador dos cuotas sociales diarias (arts. 42, fracción III, y 102, fracción III), fijadas en 1997 y actualizadas cada trimestre con la inflación. No se suman aquí: su monto vigente no viene en la ley.",
+    "quien": "Cotizan al ISSSTE quienes trabajan para la Federación y para los gobiernos y organismos que firmaron convenio con el Instituto. Muchos estados y municipios tienen su propio instituto de seguridad social, con cuotas distintas: si es tu caso, esta cuenta no es la tuya.",
+    "art127": "Art. 127, fracción II, de la Constitución: ningún servidor público puede recibir una remuneración mayor a la establecida para la Presidencia de la República en el Presupuesto. La fracción III admite excepciones por trabajo técnico calificado o especialización."
   },
 
   "regimenes": [
