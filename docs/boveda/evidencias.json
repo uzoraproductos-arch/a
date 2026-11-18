@@ -94,9 +94,9 @@
     "cifra:limantour-superavit-y-peso-oro",
     "fuente:limantour-superavit-y-peso-oro"
    ],
-   "consultado": "2026-11-17",
+   "consultado": "2026-11-18",
    "estado": "no abrió",
-   "error": "[Errno 11001] getaddrinfo failed"
+   "error": "[Errno -2] Name or service not known"
   },
   "https://centralelectoral.ine.mx/2023/03/31/lorenzo-cordova-adriana-favela-ciro-murayama-y-jose-roberto-ruiz-se-despiden-de-la-herradura-de-la-democracia/": {
    "primera_vez": "2026-10-28",
@@ -910,7 +910,7 @@
    "usos": [
     "biblioteca:ref-conapo-proyecciones"
    ],
-   "consultado": "2026-11-17",
+   "consultado": "2026-11-18",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -920,7 +920,7 @@
    "usos": [
     "biblioteca:ref-sat-padron-rfc"
    ],
-   "consultado": "2026-11-17",
+   "consultado": "2026-11-18",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -2068,9 +2068,9 @@
    "usos": [
     "biblioteca:ref-oaj-trimestre2026"
    ],
-   "consultado": "2026-11-17",
+   "consultado": "2026-11-18",
    "estado": "no abrió",
-   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1010)"
+   "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1011)"
   },
   "https://www.comunicacionpef.hacienda.gob.mx/work/models/COMUNICACION_DEL_PEF/Documentos/2026/distribucion_gasto_UR/r03_apurog.pdf": {
    "primera_vez": "2026-10-27",
@@ -3645,7 +3645,7 @@
    "usos": [
     "auditoria:inversion-megaobras"
    ],
-   "consultado": "2026-11-17",
+   "consultado": "2026-11-18",
    "estado": "no abrió",
    "error": "Not Found"
   },
@@ -4431,7 +4431,7 @@
    "usos": [
     "fuente:imss-modalidad-40-gestores"
    ],
-   "consultado": "2026-11-17",
+   "consultado": "2026-11-18",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -4604,7 +4604,7 @@
    "usos": [
     "biblioteca:ref-sat-denuncias"
    ],
-   "consultado": "2026-11-17",
+   "consultado": "2026-11-18",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -4713,7 +4713,7 @@
    "usos": [
     "biblioteca:ref-presidencia-2ig"
    ],
-   "consultado": "2026-11-17",
+   "consultado": "2026-11-18",
    "estado": "no abrió",
    "error": "Forbidden"
   },
