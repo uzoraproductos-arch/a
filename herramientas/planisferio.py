@@ -846,6 +846,32 @@ def matriz():
     return {d for d, _ in tm.PLANISFERIO.values()}
 
 
+def _rezago_cfm(a=None):
+    """Expedientes civiles, familiares y mercantiles pendientes al cierre de
+    2024 (INEGI, CNIJE 2025, tabulados, cuadro 16; gestion_judicial.rezago_cfm):
+    del país (suma de los que lo saben) o de una entidad, con su chip; si su
+    poder judicial no lo sabe, se dice y lleva a su pendiente."""
+    import gestion_judicial as gj
+    est, pais, nolo = gj.rezago_cfm()
+    v = pais if a is None else est[a]
+    partes = []
+    for m, dicho in (('fam', 'familiares'), ('civ', 'civiles'), ('mer', 'mercantiles')):
+        x = v[m]
+        if x is None and a == 'CDMX' and m == 'mer':
+            partes.append('los mercantiles van dentro de los civiles')
+        elif x is None:
+            partes.append('%s: <b>no lo sabe</b>' % dicho)
+        else:
+            partes.append('<b class="num-tabular">%s</b> %s' % (format(x, ','), dicho))
+    txt = ', '.join(partes) + ' ' + chip('oficial')
+    if a is None:
+        txt += (' <small>suma de los %d poderes judiciales que lo saben; %d le dijeron al INEGI que no lo saben</small> %s'
+                % (32 - len(nolo), len(nolo), chip('pendiente', 'judicial-rezago-civil')))
+    elif a in nolo:
+        txt += ' <small>su Poder Judicial le respondió al INEGI que no lo sabe</small> %s' % chip('pendiente', 'judicial-rezago-civil')
+    return txt
+
+
 def _bloque_judicial_mapa(base, ref, filas):
     """Los dos sectores de la dimensión Judicial bajo el mapa (09-11-2026,
     pedido del autor: «potencializar el esquema y estructura de la información,
@@ -1046,7 +1072,7 @@ def _bloque_judicial_mapa(base, ref, filas):
         '<dt>En los 32 poderes judiciales estatales</dt><dd><b class="num-tabular">%s</b> %s <small>(subió de %s al cierre de 2023)</small></dd>'
         '<dt>En juzgados federales (CJF)</dt><dd><b class="num-tabular">%s</b> %s <small>(subió de %s al cierre de 2023)</small></dd>'
         '<dt>En el sistema tradicional (antes de la reforma penal)</dt><dd><b class="num-tabular">%s</b> pendientes %s <small>(%s en estados y %s en el fuero federal)</small></dd>'
-        '<dt>Rezago civil, familiar y mercantil en estados</dt><dd>No publicado por el censo %s</dd></dl></article>'
+        '<dt>Expedientes civiles, familiares y mercantiles pendientes en los estados</dt><dd>%s</dd></dl></article>'
         '<article class="pl-piso pl-piso-jud"><p class="pl-piso-n">Tiempos de resolución y antes y después de la reforma · 2025</p>'
         '<p class="pl-piso-v"><b class="num-tabular">%s días</b> amparo indirecto · <b class="num-tabular">%s días</b> amparo directo %s</p>'
         '<dl class="pl-dl">'
@@ -1068,7 +1094,7 @@ def _bloque_judicial_mapa(base, ref, filas):
         format(gj.PEND_PENAL['pje'][1], ','), chip('oficial'), format(gj.PEND_PENAL['pje'][0], ','),
         format(gj.PEND_PENAL['cjf'][1], ','), chip('oficial'), format(gj.PEND_PENAL['cjf'][0], ','),
         format(gj.PEND_TRAD['total'], ','), chip('oficial'), format(gj.PEND_TRAD['pje'], ','), format(gj.PEND_TRAD['cjf'], ','),
-        chip('pendiente', 'judicial-rezago-civil'),
+        _rezago_cfm(),
         format(jd_d, '.1f'), format(tc_d, '.1f'), chip('oficial'),
         format(jd_l, ',.2f'), chip('oficial'),
         ej.DIAS_ANTES, format(m1[1], ','), format(m1[3], ','), chip('oficial'), format(round(m1[3] / ej.DIAS_ANTES), ','), chip('derivado'),
@@ -1741,13 +1767,13 @@ def _nota_jud(filas):
             'después de años de juicio o una demanda que se desechó el primer día, y el censo no los separa: la distancia es una pregunta, no un veredicto. '
             '<b>Lo que concluye no es lo que debe.</b> %s concluyó %s de cada 100 asuntos que le entraron %s, el más bajo del país, y es el lugar %d de 32 en causas penales pendientes '
             '(%s %s, con %s personas juzgadoras en todas las materias). Pero en lo civil, familiar y mercantil el INEGI cuenta como ingresada toda demanda, '
-            'y cuántas quedaron sin resolver no lo publica %s. '
+            'y lo que quedó sin resolver se cuenta aparte, en los expedientes pendientes de cada portal %s. '
             '<b>En el circuito federal</b>, un amparo indirecto tardó en promedio %s días en %s y %s días en %s %s, pero cada circuito atiende materias y cargas distintas, '
             'y el Órgano de Administración Judicial no reparte la nómina por circuito %s.') % (
                 a[0]['n'], _pesos(a[0]['juda']), chip('derivado'), a[-1]['n'], _pesos(a[-1]['juda']), chip('derivado'),
                 format(a[0]['juda'] / a[-1]['juda'], '.1f'),
                 c[0]['n'], pct(c[0]['judc']), chip('derivado'), r.index(c[0]) + 1, format(c[0]['judr'], ','), chip('oficial'), c[0]['judj'],
-                chip('pendiente', 'judicial-rezago-civil'),
+                chip('oficial'),
                 format(d[0]['jdfD'], '.1f'), d[0]['n'], format(d[-1]['jdfD'], '.1f'), d[-1]['n'], chip('oficial'),
                 chip('pendiente', 'poderes-judicial-0'))
 
@@ -2140,16 +2166,16 @@ def _judicial_portal(base, ref, e):
           '<dt>Personas juzgadoras</dt><dd><b class="num-tabular">%d</b> %s <small>lugar %d de 32 por plantilla en todas las materias</small></dd>'
           '<dt>Carga concluida por persona juzgadora</dt><dd><b class="num-tabular">%s asuntos al año</b> %s <small>(%s al mes; lugar %d de 32; promedio nacional: %s al año)</small></dd>'
           '<dt>Causas penales pendientes (sistema acusatorio)</dt><dd><b class="num-tabular">%s</b> %s <small>al cierre de 2024, lugar %d de 32 (%s por persona juzgadora %s); el INEGI cuenta cada persona procesada</small></dd>'
-          '<dt>Rezago civil, familiar y mercantil</dt><dd>Sin cifra %s <small>el reporte del censo del INEGI no publica cuántos quedaron en trámite</small></dd>'
+          '<dt>Expedientes civiles, familiares y mercantiles pendientes</dt><dd>%s <small>al cierre de 2024, entre los que entraron ese año y los de antes</small></dd>'
           '</dl><p class="pl-piso-f">INEGI, CNIJF-E 2025, reporte de resultados: asuntos ingresados y concluidos, tabla 23 (p. 39); '
-          'causas penales pendientes, tabla 25 (p. 45); personas juzgadoras, tabla 6 (p. 12) %s. Las divisiones son nuestras.</p></article>') % (
+          'causas penales pendientes, tabla 25 (p. 45); personas juzgadoras, tabla 6 (p. 12); expedientes pendientes, tabulados básicos, cuadro 16 %s. Las divisiones son nuestras.</p></article>') % (
               pct(j['c100']), chip('derivado'),
               format(j['i'], ','), chip('oficial'),
               format(j['c'], ','), chip('oficial'), lugar('c100'), pct(nac_c100),
               j['j'], chip('oficial'), lugar('j'),
               format(j['cj'], ','), chip('derivado'), format(round(j['cj'] / 12, 1), '.1f'), lugar('cj'), format(nac_cj, ','),
               format(j['p'], ','), chip('oficial'), lugar('p'), format(round(j['p'] / j['j'], 1), '.1f') if j['j'] else '—', chip('derivado'),
-              chip('pendiente', 'judicial-rezago-civil'),
+              _rezago_cfm(a),
               ref('ref-inegi-cnijfe2025-rr'))
     # Sector 1 · Piso 2: Productividad, litigiosidad y tiempos en su Circuito Judicial Federal
     n = ic.EDO.index(a) + 1

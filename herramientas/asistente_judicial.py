@@ -470,7 +470,10 @@ def judicial(d):
         x.setdefault('ir', [PAGINA_DE[k][0] + '#jud-' + k, PAGINA_DE[k][1]])
         x['aqui'] = [PAGINA_DE[k][0] + '#jud-' + k, PAGINA_DE[k][1]]
     return {'t': t, 'min': [[n, v] for n, v, _ in MINISTROS], 'pag': [PORTADA, PORTADA_TIT],
-            'est': gestion_judicial.por_estado(d), 'circ': indicadores_circuito.EDO}
+            'est': gestion_judicial.por_estado(d), 'circ': indicadores_circuito.EDO,
+            # Expedientes familiares, civiles y mercantiles pendientes de cada estado
+            # (cuadro 16 de los tabulados del censo); null = no lo sabe.
+            'cfm': {a: [v['fam'], v['civ'], v['mer']] for a, v in gestion_judicial.rezago_cfm()[0].items()}}
 
 
 def secciones(d, temas):
