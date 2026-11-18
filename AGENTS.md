@@ -1031,12 +1031,12 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   **El padrón de contrapartes** (18-11-2026, pedido del autor: «que nuestra base de datos quede muy bien integrada… para el compliance de prevención de
   lavado de dinero»). Una sola ficha por RFC (`assets/auditor/js/padron.js`, que leen la aplicación «Revisa a tu contraparte»,
   `herramienta-inspector-padron.html` de `herramientas/insp_padron.py`, y el chat, `padronResp()` de `asistente.js`) con las listas del SAT del art. 69,
-  17-H Bis y 69-B Bis (`herramientas/anclar_listas.py` → `assets/auditor/data/padron/`, con huella y cuadre; flujo semanal «Listas del padrón»), la 69-B,
+  17-H Bis y 69-B Bis (`herramientas/anclar_listas.py` → `assets/auditor/data/padron/`, con huella y cuadre; flujo semanal «Base al día»), la 69-B,
   el Directorio de Sancionados, la OFAC y la ONU (`sanciones-int.js`) y ComprasMX. **No trae datos propios**: lee los archivos que ya escriben esos
   scripts. **Las personas físicas no se publican** (decisión del autor, 18-11-2026): las listas del SAT las guardan por la huella SHA-256 de su RFC
   (sal `av-padron:`), y de ellas solo se dice si el RFC coincide, nunca el nombre. **Una coincidencia es una señal para revisar, nunca una acusación
   ni una calificación**; coincidir en un nombre no es ser la misma persona, y lo que no es público (la Lista de Personas Bloqueadas de la UIF) se dice
-  con su nombre. **Una lista nueva entra en `anclar_listas.py`, con sus columnas fijas y su cuadre**, o no entra.
+  con su nombre. **Una lista nueva entra en `anclar_listas.py`, con sus columnas fijas y su cuadre**, o no entra. **El lote, la cadena de terceros y la matriz** (18-11-2026, `insp-padron-lote.js`, sección `#lote`): hasta 2,000 RFC de un CSV, un TXT o lo pegado de Excel, o las facturas XML (emisor, receptor y los RFC «a cuenta de terceros» del CFDI 4.0, con el papel de cada uno), en una matriz de una fila por RFC y una columna por lista que se descarga en CSV, **todo en el navegador**; **la columna «Revisar» ordena por la señal más seria, nunca suma ni califica**.
   **La nómina** (18-11-2026, pedido del autor: «calcular la nómina… y tener las distinciones entre trabajadores del gobierno, ISSSTE, y trabajadores para empresas, IMSS»). La Calculadora Cívica (`cc_ticket.py`, `cc-ticket.js`) pregunta quién paga (`&pt=issste`) y suma «Tu nómina completa»: lo que pone el patrón y el costo de la plaza; las tasas viven en `calculadora_civica.imss_patronal` e `issste` de la base, cada una con su artículo y la huella de la ley. **La cesantía y vejez patronal sube cada 1 de enero hasta 2030**: en enero se cambia `cesantia_2026` por el renglón del año (decreto DOF 16-12-2020, Segundo transitorio). El Lector de facturas revisa recibos de nómina (`revisar_nomina()` de `lector_cfdi.py` y `revisarNomina()` de `insp-factura.js`, gemelos); **el ISR del recibo es una cuenta aproximada nuestra**, y una diferencia chica es solo nota. **Nunca se muestra el nombre, la CURP ni el número de seguridad social de quien trabaja**, y la señal del art. 127 es una comparación de cifras, no una acusación. **Revisamos la nómina; no la calculamos ni la timbramos por nadie.**
   **Los grupos y sus filiales** (17-11-2026, `herramientas/empresas_grupos.py`, sección `#grupos` y `grupoEmp()` del chat; pedido del
   autor: «le pregunté al chat por Grupo Prodi y no salió información»). Muchos grupos no contratan con su nombre: `GRUPOS` dice con qué
@@ -1066,7 +1066,7 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   flujo semanal) compara la lista del SAT contra `sat-69b.js` por RFC y deja en
   `docs/sat69b/bandeja.json` altas, cambios de situación, bajas y cambios de razón
   social, con las personas físicas con el RFC recortado y sin nombre. **Desde el 18-11-2026
-  se actualiza sola** (decisión del autor): si el SAT publicó otro archivo, el flujo corre
+  se actualiza sola** (decisión del autor): si el SAT publicó otro archivo, el flujo «Base al día» corre
   `actualizar_69b.py` con ese mismo archivo, sube el sello y publica; se detiene si cambian
   las columnas o si la lista se encoge más de 10 %. **`sat-69b.js` conserva los nombres
   tal como los publica el SAT** (decisión del autor, 18-11-2026: la 69-B es una lista que la
@@ -1081,6 +1081,17 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   proveedores» contra la 69-B y «Mis revisiones», **guardado solo en el navegador**
   (localStorage `av-mia`; los dos lectores escriben ahí con `miaGuardar()`, solo el
   resumen y nunca el archivo; las personas físicas no entran a la lista).
+- **La base al día** (18-11-2026, pedido del autor: «que nuestra base de datos quede bien integrada… únicamente para
+  alimentarla o actualizarla con las novedades»). **Cada fuente de la base tiene su renglón en `FUENTES` de
+  `herramientas/fuentes.py`**: quién la publica, cada cuándo, cómo entra (🤖 sola, 🔔 avisa o ✋ a mano), su script, su
+  archivo y, si es a mano, la fecha `revisar` en que conviene ir a buscar la siguiente; se lee en `base-al-dia.html` y
+  `revision.py` lo prueba. **Una fuente nueva no está terminada hasta que tiene ahí su renglón.** Lo que se actualiza solo
+  corre en un flujo semanal, «Base al día» (`.github/workflows/base-al-dia.yml`, miércoles 9:41: la 69-B, las listas del
+  padrón y el Directorio de sancionados): cada fuente por su lado, y la que no contesta o no cuadra se deshace sin tocar a las
+  demás; al final escribe la agenda (`docs/base/agenda.json`) con las fuentes a mano que ya toca revisar. **Al integrar una
+  fuente a mano se cambian su `corte` y su `revisar`.** La página no depende del día (la regenera cada mañana «Expedientes al
+  día»): el «ya toca» solo vive en la agenda. **GitHub programa los flujos desde `main`**: un flujo nuevo o cambiado solo corre
+  solo cuando su archivo llega ahí, con permiso del autor.
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).

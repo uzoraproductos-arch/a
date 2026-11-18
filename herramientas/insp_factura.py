@@ -55,7 +55,8 @@ PASOS = [
     ('💼', 'Si es un recibo de nómina, lo revisamos', 'Con el complemento de nómina 1.2: que cuadre por dentro, el ISR contra la tarifa del artículo 96, el subsidio para el empleo, '
      'el salario base de cotización y, si es nómina pública, el tope del artículo 127. Sin mostrar el nombre ni la CURP de quien trabaja.'),
     ('🧾', 'La cruzamos con la lista 69-B', 'Si el emisor aparece, te decimos lo que publicó el SAT y, aparte, las señales que salen de comparar fechas.'),
-    ('🏢', 'Las juntamos por proveedor', 'Con dos o más (hasta 500 a la vez), un resumen por emisor: cuántas facturas, cuánto suman, cuántas no cuadran y si está en la lista 69-B.'),
+    ('🏢', 'Las juntamos por proveedor', 'Con dos o más (hasta 500 a la vez), un resumen por emisor: cuántas facturas, cuánto suman, cuántas no cuadran y si está en la lista 69-B. Para cruzarlos con todas las listas (SAT, Sancionados, OFAC y ONU) y ver por cuenta de quién facturan, súbelas a '
+     '<a href="herramienta-inspector-padron.html#lote">Revisa a tu contraparte</a>.'),
 ]
 
 

@@ -20,15 +20,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261118e">
-  <script src="assets/auditor/js/iconos.js?v=20261118e"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261118e"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261118e" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261118e">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261118e">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261118e">
-  <link rel="stylesheet" href="assets/auditor/css/insp-efos.css?v=20261118e">
-  <link rel="stylesheet" href="assets/auditor/css/insp-padron.css?v=20261118e">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261118g">
+  <script src="assets/auditor/js/iconos.js?v=20261118g"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261118g"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261118g" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261118g">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261118g">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261118g">
+  <link rel="stylesheet" href="assets/auditor/css/insp-efos.css?v=20261118g">
+  <link rel="stylesheet" href="assets/auditor/css/insp-padron.css?v=20261118g">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -204,6 +204,25 @@
     <div id="pdRes" class="pd-res" aria-live="polite"></div>
   </section>
 
+  <section class="ef-sec" id="lote" aria-labelledby="pd-lote-tit">
+    <h2 id="pd-lote-tit">📂 Revisa un lote o tus facturas</h2>
+    <p>Sube un <b>CSV o TXT</b> con la lista de tus clientes o proveedores (hasta 2,000 RFC; basta con que cada renglón traiga el RFC), o tus <b>facturas en XML</b>.
+      Con las facturas te digo quién te factura, a quién le facturas y <b>por cuenta de quién</b>: los RFC «a cuenta de terceros» de cada concepto (CFDI 4.0).
+      El resultado es una <b>matriz</b>: una fila por RFC y una columna por lista, que puedes descargar en CSV.</p>
+    <div class="pd-suelta" id="pdSuelta">
+      <label class="ef-lbl" for="pdArch">Tu archivo (CSV, TXT o facturas XML; puedes elegir varios)</label>
+      <input type="file" id="pdArch" class="pd-archivo" accept=".csv,.txt,.xml,text/csv,text/plain,text/xml,application/xml" multiple>
+      <p class="pd-chico">o arrástralos aquí</p>
+    </div>
+    <details class="pd-pegar"><summary>O pega la columna de RFC desde Excel</summary>
+      <label class="ef-lbl" for="pdPega">RFC, uno por renglón</label>
+      <textarea id="pdPega" class="ef-input pd-pega" rows="5" spellcheck="false" autocapitalize="characters"></textarea>
+      <button type="button" class="ef-btn" id="pdLoteBtn">🔎 Revisar el lote</button>
+    </details>
+    <p class="cf-privado">🔒 Tus archivos se leen en tu navegador: no se suben a ningún lado.</p>
+    <div id="pdLote" class="pd-res" aria-live="polite"></div>
+  </section>
+
   <section class="ef-sec" aria-labelledby="pd-listas">
     <h2 id="pd-listas">📚 Las listas que revisamos</h2>
     <p>Cada una se baja de su fuente oficial con la huella SHA-256 del archivo, y si sus columnas cambian o sus cuentas no cuadran, la plataforma se detiene antes de publicarla.
@@ -229,8 +248,8 @@
   <section class="ef-sec" aria-labelledby="pd-no">
     <h2 id="pd-no">🚫 Lo que no revisamos, y por qué</h2>
     <ul><li><b>Lista de Personas Bloqueadas de la UIF.</b> La Unidad de Inteligencia Financiera de Hacienda no la publica: solo la comparte con quienes la ley obliga a reportar (bancos y quienes realizan actividades vulnerables), en su acceso del SAT. Si es tu caso, consúltala ahí.</li><li><b>Personas políticamente expuestas.</b> Hacienda dice qué cargos hacen a alguien «persona políticamente expuesta», pero no publica una lista con nombres. Aquí no armamos una: los cargos públicos y sus sueldos están en la Enciclopedia.</li><li><b>El nombre de las personas físicas.</b> No lo publicamos (AGENTS.md, regla de personas privadas). Las listas del SAT las guardamos por la huella de su RFC: con el RFC exacto te decimos si coincide, nunca quién es.</li><li><b>Registro Nacional de Obligaciones Alimentarias.</b> No se copia ni se consulta aquí: protege a menores de edad. Se pide un certificado en su portal oficial.</li></ul>
-    <p>¿Necesitas revisar a cientos de clientes o proveedores, o la cadena de quién le factura a quién? <a href="servicios.html">Pide un servicio</a>; mientras tanto, el
-      <a href="herramienta-inspector-factura.html">Lector de facturas</a> ya cruza a cada emisor con la lista 69-B.</p>
+    <p>¿Necesitas revisarlo cada mes, con más de 2,000 contrapartes o con el expediente de identificación de cada cliente? <a href="servicios.html">Pide un servicio</a>; el
+      <a href="herramienta-inspector-factura.html">Lector de facturas</a> también cruza a cada emisor con la lista 69-B.</p>
   </section>
 </div>
         </div>
@@ -249,13 +268,14 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261118e</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261118g</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261118e"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261118e"></script>
-  <script src="assets/auditor/js/padron.js?v=20261118e"></script>
-  <script src="assets/auditor/js/insp-padron.js?v=20261118e"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261118g"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261118g"></script>
+  <script src="assets/auditor/js/padron.js?v=20261118g"></script>
+  <script src="assets/auditor/js/insp-padron.js?v=20261118g"></script>
+  <script src="assets/auditor/js/insp-padron-lote.js?v=20261118g"></script>
 </body>
 </html>

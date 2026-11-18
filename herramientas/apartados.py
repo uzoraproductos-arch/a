@@ -1566,6 +1566,10 @@ BASE_PASOS = [
     ('⏳', 'Lo que falta, con nombre',
      'Si la dependencia no lo publica, no lo rellenamos: queda en el Registro de pendientes, con por qué falta, quién lo debe y dónde '
      'debería estar.'),
+    ('🔄', 'Se alimenta con cada novedad',
+     'Las dependencias no publican cada día, así que la base no se rehace a diario: cada fuente tiene su calendario. Las listas del SAT y '
+     'las de sanciones se actualizan solas cada semana; lo demás lo detecta un vigía o se integra a mano en cuanto sale. Lo ves en '
+     '<a href="base-al-dia.html">La base al día</a>.'),
     ('💾', 'Todo se descarga',
      'Las bases salen en CSV para que las revises en Excel, y el Auditor Virtual te lleva a la página y al documento de cada respuesta.'),
 ]
@@ -1792,6 +1796,7 @@ PILARES = {
              ('🔍', 'Verificamos', 'Lo que circula en redes, cotejado afirmación por afirmación, y los casos que puedes seguir.', 'noticias-seguimiento.html#seguimientos', None, None),
              ('🧾', 'Contratos públicos', 'Sigue el dinero: a quién le paga el gobierno, cuánto y por qué procedimiento (ComprasMX).', 'contratos-publicos.html', None, None),
              ('⏳', 'Registro de pendientes', 'Lo que falta publicar, por qué falta y a quién le toca.', 'pendientes.html', None, None),
+             ('🔄', 'La base al día', 'Cada fuente de la base, quién la publica, cada cuándo y cómo se actualiza.', 'base-al-dia.html', None, None),
              ('🌿', 'Crisis ambientales', 'Las crisis y los proyectos con costo ambiental, ficha por ficha.', 'herramienta-ambiente-crisis.html', None, None),
              ('📥', 'Descarga los datos', 'Las cifras de la plataforma, para que las revises por tu cuenta.', 'descarga-los-datos.html', None, None),
              ('✉️', 'Derecho de réplica', 'Si te aludimos con un dato inexacto, cómo pedir que se publique tu aclaración.', 'derecho-de-replica.html', None, None),
@@ -6919,7 +6924,8 @@ def generar(sello=None):
     import auditorias
     import estado_cuenta
     import pendientes
-    if auditorias.generar(sello) or estado_cuenta.generar(sello) or pendientes.generar(sello):
+    import fuentes
+    if auditorias.generar(sello) or estado_cuenta.generar(sello) or pendientes.generar(sello) or fuentes.generar(sello):
         return 1
     # El bot interno del Modo Inspector: su base se arma con las paginas ya
     # escritas (herramientas/asistente.py, 11-10-2026).

@@ -2611,6 +2611,15 @@
    "q": "¿Con qué bancos está endeudado Jalisco?",
    "ir": "planisferio-jal-deuda.html",
    "dice": ["Banorte"]
+  },
+  {
+   "q": "¿Cada cuándo se actualiza la base de datos?",
+   "ir": "base-al-dia.html",
+   "dice": ["La base al día"]
+  },
+  {
+   "q": "Quiero revisar mi lista de proveedores contra las listas del SAT",
+   "ir": "herramienta-inspector-padron.html#lote"
   }
  ]
 }

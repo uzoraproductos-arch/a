@@ -107,7 +107,7 @@ def _total_previo():
 def main():
     raw = leer(sys.argv[1] if len(sys.argv) > 1 else None)
     registros, cuenta, corte = registros_de(raw)
-    # Freno de la actualización automática (flujo «Vigía 69-B», 18-11-2026): la
+    # Freno de la actualización automática (flujo «Base al día», 18-11-2026): la
     # lista del SAT solo crece o se mueve de situación; si de pronto trae mucho
     # menos de lo que ya teníamos, lo más probable es un archivo cortado o un
     # cambio de formato, y no se publica.

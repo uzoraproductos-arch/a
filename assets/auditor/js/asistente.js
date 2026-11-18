@@ -2738,6 +2738,14 @@
         }, function () { return respApp('insppadron', ln, '<p>No pude descargar ahora las listas de sanciones. Búscalo en la aplicación aquí abajo.</p>'); }), tit: 'OFAC y ONU: ' + nom };
       }
     }
+    /* El lote, la cadena de terceros y la matriz (18-11-2026): un archivo con muchos RFC o las facturas en XML. */
+    if (APP.insppadron && /\b(lista|lote|archivo|excel|csv|cientos|todos|varios)\b.{0,25}\b(proveedores|clientes|contrapartes|rfc)\b|\b(mis|nuestros) (proveedores|clientes)\b.{0,30}\b(listas?|sat|ofac|69 ?b)\b|a cuenta de terceros|cadena de (terceros|proveedores)|matriz de (riesgo|contrapartes|coincidencias)/.test(p)) {
+      return respApp('insppadron', PD_URL + '#lote',
+        '<p>📂 Te abro <b>Revisa a tu contraparte</b> en su parte de lotes. Sube un <b>CSV o TXT</b> con hasta 2,000 RFC (o pega la columna desde Excel), o tus <b>facturas en XML</b>: ' +
+        'con ellas te digo quién te factura, a quién le facturas y por cuenta de quién (los RFC «a cuenta de terceros» del CFDI 4.0).</p>' +
+        '<p>El resultado es una <b>matriz</b>, una fila por RFC y una columna por lista (SAT, 69-B, 69-B Bis, Sancionados, OFAC y ONU), que puedes descargar en CSV. Todo se cruza en tu navegador: tus archivos no se suben a ningún lado.</p>' +
+        '<p class="pa-chico">La columna «Revisar» ordena la lista, no califica: una coincidencia es una señal para revisar, nunca una acusación, y de las personas físicas solo se dice si su RFC coincide.</p>');
+    }
     if (PD_GEN.test(p) && !/^\s*(que|q) (es|son|significa)\b|que quiere decir/.test(p) && APP.insppadron) {
       return respApp('insppadron', PD_URL,
         '<p>🛡️ Te abro <b>Revisa a tu contraparte</b> aquí abajo. Escribe el <b>RFC</b> de tu cliente, tu proveedor o el cliente de tu cliente (uno o varios) y te digo en una sola ficha si aparece en las listas del SAT ' +

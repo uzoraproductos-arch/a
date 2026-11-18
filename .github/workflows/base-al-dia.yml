@@ -1,0 +1,108 @@
+# La base al día (18-11-2026, pedido del autor: «que nuestra base de datos quede
+# bien integrada… únicamente para alimentarla o actualizarla con las novedades»).
+# Un solo flujo semanal para todo lo que se actualiza solo; reemplaza a «Vigía
+# 69-B» y a «Listas del padrón». El registro de cada fuente (quién la publica,
+# cada cuándo y cómo entra) vive en herramientas/fuentes.py y se lee en
+# base-al-dia.html.
+#
+# Cada fuente corre por su lado: si una no contesta, no cuadra o cambió de
+# formato, se deshace solo lo suyo, queda anotada en el resumen y las demás
+# siguen. Si nada cambió, no toca el repositorio. Al final escribe la agenda
+# (docs/base/agenda.json): las fuentes a mano que ya toca revisar.
+#
+# GitHub programa los flujos desde la rama principal del repositorio (main):
+# este archivo tiene que estar ahí para correr solo cada semana.
+name: Base al día
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '41 15 * * 3'   # miércoles, 15:41 UTC = 9:41 en la Ciudad de México
+
+permissions:
+  contents: write
+
+concurrency:
+  group: base-al-dia
+  cancel-in-progress: false
+
+jobs:
+  base:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/funny-turing-imtm54
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Lista 69-B del SAT
+        run: |
+          set -o pipefail
+          echo "### Lista 69-B del SAT" >> "$GITHUB_STEP_SUMMARY"
+          mkdir -p "$RUNNER_TEMP/sat"
+          url="$(python -c 'import sys; sys.path.insert(0,"herramientas"); import actualizar_69b as a; print(a.URL_CSV)')"
+          if ! curl -fsSL --retry 4 --retry-delay 20 -o "$RUNNER_TEMP/sat/69b.csv" "$url"; then
+            echo "⚠️ El SAT no entregó el archivo: se intenta la semana que viene." >> "$GITHUB_STEP_SUMMARY"; exit 0
+          fi
+          python herramientas/vigia_69b.py "$RUNNER_TEMP/sat/69b.csv" | tee -a "$GITHUB_STEP_SUMMARY" || { git checkout -- docs/sat69b; exit 0; }
+          if python -c 'import json,sys; sys.exit(0 if json.load(open("docs/sat69b/bandeja.json"))["mismo_archivo"] else 1)'; then
+            echo "Sin archivo nuevo del SAT." >> "$GITHUB_STEP_SUMMARY"; exit 0
+          fi
+          if ! python herramientas/actualizar_69b.py "$RUNNER_TEMP/sat/69b.csv" | tee -a "$GITHUB_STEP_SUMMARY"; then
+            echo "⚠️ No se integró: revisar a mano." >> "$GITHUB_STEP_SUMMARY"
+            git checkout -- assets/auditor/data/sat-69b.js
+          fi
+
+      - name: Listas del padrón (SAT, OFAC y ONU)
+        run: |
+          set -o pipefail
+          echo "### Listas del padrón" >> "$GITHUB_STEP_SUMMARY"
+          if ! python herramientas/anclar_listas.py | tee -a "$GITHUB_STEP_SUMMARY"; then
+            echo "⚠️ Alguna lista no contestó o no cuadró: no se integra ninguna esta semana." >> "$GITHUB_STEP_SUMMARY"
+            git checkout -- assets/auditor/data/padron assets/auditor/data/sanciones-int.js docs/listas
+            exit 0
+          fi
+          # Solo cuentan los datos: la ONU fecha su archivo cada día aunque no cambie nada.
+          if [ -z "$(git status --porcelain -- 'assets/auditor/data/padron/s-*.js' assets/auditor/data/sanciones-int.js)" ]; then
+            echo "Sin cambios en las listas." >> "$GITHUB_STEP_SUMMARY"
+            git checkout -- docs/listas/listas.json assets/auditor/data/padron/meta.js
+          fi
+
+      - name: Directorio de sancionados
+        run: |
+          set -o pipefail
+          echo "### Directorio de sancionados" >> "$GITHUB_STEP_SUMMARY"
+          if ! python herramientas/anclar_sancionados.py 2>&1 | tail -3 | tee -a "$GITHUB_STEP_SUMMARY"; then
+            echo "⚠️ El directorio no contestó o no cuadró: se intenta la semana que viene." >> "$GITHUB_STEP_SUMMARY"
+            git checkout -- assets/auditor/data/sancionados.js
+          fi
+
+      - name: Agenda de las fuentes a mano
+        run: |
+          set -o pipefail
+          python herramientas/fuentes.py --agenda | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Publicar lo que cambió
+        run: |
+          set -o pipefail
+          if [ -z "$(git status --porcelain -- assets)" ]; then
+            echo "La base ya estaba al día." | tee -a "$GITHUB_STEP_SUMMARY"
+          else
+            python herramientas/sello.py --siguiente
+            node --check assets/auditor/js/padron.js
+            node --check assets/auditor/js/insp-efos.js
+            python herramientas/inventario.py
+          fi
+          if [ -z "$(git status --porcelain)" ]; then exit 0; fi
+          git config user.name "Base al día"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Base al día: novedades de las fuentes al $(date +%d-%m-%Y)"
+          git pull --rebase origin claude/funny-turing-imtm54
+          git push origin HEAD:claude/funny-turing-imtm54

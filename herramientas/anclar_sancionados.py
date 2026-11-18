@@ -18,10 +18,12 @@ Uso:
     python3 herramientas/anclar_sancionados.py [sancionados_raw.json]
 """
 import collections
+import datetime
 import hashlib
 import json
 import pathlib
 import re
+import shutil
 import subprocess
 import sys
 
@@ -32,7 +34,9 @@ SAT_69B = RAIZ / 'assets' / 'auditor' / 'data' / 'sat-69b.js'
 
 URL_PORTAL = 'https://directoriosancionados.buengobierno.gob.mx/'
 URL_API = 'https://kong-servicios-estrategico.buengobierno.gob.mx/particularesSancionadosPro'
-CORTE = '2026-11-17'
+# El corte es el día de la consulta. Desde el 18-11-2026 lo pone el flujo «Base al día» cada semana; si el
+# API devuelve exactamente lo mismo que ya tenemos (misma huella), no se reescribe nada.
+CORTE = datetime.date.today().isoformat()
 SHA_ESPERADO = '023e410ce88855490eb885b9a024a9c6bb16c63176b1c3b8dcde823933788bc9'
 
 QUERY = {
@@ -73,11 +77,16 @@ def main():
     if len(sys.argv) >= 2:
         raw = pathlib.Path(sys.argv[1]).read_bytes()
     else:
-        p = subprocess.run(['curl.exe', '-sL', '-X', 'POST', URL_API,
+        # curl.exe en Windows y curl en Linux (el flujo «Base al día» corre en Ubuntu).
+        curl = shutil.which('curl.exe') or shutil.which('curl') or 'curl'
+        p = subprocess.run([curl, '-sL', '--retry', '3', '-X', 'POST', URL_API,
                             '-H', 'Content-Type: application/json', '-d', json.dumps(QUERY)],
                            capture_output=True, check=True)
         raw = p.stdout
     sha = hashlib.sha256(raw).hexdigest()
+    if SALIDA.exists() and ('"sha256":"%s"' % sha) in SALIDA.read_text(encoding='utf-8')[:3000]:
+        print('anclar_sancionados: sin cambios (misma huella %s…)' % sha[:12])
+        return
     d = json.loads(raw.decode('utf-8'))
     res = (d.get('data') or {}).get('results') or []
     if not res:
