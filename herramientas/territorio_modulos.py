@@ -500,6 +500,14 @@ def _base_al_dia():
         'ir': ['base-al-dia.html', 'La base al día']}
 
 
+def _servicios():
+    import apartados
+    import auditorias
+    import servicios_fichas
+    return servicios_fichas.temas(apartados.SERVICIOS, apartados.COBRO, apartados.LINEAS, apartados.PERFILES,
+                                  apartados.PERFILES_CORTO, auditorias.db())
+
+
 def temas_bot(d):
     IE = d['inspector_estatal']['entidades']
     nom = {e['abbr']: e['name'] for e in d['estados']}
@@ -531,38 +539,10 @@ def temas_bot(d):
                {'que': 'Lo que cada gobierno estatal reportó como recibido', 'e': 'oficial', 'fu': INEGI}],
         'sug': ['¿Cuánto debe cada estado?', '¿Qué dejó la ASF por aclarar en mi estado?', 'Muéstrame el mapa de obras con alerta ambiental por estado'],
         'ir': ['numeros-mapa-del-gasto-federalizado.html?l=cuadre', 'El mapa del dinero']},
-        # Revisar a un proveedor (02-11-2026): lo gratis primero, y el servicio.
-        'serv_diligencia': {
-        'tit': 'Cómo revisar a un proveedor antes de contratarlo',
-        'h': '<p>Lo básico lo puedes hacer gratis, aquí mismo:</p><ol>'
-             '<li><b>Sus contratos con el gobierno:</b> búscalo por nombre o RFC en <a href="contratos-publicos.html">Contratos públicos</a> (ComprasMX).</li>'
-             '<li><b>La lista negra del SAT:</b> pregúntame «¿está en la lista negra del SAT?» con su RFC o su nombre. Si un proveedor está en la lista 69-B como definitivo, '
-             'sus facturas pueden dejar de servirte para deducir (Código Fiscal de la Federación, art. 69-B).</li>'
-             '<li><b>Sanciones e informes:</b> en <a href="contratos-publicos.html#sancionados">Contratos públicos › Proveedores sancionados</a> ya cruzamos el Directorio de Proveedores y Contratistas Sancionados de Buen Gobierno, y en su ficha te armo las búsquedas en el DOF y la ASF.</li></ol>'
-             '<p>Si necesitas una ficha completa, con cada hallazgo y su documento, y un aviso cuando algo cambie, eso es el servicio <b>Revisión de un proveedor</b>. '
-             'Tener contratos con el gobierno no es una irregularidad, y estar en una lista no prueba un delito.</p>',
-        'ci': [],
-        'fu': [{'que': 'Lista de contribuyentes con operaciones presuntamente inexistentes (art. 69-B)', 'e': 'oficial',
-                'fu': {'tx': 'Código Fiscal de la Federación, art. 69-B', 'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf'}}],
-        'sug': ['¿Está en la lista negra del SAT?', '¿Qué contratos tiene una empresa con el gobierno?', '¿Qué servicios ofrece Auditavisión?'],
-        'ir': ['servicios-catalogo.html#sv-diligencia', 'Revisión de un proveedor']},
-        # Revisar una nómina (18-11-2026): lo gratis primero (la calculadora y el lector), y el servicio.
-        'serv_nomina': {
-        'tit': 'Cómo revisar una nómina',
-        'h': '<p>Lo básico lo puedes hacer gratis, aquí mismo:</p><ol>'
-             '<li><b>Lo que te retienen y lo que pone tu patrón:</b> la <a href="herramienta-calculadora-ticket-retienen.html">Calculadora Cívica</a> saca el ISR, '
-             'tus cuotas y lo que paga el patrón al IMSS y al INFONAVIT, o tu dependencia al ISSSTE y al FOVISSSTE si trabajas para el gobierno, con el costo de tu plaza.</li>'
-             '<li><b>Un recibo de nómina:</b> el <a href="herramienta-inspector-factura.html">Lector de facturas CFDI</a> lee el XML en tu navegador, sin subirlo, y revisa que cuadre, '
-             'el ISR contra la tarifa del artículo 96, el subsidio para el empleo y el salario base de cotización.</li>'
-             '<li><b>Quien te maquila la nómina:</b> búscalo por RFC en <a href="herramienta-inspector-padron.html">Revisa a tu contraparte</a>.</li></ol>'
-             '<p>Si necesitas revisar todos los recibos de un periodo, eso es el servicio <b>Revisión de nómina</b>: una segunda mirada a lo que calculó tu sistema o tu maquilador. '
-             'Una señal no es una irregularidad, y no sustituye a tu contador ni a tu dictamen.</p>',
-        'ci': [],
-        'fu': [{'que': 'Retención del ISR a los salarios', 'e': 'oficial', 'fu': {'tx': 'Ley del ISR, art. 96', 'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf'}},
-               {'que': 'Cuotas al Seguro Social', 'e': 'oficial', 'fu': {'tx': 'Ley del Seguro Social', 'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf'}},
-               {'que': 'Cuotas al ISSSTE', 'e': 'oficial', 'fu': {'tx': 'Ley del ISSSTE', 'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LISSSTE.pdf'}}],
-        'sug': ['Trabajo en el gobierno y gano 20 mil al mes, ¿cuánto me retienen?', 'Revisa mi recibo de nómina', '¿Qué son las cuotas al ISSSTE?'],
-        'ir': ['servicios-catalogo.html#sv-nomina', 'Revisión de nómina']},
+        # Los servicios (18-11-2026, pedido del autor): cada uno, su familia, su perfil y el
+        # catálogo, con lo que la plataforma ya hace gratis. Los arma servicios_fichas.py desde
+        # SERVICIOS de apartados.py; reemplazan a serv_diligencia y serv_nomina (02 y 18-11-2026).
+        **_servicios(),
         # La base al día (18-11-2026): lo lee del registro de fuentes (herramientas/fuentes.py), igual que base-al-dia.html.
         'base_al_dia': _base_al_dia(),
         # ¿Cómo nos sostenemos? (07-11-2026): lo lee de monetizacion.py, igual que servicios.html.

@@ -1111,7 +1111,7 @@
     var p = plano(q);
     if (!CMX_RE.test(p) || SAT_PAL.test(p) || /^ (que|q) (es|son|significa)\b/.test(p)) return null;
     var rfcs = (q.match(RFC_RE) || []).map(function (x) { return x.toUpperCase(); });
-    /* «¿Cómo reviso a un proveedor antes de contratarlo?» pide el método, no a una empresa: lo contesta map/serv_diligencia (D.san). */
+    /* «¿Cómo reviso a un proveedor antes de contratarlo?» pide el método, no a una empresa: lo contesta map/srv_diligencia (D.san). */
     if (!rfcs.length && /\b(antes de contratar\w*|debida diligencia)\b/.test(p)) return null;
     /* «¿Qué pasa si no le cobran la pena al contratista?» no busca a una empresa: lo contesta «Documentar para sancionar». */
     if (!rfcs.length && /\b(penas?|multas?|sancion\w*|incumpl\w*|no cumplio|clausulas?|pruebo|que documentos)\b/.test(p)) return null;

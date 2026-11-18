@@ -20,14 +20,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261118h">
-  <script src="assets/auditor/js/iconos.js?v=20261118h"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261118h"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261118h" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261118h">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261118h">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261118h">
-  <link rel="stylesheet" href="assets/auditor/css/servicios.css?v=20261118h">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261118i">
+  <script src="assets/auditor/js/iconos.js?v=20261118i"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261118i"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261118i" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261118i">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261118i">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261118i">
+  <link rel="stylesheet" href="assets/auditor/css/servicios.css?v=20261118i">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -219,6 +219,16 @@
             <span class="sv-base-et">documentos oficiales guardados con su huella SHA-256</span>
             <span class="sv-base-fu">Documentos de la bóveda con copia. Fuente: Bóveda de evidencias de Auditavisión</span>
           </a>
+          <a class="sv-base-n" href="herramienta-inspector-padron.html">
+            <span class="sv-base-cifra">531,034</span>
+            <span class="sv-base-et">RFC en las listas del SAT de los arts. 69, 17-H Bis y 69-B Bis</span>
+            <span class="sv-base-fu">RFC distintos en 7 listas del SAT, con la OFAC y la ONU aparte. Fuente: SAT, datos abiertos: contribuyentes publicados</span>
+          </a>
+          <a class="sv-base-n" href="planisferio.html?d=deuda">
+            <span class="sv-base-cifra">2,145</span>
+            <span class="sv-base-et">créditos y obligaciones de estados y municipios, uno por uno</span>
+            <span class="sv-base-fu">Renglones del Registro Público Único al 30 de junio de 2026. Fuente: SHCP, Registro Público Único</span>
+          </a>
         </div>
         <p class="sv-nota">Son conteos de los archivos de la plataforma al generar esta página (<span class="est-chip est-derivado">auditada</span>); cada uno dice de qué documento sale.</p>
         </div>
@@ -251,14 +261,20 @@
         <div class="apartado-bloque">
         <div class="sv-modulos">
           <a class="sv-modulo" href="herramienta-inspector-efos.html"><span class="sv-mod-et">Lista 69-B</span><span class="sv-ico" aria-hidden="true">🧾</span><b>Busca cualquier RFC en la lista negra del SAT</b><span class="sv-mod-tx">Presuntos, definitivos, desvirtuados y sentencias favorables, con el oficio y la fecha de cada publicación.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
+          <a class="sv-modulo" href="herramienta-inspector-padron.html"><span class="sv-mod-et">Nuevo · Contrapartes</span><span class="sv-ico" aria-hidden="true">🪪</span><b>Revisa a tu contraparte en todas las listas</b><span class="sv-mod-tx">Una sola ficha por RFC: las listas del SAT, el Directorio de Sancionados, la OFAC, la ONU y sus contratos públicos.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
+          <a class="sv-modulo" href="herramienta-inspector-padron.html#lote"><span class="sv-mod-et">Nuevo · Lote</span><span class="sv-ico" aria-hidden="true">🗂️</span><b>Tu cartera completa, en una matriz</b><span class="sv-mod-tx">Hasta 2,000 RFC, o los terceros de tus facturas XML, en una fila por RFC y una columna por lista. Se descarga en CSV.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
+          <a class="sv-modulo" href="herramienta-calculadora-ticket-retienen.html"><span class="sv-mod-et">Nuevo · Nómina</span><span class="sv-ico" aria-hidden="true">💼</span><b>Revisa tu nómina, IMSS o ISSSTE</b><span class="sv-mod-tx">Lo que te retienen y lo que pone el patrón, y el recibo XML contra la tarifa del ISR y el subsidio, sin subirlo.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
+          <a class="sv-modulo" href="planisferio.html?d=deuda"><span class="sv-mod-et">Nuevo · Deuda</span><span class="sv-ico" aria-hidden="true">🏦</span><b>A quién le debe cada estado</b><span class="sv-mod-tx">El Registro Público Único de Hacienda, crédito por crédito: el acreedor, la tasa, el destino y la fuente de pago.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
           <a class="sv-modulo" href="herramienta-inspector-factura.html"><span class="sv-mod-et">Nuevo · Facturas</span><span class="sv-ico" aria-hidden="true">📄</span><b>Revisa tus facturas contra la ley</b><span class="sv-mod-tx">Régimen fiscal, método y forma de pago, retención de IVA y lista 69-B, cada señal con su artículo. Hasta 500 XML, sin subirlos.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
           <a class="sv-modulo" href="herramienta-inspector-factura.html"><span class="sv-mod-et">Nuevo · REP</span><span class="sv-ico" aria-hidden="true">🔁</span><b>Empata tus complementos de pago</b><span class="sv-mod-tx">Carga tus facturas PPD con sus complementos: ves cuáles ya tienen pago registrado, cuánto les queda y cuáles no tienen ninguno.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
+          <a class="sv-modulo" href="contratos-publicos.html#grupos"><span class="sv-mod-et">Grupos</span><span class="sv-ico" aria-hidden="true">🏢</span><b>Los grupos y sus filiales</b><span class="sv-mod-tx">Con qué empresas aparece cada grupo en ComprasMX, por RFC. El vínculo que solo dice la prensa queda pendiente.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
+          <a class="sv-modulo" href="expedientes-investigacion.html"><span class="sv-mod-et">Expedientes</span><span class="sv-ico" aria-hidden="true">🗂️</span><b>Los expedientes de control interno</b><span class="sv-mod-tx">Cada gran investigación con su bitácora, lo que sigue y lo que falta, al día cada mañana, con folio y huella.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
           <a class="sv-modulo" href="herramienta-inspector-mia.html"><span class="sv-mod-et">Proveedores</span><span class="sv-ico" aria-hidden="true">📌</span><b>Tu cartera de proveedores</b><span class="sv-mod-tx">Mi Auditavisión guarda tus proveedores y el resumen de tus revisiones en tu navegador, para volver a ellos.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
           <a class="sv-modulo" href="contratos-publicos.html"><span class="sv-mod-et">Contratos</span><span class="sv-ico" aria-hidden="true">🏛️</span><b>Qué le vende al gobierno</b><span class="sv-mod-tx">Los contratos de ComprasMX de cada empresa, por institución, con su importe y su fecha.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
           <a class="sv-modulo" href="contratos-publicos.html#fraccionamiento"><span class="sv-mod-et">Fraccionamiento</span><span class="sv-ico" aria-hidden="true">✂️</span><b>Señales de compras partidas</b><span class="sv-mod-tx">Adjudicaciones directas de la misma unidad, empresa y partida que en 90 días rebasan el tope del PEF. Señal para revisar, no irregularidad.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
           <a class="sv-modulo" href="herramienta-inspector-resultados.html"><span class="sv-mod-et">Estados financieros</span><span class="sv-ico" aria-hidden="true">📊</span><b>Revisa tu estado de resultados</b><span class="sv-mod-tx">Cuadre, estructura, rentabilidad, tendencia, impuestos y deuda, desde un CSV o lo pegado de Excel, en tu navegador.</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>
-          <a class="sv-modulo" href="servicios-catalogo.html#sv-seguimiento"><span class="sv-mod-et">Vigía</span><span class="sv-ico" aria-hidden="true">🔔</span><b>Vigila tu cartera</b><span class="sv-mod-tx">Te avisamos cuando un proveedor cambia de situación en la lista 69-B, con el párrafo del artículo y el plazo que corre.</span><span class="sv-acceso sv-acceso-pronto">Con el lanzamiento</span></a>
-          <a class="sv-modulo" href="servicios-catalogo.html#sv-expediente"><span class="sv-mod-et">Investigación</span><span class="sv-ico" aria-hidden="true">🔎</span><b>Un expediente a la medida</b><span class="sv-mod-tx">Una persona investiga tu pregunta con documentos públicos y te entrega fuentes, etiquetas y límites.</span><span class="sv-acceso sv-acceso-encargo">Por encargo</span></a>
+          <a class="sv-modulo" href="servicio-seguimiento.html"><span class="sv-mod-et">Vigía</span><span class="sv-ico" aria-hidden="true">🔔</span><b>Vigila tu cartera</b><span class="sv-mod-tx">Te avisamos cuando un proveedor cambia de situación en la lista 69-B, con el párrafo del artículo y el plazo que corre.</span><span class="sv-acceso sv-acceso-pronto">Con el lanzamiento</span></a>
+          <a class="sv-modulo" href="servicio-expediente.html"><span class="sv-mod-et">Investigación</span><span class="sv-ico" aria-hidden="true">🔎</span><b>Un expediente a la medida</b><span class="sv-mod-tx">Una persona investiga tu pregunta con documentos públicos y te entrega fuentes, etiquetas y límites.</span><span class="sv-acceso sv-acceso-encargo">Por encargo</span></a>
         </div>
         </div>
       </section>
@@ -291,6 +307,7 @@
               <tr><td data-et="Hoy">Revisas el portal del SAT RFC por RFC, cuando te acuerdas.</td><td data-et="Con Auditavisión">Buscas cualquier RFC en la lista 69-B completa, gratis, y el Vigía compara la lista cada semana.</td></tr>
               <tr><td data-et="Hoy">Te enteras de que un proveedor quedó definitivo cuando ya llegó la revisión.</td><td data-et="Con Auditavisión">Con el Vigía de tu cartera (abre con el lanzamiento), el aviso llega con el párrafo del 69-B y el plazo que corre.</td></tr>
               <tr><td data-et="Hoy">Para saber si una empresa le vende al gobierno, buscas en varios portales.</td><td data-et="Con Auditavisión">Sus contratos de ComprasMX, sus señales de fraccionamiento y lo que dijo la ASF, en una sola ficha.</td></tr>
+              <tr><td data-et="Hoy">Para saber si un cliente está en una lista, revisas el SAT, el directorio de sancionados, la OFAC y la ONU por separado.</td><td data-et="Con Auditavisión">Una sola ficha por RFC con todas las listas, y tu cartera completa en una matriz que se descarga en CSV.</td></tr>
               <tr><td data-et="Hoy">Para revisar tus facturas tienes que entregarlas o dar tu contraseña del SAT.</td><td data-et="Con Auditavisión">Las lees en tu navegador, hasta 500 a la vez, sin subirlas.</td></tr>
               <tr><td data-et="Hoy">Una nota trae una cifra y no sabes si es cierta.</td><td data-et="Con Auditavisión">La contrastas contra el documento oficial, con su etiqueta: oficial, derivado o pendiente.</td></tr>
             </tbody>
@@ -415,6 +432,13 @@
         </div>
         <div class="apartado-bloque">
         <ul class="sv-novedades">
+          <li><a class="sv-nov" href="herramienta-inspector-padron.html#lote"><span class="sv-mod-et">Nuevo · Lote</span><b>Tu cartera contra todas las listas</b><span>Hasta 2,000 RFC o los terceros de tus facturas, en una matriz que se descarga en CSV.</span><small>18 nov 2026</small></a></li>
+          <li><a class="sv-nov" href="herramienta-inspector-padron.html"><span class="sv-mod-et">Contrapartes</span><b>Revisa a tu contraparte</b><span>Las listas del SAT, sancionados, la OFAC, la ONU y ComprasMX en una sola ficha por RFC.</span><small>18 nov 2026</small></a></li>
+          <li><a class="sv-nov" href="herramienta-calculadora-ticket-retienen.html"><span class="sv-mod-et">Nómina</span><b>La nómina, IMSS o ISSSTE</b><span>Lo que pone el patrón y el costo de la plaza, y el recibo XML revisado contra la ley.</span><small>18 nov 2026</small></a></li>
+          <li><a class="sv-nov" href="base-al-dia.html"><span class="sv-mod-et">Base al día</span><b>La base se actualiza sola</b><span>La 69-B, las listas del padrón y los sancionados, cada semana, con su huella.</span><small>18 nov 2026</small></a></li>
+          <li><a class="sv-nov" href="planisferio.html?d=deuda"><span class="sv-mod-et">Deuda</span><b>A quién le debe cada estado</b><span>El Registro Público Único, crédito por crédito.</span><small>17 nov 2026</small></a></li>
+          <li><a class="sv-nov" href="expedientes-investigacion.html"><span class="sv-mod-et">Expedientes</span><b>Los expedientes de control interno</b><span>Las grandes investigaciones, hechas de dictámenes, al día cada mañana.</span><small>17 nov 2026</small></a></li>
+          <li><a class="sv-nov" href="contratos-publicos.html#grupos"><span class="sv-mod-et">Contratos</span><b>Los grupos y sus filiales</b><span>Con qué empresas contrata cada grupo, por RFC.</span><small>17 nov 2026</small></a></li>
           <li><a class="sv-nov" href="herramienta-inspector-factura.html"><span class="sv-mod-et">Nuevo · Facturas</span><b>Revisión de facturas contra la ley</b><span>Régimen y tipo de persona, método y forma de pago, complemento de pago y retención de IVA, con su artículo.</span><small>7 nov 2026</small></a></li>
           <li><a class="sv-nov" href="herramienta-inspector-factura.html"><span class="sv-mod-et">Facturas</span><b>Lector de facturas CFDI</b><span>Hasta 500 XML en tu navegador, con el resumen por proveedor y el cruce con la lista 69-B.</span><small>5 nov 2026</small></a></li>
           <li><a class="sv-nov" href="herramienta-inspector-resultados.html"><span class="sv-mod-et">Estados financieros</span><b>Revisa tu estado de resultados</b><span>Seis dimensiones de revisión, sin subir tu archivo.</span><small>5 nov 2026</small></a></li>
@@ -485,7 +509,7 @@
         </div>
         <div class="apartado-bloque">
         <div class="sv-empieza">
-          <a class="sv-puerta" href="herramienta-inspector-efos.html"><span class="sv-ico" aria-hidden="true">🔓</span><span class="sv-forma-et">Gratis</span><b>Revisa un proveedor</b><span>Busca su RFC en la lista 69-B, ahora mismo.</span><span class="sv-pide">Empezar ➔</span></a>
+          <a class="sv-puerta" href="herramienta-inspector-padron.html"><span class="sv-ico" aria-hidden="true">🔓</span><span class="sv-forma-et">Gratis</span><b>Revisa un proveedor</b><span>Busca su RFC en todas las listas, ahora mismo.</span><span class="sv-pide">Empezar ➔</span></a>
           <a class="sv-puerta" href="herramienta-inspector-pregunta.html?modo=inspector"><span class="sv-ico" aria-hidden="true">💬</span><span class="sv-forma-et">Gratis</span><b>Pregúntale al Auditor</b><span>Escribe tu duda como se la dirías a alguien.</span><span class="sv-pide">Abrir el chat ➔</span></a>
           <a class="sv-puerta" href="servicios-cotiza.html#solicitud"><span class="sv-ico" aria-hidden="true">📝</span><span class="sv-forma-et">Se cotiza</span><b>Pide una cotización</b><span>Cuéntanos el caso; recibes costo y plazo por escrito.</span><span class="sv-pide">Ir al formulario ➔</span></a>
           <a class="sv-puerta" href="servicios-cotiza.html?servicio=capacitacion#solicitud"><span class="sv-ico" aria-hidden="true">🎓</span><span class="sv-forma-et">Se cotiza</span><b>Agenda un taller</b><span>Para tu despacho, tu órgano de control o tu salón.</span><span class="sv-pide">Elegir taller ➔</span></a>
@@ -516,11 +540,11 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261118h</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261118i</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261118h"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261118h"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261118i"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261118i"></script>
 </body>
 </html>

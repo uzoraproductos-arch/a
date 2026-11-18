@@ -1289,3 +1289,7 @@ a.bib-nav-estante:hover, a.bib-nav-estante[aria-current] { color: #1f3a6e; text-
 /* Pestaña que abre su propia página (el Ágora cívica, 10-10-2026). */
 .apartado-pestana-ir { margin-left: auto; padding-left: 8px; font-weight: 800; opacity: .7; }
 .apartado-pestana-pagina:hover .apartado-pestana-ir, .apartado-pestana-pagina:focus-visible .apartado-pestana-ir { opacity: 1; }
+/* Del dato al encargo (18-11-2026): la Biblioteca y la Enciclopedia llevan a los servicios. */
+.sv-puente-bib { margin: 16px 0 0; padding: 12px 16px; border-radius: 14px; background: var(--civ-gris, #f3f6fc); border: 1px solid var(--civ-gris-borde, #c9d9ee); line-height: 1.55; }
+.sv-puente-bib a { font-weight: 800; }
+[data-theme="dark"] .sv-puente-bib { background: #16233a; border-color: #2a3b57; color: #e8eefa; }
