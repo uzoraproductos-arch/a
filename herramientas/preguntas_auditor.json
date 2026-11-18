@@ -402,7 +402,7 @@
   },
   {
    "q": "Quiero que revisen la nómina de mi empresa",
-   "ir": "servicios-catalogo.html#sv-nomina"
+   "ir": "servicio-nomina.html"
   },
   {
    "q": "La calculadora",
@@ -1616,7 +1616,7 @@
   },
   {
    "q": "Quiero revisar a un proveedor antes de contratarlo",
-   "ir": "servicios-catalogo.html#sv-diligencia"
+   "ir": "servicio-diligencia.html"
   },
   {
    "q": "Muéstrame el mapa de los tres presupuestos",
@@ -2382,19 +2382,19 @@
   },
   {
    "q": "¿Qué servicios ofrecen para despachos contables?",
-   "ir": "servicios.html"
+   "ir": "servicios-tu-perfil.html"
   },
   {
    "q": "¿Qué servicios ofrecen para la temporada electoral?",
-   "ir": "servicios.html"
+   "ir": "servicios-catalogo.html#fam-electoral"
   },
   {
    "q": "¿Qué servicios tienen para prevenir fraude y lavado de dinero?",
-   "ir": "servicios.html"
+   "ir": "servicios-catalogo.html#fam-prevencion"
   },
   {
    "q": "¿Dan talleres para auditores?",
-   "ir": "servicios.html"
+   "ir": "servicio-capacitacion.html"
   },
   {
    "q": "¿Cómo reviso si una factura trae bien la retención de IVA?",
@@ -2620,6 +2620,34 @@
   {
    "q": "Quiero revisar mi lista de proveedores contra las listas del SAT",
    "ir": "herramienta-inspector-padron.html#lote"
+  },
+  {
+   "q": "¿Qué servicios ofrece Auditavisión?",
+   "ir": "servicios.html"
+  },
+  {
+   "q": "¿Cuánto cuesta la radiografía de mi municipio?",
+   "ir": "servicio-radiografia.html"
+  },
+  {
+   "q": "¿En qué consiste el servicio de revisión de contrapartes?",
+   "ir": "servicio-contrapartes.html"
+  },
+  {
+   "q": "¿Qué servicios tienen para regidores?",
+   "ir": "servicios-tu-perfil.html"
+  },
+  {
+   "q": "Quiero el kit de entrega-recepción para mi municipio",
+   "ir": "servicio-entrega.html"
+  },
+  {
+   "q": "Necesito una licencia de temporada para mi redacción",
+   "ir": "servicio-temporada.html"
+  },
+  {
+   "q": "¿Cómo se cobra la revisión de facturas por lote?",
+   "ir": "servicio-facturas.html"
   }
  ]
 }

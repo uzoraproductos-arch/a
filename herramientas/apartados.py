@@ -294,7 +294,9 @@ def bib_nav(actual):
             '        <a class="bib-nav-tit" href="diccionario.html">📚 %s</a>\n'
             '        <div class="bib-nav-fila">\n%s\n        </div>\n      </nav>' % (BIB_NOMBRE, BIB_NOMBRE, '\n'.join(
                 '          <a class="bib-nav-a" href="%s"%s><span aria-hidden="true">%s</span><span>%s<small>%s</small></span></a>'
-                % (b[0], ' aria-current="page"' if b[0] == actual else '', b[1], b[2], b[3]) for b in BIBLIOTECA)))
+                % (b[0], ' aria-current="page"' if b[0] == actual else '', b[1], b[2], b[3]) for b in BIBLIOTECA))
+            + '\n      <p class="sv-puente-bib"><span aria-hidden="true">🔎</span> ¿Lo necesitas aplicado a tu caso? '
+              '<a href="diccionario.html#servicios">Los servicios que se apoyan en esta Biblioteca</a>.</p>')
 
 
 ENCICLOPEDIA = 'enciclopedia-auditavision.html'
@@ -386,6 +388,10 @@ APARTADOS = [
                     'y lo que hace falta para leerlos. Cada tarjeta abre su propia página, y toda cifra lleva su fuente oficial.'),
         'pestanas': True,
         'pista': 'Cada tarjeta abre su propia página.',
+        # Del dato al encargo (18-11-2026, pedido del autor: «todo deberá estar vinculado»).
+        'pie_extra': ('<p class="sv-puente-bib"><span aria-hidden="true">🔎</span> ¿Necesitas que lo revisemos por ti? '
+                      'Cada <a href="servicios-catalogo.html">servicio</a> dice en qué páginas de esta Enciclopedia y de la '
+                      '<a href="diccionario.html#servicios">Biblioteca del Erario</a> se apoya.</p>'),
         'secciones': [
             {'id': 'numeros', 'pagina': 'sigue-el-dinero.html',
              'pestana': ('💰', 'Números', 'El recorrido del dinero, del impuesto a la rendición de cuentas: abre su página')},
@@ -1988,6 +1994,13 @@ SERVICIOS = [
     ('diligencia', '🏢', 'Revisión de un proveedor',
      'Lo que los documentos públicos dicen de una empresa: sus contratos con el gobierno, si está en la lista 69-B del SAT, en el directorio de sancionados o en un informe de la ASF.',
      'Ficha del proveedor con cada hallazgo, su documento y su etiqueta.', 'Empresas, despachos contables y áreas de cumplimiento.', 'prevencion'),
+    # 18-11-2026, pedido del autor: «los servicios integrando todo lo nuevo que puede hacer la plataforma». El padrón de
+    # contrapartes y su revisión por lote (insp_padron.py, insp-padron-lote.js), como encargo para carteras grandes.
+    ('contrapartes', '🗂️', 'Revisión de tu cartera de contrapartes',
+     'Tus clientes y proveedores, todos a la vez, contra las listas del SAT (arts. 69, 17-H Bis, 69-B y 69-B Bis), el Directorio de Sancionados, '
+     'la OFAC y la ONU, con la cadena de terceros de tus facturas.',
+     'Una matriz con una fila por RFC y una columna por lista, ordenada por la señal más seria, cada una con su fundamento. '
+     'Hasta 2,000 RFC los revisas tú, gratis, en tu navegador.', 'Áreas de cumplimiento y de prevención de lavado (PLD), despachos y tesorerías.', 'prevencion'),
     ('seguimiento', '📡', 'Vigía y seguimiento periódico',
      'Tu cartera de proveedores revisada contra la lista 69-B cada semana, o un tema que cambia (contratos, presupuesto, auditorías) vigilado por ti.',
      'Aviso de cada cambio relevante, con el documento que lo respalda y, en la 69-B, el párrafo y el plazo que aplican.', 'Quien necesita enterarse a tiempo, no meses después.', 'prevencion'),
@@ -2027,11 +2040,21 @@ SERVICIOS = [
      'Licencia de uso, adaptación y acompañamiento.', 'Dependencias de gobierno, universidades, medios y organizaciones.', 'investigacion'),
 ]
 
+# La Biblioteca del Erario lleva a los servicios que se apoyan en ella
+# (18-11-2026): cada tarjeta abre la página del servicio, con su fundamento.
+DICCIONARIO['secciones'].append({
+    'id': 'servicios', 'titulo': 'De la consulta al encargo',
+    'texto': ('Los servicios de Auditavisión se apoyan en esta Biblioteca: cada uno dice qué términos del Diccionario, qué Referencias y '
+              'qué leyes lo sostienen. La consulta sigue siendo gratis; el encargo es que lo hagamos por ti.'),
+    'tarjetas': [(s[1], s[2], s[3], 'servicio-%s.html' % s[0], None, None) for s in SERVICIOS],
+})
+
 # Cómo se cobra cada servicio (reestructura del 11-11-2026). Aquí va la forma
 # de cobro, nunca un monto: las tarifas salen de los pilotos (monetizacion.py)
 # y no se inventan (AGENTS §2). Cada servicio necesita su renglón.
 COBRO = {
     'diligencia': 'Precio fijo por ficha',
+    'contrapartes': 'Precio por cartera, según cuántos RFC',
     'seguimiento': 'Suscripción mensual, según cuántos RFC vigilas',
     'facturas': 'Precio por lote, según su tamaño',
     'nomina': 'Precio por periodo de nómina, según cuántos recibos',
@@ -2058,8 +2081,8 @@ LINEAS = [
 # El calendario de la página: (cuándo, qué abre, texto). Las fechas salen de
 # asistente_legislativo.py (LGIPE, art. 22) y asistente_judicial.py.
 CALENDARIO = [
-    ('Hoy', 'La consulta y las herramientas', 'Gratis: el Auditor, el Planisferio, la lista 69-B, el lector de facturas y el verificador de notas.'),
-    ('Con el lanzamiento', 'Prevención, talleres y encargos', 'El Vigía con aviso, la ficha del proveedor, los lotes de facturas, los talleres y las cotizaciones.'),
+    ('Hoy', 'La consulta y las herramientas', 'Gratis: el Auditor, el Planisferio, el padrón de contrapartes con la revisión por lote, la lista 69-B, el lector de facturas y de nómina, y el verificador de notas.'),
+    ('Con el lanzamiento', 'Prevención, talleres y encargos', 'El Vigía con aviso, la ficha del proveedor, la revisión de tu cartera, los lotes de facturas y de nómina, los talleres y las cotizaciones.'),
     ('Antes del 6 de junio de 2027', 'Radiografías y licencia de temporada', 'Ese domingo se eligen la Cámara de Diputados, gubernaturas, congresos locales y ayuntamientos. '
      'Cada promesa de gasto de campaña entra a la memoria de promesas, con su fecha.'),
     ('Después de la elección', 'Lo que recibes', 'El kit de entrega-recepción y el taller para leer el presupuesto, para los gobiernos y cabildos que entran.'),
@@ -2074,13 +2097,13 @@ CALENDARIO = [
 PERFILES = [
     ('🧮', 'Contaduría y despachos contables', 'Contadoras y contadores públicos, fiscalistas y despachos.',
      'Si un proveedor sale definitivo en la lista 69-B, sus facturas «no producen ni produjeron efecto fiscal alguno» (CFF, art. 69-B) y tu cliente tiene que acreditar la operación o corregir.',
-     ['facturas', 'nomina', 'seguimiento', 'diligencia'],
+     ['facturas', 'nomina', 'contrapartes', 'seguimiento', 'diligencia'],
      [('herramienta-inspector-efos.html', 'Busca un RFC en la lista 69-B'), ('herramienta-inspector-factura.html', 'Lee una factura sin subirla'),
       ('herramienta-inspector-resultados.html', 'Revisa un estado de resultados')]),
     ('⚖️', 'Derecho y cumplimiento', 'Abogadas y abogados corporativos, oficiales de cumplimiento y prevención de lavado (PLD).',
      'Conocer a tu cliente y a tu proveedor en actividades vulnerables (LFPIORPI) y llegar a una negociación o a un litigio con los documentos públicos ya reunidos.',
-     ['diligencia', 'expediente', 'seguimiento'],
-     [('contratos-publicos.html', 'Contratos públicos de una empresa'), ('herramienta-inspector-efos.html', 'Busca un RFC en la lista 69-B')]),
+     ['contrapartes', 'diligencia', 'expediente', 'seguimiento'],
+     [('herramienta-inspector-padron.html', 'Revisa a tu contraparte'), ('contratos-publicos.html', 'Contratos públicos de una empresa')]),
     ('🔍', 'Auditoría, control interno y auditoría forense', 'Auditores externos e internos, órganos internos de control y despachos de auditoría.',
      'Formarse y practicar con casos mexicanos: cómo documenta la ASF una irregularidad para que se pueda sancionar, y dónde se repite cada año.',
      ['capacitacion', 'revision'],
@@ -2133,9 +2156,10 @@ RIESGOS = [
     ('🧺', 'Lavado de dinero: conoce a tu cliente y a tu proveedor',
      'Si haces una actividad vulnerable, la ley te obliga a identificar a tu cliente, a su beneficiario controlador si es una empresa, '
      'y a guardar los documentos (LFPIORPI, arts. 17 y 18).',
-     'Reunimos lo que los documentos públicos dicen de esa empresa: la lista 69-B, sus contratos con el gobierno, el directorio de sancionados y la ASF. '
+     'Revisamos tu cartera completa contra las listas del SAT, el directorio de sancionados, la OFAC y la ONU, y reunimos lo que los documentos públicos '
+     'dicen de cada empresa: sus contratos con el gobierno y la ASF. '
      'Complementa tu expediente; no lo sustituye ni presenta tus avisos.',
-     ['diligencia', 'expediente'], ('aprende-auditoria.html#met-lavado', 'Qué es una actividad vulnerable')),
+     ['contrapartes', 'diligencia', 'expediente'], ('aprende-auditoria.html#met-lavado', 'Qué es una actividad vulnerable')),
     ('🕵️', 'Fraude: las señales, antes de pagar',
      'Casi ningún delito contra una empresa llega a una fiscalía. Lo que no revisas antes, rara vez se recupera después.',
      'Te damos señales con su regla: compras partidas, facturas que no cuadran con la ley y un estado de resultados que no cierra. '
@@ -2166,6 +2190,7 @@ GRATIS_PAGO = [
     ('La memoria: tu cartera de proveedores guardada', 'En tu navegador (Mi Auditavisión)', 'Con el Vigía, al abrir'),
     ('El aviso: enterarte cuando algo cambia', 'Lo revisas tú cuando quieras', 'Con el Vigía, al abrir'),
     ('El cómputo: lotes grandes de facturas', 'Hasta 500 facturas, en tu navegador', 'Servicio cotizado'),
+    ('Tu cartera contra todas las listas', 'Hasta 2,000 RFC, en tu navegador', 'Servicio cotizado'),
 ]
 
 DIFERENCIA = [
@@ -2226,12 +2251,14 @@ ANTES_DESPUES = [
     ('Revisas el portal del SAT RFC por RFC, cuando te acuerdas.', 'Buscas cualquier RFC en la lista 69-B completa, gratis, y el Vigía compara la lista cada semana.'),
     ('Te enteras de que un proveedor quedó definitivo cuando ya llegó la revisión.', 'Con el Vigía de tu cartera (abre con el lanzamiento), el aviso llega con el párrafo del 69-B y el plazo que corre.'),
     ('Para saber si una empresa le vende al gobierno, buscas en varios portales.', 'Sus contratos de ComprasMX, sus señales de fraccionamiento y lo que dijo la ASF, en una sola ficha.'),
+    ('Para saber si un cliente está en una lista, revisas el SAT, el directorio de sancionados, la OFAC y la ONU por separado.',
+     'Una sola ficha por RFC con todas las listas, y tu cartera completa en una matriz que se descarga en CSV.'),
     ('Para revisar tus facturas tienes que entregarlas o dar tu contraseña del SAT.', 'Las lees en tu navegador, hasta 500 a la vez, sin subirlas.'),
     ('Una nota trae una cifra y no sabes si es cierta.', 'La contrastas contra el documento oficial, con su etiqueta: oficial, derivado o pendiente.'),
 ]
 
 EMPIEZA = [
-    ('🔓', 'Gratis', 'Revisa un proveedor', 'Busca su RFC en la lista 69-B, ahora mismo.', 'herramienta-inspector-efos.html', 'Empezar'),
+    ('🔓', 'Gratis', 'Revisa un proveedor', 'Busca su RFC en todas las listas, ahora mismo.', 'herramienta-inspector-padron.html', 'Empezar'),
     ('💬', 'Gratis', 'Pregúntale al Auditor', 'Escribe tu duda como se la dirías a alguien.', 'herramienta-inspector-pregunta.html?modo=inspector', 'Abrir el chat'),
     ('📝', 'Se cotiza', 'Pide una cotización', 'Cuéntanos el caso; recibes costo y plazo por escrito.', '#solicitud', 'Ir al formulario'),
     ('🎓', 'Se cotiza', 'Agenda un taller', 'Para tu despacho, tu órgano de control o tu salón.', 'servicios-cotiza.html?servicio=capacitacion#solicitud', 'Elegir taller'),
@@ -2255,12 +2282,28 @@ REVISOR = {
 MODULOS = [
     ('Lista 69-B', '🧾', 'Busca cualquier RFC en la lista negra del SAT',
      'Presuntos, definitivos, desvirtuados y sentencias favorables, con el oficio y la fecha de cada publicación.', 'herramienta-inspector-efos.html', 'Gratis'),
+    ('Nuevo · Contrapartes', '🪪', 'Revisa a tu contraparte en todas las listas',
+     'Una sola ficha por RFC: las listas del SAT, el Directorio de Sancionados, la OFAC, la ONU y sus contratos públicos.',
+     'herramienta-inspector-padron.html', 'Gratis'),
+    ('Nuevo · Lote', '🗂️', 'Tu cartera completa, en una matriz',
+     'Hasta 2,000 RFC, o los terceros de tus facturas XML, en una fila por RFC y una columna por lista. Se descarga en CSV.',
+     'herramienta-inspector-padron.html#lote', 'Gratis'),
+    ('Nuevo · Nómina', '💼', 'Revisa tu nómina, IMSS o ISSSTE',
+     'Lo que te retienen y lo que pone el patrón, y el recibo XML contra la tarifa del ISR y el subsidio, sin subirlo.',
+     'herramienta-calculadora-ticket-retienen.html', 'Gratis'),
+    ('Nuevo · Deuda', '🏦', 'A quién le debe cada estado',
+     'El Registro Público Único de Hacienda, crédito por crédito: el acreedor, la tasa, el destino y la fuente de pago.',
+     'planisferio.html?d=deuda', 'Gratis'),
     ('Nuevo · Facturas', '📄', 'Revisa tus facturas contra la ley',
      'Régimen fiscal, método y forma de pago, retención de IVA y lista 69-B, cada señal con su artículo. Hasta 500 XML, sin subirlos.',
      'herramienta-inspector-factura.html', 'Gratis'),
     ('Nuevo · REP', '🔁', 'Empata tus complementos de pago',
      'Carga tus facturas PPD con sus complementos: ves cuáles ya tienen pago registrado, cuánto les queda y cuáles no tienen ninguno.',
      'herramienta-inspector-factura.html', 'Gratis'),
+    ('Grupos', '🏢', 'Los grupos y sus filiales',
+     'Con qué empresas aparece cada grupo en ComprasMX, por RFC. El vínculo que solo dice la prensa queda pendiente.', 'contratos-publicos.html#grupos', 'Gratis'),
+    ('Expedientes', '🗂️', 'Los expedientes de control interno',
+     'Cada gran investigación con su bitácora, lo que sigue y lo que falta, al día cada mañana, con folio y huella.', 'expedientes-investigacion.html', 'Gratis'),
     ('Proveedores', '📌', 'Tu cartera de proveedores',
      'Mi Auditavisión guarda tus proveedores y el resumen de tus revisiones en tu navegador, para volver a ellos.', 'herramienta-inspector-mia.html', 'Gratis'),
     ('Contratos', '🏛️', 'Qué le vende al gobierno',
@@ -2272,9 +2315,9 @@ MODULOS = [
      'Cuadre, estructura, rentabilidad, tendencia, impuestos y deuda, desde un CSV o lo pegado de Excel, en tu navegador.',
      'herramienta-inspector-resultados.html', 'Gratis'),
     ('Vigía', '🔔', 'Vigila tu cartera',
-     'Te avisamos cuando un proveedor cambia de situación en la lista 69-B, con el párrafo del artículo y el plazo que corre.', '#sv-seguimiento', 'Con el lanzamiento'),
+     'Te avisamos cuando un proveedor cambia de situación en la lista 69-B, con el párrafo del artículo y el plazo que corre.', 'servicio-seguimiento.html', 'Con el lanzamiento'),
     ('Investigación', '🔎', 'Un expediente a la medida',
-     'Una persona investiga tu pregunta con documentos públicos y te entrega fuentes, etiquetas y límites.', '#sv-expediente', 'Por encargo'),
+     'Una persona investiga tu pregunta con documentos públicos y te entrega fuentes, etiquetas y límites.', 'servicio-expediente.html', 'Por encargo'),
 ]
 
 # Cómo funciona: (etapa, título, texto, lo que entra o con qué se cruza).
@@ -2289,6 +2332,17 @@ COMO = [
 
 # Lo más nuevo: (fecha, etiqueta, título, texto, liga). Fechas de AGENTS.md.
 SV_NOVEDADES = [
+    ('18 nov 2026', 'Nuevo · Lote', 'Tu cartera contra todas las listas', 'Hasta 2,000 RFC o los terceros de tus facturas, en una matriz que se descarga en CSV.',
+     'herramienta-inspector-padron.html#lote'),
+    ('18 nov 2026', 'Contrapartes', 'Revisa a tu contraparte', 'Las listas del SAT, sancionados, la OFAC, la ONU y ComprasMX en una sola ficha por RFC.',
+     'herramienta-inspector-padron.html'),
+    ('18 nov 2026', 'Nómina', 'La nómina, IMSS o ISSSTE', 'Lo que pone el patrón y el costo de la plaza, y el recibo XML revisado contra la ley.',
+     'herramienta-calculadora-ticket-retienen.html'),
+    ('18 nov 2026', 'Base al día', 'La base se actualiza sola', 'La 69-B, las listas del padrón y los sancionados, cada semana, con su huella.', 'base-al-dia.html'),
+    ('17 nov 2026', 'Deuda', 'A quién le debe cada estado', 'El Registro Público Único, crédito por crédito.', 'planisferio.html?d=deuda'),
+    ('17 nov 2026', 'Expedientes', 'Los expedientes de control interno', 'Las grandes investigaciones, hechas de dictámenes, al día cada mañana.',
+     'expedientes-investigacion.html'),
+    ('17 nov 2026', 'Contratos', 'Los grupos y sus filiales', 'Con qué empresas contrata cada grupo, por RFC.', 'contratos-publicos.html#grupos'),
     ('7 nov 2026', 'Nuevo · Facturas', 'Revisión de facturas contra la ley',
      'Régimen y tipo de persona, método y forma de pago, complemento de pago y retención de IVA, con su artículo.', 'herramienta-inspector-factura.html'),
     ('5 nov 2026', 'Facturas', 'Lector de facturas CFDI', 'Hasta 500 XML en tu navegador, con el resumen por proveedor y el cruce con la lista 69-B.',
@@ -2406,6 +2460,8 @@ SV_ANCLAS = dict([(p[0], p[1]) for p in SV_PAGINAS] + [
 SV_EJEMPLOS = {
     'diligencia': [('Un proveedor nuevo antes de firmarle', '¿Está en la lista 69-B del SAT, tiene sanciones o contratos públicos, y qué documento lo dice?'),
                    ('Un cliente en una actividad vulnerable', '¿Qué dicen de esta empresa los documentos públicos antes de aceptarla como cliente?')],
+    'contrapartes': [('Mi cartera de clientes en una actividad vulnerable', '¿Alguno de mis clientes aparece en las listas del SAT, de sancionados, de la OFAC o de la ONU, y con qué fundamento?'),
+                     ('Los proveedores de mi empresa y los terceros de sus facturas', '¿Qué RFC de mi cartera traen alguna señal, ordenados por la más seria?')],
     'seguimiento': [('Mi cartera de proveedores contra la lista 69-B', '¿Me avisan cada semana si alguno de mis proveedores entra o cambia de situación en la lista?'),
                     ('Los contratos de una dependencia', '¿Me avisan cuando esta dependencia publique contratos nuevos de este tipo?')],
     'nomina': [('La nómina de una quincena de mi empresa', '¿El ISR, el subsidio y las cuotas de estos recibos cuadran con la ley, y quién nos maquila la nómina está en alguna lista del SAT?'),
@@ -2454,7 +2510,7 @@ def servicios():
     """Las dos páginas: la de venta y «Por qué Auditavisión»."""
     import fraude
     nom = {x[0]: x[2] for x in SERVICIOS}
-    ir = lambda i: '<a href="#sv-%s">%s</a>' % (i, nom[i])
+    ir = lambda i: '<a href="servicio-%s.html">%s</a>' % (i, nom[i])
     for p in PERFILES:
         for i in p[4]:
             if i not in nom:
@@ -2470,6 +2526,10 @@ def servicios():
         raise SystemExit('Servicios: cada servicio necesita una línea de LINEAS, y cada línea, un servicio')
     for liga in [m[4] for m in MODULOS] + [n[4] for n in SV_NOVEDADES] + [b[1] for b in CIERRE['botones']]:
         arch, _, ancla = liga.partition('#')
+        arch = arch.partition('?')[0]
+        # Las páginas de cada servicio se escriben en esta misma generación.
+        if re.match(r'servicio-([a-z]+)\.html$', arch) and arch[9:-5] in nom:
+            continue
         if arch and not os.path.exists(os.path.join(RAIZ, arch)):
             raise SystemExit('Servicios: %s no existe' % liga)
         if not arch and ancla.startswith('sv-') and ancla[3:] not in nom:
@@ -2505,7 +2565,7 @@ def servicios():
         '            <p class="sv-hero-tit">Lo que dicen los documentos, antes de que decidas.</p>',
         '            <p class="sv-hero-tx">Antes de pagarle a un proveedor, de aceptar a un cliente, de votar o de recibir un gobierno: '
         'cruzamos la lista 69-B del SAT, los contratos públicos, la ASF y la ley. Te decimos lo que encontramos, lo que falta y quién lo debe.</p>',
-        '            <div class="sv-hero-acc"><a class="sz-btn sz-btn-of" href="herramienta-inspector-efos.html">Revisa un RFC, gratis</a>'
+        '            <div class="sv-hero-acc"><a class="sz-btn sz-btn-of" href="herramienta-inspector-padron.html">Revisa un RFC en todas las listas, gratis</a>'
         '<a class="sz-btn" href="#solicitud">Pide una cotización</a></div>',
         '            <ul class="sv-hero-prom">',
         '              <li><span aria-hidden="true">🧾</span><b>Cada cifra con su documento</b></li>',
@@ -2599,8 +2659,9 @@ def servicios():
             '                <p class="sv-que">%s</p>\n'
             '                <p class="sv-cobro"><span aria-hidden="true">💳</span> %s</p>\n'
             '                <dl class="sv-dl"><dt>Recibes</dt><dd>%s</dd><dt>Para quién</dt><dd>%s</dd></dl>\n'
-            '                <a class="sv-pide" href="servicios-cotiza.html?servicio=%s#solicitud">Solicitar este servicio ➔</a>\n'
-            '              </article>' % (s[0], s[1], s[2], s[3], COBRO[s[0]], s[4], s[5], s[0])
+            '                <p class="sv-serv-acc"><a class="sv-pide" href="servicio-%s.html">Ver el servicio y lo que ya hace la plataforma ➔</a>'
+            '<a class="sv-pide" href="servicios-cotiza.html?servicio=%s#solicitud">Solicitar este servicio ➔</a></p>\n'
+            '              </article>' % (s[0], s[1], s[2], s[3], COBRO[s[0]], s[4], s[5], s[0], s[0])
             for s in SERVICIOS if s[6] == lid))
         for lid, ico, tit, tx in LINEAS)
     pestanas = lambda nombre, pares: (
@@ -2808,7 +2869,7 @@ def servicios():
              '<li>el costo de las fuentes (copias certificadas, bases de datos o trámites);</li>'
              '<li>la forma de entrega;</li><li>un margen para sostener la plataforma.</li></ul>\n'
              '        </div>\n          <h3 class="sv-tit">La línea entre lo gratis y lo de pago</h3>\n          %s') % (
-        '\n'.join('              <tr><th scope="row"><a href="#sv-%s">%s</a></th><td data-et="Cómo se cobra">%s</td><td data-et="Para quién">%s</td></tr>'
+        '\n'.join('              <tr><th scope="row"><a href="servicio-%s.html">%s</a></th><td data-et="Cómo se cobra">%s</td><td data-et="Para quién">%s</td></tr>'
                   % (s[0], s[2], COBRO[s[0]], s[5]) for s in SERVICIOS), linea)
     calendario = ('<ol class="sv-como">\n%s\n        </ol>\n'
                   '        <p class="sv-nota">La jornada del 6 de junio de 2027 sale de la ley electoral (LGIPE, art. 22: el primer domingo de junio). '
@@ -2889,9 +2950,15 @@ def servicios():
         '            <p class="sv-vista-tit"><a href="%s#fam-%s"><span aria-hidden="true">%s</span> %s</a></p>\n'
         '            <ul>\n%s\n            </ul>\n'
         '          </div>' % (SV_CATALOGO, lid, lico, ltit, '\n'.join(
-            '              <li><a href="%s#sv-%s"><span class="sv-ico" aria-hidden="true">%s</span><span><b>%s</b><small>%s</small></span></a></li>'
-            % (SV_CATALOGO, s[0], s[1], s[2], COBRO[s[0]]) for s in SERVICIOS if s[6] == lid))
+            '              <li><a href="servicio-%s.html"><span class="sv-ico" aria-hidden="true">%s</span><span><b>%s</b><small>%s</small></span></a></li>'
+            % (s[0], s[1], s[2], COBRO[s[0]]) for s in SERVICIOS if s[6] == lid))
         for lid, lico, ltit, _x in LINEAS), sv_liga(mas, 'servicios.html'))
+    # Lo nuevo de la plataforma (18-11-2026): cada novedad con los servicios que la usan.
+    import servicios_fichas as sf
+    nuevo = '<div class="sv-modulos">\n%s\n        </div>' % '\n'.join(
+        '          <div class="sv-modulo"><span class="sv-mod-et">Nuevo</span><span class="sv-ico" aria-hidden="true">%s</span>'
+        '<b><a href="%s">%s</a></b><span class="sv-mod-tx">%s</span><span class="sv-nuevo-en">En: %s</span></div>'
+        % (i, esc_attr(lg), t, tx, ', '.join('<a href="%s">%s</a>' % (sf.PAGINA % k, nom[k]) for k in ks)) for i, t, tx, lg, ks in sf.nuevos())
     # Las ligas viejas a una sección que se mudó, y las que traen el tema o el
     # servicio (?tema=, ?servicio=, ?plan=), se mandan a su página.
     redir = ('<script>(function () { var m = %s, h = decodeURIComponent(location.hash.slice(1)), q = location.search, '
@@ -2912,6 +2979,8 @@ def servicios():
         'antes': aviso,
         'secciones': [
             bloque_sec('propuesta', 'Lo que te ofrecemos', '', sv_liga(portada, 'servicios.html'), sin_cab=True),
+            bloque_sec('nuevo', 'Lo nuevo de la plataforma, ya en tus servicios',
+                       'Lo que llegó en noviembre de 2026. Lo usas gratis hoy, y cada servicio lo lleva más lejos por encargo.', nuevo, pre='Novedades'),
             bloque_sec('explora', 'Todo Servicios, en tarjetas', 'Toca una tarjeta: cada una abre su página.', tablero, pre='Explora'),
             bloque_sec('vistazo', 'Los servicios, de un vistazo',
                        '%s servicios en cuatro familias, con su forma de cobro. Toca uno para ver qué recibes.' % numero(len(SERVICIOS)),
@@ -2958,7 +3027,111 @@ def servicios():
              'tarjetas': [('🐷', 'Donaciones', 'Ayuda a sostener la plataforma, a la vista de todos.', 'donaciones.html', None, None)]},
         ],
     })
-    return [venta] + subpaginas + [porque_pag]
+    return [venta] + subpaginas + [porque_pag] + servicio_paginas(comun)
+
+
+def _ref_corta(cita):
+    """El nombre corto de una ficha de Referencias: la ley hasta su sigla, o el
+    título del documento que va después de su autor y su fecha."""
+    m = re.match(r'[^(\[]{2,200}?\. \((?:s\. f\.|\d{4}[^)]*)\)\. (.+?)(?:\. |$)', cita)
+    if m:
+        return m.group(1)[:150]
+    m = re.match(r'(.{8,160}?\])', cita)
+    if m:
+        return m.group(1)
+    partes = cita.split('. ')
+    return (partes[1] if len(partes) > 1 and len(partes[0]) < 50 else partes[0])[:140]
+
+
+def servicio_paginas(comun):
+    """Una página por servicio (pedido del autor, 18-11-2026): qué es, lo que la
+    plataforma ya hace gratis (con lo nuevo), qué preguntarle al Auditor y su
+    fundamento en la Enciclopedia y en la Biblioteca del Erario. Las fichas viven
+    en servicios_fichas.py, que detiene la generación si falta algo."""
+    import auditorias
+    import servicios_fichas as sf
+    base = auditorias.db()
+    sf.revisar(SERVICIOS, base)
+    refs = {r['id']: r for r in base['referencias_legales']}
+    linea = {l[0]: l for l in LINEAS}
+    partes = [(s[0], sf.PAGINA % s[0], s[1], s[2]) for s in SERVICIOS]
+    modos = {'inspector': '🔍 Inspector', 'periodista': '📰 Periodista', 'ciudadano': '🙋 Ciudadano', 'ambientalista': '🌎 Ambientalista'}
+    out = []
+    for sid, ico, nom, que, recibe, quien, lid in SERVICIOS:
+        f = sf.FICHAS[sid]
+        archivo = sf.PAGINA % sid
+        cotiza = 'servicios-cotiza.html?servicio=%s#solicitud' % sid
+        l = linea[lid]
+        cab = '\n'.join([
+            '<div class="sv-fx">',
+            '          <p class="sv-fx-fam"><a href="%s#fam-%s"><span aria-hidden="true">%s</span> %s</a></p>' % (SV_CATALOGO, lid, l[1], l[2]),
+            '          <p class="sv-fx-que">%s</p>' % que,
+            '          <dl class="sv-dl sv-fx-dl"><dt>Recibes</dt><dd>%s</dd><dt>Para quién</dt><dd>%s</dd>'
+            '<dt>Cómo se cobra</dt><dd>%s. El costo y el plazo te llegan por escrito antes de empezar; si no te conviene, ahí termina.</dd></dl>' % (recibe, quien, COBRO[sid]),
+            '          <div class="sv-fx-acc"><a class="sz-btn sz-btn-of" href="%s">Pide una cotización</a>'
+            '<a class="sz-btn" href="%s">Pregúntale al Auditor</a></div>' % (cotiza, sf.chat_liga(*f['auditor'][0])),
+            '          <p class="sv-limite"><span aria-hidden="true">⚖️</span> %s</p>' % f['no'],
+            '        </div>'])
+        hace = '<div class="sv-modulos">\n%s\n        </div>' % '\n'.join(
+            '          <a class="sv-modulo" href="%s"><span class="sv-mod-et">%s</span><span class="sv-ico" aria-hidden="true">%s</span>'
+            '<b>%s</b><span class="sv-mod-tx">%s</span><span class="sv-acceso sv-acceso-gratis">Gratis</span></a>'
+            % (esc_attr(lg), et, i, t, tx) for i, t, tx, lg, et in f['hace'])
+        from urllib.parse import quote
+        ejemplos = '<ul class="sv-fx-ejs">\n%s\n        </ul>' % '\n'.join(
+            '          <li><b>%s</b><span>%s</span><a href="servicios-cotiza.html?servicio=%s&amp;tema=%s&amp;pregunta=%s#solicitud">Úsalo en tu cotización ➔</a></li>'
+            % (html.escape(t), html.escape(q), sid, quote(t), quote(q)) for t, q in SV_EJEMPLOS[sid])
+        auditor = ('<ul class="sv-fx-chat">\n%s\n        </ul>\n'
+                   '        <p class="sv-nota">El Auditor contesta con la misma base de la plataforma: cada cifra con su documento y su etiqueta. '
+                   'Si la pregunta le toca a otro modo, te lo dice y te ofrece pasar.</p>') % '\n'.join(
+            '          <li><a href="%s"><span class="sv-fx-modo">%s</span><b>%s</b></a></li>' % (sf.chat_liga(q, m), modos[m], html.escape(q))
+            for q, m in f['auditor'])
+        biblio = '\n'.join([
+            '<div class="sv-fx-bib">',
+            '          <div class="sv-fx-col"><p class="sv-fx-col-tit"><span aria-hidden="true">📖</span> <a href="glosario.html">Diccionario</a></p><ul>%s</ul></div>' % ''.join(
+                '<li><a href="glosario.html#%s">%s</a></li>' % (glosario_ancla(t), html.escape(t.split(' (')[0])) for t in f['glosario']),
+            '          <div class="sv-fx-col"><p class="sv-fx-col-tit"><span aria-hidden="true">📑</span> <a href="fuentes-oficiales.html">Referencias</a></p><ul>%s</ul></div>' % ''.join(
+                '<li><a href="fuentes-oficiales.html#%s">[%d] %s</a></li>' % (r, refs[r]['num'], html.escape(_ref_corta(refs[r]['cita_apa']))) for r in f['refs']),
+            '          <div class="sv-fx-col"><p class="sv-fx-col-tit"><span aria-hidden="true">📚</span> <a href="enciclopedia-auditavision.html">En la Enciclopedia</a></p><ul>%s%s</ul></div>' % (
+                ''.join('<li><a href="%s">%s</a></li>' % (esc_attr(lg), t) for lg, t in f['enciclopedia']),
+                '<li><a href="marco-legal.html">Marco Legal Hacendario</a></li><li><a href="expedientes-investigacion.html">Expedientes de control interno</a></li>'),
+            '        </div>',
+            '        ' + DIC_ENLACE])
+        usa = [p for p in PERFILES if sid in p[4]]
+        riesgos = [r for r in RIESGOS if sid in r[4]]
+        quienes = ''
+        if usa or riesgos:
+            quienes = '<ul class="sv-lista">%s%s</ul>' % (
+                ''.join('<li><span aria-hidden="true">%s</span> <a href="servicios-tu-perfil.html"><b>%s</b></a>: %s</li>' % (p[0], p[1], p[3]) for p in usa),
+                ''.join('<li><span aria-hidden="true">%s</span> <a href="servicios-fraude-y-lavado.html"><b>%s</b></a>: %s</li>' % (r[0], r[1], r[2]) for r in riesgos))
+        hermanos = [x for x in SERVICIOS if x[6] == lid and x[0] != sid]
+        otros = '<div class="sv-modulos">\n%s\n        </div>' % '\n'.join(
+            '          <a class="sv-modulo" href="%s"><span class="sv-mod-et">%s</span><span class="sv-ico" aria-hidden="true">%s</span>'
+            '<b>%s</b><span class="sv-mod-tx">%s</span></a>' % (sf.PAGINA % x[0], COBRO[x[0]], x[1], x[2], x[3]) for x in hermanos) if hermanos else ''
+        secs = [{'id': 'servicio', 'titulo': nom, 'texto': '', 'tarjetas': [], 'bloque': cab, 'sin_cab': True},
+                {'id': 'hace', 'titulo': 'Lo que la plataforma ya hace por ti, gratis', 'pre': 'Empieza hoy', 'tarjetas': [],
+                 'texto': 'Antes de pedir el servicio, esto lo puedes hacer tú. «Nuevo» es lo que llegó en noviembre de 2026.', 'bloque': hace},
+                {'id': 'ejemplos', 'titulo': 'Lo que puedes encargarnos', 'pre': 'Por encargo', 'tarjetas': [],
+                 'texto': 'Ejemplos de redacción, sin cifras ni nombres. Toca uno y cámbialo a tu caso.', 'bloque': ejemplos},
+                {'id': 'auditor', 'titulo': 'Pregúntale al Auditor', 'pre': 'En el chat', 'tarjetas': [],
+                 'texto': 'Preguntas que el chat ya contesta sobre este tema. Cada una abre con su modo.', 'bloque': auditor},
+                {'id': 'fundamento', 'titulo': 'Su fundamento, en la Biblioteca del Erario', 'pre': 'La ley y los términos', 'tarjetas': [],
+                 'texto': 'Los términos del Diccionario, las leyes y documentos de Referencias y las páginas de la Enciclopedia en que se apoya este servicio.',
+                 'bloque': biblio}]
+        if quienes:
+            secs.append({'id': 'para-quien', 'titulo': 'A quién le sirve', 'pre': 'Perfiles y riesgos', 'tarjetas': [],
+                         'texto': 'Los perfiles y los riesgos que atiende este servicio.', 'bloque': quienes})
+        if otros:
+            secs.append({'id': 'familia', 'titulo': 'De la misma familia', 'pre': '%s %s' % (l[1], l[2]), 'tarjetas': [],
+                         'texto': l[3], 'bloque': otros})
+        out.append(dict(comun, **{
+            'archivo': archivo, 'titulo': nom, 'icono': ico, 'menu': nom,
+            'padre': ('servicios.html', 'Servicios'), 'padre2': (SV_CATALOGO, 'Catálogo'),
+            'lema': 'Servicios · %s' % l[2], 'entrada': que,
+            'saltos': {x['id']: x.get('pre') or x['titulo'] for x in secs if x['id'] != 'servicio'},
+            'secciones': secs,
+            'pie_extra': partes_nav('Los servicios', SV_CATALOGO, '🧰', partes, archivo),
+        }))
+    return out
 
 
 # Comunidad, primera version (propuesta de Astra, punto 11; entrega 7,

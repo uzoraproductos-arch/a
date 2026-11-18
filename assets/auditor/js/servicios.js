@@ -88,6 +88,9 @@
   try {
     var tema = new URLSearchParams(location.search).get('tema');
     if (tema && !val('svTema')) $('svTema').value = tema.slice(0, 160);
+    // La pagina de cada servicio manda tambien la pregunta del ejemplo (18-11-2026).
+    var preg = new URLSearchParams(location.search).get('pregunta');
+    if (preg && !val('svPregunta')) $('svPregunta').value = preg.slice(0, 1500);
     // Cada perfil y cada servicio llegan con servicios.html?servicio=<id>.
     var serv = new URLSearchParams(location.search).get('servicio');
     var sel = $('svServicio');

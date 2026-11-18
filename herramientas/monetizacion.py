@@ -98,6 +98,10 @@ def contadores():
     copiados = sum(1 for e in b['evidencias'].values() if e.get('estado') == 'copiado')
     contratos = sum(a['contratos'] for a in c['archivos'])
     anios = sorted(a['anio'] for a in c['archivos'])
+    # El padrón de contrapartes y el Registro Público Único (18-11-2026): lo
+    # nuevo que ya se revisa, contado de sus archivos como lo demás.
+    pm = _js('assets/auditor/data/padron/meta.js')
+    rpu = _js('assets/auditor/data/deuda-rpu.js', '{"meta"')['meta']
     return [
         ('69b', len(s['r']), 'RFC de la lista 69-B del SAT, con su situación',
          'renglones de la copia del %s (corte del SAT: %s)' % (s['meta']['descarga'], s['meta']['corte']),
@@ -109,6 +113,11 @@ def contadores():
          'proveedores distintos en esos contratos', 'ComprasMX, Datos Abiertos', c['url'], 'contratos-publicos.html'),
         ('boveda', copiados, 'documentos oficiales guardados con su huella SHA-256',
          'documentos de la bóveda con copia', 'Bóveda de evidencias de Auditavisión', 'pilares.html#base', 'pilares.html#base'),
+        ('padron', pm['rfc'], 'RFC en las listas del SAT de los arts. 69, 17-H Bis y 69-B Bis',
+         'RFC distintos en %d listas del SAT, con la OFAC y la ONU aparte' % len(pm['orden']),
+         'SAT, datos abiertos: contribuyentes publicados', pm['sat'][pm['orden'][0]]['pagina'], 'herramienta-inspector-padron.html'),
+        ('rpu', rpu['n'], 'créditos y obligaciones de estados y municipios, uno por uno',
+         'renglones del Registro Público Único al %s' % rpu['corteTxt'], 'SHCP, Registro Público Único', rpu['pagina'], 'planisferio.html?d=deuda'),
     ]
 
 
@@ -152,7 +161,7 @@ def hecho():
 def prueba():
     revisar()
     c = contadores()
-    assert len(c) == 4 and all(isinstance(x[1], int) and x[1] > 0 for x in c), c
+    assert len(c) == 6 and all(isinstance(x[1], int) and x[1] > 0 for x in c), c
     assert [p['id'] for p in PLANES][0] == 'gratis' and PLANES[0]['precio'] == 0
     print('monetizacion: prueba bien (%s)' % ', '.join('%s %s' % (x[0], format(x[1], ',')) for x in c))
 
