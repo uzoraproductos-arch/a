@@ -98,6 +98,7 @@ def main():
         revisiones.append(('sello', lambda: r_sello(a.base)))
     revisiones.append(('inventario', lambda: corre('inventario.py')))
     revisiones.append(('puntos ciegos', lambda: corre('prueba_puntos_ciegos.py')))
+    revisiones.append(('registro de fuentes', lambda: corre('fuentes.py')))
     # Encargo del 05-11-2026: el vigía legislativo y el lector de facturas,
     # cada uno con su prueba sin red (ejemplos fijos y una factura ficticia).
     revisiones.append(('vigía legislativo', lambda: corre('vigia_legislativo.py', '--prueba')))

@@ -481,6 +481,25 @@ def municipios(base, ref, glos, raiz):
 # El Auditor: «¿qué estados no cuadran?» (02-11-2026). Lo lee asistente-charla.js
 # dentro de D.san (clave map_cuadre), con el mismo cálculo de la lente.
 # ---------------------------------------------------------------------------
+def _base_al_dia():
+    import fuentes
+    n = {m: [f for f in fuentes.FUENTES if f['modo'] == m] for m in fuentes.MODOS}
+    nombres = lambda l: ', '.join(f['que'].split(' (')[0] for f in l)
+    return {
+        'tit': 'Cada cuándo se actualiza la base de datos',
+        'h': ('<p>Las dependencias no publican cada día, así que la base no se rehace a diario: cada fuente tiene su calendario y se alimenta '
+              'con cada novedad. En <a href="base-al-dia.html"><b>La base al día</b></a> está cada una de sus %d fuentes:</p><ul>'
+              '<li><b>🤖 Se actualizan solas cada semana (%d):</b> %s.</li>'
+              '<li><b>🔔 Avisan y se cotejan (%d):</b> %s.</li>'
+              '<li><b>✋ Se integran a mano en cuanto salen (%d):</b> como el Presupuesto, la Cuenta Pública, la UMA y las encuestas del INEGI.</li></ul>'
+              '<p>Cada novedad pasa por el mismo camino: la huella del archivo, su cuadre y su chip. Lo que una dependencia no publica queda en el '
+              '<a href="pendientes.html">Registro de pendientes</a>.</p>')
+             % (len(fuentes.FUENTES), len(n['sola']), nombres(n['sola']), len(n['aviso']), nombres(n['aviso']), len(n['mano'])),
+        'ci': [], 'fu': [],
+        'sug': ['¿Cómo se arma la base de datos?', '¿Qué datos faltan por publicar?', '¿Qué bases puedo descargar?'],
+        'ir': ['base-al-dia.html', 'La base al día']}
+
+
 def temas_bot(d):
     IE = d['inspector_estatal']['entidades']
     nom = {e['abbr']: e['name'] for e in d['estados']}
@@ -544,6 +563,8 @@ def temas_bot(d):
                {'que': 'Cuotas al ISSSTE', 'e': 'oficial', 'fu': {'tx': 'Ley del ISSSTE', 'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LISSSTE.pdf'}}],
         'sug': ['Trabajo en el gobierno y gano 20 mil al mes, ¿cuánto me retienen?', 'Revisa mi recibo de nómina', '¿Qué son las cuotas al ISSSTE?'],
         'ir': ['servicios-catalogo.html#sv-nomina', 'Revisión de nómina']},
+        # La base al día (18-11-2026): lo lee del registro de fuentes (herramientas/fuentes.py), igual que base-al-dia.html.
+        'base_al_dia': _base_al_dia(),
         # ¿Cómo nos sostenemos? (07-11-2026): lo lee de monetizacion.py, igual que servicios.html.
         'serv_sosten': {
         'tit': '¿Cómo se sostiene Auditavisión?',

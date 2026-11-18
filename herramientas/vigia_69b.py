@@ -19,7 +19,7 @@ y deja en docs/sat69b/bandeja.json lo que cambió:
 
 Este script solo compara: sat-69b.js no se toca aquí. Desde el 18-11-2026
 (decisión del autor: «la idea es que se actualice sola») el flujo semanal
-«Vigía 69-B» corre después actualizar_69b.py con el mismo archivo, sube el
+«Base al día» corre después actualizar_69b.py con el mismo archivo, sube el
 sello y publica; la bandeja queda como el registro de lo que cambió esa
 semana. A mano: actualizar_69b.py y sello.py --siguiente.
 
@@ -108,7 +108,7 @@ def main():
 
     bandeja = {
         "que_es": ("Lo que cambió en la lista 69-B del SAT frente a la copia que tenía la plataforma. El flujo "
-                   "semanal «Vigía 69-B» integra el corte nuevo solo, con el mismo archivo del SAT."),
+                   "semanal «Base al día» integra el corte nuevo solo, con el mismo archivo del SAT."),
         "fuente": "SAT, Listado completo de contribuyentes (Artículo 69-B del CFF)",
         "url": a69.URL_PAGINA,
         "csv": a69.URL_CSV,

@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 757 |
+| Páginas revisadas | 758 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -46,6 +46,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `auditoria-tren-maya.html` | Tren Maya · Auditoría en imágenes · Auditavisión | auditorias.py | 85 | 0 | 2 | 3 | 1 |
 | `auditoria-tren-toluca.html` | Tren Interurbano México-Toluca «El Insurgente» · Auditoría en imágenes · Auditavisión | auditorias.py | 85 | 0 | 2 | 4 | 1 |
 | `aviso-de-privacidad.html` | Aviso de privacidad · Auditavisión | apartados.py | 35 | 0 | 1 | 0 | 0 |
+| `base-al-dia.html` | La base al día · Auditavisión | apartados.py | 36 | 0 | 0 | 0 | 0 |
 | `biblioteca-hacendaria.html` | Biblioteca hacendaria · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `busca-y-verifica.html` | Busca y verifica · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `canjea-tu-codigo.html` | Ingresa con tu código · Auditavisión | acceso.py | 6 | 0 | 0 | 0 | 0 |
@@ -329,7 +330,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 232 | 0 | 0 | 0 | 121 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 37 | 0 | 11 | 5 | 0 |
-| `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 48 | 0 | 1 | 0 | 0 |
+| `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 50 | 0 | 1 | 0 | 0 |
 | `planisferio-ags-administracion.html` | Su administración pública · Auditavisión | apartados.py | 58 | 0 | 14 | 5 | 0 |
 | `planisferio-ags-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 11 | 18 | 3 |
 | `planisferio-ags-deuda.html` | Su deuda · Auditavisión | apartados.py | 62 | 0 | 8 | 18 | 2 |
