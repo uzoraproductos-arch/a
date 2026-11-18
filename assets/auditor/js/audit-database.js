@@ -20023,7 +20023,7 @@ window.AUDIT_DB = {
     "fuente": "Texto vigente de la Ley del Impuesto sobre la Renta",
     "estado": "oficial",
     "tope_anual": 3500000,
-    "nota": "La tasa se aplica al total de lo efectivamente cobrado y amparado con factura, sin el IVA y <b>sin deducci\u00f3n alguna</b>. Esa es la diferencia de fondo con el r\u00e9gimen general: aqu\u00ed no se resta ning\u00fan gasto, y a cambio la tasa es una fracci\u00f3n de la del cuadro com\u00fan.",
+    "nota": "La tasa se aplica al total de lo efectivamente cobrado y amparado con factura, sin el IVA y <b>sin deducci\u00f3n alguna</b>. Esa es la diferencia de fondo con el r\u00e9gimen general: aqu\u00ed no se resta ning\u00fan gasto, y a cambio la tasa es una fracci\u00f3n de la del cuadro com\u00fan. Esta tabla rige en 2026. <b>Desde el 1 de enero de 2027 el tope sube de 3.5 a 5 millones de pesos</b> y las tasas no cambian (reforma a la Ley del ISR, DOF 13-11-2026, arts. 113-E y 113-F).",
     "renglones": [
       { "hasta": 25000.00, "tasa": 1.00 },
       { "hasta": 50000.00, "tasa": 1.10 },
@@ -31317,9 +31317,9 @@ window.AUDIT_DB = {
     "deuda-congreso-2027": {
       "ente": "Congreso de la Unión (Cámara de Diputados y Senado) y Secretaría de Hacienda y Crédito Público",
       "quien": "La Secretaría de Hacienda propone la Iniciativa de Ley de Ingresos; la Cámara de Diputados (15-10-2026) y el Senado de la República autorizan los ingresos y el techo de endeudamiento (art. 73, fracc. VIII constitucional); las agencias calificadoras evalúan el riesgo soberano.",
-      "que": "El 15 de octubre de 2026 el pleno de la Cámara de Diputados aprobó la Ley de Ingresos de la Federación para 2027 (331 votos a favor y 118 en contra en lo general), y el 28 de octubre la aprobó el pleno del Senado (75 a 34 en lo general y 73 a 33 en lo particular). La ley estima ingresos totales por $10,636,488.1 millones de pesos (art. 1o.) y autoriza un techo de endeudamiento neto interno del Gobierno Federal hasta por $1,700,000.0 millones ($1.7 billones, art. 2o.). Además, aprobó una reserva al artículo vigésimo primero transitorio que quita el tope de $300 millones de pesos de ingresos anuales y permite a grandes contribuyentes obtener la reducción de multas, recargos y gastos de ejecución si pagan completo su adeudo principal. Ese mismo 15 de octubre, HR Ratings bajó la calificación soberana de largo plazo de México de HR BBB+ (G) a HR BBB (G), con perspectiva estable, por deterioro en los balances fiscales, bajo crecimiento (1.30 % real para 2026 y 1.50 % anual para 2027-2033) y rigidez del gasto, estimando un déficit de los RFSP de 4.61 % del PIB en 2026 y un Saldo Histórico de los RFSP de 61.17 % del PIB en 2030.",
-      "falta": "Falta la publicación del decreto de la Ley de Ingresos de la Federación 2027 en el Diario Oficial de la Federación y el texto íntegro de las reservas votadas en la Cámara de Diputados sobre deducciones y estímulos fiscales.",
-      "pendiente_id": "red-senado-ley-de-ingresos-2027-6",
+      "que": "El 15 de octubre de 2026 el pleno de la Cámara de Diputados aprobó la Ley de Ingresos de la Federación para 2027 (331 votos a favor y 118 en contra en lo general), el 28 de octubre la aprobó el pleno del Senado (75 a 34 en lo general y 73 a 33 en lo particular) y el 13 de noviembre se publicó en el Diario Oficial; rige desde el 1 de enero de 2027. La ley estima ingresos totales por $10,636,488.1 millones de pesos (art. 1o.) y autoriza un techo de endeudamiento neto interno del Gobierno Federal hasta por $1,700,000.0 millones ($1.7 billones, art. 2o.). Además, aprobó una reserva al artículo vigésimo primero transitorio que quita el tope de $300 millones de pesos de ingresos anuales (el texto publicado ya no trae ningún tope de ingresos) y permite a grandes contribuyentes obtener la reducción de multas, recargos y gastos de ejecución si pagan completo su adeudo principal. Ese mismo 15 de octubre, HR Ratings bajó la calificación soberana de largo plazo de México de HR BBB+ (G) a HR BBB (G), con perspectiva estable, por deterioro en los balances fiscales, bajo crecimiento (1.30 % real para 2026 y 1.50 % anual para 2027-2033) y rigidez del gasto, estimando un déficit de los RFSP de 4.61 % del PIB en 2026 y un Saldo Histórico de los RFSP de 61.17 % del PIB en 2030.",
+      "falta": "Falta lo que solo se sabrá en 2027: cuánta deuda contrata de verdad el Gobierno Federal frente al techo de 1.7 billones, y cuánto deja de cobrarse por el perdón de multas y recargos del transitorio vigésimo primero. Hacienda lo informa cada trimestre al Congreso (LFPRH, art. 107).",
+      "pendiente_id": null,
       "cifras": {
         "ingresos_totales_2027_mdp": 10636488.1,
         "ingresos_presupuestarios_2027_mdp": 9156528.9,
@@ -31334,6 +31334,10 @@ window.AUDIT_DB = {
         "hr_shrfsp_2030_pct_pib": 61.17
       },
       "fuentes": [
+        {
+          "doc": "DOF 13-11-2026: Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027 (arts. 1o., 2o. y vigésimo primero transitorio)",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
+        },
         {
           "doc": "Canal del Congreso: Aprueban en San Lázaro Ley de Ingresos 2027 (15-10-2026)",
           "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"

@@ -514,6 +514,8 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 /* Vigia legislativo: lo que el DOF y Diputados publican, por cotejar (05-11-2026). */
 .vig-sinv { display: inline-block; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #7a4a00; background: #fff1d6; border: 1px solid #e8c37a; border-radius: 4px; padding: 2px 6px; margin-right: 4px; }
 .vig-sub { margin: 22px 0 6px; }
+.vig-ok { color: #11552f; background: #e3f4ea; border-color: #8fcaa6; }
+.vig-cotejo { display: block; margin-top: 4px; }
 /* El esquema de la respuesta, el expediente y la remisión entre modos (16-11-2026). */
 .pa-cab { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 10px; padding-bottom: 8px; border-bottom: 1px solid #eef1f6; font-size: 13px; }
 .pa-cab-tipo { font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #44526b; }

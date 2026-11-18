@@ -581,6 +581,52 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5803757&fecha=13/11/2026": {
+   "primera_vez": "2026-11-18",
+   "historial": [],
+   "usos": [
+    "cotejo:senado-ley-de-ingresos-2027:0",
+    "fuente:senado-ley-de-ingresos-2027"
+   ],
+   "consultado": "2026-11-18",
+   "estado": "copiado",
+   "sha256": "838dfd1a09797988c021d18d5f182ad1069366d88e3d80ed447f816431fdc24b",
+   "bytes": 838514,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-18"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5803758&fecha=13/11/2026": {
+   "primera_vez": "2026-11-18",
+   "historial": [],
+   "usos": [
+    "cotejo:senado-ley-de-ingresos-2027:6",
+    "fuente:senado-ley-de-ingresos-2027"
+   ],
+   "consultado": "2026-11-18",
+   "estado": "copiado",
+   "sha256": "dbcab5bf925f7ebbad47d97225c1424dcf4bac2d9b3cc421f1f78def68d52516",
+   "bytes": 468152,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-18"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5803759&fecha=13/11/2026": {
+   "primera_vez": "2026-11-18",
+   "historial": [],
+   "usos": [
+    "cifra:senado-ley-de-ingresos-2027",
+    "cotejo:senado-ley-de-ingresos-2027:5",
+    "fuente:senado-ley-de-ingresos-2027"
+   ],
+   "consultado": "2026-11-18",
+   "estado": "copiado",
+   "sha256": "59a79cb1efafd0ab060b69133ed1494c42852af239aa3be4beb91f59cfe2b35a",
+   "bytes": 334550,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-18"
+  },
   "https://dof.gob.mx/reglas_2014/SEDESOL_301213_13.pdf": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -2908,6 +2954,24 @@
    "tipo": "application/pdf",
    "http": 200,
    "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf": {
+   "primera_vez": "2026-11-18",
+   "historial": [],
+   "usos": [
+    "auditoria:deuda-congreso-2027",
+    "cifra:senado-ley-de-ingresos-2027",
+    "cotejo:senado-ley-de-ingresos-2027:1",
+    "cotejo:senado-ley-de-ingresos-2027:2",
+    "cotejo:senado-ley-de-ingresos-2027:3"
+   ],
+   "consultado": "2026-11-18",
+   "estado": "copiado",
+   "sha256": "1c247831459988960cbb9ef86868c9174e1bce7532957e8156b359e214ac10db",
+   "bytes": 763072,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-18"
   },
   "https://www.diputados.gob.mx/LeyesBiblio/pdf/LOAPF.pdf": {
    "primera_vez": "2026-10-27",

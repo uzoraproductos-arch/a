@@ -3196,6 +3196,10 @@ if FUNCIONES:
 # de independencia, compromiso «De que respondemos»: se corrige en publico
 # diciendo que cambio. (fecha, donde, que estaba mal, que se hizo, enlace)
 ERRATAS = [
+    ('18-11-2026', 'Noticiero, «Al momento»: la Ley de Ingresos 2027 en el Senado',
+     'La nota decía que el IVA estimado para 2027 es de $1,768,717.3 millones, como se dijo en la tribuna del Senado.',
+     'La Ley de Ingresos publicada en el DOF el 13 de noviembre de 2026 (art. 1o.) dice $1,768,017.3 millones. Se corrigió con la ley como fuente.',
+     'noticias-al-momento-senado-ley-de-ingresos-2027.html'),
     ('24-10-2026', 'Referencias y Gasto público',
      'La ficha [11] del Presupuesto de Egresos 2026 y la página «¿Quién lo aprueba?» decían que se publicó en el DOF el 28 de noviembre de 2025.',
      'Se publicó el 21 de noviembre de 2025: así lo dice el propio documento de la Cámara de Diputados. Se corrigieron las dos.',

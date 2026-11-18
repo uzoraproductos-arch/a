@@ -21,11 +21,15 @@
   fetch(el.getAttribute('data-bandeja'), { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (b) {
     if (!b) return;
     var h = (b.hallazgos || []).slice(0, 30), av = b.avisos || [];
+    var pend = h.filter(function (x) { return x.estado !== 'cotejado'; }).length, hechos = h.length - pend;
     var out = '<p class="pa-chico">Revisado por última vez el ' + esc(b.actualizado) + '. ' +
-      (h.length ? h.length + ' publicaciones por cotejar.' : 'Sin publicaciones nuevas que toquen las leyes vigiladas.') + '</p>';
+      (pend ? pend + ' publicaciones por cotejar.' : (h.length ? '' : 'Sin publicaciones nuevas que toquen las leyes vigiladas.')) +
+      (hechos ? ' ' + hechos + ' ya cotejadas, con lo que cambió.' : '') + '</p>';
     if (h.length) {
       out += '<ol class="leg-leyes vig-lista">' + h.map(function (x) {
-        return '<li><span class="vig-sinv">Por cotejar</span> ' + liga(x.liga, x.titulo) +
+        var ok = x.estado === 'cotejado';
+        return '<li><span class="' + (ok ? 'vig-sinv vig-ok">Cotejado' : 'vig-sinv">Por cotejar') + '</span> ' + liga(x.liga, x.titulo) +
+          (ok && x.cotejo ? '<span class="vig-cotejo">' + esc(x.cotejo) + '</span>' : '') +
           '<small>' + esc(FUENTE[x.fuente] || x.fuente) + (x.fecha ? ' · ' + esc(x.fecha) : '') +
           (x.articulos ? ' · artículos ' + esc(x.articulos) : '') + ' · lo vimos el ' + esc(x.visto) + '</small></li>';
       }).join('') + '</ol>';
