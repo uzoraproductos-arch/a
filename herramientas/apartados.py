@@ -1582,7 +1582,7 @@ BASE_PASOS = [
 # llamadas a servidor). Cuando se conecte Supabase (docs/BASE-DE-DATOS.md),
 # este aviso cambia ANTES de recabar el primer dato.
 LFPDPPP = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf'
-AVISO_FECHA = '02-11-2026'
+AVISO_FECHA = '18-11-2026'
 # El responsable de los datos personales (LFPDPPP art. 15, fr. I) y de las
 # réplicas (Ley de réplica, art. 7): lo designó el autor el 02-11-2026. Un solo
 # renglón que leen las dos páginas; si cambia, cambia aquí.
@@ -1604,7 +1604,9 @@ def _responsable_html():
 _AV_NAVEGADOR = [
     ('La plática con el Auditor', 'av-chat', 'Se guarda en la pestaña (sessionStorage) y se borra al cerrarla, o antes con «🗑️ Limpiar».'),
     ('«Lo que aún no sé»', 'auditavision.bot.sinRespuesta', 'Las preguntas que el Auditor no supo contestar, hasta 50. Solo las ves tú; si quieres, las copias y nos las mandas.'),
-    ('Tu código de acceso', 'av-pase', 'Solo si canjeas un código de la versión de prueba: un número al azar que identifica a este navegador y hasta cuándo abre. En la base queda que ese número canjeó un código, cuándo, y los días en que abrió la plataforma (solo la fecha); nada que diga quién eres.'),
+    ('Tu código de acceso', 'av-pase', 'Solo si canjeas un código de la versión de prueba: un número al azar que identifica a este navegador y hasta cuándo abre. En la base queda que ese número canjeó un código, cuándo, los días en que abrió la plataforma y lo que mide «Cómo medimos el uso» (abajo); nada que diga quién eres.'),
+    ('Tu visita', 'av-sesion', 'Un número al azar que dura lo que la pestaña abierta, para contar visitas sin saber de quién son. Se borra al cerrarla.'),
+    ('No medir este navegador', 'av-sin-medir', 'Solo si apagas la medición de uso (abajo): recuerda que no quieres que se mida.'),
     ('Tus dictámenes de cada expediente', 'av-dics', 'La pregunta, el folio y el enlace de los dictámenes que generas y tocan una investigación, hasta 60, para listarlos en su expediente. Los borras ahí mismo.'),
     ('Las columnas que sigues', 'av-sigo', 'Cuáles casos de Verificamos sigues y qué versión viste, para avisarte cuando cambian.'),
     ('Ágora cívica', 'auditavision_foro_debates y otras', 'Tus hilos, tus apoyos y el seudónimo que elijas. No se publican: viven solo en tu navegador.'),
@@ -1627,7 +1629,7 @@ AVISO = {
          'bloque': ('<p>Auditavisión es un proyecto cívico independiente, publicado en GitHub Pages. La persona responsable de tus datos '
                     'personales, y a quien te diriges para cualquier asunto de este aviso, es:</p>\n' + _responsable_html())},
         {'id': 'datos', 'titulo': 'Qué datos tratamos', 'texto': 'Artículo 15, fracciones II y III.', 'tarjetas': [],
-         'bloque': ('<p><b>Ninguno en un servidor nuestro.</b> No hay registro, ni cuentas, ni herramientas de analítica, ni cookies propias. '
+         'bloque': ('<p><b>Ninguno en un servidor nuestro.</b> No hay registro, ni cuentas, ni herramientas de analítica de terceros, ni cookies propias. '
                     'Los formularios (algo raro con el dinero público, un dato mal, un tema para investigar) arman el texto en tu pantalla '
                     'para que tú lo copies o lo descargues: no se envían solos.</p>\n'
                     '<p>Lo que sí se guarda <b>en tu propio navegador</b>, para que la plataforma recuerde lo que hiciste, es esto. '
@@ -1652,6 +1654,19 @@ AVISO = {
                     '<p>Si pulsas <b>«Buscar ahora»</b> con el nombre de una persona de la vida pública, ese nombre se manda a Anthropic '
                     'para buscarlo en sitios oficiales y de prensa. Los enlaces que encuentre quedan públicos, con su fecha (así cualquiera '
                     'puede ver qué se encontró), y se reusan un día para no repetir la búsqueda. De quien busca no se guarda nada.</p>')},
+        {'id': 'uso', 'titulo': 'Cómo medimos el uso de la plataforma', 'texto': 'Para mejorarla, sin saber quién eres (18-11-2026).', 'tarjetas': [],
+         'bloque': ('<p>Para saber qué temas interesan, qué páginas sirven y dónde falta información, la plataforma anota en nuestra base '
+                    '(Supabase) <b>qué página abres, cuánto tiempo la tienes a la vista y qué liga o botón tocas</b> (la página a la que lleva o el '
+                    'texto del botón), con la hora y el número al azar de tu pase (<code>av-pase</code>) o de tu visita (<code>av-sesion</code>). '
+                    'Del Auditor solo se anota el modo y la página a la que te llevó la respuesta.</p>\n'
+                    '<p><b>Lo que no se guarda:</b> tu dirección IP, tu navegador o dispositivo, lo que escribes en cualquier campo, tus preguntas '
+                    'al chat, ni nada que diga quién eres. No usamos herramientas de analítica de terceros ni publicidad: solo la administración '
+                    'de la plataforma ve estas cuentas, en conjunto, y no se venden ni se comparten. Si tu código te llegó porque lo pediste con tu '
+                    'correo, la administración ve tus minutos de uso y tus páginas vistas junto a tu solicitud. <b>Cuánto tiempo:</b> se borra solo '
+                    'a los 12 meses.</p>\n'
+                    '<p><b>No se mide</b> si tu navegador pide «No rastrear» o tiene el control global de privacidad, ni si lo apagas aquí:</p>\n'
+                    '<p class="av-medir" data-sin-medir><button class="sz-btn sz-btn-of" type="button" data-av-medir>No medir este navegador</button> '
+                    '<span data-av-medir-estado role="status" aria-live="polite"></span></p>')},
         {'id': 'terceros', 'titulo': 'Servicios de terceros', 'texto': 'Lo que tu navegador pide a otros sitios al abrir una página.', 'tarjetas': [],
          'bloque': ('<p>Para mostrarte la página, tu navegador se conecta a GitHub Pages (donde vive el sitio), a Google Fonts (las letras) '
                     'y a cdnjs (la librería de los mapas). Si abres un formulario para enviarlo, también a Cloudflare Turnstile, '
@@ -2988,10 +3003,10 @@ if FUNCIONES:
                                      'Además, cada pregunta nueva nos llega sola, sin tu nombre ni tu correo (solo la pregunta, la '
                                      'ficha que te dio el Auditor y la versión de la página), para saber qué fichas faltan primero.')
             _sec['bloque'] = _cambia(_sec['bloque'],
-                'No hay registro, ni cuentas, ni herramientas de analítica, ni cookies propias. '
+                'No hay registro, ni cuentas, ni herramientas de analítica de terceros, ni cookies propias. '
                 'Los formularios (algo raro con el dinero público, un dato mal, un tema para investigar) arman el texto en tu pantalla '
                 'para que tú lo copies o lo descargues: no se envían solos.',
-                'No hay registro, ni cuentas, ni herramientas de analítica, ni cookies propias. Los formularios (algo raro con el dinero '
+                'No hay registro, ni cuentas, ni herramientas de analítica de terceros, ni cookies propias. Los formularios (algo raro con el dinero '
                 'público, un dato mal, un tema para investigar) arman el texto en tu pantalla; <b>solo si pulsas «Enviar»</b> llega a '
                 'nuestra base de datos (Supabase), con: el tipo de mensaje, el asunto, el texto que escribiste, la página desde donde lo '
                 'mandaste, el enlace al documento que citaste, tu correo <b>solo si lo escribes y aceptas este aviso</b>, y una huella '
@@ -3000,8 +3015,9 @@ if FUNCIONES:
                 'correo van dentro del texto, porque sin ellos no podemos cotizarte: por eso solo se envía si aceptas este aviso. '
                 + AVISO_CONSERVACION.strip())
     AVISO['entrada'] = _cambia(AVISO['entrada'], 'y hoy ningún dato tuyo sale de tu navegador',
-                                                'y solo lo que tú decides enviar sale de tu navegador')
-    AVISO['lema'] = 'Qué sabemos de ti: solo lo que tú nos mandas'
+                                                'y de tu navegador solo sale lo que tú decides enviar y, para mejorar la plataforma, '
+                                                'qué páginas abres y qué tocas, sin nada que diga quién eres (<a href="#uso">cómo lo medimos y cómo apagarlo</a>)')
+    AVISO['lema'] = 'Qué sabemos de ti: lo que nos mandas y cómo se usa la plataforma, nunca quién eres'
 
 # Fe de erratas: correcciones reales, documentadas en CONTEXT.md. Politica
 # de independencia, compromiso «De que respondemos»: se corrige en publico

@@ -199,6 +199,75 @@ def escribir_entrada(sello):
     open(os.path.join(RAIZ, CANJE), 'w', encoding='utf-8', newline='\n').write(entrada_html(sello))
 
 
+# El panel va en pestañas (pedido del autor, 18-11-2026: «tener esta parte de
+# control interno dentro de nuestra plataforma»): el tablero de uso con sus
+# gráficas, los códigos, las solicitudes, la bitácora y el acceso propio.
+HOJAS = [
+    ('tablero', '📊', 'Tablero de uso'),
+    ('codigos', '🗝️', 'Códigos'),
+    ('solicitudes', '📨', 'Solicitudes'),
+    ('bitacora', '📋', 'Bitácora'),
+    ('acceso', '🔐', 'Mi acceso'),
+]
+# Las gráficas del tablero: id, título y qué responde. Las pinta
+# acceso-paginas.js con lo que devuelve uso_tablero() de la base.
+GRAFICAS = [
+    ('dia', 'El uso, día por día', 'Páginas vistas cada día; pasa el dedo o el ratón por una columna para ver personas y minutos.'),
+    ('secciones', 'Los temas que interesan', 'Minutos con la página a la vista en cada parte de la plataforma.'),
+    ('paginas', 'Las páginas más vistas', 'Las 20 con más visitas, con sus minutos.'),
+    ('clics', 'Dónde dan clic', 'Lo que más se toca: la página a la que lleva una liga o el texto del botón.'),
+    ('chat', 'El Auditor: modos y a dónde llevó', 'Preguntas por modo y las páginas a las que llevaron las respuestas. La pregunta no se guarda.'),
+    ('horas', 'A qué hora entran', 'Páginas vistas por hora del día (Ciudad de México).'),
+    ('codigos', 'Los códigos que más se usan', 'Minutos de uso de quienes canjearon cada código.'),
+    ('estados', 'Cómo están los códigos', 'Cuántos códigos hay en cada estado (sin contar los archivados).'),
+]
+
+
+def _pestanas():
+    return ('    <div class="ac-pestanas" role="tablist" aria-label="Partes del panel">\n'
+            + ''.join('      <button class="ac-pestana" type="button" role="tab" id="ac-tab-%s" aria-controls="ac-hoja-%s" '
+                      'aria-selected="%s" data-hoja="%s">%s %s</button>\n'
+                      % (i, i, 'true' if n == 0 else 'false', i, ico, t) for n, (i, ico, t) in enumerate(HOJAS))
+            + '    </div>\n')
+
+
+def _tablero():
+    graf = ''.join('      <figure class="ac-graf%s" id="acG-%s"><figcaption><b>%s</b> <span class="ac-ayuda">%s</span></figcaption>'
+                   '<div class="ac-graf-cuerpo"><p class="ac-ayuda">Cargando…</p></div></figure>\n'
+                   % (' ac-graf-ancha' if i in ('dia', 'horas') else '', i, t, d) for i, t, d in GRAFICAS)
+    return ('      <h3>Tablero de uso</h3>\n'
+            '      <p class="ac-ayuda">Cómo se usa la plataforma, para saber dónde poner atención y qué falta en la base. '
+            'Se mide por navegador (el número al azar de su pase), nunca por persona: no se guarda la IP, lo que se escribe ni las preguntas al chat. '
+            'Tu navegador de administración no se cuenta. Las cifras son conteos de la plataforma, no estimaciones.</p>\n'
+            '      <div class="ac-orden">\n'
+            '        <div class="ac-vista" role="group" aria-label="Periodo">\n'
+            + ''.join('          <button class="sz-btn ac-chico ac-claro" type="button" data-periodo="%d" aria-pressed="%s">%s</button>\n'
+                      % (d, 'true' if d == 30 else 'false', t) for d, t in ((7, '7 días'), (30, '30 días'), (90, '90 días'), (365, '1 año')))
+            + '        </div>\n'
+            '        <button class="sz-btn ac-chico ac-claro" type="button" id="acTabCsv">Descargar el tablero (CSV)</button>\n'
+            '        <button class="sz-btn ac-chico ac-claro" type="button" id="acTabRecargar">Actualizar</button>\n'
+            '      </div>\n'
+            '      <p class="ac-estado" id="acTabEstado" role="status" aria-live="polite"></p>\n'
+            '      <div class="ac-kpis" id="acKpis"></div>\n'
+            '      <div class="ac-mirar" id="acMirar" hidden></div>\n'
+            '      <div class="ac-graficas">\n' + graf + '      </div>\n')
+
+
+def _bitacora():
+    return ('      <h3>Bitácora de la administración</h3>\n'
+            '      <p class="ac-ayuda">El control interno: cada cosa que se hace con los códigos, las solicitudes y el código maestro queda anotada sola, '
+            'con quién y cuándo. No se edita ni se borra desde aquí. «sistema» es lo que hace la plataforma sola, como el código de la semana.</p>\n'
+            '      <div class="ac-orden">\n'
+            '        <label class="ac-busca">Qué <select class="ac-campo" id="acBitQue"><option value="">Todo</option></select></label>\n'
+            '        <label class="ac-busca">Buscar <input class="ac-campo" id="acBitBusca" type="search" placeholder="Código, correo o detalle" autocomplete="off"></label>\n'
+            '        <button class="sz-btn ac-chico ac-claro" type="button" id="acBitCsv">Descargar la bitácora (CSV)</button>\n'
+            '      </div>\n'
+            '      <div class="ac-resumen" id="acBitResumen"></div>\n'
+            '      <div class="ac-tabla-caja"><table class="ac-tabla" id="acBit">\n'
+            '        <thead><tr><th>Cuándo</th><th>Quién</th><th>Qué hizo</th><th>Sobre</th><th>Detalle</th></tr></thead>\n'
+            '        <tbody></tbody></table></div>\n')
+
+
 def pagina_panel():
     opciones = ''.join('<option value="%s"%s>%s</option>' % (v, ' selected' if v == '7 days' else '', t) for v, t in DURACIONES)
     bloque = ('<div class="ac-panel" id="acPanel">\n'
@@ -211,6 +280,14 @@ def pagina_panel():
               '  </form>\n'
               '  <div class="ac-admin" id="acAdmin" hidden>\n'
               '    <p class="ac-sesion"><span id="acQuien"></span> <button class="sz-btn ac-chico" type="button" id="acSalir">Salir</button></p>\n'
+              + _pestanas() +
+              '    <section class="ac-hoja" id="ac-hoja-tablero" role="tabpanel" aria-labelledby="ac-tab-tablero" data-sin-medir>\n'
+              + _tablero() +
+              '    </section>\n'
+              '    <section class="ac-hoja" id="ac-hoja-bitacora" role="tabpanel" aria-labelledby="ac-tab-bitacora" hidden>\n'
+              + _bitacora() +
+              '    </section>\n'
+              '    <section class="ac-hoja" id="ac-hoja-acceso" role="tabpanel" aria-labelledby="ac-tab-acceso" hidden>\n'
               '    <section class="ac-semana" aria-labelledby="acSemTit">\n'
               '      <h3 id="acSemTit">Tu código de la semana</h3>\n'
               '      <p class="ac-semana-cod"><button class="ac-cod" type="button" id="acSemCod" title="Copiar">····-····</button></p>\n'
@@ -234,6 +311,8 @@ def pagina_panel():
               '      <p class="ac-estado" id="acMaeGuardar" role="status" aria-live="polite"></p>\n'
               '      <p class="ac-ayuda" id="acMaeEntradas"></p>\n'
               '    </form>\n'
+              '    </section>\n'
+              '    <section class="ac-hoja" id="ac-hoja-solicitudes" role="tabpanel" aria-labelledby="ac-tab-solicitudes" hidden>\n'
               '    <section class="ac-solicitudes" aria-labelledby="acSolTit">\n'
               '      <h3 id="acSolTit">Solicitudes de código <span class="ac-chip ac-sin_usar" id="acSolCuenta"></span></h3>\n'
               '      <p class="ac-ayuda">Quien pidió código desde la entrada. Elige cuánto le das, asigna y mándaselo desde tu correo.</p>\n'
@@ -241,6 +320,8 @@ def pagina_panel():
               '        <thead><tr><th>Correo</th><th>Quién y para qué</th><th>Pidió</th><th>Estado</th><th></th></tr></thead>\n'
               '        <tbody></tbody></table></div>\n'
               '    </section>\n'
+              '    </section>\n'
+              '    <section class="ac-hoja" id="ac-hoja-codigos" role="tabpanel" aria-labelledby="ac-tab-codigos" hidden>\n'
               '    <form class="ac-generar" id="acGenerar" novalidate>\n'
               '      <h3>Generar códigos</h3>\n'
               '      <div class="ac-fila">\n'
@@ -268,25 +349,27 @@ def pagina_panel():
               '      <label class="ac-busca">Buscar <input class="ac-campo" id="acBusca" type="search" placeholder="Código o nota" autocomplete="off"></label>\n'
               '      <button class="sz-btn ac-chico ac-claro" type="button" id="acArchInact" title="Revocados, terminados y vencidos">Archivar los que ya no abren</button>\n'
               '    </div>\n'
-              '    <p class="ac-ayuda">Archivar solo ordena: el código sigue abriendo si alguien lo usa. Eliminar lo borra para siempre y quien lo canjeó pierde su tiempo.</p>\n'
+              '    <p class="ac-ayuda">Archivar solo ordena: el código sigue abriendo si alguien lo usa. Renovar le devuelve la vida: quita la revocación y el archivo, suma personas o fecha y, si quieres, da más tiempo a quien ya lo canjeó (desde hoy, si ya se le había acabado). Eliminar lo borra para siempre y quien lo canjeó pierde su tiempo. Todo queda en la Bitácora.</p>\n'
               '    <p class="ac-estado" id="acTablaEstado" role="status" aria-live="polite"></p>\n'
               '    <div class="ac-tabla-caja"><table class="ac-tabla" id="acTabla">\n'
               '      <thead><tr><th>Código</th><th>Duración</th><th>Usos</th><th>Estado</th><th>Nota</th><th>Acciones</th></tr></thead>\n'
               '      <tbody></tbody></table></div>\n'
+              '    </section>\n'
               '  </div>\n'
               '</div>') % opciones
     return {
         'archivo': PANEL,
         'menu': 'Administración de códigos',
         'icono': '🗝️',
-        'titulo': 'Administración de códigos',
+        'titulo': 'Administración y control interno',
         'lema': 'Solo para la administración',
-        'entrada': ('Aquí generas los códigos de invitación, eliges cuánto dura cada uno y cuántas personas lo pueden usar, '
-                    'y los editas, archivas, revocas o eliminas cuando quieras. Solo abre con una cuenta dada de alta en la administración.'),
+        'entrada': ('El control interno de la plataforma: el tablero de uso con sus gráficas (qué temas interesan, cuánto tiempo y dónde dan clic), '
+                    'los códigos de invitación (los generas, editas, renuevas, archivas, revocas o eliminas), las solicitudes, la bitácora de todo '
+                    'lo que hace la administración y tu acceso. Solo abre con una cuenta dada de alta en la administración.'),
         'noindex': True,
         'estilos': ['acceso.css'],
         'scripts': ['acceso-paginas.js'],
-        'secciones': [{'id': 'panel', 'titulo': 'Los códigos', 'texto': 'El tiempo de cada código corre desde que se canjea.', 'tarjetas': [], 'bloque': bloque}],
+        'secciones': [{'id': 'panel', 'titulo': 'Control interno', 'texto': 'Tablero, códigos, solicitudes, bitácora y tu acceso, cada uno en su pestaña.', 'tarjetas': [], 'bloque': bloque}],
     }
 
 
