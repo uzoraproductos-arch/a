@@ -1569,6 +1569,21 @@
         ir: ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-salud.html', 'su salud pública en el Planisferio'],
         sug: ['¿Qué estado tiene menos camas del IMSS?', '¿Cuántas consultas dio el IMSS en 2025?', '¿Qué sabemos del IMSS-Bienestar?'] };
     }
+    /* El IMSS-Bienestar de un estado (18-11-2026): sus egresos y cirugías de 2025, de la base de egresos de la DGIS. */
+    function salBien(e) {
+      var x = SAL.t.imss_bienestar, r = SAL.ib[e.a], fu = [x.fu[0], x.fu[x.fu.length - 1]];
+      var tot = Object.keys(SAL.ib).reduce(function (s, k) { return [s[0] + SAL.ib[k][0], s[1] + SAL.ib[k][1]]; }, [0, 0]);
+      var ir = ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-salud.html', 'su salud pública en el Planisferio'];
+      var sug = ['¿Qué sabemos del IMSS-Bienestar?', '¿Cuántos médicos tiene el IMSS en ' + e.n + '?', '¿Qué pasó con el Seguro Popular?'];
+      var ojo = '<p class="pa-chico">Un egreso es una salida del hospital, no una persona. No incluye al programa IMSS-Bienestar que opera el IMSS. Sus consultas y su gasto siguen ' + chip('pendiente', 'salud-imss-bienestar') + ': ningún informe oficial los publica.</p>';
+      if (!r) return { html: '<p>En la base de egresos hospitalarios 2025 de la Secretaría de Salud <b>no hay ningún hospital del IMSS-Bienestar en ' + esc(e.n) + '</b>. La base lo registra en ' + Object.keys(SAL.ib).length + ' entidades.</p>' + ojo,
+        fu: fu, ci: [], tit: 'El IMSS-Bienestar en ' + e.n, ir: ir, sug: sug };
+      fu.splice(1, 0, { que: 'Egresos con cirugía de cada 100 y su parte del país', e: 'derivado', op: n(r[1]) + ' ÷ ' + n(r[0]) + ' × 100; ' + n(r[0]) + ' ÷ ' + n(tot[0]) + ' × 100', fu: x.fu[0].fu });
+      return { html: '<p>En 2025, los hospitales del <b>IMSS-Bienestar en ' + esc(e.n) + '</b> registraron <b>' + n(r[0]) + ' egresos hospitalarios</b> (' + n(100 * r[0] / tot[0], 1) + ' % de los del IMSS-Bienestar en el país). ' +
+        'En <b>' + n(r[1]) + '</b> hubo al menos una cirugía, ' + n(100 * r[1] / r[0], 1) + ' de cada 100 (en el país, ' + n(100 * tot[1] / tot[0], 1) + '), con <b>' + n(r[2]) + ' procedimientos quirúrgicos</b>.</p>' + ojo,
+        fu: fu, ci: [{ v: n(r[0]), etq: 'egresos del IMSS-Bienestar', e: 'oficial' }, { v: n(r[1]), etq: 'egresos con cirugía', e: 'oficial' }],
+        tit: 'El IMSS-Bienestar en ' + e.n, ir: ir, sug: sug };
+    }
     /* El IMSS y el ISSSTE de un estado (03-11-2026, dimensión de salud del Planisferio): «¿cuántos médicos tiene el ISSSTE en Jalisco?».
        asistente.js la pide antes que las columnas, que también hablan del IMSS. */
     function salEdo(t) {
@@ -1583,7 +1598,11 @@
     function salResp(t) {
       if (!SAL) return null;
       if (/seguro popular|insabi|instituto de salud para el bienestar/.test(t)) return salTema('transicion');
-      if (/imss ?bienestar/.test(t)) return salTema('imss_bienestar');
+      if (/imss ?bienestar/.test(t)) {
+        var bEs = estados(t).e;
+        if (bEs.length === 1 && SAL.ib) return salBien(bEs[0]);
+        return salTema('imss_bienestar');
+      }
       var imss = /\bimss\b|seguro social/.test(t), iss = /issste/.test(t);
       var rse = salEdo(t);
       if (rse) return rse;

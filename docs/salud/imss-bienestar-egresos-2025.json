@@ -1,0 +1,367 @@
+{
+ "fuente": {
+  "tx": "Secretaría de Salud, DGIS, Subsistema Automatizado de Egresos Hospitalarios (SAEH), registros de egresos hospitalarios 2025 (datos abiertos)",
+  "url": "http://www.dgis.salud.gob.mx/descargas/datosabiertos/egresos/ssa_egresos_2025.zip",
+  "pagina": "http://www.dgis.salud.gob.mx/contenidos/basesdedatos/da_egresoshosp_gobmx.html",
+  "sha256": "e1f86cd24c8ca0d6bdc583119adad918899e6d37be0833c66e50d0413bcabfcd",
+  "archivo": "ssa_egresos_2025.zip"
+ },
+ "catalogo": {
+  "tx": "DGIS, catálogos de egresos hospitalarios 2023-2025 (CATCLUES)",
+  "url": "http://www.dgis.salud.gob.mx/descargas/datosabiertos/egresos/ssa_Catalogos_Egresos_2023_2025.zip",
+  "sha256": "8a0cf36d703a3b545833aec4ca537adaead428009dc051b16a85c431939fa105"
+ },
+ "egresos": 2596893,
+ "inst": {
+  "IMB": {
+   "nombre": "SERVICIOS DE SALUD IMSS BIENESTAR",
+   "total": {
+    "egr": 1643230,
+    "egrq": 622579,
+    "q": 797350
+   },
+   "ent": {
+    "BC": {
+     "egr": 41350,
+     "egrq": 18224,
+     "q": 25416
+    },
+    "BCS": {
+     "egr": 33203,
+     "egrq": 7945,
+     "q": 9119
+    },
+    "CAM": {
+     "egr": 22194,
+     "egrq": 9062,
+     "q": 11836
+    },
+    "COL": {
+     "egr": 15534,
+     "egrq": 7713,
+     "q": 14704
+    },
+    "CHIS": {
+     "egr": 129708,
+     "egrq": 44043,
+     "q": 58272
+    },
+    "CDMX": {
+     "egr": 104102,
+     "egrq": 50428,
+     "q": 63156
+    },
+    "GTO": {
+     "egr": 5181,
+     "egrq": 2417,
+     "q": 2812
+    },
+    "GRO": {
+     "egr": 66233,
+     "egrq": 35890,
+     "q": 46644
+    },
+    "HGO": {
+     "egr": 45585,
+     "egrq": 22059,
+     "q": 30518
+    },
+    "MÉX": {
+     "egr": 195164,
+     "egrq": 78133,
+     "q": 98668
+    },
+    "MICH": {
+     "egr": 111698,
+     "egrq": 33780,
+     "q": 41052
+    },
+    "MOR": {
+     "egr": 40952,
+     "egrq": 13389,
+     "q": 15838
+    },
+    "NAY": {
+     "egr": 27316,
+     "egrq": 10914,
+     "q": 13538
+    },
+    "OAX": {
+     "egr": 48750,
+     "egrq": 17803,
+     "q": 23155
+    },
+    "PUE": {
+     "egr": 108057,
+     "egrq": 47323,
+     "q": 62331
+    },
+    "QROO": {
+     "egr": 36545,
+     "egrq": 14106,
+     "q": 17161
+    },
+    "SLP": {
+     "egr": 44925,
+     "egrq": 21435,
+     "q": 29469
+    },
+    "SIN": {
+     "egr": 48857,
+     "egrq": 21314,
+     "q": 24673
+    },
+    "SON": {
+     "egr": 82964,
+     "egrq": 19577,
+     "q": 22194
+    },
+    "TAB": {
+     "egr": 140215,
+     "egrq": 29929,
+     "q": 37123
+    },
+    "TAM": {
+     "egr": 56662,
+     "egrq": 26126,
+     "q": 31640
+    },
+    "TLAX": {
+     "egr": 50453,
+     "egrq": 15650,
+     "q": 19850
+    },
+    "VER": {
+     "egr": 151168,
+     "egrq": 56079,
+     "q": 70186
+    },
+    "YUC": {
+     "egr": 7788,
+     "egrq": 2602,
+     "q": 3444
+    },
+    "ZAC": {
+     "egr": 28626,
+     "egrq": 16638,
+     "q": 24551
+    }
+   }
+  },
+  "SSA": {
+   "nombre": "SECRETARIA DE SALUD",
+   "total": {
+    "egr": 798940,
+    "egrq": 276594,
+    "q": 352165
+   },
+   "ent": {
+    "AGS": {
+     "egr": 36069,
+     "egrq": 14817,
+     "q": 19809
+    },
+    "COAH": {
+     "egr": 32203,
+     "egrq": 11657,
+     "q": 13767
+    },
+    "CHIS": {
+     "egr": 90,
+     "egrq": 52,
+     "q": 57
+    },
+    "CHIH": {
+     "egr": 68181,
+     "egrq": 28515,
+     "q": 34733
+    },
+    "CDMX": {
+     "egr": 140711,
+     "egrq": 37047,
+     "q": 49037
+    },
+    "DGO": {
+     "egr": 47087,
+     "egrq": 12892,
+     "q": 15968
+    },
+    "GTO": {
+     "egr": 157597,
+     "egrq": 69550,
+     "q": 97019
+    },
+    "JAL": {
+     "egr": 153161,
+     "egrq": 50026,
+     "q": 58683
+    },
+    "NL": {
+     "egr": 45454,
+     "egrq": 16790,
+     "q": 19416
+    },
+    "QRO": {
+     "egr": 74899,
+     "egrq": 19633,
+     "q": 24302
+    },
+    "TAM": {
+     "egr": 2800,
+     "egrq": 1093,
+     "q": 1253
+    },
+    "VER": {
+     "egr": 1122,
+     "egrq": 241,
+     "q": 289
+    },
+    "YUC": {
+     "egr": 39566,
+     "egrq": 14281,
+     "q": 17832
+    }
+   }
+  },
+  "IMO": {
+   "nombre": "INSTITUTO MEXICANO DEL SEGURO SOCIAL BIENESTAR",
+   "total": {
+    "egr": 145045,
+    "egrq": 53472,
+    "q": 62394
+   },
+   "ent": {
+    "BC": {
+     "egr": 1793,
+     "egrq": 705,
+     "q": 822
+    },
+    "CAM": {
+     "egr": 1115,
+     "egrq": 574,
+     "q": 674
+    },
+    "COAH": {
+     "egr": 4022,
+     "egrq": 1706,
+     "q": 2077
+    },
+    "CHIS": {
+     "egr": 18255,
+     "egrq": 5779,
+     "q": 6262
+    },
+    "CHIH": {
+     "egr": 5895,
+     "egrq": 2032,
+     "q": 2431
+    },
+    "DGO": {
+     "egr": 3441,
+     "egrq": 1739,
+     "q": 2001
+    },
+    "GRO": {
+     "egr": 542,
+     "egrq": 298,
+     "q": 350
+    },
+    "HGO": {
+     "egr": 9001,
+     "egrq": 3754,
+     "q": 4274
+    },
+    "MÉX": {
+     "egr": 2197,
+     "egrq": 916,
+     "q": 1027
+    },
+    "MICH": {
+     "egr": 12476,
+     "egrq": 5110,
+     "q": 5977
+    },
+    "NAY": {
+     "egr": 1674,
+     "egrq": 839,
+     "q": 926
+    },
+    "OAX": {
+     "egr": 22230,
+     "egrq": 9985,
+     "q": 12091
+    },
+    "PUE": {
+     "egr": 13374,
+     "egrq": 3660,
+     "q": 4349
+    },
+    "SLP": {
+     "egr": 14743,
+     "egrq": 4718,
+     "q": 5432
+    },
+    "SIN": {
+     "egr": 3292,
+     "egrq": 1325,
+     "q": 1475
+    },
+    "TAM": {
+     "egr": 2588,
+     "egrq": 1065,
+     "q": 1225
+    },
+    "VER": {
+     "egr": 13241,
+     "egrq": 4845,
+     "q": 5854
+    },
+    "YUC": {
+     "egr": 6633,
+     "egrq": 1753,
+     "q": 2122
+    },
+    "ZAC": {
+     "egr": 8533,
+     "egrq": 2669,
+     "q": 3025
+    }
+   }
+  },
+  "SME": {
+   "nombre": "SERVICIOS MEDICOS ESTATALES",
+   "total": {
+    "egr": 6474,
+    "egrq": 4367,
+    "q": 5366
+   },
+   "ent": {
+    "SIN": {
+     "egr": 5972,
+     "egrq": 4269,
+     "q": 5246
+    },
+    "YUC": {
+     "egr": 502,
+     "egrq": 98,
+     "q": 120
+    }
+   }
+  },
+  "SMM": {
+   "nombre": "SERVICIOS MEDICOS MUNICIPALES",
+   "total": {
+    "egr": 3204,
+    "egrq": 1959,
+    "q": 2106
+   },
+   "ent": {
+    "JAL": {
+     "egr": 3204,
+     "egrq": 1959,
+     "q": 2106
+    }
+   }
+  }
+ }
+}

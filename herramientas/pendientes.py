@@ -234,12 +234,14 @@ PROPIOS = [
      PLATAFORMA, 'https://www.gob.mx/issste/documentos/anuarios-estadisticos', 'Anuarios estadísticos (ISSSTE)',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-sistema.html', 'Datos · Salud pública · Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE'),
       ('planisferio.html', 'Planisferio · Salud pública')]),
-    ('salud-imss-bienestar', 'Salud', 'Consultas, egresos, cirugías y gasto del IMSS-Bienestar en 2025',
-     'En conferencias se han dado cifras de las consultas de 2025 del IMSS-Bienestar, pero la plataforma no encontró un informe oficial con sus servicios y su gasto completo. '
-     'El capítulo del IMSS-Bienestar de la Memoria Estadística 2025 del IMSS no se pudo descargar: su enlace devuelve una página web en lugar del archivo. '
-     'Hasta tener el documento, no se publican las cifras de las conferencias.',
+    ('salud-imss-bienestar', 'Salud', 'Consultas y gasto completo del IMSS-Bienestar en 2025',
+     'Sus egresos hospitalarios y sus cirugías de 2025 ya están en la plataforma desde el 18-11-2026, con la base de egresos de la Secretaría de Salud (DGIS), hospital por hospital. '
+     'Lo que falta son sus consultas y su gasto completo: en conferencias se han dado cifras de las consultas de 2025, pero la plataforma no encontró un informe oficial que las traiga, '
+     'y la base de servicios otorgados de la DGIS llega solo a 2023. El capítulo del IMSS-Bienestar de la Memoria Estadística 2025 del IMSS no se pudo descargar: su enlace '
+     'devuelve una página web en lugar del archivo. Hasta tener el documento, no se publican las cifras de las conferencias.',
      PLATAFORMA, 'https://www.imss.gob.mx/conoce-al-imss/memoria-estadistica-2025', 'Memoria Estadística 2025 (IMSS), capítulo XIV',
-     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-sistema.html', 'Datos · Salud pública · Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE')]),
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-sistema.html', 'Datos · Salud pública · Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE'),
+      ('planisferio.html', 'Planisferio · Salud pública')]),
     # La auditoría de gestión de la PROFEPA (28-10-2026).
     ('ambiente-denuncias-causa', 'Medio ambiente', 'Cuántas denuncias populares investigadas concluyó la PROFEPA, por qué causa y en cuánto tiempo',
      'Sus Informes de Actividades dan cuántas denuncias recibió, cuántas admitió y cuántas «concluyó», pero no separan las que concluyó por turnarlas a otra autoridad '

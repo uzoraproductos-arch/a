@@ -870,6 +870,20 @@
    "ir": "datos-salud-sistema.html#sal-imss_bienestar"
   },
   {
+   "q": "¿Cuántas cirugías hizo el IMSS-Bienestar en 2025?",
+   "ir": "datos-salud-sistema.html#sal-imss_bienestar",
+   "dice": [
+    "622,579"
+   ]
+  },
+  {
+   "q": "¿Cuántos egresos tuvo el IMSS-Bienestar en Chiapas?",
+   "ir": "planisferio-chis-salud.html",
+   "dice": [
+    "129,708"
+   ]
+  },
+  {
    "q": "¿Cuántas consultas da el ISSSTE?",
    "ir": "datos-salud-sistema.html#sal-issste"
   },
