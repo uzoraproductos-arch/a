@@ -25,7 +25,7 @@ import insp_efos
 from presupuesto_modulos import chip
 
 ESTILOS = ['insp-efos.css', 'insp-padron.css']
-SCRIPTS = ['padron.js', 'insp-padron.js']
+SCRIPTS = ['padron.js', 'insp-padron.js', 'insp-padron-lote.js']
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LISTAS = os.path.join(RAIZ, 'docs', 'listas', 'listas.json')
@@ -114,6 +114,25 @@ def construir(base, ref):
     <div id="pdRes" class="pd-res" aria-live="polite"></div>
   </section>
 
+  <section class="ef-sec" id="lote" aria-labelledby="pd-lote-tit">
+    <h2 id="pd-lote-tit">📂 Revisa un lote o tus facturas</h2>
+    <p>Sube un <b>CSV o TXT</b> con la lista de tus clientes o proveedores (hasta 2,000 RFC; basta con que cada renglón traiga el RFC), o tus <b>facturas en XML</b>.
+      Con las facturas te digo quién te factura, a quién le facturas y <b>por cuenta de quién</b>: los RFC «a cuenta de terceros» de cada concepto (CFDI 4.0).
+      El resultado es una <b>matriz</b>: una fila por RFC y una columna por lista, que puedes descargar en CSV.</p>
+    <div class="pd-suelta" id="pdSuelta">
+      <label class="ef-lbl" for="pdArch">Tu archivo (CSV, TXT o facturas XML; puedes elegir varios)</label>
+      <input type="file" id="pdArch" class="pd-archivo" accept=".csv,.txt,.xml,text/csv,text/plain,text/xml,application/xml" multiple>
+      <p class="pd-chico">o arrástralos aquí</p>
+    </div>
+    <details class="pd-pegar"><summary>O pega la columna de RFC desde Excel</summary>
+      <label class="ef-lbl" for="pdPega">RFC, uno por renglón</label>
+      <textarea id="pdPega" class="ef-input pd-pega" rows="5" spellcheck="false" autocapitalize="characters"></textarea>
+      <button type="button" class="ef-btn" id="pdLoteBtn">🔎 Revisar el lote</button>
+    </details>
+    <p class="cf-privado">🔒 Tus archivos se leen en tu navegador: no se suben a ningún lado.</p>
+    <div id="pdLote" class="pd-res" aria-live="polite"></div>
+  </section>
+
   <section class="ef-sec" aria-labelledby="pd-listas">
     <h2 id="pd-listas">📚 Las listas que revisamos</h2>
     <p>Cada una se baja de su fuente oficial con la huella SHA-256 del archivo, y si sus columnas cambian o sus cuentas no cuadran, la plataforma se detiene antes de publicarla.
@@ -139,8 +158,8 @@ def construir(base, ref):
   <section class="ef-sec" aria-labelledby="pd-no">
     <h2 id="pd-no">🚫 Lo que no revisamos, y por qué</h2>
     <ul>%(no)s</ul>
-    <p>¿Necesitas revisar a cientos de clientes o proveedores, o la cadena de quién le factura a quién? <a href="servicios.html">Pide un servicio</a>; mientras tanto, el
-      <a href="herramienta-inspector-factura.html">Lector de facturas</a> ya cruza a cada emisor con la lista 69-B.</p>
+    <p>¿Necesitas revisarlo cada mes, con más de 2,000 contrapartes o con el expediente de identificación de cada cliente? <a href="servicios.html">Pide un servicio</a>; el
+      <a href="herramienta-inspector-factura.html">Lector de facturas</a> también cruza a cada emisor con la lista 69-B.</p>
   </section>
 </div>''' % {'nlistas': len(fl), 'chip_of': chip('oficial'), 'rfc': _n(m['rfc']), 'mor': _n(m['morales']), 'fis': _n(m['fisicas']),
              'tabla': tabla, 'fuentes': fuentes, 'no': no}

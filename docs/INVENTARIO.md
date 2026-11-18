@@ -208,7 +208,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-efos.html` | Lista negra del SAT · Auditavisión | apartados.py | 51 | 0 | 2 | 7 | 0 |
 | `herramienta-inspector-entes-directorio.html` | Directorio de entes públicos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-entes.html` | Auditor de entes públicos · Auditavisión | apartados.py | 59 | 0 | 49 | 3 | 0 |
-| `herramienta-inspector-factura.html` | Lector de facturas CFDI · Auditavisión | apartados.py | 46 | 0 | 2 | 1 | 0 |
+| `herramienta-inspector-factura.html` | Lector de facturas CFDI · Auditavisión | apartados.py | 47 | 0 | 2 | 1 | 0 |
 | `herramienta-inspector-investigaciones.html` | Grandes investigaciones · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-mia.html` | Mi Auditavisión · Auditavisión | apartados.py | 47 | 0 | 1 | 1 | 0 |
 | `herramienta-inspector-nepotismo.html` | Nepotismo y parentesco · Auditavisión | apartados.py | 46 | 0 | 0 | 1 | 0 |

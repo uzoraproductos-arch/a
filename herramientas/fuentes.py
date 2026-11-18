@@ -118,7 +118,7 @@ FUENTES = [
      'corte': 'contratos de 2025 y 2026', 'revisar': '2026-12-01',
      'url': 'https://comprasmx.buengobierno.gob.mx/datos-abiertos'},
     {'id': 'rpu', 'que': 'Registro Público Único de deuda de estados y municipios', 'quien': 'SHCP',
-     'cada': 'trimestral', 'publica': 'Hacienda lo actualiza cada trimestre en su portal de disciplina financiera.',
+     'cada': 'trimestral', 'publica': 'Hacienda publica el registro cada día y los saldos se reportan cada trimestre. Su servidor manda incompleta la cadena de certificados, así que se baja a mano.',
      'modo': 'mano', 'script': 'anclar_rpu.py', 'datos': 'assets/auditor/data/deuda-rpu.js',
      'corte': lambda: 'al ' + _fecha(_lee('assets/auditor/data/deuda-rpu.js', r'"corte":"([^"]+)"')), 'revisar': '2026-11-15',
      'url': 'https://www.disciplinafinanciera.hacienda.gob.mx/'},
