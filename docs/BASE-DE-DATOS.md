@@ -194,6 +194,16 @@ Las duraciones van de 1 hora a 5 años, o **ilimitado** (`interval '100 years'`)
 
 **El límite, dicho claro:** en un sitio estático el candado vive en el navegador. Detiene a quien entra por la puerta, no a quien lee el código de las páginas o desactiva JavaScript. Para cerrar de verdad, el sitio necesita un servidor que revise el pase antes de entregar la página (Vercel, fase 1 de LANZAMIENTO.md).
 
+### El control interno (18-11-2026, migración `20261118000001`)
+
+| Pieza | Qué hace |
+|---|---|
+| `renovaciones`, `renovar_codigo` | Renovar un código: quita la revocación y el archivo, suma personas (`p_usos_mas`) o fecha (`p_antes`) y, con `p_lapso`, da tiempo extra a cada pase que lo canjeó. `pase_hasta` recorre canjes y renovaciones en orden: el extra corre desde el final de lo que quedaba o desde la renovación, lo que sea más tarde |
+| `bitacora_admin`, `bitacora_lista` | La bitácora: la llenan disparadores de `codigos`, `solicitudes_codigo` y `admin_codigo` (nunca el código maestro en sí) y `renovar_codigo`. `quien` es el correo de la administración o «sistema». Nadie la escribe desde fuera |
+| `uso_eventos`, `registrar_uso`, `uso_seccion` | La medición: vista, tiempo, clic y pregunta (solo modo y destino), por pase o visita. Solo la llave de servicio escribe (acción `uso` de la función `codigo`, 120 tandas cada 10 minutos por IP, hasta 40 eventos). No guarda IP, navegador ni texto escrito; no cuenta pases con el código semanal; se borra a los 12 meses |
+| `uso_tablero(p_dias)` | Lo que pinta el Tablero de uso: resumen, por día, temas, páginas, clics, modos y destinos del chat, horas y códigos. Solo cuentas |
+| `codigo_uso` | Suma `minutos`, `vistas` y `renovado` por persona |
+
 ## Respaldos (27-10-2026)
 
 ```bash

@@ -1113,7 +1113,12 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   de una lista editorial de prensa. **Ninguna cifra fiscal vive en la base.**
   **Los códigos de acceso** (29-10-2026) abren la versión de prueba: `herramientas/acceso.py` arma el canje
   y el panel, y su candado (`acceso.js`, en el `<head>` de todas las páginas) solo se enciende con
-  `CANDADO = True`; una página que deba abrir sin código va en `LIBRES`. Todo cambio a
+  `CANDADO = True`; una página que deba abrir sin código va en `LIBRES`.
+  **El control interno** (18-11-2026): el panel (`administracion-codigos.html`) va en pestañas (`HOJAS` de `acceso.py`): tablero de uso con
+  gráficas, códigos (con Renovar), solicitudes, bitácora y mi acceso. La bitácora la escriben disparadores de la base: **una acción nueva de la
+  administración sobre los códigos queda anotada sola; una tabla nueva de la administración necesita su disparador**. La medición de uso
+  (`acceso.js`, `uso_eventos`) **nunca guarda la IP, lo que se escribe ni las preguntas al chat**, respeta «No rastrear» y GPC, no mide a la
+  administración y se apaga en el aviso de privacidad (`#uso`): **si algún día mide algo más, el aviso cambia antes**. Todo cambio a
   `supabase/` pasa `python3 herramientas/prueba_base_datos.py` y, si toca
   las funciones, `deno check` y `deno test supabase/pruebas/`.
 

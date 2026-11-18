@@ -2992,6 +2992,8 @@
     /* La lista negra del SAT contesta cuando termina de descargar la lista. */
     var espera = r.espera ? r.espera.then(function (x) { r = x; }) : null;
     var pinta = function (li) {
+      /* La medición de uso (18-11-2026): solo el modo y la página a la que llevó la respuesta; la pregunta no sale. */
+      if (!ya && window.AvUso) window.AvUso.marca('pregunta', { modo: modoActual(), destino: r.sin ? 'sin respuesta' : String((r.ir && r.ir[0]) || (r.ficha && r.ficha.ir && r.ficha.ir[0]) || '').split(/[?#]/)[0].slice(0, 160) });
       if (r.sin) {
         li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + pideExpHtml() + iaHtml(q) + (r.web ? webHtml(r.web) : fueraHtml(q));
         if (!ya) anota(q, 'sin');

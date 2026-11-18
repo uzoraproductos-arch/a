@@ -10,7 +10,7 @@ import { base, dentroDelLimite, huellaIp, leeJson, responde, sirve } from "../_c
 const PASE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 sirve(async (req) => {
-  const j = await leeJson(req, 2000);
+  const j = await leeJson(req, 16000);
   const accion = j && j.accion;
   const pase = j && typeof j.pase === "string" && PASE.test(j.pase) ? j.pase : null;
   const db = base(), huella = await huellaIp(req);
@@ -59,6 +59,19 @@ sirve(async (req) => {
     });
     if (error) throw error;
     return responde(req, data);
+  }
+
+  if (accion === "uso") {
+    // La medición de uso (migración 20261118000001): páginas, tiempo y clics,
+    // en tandas de hasta 40. Sin IP ni nada que diga quién es; el límite por
+    // IP solo frena el abuso. Si se pasa, se tira en silencio.
+    const sesion = j && typeof j.sesion === "string" ? j.sesion.slice(0, 24) : "";
+    const eventos = j && Array.isArray(j.eventos) ? j.eventos.slice(0, 40) : [];
+    if (!sesion || !eventos.length) return responde(req, { ok: false }, 400);
+    if (!(await dentroDelLimite(db, huella, "codigo-uso", 120, 600))) return responde(req, { ok: false, motivo: "espera" }, 429);
+    const { data, error } = await db.rpc("registrar_uso", { p_pase: pase, p_sesion: sesion, p_eventos: eventos });
+    if (error) throw error;
+    return responde(req, { ok: true, guardados: data ?? 0 });
   }
 
   return responde(req, { ok: false, error: "Acción desconocida." }, 400);
