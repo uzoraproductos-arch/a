@@ -1065,8 +1065,12 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   `por_proveedor()` de `lector_cfdi.py`, con las mismas reglas). **El Vigía 69-B** (`herramientas/vigia_69b.py`,
   flujo semanal) compara la lista del SAT contra `sat-69b.js` por RFC y deja en
   `docs/sat69b/bandeja.json` altas, cambios de situación, bajas y cambios de razón
-  social; tampoco escribe en la base, y a las personas físicas las deja con el RFC
-  recortado y sin nombre. **Revisa tu estado de resultados** (05-11-2026,
+  social, con las personas físicas con el RFC recortado y sin nombre. **Desde el 18-11-2026
+  se actualiza sola** (decisión del autor): si el SAT publicó otro archivo, el flujo corre
+  `actualizar_69b.py` con ese mismo archivo, sube el sello y publica; se detiene si cambian
+  las columnas o si la lista se encoge más de 10 %. **`sat-69b.js` conserva los nombres
+  tal como los publica el SAT** (decisión del autor, 18-11-2026: la 69-B es una lista que la
+  ley manda publicar en el DOF), a diferencia de las otras listas del padrón. **Revisa tu estado de resultados** (05-11-2026,
   `insp_resultados.py`, `insp-resultados.js` y su gemelo `lector_resultados.py`, con
   la prueba en `revision.py`) lee un CSV o lo pegado de Excel **en el navegador**, sin
   subirlo, y lo revisa en seis dimensiones (cuadre, estructura, rentabilidad, tendencia
