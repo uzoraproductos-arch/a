@@ -25,7 +25,10 @@ import re
 import sys
 import urllib.request
 
-URL_CSV = "http://omawww.sat.gob.mx/cifras_sat/Documents/Listado_Completo_69-B.csv"
+# Hasta el 18-11-2026 se bajaba de omawww.sat.gob.mx/cifras_sat/Documents/, que se
+# quedó congelado con el corte al 31-12-2025: el SAT publica ahora en su almacenamiento
+# de datos abiertos (lo enlaza sat.gob.mx/minisitio/DatosAbiertos/contribuyentes_publicados.html).
+URL_CSV = "https://wu1agsprosta001.blob.core.windows.net/agsc-publicaciones/Datos_abiertos/Documents_AGAFF/Listado_completo_69-B.csv"
 URL_PAGINA = ("https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-"
               "con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336")
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

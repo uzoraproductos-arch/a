@@ -853,6 +853,11 @@ HERRAMIENTAS = [
           'Pega la liga de una noticia, una revista o una publicación en redes: leemos sus cifras, las ponemos junto al documento oficial y te damos un veredicto, cifra por cifra.'),
          ('inspefos', '🧾', 'Lista negra del SAT', 'Busca y verifica',
           'Busca por RFC o por nombre en el listado del artículo 69-B del Código Fiscal: a quienes el SAT presume o declara emisores de facturas por operaciones inexistentes.'),
+         # Undécima desde el 18-11-2026 (pedido del autor: «compliance de
+         # prevención de lavado de dinero»): el padrón de contrapartes, una
+         # ficha por RFC con todas las listas (herramientas/insp_padron.py).
+         ('insppadron', '🛡️', 'Revisa a tu contraparte', 'Busca y verifica',
+          'Escribe el RFC de tu cliente o tu proveedor y te decimos en una sola ficha si aparece en las listas del SAT (69, 69-B y 69-B Bis, sellos sin efectos), en el Directorio de Sancionados, en la OFAC o en la ONU, y si tiene contratos con el gobierno.'),
          # Octava desde el 05-11-2026 (encargo del autor): lee facturas CFDI
          # en el navegador y cruza al emisor con la lista 69-B
          # (herramientas/insp_factura.py).
@@ -948,7 +953,7 @@ MODULOS_PROPIOS = {'inspverifica'}
 # modulo de herramientas/ arma su pagina con construir(base, ref) y dice
 # sus ESTILOS y SCRIPTS (assets/auditor/css y js).
 INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspentes': 'insp_entes',
-                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'inspnepotismo': 'nepotismo', 'inspfactura': 'insp_factura', 'inspresultados': 'insp_resultados', 'inspmia': 'insp_mia',
+                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'insppadron': 'insp_padron', 'inspnepotismo': 'nepotismo', 'inspfactura': 'insp_factura', 'inspresultados': 'insp_resultados', 'inspmia': 'insp_mia',
                 # Calculadora Civica (pedido del autor, 12-10-2026): sus tres
                 # aplicaciones que abrian el motor en un marco.
                 'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj',

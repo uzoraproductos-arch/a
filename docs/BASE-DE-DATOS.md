@@ -47,6 +47,33 @@ probada. Falta solo lo que toca al autor: crear la cuenta y poner las llaves.
 | `supabase/pruebas/web_test.ts` | Pruebas de lo que puede devolver la búsqueda en internet |
 | `herramientas/prueba_base_datos.py` | Corre la migración y las pruebas en un PostgreSQL local, sin cuenta ni red |
 
+## El padrón de contrapartes (18-11-2026)
+
+Pedido del autor: «que nuestra base de datos quede muy bien integrada… para el compliance de prevención de lavado de dinero». Es la columna
+vertebral de los servicios de prevención: **una sola ficha por RFC** que cruza todas las listas que tiene la plataforma. Como las cifras fiscales,
+**no vive en Supabase**: son archivos que genera Python, con su huella, y el navegador los lee.
+
+```
+  anclar_listas.py (cada miércoles, flujo «Listas del padrón»)
+  ├─ SAT: art. 69 (no localizados, firmes, exigibles, cancelados, sentencias), 17-H Bis (CSD), 69-B Bis ─▶ padron/s-XX.js (por huella de RFC)
+  └─ OFAC (SDN, alias, domicilios) y ONU (lista consolidada) ──────────────────────────────────▶ sanciones-int.js
+  actualizar_69b.py ─▶ sat-69b.js     anclar_sancionados.py ─▶ sancionados.js     actualizar_comprasmx.py ─▶ comprasmx/
+                                   │
+                         padron.js: Padron.rfc(), Padron.nombre(), Padron.html()
+                                   │
+           «Revisa a tu contraparte» (Modo Inspector)  ·  el chat (padronResp)
+```
+
+| Regla | Por qué |
+|---|---|
+| Las personas físicas van por la huella de su RFC, sin nombre | Decisión del autor: se coteja el RFC exacto, nunca se publica el padrón |
+| Una coincidencia es «señal para revisar» | Las listas del SAT son determinaciones administrativas; la OFAC y la ONU sancionan, no juzgan |
+| Si una lista cambia sus columnas o no cuadra, se detiene | El pilar de transparencia: nada se publica sin cuadre |
+| La Lista de Personas Bloqueadas de la UIF no está | No es pública: la UIF solo la comparte con los sujetos obligados |
+
+Lo que sigue (entregas 3 a 5): revisar una lista de clientes por lote, la cadena de quién le factura a quién a partir de los CFDI y la matriz de riesgo
+con su informe de diligencia.
+
 ## Los cuatro candados de la IA (AGENTS.md §5 ter)
 
 1. **No recibe texto ajeno.** La página manda la pregunta y los números de
