@@ -1396,6 +1396,21 @@
       var x = JUD.t[k];
       return { html: (antes || '') + x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug };
     }
+    /* Lo civil, familiar y mercantil que le quedó pendiente (cuadro 16 de los tabulados del censo; null: no lo sabe). */
+    function cfmNoSabe(e) {
+      var c = (JUD.cfm || {})[e.a];
+      return !c || c[0] === null || c[1] === null || (c[2] === null && e.a !== 'CDMX');
+    }
+    function cfmTxt(e) {
+      var c = (JUD.cfm || {})[e.a];
+      if (!c) return '';
+      var nom = ['familiares', 'civiles', 'mercantiles'], partes = c.map(function (v, i) {
+        if (v === null && i === 2 && e.a === 'CDMX') return 'los mercantiles van dentro de los civiles';
+        return v === null ? nom[i] + ': no lo sabe' : '<b>' + n(v) + '</b> ' + nom[i];
+      });
+      return 'En lo civil, familiar y mercantil tenía pendientes de concluir: ' + partes.join(', ') + '.' +
+        (cfmNoSabe(e) ? ' «No lo sabe» es lo que su Poder Judicial le respondió al INEGI.' : '');
+    }
     /* Un poder judicial estatal: lo que entró, lo que concluyó, con cuánto dinero y lo que se le acumula (CNIJF-E 2025). */
     function judEstado(e) {
       var r = (JUD.est || []).filter(function (x) { return x[0] === e.a; })[0];
@@ -1409,7 +1424,7 @@
         (lugar <= 16 ? 'Es el lugar <b>' + lugar + ' de 32</b> entre los que menos concluyen para lo que les llega.' : 'Está entre los que más concluyen: lugar ' + (33 - lugar) + ' de 32.') + '</p>' +
         '<p>Ejerció <b>$' + n(r[1], 1) + ' millones</b>: <b>$' + n(costo) + ' por asunto concluido</b>. Tiene ' + n(r[5]) + ' personas juzgadoras, ' + n(r[3] / r[5]) + ' asuntos concluidos por cada una.</p>' +
         '<p>Al cierre del año le quedaban <b>' + n(r[4]) + ' causas penales pendientes</b> de concluir en el sistema acusatorio (el INEGI cuenta a cada persona procesada). ' +
-        'Cuánto quedó sin resolver en lo civil, familiar y mercantil no lo publica el reporte del censo.</p>' +
+        cfmTxt(e) + '</p>' +
         '<p class="pa-chico">El dinero por asunto no es lo que cuesta un juicio: el presupuesto paga todo el poder judicial. Y son cifras que el propio poder judicial le reporta al INEGI.</p>';
       var fc = { tx: x.fu[0].fu.tx.replace(/, p\. \d+$/, ''), url: x.fu[0].fu.url };
       var fu = [{ que: 'Asuntos ingresados y concluidos de ' + e.n + ' (tabla 23, p. 39)', e: 'oficial', fu: fc },
@@ -1418,7 +1433,9 @@
         { que: 'Concluidos por cada 100 que entraron', e: 'derivado', op: n(r[3]) + ' ÷ ' + n(r[2]) + ' × 100', fu: fc },
         { que: 'Dinero por asunto concluido', e: 'derivado', op: '$' + n(r[1], 1) + ' millones ÷ ' + n(r[3]), fu: fc },
         { que: 'Asuntos concluidos por persona juzgadora', e: 'derivado', op: n(r[3]) + ' ÷ ' + n(r[5]), fu: fc }];
-      fu.push(x.fu[x.fu.length - 1]);
+      var fr = JUD.t.rezago.fu.filter(function (f) { return /cuadro 16\)$/.test(f.que); })[0];
+      if (fr) fu.push({ que: 'Expedientes familiares, civiles y mercantiles pendientes de ' + e.n + ' (cuadro 16 de los tabulados)', e: 'oficial', fu: fr.fu });
+      if (cfmNoSabe(e)) fu.push(JUD.t.rezago.fu[JUD.t.rezago.fu.length - 1]);
       return { html: h, fu: fu, tit: 'Lo que cuesta y lo que resuelve el Poder Judicial de ' + e.n,
         ir: ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-judicial.html', 'su Poder Judicial en el Planisferio'],
         ci: [{ v: n(p100, 1), etq: 'asuntos concluidos por cada 100 que entraron', e: 'derivado' }, { v: '$' + n(costo), etq: 'por asunto concluido', e: 'derivado' },
@@ -1431,13 +1448,14 @@
       if (!JUD || !JLOC.test(t) || GANA.test(t) || es.length > 1) return null;
       if (/federa|\bpjf\b|suprema corte|\bscjn\b|la corte\b|circuito|de distrito|colegiad|eleccion|elegir|elige|eligen|elegid|electo|votar|vota\b|candidat|reforma|electoral|disciplina|fideicomis|retiro|pension|tarda|dura\b|duracion|audiencia/.test(t)) return null;
       if (es.length === 1) return judEstado(es[0]);
+      if (/familiar|civil|mercantil/.test(t) && /rezago|pendiente|acumul|atorad|sin resolver/.test(t)) return judTema('rezago');
       if (!/estatal|estatales|de los estados|locales?\b|cada estado|que estado|cual estado|en que estado/.test(t)) return null;
       var k = /rezago|pendiente|acumul|atorad/.test(t) ? 'pjr' : /(por|cada) (asunto|caso|juicio|expediente)/.test(t) ? 'pja' : /jueces|juezas|juzgador|magistrad/.test(t) ? 'pjj' :
         /concluy|resuelve|resuelven|resolvi|productiv/.test(t) ? 'pjc' : /gasta|gastan|gasto|cuesta|cuestan|costo|ejerci|presupuesto|dinero/.test(t) ? 'pjg' : null;
       if (!k || !(RANK.test(t) || /que estado|cual|quien/.test(t))) return null;
       if (/barat|economic/.test(t)) dir = 'min';
       var r = ranking(k, dir, cuantos, false);
-      r.html += '<p class="pa-ojo">Ojo: ' + (k === 'pjc' ? 'concluir no es lo mismo que no deber: en lo civil, familiar y mercantil el INEGI cuenta como ingresada toda demanda, también la que se desecha, y el rezago de esas materias no lo publica el censo. ' :
+      r.html += '<p class="pa-ojo">Ojo: ' + (k === 'pjc' ? 'concluir no es lo mismo que no deber: en lo civil, familiar y mercantil el INEGI cuenta como ingresada toda demanda, también la que se desecha; lo que quedó pendiente de esas materias se cuenta aparte. ' :
         k === 'pja' ? 'el dinero por asunto no es lo que cuesta un juicio: el presupuesto paga todo el poder judicial, y un asunto concluido puede ser una sentencia o un desechamiento. ' :
         k === 'pjr' ? 'en los estados, el INEGI cuenta a cada persona procesada, no cada expediente: una causa con tres personas cuenta tres. ' : '') +
         'Son cifras que cada poder judicial le reporta de sí mismo al INEGI.</p>';

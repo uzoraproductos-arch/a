@@ -170,19 +170,21 @@ PROPIOS = [
      'Órgano de Administración Judicial (antes Consejo de la Judicatura Federal) y Tesorería de la Federación', 'https://www.gob.mx/tesofe', 'Tesorería de la Federación',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-presupuesto.html', 'Datos · Poder Judicial · El presupuesto')]),
     # La auditoría de gestión del Poder Judicial (27-10-2026).
-    ('judicial-tiempos-juzgados', 'Poderes', 'Cuánto tarda un juzgado o tribunal en resolver un asunto y en celebrar una audiencia, federal y estatal',
-     'El reporte de resultados del censo del INEGI (CNIJF-E 2025) solo publica la duración promedio de los asuntos de la Suprema Corte (tabla 13) y del Tribunal Electoral (tabla 17). '
-     'De los juzgados de distrito, los tribunales colegiados y los poderes judiciales de los estados, que es donde llega casi todo, no trae cuánto tardan en resolver ni cuánto '
-     'se espera una audiencia. Los tabulados y datos abiertos del censo pueden traer más detalle y la plataforma aún no los integra: su página se arma con JavaScript y no se '
-     'pudo leer desde donde se construye la plataforma. Si tampoco están ahí, la falta será de los órganos que reportan al INEGI.',
-     PLATAFORMA, 'https://www.inegi.org.mx/programas/cnije/2025/', 'Censo Nacional de Impartición de Justicia Estatal 2025 (INEGI)',
+    ('judicial-tiempos-juzgados', 'Poderes', 'Cuánto tardan los juzgados de los estados en resolver un asunto, y cuánto se espera una audiencia',
+     'El censo del INEGI (CNIJF-E 2025) publica cuánto tardan la Suprema Corte, el Tribunal Electoral y, en sus tabulados básicos (cuadro 13), los juzgados y tribunales '
+     'federales; eso ya está en la plataforma. De los juzgados de los poderes judiciales de los estados, que es donde llega casi todo, ni el reporte de resultados ni los '
+     'tabulados traen cuánto tardan en resolver, y de ningún juzgado, federal o estatal, cuánto se espera una audiencia. Sin esa cifra nadie puede comprobar si se cumplen '
+     'los plazos del art. 20 de la Constitución. Los datos abiertos del censo no aparecen en su página, así que no se sabe si el INEGI los levanta.',
+     'INEGI: su censo judicial estatal no la publica', 'https://www.inegi.org.mx/programas/cnije/2025/', 'Censo Nacional de Impartición de Justicia Estatal 2025 (INEGI)',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-gestion.html', 'Datos · Poder Judicial · Lo que cuesta y lo que resuelve')]),
-    ('judicial-rezago-civil', 'Poderes', 'Cuántos expedientes civiles, familiares y mercantiles quedaron sin resolver al cierre de 2024 en los poderes judiciales de los estados',
-     'El reporte de resultados del censo del INEGI (CNIJF-E 2025) publica las causas penales pendientes de concluir, pero de lo civil, familiar y mercantil solo da los asuntos '
-     'que entraron y los que concluyeron (tabla 23). Y los que entraron incluyen las demandas desechadas o mandadas corregir, así que restarlos no da el rezago. '
-     'Los tabulados y datos abiertos del censo pueden traer los expedientes en trámite al cierre del año y la plataforma aún no los integra.',
-     PLATAFORMA, 'https://www.inegi.org.mx/programas/cnije/2025/', 'Censo Nacional de Impartición de Justicia Estatal 2025 (INEGI)',
-     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-gestion.html', 'Datos · Poder Judicial · Lo que cuesta y lo que resuelve')]),
+    ('judicial-rezago-civil', 'Poderes', 'Cuántos expedientes civiles y familiares (y en algunos, mercantiles) tenían pendientes al cierre de 2024 seis poderes judiciales de los estados',
+     'El cuadro 16 de los tabulados del censo del INEGI (CNIJE 2025) da los expedientes civiles, familiares y mercantiles pendientes de concluir de cada estado, y ya está en la '
+     'plataforma. Pero seis poderes judiciales le respondieron al INEGI que no lo saben: Baja California y Morelos, de lo civil y lo familiar; Baja California Sur, Chihuahua, '
+     'Durango y Puebla, de las tres materias. Por eso el total del país suma solo a los que sí lo dijeron. La cifra la deben esos seis poderes judiciales.',
+     'Poderes judiciales de Baja California, Baja California Sur, Chihuahua, Durango, Morelos y Puebla', 'https://www.inegi.org.mx/contenidos/programas/cnije/2025/tabulados/cnije2025_imp_just.xlsx',
+     'INEGI, CNIJE 2025, tabulados básicos (cuadro 16)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-gestion.html', 'Datos · Poder Judicial · Lo que cuesta y lo que resuelve'),
+      ('planisferio.html', 'Planisferio · dimensión judicial')]),
     # Antes y después de la reforma judicial (01-11-2026).
     ('judicial-electos-por-organo', 'Poderes', 'Cómo resuelven las personas juzgadoras electas en 2025 frente a las que siguieron en el cargo, órgano por órgano',
      'Los Anexos Estadísticos de la DGEJ dan el movimiento nacional y por tipo de órgano, y el año 2025 partido al 30 de junio, así que sí se ve el antes y el después '

@@ -725,6 +725,13 @@
    ]
   },
   {
+   "q": "¿Cuánto rezago familiar tienen los juzgados de los estados?",
+   "ir": "datos-judicial-gestion.html#jud-rezago",
+   "dice": [
+    "1,667,913"
+   ]
+  },
+  {
    "q": "¿Cuántos asuntos resuelven los juzgados federales?",
    "ir": "datos-judicial-gestion.html#jud-gestion",
    "dice": [
@@ -736,6 +743,13 @@
    "ir": "datos-judicial-gestion.html#jud-tiempos",
    "dice": [
     "522 días"
+   ]
+  },
+  {
+   "q": "¿Cuánto tarda un juicio de amparo en un juzgado de distrito?",
+   "ir": "datos-judicial-gestion.html#jud-tiempos",
+   "dice": [
+    "124 días"
    ]
   },
   {
