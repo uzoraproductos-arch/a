@@ -1640,10 +1640,10 @@
     }
     /* 2b. Una factura (05-11-2026): «revisa mi factura», «tengo un XML», «¿esta factura es de una
        empresa fantasma?». Abre el Lector de facturas CFDI; un RFC suelto lo sigue contestando la lista negra. */
-    if (APP.inspfactura && /\b(facturas?|cfdi|xml|comprobantes? fiscal(es)?)\b/.test(p) && !RFC_RE.test(t) && !/^\s*(que|q) (es|son|significa)\b|que quiere decir/.test(p)) {
+    if (APP.inspfactura && /\b(facturas?|cfdi|xml|comprobantes? fiscal(es)?|recibos? de nomina)\b/.test(p) && !RFC_RE.test(t) && !/^\s*(que|q) (es|son|significa)\b|que quiere decir/.test(p)) {
       RFC_RE.lastIndex = 0;
       return respApp('inspfactura', APP.inspfactura.url,
-        '<p>📑 Te abro el <b>Lector de facturas CFDI</b> aquí abajo. Elige el XML de tu factura (o varios): lo leo en tu navegador, sin subirlo a ningún lado, rehago su cuenta, la reviso contra la ley (régimen fiscal, método y forma de pago, complemento de pago y retención de IVA, cada regla con su artículo) y cruzo al emisor con la lista 69-B del SAT. Si cargas también los complementos de pago, los empato con sus facturas.</p>' +
+        '<p>📑 Te abro el <b>Lector de facturas CFDI</b> aquí abajo. Elige el XML de tu factura (o varios): lo leo en tu navegador, sin subirlo a ningún lado, rehago su cuenta, la reviso contra la ley (régimen fiscal, método y forma de pago, complemento de pago y retención de IVA, cada regla con su artículo) y cruzo al emisor con la lista 69-B del SAT. Si cargas también los complementos de pago, los empato con sus facturas. Si es un recibo de nómina, reviso además su ISR contra la tarifa, el subsidio para el empleo y el salario base de cotización, sin mostrar el nombre de quien trabaja.</p>' +
         '<p class="pa-chico">Separo lo que declaró el SAT (oficial) de las señales que salen de comparar fechas o de revisar el XML (derivado, «señal para revisar»). No te digo si la factura está cancelada: eso lo dice el verificador del SAT con su UUID.</p>');
     }
     RFC_RE.lastIndex = 0;
@@ -1785,10 +1785,13 @@
     ['sueldos', /\b(sueldos? y salarios?|nomina|asalariad[oa]|mi patron|mi empresa me paga|empleado de)\b/]
   ];
   var PLATA = [['hospedaje', /\b(airbnb|booking|hospedaje)\b/], ['bienes', /\b(mercado libre|amazon|vendo|ventas?)\b/], ['transporte', /./]];
+  /* Quien trabaja para el gobierno cotiza al ISSSTE (18-11-2026): la calculadora lo distingue con &pt=issste. */
+  var GOBIERNO = /\b(issste|burocrata|servidora? publica?|trabajo (en|para) (el |la |una )?(gobierno|dependencia|federacion|secretaria)|soy del gobierno|empleado (del|de) gobierno|me paga el gobierno)\b/;
   function regimenDe(p) {
     var r = REGIMEN.filter(function (x) { return x[1].test(p); })[0], pl = null;
     if (r && r[0] === 'plataformas') pl = PLATA.filter(function (x) { return x[1].test(p); })[0][0];
-    return { r: r ? r[0] : '', pl: pl };
+    var gob = GOBIERNO.test(p) && (!r || r[0] === 'sueldos');
+    return { r: r ? r[0] : (gob ? 'sueldos' : ''), pl: pl, pt: gob ? 'issste' : '' };
   }
   function herramienta(q) {
     if (!HA.apps.length) return null;
@@ -1799,14 +1802,15 @@
       /* Por quincena: la calculadora trabaja por mes, y un mes son dos quincenas (derivado, se dice la operación). */
       if (quin) { m = Math.round(m * 2 * 100) / 100; per = 'mes'; }
       if (sem) m = 0;
-      var liga = 'herramienta-calculadora-ticket-retienen.html' + (m ? '?m=' + m + '&p=' + per + '&n=' + nat + (rg.r ? '&r=' + rg.r : '') + (rg.pl ? '&pl=' + rg.pl : '') : '');
+      var liga = 'herramienta-calculadora-ticket-retienen.html' + (m ? '?m=' + m + '&p=' + per + '&n=' + nat + (rg.r ? '&r=' + rg.r : '') + (rg.pl ? '&pl=' + rg.pl : '') + (rg.pt ? '&pt=' + rg.pt : '') : '');
       var regN = rg.r && CR.reg ? CR.reg[rg.r] : '', plN = rg.pl && CR.plat ? CR.plat[rg.pl] : '';
       var hijos = /\b(hijos?|hijas?|dependientes?|esposa|esposo|familia)\b/.test(p);
       return respApp('ccticket', liga, '<p><span aria-hidden="true">🧾</span> Esa cuenta la hace <b>' + esc(cc.n) + '</b>, de la ' + esc(cc.grupo) + ': ' +
         (m ? 'ya le puse tu ingreso de <b>$' + m.toLocaleString('es-MX') + (per === 'ano' ? ' al año' : ' al mes') + '</b>, ' + (nat === 'neto' ? 'después' : 'antes') + ' de descuentos' +
-          (regN ? ', en <b>' + esc(regN) + '</b>' + (plN ? ' (' + esc(plN.toLowerCase()) + ')' : '') : '') + '. ' :
+          (regN ? ', en <b>' + esc(regN) + '</b>' + (plN ? ' (' + esc(plN.toLowerCase()) + ')' : '') : '') + (rg.pt ? ', como quien trabaja para el gobierno y cotiza al <b>ISSSTE</b>' : '') + '. ' :
           sem ? 'la calculadora trabaja por mes o por año, así que escribe ahí lo que juntas al mes (no convierto semanas: los meses no tienen semanas exactas). ' : 'escribe lo que ganas. ') +
-        'Te dice cuánto te retienen, con la tarifa oficial del ISR, y a dónde va cada peso de tu impuesto, en un documento con folio y huella.</p>' +
+        'Te dice cuánto te retienen, con la tarifa oficial del ISR, lo que pone tu patrón ' + (rg.pt ? '(tu dependencia, al ISSSTE y al FOVISSSTE)' : '(al IMSS y al INFONAVIT)') + ' y cuánto cuesta tu plaza, y a dónde va cada peso de tu impuesto, en un documento con folio y huella.</p>' +
+        (rg.pt ? '<p class="pa-chico">Las cuotas salen de la Ley del ISSSTE (10.625% de tu sueldo básico). Si tu estado o tu municipio tiene su propio instituto de seguridad social, tus cuotas son otras.</p>' : '') +
         (quin ? '<p class="pa-chico">' + chip({ e: 'derivado' }) + ' <b>Operación:</b> $' + m0.toLocaleString('es-MX') + ' a la quincena × 2 quincenas = $' + m.toLocaleString('es-MX') + ' al mes.</p>' : '') +
         (hijos ? '<p class="pa-chico">Tus hijos o tu familia no cambian lo que te retienen cada mes: la tarifa del artículo 96 de la Ley del ISR no tiene descuento por dependientes. Algunos gastos de la familia, como los médicos y hospitalarios, se deducen en la declaración anual (artículo 151), que esta cuenta no hace.</p>' : '') +
         '<p class="pa-chico">La cuenta la hace la calculadora con las tarifas publicadas. ' + (regN ? 'Si tu régimen es otro, cámbialo ahí mismo, en «1 · Tu ingreso».' : /\bfacturo\b/.test(p) ? 'Como facturas, elige en «1 · Tu ingreso» si estás en el RESICO o en actividad empresarial, porque cambia mucho lo que pagas; mientras, supuse sueldos y salarios.' : 'Supuse que trabajas con un patrón (sueldos y salarios); si no es así, cámbialo ahí mismo, en «1 · Tu ingreso».') + '</p>',
@@ -2697,6 +2701,79 @@
     })[0];
     return fed ? charla.deFicha(fed) : null;
   }
+  /* --- El padrón de contrapartes (18-11-2026; pedido del autor: «compliance de prevención de lavado
+     de dinero»). Un RFC lo contesta con todas las listas a la vez (padron.js: las del SAT del art. 69,
+     17-H Bis, 69-B y 69-B Bis, el Directorio de Sancionados, la OFAC y la ONU, y ComprasMX); un nombre
+     con «OFAC», «ONU» o «lista de sanciones», en esas dos listas. De las personas físicas no dice el
+     nombre. «Contratos de RFC…» lo sigue contestando ComprasMX. --- */
+  var PD_URL = 'herramienta-inspector-padron.html', PD_CLS = { chico: 'pa-chico', lista: 'pa-lista' };
+  var PD_INT = /\b(ofac|onu|naciones unidas|consejo de seguridad|lista clinton|listas? de sanciones|sancionad[oa]s? (por|en) (ee ?uu|estados unidos|la onu|el tesoro)|terroris\w*|lista negra de (ee ?uu|estados unidos))\b/;
+  var PD_GEN = /\b(revis\w* (a )?(mi |mis |un |una |el |la |los |las )?(cliente|clientes|proveedor|proveedores|contraparte|contrapartes)|contraparte|contrapartes|padron de contrapartes|conoce a tu cliente|kyc|debida diligencia|prevencion de lavado|\bpld\b|listas? (de|para) (lavado|pld|cumplimiento)|en que listas|no localizad\w*|creditos? fiscal(es)? (firmes?|exigibles?|cancelados?)|sellos? digital(es)? sin efectos|csd sin efectos|69 ?-? ?b bis)\b/;
+  var PD_FUERA = ('esta estan es son en la el los las lista listas de del sanciones sancionado sancionada sancionados ofac onu naciones unidas consejo seguridad clinton tesoro ' +
+    'ee uu estados unidos negra terrorista terroristas aparece aparecen busca buscar buscame revisa revisar checa checar si que a me puedes dime quiero saber por favor ' +
+    'persona empresa nombre').split(' ');
+  function cargaPadron() { return cargaJs('assets/auditor/js/padron.js', function () { return window.Padron; }); }
+  function padronResp(q) {
+    var p = plano(q), rfcs = (q.match(RFC_RE) || []).map(function (x) { return x.toUpperCase(); }).filter(function (x, i, l) { return l.indexOf(x) === i; });
+    RFC_RE.lastIndex = 0;
+    if (rfcs.length) {
+      if (CMX_RE.test(p)) return null;
+      var liga = PD_URL + '?q=' + encodeURIComponent(rfcs.slice(0, 100).join(' '));
+      return { espera: cargaPadron().then(function (P) { return Promise.all(rfcs.slice(0, 50).map(P.rfc)).then(function (fs) { return respPadron(P, fs, liga, rfcs.length); }); })
+        .then(null, function () { return respApp('insppadron', liga, '<p>No pude descargar ahora las listas. Revisa tu conexión y vuelve a preguntarme, o búscalo en la aplicación aquí abajo.</p>'); }),
+        tit: 'Revisa a tu contraparte: ' + rfcs.slice(0, 3).join(', ') + (rfcs.length > 3 ? '…' : '') };
+    }
+    if (PD_INT.test(p) && !/^\s*(que|q) (es|son|significa)\b|que quiere decir/.test(p)) {
+      var nom = p.trim().split(' ').filter(function (w) { return w.length > 1 && PD_FUERA.indexOf(w) < 0; }).join(' ');
+      if (nom.replace(/ /g, '').length >= 5) {
+        var ln = PD_URL + '?q=' + encodeURIComponent(nom);
+        return { espera: cargaPadron().then(function (P) { return P.nombre(nom); }).then(function (x) {
+          var h = Padron.htmlNombre(x, PD_CLS), M = x.meta;
+          var fu = M ? [{ tx: M.ofac.fuente + ', descarga del ' + M.ofac.corte + ' (sha256 ' + M.ofac.sha256.slice(0, 12) + '…)', url: M.ofac.pagina },
+            { tx: M.onu.fuente + ', generada el ' + M.onu.corte + ' (sha256 ' + M.onu.sha256.slice(0, 12) + '…)', url: M.onu.pagina }] : [];
+          if (charla && charla.deDonde) h += charla.deDonde(fu.map(function (f) { return { que: 'Listas de sanciones', e: 'oficial', fu: f }; }));
+          return { html: h, ir: [ln, 'Revisa a tu contraparte'], app: { id: 'insppadron', url: ln }, rec: [],
+            ficha: { t: 'calculo', tit: 'OFAC y ONU: ' + nom, txt: texto(h), ci: (x.r || []).slice(0, 8).map(function (z) { return { v: z.y[0].toUpperCase() + ' ' + z.y[1], etq: z.y[3] + ' · ' + z.y[5], e: 'oficial' }; }), fu: fu, ir: [ln, 'Revisa a tu contraparte'] },
+            sug: ['¿Cómo reviso a mi cliente?', '¿Qué es una EFOS?', '¿Qué es una actividad vulnerable?'] };
+        }, function () { return respApp('insppadron', ln, '<p>No pude descargar ahora las listas de sanciones. Búscalo en la aplicación aquí abajo.</p>'); }), tit: 'OFAC y ONU: ' + nom };
+      }
+    }
+    if (PD_GEN.test(p) && !/^\s*(que|q) (es|son|significa)\b|que quiere decir/.test(p) && APP.insppadron) {
+      return respApp('insppadron', PD_URL,
+        '<p>🛡️ Te abro <b>Revisa a tu contraparte</b> aquí abajo. Escribe el <b>RFC</b> de tu cliente, tu proveedor o el cliente de tu cliente (uno o varios) y te digo en una sola ficha si aparece en las listas del SAT ' +
+        '(no localizados, créditos firmes, exigibles y cancelados, sentencias por delito fiscal, sellos digitales sin efectos, 69-B y 69-B Bis), en el Directorio de Sancionados, en la OFAC o en la ONU, y si tiene contratos con el gobierno.</p>' +
+        '<p>También puedes preguntármelo aquí: «revisa AAA010101AAA». Con un nombre busco en la OFAC y la ONU: «¿está en la OFAC el Cártel de Sinaloa?».</p>' +
+        '<p class="pa-chico">De las personas físicas te digo si su RFC coincide, nunca su nombre. Una coincidencia es una señal para revisar, no una acusación. La Lista de Personas Bloqueadas de la UIF no es pública: si tu actividad es vulnerable, consúltala en tu acceso del SAT.</p>');
+    }
+    return null;
+  }
+  function respPadron(P, fs, liga, total) {
+    var ci = [], fu = [], vistos = {};
+    fs.forEach(function (f) {
+      (f.senales || []).forEach(function (s) {
+        ci.push({ v: s.lista + (s.extra ? ', ' + s.extra : ''), etq: (f.moral && f.nombre ? f.nombre + ' · ' : '') + 'RFC ' + f.rfc + (s.fecha ? ' · publicado ' + s.fecha : ''), e: 'oficial' });
+        if (!vistos[s.fuente]) { vistos[s.fuente] = 1; fu.push({ tx: s.fuente, url: s.url }); }
+      });
+    });
+    var M = fs[0].meta;
+    if (M && !fu.length) fu.push({ tx: 'SAT, datos abiertos, Contribuyentes publicados (art. 69, 17-H Bis y 69-B Bis); lista 69-B; Directorio de Sancionados; OFAC; ONU', url: M.sat.nl.pagina });
+    function grupo(r) { var g = GR.g.filter(function (x) { return (x.emp || []).indexOf(r) >= 0; })[0]; return g ? g.n : ''; }
+    var h;
+    if (fs.length === 1) h = P.html(fs[0], { grupo: grupo(fs[0].rfc), chico: 'pa-chico', lista: 'pa-lista' });
+    else {
+      var con = fs.filter(function (f) { return f.senales && f.senales.length; });
+      h = '<p>Revisé <b>' + fs.length + ' RFC</b>: <b>' + con.length + '</b> con alguna coincidencia y <b>' + (fs.length - con.length) + '</b> sin coincidencias.' + (total > 50 ? ' Revisé solo los primeros 50; para más, usa la aplicación aquí abajo (acepta hasta 100).' : '') + '</p>' +
+        con.sort(function (a, b) { return b.nivel - a.nivel; }).slice(0, 8).map(function (f) { return P.html(f, { grupo: grupo(f.rfc), chico: 'pa-chico', lista: 'pa-lista' }).split('<p class="pa-chico">⚖️')[0]; }).join('') +
+        '<p class="pa-chico">⚖️ Una coincidencia es una señal para revisar, no una acusación. No aparecer no certifica a nadie.</p>';
+    }
+    if (charla && charla.deDonde) h += charla.deDonde(fu.map(function (f) { return { que: 'Listas que revisa el padrón de contrapartes', e: 'oficial', fu: f }; }));
+    var tit = 'Revisa a tu contraparte: ' + fs.slice(0, 3).map(function (f) { return f.rfc; }).join(', ');
+    var uno = fs.length === 1 && fs[0].moral ? fs[0].rfc : '';
+    return { html: h, ir: [liga, 'Revisa a tu contraparte'], app: { id: 'insppadron', url: liga }, rec: [],
+      ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci.slice(0, 12), fu: fu, ir: [liga, 'Revisa a tu contraparte'] },
+      sug: [uno ? 'Contratos de ' + uno + ' en ComprasMX' : '¿Cómo reviso a mi cliente?', '¿Qué es una EFOS?', '¿Qué es una actividad vulnerable?'] };
+  }
+
   function respuesta(q, previas) { return quizaEmpresa(q, respuesta0(q, previas)); }
   function respuesta0(q, previas) {
     /* Una liga que ya está en la hemeroteca abre su cotejo antes que cualquier palabra de su dirección
@@ -2738,6 +2815,8 @@
     if (vc) return vc;
     var dr = deudaRpu(q);
     if (dr) return dr;
+    var pd = padronResp(q);
+    if (pd) return pd;
     var cx = fraccCmx(q) || cruceSat(q) || sancionesCmx(q) || contratosCmx(q) || empresaNombre(q, previas);
     if (cx) return cx;
     var pe = personaje(q);

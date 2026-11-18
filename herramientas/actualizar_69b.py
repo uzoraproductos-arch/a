@@ -25,7 +25,10 @@ import re
 import sys
 import urllib.request
 
-URL_CSV = "http://omawww.sat.gob.mx/cifras_sat/Documents/Listado_Completo_69-B.csv"
+# Hasta el 18-11-2026 se bajaba de omawww.sat.gob.mx/cifras_sat/Documents/, que se
+# quedó congelado con el corte al 31-12-2025: el SAT publica ahora en su almacenamiento
+# de datos abiertos (lo enlaza sat.gob.mx/minisitio/DatosAbiertos/contribuyentes_publicados.html).
+URL_CSV = "https://wu1agsprosta001.blob.core.windows.net/agsc-publicaciones/Datos_abiertos/Documents_AGAFF/Listado_completo_69-B.csv"
 URL_PAGINA = ("https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-"
               "con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336")
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -91,9 +94,27 @@ def registros_de(raw):
     return registros, cuenta, (corte.group(1).strip() if corte else "")
 
 
+def _total_previo():
+    """Cuántos registros tiene hoy sat-69b.js (0 si no existe)."""
+    try:
+        with open(SALIDA, encoding="utf-8") as f:
+            t = f.read(4000)
+        return int(re.search(r'"total": (\d+)', t).group(1))
+    except (OSError, AttributeError):
+        return 0
+
+
 def main():
     raw = leer(sys.argv[1] if len(sys.argv) > 1 else None)
     registros, cuenta, corte = registros_de(raw)
+    # Freno de la actualización automática (flujo «Vigía 69-B», 18-11-2026): la
+    # lista del SAT solo crece o se mueve de situación; si de pronto trae mucho
+    # menos de lo que ya teníamos, lo más probable es un archivo cortado o un
+    # cambio de formato, y no se publica.
+    previo = _total_previo()
+    if previo and len(registros) < previo * 0.9 and os.environ.get("A69_FORZAR") != "1":
+        sys.exit("La lista del SAT trae %d registros y la plataforma %d: se encogió más de 10 %%. "
+                 "Revísala a mano (A69_FORZAR=1 para integrarla)." % (len(registros), previo))
 
     meta = {
         "fuente": "SAT, Listado completo de contribuyentes (Artículo 69-B del CFF)",

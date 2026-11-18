@@ -2331,15 +2331,35 @@ def _salud_portal(base, ref, e):
               format(i['u'], ','), chip('oficial'), format(i['cam'], ','), chip('oficial'), format(i['enf'], ','), chip('oficial'), format(i['cons'], ','), chip('oficial'),
               format(m['med'], ','), chip('oficial'), pct(100.0 * i['med'] / (i['med'] + m['med'])), chip('derivado'),
               chip('pendiente', 'salud-issste-servicios'), html.escape(gs.fuente_dgis()['url']), html.escape(nom))
+    bi = gs.bienestar()
+    eb = bi['ent'].get(a)
+    if eb:
+        p3v = ('<p class="pl-piso-v"><b class="num-tabular">%s</b> egresos hospitalarios %s</p>'
+               '<dl class="pl-dl"><dt>Egresos con al menos una cirugía</dt><dd>%s %s <small>%s de cada 100 %s (en el país, %s)</small></dd>'
+               '<dt>Procedimientos quirúrgicos</dt><dd>%s %s</dd>'
+               '<dt>Su parte del IMSS-Bienestar</dt><dd>%s %s <small>de los %s egresos que registró en el país</small></dd>') % (
+                   format(eb['egr'], ','), chip('oficial'), format(eb['egrq'], ','), chip('oficial'), format(100.0 * eb['egrq'] / eb['egr'], '.1f'), chip('derivado'),
+                   format(100.0 * bi['tot']['egrq'] / bi['tot']['egr'], '.1f'), format(eb['q'], ','), chip('oficial'),
+                   pct(100.0 * eb['egr'] / bi['tot']['egr']), chip('derivado'), format(bi['tot']['egr'], ','))
+    else:
+        p3v = ('<p class="pl-piso-v">Sin egresos registrados %s</p><dl class="pl-dl"><dt>En la base de egresos de 2025</dt>'
+               '<dd>Ningún hospital del IMSS-Bienestar en %s <small>la base registra hospitales del IMSS-Bienestar en %d entidades</small></dd>') % (
+                   chip('oficial'), html.escape(nom), len(bi['ent']))
+    p3 = ('<article class="pl-piso pl-piso-sal"><p class="pl-piso-n">3 · El IMSS-Bienestar en %s · 2025</p>%s'
+          '<dt>Consultas y gasto</dt><dd>Sin cifra %s <small>ningún informe oficial las publica</small></dd></dl>'
+          '<p class="pl-piso-f">Secretaría de Salud, DGIS, registros de egresos hospitalarios 2025 (<a href="%s">datos abiertos</a>), hospitales de los Servicios de Salud '
+          'IMSS-Bienestar en %s, contados por la CLUES de cada uno. Un egreso es una salida del hospital, no una persona. No incluye al programa IMSS-Bienestar del IMSS. '
+          'Las divisiones son nuestras.</p></article>') % (html.escape(nom), p3v, chip('pendiente', 'salud-imss-bienestar'), html.escape(bi['fu']['url']), html.escape(nom))
     ciego = ('<p class="pl-dim-nota"><b>Lo que estas cifras no dicen.</b> Cuentan cuánto se hizo y con qué, no si se hizo bien ni a tiempo: ni la Memoria del IMSS ni el registro '
              'de la DGIS dicen cuánto se espera una consulta o una cirugía %s. Los hospitales de alta especialidad del IMSS se cuentan en el estado donde están y atienden a gente de otros. '
              'Las dos fuentes no se mezclan: desde 2025 el IMSS del registro de la DGIS incluye las unidades rurales del antiguo programa IMSS-Bienestar. '
-             'Y quien no tiene seguridad social se atiende en el IMSS-Bienestar o en los servicios del estado, que no están en esta dimensión %s.</p>') % (
+             'Y quien no tiene seguridad social se atiende en el IMSS-Bienestar o en los servicios del estado: del IMSS-Bienestar van sus egresos, pero sus consultas y su gasto siguen '
+             'sin documento %s, y los servicios del estado no están en esta dimensión.</p>') % (
                  chip('pendiente', 'salud-tiempos-espera'), chip('pendiente', 'salud-imss-bienestar'))
     ir = ('<p class="pl-ficha-ir"><a href="planisferio.html?d=salud&amp;e=%s">El IMSS y el ISSSTE de los 32 estados, en el mapa ➔</a> '
           '<a href="datos-salud-sistema.html#sal-estados">La tabla completa, en la Enciclopedia ➔</a> '
           '<a href="datos-salud-imss.html">El IMSS en el país: lo que cuesta y lo que resuelve ➔</a></p>') % quote(a)
-    return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, ir)
+    return '<div class="pl-pisos">%s%s%s</div>%s%s' % (p1, p2, p3, ciego, ir)
 
 
 def _administracion_portal(base, ref, e):

@@ -1,8 +1,12 @@
-# Vigía de la lista 69-B (paso 0.3 de docs/PLAN-IMPLEMENTACION.md, 05-11-2026):
-# baja el listado completo del SAT, lo compara contra la copia de la plataforma
-# y deja en docs/sat69b/bandeja.json las altas, los cambios de situación y las
-# bajas (herramientas/vigia_69b.py). No escribe en la base: solo propone. Corre
-# cada miércoles a las 9:41 de la Ciudad de México y a mano desde Actions.
+# Vigía de la lista 69-B (paso 0.3 de docs/PLAN-IMPLEMENTACION.md, 05-11-2026).
+# Desde el 18-11-2026 (decisión del autor: «la idea es que se actualice sola»)
+# también publica: baja el listado completo del SAT una sola vez, deja en
+# docs/sat69b/bandeja.json lo que cambió (herramientas/vigia_69b.py) y, si el
+# archivo del SAT es otro, regenera sat-69b.js con ese mismo archivo
+# (actualizar_69b.py), sube el sello y empuja. Si el SAT cambió las columnas o
+# la lista se encoge de golpe, el script se detiene y la corrida sale en rojo:
+# no se publica nada. Corre cada miércoles a las 9:41 de la Ciudad de México y
+# a mano desde Actions.
 name: Vigía 69-B
 
 on:
@@ -13,10 +17,14 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: listas
+  cancel-in-progress: false
+
 jobs:
   vigia:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,18 +32,35 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Comparar la lista del SAT
-        run: python herramientas/vigia_69b.py
-      - name: Guardar la bandeja
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Bajar la lista del SAT
         run: |
-          git add -N docs/sat69b/bandeja.json
-          if git diff --quiet -- docs/sat69b/bandeja.json; then
+          mkdir -p "$RUNNER_TEMP/sat"
+          curl -fsSL --retry 4 --retry-delay 20 -o "$RUNNER_TEMP/sat/69b.csv" \
+            "$(python -c 'import sys; sys.path.insert(0,"herramientas"); import actualizar_69b as a; print(a.URL_CSV)')"
+      - name: Comparar contra la plataforma
+        run: python herramientas/vigia_69b.py "$RUNNER_TEMP/sat/69b.csv" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Integrar el corte nuevo
+        run: |
+          if python -c 'import json,sys; sys.exit(0 if json.load(open("docs/sat69b/bandeja.json"))["mismo_archivo"] else 1)'; then
+            echo "El SAT no publicó un archivo nuevo." | tee -a "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          python herramientas/actualizar_69b.py "$RUNNER_TEMP/sat/69b.csv" | tee -a "$GITHUB_STEP_SUMMARY"
+          python herramientas/sello.py --siguiente
+          node --check assets/auditor/js/insp-efos.js
+          python herramientas/inventario.py
+      - name: Publicar
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
             echo "Sin cambios."
             exit 0
           fi
           git config user.name "Vigía 69-B"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/sat69b/bandeja.json
-          git commit -m "Vigía 69-B: cambios en la lista del SAT al $(date +%d-%m-%Y)"
+          git add -A
+          git commit -m "Vigía 69-B: lista del SAT al día el $(date +%d-%m-%Y)"
           git pull --rebase origin claude/funny-turing-imtm54
           git push origin HEAD:claude/funny-turing-imtm54

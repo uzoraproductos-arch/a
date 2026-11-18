@@ -17,9 +17,11 @@ y deja en docs/sat69b/bandeja.json lo que cambió:
   El RFC no cambia cuando una sociedad cambia de denominación, así que es la
   forma más barata de seguir a una empresa que «se cambia el nombre».
 
-Como el vigía legislativo, **detecta y propone; nunca escribe en la base**:
-sat-69b.js no se toca. Para integrar el corte nuevo, el autor (o el agente,
-con su visto bueno) corre actualizar_69b.py y sube el sello.
+Este script solo compara: sat-69b.js no se toca aquí. Desde el 18-11-2026
+(decisión del autor: «la idea es que se actualice sola») el flujo semanal
+«Vigía 69-B» corre después actualizar_69b.py con el mismo archivo, sube el
+sello y publica; la bandeja queda como el registro de lo que cambió esa
+semana. A mano: actualizar_69b.py y sello.py --siguiente.
 
 Las personas físicas (RFC de 13 caracteres) van en la bandeja con el RFC
 recortado y sin nombre: el repositorio es público y la bandeja es para
@@ -105,8 +107,8 @@ def main():
     altas, cambios, bajas, nombres = comparar(viejos, nuevos)
 
     bandeja = {
-        "que_es": ("Lo que cambió en la lista 69-B del SAT frente a la copia de la plataforma. Detecta y propone: "
-                   "nada de aquí entra a la base hasta correr actualizar_69b.py y subir el sello."),
+        "que_es": ("Lo que cambió en la lista 69-B del SAT frente a la copia que tenía la plataforma. El flujo "
+                   "semanal «Vigía 69-B» integra el corte nuevo solo, con el mismo archivo del SAT."),
         "fuente": "SAT, Listado completo de contribuyentes (Artículo 69-B del CFF)",
         "url": a69.URL_PAGINA,
         "csv": a69.URL_CSV,

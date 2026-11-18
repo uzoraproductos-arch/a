@@ -1626,7 +1626,7 @@
   },
   "cuerpo": [
    "De dónde viene. La publicación de la cuenta @derechadiariomx en Instagram retoma una investigación de Mexicanos contra la Corrupción y la Impunidad (MCCI) del 5 de octubre. Según MCCI, la Secretaría de Energía autorizó el 27 de septiembre de 2024 a Portacelis Gas and Oil a importar hasta 52 millones de litros de diésel, nueve días después de endurecer sus reglas para esos permisos y cuando la empresa tenía unas semanas de creada. MCCI es una organización de periodismo de investigación: su trabajo es el punto de partida, no la fuente; el documento que manda es el permiso.",
-   "Lo que sí consta. El sexenio terminó el 30 de septiembre de 2024: la Constitución fija que la nueva presidencia empieza el 1 de octubre (art. 83). Si el permiso es del 27, como dice MCCI, se dio a tres días del cambio. Y Portacelis no aparece en la lista del artículo 69-B del Código Fiscal, la de las empresas que el SAT considera que facturan operaciones simuladas (las llamadas «fantasma»), en nuestra copia con corte al 31 de diciembre de 2025.",
+   "Lo que sí consta. El sexenio terminó el 30 de septiembre de 2024: la Constitución fija que la nueva presidencia empieza el 1 de octubre (art. 83). Si el permiso es del 27, como dice MCCI, se dio a tres días del cambio. Y Portacelis no aparece en la lista del artículo 69-B del Código Fiscal, la de las empresas que el SAT considera que facturan operaciones simuladas (las llamadas «fantasma»), en nuestra copia con corte al 30 de septiembre de 2026.",
    "Lo que no podemos sostener todavía. El permiso mismo, su fecha, quién lo firmó y los 52 millones de litros: la copia la tiene MCCI y no abre desde nuestro servidor, ni el registro de la Sener. Tampoco los litros que la empresa habría dejado de declarar: la prensa habla de 80, 83 o 90 millones, según la nota, a partir de una declaratoria del SAT ante la Fiscalía que no es pública.",
    "Lo que es adjetivo. «Narcoexpresidente» y «regalo de despedida» no son datos: no hay acusación, proceso ni sentencia que los sostenga, y una acusación tampoco sería una condena (Constitución, art. 20). «Fantasma», en el sentido del SAT, no consta. Y que una empresa esté «ligada» a una persona porque la administra alguien de su confianza es un vínculo que reporta MCCI, no una resolución de autoridad: según la prensa, Amílcar Olán no figura como acusado.",
    "Por qué importa. El llamado huachicol fiscal (meter combustible declarándolo como otra cosa, o por menos litros, para no pagar el IEPS) es dinero que deja de entrar a la hacienda pública. Si una autoridad confirma que este permiso se usó para eso, la pregunta de fondo es quién lo autorizó y con qué requisitos: eso es lo que hay que seguir."
@@ -1651,7 +1651,7 @@
    {
     "dice": "La empresa «fantasma» Portacelis",
     "res": "no consta",
-    "explica": "Portacelis no aparece en la lista 69-B del SAT (empresas que facturan operaciones simuladas) en nuestra copia con corte al 31 de diciembre de 2025, que revisa 14,234 contribuyentes. Que una empresa sea nueva o no tenga historial de importaciones no la vuelve «fantasma» en el sentido de la ley.",
+    "explica": "Portacelis no aparece en la lista 69-B del SAT (empresas que facturan operaciones simuladas) en nuestra copia con corte al 30 de septiembre de 2026, que revisa 15,013 contribuyentes. Que una empresa sea nueva o no tenga historial de importaciones no la vuelve «fantasma» en el sentido de la ley.",
     "fuente": "SAT, Listado completo de contribuyentes (Artículo 69-B del CFF)",
     "url": "https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336"
    },
@@ -1804,7 +1804,7 @@
     "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
    },
    {
-    "nombre": "SAT, Listado completo de contribuyentes (Artículo 69-B del CFF), corte al 31 de diciembre de 2025, en la base de la plataforma",
+    "nombre": "SAT, Listado completo de contribuyentes (Artículo 69-B del CFF), corte al 30 de septiembre de 2026, en la base de la plataforma",
     "url": "https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336"
    },
    {

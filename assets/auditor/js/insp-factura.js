@@ -26,6 +26,8 @@
   const GENERICOS = ['XAXX010101000', 'XEXX010101000'];
   const TIPOS = { I: 'Ingreso', E: 'Egreso', T: 'Traslado', N: 'Nómina', P: 'Pago' };
   const TOL = 0.01;
+  /* El complemento de nómina 1.2 (18-11-2026). */
+  const NOM = 'http://www.sat.gob.mx/nomina12';
   const facturas = [];
   let lista = null, promesa = null;
 
@@ -95,8 +97,78 @@
       reRfc: at(re, 'Rfc').toUpperCase(), reNom: at(re, 'Nombre'), uso: at(re, 'UsoCFDI'), reReg: at(re, 'RegimenFiscalReceptor'),
       metodo: at(c, 'MetodoPago'), forma: at(c, 'FormaPago'), ivaTras: iva('Traslados', 'Traslado'), ivaRet: iva('Retenciones', 'Retencion'), pagos: pagos,
       sub: num(at(c, 'SubTotal')), desc: num(at(c, 'Descuento')), tras: num(at(imp, 'TotalImpuestosTrasladados')),
-      ret: num(at(imp, 'TotalImpuestosRetenidos')), total: num(at(c, 'Total')), conceptos: conceptos
+      ret: num(at(imp, 'TotalImpuestosRetenidos')), total: num(at(c, 'Total')), conceptos: conceptos,
+      nom: leerNomina(doc, at)
     };
+  }
+
+  /* El recibo de nómina: lo que hace falta para revisarlo. Nunca la CURP, el
+     número de seguridad social ni el nombre de quien trabaja. */
+  function leerNomina(doc, at) {
+    const n = doc.getElementsByTagNameNS(NOM, 'Nomina')[0];
+    if (!n) return null;
+    const uno = nom => Array.prototype.find.call(n.children, x => x.namespaceURI === NOM && x.localName === nom) || null;
+    const todos = (padre, nom) => padre ? Array.prototype.filter.call(padre.children, x => x.localName === nom) : [];
+    const em = uno('Emisor'), re = uno('Receptor'), pe = uno('Percepciones'), de = uno('Deducciones'), op = uno('OtrosPagos');
+    const sncf = em && Array.prototype.find.call(em.children, x => x.localName === 'EntidadSNCF');
+    const per = todos(pe, 'Percepcion').map(x => ({ t: at(x, 'TipoPercepcion'), g: num(at(x, 'ImporteGravado')), e: num(at(x, 'ImporteExento')) }));
+    const ded = todos(de, 'Deduccion').map(x => ({ t: at(x, 'TipoDeduccion'), i: num(at(x, 'Importe')) }));
+    const otros = todos(op, 'OtroPago').map(x => ({ t: at(x, 'TipoOtroPago'), i: num(at(x, 'Importe')) }));
+    return {
+      tipo: at(n, 'TipoNomina'), dias: num(at(n, 'NumDiasPagados')), pago: at(n, 'FechaPago'),
+      totPer: num(at(n, 'TotalPercepciones')), totDed: num(at(n, 'TotalDeducciones')), totOtros: num(at(n, 'TotalOtrosPagos')),
+      regPat: at(em, 'RegistroPatronal'), origen: at(sncf, 'OrigenRecurso'),
+      regimen: at(re, 'TipoRegimen'), periodicidad: at(re, 'PeriodicidadPago'), sbc: num(at(re, 'SalarioBaseCotApor')), sdi: num(at(re, 'SalarioDiarioIntegrado')),
+      gravado: num(at(pe, 'TotalGravado')), exento: num(at(pe, 'TotalExento')), per: per,
+      impRet: num(at(de, 'TotalImpuestosRetenidos')), otrasDed: num(at(de, 'TotalOtrasDeducciones')), ded: ded,
+      isr: ded.filter(x => x.t === '002').reduce((a, x) => a + x.i, 0), segSoc: ded.filter(x => x.t === '001').reduce((a, x) => a + x.i, 0),
+      subsidio: otros.filter(x => x.t === '002').reduce((a, x) => a + x.i, 0), otros: otros
+    };
+  }
+
+  /* La revisión del recibo (las mismas reglas que revisar_nomina() de
+     lector_cfdi.py). Todo es «derivado» y «señal para revisar». */
+  const MES = 30.4;
+  function isrTarifa(base) {
+    const R = D.nom.tarifa;
+    if (!(base > 0)) return 0;
+    for (let i = 0; i < R.length; i++) if (R[i].ls === null || base <= R[i].ls) return Math.max(0, R[i].cf + (base - R[i].li) * R[i].pct / 100);
+    return 0;
+  }
+  function revisarNomina(f) {
+    const n = f.nom, out = [], N = D.nom;
+    if (!n) return out;
+    const sp = n.per.reduce((a, x) => a + x.g + x.e, 0), sd = n.ded.reduce((a, x) => a + x.i, 0);
+    const dif = [];
+    if (n.per.length && Math.abs(sp - (n.gravado + n.exento)) > TOL) dif.push('las percepciones suman ' + pesos(sp) + ' y gravado + exento da ' + pesos(n.gravado + n.exento));
+    if (n.ded.length && Math.abs(sd - n.totDed) > TOL) dif.push('las deducciones suman ' + pesos(sd) + ' y el total dice ' + pesos(n.totDed));
+    if (Math.abs(n.totPer + n.totOtros - f.sub) > TOL) dif.push('percepciones + otros pagos dan ' + pesos(n.totPer + n.totOtros) + ' y el subtotal dice ' + pesos(f.sub));
+    if (Math.abs(n.totDed - f.desc) > TOL) dif.push('las deducciones dan ' + pesos(n.totDed) + ' y el descuento dice ' + pesos(f.desc));
+    if (dif.length) out.push(['nom_cuadre', 'senal', 'El recibo no cuadra por dentro: ' + dif.join('; ') + '.']);
+    if (n.dias > 0 && n.tipo === 'O' && (n.regimen === '02' || n.regimen === '')) {
+      const mes = n.gravado * MES / n.dias, isr = isrTarifa(mes) * n.dias / MES;
+      const sub = mes <= N.subTope ? Math.min(N.umaMes * N.subPct / 100 * n.dias / MES, isr) : 0;
+      const esperado = Math.max(0, isr - sub);
+      const sm = mes <= N.smDia * MES + TOL;
+      const txt = 'Lo gravado (' + pesos(n.gravado) + ' en ' + n.dias + ' días) equivale a ' + dinero(mes) + ' al mes (× 30.4 ÷ días); con la tarifa del art. 96' +
+        (sub > 0 ? ' menos el subsidio para el empleo' : '') + ' daría unos ' + dinero(esperado) + ' de ISR por ' + n.dias + ' días, y el recibo retiene ' + pesos(n.isr) + '.';
+      if (sm) out.push(['nom_isr', 'nota', 'Gana el salario mínimo o menos: el art. 96 de la Ley del ISR prohíbe retenerle el impuesto.' + (n.isr > TOL ? ' Aun así, el recibo retiene ' + pesos(n.isr) + ': conviene preguntar por qué.' : '')]);
+      else if (n.isr <= TOL && esperado > 1) out.push(['nom_isr', 'senal', 'El recibo no retiene ISR. ' + txt]);
+      else if (Math.abs(n.isr - esperado) > Math.max(100, esperado * 0.10)) out.push(['nom_isr', 'nota', txt + ' La diferencia puede deberse al cálculo anual, a un ajuste o a pagos de otro periodo: es una cuenta aproximada nuestra, no la del patrón.']);
+      if (n.subsidio > TOL && mes > N.subTope) out.push(['nom_sub', 'senal', 'Da subsidio para el empleo (' + pesos(n.subsidio) + ') a un ingreso que equivale a ' + dinero(mes) + ' al mes, arriba del tope de ' + dinero(N.subTope) + '.']);
+    }
+    if (n.sbc > 0 && !n.origen) {
+      if (n.sbc + TOL < N.smDia) out.push(['nom_sbc', 'senal', 'El salario base de cotización (' + pesos(n.sbc) + ' diarios) es menor que el salario mínimo (' + pesos(N.smDia) + ').']);
+      else if (n.sbc > N.umaDia * 25 + TOL) out.push(['nom_sbc', 'senal', 'El salario base de cotización (' + pesos(n.sbc) + ' diarios) rebasa el tope de 25 UMA (' + dinero(N.umaDia * 25) + ').']);
+    }
+    if (n.origen) {
+      const o = { IP: 'ingresos propios', IF: 'ingresos federales', IM: 'ingresos mixtos' }[n.origen] || n.origen;
+      out.push(['nom_pub', 'nota', 'Es nómina pública: el patrón es una entidad del gobierno y la paga con ' + o + ' (nodo EntidadSNCF). Si cotiza al ISSSTE, las cuotas son las de su ley, no las del IMSS.']);
+      const anual = n.dias > 0 ? (n.totPer + n.totOtros) * 365 / n.dias : 0;
+      if (N.pres && n.tipo === 'O' && anual > N.pres) out.push(['nom_127', 'senal', 'Lo que paga este recibo equivale a ' + dinero(anual) + ' al año (× 365 ÷ días), más que la remuneración bruta anual de la Presidencia en el PEF 2026, ' +
+        dinero(N.pres) + '. Es una comparación de cifras, no una acusación: la fracción III admite excepciones.']);
+    }
+    return out;
   }
 
   /* Rehace la cuenta (derivado). Devuelve las diferencias. */
@@ -147,7 +219,7 @@
       out.push(['ret_iva', 'senal', 'Una persona física le factura a una persona moral IVA por ' + dinero(f.ivaTras) + ' sin IVA retenido. Si es un servicio profesional, una comisión o un arrendamiento, ' +
         'la persona moral retiene dos terceras partes: ' + dinero(f.ivaTras * 2 / 3) + ' (IVA × 2 ÷ 3). Si es venta de bienes, no aplica.']);
     }
-    return out;
+    return out.concat(revisarNomina(f));
   }
   const nRev = (f, pg) => revisar(f, pg).filter(r => r[1] === 'senal').length;
   function bloqueRevision(f, pg) {
@@ -155,10 +227,10 @@
     const fund = id => { const g = D.reglas[id];
       return '<small class="cf-fund">⚖️ ' + esc(g.f) + ' (<a href="' + esc(g.u) + '" target="_blank" rel="noopener">documento ↗</a>' +
         (g.u2 ? ', <a href="' + esc(g.u2) + '" target="_blank" rel="noopener">reglamento ↗</a>' : '') + ').</small>'; };
-    if (!r.length) return '<p>' + chip('derivado') + ' ✅ <b>Revisión contra la ley:</b> régimen, método y forma de pago, complemento de pago y retención de IVA, sin señales.</p>';
+    if (!r.length) return '<p>' + chip('derivado') + ' ✅ <b>Revisión contra la ley:</b> ' + (f.nom ? 'régimen, cuadre del recibo, ISR, subsidio y salario base de cotización' : 'régimen, método y forma de pago, complemento de pago y retención de IVA') + ', sin señales.</p>';
     return '<div class="cf-ley"><p class="cf-dos-t">' + chip('derivado') + ' Revisión contra la ley</p><ul>' + r.map(x =>
       '<li>' + (x[1] === 'senal' ? '⚠️ <b>Señal para revisar · ' : 'ℹ️ <b>') + esc(D.reglas[x[0]].t) + ':</b> ' + esc(x[2]) + '<br>' + fund(x[0]) + '</li>').join('') +
-      '</ul><p class="cf-nota">Es lo que dice el XML. No es una irregularidad: el XML no dice qué se compró de verdad ni si ya se corrigió.</p></div>';
+      '</ul><p class="cf-nota">Es lo que dice el XML. No es una irregularidad: el XML no dice ' + (f.nom ? 'cómo calculó el patrón' : 'qué se compró de verdad') + ' ni si ya se corrigió.</p></div>';
   }
 
   const fechaSat = s => { const m = /^(\d\d)\/(\d\d)\/(\d{4})$/.exec(s || ''); return m ? m[3] + '-' + m[2] + '-' + m[1] : ''; };
@@ -178,6 +250,20 @@
     return { r: r, s: s, sen: sen };
   }
 
+  function bloqueNomina(f) {
+    const n = f.nom, R = { '02': 'sueldos y salarios', '09': 'asimilados a salarios', '03': 'jubilados o pensionados' };
+    return '<div class="cf-nom"><p class="cf-dos-t">' + chip('oficial') + ' 💼 Recibo de nómina' + (n.origen ? ' · nómina pública' : '') + '</p><table class="cf-cuenta"><tbody>' +
+      '<tr><th scope="row">Días pagados</th><td>' + n.dias + (n.pago ? ' · pagado el ' + esc(n.pago) : '') + '</td></tr>' +
+      '<tr><th scope="row">Percepciones</th><td>' + pesos(n.totPer) + ' <small>(gravado ' + pesos(n.gravado) + ', exento ' + pesos(n.exento) + ')</small></td></tr>' +
+      (n.totOtros ? '<tr><th scope="row">+ Otros pagos</th><td>' + pesos(n.totOtros) + (n.subsidio ? ' <small>(subsidio ' + pesos(n.subsidio) + ')</small>' : '') + '</td></tr>' : '') +
+      '<tr><th scope="row">− ISR retenido</th><td>' + pesos(n.isr) + '</td></tr>' +
+      '<tr><th scope="row">− Seguridad social</th><td>' + pesos(n.segSoc) + '</td></tr>' +
+      (n.totDed - n.isr - n.segSoc > TOL ? '<tr><th scope="row">− Otras deducciones</th><td>' + pesos(n.totDed - n.isr - n.segSoc) + '</td></tr>' : '') +
+      '<tr class="cf-total"><th scope="row">Neto</th><td>' + pesos(f.total) + '</td></tr></tbody></table>' +
+      '<p class="cf-nota">' + (R[n.regimen] ? 'Régimen: ' + R[n.regimen] + '. ' : '') + (n.sbc ? 'Salario base de cotización: ' + pesos(n.sbc) + ' diarios. ' : '') +
+      'Lo que pone el patrón no viene en el recibo: sácalo en <a href="herramienta-calculadora-ticket-retienen.html">la Calculadora Cívica</a>' + (n.origen ? ' con «El gobierno · ISSSTE»' : '') + '.</p></div>';
+  }
+
   function tarjeta(x) {
     if (x.error) return '<article class="cf-fac cf-fac-mal"><h3>📄 ' + esc(x.archivo) + '</h3><p>' + chip('pendiente') + ' No se pudo leer: ' + esc(x.error) + '.</p></article>';
     const f = x.f, dif = cuadra(f), em = cruce(f.emRfc, f.fecha), rc = cruce(f.reRfc, f.fecha);
@@ -195,6 +281,7 @@
       '<tr><th scope="row">+ Impuestos trasladados</th><td>' + pesos(f.tras) + '</td></tr>' +
       (f.ret ? '<tr><th scope="row">− Impuestos retenidos</th><td>' + pesos(f.ret) + '</td></tr>' : '') +
       '<tr class="cf-total"><th scope="row">Total</th><td>' + pesos(f.total) + '</td></tr></tbody></table>' +
+      (f.nom ? bloqueNomina(f) : '') +
       bloqueRevision(f, pagosLote()) +
       '<p>' + chip('derivado') + ' ' + (dif.length ? '⚠️ <b>Señal para revisar:</b> ' + esc(dif.join('; ')) + '.' : '✅ La cuenta cuadra: subtotal − descuento + trasladados − retenidos = total' + (f.conceptos.length ? ', y los conceptos suman el subtotal' : '') + '.') + '</p>';
     if (f.conceptos.length) {
@@ -299,6 +386,13 @@
       agrega('factura-ficticia-cfdi40.xml', v[1], true);
       pintar();
     }, () => { estado.innerHTML = chip('pendiente') + ' No se pudo traer la factura de ejemplo.'; });
+  });
+  const nomEj = $('cfEjemploNom');
+  if (nomEj) nomEj.addEventListener('click', () => {
+    Promise.all([cargarLista(), fetch('docs/ejemplos/nomina-ficticia-cfdi40.xml').then(r => r.ok ? r.text() : Promise.reject())]).then(v => {
+      agrega('nomina-ficticia-cfdi40.xml', v[1], true);
+      pintar();
+    }, () => { estado.innerHTML = chip('pendiente') + ' No se pudo traer el recibo de ejemplo.'; });
   });
   $('cfLimpiar').addEventListener('click', () => { facturas.length = 0; pintar(); });
   /* Mi Auditavisión (05-11-2026): guarda el RESUMEN en el navegador del lector,

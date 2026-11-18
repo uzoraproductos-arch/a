@@ -135,8 +135,38 @@ PEND_ESPERA = {'que': 'Cuánto espera una persona una consulta de especialidad o
                'fu': {'tx': 'IMSS, Memoria Estadística 2025', 'url': MEMORIA}}
 PEND_ISSSTE = {'que': 'Consultas, egresos y cirugías del ISSSTE en 2025', 'e': 'pendiente', 'p': 'salud-issste-servicios',
                'fu': {'tx': 'ISSSTE, anuarios estadísticos', 'url': 'https://www.gob.mx/issste/documentos/anuarios-estadisticos'}}
-PEND_BIEN = {'que': 'Consultas, egresos, cirugías y gasto del IMSS-Bienestar en 2025', 'e': 'pendiente', 'p': 'salud-imss-bienestar',
+PEND_BIEN = {'que': 'Consultas y gasto completo del IMSS-Bienestar en 2025', 'e': 'pendiente', 'p': 'salud-imss-bienestar',
              'fu': {'tx': 'Servicios de Salud del IMSS-Bienestar', 'url': 'https://www.gob.mx/imssbienestar'}}
+
+# Los egresos y las cirugías del IMSS-Bienestar (18-11-2026, pendiente
+# salud-imss-bienestar). Los escribe anclar_egresos_bienestar.py desde la base
+# de egresos hospitalarios de la DGIS; aquí se ata a su huella y se vuelve a
+# cuadrar antes de leerlo.
+BIEN_JSON = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'docs', 'salud', 'imss-bienestar-egresos-2025.json')
+BIEN_SHA = 'e1f86cd24c8ca0d6bdc583119adad918899e6d37be0833c66e50d0413bcabfcd'
+_BIEN = {}
+
+
+def bienestar():
+    """{'fu': fuente, 'tot': {egr, egrq, q} del IMSS-Bienestar (IMB), 'ent':
+    {abbr: {egr, egrq, q}} (solo las entidades donde registró egresos), 'imo':
+    el total del programa IMSS-Bienestar del IMSS (IMO), 'nimo': sus entidades,
+    'ssa': el total de la Secretaría de Salud en la misma base}."""
+    if not _BIEN:
+        x = json.load(open(BIEN_JSON, encoding='utf-8'))
+        if x['fuente']['sha256'] != BIEN_SHA:
+            raise SystemExit('gestion_salud: los egresos del IMSS-Bienestar no salen de la base que coteja este módulo')
+        for k, v in x['inst'].items():
+            for c in ('egr', 'egrq', 'q'):
+                if sum(e[c] for e in v['ent'].values()) != v['total'][c]:
+                    raise SystemExit('gestion_salud: las entidades no suman los egresos de %s (%s)' % (k, c))
+        if sum(v['total']['egr'] for v in x['inst'].values()) != x['egresos']:
+            raise SystemExit('gestion_salud: las instituciones no suman los egresos de la base')
+        ib, io_ = x['inst']['IMB'], x['inst']['IMO']
+        _BIEN.update({'fu': {'tx': x['fuente']['tx'], 'url': x['fuente']['pagina'], 'sha256': x['fuente']['sha256']},
+                      'tot': ib['total'], 'ent': ib['ent'], 'imo': io_['total'], 'nimo': len(io_['ent']), 'ssa': x['inst']['SSA']['total'],
+                      'nssa': len(x['inst']['SSA']['ent'])})
+    return _BIEN
 
 
 # El IMSS y el ISSSTE en cada estado (03-11-2026, sexta dimensión del
@@ -325,14 +355,7 @@ def salud(d):
         'fu': [_o('Decreto del 29-11-2019: entrada en vigor el 1 de enero de 2020 y traspaso de recursos al INSABI (transitorios primero y tercero)', LGS),
                _o('Decreto del 29-05-2023: el Sistema de Salud para el Bienestar, la extinción del INSABI y el traspaso al IMSS-Bienestar (transitorios)', LGS)],
         'sug': ['¿Qué sabemos del IMSS-Bienestar?', '¿Cuánto gasta el ISSSTE?']}
-    t['imss_bienestar'] = {
-        'tit': 'Lo que sabemos del IMSS-Bienestar',
-        'h': '<p>El IMSS-Bienestar atiende a quien no tiene seguridad social en los estados que se adhirieron. En conferencias se han dado cifras de sus consultas de 2025, '
-             'pero <b>no encontramos un informe oficial</b> con sus consultas, egresos, cirugías y su gasto completo. La Memoria del IMSS tiene un capítulo del IMSS-Bienestar, '
-             'pero su archivo no se pudo descargar (el enlace devuelve una página web, no el archivo).</p>'
-             '<p>Mientras no haya documento, <b>no publicamos cifras</b> de lo que dicen las conferencias.</p>',
-        'fu': [PEND_BIEN],
-        'sug': ['¿Qué pasó con el Seguro Popular?', '¿Cuántas consultas dio el IMSS en 2025?']}
+    t['imss_bienestar'] = _tema_bienestar(d)
     t['issste'] = {
         'tit': 'El ISSSTE: el dinero sí, los números todavía no',
         'h': '<p>El ISSSTE, que atiende a quienes trabajan para el gobierno, ejerció <b>%s</b> en 2025 (Cuenta Pública). Igual que en el IMSS, ahí van también pensiones '
@@ -347,7 +370,46 @@ def salud(d):
     for k, x in t.items():
         x['ir'] = [PAGINA_DE[k][0] + '#' + PRE + k, PAGINA_DE[k][1]]
         x['aqui'] = x['ir']
-    return {'t': t, 'pag': [PORTADA, PORTADA_TIT], 'est': _chat_estados(d)}
+    b = bienestar()
+    return {'t': t, 'pag': [PORTADA, PORTADA_TIT], 'est': _chat_estados(d), 'ib': {a: [v['egr'], v['egrq'], v['q']] for a, v in b['ent'].items()}}
+
+
+def _tema_bienestar(d):
+    """Lo que sabemos del IMSS-Bienestar: sus egresos y sus cirugías de 2025,
+    de la base de egresos de la DGIS. Las cifras se calculan aquí."""
+    b = bienestar()
+    nom = {e['abbr']: e['name'] for e in d['estados']}
+    t = b['tot']
+    o = sorted(b['ent'], key=lambda a: -b['ent'][a]['egr'])
+    sin = sorted((a for a in nom if a not in b['ent']), key=lambda a: nom[a])
+    cq = 100.0 * t['egrq'] / t['egr']
+    h = ('<p>El IMSS-Bienestar atiende a quien no tiene seguridad social en los estados que le pasaron sus servicios de salud. Ningún informe suyo trae lo que hizo en 2025, '
+         'pero <b>sus hospitales le reportan cada egreso a la Secretaría de Salud</b>, que publica la base completa. En 2025 registraron <b>%s egresos hospitalarios</b>; '
+         'en <b>%s</b> de ellos hubo al menos una cirugía (%s de cada 100), con <b>%s procedimientos quirúrgicos</b> en total.</p>'
+         '<p>Lo que pocos dicen: <b>el IMSS-Bienestar no está en todo el país</b>. Registró egresos en %d entidades; los más, en %s (%s), %s (%s) y %s (%s). '
+         'En %s solo aparecen unos cuantos (%s y %s), y en %s no registró ninguno. En la misma base, los hospitales que la DGIS clasifica como de la Secretaría de Salud, entre ellos los de servicios estatales, reportan %s egresos en %d entidades.</p>'
+         '<p class="pa-chico">Ojo con tres cosas. Uno: hay <b>dos «IMSS-Bienestar»</b>. La base separa a los Servicios de Salud IMSS-Bienestar, el organismo que recibió los servicios '
+         'de los estados (estas cifras), del programa IMSS-Bienestar que el IMSS opera en el campo, con %s egresos en %d entidades; no se suman. Dos: un egreso es una salida del '
+         'hospital (por curación, mejoría, traslado, defunción u otro motivo), no una persona: quien se internó dos veces cuenta dos. Tres: no se suman ni se comparan con las '
+         'del IMSS, que salen de su Memoria Estadística, otro documento con su propio registro.</p>'
+         '<p>Sus <b>consultas y su gasto completo</b> siguen sin documento %s. En conferencias se han dado cifras de sus consultas de 2025, pero mientras no haya un informe oficial '
+         '<b>no las publicamos</b>.</p>') % (
+        _n(t['egr']), _n(t['egrq']), format(cq, '.1f'), _n(t['q']),
+        len(b['ent']), html.escape(nom[o[0]]), _n(b['ent'][o[0]]['egr']), html.escape(nom[o[1]]), _n(b['ent'][o[1]]['egr']), html.escape(nom[o[2]]), _n(b['ent'][o[2]]['egr']),
+        ' y '.join(html.escape(nom[a]) for a in o[-2:][::-1]), _n(b['ent'][o[-1]]['egr']), _n(b['ent'][o[-2]]['egr']),
+        ', '.join(html.escape(nom[a]) for a in sin[:-1]) + ' y ' + html.escape(nom[sin[-1]]),
+        _n(b['ssa']['egr']), b['nssa'], _n(b['imo']['egr']), b['nimo'], _chip('pendiente', 'salud-imss-bienestar'))
+    fu = b['fu']
+    return {
+        'tit': 'Lo que sabemos del IMSS-Bienestar',
+        'h': h,
+        'fu': [_o('Egresos hospitalarios, egresos con cirugía y procedimientos quirúrgicos de los hospitales del IMSS-Bienestar en 2025 (renglones de la base contados por la CLUES de cada hospital)', fu),
+               _o('Egresos con cirugía de cada 100', fu, 'egresos con al menos un procedimiento quirúrgico ÷ egresos × 100'),
+               PEND_BIEN],
+        'ci': [{'v': _n(t['egr']), 'etq': 'egresos hospitalarios del IMSS-Bienestar en 2025', 'e': 'oficial'},
+               {'v': _n(t['egrq']), 'etq': 'egresos con al menos una cirugía', 'e': 'oficial'},
+               {'v': _n(t['q']), 'etq': 'procedimientos quirúrgicos', 'e': 'oficial'}],
+        'sug': ['¿Cuántos egresos tuvo el IMSS-Bienestar en Chiapas?', '¿Qué pasó con el Seguro Popular?', '¿Cuántas consultas dio el IMSS en 2025?']}
 
 
 def _tema_estados(d):

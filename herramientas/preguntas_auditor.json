@@ -385,6 +385,26 @@
    "ir": "herramienta-calculadora-ticket-retienen.html?m=15000&p=mes&n=bruto"
   },
   {
+   "q": "Trabajo en el gobierno y gano 20 mil al mes, ¿cuánto me retienen?",
+   "ir": "herramienta-calculadora-ticket-retienen.html?m=20000&p=mes&n=bruto&r=sueldos&pt=issste"
+  },
+  {
+   "q": "¿Qué son las cuotas al ISSSTE?",
+   "ir": "glosario.html#Cuotas-al-ISSSTE"
+  },
+  {
+   "q": "¿Qué es el salario base de cotización?",
+   "ir": "glosario.html#Salario-Base-de-Cotizacion"
+  },
+  {
+   "q": "Revisa mi recibo de nómina",
+   "ir": "herramienta-inspector-factura.html"
+  },
+  {
+   "q": "Quiero que revisen la nómina de mi empresa",
+   "ir": "servicios-catalogo.html#sv-nomina"
+  },
+  {
    "q": "La calculadora",
    "ir": "herramienta-calculadora.html"
   },
@@ -868,6 +888,50 @@
   {
    "q": "¿Cuántas consultas da el IMSS-Bienestar?",
    "ir": "datos-salud-sistema.html#sal-imss_bienestar"
+  },
+  {
+   "q": "Revisa el RFC AAG090703QT6",
+   "ir": "herramienta-inspector-padron.html?q=AAG090703QT6",
+   "dice": [
+    "Crédito fiscal firme"
+   ]
+  },
+  {
+   "q": "¿Está en alguna lista el RFC CASB540918LVI?",
+   "ir": "herramienta-inspector-padron.html?q=CASB540918LVI",
+   "dice": [
+    "OFAC",
+    "no publicamos el nombre"
+   ]
+  },
+  {
+   "q": "¿Está en la OFAC el cártel de Sinaloa?",
+   "ir": "herramienta-inspector-padron.html?q=cartel%20sinaloa",
+   "dice": [
+    "SINALOA CARTEL"
+   ]
+  },
+  {
+   "q": "¿Cómo reviso a mi cliente en las listas de lavado?",
+   "ir": "herramienta-inspector-padron.html"
+  },
+  {
+   "q": "Contratos de MOA221226143",
+   "ir": "contratos-publicos.html?q=MOA221226143"
+  },
+  {
+   "q": "¿Cuántas cirugías hizo el IMSS-Bienestar en 2025?",
+   "ir": "datos-salud-sistema.html#sal-imss_bienestar",
+   "dice": [
+    "622,579"
+   ]
+  },
+  {
+   "q": "¿Cuántos egresos tuvo el IMSS-Bienestar en Chiapas?",
+   "ir": "planisferio-chis-salud.html",
+   "dice": [
+    "129,708"
+   ]
   },
   {
    "q": "¿Cuántas consultas da el ISSSTE?",

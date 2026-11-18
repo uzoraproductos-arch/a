@@ -1028,6 +1028,16 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   contrato abierto el importe suele ser el máximo, no lo pagado. **Las personas
   físicas no se publican** (su RFC es un dato personal), y tener contratos no
   es una irregularidad: así se dice en cada respuesta.
+  **El padrón de contrapartes** (18-11-2026, pedido del autor: «que nuestra base de datos quede muy bien integrada… para el compliance de prevención de
+  lavado de dinero»). Una sola ficha por RFC (`assets/auditor/js/padron.js`, que leen la aplicación «Revisa a tu contraparte»,
+  `herramienta-inspector-padron.html` de `herramientas/insp_padron.py`, y el chat, `padronResp()` de `asistente.js`) con las listas del SAT del art. 69,
+  17-H Bis y 69-B Bis (`herramientas/anclar_listas.py` → `assets/auditor/data/padron/`, con huella y cuadre; flujo semanal «Listas del padrón»), la 69-B,
+  el Directorio de Sancionados, la OFAC y la ONU (`sanciones-int.js`) y ComprasMX. **No trae datos propios**: lee los archivos que ya escriben esos
+  scripts. **Las personas físicas no se publican** (decisión del autor, 18-11-2026): las listas del SAT las guardan por la huella SHA-256 de su RFC
+  (sal `av-padron:`), y de ellas solo se dice si el RFC coincide, nunca el nombre. **Una coincidencia es una señal para revisar, nunca una acusación
+  ni una calificación**; coincidir en un nombre no es ser la misma persona, y lo que no es público (la Lista de Personas Bloqueadas de la UIF) se dice
+  con su nombre. **Una lista nueva entra en `anclar_listas.py`, con sus columnas fijas y su cuadre**, o no entra.
+  **La nómina** (18-11-2026, pedido del autor: «calcular la nómina… y tener las distinciones entre trabajadores del gobierno, ISSSTE, y trabajadores para empresas, IMSS»). La Calculadora Cívica (`cc_ticket.py`, `cc-ticket.js`) pregunta quién paga (`&pt=issste`) y suma «Tu nómina completa»: lo que pone el patrón y el costo de la plaza; las tasas viven en `calculadora_civica.imss_patronal` e `issste` de la base, cada una con su artículo y la huella de la ley. **La cesantía y vejez patronal sube cada 1 de enero hasta 2030**: en enero se cambia `cesantia_2026` por el renglón del año (decreto DOF 16-12-2020, Segundo transitorio). El Lector de facturas revisa recibos de nómina (`revisar_nomina()` de `lector_cfdi.py` y `revisarNomina()` de `insp-factura.js`, gemelos); **el ISR del recibo es una cuenta aproximada nuestra**, y una diferencia chica es solo nota. **Nunca se muestra el nombre, la CURP ni el número de seguridad social de quien trabaja**, y la señal del art. 127 es una comparación de cifras, no una acusación. **Revisamos la nómina; no la calculamos ni la timbramos por nadie.**
   **Los grupos y sus filiales** (17-11-2026, `herramientas/empresas_grupos.py`, sección `#grupos` y `grupoEmp()` del chat; pedido del
   autor: «le pregunté al chat por Grupo Prodi y no salió información»). Muchos grupos no contratan con su nombre: `GRUPOS` dice con qué
   empresas (por RFC) aparece cada uno en ComprasMX. **Ninguna cifra se escribe ahí**; **el vínculo entre el grupo y la filial es `pendiente`
@@ -1055,8 +1065,12 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   `por_proveedor()` de `lector_cfdi.py`, con las mismas reglas). **El Vigía 69-B** (`herramientas/vigia_69b.py`,
   flujo semanal) compara la lista del SAT contra `sat-69b.js` por RFC y deja en
   `docs/sat69b/bandeja.json` altas, cambios de situación, bajas y cambios de razón
-  social; tampoco escribe en la base, y a las personas físicas las deja con el RFC
-  recortado y sin nombre. **Revisa tu estado de resultados** (05-11-2026,
+  social, con las personas físicas con el RFC recortado y sin nombre. **Desde el 18-11-2026
+  se actualiza sola** (decisión del autor): si el SAT publicó otro archivo, el flujo corre
+  `actualizar_69b.py` con ese mismo archivo, sube el sello y publica; se detiene si cambian
+  las columnas o si la lista se encoge más de 10 %. **`sat-69b.js` conserva los nombres
+  tal como los publica el SAT** (decisión del autor, 18-11-2026: la 69-B es una lista que la
+  ley manda publicar en el DOF), a diferencia de las otras listas del padrón. **Revisa tu estado de resultados** (05-11-2026,
   `insp_resultados.py`, `insp-resultados.js` y su gemelo `lector_resultados.py`, con
   la prueba en `revision.py`) lee un CSV o lo pegado de Excel **en el navegador**, sin
   subirlo, y lo revisa en seis dimensiones (cuadre, estructura, rentabilidad, tendencia
