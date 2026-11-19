@@ -127,6 +127,24 @@ FICHAS = {
         'pal': r'revision de (la )?nomina|(revisen|auditen|chequen) (la |mi |nuestra )?nomina|auditoria de (la )?nomina|servicio de nomina',
         'no': 'Revisamos la nómina; no la calculamos ni la timbramos por nadie, y nunca mostramos el nombre, la CURP ni el número de seguridad social de quien trabaja.',
     },
+    'gobernanza': {
+        'hace': [
+            ('🗄️', '¿Hasta cuándo guardas tus papeles?', 'El calendario de conservación: cada papel con su plazo, desde cuándo corre y su artículo '
+             '(CFF, Código de Comercio, LSS, LFT, LFPIORPI y LFPDPPP), y la fecha mínima para lo de un año.', 'herramienta-inspector-conservacion.html', 'Nuevo'),
+            ('📑', 'Tus facturas, leídas', 'El XML se lee en tu navegador: lo que conviene revisar antes de archivarlo.', 'herramienta-inspector-factura.html', 'Gratis'),
+            ('🔒', 'Cómo cuidamos la información', 'Lo que hacemos nosotros con los datos: medidas de seguridad y qué pasa si algo falla.',
+             'aviso-de-privacidad.html#seguridad', 'Nuevo'),
+        ],
+        'auditor': [('¿Cuántos años debo guardar mis facturas?', 'ciudadano'), ('¿Hasta cuándo guardo los recibos de nómina?', 'inspector'),
+                    ('¿Cuánto tiempo se guarda el expediente de un cliente en una actividad vulnerable?', 'inspector')],
+        'enciclopedia': [('aprende-auditoria.html#met-control', 'Cómo se audita: el control interno'),
+                         ('aprende-auditoria.html#met-lavado', 'Cómo se audita: el lavado de dinero')],
+        'glosario': ['Control Interno', 'Actividad Vulnerable', 'Recibo de Nómina (CFDI de nómina)'],
+        'refs': ['ref-cff', 'ref-lft', 'ref-lss', 'ref-lfpiorpi'],
+        'pal': r'gobernanza documental|conservacion de (documentos|papeles|archivos|la contabilidad)|calendario de conservacion|'
+               r'destruir (mis |los |nuestros )?(papeles|documentos|archivos|expedientes)|depurar (el |mi |nuestro )?archivo',
+        'no': 'No es asesoría ni sustituye a tu contador o a tu abogado: te dice qué pide cada ley y desde cuándo corre, y nunca destruimos ni custodiamos tus documentos.',
+    },
     'radiografia': {
         'hace': [
             ('🗺️', 'El Planisferio', 'Tu estado y sus municipios en diez dimensiones: dinero, deuda, inversión, congreso, justicia, ambiente, salud, '

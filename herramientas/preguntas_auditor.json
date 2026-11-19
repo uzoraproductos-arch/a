@@ -2930,6 +2930,22 @@
   {
    "q": "¿Qué hacen si hay una fuga de datos?",
    "ir": "aviso-de-privacidad.html#vulneraciones"
+  },
+  {
+   "q": "¿Cuántos años debo guardar mis facturas?",
+   "ir": "herramienta-inspector-conservacion.html"
+  },
+  {
+   "q": "¿Hasta cuándo guardo los recibos de nómina?",
+   "ir": "herramienta-inspector-conservacion.html"
+  },
+  {
+   "q": "Quiero un calendario de conservación de documentos para mi empresa",
+   "ir": "servicio-gobernanza.html"
+  },
+  {
+   "q": "¿Cuánto tiempo se guarda el expediente de un cliente en una actividad vulnerable?",
+   "ir": "herramienta-inspector-conservacion.html"
   }
  ]
 }

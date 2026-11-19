@@ -863,7 +863,7 @@ HERRAMIENTAS = [
      'Expedientes de la Auditoría Superior de la Federación (ASF), adjudicaciones directas, empresas que facturan operaciones simuladas '
      '(EFOS) y focos rojos de riesgo. Solo informes oficiales: pliegos de observaciones, montos por aclarar y contratos abiertos.'
      ' Y si un caso necesita ir más a fondo, en la aplicación de Servicios puedes pedir una investigación a la medida: cada cifra con su documento y bajo una política de independencia.'
-     ' Las ocho también las usas desde el chat del <a href="herramienta-inspector-pregunta.html">Auditor</a>, sin salir de la plática.',
+     ' Todas también las usas desde el chat del <a href="herramienta-inspector-pregunta.html">Auditor</a>, sin salir de la plática.',
 
      'verificador', [
          # «Que encontro la ASF» y «Expedientes de casos» se fusionaron el
@@ -897,6 +897,10 @@ HERRAMIENTAS = [
          # solo en el navegador del lector (insp_mia.py).
          ('inspmia', '📌', 'Mi Auditavisión', 'Tu tablero',
           'Tu lista de proveedores cruzada con la lista 69-B y los resúmenes que guardaste de tus facturas y tus estados de resultados, en una sola vista. Se guarda solo en tu navegador: no hay cuenta ni servidor.'),
+         # Duodecima desde el 19-11-2026 (entrega 1 del servicio de gobernanza
+         # documental): el calendario de conservacion (insp_conservacion.py).
+         ('inspconservacion', '🗄️', '¿Hasta cuándo guardas tus papeles?', 'Gobernanza documental',
+          'Facturas, contabilidad, nómina, contratos y expedientes de clientes: cuánto tiempo obliga la ley a guardar cada uno, desde cuándo se cuenta y la fecha mínima para tus papeles de un año, con su artículo.'),
          ('inspverifica', '🔏', 'Verifica un estado de cuenta', 'Busca y verifica',
           '¿Te compartieron un estado de cuenta de Auditavisión? Escribe su folio o su huella digital y comprueba, cifra por cifra, que no se alteró.'),
          # Septima desde el 28-10-2026 (pedido del autor): el nepotismo, con su
@@ -979,7 +983,7 @@ MODULOS_PROPIOS = {'inspverifica'}
 # modulo de herramientas/ arma su pagina con construir(base, ref) y dice
 # sus ESTILOS y SCRIPTS (assets/auditor/css y js).
 INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspentes': 'insp_entes',
-                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'insppadron': 'insp_padron', 'inspnepotismo': 'nepotismo', 'inspfactura': 'insp_factura', 'inspresultados': 'insp_resultados', 'inspmia': 'insp_mia',
+                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'insppadron': 'insp_padron', 'inspnepotismo': 'nepotismo', 'inspfactura': 'insp_factura', 'inspresultados': 'insp_resultados', 'inspmia': 'insp_mia', 'inspconservacion': 'insp_conservacion',
                 # Calculadora Civica (pedido del autor, 12-10-2026): sus tres
                 # aplicaciones que abrian el motor en un marco.
                 'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj', 'ccinmueble': 'cc_inmueble', 'ccbolsa': 'cc_bolsa',
@@ -2097,6 +2101,14 @@ SERVICIOS = [
      'las cuotas del IMSS o del ISSSTE contra su ley, quien maquila la nómina contra las listas del SAT, y en la nómina pública, el tope del artículo 127.',
      'Señales por recibo y por trabajador, sin nombres, cada una con su artículo. El lector gratuito revisa un recibo en tu navegador.',
      'Empresas, despachos contables, tesorerías y órganos internos de control.', 'prevencion'),
+    # 19-11-2026, propuesta aceptada por el autor («sí, arranca»): gobernanza documental, empezando por el calendario de
+    # conservación (insp_conservacion.py). Siguen el autodiagnóstico y la matriz de riesgos.
+    ('gobernanza', '🗄️', 'Gobernanza documental y cumplimiento',
+     'Qué papeles guarda tu empresa, hasta cuándo y con qué ley: tu calendario de conservación por tipo de documento (fiscal, mercantil, laboral, '
+     'seguridad social, prevención de lavado y datos personales), con lo que ya toca destruir y cómo hacerlo sin incumplir.',
+     'Calendario por tipo de documento, cada plazo con su artículo y la regla del plazo más largo, y el protocolo para bloquear y suprimir los datos '
+     'personales al vencer. Tu primer calendario lo sacas tú, gratis, en tu navegador.',
+     'Empresas, despachos contables, áreas de cumplimiento, de recursos humanos y de archivo.', 'prevencion'),
     ('radiografia', '🗳️', 'Radiografía de tu municipio o de tu estado',
      'Lo que los documentos públicos dicen de un gobierno, en un solo documento: lo que le entra y lo que gasta, su deuda, su inversión, lo que dejó por aclarar ante la ASF en su estado y lo que no cuadra entre un portal y otro.',
      'Documento estándar, sin opinión: cada cifra con su documento y su etiqueta, y lo que falta, con el nombre de quien lo debe. Es el mismo para quien lo pida.',
@@ -2141,6 +2153,7 @@ COBRO = {
     'seguimiento': 'Suscripción mensual, según cuántos RFC vigilas',
     'facturas': 'Precio por lote, según su tamaño',
     'nomina': 'Precio por periodo de nómina, según cuántos recibos',
+    'gobernanza': 'Precio fijo por calendario, según cuántos tipos de documento',
     'radiografia': 'Precio fijo y público por documento: el mismo para todos',
     'temporada': 'Precio por temporada',
     'entrega': 'Precio fijo por gobierno',
@@ -2180,12 +2193,12 @@ CALENDARIO = [
 PERFILES = [
     ('🧮', 'Contaduría y despachos contables', 'Contadoras y contadores públicos, fiscalistas y despachos.',
      'Si un proveedor sale definitivo en la lista 69-B, sus facturas «no producen ni produjeron efecto fiscal alguno» (CFF, art. 69-B) y tu cliente tiene que acreditar la operación o corregir.',
-     ['facturas', 'nomina', 'contrapartes', 'seguimiento', 'diligencia'],
+     ['facturas', 'nomina', 'contrapartes', 'seguimiento', 'diligencia', 'gobernanza'],
      [('herramienta-inspector-efos.html', 'Busca un RFC en la lista 69-B'), ('herramienta-inspector-factura.html', 'Lee una factura sin subirla'),
       ('herramienta-inspector-resultados.html', 'Revisa un estado de resultados')]),
     ('⚖️', 'Derecho y cumplimiento', 'Abogadas y abogados corporativos, oficiales de cumplimiento y prevención de lavado (PLD).',
      'Conocer a tu cliente y a tu proveedor en actividades vulnerables (LFPIORPI) y llegar a una negociación o a un litigio con los documentos públicos ya reunidos.',
-     ['contrapartes', 'diligencia', 'expediente', 'seguimiento'],
+     ['contrapartes', 'diligencia', 'expediente', 'seguimiento', 'gobernanza'],
      [('herramienta-inspector-padron.html', 'Revisa a tu contraparte'), ('contratos-publicos.html', 'Contratos públicos de una empresa')]),
     ('🔍', 'Auditoría, control interno y auditoría forense', 'Auditores externos e internos, órganos internos de control y despachos de auditoría.',
      'Formarse y practicar con casos mexicanos: cómo documenta la ASF una irregularidad para que se pueda sancionar, y dónde se repite cada año.',
@@ -2550,6 +2563,8 @@ SV_EJEMPLOS = {
                     ('Los contratos de una dependencia', '¿Me avisan cuando esta dependencia publique contratos nuevos de este tipo?')],
     'nomina': [('La nómina de una quincena de mi empresa', '¿El ISR, el subsidio y las cuotas de estos recibos cuadran con la ley, y quién nos maquila la nómina está en alguna lista del SAT?'),
                ('La nómina de una dependencia o un municipio', '¿Las cuotas al ISSSTE cuadran con su ley y alguna remuneración rebasa el tope del artículo 127?')],
+    'gobernanza': [('El archivo de mi empresa', '¿Qué papeles de los últimos años ya podemos destruir y cuáles debemos seguir guardando, con qué ley?'),
+                   ('Los expedientes de mis trabajadores y clientes', '¿Hasta cuándo guardamos sus datos personales y cómo los suprimimos al vencer el plazo?')],
     'facturas': [('Las facturas de un trimestre de mi empresa', '¿Qué proveedores de este lote están en la lista 69-B y qué facturas conviene revisar?'),
                  ('Las facturas de un cliente de mi despacho', '¿Qué señales trae este lote, por proveedor, y con qué regla se detectó cada una?')],
     'radiografia': [('Las finanzas de mi municipio', '¿Cuánto le entra, en qué lo gasta, cuánto debe y qué dejó por aclarar ante la ASF?'),
@@ -2975,7 +2990,7 @@ def servicios():
              if SERVICIOS_OPERAN else
              '      <p class="sv-aviso"><span class="sz-et">Próximamente</span> Los Servicios se abren con el lanzamiento de la '
              'plataforma. Ya puedes armar tu solicitud y guardarla; el envío se activa entonces.</p>')
-    numero = lambda n: ['Cero', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve', 'Diez', 'Once', 'Doce'][n]
+    numero = lambda n: ['Cero', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve', 'Diez', 'Once', 'Doce', 'Trece', 'Catorce', 'Quince', 'Dieciséis'][n]
     politica_html = ('<div class="sv-politica">\n          <ol class="sv-pol">\n%s\n          </ol>\n'
                      '          <p class="sv-version">Versión 4 · 11 de noviembre de 2026.</p>\n        </div>' % politica)
     # Lo que va en cada página: sus secciones (id, título, texto, bloque, pre).

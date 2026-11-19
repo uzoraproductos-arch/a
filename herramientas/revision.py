@@ -106,6 +106,7 @@ def main():
     revisiones.append(('vigía legislativo', lambda: corre('vigia_legislativo.py', '--prueba')))
     revisiones.append(('lector de facturas CFDI', lambda: corre('lector_cfdi.py', '--prueba')))
     revisiones.append(('lector de estado de resultados', lambda: corre('lector_resultados.py', '--prueba')))
+    revisiones.append(('calendario de conservación', lambda: corre('insp_conservacion.py', '--prueba')))
     if not a.rapida:
         revisiones.append(('preguntas del Auditor', lambda: corre('prueba_auditor.py')))
         revisiones.append(('la Enciclopedia en el Auditor', lambda: corre('cobertura_auditor.py')))

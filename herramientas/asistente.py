@@ -613,6 +613,10 @@ ALIAS_APPS = {
     'ccreloj': ['reloj de la deuda'],
     'ccinmueble': ['vendo mi casa', 'vender mi casa', 'venta de mi casa', 'vendo un terreno', 'vender un terreno', 'venta de un inmueble', 'vender un inmueble', 'isr por la venta', 'isr de la venta', 'enajenacion de inmuebles', 'simulador de venta'],
     'ccbolsa': ['vendo acciones', 'vender acciones', 'venta de acciones', 'vendi acciones', 'acciones en bolsa', 'ganancia en bolsa', 'ganancias en bolsa', 'isr de mis acciones', 'isr por acciones', 'isr de dividendos', 'isr por dividendos', 'retencion de dividendos', 'mis dividendos', 'invierto en la bolsa', 'inversion en bolsa'],
+    'inspconservacion': ['hasta cuando guardo', 'hasta cuando debo guardar', 'hasta cuando se guarda', 'cuanto tiempo guardo', 'cuanto tiempo debo guardar',
+                         'cuanto tiempo se guarda', 'cuantos anos guardo', 'cuantos anos debo guardar', 'cuantos anos se guarda', 'conservar mis facturas',
+                         'conservar la contabilidad', 'conservacion de documentos', 'conservacion de la contabilidad', 'calendario de conservacion',
+                         'plazo de conservacion', 'destruir mis papeles', 'tirar mis papeles', 'destruir documentos', 'depurar el archivo'],
     'simulador-presupuesto.html': ['reparte el presupuesto', 'simulador del presupuesto'],
     'radar-estado-de-cuenta.html': ['estado de cuenta administrativo'],
 }
