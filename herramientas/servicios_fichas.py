@@ -139,8 +139,9 @@ FICHAS = {
                     ('¿Cuánto tiempo se guarda el expediente de un cliente en una actividad vulnerable?', 'inspector')],
         'enciclopedia': [('aprende-auditoria.html#met-control', 'Cómo se audita: el control interno'),
                          ('aprende-auditoria.html#met-lavado', 'Cómo se audita: el lavado de dinero')],
-        'glosario': ['Control Interno', 'Actividad Vulnerable', 'Recibo de Nómina (CFDI de nómina)'],
-        'refs': ['ref-cff', 'ref-lft', 'ref-lss', 'ref-lfpiorpi'],
+        'glosario': ['Plazo de Conservación', 'Bloqueo de Datos Personales', 'Plazo para que el SAT te Revise (Caducidad)',
+                     'Control Interno', 'Actividad Vulnerable', 'Recibo de Nómina (CFDI de nómina)'],
+        'refs': ['ref-cff', 'ref-ccom', 'ref-lft', 'ref-lss', 'ref-lfpiorpi', 'ref-lfpdppp', 'ref-lga'],
         'pal': r'gobernanza documental|conservacion de (documentos|papeles|archivos|la contabilidad)|calendario de conservacion|'
                r'destruir (mis |los |nuestros )?(papeles|documentos|archivos|expedientes)|depurar (el |mi |nuestro )?archivo',
         'no': 'No es asesoría ni sustituye a tu contador o a tu abogado: te dice qué pide cada ley y desde cuándo corre, y nunca destruimos ni custodiamos tus documentos.',

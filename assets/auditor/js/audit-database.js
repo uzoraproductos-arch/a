@@ -8265,6 +8265,24 @@ window.AUDIT_DB = {
       "definicion": "El registro de la Secretaría de Economía donde se inscriben las garantías sobre bienes muebles que respaldan un crédito o una obligación mercantil. No es una lista de fianzas de contratos con el gobierno ni de personas sancionadas. Ahí van la prenda sin transmisión de posesión, el arrendamiento y el factoraje financieros, la reserva de dominio, el fideicomiso de garantía y los embargos sobre bienes muebles, entre otros. Inscribirlas hace que valgan frente a terceros y les da prelación. Es una sección del Registro Público de Comercio y funciona en línea; la consulta pide cuenta de usuario, y las certificaciones se pagan.",
       "ley": "Arts. 32 bis 1 a 32 bis 9 Código de Comercio (sección adicionada DOF 27-08-2009, reformada DOF 13-06-2014)",
       "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Plazo de Conservación",
+      "definicion": "El tiempo mínimo que la ley obliga a guardar un documento. Para el SAT son 5 años, contados desde que se presentó (o debió presentarse) la declaración del ejercicio, no desde la fecha de la factura; un comerciante guarda sus libros, comprobantes y contratos 10 años; y las actas, los movimientos de capital y las declaraciones de una sociedad se guardan mientras exista. Si te alcanzan varias leyes, manda el plazo más largo. En los archivos públicos es la suma de la vigencia del documento y, en su caso, su plazo precautorio y de reserva, y se fija en el catálogo de disposición documental.",
+      "ley": "Art. 30 · Código Fiscal de la Federación (última reforma DOF 09-04-2026) · Arts. 38, 46 y 49 · Código de Comercio (última reforma DOF 14-11-2025) · Art. 4, frs. XIII y XLVI · Ley General de Archivos (última reforma DOF 14-11-2025)",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Bloqueo de Datos Personales",
+      "definicion": "Lo que se hace con los datos personales cuando ya cumplieron su finalidad: se identifican y se apartan, sin usarlos para nada más, solo por si hay que responder por cómo se trataron, hasta que prescriba esa responsabilidad; después se suprimen. Por eso guardar de más también incumple: al vencer el plazo de conservación, primero se bloquea y luego se borra. Los datos de un impago se eliminan a los 72 meses.",
+      "ley": "Arts. 3, fr. III, 10 y 24 · Ley Federal de Protección de Datos Personales en Posesión de los Particulares (DOF 20-03-2025)",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
+    },
+    {
+      "termino": "Plazo para que el SAT te Revise (Caducidad)",
+      "definicion": "El SAT tiene 5 años para revisarte y determinar contribuciones omitidas. Sube a 10 años si no te inscribiste en el RFC, si no llevas contabilidad o no la conservas el plazo de ley, o si no presentaste la declaración del ejercicio estando obligado. Por eso perder los papeles puede doblar el tiempo en que te pueden revisar.",
+      "ley": "Art. 67 · Código Fiscal de la Federación (última reforma DOF 09-04-2026)",
+      "categoria": "📜 Ley de Ingresos & Marco Legal"
     }
   ],
   "legislativo": {
@@ -9941,6 +9959,33 @@ window.AUDIT_DB = {
       "cita_apa": "Auditor\u00eda Superior de la Federaci\u00f3n. (2026). Informe del Resultado de la Fiscalizaci\u00f3n Superior de la Cuenta P\u00fablica 2025: primera entrega. ASF.",
       "url": "https://www.asf.gob.mx/Trans/Informes/IR2025a/index.html",
       "descripcion": "Primera entrega de la revisi\u00f3n de la Cuenta P\u00fablica 2025 (junio de 2026): 33 auditor\u00edas a la distribuci\u00f3n y pago de las participaciones federales, con su matriz de datos b\u00e1sicos."
+    },
+    {
+      "num": 160,
+      "id": "ref-ccom",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Código de Comercio [CCom]. Diario Oficial de la Federación, 7 de octubre al 13 de diciembre de 1889; última reforma, 14 de noviembre de 2025 (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CCom.pdf",
+      "descripcion": "Obliga a todo comerciante, y las sociedades mercantiles lo son (art. 3o.), a guardar sus libros, registros y comprobantes (arts. 38 y 46) y los originales de sus contratos (art. 49) por 10 años como mínimo, en papel o en medios electrónicos (art. 46 bis). Lo aplica la aplicación «¿Hasta cuándo guardas tus papeles?» del Modo Inspector."
+    },
+    {
+      "num": 161,
+      "id": "ref-lfpdppp",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley Federal de Protección de Datos Personales en Posesión de los Particulares [LFPDPPP]. Diario Oficial de la Federación, 20 de marzo de 2025; última reforma, 14 de noviembre de 2025 (México). Nueva ley que abrogó la de 2010. Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf",
+      "descripcion": "Rige los datos personales que tienen las empresas y las personas: al cumplir su finalidad se bloquean y se suprimen (arts. 3, fr. III, 10 y 24), y los de un impago se eliminan a los 72 meses. Es la ley de nuestro aviso de privacidad y la que pone tope a «guardarlo por si acaso»."
+    },
+    {
+      "num": 162,
+      "id": "ref-lga",
+      "categoria": "leyes_federales",
+      "categoria_nombre": "Leyes Hacendarias y Presupuestales",
+      "cita_apa": "Ley General de Archivos [LGA]. Diario Oficial de la Federación, 15 de junio de 2018; última reforma, 14 de noviembre de 2025 (México). Cámara de Diputados.",
+      "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGA.pdf",
+      "descripcion": "Ordena los archivos de los gobiernos, los Poderes, los órganos autónomos y de quien recibe o ejerce recursos públicos: cada uno fija en su catálogo de disposición documental cuánto se guarda cada serie y qué pasa después (art. 4, frs. XIII y XLVI)."
     },
     {
       "num": 157,

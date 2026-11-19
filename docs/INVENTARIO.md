@@ -827,7 +827,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `servicio-entrega.html` | Lo que recibes: kit de entrega-recepción · Auditavisión | apartados.py | 82 | 0 | 0 | 0 | 0 |
 | `servicio-expediente.html` | Expediente de investigación · Auditavisión | apartados.py | 86 | 0 | 0 | 0 | 0 |
 | `servicio-facturas.html` | Revisión de facturas por lote · Auditavisión | apartados.py | 85 | 0 | 0 | 0 | 0 |
-| `servicio-gobernanza.html` | Gobernanza documental y cumplimiento · Auditavisión | apartados.py | 85 | 0 | 0 | 0 | 0 |
+| `servicio-gobernanza.html` | Gobernanza documental y cumplimiento · Auditavisión | apartados.py | 91 | 0 | 0 | 0 | 0 |
 | `servicio-licencia.html` | Licencia de las herramientas · Auditavisión | apartados.py | 81 | 0 | 0 | 0 | 0 |
 | `servicio-nomina.html` | Revisión de nómina · Auditavisión | apartados.py | 91 | 0 | 0 | 0 | 0 |
 | `servicio-radiografia.html` | Radiografía de tu municipio o de tu estado · Auditavisión | apartados.py | 86 | 0 | 0 | 0 | 0 |

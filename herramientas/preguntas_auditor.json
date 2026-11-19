@@ -2946,6 +2946,18 @@
   {
    "q": "¿Cuánto tiempo se guarda el expediente de un cliente en una actividad vulnerable?",
    "ir": "herramienta-inspector-conservacion.html"
+  },
+  {
+   "q": "¿Qué es el bloqueo de datos personales?",
+   "ir": "glosario.html#Bloqueo-de-Datos-Personales"
+  },
+  {
+   "q": "¿Qué es el plazo de conservación de un documento?",
+   "ir": "herramienta-inspector-conservacion.html"
+  },
+  {
+   "q": "¿Cuántos años tiene el SAT para revisarme?",
+   "ir": "glosario.html#Plazo-para-que-el-SAT-te-Revise"
   }
  ]
 }
