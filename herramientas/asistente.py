@@ -560,6 +560,8 @@ def _charla(d):
             'leg': asistente_legislativo.legislativo(), 'jud': asistente_judicial.judicial(d),
             # Los servicios (servicios_fichas.py) con quién puede pedirlos y los datos de la capa de cada modo (asistente_servicios.py, 19-11-2026).
             'san': informe_sancion.bot(__import__('asistente_servicios').enriquece(__import__('territorio_modulos').temas_bot(d))), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d), 'apu': __import__('administracion_publica').chat(d), 'soc': __import__('dimension_social').chat(d),
+            # El padrón del SAT, las donatarias y las asociaciones religiosas (padron_sat.py, 19-11-2026).
+            'pad': __import__('padron_sat').chat(d),
             # Nepotismo y cargos publicos (28-10-2026): la tabla de la calculadora.
             'nep': nepotismo.bot(),
             # La memoria de promesas (01-11-2026): promesa → Presupuesto → Cuenta Pública → ASF.
@@ -608,6 +610,7 @@ ALIAS_APPS = {
     'ccticket': ['estado de cuenta civico', 'ticket civico', 'calcula mi isr', 'calcular mi isr'],
     'cccompara': ['tu contra ellos', 'yo contra ellos'],
     'ccreloj': ['reloj de la deuda'],
+    'ccinmueble': ['vendo mi casa', 'vender mi casa', 'venta de mi casa', 'vendo un terreno', 'vender un terreno', 'venta de un inmueble', 'vender un inmueble', 'isr por la venta', 'isr de la venta', 'enajenacion de inmuebles', 'simulador de venta'],
     'simulador-presupuesto.html': ['reparte el presupuesto', 'simulador del presupuesto'],
     'radar-estado-de-cuenta.html': ['estado de cuenta administrativo'],
 }

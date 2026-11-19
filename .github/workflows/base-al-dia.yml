@@ -83,6 +83,25 @@ jobs:
             git checkout -- assets/auditor/data/sancionados.js
           fi
 
+      - name: Padrón de contribuyentes del SAT
+        run: |
+          set -o pipefail
+          echo "### Padrón del SAT" >> "$GITHUB_STEP_SUMMARY"
+          pip install --quiet xlrd==2.0.2
+          if ! python herramientas/anclar_padron_sat.py | tee -a "$GITHUB_STEP_SUMMARY"; then
+            echo "⚠️ El SAT no entregó sus hojas o no cuadraron: se intenta la semana que viene." >> "$GITHUB_STEP_SUMMARY"
+            git checkout -- docs/sat/padron-sat.json
+          fi
+
+      - name: Valor de la UDI (Banxico)
+        run: |
+          set -o pipefail
+          echo "### UDI" >> "$GITHUB_STEP_SUMMARY"
+          if ! python herramientas/anclar_udi.py | tee -a "$GITHUB_STEP_SUMMARY"; then
+            echo "⚠️ Banxico no entregó su cuadro: se intenta la semana que viene." >> "$GITHUB_STEP_SUMMARY"
+            git checkout -- docs/sat/udi.json
+          fi
+
       - name: Agenda de las fuentes a mano
         run: |
           set -o pipefail
@@ -91,7 +110,8 @@ jobs:
       - name: Publicar lo que cambió
         run: |
           set -o pipefail
-          if [ -z "$(git status --porcelain -- assets)" ]; then
+          # El padrón del SAT y la UDI viven en docs/sat: también regeneran las páginas.
+          if [ -z "$(git status --porcelain -- assets docs/sat)" ]; then
             echo "La base ya estaba al día." | tee -a "$GITHUB_STEP_SUMMARY"
           else
             python herramientas/sello.py --siguiente

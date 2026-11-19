@@ -94,6 +94,17 @@ FUENTES = [
      'corte': lambda: 'consultado el ' + _fecha(_lee('assets/auditor/data/sancionados.js', r'"corte":"([^"]+)"')),
      'url': 'https://directoriosancionados.buengobierno.gob.mx/'},
 
+    {'id': 'padron-sat', 'que': 'Padrón de contribuyentes del SAT (por tipo, situación, régimen, entidad y sector)', 'quien': 'SAT',
+     'cada': 'mensual', 'publica': 'El SAT actualiza sus hojas de datos abiertos del padrón cada mes, con cifras preliminares.',
+     'modo': 'sola', 'script': 'anclar_padron_sat.py', 'datos': 'docs/sat/padron-sat.json',
+     'corte': lambda: _lee('docs/sat/padron-sat.json', r'"texto":"([^"]+)"'),
+     'url': 'https://www.sat.gob.mx/minisitio/DatosAbiertos/padron.html'},
+    {'id': 'udi', 'que': 'Valor de la UDI (para la exención de la casa habitación)', 'quien': 'Banco de México',
+     'cada': 'semanal', 'publica': 'Banxico publica la UDI de cada día por adelantado (cuadro CP150); se consulta cada semana.',
+     'modo': 'sola', 'script': 'anclar_udi.py', 'datos': 'docs/sat/udi.json',
+     'corte': lambda: 'al ' + _fecha(_lee('docs/sat/udi.json', r'"fecha": "([^"]+)"')),
+     'url': 'https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=8&accion=consultarCuadro&idCuadro=CP150&locale=es'},
+
     # ── Avisan: un vigía las detecta y se cotejan ─────────────────────────
     {'id': 'leyes', 'que': 'Leyes y reglamentos que cita la plataforma', 'quien': 'DOF y Cámara de Diputados',
      'cada': 'semanal', 'publica': 'Cada reforma sale en el DOF y la Cámara actualiza su índice de leyes vigentes.',
@@ -112,6 +123,16 @@ FUENTES = [
      'corte': 'cada miércoles', 'url': 'https://www.dof.gob.mx/'},
 
     # ── A mano ────────────────────────────────────────────────────────────
+    {'id': 'donatarias', 'que': 'Donatarias autorizadas (estadísticas del SAT con base en el Anexo 14 de la RMF)', 'quien': 'SAT',
+     'cada': 'anual', 'publica': 'El SAT publica el Anexo 14 en el DOF en enero y sus «Estadísticos Donatarias Autorizadas» en su micrositio; el PDF se lee con pdftotext.',
+     'modo': 'mano', 'script': 'anclar_donatarias.py', 'datos': 'docs/sat/donatarias.json',
+     'corte': lambda: 'ejercicio ' + _lee('docs/sat/donatarias.json', r'"anio": (\d+)'), 'revisar': '2027-01-20',
+     'url': 'https://www.sat.gob.mx/minisitio/DonatariasAutorizadas/index.html'},
+    {'id': 'asociaciones-religiosas', 'que': 'Asociaciones religiosas con registro constitutivo', 'quien': 'Secretaría de Gobernación',
+     'cada': 'mensual', 'publica': 'Gobernación publica su numeralia en el portal de Asuntos Religiosos. Al 19-11-2026 no respondió a la descarga: sigue pendiente de integrar.',
+     'modo': 'mano', 'script': 'pendiente (padron_sat.py la anota en el Registro de pendientes)', 'datos': 'pendientes.html',
+     'corte': 'sin integrar', 'revisar': '2026-12-01',
+     'url': 'https://asociacionesreligiosas.segob.gob.mx/es/AsuntosReligiosos/Numeralia'},
     {'id': 'comprasmx', 'que': 'Contratos públicos de ComprasMX', 'quien': 'Secretaría Anticorrupción y Buen Gobierno',
      'cada': 'mensual', 'publica': 'Datos abiertos que se descargan con un botón (el servidor no los sirve a una descarga directa).',
      'modo': 'mano', 'script': 'actualizar_comprasmx.py', 'datos': 'assets/auditor/data/comprasmx/',

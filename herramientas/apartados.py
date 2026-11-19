@@ -641,6 +641,14 @@ APARTADOS = [
                 'pagina': 'datos-administracion-publica.html',
                 'pestana': ('🏢', 'Administración pública', 'Federal, estatal y municipal: lo que hace, lo que cuesta y quién la audita: abre su página'),
             },
+            {
+                # El padrón del SAT (19-11-2026, pedido del autor): cuántos
+                # contribuyentes, de qué tipo, en qué régimen, dónde, y las
+                # donatarias y asociaciones religiosas (padron_sat.py).
+                'id': 'padron-sat',
+                'pagina': 'datos-padron-sat.html',
+                'pestana': ('🧾', 'Padrón del SAT', 'Cuántos contribuyentes hay, en qué régimen, en qué estado, y las donatarias: abre su página'),
+            },
             # El Estado de cuenta administrativo fue la cuarta tarjeta de Datos
             # del 12-10-2026 al 22-10-2026; desde entonces (pedido del autor)
             # es la quinta aplicacion de la Calculadora Civica. Su ancla vieja
@@ -833,6 +841,11 @@ HERRAMIENTAS = [
           'Tu ingreso neto frente al de quienes legislan, juzgan y gobiernan, y sus prestaciones de ley contra las tuyas, con el documento de cada cifra.'),
          ('ccreloj', '⏱️', 'El reloj de la deuda', 'Y de lo perdido',
           'Lo que el país se endeuda, paga de intereses y pierde por segundo, repartido entre habitantes o entre contribuyentes, con su contador en vivo.'),
+         # Sexta desde el 19-11-2026 (pedido del autor: «simuladores de
+         # impuestos por ganancias, adquisiciones, enajenaciones»): el ISR
+         # de vender un inmueble, con la ley a la vista (cc_inmueble.py).
+         ('ccinmueble', '🏠', 'Vendes una casa o un terreno', 'El ISR de la venta',
+          'Cuánto ISR causa vender tu casa o un terreno: el pago provisional que calcula el notario, lo que le toca a tu estado y si tu casa habitación queda exenta, paso por paso y con su artículo.'),
          ('simulador-presupuesto.html', '🧮', 'Reparte el presupuesto', 'Desde cero',
           'Empieza en $0: agrega lo que entra, reparte a dónde va, carga el ejemplo oficial de 2026 o 2027, compara dos escenarios y descarga la cuenta. Tiene su propia página.'),
          # Quinta aplicacion desde el 22-10-2026 (pedido del autor): venia de
@@ -964,7 +977,7 @@ INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspentes': 'insp_entes',
                 'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'insppadron': 'insp_padron', 'inspnepotismo': 'nepotismo', 'inspfactura': 'insp_factura', 'inspresultados': 'insp_resultados', 'inspmia': 'insp_mia',
                 # Calculadora Civica (pedido del autor, 12-10-2026): sus tres
                 # aplicaciones que abrian el motor en un marco.
-                'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj',
+                'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj', 'ccinmueble': 'cc_inmueble',
                 # Inversion y Megaobras (pedido del autor, 13-10-2026).
                 'pulso': 'mo_pulso', 'sector': 'mo_sector', 'sexenios': 'mo_sexenios', 'cero': 'mo_cero',
                 'tabla': 'mo_tabla', 'investiga': 'mo_investiga',
@@ -1369,6 +1382,7 @@ def poderes_paginas(base):
     import gestion_salud as gs
     import gestion_ambiental as ga
     import administracion_publica as adm
+    import padron_sat as pad
     paginas = []
     poderes = [
         (al, '🏛️', 'Curules, escaños, sesiones, el calendario del presupuesto y las elecciones de 2027',
@@ -1400,6 +1414,12 @@ def poderes_paginas(base):
          'cuántos contratos dio sin concurso y qué le dejó por aclarar la Auditoría Superior de la Federación. Con los censos de gobierno del INEGI, la Constitución '
          'y la Matriz de Datos Básicos de la ASF. Cada tarjeta abre su propia página.',
          lambda temas: adm.secciones(base, temas), adm.PRE),
+        # El padrón del SAT (19-11-2026): los datos abiertos del SAT y las donatarias.
+        (pad, '🧾', 'Cuántos contribuyentes hay, de qué tipo, en qué régimen y dónde; y las donatarias autorizadas',
+         'El padrón de contribuyentes del Servicio de Administración Tributaria, mes por mes desde 2010: activos, suspendidos y cancelados; '
+         'personas físicas, morales y asalariados; los 26 regímenes fiscales; cada estado y cada sector. Y lo que no está en el padrón: '
+         'las donatarias autorizadas, con las estadísticas del propio SAT, y las asociaciones religiosas, que registra Gobernación. Cada tarjeta abre su propia página.',
+         lambda temas: pad.secciones(base, temas), pad.PRE),
     ]
     for mod, ico, lema, entrada, secc, pre in poderes:
         partes = [(x[0], x[0], x[1], x[2]) for x in mod.PAGINAS]
@@ -6839,6 +6859,7 @@ def _hijas(base, ref):
     import estado_cuenta, presupuesto_modulos, cc_ticket, insp_asf, datos_ambiente, asistente
     import asistente_legislativo as al, asistente_judicial as aj, gestion_salud as gs, gestion_ambiental as ga
     import administracion_publica as adm
+    import padron_sat as pad
     limpio = lambda t: re.sub('<[^>]+>', '', t)
     return {
         estado_cuenta.ARCHIVO: [(p['archivo'], limpio(p.get('menu') or p['titulo'])) for p in estado_cuenta.construir()[0]
@@ -6854,6 +6875,7 @@ def _hijas(base, ref):
         gs.PORTADA: [(x[0], x[2]) for x in gs.PAGINAS],
         ga.PORTADA: [(x[0], x[2]) for x in ga.PAGINAS],
         adm.PORTADA: [(x[0], x[2]) for x in adm.PAGINAS],
+        pad.PORTADA: [(x[0], x[2]) for x in pad.PAGINAS],
     }
 
 

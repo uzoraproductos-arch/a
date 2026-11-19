@@ -1,10 +1,7 @@
 {
  "que_es": "Lo que toca revisar de la base de datos. La escribe herramientas/fuentes.py --agenda en el flujo «Base al día».",
- "revisado": "2026-11-18",
- "toca": [
-  "rpu",
-  "pef"
- ],
+ "revisado": "2026-11-19",
+ "toca": [],
  "fuentes": [
   {
    "id": "sat-69b",
@@ -55,6 +52,30 @@
    "url": "https://directoriosancionados.buengobierno.gob.mx/"
   },
   {
+   "id": "padron-sat",
+   "que": "Padrón de contribuyentes del SAT (por tipo, situación, régimen, entidad y sector)",
+   "quien": "SAT",
+   "modo": "sola",
+   "cada": "mensual",
+   "corte": "septiembre de 2026",
+   "revisar": "",
+   "toca": false,
+   "script": "anclar_padron_sat.py",
+   "url": "https://www.sat.gob.mx/minisitio/DatosAbiertos/padron.html"
+  },
+  {
+   "id": "udi",
+   "que": "Valor de la UDI (para la exención de la casa habitación)",
+   "quien": "Banco de México",
+   "modo": "sola",
+   "cada": "quincenal",
+   "corte": "al 25-11-2026",
+   "revisar": "",
+   "toca": false,
+   "script": "anclar_udi.py",
+   "url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=8&accion=consultarCuadro&idCuadro=CP150&locale=es"
+  },
+  {
    "id": "leyes",
    "que": "Leyes y reglamentos que cita la plataforma",
    "quien": "DOF y Cámara de Diputados",
@@ -91,6 +112,30 @@
    "url": "https://www.dof.gob.mx/"
   },
   {
+   "id": "donatarias",
+   "que": "Donatarias autorizadas (estadísticas del SAT con base en el Anexo 14 de la RMF)",
+   "quien": "SAT",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "ejercicio 2026",
+   "revisar": "2027-01-20",
+   "toca": false,
+   "script": "anclar_donatarias.py",
+   "url": "https://www.sat.gob.mx/minisitio/DonatariasAutorizadas/index.html"
+  },
+  {
+   "id": "asociaciones-religiosas",
+   "que": "Asociaciones religiosas con registro constitutivo",
+   "quien": "Secretaría de Gobernación",
+   "modo": "mano",
+   "cada": "mensual",
+   "corte": "sin integrar",
+   "revisar": "2026-12-01",
+   "toca": false,
+   "script": "pendiente (padron_sat.py la anota en el Registro de pendientes)",
+   "url": "https://asociacionesreligiosas.segob.gob.mx/es/AsuntosReligiosos/Numeralia"
+  },
+  {
    "id": "comprasmx",
    "que": "Contratos públicos de ComprasMX",
    "quien": "Secretaría Anticorrupción y Buen Gobierno",
@@ -109,8 +154,8 @@
    "modo": "mano",
    "cada": "trimestral",
    "corte": "al 30-06-2026",
-   "revisar": "2026-11-15",
-   "toca": true,
+   "revisar": "2026-12-01",
+   "toca": false,
    "script": "anclar_rpu.py",
    "url": "https://www.disciplinafinanciera.hacienda.gob.mx/"
   },
@@ -133,8 +178,8 @@
    "modo": "mano",
    "cada": "anual",
    "corte": "PEF 2026",
-   "revisar": "2026-11-16",
-   "toca": true,
+   "revisar": "2026-11-25",
+   "toca": false,
    "script": "módulos de la Enciclopedia (audit-database.js)",
    "url": "https://www.dof.gob.mx/"
   },
@@ -188,7 +233,7 @@
   },
   {
    "id": "tarifa-isr",
-   "que": "Tarifa del ISR de sueldos (art. 96) y subsidio para el empleo",
+   "que": "Tarifa del ISR de sueldos (art. 96), subsidio para el empleo y tabla del RESICO",
    "quien": "SAT (Anexo 8 de la RMF)",
    "modo": "mano",
    "cada": "anual",

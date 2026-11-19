@@ -1,0 +1,22 @@
+{
+ "que": "Valor de la unidad de inversión (UDI), pesos por UDI",
+ "fecha": "2026-11-25",
+ "valor": 8.932476,
+ "serie": [
+  [
+   "2026-11-23",
+   8.927827
+  ],
+  [
+   "2026-11-24",
+   8.930151
+  ],
+  [
+   "2026-11-25",
+   8.932476
+  ]
+ ],
+ "fuente": "Banco de México, Sistema de Información Económica, cuadro CP150 «Valores de UDIS» (serie SP68257)",
+ "url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=8&accion=consultarCuadro&idCuadro=CP150&locale=es",
+ "consulta": "2026-11-19"
+}

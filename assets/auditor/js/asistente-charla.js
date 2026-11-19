@@ -1731,6 +1731,45 @@
       return null;
     }
 
+    /* El padrón del SAT, las donatarias y las asociaciones religiosas (padron_sat.py, 19-11-2026). */
+    var PAD = D.pad || null;
+    function padTema(k) { var x = PAD.t[k]; return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug }; }
+    var PAD_QUIEN = /contribuyentes?|padron (del sat|de contribuyentes|fiscal)|inscritos? en el (sat|rfc)|registrad[oa]s? (en|ante) el sat|rfc activos?|personas? (morales?|juridicas?|fisicas?)|asalariados?|empresas? (registradas|inscritas)/;
+    var PAD_CUANTO = /cuant[oa]s|numero de|cantidad de|\bhay\b|registrad|inscrit|padron|crec|por regimen|por estado|por sector|cada regimen/;
+    function padEstado(e) {
+      var v = PAD.ent[e.a];
+      if (!v) return null;
+      var x = PAD.t.estados;
+      var h = '<p>En ' + esc(PAD.corte) + ', <b>' + n(v[0]) + ' contribuyentes activos</b> tenían su domicilio fiscal en <b>' + esc(e.n) + '</b>' +
+        (v[1] != null ? ', y en ' + PAD.danio + ' el SAT autorizó a <b>' + n(v[1]) + ' donatarias</b> con domicilio ahí' : '') + '.</p>' +
+        '<p class="pa-chico">El SAT cuenta a cada contribuyente donde tiene su domicilio fiscal, no donde trabaja o vende: una empresa que opera en todo el país cuenta solo en un estado.</p>';
+      var fu = [{ que: 'Contribuyentes activos por entidad federativa, ' + PAD.corte, e: 'oficial', fu: PAD.fe }];
+      if (v[1] != null) fu.push({ que: 'Donatarias autorizadas por entidad federativa, ' + PAD.danio, e: 'oficial', fu: PAD.fd });
+      return { html: h, fu: fu, tit: 'El padrón del SAT en ' + e.n, ir: x.ir, sug: x.sug,
+        ci: [{ v: n(v[0]), etq: 'contribuyentes activos en ' + e.n, e: 'oficial' }].concat(v[1] != null ? [{ v: n(v[1]), etq: 'donatarias autorizadas', e: 'oficial' }] : []) };
+    }
+    function padResp(t) {
+      if (!PAD) return null;
+      if (/69 ?b|efos|lista negra|incumplid|no localizad|por contribuyente|cada contribuyente|reloj|cuanto (paga|pago|aporta)|me retienen/.test(t)) return null;
+      var religiosas = /asociaciones? religios|iglesias? (registradas|hay)|cuantas iglesias/.test(t);
+      var donat = /donatari|donativos? deducibles?|recibos? deducibles?/.test(t);
+      var nolucro = /sin fines de lucro|no lucrativ|fines no lucrativos/.test(t);
+      if (religiosas) return padTema('religiosas');
+      var sEs = estados(t).e;
+      if (donat && /cuant|hay|autorizad|registrad|revoc|pierden|tipo|padron|lista/.test(t)) return sEs.length === 1 ? padEstado(sEs[0]) : padTema('donatarias');
+      if (nolucro && PAD_CUANTO.test(t)) return padTema('nolucrativas');
+      if (!PAD_QUIEN.test(t) && !/\bresico\b|regimen(es)? fiscal/.test(t)) return null;
+      if (!PAD_CUANTO.test(t)) return null;
+      if (sEs.length === 1) return padEstado(sEs[0]);
+      if (/enajenacion|enajenan|venta de bienes/.test(t)) return padTema('enajenacion');
+      if (/regimen|resico|plataformas?|arrendamiento|sueldos y salarios|dividendos|intereses/.test(t)) return padTema('regimenes');
+      if (/sector|actividad economica|a que se dedican/.test(t)) return padTema('sectores');
+      if (/(que|cual) estados?|cada estado|por estado|por entidad|los estados/.test(t)) return padTema('estados');
+      if (/crec|desde 2010|evolucion|historic|cada ano|aumento/.test(t)) return padTema('serie');
+      if (/morales?|juridicas?|fisicas?|tipos?|grandes contribuyentes/.test(t)) return padTema('tipos');
+      return padTema('cuantos');
+    }
+
     /* La memoria de promesas (promesas.py, 01-11-2026): lo que se anunció, seguido hasta el Presupuesto, la Cuenta Pública y la ASF. */
     var PROM = D.prom || null;
     function promUna(p) {
@@ -1932,6 +1971,8 @@
       if (rsal) return fin(rsal, { tipo: 'sal' });
       var ramg = amgResp(t);
       if (ramg) return fin(ramg, { tipo: 'amg' });
+      var rpad = padResp(t);
+      if (rpad) return fin(rpad, { tipo: 'pad' });
       var rapu = apuResp(t);
       if (rapu) return fin(rapu, { tipo: 'apu' });
       var rprom = promResp(t);

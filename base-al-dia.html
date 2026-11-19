@@ -20,13 +20,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261119g">
-  <script src="assets/auditor/js/iconos.js?v=20261119g"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261119g"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261119g" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261119g">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261119g">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261119g">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261119h">
+  <script src="assets/auditor/js/iconos.js?v=20261119h"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261119h"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261119h" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261119h">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261119h">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261119h">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -193,10 +193,10 @@
         <h2 class="sr-only" id="resumen-tit">La base en números</h2>
         <div class="apartado-bloque">
         <div class="pe-resumen">
-          <div><b>23</b><span>fuentes de la base</span></div>
-          <div class="pe-r-d"><b>4</b><span>🤖 se actualizan solas cada semana</span></div>
+          <div><b>27</b><span>fuentes de la base</span></div>
+          <div class="pe-r-d"><b>6</b><span>🤖 se actualizan solas cada semana</span></div>
           <div class="pe-r-p"><b>3</b><span>🔔 avisan y se cotejan</span></div>
-          <div class="pe-r-h"><b>16</b><span>✋ se integran a mano</span></div>
+          <div class="pe-r-h"><b>18</b><span>✋ se integran a mano</span></div>
         </div>
         <p class="pe-regla">Las dependencias no publican cada día: cada fuente tiene su calendario. La base no se rehace a diario; se alimenta con cada novedad, y cada novedad pasa por el mismo camino: su huella, su cuadre y su chip. Lo que una dependencia no publica queda en el <a href="pendientes.html">Registro de pendientes</a>.</p>
         </div>
@@ -232,6 +232,18 @@
             <p class="pe-porque"><b>Tenemos:</b> consultado el 17-11-2026 · <b>Cada cuándo:</b> semanal</p>
             <p class="pe-quien"><b>🏛️ La publica:</b> Secretaría Anticorrupción y Buen Gobierno. Se actualiza con cada sanción que queda firme.</p>
             <p class="pe-donde"><a href="https://directoriosancionados.buengobierno.gob.mx/" target="_blank" rel="noopener">🔗 Dónde se publica ↗</a></p>
+          </article>
+          <article class="pe-item" id="fuente-padron-sat">
+            <h3 class="pe-que">🤖 Padrón de contribuyentes del SAT (por tipo, situación, régimen, entidad y sector)</h3>
+            <p class="pe-porque"><b>Tenemos:</b> septiembre de 2026 · <b>Cada cuándo:</b> mensual</p>
+            <p class="pe-quien"><b>🏛️ La publica:</b> SAT. El SAT actualiza sus hojas de datos abiertos del padrón cada mes, con cifras preliminares.</p>
+            <p class="pe-donde"><a href="https://www.sat.gob.mx/minisitio/DatosAbiertos/padron.html" target="_blank" rel="noopener">🔗 Dónde se publica ↗</a></p>
+          </article>
+          <article class="pe-item" id="fuente-udi">
+            <h3 class="pe-que">🤖 Valor de la UDI (para la exención de la casa habitación)</h3>
+            <p class="pe-porque"><b>Tenemos:</b> al 25-11-2026 · <b>Cada cuándo:</b> semanal</p>
+            <p class="pe-quien"><b>🏛️ La publica:</b> Banco de México. Banxico publica la UDI de cada día por adelantado (cuadro CP150); se consulta cada semana.</p>
+            <p class="pe-donde"><a href="https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=8&accion=consultarCuadro&idCuadro=CP150&locale=es" target="_blank" rel="noopener">🔗 Dónde se publica ↗</a></p>
           </article>
         </div>
         </div>
@@ -273,6 +285,18 @@
         </div>
         <div class="apartado-bloque">
         <div class="pe-lista">
+          <article class="pe-item" id="fuente-donatarias">
+            <h3 class="pe-que">✋ Donatarias autorizadas (estadísticas del SAT con base en el Anexo 14 de la RMF)</h3>
+            <p class="pe-porque"><b>Tenemos:</b> ejercicio 2026 · <b>Cada cuándo:</b> anual</p>
+            <p class="pe-quien"><b>🏛️ La publica:</b> SAT. El SAT publica el Anexo 14 en el DOF en enero y sus «Estadísticos Donatarias Autorizadas» en su micrositio; el PDF se lee con pdftotext.</p>
+            <p class="pe-donde"><a href="https://www.sat.gob.mx/minisitio/DonatariasAutorizadas/index.html" target="_blank" rel="noopener">🔗 Dónde se publica ↗</a></p>
+          </article>
+          <article class="pe-item" id="fuente-asociaciones-religiosas">
+            <h3 class="pe-que">✋ Asociaciones religiosas con registro constitutivo</h3>
+            <p class="pe-porque"><b>Tenemos:</b> sin integrar · <b>Cada cuándo:</b> mensual</p>
+            <p class="pe-quien"><b>🏛️ La publica:</b> Secretaría de Gobernación. Gobernación publica su numeralia en el portal de Asuntos Religiosos. Al 19-11-2026 no respondió a la descarga: sigue pendiente de integrar.</p>
+            <p class="pe-donde"><a href="https://asociacionesreligiosas.segob.gob.mx/es/AsuntosReligiosos/Numeralia" target="_blank" rel="noopener">🔗 Dónde se publica ↗</a></p>
+          </article>
           <article class="pe-item" id="fuente-comprasmx">
             <h3 class="pe-que">✋ Contratos públicos de ComprasMX</h3>
             <p class="pe-porque"><b>Tenemos:</b> contratos de 2025 y 2026 · <b>Cada cuándo:</b> mensual</p>
@@ -381,11 +405,11 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261119g</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261119h</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261119g"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261119g"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261119h"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261119h"></script>
 </body>
 </html>

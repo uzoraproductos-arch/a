@@ -455,6 +455,10 @@ def recolectar():
     import recursos_naturales
     for x in recursos_naturales.pendientes():
         out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
+    # El padrón del SAT y las asociaciones religiosas (19-11-2026).
+    import padron_sat
+    for x in padron_sat.pendientes():
+        out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'] or PLATAFORMA, x['enlace'], x['enlace_txt'], x['aparece']))
     # Los grupos empresariales y sus filiales (17-11-2026).
     import empresas_grupos
     for x in empresas_grupos.pendientes():

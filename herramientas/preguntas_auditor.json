@@ -2861,6 +2861,59 @@
    "no_dice": [
     "La basura: un servicio municipal"
    ]
+  },
+  {
+   "q": "¿Cuántos contribuyentes hay en el SAT?",
+   "ir": "datos-padron-sat-contribuyentes.html#pad-cuantos",
+   "dice": [
+    "88,857,058"
+   ]
+  },
+  {
+   "q": "¿Cuántas personas morales hay registradas en el SAT?",
+   "ir": "datos-padron-sat-contribuyentes.html#pad-tipos",
+   "dice": [
+    "2,660,233"
+   ]
+  },
+  {
+   "q": "¿Cuántos contribuyentes hay en RESICO?",
+   "ir": "datos-padron-sat-regimenes.html#pad-regimenes",
+   "dice": [
+    "4,504,292"
+   ]
+  },
+  {
+   "q": "¿Cuántos contribuyentes hay en Jalisco?",
+   "ir": "datos-padron-sat-estados.html#pad-estados",
+   "dice": [
+    "6,453,159"
+   ]
+  },
+  {
+   "q": "¿Cuántas donatarias autorizadas hay?",
+   "ir": "datos-padron-sat-sin-fines-de-lucro.html#pad-donatarias",
+   "dice": [
+    "10,017"
+   ]
+  },
+  {
+   "q": "¿Cuántas donatarias hay en Nuevo León?",
+   "ir": "datos-padron-sat-estados.html#pad-estados",
+   "dice": [
+    "666"
+   ]
+  },
+  {
+   "q": "¿Cuántas asociaciones religiosas hay?",
+   "ir": "datos-padron-sat-sin-fines-de-lucro.html#pad-religiosas",
+   "dice": [
+    "Gobernación"
+   ]
+  },
+  {
+   "q": "¿Cuánto ISR pago si vendo mi casa?",
+   "ir": "herramienta-calculadora-inmueble.html"
   }
  ]
 }

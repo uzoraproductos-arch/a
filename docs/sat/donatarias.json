@@ -1,0 +1,228 @@
+{
+ "que": "Donatarias autorizadas para recibir donativos deducibles del ISR (SAT, Estadísticos Donatarias Autorizadas)",
+ "doc": {
+  "tx": "SAT, Estadísticos Donatarias Autorizadas 2026 (con base en el Anexo 14 de la RMF publicado en el DOF el 09-01-2026)",
+  "url": "https://www.sat.gob.mx/minisitio/DonatariasAutorizadas/documentos/padron_donatarias/EstadisticosDonatariasAutorizadas2026.pdf",
+  "sha256": "690cf137603c97f2d75b6377771c78708f1dc34aa8738166fbf6fd5d8e82edc4",
+  "micrositio": "https://www.sat.gob.mx/minisitio/DonatariasAutorizadas/index.html"
+ },
+ "descarga": "2026-11-19",
+ "anio": 2026,
+ "total": 10017,
+ "anual": [
+  [
+   2020,
+   10192
+  ],
+  [
+   2021,
+   10254
+  ],
+  [
+   2022,
+   10679
+  ],
+  [
+   2023,
+   11284
+  ],
+  [
+   2024,
+   10876
+  ],
+  [
+   2025,
+   10361
+  ],
+  [
+   2026,
+   10017
+  ]
+ ],
+ "extranjero": [
+  [
+   2020,
+   4268
+  ],
+  [
+   2021,
+   4831
+  ],
+  [
+   2022,
+   4972
+  ],
+  [
+   2023,
+   6032
+  ],
+  [
+   2024,
+   5883
+  ],
+  [
+   2025,
+   5650
+  ],
+  [
+   2026,
+   5358
+  ]
+ ],
+ "por_entidad": {
+  "AGS": 118,
+  "BC": 376,
+  "BCS": 132,
+  "CAM": 25,
+  "CHIS": 189,
+  "CHIH": 594,
+  "CDMX": 2448,
+  "COAH": 265,
+  "COL": 99,
+  "DGO": 70,
+  "MÉX": 753,
+  "GTO": 329,
+  "GRO": 85,
+  "HGO": 127,
+  "JAL": 722,
+  "MICH": 282,
+  "MOR": 116,
+  "NAY": 47,
+  "NL": 666,
+  "OAX": 217,
+  "PUE": 254,
+  "QRO": 261,
+  "QROO": 164,
+  "SLP": 170,
+  "SIN": 259,
+  "SON": 318,
+  "TAB": 59,
+  "TAM": 162,
+  "TLAX": 65,
+  "VER": 369,
+  "YUC": 238,
+  "ZAC": 38
+ },
+ "por_tipo": {
+  "A": 6270,
+  "B": 1413,
+  "C": 93,
+  "D": 633,
+  "E": 188,
+  "F": 384,
+  "G": 12,
+  "H": 345,
+  "I": 99,
+  "J": 9,
+  "K": 41,
+  "L": 530
+ },
+ "tipos": {
+  "A": "Asistenciales",
+  "B": "Educativas",
+  "C": "Investigación científica o tecnológica",
+  "D": "Culturales",
+  "E": "Becantes",
+  "F": "Ecológicas",
+  "G": "Reproducción de especies en protección y peligro de extinción",
+  "H": "Apoyo económico de Donatarias Autorizadas",
+  "I": "Obras o servicios públicos",
+  "J": "Bibliotecas privadas",
+  "K": "Museos privados",
+  "L": "Desarrollo social"
+ },
+ "revocaciones": [
+  [
+   2020,
+   105
+  ],
+  [
+   2021,
+   145
+  ],
+  [
+   2022,
+   91
+  ],
+  [
+   2023,
+   454
+  ],
+  [
+   2024,
+   349
+  ],
+  [
+   2025,
+   270
+  ],
+  [
+   2026,
+   30
+  ]
+ ],
+ "cancelaciones": [
+  [
+   2021,
+   35
+  ],
+  [
+   2022,
+   20
+  ],
+  [
+   2023,
+   35
+  ],
+  [
+   2024,
+   28
+  ],
+  [
+   2025,
+   26
+  ],
+  [
+   2026,
+   1
+  ]
+ ],
+ "corte_movimientos": "30 de enero de 2026",
+ "perdieron_vigencia": [
+  [
+   2020,
+   1341,
+   "14/05/2020"
+  ],
+  [
+   2021,
+   468,
+   "12/01/2021"
+  ],
+  [
+   2022,
+   255,
+   "12/01/2022"
+  ],
+  [
+   2023,
+   246,
+   "11/01/2023"
+  ],
+  [
+   2024,
+   636,
+   "18/01/2024"
+  ],
+  [
+   2025,
+   369,
+   "03/01/2025"
+  ],
+  [
+   2026,
+   344,
+   "09/01/2026"
+  ]
+ ]
+}

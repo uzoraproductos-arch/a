@@ -355,6 +355,7 @@ def _datos(base, padron):
     ap = apu.estados(base)
     import dimension_social as dso
     so = dso.estados(base)
+    sat, sat_meta = __import__('padron_sat').planisferio(base)
     import dimension_penal as dpe
     pn = dpe.estados(base)
     pc = dpe.carpetas(base)
@@ -426,6 +427,10 @@ def _datos(base, padron):
         filas[-1].update({'soP': z['p'], 'soN': z['pers'], 'soX': z['x'], 'soI': z['ing'], 'soS': z['car']['seg'], 'soA': z['car']['sal'],
                           'soR': z['car']['rez'], 'soQ': z['r33'],
                           'soc': {'m': z['m'], 'ix': z['ingx'], 'v': z['car']['viv'], 'b': z['car']['bas'], 'al': z['car']['ali'], 'pt': z['pobT'], 'u': z['url']}})
+        # Su padrón del SAT (19-11-2026, padron_sat.py): contribuyentes activos por
+        # domicilio fiscal, por cada 100 habitantes, y donatarias autorizadas.
+        z = sat[e['abbr']]
+        filas[-1].update({'sat': z['n'], 'satH': z['h'], 'don': z['don']})
         # Su fraude y su cifra oculta (INEGI, ENVIPE 2026, datos de 2025).
         w = pn[e['abbr']]
         k = pc[e['abbr']]
@@ -494,6 +499,17 @@ LENTES = [
     # (cuadre_obras() y QUE_CUADRE de territorio_modulos.py).
     {'id': 'cua', 'dim': 'financiera', 'fmt': 'pct2', 'nom': 'No cuadra: lo recibido contra lo pagado', 'pal': 'rojo', 'est': 'derivado', 'anio': 2024,
      'que': tm.QUE_CUADRE},
+    # El padrón del SAT (19-11-2026, pedido del autor): quién está inscrito para
+    # pagar impuestos en cada estado, por su domicilio fiscal (padron_sat.py).
+    {'id': 'sat', 'dim': 'financiera', 'fmt': 'n', 'nom': 'Contribuyentes activos en el SAT', 'pal': 'azul', 'est': 'oficial', 'anio': 2026,
+     'que': ('Cuántas personas y empresas tienen su RFC activo con domicilio fiscal en el estado. El SAT cuenta a cada contribuyente donde tiene su domicilio fiscal, '
+             'no donde trabaja o vende: una empresa que opera en todo el país cuenta solo en un estado. Es cuántos están inscritos, no cuántos pagaron.')},
+    {'id': 'satH', 'dim': 'financiera', 'fmt': 'dec1', 'nom': 'Contribuyentes por cada 100 habitantes', 'pal': 'azul', 'est': 'derivado', 'anio': 2026,
+     'que': ('Contribuyentes activos del estado por cada 100 habitantes. Puede pasar de 100: un contribuyente puede ser una empresa y se cuenta donde tiene su '
+             'domicilio fiscal. No es una calificación del estado ni de su gobierno.')},
+    {'id': 'don', 'dim': 'financiera', 'fmt': 'n', 'nom': 'Donatarias autorizadas', 'pal': 'verde', 'est': 'oficial', 'anio': 2026,
+     'que': ('Organizaciones civiles y fideicomisos con domicilio en el estado que el SAT autorizó para recibir donativos deducibles del ISR, '
+             'según el Anexo 14 de la Resolución Miscelánea Fiscal publicado en enero.')},
     # La dimensión de la deuda (03-11-2026): lo que debe cada gobierno estatal
     # y los tres indicadores con que lo mide el Sistema de Alertas.
     {'id': 'deuda', 'dim': 'deuda', 'fmt': 'mdp', 'nom': 'Lo que debe', 'pal': 'rojo', 'est': 'oficial', 'anio': 2025,
@@ -820,6 +836,13 @@ def _fuentes(ref, base=None):
     extra.update({'pnN': ses + '. Suma de los doce meses de 2025 del tipo «Fraude».',
                   'pnC': ses + '. Carpetas de 2025 × 100,000 ÷ población a mitad de 2026 (CONAPO, la de la base). La división es nuestra, y junta dos años.'})
     extra['obr'] = tm.FUENTE_OBRAS
+    import padron_sat as psat
+    _ps, _pm = psat.planisferio(base) if base is not None else (None, None)
+    if _pm:
+        fs = 'SAT, datos abiertos del padrón por entidad federativa, corte de %s, cifras preliminares (<a href="%s">archivo</a>; huella SHA-256 en <code>docs/sat/padron-sat.json</code>)' % (
+            _pm['corte'], html.escape(_pm['fe']))
+        extra.update({'sat': fs + '.', 'satH': 'Contribuyentes activos × 100 ÷ población a mitad de 2026 (CONAPO, la de la base), con el %s. La división es nuestra.' % fs,
+                      'don': '%s (<a href="%s">PDF</a>; huella SHA-256 en <code>docs/sat/donatarias.json</code>).' % (html.escape(_pm['dtx']), html.escape(_pm['fd']))})
     extra.update({'peT': pe + '.', 'peV': pe + '. Miles de pesos ÷ 1,000: la cuenta es nuestra.'})
     extra.update({'incH': ic + '.', 'incN': ic + '.', 'sfT': sf + '.',
                   'incP': 'Superficie afectada por los incendios de 2025 (%s) ÷ superficie forestal (%s) × 100. La división es nuestra.' % (ic, sf)})

@@ -1,0 +1,46 @@
+/* Auditavisión · Calculadora Cívica › Vendes una casa o un terreno (aplicación 6,
+   19-11-2026). La página la escribe herramientas/cc_inmueble.py; la cuenta,
+   assets/auditor/js/cc-inmueble.js. Prefijo de clases: ci-. */
+.ci { padding-top: 26px; --ci: #0b2a63; --ci-acento: #c9921a; --ci-claro: #f6f1e4; --ci-linea: #dfe5f0; --ci-tx: #1c2a44; --ci-tx2: #44526b; --ci-rojo: #b3261e; }
+.ci *, .ci *::before, .ci *::after { box-sizing: border-box; }
+.ci a { color: #1a56b8; }
+.ci small { font-size: 14px; }
+.ci .est-chip { font-size: 12px; }
+.ci-tit { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 0 0 12px; font-size: 22px; line-height: 1.25; color: var(--ci); }
+.ci-txt { margin: 0 0 14px; max-width: 840px; font-size: 17px; line-height: 1.6; }
+.ci-n { display: inline-grid; place-items: center; flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%; background: var(--ci); color: #ffffff; font: 800 17px/1 Inter, system-ui, sans-serif; }
+.ci-arranque { margin: 0 0 26px; padding: 24px; border-radius: 18px; background: linear-gradient(135deg, #0b2a63 0%, #173f86 60%, #6b4a0e 140%); color: #ffffff; }
+.ci-kicker { margin: 0 0 6px; font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #f3d98c; }
+.ci-grande { margin: 0 0 12px; font-family: 'Playfair Display', Georgia, serif; font-size: 32px; line-height: 1.15; color: #ffffff; }
+.ci-arranque .ci-txt { color: #e9effb; }
+.ci-arranque a { color: #ffd36b; }
+.ci-privado { margin: 0; padding: 10px 14px; border-radius: 12px; background: rgba(255, 255, 255, .12); font-size: 16px; line-height: 1.5; color: #f1f5fd; }
+.ci-form { display: grid; gap: 18px; margin: 0 0 24px; }
+.ci-grupo { margin: 0; padding: 18px; border: 1px solid var(--ci-linea); border-radius: 16px; background: #ffffff; }
+.ci-grupo legend { padding: 0 6px; }
+.ci-et { display: block; margin: 12px 0 6px; font-size: 16px; font-weight: 700; color: var(--ci-tx); }
+.ci-in { width: 100%; max-width: 420px; min-height: 48px; padding: 10px 12px; border: 1px solid #b9c4d8; border-radius: 10px; font-size: 17px; color: var(--ci-tx); background: #ffffff; }
+.ci-fila { display: flex; flex-wrap: wrap; gap: 0 16px; }
+.ci-fila > div { flex: 1 1 160px; }
+.ci-pista { margin: 6px 0 0; font-size: 16px; line-height: 1.5; color: var(--ci-tx2); }
+.ci-check { display: flex; align-items: center; gap: 10px; min-height: 48px; margin-top: 12px; font-size: 16px; color: var(--ci-tx); }
+.ci-check input { width: 24px; height: 24px; flex: 0 0 auto; }
+.ci-acciones { margin: 0; }
+.ci-boton { min-height: 48px; padding: 10px 22px; border: 0; border-radius: 999px; background: var(--ci); color: #ffffff; font-size: 17px; font-weight: 700; cursor: pointer; }
+.ci-boton:hover, .ci-boton:focus-visible { background: #173f86; }
+.ci-res { margin: 0 0 24px; padding: 20px; border-radius: 16px; background: var(--ci-claro); }
+.ci-total p { margin: 0 0 10px; font-size: 17px; line-height: 1.6; color: var(--ci-tx); }
+.ci-cifra { font-size: 22px !important; }
+.ci-error { color: var(--ci-rojo) !important; font-weight: 700; }
+.ci-tabla-caja { overflow-x: auto; margin: 14px 0; }
+.ci-tabla { width: 100%; border-collapse: collapse; background: #ffffff; font-size: 16px; }
+.ci-tabla caption { text-align: left; padding: 0 0 8px; font-weight: 700; color: var(--ci-tx); }
+.ci-tabla th, .ci-tabla td { padding: 10px; border-bottom: 1px solid var(--ci-linea); text-align: left; vertical-align: top; }
+.ci-tabla td:nth-child(2) { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ci-tabla tbody th { font-weight: 400; }
+.ci-fuerte th, .ci-fuerte td { font-weight: 800 !important; }
+.ci-nota { margin: 0; font-size: 16px; line-height: 1.5; color: var(--ci-tx2); }
+.ci-aviso { padding: 20px; border: 1px solid var(--ci-linea); border-radius: 16px; background: #ffffff; font-size: 17px; line-height: 1.6; color: var(--ci-tx); }
+.ci-lista { padding-left: 22px; }
+.ci-lista li { margin: 0 0 10px; }
+.ci-fuentes, .ci-hermanas { font-size: 16px; }
