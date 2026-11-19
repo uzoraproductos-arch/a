@@ -3002,6 +3002,58 @@
   {
    "q": "Debo el predial en Tepatitlán, ¿cuánto son los recargos?",
    "ir": "herramienta-calculadora-predial.html?mun=tepatitlan"
+  },
+  {
+   "q": "servicio de revisión de un proveedor",
+   "ir": "servicio-diligencia.html"
+  },
+  {
+   "q": "servicio de revisión de tu cartera de contrapartes",
+   "ir": "servicio-contrapartes.html"
+  },
+  {
+   "q": "servicio de vigía y seguimiento periódico",
+   "ir": "servicio-seguimiento.html"
+  },
+  {
+   "q": "servicio de revisión de facturas por lote",
+   "ir": "servicio-facturas.html"
+  },
+  {
+   "q": "servicio de revisión de nómina",
+   "ir": "servicio-nomina.html"
+  },
+  {
+   "q": "servicio de gobernanza documental y cumplimiento",
+   "ir": "servicio-gobernanza.html"
+  },
+  {
+   "q": "servicio de radiografía de tu municipio o de tu estado",
+   "ir": "servicio-radiografia.html"
+  },
+  {
+   "q": "servicio de licencia de temporada para redacciones",
+   "ir": "servicio-temporada.html"
+  },
+  {
+   "q": "servicio de lo que recibes: kit de entrega-recepción",
+   "ir": "servicio-entrega.html"
+  },
+  {
+   "q": "servicio de revisión documental puntual",
+   "ir": "servicio-revision.html"
+  },
+  {
+   "q": "servicio de expediente de investigación",
+   "ir": "servicio-expediente.html"
+  },
+  {
+   "q": "servicio de talleres y capacitación",
+   "ir": "servicio-capacitacion.html"
+  },
+  {
+   "q": "servicio de licencia de las herramientas",
+   "ir": "servicio-licencia.html"
   }
  ]
 }

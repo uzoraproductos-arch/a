@@ -93,6 +93,27 @@
   function $(id) { return document.getElementById(id); }
   function val(id) { var el = $(id); return el ? el.value.trim() : ''; }
   function texto(sel) { var el = $(sel); return el && el.selectedIndex >= 0 ? el.options[el.selectedIndex].text : ''; }
+  /* Móntalo en el Auditor (pedido del autor, 19-11-2026: «contratas un servicio, se lo
+     montas al chat y el chat manda el dictamen, la respuesta técnica»). Tu pregunta va
+     al chat con el modo del servicio y su aplicación principal abierta en el marco
+     (abre=), y al dictamen, que la vuelve a contestar con la base: no lleva cifras tuyas,
+     no es un documento oficial y nunca un monto. Los datos los escribe sv_monta(). */
+  var MONTA = {};
+  try { MONTA = JSON.parse(($('svMontaDatos') || {}).textContent || '{}'); } catch (e) { MONTA = {}; }
+  function monta() {
+    var caja = document.createElement('div');
+    caja.className = 'sv-monta';
+    var sid = val('svServicio'), x = MONTA[sid] || ['inspector', '', ''], q = val('svPregunta').slice(0, 600);
+    var p = '?q=' + encodeURIComponent(q) + '&modo=' + encodeURIComponent(x[0]) + (x[1] ? '&abre=' + encodeURIComponent(x[1]) : '');
+    caja.innerHTML = '<p class="sv-monta-t"><span aria-hidden="true">🤖</span> Móntalo en el Auditor, antes de mandarlo</p>' +
+      '<p>' + (x[2] ? 'El chat abre <b></b> con tu pregunta, ' : 'El chat contesta tu pregunta, ') +
+      'te da la respuesta técnica con sus documentos y su dictamen. Así llegas a la cotización sabiendo lo que la plataforma ya resuelve gratis.</p>' +
+      '<div class="sv-monta-acc"><a class="sz-btn sz-btn-of" target="_blank" rel="noopener" href="herramienta-inspector-pregunta.html' + p + '">💬 Pregúntaselo al Auditor</a>' +
+      '<a class="sz-btn" target="_blank" rel="noopener" href="herramienta-inspector-dictamen.html' + p + '">🧾 Genera su dictamen técnico</a></div>' +
+      '<p class="sv-nota">El dictamen vuelve a contestar tu pregunta con la base de la plataforma: no lleva cifras tuyas, no es un documento oficial ni un peritaje, y nunca trae un monto.</p>';
+    if (x[2]) caja.querySelector('b').textContent = '«' + x[2] + '»';
+    return caja;
+  }
   function parte() { var r = form.querySelector('input[name="parte"]:checked'); return r ? r.value : ''; }
 
   // El tema llega escrito desde cada investigacion: servicios.html?tema=...
@@ -317,6 +338,7 @@
         + 'Mientras tanto, copia o descarga tu solicitud para tenerla lista.';
       resumen.appendChild(sin);
     }
+    resumen.appendChild(monta());
     var estado = document.createElement('p');
     estado.className = 'sv-estado';
     estado.setAttribute('role', 'status');
