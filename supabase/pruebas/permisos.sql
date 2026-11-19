@@ -261,6 +261,11 @@ insert into public.envios (tipo, asunto, texto) values ('tema', 'Nuevo', 'Un env
 select pg_temp.igual((select count(*) from public.envios where asunto = 'Viejo'), 0, 'un envío de hace más de 12 meses se borra');
 select pg_temp.igual((select count(*) from public.envios where asunto = 'Errata vieja' and correo is null), 1, 'una errata publicada vieja se queda sin correo');
 select pg_temp.igual((select count(*) from public.envios where asunto = 'Nuevo'), 1, 'el envío nuevo se guarda');
+-- Las preguntas sin respuesta también, 12 meses (20261119000002).
+insert into public.preguntas_bot (pregunta, motivo, version, creado) values ('¿pregunta de hace más de un año?', 'sin', '20251001a', now() - interval '13 months');
+insert into public.preguntas_bot (pregunta, motivo, version) values ('¿pregunta de hoy que barre las viejas?', 'sin', '20261119j');
+select pg_temp.igual((select count(*) from public.preguntas_bot where pregunta like '%hace más de un año%'), 0, 'una pregunta de hace más de 12 meses se borra');
+select pg_temp.igual((select count(*) from public.preguntas_bot where pregunta like '%de hoy que barre%'), 1, 'la pregunta nueva se guarda');
 
 -- 10. El código semanal de la administración (30-10-2026).
 set role authenticated;

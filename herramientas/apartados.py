@@ -1667,7 +1667,7 @@ AVISO = {
                     'Los formularios (algo raro con el dinero público, un dato mal, un tema para investigar) arman el texto en tu pantalla '
                     'para que tú lo copies o lo descargues: no se envían solos.</p>\n'
                     '<p>Lo que sí se guarda <b>en tu propio navegador</b>, para que la plataforma recuerde lo que hiciste, es esto. '
-                    'Nunca nos llega, y lo borras al borrar los datos del sitio en tu navegador:</p>\n'
+                    'Salvo donde se dice, nunca nos llega, y lo borras al borrar los datos del sitio en tu navegador:</p>\n'
                     '<ul>\n%s\n</ul>') % '\n'.join('<li><b>%s</b> (<code>%s</code>): %s</li>' % x for x in _AV_NAVEGADOR)},
         {'id': 'codigos', 'titulo': 'Si pides o canjeas un código de acceso', 'texto': 'La versión de prueba, por invitación (29-10-2026).', 'tarjetas': [],
          'bloque': ('<p><b>Al canjear un código</b> no te pedimos nada tuyo: en la base de datos queda que un código se canjeó, cuándo, y un número '
@@ -1694,7 +1694,7 @@ AVISO = {
                     'texto del botón), con la hora y el número al azar de tu pase (<code>av-pase</code>) o de tu visita (<code>av-sesion</code>). '
                     'Del Auditor solo se anota el modo y la página a la que te llevó la respuesta.</p>\n'
                     '<p><b>Lo que no se guarda:</b> tu dirección IP, tu navegador o dispositivo, lo que escribes en cualquier campo, tus preguntas '
-                    'al chat, ni nada que diga quién eres. No usamos herramientas de analítica de terceros ni publicidad: solo la administración '
+                    'al chat (salvo las que no supo contestar, arriba), ni nada que diga quién eres. No usamos herramientas de analítica de terceros ni publicidad: solo la administración '
                     'de la plataforma ve estas cuentas, en conjunto, y no se venden ni se comparten. Si tu código te llegó porque lo pediste con tu '
                     'correo, la administración ve tus minutos de uso y tus páginas vistas junto a tu solicitud. <b>Cuánto tiempo:</b> se borra solo '
                     'a los 12 meses.</p>\n'
@@ -3261,10 +3261,14 @@ if FUNCIONES:
             _sec['bloque'] = ('<p>El envío de formularios ya está conectado y este aviso lo describe arriba. Si algún día se guarda '
                               'algo más, este aviso lo dirá antes, y la fecha de arriba cambiará.</p>')
         if _sec['id'] == 'datos':
-            _sec['bloque'] = _cambia(_sec['bloque'], '<b>Ninguno en un servidor nuestro.</b> ', '<b>Solo lo que tú envías.</b> ')
+            _sec['bloque'] = _cambia(_sec['bloque'], '<b>Ninguno en un servidor nuestro.</b> ', '<b>Lo que tú envías</b> y, sin nada que diga quién eres, las preguntas que el Auditor no supo '
+                                     'contestar y cómo se usa la plataforma (abajo). ')
             _sec['bloque'] = _cambia(_sec['bloque'], 'Solo las ves tú; si quieres, las copias y nos las mandas.',
-                                     'Además, cada pregunta nueva nos llega sola, sin tu nombre ni tu correo (solo la pregunta, la '
-                                     'ficha que te dio el Auditor y la versión de la página), para saber qué fichas faltan primero.')
+                                     'Además, <b>cada una nos llega sola</b>, sin tu nombre ni tu correo: la pregunta, si no supo '
+                                     'contestarla o la marcaste «No era lo que buscaba», la ficha que te dio, la versión de la página, el '
+                                     'modo del chat y una huella cifrada de tu conexión (no tu dirección IP) para frenar el abuso. Para qué: '
+                                     'saber qué fichas faltan primero. Se borra sola a los <b>12 meses</b>. Por eso, <b>no escribas datos '
+                                     'personales en tus preguntas</b>.')
             _sec['bloque'] = _cambia(_sec['bloque'],
                 'No hay registro, ni cuentas, ni herramientas de analítica de terceros, ni cookies propias. '
                 'Los formularios (algo raro con el dinero público, un dato mal, un tema para investigar) arman el texto en tu pantalla '
