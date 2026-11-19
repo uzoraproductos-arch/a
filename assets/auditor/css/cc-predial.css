@@ -1,0 +1,11 @@
+/* Auditavisión · Calculadora Cívica › Tu impuesto predial (aplicación 8, 19-11-2026).
+   La página la escribe herramientas/cc_predial.py; la cuenta, assets/auditor/js/cc-predial.js.
+   Usa las clases ci- de cc-inmueble.css; aquí solo lo propio (prefijo cp-). */
+.cp-mun { margin-top: 14px; }
+.cp-mun p { margin: 0 0 10px; font-size: 17px; line-height: 1.6; color: var(--ci-tx); }
+.cp-fuente { font-size: 14px; color: var(--ci-tx2); }
+.cp-ok { padding: 10px 14px; border-radius: 12px; background: #eaf5ec; }
+.cp-falta { padding: 10px 14px; border-radius: 12px; background: var(--ci-claro); }
+.cp-compara { margin: 0 0 24px; }
+.ci fieldset:disabled { opacity: .55; }
+.ci-tabla td[colspan] { text-align: left; white-space: normal; }

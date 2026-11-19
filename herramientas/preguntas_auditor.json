@@ -2982,6 +2982,18 @@
   {
    "q": "¿Cuáles son los riesgos documentales de mi empresa?",
    "ir": "herramienta-inspector-riesgos.html"
+  },
+  {
+   "q": "¿Cuánto pago de predial en Zapopan?",
+   "ir": "herramienta-calculadora-predial.html"
+  },
+  {
+   "q": "Me llegó un mandamiento de ejecución por no pagar el predial",
+   "ir": "herramienta-calculadora-predial.html"
+  },
+  {
+   "q": "Simulador del impuesto predial",
+   "ir": "herramienta-calculadora-predial.html"
   }
  ]
 }
