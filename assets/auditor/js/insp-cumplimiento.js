@@ -80,6 +80,8 @@
       return '<li><span class="cu-et cu-et-' + f[1] + '">' + (f[1] === 'no' ? 'No' : 'No sé') + '</span> <b>' + q + '</b> ' +
         '<span class="cs-ley">(' + ley + ')</span><br>' + falta + (app ? ' ' + app.innerHTML : '') + '</li>';
     }).join('') : '<li>Nada con «no» ni «no sé».</li>';
+    var r = respuestas(), lr = Object.keys(r).map(function (k) { return k + '.' + r[k]; }).join(',');
+    $('cuMatriz').href = 'herramienta-inspector-riesgos.html?p=' + encodeURIComponent(perfil().join(',')) + '&r=' + encodeURIComponent(lr);
     $('cuRes').hidden = false;
     $('cuRes').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }

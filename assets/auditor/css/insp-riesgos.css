@@ -1,0 +1,20 @@
+/* Auditavisión · Tu matriz de riesgos documentales (insp_riesgos.py). Lo demás viene de cc-inmueble.css, insp-conservacion.css e insp-cumplimiento.css. */
+.rg-area { margin: 0 0 4px; opacity: .8; }
+.rg-preg { margin: 0 0 8px; }
+.rg-et { margin: 10px 0 6px; font-weight: 600; }
+.rg-cons { margin: 6px 0; }
+.rg-mat { width: 100%; min-width: 300px; border-collapse: separate; border-spacing: 4px; table-layout: fixed; }
+.rg-mat caption { text-align: left; font-weight: 600; padding-bottom: 6px; }
+.rg-mat th { padding: 6px; text-align: center; font-weight: 600; }
+.rg-mat tbody th { text-align: left; width: 26%; }
+.rg-c { vertical-align: top; padding: 8px; border-radius: 10px; }
+.rg-c ul { margin: 6px 0 0; padding-left: 16px; }
+.rg-c li { margin: 0 0 4px; }
+.rg-num { display: block; font-weight: 700; }
+.rg-z-alta { background: #f6dede; color: #6b1a1a; }
+.rg-z-media { background: #f6ead0; color: #5e4510; }
+.rg-z-baja { background: #dcefe3; color: #1f4f36; }
+.rg-c a { color: inherit; }
+.rg-et-z { display: inline-block; padding: 1px 8px; border-radius: 8px; font-weight: 700; }
+.rg-oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+@media (max-width: 520px) { .rg-c ul { padding-left: 12px; } .rg-mat { border-spacing: 2px; } .rg-c { padding: 6px; } }

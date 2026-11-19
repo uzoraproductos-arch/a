@@ -620,6 +620,8 @@ ALIAS_APPS = {
     'inspcumplimiento': ['autodiagnostico', 'cumples con tus papeles', 'cumplo con mis papeles', 'cumplo con la ley', 'estoy cumpliendo',
                          'que me falta para cumplir', 'checklist de cumplimiento', 'lista de cumplimiento', 'diagnostico de cumplimiento',
                          'cumplimiento documental', 'cumplo con la lfpdppp', 'cumplo con datos personales'],
+    'inspriesgos': ['matriz de riesgos documentales', 'mapa de riesgos documentales', 'riesgos documentales', 'riesgos de mis papeles',
+                    'por donde empiezo a cumplir', 'que atiendo primero', 'priorizar el cumplimiento'],
     'simulador-presupuesto.html': ['reparte el presupuesto', 'simulador del presupuesto'],
     'radar-estado-de-cuenta.html': ['estado de cuenta administrativo'],
 }

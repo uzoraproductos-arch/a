@@ -2970,6 +2970,18 @@
   {
    "q": "¿Qué me falta para cumplir con la ley de datos personales?",
    "ir": "herramienta-inspector-cumplimiento.html"
+  },
+  {
+   "q": "Arma mi matriz de riesgos documentales",
+   "ir": "herramienta-inspector-riesgos.html"
+  },
+  {
+   "q": "¿Por dónde empiezo a cumplir con mis papeles?",
+   "ir": "herramienta-inspector-riesgos.html"
+  },
+  {
+   "q": "¿Cuáles son los riesgos documentales de mi empresa?",
+   "ir": "herramienta-inspector-riesgos.html"
   }
  ]
 }

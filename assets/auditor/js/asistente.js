@@ -2891,8 +2891,13 @@
   var CONSERVA_RE = /(?:cu[aá]nto tiempo|cu[aá]ntos a[nñ]os|hasta cu[aá]ndo)\s+(?:[\wáéíóúñ]+\s+){0,3}(?:guard|conserv)|calendario de conservaci|plazo de conservaci|conservaci[oó]n de (?:documentos|papeles|archivos|la contabilidad|expedientes)|gobernanza documental|(?:destruir|tirar|depurar)\s+(?:[\wáéíóúñ]+\s+){0,2}(?:papeles|documentos|archivos?|expedientes|facturas)/i;
   /* El autodiagnóstico de cumplimiento (19-11-2026): «¿cumplo con…?», «¿qué me falta para cumplir?». Va antes que el calendario. */
   var CUMPLE_RE = /autodiagn[oó]stico|diagn[oó]stico de cumplimiento|(?:checklist|lista) de cumplimiento|cumplimiento documental|(?:cumplo|cumple|cumplimos|cumples|estoy cumpliendo|estamos cumpliendo)\s+(?:[\wáéíóúñ]+\s+){0,3}(?:papeles|documentos|archivos?|la ley de datos|datos personales|lfpdppp|ley general de archivos|obligaciones documentales)|qu[eé]\s+(?:me|nos)\s+falta\s+para\s+cumplir/i;
+  var RIESGO_DOC_RE = /(?:matriz|mapa)(?: de calor)? de riesgos? (?:documental(?:es)?|de (?:mis |nuestros |los )?(?:papeles|documentos|archivos)|de cumplimiento(?: documental)?|de datos personales)|riesgos? documental(?:es)?|por d[oó]nde empiezo a cumplir|qu[eé] (?:atiendo|atendemos|arreglo) primero (?:de|en) (?:mis |nuestros )?(?:papeles|documentos|cumplimiento)/i;
   function respuesta(q, previas) {
     var t = String(q || '').trim().replace(/^[¿¡\s]+/, '').replace(/[?!.\s]+$/, '');
+    if (RIESGO_DOC_RE.test(t)) {
+      var rrg = abre(q, /servicio|cotiza|h[aá]g[ae]n|armen/i.test(t) ? 'servicio-gobernanza.html' : 'herramienta-inspector-riesgos.html');
+      if (rrg) return rrg;
+    }
     if (CUMPLE_RE.test(t)) {
       var rcu = abre(q, /servicio|cotiza|h[aá]g[ae]n|revisen/i.test(t) ? 'servicio-gobernanza.html' : 'herramienta-inspector-cumplimiento.html');
       if (rcu) return rcu;

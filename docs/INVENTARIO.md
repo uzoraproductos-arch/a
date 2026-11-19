@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 831 |
+| Páginas revisadas | 832 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -212,7 +212,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-asf-serie.html` | Seis años de revisiones · Auditavisión | apartados.py | 44 | 0 | 10 | 4 | 1 |
 | `herramienta-inspector-asf.html` | Expedientes de casos de la ASF · Auditavisión | apartados.py | 59 | 0 | 3 | 3 | 0 |
 | `herramienta-inspector-conservacion.html` | ¿Hasta cuándo guardas tus papeles? · Auditavisión | apartados.py | 48 | 0 | 2 | 1 | 0 |
-| `herramienta-inspector-cumplimiento.html` | ¿Cumples con tus papeles? · Auditavisión | apartados.py | 62 | 0 | 2 | 1 | 0 |
+| `herramienta-inspector-cumplimiento.html` | ¿Cumples con tus papeles? · Auditavisión | apartados.py | 63 | 0 | 2 | 1 | 0 |
 | `herramienta-inspector-dictamen.html` | Dictamen cívico independiente · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-efos.html` | Lista negra del SAT · Auditavisión | apartados.py | 52 | 0 | 2 | 7 | 0 |
 | `herramienta-inspector-entes-directorio.html` | Directorio de entes públicos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
@@ -229,8 +229,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-pregunta.html` | Auditor Virtual · Auditavisión | apartados.py | 41 | 0 | 1 | 1 | 1 |
 | `herramienta-inspector-radar.html` | Radar por entidad · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-resultados.html` | Revisa tu estado de resultados · Auditavisión | apartados.py | 46 | 0 | 0 | 2 | 0 |
+| `herramienta-inspector-riesgos.html` | Tu matriz de riesgos documentales · Auditavisión | apartados.py | 52 | 0 | 2 | 1 | 0 |
 | `herramienta-inspector-verifica.html` | Verifica un estado de cuenta · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector.html` | Modo Inspector · Auditavisión | apartados.py | 57 | 0 | 0 | 0 | 0 |
+| `herramienta-inspector.html` | Modo Inspector · Auditavisión | apartados.py | 58 | 0 | 0 | 0 | 0 |
 | `herramienta-megaobras-cero.html` | Las cuatro cifras y los rescates · Auditavisión | apartados.py | 56 | 0 | 35 | 55 | 7 |
 | `herramienta-megaobras-investiga.html` | Haz tu propia investigación · Auditavisión | apartados.py | 117 | 0 | 59 | 94 | 22 |
 | `herramienta-megaobras-pulso-calculo.html` | Cómo se calcula · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
@@ -245,7 +246,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 54 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 67 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 395 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 396 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `informes-documentar-para-sancionar.html` | Informe especial: Documentar para sancionar · Auditavisión | apartados.py | 54 | 0 | 40 | 8 | 2 |
@@ -828,7 +829,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `servicio-entrega.html` | Lo que recibes: kit de entrega-recepción · Auditavisión | apartados.py | 82 | 0 | 0 | 0 | 0 |
 | `servicio-expediente.html` | Expediente de investigación · Auditavisión | apartados.py | 86 | 0 | 0 | 0 | 0 |
 | `servicio-facturas.html` | Revisión de facturas por lote · Auditavisión | apartados.py | 85 | 0 | 0 | 0 | 0 |
-| `servicio-gobernanza.html` | Gobernanza documental y cumplimiento · Auditavisión | apartados.py | 93 | 0 | 0 | 0 | 0 |
+| `servicio-gobernanza.html` | Gobernanza documental y cumplimiento · Auditavisión | apartados.py | 95 | 0 | 0 | 0 | 0 |
 | `servicio-licencia.html` | Licencia de las herramientas · Auditavisión | apartados.py | 81 | 0 | 0 | 0 | 0 |
 | `servicio-nomina.html` | Revisión de nómina · Auditavisión | apartados.py | 91 | 0 | 0 | 0 | 0 |
 | `servicio-radiografia.html` | Radiografía de tu municipio o de tu estado · Auditavisión | apartados.py | 86 | 0 | 0 | 0 | 0 |
@@ -844,7 +845,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `servicios-por-que.html` | Servicios de investigación · Auditavisión | apartados.py | 85 | 0 | 3 | 2 | 0 |
 | `servicios-preguntas.html` | Preguntas · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
 | `servicios-tu-perfil.html` | Tu perfil · Auditavisión | apartados.py | 98 | 0 | 0 | 0 | 0 |
-| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 119 | 0 | 0 | 1 | 0 |
+| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 121 | 0 | 0 | 1 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 

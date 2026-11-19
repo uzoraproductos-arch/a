@@ -296,7 +296,7 @@ def construir(base, ref):
       <tbody id="cuAreas"></tbody></table></div>
     <h3 class="ci-tit">Lo que falta, con su artículo</h3>
     <ol class="ci-lista" id="cuFalta"></ol>
-    <p class="ci-acciones"><button type="button" class="ci-boton cu-sec" id="cuImprime">🖨️ Imprímelo</button></p>
+    <p class="ci-acciones"><a class="ci-boton" id="cuMatriz" href="herramienta-inspector-riesgos.html">📊 Llévalo a tu matriz de riesgos</a> <button type="button" class="ci-boton cu-sec" id="cuImprime">🖨️ Imprímelo</button></p>
     <p class="ci-nota">Es tu respuesta contada (auditada), no una calificación, una certificación ni una auditoría de tus papeles. Para que alguien lo revise contra tus documentos: <a href="servicio-gobernanza.html">🗄️ el servicio de gobernanza documental</a>.</p>
   </section>
 

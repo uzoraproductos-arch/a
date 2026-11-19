@@ -905,6 +905,10 @@ HERRAMIENTAS = [
          # documental): el autodiagnostico de cumplimiento (insp_cumplimiento.py).
          ('inspcumplimiento', '✅', '¿Cumples con tus papeles?', 'Gobernanza documental',
           'Un autodiagnóstico de 25 preguntas, una por obligación de la ley (fiscal, mercantil, laboral, prevención de lavado, datos personales y archivos públicos): contesta sí, no o no sé y ve qué tienes al corriente y qué falta, con su artículo.'),
+         # Decimocuarta desde el 19-11-2026 (entrega 3 del servicio de gobernanza
+         # documental): la matriz de riesgos (insp_riesgos.py).
+         ('inspriesgos', '📊', 'Tu matriz de riesgos documentales', 'Gobernanza documental',
+          'Las 25 obligaciones del autodiagnóstico en una matriz de probabilidad por gravedad: tu respuesta dice qué tan probable es fallar, tú dices qué tan grave sería, y te queda por dónde empezar, con lo que prevé la ley.'),
          ('inspverifica', '🔏', 'Verifica un estado de cuenta', 'Busca y verifica',
           '¿Te compartieron un estado de cuenta de Auditavisión? Escribe su folio o su huella digital y comprueba, cifra por cifra, que no se alteró.'),
          # Septima desde el 28-10-2026 (pedido del autor): el nepotismo, con su
@@ -987,7 +991,7 @@ MODULOS_PROPIOS = {'inspverifica'}
 # modulo de herramientas/ arma su pagina con construir(base, ref) y dice
 # sus ESTILOS y SCRIPTS (assets/auditor/css y js).
 INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspentes': 'insp_entes',
-                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'insppadron': 'insp_padron', 'inspnepotismo': 'nepotismo', 'inspfactura': 'insp_factura', 'inspresultados': 'insp_resultados', 'inspmia': 'insp_mia', 'inspconservacion': 'insp_conservacion', 'inspcumplimiento': 'insp_cumplimiento',
+                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'insppadron': 'insp_padron', 'inspnepotismo': 'nepotismo', 'inspfactura': 'insp_factura', 'inspresultados': 'insp_resultados', 'inspmia': 'insp_mia', 'inspconservacion': 'insp_conservacion', 'inspcumplimiento': 'insp_cumplimiento', 'inspriesgos': 'insp_riesgos',
                 # Calculadora Civica (pedido del autor, 12-10-2026): sus tres
                 # aplicaciones que abrian el motor en un marco.
                 'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj', 'ccinmueble': 'cc_inmueble', 'ccbolsa': 'cc_bolsa',
@@ -2106,7 +2110,7 @@ SERVICIOS = [
      'Señales por recibo y por trabajador, sin nombres, cada una con su artículo. El lector gratuito revisa un recibo en tu navegador.',
      'Empresas, despachos contables, tesorerías y órganos internos de control.', 'prevencion'),
     # 19-11-2026, propuesta aceptada por el autor («sí, arranca»): gobernanza documental, empezando por el calendario de
-    # conservación (insp_conservacion.py); entrega 2, el autodiagnóstico (insp_cumplimiento.py). Sigue la matriz de riesgos.
+    # conservación (insp_conservacion.py); entrega 2, el autodiagnóstico (insp_cumplimiento.py); entrega 3, la matriz de riesgos (insp_riesgos.py).
     ('gobernanza', '🗄️', 'Gobernanza documental y cumplimiento',
      'Qué papeles guarda tu empresa, hasta cuándo y con qué ley: tu calendario de conservación por tipo de documento (fiscal, mercantil, laboral, '
      'seguridad social, prevención de lavado y datos personales), con lo que ya toca destruir y cómo hacerlo sin incumplir.',
