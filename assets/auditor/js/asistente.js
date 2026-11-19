@@ -448,7 +448,7 @@
     var ir = r.ir || (r.ficha && r.ficha.ir);
     return '<p class="pa-acc">' +
       (ir ? '<a class="pa-boton pa-ver" href="' + esc(ir[0]) + '">📖 Saber más <span class="pa-ver-donde">· ' + esc(ir[1]) + '</span> ➔</a>' : '') +
-      (r.ficha ? '<a class="pa-boton pa-genera" href="' + esc(enlaceDictamen(q, previas || [])) + '" target="_blank" rel="noopener">🧾 Generar dictamen</a>' : '') +
+      (r.ficha ? '<a class="pa-boton pa-genera" href="' + esc(enlaceDictamen(q, previas || []) + (r.abre ? '&abre=' + encodeURIComponent(r.abre) : '')) + '" target="_blank" rel="noopener">🧾 Generar dictamen</a>' : '') +
       '<button type="button" class="pa-boton pa-noera" data-pa-q="' + esc(q) + '" data-pa-tit="' + esc(r.ficha ? r.ficha.tit : '') + '">🤔 No era lo que buscaba</button></p>';
   }
 
@@ -2782,7 +2782,73 @@
       sug: [uno ? 'Contratos de ' + uno + ' en ComprasMX' : '¿Cómo reviso a mi cliente?', '¿Qué es una EFOS?', '¿Qué es una actividad vulnerable?'] };
   }
 
-  function respuesta(q, previas) { return quizaEmpresa(q, respuesta0(q, previas)); }
+  /* El índice general cuelga del Auditor (decisión del autor, 19-11-2026): «el índice»,
+     «¿qué tiene la plataforma?» o «mapa del sitio» lo abren; «índice de…» sigue siendo un tema. */
+  var INDICE_RE = /^(?:(?:el|tu|su|ver|abre|abrir|dame|mu[eé]strame)\s+)*(?:[ií]ndice(?:\s+general)?|mapa del sitio)(?:\s+de\s+(?:la plataforma|auditavisi[oó]n|todo))?\s*\??$|^(?:qu[eé]|todo lo que)\s+(?:tiene|tienen|hay en|ofrece|ofrecen|contiene|sabe)(?:\s+(?:la plataforma|auditavisi[oó]n|el auditor))?\s*\??$/i;
+  function respuesta(q, previas) {
+    var t = String(q || '').trim().replace(/^[¿¡\s]+/, '').replace(/[?!.\s]+$/, '');
+    if (INDICE_RE.test(t)) {
+      var ri = abre(q, 'indice.html');
+      if (ri) {
+        ri.html = '<p><span aria-hidden="true">🗂️</span> Todo lo que sé está en el <a href="indice.html"><b>Índice general</b></a>, en el orden de las pestañas: ' +
+          'yo y mis cuatro modos, el Planisferio con el portal de cada entidad, la Enciclopedia, Comunidad, el Noticiero y los Servicios.</p>' +
+          '<p>Ábrelo con «Saber más», o escríbeme aquí lo que buscas y te llevo directo.</p>';
+        ri.ir = ['indice.html', 'Índice general'];
+        return ri;
+      }
+    }
+    return quizaEmpresa(q, respuesta0(q, previas));
+  }
+  /* Todo pasa por el Auditor (decisión del autor, 19-11-2026: «entre pestañas no se
+     vinculan: todo es a través del Auditor»). Una liga de otra pestaña llega al chat
+     con ?q= y ?abre=<página>: el chat contesta con esa página (o abre la aplicación en
+     su marco), con su dictamen, «Saber más» y el servicio que toca. Solo acepta una
+     página de la plataforma; una que el chat no conozca se contesta como pregunta. */
+  var ABRE_OK = /^[a-z0-9][a-z0-9-]*\.html([?#][^\s<>"'\\]*)?$/i, abreUna = null;
+  function abre(q, liga) {
+    if (!liga || !ABRE_OK.test(liga)) return null;
+    var base = sinParam(liga), a = appDeLiga(liga), r;
+    if (a && APP[a.id]) {
+      r = conApp(respApp(a.id, liga, '<p><span aria-hidden="true">' + a.ico + '</span> <b>' + esc(a.n) + '</b>' + (a.grupo ? ', de ' + esc(a.grupo) : '') + '. ' + esc(a.desc || a.frase || '') + '</p>' +
+        '<p>Úsala aquí abajo, sin salir del chat, o ábrela completa con «Saber más».</p>', { sug: [] }));
+    } else {
+      var hit = null, pag = null;
+      F.forEach(function (f) {
+        if (!f.ir) return;
+        if (!hit && f.ir[0] === liga) hit = f;
+        if (!pag && f.t === 'pagina' && sinParam(f.ir[0]) === base) pag = f;
+      });
+      /* Una nota «Al momento» tiene su página propia y su ficha en la columna (#col-<id>). */
+      var col = /^noticias-al-momento-(.+)\.html$/.exec(base);
+      if (!hit && !pag && col) F.forEach(function (f) { if (!pag && f.ir && /#col-/.test(f.ir[0]) && f.ir[0].split('#col-')[1] === col[1]) pag = f; });
+      if (!hit && !pag) F.forEach(function (f) { if (!pag && f.ir && sinParam(f.ir[0]) === base) pag = f; });
+      var f = hit || pag;
+      if (f && charla) {
+        r = charla.deFicha(f);
+        r.ir = [liga, (hit && r.ir && r.ir[1]) || f.tit];
+      } else {
+        /* Una página sin ficha propia (un mapa, un tablero): el chat la abre igual, sin cifras. */
+        r = { html: '<p><span aria-hidden="true">📄</span> Te llevo a <b>' + esc(q) + '</b>. Ábrela con «Saber más»; si tienes una pregunta sobre lo que ves ahí, escríbemela aquí.</p>',
+          ir: [liga, q], rec: [], sug: [] };
+      }
+    }
+    r.abre = liga;
+    return r;
+  }
+  /* Las aplicaciones del chat son servicios (pedido del autor, 19-11-2026): si la
+     respuesta lleva a una página que un servicio aprovecha (servicios_fichas.py), se
+     ofrece el servicio, con su página y su cotización. Nunca un monto. */
+  var SRV = (B.dat && B.dat.srv) || {};
+  function servicioHtml(r) {
+    if (!r || r.plat) return '';
+    var u = (r.app && r.app.url) || (r.ir && r.ir[0]) || (r.ficha && r.ficha.ir && r.ficha.ir[0]) || '';
+    var b = sinParam(u), l = SRV[b];
+    if (!b || /^servicios?(-|\.html)/.test(b) || !l || !l.length) return '';
+    return '<div class="pa-srv"><p class="pa-srv-t"><span aria-hidden="true">🧰</span> Esto también lo hacemos como servicio</p><ul>' + l.map(function (x) {
+      return '<li><a class="pa-srv-n" href="' + esc(x[4]) + '"><span aria-hidden="true">' + x[1] + '</span> <b>' + esc(x[2]) + '</b></a><small>' + esc(x[3]) + '</small>' +
+        '<a class="pa-srv-pide" href="servicios-cotiza.html?servicio=' + encodeURIComponent(x[0]) + '#solicitud">Pide una cotización ➔</a></li>';
+    }).join('') + '</ul><p class="pa-chico">Lo básico lo haces tú, gratis, aquí en el chat. El servicio es para ir más a fondo: el costo y el plazo te llegan por escrito antes de empezar.</p></div>';
+  }
   function respuesta0(q, previas) {
     /* Una liga que ya está en la hemeroteca abre su cotejo antes que cualquier palabra de su dirección
        («pemex-perdidas-…-deuda» se iba al pendiente de la deuda de Pemex, 01-11-2026). */
@@ -2988,7 +3054,8 @@
     var previas = historial.slice(-4);
     historial.push(q);
     controles();
-    var r = respuesta(q, previas);
+    var r = (abreUna && abre(q, abreUna)) || respuesta(q, previas);
+    abreUna = null;
     /* La lista negra del SAT contesta cuando termina de descargar la lista. */
     var espera = r.espera ? r.espera.then(function (x) { r = x; }) : null;
     var pinta = function (li) {
@@ -3002,7 +3069,7 @@
       if (r.anota && !ya) anota(q, 'sin');
       r.q = q;
       li.querySelector('.pa-burbuja').innerHTML = cabResp(r) + remiteHtml(q, r) + '<div class="pa-resp">' + esquema(r.html) + '</div>' + acciones(q, r, previas) +
-        expInvHtml(q, r) +
+        servicioHtml(r) + expInvHtml(q, r) +
         periodistaHtml(q, r) + capaModoHtml(q, r) +
         appDe(r) +
         panel(r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r))), '🧭', 'Explóralo a fondo') +
@@ -3060,7 +3127,7 @@
       return;
     }
     antes.forEach(function (x) { respuesta(x); });
-    var r = respuesta(q, antes);
+    var r = abre(q, ps.get('abre')) || respuesta(q, antes);
     if (r && r.espera) r.espera.then(function (x) { arma(x); }); else arma(r);
     function arma(r) {
     var f = r && !r.sin ? r.ficha : null;
@@ -3089,7 +3156,7 @@
     }
   }
   if (dic) {
-    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo };
+    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo, abre: abre, servicio: servicioHtml };
     armaDictamen();
     return;
   }
@@ -3343,7 +3410,7 @@
   })();
 
   /* Para revisar cómo puntúa una pregunta desde la consola. */
-  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo };
+  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo, abre: abre, servicio: servicioHtml };
   pintaLista();
   if (canal) document.getElementById('paSinRespNota').innerHTML = 'La lista se guarda solo en tu navegador y no se envía sola: con «Enviarlas a Auditavisión» nos la haces llegar tú.';
   var ps = new URLSearchParams(location.search), pre = ps.get('q'), lista = ps.get('p');
@@ -3355,6 +3422,7 @@
     if (!MODOS_OK[m]) { try { m = viejo(localStorage.getItem('av-modo')); } catch (e) { m = null; } }
     poneModo(MODOS_OK[m] ? m : modoActual());
   })();
+  abreUna = ps.get('abre');
   if (pre) responde(pre, true);
   /* ?p= (las imágenes de la portada, 23-10-2026): la pregunta queda escrita
      y el lector decide cuándo enviarla. */

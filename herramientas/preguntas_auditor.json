@@ -2648,6 +2648,18 @@
   {
    "q": "¿Cómo se cobra la revisión de facturas por lote?",
    "ir": "servicio-facturas.html"
+  },
+  {
+   "q": "El índice general",
+   "ir": "indice.html"
+  },
+  {
+   "q": "¿Qué tiene la plataforma?",
+   "ir": "indice.html"
+  },
+  {
+   "q": "Mapa del sitio",
+   "ir": "indice.html"
   }
  ]
 }

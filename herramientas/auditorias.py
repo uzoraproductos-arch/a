@@ -313,11 +313,11 @@ def _datos(id_):
             ]
         elif id_ == 'deuda-congreso-2027':
             cuanto = [
-                (_mdp(c['ingresos_totales_2027_mdp']), 'ingresos totales estimados en la Ley de Ingresos 2027 aprobada por Diputados y Senado', 'oficial', None),
+                (_mdp(c['ingresos_totales_2027_mdp']), 'ingresos totales estimados en la Ley de Ingresos 2027 (DOF 13-11-2026), aprobada por Diputados y Senado', 'oficial', None),
                 (_mdp(c['techo_deuda_interna_2027_mdp']), 'techo de endeudamiento interno neto autorizado para 2027 (%d votos a favor y %d en contra en Diputados)' % (c['votos_diputados_favor'], c['votos_diputados_contra']), 'oficial', None),
                 (_mdp(c['costo_financiero_2027_mdp']), 'costo financiero de la deuda propuesto para 2027 en el Paquete Económico', 'oficial', None),
                 ('BBB+ → BBB (déficit 4.61 % del PIB en 2026; deuda 61.17 % en 2030)', 'ajuste y proyecciones del reporte soberano de HR Ratings (15-10-2026)', 'oficial', None),
-                ('Por publicar', 'decreto de la Ley de Ingresos 2027 en el DOF y texto íntegro de las reservas votadas', 'pendiente', x['pendiente_id']),
+                ('DOF 13-11-2026', 'publicación de la Ley de Ingresos 2027; rige desde el 1 de enero de 2027', 'oficial', None),
             ]
         elif id_ == 'inversion-megaobras':
             cuanto = [

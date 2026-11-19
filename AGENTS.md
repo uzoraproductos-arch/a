@@ -311,6 +311,58 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   `asistente.js`). Una dimensión nueva que se pinte necesita su pregunta en
   `preguntas_auditor.json`.
 
+### 0 quinquies. Todo pasa por el Auditor
+
+**Decisión del autor, 19-11-2026, y es el pilar de la plataforma:** «el chat se alimenta y
+vincula de todas las pestañas y tarjetas y subtarjetas dentro de ellas, pero entre pestañas no se
+vinculan: todo es a través del Auditor», y «las aplicaciones del chat se convierten en servicios».
+La Enciclopedia es el respaldo de la base de datos, ordenada en tarjetas; **la puerta es el chat**:
+respuesta rápida, «Generar dictamen», «Saber más» (la página a fondo) y el servicio que toca.
+
+- **La plataforma es una estrella.** El Auditor (`herramienta-inspector-pregunta.html` y el
+  dictamen) es el centro; Planisferio, Comunidad (con la Enciclopedia), Noticiero y Servicios son
+  puntas. Dentro de una pestaña las páginas se ligan entre sí; **una liga a otra pestaña pasa por el
+  chat**: `herramienta-inspector-pregunta.html?q=<pregunta>&modo=<modo>&abre=<página>`
+  (`servicios_fichas.por_auditor()`). El chat contesta con esa página o abre la aplicación en su
+  marco (`abre()` de `asistente.js`), y el dictamen lleva el mismo `&abre=`.
+- **Las aplicaciones del chat son servicios.** Si una respuesta lleva a una página que un servicio
+  aprovecha (su `hace` en `FICHAS` de `servicios_fichas.py`), abajo sale «Esto también lo hacemos
+  como servicio», con su página y su cotización (`servicioHtml()` de `asistente.js`, que lee `srv`
+  de la base: `mapa_chat()`). **Nunca un monto.**
+- **Las cuatro pestañas ya están mudadas** (19-11-2026: Servicios, y el mismo día, a pedido del
+  autor, «todas las demás pestañas al chat»). `pagina()` de `apartados.py` pasa cada página de
+  Planisferio, Comunidad, Noticiero y Servicios por `por_auditor_html()`: una liga nueva a otra
+  pestaña se muda sola, con el modo del servicio o el de la página a la que va (`modos.py`). Las
+  ligas que arma el navegador (la ficha del Planisferio) las muda al tocarlas `volver-auditor.js`,
+  con la misma regla. La pestaña de cada página sale de su nombre (`pestana_de()`); si una página
+  marca otra, va en `EXCEPCIONES` (y en `EXC` de `volver-auditor.js`) o la revisión se detiene.
+- **Ni una liga directa entre pestañas.** `herramientas/vinculos_auditor.py` (corre en `revision.py`)
+  las cuenta, sin la cabecera, el menú, las migas, el cajón «Cuéntanos lo que viste» ni el pie: **si
+  aparece una, la revisión se detiene**. La portada (`index.html`) no es pestaña y liga a todas.
+- **Cada liga `abre=` del sitio se prueba** en `prueba_auditor.py` (587 al 19-11-2026): la página debe
+  existir y el chat debe abrirla. Una página sin ficha propia (un mapa, un tablero) se abre igual, sin cifras.
+- **La Enciclopedia es el espejo de la base de datos** (el autor, 19-11-2026): de ahí toma el
+  Auditor y lo desarrolla. **Lo que el Planisferio enseña abre en páginas del propio Planisferio**
+  («que se abran en su propia página automatizada… no dentro de la enciclopedia»): sus portales y
+  sus temas (`TEMAS` de `planisferio.py`) y, para lo que antes mandaba a la Enciclopedia (las fuentes,
+  el estado de cuenta y de resultados de cada estado, el Contexto dimensional, las leyes en sus tres
+  niveles, los Datos de cada dimensión), **sus páginas propias** `planisferio-ficha-<página>.html`
+  (`herramientas/planisferio_espejo.py`). `a_espejo()` cambia cada liga del Planisferio a la Comunidad
+  por la de su página propia y `generar()` la escribe al final, desde la página ya generada de la
+  Enciclopedia: **la misma página, nunca una copia a mano ni una cifra distinta**, marcada Planisferio,
+  con sus migas, el aviso «Lo ves desde el Planisferio» y su canónica en la original (`sitemap.py` no la
+  lista y el chat no la indexa: contesta con la original). Dentro, a otra página propia va directo y a
+  otra pestaña, por el Auditor. **Nadie la edita**: una nueva sale sola cuando el Planisferio liga a otra
+  página de la Enciclopedia, y la que ya no se pide se borra. `planisferio.js` liga a ellas por su nombre
+  (si liga a una que ninguna página pide, la generación se detiene), y `volver-auditor.js` deja en su
+  página propia la liga que una aplicación reflejada arma a sí misma.
+- **El índice general cuelga del Auditor** (el autor, 19-11-2026: «se va a integrar nuestro índice
+  general… y todo esto queda vinculado con nuestro auditor»). `indice.html` marca la pestaña Auditor
+  (con el Registro de pendientes y la base al día, que cuelgan de él: `EXCEPCIONES`), lleva a todas
+  las pestañas, Planisferio y Servicios incluidos, y el chat lo abre con «el índice», «¿qué tiene la
+  plataforma?» o «mapa del sitio» (`INDICE_RE` de `asistente.js`) y con su botón «🗂️ Índice general».
+- Lo que sigue (del autor): la página automatizada de las respuestas a lo que pidió cada usuario.
+
 ### 0 bis. Una sola plataforma: la Enciclopedia antigua se retiró
 
 **Decisión del autor, 24-10-2026.** Antes había dos «Enciclopedias». La

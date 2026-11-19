@@ -17,8 +17,9 @@
    "articulos": "",
    "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm",
    "seccion": "Leyes Federales Vigentes",
-   "estado": "por cotejar",
-   "visto": "14-11-2026"
+   "estado": "cotejado",
+   "visto": "14-11-2026",
+   "cotejo": "Cotejado el 18-11-2026: cambia el RESICO desde 2027 (tope de 5 millones) y crea el límite a las deducciones de quien ingresa más de 50 millones (arts. 78-A a 78-F); la tarifa del art. 96 no cambia."
   },
   {
    "id": "dip-lfd-13-11-2026",
@@ -31,8 +32,9 @@
    "articulos": "",
    "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfd.htm",
    "seccion": "Leyes Federales Vigentes",
-   "estado": "por cotejar",
-   "visto": "14-11-2026"
+   "estado": "cotejado",
+   "visto": "14-11-2026",
+   "cotejo": "Cotejado el 18-11-2026: la cuota del turista extranjero queda en $1,158.00 (art. 8o., fr. I)."
   },
   {
    "id": "dip-lif-13-11-2026",
@@ -45,8 +47,9 @@
    "articulos": "",
    "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lif_2027.htm",
    "seccion": "Leyes Federales Vigentes",
-   "estado": "por cotejar",
-   "visto": "14-11-2026"
+   "estado": "cotejado",
+   "visto": "14-11-2026",
+   "cotejo": "Cotejado el 18-11-2026: total de $10,636,488.1 millones (art. 1o.) y techo de deuda interna de 1.7 billones (art. 2o.); ya está en esta página."
   },
   {
    "id": "dof-5803757",
@@ -59,8 +62,9 @@
    "articulos": "",
    "liga": "https://dof.gob.mx/nota_detalle.php?codigo=5803757&fecha=13/11/2026",
    "seccion": "PODER EJECUTIVO PRESIDENCIA DE LA REPUBLICA",
-   "estado": "por cotejar",
-   "visto": "13-11-2026"
+   "estado": "cotejado",
+   "visto": "13-11-2026",
+   "cotejo": "Cotejado el 18-11-2026: total de $10,636,488.1 millones (art. 1o.) y techo de deuda interna de 1.7 billones (art. 2o.); ya está en esta página."
   },
   {
    "id": "dof-5803758",
@@ -73,8 +77,9 @@
    "articulos": "",
    "liga": "https://dof.gob.mx/nota_detalle.php?codigo=5803758&fecha=13/11/2026",
    "seccion": "PODER EJECUTIVO PRESIDENCIA DE LA REPUBLICA",
-   "estado": "por cotejar",
-   "visto": "13-11-2026"
+   "estado": "cotejado",
+   "visto": "13-11-2026",
+   "cotejo": "Cotejado el 18-11-2026: cambia el RESICO desde 2027 (tope de 5 millones) y crea el límite a las deducciones de quien ingresa más de 50 millones (arts. 78-A a 78-F); la tarifa del art. 96 no cambia."
   },
   {
    "id": "dof-5803759",
@@ -87,8 +92,9 @@
    "articulos": "",
    "liga": "https://dof.gob.mx/nota_detalle.php?codigo=5803759&fecha=13/11/2026",
    "seccion": "PODER EJECUTIVO PRESIDENCIA DE LA REPUBLICA",
-   "estado": "por cotejar",
-   "visto": "13-11-2026"
+   "estado": "cotejado",
+   "visto": "13-11-2026",
+   "cotejo": "Cotejado el 18-11-2026: la cuota del turista extranjero queda en $1,158.00 (art. 8o., fr. I)."
   }
  ],
  "leyes": {
@@ -351,16 +357,6 @@
    "vigente": "07-10-2026",
    "tipo": "vieja",
    "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpeum.htm"
-  },
-  {
-   "archivo": "herramientas/leyes_niveles.py",
-   "renglon": null,
-   "ley": "lif 2026",
-   "nombre": "LEY de Ingresos de la Federación para el Ejercicio Fiscal de 2026",
-   "cita": "07-11-2025",
-   "vigente": "13-11-2026",
-   "tipo": "vieja",
-   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lif_2026.htm"
   }
  ],
  "fallas": []

@@ -1626,7 +1626,7 @@
   },
   "cuerpo": [
    "De dónde viene. La publicación de la cuenta @derechadiariomx en Instagram retoma una investigación de Mexicanos contra la Corrupción y la Impunidad (MCCI) del 5 de octubre. Según MCCI, la Secretaría de Energía autorizó el 27 de septiembre de 2024 a Portacelis Gas and Oil a importar hasta 52 millones de litros de diésel, nueve días después de endurecer sus reglas para esos permisos y cuando la empresa tenía unas semanas de creada. MCCI es una organización de periodismo de investigación: su trabajo es el punto de partida, no la fuente; el documento que manda es el permiso.",
-   "Lo que sí consta. El sexenio terminó el 30 de septiembre de 2024: la Constitución fija que la nueva presidencia empieza el 1 de octubre (art. 83). Si el permiso es del 27, como dice MCCI, se dio a tres días del cambio. Y Portacelis no aparece en la lista del artículo 69-B del Código Fiscal, la de las empresas que el SAT considera que facturan operaciones simuladas (las llamadas «fantasma»), en nuestra copia con corte al 30 de septiembre de 2026.",
+   "Lo que sí consta. El sexenio terminó el 30 de septiembre de 2024: la Constitución fija que la nueva presidencia empieza el 1 de octubre (art. 83). Si el permiso es del 27, como dice MCCI, se dio a tres días del cambio. Y Portacelis no aparece en la lista del artículo 69-B del Código Fiscal, la de las empresas que el SAT considera que facturan operaciones simuladas (las llamadas «fantasma»), en nuestra copia con corte al 31 de octubre de 2026.",
    "Lo que no podemos sostener todavía. El permiso mismo, su fecha, quién lo firmó y los 52 millones de litros: la copia la tiene MCCI y no abre desde nuestro servidor, ni el registro de la Sener. Tampoco los litros que la empresa habría dejado de declarar: la prensa habla de 80, 83 o 90 millones, según la nota, a partir de una declaratoria del SAT ante la Fiscalía que no es pública.",
    "Lo que es adjetivo. «Narcoexpresidente» y «regalo de despedida» no son datos: no hay acusación, proceso ni sentencia que los sostenga, y una acusación tampoco sería una condena (Constitución, art. 20). «Fantasma», en el sentido del SAT, no consta. Y que una empresa esté «ligada» a una persona porque la administra alguien de su confianza es un vínculo que reporta MCCI, no una resolución de autoridad: según la prensa, Amílcar Olán no figura como acusado.",
    "Por qué importa. El llamado huachicol fiscal (meter combustible declarándolo como otra cosa, o por menos litros, para no pagar el IEPS) es dinero que deja de entrar a la hacienda pública. Si una autoridad confirma que este permiso se usó para eso, la pregunta de fondo es quién lo autorizó y con qué requisitos: eso es lo que hay que seguir."
@@ -1651,7 +1651,7 @@
    {
     "dice": "La empresa «fantasma» Portacelis",
     "res": "no consta",
-    "explica": "Portacelis no aparece en la lista 69-B del SAT (empresas que facturan operaciones simuladas) en nuestra copia con corte al 30 de septiembre de 2026, que revisa 15,013 contribuyentes. Que una empresa sea nueva o no tenga historial de importaciones no la vuelve «fantasma» en el sentido de la ley.",
+    "explica": "Portacelis no aparece en la lista 69-B del SAT (empresas que facturan operaciones simuladas) en nuestra copia con corte al 31 de octubre de 2026, que revisa 15,126 contribuyentes. Que una empresa sea nueva o no tenga historial de importaciones no la vuelve «fantasma» en el sentido de la ley.",
     "fuente": "SAT, Listado completo de contribuyentes (Artículo 69-B del CFF)",
     "url": "https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336"
    },
@@ -1804,7 +1804,7 @@
     "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
    },
    {
-    "nombre": "SAT, Listado completo de contribuyentes (Artículo 69-B del CFF), corte al 30 de septiembre de 2026, en la base de la plataforma",
+    "nombre": "SAT, Listado completo de contribuyentes (Artículo 69-B del CFF), corte al 31 de octubre de 2026, en la base de la plataforma",
     "url": "https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336"
    },
    {
@@ -2374,7 +2374,7 @@
   "icono": "🏛️",
   "fecha": "28-10-2026",
   "titulo": "El Senado aprueba la Ley de Ingresos 2027: de sus 10.6 billones, casi 1.5 son dinero prestado",
-  "balazo": "El pleno del Senado la aprobó 75 a 34 y sin cambios, así que va al Ejecutivo para publicarse. De los 10.6 billones de pesos que «prevé obtener», 9.2 billones son ingresos y el resto es dinero prestado. Lo que pagan los turistas extranjeros por entrar a México sube a 1,158 pesos, y el cambio al ISR para automotrices y gasolineras todavía no tiene un documento oficial que podamos abrir.",
+  "balazo": "El pleno del Senado la aprobó 75 a 34 y sin cambios, y el Diario Oficial la publicó el 13 de noviembre. De los 10.6 billones de pesos que «prevé obtener», 9.2 billones son ingresos y el resto es dinero prestado. Lo que pagan los turistas extranjeros por entrar a México sube a 1,158 pesos, y el cambio al ISR para gasolineras y armadoras consta en la ley publicada, aunque no alcanza a toda la industria automotriz.",
   "nota": {
    "medio": "El Financiero",
    "titulo": "Senado aprueba cambios al ISR y aumentos en cuotas de servicios y trámites para 2027",
@@ -2388,11 +2388,12 @@
    "texto": "El Senado aprobó la Ley de Ingresos y la Ley Federal de Derechos para 2027, que contemplan una recaudación de más de 10.6 billones de pesos… el pago de visitantes extranjeros pasará de 983 a mil 158 pesos… cambios al ISR para excluir a determinadas empresas automotrices y gasolineras de las restricciones a las deducciones… más de 6.2 billones provendrían de impuestos… endeudamiento de hasta 1.7 billones."
   },
   "cuerpo": [
+   "Actualización del 18 de noviembre. El 13 de noviembre el Diario Oficial publicó las tres leyes: la Ley de Ingresos de la Federación para 2027, la reforma a la Ley Federal de Derechos y la reforma a la Ley del ISR; todas rigen desde el 1 de enero de 2027. Con el texto publicado cotejamos lo que faltaba: las cifras de la ley son las que aquí se dicen, salvo el IVA, que en tribuna se dijo como $1,768,717.3 millones y la ley publicada fija en $1,768,017.3 millones (lo corregimos en la fe de erratas). El Senado sí aprobó la Ley de Derechos (su decreto lo firman las dos Cámaras el 27 de octubre), y la excepción del ISR para automotrices y gasolineras consta en el nuevo artículo 78-E.",
    "Qué pasó. Según el Canal del Congreso (28 de octubre), el pleno del Senado aprobó la Ley de Ingresos de la Federación para 2027 con 75 votos a favor y 34 en contra en lo general, y 73 a 33 en lo particular. Quedó «en sus términos», como la mandó la Cámara de Diputados el 15 de octubre, y se envió al Ejecutivo. La ley manda publicarla en el Diario Oficial a más tardar 20 días naturales después de aprobada (LFPRH, art. 42, fr. VI).",
    "El punto ciego: no son 10.6 billones de «recaudación». La ley estima $10,636,488.1 millones en total, pero esa suma incluye el dinero que el gobierno pedirá prestado. Los ingresos que entran sin endeudarse, los presupuestarios, son $9,156,528.9 millones; la diferencia, $1,479,959.2 millones, son los ingresos por financiamiento, que la ley suma en su total. Y los 1.7 billones de deuda interna son un techo: lo máximo que puede contratar en el año, no deuda ya contratada.",
-   "De dónde sale el dinero. Los impuestos aportan $6,263,886.8 millones, el 58.9 % del total: $3,288,975.3 millones del ISR, $1,768,717.3 millones del IVA y $828,256.0 millones del IEPS, según expuso en tribuna el presidente de la Comisión de Hacienda del Senado. Pemex y la CFE tienen sus propios techos de deuda.",
-   "Los derechos. La Cámara de Diputados aprobó el 14 de octubre la Ley Federal de Derechos: la cuota que paga quien visita México sin trabajar aquí (el turista extranjero) sube 17.8 % y queda en 1,158 pesos, y lo que se recaude se reparte 57 % para la Defensa, 15 % para el Instituto Nacional de Migración y 28 % para la Tesorería. Que el Senado también la aprobó lo dicen los medios; el documento del Senado todavía no lo pudimos abrir.",
-   "Lo que falta probar. Los medios dicen que el Senado cambió la reforma al ISR para que la industria automotriz y quienes venden gasolina y diésel no tengan el nuevo límite a las deducciones de quien ingresa más de 50 millones de pesos, y que por eso esa ley regresa a la Cámara de Diputados. Hasta leer la minuta del Senado, eso va como pendiente: la falta es nuestra, porque el portal del Senado no abre desde la plataforma."
+   "De dónde sale el dinero. Los impuestos aportan $6,263,886.8 millones, el 58.9 % del total: $3,288,975.3 millones del ISR, $1,768,017.3 millones del IVA y $828,256.0 millones del IEPS, según el artículo 1o. de la ley publicada. Pemex y la CFE tienen sus propios techos de deuda.",
+   "Los derechos. La Cámara de Diputados aprobó el 14 de octubre la Ley Federal de Derechos: la cuota que paga quien visita México sin trabajar aquí (el turista extranjero) sube 17.8 % y queda en 1,158 pesos, y lo que se recaude se reparte 57 % para la Defensa, 15 % para el Instituto Nacional de Migración y 28 % para la Tesorería. Que el Senado también la aprobó lo dicen los medios; el documento del Senado no lo pudimos abrir, pero el decreto publicado el 13 de noviembre lo confirma: la cuota del art. 8o., fr. I, es de $1,158.00.",
+   "Lo que ya se probó. Los medios dijeron que el Senado cambió la reforma al ISR para que la industria automotriz y quienes venden gasolina y diésel no tengan el nuevo límite a las deducciones de quien ingresa más de 50 millones de pesos. La ley publicada lo confirma, con un matiz: el nuevo Capítulo X (arts. 78-A a 78-F) no se aplica a quien expende, distribuye o comercializa gasolinas y diésel con su permiso (art. 78-E, fr. IX), ni a quien ensambla o fabrica vehículos en depósito fiscal (fr. III), salvo por lo que venda en el país. No es a «toda la industria automotriz». El decreto lo firman las dos Cámaras el 3 de noviembre."
   ],
   "ejemplo": {
    "tit": "La cuenta, con números redondos",
@@ -2420,30 +2421,30 @@
    {
     "dice": "El Senado aprobó la Ley de Ingresos para 2027",
     "res": "consta",
-    "explica": "75 a 34 en lo general y 73 a 33 en lo particular; quedó en sus términos y se envió al Ejecutivo. Falta su publicación en el Diario Oficial.",
-    "fuente": "Canal del Congreso, «Senado aprueba Ley de Ingresos 2027 por 10.6 billones de pesos» (28-10-2026)",
-    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+    "explica": "75 a 34 en lo general y 73 a 33 en lo particular; quedó en sus términos y se envió al Ejecutivo. Se publicó en el Diario Oficial el 13 de noviembre de 2026 y rige desde el 1 de enero de 2027.",
+    "fuente": "Canal del Congreso (28-10-2026) y DOF 13-11-2026, Ley de Ingresos de la Federación para 2027",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5803757&fecha=13/11/2026"
    },
    {
     "dice": "Contemplan una recaudación de más de 10.6 billones de pesos",
     "res": "matiz",
     "explica": "La cifra, $10,636,488.1 millones, consta, pero no es recaudación: es el total de la ley e incluye $1,479,959.2 millones de financiamiento. Lo que entra sin endeudarse son $9,156,528.9 millones.",
-    "fuente": "Canal del Congreso (28-10-2026) y Paquete Económico 2027 en la base de la plataforma",
-    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+    "fuente": "Ley de Ingresos de la Federación para 2027, art. 1o. (DOF 13-11-2026)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
    },
    {
     "dice": "Más de 6.2 billones provendrían del cobro de impuestos",
     "res": "consta",
     "explica": "Son $6,263,886.8 millones, el 58.9 % de los ingresos estimados.",
-    "fuente": "Canal del Congreso (28-10-2026)",
-    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+    "fuente": "Ley de Ingresos de la Federación para 2027, art. 1o. (DOF 13-11-2026)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
    },
    {
     "dice": "El endeudamiento previsto podría alcanzar hasta 1.7 billones de pesos",
     "res": "consta",
     "explica": "La ley autoriza deuda interna neta hasta por 1 billón 700 mil millones de pesos. Es un techo, no deuda contratada; Pemex y la CFE tienen techos aparte.",
-    "fuente": "Canal del Congreso (28-10-2026)",
-    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+    "fuente": "Ley de Ingresos de la Federación para 2027, art. 2o. (DOF 13-11-2026)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
    },
    {
     "dice": "El pago de visitantes extranjeros al ingresar a México pasará de 983 a 1,158 pesos",
@@ -2454,21 +2455,17 @@
    },
    {
     "dice": "El Senado aprobó también la Ley Federal de Derechos",
-    "res": "pendiente",
-    "explica": "La nota oficial del Senado que leímos solo trae la Ley de Ingresos. El voto de la Ley de Derechos no lo pudimos abrir.",
-    "fuente": "Canal del Congreso (28-10-2026)",
-    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338",
-    "quien": "Falta de la plataforma: el dictamen y su votación están en la Gaceta del Senado, que no abre desde nuestra sesión",
-    "donde": "https://www.senado.gob.mx/66/gaceta_del_senado"
+    "res": "consta",
+    "explica": "El decreto que la reforma lo firman los presidentes de las dos Cámaras el 27 de octubre de 2026, y se publicó en el Diario Oficial el 13 de noviembre; la cuota del turista extranjero queda en $1,158.00 (art. 8o., fr. I). El voto del Senado, número por número, sigue en su Gaceta.",
+    "fuente": "DOF 13-11-2026, decreto que reforma la Ley Federal de Derechos",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5803759&fecha=13/11/2026"
    },
    {
     "dice": "Se excluye a automotrices y gasolineras de las restricciones a las deducciones de quien ingresa más de 50 millones, y la ley del ISR regresa a Diputados",
-    "res": "pendiente",
-    "explica": "Ningún documento oficial que pudimos abrir trae la reserva ni su votación. Cuando la Cámara de Diputados reciba la minuta, su texto quedará en la Gaceta Parlamentaria.",
-    "fuente": "El Financiero y otros medios (28-10-2026)",
-    "url": "https://www.elfinanciero.com.mx/nacional/2026/10/28/senado-aprueba-cambios-al-isr-y-aumentos-en-cuotas-de-servicios-y-tramites-para-2027/",
-    "quien": "Falta de la plataforma: la minuta del Senado no abre desde nuestra sesión; después la publicará la Gaceta de Diputados",
-    "donde": "https://gaceta.diputados.gob.mx/"
+    "res": "matiz",
+    "explica": "La ley publicada exceptúa del nuevo límite a las deducciones (Capítulo X, arts. 78-A a 78-F) a quien expende, distribuye o comercializa gasolinas y diésel con permiso (art. 78-E, fr. IX) y a quien ensambla o fabrica vehículos en depósito fiscal, salvo por lo que venda en el país (fr. III). No es a toda la industria automotriz. El decreto lo firman las dos Cámaras el 3 de noviembre de 2026; rige desde el 1 de enero de 2027.",
+    "fuente": "DOF 13-11-2026, decreto que reforma la Ley del Impuesto sobre la Renta, art. 78-E",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5803758&fecha=13/11/2026"
    }
   ],
   "cifras": [
@@ -2476,8 +2473,8 @@
     "valor": "$10,636,488.1 millones",
     "etq": "Ley de Ingresos 2027: el total, con financiamiento",
     "estado": "oficial",
-    "fuente": "Canal del Congreso (28-10-2026)",
-    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+    "fuente": "Ley de Ingresos de la Federación para 2027, art. 1o. (DOF 13-11-2026)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
    },
    {
     "valor": "$9,156,528.9 millones",
@@ -2497,8 +2494,8 @@
     "valor": "$6,263,886.8 millones",
     "etq": "Impuestos estimados para 2027",
     "estado": "oficial",
-    "fuente": "Canal del Congreso (28-10-2026)",
-    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+    "fuente": "Ley de Ingresos de la Federación para 2027, art. 1o. (DOF 13-11-2026)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
    },
    {
     "valor": "75 a 34",
@@ -2511,8 +2508,8 @@
     "valor": "$1,158",
     "etq": "Cuota del visitante extranjero sin actividad remunerada en 2027 (+17.8 %)",
     "estado": "oficial",
-    "fuente": "Canal del Congreso (14-10-2026)",
-    "url": "https://www.canaldelcongreso.gob.mx/noticias/10318"
+    "fuente": "DOF 13-11-2026, Ley Federal de Derechos, art. 8o., fr. I",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5803759&fecha=13/11/2026"
    }
   ],
   "datos": [
@@ -2572,16 +2569,12 @@
   "red": "Senado Ley de Ingresos 2027 ISR automotrices gasolineras",
   "sigue": [
    {
-    "que": "La publicación de la Ley de Ingresos 2027 en el Diario Oficial (a más tardar 20 días naturales después de aprobada)",
+    "que": "Cómo recauda en 2027 lo que la ley estima: los informes trimestrales de Hacienda comparan lo cobrado con el art. 1o.",
+    "url": "https://www.finanzaspublicas.hacienda.gob.mx/"
+   },
+   {
+    "que": "Las reglas del SAT para el nuevo límite a las deducciones (art. 78-F de la Ley del ISR)",
     "url": "https://www.dof.gob.mx/"
-   },
-   {
-    "que": "El voto del Senado sobre la Ley Federal de Derechos y su publicación en el Diario Oficial",
-    "url": "https://www.senado.gob.mx/66/gaceta_del_senado"
-   },
-   {
-    "que": "La minuta del ISR que regresa a la Cámara de Diputados: el texto de la excepción para automotrices y gasolineras y su votación",
-    "url": "https://gaceta.diputados.gob.mx/"
    },
    {
     "que": "El Presupuesto de Egresos 2027, que la Cámara de Diputados debe aprobar a más tardar el 15 de noviembre",
@@ -2589,6 +2582,18 @@
    }
   ],
   "fuentes": [
+   {
+    "nombre": "DOF 13-11-2026: Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5803757&fecha=13/11/2026"
+   },
+   {
+    "nombre": "DOF 13-11-2026: decreto que reforma la Ley del Impuesto sobre la Renta",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5803758&fecha=13/11/2026"
+   },
+   {
+    "nombre": "DOF 13-11-2026: decreto que reforma la Ley Federal de Derechos",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5803759&fecha=13/11/2026"
+   },
    {
     "nombre": "Canal del Congreso: Senado aprueba Ley de Ingresos 2027 por 10.6 billones de pesos (28-10-2026)",
     "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
@@ -2610,7 +2615,7 @@
     "url": "https://www.elfinanciero.com.mx/nacional/2026/10/28/senado-aprueba-cambios-al-isr-y-aumentos-en-cuotas-de-servicios-y-tramites-para-2027/"
    }
   ],
-  "actualizado": "29-10-2026"
+  "actualizado": "18-11-2026"
  },
  {
   "id": "imss-modalidad-40-gestores",

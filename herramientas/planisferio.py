@@ -129,7 +129,7 @@ TEMAS = [
     ('penal', '🚨', 'Su fraude y su cifra oculta', 'Cuánto fraude dice sufrir su gente, cuántas carpetas abrió su fiscalía y cuántos delitos no llegan a una.'),
     ('ambiental', '🌎', 'Sus recursos naturales', 'Sus acuíferos, bosques, incendios, pesca, minas y su refinería, si la tiene.'),
     ('leyes', '📜', 'Sus leyes del dinero', 'Con qué leyes cobra, compra, se endeuda y rinde cuentas, y dónde se publican.'),
-    ('dimensiones', '🚪', 'En la Enciclopedia y en el Auditor', 'Su estado de cuenta, su circuito del dinero, lo que dejó la ASF y sus otras dimensiones.'),
+    ('dimensiones', '🚪', 'Sus cuentas y sus otras dimensiones', 'Su estado de cuenta y de resultados, su circuito del dinero, lo que dejó la ASF y sus otras dimensiones, en páginas del Planisferio.'),
 ]
 TEMA_DIM = {'financiera': 'presupuestos'}
 
@@ -2738,8 +2738,9 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
             {'id': 'leyes', 'titulo': 'Sus leyes del dinero',
              'texto': 'Con qué leyes cobra, compra, se endeuda y rinde cuentas %s, quién las aprueba y dónde se publican.' % nom,
              'tarjetas': [], 'bloque': leyes},
-        {'id': 'dimensiones', 'titulo': 'En la Enciclopedia y en el Auditor',
-         'texto': 'Lo demás de %s que ya vive en la Enciclopedia y en el Auditor, con el estado elegido:' % nom,
+        {'id': 'dimensiones', 'titulo': 'Sus cuentas y sus otras dimensiones',
+         'texto': ('Lo demás de %s, con el estado elegido. Cada tarjeta abre su página aquí, en el Planisferio: la misma de la base, sin una cifra distinta. '
+                   'Para todo lo demás, pregúntale al Auditor.') % nom,
          'tarjetas': [], 'bloque': '<div class="pl-puertas">%s%s</div>' % (puertas_aud, ''.join(puertas))},
     ]
     # Cada dimensión, vinculada a su Contexto dimensional, al estado de
@@ -2792,7 +2793,7 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
         out.append(dict(comun, **{
             'archivo': subpagina(a, x['id']), 'padre': (ARCHIVO, 'Planisferio'), 'padre2': (portal(a), nom),
             'menu': t[2],
-            'icono': t[1], 'titulo': '%s: %s' % (nom, t[2][0].lower() + t[2][1:]) if x['id'] != 'dimensiones' else '%s en la Enciclopedia y en el Auditor' % nom,
+            'icono': t[1], 'titulo': '%s: %s' % (nom, t[2][0].lower() + t[2][1:]) if x['id'] != 'dimensiones' else '%s: sus cuentas y sus otras dimensiones' % nom,
             'lema': 'Su portal en el Planisferio', 'entrada': x['texto'],
             'secciones': [dict(x, texto=''),
                           {'id': 'otros-temas', 'titulo': 'Los demás temas de %s' % nom, 'texto': '',

@@ -1353,3 +1353,9 @@ body .site-footer .footer-bottom .footer-aviso { color: var(--pie-acento); }
   .pie-chip,
   .pie-boton { font-size: 16px !important; }
 }
+
+/* Las páginas propias del Planisferio (planisferio_espejo.py, 19-11-2026): el aviso
+   de que es la misma página de la base, vista desde el Planisferio. */
+.pl-espejo { display: flex; gap: .5rem; align-items: flex-start; margin: 0 auto 1rem; max-width: 72rem;
+  padding: .75rem 1rem; border-left: 4px solid #1f6f8b; background: rgba(31, 111, 139, .08); border-radius: 6px; font-size: 1rem; line-height: 1.5; }
+.pl-espejo a { display: inline-block; min-height: 44px; line-height: 44px; font-weight: 600; }
