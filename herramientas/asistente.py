@@ -730,6 +730,15 @@ def escribir_base():
     regs = d['calculadora_civica']['regimenes']
     dat['calc']['reg'] = {r['id']: r['nombre'] for r in regs if not r.get('hereda')}
     dat['calc']['plat'] = {t['id']: t['nombre'] for r in regs for t in r.get('tasas', [])}
+    # Los municipios con su predial cotejado (19-11-2026): «¿cuánto pago de predial en
+    # Vallarta?» abre el simulador con el municipio ya puesto, antes que su ficha.
+    import cc_predial
+    import unicodedata
+    def _pl(t):
+        return ''.join(c for c in unicodedata.normalize('NFD', t.lower()) if unicodedata.category(c) != 'Mn')
+    dat['calc']['pred'] = [[m['id'], _pl(m['nombre'])] + ([_pl(m['nombre']).split(' de ')[0]] if ' de ' in m['nombre'] else [])
+                           for m in cc_predial.MUNICIPIOS] + [
+        ['vallarta', 'vallarta'], ['tlaquepaque', 'tlaquepaque'], ['zapotlan', 'ciudad guzman', 'zapotlan'], ['tlajomulco', 'tlajomulco']]
     # Inversión y Megaobras, dentro del chat (24-10-2026): sus obras, sus
     # sexenios, sus cifras y sus cinco aplicaciones.
     import asistente_megaobras

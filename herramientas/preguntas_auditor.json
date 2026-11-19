@@ -2985,7 +2985,7 @@
   },
   {
    "q": "¿Cuánto pago de predial en Zapopan?",
-   "ir": "herramienta-calculadora-predial.html"
+   "ir": "herramienta-calculadora-predial.html?mun=zapopan"
   },
   {
    "q": "Me llegó un mandamiento de ejecución por no pagar el predial",
@@ -2994,6 +2994,14 @@
   {
    "q": "Simulador del impuesto predial",
    "ir": "herramienta-calculadora-predial.html"
+  },
+  {
+   "q": "¿Cuánto pago de predial en Puerto Vallarta?",
+   "ir": "herramienta-calculadora-predial.html?mun=vallarta"
+  },
+  {
+   "q": "Debo el predial en Tepatitlán, ¿cuánto son los recargos?",
+   "ir": "herramienta-calculadora-predial.html?mun=tepatitlan"
   }
  ]
 }

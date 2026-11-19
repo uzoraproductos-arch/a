@@ -192,7 +192,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-calculadora-bolsa.html` | Inviertes en la bolsa · Auditavisión | apartados.py | 46 | 0 | 1 | 1 | 0 |
 | `herramienta-calculadora-compara.html` | Tú contra ellos · Auditavisión | apartados.py | 54 | 0 | 46 | 19 | 9 |
 | `herramienta-calculadora-inmueble.html` | Vendes una casa o un terreno · Auditavisión | apartados.py | 46 | 0 | 3 | 2 | 0 |
-| `herramienta-calculadora-predial.html` | Tu impuesto predial · Auditavisión | apartados.py | 47 | 0 | 1 | 3 | 0 |
+| `herramienta-calculadora-predial.html` | Tu impuesto predial · Auditavisión | apartados.py | 47 | 0 | 1 | 3 | 1 |
 | `herramienta-calculadora-reloj.html` | El reloj de la deuda · Auditavisión | apartados.py | 58 | 0 | 6 | 8 | 1 |
 | `herramienta-calculadora-ticket-estado.html` | Tu estado de cuenta · Auditavisión | apartados.py | 73 | 0 | 19 | 22 | 0 |
 | `herramienta-calculadora-ticket-ingreso.html` | Tu ingreso · Auditavisión | apartados.py | 72 | 0 | 18 | 22 | 0 |
