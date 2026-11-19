@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 832 |
+| Páginas revisadas | 833 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -192,13 +192,14 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-calculadora-bolsa.html` | Inviertes en la bolsa · Auditavisión | apartados.py | 46 | 0 | 1 | 1 | 0 |
 | `herramienta-calculadora-compara.html` | Tú contra ellos · Auditavisión | apartados.py | 54 | 0 | 46 | 19 | 9 |
 | `herramienta-calculadora-inmueble.html` | Vendes una casa o un terreno · Auditavisión | apartados.py | 46 | 0 | 3 | 2 | 0 |
+| `herramienta-calculadora-predial.html` | Tu impuesto predial · Auditavisión | apartados.py | 47 | 0 | 1 | 3 | 0 |
 | `herramienta-calculadora-reloj.html` | El reloj de la deuda · Auditavisión | apartados.py | 58 | 0 | 6 | 8 | 1 |
 | `herramienta-calculadora-ticket-estado.html` | Tu estado de cuenta · Auditavisión | apartados.py | 73 | 0 | 19 | 22 | 0 |
 | `herramienta-calculadora-ticket-ingreso.html` | Tu ingreso · Auditavisión | apartados.py | 72 | 0 | 18 | 22 | 0 |
 | `herramienta-calculadora-ticket-reparto.html` | A dónde va cada peso · Auditavisión | apartados.py | 75 | 0 | 19 | 22 | 0 |
 | `herramienta-calculadora-ticket-retienen.html` | Lo que te retienen · Auditavisión | apartados.py | 75 | 0 | 19 | 22 | 0 |
 | `herramienta-calculadora-ticket.html` | Tu estado de cuenta · Auditavisión | apartados.py | 56 | 0 | 0 | 0 | 0 |
-| `herramienta-calculadora.html` | Calculadora Cívica · Auditavisión | apartados.py | 50 | 0 | 0 | 0 | 0 |
+| `herramienta-calculadora.html` | Calculadora Cívica · Auditavisión | apartados.py | 51 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-asf-2025.html` | La Cuenta Pública 2025 · Auditavisión | apartados.py | 45 | 0 | 12 | 0 | 0 |
 | `herramienta-inspector-asf-acciones.html` | Qué significa cada acción · Auditavisión | apartados.py | 45 | 0 | 1 | 0 | 0 |
 | `herramienta-inspector-asf-autoridades.html` | Quién fiscaliza · Auditavisión | apartados.py | 56 | 0 | 0 | 0 | 0 |
@@ -246,7 +247,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 54 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 67 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 396 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 397 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `informes-documentar-para-sancionar.html` | Informe especial: Documentar para sancionar · Auditavisión | apartados.py | 54 | 0 | 40 | 8 | 2 |

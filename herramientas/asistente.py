@@ -622,6 +622,7 @@ ALIAS_APPS = {
                          'cumplimiento documental', 'cumplo con la lfpdppp', 'cumplo con datos personales'],
     'inspriesgos': ['matriz de riesgos documentales', 'mapa de riesgos documentales', 'riesgos documentales', 'riesgos de mis papeles',
                     'por donde empiezo a cumplir', 'que atiendo primero', 'priorizar el cumplimiento'],
+    'ccpredial': ['predial', 'impuesto predial', 'pago del predial', 'pagar el predial', 'calcula mi predial', 'cuanto pago de predial', 'simulador del predial', 'debo predial', 'adeudo de predial', 'mandamiento de ejecucion', 'requerimiento de pago del predial', 'recargos del predial', 'valor fiscal', 'valor catastral'],
     'simulador-presupuesto.html': ['reparte el presupuesto', 'simulador del presupuesto'],
     'radar-estado-de-cuenta.html': ['estado de cuenta administrativo'],
 }
