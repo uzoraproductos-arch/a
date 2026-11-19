@@ -111,7 +111,7 @@ ICONOS = [
     ('🧺', 'shopping-basket', 'canasta'), ('🎩', 'crown', 'élite'), ('📤', 'upload', 'enviar'),
     ('😬', 'frown', 'uy'), ('⚕️', 'heart-pulse', 'salud'), ('♿', 'accessibility', 'accesibilidad'),
     ('👩', 'user-round', 'mujer'), ('👴', 'user-round', 'persona mayor'), ('🎒', 'backpack', 'escolar'),
-    ('👩‍🏫', 'presentation', 'maestra'), ('🎖️', 'award', 'condecoración'), ('✋', 'hand', 'alto'),
+    ('👩‍🏫', 'presentation', 'maestra'), ('🎖️', 'award', 'condecoración'), ('✋', 'hand', 'alto'), ('🤖', 'bot', 'automático'),
     ('📮', 'mailbox', 'buzón'), ('🧲', 'magnet', 'imán'), ('♻️', 'recycle', 'reciclaje'),
     ('🏡', 'house', 'casa'), ('🚜', 'tractor', 'campo'), ('🫀', 'heart-pulse', 'corazón'),
     ('🪪', 'id-card', 'credencial'), ('❄️', 'snowflake', 'frío'), ('🚚', 'truck', 'camión'),

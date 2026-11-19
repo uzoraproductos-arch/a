@@ -313,11 +313,11 @@ def _datos(id_):
             ]
         elif id_ == 'deuda-congreso-2027':
             cuanto = [
-                (_mdp(c['ingresos_totales_2027_mdp']), 'ingresos totales estimados en la Ley de Ingresos 2027 aprobada por Diputados y Senado', 'oficial', None),
+                (_mdp(c['ingresos_totales_2027_mdp']), 'ingresos totales estimados en la Ley de Ingresos 2027 (DOF 13-11-2026), aprobada por Diputados y Senado', 'oficial', None),
                 (_mdp(c['techo_deuda_interna_2027_mdp']), 'techo de endeudamiento interno neto autorizado para 2027 (%d votos a favor y %d en contra en Diputados)' % (c['votos_diputados_favor'], c['votos_diputados_contra']), 'oficial', None),
                 (_mdp(c['costo_financiero_2027_mdp']), 'costo financiero de la deuda propuesto para 2027 en el Paquete Económico', 'oficial', None),
                 ('BBB+ → BBB (déficit 4.61 % del PIB en 2026; deuda 61.17 % en 2030)', 'ajuste y proyecciones del reporte soberano de HR Ratings (15-10-2026)', 'oficial', None),
-                ('Por publicar', 'decreto de la Ley de Ingresos 2027 en el DOF y texto íntegro de las reservas votadas', 'pendiente', x['pendiente_id']),
+                ('DOF 13-11-2026', 'publicación de la Ley de Ingresos 2027; rige desde el 1 de enero de 2027', 'oficial', None),
             ]
         elif id_ == 'inversion-megaobras':
             cuanto = [
@@ -471,9 +471,27 @@ def pagina(a, sello):
 </html>
 '''.format(titulo_doc=re.sub('<[^>]+>', '', titulo), pregunta_attr=esc_attr(pregunta), favicon=FAVICON,
            sello=sello, cabecera=cabecera(archivo(id_), sello), img=img, alt=esc_attr(alt), nota_img=nota_img,
-           titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), temas=temas(id_), extra=extra, ruta=ruta(id_), lectura=lectura(id_), servicio=servicio(titulo),
+           titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), temas=temas(id_), extra=extra, ruta=ruta(id_), lectura=lectura(id_), servicio=expediente_puerta(id_) + '\n' + servicio(titulo),
            sociales=sociales(archivo(id_), re.sub('<[^>]+>', '', titulo) + ' · Auditavisión', pregunta, img))
 
+
+
+def expediente_puerta(id_):
+    """La puerta de cada investigación a su expediente de control interno
+    (pedido del autor, 17-11-2026: «que quede vinculado»). No repite cifras."""
+    import expedientes_inv
+    b = expedientes_inv.para_bot(id_)
+    det = ['%d documento%s' % (b['nd'], '' if b['nd'] == 1 else 's')]
+    if b['nb']:
+        det.append('%d en su bitácora' % b['nb'])
+    if b['np']:
+        det.append('%d pendiente%s' % (b['np'], '' if b['np'] == 1 else 's'))
+    return ('      <aside class="au-servicio au-expediente" aria-label="Expediente de control interno">\n'
+            '        <p><b>🗂️ Su expediente de control interno: %s.</b> Junta este caso con su bitácora del Noticiero, lo que sigue, '
+            'lo que falta y sus dictámenes (%s). Se pone al día cada día y %s.</p>\n'
+            '        <a class="camino-ir" href="%s">Abrir el expediente ➔</a>\n'
+            '      </aside>') % (b['exn'], ', '.join(det),
+                                 'sigue abierto' if b['ab'] else 'está documentado', expedientes_inv.archivo(id_))
 
 
 def servicio(titulo):
@@ -565,12 +583,13 @@ def bot_fichas():
         if not TEMA_BOT.get(id_):
             raise SystemExit('auditorias.py: la investigacion %s no tiene sus frases en TEMA_BOT' % id_)
         d = _datos(id_)
-        out.append({'t': 'investigacion', 'tit': re.sub('<[^>]+>', '', a[5]), 'txt': d['que'],
+        import expedientes_inv
+        out.append(dict(expedientes_inv.para_bot(id_), **{'t': 'investigacion', 'tit': re.sub('<[^>]+>', '', a[5]), 'txt': d['que'],
                     'ci': [dict({'v': v, 'etq': etq, 'e': e}, **({'p': pend} if pend else {})) for v, etq, e, pend in d['cuanto']],
                     'fu': _docs_planos(d['docs']), 'qs': [q for q in (pq.get(id_), a[6]) if q],
                     'ir': [archivo(id_), 'la investigación en imágenes'],
                     'exp': ('expedientes.html#exp-' + EXPEDIENTE[id_]) if id_ in EXPEDIENTE else '',
-                    'k': TEMA_BOT.get(id_, [])})
+                    'k': TEMA_BOT.get(id_, [])}))
     return out
 
 

@@ -7949,6 +7949,30 @@ window.AUDIT_DB = {
       "categoria": "👷 Trabajo y Salario"
     },
     {
+      "termino": "Cuota Patronal del IMSS",
+      "definicion": "Lo que el patrón paga al Seguro Social y al INFONAVIT por cada trabajador, además del sueldo, y que no aparece en el recibo de nómina: una cuota fija por trabajador, los porcentajes de cada seguro sobre el salario base de cotización, la cesantía y vejez (que sube cada año hasta 2030), el riesgo de trabajo según la clase de la empresa y el 5 % de vivienda. La Calculadora Cívica la saca con tu sueldo.",
+      "ley": "Arts. 25, 36, 73, 106, 107, 147, 168 y 211 Ley del Seguro Social · Segundo transitorio del decreto DOF 16-12-2020 · Art. 29 Ley del INFONAVIT",
+      "categoria": "👷 Trabajo y Salario"
+    },
+    {
+      "termino": "Cuotas al ISSSTE",
+      "definicion": "Lo que se descuenta a quien trabaja para el gobierno federal (o para un gobierno con convenio): 10.625 % de su sueldo básico, por salud, retiro, invalidez y vida y servicios sociales. Su dependencia aporta además 20.145 %, vivienda (FOVISSSTE) incluida, y el Gobierno Federal paga cuotas sociales. Se calculan entre uno y diez salarios mínimos. Muchos estados y municipios tienen su propio instituto, con otras cuotas.",
+      "ley": "Arts. 17, 42, 75, 102, 140, 194 y 199 Ley del ISSSTE (última reforma DOF 15-01-2026)",
+      "categoria": "👷 Trabajo y Salario"
+    },
+    {
+      "termino": "Salario Base de Cotización",
+      "definicion": "El salario con el que se calculan las cuotas al Seguro Social: lo que se paga en efectivo por día más las prestaciones que la ley integra (aguinaldo, prima vacacional y otras). Tiene un piso (el salario mínimo) y un techo (25 veces la UMA diaria); arriba del techo el sueldo sube y la cuota ya no.",
+      "ley": "Arts. 27 y 28 Ley del Seguro Social",
+      "categoria": "👷 Trabajo y Salario"
+    },
+    {
+      "termino": "Recibo de Nómina (CFDI de nómina)",
+      "definicion": "La factura electrónica que el patrón timbra por cada pago de sueldo, con el complemento de nómina: percepciones gravadas y exentas, deducciones (ISR y seguridad social), otros pagos como el subsidio para el empleo y el salario base de cotización. Si el patrón es una entidad de gobierno, dice con qué recurso paga. Es la prueba de lo que te retuvieron.",
+      "ley": "Art. 99, fr. III Ley del ISR · Art. 29 Código Fiscal de la Federación · Complemento de nómina 1.2 del SAT",
+      "categoria": "👷 Trabajo y Salario"
+    },
+    {
       "termino": "Secretaría de Hacienda y Crédito Público (SHCP)",
       "definicion": "La dependencia del Ejecutivo que calcula los ingresos de la Federación, redacta las iniciativas de leyes fiscales y de ingresos, maneja la deuda pública y formula el proyecto de Presupuesto de Egresos. De ella dependen el SAT y la Tesorería de la Federación, y es quien publica los informes trimestrales, la Cuenta Pública y los datos abiertos del presupuesto.",
       "ley": "Art. 31 frs. II, III, V y XV Ley Orgánica de la Administración Pública Federal",
@@ -8222,6 +8246,24 @@ window.AUDIT_DB = {
       "termino": "Prueba Pericial",
       "definicion": "La que se ofrece cuando hace falta un conocimiento especial (contabilidad, ingeniería, informática) para examinar hechos, objetos o personas. El perito debe tener título oficial en la materia si esa profesión está reglamentada. El dictamen cívico de esta plataforma no es un peritaje.",
       "ley": "Arts. 368 y 369 · Código Nacional de Procedimientos Penales (última reforma DOF 28-11-2025)",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Concesión",
+      "definicion": "El acto por el que un gobierno da a una empresa, por un plazo, el derecho de construir, operar y explotar un bien o un servicio público, como una autopista de cuota. No es un contrato de obra: en el contrato el gobierno paga a la empresa; en la concesión la empresa invierte y cobra a quien usa la obra. Por eso una concesión no aparece en ComprasMX: se acredita con su título de concesión. La de caminos y puentes federales dura hasta 30 años; la de inmuebles federales, hasta 50. No da la propiedad del bien: solo el derecho de usarlo o explotarlo en los términos del título. A quien la recibe se le llama concesionaria.",
+      "ley": "Art. 6o. Ley de Caminos, Puentes y Autotransporte Federal · Arts. 16 y 73 Ley General de Bienes Nacionales",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Deudor Alimentario Moroso",
+      "definicion": "La persona a quien un juez declaró en incumplimiento de la pensión de alimentos que debe, casi siempre a sus hijas e hijos. Se inscribe en el Registro Nacional de Obligaciones Alimentarias, a cargo del Sistema Nacional DIF, con su nombre, su CURP, su RFC, el juzgado y el expediente. Mientras lo sea, no puede registrarse como candidato a un cargo de elección popular ni ser nombrado en el servicio público, y se le puede exigir el certificado de no inscripción para el pasaporte, la licencia de conducir o ante notario. El certificado lo pide cada persona, gratis. Auditavisión no copia ese registro ni publica nombres.",
+      "ley": "Art. 38, fr. VII Constitución (DOF 29-05-2023) · Arts. 135 Bis a 135 Septies Ley General de los Derechos de Niñas, Niños y Adolescentes (DOF 08-05-2023)",
+      "categoria": "🔍 Fiscalización Superior"
+    },
+    {
+      "termino": "Registro Único de Garantías Mobiliarias (RUG)",
+      "definicion": "El registro de la Secretaría de Economía donde se inscriben las garantías sobre bienes muebles que respaldan un crédito o una obligación mercantil. No es una lista de fianzas de contratos con el gobierno ni de personas sancionadas. Ahí van la prenda sin transmisión de posesión, el arrendamiento y el factoraje financieros, la reserva de dominio, el fideicomiso de garantía y los embargos sobre bienes muebles, entre otros. Inscribirlas hace que valgan frente a terceros y les da prelación. Es una sección del Registro Público de Comercio y funciona en línea; la consulta pide cuenta de usuario, y las certificaciones se pagan.",
+      "ley": "Arts. 32 bis 1 a 32 bis 9 Código de Comercio (sección adicionada DOF 27-08-2009, reformada DOF 13-06-2014)",
       "categoria": "🔍 Fiscalización Superior"
     }
   ],
@@ -19981,7 +20023,7 @@ window.AUDIT_DB = {
     "fuente": "Texto vigente de la Ley del Impuesto sobre la Renta",
     "estado": "oficial",
     "tope_anual": 3500000,
-    "nota": "La tasa se aplica al total de lo efectivamente cobrado y amparado con factura, sin el IVA y <b>sin deducci\u00f3n alguna</b>. Esa es la diferencia de fondo con el r\u00e9gimen general: aqu\u00ed no se resta ning\u00fan gasto, y a cambio la tasa es una fracci\u00f3n de la del cuadro com\u00fan.",
+    "nota": "La tasa se aplica al total de lo efectivamente cobrado y amparado con factura, sin el IVA y <b>sin deducci\u00f3n alguna</b>. Esa es la diferencia de fondo con el r\u00e9gimen general: aqu\u00ed no se resta ning\u00fan gasto, y a cambio la tasa es una fracci\u00f3n de la del cuadro com\u00fan. Esta tabla rige en 2026. <b>Desde el 1 de enero de 2027 el tope sube de 3.5 a 5 millones de pesos</b> y las tasas no cambian (reforma a la Ley del ISR, DOF 13-11-2026, arts. 113-E y 113-F).",
     "renglones": [
       { "hasta": 25000.00, "tasa": 1.00 },
       { "hasta": 50000.00, "tasa": 1.10 },
@@ -20015,6 +20057,83 @@ window.AUDIT_DB = {
       { "ramo": "Vivienda (INFONAVIT)", "pct": 5.00, "ley": "Art. 29 de la Ley del INFONAVIT: aportaci\u00f3n patronal del 5% sobre el salario base." },
       { "ramo": "Riesgos de trabajo", "pct": null, "ley": "Arts. 70 a 74: prima variable seg\u00fan la siniestralidad de cada empresa, a cargo del patr\u00f3n." }
     ]
+  },
+
+  "imss_patronal": {
+    "titulo": "Lo que el patrón paga al Seguro Social y al INFONAVIT por cada trabajador",
+    "fuente": "Ley del Seguro Social, última reforma DOF 15-01-2026, y su decreto del DOF 16-12-2020 (artículo Segundo transitorio, tabla de 2026)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf",
+    "sha256": "8a28a16e1dce1f8e666f4cce5ed19745bc912b2ab1ca49787d5d4bef229398ed",
+    "decreto_url": "https://www.diputados.gob.mx/LeyesBiblio/ref/lss/LSS_ref25_16dic20.pdf",
+    "decreto_sha256": "1078f08acbda8435d830c36c1699c8feb97f670dba9394419673c618d8027e92",
+    "estado": "oficial",
+    "cuota_fija_pct_uma": 20.40,
+    "cuota_fija_ley": "Art. 106, fracción I, leído con el artículo Décimo Noveno transitorio de 1995: la cuota patronal por cada asegurado arrancó en 13.9% de un salario mínimo diario y subió sesenta y cinco centésimas cada 1º de julio de 1998 a 2007, hasta quedar en 20.40%. Desde la reforma de desindexación de 2016 se calcula sobre la UMA.",
+    "ramos": [
+      { "ramo": "Enfermedades y maternidad · excedente de tres UMA", "pct": 1.10, "base": "excedente_3_uma",
+        "ley": "Art. 106, fracción II, con el Décimo Noveno transitorio de 1995: la cuota patronal arrancó en 6% y bajó cuarenta y nueve centésimas cada 1º de julio de 1998 a 2007, hasta quedar en 1.10% de lo que excede tres veces la referencia diaria." },
+      { "ramo": "Enfermedades y maternidad · prestaciones en dinero", "pct": 0.70, "base": "sbc",
+        "ley": "Art. 107, fracción I: al patrón le toca el 70% de la cuota total del 1%." },
+      { "ramo": "Gastos médicos de personas pensionadas", "pct": 1.05, "base": "sbc",
+        "ley": "Art. 25: de la cuota conjunta de 1.5%, al patrón le corresponde 1.05%." },
+      { "ramo": "Invalidez y vida", "pct": 1.75, "base": "sbc", "ley": "Art. 147: patrón 1.75%." },
+      { "ramo": "Retiro", "pct": 2.00, "base": "sbc", "ley": "Art. 168, fracción I: 2% a cargo del patrón." },
+      { "ramo": "Guarderías y prestaciones sociales", "pct": 1.00, "base": "sbc", "ley": "Arts. 211 y 212: prima de 1% que el patrón cubre íntegra." },
+      { "ramo": "Vivienda (INFONAVIT)", "pct": 5.00, "base": "sbc", "ley": "Art. 29 de la Ley del INFONAVIT: aportación patronal del 5% sobre el salario base." }
+    ],
+    "cesantia_2026": {
+      "ley": "Art. 168, fracción II, inciso a), con la tabla del artículo Segundo transitorio del decreto publicado en el DOF el 16 de diciembre de 2020: la cuota sube cada 1º de enero hasta 2030.",
+      "renglones": [
+        { "hasta_uma": null, "sm": true, "pct": 3.150, "rango": "1.00 salario mínimo" },
+        { "hasta_uma": 1.50, "pct": 3.676, "rango": "1.01 salario mínimo a 1.50 UMA" },
+        { "hasta_uma": 2.00, "pct": 4.851, "rango": "1.51 a 2.00 UMA" },
+        { "hasta_uma": 2.50, "pct": 5.556, "rango": "2.01 a 2.50 UMA" },
+        { "hasta_uma": 3.00, "pct": 6.026, "rango": "2.51 a 3.00 UMA" },
+        { "hasta_uma": 3.50, "pct": 6.361, "rango": "3.01 a 3.50 UMA" },
+        { "hasta_uma": 4.00, "pct": 6.613, "rango": "3.51 a 4.00 UMA" },
+        { "hasta_uma": null, "pct": 7.513, "rango": "4.01 UMA en adelante" }
+      ]
+    },
+    "riesgo_trabajo": {
+      "ley": "Art. 73: la empresa que se inscribe por primera vez paga la prima media de su clase; después, la que resulte de su propia siniestralidad (arts. 72 y 74).",
+      "clases": [
+        { "id": "I", "pct": 0.54355 }, { "id": "II", "pct": 1.13065 }, { "id": "III", "pct": 2.59840 },
+        { "id": "IV", "pct": 4.65325 }, { "id": "V", "pct": 7.58875 }
+      ]
+    },
+    "art36": "Art. 36: cuando el trabajador percibe como cuota diaria el salario mínimo, el patrón paga también la cuota obrera.",
+    "no_incluye": "No se incluyen el impuesto estatal sobre nóminas (cada congreso local fija su tasa), el aguinaldo, las vacaciones ni las prestaciones del contrato: el costo real de la plaza es mayor."
+  },
+
+  "issste": {
+    "titulo": "Lo que se descuenta a quien trabaja para el gobierno y lo que aporta su dependencia",
+    "fuente": "Ley del ISSSTE, última reforma publicada en el DOF el 15 de enero de 2026",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISSSTE.pdf",
+    "sha256": "aa6e0e437331debd80d0086155e2d99885ea5e22cb13353c44eb0b1090f0b4d5",
+    "estado": "oficial",
+    "base": "Sueldo Básico: el sueldo del tabulador regional del puesto (art. 17). No incluye compensaciones ni otras percepciones.",
+    "piso_sm": 1, "tope_sm": 10,
+    "tope_ley": "Art. 17: las cuotas y aportaciones se calculan sobre el Sueldo Básico, con un salario mínimo como límite inferior y diez salarios mínimos como límite superior. La ley dice «salario mínimo»: aquí se usa el general vigente, sin convertirlo a UMA.",
+    "trabajador": [
+      { "ramo": "Seguro de salud · trabajadores en activo", "pct": 2.75, "ley": "Art. 42, fracción I, inciso a)." },
+      { "ramo": "Seguro de salud · pensionados", "pct": 0.625, "ley": "Art. 42, fracción I, inciso b)." },
+      { "ramo": "Retiro, cesantía en edad avanzada y vejez", "pct": 6.125, "ley": "Art. 102, fracción I." },
+      { "ramo": "Invalidez y vida", "pct": 0.625, "ley": "Art. 140, fracción I." },
+      { "ramo": "Servicios sociales y culturales", "pct": 0.50, "ley": "Art. 199, fracción I." }
+    ],
+    "dependencia": [
+      { "ramo": "Seguro de salud · trabajadores en activo", "pct": 7.375, "ley": "Art. 42, fracción II, inciso a)." },
+      { "ramo": "Seguro de salud · pensionados", "pct": 0.72, "ley": "Art. 42, fracción II, inciso b)." },
+      { "ramo": "Riesgos del trabajo", "pct": 0.75, "ley": "Art. 75." },
+      { "ramo": "Retiro", "pct": 2.00, "ley": "Art. 102, fracción II." },
+      { "ramo": "Cesantía en edad avanzada y vejez", "pct": 3.175, "ley": "Art. 102, fracción II." },
+      { "ramo": "Invalidez y vida", "pct": 0.625, "ley": "Art. 140, fracción II." },
+      { "ramo": "Servicios sociales y culturales", "pct": 0.50, "ley": "Art. 199, fracción II." },
+      { "ramo": "Vivienda (FOVISSSTE)", "pct": 5.00, "ley": "Art. 194." }
+    ],
+    "cuota_social": "Además, el Gobierno Federal paga por cada trabajador dos cuotas sociales diarias (arts. 42, fracción III, y 102, fracción III), fijadas en 1997 y actualizadas cada trimestre con la inflación. No se suman aquí: su monto vigente no viene en la ley.",
+    "quien": "Cotizan al ISSSTE quienes trabajan para la Federación y para los gobiernos y organismos que firmaron convenio con el Instituto. Muchos estados y municipios tienen su propio instituto de seguridad social, con cuotas distintas: si es tu caso, esta cuenta no es la tuya.",
+    "art127": "Art. 127, fracción II, de la Constitución: ningún servidor público puede recibir una remuneración mayor a la establecida para la Presidencia de la República en el Presupuesto. La fracción III admite excepciones por trabajo técnico calificado o especialización."
   },
 
   "regimenes": [
@@ -24671,7 +24790,17 @@ window.AUDIT_DB = {
             "sha256": "c1579fa88c7a76ea4ba6b35d6f2b2861f80f64bbf43f4ecc47abe4cb071ea1a0",
             "paginas": 18,
             "universo": 14391101500.0,
-            "muestra": 10135587900.0
+            "muestra": 10135587900.0,
+            "extractos": {
+              "tramo1Original": 15538133100.0,
+              "tramo1Convenios": 17941530200.0,
+              "tramo1Total": 33479663300.0,
+              "tramo1Ejercido2022": 14124129500.0,
+              "contrato": "TM-TRAMO 1/20-OI-01",
+              "fechaContrato": "30/04/2020",
+              "consorcio": "Consorcio LAMAT Tramo 1, S.A.P.I. de C.V.",
+              "integrantes": "Mota-Engil M\u00e9xico, S.A.P.I. de C.V.; China Communications Construction Company, Ltd.; Gavil Ingenier\u00eda, S.A. de C.V.; EYASA, S. de R.L. de C.V.; Grupo Cosh, S.A. de C.V."
+            }
           },
           {
             "cp": 2022,
@@ -31188,9 +31317,9 @@ window.AUDIT_DB = {
     "deuda-congreso-2027": {
       "ente": "Congreso de la Unión (Cámara de Diputados y Senado) y Secretaría de Hacienda y Crédito Público",
       "quien": "La Secretaría de Hacienda propone la Iniciativa de Ley de Ingresos; la Cámara de Diputados (15-10-2026) y el Senado de la República autorizan los ingresos y el techo de endeudamiento (art. 73, fracc. VIII constitucional); las agencias calificadoras evalúan el riesgo soberano.",
-      "que": "El 15 de octubre de 2026 el pleno de la Cámara de Diputados aprobó la Ley de Ingresos de la Federación para 2027 (331 votos a favor y 118 en contra en lo general), y el 28 de octubre la aprobó el pleno del Senado (75 a 34 en lo general y 73 a 33 en lo particular). La ley estima ingresos totales por $10,636,488.1 millones de pesos (art. 1o.) y autoriza un techo de endeudamiento neto interno del Gobierno Federal hasta por $1,700,000.0 millones ($1.7 billones, art. 2o.). Además, aprobó una reserva al artículo vigésimo primero transitorio que quita el tope de $300 millones de pesos de ingresos anuales y permite a grandes contribuyentes obtener la reducción de multas, recargos y gastos de ejecución si pagan completo su adeudo principal. Ese mismo 15 de octubre, HR Ratings bajó la calificación soberana de largo plazo de México de HR BBB+ (G) a HR BBB (G), con perspectiva estable, por deterioro en los balances fiscales, bajo crecimiento (1.30 % real para 2026 y 1.50 % anual para 2027-2033) y rigidez del gasto, estimando un déficit de los RFSP de 4.61 % del PIB en 2026 y un Saldo Histórico de los RFSP de 61.17 % del PIB en 2030.",
-      "falta": "Falta la publicación del decreto de la Ley de Ingresos de la Federación 2027 en el Diario Oficial de la Federación y el texto íntegro de las reservas votadas en la Cámara de Diputados sobre deducciones y estímulos fiscales.",
-      "pendiente_id": "red-senado-ley-de-ingresos-2027-6",
+      "que": "El 15 de octubre de 2026 el pleno de la Cámara de Diputados aprobó la Ley de Ingresos de la Federación para 2027 (331 votos a favor y 118 en contra en lo general), el 28 de octubre la aprobó el pleno del Senado (75 a 34 en lo general y 73 a 33 en lo particular) y el 13 de noviembre se publicó en el Diario Oficial; rige desde el 1 de enero de 2027. La ley estima ingresos totales por $10,636,488.1 millones de pesos (art. 1o.) y autoriza un techo de endeudamiento neto interno del Gobierno Federal hasta por $1,700,000.0 millones ($1.7 billones, art. 2o.). Además, aprobó una reserva al artículo vigésimo primero transitorio que quita el tope de $300 millones de pesos de ingresos anuales (el texto publicado ya no trae ningún tope de ingresos) y permite a grandes contribuyentes obtener la reducción de multas, recargos y gastos de ejecución si pagan completo su adeudo principal. Ese mismo 15 de octubre, HR Ratings bajó la calificación soberana de largo plazo de México de HR BBB+ (G) a HR BBB (G), con perspectiva estable, por deterioro en los balances fiscales, bajo crecimiento (1.30 % real para 2026 y 1.50 % anual para 2027-2033) y rigidez del gasto, estimando un déficit de los RFSP de 4.61 % del PIB en 2026 y un Saldo Histórico de los RFSP de 61.17 % del PIB en 2030.",
+      "falta": "Falta lo que solo se sabrá en 2027: cuánta deuda contrata de verdad el Gobierno Federal frente al techo de 1.7 billones, y cuánto deja de cobrarse por el perdón de multas y recargos del transitorio vigésimo primero. Hacienda lo informa cada trimestre al Congreso (LFPRH, art. 107).",
+      "pendiente_id": null,
       "cifras": {
         "ingresos_totales_2027_mdp": 10636488.1,
         "ingresos_presupuestarios_2027_mdp": 9156528.9,
@@ -31205,6 +31334,10 @@ window.AUDIT_DB = {
         "hr_shrfsp_2030_pct_pib": 61.17
       },
       "fuentes": [
+        {
+          "doc": "DOF 13-11-2026: Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027 (arts. 1o., 2o. y vigésimo primero transitorio)",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
+        },
         {
           "doc": "Canal del Congreso: Aprueban en San Lázaro Ley de Ingresos 2027 (15-10-2026)",
           "url": "https://www.canaldelcongreso.gob.mx/noticias/10320"

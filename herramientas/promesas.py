@@ -219,7 +219,10 @@ def pendientes():
          'enlace': 'https://www.cuentapublica.hacienda.gob.mx/', 'enlace_txt': 'Cuenta Pública (Hacienda)', 'aparece': ap},
         {'id': 'promesa-dos-bocas-pef', 'tema': 'Memoria de promesas',
          'que': 'Lo que cada Presupuesto de 2019 a 2024 le asignó a la Refinería Olmeca',
-         'porque': 'Los presupuestos de cada año son públicos; la plataforma todavía no integra la partida de la refinería.',
+         'porque': ('Revisamos los datos abiertos de la Cuenta Pública de 2019 a 2024 (17-11-2026): la refinería no tiene programa ni clave de cartera '
+                    'propia, y las partidas por donde pudo pasar su dinero, las inversiones financieras de la Secretaría de Energía («Adquisición de otros '
+                    'valores», ramo 18, partida 73903) y de Pemex («Adquisición de acciones», ramo 52, partida 73902), juntan varios destinos: de esos '
+                    'archivos no se puede separar cuánto fue para ella. Falta integrar el documento de cada año que dice ese destino.'),
          'responsable': pe.PLATAFORMA, 'enlace': TP, 'enlace_txt': 'Transparencia Presupuestaria (Hacienda)', 'aparece': ap},
     ]
 

@@ -69,6 +69,22 @@ def servidor():
     return srv
 
 
+def ligas_abre():
+    """[(pregunta, página, dónde)] de cada liga al chat con ?abre= del sitio, sin repetir la página."""
+    import html as _h
+    import re
+    from urllib.parse import parse_qs, urlsplit
+    vistas, out = set(), []
+    for ruta in sorted(RAIZ.glob('*.html')):
+        for href in re.findall(r'href="(%s\?[^"]*abre=[^"]*)"' % re.escape(PAGINA), ruta.read_text(encoding='utf-8')):
+            ps = parse_qs(urlsplit(_h.unescape(href)).query)
+            liga = ps.get('abre', [''])[0]
+            if liga and liga not in vistas:
+                vistas.add(liga)
+                out.append((ps.get('q', [''])[0], liga, ruta.name))
+    return out
+
+
 def revisa(p, r):
     """Lo que no cuadra entre lo esperado (p) y la respuesta (r)."""
     mal = []
@@ -121,6 +137,13 @@ def main():
         pag.on('pageerror', lambda e: errores.append(str(e)))
         pag.goto('http://127.0.0.1:%d/%s' % (srv.server_address[1], PAGINA))
         pag.wait_for_function('() => !!(window.AuditorBot && window.AuditorBot.respuesta)')
+        # Todo pasa por el Auditor (19-11-2026): cada liga ?abre= del sitio debe abrir su página en el chat.
+        for q, liga, de in ligas_abre():
+            r = pag.evaluate('''([q, l]) => { const r = window.AuditorBot.abre(q, l); return r ? { ir: (r.ir && r.ir[0]) || null } : null; }''', [q, liga])
+            if not (RAIZ / liga.split('#')[0].split('?')[0]).exists():
+                fallas.append(('abre=%s (en %s)' % (liga, de), ['la página no existe']))
+            elif not r or r['ir'] != liga:
+                fallas.append(('abre=%s (en %s)' % (liga, de), ['el chat no la abre' if not r else '«Saber más» lleva a %s' % r['ir']]))
         for p in banco:
             r = pag.evaluate(PREGUNTA_JS, [p['q'], p.get('modo', '')])
             mal = revisa(p, r)

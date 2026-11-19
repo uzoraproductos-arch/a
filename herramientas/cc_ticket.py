@@ -71,6 +71,7 @@ def datos_js(base):
     P = base['panoramaErario']
     po = base.get('poderes') or {}
     dip = next((x for x in po.get('remuneraciones2026') or [] if 'diputad' in x['cargo'].lower()), None)
+    pres = next((x for x in po.get('remuneraciones2026') or [] if x.get('id') == 'presidencia'), None)
     regs = []
     for r in c['regimenes']:
         o = {k: r[k] for k in ('id', 'nombre', 'corto', 'icono', 'quien_es', 'retiene', 'punto_ciego', 'nota') if k in r}
@@ -99,7 +100,36 @@ def datos_js(base):
                                 'aprobado': po['ramos2026'][k]['aprobado']} for k in ('legislativo', 'judicial')]}
                     if po.get('ramos2026') else None),
         'dip': ({'cargo': dip['cargo'], 'netoAnual': dip['netoAnual'], 'pagina': dip.get('pagina', '')} if dip else None),
+        'pat': _patronal(c['imss_patronal']),
+        'issste': _issste(c['issste']),
+        'pres': ({'brutoAnual': pres['brutoAnual'], 'pagina': pres.get('pagina', '')} if pres else None),
     }
+
+
+def _patronal(ip):
+    """Lo que paga el patron (18-11-2026, pedido del autor: «calcular la nomina… y tener las distinciones entre
+    trabajadores del gobierno, ISSSTE, y trabajadores de empresas, IMSS»). Se detiene si la tabla de cesantia
+    no va en orden o le falta el renglon del salario minimo."""
+    cv = ip['cesantia_2026']['renglones']
+    if not cv[0].get('sm') or cv[-1]['hasta_uma'] is not None or any(
+            a['hasta_uma'] >= b['hasta_uma'] for a, b in zip(cv[1:-2], cv[2:-1])):
+        raise SystemExit('cc_ticket: la tabla de cesantia y vejez de 2026 no va en orden')
+    return {'fija': ip['cuota_fija_pct_uma'], 'fijaLey': ip['cuota_fija_ley'],
+            'ramos': [{'ramo': x['ramo'], 'pct': x['pct'], 'base': x['base'], 'ley': x['ley']} for x in ip['ramos']],
+            'cv': [{'h': x['hasta_uma'], 'sm': bool(x.get('sm')), 'pct': x['pct'], 'rango': x['rango']} for x in cv],
+            'cvLey': ip['cesantia_2026']['ley'], 'rt': ip['riesgo_trabajo']['clases'], 'rtLey': ip['riesgo_trabajo']['ley'],
+            'art36': ip['art36'], 'noIncluye': ip['no_incluye']}
+
+
+def _issste(i):
+    t, d = i['trabajador'], i['dependencia']
+    for k in ('trabajador', 'dependencia'):
+        if not i[k] or any(not (0 < x['pct'] < 10) for x in i[k]):
+            raise SystemExit('cc_ticket: una cuota del ISSSTE (%s) no es un porcentaje' % k)
+    return {'piso': i['piso_sm'], 'tope': i['tope_sm'], 'topeLey': i['tope_ley'], 'base': i['base'],
+            'trab': [{'ramo': x['ramo'], 'pct': x['pct'], 'ley': x['ley']} for x in t],
+            'dep': [{'ramo': x['ramo'], 'pct': x['pct'], 'ley': x['ley']} for x in d],
+            'social': i['cuota_social'], 'quien': i['quien'], 'art127': i['art127'], 'url': i['url']}
 
 
 def _tarifa_tabla(t):
@@ -180,6 +210,18 @@ def _completo(base, ref):
                               'lo que excede 3 UMA' if x['base'] == 'excedente_3_uma' else 'todo el salario base')
                            for x in im['ramos'])
 
+    iss = c['issste']
+    dep = {x['ramo']: x for x in iss['dependencia']}
+    filas_is = []
+    for x in iss['trabajador']:
+        d = dep.pop(x['ramo'], None)
+        filas_is.append((x['ramo'], x['pct'], d['pct'] if d else None, x['ley'] + (' ' + d['ley'] if d else '')))
+    filas_is += [(x['ramo'], None, x['pct'], x['ley']) for x in iss['dependencia'] if x['ramo'] in dep]
+    _p = lambda v: '—' if v is None else format(v, '.3f').rstrip('0').rstrip('.') + '%'
+    ramos_issste = '\n'.join('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>' % (esc(a), _p(b), _p(cc), esc(l)) for a, b, cc, l in filas_is)
+    ramos_issste += '\n<tr class="ct-tr-tot"><td><b>Total</b></td><td><b>%s</b></td><td><b>%s</b></td><td>Suma de los renglones %s</td></tr>' % (
+        _p(sum(x['pct'] for x in iss['trabajador'])), _p(sum(x['pct'] for x in iss['dependencia'])), chip('derivado'))
+
     poderes_txt = ''
     if po.get('ramos2026'):
         g = po['gastoNetoTotal']['valor']
@@ -244,6 +286,14 @@ def _completo(base, ref):
       </div>
       <p class="ct-pista">Las tres tasas son las del artículo 113-A de la Ley del ISR {r_lisr}.</p>
     </div>
+    <div class="ct-opcion" id="ctOpPt" hidden>
+      <span class="ct-et" id="ctPtEt">¿Quién te paga?</span>
+      <div class="ct-seg" role="group" aria-labelledby="ctPtEt">
+        <button type="button" class="ct-seg-b" data-pt="imss" aria-pressed="true"><span aria-hidden="true">🏢</span> Una empresa o un particular · IMSS</button>
+        <button type="button" class="ct-seg-b" data-pt="issste" aria-pressed="false"><span aria-hidden="true">🏛️</span> El gobierno · ISSSTE</button>
+      </div>
+      <p class="ct-pista">Cambian las cuotas que te descuentan y lo que pone tu patrón; el ISR es el mismo para los dos. {pt_quien}</p>
+    </div>
     <p class="ct-aviso ct-aviso-suave" id="ctOpNose" hidden><b>Seguimos adelante.</b> {nose_nota} Mientras tanto se calcula como <b>sueldos y salarios</b>, que es el régimen de la mayoría; el resultado lo dice en cada renglón.</p>
 
     <div class="ct-mandos">
@@ -257,7 +307,7 @@ def _completo(base, ref):
     <div class="ct-vivo" id="ctVivo" hidden aria-live="polite">
       <div><span>Ingreso bruto</span><b id="ctVBruto">$0</b></div>
       <div><span>ISR</span><b id="ctVIsr">$0</b></div>
-      <div><span>IMSS</span><b id="ctVImss">$0</b></div>
+      <div><span id="ctVImssEt">IMSS</span><b id="ctVImss">$0</b></div>
       <div class="ct-vivo-neto"><span>Te queda</span><b id="ctVNeto">$0</b></div>
       <div class="ct-vivo-barra" aria-hidden="true"><i class="ct-vb-isr" id="ctVbIsr"></i><i class="ct-vb-imss" id="ctVbImss"></i><i class="ct-vb-neto" id="ctVbNeto"></i></div>
     </div>
@@ -273,6 +323,7 @@ def _completo(base, ref):
       <ol class="ct-cascada" id="ctCascada"></ol>
       <p class="ct-leyenda"><b>−</b> y <b>+</b> son movimientos: dinero que sale o que vuelve. <b>=</b> es un subtotal, no se suma aparte. <b>·</b> es un renglón que explica cómo se llega a la base gravable y <b>no toca tu bolsillo</b>.</p>
       <div class="ct-escalon" id="ctEscalon"></div>
+      <div class="ct-nomina" id="ctNomina" hidden aria-live="polite"></div>
 
       <details class="ct-tabla-det" id="ctTarifaDet">
         <summary>📋 La tarifa mensual del ISR: el renglón en que caíste</summary>
@@ -301,6 +352,16 @@ def _completo(base, ref):
         <ul class="ct-patron">
 {patron}
         </ul>
+      </details>
+
+      <details class="ct-tabla-det" id="ctIsssteDet" hidden>
+        <summary>🏛️ Las cuotas al ISSSTE, ramo por ramo</summary>
+        <div class="ct-tabla-caja"><table class="ct-tabla"><thead><tr><th>Seguro o fondo</th><th>Te descuentan</th><th>Pone tu dependencia</th><th>Ley del ISSSTE</th></tr></thead>
+        <tbody>
+{ramos_issste}
+        </tbody></table></div>
+        <p class="ct-fuente">{is_fuente} {chip_of} (<a href="{is_url}" target="_blank" rel="noopener">texto vigente ↗</a>). {is_base} {is_tope} Salario mínimo general 2026: {sm_dia} diarios (CONASAMI {r_sm} {chip_of}); el límite superior queda en {is_tope_mes} al mes {chip_der}.</p>
+        <p class="ct-fuente">{is_social}</p>
       </details>
 
       <div class="ct-esc" id="ctIva">
@@ -382,7 +443,10 @@ def _completo(base, ref):
         tope_uma=im['tope_sbc_uma'], tope_mes=pesos2(im['tope_sbc_uma'] * uma['diaria'] * 30), patron=patron,
         iva=p['iva']['tasa'], rubros='\n'.join(rubros),
         ciego_ico=ciego['icono'], ciego_tit=esc(tu(ciego['titulo'])), ciego_tx=esc(tu(ciego['texto'])) + (' ' + esc(tu(ciego['excepcion'])) if ciego.get('excepcion') else ''),
-        total='$' + format(total, ',.1f'), poderes_txt=poderes_txt, datos=_json(D))
+        total='$' + format(total, ',.1f'), poderes_txt=poderes_txt, datos=_json(D),
+        pt_quien=esc(iss['quien']), ramos_issste=ramos_issste, is_fuente=esc(iss['fuente']), is_url=esc(iss['url']),
+        is_base=esc(iss['base']), is_tope=esc(iss['tope_ley']), sm_dia=pesos2(sm['general']),
+        is_tope_mes=pesos2(iss['tope_sm'] * sm['general'] * 30), is_social=esc(iss['cuota_social']))
 
 
 # Las cuatro cuentas en paginas propias (pedido del autor, 22-10-2026): la

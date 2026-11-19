@@ -49,6 +49,12 @@ from urllib.parse import quote
 CPEUM = {'tx': 'Constitución Política de los Estados Unidos Mexicanos, texto vigente (Cámara de Diputados, última reforma DOF 07-10-2026)',
          'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf',
          'sha256': 'cefb525ae8dfc97a7da40597d2ee918fe254d4bfce88301ff3c9959ced9e6e65'}
+# El Registro Nacional de Obligaciones Alimentarias (17-11-2026, pedido del autor «por el momento
+# electoral»): arts. 135 Bis a 135 Septies, adicionados DOF 08-05-2023, cotejados contra el texto vigente.
+LGDNNA = {'tx': 'Ley General de los Derechos de Niñas, Niños y Adolescentes, arts. 135 Bis a 135 Septies (adicionados DOF 08-05-2023; última reforma DOF 15-01-2026)',
+          'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGDNNA.pdf',
+          'sha256': '475861976811f45ac5676ccd6b9db68c61b41d7f8d85e4d3d267914ab3fe3822'}
+RNOA = {'tx': 'Sistema Nacional DIF, Registro Nacional de Obligaciones Alimentarias: certificado de no inscripción', 'url': 'https://rnoa.dif.gob.mx/'}
 LGIPE = {'tx': 'Ley General de Instituciones y Procedimientos Electorales (última reforma DOF 02-06-2026)',
          'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LGIPE.pdf',
          'sha256': '8d6253c7ac28c654543484bac172ca12bbda8db41564b07f27ca5bbea0b4cf80'}
@@ -94,6 +100,33 @@ CONGRESOS = {'MÉX': 75, 'CDMX': 65, 'VER': 50, 'GRO': 46, 'NL': 42, 'OAX': 42, 
              'QRO': 25, 'QROO': 25, 'TLAX': 25, 'BCS': 21, 'MOR': 20}
 CONGRESOS_TOTAL = 1122  # «EUM» de la misma tabla
 
+# Tabla 20 del CNPLE 2025 (p. 50): las iniciativas presentadas en los periodos
+# que cada congreso reportó del primer año de su legislatura actual, según su
+# estatus al término del periodo de sesiones en que se presentaron:
+# (total, en estudio, aprobada o procedente, ingreso, dictamen, desechada o
+# improcedente, desistimiento, otro estatus, no disponible, % dictaminadas).
+# «Dictaminadas», como las define el INEGI: dictamen + aprobada + desechada.
+INICIATIVAS = {
+    'PUE': (818, 752, 66, 0, 0, 0, 0, 0, 0, 8.1), 'MICH': (787, 564, 215, 0, 0, 8, 0, 0, 0, 28.3),
+    'JAL': (702, 36, 60, 68, 24, 0, 0, 514, 0, 12.0), 'NL': (693, 693, 0, 0, 0, 0, 0, 0, 0, 0.0),
+    'MÉX': (692, 469, 223, 0, 0, 0, 0, 0, 0, 32.2), 'CHIH': (687, 470, 208, 0, 0, 2, 0, 5, 2, 30.6),
+    'BC': (604, 566, 24, 2, 0, 0, 12, 0, 0, 4.0), 'OAX': (556, 489, 62, 0, 0, 5, 0, 0, 0, 12.1),
+    'TAM': (530, 276, 222, 0, 29, 2, 0, 1, 0, 47.7), 'AGS': (529, 309, 77, 0, 106, 36, 1, 0, 0, 41.4),
+    'HGO': (528, 365, 142, 0, 0, 0, 0, 21, 0, 26.9), 'CDMX': (422, 374, 40, 0, 0, 0, 8, 0, 0, 9.5),
+    'DGO': (418, 0, 108, 0, 0, 0, 0, 310, 0, 25.8), 'MOR': (395, 395, 0, 0, 0, 0, 0, 0, 0, 0.0),
+    'SIN': (374, 35, 69, 225, 45, 0, 0, 0, 0, 30.5), 'SLP': (323, 0, 71, 0, 0, 9, 6, 237, 0, 24.8),
+    'GRO': (296, 176, 120, 0, 0, 0, 0, 0, 0, 40.5), 'TAB': (275, 213, 62, 0, 0, 0, 0, 0, 0, 22.5),
+    'QRO': (263, 152, 81, 0, 21, 0, 9, 0, 0, 38.8), 'GTO': (249, 224, 25, 0, 0, 0, 0, 0, 0, 10.0),
+    'SON': (222, 135, 82, 0, 4, 1, 0, 0, 0, 39.2), 'TLAX': (210, 96, 113, 0, 0, 1, 0, 0, 0, 54.3),
+    'QROO': (206, 131, 73, 0, 1, 0, 0, 1, 0, 35.9), 'ZAC': (179, 102, 77, 0, 0, 0, 0, 0, 0, 43.0),
+    'YUC': (173, 132, 41, 0, 0, 0, 0, 0, 0, 23.7), 'CAM': (148, 53, 92, 3, 0, 0, 0, 0, 0, 62.2),
+    'COL': (141, 32, 106, 0, 0, 2, 1, 0, 0, 76.6), 'NAY': (141, 81, 56, 4, 0, 0, 0, 0, 0, 39.7),
+    'BCS': (114, 82, 30, 0, 0, 0, 0, 2, 0, 26.3), 'VER': (104, 78, 26, 0, 0, 0, 0, 0, 0, 25.0),
+    'CHIS': (102, 12, 90, 0, 0, 0, 0, 0, 0, 88.2), 'COAH': (86, 78, 7, 0, 0, 0, 1, 0, 0, 8.1),
+}
+INICIATIVAS_TOTAL = (11967, 7570, 2668, 302, 230, 66, 38, 1091, 2, 24.8)
+CNPLE_INI = dict(CNPLE, tx='INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, reporte de resultados, tabla 20, p. 50 (27-04-2026)')
+
 # Donde se lee todo esto (pedido del autor, 23-10-2026: cada respuesta del bot
 # lleva «Saber mas» a la pagina donde esta la informacion). Desde la tarde del
 # mismo dia (pedido del autor) vive en la pestaña Datos, una pagina por grupo
@@ -111,7 +144,7 @@ PAGINAS = [
     ('datos-legislativo-elecciones.html', '🗳️', 'Las elecciones', 'El 6 de junio de 2027, sus etapas, cómo evaluar candidaturas y la reelección',
      'Qué se vota el 6 de junio de 2027, por qué etapas pasa el proceso, cómo evaluar a una candidata o candidato, quién puede reelegirse '
      'y por qué la elección de juezas y jueces se movió a 2028.',
-     ['elecciones', 'ruta', 'candidatos', 'reeleccion', 'judicial']),
+     ['elecciones', 'ruta', 'candidatos', 'deudores', 'reeleccion', 'judicial']),
     ('datos-legislativo-estados.html', '📍', 'Congresos locales y ayuntamientos', 'Los 32 congresos y cómo se integra un ayuntamiento',
      'Cuántas personas legisladoras tiene cada uno de los 32 congresos locales y cómo se integra el ayuntamiento que gobierna tu municipio.',
      ['locales', 'ayuntamientos']),
@@ -245,7 +278,7 @@ def legislativo():
         'h': '<p>Antes de votar, puedes revisar cuatro cosas, cada una con la ley en la mano:</p><ol class="pa-lista">'
              '<li><b>¿Puede ser candidato?</b> Para una diputación federal se necesitan, entre otras cosas, <b>18 años</b> cumplidos el día de la elección y ser originario del estado o vecino '
              'con más de <b>seis meses</b> de residencia. Y no puede registrarse nadie con sentencia firme por delitos contra la vida, sexuales, violencia familiar o violencia política contra las mujeres, '
-             'ni quien esté declarado <b>deudor alimentario moroso</b>.</li>'
+             'ni quien esté declarado <b>deudor alimentario moroso</b>; la ley prevé que se le pida el certificado de no inscripción en el Registro Nacional de Obligaciones Alimentarias.</li>'
              '<li><b>¿Cuánto gasta y quién lo paga?</b> El INE fija un <b>tope de gasto</b> para cada campaña, y los partidos le reportan lo que gasta cada candidatura; la persona candidata responde '
              'junto con su partido. Si una campaña rebasa su tope en un <b>5 %</b>, la elección se puede anular, siempre que la violación sea grave, dolosa y determinante.</li>'
              '<li><b>¿Ya es servidor público?</b> Si ya ocupa un cargo (por ejemplo, si busca reelegirse), está obligado a presentar sus <b>declaraciones patrimonial y de intereses</b>, y esas son públicas, '
@@ -258,7 +291,29 @@ def legislativo():
                _o('Nulidad si se rebasa el tope en 5 %, con violaciones graves, dolosas y determinantes (art. 41, fr. VI)', CPEUM),
                _o('Todo servidor público declara patrimonio e intereses, y las declaraciones son públicas salvo datos personales (arts. 29 y 32)', LGRA),
                _o('Votaciones de cada sesión', GACETA_VOT)],
-        'sug': ['¿Se pueden reelegir los diputados?', '¿Cuándo son las próximas elecciones?', '¿Cómo es el proceso electoral?']}
+        'sug': ['¿Puede ser candidato un deudor alimentario?', '¿Se pueden reelegir los diputados?', '¿Cuándo son las próximas elecciones?']}
+    t['deudores'] = {
+        'tit': 'Deudores alimentarios: no pueden ser candidatos',
+        'h': '<p>Desde la reforma de 2023 conocida como «3 de 3 contra la violencia», quien sea declarado <b>persona deudora alimentaria morosa</b> '
+             '<b>no puede ser registrado como candidato</b> a ningún cargo de elección popular <b>ni ser nombrado</b> para un empleo, cargo o comisión '
+             'en el servicio público. Lo mismo vale para quien tenga sentencia firme por delitos contra la vida, sexuales, violencia familiar o violencia '
+             'política contra las mujeres.</p>'
+             '<p>📋 <b>Dónde consta:</b> en el <b>Registro Nacional de Obligaciones Alimentarias</b>, a cargo del Sistema Nacional DIF. Lo alimentan los '
+             'tribunales de cada estado, se actualiza cada mes, y la calidad de deudor moroso se difunde ahí, con las reglas de protección de datos '
+             'personales. Cada persona puede pedir gratis su <b>certificado de no inscripción</b>, y la ley prevé que se exija para registrarse como '
+             'candidato, para aspirar a juez o magistrado, para sacar pasaporte o licencia de conducir y ante notario.</p>'
+             '<p>🔎 <b>Cómo revisarlo:</b> pregunta si tu candidata o candidato presentó su certificado de no inscripción; el registro oficial está en '
+             '<a href="https://rnoa.dif.gob.mx/" target="_blank" rel="noopener">rnoa.dif.gob.mx ↗</a>.</p>'
+             '<p class="pa-chico">🔒 Auditavisión <b>no copia ese registro ni publica nombres</b>: casi todas las personas inscritas son particulares, y sus '
+             'acreedores son niñas, niños y adolescentes. Si una autoridad electoral niega o cancela un registro por esta causa en un documento '
+             'público, eso sí se cita, con su documento. Estar inscrito no es un delito: es una deuda declarada por un juez, que se cancela al pagarse.</p>',
+        'fu': [_o('Suspensión de derechos: no puede ser registrada como candidata ni nombrada en el servicio público (art. 38, fr. VII, adicionada DOF 29-05-2023)', CPEUM),
+               _o('El registro, a cargo del SNDIF; lo alimentan los tribunales; es público conforme a la ley de datos personales; se actualiza cada mes (art. 135 Bis)', LGDNNA),
+               _o('Qué se inscribe: nombre, CURP y RFC, el juzgado, la cuantía y el expediente (art. 135 Quáter)', LGDNNA),
+               _o('Certificado de no inscripción gratuito, en un sitio web (art. 135 Quinquies)', LGDNNA),
+               _o('Trámites que pueden exigirlo: licencia, pasaporte, candidaturas, cargos judiciales, notario y matrimonio (art. 135 Sexties)', LGDNNA),
+               _o('Portal del registro', RNOA)],
+        'sug': ['¿Cómo evalúo a un candidato?', '¿Cuándo son las próximas elecciones?', '¿Qué es un deudor alimentario moroso?']}
     t['judicial'] = {
         'tit': 'La elección judicial pasó a 2028',
         'h': '<p>La segunda elección del Poder Judicial <b>ya no será en 2027</b>. La reforma publicada el <b>2 de junio de 2026</b> la movió al '
@@ -320,7 +375,9 @@ TOPE_116 = 0.70
 
 
 def congresos_estados(base):
-    """Lo de cada congreso local por clave de entidad: lo que ejerció en 2024
+    """Lo de cada congreso local por clave de entidad (y sus iniciativas: ini
+    presentadas, iest en estudio, iapr aprobadas, idic dictaminadas, idp su
+    porcentaje publicado, iotro las demás): lo que ejerció en 2024
     (CNPLE 2025, p. 11, en DB.poderes), sus personas legisladoras (tabla 8),
     el gasto por legislador y el gasto frente al egreso del gobierno del
     estado (los dos derivados). Se detiene si falta una entidad."""
@@ -336,6 +393,17 @@ def congresos_estados(base):
                           'pag': x['pagina'], 'anio': x['ejercicio']}
     if sorted(out) != sorted(CONGRESOS):
         raise SystemExit('congresos: el gasto 2024 no trae a las 32 entidades')
+    # Las iniciativas (tabla 20): si una fila o una columna no cuadra, se detiene.
+    if sorted(INICIATIVAS) != sorted(CONGRESOS):
+        raise SystemExit('congresos: la tabla de iniciativas no trae a las 32 entidades')
+    for a, v in INICIATIVAS.items():
+        dic = v[2] + v[4] + v[5]
+        if sum(v[1:9]) != v[0] or round(100.0 * dic / v[0], 1) != v[9]:
+            raise SystemExit('congresos: las iniciativas de %s no cuadran con su total o con su porcentaje publicado' % a)
+        out[a].update({'ini': v[0], 'iest': v[1], 'iapr': v[2], 'idic': dic, 'idp': v[9], 'iotro': v[0] - v[1] - dic})
+    for j in range(9):
+        if sum(v[j] for v in INICIATIVAS.values()) != INICIATIVAS_TOTAL[j]:
+            raise SystemExit('congresos: la columna %d de las iniciativas no suma el total del país' % j)
     return out
 
 

@@ -30,17 +30,13 @@ VERIFICA = 'noticias-verifica.html'
 SEGUIMIENTO = 'noticias-seguimiento.html'
 PARTES = [
     (DIARIO, '🗞️', 'Auditavisión Noticias', 'La columna periodística: la noticia, verificada, y la opinión, con documentos',
-     'El periódico de la plataforma. La portada con lo más reciente; las noticias del día y el cotejo de lo que circula, afirmación por '
-     'afirmación; la Columna del Erario, nuestra opinión parada en documentos, y las réplicas y posturas de quienes aludimos.',
+     'El periódico de la plataforma: la noticia, cotejada afirmación por afirmación, y la opinión, parada en documentos. Elige una sección en la barra.',
      ('portada', 'al-momento', 'columnas', 'replica')),
     (VERIFICA, '⚖️', 'Verifica una noticia', 'Del rumor al documento',
-     'Pega la liga o el texto de lo que viste y lo ponemos junto al documento oficial. Aquí también están la hemeroteca (las notas de los medios que ya cotejamos), los titulares que estamos jalando '
-     '(rotulados «sin verificar»), nuestro método de siete pasos y la puerta para proponernos una nota.',
+     'Pega la liga o el texto de lo que viste y lo ponemos junto al documento oficial. En la barra están también los puntos ciegos, la hemeroteca, la mesa de redacción y nuestro método.',
      ('verifica', 'puntos-ciegos', 'hemeroteca', 'mesa', 'metodo')),
     (SEGUIMIENTO, '🔔', 'Seguimiento: el caso no se olvida', 'Qué documento falta para cerrar cada caso, y cuándo debe llegar',
-     'Los casos abiertos, con el documento que falta para cerrarlos; los que tú sigues, con su aviso de novedades; la memoria de promesas, '
-     'y la agenda del erario: '
-     'las fechas en que la ley obliga a publicar el dinero público.',
+     'Cada caso abierto dice qué documento falta para cerrarlo. En la barra están también la memoria de promesas y la agenda del erario.',
      ('seguir', 'promesas', 'agenda')),
 ]
 # Las anclas viejas del diario de una sola página (noticias-relevantes.html#…),
@@ -79,8 +75,8 @@ SECCIONES = [
     # El detector de puntos ciegos (pedido del autor, 01-11-2026): lo que las
     # notas suelen esconder, en reglas que el verificador y el chat aplican solos.
     ('puntos-ciegos', '🔦', 'Puntos ciegos', 'Puntos ciegos: lo que una nota suele esconder',
-     'Trece preguntas que conviene hacerle a cualquier nota sobre el dinero público antes de creerle. El verificador y el Auditor las '
-     'buscan solos en lo que pegues.'),
+     '%s preguntas que conviene hacerle a cualquier nota sobre el dinero público antes de creerle. El verificador y el Auditor las '
+     'buscan solos en lo que pegues. Toca una para abrirla.'),
     # La hemeroteca (pedido del autor, 31-10-2026: «seguimiento como Animal
     # Político, La Jornada… vincular toda la información que gira sobre
     # finanzas públicas»): las notas de prensa que ya cotejamos, por medio.
@@ -190,6 +186,129 @@ MEDIOS = [
 TEMAS_MEDIOS = 'presupuesto OR deuda OR "Auditoría Superior" OR licitación OR Hacienda OR desvío'
 
 
+# El tablero del Noticiero (reestructura del autor, 16-11-2026: «verificación
+# y reestructuración de la pestaña Noticiero teniendo en cuenta las novedades
+# de los servicios… y el objetivo… del modo Periodista»). La pestaña es un
+# tablero: cada sección tiene su tarjeta, agrupada por su página (PARTES), y
+# cada página muestra una sección a la vez (pestañas de noticias.js). Una
+# sección nueva necesita aquí su línea de tarjeta, o la generación se detiene.
+TARJETA = {
+    'portada': 'Lo más reciente, de un vistazo',
+    'al-momento': 'Las notas del día y el cotejo de lo que circula',
+    'columnas': 'La Columna del Erario: nuestro argumento, con documentos',
+    'replica': 'Lo que responde quien fue aludido',
+    'verifica': 'Pega la liga o el texto y lo cotejamos',
+    'puntos-ciegos': 'Lo que una nota suele esconder',
+    'hemeroteca': 'Las notas de los medios que ya cotejamos',
+    'mesa': 'Los titulares que estamos jalando, sin verificar',
+    'metodo': 'Del rumor al documento, en siete pasos, y propón una nota',
+    'seguir': 'Qué documento falta para cerrar cada caso',
+    'promesas': 'Lo que se anunció y lo que llegó',
+    'agenda': 'Las fechas que la ley fija para el dinero público',
+}
+GRUPO = {DIARIO: '🗞️ Lee: el periódico', VERIFICA: '⚖️ Verifica: del rumor al documento', SEGUIMIENTO: '🔔 Sigue: el caso no se olvida'}
+PERIODISMO = 'periodismo-en-riesgo.html'
+CHAT = 'herramienta-inspector-pregunta.html'
+
+# El puente al modo Periodista y a Servicios, al pie de cada página y en el
+# tablero: (título, texto, preguntas para el modo Periodista, servicios). Las
+# preguntas son de las que ya contesta el chat (preguntas_auditor.json); los
+# servicios se leen de SERVICIOS y COBRO de apartados.py: nunca un monto.
+PUENTE = {
+    ARCHIVO: ('¿Trabajas en una redacción o investigas por tu cuenta?', None,
+              ('Noticias de hoy', '¿Qué pasó con Dos Bocas?', 'Segalmex', '¿Qué obras no han publicado sus cifras?'),
+              ('temporada', 'revision', 'expediente', 'seguimiento')),
+    DIARIO: ('¿Tu redacción necesita esto en campaña?',
+             'El verificador y la memoria de promesas, con acompañamiento, para tu equipo.',
+             ('Noticias de hoy', '¿Qué pasó con Dos Bocas?', 'Tren Maya'), ('temporada',)),
+    VERIFICA: ('¿Necesitas cotejar algo más grande que una nota?',
+               'Una pregunta delimitada o un caso completo, revisado contra los documentos públicos que lo responden.',
+               ('¿Qué es el huachicol fiscal?', 'Modalidad 40', 'Segalmex'), ('revision', 'expediente')),
+    SEGUIMIENTO: ('¿Quieres que vigilemos un tema por ti?',
+                  'Un tema que cambia (contratos, presupuesto, auditorías), vigilado, con aviso de cada cambio y su documento.',
+                  ('¿Qué obras no han publicado sus cifras?', 'Tren Maya', 'Segalmex'), ('seguimiento', 'expediente')),
+}
+
+
+def _q(t):
+    from urllib.parse import quote
+    return '%s?modo=periodista&amp;q=%s' % (CHAT, quote(t))
+
+
+def puente(archivo):
+    """La franja al pie: el modo Periodista (con preguntas que ya contesta) y
+    los servicios que vienen al caso, con su forma de cobro. Nunca un monto."""
+    import html as h
+    import apartados
+    tit, tx, preguntas, servs = PUENTE[archivo]
+    por_id = {x[0]: x for x in apartados.SERVICIOS}
+    if tx is None:
+        tx = next(p[3] for p in apartados.PERFILES if p[1].startswith('Periodismo'))
+    lis = '\n'.join(
+        '      <li><a class="nt-pu-serv" href="%s#sv-%s"><span aria-hidden="true">%s</span><span><b>%s</b><small>%s</small>'
+        '<em>%s</em></span></a></li>' % (apartados.SV_CATALOGO, sid, por_id[sid][1], h.escape(por_id[sid][2]), h.escape(por_id[sid][3]),
+                                         h.escape(apartados.COBRO[sid])) for sid in servs)
+    chips = ' '.join('<a class="nt-chip" href="%s">%s</a>' % (_q(q), h.escape(q)) for q in preguntas)
+    return ('<aside class="nt-puente" aria-label="El modo Periodista y los servicios">\n'
+            '  <div class="nt-pu-modo">\n'
+            '    <h2 class="nt-pu-tit"><span aria-hidden="true">📰</span> Pregúntaselo al Auditor en modo Periodista</h2>\n'
+            '    <p>Te cuenta <b>lo que casi nadie te cuenta, con documento</b>: lo que la ASF dejó por aclarar, lo que una dependencia no ha '
+            'publicado y quién lo debe, y qué consta de lo que circula. Nunca un rumor ni una filtración.</p>\n'
+            '    <p class="nt-pu-chips">%s</p>\n'
+            '    <p class="nt-acciones"><a class="nt-btn" href="%s?modo=periodista">📰 Abrir el modo Periodista</a></p>\n'
+            '  </div>\n'
+            '  <div class="nt-pu-servs">\n'
+            '    <h2 class="nt-pu-tit"><span aria-hidden="true">🧰</span> %s</h2>\n'
+            '    <p>%s</p>\n'
+            '    <ul class="nt-pu-lista">\n%s\n    </ul>\n'
+            '    <p class="nt-acciones"><a class="nt-btn nt-btn-sec" href="servicios-tu-perfil.html">👤 Servicios para periodismo</a> '
+            '<a class="nt-btn nt-btn-sec" href="%s">📝 Solicita una cotización</a></p>\n'
+            '    <p class="nt-pie">Leer, verificar y seguir un caso aquí es gratis. Lo de pago es el trabajo a la medida, y nunca cambia '
+            'lo que publicamos.</p>\n'
+            '  </div>\n'
+            '</aside>') % (chips, CHAT, h.escape(tit), h.escape(tx), lis, apartados.SV_COTIZA)
+
+
+def tablero():
+    """Las tarjetas del índice: [(grupo, id, página, (ícono, nombre, lema))]."""
+    falta = [i for i, *_r in SECCIONES if i not in TARJETA]
+    if falta:
+        raise SystemExit('noticias.py: falta la línea de tarjeta (TARJETA) de: %s' % ', '.join(falta))
+    out = []
+    for arch, *_r, secs in PARTES:
+        for n, sid in enumerate(secs):
+            _i, ico, nom, _t, _e = next(x for x in SECCIONES if x[0] == sid)
+            out.append((GRUPO[arch] if n == 0 else '', 'ir-' + sid, arch + '#' + sid, (ico, nom, TARJETA[sid])))
+    out.append(('🛡️ Quienes informan', 'ir-periodismo', PERIODISMO,
+                ('🛡️', 'Periodismo en riesgo', 'Las agresiones a la prensa, con el informe del Mecanismo de Protección')))
+    return out
+
+
+def ultimas(n=3):
+    """«Lo último, verificado» del tablero: las notas «Al momento» más nuevas,
+    escritas en la página (cada una lleva a su página propia)."""
+    import html as h
+    import asistente_personajes
+    cols = [c for c in asistente_personajes.columnas()[0] if c['seccion'] == 'Al momento']
+    cols.sort(key=lambda c: tuple(reversed([int(x) for x in c['fecha'].split('-')])), reverse=True)
+    def li(c):
+        ct = c.get('cotejo') or []
+        ok = sum(1 for x in ct if x['res'] in ('consta', 'matiz'))
+        pend = sum(1 for x in ct if x['res'] == 'pendiente')
+        return ('    <li><a href="%s"><time>%s</time><b>%s</b><small>✅ %d con documento · ⏳ %d por probar%s</small></a></li>'
+                % (AL_MOMENTO % c['id'], h.escape(c['fecha']), h.escape(c['titulo']), ok, pend,
+                   (' · a partir de ' + h.escape(c['nota']['medio'])) if c.get('nota') else ''))
+    return ('<section class="nt-ix" aria-labelledby="ntUltTit">\n'
+            '  <h2 class="nt-ix-tit" id="ntUltTit"><span aria-hidden="true">⏱️</span> Lo último, verificado</h2>\n'
+            '  <ol class="nt-ix-ult">\n%s\n  </ol>\n'
+            '  <p class="nt-acciones"><a class="nt-btn nt-btn-sec" href="%s#al-momento">Todas las noticias ➔</a></p>\n'
+            '</section>') % ('\n'.join(li(c) for c in cols[:n]), DIARIO)
+
+
+def cierre_indice():
+    return '<div class="nt-indice">\n%s\n%s\n</div>' % (ultimas(), puente(ARCHIVO))
+
+
 def datos():
     return {'agenda': AGENDA, 'mesa': [{'id': i, 't': t, 'q': q} for i, t, q in MESA], 'bandeja': BANDEJA,
             'medios': [{'n': n, 'd': d} for n, d in MEDIOS], 'temasMedios': TEMAS_MEDIOS}
@@ -224,10 +343,10 @@ def construir(base, ref, archivo=DIARIO):
     import puntos_ciegos
     parte = next(p for p in PARTES if p[0] == archivo)
     mias = [x for x in SECCIONES if x[0] in parte[5]]
-    nav = '\n'.join(['    <a href="#%s"><span aria-hidden="true">%s</span> %s</a>' % (i, ico, n) for i, ico, n, _t, _e in mias] +
+    nav = '\n'.join(['    <a href="#%s" data-nt-tab="%s"><span aria-hidden="true">%s</span> %s</a>' % (i, i, ico, n) for i, ico, n, _t, _e in mias] +
                     ['    <a class="nt-barra-otra" href="%s"><span aria-hidden="true">%s</span> %s ➔</a>' % (a, ico, n.split(':')[0])
                      for a, ico, n, *_r in PARTES if a != archivo] +
-                    (['    <a class="nt-barra-otra" href="periodismo-en-riesgo.html"><span aria-hidden="true">🛡️</span> Periodismo en riesgo ➔</a>']
+                    (['    <a class="nt-barra-otra" href="%s"><span aria-hidden="true">🛡️</span> Periodismo en riesgo ➔</a>' % PERIODISMO]
                      if archivo == DIARIO else []))
     cuerpos = {
         'portada': ('<div id="noticiasPortada" class="nt-portada-raiz"><noscript><p>La portada necesita JavaScript.</p></noscript></div>'),
@@ -264,16 +383,20 @@ def construir(base, ref, archivo=DIARIO):
                                      lambda e, p=None: '<span class="est-chip est-%s"%s>%s</span>' % (e, (' data-pend="%s"' % p) if p else '', 'auditada' if e == 'derivado' else e)),
     }
     clases = {'columnas': ' nt-sec-opinion', 'verifica': ' nt-sec-verifica', 'portada': ' nt-sec-portada'}
-    partes = [_sec(i, ico, t, e, cuerpos[i], clases.get(i, '')) for i, ico, _n, t, e in mias]
-    return ('<div class="nt-diario">\n'
-            '<header class="nt-cabezal">\n'
-            '  <p class="nt-cabezal-linea"><span id="noticiasHoy">Las finanzas públicas de México</span><span>Cada cifra, con su documento</span></p>\n'
-            '  <p class="nt-nombre">Auditavisión <span>Noticias</span></p>\n'
-            '  <p class="nt-lema">La noticia, verificada. La opinión, con documentos. Y el caso, en seguimiento.</p>\n'
-            '</header>\n'
-            '<nav class="nt-barra" aria-label="Secciones de esta página y las otras dos de Noticias">\n%s\n</nav>\n%s\n'
+    cifra = {13: 'Trece'}.get(len(puntos_ciegos.REGLAS), str(len(puntos_ciegos.REGLAS)))
+    partes = [_sec(i, ico, t, (e % cifra) if i == 'puntos-ciegos' else e, cuerpos[i], clases.get(i, '')) for i, ico, _n, t, e in mias]
+    # El cabezal del periódico va solo en el diario: en las otras dos páginas
+    # repetía el título y bajaba el contenido (16-11-2026).
+    cabezal = ('<header class="nt-cabezal">\n'
+               '  <p class="nt-cabezal-linea"><span id="noticiasHoy">Las finanzas públicas de México</span><span>Cada cifra, con su documento</span></p>\n'
+               '  <p class="nt-nombre">Auditavisión <span>Noticias</span></p>\n'
+               '  <p class="nt-lema">La noticia, verificada. La opinión, con documentos. Y el caso, en seguimiento.</p>\n'
+               '</header>\n') if archivo == DIARIO else ''
+    return ('<div class="nt-diario%s">\n%s'
+            '<nav class="nt-barra" aria-label="Secciones de esta página y las otras dos de Noticias">\n%s\n</nav>\n%s\n%s\n'
             '<script type="application/json" id="noticiasDatos">%s</script>\n'
-            '</div>') % (nav, '\n'.join(partes), json.dumps(datos(), ensure_ascii=False).replace('</', '<\\/'))
+            '</div>') % ('' if cabezal else ' nt-sin-cabezal', cabezal, nav, '\n'.join(partes), puente(archivo),
+                         json.dumps(datos(), ensure_ascii=False).replace('</', '<\\/'))
 
 
 def insp_nota_chip(estado):

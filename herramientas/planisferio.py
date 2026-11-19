@@ -85,6 +85,10 @@ DIMENSIONES = [
 ]
 
 
+DINERO = 'planisferio-dinero.html'
+DINERO_TIT = 'Cuánto dinero es, de dónde sale y lo que baja al territorio'
+
+
 def clave(a):
     """MÉX → mex: la clave del archivo, sin acentos."""
     return unicodedata.normalize('NFKD', a).encode('ascii', 'ignore').decode().lower()
@@ -125,7 +129,7 @@ TEMAS = [
     ('penal', '🚨', 'Su fraude y su cifra oculta', 'Cuánto fraude dice sufrir su gente, cuántas carpetas abrió su fiscalía y cuántos delitos no llegan a una.'),
     ('ambiental', '🌎', 'Sus recursos naturales', 'Sus acuíferos, bosques, incendios, pesca, minas y su refinería, si la tiene.'),
     ('leyes', '📜', 'Sus leyes del dinero', 'Con qué leyes cobra, compra, se endeuda y rinde cuentas, y dónde se publican.'),
-    ('dimensiones', '🚪', 'En la Enciclopedia y en el Auditor', 'Su estado de cuenta, su circuito del dinero, lo que dejó la ASF y sus otras dimensiones.'),
+    ('dimensiones', '🚪', 'Sus cuentas y sus otras dimensiones', 'Su estado de cuenta y de resultados, su circuito del dinero, lo que dejó la ASF y sus otras dimensiones, en páginas del Planisferio.'),
 ]
 TEMA_DIM = {'financiera': 'presupuestos'}
 
@@ -237,6 +241,9 @@ def _mapa_mun(e, m, g, ref, padron, iv, dv):
         if r[0] >= '990':
             continue
         x = {'c': r[0], 'n': r[1]}
+        sda_m = (dv.get('sda') or {}).get('m', {}).get(m['cve'] + r[0])
+        if sda_m:
+            x['sda'] = sda_m
         if len(r) >= 10:
             ing, part, aport, fortamun, fismdf, predial = r[2], r[3], r[4], r[5], r[6], r[7]
             x.update({'ing': round(ing / 1e6, 1), 'part': round(part / 1e6, 1), 'aport': round(aport / 1e6, 1),
@@ -839,6 +846,32 @@ def matriz():
     return {d for d, _ in tm.PLANISFERIO.values()}
 
 
+def _rezago_cfm(a=None):
+    """Expedientes civiles, familiares y mercantiles pendientes al cierre de
+    2024 (INEGI, CNIJE 2025, tabulados, cuadro 16; gestion_judicial.rezago_cfm):
+    del país (suma de los que lo saben) o de una entidad, con su chip; si su
+    poder judicial no lo sabe, se dice y lleva a su pendiente."""
+    import gestion_judicial as gj
+    est, pais, nolo = gj.rezago_cfm()
+    v = pais if a is None else est[a]
+    partes = []
+    for m, dicho in (('fam', 'familiares'), ('civ', 'civiles'), ('mer', 'mercantiles')):
+        x = v[m]
+        if x is None and a == 'CDMX' and m == 'mer':
+            partes.append('los mercantiles van dentro de los civiles')
+        elif x is None:
+            partes.append('%s: <b>no lo sabe</b>' % dicho)
+        else:
+            partes.append('<b class="num-tabular">%s</b> %s' % (format(x, ','), dicho))
+    txt = ', '.join(partes) + ' ' + chip('oficial')
+    if a is None:
+        txt += (' <small>suma de los %d poderes judiciales que lo saben; %d le dijeron al INEGI que no lo saben</small> %s'
+                % (32 - len(nolo), len(nolo), chip('pendiente', 'judicial-rezago-civil')))
+    elif a in nolo:
+        txt += ' <small>su Poder Judicial le respondió al INEGI que no lo sabe</small> %s' % chip('pendiente', 'judicial-rezago-civil')
+    return txt
+
+
 def _bloque_judicial_mapa(base, ref, filas):
     """Los dos sectores de la dimensión Judicial bajo el mapa (09-11-2026,
     pedido del autor: «potencializar el esquema y estructura de la información,
@@ -1039,7 +1072,7 @@ def _bloque_judicial_mapa(base, ref, filas):
         '<dt>En los 32 poderes judiciales estatales</dt><dd><b class="num-tabular">%s</b> %s <small>(subió de %s al cierre de 2023)</small></dd>'
         '<dt>En juzgados federales (CJF)</dt><dd><b class="num-tabular">%s</b> %s <small>(subió de %s al cierre de 2023)</small></dd>'
         '<dt>En el sistema tradicional (antes de la reforma penal)</dt><dd><b class="num-tabular">%s</b> pendientes %s <small>(%s en estados y %s en el fuero federal)</small></dd>'
-        '<dt>Rezago civil, familiar y mercantil en estados</dt><dd>No publicado por el censo %s</dd></dl></article>'
+        '<dt>Expedientes civiles, familiares y mercantiles pendientes en los estados</dt><dd>%s</dd></dl></article>'
         '<article class="pl-piso pl-piso-jud"><p class="pl-piso-n">Tiempos de resolución y antes y después de la reforma · 2025</p>'
         '<p class="pl-piso-v"><b class="num-tabular">%s días</b> amparo indirecto · <b class="num-tabular">%s días</b> amparo directo %s</p>'
         '<dl class="pl-dl">'
@@ -1061,7 +1094,7 @@ def _bloque_judicial_mapa(base, ref, filas):
         format(gj.PEND_PENAL['pje'][1], ','), chip('oficial'), format(gj.PEND_PENAL['pje'][0], ','),
         format(gj.PEND_PENAL['cjf'][1], ','), chip('oficial'), format(gj.PEND_PENAL['cjf'][0], ','),
         format(gj.PEND_TRAD['total'], ','), chip('oficial'), format(gj.PEND_TRAD['pje'], ','), format(gj.PEND_TRAD['cjf'], ','),
-        chip('pendiente', 'judicial-rezago-civil'),
+        _rezago_cfm(),
         format(jd_d, '.1f'), format(tc_d, '.1f'), chip('oficial'),
         format(jd_l, ',.2f'), chip('oficial'),
         ej.DIAS_ANTES, format(m1[1], ','), format(m1[3], ','), chip('oficial'), format(round(m1[3] / ej.DIAS_ANTES), ','), chip('derivado'),
@@ -1085,6 +1118,47 @@ def _bloque_judicial_mapa(base, ref, filas):
             '<p class="pl-fin-sub">Arriba en el mapa puedes alternar las 8 lentes territoriales (6 de los poderes judiciales estatales y 2 de los circuitos federales). '
             'Aquí abajo están los dos sectores completos a nivel nacional: el reloj en vivo del presupuesto judicial, el tabulador de sueldos y prestaciones por año, día y hora, '
             'y la radiografía de productividad, rezago y tiempos de resolución.</p>' + cuaderno_j)
+
+
+# Los temas de las lentes (reestructura del 16-11-2026, pedido del autor: «veo
+# mucha información sin estar bien esquematizada»). Una dimensión con muchas
+# lentes las ordena por tema: primero se elige el tema y luego la lente. Solo
+# ordena; no agrega cifras. **Una lente nueva de estas dimensiones necesita su
+# tema aquí**, o la generación se detiene (temas_lentes()).
+TEMAS_LENTES = {
+    'judicial': [('dinero', '💰 Su dinero', ['jud', 'juda']),
+                 ('resolvio', '📊 Lo que resolvió', ['judc', 'judx', 'judr', 'judj']),
+                 ('federal', '⚖️ Justicia federal', ['jdfL', 'jdfD'])],
+    'salud': [('imss', '🩺 IMSS · su Memoria', ['imA', 'imX', 'imQ', 'imK']),
+              ('dgis', '🏥 ISSSTE e IMSS · registro de la DGIS', ['isM', 'isK', 'isU', 'imM'])],
+    'social': [('pobreza', '🫂 Pobreza', ['soP', 'soN', 'soX', 'soI']),
+               ('carencias', '🧩 Carencias', ['soS', 'soA', 'soR']),
+               ('aporta', '💵 Aportaciones', ['soQ'])],
+    'administracion': [('gobierno', '🏢 Su gobierno', ['apP', 'apK', 'apX', 'apD', 'apG']),
+                       ('municipios', '🏘️ Sus municipios', ['apM', 'apA'])],
+    'ambiental': [('agua', '💧 Agua', ['acuP', 'acuD']),
+                  ('bosques', '🌲 Bosques e incendios', ['sfT', 'incP', 'incH', 'incN']),
+                  ('pesca', '🐟 Pesca', ['peT', 'peV']),
+                  ('mineria', '⛏️ Minería', ['minT', 'minH']),
+                  ('refinerias', '🛢️ Refinerías', ['refj', 'refp', 'refu']),
+                  ('obras', '🚧 Obras', ['obr'])],
+}
+
+
+def temas_lentes():
+    """{id de lente: tema}. Se detiene si una dimensión con temas tiene una
+    lente sin tema, repetida o que no existe."""
+    de = {}
+    for dim, gs in TEMAS_LENTES.items():
+        suyas = [l['id'] for l in LENTES if l['dim'] == dim]
+        puestas = [i for _, _, ids in gs for i in ids]
+        if sorted(puestas) != sorted(suyas):
+            raise SystemExit('planisferio.py: los temas de «%s» no cubren sus lentes una sola vez: sobran o faltan %s'
+                             % (dim, ', '.join(sorted(set(puestas) ^ set(suyas))) or 'repetidas'))
+        for g, _, ids in gs:
+            for i in ids:
+                de[i] = g
+    return de
 
 
 def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
@@ -1180,8 +1254,12 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
     primera = {}
     for l in LENTES:
         primera.setdefault(l['dim'], l['id'])
-    lentes = ''.join('<button type="button" class="pl-lente" role="radio" aria-checked="%s" data-l="%s" data-dim="%s"%s>%s</button>' % (
+    tema_de = temas_lentes()
+    temas = ''.join('<button type="button" class="pl-tema" aria-pressed="false" data-g="%s" data-dim="%s" hidden>%s</button>' % (g, dim, nom)
+                    for dim, gs in TEMAS_LENTES.items() for g, nom, _ in gs)
+    lentes = ''.join('<button type="button" class="pl-lente" role="radio" aria-checked="%s" data-l="%s" data-dim="%s"%s%s>%s</button>' % (
         'true' if primera[l['dim']] == l['id'] else 'false', l['id'], l['dim'],
+        (' data-g="%s"' % tema_de[l['id']]) if l['id'] in tema_de else '',
         '' if l['dim'] == DIMENSIONES[0][0] else ' hidden', l['nom']) for l in LENTES)
     fu = _fuentes(ref, base)
     sin_est = [f['a'] for f in filas if f['est'] is None]
@@ -1351,6 +1429,7 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
               <button type="button" class="pl-caj-b pl-copia" id="plCopia" hidden><span aria-hidden="true">🔗</span> <span id="plCopiaT">Copiar el enlace de esta vista</span></button>
             </div>
             <p class="pl-dim-aviso" id="plDimAviso" hidden></p>
+            <div class="pl-temas" id="plTemas" role="group" aria-label="Los temas de esta dimensión" hidden>__TEMAS__</div>
             <div class="pl-lentes" role="radiogroup" aria-label="Qué ver en el mapa">%s</div>
             <p class="pl-que" id="plQue"></p>
             <div class="pl-rej">
@@ -1376,11 +1455,6 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
             </aside>
           </section>%s
           <template id="plTplIndice">%s</template>
-          <div class="pl-solo-dim pl-fin" data-dim="financiera">
-            <h3 class="pl-fin-tit">Cuánto dinero es, de dónde sale y lo que baja al territorio</h3>
-            <p class="pl-fin-sub">Los tres presupuestos de la Federación en 2026, lo que transfiere a estados y municipios y lo que ingresaron los municipios. El ritmo por segundo es la cifra anual entre 31,536,000 segundos: sirve para dimensionarla, no es dinero que se mueva en tiempo real.</p>
-            %s
-          </div>
           <div class="pl-solo-dim pl-fin" data-dim="judicial" hidden>
             %s
           </div>
@@ -1389,12 +1463,30 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         pasos, ''.join(dims), d0[0], d0[2].lower(), d0[3], lentes, svg, ''.join(cajones), ''.join(plantillas),
         _cajon('📍', 'Las 32 entidades', 'Elige una entidad para entrar a su portal', 'plTplIndiceTit',
                '<nav class="pl-indice" aria-label="Las 32 entidades, una por una"><ul>%s</ul></nav>' % indice),
-        cuaderno, _bloque_judicial_mapa(base, ref, filas), _json(datos))
+        _bloque_judicial_mapa(base, ref, filas), _json(datos))
     for _l in ('servicios.html',):
         if not os.path.exists(os.path.join(RAIZ, _l)):
             raise SystemExit('planisferio: el puente a Servicios apunta a %s, que no existe' % _l)
     bloque_mapa = bloque_mapa.replace('__ENTS__', ''.join('<option value="%s"></option>' % html.escape(f['n']) for f in sorted(filas, key=lambda x: clave(x['n']))))
-    return {
+    bloque_mapa = bloque_mapa.replace('__TEMAS__', temas)
+    # «Cuánto dinero es, de dónde sale y lo que baja al territorio» (pedido del
+    # autor, 16-11-2026): deja de desglosarse bajo el mapa y vive en su página;
+    # en el Planisferio queda su tarjeta, arriba de «Juega con el mapa».
+    tarjeta_dinero = ('<a class="pl-dinero" href="%s"><span class="pl-dinero-ico" aria-hidden="true">💰</span>'
+                      '<span class="pl-dinero-tx"><b>%s</b><small>Los contadores de los tres presupuestos de 2026, cuánto dinero es y los 16 orígenes del ingreso.</small></span>'
+                      '<span class="pl-dinero-ir" aria-hidden="true">➔</span></a>') % (DINERO, DINERO_TIT)
+    dinero = {
+        'archivo': DINERO, 'padre': (ARCHIVO, 'Planisferio'), 'menu': 'Cuánto dinero es', 'menu_archivo': ARCHIVO,
+        'icono': '💰', 'titulo': DINERO_TIT, 'lema': 'La dimensión financiera del Planisferio, en números',
+        'entrada': ('Los tres presupuestos de la Federación en 2026, lo que transfiere a estados y municipios y lo que ingresaron los municipios. '
+                    'El ritmo por segundo es la cifra anual entre 31,536,000 segundos: sirve para dimensionarla, no es dinero que se mueva en tiempo real.'),
+        'estilos': ['numeros.css', 'radar.css', 'planisferio.css'], 'scripts': ['planisferio.js'],
+        'secciones': [
+            {'id': 'dinero', 'titulo': DINERO_TIT, 'sin_cab': True, 'texto': '', 'tarjetas': [],
+             'bloque': '<div class="pl-fin pl-fin-pag">%s</div><nav class="pl-saltos" aria-label="Volver al mapa"><a href="%s">🗺️ Volver al mapa del Planisferio</a></nav>' % (cuaderno, ARCHIVO)},
+        ],
+    }
+    return [{
         'archivo': ARCHIVO, 'menu': 'Planisferio', 'menu_archivo': ARCHIVO,
         'icono': '🗺️', 'titulo': 'Planisferio', 'lema': 'México en un mapa: cada entidad, cada municipio, cada peso',
         'entrada': ('El dinero público tiene domicilio. Elige una dimensión y toca una entidad para entrar a su portal, con sus municipios. '
@@ -1404,7 +1496,9 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         'fondo': 'assets/auditor/img/planisferio-paisaje.webp', 'rubro': 'planisferio',
         'estilos': ['numeros.css', 'radar.css', 'planisferio.css'],
         'scripts': ['planisferio.js'],
+        'sin_saltos': True,
         'secciones': [
+            {'id': 'dinero', 'titulo': DINERO_TIT, 'sin_cab': True, 'texto': '', 'tarjetas': [], 'bloque': tarjeta_dinero},
             {'id': 'mapa', 'titulo': 'Juega con el mapa',
              'texto': 'Hoy se pintan %d dimensiones. Cada una trae su «Cómo leerla» y lo que su mapa no dice.' % len(pintadas),
              'tarjetas': [], 'bloque': bloque_mapa},
@@ -1413,7 +1507,7 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
              'texto': ('El Planisferio crece por entregas, una dimensión a la vez y, después, municipio por municipio. Mientras llegan al mapa, cada una ya tiene su lugar en la Enciclopedia:'),
              'tarjetas': [], 'bloque': '<ul class="pl-otras">%s</ul>' % otras},
         ]),
-    }
+    }, dinero]
 
 
 def _nota_amb(filas):
@@ -1673,13 +1767,13 @@ def _nota_jud(filas):
             'después de años de juicio o una demanda que se desechó el primer día, y el censo no los separa: la distancia es una pregunta, no un veredicto. '
             '<b>Lo que concluye no es lo que debe.</b> %s concluyó %s de cada 100 asuntos que le entraron %s, el más bajo del país, y es el lugar %d de 32 en causas penales pendientes '
             '(%s %s, con %s personas juzgadoras en todas las materias). Pero en lo civil, familiar y mercantil el INEGI cuenta como ingresada toda demanda, '
-            'y cuántas quedaron sin resolver no lo publica %s. '
+            'y lo que quedó sin resolver se cuenta aparte, en los expedientes pendientes de cada portal %s. '
             '<b>En el circuito federal</b>, un amparo indirecto tardó en promedio %s días en %s y %s días en %s %s, pero cada circuito atiende materias y cargas distintas, '
             'y el Órgano de Administración Judicial no reparte la nómina por circuito %s.') % (
                 a[0]['n'], _pesos(a[0]['juda']), chip('derivado'), a[-1]['n'], _pesos(a[-1]['juda']), chip('derivado'),
                 format(a[0]['juda'] / a[-1]['juda'], '.1f'),
                 c[0]['n'], pct(c[0]['judc']), chip('derivado'), r.index(c[0]) + 1, format(c[0]['judr'], ','), chip('oficial'), c[0]['judj'],
-                chip('pendiente', 'judicial-rezago-civil'),
+                chip('oficial'),
                 format(d[0]['jdfD'], '.1f'), d[0]['n'], format(d[-1]['jdfD'], '.1f'), d[-1]['n'], chip('oficial'),
                 chip('pendiente', 'poderes-judicial-0'))
 
@@ -1770,18 +1864,57 @@ def _deuda_portal(base, ref, e, pm=''):
               '<li>Solo puede endeudarse para inversión pública productiva y para refinanciarla, nunca con acreedores extranjeros ni en moneda extranjera (%s, art. 117, fr. VIII).</li>'
               '<li>%s</li>'
               '<li>Hacienda la evalúa «única y exclusivamente» con la información que entrega el propio gobierno y la del Registro Público Único (%s, art. 43).</li>'
-              '<li>La deuda de sus municipios también la mide el Sistema de Alertas: lo que pagaron y pidieron prestado en 2024 ya está arriba, con su cuenta; su saldo aún no lo integramos %s.</li>'
+              '<li>La deuda de sus municipios se revisa por dos vías oficiales: lo que pagaron y pidieron prestado en 2024 (cuenta pública al INEGI) y su saldo al cierre de 2025 y semáforo en el Sistema de Alertas de Hacienda; solo quedan pendientes los 41 municipios del país con deuda inscrita que no entregaron su información a Hacienda %s.</li>'
               '<li>Su propia ley de deuda pública se publica en: %s. <a href="%s#fed-deuda">⚖️ Las leyes de la deuda en los tres niveles</a></li></ul></div>') % (
         ln._a(ln.CPEUM, 'Constitución'), r_techo, ln._a(ln.pdf('LDFEFM.pdf'), 'LDF'),
         '<span class="est-chip est-pendiente" data-pend="deuda-municipios">pendiente</span>', html.escape(ln.ESTADOS[a][0]), ln.ARCHIVO)
-    return '<div class="pl-pisos">%s%s%s</div>%s%s' % (p1, p2, pm, ciego, reglas)
+    return '<div class="pl-pisos">%s%s%s%s</div>%s%s' % (p1, p2, pm, _rpu_piso(e), ciego, reglas)
+
+
+def _rpu_piso(e):
+    """A quién le debe: el Registro Público Único de Hacienda, crédito por
+    crédito (anclar_rpu.py). Cada crédito es oficial; las sumas, derivado."""
+    import anclar_rpu
+    D = anclar_rpu.cargar()
+    if not D:
+        return ''
+    M = D['meta']
+    r = anclar_rpu.resumen_estado(D, e['abbr'])
+    tit = '4 · A quién le debe · Registro Público Único, saldo al %s' % M['corteTxt']
+    fu = ('%s, <a href="%s">registro diario</a> descargado el %s (huella SHA-256 <code>%s…</code>). '
+          'El saldo de cada crédito es el que reporta cada gobierno a Hacienda cada trimestre.') % (
+        M['fuente'], M['url'], M['descarga'], M['sha256'][:12])
+    if not r['con']:
+        return ('<article class="pl-piso pl-piso-deuda"><p class="pl-piso-n">%s</p><p class="pl-piso-v"><b>Sin saldo reportado</b> %s</p>'
+                '<p>De sus %d créditos inscritos, ninguno reporta saldo al corte.</p><p class="pl-piso-f">%s</p></article>') % (tit, chip('oficial'), r['n'], fu)
+    nom = {'e': 'el gobierno del estado', 'm': 'sus municipios', 'o': 'sus organismos (agua, transporte, fideicomisos…)'}
+    if e['abbr'] == 'CDMX':
+        nom['e'] = 'el gobierno de la Ciudad'
+    quien = '; '.join('%s %s' % (nom[k], mdp(r['k'][k])) for k in ('e', 'm', 'o') if r['k'].get(k))
+    acre = ''.join('<dt>%s</dt><dd>%s %s <small>%s de lo que debe</small></dd>' % (
+        html.escape(c), mdp(v), chip('derivado'), pct(v / r['saldo'] * 100)) for c, v in r['acre'][:5])
+    extra = []
+    if r['bur']:
+        extra.append('%s en emisiones bursátiles: ahí el registro anota al fiduciario, no a quienes compraron los certificados' % mdp(r['bur']))
+    if r['app']:
+        extra.append('%s en obligaciones de asociaciones público-privadas: es lo comprometido con la empresa que construyó u opera la obra, no un préstamo de banco' % mdp(r['app']))
+    if r['cp']:
+        extra.append('%d préstamo%s de corto plazo con saldo, para cubrir faltas de liquidez (LDF, art. 31)' % (r['cp'], '' if r['cp'] == 1 else 's'))
+    return ('<article class="pl-piso pl-piso-deuda"><p class="pl-piso-n">%s</p>'
+            '<p class="pl-piso-v"><b class="num-tabular">%s</b> %s <small>en %d créditos con saldo de %d inscritos</small></p>'
+            '<p>Lo deben %s.</p><dl class="pl-dl">%s</dl>%s'
+            '<p class="pl-piso-f">%s Suma de los saldos de los créditos de la entidad, ordenados por acreedor con el nombre con que se firmaron (BBVA Bancomer es hoy BBVA México). '
+            'No se compara con el Sistema de Alertas: aquel mide al cierre de 2025 solo lo que se paga con ingresos de libre disposición. '
+            '<a href="herramienta-inspector-pregunta.html?q=%s">Pregúntale al Auditor a quién le debe</a></p></article>') % (
+        tit, mdp(r['saldo']), chip('derivado'), r['con'], r['n'], quien, acre,
+        ('<p><small>%s.</small></p>' % (lambda t: t[:1].upper() + t[1:])('; '.join(extra))) if extra else '', fu,
+        html.escape(__import__('urllib.parse').parse.quote('¿A quién le debe %s?' % e['name'])))
 
 
 def _deuda_mun(ref, e, m, dv, con_mapa):
-    """La deuda en la cuenta de sus municipios, 2024 (03-11-2026): lo que
-    pagaron por sus créditos y lo que pidieron prestado, suma de los que
-    rindieron cuenta (derivado). El saldo sigue pendiente."""
-    tit = '3 · La deuda en la cuenta de sus municipios · 2024'
+    """La deuda en la cuenta de sus municipios, 2024 (INEGI) y su saldo y
+    semáforo al cierre de 2025 en el Sistema de Alertas de Hacienda (SHCP)."""
+    tit = '3 · La deuda de sus municipios: pagos de 2024 (INEGI) y saldo al cierre de 2025 (SHCP)'
     pend = chip('pendiente', 'deuda-municipios')
     if not m['conCifra']:
         return ('<article class="pl-piso pl-piso-deuda"><p class="pl-piso-n">%s</p>'
@@ -1796,26 +1929,54 @@ def _deuda_mun(ref, e, m, dv, con_mapa):
     n_emp = sum(1 for _r, d in filas if d[5])
     adef = sum(d[4] for _r, d in filas)
     n_pago = sum(1 for x in pago if x)
+    # Saldo al cierre de 2025 en el Sistema de Alertas de Hacienda (SHCP)
+    sda = dv.get('sda') or {}
+    sda_m = sda.get('m') or {}
+    sda_edo = [(r[1], sda_m[m['cve'] + r[0]]) for r in m['lista'] if (m['cve'] + r[0]) in sda_m]
+    med_edo = [(nom_m, s) for nom_m, s in sda_edo if s[0] in (1, 2, 3)]
+    sin_edo = [nom_m for nom_m, s in sda_edo if s[0] == 0]
+    dyo_edo = sum(s[1] for _n, s in med_edo)
+    v_edo = sum(1 for _n, s in med_edo if s[0] == 1)
+    a_edo = sum(1 for _n, s in med_edo if s[0] == 2)
+    r_edo = sum(1 for _n, s in med_edo if s[0] == 3)
+    if sda_edo:
+        top_sda = max(med_edo, key=lambda x: x[1][1]) if med_edo else None
+        sem_txt = '%d en sostenible (verde), %d en observación (amarillo) y %d en elevado (rojo)' % (v_edo, a_edo, r_edo)
+        if sin_edo:
+            sem_txt += '; %d no entregó información a Hacienda (%s) %s' % (len(sin_edo), ', '.join(html.escape(x) for x in sin_edo[:4]), pend)
+        bloque_sda = (
+            '<dt>Saldo de deuda y obligaciones al cierre de 2025 (SHCP)</dt>'
+            '<dd><b class="num-tabular">%s</b> %s <small>en %d de %d municipios inscritos en el Registro Público Único</small></dd>'
+            '<dt>Semáforo municipal del Sistema de Alertas (CP 2025)</dt><dd>%s</dd>' % (
+                mdp(dyo_edo), chip('derivado'), len(med_edo), len(sda_edo), sem_txt) +
+            ('<dt>Municipio con mayor saldo al cierre de 2025</dt><dd>%s: <b class="num-tabular">%s</b> %s <small>(%s%% de sus ingresos libres)</small></dd>' % (
+                html.escape(top_sda[0]), mdp(top_sda[1][1]), chip('oficial'), format(top_sda[1][3], '.1f')) if top_sda and top_sda[1][1] > 0 else '')
+        )
+    else:
+        bloque_sda = ('<dt>Saldo al cierre de 2025 en el Sistema de Alertas (SHCP)</dt>'
+                      '<dd>Ningún municipio con deuda inscrita en el Registro Público Único %s</dd>' % chip('oficial'))
     ir = ('<p class="pl-ficha-ir"><a href="%s?ml=dpag#mapa-municipios">Municipio por municipio, en el mapa ➔</a></p>' % portal(e['abbr'])) if con_mapa else ''
     if tot:
         top_r, top_d = max(filas, key=lambda x: x[1][1] + x[1][2] + x[1][3])
-        top = '<dt>El que más pagó</dt><dd>%s: %s %s</dd>' % (html.escape(top_r[1]), mdp((top_d[1] + top_d[2] + top_d[3]) / 1e6), chip('oficial'))
-        desglose = ('<dt>Capital que devolvieron</dt><dd>%s %s</dd><dt>Intereses y comisiones</dt><dd>%s %s <small>lo que les costó deber</small></dd>' % (
+        top = '<dt>El que más pagó en 2024</dt><dd>%s: %s %s</dd>' % (html.escape(top_r[1]), mdp((top_d[1] + top_d[2] + top_d[3]) / 1e6), chip('oficial'))
+        desglose = ('<dt>Capital que devolvieron en 2024</dt><dd>%s %s</dd><dt>Intereses y comisiones en 2024</dt><dd>%s %s <small>lo que les costó deber</small></dd>' % (
             mdp(cap / 1e6), chip('derivado'), mdp(inte / 1e6), chip('derivado')))
     else:
         top = desglose = ''
     return ('<article class="pl-piso pl-piso-deuda"><p class="pl-piso-n">%s</p>'
-            '<p class="pl-piso-v"><b class="num-tabular">%s</b> %s <small>pagaron por sus créditos</small></p>'
-            '<dl class="pl-dl"><dt>Municipios que pagaron créditos</dt><dd>%d de %d con cuenta <small>(%d en total)</small></dd>%s'
-            '<dt>Pidieron prestado en el año</dt><dd>%s %s <small>%s</small></dd>'
-            '<dt>Adeudos de años anteriores (ADEFAS)</dt><dd>%s %s <small>lo que quedó a deber el año anterior, sobre todo a proveedores, y pagó en 2024: no es un crédito</small></dd>%s</dl>'
-            '<p class="pl-piso-f">Suma de lo que cada municipio con cuenta reportó en su capítulo de deuda pública (capital, intereses, comisiones y gastos) y en sus empréstitos. '
-            'INEGI, finanzas públicas municipales %d %s. <b>Es lo que pagaron y pidieron en el año, no lo que deben:</b> el saldo de cada municipio lo publica Hacienda en el Sistema de Alertas, '
-            'y aún no lo integramos %s. Un municipio que reportó $0 puede deber a proveedores o tener un crédito sin pagos ese año.</p>%s</article>' % (
-                tit, mdp(tot / 1e6), chip('derivado'), n_pago, len(filas), m['n'], desglose,
+            '<p class="pl-piso-v"><b class="num-tabular">%s</b> %s <small>pagaron en 2024 · </small><b class="num-tabular">%s</b> %s <small>de saldo al cierre de 2025</small></p>'
+            '<dl class="pl-dl">%s<dt>Municipios que pagaron créditos en 2024 (INEGI)</dt><dd>%d de %d con cuenta <small>(%d en total)</small></dd>%s'
+            '<dt>Pidieron prestado en 2024</dt><dd>%s %s <small>%s</small></dd>'
+            '<dt>Adeudos de años anteriores (ADEFAS 2024)</dt><dd>%s %s <small>lo que quedó a deber el año anterior, sobre todo a proveedores: no es un crédito</small></dd>%s</dl>'
+            '<p class="pl-piso-f">Pagos y empréstitos de 2024: INEGI, finanzas públicas municipales %d %s. '
+            'Saldo al cierre de 2025 y semáforo: SHCP, Sistema de Alertas de los Municipios, evaluación de la Cuenta Pública 2025 (<a href="%s">variables por municipio, XLSX</a>; huella SHA-256 <code>%s…</code>) %s. '
+            'Los municipios que no aparecen en el Sistema de Alertas no tienen financiamientos inscritos en el Registro Público Único (LDF, art. 43); en el país, 41 municipios con deuda inscrita no entregaron su información a Hacienda %s.</p>%s</article>' % (
+                tit, mdp(tot / 1e6), chip('derivado'), mdp(dyo_edo), chip('derivado'),
+                bloque_sda, n_pago, len(filas), m['n'], desglose,
                 mdp(emp / 1e6), chip('derivado'),
                 'ninguno recibió préstamos' if not n_emp else ('%d %s' % (n_emp, 'municipio recibió préstamos' if n_emp == 1 else 'municipios recibieron préstamos')),
-                mdp(adef / 1e6), chip('derivado'), top, dv['anio'], ref('ref-inegi-efipem'), pend, ir))
+                mdp(adef / 1e6), chip('derivado'), top, dv['anio'], ref('ref-inegi-efipem'),
+                html.escape(sda.get('url', '')), (sda.get('sha256') or '')[:12], ref('ref-shcp-alertas'), pend, ir))
 
 
 def _inversion_mun(ref, e, m, iv, con_mapa):
@@ -1953,7 +2114,20 @@ def _legislativa_portal(base, ref, e):
               '<a href="numeros-lo-que-cuestan-los-poderes.html#pd-congreso">Lo que cuestan los Poderes, en la Enciclopedia ➔</a></p></div>') % (
         ln._a(ln.CPEUM, 'Constitución'), ln._a(ln.CPEUM, 'Constitución'), chip('pendiente', 'asesores-congresos-locales'),
         html.escape(ln.ESTADOS[a][0]), ln.ARCHIVO, clave(a), quote(a))
-    return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, reglas)
+    # Lo que trabajo (12-11-2026): las iniciativas de la tabla 20 del mismo censo.
+    f = lambda v: format(v, ',')
+    p3 = ('<article class="pl-piso pl-piso-leg" id="iniciativas"><p class="pl-piso-n">%d · Lo que trabajó su congreso · primer año de su legislatura</p>'
+          '<p class="pl-piso-v"><b class="num-tabular">%s iniciativas</b> %s</p>'
+          '<dl class="pl-dl"><dt>Dictaminadas en el mismo periodo</dt><dd>%s %s <small>el %s %% de las presentadas %s; el INEGI cuenta así las que quedaron en dictamen, aprobadas o desechadas</small></dd>'
+          '<dt>· aprobadas o procedentes</dt><dd>%s %s</dd>'
+          '<dt>Seguían en estudio</dt><dd>%s %s</dd>'
+          '<dt>Con otro estatus</dt><dd>%s %s <small>ingreso, desistimiento, otro o no disponible</small></dd></dl>'
+          '<p class="pl-piso-f">Son las iniciativas de los periodos que el congreso reportó, con el estatus que tenían al terminar el periodo en que se presentaron: '
+          'la que se dictaminó después no cuenta aquí. Más iniciativas no es mejor trabajo, y los periodos de cada congreso no son los mismos. '
+          'INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, tabla 20, p. 50 %s.</p></article>') % (
+              3 if p2 else 2, f(c['ini']), chip('oficial'), f(c['idic']), chip('derivado'), c['idp'], chip('oficial'),
+              f(c['iapr']), chip('oficial'), f(c['iest']), chip('oficial'), f(c['iotro']), chip('derivado'), ref('ref-inegi-cnple2025'))
+    return '<div class="pl-pisos">%s%s%s</div>%s%s' % (p1, p2, p3, ciego, reglas)
 
 
 def _judicial_portal(base, ref, e):
@@ -1992,16 +2166,16 @@ def _judicial_portal(base, ref, e):
           '<dt>Personas juzgadoras</dt><dd><b class="num-tabular">%d</b> %s <small>lugar %d de 32 por plantilla en todas las materias</small></dd>'
           '<dt>Carga concluida por persona juzgadora</dt><dd><b class="num-tabular">%s asuntos al año</b> %s <small>(%s al mes; lugar %d de 32; promedio nacional: %s al año)</small></dd>'
           '<dt>Causas penales pendientes (sistema acusatorio)</dt><dd><b class="num-tabular">%s</b> %s <small>al cierre de 2024, lugar %d de 32 (%s por persona juzgadora %s); el INEGI cuenta cada persona procesada</small></dd>'
-          '<dt>Rezago civil, familiar y mercantil</dt><dd>Sin cifra %s <small>el reporte del censo del INEGI no publica cuántos quedaron en trámite</small></dd>'
+          '<dt>Expedientes civiles, familiares y mercantiles pendientes</dt><dd>%s <small>al cierre de 2024, entre los que entraron ese año y los de antes</small></dd>'
           '</dl><p class="pl-piso-f">INEGI, CNIJF-E 2025, reporte de resultados: asuntos ingresados y concluidos, tabla 23 (p. 39); '
-          'causas penales pendientes, tabla 25 (p. 45); personas juzgadoras, tabla 6 (p. 12) %s. Las divisiones son nuestras.</p></article>') % (
+          'causas penales pendientes, tabla 25 (p. 45); personas juzgadoras, tabla 6 (p. 12); expedientes pendientes, tabulados básicos, cuadro 16 %s. Las divisiones son nuestras.</p></article>') % (
               pct(j['c100']), chip('derivado'),
               format(j['i'], ','), chip('oficial'),
               format(j['c'], ','), chip('oficial'), lugar('c100'), pct(nac_c100),
               j['j'], chip('oficial'), lugar('j'),
               format(j['cj'], ','), chip('derivado'), format(round(j['cj'] / 12, 1), '.1f'), lugar('cj'), format(nac_cj, ','),
               format(j['p'], ','), chip('oficial'), lugar('p'), format(round(j['p'] / j['j'], 1), '.1f') if j['j'] else '—', chip('derivado'),
-              chip('pendiente', 'judicial-rezago-civil'),
+              _rezago_cfm(a),
               ref('ref-inegi-cnijfe2025-rr'))
     # Sector 1 · Piso 2: Productividad, litigiosidad y tiempos en su Circuito Judicial Federal
     n = ic.EDO.index(a) + 1
@@ -2157,15 +2331,35 @@ def _salud_portal(base, ref, e):
               format(i['u'], ','), chip('oficial'), format(i['cam'], ','), chip('oficial'), format(i['enf'], ','), chip('oficial'), format(i['cons'], ','), chip('oficial'),
               format(m['med'], ','), chip('oficial'), pct(100.0 * i['med'] / (i['med'] + m['med'])), chip('derivado'),
               chip('pendiente', 'salud-issste-servicios'), html.escape(gs.fuente_dgis()['url']), html.escape(nom))
+    bi = gs.bienestar()
+    eb = bi['ent'].get(a)
+    if eb:
+        p3v = ('<p class="pl-piso-v"><b class="num-tabular">%s</b> egresos hospitalarios %s</p>'
+               '<dl class="pl-dl"><dt>Egresos con al menos una cirugía</dt><dd>%s %s <small>%s de cada 100 %s (en el país, %s)</small></dd>'
+               '<dt>Procedimientos quirúrgicos</dt><dd>%s %s</dd>'
+               '<dt>Su parte del IMSS-Bienestar</dt><dd>%s %s <small>de los %s egresos que registró en el país</small></dd>') % (
+                   format(eb['egr'], ','), chip('oficial'), format(eb['egrq'], ','), chip('oficial'), format(100.0 * eb['egrq'] / eb['egr'], '.1f'), chip('derivado'),
+                   format(100.0 * bi['tot']['egrq'] / bi['tot']['egr'], '.1f'), format(eb['q'], ','), chip('oficial'),
+                   pct(100.0 * eb['egr'] / bi['tot']['egr']), chip('derivado'), format(bi['tot']['egr'], ','))
+    else:
+        p3v = ('<p class="pl-piso-v">Sin egresos registrados %s</p><dl class="pl-dl"><dt>En la base de egresos de 2025</dt>'
+               '<dd>Ningún hospital del IMSS-Bienestar en %s <small>la base registra hospitales del IMSS-Bienestar en %d entidades</small></dd>') % (
+                   chip('oficial'), html.escape(nom), len(bi['ent']))
+    p3 = ('<article class="pl-piso pl-piso-sal"><p class="pl-piso-n">3 · El IMSS-Bienestar en %s · 2025</p>%s'
+          '<dt>Consultas y gasto</dt><dd>Sin cifra %s <small>ningún informe oficial las publica</small></dd></dl>'
+          '<p class="pl-piso-f">Secretaría de Salud, DGIS, registros de egresos hospitalarios 2025 (<a href="%s">datos abiertos</a>), hospitales de los Servicios de Salud '
+          'IMSS-Bienestar en %s, contados por la CLUES de cada uno. Un egreso es una salida del hospital, no una persona. No incluye al programa IMSS-Bienestar del IMSS. '
+          'Las divisiones son nuestras.</p></article>') % (html.escape(nom), p3v, chip('pendiente', 'salud-imss-bienestar'), html.escape(bi['fu']['url']), html.escape(nom))
     ciego = ('<p class="pl-dim-nota"><b>Lo que estas cifras no dicen.</b> Cuentan cuánto se hizo y con qué, no si se hizo bien ni a tiempo: ni la Memoria del IMSS ni el registro '
              'de la DGIS dicen cuánto se espera una consulta o una cirugía %s. Los hospitales de alta especialidad del IMSS se cuentan en el estado donde están y atienden a gente de otros. '
              'Las dos fuentes no se mezclan: desde 2025 el IMSS del registro de la DGIS incluye las unidades rurales del antiguo programa IMSS-Bienestar. '
-             'Y quien no tiene seguridad social se atiende en el IMSS-Bienestar o en los servicios del estado, que no están en esta dimensión %s.</p>') % (
+             'Y quien no tiene seguridad social se atiende en el IMSS-Bienestar o en los servicios del estado: del IMSS-Bienestar van sus egresos, pero sus consultas y su gasto siguen '
+             'sin documento %s, y los servicios del estado no están en esta dimensión.</p>') % (
                  chip('pendiente', 'salud-tiempos-espera'), chip('pendiente', 'salud-imss-bienestar'))
     ir = ('<p class="pl-ficha-ir"><a href="planisferio.html?d=salud&amp;e=%s">El IMSS y el ISSSTE de los 32 estados, en el mapa ➔</a> '
           '<a href="datos-salud-sistema.html#sal-estados">La tabla completa, en la Enciclopedia ➔</a> '
           '<a href="datos-salud-imss.html">El IMSS en el país: lo que cuesta y lo que resuelve ➔</a></p>') % quote(a)
-    return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, ir)
+    return '<div class="pl-pisos">%s%s%s</div>%s%s' % (p1, p2, p3, ciego, ir)
 
 
 def _administracion_portal(base, ref, e):
@@ -2544,8 +2738,9 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
             {'id': 'leyes', 'titulo': 'Sus leyes del dinero',
              'texto': 'Con qué leyes cobra, compra, se endeuda y rinde cuentas %s, quién las aprueba y dónde se publican.' % nom,
              'tarjetas': [], 'bloque': leyes},
-        {'id': 'dimensiones', 'titulo': 'En la Enciclopedia y en el Auditor',
-         'texto': 'Lo demás de %s que ya vive en la Enciclopedia y en el Auditor, con el estado elegido:' % nom,
+        {'id': 'dimensiones', 'titulo': 'Sus cuentas y sus otras dimensiones',
+         'texto': ('Lo demás de %s, con el estado elegido. Cada tarjeta abre su página aquí, en el Planisferio: la misma de la base, sin una cifra distinta. '
+                   'Para todo lo demás, pregúntale al Auditor.') % nom,
          'tarjetas': [], 'bloque': '<div class="pl-puertas">%s%s</div>' % (puertas_aud, ''.join(puertas))},
     ]
     # Cada dimensión, vinculada a su Contexto dimensional, al estado de
@@ -2598,7 +2793,7 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
         out.append(dict(comun, **{
             'archivo': subpagina(a, x['id']), 'padre': (ARCHIVO, 'Planisferio'), 'padre2': (portal(a), nom),
             'menu': t[2],
-            'icono': t[1], 'titulo': '%s: %s' % (nom, t[2][0].lower() + t[2][1:]) if x['id'] != 'dimensiones' else '%s en la Enciclopedia y en el Auditor' % nom,
+            'icono': t[1], 'titulo': '%s: %s' % (nom, t[2][0].lower() + t[2][1:]) if x['id'] != 'dimensiones' else '%s: sus cuentas y sus otras dimensiones' % nom,
             'lema': 'Su portal en el Planisferio', 'entrada': x['texto'],
             'secciones': [dict(x, texto=''),
                           {'id': 'otros-temas', 'titulo': 'Los demás temas de %s' % nom, 'texto': '',
@@ -2612,7 +2807,7 @@ def paginas(base, ref, tres, cuenta, cuanto='', origenes=''):
     iv = inv_mun(padron)
     dv = deu_mun(padron)
     E = sorted(base['estados'], key=lambda x: clave(x['name']))
-    out = [pagina_mapa(base, ref, tres, padron, cuenta, cuanto, origenes)]
+    out = pagina_mapa(base, ref, tres, padron, cuenta, cuanto, origenes)
     for k, e in enumerate(E):
         out.extend(pagina_portal(base, ref, e, padron, E[k - 1], E[(k + 1) % len(E)], iv, dv))
     return out

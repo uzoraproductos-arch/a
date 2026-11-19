@@ -94,7 +94,7 @@
     "cifra:limantour-superavit-y-peso-oro",
     "fuente:limantour-superavit-y-peso-oro"
    ],
-   "consultado": "2026-11-11",
+   "consultado": "2026-11-18",
    "estado": "no abrió",
    "error": "[Errno -2] Name or service not known"
   },
@@ -581,6 +581,52 @@
    "http": 200,
    "copiado": "2026-10-27"
   },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5803757&fecha=13/11/2026": {
+   "primera_vez": "2026-11-18",
+   "historial": [],
+   "usos": [
+    "cotejo:senado-ley-de-ingresos-2027:0",
+    "fuente:senado-ley-de-ingresos-2027"
+   ],
+   "consultado": "2026-11-18",
+   "estado": "copiado",
+   "sha256": "838dfd1a09797988c021d18d5f182ad1069366d88e3d80ed447f816431fdc24b",
+   "bytes": 838514,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-18"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5803758&fecha=13/11/2026": {
+   "primera_vez": "2026-11-18",
+   "historial": [],
+   "usos": [
+    "cotejo:senado-ley-de-ingresos-2027:6",
+    "fuente:senado-ley-de-ingresos-2027"
+   ],
+   "consultado": "2026-11-18",
+   "estado": "copiado",
+   "sha256": "dbcab5bf925f7ebbad47d97225c1424dcf4bac2d9b3cc421f1f78def68d52516",
+   "bytes": 468152,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-18"
+  },
+  "https://dof.gob.mx/nota_detalle.php?codigo=5803759&fecha=13/11/2026": {
+   "primera_vez": "2026-11-18",
+   "historial": [],
+   "usos": [
+    "cifra:senado-ley-de-ingresos-2027",
+    "cotejo:senado-ley-de-ingresos-2027:5",
+    "fuente:senado-ley-de-ingresos-2027"
+   ],
+   "consultado": "2026-11-18",
+   "estado": "copiado",
+   "sha256": "59a79cb1efafd0ab060b69133ed1494c42852af239aa3be4beb91f59cfe2b35a",
+   "bytes": 334550,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-18"
+  },
   "https://dof.gob.mx/reglas_2014/SEDESOL_301213_13.pdf": {
    "primera_vez": "2026-10-27",
    "historial": [],
@@ -910,7 +956,7 @@
    "usos": [
     "biblioteca:ref-conapo-proyecciones"
    ],
-   "consultado": "2026-11-11",
+   "consultado": "2026-11-18",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -920,7 +966,7 @@
    "usos": [
     "biblioteca:ref-sat-padron-rfc"
    ],
-   "consultado": "2026-11-11",
+   "consultado": "2026-11-18",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -1014,6 +1060,20 @@
    "tipo": "application/pdf",
    "http": 200,
    "copiado": "2026-11-02"
+  },
+  "https://upcp-compranet.buengobierno.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf": {
+   "primera_vez": "2026-11-17",
+   "historial": [],
+   "usos": [
+    "fuente:huawei-gobierno-codigo-magenta"
+   ],
+   "consultado": "2026-11-17",
+   "estado": "copiado",
+   "sha256": "ad5a29d1044eaa71f015cfd406b4fcd99de578164229ca8460fbd4c83783c984",
+   "bytes": 545365,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-17"
   },
   "https://www.asf.gob.mx/": {
    "primera_vez": "2026-10-27",
@@ -2054,7 +2114,7 @@
    "usos": [
     "biblioteca:ref-oaj-trimestre2026"
    ],
-   "consultado": "2026-11-11",
+   "consultado": "2026-11-18",
    "estado": "no abrió",
    "error": "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1011)"
   },
@@ -2415,9 +2475,13 @@
    "usos": [
     "biblioteca:ref-inafed-presidencias"
    ],
-   "consultado": "2026-11-11",
-   "estado": "no abrió",
-   "error": "Forbidden"
+   "consultado": "2026-11-17",
+   "estado": "copiado",
+   "sha256": "d59880c105f9df00e12b0d4f80785b5a9be429a8ba7703b3e2c4e8a4fa4fc609",
+   "bytes": 25616,
+   "tipo": "text/html",
+   "http": 200,
+   "copiado": "2026-11-17"
   },
   "https://www.diputados.gob.mx/LeyesBiblio/abro/LPCGPF_abro.pdf": {
    "primera_vez": "2026-10-27",
@@ -2890,6 +2954,24 @@
    "tipo": "application/pdf",
    "http": 200,
    "copiado": "2026-10-27"
+  },
+  "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf": {
+   "primera_vez": "2026-11-18",
+   "historial": [],
+   "usos": [
+    "auditoria:deuda-congreso-2027",
+    "cifra:senado-ley-de-ingresos-2027",
+    "cotejo:senado-ley-de-ingresos-2027:1",
+    "cotejo:senado-ley-de-ingresos-2027:2",
+    "cotejo:senado-ley-de-ingresos-2027:3"
+   ],
+   "consultado": "2026-11-18",
+   "estado": "copiado",
+   "sha256": "1c247831459988960cbb9ef86868c9174e1bce7532957e8156b359e214ac10db",
+   "bytes": 763072,
+   "tipo": "application/pdf",
+   "http": 200,
+   "copiado": "2026-11-18"
   },
   "https://www.diputados.gob.mx/LeyesBiblio/pdf/LOAPF.pdf": {
    "primera_vez": "2026-10-27",
@@ -3627,7 +3709,7 @@
    "usos": [
     "auditoria:inversion-megaobras"
    ],
-   "consultado": "2026-11-11",
+   "consultado": "2026-11-18",
    "estado": "no abrió",
    "error": "Not Found"
   },
@@ -4413,7 +4495,7 @@
    "usos": [
     "fuente:imss-modalidad-40-gestores"
    ],
-   "consultado": "2026-11-11",
+   "consultado": "2026-11-18",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -4586,7 +4668,7 @@
    "usos": [
     "biblioteca:ref-sat-denuncias"
    ],
-   "consultado": "2026-11-11",
+   "consultado": "2026-11-18",
    "estado": "no abrió",
    "error": "Forbidden"
   },
@@ -4695,7 +4777,7 @@
    "usos": [
     "biblioteca:ref-presidencia-2ig"
    ],
-   "consultado": "2026-11-11",
+   "consultado": "2026-11-18",
    "estado": "no abrió",
    "error": "Forbidden"
   },

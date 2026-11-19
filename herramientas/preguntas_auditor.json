@@ -385,6 +385,26 @@
    "ir": "herramienta-calculadora-ticket-retienen.html?m=15000&p=mes&n=bruto"
   },
   {
+   "q": "Trabajo en el gobierno y gano 20 mil al mes, ¿cuánto me retienen?",
+   "ir": "herramienta-calculadora-ticket-retienen.html?m=20000&p=mes&n=bruto&r=sueldos&pt=issste"
+  },
+  {
+   "q": "¿Qué son las cuotas al ISSSTE?",
+   "ir": "glosario.html#Cuotas-al-ISSSTE"
+  },
+  {
+   "q": "¿Qué es el salario base de cotización?",
+   "ir": "glosario.html#Salario-Base-de-Cotizacion"
+  },
+  {
+   "q": "Revisa mi recibo de nómina",
+   "ir": "herramienta-inspector-factura.html"
+  },
+  {
+   "q": "Quiero que revisen la nómina de mi empresa",
+   "ir": "servicio-nomina.html"
+  },
+  {
    "q": "La calculadora",
    "ir": "herramienta-calculadora.html"
   },
@@ -406,7 +426,10 @@
   },
   {
    "q": "Contratos de Grupo Carso",
-   "ir": "contratos-publicos.html?q=grupo%20carso"
+   "ir": "contratos-publicos.html#grupo-carso",
+   "dice": [
+    "OPERADORA CICSA"
+   ]
   },
   {
    "q": "¿Quién es Andrés Manuel López Obrador?",
@@ -722,6 +745,13 @@
    ]
   },
   {
+   "q": "¿Cuánto rezago familiar tienen los juzgados de los estados?",
+   "ir": "datos-judicial-gestion.html#jud-rezago",
+   "dice": [
+    "1,667,913"
+   ]
+  },
+  {
    "q": "¿Cuántos asuntos resuelven los juzgados federales?",
    "ir": "datos-judicial-gestion.html#jud-gestion",
    "dice": [
@@ -733,6 +763,13 @@
    "ir": "datos-judicial-gestion.html#jud-tiempos",
    "dice": [
     "522 días"
+   ]
+  },
+  {
+   "q": "¿Cuánto tarda un juicio de amparo en un juzgado de distrito?",
+   "ir": "datos-judicial-gestion.html#jud-tiempos",
+   "dice": [
+    "124 días"
    ]
   },
   {
@@ -851,6 +888,50 @@
   {
    "q": "¿Cuántas consultas da el IMSS-Bienestar?",
    "ir": "datos-salud-sistema.html#sal-imss_bienestar"
+  },
+  {
+   "q": "Revisa el RFC AAG090703QT6",
+   "ir": "herramienta-inspector-padron.html?q=AAG090703QT6",
+   "dice": [
+    "Crédito fiscal firme"
+   ]
+  },
+  {
+   "q": "¿Está en alguna lista el RFC CASB540918LVI?",
+   "ir": "herramienta-inspector-padron.html?q=CASB540918LVI",
+   "dice": [
+    "OFAC",
+    "no publicamos el nombre"
+   ]
+  },
+  {
+   "q": "¿Está en la OFAC el cártel de Sinaloa?",
+   "ir": "herramienta-inspector-padron.html?q=cartel%20sinaloa",
+   "dice": [
+    "SINALOA CARTEL"
+   ]
+  },
+  {
+   "q": "¿Cómo reviso a mi cliente en las listas de lavado?",
+   "ir": "herramienta-inspector-padron.html"
+  },
+  {
+   "q": "Contratos de MOA221226143",
+   "ir": "contratos-publicos.html?q=MOA221226143"
+  },
+  {
+   "q": "¿Cuántas cirugías hizo el IMSS-Bienestar en 2025?",
+   "ir": "datos-salud-sistema.html#sal-imss_bienestar",
+   "dice": [
+    "622,579"
+   ]
+  },
+  {
+   "q": "¿Cuántos egresos tuvo el IMSS-Bienestar en Chiapas?",
+   "ir": "planisferio-chis-salud.html",
+   "dice": [
+    "129,708"
+   ]
   },
   {
    "q": "¿Cuántas consultas da el ISSSTE?",
@@ -1535,7 +1616,7 @@
   },
   {
    "q": "Quiero revisar a un proveedor antes de contratarlo",
-   "ir": "servicios-catalogo.html#sv-diligencia"
+   "ir": "servicio-diligencia.html"
   },
   {
    "q": "Muéstrame el mapa de los tres presupuestos",
@@ -1740,6 +1821,22 @@
    "dice": [
     "no es un incumplimiento",
     "transitorio octavo"
+   ]
+  },
+  {
+   "q": "¿Cuántas iniciativas se presentaron en el Congreso de Jalisco?",
+   "ir": "planisferio-jal-legislativa.html",
+   "dice": [
+    "702 iniciativas",
+    "Más iniciativas no es mejor trabajo"
+   ]
+  },
+  {
+   "q": "¿Qué congreso local presentó más iniciativas?",
+   "ir": "planisferio.html?d=legislativa",
+   "dice": [
+    "Puebla",
+    "818"
    ]
   },
   {
@@ -2285,19 +2382,19 @@
   },
   {
    "q": "¿Qué servicios ofrecen para despachos contables?",
-   "ir": "servicios.html"
+   "ir": "servicios-tu-perfil.html"
   },
   {
    "q": "¿Qué servicios ofrecen para la temporada electoral?",
-   "ir": "servicios.html"
+   "ir": "servicios-catalogo.html#fam-electoral"
   },
   {
    "q": "¿Qué servicios tienen para prevenir fraude y lavado de dinero?",
-   "ir": "servicios.html"
+   "ir": "servicios-catalogo.html#fam-prevencion"
   },
   {
    "q": "¿Dan talleres para auditores?",
-   "ir": "servicios.html"
+   "ir": "servicio-capacitacion.html"
   },
   {
    "q": "¿Cómo reviso si una factura trae bien la retención de IVA?",
@@ -2316,82 +2413,351 @@
    "ir": "servicios-por-que.html#sostenemos"
   },
   {
+   "q": "Expediente del Tren Maya",
+   "ir": "expediente-tren-maya.html",
+   "dice": [
+    "EXP-001"
+   ]
+  },
+  {
+   "q": "expediente de huachicol",
+   "ir": "expediente-huachicol-fiscal.html"
+  },
+  {
+   "q": "Expedientes de investigación",
+   "ir": "expedientes-investigacion.html"
+  },
+  {
+   "q": "Expedientes de control interno",
+   "ir": "expedientes-investigacion.html"
+  },
+  {
+   "q": "casos por aclarar del AIFA",
+   "ir": "expedientes.html#exp-aifa"
+  },
+  {
+   "q": "Grupo Prodi",
+   "ir": "contratos-publicos.html#grupo-prodi",
+   "dice": [
+    "MOTA-ENGIL MEXICO",
+    "pendiente",
+    "Contrato, concesión y permiso no son lo mismo"
+   ],
+   "no_dice": [
+    "49"
+   ]
+  },
+  {
+   "q": "¿Grupo PRODI es concesionaria del gobierno?",
+   "ir": "contratos-publicos.html#grupo-prodi",
+   "dice": [
+    "Lo que falta cotejar",
+    "no un partido"
+   ]
+  },
+  {
+   "q": "Mota-Engil",
+   "ir": "contratos-publicos.html#grupo-prodi",
+   "dice": [
+    "licitación pública"
+   ]
+  },
+  {
+   "q": "Laboratorios Pisa",
+   "ir": "contratos-publicos.html?q=LPI830527KJ2"
+  },
+  {
+   "q": "la empresa ICA",
+   "ir": "contratos-publicos.html?q=ica",
+   "dice": [
+    "¿Cuál buscas?"
+   ]
+  },
+  {
+   "q": "¿es concesionaria Laboratorios Pisa?",
+   "ir": "contratos-publicos.html?q=LPI830527KJ2",
+   "dice": [
+    "ComprasMX trae contratos, no concesiones"
+   ]
+  },
+  {
+   "q": "la empresa Odebrecht",
+   "ir": "contratos-publicos.html#grupos",
+   "dice": [
+    "No encontré",
+    "filial"
+   ]
+  },
+  {
+   "q": "¿Qué es una concesión?",
+   "ir": "glosario.html#Concesion"
+  },
+  {
+   "q": "grupo fertinal",
+   "ir": "herramienta-megaobras-sector.html#obra-fertinal"
+  },
+  {
+   "q": "¿Puede ser candidato un deudor alimentario?",
+   "ir": "datos-legislativo-elecciones.html#leg-deudores",
+   "dice": [
+    "no puede ser registrado como candidato",
+    "rnoa.dif.gob.mx"
+   ]
+  },
+  {
+   "q": "mi candidato debe pensión alimenticia, ¿puede competir?",
+   "ir": "datos-legislativo-elecciones.html#leg-deudores",
+   "dice": [
+    "no copia ese registro ni publica nombres"
+   ]
+  },
+  {
+   "q": "certificado de no deudor alimentario",
+   "ir": "datos-legislativo-elecciones.html#leg-deudores"
+  },
+  {
+   "q": "¿Qué es el RUG?",
+   "ir": "glosario.html#Registro-Unico-de-Garantias-Mobiliarias",
+   "dice": [
+    "No es una lista de fianzas"
+   ]
+  },
+  {
+   "q": "requisitos para ser candidato",
+   "ir": "datos-legislativo-elecciones.html#leg-candidatos"
+  },
+  {
+   "q": "Telmex",
+   "ir": "contratos-publicos.html#grupo-america-movil",
+   "dice": [
+    "RADIOMOVIL DIPSA",
+    "oficial"
+   ]
+  },
+  {
+   "q": "Grupo Salinas",
+   "ir": "contratos-publicos.html#grupo-salinas",
+   "dice": [
+    "no son del grupo"
+   ]
+  },
+  {
+   "q": "Seguros Inbursa",
+   "ir": "contratos-publicos.html#grupo-inbursa",
+   "dice": [
+    "Su propia denominación dice que pertenece"
+   ]
+  },
+  {
+   "q": "Grupo Pisa",
+   "ir": "contratos-publicos.html#grupo-pisa",
+   "dice": [
+    "DIMESA"
+   ]
+  },
+  {
+   "q": "Ferromex",
+   "ir": "contratos-publicos.html#grupo-grupo-mexico"
+  },
+  {
+   "q": "¿Qué proveedores están sancionados o inhabilitados?",
+   "ir": "contratos-publicos.html#sancionados",
+   "dice": [
+    "2,408",
+    "89 empresas"
+   ]
+  },
+  {
+   "q": "Contratos de EYA840229LX3",
+   "ir": "contratos-publicos.html?q=EYA840229LX3",
+   "dice": [
+    "Directorio de Proveedores y Contratistas Sancionados"
+   ]
+  },
+  {
+   "q": "¿Qué municipios tienen deuda elevada?",
+   "ir": "planisferio.html?d=deuda",
+   "dice": [
+    "Caborca",
+    "Tlahualilo",
+    "endeudamiento elevado"
+   ]
+  },
+  {
+   "q": "municipios más endeudados",
+   "ir": "planisferio.html?d=deuda"
+  },
+  {
+   "q": "¿Qué municipios de Sonora están en el semáforo rojo de deuda?",
+   "ir": "planisferio-son-deuda.html",
+   "dice": [
+    "Puerto Peñasco"
+   ]
+  },
+  {
+   "q": "¿A quién le debe Nuevo León?",
+   "ir": "planisferio-nl-deuda.html",
+   "dice": [
+    "Banobras",
+    "Registro Público Único"
+   ]
+  },
+  {
+   "q": "¿Cuánto le deben los estados a Banobras?",
+   "ir": "planisferio.html?d=deuda",
+   "dice": [
+    "Ciudad de México",
+    "Banobras"
+   ]
+  },
+  {
+   "q": "¿A quién le debe el municipio de Caborca?",
+   "ir": "planisferio-son-deuda.html",
+   "dice": [
+    "Efficiency Matters Corporation",
+    "no es un préstamo de banco"
+   ]
+  },
+  {
+   "q": "¿Con qué bancos está endeudado Jalisco?",
+   "ir": "planisferio-jal-deuda.html",
+   "dice": [
+    "Banorte"
+   ]
+  },
+  {
+   "q": "¿Cada cuándo se actualiza la base de datos?",
+   "ir": "base-al-dia.html",
+   "dice": [
+    "La base al día"
+   ]
+  },
+  {
+   "q": "Quiero revisar mi lista de proveedores contra las listas del SAT",
+   "ir": "herramienta-inspector-padron.html#lote"
+  },
+  {
+   "q": "¿Qué servicios ofrece Auditavisión?",
+   "ir": "servicios.html"
+  },
+  {
+   "q": "¿Cuánto cuesta la radiografía de mi municipio?",
+   "ir": "servicio-radiografia.html"
+  },
+  {
+   "q": "¿En qué consiste el servicio de revisión de contrapartes?",
+   "ir": "servicio-contrapartes.html"
+  },
+  {
+   "q": "¿Qué servicios tienen para regidores?",
+   "ir": "servicios-tu-perfil.html"
+  },
+  {
+   "q": "Quiero el kit de entrega-recepción para mi municipio",
+   "ir": "servicio-entrega.html"
+  },
+  {
+   "q": "Necesito una licencia de temporada para mi redacción",
+   "ir": "servicio-temporada.html"
+  },
+  {
+   "q": "¿Cómo se cobra la revisión de facturas por lote?",
+   "ir": "servicio-facturas.html"
+  },
+  {
+   "q": "El índice general",
+   "ir": "indice.html"
+  },
+  {
+   "q": "¿Qué tiene la plataforma?",
+   "ir": "indice.html"
+  },
+  {
+   "q": "Mapa del sitio",
+   "ir": "indice.html"
+  },
+  {
+   "q": "Mis respuestas",
+   "ir": "mis-respuestas.html"
+  },
+  {
+   "q": "Mi caso",
+   "ir": "mis-respuestas.html"
+  },
+  {
    "q": "¿Cómo cotizo una radiografía para mi municipio?",
-   "ir": "servicios-catalogo.html#sv-radiografia",
+   "ir": "servicio-radiografia.html",
    "dice": [
     "Precio fijo y público",
-    "Cotiza este servicio"
+    "Pide una cotización"
    ]
   },
   {
    "q": "¿Qué me entregan si contrato el expediente de investigación?",
-   "ir": "servicios-catalogo.html#sv-expediente",
+   "ir": "servicio-expediente.html",
    "dice": [
     "Cronología"
    ]
   },
   {
    "q": "¿Cuánto cuesta el Vigía de proveedores?",
-   "ir": "servicios-catalogo.html#sv-seguimiento",
+   "ir": "servicio-seguimiento.html",
    "dice": [
     "Suscripción mensual",
-    "No damos un monto"
+    "llegan por escrito antes de empezar"
    ]
   },
   {
    "q": "Quiero el kit de entrega-recepción para mi cabildo",
-   "ir": "servicios-catalogo.html#sv-entrega",
+   "ir": "servicio-entrega.html",
    "dice": [
     "Ya opera para quien tiene un código de acceso vigente"
    ]
   },
   {
    "q": "¿Cuánto cobran por revisar mis facturas por lote?",
-   "ir": "servicios-catalogo.html#sv-facturas",
+   "ir": "servicio-facturas.html",
    "dice": [
     "Precio por lote"
    ]
   },
   {
    "q": "¿Cuánto cuestan sus servicios?",
-   "ir": "servicios-como-se-cobra.html",
+   "ir": "servicios.html",
    "dice": [
-    "No damos montos todavía"
+    "todavía no hay tarifas publicadas"
    ]
   },
   {
    "q": "Necesito un servicio contra el lavado de dinero para conocer a mi cliente",
-   "ir": "servicios-catalogo.html#sv-diligencia",
-   "dice": [
-    "No decimos que evitamos el fraude"
-   ]
+   "ir": "servicio-contrapartes.html"
   },
   {
    "q": "¿En qué consiste la licencia de temporada para redacciones?",
-   "ir": "servicios-catalogo.html#sv-temporada"
+   "ir": "servicio-temporada.html"
   },
   {
    "q": "Quiero contratar un taller de capacitación para mi despacho",
-   "ir": "servicios-catalogo.html#sv-capacitacion",
+   "ir": "servicio-capacitacion.html",
    "dice": [
     "Precio por taller"
    ]
   },
   {
    "q": "¿Cuánto cuesta la licencia de las herramientas?",
-   "ir": "servicios-catalogo.html#sv-licencia",
+   "ir": "servicio-licencia.html",
    "dice": [
     "Convenio anual"
    ]
   },
   {
    "q": "¿Cómo cotizo una revisión documental puntual?",
-   "ir": "servicios-catalogo.html#sv-revision"
+   "ir": "servicio-revision.html"
   },
   {
    "q": "¿Cómo cotizo una radiografía para mi municipio?",
    "modo": "periodista",
-   "ir": "servicios-catalogo.html#sv-radiografia",
+   "ir": "servicio-radiografia.html",
    "dice": [
     "En campaña, el mismo documento y el mismo precio",
     "memoria de promesas"
@@ -2403,20 +2769,20 @@
   {
    "q": "Necesito un servicio contra el lavado de dinero para conocer a mi cliente",
    "modo": "inspector",
-   "ir": "servicios-catalogo.html#sv-diligencia",
+   "ir": "servicio-contrapartes.html",
    "dice": [
     "Antes de encargarlo, revísalo tú",
-    "Busca su RFC en la lista 69-B",
+    "Tu cartera completa, en una matriz",
     "Es investigación documental"
    ]
   },
   {
    "q": "¿Cuánto cobran por revisar mis facturas por lote?",
    "modo": "ciudadano",
-   "ir": "servicios-catalogo.html#sv-facturas",
+   "ir": "servicio-facturas.html",
    "dice": [
     "trabajo de pago",
-    "El lector de facturas"
+    "El Lector de facturas CFDI"
    ],
    "no_dice": [
     "estado de cuenta cívico"
@@ -2425,7 +2791,7 @@
   {
    "q": "¿Qué me entregan si contrato el expediente de investigación?",
    "modo": "ambientalista",
-   "ir": "servicios-catalogo.html#sv-expediente",
+   "ir": "servicio-expediente.html",
    "dice": [
     "Este servicio no mide el daño ambiental"
    ],

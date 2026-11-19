@@ -32,6 +32,8 @@ insert into public.envios (tipo, asunto, texto, pagina, estado) values
   ('errata', 'Cifra del PEF', 'La cifra del anexo no coincide con el DOF.', 'numeros-gasto-publico.html', 'publicado'),
   ('solicitud', 'Investigar contrato', 'Quiero que revisen el contrato de la obra.', null, 'nuevo');
 insert into public.preguntas_bot (pregunta, motivo, version) values ('¿cuánto costó la barda?', 'sin', '20261024r'), ('¿Cuánto  costó la barda?', 'sin', '20261024r');
+insert into public.preguntas_bot (pregunta, motivo, version, modo, modo_toca) values ('¿es cierto lo del contrato?', 'sin', '20261116e', 'ciudadano', 'periodista');
+select pg_temp.debe_fallar($$insert into public.preguntas_bot (pregunta, motivo, version, modo) values ('¿y esto?', 'sin', '20261116e', 'chismoso')$$, 'una pregunta con un modo que no existe');
 select pg_temp.debe_fallar($$insert into public.envios (tipo, asunto, texto, correo) values ('tema','Hola','Texto suficiente aquí','x@y.mx')$$, 'un correo sin aceptar el aviso de privacidad');
 select pg_temp.debe_fallar($$insert into public.envios (tipo, asunto, texto, pagina) values ('tema','Hola','Texto suficiente aquí','https://otro.sitio/x')$$, 'una página que no es de la plataforma');
 select pg_temp.debe_fallar($$insert into public.consultas_ia (pregunta, fichas, version, verificada, rechazo) values ('x?', '{1}', '20261024r', true, 'formato')$$, 'una consulta verificada y rechazada a la vez');
@@ -45,6 +47,7 @@ set role anon;
 select pg_temp.igual((select count(*) from public.envios), 0, 'envíos que ve el público');
 select pg_temp.igual((select count(*) from public.envios_publicos), 1, 'erratas publicadas que ve el público');
 select pg_temp.igual((select count(*) from public.preguntas_bot), 0, 'preguntas del bot que ve el público');
+select pg_temp.debe_fallar($$select * from public.preguntas_por_modo$$, 'que el público lea el registro por modo');
 select pg_temp.igual((select count(*) from public.donaciones), 0, 'donaciones (públicas, aún vacías)');
 select pg_temp.debe_fallar($$insert into public.envios (tipo, asunto, texto) values ('tema','Directo','Sin pasar por la función')$$, 'que el público escriba directo en envíos');
 select pg_temp.debe_fallar($$insert into public.donaciones (monto, comprobante) values (100, 'falso')$$, 'que el público invente una donación');
@@ -81,6 +84,7 @@ select pg_temp.igual((select count(*) from public.envios), 2, 'envíos que ve la
 update public.foro_hilos set aprobado = true;
 update public.envios set estado = 'en_revision', respuesta = 'Lo revisamos' where tipo = 'solicitud';
 select pg_temp.igual((select veces from public.preguntas_por_atender limit 1), 2, 'veces de la pregunta más repetida (sin importar mayúsculas ni espacios)');
+select pg_temp.igual((select veces from public.preguntas_por_modo where le_toca = 'periodista' and se_pregunto_en = 'ciudadano'), 1, 'preguntas que le tocaban al modo Periodista y se hicieron en Ciudadano');
 reset role;
 
 set role anon;
@@ -417,6 +421,58 @@ select pg_temp.igual(public.anotar_aviso('OTR030303ZZ0', 'alta_69b', 'Nada.'), 0
 reset role;
 set role anon;
 select pg_temp.igual((select pagos from public.ingresos_por_via(2026) where via = 'servicio'), 1, 'la cuenta pública por vía se puede leer sin datos del cliente');
+reset role;
+
+-- 13. El control interno (18-11-2026): renovar, la bitácora y la medición de uso.
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select count(*) as n from public.crear_codigo('RENO2345', interval '1 day', 1, null, 'Para renovar') \gset
+select id as ir from public.codigos where codigo = 'RENO2345' \gset
+reset role;
+reset request.jwt.claim.sub;
+set role service_role;
+select (public.canjear_codigo('RENO2345'))->>'pase' as pr \gset
+update public.canjes set en = now() - interval '3 days' where pase_id = :'pr';
+select pg_temp.igual((public.pase_hasta(:'pr') < now())::int, 1, 'el pase de un día canjeado hace tres ya se acabó');
+select pg_temp.igual(public.registrar_uso(:'pr', 'sesion0001', '[{"tipo":"vista","pagina":"planisferio.html"},{"tipo":"tiempo","pagina":"planisferio.html","segundos":"600"},{"tipo":"clic","pagina":"planisferio.html","destino":"planisferio-jal.html","etiqueta":"Jalisco"},{"tipo":"pregunta","pagina":"herramienta-inspector-pregunta.html","modo":"periodista","destino":"noticias-auditavision.html"},{"tipo":"espia","pagina":"index.html"},{"tipo":"vista","pagina":"https://otro.sitio/x"}]'::jsonb), 4,
+  'el registro de uso guarda los cuatro eventos con forma y tira los otros dos');
+select pg_temp.igual((select count(*) from public.uso_eventos where seccion = 'Planisferio'), 3, 'la sección sale de la página');
+select pg_temp.igual(public.registrar_uso(null, 'mala sesion!', '[{"tipo":"vista","pagina":"index.html"}]'::jsonb), 0, 'una sesión mal formada no se guarda');
+reset role;
+set role anon;
+select pg_temp.debe_fallar($$select public.registrar_uso(null, 'sesion0002', '[{"tipo":"vista","pagina":"index.html"}]'::jsonb)$$, 'que el público escriba directo en el uso');
+select pg_temp.debe_fallar($$select count(*) from public.uso_eventos$$, 'que el público lea el uso');
+select pg_temp.debe_fallar($$select public.uso_tablero(30)$$, 'que el público vea el tablero');
+select pg_temp.debe_fallar($$select count(*) from public.bitacora_admin$$, 'que el público lea la bitácora');
+select pg_temp.debe_fallar($$select public.renovar_codigo(1, interval '1 day')$$, 'que el público renueve un código');
+reset role;
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
+select pg_temp.debe_fallar($$select public.uso_tablero(30)$$, 'que una cuenta común vea el tablero');
+select pg_temp.debe_fallar($$select * from public.bitacora_lista()$$, 'que una cuenta común lea la bitácora');
+select pg_temp.debe_fallar($$select public.renovar_codigo(1, interval '1 day')$$, 'que una cuenta común renueve un código');
+select pg_temp.debe_fallar($$insert into public.bitacora_admin (quien, accion) values ('yo', 'borré')$$, 'que una cuenta común escriba en la bitácora');
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+select public.revocar_codigo(:ir);
+select pg_temp.igual(public.renovar_codigo(:ir, interval '7 days', 2, null), 1, 'renovar le da más tiempo a la persona que lo canjeó');
+select pg_temp.igual((select count(*) from public.codigos where id = :ir and not revocado and usos_max = 3), 1, 'renovar quita la revocación y suma personas');
+select pg_temp.debe_fallar($$select public.renovar_codigo((select id from public.codigos where codigo = 'RENO2345'), interval '-1 day')$$, 'renovar con tiempo negativo');
+select pg_temp.debe_fallar($$select public.renovar_codigo((select id from public.codigos where codigo = 'RENO2345'), null, 0, now() - interval '1 day')$$, 'renovar con una fecha para canjear que ya pasó');
+select pg_temp.igual((select minutos from public.codigo_uso(:ir) where persona = 1), 10, 'minutos de uso de la persona');
+select pg_temp.igual((select vistas from public.codigo_uso(:ir) where persona = 1), 1, 'páginas vistas de la persona');
+select pg_temp.igual((select renovado::int from public.codigo_uso(:ir) where persona = 1), 1, 'el registro dice que se le renovó');
+select pg_temp.igual(((public.uso_tablero(30)) -> 'resumen' ->> 'minutos')::bigint, 10, 'el tablero suma los minutos');
+select pg_temp.igual(((public.uso_tablero(30)) -> 'resumen' ->> 'preguntas')::bigint, 1, 'el tablero cuenta las preguntas al chat');
+select pg_temp.igual(jsonb_array_length((public.uso_tablero(7)) -> 'por_dia'), 7, 'el tablero trae un renglón por día del periodo');
+select pg_temp.igual((select count(*) from public.bitacora_lista() where objeto = 'RENO2345' and accion in ('creó', 'revocó', 'renovó') and quien = 'admin@ejemplo.mx'), 3,
+  'la bitácora anota crear, revocar y renovar con el correo de la administración');
+select pg_temp.igual((select count(*) from public.bitacora_lista() where objeto = 'RENO2345' and accion = 'editó'), 0, 'renovar no se anota también como edición');
+select public.editar_codigo(:ir, 'Renovado', 3, null, interval '1 day');
+select pg_temp.igual((select count(*) from public.bitacora_lista() where objeto = 'RENO2345' and accion = 'editó' and detalle ? 'nota'), 1, 'editar anota qué cambió');
+reset role;
+reset request.jwt.claim.sub;
+set role service_role;
+select pg_temp.igual((public.pase_hasta(:'pr') > now() + interval '6 days')::int, 1, 'el pase vencido abre siete días desde la renovación');
 reset role;
 
 \echo 'Todas las pruebas de permisos pasaron.'

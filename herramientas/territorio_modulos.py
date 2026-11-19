@@ -481,6 +481,33 @@ def municipios(base, ref, glos, raiz):
 # El Auditor: «¿qué estados no cuadran?» (02-11-2026). Lo lee asistente-charla.js
 # dentro de D.san (clave map_cuadre), con el mismo cálculo de la lente.
 # ---------------------------------------------------------------------------
+def _base_al_dia():
+    import fuentes
+    n = {m: [f for f in fuentes.FUENTES if f['modo'] == m] for m in fuentes.MODOS}
+    nombres = lambda l: ', '.join(f['que'].split(' (')[0] for f in l)
+    return {
+        'tit': 'Cada cuándo se actualiza la base de datos',
+        'h': ('<p>Las dependencias no publican cada día, así que la base no se rehace a diario: cada fuente tiene su calendario y se alimenta '
+              'con cada novedad. En <a href="base-al-dia.html"><b>La base al día</b></a> está cada una de sus %d fuentes:</p><ul>'
+              '<li><b>🤖 Se actualizan solas cada semana (%d):</b> %s.</li>'
+              '<li><b>🔔 Avisan y se cotejan (%d):</b> %s.</li>'
+              '<li><b>✋ Se integran a mano en cuanto salen (%d):</b> como el Presupuesto, la Cuenta Pública, la UMA y las encuestas del INEGI.</li></ul>'
+              '<p>Cada novedad pasa por el mismo camino: la huella del archivo, su cuadre y su chip. Lo que una dependencia no publica queda en el '
+              '<a href="pendientes.html">Registro de pendientes</a>.</p>')
+             % (len(fuentes.FUENTES), len(n['sola']), nombres(n['sola']), len(n['aviso']), nombres(n['aviso']), len(n['mano'])),
+        'ci': [], 'fu': [],
+        'sug': ['¿Cómo se arma la base de datos?', '¿Qué datos faltan por publicar?', '¿Qué bases puedo descargar?'],
+        'ir': ['base-al-dia.html', 'La base al día']}
+
+
+def _servicios():
+    import apartados
+    import auditorias
+    import servicios_fichas
+    return servicios_fichas.temas(apartados.SERVICIOS, apartados.COBRO, apartados.LINEAS, apartados.PERFILES,
+                                  apartados.PERFILES_CORTO, auditorias.db())
+
+
 def temas_bot(d):
     IE = d['inspector_estatal']['entidades']
     nom = {e['abbr']: e['name'] for e in d['estados']}
@@ -512,21 +539,12 @@ def temas_bot(d):
                {'que': 'Lo que cada gobierno estatal reportó como recibido', 'e': 'oficial', 'fu': INEGI}],
         'sug': ['¿Cuánto debe cada estado?', '¿Qué dejó la ASF por aclarar en mi estado?', 'Muéstrame el mapa de obras con alerta ambiental por estado'],
         'ir': ['numeros-mapa-del-gasto-federalizado.html?l=cuadre', 'El mapa del dinero']},
-        # Revisar a un proveedor (02-11-2026): lo gratis primero, y el servicio.
-        'serv_diligencia': {
-        'tit': 'Cómo revisar a un proveedor antes de contratarlo',
-        'h': '<p>Lo básico lo puedes hacer gratis, aquí mismo:</p><ol>'
-             '<li><b>Sus contratos con el gobierno:</b> búscalo por nombre o RFC en <a href="contratos-publicos.html">Contratos públicos</a> (ComprasMX).</li>'
-             '<li><b>La lista negra del SAT:</b> pregúntame «¿está en la lista negra del SAT?» con su RFC o su nombre. Si un proveedor está en la lista 69-B como definitivo, '
-             'sus facturas pueden dejar de servirte para deducir (Código Fiscal de la Federación, art. 69-B).</li>'
-             '<li><b>Sanciones e informes:</b> en su ficha te armo las búsquedas en el directorio de proveedores sancionados, el DOF y la ASF.</li></ol>'
-             '<p>Si necesitas una ficha completa, con cada hallazgo y su documento, y un aviso cuando algo cambie, eso es el servicio <b>Revisión de un proveedor</b>. '
-             'Tener contratos con el gobierno no es una irregularidad, y estar en una lista no prueba un delito.</p>',
-        'ci': [],
-        'fu': [{'que': 'Lista de contribuyentes con operaciones presuntamente inexistentes (art. 69-B)', 'e': 'oficial',
-                'fu': {'tx': 'Código Fiscal de la Federación, art. 69-B', 'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf'}}],
-        'sug': ['¿Está en la lista negra del SAT?', '¿Qué contratos tiene una empresa con el gobierno?', '¿Qué servicios ofrece Auditavisión?'],
-        'ir': ['servicios-catalogo.html#sv-diligencia', 'Revisión de un proveedor']},
+        # Los servicios (18-11-2026, pedido del autor): cada uno, su familia, su perfil y el
+        # catálogo, con lo que la plataforma ya hace gratis. Los arma servicios_fichas.py desde
+        # SERVICIOS de apartados.py; reemplazan a serv_diligencia y serv_nomina (02 y 18-11-2026).
+        **_servicios(),
+        # La base al día (18-11-2026): lo lee del registro de fuentes (herramientas/fuentes.py), igual que base-al-dia.html.
+        'base_al_dia': _base_al_dia(),
         # ¿Cómo nos sostenemos? (07-11-2026): lo lee de monetizacion.py, igual que servicios.html.
         'serv_sosten': {
         'tit': '¿Cómo se sostiene Auditavisión?',

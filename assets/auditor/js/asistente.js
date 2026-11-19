@@ -181,9 +181,10 @@
   function dictamenHtml(q, r, f, antes) {
     var t = TIPO[f.t] || ['📄', 'Ficha'], k = 0;
     function cap(tit) { return '<h3 class="dic-cap"><span>' + ROMANO[k++] + '.</span> ' + tit + '</h3>'; }
-    var ci = (f.ci || []).map(function (c) {
-      return '<li><b>' + esc(c.v) + '</b><span>' + esc(c.etq) + '</span>' + chip(c) +
-        (c.op ? '<small class="pa-op"><b>Operación:</b> ' + esc(c.op) + '</small>' : '') + '</li>';
+    /* Las cifras van en tabla (16-11-2026): cifra, qué es, su estado y su operación. */
+    var ci = (f.ci || []).map(function (c, i) {
+      return '<tr><td class="dic-n">' + (i + 1) + '</td><td class="dic-v">' + esc(c.v) + '</td><td>' + esc(c.etq) +
+        (c.op ? '<small class="pa-op"><b>Operación:</b> ' + esc(c.op) + '</small>' : '') + '</td><td>' + chip(c) + '</td></tr>';
     }).join('');
     var fu = (f.fu || []).map(function (x, i) {
       return '<li><b>F' + (i + 1) + '.</b> ' + (x.url ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.tx) + ' ↗</a>' : esc(x.tx)) + '</li>';
@@ -205,6 +206,24 @@
     var ir = r.ir || f.ir, m = modoVivo(), cm = MODO_ICO[m] ? capaModo(q, r, m) : null;
     var capa = cm && cm.html ? cm.html.replace(/<button\b[^>]*>[\s\S]*?<\/button>/g, '') : '';
     var resp = r.html.replace(/<details class="pa-dedonde"/g, '<details class="pa-dedonde" open');
+    /* «De un vistazo» (16-11-2026): qué trae el dictamen antes de leerlo. Cuenta
+       lo que ya está en la ficha; no agrega cifras ni entra a la huella. */
+    var nE = { oficial: 0, derivado: 0, pendiente: 0 };
+    (f.ci || []).forEach(function (c) { if (nE[c.e] != null) nE[c.e]++; });
+    var xf = f.t === 'investigacion' && f.ex ? f : invToca(q, r);
+    var mira = '<aside class="dic-mirada" aria-label="De un vistazo"><b class="dic-mirada-t">De un vistazo</b><dl>' +
+      '<div><dt>Cifras</dt><dd>' + (f.ci || []).length + '</dd></div>' +
+      ['oficial', 'derivado', 'pendiente'].filter(function (e) { return nE[e]; }).map(function (e) {
+        return '<div><dt>' + chip({ e: e }) + '</dt><dd>' + nE[e] + '</dd></div>'; }).join('') +
+      '<div><dt>Documentos citados</dt><dd>' + (f.fu || []).length + '</dd></div>' +
+      (f.cot && f.cot.length ? '<div><dt>Afirmaciones cotejadas</dt><dd>' + f.cot.length + '</dd></div>' : '') +
+      (xf ? '<div class="dic-mirada-exp"><dt>Expediente</dt><dd>' + esc(xf.exn) + (xf.ab ? ' · abierto' : ' · documentado') + '</dd></div>' : '') +
+      '</dl></aside>';
+    var expCap = xf ? '<p>Esta respuesta toca una de las grandes investigaciones de la plataforma. Su expediente, <b>' + esc(xf.exn) + ' · ' + esc(xf.tit) + '</b>, ' +
+      'junta el caso en cinco preguntas, su bitácora, lo que sigue y lo que falta' + (xf.nov ? '; el último registro de su bitácora es del ' + esc(xf.nov) : '') + '. ' +
+      '<a href="' + esc(xf.ex) + '">Abrir el expediente ➔</a></p>' +
+      '<p>Este dictamen es una de sus piezas: el expediente junta los dictámenes del caso bajo su propio folio (<b>' + esc(xf.fo) + '</b>), como una sola investigación.</p>' +
+      '<p class="dic-chico">El expediente se arma solo con la base de la plataforma; no forma parte de la huella de este dictamen.</p>' : '';
     return '<article class="pa-nota dic-doc">' +
       '<header class="dic-cab"><div class="dic-cab-marca"><img src="' + LOGO + '" alt="" width="62" height="48">' +
       '<div><b>Auditavisión</b><small>Plataforma ciudadana de fiscalización del gasto público</small></div></div>' +
@@ -212,7 +231,7 @@
       '<div class="dic-cab-tx"><span class="pa-nota-tipo">Dictamen cívico independiente · ' + esc(t[1]) + (capa ? ' · ' + MODO_ICO[m] + ' Modo ' + MODO_NOM[m] : '') + '</span>' +
       '<dl><div><dt>Folio</dt><dd class="pa-folio">calculando…</dd></div><div><dt>Expedido</dt><dd>' + esc(hoy()) + '</dd></div>' +
       '<div><dt>Versión de la plataforma</dt><dd>' + esc(selloSitio()) + '</dd></div></dl></div></header>' +
-      '<h2 class="dic-tit"><span aria-hidden="true">' + t[0] + '</span> ' + esc(f.tit) + '</h2>' +
+      '<h2 class="dic-tit"><span aria-hidden="true">' + t[0] + '</span> ' + esc(f.tit) + '</h2>' + mira +
       cap('Planteamiento') + '<p class="pa-nota-q"><span>La pregunta</span> «' + esc(q) + '»</p>' +
       (antes.length ? '<p class="dic-chico">Se hizo en la plática después de: ' + antes.map(function (x) { return '«' + esc(x) + '»'; }).join(' → ') + '.</p>' : '') +
       cap('Respuesta del Auditor') + '<div class="dic-resp">' + resp + '</div>' +
@@ -220,7 +239,7 @@
         '<p class="dic-chico">Pediste el dictamen en el modo ' + MODO_NOM[m] + ': esta es su forma de leer la misma respuesta. El modo cambia cómo se cuenta, nunca los datos: no agrega cifras y no entra a la huella.</p>' +
         '<div class="dic-resp dic-modo">' + capa + '</div>' : '') +
       (f.txt && f.t !== 'calculo' ? '<p class="pa-nota-tx"><b>La ficha completa:</b> ' + esc(f.txt) + '</p>' : '') +
-      (ci ? cap('Hallazgos: las cifras') + '<ul class="pa-cifras">' + ci + '</ul>' : '') +
+      (ci ? cap('Hallazgos: las cifras') + '<div class="dic-tabla"><table><thead><tr><th>#</th><th>Cifra</th><th>Qué es</th><th>Estado</th></tr></thead><tbody>' + ci + '</tbody></table></div>' : '') +
       (f.cot && f.cot.length && charla ? cap('Cotejo de lo que circula') +
         '<p class="dic-chico">Cada afirmación que circula se comparó con el documento oficial. «Consta» quiere decir que el documento la sostiene; «con matices», que la sostiene en parte; «sin documento oficial», que solo la dice la prensa o las redes, y no la afirmamos ni la negamos.</p>' +
         charla.cotejo(f, true) : '') +
@@ -228,6 +247,7 @@
         'Para ver el resultado, o para que otra persona lo compruebe, abre la aplicación desde este enlace: <a href="' + esc(f.app.url) + '">' + esc(f.app.pag) + (f.app.par ? ' con tus datos' : '') + ' ➔</a>.</p>' +
         '<p class="dic-chico">La aplicación calcula con la base de la plataforma vigente, así que con el mismo enlace y la misma versión da el mismo resultado.</p>' : '') +
       (pend ? cap('Lo que falta') + pend : '') +
+      (expCap ? cap('Expediente relacionado') + expCap : '') +
       cap('Fundamento documental') + (fu ? '<ol class="dic-fuentes">' + fu + '</ol>' + (f.app && f.app.mas ? '<p class="dic-chico">Y ' + f.app.mas + ' documentos más, citados en la página de la aplicación.</p>' : '') : '<p>Esta respuesta no cita cifras: lleva a una página de la plataforma, donde cada dato trae su fuente.</p>') +
       cap('Método') + '<ol class="dic-metodo">' +
       '<li><b>Localización.</b> El Auditor buscó la respuesta en la base de la plataforma (' + B.fichas.length.toLocaleString('es-MX') + ' fichas), que solo guarda datos ya publicados con su documento.</li>' +
@@ -273,7 +293,8 @@
     if (!funcionBot || !window.fetch) return;
     try {
       fetch(funcionBot, { method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
-        body: JSON.stringify({ pregunta: String(q).slice(0, 600), motivo: motivo === 'noera' ? 'noera' : 'sin', ficha: tit || null, version: selloSitio() })
+        body: JSON.stringify({ pregunta: String(q).slice(0, 600), motivo: motivo === 'noera' ? 'noera' : 'sin', ficha: tit || null, version: selloSitio(),
+          modo: MODO_ICO[modoVivo()] ? modoVivo() : null, modo_toca: modoSugerido(q, true) })
       }).catch(function () {});
     } catch (e) {}
   }
@@ -363,14 +384,14 @@
     var l = leeLista(), k = plano(q), hoy = new Date().toISOString().slice(0, 10), x = null;
     l.forEach(function (o) { if (plano(o.q) === k && o.m === motivo) x = o; });
     if (x) { x.n = (x.n || 1) + 1; x.f = hoy; if (tit) x.t = tit; }
-    else { l.unshift({ q: q, m: motivo, t: tit || '', f: hoy, n: 1 }); reporta(q, motivo, tit); }
+    else { l.unshift({ q: q, m: motivo, t: tit || '', f: hoy, n: 1, mo: modoVivo() || '' }); reporta(q, motivo, tit); }
     guardaLista(l.slice(0, MAX));
     pintaLista();
   }
   function textoLista(l) {
     return 'Preguntas que el bot de Auditavisión no supo contestar\n' + l.map(function (o, i) {
       return (i + 1) + '. «' + o.q + '» · ' + (o.m === 'noera' ? 'la nota no respondía' + (o.t ? ' (dio: ' + o.t + ')' : '') : 'sin respuesta') +
-        ' · ' + o.f + (o.n > 1 ? ' · ' + o.n + ' veces' : '');
+        (o.mo && MODO_NOM[o.mo] ? ' · modo ' + MODO_NOM[o.mo] : '') + ' · ' + o.f + (o.n > 1 ? ' · ' + o.n + ' veces' : '');
     }).join('\n') + '\n' + location.href.split('?')[0];
   }
   function pintaLista() {
@@ -427,7 +448,7 @@
     var ir = r.ir || (r.ficha && r.ficha.ir);
     return '<p class="pa-acc">' +
       (ir ? '<a class="pa-boton pa-ver" href="' + esc(ir[0]) + '">📖 Saber más <span class="pa-ver-donde">· ' + esc(ir[1]) + '</span> ➔</a>' : '') +
-      (r.ficha ? '<a class="pa-boton pa-genera" href="' + esc(enlaceDictamen(q, previas || [])) + '" target="_blank" rel="noopener">🧾 Generar dictamen</a>' : '') +
+      (r.ficha ? '<a class="pa-boton pa-genera" href="' + esc(enlaceDictamen(q, previas || []) + (r.abre ? '&abre=' + encodeURIComponent(r.abre) : '')) + '" target="_blank" rel="noopener">🧾 Generar dictamen</a>' : '') +
       '<button type="button" class="pa-boton pa-noera" data-pa-q="' + esc(q) + '" data-pa-tit="' + esc(r.ficha ? r.ficha.tit : '') + '">🤔 No era lo que buscaba</button></p>';
   }
 
@@ -675,12 +696,12 @@
      que un encargo no es; el Periodista, el compromiso de independencia de su
      familia; el Ciudadano, en una línea y con qué empezar gratis; el Ambientalista,
      dónde ver lo ambiental, porque ningún servicio lo mide. Todo viene de
-     asistente_servicios.py (D.san.t.sv_*), que lo lee de apartados.py. */
+     asistente_servicios.py en las respuestas srv_* de servicios_fichas.py (D.san.t), que lo leen de apartados.py. */
   var SVT = (B.dat && B.dat.san && B.dat.san.t) || {};
   function svDe(r) {
-    var ir = r && (r.ir || (r.ficha && r.ficha.ir)), u = ir ? String(ir[0]) : '', m = /^servicios-catalogo\.html#sv-([a-z]+)/.exec(u);
-    if (m && SVT['sv_' + m[1]]) return SVT['sv_' + m[1]];
-    if (/^servicios(-[a-z-]+)?\.html/.test(u) && !/^servicios-por-que\.html/.test(u) && SVT.sv_revision) return { todos: 1, noes: SVT.sv_revision.noes, ind: SVT.sv_revision.ind, gr: [] };
+    var ir = r && (r.ir || (r.ficha && r.ficha.ir)), u = ir ? String(ir[0]) : '', m = /^servicio-([a-z]+)\.html/.exec(u);
+    if (m && SVT['srv_' + m[1]] && SVT['srv_' + m[1]].fam) return SVT['srv_' + m[1]];
+    if (/^servicios(-[a-z-]+)?\.html/.test(u) && !/^servicios-por-que\.html/.test(u) && SVT.srv_revision) return { todos: 1, noes: SVT.srv_revision.noes, ind: SVT.srv_revision.ind, gr: [] };
     return null;
   }
   function svLigas(gr) {
@@ -807,16 +828,46 @@
     ['ciudadano', /\b(me retienen|mi sueldo|gano|mi aguinaldo|mi estado de cuenta|cuanto pago)\b/]
   ];
   var MODO_NOM = { inspector: 'Inspector', periodista: 'Periodista', ciudadano: 'Ciudadano', ambientalista: 'Ambientalista' };
-  function modoSugerido(q) {
+  function modoSugerido(q, cual) {
     var p = ' ' + plano(q) + ' ', m = modoVivo(), s = null;
     MODO_PAL.forEach(function (x) { if (!s && x[1].test(p)) s = x[0]; });
-    return s && s !== m ? s : null;
+    return s && (cual || s !== m) ? s : null;
   }
   function capaModoHtml(q, r) {
     var m = modoVivo(), c = m === 'inspector' ? inspectorCapa(q, r) : m === 'ciudadano' ? ciudadanoCapa(q, r) : m === 'ambientalista' ? ambientalistaCapa(q, r) : null;
-    var s = r && !r.sin ? modoSugerido(q) : null;
-    return (c ? c.html : '') + (s ? '<p class="pa-modo-sug-p"><button type="button" class="pa-boton pa-modo-sug" data-pa-modo-sug="' + s + '" data-pa-q="' + esc(q) + '">' +
-      MODO_ICO[s] + ' Esto luce más en el modo ' + MODO_NOM[s] + ': cámbiame y te lo cuento así ➔</button></p>' : '');
+    return c ? c.html : '';
+  }
+  /* Cada modo contesta lo suyo y remite lo ajeno (pedido del autor, 16-11-2026:
+     «en caso que corresponda a otro modo, mencionarlo y remitirlo al chat de
+     aquel modo»). A qué modo le toca una respuesta sale de las palabras de la
+     pregunta (MODO_PAL) o, si no, del modo con que la base clasificó su ficha
+     o su página (modos.py). El Inspector es el modo por omisión de la base: por
+     eso una ficha «de Inspector» no remite sola; hace falta que lo pida la
+     pregunta. La remisión va arriba de la respuesta; los datos son los mismos. */
+  var MODO_COMO = {
+    inspector: 'allá la reviso con sus documentos, lo que falta y por dónde seguir',
+    periodista: 'allá la cuento como nota, con lo que casi nadie cuenta y lo que circula',
+    ciudadano: 'allá te la digo en corto, con sus palabras difíciles y lo que toca a tu bolsillo',
+    ambientalista: 'allá la leo por su costo y su daño ambiental, y quién lo paga'
+  };
+  var MODO_DE_PAG = null;
+  function modoToca(q, r) {
+    if (!r || r.sin || r.plat) return null;
+    var s = modoSugerido(q, true);
+    if (s) return s;
+    var f = r.ficha, m = f && f.m, ir = r.ir || (f && f.ir);
+    if (!m && ir) {
+      if (!MODO_DE_PAG) { MODO_DE_PAG = {}; B.fichas.forEach(function (x) { if (x.t === 'pagina' && x.m && x.ir) MODO_DE_PAG[sinParam(x.ir[0]).split('#')[0]] = x.m; }); }
+      m = MODO_DE_PAG[sinParam(ir[0]).split('#')[0]];
+    }
+    return m && m !== 'inspector' && MODO_ICO[m] ? m : null;
+  }
+  function remiteHtml(q, r) {
+    var t = modoToca(q, r), m = modoVivo();
+    if (!t || t === m || !MODO_ICO[m]) return '';
+    return '<div class="pa-remite pa-remite-' + t + '"><p><span aria-hidden="true">' + MODO_ICO[t] + '</span> <b>Esto le toca al modo ' + MODO_NOM[t] + '.</b> ' +
+      'Te lo contesto aquí con los mismos datos; ' + MODO_COMO[t] + '.</p>' +
+      '<button type="button" class="pa-boton pa-modo-sug" data-pa-modo-sug="' + t + '" data-pa-q="' + esc(q) + '">' + MODO_ICO[t] + ' Pasar al modo ' + MODO_NOM[t] + ' ➔</button></div>';
   }
   /* Para el banco de pruebas: la capa del modo pedido, en texto. */
   function capaModo(q, r, m) {
@@ -1097,6 +1148,7 @@
   }
   function cmxIdx() { return cargaJs(CMX_DIR + 'indice.js', function () { return window.CMX_IDX; }); }
   function cmxInst() { return cargaJs(CMX_DIR + 'inst.js', function () { return window.CMX_INST; }); }
+  function cmxSanc() { return cargaJs('assets/auditor/data/sancionados.js', function () { return window.AUDIT_SANCIONADOS; }).catch(function () { return null; }); }
   function cmxProv(rfc) {
     var pre = rfc.slice(0, 2);
     return cargaJs(CMX_DIR + 'p-' + pre.replace(/[^A-Z0-9]/g, '_') + '.js', function () { return window.CMX_P && window.CMX_P[pre]; })
@@ -1116,7 +1168,7 @@
     var p = plano(q);
     if (!CMX_RE.test(p) || SAT_PAL.test(p) || /^ (que|q) (es|son|significa)\b/.test(p)) return null;
     var rfcs = (q.match(RFC_RE) || []).map(function (x) { return x.toUpperCase(); });
-    /* «¿Cómo reviso a un proveedor antes de contratarlo?» pide el método, no a una empresa: lo contesta map/serv_diligencia (D.san). */
+    /* «¿Cómo reviso a un proveedor antes de contratarlo?» pide el método, no a una empresa: lo contesta map/srv_diligencia (D.san). */
     if (!rfcs.length && /\b(antes de contratar\w*|debida diligencia)\b/.test(p)) return null;
     /* «¿Qué pasa si no le cobran la pena al contratista?» no busca a una empresa: lo contesta «Documentar para sancionar». */
     if (!rfcs.length && /\b(penas?|multas?|sancion\w*|incumpl\w*|no cumplio|clausulas?|pruebo|que documentos)\b/.test(p)) return null;
@@ -1130,9 +1182,9 @@
         ir: [CMX_PAG, 'Contratos públicos'], sug: ['¿A quién le compra el IMSS?', 'Contratos del Tren Maya', '¿Qué contratistas están en la lista negra del SAT?'], rec: [] };
     }
     var termino = rfcs.length ? rfcs[0] : nombre;
-    var prom = Promise.all([cmxIdx(), cmxInst()]).then(function (D) {
-      var I = D[0], T = D[1];
-      if (rfcs.length) return cmxProv(rfcs[0]).then(function (d) { return respProv(rfcs[0], d, I.meta); });
+    var prom = Promise.all([cmxIdx(), cmxInst(), cmxSanc()]).then(function (D) {
+      var I = D[0], T = D[1], S = D[2];
+      if (rfcs.length) return cmxProv(rfcs[0]).then(function (d) { return respProv(rfcs[0], d, I.meta, S); });
       var ws = satNorm(nombre).split(' ');
       /* Una institución por sus siglas («IMSS», «CFE») o por su nombre. */
       var claves = Object.keys(T.i), sig = null;
@@ -1144,11 +1196,17 @@
         var k = sig || porNom.sort(function (a, b) { return T.i[b].m - T.i[a].m; })[0];
         return respInst(k, T.i[k], T.meta, porNom.length > 1 && !sig ? porNom.length : 0);
       }
+      if (!provs.length && S && S.n) {
+        provs = Object.keys(S.n).filter(function (rfc) {
+          var n = ' ' + satNorm(S.n[rfc]) + ' ';
+          return ws.every(function (w) { return n.indexOf(' ' + w + ' ') >= 0; });
+        }).map(function (rfc) { return [rfc, S.n[rfc]]; });
+      }
       if (!provs.length) return { html: '<p>◻️ No encontré «' + esc(nombre) + '» entre los <b>' + I.meta.proveedores.toLocaleString('es-MX') + '</b> proveedores (personas morales) ni entre las <b>' + I.meta.instituciones.toLocaleString('es-MX') + '</b> instituciones con contratos en ComprasMX, en los expedientes de 2025 y 2026.</p>' +
         '<p>Eso no quiere decir que no tenga contratos: el nombre puede estar escrito distinto, sus contratos pueden ser de otros años, o la institución puede no reportar en ComprasMX. Varios órganos autónomos, como el INE, y los gobiernos que no usan la plataforma publican sus contratos en sus propios portales y en la Plataforma Nacional de Transparencia. Con el <b>RFC</b> la búsqueda es exacta.</p>',
         ir: [CMX_PAG + '?q=' + encodeURIComponent(nombre), 'Contratos públicos'], sug: [], rec: [], web: nombre };
       var exacto = provs.filter(function (r) { return satNorm(r[1]).replace(/\b(S ?A|DE|C ?V|S ?A ?P ?I|R ?L|S ?C)\b/g, '').replace(/ +/g, ' ').trim() === ws.join(' '); });
-      if (provs.length === 1 || exacto.length === 1) { var r1 = provs.length === 1 ? provs[0] : exacto[0]; return cmxProv(r1[0]).then(function (d) { return respProv(r1[0], d, I.meta); }); }
+      if (provs.length === 1 || exacto.length === 1) { var r1 = provs.length === 1 ? provs[0] : exacto[0]; return cmxProv(r1[0]).then(function (d) { return respProv(r1[0], d, I.meta, S); }); }
       return { html: '<p>Encontré <b>' + provs.length.toLocaleString('es-MX') + '</b> proveedores con «' + esc(nombre) + '» en el nombre. ¿Cuál buscas?</p><p>' +
         provs.slice(0, 8).map(function (r) { return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc('Contratos de ' + r[0]) + '">' + esc(r[1]) + '</button>'; }).join(' ') + '</p>' +
         (provs.length > 8 ? '<p class="pa-chico">Te muestro 8. Con el RFC la búsqueda es exacta.</p>' : ''),
@@ -1164,10 +1222,38 @@
   function cmxCaveat() {
     return '<p class="pa-chico">⚖️ Tener contratos con el gobierno no es una irregularidad. El importe es el que reportó cada institución, antes de impuestos; en un contrato abierto suele ser el máximo, no lo pagado. ComprasMX no publica pagos: lo pagado se rinde en la Cuenta Pública.</p>';
   }
-  function respProv(rfc, d, M) {
-    if (!d) return { html: '<p>◻️ El RFC <code>' + esc(rfc) + '</code> no tiene contratos en los expedientes de 2025 y 2026 de ComprasMX.</p><p>Puede tenerlos en otros años o con gobiernos que no usan ComprasMX. Eso no certifica nada.</p>',
-      ir: [CMX_PAG + '?q=' + rfc, 'Contratos públicos'], sug: ['¿Está en la lista negra del SAT el RFC ' + rfc + '?'], rec: [] };
-    var tp = d.tp || {}, mtp = d.mtp || {}, fuente = cmxFuente(M), ci = [];
+  function sancChatHtml(rfc, S, ci, fuentes, deDondeList) {
+    var exps = S && S.r && S.r[rfc];
+    if (!exps || !exps.length) return '';
+    var fuS = { tx: S.fuente + ' (corte al ' + S.corte + ')', url: S.url };
+    if (fuentes) fuentes.push(fuS);
+    if (deDondeList) deDondeList.push({ que: 'Directorio de Proveedores y Contratistas Sancionados', e: 'oficial', fu: fuS });
+    exps.forEach(function (x) {
+      if (ci) ci.push({ v: x[5] || (x[6] ? pesosCmx(x[6]) : 'Sanción'), etq: 'Expediente ' + x[0] + ' · ' + (x[1] || 'OIC') + ' (' + x[2] + ')', e: 'oficial' });
+    });
+    return '<p>⛔ <b>En el Directorio de Proveedores y Contratistas Sancionados</b> (' + exps.length.toLocaleString('es-MX') + ' expediente' + (exps.length === 1 ? '' : 's') + ' al corte del ' + esc(S.corte) + ') ' + chip({ e: 'oficial' }) + ':</p><ul class="pa-lista">' +
+      exps.map(function (x) {
+        return '<li><b>' + esc(x[0]) + '</b> · ' + esc(x[1] || 'Órgano Interno de Control') + ' (' + esc(x[2]) + ')' +
+          (x[5] ? ' · inhabilitación: <b>' + esc(x[5]) + '</b> (' + esc(x[3]) + ' a ' + esc(x[4]) + ')' : (x[3] || x[4] ? ' · vigencia: ' + esc(x[3]) + ' a ' + esc(x[4]) : '')) +
+          (x[6] ? ' · multa: <b>' + pesosCmx(x[6]) + '</b>' : '') + (x[7] ? ' · DOF ' + esc(x[7]) : '') + '</li>';
+      }).join('') + '</ul>';
+  }
+  function respProv(rfc, d, M, S) {
+    var ci = [], fuente = cmxFuente(M), fuentes = [fuente], deDondeList = [{ que: 'Datos relevantes de los contratos de ComprasMX', e: 'oficial', fu: fuente }];
+    var sh = sancChatHtml(rfc, S, ci, fuentes, deDondeList);
+    if (!d) {
+      if (sh && S && S.n && S.n[rfc]) {
+        var nomS = S.n[rfc];
+        var hs = '<p>🏢 <b>' + esc(nomS) + '</b> (<code>' + esc(rfc) + '</code>) no tiene contratos en los expedientes de 2025 y 2026 de ComprasMX, pero aparece en el Directorio de Buen Gobierno:</p>' + sh +
+          '<p class="pa-chico">⚖️ ' + esc(S.nota) + '</p>' + (charla && charla.deDonde ? charla.deDonde(deDondeList.slice(1)) : '');
+        return { html: hs, ir: [CMX_PAG + '?q=' + rfc, 'Contratos públicos'], rec: [],
+          ficha: { t: 'calculo', tit: 'Proveedor sancionado: ' + nomS, txt: texto(hs), ci: ci, fu: fuentes.slice(1), ir: [CMX_PAG + '?q=' + rfc, 'Contratos públicos'] },
+          sug: ['¿Está en la lista negra del SAT el RFC ' + rfc + '?', '¿Qué proveedores están sancionados o inhabilitados?'] };
+      }
+      return { html: '<p>◻️ El RFC <code>' + esc(rfc) + '</code> no tiene contratos en los expedientes de 2025 y 2026 de ComprasMX ni aparece en el Directorio de Proveedores y Contratistas Sancionados.</p><p>Puede tenerlos en otros años o con gobiernos que no usan ComprasMX. Eso no certifica nada.</p>',
+        ir: [CMX_PAG + '?q=' + rfc, 'Contratos públicos'], sug: ['¿Está en la lista negra del SAT el RFC ' + rfc + '?'], rec: [] };
+    }
+    var tp = d.tp || {}, mtp = d.mtp || {};
     var partes = ['AD', 'LP', 'I3', 'OT'].filter(function (k) { return tp[k]; }).map(function (k) {
       return '<b>' + tp[k].toLocaleString('es-MX') + '</b> por ' + TIPO_CMX[k] + (mtp[k] ? ' (' + pesosCmx(mtp[k]) + ')' : '');
     });
@@ -1186,6 +1272,7 @@
       var s = (IN.sat || {})[d.sat[0]] || { t: d.sat[0], txt: '' };
       h += '<p>' + (d.sat[0] === 'F' ? '⛔' : d.sat[0] === 'P' ? '⚠️' : 'ℹ️') + ' <b>Aparece en la lista 69-B del SAT</b> como <b>' + esc(s.t) + '</b> (oficio ' + esc(d.sat[1]) + ', ' + esc(d.sat[2]) + '). ' + esc(s.txt || '') + '</p>';
     }
+    if (sh) h += sh;
     var emp = PE.per.filter(function (x) { return x.emp; }).filter(function (x) { return x.al.some(function (a) { return plano(d.n).indexOf(' ' + a + ' ') >= 0; }); })[0];
     if (emp) h += '<p>📰 La plataforma también tiene a <b>' + esc(corta(emp.n)) + '</b> en Noticias relevantes: <button type="button" class="pa-ej" data-pa-pregunta="' + esc(corta(emp.n)) + '">Ver lo que sabemos</button></p>';
     h += cmxCaveat();
@@ -1193,9 +1280,9 @@
     ci.push({ v: pesosCmx(d.m), etq: 'Importe antes de impuestos, suma de sus contratos en pesos', e: 'derivado' });
     d.k.forEach(function (k) { ci.push({ v: pesosCmx(k[3]) + (k[4] !== 'MXN' ? ' ' + k[4] : ''), etq: k[0] + ' · ' + k[1] + ' · ' + k[2], e: 'oficial' }); });
     var tit = 'Contratos en ComprasMX: ' + d.n;
-    h += charla && charla.deDonde ? charla.deDonde([{ que: 'Datos relevantes de los contratos de ComprasMX', e: 'oficial', fu: fuente }]) : '';
+    h += charla && charla.deDonde ? charla.deDonde(deDondeList) : '';
     return { html: h, ir: [CMX_PAG + '?q=' + rfc, 'Contratos públicos'], rec: [],
-      ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: [fuente], ir: [CMX_PAG + '?q=' + rfc, 'Contratos públicos'] },
+      ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: fuentes, ir: [CMX_PAG + '?q=' + rfc, 'Contratos públicos'] },
       sug: ['¿Está en la lista negra del SAT el RFC ' + rfc + '?'].concat(d.i.slice(0, 2).map(function (x) { return '¿A quién le compra ' + x[1] + '?'; })) };
   }
   function respInst(k, d, M, otras) {
@@ -1217,6 +1304,130 @@
       ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: [fuente], ir: [CMX_PAG + '?i=' + encodeURIComponent(k), 'Contratos públicos'] },
       sug: d.p.slice(0, 2).map(function (x) { return 'Contratos de ' + x[1]; }) };
   }
+  /* --- Grupos empresariales y sus filiales (pedido del autor, 17-11-2026: «le
+     pregunté al chat por Grupo Prodi y no salió información»). Muchos grupos no
+     contratan con su nombre: contrata una filial. El catálogo lo escribe
+     herramientas/empresas_grupos.py, sin cifras: los contratos se leen de
+     ComprasMX por el RFC de cada filial. El vínculo que solo dice la prensa va
+     como pendiente, y lo que falta cotejar no lleva montos. --- */
+  var GR = (B.dat && B.dat.gru) || { g: [], fig: [], nota: '' };
+  function figHtml() {
+    return GR.fig.length ? '<p>📑 <b>Contrato, concesión y permiso no son lo mismo:</b></p><ul class="pa-lista">' + GR.fig.map(function (f) {
+      return '<li><b>' + esc(f.n) + '.</b> ' + esc(f.tx) + ' <span class="pa-chico">(' + esc(f.ley) + ')</span></li>';
+    }).join('') + '</ul>' : '';
+  }
+  function grupoEmp(q) {
+    var p = plano(q), g = GR.g.filter(function (x) { return x.al.some(function (a) { return p.indexOf(' ' + a + ' ') >= 0; }); })[0];
+    if (!g || SAT_PAL.test(p) || (q.match(RFC_RE) || []).length) return null;
+    var prom = cmxIdx().then(function (I) {
+      return Promise.all(g.emp.map(cmxProv)).then(function (ds) { return respGrupo(g, ds, I.meta); });
+    }).then(null, function () { return respGrupo(g, [], null); });
+    return { espera: prom, tit: 'Grupo empresarial: ' + g.n };
+  }
+  function respGrupo(g, ds, M) {
+    var ci = [], fu = M ? [cmxFuente(M)] : [];
+    var h = '<p>🏢 <b>' + esc(g.n) + '.</b> ' + g.que + '</p>' +
+      '<p>🔗 <b>El vínculo:</b> ' + esc(g.vin.tx) + ' ' + (g.vin.e === 'oficial' ? chip({ e: 'oficial' }) : chip({ e: 'pendiente', p: g.vin.p })) + '. ' + esc(g.vin.x) + '</p>';
+    ds.forEach(function (d, i) {
+      var rfc = g.emp[i];
+      if (!d) return;
+      var tp = d.tp || {}, mtp = d.mtp || {};
+      var partes = ['AD', 'LP', 'I3', 'OT'].filter(function (k) { return tp[k]; }).map(function (k) {
+        return '<b>' + tp[k].toLocaleString('es-MX') + '</b> por ' + TIPO_CMX[k] + (mtp[k] ? ' (' + pesosCmx(mtp[k]) + ')' : '');
+      });
+      h += '<p>🧾 <b>' + esc(d.n) + '</b> (<code>' + esc(rfc) + '</code>) tiene <b>' + d.c.toLocaleString('es-MX') + ' contrato' + (d.c === 1 ? '' : 's') + '</b> en ComprasMX, en los expedientes de 2025 y 2026, por <b>' + pesosCmx(d.m) + '</b> antes de impuestos ' + chip({ e: 'derivado' }) + '. Por procedimiento: ' + partes.join('; ') + '.</p>' +
+        '<p>Sus contratos mayores ' + chip({ e: 'oficial' }) + ':</p><ul class="pa-lista">' + d.k.slice(0, 5).map(function (k) {
+          return '<li>' + pesosCmx(k[3]) + (k[4] !== 'MXN' ? ' ' + esc(k[4]) : '') + ' · <b>' + esc(k[1]) + '</b> · ' + esc(TIPO_CMX[k[5]] || '') + (k[6] ? ' · ' + esc(k[6]) : '') + '<br><span class="pa-chico">' + esc(k[2]) + '</span>' +
+            (k[7] ? ' <a href="' + esc(M.detalle.replace('%s', k[7])) + '" target="_blank" rel="noopener">Ver en ComprasMX ↗</a>' : '') + '</li>';
+        }).join('') + '</ul>' +
+        '<p><button type="button" class="pa-ej" data-pa-pregunta="' + esc('Contratos de ' + rfc) + '">Ver todos sus contratos</button></p>';
+      ci.push({ v: d.c.toLocaleString('es-MX') + ' contratos', etq: d.n + ' · RFC ' + rfc + ' · expedientes 2025 y 2026', e: 'oficial' });
+      ci.push({ v: pesosCmx(d.m), etq: 'Importe antes de impuestos, suma de sus contratos en pesos', e: 'derivado' });
+      d.k.slice(0, 5).forEach(function (k) { ci.push({ v: pesosCmx(k[3]) + (k[4] !== 'MXN' ? ' ' + k[4] : ''), etq: k[0] + ' · ' + k[1] + ' · ' + k[2], e: 'oficial' }); });
+    });
+    if (!M) h += '<p class="pa-chico">No pude descargar ahora el catálogo de ComprasMX para decirte sus contratos. Revisa tu conexión y vuelve a preguntarme.</p>';
+    if (g.asf && g.asf.length) {
+      h += '<p>🔎 <b>Lo que auditó la ASF (contratos anteriores a ComprasMX 2025-2026):</b></p><ul class="pa-lista">' + g.asf.map(function (a) {
+        var fuA = { tx: 'ASF, Cuenta Pública ' + a.cp + ', Auditoría ' + a.num + ' (' + a.clave + ', sha256 ' + a.sha + '…)', url: a.url };
+        fu.push(fuA);
+        ci.push({ v: '$' + a.tot_mdp.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp', etq: a.etq + ' · contrato ' + a.contrato + ' (original $' + a.orig_mdp.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp + convenios $' + a.conv_mdp.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp)', e: 'oficial' });
+        return '<li><b>' + esc(a.etq) + '</b> (contrato <code>' + esc(a.contrato) + '</code>, firmado el ' + esc(a.fecha) + ' con <b>' + esc(a.consorcio) + '</b>, integrado por ' + esc(a.integrantes) + '): importe original <b>$' + a.orig_mdp.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp</b> ' + chip({ e: 'oficial' }) + ', convenios modificatorios por <b>+$' + a.conv_mdp.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp</b>, total contratado <b>$' + a.tot_mdp.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp</b> ' + chip({ e: 'oficial' }) + ' ($' + a.ej22_mdp.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp ejercidos en ' + a.cp + ') y <b>$' + a.aclarar_mdp.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp</b> pendientes por aclarar en la <a href="' + esc(a.url) + '" target="_blank" rel="noopener">Auditoría ' + a.num + ' de la Cuenta Pública ' + a.cp + ' ↗</a>.</li>';
+      }).join('') + '</ul>';
+    }
+    h += figHtml();
+    if (g.cot.length) h += '<p>🔎 <b>Lo que falta cotejar</b> (sin montos hasta tener el documento):</p><ul class="pa-lista">' + g.cot.map(function (c) {
+      ci.push({ v: c.fig, etq: c.tx, e: 'pendiente', p: c.p });
+      return '<li><b>' + esc(c.fig) + '.</b> ' + esc(c.tx) + ' ' + chip({ e: 'pendiente', p: c.p }) + '<br><span class="pa-chico">' + esc(c.x) + ' Dónde debe estar: <a href="' + esc(c.url) + '" target="_blank" rel="noopener">' + esc(c.ut) + ' ↗</a></span></li>';
+    }).join('') + '</ul>';
+    if (g.pr.length) h += '<p>📰 <b>Cómo lo contó la prensa</b> (sin verificar: solo titular y liga; una nota no es fuente):</p><ul class="pa-lista">' + g.pr.map(function (x) {
+      return '<li><a href="' + esc(x.u) + '" target="_blank" rel="noopener">' + esc(x.t) + ' ↗</a> <span class="pa-chico">(' + esc(x.m) + ')</span></li>';
+    }).join('') + '</ul>';
+    h += '<p class="pa-chico">⚖️ ' + esc(GR.nota) + ' El importe es el que reportó cada institución, antes de impuestos; en un contrato abierto suele ser el máximo, no lo pagado.</p>';
+    var tit = 'Grupo empresarial: ' + g.n;
+    if (M) h += charla && charla.deDonde ? charla.deDonde([{ que: 'Datos relevantes de los contratos de ComprasMX', e: 'oficial', fu: fu[0] }]) : '';
+    return { html: h, ir: [g.ir, 'Grupos y filiales'], rec: [],
+      ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: fu, ir: [g.ir, 'Grupos y filiales'] },
+      sug: g.emp.slice(0, 2).map(function (r) { return '¿Está en la lista negra del SAT el RFC ' + r + '?'; }).concat(['¿Qué es una concesión?']) };
+  }
+  /* Una empresa por su nombre, sin la palabra «contratos» («Grupo Carso», «la empresa
+     ICA», «X, S.A. de C.V.», «¿es concesionaria X?»): se busca en ComprasMX y, si no
+     está, la pregunta sigue su camino de siempre (sinEmp evita volver a entrar). */
+  var EMP_RE = /^ (?:(?:quien(?:es)? (?:es|son)|que es|que se sabe de|que hay de|dime de|busca|investiga) )?(?:a )?(?:la |el )?(?:empresa|grupo|constructora|concesionaria|consorcio|corporativo|laboratorios?|comercializadora) \S/;
+  var EMP_SUF = / (?:s a de c v|sa de cv|s a p i de c v|sapi de cv|s de r l de c v|s a b de c v|sab de cv) $/;
+  var EMP_CON = /^ (?:(?:que|cuales|cuantas) )?concesion(?:es)? (?:tiene|de|del|a) \S| (?:es|son) (?:una )?concesionarias? /;
+  var EMP_FUERA = 'concesion concesiones concesionaria concesionarias una un se sabe consorcio corporativo'.split(' ');
+  var sinEmp = false;
+  function sigueSinEmp(q, previas) {
+    sinEmp = true;
+    try { var r = respuesta0(q, previas); return r && r.espera ? r.espera : r; } finally { sinEmp = false; }
+  }
+  function cmxPorNombre(I, ws) {
+    var provs = I.r.filter(function (r) { var n = ' ' + satNorm(r[1]) + ' '; return ws.every(function (w) { return n.indexOf(' ' + w + ' ') >= 0; }); });
+    var exacto = provs.filter(function (r) { return satNorm(r[1]).replace(/\b(S ?A|DE|C ?V|S ?A ?P ?I|R ?L|S ?C|S ?A ?B)\b/g, '').replace(/ +/g, ' ').trim() === ws.join(' '); });
+    return { todos: provs, uno: provs.length === 1 ? provs[0] : exacto.length === 1 ? exacto[0] : null };
+  }
+  function cualEmp(provs, nombre) {
+    return { html: '<p>Encontré <b>' + provs.length.toLocaleString('es-MX') + '</b> empresas con «' + esc(nombre) + '» en el nombre entre los proveedores de ComprasMX. ¿Cuál buscas?</p><p>' +
+      provs.slice(0, 8).map(function (r) { return '<button type="button" class="pa-ej" data-pa-pregunta="' + esc('Contratos de ' + r[0]) + '">' + esc(r[1]) + '</button>'; }).join(' ') + '</p>' +
+      (provs.length > 8 ? '<p class="pa-chico">Te muestro 8. Con el RFC la búsqueda es exacta.</p>' : ''),
+      ir: [CMX_PAG + '?q=' + encodeURIComponent(nombre), 'Contratos públicos'], sug: [], rec: [] };
+  }
+  function empresaNombre(q, previas) {
+    var p = plano(q), con = EMP_CON.test(p);
+    if (sinEmp || CMX_RE.test(p) || SAT_PAL.test(p) || (q.match(RFC_RE) || []).length) return null;
+    if (!EMP_RE.test(p) && !EMP_SUF.test(p) && !con) return null;
+    if (/\b(fantasmas?|productivas?|parlamentarios?|vulnerables?|publicas?|paraestatal(es)?|del estado|mineras?|de agua|radio|television)\b/.test(p)) return null;
+    var nombre = p.trim().split(' ').filter(function (w) { return w.length > 1 && CMX_FUERA.indexOf(w) < 0 && EMP_FUERA.indexOf(w) < 0; }).join(' ');
+    var ws = satNorm(nombre).split(' ').filter(function (w) { return w; });
+    if (!ws.length || ws.length > 6) return null;
+    var prom = cmxIdx().then(function (I) {
+      var m = cmxPorNombre(I, ws);
+      if (!m.todos.length || (!m.uno && m.todos.length > 60)) return Promise.resolve(sigueSinEmp(q, previas)).then(function (r) {
+        /* Si lo demás de la plataforma tampoco la tiene, se dice: no se contesta con lo que se le parece. */
+        if (r && !r.sin && !r.tambien && !/^<p>Eso lo encuentras en/.test(r.html || '')) return r;
+        return { html: '<p>◻️ No encontré a «' + esc(nombre) + '» entre los <b>' + I.meta.proveedores.toLocaleString('es-MX') + '</b> proveedores (personas morales) con contratos en ComprasMX, en los expedientes de 2025 y 2026, ni en el resto de la plataforma.</p>' +
+          '<p>Eso no quiere decir que no tenga contratos: muchos grupos contratan con el nombre de una filial o de un consorcio, sus contratos pueden ser de otros años, o pueden ser de gobiernos que no usan ComprasMX. Y una <b>concesión</b> no aparece ahí: se acredita con su título. Con el <b>RFC</b> de la empresa la búsqueda es exacta.</p>',
+          ir: [GR.pag || CMX_PAG, 'Grupos y filiales'], sug: ['¿Qué es una concesión?', '¿Qué contratistas están en la lista negra del SAT?'], rec: [], web: nombre, anota: true };
+      });
+      var nota = con ? '<p>📑 <b>ComprasMX trae contratos, no concesiones.</b> Una concesión se acredita con su título, que publica el gobierno que la otorga. Esto es lo que la plataforma tiene de sus contratos:</p>' : '';
+      if (m.uno) return Promise.all([cmxProv(m.uno[0]), cmxSanc()]).then(function (P) { var r = respProv(m.uno[0], P[0], I.meta, P[1]); r.html = nota + r.html + (con ? figHtml() : ''); return r; });
+      var r = cualEmp(m.todos, nombre); r.html = nota + r.html; return r;
+    }, function () { return sigueSinEmp(q, previas); });
+    return { espera: prom, tit: 'Empresa en ComprasMX: ' + nombre };
+  }
+  /* Un nombre propio que la plataforma no tiene («Laboratorios Pisa» a secas): antes
+     de decir «no lo sé», se revisa si es una empresa con contratos en ComprasMX. */
+  function quizaEmpresa(q, r) {
+    if (sinEmp || !r || r.espera || !(r.sin || (r.tambien && r.web))) return r;
+    var ws = satNorm(q).split(' ').filter(function (w) { return w.length > 1; });
+    if (!ws.length || ws.length > 5 || /[?¿]/.test(q) || /\b(QUE|CUANTO|CUANTOS|CUANTA|CUANTAS|COMO|QUIEN|QUIENES|CUAL|CUALES|DONDE|CUANDO|POR|ES|SON|HAY)\b/.test(' ' + ws.join(' ') + ' ')) return r;
+    var prom = cmxIdx().then(function (I) {
+      var m = cmxPorNombre(I, ws);
+      if (m.uno) return Promise.all([cmxProv(m.uno[0]), cmxSanc()]).then(function (P) { return respProv(m.uno[0], P[0], I.meta, P[1]); });
+      return ws.length > 1 && m.todos.length > 1 && m.todos.length <= 8 ? cualEmp(m.todos, ws.join(' ').toLowerCase()) : r;
+    }, function () { return r; });
+    return { espera: prom, tit: 'Empresa en ComprasMX: ' + q };
+  }
   /* Contratistas que también están en la lista 69-B del SAT. */
   var CRUCE_RE = /\b(contratistas?|proveedor(es)?|empresas? con contratos?)\b.*\b(lista negra|69 ?b|efos|sat)\b|\b(lista negra|69 ?b|efos)\b.*\b(contratistas?|proveedor(es)?|contratos?)\b/;
   function cruceSat(q) {
@@ -1230,6 +1441,31 @@
       return { html: h, ir: [CMX_PAG + '#cruce', 'Contratos públicos'], rec: [], sug: [],
         ficha: { t: 'calculo', tit: 'Contratistas de ComprasMX en la lista 69-B del SAT', txt: texto(h), ci: L.map(function (r) { return { v: (sit[r[2]] || { t: r[2] }).t, etq: r[1] + ' · RFC ' + r[0], e: 'oficial' }; }), fu: fuentes, ir: [CMX_PAG + '#cruce', 'Contratos públicos'] } };
     }, function () { return { html: '<p>No pude descargar ahora el catálogo de contratos.</p>', ir: [CMX_PAG, 'Contratos públicos'], sug: [], rec: [] }; }), tit: 'Contratistas en la lista 69-B' };
+  }
+  /* Directorio de Proveedores y Contratistas Sancionados (Buen Gobierno). */
+  var SANC_RE = /\b(proveedor(es)?|contratistas?|empresas?)\b.*\b(sancionad\w*|inhabilitad\w*)\b|\b(sancionad\w*|inhabilitad\w*)\b.*\b(proveedor(es)?|contratistas?|comprasmx)\b|\bdirectorio de (proveedores|sancionados|contratistas)\b/;
+  function sancionesCmx(q) {
+    var p = plano(q);
+    if (!SANC_RE.test(p) || /\b(asf|funcionarios?|servidor(es)?|nepotismo)\b/.test(p) || (q.match(RFC_RE) || []).length) return null;
+    return { espera: cmxSanc().then(function (S) {
+      if (!S) return { html: '<p>No pude descargar ahora el directorio de proveedores sancionados.</p>', ir: [CMX_PAG + '#sancionados', 'Contratos públicos'], sug: [], rec: [] };
+      var R = S.resumen, fu = { tx: S.fuente + ' (corte al ' + S.corte + ')', url: S.url };
+      var h = '<p>⛔ El <b>Directorio de Proveedores y Contratistas Sancionados</b> de la Secretaría Anticorrupción y Buen Gobierno reúne <b>' + R.expedientes.toLocaleString('es-MX') + ' expedientes de sanción</b> (' + R.expedientesMorales.toLocaleString('es-MX') + ' de <b>' + R.empresasUnicas.toLocaleString('es-MX') + ' personas morales</b> y ' + R.personasFisicasOcultas.toLocaleString('es-MX') + ' de personas físicas que no se publican por dato personal) por <b>$' + R.multasMdp.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp</b> en multas, al corte del ' + esc(S.corte) + ' ' + chip({ e: 'oficial' }) + '.</p>' +
+        '<p>Al cruzarlo por RFC contra los contratos públicos de ComprasMX (expedientes de 2025 y 2026) y la lista 69-B del SAT: <b>' + R.enComprasMx + ' empresas sancionadas tienen contratos en 2025-2026</b> y <b>' + R.enSat69b + ' aparecen también en la lista 69-B</b> ' + chip({ e: 'derivado' }) + '. Algunas de las que tienen contratos:</p>' +
+        '<ul class="pa-lista">' + S.cruceComprasMx.slice(0, 10).map(function (r) {
+          return '<li>⛔ <button type="button" class="pa-ej" data-pa-pregunta="' + esc('Contratos de ' + r[0]) + '">' + esc(r[1]) + '</button> (<code>' + esc(r[0]) + '</code>) · ' + r[2] + ' sanción' + (r[2] === 1 ? '' : 'es') + ' (' + esc(r[3]) + ', ' + esc(r[4]) + ')' + (r[5] || r[6] ? ' · ' + esc(r[5]) + ' a ' + esc(r[6]) : '') + (r[7] ? ' · multa ' + pesosCmx(r[7]) : '') + '</li>';
+        }).join('') + '</ul>' +
+        '<p class="pa-chico">⚖️ ' + esc(S.nota) + '</p>' +
+        (charla && charla.deDonde ? charla.deDonde([{ que: 'Directorio de Proveedores y Contratistas Sancionados', e: 'oficial', fu: fu }]) : '');
+      var ci = [
+        { v: R.expedientes.toLocaleString('es-MX') + ' expedientes', etq: R.empresasUnicas.toLocaleString('es-MX') + ' personas morales sancionadas (corte ' + S.corte + ')', e: 'oficial' },
+        { v: '$' + R.multasMdp.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp', etq: 'Suma de multas impuestas en el Directorio', e: 'derivado' },
+        { v: R.enComprasMx + ' empresas', etq: 'Sancionadas en el Directorio y con contratos en ComprasMX 2025-2026', e: 'derivado' }
+      ];
+      return { html: h, ir: [CMX_PAG + '#sancionados', 'Proveedores sancionados'], rec: [],
+        ficha: { t: 'calculo', tit: 'Proveedores y contratistas sancionados (Buen Gobierno)', txt: texto(h), ci: ci, fu: [fu], ir: [CMX_PAG + '#sancionados', 'Proveedores sancionados'] },
+        sug: ['¿Qué contratistas están en la lista negra del SAT?', 'Contratos de EYA840229LX3', '¿Cómo reviso a un proveedor antes de contratarlo?'] };
+    }), tit: 'Proveedores sancionados' };
   }
 
   /* Señales de fraccionamiento (03-11-2026): adjudicaciones directas por monto
@@ -1297,6 +1533,104 @@
     }, function () { return { html: '<p>No pude descargar ahora las señales de fraccionamiento. Revisa tu conexión y vuelve a preguntarme.</p>', ir: [FRACC_PAG, 'Contratos públicos'], sug: [], rec: [] }; }),
       tit: 'Señales de fraccionamiento' };
   }
+  /* --- A quién le deben los estados y los municipios (17-11-2026, pedido del autor:
+     «prosigue con estos pendientes y las deudas»). El Registro Público Único de
+     Hacienda, crédito por crédito (herramientas/anclar_rpu.py escribe
+     assets/auditor/data/deuda-rpu.js; se descarga solo al preguntar). Cada crédito
+     es «oficial»; las sumas y los órdenes, «derivado». El Sistema de Alertas dice
+     cuánto debe y cuánto le pesa; el registro dice a quién, a qué tasa y para qué. --- */
+  function rpuDatos() { return cargaJs('assets/auditor/data/deuda-rpu.js', function () { return window.AUDIT_RPU; }); }
+  var RPU_BANCO = [['banobras', 'Banobras'], ['banorte', 'Banorte'], ['bbva', 'BBVA'], ['bancomer', 'BBVA'], ['santander', 'Santander'], ['banamex', 'Banamex'],
+    ['invex', 'Invex'], ['hsbc', 'HSBC'], ['bajio', 'BanBajío'], ['bansi', 'Bansí'], ['multiva', 'Multiva'], ['mifel', 'Mifel'], ['scotiabank', 'Scotiabank'],
+    ['banco azteca', 'Banco Azteca'], ['afirme', 'Afirme'], ['cibanco', 'CIBanco'], ['nafin', 'Nafin'], ['interacciones', 'Interacciones']];
+  function rpuPide(p) {
+    if (/ (que|q) (es|son|significa) /.test(p) && !/ (debe|deben|deuda|credit|prest)/.test(p)) return false;
+    var banco = RPU_BANCO.filter(function (b) { return p.indexOf(' ' + b[0] + ' ') >= 0; })[0];
+    if (banco && / (debe|deben|deuda|deudas|credito|creditos|presta|prestan|presto|prestamo|prestamos|endeud\w*) /.test(p)) return { banco: banco[1] };
+    if (/ (a|con) quien(es)? (le |les )?(debe|deben|esta endeudad\w*|estan endeudad\w*)| acreedor(es)? | registro publico unico | rpu | (que|cuales|con que|cuantos) bancos? | bancos? (le |les )?(presta|prestan|prestaron|presto) /.test(p) ||
+      / (sus |los |la |de )?(creditos|prestamos) (bancarios |de la deuda )?(de|del) / .test(p) && /(estado|municipi|gobierno|deuda|[a-z]{4,})/.test(p)) return { banco: null };
+    return false;
+  }
+  function rpuMdp(v) { return '$' + Number(v).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' millones'; }
+  function rpuOjo(D, L) {
+    var T = D.tipo, hay = function (s) { return L.some(function (x) { return x[8] && T[x[5]] === s; }); }, n = D.meta.tipoNota, o = [];
+    if (hay('Emisión bursátil')) o.push('en una <b>emisión bursátil</b> ' + esc(n['Emisión bursátil']));
+    if (hay('Obligación relacionada con asociaciones público - privadas')) o.push('una <b>APP</b> es ' + esc(n['Obligación relacionada con asociaciones público - privadas']));
+    if (hay('Obligación a corto plazo')) o.push('el <b>corto plazo</b> es ' + esc(n['Obligación a corto plazo']));
+    if (L.some(function (x) { return D.dest[x[11]] === 'Refinanciamiento sin autorización'; })) o.push('«refinanciamiento sin autorización» es el nombre del registro para el refinanciamiento que, por mejorar las condiciones, no necesita el voto del Congreso local (LDF, art. 23): no quiere decir que sea ilegal');
+    o.push('BBVA Bancomer es el nombre que BBVA México tenía hasta 2019, y el registro conserva el nombre con que se firmó cada crédito');
+    return '<p class="pa-ojo">Ojo: ' + o.join('; ') + '. Tener deuda no es una irregularidad, y este registro no dice si se usó bien. El saldo es el que cada gobierno le reporta a Hacienda cada trimestre, y no se suma con el del Sistema de Alertas, que mide al cierre de 2025 solo lo que se paga con ingresos de libre disposición.</p>';
+  }
+  function rpuLi(D, x, conDeudor) {
+    var I = D.inst[x[4]], t = D.tipo[x[5]];
+    return '<li>' + (conDeudor ? '<b>' + esc(x[2]) + '</b> con ' : '') + '<b>' + esc(I[0]) + '</b>: ' + (x[8] ? 'debe <b>' + rpuMdp(x[8]) + '</b>' : 'sin saldo reportado') +
+      ' de ' + rpuMdp(x[7]) + ' contratados' + (x[6] ? ' el ' + esc(x[6].split('-').reverse().join('-')) : '') + ' · ' + esc(t.toLowerCase()) +
+      (x[9] != null ? ' · tasa efectiva ' + Number(x[9]).toLocaleString('es-MX') + ' %' : '') + (x[10] ? ' · vence ' + esc(x[10].split('-').reverse().join('-')) : '') +
+      '<br><span class="pa-chico">Para: ' + esc(D.dest[x[11]]) + (D.fte[x[12]] !== '—' && D.fte[x[12]] !== '-' ? ' · se paga con: ' + esc(D.fte[x[12]]) : '') + '</span></li>';
+  }
+  function deudaRpu(q) {
+    var p = plano(q), pide = rpuPide(p);
+    if (!pide) return null;
+    var lu = charla && charla.lugar ? charla.lugar(q) : { e: [], m: null }, e = lu.e.length === 1 ? lu.e[0] : null, m = lu.m;
+    return { espera: rpuDatos().then(function (D) {
+      var M = D.meta, R = D.r, h, tit, ci = [], sug = [];
+      var porBanco = function (x) { return !pide.banco || D.inst[x[4]][0].indexOf(pide.banco) === 0; };
+      var suma = function (L) { return L.reduce(function (s, x) { return s + (x[8] || 0); }, 0); };
+      var agrupa = function (L, k) { var o = {}; L.forEach(function (x) { if (x[8]) { var c = k(x); o[c] = (o[c] || 0) + x[8]; } }); return Object.keys(o).map(function (c) { return [c, o[c]]; }).sort(function (a, b) { return b[1] - a[1] || (a[0] < b[0] ? -1 : 1); }); };
+      var L;
+      if (m) {
+        L = R.filter(function (x) { return x[3] === m.cve && porBanco(x); }).sort(function (a, b) { return (b[8] || 0) - (a[8] || 0); });
+        tit = 'A quién le debe ' + m.n + ', ' + m.en;
+        if (!L.length) h = '<p>El municipio de <b>' + esc(m.n) + '</b>, ' + esc(m.en) + ', no tiene ' + (pide.banco ? 'créditos con ' + esc(pide.banco) : 'créditos ni obligaciones') + ' inscritos en el <b>Registro Público Único</b> de Hacienda ' + chip({ e: 'oficial' }) + '. Eso no quiere decir que no le deba a nadie: los adeudos con proveedores, por ejemplo, no pasan por ese registro.</p>';
+        else {
+          var con = L.filter(function (x) { return x[8]; });
+          h = '<p>🏦 El municipio de <b>' + esc(m.n) + '</b>, ' + esc(m.en) + ', tiene <b>' + L.length + '</b> crédito' + (L.length === 1 ? '' : 's') + ' u obligaci' + (L.length === 1 ? 'ón' : 'ones') + (pide.banco ? ' con ' + esc(pide.banco) : '') + ' inscrit' + (L.length === 1 ? 'o' : 'os') + ' en el Registro Público Único ' + chip({ e: 'oficial' }) +
+            (con.length ? '; con saldo al ' + esc(M.corteTxt) + ' debe <b>' + rpuMdp(suma(con)) + '</b> ' + chip({ e: 'derivado' }) : '; ninguno reporta saldo al ' + esc(M.corteTxt)) + ':</p><ol class="pa-lista">' + L.slice(0, 8).map(function (x) { return rpuLi(D, x); }).join('') + '</ol>' +
+            (L.length > 8 ? '<p class="pa-chico">Te muestro 8 de ' + L.length + '.</p>' : '');
+          con.slice(0, 5).forEach(function (x) { ci.push({ v: rpuMdp(x[8]), etq: m.n + ' · ' + D.inst[x[4]][0] + ' · ' + D.tipo[x[5]], e: 'oficial' }); });
+        }
+        sug = ['¿Cuánto debe el municipio de ' + m.n + '?', '¿A quién le debe ' + m.en + '?'];
+      } else if (e) {
+        L = R.filter(function (x) { return x[0] === e.a && porBanco(x); });
+        var con2 = L.filter(function (x) { return x[8]; }), tot = suma(con2), k = agrupa(L, function (x) { return x[1]; }), kn = { e: e.a === 'CDMX' ? 'el gobierno de la Ciudad' : 'el gobierno del estado', m: 'sus municipios', o: 'sus organismos (agua, transporte, fideicomisos…)' };
+        tit = 'A quién le debe ' + e.n + (pide.banco ? ' · ' + pide.banco : '');
+        var ac = agrupa(L, function (x) { return D.inst[x[4]][0]; });
+        var gob = con2.filter(function (x) { return x[1] === 'e'; }).sort(function (a, b) { return b[8] - a[8]; });
+        h = '<p>🏦 En <b>' + esc(e.n) + '</b>, el Registro Público Único de Hacienda tiene <b>' + L.length + '</b> créditos y obligaciones inscritos' + (pide.banco ? ' con <b>' + esc(pide.banco) + '</b>' : '') + ' ' + chip({ e: 'oficial' }) + '; <b>' + con2.length + '</b> reportan saldo al ' + esc(M.corteTxt) + ' y suman <b>' + rpuMdp(tot) + '</b> ' + chip({ e: 'derivado' }) + '.</p>' +
+          (k.length ? '<p>Lo deben ' + k.map(function (x) { return kn[x[0]] + ' (' + rpuMdp(x[1]) + ')'; }).join(', ') + '.</p>' : '') +
+          (!pide.banco && ac.length ? '<p>A quién ' + chip({ e: 'derivado' }) + ':</p><ol class="pa-lista">' + ac.slice(0, 6).map(function (x) { return '<li><b>' + esc(x[0]) + '</b>: ' + rpuMdp(x[1]) + ', el ' + (x[1] / tot * 100).toLocaleString('es-MX', { maximumFractionDigits: 1 }) + ' %</li>'; }).join('') + '</ol>' : '') +
+          (gob.length ? '<p>Los créditos más grandes del gobierno ' + (e.a === 'CDMX' ? 'de la Ciudad' : 'del estado') + ' ' + chip({ e: 'oficial' }) + ':</p><ol class="pa-lista">' + gob.slice(0, 5).map(function (x) { return rpuLi(D, x); }).join('') + '</ol>' : '');
+        if (pide.banco && !gob.length) h += '<ol class="pa-lista">' + con2.sort(function (a, b) { return b[8] - a[8]; }).slice(0, 6).map(function (x) { return rpuLi(D, x, true); }).join('') + '</ol>';
+        ci.push({ v: rpuMdp(tot), etq: e.n + ' · saldo de sus créditos inscritos en el Registro Público Único al ' + M.corteTxt, e: 'derivado' });
+        ac.slice(0, 5).forEach(function (x) { ci.push({ v: rpuMdp(x[1]), etq: e.n + ' · le debe a ' + x[0], e: 'derivado' }); });
+        sug = ['¿Cuánto debe ' + e.n + '?', '¿Qué municipios de ' + e.n + ' tienen deuda elevada?'];
+      } else {
+        L = R.filter(porBanco);
+        var con3 = L.filter(function (x) { return x[8]; }), tot3 = suma(con3), en = agrupa(L, function (x) { return x[0]; });
+        var nomE = function (a) { return M.ent[a] || a; };
+        tit = pide.banco ? 'Lo que le deben a ' + pide.banco + ' los estados y los municipios' : 'A quién le deben los estados y los municipios';
+        h = '<p>🏦 En el <b>Registro Público Único</b> de Hacienda hay <b>' + L.length.toLocaleString('es-MX') + '</b> créditos y obligaciones de estados, municipios y sus organismos' + (pide.banco ? ' con <b>' + esc(pide.banco) + '</b>' : '') + ' ' + chip({ e: 'oficial' }) + '; <b>' + con3.length.toLocaleString('es-MX') + '</b> reportan saldo al ' + esc(M.corteTxt) + ' y suman <b>' + rpuMdp(tot3) + '</b> ' + chip({ e: 'derivado' }) + '.</p>';
+        if (!pide.banco) {
+          var ac3 = agrupa(L, function (x) { return D.inst[x[4]][0]; });
+          h += '<p>A quién le deben más ' + chip({ e: 'derivado' }) + ':</p><ol class="pa-lista">' + ac3.slice(0, 6).map(function (x) { return '<li><b>' + esc(x[0]) + '</b>: ' + rpuMdp(x[1]) + ', el ' + (x[1] / tot3 * 100).toLocaleString('es-MX', { maximumFractionDigits: 1 }) + ' %</li>'; }).join('') + '</ol>';
+          ac3.slice(0, 5).forEach(function (x) { ci.push({ v: rpuMdp(x[1]), etq: 'Estados y municipios le deben a ' + x[0], e: 'derivado' }); });
+        }
+        h += '<p>Las entidades donde más se debe' + (pide.banco ? ' a ' + esc(pide.banco) : '') + ', sumando gobierno, municipios y organismos ' + chip({ e: 'derivado' }) + ':</p><ol class="pa-lista">' + en.slice(0, 5).map(function (x) {
+          return '<li><button type="button" class="pa-ej" data-pa-pregunta="' + esc('¿A quién le debe ' + nomE(x[0]) + '?') + '">' + esc(nomE(x[0])) + '</button> ' + rpuMdp(x[1]) + '</li>'; }).join('') + '</ol>';
+        ci.push({ v: rpuMdp(tot3), etq: (pide.banco ? 'Lo que le deben a ' + pide.banco : 'Saldo de los créditos de estados y municipios') + ' en el Registro Público Único al ' + M.corteTxt, e: 'derivado' });
+        sug = en.slice(0, 2).map(function (x) { return '¿A quién le debe ' + nomE(x[0]) + '?'; }).concat(['¿Qué municipios tienen deuda elevada?']);
+      }
+      h += rpuOjo(D, L || []);
+      var fu = { tx: M.fuente + ', registro diario descargado el ' + M.descarga.split('-').reverse().join('-') + ' (saldo al ' + M.corteTxt + ', sha256 ' + M.sha256.slice(0, 12) + '…)', url: M.pagina };
+      var fus = [{ que: 'Cada crédito: deudor, acreedor, tipo, monto, saldo, tasa, vencimiento, destino y fuente de pago', e: 'oficial', fu: fu },
+        { que: 'Totales y órdenes', e: 'derivado', op: 'sumamos el saldo de los créditos que lo reportan y los agrupamos por acreedor o por entidad; los que Hacienda publica con «-» no suman' }];
+      h += charla && charla.deDonde ? charla.deDonde(fus) : '';
+      var clave = e ? e.a.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase() : m ? m.a.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase() : '';
+      var ir = clave ? ['planisferio-' + clave + '-deuda.html', 'la deuda de ' + (e ? e.n : m.en) + ' en el Planisferio'] : ['planisferio.html?d=deuda', 'la deuda en el Planisferio'];
+      return { html: h, ir: ir, rec: [], ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci, fu: [fu], ir: ir }, sug: sug };
+    }, function () { return { html: '<p>No pude descargar ahora el Registro Público Único. Revisa tu conexión y vuelve a preguntarme.</p>', ir: ['planisferio.html?d=deuda', 'la deuda en el Planisferio'], sug: [], rec: [] }; }),
+      tit: 'A quién le deben' };
+  }
   /* --- Las demás: qué pide el lector y con qué la abrimos. --- */
   var FOLIO_RE = /\bAV-[A-Z0-9]{2,8}-[0-9A-F]{6,}\b|\b[0-9A-F]{64}\b/i, DICT_RE = /\b(DP|NT)-\d{8}-[0-9A-F]{8}\b/i;
   function enteFederal(t) {
@@ -1363,10 +1697,10 @@
     }
     /* 2b. Una factura (05-11-2026): «revisa mi factura», «tengo un XML», «¿esta factura es de una
        empresa fantasma?». Abre el Lector de facturas CFDI; un RFC suelto lo sigue contestando la lista negra. */
-    if (APP.inspfactura && /\b(facturas?|cfdi|xml|comprobantes? fiscal(es)?)\b/.test(p) && !RFC_RE.test(t) && !/^\s*(que|q) (es|son|significa)\b|que quiere decir/.test(p)) {
+    if (APP.inspfactura && /\b(facturas?|cfdi|xml|comprobantes? fiscal(es)?|recibos? de nomina)\b/.test(p) && !RFC_RE.test(t) && !/^\s*(que|q) (es|son|significa)\b|que quiere decir/.test(p)) {
       RFC_RE.lastIndex = 0;
       return respApp('inspfactura', APP.inspfactura.url,
-        '<p>📑 Te abro el <b>Lector de facturas CFDI</b> aquí abajo. Elige el XML de tu factura (o varios): lo leo en tu navegador, sin subirlo a ningún lado, rehago su cuenta, la reviso contra la ley (régimen fiscal, método y forma de pago, complemento de pago y retención de IVA, cada regla con su artículo) y cruzo al emisor con la lista 69-B del SAT. Si cargas también los complementos de pago, los empato con sus facturas.</p>' +
+        '<p>📑 Te abro el <b>Lector de facturas CFDI</b> aquí abajo. Elige el XML de tu factura (o varios): lo leo en tu navegador, sin subirlo a ningún lado, rehago su cuenta, la reviso contra la ley (régimen fiscal, método y forma de pago, complemento de pago y retención de IVA, cada regla con su artículo) y cruzo al emisor con la lista 69-B del SAT. Si cargas también los complementos de pago, los empato con sus facturas. Si es un recibo de nómina, reviso además su ISR contra la tarifa, el subsidio para el empleo y el salario base de cotización, sin mostrar el nombre de quien trabaja.</p>' +
         '<p class="pa-chico">Separo lo que declaró el SAT (oficial) de las señales que salen de comparar fechas o de revisar el XML (derivado, «señal para revisar»). No te digo si la factura está cancelada: eso lo dice el verificador del SAT con su UUID.</p>');
     }
     RFC_RE.lastIndex = 0;
@@ -1508,10 +1842,13 @@
     ['sueldos', /\b(sueldos? y salarios?|nomina|asalariad[oa]|mi patron|mi empresa me paga|empleado de)\b/]
   ];
   var PLATA = [['hospedaje', /\b(airbnb|booking|hospedaje)\b/], ['bienes', /\b(mercado libre|amazon|vendo|ventas?)\b/], ['transporte', /./]];
+  /* Quien trabaja para el gobierno cotiza al ISSSTE (18-11-2026): la calculadora lo distingue con &pt=issste. */
+  var GOBIERNO = /\b(issste|burocrata|servidora? publica?|trabajo (en|para) (el |la |una )?(gobierno|dependencia|federacion|secretaria)|soy del gobierno|empleado (del|de) gobierno|me paga el gobierno)\b/;
   function regimenDe(p) {
     var r = REGIMEN.filter(function (x) { return x[1].test(p); })[0], pl = null;
     if (r && r[0] === 'plataformas') pl = PLATA.filter(function (x) { return x[1].test(p); })[0][0];
-    return { r: r ? r[0] : '', pl: pl };
+    var gob = GOBIERNO.test(p) && (!r || r[0] === 'sueldos');
+    return { r: r ? r[0] : (gob ? 'sueldos' : ''), pl: pl, pt: gob ? 'issste' : '' };
   }
   function herramienta(q) {
     if (!HA.apps.length) return null;
@@ -1522,14 +1859,15 @@
       /* Por quincena: la calculadora trabaja por mes, y un mes son dos quincenas (derivado, se dice la operación). */
       if (quin) { m = Math.round(m * 2 * 100) / 100; per = 'mes'; }
       if (sem) m = 0;
-      var liga = 'herramienta-calculadora-ticket-retienen.html' + (m ? '?m=' + m + '&p=' + per + '&n=' + nat + (rg.r ? '&r=' + rg.r : '') + (rg.pl ? '&pl=' + rg.pl : '') : '');
+      var liga = 'herramienta-calculadora-ticket-retienen.html' + (m ? '?m=' + m + '&p=' + per + '&n=' + nat + (rg.r ? '&r=' + rg.r : '') + (rg.pl ? '&pl=' + rg.pl : '') + (rg.pt ? '&pt=' + rg.pt : '') : '');
       var regN = rg.r && CR.reg ? CR.reg[rg.r] : '', plN = rg.pl && CR.plat ? CR.plat[rg.pl] : '';
       var hijos = /\b(hijos?|hijas?|dependientes?|esposa|esposo|familia)\b/.test(p);
       return respApp('ccticket', liga, '<p><span aria-hidden="true">🧾</span> Esa cuenta la hace <b>' + esc(cc.n) + '</b>, de la ' + esc(cc.grupo) + ': ' +
         (m ? 'ya le puse tu ingreso de <b>$' + m.toLocaleString('es-MX') + (per === 'ano' ? ' al año' : ' al mes') + '</b>, ' + (nat === 'neto' ? 'después' : 'antes') + ' de descuentos' +
-          (regN ? ', en <b>' + esc(regN) + '</b>' + (plN ? ' (' + esc(plN.toLowerCase()) + ')' : '') : '') + '. ' :
+          (regN ? ', en <b>' + esc(regN) + '</b>' + (plN ? ' (' + esc(plN.toLowerCase()) + ')' : '') : '') + (rg.pt ? ', como quien trabaja para el gobierno y cotiza al <b>ISSSTE</b>' : '') + '. ' :
           sem ? 'la calculadora trabaja por mes o por año, así que escribe ahí lo que juntas al mes (no convierto semanas: los meses no tienen semanas exactas). ' : 'escribe lo que ganas. ') +
-        'Te dice cuánto te retienen, con la tarifa oficial del ISR, y a dónde va cada peso de tu impuesto, en un documento con folio y huella.</p>' +
+        'Te dice cuánto te retienen, con la tarifa oficial del ISR, lo que pone tu patrón ' + (rg.pt ? '(tu dependencia, al ISSSTE y al FOVISSSTE)' : '(al IMSS y al INFONAVIT)') + ' y cuánto cuesta tu plaza, y a dónde va cada peso de tu impuesto, en un documento con folio y huella.</p>' +
+        (rg.pt ? '<p class="pa-chico">Las cuotas salen de la Ley del ISSSTE (10.625% de tu sueldo básico). Si tu estado o tu municipio tiene su propio instituto de seguridad social, tus cuotas son otras.</p>' : '') +
         (quin ? '<p class="pa-chico">' + chip({ e: 'derivado' }) + ' <b>Operación:</b> $' + m0.toLocaleString('es-MX') + ' a la quincena × 2 quincenas = $' + m.toLocaleString('es-MX') + ' al mes.</p>' : '') +
         (hijos ? '<p class="pa-chico">Tus hijos o tu familia no cambian lo que te retienen cada mes: la tarifa del artículo 96 de la Ley del ISR no tiene descuento por dependientes. Algunos gastos de la familia, como los médicos y hospitalarios, se deducen en la declaración anual (artículo 151), que esta cuenta no hace.</p>' : '') +
         '<p class="pa-chico">La cuenta la hace la calculadora con las tarifas publicadas. ' + (regN ? 'Si tu régimen es otro, cámbialo ahí mismo, en «1 · Tu ingreso».' : /\bfacturo\b/.test(p) ? 'Como facturas, elige en «1 · Tu ingreso» si estás en el RESICO o en actividad empresarial, porque cambia mucho lo que pagas; mientras, supuse sueldos y salarios.' : 'Supuse que trabajas con un patrón (sueldos y salarios); si no es así, cámbialo ahí mismo, en «1 · Tu ingreso».') + '</p>',
@@ -2420,11 +2758,174 @@
     })[0];
     return fed ? charla.deFicha(fed) : null;
   }
+  /* --- El padrón de contrapartes (18-11-2026; pedido del autor: «compliance de prevención de lavado
+     de dinero»). Un RFC lo contesta con todas las listas a la vez (padron.js: las del SAT del art. 69,
+     17-H Bis, 69-B y 69-B Bis, el Directorio de Sancionados, la OFAC y la ONU, y ComprasMX); un nombre
+     con «OFAC», «ONU» o «lista de sanciones», en esas dos listas. De las personas físicas no dice el
+     nombre. «Contratos de RFC…» lo sigue contestando ComprasMX. --- */
+  var PD_URL = 'herramienta-inspector-padron.html', PD_CLS = { chico: 'pa-chico', lista: 'pa-lista' };
+  var PD_INT = /\b(ofac|onu|naciones unidas|consejo de seguridad|lista clinton|listas? de sanciones|sancionad[oa]s? (por|en) (ee ?uu|estados unidos|la onu|el tesoro)|terroris\w*|lista negra de (ee ?uu|estados unidos))\b/;
+  var PD_GEN = /\b(revis\w* (a )?(mi |mis |un |una |el |la |los |las )?(cliente|clientes|proveedor|proveedores|contraparte|contrapartes)|contraparte|contrapartes|padron de contrapartes|conoce a tu cliente|kyc|debida diligencia|prevencion de lavado|\bpld\b|listas? (de|para) (lavado|pld|cumplimiento)|en que listas|no localizad\w*|creditos? fiscal(es)? (firmes?|exigibles?|cancelados?)|sellos? digital(es)? sin efectos|csd sin efectos|69 ?-? ?b bis)\b/;
+  var PD_FUERA = ('esta estan es son en la el los las lista listas de del sanciones sancionado sancionada sancionados ofac onu naciones unidas consejo seguridad clinton tesoro ' +
+    'ee uu estados unidos negra terrorista terroristas aparece aparecen busca buscar buscame revisa revisar checa checar si que a me puedes dime quiero saber por favor ' +
+    'persona empresa nombre').split(' ');
+  function cargaPadron() { return cargaJs('assets/auditor/js/padron.js', function () { return window.Padron; }); }
+  function padronResp(q) {
+    var p = plano(q), rfcs = (q.match(RFC_RE) || []).map(function (x) { return x.toUpperCase(); }).filter(function (x, i, l) { return l.indexOf(x) === i; });
+    RFC_RE.lastIndex = 0;
+    if (rfcs.length) {
+      if (CMX_RE.test(p)) return null;
+      var liga = PD_URL + '?q=' + encodeURIComponent(rfcs.slice(0, 100).join(' '));
+      return { espera: cargaPadron().then(function (P) { return Promise.all(rfcs.slice(0, 50).map(P.rfc)).then(function (fs) { return respPadron(P, fs, liga, rfcs.length); }); })
+        .then(null, function () { return respApp('insppadron', liga, '<p>No pude descargar ahora las listas. Revisa tu conexión y vuelve a preguntarme, o búscalo en la aplicación aquí abajo.</p>'); }),
+        tit: 'Revisa a tu contraparte: ' + rfcs.slice(0, 3).join(', ') + (rfcs.length > 3 ? '…' : '') };
+    }
+    if (PD_INT.test(p) && !/^\s*(que|q) (es|son|significa)\b|que quiere decir/.test(p)) {
+      var nom = p.trim().split(' ').filter(function (w) { return w.length > 1 && PD_FUERA.indexOf(w) < 0; }).join(' ');
+      if (nom.replace(/ /g, '').length >= 5) {
+        var ln = PD_URL + '?q=' + encodeURIComponent(nom);
+        return { espera: cargaPadron().then(function (P) { return P.nombre(nom); }).then(function (x) {
+          var h = Padron.htmlNombre(x, PD_CLS), M = x.meta;
+          var fu = M ? [{ tx: M.ofac.fuente + ', descarga del ' + M.ofac.corte + ' (sha256 ' + M.ofac.sha256.slice(0, 12) + '…)', url: M.ofac.pagina },
+            { tx: M.onu.fuente + ', generada el ' + M.onu.corte + ' (sha256 ' + M.onu.sha256.slice(0, 12) + '…)', url: M.onu.pagina }] : [];
+          if (charla && charla.deDonde) h += charla.deDonde(fu.map(function (f) { return { que: 'Listas de sanciones', e: 'oficial', fu: f }; }));
+          return { html: h, ir: [ln, 'Revisa a tu contraparte'], app: { id: 'insppadron', url: ln }, rec: [],
+            ficha: { t: 'calculo', tit: 'OFAC y ONU: ' + nom, txt: texto(h), ci: (x.r || []).slice(0, 8).map(function (z) { return { v: z.y[0].toUpperCase() + ' ' + z.y[1], etq: z.y[3] + ' · ' + z.y[5], e: 'oficial' }; }), fu: fu, ir: [ln, 'Revisa a tu contraparte'] },
+            sug: ['¿Cómo reviso a mi cliente?', '¿Qué es una EFOS?', '¿Qué es una actividad vulnerable?'] };
+        }, function () { return respApp('insppadron', ln, '<p>No pude descargar ahora las listas de sanciones. Búscalo en la aplicación aquí abajo.</p>'); }), tit: 'OFAC y ONU: ' + nom };
+      }
+    }
+    /* El lote, la cadena de terceros y la matriz (18-11-2026): un archivo con muchos RFC o las facturas en XML. */
+    if (APP.insppadron && /\b(lista|lote|archivo|excel|csv|cientos|todos|varios)\b.{0,25}\b(proveedores|clientes|contrapartes|rfc)\b|\b(mis|nuestros) (proveedores|clientes)\b.{0,30}\b(listas?|sat|ofac|69 ?b)\b|a cuenta de terceros|cadena de (terceros|proveedores)|matriz de (riesgo|contrapartes|coincidencias)/.test(p)) {
+      return respApp('insppadron', PD_URL + '#lote',
+        '<p>📂 Te abro <b>Revisa a tu contraparte</b> en su parte de lotes. Sube un <b>CSV o TXT</b> con hasta 2,000 RFC (o pega la columna desde Excel), o tus <b>facturas en XML</b>: ' +
+        'con ellas te digo quién te factura, a quién le facturas y por cuenta de quién (los RFC «a cuenta de terceros» del CFDI 4.0).</p>' +
+        '<p>El resultado es una <b>matriz</b>, una fila por RFC y una columna por lista (SAT, 69-B, 69-B Bis, Sancionados, OFAC y ONU), que puedes descargar en CSV. Todo se cruza en tu navegador: tus archivos no se suben a ningún lado.</p>' +
+        '<p class="pa-chico">La columna «Revisar» ordena la lista, no califica: una coincidencia es una señal para revisar, nunca una acusación, y de las personas físicas solo se dice si su RFC coincide.</p>');
+    }
+    if (PD_GEN.test(p) && !/^\s*(que|q) (es|son|significa)\b|que quiere decir/.test(p) && APP.insppadron) {
+      return respApp('insppadron', PD_URL,
+        '<p>🛡️ Te abro <b>Revisa a tu contraparte</b> aquí abajo. Escribe el <b>RFC</b> de tu cliente, tu proveedor o el cliente de tu cliente (uno o varios) y te digo en una sola ficha si aparece en las listas del SAT ' +
+        '(no localizados, créditos firmes, exigibles y cancelados, sentencias por delito fiscal, sellos digitales sin efectos, 69-B y 69-B Bis), en el Directorio de Sancionados, en la OFAC o en la ONU, y si tiene contratos con el gobierno.</p>' +
+        '<p>También puedes preguntármelo aquí: «revisa AAA010101AAA». Con un nombre busco en la OFAC y la ONU: «¿está en la OFAC el Cártel de Sinaloa?».</p>' +
+        '<p class="pa-chico">De las personas físicas te digo si su RFC coincide, nunca su nombre. Una coincidencia es una señal para revisar, no una acusación. La Lista de Personas Bloqueadas de la UIF no es pública: si tu actividad es vulnerable, consúltala en tu acceso del SAT.</p>');
+    }
+    return null;
+  }
+  function respPadron(P, fs, liga, total) {
+    var ci = [], fu = [], vistos = {};
+    fs.forEach(function (f) {
+      (f.senales || []).forEach(function (s) {
+        ci.push({ v: s.lista + (s.extra ? ', ' + s.extra : ''), etq: (f.moral && f.nombre ? f.nombre + ' · ' : '') + 'RFC ' + f.rfc + (s.fecha ? ' · publicado ' + s.fecha : ''), e: 'oficial' });
+        if (!vistos[s.fuente]) { vistos[s.fuente] = 1; fu.push({ tx: s.fuente, url: s.url }); }
+      });
+    });
+    var M = fs[0].meta;
+    if (M && !fu.length) fu.push({ tx: 'SAT, datos abiertos, Contribuyentes publicados (art. 69, 17-H Bis y 69-B Bis); lista 69-B; Directorio de Sancionados; OFAC; ONU', url: M.sat.nl.pagina });
+    function grupo(r) { var g = GR.g.filter(function (x) { return (x.emp || []).indexOf(r) >= 0; })[0]; return g ? g.n : ''; }
+    var h;
+    if (fs.length === 1) h = P.html(fs[0], { grupo: grupo(fs[0].rfc), chico: 'pa-chico', lista: 'pa-lista' });
+    else {
+      var con = fs.filter(function (f) { return f.senales && f.senales.length; });
+      h = '<p>Revisé <b>' + fs.length + ' RFC</b>: <b>' + con.length + '</b> con alguna coincidencia y <b>' + (fs.length - con.length) + '</b> sin coincidencias.' + (total > 50 ? ' Revisé solo los primeros 50; para más, usa la aplicación aquí abajo (acepta hasta 100).' : '') + '</p>' +
+        con.sort(function (a, b) { return b.nivel - a.nivel; }).slice(0, 8).map(function (f) { return P.html(f, { grupo: grupo(f.rfc), chico: 'pa-chico', lista: 'pa-lista' }).split('<p class="pa-chico">⚖️')[0]; }).join('') +
+        '<p class="pa-chico">⚖️ Una coincidencia es una señal para revisar, no una acusación. No aparecer no certifica a nadie.</p>';
+    }
+    if (charla && charla.deDonde) h += charla.deDonde(fu.map(function (f) { return { que: 'Listas que revisa el padrón de contrapartes', e: 'oficial', fu: f }; }));
+    var tit = 'Revisa a tu contraparte: ' + fs.slice(0, 3).map(function (f) { return f.rfc; }).join(', ');
+    var uno = fs.length === 1 && fs[0].moral ? fs[0].rfc : '';
+    return { html: h, ir: [liga, 'Revisa a tu contraparte'], app: { id: 'insppadron', url: liga }, rec: [],
+      ficha: { t: 'calculo', tit: tit, txt: texto(h), ci: ci.slice(0, 12), fu: fu, ir: [liga, 'Revisa a tu contraparte'] },
+      sug: [uno ? 'Contratos de ' + uno + ' en ComprasMX' : '¿Cómo reviso a mi cliente?', '¿Qué es una EFOS?', '¿Qué es una actividad vulnerable?'] };
+  }
+
+  /* El índice general cuelga del Auditor (decisión del autor, 19-11-2026): «el índice»,
+     «¿qué tiene la plataforma?» o «mapa del sitio» lo abren; «índice de…» sigue siendo un tema. */
+  var INDICE_RE = /^(?:(?:el|tu|su|ver|abre|abrir|dame|mu[eé]strame)\s+)*(?:[ií]ndice(?:\s+general)?|mapa del sitio)(?:\s+de\s+(?:la plataforma|auditavisi[oó]n|todo))?\s*\??$|^(?:qu[eé]|todo lo que)\s+(?:tiene|tienen|hay en|ofrece|ofrecen|contiene|sabe)(?:\s+(?:la plataforma|auditavisi[oó]n|el auditor))?\s*\??$/i;
+  var MIS_RE = /^(?:(?:ver|abre|abrir|dame|mu[eé]strame)\s+)*(?:mis|tus)\s+(?:respuestas|preguntas|solicitudes|consultas)(?:\s+(?:anteriores|guardadas))?$|^mi\s+(?:caso|historial)$|^(?:qu[eé]\s+)?(?:te\s+)?(?:he\s+)?pregunt[eé](?:\s+antes)?$/i;
   function respuesta(q, previas) {
+    var t = String(q || '').trim().replace(/^[¿¡\s]+/, '').replace(/[?!.\s]+$/, '');
+    if (MIS_RE.test(t)) {
+      var rm = abre(q, 'mis-respuestas.html');
+      if (rm) {
+        rm.html = '<p><span aria-hidden="true">📋</span> Todo lo que me preguntas queda en <a href="mis-respuestas.html"><b>Tus respuestas</b></a>: cada respuesta en corto, ' +
+          'su «Saber más», su dictamen, lo que no supe contestarte y los servicios que vienen a tu caso, ya listos para pedirlos.</p>' +
+          '<p>Se arma solo en tu navegador: nada se manda a ningún servidor.</p>';
+        rm.ir = ['mis-respuestas.html', 'Tus respuestas'];
+        return rm;
+      }
+    }
+    if (INDICE_RE.test(t)) {
+      var ri = abre(q, 'indice.html');
+      if (ri) {
+        ri.html = '<p><span aria-hidden="true">🗂️</span> Todo lo que sé está en el <a href="indice.html"><b>Índice general</b></a>, en el orden de las pestañas: ' +
+          'yo y mis cuatro modos, el Planisferio con el portal de cada entidad, la Enciclopedia, Comunidad, el Noticiero y los Servicios.</p>' +
+          '<p>Ábrelo con «Saber más», o escríbeme aquí lo que buscas y te llevo directo.</p>';
+        ri.ir = ['indice.html', 'Índice general'];
+        return ri;
+      }
+    }
+    return quizaEmpresa(q, respuesta0(q, previas));
+  }
+  /* Todo pasa por el Auditor (decisión del autor, 19-11-2026: «entre pestañas no se
+     vinculan: todo es a través del Auditor»). Una liga de otra pestaña llega al chat
+     con ?q= y ?abre=<página>: el chat contesta con esa página (o abre la aplicación en
+     su marco), con su dictamen, «Saber más» y el servicio que toca. Solo acepta una
+     página de la plataforma; una que el chat no conozca se contesta como pregunta. */
+  var ABRE_OK = /^[a-z0-9][a-z0-9-]*\.html([?#][^\s<>"'\\]*)?$/i, abreUna = null;
+  function abre(q, liga) {
+    if (!liga || !ABRE_OK.test(liga)) return null;
+    var base = sinParam(liga), a = appDeLiga(liga), r;
+    if (a && APP[a.id]) {
+      r = conApp(respApp(a.id, liga, '<p><span aria-hidden="true">' + a.ico + '</span> <b>' + esc(a.n) + '</b>' + (a.grupo ? ', de ' + esc(a.grupo) : '') + '. ' + esc(a.desc || a.frase || '') + '</p>' +
+        '<p>Úsala aquí abajo, sin salir del chat, o ábrela completa con «Saber más».</p>', { sug: [] }));
+    } else {
+      var hit = null, pag = null;
+      F.forEach(function (f) {
+        if (!f.ir) return;
+        if (!hit && f.ir[0] === liga) hit = f;
+        if (!pag && f.t === 'pagina' && sinParam(f.ir[0]) === base) pag = f;
+      });
+      /* Una nota «Al momento» tiene su página propia y su ficha en la columna (#col-<id>). */
+      var col = /^noticias-al-momento-(.+)\.html$/.exec(base);
+      if (!hit && !pag && col) F.forEach(function (f) { if (!pag && f.ir && /#col-/.test(f.ir[0]) && f.ir[0].split('#col-')[1] === col[1]) pag = f; });
+      if (!hit && !pag) F.forEach(function (f) { if (!pag && f.ir && sinParam(f.ir[0]) === base) pag = f; });
+      var f = hit || pag;
+      if (f && charla) {
+        r = charla.deFicha(f);
+        r.ir = [liga, (hit && r.ir && r.ir[1]) || f.tit];
+      } else {
+        /* Una página sin ficha propia (un mapa, un tablero): el chat la abre igual, sin cifras. */
+        r = { html: '<p><span aria-hidden="true">📄</span> Te llevo a <b>' + esc(q) + '</b>. Ábrela con «Saber más»; si tienes una pregunta sobre lo que ves ahí, escríbemela aquí.</p>',
+          ir: [liga, q], rec: [], sug: [] };
+      }
+    }
+    r.abre = liga;
+    return r;
+  }
+  /* Las aplicaciones del chat son servicios (pedido del autor, 19-11-2026): si la
+     respuesta lleva a una página que un servicio aprovecha (servicios_fichas.py), se
+     ofrece el servicio, con su página y su cotización. Nunca un monto. */
+  var SRV = (B.dat && B.dat.srv) || {};
+  function servicioHtml(r) {
+    if (!r || r.plat) return '';
+    var u = (r.app && r.app.url) || (r.ir && r.ir[0]) || (r.ficha && r.ficha.ir && r.ficha.ir[0]) || '';
+    var b = sinParam(u), l = SRV[b];
+    if (!b || /^servicios?(-|\.html)/.test(b) || !l || !l.length) return '';
+    return '<div class="pa-srv"><p class="pa-srv-t"><span aria-hidden="true">🧰</span> Esto también lo hacemos como servicio</p><ul>' + l.map(function (x) {
+      return '<li><a class="pa-srv-n" href="' + esc(x[4]) + '"><span aria-hidden="true">' + x[1] + '</span> <b>' + esc(x[2]) + '</b></a><small>' + esc(x[3]) + '</small>' +
+        '<a class="pa-srv-pide" href="servicios-cotiza.html?servicio=' + encodeURIComponent(x[0]) + '#solicitud">Pide una cotización ➔</a></li>';
+    }).join('') + '</ul><p class="pa-chico">Lo básico lo haces tú, gratis, aquí en el chat. El servicio es para ir más a fondo: el costo y el plazo te llegan por escrito antes de empezar.</p></div>';
+  }
+  function respuesta0(q, previas) {
     /* Una liga que ya está en la hemeroteca abre su cotejo antes que cualquier palabra de su dirección
        («pemex-perdidas-…-deuda» se iba al pendiente de la deuda de Pemex, 01-11-2026). */
     var lg = (/https?:\/\/[^\s<>"']+/i.exec(String(q)) || [])[0], hm = lg && hemeroteca(lg);
     if (hm) return hm;
+    var ge = grupoEmp(q);
+    if (ge) return ge;
+    var xi = expInvResp(q);
+    if (xi) return xi;
     /* La memoria de promesas (01-11-2026): «¿qué pasó con lo que prometieron…?» antes que la nota o la obra del mismo tema. */
     var pm = charla && charla.promesa && charla.promesa(q);
     if (pm) return pm;
@@ -2454,7 +2955,11 @@
     if (sa) return sa;
     var vc = PIDE_COTEJO.test(plano(q)) && verificado(q);
     if (vc) return vc;
-    var cx = fraccCmx(q) || cruceSat(q) || contratosCmx(q);
+    var dr = deudaRpu(q);
+    if (dr) return dr;
+    var pd = padronResp(q);
+    if (pd) return pd;
+    var cx = fraccCmx(q) || cruceSat(q) || sancionesCmx(q) || contratosCmx(q) || empresaNombre(q, previas);
     if (cx) return cx;
     var pe = personaje(q);
     if (pe) return pe;
@@ -2517,6 +3022,118 @@
     return r;
   }
 
+  /* El esquema de la respuesta (pedido del autor, 16-11-2026: «que el formato de
+     las respuestas… se potencialice… mejor esquematizada»). La respuesta se lee
+     por pisos: de qué está hecha (su tipo y sus chips), lo esencial, el detalle
+     plegado cuando es largo, sus acciones, su expediente si lo tiene, y las
+     puertas en paneles que se abren. Nada de esto cambia un dato: solo ordena. */
+  function cabResp(r) {
+    var f = r.ficha, t = f && TIPO[f.t], est = {};
+    (r.html.match(/est-chip est-(oficial|derivado|pendiente)/g) || []).forEach(function (m) { est[m.slice(13)] = 1; });
+    var chs = ['oficial', 'derivado', 'pendiente'].filter(function (e) { return est[e]; });
+    var mt = (r.q && modoToca(r.q, r)) || modoVivo();
+    if (!t && !chs.length) return '';
+    return '<p class="pa-cab">' + (t ? '<span class="pa-cab-tipo"><span aria-hidden="true">' + t[0] + '</span> ' + esc(t[1]) + '</span>' : '') +
+      (MODO_ICO[mt] ? '<span class="pa-cab-modo" title="El modo al que pertenece esta respuesta">' + MODO_ICO[mt] + ' ' + MODO_NOM[mt] + '</span>' : '') +
+      (chs.length ? '<span class="pa-cab-est"><span class="pa-cab-de">Hecha con datos</span> ' + chs.map(function (e) { return chip({ e: e }); }).join(' ') + '</span>' : '') + '</p>';
+  }
+  function esquema(html) {
+    var d = document.createElement('div');
+    d.innerHTML = html;
+    var suelto = Array.prototype.some.call(d.childNodes, function (n) { return n.nodeType === 3 && n.textContent.trim(); });
+    if (suelto || d.querySelector('iframe, form, input, textarea, .pa-app')) return html;
+    var pie = [], cuerpo = [];
+    Array.prototype.forEach.call(d.children, function (k) { (k.classList.contains('pa-dedonde') ? pie : cuerpo).push(k); });
+    var largo = cuerpo.reduce(function (s, k) { return s + k.textContent.length; }, 0);
+    if (cuerpo.length < 4 || largo < 900) return html;
+    var ver = [], ac = 0;
+    while (cuerpo.length > 2 && ver.length < 3 && (!ver.length || ac < 280)) { ac += cuerpo[0].textContent.length; ver.push(cuerpo.shift()); }
+    if (cuerpo.length < 2) return html;
+    var fuera = function (l) { return l.map(function (k) { return k.outerHTML; }).join(''); };
+    return fuera(ver) + '<details class="pa-detalle"><summary><span>📋 Ver el detalle completo</span><small>' + cuerpo.length + ' apartados más</small></summary>' +
+      '<div class="pa-detalle-c">' + fuera(cuerpo) + '</div></details>' + fuera(pie);
+  }
+  /* Las puertas de una respuesta van en paneles: se ve cuántas hay y se abren
+     con un toque. Con pocas, el panel ya viene abierto. */
+  function panel(h, ico, tit, abre) {
+    if (!h) return '';
+    var n = (h.match(/class="pa-rec-a"|class="pa-pl-a"|class="pa-pl-chip"/g) || []).length;
+    return '<details class="pa-panel"' + (abre || (n && n <= 3) ? ' open' : '') + '><summary><span>' + ico + ' ' + tit + '</span>' + (n ? '<small>' + n + '</small>' : '') + '</summary>' +
+      h.replace(/<p class="pa-mas-t">[^<]*<\/p>/, '') + '</details>';
+  }
+  /* El expediente de la investigación (16-11-2026): cuando la plática toca una de
+     las grandes investigaciones, la respuesta trae la tarjeta de su expediente,
+     que arma herramientas/expedientes_inv.py con la base. */
+  var EXP_INDICE = 'expedientes-investigacion.html';
+  function invToca(q, r) {
+    var p = plano(q + ' ' + ((r && r.ficha && r.ficha.tit) || (r && r.tit) || '')), hit = null;
+    INV.forEach(function (f) { if (!hit && f.ex && f._k.some(function (x) { return p.indexOf(x) >= 0; })) hit = f; });
+    return hit;
+  }
+  function expInvHtml(q, r) {
+    if (r.plat) return '';
+    var f = r.ficha && r.ficha.t === 'investigacion' && r.ficha.ex ? r.ficha : invToca(q, r);
+    if (!f) return '';
+    var det = [f.nd + ' documento' + (f.nd === 1 ? '' : 's')];
+    if (f.nb) det.push(f.nb + ' en su bitácora');
+    if (f.np) det.push(f.np + ' pendiente' + (f.np === 1 ? '' : 's'));
+    if (f.nov) det.push('último registro: ' + f.nov);
+    return '<a class="pa-exp" href="' + esc(f.ex) + '"><span class="pa-exp-ico" aria-hidden="true">🗂️</span>' +
+      '<span class="pa-exp-tx"><small>' + esc(f.exn) + ' · Expediente de investigación · ' + (f.ab ? '🟠 Abierto' : '🟢 Documentado') + '</small>' +
+      '<b>' + esc(f.tit) + '</b><small>' + esc(det.join(' · ')) + '</small></span><span class="pa-exp-ir">Abrir ➔</span></a>';
+  }
+  function pideExpHtml() {
+    return '<p class="pa-chico pa-exp-pide">🗂️ ¿Es un caso grande? Revisa los <a href="' + EXP_INDICE + '">expedientes de investigación</a> o ' +
+      '<a href="servicios-cotiza.html?servicio=expediente">pide el tuyo</a>.</p>';
+  }
+  /* «Expediente del Tren Maya», «expedientes de investigación»: abre el de la
+     Biblioteca. Los casos de la ASF («expediente de Segalmex», «casos por aclarar
+     del AIFA») siguen en su aplicación. */
+  function expInvResp(q) {
+    var p = plano(q);
+    if (!charla || !/ expedientes? /.test(p) || / (asf|casos?|pliegos?|por aclarar) /.test(p)) return null;
+    /* «¿Qué me entregan si contrato el expediente…?» pide el servicio, no la Biblioteca (servicio-expediente.html). */
+    if (/ (contrat\w*|encarg\w*|cotiz\w*|servicios?|me entregan) /.test(p)) return null;
+    var f = invToca(q, null);
+    if (f) {
+      var r = charla.deFicha(f);
+      r.ir = [f.ex, 'su expediente'];
+      r.html = '<p>🗂️ Es el <b>expediente ' + esc(f.exn) + '</b> de la Biblioteca del Erario Público: todo lo que la plataforma sabe del caso, en un solo lugar, ' +
+        (f.ab ? 'y <b>sigue abierto</b>' : 'ya <b>documentado</b>') + (f.nov ? '. El último registro de su bitácora es del ' + esc(f.nov) : '') + '.</p>' + r.html.replace(/<p>Es una de las investigaciones[\s\S]*?<\/p>/, '');
+      r.sug = ['Expedientes de investigación', '¿Cómo pido un expediente?'];
+      return r;
+    }
+    if (!/ expedientes? de (las )?(grandes )?investigacion(es)? | grandes investigaciones | expedientes? de la biblioteca | expedientes? internos? | expedientes? de control interno /.test(p)) return null;
+    var ab = INV.filter(function (x) { return x.ex && x.ab; }).length, tot = INV.filter(function (x) { return x.ex; }).length;
+    var nuevos = INV.filter(function (x) { return x.ex && x.nov; }).slice(0, 5);
+    return { tit: 'Expedientes de control interno', ir: [EXP_INDICE, 'los Expedientes de control interno'], rec: [],
+      html: '<p>🗂️ Los <b>Expedientes de control interno</b> son la quinta tarjeta de la Biblioteca del Erario Público: cada gran investigación en un solo lugar, con el caso en cinco preguntas, su bitácora, lo que sigue y lo que falta.</p>' +
+        '<p>Hay <b>' + tot + '</b>: <b>' + ab + '</b> abiertos y <b>' + (tot - ab) + '</b> documentados. Se arman solos con la base de datos y se ponen al día cada día.</p>' +
+        (nuevos.length ? '<p>Con registro fechado en su bitácora:</p><ul class="pa-lista">' + nuevos.map(function (x) {
+          return '<li><a href="' + esc(x.ex) + '">' + esc(x.exn) + ' · ' + esc(x.tit) + '</a> · ' + esc(x.nov) + '</li>'; }).join('') + '</ul>' : '') +
+        '<p>Dime «expediente del Tren Maya» y te abro el suyo. Si tu caso no está, <a href="servicios-cotiza.html?servicio=expediente">puedes pedirlo</a>.</p>',
+      sug: INV.filter(function (x) { return x.ex; }).slice(0, 3).map(function (x) { return 'Expediente de ' + x.tit; }) };
+  }
+  /* «Tus respuestas» (pedido del autor, 19-11-2026: «la página automatizada de las respuestas
+     o de los servicios a… lo que hayan hecho los usuarios»). Cada pregunta contestada se anota
+     solo en este navegador (av-caso, hasta 60) con su respuesta en corto, su página, su dictamen
+     y los servicios que aprovechan esa página (SRV); mis-respuestas.html la arma. Lo que no supo
+     contestar queda como solicitud. Nada sale de aquí. */
+  function caso(q, r, previas, sin) {
+    try {
+      var ir = sin ? null : (r.ir || (r.ficha && r.ficha.ir) || null), u = sin ? '' : ((r.app && r.app.url) || (ir && ir[0]) || '');
+      var b = sinParam(u), l = (!b || /^servicios?(-|\.html)/.test(b)) ? [] : (SRV[b] || []);
+      var d = document.createElement('div'); d.innerHTML = sin ? '' : (r.html || '');
+      var t = (d.textContent || '').replace(/\s+/g, ' ').trim();
+      if (t.length > 320) t = t.slice(0, 317) + '…';
+      var c = JSON.parse(localStorage.getItem('av-caso') || '[]');
+      if (!Array.isArray(c)) c = [];
+      c = c.filter(function (x) { return x && x.q !== q; });
+      c.unshift({ q: q, f: hoy(), m: modoActual(), t: t, ir: ir ? [ir[0], ir[1] || ''] : null, s: l.map(function (x) { return x[0]; }),
+        d: !sin && r.ficha ? enlaceDictamen(q, previas || []) + (r.abre ? '&abre=' + encodeURIComponent(r.abre) : '') : '', sin: !!sin });
+      localStorage.setItem('av-caso', JSON.stringify(c.slice(0, 60)));
+    } catch (e) { /* sin almacenamiento, el chat sirve igual */ }
+  }
   function responde(q, quieto, ya) {
     q = String(q || '').trim().slice(0, 600);
     if (!q) return;
@@ -2527,25 +3144,31 @@
     var previas = historial.slice(-4);
     historial.push(q);
     controles();
-    var r = respuesta(q, previas);
+    var r = (abreUna && abre(q, abreUna)) || respuesta(q, previas);
+    abreUna = null;
     /* La lista negra del SAT contesta cuando termina de descargar la lista. */
     var espera = r.espera ? r.espera.then(function (x) { r = x; }) : null;
     var pinta = function (li) {
+      /* La medición de uso (18-11-2026): solo el modo y la página a la que llevó la respuesta; la pregunta no sale. */
+      if (!ya && window.AvUso) window.AvUso.marca('pregunta', { modo: modoActual(), destino: r.sin ? 'sin respuesta' : String((r.ir && r.ir[0]) || (r.ficha && r.ficha.ir && r.ficha.ir[0]) || '').split(/[?#]/)[0].slice(0, 160) });
       if (r.sin) {
-        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + iaHtml(q) + (r.web ? webHtml(r.web) : fueraHtml(q));
-        if (!ya) anota(q, 'sin');
+        li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + pideExpHtml() + iaHtml(q) + (r.web ? webHtml(r.web) : fueraHtml(q));
+        if (!ya) { anota(q, 'sin'); caso(q, r, previas, true); }
         return;
       }
       if (r.anota && !ya) anota(q, 'sin');
-      li.querySelector('.pa-burbuja').innerHTML = '<div class="pa-resp">' + r.html + '</div>' + acciones(q, r, previas) +
+      r.q = q;
+      li.querySelector('.pa-burbuja').innerHTML = cabResp(r) + remiteHtml(q, r) + '<div class="pa-resp">' + esquema(r.html) + '</div>' + acciones(q, r, previas) +
+        servicioHtml(r) + expInvHtml(q, r) +
         periodistaHtml(q, r) + capaModoHtml(q, r) +
         appDe(r) +
-        (r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r)))) +
-        enciclopediaHtml(enciclopediaPara(q, r)) +
+        panel(r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r))), '🧭', 'Explóralo a fondo') +
+        panel(enciclopediaHtml(enciclopediaPara(q, r)), '📚', 'En la Enciclopedia') +
         (r.web ? webHtml(r.web) : '') +
         (r.sug && r.sug.length ? '<p class="pa-mas-t">' + (r.tambien ? 'También te puede servir' : 'Sigue preguntando') + '</p>' + chips(r.sug) : '');
       var caja = li.querySelector('.pa-app[data-pa-abre]');
       if (caja) montaApp(caja);
+      if (!ya) caso(q, r, previas);
       guarda();
     };
     if (quieto || QUIETO) {
@@ -2569,6 +3192,21 @@
 
   /* La página del dictamen: vuelve a contestar la pregunta del enlace (y las
      previas, para el contexto) con la misma base y arma el dictamen. */
+  /* El dictamen que toca una investigación queda anotado en su expediente de
+     control interno, solo en este navegador (av-dics): la pregunta, el folio y
+     el enlace que lo vuelve a armar. Nada se manda a un servidor. */
+  function guardaDic(q, r, f, fol) {
+    var xf = f.t === 'investigacion' && f.ex ? f : invToca(q, r);
+    if (!xf || !xf.ex) return;
+    try {
+      var l = JSON.parse(localStorage.getItem('av-dics') || '[]');
+      if (!Array.isArray(l)) l = [];
+      l = l.filter(function (x) { return x && !(x.ex === xf.ex && x.q === q); });
+      l.unshift({ ex: xf.ex, q: q, fo: fol || '', f: hoy(), m: MODO_DIC || '', u: location.search.slice(0, 3000) });
+      localStorage.setItem('av-dics', JSON.stringify(l.slice(0, 60)));
+    } catch (e) { /* sin almacenamiento, el dictamen sirve igual */ }
+  }
+
   function armaDictamen() {
     var ps = new URLSearchParams(location.search), q = (ps.get('q') || '').trim().slice(0, 600);
     var antes = ps.getAll('c').map(function (x) { return x.trim().slice(0, 600); }).filter(Boolean).slice(-4);
@@ -2580,7 +3218,7 @@
       return;
     }
     antes.forEach(function (x) { respuesta(x); });
-    var r = respuesta(q, antes);
+    var r = abre(q, ps.get('abre')) || respuesta(q, antes);
     if (r && r.espera) r.espera.then(function (x) { arma(x); }); else arma(r);
     function arma(r) {
     var f = r && !r.sin ? r.ficha : null;
@@ -2596,6 +3234,7 @@
       Array.prototype.forEach.call(doc.querySelectorAll('.pa-folio'), function (el) { el.textContent = fol || 'no disponible en este navegador'; });
       doc.querySelector('.pa-huella code').textContent = hx ? hx.replace(/(.{16})/g, '$1 ').trim() : 'no disponible en este navegador';
       Array.prototype.forEach.call(doc.querySelectorAll('.dic-sello'), function (el) { el.innerHTML = sello(fol, 'DICTAMEN'); });
+      guardaDic(q, r, f, fol);
     });
     var im = document.getElementById('dicImprime'), en = document.getElementById('dicEnlace');
     im.hidden = en.hidden = false;
@@ -2608,7 +3247,7 @@
     }
   }
   if (dic) {
-    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo };
+    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo, abre: abre, servicio: servicioHtml };
     armaDictamen();
     return;
   }
@@ -2862,7 +3501,7 @@
   })();
 
   /* Para revisar cómo puntúa una pregunta desde la consola. */
-  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo };
+  window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo, abre: abre, servicio: servicioHtml };
   pintaLista();
   if (canal) document.getElementById('paSinRespNota').innerHTML = 'La lista se guarda solo en tu navegador y no se envía sola: con «Enviarlas a Auditavisión» nos la haces llegar tú.';
   var ps = new URLSearchParams(location.search), pre = ps.get('q'), lista = ps.get('p');
@@ -2874,6 +3513,7 @@
     if (!MODOS_OK[m]) { try { m = viejo(localStorage.getItem('av-modo')); } catch (e) { m = null; } }
     poneModo(MODOS_OK[m] ? m : modoActual());
   })();
+  abreUna = ps.get('abre');
   if (pre) responde(pre, true);
   /* ?p= (las imágenes de la portada, 23-10-2026): la pregunta queda escrita
      y el lector decide cuándo enviarla. */

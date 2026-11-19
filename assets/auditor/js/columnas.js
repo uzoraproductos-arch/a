@@ -57,7 +57,7 @@
   ],
   "fecha": "01-11-2026",
   "titulo": "¿Huawei «digitaliza» al gobierno con acceso total al IMSS, al SAT y a Aduanas? En los contratos federales de 2025 y 2026, Huawei no aparece como proveedor",
-  "balazo": "Circula que Morena «recurre a Huawei» y que sus ejecutivos «tendrían total acceso» a los sistemas más sensibles del gobierno, según audios que publicó Código Magenta. Los audios son de un ejecutivo comercial que presume clientes: no son un contrato. En los 215,121 contratos federales de ComprasMX de 2025 y 2026, ningún proveedor se llama Huawei; lo que sí hay son dos compras de equipo de esa marca a otras empresas, las dos del Hospital Juárez de México. Lo de años anteriores está pendiente.",
+  "balazo": "Circula que Morena «recurre a Huawei» y que sus ejecutivos «tendrían total acceso» a los sistemas más sensibles del gobierno, según audios que publicó Código Magenta. Los audios son de un ejecutivo comercial que presume clientes: no son un contrato. En los 217,127 contratos federales de ComprasMX de 2025 y 2026, ningún proveedor se llama Huawei; lo que sí hay son dos compras de equipo de esa marca a otras empresas, las dos del Hospital Juárez de México. Lo de años anteriores está pendiente.",
   "nota": {
    "medio": "Código Magenta",
    "titulo": "Operación Huawei: Grabaciones secretas",
@@ -72,10 +72,10 @@
   },
   "cuerpo": [
    "De dónde sale. Código Magenta publicó una serie, «Operación Huawei», con grabaciones que atribuye a un ejecutivo comercial de Huawei en México. Según las notas que la retoman, en ellas el ejecutivo dice que su empresa es el mayor proveedor tecnológico del IMSS, del SAT, de la Agencia Nacional de Aduanas y de la Conagua, que construyó centros de datos para el IMSS y que su gente ayudó a redactar un contrato marco de servicios tecnológicos. Es lo que dice un vendedor de sus clientes: no es un contrato, y no conocemos una autenticación de los audios. La serie no abre desde la plataforma.",
-   "Lo que dicen los contratos. Cruzamos la base de ComprasMX que tiene la plataforma: los 215,121 contratos que las dependencias federales reportaron en 2025 y 2026 (descarga del 26-10-2026). Ningún proveedor se llama Huawei. Lo que sí aparece son dos compras de equipo de la marca a otras empresas, las dos del Hospital Juárez de México: $36,108,967.10 por «Servicio de infraestructura tecnológica de la marca Huawei 2026 - 2027» (IKUSI MEXICO SA DE CV, licitación pública) y $5,051,932.24 por «Licenciamiento, póliza de servicio y soporte técnico para equipos Huawei» (GLOBAL TELECOMUNICATION GROUP SA DE CV, invitación a cuando menos tres personas). En total, $41,160,899.34 antes de impuestos (derivado). Tener contratos no es una irregularidad.",
+   "Lo que dicen los contratos. Cruzamos la base de ComprasMX que tiene la plataforma: los 217,127 contratos que las dependencias federales reportaron en 2025 y 2026 (descarga del 2026-11-04). Ningún proveedor se llama Huawei. Lo que sí aparece son dos compras de equipo de la marca a otras empresas, las dos del Hospital Juárez de México: $36,108,967.10 por «Servicio de infraestructura tecnológica de la marca Huawei 2026 - 2027» (IKUSI MEXICO SA DE CV, licitación pública) y $5,051,932.24 por «Licenciamiento, póliza de servicio y soporte técnico para equipos Huawei» (GLOBAL TELECOMUNICATION GROUP SA DE CV, invitación a cuando menos tres personas). En total, $41,160,899.34 antes de impuestos (derivado). Tener contratos no es una irregularidad.",
    "El primer punto ciego: el condicional. «Tendrían total acceso», «el control que tendría», «sería peligroso»: la publicación no afirma un hecho, lo supone. Y «total acceso» no es lo que se cita de los audios, que hablan de ser proveedor. Vender equipo o construir un centro de datos no es lo mismo que controlar un sistema: eso depende de quién lo opera y de qué dice el contrato.",
    "El segundo: «Morena recurre». Un partido no contrata servicios del gobierno; contratan las dependencias, y cada contrato queda en ComprasMX con su número. Los audios hablan de dependencias y de funcionarios, no de una decisión del partido.",
-   "El tercero: lo que todavía no vemos. Nuestra búsqueda de la marca en los títulos solo cubre los cinco contratos más grandes de cada proveedor que guarda la plataforma, y no tenemos el histórico de CompraNet de 2019 a 2024 ni el contrato marco de nube de 2024: ahí podría estar lo que dice el ejecutivo. Una compra por medio de otra empresa tampoco lleva el nombre de Huawei como proveedor. Por eso lo de años anteriores queda pendiente, y una acusación no es una condena."
+   "El tercero: lo que dice el Contrato Marco de Nube Pública de 2024 y lo que todavía no vemos. En el Contrato Marco para la Prestación de Servicios de Nube Pública firmado el 18 de abril de 2024 por la Secretaría de la Función Pública y la Coordinación de Estrategia Digital Nacional (pág. 36, sha256 ad5a29d1044e…), los 11 posibles proveedores firmantes son Amazon Web Services, Axtel, B-Drive IT, Bufete de Soluciones Integrales, E-Ngenium Infraestructura, Google LLC, Insaite, Intellilabs, Hola Innovación, Sitinformación y Triara.com: Huawei no figura con su razón social entre los 11 firmantes iniciales. Sin embargo, nuestra búsqueda de la marca en los títulos solo cubre los cinco contratos más grandes de cada proveedor que guarda la plataforma, y no tenemos el histórico de CompraNet de 2019 a 2024 ni los convenios de adhesión posteriores: ahí podría estar lo que dice el ejecutivo, o una compra por medio de un integrador. Por eso lo de años anteriores queda pendiente, y una acusación no es una condena."
   ],
   "ejemplo": {
    "tit": "La cuenta, con los contratos que sí aparecen",
@@ -103,7 +103,7 @@
    {
     "dice": "Morena recurre a Huawei para digitalizar al gobierno",
     "res": "no consta",
-    "explica": "Ningún documento oficial muestra un contrato del gobierno, y menos de un partido, con Huawei para «digitalizar al gobierno». En los 215,121 contratos federales de ComprasMX de 2025 y 2026 no hay ningún proveedor llamado Huawei.",
+    "explica": "Ningún documento oficial muestra un contrato del gobierno, y menos de un partido, con Huawei para «digitalizar al gobierno». En los 217,127 contratos federales de ComprasMX de 2025 y 2026 no hay ningún proveedor llamado Huawei.",
     "fuente": "ComprasMX, Datos Abiertos 2025 y 2026 (Secretaría Anticorrupción y Buen Gobierno), en la base de la plataforma",
     "url": "https://comprasmx.buengobierno.gob.mx/datos-abiertos"
    },
@@ -113,7 +113,7 @@
     "explica": "Lo dice en condicional, y se apoya en audios que el medio atribuye a un ejecutivo comercial de Huawei: lo que dice de sus clientes no es un documento. No conocemos una autenticación de los audios, y eso no los vuelve falsos: falta ver los contratos de esos años.",
     "fuente": "Código Magenta, «Operación Huawei: Grabaciones secretas»",
     "url": "https://codigomagenta.com.mx/operacion-huawei-grabaciones-secretas/",
-    "quien": "Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026, no el histórico de CompraNet de 2019 a 2024 ni los contratos marco; esos portales no abren desde nuestra sesión.",
+    "quien": "Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026 y el Contrato Marco de Servicios de Nube Pública del 18-04-2024, pero no el histórico de CompraNet de 2019 a 2024 ni los convenios de adhesión posteriores.",
     "donde": "https://comprasmx.buengobierno.gob.mx/datos-abiertos"
    },
    {
@@ -122,8 +122,8 @@
     "explica": "En 2025 y 2026 ninguna de esas dependencias le contrató directamente a Huawei. Lo que el ejecutivo dice de años anteriores, o de compras por medio de otras empresas, se vería en el histórico de CompraNet y en los contratos marco, que no integramos todavía. En 2025 y 2026 solo el Hospital Juárez de México compró equipo de la marca, a otras empresas.",
     "fuente": "ComprasMX, Datos Abiertos 2025 y 2026, en la base de la plataforma",
     "url": "contratos-publicos.html",
-    "quien": "Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026, no el histórico de CompraNet de 2019 a 2024 ni los contratos marco; esos portales no abren desde nuestra sesión.",
-    "donde": "https://upcp-compranet.hacienda.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf"
+    "quien": "Falta de la plataforma: tenemos los contratos de ComprasMX de 2025 y 2026 y el Contrato Marco de Servicios de Nube Pública del 18-04-2024, pero no el histórico de CompraNet de 2019 a 2024 ni los convenios de adhesión posteriores.",
+    "donde": "https://upcp-compranet.buengobierno.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf"
    },
    {
     "dice": "Estados Unidos ya calificó a Huawei como una amenaza para la seguridad nacional",
@@ -226,7 +226,7 @@
    },
    {
     "que": "El Anexo 4 del contrato marco de nube pública de 2024: qué proveedores quedaron acreditados",
-    "url": "https://upcp-compranet.hacienda.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf"
+    "url": "https://upcp-compranet.buengobierno.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf"
    },
    {
     "que": "La respuesta de la Agencia de Transformación Digital y de las dependencias nombradas",
@@ -237,6 +237,10 @@
    {
     "nombre": "ComprasMX, Datos Abiertos: Datos Relevantes de los Contratos 2025 y 2026 (descarga del 26-10-2026), en la base de la plataforma",
     "url": "https://comprasmx.buengobierno.gob.mx/datos-abiertos"
+   },
+   {
+    "nombre": "Secretaría de la Función Pública y Coordinación de Estrategia Digital Nacional, Contrato Marco para la Prestación de Servicios de Nube Pública (18-04-2024, pág. 36, sha256 ad5a29d1044e…)",
+    "url": "https://upcp-compranet.buengobierno.gob.mx/cnetassets/Publicaciones_Gob_CM/CM_Servicios_Nube_Publica/CM_SERVICIOS_DE_NUBE_2024.pdf"
    },
    {
     "nombre": "Congreso de EE. UU., Public Law 115-232 (John S. McCain National Defense Authorization Act for Fiscal Year 2019), sec. 889(f)(3)(A) (13-08-2018)",
@@ -705,30 +709,24 @@
   "cotejo": [
    {
     "dice": "Pemex reportó una pérdida neta de 10 mil 792 millones de pesos en el tercer trimestre",
-    "res": "pendiente",
-    "explica": "Casi todos los medios dan 10,795 millones (EFE, Expansión) y solo uno 10,792. Manda el reporte de Pemex a la Bolsa, que no pudimos abrir.",
-    "fuente": "Pemex, Reporte de resultados al 30 de septiembre de 2026",
-    "url": "https://www.pemex.com/",
-    "quien": "Falta de la plataforma: el Boletín nacional 86 de Pemex ya está integrado, pero el estado financiero completo enviado a la Bolsa Mexicana de Valores con el renglón exacto de la pérdida neta aún no se integra.",
-    "donde": "https://www.bmv.com.mx/"
+    "res": "consta",
+    "explica": "El reporte financiero oficial en formato XBRL entregado por Pemex a la Bolsa Mexicana de Valores (3T 2026, ifrsxbrl_1600278_2026-03_1.zip, sha256 74dcbef3cfbb…) confirma ambas cifras de la prensa: la pérdida neta consolidada total fue de 10,795.0 millones de pesos (frente a 61,242.4 millones en el 3T 2025), y la pérdida neta atribuible a la participación controladora fue exactamente de 10,792.1 millones de pesos (frente a 61,246.6 millones). Ambas versiones de la prensa son oficiales.",
+    "fuente": "Pemex, Información Financiera 3T 2026 (XBRL, BMV, sha256 74dcbef3cfbb…)",
+    "url": "https://www.bmv.com.mx/"
    },
    {
     "dice": "(605 millones de dólares)",
-    "res": "pendiente",
-    "explica": "Es una conversión: 605 millones de dólares equivalen a unos 17.8 pesos por dólar. Otro medio convirtió a 596.9 millones. El tipo de cambio que usó Pemex vendrá en su reporte.",
-    "fuente": "Pemex, Reporte de resultados al 30 de septiembre de 2026",
-    "url": "https://www.pemex.com/",
-    "quien": "Falta de la plataforma: el Boletín nacional 86 de Pemex ya está integrado, pero el estado financiero completo enviado a la Bolsa Mexicana de Valores con el renglón exacto de la pérdida neta aún no se integra.",
-    "donde": "https://www.bmv.com.mx/"
+    "res": "matiz",
+    "explica": "El reporte de Pemex a la Bolsa Mexicana de Valores trae un tipo de cambio de cierre de $17.8413 por dólar al 30 de septiembre de 2026. Con él, los 605 millones de dólares salen de la pérdida consolidada total (10,795.0 millones de pesos ÷ 17.8413 = 605.1), no de los 10,792 millones que la misma nota cita, que son la pérdida de la controladora y equivalen a 604.9 millones de dólares. La diferencia es menor, pero la nota mezcla dos conceptos.",
+    "fuente": "Pemex, Información Financiera 3T 2026 (XBRL, BMV, sha256 74dcbef3cfbb…)",
+    "url": "https://www.bmv.com.mx/"
    },
    {
     "dice": "Un 82.4 % menos que los 61 mil 247 millones del mismo periodo del año pasado",
-    "res": "pendiente",
-    "explica": "La resta cuadra con las dos versiones de la prensa (10,792 contra 61,247, o 10,795 contra 61,242: 82.4 % menos en las dos), pero las dos cifras de partida siguen sin documento abierto.",
-    "fuente": "Pemex, reportes de resultados del tercer trimestre de 2025 y de 2026",
-    "url": "https://www.pemex.com/",
-    "quien": "Falta de la plataforma: el Boletín nacional 86 de Pemex ya está integrado, pero el estado financiero completo enviado a la Bolsa Mexicana de Valores con el renglón exacto de la pérdida neta aún no se integra.",
-    "donde": "https://www.bmv.com.mx/"
+    "res": "consta",
+    "explica": "En el reporte a la Bolsa, la pérdida atribuible a la controladora pasó de 61,246.6 millones en el 3T 2025 (los «61 mil 247» de la nota) a 10,792.1 millones en el 3T 2026: 82.4 % menos. La pérdida consolidada total pasó de 61,242.4 a 10,795.0 millones, también 82.4 % menos. Son dos conceptos distintos del mismo estado de resultados, no un redondeo; la nota usa los dos de la controladora.",
+    "fuente": "Pemex, Información Financiera 3T 2026 (XBRL, BMV, sha256 74dcbef3cfbb…)",
+    "url": "https://www.bmv.com.mx/"
    },
    {
     "dice": "Se debió a un incremento en ventas y disminución en deterioro de activos",
@@ -1628,7 +1626,7 @@
   },
   "cuerpo": [
    "De dónde viene. La publicación de la cuenta @derechadiariomx en Instagram retoma una investigación de Mexicanos contra la Corrupción y la Impunidad (MCCI) del 5 de octubre. Según MCCI, la Secretaría de Energía autorizó el 27 de septiembre de 2024 a Portacelis Gas and Oil a importar hasta 52 millones de litros de diésel, nueve días después de endurecer sus reglas para esos permisos y cuando la empresa tenía unas semanas de creada. MCCI es una organización de periodismo de investigación: su trabajo es el punto de partida, no la fuente; el documento que manda es el permiso.",
-   "Lo que sí consta. El sexenio terminó el 30 de septiembre de 2024: la Constitución fija que la nueva presidencia empieza el 1 de octubre (art. 83). Si el permiso es del 27, como dice MCCI, se dio a tres días del cambio. Y Portacelis no aparece en la lista del artículo 69-B del Código Fiscal, la de las empresas que el SAT considera que facturan operaciones simuladas (las llamadas «fantasma»), en nuestra copia con corte al 31 de diciembre de 2025.",
+   "Lo que sí consta. El sexenio terminó el 30 de septiembre de 2024: la Constitución fija que la nueva presidencia empieza el 1 de octubre (art. 83). Si el permiso es del 27, como dice MCCI, se dio a tres días del cambio. Y Portacelis no aparece en la lista del artículo 69-B del Código Fiscal, la de las empresas que el SAT considera que facturan operaciones simuladas (las llamadas «fantasma»), en nuestra copia con corte al 31 de octubre de 2026.",
    "Lo que no podemos sostener todavía. El permiso mismo, su fecha, quién lo firmó y los 52 millones de litros: la copia la tiene MCCI y no abre desde nuestro servidor, ni el registro de la Sener. Tampoco los litros que la empresa habría dejado de declarar: la prensa habla de 80, 83 o 90 millones, según la nota, a partir de una declaratoria del SAT ante la Fiscalía que no es pública.",
    "Lo que es adjetivo. «Narcoexpresidente» y «regalo de despedida» no son datos: no hay acusación, proceso ni sentencia que los sostenga, y una acusación tampoco sería una condena (Constitución, art. 20). «Fantasma», en el sentido del SAT, no consta. Y que una empresa esté «ligada» a una persona porque la administra alguien de su confianza es un vínculo que reporta MCCI, no una resolución de autoridad: según la prensa, Amílcar Olán no figura como acusado.",
    "Por qué importa. El llamado huachicol fiscal (meter combustible declarándolo como otra cosa, o por menos litros, para no pagar el IEPS) es dinero que deja de entrar a la hacienda pública. Si una autoridad confirma que este permiso se usó para eso, la pregunta de fondo es quién lo autorizó y con qué requisitos: eso es lo que hay que seguir."
@@ -1653,7 +1651,7 @@
    {
     "dice": "La empresa «fantasma» Portacelis",
     "res": "no consta",
-    "explica": "Portacelis no aparece en la lista 69-B del SAT (empresas que facturan operaciones simuladas) en nuestra copia con corte al 31 de diciembre de 2025, que revisa 14,234 contribuyentes. Que una empresa sea nueva o no tenga historial de importaciones no la vuelve «fantasma» en el sentido de la ley.",
+    "explica": "Portacelis no aparece en la lista 69-B del SAT (empresas que facturan operaciones simuladas) en nuestra copia con corte al 31 de octubre de 2026, que revisa 15,126 contribuyentes. Que una empresa sea nueva o no tenga historial de importaciones no la vuelve «fantasma» en el sentido de la ley.",
     "fuente": "SAT, Listado completo de contribuyentes (Artículo 69-B del CFF)",
     "url": "https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336"
    },
@@ -1806,7 +1804,7 @@
     "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
    },
    {
-    "nombre": "SAT, Listado completo de contribuyentes (Artículo 69-B del CFF), corte al 31 de diciembre de 2025, en la base de la plataforma",
+    "nombre": "SAT, Listado completo de contribuyentes (Artículo 69-B del CFF), corte al 31 de octubre de 2026, en la base de la plataforma",
     "url": "https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336"
    },
    {
@@ -2376,7 +2374,7 @@
   "icono": "🏛️",
   "fecha": "28-10-2026",
   "titulo": "El Senado aprueba la Ley de Ingresos 2027: de sus 10.6 billones, casi 1.5 son dinero prestado",
-  "balazo": "El pleno del Senado la aprobó 75 a 34 y sin cambios, así que va al Ejecutivo para publicarse. De los 10.6 billones de pesos que «prevé obtener», 9.2 billones son ingresos y el resto es dinero prestado. Lo que pagan los turistas extranjeros por entrar a México sube a 1,158 pesos, y el cambio al ISR para automotrices y gasolineras todavía no tiene un documento oficial que podamos abrir.",
+  "balazo": "El pleno del Senado la aprobó 75 a 34 y sin cambios, y el Diario Oficial la publicó el 13 de noviembre. De los 10.6 billones de pesos que «prevé obtener», 9.2 billones son ingresos y el resto es dinero prestado. Lo que pagan los turistas extranjeros por entrar a México sube a 1,158 pesos, y el cambio al ISR para gasolineras y armadoras consta en la ley publicada, aunque no alcanza a toda la industria automotriz.",
   "nota": {
    "medio": "El Financiero",
    "titulo": "Senado aprueba cambios al ISR y aumentos en cuotas de servicios y trámites para 2027",
@@ -2390,11 +2388,12 @@
    "texto": "El Senado aprobó la Ley de Ingresos y la Ley Federal de Derechos para 2027, que contemplan una recaudación de más de 10.6 billones de pesos… el pago de visitantes extranjeros pasará de 983 a mil 158 pesos… cambios al ISR para excluir a determinadas empresas automotrices y gasolineras de las restricciones a las deducciones… más de 6.2 billones provendrían de impuestos… endeudamiento de hasta 1.7 billones."
   },
   "cuerpo": [
+   "Actualización del 18 de noviembre. El 13 de noviembre el Diario Oficial publicó las tres leyes: la Ley de Ingresos de la Federación para 2027, la reforma a la Ley Federal de Derechos y la reforma a la Ley del ISR; todas rigen desde el 1 de enero de 2027. Con el texto publicado cotejamos lo que faltaba: las cifras de la ley son las que aquí se dicen, salvo el IVA, que en tribuna se dijo como $1,768,717.3 millones y la ley publicada fija en $1,768,017.3 millones (lo corregimos en la fe de erratas). El Senado sí aprobó la Ley de Derechos (su decreto lo firman las dos Cámaras el 27 de octubre), y la excepción del ISR para automotrices y gasolineras consta en el nuevo artículo 78-E.",
    "Qué pasó. Según el Canal del Congreso (28 de octubre), el pleno del Senado aprobó la Ley de Ingresos de la Federación para 2027 con 75 votos a favor y 34 en contra en lo general, y 73 a 33 en lo particular. Quedó «en sus términos», como la mandó la Cámara de Diputados el 15 de octubre, y se envió al Ejecutivo. La ley manda publicarla en el Diario Oficial a más tardar 20 días naturales después de aprobada (LFPRH, art. 42, fr. VI).",
    "El punto ciego: no son 10.6 billones de «recaudación». La ley estima $10,636,488.1 millones en total, pero esa suma incluye el dinero que el gobierno pedirá prestado. Los ingresos que entran sin endeudarse, los presupuestarios, son $9,156,528.9 millones; la diferencia, $1,479,959.2 millones, son los ingresos por financiamiento, que la ley suma en su total. Y los 1.7 billones de deuda interna son un techo: lo máximo que puede contratar en el año, no deuda ya contratada.",
-   "De dónde sale el dinero. Los impuestos aportan $6,263,886.8 millones, el 58.9 % del total: $3,288,975.3 millones del ISR, $1,768,717.3 millones del IVA y $828,256.0 millones del IEPS, según expuso en tribuna el presidente de la Comisión de Hacienda del Senado. Pemex y la CFE tienen sus propios techos de deuda.",
-   "Los derechos. La Cámara de Diputados aprobó el 14 de octubre la Ley Federal de Derechos: la cuota que paga quien visita México sin trabajar aquí (el turista extranjero) sube 17.8 % y queda en 1,158 pesos, y lo que se recaude se reparte 57 % para la Defensa, 15 % para el Instituto Nacional de Migración y 28 % para la Tesorería. Que el Senado también la aprobó lo dicen los medios; el documento del Senado todavía no lo pudimos abrir.",
-   "Lo que falta probar. Los medios dicen que el Senado cambió la reforma al ISR para que la industria automotriz y quienes venden gasolina y diésel no tengan el nuevo límite a las deducciones de quien ingresa más de 50 millones de pesos, y que por eso esa ley regresa a la Cámara de Diputados. Hasta leer la minuta del Senado, eso va como pendiente: la falta es nuestra, porque el portal del Senado no abre desde la plataforma."
+   "De dónde sale el dinero. Los impuestos aportan $6,263,886.8 millones, el 58.9 % del total: $3,288,975.3 millones del ISR, $1,768,017.3 millones del IVA y $828,256.0 millones del IEPS, según el artículo 1o. de la ley publicada. Pemex y la CFE tienen sus propios techos de deuda.",
+   "Los derechos. La Cámara de Diputados aprobó el 14 de octubre la Ley Federal de Derechos: la cuota que paga quien visita México sin trabajar aquí (el turista extranjero) sube 17.8 % y queda en 1,158 pesos, y lo que se recaude se reparte 57 % para la Defensa, 15 % para el Instituto Nacional de Migración y 28 % para la Tesorería. Que el Senado también la aprobó lo dicen los medios; el documento del Senado no lo pudimos abrir, pero el decreto publicado el 13 de noviembre lo confirma: la cuota del art. 8o., fr. I, es de $1,158.00.",
+   "Lo que ya se probó. Los medios dijeron que el Senado cambió la reforma al ISR para que la industria automotriz y quienes venden gasolina y diésel no tengan el nuevo límite a las deducciones de quien ingresa más de 50 millones de pesos. La ley publicada lo confirma, con un matiz: el nuevo Capítulo X (arts. 78-A a 78-F) no se aplica a quien expende, distribuye o comercializa gasolinas y diésel con su permiso (art. 78-E, fr. IX), ni a quien ensambla o fabrica vehículos en depósito fiscal (fr. III), salvo por lo que venda en el país. No es a «toda la industria automotriz». El decreto lo firman las dos Cámaras el 3 de noviembre."
   ],
   "ejemplo": {
    "tit": "La cuenta, con números redondos",
@@ -2422,30 +2421,30 @@
    {
     "dice": "El Senado aprobó la Ley de Ingresos para 2027",
     "res": "consta",
-    "explica": "75 a 34 en lo general y 73 a 33 en lo particular; quedó en sus términos y se envió al Ejecutivo. Falta su publicación en el Diario Oficial.",
-    "fuente": "Canal del Congreso, «Senado aprueba Ley de Ingresos 2027 por 10.6 billones de pesos» (28-10-2026)",
-    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+    "explica": "75 a 34 en lo general y 73 a 33 en lo particular; quedó en sus términos y se envió al Ejecutivo. Se publicó en el Diario Oficial el 13 de noviembre de 2026 y rige desde el 1 de enero de 2027.",
+    "fuente": "Canal del Congreso (28-10-2026) y DOF 13-11-2026, Ley de Ingresos de la Federación para 2027",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5803757&fecha=13/11/2026"
    },
    {
     "dice": "Contemplan una recaudación de más de 10.6 billones de pesos",
     "res": "matiz",
     "explica": "La cifra, $10,636,488.1 millones, consta, pero no es recaudación: es el total de la ley e incluye $1,479,959.2 millones de financiamiento. Lo que entra sin endeudarse son $9,156,528.9 millones.",
-    "fuente": "Canal del Congreso (28-10-2026) y Paquete Económico 2027 en la base de la plataforma",
-    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+    "fuente": "Ley de Ingresos de la Federación para 2027, art. 1o. (DOF 13-11-2026)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
    },
    {
     "dice": "Más de 6.2 billones provendrían del cobro de impuestos",
     "res": "consta",
     "explica": "Son $6,263,886.8 millones, el 58.9 % de los ingresos estimados.",
-    "fuente": "Canal del Congreso (28-10-2026)",
-    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+    "fuente": "Ley de Ingresos de la Federación para 2027, art. 1o. (DOF 13-11-2026)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
    },
    {
     "dice": "El endeudamiento previsto podría alcanzar hasta 1.7 billones de pesos",
     "res": "consta",
     "explica": "La ley autoriza deuda interna neta hasta por 1 billón 700 mil millones de pesos. Es un techo, no deuda contratada; Pemex y la CFE tienen techos aparte.",
-    "fuente": "Canal del Congreso (28-10-2026)",
-    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+    "fuente": "Ley de Ingresos de la Federación para 2027, art. 2o. (DOF 13-11-2026)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
    },
    {
     "dice": "El pago de visitantes extranjeros al ingresar a México pasará de 983 a 1,158 pesos",
@@ -2456,21 +2455,17 @@
    },
    {
     "dice": "El Senado aprobó también la Ley Federal de Derechos",
-    "res": "pendiente",
-    "explica": "La nota oficial del Senado que leímos solo trae la Ley de Ingresos. El voto de la Ley de Derechos no lo pudimos abrir.",
-    "fuente": "Canal del Congreso (28-10-2026)",
-    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338",
-    "quien": "Falta de la plataforma: el dictamen y su votación están en la Gaceta del Senado, que no abre desde nuestra sesión",
-    "donde": "https://www.senado.gob.mx/66/gaceta_del_senado"
+    "res": "consta",
+    "explica": "El decreto que la reforma lo firman los presidentes de las dos Cámaras el 27 de octubre de 2026, y se publicó en el Diario Oficial el 13 de noviembre; la cuota del turista extranjero queda en $1,158.00 (art. 8o., fr. I). El voto del Senado, número por número, sigue en su Gaceta.",
+    "fuente": "DOF 13-11-2026, decreto que reforma la Ley Federal de Derechos",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5803759&fecha=13/11/2026"
    },
    {
     "dice": "Se excluye a automotrices y gasolineras de las restricciones a las deducciones de quien ingresa más de 50 millones, y la ley del ISR regresa a Diputados",
-    "res": "pendiente",
-    "explica": "Ningún documento oficial que pudimos abrir trae la reserva ni su votación. Cuando la Cámara de Diputados reciba la minuta, su texto quedará en la Gaceta Parlamentaria.",
-    "fuente": "El Financiero y otros medios (28-10-2026)",
-    "url": "https://www.elfinanciero.com.mx/nacional/2026/10/28/senado-aprueba-cambios-al-isr-y-aumentos-en-cuotas-de-servicios-y-tramites-para-2027/",
-    "quien": "Falta de la plataforma: la minuta del Senado no abre desde nuestra sesión; después la publicará la Gaceta de Diputados",
-    "donde": "https://gaceta.diputados.gob.mx/"
+    "res": "matiz",
+    "explica": "La ley publicada exceptúa del nuevo límite a las deducciones (Capítulo X, arts. 78-A a 78-F) a quien expende, distribuye o comercializa gasolinas y diésel con permiso (art. 78-E, fr. IX) y a quien ensambla o fabrica vehículos en depósito fiscal, salvo por lo que venda en el país (fr. III). No es a toda la industria automotriz. El decreto lo firman las dos Cámaras el 3 de noviembre de 2026; rige desde el 1 de enero de 2027.",
+    "fuente": "DOF 13-11-2026, decreto que reforma la Ley del Impuesto sobre la Renta, art. 78-E",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5803758&fecha=13/11/2026"
    }
   ],
   "cifras": [
@@ -2478,8 +2473,8 @@
     "valor": "$10,636,488.1 millones",
     "etq": "Ley de Ingresos 2027: el total, con financiamiento",
     "estado": "oficial",
-    "fuente": "Canal del Congreso (28-10-2026)",
-    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+    "fuente": "Ley de Ingresos de la Federación para 2027, art. 1o. (DOF 13-11-2026)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
    },
    {
     "valor": "$9,156,528.9 millones",
@@ -2499,8 +2494,8 @@
     "valor": "$6,263,886.8 millones",
     "etq": "Impuestos estimados para 2027",
     "estado": "oficial",
-    "fuente": "Canal del Congreso (28-10-2026)",
-    "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
+    "fuente": "Ley de Ingresos de la Federación para 2027, art. 1o. (DOF 13-11-2026)",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
    },
    {
     "valor": "75 a 34",
@@ -2513,8 +2508,8 @@
     "valor": "$1,158",
     "etq": "Cuota del visitante extranjero sin actividad remunerada en 2027 (+17.8 %)",
     "estado": "oficial",
-    "fuente": "Canal del Congreso (14-10-2026)",
-    "url": "https://www.canaldelcongreso.gob.mx/noticias/10318"
+    "fuente": "DOF 13-11-2026, Ley Federal de Derechos, art. 8o., fr. I",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5803759&fecha=13/11/2026"
    }
   ],
   "datos": [
@@ -2574,16 +2569,12 @@
   "red": "Senado Ley de Ingresos 2027 ISR automotrices gasolineras",
   "sigue": [
    {
-    "que": "La publicación de la Ley de Ingresos 2027 en el Diario Oficial (a más tardar 20 días naturales después de aprobada)",
+    "que": "Cómo recauda en 2027 lo que la ley estima: los informes trimestrales de Hacienda comparan lo cobrado con el art. 1o.",
+    "url": "https://www.finanzaspublicas.hacienda.gob.mx/"
+   },
+   {
+    "que": "Las reglas del SAT para el nuevo límite a las deducciones (art. 78-F de la Ley del ISR)",
     "url": "https://www.dof.gob.mx/"
-   },
-   {
-    "que": "El voto del Senado sobre la Ley Federal de Derechos y su publicación en el Diario Oficial",
-    "url": "https://www.senado.gob.mx/66/gaceta_del_senado"
-   },
-   {
-    "que": "La minuta del ISR que regresa a la Cámara de Diputados: el texto de la excepción para automotrices y gasolineras y su votación",
-    "url": "https://gaceta.diputados.gob.mx/"
    },
    {
     "que": "El Presupuesto de Egresos 2027, que la Cámara de Diputados debe aprobar a más tardar el 15 de noviembre",
@@ -2591,6 +2582,18 @@
    }
   ],
   "fuentes": [
+   {
+    "nombre": "DOF 13-11-2026: Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5803757&fecha=13/11/2026"
+   },
+   {
+    "nombre": "DOF 13-11-2026: decreto que reforma la Ley del Impuesto sobre la Renta",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5803758&fecha=13/11/2026"
+   },
+   {
+    "nombre": "DOF 13-11-2026: decreto que reforma la Ley Federal de Derechos",
+    "url": "https://dof.gob.mx/nota_detalle.php?codigo=5803759&fecha=13/11/2026"
+   },
    {
     "nombre": "Canal del Congreso: Senado aprueba Ley de Ingresos 2027 por 10.6 billones de pesos (28-10-2026)",
     "url": "https://www.canaldelcongreso.gob.mx/noticias/10338"
@@ -2612,7 +2615,7 @@
     "url": "https://www.elfinanciero.com.mx/nacional/2026/10/28/senado-aprueba-cambios-al-isr-y-aumentos-en-cuotas-de-servicios-y-tramites-para-2027/"
    }
   ],
-  "actualizado": "29-10-2026"
+  "actualizado": "18-11-2026"
  },
  {
   "id": "imss-modalidad-40-gestores",
@@ -5753,21 +5756,6 @@
       }).join('');
   }
 
-  /* La franja «Al momento»: las notas breves, de la más nueva a la más vieja. */
-  function fechaN(f) { var p = String(f || '').split('-'); return p.length === 3 ? +(p[2] + p[1] + p[0]) : 0; }
-  function franja() {
-    var b = COLUMNAS.filter(function (c) { return c.seccion === 'Al momento'; })
-      .sort(function (x, y) { return fechaN(y.fecha) - fechaN(x.fecha); });
-    if (!b.length) return '';
-    return '<section class="col-franja" aria-labelledby="colFranjaTit"><h4 class="col-franja-tit" id="colFranjaTit">⏱️ Al momento <small>Lo que está pasando, verificado</small></h4><ol>' +
-      b.slice(0, 6).map(function (c) {
-        var pend = (c.cotejo || []).filter(function (x) { return x.res === 'pendiente'; }).length;
-        var ok = (c.cotejo || []).filter(function (x) { return x.res === 'consta' || x.res === 'matiz'; }).length;
-        return '<li><time>' + esc(c.fecha) + '</time><a href="' + COL + '#col-' + esc(c.id) + '">' + esc(c.titulo) + '</a>' +
-          '<small>' + ok + ' con documento · ' + pend + ' por probar' + (c.nota ? ' · a partir de ' + esc(c.nota.medio) : '') + '</small></li>';
-      }).join('') + '</ol></section>';
-  }
-
   function articulo(c, i) {
     var cifras = (c.cifras || []).map(function (x) {
       return '<li><strong>' + esc(x.valor) + '</strong><span>' + esc(x.etq) + '</span>' +
@@ -5819,6 +5807,7 @@
         '<div class="col-acciones">' +
           btnSeguir(c) +
           (c.seccion === 'Al momento' ? '<a class="col-propia" href="noticias-al-momento-' + esc(c.id) + '.html">📄 Página de la nota</a>' : '') +
+          '<a class="col-propia" href="herramienta-inspector-pregunta.html?modo=periodista&amp;q=' + encodeURIComponent(c.titulo) + '">📰 Pregúntale al Periodista</a>' +
           '<button type="button" class="col-copiar" data-id="' + esc(c.id) + '">🔗 Copiar enlace</button>' +
           '<button type="button" class="col-cerrar">Cerrar la columna ▴</button>' +
         '</div>' +
@@ -5875,7 +5864,7 @@
     if (!raizP) return;
     var nt = suyas('n'), op = suyas('o');
     var lead = nt[0];
-    raizP.innerHTML = franja() +
+    raizP.innerHTML =
       '<div class="nt-portada">' +
         (lead ? '<article class="nt-lead">' +
           '<a class="nt-lead-a" href="' + COL + '#col-' + esc(lead.id) + '">' + figura(lead, true) +
@@ -5903,9 +5892,9 @@
         return '<li class="nt-caso"><div class="nt-caso-cab"><span class="col-kicker">' + esc(c.seccion === 'Verificado' ? 'Verificamos' : c.seccion) + '</span>' +
           '<a href="' + COL + '#col-' + esc(c.id) + '"><b>' + esc(c.titulo) + '</b></a>' +
           '<small>Revisado al ' + esc(c.actualizado || c.fecha || 'sin fecha') + ' · ' + c.sigue.length + (c.sigue.length === 1 ? ' documento' : ' documentos') + ' por llegar</small></div>' +
-          '<ul class="nt-caso-falta">' + c.sigue.slice(0, 3).map(function (x) {
+          '<details class="nt-caso-det"><summary>Qué falta para cerrarlo</summary><ul class="nt-caso-falta">' + c.sigue.slice(0, 3).map(function (x) {
             return '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.que) + ' ↗</a></li>';
-          }).join('') + (c.sigue.length > 3 ? '<li><a href="' + COL + '#col-' + esc(c.id) + '">y ' + (c.sigue.length - 3) + ' más en la nota ➔</a></li>' : '') + '</ul>' +
+          }).join('') + (c.sigue.length > 3 ? '<li><a href="' + COL + '#col-' + esc(c.id) + '">y ' + (c.sigue.length - 3) + ' más en la nota ➔</a></li>' : '') + '</ul></details>' +
           btnSeguir(c) + '</li>';
       }).join('') + '</ol>';
   }

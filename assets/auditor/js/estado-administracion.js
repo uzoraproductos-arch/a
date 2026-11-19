@@ -319,6 +319,156 @@
       (p === null ? '' : '<b class="ex-med-m' + (fuera ? ' ex-med-fuera' : '') + '" style="left:' + p.toFixed(1) + '%"></b>') + '</span>';
   }
 
+  /* ================= La lectura en pantalla (12-11-2026) =================
+     Pedido del autor: «sintetizarlo, esquematizarlo mejor». Tres piezas que solo
+     viven en la pantalla (.ex-sp no se imprime): «De un vistazo» (las cifras
+     clave del mismo documento, ninguna nueva), el índice de sus secciones y la
+     nota de cada renglón al tocarlo. Las notas del reverso se abren con su botón.
+     La hoja impresa y la huella no cambian: firman las mismas cifras. */
+  function vistazoSem(cs) {
+    var k = { verde: 0, ambar: 0, rojo: 0, gris: 0 };
+    cs.forEach(function (c) { k[c || 'gris']++; });
+    var p = ['verde', 'ambar', 'rojo'].filter(function (c) { return k[c]; }).map(function (c) {
+      return '<span class="ex-vz-p"><i style="background:' + TONO[c] + '"></i>' + k[c] + ' ' + COLOR[c][1].toLowerCase() + '</span>';
+    });
+    if (k.gris) p.push('<span class="ex-vz-p"><i style="background:#c9d3e6"></i>' + k.gris + ' sin color</span>');
+    return { t: cs.length === 1 ? 'Su señal' : 'Sus ' + cs.length + ' señales', h: '<span class="ex-vz-sem">' + p.join('') + '</span>' };
+  }
+  function vistazo(ts) {
+    return '<section class="ex-vistazo ex-sp" aria-label="De un vistazo"><h4>👁️ De un vistazo</h4><div class="ex-vz-in">' + ts.map(function (t) {
+      return '<div class="ex-vz-c"><small>' + esc(t.t) + '</small><span class="ex-vz-v">' + t.h + '</span></div>';
+    }).join('') + '</div><p class="ex-vz-pie"></p></section>';
+  }
+  var ANFITRION = 'tr, .ex-med-f, .ex-org-c, .ex-org-pers, .ex-emb-f, .ex-emb-x li';
+  function despues(doc) {
+    var anv = doc.querySelector('.ex-anverso'), rev = doc.querySelector('.ex-reverso');
+    if (!anv || !rev) return;
+    var secs = Array.prototype.slice.call(anv.querySelectorAll('.ex-termo, .ex-organo, .ex-caja'));
+    var chips = { oficial: 0, derivado: 0, pendiente: 0 };
+    secs.forEach(function (s) {
+      Array.prototype.forEach.call(s.querySelectorAll('.est-chip'), function (c) {
+        chips[c.classList.contains('est-oficial') ? 'oficial' : c.classList.contains('est-pendiente') ? 'pendiente' : 'derivado']++;
+      });
+    });
+    var pie = doc.querySelector('.ex-vz-pie'), total = chips.oficial + chips.derivado + chips.pendiente;
+    if (pie) pie.innerHTML = 'Este documento trae <b>' + total + ' cifras</b>: ' + chips.oficial + (chips.oficial === 1 ? ' oficial' : ' oficiales') + (chips.pendiente ? ', ' : ' y ') + chips.derivado + (chips.derivado === 1 ? ' auditada' : ' auditadas') +
+      (chips.pendiente ? ' y ' + chips.pendiente + (chips.pendiente === 1 ? ' pendiente' : ' pendientes') : '') + '. Toca cualquier renglón para ver de dónde sale.';
+    var notas = rev.querySelectorAll('.ex-notas li').length;
+    var nav = document.createElement('nav');
+    nav.className = 'ex-indice ex-sp';
+    nav.setAttribute('aria-label', 'Secciones del estado de cuenta');
+    nav.innerHTML = secs.map(function (s, i) {
+      var h = s.querySelector('h4'), t = h ? h.textContent.trim().split(':')[0].replace(/\s*preliminar$/, '') : 'Sección';
+      s.setAttribute('data-sec', i);
+      return '<button type="button" data-ir="' + i + '">' + esc(t) + '</button>';
+    }).join('') + '<button type="button" data-ir="notas">Notas y fuentes</button><button type="button" data-ir="sello">Dictamen y folio</button>';
+    var vz = doc.querySelector('.ex-vistazo');
+    if (vz) vz.parentNode.insertBefore(nav, vz.nextSibling);
+    var cols = rev.querySelector('.ex-rev-cols');
+    if (cols) {
+      rev.classList.add('ex-rev-cerrado');
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'ex-rev-abre ex-sp';
+      b.setAttribute('aria-expanded', 'false');
+      b.setAttribute('data-n', notas);
+      b.textContent = 'Ver las ' + notas + ' notas, el fundamento y las fuentes';
+      cols.parentNode.insertBefore(b, cols);
+    }
+    Array.prototype.forEach.call(anv.querySelectorAll('.ex-ref'), function (r) {
+      var a = r.closest(ANFITRION);
+      if (a && !a.classList.contains('ex-toca')) { a.classList.add('ex-toca'); a.tabIndex = 0; a.setAttribute('aria-expanded', 'false'); }
+    });
+  }
+  /* Las dos funciones del estado de cuenta (pedido del autor, 12-11-2026):
+     finanzas públicas y productividad. En pantalla se elige una; impresas van las dos. */
+  function funciones(fin, prod, conDato) {
+    function b(k, ico, t, sub, on) {
+      return '<button type="button" role="tab" class="ex-fun-b' + (on ? ' on' : '') + '" data-fun-ir="' + k + '" aria-selected="' + (on ? 'true' : 'false') +
+        '"><span class="ex-fun-i" aria-hidden="true">' + ico + '</span><span><b>' + t + '</b><small>' + sub + '</small></span></button>';
+    }
+    return '<div class="ex-fun ex-sp" role="tablist" aria-label="Las dos funciones del estado de cuenta">' +
+      b('fin', '💰', 'Finanzas públicas', 'De dónde vino el dinero y cómo se usó', true) +
+      b('prod', '📈', 'Productividad', 'Qué se hizo con ese dinero · ' + (conDato ? 'con datos de 2024' : 'pendiente'), false) + '</div>' +
+      '<div class="ex-fun-p" data-fun="fin"><p class="ex-fun-t">💰 Finanzas públicas</p>' + fin + '</div>' +
+      '<div class="ex-fun-p ex-fun-off" data-fun="prod"><p class="ex-fun-t">📈 Productividad</p>' + prod + '</div>';
+  }
+  function verFun(doc, k) {
+    Array.prototype.forEach.call(doc.querySelectorAll('.ex-fun-p'), function (x) { x.classList.toggle('ex-fun-off', x.getAttribute('data-fun') !== k); });
+    Array.prototype.forEach.call(doc.querySelectorAll('.ex-fun-b'), function (x) {
+      var on = x.getAttribute('data-fun-ir') === k;
+      x.classList.toggle('on', on); x.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
+  function conProd(pr) { return !!pr && pr.filas.some(function (r) { return typeof r.v === 'number' || r.txt; }); }
+  /* La caja de productividad: con cifras, cada renglón con su nota; sin ellas, lo que falta y por qué. */
+  function prodCaja(pr, N) {
+    if (!pr) return '';
+    N.sec('Productividad: qué se hizo con ese dinero', esc(pr.nota || ''));
+    var filas = pr.filas.map(function (r) {
+      if (typeof r === 'string') r = { t: r, est: 'pendiente', pid: pr.pid };
+      return '<tr><th scope="row">' + esc(r.t) + '</th><td>' + valorC(r, N.add('<b>' + esc(r.t) + '.</b> ' + (notaC(N, r) || esc(pr.falta || '')))) + '</td></tr>';
+    }).join('');
+    /* Una administración se lee por las dimensiones del Planisferio (decisión del autor, 12-11-2026). */
+    var dims = pr.dims ? caja('🧭 Su gestión, dimensión por dimensión', '<p class="ex-fun-falta">La productividad de una administración se lee en las mismas dimensiones del Planisferio. Cada una abre su mapa y su página federal:</p><ul class="ex-dims">' +
+      pr.dims.map(function (d) {
+        return '<li><b>' + d.ico + ' ' + esc(d.n) + '</b><small>' + esc(d.que) + '</small><span><a href="' + esc(d.pl) + '">Ver en el Planisferio</a> · <a href="' + esc(d.ctx) + '">' + esc(d.ctxT) + '</a></span></li>';
+      }).join('') + '</ul>', true) : '';
+    return dims + caja('📈 Productividad: qué se hizo con ese dinero', tabla(filas, ['Concepto', 'Cifra']) +
+      (pr.falta ? '<p class="ex-fun-falta"><b>' + (conProd(pr) ? 'Lo que aún falta.' : 'Por qué está pendiente.') + '</b> ' + esc(pr.falta) + '</p>' : ''), true);
+  }
+  function abreNotas(doc, abrir) {
+    var rev = doc.querySelector('.ex-reverso'), b = doc.querySelector('.ex-rev-abre');
+    if (!rev || !b) return;
+    var cerrado = abrir === undefined ? !rev.classList.contains('ex-rev-cerrado') : !abrir;
+    rev.classList.toggle('ex-rev-cerrado', cerrado);
+    b.setAttribute('aria-expanded', String(!cerrado));
+    b.textContent = (cerrado ? 'Ver las ' : 'Esconder las ') + b.getAttribute('data-n') + ' notas, el fundamento y las fuentes';
+  }
+  /* La nota de un renglón, ahí mismo: es la misma del reverso, no otra. */
+  function notaDe(doc, a) {
+    if (a._nota) { a._nota.remove(); a._nota = null; a.setAttribute('aria-expanded', 'false'); return; }
+    var ns = [];
+    Array.prototype.forEach.call(a.querySelectorAll('.ex-ref'), function (r) {
+      var li = doc.querySelector('.ex-notas li[value="' + parseInt(r.textContent, 10) + '"]');
+      if (li) ns.push('<li value="' + li.value + '">' + li.innerHTML + '</li>');
+    });
+    if (!ns.length) return;
+    var caja = '<ol class="ex-notas">' + ns.join('') + '</ol>', n;
+    if (a.tagName === 'TR') {
+      n = document.createElement('tr');
+      n.innerHTML = '<td colspan="' + a.children.length + '">' + caja + '</td>';
+      a.parentNode.insertBefore(n, a.nextSibling);
+    } else {
+      n = document.createElement(a.tagName === 'LI' ? 'div' : 'span');
+      n.innerHTML = caja;
+      a.appendChild(n);
+    }
+    n.className = 'ex-nota-ab ex-sp';
+    a._nota = n;
+    a.setAttribute('aria-expanded', 'true');
+  }
+  function toque(e) {
+    var doc = document.getElementById('exDoc');
+    if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+    if (e.target.closest('a, .est-chip, .ex-nota-ab')) return;
+    var ir = e.target.closest('[data-ir]');
+    if (ir) {
+      var k = ir.getAttribute('data-ir'), d;
+      if (k === 'notas') { abreNotas(doc, true); d = doc.querySelector('.ex-reverso'); }
+      else d = k === 'sello' ? doc.querySelector('.ex-sello') : doc.querySelector('[data-sec="' + k + '"]');
+      var pf = d && d.closest('.ex-fun-p');
+      if (pf) verFun(doc, pf.getAttribute('data-fun'));
+      if (d) d.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+    var fb = e.target.closest('[data-fun-ir]');
+    if (fb) { if (e.type === 'click') verFun(doc, fb.getAttribute('data-fun-ir')); return; }
+    if (e.target.closest('.ex-rev-abre')) { if (e.type === 'click') abreNotas(doc); return; }
+    var a = e.target.closest('.ex-toca');
+    if (a) { if (e.type === 'keydown') e.preventDefault(); notaDe(doc, a); }
+  }
+
   var est = { tipo: 'adm', adm: null, doc: null, folio: null, listo: false };
   /* El documento se arma solo al presionar «Generar estado de cuenta»
      (pedido del autor, 10-10-2026); elegir otro lo vuelve a dejar en espera. */
@@ -348,6 +498,12 @@
       a.periodo + (a.ys ? ' · cifras de ' + a.ys[0] + (a.ys[1] !== a.ys[0] ? ' a ' + a.ys[1] : '') : ''), 'Datos con corte al', D.corte);
     if (a.aviso) h += '<p class="ex-aviso">⚠️ ' + esc(a.aviso) + (a.curso ? ' El semáforo es <b>preliminar</b>: se compara un año contra sexenios completos.' : '') + '</p>';
 
+    h += vistazo([vistazoSem(m.sem.map(function (r) { return r.c; })),
+      { t: 'Balance, promedio al año', h: valor(m.cuenta[2].pib, 'pib') },
+      { t: 'La deuda, de principio a fin', h: valor(m.deuda[2].x, m.deuda[2].u) },
+      { t: 'Por aclarar ante la ASF', h: valor(m.asf[2].x, m.asf[2].u) }]);
+
+    var hCab = h; h = '';
     /* El termostato */
     N.sec('El termostato: qué mide cada indicador y cómo se le pone color',
       'El termostato compara con reglas escritas; no es una calificación oficial ni un juicio sobre la persona, y no suma los colores en una nota global. ' +
@@ -381,11 +537,13 @@
       [simple('🔎', 'Ante la Auditoría Superior de la Federación', m.asf,
         'Sin color en el termostato: la ASF mide el monto por aclarar con esta definición solo desde la Cuenta Pública 2019, y las cuentas viejas llevan más años de solventación. No es daño comprobado.')]));
 
+    h = hCab + funciones(h, prodCaja(D.prod, N), conProd(D.prod));
     var rev = '<div class="ex-rev-cols">' + N.html(1) +
       '<section class="ex-rsec"><h4><span>' + (N.secs.length + 1) + '</span> Fundamento legal</h4><p class="ex-nota">' + esc(D.ley17.txt) +
       ' <a href="' + esc(D.ley17.url) + '" target="_blank" rel="noopener noreferrer">' + esc(D.ley17.corto) + ' ↗</a></p></section>' +
       listaFuentes(m.fuentes, D.fuentes, N.secs.length + 2) + '</div>';
     doc.innerHTML = hoja(h, 'Estado de cuenta de ' + a.n, rev);
+    despues(doc);
     doc.style.setProperty('--c', a.col);
     firma(doc, cifras(m), a.ini);
   }
@@ -418,16 +576,20 @@
     function f(r) { if (r.f && ks.indexOf(r.f) < 0) ks.push(r.f); }
     d.senales.forEach(function (s) { f(s.x); s.extra.forEach(f); f({ f: C.senales[s.id].ley }); });
     d.secciones.forEach(function (s) { s.filas.forEach(f); });
+    if (d.prod) d.prod.filas.forEach(f);
     return ks;
   }
   /* Las cifras que firma el sello, en un orden fijo. */
   function cifrasC(d) {
     function v(r) { return typeof r.v === 'number' ? (typeof r.v2 === 'number' ? [r.v, r.v2] : r.v) : r.u === 'txt' ? r.txt || 'sin dato' : 'sin dato'; }
-    return {
+    var o = {
       doc: 'Auditavisión · ' + d.tipoTx, id: d.id, corte: d.corte,
       senales: d.senales.map(function (s) { return [s.id, v(s.x), s.c || 'sin color']; }),
       secciones: d.secciones.map(function (s) { return [s.tit, s.filas.map(function (r) { return [r.t, v(r), r.est]; })]; })
     };
+    /* La productividad entra a la huella solo donde trae cifras: los demás folios no cambian. */
+    if (conProd(d.prod)) o.productividad = d.prod.filas.map(function (r) { return [r.t, v(r), r.est]; });
+    return o;
   }
   /* La institución como órgano (10-10-2026): lo que nos cuesta, en tres
      cifras grandes, y del dinero que ejerció a lo que falta aclarar, en barras
@@ -465,6 +627,15 @@
     var doc = document.getElementById('exDoc'), ks = fuentesDe(d), N = new Notas(ks);
     var h = cabecera(d.col, d.tipoTx, d.n, d.sub, 'Fuentes consultadas en', d.corte);
     if (d.aviso) h += '<p class="ex-aviso">ℹ️ ' + esc(d.aviso) + '</p>';
+    var vz = [vistazoSem(d.senales.map(function (s) { return s.c; }))];
+    if (d.senales[0]) vz.push({ t: d.senales[0].x.t, h: valorC(d.senales[0].x) });
+    d.secciones.forEach(function (s) {
+      s.filas.forEach(function (r) {
+        if (s.panel === 'costo' && r.k === 'total' || s.panel === 'embudo' && r.k === 'aclarar') vz.push({ t: s.panel === 'embudo' ? r.t + ' ante la ASF' : r.t, h: valorC(r) });
+      });
+    });
+    h += vistazo(vz);
+    var hCab = h; h = '';
     N.sec('Las dos señales con regla de ley', 'Las señales comparan con reglas escritas en la ley; no son una calificación oficial ni un juicio sobre ninguna persona. ' +
       'Donde la cifra es parcial o falta, la señal se queda sin color en lugar de suponer.');
     h += '<section class="ex-termo"><h4>🌡️ Termostato: dos señales con regla de ley</h4><div class="ex-termo-in">' +
@@ -500,6 +671,7 @@
       return { larga: true, h: caja(esc(s.tit), '<div class="ex-t2">' + tabla(filas.slice(0, mitad).join(''), ['Concepto', 'Cifra']) +
         tabla(filas.slice(mitad).join(''), ['Concepto', 'Cifra']) + '</div>', true) };
     }));
+    h = hCab + funciones(h, prodCaja(d.prod, N), conProd(d.prod));
     var leyes = [];
     d.senales.forEach(function (s) { var l = C.fuentes[C.senales[s.id].ley]; if (l && leyes.indexOf(l) < 0) leyes.push(l); });
     var rev = '<div class="ex-rev-cols">' + N.html(1) +
@@ -508,6 +680,7 @@
       }).join('') + '</ul></section>' +
       listaFuentes(ks, C.fuentes, N.secs.length + 2) + '</div>';
     doc.innerHTML = hoja(h, d.tipoTx + ': ' + d.n, rev);
+    despues(doc);
     doc.style.setProperty('--c', d.col);
     firma(doc, cifrasC(d), d.ini);
   }
@@ -614,6 +787,8 @@
     cajas.forEach(function (x, k) { cols[k < mejor[1] ? 0 : 1].appendChild(x); });
   }
   document.getElementById('exGenera').addEventListener('click', genera);
+  document.getElementById('exDoc').addEventListener('click', toque);
+  document.getElementById('exDoc').addEventListener('keydown', toque);
 
   /* ================= Descargar en PDF ================= */
   document.getElementById('exPdf').addEventListener('click', function () {

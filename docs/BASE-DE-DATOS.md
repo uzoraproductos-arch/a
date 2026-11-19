@@ -47,6 +47,33 @@ probada. Falta solo lo que toca al autor: crear la cuenta y poner las llaves.
 | `supabase/pruebas/web_test.ts` | Pruebas de lo que puede devolver la búsqueda en internet |
 | `herramientas/prueba_base_datos.py` | Corre la migración y las pruebas en un PostgreSQL local, sin cuenta ni red |
 
+## El padrón de contrapartes (18-11-2026)
+
+Pedido del autor: «que nuestra base de datos quede muy bien integrada… para el compliance de prevención de lavado de dinero». Es la columna
+vertebral de los servicios de prevención: **una sola ficha por RFC** que cruza todas las listas que tiene la plataforma. Como las cifras fiscales,
+**no vive en Supabase**: son archivos que genera Python, con su huella, y el navegador los lee.
+
+```
+  anclar_listas.py (cada miércoles, flujo «Listas del padrón»)
+  ├─ SAT: art. 69 (no localizados, firmes, exigibles, cancelados, sentencias), 17-H Bis (CSD), 69-B Bis ─▶ padron/s-XX.js (por huella de RFC)
+  └─ OFAC (SDN, alias, domicilios) y ONU (lista consolidada) ──────────────────────────────────▶ sanciones-int.js
+  actualizar_69b.py ─▶ sat-69b.js     anclar_sancionados.py ─▶ sancionados.js     actualizar_comprasmx.py ─▶ comprasmx/
+                                   │
+                         padron.js: Padron.rfc(), Padron.nombre(), Padron.html()
+                                   │
+           «Revisa a tu contraparte» (Modo Inspector)  ·  el chat (padronResp)
+```
+
+| Regla | Por qué |
+|---|---|
+| Las personas físicas van por la huella de su RFC, sin nombre | Decisión del autor: se coteja el RFC exacto, nunca se publica el padrón |
+| Una coincidencia es «señal para revisar» | Las listas del SAT son determinaciones administrativas; la OFAC y la ONU sancionan, no juzgan |
+| Si una lista cambia sus columnas o no cuadra, se detiene | El pilar de transparencia: nada se publica sin cuadre |
+| La Lista de Personas Bloqueadas de la UIF no está | No es pública: la UIF solo la comparte con los sujetos obligados |
+
+Lo que sigue (entregas 3 a 5): revisar una lista de clientes por lote, la cadena de quién le factura a quién a partir de los CFDI y la matriz de riesgo
+con su informe de diligencia.
+
 ## Los cuatro candados de la IA (AGENTS.md §5 ter)
 
 1. **No recibe texto ajeno.** La página manda la pregunta y los números de
@@ -167,6 +194,16 @@ Las duraciones van de 1 hora a 5 años, o **ilimitado** (`interval '100 years'`)
 
 **El límite, dicho claro:** en un sitio estático el candado vive en el navegador. Detiene a quien entra por la puerta, no a quien lee el código de las páginas o desactiva JavaScript. Para cerrar de verdad, el sitio necesita un servidor que revise el pase antes de entregar la página (Vercel, fase 1 de LANZAMIENTO.md).
 
+### El control interno (18-11-2026, migración `20261118000001`)
+
+| Pieza | Qué hace |
+|---|---|
+| `renovaciones`, `renovar_codigo` | Renovar un código: quita la revocación y el archivo, suma personas (`p_usos_mas`) o fecha (`p_antes`) y, con `p_lapso`, da tiempo extra a cada pase que lo canjeó. `pase_hasta` recorre canjes y renovaciones en orden: el extra corre desde el final de lo que quedaba o desde la renovación, lo que sea más tarde |
+| `bitacora_admin`, `bitacora_lista` | La bitácora: la llenan disparadores de `codigos`, `solicitudes_codigo` y `admin_codigo` (nunca el código maestro en sí) y `renovar_codigo`. `quien` es el correo de la administración o «sistema». Nadie la escribe desde fuera |
+| `uso_eventos`, `registrar_uso`, `uso_seccion` | La medición: vista, tiempo, clic y pregunta (solo modo y destino), por pase o visita. Solo la llave de servicio escribe (acción `uso` de la función `codigo`, 120 tandas cada 10 minutos por IP, hasta 40 eventos). No guarda IP, navegador ni texto escrito; no cuenta pases con el código semanal; se borra a los 12 meses |
+| `uso_tablero(p_dias)` | Lo que pinta el Tablero de uso: resumen, por día, temas, páginas, clics, modos y destinos del chat, horas y códigos. Solo cuentas |
+| `codigo_uso` | Suma `minutos`, `vistas` y `renovado` por persona |
+
 ## Respaldos (27-10-2026)
 
 ```bash
@@ -188,3 +225,5 @@ deno test supabase/pruebas/
 - **La bóveda corre sola cada miércoles** (`.github/workflows/boveda.yml`, 30-10-2026):
   desde la red de GitHub revisa las direcciones oficiales que respaldan los datos y guarda
   su huella en `docs/boveda/evidencias.json`. No cambia ninguna cifra.
+
+- **El registro por modo (17-11-2026).** `preguntas_bot` guarda además `modo` (el modo del chat en que se preguntó) y `modo_toca` (el modo al que le tocaba, por las palabras de la pregunta). La vista `preguntas_por_modo` dice qué le falta a cada modo. No cambia qué se guarda: solo las preguntas sin respuesta o marcadas «No era lo que buscaba», sin nombre ni correo. Migración `20261116000001_preguntas_por_modo.sql`; se sube con el flujo «Sube la base de datos».

@@ -99,6 +99,9 @@
   try {
     var tema = new URLSearchParams(location.search).get('tema');
     if (tema && !val('svTema')) $('svTema').value = tema.slice(0, 160);
+    // La pagina de cada servicio manda tambien la pregunta del ejemplo (18-11-2026).
+    var preg = new URLSearchParams(location.search).get('pregunta');
+    if (preg && !val('svPregunta')) $('svPregunta').value = preg.slice(0, 1500);
     // Cada perfil y cada servicio llegan con servicios.html?servicio=<id>.
     var serv = new URLSearchParams(location.search).get('servicio');
     var sel = $('svServicio');
@@ -107,6 +110,56 @@
     var plan = (new URLSearchParams(location.search).get('plan') || '').replace(/[^a-z]/g, '');
     if (plan && !val('svTema')) $('svTema').value = 'Quiero el plan ' + plan;
   } catch (e) { /* sin URLSearchParams: el lector lo escribe */ }
+
+  /* Las opciones a un toque (16-11-2026): cada botón pone su valor en su
+     campo. Si el campo es una lista (data-elige), los botones la sustituyen a
+     la vista; si es libre, lo llenan y el lector lo puede cambiar. Los
+     ejemplos de tema y pregunta cambian con el servicio elegido. */
+  var grupos = [].slice.call(form.querySelectorAll('.sv-ops[data-para]'));
+  var EJ = {};
+  try { EJ = JSON.parse($('svEjemplosDatos').textContent); } catch (e) { /* sin ejemplos */ }
+  function pinta() {
+    grupos.forEach(function (g) {
+      var v = val(g.getAttribute('data-para'));
+      [].forEach.call(g.querySelectorAll('.sv-op'), function (b) {
+        b.setAttribute('aria-pressed', b.getAttribute('data-valor') === v ? 'true' : 'false');
+      });
+    });
+    var caja = $('svEjemplos'), ops = $('svEjemplosOps'), lista = EJ[val('svServicio')] || [];
+    if (!caja || !ops) return;
+    caja.hidden = !lista.length;
+    ops.textContent = '';
+    lista.forEach(function (x) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'sv-op sv-op-ej';
+      b.textContent = x[0];
+      b.setAttribute('aria-pressed', val('svTema') === x[0] ? 'true' : 'false');
+      b.addEventListener('click', function () {
+        $('svTema').value = x[0];
+        $('svPregunta').value = x[1];
+        marcar('svTema', false); marcar('svPregunta', false);
+        pinta();
+        $('svPregunta').focus();
+      });
+      ops.appendChild(b);
+    });
+  }
+  grupos.forEach(function (g) {
+    var campo = $(g.getAttribute('data-para'));
+    if (!campo) return;
+    if (g.hasAttribute('data-elige')) campo.classList.add('sv-oculto');
+    g.addEventListener('click', function (ev) {
+      var b = ev.target.closest('.sv-op');
+      if (!b) return;
+      campo.value = b.getAttribute('aria-pressed') === 'true' && !g.hasAttribute('data-elige') ? '' : b.getAttribute('data-valor');
+      pinta();
+    });
+    campo.addEventListener('input', pinta);
+    campo.addEventListener('change', pinta);
+  });
+  $('svTema').addEventListener('input', pinta);
+  pinta();
 
   function marcar(id, malo) {
     var el = $(id);
@@ -292,6 +345,7 @@
     resumen.hidden = true;
     resumen.innerHTML = '';
     form.querySelectorAll('[aria-invalid]').forEach(function (el) { el.removeAttribute('aria-invalid'); });
+    setTimeout(pinta, 0);
   });
 })();
 

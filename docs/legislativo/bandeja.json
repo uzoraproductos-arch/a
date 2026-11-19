@@ -1,11 +1,102 @@
 {
- "actualizado": "09-11-2026",
+ "actualizado": "17-11-2026",
  "nota": "Lo que junta herramientas/vigia_legislativo.py del sumario del DOF y del índice de Leyes Federales Vigentes de la Cámara de Diputados, sin verificar: solo título, fecha y liga, nunca el texto de la reforma. Cada hallazgo queda «por cotejar» hasta que una persona lo revisa; los avisos dicen qué módulo de Auditavisión cita una reforma anterior a la vigente.",
  "fuentes": {
   "dof": "https://dof.gob.mx/sumario.xml",
   "diputados": "https://www.diputados.gob.mx/LeyesBiblio/index.htm"
  },
- "hallazgos": [],
+ "hallazgos": [
+  {
+   "id": "dip-lisr-13-11-2026",
+   "fuente": "diputados",
+   "leyes": [
+    "lisr"
+   ],
+   "fecha": "13-11-2026",
+   "titulo": "LEY del Impuesto sobre la Renta: la Cámara de Diputados registra una reforma del 13-11-2026 (antes decía 01-04-2024).",
+   "articulos": "",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm",
+   "seccion": "Leyes Federales Vigentes",
+   "estado": "cotejado",
+   "visto": "14-11-2026",
+   "cotejo": "Cotejado el 18-11-2026: cambia el RESICO desde 2027 (tope de 5 millones) y crea el límite a las deducciones de quien ingresa más de 50 millones (arts. 78-A a 78-F); la tarifa del art. 96 no cambia."
+  },
+  {
+   "id": "dip-lfd-13-11-2026",
+   "fuente": "diputados",
+   "leyes": [
+    "lfd"
+   ],
+   "fecha": "13-11-2026",
+   "titulo": "LEY Federal de Derechos: la Cámara de Diputados registra una reforma del 13-11-2026 (antes decía 28-12-2025).",
+   "articulos": "",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfd.htm",
+   "seccion": "Leyes Federales Vigentes",
+   "estado": "cotejado",
+   "visto": "14-11-2026",
+   "cotejo": "Cotejado el 18-11-2026: la cuota del turista extranjero queda en $1,158.00 (art. 8o., fr. I)."
+  },
+  {
+   "id": "dip-lif-13-11-2026",
+   "fuente": "diputados",
+   "leyes": [
+    "lif"
+   ],
+   "fecha": "13-11-2026",
+   "titulo": "LEY de Ingresos de la Federación para el Ejercicio Fiscal de 2027: la Cámara de Diputados registra una reforma del 13-11-2026 (antes decía 07-11-2025).",
+   "articulos": "",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lif_2027.htm",
+   "seccion": "Leyes Federales Vigentes",
+   "estado": "cotejado",
+   "visto": "14-11-2026",
+   "cotejo": "Cotejado el 18-11-2026: total de $10,636,488.1 millones (art. 1o.) y techo de deuda interna de 1.7 billones (art. 2o.); ya está en esta página."
+  },
+  {
+   "id": "dof-5803757",
+   "fuente": "dof",
+   "leyes": [
+    "lif"
+   ],
+   "fecha": "13-11-2026",
+   "titulo": "Decreto por el que se expide la Ley de Ingresos de la Federación para el Ejercicio Fiscal de 2027.",
+   "articulos": "",
+   "liga": "https://dof.gob.mx/nota_detalle.php?codigo=5803757&fecha=13/11/2026",
+   "seccion": "PODER EJECUTIVO PRESIDENCIA DE LA REPUBLICA",
+   "estado": "cotejado",
+   "visto": "13-11-2026",
+   "cotejo": "Cotejado el 18-11-2026: total de $10,636,488.1 millones (art. 1o.) y techo de deuda interna de 1.7 billones (art. 2o.); ya está en esta página."
+  },
+  {
+   "id": "dof-5803758",
+   "fuente": "dof",
+   "leyes": [
+    "lisr"
+   ],
+   "fecha": "13-11-2026",
+   "titulo": "Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Ley del Impuesto sobre la Renta y se expiden disposiciones de vigencia transitoria.",
+   "articulos": "",
+   "liga": "https://dof.gob.mx/nota_detalle.php?codigo=5803758&fecha=13/11/2026",
+   "seccion": "PODER EJECUTIVO PRESIDENCIA DE LA REPUBLICA",
+   "estado": "cotejado",
+   "visto": "13-11-2026",
+   "cotejo": "Cotejado el 18-11-2026: cambia el RESICO desde 2027 (tope de 5 millones) y crea el límite a las deducciones de quien ingresa más de 50 millones (arts. 78-A a 78-F); la tarifa del art. 96 no cambia."
+  },
+  {
+   "id": "dof-5803759",
+   "fuente": "dof",
+   "leyes": [
+    "lfd"
+   ],
+   "fecha": "13-11-2026",
+   "titulo": "Decreto por el que se reforman, adicionan y derogan diversas disposiciones de la Ley Federal de Derechos.",
+   "articulos": "",
+   "liga": "https://dof.gob.mx/nota_detalle.php?codigo=5803759&fecha=13/11/2026",
+   "seccion": "PODER EJECUTIVO PRESIDENCIA DE LA REPUBLICA",
+   "estado": "cotejado",
+   "visto": "13-11-2026",
+   "cotejo": "Cotejado el 18-11-2026: la cuota del turista extranjero queda en $1,158.00 (art. 8o., fr. I)."
+  }
+ ],
  "leyes": {
   "cpeum": {
    "nombre": "CONSTITUCIÓN Política de los Estados Unidos Mexicanos",
@@ -24,7 +115,7 @@
   "lisr": {
    "nombre": "LEY del Impuesto sobre la Renta",
    "publicada": "11-12-2013",
-   "reforma": "01-04-2024",
+   "reforma": "13-11-2026",
    "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm",
    "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf"
   },
@@ -45,16 +136,16 @@
   "lfd": {
    "nombre": "LEY Federal de Derechos",
    "publicada": "31-12-1981",
-   "reforma": "28-12-2025",
+   "reforma": "13-11-2026",
    "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lfd.htm",
    "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFD.pdf"
   },
   "lif": {
-   "nombre": "LEY de Ingresos de la Federación para el Ejercicio Fiscal de 2026",
-   "publicada": "07-11-2025",
-   "reforma": "07-11-2025",
-   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lif_2026.htm",
-   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2026.pdf"
+   "nombre": "LEY de Ingresos de la Federación para el Ejercicio Fiscal de 2027",
+   "publicada": "13-11-2026",
+   "reforma": "13-11-2026",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lif_2027.htm",
+   "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LIF_2027.pdf"
   },
   "lfprh": {
    "nombre": "LEY Federal de Presupuesto y Responsabilidad Hacendaria",
@@ -246,6 +337,27 @@
    "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CNPP.pdf"
   }
  },
- "avisos": [],
+ "avisos": [
+  {
+   "archivo": "herramientas/integrar_glosario_registros.py",
+   "renglon": 11,
+   "ley": "cpeum",
+   "nombre": "Constitución Política de los Estados Unidos Mexicanos",
+   "cita": "15-01-2026",
+   "vigente": "07-10-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpeum.htm"
+  },
+  {
+   "archivo": "herramientas/integrar_glosario_registros.py",
+   "renglon": 12,
+   "ley": "cpeum",
+   "nombre": "Constitución Política de los Estados Unidos Mexicanos",
+   "cita": "14-11-2025",
+   "vigente": "07-10-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpeum.htm"
+  }
+ ],
  "fallas": []
 }

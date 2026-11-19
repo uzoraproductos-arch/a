@@ -1,0 +1,1059 @@
+{
+ "fuente": {
+  "tx": "INEGI, Censo Nacional de Impartición de Justicia Federal y Estatal (CNIJF-E) 2025, tabulados básicos de impartición de justicia",
+  "url": "https://www.inegi.org.mx/contenidos/programas/cnije/2025/tabulados/cnije2025_imp_just.xlsx",
+  "sha256": "3802c222bda87d4453134222f34196b24087600b4a0a0c17c8a765c72f16612d",
+  "archivo": "cnije2025_imp_just.xlsx"
+ },
+ "c16": {
+  "pais": {
+   "tot": {
+    "pen": 504050,
+    "ado": 10311,
+    "civ": 1050688,
+    "fam": 1667913,
+    "mer": 619179
+   },
+   "trad": {
+    "pen": 78333,
+    "ado": 108,
+    "civ": 992581,
+    "fam": 1299098,
+    "mer": 495992
+   },
+   "oral": {
+    "pen": 425717,
+    "ado": 10203,
+    "civ": 58107,
+    "fam": 368815,
+    "mer": 123187
+   }
+  },
+  "estados": {
+   "AGS": {
+    "tot": {
+     "pen": 3847,
+     "ado": 125,
+     "civ": 38474,
+     "fam": 81483,
+     "mer": 71472
+    },
+    "trad": {
+     "pen": 69,
+     "ado": "NA",
+     "civ": 38474,
+     "fam": 81483,
+     "mer": 68458
+    },
+    "oral": {
+     "pen": 3778,
+     "ado": 125,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 3014
+    }
+   },
+   "BC": {
+    "tot": {
+     "pen": 30175,
+     "ado": 536,
+     "civ": null,
+     "fam": null,
+     "mer": 664
+    },
+    "trad": {
+     "pen": null,
+     "ado": null,
+     "civ": null,
+     "fam": null,
+     "mer": null
+    },
+    "oral": {
+     "pen": 30175,
+     "ado": 536,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 664
+    }
+   },
+   "BCS": {
+    "tot": {
+     "pen": 4470,
+     "ado": 44,
+     "civ": null,
+     "fam": null,
+     "mer": null
+    },
+    "trad": {
+     "pen": 197,
+     "ado": "NA",
+     "civ": null,
+     "fam": null,
+     "mer": null
+    },
+    "oral": {
+     "pen": 4273,
+     "ado": 44,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": null
+    }
+   },
+   "CAM": {
+    "tot": {
+     "pen": 826,
+     "ado": 33,
+     "civ": 4178,
+     "fam": 9314,
+     "mer": 3871
+    },
+    "trad": {
+     "pen": 1,
+     "ado": "NA",
+     "civ": 4178,
+     "fam": 6647,
+     "mer": 3268
+    },
+    "oral": {
+     "pen": 825,
+     "ado": 33,
+     "civ": "NA",
+     "fam": 2667,
+     "mer": 603
+    }
+   },
+   "COAH": {
+    "tot": {
+     "pen": 7222,
+     "ado": 128,
+     "civ": 43964,
+     "fam": 45522,
+     "mer": 61865
+    },
+    "trad": {
+     "pen": 6,
+     "ado": "NA",
+     "civ": 43964,
+     "fam": 5461,
+     "mer": null
+    },
+    "oral": {
+     "pen": 7216,
+     "ado": 128,
+     "civ": "NA",
+     "fam": 40061,
+     "mer": 61865
+    }
+   },
+   "COL": {
+    "tot": {
+     "pen": 1538,
+     "ado": 56,
+     "civ": 2234,
+     "fam": 5285,
+     "mer": 2244
+    },
+    "trad": {
+     "pen": 0,
+     "ado": "NA",
+     "civ": 2234,
+     "fam": 5208,
+     "mer": 2192
+    },
+    "oral": {
+     "pen": 1538,
+     "ado": 56,
+     "civ": "NA",
+     "fam": 77,
+     "mer": 52
+    }
+   },
+   "CHIS": {
+    "tot": {
+     "pen": 3747,
+     "ado": 105,
+     "civ": 4706,
+     "fam": 17305,
+     "mer": 3807
+    },
+    "trad": {
+     "pen": 147,
+     "ado": "NA",
+     "civ": 4706,
+     "fam": 17305,
+     "mer": 3682
+    },
+    "oral": {
+     "pen": 3600,
+     "ado": 105,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 125
+    }
+   },
+   "CHIH": {
+    "tot": {
+     "pen": 4462,
+     "ado": 52,
+     "civ": null,
+     "fam": null,
+     "mer": null
+    },
+    "trad": {
+     "pen": null,
+     "ado": "NA",
+     "civ": null,
+     "fam": null,
+     "mer": null
+    },
+    "oral": {
+     "pen": 4462,
+     "ado": 52,
+     "civ": null,
+     "fam": null,
+     "mer": null
+    }
+   },
+   "CDMX": {
+    "tot": {
+     "pen": 15305,
+     "ado": 134,
+     "civ": 231493,
+     "fam": 240753,
+     "mer": null
+    },
+    "trad": {
+     "pen": 1141,
+     "ado": null,
+     "civ": 175475,
+     "fam": 215181,
+     "mer": null
+    },
+    "oral": {
+     "pen": 14164,
+     "ado": 134,
+     "civ": 56018,
+     "fam": 25572,
+     "mer": null
+    }
+   },
+   "DGO": {
+    "tot": {
+     "pen": 23548,
+     "ado": 190,
+     "civ": null,
+     "fam": null,
+     "mer": null
+    },
+    "trad": {
+     "pen": 421,
+     "ado": "NA",
+     "civ": null,
+     "fam": null,
+     "mer": null
+    },
+    "oral": {
+     "pen": 23127,
+     "ado": 190,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": null
+    }
+   },
+   "GTO": {
+    "tot": {
+     "pen": 6808,
+     "ado": 988,
+     "civ": 21696,
+     "fam": 14856,
+     "mer": 37707
+    },
+    "trad": {
+     "pen": 308,
+     "ado": "NA",
+     "civ": 21696,
+     "fam": "NA",
+     "mer": 35453
+    },
+    "oral": {
+     "pen": 6500,
+     "ado": 988,
+     "civ": "NA",
+     "fam": 14856,
+     "mer": 2254
+    }
+   },
+   "GRO": {
+    "tot": {
+     "pen": 20450,
+     "ado": 207,
+     "civ": 27580,
+     "fam": 109028,
+     "mer": 35107
+    },
+    "trad": {
+     "pen": 6461,
+     "ado": 5,
+     "civ": 27580,
+     "fam": 109028,
+     "mer": 33879
+    },
+    "oral": {
+     "pen": 13989,
+     "ado": 202,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 1228
+    }
+   },
+   "HGO": {
+    "tot": {
+     "pen": 34860,
+     "ado": 109,
+     "civ": 37250,
+     "fam": 97910,
+     "mer": 16713
+    },
+    "trad": {
+     "pen": 4472,
+     "ado": 70,
+     "civ": 37250,
+     "fam": 97910,
+     "mer": 15705
+    },
+    "oral": {
+     "pen": 30388,
+     "ado": 39,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 1008
+    }
+   },
+   "JAL": {
+    "tot": {
+     "pen": 47135,
+     "ado": 417,
+     "civ": 210437,
+     "fam": 142773,
+     "mer": 97843
+    },
+    "trad": {
+     "pen": 7096,
+     "ado": 25,
+     "civ": 210375,
+     "fam": 141901,
+     "mer": 70947
+    },
+    "oral": {
+     "pen": 40039,
+     "ado": 392,
+     "civ": 62,
+     "fam": 872,
+     "mer": 26896
+    }
+   },
+   "MÉX": {
+    "tot": {
+     "pen": 58439,
+     "ado": 3481,
+     "civ": 75038,
+     "fam": 260551,
+     "mer": 70974
+    },
+    "trad": {
+     "pen": 3631,
+     "ado": 1,
+     "civ": 74963,
+     "fam": 58140,
+     "mer": 66083
+    },
+    "oral": {
+     "pen": 54808,
+     "ado": 3480,
+     "civ": 75,
+     "fam": 202411,
+     "mer": 4891
+    }
+   },
+   "MICH": {
+    "tot": {
+     "pen": 3238,
+     "ado": 26,
+     "civ": 70135,
+     "fam": 36767,
+     "mer": 6155
+    },
+    "trad": {
+     "pen": 1718,
+     "ado": "NA",
+     "civ": 70135,
+     "fam": 3020,
+     "mer": 5134
+    },
+    "oral": {
+     "pen": 1520,
+     "ado": 26,
+     "civ": "NA",
+     "fam": 33747,
+     "mer": 1021
+    }
+   },
+   "MOR": {
+    "tot": {
+     "pen": 1093,
+     "ado": 167,
+     "civ": null,
+     "fam": null,
+     "mer": 1505
+    },
+    "trad": {
+     "pen": 0,
+     "ado": "NA",
+     "civ": null,
+     "fam": null,
+     "mer": null
+    },
+    "oral": {
+     "pen": 1093,
+     "ado": 167,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 1505
+    }
+   },
+   "NAY": {
+    "tot": {
+     "pen": 57347,
+     "ado": 121,
+     "civ": 12833,
+     "fam": 39247,
+     "mer": 15252
+    },
+    "trad": {
+     "pen": 45360,
+     "ado": "NA",
+     "civ": 12833,
+     "fam": 39247,
+     "mer": 13830
+    },
+    "oral": {
+     "pen": 11987,
+     "ado": 121,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 1422
+    }
+   },
+   "NL": {
+    "tot": {
+     "pen": 8957,
+     "ado": 5,
+     "civ": 14663,
+     "fam": 38000,
+     "mer": 12698
+    },
+    "trad": {
+     "pen": 9,
+     "ado": "NA",
+     "civ": 13395,
+     "fam": 15840,
+     "mer": 8851
+    },
+    "oral": {
+     "pen": 8948,
+     "ado": 5,
+     "civ": 1268,
+     "fam": 22160,
+     "mer": 3847
+    }
+   },
+   "OAX": {
+    "tot": {
+     "pen": 7166,
+     "ado": 356,
+     "civ": 22421,
+     "fam": 52170,
+     "mer": 51195
+    },
+    "trad": {
+     "pen": 1513,
+     "ado": "NA",
+     "civ": 22421,
+     "fam": 52170,
+     "mer": 50041
+    },
+    "oral": {
+     "pen": 5653,
+     "ado": 356,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 1154
+    }
+   },
+   "PUE": {
+    "tot": {
+     "pen": 18883,
+     "ado": 352,
+     "civ": null,
+     "fam": null,
+     "mer": null
+    },
+    "trad": {
+     "pen": 1306,
+     "ado": "NA",
+     "civ": null,
+     "fam": null,
+     "mer": null
+    },
+    "oral": {
+     "pen": 17577,
+     "ado": 352,
+     "civ": "NA",
+     "fam": null,
+     "mer": null
+    }
+   },
+   "QRO": {
+    "tot": {
+     "pen": 7163,
+     "ado": 161,
+     "civ": 12279,
+     "fam": 18365,
+     "mer": 20651
+    },
+    "trad": {
+     "pen": 62,
+     "ado": "NA",
+     "civ": 12279,
+     "fam": 18365,
+     "mer": 19249
+    },
+    "oral": {
+     "pen": 7101,
+     "ado": 161,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 1402
+    }
+   },
+   "QROO": {
+    "tot": {
+     "pen": 11608,
+     "ado": 112,
+     "civ": 7428,
+     "fam": 6061,
+     "mer": 2072
+    },
+    "trad": {
+     "pen": 0,
+     "ado": "NA",
+     "civ": 6744,
+     "fam": 1859,
+     "mer": 1718
+    },
+    "oral": {
+     "pen": 11608,
+     "ado": 112,
+     "civ": 684,
+     "fam": 4202,
+     "mer": 354
+    }
+   },
+   "SLP": {
+    "tot": {
+     "pen": 5530,
+     "ado": 48,
+     "civ": 5579,
+     "fam": 23133,
+     "mer": 7660
+    },
+    "trad": {
+     "pen": 2,
+     "ado": 6,
+     "civ": 5579,
+     "fam": 23133,
+     "mer": 6672
+    },
+    "oral": {
+     "pen": 5528,
+     "ado": 42,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 988
+    }
+   },
+   "SIN": {
+    "tot": {
+     "pen": 11026,
+     "ado": 141,
+     "civ": 17932,
+     "fam": 80082,
+     "mer": 12888
+    },
+    "trad": {
+     "pen": 976,
+     "ado": null,
+     "civ": 17932,
+     "fam": 80082,
+     "mer": 11026
+    },
+    "oral": {
+     "pen": 10050,
+     "ado": 141,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 1862
+    }
+   },
+   "SON": {
+    "tot": {
+     "pen": 12065,
+     "ado": 252,
+     "civ": 11089,
+     "fam": 14289,
+     "mer": 10418
+    },
+    "trad": {
+     "pen": 152,
+     "ado": "NA",
+     "civ": 11089,
+     "fam": 14289,
+     "mer": 9525
+    },
+    "oral": {
+     "pen": 11913,
+     "ado": 252,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 893
+    }
+   },
+   "TAB": {
+    "tot": {
+     "pen": 52364,
+     "ado": 644,
+     "civ": 24684,
+     "fam": 7044,
+     "mer": 1913
+    },
+    "trad": {
+     "pen": 564,
+     "ado": "NA",
+     "civ": 24684,
+     "fam": 7044,
+     "mer": 1369
+    },
+    "oral": {
+     "pen": 51800,
+     "ado": 644,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 544
+    }
+   },
+   "TAM": {
+    "tot": {
+     "pen": 12932,
+     "ado": 283,
+     "civ": 9605,
+     "fam": 39155,
+     "mer": 7643
+    },
+    "trad": {
+     "pen": 1744,
+     "ado": 0,
+     "civ": 9605,
+     "fam": 39155,
+     "mer": 6648
+    },
+    "oral": {
+     "pen": 11188,
+     "ado": 283,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 995
+    }
+   },
+   "TLAX": {
+    "tot": {
+     "pen": 4426,
+     "ado": 41,
+     "civ": 10009,
+     "fam": 15709,
+     "mer": 2674
+    },
+    "trad": {
+     "pen": 226,
+     "ado": "NA",
+     "civ": 10009,
+     "fam": 15709,
+     "mer": 2451
+    },
+    "oral": {
+     "pen": 4200,
+     "ado": 41,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 223
+    }
+   },
+   "VER": {
+    "tot": {
+     "pen": 8823,
+     "ado": 304,
+     "civ": 96372,
+     "fam": 231991,
+     "mer": 39428
+    },
+    "trad": {
+     "pen": 0,
+     "ado": "NA",
+     "civ": 96372,
+     "fam": 231991,
+     "mer": 36407
+    },
+    "oral": {
+     "pen": 8823,
+     "ado": 304,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 3021
+    }
+   },
+   "YUC": {
+    "tot": {
+     "pen": 6669,
+     "ado": 148,
+     "civ": 10707,
+     "fam": 22725,
+     "mer": 7434
+    },
+    "trad": {
+     "pen": 172,
+     "ado": 1,
+     "civ": 10707,
+     "fam": 535,
+     "mer": 6439
+    },
+    "oral": {
+     "pen": 6497,
+     "ado": 147,
+     "civ": "NA",
+     "fam": 22190,
+     "mer": 995
+    }
+   },
+   "ZAC": {
+    "tot": {
+     "pen": 11928,
+     "ado": 545,
+     "civ": 27902,
+     "fam": 18395,
+     "mer": 17326
+    },
+    "trad": {
+     "pen": 579,
+     "ado": "NA",
+     "civ": 27902,
+     "fam": 18395,
+     "mer": 16965
+    },
+    "oral": {
+     "pen": 11349,
+     "ado": 545,
+     "civ": "NA",
+     "fam": "NA",
+     "mer": 361
+    }
+   }
+  },
+  "nota": "Nota: la información se refiere a los pendientes de concluir registrados en las causas penales y a los expedientes pendientes de concluir por los órganos jurisdiccionales de primera instancia, al 31 de diciembre, independientemente de que hayan ingresado durante el año o en ejercicios anteriores. En materia penal y justicia para adolescentes la unidad de referencia para los datos corresponde al estatus jurídico de cada persona procesada y/o imputada, toda vez que la causa penal se individualiza de acuerdo con el estatus jurídico de la persona conforme a la última etapa procesal o acto procedimental en el que se encontraba su situación jurídica en el proceso penal. Los totales corresponden a la suma de las cifras de los casos en los que se contó con datos.",
+  "llamadas": {
+   "COAH": "8 El Poder Judicial de la entidad federativa reportó que los expedientes registrados en materia mercantil en el Sistema Oral incluyen también los del Sistema Escrito, debido a la imposibilidad de desagregar la información por tipo de sistema.",
+   "CDMX": "9 El Poder Judicial de la entidad federativa reportó que los expedientes registrados en materia civil incluyen las materias civil y mercantil, debido a la competencia de los juzgados civiles para conocer de ambas materias."
+  }
+ },
+ "c13": {
+  "grupos": {
+   "Tribunales Colegiados de Circuito": [
+    [
+     "Amparo directo",
+     286,
+     286,
+     256
+    ],
+    [
+     "Amparo en revisión",
+     246,
+     246,
+     229
+    ],
+    [
+     "Conflictos competenciales",
+     74,
+     74,
+     75
+    ],
+    [
+     "Impedimentos",
+     54,
+     55,
+     41
+    ],
+    [
+     "Revisión contenciosa administrativa",
+     175,
+     177,
+     82
+    ],
+    [
+     "Quejas",
+     80,
+     82,
+     29
+    ],
+    [
+     "Revisión fiscal",
+     215,
+     216,
+     175
+    ],
+    [
+     "Conflictos de acumulación",
+     62,
+     62,
+     0
+    ],
+    [
+     "Reclamaciones",
+     58,
+     0,
+     58
+    ],
+    [
+     "Incidentes de inejecución (acuerdo 5/2001 Tribunal Pleno SCJN)",
+     142,
+     141,
+     160
+    ],
+    [
+     "Denuncia repetición del acto reclamado",
+     105,
+     104,
+     121
+    ],
+    [
+     "Inconformidad (acuerdo 5/2001 Tribunal Pleno SCJN)",
+     125,
+     125,
+     90
+    ],
+    [
+     "Incidente de reconocimiento de inocencia (acuerdo 5/2001 Tribunal Pleno SCJN)",
+     0,
+     0,
+     0
+    ]
+   ],
+   "Tribunales Colegiados de Apelación": [
+    [
+     "Juicios de amparo indirecto",
+     143,
+     143,
+     16
+    ],
+    [
+     "Procesos penales federales en segunda instancia. Apelación",
+     106,
+     95,
+     60
+    ],
+    [
+     "Procesos penales federales en segunda instancia. Denegada apelación",
+     31,
+     36,
+     1
+    ],
+    [
+     "Procesos penales federales en segunda instancia. Impedimento",
+     102,
+     31,
+     26
+    ],
+    [
+     "Procesos penales federales en segunda instancia. Queja",
+     18,
+     23,
+     8
+    ],
+    [
+     "Procesos penales federales en segunda instancia. Competencia entre jueces",
+     46,
+     49,
+     7
+    ],
+    [
+     "Procesos penales federales en segunda instancia. Conflicto de acumulación",
+     0,
+     0,
+     0
+    ],
+    [
+     "Procesos penales federales en segunda instancia. Otro",
+     16,
+     16,
+     0
+    ],
+    [
+     "Procesos civiles o administrativos federales en segunda instancia. Apelación",
+     118,
+     126,
+     82
+    ],
+    [
+     "Procesos civiles o administrativos federales en segunda instancia. Denegada apelación",
+     50,
+     64,
+     33
+    ],
+    [
+     "Procesos civiles o administrativos federales en segunda instancia. Impedimento",
+     46,
+     45,
+     57
+    ],
+    [
+     "Procesos civiles o administrativos federales en segunda instancia. Queja",
+     3,
+     0,
+     3
+    ],
+    [
+     "Procesos civiles o administrativos federales en segunda instancia. Competencia entre jueces",
+     75,
+     84,
+     16
+    ],
+    [
+     "Procesos civiles o administrativos federales en segunda instancia. Conflicto de acumulación",
+     54,
+     57,
+     40
+    ],
+    [
+     "Procesos civiles o administrativos federales en segunda instancia. Otro",
+     59,
+     62,
+     31
+    ],
+    [
+     "Reconocimiento de inocencia y anulación de sentencia. Reconocimiento de inocencia",
+     89,
+     100,
+     46
+    ],
+    [
+     "Reconocimiento de inocencia y anulación de sentencia. Anulación de sentencia",
+     91,
+     155,
+     2
+    ],
+    [
+     "Otro",
+     0,
+     0,
+     0
+    ]
+   ],
+   "Juzgados de Distrito": [
+    [
+     "Juicios de amparo indirecto",
+     83,
+     124,
+     34
+    ],
+    [
+     "Causas penales en procesos de primera instancia",
+     520,
+     506,
+     527
+    ],
+    [
+     "Causas penales en procesos de ejecución penal",
+     null,
+     null,
+     null
+    ],
+    [
+     "Procesos civiles o administrativos federales",
+     11,
+     276,
+     5
+    ],
+    [
+     "Juicios orales mercantiles",
+     86,
+     303,
+     17
+    ],
+    [
+     "Medidas precautorias",
+     0,
+     0,
+     0
+    ],
+    [
+     "Procedimiento de extradición",
+     3149,
+     0,
+     3149
+    ],
+    [
+     "Extinción de dominio",
+     319,
+     452,
+     11
+    ],
+    [
+     "Denuncia por incumplimiento de la declaratoria general de inconstitucionalidad",
+     39,
+     54,
+     11
+    ]
+   ],
+   "Centros de Justicia Penal Federal": [
+    [
+     "Causa penal. Juez de Control o Garantías",
+     338,
+     335,
+     469
+    ],
+    [
+     "Causa penal. Juez de Enjuiciamiento o Juicio Oral",
+     847,
+     844,
+     891
+    ],
+    [
+     "Causa penal. Juez de Ejecución Penal",
+     337,
+     422,
+     248
+    ],
+    [
+     "Exhorto",
+     33,
+     "NA",
+     "NA"
+    ],
+    [
+     "Otro",
+     142,
+     143,
+     141
+    ]
+   ]
+  },
+  "nota": "Nota: la información se refiere a la duración promedio de resolución, en días naturales, de los asuntos jurisdiccionales egresados de los órganos jurisdiccionales del Consejo de la Judicatura Federal, del 1 de enero al 31 de diciembre. Las cifras reportadas en 0 pueden deberse a que no se registraron asuntos resueltos del tipo de asunto o con el tipo de resolución correspondientes."
+ }
+}

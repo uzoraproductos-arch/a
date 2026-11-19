@@ -166,6 +166,7 @@
     /* ---------- Qué se pregunta ---------- */
     var MET_EDO = [
       /* Los congresos locales (CNPLE 2025): van primero, porque «cuánto gasta el congreso» no es lo que recibe el estado. */
+      ['congi', /(iniciativas?|dictamin[a-z]*|productividad|trabajo legislativo).*(congres|legislatura|diputad[oa]s? local)|(congres|legislatura|diputad[oa]s? local).*(iniciativas?|dictamin[a-z]*|productividad)/],
       ['congp', /(tope|limite|0 70|cero punto setenta).*(congres|legislatura)|(congres|legislatura).*(tope|limite|0 70|cero punto setenta)/],
       ['congx', /(congres|legislatura|diputad[oa]s? local|legislador(es)? local).*(por (cada )?(curul|diputad|legislador)|cada (curul|diputad|legislador))|(cuesta|cuestan|costo|gasta|gastan) (cada|por) (curul|diputad|legislador)[a-z]* local/],
       ['congn', /(cuant[oa]s|numero de|integrantes) .*(diputad[oa]s? locales|legisladores locales)|(congres|legislatura).*(cuant[oa]s (diputad|legislador|integrantes)|integrantes|integra|tamano)/],
@@ -303,6 +304,11 @@
           '<p class="pa-ojo">Ojo: un gobierno estatal hace obra por dos vías. ' + (k === 'inv' ? 'Además de la suya, les pasó <b>' + fmt(e.invt, 'mdp') + '</b> a sus organismos de obra' : 'Además, hizo <b>' + fmt(e.inv, 'mdp') + '</b> de obra directa') +
           (veces > 1 ? ', ' + n(veces, 1) + ' veces su obra directa' : '') + '. Las dos no se suman: con lo que reciben, esos organismos también pagan su nómina y su operación.</p>';
         fu.push(fuenteDe(k === 'inv' ? 'invt' : 'inv', e), { que: 'De cada $100 de su egreso', e: 'derivado', op: 'inversión pública ÷ total de egresos de 2024 (' + fmt(e.egr, 'mdp') + ') × 100' }, LUGAR);
+      } else if (k === 'congi' || k === 'congd') {
+        h = '<p>En el primer año de su legislatura actual, en el Congreso de <b>' + esc(e.n) + '</b> se presentaron <b>' + n(e.congi) + ' iniciativas</b>, según lo que reportó al censo de los congresos estatales del INEGI. ' +
+          'De ellas, <b>' + n(e.congd) + '</b> se dictaminaron en el mismo periodo de sesiones en que se presentaron (el <b>' + n(e.congdp, 1) + ' %</b>), y <b>' + n(e.congia) + '</b> quedaron aprobadas o procedentes.</p>' +
+          '<p class="pa-ojo">Ojo: es el estatus que tenía cada iniciativa al terminar el periodo en que se presentó; la que se dictaminó después no cuenta aquí. Más iniciativas no es mejor trabajo, y los periodos que reportó cada congreso no son los mismos.</p>';
+        fu = [fuenteDe('congi', e), fuenteDe('congd', e), { que: 'Porcentaje de iniciativas dictaminadas', e: 'oficial' }];
       } else if (k === 'cong' || k === 'congx' || k === 'congp' || k === 'congn') {
         h = '<p>En 2024, el Congreso de <b>' + esc(e.n) + '</b> gastó <b>' + fmt(e.cong, 'mdp') + '</b>, según lo que reportó al censo de los congresos estatales del INEGI.' + lugarTxt('cong', e, 'entre los congresos que más gastaron') +
           ' Lo integran <b>' + n(e.congn) + ' personas legisladoras</b>, así que cuesta <b>' + fmt(e.congx, 'mdp') + ' por curul</b>.' + lugarTxt('congx', e, 'entre los que más cuestan por curul') + '</p>' +
@@ -332,7 +338,7 @@
       radar: 'dinero por aclarar de cada $100 revisados', gasto: 'dinero federal en 2026 (Ramos 28 y 33)', r28: 'participaciones', r33: 'aportaciones',
       pc: 'dinero federal por habitante', dep: 'dependencia de la Federación', propia: 'recaudación propia', pob: 'población',
       inv: 'obra directa del gobierno del estado (2024)', invt: 'dinero a sus organismos de obra (2024)',
-      cong: 'gasto de su congreso (2024)', congx: 'gasto de su congreso por curul (2024)', congp: 'gasto de su congreso frente al egreso del estado (2024)', congn: 'personas legisladoras en su congreso',
+      cong: 'gasto de su congreso (2024)', congx: 'gasto de su congreso por curul (2024)', congp: 'gasto de su congreso frente al egreso del estado (2024)', congi: 'iniciativas presentadas en su congreso', congd: 'iniciativas dictaminadas en su congreso', congn: 'personas legisladoras en su congreso',
       pjg: 'gasto de su Poder Judicial (2024)', pjc: 'asuntos concluidos de cada 100 que le entraron a su Poder Judicial (2024)', pja: 'gasto de su Poder Judicial por asunto concluido (2024)',
       pjr: 'causas penales pendientes en su Poder Judicial (cierre de 2024)', pjj: 'personas juzgadoras en su Poder Judicial' };
     var RKM = { ing: 'ingresos', part: 'participaciones', aport: 'aportaciones', fortamun: 'FORTAMUN', fismdf: 'FAIS municipal', predial: 'cobro de predial',
@@ -461,8 +467,11 @@
           (L.de > 1 ? ' Lugar <b>' + L.l + ' de ' + L.de + '</b> en ' + esc(m.en) + '.' : '') + '</p>';
         fu.push(munFu('egr'), { que: 'De cada $100 y lugar', e: 'derivado', op: 'inversión pública ÷ egresos totales × 100; lugar entre los municipios del estado con cifra' });
       } else if (k === 'deu' && mv(m, 'deu') != null) {
-        /* La deuda en su cuenta (anclar_deuda_municipios.py): lo que pagó y pidió en 2024. El saldo es de Hacienda y sigue pendiente. */
-        var dd = MDEU.mun[m.cve], md = function (x) { return grande(x, 1); };
+        /* La deuda en su cuenta (anclar_deuda_municipios.py): lo que pagó y pidió en 2024 (INEGI) y su saldo al cierre de 2025 en el Sistema de Alertas (SHCP). */
+        var dd = MDEU.mun[m.cve], sdaM = MDEU.sda && MDEU.sda.m && MDEU.sda.m[m.cve], md = function (x) { return grande(x, 1); };
+        var txtSda = !sdaM ? 'En el Sistema de Alertas de Hacienda (Cuenta Pública 2025), <b>' + nom + '</b> no figura con financiamientos inscritos en el Registro Público Único (no se mide, LDF art. 43).' :
+          (sdaM[0] > 0 ? 'Al cierre de 2025, en el Sistema de Alertas de Hacienda (Cuenta Pública 2025), <b>' + nom + '</b> registra un saldo de deuda y obligaciones de <b>$' + n(sdaM[1], 1) + ' millones</b> (deuda directa: $' + n(sdaM[2], 1) + ' millones), con semáforo en <b>' + ['', 'endeudamiento sostenible (verde)', 'endeudamiento en observación (amarillo)', 'endeudamiento elevado (rojo)'][sdaM[0]] + '</b> (' + n(sdaM[3], 1) + ' % de sus ingresos de libre disposición).' :
+          'En el Sistema de Alertas de Hacienda (Cuenta Pública 2025), <b>' + nom + '</b> tiene deuda inscrita en el Registro Público Único, pero no entregó información suficiente para su evaluación ' + chip('pendiente', 'deuda-municipios') + '.');
         L = munLugar(m, 'deu');
         h = (mv(m, 'deu') === 0 ?
           '<p>En su cuenta de 2024 al INEGI, <b>' + nom + '</b> reportó <b>$0</b> en pagos de créditos: ni capital ni intereses.</p>' :
@@ -470,11 +479,13 @@
             (L.de > 1 ? ' Lugar <b>' + L.l + ' de ' + L.de + '</b> en ' + esc(m.en) + '.' : '') + '</p>') +
           '<p>' + (dd[5] ? 'Ese año pidió prestados <b>' + md(dd[5]) + '</b>.' : 'Ese año no recibió préstamos.') +
           (dd[4] ? ' Además pagó <b>' + md(dd[4]) + '</b> de adeudos de años anteriores (ADEFAS): lo que quedó a deber, sobre todo a proveedores; no es un crédito.' : '') + '</p>' +
-          '<p class="pa-ojo">Ojo: es lo que pagó y pidió en el año, no lo que debe. Su saldo lo publica Hacienda en el Sistema de Alertas y la plataforma todavía no lo integra ' + chip('pendiente', 'deuda-municipios') + '. ' +
-          'Y el renglón «Financiamiento» del INEGI no es deuda nueva: casi todo es «Déficit», con que se cuadra el ingreso con el egreso.</p>';
-        fu = [{ que: 'Su capítulo de deuda pública y sus empréstitos', e: 'oficial', fu: MFU },
+          '<p>' + txtSda + '</p>' +
+          '<p class="pa-ojo">Ojo: lo del INEGI (2024) es lo que pagó y pidió en el año; lo del Sistema de Alertas de Hacienda (cierre de 2025) mide el saldo inscrito en el Registro Público Único. ' +
+          'El renglón «Financiamiento» del INEGI no es deuda nueva: casi todo es «Déficit», con que se cuadra el ingreso con el egreso.</p>';
+        fu = [{ que: 'Su capítulo de deuda pública y sus empréstitos (2024)', e: 'oficial', fu: MFU },
           { que: 'Lo que pagó por sus créditos y su lugar', e: 'derivado', op: 'amortización + intereses + comisiones y gastos de la deuda; lugar entre los municipios del estado con cifra' },
-          { que: 'Lo que debe al cierre', e: 'pendiente', p: 'deuda-municipios' }];
+          sdaM && sdaM[0] === 0 ? { que: 'Saldo al cierre de 2025 en el Sistema de Alertas (no entregó información)', e: 'pendiente', p: 'deuda-municipios' } :
+            { que: 'Saldo y semáforo al cierre de 2025 en el Sistema de Alertas', e: 'oficial', fu: { tx: (MDEU.sda && MDEU.sda.fuente) || 'SHCP, Sistema de Alertas de los Municipios, Cuenta Pública 2025', url: (MDEU.sda && MDEU.sda.pagina) || 'https://www.disciplinafinanciera.hacienda.gob.mx/es/DISCIPLINA_FINANCIERA/Municipios_2025' } }];
       } else if (k === 'dep') {
         h = '<p>De cada $100 que ingresó <b>' + nom + '</b> en 2024, <b>$' + n(mv(m, 'dep'), 1) + '</b> llegaron de la Federación (participaciones y aportaciones). Lo que cobró por su cuenta fue $' + n(mv(m, 'propios') / ing * 100, 1) + ' de cada $100.</p>';
         fu.push(munFu('propios'));
@@ -486,6 +497,44 @@
       }
       return { html: h + mas, fu: fu, val: k === 'dep' ? { v: mv(m, 'dep'), u: 'pct' } : { v: mv(m, k || 'ing'), u: 'pesos' }, tit: m.n + ', ' + m.en + ': ' + MUN_NOM[k || 'ing'], ci: [{ v: grande(mv(m, k || 'ing'), 1), etq: MUN_NOM[k || 'ing'], e: 'oficial' }] };
     }
+    /* El semáforo del Sistema de Alertas de los municipios (pedido del autor, 17-11-2026: «agrega lo de municipios con deuda
+       elevada»). Lo escribe anclar_deuda_municipios.py desde los libros de Hacienda (Cuenta Pública 2025); aquí solo se ordena.
+       El nivel es la clasificación de Hacienda (LDF, arts. 43 y 44) y el techo, el del art. 46: no es una calificación nuestra. */
+    var SEM_NOM = { 1: 'endeudamiento sostenible', 2: 'endeudamiento en observación', 3: 'endeudamiento elevado' };
+    var SEM_TECHO = { 1: 'hasta el 15 %', 2: 'hasta el 5 %', 3: 'cero' };
+    var MCVE = null;
+    function munSemaforo(t, e) {
+      var S = MDEU && MDEU.sda;
+      if (!S || !S.m) return null;
+      if (!MCVE) { MCVE = {}; MUN.forEach(function (x) { MCVE[x.cve] = x; }); }
+      var R = S.resumen || {}, L = Object.keys(S.m).map(function (c) { return { c: c, v: S.m[c], m: MCVE[c] }; })
+        .filter(function (x) { return x.m && (!e || x.m.a === e.a); });
+      var de = function (s) { return L.filter(function (x) { return x.v[0] === s; }).sort(function (a, b) { return b.v[3] - a.v[3] || (a.c < b.c ? -1 : 1); }); };
+      var rojo = de(3), amar = de(2), sin = de(0), verde = de(1);
+      var li = function (x) {
+        return '<li><b>' + esc(x.m.n) + '</b>' + (e ? '' : ', ' + esc(x.m.en)) + ': debe <b>$' + n(x.v[1], 1) + ' millones</b> en deuda y obligaciones, el <b>' + n(x.v[3], 1) +
+          ' %</b> de sus ingresos de libre disposición</li>';
+      };
+      var donde = e ? ' de <b>' + esc(e.n) + '</b>' : '';
+      var h = '<p>En el <b>Sistema de Alertas de Hacienda</b> (Cuenta Pública 2025), ' + (e ? 'de los municipios' + donde + ' con deuda inscrita, ' : 'de los <b>' + n(R.inscritos) + '</b> municipios con deuda inscrita en el Registro Público Único, ') +
+        '<b>' + n(rojo.length) + '</b> ' + (rojo.length === 1 ? 'está' : 'están') + ' en <b>endeudamiento elevado</b>, <b>' + n(amar.length) + '</b> en observación y <b>' + n(verde.length) + '</b> en sostenible ' + chip('oficial') +
+        '. Otros <b>' + n(sin.length) + '</b> no entregaron información suficiente para medirlos ' + chip('pendiente', 'deuda-municipios') + '.</p>';
+      if (rojo.length) h += '<p>🔴 <b>Endeudamiento elevado</b> (su techo para endeudarse más es <b>cero</b>):</p><ol class="pa-lista">' + rojo.map(li).join('') + '</ol>';
+      if (amar.length) h += '<p>🟡 <b>En observación</b> (solo pueden endeudarse más hasta el 5 % de sus ingresos de libre disposición)' + (amar.length > 10 ? '; los 10 con la deuda más alta frente a sus ingresos' : '') + ':</p><ol class="pa-lista">' + amar.slice(0, 10).map(li).join('') + '</ol>' +
+        (amar.length > 10 ? '<p class="pa-chico">Y ' + n(amar.length - 10) + ' más. Pregúntame por uno con su nombre para ver su ficha.</p>' : '');
+      if (!rojo.length && !amar.length) h += '<p>Ninguno' + donde + ' está en observación ni en endeudamiento elevado.</p>';
+      h += '<p class="pa-ojo">Ojo: el semáforo es la clasificación que hace Hacienda con tres indicadores (la deuda, su pago y las obligaciones de corto plazo, frente a los ingresos); de ella sale cuánto más ' +
+        'puede endeudarse cada municipio: hasta el 15 % de sus ingresos de libre disposición en sostenible, 5 % en observación y cero en elevado. No mide si la deuda se usó bien, ni califica a su gobierno. ' +
+        'Los municipios sin deuda inscrita no se miden.</p>';
+      var fuS = { tx: S.fuente + ' (libros de variables y resultados, sha256 ' + String(S.sha256).slice(0, 12) + '… y ' + String(S.sha256Resultados).slice(0, 12) + '…)', url: S.pagina };
+      return { html: h, tit: 'Municipios con deuda elevada o en observación' + (e ? ' en ' + e.n : ''),
+        fu: [{ que: 'Nivel del semáforo, deuda y obligaciones e indicador de deuda sobre ingresos de libre disposición de cada municipio', e: 'oficial', fu: fuS },
+          { que: 'Techo de financiamiento neto de cada nivel (art. 46) y los tres indicadores (art. 44)', e: 'oficial', fu: { tx: 'Ley de Disciplina Financiera de las Entidades Federativas y los Municipios (última reforma DOF 10-05-2022)', url: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LDFEFM.pdf' } },
+          { que: 'Cuántos hay en cada nivel y el orden', e: 'derivado', op: 'contamos los municipios de cada nivel y los ordenamos por su indicador de deuda sobre ingresos de libre disposición, de mayor a menor' }],
+        ci: rojo.concat(amar.slice(0, 10)).map(function (x) { return { v: '$' + n(x.v[1], 1) + ' millones', etq: x.m.n + ', ' + x.m.en + ' · ' + SEM_NOM[x.v[0]], e: 'oficial' }; }),
+        ir: e ? ['planisferio-' + e.a.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase() + '-deuda.html', 'la deuda de sus municipios en el Planisferio'] : ['planisferio.html?d=deuda', 'la deuda en el Planisferio'],
+        sug: rojo.slice(0, 2).map(function (x) { return '¿Cuánto debe el municipio de ' + x.m.n + '?'; }).concat(['¿Qué es el Sistema de Alertas?']) };
+    }
     function munRanking(k, dir, cuantos, e) {
       k = k || 'ing';
       var l = MUN.filter(function (x) { return (!e || x.a === e.a) && mv(x, k) != null; }).sort(function (a, b) { return dir === 'min' ? mv(a, k) - mv(b, k) : mv(b, k) - mv(a, k); });
@@ -493,7 +542,7 @@
       var h = '<p>' + (dir === 'min' ? 'Los municipios con menos' : 'Los municipios con más') + ' ' + esc(RKM[k]) + (e ? ' en <b>' + esc(e.n) + '</b>' : ' del país') + ':</p><ol class="pa-lista">' +
         top.map(function (x) { return '<li><b>' + esc(x.n) + '</b>' + (e ? '' : ', ' + esc(x.en)) + ': ' + (u ? n(mv(x, k), 1) + ' %' : grande(mv(x, k), 1)) + '</li>'; }).join('') + '</ol>' +
         '<p class="pa-chico">Entre ' + n(l.length) + ' municipios con cifras de 2024.</p>' +
-        (k === 'deu' ? '<p class="pa-ojo">Ojo: es lo que pagaron por sus créditos en el año, no lo que deben. El saldo de cada municipio lo publica Hacienda y sigue ' + chip('pendiente', 'deuda-municipios') + '.</p>' : '');
+        (k === 'deu' ? '<p class="pa-ojo">Ojo: este orden es por lo que pagaron por sus créditos en 2024 (INEGI). El saldo al cierre de 2025 en el Sistema de Alertas de Hacienda suma $36,279.2 millones en 629 municipios medidos (41 con deuda inscrita no entregaron su información a Hacienda ' + chip('pendiente', 'deuda-municipios') + ').</p>' : '');
       return { html: h, fu: [munFu(k), { que: 'Orden', e: 'derivado', op: 'ordenamos los municipios con cifra' }], tit: 'Municipios: ' + MUN_NOM[k],
         ci: top.map(function (x) { return { v: u ? n(mv(x, k), 1) + ' %' : grande(mv(x, k), 1), etq: x.n + ', ' + x.en, e: k === 'dep' ? 'derivado' : 'oficial' }; }) };
     }
@@ -1117,7 +1166,8 @@
     function legResp(t, es, dir, cuantos) {
       if (!LEG) return null;
       if (/cuando se (aprueba|vota|entrega|presenta|discute)|fecha (limite|para)|a mas tardar|calendario/.test(t) && /presupuesto|paquete|ley de ingresos|\bpef\b|\blif\b/.test(t)) return legTema('paquete');
-      if (/(evaluar|evaluo|conocer|investigar|revisar|reviso|checar|checo|en que me fijo|como (escojo|elijo|saber)).*(candidat|aspirante)|(candidat|aspirante)s?.*(confiable|evaluar|puede ser|declaracion)|requisitos para ser (diputad|candidat)|(puede|pueden) ser candidat|deudor(es)? alimentari|topes? de (gasto|campana)/.test(t)) return legTema('candidatos');
+      if (/(evaluar|evaluo|conocer|investigar|revisar|reviso|checar|checo|en que me fijo|como (escojo|elijo|saber)).*(candidat|aspirante)|(candidat|aspirante)s?.*(confiable|evaluar|puede ser|declaracion)|requisitos para ser (diputad|candidat)|(puede|pueden) ser candidat|topes? de (gasto|campana)/.test(t) && !/deudor|alimentari|pension alimenti/.test(t)) return legTema('candidatos');
+      if (/deudor(es|as)? alimentari|deudora? moros|obligaciones alimentarias|\brnoa\b|no deudor alimentario|pension(es)? alimenti\w* .*(candidat|cargo|servidor|eleccion)|(candidat|cargo|servidor|eleccion)\w* .*pension(es)? alimenti/.test(t) && !/^ (que|q) (es|son|significa)\b/.test(' ' + t)) return legTema('deudores');
       if (DINERO.test(t)) return null;
       var cuenta = /cuant[oa]s|numero de|integrantes|integra|tamano|grande|chico|pequeno|\bmas (diputad|legislador)|\bmenos (diputad|legislador)/;
       var local = /congresos? (local|locales|estatal|estatales|de los estados)|diputad[oa]s? locales?|legislaturas? (local|locales|estatal|estatales)|legisladores locales/.test(t);
@@ -1199,17 +1249,6 @@
     function sanTema(k) {
       var x = SAN.t[k];
       return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug };
-    }
-    var SVA = SAN && SAN.sva ? Object.keys(SAN.sva).map(function (k) { return [k, new RegExp(SAN.sva[k])]; }) : [];
-    function svTema(t) {
-      if (!SVA.length || /\b(que|cuales) servicios\b/.test(t)) return null;
-      var cobro = /\b(cuanto (cuesta|cuestan|cobran|cobra|sale|me sale)|precios?|tarifas?|como (se )?cobran?|como cotizo|cotiza\w*)\b/.test(t);
-      if (!cobro && !/servicio|contrat|encarg|que (me )?(entregan|incluye|recibo)|en que consiste|como (lo |la )?(pido|solicito)|quiero (una|un|la|el|que)|necesito (una|un)|ofrecen|venden/.test(t)) return null;
-      var k = null;
-      SVA.forEach(function (x) { if (!k && x[1].test(t)) k = x[0]; });
-      if (k && SAN.t[k]) return k;
-      if (cobro && /\bservicios?\b|auditavision|ustedes|sus talleres/.test(t) && SAN.t.sv_cobro) return 'sv_cobro';
-      return null;
     }
     /* El mapa del dinero y la revisión de un proveedor (02-11-2026): van antes que
        las columnas, porque «no cuadra» o «contratar» también salen en las notas. */
@@ -1309,11 +1348,17 @@
         }
       }
       if (SAN.t.serv_sosten && /\bcomo (se )?(sostiene|financia|mantiene|gana dinero|ganan dinero)\b|\bde que vive|\bquien (los|la|le) (paga|financia|sostiene)|\bmodelo de negocio de auditavision/.test(t)) return sanTema('serv_sosten');
-      if (SAN.t.serv_diligencia && /debida diligencia|antes de contratar|\b(como|quiero|puedo) (reviso|revisar|checo|checar|investigo|investigar|verifico|verificar) (a )?(un|una|mi|mis) (proveedor|proveedores|empresa)\b/.test(t)) return sanTema('serv_diligencia');
-      /* Cada servicio, por su nombre o como lo pide la gente (19-11-2026, asistente_servicios.py): qué es, qué recibes,
-         cómo se cobra (nunca un monto) y su botón para cotizar. «¿Qué servicios ofrecen…?» sigue llevando al catálogo. */
-      var sv = svTema(t);
-      if (sv) return sanTema(sv);
+      if (SAN.t.srv_nomina && /\b(revis\w*|audit\w*|checa\w*|verific\w*) (de )?(la |mi |nuestra |las |mis )?nominas?\b|\b(revisen|auditen|chequen) (la |mi |nuestra )?nomina|\bauditoria de (la )?nomina|\brevision de (la )?nomina/.test(t) && !/\brecibos?\b|\bxml\b|\bcfdi\b/.test(t)) return sanTema('srv_nomina');
+      if (SAN.t.srv_diligencia && /debida diligencia|antes de contratar|\b(como|quiero|puedo) (reviso|revisar|checo|checar|investigo|investigar|verifico|verificar) (a )?(un|una|mi|mis) (proveedor|proveedores|empresa)\b/.test(t)) return sanTema('srv_diligencia');
+      /* Los servicios (18-11-2026, servicios_fichas.py): uno por su nombre, una familia o un perfil, o el catálogo.
+         Solo si la pregunta habla de servicios o de contratarlos; gana el más específico (pri) y, si empatan, la frase más larga. */
+      if (/servicio|cotiz|contrat|encarg|cuanto (cuesta|cobran)|como (se )?cobra|que incluye|que (me )?entregan|en que consiste|ofrecen|me sirve|me conviene|talleres?|capacitacion|revisen|licencia|radiografia|kit de entrega/.test(t)) {
+        var SRV = Object.keys(SAN.t).filter(function (k) { return /^srv_/.test(k) && SAN.t[k].pal; }).map(function (k) {
+          var x = SAN.t[k], m = new RegExp('\\b(' + x.pal + ')').exec(t);
+          return m && (!x.req || new RegExp('\\b(' + x.req + ')').test(t)) ? [k, x.pri || 0, m[0].length] : null;
+        }).filter(Boolean).sort(function (a, b) { return b[1] - a[1] || b[2] - a[2]; });
+        if (SRV.length) return sanTema(SRV[0][0]);
+      }
       return null;
     }
     function sanResp(t) {
@@ -1361,6 +1406,21 @@
       var x = JUD.t[k];
       return { html: (antes || '') + x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug };
     }
+    /* Lo civil, familiar y mercantil que le quedó pendiente (cuadro 16 de los tabulados del censo; null: no lo sabe). */
+    function cfmNoSabe(e) {
+      var c = (JUD.cfm || {})[e.a];
+      return !c || c[0] === null || c[1] === null || (c[2] === null && e.a !== 'CDMX');
+    }
+    function cfmTxt(e) {
+      var c = (JUD.cfm || {})[e.a];
+      if (!c) return '';
+      var nom = ['familiares', 'civiles', 'mercantiles'], partes = c.map(function (v, i) {
+        if (v === null && i === 2 && e.a === 'CDMX') return 'los mercantiles van dentro de los civiles';
+        return v === null ? nom[i] + ': no lo sabe' : '<b>' + n(v) + '</b> ' + nom[i];
+      });
+      return 'En lo civil, familiar y mercantil tenía pendientes de concluir: ' + partes.join(', ') + '.' +
+        (cfmNoSabe(e) ? ' «No lo sabe» es lo que su Poder Judicial le respondió al INEGI.' : '');
+    }
     /* Un poder judicial estatal: lo que entró, lo que concluyó, con cuánto dinero y lo que se le acumula (CNIJF-E 2025). */
     function judEstado(e) {
       var r = (JUD.est || []).filter(function (x) { return x[0] === e.a; })[0];
@@ -1374,7 +1434,7 @@
         (lugar <= 16 ? 'Es el lugar <b>' + lugar + ' de 32</b> entre los que menos concluyen para lo que les llega.' : 'Está entre los que más concluyen: lugar ' + (33 - lugar) + ' de 32.') + '</p>' +
         '<p>Ejerció <b>$' + n(r[1], 1) + ' millones</b>: <b>$' + n(costo) + ' por asunto concluido</b>. Tiene ' + n(r[5]) + ' personas juzgadoras, ' + n(r[3] / r[5]) + ' asuntos concluidos por cada una.</p>' +
         '<p>Al cierre del año le quedaban <b>' + n(r[4]) + ' causas penales pendientes</b> de concluir en el sistema acusatorio (el INEGI cuenta a cada persona procesada). ' +
-        'Cuánto quedó sin resolver en lo civil, familiar y mercantil no lo publica el reporte del censo.</p>' +
+        cfmTxt(e) + '</p>' +
         '<p class="pa-chico">El dinero por asunto no es lo que cuesta un juicio: el presupuesto paga todo el poder judicial. Y son cifras que el propio poder judicial le reporta al INEGI.</p>';
       var fc = { tx: x.fu[0].fu.tx.replace(/, p\. \d+$/, ''), url: x.fu[0].fu.url };
       var fu = [{ que: 'Asuntos ingresados y concluidos de ' + e.n + ' (tabla 23, p. 39)', e: 'oficial', fu: fc },
@@ -1383,7 +1443,9 @@
         { que: 'Concluidos por cada 100 que entraron', e: 'derivado', op: n(r[3]) + ' ÷ ' + n(r[2]) + ' × 100', fu: fc },
         { que: 'Dinero por asunto concluido', e: 'derivado', op: '$' + n(r[1], 1) + ' millones ÷ ' + n(r[3]), fu: fc },
         { que: 'Asuntos concluidos por persona juzgadora', e: 'derivado', op: n(r[3]) + ' ÷ ' + n(r[5]), fu: fc }];
-      fu.push(x.fu[x.fu.length - 1]);
+      var fr = JUD.t.rezago.fu.filter(function (f) { return /cuadro 16\)$/.test(f.que); })[0];
+      if (fr) fu.push({ que: 'Expedientes familiares, civiles y mercantiles pendientes de ' + e.n + ' (cuadro 16 de los tabulados)', e: 'oficial', fu: fr.fu });
+      if (cfmNoSabe(e)) fu.push(JUD.t.rezago.fu[JUD.t.rezago.fu.length - 1]);
       return { html: h, fu: fu, tit: 'Lo que cuesta y lo que resuelve el Poder Judicial de ' + e.n,
         ir: ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-judicial.html', 'su Poder Judicial en el Planisferio'],
         ci: [{ v: n(p100, 1), etq: 'asuntos concluidos por cada 100 que entraron', e: 'derivado' }, { v: '$' + n(costo), etq: 'por asunto concluido', e: 'derivado' },
@@ -1396,13 +1458,14 @@
       if (!JUD || !JLOC.test(t) || GANA.test(t) || es.length > 1) return null;
       if (/federa|\bpjf\b|suprema corte|\bscjn\b|la corte\b|circuito|de distrito|colegiad|eleccion|elegir|elige|eligen|elegid|electo|votar|vota\b|candidat|reforma|electoral|disciplina|fideicomis|retiro|pension|tarda|dura\b|duracion|audiencia/.test(t)) return null;
       if (es.length === 1) return judEstado(es[0]);
+      if (/familiar|civil|mercantil/.test(t) && /rezago|pendiente|acumul|atorad|sin resolver/.test(t)) return judTema('rezago');
       if (!/estatal|estatales|de los estados|locales?\b|cada estado|que estado|cual estado|en que estado/.test(t)) return null;
       var k = /rezago|pendiente|acumul|atorad/.test(t) ? 'pjr' : /(por|cada) (asunto|caso|juicio|expediente)/.test(t) ? 'pja' : /jueces|juezas|juzgador|magistrad/.test(t) ? 'pjj' :
         /concluy|resuelve|resuelven|resolvi|productiv/.test(t) ? 'pjc' : /gasta|gastan|gasto|cuesta|cuestan|costo|ejerci|presupuesto|dinero/.test(t) ? 'pjg' : null;
       if (!k || !(RANK.test(t) || /que estado|cual|quien/.test(t))) return null;
       if (/barat|economic/.test(t)) dir = 'min';
       var r = ranking(k, dir, cuantos, false);
-      r.html += '<p class="pa-ojo">Ojo: ' + (k === 'pjc' ? 'concluir no es lo mismo que no deber: en lo civil, familiar y mercantil el INEGI cuenta como ingresada toda demanda, también la que se desecha, y el rezago de esas materias no lo publica el censo. ' :
+      r.html += '<p class="pa-ojo">Ojo: ' + (k === 'pjc' ? 'concluir no es lo mismo que no deber: en lo civil, familiar y mercantil el INEGI cuenta como ingresada toda demanda, también la que se desecha; lo que quedó pendiente de esas materias se cuenta aparte. ' :
         k === 'pja' ? 'el dinero por asunto no es lo que cuesta un juicio: el presupuesto paga todo el poder judicial, y un asunto concluido puede ser una sentencia o un desechamiento. ' :
         k === 'pjr' ? 'en los estados, el INEGI cuenta a cada persona procesada, no cada expediente: una causa con tres personas cuenta tres. ' : '') +
         'Son cifras que cada poder judicial le reporta de sí mismo al INEGI.</p>';
@@ -1516,6 +1579,21 @@
         ir: ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-salud.html', 'su salud pública en el Planisferio'],
         sug: ['¿Qué estado tiene menos camas del IMSS?', '¿Cuántas consultas dio el IMSS en 2025?', '¿Qué sabemos del IMSS-Bienestar?'] };
     }
+    /* El IMSS-Bienestar de un estado (18-11-2026): sus egresos y cirugías de 2025, de la base de egresos de la DGIS. */
+    function salBien(e) {
+      var x = SAL.t.imss_bienestar, r = SAL.ib[e.a], fu = [x.fu[0], x.fu[x.fu.length - 1]];
+      var tot = Object.keys(SAL.ib).reduce(function (s, k) { return [s[0] + SAL.ib[k][0], s[1] + SAL.ib[k][1]]; }, [0, 0]);
+      var ir = ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-salud.html', 'su salud pública en el Planisferio'];
+      var sug = ['¿Qué sabemos del IMSS-Bienestar?', '¿Cuántos médicos tiene el IMSS en ' + e.n + '?', '¿Qué pasó con el Seguro Popular?'];
+      var ojo = '<p class="pa-chico">Un egreso es una salida del hospital, no una persona. No incluye al programa IMSS-Bienestar que opera el IMSS. Sus consultas y su gasto siguen ' + chip('pendiente', 'salud-imss-bienestar') + ': ningún informe oficial los publica.</p>';
+      if (!r) return { html: '<p>En la base de egresos hospitalarios 2025 de la Secretaría de Salud <b>no hay ningún hospital del IMSS-Bienestar en ' + esc(e.n) + '</b>. La base lo registra en ' + Object.keys(SAL.ib).length + ' entidades.</p>' + ojo,
+        fu: fu, ci: [], tit: 'El IMSS-Bienestar en ' + e.n, ir: ir, sug: sug };
+      fu.splice(1, 0, { que: 'Egresos con cirugía de cada 100 y su parte del país', e: 'derivado', op: n(r[1]) + ' ÷ ' + n(r[0]) + ' × 100; ' + n(r[0]) + ' ÷ ' + n(tot[0]) + ' × 100', fu: x.fu[0].fu });
+      return { html: '<p>En 2025, los hospitales del <b>IMSS-Bienestar en ' + esc(e.n) + '</b> registraron <b>' + n(r[0]) + ' egresos hospitalarios</b> (' + n(100 * r[0] / tot[0], 1) + ' % de los del IMSS-Bienestar en el país). ' +
+        'En <b>' + n(r[1]) + '</b> hubo al menos una cirugía, ' + n(100 * r[1] / r[0], 1) + ' de cada 100 (en el país, ' + n(100 * tot[1] / tot[0], 1) + '), con <b>' + n(r[2]) + ' procedimientos quirúrgicos</b>.</p>' + ojo,
+        fu: fu, ci: [{ v: n(r[0]), etq: 'egresos del IMSS-Bienestar', e: 'oficial' }, { v: n(r[1]), etq: 'egresos con cirugía', e: 'oficial' }],
+        tit: 'El IMSS-Bienestar en ' + e.n, ir: ir, sug: sug };
+    }
     /* El IMSS y el ISSSTE de un estado (03-11-2026, dimensión de salud del Planisferio): «¿cuántos médicos tiene el ISSSTE en Jalisco?».
        asistente.js la pide antes que las columnas, que también hablan del IMSS. */
     function salEdo(t) {
@@ -1530,7 +1608,11 @@
     function salResp(t) {
       if (!SAL) return null;
       if (/seguro popular|insabi|instituto de salud para el bienestar/.test(t)) return salTema('transicion');
-      if (/imss ?bienestar/.test(t)) return salTema('imss_bienestar');
+      if (/imss ?bienestar/.test(t)) {
+        var bEs = estados(t).e;
+        if (bEs.length === 1 && SAL.ib) return salBien(bEs[0]);
+        return salTema('imss_bienestar');
+      }
       var imss = /\bimss\b|seguro social/.test(t), iss = /issste/.test(t);
       var rse = salEdo(t);
       if (rse) return rse;
@@ -1861,6 +1943,13 @@
       var sigue = /^\s*(y|e|ahora|tambien|y que tal|y en|y de|y el|y la|y los|y las|y si)\b/.test(t) || t.trim().split(/\s+/).length <= 3;
 
       var ES = estados(t), es = ES.e, resto = ES.resto;
+      /* El semáforo de la deuda de los municipios (17-11-2026): «¿qué municipios tienen deuda elevada?». */
+      if (!/^\s*(que|q) (es|son|significa)\b/.test(t) && /municipi|alcaldi|ayuntamiento/.test(t) && /deuda|endeud|sistema de alertas|semaforo/.test(t) &&
+          /elevad|\brojo|\balta\b|\balto\b|observacion|amarill|semaforo|alerta|mas endeudad|riesgo|no entregaron|sin (informacion|medir)/.test(t) &&
+          /\b(que|cuales|cuantos|lista|todos)\b|mas endeudad/.test(t)) {
+        var smf = munSemaforo(t, es.length === 1 ? es[0] : null);
+        if (smf) return fin(smf, { tipo: 'mun', met: 'deu' });
+      }
       var porHab = POR_HAB.test(t);
       var dir = /\b(menos|menor|minimo|ultimo|ultimos)\b/.test(t) ? 'min' : 'max';
       var cuantos = (/\btop ?(\d+)|\blos (\d+)|\b(\d+) (estados|municipios|que)/.exec(t) || []).slice(1).filter(Boolean)[0];
@@ -1921,6 +2010,7 @@
 
       /* La pestaña Datos: la lista 69-B, las descargas, los plazos de la ASF y el peso. */
       if (/\b69 ?b\b|\befos\b|lista negra del sat|empresas fantasma|factureras|operaciones (simuladas|inexistentes)/.test(t) && !/\bdonde\b/.test(t) && !/\b(cuanto|monto|montos|dinero|billones|evasion|evadieron)\b/.test(t)) { var r69 = lista69(t); if (r69) return fin(r69, { tipo: '' }); }
+      if (SAN.t.base_al_dia && /\b(cada cuando|actualiza\w*|al dia|novedades?|calendario|que tan reciente|de que fecha)\b/.test(t) && /\b(base|bases|datos|fuentes?|cifras)\b/.test(t) && !es.length) return sanTema('base_al_dia');
       if (/descarg|\bcsv\b|excel|datos abiertos|bases? de datos|bajar (los )?datos/.test(t) && !/pilar/.test(t) && !es.length) return fin(descargas(t), { tipo: '' });
       if (/plazo|cuanto tiempo|cuantos dias/.test(t) && /asf|auditoria|observac|pliego|solvent|respond|aclarar|informe individual/.test(t)) return fin(plazosAsf(), { tipo: '' });
       if (!es.length) { var rp = pesoResp(t, q); if (rp) return fin(rp, { tipo: 'peso' }); }
@@ -2090,10 +2180,18 @@
       }
       if (f.t === 'investigacion') {
         var cv = (f.ci || []).slice(0, 4);
-        h = '<p>Es una de las investigaciones de <b>Auditoría en imágenes</b>: <b>' + esc(f.tit) + '</b>.</p><p>' + esc(corto(f.txt, 360)) + '</p>' +
-          (cv.length ? '<ul class="pa-lista">' + cv.map(function (c) { return '<li><b>' + esc(c.v) + '</b> · ' + esc(c.etq) + '</li>'; }).join('') + '</ul>' : '') +
-          '<p>Toca <b>«Saber más»</b> y te llevo a su página: el dinero paso a paso, quién interviene y qué falta saber, con cada cifra y su fuente.' +
-          (f.exp ? ' Los documentos de la Auditoría Superior están en <a href="' + esc(f.exp) + '">su expediente</a>.' : '') + '</p>';
+        /* El caso en cuatro casillas (16-11-2026): qué pasó, cuánto dinero, quién
+           interviene y qué falta saber, como la lectura breve de su página. */
+        var cas = function (ico, tit, cuerpo) { return cuerpo ? '<div class="pa-cinco-f"><dt><span aria-hidden="true">' + ico + '</span> ' + tit + '</dt><dd>' + cuerpo + '</dd></div>' : ''; };
+        h = '<p>Es una de las investigaciones de <b>Auditoría en imágenes</b>: <b>' + esc(f.tit) + '</b>.</p>' +
+          '<dl class="pa-cinco">' +
+          cas('🔎', 'Qué pasó', esc(corto(f.txt, 360))) +
+          cas('💰', 'Cuánto dinero', cv.length ? '<ul class="pa-lista">' + cv.map(function (c) { return '<li><b>' + esc(c.v) + '</b> · ' + esc(c.etq) + ' ' + chip(c.e, c.p) + '</li>'; }).join('') + '</ul>' : '') +
+          cas('🏛️', 'Quién interviene', f.qn ? esc(corto(f.qn, 260)) : '') +
+          cas('❓', 'Qué falta saber', f.fal ? esc(corto(f.fal, 300)) : '') +
+          '</dl>' +
+          '<p>Toca <b>«Saber más»</b> y te llevo a su página: el dinero paso a paso, con cada cifra y su fuente.' +
+          (f.exp ? ' Los documentos de la Auditoría Superior están en <a href="' + esc(f.exp) + '">su caso de la ASF</a>.' : '') + '</p>';
         cv.forEach(function (c) { fu.push({ que: c.etq, e: c.e, p: c.p, fu: (f.fu || [])[0] }); });
         return { html: h + deDonde(fu), ficha: f, ir: f.ir, sug: [] };
       }
@@ -2163,6 +2261,8 @@
       mapa: function (q) { var r = mapaResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'san' }); },
       promesa: function (q) { var r = promResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'prom' }); },
       ambiente: function (q) { var r = amgResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'amg' }); },
+      /* El estado y el municipio que nombra una pregunta (para el Registro Publico Unico, que vive en asistente.js). */
+      lugar: function (q) { var t = plano(q), ES = estados(t), m = /municipi|alcaldi|ayuntamiento/.test(t) ? municipio(ES.resto, true, ES.e) : null; return { e: ES.e, m: m && m.m }; },
       deFicha: deFicha, deDonde: deDonde, olvida: function () { ctx = {}; }, ctx: function () { return ctx; }
 
     };

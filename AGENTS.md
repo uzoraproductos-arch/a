@@ -74,7 +74,7 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
 copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
 **Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras
 Ágora, Garantías y Donaciones), **Noticiero** (antes «Noticias») y
-**Servicios** (`servicios.html`, que fue módulo del Modo Inspector). Desde el 11-11-2026 va en cuatro familias (`LINEAS` de `apartados.py`), cada servicio con su forma de cobro en `COBRO` (**nunca un monto sin pilotos**), y sus argumentos y cuentas viven en `servicios-por-que.html`: **un servicio nuevo necesita su renglón en `COBRO`**, o la generación se detiene. **En el chat, cada servicio tiene su respuesta** (19-11-2026, `herramientas/asistente_servicios.py`, temas `sv_<id>` y `sv_cobro` de `D.san`): qué es, qué recibes, cómo se cobra y con qué empezar gratis, con su botón «Cotiza este servicio» (`?servicio=<id>`); el texto se lee de `SERVICIOS`, `COBRO`, `LINEAS` y `PERFILES`, nunca se copia. **Un servicio nuevo necesita además su renglón en `ALIAS` (cómo lo pide la gente) y en `GRATIS` (con qué empezar hoy)**, o la generación se detiene. «¿Qué servicios ofrecen…?» sigue llevando al tablero. **Los Servicios operan para quien tiene un código de acceso vigente** (decisión del autor, 19-11-2026): lo manda `SERVICIOS_OPERAN` de `apartados.py`, que cambia todos los avisos a la vez, y `servicios.js` no envía la solicitud sin pase vigente; **el servidor lo revisa también** (`SERVICIOS_CON_CODIGO` de `supabase/functions/recibir-formulario`, con `pase_hasta`): si los dos no dicen lo mismo, la generación se detiene. Cada modo del chat suma su capa a la respuesta de un servicio (`svCapa()` de `asistente.js`): **ninguna capa da montos ni dice que un servicio mide lo que no mide**. Las familias y los perfiles se ven por pestañas (`data-sv-tabs` de `servicios.js`; **un perfil nuevo necesita su nombre corto en `PERFILES_CORTO`**), y el argumento de fraude y lavado vive en `RIESGOS` (`#riesgo`): **nunca dice que la plataforma evita el fraude ni que cumple por el cliente**. Desde el 12-11-2026 `servicios.html` es un **tablero de tarjetas**: cada sección vive en su página (`SV_PAGINAS` de `apartados.py`) y las ligas viejas a sus anclas se mandan solas allá (`SV_ANCLAS`); **una sección nueva de Servicios es una tarjeta con su página, no un desglose en el tablero**. Ningún
+**Servicios** (`servicios.html`, que fue módulo del Modo Inspector). Desde el 11-11-2026 va en cuatro familias (`LINEAS` de `apartados.py`), cada servicio con su forma de cobro en `COBRO` (**nunca un monto sin pilotos**), y sus argumentos y cuentas viven en `servicios-por-que.html`: **un servicio nuevo necesita su renglón en `COBRO`**, o la generación se detiene. **Cada servicio tiene su página** (`servicio-<id>.html`, 18-11-2026) **y su ficha en `FICHAS` de `herramientas/servicios_fichas.py`**: lo que la plataforma ya hace gratis, sus preguntas al Auditor, su fundamento en la Biblioteca del Erario (términos del Diccionario y fichas de Referencias, tal como están en la base) y en la Enciclopedia, y sus palabras para el chat (`srv_<id>`). **Un servicio nuevo sin ficha, o una ficha con una liga, un término o una referencia que no existan, detienen la generación**; **una herramienta nueva de la plataforma entra a la ficha del servicio que la aprovecha** (etiqueta «Nuevo»), y así llega al tablero y al chat. **Los Servicios operan para quien tiene un código de acceso vigente** (decisión del autor, 19-11-2026): lo manda `SERVICIOS_OPERAN` de `apartados.py`, que cambia todos los avisos a la vez, y `servicios.js` no envía la solicitud sin pase vigente; **el servidor lo revisa también** (`SERVICIOS_CON_CODIGO` de `supabase/functions/recibir-formulario`, con `pase_hasta`): si los dos no dicen lo mismo, la generación se detiene. En el chat, la respuesta de cada servicio dice quién puede pedirlo y cada modo le suma su capa (`svCapa()` de `asistente.js`, con lo que agrega `herramientas/asistente_servicios.py`): **ninguna capa da montos ni dice que un servicio mide lo que no mide**. Las familias y los perfiles se ven por pestañas (`data-sv-tabs` de `servicios.js`; **un perfil nuevo necesita su nombre corto en `PERFILES_CORTO`**), y el argumento de fraude y lavado vive en `RIESGOS` (`#riesgo`): **nunca dice que la plataforma evita el fraude ni que cumple por el cliente**. Desde el 12-11-2026 `servicios.html` es un **tablero de tarjetas**: cada sección vive en su página (`SV_PAGINAS` de `apartados.py`) y las ligas viejas a sus anclas se mandan solas allá (`SV_ANCLAS`); **una sección nueva de Servicios es una tarjeta con su página, no un desglose en el tablero**. **La cotización se llena con opciones a un toque** (pedido del autor, 16-11-2026): el servicio, el ámbito, el periodo, el plazo y el uso son botones (`.sv-ops` de `servicios.js`), y cada servicio trae ejemplos de tema y pregunta que se tocan y se cambian (`SV_EJEMPLOS` de `apartados.py`: **un servicio nuevo necesita ahí sus ejemplos**, sin cifras ni nombres, o la generación se detiene); todo campo sigue siendo libre. Ningún
 archivo cambió de nombre. Las páginas de Números, Datos y Aprende marcan
 Comunidad (`ENCICLO_MARCAN`) y sus migas empiezan «Comunidad › Enciclopedia».
 Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
@@ -102,10 +102,12 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   porque en el Planisferio no corre `numeros.js`).
   **El mapa es lo principal** (rediseño del autor, 03-11-2026): la página es una sola
   sección, sin «En esta página»; tras la entrada vienen las dimensiones y su mapa.
-  Los contadores, «Cuánto dinero es» y «Los 16 orígenes» van integrados debajo del
-  mapa **solo en la dimensión financiera** (`.pl-solo-dim[data-dim]`, que
-  `planisferio.js` esconde en las demás), y las 32 entidades abren en la ventana
-  lateral con el botón «📍 Las 32 entidades».
+  Los contadores, «Cuánto dinero es» y «Los 16 orígenes» fueron integrados debajo del
+  mapa en la dimensión financiera hasta el 16-11-2026; **desde ese día viven en su página**,
+  `planisferio-dinero.html` (`DINERO` de `planisferio.py`; pedido del autor: «que quede como una
+  tarjeta… que nos dirija a una nueva página»), y en el Planisferio queda su tarjeta (`.pl-dinero`),
+  arriba de «Juega con el mapa». **Lo financiero nuevo va a esa página, no bajo el mapa.** Las 32
+  entidades abren en la ventana lateral con el botón «📍 Las 32 entidades».
   **El mapa es el protagonista** (reestructura del autor, 04-11-2026: «lo que le llama al
   usuario a jugar con él»): encabezado con la foto del paisaje y la persona en sombra
   (`planisferio-paisaje.webp`, en su sentido original, con su versión `-movil`), «cómo se juega» en
@@ -119,6 +121,12 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   calificación** y se esconde si hay empate en el corte; la dirección guarda la vista (`?d=&l=&e=`); hay buscador de
   estado, y el pie lleva a Servicios (`#plPuente`: una franja de venta con su botón, y el servicio también en la ficha
   de la entidad elegida, `.pl-ficha-serv`; **nunca un monto**). El encabezado es bajo para que el mapa suba. Nada de eso agrega cifras.
+- **La ficha va esquematizada y las lentes, por tema** (reestructura del autor, 16-11-2026: «muestra mucha información
+  que no es tan fácil de comprender»). Al tocar una entidad, la ficha abre con la cifra de la lente y su lugar entre las 32
+  (`esquema()` y `tira()` de `planisferio.js`), sigue con cada tema en un acordeón (abre solo el de la lente) y cierra con sus
+  puertas; **una fila que es lente (`dt[data-l]`) se toca y el mapa cambia a ella**. Las dimensiones con muchas lentes las
+  ordenan por tema (`TEMAS_LENTES` de `planisferio.py`): **una lente nueva de esas dimensiones necesita ahí su tema**, o la
+  generación se detiene. La advertencia general de una dimensión lleva `pl-ficha-gen` para quedar siempre a la vista. Nada de eso agrega cifras.
 - **El Planisferio es la matriz de los mapas** (pedido del autor, 04-11-2026: «las cuestiones que
   tienen que ver con los mapas quedan vinculadas con el planisferio… va a ser nuestra matriz, que se
   vincula y se alimenta al mismo tiempo con la información de la Enciclopedia»). Cada lente del mapa de
@@ -173,6 +181,13 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   del Sistema de Alertas y sigue pendiente), los ADEFAS no se dicen como crédito y
   el capítulo «Financiamiento» del INEGI no se dice como deuda nueva: casi todo es
   «Déficit», su renglón de cuadre.
+  **A quién le debe** (17-11-2026, pedido del autor: «las deudas»): el Registro Público Único de Hacienda, crédito por
+  crédito (`herramientas/anclar_rpu.py <registro_deuda.xlsx>` → `assets/auditor/data/deuda-rpu.js`, con huella; el servidor pide el
+  intermedio YR1 en `--cacert`). Va en la página de deuda de cada portal (cuarto piso) y en el chat (`deudaRpu()` de `asistente.js`:
+  «¿a quién le debe Nuevo León?», «¿cuánto le deben a Banobras?»). **Cada crédito es oficial y las sumas, derivado; su saldo (corte
+  trimestral) no se suma ni se compara con el del Sistema de Alertas; en una emisión bursátil el acreedor anotado es el fiduciario, una APP
+  no es préstamo de banco y «refinanciamiento sin autorización» no quiere decir ilegal (LDF, art. 23).** Un acreedor que no sea
+  institución ni empresa detiene el script (§2 bis).
 - **La inversión, tercera dimensión pintada** (03-11-2026). Lee `invPub`,
   `invInfra` y `egr2024` de `DB.estados` (los escribe
   `herramientas/anclar_egresos_entidades.py` desde la estadística estatal del
@@ -295,6 +310,66 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   entidad elegida) y «planisferio» cuenta como pedir un mapa (`TIPOS_REC` de
   `asistente.js`). Una dimensión nueva que se pinte necesita su pregunta en
   `preguntas_auditor.json`.
+
+### 0 quinquies. Todo pasa por el Auditor
+
+**Decisión del autor, 19-11-2026, y es el pilar de la plataforma:** «el chat se alimenta y
+vincula de todas las pestañas y tarjetas y subtarjetas dentro de ellas, pero entre pestañas no se
+vinculan: todo es a través del Auditor», y «las aplicaciones del chat se convierten en servicios».
+La Enciclopedia es el respaldo de la base de datos, ordenada en tarjetas; **la puerta es el chat**:
+respuesta rápida, «Generar dictamen», «Saber más» (la página a fondo) y el servicio que toca.
+
+- **La plataforma es una estrella.** El Auditor (`herramienta-inspector-pregunta.html` y el
+  dictamen) es el centro; Planisferio, Comunidad (con la Enciclopedia), Noticiero y Servicios son
+  puntas. Dentro de una pestaña las páginas se ligan entre sí; **una liga a otra pestaña pasa por el
+  chat**: `herramienta-inspector-pregunta.html?q=<pregunta>&modo=<modo>&abre=<página>`
+  (`servicios_fichas.por_auditor()`). El chat contesta con esa página o abre la aplicación en su
+  marco (`abre()` de `asistente.js`), y el dictamen lleva el mismo `&abre=`.
+- **Las aplicaciones del chat son servicios.** Si una respuesta lleva a una página que un servicio
+  aprovecha (su `hace` en `FICHAS` de `servicios_fichas.py`), abajo sale «Esto también lo hacemos
+  como servicio», con su página y su cotización (`servicioHtml()` de `asistente.js`, que lee `srv`
+  de la base: `mapa_chat()`). **Nunca un monto.**
+- **Las cuatro pestañas ya están mudadas** (19-11-2026: Servicios, y el mismo día, a pedido del
+  autor, «todas las demás pestañas al chat»). `pagina()` de `apartados.py` pasa cada página de
+  Planisferio, Comunidad, Noticiero y Servicios por `por_auditor_html()`: una liga nueva a otra
+  pestaña se muda sola, con el modo del servicio o el de la página a la que va (`modos.py`). Las
+  ligas que arma el navegador (la ficha del Planisferio) las muda al tocarlas `volver-auditor.js`,
+  con la misma regla. La pestaña de cada página sale de su nombre (`pestana_de()`); si una página
+  marca otra, va en `EXCEPCIONES` (y en `EXC` de `volver-auditor.js`) o la revisión se detiene.
+- **Ni una liga directa entre pestañas.** `herramientas/vinculos_auditor.py` (corre en `revision.py`)
+  las cuenta, sin la cabecera, el menú, las migas, el cajón «Cuéntanos lo que viste» ni el pie: **si
+  aparece una, la revisión se detiene**. La portada (`index.html`) no es pestaña y liga a todas.
+- **Cada liga `abre=` del sitio se prueba** en `prueba_auditor.py` (587 al 19-11-2026): la página debe
+  existir y el chat debe abrirla. Una página sin ficha propia (un mapa, un tablero) se abre igual, sin cifras.
+- **La Enciclopedia es el espejo de la base de datos** (el autor, 19-11-2026): de ahí toma el
+  Auditor y lo desarrolla. **Lo que el Planisferio enseña abre en páginas del propio Planisferio**
+  («que se abran en su propia página automatizada… no dentro de la enciclopedia»): sus portales y
+  sus temas (`TEMAS` de `planisferio.py`) y, para lo que antes mandaba a la Enciclopedia (las fuentes,
+  el estado de cuenta y de resultados de cada estado, el Contexto dimensional, las leyes en sus tres
+  niveles, los Datos de cada dimensión), **sus páginas propias** `planisferio-ficha-<página>.html`
+  (`herramientas/planisferio_espejo.py`). `a_espejo()` cambia cada liga del Planisferio a la Comunidad
+  por la de su página propia y `generar()` la escribe al final, desde la página ya generada de la
+  Enciclopedia: **la misma página, nunca una copia a mano ni una cifra distinta**, marcada Planisferio,
+  con sus migas, el aviso «Lo ves desde el Planisferio» y su canónica en la original (`sitemap.py` no la
+  lista y el chat no la indexa: contesta con la original). Dentro, a otra página propia va directo y a
+  otra pestaña, por el Auditor. **Nadie la edita**: una nueva sale sola cuando el Planisferio liga a otra
+  página de la Enciclopedia, y la que ya no se pide se borra. `planisferio.js` liga a ellas por su nombre
+  (si liga a una que ninguna página pide, la generación se detiene), y `volver-auditor.js` deja en su
+  página propia la liga que una aplicación reflejada arma a sí misma.
+- **El índice general cuelga del Auditor** (el autor, 19-11-2026: «se va a integrar nuestro índice
+  general… y todo esto queda vinculado con nuestro auditor»). `indice.html` marca la pestaña Auditor
+  (con el Registro de pendientes y la base al día, que cuelgan de él: `EXCEPCIONES`), lleva a todas
+  las pestañas, Planisferio y Servicios incluidos, y el chat lo abre con «el índice», «¿qué tiene la
+  plataforma?» o «mapa del sitio» (`INDICE_RE` de `asistente.js`) y con su botón «🗂️ Índice general».
+- **La página automatizada de tus respuestas** (el autor, 19-11-2026: «la página… automatizada de las respuestas o de los servicios a los
+  problemas, peticiones, solicitudes de lo que hayan hecho los usuarios»). `mis-respuestas.html` (pestaña Auditor; `herramientas/mis_respuestas.py`
+  y `mis-respuestas.js`). El chat anota cada pregunta que contesta **solo en el navegador** (`av-caso`, hasta 60; `caso()` de `asistente.js`):
+  la pregunta, la fecha, el modo, la respuesta en corto (el texto que ya dio), «Saber más», el enlace de su dictamen y los servicios de `srv`
+  para su página; lo que no supo contestar queda como solicitud y se pide como investigación (servicio `expediente`). La página lo junta con
+  los dictámenes (`av-dics`) y Mi Auditavisión (`av-mia`), ordena los servicios de más a menos preguntas que los piden y llena la cotización
+  con esas preguntas (`?servicio=&tema=&pregunta=`). **Nada sale del navegador, nunca un monto, no es un documento oficial**; se imprime, se
+  descarga en texto y se borra ahí. El chat la abre con «mis respuestas» o «mi caso» (`MIS_RE`) y con su botón «📋 Tus respuestas». **Un
+  dato nuevo que el chat guarde en el navegador necesita su renglón en `_AV_NAVEGADOR` del aviso de privacidad.**
 
 ### 0 bis. Una sola plataforma: la Enciclopedia antigua se retiró
 
@@ -722,6 +797,16 @@ mudando a su página; no se agregan desgloses nuevos.
   aludida dijo en su propio documento: se publica en sus palabras, con su liga,
   y no se califica. La página es la función `noticias(base, ref)` de
   `apartados.py`.
+- **El Noticiero es un tablero y sus páginas van por pestañas** (reestructura del autor, 16-11-2026: «teniendo en
+  cuenta las novedades de los servicios… y el objetivo… del modo Periodista»). `noticias-relevantes.html` trae una
+  tarjeta por sección, en tres grupos (Lee, Verifica, Sigue; `TARJETA` y `tablero()` de `noticias.py`: **una sección
+  nueva necesita ahí su línea de tarjeta**, o la generación se detiene), «Lo último, verificado» (`ultimas()`) y el
+  puente. En las tres páginas **la barra son pestañas: se ve una sección a la vez** (`irA()` de `noticias.js`); las
+  direcciones no cambian, y un ancla de adentro (`#col-<id>`, `#propon`, `#ciego-<id>`, `#promesa-<id>`) abre su
+  sección. Los puntos ciegos y lo que falta de cada caso abierto van plegados. **El puente** (`PUENTE` y `puente()`)
+  cierra cada página con el modo Periodista (preguntas que el chat ya contesta) y los servicios que vienen al caso,
+  leídos de `SERVICIOS` y `COBRO`: **nunca un monto**. Cada nota trae «📰 Pregúntale al Periodista». El cabezal del
+  periódico va solo en el diario. Se reordenó; no se quitó contenido.
 - **Noticias es un periódico: «Auditavisión Noticias»** (pedido del autor,
   28-10-2026: «una nueva reestructuración tanto de diseño como de la
   información… partiendo de una metodología u objetivo»). **Objetivo: que
@@ -817,6 +902,12 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   nunca es prueba de parentesco**: un vínculo entra a la plataforma solo si lo
   dice un documento oficial, y a los familiares que no son servidores públicos
   no se les nombra.
+  **Los deudores alimentarios y las candidaturas** (17-11-2026, pedido del autor «por el momento electoral»): tema `deudores` de
+  `asistente_legislativo.py`, cotejado con el art. 38, fr. VII de la Constitución y los arts. 135 Bis a 135 Septies de la LGDNNA.
+  **El Registro Nacional de Obligaciones Alimentarias no se copia ni se publica un solo nombre** (son particulares y sus acreedores,
+  menores; decisión del autor, que además descartó cobrar por consultarlo): se explica, se da su liga y se cita solo lo que una
+  autoridad electoral haga público en un documento. El **RUG** (garantías mobiliarias, Código de Comercio) va en el glosario: **no es
+  una lista de fianzas ni de sancionados**, y su consulta pide cuenta de usuario.
   Las agresiones a la prensa, por `herramientas/periodistas.py` (29-10-2026;
   `periodismo-en-riesgo.html`, del modo Periodista), con el informe mensual del
   Mecanismo de Protección (Gobernación); **los homicidios y las sentencias son de
@@ -847,6 +938,35 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   la página vuelve a contestarla con la misma base, así que no se puede
   fabricar un dictamen con cifras ajenas. El dictamen dice que no es un
   documento oficial ni un peritaje con validez ante autoridad.
+- **Los Expedientes de investigación** (pedido del autor, 16-11-2026: «grandes investigaciones que se irán dando seguimiento de forma
+  autónoma, automatizada e independiente, alimentándose de nuestra base de datos y al día», y «que el usuario también nos puede solicitar»).
+  Son la quinta tarjeta de la Biblioteca del Erario Público, **con el nombre «Expedientes de control interno»** (decisión del autor, 17-11-2026; los archivos no cambian de nombre): `expedientes-investigacion.html` y un `expediente-<id>.html` por cada
+  investigación de Auditoría en imágenes. Los arma `herramientas/expedientes_inv.py` y **nadie los escribe a mano ni traen cifras propias**:
+  cruzan por las frases de `TEMA_BOT` la lectura breve, las notas del Noticiero y la memoria de promesas (la bitácora), los «Lo que sigue» y
+  el Registro de pendientes. «En el radar» lee en el navegador la bandeja de la Mesa de redacción: **solo titular, medio, fecha y liga,
+  «sin verificar»; un titular nunca entra como dato**. **Una investigación nueva tiene su expediente sola**; «abierto» quiere decir que hay
+  pendientes o un «lo que sigue», nunca una acusación. Se piden con el servicio `expediente` (se cotiza, **nunca un monto**) o proponiendo un
+  caso. `expedientes.html` sigue siendo los casos de la ASF: «expediente de Segalmex» abre esa aplicación; «expediente del Tren Maya», el de
+  la Biblioteca (`expInvResp()` de `asistente.js`).
+  **Son el archivero digital** (17-11-2026): las investigaciones propias y las pedidas pasan por las mismas etapas (`ETAPAS`); un pedido aceptado va en
+  `SOLICITADOS`, **sin decir quién lo pidió y sin cifras** (las cifras entran por su módulo), y la lista no se rellena con solicitudes inventadas.
+  **El expediente es una gran investigación hecha de dictámenes**: lista los dictámenes de su caso y lleva su sello, con folio y huella SHA-256 de su
+  contenido (`_huella()`), que cambia cuando cambia una cifra, un documento, la bitácora o un pendiente. No es un documento oficial, y lo dice.
+  **El registro por modo vive en Supabase** (`preguntas_bot.modo` y `modo_toca`, vista `preguntas_por_modo`): solo de las preguntas sin respuesta.
+  **Todo queda vinculado al expediente** (17-11-2026): cada investigación de Auditoría en imágenes lleva a su expediente (`expediente_puerta()` de
+  `auditorias.py`); una nota o columna entra a la bitácora si nombra el caso (título, `temas` o su clave), si ella misma cita la investigación con su
+  liga (`auditoria-<id>.html`) o si está en `VINCULOS` (`_cita()`): **el cuerpo no se lee por palabras, porque mencionar de paso no es pertenecer al caso**.
+  Los dictámenes que el lector genera en el chat y tocan una investigación se listan en su expediente, «Tus dictámenes de este caso», **guardados solo en su
+  navegador** (`av-dics`, `guardaDic()` de `asistente.js`): nunca van a un servidor ni entran a la huella.
+  **Se arman cada día** (17-11-2026, flujo «Expedientes al día», `.github/workflows/expedientes.yml`, 8:53 de la Ciudad de México y a mano): vuelve a correr
+  `apartados.py` y publica solo si algo cambió; su reporte (`resumen()`) cuenta los titulares por cotejar de cada caso, que **nunca entran solos**. Por eso
+  **la generación debe dar lo mismo dos veces seguidas**: un orden que salga de un `set` se desempata (`key=lambda x: (-len(x), x)`), o el flujo publicaría ruido.
+- **La respuesta va esquematizada y los modos remiten** (pedido del autor, 16-11-2026). Cada respuesta abre con su cabecera (`cabResp()`: tipo de
+  ficha, modo al que pertenece y chips), pliega el detalle largo (`esquema()`), trae la tarjeta de su expediente (`expInvHtml()`) y guarda
+  «Explóralo a fondo» y «En la Enciclopedia» en paneles (`panel()`). **Si la pregunta le toca a otro modo, la respuesta lo dice arriba y ofrece
+  pasar** (`modoToca()` y `remiteHtml()`: por las palabras de `MODO_PAL` o por el modo con que `modos.py` clasificó la página); la contesta igual,
+  con los mismos datos. El dictamen abre con «De un vistazo», trae las cifras en tabla y el capítulo «Expediente relacionado». **Nada de esto
+  agrega cifras ni entra a la huella.**
 - **Se ve y se usa como el mejor producto** (rediseño del 24-10-2026): un
   solo logo (el de la cabecera del chat; las burbujas no llevan avatar), cada
   respuesta en cuatro capas (texto, panel de fuente, acciones, «Sigue
@@ -968,6 +1088,23 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   contrato abierto el importe suele ser el máximo, no lo pagado. **Las personas
   físicas no se publican** (su RFC es un dato personal), y tener contratos no
   es una irregularidad: así se dice en cada respuesta.
+  **El padrón de contrapartes** (18-11-2026, pedido del autor: «que nuestra base de datos quede muy bien integrada… para el compliance de prevención de
+  lavado de dinero»). Una sola ficha por RFC (`assets/auditor/js/padron.js`, que leen la aplicación «Revisa a tu contraparte»,
+  `herramienta-inspector-padron.html` de `herramientas/insp_padron.py`, y el chat, `padronResp()` de `asistente.js`) con las listas del SAT del art. 69,
+  17-H Bis y 69-B Bis (`herramientas/anclar_listas.py` → `assets/auditor/data/padron/`, con huella y cuadre; flujo semanal «Base al día»), la 69-B,
+  el Directorio de Sancionados, la OFAC y la ONU (`sanciones-int.js`) y ComprasMX. **No trae datos propios**: lee los archivos que ya escriben esos
+  scripts. **Las personas físicas no se publican** (decisión del autor, 18-11-2026): las listas del SAT las guardan por la huella SHA-256 de su RFC
+  (sal `av-padron:`), y de ellas solo se dice si el RFC coincide, nunca el nombre. **Una coincidencia es una señal para revisar, nunca una acusación
+  ni una calificación**; coincidir en un nombre no es ser la misma persona, y lo que no es público (la Lista de Personas Bloqueadas de la UIF) se dice
+  con su nombre. **Una lista nueva entra en `anclar_listas.py`, con sus columnas fijas y su cuadre**, o no entra. **El lote, la cadena de terceros y la matriz** (18-11-2026, `insp-padron-lote.js`, sección `#lote`): hasta 2,000 RFC de un CSV, un TXT o lo pegado de Excel, o las facturas XML (emisor, receptor y los RFC «a cuenta de terceros» del CFDI 4.0, con el papel de cada uno), en una matriz de una fila por RFC y una columna por lista que se descarga en CSV, **todo en el navegador**; **la columna «Revisar» ordena por la señal más seria, nunca suma ni califica**.
+  **La nómina** (18-11-2026, pedido del autor: «calcular la nómina… y tener las distinciones entre trabajadores del gobierno, ISSSTE, y trabajadores para empresas, IMSS»). La Calculadora Cívica (`cc_ticket.py`, `cc-ticket.js`) pregunta quién paga (`&pt=issste`) y suma «Tu nómina completa»: lo que pone el patrón y el costo de la plaza; las tasas viven en `calculadora_civica.imss_patronal` e `issste` de la base, cada una con su artículo y la huella de la ley. **La cesantía y vejez patronal sube cada 1 de enero hasta 2030**: en enero se cambia `cesantia_2026` por el renglón del año (decreto DOF 16-12-2020, Segundo transitorio). El Lector de facturas revisa recibos de nómina (`revisar_nomina()` de `lector_cfdi.py` y `revisarNomina()` de `insp-factura.js`, gemelos); **el ISR del recibo es una cuenta aproximada nuestra**, y una diferencia chica es solo nota. **Nunca se muestra el nombre, la CURP ni el número de seguridad social de quien trabaja**, y la señal del art. 127 es una comparación de cifras, no una acusación. **Revisamos la nómina; no la calculamos ni la timbramos por nadie.**
+  **Los grupos y sus filiales** (17-11-2026, `herramientas/empresas_grupos.py`, sección `#grupos` y `grupoEmp()` del chat; pedido del
+  autor: «le pregunté al chat por Grupo Prodi y no salió información»). Muchos grupos no contratan con su nombre: `GRUPOS` dice con qué
+  empresas (por RFC) aparece cada uno en ComprasMX. **Ninguna cifra se escribe ahí**; **el vínculo entre el grupo y la filial es `pendiente`
+  mientras solo lo diga la prensa**; lo que falta cotejar va sin montos y con el portal donde debe estar; **contrato, concesión y permiso
+  no se confunden** (`FIGURAS`: ComprasMX trae contratos, una concesión se acredita con su título), y **nunca se dice el partido de un
+  gobierno**. Una empresa por su nombre, sin la palabra «contratos», se busca en ComprasMX (`empresaNombre()` y `quizaEmpresa()`); si no
+  está, se dice, y no se contesta con lo que se le parece. **Un grupo nuevo necesita su renglón en `GRUPOS`** y su pregunta de prueba.
   **Las señales de fraccionamiento** (04-11-2026, `herramientas/fraccionamiento.py`, sección
   `#fraccionamiento` y `fraccCmx()` del chat): adjudicaciones directas por monto de la misma unidad,
   empresa y partida que en 90 días rebasan el tope del Anexo 9 del PEF (LAASSP art. 55; Reglamento
@@ -988,8 +1125,12 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   `por_proveedor()` de `lector_cfdi.py`, con las mismas reglas). **El Vigía 69-B** (`herramientas/vigia_69b.py`,
   flujo semanal) compara la lista del SAT contra `sat-69b.js` por RFC y deja en
   `docs/sat69b/bandeja.json` altas, cambios de situación, bajas y cambios de razón
-  social; tampoco escribe en la base, y a las personas físicas las deja con el RFC
-  recortado y sin nombre. **Revisa tu estado de resultados** (05-11-2026,
+  social, con las personas físicas con el RFC recortado y sin nombre. **Desde el 18-11-2026
+  se actualiza sola** (decisión del autor): si el SAT publicó otro archivo, el flujo «Base al día» corre
+  `actualizar_69b.py` con ese mismo archivo, sube el sello y publica; se detiene si cambian
+  las columnas o si la lista se encoge más de 10 %. **`sat-69b.js` conserva los nombres
+  tal como los publica el SAT** (decisión del autor, 18-11-2026: la 69-B es una lista que la
+  ley manda publicar en el DOF), a diferencia de las otras listas del padrón. **Revisa tu estado de resultados** (05-11-2026,
   `insp_resultados.py`, `insp-resultados.js` y su gemelo `lector_resultados.py`, con
   la prueba en `revision.py`) lee un CSV o lo pegado de Excel **en el navegador**, sin
   subirlo, y lo revisa en seis dimensiones (cuadre, estructura, rentabilidad, tendencia
@@ -1000,6 +1141,17 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   proveedores» contra la 69-B y «Mis revisiones», **guardado solo en el navegador**
   (localStorage `av-mia`; los dos lectores escriben ahí con `miaGuardar()`, solo el
   resumen y nunca el archivo; las personas físicas no entran a la lista).
+- **La base al día** (18-11-2026, pedido del autor: «que nuestra base de datos quede bien integrada… únicamente para
+  alimentarla o actualizarla con las novedades»). **Cada fuente de la base tiene su renglón en `FUENTES` de
+  `herramientas/fuentes.py`**: quién la publica, cada cuándo, cómo entra (🤖 sola, 🔔 avisa o ✋ a mano), su script, su
+  archivo y, si es a mano, la fecha `revisar` en que conviene ir a buscar la siguiente; se lee en `base-al-dia.html` y
+  `revision.py` lo prueba. **Una fuente nueva no está terminada hasta que tiene ahí su renglón.** Lo que se actualiza solo
+  corre en un flujo semanal, «Base al día» (`.github/workflows/base-al-dia.yml`, miércoles 9:41: la 69-B, las listas del
+  padrón y el Directorio de sancionados): cada fuente por su lado, y la que no contesta o no cuadra se deshace sin tocar a las
+  demás; al final escribe la agenda (`docs/base/agenda.json`) con las fuentes a mano que ya toca revisar. **Al integrar una
+  fuente a mano se cambian su `corte` y su `revisar`.** La página no depende del día (la regenera cada mañana «Expedientes al
+  día»): el «ya toca» solo vive en la agenda. **GitHub programa los flujos desde `main`**: un flujo nuevo o cambiado solo corre
+  solo cuando su archivo llega ahí, con permiso del autor.
 - **Verifica:** ante «¿es cierto que…?», «dicen que…» o la liga de una nota,
   compara contra el documento oficial con el mismo criterio de «Contrasta
   una nota» (`assets/auditor/js/verificador.js`, compartido por los dos).
@@ -1021,7 +1173,12 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   de una lista editorial de prensa. **Ninguna cifra fiscal vive en la base.**
   **Los códigos de acceso** (29-10-2026) abren la versión de prueba: `herramientas/acceso.py` arma el canje
   y el panel, y su candado (`acceso.js`, en el `<head>` de todas las páginas) solo se enciende con
-  `CANDADO = True`; una página que deba abrir sin código va en `LIBRES`. Todo cambio a
+  `CANDADO = True`; una página que deba abrir sin código va en `LIBRES`.
+  **El control interno** (18-11-2026): el panel (`administracion-codigos.html`) va en pestañas (`HOJAS` de `acceso.py`): tablero de uso con
+  gráficas, códigos (con Renovar), solicitudes, bitácora y mi acceso. La bitácora la escriben disparadores de la base: **una acción nueva de la
+  administración sobre los códigos queda anotada sola; una tabla nueva de la administración necesita su disparador**. La medición de uso
+  (`acceso.js`, `uso_eventos`) **nunca guarda la IP, lo que se escribe ni las preguntas al chat**, respeta «No rastrear» y GPC, no mide a la
+  administración y se apaga en el aviso de privacidad (`#uso`): **si algún día mide algo más, el aviso cambia antes**. Todo cambio a
   `supabase/` pasa `python3 herramientas/prueba_base_datos.py` y, si toca
   las funciones, `deno check` y `deno test supabase/pruebas/`.
 

@@ -331,7 +331,9 @@ def _paginas():
         n = os.path.basename(p)
         # Las notas «Al momento» con página propia (para buscadores, 31-10-2026) ya
         # están en el chat como columnas: su página no compite con su ficha.
-        if n in (ARCHIVO, DICTAMEN) or n.startswith('noticias-al-momento-'):
+        # Las páginas propias del Planisferio son reflejos de la Enciclopedia
+        # (planisferio_espejo.py): el chat contesta con la original.
+        if n in (ARCHIVO, DICTAMEN) or n.startswith('noticias-al-momento-') or n.startswith('planisferio-ficha-'):
             continue
         s = open(p, encoding='utf-8').read()
         if 'http-equiv="refresh"' in s or 'name="robots" content="noindex' in s:
@@ -453,6 +455,12 @@ def _charla(d):
                   'sin': [a for a, c in cg.items() if c['p'] is None], 'pend': 'entidades-' + '-'.join(a for a, c in cg.items() if c['p'] is None).lower()},
         'congn': {'n': 'personas legisladoras de su congreso', 'u': 'ent', 'e': 'oficial', 'suma': 1,
                   'fu': fu('INEGI, Censo Nacional de Poderes Legislativos Estatales 2025, tabla 8', 'ref-inegi-cnple2025')},
+        # Lo que trabajó cada congreso local (12-11-2026): tabla 20 del mismo censo.
+        'congi': {'n': 'iniciativas presentadas en su congreso (primer año de su legislatura)', 'u': 'ent', 'e': 'oficial', 'suma': 1,
+                  'fu': fu(al.CNPLE_INI['tx'], 'ref-inegi-cnple2025')},
+        'congd': {'n': 'iniciativas que su congreso dictaminó en el mismo periodo en que se presentaron', 'u': 'ent', 'e': 'derivado', 'suma': 1,
+                  'fu': fu(al.CNPLE_INI['tx'], 'ref-inegi-cnple2025'),
+                  'op': 'aprobadas o procedentes + en dictamen + desechadas o improcedentes, como las cuenta el INEGI'},
         # Los 32 poderes judiciales estatales (03-11-2026, dimensión judicial
         # del Planisferio): INEGI, CNIJF-E 2025, primera instancia.
         'pjg': {'n': 'lo que ejerció su Poder Judicial en 2024', 'u': 'mdp', 'e': 'oficial', 'suma': 1, 'peor': 'max', 'fu': fj('gráfica 7, p. 14')},
@@ -474,7 +482,7 @@ def _charla(d):
              'asf': e.get('asfMontoObservado'), 'aud': e.get('asfAuditorias'), 'radar': round(r['v'][0], 2) if r else None,
              'gasto': e['gasto'], 'r28': e['ramo28'], 'r33': e['ramo33'], 'pc': e['pc'], 'pob': e.get('pobPersonas'),
              'inv': e.get('invPub'), 'invt': e.get('invInfra'), 'egr': e.get('egr2024'),
-             'cong': cg[e['abbr']]['g'], 'congx': cg[e['abbr']]['x'], 'congp': cg[e['abbr']]['p'], 'congn': cg[e['abbr']]['n'],
+             'cong': cg[e['abbr']]['g'], 'congx': cg[e['abbr']]['x'], 'congp': cg[e['abbr']]['p'], 'congn': cg[e['abbr']]['n'], 'congi': cg[e['abbr']]['ini'], 'congd': cg[e['abbr']]['idic'], 'congdp': cg[e['abbr']]['idp'], 'congia': cg[e['abbr']]['iapr'],
              'pjg': pj[e['abbr']]['g'], 'pjc': pj[e['abbr']]['c100'], 'pja': pj[e['abbr']]['xa'], 'pjr': pj[e['abbr']]['p'], 'pjj': pj[e['abbr']]['j']}
         for k in ('dep', 'propia'):
             x[k] = None if e['abbr'] in sin else e[{'dep': 'dep', 'propia': 'recaudacionPropia'}[k]]
@@ -550,15 +558,22 @@ def _charla(d):
     return {'nota': nota, 'met': met, 'edo': edo, 'cargos': cargos, 'smin': smin, 'adm': adm, 'admet': admet, 'expide': EXPIDE,
             'mapa': 'numeros-mapa-del-gasto-federalizado.html', 'num': num, 'datos': asistente_datos.datos(d, num, D),
             'leg': asistente_legislativo.legislativo(), 'jud': asistente_judicial.judicial(d),
-            # Los servicios, uno por uno (19-11-2026, asistente_servicios.py): sus temas sv_* y cómo los pide la gente (sva).
-            'san': dict(informe_sancion.bot(dict(__import__('territorio_modulos').temas_bot(d), **__import__('asistente_servicios').temas())),
-                        sva=__import__('asistente_servicios').alias()), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d), 'apu': __import__('administracion_publica').chat(d), 'soc': __import__('dimension_social').chat(d),
+            # Los servicios (servicios_fichas.py) con quién puede pedirlos y los datos de la capa de cada modo (asistente_servicios.py, 19-11-2026).
+            'san': informe_sancion.bot(__import__('asistente_servicios').enriquece(__import__('territorio_modulos').temas_bot(d))), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d), 'apu': __import__('administracion_publica').chat(d), 'soc': __import__('dimension_social').chat(d),
             # Nepotismo y cargos publicos (28-10-2026): la tabla de la calculadora.
             'nep': nepotismo.bot(),
             # La memoria de promesas (01-11-2026): promesa → Presupuesto → Cuenta Pública → ASF.
             'prom': __import__('promesas').datos(),
             # Agenda del erario de Noticias (28-10-2026): las fechas que fija la ley.
-            'agenda': __import__('noticias').AGENDA}
+            'agenda': __import__('noticias').AGENDA,
+            # Las aplicaciones del chat son servicios (19-11-2026): qué servicio aprovecha cada página.
+            'srv': _servicios_chat()}
+
+
+def _servicios_chat():
+    import apartados
+    import servicios_fichas
+    return servicios_fichas.mapa_chat(apartados.SERVICIOS, apartados.COBRO)
 
 
 def _inspector():
@@ -706,6 +721,8 @@ def escribir_base():
     dat['mo'] = asistente_megaobras.datos(d, dat['datos']['peso'])
     # Los personajes de Noticias relevantes y las búsquedas en internet.
     dat['per'] = asistente_personajes.datos()
+    # Los grupos empresariales y sus filiales (17-11-2026).
+    dat['gru'] = __import__('empresas_grupos').datos()
     # Las fuentes de cada aplicacion, para su dictamen cuando se usa en el chat.
     refs = {r['id']: r for r in d['referencias_legales']}
     for k in ('insp', 'mo', 'amb', 'calc'):
@@ -1008,6 +1025,8 @@ def pagina(cuenta, canal='', herramientas=()):
             <div class="pa-control" role="group" aria-label="Controles de la plática">
               <button type="button" class="pa-ctl" id="paRegresa" disabled><span aria-hidden="true">↩️</span> Regresar</button>
               <button type="button" class="pa-ctl" id="paLimpia" disabled><span aria-hidden="true">🗑️</span> Limpiar</button>
+              <a class="pa-ctl" href="mis-respuestas.html" title="Lo que le preguntaste y los servicios que vienen a tu caso"><span aria-hidden="true">📋</span> Tus respuestas</a>
+              <a class="pa-ctl" href="indice.html" title="Todo lo que sabe el Auditor, en una página"><span aria-hidden="true">🗂️</span> Índice general</a>
               <span class="pa-control-nota">Tu plática se guarda mientras navegas por la plataforma.</span>
             </div>
           </div>

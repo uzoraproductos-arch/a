@@ -125,13 +125,32 @@ def guardar(b):
 
 
 def bajar(url):
-    """(bytes, tipo, http) o lanza la excepción del intento."""
+    """(bytes, tipo, http) o lanza la excepción del intento. Si urllib falla
+    por cadena intermedia de certificado (AIA) o huella TLS, intenta con curl
+    del sistema (con verificación SSL activa, nunca -k)."""
     req = urllib.request.Request(url, headers={'User-Agent': AGENTE, 'Accept': '*/*'})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        datos = r.read(LIMITE + 1)
-        if len(datos) > LIMITE:
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            datos = r.read(LIMITE + 1)
+            if len(datos) > LIMITE:
+                raise ValueError('pasa de %d MB; se omite' % (LIMITE // 1048576))
+            return datos, (r.headers.get('Content-Type') or '').split(';')[0].strip(), r.status
+    except Exception as err_u:
+        import shutil
+        import subprocess
+        curl_bin = shutil.which('curl.exe') or shutil.which('curl')
+        if not curl_bin:
+            raise err_u
+        ua_nav = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
+        p = subprocess.run([curl_bin, '-sSLf', '-A', ua_nav, '--max-time', '60',
+                            '-w', '\n__BV_META__:%{http_code}|%{content_type}', url], capture_output=True)
+        if p.returncode != 0 or b'\n__BV_META__:' not in p.stdout:
+            raise err_u
+        cuerpo, meta = p.stdout.rsplit(b'\n__BV_META__:', 1)
+        if len(cuerpo) > LIMITE:
             raise ValueError('pasa de %d MB; se omite' % (LIMITE // 1048576))
-        return datos, (r.headers.get('Content-Type') or '').split(';')[0].strip(), r.status
+        cod, _, ctype = meta.decode('ascii', errors='ignore').strip().partition('|')
+        return cuerpo, ctype.split(';')[0].strip(), int(cod or 200)
 
 
 def pedir_archivo(url):

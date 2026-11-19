@@ -52,8 +52,11 @@ PASOS = [
     ('🔎', 'Los leemos aquí mismo', 'En tu navegador: el UUID del timbre, la fecha, el emisor, el receptor, los conceptos, los impuestos y el total.'),
     ('🧮', 'Rehacemos la cuenta', 'Subtotal menos descuento, más impuestos trasladados, menos retenidos: ¿da el total? ¿Los conceptos suman el subtotal?'),
     ('⚖️', 'La revisamos contra la ley', 'Régimen fiscal contra el tipo de persona, método y forma de pago, complemento de pago y retención de IVA a personas físicas, cada regla con su artículo.'),
+    ('💼', 'Si es un recibo de nómina, lo revisamos', 'Con el complemento de nómina 1.2: que cuadre por dentro, el ISR contra la tarifa del artículo 96, el subsidio para el empleo, '
+     'el salario base de cotización y, si es nómina pública, el tope del artículo 127. Sin mostrar el nombre ni la CURP de quien trabaja.'),
     ('🧾', 'La cruzamos con la lista 69-B', 'Si el emisor aparece, te decimos lo que publicó el SAT y, aparte, las señales que salen de comparar fechas.'),
-    ('🏢', 'Las juntamos por proveedor', 'Con dos o más (hasta 500 a la vez), un resumen por emisor: cuántas facturas, cuánto suman, cuántas no cuadran y si está en la lista 69-B.'),
+    ('🏢', 'Las juntamos por proveedor', 'Con dos o más (hasta 500 a la vez), un resumen por emisor: cuántas facturas, cuánto suman, cuántas no cuadran y si está en la lista 69-B. Para cruzarlos con todas las listas (SAT, Sancionados, OFAC y ONU) y ver por cuenta de quién facturan, súbelas a '
+     '<a href="herramienta-inspector-padron.html#lote">Revisa a tu contraparte</a>.'),
 ]
 
 
@@ -71,7 +74,8 @@ def construir(base, ref):
     sit = {k: {'t': (nom if k != 'S' else 'Sentencia favorable'), 'c': cl, 'i': ico, 'corto': corto}
            for k, nom, cl, ico, corto, _txt in insp_efos.SITUACIONES}
     datos = {'corte': m['corte'], 'total': m['total'], 'sit': sit, 'cff': CFF, 'reglas': lector_cfdi.REGLAS,
-             'reg': {k: [n, f, mo] for k, (n, f, mo) in lector_cfdi.REGIMENES.items()}}
+             'reg': {k: [n, f, mo] for k, (n, f, mo) in lector_cfdi.REGIMENES.items()},
+             'nom': lector_cfdi.parametros_nomina(base)}
     pasos = ''.join('<li class="cf-paso"><span class="cf-paso-ico" aria-hidden="true">%s</span><b>%s</b><p>%s</p></li>' % p for p in PASOS)
     ley = ''.join('<li><b>%s.</b> %s</li>' % (html.escape(p), html.escape(t)) for p, t in LEY)
     return '''
@@ -95,7 +99,8 @@ def construir(base, ref):
         <textarea id="cfTexto" class="ef-area" rows="6" spellcheck="false" placeholder="&lt;cfdi:Comprobante …"></textarea>
         <button type="button" class="ef-btn" id="cfLeerTexto">Leer este XML</button>
       </details>
-      <p><button type="button" class="ef-btn ef-btn-sec" id="cfEjemplo">🧪 Probar con una factura ficticia</button></p>
+      <p><button type="button" class="ef-btn ef-btn-sec" id="cfEjemplo">🧪 Probar con una factura ficticia</button>
+        <button type="button" class="ef-btn ef-btn-sec" id="cfEjemploNom">💼 Probar con un recibo de nómina ficticio</button></p>
     </div>
 
     <p class="ef-estado" id="cfEstado" role="status">La lista 69-B (1.9 MB) se descarga cuando eliges tu primera factura.</p>
@@ -135,7 +140,8 @@ def construir(base, ref):
       <li><b>No dice si la factura está vigente o cancelada.</b> Eso solo lo sabe el SAT: consúltalo con el UUID en su verificador de comprobantes fiscales digitales.</li>
       <li><b>No valida el sello ni el certificado.</b> Leemos lo que el XML dice; un archivo alterado a mano se leería igual. La estructura del CFDI la fija el %(anexo)s (%(xsd)s).</li>
       <li><b>No sabe qué se compró.</b> La retención de IVA depende de si fue un servicio profesional, una comisión, un arrendamiento o una venta, y el XML no siempre lo dice: por eso la señal dice «si es…».</li>
-      <li><b>No revisa todas las reglas del SAT.</b> Revisa cuatro, cada una con su artículo: régimen y tipo de persona, método y forma de pago, complemento de pago y retención de IVA. Lo demás lo valida el SAT al timbrar.</li>
+      <li><b>No revisa todas las reglas del SAT.</b> En facturas revisa cuatro, cada una con su artículo: régimen y tipo de persona, método y forma de pago, complemento de pago y retención de IVA; en recibos de nómina, el cuadre, el ISR, el subsidio, el salario base de cotización y el artículo 127. Lo demás lo valida el SAT al timbrar.</li>
+      <li><b>En la nómina, el ISR es una cuenta aproximada nuestra:</b> lleva lo gravado del periodo al mes (× 30.4 ÷ días pagados) y aplica la tarifa mensual. El patrón puede ajustar con el cálculo anual o con pagos de otro periodo, por eso una diferencia chica es solo una nota. Lo que pone el patrón al IMSS o al ISSSTE no viene en el recibo: sale en la Calculadora Cívica.</li>
       <li><b>No califica al receptor</b> ni dice si la operación existió: eso se acredita ante el SAT con documentos (art. 69-B, octavo párrafo).</li>
       <li>La lista tiene corte al %(corte)s. Alguien que el SAT publicó después no aparece todavía.</li>
       <li>Si el emisor o el receptor es persona física, su RFC sale tapado y su nombre no se muestra: es un dato personal.</li>

@@ -248,18 +248,20 @@
       if (!uso || uso.id !== k.id) return '';
       var filas = uso.filas;
       var cuerpo = !filas ? '<p>Cargando el registro…</p>' : !filas.length ? '<p>Nadie lo ha canjeado todavía.</p>' :
-        '<table class="ac-tabla ac-uso"><thead><tr><th>Quién</th><th>Lo canjeó</th><th>Lo lleva usando</th><th>Le queda</th><th>Última vez</th><th>Días que entró</th></tr></thead><tbody>' +
+        '<table class="ac-tabla ac-uso"><thead><tr><th>Quién</th><th>Lo canjeó</th><th>Lo lleva usando</th><th>Le queda</th><th>Última vez</th><th>Días que entró</th><th>Minutos de uso</th><th>Páginas vistas</th></tr></thead><tbody>' +
         filas.map(function (u) {
           var ahora = Date.now(), ini = Date.parse(u.canjeado), fin = u.hasta ? Date.parse(u.hasta) : ini;
           var quien = u.nombre || u.correo ? esc(u.nombre || '') + (u.correo ? ' <span class="ac-ayuda">' + esc(u.correo) + '</span>' : '') : 'Persona ' + u.persona;
           var queda = fin > ahora ? (esIlimitado(u.hasta) ? 'Ilimitado' : lapso(fin - ahora)) : 'Se le acabó el ' + fecha(u.hasta);
-          return '<tr><td>' + quien + '</td><td>' + fecha(u.canjeado) + '</td><td>' + lapso(Math.min(ahora, fin) - ini) + '</td>' +
-            '<td>' + queda + '</td><td>' + (u.ultimo ? new Date(u.ultimo + 'T12:00:00').toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) : '—') + '</td><td>' + u.dias + '</td></tr>';
+          return '<tr><td>' + quien + (u.renovado ? ' <span class="ac-chip ac-en_uso">renovado</span>' : '') + '</td><td>' + fecha(u.canjeado) + '</td><td>' + lapso(Math.min(ahora, fin) - ini) + '</td>' +
+            '<td>' + queda + '</td><td>' + (u.ultimo ? new Date(u.ultimo + 'T12:00:00').toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) : '—') + '</td><td>' + u.dias + '</td>' +
+            '<td>' + num(u.minutos) + '</td><td>' + num(u.vistas) + '</td></tr>';
         }).join('') + '</tbody></table>';
-      return '<tr class="ac-editor"><td colspan="6"><p class="ac-ancho"><b>Uso del ' + esc(bonito(k.codigo)) + '</b> · ' + k.usos + ' de ' + k.usos_max + ' personas</p>' + cuerpo +
-        '<p class="ac-ayuda">«Días que entró» cuenta los días distintos en que abrió la plataforma (se anota una vez al día, solo la fecha). ' +
-        'No se guardan horas, páginas ni nada que diga quién es; el nombre y el correo solo salen si el código vino de una solicitud.</p>' +
-        '<p class="ac-acciones">' + boton('Cerrar', 'data-cerraruso="1"') + '</p></td></tr>';
+      return '<tr class="ac-editor"><td colspan="6"><div class="ac-tabla-caja"><p class="ac-ancho"><b>Uso del ' + esc(bonito(k.codigo)) + '</b> · ' + k.usos + ' de ' + k.usos_max + ' personas</p>' + cuerpo +
+        '<p class="ac-ayuda">«Días que entró» cuenta los días distintos en que abrió la plataforma. «Minutos de uso» suma el tiempo con una página a la vista y «Páginas vistas», ' +
+        'las que abrió (de lo medido desde el 18-11-2026, últimos 12 meses; no cuenta si su navegador pide no ser medido). Nada dice quién es: ' +
+        'el nombre y el correo solo salen si el código vino de una solicitud.</p>' +
+        '<p class="ac-acciones">' + boton('Cerrar', 'data-cerraruso="1"') + '</p></div></td></tr>';
     }
     function fechaCampo(iso) {
       if (!iso) return '';
@@ -278,6 +280,21 @@
         '<label>Canjear antes del <input class="ac-campo" name="antes" type="date" value="' + fechaCampo(k.canjear_antes) + '"></label>' +
         '<label class="ac-ancho">Nota <input class="ac-campo" name="nota" type="text" maxlength="120" value="' + esc(k.nota || '') + '"></label>' +
         '<p class="ac-acciones ac-ancho"><button class="sz-btn sz-btn-of" type="submit">Guardar</button>' +
+        boton('Cancelar', 'data-cancelar="1"') + '</p></form></td></tr>';
+    }
+    // Renovar (18-11-2026): devuelve la vida al código y, si quieres, más tiempo a quien ya lo canjeó.
+    var renovando = null;
+    function renovador(k) {
+      var ops = '<option value="">Sin tiempo extra</option>' + Object.keys(DUR).map(function (d) { return '<option value="' + d + '"' + (d === k.duracion ? ' selected' : '') + '>' + DUR[d] + '</option>'; }).join('');
+      var antes = k.canjear_antes && Date.parse(k.canjear_antes) <= Date.now();
+      return '<tr class="ac-editor"><td colspan="6"><form class="ac-fila" data-renovar="' + k.id + '">' +
+        '<p class="ac-ancho"><b>Renovar ' + esc(bonito(k.codigo)) + '</b>' + (k.revocado ? ' · está revocado: al renovarlo vuelve a abrir.' : '') +
+        (k.archivado ? ' · vuelve a Activos.' : '') + (antes ? ' · su fecha para canjear ya pasó: si no pones otra, queda sin fecha.' : '') + '</p>' +
+        '<label>Tiempo extra para quien ya lo canjeó (' + k.usos + ') <select class="ac-campo" name="lapso">' + ops + '</select></label>' +
+        '<label>Personas de más <input class="ac-campo" name="mas" type="number" min="0" max="10000" value="' + (k.usos >= k.usos_max ? 1 : 0) + '"></label>' +
+        '<label>Nueva fecha para canjear <input class="ac-campo" name="antes" type="date"></label>' +
+        '<p class="ac-ayuda ac-ancho">El tiempo extra se suma al final de lo que le quede a cada persona, o desde hoy si ya se le había acabado. Queda anotado en la Bitácora.</p>' +
+        '<p class="ac-acciones ac-ancho"><button class="sz-btn sz-btn-of" type="submit">Renovar</button>' +
         boton('Cancelar', 'data-cancelar="1"') + '</p></form></td></tr>';
     }
     function pinta() {
@@ -302,13 +319,14 @@
         var acc = k.semanal ? boton('Uso' + (k.usos ? ' (' + k.usos + ')' : ''), 'data-accion="uso" data-id="' + k.id + '"') + '<span class="ac-ayuda">Código de la semana: se cambia arriba.</span>'
           : boton('Uso' + (k.usos ? ' (' + k.usos + ')' : ''), 'data-accion="uso" data-id="' + k.id + '"') +
             boton('Editar', 'data-accion="editar" data-id="' + k.id + '"') +
+            boton('Renovar', 'data-accion="renovar" data-id="' + k.id + '"', k.estado === 'en_uso' || k.estado === 'sin_usar' ? 'ac-claro' : 'sz-btn-of') +
             boton(k.revocado ? 'Devolver' : 'Revocar', 'data-accion="revocar" data-id="' + k.id + '" data-revocar="' + (k.revocado ? '0' : '1') + '"') +
             boton(k.archivado ? 'Desarchivar' : 'Archivar', 'data-accion="archivar" data-id="' + k.id + '" data-archivar="' + (k.archivado ? '0' : '1') + '"') +
             boton('Eliminar', 'data-accion="eliminar" data-id="' + k.id + '"', 'ac-peligro');
         return '<tr' + (k.semanal ? ' class="ac-fila-semana"' : '') + '><td><button class="ac-cod" type="button" data-copia="' + esc(bonito(k.codigo)) + '" title="Copiar">' + esc(bonito(k.codigo)) + '</button></td>' +
           '<td>' + esc(duracion(k.duracion)) + '</td><td>' + k.usos + ' de ' + k.usos_max + '</td>' +
           '<td><span class="ac-chip ac-' + k.estado + '">' + esc(est) + '</span></td><td>' + esc(k.nota || '') + '</td>' +
-          '<td><div class="ac-acciones">' + acc + '</div></td></tr>' + (editando === k.id ? editor(k) : '') + registro(k);
+          '<td><div class="ac-acciones">' + acc + '</div></td></tr>' + (editando === k.id ? editor(k) : '') + (renovando === k.id ? renovador(k) : '') + registro(k);
       }).join('') || '<tr><td colspan="6">' + (q ? 'Ningún código coincide con la búsqueda.' : vista === 'archivados' ? 'No hay códigos archivados.' : 'Todavía no hay códigos.') + '</td></tr>';
     }
     function limpiaBusca(t) { return String(t || '').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim(); }
@@ -341,7 +359,7 @@
     }
     function carga() {
       return Promise.all([
-        rpc('codigos_lista').then(function (j) { lista = j || []; pinta(); }),
+        rpc('codigos_lista').then(function (j) { lista = j || []; pinta(); estados(); }),
         rpc('solicitudes_lista').then(function (j) { sols = j || []; pintaSol(); })
       ]);
     }
@@ -420,6 +438,200 @@
         return maestroInfo();
       }).catch(function (x) { est.textContent = (x && x.message) ? 'No se guardó: ' + x.message + '.' : 'No se pudo guardar. Intenta de nuevo.'; });
     });
+
+    // ---------------------------------------------------------------------
+    // Las pestañas del panel (18-11-2026). La elegida se recuerda en la pestaña
+    // del navegador y en la dirección (#tablero, #codigos…).
+    var HOJAS = ['tablero', 'codigos', 'solicitudes', 'bitacora', 'acceso'], cargado = {};
+    function hoja(id, foco) {
+      if (HOJAS.indexOf(id) < 0) id = 'tablero';
+      raiz.querySelectorAll('[data-hoja]').forEach(function (b) {
+        var si = b.dataset.hoja === id;
+        b.setAttribute('aria-selected', String(si)); b.tabIndex = si ? 0 : -1;
+        $('ac-hoja-' + b.dataset.hoja).hidden = !si;
+        if (si && foco) b.focus();
+      });
+      try { sessionStorage.setItem('av-admin-hoja', id); } catch (e) {}
+      if (location.hash.slice(1) !== id) history.replaceState(null, '', '#' + id);
+      if (s && !admin.hidden) { if (id === 'tablero' && !cargado.tablero) tablero(); if (id === 'bitacora' && !cargado.bitacora) bitacora(); }
+    }
+    raiz.querySelectorAll('[data-hoja]').forEach(function (b, i, todas) {
+      b.addEventListener('click', function () { hoja(b.dataset.hoja); });
+      b.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return;
+        e.preventDefault(); hoja(todas[(i + d + todas.length) % todas.length].dataset.hoja, true);
+      });
+    });
+    function hojaInicial() {
+      var h0 = location.hash.slice(1); if (HOJAS.indexOf(h0) >= 0) return h0;
+      try { return sessionStorage.getItem('av-admin-hoja') || 'tablero'; } catch (e) { return 'tablero'; }
+    }
+
+    // ---------------------------------------------------------------------
+    // El tablero de uso: lo cuenta la base (uso_tablero) y aquí se dibuja.
+    function num(n) { return (+n || 0).toLocaleString('es-MX'); }
+    var periodo = 30, tab = null;
+    function barras(filas, et, val, extra, vacio) {
+      if (!filas || !filas.length) return '<p class="ac-ayuda">' + (vacio || 'Todavía no hay datos en este periodo.') + '</p>';
+      var max = Math.max.apply(null, filas.map(function (f) { return +f[val] || 0; })) || 1;
+      return '<ol class="ac-barras">' + filas.map(function (f) {
+        var v = +f[val] || 0;
+        return '<li><span class="ac-barra-et" title="' + esc(et(f)) + '">' + esc(et(f)) + '</span>' +
+          '<span class="ac-barra-pista" aria-hidden="true"><i style="width:' + Math.max(1, Math.round(v / max * 100)) + '%"></i></span>' +
+          '<b>' + num(v) + '</b>' + (extra ? '<small>' + esc(extra(f)) + '</small>' : '') + '</li>';
+      }).join('') + '</ol>';
+    }
+    function columnas(filas, val, etiqueta, titulo, resumen) {
+      if (!filas || !filas.length) return '<p class="ac-ayuda">Todavía no hay datos en este periodo.</p>';
+      var n = filas.length, max = Math.max.apply(null, filas.map(function (f) { return +f[val] || 0; })) || 1;
+      var w = 100 / n, h = 120;
+      var rects = filas.map(function (f, i) {
+        var v = +f[val] || 0, alto = v ? Math.max(1.5, v / max * (h - 6)) : 0;
+        return '<rect x="' + (i * w + w * 0.12).toFixed(2) + '" y="' + (h - alto).toFixed(2) + '" width="' + (w * 0.76).toFixed(2) + '" height="' + alto.toFixed(2) + '">' +
+          '<title>' + esc(titulo(f)) + '</title></rect>';
+      }).join('');
+      return '<svg class="ac-cols" viewBox="0 0 100 ' + h + '" preserveAspectRatio="none" role="img" aria-label="' + esc(resumen) + '">' +
+        '<line x1="0" y1="' + h + '" x2="100" y2="' + h + '"></line>' + rects + '</svg>' +
+        '<p class="ac-cols-eje"><span>' + esc(etiqueta(filas[0])) + '</span><span>Máximo: ' + num(max) + '</span><span>' + esc(etiqueta(filas[n - 1])) + '</span></p>';
+    }
+    function diaCorto(d) { return new Date(d + 'T12:00:00').toLocaleDateString('es-MX', { day: 'numeric', month: 'short' }); }
+    function graf(id, html) { var g = $('acG-' + id); if (g) g.querySelector('.ac-graf-cuerpo').innerHTML = html; }
+    var MODO_N = { inspector: 'Inspector', periodista: 'Periodista', ciudadano: 'Ciudadano', ambientalista: 'Ambientalista', 'sin modo': 'Sin modo' };
+    function pintaTablero() {
+      var t = tab; if (!t) return;
+      var r = t.resumen || {}, ses = +r.sesiones || 0;
+      var kp = [
+        ['Personas', r.personas, 'navegadores con pase distintos'],
+        ['Visitas', ses, 'sesiones (una por pestaña abierta)'],
+        ['Páginas vistas', r.vistas, ses ? 'unas ' + (r.vistas / ses).toFixed(1) + ' por visita (auditada)' : ''],
+        ['Minutos de uso', r.minutos, ses ? 'unos ' + (r.minutos / ses).toFixed(1) + ' por visita (auditada)' : 'con la página a la vista'],
+        ['Clics', r.clics, 'ligas, botones y pestañas'],
+        ['Preguntas al Auditor', r.preguntas, 'solo el modo y a dónde llevó'],
+        ['Sin respuesta', t.sin_respuesta, 'preguntas que el chat no supo contestar'],
+        ['Canjes', t.canjes, 'códigos canjeados en el periodo']
+      ];
+      $('acKpis').innerHTML = kp.map(function (k) {
+        return '<div class="ac-kpi"><span>' + esc(k[0]) + '</span><b>' + num(k[1]) + '</b><small>' + esc(k[2]) + '</small></div>';
+      }).join('');
+      // Lo que conviene mirar: tres lecturas de las mismas cifras, sin calificar.
+      var mir = [], sec = (t.secciones || []).filter(function (x) { return x.minutos > 0; });
+      if (sec.length) mir.push('El tema con más tiempo es <b>' + esc(sec[0].seccion) + '</b>: ' + num(sec[0].minutos) + ' minutos' + (sec[1] ? '; le sigue ' + esc(sec[1].seccion) + ' con ' + num(sec[1].minutos) + '.' : '.'));
+      var rapidas = (t.paginas || []).filter(function (p) { return p.vistas >= 10 && p.minutos / p.vistas < 0.25; });
+      if (rapidas.length) mir.push('Se abren mucho y se dejan rápido (menos de 15 segundos por vista): ' + rapidas.slice(0, 3).map(function (p) { return '<a href="' + esc(p.pagina) + '">' + esc(p.pagina) + '</a>'; }).join(', ') + '. Conviene revisar si su entrada contesta lo que se busca.');
+      if (+t.sin_respuesta) mir.push(num(t.sin_respuesta) + ' preguntas al chat se quedaron sin respuesta en el periodo: son las fichas que faltan en la base (tabla <code>preguntas_bot</code> de Supabase).');
+      var hz = (t.horas || []).slice().sort(function (a, b) { return b.vistas - a.vistas; })[0];
+      if (hz && hz.vistas) mir.push('La hora con más visitas es de las ' + hz.hora + ':00 a las ' + hz.hora + ':59.');
+      $('acMirar').hidden = !mir.length;
+      $('acMirar').innerHTML = '<b>Lo que conviene mirar</b><ul>' + mir.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>';
+      graf('dia', columnas(t.por_dia, 'vistas', function (f) { return diaCorto(f.dia); },
+        function (f) { return diaCorto(f.dia) + ': ' + num(f.vistas) + ' páginas, ' + num(f.personas) + ' personas, ' + num(f.minutos) + ' min'; },
+        'Páginas vistas por día, del ' + diaCorto(t.desde) + ' a hoy'));
+      graf('secciones', barras(t.secciones, function (f) { return f.seccion; }, 'minutos', function (f) { return num(f.vistas) + ' vistas'; }));
+      graf('paginas', barras(t.paginas, function (f) { return f.pagina; }, 'vistas', function (f) { return num(f.minutos) + ' min · ' + f.seccion; }));
+      graf('clics', barras(t.clics, function (f) { return f.destino.charAt(0) === '[' ? (f.etiqueta || f.destino) + ' (botón)' : f.etiqueta ? f.etiqueta + ' → ' + f.destino : f.destino; }, 'n'));
+      graf('chat', barras(t.modos, function (f) { return MODO_N[f.modo] || f.modo; }, 'n', null, 'Nadie le ha preguntado al Auditor en este periodo.') +
+        (t.destinos_chat && t.destinos_chat.length ? '<p class="ac-ayuda">A dónde llevaron las respuestas:</p>' + barras(t.destinos_chat, function (f) { return f.destino; }, 'n') : ''));
+      graf('horas', columnas(t.horas, 'vistas', function (f) { return f.hora + ':00'; }, function (f) { return f.hora + ':00 a ' + f.hora + ':59: ' + num(f.vistas) + ' páginas'; },
+        'Páginas vistas por hora del día'));
+      graf('codigos', barras(t.codigos, function (f) { return bonito(f.codigo) + (f.nota ? ' · ' + f.nota : ''); }, 'minutos',
+        function (f) { return num(f.personas) + (f.personas == 1 ? ' persona · ' : ' personas · ') + num(f.vistas) + ' vistas'; }, 'Ningún código con uso medido en este periodo.'));
+      estados();
+    }
+    function estados() {
+      var cuenta = {};
+      lista.forEach(function (k) { if (!k.archivado && !k.semanal) cuenta[k.estado] = (cuenta[k.estado] || 0) + 1; });
+      graf('estados', barras(Object.keys(EST).map(function (e) { return { e: EST[e], n: cuenta[e] || 0 }; }).filter(function (x) { return x.n; }),
+        function (f) { return f.e; }, 'n', null, 'Todavía no hay códigos.'));
+    }
+    function tablero() {
+      cargado.tablero = true;
+      $('acTabEstado').textContent = 'Cargando el tablero…';
+      return rpc('uso_tablero', { p_dias: periodo }).then(function (j) {
+        tab = j; $('acTabEstado').textContent = 'Del ' + diaCorto(j.desde) + ' a hoy (' + j.dias + ' días).'; pintaTablero();
+      }).catch(function (e) {
+        cargado.tablero = false;
+        $('acTabEstado').textContent = 'No se pudo cargar el tablero' + (e && e.message ? ': ' + e.message : '') + '. Si es la primera vez, falta subir la migración del control interno.';
+      });
+    }
+    raiz.querySelectorAll('[data-periodo]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        periodo = +b.dataset.periodo;
+        raiz.querySelectorAll('[data-periodo]').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+        tablero();
+      });
+    });
+    $('acTabRecargar').addEventListener('click', tablero);
+    $('acTabCsv').addEventListener('click', function () {
+      if (!tab) return;
+      var f = [['parte', 'concepto', 'valor', 'detalle']], r = tab.resumen || {};
+      Object.keys(r).forEach(function (k) { f.push(['resumen', k, r[k], '']); });
+      f.push(['resumen', 'canjes', tab.canjes, ''], ['resumen', 'sin_respuesta', tab.sin_respuesta, '']);
+      (tab.por_dia || []).forEach(function (x) { f.push(['por_dia', x.dia, x.vistas, 'personas ' + x.personas + ' · sesiones ' + x.sesiones + ' · minutos ' + x.minutos]); });
+      (tab.secciones || []).forEach(function (x) { f.push(['tema', x.seccion, x.minutos, 'minutos · ' + x.vistas + ' vistas']); });
+      (tab.paginas || []).forEach(function (x) { f.push(['pagina', x.pagina, x.vistas, 'vistas · ' + x.minutos + ' min']); });
+      (tab.clics || []).forEach(function (x) { f.push(['clic', x.destino, x.n, x.etiqueta || '']); });
+      (tab.modos || []).forEach(function (x) { f.push(['chat_modo', x.modo, x.n, '']); });
+      (tab.destinos_chat || []).forEach(function (x) { f.push(['chat_destino', x.destino, x.n, '']); });
+      (tab.horas || []).forEach(function (x) { f.push(['hora', x.hora, x.vistas, 'vistas']); });
+      (tab.codigos || []).forEach(function (x) { f.push(['codigo', bonito(x.codigo), x.minutos, 'minutos · ' + x.personas + ' personas · ' + x.vistas + ' vistas']); });
+      bajaCsv('tablero-de-uso-' + tab.dias + '-dias.csv', f);
+    });
+
+    // ---------------------------------------------------------------------
+    // La bitácora: lo anota la base sola; aquí solo se lee, filtra y baja.
+    var bit = [];
+    var CAMPO = { duracion: 'duración', personas: 'personas', canjear_antes: 'canjear antes del', nota: 'nota', tiempo_extra: 'tiempo extra',
+      personas_con_mas_tiempo: 'personas con más tiempo', personas_mas: 'personas de más', estaba: 'estaba', lo_habian_usado: 'lo habían usado', codigo: 'código' };
+    function valor(k, v) {
+      if (v == null || v === '') return '—';
+      if (/^\d{4}-\d{2}-\d{2}T/.test(String(v))) return fecha(v);
+      if (k === 'duracion' || k === 'tiempo_extra') return duracion(String(v));
+      if (k === 'codigo') return bonito(String(v));
+      return String(v);
+    }
+    function detalle(d) {
+      return Object.keys(d || {}).map(function (k) {
+        var v = d[k];
+        return esc(CAMPO[k] || k) + ': ' + (Array.isArray(v) ? esc(valor(k, v[0])) + ' → <b>' + esc(valor(k, v[1])) + '</b>' : '<b>' + esc(valor(k, v)) + '</b>');
+      }).join(' · ');
+    }
+    function objeto(o) { return o && /^[0-9A-Z]{8}$/.test(o) ? bonito(o) : (o || ''); }
+    function pintaBit() {
+      var que = $('acBitQue').value, q = limpiaBusca($('acBitBusca').value);
+      var ver = bit.filter(function (x) {
+        if (que && x.accion !== que) return false;
+        return !q || limpiaBusca([x.quien, x.accion, x.objeto, JSON.stringify(x.detalle)].join(' ')).indexOf(q) >= 0;
+      });
+      $('acBit').querySelector('tbody').innerHTML = ver.map(function (x) {
+        return '<tr><td>' + esc(fecha(x.en)) + '</td><td>' + esc(x.quien) + '</td><td><span class="ac-chip">' + esc(x.accion) + '</span></td>' +
+          '<td>' + esc(objeto(x.objeto)) + '</td><td>' + detalle(x.detalle) + '</td></tr>';
+      }).join('') || '<tr><td colspan="5">' + (bit.length ? 'Nada coincide con el filtro.' : 'Todavía no hay movimientos anotados.') + '</td></tr>';
+    }
+    function bitacora() {
+      cargado.bitacora = true;
+      return rpc('bitacora_lista', { p_limite: 2000 }).then(function (j) {
+        bit = j || [];
+        var cuenta = {};
+        bit.forEach(function (x) { cuenta[x.accion] = (cuenta[x.accion] || 0) + 1; });
+        var sel = $('acBitQue'), elegido = sel.value;
+        sel.innerHTML = '<option value="">Todo (' + bit.length + ')</option>' + Object.keys(cuenta).sort().map(function (a) {
+          return '<option value="' + esc(a) + '"' + (a === elegido ? ' selected' : '') + '>' + esc(a) + ' (' + cuenta[a] + ')</option>';
+        }).join('');
+        var hoy = bit.filter(function (x) { return Date.now() - Date.parse(x.en) < 864e5 * 7; }).length;
+        $('acBitResumen').innerHTML = '<span class="ac-chip">Movimientos: <b>' + bit.length + '</b></span> <span class="ac-chip">En los últimos 7 días: <b>' + hoy + '</b></span>';
+        pintaBit();
+      }).catch(function (e) {
+        cargado.bitacora = false;
+        $('acBit').querySelector('tbody').innerHTML = '<tr><td colspan="5">No se pudo leer la bitácora' + (e && e.message ? ': ' + esc(e.message) : '') + '.</td></tr>';
+      });
+    }
+    $('acBitQue').addEventListener('change', pintaBit);
+    $('acBitBusca').addEventListener('input', pintaBit);
+    $('acBitCsv').addEventListener('click', function () {
+      bajaCsv('bitacora-auditavision.csv', [['cuando', 'quien', 'accion', 'sobre', 'detalle']].concat(bit.map(function (x) {
+        return [x.en, x.quien, x.accion, objeto(x.objeto), JSON.stringify(x.detalle || {})];
+      })));
+    });
     function abre() {
       token().then(function (t) { return auth('/auth/v1/user', null, t, 'GET'); }).then(function (u) {
         s.correo = u.email; pon(s);
@@ -427,6 +639,7 @@
         return Promise.all([carga(), semana(), maestroInfo()]);
       }).then(function () {
         entrar.hidden = true; admin.hidden = false;
+        hoja(hojaInicial());
         if (/[?&]maestro=1/.test(location.search)) {
           history.replaceState(null, '', location.pathname);
           $('acQuien').textContent += ' Te reconocimos con tu código maestro.';
@@ -465,7 +678,7 @@
     });
     $('acRecargar').addEventListener('click', function () { carga(); });
     function falla(e2) { $('acTablaEstado').textContent = 'No se pudo: ' + ((e2 && e2.message) || 'intenta de nuevo') + '.'; }
-    function hecho(txt) { return function () { $('acTablaEstado').textContent = txt; return carga(); }; }
+    function hecho(txt) { return function () { $('acTablaEstado').textContent = txt; cargado.bitacora = false; return carga(); }; }
     raiz.querySelectorAll('[data-vista]').forEach(function (b) {
       b.addEventListener('click', function () { vista = b.dataset.vista; editando = null; pinta(); });
     });
@@ -480,7 +693,7 @@
         navigator.clipboard && navigator.clipboard.writeText(b.dataset.copia).then(function () { b.classList.add('ac-copiado'); setTimeout(function () { b.classList.remove('ac-copiado'); }, 1200); });
         return;
       }
-      if (b.dataset.cancelar) { editando = null; pinta(); return; }
+      if (b.dataset.cancelar) { editando = null; renovando = null; pinta(); return; }
       if (b.dataset.cerraruso) { uso = null; pinta(); return; }
       var id = +b.dataset.id, a = b.dataset.accion; if (!a) return;
       var k = lista.filter(function (x) { return x.id === id; })[0]; if (!k) return;
@@ -490,8 +703,11 @@
         uso = { id: id, filas: null }; pinta();
         rpc('codigo_uso', { p_id: id }).then(function (f) { if (uso && uso.id === id) { uso.filas = f || []; pinta(); } })
           .catch(function (e2) { uso = null; pinta(); falla(e2); });
+      } else if (a === 'renovar') {
+        renovando = renovando === id ? null : id; editando = null; pinta();
+        var fr = $('acTabla').querySelector('[data-renovar="' + id + '"]'); if (fr) fr.lapso.focus();
       } else if (a === 'editar') {
-        editando = editando === id ? null : id; pinta();
+        editando = editando === id ? null : id; renovando = null; pinta();
         var f = $('acTabla').querySelector('[data-editar="' + id + '"]'); if (f) f.duracion.focus();
       } else if (a === 'revocar') {
         var revoca = b.dataset.revocar === '1';
@@ -506,6 +722,20 @@
       }
     });
     $('acTabla').addEventListener('submit', function (e) {
+      var fr = e.target.closest('[data-renovar]');
+      if (fr) {
+        e.preventDefault();
+        var rid = +fr.dataset.renovar, rk = lista.filter(function (x) { return x.id === rid; })[0];
+        var nomr = rk ? bonito(rk.codigo) : 'El código';
+        rpc('renovar_codigo', {
+          p_id: rid, p_lapso: fr.lapso.value || null, p_usos_mas: Math.max(0, +fr.mas.value || 0),
+          p_antes: fr.antes.value ? new Date(fr.antes.value + 'T23:59:59').toISOString() : null
+        }).then(function (n) {
+          renovando = null;
+          return hecho(nomr + ' renovado' + (fr.lapso.value ? ': ' + n + (n === 1 ? ' persona recibió' : ' personas recibieron') + ' ' + duracion(fr.lapso.value).toLowerCase() + ' más.' : '.'))();
+        }).catch(falla);
+        return;
+      }
       var f = e.target.closest('[data-editar]'); if (!f) return;
       e.preventDefault();
       var id = +f.dataset.editar, k = lista.filter(function (x) { return x.id === id; })[0];
@@ -527,8 +757,8 @@
     });
     $('acCsvUso').addEventListener('click', function () {
       rpc('codigo_uso', { p_id: null }).then(function (f) {
-        bajaCsv('uso-de-codigos-auditavision.csv', [['codigo', 'persona', 'nombre', 'correo', 'canjeado', 'hasta', 'ultimo_dia', 'dias_que_entro']].concat((f || []).map(function (u) {
-          return [bonito(u.codigo), u.persona, u.nombre, u.correo, u.canjeado, u.hasta, u.ultimo, u.dias];
+        bajaCsv('uso-de-codigos-auditavision.csv', [['codigo', 'persona', 'nombre', 'correo', 'canjeado', 'hasta', 'ultimo_dia', 'dias_que_entro', 'minutos_de_uso', 'paginas_vistas', 'renovado']].concat((f || []).map(function (u) {
+          return [bonito(u.codigo), u.persona, u.nombre, u.correo, u.canjeado, u.hasta, u.ultimo, u.dias, u.minutos, u.vistas, u.renovado ? 'sí' : 'no'];
         })));
       }).catch(falla);
     });

@@ -296,3 +296,20 @@
   .ct-flujo-et, .ct-flujo-nom, .ct-flujo-frase, .ct-flujo-ir { padding: 0 12px; }
   .ct-flujo-nom { font-size: 18px; }
 }
+/* Tu nómina completa (18-11-2026): IMSS o ISSSTE, lo que pone el patrón y el costo de la plaza. */
+.ct-nomina { margin-top: 18px; padding: 16px; border-radius: 14px; border: 1px solid var(--ct-linea); border-left: 5px solid var(--ct-cian); background: #fbfcfe; }
+.ct-nom-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 10px 0; }
+.ct-nom-kpis > div { display: grid; gap: 2px; padding: 10px 12px; border-radius: 12px; background: var(--ct-claro); }
+.ct-nom-kpis span, .ct-nom-kpis small { font-size: 16px; color: var(--ct-tx2); }
+.ct-nom-kpis b { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 20px; color: var(--ct-tx); }
+.ct-nom-costo { border: 2px solid var(--ct-acento); }
+.ct-rt { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 8px 0; }
+.ct-select { min-height: 44px; font-size: 16px; padding: 6px 10px; border-radius: 10px; border: 1px solid var(--ct-linea); background: #fff; color: var(--ct-tx); }
+.ct-nl { list-style: none; margin: 10px 0 0; padding: 0; }
+.ct-nl li { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 10px 0; border-bottom: 1px solid var(--ct-linea); }
+.ct-nl-ramo { font-weight: 600; color: var(--ct-tx); }
+.ct-nl b { font-family: 'JetBrains Mono', ui-monospace, monospace; color: var(--ct-tx); }
+.ct-nl small { grid-column: 1 / -1; font-size: 16px; line-height: 1.45; color: var(--ct-tx2); }
+.ct-nl-tot { border-top: 2px solid var(--ct); border-bottom: 0 !important; }
+.ct-tr-tot td { border-top: 2px solid var(--ct); }
+.ct-doc-nom p { margin: 6px 0 0; font-size: 16px; line-height: 1.5; }

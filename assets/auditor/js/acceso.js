@@ -44,6 +44,90 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', pestana); else pestana();
   }
 
+  // La medición de uso (pedido del autor, 18-11-2026: «el tiempo que ha
+  // consumido los usuarios, qué tema les ha interesado… dónde le da clic»).
+  // Solo para mejorar la plataforma: la página, el tiempo con la pestaña a la
+  // vista y el texto y destino de lo que se toca. Nunca lo que se escribe, la
+  // IP ni nada que diga quién eres. No mide en la copia local, en el navegador
+  // de la administración, con «No rastrear» o el control global de privacidad,
+  // ni si lo apagas en el aviso de privacidad (av-sin-medir).
+  var SIN = 'av-sin-medir';
+  function sinMedir() { try { return localStorage.getItem(SIN) === '1'; } catch (e) { return false; } }
+  window.AvAcceso.medir = function (si) {
+    try { if (si) localStorage.removeItem(SIN); else localStorage.setItem(SIN, '1'); } catch (e) {}
+  };
+  window.AvAcceso.midiendo = function () { return !sinMedir() && !navigator.globalPrivacyControl && navigator.doNotTrack !== '1'; };
+  window.AvUso = { marca: function () {} };
+  // El botón del aviso de privacidad: «No medir este navegador» / «Volver a medir».
+  function botonMedir() {
+    document.querySelectorAll('[data-av-medir]').forEach(function (b) {
+      var est = b.parentNode.querySelector('[data-av-medir-estado]');
+      function pinta() {
+        var gpc = navigator.globalPrivacyControl || navigator.doNotTrack === '1';
+        b.textContent = sinMedir() ? 'Volver a medir este navegador' : 'No medir este navegador';
+        b.disabled = !!gpc;
+        if (est) est.textContent = gpc ? 'Tu navegador ya pide no ser medido: no se mide.' : sinMedir() ? 'Este navegador no se mide.' : 'Este navegador se mide, como se explica arriba.';
+      }
+      b.addEventListener('click', function () { window.AvAcceso.medir(sinMedir()); pinta(); });
+      pinta();
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', botonMedir); else botonMedir();
+  (function () {
+    var pag = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    var enMarco = false; try { enMarco = window.top !== window; } catch (e) { enMarco = true; }
+    if (!C.funciones || enMarco || /^(localhost|127\.0\.0\.1)$/.test(location.hostname) || !/^[a-z0-9._-]{1,120}\.html$/.test(pag)) return;
+    if (!window.AvAcceso.midiendo() || (yo && yo.admin)) return;
+    var ses; try { ses = sessionStorage.getItem('av-sesion'); } catch (e) {}
+    if (!ses) { ses = (Date.now().toString(36) + Math.random().toString(36).slice(2, 10)).slice(0, 20); try { sessionStorage.setItem('av-sesion', ses); } catch (e) {} }
+    var cola = [], visible = 0, desde = document.visibilityState === 'visible' ? Date.now() : 0;
+    function manda() {
+      if (!cola.length) return;
+      var p = leer(), cuerpo = JSON.stringify({ accion: 'uso', pase: p && p.pase, sesion: ses, eventos: cola.splice(0, 40) });
+      // Texto plano y sin cabeceras: el navegador lo manda aunque la página se cierre.
+      var ok = false;
+      try { ok = navigator.sendBeacon && navigator.sendBeacon(C.funciones + '/codigo', new Blob([cuerpo], { type: 'text/plain' })); } catch (e) {}
+      if (!ok) { try { fetch(C.funciones + '/codigo', { method: 'POST', body: cuerpo, keepalive: true }).catch(function () {}); } catch (e) {} }
+      if (cola.length) manda();
+    }
+    function marca(tipo, x) {
+      if (sinMedir()) return;
+      x = x || {}; x.tipo = tipo; x.pagina = pag; cola.push(x);
+      if (cola.length >= 20) manda();
+    }
+    function corte() {
+      if (desde) { visible += Date.now() - desde; desde = 0; }
+      var s = Math.round(visible / 1000); visible = 0;
+      if (s >= 2) marca('tiempo', { segundos: Math.min(s, 7200) });
+    }
+    window.AvUso.marca = marca;
+    marca('vista');
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'visible') desde = Date.now();
+      else { corte(); manda(); }
+    });
+    window.addEventListener('pagehide', function () { corte(); manda(); });
+    // Lo que se toca: ligas, botones, pestañas y desplegables. De las ligas,
+    // la página de destino (de otro sitio, solo su dominio); de lo demás, su
+    // texto. Nada de lo que se escribe en un campo.
+    document.addEventListener('click', function (e) {
+      var t = e.target && e.target.closest && e.target.closest('a[href], button, summary, [role="tab"]');
+      if (!t || t.closest('[data-sin-medir]')) return;
+      var dest = '', h = t.getAttribute('href');
+      if (h && t.tagName === 'A') {
+        try {
+          var u = new URL(h, location.href);
+          if (/^(mailto|tel):/.test(u.protocol)) dest = u.protocol.slice(0, -1);
+          else dest = u.origin === location.origin ? (u.pathname.split('/').pop() || 'index.html') + (u.hash || '').slice(0, 40) : 'externo: ' + u.hostname;
+        } catch (e2) { return; }
+      } else dest = '[' + (t.getAttribute('data-vista') || t.getAttribute('aria-controls') || t.id || t.tagName.toLowerCase()) + ']';
+      // Una pregunta que escribió la persona (la lista de «Lo que aún no sé», su burbuja) no se lee.
+      var et = t.closest('[data-pa-ya], .pa-reintenta, .pa-yo') ? '(su pregunta)' : (t.getAttribute('aria-label') || t.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+      marca('clic', { destino: dest.slice(0, 160), etiqueta: et });
+    }, true);
+    setInterval(manda, 30000);
+  })();
+
   if (!C.candado || !C.funciones) return;
   // En la copia local (python3 -m http.server y las pruebas de revision.py)
   // no se pide código.

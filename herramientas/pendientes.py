@@ -70,6 +70,31 @@ PROPIOS = [
      'La ASF no publicó en su portal la matriz de la Cuenta Pública 2018, como sí lo hizo con las demás. Sin ella, la serie de montos por aclarar tiene un hueco en ese año.',
      'Auditoría Superior de la Federación (ASF)', 'https://www.asf.gob.mx/Section/58_Informes_de_auditoria',
      'Informes de auditoría de la ASF', [('herramienta-inspector-asf.html', 'Expedientes de casos de la ASF')]),
+    ('productividad-entes', 'Productividad', 'Auditoría de productividad de cada ente público',
+     'La ficha técnica de cada ente lleva dos auditorías: la de finanzas públicas y la de productividad (qué hizo con su dinero). '
+     'La de productividad solo está integrada para la Suprema Corte, los juzgados y tribunales federales, el Tribunal Electoral y los 32 poderes judiciales estatales, con el censo del INEGI; para el IMSS, con su Memoria Estadística; para la PROFEPA (en la ficha de la Semarnat), con su Informe de Actividades; y para los 32 congresos locales (sus iniciativas), con el censo del INEGI. '
+     'Para los demás entes federales, Hacienda publica los indicadores de desempeño de sus programas y la ASF sus auditorías de desempeño: el documento existe y la plataforma aún no lo integra. '
+     'Para los gobiernos estatales y los municipios, la plataforma todavía no localiza un documento oficial que reúna sus resultados; mientras no lo haya, no se rellena.',
+     'Auditavisión: falta de la plataforma, que aún no integra los indicadores de desempeño',
+     'https://www.transparenciapresupuestaria.gob.mx/', 'Transparencia Presupuestaria (Hacienda)',
+     [('herramienta-inspector-entes.html', 'Auditor de entes públicos')]),
+    ('productividad-administraciones', 'Productividad', 'Productividad de cada administración presidencial',
+     'El estado de cuenta de una administración lleva dos funciones: finanzas públicas y productividad (qué hizo con ese dinero). '
+     'La de productividad se lee por las dimensiones del Planisferio y por tres indicadores (decisión del autor, 12-11-2026): las metas del Plan Nacional de Desarrollo que se cumplieron, '
+     'los indicadores de desempeño de los programas presupuestarios y lo que concluyeron las auditorías de desempeño de la ASF. Las dimensiones ya llevan a su mapa y a su página federal, '
+     'pero muestran el país de hoy, no lo que dejó cada sexenio; los tres indicadores siguen pendientes: cada gobierno rinde su Informe de Gobierno y sus informes de ejecución del Plan, '
+     'Hacienda publica los indicadores y la ASF sus auditorías. Los documentos existen y la plataforma aún no los integra.',
+     'Auditavisión: falta de la plataforma, que aún no integra los informes de ejecución ni los indicadores de desempeño',
+     'https://www.transparenciapresupuestaria.gob.mx/', 'Transparencia Presupuestaria (Hacienda)',
+     [('radar-estado-de-cuenta.html', 'Estado de cuenta administrativo')]),
+    ('productividad-legislativo', 'Productividad', 'Productividad de las Cámaras federales y de los congresos locales',
+     'El estado de cuenta de una diputación o una senaduría lleva dos funciones: finanzas públicas y productividad. '
+     'De los 32 congresos locales ya están integradas las iniciativas presentadas y dictaminadas (INEGI, censo de poderes legislativos estatales 2025, tabla 20); faltan sus sesiones y su asistencia, que el mismo censo levanta. '
+     'De las dos Cámaras federales falta todo (iniciativas presentadas, dictaminadas y aprobadas, sesiones y asistencia): cada Cámara lo publica en su Gaceta Parlamentaria y '
+     'Gobernación lo reúne en el Sistema de Información Legislativa. Los documentos existen y la plataforma aún no los integra.',
+     'Auditavisión: falta de la plataforma, que aún no integra el trabajo legislativo',
+     'https://sil.gobernacion.gob.mx/', 'Sistema de Información Legislativa (Gobernación)',
+     [('radar-estado-de-cuenta.html', 'Estado de cuenta administrativo')]),
     ('municipios-sin-cuenta', 'Estados y municipios', 'Cuenta pública 2024 de los municipios que no la entregaron al INEGI',
      'De los 2,479 municipios del catálogo, 83 no reportaron sus finanzas de 2024 a la estadística del INEGI, y las 16 demarcaciones de la Ciudad de México no rinden cuenta municipal. Sin ese reporte no se sabe cuánto ingresaron ni en qué gastaron.',
      'Los ayuntamientos que no reportaron', 'https://www.inegi.org.mx/programas/finanzas/',
@@ -133,16 +158,10 @@ PROPIOS = [
      'Centro Nacional de Prevención de Desastres (CENAPRED)', 'https://www.cenapred.gob.mx/es/Publicaciones/archivos/521-RESUMENEJECUTIVOIMPACTO2024.PDF',
      'Impacto socioeconómico 2024 (CENAPRED)', [('herramienta-ambiente-crisis.html', 'Costo Ambiental · Crisis ambientales')]),
     # El Poder Judicial en el bot y en Datos (23-10-2026).
-    ('judicial-2025-participacion', 'Elecciones', 'Porcentaje definitivo de participación ciudadana del cómputo nacional de la elección judicial del 1 de junio de 2025',
-     'La plataforma ya integra la estimación muestral que informó el INE el 2 de junio de 2025 (entre 12.57 % y 13.32 % de la Lista Nominal, Comunicado 192), '
-     'pero el portal de los cómputos distritales definitivos (computospjf2025.ine.mx) dejó de resolver en DNS y los acuerdos publicados en el Diario Oficial '
-     '(INE/CG563/2025 e INE/CG564/2025) traen la suma de votos por candidatura sin el porcentaje nacional definitivo de participación.',
-     PLATAFORMA, 'https://www.ine.mx/voto-y-elecciones/computos-distritales/', 'Cómputos distritales (INE)',
-     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-eleccion.html', 'Datos · Poder Judicial · La elección judicial')]),
-    ('judicial-2025-costo', 'Elecciones', 'Cuánto costó al final la elección judicial de 2025',
-     'El acuerdo INE/CG563/2025 cita el presupuesto precautorio que el INE aprobó para organizarla ($13,205.1 millones, con una eventual consulta popular incluida), '
-     'pero eso es lo que pidió, no lo que gastó. El informe del gasto ejercido existe en los reportes del INE y la plataforma aún no lo integra.',
-     PLATAFORMA, 'https://www.ine.mx/transparencia/', 'Transparencia del INE',
+    ('judicial-2025-costo', 'Elecciones', 'Cuánto costó al final la elección judicial de 2025 (cierre ejercido en Cuenta Pública 2025)',
+     'La plataforma ya integra el presupuesto aprobado para el Proceso Electoral Extraordinario ($6,219,213,262 según Numeralia del INE, tras el presupuesto precautorio inicial de $13,205.1 millones). '
+     'El informe del gasto ejercido definitivo se audita en la Cuenta Pública 2025 y la plataforma aún no lo integra.',
+     PLATAFORMA, 'https://www.transparenciapresupuestaria.gob.mx/', 'Transparencia Presupuestaria (Cuenta Pública 2025)',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-eleccion.html', 'Datos · Poder Judicial · La elección judicial')]),
     ('judicial-fideicomisos-monto', 'Poderes', 'Cierre definitivo de liquidación de los fideicomisos del extinto Consejo de la Judicatura Federal',
      'La Suprema Corte ya publicó en el Diario Oficial (15-07-2025) que el 2 de abril de 2025 Nacional Financiera concentró en la Tesorería de la Federación $6,654.1 millones '
@@ -151,19 +170,21 @@ PROPIOS = [
      'Órgano de Administración Judicial (antes Consejo de la Judicatura Federal) y Tesorería de la Federación', 'https://www.gob.mx/tesofe', 'Tesorería de la Federación',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-presupuesto.html', 'Datos · Poder Judicial · El presupuesto')]),
     # La auditoría de gestión del Poder Judicial (27-10-2026).
-    ('judicial-tiempos-juzgados', 'Poderes', 'Cuánto tarda un juzgado o tribunal en resolver un asunto y en celebrar una audiencia, federal y estatal',
-     'El reporte de resultados del censo del INEGI (CNIJF-E 2025) solo publica la duración promedio de los asuntos de la Suprema Corte (tabla 13) y del Tribunal Electoral (tabla 17). '
-     'De los juzgados de distrito, los tribunales colegiados y los poderes judiciales de los estados, que es donde llega casi todo, no trae cuánto tardan en resolver ni cuánto '
-     'se espera una audiencia. Los tabulados y datos abiertos del censo pueden traer más detalle y la plataforma aún no los integra: su página se arma con JavaScript y no se '
-     'pudo leer desde donde se construye la plataforma. Si tampoco están ahí, la falta será de los órganos que reportan al INEGI.',
-     PLATAFORMA, 'https://www.inegi.org.mx/programas/cnije/2025/', 'Censo Nacional de Impartición de Justicia Estatal 2025 (INEGI)',
+    ('judicial-tiempos-juzgados', 'Poderes', 'Cuánto tardan los juzgados de los estados en resolver un asunto, y cuánto se espera una audiencia',
+     'El censo del INEGI (CNIJF-E 2025) publica cuánto tardan la Suprema Corte, el Tribunal Electoral y, en sus tabulados básicos (cuadro 13), los juzgados y tribunales '
+     'federales; eso ya está en la plataforma. De los juzgados de los poderes judiciales de los estados, que es donde llega casi todo, ni el reporte de resultados ni los '
+     'tabulados traen cuánto tardan en resolver, y de ningún juzgado, federal o estatal, cuánto se espera una audiencia. Sin esa cifra nadie puede comprobar si se cumplen '
+     'los plazos del art. 20 de la Constitución. Los datos abiertos del censo no aparecen en su página, así que no se sabe si el INEGI los levanta.',
+     'INEGI: su censo judicial estatal no la publica', 'https://www.inegi.org.mx/programas/cnije/2025/', 'Censo Nacional de Impartición de Justicia Estatal 2025 (INEGI)',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-gestion.html', 'Datos · Poder Judicial · Lo que cuesta y lo que resuelve')]),
-    ('judicial-rezago-civil', 'Poderes', 'Cuántos expedientes civiles, familiares y mercantiles quedaron sin resolver al cierre de 2024 en los poderes judiciales de los estados',
-     'El reporte de resultados del censo del INEGI (CNIJF-E 2025) publica las causas penales pendientes de concluir, pero de lo civil, familiar y mercantil solo da los asuntos '
-     'que entraron y los que concluyeron (tabla 23). Y los que entraron incluyen las demandas desechadas o mandadas corregir, así que restarlos no da el rezago. '
-     'Los tabulados y datos abiertos del censo pueden traer los expedientes en trámite al cierre del año y la plataforma aún no los integra.',
-     PLATAFORMA, 'https://www.inegi.org.mx/programas/cnije/2025/', 'Censo Nacional de Impartición de Justicia Estatal 2025 (INEGI)',
-     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-gestion.html', 'Datos · Poder Judicial · Lo que cuesta y lo que resuelve')]),
+    ('judicial-rezago-civil', 'Poderes', 'Cuántos expedientes civiles y familiares (y en algunos, mercantiles) tenían pendientes al cierre de 2024 seis poderes judiciales de los estados',
+     'El cuadro 16 de los tabulados del censo del INEGI (CNIJE 2025) da los expedientes civiles, familiares y mercantiles pendientes de concluir de cada estado, y ya está en la '
+     'plataforma. Pero seis poderes judiciales le respondieron al INEGI que no lo saben: Baja California y Morelos, de lo civil y lo familiar; Baja California Sur, Chihuahua, '
+     'Durango y Puebla, de las tres materias. Por eso el total del país suma solo a los que sí lo dijeron. La cifra la deben esos seis poderes judiciales.',
+     'Poderes judiciales de Baja California, Baja California Sur, Chihuahua, Durango, Morelos y Puebla', 'https://www.inegi.org.mx/contenidos/programas/cnije/2025/tabulados/cnije2025_imp_just.xlsx',
+     'INEGI, CNIJE 2025, tabulados básicos (cuadro 16)',
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-judicial-gestion.html', 'Datos · Poder Judicial · Lo que cuesta y lo que resuelve'),
+      ('planisferio.html', 'Planisferio · dimensión judicial')]),
     # Antes y después de la reforma judicial (01-11-2026).
     ('judicial-electos-por-organo', 'Poderes', 'Cómo resuelven las personas juzgadoras electas en 2025 frente a las que siguieron en el cargo, órgano por órgano',
      'Los Anexos Estadísticos de la DGEJ dan el movimiento nacional y por tipo de órgano, y el año 2025 partido al 30 de junio, así que sí se ve el antes y el después '
@@ -213,12 +234,14 @@ PROPIOS = [
      PLATAFORMA, 'https://www.gob.mx/issste/documentos/anuarios-estadisticos', 'Anuarios estadísticos (ISSSTE)',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-sistema.html', 'Datos · Salud pública · Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE'),
       ('planisferio.html', 'Planisferio · Salud pública')]),
-    ('salud-imss-bienestar', 'Salud', 'Consultas, egresos, cirugías y gasto del IMSS-Bienestar en 2025',
-     'En conferencias se han dado cifras de las consultas de 2025 del IMSS-Bienestar, pero la plataforma no encontró un informe oficial con sus servicios y su gasto completo. '
-     'El capítulo del IMSS-Bienestar de la Memoria Estadística 2025 del IMSS no se pudo descargar: su enlace devuelve una página web en lugar del archivo. '
-     'Hasta tener el documento, no se publican las cifras de las conferencias.',
+    ('salud-imss-bienestar', 'Salud', 'Consultas y gasto completo del IMSS-Bienestar en 2025',
+     'Sus egresos hospitalarios y sus cirugías de 2025 ya están en la plataforma desde el 18-11-2026, con la base de egresos de la Secretaría de Salud (DGIS), hospital por hospital. '
+     'Lo que falta son sus consultas y su gasto completo: en conferencias se han dado cifras de las consultas de 2025, pero la plataforma no encontró un informe oficial que las traiga, '
+     'y la base de servicios otorgados de la DGIS llega solo a 2023. El capítulo del IMSS-Bienestar de la Memoria Estadística 2025 del IMSS no se pudo descargar: su enlace '
+     'devuelve una página web en lugar del archivo. Hasta tener el documento, no se publican las cifras de las conferencias.',
      PLATAFORMA, 'https://www.imss.gob.mx/conoce-al-imss/memoria-estadistica-2025', 'Memoria Estadística 2025 (IMSS), capítulo XIV',
-     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-sistema.html', 'Datos · Salud pública · Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE')]),
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-sistema.html', 'Datos · Salud pública · Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE'),
+      ('planisferio.html', 'Planisferio · Salud pública')]),
     # La auditoría de gestión de la PROFEPA (28-10-2026).
     ('ambiente-denuncias-causa', 'Medio ambiente', 'Cuántas denuncias populares investigadas concluyó la PROFEPA, por qué causa y en cuánto tiempo',
      'Sus Informes de Actividades dan cuántas denuncias recibió, cuántas admitió y cuántas «concluyó», pero no separan las que concluyó por turnarlas a otra autoridad '
@@ -431,6 +454,10 @@ def recolectar():
     # Los recursos naturales y las refinerías de PEMEX (03-11-2026).
     import recursos_naturales
     for x in recursos_naturales.pendientes():
+        out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
+    # Los grupos empresariales y sus filiales (17-11-2026).
+    import empresas_grupos
+    for x in empresas_grupos.pendientes():
         out.append(e(x['id'], x['tema'], x['que'], x['porque'], x['responsable'], x['enlace'], x['enlace_txt'], x['aparece']))
     # 10. Lo que circula en redes y quedó pendiente en su cotejo (Noticias
     # relevantes · Verificamos, 26-10-2026).
