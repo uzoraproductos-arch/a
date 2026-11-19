@@ -2883,8 +2883,28 @@
      «¿qué tiene la plataforma?» o «mapa del sitio» lo abren; «índice de…» sigue siendo un tema. */
   var INDICE_RE = /^(?:(?:el|tu|su|ver|abre|abrir|dame|mu[eé]strame)\s+)*(?:[ií]ndice(?:\s+general)?|mapa del sitio)(?:\s+de\s+(?:la plataforma|auditavisi[oó]n|todo))?\s*\??$|^(?:qu[eé]|todo lo que)\s+(?:tiene|tienen|hay en|ofrece|ofrecen|contiene|sabe)(?:\s+(?:la plataforma|auditavisi[oó]n|el auditor))?\s*\??$/i;
   var MIS_RE = /^(?:(?:ver|abre|abrir|dame|mu[eé]strame)\s+)*(?:mis|tus)\s+(?:respuestas|preguntas|solicitudes|consultas)(?:\s+(?:anteriores|guardadas))?$|^mi\s+(?:caso|historial)$|^(?:qu[eé]\s+)?(?:te\s+)?(?:he\s+)?pregunt[eé](?:\s+antes)?$/i;
+  /* Cómo se protege la información y qué se hace si algo falla (19-11-2026, LFPDPPP
+     arts. 18 a 20): lleva a esas dos secciones del aviso de privacidad. Pide «mis datos»,
+     «la información» o una fuga: «seguridad» sola es un tema (la ENVIPE), no esto. */
+  var PROTEGE_RE = /(?:proteg|cuid|resguard)\w*\s+(?:(?:mis|tus|los|la|mi|nuestros?|nuestra)\s+)?(?:datos|informaci[oó]n)|(?:fuga|filtraci[oó]n|vulneraci[oó]n|robo|hackeo)\s+de\s+(?:(?:mis|tus|los)\s+)?(?:datos|informaci[oó]n)|(?:mis|tus)\s+datos\s+(?:est[aá]n|son)\s+segur|seguridad\s+de\s+(?:mis|tus|los)\s+datos/i;
   function respuesta(q, previas) {
     var t = String(q || '').trim().replace(/^[¿¡\s]+/, '').replace(/[?!.\s]+$/, '');
+    if (PROTEGE_RE.test(t)) {
+      var fuga = /fuga|filtraci|vulneraci|robo|hackeo/i.test(t), lp = 'aviso-de-privacidad.html#' + (fuga ? 'vulneraciones' : 'seguridad');
+      var rp = abre(q, lp) || abre(q, 'aviso-de-privacidad.html');
+      if (rp) {
+        rp.html = (fuga
+          ? '<p><span aria-hidden="true">🔒</span> Si algo falla, hacemos cuatro cosas: <b>cerrar la puerta</b> (llaves y sesiones), <b>medir el daño</b> con la bitácora, ' +
+            '<b>avisarte de inmediato</b> si te afecta, como manda la ley (LFPDPPP, art. 19), y <b>corregir y contarlo</b> en una nota pública, sin datos de nadie.</p>' +
+            '<p>Si tú encuentras una falla, escríbenos antes de publicarla, para cerrarla primero.</p>'
+          : '<p><span aria-hidden="true">🔒</span> Lo más importante: <b>tus facturas, tu nómina y tus listas de RFC no se suben</b>; se leen en tu navegador. ' +
+            'Además, cada página trae una política de seguridad que no la deja mandar datos a otro sitio, la conexión va cifrada, la base revisa quién ve cada renglón ' +
+            'y la administración entra con dos pasos (LFPDPPP, art. 18).</p>' +
+            '<p>Lo que aún falta también está dicho: lo que guarda tu navegador no va cifrado, así que bórralo si compartes la computadora.</p>');
+        rp.ir = [lp, fuga ? 'Si algo falla: qué hacemos' : 'Cómo protegemos la información'];
+        return rp;
+      }
+    }
     if (MIS_RE.test(t)) {
       var rm = abre(q, 'mis-respuestas.html');
       if (rm) {

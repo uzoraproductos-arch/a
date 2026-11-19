@@ -632,8 +632,56 @@
         return [x.en, x.quien, x.accion, objeto(x.objeto), JSON.stringify(x.detalle || {})];
       })));
     });
+    /* El doble factor (19-11-2026, LFPDPPP art. 18). La sesión del correo o del
+       código maestro es de un paso (aal1); la base solo reconoce a la
+       administración con la de dos (aal2: es_admin() de la migración
+       20261119000001_doble_factor.sql). Aquí se da de alta la aplicación de
+       autenticación la primera vez, o se pide su código de seis números. */
+    function nivel(t) {
+      try {
+        var p = t.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+        return JSON.parse(atob(p + '==='.slice((p.length + 3) % 4))).aal || 'aal1';
+      } catch (e) { return 'aal1'; }
+    }
+    function segundoPaso(t) {
+      return auth('/auth/v1/user', null, t, 'GET').then(function (u) {
+        s.correo = u.email; pon(s);
+        var fs = (u.factors || []).filter(function (f) { return f.factor_type === 'totp'; });
+        var listo = fs.filter(function (f) { return f.status === 'verified'; })[0];
+        // Un alta que se quedó a medias se borra para empezar limpio.
+        var sueltos = listo ? [] : fs.filter(function (f) { return f.status !== 'verified'; });
+        return Promise.all(sueltos.map(function (f) { return auth('/auth/v1/factors/' + f.id, null, t, 'DELETE').catch(function () {}); }))
+          .then(function () {
+            if (listo) return listo;
+            return auth('/auth/v1/factors', { factor_type: 'totp', friendly_name: 'Panel Auditavisión ' + Date.now() }, t)
+              .catch(function () { throw { message: 'factor' }; });
+          });
+      }).then(function (f) {
+        var caja = $('acFactor'), est = $('acFactorEstado'), cod = $('acFactorCodigo');
+        entrar.hidden = true; caja.hidden = false;
+        $('acFactorAlta').hidden = !f.totp;
+        if (f.totp) { $('acFactorQr').src = f.totp.qr_code; $('acFactorSecreto').textContent = f.totp.secret; }
+        cod.focus();
+        return new Promise(function (ok) {
+          caja.onsubmit = function (e) {
+            e.preventDefault();
+            var n = cod.value.replace(/\D/g, '');
+            if (n.length !== 6) { est.textContent = 'Escribe los seis números que te da tu aplicación.'; return; }
+            est.textContent = 'Revisando…';
+            auth('/auth/v1/factors/' + f.id + '/challenge', {}, t).then(function (ch) {
+              return auth('/auth/v1/factors/' + f.id + '/verify', { challenge_id: ch.id, code: n }, t);
+            }).then(function (j) {
+              pon({ token: j.access_token, refresh: j.refresh_token, vence: Date.now() + j.expires_in * 1000, correo: s.correo });
+              caja.hidden = true; est.textContent = ''; cod.value = '';
+              ok(j.access_token);
+            }).catch(function () { est.textContent = 'El código no coincide o ya cambió: escribe el que se ve ahora.'; cod.select(); });
+          };
+        });
+      });
+    }
     function abre() {
-      token().then(function (t) { return auth('/auth/v1/user', null, t, 'GET'); }).then(function (u) {
+      token().then(function (t) { return nivel(t) === 'aal2' ? t : segundoPaso(t); })
+        .then(function (t) { return auth('/auth/v1/user', null, t, 'GET'); }).then(function (u) {
         s.correo = u.email; pon(s);
         $('acQuien').textContent = 'Entraste como ' + u.email + '.';
         return Promise.all([carga(), semana(), maestroInfo()]);
@@ -649,8 +697,10 @@
         paseAdmin().then(function () { if (A.pestana) A.pestana(); }).catch(function () {});
       })
         .catch(function (e) {
-          var no = e && /administraci/.test(e.message || '');
-          $('acEntrarEstado').textContent = no ? 'Esta cuenta no está dada de alta en la administración.' : 'Tu sesión venció: vuelve a pedir el enlace.';
+          var no = e && /administraci/.test(e.message || ''), fa = e && e.message === 'factor';
+          entrar.hidden = false; $('acFactor').hidden = true;
+          $('acEntrarEstado').textContent = fa ? 'No se pudo dar de alta el segundo factor: revisa que la autenticación de dos pasos (TOTP) esté encendida en Supabase.'
+            : no ? 'Esta cuenta no está dada de alta en la administración.' : 'Tu sesión venció: vuelve a pedir el enlace.';
           if (!no) pon(null);
         });
     }

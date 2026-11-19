@@ -29,6 +29,7 @@ import unicodedata
 import sys
 
 import mo_capitulos
+import seguridad
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -1614,7 +1615,7 @@ BASE_PASOS = [
 # llamadas a servidor). Cuando se conecte Supabase (docs/BASE-DE-DATOS.md),
 # este aviso cambia ANTES de recabar el primer dato.
 LFPDPPP = 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LFPDPPP.pdf'
-AVISO_FECHA = '18-11-2026'
+AVISO_FECHA = '19-11-2026'
 # El responsable de los datos personales (LFPDPPP art. 15, fr. I) y de las
 # réplicas (Ley de réplica, art. 7): lo designó el autor el 02-11-2026. Un solo
 # renglón que leen las dos páginas; si cambia, cambia aquí.
@@ -1706,6 +1707,51 @@ AVISO = {
                     'que comprueba que eres una persona y no un programa; y si usas la IA, a nuestra base, que llama a Anthropic (arriba). Esos servicios reciben, como cualquier sitio, tu dirección IP y los datos técnicos '
                     'de tu navegador, y los tratan con sus propias políticas. Los enlaces a portales oficiales y a noticias te llevan a '
                     'sitios con sus propios avisos.</p>')},
+        # Cómo se protege y qué se hace si algo falla (19-11-2026, pedido del autor: «la
+        # forma de proteger la información»). Cotejado contra la LFPDPPP, arts. 18 a 20.
+        # Dice solo lo que hace hoy el código: si una medida cambia, cambia aquí.
+        {'id': 'seguridad', 'titulo': 'Cómo protegemos la información', 'texto': 'Artículos 18 y 20 de la ley.', 'tarjetas': [],
+         'bloque': ('<p>La ley pide medidas de seguridad <b>administrativas, técnicas y físicas</b> «que permitan proteger los datos personales '
+                    'contra daño, pérdida, alteración, destrucción o el uso, acceso o tratamiento no autorizado», según el riesgo y la '
+                    'sensibilidad de los datos (art. 18). Estas son las nuestras, dichas tal como funcionan hoy:</p>\n'
+                    '<ul>\n'
+                    '<li><b>Lo tuyo no se sube.</b> Las facturas, los recibos de nómina, los estados de resultados, las listas de RFC y '
+                    'Mi Auditavisión se leen y se guardan <b>en tu navegador</b>; el archivo nunca viaja a un servidor.</li>\n'
+                    '<li><b>Una política de seguridad en cada página</b> (Content-Security-Policy): el navegador solo deja que la página hable '
+                    'con nuestra base de datos y con los servicios que se nombran en este aviso. Si alguien lograra meter código en una página, '
+                    'no podría mandar lo que abriste a otro sitio.</li>\n'
+                    '<li><b>Conexión cifrada</b> (HTTPS) con el sitio y con la base de datos.</li>\n'
+                    '<li><b>Cada quien ve solo lo suyo</b>: la base de datos revisa, renglón por renglón, quién puede leer o escribir cada '
+                    'dato, y la llave maestra de la base no está en el sitio público.</li>\n'
+                    '<li><b>La administración entra con dos pasos</b>: su correo (o su código maestro) y un código de seis números de una '
+                    'aplicación de autenticación. Sin el segundo, la base no la reconoce.</li>\n'
+                    '<li><b>Bitácora</b>: cada acción de la administración sobre los códigos queda anotada sola, con quién y cuándo.</li>\n'
+                    '<li><b>Lo mínimo y por poco tiempo</b>: no guardamos tu dirección IP, solo una huella cifrada para frenar el abuso, y lo '
+                    'que se guarda se borra solo a los 12 meses. Del RFC de una persona física solo se guarda su huella SHA-256.</li>\n'
+                    '<li><b>Confidencialidad</b>: quien interviene en el tratamiento de tus datos guarda el secreto, «aun después de '
+                    'finalizar sus relaciones» con la plataforma (art. 20).</li>\n'
+                    '<li><b>Lo físico</b>: no tenemos servidores propios. El sitio vive en GitHub Pages y la base de datos en Supabase, '
+                    'que cuidan sus centros de datos con sus propias medidas.</li>\n'
+                    '</ul>\n'
+                    '<p><b>Lo que todavía falta, dicho con su nombre:</b> la política de seguridad aún permite código escrito dentro de la '
+                    'página (lo quitaremos al pasarlo a archivos), y lo que guarda tu navegador no va cifrado: si alguien usa tu equipo, '
+                    'puede verlo. Bórralo al terminar si compartes la computadora.</p>')},
+        {'id': 'vulneraciones', 'titulo': 'Si algo falla: qué hacemos', 'texto': 'Artículo 19 de la ley.', 'tarjetas': [],
+         'bloque': ('<p>La ley manda que una vulneración de seguridad que afecte de forma significativa tus derechos patrimoniales o '
+                    'morales «le serán informadas de forma inmediata» (art. 19), para que puedas defenderte. Este es nuestro procedimiento:</p>\n'
+                    '<ol>\n'
+                    '<li><b>Cerrar la puerta.</b> En cuanto sepamos de una falla, cerramos el acceso: cambiamos las llaves, cerramos las '
+                    'sesiones y apagamos la función afectada.</li>\n'
+                    '<li><b>Medir el daño.</b> Con la bitácora y los registros de la base, revisamos qué datos, de quién y desde cuándo.</li>\n'
+                    '<li><b>Avisarte de inmediato.</b> Si te afecta, te escribimos al correo que nos diste, sin esperar a terminar la '
+                    'revisión: qué pasó, qué datos tuyos se vieron, qué hicimos y qué te conviene hacer. Si no tenemos cómo escribirte, '
+                    'el aviso va en esta página.</li>\n'
+                    '<li><b>Corregir y contarlo.</b> Arreglamos la causa y publicamos una nota con la fecha, lo que falló y la medida '
+                    'nueva, sin datos de nadie, y la fecha de este aviso cambia.</li>\n'
+                    '</ol>\n'
+                    '<p><b>¿Viste algo raro?</b> Si encuentras una falla de seguridad en la plataforma, escríbenos a '
+                    '<a href="mailto:%s">%s</a> antes de publicarla, para cerrarla primero. Te respondemos y, si quieres, te damos crédito.</p>'
+                    % (RESPONSABLE['correo'], RESPONSABLE['correo']))},
         {'id': 'derechos', 'titulo': 'Tus derechos y cómo limitar el uso', 'texto': 'Artículo 15, fracciones IV y V.', 'tarjetas': [],
          'bloque': ('<p>Tienes derecho a acceder a tus datos, rectificarlos, cancelarlos y oponerte a su uso (derechos ARCO, arts. 21 a 28 de '
                     'la ley). Lo que vive en tu navegador lo borras tú mismo: borra los datos del sitio, o usa «🗑️ Limpiar» en el '
@@ -6661,6 +6707,7 @@ def _pagina(a, sello):
 <html lang="es" data-theme="light">
 <head>
   <meta charset="UTF-8">
+  {csp}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{titulo_doc}</title>
   <meta name="description" content="{descripcion}">
@@ -6712,7 +6759,7 @@ def _pagina(a, sello):
   <script src="assets/auditor/js/comunidad.js?v={sello}"></script>{scripts}
 </body>
 </html>
-'''.format(titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
+'''.format(csp=seguridad.meta(), titulo_doc=titulo_doc, descripcion=esc_attr(descripcion), favicon=FAVICON, sello=sello,
            sociales=sociales(a['archivo'], titulo_doc, descripcion) + ('\n  <meta name="robots" content="noindex, nofollow">' if a.get('noindex') else ''),
            cabecera=cabecera(a.get('menu_archivo', a['archivo']), sello), menu=a['menu'],
            volver='' if a.get('pie_corto') else (
@@ -7105,6 +7152,7 @@ def redireccion(destino, nombre, texto):
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  {csp}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{nombre} · Auditavisión</title>
   <meta name="robots" content="noindex">
@@ -7116,7 +7164,7 @@ def redireccion(destino, nombre, texto):
   <p><b>{nombre}</b> cambió de lugar. {texto} <a href="{destino}">Ir ahora ➔</a></p>
 </body>
 </html>
-'''.format(nombre=nombre, destino=destino, favicon=FAVICON, url=destino.replace('&amp;', '&'), texto=texto)
+'''.format(csp=seguridad.meta(), nombre=nombre, destino=destino, favicon=FAVICON, url=destino.replace('&amp;', '&'), texto=texto)
 
 
 def generar(sello=None):

@@ -654,6 +654,13 @@ python3 -m http.server 8000    # y abrir http://localhost:8000
 
   Cambia las referencias `?v=` y el sello visible al pie de `index.html` (solo ahí). Si no tocaste
   `assets/`, no lo subas.
+- **Cada página lleva la política de seguridad de contenido (CSP)** de
+  `herramientas/seguridad.py` (19-11-2026, LFPDPPP art. 18): la ponen los
+  generadores y la portada a mano, y `revision.py` se detiene si una página no
+  la trae igual. **Un servicio externo nuevo (API, CDN, antispam) necesita ahí su
+  anfitrión**, o el navegador lo bloquea en silencio. **El panel de la
+  administración pide dos factores**: `es_admin()` solo responde con la sesión
+  aal2 (migración `20261119000001_doble_factor.sql`).
 - La navegación usa `data-tab` en las pestañas y `data-sub` en las
   subpestañas; los paneles, `data-subpanel`.
 - **Reglas de lectura** (condición del dueño: fácil de leer en celular):

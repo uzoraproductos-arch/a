@@ -26,6 +26,23 @@ begin
 end $$;
 grant execute on function pg_temp.debe_fallar(text, text), pg_temp.igual(bigint, bigint, text) to anon, authenticated;
 
+-- 0. El doble factor (20261119000001_doble_factor.sql): la administración que
+-- entró con un solo paso (aal1) no es administración.
+set role authenticated;
+set request.jwt.claim.sub = '00000000-0000-0000-0000-0000000000ad';
+set request.jwt.claims = '{"aal":"aal1"}';
+select pg_temp.igual((select count(*) from public.administradores), 0, 'administración con un solo factor ve la tabla de administración');
+select pg_temp.igual(public.es_admin()::int, 0, 'es_admin() con un solo factor');
+set request.jwt.claims = '{}';
+select pg_temp.igual(public.es_admin()::int, 0, 'es_admin() sin nivel de sesión');
+set request.jwt.claims = '{"aal":"aal2"}';
+select pg_temp.igual(public.es_admin()::int, 1, 'es_admin() con dos factores');
+set request.jwt.claim.sub = '00000000-0000-0000-0000-00000000000a';
+select pg_temp.igual(public.es_admin()::int, 0, 'una persona sin alta, aun con dos factores');
+reset request.jwt.claim.sub;
+reset role;
+-- De aquí en adelante, todas las sesiones son de dos factores.
+
 -- 1. La función (llave de servicio) guarda envíos y preguntas.
 set role service_role;
 insert into public.envios (tipo, asunto, texto, pagina, estado) values

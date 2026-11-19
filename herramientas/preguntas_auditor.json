@@ -2922,6 +2922,14 @@
   {
    "q": "¿Cuánto me retienen de ISR por mis dividendos?",
    "ir": "herramienta-calculadora-bolsa.html"
+  },
+  {
+   "q": "¿Cómo protegen mis datos?",
+   "ir": "aviso-de-privacidad.html#seguridad"
+  },
+  {
+   "q": "¿Qué hacen si hay una fuga de datos?",
+   "ir": "aviso-de-privacidad.html#vulneraciones"
   }
  ]
 }

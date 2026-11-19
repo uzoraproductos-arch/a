@@ -33,6 +33,7 @@ pase antes de entregar la página (Vercel, fase 1 de docs/LANZAMIENTO.md).
 import json
 import os
 import re
+import seguridad
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 JS = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'acceso.js')
@@ -127,6 +128,7 @@ def entrada_html(sello):
 <html lang="es" data-theme="light">
 <head>
   <meta charset="UTF-8">
+  {csp}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ingresa con tu código · Auditavisión</title>
   <meta name="description" content="Auditavisión, el gasto público a la vista. Versión de prueba por invitación: ingresa con tu código o pide uno.">
@@ -192,7 +194,7 @@ def entrada_html(sello):
   <script src="assets/auditor/js/acceso-paginas.js?v={sello}"></script>
 </body>
 </html>
-""".format(sello=sello, logo=apartados.LOGO_IMG, notas=notas, casillas=casillas, sin_base=sin_base)
+""".format(csp=seguridad.meta(), sello=sello, logo=apartados.LOGO_IMG, notas=notas, casillas=casillas, sin_base=sin_base)
 
 
 def escribir_entrada(sello):
@@ -277,6 +279,25 @@ def pagina_panel():
               '    <button class="sz-btn sz-btn-of" type="submit">Mandarme el enlace para entrar</button>\n'
               '    <p class="ac-estado" id="acEntrarEstado" role="status" aria-live="polite"></p>\n'
               '    <p class="ac-ayuda">¿Ya pusiste tu código maestro? Escríbelo en <a href="canjea-tu-codigo.html">la entrada</a> y entras sin correo.</p>\n'
+              '  </form>\n'
+              # El doble factor (19-11-2026, LFPDPPP art. 18): el correo o el código maestro
+              # abren la sesión, y el panel pide además el código de seis números de una
+              # aplicación de autenticación (TOTP de Supabase). La base lo exige también:
+              # es_admin() solo responde con la sesión de dos factores (aal2).
+              '  <form class="ac-entrar" id="acFactor" novalidate hidden>\n'
+              '    <h2 class="ac-et">Segundo paso: tu código de seis números</h2>\n'
+              '    <div id="acFactorAlta" hidden>\n'
+              '      <p class="ac-ayuda">Es la primera vez: escanea este código con tu aplicación de autenticación '
+              '(Google Authenticator, Microsoft Authenticator, 1Password, Authy…) y escribe los seis números que te da.</p>\n'
+              '      <img class="ac-qr" id="acFactorQr" alt="Código QR para dar de alta el segundo factor" width="200" height="200">\n'
+              '      <p class="ac-ayuda">¿No puedes escanearlo? Escribe esta clave en la aplicación: <code id="acFactorSecreto"></code></p>\n'
+              '    </div>\n'
+              '    <label class="ac-et" for="acFactorCodigo">Código de tu aplicación</label>\n'
+              '    <input class="ac-campo" id="acFactorCodigo" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required>\n'
+              '    <button class="sz-btn sz-btn-of" type="submit">Entrar al panel</button>\n'
+              '    <p class="ac-estado" id="acFactorEstado" role="status" aria-live="polite"></p>\n'
+              '    <p class="ac-ayuda">El panel pide los dos pasos por seguridad (LFPDPPP, art. 18). '
+              'Si perdiste tu aplicación, la llave de servicio de Supabase borra el factor y lo das de alta otra vez.</p>\n'
               '  </form>\n'
               '  <div class="ac-admin" id="acAdmin" hidden>\n'
               '    <p class="ac-sesion"><span id="acQuien"></span> <button class="sz-btn ac-chico" type="button" id="acSalir">Salir</button></p>\n'

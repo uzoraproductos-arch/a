@@ -18,6 +18,12 @@ create function auth.uid() returns uuid language sql stable as $$
   select nullif(current_setting('request.jwt.claim.sub', true), '')::uuid;
 $$;
 grant execute on function auth.uid() to anon, authenticated, service_role;
+-- auth.jwt(): los datos de la sesión. En las pruebas, request.jwt.claims; el
+-- nivel de la sesión (aal) dice si entró con uno o con dos factores.
+create function auth.jwt() returns jsonb language sql stable as $$
+  select coalesce(nullif(current_setting('request.jwt.claims', true), ''), '{}')::jsonb;
+$$;
+grant execute on function auth.jwt() to anon, authenticated, service_role;
 
 -- Como en Supabase: pgcrypto vive en el esquema «extensions», fuera de public.
 -- Así una función con search_path = public que la use falla aquí también

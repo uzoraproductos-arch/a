@@ -171,3 +171,5 @@
   .ac-barra-pista { grid-column: 1 / -1; grid-row: 2; }
   .ac-pestana { flex: 1 1 auto; }
 }
+.ac-qr { display: block; width: 200px; height: 200px; margin: 12px 0; background: #fff; padding: 8px; border: 1px solid #c8d1e0; border-radius: 8px; }
+#acFactor code { word-break: break-all; font-size: 16px; }

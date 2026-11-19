@@ -11,6 +11,7 @@ Aqui no se escribe ni un monto: solo el marco de cada pagina.
 Lo llama apartados.generar(), asi que sello.py las regenera con el sello.
 """
 import html
+import seguridad
 import json
 import os
 import re
@@ -397,6 +398,7 @@ def pagina(a, sello):
 <html lang="es" data-theme="light">
 <head>
   <meta charset="UTF-8">
+  {csp}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{titulo_doc} · Auditoría en imágenes · Auditavisión</title>
   <meta name="description" content="{pregunta_attr}">
@@ -469,7 +471,7 @@ def pagina(a, sello):
   <script src="assets/auditor/js/auditoria-imagen.js?v={sello}"></script>
 </body>
 </html>
-'''.format(titulo_doc=re.sub('<[^>]+>', '', titulo), pregunta_attr=esc_attr(pregunta), favicon=FAVICON,
+'''.format(csp=seguridad.meta(), titulo_doc=re.sub('<[^>]+>', '', titulo), pregunta_attr=esc_attr(pregunta), favicon=FAVICON,
            sello=sello, cabecera=cabecera(archivo(id_), sello), img=img, alt=esc_attr(alt), nota_img=nota_img,
            titulo=titulo, badge=badge, pregunta=pregunta, id=id_, otras=otras(id_), temas=temas(id_), extra=extra, ruta=ruta(id_), lectura=lectura(id_), servicio=expediente_puerta(id_) + '\n' + servicio(titulo),
            sociales=sociales(archivo(id_), re.sub('<[^>]+>', '', titulo) + ' · Auditavisión', pregunta, img))

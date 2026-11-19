@@ -301,7 +301,8 @@ PAGINA_K = {
     'comunidad.html': ' participa participar reportar denunciar error corregir proponer tema',
     'informes-documentar-para-sancionar.html': ' sancion sancionar sanciones castigo impunidad responsabilidad administrativa falta grave desvio abuso de funciones desacato ipra expediente matrices irregularidad',
     'derecho-de-replica.html': ' replica rectificacion aclaracion aclarar corregir me aludieron me mencionaron me nombraron nombran difamacion inexacto falso agravio prensa periodistas personas privadas responder',
-    'aviso-de-privacidad.html': ' privacidad datos personales mis datos guardan guardas cookies rastreo analitica borrar derechos arco',
+    'aviso-de-privacidad.html': ' privacidad datos personales mis datos guardan guardas cookies rastreo analitica borrar derechos arco'
+                                ' protegen proteger proteccion seguridad seguro fuga fugas filtracion vulneracion hackeo robo de datos cifrado',
 }
 
 

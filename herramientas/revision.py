@@ -100,6 +100,7 @@ def main():
     revisiones.append(('puntos ciegos', lambda: corre('prueba_puntos_ciegos.py')))
     revisiones.append(('vínculos por el Auditor', lambda: corre('vinculos_auditor.py')))
     revisiones.append(('registro de fuentes', lambda: corre('fuentes.py')))
+    revisiones.append(('política de seguridad (CSP)', lambda: corre('seguridad.py')))
     # Encargo del 05-11-2026: el vigía legislativo y el lector de facturas,
     # cada uno con su prueba sin red (ejemplos fijos y una factura ficticia).
     revisiones.append(('vigía legislativo', lambda: corre('vigia_legislativo.py', '--prueba')))
