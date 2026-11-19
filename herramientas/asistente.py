@@ -617,6 +617,9 @@ ALIAS_APPS = {
                          'cuanto tiempo se guarda', 'cuantos anos guardo', 'cuantos anos debo guardar', 'cuantos anos se guarda', 'conservar mis facturas',
                          'conservar la contabilidad', 'conservacion de documentos', 'conservacion de la contabilidad', 'calendario de conservacion',
                          'plazo de conservacion', 'destruir mis papeles', 'tirar mis papeles', 'destruir documentos', 'depurar el archivo'],
+    'inspcumplimiento': ['autodiagnostico', 'cumples con tus papeles', 'cumplo con mis papeles', 'cumplo con la ley', 'estoy cumpliendo',
+                         'que me falta para cumplir', 'checklist de cumplimiento', 'lista de cumplimiento', 'diagnostico de cumplimiento',
+                         'cumplimiento documental', 'cumplo con la lfpdppp', 'cumplo con datos personales'],
     'simulador-presupuesto.html': ['reparte el presupuesto', 'simulador del presupuesto'],
     'radar-estado-de-cuenta.html': ['estado de cuenta administrativo'],
 }

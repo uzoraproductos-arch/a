@@ -2889,8 +2889,14 @@
   var PROTEGE_RE = /(?:proteg|cuid|resguard)\w*\s+(?:(?:mis|tus|los|la|mi|nuestros?|nuestra)\s+)?(?:datos|informaci[oó]n)|(?:fuga|filtraci[oó]n|vulneraci[oó]n|robo|hackeo)\s+de\s+(?:(?:mis|tus|los)\s+)?(?:datos|informaci[oó]n)|(?:mis|tus)\s+datos\s+(?:est[aá]n|son)\s+segur|seguridad\s+de\s+(?:mis|tus|los)\s+datos/i;
   /* Cuánto tiempo se guarda un papel (19-11-2026): va antes que facturas, nómina y el calendario de Servicios, que comparten palabras. */
   var CONSERVA_RE = /(?:cu[aá]nto tiempo|cu[aá]ntos a[nñ]os|hasta cu[aá]ndo)\s+(?:[\wáéíóúñ]+\s+){0,3}(?:guard|conserv)|calendario de conservaci|plazo de conservaci|conservaci[oó]n de (?:documentos|papeles|archivos|la contabilidad|expedientes)|gobernanza documental|(?:destruir|tirar|depurar)\s+(?:[\wáéíóúñ]+\s+){0,2}(?:papeles|documentos|archivos?|expedientes|facturas)/i;
+  /* El autodiagnóstico de cumplimiento (19-11-2026): «¿cumplo con…?», «¿qué me falta para cumplir?». Va antes que el calendario. */
+  var CUMPLE_RE = /autodiagn[oó]stico|diagn[oó]stico de cumplimiento|(?:checklist|lista) de cumplimiento|cumplimiento documental|(?:cumplo|cumple|cumplimos|cumples|estoy cumpliendo|estamos cumpliendo)\s+(?:[\wáéíóúñ]+\s+){0,3}(?:papeles|documentos|archivos?|la ley de datos|datos personales|lfpdppp|ley general de archivos|obligaciones documentales)|qu[eé]\s+(?:me|nos)\s+falta\s+para\s+cumplir/i;
   function respuesta(q, previas) {
     var t = String(q || '').trim().replace(/^[¿¡\s]+/, '').replace(/[?!.\s]+$/, '');
+    if (CUMPLE_RE.test(t)) {
+      var rcu = abre(q, /servicio|cotiza|h[aá]g[ae]n|revisen/i.test(t) ? 'servicio-gobernanza.html' : 'herramienta-inspector-cumplimiento.html');
+      if (rcu) return rcu;
+    }
     if (CONSERVA_RE.test(t)) {
       var srvC = /servicio|cotiza|gobernanza|h[aá]g[ae]n|quiero un calendario|para mi empresa/i.test(t), lc = srvC ? 'servicio-gobernanza.html' : 'herramienta-inspector-conservacion.html';
       var rc = abre(q, lc);

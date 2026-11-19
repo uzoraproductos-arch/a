@@ -131,12 +131,15 @@ FICHAS = {
         'hace': [
             ('🗄️', '¿Hasta cuándo guardas tus papeles?', 'El calendario de conservación: cada papel con su plazo, desde cuándo corre y su artículo '
              '(CFF, Código de Comercio, LSS, LFT, LFPIORPI y LFPDPPP), y la fecha mínima para lo de un año.', 'herramienta-inspector-conservacion.html', 'Nuevo'),
+            ('✅', '¿Cumples con tus papeles?', 'El autodiagnóstico: 25 obligaciones de la ley sobre tus documentos y tus datos personales, contestas sí, no o no sé, '
+             'y ves qué falta por área, con su artículo y qué hacer.', 'herramienta-inspector-cumplimiento.html', 'Nuevo'),
             ('📑', 'Tus facturas, leídas', 'El XML se lee en tu navegador: lo que conviene revisar antes de archivarlo.', 'herramienta-inspector-factura.html', 'Gratis'),
             ('🔒', 'Cómo cuidamos la información', 'Lo que hacemos nosotros con los datos: medidas de seguridad y qué pasa si algo falla.',
              'aviso-de-privacidad.html#seguridad', 'Nuevo'),
         ],
         'auditor': [('¿Cuántos años debo guardar mis facturas?', 'ciudadano'), ('¿Hasta cuándo guardo los recibos de nómina?', 'inspector'),
-                    ('¿Cuánto tiempo se guarda el expediente de un cliente en una actividad vulnerable?', 'inspector')],
+                    ('¿Cuánto tiempo se guarda el expediente de un cliente en una actividad vulnerable?', 'inspector'),
+                    ('¿Mi empresa cumple con sus papeles?', 'inspector')],
         'enciclopedia': [('aprende-auditoria.html#met-control', 'Cómo se audita: el control interno'),
                          ('aprende-auditoria.html#met-lavado', 'Cómo se audita: el lavado de dinero')],
         'glosario': ['Plazo de Conservación', 'Bloqueo de Datos Personales', 'Plazo para que el SAT te Revise (Caducidad)',

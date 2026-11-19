@@ -1,0 +1,18 @@
+/* Auditavisión · ¿Cumples con tus papeles? (insp_cumplimiento.py). Lo demás viene de cc-inmueble.css e insp-conservacion.css. */
+.cu-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.cu-q { padding: 12px; border: 1px solid var(--ci-linea); border-radius: 12px; }
+.cu-preg { margin: 0 0 8px; font-weight: 600; }
+.cu-ops { display: flex; flex-wrap: wrap; gap: 8px; }
+.cu-r { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 14px; border: 1px solid var(--ci-linea); border-radius: 22px; cursor: pointer; }
+.cu-r input { width: 20px; height: 20px; }
+.cu-r:has(input:checked) { background: var(--ci-claro); border-color: #2f6f4f; }
+.cu-falta { margin: 6px 0; }
+.cu-app a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+.cu-paso { margin: 18px 0 8px; }
+.cu-barra { display: block; height: 12px; min-width: 90px; border-radius: 6px; background: var(--ci-linea); overflow: hidden; }
+.cu-barra span { display: block; height: 100%; background: #2f6f4f; }
+.cu-et { display: inline-block; padding: 1px 8px; border-radius: 8px; font-weight: 700; }
+.cu-et-no { background: #f6dede; color: #7a1f1f; }
+.cu-et-nose { background: #f6efd6; color: #6b5310; }
+.cu-sec { background: transparent; color: inherit; border: 1px solid var(--ci-linea); }
+@media print { .ci-form, .ci-aviso, .ci-acciones { display: none !important; } .ci-res { display: block !important; } }
