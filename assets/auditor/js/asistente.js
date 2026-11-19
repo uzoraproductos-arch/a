@@ -1890,6 +1890,21 @@
     var gob = GOBIERNO.test(p) && (!r || r[0] === 'sueldos');
     return { r: r ? r[0] : (gob ? 'sueldos' : ''), pl: pl, pt: gob ? 'issste' : '' };
   }
+  /* «¿Cuánto pago de predial en Vallarta?», «debo el predial en Tepatitlán»: el simulador del
+     predial, con el municipio ya puesto si su ley está cotejada (19-11-2026). Va antes que la ficha
+     del municipio y que Megaobras; «¿cuánto recaudó Zapopan de predial?» sigue yendo a la ficha. */
+  function predialResp(q) {
+    var p = plano(q), a = APP.ccpredial, L = (B.dat.calc || {}).pred || [];
+    if (!a || !/ predial(es)? /.test(p) || /^ (que|q) (es|son|significa) /.test(p) || / (recaud|ingres|cobr(o|aron) el municipio|cuanto (cobra|junta) el municipio)/.test(p)) return null;
+    var hit = null;
+    L.forEach(function (m) { if (!hit && m.slice(1).some(function (n) { return p.indexOf(' ' + n + ' ') >= 0; })) hit = m; });
+    var liga = a.url + (hit ? '?mun=' + hit[0] : '');
+    return respApp('ccpredial', liga, '<p><span aria-hidden="true">' + a.ico + '</span> Esa cuenta la hace <b>' + esc(a.n) + '</b>, de la ' + esc(a.grupo) + (hit ? ', y ya le puse el municipio' : '') +
+      ': escribe el valor fiscal de tu predio (viene en tu recibo) y te dice tu predial del año con la tabla de su Ley de Ingresos, sus descuentos y, si debes bimestres, la actualización, los recargos, la multa y los gastos de cobranza, cada uno con su artículo.</p>' +
+      '<p class="pa-chico">La cuenta la hace el simulador, no el chat. Cada municipio cobra con su propia ley; si el tuyo aún no está cotejado, la página te lo dice y te da cuánto recaudó de predial.</p>',
+      { sug: ['Me llegó un mandamiento de ejecución por no pagar el predial', '¿Cuánto recaudó de predial mi municipio?', 'Vendes una casa o un terreno'] });
+  }
+
   function herramienta(q) {
     if (!HA.apps.length) return null;
     var p = plano(q), cc = APP.ccticket, CR = B.dat.calc || {};
@@ -3041,6 +3056,8 @@
     if (cx) return cx;
     var pe = personaje(q);
     if (pe) return pe;
+    var prd = conApp(predialResp(q));
+    if (prd) return prd;
     var ins = conApp(inspector(q, previas));
     if (ins) return ins;
     var mo = conApp(megaobras(q, previas));

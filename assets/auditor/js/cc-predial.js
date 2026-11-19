@@ -19,24 +19,34 @@
     for (var i = 0; i < m.tramos.length; i++) if (vf >= m.tramos[i][0]) k = i;
     return k;
   }
+  /* tipo: 'edif' (construido), 'rust' (rústico: su propia tasa al millar si la ley la da) o 'baldio'. */
   function base(m, vf, tipo) {
+    if (tipo === 'rust' && m.rustico) return r2(vf * m.rustico.millar / 1000 + m.rustico.cf);
     if (tipo !== 'baldio') return bimestral(m, vf);
     var b = m.baldio;
+    if (b.tipo === 'igual') return bimestral(m, vf);
     if (b.tipo === 'sobretasa') return r2(bimestral(m, vf) * (1 + b.pct / 100));
     return r2(vf * b.millar / 1000 + b.cf);
   }
+  function cf2(v) { return '$' + Number(v).toLocaleString('es-MX', { minimumFractionDigits: 2 }); }
 
   /* x: {vf, tipo, ben, pago} */
   function calcula(D, m, x) {
     var pasos = [], avisos = [], ley = function (a) { return 'Ley de Ingresos de ' + m.nombre + ', ' + a; };
     var B = base(m, x.vf, x.tipo);
-    if (x.tipo === 'baldio') {
+    if (x.tipo === 'rust' && m.rustico) {
+      pasos.push(['Rústico: ' + m.rustico.millar + ' al millar del valor + cuota fija de ' + cf2(m.rustico.cf), B, ley(m.rustico.art), 'b']);
+    } else if (x.tipo === 'baldio' && m.baldio.tipo === 'igual') {
+      pasos.push(['Baldío: la ley no le pone otra tasa; paga con la tabla general', B, ley(m.baldio.art), 'b']);
+    } else if (x.tipo === 'baldio') {
       if (m.baldio.tipo === 'sobretasa') {
         pasos.push(['Impuesto de un predio construido con ese valor', bimestral(m, x.vf), ley(m.art_tarifa)]);
-        pasos.push(['Baldío: sobretasa de ' + m.baldio.pct + ' % (el doble)', B, ley(m.baldio.art)]);
+        pasos.push(['Baldío: sobretasa de ' + m.baldio.pct + ' %' + (m.baldio.pct === 100 ? ' (el doble)' : ''), B, ley(m.baldio.art)]);
       } else {
         pasos.push(['Baldío: ' + m.baldio.millar + ' al millar del valor + cuota fija de $' + m.baldio.cf.toFixed(2), B, ley(m.baldio.art), 'b']);
       }
+    } else if (m.tarifa === 'millar') {
+      pasos.push(['Construido: ' + m.millar + ' al millar del valor + cuota fija de ' + cf2(m.tramos[0][1]), B, ley(m.art_tarifa), 'b']);
     } else {
       var t = m.tramos[tramo(m, x.vf)];
       pasos.push(['Tu tramo: desde $' + t[0].toLocaleString('es-MX', { minimumFractionDigits: 2 }) + ', cuota fija $' + t[1].toLocaleString('es-MX', { minimumFractionDigits: 2 }) + ', tasa ' + t[2], null, ley(m.art_tarifa)]);
@@ -44,7 +54,8 @@
       pasos.push(['Impuesto de cada bimestre (más la cuota fija)', B, ley(m.art_tarifa), 'b']);
     }
     var A = r2(B * 6);
-    pasos.push(['Impuesto del año (seis bimestres)', A, ley(m.art_tarifa), 'b']);
+    var artB = x.tipo === 'rust' && m.rustico ? m.rustico.art : x.tipo === 'baldio' ? m.baldio.art : m.art_tarifa;
+    pasos.push(['Impuesto del año (seis bimestres)', A, ley(artB), 'b']);
     var res = { bim: B, anual: A, pasos: pasos, avisos: avisos };
 
     /* El descuento: factor sobre el impuesto, a veces solo «sobre el primer» tanto del valor. */
@@ -82,9 +93,11 @@
     res.fin = r2(fin);
     res.pr = pr;
     res.ben = ben;
-    pasos.push([pr ? 'Pagas por el año, en una sola exhibición' : 'Pagas por el año (en seis bimestres de ' + pesos(r2(A1 / 6)) + ')', res.fin, ley(pr ? pr.art : m.art_tarifa), 'b']);
+    pasos.push([pr ? 'Pagas por el año, en una sola exhibición' : 'Pagas por el año (en seis bimestres de ' + pesos(r2(A1 / 6)) + ')', res.fin, ley(pr ? pr.art : artB), 'b']);
     if (pr && m.pronto_nota) avisos.push(m.pronto_nota);
     if (m.tramos_nota) avisos.push(m.tramos_nota);
+    if (x.tipo === 'rust' && !m.rustico) avisos.push('La Ley de Ingresos de ' + m.nombre + ' cobra a los predios rústicos con la misma tabla que a los urbanos.');
+    if (m.nota) avisos.push(m.nota);
     return res;
   }
 
@@ -128,21 +141,30 @@
     if (y.sit !== 'esp') {
       if (m.multa && y.multa > 0) {
         multa = r2(tot.imp * y.multa / 100);
-        pasos.push(['Multa: ' + y.multa + ' % del impuesto omitido (la ley da de ' + m.multa.min + ' % a ' + m.multa.max + ' %)', multa, L(m.multa.art)]);
+        pasos.push(['Multa: ' + y.multa + ' % del impuesto omitido' + (m.multa.min === m.multa.max ? '' : ' (la ley da de ' + m.multa.min + ' % a ' + m.multa.max + ' %)'), multa, L(m.multa.art)]);
       } else if (!m.multa) {
         avisos.push('La Ley de Ingresos de ' + m.nombre + ' no fija el porcentaje de la multa en sus accesorios; si te impusieron una, súmala aparte.');
       }
       credito += multa;
-      var nt = m.notif;
-      notif = nt.pct ? r2(Math.min(Math.max(credito * nt.pct / 100, (nt.min_uma || 0) * uma), nt.max_uma ? nt.max_uma * uma : Infinity)) : r2(nt.uma * uma);
-      pasos.push(['Notificación del adeudo' + (nt.pct ? ' (' + nt.pct + ' % del crédito)' : ' (' + nt.uma + ' UMA diarias)'), notif, L(nt.art)]);
-      var dil = y.sit === 'req' ? 1 : y.sit === 'emb' ? 2 : 0;
+      var nt = m.notif, dil = y.sit === 'req' ? 1 : y.sit === 'emb' ? 2 : 0;
+      /* nt.req: la ley solo cobra la notificación del requerimiento (no una notificación previa). */
+      if (nt.req && !dil) nt = null;
+      if (nt) {
+        var tope2 = nt.max_pesos || (nt.max_uma ? nt.max_uma * uma : Infinity);
+        notif = nt.pesos ? nt.pesos : nt.pct ? r2(Math.min(Math.max(credito * nt.pct / 100, (nt.min_uma || 0) * uma), tope2)) : r2(nt.uma * uma);
+        pasos.push([(nt.req ? 'Notificación del requerimiento' : 'Notificación del adeudo') + (nt.pesos ? ' (cuota de la ley)' : nt.pct ? ' (' + nt.pct + ' % del crédito)' : ' (' + nt.uma + ' UMA diarias)'), notif, L(nt.art)]);
+        if (nt.pesos_nota) avisos.push(nt.pesos_nota);
+      }
+      var e = m.ejec;
+      /* e.emb: la ley cobra estos gastos solo por la diligencia de embargo, una vez. */
+      if (e.emb) dil = y.sit === 'emb' ? 1 : 0;
       if (dil) {
-        var e = m.ejec, una = credito * e.pct / 100;
+        var una = e.pesos ? e.pesos : credito * e.pct / 100;
         if (e.min_uma) una = Math.max(una, e.min_uma * uma);
         if (e.max_uma) una = Math.min(una, e.max_uma * uma);
+        if (e.max_pesos) una = Math.min(una, e.max_pesos);
         ejec = r2(una * dil);
-        pasos.push(['Gastos de ejecución: ' + e.pct + ' % del crédito por diligencia × ' + dil + (dil > 1 ? ' (requerimiento y embargo)' : ' (requerimiento)'), ejec, L(e.art)]);
+        pasos.push([e.emb ? 'Gastos de embargo: ' + (e.pesos ? 'cuota de la ley' : e.pct + ' % del crédito') : 'Gastos de ejecución: ' + e.pct + ' % del crédito por diligencia × ' + dil + (dil > 1 ? ' (requerimiento y embargo)' : ' (requerimiento)'), ejec, L(e.art)]);
       }
     } else {
       avisos.push('Pagando por tu cuenta, antes de que te requieran, no hay multa ni gastos de cobranza, y los recargos no pasan de 100 % (Ley de Hacienda Municipal, art. 52).');
@@ -150,14 +172,14 @@
     var total = r2(tot.imp + tot.act + tot.rec + multa + notif + ejec);
     pasos.push(['Total a pagar (aproximado)', total, 'Suma', 'b']);
     if (y.da < D.anio) avisos.push('Para los años antes de ' + D.anio + ' usamos la tasa de recargos de ' + D.anio + ' y el impuesto que escribiste; cada año tuvo los suyos en su ley, así que el adeudo oficial puede ser distinto.');
-    return { pasos: pasos, avisos: avisos, total: total, n: filas.length };
+    return { pasos: pasos, avisos: avisos, total: total, n: filas.length, multa: multa, notif: notif, ejec: ejec };
   }
 
   function pesos(v) {
     return (v < 0 ? '−' : '') + '$' + Math.abs(Number(v)).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
-  window.AuditorPredial = { bimestral: bimestral, calcula: calcula, adeudo: adeudo };
+  window.AuditorPredial = { bimestral: bimestral, base: base, calcula: calcula, adeudo: adeudo };
 
   var raiz = document.getElementById('cpRaiz');
   if (!raiz) return;
@@ -200,6 +222,9 @@
     }
     if (m) {
       h += '<p class="cp-ok">✓ Su tabla está integrada: <a href="' + esc(m.url) + '">' + esc(m.ley) + '</a>. Recargos: ' + m.recargo.pct + ' % al mes (' + esc(m.recargo.art) + ').</p>';
+    } else if (D.espera && D.espera[ent + '-' + cve]) {
+      var w = D.espera[ent + '-' + cve];
+      h += '<p class="cp-falta"><span class="est-chip est-pendiente">pendiente</span> Leímos su <a href="' + esc(w.url) + '">Ley de Ingresos ' + D.anio + '</a>, pero no la integramos: ' + esc(w.motivo) + ' No adivinamos una tasa. Mientras, prueba con un municipio marcado con ✓.</p>';
     } else {
       h += '<p class="cp-falta"><span class="est-chip est-pendiente">pendiente</span> Aún no integramos la tabla del predial de su Ley de Ingresos ' + D.anio +
         ': es falta de esta plataforma, no del municipio. La ley la publica el congreso de su estado' +
@@ -216,7 +241,13 @@
         return '<option value="' + esc(p.id) + '">' + esc(p.et) + ' — pagas ' + Math.round(p.f * 100) + ' %</option>';
       }).join('');
       var ops = m.multa ? [] : ['<option value="0">La ley no fija el porcentaje</option>'];
-      if (m.multa) for (var p = m.multa.min; p <= m.multa.max; p += 5) ops.push('<option value="' + p + '"' + (p === m.multa.max ? ' selected' : '') + '>' + p + ' %</option>');
+      if (m.multa) {
+        /* El mínimo, los múltiplos de 5 de en medio y el máximo (hay leyes con 3.18 % a 10.60 %). */
+        var vs = [m.multa.min];
+        for (var p = Math.ceil(m.multa.min / 5) * 5; p < m.multa.max; p += 5) if (p > m.multa.min) vs.push(p);
+        if (m.multa.max !== m.multa.min) vs.push(m.multa.max);
+        vs.forEach(function (v) { ops.push('<option value="' + v + '"' + (v === m.multa.max ? ' selected' : '') + '>' + v + ' %</option>'); });
+      }
       $('cpMulta').innerHTML = ops.join('');
     }
     compara();
@@ -231,7 +262,7 @@
     var filas = D.mun.map(function (m) { return [m, r2(base(m, vf, tipo) * 6)]; }).sort(function (a, b) { return a[1] - b[1]; });
     $('cpComp').innerHTML = filas.map(function (f) {
       var m = f[0];
-      return '<tr><th scope="row">' + esc(m.nombre) + '</th><td>' + pesos(f[1]) + '</td><td>' + m.recargo.pct + ' % · ' + (m.multa ? m.multa.min + '–' + m.multa.max + ' %' : 'no la fija') + '</td></tr>';
+      return '<tr><th scope="row">' + esc(m.nombre) + '</th><td>' + pesos(f[1]) + '</td><td>' + m.recargo.pct + ' % · ' + (m.multa ? (m.multa.min === m.multa.max ? m.multa.min : m.multa.min + '–' + m.multa.max) + ' %' : 'no la fija') + '</td></tr>';
     }).join('');
   }
 

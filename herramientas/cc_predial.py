@@ -25,6 +25,19 @@ ingresos 2026, archivo «-300126») y la Ley de Hacienda Municipal vigente
     art. 43, fr. III, cuál se suma), 49 (recargos), 50 (multa), 52 (gastos).
   - Tlajomulco de Zúñiga: arts. 35 a 38 (tarifa, baldíos, beneficios, pago
     anticipado), 46 (multa), 47 (recargos), 50 (gastos).
+  - Segunda entrega, el mismo día (pedido del autor: «continúa con los
+    municipios»): El Salto (arts. 20 a 27, 33, 35 y 37), Zapotlanejo (37 a 44,
+    51, 52 y 54), Juanacatlán (18 a 21, 26, 28 y 30), Ixtlahuacán de los
+    Membrillos (22 a 27, 33, 35 y 37), Puerto Vallarta (38 a 40, 48 y 112),
+    Lagos de Moreno (18 a 21, 28, 29 y 31), Tepatitlán de Morelos (17 a 20, 28,
+    29 y 31), Zapotlán el Grande (30 a 33, 41, 42 y 44) y Ocotlán (37 a 40, 47,
+    48 y 50). Unos cobran por tramos y otros con una tasa al millar más una
+    cuota fija (tarifa 'millar', con su tasa de rústicos en 'rustico'); la
+    cobranza también cambia: 'req' (la notificación solo se cobra con el
+    requerimiento), 'emb' (los gastos solo por el embargo, una vez), topes en
+    pesos ('max_pesos') y cuotas en pesos ('pesos', Tepatitlán).
+    Acatlán de Juárez y Chapala se leyeron y quedan en ESPERA: escriben la tasa
+    con «%» bajo «tasa bimestral al millar» y no adivinamos cuál es.
   - Ley de Hacienda Municipal: art. 44 bis (actualización con el INPC), 52
     (recargos por mes o fracción desde el día siguiente al vencimiento; tope
     de 250 %, o de 100 % si se paga de forma espontánea) y 103 (el predial se
@@ -53,6 +66,7 @@ Lo llama apartados.insp_nativa() (INSP_NATIVAS['ccpredial']).
 """
 import html
 import json
+import math
 import os
 import subprocess
 import sys
@@ -226,7 +240,243 @@ MUNICIPIOS = [
      'notif': {'pct': 8, 'min_uma': 1, 'max_uma': 30, 'art': 'art. 50, frs. I y IV'},
      'ejec': {'pct': 8, 'min_uma': 1, 'max_uma': 45, 'art': 'art. 50, frs. II y IV'},
      'pago_url': 'https://tlajomulco.gob.mx/'},
+
+    # ── 19-11-2026, segunda entrega: el resto de la zona metropolitana y las ciudades medias. ──
+    {'id': 'elsalto', 'ent': 'JAL', 'cve': '070', 'nombre': 'El Salto',
+     'ley': 'Ley de Ingresos del Municipio de El Salto, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('El%20Salto'), 'sha256': '92de467ef49d9c2f8de6b7165813e829a87943819deabdfa3bfe231bdd89fde1',
+     'art_tarifa': 'art. 20',
+     'tramos': [[0.01, 40.00, 0.000210], [166400.01, 74.95, 0.000210], [213059.01, 84.75, 0.000231],
+                [265341.01, 96.83, 0.000252], [487968.01, 152.94, 0.000273], [1977307.01, 559.53, 0.000294],
+                [11326987.01, 3308.34, 0.000315], [33886503.01, 10414.59, 0.000336], [72360418.01, 23341.83, 0.000357],
+                [148214225.01, 50421.64, 0.000378]],
+     'baldio': {'tipo': 'sobretasa', 'pct': 100, 'art': 'art. 20'},
+     'pronto': [{'id': 'feb', 'et': 'Pagas el año completo en enero o febrero', 'f': 0.85, 'art': 'art. 23'},
+                {'id': 'abr', 'et': 'Pagas el año completo en marzo o abril', 'f': 0.95, 'art': 'art. 23'}],
+     'pronto_nota': 'La ley dice «hasta el 15 %» para enero y febrero: aquí usamos el 15 %. Pagando el año antes del 1 de mayo tampoco causas los recargos del primer bimestre (art. 22).',
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad, en viudez o con 60 años o más (tu casa)', 'f': 0.50, 'tope': 450000, 'art': 'art. 24'},
+         {'id': 'jefa', 'et': 'Madre jefa de familia, pagando en el primer bimestre (tu casa)', 'f': 0.50, 'tope': 487698, 'art': 'art. 25'},
+         {'id': 'techo1', 'et': 'Naturación extensiva del techo, con constancia', 'f': 0.80, 'art': 'art. 27'},
+         {'id': 'techo2', 'et': 'Naturación intensiva del techo (jardín), con constancia', 'f': 0.70, 'art': 'art. 27'},
+         {'id': 'agro', 'et': 'Predio rústico agropecuario en producción, con constancia (hasta 50 %)', 'f': 0.50, 'art': 'art. 22'},
+         {'id': 'ac', 'et': 'Institución de asistencia o asociación civil, con dictamen', 'f': 0.50, 'tope': 353821, 'art': 'art. 21'},
+         {'id': 'rel', 'et': 'Asociación religiosa', 'f': 0.50, 'art': 'art. 21'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado (hasta 60 %)', 'f': 0.40, 'art': 'art. 21'}],
+     'suma_art': 'art. 24',
+     'recargo': {'pct': 1.6, 'art': 'art. 35'},
+     'multa': {'min': 3.18, 'max': 10.60, 'art': 'art. 33'},
+     'notif': {'pct': 5.30, 'min_uma': 1, 'max_uma': 30, 'req': True, 'art': 'art. 37 (requerimiento en la cabecera)'},
+     'ejec': {'pct': 5, 'max_uma': 45, 'emb': True, 'art': 'art. 37 (embargo en la cabecera)'}},
+
+    {'id': 'zapotlanejo', 'ent': 'JAL', 'cve': '124', 'nombre': 'Zapotlanejo',
+     'ley': 'Ley de Ingresos del Municipio de Zapotlanejo, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('Zapotlanejo'), 'sha256': '7290d72d58511d0a7afb48fa39c364157f6ca0ac3f77230be250889979d744d2',
+     'art_tarifa': 'art. 37, fr. III, a', 'tarifa': 'millar', 'millar': 0.23,
+     'tramos': [[0.00, 38.40, 0.00023]],
+     'rustico': {'millar': 0.26, 'cf': 26.11, 'art': 'art. 37, fr. II'},
+     'baldio': {'tipo': 'millar', 'millar': 0.45, 'cf': 38.40, 'art': 'art. 37, fr. III, b'},
+     'pronto': [{'id': 'feb', 'et': 'Pagas el año completo en enero o febrero', 'f': 0.85, 'art': 'art. 40, a'},
+                {'id': 'abr', 'et': 'Pagas el año completo en marzo o abril', 'f': 0.95, 'art': 'art. 40, b'}],
+     'pronto_nota': 'La ley dice «se les aplicará un factor de 0.15 sobre el monto del impuesto» (y 0.05 en marzo y abril): lo leemos como 15 % y 5 % de descuento, como lo dicen sus vecinos. Pagando el año antes del 1 de mayo no causas los recargos del primer bimestre (art. 39).',
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad o en viudez (tu casa)', 'f': 0.50, 'tope': 705948.97, 'art': 'art. 41'},
+         {'id': 'jefa', 'et': 'Madre jefa de familia, inscrita en el padrón estatal (tu casa)', 'f': 0.50, 'hasta': 705948.97, 'art': 'art. 44'},
+         {'id': 'agro', 'et': 'Predio rústico agropecuario en producción, con constancia', 'f': 0.50, 'art': 'art. 39'},
+         {'id': 'ac', 'et': 'Institución de asistencia o asociación civil, con dictamen', 'f': 0.50, 'tope': 705948.97, 'art': 'art. 38, fr. I'},
+         {'id': 'rel', 'et': 'Asociación religiosa', 'f': 0.50, 'art': 'art. 38, fr. II'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado', 'f': 0.50, 'art': 'art. 38, fr. III'}],
+     'nota': 'El art. 42 da un beneficio a quien tiene 60 años o más, pero no dice de cuánto: por eso no está en la lista.',
+     'suma_art': 'art. 43',
+     'recargo': {'pct': 1.0, 'art': 'art. 52'},
+     'multa': {'min': 10, 'max': 30, 'art': 'art. 51'},
+     'notif': {'pct': 5, 'min_uma': 1, 'max_uma': 30, 'req': True, 'art': 'art. 54, fr. I, a'},
+     'ejec': {'pct': 5, 'max_uma': 45, 'emb': True, 'art': 'art. 54, fr. II, a'}},
+
+    {'id': 'juanacatlan', 'ent': 'JAL', 'cve': '051', 'nombre': 'Juanacatlán',
+     'ley': 'Ley de Ingresos del Municipio de Juanacatlán, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('Juanacatl%C3%A1n'), 'sha256': '0c8ef837accf1b5753e97d7a479785a52ec717b89e933512bc797b62a793b7e8',
+     'art_tarifa': 'art. 18, fr. III, a', 'tarifa': 'millar', 'millar': 0.21,
+     'tramos': [[0.00, 14.88, 0.00021]],
+     'rustico': {'millar': 0.24, 'cf': 14.88, 'art': 'art. 18, fr. II'},
+     'baldio': {'tipo': 'millar', 'millar': 0.36, 'cf': 14.88, 'art': 'art. 18, fr. III, b'},
+     'pronto': [{'id': 'feb', 'et': 'Pagas el año completo en enero o febrero', 'f': 0.85, 'art': 'art. 20, a'},
+                {'id': 'abr', 'et': 'Pagas el año completo en marzo o abril', 'f': 0.95, 'art': 'art. 20, b'}],
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad, en viudez o con 60 años o más (tu casa)', 'f': 0.50, 'art': 'art. 21'},
+         {'id': 'agro', 'et': 'Predio rústico agropecuario en producción, con constancia (no invernaderos)', 'f': 0.50, 'art': 'art. 18, fr. II'},
+         {'id': 'ac', 'et': 'Institución de asistencia o asociación civil, con dictamen', 'f': 0.50, 'tope': 600000, 'art': 'art. 19, fr. I'},
+         {'id': 'rel', 'et': 'Asociación religiosa', 'f': 0.50, 'art': 'art. 19, fr. II'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado', 'f': 0.40, 'art': 'art. 19, fr. III'}],
+     'nota': 'En el art. 18, fr. II, la frase de la cuota fija de los rústicos llega cortada («…en los incisos a) cuota fija de $14.88»): la leemos como $14.88, la misma de los urbanos.',
+     'suma_art': 'art. 21',
+     'recargo': {'pct': 1.0, 'art': 'art. 28'},
+     'multa': {'min': 10, 'max': 30, 'art': 'art. 26, fr. II'},
+     'notif': {'pct': 5, 'min_uma': 1, 'max_pesos': 3136.80, 'req': True, 'art': 'art. 30, fr. I, a'},
+     'ejec': {'pct': 5, 'max_pesos': 4704.51, 'emb': True, 'art': 'art. 30, fr. II, a'}},
+
+    {'id': 'ixtlahuacan', 'ent': 'JAL', 'cve': '044', 'nombre': 'Ixtlahuacán de los Membrillos',
+     'ley': 'Ley de Ingresos del Municipio de Ixtlahuacán de los Membrillos, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('Ixtlahuac%C3%A1n%20de%20los%20Membrillos'), 'sha256': '454897599068f8b598c1650caae2fa5e92d1ad44e9e4519ba3c4a16b5f946904',
+     'art_tarifa': 'art. 22, fr. I, tabla 01',
+     'tramos': [[0.01, 28.84, 0.00025], [183935.01, 74.82, 0.00027], [246803.01, 91.80, 0.00029],
+                [482947.01, 160.28, 0.00031], [820936.01, 265.06, 0.00033], [1315500.01, 428.26, 0.00036],
+                [2075986.01, 702.04, 0.00039], [3904573.01, 1415.19, 0.00042], [10281384.01, 4093.45, 0.00045],
+                [38281100.01, 16693.32, 0.00048]],
+     'tramos_nota': 'La tabla 01 cierra un tramo en $820,933.00 y abre el siguiente en $820,936.01: dejamos los límites como los escribe la ley.',
+     'baldio': {'tipo': 'sobretasa', 'pct': 50, 'art': 'art. 22'},
+     'pronto': [{'id': 'feb', 'et': 'Pagas el año completo en enero o febrero', 'f': 0.85, 'art': 'art. 24, a'},
+                {'id': 'abr', 'et': 'Pagas el año completo en marzo o abril', 'f': 0.95, 'art': 'art. 24, b'}],
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad, en viudez o con 60 años o más (tu casa; hasta 50 %)', 'f': 0.50, 'tope': 1049800, 'art': 'art. 25'},
+         {'id': 'jefa', 'et': 'Jefa de familia o mamá soltera, con constancia del DIF (tu casa; hasta 50 %)', 'f': 0.50, 'tope': 1049800, 'art': 'art. 25'},
+         {'id': 'techo1', 'et': 'Naturación extensiva del techo, con constancia', 'f': 0.80, 'art': 'art. 27, fr. I'},
+         {'id': 'techo2', 'et': 'Naturación intensiva del techo (jardín), con constancia', 'f': 0.70, 'art': 'art. 27, fr. II'},
+         {'id': 'agro', 'et': 'Predio rústico agropecuario en producción, con constancia', 'f': 0.50, 'art': 'art. 22'},
+         {'id': 'ac', 'et': 'Institución de asistencia o asociación civil, con dictamen', 'f': 0.50, 'tope': 500000, 'art': 'art. 23, fr. I'},
+         {'id': 'rel', 'et': 'Asociación religiosa', 'f': 0.50, 'art': 'art. 23, fr. II'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado', 'f': 0.40, 'art': 'art. 23, fr. III'}],
+     'suma_art': 'art. 25',
+     'recargo': {'pct': 1.0, 'art': 'art. 35'},
+     'multa': {'min': 15, 'max': 30, 'art': 'art. 33, fr. II'},
+     'notif': {'pct': 5, 'min_uma': 1, 'max_uma': 30, 'req': True, 'art': 'art. 37, fr. I, a'},
+     'ejec': {'pct': 5, 'max_uma': 45, 'emb': True, 'art': 'art. 37, fr. II, a'}},
+
+    {'id': 'vallarta', 'ent': 'JAL', 'cve': '067', 'nombre': 'Puerto Vallarta',
+     'ley': 'Ley de Ingresos del Municipio de Puerto Vallarta, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('Puerto%20Vallarta'), 'sha256': 'd697b1973cca8a6ed22c5db9b9ff2ec2a99e8a3d05ce45421e9436a76afcb958',
+     'art_tarifa': 'art. 38, fr. V, a, tabla 1',
+     'tramos': [[0.01, 0.00, 0.000250], [584775.01, 146.20, 0.000250], [988162.01, 247.05, 0.000275],
+                [1630274.01, 423.64, 0.000300], [2500184.01, 684.62, 0.000325], [4067064.01, 1193.86, 0.000350],
+                [6559136.01, 2066.09, 0.000375], [13143342.01, 4535.17, 0.000400], [48372251.01, 18626.74, 0.000425],
+                [219067566.01, 91172.25, 0.000450]],
+     'rustico': {'millar': 0.20, 'cf': 8.00, 'art': 'art. 38, fr. II'},
+     'baldio': {'tipo': 'millar', 'millar': 0.80, 'cf': 6.00, 'art': 'art. 38, fr. V, b y d'},
+     'pronto': [{'id': 'ene', 'et': 'Pagas el año completo en enero', 'f': 0.85, 'art': 'art. 39, fr. I'},
+                {'id': 'feb', 'et': 'Pagas el año completo en febrero', 'f': 0.90, 'art': 'art. 39, fr. I'},
+                {'id': 'abr', 'et': 'Pagas el año completo en marzo o abril', 'f': 0.95, 'art': 'art. 39, fr. I'}],
+     'pronto_nota': 'Pagando el año antes del 1 de junio no causas los recargos del primer bimestre (art. 39, fr. II).',
+     'beneficios': [
+         {'id': 'm60', 'et': 'Pensionado, jubilado, con discapacidad, en viudez o de 60 a 74 años (tu casa)', 'f': 0.50, 'tope': 2000000, 'art': 'art. 40, fr. III'},
+         {'id': 'm75', 'et': 'Tienes de 75 a 79 años (tu casa)', 'f': 0.40, 'tope': 2000000, 'art': 'art. 40, fr. IV'},
+         {'id': 'm80', 'et': 'Tienes 80 años o más (tu casa)', 'f': 0.20, 'tope': 2000000, 'art': 'art. 40, fr. V'},
+         {'id': 'agro', 'et': 'Predio agropecuario en producción, con dictamen (pagando el año)', 'f': 0.50, 'tope': 2000000, 'art': 'art. 38, fr. IV'},
+         {'id': 'ac', 'et': 'Institución de asistencia o asociación civil, con dictamen', 'f': 0.50, 'tope': 2000000, 'art': 'art. 40, fr. I'},
+         {'id': 'rel', 'et': 'Asociación religiosa (pagando el año)', 'f': 0.50, 'art': 'art. 40, fr. II'}],
+     'suma_art': 'art. 40',
+     'recargo': {'pct': 1.10, 'art': 'art. 48'},
+     'multa': None,
+     'notif': {'uma': 1, 'art': 'art. 112, fr. I'},
+     'ejec': {'pct': 5, 'min_uma': 1, 'max_uma': 365, 'art': 'art. 112, fr. II'}},
+
+    {'id': 'lagos', 'ent': 'JAL', 'cve': '053', 'nombre': 'Lagos de Moreno',
+     'ley': 'Ley de Ingresos del Municipio de Lagos de Moreno, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('Lagos%20de%20Moreno'), 'sha256': '27332e612a99019c90cb8b78a0d4fbcd742dd5350eac5e763dca30fcc13da10e',
+     'art_tarifa': 'art. 18, fr. I, tabla 1',
+     'tramos': [[0.01, 45.00, 0.000250], [207000.01, 96.75, 0.000250], [360700.01, 135.18, 0.000275],
+                [552000.01, 187.79, 0.000300], [814000.01, 266.39, 0.000325], [1237000.01, 403.87, 0.000350],
+                [1995000.01, 669.17, 0.000375], [3674000.01, 1298.80, 0.000400], [9450000.01, 3609.20, 0.000425],
+                [52000000.01, 21692.95, 0.000450]],
+     'baldio': {'tipo': 'sobretasa', 'pct': 100, 'art': 'art. 18, fr. I'},
+     'pronto': [{'id': 'abr', 'et': 'Pagas el año completo de enero a abril', 'f': 0.85, 'art': 'art. 20'}],
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad, en viudez o con 60 años o más (tu casa)', 'f': 0.50, 'tope': 594496, 'art': 'art. 21, fr. I'},
+         {'id': 'jefa', 'et': 'Madre jefa de familia, único sostén del hogar', 'f': 0.50, 'art': 'art. 21, fr. III'},
+         {'id': 'agro', 'et': 'Predio agropecuario en producción, con dictamen', 'f': 0.50, 'art': 'art. 18, fr. II'},
+         {'id': 'ac', 'et': 'Institución de asistencia o asociación civil, con dictamen', 'f': 0.50, 'tope': 559979, 'art': 'art. 19, fr. I'},
+         {'id': 'rel', 'et': 'Asociación religiosa', 'f': 0.50, 'art': 'art. 19, fr. II'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado', 'f': 0.40, 'art': 'art. 19, fr. III'}],
+     'suma_art': 'art. 21',
+     'recargo': {'pct': 1.0, 'art': 'art. 29'},
+     'multa': {'min': 10, 'max': 30, 'art': 'art. 28'},
+     'notif': {'pct': 5, 'min_uma': 1, 'max_uma': 30, 'req': True, 'art': 'art. 31, fr. I, a'},
+     'ejec': {'pct': 5, 'max_uma': 45, 'emb': True, 'art': 'art. 31, fr. II, a'}},
+
+    {'id': 'tepatitlan', 'ent': 'JAL', 'cve': '093', 'nombre': 'Tepatitlán de Morelos',
+     'ley': 'Ley de Ingresos del Municipio de Tepatitlán de Morelos, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('Tepatitl%C3%A1n%20de%20Morelos'), 'sha256': '52a4c59b9550563ac65002542f437dea4204432981b9a50a47b3c99fe48231d8',
+     'art_tarifa': 'art. 17, fr. III, a', 'tarifa': 'millar', 'millar': 0.16,
+     'tramos': [[0.00, 15.00, 0.00016]],
+     'rustico': {'millar': 0.23, 'cf': 5.00, 'art': 'art. 17, fr. II, b'},
+     'baldio': {'tipo': 'millar', 'millar': 0.30, 'cf': 15.00, 'art': 'art. 17, fr. III, b'},
+     'pronto': [{'id': 'feb', 'et': 'Pagas el año completo en enero o febrero', 'f': 0.85, 'art': 'art. 19, a'},
+                {'id': 'abr', 'et': 'Pagas el año completo en marzo o abril', 'f': 0.95, 'art': 'art. 19, b'}],
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad, en viudez o con 60 años o más (tu casa)', 'f': 0.50, 'tope': 1278000, 'art': 'art. 20'},
+         {'id': 'agro', 'et': 'Predio rústico agropecuario en producción, con constancia', 'f': 0.50, 'art': 'art. 17, fr. II'},
+         {'id': 'ac', 'et': 'Institución de asistencia o asociación civil, con dictamen', 'f': 0.50, 'tope': 1500000, 'art': 'art. 18, fr. I'},
+         {'id': 'rel', 'et': 'Asociación religiosa', 'f': 0.50, 'art': 'art. 18, fr. II'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado', 'f': 0.40, 'art': 'art. 18, fr. III'}],
+     'suma_art': 'art. 20',
+     'recargo': {'pct': 2.0, 'art': 'art. 29'},
+     'multa': {'min': 10, 'max': 30, 'art': 'art. 28'},
+     'notif': {'pesos': 578.79, 'req': True, 'art': 'art. 31, fr. I, a',
+               'pesos_nota': 'Por notificar el requerimiento la ley da de $244.94 a $578.79 (art. 31, fr. I): aquí tomamos la cuota más alta.'},
+     'ejec': {'pesos': 710.34, 'emb': True, 'art': 'art. 31, fr. II'}},
+
+    {'id': 'zapotlan', 'ent': 'JAL', 'cve': '023', 'nombre': 'Zapotlán el Grande',
+     'ley': 'Ley de Ingresos del Municipio de Zapotlán el Grande, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('Zapotl%C3%A1n%20el%20Grande'), 'sha256': '674aefb0d55d60787b5675271e9949c4aafb912ef550e505e4a47734439880a4',
+     'art_tarifa': 'art. 30, fr. I',
+     'tramos': [[0.01, 0.00, 0.000220], [207000.01, 45.54, 0.000220], [360700.01, 79.35, 0.000242],
+                [552000.01, 125.65, 0.000264], [814000.01, 194.82, 0.000286], [1237000.01, 315.79, 0.000308],
+                [1995000.01, 549.26, 0.000330], [3674000.01, 1103.33, 0.000352], [9450000.01, 3136.48, 0.000374],
+                [52000000.01, 19050.18, 0.000396]],
+     'baldio': {'tipo': 'igual', 'art': 'art. 30, fr. I'},
+     'pronto': [{'id': 'feb', 'et': 'Pagas el año completo en enero o febrero', 'f': 0.90, 'art': 'art. 32, a'},
+                {'id': 'mar', 'et': 'Pagas el año completo en marzo', 'f': 0.95, 'art': 'art. 32, b'}],
+     'pronto_nota': 'Pagando así no causas los recargos generados hasta ese momento (art. 32, c).',
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad, en viudez, madre jefa de familia o con 60 años o más (tu casa, pagando el año antes de abril)', 'f': 0.50, 'tope': 1600000, 'art': 'art. 33'},
+         {'id': 'eco', 'et': 'Usas ecotecnias en tu casa (pagando el año antes de abril)', 'f': 0.80, 'tope': 1600000, 'art': 'art. 33'},
+         {'id': 'techo1', 'et': 'Naturación extensiva del techo, con constancia', 'f': 0.80, 'art': 'art. 31, fr. VI, a'},
+         {'id': 'techo2', 'et': 'Naturación intensiva del techo o jardín vertical, con constancia', 'f': 0.70, 'art': 'art. 31, fr. VI, b'},
+         {'id': 'agro', 'et': 'Predio agropecuario en producción, en el padrón municipal', 'f': 0.50, 'art': 'art. 30, fr. II'},
+         {'id': 'ac', 'et': 'Institución de asistencia, asociación civil o escuela privada (pagando el año antes de abril)', 'f': 0.50, 'tope': 1600000, 'art': 'art. 31, fr. I'},
+         {'id': 'rel', 'et': 'Asociación religiosa con predio de más de $2,500,000 (pagando el año antes de abril)', 'f': 0.50, 'art': 'art. 31, fr. II'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado (pagando el año antes de abril)', 'f': 0.40, 'art': 'art. 31, fr. IV'}],
+     'nota': 'La ley de Zapotlán el Grande no le pone sobretasa a los baldíos: pagan con la misma tabla. Los descuentos de «sobre $1,600,000 de valor fiscal» los leemos como «sobre el primer $1,600,000».',
+     'suma_art': 'art. 33',
+     'recargo': {'pct': 1.5, 'art': 'art. 42'},
+     'multa': {'min': 20, 'max': 55, 'art': 'art. 41'},
+     'notif': {'uma': 6, 'art': 'art. 44, fr. I'},
+     'ejec': {'pct': 2, 'min_uma': 6, 'max_uma': 1.5 * 365, 'art': 'art. 44, fr. II'}},
+
+    {'id': 'ocotlan', 'ent': 'JAL', 'cve': '063', 'nombre': 'Ocotlán',
+     'ley': 'Ley de Ingresos del Municipio de Ocotlán, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('Ocotl%C3%A1n'), 'sha256': '2b8297f1a2309afc8c9cb9dab6d08870024c46f4897c6debf33742408aca6fcb',
+     'art_tarifa': 'art. 37',
+     'tramos': [[0.01, 0.00, 0.000350], [253137.01, 88.60, 0.000350], [365900.01, 128.07, 0.000375],
+                [521970.01, 186.59, 0.000399], [744900.01, 275.46, 0.000424], [1121370.01, 435.08, 0.000448],
+                [1808800.01, 742.87, 0.000473], [3697800.01, 1636.37, 0.000497], [10772150.01, 5151.37, 0.000522],
+                [50045600.01, 25652.11, 0.000546]],
+     'tramos_nota': 'La tabla escribe «$3,697.800.00» y «$3,697.800.01»: los leemos como $3,697,800.',
+     'baldio': {'tipo': 'sobretasa', 'pct': 90, 'art': 'art. 37'},
+     'pronto': [{'id': 'feb', 'et': 'Pagas el año completo en enero o febrero', 'f': 0.85, 'art': 'art. 39, a'},
+                {'id': 'mar', 'et': 'Pagas el año completo en marzo', 'f': 0.90, 'art': 'art. 39, b'},
+                {'id': 'abr', 'et': 'Pagas el año completo en abril', 'f': 0.95, 'art': 'art. 39, c'}],
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad, en viudez, con 60 años o más, jefa de familia vulnerable o con cáncer o VIH (tu casa)', 'f': 0.50, 'tope': 589837.50, 'art': 'art. 40'},
+         {'id': 'cuida', 'et': 'Cuidas a una persona con discapacidad (tu casa)', 'f': 0.50, 'tope': 589837.50, 'art': 'art. 40'},
+         {'id': 'ac', 'et': 'Institución de asistencia o asociación civil, con dictamen', 'f': 0.50, 'tope': 589837.50, 'art': 'art. 38, fr. I'},
+         {'id': 'rel', 'et': 'Asociación religiosa', 'f': 0.50, 'art': 'art. 38, fr. II'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado', 'f': 0.40, 'art': 'art. 38, fr. III'}],
+     'suma_art': 'art. 40',
+     'recargo': {'pct': 1.0, 'art': 'art. 48'},
+     'multa': {'min': 20, 'max': 20, 'art': 'art. 47'},
+     'notif': {'pct': 10, 'min_uma': 1, 'max_pesos': 3078.91, 'req': True, 'art': 'art. 50, fr. I, a'},
+     'ejec': {'pct': 5, 'max_pesos': 4619.00, 'emb': True, 'art': 'art. 50, fr. II, a'}},
 ]
+
+# Leyes que leímos y no integramos, con su porqué: la página lo dice en la ficha del municipio.
+ESPERA = {
+    'JAL-002': {'nombre': 'Acatlán de Juárez', 'url': _li('Acatl%C3%A1n%20de%20Ju%C3%A1rez'),
+                'sha256': '78ac7763e957e8e33f85401a41b94335c6421595e88795632fa7ee18bcf179c8',
+                'motivo': 'su art. 25 pone las tasas como «20%», «25%» y «30%» bajo el título «Tasa bimestral al millar», y así no se sabe cuánto es.'},
+    'JAL-030': {'nombre': 'Chapala', 'url': _li('Chapala'),
+                'sha256': 'fef31659e5b631cfbc1c63cda3666036d1e0b6a3e96ec94bdcad34857118a031',
+                'motivo': 'su art. 42 pone las tasas como «0.20%», «0.25%» y «0.30%» bajo el título «Tasa bimestral al millar», y así no se sabe cuánto es.'},
+}
 
 ENTIDADES = {'AGS': 'Aguascalientes', 'BC': 'Baja California', 'BCS': 'Baja California Sur', 'CAM': 'Campeche',
              'COAH': 'Coahuila', 'COL': 'Colima', 'CHIS': 'Chiapas', 'CHIH': 'Chihuahua', 'CDMX': 'Ciudad de México',
@@ -265,12 +515,46 @@ def revisa():
         for b in m['beneficios']:
             if not (0 <= b['f'] < 1) or not b.get('art'):
                 raise SystemExit('cc_predial: beneficio %s de %s mal' % (b['id'], m['id']))
+        if m['baldio']['tipo'] not in ('sobretasa', 'millar', 'igual') or not m['baldio'].get('art'):
+            raise SystemExit('cc_predial: el baldío de %s trae un tipo que la página no sabe cobrar' % m['id'])
+        if m.get('tarifa') == 'millar' and (len(m['tramos']) != 1 or abs(m['tramos'][0][2] * 1000 - m['millar']) > 1e-9):
+            raise SystemExit('cc_predial: la tasa al millar de %s no coincide con su tabla' % m['id'])
+        for k in ('notif', 'ejec'):
+            g = m[k]
+            if not (g.get('pct') or g.get('uma') or g.get('pesos')) or not g.get('art'):
+                raise SystemExit('cc_predial: %s de %s no dice cuánto se cobra' % (k, m['id']))
+        if m.get('multa') and not (0 < m['multa']['min'] <= m['multa']['max']):
+            raise SystemExit('cc_predial: la multa de %s está al revés' % m['id'])
+    ids = [m['id'] for m in MUNICIPIOS]
+    claves = ['%s-%s' % (m['ent'], m['cve']) for m in MUNICIPIOS]
+    if len(set(ids)) != len(ids) or len(set(claves)) != len(claves):
+        raise SystemExit('cc_predial: un municipio está dos veces')
+    for k, w in ESPERA.items():
+        if k in claves or len(w['sha256']) != 64 or not w['motivo']:
+            raise SystemExit('cc_predial: %s está en ESPERA y en MUNICIPIOS, o le falta su porqué' % k)
+
+
+def _r2(v):
+    """Como Math.round(v * 100) / 100 del navegador (los medios centavos van hacia arriba)."""
+    return math.floor(v * 100 + 0.5) / 100
 
 
 def bimestral(m, vf):
     t = [x for x in m['tramos'] if vf >= x[0]]
     li, cf, tasa = t[-1] if t else m['tramos'][0]
-    return round((vf - li) * tasa + cf, 2)
+    return _r2((vf - li) * tasa + cf)
+
+
+def base(m, vf, tipo):
+    """Gemela de base() de cc-predial.js: construido, rústico o baldío."""
+    if tipo == 'rust' and m.get('rustico'):
+        return _r2(vf * m['rustico']['millar'] / 1000 + m['rustico']['cf'])
+    if tipo != 'baldio' or m['baldio']['tipo'] == 'igual':
+        return bimestral(m, vf)
+    b = m['baldio']
+    if b['tipo'] == 'sobretasa':
+        return _r2(bimestral(m, vf) * (1 + b['pct'] / 100))
+    return _r2(vf * b['millar'] / 1000 + b['cf'])
 
 
 def datos(base):
@@ -279,7 +563,7 @@ def datos(base):
     uma = base['calculadora_civica']['parametros']['uma']
     return {'anio': ANIO, 'inpc': cc['inpc'], 'inpc_ult': cc['inpc_ult'],
             'uma': uma['diaria'], 'uma_f': uma['fuente'], 'ent': ENTIDADES,
-            'mun': MUNICIPIOS, 'lhm': {'tope': 250, 'tope_esp': 100}}
+            'mun': MUNICIPIOS, 'espera': ESPERA, 'lhm': {'tope': 250, 'tope_esp': 100}}
 
 
 def construir(base, ref):
@@ -293,6 +577,7 @@ def construir(base, ref):
     leyes = ''.join('<li><b>%s</b>: <a href="%s">%s</a> (huella SHA-256 <code>%s…</code>)</li>'
                     % (esc(m['nombre']), esc(m['url']), esc(m['ley']), m['sha256'][:12]) for m in MUNICIPIOS)
     lista = ', '.join(esc(m['nombre']) for m in MUNICIPIOS)
+    espera = '; '.join('%s: <a href="%s">su ley</a> %s' % (esc(w['nombre']), esc(w['url']), esc(w['motivo'])) for w in ESPERA.values())
     return '''<div class="ci" id="cpRaiz">
   <section class="ci-arranque" aria-labelledby="cpTit">
     <p class="ci-kicker">Calculadora Cívica · simulador</p>
@@ -317,7 +602,7 @@ def construir(base, ref):
       <input class="ci-in" id="cpVf" inputmode="decimal" autocomplete="off" placeholder="Ej.: 2,500,000">
       <p class="ci-pista">Es el valor catastral que viene en tu recibo o en tu estado de cuenta predial; lo fija el catastro con las tablas de valores que aprueba el Congreso del Estado.</p>
       <label class="ci-et" for="cpTipo">Tipo de predio</label>
-      <select class="ci-in" id="cpTipo"><option value="edif">Construido (casa, departamento, local) o rústico</option><option value="baldio">Baldío en zona urbana</option></select>
+      <select class="ci-in" id="cpTipo"><option value="edif">Construido (casa, departamento, local)</option><option value="rust">Rústico (fuera de la zona urbana)</option><option value="baldio">Baldío en zona urbana</option></select>
       <label class="ci-et" for="cpBen">¿Tienes derecho a algún descuento?</label>
       <select class="ci-in" id="cpBen"></select>
       <label class="ci-et" for="cpPago">¿Cómo pagas?</label>
@@ -377,22 +662,22 @@ def construir(base, ref):
   <aside class="ci-aviso" aria-labelledby="cpLeeTit">
     <h2 class="ci-tit" id="cpLeeTit"><span aria-hidden="true">📐</span> Cómo se calcula</h2>
     <ol class="ci-lista">
-      <li><b>El predial es bimestral.</b> A tu valor fiscal se le resta el límite inferior de su tramo; la diferencia se multiplica por la tasa del tramo y se suma la cuota fija: <code>((VF − LI) × T) + CF</code>. Eso pagas cada bimestre, y por seis, al año. La tabla es de cada Ley de Ingresos.</li>
-      <li><b>Los baldíos pagan más</b> «por razones extrafiscales»: en Zapopan y Guadalajara, una sobretasa de 100 % (aquí, el doble del impuesto); en Tlaquepaque, Tonalá y Tlajomulco, una tasa al millar sobre el valor más una cuota fija.</li>
+      <li><b>El predial es bimestral.</b> A tu valor fiscal se le resta el límite inferior de su tramo; la diferencia se multiplica por la tasa del tramo y se suma la cuota fija: <code>((VF − LI) × T) + CF</code>. Eso pagas cada bimestre, y por seis, al año. La tabla es de cada Ley de Ingresos. Algunos municipios (Zapotlanejo, Juanacatlán, Tepatitlán) no usan tramos: cobran una <b>tasa al millar</b> sobre el valor más una cuota fija, y a los predios rústicos les ponen la suya.</li>
+      <li><b>Los baldíos pagan más</b> «por razones extrafiscales»: unas leyes les ponen una sobretasa (100 % en Zapopan, Guadalajara, El Salto y Lagos de Moreno: aquí, el doble del impuesto; 90 % en Ocotlán; 50 % en Ixtlahuacán de los Membrillos) y otras, una tasa al millar sobre el valor más una cuota fija. La de Zapotlán el Grande no les pone otra tasa.</li>
       <li><b>Los descuentos</b> son factores sobre el impuesto: 0.50 es pagar la mitad. Muchos valen «sobre el primer» tanto del valor fiscal: aquí el descuento se calcula sobre el impuesto que daría ese valor, la lectura que explica la Ley de Tlaquepaque (art. 32, fr. III, f). Si te tocan varios, se da el mayor; el de adultos mayores (y en algunos municipios el de pensionados) se suma al de pago anticipado, que se calcula sobre lo que queda.</li>
       <li><b>Se paga en los primeros quince días del primer mes de cada bimestre</b> (Ley de Hacienda Municipal, art. 103). Desde el día siguiente corren los <b>recargos</b>, por cada mes o fracción, con la tasa que fija la Ley de Ingresos; no pasan de 250 % del adeudo, o de 100 % si pagas por tu cuenta (art. 52). El adeudo además se <b>actualiza</b> con el INPC (art. 44 bis): aquí, el del mes anterior al pago entre el del mes anterior al vencimiento. En la base, el último INPC es el de {ult}.</li>
-      <li><b>Si te cobran</b>, se suman la <b>multa</b> (un porcentaje del impuesto omitido, cuando la ley de ingresos lo fija), la <b>notificación</b> (unas veces la UMA diaria; en Tlajomulco, 8 % del crédito) y los <b>gastos de ejecución</b> por cada diligencia: el requerimiento y el embargo (3 % u 8 % del crédito, con su mínimo y su tope en UMA). La UMA es la de {anio}: ${uma} diarios ({uma_f}).</li>
+      <li><b>Si te cobran</b>, se suman la <b>multa</b> (un porcentaje del impuesto omitido, cuando la ley de ingresos lo fija), la <b>notificación</b> y los <b>gastos de ejecución</b>. Aquí cambia mucho de una ley a otra: unas cobran la notificación en UMA y un porcentaje del crédito por cada diligencia (el requerimiento y el embargo); otras cobran un porcentaje por notificar el requerimiento y otro por el embargo, con su tope en UMA o en pesos; Tepatitlán, cuotas fijas en pesos. La página sigue la de tu municipio y te dice el artículo. La UMA es la de {anio}: ${uma} diarios ({uma_f}).</li>
     </ol>
     <p><b>Un ejemplo real, sin datos de la persona.</b> Un mandamiento de ejecución de la Tesorería de Zapopan cobró un predio con valor fiscal de $7,613,320.00. Cae en el tramo que empieza en $5,158,931.01: (7,613,320.00 − 5,158,931.01) × 0.0003473 + 1,485.21 = <b>$2,337.62 por bimestre</b>, $14,025.72 por los seis de un año y $7,012.86 por tres; la multa fue de 50 % del impuesto ($7,012.86 y $3,506.43) y la notificación, seis UMA de 2022 ($577.32). Escribe ese valor en Zapopan y verás las mismas cifras {chip_d}.</p>
     <p><b>Lo que esta cuenta no hace:</b> no es tu estado de cuenta ni una resolución: el adeudo oficial te lo da la tesorería de tu municipio, y cambia cada mes. Usa la tarifa y las tasas de {anio}; los años anteriores tuvieron las suyas en su propia ley, así que para un adeudo viejo la cifra es aproximada. No calcula el valor fiscal (lo fija el catastro), los derechos de agua o basura, los convenios ni las condonaciones o programas de descuento en recargos que aprueba cada municipio, ni las erogaciones extraordinarias de un embargo (avalúo, edictos, traslado). Si no estás de acuerdo con un requerimiento, la ley te da recursos con plazo: el de reconsideración y el juicio ante el Tribunal de Justicia Administrativa; acércate a un abogado o a la Procuraduría de Desarrollo Urbano o de la Defensa del Contribuyente de tu estado.</p>
-    <p><b>Municipios integrados:</b> {lista}. Para los demás damos cuánto recaudaron de predial (INEGI) y su tabla queda por integrar: es falta de esta plataforma, no del municipio, que la publica en su Ley de Ingresos.</p>
+    <p><b>Municipios integrados:</b> {lista}. Para los demás damos cuánto recaudaron de predial (INEGI) y su tabla queda por integrar: es falta de esta plataforma, no del municipio, que la publica en su Ley de Ingresos. <b>Leídas y en espera</b> {chip_p}: {espera}. No adivinamos una tasa.</p>
     <p class="ci-fuentes">Fuentes, cotejadas el 19-11-2026: <ul class="ci-lista">{leyes}<li><a href="{lhm_url}">{lhm_tx}</a> (huella SHA-256 <code>{lhm_sha}…</code>), arts. 44 bis, 52 y 103</li></ul> INPC: <a href="{inpc_url}">{f_inpc}</a> · Recaudación de cada municipio: INEGI, EFIPEM 2024 {chip_o}.</p>
     <p class="ci-hermanas">Sigue con la Calculadora: <a href="herramienta-calculadora-inmueble.html">🏠 Vendes una casa o un terreno</a> · <a href="herramienta-calculadora-ticket.html">🧾 Tu estado de cuenta</a></p>
   </aside>
   <script type="application/json" id="cpDatos">{datos}</script>
 </div>'''.format(
         anio=ANIO, ents=ents, anios=anios, bims=bims, ult=ult, uma=format(D['uma'], ',.2f'), uma_f=esc(D['uma_f']),
-        lista=lista, leyes=leyes, lhm_url=esc(LHM['url']), lhm_tx=esc(LHM['tx']), lhm_sha=LHM['sha256'][:12],
+        lista=lista, espera=espera, chip_p=chip('pendiente'), leyes=leyes, lhm_url=esc(LHM['url']), lhm_tx=esc(LHM['tx']), lhm_sha=LHM['sha256'][:12],
         inpc_url=esc(cc_inmueble.datos(base)['f']['inpc_url']), f_inpc=esc(cc_inmueble.datos(base)['f']['inpc']),
         chip_d=chip('derivado'), chip_o=chip('oficial'), datos=cc_inmueble._json(D))
 
@@ -411,11 +696,11 @@ def prueba():
         mal += 1
         print('✗ la multa o la notificación del ejemplo')
     js = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'cc-predial.js')
-    casos = [(m['id'], v) for m in MUNICIPIOS for v in (150000, 950000, 2500000, 7613320, 30000000, 2e9)]
+    casos = [(m['id'], v, t) for m in MUNICIPIOS for v in (150000, 950000, 2500000, 7613320, 30000000, 2e9) for t in ('edif', 'rust', 'baldio')]
     D = {'mun': MUNICIPIOS, 'inpc': {}, 'inpc_ult': [2026, 1], 'uma': 117.31, 'lhm': {'tope': 250, 'tope_esp': 100}}
     prog = ("global.window={};global.document={getElementById:function(){return null}};require(%s);"
             "var D=%s,c=%s;console.log(JSON.stringify(c.map(function(x){var m=D.mun.filter(function(y){return y.id===x[0]})[0];"
-            "return window.AuditorPredial.bimestral(m,x[1]);})));"
+            "return window.AuditorPredial.base(m,x[1],x[2]);})));"
             "var m=D.mun[0];var r=window.AuditorPredial.calcula(D,m,{vf:7613320,tipo:'edif',ben:'',pago:'bim'});console.log(JSON.stringify(r.anual));"
             % (json.dumps(js), json.dumps(D), json.dumps(casos)))
     r = subprocess.run(['node', '-e', prog], capture_output=True, text=True)
@@ -424,19 +709,38 @@ def prueba():
         return 1
     lineas = r.stdout.strip().split('\n')
     nav = json.loads(lineas[0])
-    for (mid, v), n in zip(casos, nav):
-        py = bimestral(next(m for m in MUNICIPIOS if m['id'] == mid), v)
+    for (mid, v, t), n in zip(casos, nav):
+        py = base(next(m for m in MUNICIPIOS if m['id'] == mid), v, t)
         if abs(py - n) > 0.005:
             mal += 1
-            print('✗', mid, v, 'Python', py, 'navegador', n)
+            print('✗', mid, v, t, 'Python', py, 'navegador', n)
+    # La cobranza: notificación solo con requerimiento y embargo una vez (El Salto), cuotas en pesos (Tepatitlán).
+    y = "{imp:1000,da:2025,db:1,ha:2025,hb:6,f:[2026,6,1],multa:0,sit:S}"
+    prog2 = ("global.window={};global.document={getElementById:function(){return null}};require(%s);var D=%s;"
+             "function M(i){return D.mun.filter(function(m){return m.id===i})[0]}"
+             "var o={};['not','req','emb'].forEach(function(S){var r=window.AuditorPredial.adeudo(D,M('elsalto'),%s);o['s'+S]=[r.notif,r.ejec];"
+             "r=window.AuditorPredial.adeudo(D,M('tepatitlan'),%s);o['t'+S]=[r.notif,r.ejec];});console.log(JSON.stringify(o));"
+             % (json.dumps(js), json.dumps(D), y, y))
+    r2 = subprocess.run(['node', '-e', prog2], capture_output=True, text=True)
+    o = json.loads(r2.stdout or '{}')
+    uma = D['uma']
+    esperado = {'snot': [0, 0], 'tnot': [0, 0], 'treq': [578.79, 0], 'temb': [578.79, 710.34]}
+    for k, v in esperado.items():
+        if o.get(k) != v:
+            mal += 1
+            print('✗ cobranza', k, o.get(k), 'esperaba', v)
+    sreq, semb = o.get('sreq', [0, 1]), o.get('semb', [0, 0])
+    if not (uma <= sreq[0] <= 30 * uma) or sreq[1] != 0 or not (0 < semb[1] <= 45 * uma) or semb[0] != sreq[0]:
+        mal += 1
+        print('✗ cobranza de El Salto', sreq, semb)
     if abs(json.loads(lineas[1]) - EJEMPLO['anual']) > 0.005:
         mal += 1
         print('✗ el navegador no da $14,025.72 al año para el ejemplo:', lineas[1])
     if mal:
         print('%d diferencias en el simulador del predial' % mal)
         return 1
-    print('✓ Simulador del predial: %d municipios, %d casos iguales en Python y en el navegador; el mandamiento de Zapopan cuadra ($2,337.62)'
-          % (len(MUNICIPIOS), len(casos)))
+    print('✓ Simulador del predial: %d municipios (%d leídos y en espera), %d casos iguales en Python y en el navegador; '
+          'la cobranza sigue a cada ley; el mandamiento de Zapopan cuadra ($2,337.62)' % (len(MUNICIPIOS), len(ESPERA), len(casos)))
     return 0
 
 
