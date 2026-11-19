@@ -3002,6 +3002,18 @@
   {
    "q": "Debo el predial en Tepatitlán, ¿cuánto son los recargos?",
    "ir": "herramienta-calculadora-predial.html?mun=tepatitlan"
+  },
+  {
+   "q": "¿Cuánto pago de predial en Autlán?",
+   "ir": "herramienta-calculadora-predial.html?mun=autlan"
+  },
+  {
+   "q": "Me requirieron el predial en San Juan de los Lagos",
+   "ir": "herramienta-calculadora-predial.html?mun=sanjuan"
+  },
+  {
+   "q": "¿Cuánto es el predial de una casa en Tequila?",
+   "ir": "herramienta-calculadora-predial.html?mun=tequila"
   }
  ]
 }

@@ -1897,7 +1897,9 @@
     var p = plano(q), a = APP.ccpredial, L = (B.dat.calc || {}).pred || [];
     if (!a || !/ predial(es)? /.test(p) || /^ (que|q) (es|son|significa) /.test(p) || / (recaud|ingres|cobr(o|aron) el municipio|cuanto (cobra|junta) el municipio)/.test(p)) return null;
     var hit = null;
-    L.forEach(function (m) { if (!hit && m.slice(1).some(function (n) { return p.indexOf(' ' + n + ' ') >= 0; })) hit = m; });
+    /* Gana el nombre más largo: «lagos» (Lagos de Moreno) no le gana a «san juan de los lagos». */
+    var largo = 0;
+    L.forEach(function (m) { m.slice(1).forEach(function (n) { if (n.length > largo && p.indexOf(' ' + n + ' ') >= 0) { hit = m; largo = n.length; } }); });
     var liga = a.url + (hit ? '?mun=' + hit[0] : '');
     return respApp('ccpredial', liga, '<p><span aria-hidden="true">' + a.ico + '</span> Esa cuenta la hace <b>' + esc(a.n) + '</b>, de la ' + esc(a.grupo) + (hit ? ', y ya le puse el municipio' : '') +
       ': escribe el valor fiscal de tu predio (viene en tu recibo) y te dice tu predial del año con la tabla de su Ley de Ingresos, sus descuentos y, si debes bimestres, la actualización, los recargos, la multa y los gastos de cobranza, cada uno con su artículo.</p>' +

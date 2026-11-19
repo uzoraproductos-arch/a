@@ -736,7 +736,9 @@ def escribir_base():
     import unicodedata
     def _pl(t):
         return ''.join(c for c in unicodedata.normalize('NFD', t.lower()) if unicodedata.category(c) != 'Mn')
-    dat['calc']['pred'] = [[m['id'], _pl(m['nombre'])] + ([_pl(m['nombre']).split(' de ')[0]] if ' de ' in m['nombre'] else [])
+    # El nombre corto (lo de antes de « de ») sirve si no es de otro lugar: «san juan» también es San Juan del Río.
+    _corto = lambda n: [n.split(' de ')[0]] if ' de ' in n and not n.startswith('san ') else []
+    dat['calc']['pred'] = [[m['id'], _pl(m['nombre'])] + _corto(_pl(m['nombre']))
                            for m in cc_predial.MUNICIPIOS] + [
         ['vallarta', 'vallarta'], ['tlaquepaque', 'tlaquepaque'], ['zapotlan', 'ciudad guzman', 'zapotlan'], ['tlajomulco', 'tlajomulco']]
     # Inversión y Megaobras, dentro del chat (24-10-2026): sus obras, sus
