@@ -67,6 +67,7 @@
       documento: null,
       correo: val('svCorreo') || null,
       acepta_aviso: true,
+      pase: (A && A.leer() && A.leer().pase) || null,  /* recibir-formulario lo revisa contra la base */
       turnstile: wid != null && window.turnstile ? window.turnstile.getResponse(wid) : null
     };
     boton.disabled = true;

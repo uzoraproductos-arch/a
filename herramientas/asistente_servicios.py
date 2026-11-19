@@ -116,6 +116,12 @@ def temas():
             if not os.path.exists(os.path.join(RAIZ, f.split('#')[0])):
                 raise SystemExit('asistente_servicios.py: la liga gratuita de «%s» no existe: %s' % (i, f))
     # Quién puede pedirlo hoy: SERVICIOS_OPERAN de apartados.py (19-11-2026).
+    # El servidor revisa el mismo candado (recibir-formulario): si uno cambia y
+    # el otro no, la generación se detiene.
+    with open(os.path.join(RAIZ, 'supabase', 'functions', 'recibir-formulario', 'index.ts'), encoding='utf-8') as f:
+        srv = 'const SERVICIOS_CON_CODIGO = true;' in f.read()
+    if srv != (A.SERVICIOS_OPERAN == 'codigo'):
+        raise SystemExit('asistente_servicios.py: SERVICIOS_OPERAN de apartados.py y SERVICIOS_CON_CODIGO de recibir-formulario no dicen lo mismo')
     abre = ('Ya opera para quien tiene un código de acceso vigente: arma tu solicitud, '
             've cómo queda y envíala; te respondemos por escrito.') if A.SERVICIOS_OPERAN else \
         'Los servicios se abren con el lanzamiento: ya puedes armar tu solicitud y ver cómo queda antes de mandarla.'

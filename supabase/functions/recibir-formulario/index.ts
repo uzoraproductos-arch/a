@@ -6,6 +6,15 @@ import { base, dentroDelLimite, esPersona, huellaIp, leeJson, responde, sirve, t
 
 const TIPOS = ["solicitud", "errata", "tema", "reporte", "algo_raro", "compartir"];
 
+// Los Servicios operan para quien tiene un código de acceso vigente (decisión
+// del autor, 19-11-2026). Va igual que SERVICIOS_OPERAN de apartados.py, que
+// lo coteja al generar: la solicitud de Servicios («solicitud») trae el pase
+// del navegador (av-pase de acceso.js) y aquí se revisa contra la base, para
+// que el candado no dependa solo del navegador. Los demás formularios de la
+// comunidad siguen abiertos a todos.
+const SERVICIOS_CON_CODIGO = true;
+const PASE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 sirve(async (req) => {
   const j = await leeJson(req);
   if (!j) return responde(req, { ok: false, error: "Mensaje ilegible o demasiado largo." }, 400);
@@ -23,6 +32,19 @@ sirve(async (req) => {
   const db = base(), huella = await huellaIp(req);
   if (!(await dentroDelLimite(db, huella, "formulario", 5, 600))) {
     return responde(req, { ok: false, error: "Recibimos varios envíos tuyos seguidos; espera unos minutos." }, 429);
+  }
+  if (tipo === "solicitud" && SERVICIOS_CON_CODIGO) {
+    // Después del límite por IP, para que nadie pruebe pases al azar.
+    const pase = typeof j.pase === "string" && PASE.test(j.pase) ? j.pase : null;
+    let hasta: string | null = null;
+    if (pase) {
+      const r = await db.rpc("pase_hasta", { p_pase: pase });
+      if (r.error) throw r.error;
+      hasta = r.data as string | null;
+    }
+    if (!hasta || Date.parse(hasta) <= Date.now()) {
+      return responde(req, { ok: false, motivo: "codigo", error: "Los Servicios operan para quien tiene un código de acceso vigente. Canjéalo y vuelve a enviarla." }, 403);
+    }
   }
   const { data, error } = await db.from("envios")
     .insert({ tipo, asunto, texto: cuerpo, pagina, documento, correo, acepta_aviso: acepta, ip_huella: huella })
