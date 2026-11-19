@@ -589,6 +589,8 @@
   }
   function periodista(q, r) {
     if (!r || r.sin || r.plat) return null;
+    var sc = svCapa(r, 'periodista');
+    if (sc) return sc;
     var f0 = r.ficha, tema = temaDe(r), res = buscar(q), piso = Math.max(5, res.length ? res[0].s * 0.35 : 0);
     var cerca = res.slice(0, 30).filter(function (x) { return x.s >= piso; }).map(function (x) { return x.f; });
     if (f0 && cerca.indexOf(f0) < 0) cerca.unshift(f0);
@@ -667,9 +669,60 @@
      respuesta en una línea y sus palabras difíciles; el Ambientalista, los
      proyectos con alerta ambiental del tema y quién los paga. Ninguna capa
      agrega cifras: todo sale de la respuesta y de la base. */
+  /* Los servicios en cada modo (19-11-2026, pedido del autor: «afinación de las
+     respuestas por modo»). Bajo la respuesta de un servicio, cada modo suma lo que
+     le toca, sin montos ni cifras: el Inspector, cómo revisarlo por tu cuenta y lo
+     que un encargo no es; el Periodista, el compromiso de independencia de su
+     familia; el Ciudadano, en una línea y con qué empezar gratis; el Ambientalista,
+     dónde ver lo ambiental, porque ningún servicio lo mide. Todo viene de
+     asistente_servicios.py (D.san.t.sv_*), que lo lee de apartados.py. */
+  var SVT = (B.dat && B.dat.san && B.dat.san.t) || {};
+  function svDe(r) {
+    var ir = r && (r.ir || (r.ficha && r.ficha.ir)), u = ir ? String(ir[0]) : '', m = /^servicios-catalogo\.html#sv-([a-z]+)/.exec(u);
+    if (m && SVT['sv_' + m[1]]) return SVT['sv_' + m[1]];
+    if (/^servicios(-[a-z-]+)?\.html/.test(u) && !/^servicios-por-que\.html/.test(u) && SVT.sv_revision) return { todos: 1, noes: SVT.sv_revision.noes, ind: SVT.sv_revision.ind, gr: [] };
+    return null;
+  }
+  function svLigas(gr) {
+    return (gr || []).map(function (g) { return '<li>🔓 <a href="' + esc(g[0]) + '">' + esc(g[1]) + ' ➔</a> · gratis</li>'; }).join('');
+  }
+  function svCapa(r, m) {
+    if (!r || r.sin) return null;
+    var s = svDe(r);
+    if (!s) return null;
+    var nom = s.todos ? 'los Servicios' : '«' + esc((r.ir || [])[1] || 'este servicio') + '»', h;
+    if (m === 'inspector') {
+      h = '<div class="pa-capa pa-capa-inspector"><p class="pa-capa-t">🔍 La revisión del Inspector</p>' +
+        '<p class="pa-rep-s">Antes de encargarlo, revísalo tú</p><ul class="pa-lista">' +
+        (s.todos ? '<li>🔍 <a href="herramienta-inspector.html">Las aplicaciones del Modo Inspector ➔</a> · gratis</li>' : svLigas(s.gr)) + '</ul>' +
+        (s.noes ? '<p class="pa-rep-s">Lo que un encargo no es</p><p><b>' + esc(s.noes[0]) + '</b> ' + esc(s.noes[1]) + '</p>' : '') +
+        '<p class="pa-chico">Cada hallazgo de un encargo lleva su documento y una de tres etiquetas: oficial, auditada o pendiente. <a href="servicios-cotiza.html#independencia">La política de independencia ➔</a></p></div>';
+    } else if (m === 'periodista') {
+      h = '<div class="pa-reportero"><p class="pa-rep-t">📰 La nota del Periodista</p>' +
+        '<p class="pa-rep-s">🕵️ Lo que conviene saber antes de encargar ' + nom + '</p><ul class="pa-lista">' +
+        (s.ind ? '<li>⚖️ <b>' + esc(s.ind[0]) + '</b> ' + esc(s.ind[1]) + '</li>' : '') +
+        (s.ind && !/^Quien encarga/.test(s.ind[0]) ? '<li>❓ <b>Quien encarga define la pregunta, no la respuesta.</b> Si los documentos no sostienen lo que esperabas, el entregable lo dice.</li>' : '') +
+        (s.fam === 'electoral' ? '<li>🗓️ Cada promesa de gasto de campaña se sigue en <a href="noticias-seguimiento.html#promesas">la memoria de promesas ➔</a>, con su fecha.</li>' : '') + '</ul>' +
+        '<p class="pa-chico">Lo que publica la plataforma no cambia por quién compró qué. <a href="servicios-cotiza.html#independencia">La política de independencia, completa ➔</a></p></div>';
+    } else if (m === 'ciudadano') {
+      h = '<div class="pa-capa pa-capa-ciudadano"><p class="pa-capa-t">🙋 En corto</p>' +
+        '<p class="pa-capa-corto">' + (s.todos ? 'Los Servicios son' : 'Es') + ' trabajo de pago: una persona lo hace por ti. Lo público lo consultas gratis, siempre.</p>' +
+        (s.todos ? '' : '<p class="pa-rep-s">Si quieres hacerlo tú, empieza aquí</p><ul class="pa-lista">' + svLigas(s.gr.slice(0, 2)) + '</ul>') +
+        '<p>¿Dudas antes de pedirlo? Lee <a href="servicios-preguntas.html">las preguntas frecuentes ➔</a></p></div>';
+    } else if (m === 'ambientalista') {
+      h = '<div class="pa-capa pa-capa-ambientalista"><p class="pa-capa-t">🌎 La mirada ambiental</p>' +
+        '<p>' + (s.todos ? 'Ninguno de los Servicios mide' : 'Este servicio no mide') + ' el daño ambiental: no lo vamos a presentar como si lo hiciera. Lo ambiental lo consultas gratis:</p><ul class="pa-lista">' +
+        '<li>🗺️ <a href="planisferio.html?d=ambiental">La dimensión ambiental del Planisferio ➔</a>: refinerías, minas, agua del subsuelo, incendios, bosques y pesca.</li>' +
+        '<li>⏱️ <a href="herramienta-ambiente-reloj.html">El reloj del daño ambiental</a> y <a href="datos-justicia-ambiental-denuncias.html">lo que resuelve la PROFEPA</a></li></ul>' +
+        '<p class="pa-chico">El deterioro del ambiente también es gasto público. Si tu pregunta es ambiental, cuéntanosla en la solicitud: se cotiza como revisión o expediente.</p></div>';
+    } else return null;
+    return { html: h, web: '' };
+  }
   function textoDe(h) { return String(h || '').replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim(); }
   function inspectorCapa(q, r) {
     if (!r || r.sin || r.plat) return null;
+    var sc = svCapa(r, 'inspector');
+    if (sc) return sc;
     var h = String(r.html || ''), cu = { oficial: 0, derivado: 0, pendiente: 0 };
     (h.match(/est-chip est-(oficial|derivado|pendiente)/g) || []).forEach(function (m) { cu[m.split('est-').pop()]++; });
     var f0 = r.ficha, fu = (f0 && f0.fu) || [], ab = entidadDe(q + ' ' + ((f0 && f0.tit) || ''));
@@ -699,6 +752,8 @@
   }
   function ciudadanoCapa(q, r) {
     if (!r || r.sin || r.plat) return null;
+    var sc = svCapa(r, 'ciudadano');
+    if (sc) return sc;
     /* La primera oración del primer párrafo: lo demás ya está arriba. */
     var p1 = (String(r.html || '').match(/<p[^>]*>([\s\S]*?)<\/p>/) || [0, r.html])[1];
     var t = textoDe(r.html).replace(/📎.*$/, '').trim(), t1 = textoDe(p1).replace(/📎.*$/, '').trim();
@@ -723,6 +778,8 @@
   }
   function ambientalistaCapa(q, r) {
     if (!r || r.sin || r.plat) return null;
+    var sc = svCapa(r, 'ambientalista');
+    if (sc) return sc;
     var casos = MO.casosAmb || [], ab = entidadDe(q + ' ' + ((r.ficha && r.ficha.tit) || '')), pt = ' ' + plano(q + ' ' + textoDe(r.html)) + ' ';
     var os = casos.filter(function (c) {
       if (ab && (c.edos || []).indexOf(ab) >= 0) return true;

@@ -738,13 +738,13 @@ La Enciclopedia queda fuera porque está congelada.
 | `servicios-calendario.html` | Calendario · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
 | `servicios-catalogo.html` | Catálogo · Auditavisión | apartados.py | 55 | 0 | 0 | 0 | 0 |
 | `servicios-como-se-cobra.html` | Cómo se cobra · Auditavisión | apartados.py | 55 | 0 | 0 | 0 | 0 |
-| `servicios-cotiza.html` | Cotiza · Auditavisión | apartados.py | 47 | 0 | 0 | 0 | 0 |
+| `servicios-cotiza.html` | Cotiza · Auditavisión | apartados.py | 48 | 0 | 0 | 0 | 0 |
 | `servicios-empieza-gratis.html` | Empieza gratis · Auditavisión | apartados.py | 53 | 0 | 0 | 0 | 0 |
 | `servicios-fraude-y-lavado.html` | Fraude y lavado · Auditavisión | apartados.py | 55 | 0 | 2 | 1 | 0 |
 | `servicios-por-que.html` | Servicios de investigación · Auditavisión | apartados.py | 69 | 0 | 3 | 2 | 0 |
 | `servicios-preguntas.html` | Preguntas · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `servicios-tu-perfil.html` | Tu perfil · Auditavisión | apartados.py | 91 | 0 | 0 | 0 | 0 |
-| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 71 | 0 | 0 | 1 | 0 |
+| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 72 | 0 | 0 | 1 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 

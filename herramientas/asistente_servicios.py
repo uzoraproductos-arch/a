@@ -81,6 +81,20 @@ FUNDAMENTO = {
 }
 
 
+# El compromiso de la política de independencia que el modo Periodista pone a
+# la vista en cada familia, y lo que un encargo no es (modo Inspector). Se
+# buscan por el principio de su título en apartados.INDEPENDENCIA.
+IND_FAMILIA = {'electoral': 'En campaña', 'investigacion': 'Quien encarga', 'prevencion': 'Lo que no está en venta', 'formacion': 'Lo que no está en venta'}
+IND_NO_ES = 'Es investigación documental'
+
+
+def _ind(prefijo):
+    x = [c for c in A.INDEPENDENCIA if c[0].startswith(prefijo)]
+    if len(x) != 1:
+        raise SystemExit('asistente_servicios.py: no encuentro en INDEPENDENCIA el compromiso «%s…»' % prefijo)
+    return list(x[0])
+
+
 def _esc(t):
     return html.escape(t, quote=False)
 
@@ -92,6 +106,8 @@ def _cotiza(i):
 def temas():
     serv = {s[0]: s for s in A.SERVICIOS}
     fam = {x[0]: x for x in A.LINEAS}
+    if set(fam) - set(IND_FAMILIA):
+        raise SystemExit('asistente_servicios.py: estas familias no tienen su compromiso en IND_FAMILIA: %s' % ', '.join(sorted(set(fam) - set(IND_FAMILIA))))
     faltan = sorted(set(serv) - set(ALIAS)) + sorted(set(serv) - set(GRATIS)) + sorted(set(serv) - set(A.COBRO))
     if faltan:
         raise SystemExit('asistente_servicios.py: estos servicios no tienen su renglón en ALIAS, GRATIS o COBRO: %s' % ', '.join(faltan))
@@ -99,7 +115,9 @@ def temas():
         for f, _t in gs:
             if not os.path.exists(os.path.join(RAIZ, f.split('#')[0])):
                 raise SystemExit('asistente_servicios.py: la liga gratuita de «%s» no existe: %s' % (i, f))
-    abre = 'Ya puedes armar tu solicitud.' if A.CANAL_SOLICITUD else \
+    # Quién puede pedirlo hoy: SERVICIOS_OPERAN de apartados.py (19-11-2026).
+    abre = ('Ya opera para quien tiene un código de acceso vigente: arma tu solicitud, '
+            've cómo queda y envíala; te respondemos por escrito.') if A.SERVICIOS_OPERAN else \
         'Los servicios se abren con el lanzamiento: ya puedes armar tu solicitud y ver cómo queda antes de mandarla.'
     t = {}
     for i, (_, ico, nom, que, recibe, quien, linea) in serv.items():
@@ -119,7 +137,9 @@ def temas():
             'tit': nom, 'h': h, 'ci': [],
             'fu': [{'que': q, 'e': 'oficial', 'fu': f} for q, f in FUNDAMENTO.get(i, [])],
             'sug': ['¿Cómo se cobra cada servicio?', '¿Qué servicios ofrece Auditavisión?', GRATIS[i][0][1]],
-            'ir': ['%s#sv-%s' % (A.SV_CATALOGO, i), nom]}
+            'ir': ['%s#sv-%s' % (A.SV_CATALOGO, i), nom],
+            # Para la capa de cada modo (asistente.js, svCapa()): la familia y lo gratis.
+            'fam': linea, 'gr': [list(g) for g in GRATIS[i]], 'ind': _ind(IND_FAMILIA[linea]), 'noes': _ind(IND_NO_ES)}
     # «¿Cuánto cuestan sus servicios?»: la forma de cobro de todos, sin montos.
     filas = ''.join('<li><span aria-hidden="true">%s</span> <b>%s:</b> %s.</li>' % (s[1], _esc(s[2]), _esc(A.COBRO[s[0]])) for s in A.SERVICIOS)
     t['sv_cobro'] = {

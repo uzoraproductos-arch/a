@@ -2340,7 +2340,10 @@
   },
   {
    "q": "Quiero el kit de entrega-recepción para mi cabildo",
-   "ir": "servicios-catalogo.html#sv-entrega"
+   "ir": "servicios-catalogo.html#sv-entrega",
+   "dice": [
+    "Ya opera para quien tiene un código de acceso vigente"
+   ]
   },
   {
    "q": "¿Cuánto cobran por revisar mis facturas por lote?",
@@ -2384,6 +2387,51 @@
   {
    "q": "¿Cómo cotizo una revisión documental puntual?",
    "ir": "servicios-catalogo.html#sv-revision"
+  },
+  {
+   "q": "¿Cómo cotizo una radiografía para mi municipio?",
+   "modo": "periodista",
+   "ir": "servicios-catalogo.html#sv-radiografia",
+   "dice": [
+    "En campaña, el mismo documento y el mismo precio",
+    "memoria de promesas"
+   ],
+   "no_dice": [
+    "En la redacción todavía no hay nota"
+   ]
+  },
+  {
+   "q": "Necesito un servicio contra el lavado de dinero para conocer a mi cliente",
+   "modo": "inspector",
+   "ir": "servicios-catalogo.html#sv-diligencia",
+   "dice": [
+    "Antes de encargarlo, revísalo tú",
+    "Busca su RFC en la lista 69-B",
+    "Es investigación documental"
+   ]
+  },
+  {
+   "q": "¿Cuánto cobran por revisar mis facturas por lote?",
+   "modo": "ciudadano",
+   "ir": "servicios-catalogo.html#sv-facturas",
+   "dice": [
+    "trabajo de pago",
+    "El lector de facturas"
+   ],
+   "no_dice": [
+    "estado de cuenta cívico"
+   ]
+  },
+  {
+   "q": "¿Qué me entregan si contrato el expediente de investigación?",
+   "modo": "ambientalista",
+   "ir": "servicios-catalogo.html#sv-expediente",
+   "dice": [
+    "Este servicio no mide el daño ambiental"
+   ],
+   "no_dice": [
+    "Sobre esto no hay un proyecto"
+   ]
   }
  ]
 }

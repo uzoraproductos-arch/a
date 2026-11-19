@@ -43,6 +43,16 @@
   }
 
   function enviar(t, boton, wid) {
+    /* Los Servicios operan para quien tiene un código de acceso vigente (decisión del autor, 19-11-2026,
+       SERVICIOS_OPERAN de apartados.py). El candado es del navegador, como el de toda la plataforma
+       (acceso.py); en la copia local no se pide, para las pruebas. */
+    var A = window.AvAcceso, local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+    if (form.getAttribute('data-con-codigo') && A && A.config && A.config.candado && !local && !A.vigente(A.leer())) {
+      avisar('Los Servicios operan para quien tiene un código de acceso vigente. Canjéalo y vuelve a enviarla; tu solicitud se queda aquí para copiarla o descargarla. ');
+      var p = resumen.querySelector('.sv-estado');
+      if (p && A.config.canje) { var a = document.createElement('a'); a.href = A.config.canje + '?volver=' + encodeURIComponent('servicios-cotiza.html' + location.search); a.textContent = 'Canjea tu código ➔'; p.appendChild(a); }
+      return;
+    }
     var acepta = $('svAcepta');
     if (!acepta || !acepta.checked) {
       avisar('Para enviarla, marca «Acepto el aviso de privacidad» arriba: tu solicitud lleva tu nombre y tu correo.');

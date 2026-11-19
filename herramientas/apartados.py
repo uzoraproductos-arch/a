@@ -1907,6 +1907,16 @@ def simulador():
 # (por ejemplo 'mailto:investigaciones@tu-dominio.mx') y corre sello.py.
 CANAL_SOLICITUD = ''
 
+# Quién puede pedir un servicio hoy (decisión del autor, 19-11-2026: «los
+# servicios digamos que ya operan para aquellos usuarios que tienen código
+# vigente y pueden usar la plataforma»). 'codigo': operan para quien tiene un
+# código de acceso vigente (acceso.py); el formulario lo revisa en el
+# navegador antes de enviar (servicios.js) y el chat lo dice
+# (asistente_servicios.py). '' los deja «con el lanzamiento». Cambiarlo
+# cambia todos los avisos de Servicios a la vez.
+SERVICIOS_OPERAN = 'codigo'
+CON_CODIGO = 'con un código de acceso vigente'
+
 # Reestructura de la pestaña (pedido del autor, 07-11-2026: «reestructura la
 # pestaña de servicios de forma profesional, fácil de consumir, para la
 # atracción de nuestros clientes… tomando en cuenta también el modelo de
@@ -1986,7 +1996,8 @@ LINEAS = [
 # asistente_legislativo.py (LGIPE, art. 22) y asistente_judicial.py.
 CALENDARIO = [
     ('Hoy', 'La consulta y las herramientas', 'Gratis: el Auditor, el Planisferio, la lista 69-B, el lector de facturas y el verificador de notas.'),
-    ('Con el lanzamiento', 'Prevención, talleres y encargos', 'El Vigía con aviso, la ficha del proveedor, los lotes de facturas, los talleres y las cotizaciones.'),
+    ('Hoy, %s' % CON_CODIGO if SERVICIOS_OPERAN else 'Con el lanzamiento', 'Prevención, talleres y encargos',
+     'El Vigía con aviso, la ficha del proveedor, los lotes de facturas, los talleres y las cotizaciones.'),
     ('Antes del 6 de junio de 2027', 'Radiografías y licencia de temporada', 'Ese domingo se eligen la Cámara de Diputados, gubernaturas, congresos locales y ayuntamientos. '
      'Cada promesa de gasto de campaña entra a la memoria de promesas, con su fecha.'),
     ('Después de la elección', 'Lo que recibes', 'El kit de entrega-recepción y el taller para leer el presupuesto, para los gobiernos y cabildos que entran.'),
@@ -2089,8 +2100,8 @@ GRATIS_PAGO = [
     ('La información pública', 'Gratis, siempre', 'Nunca se cobra'),
     ('Buscar un RFC en la 69-B, leer una factura, el dictamen', 'Gratis, siempre', 'Nunca se cobra'),
     ('El trabajo: que una persona investigue, revise o enseñe por ti', 'Lo haces tú con las herramientas', 'Servicio cotizado'),
-    ('La memoria: tu cartera de proveedores guardada', 'En tu navegador (Mi Auditavisión)', 'Con el Vigía, al abrir'),
-    ('El aviso: enterarte cuando algo cambia', 'Lo revisas tú cuando quieras', 'Con el Vigía, al abrir'),
+    ('La memoria: tu cartera de proveedores guardada', 'En tu navegador (Mi Auditavisión)', 'Con el Vigía' + (', %s' % CON_CODIGO if SERVICIOS_OPERAN else ', al abrir')),
+    ('El aviso: enterarte cuando algo cambia', 'Lo revisas tú cuando quieras', 'Con el Vigía' + (', %s' % CON_CODIGO if SERVICIOS_OPERAN else ', al abrir')),
     ('El cómputo: lotes grandes de facturas', 'Hasta 500 facturas, en tu navegador', 'Servicio cotizado'),
 ]
 
@@ -2124,7 +2135,8 @@ PREGUNTAS = [
     ('¿Mis facturas o mis datos se publican?', 'No. Tu encargo es confidencial y no publicamos quién encargó qué sin su permiso. Con las herramientas gratuitas, tus archivos ni siquiera salen de tu navegador.'),
     ('¿Cuánto tarda y cuánto cuesta?', 'Cada servicio dice cómo se cobra: por ficha, por mes, por documento, por taller o por cotización. Todavía no hay tarifas publicadas, y no vamos a inventarlas: saldrán de los primeros encargos piloto. Antes de empezar recibes por escrito el costo y el plazo; si no te conviene, ahí termina y no pagas nada.'),
     ('¿Atienden a gobiernos y a partidos?', 'Sí, con la misma regla para todos: el mismo servicio y el mismo precio, con factura y sin cortesías, y nunca a cambio de cambiar lo que publicamos. En campaña no investigamos por encargo a una candidatura rival. Si quien solicita es parte del caso, se dice en la cotización.'),
-    ('¿Cuándo abren?', 'Con el lanzamiento de la plataforma. Ya puedes armar tu solicitud; el envío se activa entonces.'),
+    ('¿Cuándo abren?', 'Ya operan para quien tiene un código de acceso vigente: arma tu solicitud y envíala. ¿No tienes código? Pídelo en «Canjea tu código».'
+     if SERVICIOS_OPERAN else 'Con el lanzamiento de la plataforma. Ya puedes armar tu solicitud; el envío se activa entonces.'),
 ]
 
 # Lo que se tomó de la página de WiseCricket (leída el 07-11-2026, pedido del
@@ -2150,7 +2162,7 @@ DEMO = {
 
 ANTES_DESPUES = [
     ('Revisas el portal del SAT RFC por RFC, cuando te acuerdas.', 'Buscas cualquier RFC en la lista 69-B completa, gratis, y el Vigía compara la lista cada semana.'),
-    ('Te enteras de que un proveedor quedó definitivo cuando ya llegó la revisión.', 'Con el Vigía de tu cartera (abre con el lanzamiento), el aviso llega con el párrafo del 69-B y el plazo que corre.'),
+    ('Te enteras de que un proveedor quedó definitivo cuando ya llegó la revisión.', 'Con el Vigía de tu cartera (' + ('opera %s' % CON_CODIGO if SERVICIOS_OPERAN else 'abre con el lanzamiento') + '), el aviso llega con el párrafo del 69-B y el plazo que corre.'),
     ('Para saber si una empresa le vende al gobierno, buscas en varios portales.', 'Sus contratos de ComprasMX, sus señales de fraccionamiento y lo que dijo la ASF, en una sola ficha.'),
     ('Para revisar tus facturas tienes que entregarlas o dar tu contraseña del SAT.', 'Las lees en tu navegador, hasta 500 a la vez, sin subirlas.'),
     ('Una nota trae una cifra y no sabes si es cierta.', 'La contrastas contra el documento oficial, con su etiqueta: oficial, derivado o pendiente.'),
@@ -2198,7 +2210,7 @@ MODULOS = [
      'Cuadre, estructura, rentabilidad, tendencia, impuestos y deuda, desde un CSV o lo pegado de Excel, en tu navegador.',
      'herramienta-inspector-resultados.html', 'Gratis'),
     ('Vigía', '🔔', 'Vigila tu cartera',
-     'Te avisamos cuando un proveedor cambia de situación en la lista 69-B, con el párrafo del artículo y el plazo que corre.', '#sv-seguimiento', 'Con el lanzamiento'),
+     'Te avisamos cuando un proveedor cambia de situación en la lista 69-B, con el párrafo del artículo y el plazo que corre.', '#sv-seguimiento', 'Con código vigente' if SERVICIOS_OPERAN else 'Con el lanzamiento'),
     ('Investigación', '🔎', 'Un expediente a la medida',
      'Una persona investiga tu pregunta con documentos públicos y te entrega fuentes, etiquetas y límites.', '#sv-expediente', 'Por encargo'),
 ]
@@ -2541,9 +2553,10 @@ def servicios():
              '            <thead><tr><th scope="col">Qué</th><th scope="col">Gratis</th><th scope="col">De pago</th></tr></thead>\n'
              '            <tbody>\n%s\n            </tbody>\n          </table></div>\n'
              '          <p class="sv-nota">La prueba de la línea: si alguien pregunta «¿cobran por la información?», la respuesta siempre es '
-             '«no»: se cobra que lo hagamos por ti, que lo recordemos o que te avisemos. El Vigía con aviso y memoria se abre con el lanzamiento.</p>'
-             % '\n'.join('              <tr><th scope="row">%s</th><td data-et="Gratis">%s</td><td data-et="De pago">%s</td></tr>' % g
-                         for g in GRATIS_PAGO))
+             '«no»: se cobra que lo hagamos por ti, que lo recordemos o que te avisemos. %s</p>'
+             % ('El Vigía con aviso y memoria opera %s.' % CON_CODIGO if SERVICIOS_OPERAN else 'El Vigía con aviso y memoria se abre con el lanzamiento.',
+                '\n'.join('              <tr><th scope="row">%s</th><td data-et="Gratis">%s</td><td data-et="De pago">%s</td></tr>' % g
+                         for g in GRATIS_PAGO)))
 
     dentro, fuera, cierre = ENCAJE
     encaje = ('<div class="sv-encaje">\n%s\n        </div>\n'
@@ -2623,7 +2636,7 @@ def servicios():
                   '<a href="aviso-de-privacidad.html">aviso de privacidad</a> para que guarden mi solicitud y mi correo '
                   '(solo hace falta para enviarla).</label>')
     formulario = '\n'.join([
-        '<form class="sv-form" id="svForm" data-canal="%s"%s novalidate>' % (esc_attr(CANAL_SOLICITUD), envio),
+        '<form class="sv-form" id="svForm" data-canal="%s"%s%s novalidate>' % (esc_attr(CANAL_SOLICITUD), envio, ' data-con-codigo="1"' if SERVICIOS_OPERAN else ''),
         '          <p class="sv-privado">%s</p>' % privado,
         '          <fieldset class="sv-grupo"><legend>Qué quieres investigar</legend>',
         campo('svServicio', 'Servicio', '<select id="svServicio" name="servicio">\n%s\n                <option value="no-se">No sé, ayúdenme a definirlo</option>\n              </select>' % opciones),
@@ -2689,7 +2702,10 @@ def servicios():
     # la página donde vive (SV_ANCLAS).
     fuera = lambda h: sv_liga(h, SV_PORQUE)
     comun = {'menu': 'Servicios de investigación', 'menu_archivo': 'servicios.html', 'icono': '🔎', 'estilos': ['servicios.css']}
-    aviso = ('      <p class="sv-aviso"><span class="sz-et">Próximamente</span> Los Servicios se abren con el lanzamiento de la '
+    aviso = ('      <p class="sv-aviso"><span class="sz-et">Ya operan</span> Los Servicios operan para quien tiene un código de acceso vigente: '
+             'arma tu solicitud y envíala aquí; te respondemos por escrito. ¿No tienes código? <a href="canjea-tu-codigo.html">Canjéalo o pídelo ➔</a></p>'
+             if SERVICIOS_OPERAN else
+             '      <p class="sv-aviso"><span class="sz-et">Próximamente</span> Los Servicios se abren con el lanzamiento de la '
              'plataforma. Ya puedes armar tu solicitud y guardarla; el envío se activa entonces.</p>')
     numero = lambda n: ['Cero', 'Uno', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve', 'Diez', 'Once', 'Doce'][n]
     politica_html = ('<div class="sv-politica">\n          <ol class="sv-pol">\n%s\n          </ol>\n'
