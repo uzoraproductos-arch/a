@@ -453,11 +453,12 @@ filtración, un dato personal ni un rumor**. Se construye en entregas:
 ## 1. Se trabaja en la rama, `main` es la versión entregada
 
 **Todo el trabajo se hace en la rama `claude/funny-turing-imtm54`.**
-`main` es la versión que el autor aprueba: el 29-09-2026 se puso al día con la
-rama y quedaron idénticas. Desde entonces, `main` solo avanza cuando el autor
-lo pide, así que la rama puede volver a ir adelante. Para ver cuánto le falta
-a `main`: `git rev-list --count origin/main..origin/claude/funny-turing-imtm54`
-(0 = están iguales).
+**`main` es su espejo y se actualiza sola** (decisión del autor, 19-11-2026: «solo quiero
+modificar uno y que se actualice [el otro]»): el flujo «Espejo de main»
+(`.github/workflows/espejo-main.yml`) la adelanta a la rama en cada envío, al terminar cada flujo
+programado, cada día y a mano, solo por avance directo. **Nunca se escribe directo en `main`**: si
+alguien lo hace, el flujo se detiene sin pisar nada, y se arregla integrando `main` en la rama. Para
+ver si están iguales: `git rev-list --count origin/main..origin/claude/funny-turing-imtm54` (0 = iguales).
 
 ```bash
 git clone --branch claude/funny-turing-imtm54 \
@@ -477,7 +478,7 @@ git push origin claude/funny-turing-imtm54   # AL TERMINAR, aunque quede a media
 Un commit imperfecto vale más que un avance perdido: si se cae la sesión o se
 acaban los créditos, lo único que se pierde es lo que no se empujó.
 
-**Nunca empujes a `main` sin permiso expreso del autor.**
+**Nunca empujes a `main` a mano**: la iguala el flujo «Espejo de main».
 
 **Hay una sola plataforma** (§0 bis). La Enciclopedia antigua
 (`enciclopedia.html` con `assets/css`, `assets/js` y `assets/data`) se retiró

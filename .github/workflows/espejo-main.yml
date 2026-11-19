@@ -1,0 +1,50 @@
+# main es el espejo de la rama de trabajo (decisión del autor, 19-11-2026:
+# «solo quiero modificar uno y que se actualice [el otro]»). Todo se trabaja y
+# se empuja a claude/funny-turing-imtm54 (la rama que publica el sitio y a la
+# que escriben los flujos programados); este flujo adelanta main a ella, solo
+# por avance directo (fast-forward). Si alguien escribió en main por su lado, no
+# se pisa nada: el flujo se detiene y lo dice.
+#
+# Los commits que hacen los flujos programados con GITHUB_TOKEN no disparan
+# «push», así que también corre al terminar cada uno de ellos, cada día y a mano.
+name: Espejo de main
+
+on:
+  push:
+    branches: [claude/funny-turing-imtm54]
+  workflow_run:
+    workflows: [Base al día, Bóveda de evidencias, Expedientes al día, Indicadores de Banxico, Mesa de redacción, Revisión semanal, Vigía legislativo]
+    types: [completed]
+  schedule:
+    - cron: '7 7 * * *'   # cada día, 1:07 en la Ciudad de México
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: espejo-main
+  cancel-in-progress: false
+
+jobs:
+  espejo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/funny-turing-imtm54
+          fetch-depth: 0
+      - name: Adelanta main a la rama de trabajo
+        run: |
+          git fetch origin main
+          if [ "$(git rev-parse origin/main)" = "$(git rev-parse HEAD)" ]; then
+            echo "main ya está igual que claude/funny-turing-imtm54."
+            exit 0
+          fi
+          if ! git merge-base --is-ancestor origin/main HEAD; then
+            echo "::error::main tiene commits que la rama de trabajo no trae. No se pisa nada: integra main en claude/funny-turing-imtm54 y este flujo la igualará."
+            exit 1
+          fi
+          git push origin HEAD:main
+          echo "main avanzó a $(git rev-parse --short HEAD)."
