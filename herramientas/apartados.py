@@ -325,7 +325,8 @@ ENCICLO_MARCAN = (ENCICLOPEDIA, 'sigue-el-dinero.html', 'descarga-los-datos.html
 # archivo cambió de nombre.
 PLANISFERIO = 'planisferio.html'
 MENU = [
-    (AUDITOR_VIRTUAL, 'Auditor', ('herramientas.html',)),
+    # El índice general cuelga del Auditor (decisión del autor, 19-11-2026).
+    (AUDITOR_VIRTUAL, 'Auditor', ('herramientas.html', 'indice.html')),
     (PLANISFERIO, 'Planisferio', (PLANISFERIO,)),
     ('participa.html', 'Comunidad', ('participa.html',) + ENCICLO_MARCAN),
     # Pedido del autor, 28-10-2026: «darle más protagonismo a las noticias
@@ -6425,6 +6426,11 @@ def pagina(a, sello):
     texto = _pagina(a, sello)
     import servicios_fichas as sf
     origen = sf.pestana_de(a['archivo'])
+    if origen == 'Planisferio':
+        # 19-11-2026: lo que el Planisferio enseña abre en sus propias páginas, no en la
+        # Enciclopedia (planisferio_espejo.py).
+        import planisferio_espejo
+        texto = planisferio_espejo.a_espejo(texto)
     if origen in ('Servicios', 'Planisferio', 'Comunidad', 'Noticiero'):
         # 19-11-2026: todas las pestañas. La liga lleva el modo del servicio o, si no,
         # el de la página a la que va (modos.py).
@@ -6911,6 +6917,19 @@ def indice(base, ref):
     diario = _rejilla([_grupo('📰', 'Noticias', [(noticias.ARCHIVO, 'Noticias', 'La pestaña: sus tres páginas en una sola puerta')], noticias.ARCHIVO)] +
                       [_grupo(ico, tit, [(arch, tit, lema)] + [('%s#%s' % (arch, i), '· ' + nsec[i], '') for i in secs], arch)
                        for arch, ico, tit, lema, _t, secs in noticias.PARTES])
+    # El Planisferio y los Servicios (19-11-2026: el índice cuelga del Auditor y lleva a
+    # todas las pestañas). Salen de sus mismas listas: un portal o un servicio nuevo
+    # aparece solo.
+    import planisferio as pl_
+    E_ = sorted(auditorias.db()['estados'], key=lambda x: pl_.clave(x['name']))
+    mapa_pl = _rejilla([
+        _grupo('🗺️', 'Planisferio', [(PLANISFERIO, 'El mapa de México por dimensiones', 'Toca una entidad y abre su portal'),
+                                     (pl_.DINERO, pl_.DINERO_TIT, 'Los contadores, cuánto dinero es y los 16 orígenes del ingreso')], PLANISFERIO),
+        _grupo('📍', 'Los portales de las 32 entidades', [(pl_.portal(e['abbr']), e['name'], '') for e in E_])])
+    servicios_idx = _rejilla([
+        _grupo('🧰', 'Servicios', [('servicios.html', 'El tablero de Servicios', 'Todo empieza en el chat: plantéale tu caso al Auditor')] +
+               [(x[1], '· ' + x[3], x[4]) for x in SV_PAGINAS], 'servicios.html'),
+        _grupo('🧾', 'Cada servicio, en su página', [('servicio-%s.html' % x[0], '%s %s' % (x[1], x[2]), '') for x in SERVICIOS])])
     metodologia = (
         '<div class="indice-metodo">\n'
         '          <p>Toda cifra de la plataforma lleva su fuente oficial y uno de tres estados:</p>\n'
@@ -6927,21 +6946,24 @@ def indice(base, ref):
         '        </div>') % '\n'.join('            <li><b>%s</b> %s</li>' % n for n in NOVEDADES)
     secc = [
         ('auditor', '🔍 Auditor Virtual', 'El chat que te contesta todo, en sus cuatro modos, con su dictamen.', auditor),
+        ('planisferio', '🗺️ Planisferio', 'El mapa de México y el portal de cada entidad, con sus temas en páginas propias.', mapa_pl),
         ('enciclopedia', '📚 Enciclopedia', 'La parte de consulta: Números, sus Herramientas, Datos y Aprende.', enciclopedia),
         ('numeros', '💰 Enciclopedia · Números', 'El recorrido del dinero público, del impuesto a la rendición de cuentas, cada parte en su propia página.', numeros),
         ('herramientas', '🧰 Enciclopedia · Herramientas del Auditor', 'Cada herramienta y sus aplicaciones, con página propia.', herr),
         ('mas', '📊 Enciclopedia · Datos y Aprende', 'Las descargas, el radar, el ambiente, los Poderes de la Unión y la Biblioteca del Erario Público.', _rejilla(datos_aprende)),
         ('comunidad', '🤝 Comunidad', 'La participación ciudadana: el Ágora, tus garantías, las donaciones y «Cuéntanos lo que viste».', _rejilla(comunidad)),
         ('noticias', '📰 Noticias', 'Auditavisión Noticias, el verificador y el seguimiento de cada caso.', diario),
+        ('servicios', '🧰 Servicios', 'Lo que hacemos por encargo: cada servicio con su página, y todo empieza en el chat.', servicios_idx),
         ('investigaciones', '🖼️ Auditoría en imágenes, por tema', 'Las investigaciones. Cada una explica el caso y lleva a sus números y a su evidencia.', investigaciones),
         ('metodologia', '🔎 Cómo verificamos', 'La regla que sigue cada cifra y lo último que cambió.', metodologia),
     ]
     return {
-        'archivo': 'indice.html', 'menu': 'Índice general', 'menu_archivo': 'indice.html',
-        'icono': '🗂️', 'titulo': 'Índice general', 'lema': 'Todo lo que hay en Auditavisión, en una página',
-        'entrada': ('Aquí está el mapa completo de la plataforma, en el orden de sus pestañas: el Auditor Virtual y sus modos; '
+        'archivo': 'indice.html', 'menu': 'Índice general', 'menu_archivo': 'indice.html', 'padre': (AUDITOR_VIRTUAL, 'Auditor'),
+        'icono': '🗂️', 'titulo': 'Índice general', 'lema': 'Todo lo que sabe el Auditor, en una página',
+        'entrada': ('El Auditor es la puerta de la plataforma y este es su índice: todo lo que puede contestarte, en el orden de sus pestañas. '
+                    'Pregúntale lo que sea en el chat, o abre aquí la página que buscas. Primero el Auditor Virtual y sus modos; el Planisferio; '
                     'la Enciclopedia, con los capítulos de Números, cada herramienta con sus aplicaciones, los datos y la obra de consulta; '
-                    'Comunidad y Noticias. Al final, las investigaciones por tema y cómo verificamos cada cifra. '
+                    'Comunidad, Noticias y Servicios. Al final, las investigaciones por tema y cómo verificamos cada cifra. '
                     'Cada enlace abre su propia página.'),
         'secciones': [{'id': i, 'titulo': t, 'texto': x, 'tarjetas': [], 'bloque': b} for i, t, x, b in secc],
     }
@@ -7149,6 +7171,10 @@ def generar(sello=None):
     # La entrada de la versión de prueba (códigos de acceso), con su molde propio.
     import acceso
     acceso.escribir_entrada(sello)
+    # Las páginas propias del Planisferio, al final: se escriben desde las páginas ya
+    # generadas de la Enciclopedia (planisferio_espejo.py, 19-11-2026).
+    import planisferio_espejo
+    planisferio_espejo.generar()
     import sitemap
     return sitemap.generar(sello)
 

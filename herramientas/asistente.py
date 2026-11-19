@@ -331,7 +331,9 @@ def _paginas():
         n = os.path.basename(p)
         # Las notas «Al momento» con página propia (para buscadores, 31-10-2026) ya
         # están en el chat como columnas: su página no compite con su ficha.
-        if n in (ARCHIVO, DICTAMEN) or n.startswith('noticias-al-momento-'):
+        # Las páginas propias del Planisferio son reflejos de la Enciclopedia
+        # (planisferio_espejo.py): el chat contesta con la original.
+        if n in (ARCHIVO, DICTAMEN) or n.startswith('noticias-al-momento-') or n.startswith('planisferio-ficha-'):
             continue
         s = open(p, encoding='utf-8').read()
         if 'http-equiv="refresh"' in s or 'name="robots" content="noindex' in s:
@@ -1022,6 +1024,7 @@ def pagina(cuenta, canal='', herramientas=()):
             <div class="pa-control" role="group" aria-label="Controles de la plática">
               <button type="button" class="pa-ctl" id="paRegresa" disabled><span aria-hidden="true">↩️</span> Regresar</button>
               <button type="button" class="pa-ctl" id="paLimpia" disabled><span aria-hidden="true">🗑️</span> Limpiar</button>
+              <a class="pa-ctl" href="indice.html" title="Todo lo que sabe el Auditor, en una página"><span aria-hidden="true">🗂️</span> Índice general</a>
               <span class="pa-control-nota">Tu plática se guarda mientras navegas por la plataforma.</span>
             </div>
           </div>

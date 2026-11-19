@@ -33,7 +33,9 @@ def generar(sello):
         if not f.endswith('.html') or f in EXCLUIR:
             continue
         t = open(os.path.join(RAIZ, f), encoding='utf-8', errors='replace').read()
-        if redirige(t) or re.search(r'<meta name="robots" content="[^"]*noindex', t):
+        # Una página cuya dirección canónica es otra (los reflejos del Planisferio) no se lista.
+        c = re.search(r'<link rel="canonical" href="[^"]*/([^"/]*)">', t)
+        if redirige(t) or re.search(r'<meta name="robots" content="[^"]*noindex', t) or (c and c.group(1) not in ('', f)):
             continue
         paginas.append('' if f == 'index.html' else f)
     xml = ['<?xml version="1.0" encoding="UTF-8"?>',

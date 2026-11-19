@@ -32,7 +32,7 @@
      arma el navegador (la ficha del Planisferio, por ejemplo): al tocar una liga a
      otra pestaña, se cambia por la del chat con la pregunta y ?abre=. La regla de
      cada pestaña es la de pestana_de() en servicios_fichas.py. */
-  var EXC = { 'periodismo-en-riesgo.html': 'Noticiero' };
+  var EXC = { 'periodismo-en-riesgo.html': 'Noticiero', 'indice.html': 'Auditor', 'pendientes.html': 'Auditor', 'base-al-dia.html': 'Auditor' };
   function pestana(f) {
     if (EXC[f]) return EXC[f];
     if (f === CHAT || f === 'herramienta-inspector-dictamen.html') return 'Auditor';
@@ -49,6 +49,9 @@
       if (!a || a.origin !== location.origin || !a.closest('main') || a.closest('.pt-cajon, .apartado-migas, .site-top-nav')) return;
       var f = a.pathname.split('/').pop(), t = pestana(f);
       if (!/\.html$/.test(f) || !t || t === mia || t === 'Auditor') return;
+      /* Una página propia del Planisferio que liga a su original se queda en ella
+         (planisferio_espejo.py, 19-11-2026). */
+      if (aqui === 'planisferio-ficha-' + f) { a.href = aqui + a.search + a.hash; return; }
       var b = a.querySelector('b'), q = ((b || a).textContent || '').replace(/\s+/g, ' ').replace(/[➔→›»]/g, '').trim();
       if (q.length < 4 || q.length > 140) q = f.replace(/\.html$/, '').replace(/-/g, ' ');
       a.href = CHAT + '?q=' + encodeURIComponent(q) + '&abre=' + encodeURIComponent(f + a.search + a.hash);

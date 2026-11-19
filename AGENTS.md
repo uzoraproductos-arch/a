@@ -342,12 +342,26 @@ respuesta rápida, «Generar dictamen», «Saber más» (la página a fondo) y e
 - **Cada liga `abre=` del sitio se prueba** en `prueba_auditor.py` (587 al 19-11-2026): la página debe
   existir y el chat debe abrirla. Una página sin ficha propia (un mapa, un tablero) se abre igual, sin cifras.
 - **La Enciclopedia es el espejo de la base de datos** (el autor, 19-11-2026): de ahí toma el
-  Auditor y lo desarrolla. **Lo que el Planisferio enseña de un estado vive en páginas del propio
-  Planisferio** (sus portales y sus temas, `TEMAS` de `planisferio.py`); para ir a la Enciclopedia,
-  la liga pasa por el chat.
-- Lo que sigue (del autor): la página automatizada de las respuestas a lo que pidió cada usuario, y
-  que el Planisferio tenga en sus páginas lo que hoy manda a la Enciclopedia (las fuentes, el estado
-  de cuenta y de resultados de cada estado, el Contexto dimensional y las leyes en sus tres niveles).
+  Auditor y lo desarrolla. **Lo que el Planisferio enseña abre en páginas del propio Planisferio**
+  («que se abran en su propia página automatizada… no dentro de la enciclopedia»): sus portales y
+  sus temas (`TEMAS` de `planisferio.py`) y, para lo que antes mandaba a la Enciclopedia (las fuentes,
+  el estado de cuenta y de resultados de cada estado, el Contexto dimensional, las leyes en sus tres
+  niveles, los Datos de cada dimensión), **sus páginas propias** `planisferio-ficha-<página>.html`
+  (`herramientas/planisferio_espejo.py`). `a_espejo()` cambia cada liga del Planisferio a la Comunidad
+  por la de su página propia y `generar()` la escribe al final, desde la página ya generada de la
+  Enciclopedia: **la misma página, nunca una copia a mano ni una cifra distinta**, marcada Planisferio,
+  con sus migas, el aviso «Lo ves desde el Planisferio» y su canónica en la original (`sitemap.py` no la
+  lista y el chat no la indexa: contesta con la original). Dentro, a otra página propia va directo y a
+  otra pestaña, por el Auditor. **Nadie la edita**: una nueva sale sola cuando el Planisferio liga a otra
+  página de la Enciclopedia, y la que ya no se pide se borra. `planisferio.js` liga a ellas por su nombre
+  (si liga a una que ninguna página pide, la generación se detiene), y `volver-auditor.js` deja en su
+  página propia la liga que una aplicación reflejada arma a sí misma.
+- **El índice general cuelga del Auditor** (el autor, 19-11-2026: «se va a integrar nuestro índice
+  general… y todo esto queda vinculado con nuestro auditor»). `indice.html` marca la pestaña Auditor
+  (con el Registro de pendientes y la base al día, que cuelgan de él: `EXCEPCIONES`), lleva a todas
+  las pestañas, Planisferio y Servicios incluidos, y el chat lo abre con «el índice», «¿qué tiene la
+  plataforma?» o «mapa del sitio» (`INDICE_RE` de `asistente.js`) y con su botón «🗂️ Índice general».
+- Lo que sigue (del autor): la página automatizada de las respuestas a lo que pidió cada usuario.
 
 ### 0 bis. Una sola plataforma: la Enciclopedia antigua se retiró
 

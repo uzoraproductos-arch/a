@@ -307,7 +307,9 @@ def chat_liga(q, modo):
 # (o abre la aplicación en su marco), ofrece el dictamen, «Saber más» y el servicio
 # que toca (`abre()` y `servicioHtml()` de asistente.js). herramientas/vinculos_auditor.py
 # revisa que la regla de `pestana_de()` coincida con la pestaña que marca cada página.
-EXCEPCIONES = {'periodismo-en-riesgo.html': 'Noticiero'}
+# El índice general cuelga del Auditor (decisión del autor, 19-11-2026).
+# Con él, las dos páginas que cuelgan del índice: el Registro de pendientes y la base al día.
+EXCEPCIONES = {'periodismo-en-riesgo.html': 'Noticiero', 'indice.html': 'Auditor', 'pendientes.html': 'Auditor', 'base-al-dia.html': 'Auditor'}
 _GENERICO = re.compile(r'^(ábrelo|abrir|abre|ver|ver más|ver la página|ver la ficha|aquí|esta página|la página|➔|saber más)\W*$', re.I)
 _A = re.compile(r'<a\b([^>]*?)\bhref="([^"]+)"([^>]*)>(.*?)</a>', re.S)
 

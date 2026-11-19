@@ -2782,7 +2782,23 @@
       sug: [uno ? 'Contratos de ' + uno + ' en ComprasMX' : '¿Cómo reviso a mi cliente?', '¿Qué es una EFOS?', '¿Qué es una actividad vulnerable?'] };
   }
 
-  function respuesta(q, previas) { return quizaEmpresa(q, respuesta0(q, previas)); }
+  /* El índice general cuelga del Auditor (decisión del autor, 19-11-2026): «el índice»,
+     «¿qué tiene la plataforma?» o «mapa del sitio» lo abren; «índice de…» sigue siendo un tema. */
+  var INDICE_RE = /^(?:(?:el|tu|su|ver|abre|abrir|dame|mu[eé]strame)\s+)*(?:[ií]ndice(?:\s+general)?|mapa del sitio)(?:\s+de\s+(?:la plataforma|auditavisi[oó]n|todo))?\s*\??$|^(?:qu[eé]|todo lo que)\s+(?:tiene|tienen|hay en|ofrece|ofrecen|contiene|sabe)(?:\s+(?:la plataforma|auditavisi[oó]n|el auditor))?\s*\??$/i;
+  function respuesta(q, previas) {
+    var t = String(q || '').trim().replace(/^[¿¡\s]+/, '').replace(/[?!.\s]+$/, '');
+    if (INDICE_RE.test(t)) {
+      var ri = abre(q, 'indice.html');
+      if (ri) {
+        ri.html = '<p><span aria-hidden="true">🗂️</span> Todo lo que sé está en el <a href="indice.html"><b>Índice general</b></a>, en el orden de las pestañas: ' +
+          'yo y mis cuatro modos, el Planisferio con el portal de cada entidad, la Enciclopedia, Comunidad, el Noticiero y los Servicios.</p>' +
+          '<p>Ábrelo con «Saber más», o escríbeme aquí lo que buscas y te llevo directo.</p>';
+        ri.ir = ['indice.html', 'Índice general'];
+        return ri;
+      }
+    }
+    return quizaEmpresa(q, respuesta0(q, previas));
+  }
   /* Todo pasa por el Auditor (decisión del autor, 19-11-2026: «entre pestañas no se
      vinculan: todo es a través del Auditor»). Una liga de otra pestaña llega al chat
      con ?q= y ?abre=<página>: el chat contesta con esa página (o abre la aplicación en

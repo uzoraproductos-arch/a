@@ -360,6 +360,7 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .pa-ctl { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 16px; border: 1px solid #dfe5f0; border-radius: 999px; background: #ffffff; color: #33415c; font: 600 14px/1 Inter, system-ui, sans-serif; cursor: pointer; }
 .pa-ctl:hover:not(:disabled), .pa-ctl:focus-visible { border-color: var(--pa); background: var(--pa-claro); }
 .pa-ctl:disabled { opacity: .45; cursor: default; }
+a.pa-ctl { text-decoration: none; }
 .pa-control-nota { margin-left: auto; font-size: 13px; color: #6b7588; }
 @media (min-width: 901px) {
   .pa-hilo { max-height: 62vh; }
