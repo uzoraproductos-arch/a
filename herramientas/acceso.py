@@ -291,6 +291,7 @@ def pagina_panel():
               '(Google Authenticator, Microsoft Authenticator, 1Password, Authy…) y escribe los seis números que te da.</p>\n'
               '      <img class="ac-qr" id="acFactorQr" alt="Código QR para dar de alta el segundo factor" width="200" height="200">\n'
               '      <p class="ac-ayuda">¿No puedes escanearlo? Escribe esta clave en la aplicación: <code id="acFactorSecreto"></code></p>\n'
+              '      <p class="ac-ayuda"><a class="sz-btn" id="acFactorUri" href="#" hidden>📱 Ábrelo en tu aplicación (si estás en el celular)</a></p>\n'
               '    </div>\n'
               '    <label class="ac-et" for="acFactorCodigo">Código de tu aplicación</label>\n'
               '    <input class="ac-campo" id="acFactorCodigo" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" required>\n'

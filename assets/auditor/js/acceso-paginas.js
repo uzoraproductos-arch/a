@@ -660,7 +660,23 @@
         var caja = $('acFactor'), est = $('acFactorEstado'), cod = $('acFactorCodigo');
         entrar.hidden = true; caja.hidden = false;
         $('acFactorAlta').hidden = !f.totp;
-        if (f.totp) { $('acFactorQr').src = f.totp.qr_code; $('acFactorSecreto').textContent = f.totp.secret; }
+        if (f.totp) {
+          // Supabase manda el QR como SVG sin codificar («data:image/svg+xml;utf-8,<svg…>»):
+          // un «#» o un salto de línea lo rompen y la imagen sale vacía. Se vuelve a codificar.
+          var qr = String(f.totp.qr_code || ''), coma = qr.indexOf(','), img = $('acFactorQr');
+          if (/^data:image\/svg\+xml/.test(qr) && !/;base64,/.test(qr.slice(0, coma + 1))) {
+            var svg = qr.slice(coma + 1);
+            try { if (/%3C/i.test(svg.slice(0, 12))) svg = decodeURIComponent(svg); } catch (e) { /* ya venía en claro */ }
+            qr = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+          } else if (/^\s*<svg|^\s*<\?xml/.test(qr)) {
+            qr = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(qr);
+          }
+          img.onerror = function () { est.textContent = 'Tu navegador no pudo dibujar el código QR: usa la clave de abajo o el botón «Ábrelo en tu aplicación».'; };
+          img.src = qr;
+          $('acFactorSecreto').textContent = f.totp.secret;
+          var abrir = $('acFactorUri');
+          if (abrir && f.totp.uri) { abrir.href = f.totp.uri; abrir.hidden = false; }
+        }
         cod.focus();
         return new Promise(function (ok) {
           caja.onsubmit = function (e) {
