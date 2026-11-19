@@ -1200,6 +1200,17 @@
       var x = SAN.t[k];
       return { html: x.h, fu: x.fu, ci: x.ci || [], tit: x.tit, ir: x.ir, sug: x.sug };
     }
+    var SVA = SAN && SAN.sva ? Object.keys(SAN.sva).map(function (k) { return [k, new RegExp(SAN.sva[k])]; }) : [];
+    function svTema(t) {
+      if (!SVA.length || /\b(que|cuales) servicios\b/.test(t)) return null;
+      var cobro = /\b(cuanto (cuesta|cuestan|cobran|cobra|sale|me sale)|precios?|tarifas?|como (se )?cobran?|como cotizo|cotiza\w*)\b/.test(t);
+      if (!cobro && !/servicio|contrat|encarg|que (me )?(entregan|incluye|recibo)|en que consiste|como (lo |la )?(pido|solicito)|quiero (una|un|la|el|que)|necesito (una|un)|ofrecen|venden/.test(t)) return null;
+      var k = null;
+      SVA.forEach(function (x) { if (!k && x[1].test(t)) k = x[0]; });
+      if (k && SAN.t[k]) return k;
+      if (cobro && /\bservicios?\b|auditavision|ustedes|sus talleres/.test(t) && SAN.t.sv_cobro) return 'sv_cobro';
+      return null;
+    }
     /* El mapa del dinero y la revisión de un proveedor (02-11-2026): van antes que
        las columnas, porque «no cuadra» o «contratar» también salen en las notas. */
     function mapaResp(t) {
@@ -1299,6 +1310,10 @@
       }
       if (SAN.t.serv_sosten && /\bcomo (se )?(sostiene|financia|mantiene|gana dinero|ganan dinero)\b|\bde que vive|\bquien (los|la|le) (paga|financia|sostiene)|\bmodelo de negocio de auditavision/.test(t)) return sanTema('serv_sosten');
       if (SAN.t.serv_diligencia && /debida diligencia|antes de contratar|\b(como|quiero|puedo) (reviso|revisar|checo|checar|investigo|investigar|verifico|verificar) (a )?(un|una|mi|mis) (proveedor|proveedores|empresa)\b/.test(t)) return sanTema('serv_diligencia');
+      /* Cada servicio, por su nombre o como lo pide la gente (19-11-2026, asistente_servicios.py): qué es, qué recibes,
+         cómo se cobra (nunca un monto) y su botón para cotizar. «¿Qué servicios ofrecen…?» sigue llevando al catálogo. */
+      var sv = svTema(t);
+      if (sv) return sanTema(sv);
       return null;
     }
     function sanResp(t) {

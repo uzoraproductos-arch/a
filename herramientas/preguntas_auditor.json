@@ -2314,6 +2314,76 @@
   {
    "q": "¿de qué vive auditavision?",
    "ir": "servicios-por-que.html#sostenemos"
+  },
+  {
+   "q": "¿Cómo cotizo una radiografía para mi municipio?",
+   "ir": "servicios-catalogo.html#sv-radiografia",
+   "dice": [
+    "Precio fijo y público",
+    "Cotiza este servicio"
+   ]
+  },
+  {
+   "q": "¿Qué me entregan si contrato el expediente de investigación?",
+   "ir": "servicios-catalogo.html#sv-expediente",
+   "dice": [
+    "Cronología"
+   ]
+  },
+  {
+   "q": "¿Cuánto cuesta el Vigía de proveedores?",
+   "ir": "servicios-catalogo.html#sv-seguimiento",
+   "dice": [
+    "Suscripción mensual",
+    "No damos un monto"
+   ]
+  },
+  {
+   "q": "Quiero el kit de entrega-recepción para mi cabildo",
+   "ir": "servicios-catalogo.html#sv-entrega"
+  },
+  {
+   "q": "¿Cuánto cobran por revisar mis facturas por lote?",
+   "ir": "servicios-catalogo.html#sv-facturas",
+   "dice": [
+    "Precio por lote"
+   ]
+  },
+  {
+   "q": "¿Cuánto cuestan sus servicios?",
+   "ir": "servicios-como-se-cobra.html",
+   "dice": [
+    "No damos montos todavía"
+   ]
+  },
+  {
+   "q": "Necesito un servicio contra el lavado de dinero para conocer a mi cliente",
+   "ir": "servicios-catalogo.html#sv-diligencia",
+   "dice": [
+    "No decimos que evitamos el fraude"
+   ]
+  },
+  {
+   "q": "¿En qué consiste la licencia de temporada para redacciones?",
+   "ir": "servicios-catalogo.html#sv-temporada"
+  },
+  {
+   "q": "Quiero contratar un taller de capacitación para mi despacho",
+   "ir": "servicios-catalogo.html#sv-capacitacion",
+   "dice": [
+    "Precio por taller"
+   ]
+  },
+  {
+   "q": "¿Cuánto cuesta la licencia de las herramientas?",
+   "ir": "servicios-catalogo.html#sv-licencia",
+   "dice": [
+    "Convenio anual"
+   ]
+  },
+  {
+   "q": "¿Cómo cotizo una revisión documental puntual?",
+   "ir": "servicios-catalogo.html#sv-revision"
   }
  ]
 }
