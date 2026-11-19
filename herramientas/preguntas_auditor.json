@@ -2914,6 +2914,14 @@
   {
    "q": "¿Cuánto ISR pago si vendo mi casa?",
    "ir": "herramienta-calculadora-inmueble.html"
+  },
+  {
+   "q": "¿Cuánto ISR pago si vendo acciones en la bolsa?",
+   "ir": "herramienta-calculadora-bolsa.html"
+  },
+  {
+   "q": "¿Cuánto me retienen de ISR por mis dividendos?",
+   "ir": "herramienta-calculadora-bolsa.html"
   }
  ]
 }

@@ -611,6 +611,7 @@ ALIAS_APPS = {
     'cccompara': ['tu contra ellos', 'yo contra ellos'],
     'ccreloj': ['reloj de la deuda'],
     'ccinmueble': ['vendo mi casa', 'vender mi casa', 'venta de mi casa', 'vendo un terreno', 'vender un terreno', 'venta de un inmueble', 'vender un inmueble', 'isr por la venta', 'isr de la venta', 'enajenacion de inmuebles', 'simulador de venta'],
+    'ccbolsa': ['vendo acciones', 'vender acciones', 'venta de acciones', 'vendi acciones', 'acciones en bolsa', 'ganancia en bolsa', 'ganancias en bolsa', 'isr de mis acciones', 'isr por acciones', 'isr de dividendos', 'isr por dividendos', 'retencion de dividendos', 'mis dividendos', 'invierto en la bolsa', 'inversion en bolsa'],
     'simulador-presupuesto.html': ['reparte el presupuesto', 'simulador del presupuesto'],
     'radar-estado-de-cuenta.html': ['estado de cuenta administrativo'],
 }

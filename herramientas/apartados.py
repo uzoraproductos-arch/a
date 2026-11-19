@@ -846,6 +846,10 @@ HERRAMIENTAS = [
          # de vender un inmueble, con la ley a la vista (cc_inmueble.py).
          ('ccinmueble', '🏠', 'Vendes una casa o un terreno', 'El ISR de la venta',
           'Cuánto ISR causa vender tu casa o un terreno: el pago provisional que calcula el notario, lo que le toca a tu estado y si tu casa habitación queda exenta, paso por paso y con su artículo.'),
+         # Septima desde el mismo dia (los pendientes de esa entrega): el ISR
+         # de vender acciones en bolsa y de cobrar dividendos (cc_bolsa.py).
+         ('ccbolsa', '📈', 'Inviertes en la bolsa', 'El ISR de tus acciones y dividendos',
+          'Cuánto ISR pagas por vender acciones en bolsa y cuánto te retienen de tus dividendos: el 10 % de cada uno, tus pérdidas de otros años y lo que llevas a tu declaración anual, paso por paso y con su artículo.'),
          ('simulador-presupuesto.html', '🧮', 'Reparte el presupuesto', 'Desde cero',
           'Empieza en $0: agrega lo que entra, reparte a dónde va, carga el ejemplo oficial de 2026 o 2027, compara dos escenarios y descarga la cuenta. Tiene su propia página.'),
          # Quinta aplicacion desde el 22-10-2026 (pedido del autor): venia de
@@ -977,7 +981,7 @@ INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspentes': 'insp_entes',
                 'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'insppadron': 'insp_padron', 'inspnepotismo': 'nepotismo', 'inspfactura': 'insp_factura', 'inspresultados': 'insp_resultados', 'inspmia': 'insp_mia',
                 # Calculadora Civica (pedido del autor, 12-10-2026): sus tres
                 # aplicaciones que abrian el motor en un marco.
-                'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj', 'ccinmueble': 'cc_inmueble',
+                'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj', 'ccinmueble': 'cc_inmueble', 'ccbolsa': 'cc_bolsa',
                 # Inversion y Megaobras (pedido del autor, 13-10-2026).
                 'pulso': 'mo_pulso', 'sector': 'mo_sector', 'sexenios': 'mo_sexenios', 'cero': 'mo_cero',
                 'tabla': 'mo_tabla', 'investiga': 'mo_investiga',

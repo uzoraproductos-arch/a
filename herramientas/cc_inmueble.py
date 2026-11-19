@@ -17,10 +17,12 @@ Diputados (huella SHA-256 abajo):
     hasta 20, con la tarifa del art. 96 por los meses transcurridos del año, y
     el resultado por los mismos años); art. 127 (5 % de la ganancia para la
     entidad, acreditable contra el art. 126).
-  - CFF (última reforma DOF 09-04-2026), art. 17-A: el factor es el INPC del
-    mes más reciente entre el del mes más antiguo; si el del mes anterior no se
-    ha publicado, se usa el último publicado; si sale menor que 1, es 1; los
-    factores se calculan hasta el diezmilésimo.
+  - CFF (última reforma DOF 09-04-2026), art. 17-A: el factor divide el INPC
+    «del mes anterior al más reciente del periodo» entre el «del mes anterior
+    al más antiguo»; si el del mes anterior no se ha publicado, se usa el
+    último publicado; si sale menor que 1, es 1. Usamos la lectura usual en
+    la práctica (INPC del mes anterior a la venta ÷ INPC del mes de compra) y
+    la página dice que, al pie de la letra, cada extremo correría un mes.
 
 Lo que la ley no fija y decidimos a la vista: los años transcurridos se
 cuentan completos (ni la LISR ni su Reglamento dicen cómo contar una fracción;
@@ -29,8 +31,8 @@ si no pasa un año, se divide entre 1).
 **La cuenta la hace el navegador con los datos de la base**: el INPC de la
 máquina del tiempo del peso (Banxico, serie SP1), la tarifa mensual del art. 96
 del Anexo 8 de la RMF 2026 (calculadora_civica.tarifa_mensual) y la UDI de
-Banxico (docs/sat/udi.json, anclar_udi.py). Por eso solo vale para ventas en
-2026: la tarifa de otro año no está en la base. Nada se guarda ni se envía.
+Banxico (docs/sat/udi.json, anclar_udi.py). Por eso solo vale para ventas del
+año de esa tarifa (lo lee de su renglón «RMF AAAA»). Nada se guarda ni se envía.
 
 No es la declaración ni sustituye al notario: es una cuenta aproximada
 (derivado). El impuesto del año se recalcula en la declaración anual (art. 120).
@@ -39,6 +41,7 @@ Lo llama apartados.insp_nativa() (INSP_NATIVAS['ccinmueble']).
 import html
 import json
 import os
+import re
 
 from presupuesto_modulos import chip
 
@@ -46,7 +49,6 @@ ESTILOS = ['cc-inmueble.css']
 SCRIPTS = ['cc-inmueble.js']
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UDI = os.path.join(RAIZ, 'docs', 'sat', 'udi.json')
-ANIO = 2026
 LISR = {'tx': 'Ley del Impuesto sobre la Renta, texto vigente (Cámara de Diputados, última reforma DOF 01-04-2024)',
         'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf',
         'sha256': '803c2875c09c751c1966b8eb4dca99f460b237da4ef67ee04b4fa325d8c2f786'}
@@ -70,8 +72,13 @@ def datos(base):
     u = json.load(open(UDI, encoding='utf-8'))
     inpc = {int(a): v for a, v in p['inpc']['mensual'].items()}
     ult = max(inpc)
+    # El año de la tarifa sale de su propio renglón («Anexo 8 de la RMF 2026»):
+    # cuando la base traiga la del año nuevo, el simulador cambia de año solo.
+    m = re.search(r'RMF (\d{4})', tm['ley'])
+    if not m:
+        raise SystemExit('cc_inmueble: la tarifa mensual no dice de qué RMF es: %r' % tm['ley'])
     return {
-        'anio': ANIO,
+        'anio': int(m.group(1)),
         'inpc': inpc, 'inpc_ult': [ult, len(inpc[ult])],
         'tarifa': tm['renglones'],
         'udi': {'v': u['valor'], 'f': u['fecha']}, 'exento_udis': EXENTO_UDIS,
@@ -86,7 +93,7 @@ def construir(base, ref):
     ult = '%s de %d' % (MES[D['inpc_ult'][1] - 1], D['inpc_ult'][0])
     lim = D['udi']['v'] * EXENTO_UDIS
     meses = ''.join('<option value="%d">%s</option>' % (i + 1, m) for i, m in enumerate(MES))
-    anios = ''.join('<option value="%d"%s>%d</option>' % (a, ' selected' if a == 2010 else '', a) for a in range(ANIO, min(D['inpc']) - 1, -1))
+    anios = ''.join('<option value="%d"%s>%d</option>' % (a, ' selected' if a == 2010 else '', a) for a in range(D['anio'], min(D['inpc']) - 1, -1))
     ley = lambda arts: '<a href="%s">%s</a>' % (esc(LISR['url']), esc(arts))
     return '''<div class="ci" id="ciRaiz">
   <section class="ci-arranque" aria-labelledby="ciTit">
@@ -149,7 +156,7 @@ def construir(base, ref):
     <h2 class="ci-tit" id="ciLeeTit"><span aria-hidden="true">📐</span> Cómo se calcula</h2>
     <ol class="ci-lista">
       <li><b>El costo de lo que compraste.</b> Se separa el terreno de la construcción; si no se puede, el terreno es el 20 % ({a124}). La construcción pierde 3 % por cada año que pasó, sin bajar de 20 % de lo que costó.</li>
-      <li><b>Se actualiza por inflación</b> con el INPC: el del mes anterior a la venta entre el del mes de la compra. El factor va a cuatro decimales y nunca es menor que 1; si el INPC del mes anterior aún no se publica, se usa el último ({a17a}). En la base, el último es el de {ult}.</li>
+      <li><b>Se actualiza por inflación</b> con el INPC: el del mes anterior a la venta entre el del mes de la compra. El factor va a cuatro decimales y nunca es menor que 1; si el INPC del mes anterior aún no se publica, se usa el último ({a17a}). Es la lectura usual; leído al pie de la letra, el art. 17-A tomaría en cada extremo el mes anterior. En la base, el último es el de {ult}.</li>
       <li><b>El costo actualizado vale al menos 10 % del precio de venta</b> ({a121}). Las mejoras se tratan igual que la construcción; los gastos de la compra se actualizan desde su mes.</li>
       <li><b>Ganancia</b> = precio de venta − todo lo que se deduce. Si es tu casa habitación y la vendes en hasta 700,000 UDIS, no pagas ISR; si la vendes en más, solo pagas por la parte que excede, con las deducciones en la misma proporción ({a93}). Con la UDI del {udi_f} ({udi_v} pesos), el tope es de {lim} {chip_d}.</li>
       <li><b>El pago provisional</b>: la ganancia se divide entre los años completos que pasaron (al menos 1 y hasta 20), a ese resultado se le aplica la tarifa mensual del ISR multiplicada por el número de mes de la venta, y el impuesto se multiplica por los mismos años ({a126}).</li>
@@ -161,7 +168,7 @@ def construir(base, ref):
   </aside>
   <script type="application/json" id="ciDatos">{datos}</script>
 </div>'''.format(
-        anio=ANIO, meses=meses, anios=anios, ult=ult, udi_f=esc(D['udi']['f']), udi_v=format(D['udi']['v'], '.6f'),
+        anio=D['anio'], meses=meses, anios=anios, ult=ult, udi_f=esc(D['udi']['f']), udi_v=format(D['udi']['v'], '.6f'),
         lim='$' + format(round(lim, 2), ',.2f'), chip_d=chip('derivado'), chip_o=chip('oficial'),
         a93=ley('LISR, art. 93, fr. XIX, a'), a121=ley('LISR, art. 121'), a124=ley('LISR, art. 124'), a126=ley('LISR, art. 126'),
         a127=ley('LISR, art. 127'), a17a='<a href="%s">CFF, art. 17-A</a>' % esc(CFF['url']),
