@@ -562,7 +562,15 @@ def _charla(d):
             # La memoria de promesas (01-11-2026): promesa → Presupuesto → Cuenta Pública → ASF.
             'prom': __import__('promesas').datos(),
             # Agenda del erario de Noticias (28-10-2026): las fechas que fija la ley.
-            'agenda': __import__('noticias').AGENDA}
+            'agenda': __import__('noticias').AGENDA,
+            # Las aplicaciones del chat son servicios (19-11-2026): qué servicio aprovecha cada página.
+            'srv': _servicios_chat()}
+
+
+def _servicios_chat():
+    import apartados
+    import servicios_fichas
+    return servicios_fichas.mapa_chat(apartados.SERVICIOS, apartados.COBRO)
 
 
 def _inspector():

@@ -311,6 +311,35 @@ Donde §0 y §5 bis dicen «pestaña Enciclopedia» o «Noticias», léase así.
   `asistente.js`). Una dimensión nueva que se pinte necesita su pregunta en
   `preguntas_auditor.json`.
 
+### 0 quinquies. Todo pasa por el Auditor
+
+**Decisión del autor, 19-11-2026, y es el pilar de la plataforma:** «el chat se alimenta y
+vincula de todas las pestañas y tarjetas y subtarjetas dentro de ellas, pero entre pestañas no se
+vinculan: todo es a través del Auditor», y «las aplicaciones del chat se convierten en servicios».
+La Enciclopedia es el respaldo de la base de datos, ordenada en tarjetas; **la puerta es el chat**:
+respuesta rápida, «Generar dictamen», «Saber más» (la página a fondo) y el servicio que toca.
+
+- **La plataforma es una estrella.** El Auditor (`herramienta-inspector-pregunta.html` y el
+  dictamen) es el centro; Planisferio, Comunidad (con la Enciclopedia), Noticiero y Servicios son
+  puntas. Dentro de una pestaña las páginas se ligan entre sí; **una liga a otra pestaña pasa por el
+  chat**: `herramienta-inspector-pregunta.html?q=<pregunta>&modo=<modo>&abre=<página>`
+  (`servicios_fichas.por_auditor()`). El chat contesta con esa página o abre la aplicación en su
+  marco (`abre()` de `asistente.js`), y el dictamen lleva el mismo `&abre=`.
+- **Las aplicaciones del chat son servicios.** Si una respuesta lleva a una página que un servicio
+  aprovecha (su `hace` en `FICHAS` de `servicios_fichas.py`), abajo sale «Esto también lo hacemos
+  como servicio», con su página y su cotización (`servicioHtml()` de `asistente.js`, que lee `srv`
+  de la base: `mapa_chat()`). **Nunca un monto.**
+- **Se muda por entregas, con trinquete.** `herramientas/vinculos_auditor.py` (corre en
+  `revision.py`) cuenta las ligas directas entre pestañas, sin la cabecera, el menú, las migas, el
+  cajón «Cuéntanos lo que viste» ni el pie, contra `docs/vinculos-auditor.json`: **si un par sube,
+  la revisión se detiene**; cuando baja, `--fijar`. **Servicios ya está mudado** (19-11-2026):
+  `pagina()` de `apartados.py` pasa cada página de Servicios por `por_auditor_html()`, así que una liga
+  nueva suya a otra pestaña se muda sola. La pestaña de cada página sale de su nombre
+  (`pestana_de()`); si una página marca otra, va en `EXCEPCIONES` o la revisión se detiene.
+- **Cada liga `abre=` del sitio se prueba** en `prueba_auditor.py`: si el chat no la abre, falla.
+- Lo que sigue (del autor): la página automatizada de las respuestas a lo que pidió cada usuario,
+  y mudar las otras pestañas (Planisferio → Comunidad es la mayor parte).
+
 ### 0 bis. Una sola plataforma: la Enciclopedia antigua se retiró
 
 **Decisión del autor, 24-10-2026.** Antes había dos «Enciclopedias». La

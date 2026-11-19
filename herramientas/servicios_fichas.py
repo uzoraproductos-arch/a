@@ -301,6 +301,87 @@ def chat_liga(q, modo):
     return '%s?q=%s&amp;modo=%s' % (CHAT, quote(q), modo)
 
 
+# Todo pasa por el Auditor (decisión del autor, 19-11-2026: «entre pestañas no se
+# vinculan: todo es a través del Auditor»). Una liga de Servicios a otra pestaña
+# abre el chat con la pregunta y `abre=`: el chat contesta en corto con esa página
+# (o abre la aplicación en su marco), ofrece el dictamen, «Saber más» y el servicio
+# que toca (`abre()` y `servicioHtml()` de asistente.js). herramientas/vinculos_auditor.py
+# revisa que la regla de `pestana_de()` coincida con la pestaña que marca cada página.
+EXCEPCIONES = {'periodismo-en-riesgo.html': 'Noticiero'}
+_GENERICO = re.compile(r'^(ábrelo|abrir|abre|ver|ver más|ver la página|ver la ficha|aquí|esta página|la página|➔|saber más)\W*$', re.I)
+_A = re.compile(r'<a\b([^>]*?)\bhref="([^"]+)"([^>]*)>(.*?)</a>', re.S)
+
+
+def pestana_de(archivo):
+    """La pestaña de una página por su nombre (la misma regla que comprueba vinculos_auditor.py)."""
+    a = archivo.split('#')[0].split('?')[0]
+    if a in EXCEPCIONES:
+        return EXCEPCIONES[a]
+    if a in (CHAT, 'herramienta-inspector-dictamen.html'):
+        return 'Auditor'
+    if a == 'index.html':
+        return None
+    if re.match(r'servicios?(-|\.html)', a):
+        return 'Servicios'
+    if a.startswith('planisferio'):
+        return 'Planisferio'
+    if a.startswith('noticias'):
+        return 'Noticiero'
+    return 'Comunidad'
+
+
+def por_auditor(liga, q, modo=None):
+    """La liga que pasa por el chat: la pregunta, el modo y la página que debe abrir."""
+    from urllib.parse import quote
+    return '%s?q=%s%s&amp;abre=%s' % (CHAT, quote(q), '&amp;modo=%s' % modo if modo else '', quote(html.unescape(liga), safe='/-_.'))
+
+
+def _titulo(archivo):
+    ruta = os.path.join(RAIZ, archivo.split('#')[0].split('?')[0])
+    if not os.path.exists(ruta):
+        return ''
+    m = re.search(r'<title>(.*?)</title>', open(ruta, encoding='utf-8').read(), re.S)
+    return html.unescape(re.split(r' [·|—-] ', m.group(1))[0]).strip() if m else ''
+
+
+def por_auditor_html(texto, origen='Servicios', modo=None):
+    """Cambia, dentro de <main>, cada liga directa a otra pestaña por su liga al chat."""
+    i, j = texto.find('<main'), texto.rfind('</main>')
+    if i < 0 or j < 0:
+        return texto
+
+    def cambia(m):
+        antes, liga, despues, dentro = m.groups()
+        if re.match(r'[a-z]+:|#|//', liga) or not liga.split('#')[0].split('?')[0].endswith('.html'):
+            return m.group(0)
+        t = pestana_de(liga)
+        if t in (None, origen, 'Auditor'):
+            return m.group(0)
+        b = re.search(r'<b>(.*?)</b>', dentro, re.S)
+        q = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', b.group(1) if b else dentro))).strip(' ➔→›»')
+        if len(q) < 4 or _GENERICO.match(q) or len(q) > 140:
+            q = _titulo(liga) or q[:140]
+        return '<a%shref="%s"%s>%s</a>' % (antes, por_auditor(liga, q, modo), despues, dentro)
+    return texto[:i] + _A.sub(cambia, texto[i:j]) + texto[j:]
+
+
+def mapa_chat(servicios, cobro):
+    """{página: [[id, ícono, nombre, cobro, página del servicio]]}: los servicios que
+    aprovechan cada página (su `hace`). Lo lee servicioHtml() de asistente.js para
+    ofrecer el servicio cuando una respuesta lleva a esa página. Nunca un monto."""
+    nom = {x[0]: x for x in servicios}
+    out = {}
+    for sid, f in FICHAS.items():
+        for _i, _t, _tx, liga, _et in f['hace']:
+            b = liga.split('#')[0].split('?')[0]
+            if pestana_de(b) in ('Servicios', 'Auditor'):
+                continue
+            l = out.setdefault(b, [])
+            if len(l) < 3 and sid not in [x[0] for x in l]:
+                l.append([sid, nom[sid][1], nom[sid][2], cobro[sid], PAGINA % sid])
+    return dict(sorted(out.items()))
+
+
 def nuevos(sid=None):
     """Lo nuevo de la plataforma, sin repetir: (ícono, título, texto, liga, servicios)."""
     vistos = {}

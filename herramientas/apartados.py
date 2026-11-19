@@ -3068,8 +3068,10 @@ def servicio_paginas(comun):
             '          <p class="sv-fx-que">%s</p>' % que,
             '          <dl class="sv-dl sv-fx-dl"><dt>Recibes</dt><dd>%s</dd><dt>Para quién</dt><dd>%s</dd>'
             '<dt>Cómo se cobra</dt><dd>%s. El costo y el plazo te llegan por escrito antes de empezar; si no te conviene, ahí termina.</dd></dl>' % (recibe, quien, COBRO[sid]),
-            '          <div class="sv-fx-acc"><a class="sz-btn sz-btn-of" href="%s">Pide una cotización</a>'
-            '<a class="sz-btn" href="%s">Pregúntale al Auditor</a></div>' % (cotiza, sf.chat_liga(*f['auditor'][0])),
+            '          <div class="sv-fx-acc"><a class="sz-btn" href="%s">Plantéale tu caso al Auditor</a>'
+            '<a class="sz-btn sz-btn-of" href="%s">Pide una cotización</a></div>' % (sf.chat_liga(*f['auditor'][0]), cotiza),
+            '          <p class="sv-nota">Todo empieza en el chat: te contesta en corto, te da el dictamen y te lleva a fondo. '
+            'Lo que la plataforma tiene en otras pestañas se abre desde ahí.</p>',
             '          <p class="sv-limite"><span aria-hidden="true">⚖️</span> %s</p>' % f['no'],
             '        </div>'])
         hace = '<div class="sv-modulos">\n%s\n        </div>' % '\n'.join(
@@ -6418,6 +6420,17 @@ def numeros_preparar():
 
 
 def pagina(a, sello):
+    """La página, y si es de Servicios, con sus ligas a otras pestañas pasando por el
+    Auditor (decisión del autor, 19-11-2026; servicios_fichas.por_auditor_html)."""
+    texto = _pagina(a, sello)
+    import servicios_fichas as sf
+    if sf.pestana_de(a['archivo']) == 'Servicios':
+        sid = a['archivo'][len('servicio-'):-len('.html')] if a['archivo'].startswith('servicio-') else None
+        texto = sf.por_auditor_html(texto, 'Servicios', sf.FICHAS[sid]['auditor'][0][1] if sid in sf.FICHAS else None)
+    return texto
+
+
+def _pagina(a, sello):
     nav = nav_de_pagina(a['archivo'], a.get('padre3'), a.get('cap_nav'))
     if nav:
         a = dict(a, pie_extra=nav, pie_corto=True)

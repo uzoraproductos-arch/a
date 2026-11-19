@@ -547,6 +547,16 @@ section[id^="leg-"] { scroll-margin-top: 96px; }
 .pa-exp-tx small { font-size: 13px; line-height: 1.35; color: #dbe6fa; }
 .pa-exp-ir { margin-left: auto; flex: none; font-weight: 800; font-size: 14px; white-space: nowrap; }
 .pa-exp-pide { margin-top: 10px; }
+/* Las aplicaciones del chat son servicios (19-11-2026): servicioHtml() de asistente.js. */
+.pa-srv { margin: 14px 0 0; padding: 12px 14px; border: 1px solid #8fcaa6; border-radius: 14px; background: #eef8f2; }
+.pa-srv-t { margin: 0 0 6px; font-weight: 800; color: #11552f; }
+.pa-srv ul { margin: 0; padding: 0; list-style: none; display: grid; }
+.pa-srv li { display: grid; justify-items: start; gap: 0; padding: 4px 0 6px; border-top: 1px solid #cfe7d8; line-height: 1.4; }
+.pa-srv li:first-child { border-top: 0; }
+.pa-srv li small { color: #44526b; }
+.pa-srv a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+.pa-srv a.pa-srv-pide { font-weight: 700; }
+.pa-srv .pa-chico { margin: 6px 0 0; }
 .pa-cinco { display: grid; gap: 8px; margin: 0 0 12px; }
 .pa-cinco-f { padding: 10px 12px; border-left: 3px solid #c9d2e3; border-radius: 0 10px 10px 0; background: var(--pa-claro); }
 .pa-cinco dt { margin: 0 0 4px; font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #44526b; }
