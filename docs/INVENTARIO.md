@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 820 |
+| Páginas revisadas | 821 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -217,7 +217,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-nota-veredicto.html` | Contrasta una nota · el veredicto · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-nota.html` | Contrasta una nota · Auditavisión | apartados.py | 53 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-padron.html` | Revisa a tu contraparte · Auditavisión | apartados.py | 47 | 0 | 12 | 0 | 0 |
-| `herramienta-inspector-pregunta.html` | Auditor Virtual · Auditavisión | apartados.py | 40 | 0 | 1 | 1 | 1 |
+| `herramienta-inspector-pregunta.html` | Auditor Virtual · Auditavisión | apartados.py | 41 | 0 | 1 | 1 | 1 |
 | `herramienta-inspector-radar.html` | Radar por entidad · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-resultados.html` | Revisa tu estado de resultados · Auditavisión | apartados.py | 46 | 0 | 0 | 2 | 0 |
 | `herramienta-inspector-verifica.html` | Verifica un estado de cuenta · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
@@ -236,7 +236,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-megaobras.html` | Inversión y Megaobras · Auditavisión | apartados.py | 54 | 0 | 0 | 2 | 1 |
 | `herramientas.html` | Herramientas · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `index.html` | Auditavisión — Sistema Cívico de Fiscalización y Geopolítica del Gasto Público en México | a mano | 67 | 0 | 3 | 6 | 1 |
-| `indice.html` | Índice general · Auditavisión | apartados.py | 384 | 0 | 1 | 1 | 1 |
+| `indice.html` | Índice general · Auditavisión | apartados.py | 385 | 0 | 1 | 1 | 1 |
 | `informes-cuenta-publica.html` | Informes de la Cuenta Pública (ASF) · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `informes-diccionario.html` | Diccionario de Datos · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `informes-documentar-para-sancionar.html` | Informe especial: Documentar para sancionar · Auditavisión | apartados.py | 54 | 0 | 40 | 8 | 2 |
@@ -244,6 +244,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `informes-semestral-asf.html` | Informe semestral de la ASF · Auditavisión | apartados.py | 53 | 0 | 32 | 6 | 4 |
 | `marco-legal-tres-niveles.html` | Las leyes del dinero en los tres niveles · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 2 |
 | `marco-legal.html` | Marco Legal Hacendario · Auditavisión | apartados.py | 48 | 0 | 0 | 0 | 0 |
+| `mis-respuestas.html` | Tus respuestas · Auditavisión | apartados.py | 38 | 0 | 0 | 0 | 0 |
 | `nepotismo-y-cargos-publicos.html` | Nepotismo y cargos públicos · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `noticias-al-momento-agua-guadalajara-14500-federal.html` | El agua de Guadalajara: la Federación anuncia 14,500 millones «sin deuda», pero el dinero todavía no aparece en el Presupuesto 2027 · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-asf-nuevo-leon-triangulacion-cp2025.html` | La ASF denuncia una presunta triangulación de 7 mil 200 millones en Nuevo León: lo que dice la Matriz oficial, lo que falta y por qué «desvió» todavía no es un hecho · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 3 |

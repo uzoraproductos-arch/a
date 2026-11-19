@@ -2785,8 +2785,19 @@
   /* El índice general cuelga del Auditor (decisión del autor, 19-11-2026): «el índice»,
      «¿qué tiene la plataforma?» o «mapa del sitio» lo abren; «índice de…» sigue siendo un tema. */
   var INDICE_RE = /^(?:(?:el|tu|su|ver|abre|abrir|dame|mu[eé]strame)\s+)*(?:[ií]ndice(?:\s+general)?|mapa del sitio)(?:\s+de\s+(?:la plataforma|auditavisi[oó]n|todo))?\s*\??$|^(?:qu[eé]|todo lo que)\s+(?:tiene|tienen|hay en|ofrece|ofrecen|contiene|sabe)(?:\s+(?:la plataforma|auditavisi[oó]n|el auditor))?\s*\??$/i;
+  var MIS_RE = /^(?:(?:ver|abre|abrir|dame|mu[eé]strame)\s+)*(?:mis|tus)\s+(?:respuestas|preguntas|solicitudes|consultas)(?:\s+(?:anteriores|guardadas))?$|^mi\s+(?:caso|historial)$|^(?:qu[eé]\s+)?(?:te\s+)?(?:he\s+)?pregunt[eé](?:\s+antes)?$/i;
   function respuesta(q, previas) {
     var t = String(q || '').trim().replace(/^[¿¡\s]+/, '').replace(/[?!.\s]+$/, '');
+    if (MIS_RE.test(t)) {
+      var rm = abre(q, 'mis-respuestas.html');
+      if (rm) {
+        rm.html = '<p><span aria-hidden="true">📋</span> Todo lo que me preguntas queda en <a href="mis-respuestas.html"><b>Tus respuestas</b></a>: cada respuesta en corto, ' +
+          'su «Saber más», su dictamen, lo que no supe contestarte y los servicios que vienen a tu caso, ya listos para pedirlos.</p>' +
+          '<p>Se arma solo en tu navegador: nada se manda a ningún servidor.</p>';
+        rm.ir = ['mis-respuestas.html', 'Tus respuestas'];
+        return rm;
+      }
+    }
     if (INDICE_RE.test(t)) {
       var ri = abre(q, 'indice.html');
       if (ri) {
@@ -3044,6 +3055,26 @@
         '<p>Dime «expediente del Tren Maya» y te abro el suyo. Si tu caso no está, <a href="servicios-cotiza.html?servicio=expediente">puedes pedirlo</a>.</p>',
       sug: INV.filter(function (x) { return x.ex; }).slice(0, 3).map(function (x) { return 'Expediente de ' + x.tit; }) };
   }
+  /* «Tus respuestas» (pedido del autor, 19-11-2026: «la página automatizada de las respuestas
+     o de los servicios a… lo que hayan hecho los usuarios»). Cada pregunta contestada se anota
+     solo en este navegador (av-caso, hasta 60) con su respuesta en corto, su página, su dictamen
+     y los servicios que aprovechan esa página (SRV); mis-respuestas.html la arma. Lo que no supo
+     contestar queda como solicitud. Nada sale de aquí. */
+  function caso(q, r, previas, sin) {
+    try {
+      var ir = sin ? null : (r.ir || (r.ficha && r.ficha.ir) || null), u = sin ? '' : ((r.app && r.app.url) || (ir && ir[0]) || '');
+      var b = sinParam(u), l = (!b || /^servicios?(-|\.html)/.test(b)) ? [] : (SRV[b] || []);
+      var d = document.createElement('div'); d.innerHTML = sin ? '' : (r.html || '');
+      var t = (d.textContent || '').replace(/\s+/g, ' ').trim();
+      if (t.length > 320) t = t.slice(0, 317) + '…';
+      var c = JSON.parse(localStorage.getItem('av-caso') || '[]');
+      if (!Array.isArray(c)) c = [];
+      c = c.filter(function (x) { return x && x.q !== q; });
+      c.unshift({ q: q, f: hoy(), m: modoActual(), t: t, ir: ir ? [ir[0], ir[1] || ''] : null, s: l.map(function (x) { return x[0]; }),
+        d: !sin && r.ficha ? enlaceDictamen(q, previas || []) + (r.abre ? '&abre=' + encodeURIComponent(r.abre) : '') : '', sin: !!sin });
+      localStorage.setItem('av-caso', JSON.stringify(c.slice(0, 60)));
+    } catch (e) { /* sin almacenamiento, el chat sirve igual */ }
+  }
   function responde(q, quieto, ya) {
     q = String(q || '').trim().slice(0, 600);
     if (!q) return;
@@ -3063,7 +3094,7 @@
       if (!ya && window.AvUso) window.AvUso.marca('pregunta', { modo: modoActual(), destino: r.sin ? 'sin respuesta' : String((r.ir && r.ir[0]) || (r.ficha && r.ficha.ir && r.ficha.ir[0]) || '').split(/[?#]/)[0].slice(0, 160) });
       if (r.sin) {
         li.querySelector('.pa-burbuja').innerHTML = sinRespuesta(q, r.sin) + pideExpHtml() + iaHtml(q) + (r.web ? webHtml(r.web) : fueraHtml(q));
-        if (!ya) anota(q, 'sin');
+        if (!ya) { anota(q, 'sin'); caso(q, r, previas, true); }
         return;
       }
       if (r.anota && !ya) anota(q, 'sin');
@@ -3078,6 +3109,7 @@
         (r.sug && r.sug.length ? '<p class="pa-mas-t">' + (r.tambien ? 'También te puede servir' : 'Sigue preguntando') + '</p>' + chips(r.sug) : '');
       var caja = li.querySelector('.pa-app[data-pa-abre]');
       if (caja) montaApp(caja);
+      if (!ya) caso(q, r, previas);
       guarda();
     };
     if (quieto || QUIETO) {

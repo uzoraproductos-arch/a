@@ -1024,6 +1024,7 @@ def pagina(cuenta, canal='', herramientas=()):
             <div class="pa-control" role="group" aria-label="Controles de la plática">
               <button type="button" class="pa-ctl" id="paRegresa" disabled><span aria-hidden="true">↩️</span> Regresar</button>
               <button type="button" class="pa-ctl" id="paLimpia" disabled><span aria-hidden="true">🗑️</span> Limpiar</button>
+              <a class="pa-ctl" href="mis-respuestas.html" title="Lo que le preguntaste y los servicios que vienen a tu caso"><span aria-hidden="true">📋</span> Tus respuestas</a>
               <a class="pa-ctl" href="indice.html" title="Todo lo que sabe el Auditor, en una página"><span aria-hidden="true">🗂️</span> Índice general</a>
               <span class="pa-control-nota">Tu plática se guarda mientras navegas por la plataforma.</span>
             </div>
