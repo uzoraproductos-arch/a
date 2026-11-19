@@ -326,7 +326,8 @@ ENCICLO_MARCAN = (ENCICLOPEDIA, 'sigue-el-dinero.html', 'descarga-los-datos.html
 PLANISFERIO = 'planisferio.html'
 MENU = [
     # El índice general cuelga del Auditor (decisión del autor, 19-11-2026).
-    (AUDITOR_VIRTUAL, 'Auditor', ('herramientas.html', 'indice.html')),
+    # Con él, la página automatizada de tus respuestas (mis_respuestas.py, 19-11-2026).
+    (AUDITOR_VIRTUAL, 'Auditor', ('herramientas.html', 'indice.html', 'mis-respuestas.html')),
     (PLANISFERIO, 'Planisferio', (PLANISFERIO,)),
     ('participa.html', 'Comunidad', ('participa.html',) + ENCICLO_MARCAN),
     # Pedido del autor, 28-10-2026: «darle más protagonismo a las noticias
@@ -1614,6 +1615,7 @@ _AV_NAVEGADOR = [
     ('Tu código de acceso', 'av-pase', 'Solo si canjeas un código de la versión de prueba: un número al azar que identifica a este navegador y hasta cuándo abre. En la base queda que ese número canjeó un código, cuándo, los días en que abrió la plataforma y lo que mide «Cómo medimos el uso» (abajo); nada que diga quién eres.'),
     ('Tu visita', 'av-sesion', 'Un número al azar que dura lo que la pestaña abierta, para contar visitas sin saber de quién son. Se borra al cerrarla.'),
     ('No medir este navegador', 'av-sin-medir', 'Solo si apagas la medición de uso (abajo): recuerda que no quieres que se mida.'),
+    ('Tus respuestas', 'av-caso', 'Lo que le preguntaste al Auditor, hasta 60: la pregunta, la fecha, el modo, la respuesta en corto, su página y los servicios que vienen al caso, para armar «Tus respuestas» (mis-respuestas.html). Nunca sale del navegador; la borras ahí mismo, o una por una.'),
     ('Tus dictámenes de cada expediente', 'av-dics', 'La pregunta, el folio y el enlace de los dictámenes que generas y tocan una investigación, hasta 60, para listarlos en su expediente. Los borras ahí mismo.'),
     ('Las columnas que sigues', 'av-sigo', 'Cuáles casos de Verificamos sigues y qué versión viste, para avisarte cuando cambian.'),
     ('Ágora cívica', 'auditavision_foro_debates y otras', 'Tus hilos, tus apoyos y el seudónimo que elijas. No se publican: viven solo en tu navegador.'),
@@ -6875,7 +6877,8 @@ def indice(base, ref):
     # Aprende), Comunidad y Noticias; luego las investigaciones y el método.
     import asistente, noticias
     auditor = _rejilla([
-        grupo('💬', ASISTENTE[1], [(ASISTENTE[0], ASISTENTE[1], ASISTENTE[2])], ASISTENTE[0]),
+        grupo('💬', ASISTENTE[1], [(ASISTENTE[0], ASISTENTE[1], ASISTENTE[2]),
+                                  ('mis-respuestas.html', 'Tus respuestas', 'Lo que le pediste al Auditor y los servicios que vienen a tu caso')], ASISTENTE[0]),
         _grupo('🎛️', 'Los cuatro modos', [('%s?modo=%s' % (ASISTENTE[0], m[0]), '%s Modo %s' % (m[1], m[2]), m[3])
                                           for m in asistente.MODOS])])
     enciclopedia = _rejilla([_grupo('📚', 'Enciclopedia', [
@@ -7143,7 +7146,8 @@ def generar(sello=None):
     import planisferio
     import leyes_niveles
     import presupuesto_modulos
-    for extra in planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), fraude.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), *servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA + [dict(x, pie_extra=bib_nav(expedientes_inv.INDICE)) for x in expedientes_inv.paginas()]:
+    import mis_respuestas
+    for extra in [mis_respuestas.pagina(SERVICIOS, COBRO, __import__('asistente').MODOS, AUDITOR_VIRTUAL)] + planisferio.paginas(base, ref, numeros_datos(base), numeros_tres(numeros_datos(base)), presupuesto_modulos.cuanto(base, ref, '', ('', [], '')), numeros_renglones(base, numeros_datos(base), lleno=True)) + [leyes_niveles.pagina(base, planisferio._padron()), DICCIONARIO, metodologia_auditoria.pagina(), fraude.pagina(), recursos_naturales.pagina(), *noticias(base, ref), PILARES, AVISO, REPLICA, periodistas.pagina(), *acceso.paginas(), contratos_publicos(), GLOSARIO, indice(base, ref), simulador(), *servicios(), agora(), donaciones()] + datos_paginas() + poderes_paginas(base) + garantias() + comunidad() + radar() + datos_ambiente.paginas(base, ref) + NUMEROS_PAGINAS + PAGINAS_BIBLIOTECA + [dict(x, pie_extra=bib_nav(expedientes_inv.INDICE)) for x in expedientes_inv.paginas()]:
         texto = pagina(extra, sello).replace('\r\n', '\n').replace('\n', '\r\n')
         open(os.path.join(RAIZ, extra['archivo']), 'wb').write(texto.encode('utf-8'))
     for archivo, datos in REDIRECCIONES.items():

@@ -2660,6 +2660,14 @@
   {
    "q": "Mapa del sitio",
    "ir": "indice.html"
+  },
+  {
+   "q": "Mis respuestas",
+   "ir": "mis-respuestas.html"
+  },
+  {
+   "q": "Mi caso",
+   "ir": "mis-respuestas.html"
   }
  ]
 }

@@ -361,7 +361,15 @@ respuesta rápida, «Generar dictamen», «Saber más» (la página a fondo) y e
   (con el Registro de pendientes y la base al día, que cuelgan de él: `EXCEPCIONES`), lleva a todas
   las pestañas, Planisferio y Servicios incluidos, y el chat lo abre con «el índice», «¿qué tiene la
   plataforma?» o «mapa del sitio» (`INDICE_RE` de `asistente.js`) y con su botón «🗂️ Índice general».
-- Lo que sigue (del autor): la página automatizada de las respuestas a lo que pidió cada usuario.
+- **La página automatizada de tus respuestas** (el autor, 19-11-2026: «la página… automatizada de las respuestas o de los servicios a los
+  problemas, peticiones, solicitudes de lo que hayan hecho los usuarios»). `mis-respuestas.html` (pestaña Auditor; `herramientas/mis_respuestas.py`
+  y `mis-respuestas.js`). El chat anota cada pregunta que contesta **solo en el navegador** (`av-caso`, hasta 60; `caso()` de `asistente.js`):
+  la pregunta, la fecha, el modo, la respuesta en corto (el texto que ya dio), «Saber más», el enlace de su dictamen y los servicios de `srv`
+  para su página; lo que no supo contestar queda como solicitud y se pide como investigación (servicio `expediente`). La página lo junta con
+  los dictámenes (`av-dics`) y Mi Auditavisión (`av-mia`), ordena los servicios de más a menos preguntas que los piden y llena la cotización
+  con esas preguntas (`?servicio=&tema=&pregunta=`). **Nada sale del navegador, nunca un monto, no es un documento oficial**; se imprime, se
+  descarga en texto y se borra ahí. El chat la abre con «mis respuestas» o «mi caso» (`MIS_RE`) y con su botón «📋 Tus respuestas». **Un
+  dato nuevo que el chat guarde en el navegador necesita su renglón en `_AV_NAVEGADOR` del aviso de privacidad.**
 
 ### 0 bis. Una sola plataforma: la Enciclopedia antigua se retiró
 
