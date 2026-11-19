@@ -2798,6 +2798,69 @@
    "no_dice": [
     "Sobre esto no hay un proyecto"
    ]
+  },
+  {
+   "q": "Quiero donar",
+   "modo": "periodista",
+   "ir": "donaciones.html",
+   "no_dice": [
+    "En la redacción todavía no hay nota"
+   ]
+  },
+  {
+   "q": "¿Cuánto invirtió el municipio de Zapopan en obra pública?",
+   "modo": "periodista",
+   "ir": "planisferio-jal.html?ml=inv#mapa-municipios",
+   "dice": [
+    "Si lo lees en una nota, pregunta",
+    "Comparar cosas que no miden lo mismo"
+   ]
+  },
+  {
+   "q": "¿Qué es el triángulo del fraude?",
+   "modo": "periodista",
+   "ir": "aprende-auditoria.html#met-fraude",
+   "no_dice": [
+    "Una acusación no es una condena"
+   ]
+  },
+  {
+   "q": "¿Cuántos acuíferos de Chihuahua están en déficit?",
+   "modo": "ambientalista",
+   "ir": "planisferio-chih-ambiental.html",
+   "dice": [
+    "Este tema ya es ambiental"
+   ],
+   "no_dice": [
+    "no hay un proyecto con alerta ambiental"
+   ]
+  },
+  {
+   "q": "¿Cuánto rezago familiar tienen los juzgados de los estados?",
+   "modo": "ambientalista",
+   "ir": "datos-judicial-gestion.html#jud-rezago",
+   "dice": [
+    "La justicia ambiental"
+   ]
+  },
+  {
+   "q": "¿Cuánta deuda dejó AMLO?",
+   "modo": "ambientalista",
+   "ir": "radar-estado-de-cuenta.html?adm=amlo",
+   "dice": [
+    "Tu estado de cuenta ambiental"
+   ]
+  },
+  {
+   "q": "¿Cuántos congresos locales hay?",
+   "modo": "ambientalista",
+   "ir": "datos-legislativo-estados.html#leg-locales",
+   "dice": [
+    "Las leyes ambientales que aplican"
+   ],
+   "no_dice": [
+    "La basura: un servicio municipal"
+   ]
   }
  ]
 }

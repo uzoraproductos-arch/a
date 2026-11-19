@@ -608,6 +608,7 @@
     t = t.split(/[:(]| — | · /)[0].replace(/^Cuánto gana\s*/i, '').trim();
     return t.split(' ').length <= 6 ? t : '';
   }
+  var VER_P = window.AuditorVerifica && B.dat && B.dat.nota ? window.AuditorVerifica(B.dat.nota) : null;
   function periodista(q, r) {
     if (!r || r.sin || r.plat) return null;
     var sc = svCapa(r, 'periodista');
@@ -669,12 +670,27 @@
     });
     var sigue = [];
     cols.forEach(function (f) { (f.sigue || []).slice(0, 2 - sigue.length).forEach(function (s) { sigue.push('<li>🗓️ ' + (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.tx) + ' ↗</a>' : esc(s.tx)) + '</li>'); }); });
-    var nada = !nadie.length && !ruido.length;
+    var nada = !nadie.length && !ruido.length, cie = [];
+    /* Sin nota (19-11-2026, afinación por modo): una herramienta o una página de la plataforma no es
+       tema de nota, así que no se ofrece una; en lo demás, el Periodista enseña qué preguntar si el tema
+       sale en la prensa, con los puntos ciegos (puntos_ciegos.py) que toca la respuesta. */
+    if (nada && (r.app || /^(donaciones|canjea|mis-respuestas|indice|derecho-de-replica|noticias-|participa|comunidad)/.test(base) || base === 'herramienta-inspector.html' || (base === 'glosario.html' && !/#(?!terminos)/.test((r.ir || [''])[0])))) return null;
+    if (nada && VER_P) {
+      var vistoC = {};
+      /* En un concepto (glosario, Aprende) no se acusa a nadie: ahí sobra «una acusación no es una condena». */
+      var concepto = /^(glosario|aprende-)/.test(base);
+      cie = VER_P.ciegos({ texto: q + '\n' + textoDe(r.html) }).filter(function (c) {
+        return !(concepto && c.r.id === 'acusacion') && !vistoC[c.r.id] && (vistoC[c.r.id] = 1);
+      }).slice(0, 2);
+    }
     var h = '<div class="pa-reportero"><p class="pa-rep-t">📰 La nota del Periodista</p>' +
       (nadie.length ? '<p class="pa-rep-s">🕵️ Lo que casi nadie te cuenta</p><ul class="pa-lista">' + nadie.slice(0, 4).join('') + '</ul>' : '') +
       (ruido.length ? '<p class="pa-rep-s">📢 El ruido: lo que circula y lo que consta</p><ul class="pa-lista">' + ruido.join('') + '</ul>' : '') +
       (sigue.length ? '<p class="pa-rep-s">🗓️ Lo que sigue</p><ul class="pa-lista">' + sigue.join('') + '</ul>' : '') +
-      (nada ? '<p>En la redacción todavía no hay nota sobre esto: no tenemos cotejo de lo que circula ni pendientes señalados. <a href="noticias-verifica.html#propon">¿Lo investigamos? Propón una nota ➔</a></p>' : '') +
+      (nada && cie.length ? '<p class="pa-rep-s">🔦 Si lo lees en una nota, pregunta</p><ul class="pa-lista">' + cie.map(function (c) {
+        return '<li>' + esc(c.r.ico) + ' <b>' + esc(c.r.n) + '.</b> ' + esc(c.r.pr) + '</li>';
+      }).join('') + '</ul><p class="pa-chico">Son los <a href="noticias-verifica.html#puntos-ciegos">puntos ciegos</a> que las notas suelen esconder: preguntas que conviene hacer, no un juicio sobre nadie. ¿Quieres que lo investiguemos? <a href="noticias-verifica.html#propon">Propón una nota ➔</a></p>' : '') +
+      (nada && !cie.length ? '<p>En la redacción todavía no hay nota sobre esto: no tenemos cotejo de lo que circula ni pendientes señalados. <a href="noticias-verifica.html#propon">¿Lo investigamos? Propón una nota ➔</a></p>' : '') +
       '<p class="pa-chico">Lo que te cuento sale de documentos públicos que casi nadie lee, no de rumores. Una nota de prensa es mi punto de partida, nunca mi fuente' +
       (cols.length ? ', y <b>una acusación no es una condena</b>' : '') + '. A las personas privadas no las nombro.</p></div>';
     return { html: h, web: !r.web && tema ? tema : '' };
@@ -797,6 +813,19 @@
       'Si quieres ir a fondo, toca «Saber más» o cámbiame al modo Inspector.</p></div>';
     return { html: hh };
   }
+  /* El puente de cada tema a su lado ambiental: [palabras, ícono, texto, página, 'q' si solo cuenta la pregunta].
+     Solo páginas que ya existen. */
+  var AMB_PUENTE = [
+    [/ (judicial\w*|juzgad\w*|jueces|tribunal\w*|fiscalias?|denuncias?) /, '⚖️', 'La justicia ambiental: lo que la PROFEPA hace con las denuncias, su rezago y lo que lleva a la Fiscalía', 'datos-justicia-ambiental.html'],
+    [/ (obras? publicas?|infraestructura|megaobras?|aeropuerto|aifa|tren|refineria|dos bocas|carreteras?|invierte\w*|inversion) /, '🏗️', 'La huella de las megaobras: cada obra con su alerta ambiental y quién la paga', 'datos-ambiente-megaobras.html'],
+    [/ (presupuest\w*|ramos?|egresos|paquete economico|pef|gasto programable) /, '💰', 'El presupuesto ambiental: el Ramo 16, órgano por órgano', 'datos-ambiente-presupuesto.html'],
+    [/ (pib|crecimiento|economia) /, '📉', 'El PIB que no alcanza: lo que el país produjo menos lo que le costó a la naturaleza', 'datos-ambiente-pib.html'],
+    [/ (municipios?|alcald\w*|ayuntamientos?|basura|limpia) /, '🗑️', 'La basura: un servicio municipal sin dinero federal, de lo que se genera a dónde va', 'datos-ambiente-basura.html', 'q'],
+    [/ (diputad\w*|senad\w*|congresos?|legislativ\w*|leyes|reformas?) /, '📜', 'Las leyes ambientales que aplican, con su texto vigente', 'datos-ambiente-leyes.html'],
+    [/ (sueldo|salario|impuestos?|isr|iva|retienen|aguinaldo|deuda) /, '🧾', 'Tu estado de cuenta ambiental: tu parte del daño ambiental, junto a la de la deuda', 'herramienta-ambiente-ticket.html'],
+    [/ (asf|auditoria superior|fiscalizacion|expedientes?|por aclarar|observ\w*) /, '🔎', 'El Auditor ambiental: lo que la Auditoría Superior observó a la SEMARNAT, la Conagua, la CONAFOR y la PROFEPA', 'herramienta-ambiente-auditor.html'],
+    [/ (huracan\w*|inundacion\w*|sequia|crisis|desastres?|fonden) /, '🌀', 'Las crisis ambientales: cuánto cubre el fondo, cuánto se anunció y cuánto se comprobó', 'herramienta-ambiente-crisis.html']
+  ];
   function ambientalistaCapa(q, r) {
     if (!r || r.sin || r.plat) return null;
     var sc = svCapa(r, 'ambientalista');
@@ -807,12 +836,23 @@
       var w = plano(c.nombre).trim().split(' ').filter(function (x) { return x.length > 3; });
       return w.length && w.every(function (x) { return pt.indexOf(' ' + x + ' ') >= 0; });
     }).slice(0, 3);
+    /* Afinación por modo (19-11-2026): si el tema ya es ambiental (por sus palabras o por el modo de su página,
+       modoToca()), no se dice «no hay proyecto»; y cada tema tiende su puente a la página ambiental que le toca
+       (AMB_PUENTE), sin cifras: solo a dónde ver su lado ambiental. */
+    var yaAmb = modoToca(q, r) === 'ambientalista', base = sinParam((r.ir || [''])[0]).split('#')[0];
+    var pt2 = ' ' + plano(q + ' ' + ((r.ir && r.ir[1]) || '')) + ' ';
+    var pq2 = ' ' + plano(q) + ' ';
+    var pu = AMB_PUENTE.filter(function (x) { return x[0].test(x[4] ? pq2 : pt2) && x[3].split('#')[0] !== base; }).slice(0, 2);
     var hh = '<div class="pa-capa pa-capa-ambientalista"><p class="pa-capa-t">🌎 La mirada ambiental</p>' +
       (os.length ? '<p class="pa-rep-s">Proyectos con alerta ambiental' + (ab ? ' en ' + esc(NOMBRE[ab]) : '') + ', y quién los paga</p><ul class="pa-lista">' + os.map(function (c) {
         return '<li>' + esc(c.ico) + ' <b>' + esc(c.nombre) + '</b>: ' + (c.paga === 'privado' ? '🏢 inversión privada, no es gasto público' : '🏛️ gasto público') +
           '. 🌱 ' + esc(recorta(c.alerta, 150)) + ' <a href="' + esc(c.aud) + '">Ver la investigación ➔</a></li>';
       }).join('') + '</ul>' :
-        '<p>Sobre esto no hay un proyecto con alerta ambiental en el mapa de megaobras' + (ab ? ' que toque ' + esc(NOMBRE[ab]) : '') + '. Eso no quiere decir que no haya daño: quiere decir que no lo tenemos documentado.</p>') +
+        (yaAmb ? '<p>🌱 Este tema ya es ambiental: la respuesta de arriba es la mirada de este modo.</p>' :
+          '<p>Sobre esto no hay un proyecto con alerta ambiental en el mapa de megaobras' + (ab ? ' que toque ' + esc(NOMBRE[ab]) : '') + '. Eso no quiere decir que no haya daño: quiere decir que no lo tenemos documentado.</p>')) +
+      (pu.length ? '<p class="pa-rep-s">El lado ambiental de este tema</p><ul class="pa-lista">' + pu.map(function (x) {
+        return '<li>' + x[1] + ' <a href="' + esc(x[3]) + '">' + esc(x[2]) + ' ➔</a></li>';
+      }).join('') + '</ul>' : '') +
       '<p class="pa-rep-s">Para mirarlo con ojos de ambiente</p><ul class="pa-lista">' +
       '<li>🗺️ <a href="planisferio.html?d=ambiental' + (ab ? '&amp;e=' + esc(ab) : '') + '">' + (ab ? esc(NOMBRE[ab]) + ' en' : 'Los 32 estados en') + ' la dimensión ambiental del Planisferio ➔</a></li>' +
       '<li>⏱️ <a href="herramienta-ambiente-reloj.html">El reloj del daño ambiental</a> y <a href="datos-justicia-ambiental-denuncias.html">lo que resuelve la PROFEPA</a></li></ul>' +

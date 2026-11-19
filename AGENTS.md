@@ -42,7 +42,8 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
   por dónde seguir; `ciudadanoCapa()`, «🙋 En corto»: la respuesta en una oración, sus
   palabras difíciles con el glosario y su estado de cuenta cívico; `ambientalistaCapa()`,
   «🌎 La mirada ambiental»: los proyectos con alerta ambiental del tema o del estado
-  y quién los paga. **Ninguna capa agrega cifras**. Cada modo ofrece pasarse al que le
+  y quién los paga, o, si no hay, el puente del tema a su lado ambiental (`AMB_PUENTE`, solo a páginas que existen);
+  sin nota, el Periodista enseña los puntos ciegos que toca la respuesta y calla en las herramientas. **Ninguna capa agrega cifras**. Cada modo ofrece pasarse al que le
   toca, con `MODO_PAL` de `asistente.js`, y el banco de pruebas lee la capa de
   cualquier modo con `capaModo()`); (c) el dictamen de cada modo, hecho (04-11-2026): el
   enlace lleva `&modo=` y el dictamen suma la capa del modo como capítulo, «La lectura del
