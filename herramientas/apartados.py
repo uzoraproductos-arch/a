@@ -6424,9 +6424,13 @@ def pagina(a, sello):
     Auditor (decisión del autor, 19-11-2026; servicios_fichas.por_auditor_html)."""
     texto = _pagina(a, sello)
     import servicios_fichas as sf
-    if sf.pestana_de(a['archivo']) == 'Servicios':
+    origen = sf.pestana_de(a['archivo'])
+    if origen in ('Servicios', 'Planisferio', 'Comunidad', 'Noticiero'):
+        # 19-11-2026: todas las pestañas. La liga lleva el modo del servicio o, si no,
+        # el de la página a la que va (modos.py).
+        import modos
         sid = a['archivo'][len('servicio-'):-len('.html')] if a['archivo'].startswith('servicio-') else None
-        texto = sf.por_auditor_html(texto, 'Servicios', sf.FICHAS[sid]['auditor'][0][1] if sid in sf.FICHAS else None)
+        texto = sf.por_auditor_html(texto, origen, sf.FICHAS[sid]['auditor'][0][1] if sid in sf.FICHAS else None, modos.modo_pagina)
     return texto
 
 

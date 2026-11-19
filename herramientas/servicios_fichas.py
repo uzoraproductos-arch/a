@@ -344,7 +344,7 @@ def _titulo(archivo):
     return html.unescape(re.split(r' [·|—-] ', m.group(1))[0]).strip() if m else ''
 
 
-def por_auditor_html(texto, origen='Servicios', modo=None):
+def por_auditor_html(texto, origen='Servicios', modo=None, modo_de=None):
     """Cambia, dentro de <main>, cada liga directa a otra pestaña por su liga al chat."""
     i, j = texto.find('<main'), texto.rfind('</main>')
     if i < 0 or j < 0:
@@ -361,7 +361,7 @@ def por_auditor_html(texto, origen='Servicios', modo=None):
         q = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', b.group(1) if b else dentro))).strip(' ➔→›»')
         if len(q) < 4 or _GENERICO.match(q) or len(q) > 140:
             q = _titulo(liga) or q[:140]
-        return '<a%shref="%s"%s>%s</a>' % (antes, por_auditor(liga, q, modo), despues, dentro)
+        return '<a%shref="%s"%s>%s</a>' % (antes, por_auditor(liga, q, modo or (modo_de(liga.split('#')[0].split('?')[0]) if modo_de else None)), despues, dentro)
     return texto[:i] + _A.sub(cambia, texto[i:j]) + texto[j:]
 
 

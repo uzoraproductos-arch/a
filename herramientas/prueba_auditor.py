@@ -140,7 +140,9 @@ def main():
         # Todo pasa por el Auditor (19-11-2026): cada liga ?abre= del sitio debe abrir su página en el chat.
         for q, liga, de in ligas_abre():
             r = pag.evaluate('''([q, l]) => { const r = window.AuditorBot.abre(q, l); return r ? { ir: (r.ir && r.ir[0]) || null } : null; }''', [q, liga])
-            if not r or r['ir'] != liga:
+            if not (RAIZ / liga.split('#')[0].split('?')[0]).exists():
+                fallas.append(('abre=%s (en %s)' % (liga, de), ['la página no existe']))
+            elif not r or r['ir'] != liga:
                 fallas.append(('abre=%s (en %s)' % (liga, de), ['el chat no la abre' if not r else '«Saber más» lleva a %s' % r['ir']]))
         for p in banco:
             r = pag.evaluate(PREGUNTA_JS, [p['q'], p.get('modo', '')])

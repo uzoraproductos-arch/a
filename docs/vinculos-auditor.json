@@ -1,12 +1,4 @@
 {
  "nota": "Ligas directas entre pestañas que faltan por mudar al Auditor (herramientas/vinculos_auditor.py). Solo pueden bajar.",
- "pares": {
-  "Comunidad → Noticiero": 90,
-  "Comunidad → Planisferio": 21,
-  "Comunidad → Servicios": 45,
-  "Noticiero → Comunidad": 21,
-  "Noticiero → Servicios": 17,
-  "Planisferio → Comunidad": 2902,
-  "Planisferio → Servicios": 2
- }
+ "pares": {}
 }

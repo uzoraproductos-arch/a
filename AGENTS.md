@@ -329,16 +329,25 @@ respuesta rápida, «Generar dictamen», «Saber más» (la página a fondo) y e
   aprovecha (su `hace` en `FICHAS` de `servicios_fichas.py`), abajo sale «Esto también lo hacemos
   como servicio», con su página y su cotización (`servicioHtml()` de `asistente.js`, que lee `srv`
   de la base: `mapa_chat()`). **Nunca un monto.**
-- **Se muda por entregas, con trinquete.** `herramientas/vinculos_auditor.py` (corre en
-  `revision.py`) cuenta las ligas directas entre pestañas, sin la cabecera, el menú, las migas, el
-  cajón «Cuéntanos lo que viste» ni el pie, contra `docs/vinculos-auditor.json`: **si un par sube,
-  la revisión se detiene**; cuando baja, `--fijar`. **Servicios ya está mudado** (19-11-2026):
-  `pagina()` de `apartados.py` pasa cada página de Servicios por `por_auditor_html()`, así que una liga
-  nueva suya a otra pestaña se muda sola. La pestaña de cada página sale de su nombre
-  (`pestana_de()`); si una página marca otra, va en `EXCEPCIONES` o la revisión se detiene.
-- **Cada liga `abre=` del sitio se prueba** en `prueba_auditor.py`: si el chat no la abre, falla.
-- Lo que sigue (del autor): la página automatizada de las respuestas a lo que pidió cada usuario,
-  y mudar las otras pestañas (Planisferio → Comunidad es la mayor parte).
+- **Las cuatro pestañas ya están mudadas** (19-11-2026: Servicios, y el mismo día, a pedido del
+  autor, «todas las demás pestañas al chat»). `pagina()` de `apartados.py` pasa cada página de
+  Planisferio, Comunidad, Noticiero y Servicios por `por_auditor_html()`: una liga nueva a otra
+  pestaña se muda sola, con el modo del servicio o el de la página a la que va (`modos.py`). Las
+  ligas que arma el navegador (la ficha del Planisferio) las muda al tocarlas `volver-auditor.js`,
+  con la misma regla. La pestaña de cada página sale de su nombre (`pestana_de()`); si una página
+  marca otra, va en `EXCEPCIONES` (y en `EXC` de `volver-auditor.js`) o la revisión se detiene.
+- **Ni una liga directa entre pestañas.** `herramientas/vinculos_auditor.py` (corre en `revision.py`)
+  las cuenta, sin la cabecera, el menú, las migas, el cajón «Cuéntanos lo que viste» ni el pie: **si
+  aparece una, la revisión se detiene**. La portada (`index.html`) no es pestaña y liga a todas.
+- **Cada liga `abre=` del sitio se prueba** en `prueba_auditor.py` (587 al 19-11-2026): la página debe
+  existir y el chat debe abrirla. Una página sin ficha propia (un mapa, un tablero) se abre igual, sin cifras.
+- **La Enciclopedia es el espejo de la base de datos** (el autor, 19-11-2026): de ahí toma el
+  Auditor y lo desarrolla. **Lo que el Planisferio enseña de un estado vive en páginas del propio
+  Planisferio** (sus portales y sus temas, `TEMAS` de `planisferio.py`); para ir a la Enciclopedia,
+  la liga pasa por el chat.
+- Lo que sigue (del autor): la página automatizada de las respuestas a lo que pidió cada usuario, y
+  que el Planisferio tenga en sus páginas lo que hoy manda a la Enciclopedia (las fuentes, el estado
+  de cuenta y de resultados de cada estado, el Contexto dimensional y las leyes en sus tres niveles).
 
 ### 0 bis. Una sola plataforma: la Enciclopedia antigua se retiró
 

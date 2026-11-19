@@ -14,14 +14,11 @@ que contesta en corto, ofrece el dictamen, lleva a «Saber más» y ofrece el
 servicio que toca.
 
 Este script lee las páginas generadas y cuenta, por par de pestañas, las ligas
-directas que todavía saltan de una a otra (sin contar la cabecera, el menú, las
-migas ni el pie). Se muda por entregas, así que funciona como trinquete:
-
-- Compara contra `docs/vinculos-auditor.json`. **Si un par sube, la revisión se
-  detiene**: una liga nueva entre pestañas va por el Auditor.
-- **Servicios ya está mudado** (19-11-2026): ninguna liga suya sale directo a
-  otra pestaña.
-- Cuando un par baja, `--fijar` guarda la cuenta nueva.
+directas que saltan de una a otra (sin contar la cabecera, el menú, las migas, el
+cajón «Cuéntanos lo que viste» ni el pie). **Las cuatro pestañas ya están mudadas**
+(19-11-2026; `MUDADAS`): si aparece una sola liga directa, la revisión se detiene.
+`docs/vinculos-auditor.json` guarda la cuenta (`--fijar`) por si una pestaña nueva
+se muda por entregas.
 
 Uso: python3 herramientas/vinculos_auditor.py [--fijar] [--ver ORIGEN]
 """
@@ -35,8 +32,8 @@ import sys
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = os.path.join(RAIZ, 'docs', 'vinculos-auditor.json')
 PESTANAS = ('Auditor', 'Planisferio', 'Comunidad', 'Noticiero', 'Servicios')
-# Las pestañas ya mudadas: no pueden tener ni una liga directa a otra.
-MUDADAS = ('Servicios',)
+# Las pestañas ya mudadas (todas desde el 19-11-2026): ni una liga directa a otra.
+MUDADAS = ('Planisferio', 'Comunidad', 'Noticiero', 'Servicios')
 
 _CUR = re.compile(r'<a [^>]*aria-current="page"[^>]*>([^<]*)</a>')
 _FUERA = [re.compile(p, re.S) for p in (

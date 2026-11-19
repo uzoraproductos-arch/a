@@ -2788,7 +2788,7 @@
      con ?q= y ?abre=<página>: el chat contesta con esa página (o abre la aplicación en
      su marco), con su dictamen, «Saber más» y el servicio que toca. Solo acepta una
      página de la plataforma; una que el chat no conozca se contesta como pregunta. */
-  var ABRE_OK = /^[a-z0-9][a-z0-9-]*\.html([?#][\w=&:.%-]*)?$/i, abreUna = null;
+  var ABRE_OK = /^[a-z0-9][a-z0-9-]*\.html([?#][^\s<>"'\\]*)?$/i, abreUna = null;
   function abre(q, liga) {
     if (!liga || !ABRE_OK.test(liga)) return null;
     var base = sinParam(liga), a = appDeLiga(liga), r;
@@ -2802,10 +2802,19 @@
         if (!hit && f.ir[0] === liga) hit = f;
         if (!pag && f.t === 'pagina' && sinParam(f.ir[0]) === base) pag = f;
       });
+      /* Una nota «Al momento» tiene su página propia y su ficha en la columna (#col-<id>). */
+      var col = /^noticias-al-momento-(.+)\.html$/.exec(base);
+      if (!hit && !pag && col) F.forEach(function (f) { if (!pag && f.ir && /#col-/.test(f.ir[0]) && f.ir[0].split('#col-')[1] === col[1]) pag = f; });
+      if (!hit && !pag) F.forEach(function (f) { if (!pag && f.ir && sinParam(f.ir[0]) === base) pag = f; });
       var f = hit || pag;
-      if (!f || !charla) return null;
-      r = charla.deFicha(f);
-      r.ir = [liga, (hit && r.ir && r.ir[1]) || f.tit];
+      if (f && charla) {
+        r = charla.deFicha(f);
+        r.ir = [liga, (hit && r.ir && r.ir[1]) || f.tit];
+      } else {
+        /* Una página sin ficha propia (un mapa, un tablero): el chat la abre igual, sin cifras. */
+        r = { html: '<p><span aria-hidden="true">📄</span> Te llevo a <b>' + esc(q) + '</b>. Ábrela con «Saber más»; si tienes una pregunta sobre lo que ves ahí, escríbemela aquí.</p>',
+          ir: [liga, q], rec: [], sug: [] };
+      }
     }
     r.abre = liga;
     return r;
