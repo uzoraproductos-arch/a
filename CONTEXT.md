@@ -7523,12 +7523,19 @@ Pedido del autor: «intégralo y continúa con las dimensiones pendientes». Se 
 - **Lector:** octava aplicación del Modo Inspector, `herramienta-inspector-factura.html`; todo en el navegador, nada se sube. `actualizar_69b.py` conserva ahora la fecha de presunto y de definitivo de cada RFC (dos columnas al final; el CSV es el mismo, SHA-256 `54b95d41…`).
 - **Pendiente:** cotejar los 8 avisos contra el DOF y corregir cada módulo con su fecha (plataforma); el Senado, si un día publica un índice legible; la validación del sello digital y la consulta de vigencia (cancelación) de cada CFDI, que solo da el SAT.
 
+### 20-11-2026 · sello 20261120f · Los salarios caídos: apartado B y su ISR
+
+- **Pedido del autor:** «continuemos con salarios caídos».
+- **Hecho:** apartado B con escenario de salarios caídos sin tope y sin interés (LFTSE, art. 43, fr. III y IV; `SCJN`: 2a./J. 34/2017, transcrita en la Gaceta de octubre de 2022, huella `1f324f18…`); ISR de los vencidos o caídos con la mecánica del art. 95 de la LISR y sin exención (`SCJN_ISR`: tesis 2a. XXVIII/2017, transcrita en el ADR 503/2022, huella `7812c264…`). El Semanario Judicial (sjf2.scjn.gob.mx) rechaza las descargas automáticas; por eso se cotejó en documentos de la SCJN que transcriben las tesis.
+- **Lecturas nuestras:** sin exención del art. 93, fr. XIII (hay criterios encontrados, entre ellos una jurisprudencia de Pleno de Circuito que no se pudo cotejar en su fuente); los caídos del B con el salario mensual × meses.
+- **Pendiente:** el ISR de los intereses del art. 48; la indemnización del apartado B (la fija el laudo); cotejar en el Semanario la jurisprudencia de Pleno de Circuito sobre la exención (PC.XXX. J/31 A, según fuentes secundarias).
+
 ### 20-11-2026 · sello 20261120e · El simulador laboral: subsidio, juicio, reparto de utilidades y apartado B
 
 - **Pedido del autor:** «continúa con los pendientes a calcular».
 - **Hecho:** en `cc_laboral.py` y `cc-laboral.js` (gemelos): el subsidio para el empleo (decreto DOF 31-12-2025, `SUBSIDIO`, huella `c2ff9053…` del texto del SIDOF; lee `subsidio_empleo` de la base), los salarios vencidos y sus intereses como escenario (`mj`, LFT art. 48), el reparto de utilidades con los datos del proyecto de la comisión mixta (`ptu*`, arts. 122 a 127, LISR art. 93 fr. XIV, RLISR art. 174) y el apartado B (`reg=B`, `LFTSE`, huella `2055ea67…`). La página acepta `?mj=` y `?reg=B`; el chat lo abre con «salarios caídos», «cuánto me toca de utilidades», «finiquito de burócrata». `--prueba`: 27 casos.
 - **Lecturas nuestras (dichas en la página):** el subsidio completo del mes contra la retención de lo ordinario; los vencidos con el salario integrado y el interés simple («capitalizable al momento del pago»); la proporción por días del aguinaldo B (el art. 42 Bis deja la norma al Ejecutivo); el tope del reparto como 90 días de cuota diaria.
-- **Pendiente:** el ISR de los salarios vencidos; en el apartado B, la indemnización, los salarios caídos, las vacaciones no disfrutadas y los quinquenios (los fija el laudo); los trabajadores de estados y municipios (ley de cada estado); el porcentaje de enero del subsidio (15.59 % con la UMA de 2025), que la base no trae; contratos por tiempo u obra determinados (art. 50, fr. I) y plataformas digitales (fr. IV).
+- **Pendiente:** en el apartado B, la indemnización, las vacaciones no disfrutadas y los quinquenios (los fija el laudo); los trabajadores de estados y municipios (ley de cada estado); el porcentaje de enero del subsidio (15.59 % con la UMA de 2025), que la base no trae; contratos por tiempo u obra determinados (art. 50, fr. I) y plataformas digitales (fr. IV).
 
 ### 20-11-2026 · sello 20261120c · El simulador laboral: tu finiquito o tu liquidación
 

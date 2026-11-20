@@ -81,13 +81,19 @@
     /* Escenario de juicio (LFT, art. 48): fuera del total. */
     var mj = Math.floor(+x.mj || 0);
     r.juicio = [];
+    if (B && mj > 0 && (causa === 'injustificado' || causa === 'sin_reinstalar'))
+      r.juicio.push(['caidos', 'Salarios caídos: ' + mj + ' meses × 30 días × tu salario, sin tope (corren hasta que se cumpla el laudo)', mj * 30 * sd, 'LFTSE, art. 43, fr. III y IV; SCJN, 2a./J. 34/2017']);
     if (!B && mj > 0 && (causa === 'injustificado' || causa === 'sin_reinstalar')) {
       r.juicio.push(['vencidos', 'Salarios vencidos: ' + Math.min(mj, 12) + ' meses × 30 días × salario integrado (hasta 12 meses)', Math.min(mj, 12) * 30 * sdi, 'LFT, art. 48, segundo párrafo']);
       if (mj > 12) r.juicio.push(['intereses', 'Intereses: 2 % mensual sobre quince meses de salario, por ' + (mj - 12) + ' meses después del mes 12',
         15 * 30 * sdi * 0.02 * (mj - 12), 'LFT, art. 48, tercer párrafo']);
     }
     r.total_juicio = tot;
-    r.juicio.forEach(function (k) { r.total_juicio += k[2]; });
+    var v = 0;
+    r.juicio.forEach(function (k) { r.total_juicio += k[2]; if (k[0] === 'vencidos' || k[0] === 'caidos') v += k[2]; });
+    /* ISR de los vencidos o caídos: prestación por la terminación (SCJN, 2a. XXVIII/2017), mecánica del art. 95, sin exención. */
+    r.isr_juicio = v > 0 ? (v < m ? isrTarifa(D, v) : v * tasaM) : 0;
+    r.neto_juicio = r.total_juicio - isr - r.isr_juicio;
     /* Reparto de utilidades (LFT, arts. 123, 124 y 127, fr. VIII): aparte. */
     r.ptu = null;
     var pu = +x.ptuU || 0, pdt = +x.ptuDT || 0, pst = +x.ptuST || 0, pd = +x.ptuD || 0;
@@ -116,6 +122,11 @@
   function esc(t) { return String(t).replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; }); }
   function ley() {
     var k = $('clCausa').value;
+    if ($('clReg') && $('clReg').value === 'B') {
+      $('clCausaLey').textContent = k === 'renuncia' ? 'LFTSE, art. 46, fr. I: la renuncia termina el nombramiento.' :
+        'LFTSE, art. 46: nadie puede ser cesado sino por justa causa; si el Tribunal declara injustificado el cese, reinstalación o indemnización y salarios caídos (art. 43, fr. III y IV).';
+      return;
+    }
     D.causas.forEach(function (c) { if (c[0] === k) $('clCausaLey').textContent = c[2]; });
   }
 
@@ -134,13 +145,13 @@
       if ($('clPv').value === REG[o][1] || !$('clPv').value) $('clPv').value = REG[k][1];
     }
     $('clRegLey').textContent = REG[k][2];
-    $('clExtras').hidden = k === 'B';
+    $('clPtuCaja').hidden = k === 'B';
   }
   try { var qr = new URLSearchParams(location.search).get('reg'); if (qr === 'B' || qr === 'A') $('clReg').value = qr; } catch (e) { /* sin parámetros */ }
   reg(true);
   ley();
   $('clCausa').addEventListener('change', ley);
-  $('clReg').addEventListener('change', function () { reg(true); });
+  $('clReg').addEventListener('change', function () { reg(true); ley(); });
 
   function pinta(e) {
     if (e) e.preventDefault();
@@ -178,11 +189,14 @@
     }
     if (r.juicio.length) {
       var j = r.juicio.slice();
-      j.push(['', 'Tu liquidación más lo del juicio, antes de impuestos', r.total_juicio, 'Suma', 1]);
-      ex += '<h3 class="ci-tit">⚖️ Si el juicio dura ' + x.mj + ' meses (escenario)</h3>' + tabla('Lo que sumaría el juicio, si el patrón no prueba la causa', j) +
-        '<p class="ci-nota">Es un escenario: lo que vale es lo que resuelva el Tribunal. No calculamos su ISR.</p>';
-    } else if (x.mj > 0 && r.reg === 'A') {
-      ex += '<p class="ci-nota">Los salarios vencidos solo se pagan si te despidieron y el patrón no prueba la causa en el juicio (LFT, art. 48): elige esa causa para verlos.</p>';
+      j.push(['', (r.reg === 'B' ? 'Lo del finiquito más los salarios caídos' : 'Tu liquidación más lo del juicio') + ', antes de impuestos', r.total_juicio, 'Suma', 1]);
+      j.push(['', 'ISR de los salarios ' + (r.reg === 'B' ? 'caídos' : 'vencidos') + ': como lo de la separación, con la tasa de tu sueldo mensual y sin exención', r.isr_juicio, 'LISR, art. 95; SCJN, 2a. XXVIII/2017']);
+      j.push(['', 'Lo que recibirías con el juicio, aproximado (menos todo el ISR)', r.neto_juicio, 'Suma − ISR', 1]);
+      ex += '<h3 class="ci-tit">⚖️ Si el juicio dura ' + x.mj + ' meses (escenario)</h3>' + tabla('Lo que sumaría el juicio, si ' + (r.reg === 'B' ? 'el Tribunal declara injustificado el cese' : 'el patrón no prueba la causa'), j) +
+        '<p class="ci-nota">Es un escenario: lo que vale es lo que resuelva el Tribunal. ' + (r.reg === 'B' ? 'En el apartado B no hay tope de doce meses ni interés del 2 % (SCJN, 2a./J. 34/2017).' : 'El ISR de los intereses no lo calculamos.') +
+        ' Hay criterios encontrados sobre si a estos salarios les toca la exención de la separación: la cuenta no se la aplica.</p>';
+    } else if (x.mj > 0) {
+      ex += '<p class="ci-nota">Los salarios ' + (r.reg === 'B' ? 'caídos' : 'vencidos') + ' solo se pagan si te despidieron y en el juicio se demuestra que fue sin causa (' + (r.reg === 'B' ? 'LFTSE, art. 43, fr. III' : 'LFT, art. 48') + '): elige esa causa para verlos.</p>';
     }
     if (r.ptu) {
       var t = r.ptu;
@@ -197,8 +211,8 @@
     }
     $('clExtra').innerHTML = ex;
     var av = ['Es una cuenta aproximada (derivado): lo que vale es lo que firmen ante el Centro de Conciliación o resuelva el Tribunal.'];
-    if (r.reg === 'B') av.unshift('En el apartado B la indemnización, los salarios caídos y la prima vacacional que se deba los fija el laudo (LFTSE, art. 43, fr. III y IV); aquí solo va lo que la ley ya da: el salario pendiente y el aguinaldo de ' + x.agd + ' días en proporción.');
-    if (r.reg === 'A' && !r.juicio.length && (x.causa === 'injustificado' || x.causa === 'sin_reinstalar')) av.unshift('Sin los salarios vencidos ni sus intereses (LFT, art. 48): dependen de cuánto dure el juicio; escribe un escenario en el paso 3.');
+    if (r.reg === 'B') av.unshift('En el apartado B la indemnización y la prima vacacional que se deba los fija el laudo (LFTSE, art. 43, fr. III y IV); aquí va lo que la ley ya da: el salario pendiente, el aguinaldo de ' + x.agd + ' días en proporción y, si escribes cuánto dura el juicio, los salarios caídos.');
+    if (!r.juicio.length && (x.causa === 'injustificado' || x.causa === 'sin_reinstalar')) av.unshift(r.reg === 'B' ? 'Sin los salarios caídos (LFTSE, art. 43): dependen de cuánto dure el juicio; escribe un escenario en el paso 3.' : 'Sin los salarios vencidos ni sus intereses (LFT, art. 48): dependen de cuánto dure el juicio; escribe un escenario en el paso 3.');
     if (r.reg === 'A' && x.causa === 'renuncia' && r.anios < 15) av.unshift('Con menos de 15 años, quien se va por su voluntad no cobra prima de antigüedad (LFT, art. 162, fr. III).');
     $('clNota').textContent = av.join(' ');
   }
