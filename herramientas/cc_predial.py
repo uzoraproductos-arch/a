@@ -970,6 +970,45 @@ ESPERA = {
                 'motivo': 'su art. 33 dice «al millar el: 0.00021», «0.00017» y «0.00031»: leído así sería un impuesto casi nulo, y no se sabe cuánto es.'},
 }
 
+# Las Tablas de Valores Unitarios de cada municipio (lo que fija el catastro para armar el valor fiscal).
+# Cada valor es oficial y lleva su documento; armar el valor fiscal con ellos es derivado. Valores en pesos por m²,
+# por calidad: [moderno, semimoderno, antiguo] × [bueno, regular, malo].
+_ZAP_TV = 'https://s3.zapopan.gob.mx/geomatica/tablasvalor/2026/'
+TABLAS = {
+    'zapopan': {
+        'tx': 'Tablas de Valores Unitarios de Suelo y Construcción de Zapopan para 2026 (Decreto 29987/LXIV/25 del Congreso de Jalisco, Periódico Oficial «El Estado de Jalisco», 18-12-2025), copia de la Dirección de Catastro: «1. Valores de construcción»',
+        'url': _ZAP_TV + '1.%20Valores%20de%20construcci%C3%B3n.pdf',
+        'sha256': '476f0ba7f1dcf4f5db8a0997ab317f8c9b9c4c67adeef2a5e7e5a57d315070f4',
+        'edades': [['mod', 'Moderna: de 0 a 10 años', 10], ['semi', 'Semimoderna: de 10 a 30 años', 30], ['ant', 'Antigua: de más de 30 años', None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ['Lujo', [[17450, 16050, 11650], [15700, 12450, 9050], [10500, 6300, 4500]]],
+                ['Superior', [[12700, 11600, 8500], [11350, 9050, 6600], [7450, 4450, 3250]]],
+                ['Medio', [[8800, 7700, 5600], [7600, 5950, 4300], [4750, 2500, 1850]]],
+                ['Económico', [[6500, 5700, 4200], [5600, 4200, 3000], [2950, 1500, 1200]]],
+                ['Austero (autoconstrucción sin acabados)', [[5100, 4500, 3200], [4300, 3200, 2300], [2250, 1100, 890]]]]},
+            'ind': {'et': 'Industrial', 'cal': [
+                ['Especial', [[6100, 5500, 4100], [4600, 3000, 2100], [2350, 1250, 900]]],
+                ['Superior', [[5500, 5000, 3600], [4100, 2800, 1900], [2100, 1010, 810]]],
+                ['Medio', [[4600, 4300, 3100], [3500, 2200, 1650], [1750, 850, 680]]],
+                ['Económico', [[4000, 3600, 2650], [3000, 2000, 1300], [1550, 660, 520]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 3: más de 4 niveles desde su desplante, +10 % por estructura'},
+        'suelo': {'tx': 'Valor Catastral Zapopan 2026 (planos con el valor de cada calle; 828 MB)',
+                  'url': _ZAP_TV + 'Valor%20Catastral%20Zapopan%202026.pdf',
+                  'nota': 'En Zapopan el suelo se valúa por calle: el valor de tu calle viene en los planos de la tabla. Aún no los integramos (el archivo pesa 828 MB y son planos): búscalo ahí o pídelo en Catastro.'},
+        'demeritos': {'tx': '9. Tabla de deméritos e incrementos', 'url': _ZAP_TV + '9.%20Tabla%20de%20dem%C3%A9ritos%20e%20incrementos.pdf',
+                      'sha256': '4934cffc962cd971f851807908b0763a9d197f91be0891a977b36f535a360fea',
+                      'nota': 'El valor del terreno baja por mucha profundidad, poco frente (2 a 6 m), lote interior (50 %) o pendiente, y sube en esquina (10 % habitacional, 15 % mixto o industrial, 20 % comercial); los factores se multiplican y nunca bajan más de 50 % ni suben más de 35 %. El simulador no los aplica: si te tocan, usa tu propio factor.'}},
+}
+
+
+def valor_construccion(T, uso, ical, iedad, iest, niveles=False):
+    """Gemela de valorConstruccion() de cc-predial.js: el valor unitario oficial y, si aplica, +% por niveles."""
+    v = T['usos'][uso]['cal'][ical][1][iedad][iest]
+    return _r2(v * (1 + T['niveles']['pct'] / 100)) if niveles else v
+
+
 # El registro, estado por estado: dónde publica cada congreso las leyes de ingresos municipales y lo que
 # consta en un documento oficial de los municipios sin ley. Solo entra lo cotejado; los demás estados quedan
 # «por revisar», como falta de esta plataforma.
@@ -1052,6 +1091,16 @@ def revisa():
     claves = ['%s-%s' % (m['ent'], m['cve']) for m in MUNICIPIOS]
     if len(set(ids)) != len(ids) or len(set(claves)) != len(claves):
         raise SystemExit('cc_predial: un municipio está dos veces')
+    for mid, T in TABLAS.items():
+        if mid not in [m['id'] for m in MUNICIPIOS] or len(T['sha256']) != 64:
+            raise SystemExit('cc_predial: la tabla de valores de %s no tiene municipio o huella' % mid)
+        for u in T['usos'].values():
+            for nom, eds in u['cal']:
+                if len(eds) != len(T['edades']) or any(len(f) != 3 or f != sorted(f, reverse=True) for f in eds):
+                    raise SystemExit('cc_predial: la tabla de %s, calidad %s, no va de bueno a malo' % (mid, nom))
+            primero = [eds[0][0] for nom, eds in u['cal']]
+            if primero != sorted(primero, reverse=True):
+                raise SystemExit('cc_predial: las calidades de %s no van de mayor a menor' % mid)
     for e, r in REGISTRO.items():
         if e not in ENTIDADES or not (r['donde'] and r['url'].startswith('https://')):
             raise SystemExit('cc_predial: el registro de %s está incompleto' % e)
@@ -1113,7 +1162,7 @@ def datos(base):
     uma = base['calculadora_civica']['parametros']['uma']
     return {'anio': ANIO, 'inpc': cc['inpc'], 'inpc_ult': cc['inpc_ult'],
             'uma': uma['diaria'], 'uma_f': uma['fuente'], 'ent': ENTIDADES,
-            'mun': MUNICIPIOS, 'espera': ESPERA, 'reg': REGISTRO, 'lhm': {'tope': 250, 'tope_esp': 100}}
+            'mun': MUNICIPIOS, 'espera': ESPERA, 'reg': REGISTRO, 'tablas': TABLAS, 'lhm': {'tope': 250, 'tope_esp': 100}}
 
 
 def construir(base, ref):
@@ -1165,10 +1214,23 @@ def construir(base, ref):
       <p class="ci-pista">Es el valor catastral que viene en tu recibo o en tu estado de cuenta predial; lo fija el catastro con las tablas de valores que aprueba el Congreso del Estado.</p>
       <details class="cp-vf" id="cpVfCalc">
         <summary>¿No sabes tu valor fiscal? Ármalo con tu terreno y tu construcción</summary>
-        <p class="ci-pista">El catastro lo arma así: <b>metros de terreno × valor unitario de suelo de tu zona</b>, más <b>metros construidos × valor unitario de tu tipo de construcción</b> (y, si tu tabla lo da, un factor por la edad o el estado de conservación). Los valores unitarios vienen en las <b>Tablas de Valores Unitarios</b> de tu municipio, que aprueba el Congreso del Estado cada año y se publican en el periódico oficial del estado; en Jalisco, en el <a href="https://periodicooficial.jalisco.gob.mx/">Periódico Oficial «El Estado de Jalisco»</a>. Todavía no las integramos: búscalas ahí o pídelas en el catastro de tu municipio.</p>
+        <p class="ci-pista">El catastro lo arma así: <b>metros de terreno × valor unitario de suelo de tu zona</b>, más <b>metros construidos × valor unitario de tu tipo de construcción</b> (y, si tu tabla lo da, un factor por la edad o el estado de conservación). Los valores unitarios vienen en las <b>Tablas de Valores Unitarios</b> de tu municipio, que aprueba el Congreso del Estado cada año y se publican en el periódico oficial del estado; en Jalisco, en el <a href="https://periodicooficial.jalisco.gob.mx/">Periódico Oficial «El Estado de Jalisco»</a>. Ya integramos los valores de construcción de Zapopan (elige Zapopan y se ponen solos); las demás aún no: búscalas ahí o pídelas en el catastro de tu municipio.</p>
         <div class="ci-fila">
           <div><label class="ci-et" for="cpTs">Terreno (m²)</label><input class="ci-in" id="cpTs" inputmode="decimal" autocomplete="off" placeholder="Ej.: 160"></div>
           <div><label class="ci-et" for="cpVs">Valor de suelo ($/m²)</label><input class="ci-in" id="cpVs" inputmode="decimal" autocomplete="off" placeholder="De tu tabla"></div>
+        </div>
+        <div class="cp-tabla" id="cpTabla" hidden>
+          <p class="ci-pista" id="cpTablaTit"></p>
+          <div class="ci-fila">
+            <div><label class="ci-et" for="cpTUso">Uso</label><select class="ci-in" id="cpTUso"></select></div>
+            <div><label class="ci-et" for="cpTCal">Calidad</label><select class="ci-in" id="cpTCal"></select></div>
+          </div>
+          <div class="ci-fila">
+            <div><label class="ci-et" for="cpTEdad">Edad</label><select class="ci-in" id="cpTEdad"></select></div>
+            <div><label class="ci-et" for="cpTEst">Estado de conservación</label><select class="ci-in" id="cpTEst"></select></div>
+          </div>
+          <label class="ci-check"><input type="checkbox" id="cpTNiv"> El edificio tiene más de 4 niveles</label>
+          <p class="ci-nota" id="cpTablaVal" aria-live="polite"></p>
         </div>
         <div class="ci-fila">
           <div><label class="ci-et" for="cpTc">Construcción (m²)</label><input class="ci-in" id="cpTc" inputmode="decimal" autocomplete="off" placeholder="Ej.: 120"></div>
@@ -1356,6 +1418,24 @@ def prueba():
         if py != n or (py is not None and abs(bimestral(mm, py) - i) > 0.02):
             mal += 1
             print('✗ inverso', mid, i, py, n)
+    # La tabla de valores de Zapopan: cada celda igual en Python y en el navegador, con y sin el +10 % por niveles.
+    cel = [(mid, u, i, e, k, n) for mid, T in TABLAS.items() for u, U in T['usos'].items() for i in range(len(U['cal']))
+           for e in range(len(T['edades'])) for k in range(3) for n in (False, True)]
+    prog4 = ("global.window={};global.document={getElementById:function(){return null}};require(%s);var T=%s;"
+             "console.log(JSON.stringify(%s.map(function(x){return window.AuditorPredial.valorConstruccion(T[x[0]],x[1],x[2],x[3],x[4],x[5]);})));"
+             % (json.dumps(js), json.dumps(TABLAS), json.dumps(cel)))
+    r4 = subprocess.run(['node', '-e', prog4], capture_output=True, text=True)
+    nav4 = json.loads(r4.stdout or '[]')
+    if len(nav4) != len(cel):
+        mal += 1
+        print('✗ la tabla de valores no corrió en el navegador', r4.stderr[:300])
+    for x, n in zip(cel, nav4):
+        if valor_construccion(TABLAS[x[0]], *x[1:]) != n:
+            mal += 1
+            print('✗ tabla de valores', x, n)
+    if valor_construccion(TABLAS['zapopan'], 'hab', 2, 0, 0) != 8800:
+        mal += 1
+        print('✗ Zapopan, medio moderno bueno debe ser $8,800 por m²')
     if float(l3[1]) != valor_fiscal(160, 3250.5, 120, 6400, 0.85):
         mal += 1
         print('✗ valorFiscal', l3[1])
@@ -1370,8 +1450,8 @@ def prueba():
     if mal:
         print('%d diferencias en el simulador del predial' % mal)
         return 1
-    print('✓ Simulador del predial: %d municipios (%d leídos y en espera), %d casos iguales en Python y en el navegador; '
-          'la cobranza sigue a cada ley; el mandamiento de Zapopan cuadra ($2,337.62)' % (len(MUNICIPIOS), len(ESPERA), len(casos)))
+    print('✓ Simulador del predial: %d municipios (%d leídos y en espera), %d casos iguales en Python y en el navegador '
+          '(y %d celdas de tablas de valores); la cobranza sigue a cada ley; el mandamiento de Zapopan cuadra ($2,337.62)' % (len(MUNICIPIOS), len(ESPERA), len(casos), len(cel)))
     return 0
 
 

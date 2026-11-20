@@ -52,6 +52,11 @@
     var fc = t.fc > 0 ? t.fc : 1;
     return r2(t.ts * t.vs + t.tc * t.vc * fc);
   }
+  /* El valor unitario oficial de la tabla de valores del municipio (T), y +% si el edificio pasa de los niveles que dice. */
+  function valorConstruccion(T, uso, ical, iedad, iest, niveles) {
+    var v = T.usos[uso].cal[ical][1][iedad][iest];
+    return niveles ? r2(v * (1 + T.niveles.pct / 100)) : v;
+  }
   function cf2(v) { return '$' + Number(v).toLocaleString('es-MX', { minimumFractionDigits: 2 }); }
 
   /* x: {vf, tipo, ben, pago} */
@@ -239,7 +244,7 @@
     return (v < 0 ? '−' : '') + '$' + Math.abs(Number(v)).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
-  window.AuditorPredial = { bimestral: bimestral, base: base, calcula: calcula, adeudo: adeudo, inverso: inverso, valorFiscal: valorFiscal, contrasta: contrasta };
+  window.AuditorPredial = { bimestral: bimestral, base: base, calcula: calcula, adeudo: adeudo, inverso: inverso, valorFiscal: valorFiscal, valorConstruccion: valorConstruccion, contrasta: contrasta };
 
   var raiz = document.getElementById('cpRaiz');
   if (!raiz) return;
@@ -317,8 +322,34 @@
       }
       $('cpMulta').innerHTML = ops.join('');
     }
+    tabla(m);
     compara();
     return m;
+  }
+
+  /* Si el municipio tiene su tabla de valores integrada, el valor de construcción sale de ahí. */
+  function tabla(m) {
+    var T = m && D.tablas ? D.tablas[m.id] : null, caja = $('cpTabla');
+    caja.hidden = !T;
+    if (!T) return;
+    $('cpTablaTit').innerHTML = '<b>' + esc(m.nombre) + ' ya tiene su tabla de valores de construcción integrada</b> <span class="est-chip est-oficial">oficial</span>: elige tu construcción y el valor por m² se pone solo. ' +
+      'Fuente: <a href="' + esc(T.url) + '">' + esc(T.tx) + '</a>. ' + esc(T.suelo.nota) + ' <a href="' + esc(T.suelo.url) + '">' + esc(T.suelo.tx) + '</a>. ' + esc(T.demeritos.nota);
+    $('cpTUso').innerHTML = Object.keys(T.usos).map(function (k) { return '<option value="' + k + '">' + esc(T.usos[k].et) + '</option>'; }).join('');
+    $('cpTEdad').innerHTML = T.edades.map(function (e, i) { return '<option value="' + i + '">' + esc(e[1]) + '</option>'; }).join('');
+    $('cpTEst').innerHTML = T.estados.map(function (e, i) { return '<option value="' + i + '">' + esc(e) + '</option>'; }).join('');
+    calidades(T);
+    pintaTabla();
+  }
+  function calidades(T) {
+    var u = T.usos[$('cpTUso').value];
+    $('cpTCal').innerHTML = u.cal.map(function (c, i) { return '<option value="' + i + '"' + (c[0] === 'Medio' ? ' selected' : '') + '>' + esc(c[0]) + '</option>'; }).join('');
+  }
+  function pintaTabla() {
+    var m = ley($('cpEnt').value, $('cpMun').value), T = m && D.tablas ? D.tablas[m.id] : null;
+    if (!T) return;
+    var v = valorConstruccion(T, $('cpTUso').value, +$('cpTCal').value, +$('cpTEdad').value, +$('cpTEst').value, $('cpTNiv').checked);
+    $('cpVc').value = String(v);
+    $('cpTablaVal').innerHTML = 'Valor de construcción: <b>' + pesos(v) + ' por m²</b> <span class="est-chip est-oficial">oficial</span>' + ($('cpTNiv').checked ? ' (con +' + T.niveles.pct + ' %: ' + esc(T.niveles.art) + ')' : '') + '. Ya lo pusimos abajo.';
   }
 
   function compara() {
@@ -416,6 +447,11 @@
   $('cpSit').addEventListener('change', function () { $('cpMultaCaja').hidden = this.value === 'esp'; });
   $('cpMultaCaja').hidden = true;
   $('cpForm').addEventListener('submit', pinta);
+  ['cpTCal', 'cpTEdad', 'cpTEst', 'cpTNiv'].forEach(function (id) { $(id).addEventListener('change', pintaTabla); });
+  $('cpTUso').addEventListener('change', function () {
+    var m = ley($('cpEnt').value, $('cpMun').value);
+    if (m && D.tablas[m.id]) { calidades(D.tablas[m.id]); pintaTabla(); }
+  });
   $('cpVfUsa').addEventListener('click', function () {
     var t = { ts: num('cpTs'), vs: num('cpVs'), tc: num('cpTc') || 0, vc: num('cpVc') || 0, fc: num('cpFc') };
     if (!(t.ts > 0 && t.vs > 0) || (t.tc > 0 && !(t.vc > 0))) {
