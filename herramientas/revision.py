@@ -110,6 +110,7 @@ def main():
     revisiones.append(('autodiagnóstico de cumplimiento', lambda: corre('insp_cumplimiento.py', '--prueba')))
     revisiones.append(('matriz de riesgos documentales', lambda: corre('insp_riesgos.py', '--prueba')))
     revisiones.append(('simulador del predial', lambda: corre('cc_predial.py', '--prueba')))
+    revisiones.append(('simulador laboral', lambda: corre('cc_laboral.py', '--prueba')))
     if not a.rapida:
         revisiones.append(('preguntas del Auditor', lambda: corre('prueba_auditor.py')))
         revisiones.append(('la Enciclopedia en el Auditor', lambda: corre('cobertura_auditor.py')))

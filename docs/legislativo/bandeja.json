@@ -1,5 +1,5 @@
 {
- "actualizado": "17-11-2026",
+ "actualizado": "19-11-2026",
  "nota": "Lo que junta herramientas/vigia_legislativo.py del sumario del DOF y del índice de Leyes Federales Vigentes de la Cámara de Diputados, sin verificar: solo título, fecha y liga, nunca el texto de la reforma. Cada hallazgo queda «por cotejar» hasta que una persona lo revisa; los avisos dicen qué módulo de Auditavisión cita una reforma anterior a la vigente.",
  "fuentes": {
   "dof": "https://dof.gob.mx/sumario.xml",
@@ -339,6 +339,46 @@
  },
  "avisos": [
   {
+   "archivo": "herramientas/cc_inmueble.py",
+   "renglon": 11,
+   "ley": "lisr",
+   "nombre": "Ley del Impuesto sobre la Renta",
+   "cita": "01-04-2024",
+   "vigente": "13-11-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm"
+  },
+  {
+   "archivo": "herramientas/cc_inmueble.py",
+   "renglon": 52,
+   "ley": "lisr",
+   "nombre": "Ley del Impuesto sobre la Renta",
+   "cita": "01-04-2024",
+   "vigente": "13-11-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm"
+  },
+  {
+   "archivo": "herramientas/integrar_glosario_conservacion.py",
+   "renglon": 12,
+   "ley": "cff",
+   "nombre": "Código Fiscal de la Federación",
+   "cita": "14-11-2025",
+   "vigente": "09-04-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cff.htm"
+  },
+  {
+   "archivo": "herramientas/integrar_glosario_conservacion.py",
+   "renglon": 22,
+   "ley": "cff",
+   "nombre": "Código Fiscal de la Federación",
+   "cita": "14-11-2025",
+   "vigente": "09-04-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cff.htm"
+  },
+  {
    "archivo": "herramientas/integrar_glosario_registros.py",
    "renglon": 11,
    "ley": "cpeum",
@@ -357,6 +397,16 @@
    "vigente": "07-10-2026",
    "tipo": "vieja",
    "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpeum.htm"
+  },
+  {
+   "archivo": "herramientas/padron_sat.py",
+   "renglon": 37,
+   "ley": "lisr",
+   "nombre": "Ley del Impuesto sobre la Renta",
+   "cita": "01-04-2024",
+   "vigente": "13-11-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm"
   }
  ],
  "fallas": []

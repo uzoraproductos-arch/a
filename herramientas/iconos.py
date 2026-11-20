@@ -34,7 +34,7 @@ ICONOS = [
     ('🏛️', 'landmark', 'institución'), ('🔒', 'lock', 'candado'), ('📢', 'megaphone', 'aviso'),
     ('⚖️', 'scale', 'balanza'), ('🏗️', 'construction', 'obra'), ('🔗', 'link', 'enlace'),
     ('🔍', 'search', 'buscar'), ('🔎', 'search', 'buscar'), ('💰', 'piggy-bank', 'dinero'),
-    ('⚠️', 'triangle-alert', 'atención', 'ambar'), ('🗂️', 'folders', 'archivo'), ('💡', 'lightbulb', 'idea'),
+    ('⚠️', 'triangle-alert', 'atención', 'ambar'), ('🗂️', 'folders', 'archivo'), ('🗄️', 'archive', 'archivero'), ('💡', 'lightbulb', 'idea'),
     ('✏️', 'pencil', 'editar'), ('🧾', 'receipt', 'recibo'), ('🪐', 'orbit', 'órbita'),
     ('📜', 'scroll-text', 'documento'), ('🟢', 'circle', 'verde', 'verde r'), ('📊', 'chart-column', 'gráfica'),
     ('⏱️', 'timer', 'cronómetro'), ('🧭', 'compass', 'brújula'), ('📖', 'book-open', 'nota'),

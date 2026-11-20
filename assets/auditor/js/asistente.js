@@ -177,7 +177,7 @@
 
   /* El dictamen cívico independiente (antes «pericial»; pedido del autor, 23-10-2026): la respuesta del
      Auditor con su respaldo completo. Encabezado y pie llevan el sello. */
-  var ROMANO = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+  var ROMANO = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV'];
   function dictamenHtml(q, r, f, antes) {
     var t = TIPO[f.t] || ['📄', 'Ficha'], k = 0;
     function cap(tit) { return '<h3 class="dic-cap"><span>' + ROMANO[k++] + '.</span> ' + tit + '</h3>'; }
@@ -203,7 +203,7 @@
       '<p><b>Por qué falta:</b> ' + esc(f.pend.pq) + '</p>' +
       '<p><b>A quién le toca:</b> ' + esc(f.pend.quien) + '</p>' +
       '<p><b>Dónde debería estar:</b> <a href="' + esc(f.pend.donde) + '" target="_blank" rel="noopener noreferrer">' + esc(f.pend.donde_tx) + ' ↗</a></p></div>' : '';
-    var ir = r.ir || f.ir, m = modoVivo(), cm = MODO_ICO[m] ? capaModo(q, r, m) : null;
+    var ir = r.ir || f.ir, m = modoVivo(), cm = MODO_ICO[m] ? capaModo(q, r, m) : null, svDic = svDicHtml(q, r);
     var capa = cm && cm.html ? cm.html.replace(/<button\b[^>]*>[\s\S]*?<\/button>/g, '') : '';
     var resp = r.html.replace(/<details class="pa-dedonde"/g, '<details class="pa-dedonde" open');
     /* «De un vistazo» (16-11-2026): qué trae el dictamen antes de leerlo. Cuenta
@@ -248,6 +248,7 @@
         '<p class="dic-chico">La aplicación calcula con la base de la plataforma vigente, así que con el mismo enlace y la misma versión da el mismo resultado.</p>' : '') +
       (pend ? cap('Lo que falta') + pend : '') +
       (expCap ? cap('Expediente relacionado') + expCap : '') +
+      (svDic ? cap('Para ir más a fondo: el servicio') + svDic : '') +
       cap('Fundamento documental') + (fu ? '<ol class="dic-fuentes">' + fu + '</ol>' + (f.app && f.app.mas ? '<p class="dic-chico">Y ' + f.app.mas + ' documentos más, citados en la página de la aplicación.</p>' : '') : '<p>Esta respuesta no cita cifras: lleva a una página de la plataforma, donde cada dato trae su fuente.</p>') +
       cap('Método') + '<ol class="dic-metodo">' +
       '<li><b>Localización.</b> El Auditor buscó la respuesta en la base de la plataforma (' + B.fichas.length.toLocaleString('es-MX') + ' fichas), que solo guarda datos ya publicados con su documento.</li>' +
@@ -1212,6 +1213,8 @@
     if (!rfcs.length && /\b(antes de contratar\w*|debida diligencia)\b/.test(p)) return null;
     /* «¿Qué pasa si no le cobran la pena al contratista?» no busca a una empresa: lo contesta «Documentar para sancionar». */
     if (!rfcs.length && /\b(penas?|multas?|sancion\w*|incumpl\w*|no cumplio|clausulas?|pruebo|que documentos)\b/.test(p)) return null;
+    /* «Se venció mi contrato eventual» habla de un trabajo, no de un contrato público: lo contesta el simulador laboral. */
+    if (!rfcs.length && /\b(mi contrato|contrato (eventual|por tiempo|de trabajo|laboral)|me toca|finiquito|liquidacion)\b/.test(p)) return null;
     var nombre = p.trim().split(' ').filter(function (w) { return w.length > 1 && CMX_FUERA.indexOf(w) < 0; }).join(' ');
     if (rfcs.length && rfcs[0].length === 13) {
       return { html: '<p>🔒 <code>' + esc(rfcs[0]) + '</code> es el RFC de una <b>persona física</b>. La plataforma no publica a las personas físicas que le venden al gobierno: su RFC es un dato personal. Solo cuentan en los totales de cada institución.</p>' +
@@ -3002,15 +3005,36 @@
      respuesta lleva a una página que un servicio aprovecha (servicios_fichas.py), se
      ofrece el servicio, con su página y su cotización. Nunca un monto. */
   var SRV = (B.dat && B.dat.srv) || {};
-  function servicioHtml(r) {
+  function servicioHtml(r, q) {
     if (!r || r.plat) return '';
+    var pq = (q || r.q) ? '&pregunta=' + encodeURIComponent(String(q || r.q).slice(0, 600)) : '';
     var u = (r.app && r.app.url) || (r.ir && r.ir[0]) || (r.ficha && r.ficha.ir && r.ficha.ir[0]) || '';
     var b = sinParam(u), l = SRV[b];
     if (!b || /^servicios?(-|\.html)/.test(b) || !l || !l.length) return '';
     return '<div class="pa-srv"><p class="pa-srv-t"><span aria-hidden="true">🧰</span> Esto también lo hacemos como servicio</p><ul>' + l.map(function (x) {
       return '<li><a class="pa-srv-n" href="' + esc(x[4]) + '"><span aria-hidden="true">' + x[1] + '</span> <b>' + esc(x[2]) + '</b></a><small>' + esc(x[3]) + '</small>' +
-        '<a class="pa-srv-pide" href="servicios-cotiza.html?servicio=' + encodeURIComponent(x[0]) + '#solicitud">Pide una cotización ➔</a></li>';
+        '<a class="pa-srv-pide" href="servicios-cotiza.html?servicio=' + encodeURIComponent(x[0]) + pq + '#solicitud">Cotiza con tu pregunta ➔</a></li>';
     }).join('') + '</ul><p class="pa-chico">Lo básico lo haces tú, gratis, aquí en el chat. El servicio es para ir más a fondo: el costo y el plazo te llegan por escrito antes de empezar.</p></div>';
+  }
+  /* El servicio, también en el dictamen (pedido del autor, 19-11-2026: «que todo quede vinculado
+     al chat y a la generación del dictamen»): si la respuesta es un servicio o lleva a una página que
+     un servicio aprovecha, el dictamen cierra con él y su cotización ya lleva la pregunta. Nunca un
+     monto, y no entra a la huella. */
+  var SRVS = (B.dat && B.dat.srvs) || {};
+  function svDicHtml(q, r) {
+    if (!r || r.plat) return '';
+    var u = (r.app && r.app.url) || (r.ir && r.ir[0]) || (r.ficha && r.ficha.ir && r.ficha.ir[0]) || '';
+    var b = sinParam(u), m = /^servicio-([a-z]+)\.html$/.exec(b), l = [];
+    if (m && SRVS[m[1]]) l = [[m[1]].concat(SRVS[m[1]])];
+    else if (SRV[b]) l = SRV[b];
+    if (!l.length) return '';
+    return '<p>' + (m ? 'Esta respuesta describe un servicio de Auditavisión.' : 'Lo que respalda este dictamen también lo hacemos a fondo, por encargo:') + '</p><ul class="dic-srv">' +
+      l.map(function (x) {
+        return '<li><span aria-hidden="true">' + x[1] + '</span> <b>' + esc(x[2]) + '</b> · ' + esc(x[3]) + '. ' +
+          '<a href="servicio-' + esc(x[0]) + '.html">Ver el servicio ➔</a> · ' +
+          '<a href="servicios-cotiza.html?servicio=' + encodeURIComponent(x[0]) + '&pregunta=' + encodeURIComponent(String(q).slice(0, 600)) + '#solicitud">Cotiza con esta pregunta ➔</a></li>';
+      }).join('') + '</ul>' +
+      '<p class="dic-chico">El costo y el plazo llegan por escrito antes de empezar; aquí nunca va un monto. Este capítulo no forma parte de la huella del dictamen.</p>';
   }
   function respuesta0(q, previas) {
     /* Una liga que ya está en la hemeroteca abre su cotejo antes que cualquier palabra de su dirección
@@ -3256,7 +3280,7 @@
       if (r.anota && !ya) anota(q, 'sin');
       r.q = q;
       li.querySelector('.pa-burbuja').innerHTML = cabResp(r) + remiteHtml(q, r) + '<div class="pa-resp">' + esquema(r.html) + '</div>' + acciones(q, r, previas) +
-        servicioHtml(r) + expInvHtml(q, r) +
+        servicioHtml(r, q) + expInvHtml(q, r) +
         periodistaHtml(q, r) + capaModoHtml(q, r) +
         appDe(r) +
         panel(r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r))), '🧭', 'Explóralo a fondo') +

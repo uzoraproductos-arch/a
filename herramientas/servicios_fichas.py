@@ -160,6 +160,8 @@ FICHAS = {
             ('💰', 'Cuánto dinero es', 'Lo que baja de la Federación, lo que cobra el estado y lo que ingresan sus municipios.', 'planisferio-dinero.html', 'Gratis'),
             ('🧭', 'El Auditor de entes', 'El estado de cuenta, la salud financiera y el dictamen de cada estado y cada municipio.',
              'herramienta-inspector-entes.html', 'Gratis'),
+            ('🏡', 'El predial de tu municipio', 'El simulador del predial con la Ley de Ingresos de cada municipio ya cotejada.',
+             'herramienta-calculadora-predial.html', 'Nuevo'),
         ],
         'auditor': [('¿A quién le debe Nuevo León?', 'inspector'), ('Muéstrame el mapa de la deuda de los estados', 'inspector'),
                     ('¿Qué municipio recibe más?', 'ciudadano')],
@@ -196,6 +198,7 @@ FICHAS = {
             ('🔎', 'Lo que dejó la ASF', 'Las auditorías de cada estado y lo que quedó por aclarar.', 'herramienta-inspector-asf.html', 'Gratis'),
             ('🧭', 'Su estado de cuenta', 'Lo que le entra, lo que gasta y su salud financiera, en el Auditor de entes.', 'herramienta-inspector-entes.html', 'Gratis'),
             ('📋', 'Lo que falta por publicar', 'Cada pendiente con su porqué y quién lo debe.', 'pendientes.html', 'Gratis'),
+            ('🧮', 'Reparte el presupuesto', 'Para el taller: mueve el gasto de un ramo a otro y ve qué cambia.', 'simulador-presupuesto.html', 'Gratis'),
         ],
         'auditor': [('¿A quién le debe Nuevo León?', 'inspector'), ('¿Cuánto dejó por aclarar la ASF?', 'inspector')],
         'enciclopedia': [('numeros-cuentas-quien-autoriza-la-deuda.html', 'Quién autoriza la deuda'), ('datos-administracion-publica.html', 'La administración pública')],
@@ -240,6 +243,8 @@ FICHAS = {
             ('⚖️', 'Las 20 matrices de la ASF', 'Cómo documenta la ASF una irregularidad para que se pueda sancionar.', 'informes-documentar-para-sancionar.html', 'Gratis'),
             ('📈', 'El informe semestral de la ASF', 'Lo que ha recuperado, sancionado y denunciado, cada semestre.', 'informes-semestral-asf.html', 'Gratis'),
             ('🗂️', 'Casos reales para practicar', 'Los expedientes de control interno, con su bitácora y lo que falta.', 'expedientes-investigacion.html', 'Nuevo'),
+            ('🧮', 'Los simuladores en clase', 'La Calculadora Cívica: nómina, venta de un inmueble, bolsa y predial, cada paso con su artículo.',
+             'herramienta-calculadora.html', 'Gratis'),
         ],
         'auditor': [('¿Qué es el informe Documentar para sancionar?', 'inspector'), ('¿Cuántos funcionarios ha sancionado la ASF?', 'inspector')],
         'enciclopedia': [('aprende-auditoria.html', 'Cómo se audita'), ('aprende-fraude-en-numeros.html', 'El fraude en números')],
@@ -262,6 +267,58 @@ FICHAS = {
         'pal': r'licencia (de (las )?herramientas|institucional|para (mi|nuestra))|licenciar',
         'no': 'Una licencia no da control sobre lo que la plataforma publica.',
     },
+    # 20-11-2026, pedido del autor: «integra nuestros simuladores como servicios también».
+    'simulacion': {
+        'hace': [
+            ('🧾', 'Tu estado de cuenta cívico', 'Lo que ganaste, lo que te retuvieron y a dónde fue tu impuesto, en un solo documento con folio y huella.',
+             'herramienta-calculadora-ticket-estado.html', 'Gratis'),
+            ('🌱', 'Tu estado de cuenta ambiental', 'Lo que ya te cargaron a tu nombre: tu parte de la deuda, de sus intereses y del daño ambiental.',
+             'herramienta-ambiente-ticket.html', 'Gratis'),
+            ('💼', 'Tu nómina completa', 'Lo que te retienen (ISR y cuotas obreras) y lo que pone el patrón: IMSS e INFONAVIT en la empresa, '
+             'ISSSTE y FOVISSSTE en el gobierno, con el costo de la plaza y su artículo.', 'herramienta-calculadora-ticket-retienen.html', 'Nuevo'),
+            ('🤝', 'Tu finiquito o tu liquidación', 'Lo que te toca al terminar tu trabajo según la causa: vacaciones, aguinaldo, indemnización y prima '
+             'de antigüedad, con lo exento de ISR y la retención aproximada, cada renglón con su artículo de la LFT.', 'herramienta-calculadora-laboral.html', 'Nuevo'),
+            ('🏠', 'Vendes una casa o un terreno', 'El ISR de la ganancia con el factor del INPC, la exención de la casa habitación y el pago ante notario, '
+             'cada paso con su artículo.', 'herramienta-calculadora-inmueble.html', 'Nuevo'),
+            ('📈', 'Inviertes en la bolsa', 'El 10 % de los artículos 129 y 140 sobre tu ganancia y tus dividendos, y lo que el simulador no calcula.',
+             'herramienta-calculadora-bolsa.html', 'Nuevo'),
+            ('🏡', 'Tu impuesto predial', 'El predial con la Ley de Ingresos de tu municipio, si ya está cotejada, cada cifra con su artículo.',
+             'herramienta-calculadora-predial.html', 'Nuevo'),
+        ],
+        'auditor': [('Dame mi estado de cuenta cívico', 'ciudadano'), ('Mi estado de cuenta ambiental', 'ambientalista'),
+                    ('Me despidieron, ¿cuánto me toca de liquidación?', 'ciudadano'),
+                    ('Gano 15 mil al mes, ¿cuánto me retienen?', 'ciudadano'), ('Trabajo en el gobierno y gano 20 mil al mes, ¿cuánto me retienen?', 'ciudadano'), ('¿Cuánto ISR pago si vendo mi casa?', 'ciudadano'),
+                    ('¿Cuánto ISR pago si vendo acciones en la bolsa?', 'ciudadano'), ('¿Cuánto pago de predial en Zapopan?', 'ciudadano')],
+        'enciclopedia': [('herramienta-calculadora.html', 'La Calculadora Cívica'), ('numeros-herramientas-del-auditor.html', 'Las herramientas del Auditor')],
+        'glosario': ['ISR (Impuesto Sobre la Renta)', 'Retención del ISR (Tarifa del Artículo 96)', 'Cuota Obrera del IMSS', 'Cuota Patronal del IMSS', 'Cuotas al ISSSTE',
+                     'Costos Totales por Agotamiento y Degradación Ambiental',
+                     'Impuesto Predial', 'Inflación e INPC', 'UMA (Unidad de Medida y Actualización)'],
+        'refs': ['ref-lisr', 'ref-rmf2026', 'ref-lss', 'ref-lft', 'ref-cff'],
+        'pal': r'simulacion (fiscal|laboral|de nomina|de (mi|tu|su) caso)|simul\w* (mi|tu|su) caso|memoria de calculo|simulen',
+        'no': 'La cuenta es una aproximación hecha con la ley vigente: no es tu declaración ni sustituye a tu contador o a tu notario, y nunca la presentamos por ti.',
+    },
+    'escenarios': {
+        'hace': [
+            ('🧮', 'Reparte el presupuesto', 'Mueve el gasto de un ramo a otro y ve qué cambia, con las cifras del Presupuesto de Egresos.',
+             'simulador-presupuesto.html', 'Gratis'),
+            ('💱', 'La máquina del tiempo del peso', 'Una cifra de otro año traída a pesos de hoy con el INPC, con la operación a la vista.',
+             'radar-peso-maquina.html', 'Gratis'),
+            ('⏱️', 'Las megaobras en vivo', 'Lo que gana o pierde cada obra por industria, en el tiempo.', 'herramienta-megaobras-sector.html#ms-vivo', 'Gratis'),
+            ('👛', 'De la cifra a tu bolsillo', 'Lo que le toca a cada contribuyente de las megaobras y sus rescates.', 'herramienta-megaobras-cero.html#mcMesa3', 'Gratis'),
+            ('⏰', 'El reloj de la deuda', 'La deuda pública repartida en el tiempo y entre quienes la pagamos.', 'herramienta-calculadora-reloj.html', 'Gratis'),
+            ('🌱', 'Simulador de inversión ambiental', 'Qué se podría hacer con el dinero de una obra si se invirtiera en el ambiente.',
+             'herramienta-ambiente-inversion.html', 'Gratis'),
+        ],
+        'auditor': [('¿Cuánto valen 1,000 pesos de 2000 hoy?', 'ciudadano'), ('El reloj de la deuda', 'ciudadano'),
+                    ('¿Cuánto han costado las megaobras?', 'inspector')],
+        'enciclopedia': [('numeros-herramientas-del-auditor.html', 'Las herramientas del Auditor'),
+                         ('numeros-gasto-simulador-contable.html', 'En qué se gasta el presupuesto')],
+        'glosario': ['PEF (Presupuesto de Egresos de la Federación)', 'Pesos Corrientes vs. Pesos Constantes', 'Inflación e INPC',
+                     'Deuda Pública y SHRFSP', 'Sobrecosto', 'Gasto Público'],
+        'refs': ['ref-pef2026', 'ref-lfprh', 'ref-ldf', 'ref-banxico-sie'],
+        'pal': r'escenarios? (del|de un|de) (presupuesto|obras?|megaobras?|gasto|deuda)|que pasaria si|simulacion presupuestal',
+        'no': 'Un escenario es un ejercicio con cifras oficiales y supuestos que tú eliges: no predice, no recomienda y no califica a ningún gobierno.',
+    },
 }
 
 # Con qué palabras se pide una familia o un perfil: (clave de LINEAS o número
@@ -271,6 +328,7 @@ PAL_LINEA = {
     'electoral': r'temporada electoral|elecciones?|electoral|campanas?|candidat\w*',
     'formacion': r'formacion|ensenar|universidad\w*|alumnos',
     'investigacion': r'investigacion(es)? a la medida|instituciones?',
+    'simuladores': r'simuladores?|simulaciones?|simular',
 }
 PAL_PERFIL = [
     r'despachos? contables?|contador\w*|contaduria|fiscalistas?',

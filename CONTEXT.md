@@ -7522,3 +7522,53 @@ Pedido del autor: «intégralo y continúa con las dimensiones pendientes». Se 
 - **Vigía:** `vigia_legislativo.py` → `docs/legislativo/bandeja.json` (hallazgos por cotejar, índice de 35 leyes y avisos de citas viejas); flujo diario `vigia-legislativo.yml`; sección `marco-legal-tres-niveles.html#reformas-recientes` y ficha del chat. Primera corrida: 0 publicaciones del día sobre las leyes vigiladas y 8 avisos (LFRCF ×5, LIEPS ×2, LGPP).
 - **Lector:** octava aplicación del Modo Inspector, `herramienta-inspector-factura.html`; todo en el navegador, nada se sube. `actualizar_69b.py` conserva ahora la fecha de presunto y de definitivo de cada RFC (dos columnas al final; el CSV es el mismo, SHA-256 `54b95d41…`).
 - **Pendiente:** cotejar los 8 avisos contra el DOF y corregir cada módulo con su fecha (plataforma); el Senado, si un día publica un índice legible; la validación del sello digital y la consulta de vigencia (cancelación) de cada CFDI, que solo da el SAT.
+
+### 20-11-2026 · sello 20261120f · Los salarios caídos: apartado B y su ISR
+
+- **Pedido del autor:** «continuemos con salarios caídos».
+- **Hecho:** apartado B con escenario de salarios caídos sin tope y sin interés (LFTSE, art. 43, fr. III y IV; `SCJN`: 2a./J. 34/2017, transcrita en la Gaceta de octubre de 2022, huella `1f324f18…`); ISR de los vencidos o caídos con la mecánica del art. 95 de la LISR y sin exención (`SCJN_ISR`: tesis 2a. XXVIII/2017, transcrita en el ADR 503/2022, huella `7812c264…`). El Semanario Judicial (sjf2.scjn.gob.mx) rechaza las descargas automáticas; por eso se cotejó en documentos de la SCJN que transcriben las tesis.
+- **Lecturas nuestras:** sin exención del art. 93, fr. XIII (hay criterios encontrados, entre ellos una jurisprudencia de Pleno de Circuito que no se pudo cotejar en su fuente); los caídos del B con el salario mensual × meses.
+- **Pendiente:** el ISR de los intereses del art. 48; la indemnización del apartado B (la fija el laudo); cotejar en el Semanario la jurisprudencia de Pleno de Circuito sobre la exención (PC.XXX. J/31 A, según fuentes secundarias).
+
+### 20-11-2026 · sello 20261120e · El simulador laboral: subsidio, juicio, reparto de utilidades y apartado B
+
+- **Pedido del autor:** «continúa con los pendientes a calcular».
+- **Hecho:** en `cc_laboral.py` y `cc-laboral.js` (gemelos): el subsidio para el empleo (decreto DOF 31-12-2025, `SUBSIDIO`, huella `c2ff9053…` del texto del SIDOF; lee `subsidio_empleo` de la base), los salarios vencidos y sus intereses como escenario (`mj`, LFT art. 48), el reparto de utilidades con los datos del proyecto de la comisión mixta (`ptu*`, arts. 122 a 127, LISR art. 93 fr. XIV, RLISR art. 174) y el apartado B (`reg=B`, `LFTSE`, huella `2055ea67…`). La página acepta `?mj=` y `?reg=B`; el chat lo abre con «salarios caídos», «cuánto me toca de utilidades», «finiquito de burócrata». `--prueba`: 27 casos.
+- **Lecturas nuestras (dichas en la página):** el subsidio completo del mes contra la retención de lo ordinario; los vencidos con el salario integrado y el interés simple («capitalizable al momento del pago»); la proporción por días del aguinaldo B (el art. 42 Bis deja la norma al Ejecutivo); el tope del reparto como 90 días de cuota diaria.
+- **Pendiente:** en el apartado B, la indemnización, las vacaciones no disfrutadas y los quinquenios (los fija el laudo); los trabajadores de estados y municipios (ley de cada estado); el porcentaje de enero del subsidio (15.59 % con la UMA de 2025), que la base no trae; contratos por tiempo u obra determinados (art. 50, fr. I) y plataformas digitales (fr. IV).
+
+### 20-11-2026 · sello 20261120c · El simulador laboral: tu finiquito o tu liquidación
+
+- **Pedido del autor:** «integralo y construye el simulador laboral».
+- **Hecho:** `cc_laboral.py` + `cc-laboral.js` (gemelos, `--prueba` con 17 casos en `revision.py`), novena aplicación de la Calculadora Cívica (`cclaboral`). Cotejado contra la LFT (DOF 14-05-2026, huella `12f09393…`), la LISR (`803c2875…`), el RLISR (`0538fd2f…`) y la CPEUM (transitorio tercero de la desindexación, `cefb525a…`). Lecturas nuestras dichas en la página: años de 365 días, último año en proporción, mes de 30 días, salario integrado con aguinaldo y prima vacacional, y el salario y las vacaciones tasados como todo el ingreso del mes, sin subsidio.
+- **Pendiente:** salarios vencidos e intereses (dependen del juicio), reparto de utilidades (depende de la declaración de la empresa), contratos por tiempo u obra determinados (art. 50, fr. I), plataformas digitales (fr. IV) y el apartado B; el subsidio para el empleo en la retención.
+
+### 20-11-2026 · sello 20261120b · La Simulación de tu caso, con estados de cuenta y nómina
+
+- **Pedido del autor:** «en el simulador también me refería al estado de cuenta cívico, ambiental, nómina, predial, laboral».
+- **Hecho:** `simulacion` → «Simulación de tu caso»; su `hace` abre con el estado de cuenta cívico (`herramienta-calculadora-ticket-estado.html`), el ambiental (`herramienta-ambiente-ticket.html`) y la nómina completa; preguntas del Auditor del modo Ciudadano y Ambientalista; glosario con la cuota obrera y el costo ambiental; la LFT en sus referencias.
+- **Pendiente (plataforma):** un simulador laboral (finiquito, liquidación, aguinaldo, vacaciones y PTU) cotejado con la LFT y el art. 93 de la LISR; hasta entonces el servicio no lo ofrece.
+
+### 20-11-2026 · sello 20261120a · Los simuladores, como servicios
+
+- **Pedido del autor:** «integra nuestros simuladores como servicios también».
+- **Hecho:** quinta familia `simuladores` («Simuladores a tu medida») con `simulacion` (Calculadora Cívica: retenciones y costo de la plaza, inmueble, bolsa, predial, estado de cuenta cívico) y `escenarios` (Reparte el presupuesto, máquina del tiempo del peso, megaobras en vivo y en tu bolsillo, reloj de la deuda, inversión ambiental). `COBRO`, `FICHAS` (glosario y referencias de la base), `SV_EJEMPLOS`, `PAL_LINEA`, `IND_FAMILIA` («Quien encarga»), `SV_TONO` y las puertas de la portada. Los simuladores también en `hace` de radiografía, entrega y capacitación, y en cinco perfiles.
+- **Probado:** el chat contesta «servicio de …» con cada página y ofrece la simulación bajo «¿Cuánto ISR pago si vendo mi casa?»; el dictamen de los escenarios cierra con su servicio; sin errores de consola. 561 preguntas.
+- **Pendiente:** ninguno nuevo. Los simuladores de megaobras y de presupuesto no tienen aún un formato de «memoria de escenario» descargable: hoy el entregable se arma por encargo.
+
+### 19-11-2026 · sello 20261119r · Servicios: tarjeta única, todo por el chat y el dictamen
+
+- **Pedido del autor:** «evalúa, verifícame, actualízame y rediséñame la pestaña de servicios homologando las tarjetas y que todo quede vinculado al chat y a la generación del dictamen», y después: «que quede integrado todos los servicios con las herramientas… [nómina, despapelizar]… contratas un servicio, se lo montas al chat y el chat manda el dictamen, la respuesta técnica».
+- **Evaluación:** cinco estilos de tarjeta en el tablero (puertas, novedades, tablero, vistazo, módulos); veinte novedades antes del tablero; el 🗄️ de Gobernanza sin ícono; el pie de `servicios.html` heredado del Modo Inspector («Aplicación anterior: Nepotismo»); el dictamen no decía nada de los servicios; las tarjetas de servicio no llevaban al chat ni al dictamen.
+- **Hecho:** `sv_card()` (una tarjeta), `sv_acciones()` (cuatro puertas), `sv_apps()` (aplicaciones de cada servicio, de su `hace`), `sv_monta()` (la aplicación principal que el chat abre al cotizar), el capítulo «Para ir más a fondo: el servicio» del dictamen (`svDicHtml()`, con `dat.srvs`) y la cotización con la pregunta desde el chat y el dictamen. Nómina (lo de BUK) y Gobernanza documental (lo de «despapelizar») ya eran servicios con sus aplicaciones; ahora se ven y se montan igual que los demás.
+- **Probado:** los 13 dictámenes «servicio de <nombre>» se arman con el capítulo del servicio; 12 de 13 servicios montan su aplicación en el chat y en el dictamen (Revisión documental usa el chat mismo); `revision.py`: 18 de 18.
+- **Pendiente:** ninguno nuevo. El enlace del dictamen no lleva el servicio cotizado (sería un parámetro nuevo): el capítulo lista los servicios que aprovechan la página de la respuesta, que suelen incluirlo.
+
+### 20-11-2026 · sello 20261120h · El tipo de contrato: eventual y plataformas digitales
+
+- **Pedido del autor:** «continúa con los pendientes».
+- **Hecho:** `TIPOS` de `cc_laboral.py` (indeterminado, eventual, plataforma; solo apartado A) y la causa `vence`. Eventual: art. 50, fr. I, en lugar de la fr. II, con los tres meses de la fr. III además; el reparto, con sesenta días o más (art. 127, fr. VII). Plataforma: sin finiquito (art. 291-F), tres meses del promedio de lo ingresado en seis meses (art. 291-N), y la nota de la terminación a los treinta días sin actividad (art. 291-C), la reinstalación solo por derechos colectivos (art. 49, fr. VI) y el reparto con más de 288 horas (art. 127, fr. IX). Cotejado contra la LFT de la Cámara de Diputados (última reforma DOF 14-05-2026, la misma huella `12f09393…`).
+- **Lecturas nuestras (derivado):** los «seis meses» como 180 días y los años que siguen al primero en proporción; los «tres meses» de una plataforma como la mitad de lo ingresado en seis meses.
+- **En espera (`espera` de `calcula()`, la ley no lo dice claro):** la prima de antigüedad de un eventual o de una plataforma (el art. 162 la da «a los trabajadores de planta»; no se encontró jurisprudencia cotejable); en plataformas, los veinte días por año (cómo volver el tiempo efectivamente laborado en años), los salarios vencidos (cuál es el salario de un día) y el ISR (los años de servicio de la exención).
+- **El chat:** «se venció mi contrato…» ya no abre ComprasMX (`contratosCmx()` suelta «mi contrato», «finiquito», «me toca»…); frases nuevas en `ALIAS_APPS`.
+- **Pendiente:** la obra determinada (el art. 50 no la nombra); lo que quedó en espera; el ISR de los intereses del art. 48; la indemnización del apartado B; trabajadores de estados y municipios; el subsidio de enero; cotejar PC.XXX. J/31 A en el Semanario.

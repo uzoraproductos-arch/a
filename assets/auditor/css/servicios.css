@@ -301,6 +301,7 @@
 .sv-hub-modulos { --sv-c: #1f6b3a; --sv-f: #e6f4ea; }
 .sv-hub-cobro { --sv-c: #8a5a00; --sv-f: #fdf3dc; }
 .sv-hub-calendario { --sv-c: #0b6e7a; --sv-f: #e2f4f6; }
+.sv-hub-simula { --sv-c: #00658f; --sv-f: #e1f2fa; }
 .sv-hub-preguntas { --sv-c: #4a5a6a; --sv-f: #eef1f4; }
 .sv-hub-solicitud { --sv-c: #0b2a63; --sv-f: #dfe7f5; }
 .sv-vista { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
@@ -364,3 +365,67 @@
 .sv-fx-acc .sz-btn-of { background: #1d4fa3; color: #fff; }
 [data-theme="dark"] .sv-fx-acc .sz-btn { background: transparent; color: #9cc0ff; border-color: #9cc0ff; }
 [data-theme="dark"] .sv-fx-acc .sz-btn-of { background: #f2b63d; color: #101a2c; border-color: #f2b63d; }
+
+/* La tarjeta única de Servicios (pedido del autor, 19-11-2026: «homologando
+   las tarjetas»). Ícono en su caja, etiqueta arriba a la derecha, título,
+   texto y, al pie, la liga o las cuatro puertas: el servicio, el Auditor, su
+   dictamen y su cotización. El color sale de la familia (--sv-c, --sv-f). */
+.sv-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.sv-cards4 { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.sv-card { position: relative; display: flex; flex-direction: column; gap: 8px; min-width: 0; min-height: 44px; padding: 18px; border-radius: 20px; background: #fff; border: 1px solid #dfe5f0; border-top: 5px solid var(--sv-c, #1d4fa3); text-decoration: none; color: #33415c; line-height: 1.45; transition: transform .15s, box-shadow .15s; }
+a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card:focus-within { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(11,42,99,.14); border-color: var(--sv-c, #1d4fa3); }
+.sv-card:target { outline: 3px solid #f0b429; outline-offset: 4px; }
+.sv-card-cab { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.sv-card-ico { display: inline-flex; flex: none; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 14px; background: var(--sv-f, #e8efff); color: var(--sv-c, #1d4fa3); font-size: 24px; }
+.sv-card-chip { padding: 3px 10px; border-radius: 999px; background: #f3f6fc; color: #5a6782; font-size: 14px; font-weight: 700; line-height: 1.3; text-align: right; }
+.sv-card-tit { font-size: 19px; color: #0b2a63; line-height: 1.25; }
+.sv-card-tit a { color: inherit; text-decoration: none; }
+.sv-card-tit a:hover { text-decoration: underline; }
+.sv-card-tx { font-size: 16px; }
+.sv-card .sv-dl { margin: 2px 0 0; font-size: 15px; }
+.sv-card .sv-acceso { align-self: flex-start; }
+.sv-card .sv-nuevo-en { font-size: 14px; }
+.sv-card-ir { margin-top: auto; font-weight: 800; color: var(--sv-c, #1d4fa3); }
+.sv-card-acc { margin-top: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding-top: 6px; }
+.sv-card-b { display: flex; gap: 6px; align-items: center; justify-content: center; min-height: 44px; padding: 6px 10px; border-radius: 12px; border: 1.5px solid #c9d4e6; background: #f6f9fe; color: #0b2a63; font-size: 15px; font-weight: 700; text-align: center; text-decoration: none; line-height: 1.2; }
+.sv-card-b:hover, .sv-card-b:focus-visible { border-color: var(--sv-c, #1d4fa3); background: var(--sv-f, #e8efff); }
+.sv-card-b-of { grid-column: 1 / -1; background: var(--sv-c, #1d4fa3); border-color: var(--sv-c, #1d4fa3); color: #fff; }
+.sv-card-b-of:hover, .sv-card-b-of:focus-visible { background: #0b2a63; border-color: #0b2a63; color: #fff; }
+.sv-card-acc .sv-card-b:only-child { grid-column: 1 / -1; }
+.sv-fam-tit { margin: 22px 0 10px; font-weight: 800; font-size: 18px; }
+.sv-fam-tit:first-child { margin-top: 0; }
+.sv-fam-tit a { display: inline-flex; gap: 8px; align-items: center; min-height: 44px; color: var(--sv-c, #0b2a63); text-decoration: none; }
+.sv-lineas .sv-cards { margin-top: 10px; }
+.sv-mas { margin-top: 14px; }
+.sv-mas > summary { display: inline-flex; align-items: center; min-height: 44px; padding: 6px 16px; border-radius: 999px; border: 1.5px solid #c9d4e6; background: #f6f9fe; color: #0b2a63; font-weight: 700; cursor: pointer; }
+.sv-mas[open] > summary { margin-bottom: 14px; }
+/* Del chat al servicio: los cuatro pasos y la caja de pregunta. */
+.sv-ruta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 0 0 16px; padding: 0; list-style: none; counter-reset: none; }
+.sv-ruta .sv-card { --sv-c: #0b2a63; --sv-f: #dfe7f5; }
+.sv-preg { display: grid; gap: 8px; padding: 18px; border-radius: 20px; background: linear-gradient(135deg, #0b2a63, #1d4fa3); color: #fff; }
+.sv-preg label { font-weight: 800; font-size: 18px; }
+.sv-preg-fila { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 8px; }
+.sv-preg input, .sv-preg select { min-height: 48px; border-radius: 12px; border: 0; padding: 8px 14px; font: 16px 'Inter', system-ui, sans-serif; color: #0b2a63; background: #fff; min-width: 0; }
+.sv-preg .sz-btn { min-height: 48px; }
+.sv-preg-ej { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 4px 0 0; }
+.sv-preg-ej > span { font-weight: 600; }
+.sv-preg-ej .sv-op { text-decoration: none; }
+@media (max-width: 1000px) { .sv-cards, .sv-cards4, .sv-ruta { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) {
+  .sv-cards, .sv-cards4, .sv-ruta { grid-template-columns: 1fr; }
+  .sv-preg-fila { grid-template-columns: 1fr; }
+}
+[data-theme="dark"] .sv-card { background: #16233a; border-color: #2a3b57; border-top-color: var(--sv-c, #9cc0ff); color: #d5deef; }
+[data-theme="dark"] .sv-card-tit, [data-theme="dark"] .sv-fam-tit a { color: #e8eefa; }
+[data-theme="dark"] .sv-card-chip { background: #1d2740; color: #b7c3d9; }
+[data-theme="dark"] .sv-card-ir { color: #9cc0ff; }
+[data-theme="dark"] .sv-card-b, [data-theme="dark"] .sv-mas > summary { background: #1d2740; border-color: #2a3b57; color: #e8eefa; }
+[data-theme="dark"] .sv-card-b-of { background: #f2b63d; border-color: #f2b63d; color: #101a2c; }
+.sv-fx-acc .sz-btn, .sv-preg .sz-btn { display: inline-flex; align-items: center; gap: 6px; }
+.sv-monta { margin: 14px 0; padding: 16px 18px; border-radius: 18px; border: 1px solid #c9d9ee; border-left: 6px solid #1d4fa3; background: #f3f7ff; }
+.sv-monta-t { margin: 0 0 6px; font-weight: 800; font-size: 18px; color: #0b2a63; }
+.sv-monta-acc { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 4px; }
+[data-theme="dark"] .sv-monta { background: #16233a; border-color: #2a3b57; border-left-color: #9cc0ff; color: #e8eefa; }
+[data-theme="dark"] .sv-monta-t { color: #e8eefa; }
+.sv-card-apps { font-size: 14px; color: #5a6782; line-height: 1.4; }
+[data-theme="dark"] .sv-card-apps { color: #b7c3d9; }

@@ -570,7 +570,9 @@ def _charla(d):
             # Agenda del erario de Noticias (28-10-2026): las fechas que fija la ley.
             'agenda': __import__('noticias').AGENDA,
             # Las aplicaciones del chat son servicios (19-11-2026): qué servicio aprovecha cada página.
-            'srv': _servicios_chat()}
+            'srv': _servicios_chat(),
+            # Cada servicio, para el capítulo «el servicio» del dictamen (19-11-2026): ícono, nombre y forma de cobro. Nunca un monto.
+            'srvs': {x[0]: [x[1], x[2], __import__('apartados').COBRO[x[0]]] for x in __import__('apartados').SERVICIOS}}
 
 
 def _servicios_chat():
@@ -622,6 +624,13 @@ ALIAS_APPS = {
                          'cumplimiento documental', 'cumplo con la lfpdppp', 'cumplo con datos personales'],
     'inspriesgos': ['matriz de riesgos documentales', 'mapa de riesgos documentales', 'riesgos documentales', 'riesgos de mis papeles',
                     'por donde empiezo a cumplir', 'que atiendo primero', 'priorizar el cumplimiento'],
+    'cclaboral': ['finiquito', 'liquidacion laboral', 'mi liquidacion', 'me corrieron', 'me despidieron', 'me van a correr', 'me quieren correr',
+                  'despido injustificado', 'renuncie', 'voy a renunciar', 'quiero renunciar', 'si renuncio', 'prima de antiguedad',
+                  'aguinaldo proporcional', 'vacaciones proporcionales', 'indemnizacion por despido', 'simulador laboral', 'cuanto me toca de liquidacion',
+                  'salarios caidos', 'salarios vencidos', 'cuanto me toca de utilidades', 'cuanto me toca de ptu', 'mi reparto de utilidades',
+                  'calcula mi ptu', 'finiquito de burocrata', 'liquidacion de burocrata', 'finiquito apartado b',
+                  'contrato por tiempo determinado', 'contrato eventual', 'se vencio mi contrato', 'termino mi contrato', 'finiquito eventual',
+                  'repartidor de plataforma', 'liquidacion de repartidor', 'finiquito de uber', 'me desactivaron de la plataforma', 'me dieron de baja de la app'],
     'ccpredial': ['predial', 'impuesto predial', 'pago del predial', 'pagar el predial', 'calcula mi predial', 'cuanto pago de predial', 'simulador del predial', 'debo predial', 'adeudo de predial', 'mandamiento de ejecucion', 'requerimiento de pago del predial', 'recargos del predial', 'valor fiscal', 'valor catastral'],
     'simulador-presupuesto.html': ['reparte el presupuesto', 'simulador del presupuesto'],
     'radar-estado-de-cuenta.html': ['estado de cuenta administrativo'],

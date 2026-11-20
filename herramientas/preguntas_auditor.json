@@ -3014,6 +3014,106 @@
   {
    "q": "¿Cuánto es el predial de una casa en Tequila?",
    "ir": "herramienta-calculadora-predial.html?mun=tequila"
+  },
+  {
+   "q": "servicio de revisión de un proveedor",
+   "ir": "servicio-diligencia.html"
+  },
+  {
+   "q": "servicio de revisión de tu cartera de contrapartes",
+   "ir": "servicio-contrapartes.html"
+  },
+  {
+   "q": "servicio de vigía y seguimiento periódico",
+   "ir": "servicio-seguimiento.html"
+  },
+  {
+   "q": "servicio de revisión de facturas por lote",
+   "ir": "servicio-facturas.html"
+  },
+  {
+   "q": "servicio de revisión de nómina",
+   "ir": "servicio-nomina.html"
+  },
+  {
+   "q": "servicio de gobernanza documental y cumplimiento",
+   "ir": "servicio-gobernanza.html"
+  },
+  {
+   "q": "servicio de radiografía de tu municipio o de tu estado",
+   "ir": "servicio-radiografia.html"
+  },
+  {
+   "q": "servicio de licencia de temporada para redacciones",
+   "ir": "servicio-temporada.html"
+  },
+  {
+   "q": "servicio de lo que recibes: kit de entrega-recepción",
+   "ir": "servicio-entrega.html"
+  },
+  {
+   "q": "servicio de revisión documental puntual",
+   "ir": "servicio-revision.html"
+  },
+  {
+   "q": "servicio de expediente de investigación",
+   "ir": "servicio-expediente.html"
+  },
+  {
+   "q": "servicio de talleres y capacitación",
+   "ir": "servicio-capacitacion.html"
+  },
+  {
+   "q": "servicio de licencia de las herramientas",
+   "ir": "servicio-licencia.html"
+  },
+  {
+   "q": "servicio de simulación de tu caso",
+   "ir": "servicio-simulacion.html"
+  },
+  {
+   "q": "servicio de escenarios del presupuesto y de las obras",
+   "ir": "servicio-escenarios.html"
+  },
+  {
+   "q": "Quiero una simulación fiscal de mi caso",
+   "ir": "servicio-simulacion.html"
+  },
+  {
+   "q": "¿Qué servicios de simuladores tienen?",
+   "ir": "servicios-catalogo.html#fam-simuladores"
+  },
+  {
+   "q": "Me despidieron, ¿cuánto me toca de liquidación?",
+   "ir": "herramienta-calculadora-laboral.html"
+  },
+  {
+   "q": "¿Cuánto me toca de finiquito si renuncio?",
+   "ir": "herramienta-calculadora-laboral.html"
+  },
+  {
+   "q": "Simulador laboral",
+   "ir": "herramienta-calculadora-laboral.html"
+  },
+  {
+   "q": "¿Cuántos salarios caídos me tocan si voy a juicio?",
+   "ir": "herramienta-calculadora-laboral.html"
+  },
+  {
+   "q": "¿Cuánto me toca de utilidades?",
+   "ir": "herramienta-calculadora-laboral.html"
+  },
+  {
+   "q": "Finiquito de burócrata",
+   "ir": "herramienta-calculadora-laboral.html"
+  },
+  {
+   "q": "Se venció mi contrato eventual, ¿cuánto me toca?",
+   "ir": "herramienta-calculadora-laboral.html"
+  },
+  {
+   "q": "Soy repartidor y me dieron de baja de la app",
+   "ir": "herramienta-calculadora-laboral.html"
   }
  ]
 }
