@@ -3054,6 +3054,22 @@
   {
    "q": "servicio de licencia de las herramientas",
    "ir": "servicio-licencia.html"
+  },
+  {
+   "q": "servicio de simulación fiscal de tu caso",
+   "ir": "servicio-simulacion.html"
+  },
+  {
+   "q": "servicio de escenarios del presupuesto y de las obras",
+   "ir": "servicio-escenarios.html"
+  },
+  {
+   "q": "Quiero una simulación fiscal de mi caso",
+   "ir": "servicio-simulacion.html"
+  },
+  {
+   "q": "¿Qué servicios de simuladores tienen?",
+   "ir": "servicios-catalogo.html#fam-simuladores"
   }
  ]
 }

@@ -301,6 +301,7 @@
 .sv-hub-modulos { --sv-c: #1f6b3a; --sv-f: #e6f4ea; }
 .sv-hub-cobro { --sv-c: #8a5a00; --sv-f: #fdf3dc; }
 .sv-hub-calendario { --sv-c: #0b6e7a; --sv-f: #e2f4f6; }
+.sv-hub-simula { --sv-c: #00658f; --sv-f: #e1f2fa; }
 .sv-hub-preguntas { --sv-c: #4a5a6a; --sv-f: #eef1f4; }
 .sv-hub-solicitud { --sv-c: #0b2a63; --sv-f: #dfe7f5; }
 .sv-vista { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
@@ -370,7 +371,7 @@
    texto y, al pie, la liga o las cuatro puertas: el servicio, el Auditor, su
    dictamen y su cotización. El color sale de la familia (--sv-c, --sv-f). */
 .sv-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
-.sv-cards4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.sv-cards4 { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
 .sv-card { position: relative; display: flex; flex-direction: column; gap: 8px; min-width: 0; min-height: 44px; padding: 18px; border-radius: 20px; background: #fff; border: 1px solid #dfe5f0; border-top: 5px solid var(--sv-c, #1d4fa3); text-decoration: none; color: #33415c; line-height: 1.45; transition: transform .15s, box-shadow .15s; }
 a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card:focus-within { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(11,42,99,.14); border-color: var(--sv-c, #1d4fa3); }
 .sv-card:target { outline: 3px solid #f0b429; outline-offset: 4px; }
