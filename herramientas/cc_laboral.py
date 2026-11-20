@@ -50,9 +50,19 @@ el salario integrado con aguinaldo y prima vacacional, y que el salario y las
 vacaciones se tasan como si fueran todo el ingreso del mes, sin el subsidio
 para el empleo (ya no: ver la segunda entrega). **No es asesoría legal ni un
 convenio**: lo que vale es lo que pacten ante el Centro de Conciliación o
-resuelva el Tribunal. No aplica a contratos por
-tiempo u obra determinados (art. 50, fr. I), ni a plataformas digitales (fr.
-IV), ni a quien trabaja para un estado o un municipio. `calcula()` y la de `cc-laboral.js` son gemelas (`--prueba`).
+resuelva el Tribunal. No aplica a contratos por obra determinada (el art. 50
+no los nombra) ni a quien trabaja para un estado o un municipio.
+
+Tercera entrega (20-11-2026, «continúa con los pendientes»): el tipo de
+contrato (`TIPOS`). El eventual (art. 50, fr. I): la mitad de los salarios
+del tiempo trabajado si fue menos de un año, o seis meses y veinte días por
+año siguiente, en lugar de la fr. II; la causa `vence` (art. 53, fr. III); el
+reparto con sesenta días o más (art. 127, fr. VII). La plataforma digital
+(art. 50, fr. IV): sin finiquito (art. 291-F) y tres meses del promedio de
+seis meses (art. 291-N). **Una ley ambigua no se interpreta para sacar una
+cifra**: la prima de antigüedad fuera de planta (art. 162), y en plataformas
+los veinte días por año del «tiempo efectivamente laborado», los vencidos y el
+ISR van en `espera`, con su porqué, y no se suman. `calcula()` y la de `cc-laboral.js` son gemelas (`--prueba`).
 Lo llama apartados.insp_nativa() (INSP_NATIVAS['cclaboral']).
 """
 import datetime
@@ -98,6 +108,13 @@ CAUSAS = [
     ('justificado', 'Me despidieron con una causa del art. 47', 'LFT, art. 47; prima de antigüedad (art. 162, fr. III)'),
     ('injustificado', 'Me despidieron sin causa y pido la indemnización', 'LFT, art. 48: tres meses de salario y prima de antigüedad'),
     ('sin_reinstalar', 'El patrón no me reinstala, o yo rescindí por su culpa', 'LFT, arts. 49 a 52: tres meses, veinte días por año y prima de antigüedad'),
+    ('vence', 'Se acabó el plazo de mi contrato (o, en una plataforma, pasé 30 días sin actividad)', 'LFT, art. 53, fr. III, y art. 291-C: termina sin indemnización'),
+]
+# Tipo de contrato (solo apartado A). La obra determinada no entra: el art. 50 no la nombra.
+TIPOS = [
+    ('ind', 'Por tiempo indeterminado (de planta)', 'LFT, art. 50, fr. II'),
+    ('det', 'Por tiempo determinado (eventual)', 'LFT, arts. 37 y 50, fr. I'),
+    ('plat', 'Trabajo en una plataforma digital (reparto, transporte)', 'LFT, arts. 291-A a 291-U y 50, fr. IV'),
 ]
 EJEMPLO = {'ing': '2019-03-01', 'sal': '2026-11-15', 'sd': 600, 'zona': 'gen', 'agd': 15, 'pv': 25, 'vacPend': 0, 'vacTom': 0, 'dp': 15,
            'causa': 'injustificado', 'agPag': False}
@@ -115,7 +132,7 @@ def datos(base):
     return {'uma': p['uma']['diaria'], 'umam': p['uma']['mensual'], 'sub': {'pct': se['pct_uma'], 'tope': se['tope_ingreso_mensual']},
             'sm': {'gen': p['salario_minimo']['general'], 'fro': p['salario_minimo']['frontera_norte']},
             'tarifa': [[r['li'], r['ls'], r['cf'], r['pct']] for r in tm['renglones']],
-            'causas': [[c[0], c[1], c[2]] for c in CAUSAS],
+            'causas': [[c[0], c[1], c[2]] for c in CAUSAS], 'tipos': [list(t) for t in TIPOS],
             'f': {'uma': p['uma']['fuente'], 'sm': p['salario_minimo']['fuente'], 'tarifa': '%s (%s)' % (tm['ley'], tm['fuente']), 'sub': se['fuente']}}
 
 
@@ -155,23 +172,30 @@ def calcula(D, x):
     comp = int(dias // 365)
     dcur = dias - comp * 365
     B = (x.get('reg') or 'A') == 'B'
+    tipo = 'ind' if B else (x.get('tipo') or 'ind')
+    P = tipo == 'plat'
+    if P:
+        # Plataformas: el salario es el promedio de lo ingresado en los últimos seis meses (art. 291-N).
+        sd = float(x.get('p6') or 0) / 6.0 / 30.0
     agd, pv = float(x.get('agd') or (40 if B else 15)), float(x.get('pv') or (30 if B else 25))
     vac_anio = 20 if B else vac_tabla(comp + 1)
     sdi = sd * (1 + (agd + vac_anio * pv / 100.0) / 365.0)
-    r = {'dias': dias, 'anios': anios, 'sdi': sdi, 'vac_anio': vac_anio, 'conc': [], 'reg': 'B' if B else 'A'}
+    if P:
+        sdi = sd  # el pago por tarea ya trae lo proporcional de aguinaldo, vacaciones y prima (art. 291-F)
+    r = {'dias': dias, 'anios': anios, 'sdi': sdi, 'vac_anio': vac_anio, 'conc': [], 'reg': 'B' if B else 'A', 'tipo': tipo, 'espera': []}
     c = r['conc']
     # Finiquito: lo que se debe siempre.
-    dp = float(x.get('dp') or 0)
+    dp = 0.0 if P else float(x.get('dp') or 0)
     if dp > 0:
         c.append(['salario', 'Días de salario que no te han pagado (%g × salario diario)' % dp, dp * sd, 'LFTSE, arts. 32 y 43' if B else 'LFT, art. 88'])
-    if not B:
+    if not B and not P:
         vprop = max(0.0, vac_anio * dcur / 365.0 - float(x.get('vacTom') or 0))
         vdias = vprop + float(x.get('vacPend') or 0)
         vac = vdias * sd
         if vac > 0:
             c.append(['vacaciones', 'Vacaciones: %.2f días (proporcionales del año en curso y pendientes)' % vdias, vac, 'LFT, arts. 76 y 79'])
             c.append(['prima_vac', 'Prima vacacional (%g %% de tus vacaciones)' % pv, vac * pv / 100.0, 'LFT, art. 80'])
-    if not x.get('agPag'):
+    if not x.get('agPag') and not P:
         ini = max(ing, datetime.date(sal.year, 1, 1))
         dag = (sal - ini).days + 1
         ag = agd * dag / 365.0 * sd
@@ -180,22 +204,37 @@ def calcula(D, x):
     causa = x['causa']
     tope = 2 * D['sm'][x.get('zona') or 'gen']
     piso = D['sm'][x.get('zona') or 'gen']
-    if not B and (causa in ('justificado', 'injustificado', 'sin_reinstalar') or (causa == 'renuncia' and anios >= 15)):
+    if tipo != 'ind' and causa != 'vence' and (causa != 'renuncia' or anios >= 15):
+        # El art. 162 la da a «los trabajadores de planta»; si alcanza a un eventual o a una plataforma, la ley no lo dice claro.
+        r['espera'].append(['prima_ant', 'Prima de antigüedad', 'LFT, art. 162: la ley la da a los trabajadores de planta; si te toca con un contrato eventual o en una plataforma no lo dice con claridad, y no la sumamos'])
+    if not B and tipo == 'ind' and (causa in ('justificado', 'injustificado', 'sin_reinstalar') or (causa == 'renuncia' and anios >= 15)):
         bpa = min(max(sdi, piso), tope)
         c.append(['prima_ant', 'Prima de antigüedad: 12 días × %.2f años × %s de salario (entre uno y dos salarios mínimos)' % (anios, _p(bpa)),
                   12 * anios * bpa, 'LFT, arts. 162, 485 y 486'])
-    if not B and causa in ('injustificado', 'sin_reinstalar'):
+    if P and causa in ('injustificado', 'sin_reinstalar'):
+        c.append(['ind3', 'Indemnización: tres meses de salario (la mitad de lo que ingresaste en seis meses)', 90 * sd, 'LFT, arts. 50, fr. IV, y 291-N'])
+        r['espera'].append(['ind20', 'Veinte días por año de servicios', 'LFT, art. 50, fr. IV: se cuentan con el tiempo efectivamente laborado (art. 291-D), y la ley no dice cómo volver horas de trabajo en años'])
+        if float(x.get('mj') or 0) > 0:
+            r['espera'].append(['vencidos', 'Salarios vencidos e intereses', 'LFT, arts. 48 y 50, fr. IV: la ley no dice cuál es el salario de un día en una plataforma'])
+    if not B and not P and causa in ('injustificado', 'sin_reinstalar'):
         c.append(['ind3', 'Indemnización: tres meses (90 días) de salario integrado', 90 * sdi, 'LFT, arts. 48, 50 (fr. III) y 89'])
-    if not B and causa == 'sin_reinstalar':
+    if not B and tipo == 'ind' and causa == 'sin_reinstalar':
         c.append(['ind20', 'Veinte días de salario integrado por cada año de servicios (%.2f años)' % anios, 20 * anios * sdi, 'LFT, arts. 49 y 50, fr. II'])
+    if tipo == 'det' and causa == 'sin_reinstalar':
+        if anios < 1:
+            c.append(['ind50i', 'Salarios de la mitad del tiempo que trabajaste (%d días ÷ 2, con salario integrado)' % dias, dias / 2.0 * sdi, 'LFT, arts. 49, 50 (fr. I) y 89'])
+        else:
+            c.append(['ind50i', 'Seis meses (180 días) por el primer año y veinte días por cada año siguiente (%.2f años), con salario integrado' % (anios - 1),
+                      (180 + 20 * (anios - 1)) * sdi, 'LFT, arts. 49, 50 (fr. I) y 89'])
     tot = sum(k[2] for k in c)
     # ISR aproximado (LISR arts. 93, 95 y 96; RLISR art. 174) y subsidio para el empleo (decreto DOF 31-12-2025).
     U = D['uma']
     m = float(x.get('mens') or 0) or sd * 30
+    r['isr_pend'] = P  # en una plataforma, los «años de servicio» de la exención no se pueden contar sin interpretar
     isr_m = isr_tarifa(D, m)
     tasa_m = isr_m / m if m else 0.0
     val = {k[0]: k[2] for k in c}
-    sep = val.get('prima_ant', 0) + val.get('ind3', 0) + val.get('ind20', 0)
+    sep = val.get('prima_ant', 0) + val.get('ind3', 0) + val.get('ind20', 0) + val.get('ind50i', 0)
     anios_isr = comp + (1 if anios - comp > 0.5 else 0)
     ex_sep = min(sep, 90 * U * anios_isr)
     g_sep = sep - ex_sep
@@ -220,6 +259,8 @@ def calcula(D, x):
     if m <= D['sub']['tope']:
         sub = min(D['umam'] * D['sub']['pct'] / 100.0, ret_ord + ret_ag + ret_pv)
     isr = ret_sep + ret_ag + ret_pv + ret_ord - sub
+    if P:
+        isr, ret_sep, ex_sep = 0.0, 0.0, 0.0
     r.update({'total': tot, 'exento': ex_sep + ex_ag + ex_pv, 'isr': isr, 'neto': tot - isr, 'm': m, 'tasa_m': tasa_m, 'sub': sub,
               'isr_det': [ret_ord, ret_ag, ret_pv, ret_sep], 'ex_det': [ex_ag, ex_pv, ex_sep], 'anios_isr': anios_isr})
     # Escenario de juicio, fuera del total. Apartado A: LFT, art. 48, párrafos segundo y tercero.
@@ -229,7 +270,7 @@ def calcula(D, x):
     if B and mj > 0 and causa in ('injustificado', 'sin_reinstalar'):
         r['juicio'].append(['caidos', 'Salarios caídos: %d meses × 30 días × tu salario, sin tope (corren hasta que se cumpla el laudo)' % mj,
                             mj * 30 * sd, 'LFTSE, art. 43, fr. III y IV; SCJN, 2a./J. 34/2017'])
-    if not B and mj > 0 and causa in ('injustificado', 'sin_reinstalar'):
+    if not B and not P and mj > 0 and causa in ('injustificado', 'sin_reinstalar'):
         r['juicio'].append(['vencidos', 'Salarios vencidos: %d meses × 30 días × salario integrado (hasta 12 meses)' % min(mj, 12),
                             min(mj, 12) * 30 * sdi, 'LFT, art. 48, segundo párrafo'])
         if mj > 12:
@@ -245,7 +286,9 @@ def calcula(D, x):
     # Reparto de utilidades (LFT, arts. 123, 124 y 127, fr. VIII): aparte, se paga en su fecha (art. 122).
     r['ptu'] = None
     pu, pdt, pst, pd = (float(x.get(k) or 0) for k in ('ptuU', 'ptuDT', 'ptuST', 'ptuD'))
-    if not B and pu > 0 and pdt > 0 and pst > 0 and pd > 0:
+    if tipo == 'det' and pd < 60:
+        pu = 0  # los eventuales participan si trabajaron 60 días o más en el año (art. 127, fr. VII)
+    if not B and not P and pu > 0 and pdt > 0 and pst > 0 and pd > 0:
         ps = float(x.get('ptuS') or 0) or sd * pd
         p_d, p_s = pu / 2.0 * pd / pdt, pu / 2.0 * ps / pst
         bruto = p_d + p_s
@@ -268,6 +311,7 @@ def construir(base, ref):
     lft = lambda a: '<a href="%s">LFT, %s</a>' % (esc(LFT['url']), esc(a))
     lftse = lambda a: '<a href="%s">LFTSE, %s</a>' % (esc(LFTSE['url']), esc(a))
     lisr = lambda a: '<a href="%s">LISR, %s</a>' % (esc(L['url']), esc(a))
+    tipos = ''.join('<option value="%s">%s</option>' % (k, esc(t)) for k, t, _r in TIPOS)
     causas = ''.join('<option value="%s"%s>%s</option>' % (k, ' selected' if k == 'renuncia' else '', esc(t)) for k, t, _r in CAUSAS)
     huella = lambda d: '<a href="%s">%s</a> (huella SHA-256 <code>%s…</code>)' % (esc(d['url']), esc(d['tx']), d['sha256'][:12])
     return '''<div class="ci" id="clRaiz">
@@ -288,18 +332,27 @@ def construir(base, ref):
       <label class="ci-et" for="clReg">Quién te paga</label>
       <select class="ci-in" id="clReg"><option value="A">Una empresa o una persona (apartado A: Ley Federal del Trabajo)</option><option value="B">El gobierno federal (apartado B: Ley Federal de los Trabajadores al Servicio del Estado)</option></select>
       <p class="ci-pista" id="clRegLey"></p>
+      <div id="clTipoCaja">
+      <label class="ci-et" for="clTipo">Tu contrato</label>
+      <select class="ci-in" id="clTipo">{tipos}</select>
+      <p class="ci-pista" id="clTipoLey"></p>
+      </div>
+      <div id="clSdCaja">
       <label class="ci-et" for="clSd">Tu salario (pesos, antes de descuentos)</label>
       <input class="ci-in" id="clSd" inputmode="decimal" autocomplete="off" placeholder="Ej.: 12,000">
-      <div class="ci-fila">
-        <div><label class="ci-et" for="clPer">Cada cuándo</label><select class="ci-in" id="clPer"><option value="mes">Al mes</option><option value="dia">Al día</option></select></div>
-        <div><label class="ci-et" for="clZona">Dónde trabajas</label><select class="ci-in" id="clZona"><option value="gen">Resto del país</option><option value="fro">Zona libre de la frontera norte</option></select></div>
+      <label class="ci-et" for="clPer">Cada cuándo</label><select class="ci-in" id="clPer"><option value="mes">Al mes</option><option value="dia">Al día</option></select>
       </div>
+      <div id="clP6Caja" hidden>
+      <label class="ci-et" for="clP6">Lo que ingresaste en la plataforma en los últimos seis meses (pesos, sin propinas)</label>
+      <input class="ci-in" id="clP6" inputmode="decimal" autocomplete="off" placeholder="Ej.: 60,000">
+      </div>
+      <label class="ci-et" for="clZona">Dónde trabajas</label><select class="ci-in" id="clZona"><option value="gen">Resto del país</option><option value="fro">Zona libre de la frontera norte</option></select>
       <label class="ci-et" for="clCausa">Por qué termina</label>
       <select class="ci-in" id="clCausa">{causas}</select>
       <p class="ci-pista" id="clCausaLey"></p>
     </fieldset>
 
-    <fieldset class="ci-grupo">
+    <fieldset class="ci-grupo" id="clPresta">
       <legend class="ci-tit"><span class="ci-n" aria-hidden="true">2</span> Lo que ya te pagaron y tus prestaciones <small>(opcional)</small></legend>
       <label class="ci-et" for="clDp">Días trabajados que todavía no te pagan</label>
       <input class="ci-in" id="clDp" inputmode="decimal" autocomplete="off" placeholder="Ej.: 15">
@@ -355,16 +408,19 @@ def construir(base, ref):
       <li><b>El ISR</b>: no pagas por lo de la separación hasta 90 UMA por año de servicio; por el aguinaldo, hasta 30, y por la prima vacacional, hasta 15 ({a93}). La ley todavía dice «salario mínimo», y desde 2016 esas referencias se leen como UMA ({cpeum}). Lo demás se retiene: lo de la separación con la tasa de tu último sueldo mensual ({a96}) y el aguinaldo y la prima con el art. 174 del Reglamento ({r174}). Si tu sueldo del mes no pasa de {sub_tope}, se resta el <b>subsidio para el empleo</b>: el {sub_pct} % de la UMA mensual, nunca sobre lo de la separación y sin entregarte lo que sobre ({sub}).</li>
       <li><b>Si vas a juicio</b> y el patrón no prueba la causa, además te toca lo que no ganaste: los <b>salarios vencidos</b> desde el despido, hasta doce meses, y si el juicio sigue, un <b>interés del 2 % mensual</b> sobre quince meses de salario ({a48b}). Si trabajas para el gobierno federal, los <b>salarios caídos no tienen tope</b>: corren hasta que se cumpla el laudo ({b43}; la Suprema Corte dijo que el tope de doce meses de la LFT no se les aplica: {j34}), y no hay interés del 2 %. Lo damos aparte, como escenario: depende de cuánto dure y de lo que resuelva el Tribunal. <b>Su ISR</b>: la Suprema Corte dijo que no son salario ordinario sino una prestación por la terminación del trabajo, que se grava cuando la cobras ({t28}); por eso los tasamos como lo de la separación ({a96}), sin exención, porque hay criterios encontrados sobre si les toca. El ISR de los intereses no lo calculamos.</li>
       <li><b>El reparto de utilidades</b> no es parte del finiquito: se paga dentro de los sesenta días siguientes a la fecha en que la empresa debe pagar su impuesto anual ({a122}), y por eso va aparte. La mitad se reparte por los días trabajados y la otra mitad por los salarios ({a123}); el salario es solo la cuota diaria ({a124}), y lo tuyo no pasa de tres meses de salario o del promedio de los últimos tres años, lo que te convenga más ({a127}). Exento de ISR hasta 15 UMA ({a93}). Directivos, administradores y gerentes generales no participan, y quien trabaja en el hogar tampoco.</li>
+      <li><b>Si tu contrato es por tiempo determinado</b> (eventual), el finiquito es el mismo. Si el patrón no te reinstala o tú rescindes por su culpa, en lugar de los veinte días por año te toca la mitad de los salarios del tiempo que trabajaste, si fue menos de un año, o seis meses por el primer año y veinte días por cada uno de los siguientes ({a50i}); los tres meses van además ({a50iii}). Al vencer el plazo, el trabajo termina sin indemnización ({a53}), salvo que el trabajo siga: entonces el contrato se prorroga ({a39}). La <b>prima de antigüedad</b> la ley se la da a los trabajadores de planta ({a162}): con un contrato eventual no lo dice claro, así que la dejamos <b>en espera</b>, sin sumarla. Participas del reparto si trabajaste sesenta días o más en el año ({a127vii}).</li>
+      <li><b>Si trabajas en una plataforma digital</b> (reparto, transporte), tu pago por tarea ya trae en proporción el aguinaldo, las vacaciones, la prima y el descanso ({a291f}): no hay finiquito que sumar. Si te despiden sin causa, te tocan tres meses de salario, y el salario es el promedio de lo que ingresaste en los últimos seis meses ({a291n}); los veinte días por año se cuentan con el tiempo efectivamente laborado ({a50iv}, {a291d}), y como la ley no dice cómo volver horas de trabajo en años, quedan <b>en espera</b>, igual que los salarios vencidos y el ISR. Si pasas treinta días sin actividad, la relación termina sin indemnización ({a291c}).</li>
       <li><b>Si trabajas para el gobierno federal</b> (apartado B), su ley da aguinaldo de 40 días por lo menos ({b42}), dos periodos de diez días de vacaciones con prima del 30 % ({b30}, {b40}) y deja la indemnización al laudo ({b43}); no trae prima de antigüedad. Por eso la cuenta saca el salario pendiente, el aguinaldo proporcional y, como escenario, los salarios caídos: lo demás lo fija el Tribunal Federal de Conciliación y Arbitraje.</li>
     </ol>
-    <p><b>Lo que esta cuenta supone:</b> años de 365 días, la parte del último año en proporción, el mes de 30 días ({a89b}), y que el salario y las vacaciones se tasan como si fueran todo tu ingreso del mes, con el subsidio completo del mes; los salarios vencidos con el salario integrado y el interés simple, sumado al pagar; los caídos del apartado B con tu salario; su ISR sin exención; la «parte proporcional» del aguinaldo del apartado B por días; y los tres meses del tope del reparto como 90 días de tu salario. Todo eso es nuestro (<span class="est-chip est-derivado">auditada</span>).</p>
-    <p><b>Lo que no hace:</b> no es asesoría legal ni un convenio. Lo que vale es lo que firmen ante el Centro de Conciliación o resuelva el Tribunal. No calcula el ISR de los intereses del juicio ni la indemnización del apartado B, que fija el laudo. No aplica a quien trabaja para un estado o un municipio (le rige la ley de su estado), si tu contrato era por tiempo u obra determinados ({a50i}) o si trabajas en plataformas digitales ({a50iv}). Si tienes dudas, la Procuraduría Federal de la Defensa del Trabajo asesora gratis.</p>
+    <p><b>Lo que esta cuenta supone:</b> años de 365 días, la parte del último año en proporción, el mes de 30 días ({a89b}), y que el salario y las vacaciones se tasan como si fueran todo tu ingreso del mes, con el subsidio completo del mes; los salarios vencidos con el salario integrado y el interés simple, sumado al pagar; los caídos del apartado B con tu salario; su ISR sin exención; los «seis meses» del contrato eventual como 180 días y los años que siguen al primero en proporción; los «tres meses» de una plataforma como la mitad de lo que ingresaste en seis meses; la «parte proporcional» del aguinaldo del apartado B por días; y los tres meses del tope del reparto como 90 días de tu salario. Todo eso es nuestro (<span class="est-chip est-derivado">auditada</span>).</p>
+    <p><b>Lo que no hace:</b> no es asesoría legal ni un convenio. Lo que vale es lo que firmen ante el Centro de Conciliación o resuelva el Tribunal. No calcula el ISR de los intereses del juicio ni la indemnización del apartado B, que fija el laudo. No suma lo que dejamos en espera: la prima de antigüedad de un contrato eventual o de una plataforma ({a162}) y, en una plataforma, los veinte días por año, los salarios vencidos y el ISR. No aplica a quien trabaja para un estado o un municipio (le rige la ley de su estado) ni a un contrato por obra determinada: el art. 50 no lo nombra ({a50i}). Si tienes dudas, la Procuraduría Federal de la Defensa del Trabajo asesora gratis.</p>
     <p class="ci-fuentes">Fuentes: {f_lft} · {f_lftse} · {f_j34} · {f_t28} · {f_sub} · {f_lisr} · {f_rlisr} · {f_cpeum} · UMA: {f_uma} · Salario mínimo: {f_sm} · Tarifa: {f_tarifa} {chip_o}.</p>
     <p class="ci-hermanas">Sigue con la Calculadora: <a href="herramienta-calculadora-ticket-retienen.html">💼 Lo que te retienen y tu nómina completa</a> · <a href="herramienta-calculadora-ticket.html">🧾 Tu estado de cuenta</a></p>
   </aside>
   <script type="application/json" id="clDatos">{datos}</script>
 </div>'''.format(
-        hoy=hoy, causas=causas, chip_d=chip('derivado'), chip_o=chip('oficial'),
+        hoy=hoy, causas=causas, tipos=tipos, a50iii=lft('art. 50, fr. III'), a53=lft('art. 53, fr. III'), a39=lft('arts. 37 y 39'),
+        a127vii=lft('art. 127, fr. VII'), a291f=lft('art. 291-F'), a291n=lft('art. 291-N'), a291d=lft('art. 291-D'), a291c=lft('arts. 291-C y 49, fr. VI'), chip_d=chip('derivado'), chip_o=chip('oficial'),
         a76=lft('art. 76'), a79=lft('art. 79'), a80=lft('art. 80'), a87=lft('art. 87'), a162=lft('art. 162'), a486=lft('arts. 485 y 486'),
         a48=lft('art. 48'), a50=lft('arts. 49 y 50, fr. II y III'), a51=lft('arts. 51 y 52'), a89=lft('arts. 84 y 89'), a89b=lft('art. 89'),
         a125=lft('art. 125'), a48b=lft('art. 48, segundo y tercer párrafos'), a122=lft('art. 122'), a123=lft('art. 123'), a124=lft('art. 124'),
@@ -403,10 +459,15 @@ def prueba():
     casos += [dict(EJEMPLO, reg='B', agd=40, causa='injustificado', mj=40, sd=9000 / 30.0, mens=9000),
               dict(EJEMPLO, causa='injustificado', mj=1, sd=200)]
     casos.append(dict(EJEMPLO, sd=250, dp=10, causa='renuncia'))
+    # Contrato eventual (art. 50, fr. I) y plataformas (arts. 50, fr. IV, 291-F y 291-N).
+    for causa in ('renuncia', 'justificado', 'injustificado', 'sin_reinstalar', 'vence'):
+        casos.append(dict(EJEMPLO, tipo='det', causa=causa, mj=14, ptuD=50, **{k: v for k, v in PTU.items() if k != 'ptuD'}))
+        casos.append(dict(EJEMPLO, tipo='det', causa=causa, ing='2026-05-01', **PTU))
+        casos.append(dict(EJEMPLO, tipo='plat', causa=causa, p6=60000, mj=8, **PTU))
     js = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'cc-laboral.js')
     prog = ("global.window={};global.document={getElementById:function(){return null}};require(%s);"
             "var D=%s;console.log(JSON.stringify(%s.map(function(x){var r=window.AuditorLaboral.calcula(D,x);"
-            "return [r.total,r.isr,r.exento,r.sdi,r.conc.length,r.sub,r.total_juicio,r.ptu?r.ptu.ptu:0,r.ptu?r.ptu.isr:0,r.isr_juicio,r.neto_juicio];})));" % (json.dumps(js), json.dumps(D), json.dumps(casos)))
+            "return [r.total,r.isr,r.exento,r.sdi,r.conc.length,r.sub,r.total_juicio,r.ptu?r.ptu.ptu:0,r.ptu?r.ptu.isr:0,r.isr_juicio,r.neto_juicio,r.espera.length];})));" % (json.dumps(js), json.dumps(D), json.dumps(casos)))
     r = subprocess.run(['node', '-e', prog], capture_output=True, text=True)
     if r.returncode:
         print(r.stderr)
@@ -416,7 +477,7 @@ def prueba():
     for x, n in zip(casos, nav):
         p = calcula(D, x)
         t = p['ptu'] or {}
-        py = [p['total'], p['isr'], p['exento'], p['sdi'], len(p['conc']), p['sub'], p['total_juicio'], t.get('ptu', 0), t.get('isr', 0), p['isr_juicio'], p['neto_juicio']]
+        py = [p['total'], p['isr'], p['exento'], p['sdi'], len(p['conc']), p['sub'], p['total_juicio'], t.get('ptu', 0), t.get('isr', 0), p['isr_juicio'], p['neto_juicio'], len(p['espera'])]
         if any(abs(a - b) > 0.005 for a, b in zip(py, n)):
             mal += 1
             print('✗', x['causa'], x['ing'], x['sal'], 'Python', py, 'navegador', n)
@@ -441,13 +502,28 @@ def prueba():
             [k[0] for k in b30['juicio']] != ['caidos'] or abs(b30['juicio'][0][2] - 900 * EJEMPLO['sd']) > 0.01:
         mal += 1
         print('✗ el apartado B saca conceptos del apartado A')
+    # Eventual: mitad del tiempo si es menos de un año; seis meses más veinte días por año siguiente; sin prima de antigüedad.
+    d1 = calcula(D, dict(EJEMPLO, tipo='det', causa='sin_reinstalar', ing='2026-05-01'))
+    d2 = calcula(D, dict(EJEMPLO, tipo='det', causa='sin_reinstalar'))
+    v1 = {k[0]: k[2] for k in d1['conc']}
+    v2 = {k[0]: k[2] for k in d2['conc']}
+    if abs(v1['ind50i'] - d1['dias'] / 2 * d1['sdi']) > 0.01 or abs(v2['ind50i'] - (180 + 20 * (d2['anios'] - 1)) * d2['sdi']) > 0.01 or \
+            'prima_ant' in v2 or 'ind20' in v2 or 'ind3' not in v2 or [k[0] for k in d2['espera']] != ['prima_ant'] or \
+            {k[0] for k in calcula(D, dict(EJEMPLO, tipo='det', causa='vence'))['conc']} - {'salario', 'vacaciones', 'prima_vac', 'aguinaldo'}:
+        mal += 1
+        print('✗ el contrato eventual del art. 50, fr. I')
+    pl = calcula(D, dict(EJEMPLO, tipo='plat', causa='injustificado', p6=60000, mj=6))
+    if [k[0] for k in pl['conc']] != ['ind3'] or abs(pl['conc'][0][2] - 30000) > 0.01 or pl['isr'] != 0 or pl['juicio'] or \
+            [k[0] for k in pl['espera']] != ['prima_ant', 'ind20', 'vencidos']:
+        mal += 1
+        print('✗ la plataforma digital del art. 50, fr. IV')
     if calcula(D, dict(EJEMPLO, sd=D['sub']['tope'] / 30 + 1))['sub'] != 0:
         mal += 1
         print('✗ el subsidio se aplica arriba del tope del decreto')
     if mal:
         print('Simulador laboral: %d diferencias' % mal)
         return 1
-    print('Simulador laboral: %d casos iguales en Python y en el navegador; la tabla del art. 76, las cuatro causas, el art. 48, el apartado B (caídos sin tope) y el tope del subsidio en orden' % len(casos))
+    print('Simulador laboral: %d casos iguales en Python y en el navegador; la tabla del art. 76, las cuatro causas, el art. 48, el apartado B (caídos sin tope), el tope del subsidio, el contrato eventual y las plataformas en orden' % len(casos))
     return 0
 
 

@@ -30,13 +30,17 @@
     var dias = Math.round((sal - ing) / DIA) + 1;
     var anios = dias / 365, comp = Math.floor(dias / 365), dcur = dias - comp * 365;
     var B = (x.reg || 'A') === 'B';
+    var tipo = B ? 'ind' : (x.tipo || 'ind'), P = tipo === 'plat';
+    /* Plataformas: el salario es el promedio de lo ingresado en los últimos seis meses (art. 291-N). */
+    if (P) sd = (+x.p6 || 0) / 6 / 30;
     var agd = +x.agd || (B ? 40 : 15), pv = +x.pv || (B ? 30 : 25);
     var vacAnio = B ? 20 : vacTabla(comp + 1);
     var sdi = sd * (1 + (agd + vacAnio * pv / 100) / 365);
-    var c = [], r = { dias: dias, anios: anios, sdi: sdi, vac_anio: vacAnio, conc: c, reg: B ? 'B' : 'A' };
-    var dp = +x.dp || 0;
+    if (P) sdi = sd; /* el pago por tarea ya trae aguinaldo, vacaciones y prima en proporción (art. 291-F) */
+    var c = [], r = { dias: dias, anios: anios, sdi: sdi, vac_anio: vacAnio, conc: c, reg: B ? 'B' : 'A', tipo: tipo, espera: [] };
+    var dp = P ? 0 : (+x.dp || 0);
     if (dp > 0) c.push(['salario', 'Días de salario que no te han pagado (' + dp + ' × salario diario)', dp * sd, B ? 'LFTSE, arts. 32 y 43' : 'LFT, art. 88']);
-    if (!B) {
+    if (!B && !P) {
       var vprop = Math.max(0, vacAnio * dcur / 365 - (+x.vacTom || 0));
       var vdias = vprop + (+x.vacPend || 0), vac = vdias * sd;
       if (vac > 0) {
@@ -44,24 +48,37 @@
         c.push(['prima_vac', 'Prima vacacional (' + pv + ' % de tus vacaciones)', vac * pv / 100, 'LFT, art. 80']);
       }
     }
-    if (!x.agPag) {
+    if (!x.agPag && !P) {
       var y = Number(String(x.sal).slice(0, 4)), ini = Math.max(ing, Date.UTC(y, 0, 1));
       var dag = Math.round((sal - ini) / DIA) + 1;
       c.push(['aguinaldo', 'Aguinaldo proporcional (' + agd + ' días × ' + dag + ' días trabajados este año ÷ 365)', agd * dag / 365 * sd, B ? 'LFTSE, art. 42 Bis' : 'LFT, art. 87']);
     }
     var z = x.zona || 'gen', tope = 2 * D.sm[z], piso = D.sm[z], causa = x.causa;
-    if (!B && (causa === 'justificado' || causa === 'injustificado' || causa === 'sin_reinstalar' || (causa === 'renuncia' && anios >= 15))) {
+    if (tipo !== 'ind' && causa !== 'vence' && (causa !== 'renuncia' || anios >= 15))
+      r.espera.push(['prima_ant', 'Prima de antigüedad', 'LFT, art. 162: la ley la da a los trabajadores de planta; si te toca con un contrato eventual o en una plataforma no lo dice con claridad, y no la sumamos']);
+    if (!B && tipo === 'ind' && (causa === 'justificado' || causa === 'injustificado' || causa === 'sin_reinstalar' || (causa === 'renuncia' && anios >= 15))) {
       var bpa = Math.min(Math.max(sdi, piso), tope);
       c.push(['prima_ant', 'Prima de antigüedad: 12 días × ' + anios.toFixed(2) + ' años × ' + p2(bpa) + ' de salario (entre uno y dos salarios mínimos)',
         12 * anios * bpa, 'LFT, arts. 162, 485 y 486']);
     }
-    if (!B && (causa === 'injustificado' || causa === 'sin_reinstalar')) c.push(['ind3', 'Indemnización: tres meses (90 días) de salario integrado', 90 * sdi, 'LFT, arts. 48, 50 (fr. III) y 89']);
-    if (!B && causa === 'sin_reinstalar') c.push(['ind20', 'Veinte días de salario integrado por cada año de servicios (' + anios.toFixed(2) + ' años)', 20 * anios * sdi, 'LFT, arts. 49 y 50, fr. II']);
+    if (P && (causa === 'injustificado' || causa === 'sin_reinstalar')) {
+      c.push(['ind3', 'Indemnización: tres meses de salario (la mitad de lo que ingresaste en seis meses)', 90 * sd, 'LFT, arts. 50, fr. IV, y 291-N']);
+      r.espera.push(['ind20', 'Veinte días por año de servicios', 'LFT, art. 50, fr. IV: se cuentan con el tiempo efectivamente laborado (art. 291-D), y la ley no dice cómo volver horas de trabajo en años']);
+      if ((+x.mj || 0) > 0) r.espera.push(['vencidos', 'Salarios vencidos e intereses', 'LFT, arts. 48 y 50, fr. IV: la ley no dice cuál es el salario de un día en una plataforma']);
+    }
+    if (!B && !P && (causa === 'injustificado' || causa === 'sin_reinstalar')) c.push(['ind3', 'Indemnización: tres meses (90 días) de salario integrado', 90 * sdi, 'LFT, arts. 48, 50 (fr. III) y 89']);
+    if (!B && tipo === 'ind' && causa === 'sin_reinstalar') c.push(['ind20', 'Veinte días de salario integrado por cada año de servicios (' + anios.toFixed(2) + ' años)', 20 * anios * sdi, 'LFT, arts. 49 y 50, fr. II']);
+    if (tipo === 'det' && causa === 'sin_reinstalar') {
+      if (anios < 1) c.push(['ind50i', 'Salarios de la mitad del tiempo que trabajaste (' + dias + ' días ÷ 2, con salario integrado)', dias / 2 * sdi, 'LFT, arts. 49, 50 (fr. I) y 89']);
+      else c.push(['ind50i', 'Seis meses (180 días) por el primer año y veinte días por cada año siguiente (' + (anios - 1).toFixed(2) + ' años), con salario integrado',
+        (180 + 20 * (anios - 1)) * sdi, 'LFT, arts. 49, 50 (fr. I) y 89']);
+    }
     var tot = 0, val = {};
     c.forEach(function (k) { tot += k[2]; val[k[0]] = k[2]; });
     var U = D.uma, m = (+x.mens || 0) || sd * 30;
+    r.isr_pend = P; /* en una plataforma, los «años de servicio» de la exención no se cuentan sin interpretar */
     var isrM = isrTarifa(D, m), tasaM = m ? isrM / m : 0;
-    var sep = (val.prima_ant || 0) + (val.ind3 || 0) + (val.ind20 || 0);
+    var sep = (val.prima_ant || 0) + (val.ind3 || 0) + (val.ind20 || 0) + (val.ind50i || 0);
     var aniosIsr = comp + (anios - comp > 0.5 ? 1 : 0);
     var exSep = Math.min(sep, 90 * U * aniosIsr), gSep = sep - exSep, retSep = 0;
     if (gSep > 0) retSep = gSep < m ? isrTarifa(D, gSep) : gSep * tasaM;
@@ -76,6 +93,7 @@
     var sub = 0;
     if (m <= D.sub.tope) sub = Math.min(D.umam * D.sub.pct / 100, retOrd + retAg + retPv);
     var isr = retSep + retAg + retPv + retOrd - sub;
+    if (P) { isr = 0; retSep = 0; exSep = 0; }
     r.total = tot; r.exento = exSep + exAg + exPv; r.isr = isr; r.neto = tot - isr; r.m = m; r.tasa_m = tasaM; r.sub = sub;
     r.isr_det = [retOrd, retAg, retPv, retSep]; r.ex_det = [exAg, exPv, exSep]; r.anios_isr = aniosIsr;
     /* Escenario de juicio (LFT, art. 48): fuera del total. */
@@ -83,7 +101,7 @@
     r.juicio = [];
     if (B && mj > 0 && (causa === 'injustificado' || causa === 'sin_reinstalar'))
       r.juicio.push(['caidos', 'Salarios caídos: ' + mj + ' meses × 30 días × tu salario, sin tope (corren hasta que se cumpla el laudo)', mj * 30 * sd, 'LFTSE, art. 43, fr. III y IV; SCJN, 2a./J. 34/2017']);
-    if (!B && mj > 0 && (causa === 'injustificado' || causa === 'sin_reinstalar')) {
+    if (!B && !P && mj > 0 && (causa === 'injustificado' || causa === 'sin_reinstalar')) {
       r.juicio.push(['vencidos', 'Salarios vencidos: ' + Math.min(mj, 12) + ' meses × 30 días × salario integrado (hasta 12 meses)', Math.min(mj, 12) * 30 * sdi, 'LFT, art. 48, segundo párrafo']);
       if (mj > 12) r.juicio.push(['intereses', 'Intereses: 2 % mensual sobre quince meses de salario, por ' + (mj - 12) + ' meses después del mes 12',
         15 * 30 * sdi * 0.02 * (mj - 12), 'LFT, art. 48, tercer párrafo']);
@@ -97,7 +115,8 @@
     /* Reparto de utilidades (LFT, arts. 123, 124 y 127, fr. VIII): aparte. */
     r.ptu = null;
     var pu = +x.ptuU || 0, pdt = +x.ptuDT || 0, pst = +x.ptuST || 0, pd = +x.ptuD || 0;
-    if (!B && pu > 0 && pdt > 0 && pst > 0 && pd > 0) {
+    if (tipo === 'det' && pd < 60) pu = 0; /* eventuales: 60 días o más en el año (art. 127, fr. VII) */
+    if (!B && !P && pu > 0 && pdt > 0 && pst > 0 && pd > 0) {
       var ps = (+x.ptuS || 0) || sd * pd;
       var pD = pu / 2 * pd / pdt, pS = pu / 2 * ps / pst, bruto = pD + pS;
       var topeP = Math.max(90 * sd, +x.ptuP || 0), ptu = Math.min(bruto, topeP);
@@ -145,43 +164,65 @@
       if ($('clPv').value === REG[o][1] || !$('clPv').value) $('clPv').value = REG[k][1];
     }
     $('clRegLey').textContent = REG[k][2];
-    $('clPtuCaja').hidden = k === 'B';
+    tipo();
   }
-  try { var qr = new URLSearchParams(location.search).get('reg'); if (qr === 'B' || qr === 'A') $('clReg').value = qr; } catch (e) { /* sin parámetros */ }
+  /* Tipo de contrato: cambia el salario que se pide y las causas que caben. */
+  function tipo() {
+    var B = $('clReg').value === 'B', t = B ? 'ind' : $('clTipo').value, P = t === 'plat';
+    $('clTipoCaja').hidden = B;
+    $('clSdCaja').hidden = P; $('clP6Caja').hidden = !P; $('clPresta').hidden = P;
+    $('clPtuCaja').hidden = B || P;
+    var ov = $('clCausa').querySelector('option[value="vence"]');
+    ov.hidden = ov.disabled = t === 'ind';
+    if (t === 'ind' && $('clCausa').value === 'vence') $('clCausa').value = 'renuncia';
+    D.tipos.forEach(function (c) { if (c[0] === t) $('clTipoLey').textContent = c[2] + (P ? ': el pago por tarea ya trae en proporción el aguinaldo, las vacaciones y la prima (art. 291-F), y para la indemnización el salario es el promedio de lo que ingresaste en los últimos seis meses (art. 291-N).' : t === 'det' ? ': el plazo solo vale si lo exige la naturaleza del trabajo o se sustituye a alguien; si el trabajo sigue al vencer, el contrato se prorroga (arts. 37 y 39).' : '.'); });
+  }
+  try {
+    var qr = new URLSearchParams(location.search);
+    if (qr.get('reg') === 'B' || qr.get('reg') === 'A') $('clReg').value = qr.get('reg');
+    if (['ind', 'det', 'plat'].indexOf(qr.get('tipo')) >= 0) $('clTipo').value = qr.get('tipo');
+  } catch (e) { /* sin parámetros */ }
   reg(true);
   ley();
   $('clCausa').addEventListener('change', ley);
   $('clReg').addEventListener('change', function () { reg(true); ley(); });
+  $('clTipo').addEventListener('change', function () { tipo(); ley(); });
 
   function pinta(e) {
     if (e) e.preventDefault();
-    var s = num('clSd'), per = $('clPer').value;
+    var P = $('clReg').value === 'A' && $('clTipo').value === 'plat';
+    var s = P ? num('clP6') : num('clSd'), per = P ? 'mes' : $('clPer').value;
     var res = $('clRes'), tot = $('clTotal');
     res.hidden = false;
     var extra = [num('clDp'), num('clVt'), num('clVp'), num('clAg'), num('clPv'), num('clMj'), num('clPtuU'), num('clPtuD'), num('clPtuDT'), num('clPtuST'), num('clPtuS'), num('clPtuP')];
     if (!s || isNaN(s) || !$('clIng').value || !$('clSal').value || extra.some(function (v) { return typeof v === 'number' && isNaN(v); })) {
-      tot.innerHTML = '<p class="ci-error">Escribe tus dos fechas y tu salario, con números.</p>';
+      tot.innerHTML = '<p class="ci-error">Escribe tus dos fechas y ' + (P ? 'lo que ingresaste en la plataforma en los últimos seis meses' : 'tu salario') + ', con números.</p>';
       $('clPasos').innerHTML = ''; $('clNota').textContent = ''; $('clExtra').innerHTML = '';
       return;
     }
-    var x = { ing: $('clIng').value, sal: $('clSal').value, sd: per === 'mes' ? s / 30 : s, mens: per === 'mes' ? s : 0, zona: $('clZona').value,
+    var x = { ing: $('clIng').value, sal: $('clSal').value, sd: P ? 0 : (per === 'mes' ? s / 30 : s), mens: P ? 0 : (per === 'mes' ? s : 0), p6: P ? s : 0, tipo: $('clTipo').value, zona: $('clZona').value,
       agd: num('clAg') || ($('clReg').value === 'B' ? 40 : 15), pv: num('clPv') || ($('clReg').value === 'B' ? 30 : 25), vacPend: num('clVp') || 0, vacTom: num('clVt') || 0, dp: num('clDp') || 0,
       causa: $('clCausa').value, agPag: $('clAgPag').checked, reg: $('clReg').value, mj: num('clMj') || 0,
       ptuU: num('clPtuU') || 0, ptuD: num('clPtuD') || 0, ptuDT: num('clPtuDT') || 0, ptuST: num('clPtuST') || 0, ptuS: num('clPtuS') || 0, ptuP: num('clPtuP') || 0 };
     var r = calcula(D, x);
     if (r.error) { tot.innerHTML = '<p class="ci-error">' + esc(r.error) + '</p>'; $('clPasos').innerHTML = ''; $('clNota').textContent = ''; $('clExtra').innerHTML = ''; return; }
     tot.innerHTML = '<p class="ci-cifra">Te toca: <b>' + p2(r.total) + '</b> antes de impuestos</p>' +
-      '<p>Retención aproximada de ISR: <b>' + p2(r.isr) + '</b> · Lo que recibirías: <b>' + p2(r.neto) + '</b></p>' +
-      '<p>Antigüedad: ' + r.anios.toFixed(2) + ' años (' + r.dias + ' días)' + (r.reg === 'A' ? ' · Salario integrado: ' + p2(r.sdi) + ' al día.' : ' · Apartado B.') + '</p>';
+      (r.isr_pend ? '<p>El ISR no lo calculamos: su exención va por años de servicio, y en una plataforma la relación solo existe en el tiempo efectivamente laborado (LFT, art. 291-D).</p>' :
+      '<p>Retención aproximada de ISR: <b>' + p2(r.isr) + '</b> · Lo que recibirías: <b>' + p2(r.neto) + '</b></p>') +
+      '<p>Antigüedad: ' + r.anios.toFixed(2) + ' años (' + r.dias + ' días)' + (r.reg === 'B' ? ' · Apartado B.' : r.tipo === 'plat' ? ' · Salario para la indemnización: ' + p2(r.sdi * 30) + ' al mes (art. 291-N).' : ' · Salario integrado: ' + p2(r.sdi) + ' al día.') + '</p>';
     var filas = r.conc.map(function (k) { return '<tr><th scope="row">' + esc(k[1]) + '</th><td>' + p2(k[2]) + '</td><td>' + esc(k[3]) + '</td></tr>'; });
+    r.espera.forEach(function (k) { filas.push('<tr><th scope="row">' + esc(k[1]) + ' <span class="est-chip est-pendiente">en espera</span></th><td>—</td><td>' + esc(k[2]) + '</td></tr>'); });
     filas.push('<tr class="ci-fuerte"><th scope="row">Total antes de impuestos</th><td>' + p2(r.total) + '</td><td>Suma</td></tr>');
-    filas.push('<tr><th scope="row">Exento de ISR (aguinaldo hasta 30 UMA, prima vacacional hasta 15 y separación hasta 90 por ' + r.anios_isr + ' año' + (r.anios_isr === 1 ? '' : 's') + ')</th><td>' + p2(r.exento) + '</td><td>LISR, art. 93, fr. XIII y XIV</td></tr>');
-    filas.push('<tr><th scope="row">ISR del salario y las vacaciones, con la tarifa mensual</th><td>' + p2(r.isr_det[0]) + '</td><td>LISR, art. 96</td></tr>');
-    if (r.isr_det[1] + r.isr_det[2] > 0) filas.push('<tr><th scope="row">ISR del aguinaldo y la prima vacacional que pasan de lo exento</th><td>' + p2(r.isr_det[1] + r.isr_det[2]) + '</td><td>RLISR, art. 174</td></tr>');
-    if (r.isr_det[3] > 0) filas.push('<tr><th scope="row">ISR de la separación: lo gravado × ' + (r.tasa_m * 100).toFixed(2) + ' % (la tasa de tu sueldo mensual de ' + p2(r.m) + ')</th><td>' + p2(r.isr_det[3]) + '</td><td>LISR, arts. 95 y 96</td></tr>');
-    if (r.sub > 0) filas.push('<tr><th scope="row">Menos el subsidio para el empleo (' + D.sub.pct + ' % de la UMA mensual; tu sueldo no pasa de ' + p2(D.sub.tope) + ')</th><td>−' + p2(r.sub) + '</td><td>Decreto DOF 31-12-2025</td></tr>');
-    filas.push('<tr class="ci-fuerte"><th scope="row">Lo que recibirías, aproximado</th><td>' + p2(r.neto) + '</td><td>Total − ISR</td></tr>');
-    $('clPasos').innerHTML = filas.join('');
+    if (r.isr_pend) { $('clPasos').innerHTML = filas.join(''); filas = null; }
+    if (filas) filas.push('<tr><th scope="row">Exento de ISR (aguinaldo hasta 30 UMA, prima vacacional hasta 15 y separación hasta 90 por ' + r.anios_isr + ' año' + (r.anios_isr === 1 ? '' : 's') + ')</th><td>' + p2(r.exento) + '</td><td>LISR, art. 93, fr. XIII y XIV</td></tr>');
+    if (filas) filas.push('<tr><th scope="row">ISR del salario y las vacaciones, con la tarifa mensual</th><td>' + p2(r.isr_det[0]) + '</td><td>LISR, art. 96</td></tr>');
+    if (filas && r.isr_det[1] + r.isr_det[2] > 0) filas.push('<tr><th scope="row">ISR del aguinaldo y la prima vacacional que pasan de lo exento</th><td>' + p2(r.isr_det[1] + r.isr_det[2]) + '</td><td>RLISR, art. 174</td></tr>');
+    if (filas && r.isr_det[3] > 0) filas.push('<tr><th scope="row">ISR de la separación: lo gravado × ' + (r.tasa_m * 100).toFixed(2) + ' % (la tasa de tu sueldo mensual de ' + p2(r.m) + ')</th><td>' + p2(r.isr_det[3]) + '</td><td>LISR, arts. 95 y 96</td></tr>');
+    if (filas && r.sub > 0) filas.push('<tr><th scope="row">Menos el subsidio para el empleo (' + D.sub.pct + ' % de la UMA mensual; tu sueldo no pasa de ' + p2(D.sub.tope) + ')</th><td>−' + p2(r.sub) + '</td><td>Decreto DOF 31-12-2025</td></tr>');
+    if (filas) {
+      filas.push('<tr class="ci-fuerte"><th scope="row">Lo que recibirías, aproximado</th><td>' + p2(r.neto) + '</td><td>Total − ISR</td></tr>');
+      $('clPasos').innerHTML = filas.join('');
+    }
     var ex = '';
     function tabla(cap, rows) {
       return '<div class="ci-tabla-caja"><table class="ci-tabla"><caption>' + cap + '</caption><thead><tr><th scope="col">Concepto</th><th scope="col">Pesos</th><th scope="col">Regla</th></tr></thead><tbody>' +
@@ -195,7 +236,7 @@
       ex += '<h3 class="ci-tit">⚖️ Si el juicio dura ' + x.mj + ' meses (escenario)</h3>' + tabla('Lo que sumaría el juicio, si ' + (r.reg === 'B' ? 'el Tribunal declara injustificado el cese' : 'el patrón no prueba la causa'), j) +
         '<p class="ci-nota">Es un escenario: lo que vale es lo que resuelva el Tribunal. ' + (r.reg === 'B' ? 'En el apartado B no hay tope de doce meses ni interés del 2 % (SCJN, 2a./J. 34/2017).' : 'El ISR de los intereses no lo calculamos.') +
         ' Hay criterios encontrados sobre si a estos salarios les toca la exención de la separación: la cuenta no se la aplica.</p>';
-    } else if (x.mj > 0) {
+    } else if (x.mj > 0 && r.tipo !== 'plat') {
       ex += '<p class="ci-nota">Los salarios ' + (r.reg === 'B' ? 'caídos' : 'vencidos') + ' solo se pagan si te despidieron y en el juicio se demuestra que fue sin causa (' + (r.reg === 'B' ? 'LFTSE, art. 43, fr. III' : 'LFT, art. 48') + '): elige esa causa para verlos.</p>';
     }
     if (r.ptu) {
@@ -213,7 +254,10 @@
     var av = ['Es una cuenta aproximada (derivado): lo que vale es lo que firmen ante el Centro de Conciliación o resuelva el Tribunal.'];
     if (r.reg === 'B') av.unshift('En el apartado B la indemnización y la prima vacacional que se deba los fija el laudo (LFTSE, art. 43, fr. III y IV); aquí va lo que la ley ya da: el salario pendiente, el aguinaldo de ' + x.agd + ' días en proporción y, si escribes cuánto dura el juicio, los salarios caídos.');
     if (!r.juicio.length && (x.causa === 'injustificado' || x.causa === 'sin_reinstalar')) av.unshift(r.reg === 'B' ? 'Sin los salarios caídos (LFTSE, art. 43): dependen de cuánto dure el juicio; escribe un escenario en el paso 3.' : 'Sin los salarios vencidos ni sus intereses (LFT, art. 48): dependen de cuánto dure el juicio; escribe un escenario en el paso 3.');
-    if (r.reg === 'A' && x.causa === 'renuncia' && r.anios < 15) av.unshift('Con menos de 15 años, quien se va por su voluntad no cobra prima de antigüedad (LFT, art. 162, fr. III).');
+    if (r.tipo === 'plat') av.unshift('En una plataforma no se suman días pendientes, vacaciones, prima ni aguinaldo: tu pago por tarea ya los trae (LFT, art. 291-F). Si dejas de tener actividad 30 días seguidos, la relación termina sin indemnización (art. 291-C), y el patrón solo tiene que reinstalarte si se violaron derechos colectivos (art. 49, fr. VI). El reparto de utilidades te toca si trabajaste más de 288 horas en el año (art. 127, fr. IX).');
+    if (r.tipo === 'det' && x.causa === 'vence') av.unshift('Al vencer el plazo, la relación termina sin indemnización (LFT, art. 53, fr. III). Pero si el trabajo que hacías sigue, el contrato se prorroga mientras dure (art. 39), y el plazo solo vale en los casos del art. 37.');
+    if (r.tipo === 'det' && (x.ptuD || 0) > 0 && x.ptuD < 60) av.unshift('Sin reparto de utilidades: quien tiene contrato eventual participa si trabajó sesenta días o más en el año (LFT, art. 127, fr. VII).');
+    if (r.reg === 'A' && r.tipo === 'ind' && x.causa === 'renuncia' && r.anios < 15) av.unshift('Con menos de 15 años, quien se va por su voluntad no cobra prima de antigüedad (LFT, art. 162, fr. III).');
     $('clNota').textContent = av.join(' ');
   }
   $('clForm').addEventListener('submit', pinta);

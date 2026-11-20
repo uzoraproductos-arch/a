@@ -1213,6 +1213,8 @@
     if (!rfcs.length && /\b(antes de contratar\w*|debida diligencia)\b/.test(p)) return null;
     /* «¿Qué pasa si no le cobran la pena al contratista?» no busca a una empresa: lo contesta «Documentar para sancionar». */
     if (!rfcs.length && /\b(penas?|multas?|sancion\w*|incumpl\w*|no cumplio|clausulas?|pruebo|que documentos)\b/.test(p)) return null;
+    /* «Se venció mi contrato eventual» habla de un trabajo, no de un contrato público: lo contesta el simulador laboral. */
+    if (!rfcs.length && /\b(mi contrato|contrato (eventual|por tiempo|de trabajo|laboral)|me toca|finiquito|liquidacion)\b/.test(p)) return null;
     var nombre = p.trim().split(' ').filter(function (w) { return w.length > 1 && CMX_FUERA.indexOf(w) < 0; }).join(' ');
     if (rfcs.length && rfcs[0].length === 13) {
       return { html: '<p>🔒 <code>' + esc(rfcs[0]) + '</code> es el RFC de una <b>persona física</b>. La plataforma no publica a las personas físicas que le venden al gobierno: su RFC es un dato personal. Solo cuentan en los totales de cada institución.</p>' +
