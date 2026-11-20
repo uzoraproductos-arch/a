@@ -3016,6 +3016,30 @@
    "ir": "herramienta-calculadora-predial.html?mun=tequila"
   },
   {
+   "q": "¿Cuánto pago de predial en Jalostotitlán?",
+   "ir": "herramienta-calculadora-predial.html?mun=jalostotitlan"
+  },
+  {
+   "q": "Debo el predial de mi casa en San Miguel el Alto",
+   "ir": "herramienta-calculadora-predial.html?mun=sanmiguel"
+  },
+  {
+   "q": "¿Cuánto pago de predial en El Arenal?",
+   "ir": "herramienta-calculadora-predial.html?mun=elarenal"
+  },
+  {
+   "q": "¿Cuánto es el predial en Zacoalco de Torres?",
+   "ir": "herramienta-calculadora-predial.html?mun=zacoalco"
+  },
+  {
+   "q": "¿Cuánto pago de predial en Tamazula de Gordiano?",
+   "ir": "herramienta-calculadora-predial.html?mun=tamazula"
+  },
+  {
+   "q": "¿Cuánto es el predial en Encarnación de Díaz?",
+   "ir": "herramienta-calculadora-predial.html?mun=encarnacion"
+  },
+  {
    "q": "servicio de revisión de un proveedor",
    "ir": "servicio-diligencia.html"
   },

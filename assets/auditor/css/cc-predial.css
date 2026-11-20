@@ -9,3 +9,10 @@
 .cp-compara { margin: 0 0 24px; }
 .ci fieldset:disabled { opacity: .55; }
 .ci-tabla td[colspan] { text-align: left; white-space: normal; }
+/* ¿No sabes tu valor fiscal? y tu recibo contra la ley (20-11-2026). */
+.cp-vf { margin: 12px 0 16px; padding: 12px 14px; border: 1px solid var(--ci-claro); border-radius: 12px; }
+.cp-vf summary { min-height: 44px; display: flex; align-items: center; font-size: 17px; font-weight: 700; color: var(--ci); cursor: pointer; }
+.ci-boton-2 { background: transparent; color: var(--ci); border: 2px solid var(--ci); }
+.ci-boton-2:hover, .ci-boton-2:focus-visible { background: var(--ci-claro); color: var(--ci); }
+.cp-contraste { margin: 16px 0; padding: 14px 16px; border-radius: 12px; border: 2px solid var(--ci-claro); }
+.cp-contraste p, .cp-contraste li { font-size: 17px; line-height: 1.6; color: var(--ci-tx); }

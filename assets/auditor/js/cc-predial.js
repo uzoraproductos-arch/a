@@ -20,13 +20,37 @@
     return k;
   }
   /* tipo: 'edif' (construido), 'rust' (rústico: su propia tasa al millar si la ley la da) o 'baldio'. */
+  /* El mínimo bimestral, si la ley lo pone (Tamazula: «en ningún caso… inferior a $50.00 pesos bimestrales»). */
   function base(m, vf, tipo) {
+    var b = base0(m, vf, tipo);
+    return m.minimo ? Math.max(b, m.minimo.pesos) : b;
+  }
+  function base0(m, vf, tipo) {
     if (tipo === 'rust' && m.rustico) return r2(vf * m.rustico.millar / 1000 + m.rustico.cf);
     if (tipo !== 'baldio') return bimestral(m, vf);
     var b = m.baldio;
     if (b.tipo === 'igual') return bimestral(m, vf);
     if (b.tipo === 'sobretasa') return r2(bimestral(m, vf) * (1 + b.pct / 100));
     return r2(vf * b.millar / 1000 + b.cf);
+  }
+  /* Al revés: con el impuesto de un bimestre, el valor fiscal que lo daría (predio construido, tabla general).
+     null si el impuesto cae en el mínimo o debajo de la primera cuota fija. */
+  function inverso(m, imp) {
+    if (m.minimo && imp <= m.minimo.pesos) return null;
+    for (var i = m.tramos.length - 1; i >= 0; i--) {
+      var t = m.tramos[i];
+      if (imp >= t[1]) {
+        var v = r2(t[0] + (imp - t[1]) / t[2]);
+        return v >= t[0] ? v : null;
+      }
+    }
+    return null;
+  }
+  /* El valor fiscal, armado como el catastro: terreno × valor unitario de suelo + construcción × valor
+     unitario de construcción × factor (demérito o conservación; 1 si tu tabla no lo da). t: {ts, vs, tc, vc, fc} */
+  function valorFiscal(t) {
+    var fc = t.fc > 0 ? t.fc : 1;
+    return r2(t.ts * t.vs + t.tc * t.vc * fc);
   }
   function cf2(v) { return '$' + Number(v).toLocaleString('es-MX', { minimumFractionDigits: 2 }); }
 
@@ -52,6 +76,9 @@
       pasos.push(['Tu tramo: desde $' + t[0].toLocaleString('es-MX', { minimumFractionDigits: 2 }) + ', cuota fija $' + t[1].toLocaleString('es-MX', { minimumFractionDigits: 2 }) + ', tasa ' + t[2], null, ley(m.art_tarifa)]);
       pasos.push(['(Valor fiscal − límite inferior) × tasa', r2((x.vf - t[0]) * t[2]), ley(m.art_tarifa)]);
       pasos.push(['Impuesto de cada bimestre (más la cuota fija)', B, ley(m.art_tarifa), 'b']);
+    }
+    if (m.minimo && base0(m, x.vf, x.tipo) < m.minimo.pesos) {
+      pasos.push(['La cuenta da menos del mínimo: la ley cobra ' + cf2(m.minimo.pesos) + ' por bimestre', B, ley(m.minimo.art), 'b']);
     }
     var A = r2(B * 6);
     var artB = x.tipo === 'rust' && m.rustico ? m.rustico.art : x.tipo === 'baldio' ? m.baldio.art : m.art_tarifa;
@@ -89,6 +116,10 @@
       } else {
         avisos.push(m.suma_art ? 'El descuento no se suma al pago anticipado (' + m.suma_art + '): te dejamos el descuento, que es mayor.' : 'La Ley de Ingresos de ' + m.nombre + ' no dice si el descuento se suma al pago anticipado; aquí te damos el mayor de los dos.');
       }
+    }
+    if (m.minimo && fin < m.minimo.pesos * 6) {
+      fin = r2(m.minimo.pesos * 6);
+      avisos.push('Con el descuento quedaría debajo del mínimo de ' + cf2(m.minimo.pesos) + ' por bimestre (' + ley(m.minimo.art) + '): pagas el mínimo.');
     }
     res.fin = r2(fin);
     res.pr = pr;
@@ -177,11 +208,38 @@
     return { pasos: pasos, avisos: avisos, total: total, n: filas.length, multa: multa, notif: notif, ejec: ejec };
   }
 
+  /* Tu recibo contra la ley: c = {cobro, per: 'bim'|'anual'}; r = lo que dio calcula(). Nunca califica: si no cuadra,
+     da las causas más comunes para preguntar en la tesorería. */
+  function contrasta(m, x, r, c) {
+    var ley = c.per === 'anual' ? r.fin : r2(r.conBen / 6);
+    var sinDesc = c.per === 'anual' ? r.anual : r.bim;
+    var dif = r2(c.cobro - ley), pct = ley > 0 ? Math.round(dif / ley * 1000) / 10 : 0;
+    var o = { ley: ley, sinDesc: sinDesc, dif: dif, pct: pct, causas: [] };
+    o.cuadra = Math.abs(dif) <= Math.max(1, ley * 0.01);
+    if (!o.cuadra && Math.abs(c.cobro - sinDesc) <= Math.max(1, sinDesc * 0.01)) o.sinBen = true;
+    var bimRecibo = c.per === 'anual' ? c.cobro / 6 : c.cobro;
+    if (x.tipo === 'edif' && !o.cuadra) o.vfImplicito = inverso(m, bimRecibo);
+    if (!o.cuadra) {
+      if (dif > 0) {
+        o.causas = ['Tu recibo puede sumar otros conceptos (agua, aseo, alumbrado, derechos o fondos especiales): compara solo el renglón del impuesto predial.',
+          'Puede traer adeudos de años o bimestres anteriores, con sus recargos y su actualización.',
+          'El catastro pudo cambiar tu valor fiscal (un revalúo, una construcción nueva o las tablas de valores del año).',
+          'Tu predio puede estar registrado con otra clase (baldío o rústico) o con otra tasa.',
+          'El descuento que escogiste aquí quizá no está aplicado en tu cuenta (casi todos se piden por escrito y con documentos).'];
+      } else {
+        o.causas = ['Te pudieron aplicar un descuento, un pago anticipado o un programa del municipio que el simulador no conoce.',
+          'Tu valor fiscal registrado puede ser menor al que escribiste.',
+          'Algunas leyes ponen un tope al aumento del predial frente al año anterior (lo dice la nota de tu municipio, si es el caso).'];
+      }
+    }
+    return o;
+  }
+
   function pesos(v) {
     return (v < 0 ? '−' : '') + '$' + Math.abs(Number(v)).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
-  window.AuditorPredial = { bimestral: bimestral, base: base, calcula: calcula, adeudo: adeudo };
+  window.AuditorPredial = { bimestral: bimestral, base: base, calcula: calcula, adeudo: adeudo, inverso: inverso, valorFiscal: valorFiscal, contrasta: contrasta };
 
   var raiz = document.getElementById('cpRaiz');
   if (!raiz) return;
@@ -227,6 +285,13 @@
     } else if (D.espera && D.espera[ent + '-' + cve]) {
       var w = D.espera[ent + '-' + cve];
       h += '<p class="cp-falta"><span class="est-chip est-pendiente">pendiente</span> Leímos su <a href="' + esc(w.url) + '">Ley de Ingresos ' + D.anio + '</a>, pero no la integramos: ' + esc(w.motivo) + ' No adivinamos una tasa. Mientras, prueba con un municipio marcado con ✓.</p>';
+    } else if (D.reg && D.reg[ent] && D.reg[ent].sin_ley && D.reg[ent].sin_ley[ent + '-' + cve]) {
+      var s0 = D.reg[ent].sin_ley[ent + '-' + cve];
+      h += '<p class="cp-falta"><span class="est-chip est-oficial">oficial</span> <b>' + esc(s0.nombre) + ' no tiene Ley de Ingresos ' + D.anio + ' aprobada.</b> ' + esc(s0.motivo) +
+        ' Fuente: <a href="' + esc(s0.doc.url) + '">' + esc(s0.doc.tx) + '</a>. Sin ley aprobada no hay tarifa del Congreso que el simulador pueda usar; con qué cobra lo debe aclarar su tesorería.</p>';
+    } else if (D.reg && D.reg[ent]) {
+      h += '<p class="cp-falta"><span class="est-chip est-pendiente">pendiente</span> Aún no integramos la tabla del predial de su Ley de Ingresos ' + D.anio +
+        ': es falta de esta plataforma, no del municipio. ' + esc(D.reg[ent].como) + ' Se publican en: <a href="' + esc(D.reg[ent].url) + '">' + esc(D.reg[ent].donde) + '</a>. Mientras, prueba con un municipio marcado con ✓.</p>';
     } else {
       h += '<p class="cp-falta"><span class="est-chip est-pendiente">pendiente</span> Aún no integramos la tabla del predial de su Ley de Ingresos ' + D.anio +
         ': es falta de esta plataforma, no del municipio. La ley la publica el congreso de su estado' +
@@ -310,6 +375,22 @@
     } else {
       $('cpDeudaCaja').hidden = true;
     }
+    var cobro = num('cpCobro'), cx = $('cpContraste');
+    if (cobro > 0) {
+      var c = contrasta(m, x, r, { cobro: cobro, per: $('cpPer').value }), per = c.per === 'anual' ? 'al año' : 'por bimestre';
+      var t = '<h3 class="ci-tit">⚖️ Tu recibo contra la ley</h3><p>Te cobran <b>' + pesos(cobro) + ' ' + per + '</b>; con tu valor fiscal, la Ley de Ingresos de ' + esc(m.nombre) + ' da <b>' + pesos(c.ley) + '</b> <span class="est-chip est-derivado">auditada</span>.</p>';
+      if (c.cuadra) t += '<p class="cp-ok">✓ Coinciden: la diferencia es de ' + pesos(c.dif) + '.</p>';
+      else {
+        t += '<p class="cp-falta">La diferencia es de <b>' + pesos(c.dif) + '</b> (' + (c.pct > 0 ? '+' : '') + c.pct + ' %). Es una señal para revisar, no quiere decir que te cobren mal.</p>';
+        if (c.sinBen) t += '<p>Lo que te cobran es justo el impuesto <b>sin el descuento</b> que escogiste: quizá no está aplicado en tu cuenta.</p>';
+        if (c.vfImplicito) t += '<p>Con lo que te cobran, la tabla de ' + esc(m.nombre) + ' corresponde a un valor fiscal de unos <b>' + pesos(Math.round(c.vfImplicito)).replace(/\.00$/, '') + '</b> <span class="est-chip est-derivado">auditada</span>: compáralo con el que trae tu recibo.</p>';
+        t += '<p>Causas comunes, para preguntar en la tesorería:</p><ul class="ci-lista">' + c.causas.map(function (k) { return '<li>' + esc(k) + '</li>'; }).join('') + '</ul>';
+        t += '<p>Pide el <b>desglose por escrito</b>. Si no estás de acuerdo con un cobro, la ley te da plazo para el recurso de reconsideración o el juicio ante el Tribunal de Justicia Administrativa.</p>';
+      }
+      cx.innerHTML = t; cx.hidden = false;
+    } else {
+      cx.hidden = true;
+    }
     $('cpNota').textContent = avisos.concat(['Es una cuenta aproximada (auditada, no oficial). Tu adeudo oficial te lo da la tesorería de ' + m.nombre + '.']).join(' ');
   }
 
@@ -335,5 +416,17 @@
   $('cpSit').addEventListener('change', function () { $('cpMultaCaja').hidden = this.value === 'esp'; });
   $('cpMultaCaja').hidden = true;
   $('cpForm').addEventListener('submit', pinta);
+  $('cpVfUsa').addEventListener('click', function () {
+    var t = { ts: num('cpTs'), vs: num('cpVs'), tc: num('cpTc') || 0, vc: num('cpVc') || 0, fc: num('cpFc') };
+    if (!(t.ts > 0 && t.vs > 0) || (t.tc > 0 && !(t.vc > 0))) {
+      $('cpVfRes').textContent = 'Escribe al menos los metros de terreno y su valor unitario; si hay construcción, también su valor unitario.';
+      return;
+    }
+    var v = valorFiscal(t);
+    $('cpVf').value = String(v);
+    $('cpVfRes').innerHTML = 'Valor fiscal estimado: <b>' + pesos(v) + '</b> = ' + t.ts + ' m² × ' + pesos(t.vs) + (t.tc ? ' + ' + t.tc + ' m² × ' + pesos(t.vc) + (t.fc && t.fc !== 1 ? ' × ' + t.fc : '') : '') +
+      ' <span class="est-chip est-derivado">auditada</span>. Es tu cuenta con los valores que escribiste; el oficial es el que registra el catastro. Ya lo pusimos arriba.';
+    compara();
+  });
   if (num('cpVf') > 0) pinta();
 })();
