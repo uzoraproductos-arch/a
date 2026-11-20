@@ -837,7 +837,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `servicio-radiografia.html` | Radiografía de tu municipio o de tu estado · Auditavisión | apartados.py | 98 | 0 | 0 | 0 | 0 |
 | `servicio-revision.html` | Revisión documental puntual · Auditavisión | apartados.py | 93 | 0 | 0 | 0 | 0 |
 | `servicio-seguimiento.html` | Vigía y seguimiento periódico · Auditavisión | apartados.py | 107 | 0 | 0 | 0 | 0 |
-| `servicio-simulacion.html` | Simulación fiscal de tu caso · Auditavisión | apartados.py | 96 | 0 | 0 | 0 | 0 |
+| `servicio-simulacion.html` | Simulación de tu caso · Auditavisión | apartados.py | 104 | 0 | 0 | 0 | 0 |
 | `servicio-temporada.html` | Licencia de temporada para redacciones · Auditavisión | apartados.py | 93 | 0 | 0 | 0 | 0 |
 | `servicios-calendario.html` | Calendario · Auditavisión | apartados.py | 47 | 0 | 0 | 0 | 0 |
 | `servicios-catalogo.html` | Catálogo · Auditavisión | apartados.py | 121 | 0 | 0 | 0 | 0 |
@@ -848,7 +848,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `servicios-por-que.html` | Servicios de investigación · Auditavisión | apartados.py | 85 | 0 | 3 | 2 | 0 |
 | `servicios-preguntas.html` | Preguntas · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
 | `servicios-tu-perfil.html` | Tu perfil · Auditavisión | apartados.py | 104 | 0 | 0 | 0 | 0 |
-| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 229 | 0 | 0 | 1 | 0 |
+| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 232 | 0 | 0 | 1 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 

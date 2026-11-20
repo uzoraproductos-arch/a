@@ -2153,12 +2153,14 @@ SERVICIOS = [
     # 20-11-2026, pedido del autor: «integra nuestros simuladores como servicios también». Los simuladores de la
     # Calculadora Cívica, de Megaobras, de Costo Ambiental y de la Enciclopedia, como encargo: la cuenta la hace
     # el simulador, con su artículo; el encargo es correrla con tu caso y documentarla.
-    ('simulacion', '🧮', 'Simulación fiscal de tu caso',
-     'Tu caso pasado por los simuladores de la plataforma, con tus números: lo que te retienen y lo que cuesta una plaza (IMSS o ISSSTE), '
-     'el ISR al vender una casa o un terreno, el de tus ganancias en la bolsa y tu impuesto predial, cada paso con su artículo.',
-     'Memoria de cálculo por escenario: cada paso con su artículo y su etiqueta, lo que el simulador no calcula y los escenarios que comparaste. '
-     'Cada simulador lo usas tú, gratis, en tu navegador.',
-     'Personas, despachos contables, inmobiliarias, notarías y áreas de recursos humanos.', 'simuladores'),
+    # 20-11-2026, el autor: «en el simulador también me refería al estado de cuenta cívico, ambiental, nómina, predial, laboral».
+    ('simulacion', '🧮', 'Simulación de tu caso',
+     'Tu caso pasado por los simuladores de la plataforma, con tus números: tu estado de cuenta cívico y tu estado de cuenta ambiental, '
+     'tu nómina completa (lo que te retienen, lo que pone el patrón al IMSS e INFONAVIT o al ISSSTE y FOVISSSTE, y el costo de la plaza), '
+     'tu impuesto predial y el ISR al vender una casa o un terreno o al ganar en la bolsa, cada paso con su artículo.',
+     'Memoria de cálculo por escenario: cada paso con su artículo y su etiqueta, lo que el simulador no calcula y los escenarios que comparaste, '
+     'y tus estados de cuenta con folio y huella. Cada simulador lo usas tú, gratis, en tu navegador.',
+     'Personas, despachos contables, áreas de recursos humanos y de nómina, inmobiliarias y notarías.', 'simuladores'),
     ('escenarios', '📈', 'Escenarios del presupuesto y de las obras',
      'Qué pasa si…: el presupuesto repartido de otra forma, una cifra de otro año traída a pesos de hoy, lo que cuestan las megaobras en el tiempo '
      'y en tu bolsillo, el reloj de la deuda y la inversión ambiental, con las cifras oficiales de la base.',
@@ -2618,7 +2620,8 @@ SV_EJEMPLOS = {
                      ('Taller para leer el presupuesto', '¿Pueden enseñar a mi grupo a leer el presupuesto de su municipio o de su estado?')],
     'licencia': [('Las herramientas dentro de mi institución', '¿Cómo podemos usar el verificador y los datos de la plataforma en nuestra organización?'),
                  ('La plataforma en mi universidad', '¿Cómo la usamos en clase, en servicio social o en tesis?')],
-    'simulacion': [('Vendo la casa o el terreno que heredé', '¿Cuánto ISR pagaría al venderla, paso por paso y con qué artículo, y qué no calcula el simulador?'),
+    'simulacion': [('Mi estado de cuenta cívico y ambiental', '¿Cuánto pago de impuestos al año, a dónde va cada peso y qué me cargan de deuda y de daño ambiental, con folio y huella?'),
+                   ('Vendo la casa o el terreno que heredé', '¿Cuánto ISR pagaría al venderla, paso por paso y con qué artículo, y qué no calcula el simulador?'),
                    ('Lo que cuesta una plaza en mi empresa o en mi dependencia', '¿Cuánto le retienen a la persona y cuánto pone el patrón, con el IMSS o con el ISSSTE?'),
                    ('Mis ganancias en la bolsa y el predial de mi casa', '¿Cuánto pago de ISR por lo que gané y cuánto de predial con la ley de mi municipio?')],
     'escenarios': [('El presupuesto de mi estado repartido de otra forma', '¿Qué pasaría si se movieran recursos de un ramo a otro, con las cifras oficiales y la operación de cada resultado?'),
