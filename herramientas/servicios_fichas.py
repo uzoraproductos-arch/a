@@ -270,23 +270,28 @@ FICHAS = {
     # 20-11-2026, pedido del autor: «integra nuestros simuladores como servicios también».
     'simulacion': {
         'hace': [
-            ('🧮', 'Lo que te retienen', 'El ISR, las cuotas del IMSS o del ISSSTE y lo que pone el patrón, con el costo de la plaza.',
-             'herramienta-calculadora-ticket-retienen.html', 'Gratis'),
+            ('🧾', 'Tu estado de cuenta cívico', 'Lo que ganaste, lo que te retuvieron y a dónde fue tu impuesto, en un solo documento con folio y huella.',
+             'herramienta-calculadora-ticket-estado.html', 'Gratis'),
+            ('🌱', 'Tu estado de cuenta ambiental', 'Lo que ya te cargaron a tu nombre: tu parte de la deuda, de sus intereses y del daño ambiental.',
+             'herramienta-ambiente-ticket.html', 'Gratis'),
+            ('💼', 'Tu nómina completa', 'Lo que te retienen (ISR y cuotas obreras) y lo que pone el patrón: IMSS e INFONAVIT en la empresa, '
+             'ISSSTE y FOVISSSTE en el gobierno, con el costo de la plaza y su artículo.', 'herramienta-calculadora-ticket-retienen.html', 'Nuevo'),
             ('🏠', 'Vendes una casa o un terreno', 'El ISR de la ganancia con el factor del INPC, la exención de la casa habitación y el pago ante notario, '
              'cada paso con su artículo.', 'herramienta-calculadora-inmueble.html', 'Nuevo'),
             ('📈', 'Inviertes en la bolsa', 'El 10 % de los artículos 129 y 140 sobre tu ganancia y tus dividendos, y lo que el simulador no calcula.',
              'herramienta-calculadora-bolsa.html', 'Nuevo'),
             ('🏡', 'Tu impuesto predial', 'El predial con la Ley de Ingresos de tu municipio, si ya está cotejada, cada cifra con su artículo.',
              'herramienta-calculadora-predial.html', 'Nuevo'),
-            ('🧾', 'Tu estado de cuenta cívico', 'Lo que pagas de impuestos al año y a dónde va cada peso.', 'herramienta-calculadora-ticket.html', 'Gratis'),
         ],
-        'auditor': [('Gano 15 mil al mes, ¿cuánto me retienen?', 'ciudadano'), ('¿Cuánto ISR pago si vendo mi casa?', 'ciudadano'),
+        'auditor': [('Dame mi estado de cuenta cívico', 'ciudadano'), ('Mi estado de cuenta ambiental', 'ambientalista'),
+                    ('Gano 15 mil al mes, ¿cuánto me retienen?', 'ciudadano'), ('Trabajo en el gobierno y gano 20 mil al mes, ¿cuánto me retienen?', 'ciudadano'), ('¿Cuánto ISR pago si vendo mi casa?', 'ciudadano'),
                     ('¿Cuánto ISR pago si vendo acciones en la bolsa?', 'ciudadano'), ('¿Cuánto pago de predial en Zapopan?', 'ciudadano')],
         'enciclopedia': [('herramienta-calculadora.html', 'La Calculadora Cívica'), ('numeros-herramientas-del-auditor.html', 'Las herramientas del Auditor')],
-        'glosario': ['ISR (Impuesto Sobre la Renta)', 'Retención del ISR (Tarifa del Artículo 96)', 'Cuota Patronal del IMSS', 'Cuotas al ISSSTE',
+        'glosario': ['ISR (Impuesto Sobre la Renta)', 'Retención del ISR (Tarifa del Artículo 96)', 'Cuota Obrera del IMSS', 'Cuota Patronal del IMSS', 'Cuotas al ISSSTE',
+                     'Costos Totales por Agotamiento y Degradación Ambiental',
                      'Impuesto Predial', 'Inflación e INPC', 'UMA (Unidad de Medida y Actualización)'],
-        'refs': ['ref-lisr', 'ref-rmf2026', 'ref-lss', 'ref-cff'],
-        'pal': r'simulacion (fiscal|de (mi|tu|su) caso)|simul\w* (mi|tu|su) caso|memoria de calculo|simulen',
+        'refs': ['ref-lisr', 'ref-rmf2026', 'ref-lss', 'ref-lft', 'ref-cff'],
+        'pal': r'simulacion (fiscal|laboral|de nomina|de (mi|tu|su) caso)|simul\w* (mi|tu|su) caso|memoria de calculo|simulen',
         'no': 'La cuenta es una aproximación hecha con la ley vigente: no es tu declaración ni sustituye a tu contador o a tu notario, y nunca la presentamos por ti.',
     },
     'escenarios': {

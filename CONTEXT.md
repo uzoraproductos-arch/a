@@ -7523,6 +7523,12 @@ Pedido del autor: «intégralo y continúa con las dimensiones pendientes». Se 
 - **Lector:** octava aplicación del Modo Inspector, `herramienta-inspector-factura.html`; todo en el navegador, nada se sube. `actualizar_69b.py` conserva ahora la fecha de presunto y de definitivo de cada RFC (dos columnas al final; el CSV es el mismo, SHA-256 `54b95d41…`).
 - **Pendiente:** cotejar los 8 avisos contra el DOF y corregir cada módulo con su fecha (plataforma); el Senado, si un día publica un índice legible; la validación del sello digital y la consulta de vigencia (cancelación) de cada CFDI, que solo da el SAT.
 
+### 20-11-2026 · sello 20261120b · La Simulación de tu caso, con estados de cuenta y nómina
+
+- **Pedido del autor:** «en el simulador también me refería al estado de cuenta cívico, ambiental, nómina, predial, laboral».
+- **Hecho:** `simulacion` → «Simulación de tu caso»; su `hace` abre con el estado de cuenta cívico (`herramienta-calculadora-ticket-estado.html`), el ambiental (`herramienta-ambiente-ticket.html`) y la nómina completa; preguntas del Auditor del modo Ciudadano y Ambientalista; glosario con la cuota obrera y el costo ambiental; la LFT en sus referencias.
+- **Pendiente (plataforma):** un simulador laboral (finiquito, liquidación, aguinaldo, vacaciones y PTU) cotejado con la LFT y el art. 93 de la LISR; hasta entonces el servicio no lo ofrece.
+
 ### 20-11-2026 · sello 20261120a · Los simuladores, como servicios
 
 - **Pedido del autor:** «integra nuestros simuladores como servicios también».
