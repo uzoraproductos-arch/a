@@ -16,3 +16,5 @@
 .ci-boton-2:hover, .ci-boton-2:focus-visible { background: var(--ci-claro); color: var(--ci); }
 .cp-contraste { margin: 16px 0; padding: 14px 16px; border-radius: 12px; border: 2px solid var(--ci-claro); }
 .cp-contraste p, .cp-contraste li { font-size: 17px; line-height: 1.6; color: var(--ci-tx); }
+.cp-tabla { margin: 8px 0 14px; padding: 12px 14px; border-radius: 12px; background: var(--ci-claro); }
+.cp-tabla .ci-pista, .cp-tabla .ci-nota { color: var(--ci-tx); }
