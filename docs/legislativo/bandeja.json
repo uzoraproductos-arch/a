@@ -1,11 +1,25 @@
 {
- "actualizado": "19-11-2026",
+ "actualizado": "20-11-2026",
  "nota": "Lo que junta herramientas/vigia_legislativo.py del sumario del DOF y del índice de Leyes Federales Vigentes de la Cámara de Diputados, sin verificar: solo título, fecha y liga, nunca el texto de la reforma. Cada hallazgo queda «por cotejar» hasta que una persona lo revisa; los avisos dicen qué módulo de Auditavisión cita una reforma anterior a la vigente.",
  "fuentes": {
   "dof": "https://dof.gob.mx/sumario.xml",
   "diputados": "https://www.diputados.gob.mx/LeyesBiblio/index.htm"
  },
  "hallazgos": [
+  {
+   "id": "dip-cpf-13-11-2026",
+   "fuente": "diputados",
+   "leyes": [
+    "cpf"
+   ],
+   "fecha": "13-11-2026",
+   "titulo": "CÓDIGO Penal Federal: la Cámara de Diputados registra una reforma del 13-11-2026 (antes decía 13-03-2026).",
+   "articulos": "",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpf.htm",
+   "seccion": "Leyes Federales Vigentes",
+   "estado": "por cotejar",
+   "visto": "20-11-2026"
+  },
   {
    "id": "dip-lisr-13-11-2026",
    "fuente": "diputados",
@@ -318,7 +332,7 @@
   "cpf": {
    "nombre": "CÓDIGO Penal Federal",
    "publicada": "14-08-1931",
-   "reforma": "13-03-2026",
+   "reforma": "13-11-2026",
    "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpf.htm",
    "pdf": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPF.pdf"
   },
@@ -359,6 +373,36 @@
    "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm"
   },
   {
+   "archivo": "herramientas/cc_laboral.py",
+   "renglon": 29,
+   "ley": "lisr",
+   "nombre": "Ley del Impuesto sobre la Renta",
+   "cita": "01-04-2024",
+   "vigente": "13-11-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm"
+  },
+  {
+   "archivo": "herramientas/cc_laboral.py",
+   "renglon": 85,
+   "ley": "lisr",
+   "nombre": "Ley del Impuesto sobre la Renta",
+   "cita": "06-05-2016",
+   "vigente": "13-11-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm"
+  },
+  {
+   "archivo": "herramientas/cc_laboral.py",
+   "renglon": 92,
+   "ley": "cpeum",
+   "nombre": "Constitución Política de los Estados Unidos Mexicanos",
+   "cita": "15-01-2026",
+   "vigente": "07-10-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpeum.htm"
+  },
+  {
    "archivo": "herramientas/integrar_glosario_conservacion.py",
    "renglon": 12,
    "ley": "cff",
@@ -379,6 +423,16 @@
    "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cff.htm"
   },
   {
+   "archivo": "herramientas/integrar_glosario_nepotismo.py",
+   "renglon": 12,
+   "ley": "cpf",
+   "nombre": "Código Penal Federal",
+   "cita": "13-03-2026",
+   "vigente": "13-11-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpf.htm"
+  },
+  {
    "archivo": "herramientas/integrar_glosario_registros.py",
    "renglon": 11,
    "ley": "cpeum",
@@ -397,6 +451,16 @@
    "vigente": "07-10-2026",
    "tipo": "vieja",
    "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpeum.htm"
+  },
+  {
+   "archivo": "herramientas/nepotismo.py",
+   "renglon": 15,
+   "ley": "cpf",
+   "nombre": "Código Penal Federal",
+   "cita": "13-03-2026",
+   "vigente": "13-11-2026",
+   "tipo": "vieja",
+   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpf.htm"
   },
   {
    "archivo": "herramientas/padron_sat.py",
