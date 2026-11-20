@@ -27,7 +27,8 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # El compromiso de la política de independencia que el modo Periodista pone a
 # la vista en cada familia, y lo que un encargo no es (modo Inspector). Se
 # buscan por el principio de su título en apartados.INDEPENDENCIA.
-IND_FAMILIA = {'electoral': 'En campaña', 'investigacion': 'Quien encarga', 'prevencion': 'Lo que no está en venta', 'formacion': 'Lo que no está en venta'}
+IND_FAMILIA = {'electoral': 'En campaña', 'investigacion': 'Quien encarga', 'prevencion': 'Lo que no está en venta', 'formacion': 'Lo que no está en venta',
+               'simuladores': 'Quien encarga'}
 IND_NO_ES = 'Es investigación documental'
 
 

@@ -7523,6 +7523,13 @@ Pedido del autor: «intégralo y continúa con las dimensiones pendientes». Se 
 - **Lector:** octava aplicación del Modo Inspector, `herramienta-inspector-factura.html`; todo en el navegador, nada se sube. `actualizar_69b.py` conserva ahora la fecha de presunto y de definitivo de cada RFC (dos columnas al final; el CSV es el mismo, SHA-256 `54b95d41…`).
 - **Pendiente:** cotejar los 8 avisos contra el DOF y corregir cada módulo con su fecha (plataforma); el Senado, si un día publica un índice legible; la validación del sello digital y la consulta de vigencia (cancelación) de cada CFDI, que solo da el SAT.
 
+### 20-11-2026 · sello 20261120a · Los simuladores, como servicios
+
+- **Pedido del autor:** «integra nuestros simuladores como servicios también».
+- **Hecho:** quinta familia `simuladores` («Simuladores a tu medida») con `simulacion` (Calculadora Cívica: retenciones y costo de la plaza, inmueble, bolsa, predial, estado de cuenta cívico) y `escenarios` (Reparte el presupuesto, máquina del tiempo del peso, megaobras en vivo y en tu bolsillo, reloj de la deuda, inversión ambiental). `COBRO`, `FICHAS` (glosario y referencias de la base), `SV_EJEMPLOS`, `PAL_LINEA`, `IND_FAMILIA` («Quien encarga»), `SV_TONO` y las puertas de la portada. Los simuladores también en `hace` de radiografía, entrega y capacitación, y en cinco perfiles.
+- **Probado:** el chat contesta «servicio de …» con cada página y ofrece la simulación bajo «¿Cuánto ISR pago si vendo mi casa?»; el dictamen de los escenarios cierra con su servicio; sin errores de consola. 561 preguntas.
+- **Pendiente:** ninguno nuevo. Los simuladores de megaobras y de presupuesto no tienen aún un formato de «memoria de escenario» descargable: hoy el entregable se arma por encargo.
+
 ### 19-11-2026 · sello 20261119r · Servicios: tarjeta única, todo por el chat y el dictamen
 
 - **Pedido del autor:** «evalúa, verifícame, actualízame y rediséñame la pestaña de servicios homologando las tarjetas y que todo quede vinculado al chat y a la generación del dictamen», y después: «que quede integrado todos los servicios con las herramientas… [nómina, despapelizar]… contratas un servicio, se lo montas al chat y el chat manda el dictamen, la respuesta técnica».

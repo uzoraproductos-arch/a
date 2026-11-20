@@ -2150,6 +2150,21 @@ SERVICIOS = [
     ('licencia', '🔑', 'Licencia de las herramientas',
      'El uso de las herramientas y los datos de la plataforma dentro de tu institución.',
      'Licencia de uso, adaptación y acompañamiento.', 'Dependencias de gobierno, universidades, medios y organizaciones.', 'investigacion'),
+    # 20-11-2026, pedido del autor: «integra nuestros simuladores como servicios también». Los simuladores de la
+    # Calculadora Cívica, de Megaobras, de Costo Ambiental y de la Enciclopedia, como encargo: la cuenta la hace
+    # el simulador, con su artículo; el encargo es correrla con tu caso y documentarla.
+    ('simulacion', '🧮', 'Simulación fiscal de tu caso',
+     'Tu caso pasado por los simuladores de la plataforma, con tus números: lo que te retienen y lo que cuesta una plaza (IMSS o ISSSTE), '
+     'el ISR al vender una casa o un terreno, el de tus ganancias en la bolsa y tu impuesto predial, cada paso con su artículo.',
+     'Memoria de cálculo por escenario: cada paso con su artículo y su etiqueta, lo que el simulador no calcula y los escenarios que comparaste. '
+     'Cada simulador lo usas tú, gratis, en tu navegador.',
+     'Personas, despachos contables, inmobiliarias, notarías y áreas de recursos humanos.', 'simuladores'),
+    ('escenarios', '📈', 'Escenarios del presupuesto y de las obras',
+     'Qué pasa si…: el presupuesto repartido de otra forma, una cifra de otro año traída a pesos de hoy, lo que cuestan las megaobras en el tiempo '
+     'y en tu bolsillo, el reloj de la deuda y la inversión ambiental, con las cifras oficiales de la base.',
+     'Un escenario documentado: los supuestos que tú eliges, separados de las cifras oficiales, la operación de cada resultado y lo que el '
+     'escenario no dice. Es un ejercicio, no un pronóstico.',
+     'Candidaturas, regidurías y congresos, medios, universidades y organizaciones.', 'simuladores'),
 ]
 
 # La Biblioteca del Erario lleva a los servicios que se apoyan en ella
@@ -2178,6 +2193,8 @@ COBRO = {
     'expediente': 'Cotización por escrito',
     'capacitacion': 'Precio por taller',
     'licencia': 'Convenio anual',
+    'simulacion': 'Precio fijo por escenario, según cuántos simuladores',
+    'escenarios': 'Precio fijo por escenario documentado',
 }
 
 # Cuatro familias (reestructura del 11-11-2026, pedido del autor: «haz la
@@ -2189,13 +2206,14 @@ LINEAS = [
     ('electoral', '🗳️', 'Temporada electoral', 'Antes de votar, de prometer o de recibir un gobierno: sus números, con su documento. El mismo servicio y el mismo precio para todos.'),
     ('formacion', '🎓', 'Formación', 'Para que tu equipo, tus alumnos o tu dependencia lo hagan por su cuenta.'),
     ('investigacion', '🔎', 'Instituciones e investigación a la medida', 'Cuando una pregunta necesita documentos cruzados, o tu institución quiere las herramientas dentro.'),
+    ('simuladores', '🧮', 'Simuladores a tu medida', 'Tu caso o tu pregunta pasados por los simuladores de la plataforma: cada paso con su artículo, y lo que no calcula, dicho.'),
 ]
 
 # El calendario de la página: (cuándo, qué abre, texto). Las fechas salen de
 # asistente_legislativo.py (LGIPE, art. 22) y asistente_judicial.py.
 CALENDARIO = [
-    ('Hoy', 'La consulta y las herramientas', 'Gratis: el Auditor, el Planisferio, el padrón de contrapartes con la revisión por lote, la lista 69-B, el lector de facturas y de nómina, y el verificador de notas.'),
-    ('Hoy, %s' % CON_CODIGO if SERVICIOS_OPERAN else 'Con el lanzamiento', 'Prevención, talleres y encargos', 'El Vigía con aviso, la ficha del proveedor, la revisión de tu cartera, los lotes de facturas y de nómina, los talleres y las cotizaciones.'),
+    ('Hoy', 'La consulta y las herramientas', 'Gratis: el Auditor, el Planisferio, el padrón de contrapartes con la revisión por lote, la lista 69-B, el lector de facturas y de nómina, el verificador de notas y los simuladores.'),
+    ('Hoy, %s' % CON_CODIGO if SERVICIOS_OPERAN else 'Con el lanzamiento', 'Prevención, talleres y encargos', 'El Vigía con aviso, la ficha del proveedor, la revisión de tu cartera, los lotes de facturas y de nómina, los talleres, las simulaciones a tu medida y las cotizaciones.'),
     ('Antes del 6 de junio de 2027', 'Radiografías y licencia de temporada', 'Ese domingo se eligen la Cámara de Diputados, gubernaturas, congresos locales y ayuntamientos. '
      'Cada promesa de gasto de campaña entra a la memoria de promesas, con su fecha.'),
     ('Después de la elección', 'Lo que recibes', 'El kit de entrega-recepción y el taller para leer el presupuesto, para los gobiernos y cabildos que entran.'),
@@ -2210,7 +2228,7 @@ CALENDARIO = [
 PERFILES = [
     ('🧮', 'Contaduría y despachos contables', 'Contadoras y contadores públicos, fiscalistas y despachos.',
      'Si un proveedor sale definitivo en la lista 69-B, sus facturas «no producen ni produjeron efecto fiscal alguno» (CFF, art. 69-B) y tu cliente tiene que acreditar la operación o corregir.',
-     ['facturas', 'nomina', 'contrapartes', 'seguimiento', 'diligencia', 'gobernanza'],
+     ['facturas', 'nomina', 'contrapartes', 'seguimiento', 'diligencia', 'gobernanza', 'simulacion'],
      [('herramienta-inspector-efos.html', 'Busca un RFC en la lista 69-B'), ('herramienta-inspector-factura.html', 'Lee una factura sin subirla'),
       ('herramienta-inspector-resultados.html', 'Revisa un estado de resultados')]),
     ('⚖️', 'Derecho y cumplimiento', 'Abogadas y abogados corporativos, oficiales de cumplimiento y prevención de lavado (PLD).',
@@ -2224,19 +2242,19 @@ PERFILES = [
       ('herramienta-inspector-asf.html', 'Auditorías de la ASF')]),
     ('📰', 'Periodismo e investigación', 'Reporteras, reporteros, editores y equipos de datos.',
      'Cotejar rápido una cifra antes de publicarla y tener a la mano el documento que la sostiene, para no exponerse a una réplica.',
-     ['temporada', 'revision', 'expediente'],
+     ['temporada', 'revision', 'expediente', 'escenarios'],
      [('herramienta-inspector-nota.html', 'Contrasta una nota'), ('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor')]),
     ('🗳️', 'Candidaturas y equipos de campaña', 'De cualquier partido, coalición o candidatura independiente.',
      'Proponer con los números reales de tu municipio o de tu estado, y no con los que circulan. El mismo documento y el mismo precio para todas las candidaturas, con factura y sin cortesías.',
-     ['radiografia', 'capacitacion'],
+     ['radiografia', 'escenarios', 'capacitacion'],
      [('planisferio.html', 'El Planisferio'), ('noticias-seguimiento.html#promesas', 'La memoria de promesas')]),
     ('🏛️', 'Regidurías, congresos y su asesoría', 'Regidoras, regidores, diputaciones locales y su equipo técnico, de cualquier partido.',
      'Llegar a una sesión de cabildo o a la revisión de una cuenta pública con los documentos ya cruzados. El mismo servicio y la misma regla para todos los partidos.',
-     ['entrega', 'expediente', 'seguimiento'],
+     ['entrega', 'expediente', 'seguimiento', 'escenarios'],
      [('herramienta-inspector-entes.html', 'El Auditor de entes'), ('planisferio.html', 'El Planisferio')]),
     ('🎓', 'Universidades y academia', 'Contaduría, Derecho, Economía, Administración y políticas públicas, Ciencia política y Periodismo.',
      'Enseñar a leer el presupuesto y a fiscalizar con datos reales y citables, en clase, en un servicio social o en una tesis.',
-     ['capacitacion', 'licencia'],
+     ['capacitacion', 'licencia', 'escenarios', 'simulacion'],
      [('enciclopedia-auditavision.html', 'La Enciclopedia'), ('planisferio.html', 'El Planisferio')]),
     ('📋', 'Gobiernos y dependencias', 'Tesorerías, contralorías y áreas de transparencia.',
      'Capacitar a su personal con las observaciones que la ASF repite, y revisar su nómina contra la Ley del ISSSTE y el tope del artículo 127. '
@@ -2600,6 +2618,11 @@ SV_EJEMPLOS = {
                      ('Taller para leer el presupuesto', '¿Pueden enseñar a mi grupo a leer el presupuesto de su municipio o de su estado?')],
     'licencia': [('Las herramientas dentro de mi institución', '¿Cómo podemos usar el verificador y los datos de la plataforma en nuestra organización?'),
                  ('La plataforma en mi universidad', '¿Cómo la usamos en clase, en servicio social o en tesis?')],
+    'simulacion': [('Vendo la casa o el terreno que heredé', '¿Cuánto ISR pagaría al venderla, paso por paso y con qué artículo, y qué no calcula el simulador?'),
+                   ('Lo que cuesta una plaza en mi empresa o en mi dependencia', '¿Cuánto le retienen a la persona y cuánto pone el patrón, con el IMSS o con el ISSSTE?'),
+                   ('Mis ganancias en la bolsa y el predial de mi casa', '¿Cuánto pago de ISR por lo que gané y cuánto de predial con la ley de mi municipio?')],
+    'escenarios': [('El presupuesto de mi estado repartido de otra forma', '¿Qué pasaría si se movieran recursos de un ramo a otro, con las cifras oficiales y la operación de cada resultado?'),
+                   ('Lo que cuestan las megaobras en pesos de hoy', '¿Cuánto vale hoy lo que se gastó en esa obra y cuánto le toca a cada contribuyente?')],
     'no-se': [('Algo raro con el dinero público de mi municipio', '¿Por dónde conviene empezar a revisarlo, y con qué documentos?'),
               ('Una empresa con la que voy a tratar', '¿Qué puedo saber de ella con documentos públicos?')],
 }
@@ -2627,7 +2650,7 @@ def sv_liga(html_, archivo):
 # generación del dictamen»). La de un servicio lleva siempre las mismas cuatro
 # puertas: su página, el Auditor, su dictamen y su cotización. El chat y el
 # dictamen son de la pestaña Auditor: se ligan directo (§0 quinquies).
-SV_TONO = {'prevencion': 'riesgo', 'electoral': 'sectores', 'formacion': 'modulos', 'investigacion': 'oferta'}
+SV_TONO = {'prevencion': 'riesgo', 'electoral': 'sectores', 'formacion': 'modulos', 'investigacion': 'oferta', 'simuladores': 'simula'}
 DICTAMEN = 'herramienta-inspector-dictamen.html'
 
 
@@ -2745,7 +2768,8 @@ def servicios():
     # La portada: la propuesta de valor y un selector por necesidad, que lleva
     # a cada familia (11-11-2026).
     puertas = [('prevencion', 'Prevenir fraude y lavado'), ('electoral', 'Entender a mi municipio o a mi estado'),
-               ('formacion', 'Capacitar a mi equipo'), ('investigacion', 'Una investigación o una licencia')]
+               ('formacion', 'Capacitar a mi equipo'), ('investigacion', 'Una investigación o una licencia'),
+               ('simuladores', 'Simular mi caso o un escenario')]
     import monetizacion
     monetizacion.revisar()
     # Diseño del 11-11-2026 (pedido del autor: «no es algo fácil para el
@@ -2870,7 +2894,7 @@ def servicios():
             for n, (k, t) in enumerate(pares))))
     oferta = '<div class="sv-tabs" data-sv-tabs>\n          %s\n          <div class="sv-lineas">\n%s\n          </div>\n        </div>' % (
         pestanas('Familias de servicios', [(lid, '<span aria-hidden="true">%s</span> %s' % (ico, corto)) for (lid, ico, _t, _x), corto in
-                                           zip(LINEAS, ['Fraude y lavado', 'Temporada electoral', 'Formación', 'Instituciones e investigación'])]), oferta)
+                                           zip(LINEAS, ['Fraude y lavado', 'Temporada electoral', 'Formación', 'Instituciones e investigación', 'Simuladores'])]), oferta)
 
     # Fraude y lavado de dinero: el argumento de venta, con sus cifras.
     falta = [k for k in RIESGO_CIFRAS if k not in {c[0] for c in fraude.cifras()}]
