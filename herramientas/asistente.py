@@ -570,7 +570,9 @@ def _charla(d):
             # Agenda del erario de Noticias (28-10-2026): las fechas que fija la ley.
             'agenda': __import__('noticias').AGENDA,
             # Las aplicaciones del chat son servicios (19-11-2026): qué servicio aprovecha cada página.
-            'srv': _servicios_chat()}
+            'srv': _servicios_chat(),
+            # Cada servicio, para el capítulo «el servicio» del dictamen (19-11-2026): ícono, nombre y forma de cobro. Nunca un monto.
+            'srvs': {x[0]: [x[1], x[2], __import__('apartados').COBRO[x[0]]] for x in __import__('apartados').SERVICIOS}}
 
 
 def _servicios_chat():
