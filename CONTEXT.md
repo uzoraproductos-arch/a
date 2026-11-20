@@ -7523,6 +7523,12 @@ Pedido del autor: «intégralo y continúa con las dimensiones pendientes». Se 
 - **Lector:** octava aplicación del Modo Inspector, `herramienta-inspector-factura.html`; todo en el navegador, nada se sube. `actualizar_69b.py` conserva ahora la fecha de presunto y de definitivo de cada RFC (dos columnas al final; el CSV es el mismo, SHA-256 `54b95d41…`).
 - **Pendiente:** cotejar los 8 avisos contra el DOF y corregir cada módulo con su fecha (plataforma); el Senado, si un día publica un índice legible; la validación del sello digital y la consulta de vigencia (cancelación) de cada CFDI, que solo da el SAT.
 
+### 20-11-2026 · sello 20261120c · El simulador laboral: tu finiquito o tu liquidación
+
+- **Pedido del autor:** «integralo y construye el simulador laboral».
+- **Hecho:** `cc_laboral.py` + `cc-laboral.js` (gemelos, `--prueba` con 17 casos en `revision.py`), novena aplicación de la Calculadora Cívica (`cclaboral`). Cotejado contra la LFT (DOF 14-05-2026, huella `12f09393…`), la LISR (`803c2875…`), el RLISR (`0538fd2f…`) y la CPEUM (transitorio tercero de la desindexación, `cefb525a…`). Lecturas nuestras dichas en la página: años de 365 días, último año en proporción, mes de 30 días, salario integrado con aguinaldo y prima vacacional, y el salario y las vacaciones tasados como todo el ingreso del mes, sin subsidio.
+- **Pendiente:** salarios vencidos e intereses (dependen del juicio), reparto de utilidades (depende de la declaración de la empresa), contratos por tiempo u obra determinados (art. 50, fr. I), plataformas digitales (fr. IV) y el apartado B; el subsidio para el empleo en la retención.
+
 ### 20-11-2026 · sello 20261120b · La Simulación de tu caso, con estados de cuenta y nómina
 
 - **Pedido del autor:** «en el simulador también me refería al estado de cuenta cívico, ambiental, nómina, predial, laboral».

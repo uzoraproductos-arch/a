@@ -3070,6 +3070,18 @@
   {
    "q": "¿Qué servicios de simuladores tienen?",
    "ir": "servicios-catalogo.html#fam-simuladores"
+  },
+  {
+   "q": "Me despidieron, ¿cuánto me toca de liquidación?",
+   "ir": "herramienta-calculadora-laboral.html"
+  },
+  {
+   "q": "¿Cuánto me toca de finiquito si renuncio?",
+   "ir": "herramienta-calculadora-laboral.html"
+  },
+  {
+   "q": "Simulador laboral",
+   "ir": "herramienta-calculadora-laboral.html"
   }
  ]
 }

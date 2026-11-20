@@ -276,6 +276,8 @@ FICHAS = {
              'herramienta-ambiente-ticket.html', 'Gratis'),
             ('💼', 'Tu nómina completa', 'Lo que te retienen (ISR y cuotas obreras) y lo que pone el patrón: IMSS e INFONAVIT en la empresa, '
              'ISSSTE y FOVISSSTE en el gobierno, con el costo de la plaza y su artículo.', 'herramienta-calculadora-ticket-retienen.html', 'Nuevo'),
+            ('🤝', 'Tu finiquito o tu liquidación', 'Lo que te toca al terminar tu trabajo según la causa: vacaciones, aguinaldo, indemnización y prima '
+             'de antigüedad, con lo exento de ISR y la retención aproximada, cada renglón con su artículo de la LFT.', 'herramienta-calculadora-laboral.html', 'Nuevo'),
             ('🏠', 'Vendes una casa o un terreno', 'El ISR de la ganancia con el factor del INPC, la exención de la casa habitación y el pago ante notario, '
              'cada paso con su artículo.', 'herramienta-calculadora-inmueble.html', 'Nuevo'),
             ('📈', 'Inviertes en la bolsa', 'El 10 % de los artículos 129 y 140 sobre tu ganancia y tus dividendos, y lo que el simulador no calcula.',
@@ -284,6 +286,7 @@ FICHAS = {
              'herramienta-calculadora-predial.html', 'Nuevo'),
         ],
         'auditor': [('Dame mi estado de cuenta cívico', 'ciudadano'), ('Mi estado de cuenta ambiental', 'ambientalista'),
+                    ('Me despidieron, ¿cuánto me toca de liquidación?', 'ciudadano'),
                     ('Gano 15 mil al mes, ¿cuánto me retienen?', 'ciudadano'), ('Trabajo en el gobierno y gano 20 mil al mes, ¿cuánto me retienen?', 'ciudadano'), ('¿Cuánto ISR pago si vendo mi casa?', 'ciudadano'),
                     ('¿Cuánto ISR pago si vendo acciones en la bolsa?', 'ciudadano'), ('¿Cuánto pago de predial en Zapopan?', 'ciudadano')],
         'enciclopedia': [('herramienta-calculadora.html', 'La Calculadora Cívica'), ('numeros-herramientas-del-auditor.html', 'Las herramientas del Auditor')],

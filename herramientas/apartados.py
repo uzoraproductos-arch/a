@@ -856,6 +856,10 @@ HERRAMIENTAS = [
          # municipio (cc_predial.py).
          ('ccpredial', '🏡', 'Tu impuesto predial', 'Según tu municipio',
           'Cuánto predial pagas según la Ley de Ingresos de tu municipio, con sus descuentos y el pago anticipado, y cuánto costaría ponerte al corriente si debes bimestres: recargos, multa y gastos de cobranza, paso por paso y con su artículo.'),
+         # Novena desde el 20-11-2026 (pedido del autor: «construye el simulador
+         # laboral»): el finiquito y la liquidación con la LFT (cc_laboral.py).
+         ('cclaboral', '💼', 'Tu finiquito o tu liquidación', 'Lo que te toca al salir',
+          'Cuánto te toca al terminar tu trabajo: salario pendiente, vacaciones, prima vacacional y aguinaldo, y según la causa, la indemnización y la prima de antigüedad, con lo exento de ISR y la retención aproximada, renglón por renglón y con su artículo.'),
          ('simulador-presupuesto.html', '🧮', 'Reparte el presupuesto', 'Desde cero',
           'Empieza en $0: agrega lo que entra, reparte a dónde va, carga el ejemplo oficial de 2026 o 2027, compara dos escenarios y descarga la cuenta. Tiene su propia página.'),
          # Quinta aplicacion desde el 22-10-2026 (pedido del autor): venia de
@@ -999,7 +1003,7 @@ INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspentes': 'insp_entes',
                 'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'insppadron': 'insp_padron', 'inspnepotismo': 'nepotismo', 'inspfactura': 'insp_factura', 'inspresultados': 'insp_resultados', 'inspmia': 'insp_mia', 'inspconservacion': 'insp_conservacion', 'inspcumplimiento': 'insp_cumplimiento', 'inspriesgos': 'insp_riesgos',
                 # Calculadora Civica (pedido del autor, 12-10-2026): sus tres
                 # aplicaciones que abrian el motor en un marco.
-                'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj', 'ccinmueble': 'cc_inmueble', 'ccbolsa': 'cc_bolsa', 'ccpredial': 'cc_predial',
+                'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj', 'ccinmueble': 'cc_inmueble', 'ccbolsa': 'cc_bolsa', 'ccpredial': 'cc_predial', 'cclaboral': 'cc_laboral',
                 # Inversion y Megaobras (pedido del autor, 13-10-2026).
                 'pulso': 'mo_pulso', 'sector': 'mo_sector', 'sexenios': 'mo_sexenios', 'cero': 'mo_cero',
                 'tabla': 'mo_tabla', 'investiga': 'mo_investiga',
@@ -2157,7 +2161,7 @@ SERVICIOS = [
     ('simulacion', '🧮', 'Simulación de tu caso',
      'Tu caso pasado por los simuladores de la plataforma, con tus números: tu estado de cuenta cívico y tu estado de cuenta ambiental, '
      'tu nómina completa (lo que te retienen, lo que pone el patrón al IMSS e INFONAVIT o al ISSSTE y FOVISSSTE, y el costo de la plaza), '
-     'tu impuesto predial y el ISR al vender una casa o un terreno o al ganar en la bolsa, cada paso con su artículo.',
+     'tu finiquito o tu liquidación, tu impuesto predial y el ISR al vender una casa o un terreno o al ganar en la bolsa, cada paso con su artículo.',
      'Memoria de cálculo por escenario: cada paso con su artículo y su etiqueta, lo que el simulador no calcula y los escenarios que comparaste, '
      'y tus estados de cuenta con folio y huella. Cada simulador lo usas tú, gratis, en tu navegador.',
      'Personas, despachos contables, áreas de recursos humanos y de nómina, inmobiliarias y notarías.', 'simuladores'),
