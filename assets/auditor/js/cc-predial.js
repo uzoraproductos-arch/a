@@ -151,9 +151,10 @@
       if (nt.req && !dil) nt = null;
       if (nt) {
         var tope2 = nt.max_pesos || (nt.max_uma ? nt.max_uma * uma : Infinity);
-        notif = nt.pesos ? nt.pesos : nt.pct ? r2(Math.min(Math.max(credito * nt.pct / 100, (nt.min_uma || 0) * uma), tope2)) : r2(nt.uma * uma);
+        notif = nt.pesos ? nt.pesos : nt.pct ? r2(Math.min(Math.max(credito * nt.pct / 100, (nt.min_uma || 0) * uma, nt.min_pesos || 0), tope2)) : r2(nt.uma * uma);
         pasos.push([(nt.req ? 'Notificación del requerimiento' : 'Notificación del adeudo') + (nt.pesos ? ' (cuota de la ley)' : nt.pct ? ' (' + nt.pct + ' % del crédito)' : ' (' + nt.uma + ' UMA diarias)'), notif, L(nt.art)]);
         if (nt.pesos_nota) avisos.push(nt.pesos_nota);
+        if (nt.nota) avisos.push(nt.nota);
       }
       var e = m.ejec;
       /* e.emb: la ley cobra estos gastos solo por la diligencia de embargo, una vez. */
@@ -162,6 +163,7 @@
         var una = e.pesos ? e.pesos : credito * e.pct / 100;
         if (e.min_uma) una = Math.max(una, e.min_uma * uma);
         if (e.max_uma) una = Math.min(una, e.max_uma * uma);
+        if (e.min_pesos) una = Math.max(una, e.min_pesos);
         if (e.max_pesos) una = Math.min(una, e.max_pesos);
         ejec = r2(una * dil);
         pasos.push([e.emb ? 'Gastos de embargo: ' + (e.pesos ? 'cuota de la ley' : e.pct + ' % del crédito') : 'Gastos de ejecución: ' + e.pct + ' % del crédito por diligencia × ' + dil + (dil > 1 ? ' (requerimiento y embargo)' : ' (requerimiento)'), ejec, L(e.art)]);

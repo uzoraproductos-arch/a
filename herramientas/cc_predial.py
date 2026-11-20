@@ -466,6 +466,210 @@ MUNICIPIOS = [
      'multa': {'min': 20, 'max': 20, 'art': 'art. 47'},
      'notif': {'pct': 10, 'min_uma': 1, 'max_pesos': 3078.91, 'req': True, 'art': 'art. 50, fr. I, a'},
      'ejec': {'pct': 5, 'max_pesos': 4619.00, 'emb': True, 'art': 'art. 50, fr. II, a'}},
+    # ── 19-11-2026, tercera entrega: nueve cabeceras regionales más. ──
+    {'id': 'ameca', 'ent': 'JAL', 'cve': '006', 'nombre': 'Ameca',
+     'ley': 'Ley de Ingresos del Municipio de Ameca, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('Ameca'), 'sha256': '7cf8e9a6f6476e16f930f0a91e57b50ad96afbe5c76249be417d9e222fd33b29',
+     'art_tarifa': 'art. 18, fr. III, a', 'tarifa': 'millar', 'millar': 0.22,
+     'tramos': [[0.00, 10.13, 0.00022]],
+     'rustico': {'millar': 0.22, 'cf': 10.13, 'art': 'art. 18, fr. II, a'},
+     'baldio': {'tipo': 'millar', 'millar': 0.32, 'cf': 10.13, 'art': 'art. 18, fr. III, b'},
+     'pronto': [{'id': 'feb', 'et': 'Pagas el año completo en enero o febrero', 'f': 0.85, 'art': 'art. 20, a'},
+                {'id': 'abr', 'et': 'Pagas el año completo en marzo o abril', 'f': 0.95, 'art': 'art. 20, b'}],
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad, madre jefa de familia, en viudez o con 60 años o más (tu casa)', 'f': 0.50, 'tope': 477000, 'art': 'art. 21'},
+         {'id': 'agro', 'et': 'Predio rústico agropecuario en producción, con constancia', 'f': 0.50, 'art': 'art. 18, fr. II'},
+         {'id': 'ac', 'et': 'Institución de asistencia o asociación civil, con dictamen', 'f': 0.50, 'tope': 424000, 'art': 'art. 19, fr. I'},
+         {'id': 'rel', 'et': 'Asociación religiosa', 'f': 0.50, 'art': 'art. 19, fr. II'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado', 'f': 0.40, 'art': 'art. 19, fr. III'}],
+     'suma_art': 'art. 21',
+     'recargo': {'pct': 1.0, 'art': 'art. 28'},
+     'multa': {'min': 10, 'max': 30, 'art': 'art. 26, fr. II'},
+     'notif': {'pct': 5, 'min_uma': 1, 'max_uma': 30, 'req': True, 'art': 'art. 30, fr. I, a',
+               'nota': 'La Ley de Ameca pone el mínimo y el tope de la cobranza en «salarios mínimos»; desde la reforma constitucional de 2016 (DOF 27-01-2016, transitorio tercero) esas referencias se leen en UMA, y así los contamos.'},
+     'ejec': {'pct': 5, 'max_uma': 45, 'emb': True, 'art': 'art. 30, fr. II, a'}},
+
+    {'id': 'arandas', 'ent': 'JAL', 'cve': '008', 'nombre': 'Arandas',
+     'ley': 'Ley de Ingresos del Municipio de Arandas, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('Arandas'), 'sha256': 'a338446b4f0335f5d706915e5d7d2c2da88f761a68a8080c0daa505fa28a9e53',
+     'art_tarifa': 'art. 18, fr. I',
+     'tramos': [[0.01, 0.00, 0.00073], [77887.01, 56.86, 0.0007305], [145976.01, 106.60, 0.000731],
+                [220477.01, 161.06, 0.000815], [338772.01, 257.47, 0.00082], [485408.01, 377.71, 0.000825],
+                [721948.01, 572.85, 0.00083], [1255792.01, 1015.94, 0.000835], [2391048.01, 1963.88, 0.00084],
+                [6120120.01, 5096.30, 0.000845]],
+     'baldio': {'tipo': 'sobretasa', 'pct': 100, 'art': 'art. 18'},
+     'pronto': [{'id': 'feb', 'et': 'Pagas el año completo en enero o febrero', 'f': 0.85, 'art': 'art. 20, a'},
+                {'id': 'abr', 'et': 'Pagas el año completo en marzo o abril', 'f': 0.90, 'art': 'art. 20, b'}],
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad, en viudez o con 60 años o más (tu casa)', 'f': 0.50, 'art': 'art. 21'},
+         {'id': 'agro', 'et': 'Predio agropecuario en producción, en el padrón municipal', 'f': 0.50, 'art': 'art. 18'},
+         {'id': 'techo1', 'et': 'Naturación extensiva del techo, pagando el año en enero o febrero', 'f': 0.80, 'art': 'art. 22 Bis, fr. I'},
+         {'id': 'techo2', 'et': 'Naturación intensiva del techo, pagando el año en enero o febrero', 'f': 0.70, 'art': 'art. 22 Bis, fr. II'},
+         {'id': 'ac', 'et': 'Institución de asistencia o asociación civil, con dictamen', 'f': 0.50, 'art': 'art. 19, fr. I'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado', 'f': 0.40, 'art': 'art. 19, fr. IV'}],
+     'nota': 'Arandas topa el impuesto: si tu predio no cambió de valor ni de metros construidos, no pagas más de lo de 2025 más 5 %; si cambió, no más de lo de 2025 más 35 % (art. 18). El simulador no sabe lo que pagaste en 2025: compáralo tú. A las asociaciones religiosas les remite al art. 105 de la Ley de Hacienda Municipal, sin decir el porcentaje, y por eso no están en la lista.',
+     'suma_art': None,
+     'recargo': {'pct': 1.47, 'art': 'art. 29'},
+     'multa': {'min': 10, 'max': 10, 'art': 'art. 28'},
+     'notif': {'pct': 5, 'min_pesos': 499.00, 'max_pesos': 2930.00, 'req': True, 'art': 'art. 31, fr. I, a'},
+     'ejec': {'pct': 5, 'min_pesos': 615.00, 'max_pesos': 4395.00, 'emb': True, 'art': 'art. 31, fr. II, a'}},
+
+    {'id': 'atotonilco', 'ent': 'JAL', 'cve': '013', 'nombre': 'Atotonilco el Alto',
+     'ley': 'Ley de Ingresos del Municipio de Atotonilco el Alto, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('Atotonilco%20el%20Alto'), 'sha256': 'd49081f2921c45d356c63f61ed8b636a538df699aa7293f0002fafa82d331c72',
+     'art_tarifa': 'art. 17, fr. III, a', 'tarifa': 'millar', 'millar': 0.18,
+     'tramos': [[0.00, 23.00, 0.00018]],
+     'rustico': {'millar': 0.20, 'cf': 23.00, 'art': 'art. 17, fr. II, a'},
+     'baldio': {'tipo': 'millar', 'millar': 0.30, 'cf': 23.00, 'art': 'art. 17, fr. III, b'},
+     'pronto': [{'id': 'feb', 'et': 'Pagas el año completo en enero o febrero', 'f': 0.85, 'art': 'art. 19, a'},
+                {'id': 'abr', 'et': 'Pagas el año completo en marzo o abril', 'f': 0.95, 'art': 'art. 19, b'}],
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad, en viudez o con 60 años o más (tu casa)', 'f': 0.50, 'tope': 1500000, 'art': 'art. 20'},
+         {'id': 'agro', 'et': 'Predio rústico agropecuario en producción de 10 hectáreas o más, con constancia', 'f': 0.70, 'art': 'art. 17, fr. II'},
+         {'id': 'ac', 'et': 'Institución de asistencia o asociación civil, con dictamen', 'f': 0.50, 'tope': 1500000, 'art': 'art. 18, fr. I'},
+         {'id': 'rel', 'et': 'Asociación religiosa', 'f': 0.50, 'art': 'art. 18, fr. II'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado', 'f': 0.40, 'art': 'art. 18, fr. III'}],
+     'suma_art': 'art. 20',
+     'recargo': {'pct': 1.0, 'art': 'art. 29'},
+     'multa': {'min': 10, 'max': 30, 'art': 'art. 28'},
+     'notif': {'pct': 5, 'min_uma': 1, 'max_uma': 30, 'req': True, 'art': 'art. 31, fr. I, a'},
+     'ejec': {'pct': 5, 'max_uma': 45, 'emb': True, 'art': 'art. 31, fr. II, a'}},
+
+    {'id': 'autlan', 'ent': 'JAL', 'cve': '015', 'nombre': 'Autlán de Navarro',
+     'ley': 'Ley de Ingresos del Municipio de Autlán de Navarro, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('Autl%C3%A1n%20de%20Navarro'), 'sha256': '6c730c97a6d76f011fa4367269f60fad2988bd8492e2cbed014f14e34af28220',
+     'art_tarifa': 'art. 18, fr. III, a', 'tarifa': 'millar', 'millar': 0.21,
+     'tramos': [[0.00, 13.01, 0.00021]],
+     'rustico': {'millar': 0.20, 'cf': 13.00, 'art': 'art. 18, fr. II, a'},
+     'baldio': {'tipo': 'millar', 'millar': 0.35, 'cf': 32.19, 'art': 'art. 18, fr. III, c'},
+     'pronto': [{'id': 'feb', 'et': 'Pagas el año completo en enero o febrero', 'f': 0.85, 'art': 'art. 20, a'},
+                {'id': 'abr', 'et': 'Pagas el año completo en marzo o abril', 'f': 0.95, 'art': 'art. 20, b'}],
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad, en viudez, con 60 años o más o cuidador de una persona con discapacidad severa (tu casa)', 'f': 0.50, 'tope': 560000, 'art': 'art. 21'},
+         {'id': 'agro', 'et': 'Predio rústico agropecuario en producción, con constancia', 'f': 0.50, 'art': 'art. 18, fr. II'},
+         {'id': 'ac', 'et': 'Institución de asistencia o asociación civil, con dictamen', 'f': 0.50, 'tope': 600000, 'art': 'art. 19, fr. I'},
+         {'id': 'rel', 'et': 'Asociación religiosa', 'f': 0.50, 'art': 'art. 19, fr. II'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado', 'f': 0.40, 'art': 'art. 19, fr. III'}],
+     'nota': 'Para el baldío usamos la tasa de los predios dentro de la zona urbana de la cabecera (0.35 al millar); fuera de ella es 0.30 al millar, con la misma cuota fija de $32.19 (art. 18, fr. III, b). La ley dice además que el predial «en ningún caso» será inferior a una UMA (art. 21), sin decir si por bimestre o por año.',
+     'suma_art': 'art. 21',
+     'recargo': {'pct': 1.0, 'art': 'art. 28'},
+     'multa': {'min': 10, 'max': 30, 'art': 'art. 27'},
+     'notif': {'pct': 5, 'min_uma': 1, 'max_uma': 30, 'req': True, 'art': 'art. 30, fr. I, a'},
+     'ejec': {'pct': 5, 'max_uma': 45, 'emb': True, 'art': 'art. 30, fr. II, a'}},
+
+    {'id': 'cihuatlan', 'ent': 'JAL', 'cve': '022', 'nombre': 'Cihuatlán',
+     'ley': 'Ley de Ingresos del Municipio de Cihuatlán, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('Cihuatl%C3%A1n'), 'sha256': 'c2b201bcd66bd5b6b88d3f48117d3a6fe8aecccf3afbee9a97bbdb065bd8d094',
+     'art_tarifa': 'art. 18, fr. III, f', 'tarifa': 'millar', 'millar': 0.17,
+     'tramos': [[0.00, 18.02, 0.00017]],
+     'rustico': {'millar': 0.20, 'cf': 15.78, 'art': 'art. 18, fr. II, d'},
+     'baldio': {'tipo': 'millar', 'millar': 0.33, 'cf': 18.02, 'art': 'art. 18, fr. III, g'},
+     'pronto': [{'id': 'feb', 'et': 'Pagas el año completo en enero o febrero', 'f': 0.85, 'art': 'art. 20, a'},
+                {'id': 'abr', 'et': 'Pagas el año completo en marzo o abril', 'f': 0.95, 'art': 'art. 20, b'}],
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad, en viudez o con 60 años o más (tu casa)', 'f': 0.50, 'tope': 425000, 'art': 'art. 21'},
+         {'id': 'agro', 'et': 'Predio rústico agropecuario en producción, con constancia', 'f': 0.50, 'art': 'art. 18, fr. II, d'},
+         {'id': 'ac', 'et': 'Institución de asistencia o asociación civil, con dictamen', 'f': 0.50, 'tope': 420000, 'art': 'art. 19, fr. I'},
+         {'id': 'rel', 'et': 'Asociación religiosa', 'f': 0.50, 'art': 'art. 19, fr. II'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado', 'f': 0.40, 'art': 'art. 19, fr. III'}],
+     'nota': 'Son las tasas de los predios con valor real, según la Ley de Hacienda Municipal (art. 18, fr. II, d, y fr. III, f y g). Si tu predio se valuó por última vez antes del año 2000, la ley le pone tasas más altas (de 0.16 a 1.50 al millar) hasta que se actualice su valor.',
+     'suma_art': 'art. 21',
+     'recargo': {'pct': 1.0, 'art': 'art. 29'},
+     'multa': {'min': 10, 'max': 30, 'art': 'art. 28'},
+     'notif': {'pct': 5, 'min_uma': 1, 'max_uma': 30, 'req': True, 'art': 'art. 31, fr. I, a'},
+     'ejec': {'pct': 5, 'max_uma': 45, 'emb': True, 'art': 'art. 31, fr. II, a'}},
+
+    {'id': 'jocotepec', 'ent': 'JAL', 'cve': '050', 'nombre': 'Jocotepec',
+     'ley': 'Ley de Ingresos del Municipio de Jocotepec, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('Jocotepec'), 'sha256': 'a3a1d601931f847c20066ec7bc81a008a7a9de03c2956cc2380ea6abadc38aae',
+     'art_tarifa': 'art. 40, fr. II, b', 'tarifa': 'millar', 'millar': 0.21,
+     'tramos': [[0.00, 5.46, 0.00021]],
+     'rustico': {'millar': 0.21, 'cf': 12.01, 'art': 'art. 40, fr. I, b'},
+     'baldio': {'tipo': 'millar', 'millar': 0.85, 'cf': 5.46, 'art': 'art. 40, fr. II, d'},
+     'pronto': [{'id': 'feb', 'et': 'Pagas el año completo en enero o febrero', 'f': 0.85, 'art': 'art. 41, a'},
+                {'id': 'abr', 'et': 'Pagas el año completo en marzo o abril', 'f': 0.95, 'art': 'art. 41, b'}],
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad, en viudez o con 60 años o más (tu casa)', 'f': 0.50, 'tope': 420000, 'suma': True, 'art': 'art. 43, fr. IV'},
+         {'id': 'ac', 'et': 'Asociación civil de asistencia o enseñanza gratuita, con dictamen', 'f': 0.50, 'art': 'art. 43, fr. I'},
+         {'id': 'esc', 'et': 'Centro de educación superior (predio de enseñanza o investigación)', 'f': 0.50, 'art': 'art. 43, fr. II'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado', 'f': 0.40, 'art': 'art. 43, fr. III'},
+         {'id': 'jardin', 'et': 'Baldío convertido en jardín ornamental, con dictamen', 'f': 0.50, 'art': 'art. 40, fr. II'}],
+     'nota': 'Para el baldío usamos la tasa de los predios dentro de la zona urbana de hasta 10,000 m² (0.85 al millar); fuera de la zona urbana es 0.53 y dentro, con más de 10,000 m², 1.05 (art. 40, fr. II, c y e). A los predios agropecuarios la ley les da una «tasa preferente» de 0.84 al millar, más alta que la general de 0.21 (art. 40, fr. I, c), y por eso no la ponemos como descuento. El de naturación de techos va «del 20 al 30 %» sin decir cuándo cada uno (art. 41, c). Si tu predio no cambió de valor, el impuesto no sube más de 25 % sobre el del año anterior (art. 43, fr. VI).',
+     'suma_art': 'art. 44',
+     'recargo': {'pct': 1.0, 'art': 'art. 53'},
+     'multa': {'min': 10, 'max': 30, 'art': 'art. 52'},
+     'notif': {'pct': 5, 'min_uma': 1, 'max_uma': 30, 'req': True, 'art': 'art. 55, fr. I, a'},
+     'ejec': {'pct': 5, 'max_uma': 45, 'emb': True, 'art': 'art. 55, fr. II, a'}},
+
+    {'id': 'labarca', 'ent': 'JAL', 'cve': '018', 'nombre': 'La Barca',
+     'ley': 'Ley de Ingresos del Municipio de La Barca, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('La%20Barca'), 'sha256': '6ff772001f1a4794f6ee461d0489cee205ac4e6703203445e62dac753371061e',
+     'art_tarifa': 'art. 27, fr. I',
+     'tramos': [[0.01, 18.00, 0.000250], [183818.01, 63.95, 0.000255], [284110.01, 89.53, 0.000260],
+                [384972.01, 115.75, 0.000265], [512026.01, 149.42, 0.000270], [729900.01, 208.25, 0.000275],
+                [1295666.01, 363.83, 0.000280], [2858250.01, 801.36, 0.000285], [8010092.01, 2269.63, 0.000290],
+                [23804554.01, 6850.03, 0.000295]],
+     'baldio': {'tipo': 'sobretasa', 'pct': 100, 'art': 'art. 27'},
+     'pronto': [{'id': 'feb', 'et': 'Pagas el año completo en enero o febrero', 'f': 0.85, 'art': 'art. 29, a'},
+                {'id': 'abr', 'et': 'Pagas el año completo en marzo o abril', 'f': 0.95, 'art': 'art. 29, b'}],
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad, en viudez o con 60 años o más (tu casa)', 'f': 0.50, 'tope': 420000, 'art': 'art. 31'},
+         {'id': 'jefa', 'et': 'Madre jefa de familia', 'f': 0.50, 'art': 'art. 28, fr. IV'},
+         {'id': 'eco', 'et': 'Casa con calentador solar, celdas solares o captación de lluvia, con dictamen', 'f': 0.75, 'tope': 750000, 'art': 'art. 30'},
+         {'id': 'agro', 'et': 'Predio agropecuario en producción, en el padrón municipal', 'f': 0.50, 'art': 'art. 27, fr. II'},
+         {'id': 'ac', 'et': 'Institución de asistencia o asociación civil, con dictamen', 'f': 0.50, 'tope': 415000, 'art': 'art. 28, fr. I'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado', 'f': 0.40, 'art': 'art. 28, fr. III'}],
+     'nota': 'A las asociaciones religiosas, la Ley de La Barca les remite al art. 105 de la Ley de Hacienda Municipal, sin decir el porcentaje, y por eso no están en la lista.',
+     'suma_art': 'art. 31',
+     'recargo': {'pct': 1.3, 'art': 'art. 39'},
+     'multa': {'min': 30, 'max': 50, 'art': 'art. 37, fr. II'},
+     'notif': {'pct': 5, 'min_uma': 1, 'max_uma': 30, 'req': True, 'art': 'art. 41, fr. I, a'},
+     'ejec': {'pct': 5, 'max_uma': 45, 'emb': True, 'art': 'art. 41, fr. II, a'}},
+
+    {'id': 'sanjuan', 'ent': 'JAL', 'cve': '073', 'nombre': 'San Juan de los Lagos',
+     'ley': 'Ley de Ingresos del Municipio de San Juan de los Lagos, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('San%20Juan%20de%20los%20Lagos'), 'sha256': '9509052c26476d1b134f1c56accc8a1bc21702e2dab1a13a1c3ceb4cc4fd2b91',
+     'art_tarifa': 'art. 22, fr. II, a', 'tarifa': 'millar', 'millar': 0.23,
+     'tramos': [[0.00, 37.80, 0.00023]],
+     'rustico': {'millar': 0.23, 'cf': 38.00, 'art': 'art. 22, fr. I, a'},
+     'baldio': {'tipo': 'millar', 'millar': 0.46, 'cf': 37.80, 'art': 'art. 22, fr. II, b'},
+     'pronto': [{'id': 'feb', 'et': 'Pagas el año completo en enero o febrero', 'f': 0.85, 'art': 'art. 24'},
+                {'id': 'abr', 'et': 'Pagas el año completo en marzo o abril', 'f': 0.90, 'art': 'art. 24'}],
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad, en viudez o con 60 años o más (tu casa)', 'f': 0.50, 'tope': 873613.62, 'art': 'art. 25'},
+         {'id': 'agro', 'et': 'Predio rústico agropecuario en producción, con constancia', 'f': 0.50, 'art': 'art. 22, fr. I'},
+         {'id': 'ac', 'et': 'Institución de asistencia o asociación civil, con dictamen', 'f': 0.50, 'tope': 873613.62, 'art': 'art. 23, fr. I'},
+         {'id': 'rel', 'et': 'Asociación religiosa', 'f': 0.50, 'art': 'art. 23, fr. II'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado', 'f': 0.40, 'art': 'art. 23, fr. III'}],
+     'suma_art': 'art. 25',
+     'recargo': {'pct': 1.47, 'art': 'art. 33'},
+     'multa': {'min': 10, 'max': 30, 'art': 'art. 31, fr. II'},
+     'notif': {'pct': 5, 'min_uma': 1, 'max_uma': 30, 'req': True, 'art': 'art. 35, fr. I'},
+     'ejec': {'pct': 5, 'max_uma': 45, 'emb': True, 'art': 'art. 35, fr. II'}},
+
+    {'id': 'tequila', 'ent': 'JAL', 'cve': '094', 'nombre': 'Tequila',
+     'ley': 'Ley de Ingresos del Municipio de Tequila, Jalisco, para el ejercicio fiscal 2026',
+     'url': _li('Tequila'), 'sha256': 'dc16f67912f50a8e845dfc055be0f54c4f76a0548086c17700ed9cc22d346c11',
+     'art_tarifa': 'art. 32',
+     'tramos': [[0.01, 87.15, 0.00026], [159350.01, 128.58, 0.00026], [280800.01, 160.16, 0.00032],
+                [436300.01, 209.92, 0.00037], [699564.01, 307.33, 0.00042], [1210560.01, 521.94, 0.00047],
+                [2616069.01, 1182.53, 0.00053], [5927800.01, 2937.75, 0.00058], [13696000.01, 7443.31, 0.00063],
+                [29030931.01, 17104.31, 0.00068]],
+     'baldio': {'tipo': 'igual', 'art': 'art. 32'},
+     'pronto': [{'id': 'feb', 'et': 'Pagas el año completo en enero o febrero', 'f': 0.85, 'art': 'art. 34'},
+                {'id': 'abr', 'et': 'Pagas el año completo en marzo o abril', 'f': 0.95, 'art': 'art. 34'}],
+     'beneficios': [
+         {'id': 'jub', 'et': 'Pensionado, jubilado, con discapacidad, en viudez, madre jefa de familia o con 60 años o más (tu casa)', 'f': 0.50, 'tope': 1190910, 'art': 'art. 33'},
+         {'id': 'eco', 'et': 'Casa con techo naturado, calentador solar, celdas solares o captación de lluvia, con dictamen', 'f': 0.75, 'art': 'art. 34'},
+         {'id': 'ac', 'et': 'Institución de asistencia o asociación civil, con dictamen', 'f': 0.50, 'tope': 530000, 'art': 'art. 33'},
+         {'id': 'rel', 'et': 'Asociación religiosa', 'f': 0.50, 'art': 'art. 33'},
+         {'id': 'pat', 'et': 'Inmueble del patrimonio cultural, bien conservado', 'f': 0.40, 'art': 'art. 33'}],
+     'nota': 'Para los descuentos del art. 33 la ley pide no deber al municipio otros impuestos, derechos ni aprovechamientos. Quien paga todo lo atrasado del predial, con multas y recargos generados hasta abril de 2026, tiene 75 % de descuento en esas multas y recargos (art. 34): el simulador no lo resta.',
+     'suma_art': 'art. 33',
+     'recargo': {'pct': 1.0, 'art': 'art. 42'},
+     'multa': {'min': 20, 'max': 50, 'art': 'art. 43'},
+     'notif': {'pesos': 106.85, 'art': 'art. 45 (en la cabecera)'},
+     'ejec': {'pct': 5, 'min_pesos': 106.85, 'art': 'art. 45 (en la cabecera)'}},
 ]
 
 # Leyes que leímos y no integramos, con su porqué: la página lo dice en la ficha del municipio.
@@ -476,6 +680,12 @@ ESPERA = {
     'JAL-030': {'nombre': 'Chapala', 'url': _li('Chapala'),
                 'sha256': 'fef31659e5b631cfbc1c63cda3666036d1e0b6a3e96ec94bdcad34857118a031',
                 'motivo': 'su art. 42 pone las tasas como «0.20%», «0.25%» y «0.30%» bajo el título «Tasa bimestral al millar», y así no se sabe cuánto es.'},
+    'JAL-066': {'nombre': 'Poncitlán', 'url': _li('Poncitl%C3%A1n'),
+                'sha256': '2058a203cb1f47f227a7bbc5d621ec0c998c65996017509cbf5b427622dd6f13',
+                'motivo': 'su tarifa es clara, pero su art. 31, fr. II pone a los gastos de ejecución un mínimo de dos UMA y un máximo de una UMA, y así no se sabe cuánto cobra.'},
+    'JAL-083': {'nombre': 'Tala', 'url': _li('Tala'),
+                'sha256': 'a69572767eaa6f604ea404be3e4115418ca1808e35c3f66846d2056766a7693e',
+                'motivo': 'su art. 32 dice que las tasas son «bimestrales y al millar», pero las escribe como «0.2%», «0.23%» y «0.35%», y así no se sabe cuánto es.'},
 }
 
 ENTIDADES = {'AGS': 'Aguascalientes', 'BC': 'Baja California', 'BCS': 'Baja California Sur', 'CAM': 'Campeche',
@@ -662,11 +872,11 @@ def construir(base, ref):
   <aside class="ci-aviso" aria-labelledby="cpLeeTit">
     <h2 class="ci-tit" id="cpLeeTit"><span aria-hidden="true">📐</span> Cómo se calcula</h2>
     <ol class="ci-lista">
-      <li><b>El predial es bimestral.</b> A tu valor fiscal se le resta el límite inferior de su tramo; la diferencia se multiplica por la tasa del tramo y se suma la cuota fija: <code>((VF − LI) × T) + CF</code>. Eso pagas cada bimestre, y por seis, al año. La tabla es de cada Ley de Ingresos. Algunos municipios (Zapotlanejo, Juanacatlán, Tepatitlán) no usan tramos: cobran una <b>tasa al millar</b> sobre el valor más una cuota fija, y a los predios rústicos les ponen la suya.</li>
+      <li><b>El predial es bimestral.</b> A tu valor fiscal se le resta el límite inferior de su tramo; la diferencia se multiplica por la tasa del tramo y se suma la cuota fija: <code>((VF − LI) × T) + CF</code>. Eso pagas cada bimestre, y por seis, al año. La tabla es de cada Ley de Ingresos. Muchos municipios (Zapotlanejo, Tepatitlán, Ameca, Autlán, San Juan de los Lagos y otros) no usan tramos: cobran una <b>tasa al millar</b> sobre el valor más una cuota fija, y a los predios rústicos les ponen la suya.</li>
       <li><b>Los baldíos pagan más</b> «por razones extrafiscales»: unas leyes les ponen una sobretasa (100 % en Zapopan, Guadalajara, El Salto y Lagos de Moreno: aquí, el doble del impuesto; 90 % en Ocotlán; 50 % en Ixtlahuacán de los Membrillos) y otras, una tasa al millar sobre el valor más una cuota fija. La de Zapotlán el Grande no les pone otra tasa.</li>
       <li><b>Los descuentos</b> son factores sobre el impuesto: 0.50 es pagar la mitad. Muchos valen «sobre el primer» tanto del valor fiscal: aquí el descuento se calcula sobre el impuesto que daría ese valor, la lectura que explica la Ley de Tlaquepaque (art. 32, fr. III, f). Si te tocan varios, se da el mayor; el de adultos mayores (y en algunos municipios el de pensionados) se suma al de pago anticipado, que se calcula sobre lo que queda.</li>
       <li><b>Se paga en los primeros quince días del primer mes de cada bimestre</b> (Ley de Hacienda Municipal, art. 103). Desde el día siguiente corren los <b>recargos</b>, por cada mes o fracción, con la tasa que fija la Ley de Ingresos; no pasan de 250 % del adeudo, o de 100 % si pagas por tu cuenta (art. 52). El adeudo además se <b>actualiza</b> con el INPC (art. 44 bis): aquí, el del mes anterior al pago entre el del mes anterior al vencimiento. En la base, el último INPC es el de {ult}.</li>
-      <li><b>Si te cobran</b>, se suman la <b>multa</b> (un porcentaje del impuesto omitido, cuando la ley de ingresos lo fija), la <b>notificación</b> y los <b>gastos de ejecución</b>. Aquí cambia mucho de una ley a otra: unas cobran la notificación en UMA y un porcentaje del crédito por cada diligencia (el requerimiento y el embargo); otras cobran un porcentaje por notificar el requerimiento y otro por el embargo, con su tope en UMA o en pesos; Tepatitlán, cuotas fijas en pesos. La página sigue la de tu municipio y te dice el artículo. La UMA es la de {anio}: ${uma} diarios ({uma_f}).</li>
+      <li><b>Si te cobran</b>, se suman la <b>multa</b> (un porcentaje del impuesto omitido, cuando la ley de ingresos lo fija), la <b>notificación</b> y los <b>gastos de ejecución</b>. Aquí cambia mucho de una ley a otra: unas cobran la notificación en UMA y un porcentaje del crédito por cada diligencia (el requerimiento y el embargo); otras cobran un porcentaje por notificar el requerimiento y otro por el embargo, con su mínimo y su tope en UMA o en pesos; Tepatitlán, cuotas fijas en pesos. La página sigue la de tu municipio y te dice el artículo. La UMA es la de {anio}: ${uma} diarios ({uma_f}).</li>
     </ol>
     <p><b>Un ejemplo real, sin datos de la persona.</b> Un mandamiento de ejecución de la Tesorería de Zapopan cobró un predio con valor fiscal de $7,613,320.00. Cae en el tramo que empieza en $5,158,931.01: (7,613,320.00 − 5,158,931.01) × 0.0003473 + 1,485.21 = <b>$2,337.62 por bimestre</b>, $14,025.72 por los seis de un año y $7,012.86 por tres; la multa fue de 50 % del impuesto ($7,012.86 y $3,506.43) y la notificación, seis UMA de 2022 ($577.32). Escribe ese valor en Zapopan y verás las mismas cifras {chip_d}.</p>
     <p><b>Lo que esta cuenta no hace:</b> no es tu estado de cuenta ni una resolución: el adeudo oficial te lo da la tesorería de tu municipio, y cambia cada mes. Usa la tarifa y las tasas de {anio}; los años anteriores tuvieron las suyas en su propia ley, así que para un adeudo viejo la cifra es aproximada. No calcula el valor fiscal (lo fija el catastro), los derechos de agua o basura, los convenios ni las condonaciones o programas de descuento en recargos que aprueba cada municipio, ni las erogaciones extraordinarias de un embargo (avalúo, edictos, traslado). Si no estás de acuerdo con un requerimiento, la ley te da recursos con plazo: el de reconsideración y el juicio ante el Tribunal de Justicia Administrativa; acércate a un abogado o a la Procuraduría de Desarrollo Urbano o de la Defensa del Contribuyente de tu estado.</p>
@@ -714,17 +924,23 @@ def prueba():
         if abs(py - n) > 0.005:
             mal += 1
             print('✗', mid, v, t, 'Python', py, 'navegador', n)
-    # La cobranza: notificación solo con requerimiento y embargo una vez (El Salto), cuotas en pesos (Tepatitlán).
+    # La cobranza: notificación solo con requerimiento y embargo una vez (El Salto), cuotas en pesos (Tepatitlán),
+    # mínimos y topes en pesos (Arandas, Tequila).
     y = "{imp:1000,da:2025,db:1,ha:2025,hb:6,f:[2026,6,1],multa:0,sit:S}"
     prog2 = ("global.window={};global.document={getElementById:function(){return null}};require(%s);var D=%s;"
              "function M(i){return D.mun.filter(function(m){return m.id===i})[0]}"
              "var o={};['not','req','emb'].forEach(function(S){var r=window.AuditorPredial.adeudo(D,M('elsalto'),%s);o['s'+S]=[r.notif,r.ejec];"
-             "r=window.AuditorPredial.adeudo(D,M('tepatitlan'),%s);o['t'+S]=[r.notif,r.ejec];});console.log(JSON.stringify(o));"
-             % (json.dumps(js), json.dumps(D), y, y))
+             "r=window.AuditorPredial.adeudo(D,M('tepatitlan'),%s);o['t'+S]=[r.notif,r.ejec];"
+             "r=window.AuditorPredial.adeudo(D,M('arandas'),%s);o['a'+S]=[r.notif,r.ejec];"
+             "r=window.AuditorPredial.adeudo(D,M('tequila'),%s);o['q'+S]=[r.notif,r.ejec];});console.log(JSON.stringify(o));"
+             % (json.dumps(js), json.dumps(D), y, y, y, y))
     r2 = subprocess.run(['node', '-e', prog2], capture_output=True, text=True)
     o = json.loads(r2.stdout or '{}')
     uma = D['uma']
-    esperado = {'snot': [0, 0], 'tnot': [0, 0], 'treq': [578.79, 0], 'temb': [578.79, 710.34]}
+    # Mínimos en pesos con requerimiento y embargo (Arandas); notificación en pesos y 5 % por cada diligencia (Tequila).
+    esperado = {'snot': [0, 0], 'tnot': [0, 0], 'treq': [578.79, 0], 'temb': [578.79, 710.34],
+                'anot': [0, 0], 'areq': [499, 0], 'aemb': [499, 615],
+                'qnot': [106.85, 0], 'qreq': [106.85, 336], 'qemb': [106.85, 672]}
     for k, v in esperado.items():
         if o.get(k) != v:
             mal += 1
