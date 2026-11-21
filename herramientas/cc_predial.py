@@ -1330,6 +1330,38 @@ TABLAS = {
                 ["Económico", [[1800, 1520, 1480], [1690, 1430, 1360], [1400, 920, 890], [1310, 850, 830], [790, 630, 330], [None, 550, 280]]]]}},
         'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
         'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24319/newspaper251212092633.pdf', 'nota': 'En Encarnación de Díaz el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'arandas': {
+        'tx': 'Decreto 29877/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Arandas para 2026, Periódico Oficial «El Estado de Jalisco», 11-12-2025, pág. 6 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24325/newspaper251212094731.pdf',
+        'sha256': '7204f018ed6368033ed7d0d22961fde7a46729218c926a9182f000c797038f9b',
+        'escaneo': True,
+        'falta': 'Su tabla industrial no entra: el decreto la publica con solo tres rangos de edad (moderno, semimoderno y antiguo) y no dice a cuántos años corresponde cada uno. Si tu construcción es industrial, el valor está en la pág. 6 del decreto; pregúntale al catastro municipal cuál rango te toca.',
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[None, 6950, 5790], [7550, None, 5440], [6200, 5090, 4450], [5850, 4740, 4100], [3560, 3030, 2440], [3210, None, 2090]]],
+                ["Superior", [[6250, 5180, None], [5900, 4830, 4210], [3820, 3250, 2750], [3470, 2900, 2400], [2620, 2350, 1740], [2270, 2000, 1390]]],
+                ["Medio", [[5870, 4180, 3520], [5520, 3830, 3170], [3530, 3010, 2620], [3180, 2660, 2270], [2250, 1770, 1370], [1900, 1420, 1020]]],
+                ["Económico", [[3580, 3150, 2570], [3230, 2800, 2220], [None, 2350, 2070], [2530, 2000, 1720], [1740, 1370, 1130], [1390, 1020, 780]]]]}},
+        'niveles': None,
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24325/newspaper251212094731.pdf', 'nota': 'En Arandas el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'autlan': {
+        'tx': 'Decreto 29883/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Autlán de Navarro para 2026, Periódico Oficial «El Estado de Jalisco», 11-12-2025, pág. 6 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24304/newspaper251212090124.pdf',
+        'sha256': '5c2455220eaaf2cd6773b0ec66973f1b739b37b602f7b0fa1d0574e8be80bf9d',
+        'escaneo': True,
+        'falta': 'Su tabla industrial (pág. 7) no entra: en la copia publicada, el bloque «Semimoderno 2» repite las claves y los valores de la construcción habitacional «Moderno 1», y la columna de valores de los bloques «Antiguo» quedó en parte tapada por la firma y el sello de cotejo. Si tu construcción es industrial, pregúntale al catastro municipal el valor que aplica.',
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[14940, 13740, 9980], [13820, 12710, 9240], [13420, 10640, 7730], [11650, 8350, 6070], [10110, 6040, 4390], [9090, 4800, 3290]]],
+                ["Superior", [[11200, 10300, 7490], [10750, None, 7180], [10060, 7980, 5800], [9060, 6500, 4720], [7590, 4530, 3300], [7070, 3730, 2560]]],
+                ["Medio", [[7850, 6890, 5000], [7780, 6590, 4780], [6910, 5320, 3870], [None, 4470, 3240], [4800, 2560, 1860], [4550, 2210, 1540]]],
+                ["Económico", [[5850, 5070, 3690], [6120, None, 3760], [4980, 3690, 2680], [4770, 3320, 2410], [2980, 1330, 960], [2870, 1130, 900]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24304/newspaper251212090124.pdf', 'nota': 'En Autlán de Navarro el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
     'tlaquepaque': {
         'tx': 'Decreto 29949/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de San Pedro Tlaquepaque para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 9 del archivo («Valores unitarios de la construcción año 2026»)',
         'url': _POE + 'newspaper/24379/newspaper251217061214.pdf',
@@ -1585,7 +1617,7 @@ def revisa():
                     raise SystemExit('cc_predial: la tabla de %s, calidad %s, no va de bueno a malo' % (mid, nom))
                 if any(v is None for f in eds for v in f) and not T.get('escaneo'):
                     raise SystemExit('cc_predial: la tabla de %s trae una celda vacía sin ser copia escaneada' % mid)
-            primero = [eds[0][0] for nom, eds in u['cal']]
+            primero = [eds[0][0] for nom, eds in u['cal'] if eds[0][0] is not None]
             if primero != sorted(primero, reverse=True):
                 raise SystemExit('cc_predial: las calidades de %s no van de mayor a menor' % mid)
     for e, dv in DECRETOS_TV.items():

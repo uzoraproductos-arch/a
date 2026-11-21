@@ -347,7 +347,7 @@
     $('cpTablaTit').innerHTML = '<b>' + esc(m.nombre) + ' ya tiene su tabla de valores de construcción integrada</b> <span class="est-chip est-oficial">oficial</span>: elige tu construcción y el valor por m² se pone solo. ' +
       'Fuente: <a href="' + esc(T.url) + '">' + esc(T.tx) + '</a>. ' +
       (T.escaneo ? 'El decreto se publicó escaneado: transcribimos cada celda de la copia del Periódico Oficial, y la que no se lee sin duda va como ilegible, nunca adivinada. ' : '') +
-      (T.suelo ? esc(T.suelo.nota) + ' <a href="' + esc(T.suelo.url) + '">' + esc(T.suelo.tx) + '</a>. ' : '') + (T.demeritos ? esc(T.demeritos.nota) : '') + (T.atipica ? ' ' + esc(T.atipica.nota) : '');
+      (T.suelo ? esc(T.suelo.nota) + ' <a href="' + esc(T.suelo.url) + '">' + esc(T.suelo.tx) + '</a>. ' : '') + (T.demeritos ? esc(T.demeritos.nota) : '') + (T.atipica ? ' ' + esc(T.atipica.nota) : '') + (T.falta ? ' ' + esc(T.falta) : '');
     $('cpTUso').innerHTML = Object.keys(T.usos).map(function (k) { return '<option value="' + k + '">' + esc(T.usos[k].et) + '</option>'; }).join('');
     $('cpTEdad').innerHTML = T.edades.map(function (e, i) { return '<option value="' + i + '">' + esc(e[1]) + '</option>'; }).join('');
     $('cpTEst').innerHTML = T.estados.map(function (e, i) { return '<option value="' + i + '">' + esc(e) + '</option>'; }).join('');
