@@ -1159,6 +1159,86 @@ TABLAS = {
                 ["Económico", [[4150, 3600, 2640], [4060, 3430, 2500], [3550, 2610, 1910], [3170, 2210, 1610], [2140, 950, 670], [1900, 750, 590]]]]}},
         'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
         'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24358/newspaper251215103417.pdf', 'nota': 'En Magdalena el suelo se valúa por zona: el valor de la tuya viene en el decreto. Aún no lo integramos: búscalo ahí.'}},
+    'juanacatlan': {
+        'tx': 'Decreto 29920/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Juanacatlán para 2026, Periódico Oficial «El Estado de Jalisco», 13-12-2025, págs. 6 y 7 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24353/newspaper251215102833.pdf',
+        'sha256': '6cd0624fc5b4786086bb794779a7af77227a2774919dde8ed4e6b947fbbbb7ed',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[8360, 7480, 5630], [8060, 7240, 5450], [7480, 5630, 4000], [6790, 4630, 3280], [5630, 3250, 2490], [5300, 2700, 1940]]],
+                ["Superior", [[6240, 5370, 4000], [6040, 5210, 3890], [5250, 4000, 3000], [4760, 3280, 2450], [4370, 2750, 1880], [4130, 2290, 1480]]],
+                ["Medio", [[4370, 3680, 2620], [4200, 3420, 2450], [3750, 3120, 2010], [3370, 2570, 1640], [2490, 1500, 1000], [2330, 1250, 810]]],
+                ["Económico", [[3180, 2620, 1880], [3130, 2510, 1790], [3100, 2010, 1370], [2780, 1710, 1160], [1750, 870, 630], [1580, 690, 540]]]]},
+            'ind': {'et': 'Industrial', 'cal': [
+                ["Especial", [[3250, 2750, 2250], [3070, 2570, 2060], [2490, 2010, 1250], [2330, 1870, 1160], [2010, 1630, 1140], [1740, 1410, 990]]],
+                ["Superior", [[3120, 2620, 2010], [2940, 2440, 1840], [2250, 1630, 1060], [2080, 1520, 980], [1630, 1320, 950], [1410, 1130, 810]]],
+                ["Medio", [[2490, 2200, 1630], [2340, 2070, 1500], [2010, 1320, 870], [1870, 1220, 810], [1320, 1060, 800], [1140, 910, 700]]],
+                ["Económico", [[2250, 1880, 1500], [2140, 1760, 1380], [1630, 1130, 760], [1500, 1050, 690], [1060, 950, 690], [920, 820, 580]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24353/newspaper251215102833.pdf', 'nota': 'En Juanacatlán el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'ayotlan': {
+        'tx': 'Decreto 29884/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Ayotlán para 2026, Periódico Oficial «El Estado de Jalisco», 11-12-2025, pág. 6 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24305/newspaper251212090416.pdf',
+        'sha256': '65c134e7d527d2f7864b8f83274fdd51802ba1e302600ce0ed08f60c46536b22',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[7990, 6770, 5550], [7760, 6540, 5400], [4920, 4180, 3430], [4470, 3400, 2790], [3440, 2580, 1920], [3210, 2140, 1490]]],
+                ["Superior", [[5390, 4640, 3870], [5210, 4480, 3760], [4470, 3650, 2820], [4040, 2990, 2320], [2550, 2220, 1730], [2380, 1840, 1350]]],
+                ["Medio", [[3850, 3310, 2530], [3710, 3090, 2350], [3330, 2720, 2110], [2990, 2240, None], [1640, 1460, 960], [1500, 1220, 770]]],
+                ["Económico", [[3010, 2540, 2080], [2960, 2430, 1960], [2530, 2060, 1600], [2270, 1730, 1330], [1410, 1060, 720], [1260, 850, 630]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24305/newspaper251212090416.pdf', 'nota': 'En Ayotlán el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'zacoalco': {
+        'tx': 'Decreto 29986/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Zacoalco de Torres para 2026, Periódico Oficial «El Estado de Jalisco», 18-12-2025, pág. 6 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24472/newspaper251222035446.pdf',
+        'sha256': '860010ad9bcc25109b93a461ff146201995f5ad8ca1cd0036d0a33d2a25a24c8',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[11870, 10920, 7930], [11460, 10540, 7660], [10670, 8450, 6140], [9660, 6930, 5040], [8040, 4800, 3490], [7540, 3980, 2730]]],
+                ["Superior", [[8930, 8220, 5970], [8670, 7970, 5790], [8050, 6370, 4620], [7300, 5240, 3810], [6050, 3630, 2620], [5690, 3010, 2060]]],
+                ["Medio", [[6280, 5500, 4010], [6060, None, None], [5510, 4260, 3090], [4990, 3480, None], [3820, 2040, 1490], [3550, 1720, None]]],
+                ["Económico", [[4160, 4050, 2950], [4060, 3860, 2800], [3960, 2950, 2130], [3540, 2470, 1790], [2380, 1060, 780], [2140, 840, 670]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24472/newspaper251222035446.pdf', 'nota': 'En Zacoalco de Torres el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'teocaltiche': {
+        'tx': 'Decreto 29962/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Teocaltiche para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 6 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24399/newspaper251217070318.pdf',
+        'sha256': '0449424d26d16455d3c68d8621134bab019fb39a8583ad258ef3fc3dec5e5558',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[11460, 10510, 7650], [11070, 10170, 7390], [10330, 8140, 5930], [9320, 6620, 4860], [7770, 4630, 3370], [7210, 3850, 2640]]],
+                ["Superior", [[8830, 8110, 5900], [8520, 7830, 5690], [7930, 6280, 4570], [7180, 5150, 3740], [5980, 3570, 2590], [5610, 2960, 2030]]],
+                ["Medio", [[6380, 5590, 4060], [6170, 5220, 3790], [5610, 4320, 3140], [5080, 3540, 2570], [3890, 2080, 1510], [3610, 1750, 1220]]],
+                ["Económico", [[4970, 4320, 3140], [4850, 4110, 2980], [4240, 3140, 2280], [3780, 2630, 1910], [2540, 1130, 820], [2270, 890, 710]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24399/newspaper251217070318.pdf', 'nota': 'En Teocaltiche el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'tamazula': {
+        'tx': 'Decreto 29956/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Tamazula de Gordiano para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 5 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24389/newspaper251217064056.pdf',
+        'sha256': 'a9000ddc94b1f7f7457020db227185cb49d3ba6902cf6b10700bf513f590ba9a',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[12800, 11760, 8550], [12360, 11350, 8260], [11500, None, 6630], [10410, 7470, 5430], [8660, 5180, 3760], [8120, 4300, 2940]]],
+                ["Superior", [[9610, 8820, 6420], [8830, 8110, 5900], [8620, 6840, 4970], [7430, 5340, 3870], [6500, 3890, 2830], [5810, 3070, 2100]]],
+                ["Medio", [[6980, 5900, 4300], [6750, 5250, None], [5920, 4570, 3320], [5110, 3560, 2590], [4110, 2200, 1600], [3630, 1750, 1230]]],
+                ["Económico", [[5010, 4350, 3160], [4650, 3930, 2960], [4260, 3440, 2290], [3620, 2760, 1830], [2450, 1440, 880], [2080, 1130, 760]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24389/newspaper251217064056.pdf', 'nota': 'En Tamazula de Gordiano el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
     'tlaquepaque': {
         'tx': 'Decreto 29949/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de San Pedro Tlaquepaque para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 9 del archivo («Valores unitarios de la construcción año 2026»)',
         'url': _POE + 'newspaper/24379/newspaper251217061214.pdf',
