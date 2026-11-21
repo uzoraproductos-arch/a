@@ -55,6 +55,7 @@
   /* El valor unitario oficial de la tabla de valores del municipio (T), y +% si el edificio pasa de los niveles que dice. */
   function valorConstruccion(T, uso, ical, iedad, iest, niveles) {
     var v = T.usos[uso].cal[ical][1][iedad][iest];
+    if (v === null) return null;
     return niveles ? r2(v * (1 + T.niveles.pct / 100)) : v;
   }
   function cf2(v) { return '$' + Number(v).toLocaleString('es-MX', { minimumFractionDigits: 2 }); }
@@ -303,6 +304,17 @@
         (ent === 'JAL' ? ' en su <a href="https://congresoweb.congresojal.gob.mx/BibliotecaVirtual/busquedasleyes/Listado%272.cfm">Biblioteca Virtual</a>' : '') +
         '. Mientras, prueba con un municipio marcado con ✓.</p>';
     }
+    var dv = D.dtv && D.dtv[ent];
+    if (dv) {
+      var d0 = dv.lista[cve];
+      if (d0) {
+        h += '<p><span class="est-chip est-oficial">oficial</span> Sus tablas de valores ' + dv.anio + ' (con las que el catastro fija tu valor fiscal): <a href="' + esc(D.poe + d0[2]) + '">Decreto ' + esc(d0[0]) +
+          ' del Congreso, Periódico Oficial del ' + d0[1].split('-').reverse().join('-') + '</a>' + (m && D.tablas && D.tablas[m.id] ? '; sus valores de construcción ya están abajo, en «¿No sabes tu valor fiscal?».' : '.') + '</p>';
+      } else {
+        h += '<p class="cp-falta"><span class="est-chip est-pendiente">pendiente</span> No encontramos en el Periódico Oficial un decreto de tablas de valores ' + dv.anio + ' para ' + esc(nom) +
+          ' (lo buscamos ejemplar por ejemplar, de ' + esc(dv.buscado) + '). Con qué valores se calcula tu predial lo debe aclarar su catastro municipal.</p>';
+      }
+    }
     $('cpMunFicha').innerHTML = h;
     $('cpPredio').disabled = !m;
     if (m) {
@@ -333,7 +345,9 @@
     caja.hidden = !T;
     if (!T) return;
     $('cpTablaTit').innerHTML = '<b>' + esc(m.nombre) + ' ya tiene su tabla de valores de construcción integrada</b> <span class="est-chip est-oficial">oficial</span>: elige tu construcción y el valor por m² se pone solo. ' +
-      'Fuente: <a href="' + esc(T.url) + '">' + esc(T.tx) + '</a>. ' + esc(T.suelo.nota) + ' <a href="' + esc(T.suelo.url) + '">' + esc(T.suelo.tx) + '</a>. ' + esc(T.demeritos.nota);
+      'Fuente: <a href="' + esc(T.url) + '">' + esc(T.tx) + '</a>. ' +
+      (T.escaneo ? 'El decreto se publicó escaneado: transcribimos cada celda de la copia del Periódico Oficial, y la que no se lee sin duda va como ilegible, nunca adivinada. ' : '') +
+      (T.suelo ? esc(T.suelo.nota) + ' <a href="' + esc(T.suelo.url) + '">' + esc(T.suelo.tx) + '</a>. ' : '') + (T.demeritos ? esc(T.demeritos.nota) : '');
     $('cpTUso').innerHTML = Object.keys(T.usos).map(function (k) { return '<option value="' + k + '">' + esc(T.usos[k].et) + '</option>'; }).join('');
     $('cpTEdad').innerHTML = T.edades.map(function (e, i) { return '<option value="' + i + '">' + esc(e[1]) + '</option>'; }).join('');
     $('cpTEst').innerHTML = T.estados.map(function (e, i) { return '<option value="' + i + '">' + esc(e) + '</option>'; }).join('');
@@ -348,6 +362,10 @@
     var m = ley($('cpEnt').value, $('cpMun').value), T = m && D.tablas ? D.tablas[m.id] : null;
     if (!T) return;
     var v = valorConstruccion(T, $('cpTUso').value, +$('cpTCal').value, +$('cpTEdad').value, +$('cpTEst').value, $('cpTNiv').checked);
+    if (v === null) {
+      $('cpTablaVal').innerHTML = '<span class="est-chip est-pendiente">pendiente</span> Esta celda no se lee sin duda en la copia escaneada que publicó el Periódico Oficial; no la adivinamos. Búscala en el decreto o en tu recibo, y escribe tu valor abajo.';
+      return;
+    }
     $('cpVc').value = String(v);
     $('cpTablaVal').innerHTML = 'Valor de construcción: <b>' + pesos(v) + ' por m²</b> <span class="est-chip est-oficial">oficial</span>' + ($('cpTNiv').checked ? ' (con +' + T.niveles.pct + ' %: ' + esc(T.niveles.art) + ')' : '') + '. Ya lo pusimos abajo.';
   }
