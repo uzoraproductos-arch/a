@@ -848,10 +848,10 @@ La Enciclopedia queda fuera porque está congelada.
 | `servicios-fraude-y-lavado.html` | Fraude y lavado · Auditavisión | apartados.py | 58 | 0 | 2 | 1 | 0 |
 | `servicios-inspector.html` | El Inspector · Auditavisión | apartados.py | 43 | 0 | 1 | 1 | 1 |
 | `servicios-por-que.html` | Servicios de investigación · Auditavisión | apartados.py | 85 | 0 | 3 | 2 | 0 |
-| `servicios-preguntas.html` | Preguntas · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
+| `servicios-preguntas.html` | Preguntas · Auditavisión | apartados.py | 47 | 0 | 0 | 0 | 0 |
 | `servicios-respuesta.html` | La respuesta completa · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
 | `servicios-tu-perfil.html` | Tu perfil · Auditavisión | apartados.py | 104 | 0 | 0 | 0 | 0 |
-| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 125 | 0 | 6 | 1 | 0 |
+| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 117 | 0 | 6 | 1 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 

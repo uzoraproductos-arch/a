@@ -2383,12 +2383,21 @@ LIENZO = [
     ('ingresos', '5', 'Cómo nos sostenemos', 'Servicios cotizados, talleres, licencias y donaciones. Nunca la información pública ni la publicidad.'),
 ]
 
+# Las preguntas de Servicios, depuradas (pedido del autor, 21-11-2026: «preguntas que se pueden
+# integrar a la parte de abajo como preguntas frecuentes… unificando»): «¿Cobran por la
+# información?» y «¿Cuánto tarda y cuánto cuesta?» van en una; «¿Es seguro?», que era su
+# sección, va junto a «¿Mis facturas o mis datos se publican?». Nunca un monto.
 PREGUNTAS = [
-    ('¿Cobran por la información?', 'No. Lo que se ve en el sitio es gratis y lo seguirá siendo. Se cobra que lo hagamos por ti, que lo recordemos o que te avisemos.'),
+    ('¿Cuánto cuesta y cuánto tarda?', 'La consulta es gratis y lo seguirá siendo: lo que ves en el sitio no se cobra. Se cobra que lo hagamos por ti, '
+     'que lo recordemos o que te avisemos, y cada servicio dice cómo: por ficha, por mes, por documento, por taller o por cotización. Todavía no hay '
+     'tarifas publicadas, y no vamos a inventarlas: saldrán de los primeros encargos piloto y serán iguales para todos. Antes de empezar recibes por '
+     'escrito el costo y el plazo; si no te conviene, ahí termina y no pagas nada.'),
     ('¿El entregable es un dictamen o un peritaje?', 'No. Es investigación documental y análisis de indicios: señalamos lo que dicen los documentos públicos y las inconsistencias, sin acusar a nadie. Un encargo que requiera dictamen pericial se cotiza aparte, con su responsable profesional.'),
     ('¿Qué pasa si no encuentran lo que yo esperaba?', 'El entregable lo dice. Quien encarga define la pregunta, no la respuesta, y las conclusiones no se negocian.'),
-    ('¿Mis facturas o mis datos se publican?', 'No. Tu encargo es confidencial y no publicamos quién encargó qué sin su permiso. Con las herramientas gratuitas, tus archivos ni siquiera salen de tu navegador.'),
-    ('¿Cuánto tarda y cuánto cuesta?', 'Cada servicio dice cómo se cobra: por ficha, por mes, por documento, por taller o por cotización. Todavía no hay tarifas publicadas, y no vamos a inventarlas: saldrán de los primeros encargos piloto. Antes de empezar recibes por escrito el costo y el plazo; si no te conviene, ahí termina y no pagas nada.'),
+    ('¿Es seguro? ¿Mis facturas o mis datos se publican?', 'No se publican: tu encargo es confidencial y no decimos quién encargó qué sin su permiso. '
+     'Y puedes comprobarlo: tus facturas, nóminas y estados de resultados se leen en tu navegador, no se suben; nunca te pedimos la contraseña del SAT '
+     'ni la de tu banco; cada cifra va con su documento y su etiqueta (oficial, auditada o pendiente), y ningún cliente ni donante compra lo que '
+     'publicamos. <a href="servicios-por-que.html#diferencia">Más sobre cómo te protegemos ➔</a>'),
     ('¿Atienden a gobiernos y a partidos?', 'Sí, con la misma regla para todos: el mismo servicio y el mismo precio, con factura y sin cortesías, y nunca a cambio de cambiar lo que publicamos. En campaña no investigamos por encargo a una candidatura rival. Si quien solicita es parte del caso, se dice en la cotización.'),
     ('¿Cuándo abren?', 'Ya operan para quien tiene un código de acceso vigente: arma tu solicitud y envíala. ¿No tienes código? Pídelo en «Canjea tu código».'
      if SERVICIOS_OPERAN else 'Con el lanzamiento de la plataforma. Ya puedes armar tu solicitud; el envío se activa entonces.'),
@@ -2767,14 +2776,31 @@ def sv_servicios_y_nuevo(sf, puertas):
                     k, 'true' if n == 0 else 'false', i, corto[k]) for n, (k, i) in enumerate(barra)), '\n'.join(paneles))
 
 
+SV_OPERA = [('Antes de contratar', ('sectores', 'modulos', 'riesgo', 'calendario')),
+            ('Para contratar', ('oferta', 'cobro', 'solicitud'))]
+# Las preguntas van completas al pie de servicios.html, en «Preguntas frecuentes».
+SV_OPERA_FUERA = {'preguntas'}
+
+
 def sv_operacion():
-    """Cómo opera cada parte de los Servicios (pedido del autor, 21-11-2026): las tarjetas
-    que iban al pie de servicios.html (fraude y lavado, el catálogo, tu perfil, empieza
-    gratis, cómo se cobra, el calendario, las preguntas y la cotización) se integran a
-    «Cómo funciona». Cada una sigue siendo su página (SV_PAGINAS)."""
-    return ('<p class="sv-op-tit"><b>La operación de los servicios</b> <span>Cada parte, en su página.</span></p>\n'
-            '        <div class="sv-cards sv-cards-op">\n%s\n        </div>') % '\n'.join(
-        '          ' + sv_card(corto, frase, ico, '', archivo) for _sid, archivo, ico, corto, _tit, frase in SV_PAGINAS)
+    """Cómo operan los servicios, dentro de «¿Qué necesitas?» (pedido del autor, 21-11-2026:
+    «que la operación de los servicios… se fusione a los servicios… quitar un poquito de
+    contenido»): las páginas de SV_PAGINAS en dos renglones de ligas. Lo que costaba y lo que
+    era «¿Es seguro?» van en las preguntas frecuentes del pie. Nunca un monto."""
+    pag = {p[0]: p for p in SV_PAGINAS}
+    faltan = sorted(set(pag) - SV_OPERA_FUERA - {k for _t, ks in SV_OPERA for k in ks})
+    if faltan:
+        raise SystemExit('Servicios: SV_OPERA no acomoda las páginas %s' % ', '.join(faltan))
+    filas = ''.join(
+        '<div class="sv-opera-fila"><b>%s</b><span class="sv-mapa">%s</span></div>' % (t, ''.join(
+            '<a href="%s" title="%s"><span aria-hidden="true">%s</span> %s</a>' % (
+                esc_attr(pag[k][1]), esc_attr(pag[k][5]), pag[k][2], 'Todos los servicios' if k == 'oferta' else pag[k][3]) for k in ks))
+        for t, ks in SV_OPERA)
+    return ('<div class="sv-opera" id="opera">\n'
+            '          <p class="sv-opera-tit"><span aria-hidden="true">⚙️</span> <b>Cómo operan</b></p>\n'
+            '          %s\n'
+            '          <p class="sv-nota">Cómo funciona por dentro, la evidencia y cómo nos sostenemos: <a href="%s">Por qué Auditavisión ➔</a></p>\n'
+            '        </div>') % (filas, SV_PORQUE)
 
 
 def sv_pregunta(sid):
@@ -2880,14 +2906,6 @@ SV_CONSECUENCIAS = [
      'cambie, convierta, deposite, retire, dé o reciba por cualquier motivo […] recursos, derechos o bienes de cualquier naturaleza, cuando tenga '
      'conocimiento de que proceden o representan el producto de una actividad ilícita',
      ('Revisa un nombre en la OFAC y la ONU', 'herramienta-inspector-padron.html'), 'diligencia'),
-]
-# ¿Es seguro? En cuatro palomitas (idea de getfinos.com, 21-11-2026). Lo largo
-# sigue en DIFERENCIA, en «Por qué Auditavisión».
-SV_SEGURO = [
-    'Tus facturas, nóminas y estados de resultados se leen en tu navegador: no se suben.',
-    'Nunca te pedimos la contraseña del SAT ni la de tu banco.',
-    'Cada cifra va con su documento y una etiqueta: oficial, auditada o pendiente.',
-    'Ningún cliente ni donante compra lo que publicamos: las mismas reglas para todos.',
 ]
 # Las fuentes que más usan los Servicios, con su corte (fuentes.FUENTES).
 SV_FUENTES = ['sat-69b', 'listas-sat', 'ofac-onu', 'sancionados', 'comprasmx', 'rpu']
@@ -3327,11 +3345,7 @@ def servicios():
         '          <div class="sv-preg-fila"><input id="svPreg" name="q" type="text" maxlength="300" required '
         'placeholder="Ej.: ¿Cómo reviso a un proveedor antes de contratarlo?">'
         '<button type="submit" class="sz-btn sz-btn-of">Preguntar</button></div>',
-        '          <p class="sv-preg-ej"><span>O empieza por un servicio:</span>%s</p>' % ''.join(
-            '<a class="sv-op" href="%s"><span aria-hidden="true">%s</span> %s</a>' % (sf.chat_liga(sv_pregunta(x[0])[0], 'inspector'), x[1], x[2])
-            for x in SERVICIOS[:4]),
-        '        </form>',
-        '        ' + sv_operacion()])
+        '        </form>'])
     from insp_conservacion import LEYES as LEYES_CONS
     leyes_sv = dict(LEYES_CONS, cpf=SV_CPF)
     for c in SV_CONSECUENCIAS:
@@ -3367,19 +3381,8 @@ def servicios():
         '        <p class="sv-nota">Los números son conteos de los archivos de la plataforma al generar esta página (<span class="est-chip est-derivado">auditada</span>). '
         'Cada fuente, con quién la publica, cada cuándo y su próxima revisión, está en <a href="base-al-dia.html">La base al día</a>; '
         'de qué documento sale cada número, en <a href="%s#base">Por qué Auditavisión</a>.</p>' % SV_PORQUE])
-    seguro = ('<ul class="sv-checks">%s</ul>\n        <p class="sv-nota"><a href="%s#diferencia">Más sobre cómo te protegemos ➔</a></p>') % (
-        ''.join('<li>%s</li>' % x for x in SV_SEGURO), SV_PORQUE)
-    precio = ('<div class="sv-precio-l">\n'
-              '          <p class="sv-precio-tit">La consulta es gratis, y lo seguirá siendo.</p>\n'
-              '          <p>Lo que hacemos por encargo se cotiza por escrito antes de empezar; si no te conviene, ahí termina. Todavía no hay tarifas publicadas: '
-              'saldrán de encargos piloto y serán iguales para todos.</p>\n'
-              '          <div class="sv-hero-acc"><a class="sz-btn sz-btn-of" href="%s#solicitud">Pide una cotización</a>'
-              '<a class="sz-btn" href="servicios-como-se-cobra.html">Cómo se cobra cada servicio</a></div>\n'
-              '        </div>') % SV_COTIZA
-    faq = '<div class="sv-faqs">\n%s\n        </div>\n        <p class="sv-nota"><a href="servicios-preguntas.html">Ver las %d preguntas ➔</a></p>' % (
-        '\n'.join('          <details class="sv-faq"><summary>%s</summary><p>%s</p></details>' % q for q in PREGUNTAS[:5]), len(PREGUNTAS))
-    mas_porque = ('<p class="sv-nota">Cómo funciona por dentro, la evidencia, dónde encajamos y cómo nos sostenemos: '
-                  '<a href="%s">Por qué Auditavisión ➔</a></p>' % SV_PORQUE)
+    faq = '<div class="sv-faqs">\n%s\n        </div>' % '\n'.join(
+        '          <details class="sv-faq"><summary>%s</summary><p>%s</p></details>' % q for q in PREGUNTAS)
     # Lo nuevo de la plataforma (18-11-2026), integrado a cada servicio y por
     # familia (pedido del autor, 21-11-2026: «cada una de esas novedades… a los
     # servicios que ofrecemos… dividido en las secciones que correspondan»).
@@ -3408,16 +3411,14 @@ def servicios():
             bloque_sec('propuesta', 'Lo que te ofrecemos', '', sv_liga(portada, 'servicios.html'), sin_cab=True),
             bloque_sec('al-dia', 'La base, al día', 'Lo que ya puedes revisar hoy, gratis, y de cuándo es cada fuente.', aldia, pre='Nuestra base de datos'),
             bloque_sec('como', 'Cómo funciona', 'Tres pasos. Todo empieza con una pregunta en tus palabras.', como3, pre='Del chat al servicio'),
-            bloque_sec('necesitas', '¿Qué necesitas? Los servicios y lo nuevo en cada uno',
+            bloque_sec('necesitas', 'Los servicios: qué necesitas, lo nuevo y cómo operan',
                        '%s servicios en cinco familias. Cada uno dice cómo se cobra y lo que le llegó en noviembre de 2026: lo usas gratis hoy, '
-                       'y el servicio lo lleva más lejos por encargo.' % numero(len(SERVICIOS)), '%s\n        %s' % (necesitas, mas_porque), pre='Los servicios'),
+                       'y el servicio lo lleva más lejos por encargo.' % numero(len(SERVICIOS)), '%s\n        %s' % (necesitas, sv_operacion()), pre='Los servicios'),
             bloque_sec('arriesgas', 'Lo que arriesgas si no revisas',
                        'Lo que dice la ley cuando un proveedor o un cliente no es lo que parece. Toca el artículo para leer su texto.', arriesga, pre='Por qué revisar'),
-            bloque_sec('seguro', '¿Es seguro?', 'Cuatro cosas que puedes comprobar antes de contratar.', seguro, pre='Confianza'),
-            bloque_sec('cuesta', '¿Cuánto cuesta?', 'Sabes cómo se cobra antes de escribirnos.', precio, pre='Precio'),
             bloque_sec('preguntas-f', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.', faq),
         ],
-        # Las tarjetas del pie viven en «Cómo funciona» (sv_operacion(), 21-11-2026).
+        # Las tarjetas del pie y «¿Cuánto cuesta?» viven en «Cómo operan», dentro de los servicios (sv_operacion(), 21-11-2026).
     })
     # «Por qué Auditavisión»: los argumentos y la rendición de cuentas que
     # antes alargaban la página de venta (11-11-2026). Nada se borró.
