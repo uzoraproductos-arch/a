@@ -1381,7 +1381,15 @@ TABLAS = {
                 ["Medio", [[None, 4850, None], [5000, None, 3230], [3450, 2680, None], [3210, 2470, 1680], [None, 1300, 610], [None, 1130, None]]],
                 ["Económico", [[4500, 4040, 3070], [4230, 3800, 2800], [2810, 2310, None], [2630, 2140, 1430], [1650, 980, 610], [1420, None, None]]]]}},
         'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
-        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24477/newspaper251222040507.pdf', 'nota': 'En Zapotlán el Grande el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por calle en los planos (págs. 15 a 106 del archivo)', 'url': _POE + 'newspaper/24477/newspaper251222040507.pdf',
+                  'nota': 'En Zapotlán el Grande el suelo urbano se valúa por calle: el valor de la tuya viene en los planos del decreto, que no integramos (son dibujos, no tablas): búscalo ahí. Sí integramos las dos tablas de suelo del decreto: las poblaciones con valor de rango único y los predios rústicos.',
+                  'listas': [
+                      {'et': 'Poblaciones, fraccionamientos y colonias con valor catastral de rango único, por m²', 'pag': 'pág. 111 del archivo, «Página 107 de 112»', 'un': 'm2',
+                       'nota': 'Son los centros de población que cuentan con un máximo de diez manzanas y que aún no tienen sus planos de valores; el valor es el mismo para todo el lugar.',
+                       'filas': [["Apaztepetl", 290], ["Atequizayán", 330], ["El Fresnito", 560], ["La Fortuna", 330], ["Los Depósitos", 300], ["Los Mazos", 290], ["Parque Industrial 2000", 570], ["Pico del Águila", 290], ["Zona 1", 330], ["Zona 2", 370]]},
+                      {'et': 'Predios rústicos, por hectárea, según su zona (mapa de la pág. 114 del archivo) y su tipo de suelo', 'pag': 'pág. 113 del archivo, «Página 109 de 112»', 'un': 'ha',
+                       'nota': 'En la valuación de predios rústicos no aplican deméritos. Los rústicos frente a carreteras, fuera del plan de desarrollo de la cabecera o sin valor por m², valen $569,500.00 por hectárea en la zona 1, $522,500.00 en la zona 2 y $483,700.00 en la zona 3 en sus primeros 40 metros de profundidad; el resto, según su uso potencial (nota del decreto).',
+                       'filas': [["Zona 1 · Agrícola de riego o humedad residual", 569500], ["Zona 1 · Agrícola de temporal 1a", 278900], ["Zona 1 · Agrícola de temporal 2a", 217900], ["Zona 1 · Agostadero 1a. clase", 127700], ["Zona 1 · Agostadero 2a. clase", 85600], ["Zona 1 · Cerril, improductivo o eriazo", 31600], ["Zona 2 · Agrícola de riego o humedad residual", 522500], ["Zona 2 · Agrícola de temporal 1a", 277400], ["Zona 2 · Agrícola de temporal 2a", 212800], ["Zona 2 · Agostadero 1a. clase", 112900], ["Zona 2 · Agostadero 2a. clase", 75000], ["Zona 2 · Cerril, improductivo o eriazo", 23700], ["Zona 3 · Agrícola de riego o humedad residual", 483700], ["Zona 3 · Agrícola de temporal 1a", 254300], ["Zona 3 · Agrícola de temporal 2a", 180000], ["Zona 3 · Agostadero 1a. clase", 99300], ["Zona 3 · Agostadero 2a. clase", 62500], ["Zona 3 · Cerril, improductivo o eriazo", 18400]]}]}},
     'tonala': {
         'tx': 'Decreto 29971/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Tonalá para 2026, Periódico Oficial «El Estado de Jalisco», 18-12-2025, pág. 6 del archivo («Valores de construcción 2026»)',
         'url': _POE + 'newspaper/24458/newspaper251222034000.pdf',
@@ -1642,6 +1650,16 @@ def valor_construccion(T, uso, ical, iedad, iest, niveles=False):
     return _r2(v * (1 + T['niveles']['pct'] / 100)) if niveles and T.get('niveles') else v
 
 
+def valor_suelo(T, il, ir):
+    """Gemela de valorSuelo() de cc-predial.js: el valor de suelo por m² de una lista del decreto. Si la lista va por
+    hectárea, es el valor de la hectárea ÷ 10,000 m² (derivado, redondeado al centavo)."""
+    L = T['suelo']['listas'][il]
+    v = L['filas'][ir][1]
+    if v is None:
+        return None
+    return _r2(v / 10000) if L['un'] == 'ha' else v
+
+
 # El registro, estado por estado: dónde publica cada congreso las leyes de ingresos municipales y lo que
 # consta en un documento oficial de los municipios sin ley. Solo entra lo cotejado; los demás estados quedan
 # «por revisar», como falta de esta plataforma.
@@ -1741,6 +1759,13 @@ def revisa():
             primero = [eds[0][0] for nom, eds in u['cal'] if eds[0][0] is not None]
             if primero != sorted(primero, reverse=True):
                 raise SystemExit('cc_predial: las calidades de %s no van de mayor a menor' % mid)
+        # Las listas de suelo que el decreto da como tabla (poblaciones de rango único, rústicos por hectárea).
+        for L in (T.get('suelo') or {}).get('listas', []):
+            if L.get('un') not in ('m2', 'ha') or not L.get('et') or not L.get('pag') or not L.get('filas'):
+                raise SystemExit('cc_predial: una lista de suelo de %s no dice su unidad, su página o sus renglones' % mid)
+            for nom, v in L['filas']:
+                if not nom or (v is None and not T.get('escaneo')) or (v is not None and not (isinstance(v, (int, float)) and v > 0)):
+                    raise SystemExit('cc_predial: el renglón de suelo %r de %s está mal' % (nom, mid))
     for e, dv in DECRETOS_TV.items():
         for k, d in dv['lista'].items():
             if e not in ENTIDADES or not re.fullmatch(r'\d{3}', k) or not re.fullmatch(r'\d+/LXIV/\d\d', d[0]) \
@@ -1871,6 +1896,12 @@ def construir(base, ref):
         <div class="ci-fila">
           <div><label class="ci-et" for="cpTs">Terreno (m²)</label><input class="ci-in" id="cpTs" inputmode="decimal" autocomplete="off" placeholder="Ej.: 160"></div>
           <div><label class="ci-et" for="cpVs">Valor de suelo ($/m²)</label><input class="ci-in" id="cpVs" inputmode="decimal" autocomplete="off" placeholder="De tu tabla"></div>
+        </div>
+        <div class="cp-tabla" id="cpSuelo" hidden>
+          <p class="ci-pista" id="cpSueloTit"></p>
+          <label class="ci-et" for="cpSueloSel">Tu terreno en la tabla de suelo</label>
+          <select class="ci-in" id="cpSueloSel"></select>
+          <p class="ci-nota" id="cpSueloVal" aria-live="polite"></p>
         </div>
         <div class="cp-tabla" id="cpTabla" hidden>
           <p class="ci-pista" id="cpTablaTit"></p>
@@ -2086,6 +2117,20 @@ def prueba():
         if valor_construccion(TABLAS[x[0]], *x[1:]) != n:
             mal += 1
             print('✗ tabla de valores', x, n)
+    sue = [(mid, il, ir) for mid, T in TABLAS.items() for il, L in enumerate((T.get('suelo') or {}).get('listas', [])) for ir in range(len(L['filas']))]
+    prog5 = ("global.window={};global.document={getElementById:function(){return null}};require(%s);var T=%s;"
+             "console.log(JSON.stringify(%s.map(function(x){return window.AuditorPredial.valorSuelo(T[x[0]],x[1],x[2]);})));"
+             % (json.dumps(js), json.dumps(TABLAS), json.dumps(sue)))
+    r5 = subprocess.run(['node'], input=prog5, capture_output=True, text=True)
+    nav5 = json.loads(r5.stdout or '[]')
+    if len(nav5) != len(sue):
+        mal += 1
+        print('✗ el suelo no corrió en el navegador', r5.stderr[:300])
+    for x, n in zip(sue, nav5):
+        if valor_suelo(TABLAS[x[0]], x[1], x[2]) != n:
+            mal += 1
+            print('✗ suelo', x, n)
+    cel = cel + sue
     if valor_construccion(TABLAS['zapopan'], 'hab', 2, 0, 0) != 8800:
         mal += 1
         print('✗ Zapopan, medio moderno bueno debe ser $8,800 por m²')
@@ -2104,7 +2149,7 @@ def prueba():
         print('%d diferencias en el simulador del predial' % mal)
         return 1
     print('✓ Simulador del predial: %d municipios (%d leídos y en espera), %d casos iguales en Python y en el navegador '
-          '(y %d celdas de tablas de valores); la cobranza sigue a cada ley; el mandamiento de Zapopan cuadra ($2,337.62)' % (len(MUNICIPIOS), len(ESPERA), len(casos), len(cel)))
+          '(y %d celdas de tablas de valores, de construcción y de suelo); la cobranza sigue a cada ley; el mandamiento de Zapopan cuadra ($2,337.62)' % (len(MUNICIPIOS), len(ESPERA), len(casos), len(cel)))
     return 0
 
 
