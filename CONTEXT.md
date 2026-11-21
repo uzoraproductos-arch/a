@@ -7573,6 +7573,17 @@ Pedido del autor: «intégralo y continúa con las dimensiones pendientes». Se 
 - **El chat:** «se venció mi contrato…» ya no abre ComprasMX (`contratosCmx()` suelta «mi contrato», «finiquito», «me toca»…); frases nuevas en `ALIAS_APPS`.
 - **Pendiente:** la obra determinada (el art. 50 no la nombra); lo que quedó en espera; el ISR de los intereses del art. 48; la indemnización del apartado B; trabajadores de estados y municipios; el subsidio de enero; cotejar PC.XXX. J/31 A en el Semanario.
 
+### 21-11-2026 · sello 20261121w · Lo nuevo, integrado a cada servicio y por familia
+
+Pedido del autor: «lo que viene siendo novedades… se integre cada una de esas novedades como a los servicios que ofrecemos. Y pues
+cada uno dividido en las secciones que correspondan».
+- `servicios.html#nuevo` («Lo nuevo, en cada servicio») ya no es una lista plana plegada: va por pestañas de familia (`LINEAS`,
+  `sv_novedades_por_familia()`) y, dentro, una tarjeta por servicio con sus novedades (`sv_novedades_lista()`, de los renglones
+  «Nuevo» de `FICHAS`), con su fecha cuando `SV_NOVEDADES` trae la misma liga (`sv_novedad_fecha()`; si dos novedades comparten
+  página, la fecha va en `SV_NOVEDAD_FECHA`). La página carga `servicios.js` para sus pestañas.
+- Cada `servicio-<id>.html` trae «Lo nuevo en este servicio» (`#nuevo`) después de su cabecera; «Lo que la plataforma ya hace
+  por ti, gratis» (`#hace`) queda con lo demás y no sale si el servicio solo tiene novedades. Nunca un monto. No se quitó contenido.
+
 ### 21-11-2026 · sello 20261121t · Servicios: la imagen en la cabecera y la base al día arriba
 
 Pedido del autor: «la parte que dice nuestra base de datos, la base al día… se trasladará arriba… antes de la parte del chat al

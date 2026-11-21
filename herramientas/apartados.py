@@ -2682,6 +2682,55 @@ def sv_card(tit, tx, ico='', chip='', liga='', acciones=(), tono='', id_='', att
                     for t, lg, prim in acciones)))
 
 
+# Una novedad que comparte página con otra más vieja lleva aquí su fecha (AGENTS.md):
+SV_NOVEDAD_FECHA = {'El recibo de nómina': '18 nov 2026'}
+
+
+def sv_novedad_fecha(liga, tit=''):
+    """La fecha de una novedad, si SV_NOVEDADES la trae para la misma liga."""
+    if tit in SV_NOVEDAD_FECHA:
+        return SV_NOVEDAD_FECHA[tit]
+    for f, _e, _t, _x, lg in SV_NOVEDADES:
+        if lg == liga:
+            return f
+    return ''
+
+
+def sv_novedades_lista(sid, sf):
+    """Las novedades de un servicio, como lista con su fecha cuando consta."""
+    return '<ul class="sv-nuevo-lista">%s</ul>' % ''.join(
+        '<li><span aria-hidden="true">%s</span> <a href="%s"><b>%s</b></a>%s <span>%s</span></li>' % (
+            i, esc_attr(lg), t, (' <small class="sv-nuevo-fecha">%s</small>' % sv_novedad_fecha(lg, t)) if sv_novedad_fecha(lg, t) else '', tx)
+        for i, t, tx, lg, _k in sf.nuevos(sid))
+
+
+def sv_novedades_por_familia(sf):
+    """Lo nuevo de la plataforma por familia (pestañas) y, dentro, por servicio:
+    cada tarjeta es un servicio con lo que le llegó. Nunca un monto."""
+    paneles, barra = [], []
+    for lid, ico, tit, tx in LINEAS:
+        servs = [s for s in SERVICIOS if s[6] == lid and sf.nuevos(s[0])]
+        if not servs:
+            continue
+        barra.append((lid, ico))
+        paneles.append(
+            '          <div class="sv-linea" id="nuevo-%s" data-sv-panel="%s">\n'
+            '            <p class="sv-linea-tit"><span aria-hidden="true">%s</span> %s</p>\n'
+            '            <div class="sv-cards">\n%s\n            </div>\n'
+            '          </div>' % (lid, lid, ico, tit, '\n'.join(
+                '              ' + sv_card(s[2], '%d %s' % (len(sf.nuevos(s[0])), 'novedad' if len(sf.nuevos(s[0])) == 1 else 'novedades'),
+                                         s[1], 'Nuevo', sf.PAGINA % s[0] + '#nuevo',
+                                         (('Ver el servicio', sf.PAGINA % s[0] + '#nuevo', True),
+                                          ('Pide una cotización', 'servicios-cotiza.html?servicio=%s#solicitud' % s[0], False)),
+                                         SV_TONO[lid], pie=sv_novedades_lista(s[0], sf))
+                for s in servs)))
+    corto = dict(zip([l[0] for l in LINEAS], ['Fraude y lavado', 'Temporada electoral', 'Formación', 'Instituciones e investigación', 'Simuladores']))
+    return ('<div class="sv-tabs" data-sv-tabs>\n          <div class="sv-tabs-barra" role="group" aria-label="Novedades por familia">%s</div>\n'
+            '          <div class="sv-lineas">\n%s\n          </div>\n        </div>') % (''.join(
+                '<button type="button" class="sv-tab" data-sv-tab="%s" aria-pressed="%s"><span aria-hidden="true">%s</span> %s</button>' % (
+                    k, 'true' if n == 0 else 'false', i, corto[k]) for n, (k, i) in enumerate(barra)), '\n'.join(paneles))
+
+
 def sv_pregunta(sid):
     """La pregunta con que el chat contesta un servicio (srv_<id>), y su modo.
     Se probó con los trece: «servicio de <nombre>» llega a su ficha, y con
@@ -3301,14 +3350,11 @@ def servicios():
         '\n'.join('          <details class="sv-faq"><summary>%s</summary><p>%s</p></details>' % q for q in PREGUNTAS[:5]), len(PREGUNTAS))
     mas_porque = ('<p class="sv-nota">Cómo funciona por dentro, la evidencia, dónde encajamos y cómo nos sostenemos: '
                   '<a href="%s">Por qué Auditavisión ➔</a></p>' % SV_PORQUE)
-    # Lo nuevo de la plataforma (18-11-2026): cada novedad con los servicios que la usan.
+    # Lo nuevo de la plataforma (18-11-2026), integrado a cada servicio y por
+    # familia (pedido del autor, 21-11-2026: «cada una de esas novedades… a los
+    # servicios que ofrecemos… dividido en las secciones que correspondan»).
     import servicios_fichas as sf
-    nv = ['          ' + sv_card(t, tx, i, 'Nuevo', lg, (('Ábrelo', lg, True),), pie='<span class="sv-nuevo-en">En: %s</span>' % ', '.join(
-        '<a href="%s">%s</a>' % (sf.PAGINA % k, nom[k]) for k in ks)) for i, t, tx, lg, ks in sf.nuevos()]
-    nuevo = '<div class="sv-cards">\n%s\n        </div>' % '\n'.join(nv[:6])
-    if nv[6:]:
-        nuevo += ('\n        <details class="sv-mas"><summary>Ver las otras %d novedades</summary>\n        <div class="sv-cards">\n%s\n        </div>\n'
-                  '        </details>' % (len(nv) - 6, '\n'.join(nv[6:])))
+    nuevo = sv_novedades_por_familia(sf)
     # Las ligas viejas a una sección que se mudó, y las que traen el tema o el
     # servicio (?tema=, ?servicio=, ?plan=), se mandan a su página.
     redir = ('<script>(function () { var m = %s, h = decodeURIComponent(location.hash.slice(1)), q = location.search, '
@@ -3328,6 +3374,7 @@ def servicios():
         'sin_saltos': True, 'redirige': redir,
         # La imagen del autor va de fondo de esta cabecera (pedido del autor, 21-11-2026).
         'cab_extra': 'sv-cab-foto',
+        'scripts': ['servicios.js'],  # las pestañas de «Lo nuevo» por familia
         'antes': aviso,
         'secciones': [
             bloque_sec('propuesta', 'Lo que te ofrecemos', '', sv_liga(portada, 'servicios.html'), sin_cab=True),
@@ -3340,8 +3387,9 @@ def servicios():
             bloque_sec('seguro', '¿Es seguro?', 'Cuatro cosas que puedes comprobar antes de contratar.', seguro, pre='Confianza'),
             bloque_sec('cuesta', '¿Cuánto cuesta?', 'Sabes cómo se cobra antes de escribirnos.', precio, pre='Precio'),
             bloque_sec('preguntas-f', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.', faq),
-            bloque_sec('nuevo', 'Lo nuevo de la plataforma', 'Lo que llegó en noviembre de 2026: lo usas gratis hoy, y cada servicio lo lleva más lejos por encargo.',
-                       '<details class="sv-mas"><summary>Ver las novedades</summary>\n        %s\n        </details>\n        %s' % (nuevo, mas_porque)),
+            bloque_sec('nuevo', 'Lo nuevo, en cada servicio',
+                       'Lo que llegó en noviembre de 2026, ordenado por familia y por el servicio que lo aprovecha: lo usas gratis hoy, y el servicio lo lleva más lejos por encargo.',
+                       '%s\n        %s' % (nuevo, mas_porque), pre='Novedades'),
         ],
         'pie_extra': partes_nav('Servicios', 'servicios.html', '🔎', partes, 'servicios.html'),
     })
@@ -3433,9 +3481,13 @@ def servicio_paginas(comun):
             'El dictamen de este servicio respalda qué es, con sus fuentes, su folio y su huella; no es un documento oficial ni un peritaje.</p>',
             '          <p class="sv-limite"><span aria-hidden="true">⚖️</span> %s</p>' % f['no'],
             '        </div>'])
-        hace = '<div class="sv-cards">\n%s\n        </div>' % '\n'.join(
+        # Lo nuevo va en su propia sección (pedido del autor, 21-11-2026); lo demás, en «hace».
+        tarjetas = lambda xs: '<div class="sv-cards">\n%s\n        </div>' % '\n'.join(
             '          ' + sv_card(t, tx, i, et, lg, tono=SV_TONO[lid], pie='' if et == 'Gratis' else '<span class="sv-acceso sv-acceso-gratis">Gratis</span>')
-            for i, t, tx, lg, et in f['hace'])
+            for i, t, tx, lg, et in xs)
+        nuevas = [x for x in f['hace'] if x[4] == 'Nuevo']
+        hace_x = [x for x in f['hace'] if x[4] != 'Nuevo']
+        hace = tarjetas(hace_x)
         from urllib.parse import quote
         ejemplos = '<ul class="sv-fx-ejs">\n%s\n        </ul>' % '\n'.join(
             '          <li><b>%s</b><span>%s</span><a href="servicios-cotiza.html?servicio=%s&amp;tema=%s&amp;pregunta=%s#solicitud">Úsalo en tu cotización ➔</a></li>'
@@ -3467,16 +3519,21 @@ def servicio_paginas(comun):
         otros = '<div class="sv-cards">\n%s\n        </div>' % '\n'.join(
             '          ' + sv_tarjeta_servicio(x) for x in hermanos) if hermanos else ''
         secs = [{'id': 'servicio', 'titulo': nom, 'texto': '', 'tarjetas': [], 'bloque': cab, 'sin_cab': True},
-                {'id': 'hace', 'titulo': 'Lo que la plataforma ya hace por ti, gratis', 'pre': 'Empieza hoy', 'tarjetas': [],
-                 'texto': 'Las aplicaciones con que trabaja este servicio. Antes de pedirlo, úsalas tú: cada una se abre montada en el chat del Auditor, '
-                          'con su respuesta y su dictamen. «Nuevo» es lo que llegó en noviembre de 2026.', 'bloque': hace},
-                {'id': 'ejemplos', 'titulo': 'Lo que puedes encargarnos', 'pre': 'Por encargo', 'tarjetas': [],
+{'id': 'ejemplos', 'titulo': 'Lo que puedes encargarnos', 'pre': 'Por encargo', 'tarjetas': [],
                  'texto': 'Ejemplos de redacción, sin cifras ni nombres. Toca uno y cámbialo a tu caso.', 'bloque': ejemplos},
                 {'id': 'auditor', 'titulo': 'Pregúntale al Auditor', 'pre': 'En el chat', 'tarjetas': [],
                  'texto': 'Preguntas que el chat ya contesta sobre este tema. Cada una abre con su modo; si su respuesta cita datos, trae «Generar dictamen».', 'bloque': auditor},
                 {'id': 'fundamento', 'titulo': 'Su fundamento, en la Biblioteca del Erario', 'pre': 'La ley y los términos', 'tarjetas': [],
                  'texto': 'Los términos del Diccionario, las leyes y documentos de Referencias y las páginas de la Enciclopedia en que se apoya este servicio.',
                  'bloque': biblio}]
+        if hace_x:
+            secs.insert(1, {'id': 'hace', 'titulo': 'Lo que la plataforma ya hace por ti, gratis', 'pre': 'Empieza hoy', 'tarjetas': [],
+                 'texto': 'Las aplicaciones con que trabaja este servicio. Antes de pedirlo, úsalas tú: cada una se abre montada en el chat del Auditor, '
+                          'con su respuesta y su dictamen.', 'bloque': hace})
+        if nuevas:
+            secs.insert(1, {'id': 'nuevo', 'titulo': 'Lo nuevo en este servicio', 'pre': 'Novedades', 'tarjetas': [],
+                            'texto': 'Lo que llegó a la plataforma en noviembre de 2026 y aprovecha este servicio. Lo usas gratis hoy; '
+                                     'por encargo lo llevamos más lejos.', 'bloque': tarjetas(nuevas)})
         if quienes:
             secs.append({'id': 'para-quien', 'titulo': 'A quién le sirve', 'pre': 'Perfiles y riesgos', 'tarjetas': [],
                          'texto': 'Los perfiles y los riesgos que atiende este servicio.', 'bloque': quienes})
