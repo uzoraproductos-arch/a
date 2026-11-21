@@ -7573,6 +7573,25 @@ Pedido del autor: «intégralo y continúa con las dimensiones pendientes». Se 
 - **El chat:** «se venció mi contrato…» ya no abre ComprasMX (`contratosCmx()` suelta «mi contrato», «finiquito», «me toca»…); frases nuevas en `ALIAS_APPS`.
 - **Pendiente:** la obra determinada (el art. 50 no la nombra); lo que quedó en espera; el ISR de los intereses del art. 48; la indemnización del apartado B; trabajadores de estados y municipios; el subsidio de enero; cotejar PC.XXX. J/31 A en el Semanario.
 
+### 21-11-2026 · sello 20261121x · Dos chats: el Inspector vive en Servicios
+
+Pedido del autor: fusionar «¿Qué necesitas?» con «Lo nuevo»; llevar las tarjetas del pie de Servicios (fraude y lavado, servicios,
+tu perfil, empieza gratis, cómo se cobra, calendario, preguntas y cotiza) a «Cómo funciona»; y «crear dos chats, uno reflejo del
+otro… ambos se alimentan de lo mismo», con el modo Inspector solo en Servicios, una respuesta breve y «toda esa información… en una
+nueva página completa y al final… generar dictamen».
+- `servicios-inspector.html`: el chat con solo el modo Inspector (`asistente.pagina(solo='inspector')`), mismo `asistente.js` y misma
+  base. Contesta en corto (`corto()`), con «Ver la respuesta completa», «Generar dictamen» y «No era lo que buscaba».
+- `servicios-respuesta.html?q=…`: vuelve a contestar con la base (`armaRespuesta()`) y desglosa la respuesta, la revisión del
+  Inspector, su aplicación, el expediente, el servicio que toca, las demás partes de la plataforma y la Enciclopedia, y cierra con
+  «Tu dictamen». Nada viaja en el enlace.
+- El chat del Auditor queda con tres modos; `?modo=inspector` se muda al de Servicios con su pregunta. Las ligas de Servicios a un chat
+  van al Inspector de Servicios (`chat_liga()`, `por_auditor(origen='Servicios')`), y el dictamen del Inspector vuelve a ese chat.
+- `servicios.html`: «¿Qué necesitas? Los servicios y lo nuevo en cada uno» (`sv_servicios_y_nuevo()`, pestañas por familia, cada servicio
+  con su cobro, sus novedades y sus tres puertas); «La operación de los servicios» dentro de «Cómo funciona» (`sv_operacion()`); sin
+  el pie de tarjetas. Las subpáginas conservan su navegación. Nunca un monto. No se quitó contenido.
+- **Pendiente:** las aplicaciones del modo Inspector siguen colgando de la Enciclopedia en sus migas
+  (`numeros-herramientas-del-auditor.html`); mudarlas a Servicios es una entrega aparte.
+
 ### 21-11-2026 · sello 20261121w · Lo nuevo, integrado a cada servicio y por familia
 
 Pedido del autor: «lo que viene siendo novedades… se integre cada una de esas novedades como a los servicios que ofrecemos. Y pues
