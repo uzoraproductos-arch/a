@@ -21,14 +21,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261121za">
-  <script src="assets/auditor/js/iconos.js?v=20261121za"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261121za"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261121za" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261121za">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261121za">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261121za">
-  <link rel="stylesheet" href="assets/auditor/css/servicios.css?v=20261121za">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261121zc">
+  <script src="assets/auditor/js/iconos.js?v=20261121zc"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261121zc"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261121zc" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261121zc">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261121zc">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261121zc">
+  <link rel="stylesheet" href="assets/auditor/css/servicios.css?v=20261121zc">
   <script>(function () { var m = {"riesgo": "servicios-fraude-y-lavado.html", "oferta": "servicios-catalogo.html", "sectores": "servicios-tu-perfil.html", "modulos": "servicios-empieza-gratis.html", "cobro": "servicios-como-se-cobra.html", "calendario": "servicios-calendario.html", "preguntas": "servicios-preguntas.html", "solicitud": "servicios-cotiza.html", "precio": "servicios-como-se-cobra.html", "planes": "servicios-como-se-cobra.html", "proceso": "servicios-cotiza.html", "independencia": "servicios-cotiza.html", "sv-*": "servicios-catalogo.html", "fam-*": "servicios-catalogo.html"}, h = decodeURIComponent(location.hash.slice(1)), q = location.search, d = m[h] || (/^(sv|fam)-/.test(h) ? m[h.split('-')[0] + '-*'] : ''); if (d) { location.replace(d + q + '#' + h); return; } if (/[?&](tema|servicio|plan)=/.test(q)) location.replace(m.solicitud + q + '#solicitud'); })();</script>
 </head>
 <body data-pagina="apartado">
@@ -238,26 +238,14 @@
         <form class="sv-preg" id="inspector" action="servicios-inspector.html" method="get" role="search" aria-label="Cuéntale tu caso al Inspector">
           <label for="svPreg">Cuéntale tu caso al Inspector</label>
           <div class="sv-preg-fila"><input id="svPreg" name="q" type="text" maxlength="300" required placeholder="Ej.: ¿Cómo reviso a un proveedor antes de contratarlo?"><button type="submit" class="sz-btn sz-btn-of">Preguntar</button></div>
-          <p class="sv-preg-ej"><span>O empieza por un servicio:</span><a class="sv-op" href="servicios-inspector.html?q=servicio%20de%20revisi%C3%B3n%20de%20un%20proveedor"><span aria-hidden="true">🏢</span> Revisión de un proveedor</a><a class="sv-op" href="servicios-inspector.html?q=servicio%20de%20revisi%C3%B3n%20de%20tu%20cartera%20de%20contrapartes"><span aria-hidden="true">🗂️</span> Revisión de tu cartera de contrapartes</a><a class="sv-op" href="servicios-inspector.html?q=servicio%20de%20vig%C3%ADa%20y%20seguimiento%20peri%C3%B3dico"><span aria-hidden="true">📡</span> Vigía y seguimiento periódico</a><a class="sv-op" href="servicios-inspector.html?q=servicio%20de%20revisi%C3%B3n%20de%20facturas%20por%20lote"><span aria-hidden="true">🧾</span> Revisión de facturas por lote</a></p>
         </form>
-        <p class="sv-op-tit"><b>La operación de los servicios</b> <span>Cada parte, en su página.</span></p>
-        <div class="sv-cards sv-cards-op">
-          <a class="sv-card" href="servicios-fraude-y-lavado.html"><span class="sv-card-cab"><span class="sv-card-ico" aria-hidden="true">🛡️</span></span><b class="sv-card-tit">Fraude y lavado</b><span class="sv-card-tx">El fraude es frecuente y casi nunca se denuncia: los riesgos, sus cifras y lo que hacemos con cada uno.</span><span class="sv-card-ir">Abrir ➔</span></a>
-          <a class="sv-card" href="servicios-catalogo.html"><span class="sv-card-cab"><span class="sv-card-ico" aria-hidden="true">🧰</span></span><b class="sv-card-tit">Servicios</b><span class="sv-card-tx">Todos los servicios, en cuatro familias: qué es cada uno, qué recibes y cómo se cobra.</span><span class="sv-card-ir">Abrir ➔</span></a>
-          <a class="sv-card" href="servicios-tu-perfil.html"><span class="sv-card-cab"><span class="sv-card-ico" aria-hidden="true">👤</span></span><b class="sv-card-tit">Tu perfil</b><span class="sv-card-tx">Lo que te pide tu trabajo, el servicio que lo atiende y con qué empezar hoy, gratis.</span><span class="sv-card-ir">Abrir ➔</span></a>
-          <a class="sv-card" href="servicios-empieza-gratis.html"><span class="sv-card-cab"><span class="sv-card-ico" aria-hidden="true">🔓</span></span><b class="sv-card-tit">Empieza gratis</b><span class="sv-card-tx">Las herramientas que ya puedes usar sin pagar y sin subir tus archivos.</span><span class="sv-card-ir">Abrir ➔</span></a>
-          <a class="sv-card" href="servicios-como-se-cobra.html"><span class="sv-card-cab"><span class="sv-card-ico" aria-hidden="true">💳</span></span><b class="sv-card-tit">Cómo se cobra</b><span class="sv-card-tx">Sabes cómo se cobra antes de escribirnos, y dónde está la línea entre lo gratis y lo de pago.</span><span class="sv-card-ir">Abrir ➔</span></a>
-          <a class="sv-card" href="servicios-calendario.html"><span class="sv-card-cab"><span class="sv-card-ico" aria-hidden="true">📅</span></span><b class="sv-card-tit">Calendario</b><span class="sv-card-tx">La prevención sirve todo el año; la temporada electoral tiene fecha.</span><span class="sv-card-ir">Abrir ➔</span></a>
-          <a class="sv-card" href="servicios-preguntas.html"><span class="sv-card-cab"><span class="sv-card-ico" aria-hidden="true">❓</span></span><b class="sv-card-tit">Preguntas</b><span class="sv-card-tx">Lo que casi todos preguntan antes de contratar.</span><span class="sv-card-ir">Abrir ➔</span></a>
-          <a class="sv-card" href="servicios-cotiza.html"><span class="sv-card-cab"><span class="sv-card-ico" aria-hidden="true">📝</span></span><b class="sv-card-tit">Cotiza</b><span class="sv-card-tx">Cuéntanos qué quieres saber: ves tu solicitud antes de mandarla. Con cómo trabajamos y la política de independencia.</span><span class="sv-card-ir">Abrir ➔</span></a>
-        </div>
         </div>
       </section>
 
       <section class="apartado-seccion" id="necesitas" aria-labelledby="necesitas-tit">
         <div class="apartado-seccion-cab">
           <p class="apartado-seccion-pre">Los servicios</p>
-          <h2 class="apartado-seccion-titulo" id="necesitas-tit"><span class="sr-only"></span>¿Qué necesitas? Los servicios y lo nuevo en cada uno</h2>
+          <h2 class="apartado-seccion-titulo" id="necesitas-tit"><span class="sr-only"></span>Los servicios: qué necesitas, lo nuevo y cómo operan</h2>
           <p class="apartado-seccion-texto">Quince servicios en cinco familias. Cada uno dice cómo se cobra y lo que le llegó en noviembre de 2026: lo usas gratis hoy, y el servicio lo lleva más lejos por encargo.</p>
         </div>
         <div class="apartado-bloque">
@@ -316,7 +304,11 @@
           </div>
           </div>
         </div>
-        <p class="sv-nota">Cómo funciona por dentro, la evidencia, dónde encajamos y cómo nos sostenemos: <a href="servicios-por-que.html">Por qué Auditavisión ➔</a></p>
+        <div class="sv-opera" id="opera">
+          <p class="sv-opera-tit"><span aria-hidden="true">⚙️</span> <b>Cómo operan</b></p>
+          <div class="sv-opera-fila"><b>Antes de contratar</b><span class="sv-mapa"><a href="servicios-tu-perfil.html" title="Lo que te pide tu trabajo, el servicio que lo atiende y con qué empezar hoy, gratis."><span aria-hidden="true">👤</span> Tu perfil</a><a href="servicios-empieza-gratis.html" title="Las herramientas que ya puedes usar sin pagar y sin subir tus archivos."><span aria-hidden="true">🔓</span> Empieza gratis</a><a href="servicios-fraude-y-lavado.html" title="El fraude es frecuente y casi nunca se denuncia: los riesgos, sus cifras y lo que hacemos con cada uno."><span aria-hidden="true">🛡️</span> Fraude y lavado</a><a href="servicios-calendario.html" title="La prevención sirve todo el año; la temporada electoral tiene fecha."><span aria-hidden="true">📅</span> Calendario</a></span></div><div class="sv-opera-fila"><b>Para contratar</b><span class="sv-mapa"><a href="servicios-catalogo.html" title="Todos los servicios, en cuatro familias: qué es cada uno, qué recibes y cómo se cobra."><span aria-hidden="true">🧰</span> Todos los servicios</a><a href="servicios-como-se-cobra.html" title="Sabes cómo se cobra antes de escribirnos, y dónde está la línea entre lo gratis y lo de pago."><span aria-hidden="true">💳</span> Cómo se cobra</a><a href="servicios-cotiza.html" title="Cuéntanos qué quieres saber: ves tu solicitud antes de mandarla. Con cómo trabajamos y la política de independencia."><span aria-hidden="true">📝</span> Cotiza</a></span></div>
+          <p class="sv-nota">Cómo funciona por dentro, la evidencia y cómo nos sostenemos: <a href="servicios-por-que.html">Por qué Auditavisión ➔</a></p>
+        </div>
         </div>
       </section>
 
@@ -369,33 +361,6 @@
         </div>
       </section>
 
-      <section class="apartado-seccion" id="seguro" aria-labelledby="seguro-tit">
-        <div class="apartado-seccion-cab">
-          <p class="apartado-seccion-pre">Confianza</p>
-          <h2 class="apartado-seccion-titulo" id="seguro-tit"><span class="sr-only"></span>¿Es seguro?</h2>
-          <p class="apartado-seccion-texto">Cuatro cosas que puedes comprobar antes de contratar.</p>
-        </div>
-        <div class="apartado-bloque">
-        <ul class="sv-checks"><li>Tus facturas, nóminas y estados de resultados se leen en tu navegador: no se suben.</li><li>Nunca te pedimos la contraseña del SAT ni la de tu banco.</li><li>Cada cifra va con su documento y una etiqueta: oficial, auditada o pendiente.</li><li>Ningún cliente ni donante compra lo que publicamos: las mismas reglas para todos.</li></ul>
-        <p class="sv-nota"><a href="servicios-por-que.html#diferencia">Más sobre cómo te protegemos ➔</a></p>
-        </div>
-      </section>
-
-      <section class="apartado-seccion" id="cuesta" aria-labelledby="cuesta-tit">
-        <div class="apartado-seccion-cab">
-          <p class="apartado-seccion-pre">Precio</p>
-          <h2 class="apartado-seccion-titulo" id="cuesta-tit"><span class="sr-only"></span>¿Cuánto cuesta?</h2>
-          <p class="apartado-seccion-texto">Sabes cómo se cobra antes de escribirnos.</p>
-        </div>
-        <div class="apartado-bloque">
-        <div class="sv-precio-l">
-          <p class="sv-precio-tit">La consulta es gratis, y lo seguirá siendo.</p>
-          <p>Lo que hacemos por encargo se cotiza por escrito antes de empezar; si no te conviene, ahí termina. Todavía no hay tarifas publicadas: saldrán de encargos piloto y serán iguales para todos.</p>
-          <div class="sv-hero-acc"><a class="sz-btn sz-btn-of" href="servicios-cotiza.html#solicitud">Pide una cotización</a><a class="sz-btn" href="servicios-como-se-cobra.html">Cómo se cobra cada servicio</a></div>
-        </div>
-        </div>
-      </section>
-
       <section class="apartado-seccion" id="preguntas-f" aria-labelledby="preguntas-f-tit">
         <div class="apartado-seccion-cab">
           <h2 class="apartado-seccion-titulo" id="preguntas-f-tit"><span class="sr-only"></span>Preguntas frecuentes</h2>
@@ -403,13 +368,13 @@
         </div>
         <div class="apartado-bloque">
         <div class="sv-faqs">
-          <details class="sv-faq"><summary>¿Cobran por la información?</summary><p>No. Lo que se ve en el sitio es gratis y lo seguirá siendo. Se cobra que lo hagamos por ti, que lo recordemos o que te avisemos.</p></details>
+          <details class="sv-faq"><summary>¿Cuánto cuesta y cuánto tarda?</summary><p>La consulta es gratis y lo seguirá siendo: lo que ves en el sitio no se cobra. Se cobra que lo hagamos por ti, que lo recordemos o que te avisemos, y cada servicio dice cómo: por ficha, por mes, por documento, por taller o por cotización. Todavía no hay tarifas publicadas, y no vamos a inventarlas: saldrán de los primeros encargos piloto y serán iguales para todos. Antes de empezar recibes por escrito el costo y el plazo; si no te conviene, ahí termina y no pagas nada.</p></details>
           <details class="sv-faq"><summary>¿El entregable es un dictamen o un peritaje?</summary><p>No. Es investigación documental y análisis de indicios: señalamos lo que dicen los documentos públicos y las inconsistencias, sin acusar a nadie. Un encargo que requiera dictamen pericial se cotiza aparte, con su responsable profesional.</p></details>
           <details class="sv-faq"><summary>¿Qué pasa si no encuentran lo que yo esperaba?</summary><p>El entregable lo dice. Quien encarga define la pregunta, no la respuesta, y las conclusiones no se negocian.</p></details>
-          <details class="sv-faq"><summary>¿Mis facturas o mis datos se publican?</summary><p>No. Tu encargo es confidencial y no publicamos quién encargó qué sin su permiso. Con las herramientas gratuitas, tus archivos ni siquiera salen de tu navegador.</p></details>
-          <details class="sv-faq"><summary>¿Cuánto tarda y cuánto cuesta?</summary><p>Cada servicio dice cómo se cobra: por ficha, por mes, por documento, por taller o por cotización. Todavía no hay tarifas publicadas, y no vamos a inventarlas: saldrán de los primeros encargos piloto. Antes de empezar recibes por escrito el costo y el plazo; si no te conviene, ahí termina y no pagas nada.</p></details>
+          <details class="sv-faq"><summary>¿Es seguro? ¿Mis facturas o mis datos se publican?</summary><p>No se publican: tu encargo es confidencial y no decimos quién encargó qué sin su permiso. Y puedes comprobarlo: tus facturas, nóminas y estados de resultados se leen en tu navegador, no se suben; nunca te pedimos la contraseña del SAT ni la de tu banco; cada cifra va con su documento y su etiqueta (oficial, auditada o pendiente), y ningún cliente ni donante compra lo que publicamos. <a href="servicios-por-que.html#diferencia">Más sobre cómo te protegemos ➔</a></p></details>
+          <details class="sv-faq"><summary>¿Atienden a gobiernos y a partidos?</summary><p>Sí, con la misma regla para todos: el mismo servicio y el mismo precio, con factura y sin cortesías, y nunca a cambio de cambiar lo que publicamos. En campaña no investigamos por encargo a una candidatura rival. Si quien solicita es parte del caso, se dice en la cotización.</p></details>
+          <details class="sv-faq"><summary>¿Cuándo abren?</summary><p>Ya operan para quien tiene un código de acceso vigente: arma tu solicitud y envíala. ¿No tienes código? Pídelo en «Canjea tu código».</p></details>
         </div>
-        <p class="sv-nota"><a href="servicios-preguntas.html">Ver las 7 preguntas ➔</a></p>
         </div>
       </section>
     </div>
@@ -421,12 +386,12 @@
       <a class="apartado-volver apartado-indice" href="indice.html">🗂️ Índice general</a>
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261121za</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261121zc</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261121za"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261121za"></script>
-  <script src="assets/auditor/js/servicios.js?v=20261121za"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261121zc"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261121zc"></script>
+  <script src="assets/auditor/js/servicios.js?v=20261121zc"></script>
 </body>
 </html>

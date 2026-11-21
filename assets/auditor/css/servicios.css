@@ -501,8 +501,13 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 .sv-nuevo-fecha { font-size: 14px; color: #8a5a00; font-weight: 700; margin-left: 4px; }
 [data-theme="dark"] .sv-nuevo-lista span:not([aria-hidden]) { color: #b7c3d9; }
 [data-theme="dark"] .sv-nuevo-fecha { color: #ffd27a; }
-/* La operación de los servicios, dentro de «Cómo funciona» (21-11-2026). */
-.sv-op-tit { margin: 1.75rem 0 .75rem; display: flex; flex-wrap: wrap; gap: .25rem .75rem; align-items: baseline; }
-.sv-op-tit b { font-size: 1.15rem; }
-.sv-op-tit span { color: var(--txt-sec, #5b6470); }
-.sv-cards-op { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+/* Cómo operan, dentro de los servicios (21-11-2026): las páginas de Servicios en dos renglones de ligas. */
+.sv-opera { margin-top: 22px; padding: 20px 22px; border-radius: 20px; background: #f3f6fc; border: 1px solid #dfe5f0; display: grid; gap: 12px; }
+.sv-opera-tit { margin: 0; font-size: 20px; color: #0b2a63; }
+.sv-opera-cobro { margin: 0; line-height: 1.55; color: #24324d; }
+.sv-opera-fila { display: grid; grid-template-columns: 170px 1fr; gap: 8px 14px; align-items: center; }
+.sv-opera-fila > b { color: #0b2a63; }
+.sv-opera .sv-nota { margin: 0; }
+@media (max-width: 860px) { .sv-opera-fila { grid-template-columns: 1fr; } }
+[data-theme="dark"] .sv-opera { background: #1b2a44; border-color: #2a3b57; }
+[data-theme="dark"] .sv-opera-tit, [data-theme="dark"] .sv-opera-fila > b, [data-theme="dark"] .sv-opera-cobro { color: #e8eefa; }
