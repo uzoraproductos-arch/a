@@ -39,3 +39,41 @@
 .cp-esc-tu { top: 0; height: 66px; border-left: 4px solid var(--ci); }
 .cp-esc-tu > span { top: 0; padding-left: 6px; font-weight: 700; color: var(--ci); }
 .cp-esc-tu.cp-der > span { padding: 0 6px 0 0; }
+/* El informe de tu predial (21-11-2026): se ve plegado, se imprime solo. */
+.cp-inf-acc { margin-top: 22px; padding: 16px 18px; border: 1px solid #c9d3e3; border-radius: 14px; background: #f7f9fc; }
+.cp-inf-acc .ci-acciones { display: flex; flex-wrap: wrap; gap: 10px; }
+.cp-inf-ver > summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 700; font-size: 16px; color: var(--ci); }
+.cp-informe { margin-top: 10px; padding: 22px; border: 1px solid #8a94a6; border-radius: 6px; background: #fff; color: #1c2a44; font-size: 16px; line-height: 1.55; }
+.cp-inf-cab { border-bottom: 3px double #1c2a44; padding-bottom: 12px; margin-bottom: 14px; }
+.cp-inf-marca { margin: 0; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: #4a5a6a; }
+.cp-inf-tit { margin: 4px 0 10px; font: 800 26px/1.2 'Playfair Display', Georgia, serif; }
+.cp-inf-meta, .cp-inf-dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px 16px; margin: 0; }
+.cp-inf-meta dt, .cp-inf-dl dt { font-size: 14px; color: #4a5a6a; }
+.cp-inf-meta dd, .cp-inf-dl dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
+.cp-inf-sec { margin: 0 0 16px; }
+.cp-inf-sec h4 { margin: 0 0 6px; font-size: 18px; break-after: avoid; }
+.cp-inf-tabla tr { break-inside: avoid; }
+.cp-inf-sec p { margin: 0 0 8px; }
+.cp-inf-sec ul { margin: 6px 0; padding-left: 22px; }
+.cp-inf-tabla { width: 100%; border-collapse: collapse; font-size: 15px; margin: 6px 0; }
+.cp-inf-tabla th, .cp-inf-tabla td { border-bottom: 1px solid #d5dbe5; padding: 6px 4px; text-align: left; vertical-align: top; }
+.cp-inf-tabla td:nth-child(2) { white-space: nowrap; text-align: right; }
+.cp-inf-tabla .ci-fuerte th, .cp-inf-tabla .ci-fuerte td { font-weight: 700; }
+.cp-inf-sha, .cp-inf-pie code { font-size: 13px; overflow-wrap: anywhere; word-break: break-all; }
+.cp-inf-pie { border-top: 1px solid #8a94a6; padding-top: 10px; font-size: 15px; }
+.cp-inf-pie a { overflow-wrap: anywhere; }
+#cpPrintRaiz { display: none; }
+@media (max-width: 600px) {
+  .cp-informe { padding: 14px 12px; }
+  .cp-inf-tabla thead { display: none; }
+  .cp-inf-tabla tr { display: block; padding: 8px 0; border-bottom: 1px solid #d5dbe5; }
+  .cp-inf-tabla th, .cp-inf-tabla td { display: block; border: 0; padding: 2px 0; }
+  .cp-inf-tabla td:nth-child(2) { text-align: left; font-weight: 700; }
+  .cp-inf-tabla td:nth-child(3) { font-size: 14px; color: #4a5a6a; }
+}
+@media print {
+  body.cp-print > *:not(#cpPrintRaiz) { display: none !important; }
+  body.cp-print #cpPrintRaiz { display: block; border: 0; padding: 0; margin: 0; }
+  body.cp-print { background: #fff; }
+  .cp-informe a { color: inherit; }
+}

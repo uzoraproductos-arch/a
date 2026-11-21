@@ -1908,7 +1908,7 @@ def datos(base):
     uma = base['calculadora_civica']['parametros']['uma']
     return {'anio': ANIO, 'inpc': cc['inpc'], 'inpc_ult': cc['inpc_ult'],
             'uma': uma['diaria'], 'uma_f': uma['fuente'], 'ent': ENTIDADES,
-            'mun': MUNICIPIOS, 'espera': ESPERA, 'reg': REGISTRO, 'tablas': TABLAS, 'dtv': DECRETOS_TV, 'poe': _POE, 'lhm': {'tope': 250, 'tope_esp': 100}, 'shf': shf()}
+            'mun': MUNICIPIOS, 'espera': ESPERA, 'reg': REGISTRO, 'tablas': TABLAS, 'dtv': DECRETOS_TV, 'poe': _POE, 'lhm': {'tope': 250, 'tope_esp': 100, 'tx': LHM['tx'], 'url': LHM['url'], 'sha256': LHM['sha256']}, 'shf': shf()}
 
 
 def construir(base, ref):
@@ -2055,6 +2055,13 @@ def construir(base, ref):
       <thead><tr><th scope="col">Concepto</th><th scope="col">Pesos</th><th scope="col">Regla</th></tr></thead>
       <tbody id="cpDeudaPasos"></tbody></table></div>
     <p class="ci-nota" id="cpNota"></p>
+    <div class="cp-inf-acc" id="cpInfAcc" hidden>
+      <h3 class="ci-tit"><span aria-hidden="true">🖨️</span> Tu informe del predial</h3>
+      <p class="ci-nota">Todo lo de arriba en un solo documento: tu predio, tu cuenta paso por paso con su artículo, tu recibo contra la ley, tu adeudo, el mercado de la vivienda y las fuentes con su huella. Lleva un <b>folio</b> y la <b>huella SHA-256</b> de tus datos y sus cifras: los mismos datos dan siempre el mismo folio. Se arma en tu navegador; nada se envía. <b>No es un documento oficial ni un avalúo.</b></p>
+      <p class="ci-acciones"><button type="button" class="ci-boton" id="cpImprime">🖨️ Imprimir o guardar en PDF</button> <button type="button" class="ci-boton ci-boton-2" id="cpBaja">⬇️ Descargar en texto</button> <button type="button" class="ci-boton ci-boton-2" id="cpLiga">🔗 Copiar la liga</button></p>
+      <p class="ci-nota" id="cpInfMsg" aria-live="polite"></p>
+      <details class="cp-inf-ver" id="cpInfVer"><summary>📄 Ver tu informe</summary><article class="cp-informe" id="cpInforme" aria-label="Informe de tu predial"></article></details>
+    </div>
   </section>
 
   <section class="ci-grupo cp-mercado" id="cpMercado" aria-labelledby="cpMerTit">
@@ -2125,7 +2132,7 @@ def prueba():
         print('✗ la multa o la notificación del ejemplo')
     js = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'cc-predial.js')
     casos = [(m['id'], v, t) for m in MUNICIPIOS for v in (150000, 950000, 2500000, 7613320, 30000000, 2e9) for t in ('edif', 'rust', 'baldio')]
-    D = {'mun': MUNICIPIOS, 'inpc': {}, 'inpc_ult': [2026, 1], 'uma': 117.31, 'lhm': {'tope': 250, 'tope_esp': 100}}
+    D = {'mun': MUNICIPIOS, 'inpc': {}, 'inpc_ult': [2026, 1], 'uma': 117.31, 'lhm': {'tope': 250, 'tope_esp': 100, 'tx': LHM['tx'], 'url': LHM['url'], 'sha256': LHM['sha256']}}
     prog = ("global.window={};global.document={getElementById:function(){return null}};require(%s);"
             "var D=%s,c=%s;console.log(JSON.stringify(c.map(function(x){var m=D.mun.filter(function(y){return y.id===x[0]})[0];"
             "return window.AuditorPredial.base(m,x[1],x[2]);})));"
