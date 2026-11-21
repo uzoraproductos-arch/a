@@ -1423,6 +1423,66 @@ TABLAS = {
                 ["Económico", [[3090, 2770, 2100], [1880, 1550, 1110], [None, None, None]]]]}},
         'niveles': None,
         'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24478/newspaper251222040558.pdf', 'nota': 'En Zapotlanejo el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'jalostotitlan': {
+        'tx': 'Decreto 29915/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Jalostotitlán para 2026, Periódico Oficial «El Estado de Jalisco», 13-12-2025, pág. 6 y 7 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24348/newspaper251215102147.pdf',
+        'sha256': '89b713fe1f6886b6823721ac5be498cb4d13b8b14edc458259a836f0614f031e',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[12050, None, 8050], [11630, 10690, 7770], [10820, 8580, 6230], [9800, 7030, 5110], [8160, 4870, 3540], [7650, 4040, 2780]]],
+                ["Superior", [[9370, None, 6260], [9050, 8320, 6040], [8420, 6670, 4850], [7620, 5470, 3970], [6340, 3790, 2750], [5950, 3140, 2150]]],
+                ["Medio", [[6770, 5940, 4310], [6550, 5540, 4020], [5960, 4590, 3340], [5390, 3760, 2730], [4130, 2210, 1600], [3830, None, None]]],
+                ["Económico", [[5280, 4590, 3330], [5150, 4360, 3160], [4500, 3330, 2420], [4010, 2800, 2030], [2700, 1200, 870], [2410, 950, 750]]]]},
+            'ind': {'et': 'Industrial', 'cal': [
+                ["Especial", [[4740, 4320, 3160], [4470, 4050, 2900], [3580, 2360, 1570], [3320, 2190, 1460], [2010, None, 480], [1800, 650, 450]]],
+                ["Superior", [[4230, 3850, 2820], [3990, 3620, 2580], [3190, 2110, 1400], [2960, 1950, 1300], [1800, 650, 450], [1550, None, 370]]],
+                ["Medio", [[3800, 3270, 2390], [3590, 3070, 2190], [2710, 1790, 1190], [2510, 1660, 1100], [1520, 530, 370], [1310, None, 320]]],
+                ["Económico", [[3070, 2800, 2050], [2900, 2630, 1880], [2320, 1530, 1020], [2150, 1420, None], [None, None, 310], [None, 390, 270]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24348/newspaper251215102147.pdf', 'nota': 'En Jalostotitlán el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'sanmiguel': {
+        'tx': 'Decreto 29948/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de San Miguel el Alto para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 6 y 7 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24404/newspaper251217071958.pdf',
+        'sha256': '1388993844b7f81d98fcf21a464868f82ca09a10891c44565eb95b3953afec45',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[12710, 11680, 8490], [12330, 11220, None], [11410, 9040, 6580], [9940, 7130, 5180], [8600, None, 3730], [8020, 4290, 2900]]],
+                ["Superior", [[9060, 8340, 6060], [8650, None, 5900], [8150, 6470, None], [7730, 5550, 4030], [None, 3660, 2670], [6040, None, None]]],
+                ["Medio", [[None, 5590, 4070], [None, None, None], [5600, 4300, 3140], [None, 3810, None], [3880, 2070, 1520], [3690, None, 1320]]],
+                ["Económico", [[4750, None, None], [4520, 3920, None], [4040, 2980, 2160], [3970, 2840, 2060], [2420, 1090, None], [None, None, None]]]]},
+            'ind': {'et': 'Industrial', 'cal': [
+                ["Especial", [[4370, None, 2920], [4150, 3710, 2680], [3280, 2160, 1450], [3030, 2000, 1330], [1850, 650, 450], [1580, 560, None]]],
+                ["Superior", [[None, 3540, None], [None, 3310, None], [2940, 1930, 1290], [2710, 1780, None], [1650, 580, None], [1420, None, None]]],
+                ["Medio", [[3290, 3000, 2200], [None, None, None], [2490, 1650, 1100], [None, 1530, 1020], [None, 500, 340], [None, None, None]]],
+                ["Económico", [[2820, None, None], [2650, 2410, 1720], [2120, 1410, None], [1970, 1320, None], [1200, 420, 290], [None, None, None]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24404/newspaper251217071958.pdf', 'nota': 'En San Miguel el Alto el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'acatic': {
+        'tx': 'Decreto 29871/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Acatic para 2026, Periódico Oficial «El Estado de Jalisco», 13-12-2025, pág. 6 y 7 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24366/newspaper251216033135.pdf',
+        'sha256': 'ada3ecceb7e6f01f0e810ef42f2033c712800ad072b7f6b5f52516eef68b8b6b',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[10830, 9950, 7230], [None, 9610, None], [9730, 7710, 5600], [8810, 6320, 4590], [7500, 4380, 3180], [5880, 3630, 2490]]],
+                ["Superior", [[8420, 7740, 5630], [8130, 7470, 5430], [7560, 5990, 4360], [6850, 4910, 3570], [5700, 3400, 2470], [5350, 2820, 1930]]],
+                ["Medio", [[6090, 5330, 3880], [5880, 4980, 3610], [5350, 4120, 3000], [4840, 3380, 2450], [3710, 1980, 1440], [3440, 1670, 1170]]],
+                ["Económico", [[4740, 4120, 3000], [4630, 3920, 2840], [4040, 2990, 2170], [3600, 2510, 1820], [2430, 1080, 780], [2170, 850, None]]]]},
+            'ind': {'et': 'Industrial', 'cal': [
+                ["Especial", [[4260, 3880, 2840], [4020, 3640, 2600], [3210, 2120, 1410], [2980, 1970, 1310], [1810, 630, 430], [1500, 550, 370]]],
+                ["Superior", [[3800, 3460, 2530], [3590, 3250, 2320], [2870, 1890, 1260], [2660, 1760, 1170], [1570, 560, 390], [1390, 490, 330]]],
+                ["Medio", [[3220, 2940, 2150], [3040, 2760, 1970], [2430, 1610, 1070], [2260, 1490, 990], [1370, 480, 330], [1180, 410, 280]]],
+                ["Económico", [[2760, 2520, 1840], [2610, 2360, 1690], [2080, 1380, 920], [1930, 1280, 850], [1170, 410, 280], [1010, 350, 240]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24366/newspaper251216033135.pdf', 'nota': 'En Acatic el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
     'tlaquepaque': {
         'tx': 'Decreto 29949/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de San Pedro Tlaquepaque para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 9 del archivo («Valores unitarios de la construcción año 2026»)',
         'url': _POE + 'newspaper/24379/newspaper251217061214.pdf',
