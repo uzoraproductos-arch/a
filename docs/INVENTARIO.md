@@ -849,7 +849,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `servicios-por-que.html` | Servicios de investigación · Auditavisión | apartados.py | 85 | 0 | 3 | 2 | 0 |
 | `servicios-preguntas.html` | Preguntas · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
 | `servicios-tu-perfil.html` | Tu perfil · Auditavisión | apartados.py | 104 | 0 | 0 | 0 | 0 |
-| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 178 | 0 | 6 | 1 | 0 |
+| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 165 | 0 | 6 | 1 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 

@@ -494,3 +494,10 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 @media (max-width: 860px) {
   .apartado-cab.sv-cab-foto { background: linear-gradient(180deg, rgba(7,29,71,.6) 0%, rgba(7,29,71,.8) 40%, rgba(7,29,71,.92) 100%), #071d47 url('../img/servicios-encabezado-movil.webp') 75% 30% / cover no-repeat; padding-bottom: 40px; }
 }
+/* Lo nuevo, en cada servicio (21-11-2026). */
+.sv-nuevo-lista { margin: 10px 0 4px; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 16px; line-height: 1.45; }
+.sv-nuevo-lista li { padding-left: 2px; }
+.sv-nuevo-lista span:not([aria-hidden]) { display: block; color: #4a5770; }
+.sv-nuevo-fecha { font-size: 14px; color: #8a5a00; font-weight: 700; margin-left: 4px; }
+[data-theme="dark"] .sv-nuevo-lista span:not([aria-hidden]) { color: #b7c3d9; }
+[data-theme="dark"] .sv-nuevo-fecha { color: #ffd27a; }
