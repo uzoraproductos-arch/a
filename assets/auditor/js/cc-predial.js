@@ -58,6 +58,12 @@
     if (v === null) return null;
     return niveles && T.niveles ? r2(v * (1 + T.niveles.pct / 100)) : v;
   }
+  /* El valor de suelo por m² de una lista del decreto; si la lista va por hectárea, ÷ 10,000 m² (derivado). */
+  function valorSuelo(T, il, ir) {
+    var L = T.suelo.listas[il], v = L.filas[ir][1];
+    if (v === null) return null;
+    return L.un === 'ha' ? r2(v / 10000) : v;
+  }
   function cf2(v) { return '$' + Number(v).toLocaleString('es-MX', { minimumFractionDigits: 2 }); }
 
   /* x: {vf, tipo, ben, pago} */
@@ -245,7 +251,7 @@
     return (v < 0 ? '−' : '') + '$' + Math.abs(Number(v)).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
-  window.AuditorPredial = { bimestral: bimestral, base: base, calcula: calcula, adeudo: adeudo, inverso: inverso, valorFiscal: valorFiscal, valorConstruccion: valorConstruccion, contrasta: contrasta };
+  window.AuditorPredial = { bimestral: bimestral, base: base, calcula: calcula, adeudo: adeudo, inverso: inverso, valorFiscal: valorFiscal, valorConstruccion: valorConstruccion, valorSuelo: valorSuelo, contrasta: contrasta };
 
   var raiz = document.getElementById('cpRaiz');
   if (!raiz) return;
@@ -343,6 +349,7 @@
   function tabla(m) {
     var T = m && D.tablas ? D.tablas[m.id] : null, caja = $('cpTabla');
     caja.hidden = !T;
+    suelo(T);
     if (!T) return;
     $('cpTablaTit').innerHTML = '<b>' + esc(m.nombre) + ' ya tiene su tabla de valores de construcción integrada</b> <span class="est-chip est-oficial">oficial</span>: elige tu construcción y el valor por m² se pone solo. ' +
       'Fuente: <a href="' + esc(T.url) + '">' + esc(T.tx) + '</a>. ' +
@@ -355,6 +362,33 @@
     if (!T.niveles) $('cpTNiv').checked = false;
     calidades(T);
     pintaTabla();
+  }
+  /* Las tablas de suelo del decreto (rango único, rústicos): elige tu renglón y el valor por m² se pone solo. */
+  function suelo(T) {
+    var Ls = T && T.suelo && T.suelo.listas, caja = $('cpSuelo');
+    caja.hidden = !Ls;
+    if (!Ls) return;
+    $('cpSueloTit').innerHTML = '<b>Sus tablas de suelo</b> <span class="est-chip est-oficial">oficial</span>: ' + Ls.map(function (L) { return esc(L.et) + ' (' + esc(L.pag) + ')'; }).join('; ') +
+      '. Fuente: <a href="' + esc(T.suelo.url) + '">' + esc(T.tx.split(',')[0]) + '</a>. Si tu terreno está en una calle de la ciudad, su valor viene en los planos: escríbelo a mano.';
+    $('cpSueloSel').innerHTML = '<option value="">Mi terreno no está en estas tablas</option>' + Ls.map(function (L, il) {
+      return '<optgroup label="' + esc(L.et) + '">' + L.filas.map(function (f, ir) {
+        return '<option value="' + il + '.' + ir + '">' + esc(f[0]) + (f[1] === null ? ' — ilegible' : ' — ' + pesos(f[1]) + (L.un === 'ha' ? ' por hectárea' : ' por m²')) + '</option>';
+      }).join('') + '</optgroup>';
+    }).join('');
+    $('cpSueloVal').innerHTML = '';
+  }
+  function pintaSuelo() {
+    var m = ley($('cpEnt').value, $('cpMun').value), T = m && D.tablas ? D.tablas[m.id] : null, k = $('cpSueloSel').value;
+    if (!T || !k) { $('cpSueloVal').innerHTML = ''; return; }
+    var il = +k.split('.')[0], ir = +k.split('.')[1], L = T.suelo.listas[il], v = valorSuelo(T, il, ir);
+    if (v === null) {
+      $('cpSueloVal').innerHTML = '<span class="est-chip est-pendiente">pendiente</span> Este renglón no se lee sin duda en la copia escaneada que publicó el Periódico Oficial; no lo adivinamos. Búscalo en el decreto y escribe tu valor arriba.';
+      return;
+    }
+    $('cpVs').value = String(v);
+    $('cpSueloVal').innerHTML = (L.un === 'ha'
+      ? 'Valor de suelo: <b>' + pesos(L.filas[ir][1]) + ' por hectárea</b> <span class="est-chip est-oficial">oficial</span>, que son <b>' + pesos(v) + ' por m²</b> <span class="est-chip est-derivado">derivado</span> (la hectárea ÷ 10,000 m², al centavo). Escribe arriba tu terreno en m² (una hectárea son 10,000 m²).'
+      : 'Valor de suelo: <b>' + pesos(v) + ' por m²</b> <span class="est-chip est-oficial">oficial</span>.') + ' Ya lo pusimos arriba. ' + (L.nota ? esc(L.nota) : '');
   }
   function calidades(T) {
     var u = T.usos[$('cpTUso').value];
@@ -467,6 +501,7 @@
   $('cpSit').addEventListener('change', function () { $('cpMultaCaja').hidden = this.value === 'esp'; });
   $('cpMultaCaja').hidden = true;
   $('cpForm').addEventListener('submit', pinta);
+  $('cpSueloSel').addEventListener('change', pintaSuelo);
   ['cpTCal', 'cpTEdad', 'cpTEst', 'cpTNiv'].forEach(function (id) { $(id).addEventListener('change', pintaTabla); });
   $('cpTUso').addEventListener('change', function () {
     var m = ley($('cpEnt').value, $('cpMun').value);

@@ -1289,7 +1289,13 @@ TABLAS = {
                 ["Económico", [[2870, 2650, 1930], [2690, 2500, 1750], [1580, 1450, 1060], [1470, 1340, 980], [1240, 550, 320], [1060, 480, 260]]]]}},
         'atipica': {'celdas': [['hab', 'Económico', 3]], 'nota': 'Ojo: en la construcción habitacional económica de 21 a 30 años, el decreto le da más valor al estado «regular» ($3,730 por m²) que al «bueno» ($3,550). Las dos lecturas de la copia publicada coinciden: así lo publicó el Periódico Oficial y así lo usamos. Si tu casa cae ahí, pregúntale al catastro municipal cuál aplica.'},
         'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
-        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24300/newspaper251212080953.pdf', 'nota': 'En Atotonilco el Alto el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por calle en los planos', 'url': _POE + 'newspaper/24300/newspaper251212080953.pdf',
+                  'nota': 'En Atotonilco el Alto el suelo urbano se valúa por calle: el valor de la tuya viene en los planos del decreto, que no integramos (son dibujos, no tablas): búscalo ahí. Sí integramos sus tablas de suelo: las poblaciones con valor de rango único y los predios rústicos por hectárea.',
+                  'listas': [
+                      {'et': 'Poblaciones, fraccionamientos y colonias con valor catastral de rango único, por m²', 'pag': 'pág. 191 del archivo, «Página 187 de 192»', 'un': 'm2', 'nota': 'Son los centros de población que cuentan con un máximo de diez manzanas y que aún no tienen sus planos de valores; el valor es el mismo para todo el lugar.',
+                       'filas': [["Agua Fría - Montelargo", 250], ["Barranca del Aguacate", 220], ["Col. Abasolo San Joaquín", 480], ["El Calabozo", 430], ["El Castillo", 230], ["El Centro", 230], ["El Lindero - El Destierro", 360], ["El Refugio de los Altos", 220], ["Fracc. María Auxiliadora - Ojo de Agua", 480], ["La Alegría, El Vergel, El Viborero", 250], ["La Alfalfa", 880], ["La Estancia", 220], ["La Mesa del Pino", 220], ["La Sabinilla", 360], ["Lagunillas y El Pantano", 250], ["Las Corrientes Bordo Chico", 250], ["Las Palmas", 230], ["Los Ranchitos Los Molcajetes", 250], ["Navarro La Providencia", 220], ["Rinconada de Cristo Rey", 220]]},
+                      {'et': 'Predios rústicos, por hectárea, según su zona y su tipo de suelo', 'pag': 'pág. 193 del archivo, «Página 189 de 192»', 'un': 'ha', 'nota': 'En la valuación de predios rústicos no aplican deméritos. Los rústicos frente a carreteras, fuera del plan de desarrollo de la cabecera o sin valor por m², valen $513,100.00 por hectárea en la zona 1, $428,700.00 por hectárea en la zona 2, $342,800.00 por hectárea en la zona 3 en sus primeros 40 metros de profundidad; el resto, según su uso potencial (nota del decreto). Ojo: la zona 3, agrícola de temporal 1a, viene en el decreto como $10,400.00, menos que su temporal 2a ($88,000.00); así la transcribimos, sin corregirla.',
+                       'filas': [["Zona 1 · Agrícola de riego o humedad residual", 258200], ["Zona 1 · Agrícola de temporal 1a", 139900], ["Zona 1 · Agrícola de temporal 2a", 111900], ["Zona 1 · Agostadero 1a. clase", 72800], ["Zona 1 · Agostadero 2a. clase", 44600], ["Zona 1 · Cerril, improductivo o eriazo", 14000], ["Zona 2 · Agrícola de riego o humedad residual", 231400], ["Zona 2 · Agrícola de temporal 1a", 116200], ["Zona 2 · Agrícola de temporal 2a", 93300], ["Zona 2 · Agostadero 1a. clase", 63000], ["Zona 2 · Agostadero 2a. clase", 37400], ["Zona 2 · Cerril, improductivo o eriazo", 13800], ["Zona 3 · Agrícola de riego o humedad residual", 217400], ["Zona 3 · Agrícola de temporal 1a", 10400], ["Zona 3 · Agrícola de temporal 2a", 88000], ["Zona 3 · Agostadero 1a. clase", 59200], ["Zona 3 · Agostadero 2a. clase", 32900], ["Zona 3 · Cerril, improductivo o eriazo", 12100]]}]}},
     'colotlan': {
         'tx': 'Decreto 29895/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Colotlán para 2026, Periódico Oficial «El Estado de Jalisco», 11-12-2025, pág. 6 y 7 del archivo («Valores de construcción»)',
         'url': _POE + 'newspaper/24311/newspaper251212091451.pdf',
@@ -1361,7 +1367,11 @@ TABLAS = {
                 ["Medio", [[7850, 6890, 5000], [7780, 6590, 4780], [6910, 5320, 3870], [None, 4470, 3240], [4800, 2560, 1860], [4550, 2210, 1540]]],
                 ["Económico", [[5850, 5070, 3690], [6120, None, 3760], [4980, 3690, 2680], [4770, 3320, 2410], [2980, 1330, 960], [2870, 1130, 900]]]]}},
         'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
-        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24304/newspaper251212090124.pdf', 'nota': 'En Autlán de Navarro el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por calle en los planos', 'url': _POE + 'newspaper/24304/newspaper251212090124.pdf',
+                  'nota': 'En Autlán de Navarro el suelo urbano se valúa por calle: el valor de la tuya viene en los planos del decreto, que no integramos (son dibujos, no tablas): búscalo ahí. Sí integramos su tabla de agencias y delegaciones. Sus rústicos no entran: el decreto trae dos tablas de valores por hectárea (págs. 107 y 109 del archivo) que no dicen lo mismo en la zona 1 ($289,440 y $276,300 de agrícola de riego, por ejemplo), y no escogemos entre las dos.',
+                  'listas': [
+                      {'et': 'Agencias y delegaciones, valor unitario de terreno por m²', 'pag': 'pág. 106 del archivo', 'un': 'm2', 'nota': 'Es el valor de terreno de cada agencia o delegación del municipio, como lo da su tabla.',
+                       'filas': [["Ayutita", 780], ["San Francisco de Abajo", 660], ["San Francisco de Arriba", 660], ["La Sidra", 660], ["La Yerbabuena", 660], ["La Aldaba", 660], ["El Rodeo", 660], ["La Tuna", 660], ["Chiquihuitlán", 660], ["Bellavista", 660], ["La Noria", 660], ["Agua Hedionda", 660], ["El Jalocote", 660], ["El Volantín", 660], ["El Izote", 660], ["Tecopatlán", 660]]}]}},
     'zapotlan': {
         'tx': 'Decreto 29990/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Zapotlán el Grande para 2026, Periódico Oficial «El Estado de Jalisco», 18-12-2025, pág. 6 y 7 del archivo («Valores de construcción»)',
         'url': _POE + 'newspaper/24477/newspaper251222040507.pdf',
@@ -1381,7 +1391,15 @@ TABLAS = {
                 ["Medio", [[None, 4850, None], [5000, None, 3230], [3450, 2680, None], [3210, 2470, 1680], [None, 1300, 610], [None, 1130, None]]],
                 ["Económico", [[4500, 4040, 3070], [4230, 3800, 2800], [2810, 2310, None], [2630, 2140, 1430], [1650, 980, 610], [1420, None, None]]]]}},
         'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
-        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24477/newspaper251222040507.pdf', 'nota': 'En Zapotlán el Grande el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por calle en los planos (págs. 15 a 106 del archivo)', 'url': _POE + 'newspaper/24477/newspaper251222040507.pdf',
+                  'nota': 'En Zapotlán el Grande el suelo urbano se valúa por calle: el valor de la tuya viene en los planos del decreto, que no integramos (son dibujos, no tablas): búscalo ahí. Sí integramos las dos tablas de suelo del decreto: las poblaciones con valor de rango único y los predios rústicos.',
+                  'listas': [
+                      {'et': 'Poblaciones, fraccionamientos y colonias con valor catastral de rango único, por m²', 'pag': 'pág. 111 del archivo, «Página 107 de 112»', 'un': 'm2',
+                       'nota': 'Son los centros de población que cuentan con un máximo de diez manzanas y que aún no tienen sus planos de valores; el valor es el mismo para todo el lugar.',
+                       'filas': [["Apaztepetl", 290], ["Atequizayán", 330], ["El Fresnito", 560], ["La Fortuna", 330], ["Los Depósitos", 300], ["Los Mazos", 290], ["Parque Industrial 2000", 570], ["Pico del Águila", 290], ["Zona 1", 330], ["Zona 2", 370]]},
+                      {'et': 'Predios rústicos, por hectárea, según su zona (mapa de la pág. 114 del archivo) y su tipo de suelo', 'pag': 'pág. 113 del archivo, «Página 109 de 112»', 'un': 'ha',
+                       'nota': 'En la valuación de predios rústicos no aplican deméritos. Los rústicos frente a carreteras, fuera del plan de desarrollo de la cabecera o sin valor por m², valen $569,500.00 por hectárea en la zona 1, $522,500.00 en la zona 2 y $483,700.00 en la zona 3 en sus primeros 40 metros de profundidad; el resto, según su uso potencial (nota del decreto).',
+                       'filas': [["Zona 1 · Agrícola de riego o humedad residual", 569500], ["Zona 1 · Agrícola de temporal 1a", 278900], ["Zona 1 · Agrícola de temporal 2a", 217900], ["Zona 1 · Agostadero 1a. clase", 127700], ["Zona 1 · Agostadero 2a. clase", 85600], ["Zona 1 · Cerril, improductivo o eriazo", 31600], ["Zona 2 · Agrícola de riego o humedad residual", 522500], ["Zona 2 · Agrícola de temporal 1a", 277400], ["Zona 2 · Agrícola de temporal 2a", 212800], ["Zona 2 · Agostadero 1a. clase", 112900], ["Zona 2 · Agostadero 2a. clase", 75000], ["Zona 2 · Cerril, improductivo o eriazo", 23700], ["Zona 3 · Agrícola de riego o humedad residual", 483700], ["Zona 3 · Agrícola de temporal 1a", 254300], ["Zona 3 · Agrícola de temporal 2a", 180000], ["Zona 3 · Agostadero 1a. clase", 99300], ["Zona 3 · Agostadero 2a. clase", 62500], ["Zona 3 · Cerril, improductivo o eriazo", 18400]]}]}},
     'tonala': {
         'tx': 'Decreto 29971/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Tonalá para 2026, Periódico Oficial «El Estado de Jalisco», 18-12-2025, pág. 6 del archivo («Valores de construcción 2026»)',
         'url': _POE + 'newspaper/24458/newspaper251222034000.pdf',
@@ -1401,7 +1419,7 @@ TABLAS = {
                 ["Medio", [[5050, 4650, None], [3550, 2750, None], [2050, 1650, None]]],
                 ["Económico", [[3950, 3600, 2700], [None, 2000, 1300], [1700, 1200, 900]]]]}},
         'niveles': {'pct': 10, 'art': 'Nota 4: más de 5 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
-        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24458/newspaper251222034000.pdf', 'nota': 'En Tonalá el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24458/newspaper251222034000.pdf', 'nota': 'En Tonalá el suelo se valúa por calle, avenida o rango: el valor del tuyo viene en los planos del decreto. Aún no lo integramos: búscalo ahí. Su tabla de rústicos (pág. 17 del archivo) tampoco entra: su título dice «valores unitarios por hectárea» y su renglón dice «valor de metro cuadrado» ($350 a $90), y no interpretamos cuál de los dos vale.'}},
     'zapotlanejo': {
         'tx': 'Decreto 29991/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Zapotlanejo para 2026, Periódico Oficial «El Estado de Jalisco», 18-12-2025, pág. 6 del archivo («Valores de construcción»)',
         'url': _POE + 'newspaper/24478/newspaper251222040558.pdf',
@@ -1442,7 +1460,13 @@ TABLAS = {
                 ["Medio", [[3800, 3270, 2390], [3590, 3070, 2190], [2710, 1790, 1190], [2510, 1660, 1100], [1520, 530, 370], [1310, None, 320]]],
                 ["Económico", [[3070, 2800, 2050], [2900, 2630, 1880], [2320, 1530, 1020], [2150, 1420, None], [None, None, 310], [None, 390, 270]]]]}},
         'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
-        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24348/newspaper251215102147.pdf', 'nota': 'En Jalostotitlán el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por calle en los planos', 'url': _POE + 'newspaper/24348/newspaper251215102147.pdf',
+                  'nota': 'En Jalostotitlán el suelo urbano se valúa por calle: el valor de la tuya viene en los planos del decreto, que no integramos (son dibujos, no tablas): búscalo ahí. Sí integramos sus tablas de suelo: las poblaciones con valor de rango único y los predios rústicos por hectárea.',
+                  'listas': [
+                      {'et': 'Poblaciones, fraccionamientos y colonias con valor catastral de rango único, por m²', 'pag': 'pág. 77 del archivo, «Página 73 de 77»', 'un': 'm2', 'nota': 'Son los centros de población que cuentan con un máximo de diez manzanas y que aún no tienen sus planos de valores; el valor es el mismo para todo el lugar.',
+                       'filas': [["Apozolco", 70], ["Cañada de Gómez", 70], ["El Bueyero", 70], ["El Capiro", 70], ["El Mayoral", 70], ["La Labor", 70], ["La Laja", 70], ["La Soledad", 70], ["Las Lomas", 70], ["Los Planes", 70], ["Santa Isabel", 70], ["Santa Martha", 70], ["Tamara", 70], ["Tierras Blancas", 70]]},
+                      {'et': 'Predios rústicos, por hectárea, según su zona y su tipo de suelo', 'pag': 'pág. 78 del archivo, «Página 74 de 77»', 'un': 'ha', 'nota': 'En la valuación de predios rústicos no aplican deméritos. Los rústicos frente a carreteras federales y estatales, fuera del plan de desarrollo de la cabecera o sin valor por m², valen $406,000.00 por hectárea en la zona 1, $381,000.00 por hectárea en la zona 2, $345,000.00 por hectárea en la zona 3 en sus primeros 40 metros de profundidad; el resto, según su uso potencial (nota del decreto).',
+                       'filas': [["Zona 1 · Agrícola de riego o humedad residual", 232500], ["Zona 1 · Agrícola de temporal 1a", 126000], ["Zona 1 · Agrícola de temporal 2a", 101000], ["Zona 1 · Agostadero 1a. clase", 65500], ["Zona 1 · Agostadero 2a. clase", 40300], ["Zona 1 · Cerril, improductivo o eriazo", 13000], ["Zona 2 · Agrícola de riego o humedad residual", 174000], ["Zona 2 · Agrícola de temporal 1a", 95000], ["Zona 2 · Agrícola de temporal 2a", 76000], ["Zona 2 · Agostadero 1a. clase", 50000], ["Zona 2 · Agostadero 2a. clase", 35000], ["Zona 2 · Cerril, improductivo o eriazo", 12000], ["Zona 3 · Agrícola de riego o humedad residual", 131000], ["Zona 3 · Agrícola de temporal 1a", 71000], ["Zona 3 · Agrícola de temporal 2a", 57000], ["Zona 3 · Agostadero 1a. clase", 38000], ["Zona 3 · Agostadero 2a. clase", 30000], ["Zona 3 · Cerril, improductivo o eriazo", 11000]]}]}},
     'sanmiguel': {
         'tx': 'Decreto 29948/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de San Miguel el Alto para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 6 y 7 del archivo («Valores de construcción»)',
         'url': _POE + 'newspaper/24404/newspaper251217071958.pdf',
@@ -1482,7 +1506,15 @@ TABLAS = {
                 ["Medio", [[3220, 2940, 2150], [3040, 2760, 1970], [2430, 1610, 1070], [2260, 1490, 990], [1370, 480, 330], [1180, 410, 280]]],
                 ["Económico", [[2760, 2520, 1840], [2610, 2360, 1690], [2080, 1380, 920], [1930, 1280, 850], [1170, 410, 280], [1010, 350, 240]]]]}},
         'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
-        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24366/newspaper251216033135.pdf', 'nota': 'En Acatic el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por calle en los planos', 'url': _POE + 'newspaper/24366/newspaper251216033135.pdf',
+                  'nota': 'En Acatic el suelo urbano se valúa por calle: el valor de la tuya viene en los planos del decreto, que no integramos (son dibujos, no tablas): búscalo ahí. Sí integramos sus tablas de suelo: las poblaciones con valor de rango único, los predios rústicos por hectárea y los predios menores de una hectárea por m².',
+                  'listas': [
+                      {'et': 'Poblaciones, fraccionamientos y colonias con valor catastral de rango único, por m²', 'pag': 'pág. 15 del archivo, «Página 11 de 71»', 'un': 'm2', 'nota': 'Son los centros de población que cuentan con un máximo de diez manzanas y que aún no tienen sus planos de valores; el valor es el mismo para todo el lugar.',
+                       'filas': [["Agua Prieta", 70], ["Calderón", 250], ["Charranga", 250], ["Chiquihuitillo", 180], ["Corral Falso", 70], ["El Saltillo", 200], ["Fracc. Bosques del Palomar", 200], ["Fracc. Juan Pablo", 600], ["Fracc. Los Alacates", 200], ["Fracc. Los Ranchitos", 150], ["Fracc. Tequililla", 150], ["Fraccionamiento San Miguel", 250], ["La Cofradía", 70], ["La Leonerita", 70], ["La Providencia", 200], ["Las Motas", 250], ["Las Paredes", 70], ["Monte Largo / Camino Real", 180], ["Nido de Águilas", 200], ["Ojo de Agua", 150], ["Paseos del Encino", 200], ["Rancho Nuevo", 70], ["San Antonio", None], ["Santa Rita", None], ["Tequililla", 200]]},
+                      {'et': 'Predios rústicos, por hectárea, según su zona y su tipo de suelo', 'pag': 'pág. 16 del archivo, «Página 12 de 71»', 'un': 'ha', 'nota': 'En la valuación de predios rústicos no aplican deméritos. Los predios con frente a carretera valen $400,000.00 por hectárea, solo en la superficie que resulta de multiplicar el frente por los primeros 40 metros de profundidad; y los que inician trabajos de infraestructura para fraccionar o han desprendido más de 5 fracciones menores de una hectárea, $1,500,000.00 por hectárea (notas del decreto).',
+                       'filas': [["Zona 1 · Agrícola de riego o humedad residual", 211000], ["Zona 1 · Agrícola de temporal 1a", 114300], ["Zona 1 · Agrícola de temporal 2a", 91400], ["Zona 1 · Agostadero 1a. clase", 59500], ["Zona 1 · Agostadero 2a. clase", 36600], ["Zona 1 · Cerril, improductivo o eriazo", 21500], ["Zona 2 · Agrícola de riego o humedad residual", 168800], ["Zona 2 · Agrícola de temporal 1a", 91400], ["Zona 2 · Agrícola de temporal 2a", 73000], ["Zona 2 · Agostadero 1a. clase", 47500], ["Zona 2 · Agostadero 2a. clase", 29300], ["Zona 2 · Cerril, improductivo o eriazo", 20200], ["Zona 3 · Agrícola de riego o humedad residual", 151800], ["Zona 3 · Agrícola de temporal 1a", 82300], ["Zona 3 · Agrícola de temporal 2a", 65800], ["Zona 3 · Agostadero 1a. clase", 42800], ["Zona 3 · Agostadero 2a. clase", 26300], ["Zona 3 · Cerril, improductivo o eriazo", 18900]]},
+                      {'et': 'Predios menores de una hectárea sin valor de localidad, zona o calle, por m², según su zona y su uso', 'pag': 'pág. 16 del archivo, «Página 12 de 71»', 'un': 'm2', 'nota': 'Para los predios menores a una hectárea que no tengan un valor asignado en la tabla de localidades o valor de zona o calle (nota del decreto).',
+                       'filas': [["Zona 1 · Riego", 35], ["Zona 1 · Agrícola temporal 1a", 25], ["Zona 1 · Agrícola temporal 2a", 15], ["Zona 1 · Agostadero 1a", 10], ["Zona 1 · Agostadero 2a", 7], ["Zona 1 · Cerril", 5], ["Zona 1 · Habitacional", 150], ["Zona 2 · Riego", 30], ["Zona 2 · Agrícola temporal 1a", 20], ["Zona 2 · Agrícola temporal 2a", 10], ["Zona 2 · Agostadero 1a", 8], ["Zona 2 · Agostadero 2a", 5], ["Zona 2 · Cerril", 4], ["Zona 2 · Habitacional", 100], ["Zona 3 · Riego", 20], ["Zona 3 · Agrícola temporal 1a", 15], ["Zona 3 · Agrícola temporal 2a", 8], ["Zona 3 · Agostadero 1a", 6], ["Zona 3 · Agostadero 2a", 4], ["Zona 3 · Cerril", 2], ["Zona 3 · Habitacional", 70]]}]}},
     'tlaquepaque': {
         'tx': 'Decreto 29949/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de San Pedro Tlaquepaque para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 9 del archivo («Valores unitarios de la construcción año 2026»)',
         'url': _POE + 'newspaper/24379/newspaper251217061214.pdf',
@@ -1642,6 +1674,16 @@ def valor_construccion(T, uso, ical, iedad, iest, niveles=False):
     return _r2(v * (1 + T['niveles']['pct'] / 100)) if niveles and T.get('niveles') else v
 
 
+def valor_suelo(T, il, ir):
+    """Gemela de valorSuelo() de cc-predial.js: el valor de suelo por m² de una lista del decreto. Si la lista va por
+    hectárea, es el valor de la hectárea ÷ 10,000 m² (derivado, redondeado al centavo)."""
+    L = T['suelo']['listas'][il]
+    v = L['filas'][ir][1]
+    if v is None:
+        return None
+    return _r2(v / 10000) if L['un'] == 'ha' else v
+
+
 # El registro, estado por estado: dónde publica cada congreso las leyes de ingresos municipales y lo que
 # consta en un documento oficial de los municipios sin ley. Solo entra lo cotejado; los demás estados quedan
 # «por revisar», como falta de esta plataforma.
@@ -1741,6 +1783,13 @@ def revisa():
             primero = [eds[0][0] for nom, eds in u['cal'] if eds[0][0] is not None]
             if primero != sorted(primero, reverse=True):
                 raise SystemExit('cc_predial: las calidades de %s no van de mayor a menor' % mid)
+        # Las listas de suelo que el decreto da como tabla (poblaciones de rango único, rústicos por hectárea).
+        for L in (T.get('suelo') or {}).get('listas', []):
+            if L.get('un') not in ('m2', 'ha') or not L.get('et') or not L.get('pag') or not L.get('filas'):
+                raise SystemExit('cc_predial: una lista de suelo de %s no dice su unidad, su página o sus renglones' % mid)
+            for nom, v in L['filas']:
+                if not nom or (v is None and not T.get('escaneo')) or (v is not None and not (isinstance(v, (int, float)) and v > 0)):
+                    raise SystemExit('cc_predial: el renglón de suelo %r de %s está mal' % (nom, mid))
     for e, dv in DECRETOS_TV.items():
         for k, d in dv['lista'].items():
             if e not in ENTIDADES or not re.fullmatch(r'\d{3}', k) or not re.fullmatch(r'\d+/LXIV/\d\d', d[0]) \
@@ -1871,6 +1920,12 @@ def construir(base, ref):
         <div class="ci-fila">
           <div><label class="ci-et" for="cpTs">Terreno (m²)</label><input class="ci-in" id="cpTs" inputmode="decimal" autocomplete="off" placeholder="Ej.: 160"></div>
           <div><label class="ci-et" for="cpVs">Valor de suelo ($/m²)</label><input class="ci-in" id="cpVs" inputmode="decimal" autocomplete="off" placeholder="De tu tabla"></div>
+        </div>
+        <div class="cp-tabla" id="cpSuelo" hidden>
+          <p class="ci-pista" id="cpSueloTit"></p>
+          <label class="ci-et" for="cpSueloSel">Tu terreno en la tabla de suelo</label>
+          <select class="ci-in" id="cpSueloSel"></select>
+          <p class="ci-nota" id="cpSueloVal" aria-live="polite"></p>
         </div>
         <div class="cp-tabla" id="cpTabla" hidden>
           <p class="ci-pista" id="cpTablaTit"></p>
@@ -2086,6 +2141,20 @@ def prueba():
         if valor_construccion(TABLAS[x[0]], *x[1:]) != n:
             mal += 1
             print('✗ tabla de valores', x, n)
+    sue = [(mid, il, ir) for mid, T in TABLAS.items() for il, L in enumerate((T.get('suelo') or {}).get('listas', [])) for ir in range(len(L['filas']))]
+    prog5 = ("global.window={};global.document={getElementById:function(){return null}};require(%s);var T=%s;"
+             "console.log(JSON.stringify(%s.map(function(x){return window.AuditorPredial.valorSuelo(T[x[0]],x[1],x[2]);})));"
+             % (json.dumps(js), json.dumps(TABLAS), json.dumps(sue)))
+    r5 = subprocess.run(['node'], input=prog5, capture_output=True, text=True)
+    nav5 = json.loads(r5.stdout or '[]')
+    if len(nav5) != len(sue):
+        mal += 1
+        print('✗ el suelo no corrió en el navegador', r5.stderr[:300])
+    for x, n in zip(sue, nav5):
+        if valor_suelo(TABLAS[x[0]], x[1], x[2]) != n:
+            mal += 1
+            print('✗ suelo', x, n)
+    cel = cel + sue
     if valor_construccion(TABLAS['zapopan'], 'hab', 2, 0, 0) != 8800:
         mal += 1
         print('✗ Zapopan, medio moderno bueno debe ser $8,800 por m²')
@@ -2104,7 +2173,7 @@ def prueba():
         print('%d diferencias en el simulador del predial' % mal)
         return 1
     print('✓ Simulador del predial: %d municipios (%d leídos y en espera), %d casos iguales en Python y en el navegador '
-          '(y %d celdas de tablas de valores); la cobranza sigue a cada ley; el mandamiento de Zapopan cuadra ($2,337.62)' % (len(MUNICIPIOS), len(ESPERA), len(casos), len(cel)))
+          '(y %d celdas de tablas de valores, de construcción y de suelo); la cobranza sigue a cada ley; el mandamiento de Zapopan cuadra ($2,337.62)' % (len(MUNICIPIOS), len(ESPERA), len(casos), len(cel)))
     return 0
 
 
