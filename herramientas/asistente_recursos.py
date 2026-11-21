@@ -153,6 +153,11 @@ RECURSOS = [
     ('pl-inversion', '🏗️', 'Ver la inversión en el Planisferio', 'La obra de los gobiernos estatales y lo que dejó la ASF, en el Planisferio', 'planisferio.html?d=inversion',
      'planisferio.html?d=inversion&e=%s', 'mapa',
      'inversion invierte invirtio obra obras publica infraestructura organismos caminos planisferio mapa'),
+    # El precio de la vivienda (21-11-2026): el Índice SHF por estado, la
+    # lente que comparte con el simulador del predial.
+    ('pl-vivienda', '🏘️', 'Ver el precio de la vivienda en el Planisferio', 'El Índice SHF de precios de la vivienda de los 32 estados, en el Planisferio',
+     'planisferio.html?d=financiera&l=shfI', 'planisferio.html?d=financiera&l=shfI&e=%s', 'mapa',
+     'vivienda viviendas precio precios shf sociedad hipotecaria federal indice avaluo avaluos plusvalia inmobiliario hipotecario hipotecaria mercado planisferio mapa'),
     # La dimensión penal (07-11-2026): la ENVIPE por estado.
     ('pl-penal', '🚨', 'Ver el fraude en el Planisferio', 'El fraude y la cifra oculta de los 32 estados, en el Planisferio', 'planisferio.html?d=penal',
      'planisferio.html?d=penal&e=%s', 'mapa',

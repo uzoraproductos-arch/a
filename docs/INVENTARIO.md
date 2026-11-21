@@ -193,7 +193,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-calculadora-compara.html` | Tú contra ellos · Auditavisión | apartados.py | 54 | 0 | 46 | 19 | 9 |
 | `herramienta-calculadora-inmueble.html` | Vendes una casa o un terreno · Auditavisión | apartados.py | 46 | 0 | 3 | 2 | 0 |
 | `herramienta-calculadora-laboral.html` | Tu finiquito o tu liquidación · Auditavisión | apartados.py | 46 | 0 | 1 | 2 | 0 |
-| `herramienta-calculadora-predial.html` | Tu impuesto predial · Auditavisión | apartados.py | 47 | 0 | 3 | 4 | 3 |
+| `herramienta-calculadora-predial.html` | Tu impuesto predial · Auditavisión | apartados.py | 48 | 0 | 3 | 4 | 3 |
 | `herramienta-calculadora-reloj.html` | El reloj de la deuda · Auditavisión | apartados.py | 58 | 0 | 6 | 8 | 1 |
 | `herramienta-calculadora-ticket-estado.html` | Tu estado de cuenta · Auditavisión | apartados.py | 73 | 0 | 19 | 22 | 0 |
 | `herramienta-calculadora-ticket-ingreso.html` | Tu ingreso · Auditavisión | apartados.py | 72 | 0 | 18 | 22 | 0 |
@@ -838,7 +838,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `servicio-radiografia.html` | Radiografía de tu municipio o de tu estado · Auditavisión | apartados.py | 98 | 0 | 0 | 0 | 0 |
 | `servicio-revision.html` | Revisión documental puntual · Auditavisión | apartados.py | 93 | 0 | 0 | 0 | 0 |
 | `servicio-seguimiento.html` | Vigía y seguimiento periódico · Auditavisión | apartados.py | 107 | 0 | 0 | 0 | 0 |
-| `servicio-simulacion.html` | Simulación de tu caso · Auditavisión | apartados.py | 106 | 0 | 0 | 0 | 0 |
+| `servicio-simulacion.html` | Simulación de tu caso · Auditavisión | apartados.py | 109 | 0 | 0 | 0 | 0 |
 | `servicio-temporada.html` | Licencia de temporada para redacciones · Auditavisión | apartados.py | 93 | 0 | 0 | 0 | 0 |
 | `servicios-calendario.html` | Calendario · Auditavisión | apartados.py | 47 | 0 | 0 | 0 | 0 |
 | `servicios-catalogo.html` | Catálogo · Auditavisión | apartados.py | 121 | 0 | 0 | 0 | 0 |
@@ -849,7 +849,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `servicios-por-que.html` | Servicios de investigación · Auditavisión | apartados.py | 85 | 0 | 3 | 2 | 0 |
 | `servicios-preguntas.html` | Preguntas · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
 | `servicios-tu-perfil.html` | Tu perfil · Auditavisión | apartados.py | 104 | 0 | 0 | 0 | 0 |
-| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 235 | 0 | 0 | 1 | 0 |
+| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 241 | 0 | 0 | 1 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 
