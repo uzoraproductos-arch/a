@@ -7573,6 +7573,8 @@ Pedido del autor: «intégralo y continúa con las dimensiones pendientes». Se 
 - **El chat:** «se venció mi contrato…» ya no abre ComprasMX (`contratosCmx()` suelta «mi contrato», «finiquito», «me toca»…); frases nuevas en `ALIAS_APPS`.
 - **Pendiente:** la obra determinada (el art. 50 no la nombra); lo que quedó en espera; el ISR de los intereses del art. 48; la indemnización del apartado B; trabajadores de estados y municipios; el subsidio de enero; cotejar PC.XXX. J/31 A en el Semanario.
 
+### 21-11-2026 · sello 20261121r · Encabezado de Servicios con la imagen del autor (`assets/auditor/img/servicios-encabezado*.webp`, `.sv-hero-foto`) y la base al día: listas del art. 69 y OFAC/ONU con corte 21-11-2026 (art. 69: 531,034 → 531,007 RFC); 69-B, padrón del SAT y UDI sin cambio; el Directorio de sancionados no respondió desde la sesión (queda al flujo semanal). Pendientes de la agenda: SESNSP (venció el 20-11; su ZIP se baja a mano de SharePoint), ComprasMX y RPU (01-12).
+
 ### 21-11-2026 · sello 20261121q · Servicios rediseñada (referencia: FINOS) y segunda en el menú
 
 - **Pedido del autor:** evaluar getfinos.com («muy esquematizado, muy concreto, muy bien arquitectónico»), traer su sencillez a Servicios, subir Servicios a la segunda pestaña, quitar lo reiterativo («¿qué necesitas?», «de un vistazo», «cuéntale tu caso»), sumar las consecuencias de no verificar a proveedores y clientes, y dejar claro que **el Inspector** resuelve los servicios: pregunta, dictamen, cotización.

@@ -2852,7 +2852,7 @@ def servicios():
         '            <a class="sv-tira-n" href="%s"><span class="sv-tira-cifra">%s</span><span class="sv-tira-et">%s</span></a>'
         % (liga, format(v, ','), html.escape(et)) for _, v, et, _op, _fu, _url, liga in monetizacion.contadores())
     portada = '\n'.join([
-        '<div class="sv-hero sv-hero2">',
+        '<div class="sv-hero sv-hero2 sv-hero-foto">',
         '          <div class="sv-hero-izq">',
         '            <p class="sv-hero-pre">Prevención de fraude y de lavado · temporada electoral · formación · investigación</p>',
         '            <p class="sv-hero-tit">Lo que dicen los documentos, antes de que decidas.</p>',

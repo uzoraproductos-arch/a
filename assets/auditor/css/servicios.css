@@ -483,3 +483,10 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 [data-theme="dark"] .sv-precio-l, [data-theme="dark"] .sv-con-ley blockquote { background: #1b2a44; border-color: #2a3b57; color: #e8eefa; }
 [data-theme="dark"] .sv-fam-lista li { border-color: #2a3b57; }
 [data-theme="dark"] .sv-fam-lista small, [data-theme="dark"] .sv-con-ley small, [data-theme="dark"] .sv-fuentes small { color: #b7c3d9; }
+
+/* Encabezado con fotografía (pedido del autor, 21-11-2026): la imagen va de fondo y un velo azul deja leer el texto. */
+.sv-hero2.sv-hero-foto { background: linear-gradient(90deg, rgba(7,29,71,.9) 0%, rgba(7,29,71,.62) 40%, rgba(7,29,71,.22) 70%, rgba(7,29,71,.1) 100%), #071d47 url('../img/servicios-encabezado.webp') 70% 50% / cover no-repeat; }
+.sv-hero-foto .sv-hero-tit, .sv-hero-foto .sv-hero-tx, .sv-hero-foto .sv-hero-prom li { text-shadow: 0 1px 8px rgba(4,14,38,.6); }
+@media (max-width: 860px) {
+  .sv-hero2.sv-hero-foto { background: linear-gradient(180deg, rgba(7,29,71,.55) 0%, rgba(7,29,71,.78) 30%, rgba(7,29,71,.9) 100%), #071d47 url('../img/servicios-encabezado-movil.webp') 75% 30% / cover no-repeat; }
+}
