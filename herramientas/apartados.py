@@ -2852,7 +2852,7 @@ def servicios():
         '            <a class="sv-tira-n" href="%s"><span class="sv-tira-cifra">%s</span><span class="sv-tira-et">%s</span></a>'
         % (liga, format(v, ','), html.escape(et)) for _, v, et, _op, _fu, _url, liga in monetizacion.contadores())
     portada = '\n'.join([
-        '<div class="sv-hero sv-hero2 sv-hero-foto">',
+        '<div class="sv-hero sv-hero2">',
         '          <div class="sv-hero-izq">',
         '            <p class="sv-hero-pre">Prevención de fraude y de lavado · temporada electoral · formación · investigación</p>',
         '            <p class="sv-hero-tit">Lo que dicen los documentos, antes de que decidas.</p>',
@@ -3326,15 +3326,17 @@ def servicios():
         'entrada': ('La consulta es libre y lo seguirá siendo. Cuando quieras ir más a fondo, lo hacemos por encargo, con la misma regla. '
                     'Los Servicios y las <a href="donaciones.html">donaciones</a> sostienen el trabajo; ninguno compra lo que publicamos.'),
         'sin_saltos': True, 'redirige': redir,
+        # La imagen del autor va de fondo de esta cabecera (pedido del autor, 21-11-2026).
+        'cab_extra': 'sv-cab-foto',
         'antes': aviso,
         'secciones': [
             bloque_sec('propuesta', 'Lo que te ofrecemos', '', sv_liga(portada, 'servicios.html'), sin_cab=True),
+            bloque_sec('al-dia', 'La base, al día', 'Lo que ya puedes revisar hoy, gratis, y de cuándo es cada fuente.', aldia, pre='Nuestra base de datos'),
             bloque_sec('como', 'Cómo funciona', 'Tres pasos. Todo empieza con una pregunta en tus palabras.', como3, pre='Del chat al servicio'),
             bloque_sec('necesitas', '¿Qué necesitas?',
                        '%s servicios en cinco familias. Toca uno para ver qué recibes y cómo se cobra.' % numero(len(SERVICIOS)), fams, pre='Los servicios'),
             bloque_sec('arriesgas', 'Lo que arriesgas si no revisas',
                        'Lo que dice la ley cuando un proveedor o un cliente no es lo que parece. Toca el artículo para leer su texto.', arriesga, pre='Por qué revisar'),
-            bloque_sec('al-dia', 'La base, al día', 'Lo que ya puedes revisar hoy, gratis, y de cuándo es cada fuente.', aldia, pre='Nuestra base de datos'),
             bloque_sec('seguro', '¿Es seguro?', 'Cuatro cosas que puedes comprobar antes de contratar.', seguro, pre='Confianza'),
             bloque_sec('cuesta', '¿Cuánto cuesta?', 'Sabes cómo se cobra antes de escribirnos.', precio, pre='Precio'),
             bloque_sec('preguntas-f', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.', faq),
@@ -6945,6 +6947,8 @@ def _pagina(a, sello):
     if a.get('fondo'):
         cab_clase += ' herr-cab herr-foto rubro-%s' % a['rubro'] + (' ' + a['foto_clase'] if a.get('foto_clase') else '')
         nota = '<span class="herr-cab-credito">Imagen ilustrativa</span>' + nota
+    if a.get('cab_extra'):
+        cab_clase += ' ' + a['cab_extra']
     pie_extra = ('\n\n      ' + a['pie_extra']) if a.get('pie_extra') else ''
     entrada = a['entrada']
     if a.get('cajon'):

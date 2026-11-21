@@ -9,7 +9,10 @@ Se corre a mano:
 
 El ZIP es «2015 - 2025 (Fuero Común - Delitos). Incidencia delictiva estatal»
 de la página de datos abiertos del Secretariado Ejecutivo del Sistema Nacional
-de Seguridad Pública (PAGINA, abajo), que lo sirve desde su SharePoint. Trae un
+de Seguridad Pública (PAGINA, abajo), que lo sirve desde su SharePoint.
+Se baja con curl si guarda las cookies de la primera redirección
+(curl -L -c cj -b cj '<liga>&download=1'); sin ellas SharePoint responde 403.
+Cada corte trae su propia liga: se toma de PAGINA y se cambia ENLACE. Trae un
 CSV (latin-1) con un renglón por año, entidad, tipo, subtipo y modalidad, y una
 columna por mes: son las carpetas de investigación que las fiscalías y
 procuradurías de los estados reportaron al SESNSP (metodología 2015).
@@ -33,7 +36,7 @@ import zipfile
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SALIDA = os.path.join(RAIZ, 'docs', 'seguridad', 'sesnsp-fraude-estatal.json')
 PAGINA = 'https://www.gob.mx/sesnsp/acciones-y-programas/datos-abiertos-de-incidencia-delictiva'
-ENLACE = 'https://sspcgob-my.sharepoint.com/:u:/g/personal/cni_sspc_gob_mx/IQDORskgZaqcSox3W83-KLHZAeTct2NCwzncsRTgnZTBRus?e=xq0UDc'
+ENLACE = 'https://sspcgob-my.sharepoint.com/:u:/g/personal/cni_sspc_gob_mx/IQBfCWBy6I_sSbT6zeQdZvGnAcoyxjlWCljbFWtdTXk0iIY?e=calRNh'
 # Clave del INEGI → (nombre en el CSV del SESNSP, clave de la plataforma).
 ENT = {1: ('Aguascalientes', 'AGS'), 2: ('Baja California', 'BC'), 3: ('Baja California Sur', 'BCS'), 4: ('Campeche', 'CAM'),
        5: ('Coahuila de Zaragoza', 'COAH'), 6: ('Colima', 'COL'), 7: ('Chiapas', 'CHIS'), 8: ('Chihuahua', 'CHIH'),

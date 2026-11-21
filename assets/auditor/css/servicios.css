@@ -484,9 +484,13 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 [data-theme="dark"] .sv-fam-lista li { border-color: #2a3b57; }
 [data-theme="dark"] .sv-fam-lista small, [data-theme="dark"] .sv-con-ley small, [data-theme="dark"] .sv-fuentes small { color: #b7c3d9; }
 
-/* Encabezado con fotografía (pedido del autor, 21-11-2026): la imagen va de fondo y un velo azul deja leer el texto. */
-.sv-hero2.sv-hero-foto { background: linear-gradient(90deg, rgba(7,29,71,.9) 0%, rgba(7,29,71,.62) 40%, rgba(7,29,71,.22) 70%, rgba(7,29,71,.1) 100%), #071d47 url('../img/servicios-encabezado.webp') 70% 50% / cover no-repeat; }
-.sv-hero-foto .sv-hero-tit, .sv-hero-foto .sv-hero-tx, .sv-hero-foto .sv-hero-prom li { text-shadow: 0 1px 8px rgba(4,14,38,.6); }
+/* Encabezado con fotografía (pedido del autor, 21-11-2026): la imagen va de fondo de la cabecera de la página
+   («La consulta es libre…»), no del recuadro de la portada; un velo azul deja leer el texto. */
+.apartado-cab.sv-cab-foto { background: linear-gradient(90deg, rgba(7,29,71,.92) 0%, rgba(7,29,71,.7) 45%, rgba(7,29,71,.3) 75%, rgba(7,29,71,.15) 100%), #071d47 url('../img/servicios-encabezado.webp') 70% 45% / cover no-repeat; border-bottom: 0; padding: 30px 0 64px; }
+.sv-cab-foto .apartado-titulo, .sv-cab-foto .apartado-entrada, .sv-cab-foto .apartado-migas { color: #ffffff; text-shadow: 0 1px 8px rgba(4,14,38,.65); }
+.sv-cab-foto .apartado-entrada { max-width: 620px; }
+.sv-cab-foto .apartado-migas a, .sv-cab-foto .apartado-entrada a { color: #ffd27a; }
+.sv-cab-foto .apartado-titulo { font-size: clamp(32px, 4.4vw, 54px); }
 @media (max-width: 860px) {
-  .sv-hero2.sv-hero-foto { background: linear-gradient(180deg, rgba(7,29,71,.55) 0%, rgba(7,29,71,.78) 30%, rgba(7,29,71,.9) 100%), #071d47 url('../img/servicios-encabezado-movil.webp') 75% 30% / cover no-repeat; }
+  .apartado-cab.sv-cab-foto { background: linear-gradient(180deg, rgba(7,29,71,.6) 0%, rgba(7,29,71,.8) 40%, rgba(7,29,71,.92) 100%), #071d47 url('../img/servicios-encabezado-movil.webp') 75% 30% / cover no-repeat; padding-bottom: 40px; }
 }
