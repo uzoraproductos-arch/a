@@ -1362,6 +1362,46 @@ TABLAS = {
                 ["Económico", [[5850, 5070, 3690], [6120, None, 3760], [4980, 3690, 2680], [4770, 3320, 2410], [2980, 1330, 960], [2870, 1130, 900]]]]}},
         'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
         'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24304/newspaper251212090124.pdf', 'nota': 'En Autlán de Navarro el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'zapotlan': {
+        'tx': 'Decreto 29990/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Zapotlán el Grande para 2026, Periódico Oficial «El Estado de Jalisco», 18-12-2025, pág. 6 y 7 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24477/newspaper251222040507.pdf',
+        'sha256': '81725f9a59aeedb0328ce0a9c846dd7740a811b2490f0b11b6561eb7820cc082',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[None, 16040, 11580], [17000, 15470, 11250], [14960, 11640, 7770], [None, None, None], [8830, None, 2800], [None, 3610, 2190]]],
+                ["Superior", [[None, 11480, 8260], [12120, 11130, 8000], [10670, 8310, None], [9620, 6810, 4540], [6320, 3340, 1970], [None, 2770, 1540]]],
+                ["Medio", [[8840, 7610, 5460], [8670, 7090, 5080], [None, None, 3930], [6800, 4810, 3190], [None, 2540, 1420], [4200, 2140, None]]],
+                ["Económico", [[6660, None, 4130], [6500, 5780, 3900], [5460, 4280, 2850], [4880, 3610, 2370], [3340, 1820, 1040], [2970, 1440, 900]]]]},
+            'ind': {'et': 'Industrial', 'cal': [
+                ["Especial", [[7020, 6410, 4250], [6600, 5970, 3890], [4340, None, 2320], [4040, 3270, None], [2420, 1490, 800], [2090, None, 680]]],
+                ["Superior", [[6270, 5720, None], [None, 5400, 3900], [3950, 3070, 2080], [3640, None, 1940], [2210, 1350, 640], [1910, 1170, None]]],
+                ["Medio", [[None, 4850, None], [5000, None, 3230], [3450, 2680, None], [3210, 2470, 1680], [None, 1300, 610], [None, 1130, None]]],
+                ["Económico", [[4500, 4040, 3070], [4230, 3800, 2800], [2810, 2310, None], [2630, 2140, 1430], [1650, 980, 610], [1420, None, None]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24477/newspaper251222040507.pdf', 'nota': 'En Zapotlán el Grande el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'tonala': {
+        'tx': 'Decreto 29971/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Tonalá para 2026, Periódico Oficial «El Estado de Jalisco», 18-12-2025, pág. 6 del archivo («Valores de construcción 2026»)',
+        'url': _POE + 'newspaper/24458/newspaper251222034000.pdf',
+        'sha256': '2d3030e2cb6d52d95a305757982726f29c6b95c83ab869bd12c5f8ccee9f25f6',
+        'escaneo': True,
+        'edades': [["mod", "Moderno: de 0 a 10 años", 10], ["semi", "Semimoderno: de 11 a 30 años", 30], ["ant", "Antiguo: de 30 años en adelante (así lo dice la nota 1)", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[None, 16200, 11800], [15850, 12600, None], [12100, 9650, 7400]]],
+                ["Superior", [[12650, 11600, 8400], [11350, 9000, 6550], [8700, 6750, 5400]]],
+                ["Medio", [[8850, 7750, 5600], [7800, 6500, None], [5500, 4850, 3800]]],
+                ["Económico", [[6600, 5700, 4150], [None, None, 3350], [4100, 3400, 2600]]]]},
+            'ind': {'et': 'Industrial', 'cal': [
+                ["Especial", [[None, 5500, 4050], [None, 3550, 2400], [2600, 2000, 1150]]],
+                ["Superior", [[5400, 4950, None], [4100, 2700, None], [2350, None, 1350]]],
+                ["Medio", [[5050, 4650, None], [3550, 2750, None], [2050, 1650, None]]],
+                ["Económico", [[3950, 3600, 2700], [None, 2000, 1300], [1700, 1200, 900]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 4: más de 5 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24458/newspaper251222034000.pdf', 'nota': 'En Tonalá el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
     'tlaquepaque': {
         'tx': 'Decreto 29949/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de San Pedro Tlaquepaque para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 9 del archivo («Valores unitarios de la construcción año 2026»)',
         'url': _POE + 'newspaper/24379/newspaper251217061214.pdf',
