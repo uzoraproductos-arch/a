@@ -64,6 +64,8 @@
     if (v === null) return null;
     return L.un === 'ha' ? r2(v / 10000) : v;
   }
+  /* En qué cuarto de los precios de avalúo SHF cae un valor: 0 (bajo el 25 %) a 3 (desde el 75 %). Gemela de cuartil() de cc_predial.py. */
+  function cuartil(P, vf) { return (vf >= P.p25 ? 1 : 0) + (vf >= P.p50 ? 1 : 0) + (vf >= P.p75 ? 1 : 0); }
   function cf2(v) { return '$' + Number(v).toLocaleString('es-MX', { minimumFractionDigits: 2 }); }
 
   /* x: {vf, tipo, ben, pago} */
@@ -251,7 +253,7 @@
     return (v < 0 ? '−' : '') + '$' + Math.abs(Number(v)).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
-  window.AuditorPredial = { bimestral: bimestral, base: base, calcula: calcula, adeudo: adeudo, inverso: inverso, valorFiscal: valorFiscal, valorConstruccion: valorConstruccion, valorSuelo: valorSuelo, contrasta: contrasta };
+  window.AuditorPredial = { bimestral: bimestral, base: base, calcula: calcula, adeudo: adeudo, inverso: inverso, valorFiscal: valorFiscal, valorConstruccion: valorConstruccion, valorSuelo: valorSuelo, contrasta: contrasta, cuartil: cuartil };
 
   var raiz = document.getElementById('cpRaiz');
   if (!raiz) return;
@@ -415,7 +417,49 @@
     $('cpComp').innerHTML = filas.map(function (f) {
       var m = f[0];
       return '<tr><th scope="row">' + esc(m.nombre) + '</th><td>' + pesos(f[1]) + '</td><td>' + m.recargo.pct + ' % · ' + (m.multa ? (m.multa.min === m.multa.max ? m.multa.min : m.multa.min + '–' + m.multa.max) + ' %' : 'no la fija') + '</td></tr>';
-    }).join('');
+    }).join('');    mercado();
+  }
+
+  /* El mercado de la vivienda junto al valor fiscal (Índice SHF, 21-11-2026). Los precios y las variaciones son
+     oficiales (SHF); dónde cae tu valor y la escala, cuenta nuestra. No es un avalúo ni el valor de tu predio. */
+  var TRIM = ['primer', 'segundo', 'tercer', 'cuarto'];
+  function mercado() {
+    var S = D.shf, ent = $('cpEnt').value, E = S.est[ent], caja = $('cpMerCuerpo');
+    if (!E) { caja.innerHTML = ''; return; }
+    var o = $('cpMun').options[$('cpMun').selectedIndex], nom = o ? o.textContent.replace(/ ✓$/, '') : '';
+    var m = ley(ent, $('cpMun').value), mi = m ? S.mun[m.id] : null, P = E.precios, en = D.ent[ent];
+    var corte = TRIM[S.trim - 1] + ' trimestre', ofi = ' <span class="est-chip est-oficial">oficial</span>', aud = ' <span class="est-chip est-derivado">auditada</span>';
+    var vf = num('cpVf'), tipo = $('cpTipo').value, h = '';
+    h += '<p>En <b>' + esc(en) + '</b>, la mitad de las viviendas valuadas en ' + S.anio + ' valió menos de <b>' + mdp(P.p50) + '</b> (la mediana), una de cada cuatro, menos de ' + mdp(P.p25) +
+      ' y una de cada cuatro, más de ' + mdp(P.p75) + '. El precio medio fue de ' + mdp(P.medio) + ': queda arriba de la mediana porque unas pocas viviendas muy caras lo jalan.' + ofi + '</p>';
+    var esc0 = Math.max(P.p75 * 1.5, vf > 0 ? vf * 1.1 : 0), pc = function (v) { return Math.min(100, v / esc0 * 100).toFixed(1) + '%'; };
+    var marca = function (v, c, t, abajo) {
+      var x = v / esc0, lado = x < 0.25 ? ' cp-izq' : (x > 0.7 ? ' cp-der' : '');
+      return '<span class="cp-esc-m ' + c + (abajo ? ' cp-esc-ab' : '') + (c === 'cp-esc-tu' ? (x > 0.5 ? ' cp-der' : ' cp-izq') : lado) + '" style="left:' + pc(v) + '"><span>' + t + '</span></span>';
+    };
+    var g = '<div class="cp-esc" role="img" aria-label="Escala de precios de avalúo de vivienda en ' + esc(en) + (vf > 0 && tipo === 'edif' ? ' con tu valor fiscal marcado' : '') + '">' +
+      '<div class="cp-esc-barra"><span class="cp-esc-banda" style="left:' + pc(P.p25) + ';width:' + (Math.min(100, P.p75 / esc0 * 100) - P.p25 / esc0 * 100).toFixed(1) + '%"></span></div>' +
+      marca(P.p25, '', '25 %: ' + mdp(P.p25), true) + marca(P.p50, 'cp-esc-q', 'Mediana: ' + mdp(P.p50), false) + marca(P.p75, 'cp-esc-ab2', '75 %: ' + mdp(P.p75), true) +
+      (vf > 0 && tipo === 'edif' ? marca(vf, 'cp-esc-tu', 'Tu valor fiscal: ' + mdp(vf), false) : '') + '</div>' +
+      '<p class="ci-pista">La franja es la mitad de en medio de los avalúos de ' + esc(en) + ' (del 25 % al 75 %).</p>';
+    h += g;
+    if (!(vf > 0)) {
+      h += '<p>Escribe arriba el valor fiscal de tu predio y lo marcamos en la escala.</p>';
+    } else if (tipo !== 'edif') {
+      h += '<p>El Índice SHF mide <b>vivienda</b>; para un terreno ' + (tipo === 'rust' ? 'rústico' : 'baldío') + ' no hay comparación justa, así que no lo marcamos.</p>';
+    } else {
+      var q = cuartil(P, vf);
+      var dice = ['abajo de una de cada cuatro viviendas valuadas: al menos tres de cada cuatro valieron más que eso',
+        'entre la cuarta parte más barata y la mediana: más de la mitad de las viviendas valuadas valió más',
+        'entre la mediana y el 75 %: más de la mitad valió menos, pero una de cada cuatro valió más de ' + mdp(P.p75),
+        'arriba del 75 %: menos de una de cada cuatro viviendas valuadas valió más que eso'][q];
+      h += '<p>Tu valor fiscal de <b>' + mdp(vf) + '</b> queda ' + dice + '.' + aud + '</p>' +
+        '<p class="ci-nota">Ojo: tu valor fiscal y un precio de avalúo no son la misma medida, y los precios del estado mezclan muchas ciudades, colonias y tipos de vivienda. Que tu valor fiscal quede bajo o alto en la escala no quiere decir que el catastro lo tenga mal: es una señal para preguntar, no una conclusión.</p>';
+    }
+    if (mi) h += '<p><b>' + esc(nom) + '</b> es uno de los municipios que mide la SHF: su índice subió <b>' + mi['var'] + ' %</b> del ' + corte + ' de ' + (S.anio - 1) + ' al de ' + S.anio + ofi + ' (en todo ' + esc(en) + ', ' + E.var + ' %).</p>';
+    else h += '<p>En <b>' + esc(en) + '</b>, el índice subió <b>' + E.var + ' %</b> del ' + corte + ' de ' + (S.anio - 1) + ' al de ' + S.anio + ofi + '. ' + (nom ? 'La SHF no publica un índice propio de ' + esc(nom) + '; damos el del estado.' : '') + '</p>';
+    h += '<p class="ci-nota">Subir el índice no sube tu predial: el predial cambia cuando el Congreso aprueba nuevas tablas de valores y tu Ley de Ingresos. Lo que sí dice es cuánto se movió el mercado mientras tus tablas se quedaban quietas o cambiaban.</p>';
+    caja.innerHTML = h;
   }
 
   function pinta(e) {
@@ -493,8 +537,8 @@
   $('cpF').value = hoy.toISOString().slice(0, 10);
   $('cpDb').value = '1';
   $('cpHb').value = String(Math.max(1, Math.ceil((hoy.getMonth() + 1) / 2)));
-  $('cpEnt').addEventListener('change', function () { llenaMunicipios(); ficha(); $('cpRes').hidden = true; });
-  $('cpMun').addEventListener('change', function () { ficha(); $('cpRes').hidden = true; });
+  $('cpEnt').addEventListener('change', function () { llenaMunicipios(); ficha(); $('cpRes').hidden = true; mercado(); });
+  $('cpMun').addEventListener('change', function () { ficha(); $('cpRes').hidden = true; mercado(); });
   $('cpTipo').addEventListener('change', compara);
   $('cpVf').addEventListener('input', compara);
   $('cpDebe').addEventListener('change', function () { $('cpDeuda').hidden = !this.checked; });
@@ -519,5 +563,6 @@
       ' <span class="est-chip est-derivado">auditada</span>. Es tu cuenta con los valores que escribiste; el oficial es el que registra el catastro. Ya lo pusimos arriba.';
     compara();
   });
+  mercado();
   if (num('cpVf') > 0) pinta();
 })();
