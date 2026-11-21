@@ -76,7 +76,8 @@ def ligas_abre():
     from urllib.parse import parse_qs, urlsplit
     vistas, out = set(), []
     for ruta in sorted(RAIZ.glob('*.html')):
-        for href in re.findall(r'href="(%s\?[^"]*abre=[^"]*)"' % re.escape(PAGINA), ruta.read_text(encoding='utf-8')):
+        # Las del Inspector de Servicios (21-11-2026) abren igual: mismo motor, misma base.
+        for href in re.findall(r'href="((?:%s|servicios-inspector\.html)\?[^"]*abre=[^"]*)"' % re.escape(PAGINA), ruta.read_text(encoding='utf-8')):
             ps = parse_qs(urlsplit(_h.unescape(href)).query)
             liga = ps.get('abre', [''])[0]
             if liga and liga not in vistas:

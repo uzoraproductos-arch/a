@@ -28,6 +28,13 @@ from apartados import RAIZ, glosario_ancla
 ARCHIVO = 'herramienta-inspector-pregunta.html'
 # El dictamen de cada respuesta, en su propia pagina (pedido del autor, 23-10-2026).
 DICTAMEN = 'herramienta-inspector-dictamen.html'
+# Dos chats, reflejo uno del otro (pedido del autor, 21-11-2026: «crear dos chats…
+# ambos se alimentan de lo mismo»). El del Auditor trabaja en tres modos (Periodista,
+# Ciudadano y Ambientalista); el modo Inspector, con sus aplicaciones, vive en la
+# pestaña Servicios. Ahí contesta en corto, y la respuesta completa abre en su
+# propia página, que cierra con «Generar dictamen».
+SV_CHAT = 'servicios-inspector.html'
+SV_RESPUESTA = 'servicios-respuesta.html'
 ASF_INFORMES = 'https://www.asf.gob.mx/Section/58_Informes_de_auditoria'
 ALERTAS = 'https://www.disciplinafinanciera.hacienda.gob.mx/'
 BASE_JS = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'asistente-base.js')
@@ -986,13 +993,19 @@ def _ejemplos():
     return ej
 
 
-def _modos_html():
+def modos_de(solo=None):
+    """Los modos de cada chat: el de Servicios, solo el Inspector; el del Auditor, los otros tres."""
+    return [m for m in MODOS if (m[0] == solo if solo else m[0] != 'inspector')]
+
+
+def _modos_html(solo=None):
     """El selector de modo de la cabecera, la franja con las aplicaciones del
     modo elegido y su saludo. Cada aplicación es una pregunta: el chat la
     reconoce por su nombre y la abre en su respuesta, como hasta ahora."""
     import apartados
     opciones, franjas, holas = [], [], []
-    for mid, ico, nom, lema, que, herrs, extra, hola in MODOS:
+    inicial = solo or MODO_INICIAL
+    for mid, ico, nom, lema, que, herrs, extra, hola in modos_de(solo):
         apps = [(t[1], t[2]) for clave in herrs for t in next(h for h in apartados.HERRAMIENTAS if h[1] == clave)[7]] + list(extra)
         opciones.append('              <li><button type="button" class="pa-modo-op" data-pa-modo="%s" data-nom="Modo %s" data-lema="%s" aria-pressed="false">'
                         '<span class="pa-modo-ico" aria-hidden="true">%s</span><span><b>Modo %s</b><small>%s</small></span></button></li>'
@@ -1002,35 +1015,61 @@ def _modos_html():
             '            <summary><span aria-hidden="true">%s</span> <b>Modo %s</b><span class="pa-modo-lema"> · %s</span>'
             '<span class="pa-modo-n">%d aplicaciones ▾</span></summary>\n'
             '            <p>%s</p>\n            <div class="pa-modo-apps">\n%s\n            </div>\n          </details>' % (
-                mid, '' if mid == MODO_INICIAL else ' hidden', ico, html.escape(nom), html.escape(lema), len(apps), html.escape(que),
+                mid, '' if mid == inicial else ' hidden', ico, html.escape(nom), html.escape(lema), len(apps), html.escape(que),
                 '\n'.join('              <button type="button" class="pa-modo-app" data-pa-pregunta="%s"><span aria-hidden="true">%s</span> %s</button>'
                           % (html.escape(n, quote=True), i, html.escape(n)) for i, n in apps)))
-        holas.append('                <div class="pa-hola-modo" data-modo="%s"%s>%s</div>' % (mid, '' if mid == MODO_INICIAL else ' hidden', hola))
+        holas.append('                <div class="pa-hola-modo" data-modo="%s"%s>%s</div>' % (mid, '' if mid == inicial else ' hidden', SV_HOLA if solo else hola))
     return '\n'.join(opciones), '\n'.join(franjas), '\n'.join(holas)
 
 
-def pagina(cuenta, canal='', herramientas=()):
+INSP_LI = '<li><b>Investigo contigo, sin salir del chat.</b> Las ocho aplicaciones del Modo Inspector se usan desde aquí: pégame un <b>RFC</b> o un nombre y te digo si está en la lista negra del SAT; un <b>folio</b> (AV-…) y compruebo el estado de cuenta; la <b>liga de una nota</b> y la contrasto; pídeme el <b>diagnóstico de un ente</b> («diagnóstico de Pemex»), un <b>expediente de la ASF</b> («expediente de Segalmex») o una <b>investigación a la medida</b>. La aplicación se abre en la respuesta con «▶️ Úsala aquí».</li>'
+
+SV_HOLA = ('<p>Soy el <b>Inspector</b> de Servicios: investigo con toda la base de datos de la plataforma. Pégame un <b>RFC</b>, un <b>folio</b> o la liga de una nota, '
+           'pídeme el <b>diagnóstico de un ente</b>, un <b>expediente de la ASF</b>, los <b>contratos</b> de una empresa o la cuenta de una <b>megaobra</b>.</p>'
+           '<p>Aquí te contesto <b>en corto</b>. Todo lo demás (las cifras, sus documentos, los mapas del Planisferio, el servicio que toca) abre en '
+           '<b>su propia página</b>, que cierra con <b>«Generar dictamen»</b>.</p>')
+
+
+def pagina(cuenta, canal='', herramientas=(), solo=None):
     """herramientas ya no se usa (29-10-2026: el menú «Herramientas» de la
     cabecera es ahora el selector de modo); se queda para no romper a quien
-    lo llame."""
+    lo llame. Con solo='inspector', el chat de Servicios (21-11-2026)."""
     total = sum(cuenta.values())
-    opciones, franjas, holas = _modos_html()
+    opciones, franjas, holas = _modos_html(solo)
+    vale = {m[0] for m in modos_de(solo)}
     ej = '\n'.join('              <button type="button" class="pa-ej%s" data-pa-pregunta="%s" data-modo="%s">%s<span aria-hidden="true">%s</span> %s</button>'
                    % (' pa-ej-sabias' if sena else '', html.escape(q, quote=True), m, '<small class="pa-ej-sena">%s</small>' % sena if sena else '',
-                      i, html.escape(t)) for q, t, i, m, sena in _ejemplos())
+                      i, html.escape(t)) for q, t, i, m, sena in _ejemplos() if m in vale)
     import apartados  # «Lo que aún no sé» llega a pregunta-bot cuando hay base (paso 2.8)
     funcion = (' data-funcion="%s/pregunta-bot"' % html.escape(apartados.FUNCIONES.rstrip('/'), quote=True)) if apartados.FUNCIONES else ''
-    return '''<div class="pa" id="paApp" data-canal="%s"%s data-modo="%s">
+    if solo:
+        cab = ('<div><b>El Inspector de Servicios</b><small><span class="pa-enlinea" aria-hidden="true"></span> En línea · contesta en corto, con datos oficiales</small></div>\n'
+               '            <span class="pa-cab-acc">\n'
+               '            <span class="pa-como-abre pa-herr-abre pa-modo-fijo" id="paHerrAbre"><span class="pa-modo-actual" id="paModoActual">🔍 Modo Inspector</span></span>')
+        modos_tx = ('<li><b>Soy el modo Inspector</b>, con todas sus aplicaciones. Los otros tres modos (Periodista, Ciudadano y Ambientalista) viven en el '
+                    '<a href="%s">chat del Auditor</a>; los datos son los mismos.</li>' % ARCHIVO)
+        resp_tx = ('<li><b>Te contesto en corto, aquí.</b> Con «📄 Ver la respuesta completa» abres su página: la cifra, sus documentos, el Planisferio, '
+                   'el expediente y el servicio que toca, y al final, «🧾 Generar dictamen».</li>')
+    else:
+        cab = ('<div><b>Pregúntale al Auditor</b><small><span class="pa-enlinea" aria-hidden="true"></span> En línea · contesta con datos oficiales</small></div>\n'
+               '            <span class="pa-cab-acc">\n'
+               '            <button type="button" class="pa-como-abre pa-herr-abre" id="paHerrAbre" aria-controls="paHerr" aria-expanded="false" aria-label="Cambiar el modo del Auditor">'
+               '<span class="pa-modo-actual" id="paModoActual">🙋 Modo Ciudadano</span> <span class="pa-herr-flecha" aria-hidden="true">▾</span></button>')
+        modos_tx = ('<li><b>Elige mi modo</b> con el botón de arriba: <b>📰 Periodista</b> (un tema contado como nota, con las Noticias), <b>🙋 Ciudadano</b> (en corto, como un amigo) '
+                    'o <b>🌎 Ambientalista</b> (el costo y el daño ambiental). Cada modo trae sus aplicaciones y sus preguntas de ejemplo; los datos son los mismos en los tres. '
+                    'La investigación a fondo, con el <b>🔍 modo Inspector</b> y sus aplicaciones, vive en <a href="%s">Servicios</a>.</li>' % SV_CHAT)
+        resp_tx = ''
+    insp_tx = INSP_LI if solo else ('<li><b>¿Quieres investigar a fondo?</b> Un <b>RFC</b>, un <b>folio</b>, un <b>expediente de la ASF</b>, los <b>contratos</b> de una empresa '
+                                    'o el <b>diagnóstico de un ente</b> los contesta el <a href="%s">🔍 Inspector de Servicios</a>, con todas sus aplicaciones.</li>' % SV_CHAT)
+    return '''<div class="pa" id="paApp" data-canal="%s"%s data-modo="%s"%s>
         <div class="pa-chat">
           <div class="pa-chat-cab">
             <img src="assets/auditor/img/logo-auditavision.svg" alt="" width="52" height="40">
-            <div><b>Pregúntale al Auditor</b><small><span class="pa-enlinea" aria-hidden="true"></span> En línea · contesta con datos oficiales</small></div>
-            <span class="pa-cab-acc">
-            <button type="button" class="pa-como-abre pa-herr-abre" id="paHerrAbre" aria-controls="paHerr" aria-expanded="false" aria-label="Cambiar el modo del Auditor"><span class="pa-modo-actual" id="paModoActual">🙋 Modo Ciudadano</span> <span class="pa-herr-flecha" aria-hidden="true">▾</span></button>
+            %s
             <button type="button" class="pa-como-abre" id="paComoAbre" aria-controls="paComo" aria-expanded="false"><span aria-hidden="true">❓</span> Cómo platicar conmigo</button>
             </span>
             <div class="pa-herr pa-modos" id="paHerr" role="group" aria-label="Modos del Auditor" hidden>
-              <p>Elige cómo quieres que investigue. Los datos son los mismos en los cuatro modos; cambia la forma de buscar y de contestarte.</p>
+              <p>Elige cómo quieres que investigue. Los datos son los mismos en todos los modos; cambia la forma de buscar y de contestarte.</p>
               <ul>
 %s
               </ul>
@@ -1073,12 +1112,12 @@ def pagina(cuenta, canal='', herramientas=()):
           <div class="glos-drawer-cuerpo">
           <h3 id="paComoT">Cómo platicar conmigo</h3>
           <ol>
-            <li><b>Elige mi modo</b> con el botón de arriba: <b>🔍 Inspector</b> (la investigación más completa), <b>📰 Periodista</b> (un tema contado como nota, con las Noticias), <b>🙋 Ciudadano</b> (en corto, como un amigo) o <b>🌎 Ambientalista</b> (el costo y el daño ambiental). Cada modo trae sus aplicaciones y sus preguntas de ejemplo; los datos son los mismos en los cuatro.</li>
+            %s%s
             <li><b>Escríbeme como hablas.</b> Entiendo «lana», «varo», «¿cuánto se clavaron?», siglas como CDMX o Edomex, y preguntas que siguen a la anterior: «¿y Nuevo León?», «¿y por habitante?», «¿y el que menos?».</li>
             <li><b>Te contesto en corto:</b> la cifra, qué quiere decir y en qué lugar queda. Sé de los 32 estados, de los municipios, de los sueldos de los cargos públicos, de cada sexenio desde 1989, de %s términos del glosario y de las páginas de la plataforma.</li>
             <li><b>Saco cuentas:</b> ordeno, comparo, sumo y saco porcentajes y márgenes. Cuando hago una cuenta, te digo cuál fue.</li>
             <li><b>Verifico lo que oyes:</b> «¿es cierto que…?», «dicen que…» o la liga de una nota. Comparo la cifra con su documento oficial y te digo si coincide, si se acerca o si no cuadra.</li>
-            <li><b>Investigo contigo, sin salir del chat.</b> Las ocho aplicaciones del Modo Inspector se usan desde aquí: pégame un <b>RFC</b> o un nombre y te digo si está en la lista negra del SAT; un <b>folio</b> (AV-…) y compruebo el estado de cuenta; la <b>liga de una nota</b> y la contrasto; pídeme el <b>diagnóstico de un ente</b> («diagnóstico de Pemex»), un <b>expediente de la ASF</b> («expediente de Segalmex») o una <b>investigación a la medida</b>. La aplicación se abre en la respuesta con «▶️ Úsala aquí».</li>
+            %s
             <li><b>Sigo cada megaobra.</b> Pregúntame por el <b>Tren Maya</b>, <b>Dos Bocas</b>, el <b>AIFA</b> o el <b>FOBAPROA</b>: cuánto se aprobó, cuánto costó, su sobrecosto, si gana o pierde al año y qué dijo la ASF. También <b>en qué invirtió cada presidente</b> («obras de Calderón»), cuál tiene <b>más sobrecosto</b> y las cinco aplicaciones de Inversión y Megaobras, que también se abren aquí.</li>
             <li><b>Toca «📎 Fuente»</b> para ver la fuente de cada cifra y su estado: <span class="est-chip est-oficial">oficial</span> <span class="est-chip est-derivado">auditada</span> <span class="est-chip est-pendiente">pendiente</span>.</li>
             <li><b>¿Quieres ir a fondo?</b> «📖 Saber más» te lleva a la página de la plataforma donde está la información completa.</li>
@@ -1100,7 +1139,7 @@ def pagina(cuenta, canal='', herramientas=()):
           <p class="pa-aviso"><b>Platico como chat, pero no invento.</b> No soy una inteligencia artificial que redacta: entiendo tu pregunta y contesto solo con cifras que la plataforma ya publicó con su documento (%s fichas y %s municipios). Si no lo tengo, te lo digo. Tu pregunta no sale de tu navegador.</p>
           </div>
         </aside>
-      </div>''' % (html.escape(canal, quote=True), funcion, MODO_INICIAL, opciones, franjas, holas, ej, format(cuenta.get('glosario', 0), ','),
+      </div>''' % (html.escape(canal, quote=True), funcion, solo or MODO_INICIAL, ' data-solo="%s"' % solo if solo else '', cab, opciones, franjas, holas, ej, modos_tx, resp_tx, insp_tx, format(cuenta.get('glosario', 0), ','),
                  format(total - cuenta.get('municipio', 0), ','), format(cuenta.get('municipio', 0), ','))
 
 
@@ -1121,3 +1160,17 @@ def dictamen_pagina():
           <noscript><p>El dictamen se arma en tu navegador y necesita JavaScript.</p></noscript>
         </div>
       </div>''' % ARCHIVO
+
+
+def respuesta_pagina():
+    """La respuesta completa del Inspector de Servicios (21-11-2026, pedido del autor:
+    «toda esa información se desglose en una nueva página completa y al final venga
+    la parte de generar dictamen»). Como el dictamen, la página vuelve a contestar la
+    pregunta del enlace con la misma base: nada de lo que se ve viaja en él."""
+    return '''<div class="pa-pagina" id="respApp">
+        <p class="dic-acc"><a class="pa-boton" href="%s">← Volver al Inspector</a></p>
+        <div id="respDoc" aria-live="polite">
+          <p>Armando la respuesta…</p>
+          <noscript><p>La respuesta se arma en tu navegador y necesita JavaScript.</p></noscript>
+        </div>
+      </div>''' % SV_CHAT

@@ -21,7 +21,14 @@
   var form = document.getElementById('paForm');
   var campo = document.getElementById('paPregunta');
   var dic = document.getElementById('dicApp');
-  if (!B || (!dic && (!hilo || !form || !campo))) return;
+  /* Dos chats, reflejo uno del otro (pedido del autor, 21-11-2026): el del Auditor, con
+     tres modos, y el Inspector de Servicios (data-solo="inspector"), que contesta en
+     corto; su respuesta completa abre en su propia página (#respApp), que cierra con
+     «Generar dictamen». Los dos leen la misma base. */
+  var resp = document.getElementById('respApp');
+  var SOLO = (document.getElementById('paApp') || { getAttribute: function () { return null; } }).getAttribute('data-solo');
+  var SV_CHAT = 'servicios-inspector.html', SV_RESP = 'servicios-respuesta.html', CHAT_AV = 'herramienta-inspector-pregunta.html';
+  if (!B || (!dic && !resp && (!hilo || !form || !campo))) return;
   /* Los municipios salen del padrón del INEGI (municipios-efipem.js, que la
      página carga): aquí se arma la ficha de cada uno. */
   var MU = window.AUDIT_MUNICIPIOS, NOMBRE = {};
@@ -906,6 +913,13 @@
   function remiteHtml(q, r) {
     var t = modoToca(q, r), m = modoVivo();
     if (!t || t === m || !MODO_ICO[m]) return '';
+    /* Entre los dos chats, la remisión es una liga al otro, con la misma pregunta. */
+    if (t === 'inspector' || SOLO || resp) {
+      var al = t === 'inspector' ? SV_CHAT + '?q=' + encodeURIComponent(q) : CHAT_AV + '?q=' + encodeURIComponent(q) + '&modo=' + t;
+      return '<div class="pa-remite pa-remite-' + t + '"><p><span aria-hidden="true">' + MODO_ICO[t] + '</span> <b>Esto le toca al modo ' + MODO_NOM[t] + '.</b> ' +
+        'Te lo contesto aquí con los mismos datos; ' + MODO_COMO[t] + '.</p>' +
+        '<a class="pa-boton pa-modo-sug" href="' + esc(al) + '">' + MODO_ICO[t] + (t === 'inspector' ? ' Pasar al Inspector de Servicios' : ' Pasar al chat del Auditor, modo ' + MODO_NOM[t]) + ' ➔</a></div>';
+    }
     return '<div class="pa-remite pa-remite-' + t + '"><p><span aria-hidden="true">' + MODO_ICO[t] + '</span> <b>Esto le toca al modo ' + MODO_NOM[t] + '.</b> ' +
       'Te lo contesto aquí con los mismos datos; ' + MODO_COMO[t] + '.</p>' +
       '<button type="button" class="pa-boton pa-modo-sug" data-pa-modo-sug="' + t + '" data-pa-q="' + esc(q) + '">' + MODO_ICO[t] + ' Pasar al modo ' + MODO_NOM[t] + ' ➔</button></div>';
@@ -3279,6 +3293,13 @@
       }
       if (r.anota && !ya) anota(q, 'sin');
       r.q = q;
+      if (SOLO) {
+        li.querySelector('.pa-burbuja').innerHTML = cabResp(r) + remiteHtml(q, r) + '<div class="pa-resp pa-corto">' + corto(r.html) + '</div>' + accionesSv(q, r, previas) +
+          (r.sug && r.sug.length ? '<p class="pa-mas-t">Sigue preguntando</p>' + chips(r.sug.slice(0, 4)) : '');
+        if (!ya) caso(q, r, previas);
+        guarda();
+        return;
+      }
       li.querySelector('.pa-burbuja').innerHTML = cabResp(r) + remiteHtml(q, r) + '<div class="pa-resp">' + esquema(r.html) + '</div>' + acciones(q, r, previas) +
         servicioHtml(r, q) + expInvHtml(q, r) +
         periodistaHtml(q, r) + capaModoHtml(q, r) +
@@ -3302,6 +3323,35 @@
       li.classList.remove('pa-escribe'); pinta(li); li.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
   }
+  /* La respuesta en corto del Inspector de Servicios: lo primero que dice, sin
+     tablas, marcos ni listas largas; lo demás vive en su página completa. */
+  function corto(h) {
+    var d = document.createElement('div');
+    d.innerHTML = h;
+    var out = [], n = 0;
+    Array.prototype.some.call(d.children, function (k) {
+      if (k.classList.contains('pa-dedonde') || k.querySelector('iframe, form, table, .pa-app') || /^(TABLE|FORM|IFRAME|DETAILS)$/.test(k.tagName)) return false;
+      if (/^(UL|OL)$/.test(k.tagName)) {
+        var c = k.cloneNode(false);
+        Array.prototype.slice.call(k.children, 0, 3).forEach(function (x) { c.appendChild(x.cloneNode(true)); });
+        out.push(c.outerHTML); n += c.textContent.length;
+      } else { out.push(k.outerHTML); n += k.textContent.length; }
+      return out.length >= 2 || n > 260;
+    });
+    if (!out.length) { var t = d.textContent.replace(/\s+/g, ' ').trim(); out.push('<p>' + esc(t.length > 260 ? t.slice(0, 258).replace(/\s+\S*$/, '') + '…' : t) + '</p>'); }
+    return out.join('');
+  }
+  function enlaceResp(q, previas, abreL) {
+    return SV_RESP + '?q=' + encodeURIComponent(q) + (previas || []).map(function (c) { return '&c=' + encodeURIComponent(c); }).join('') +
+      (abreL ? '&abre=' + encodeURIComponent(abreL) : '');
+  }
+  function accionesSv(q, r, previas) {
+    return '<p class="pa-acc">' +
+      '<a class="pa-boton pa-ver" href="' + esc(enlaceResp(q, previas, r.abre)) + '">📄 Ver la respuesta completa ➔</a>' +
+      (r.ficha ? '<a class="pa-boton pa-genera" href="' + esc(enlaceDictamen(q, previas || []) + (r.abre ? '&abre=' + encodeURIComponent(r.abre) : '')) + '" target="_blank" rel="noopener">🧾 Generar dictamen</a>' : '') +
+      '<button type="button" class="pa-boton pa-noera" data-pa-q="' + esc(q) + '" data-pa-tit="' + esc(r.ficha ? r.ficha.tit : '') + '">🤔 No era lo que buscaba</button></p>';
+  }
+
   /* La tarjeta de la aplicación del Modo Inspector que viene al caso: la que
      pidió el lector (abierta) o la de la página a la que lleva «Saber más». */
   function appDe(r) {
@@ -3334,6 +3384,11 @@
     var doc = document.getElementById('dicDoc'), chat = 'herramienta-inspector-pregunta.html';
     var pm = ps.get('modo') === 'reportero' ? 'periodista' : ps.get('modo');
     if (MODO_ICO[pm]) MODO_DIC = pm;
+    if (pm === 'inspector') {
+      chat = SV_CHAT;
+      var vu = document.querySelector('#dicApp .dic-acc a');
+      if (vu) { vu.setAttribute('href', SV_CHAT); vu.textContent = '← Volver al Inspector'; }
+    }
     if (!q) {
       doc.innerHTML = '<p>El dictamen respalda una respuesta del Auditor. <a href="' + chat + '">Hazle una pregunta</a> y, en su respuesta, toca <b>«🧾 Generar dictamen»</b>.</p>';
       return;
@@ -3366,6 +3421,55 @@
       }, function () { en.textContent = 'Copia la dirección de tu navegador'; });
     });
     }
+  }
+  /* La respuesta completa del Inspector de Servicios: todo lo que la respuesta trae
+     (las cifras, sus documentos, el expediente, el Planisferio y las demás partes
+     de la plataforma, el servicio que toca) y, al final, «Generar dictamen». */
+  function armaRespuesta() {
+    var ps = new URLSearchParams(location.search), q = (ps.get('q') || '').trim().slice(0, 600);
+    var antes = ps.getAll('c').map(function (x) { return x.trim().slice(0, 600); }).filter(Boolean).slice(-4);
+    var doc = document.getElementById('respDoc');
+    MODO_DIC = 'inspector';
+    if (!q) { doc.innerHTML = '<p>Esta página desglosa una respuesta del Inspector. <a href="' + SV_CHAT + '">Hazle una pregunta</a> y toca <b>«📄 Ver la respuesta completa»</b>.</p>'; return; }
+    antes.forEach(function (x) { respuesta(x); });
+    var r = abre(q, ps.get('abre')) || respuesta(q, antes);
+    if (r && r.espera) r.espera.then(arma); else arma(r);
+    function arma(r) {
+      if (!r || r.sin) {
+        doc.innerHTML = '<h2 class="pa-pag-q">«' + esc(q) + '»</h2>' + (r ? sinRespuesta(q, r.sin) + pideExpHtml() : '') +
+          '<p><a class="pa-boton" href="' + SV_CHAT + '?q=' + encodeURIComponent(q) + '">Pregúntasela de otra forma al Inspector ➔</a></p>';
+        return;
+      }
+      r.q = q;
+      var ir = r.ir || (r.ficha && r.ficha.ir), dl = enlaceDictamen(q, antes) + (r.abre ? '&abre=' + encodeURIComponent(r.abre) : '');
+      var sec = function (ico, tit, h) { return h ? '<section class="pa-pag-sec"><h3><span aria-hidden="true">' + ico + '</span> ' + tit + '</h3>' + h + '</section>' : ''; };
+      doc.innerHTML = '<h2 class="pa-pag-q">«' + esc(q) + '»</h2>' + cabResp(r) + remiteHtml(q, r) +
+        '<div class="pa-resp">' + r.html + '</div>' +
+        (ir ? '<p class="pa-acc"><a class="pa-boton pa-ver" href="' + esc(ir[0]) + '">📖 Saber más <span class="pa-ver-donde">· ' + esc(ir[1]) + '</span> ➔</a></p>' : '') +
+        capaModoHtml(q, r) + appDe(r) + expInvHtml(q, r) + servicioHtml(r, q) +
+        sec('🧭', 'En las demás partes de la plataforma', r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r))).replace(/<p class="pa-mas-t">[^<]*<\/p>/, '')) +
+        sec('📚', 'En la Enciclopedia', enciclopediaHtml(enciclopediaPara(q, r)).replace(/<p class="pa-mas-t">[^<]*<\/p>/, '')) +
+        (r.web ? webHtml(r.web) : '') +
+        (r.ficha ? '<section class="pa-pag-dic"><h3><span aria-hidden="true">🧾</span> Tu dictamen</h3>' +
+          '<p>El respaldo de esta respuesta: tu pregunta, lo que se contestó, cada cifra con su estado, sus fuentes y el método, con folio, sello y huella digital. ' +
+          'No es un documento oficial ni un peritaje.</p><p class="pa-acc"><a class="pa-boton pa-genera" href="' + esc(dl) + '">🧾 Generar dictamen ➔</a>' +
+          '<a class="pa-boton" href="servicios-cotiza.html#solicitud">📝 Cotiza si quieres ir más a fondo</a></p></section>' : '');
+      document.title = (r.ficha ? r.ficha.tit : q) + ' · El Inspector · Auditavisión';
+      var caja = doc.querySelector('.pa-app[data-pa-abre]');
+      if (caja) montaApp(caja);
+      doc.addEventListener('click', function (ev) {
+        var ap = ev.target.closest ? ev.target.closest('.pa-app') : null;
+        if (ap && ev.target.closest('.pa-app-usa')) montaApp(ap);
+        else if (ap && ev.target.closest('.pa-app-cierra')) cierraApp(ap);
+        var b = ev.target.closest ? ev.target.closest('[data-pa-pregunta]') : null;
+        if (b) location.href = SV_CHAT + '?q=' + encodeURIComponent(b.getAttribute('data-pa-pregunta'));
+      });
+    }
+  }
+  if (resp) {
+    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo, abre: abre, servicio: servicioHtml };
+    armaRespuesta();
+    return;
   }
   if (dic) {
     window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo, abre: abre, servicio: servicioHtml };
@@ -3427,7 +3531,8 @@
      saludo, la franja de aplicaciones y las preguntas de ejemplo; los datos
      son los mismos en los cuatro. Se recuerda en este navegador y se puede
      pedir por la dirección (?modo=periodista). */
-  var app = document.getElementById('paApp'), MODOS_OK = { inspector: 1, periodista: 1, ciudadano: 1, ambientalista: 1 };
+  var app = document.getElementById('paApp'), MODOS_OK = {};
+  Array.prototype.forEach.call(app.querySelectorAll('.pa-modo-op'), function (b) { MODOS_OK[b.getAttribute('data-pa-modo')] = 1; });
   function modoActual() { return app.getAttribute('data-modo'); }
   function poneModo(m, avisa) {
     if (!MODOS_OK[m]) return;
@@ -3456,7 +3561,7 @@
   }
   (function () {
     var bt = document.getElementById('paHerrAbre'), menu = document.getElementById('paHerr');
-    if (!bt || !menu) return;
+    if (!bt || !menu || SOLO) return;
     function pon(abierto, foco) {
       menu.hidden = !abierto;
       bt.setAttribute('aria-expanded', abierto ? 'true' : 'false');
@@ -3550,7 +3655,7 @@
      lector abre «Saber más» y vuelve, la encuentra como la dejó. «Regresar»
      quita la última pregunta con su respuesta y la deja escrita para
      corregirla; «Limpiar» empieza de cero. */
-  var CLAVE = 'av-chat', btReg = document.getElementById('paRegresa'), btLim = document.getElementById('paLimpia');
+  var CLAVE = SOLO ? 'av-chat-sv' : 'av-chat', btReg = document.getElementById('paRegresa'), btLim = document.getElementById('paLimpia');
   function guarda() {
     try {
       var lis = Array.prototype.slice.call(hilo.children, 1).filter(function (li) { return !li.classList.contains('pa-escribe'); });
@@ -3626,14 +3731,22 @@
   pintaLista();
   if (canal) document.getElementById('paSinRespNota').innerHTML = 'La lista se guarda solo en tu navegador y no se envía sola: con «Enviarlas a Auditavisión» nos la haces llegar tú.';
   var ps = new URLSearchParams(location.search), pre = ps.get('q'), lista = ps.get('p');
-  (function () {
+  var muda = (function () {
     /* «Reportero» se llamó así hasta el 29-10-2026 (ahora es «Periodista»): las ligas
        viejas (?modo=reportero) y lo que guardó el navegador siguen sirviendo. */
     var viejo = function (x) { return x === 'reportero' ? 'periodista' : x; };
     var m = viejo(ps.get('modo'));
+    /* El modo Inspector vive en Servicios (21-11-2026): una liga vieja al Auditor con
+       ?modo=inspector se muda allá con su pregunta. */
+    if (m === 'inspector' && !SOLO) {
+      ps.delete('modo');
+      location.replace(SV_CHAT + (ps.toString() ? '?' + ps.toString() : '') + location.hash);
+      return true;
+    }
     if (!MODOS_OK[m]) { try { m = viejo(localStorage.getItem('av-modo')); } catch (e) { m = null; } }
     poneModo(MODOS_OK[m] ? m : modoActual());
   })();
+  if (muda) return;
   abreUna = ps.get('abre');
   if (pre) responde(pre, true);
   /* ?p= (las imágenes de la portada, 23-10-2026): la pregunta queda escrita

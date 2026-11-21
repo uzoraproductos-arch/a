@@ -582,3 +582,13 @@ a.pa-ctl { text-decoration: none; }
   .dic-tabla .dic-v { white-space: normal; overflow-wrap: anywhere; }
 }
 @media print { .pa-detalle > summary, .pa-panel > summary { display: none; } .dic-mirada { break-inside: avoid; } }
+/* El Inspector de Servicios (21-11-2026): respuesta en corto y su página completa. */
+.pa-modo-fijo { cursor: default; }
+.pa-corto p:last-child { margin-bottom: .25rem; }
+.pa-pagina { --pa: #3b424d; --pa-osc: #252b33; --pa-claro: #f3f5f8; max-width: 860px; margin: 0 auto; }
+.pa-pag-q { font-size: 1.35rem; margin: .5rem 0 1rem; }
+.pa-pag-sec { margin: 1.75rem 0 0; padding-top: 1.25rem; border-top: 1px solid var(--borde, #d9dee5); }
+.pa-pag-sec h3, .pa-pag-dic h3 { font-size: 1.15rem; margin: 0 0 .75rem; }
+.pa-pag-dic { margin: 2rem 0 0; padding: 1.25rem; border-radius: 14px; border: 2px solid var(--marca, #1f5fa8); background: var(--fondo-sec, #f3f7fc); }
+:root[data-theme="dark"] .pa-pag-dic { background: rgba(255,255,255,.04); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pa-pag-dic { background: rgba(255,255,255,.04); } }

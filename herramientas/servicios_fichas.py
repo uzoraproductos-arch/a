@@ -33,6 +33,8 @@ import re
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAGINA = 'servicio-%s.html'
 CHAT = 'herramienta-inspector-pregunta.html'
+# El chat del modo Inspector vive en Servicios desde el 21-11-2026 (asistente.SV_CHAT).
+SV_CHAT = 'servicios-inspector.html'
 
 FICHAS = {
     'diligencia': {
@@ -380,7 +382,8 @@ def revisar(servicios, base):
 
 def chat_liga(q, modo):
     from urllib.parse import quote
-    return '%s?q=%s&amp;modo=%s' % (CHAT, quote(q), modo)
+    # Desde Servicios, toda pregunta va al Inspector de Servicios (21-11-2026): mismos datos.
+    return '%s?q=%s' % (SV_CHAT, quote(q))
 
 
 # Todo pasa por el Auditor (decisión del autor, 19-11-2026: «entre pestañas no se
@@ -415,9 +418,12 @@ def pestana_de(archivo):
     return 'Comunidad'
 
 
-def por_auditor(liga, q, modo=None):
-    """La liga que pasa por el chat: la pregunta, el modo y la página que debe abrir."""
+def por_auditor(liga, q, modo=None, origen=None):
+    """La liga que pasa por el chat: la pregunta, el modo y la página que debe abrir.
+    Desde Servicios pasa por su propio chat, el del modo Inspector (21-11-2026)."""
     from urllib.parse import quote
+    if origen == 'Servicios':
+        return '%s?q=%s&amp;abre=%s' % (SV_CHAT, quote(q), quote(html.unescape(liga), safe='/-_.'))
     return '%s?q=%s%s&amp;abre=%s' % (CHAT, quote(q), '&amp;modo=%s' % modo if modo else '', quote(html.unescape(liga), safe='/-_.'))
 
 
@@ -446,7 +452,7 @@ def por_auditor_html(texto, origen='Servicios', modo=None, modo_de=None):
         q = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', b.group(1) if b else dentro))).strip(' ➔→›»')
         if len(q) < 4 or _GENERICO.match(q) or len(q) > 140:
             q = _titulo(liga) or q[:140]
-        return '<a%shref="%s"%s>%s</a>' % (antes, por_auditor(liga, q, modo or (modo_de(liga.split('#')[0].split('?')[0]) if modo_de else None)), despues, dentro)
+        return '<a%shref="%s"%s>%s</a>' % (antes, por_auditor(liga, q, modo or (modo_de(liga.split('#')[0].split('?')[0]) if modo_de else None), origen), despues, dentro)
     return texto[:i] + _A.sub(cambia, texto[i:j]) + texto[j:]
 
 

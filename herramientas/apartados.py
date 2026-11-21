@@ -1402,6 +1402,34 @@ def herramienta_dictamen(bloque):
     }
 
 
+def servicios_chat(bloque, resp=False):
+    """El Inspector de Servicios (21-11-2026, pedido del autor: «separar nuestro auditor y
+    el chat del auditor… crear dos chats, uno reflejo del otro… aquí únicamente va a ser
+    todo el modo Inspector con sus aplicaciones»). Mismo motor y misma base que el chat
+    del Auditor; contesta en corto y la respuesta completa abre en su propia página."""
+    import asistente
+    scripts = ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js']
+    if resp:
+        return {
+            'archivo': asistente.SV_RESPUESTA, 'menu': 'La respuesta completa', 'menu_archivo': 'servicios.html',
+            'padre': ('servicios.html', 'Servicios'), 'icono': '📄', 'titulo': 'La respuesta completa del Inspector',
+            'lema': 'Servicios · el Inspector', 'sin_icono_lema': True,
+            'entrada': ('<b>Todo lo que la plataforma sabe de tu pregunta, en una página.</b> La cifra y sus documentos, el expediente, los mapas y las demás '
+                        'partes de la plataforma, el servicio que toca y, al final, tu dictamen. Se arma de nuevo con la base cada vez que abres el enlace.'),
+            'secciones': [{'id': 'respuesta', 'titulo': 'La respuesta completa', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
+            'estilos': ['asistente.css', 'servicios.css'], 'scripts': scripts,
+        }
+    return {
+        'archivo': asistente.SV_CHAT, 'menu': 'El Inspector', 'menu_archivo': 'servicios.html',
+        'padre': ('servicios.html', 'Servicios'), 'icono': '🔍', 'titulo': 'El Inspector de Servicios',
+        'lema': 'Servicios · el chat del modo Inspector', 'sin_icono_lema': True,
+        'entrada': ('<b>Cuéntale tu caso.</b> Te contesta en corto, con la cifra y su documento; la respuesta completa abre en su propia página '
+                    'y cierra con tu dictamen. Es el mismo Auditor, con la misma base, en su modo más completo.'),
+        'secciones': [{'id': 'chat', 'titulo': 'El Inspector de Servicios', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
+        'estilos': ['asistente.css', 'servicios.css'], 'scripts': scripts,
+    }
+
+
 def poderes_paginas(base):
     """Los Poderes Legislativo y Judicial en la pestaña Datos (pedido del
     autor, 23-10-2026: «que esa pestaña este replicada en Datos, asi como la
@@ -2704,31 +2732,47 @@ def sv_novedades_lista(sid, sf):
         for i, t, tx, lg, _k in sf.nuevos(sid))
 
 
-def sv_novedades_por_familia(sf):
-    """Lo nuevo de la plataforma por familia (pestañas) y, dentro, por servicio:
-    cada tarjeta es un servicio con lo que le llegó. Nunca un monto."""
+def sv_servicios_y_nuevo(sf, puertas):
+    """«¿Qué necesitas?» y «Lo nuevo» en una sola sección (pedido del autor, 21-11-2026:
+    «quiero que ambas partes se fusionen»): una pestaña por familia y, dentro, cada
+    servicio con su forma de cobro y lo que le llegó de nuevo. Nunca un monto."""
+    corto = dict(zip([l[0] for l in LINEAS], ['Fraude y lavado', 'Temporada electoral', 'Formación', 'Instituciones e investigación', 'Simuladores']))
     paneles, barra = [], []
-    for lid, ico, tit, tx in LINEAS:
-        servs = [s for s in SERVICIOS if s[6] == lid and sf.nuevos(s[0])]
-        if not servs:
-            continue
+    for fid, frase in puertas:
+        lid, ico, tit, tx = next(l for l in LINEAS if l[0] == fid)
+        servs = [x for x in SERVICIOS if x[6] == lid]
         barra.append((lid, ico))
+        tarjetas = []
+        for x in servs:
+            nv = sf.nuevos(x[0])
+            tarjetas.append('              ' + sv_card(
+                x[2], '%s%s' % (COBRO[x[0]], (' · %d %s' % (len(nv), 'novedad' if len(nv) == 1 else 'novedades')) if nv else ''),
+                x[1], 'Nuevo' if nv else '', sf.PAGINA % x[0],
+                (('Ver el servicio', sf.PAGINA % x[0] + ('#nuevo' if nv else ''), True),
+                 ('🔍 Pregúntale', sf.chat_liga(sv_pregunta(x[0])[0], 'inspector'), False),
+                 ('📝 Cotiza', 'servicios-cotiza.html?servicio=%s#solicitud' % x[0], False)),
+                SV_TONO[lid], id_='sv-nuevo-%s' % x[0], pie=sv_novedades_lista(x[0], sf) if nv else ''))
         paneles.append(
             '          <div class="sv-linea" id="nuevo-%s" data-sv-panel="%s">\n'
             '            <p class="sv-linea-tit"><span aria-hidden="true">%s</span> %s</p>\n'
+            '            <p class="sv-fam-tx">%s</p>\n'
             '            <div class="sv-cards">\n%s\n            </div>\n'
-            '          </div>' % (lid, lid, ico, tit, '\n'.join(
-                '              ' + sv_card(s[2], '%d %s' % (len(sf.nuevos(s[0])), 'novedad' if len(sf.nuevos(s[0])) == 1 else 'novedades'),
-                                         s[1], 'Nuevo', sf.PAGINA % s[0] + '#nuevo',
-                                         (('Ver el servicio', sf.PAGINA % s[0] + '#nuevo', True),
-                                          ('Pide una cotización', 'servicios-cotiza.html?servicio=%s#solicitud' % s[0], False)),
-                                         SV_TONO[lid], pie=sv_novedades_lista(s[0], sf))
-                for s in servs)))
-    corto = dict(zip([l[0] for l in LINEAS], ['Fraude y lavado', 'Temporada electoral', 'Formación', 'Instituciones e investigación', 'Simuladores']))
-    return ('<div class="sv-tabs" data-sv-tabs>\n          <div class="sv-tabs-barra" role="group" aria-label="Novedades por familia">%s</div>\n'
+            '            <p class="sv-nota"><a href="%s#fam-%s">Compara los servicios de %s ➔</a></p>\n'
+            '          </div>' % (lid, lid, ico, frase, tx, '\n'.join(tarjetas), SV_CATALOGO, lid, tit[0].lower() + tit[1:]))
+    return ('<div class="sv-tabs" data-sv-tabs>\n          <div class="sv-tabs-barra" role="group" aria-label="Servicios por familia">%s</div>\n'
             '          <div class="sv-lineas">\n%s\n          </div>\n        </div>') % (''.join(
                 '<button type="button" class="sv-tab" data-sv-tab="%s" aria-pressed="%s"><span aria-hidden="true">%s</span> %s</button>' % (
                     k, 'true' if n == 0 else 'false', i, corto[k]) for n, (k, i) in enumerate(barra)), '\n'.join(paneles))
+
+
+def sv_operacion():
+    """Cómo opera cada parte de los Servicios (pedido del autor, 21-11-2026): las tarjetas
+    que iban al pie de servicios.html (fraude y lavado, el catálogo, tu perfil, empieza
+    gratis, cómo se cobra, el calendario, las preguntas y la cotización) se integran a
+    «Cómo funciona». Cada una sigue siendo su página (SV_PAGINAS)."""
+    return ('<p class="sv-op-tit"><b>La operación de los servicios</b> <span>Cada parte, en su página.</span></p>\n'
+            '        <div class="sv-cards sv-cards-op">\n%s\n        </div>') % '\n'.join(
+        '          ' + sv_card(corto, frase, ico, '', archivo) for _sid, archivo, ico, corto, _tit, frase in SV_PAGINAS)
 
 
 def sv_pregunta(sid):
@@ -2742,7 +2786,7 @@ def sv_pregunta(sid):
 
 def sv_dictamen(q, modo):
     from urllib.parse import quote
-    return '%s?q=%s&amp;modo=%s' % (DICTAMEN, quote(q), modo)
+    return '%s?q=%s&amp;modo=inspector' % (DICTAMEN, quote(q))  # el dictamen del Inspector de Servicios (21-11-2026)
 
 
 def sv_acciones(sid, ver=True):
@@ -3273,35 +3317,25 @@ def servicios():
     # y el tablero), lo que arriesgas si no revisas, la base al día, por qué es seguro,
     # cuánto cuesta y las preguntas. El catálogo completo sigue en su página.
     pasos3 = [
-        ('🔍', 'Cuéntale tu caso al Inspector', 'Es el modo más completo del Auditor: investiga con toda la base y con las aplicaciones de los cuatro modos. '
-         'Te contesta en corto, con la cifra, su documento y su etiqueta.'),
-        ('🧾', 'Recibe tu dictamen', 'Cada respuesta con datos trae su Dictamen cívico independiente, con folio, huella y fuentes. No es un documento oficial ni un peritaje.'),
+        ('🔍', 'Cuéntale tu caso al Inspector', 'Es el chat de Servicios, con todas las aplicaciones del modo Inspector y toda la base. '
+         'Te contesta en corto, aquí mismo; la respuesta completa abre en su propia página.'),
+        ('🧾', 'Recibe tu dictamen', 'La página de la respuesta cierra con tu Dictamen cívico independiente, con folio, huella y fuentes. No es un documento oficial ni un peritaje.'),
         ('📝', 'Cotiza si quieres ir más a fondo', 'El chat te dice qué servicio le toca a tu caso. Tu misma pregunta pasa a la cotización, y el costo y el plazo te llegan por escrito antes de empezar.'),
     ]
     como3 = '\n'.join([
         '<ol class="sv-p3">%s</ol>' % ''.join(
             '<li><span class="sv-p3-n" aria-hidden="true">%d</span><span class="sv-p3-ico" aria-hidden="true">%s</span><b>%s</b><span>%s</span></li>'
             % (n, ico, t, tx) for n, (ico, t, tx) in enumerate(pasos3, 1)),
-        '        <form class="sv-preg" id="inspector" action="herramienta-inspector-pregunta.html" method="get" role="search" aria-label="Cuéntale tu caso al Inspector">',
+        '        <form class="sv-preg" id="inspector" action="%s" method="get" role="search" aria-label="Cuéntale tu caso al Inspector">' % sf.SV_CHAT,
         '          <label for="svPreg">Cuéntale tu caso al Inspector</label>',
-        '          <input type="hidden" name="modo" value="inspector">',
         '          <div class="sv-preg-fila"><input id="svPreg" name="q" type="text" maxlength="300" required '
         'placeholder="Ej.: ¿Cómo reviso a un proveedor antes de contratarlo?">'
         '<button type="submit" class="sz-btn sz-btn-of">Preguntar</button></div>',
         '          <p class="sv-preg-ej"><span>O empieza por un servicio:</span>%s</p>' % ''.join(
             '<a class="sv-op" href="%s"><span aria-hidden="true">%s</span> %s</a>' % (sf.chat_liga(sv_pregunta(x[0])[0], 'inspector'), x[1], x[2])
             for x in SERVICIOS[:4]),
-        '        </form>'])
-    fams = '<div class="sv-fams">\n%s\n        </div>' % '\n'.join(
-        '          <section class="sv-fam sv-hub-%s" aria-labelledby="svf-%s">\n'
-        '            <p class="sv-fam-cab"><span class="sv-card-ico" aria-hidden="true">%s</span><b id="svf-%s">%s</b></p>\n'
-        '            <p class="sv-fam-tx">%s</p>\n'
-        '            <ul class="sv-fam-lista">%s</ul>\n'
-        '            <a class="sv-fam-ir" href="%s#fam-%s">Compáralos ➔</a>\n'
-        '          </section>' % (SV_TONO[fid], fid, l[1], fid, tx, l[3], ''.join(
-            '<li><a href="servicio-%s.html"><span aria-hidden="true">%s</span> %s</a><small>%s</small></li>' % (x[0], x[1], x[2], COBRO[x[0]])
-            for x in SERVICIOS if x[6] == fid), SV_CATALOGO, fid)
-        for fid, tx in puertas for l in LINEAS if l[0] == fid)
+        '        </form>',
+        '        ' + sv_operacion()])
     from insp_conservacion import LEYES as LEYES_CONS
     leyes_sv = dict(LEYES_CONS, cpf=SV_CPF)
     for c in SV_CONSECUENCIAS:
@@ -3354,7 +3388,7 @@ def servicios():
     # familia (pedido del autor, 21-11-2026: «cada una de esas novedades… a los
     # servicios que ofrecemos… dividido en las secciones que correspondan»).
     import servicios_fichas as sf
-    nuevo = sv_novedades_por_familia(sf)
+    necesitas = '<span id="nuevo"></span>' + sv_servicios_y_nuevo(sf, puertas)
     # Las ligas viejas a una sección que se mudó, y las que traen el tema o el
     # servicio (?tema=, ?servicio=, ?plan=), se mandan a su página.
     redir = ('<script>(function () { var m = %s, h = decodeURIComponent(location.hash.slice(1)), q = location.search, '
@@ -3374,24 +3408,22 @@ def servicios():
         'sin_saltos': True, 'redirige': redir,
         # La imagen del autor va de fondo de esta cabecera (pedido del autor, 21-11-2026).
         'cab_extra': 'sv-cab-foto',
-        'scripts': ['servicios.js'],  # las pestañas de «Lo nuevo» por familia
+        'scripts': ['servicios.js'],  # las pestañas de los servicios por familia
         'antes': aviso,
         'secciones': [
             bloque_sec('propuesta', 'Lo que te ofrecemos', '', sv_liga(portada, 'servicios.html'), sin_cab=True),
             bloque_sec('al-dia', 'La base, al día', 'Lo que ya puedes revisar hoy, gratis, y de cuándo es cada fuente.', aldia, pre='Nuestra base de datos'),
             bloque_sec('como', 'Cómo funciona', 'Tres pasos. Todo empieza con una pregunta en tus palabras.', como3, pre='Del chat al servicio'),
-            bloque_sec('necesitas', '¿Qué necesitas?',
-                       '%s servicios en cinco familias. Toca uno para ver qué recibes y cómo se cobra.' % numero(len(SERVICIOS)), fams, pre='Los servicios'),
+            bloque_sec('necesitas', '¿Qué necesitas? Los servicios y lo nuevo en cada uno',
+                       '%s servicios en cinco familias. Cada uno dice cómo se cobra y lo que le llegó en noviembre de 2026: lo usas gratis hoy, '
+                       'y el servicio lo lleva más lejos por encargo.' % numero(len(SERVICIOS)), '%s\n        %s' % (necesitas, mas_porque), pre='Los servicios'),
             bloque_sec('arriesgas', 'Lo que arriesgas si no revisas',
                        'Lo que dice la ley cuando un proveedor o un cliente no es lo que parece. Toca el artículo para leer su texto.', arriesga, pre='Por qué revisar'),
             bloque_sec('seguro', '¿Es seguro?', 'Cuatro cosas que puedes comprobar antes de contratar.', seguro, pre='Confianza'),
             bloque_sec('cuesta', '¿Cuánto cuesta?', 'Sabes cómo se cobra antes de escribirnos.', precio, pre='Precio'),
             bloque_sec('preguntas-f', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.', faq),
-            bloque_sec('nuevo', 'Lo nuevo, en cada servicio',
-                       'Lo que llegó en noviembre de 2026, ordenado por familia y por el servicio que lo aprovecha: lo usas gratis hoy, y el servicio lo lleva más lejos por encargo.',
-                       '%s\n        %s' % (nuevo, mas_porque), pre='Novedades'),
         ],
-        'pie_extra': partes_nav('Servicios', 'servicios.html', '🔎', partes, 'servicios.html'),
+        # Las tarjetas del pie viven en «Cómo funciona» (sv_operacion(), 21-11-2026).
     })
     # «Por qué Auditavisión»: los argumentos y la rendición de cuentas que
     # antes alargaban la página de venta (11-11-2026). Nada se borró.
@@ -3493,9 +3525,9 @@ def servicio_paginas(comun):
             '          <li><b>%s</b><span>%s</span><a href="servicios-cotiza.html?servicio=%s&amp;tema=%s&amp;pregunta=%s#solicitud">Úsalo en tu cotización ➔</a></li>'
             % (html.escape(t), html.escape(q), sid, quote(t), quote(q)) for t, q in SV_EJEMPLOS[sid])
         auditor = ('<ul class="sv-fx-chat">\n%s\n        </ul>\n'
-                   '        <p class="sv-nota">El Auditor contesta con la misma base de la plataforma: cada cifra con su documento y su etiqueta. '
-                   'Si la pregunta le toca a otro modo, te lo dice y te ofrece pasar.</p>') % '\n'.join(
-            '          <li><a href="%s"><span class="sv-fx-modo">%s</span><b>%s</b></a></li>' % (sf.chat_liga(q, m), modos[m], html.escape(q))
+                   '        <p class="sv-nota">El Inspector de Servicios contesta en corto con la misma base de la plataforma, y la respuesta completa abre en su página, '
+                   'con cada cifra, su documento y tu dictamen.</p>') % '\n'.join(
+            '          <li><a href="%s"><span class="sv-fx-modo">%s</span><b>%s</b></a></li>' % (sf.chat_liga(q, m), modos['inspector'], html.escape(q))
             for q, m in f['auditor'])
         biblio = '\n'.join([
             '<div class="sv-fx-bib">',
@@ -7593,6 +7625,10 @@ def generar(sello=None):
     open(os.path.join(RAIZ, asistente.ARCHIVO), 'wb').write(texto.encode('utf-8'))
     texto = pagina(herramienta_dictamen(asistente.dictamen_pagina()), sello).replace('\r\n', '\n').replace('\n', '\r\n')
     open(os.path.join(RAIZ, asistente.DICTAMEN), 'wb').write(texto.encode('utf-8'))
+    for arch, pag in ((asistente.SV_CHAT, servicios_chat(asistente.pagina(cuenta, CANAL_COMUNIDAD, solo='inspector'))),
+                      (asistente.SV_RESPUESTA, servicios_chat(asistente.respuesta_pagina(), resp=True))):
+        texto = pagina(pag, sello).replace('\r\n', '\n').replace('\n', '\r\n')
+        open(os.path.join(RAIZ, arch), 'wb').write(texto.encode('utf-8'))
     print('asistente: %s con %d fichas %s' % (asistente.ARCHIVO, sum(cuenta.values()), cuenta))
     # La entrada de la versión de prueba (códigos de acceso), con su molde propio.
     import acceso
