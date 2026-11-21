@@ -476,6 +476,7 @@
     }
     var x = { vf: vf, tipo: $('cpTipo').value, ben: $('cpBen').value, pago: $('cpPago').value };
     var r = calcula(D, m, x);
+    var U = { m: m, x: x, r: r, d: null, y: null, c: null, benTx: x.ben ? opTxt('cpBen') : 'Ninguno', pagoTx: opTxt('cpPago') };
     var h = '<p class="ci-cifra">Tu predial en ' + esc(m.nombre) + ': <b>' + pesos(r.fin) + ' al año</b></p>' +
       '<p>' + (r.pr ? 'En una sola exhibición.' : 'Son ' + pesos(r2(r.conBen / 6)) + ' cada bimestre, que se pagan en los primeros quince días del primer mes de cada bimestre (enero, marzo, mayo, julio, septiembre y noviembre).') +
       (r.fin < r.anual ? ' Sin descuentos serían ' + pesos(r.anual) + '.' : '') + '</p>';
@@ -494,6 +495,7 @@
       else if (y.ha * 6 + y.hb < y.da * 6 + y.db) d = { error: 'El bimestre «hasta» no puede ser antes del bimestre «desde».' };
       else d = adeudo(D, m, y);
       $('cpDeudaCaja').hidden = false;
+      if (!d.error) { U.d = d; U.y = y; U.y.fs = $('cpF').value; }
       if (d.error) {
         $('cpDeudaPasos').innerHTML = '<tr><td colspan="3" class="ci-error">' + esc(d.error) + '</td></tr>';
       } else {
@@ -507,6 +509,7 @@
     var cobro = num('cpCobro'), cx = $('cpContraste');
     if (cobro > 0) {
       var c = contrasta(m, x, r, { cobro: cobro, per: $('cpPer').value }), per = c.per === 'anual' ? 'al año' : 'por bimestre';
+      U.c = c; c.cobro = cobro;
       var t = '<h3 class="ci-tit">⚖️ Tu recibo contra la ley</h3><p>Te cobran <b>' + pesos(cobro) + ' ' + per + '</b>; con tu valor fiscal, la Ley de Ingresos de ' + esc(m.nombre) + ' da <b>' + pesos(c.ley) + '</b> <span class="est-chip est-derivado">auditada</span>.</p>';
       if (c.cuadra) t += '<p class="cp-ok">✓ Coinciden: la diferencia es de ' + pesos(c.dif) + '.</p>';
       else {
@@ -521,6 +524,144 @@
       cx.hidden = true;
     }
     $('cpNota').textContent = avisos.concat(['Es una cuenta aproximada (auditada, no oficial). Tu adeudo oficial te lo da la tesorería de ' + m.nombre + '.']).join(' ');
+    U.avisos = avisos;
+    informe(U);
+  }
+
+  /* El informe de tu predial (21-11-2026): lo mismo que está en pantalla, en un documento para imprimir,
+     guardar en PDF o descargar en texto, con folio y huella SHA-256 de tus datos y sus cifras (la fecha no
+     entra: los mismos datos dan siempre el mismo folio). Un solo modelo (docInforme) se pinta en HTML y en
+     texto. No agrega cifras, no es un documento oficial y nada sale del navegador. */
+  var ULT = null, TIPOS = { edif: 'Construido (casa, departamento, local)', rust: 'Rústico (fuera de la zona urbana)', baldio: 'Baldío en zona urbana' };
+  function opTxt(id) { var s = $(id), o = s.options[s.selectedIndex]; return o ? o.textContent : ''; }
+  function ligaDe(U) {
+    var p = new URLSearchParams();
+    p.set('mun', U.m.id); p.set('vf', String(U.x.vf)); p.set('tipo', U.x.tipo);
+    if (U.x.ben) p.set('ben', U.x.ben);
+    if (U.x.pago && U.x.pago !== 'bim') p.set('pago', U.x.pago);
+    if (U.c) { p.set('cobro', String(U.c.cobro)); p.set('per', U.c.per); }
+    if (U.y) { ['imp', 'da', 'db', 'ha', 'hb', 'sit', 'multa'].forEach(function (k) { p.set(k, String(U.y[k])); }); p.set('f', U.y.fs); }
+    return location.origin + location.pathname + '?' + p.toString();
+  }
+  function docInforme(U) {
+    var m = U.m, x = U.x, r = U.r, S = D.shf, E = S.est[m.ent], mi = S.mun[m.id], sec = [];
+    sec.push({ t: 'Tu predio', dl: [['Municipio', m.nombre + ', ' + D.ent[m.ent]], ['Ley con que se cobra', m.ley],
+      ['Valor fiscal', pesos(x.vf) + ' (lo escribiste tú; el oficial es el que registra el catastro)'], ['Tipo de predio', TIPOS[x.tipo]],
+      ['Descuento', U.benTx + (x.ben && !r.ben ? ' (no aplica con tu valor fiscal)' : '')], ['Forma de pago', U.pagoTx]] });
+    sec.push({ t: 'Tu predial de ' + D.anio, est: 'derivado',
+      p: ['Pagas ' + pesos(r.fin) + ' al año' + (r.pr ? ', en una sola exhibición.' : ', en seis bimestres de ' + pesos(r2(r.conBen / 6)) + '.') + (r.fin < r.anual ? ' Sin descuentos serían ' + pesos(r.anual) + '.' : '')],
+      tab: { cab: ['Paso', 'Pesos', 'Regla'], filas: r.pasos } });
+    if (U.c) {
+      var c = U.c, cp = { t: 'Tu recibo contra la ley', est: 'derivado',
+        p: ['Te cobran ' + pesos(c.cobro) + (c.per === 'anual' ? ' al año' : ' por bimestre') + '; con tu valor fiscal, la ley da ' + pesos(c.ley) + '.'] };
+      if (c.cuadra) cp.p.push('Coinciden: la diferencia es de ' + pesos(c.dif) + '.');
+      else {
+        cp.p.push('La diferencia es de ' + pesos(c.dif) + ' (' + (c.pct > 0 ? '+' : '') + c.pct + ' %). Es una señal para pedir el desglose por escrito, no quiere decir que te cobren mal.');
+        if (c.sinBen) cp.p.push('Lo que te cobran es justo el impuesto sin el descuento que escogiste: quizá no está aplicado en tu cuenta.');
+        if (c.vfImplicito) cp.p.push('Con lo que te cobran, la tabla de ' + m.nombre + ' corresponde a un valor fiscal de unos ' + pesos(Math.round(c.vfImplicito)).replace(/\.00$/, '') + ': compáralo con el de tu recibo.');
+        cp.li = c.causas; cp.liTit = 'Causas comunes, para preguntar en la tesorería:';
+      }
+      sec.push(cp);
+    }
+    if (U.d) sec.push({ t: 'Si te pones al corriente', est: 'derivado',
+      p: ['Por ' + U.d.n + ' bimestre' + (U.d.n > 1 ? 's' : '') + ', pagando el ' + U.y.fs.split('-').reverse().join('-') + ': ' + pesos(U.d.total) + '.'],
+      tab: { cab: ['Concepto', 'Pesos', 'Regla'], filas: U.d.pasos } });
+    if (E) {
+      var P = E.precios, mp = { t: 'Junto al mercado de la vivienda', est: 'oficial',
+        p: ['En ' + D.ent[m.ent] + ', las viviendas valuadas en ' + S.anio + ' tuvieron una mediana de ' + mdp(P.p50) + '; una de cada cuatro valió menos de ' + mdp(P.p25) + ' y una de cada cuatro, más de ' + mdp(P.p75) + ' (Índice SHF, ' + S.corte + ').'] };
+      if (x.tipo === 'edif') mp.p.push('Tu valor fiscal queda ' + ['abajo del 25 %', 'entre el 25 % y la mediana', 'entre la mediana y el 75 %', 'arriba del 75 %'][cuartil(P, x.vf)] + ' de esos precios (cuenta nuestra, auditada). Tu valor fiscal y un precio de avalúo no son la misma medida: no es un avalúo, no es el valor de tu predio y una diferencia no es un error del catastro.');
+      else mp.p.push('El índice mide vivienda: para un terreno ' + (x.tipo === 'rust' ? 'rústico' : 'baldío') + ' no hay comparación justa.');
+      mp.p.push((mi ? 'El índice de ' + m.nombre + ' subió ' + mi['var'] : 'El índice de ' + D.ent[m.ent] + ' subió ' + E['var']) + ' % en un año. Eso no sube tu predial: lo cambian las tablas de valores y la Ley de Ingresos que aprueba el Congreso.');
+      sec.push(mp);
+    }
+    if (U.avisos.length) sec.push({ t: 'Avisos de la cuenta', li: U.avisos });
+    var fu = [{ tx: m.ley + ' (' + m.art_tarifa + ' y los artículos de cada paso)', url: m.url, sha: m.sha256 },
+      { tx: D.lhm.tx + ', arts. 44 bis, 52 y 103', url: D.lhm.url, sha: D.lhm.sha256 }];
+    if (E) fu.push({ tx: S.fuente + ', ' + S.corte, url: S.inf.url, sha: S.inf.sha256 });
+    sec.push({ t: 'Fuentes', fu: fu });
+    sec.push({ t: 'Lo que este informe no es', p: ['No es un documento oficial, ni tu estado de cuenta, ni un avalúo, ni una resolución: es la cuenta de la ley con los datos que escribiste, hecha en tu navegador. Tu adeudo oficial te lo da la tesorería de ' + m.nombre + ', y cambia cada mes.',
+      'Las tarifas son las de ' + D.anio + ' y los años anteriores tuvieron las suyas; no incluye derechos de agua o basura, convenios, condonaciones ni los gastos extraordinarios de un embargo.'] });
+    return { municipio: m.nombre + ', ' + D.ent[m.ent], emitido: new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }), sec: sec, liga: ligaDe(U) };
+  }
+  var CHIP = { oficial: '<span class="est-chip est-oficial">oficial</span>', derivado: '<span class="est-chip est-derivado">auditada</span>' };
+  function infHtml(I) {
+    var h = '<header class="cp-inf-cab"><p class="cp-inf-marca">Auditavisión · Calculadora Cívica</p><h3 class="cp-inf-tit">Informe de tu predial</h3>' +
+      '<dl class="cp-inf-meta"><div><dt>Folio</dt><dd class="cp-inf-folio">calculando…</dd></div><div><dt>Emitido</dt><dd>' + esc(I.emitido) + '</dd></div><div><dt>Municipio</dt><dd>' + esc(I.municipio) + '</dd></div></dl></header>';
+    I.sec.forEach(function (s, i) {
+      h += '<section class="cp-inf-sec"><h4>' + (i + 1) + '. ' + esc(s.t) + (s.est ? ' ' + CHIP[s.est] : '') + '</h4>';
+      if (s.dl) h += '<dl class="cp-inf-dl">' + s.dl.map(function (d) { return '<div><dt>' + esc(d[0]) + '</dt><dd>' + esc(d[1]) + '</dd></div>'; }).join('') + '</dl>';
+      (s.p || []).forEach(function (t) { h += '<p>' + esc(t) + '</p>'; });
+      if (s.tab) h += '<table class="cp-inf-tabla"><thead><tr>' + s.tab.cab.map(function (c) { return '<th scope="col">' + esc(c) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+        s.tab.filas.map(function (f) { return '<tr' + (f[3] === 'b' ? ' class="ci-fuerte"' : '') + '><th scope="row">' + esc(f[0]) + '</th><td>' + (f[1] == null ? '' : pesos(f[1])) + '</td><td>' + esc(f[2]) + '</td></tr>'; }).join('') + '</tbody></table>';
+      if (s.li) h += (s.liTit ? '<p>' + esc(s.liTit) + '</p>' : '') + '<ul>' + s.li.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
+      if (s.fu) h += '<ul>' + s.fu.map(function (f) { return '<li><a href="' + esc(f.url) + '">' + esc(f.tx) + '</a><br><span class="cp-inf-sha">SHA-256 ' + esc(f.sha) + '</span></li>'; }).join('') + '</ul>';
+      h += '</section>';
+    });
+    return h + '<footer class="cp-inf-pie"><p>Huella digital (SHA-256 de tus datos y de estas cifras): <code class="cp-inf-huella">calculando…</code></p>' +
+      '<p>Para repetir la cuenta: <a class="cp-inf-liga" href="' + esc(I.liga) + '">abre esta liga</a>. Lleva tus cifras: compártela solo si quieres.</p></footer>';
+  }
+  function infTexto(I, folio, huella) {
+    var L = ['INFORME DE TU PREDIAL · Auditavisión, Calculadora Cívica', 'Folio: ' + (folio || 'no disponible') + ' · Emitido: ' + I.emitido, 'Municipio: ' + I.municipio, ''];
+    I.sec.forEach(function (s, i) {
+      L.push((i + 1) + '. ' + s.t.toUpperCase() + (s.est ? ' [' + (s.est === 'oficial' ? 'oficial' : 'auditada') + ']' : ''));
+      (s.dl || []).forEach(function (d) { L.push('   ' + d[0] + ': ' + d[1]); });
+      (s.p || []).forEach(function (t) { L.push('   ' + t); });
+      if (s.tab) s.tab.filas.forEach(function (f) { L.push('   - ' + f[0] + (f[1] == null ? '' : ': ' + pesos(f[1])) + ' (' + f[2] + ')'); });
+      if (s.liTit) L.push('   ' + s.liTit);
+      (s.li || []).forEach(function (t) { L.push('   - ' + t); });
+      (s.fu || []).forEach(function (f) { L.push('   - ' + f.tx + ': ' + f.url + ' (SHA-256 ' + f.sha + ')'); });
+      L.push('');
+    });
+    L.push('Huella digital (SHA-256 de tus datos y de estas cifras): ' + (huella || 'no disponible'));
+    L.push('Para repetir la cuenta: ' + I.liga);
+    return L.join('\r\n') + '\r\n';
+  }
+  function huellaDe(U) {
+    var obj = { ley: U.m.sha256, mun: U.m.id, x: U.x, pasos: U.r.pasos, fin: U.r.fin, cobro: U.c ? [U.c.cobro, U.c.per, U.c.ley] : null,
+      deuda: U.d ? { y: U.y, pasos: U.d.pasos, total: U.d.total } : null };
+    try {
+      return crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(obj))).then(function (b) {
+        return Array.prototype.map.call(new Uint8Array(b), function (v) { return ('0' + v.toString(16)).slice(-2); }).join('');
+      }).catch(function () { return null; });
+    } catch (e) { return Promise.resolve(null); }
+  }
+  function informe(U) {
+    var I = docInforme(U), caja = $('cpInforme');
+    ULT = { U: U, I: I, folio: null, huella: null };
+    caja.innerHTML = infHtml(I);
+    $('cpInfAcc').hidden = false; $('cpInfMsg').textContent = '';
+    var yo = ULT;
+    huellaDe(U).then(function (h) {
+      if (ULT !== yo) return;
+      yo.huella = h; yo.folio = h ? 'AV-PR-' + h.slice(0, 8).toUpperCase() : null;
+      caja.querySelector('.cp-inf-folio').textContent = yo.folio || 'no disponible en este navegador';
+      caja.querySelector('.cp-inf-huella').textContent = h || 'este navegador no calcula huellas SHA-256';
+    });
+  }
+  function imprime() {
+    if (!ULT) return;
+    var raiz = document.createElement('div'), ver = $('cpInfVer');
+    raiz.id = 'cpPrintRaiz'; raiz.className = 'cp-informe'; raiz.innerHTML = $('cpInforme').innerHTML;
+    document.body.appendChild(raiz); document.body.classList.add('cp-print');
+    var fin = function () { document.body.classList.remove('cp-print'); if (raiz.parentNode) raiz.parentNode.removeChild(raiz); window.removeEventListener('afterprint', fin); };
+    window.addEventListener('afterprint', fin);
+    window.print();
+    setTimeout(fin, 1000);
+    if (ver) ver.open = true;
+  }
+  function descarga() {
+    if (!ULT) return;
+    var b = new Blob([infTexto(ULT.I, ULT.folio, ULT.huella)], { type: 'text/plain;charset=utf-8' }), a = document.createElement('a');
+    a.href = URL.createObjectURL(b); a.download = 'informe-predial-' + ULT.U.m.id + (ULT.folio ? '-' + ULT.folio : '') + '.txt';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+    $('cpInfMsg').textContent = 'Listo: se descargó tu informe en texto.';
+  }
+  function copiaLiga() {
+    if (!ULT) return;
+    var l = ULT.I.liga, ok = function () { $('cpInfMsg').textContent = 'Copiamos la liga: al abrirla, la página repite tu cuenta. Lleva tus cifras; compártela solo si quieres.'; };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(l).then(ok, function () { $('cpInfMsg').textContent = l; });
+    else $('cpInfMsg').textContent = l;
   }
 
   /* Lo que llega por la dirección (?mun=zapopan&vf=…), para que el chat abra la cuenta ya puesta. */
@@ -537,13 +678,27 @@
   $('cpF').value = hoy.toISOString().slice(0, 10);
   $('cpDb').value = '1';
   $('cpHb').value = String(Math.max(1, Math.ceil((hoy.getMonth() + 1) / 2)));
+  /* La liga del informe trae además el tipo, el descuento, el pago, el recibo y el adeudo. */
+  if (q) {
+    var pon = function (id, k) { var v = q.get(k); if (v === null) return; var el = $(id); if (el.tagName === 'SELECT' && ![].some.call(el.options, function (o) { return o.value === v; })) return; el.value = v; };
+    pon('cpTipo', 'tipo'); pon('cpBen', 'ben'); pon('cpPago', 'pago'); pon('cpCobro', 'cobro'); pon('cpPer', 'per');
+    if (q.get('imp')) {
+      $('cpDebe').checked = true; $('cpDeuda').hidden = false;
+      pon('cpImp', 'imp'); pon('cpDa', 'da'); pon('cpDb', 'db'); pon('cpHa', 'ha'); pon('cpHb', 'hb'); pon('cpSit', 'sit'); pon('cpMulta', 'multa');
+      if (/^\d{4}-\d{2}-\d{2}$/.test(q.get('f') || '')) $('cpF').value = q.get('f');
+      $('cpMultaCaja').hidden = $('cpSit').value === 'esp';
+    }
+  }
+  $('cpImprime').addEventListener('click', imprime);
+  $('cpBaja').addEventListener('click', descarga);
+  $('cpLiga').addEventListener('click', copiaLiga);
   $('cpEnt').addEventListener('change', function () { llenaMunicipios(); ficha(); $('cpRes').hidden = true; mercado(); });
   $('cpMun').addEventListener('change', function () { ficha(); $('cpRes').hidden = true; mercado(); });
   $('cpTipo').addEventListener('change', compara);
   $('cpVf').addEventListener('input', compara);
   $('cpDebe').addEventListener('change', function () { $('cpDeuda').hidden = !this.checked; });
   $('cpSit').addEventListener('change', function () { $('cpMultaCaja').hidden = this.value === 'esp'; });
-  $('cpMultaCaja').hidden = true;
+  $('cpMultaCaja').hidden = $('cpSit').value === 'esp';
   $('cpForm').addEventListener('submit', pinta);
   $('cpSueloSel').addEventListener('change', pintaSuelo);
   ['cpTCal', 'cpTEdad', 'cpTEst', 'cpTNiv'].forEach(function (id) { $(id).addEventListener('change', pintaTabla); });
