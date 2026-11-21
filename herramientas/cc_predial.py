@@ -1021,6 +1021,144 @@ TABLAS = {
         'suelo': {'tx': 'el mismo decreto, «Índice de valores por colonias, lotes tipo y código de polígono» (págs. 29 a 38 del archivo)',
                   'url': _POE + 'newspaper/24344/newspaper251215101716.pdf',
                   'nota': 'En Guadalajara el suelo se valúa por colonia y polígono: el valor de la tuya viene en el índice del decreto. Aún no lo integramos (es una copia escaneada): búscalo ahí.'}},
+    'tlajomulco': {
+        'tx': 'Decreto 29968/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Tlajomulco de Zúñiga para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 6 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24405/newspaper251217072240.pdf',
+        'sha256': 'd74b16dff00a56508c75ff088d2e93a1ee84d31c935cbaa01de21d99f4a0f8f1',
+        'escaneo': True,
+        'edades': [['m1', 'Moderno 1: de 0 a 5 años', 5], ['m2', 'Moderno 2: de 6 a 10 años', 10], ['s1', 'Semimoderno 1: de 11 a 20 años', 20],
+                   ['s2', 'Semimoderno 2: de 21 a 30 años', 30], ['a1', 'Antiguo 1: de 31 a 40 años', 40], ['a2', 'Antiguo 2: de 41 o más años', None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ['Lujo', [[17460, 15800, 11670], [16860, 15250, 11270], [15350, 11600, 8750], [14500, 11000, 8060], [11250, 6700, 5000], [11000, 6000, 4300]]],
+                ['Superior', [[13150, 11600, 8950], [12750, 11200, 8550], [11200, 8700, 6650], [10300, 7850, 5930], [8850, 5150, 3800], [8000, 4550, 3500]]],
+                ['Medio', [[9500, 8350, 6150], [9100, 7950, 5750], [8000, 6150, 4400], [7500, 5770, 4250], [5600, 3000, 2100], [5550, 2700, 1900]]],
+                ['Económico', [[6850, 5850, 4450], [6650, 5650, 4250], [5850, 4350, 3250], [5400, 3980, 2950], [3600, 1740, 1260], [3490, 1530, 1090]]]]},
+            'ind': {'et': 'Industrial', 'cal': [
+                ['Especial', [[6800, 6200, 4500], [6480, 5870, 4200], [5100, 3400, 2200], [4800, 3100, 2100], [2900, 1000, 700], [2550, 920, 610]]],
+                ['Superior', [[6100, 5500, 4050], [5790, 5240, 3750], [4500, 3000, 2000], [4200, 2800, 1850], [2550, 900, 600], [2280, 810, 540]]],
+                ['Medio', [[5200, 4740, 3400], [4900, 4450, 3100], [3900, 2500, 1700], [3600, 2400, 1600], [2150, 750, 500], [1920, 700, 450]]],
+                ['Económico', [[4300, 4000, 2800], [4100, 3800, 2700], [3300, 2200, 1450], [3100, 2050, 1350], [1750, 660, 450], [1650, 600, 400]]]]}},
+        'niveles': None,
+        'suelo': {'tx': 'el mismo decreto, índice de fraccionamientos y planos de valores (desde la pág. 18 del archivo)',
+                  'url': _POE + 'newspaper/24405/newspaper251217072240.pdf',
+                  'nota': 'En Tlajomulco el suelo se valúa por fraccionamiento y zona: el valor del tuyo viene en el índice y los planos del decreto. Aún no los integramos: búscalo ahí.'}},
+    'vallarta': {
+        'tx': 'Decreto 29936/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Puerto Vallarta para 2026, Periódico Oficial «El Estado de Jalisco», 18-12-2025, pág. 6 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24480/newspaper251222040914.pdf',
+        'sha256': '26cb5b51e61b6024410d036f08c9119af109ff34d3be61bc62e69b87bb15eb0d',
+        'escaneo': True,
+        'edades': [['m1', 'Moderno 1: de 0 a 5 años', 5], ['m2', 'Moderno 2: de 6 a 10 años', 10], ['s1', 'Semimoderno 1: de 11 a 20 años', 20],
+                   ['s2', 'Semimoderno 2: de 21 a 30 años', 30], ['a1', 'Antiguo 1: de 31 a 40 años', 40], ['a2', 'Antiguo 2: de 41 o más años', None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ['Lujo', [[17990, 16140, 14410], [16860, 15590, 13920], [15580, 12430, 11050], [15050, 12000, 10640], [8500, 7060, 6230], [8210, 7010, 6020]]],
+                ['Superior', [[13580, 12480, 10100], [13110, 12050, 9750], [10400, 9910, 7770], [10040, 9570, 7500], [5420, 4930, 4430], [5230, 4760, 4280]]],
+                ['Medio', [[8640, 7800, 6250], [8340, 7530, 6040], [6660, 5950, 4830], [6430, 5740, 4660], [3940, 3450, 2960], [3810, 3330, 2860]]],
+                ['Económico', [[4960, 4260, 3820], [4790, 4110, 3690], [4260, 3820, 3400], [4110, 3690, 3290], [2460, 2090, 1970], [2380, 2020, 1900]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores unitarios por sectores y planos (desde la pág. 18 del archivo)',
+                  'url': _POE + 'newspaper/24480/newspaper251222040914.pdf',
+                  'nota': 'En Puerto Vallarta el suelo se valúa por sector y zona: el valor del tuyo viene en los planos del decreto. Aún no los integramos: búscalo ahí.'}},
+    'lagos': {
+        'tx': 'Decreto 29925/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Lagos de Moreno para 2026, Periódico Oficial «El Estado de Jalisco», 13-12-2025, pág. 7 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24357/newspaper251215103319.pdf',
+        'sha256': '0eda2dc5528611262d4333ef97961c2202f25714c0a10c24965d6b86bae6e826',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[13304, 12002, 8726], [12260, 11039, 8027], [11718, 9272, 6741], [10117, 7258, 5273], [8789, 5261, 3633], [7821, 4171, 2709]]],
+                ["Superior", [[9272, 8600, 6195], [8552, 7865, 5716], [8379, 6615, 4830], [7204, 5167, 3758], [6269, 3791, 2730], [5629, 3009, 2036]]],
+                ["Medio", [[6542, 5733, 4148], [6052, 5117, 3671], [5733, 3917, 3203], [4923, 3060, 2495], [4001, 2111, 1554], [3544, 1697, 1199]]],
+                ["Económico", [[4830, 4232, 3066], [4480, 3839, 2786], [4127, 3056, 2195], [3488, 2432, 1746], [2489, 1092, 798], [2122, 824, 656]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24357/newspaper251215103319.pdf', 'nota': 'En Lagos de Moreno el suelo se valúa por zona: el valor de la tuya viene en el decreto. Aún no lo integramos: búscalo ahí.'}},
+    'tepatitlan': {
+        'tx': 'Decreto 29964/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Tepatitlán de Morelos para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 9 del archivo («Valores de construcción 2026»)',
+        'url': _POE + 'newspaper/24397/newspaper251217065431.pdf',
+        'sha256': '6199d43095073e9985ef9577fcc9bf0159d16a377e2db1915ee4500e3a0d08bd',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[13840, 12520, 9170], [13360, 12090, 8860], [12240, 9670, 7050], [11080, 7930, 5780], [8100, 5300, 3840], [7930, 4400, 3000]]],
+                ["Superior", [[10550, 9440, 6970], [10190, 9110, 6720], [9200, 7450, 5320], [8330, 6110, 4360], [5610, 3990, 2960], [5500, 3310, 2310]]],
+                ["Medio", [[7660, 6530, 4880], [7400, 6100, 4540], [6700, 4990, 3620], [6060, 4090, 2960], [4030, 2490, 1810], [3740, 2100, 1470]]],
+                ["Económico", [[5820, 5050, 3670], [5670, 4810, 3480], [4960, 3660, 2640], [4420, 3080, 2220], [2940, 1320, 960], [2630, 1050, 830]]],
+                ["Austero", [[4520, 3840, 2710], [4290, 3650, 2570], [3750, 2460, 1850], [3380, 2220, 1670], [1850, 1020, 750], [1570, 870, 640]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24397/newspaper251217065431.pdf', 'nota': 'En Tepatitlán de Morelos el suelo se valúa por zona: el valor de la tuya viene en el decreto. Aún no lo integramos: búscalo ahí.'}},
+    'ocotlan': {
+        'tx': 'Decreto 29932/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Ocotlán para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 6 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24418/newspaper251217075651.pdf',
+        'sha256': 'a4f4c99818e4308f3a32163efef53e3b0f1451fddfa6c5d83aaaa30f34fbc91a',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[14210, 13060, 9500], [13680, 12570, 9140], [12770, 10120, 7350], [11520, 8270, 6010], [9620, 5740, 4180], [9000, 4750, 3260]]],
+                ["Superior", [[10590, 9740, 7080], [10230, 9400, 6830], [9510, 7540, 5480], [8610, 6180, 4490], [7170, 4280, 3110], [6730, 3550, 2430]]],
+                ["Medio", [[7660, 6710, 4880], [7400, 6270, 4540], [6730, 5190, 3770], [6090, 4250, 3080], [4670, 2490, 1810], [4330, 2100, 1470]]],
+                ["Económico", [[5970, 5180, 3770], [5820, 4930, 3570], [5080, 3760, 2730], [4530, 3160, 2300], [3050, 1350, 980], [2730, 1070, 850]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24418/newspaper251217075651.pdf', 'nota': 'En Ocotlán el suelo se valúa por zona: el valor de la tuya viene en el decreto. Aún no lo integramos: búscalo ahí.'}},
+    'sanjuan': {
+        'tx': 'Decreto 29942/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de San Juan de los Lagos para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 6 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24396/newspaper251217065242.pdf',
+        'sha256': '2b8d8225dce182fb0c1d8ac1ca247ffb6fd14f75a9090b1760845638f7b80218',
+        'escaneo': True,
+        'edades': [["mod", "Moderno: hasta 10 años", 10], ["semi", "Semimoderno: de más de 10 y hasta 30 años", 30], ["ant", "Antiguo: de más de 30 años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[13610, 12390, 9290], [11670, 9170, 6910], [8810, 5240, 3930]]],
+                ["Superior", [[8570, 7900, 5760], [7750, 6150, 4460], [5800, 3470, 2500]]],
+                ["Medio", [[5610, 4900, 3670], [4900, 3800, 2760], [3430, 1840, 1350]]],
+                ["Económico", [[4160, 3670, 2690], [3560, 2640, 1920], [2140, 940, 680]]],
+                ["Austero", [[3430, 2940, 2210], [2940, 2170, 1590], [1780, 800, 560]]]]},
+            'ind': {'et': 'Industrial', 'cal': [
+                ["Especial", [[4400, 4010, 2940], [3320, 2180, 1460], [1870, 660, 460]]],
+                ["Superior", [[3920, 3550, 2630], [2960, 1960, 1310], [1690, 590, 400]]],
+                ["Medio", [[3320, 3040, 2230], [2500, 1660, 1100], [1420, 500, 340]]],
+                ["Económico", [[2850, 2600, 1900], [2150, 1420, 950], [1210, 440, 300]]]]}},
+        'niveles': None,
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24396/newspaper251217065242.pdf', 'nota': 'En San Juan de los Lagos el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'jocotepec': {
+        'tx': 'Decreto 29919/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Jocotepec para 2026, Periódico Oficial «El Estado de Jalisco», 13-12-2025, pág. 6 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24352/newspaper251215102655.pdf',
+        'sha256': '9cb7cdaa531abd358843a382f6321434dd66c8b29f3098eb06e292251e63194c',
+        'escaneo': True,
+        'edades': [["mod", "Moderno: hasta 10 años", 10], ["semi", "Semimoderno: de más de 10 y hasta 30 años", 30], ["ant", "Antiguo: de más de 30 años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[13120, 12060, 8770], [11780, 9340, 6790], [8880, 5300, 3850]]],
+                ["Superior", [[9780, 8990, 6530], [8780, 6960, 5060], [6620, 3950, 2870]]],
+                ["Medio", [[7070, 6190, 4500], [6210, 4790, 3480], [4310, 2300, 1670]]],
+                ["Económico", [[5510, 4790, 3480], [4690, 3470, 2520], [2820, None, 910]]]]}},
+        'niveles': None,
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24352/newspaper251215102655.pdf', 'nota': 'En Jocotepec el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'magdalena': {
+        'tx': 'Decreto 29926/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Magdalena para 2026, Periódico Oficial «El Estado de Jalisco», 13-12-2025, pág. 6 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24358/newspaper251215103417.pdf',
+        'sha256': '5dd311f1b32052df267a53fd448add9eb9332350bba6cb76643a5dda2c862eb2',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[11160, 10250, 7460], [10790, 9920, 7210], [10040, 8220, 5780], [9090, 6730, 4750], [6760, 4500, 2770], [6320, 3750, 2160]]],
+                ["Superior", [[7990, 7340, 5360], [7730, 7100, 5160], [7180, 5790, 4140], [6510, 4710, 3390], [5400, 3260, 2350], [5080, 2720, 1840]]],
+                ["Medio", [[5610, 4730, 3570], [5410, 4420, 3320], [4940, 3790, 2770], [4450, 3110, 2260], [3410, 1830, 1330], [3170, 1530, 1070]]],
+                ["Económico", [[4150, 3600, 2640], [4060, 3430, 2500], [3550, 2610, 1910], [3170, 2210, 1610], [2140, 950, 670], [1900, 750, 590]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24358/newspaper251215103417.pdf', 'nota': 'En Magdalena el suelo se valúa por zona: el valor de la tuya viene en el decreto. Aún no lo integramos: búscalo ahí.'}},
     'tlaquepaque': {
         'tx': 'Decreto 29949/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de San Pedro Tlaquepaque para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 9 del archivo («Valores unitarios de la construcción año 2026»)',
         'url': _POE + 'newspaper/24379/newspaper251217061214.pdf',
@@ -1177,7 +1315,7 @@ def valor_construccion(T, uso, ical, iedad, iest, niveles=False):
     v = T['usos'][uso]['cal'][ical][1][iedad][iest]
     if v is None:
         return None
-    return _r2(v * (1 + T['niveles']['pct'] / 100)) if niveles else v
+    return _r2(v * (1 + T['niveles']['pct'] / 100)) if niveles and T.get('niveles') else v
 
 
 # El registro, estado por estado: dónde publica cada congreso las leyes de ingresos municipales y lo que
@@ -1352,6 +1490,9 @@ def construir(base, ref):
     D = datos(base)
     MES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
     ult = '%s de %d' % (MES[D['inpc_ult'][1] - 1], D['inpc_ult'][0])
+    nom = {m['id']: m['nombre'] for m in MUNICIPIOS}
+    lt = sorted(nom[k] for k in TABLAS)
+    con_tabla = esc(', '.join(lt[:-1]) + ' y ' + lt[-1])
     ents = ''.join('<option value="%s"%s>%s</option>' % (esc(k), ' selected' if k == 'JAL' else '', esc(v))
                    for k, v in sorted(ENTIDADES.items(), key=lambda x: x[1]))
     anios = ''.join('<option value="%d"%s>%d</option>' % (a, ' selected' if a == ANIO else '', a) for a in range(ANIO + 1, 2014, -1))
@@ -1397,7 +1538,7 @@ def construir(base, ref):
       <p class="ci-pista">Es el valor catastral que viene en tu recibo o en tu estado de cuenta predial; lo fija el catastro con las tablas de valores que aprueba el Congreso del Estado.</p>
       <details class="cp-vf" id="cpVfCalc">
         <summary>¿No sabes tu valor fiscal? Ármalo con tu terreno y tu construcción</summary>
-        <p class="ci-pista">El catastro lo arma así: <b>metros de terreno × valor unitario de suelo de tu zona</b>, más <b>metros construidos × valor unitario de tu tipo de construcción</b> (y, si tu tabla lo da, un factor por la edad o el estado de conservación). Los valores unitarios vienen en las <b>Tablas de Valores Unitarios</b> de tu municipio, que aprueba el Congreso del Estado cada año y se publican en el periódico oficial del estado; en Jalisco, en el <a href="https://periodicooficial.jalisco.gob.mx/">Periódico Oficial «El Estado de Jalisco»</a>. Ya integramos los valores de construcción de Zapopan, Guadalajara y Tlaquepaque (elige tu municipio y se ponen solos), y de los demás municipios de Jalisco te damos la liga a su decreto en la ficha del paso 1.</p>
+        <p class="ci-pista">El catastro lo arma así: <b>metros de terreno × valor unitario de suelo de tu zona</b>, más <b>metros construidos × valor unitario de tu tipo de construcción</b> (y, si tu tabla lo da, un factor por la edad o el estado de conservación). Los valores unitarios vienen en las <b>Tablas de Valores Unitarios</b> de tu municipio, que aprueba el Congreso del Estado cada año y se publican en el periódico oficial del estado; en Jalisco, en el <a href="https://periodicooficial.jalisco.gob.mx/">Periódico Oficial «El Estado de Jalisco»</a>. Ya integramos los valores de construcción de {con_tabla} (elige tu municipio y se ponen solos), y de los demás municipios de Jalisco te damos la liga a su decreto en la ficha del paso 1.</p>
         <div class="ci-fila">
           <div><label class="ci-et" for="cpTs">Terreno (m²)</label><input class="ci-in" id="cpTs" inputmode="decimal" autocomplete="off" placeholder="Ej.: 160"></div>
           <div><label class="ci-et" for="cpVs">Valor de suelo ($/m²)</label><input class="ci-in" id="cpVs" inputmode="decimal" autocomplete="off" placeholder="De tu tabla"></div>
@@ -1412,7 +1553,7 @@ def construir(base, ref):
             <div><label class="ci-et" for="cpTEdad">Edad</label><select class="ci-in" id="cpTEdad"></select></div>
             <div><label class="ci-et" for="cpTEst">Estado de conservación</label><select class="ci-in" id="cpTEst"></select></div>
           </div>
-          <label class="ci-check"><input type="checkbox" id="cpTNiv"> El edificio tiene más de 4 niveles</label>
+          <label class="ci-check" id="cpTNivL"><input type="checkbox" id="cpTNiv"> El edificio tiene más de 4 niveles</label>
           <p class="ci-nota" id="cpTablaVal" aria-live="polite"></p>
         </div>
         <div class="ci-fila">
@@ -1520,7 +1661,7 @@ def construir(base, ref):
   </aside>
   <script type="application/json" id="cpDatos">{datos}</script>
 </div>'''.format(
-        anio=ANIO, ents=ents, anios=anios, bims=bims, ult=ult, uma=format(D['uma'], ',.2f'), uma_f=esc(D['uma_f']),
+        con_tabla=con_tabla, anio=ANIO, ents=ents, anios=anios, bims=bims, ult=ult, uma=format(D['uma'], ',.2f'), uma_f=esc(D['uma_f']),
         lista=lista, espera=espera, reg_filas=reg_filas, reg_sin=reg_sin, chip_p=chip('pendiente'), leyes=leyes, lhm_url=esc(LHM['url']), lhm_tx=esc(LHM['tx']), lhm_sha=LHM['sha256'][:12],
         inpc_url=esc(cc_inmueble.datos(base)['f']['inpc_url']), f_inpc=esc(cc_inmueble.datos(base)['f']['inpc']),
         chip_d=chip('derivado'), chip_o=chip('oficial'), datos=cc_inmueble._json(D))
