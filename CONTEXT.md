@@ -7573,6 +7573,18 @@ Pedido del autor: «intégralo y continúa con las dimensiones pendientes». Se 
 - **El chat:** «se venció mi contrato…» ya no abre ComprasMX (`contratosCmx()` suelta «mi contrato», «finiquito», «me toca»…); frases nuevas en `ALIAS_APPS`.
 - **Pendiente:** la obra determinada (el art. 50 no la nombra); lo que quedó en espera; el ISR de los intereses del art. 48; la indemnización del apartado B; trabajadores de estados y municipios; el subsidio de enero; cotejar PC.XXX. J/31 A en el Semanario.
 
+### 21-11-2026 · sello 20261121za · Servicios: la imagen, de fondo del recuadro; las tarjetas, solo ligas a la respuesta completa
+
+Pedido del autor: «no me refiero a que fuera dentro, fuera como el fondo de esa sección», y en «¿Qué necesitas?»
+«los hipervínculos, luego el botón de ver el servicio, pregúntale, cotiza… muy reiterativo… que quede como para los
+hipervínculos… va directamente a la respuesta completa del inspector». La imagen vuelve a ser el fondo del recuadro
+de la portada (`sv-hero-foto`, con su versión `-movil`), con un velo azul del lado del texto; el ejemplo no vuelve a
+ese recuadro (`DEMO` sigue en su página). Cada tarjeta de servicio es un `<article>` sin botones (`sv_card(...,
+ligas=True)`): su título lleva a `servicios-respuesta.html?q=servicio de <nombre>` y cada novedad, a
+`servicios-respuesta.html?q=<novedad>&abre=<su página>` (`resp_liga()` de `servicios_fichas.py`). `prueba_auditor.py`
+también prueba las ligas `abre=` de la respuesta completa. Pendiente, del autor: «darle un formato más atractivo a
+cada respuesta completa del Inspector» (siguiente entrega).
+
 ### 21-11-2026 · sello 20261121z · Servicios: la imagen vuelve al recuadro de la portada
 
 Pedido del autor: quitar la imagen de la cabecera de `servicios.html` y regresarla al recuadro «Prevención de

@@ -35,6 +35,8 @@ PAGINA = 'servicio-%s.html'
 CHAT = 'herramienta-inspector-pregunta.html'
 # El chat del modo Inspector vive en Servicios desde el 21-11-2026 (asistente.SV_CHAT).
 SV_CHAT = 'servicios-inspector.html'
+# Y su respuesta completa, en su propia página (asistente.SV_RESPUESTA).
+SV_RESP = 'servicios-respuesta.html'
 
 FICHAS = {
     'diligencia': {
@@ -416,6 +418,13 @@ def pestana_de(archivo):
     if a.startswith('noticias'):
         return 'Noticiero'
     return 'Comunidad'
+
+
+def resp_liga(q, abre=None):
+    """La liga a la respuesta completa del Inspector de Servicios (21-11-2026): la página
+    vuelve a contestar con la base; con `abre=`, con esa página o aplicación."""
+    from urllib.parse import quote
+    return '%s?q=%s%s' % (SV_RESP, quote(q), '&abre=%s' % quote(html.unescape(abre), safe='/-_.') if abre else '')
 
 
 def por_auditor(liga, q, modo=None, origen=None):

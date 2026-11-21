@@ -2691,23 +2691,25 @@ SV_TONO = {'prevencion': 'riesgo', 'electoral': 'sectores', 'formacion': 'modulo
 DICTAMEN = 'herramienta-inspector-dictamen.html'
 
 
-def sv_card(tit, tx, ico='', chip='', liga='', acciones=(), tono='', id_='', attrs='', pie='', ir='Abrir'):
+def sv_card(tit, tx, ico='', chip='', liga='', acciones=(), tono='', id_='', attrs='', pie='', ir='Abrir', ligas=False):
     """La tarjeta homologada de Servicios. Sin `acciones`, toda la tarjeta es
     la liga; con ellas, el título lleva a `liga` y abajo van sus botones
-    (texto, liga, principal)."""
+    (texto, liga, principal). Con `ligas` (el pie trae sus propias ligas), el
+    título lleva a `liga` y no hay botones."""
     cab = ('<span class="sv-card-cab">%s%s</span>' % (
         '<span class="sv-card-ico" aria-hidden="true">%s</span>' % ico if ico else '',
         '<span class="sv-card-chip">%s</span>' % chip if chip else '')) if (ico or chip) else ''
     cl = 'sv-card' + (' sv-hub-%s' % tono if tono else '')
     ida = (' id="%s"' % id_ if id_ else '') + attrs
-    if not acciones:
+    if not acciones and not ligas:
         return ('<a class="%s" href="%s"%s>%s<b class="sv-card-tit">%s</b><span class="sv-card-tx">%s</span>%s'
                 '<span class="sv-card-ir">%s ➔</span></a>' % (cl, esc_attr(liga), ida, cab, tit, tx, pie, ir))
-    return ('<article class="%s"%s>%s<b class="sv-card-tit">%s</b><span class="sv-card-tx">%s</span>%s'
-            '<span class="sv-card-acc">%s</span></article>' % (
-                cl, ida, cab, '<a href="%s">%s</a>' % (esc_attr(liga), tit) if liga else tit, tx, pie, ''.join(
-                    '<a class="sv-card-b%s" href="%s">%s</a>' % (' sv-card-b-of' if prim else '', esc_attr(lg), t)
-                    for t, lg, prim in acciones)))
+    botones = ('<span class="sv-card-acc">%s</span>' % ''.join(
+        '<a class="sv-card-b%s" href="%s">%s</a>' % (' sv-card-b-of' if prim else '', esc_attr(lg), t)
+        for t, lg, prim in acciones)) if acciones else ''
+    return ('<article class="%s"%s>%s<b class="sv-card-tit">%s</b><span class="sv-card-tx">%s</span>%s%s</article>' % (
+        cl + (' sv-card-ligas' if ligas else ''), ida, cab, '<a href="%s">%s</a>' % (esc_attr(liga), tit) if liga else tit,
+        tx, pie, botones))
 
 
 # Una novedad que comparte página con otra más vieja lleva aquí su fecha (AGENTS.md):
@@ -2724,18 +2726,21 @@ def sv_novedad_fecha(liga, tit=''):
     return ''
 
 
-def sv_novedades_lista(sid, sf):
-    """Las novedades de un servicio, como lista con su fecha cuando consta."""
+def sv_novedades_lista(sid, sf, resp=False):
+    """Las novedades de un servicio, como lista con su fecha cuando consta. Con `resp`,
+    cada una lleva a la respuesta completa del Inspector (21-11-2026), que abre su página."""
     return '<ul class="sv-nuevo-lista">%s</ul>' % ''.join(
         '<li><span aria-hidden="true">%s</span> <a href="%s"><b>%s</b></a>%s <span>%s</span></li>' % (
-            i, esc_attr(lg), t, (' <small class="sv-nuevo-fecha">%s</small>' % sv_novedad_fecha(lg, t)) if sv_novedad_fecha(lg, t) else '', tx)
+            i, esc_attr(sf.resp_liga(html.unescape(re.sub('<[^>]+>', '', t)), lg) if resp else lg), t, (' <small class="sv-nuevo-fecha">%s</small>' % sv_novedad_fecha(lg, t)) if sv_novedad_fecha(lg, t) else '', tx)
         for i, t, tx, lg, _k in sf.nuevos(sid))
 
 
 def sv_servicios_y_nuevo(sf, puertas):
     """«¿Qué necesitas?» y «Lo nuevo» en una sola sección (pedido del autor, 21-11-2026:
     «quiero que ambas partes se fusionen»): una pestaña por familia y, dentro, cada
-    servicio con su forma de cobro y lo que le llegó de nuevo. Nunca un monto."""
+    servicio con su forma de cobro y lo que le llegó de nuevo. Nunca un monto.
+    Sin botones (pedido del autor, 21-11-2026: «muy reiterativo»): el nombre del servicio
+    y cada novedad son ligas a la respuesta completa del Inspector (servicios-respuesta.html)."""
     corto = dict(zip([l[0] for l in LINEAS], ['Fraude y lavado', 'Temporada electoral', 'Formación', 'Instituciones e investigación', 'Simuladores']))
     paneles, barra = [], []
     for fid, frase in puertas:
@@ -2747,11 +2752,8 @@ def sv_servicios_y_nuevo(sf, puertas):
             nv = sf.nuevos(x[0])
             tarjetas.append('              ' + sv_card(
                 x[2], '%s%s' % (COBRO[x[0]], (' · %d %s' % (len(nv), 'novedad' if len(nv) == 1 else 'novedades')) if nv else ''),
-                x[1], 'Nuevo' if nv else '', sf.PAGINA % x[0],
-                (('Ver el servicio', sf.PAGINA % x[0] + ('#nuevo' if nv else ''), True),
-                 ('🔍 Pregúntale', sf.chat_liga(sv_pregunta(x[0])[0], 'inspector'), False),
-                 ('📝 Cotiza', 'servicios-cotiza.html?servicio=%s#solicitud' % x[0], False)),
-                SV_TONO[lid], id_='sv-nuevo-%s' % x[0], pie=sv_novedades_lista(x[0], sf) if nv else ''))
+                x[1], 'Nuevo' if nv else '', sf.resp_liga(sv_pregunta(x[0])[0]), (),
+                SV_TONO[lid], id_='sv-nuevo-%s' % x[0], pie=sv_novedades_lista(x[0], sf, resp=True) if nv else '', ligas=True))
         paneles.append(
             '          <div class="sv-linea" id="nuevo-%s" data-sv-panel="%s">\n'
             '            <p class="sv-linea-tit"><span aria-hidden="true">%s</span> %s</p>\n'
@@ -2933,19 +2935,14 @@ def servicios():
     # usuario su vista y consumo… nos podemos basar en getquin o WiseCricket»):
     # portada en dos columnas con el producto a la vista, la base contada en
     # una tira, y las familias y los perfiles por pestañas (servicios.js).
-    # La imagen del autor va en el recuadro de la portada, donde estaba el ejemplo de la
-    # empresa y sus hallazgos (pedido del autor, 21-11-2026; ya no va en la cabecera).
-    # El ejemplo completo sigue en su página (DEMO).
-    mini = ('<figure class="sv-hero-img"><picture>'
-            '<source media="(max-width: 860px)" srcset="assets/auditor/img/servicios-encabezado-movil.webp">'
-            '<img src="assets/auditor/img/servicios-encabezado.webp" width="1280" height="720" '
-            'alt="Ilustración: una lupa sobre documentos verificados, una balanza, gráficas y un escudo con candado">'
-            '</picture></figure>')
     tira = '\n'.join(
         '            <a class="sv-tira-n" href="%s"><span class="sv-tira-cifra">%s</span><span class="sv-tira-et">%s</span></a>'
         % (liga, format(v, ','), html.escape(et)) for _, v, et, _op, _fu, _url, liga in monetizacion.contadores())
     portada = '\n'.join([
-        '<div class="sv-hero sv-hero2">',
+        # La imagen del autor va de fondo de este recuadro (pedido del autor, 21-11-2026:
+        # «como el fondo de esa sección»), en el lado donde estaba el ejemplo; el ejemplo
+        # completo (DEMO) sigue en su página.
+        '<div class="sv-hero sv-hero2 sv-hero-foto">',
         '          <div class="sv-hero-izq">',
         '            <p class="sv-hero-pre">Prevención de fraude y de lavado · temporada electoral · formación · investigación</p>',
         '            <p class="sv-hero-tit">Lo que dicen los documentos, antes de que decidas.</p>',
@@ -2959,7 +2956,6 @@ def servicios():
         '              <li><span aria-hidden="true">🔓</span><b>La consulta es gratis</b></li>',
         '            </ul>',
         '          </div>',
-        '          ' + mini,
         '        </div>'])
 
     # La base, contada (idea de getquin, docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md
