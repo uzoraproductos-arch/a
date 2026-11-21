@@ -7573,6 +7573,37 @@ Pedido del autor: «intégralo y continúa con las dimensiones pendientes». Se 
 - **El chat:** «se venció mi contrato…» ya no abre ComprasMX (`contratosCmx()` suelta «mi contrato», «finiquito», «me toca»…); frases nuevas en `ALIAS_APPS`.
 - **Pendiente:** la obra determinada (el art. 50 no la nombra); lo que quedó en espera; el ISR de los intereses del art. 48; la indemnización del apartado B; trabajadores de estados y municipios; el subsidio de enero; cotejar PC.XXX. J/31 A en el Semanario.
 
+### 21-11-2026 · sello 20261121za · Servicios: la imagen, de fondo del recuadro; las tarjetas, solo ligas a la respuesta completa
+
+Pedido del autor: «no me refiero a que fuera dentro, fuera como el fondo de esa sección», y en «¿Qué necesitas?»
+«los hipervínculos, luego el botón de ver el servicio, pregúntale, cotiza… muy reiterativo… que quede como para los
+hipervínculos… va directamente a la respuesta completa del inspector». La imagen vuelve a ser el fondo del recuadro
+de la portada (`sv-hero-foto`, con su versión `-movil`), con un velo azul del lado del texto; el ejemplo no vuelve a
+ese recuadro (`DEMO` sigue en su página). Cada tarjeta de servicio es un `<article>` sin botones (`sv_card(...,
+ligas=True)`): su título lleva a `servicios-respuesta.html?q=servicio de <nombre>` y cada novedad, a
+`servicios-respuesta.html?q=<novedad>&abre=<su página>` (`resp_liga()` de `servicios_fichas.py`). `prueba_auditor.py`
+también prueba las ligas `abre=` de la respuesta completa. Pendiente, del autor: «darle un formato más atractivo a
+cada respuesta completa del Inspector» (siguiente entrega).
+
+### 21-11-2026 · sello 20261121z · Servicios: la imagen vuelve al recuadro de la portada
+
+Pedido del autor: quitar la imagen de la cabecera de `servicios.html` y regresarla al recuadro «Prevención de
+fraude y de lavado · temporada electoral · formación · investigación», en el lugar del ejemplo (la empresa y
+los hallazgos). La cabecera ya no lleva `cab_extra: 'sv-cab-foto'` (sus reglas salen de `servicios.css`), y
+`mini` de `servicios()` es ahora la imagen (`.sv-hero-img`, con su versión `-movil` en un `<picture>`), en vez
+de la tarjeta `sv-demo-mini`. El ejemplo completo (`DEMO`) sigue en su página. Ninguna cifra cambió.
+
+### 21-11-2026 · sello 20261121y · Las imágenes de la portada, vinculadas al modo Periodista
+
+Pedido del autor: «las imágenes que quedaron en la portada principal de la plataforma… quedan vinculadas al
+modo periodista». Hasta hoy cada diapositiva abría el chat del Auditor con `?p=` y sin modo (abría en el que
+el lector tuviera guardado, o en Ciudadano). Ahora `chat_url()` de `auditorias.py` agrega
+`&modo=periodista` (`MODO_PORTADA`), así que la imagen, su `title` y «Pregúntale» de la lista de
+investigaciones abren el modo Periodista con la pregunta escrita; el letrero de cada imagen dice
+«📰 Pregúntale al Periodista». `portada()` reescribe las 23 ligas de `index.html` en binario (CR sueltos: 56).
+Las plantillas de `integrar_auditorias_actuales.py` e `integrar_seguro_popular.py` dicen lo mismo. Ninguna
+cifra cambió.
+
 ### 21-11-2026 · sello 20261121x · Dos chats: el Inspector vive en Servicios
 
 Pedido del autor: fusionar «¿Qué necesitas?» con «Lo nuevo»; llevar las tarjetas del pie de Servicios (fraude y lavado, servicios,

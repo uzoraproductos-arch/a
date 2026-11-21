@@ -888,7 +888,7 @@ def actualizar_index():
             f'              <span class="showcase-slide-badge">{badge}</span>\n'
             f'              <h3 class="showcase-slide-q">{preg}</h3>\n'
             f'              <div class="showcase-click-cue">\n'
-            f'                <span>💬 Pregúntale al Auditor</span> ➔\n'
+            f'                <span>📰 Pregúntale al Periodista</span> ➔\n'
             f'              </div>\n'
             f'            </div>\n'
             f'          </a>'
@@ -896,7 +896,7 @@ def actualizar_index():
     t_slide = (
         '              <h3 class="showcase-slide-q">¿Cuánto costaron las 11 megaobras y los 2 rescates de seis sexenios, cuánto pierden al año y dónde se consulta cada obra?</h3>\n'
         '              <div class="showcase-click-cue">\n'
-        '                <span>💬 Pregúntale al Auditor</span> ➔\n'
+        '                <span>📰 Pregúntale al Periodista</span> ➔\n'
         '              </div>\n'
         '            </div>\n'
         '          </a>\n'
@@ -907,7 +907,7 @@ def actualizar_index():
     r_slide = (
         '              <h3 class="showcase-slide-q">¿Cuánto costaron las 11 megaobras y los 2 rescates de seis sexenios, cuánto pierden al año y dónde se consulta cada obra?</h3>\n'
         '              <div class="showcase-click-cue">\n'
-        '                <span>💬 Pregúntale al Auditor</span> ➔\n'
+        '                <span>📰 Pregúntale al Periodista</span> ➔\n'
         '              </div>\n'
         '            </div>\n'
         '          </a>\n\n'
