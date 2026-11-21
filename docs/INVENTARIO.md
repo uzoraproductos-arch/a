@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 836 |
+| Páginas revisadas | 838 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -228,7 +228,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-nota-veredicto.html` | Contrasta una nota · el veredicto · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-nota.html` | Contrasta una nota · Auditavisión | apartados.py | 53 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-padron.html` | Revisa a tu contraparte · Auditavisión | apartados.py | 47 | 0 | 12 | 0 | 0 |
-| `herramienta-inspector-pregunta.html` | Auditor Virtual · Auditavisión | apartados.py | 41 | 0 | 1 | 1 | 1 |
+| `herramienta-inspector-pregunta.html` | Auditor Virtual · Auditavisión | apartados.py | 43 | 0 | 1 | 1 | 1 |
 | `herramienta-inspector-radar.html` | Radar por entidad · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-resultados.html` | Revisa tu estado de resultados · Auditavisión | apartados.py | 46 | 0 | 0 | 2 | 0 |
 | `herramienta-inspector-riesgos.html` | Tu matriz de riesgos documentales · Auditavisión | apartados.py | 52 | 0 | 2 | 1 | 0 |
@@ -846,10 +846,12 @@ La Enciclopedia queda fuera porque está congelada.
 | `servicios-cotiza.html` | Cotiza · Auditavisión | apartados.py | 49 | 0 | 0 | 0 | 0 |
 | `servicios-empieza-gratis.html` | Empieza gratis · Auditavisión | apartados.py | 60 | 0 | 0 | 0 | 0 |
 | `servicios-fraude-y-lavado.html` | Fraude y lavado · Auditavisión | apartados.py | 58 | 0 | 2 | 1 | 0 |
+| `servicios-inspector.html` | El Inspector · Auditavisión | apartados.py | 43 | 0 | 1 | 1 | 1 |
 | `servicios-por-que.html` | Servicios de investigación · Auditavisión | apartados.py | 85 | 0 | 3 | 2 | 0 |
 | `servicios-preguntas.html` | Preguntas · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
+| `servicios-respuesta.html` | La respuesta completa · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
 | `servicios-tu-perfil.html` | Tu perfil · Auditavisión | apartados.py | 104 | 0 | 0 | 0 | 0 |
-| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 165 | 0 | 6 | 1 | 0 |
+| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 170 | 0 | 6 | 1 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 
