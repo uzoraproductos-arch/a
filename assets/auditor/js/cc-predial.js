@@ -56,7 +56,7 @@
   function valorConstruccion(T, uso, ical, iedad, iest, niveles) {
     var v = T.usos[uso].cal[ical][1][iedad][iest];
     if (v === null) return null;
-    return niveles ? r2(v * (1 + T.niveles.pct / 100)) : v;
+    return niveles && T.niveles ? r2(v * (1 + T.niveles.pct / 100)) : v;
   }
   function cf2(v) { return '$' + Number(v).toLocaleString('es-MX', { minimumFractionDigits: 2 }); }
 
@@ -351,6 +351,8 @@
     $('cpTUso').innerHTML = Object.keys(T.usos).map(function (k) { return '<option value="' + k + '">' + esc(T.usos[k].et) + '</option>'; }).join('');
     $('cpTEdad').innerHTML = T.edades.map(function (e, i) { return '<option value="' + i + '">' + esc(e[1]) + '</option>'; }).join('');
     $('cpTEst').innerHTML = T.estados.map(function (e, i) { return '<option value="' + i + '">' + esc(e) + '</option>'; }).join('');
+    $('cpTNivL').hidden = !T.niveles;
+    if (!T.niveles) $('cpTNiv').checked = false;
     calidades(T);
     pintaTabla();
   }
@@ -367,7 +369,7 @@
       return;
     }
     $('cpVc').value = String(v);
-    $('cpTablaVal').innerHTML = 'Valor de construcción: <b>' + pesos(v) + ' por m²</b> <span class="est-chip est-oficial">oficial</span>' + ($('cpTNiv').checked ? ' (con +' + T.niveles.pct + ' %: ' + esc(T.niveles.art) + ')' : '') + '. Ya lo pusimos abajo.';
+    $('cpTablaVal').innerHTML = 'Valor de construcción: <b>' + pesos(v) + ' por m²</b> <span class="est-chip est-oficial">oficial</span>' + ($('cpTNiv').checked && T.niveles ? ' (con +' + T.niveles.pct + ' %: ' + esc(T.niveles.art) + ')' : '') + '. Ya lo pusimos abajo.';
   }
 
   function compara() {
