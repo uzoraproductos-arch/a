@@ -66,6 +66,7 @@ Lo llama apartados.insp_nativa() (INSP_NATIVAS['ccpredial']).
 """
 import html
 import json
+import re
 import math
 import os
 import subprocess
@@ -974,6 +975,9 @@ ESPERA = {
 # Cada valor es oficial y lleva su documento; armar el valor fiscal con ellos es derivado. Valores en pesos por m²,
 # por calidad: [moderno, semimoderno, antiguo] × [bueno, regular, malo].
 _ZAP_TV = 'https://s3.zapopan.gob.mx/geomatica/tablasvalor/2026/'
+# El Periódico Oficial «El Estado de Jalisco» publica cada decreto de tablas; la mayoría son copias escaneadas: una celda
+# que no se lee sin duda en la copia publicada va como None («ilegible»), nunca adivinada.
+_POE = 'https://apiperiodico.jalisco.gob.mx/api/newspaper/getAsset?q='
 TABLAS = {
     'zapopan': {
         'tx': 'Tablas de Valores Unitarios de Suelo y Construcción de Zapopan para 2026 (Decreto 29987/LXIV/25 del Congreso de Jalisco, Periódico Oficial «El Estado de Jalisco», 18-12-2025), copia de la Dirección de Catastro: «1. Valores de construcción»',
@@ -999,13 +1003,180 @@ TABLAS = {
                   'nota': 'En Zapopan el suelo se valúa por calle: el valor de tu calle viene en los planos de la tabla. Aún no los integramos (el archivo pesa 828 MB y son planos): búscalo ahí o pídelo en Catastro.'},
         'demeritos': {'tx': '9. Tabla de deméritos e incrementos', 'url': _ZAP_TV + '9.%20Tabla%20de%20dem%C3%A9ritos%20e%20incrementos.pdf',
                       'sha256': '4934cffc962cd971f851807908b0763a9d197f91be0891a977b36f535a360fea',
-                      'nota': 'El valor del terreno baja por mucha profundidad, poco frente (2 a 6 m), lote interior (50 %) o pendiente, y sube en esquina (10 % habitacional, 15 % mixto o industrial, 20 % comercial); los factores se multiplican y nunca bajan más de 50 % ni suben más de 35 %. El simulador no los aplica: si te tocan, usa tu propio factor.'}},
+                      'nota': 'El valor del terreno baja por mucha profundidad, poco frente (2 a 6 m), lote interior (50 %) o pendiente, y sube en esquina (10 % habitacional, 15 % mixto o industrial, 20 % comercial); los factores se multiplican y nunca bajan más de 50 % ni suben más de 35 %. El simulador no los aplica: si te tocan, usa tu propio factor.'}},    'guadalajara': {
+        'tx': 'Decreto 29909/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Guadalajara para 2026, Periódico Oficial «El Estado de Jalisco», 13-12-2025, sección XIII, pág. 6 del archivo («Valores de construcción 2026»)',
+        'url': _POE + 'newspaper/24344/newspaper251215101716.pdf',
+        'sha256': '3d4e244e3f71700005edb0500162177fdeff90cfb2b683e2bcb04abde58ce142',
+        'escaneo': True,
+        'edades': [['m1', 'Moderno 1: de 0 a 5 años', 5], ['m2', 'Moderno 2: de 6 a 10 años', 10], ['s1', 'Semimoderno 1: de 11 a 20 años', 20],
+                   ['s2', 'Semimoderno 2: de 21 a 30 años', 30], ['a1', 'Antiguo 1: de 31 a 40 años', 40], ['a2', 'Antiguo 2: de más de 40 años', None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ['Lujo', [[19700, 17340, 11170], [18700, 16590, 10560], [16960, 14230, 8640], [15070, 11950, None], [12770, 8990, 5200], [9640, 5740, 3730]]],
+                ['Superior', [[14100, 12390, 7970], [13300, 11960, None], [12100, 10200, 6520], [10790, None, None], [9120, 6550, 4720], [6890, 5560, 4010]]],
+                ['Medio', [[9900, 8280, 5330], [9400, 7940, 5110], [8500, 7100, 4650], [7000, 5910, 4090], [5760, 4530, 3270], [4400, 3550, None]]],
+                ['Económico', [[7340, 6100, 3930], [7000, 5790, 3740], [6300, 5300, 3430], [4860, 4400, 3040], [3600, 3300, 2130], [2400, 1930, 1410]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 2: más de 4 niveles (con sótano), +10 %; con 10 niveles o más la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, «Índice de valores por colonias, lotes tipo y código de polígono» (págs. 29 a 38 del archivo)',
+                  'url': _POE + 'newspaper/24344/newspaper251215101716.pdf',
+                  'nota': 'En Guadalajara el suelo se valúa por colonia y polígono: el valor de la tuya viene en el índice del decreto. Aún no lo integramos (es una copia escaneada): búscalo ahí.'}},
+    'tlaquepaque': {
+        'tx': 'Decreto 29949/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de San Pedro Tlaquepaque para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 9 del archivo («Valores unitarios de la construcción año 2026»)',
+        'url': _POE + 'newspaper/24379/newspaper251217061214.pdf',
+        'sha256': '88bbc7203d4b34e732285c722fb0d54d3f216d9aa3f79a5f2817bcfbae7e196e',
+        'escaneo': True,
+        'edades': [['mod', 'Moderno: hasta 10 años', 10], ['semi', 'Semimoderno: de 11 a 30 años', 30], ['ant', 'Antiguo: de más de 30 años', None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ['Lujo', [[16280, 14950, 10890], [13410, 9820, 7000], [8060, None, 2480]]],
+                ['Superior', [[11620, 10680, 7760], [10010, 7400, None], [6040, 2480, 1810]]],
+                ['Medio', [[8370, 7310, 5430], [7300, 5630, 4080], [4620, 1800, 1340]]],
+                ['Económico', [[6290, 5460, 3930], [5260, 3890, 2830], [3200, 1340, 1030]]],
+                ['Austero', [[4990, 4220, 3180], [4080, 3030, 2200], [2490, 1100, 800]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 3: más de 4 niveles, +10 % por estructura'},
+        'suelo': {'tx': 'el mismo decreto, planos de valores de suelo por zona (págs. 18 a 65 del archivo)',
+                  'url': _POE + 'newspaper/24379/newspaper251217061214.pdf',
+                  'nota': 'En Tlaquepaque el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no los integramos (son planos escaneados): búscalo ahí.'}},
+}
+
+
+# Dónde se publicó cada decreto de Tablas de Valores Unitarios de Suelo y Construcción (oficial). Clave INEGI →
+# [decreto del Congreso, fecha del Periódico Oficial, archivo del ejemplar (se abre con _POE + archivo)]. Se buscaron en su consulta pública,
+# ejemplar por ejemplar, de septiembre de 2025 a noviembre de 2026; los municipios que faltan no aparecieron ahí.
+POE_CONSULTA = 'https://periodicooficial.jalisco.gob.mx/'
+DECRETOS_TV = {
+    'JAL': {'anio': 2026, 'buscado': 'septiembre de 2025 a noviembre de 2026', 'lista': {
+        '001': ['29871/LXIV/25', '2025-12-13', 'newspaper/24366/newspaper251216033135.pdf'],
+        '002': ['29872/LXIV/25', '2025-12-13', 'newspaper/24337/newspaper251215100952.pdf'],
+        '003': ['29873/LXIV/25', '2025-12-15', 'newspaper/24382/newspaper251217062246.pdf'],
+        '005': ['29875/LXIV/25', '2025-12-13', 'newspaper/24338/newspaper251215101055.pdf'],
+        '006': ['29876/LXIV/25', '2025-12-11', 'newspaper/24324/newspaper251212094544.pdf'],
+        '007': ['29943/LXIV/25', '2025-12-15', 'newspaper/24383/newspaper251217062355.pdf'],
+        '008': ['29877/LXIV/25', '2025-12-11', 'newspaper/24325/newspaper251212094731.pdf'],
+        '009': ['29901/LXIV/25', '2025-12-11', 'newspaper/24316/newspaper251212092223.pdf'],
+        '010': ['29878/LXIV/25', '2025-12-11', 'newspaper/24301/newspaper251212085349.pdf'],
+        '011': ['29879/LXIV/25', '2025-12-11', 'newspaper/24302/newspaper251212085600.pdf'],
+        '012': ['29880/LXIV/25', '2025-12-15', 'newspaper/24410/newspaper251217073231.pdf'],
+        '013': ['29881/LXIV/25', '2025-12-11', 'newspaper/24300/newspaper251212080953.pdf'],
+        '014': ['29882/LXIV/25', '2025-12-11', 'newspaper/24303/newspaper251212085855.pdf'],
+        '015': ['29883/LXIV/25', '2025-12-11', 'newspaper/24304/newspaper251212090124.pdf'],
+        '016': ['29884/LXIV/25', '2025-12-11', 'newspaper/24305/newspaper251212090416.pdf'],
+        '017': ['29885/LXIV/25', '2025-12-13', 'newspaper/24339/newspaper251215101153.pdf'],
+        '018': ['29922/LXIV/25', '2025-12-13', 'newspaper/24355/newspaper251215103022.pdf'],
+        '019': ['29886/LXIV/25', '2025-12-11', 'newspaper/24306/newspaper251212090801.pdf'],
+        '020': ['29887/LXIV/25', '2025-12-11', 'newspaper/24307/newspaper251212090933.pdf'],
+        '021': ['29889/LXIV/25', '2025-12-11', 'newspaper/24308/newspaper251212091035.pdf'],
+        '022': ['29893/LXIV/25', '2025-12-11', 'newspaper/24309/newspaper251212091128.pdf'],
+        '023': ['29990/LXIV/25', '2025-12-18', 'newspaper/24477/newspaper251222040507.pdf'],
+        '024': ['29894/LXIV/25', '2025-12-11', 'newspaper/24310/newspaper251212091320.pdf'],
+        '025': ['29895/LXIV/25', '2025-12-11', 'newspaper/24311/newspaper251212091451.pdf'],
+        '026': ['29896/LXIV/25', '2025-12-15', 'newspaper/24409/newspaper251217073133.pdf'],
+        '028': ['29897/LXIV/25', '2025-12-13', 'newspaper/24341/newspaper251215101418.pdf'],
+        '029': ['29898/LXIV/25', '2025-12-13', 'newspaper/24342/newspaper251215101528.pdf'],
+        '030': ['29890/LXIV/25', '2025-12-11', 'newspaper/24312/newspaper251212091727.pdf'],
+        '031': ['29891/LXIV/25', '2025-12-15', 'newspaper/24375/newspaper251217060428.pdf'],
+        '032': ['29892/LXIV/25', '2025-12-11', 'newspaper/24313/newspaper251212091847.pdf'],
+        '033': ['29899/LXIV/25', '2025-12-11', 'newspaper/24314/newspaper251212091953.pdf'],
+        '034': ['29900/LXIV/25', '2025-12-11', 'newspaper/24315/newspaper251212092117.pdf'],
+        '035': ['29905/LXIV/25', '2025-12-11', 'newspaper/24319/newspaper251212092633.pdf'],
+        '036': ['29906/LXIV/25', '2025-12-11', 'newspaper/24320/newspaper251212092748.pdf'],
+        '037': ['29902/LXIV/25', '2025-12-11', 'newspaper/24317/newspaper251212092335.pdf'],
+        '038': ['29908/LXIV/25', '2025-12-15', 'newspaper/24387/newspaper251217063347.pdf'],
+        '039': ['29909/LXIV/25', '2025-12-13', 'newspaper/24344/newspaper251215101716.pdf'],
+        '040': ['29910/LXIV/25', '2025-12-13', 'newspaper/24345/newspaper251215101837.pdf'],
+        '041': ['29911/LXIV/25', '2025-12-13', 'newspaper/24346/newspaper251215101940.pdf'],
+        '042': ['29912/LXIV/25', '2025-12-11', 'newspaper/24322/newspaper251212092905.pdf'],
+        '043': ['29923/LXIV/25', '2025-12-13', 'newspaper/24363/newspaper251215105326.pdf'],
+        '044': ['29913/LXIV/25', '2025-12-13', 'newspaper/24365/newspaper251216031510.pdf'],
+        '045': ['29914/LXIV/25', '2025-12-13', 'newspaper/24347/newspaper251215102059.pdf'],
+        '046': ['29915/LXIV/25', '2025-12-13', 'newspaper/24348/newspaper251215102147.pdf'],
+        '047': ['29916/LXIV/25', '2025-12-13', 'newspaper/24349/newspaper251215102310.pdf'],
+        '048': ['29917/LXIV/25', '2025-12-13', 'newspaper/24350/newspaper251215102425.pdf'],
+        '049': ['29918/LXIV/25', '2025-12-13', 'newspaper/24351/newspaper251215102520.pdf'],
+        '050': ['29919/LXIV/25', '2025-12-13', 'newspaper/24352/newspaper251215102655.pdf'],
+        '051': ['29920/LXIV/25', '2025-12-13', 'newspaper/24353/newspaper251215102833.pdf'],
+        '052': ['29921/LXIV/25', '2025-12-13', 'newspaper/24354/newspaper251215102933.pdf'],
+        '053': ['29925/LXIV/25', '2025-12-13', 'newspaper/24357/newspaper251215103319.pdf'],
+        '054': ['29903/LXIV/25', '2025-12-11', 'newspaper/24318/newspaper251212092443.pdf'],
+        '055': ['29926/LXIV/25', '2025-12-13', 'newspaper/24358/newspaper251215103417.pdf'],
+        '056': ['29952/LXIV/25', '2025-12-15', 'newspaper/24411/newspaper251217073439.pdf'],
+        '057': ['29924/LXIV/25', '2025-12-13', 'newspaper/24356/newspaper251215103131.pdf'],
+        '058': ['29927/LXIV/25', '2025-12-13', 'newspaper/24359/newspaper251215103555.pdf'],
+        '059': ['29928/LXIV/25', '2025-12-13', 'newspaper/24360/newspaper251215103633.pdf'],
+        '060': ['29929/LXIV/25', '2025-12-13', 'newspaper/24361/newspaper251215103735.pdf'],
+        '061': ['29930/LXIV/25', '2025-12-13', 'newspaper/24362/newspaper251215103830.pdf'],
+        '062': ['29931/LXIV/25', '2025-12-18', 'newspaper/24479/newspaper251222040706.pdf'],
+        '063': ['29932/LXIV/25', '2025-12-15', 'newspaper/24418/newspaper251217075651.pdf'],
+        '064': ['29933/LXIV/25', '2025-12-15', 'newspaper/24417/newspaper251217074415.pdf'],
+        '065': ['29934/LXIV/25', '2025-12-15', 'newspaper/24393/newspaper251217064532.pdf'],
+        '066': ['29935/LXIV/25', '2025-12-15', 'newspaper/24415/newspaper251217074132.pdf'],
+        '067': ['29936/LXIV/25', '2025-12-18', 'newspaper/24480/newspaper251222040914.pdf'],
+        '068': ['29984/LXIV/25', '2025-12-18', 'newspaper/24470/newspaper251222035157.pdf'],
+        '069': ['29937/LXIV/25', '2025-12-15', 'newspaper/24378/newspaper251217061113.pdf'],
+        '070': ['29904/LXIV/25', '2025-12-13', 'newspaper/24343/newspaper251215101613.pdf'],
+        '071': ['29938/LXIV/25', '2025-12-15', 'newspaper/24376/newspaper251217060911.pdf'],
+        '072': ['29939/LXIV/25', '2025-12-15', 'newspaper/24416/newspaper251217074224.pdf'],
+        '073': ['29942/LXIV/25', '2025-12-15', 'newspaper/24396/newspaper251217065242.pdf'],
+        '074': ['29944/LXIV/25', '2025-12-15', 'newspaper/24386/newspaper251217063232.pdf'],
+        '075': ['29945/LXIV/25', '2025-12-18', 'newspaper/24481/newspaper251222041012.pdf'],
+        '076': ['29946/LXIV/25', '2025-12-15', 'newspaper/24392/newspaper251217064422.pdf'],
+        '077': ['29947/LXIV/25', '2025-12-15', 'newspaper/24390/newspaper251217064154.pdf'],
+        '078': ['29948/LXIV/25', '2025-12-15', 'newspaper/24404/newspaper251217071958.pdf'],
+        '079': ['29907/LXIV/25', '2025-12-15', 'newspaper/24384/newspaper251217062810.pdf'],
+        '080': ['29950/LXIV/25', '2025-12-15', 'newspaper/24413/newspaper251217073701.pdf'],
+        '081': ['29951/LXIV/25', '2025-12-15', 'newspaper/24412/newspaper251217073600.pdf'],
+        '082': ['29953/LXIV/25', '2025-12-15', 'newspaper/24401/newspaper251217070739.pdf'],
+        '083': ['29954/LXIV/25', '2025-12-15', 'newspaper/24408/newspaper251217072537.pdf'],
+        '084': ['29955/LXIV/25', '2025-12-15', 'newspaper/24403/newspaper251217071532.pdf'],
+        '085': ['29956/LXIV/25', '2025-12-15', 'newspaper/24389/newspaper251217064056.pdf'],
+        '086': ['29957/LXIV/25', '2025-12-15', 'newspaper/24407/newspaper251217072355.pdf'],
+        '087': ['29958/LXIV/25', '2025-12-15', 'newspaper/24391/newspaper251217064245.pdf'],
+        '088': ['29960/LXIV/25', '2025-12-15', 'newspaper/24377/newspaper251217061015.pdf'],
+        '089': ['29959/LXIV/25', '2025-12-15', 'newspaper/24381/newspaper251217062030.pdf'],
+        '090': ['29961/LXIV/25', '2025-12-15', 'newspaper/24398/newspaper251217065601.pdf'],
+        '091': ['29962/LXIV/25', '2025-12-15', 'newspaper/24399/newspaper251217070318.pdf'],
+        '092': ['29963/LXIV/25', '2025-12-15', 'newspaper/24400/newspaper251217070628.pdf'],
+        '093': ['29964/LXIV/25', '2025-12-15', 'newspaper/24397/newspaper251217065431.pdf'],
+        '094': ['29965/LXIV/25', '2025-12-15', 'newspaper/24385/newspaper251217063111.pdf'],
+        '095': ['29966/LXIV/25', '2025-12-15', 'newspaper/24388/newspaper251217063507.pdf'],
+        '096': ['29967/LXIV/25', '2025-12-15', 'newspaper/24395/newspaper251217064757.pdf'],
+        '097': ['29968/LXIV/25', '2025-12-15', 'newspaper/24405/newspaper251217072240.pdf'],
+        '098': ['29949/LXIV/25', '2025-12-15', 'newspaper/24379/newspaper251217061214.pdf'],
+        '099': ['29969/LXIV/25', '2025-12-15', 'newspaper/24380/newspaper251217061940.pdf'],
+        '100': ['29970/LXIV/25', '2025-12-15', 'newspaper/24402/newspaper251217070922.pdf'],
+        '101': ['29971/LXIV/25', '2025-12-18', 'newspaper/24458/newspaper251222034000.pdf'],
+        '102': ['29972/LXIV/25', '2025-12-18', 'newspaper/24459/newspaper251222034051.pdf'],
+        '103': ['29973/LXIV/25', '2025-12-18', 'newspaper/24460/newspaper251222034205.pdf'],
+        '104': ['29974/LXIV/25', '2025-12-18', 'newspaper/24461/newspaper251222034252.pdf'],
+        '106': ['29975/LXIV/25', '2025-12-18', 'newspaper/24462/newspaper251222034339.pdf'],
+        '108': ['29976/LXIV/25', '2025-12-18', 'newspaper/24463/newspaper251222034447.pdf'],
+        '109': ['29977/LXIV/25', '2025-12-18', 'newspaper/24464/newspaper251222034536.pdf'],
+        '110': ['29978/LXIV/25', '2025-12-18', 'newspaper/24465/newspaper251222034708.pdf'],
+        '111': ['29979/LXIV/25', '2025-12-18', 'newspaper/24466/newspaper251222034749.pdf'],
+        '112': ['29980/LXIV/25', '2025-12-18', 'newspaper/24467/newspaper251222034853.pdf'],
+        '113': ['29940/LXIV/25', '2025-12-15', 'newspaper/24414/newspaper251217074030.pdf'],
+        '114': ['29981/LXIV/25', '2025-12-18', 'newspaper/24468/newspaper251222035010.pdf'],
+        '115': ['29982/LXIV/25', '2025-12-18', 'newspaper/24469/newspaper251222035048.pdf'],
+        '116': ['29983/LXIV/25', '2025-12-15', 'newspaper/24394/newspaper251217064651.pdf'],
+        '117': ['29888/LXIV/25', '2025-12-13', 'newspaper/24340/newspaper251215101310.pdf'],
+        '118': ['29985/LXIV/25', '2025-12-18', 'newspaper/24471/newspaper251222035328.pdf'],
+        '119': ['29986/LXIV/25', '2025-12-18', 'newspaper/24472/newspaper251222035446.pdf'],
+        '120': ['29987/LXIV/25', '2025-12-18', 'newspaper/24474/newspaper251222035804.pdf'],
+        '121': ['29988/LXIV/25', '2025-12-18', 'newspaper/24475/newspaper251222040249.pdf'],
+        '123': ['29989/LXIV/25', '2025-12-18', 'newspaper/24476/newspaper251222040348.pdf'],
+        '124': ['29991/LXIV/25', '2025-12-18', 'newspaper/24478/newspaper251222040558.pdf'],
+        '125': ['29941/LXIV/25', '2025-12-15', 'newspaper/24374/newspaper251217060255.pdf'],
+    }},
 }
 
 
 def valor_construccion(T, uso, ical, iedad, iest, niveles=False):
     """Gemela de valorConstruccion() de cc-predial.js: el valor unitario oficial y, si aplica, +% por niveles."""
     v = T['usos'][uso]['cal'][ical][1][iedad][iest]
+    if v is None:
+        return None
     return _r2(v * (1 + T['niveles']['pct'] / 100)) if niveles else v
 
 
@@ -1096,11 +1267,23 @@ def revisa():
             raise SystemExit('cc_predial: la tabla de valores de %s no tiene municipio o huella' % mid)
         for u in T['usos'].values():
             for nom, eds in u['cal']:
-                if len(eds) != len(T['edades']) or any(len(f) != 3 or f != sorted(f, reverse=True) for f in eds):
+                if len(eds) != len(T['edades']) or any(len(f) != 3 or [v for v in f if v is not None] != sorted([v for v in f if v is not None], reverse=True) for f in eds):
                     raise SystemExit('cc_predial: la tabla de %s, calidad %s, no va de bueno a malo' % (mid, nom))
+                if any(v is None for f in eds for v in f) and not T.get('escaneo'):
+                    raise SystemExit('cc_predial: la tabla de %s trae una celda vacía sin ser copia escaneada' % mid)
             primero = [eds[0][0] for nom, eds in u['cal']]
             if primero != sorted(primero, reverse=True):
                 raise SystemExit('cc_predial: las calidades de %s no van de mayor a menor' % mid)
+    for e, dv in DECRETOS_TV.items():
+        for k, d in dv['lista'].items():
+            if e not in ENTIDADES or not re.fullmatch(r'\d{3}', k) or not re.fullmatch(r'\d+/LXIV/\d\d', d[0]) \
+                    or not re.fullmatch(r'20\d\d-\d\d-\d\d', d[1]) or not re.fullmatch(r'newspaper/\d+/[\w.]+\.pdf', d[2]):
+                raise SystemExit('cc_predial: el decreto de tablas de valores %s-%s está incompleto' % (e, k))
+    for mid, T in TABLAS.items():
+        m = [x for x in MUNICIPIOS if x['id'] == mid][0]
+        d = DECRETOS_TV.get(m['ent'], {}).get('lista', {}).get(m['cve'])
+        if d and d[0] not in T['tx']:
+            raise SystemExit('cc_predial: la tabla de valores de %s no cita su decreto %s' % (mid, d[0]))
     for e, r in REGISTRO.items():
         if e not in ENTIDADES or not (r['donde'] and r['url'].startswith('https://')):
             raise SystemExit('cc_predial: el registro de %s está incompleto' % e)
@@ -1162,7 +1345,7 @@ def datos(base):
     uma = base['calculadora_civica']['parametros']['uma']
     return {'anio': ANIO, 'inpc': cc['inpc'], 'inpc_ult': cc['inpc_ult'],
             'uma': uma['diaria'], 'uma_f': uma['fuente'], 'ent': ENTIDADES,
-            'mun': MUNICIPIOS, 'espera': ESPERA, 'reg': REGISTRO, 'tablas': TABLAS, 'lhm': {'tope': 250, 'tope_esp': 100}}
+            'mun': MUNICIPIOS, 'espera': ESPERA, 'reg': REGISTRO, 'tablas': TABLAS, 'dtv': DECRETOS_TV, 'poe': _POE, 'lhm': {'tope': 250, 'tope_esp': 100}}
 
 
 def construir(base, ref):
@@ -1214,7 +1397,7 @@ def construir(base, ref):
       <p class="ci-pista">Es el valor catastral que viene en tu recibo o en tu estado de cuenta predial; lo fija el catastro con las tablas de valores que aprueba el Congreso del Estado.</p>
       <details class="cp-vf" id="cpVfCalc">
         <summary>¿No sabes tu valor fiscal? Ármalo con tu terreno y tu construcción</summary>
-        <p class="ci-pista">El catastro lo arma así: <b>metros de terreno × valor unitario de suelo de tu zona</b>, más <b>metros construidos × valor unitario de tu tipo de construcción</b> (y, si tu tabla lo da, un factor por la edad o el estado de conservación). Los valores unitarios vienen en las <b>Tablas de Valores Unitarios</b> de tu municipio, que aprueba el Congreso del Estado cada año y se publican en el periódico oficial del estado; en Jalisco, en el <a href="https://periodicooficial.jalisco.gob.mx/">Periódico Oficial «El Estado de Jalisco»</a>. Ya integramos los valores de construcción de Zapopan (elige Zapopan y se ponen solos); las demás aún no: búscalas ahí o pídelas en el catastro de tu municipio.</p>
+        <p class="ci-pista">El catastro lo arma así: <b>metros de terreno × valor unitario de suelo de tu zona</b>, más <b>metros construidos × valor unitario de tu tipo de construcción</b> (y, si tu tabla lo da, un factor por la edad o el estado de conservación). Los valores unitarios vienen en las <b>Tablas de Valores Unitarios</b> de tu municipio, que aprueba el Congreso del Estado cada año y se publican en el periódico oficial del estado; en Jalisco, en el <a href="https://periodicooficial.jalisco.gob.mx/">Periódico Oficial «El Estado de Jalisco»</a>. Ya integramos los valores de construcción de Zapopan, Guadalajara y Tlaquepaque (elige tu municipio y se ponen solos), y de los demás municipios de Jalisco te damos la liga a su decreto en la ficha del paso 1.</p>
         <div class="ci-fila">
           <div><label class="ci-et" for="cpTs">Terreno (m²)</label><input class="ci-in" id="cpTs" inputmode="decimal" autocomplete="off" placeholder="Ej.: 160"></div>
           <div><label class="ci-et" for="cpVs">Valor de suelo ($/m²)</label><input class="ci-in" id="cpVs" inputmode="decimal" autocomplete="off" placeholder="De tu tabla"></div>
