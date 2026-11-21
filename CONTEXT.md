@@ -7573,6 +7573,15 @@ Pedido del autor: «intégralo y continúa con las dimensiones pendientes». Se 
 - **El chat:** «se venció mi contrato…» ya no abre ComprasMX (`contratosCmx()` suelta «mi contrato», «finiquito», «me toca»…); frases nuevas en `ALIAS_APPS`.
 - **Pendiente:** la obra determinada (el art. 50 no la nombra); lo que quedó en espera; el ISR de los intereses del art. 48; la indemnización del apartado B; trabajadores de estados y municipios; el subsidio de enero; cotejar PC.XXX. J/31 A en el Semanario.
 
+### 21-11-2026 · sello 20261121t · Servicios: la imagen en la cabecera y la base al día arriba
+
+Pedido del autor: «la parte que dice nuestra base de datos, la base al día… se trasladará arriba… antes de la parte del chat al
+servicio, cómo funciona» y «quería que la imagen estuviera arriba… La consulta es libre… En esa parte quiero que vaya la imagen».
+- La imagen (`servicios-encabezado.webp` y su versión `-movil`) pasa de fondo del recuadro de la portada (`sv-hero-foto`, retirado)
+  a fondo de la cabecera de la página (`apartado-cab sv-cab-foto`, con el velo azul y el texto en blanco). `pagina()` acepta
+  `cab_extra` para sumarle una clase a la cabecera.
+- «La base, al día» (`#al-dia`) va ahora segunda, antes de «Cómo funciona». No se quitó contenido.
+
 ### 21-11-2026 · sello 20261121s · Los pendientes de la base, al día
 
 - **SESNSP** (`anclar_sesnsp_fraude.py`): corte oct2026; las cifras 2015-2025 no cambiaron, solo la huella, el archivo y la liga (`ENLACE`). Se baja con `curl -L -c cj -b cj '<liga>&download=1'` (sin cookies, 403). Revisar de nuevo el 20-12-2026.
