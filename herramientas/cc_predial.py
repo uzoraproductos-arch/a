@@ -1194,21 +1194,6 @@ TABLAS = {
                 ["Económico", [[3010, 2540, 2080], [2960, 2430, 1960], [2530, 2060, 1600], [2270, 1730, 1330], [1410, 1060, 720], [1260, 850, 630]]]]}},
         'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
         'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24305/newspaper251212090416.pdf', 'nota': 'En Ayotlán el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
-    'zacoalco': {
-        'tx': 'Decreto 29986/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Zacoalco de Torres para 2026, Periódico Oficial «El Estado de Jalisco», 18-12-2025, pág. 6 del archivo («Valores de construcción»)',
-        'url': _POE + 'newspaper/24472/newspaper251222035446.pdf',
-        'sha256': '860010ad9bcc25109b93a461ff146201995f5ad8ca1cd0036d0a33d2a25a24c8',
-        'escaneo': True,
-        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
-        'estados': ['Bueno', 'Regular', 'Malo'],
-        'usos': {
-            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
-                ["Lujo", [[11870, 10920, 7930], [11460, 10540, 7660], [10670, 8450, 6140], [9660, 6930, 5040], [8040, 4800, 3490], [7540, 3980, 2730]]],
-                ["Superior", [[8930, 8220, 5970], [8670, 7970, 5790], [8050, 6370, 4620], [7300, 5240, 3810], [6050, 3630, 2620], [5690, 3010, 2060]]],
-                ["Medio", [[6280, 5500, 4010], [6060, None, None], [5510, 4260, 3090], [4990, 3480, None], [3820, 2040, 1490], [3550, 1720, None]]],
-                ["Económico", [[4160, 4050, 2950], [4060, 3860, 2800], [3960, 2950, 2130], [3540, 2470, 1790], [2380, 1060, 780], [2140, 840, 670]]]]}},
-        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
-        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24472/newspaper251222035446.pdf', 'nota': 'En Zacoalco de Torres el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
     'teocaltiche': {
         'tx': 'Decreto 29962/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Teocaltiche para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 6 del archivo («Valores de construcción»)',
         'url': _POE + 'newspaper/24399/newspaper251217070318.pdf',
@@ -1224,8 +1209,28 @@ TABLAS = {
                 ["Económico", [[4970, 4320, 3140], [4850, 4110, 2980], [4240, 3140, 2280], [3780, 2630, 1910], [2540, 1130, 820], [2270, 890, 710]]]]}},
         'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
         'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24399/newspaper251217070318.pdf', 'nota': 'En Teocaltiche el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'zacoalco': {
+        'tx': 'Decreto 29986/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Zacoalco de Torres para 2026, Periódico Oficial «El Estado de Jalisco», 18-12-2025, pág. 6 y 7 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24472/newspaper251222035446.pdf',
+        'sha256': '860010ad9bcc25109b93a461ff146201995f5ad8ca1cd0036d0a33d2a25a24c8',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[11870, 10920, 7930], [11460, 10540, 7660], [10670, 8450, 6140], [9660, 6930, 5040], [8040, 4800, 3490], [7540, 3980, 2730]]],
+                ["Superior", [[8930, 8220, 5970], [8670, 7970, 5790], [8050, 6370, 4620], [7300, 5240, 3810], [6050, 3630, 2620], [5690, 3010, 2060]]],
+                ["Medio", [[6280, 5500, 4010], [6060, None, None], [5510, 4260, 3090], [4990, 3480, None], [3820, 2040, 1490], [3550, 1720, None]]],
+                ["Económico", [[4160, 4050, 2950], [4060, 3860, 2800], [3960, 2950, 2130], [3540, 2470, 1790], [2380, 1060, 780], [2140, 840, 670]]]]},
+            'ind': {'et': 'Industrial', 'cal': [
+                ["Especial", [[4290, 3910, 2860], [4050, 3660, 2610], [3240, 2140, 1430], [3000, 1990, 1320], [1810, 640, 430], [1570, 560, 370]]],
+                ["Superior", [[3820, 3490, 2560], [3620, 3270, 2340], [2880, 1910, 1270], [2680, 1770, 1180], [1620, 570, 390], [1400, 500, 350]]],
+                ["Medio", [[3250, 3250, 2170], [3070, None, 1990], [None, 1620, 1080], [2270, 1500, 1000], [1380, 490, 340], [1200, 420, 290]]],
+                ["Económico", [[2780, 2530, 1860], [2620, 2380, 1700], [2110, 1390, 930], [1940, 1290, 850], [1180, 420, 280], [1020, 370, 240]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24472/newspaper251222035446.pdf', 'nota': 'En Zacoalco de Torres el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
     'tamazula': {
-        'tx': 'Decreto 29956/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Tamazula de Gordiano para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 5 del archivo («Valores de construcción»)',
+        'tx': 'Decreto 29956/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Tamazula de Gordiano para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 5 y 6 del archivo («Valores de construcción»)',
         'url': _POE + 'newspaper/24389/newspaper251217064056.pdf',
         'sha256': 'a9000ddc94b1f7f7457020db227185cb49d3ba6902cf6b10700bf513f590ba9a',
         'escaneo': True,
@@ -1236,9 +1241,95 @@ TABLAS = {
                 ["Lujo", [[12800, 11760, 8550], [12360, 11350, 8260], [11500, None, 6630], [10410, 7470, 5430], [8660, 5180, 3760], [8120, 4300, 2940]]],
                 ["Superior", [[9610, 8820, 6420], [8830, 8110, 5900], [8620, 6840, 4970], [7430, 5340, 3870], [6500, 3890, 2830], [5810, 3070, 2100]]],
                 ["Medio", [[6980, 5900, 4300], [6750, 5250, None], [5920, 4570, 3320], [5110, 3560, 2590], [4110, 2200, 1600], [3630, 1750, 1230]]],
-                ["Económico", [[5010, 4350, 3160], [4650, 3930, 2960], [4260, 3440, 2290], [3620, 2760, 1830], [2450, 1440, 880], [2080, 1130, 760]]]]}},
+                ["Económico", [[5010, 4350, 3160], [4650, 3930, 2960], [4260, 3440, 2290], [3620, 2760, 1830], [2450, 1440, 880], [2080, 1130, 760]]]]},
+            'ind': {'et': 'Industrial', 'cal': [
+                ["Especial", [[4830, 4400, 3220], [4340, 3930, 2920], [3640, 2410, 1600], [3210, 2130, 1600], [2050, 1160, 770], [1680, 1010, 660]]],
+                ["Superior", [[4320, 3930, 2880], [3880, 3510, 2510], [3260, 2150, 1420], [2870, 1900, 1410], [1830, 1150, 710], [1500, None, 610]]],
+                ["Medio", [[3660, 3330, 2840], [3290, 2970, 2270], [2760, 1820, 1210], [2440, 1610, 1200], [1550, 1040, 560], [1280, 910, 480]]],
+                ["Económico", [[3130, 2860, 2090], [2810, 2560, 1820], [2360, 1550, 1040], [2090, 1380, 910], [1330, 870, 470], [1100, 760, 400]]]]}},
         'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
         'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24389/newspaper251217064056.pdf', 'nota': 'En Tamazula de Gordiano el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'ameca': {
+        'tx': 'Decreto 29876/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Ameca para 2026, Periódico Oficial «El Estado de Jalisco», 11-12-2025, pág. 6 y 7 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24324/newspaper251212094544.pdf',
+        'sha256': '3516880065f5ae725988fa0930b9873a89dc43106dfad77c9746a33454ab07c0',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[12920, 11880, 8630], [12480, 11470, 8340], [None, 9200, None], [10510, 7540, 5480], [8750, 5220, 3800], [8210, 4330, 2970]]],
+                ["Superior", [[10050, 9240, 6710], [9700, 8920, 6480], [9030, 7150, 5200], [8170, None, 4260], [None, 4060, 2950], [6380, 3370, 2310]]],
+                ["Medio", [[7270, 6370, 4630], [7020, 5940, 4310], [6390, 4920, 3580], [5780, 4030, 2930], [4430, 2370, 1720], [4110, None, None]]],
+                ["Económico", [[5660, 4920, 3580], [5520, 4680, 3390], [4820, 3570, 2590], [4300, 3000, 2180], [2890, 1280, 930], [None, 1020, 810]]]]},
+            'ind': {'et': 'Industrial', 'cal': [
+                ["Especial", [[5080, 4630, 3390], [4800, 4350, 3100], [3830, 2530, 1690], [3560, 2350, 1560], [2160, 750, 520], [1860, 650, 450]]],
+                ["Superior", [[4540, 4130, 3020], [4280, 3880, 2770], [3420, 2260, 1510], [3170, 2100, None], [1920, 670, 460], [1660, 580, 400]]],
+                ["Medio", [[3850, 3500, 2560], [None, 3290, 2350], [2900, 1920, None], [2690, None, None], [1630, 570, 390], [1410, 490, None]]],
+                ["Económico", [[3290, 3000, 2200], [3110, 2820, 2010], [2490, None, 1090], [2310, 1520, 1020], [1400, 490, 340], [1210, 420, 290]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24324/newspaper251212094544.pdf', 'nota': 'En Ameca el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'atotonilco': {
+        'tx': 'Decreto 29881/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Atotonilco el Alto para 2026, Periódico Oficial «El Estado de Jalisco», 11-12-2025, pág. 6 y 7 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24300/newspaper251212080953.pdf',
+        'sha256': 'ca6a545ce855555db74037d1606c4e51d50df88139c5144c717f6463ec6c0fe6',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[10700, 9430, 7190], [10280, 9110, 6960], [9630, 8520, 6480], [8800, 6960, 5330], [7220, 6080, 4630], [6760, 5040, 3630]]],
+                ["Superior", [[8450, 7760, 5660], [8190, 7530, 5470], [7610, 6980, 5090], [6900, 5710, 4190], [5700, 5020, 3640], [5320, None, 2830]]],
+                ["Medio", [[5940, 5210, 3770], [5710, None, 3520], [5330, 4680, 3390], [4820, 4000, 2790], [4000, 3370, 2440], [3720, 2820, 1980]]],
+                ["Económico", [[4880, 4520, 2800], [4770, 4270, 2670], [4350, 4220, 2520], [3550, 3730, 2120], [2840, 2580, 1770], [2550, 1940, 1530]]]]},
+            'ind': {'et': 'Industrial', 'cal': [
+                ["Especial", [[4340, 4030, 2930], [4100, 3800, 2690], [None, 2220, 1600], [2230, 2050, 1480], [1910, 900, 505], [1650, 790, 430]]],
+                ["Superior", [[3980, 3600, 2650], [3740, 3390, 2430], [2180, 1980, 1450], [2020, 1830, 1340], [1710, 610, 410], [1480, 530, 360]]],
+                ["Medio", [[3300, 3080, 2220], [3110, 2880, 2030], [1820, 1690, 1220], [1690, 1560, 1130], [1460, 530, 370], [1260, 460, 320]]],
+                ["Económico", [[2870, 2650, 1930], [2690, 2500, 1750], [1580, 1450, 1060], [1470, 1340, 980], [1240, 550, 320], [1060, 480, 260]]]]}},
+        'atipica': {'celdas': [['hab', 'Económico', 3]], 'nota': 'Ojo: en la construcción habitacional económica de 21 a 30 años, el decreto le da más valor al estado «regular» ($3,730 por m²) que al «bueno» ($3,550). Las dos lecturas de la copia publicada coinciden: así lo publicó el Periódico Oficial y así lo usamos. Si tu casa cae ahí, pregúntale al catastro municipal cuál aplica.'},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24300/newspaper251212080953.pdf', 'nota': 'En Atotonilco el Alto el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'colotlan': {
+        'tx': 'Decreto 29895/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Colotlán para 2026, Periódico Oficial «El Estado de Jalisco», 11-12-2025, pág. 6 y 7 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24311/newspaper251212091451.pdf',
+        'sha256': 'a45793c3bd810581b206abb403b32069676c4f83aabe4fc09b834664e18b0224',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[12570, 11560, 8400], [12140, 11160, 8110], [11290, 8950, 6500], [10230, 7340, 5330], [None, 5080, 3690], [7980, 4220, 2890]]],
+                ["Superior", [[9780, 8990, 6530], [9440, 8680, 6310], [8780, 6960, 5060], [7950, 5700, 4150], [6620, 3950, 2870], [6210, 3280, 2250]]],
+                ["Medio", [[7070, 6190, 4500], [6830, 5780, 4190], [6210, 4790, 3480], [5620, 3920, 2850], [4310, 2300, 1670], [4000, 1940, 1350]]],
+                ["Económico", [[5510, 4790, 3480], [5370, 4550, 3300], [4690, 3470, 2520], [4180, 2920, 2120], [2820, 1250, 910], [2520, 990, 790]]]]},
+            'ind': {'et': 'Industrial', 'cal': [
+                ["Especial", [[4940, 4500, 3300], [4670, 4230, 3020], [3730, 2460, 1640], [3460, 2280, 1520], [2100, 730, 500], [1810, 630, 440]]],
+                ["Superior", [[4410, 4020, 2940], [4170, 3780, 2700], [3330, 2200, 1460], [3090, 2040, 1360], [1870, 660, 450], [1620, 570, 390]]],
+                ["Medio", [[3740, 3410, 2500], [3530, 3200, 2290], [2820, 1860, 1240], [2620, None, 1150], [1590, 560, 380], [1370, 480, 330]]],
+                ["Económico", [[3210, 2920, 2140], [3030, 2740, 1960], [2420, 1600, 1060], [2240, 1480, 990], [1360, 480, 330], [1180, 410, 280]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24311/newspaper251212091451.pdf', 'nota': 'En Colotlán el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'encarnacion': {
+        'tx': 'Decreto 29905/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Encarnación de Díaz para 2026, Periódico Oficial «El Estado de Jalisco», 11-12-2025, pág. 6 y 7 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24319/newspaper251212092633.pdf',
+        'sha256': 'fba12c2c38d8ca94c4c01d8e1075d2d42596e177639ba44c81648e619d8f3324',
+        'escaneo': True,
+        'edades': [["m1", "Moderno 1: de 0 a 5 años", 5], ["m2", "Moderno 2: de 6 a 10 años", 10], ["s1", "Semimoderno 1: de 11 a 20 años", 20], ["s2", "Semimoderno 2: de 21 a 30 años", 30], ["a1", "Antiguo 1: de 31 a 40 años", 40], ["a2", "Antiguo 2: de 41 o más años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[6140, 5110, 4080], [5980, 4930, 3910], [4160, 3420, 2600], [3720, 2810, 2150], [2870, 1740, 1340], [2660, 1450, 1060]]],
+                ["Superior", [[4310, 3650, 2590], [4180, 3490, 2480], [3220, 2530, 1940], [2890, 2080, 1600], [2230, 1310, 1150], [2080, 1090, 900]]],
+                ["Medio", [[2660, 2360, 2150], [2560, 2220, None], [2230, 1700, 1430], [2050, None, None], [1740, 1120, 950], [1610, None, 770]]],
+                ["Económico", [[2360, 2060, 1540], [2330, 1970, 1460], [1700, 1430, 1220], [1520, 1200, 1020], [1210, 1010, 790], [1090, 790, 680]]]]},
+            'ind': {'et': 'Industrial', 'cal': [
+                ["Especial", [[3080, 2800, 1840], [2890, 2630, 1690], [2520, 1450, 1210], [2350, 1340, 1130], [1690, 1120, 900], [1460, 970, 790]]],
+                ["Superior", [[2710, 2460, 1750], [2530, 2300, 1620], [1910, 1260, 1130], [1760, 1160, 1040], [1310, 960, 670], [1130, 820, 580]]],
+                ["Medio", [[2140, 1690, 1540], [2020, None, 1420], [1640, 1100, 890], [1320, 1020, 830], [1010, 740, 630], [880, 630, 550]]],
+                ["Económico", [[1800, 1520, 1480], [1690, 1430, 1360], [1400, 920, 890], [1310, 850, 830], [790, 630, 330], [None, 550, 280]]]]}},
+        'niveles': {'pct': 10, 'art': 'Nota 5: más de 4 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24319/newspaper251212092633.pdf', 'nota': 'En Encarnación de Díaz el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
     'tlaquepaque': {
         'tx': 'Decreto 29949/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de San Pedro Tlaquepaque para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 9 del archivo («Valores unitarios de la construcción año 2026»)',
         'url': _POE + 'newspaper/24379/newspaper251217061214.pdf',
@@ -1483,9 +1574,14 @@ def revisa():
     for mid, T in TABLAS.items():
         if mid not in [m['id'] for m in MUNICIPIOS] or len(T['sha256']) != 64:
             raise SystemExit('cc_predial: la tabla de valores de %s no tiene municipio o huella' % mid)
-        for u in T['usos'].values():
+        # Una fila que en el decreto no va de bueno a malo solo pasa si está anotada en 'atipica', con su nota para el lector.
+        at = T.get('atipica')
+        if at and not (at.get('nota') and at.get('celdas')):
+            raise SystemExit('cc_predial: la tabla de %s anota celdas atípicas sin decir cuáles o sin nota' % mid)
+        fuera = {tuple(c) for c in (at or {}).get('celdas', [])}
+        for uk, u in T['usos'].items():
             for nom, eds in u['cal']:
-                if len(eds) != len(T['edades']) or any(len(f) != 3 or [v for v in f if v is not None] != sorted([v for v in f if v is not None], reverse=True) for f in eds):
+                if len(eds) != len(T['edades']) or any(len(f) != 3 or ((uk, nom, i) not in fuera and [v for v in f if v is not None] != sorted([v for v in f if v is not None], reverse=True)) for i, f in enumerate(eds)):
                     raise SystemExit('cc_predial: la tabla de %s, calidad %s, no va de bueno a malo' % (mid, nom))
                 if any(v is None for f in eds for v in f) and not T.get('escaneo'):
                     raise SystemExit('cc_predial: la tabla de %s trae una celda vacía sin ser copia escaneada' % mid)
@@ -1768,7 +1864,7 @@ def prueba():
             "return window.AuditorPredial.base(m,x[1],x[2]);})));"
             "var m=D.mun[0];var r=window.AuditorPredial.calcula(D,m,{vf:7613320,tipo:'edif',ben:'',pago:'bim'});console.log(JSON.stringify(r.anual));"
             % (json.dumps(js), json.dumps(D), json.dumps(casos)))
-    r = subprocess.run(['node', '-e', prog], capture_output=True, text=True)
+    r = subprocess.run(['node'], input=prog, capture_output=True, text=True)
     if r.returncode:
         print(r.stderr)
         return 1
@@ -1789,7 +1885,7 @@ def prueba():
              "r=window.AuditorPredial.adeudo(D,M('arandas'),%s);o['a'+S]=[r.notif,r.ejec];"
              "r=window.AuditorPredial.adeudo(D,M('tequila'),%s);o['q'+S]=[r.notif,r.ejec];});console.log(JSON.stringify(o));"
              % (json.dumps(js), json.dumps(D), y, y, y, y))
-    r2 = subprocess.run(['node', '-e', prog2], capture_output=True, text=True)
+    r2 = subprocess.run(['node'], input=prog2, capture_output=True, text=True)
     o = json.loads(r2.stdout or '{}')
     uma = D['uma']
     # Mínimos en pesos con requerimiento y embargo (Arandas); notificación en pesos y 5 % por cada diligencia (Tequila).
@@ -1814,7 +1910,7 @@ def prueba():
              "console.log(JSON.stringify(%s.map(function(x){var m=D.mun.filter(function(y){return y.id===x[0]})[0];"
              "return window.AuditorPredial.inverso(m,x[1]);})));console.log(window.AuditorPredial.valorFiscal({ts:160,vs:3250.5,tc:120,vc:6400,fc:0.85}));"
              % (json.dumps(js), json.dumps(D), json.dumps(inv)))
-    r3 = subprocess.run(['node', '-e', prog3], capture_output=True, text=True)
+    r3 = subprocess.run(['node'], input=prog3, capture_output=True, text=True)
     l3 = r3.stdout.strip().split('\n')
     for (mid, i), n in zip(inv, json.loads(l3[0])):
         mm = next(m for m in MUNICIPIOS if m['id'] == mid)
@@ -1828,7 +1924,7 @@ def prueba():
     prog4 = ("global.window={};global.document={getElementById:function(){return null}};require(%s);var T=%s;"
              "console.log(JSON.stringify(%s.map(function(x){return window.AuditorPredial.valorConstruccion(T[x[0]],x[1],x[2],x[3],x[4],x[5]);})));"
              % (json.dumps(js), json.dumps(TABLAS), json.dumps(cel)))
-    r4 = subprocess.run(['node', '-e', prog4], capture_output=True, text=True)
+    r4 = subprocess.run(['node'], input=prog4, capture_output=True, text=True)
     nav4 = json.loads(r4.stdout or '[]')
     if len(nav4) != len(cel):
         mal += 1
