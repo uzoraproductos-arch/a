@@ -1402,6 +1402,27 @@ TABLAS = {
                 ["Económico", [[3950, 3600, 2700], [None, 2000, 1300], [1700, 1200, 900]]]]}},
         'niveles': {'pct': 10, 'art': 'Nota 4: más de 5 niveles (con sótano), +10 %; con más de 10 niveles la nota sube a +15 %'},
         'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24458/newspaper251222034000.pdf', 'nota': 'En Tonalá el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
+    'zapotlanejo': {
+        'tx': 'Decreto 29991/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de Zapotlanejo para 2026, Periódico Oficial «El Estado de Jalisco», 18-12-2025, pág. 6 del archivo («Valores de construcción»)',
+        'url': _POE + 'newspaper/24478/newspaper251222040558.pdf',
+        'sha256': '8fdc8dfed4567ab6a199571dcf2da58b3193eab747e3dfc5f92ede0e22276428',
+        'escaneo': True,
+        'edades': [["mod", "Moderno: hasta 10 años", 10], ["semi", "Semimoderno: de más de 10 y hasta 30 años", 30], ["ant", "Antiguo: de más de 30 años", None]],
+        'estados': ['Bueno', 'Regular', 'Malo'],
+        'usos': {
+            'hab': {'et': 'Habitacional, comercial o de servicios', 'cal': [
+                ["Lujo", [[12570, 11590, 8380], [None, 8380, 5630], [7500, 3530, 2430]]],
+                ["Superior", [[9050, 8280, 5960], [7720, 6070, 4090], [5410, 2550, 1770]]],
+                ["Medio", [[6400, 5520, 3970], [5410, 4530, 3090], [3310, 1660, 1110]]],
+                ["Económico", [[5080, 4310, 3090], [4310, 3430, 2330], [2550, 1220, 890]]],
+                ["Austero (sin los requisitos mínimos de habitabilidad, nota 5)", [[None, 3430, 2430], [3090, 2430, 1660], [1770, 890, 670]]]]},
+            'ind': {'et': 'Industrial', 'cal': [
+                ["Especial", [[4750, 4310, 3210], [2870, 2430, 1660], [1660, 780, 560]]],
+                ["Superior", [[4190, 3870, 2870], [2550, 2100, 1440], [1440, 730, 450]]],
+                ["Medio", [[3650, 3310, 2430], [2210, 1770, 1220], [None, None, None]]],
+                ["Económico", [[3090, 2770, 2100], [1880, 1550, 1110], [None, None, None]]]]}},
+        'niveles': None,
+        'suelo': {'tx': 'el mismo decreto, valores de suelo por zona y planos', 'url': _POE + 'newspaper/24478/newspaper251222040558.pdf', 'nota': 'En Zapotlanejo el suelo se valúa por zona: el valor de la tuya viene en los planos del decreto. Aún no lo integramos: búscalo ahí.'}},
     'tlaquepaque': {
         'tx': 'Decreto 29949/LXIV/25, Tablas de Valores Unitarios de Suelo y Construcción de San Pedro Tlaquepaque para 2026, Periódico Oficial «El Estado de Jalisco», 15-12-2025, pág. 9 del archivo («Valores unitarios de la construcción año 2026»)',
         'url': _POE + 'newspaper/24379/newspaper251217061214.pdf',
