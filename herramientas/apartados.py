@@ -329,13 +329,15 @@ MENU = [
     # El índice general cuelga del Auditor (decisión del autor, 19-11-2026).
     # Con él, la página automatizada de tus respuestas (mis_respuestas.py, 19-11-2026).
     (AUDITOR_VIRTUAL, 'Auditor', ('herramientas.html', 'indice.html', 'mis-respuestas.html')),
+    # Servicios, segunda desde el 21-11-2026 (pedido del autor: «quedaría ya […] en
+    # segunda posición después del auditor en el encabezado y planisferio»).
+    ('servicios.html', 'Servicios', ('servicios.html',)),
     (PLANISFERIO, 'Planisferio', (PLANISFERIO,)),
     ('participa.html', 'Comunidad', ('participa.html',) + ENCICLO_MARCAN),
     # Pedido del autor, 28-10-2026: «darle más protagonismo a las noticias
     # relevantes… como una cuarta pestaña». Desde el 02-11-2026 se llama
     # «Noticiero»; su archivo no cambia de nombre.
     ('noticias-relevantes.html', 'Noticiero', ('noticias-relevantes.html',)),
-    ('servicios.html', 'Servicios', ('servicios.html',)),
 ]
 
 # El índice de las cuatro herramientas. Desde el 29-10-2026 vive en
@@ -2732,13 +2734,68 @@ def sv_monta():
     return out
 
 
-# Del chat al servicio, en cuatro pasos: cómo se usa el Auditor para llegar a un encargo.
-SV_RUTA = [
-    ('💬', 'Pregúntale al Auditor', 'Escribe tu duda o tu caso, en tus palabras. Te contesta en corto, con la cifra, su documento y su etiqueta.'),
-    ('🧾', 'Genera el dictamen', 'Cada respuesta con datos trae su Dictamen cívico independiente: folio, huella y fuentes, listo para imprimir o compartir.'),
-    ('🧰', 'Ve el servicio que toca', 'Si la respuesta lleva a algo que hacemos por encargo, el chat y el dictamen te lo ofrecen, con su forma de cobro.'),
-    ('📝', 'Cotiza con tu pregunta', 'Tu pregunta pasa a la cotización: la ajustas y la mandas. El costo y el plazo llegan por escrito antes de empezar.'),
+# Lo que arriesgas si no revisas (pedido del autor, 21-11-2026: «poner estas
+# consecuencias de los delitos… o de las sanciones que hay, o no cumplir o no
+# verificar bien a tus proveedores o clientes»). Cada renglón cita el texto
+# vigente de su ley (las huellas del CFF y la LFPIORPI son las de
+# insp_conservacion.LEYES; la del Código Penal Federal, la de SV_CPF). **Nunca un
+# monto de multa** (la ley lo fija en UMA y la autoridad lo individualiza) y
+# nunca se dice que revisar te libra de nada: (ícono, situación, consecuencia,
+# ley, artículo, cita textual, (qué revisa, su aplicación), servicio).
+SV_CPF = ('Código Penal Federal', 'CPF', 'DOF 13-03-2026', 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPF.pdf',
+          'a2d80c4383c5fbc8453cf290c19b7853eb0a5a05d1e366572da384edfafda88c')
+SV_CONSECUENCIAS = [
+    ('🧾', 'Tu proveedor entra a la lista 69-B definitiva',
+     'Sus facturas no producen ni produjeron efecto fiscal: tienes 30 días para probar que la operación existió o para corregir tu declaración.',
+     'cff', 'art. 69-B, párrafos quinto y octavo',
+     'Los efectos de la publicación de este listado serán considerar, con efectos generales, que las operaciones contenidas en los comprobantes '
+     'fiscales expedidos por el contribuyente en cuestión no producen ni produjeron efecto fiscal alguno. […] contarán con treinta días siguientes '
+     'al de la citada publicación para acreditar ante la propia autoridad, que efectivamente adquirieron los bienes o recibieron los servicios […], '
+     'o bien procederán en el mismo plazo a corregir su situación fiscal',
+     ('Revisa un RFC en la 69-B', 'herramienta-inspector-efos.html'), 'seguimiento'),
+    ('💸', 'No pruebas la operación ni corriges a tiempo',
+     'El SAT determina los créditos fiscales, y esas operaciones se tienen por actos simulados para los delitos del Código Fiscal.',
+     'cff', 'art. 69-B, párrafo noveno',
+     'determinará el o los créditos fiscales que correspondan. Asimismo, las operaciones amparadas en los comprobantes fiscales antes señalados '
+     'se considerarán como actos o contratos simulados para efecto de los delitos previstos en este Código.',
+     ('Lee tus facturas contra la 69-B', 'herramienta-inspector-factura.html'), 'facturas'),
+    ('⛓️', 'Compras o usas facturas de operaciones que no existieron',
+     'De dos a nueve años de prisión. Desde noviembre de 2025 se persigue aunque siga abierto el trámite ante el SAT.',
+     'cff', 'art. 113 Bis',
+     'Se impondrá sanción de dos a nueve años de prisión, al que por sí o por interpósita persona, expida, enajene, compre o adquiera comprobantes '
+     'fiscales que amparen operaciones inexistentes, falsas o actos jurídicos simulados. […] Este delito se investigará y perseguirá '
+     'independientemente del estado en que se encuentre el procedimiento administrativo que, en su caso, se haya iniciado.',
+     ('Lee tus facturas contra la 69-B', 'herramienta-inspector-factura.html'), 'diligencia'),
+    ('🪪', 'Tu actividad es vulnerable y no identificas a tu cliente',
+     'Multa de Hacienda por no identificar al cliente ni a su beneficiario controlador. El monto lo fija la ley y lo individualiza la autoridad: no lo damos.',
+     'lfpiorpi', 'arts. 18 y 53, fr. II',
+     'Se aplicará la multa correspondiente a quienes: […] Incumplan con cualquiera de las obligaciones establecidas en el artículo 18 de esta Ley',
+     ('Revisa a tu contraparte en todas las listas', 'herramienta-inspector-padron.html'), 'contrapartes'),
+    ('📝', 'Datos falsos, alterados o ilegibles en los avisos',
+     'De dos a ocho años de prisión. Desde julio de 2025 también por descuido, salvo que el error se corrija por iniciativa propia antes de que la autoridad lo sepa.',
+     'lfpiorpi', 'art. 62',
+     'Se sancionará con prisión de dos a ocho años […] a quien: I. Proporcione a quienes deban dar Avisos, información, documentación, datos o imágenes '
+     'que sean falsos […]. Los delitos previstos en este artículo admitirán la comisión culposa. La comisión culposa de estos delitos, cuando medie un '
+     'error de tipo vencible y éste sea corregido de manera espontánea antes de que la autoridad tome conocimiento del delito, no será sancionada.',
+     ('Revisa tu cartera por lote', 'herramienta-inspector-padron.html#lote'), 'contrapartes'),
+    ('🏦', 'Recibes o mueves dinero sabiendo que viene de un delito',
+     'De cinco a quince años de prisión. El delito pide que lo sepas: revisar no te hace culpable ni inocente, pero deja constancia de qué consultaste y cuándo.',
+     'cpf', 'art. 400 Bis',
+     'Se impondrá de cinco a quince años de prisión […] al que, por sí o por interpósita persona […] Adquiera, enajene, administre, custodie, posea, '
+     'cambie, convierta, deposite, retire, dé o reciba por cualquier motivo […] recursos, derechos o bienes de cualquier naturaleza, cuando tenga '
+     'conocimiento de que proceden o representan el producto de una actividad ilícita',
+     ('Revisa un nombre en la OFAC y la ONU', 'herramienta-inspector-padron.html'), 'diligencia'),
 ]
+# ¿Es seguro? En cuatro palomitas (idea de getfinos.com, 21-11-2026). Lo largo
+# sigue en DIFERENCIA, en «Por qué Auditavisión».
+SV_SEGURO = [
+    'Tus facturas, nóminas y estados de resultados se leen en tu navegador: no se suben.',
+    'Nunca te pedimos la contraseña del SAT ni la de tu banco.',
+    'Cada cifra va con su documento y una etiqueta: oficial, auditada o pendiente.',
+    'Ningún cliente ni donante compra lo que publicamos: las mismas reglas para todos.',
+]
+# Las fuentes que más usan los Servicios, con su corte (fuentes.FUENTES).
+SV_FUENTES = ['sat-69b', 'listas-sat', 'ofac-onu', 'sancionados', 'comprasmx', 'rpu']
 
 
 def servicios():
@@ -2795,14 +2852,14 @@ def servicios():
         '            <a class="sv-tira-n" href="%s"><span class="sv-tira-cifra">%s</span><span class="sv-tira-et">%s</span></a>'
         % (liga, format(v, ','), html.escape(et)) for _, v, et, _op, _fu, _url, liga in monetizacion.contadores())
     portada = '\n'.join([
-        '<div class="sv-hero sv-hero2">',
+        '<div class="sv-hero sv-hero2 sv-hero-foto">',
         '          <div class="sv-hero-izq">',
         '            <p class="sv-hero-pre">Prevención de fraude y de lavado · temporada electoral · formación · investigación</p>',
         '            <p class="sv-hero-tit">Lo que dicen los documentos, antes de que decidas.</p>',
         '            <p class="sv-hero-tx">Antes de pagarle a un proveedor, de aceptar a un cliente, de votar o de recibir un gobierno: '
         'cruzamos la lista 69-B del SAT, los contratos públicos, la ASF y la ley. Te decimos lo que encontramos, lo que falta y quién lo debe.</p>',
-        '            <div class="sv-hero-acc"><a class="sz-btn sz-btn-of" href="herramienta-inspector-padron.html">Revisa un RFC en todas las listas, gratis</a>'
-        '<a class="sz-btn" href="#solicitud">Pide una cotización</a></div>',
+        '            <div class="sv-hero-acc"><a class="sz-btn sz-btn-of" href="#inspector">Cuéntale tu caso al Inspector</a>'
+        '<a class="sz-btn" href="herramienta-inspector-padron.html">Revisa un RFC gratis</a></div>',
         '            <ul class="sv-hero-prom">',
         '              <li><span aria-hidden="true">🧾</span><b>Cada cifra con su documento</b></li>',
         '              <li><span aria-hidden="true">⚖️</span><b>Las mismas reglas</b> para todos</li>',
@@ -2810,17 +2867,7 @@ def servicios():
         '            </ul>',
         '          </div>',
         '          ' + mini,
-        '        </div>',
-        '        <div class="sv-tira">',
-        tira,
-        '        </div>',
-        '        <p class="sv-nota sv-tira-nota">Lo que ya puedes revisar hoy. Son conteos de los archivos de la plataforma al generar esta página '
-        '(<span class="est-chip est-derivado">auditada</span>); de qué documento sale cada uno está en <a href="%s#base">Por qué Auditavisión</a>.</p>' % SV_PORQUE,
-        '        <p class="sv-que-nec">¿Qué necesitas?</p>',
-        '        <div class="sv-cards sv-cards4">%s</div>' % ''.join(
-            sv_card(tx, [l[3] for l in LINEAS if l[0] == fid][0], [l[1] for l in LINEAS if l[0] == fid][0],
-                    (lambda k: '%d servicio%s' % (k, '' if k == 1 else 's'))(sum(1 for x in SERVICIOS if x[6] == fid)), '#fam-%s' % fid, tono=SV_TONO[fid], ir='Ver')
-            for fid, tx in puertas)])
+        '        </div>'])
 
     # La base, contada (idea de getquin, docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md
     # §3.4): cada número se cuenta de su archivo al generar (monetizacion.py).
@@ -3168,36 +3215,92 @@ def servicios():
             'pie_extra': partes_nav('Servicios', 'servicios.html', '🔎', partes, archivo),
         }))
 
-    # El tablero (pedido del autor, 11-11-2026): la portada, una tarjeta por
-    # página y los servicios de un vistazo. Ya no se despliega nada aquí.
-    cuenta = {'riesgo': '%d riesgos' % len(RIESGOS), 'oferta': '%d servicios' % len(SERVICIOS), 'sectores': '%d perfiles' % len(PERFILES),
-              'modulos': '%d herramientas' % sum(1 for m in MODULOS if m[5] == 'Gratis'), 'cobro': '%d formas de cobro' % len(SERVICIOS),
-              'calendario': '%d etapas' % len(CALENDARIO), 'preguntas': '%d preguntas' % len(PREGUNTAS), 'solicitud': 'Sin costo'}
-    tablero = '<nav class="sv-cards sv-cards4" aria-label="Las páginas de Servicios">\n%s\n        </nav>' % '\n'.join(
-        '          ' + sv_card(corto, frase, ico, cuenta[sid], archivo, tono=sid) for sid, archivo, ico, corto, _t, frase in SV_PAGINAS)
-    vistazo = '%s\n        %s' % ('\n'.join(
-        '<p class="sv-fam-tit sv-hub-%s"><a href="%s#fam-%s"><span aria-hidden="true">%s</span> %s</a></p>\n'
-        '        <div class="sv-cards">\n%s\n        </div>' % (SV_TONO[lid], SV_CATALOGO, lid, lico, ltit, '\n'.join(
-            '          ' + sv_tarjeta_servicio(s) for s in SERVICIOS if s[6] == lid))
-        for lid, lico, ltit, _x in LINEAS), sv_liga(mas, 'servicios.html'))
-    # Del chat al servicio (19-11-2026): la pregunta va directo al Auditor, con su modo.
+    # Del chat al servicio: el Inspector (rediseño del 21-11-2026, abajo).
     import servicios_fichas as sf
-    ruta = '\n'.join([
-        '<ol class="sv-ruta">%s</ol>' % ''.join(
-            '<li class="sv-card"><span class="sv-card-cab"><span class="sv-card-ico" aria-hidden="true">%s</span><span class="sv-card-chip">Paso %d</span></span>'
-            '<b class="sv-card-tit">%s</b><span class="sv-card-tx">%s</span></li>' % (ico, n, t, tx) for n, (ico, t, tx) in enumerate(SV_RUTA, 1)),
-        '        <form class="sv-preg" action="herramienta-inspector-pregunta.html" method="get" role="search" aria-label="Pregúntale al Auditor">',
-        '          <label for="svPreg">Cuéntale tu caso al Auditor</label>',
+    # Rediseño del 21-11-2026 (pedido del autor, con getfinos.com de referencia: «muy
+    # esquematizado, muy concreto… está muy reiterativo, poco entendible»). Una idea por
+    # sección y en este orden: cómo funciona (tres pasos, por el Inspector), qué
+    # necesitas (cada familia con sus servicios en una línea: sustituye «de un vistazo»
+    # y el tablero), lo que arriesgas si no revisas, la base al día, por qué es seguro,
+    # cuánto cuesta y las preguntas. El catálogo completo sigue en su página.
+    pasos3 = [
+        ('🔍', 'Cuéntale tu caso al Inspector', 'Es el modo más completo del Auditor: investiga con toda la base y con las aplicaciones de los cuatro modos. '
+         'Te contesta en corto, con la cifra, su documento y su etiqueta.'),
+        ('🧾', 'Recibe tu dictamen', 'Cada respuesta con datos trae su Dictamen cívico independiente, con folio, huella y fuentes. No es un documento oficial ni un peritaje.'),
+        ('📝', 'Cotiza si quieres ir más a fondo', 'El chat te dice qué servicio le toca a tu caso. Tu misma pregunta pasa a la cotización, y el costo y el plazo te llegan por escrito antes de empezar.'),
+    ]
+    como3 = '\n'.join([
+        '<ol class="sv-p3">%s</ol>' % ''.join(
+            '<li><span class="sv-p3-n" aria-hidden="true">%d</span><span class="sv-p3-ico" aria-hidden="true">%s</span><b>%s</b><span>%s</span></li>'
+            % (n, ico, t, tx) for n, (ico, t, tx) in enumerate(pasos3, 1)),
+        '        <form class="sv-preg" id="inspector" action="herramienta-inspector-pregunta.html" method="get" role="search" aria-label="Cuéntale tu caso al Inspector">',
+        '          <label for="svPreg">Cuéntale tu caso al Inspector</label>',
+        '          <input type="hidden" name="modo" value="inspector">',
         '          <div class="sv-preg-fila"><input id="svPreg" name="q" type="text" maxlength="300" required '
         'placeholder="Ej.: ¿Cómo reviso a un proveedor antes de contratarlo?">'
-        '<select name="modo" aria-label="Modo del Auditor"><option value="inspector">🔍 Inspector</option><option value="periodista">📰 Periodista</option>'
-        '<option value="ciudadano">🙋 Ciudadano</option><option value="ambientalista">🌎 Ambientalista</option></select>'
         '<button type="submit" class="sz-btn sz-btn-of">Preguntar</button></div>',
-        '          <p class="sv-preg-ej"><span>O toca un servicio:</span>%s</p>' % ''.join(
-            '<a class="sv-op" href="%s"><span aria-hidden="true">%s</span> %s</a>' % (sf.chat_liga(*sv_pregunta(x[0])), x[1], x[2]) for x in SERVICIOS[:4]),
-        '        </form>',
-        '        <p class="sv-nota">El Auditor contesta con la misma base de la plataforma y nunca da un monto: el costo de un servicio llega por escrito, '
-        'antes de empezar. El dictamen no es un documento oficial ni un peritaje.</p>'])
+        '          <p class="sv-preg-ej"><span>O empieza por un servicio:</span>%s</p>' % ''.join(
+            '<a class="sv-op" href="%s"><span aria-hidden="true">%s</span> %s</a>' % (sf.chat_liga(sv_pregunta(x[0])[0], 'inspector'), x[1], x[2])
+            for x in SERVICIOS[:4]),
+        '        </form>'])
+    fams = '<div class="sv-fams">\n%s\n        </div>' % '\n'.join(
+        '          <section class="sv-fam sv-hub-%s" aria-labelledby="svf-%s">\n'
+        '            <p class="sv-fam-cab"><span class="sv-card-ico" aria-hidden="true">%s</span><b id="svf-%s">%s</b></p>\n'
+        '            <p class="sv-fam-tx">%s</p>\n'
+        '            <ul class="sv-fam-lista">%s</ul>\n'
+        '            <a class="sv-fam-ir" href="%s#fam-%s">Compáralos ➔</a>\n'
+        '          </section>' % (SV_TONO[fid], fid, l[1], fid, tx, l[3], ''.join(
+            '<li><a href="servicio-%s.html"><span aria-hidden="true">%s</span> %s</a><small>%s</small></li>' % (x[0], x[1], x[2], COBRO[x[0]])
+            for x in SERVICIOS if x[6] == fid), SV_CATALOGO, fid)
+        for fid, tx in puertas for l in LINEAS if l[0] == fid)
+    from insp_conservacion import LEYES as LEYES_CONS
+    leyes_sv = dict(LEYES_CONS, cpf=SV_CPF)
+    for c in SV_CONSECUENCIAS:
+        if c[3] not in leyes_sv or c[7] not in nom:
+            raise SystemExit('Servicios: la consecuencia «%s» cita una ley o un servicio que no existen' % c[1])
+        if not os.path.exists(os.path.join(RAIZ, c[6][1].partition('#')[0])):
+            raise SystemExit('Servicios: la consecuencia «%s» lleva a %s, que no existe' % (c[1], c[6][1]))
+    arriesga = ('<div class="sv-cons">\n%s\n        </div>\n'
+                '        <p class="sv-limite"><span aria-hidden="true">⚖️</span> Citamos el artículo y su texto vigente, nunca un monto de multa: la ley la fija '
+                'en UMA y la autoridad la individualiza. Una infracción no es una sanción, y que una lista te nombre no es una condena (Constitución, art. 20, B, fr. I). '
+                'No es asesoría legal.</p>') % '\n'.join(
+        '          <article class="sv-con">\n'
+        '            <p class="sv-con-cab"><span class="sv-card-ico" aria-hidden="true">%s</span><b>%s</b></p>\n'
+        '            <p class="sv-con-pasa">%s</p>\n'
+        '            <details class="sv-con-ley"><summary>%s, %s <span class="est-chip est-oficial">oficial</span></summary>'
+        '<blockquote>«%s»</blockquote><small><a href="%s" target="_blank" rel="noopener">%s</a>, texto vigente (Cámara de Diputados, última reforma %s; huella SHA-256 <code>%s…</code>).</small></details>\n'
+        '            <p class="sv-con-acc"><a href="%s">%s ➔</a><a class="sv-con-srv" href="servicio-%s.html">Servicio: %s</a></p>\n'
+        '          </article>' % (ico, tit, pasa, leyes_sv[ley][1], art, cita, esc_attr(leyes_sv[ley][3]), leyes_sv[ley][0], leyes_sv[ley][2], leyes_sv[ley][4][:12],
+                                  rev[1], rev[0], sid, nom[sid])
+        for ico, tit, pasa, ley, art, cita, rev, sid in SV_CONSECUENCIAS)
+    import fuentes as fu
+    fte = {f['id']: f for f in fu.FUENTES}
+    falta = [k for k in SV_FUENTES if k not in fte]
+    if falta:
+        raise SystemExit('Servicios: SV_FUENTES pide fuentes que no están en fuentes.FUENTES: %s' % ', '.join(falta))
+    modo_tx = {'sola': '🤖 Se pone al día sola cada semana', 'aviso': '🔔 Un vigía avisa y se coteja', 'mano': '✋ Se integra a mano'}
+    aldia = '\n'.join([
+        '<div class="sv-tira">', tira, '        </div>',
+        '        <ul class="sv-fuentes">%s</ul>' % ''.join(
+            '<li><b>%s</b><span>%s · %s</span><small>%s</small></li>' % (
+                html.escape(fte[k]['que']), html.escape(fte[k]['quien']), html.escape(fu.corte(fte[k])), modo_tx[fte[k]['modo']])
+            for k in SV_FUENTES),
+        '        <p class="sv-nota">Los números son conteos de los archivos de la plataforma al generar esta página (<span class="est-chip est-derivado">auditada</span>). '
+        'Cada fuente, con quién la publica, cada cuándo y su próxima revisión, está en <a href="base-al-dia.html">La base al día</a>; '
+        'de qué documento sale cada número, en <a href="%s#base">Por qué Auditavisión</a>.</p>' % SV_PORQUE])
+    seguro = ('<ul class="sv-checks">%s</ul>\n        <p class="sv-nota"><a href="%s#diferencia">Más sobre cómo te protegemos ➔</a></p>') % (
+        ''.join('<li>%s</li>' % x for x in SV_SEGURO), SV_PORQUE)
+    precio = ('<div class="sv-precio-l">\n'
+              '          <p class="sv-precio-tit">La consulta es gratis, y lo seguirá siendo.</p>\n'
+              '          <p>Lo que hacemos por encargo se cotiza por escrito antes de empezar; si no te conviene, ahí termina. Todavía no hay tarifas publicadas: '
+              'saldrán de encargos piloto y serán iguales para todos.</p>\n'
+              '          <div class="sv-hero-acc"><a class="sz-btn sz-btn-of" href="%s#solicitud">Pide una cotización</a>'
+              '<a class="sz-btn" href="servicios-como-se-cobra.html">Cómo se cobra cada servicio</a></div>\n'
+              '        </div>') % SV_COTIZA
+    faq = '<div class="sv-faqs">\n%s\n        </div>\n        <p class="sv-nota"><a href="servicios-preguntas.html">Ver las %d preguntas ➔</a></p>' % (
+        '\n'.join('          <details class="sv-faq"><summary>%s</summary><p>%s</p></details>' % q for q in PREGUNTAS[:5]), len(PREGUNTAS))
+    mas_porque = ('<p class="sv-nota">Cómo funciona por dentro, la evidencia, dónde encajamos y cómo nos sostenemos: '
+                  '<a href="%s">Por qué Auditavisión ➔</a></p>' % SV_PORQUE)
     # Lo nuevo de la plataforma (18-11-2026): cada novedad con los servicios que la usan.
     import servicios_fichas as sf
     nv = ['          ' + sv_card(t, tx, i, 'Nuevo', lg, (('Ábrelo', lg, True),), pie='<span class="sv-nuevo-en">En: %s</span>' % ', '.join(
@@ -3226,15 +3329,17 @@ def servicios():
         'antes': aviso,
         'secciones': [
             bloque_sec('propuesta', 'Lo que te ofrecemos', '', sv_liga(portada, 'servicios.html'), sin_cab=True),
-            bloque_sec('auditor', 'Del chat al servicio, en cuatro pasos',
-                       'Todo pasa por el Auditor: pregúntale, genera tu dictamen y, si quieres ir más a fondo, cotiza con tu misma pregunta.',
-                       ruta, pre='Pregúntale al Auditor'),
-            bloque_sec('vistazo', 'Los servicios, de un vistazo',
-                       '%s servicios en cuatro familias. Cada tarjeta tiene las mismas cuatro puertas: el servicio, el Auditor, su dictamen y su cotización.'
-                       % numero(len(SERVICIOS)), vistazo, pre='La oferta'),
-            bloque_sec('explora', 'Todo Servicios, en tarjetas', 'Toca una tarjeta: cada una abre su página.', tablero, pre='Explora'),
-            bloque_sec('nuevo', 'Lo nuevo de la plataforma, ya en tus servicios',
-                       'Lo que llegó en noviembre de 2026. Lo usas gratis hoy, y cada servicio lo lleva más lejos por encargo.', nuevo, pre='Novedades'),
+            bloque_sec('como', 'Cómo funciona', 'Tres pasos. Todo empieza con una pregunta en tus palabras.', como3, pre='Del chat al servicio'),
+            bloque_sec('necesitas', '¿Qué necesitas?',
+                       '%s servicios en cinco familias. Toca uno para ver qué recibes y cómo se cobra.' % numero(len(SERVICIOS)), fams, pre='Los servicios'),
+            bloque_sec('arriesgas', 'Lo que arriesgas si no revisas',
+                       'Lo que dice la ley cuando un proveedor o un cliente no es lo que parece. Toca el artículo para leer su texto.', arriesga, pre='Por qué revisar'),
+            bloque_sec('al-dia', 'La base, al día', 'Lo que ya puedes revisar hoy, gratis, y de cuándo es cada fuente.', aldia, pre='Nuestra base de datos'),
+            bloque_sec('seguro', '¿Es seguro?', 'Cuatro cosas que puedes comprobar antes de contratar.', seguro, pre='Confianza'),
+            bloque_sec('cuesta', '¿Cuánto cuesta?', 'Sabes cómo se cobra antes de escribirnos.', precio, pre='Precio'),
+            bloque_sec('preguntas-f', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.', faq),
+            bloque_sec('nuevo', 'Lo nuevo de la plataforma', 'Lo que llegó en noviembre de 2026: lo usas gratis hoy, y cada servicio lo lleva más lejos por encargo.',
+                       '<details class="sv-mas"><summary>Ver las novedades</summary>\n        %s\n        </details>\n        %s' % (nuevo, mas_porque)),
         ],
         'pie_extra': partes_nav('Servicios', 'servicios.html', '🔎', partes, 'servicios.html'),
     })
