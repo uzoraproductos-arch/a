@@ -484,16 +484,9 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 [data-theme="dark"] .sv-fam-lista li { border-color: #2a3b57; }
 [data-theme="dark"] .sv-fam-lista small, [data-theme="dark"] .sv-con-ley small, [data-theme="dark"] .sv-fuentes small { color: #b7c3d9; }
 
-/* Encabezado con fotografía (pedido del autor, 21-11-2026): la imagen va de fondo de la cabecera de la página
-   («La consulta es libre…»), no del recuadro de la portada; un velo azul deja leer el texto. */
-.apartado-cab.sv-cab-foto { background: linear-gradient(90deg, rgba(7,29,71,.92) 0%, rgba(7,29,71,.7) 45%, rgba(7,29,71,.3) 75%, rgba(7,29,71,.15) 100%), #071d47 url('../img/servicios-encabezado.webp') 70% 45% / cover no-repeat; border-bottom: 0; padding: 30px 0 64px; }
-.sv-cab-foto .apartado-titulo, .sv-cab-foto .apartado-entrada, .sv-cab-foto .apartado-migas { color: #ffffff; text-shadow: 0 1px 8px rgba(4,14,38,.65); }
-.sv-cab-foto .apartado-entrada { max-width: 620px; }
-.sv-cab-foto .apartado-migas a, .sv-cab-foto .apartado-entrada a { color: #ffd27a; }
-.sv-cab-foto .apartado-titulo { font-size: clamp(32px, 4.4vw, 54px); }
-@media (max-width: 860px) {
-  .apartado-cab.sv-cab-foto { background: linear-gradient(180deg, rgba(7,29,71,.6) 0%, rgba(7,29,71,.8) 40%, rgba(7,29,71,.92) 100%), #071d47 url('../img/servicios-encabezado-movil.webp') 75% 30% / cover no-repeat; padding-bottom: 40px; }
-}
+/* La imagen del autor va en el recuadro de la portada, en lugar del ejemplo (pedido del autor, 21-11-2026). */
+.sv-hero-img { margin: 0; border-radius: 20px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.35); background: #071d47; }
+.sv-hero-img img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
 /* Lo nuevo, en cada servicio (21-11-2026). */
 .sv-nuevo-lista { margin: 10px 0 4px; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 16px; line-height: 1.45; }
 .sv-nuevo-lista li { padding-left: 2px; }

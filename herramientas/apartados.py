@@ -2933,14 +2933,14 @@ def servicios():
     # usuario su vista y consumo… nos podemos basar en getquin o WiseCricket»):
     # portada en dos columnas con el producto a la vista, la base contada en
     # una tira, y las familias y los perfiles por pestañas (servicios.js).
-    mini = ('<div class="sv-demo sv-demo-mini" id="ejemplo">\n'
-            '            <div class="sv-demo-cab"><span class="sv-demo-et">Datos de ejemplo: la empresa y los hallazgos son ficticios</span>'
-            '<p class="sv-demo-tit"><span aria-hidden="true">🏢</span> %s</p><p class="sv-demo-sub">Revisión de un proveedor · fuentes públicas</p></div>\n'
-            '            <ol class="sv-demo-lista">\n%s\n            </ol>\n'
-            '            <p class="sv-demo-ver"><b>Resultado:</b> %s</p>\n'
-            '          </div>') % (DEMO['empresa'], '\n'.join(
-        '              <li class="sv-h sv-h-%s"><b>%s</b><span>%s</span><small>%s</small></li>' % (cl, tit, tx, ley)
-        for tit, tx, ley, cl in DEMO['hallazgos']), DEMO['veredicto'])
+    # La imagen del autor va en el recuadro de la portada, donde estaba el ejemplo de la
+    # empresa y sus hallazgos (pedido del autor, 21-11-2026; ya no va en la cabecera).
+    # El ejemplo completo sigue en su página (DEMO).
+    mini = ('<figure class="sv-hero-img"><picture>'
+            '<source media="(max-width: 860px)" srcset="assets/auditor/img/servicios-encabezado-movil.webp">'
+            '<img src="assets/auditor/img/servicios-encabezado.webp" width="1280" height="720" '
+            'alt="Ilustración: una lupa sobre documentos verificados, una balanza, gráficas y un escudo con candado">'
+            '</picture></figure>')
     tira = '\n'.join(
         '            <a class="sv-tira-n" href="%s"><span class="sv-tira-cifra">%s</span><span class="sv-tira-et">%s</span></a>'
         % (liga, format(v, ','), html.escape(et)) for _, v, et, _op, _fu, _url, liga in monetizacion.contadores())
@@ -3406,8 +3406,6 @@ def servicios():
         'entrada': ('La consulta es libre y lo seguirá siendo. Cuando quieras ir más a fondo, lo hacemos por encargo, con la misma regla. '
                     'Los Servicios y las <a href="donaciones.html">donaciones</a> sostienen el trabajo; ninguno compra lo que publicamos.'),
         'sin_saltos': True, 'redirige': redir,
-        # La imagen del autor va de fondo de esta cabecera (pedido del autor, 21-11-2026).
-        'cab_extra': 'sv-cab-foto',
         'scripts': ['servicios.js'],  # las pestañas de los servicios por familia
         'antes': aviso,
         'secciones': [

@@ -7573,6 +7573,14 @@ Pedido del autor: «intégralo y continúa con las dimensiones pendientes». Se 
 - **El chat:** «se venció mi contrato…» ya no abre ComprasMX (`contratosCmx()` suelta «mi contrato», «finiquito», «me toca»…); frases nuevas en `ALIAS_APPS`.
 - **Pendiente:** la obra determinada (el art. 50 no la nombra); lo que quedó en espera; el ISR de los intereses del art. 48; la indemnización del apartado B; trabajadores de estados y municipios; el subsidio de enero; cotejar PC.XXX. J/31 A en el Semanario.
 
+### 21-11-2026 · sello 20261121z · Servicios: la imagen vuelve al recuadro de la portada
+
+Pedido del autor: quitar la imagen de la cabecera de `servicios.html` y regresarla al recuadro «Prevención de
+fraude y de lavado · temporada electoral · formación · investigación», en el lugar del ejemplo (la empresa y
+los hallazgos). La cabecera ya no lleva `cab_extra: 'sv-cab-foto'` (sus reglas salen de `servicios.css`), y
+`mini` de `servicios()` es ahora la imagen (`.sv-hero-img`, con su versión `-movil` en un `<picture>`), en vez
+de la tarjeta `sv-demo-mini`. El ejemplo completo (`DEMO`) sigue en su página. Ninguna cifra cambió.
+
 ### 21-11-2026 · sello 20261121y · Las imágenes de la portada, vinculadas al modo Periodista
 
 Pedido del autor: «las imágenes que quedaron en la portada principal de la plataforma… quedan vinculadas al
