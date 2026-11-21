@@ -18,3 +18,24 @@
 .cp-contraste p, .cp-contraste li { font-size: 17px; line-height: 1.6; color: var(--ci-tx); }
 .cp-tabla { margin: 8px 0 14px; padding: 12px 14px; border-radius: 12px; background: var(--ci-claro); }
 .cp-tabla .ci-pista, .cp-tabla .ci-nota { color: var(--ci-tx); }
+/* Tu valor fiscal junto al mercado de la vivienda: la escala del Índice SHF (21-11-2026). */
+.cp-mercado { margin: 0 0 24px; }
+.cp-mercado p { font-size: 17px; line-height: 1.6; color: var(--ci-tx); }
+.cp-esc { position: relative; height: 120px; margin: 18px 4px 4px; }
+.cp-esc-barra { position: absolute; left: 0; right: 0; top: 50px; height: 12px; border-radius: 6px; background: var(--ci-claro); overflow: hidden; }
+.cp-esc-banda { position: absolute; top: 0; bottom: 0; background: var(--ci); opacity: .35; }
+.cp-esc-m { position: absolute; width: 0; border-left: 2px dashed var(--ci-tx2); }
+.cp-esc-m > span { position: absolute; left: 0; transform: translateX(-50%); white-space: nowrap; font-size: 14px; line-height: 1.3; color: var(--ci-tx2); text-align: center; }
+.cp-esc-q > span, .cp-esc-ab > span { z-index: 2; background: #fff; padding: 0 3px; }
+.cp-esc-tu { z-index: 1; }
+.cp-esc-m.cp-izq > span { transform: none; text-align: left; }
+.cp-esc-m.cp-der > span { transform: translateX(-100%); text-align: right; }
+.cp-esc-q { top: 22px; height: 40px; }
+.cp-esc-q > span { top: 0; }
+.cp-esc-ab { top: 50px; height: 26px; }
+.cp-esc-ab > span { top: 26px; }
+.cp-esc-ab2 { height: 48px; }
+.cp-esc-ab2 > span { top: 48px; }
+.cp-esc-tu { top: 0; height: 66px; border-left: 4px solid var(--ci); }
+.cp-esc-tu > span { top: 0; padding-left: 6px; font-weight: 700; color: var(--ci); }
+.cp-esc-tu.cp-der > span { padding: 0 6px 0 0; }

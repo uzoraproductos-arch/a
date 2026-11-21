@@ -1727,6 +1727,37 @@ EJEMPLO = {'vf': 7613320.00, 'bim': 2337.62, 'anual': 14025.72, 'tres': 7012.86,
            'notif_uma2022': 577.32, 'uma2022': 96.22}
 
 
+# ---- El mercado de la vivienda junto al valor fiscal (Índice SHF, 21-11-2026) ----
+# Lo escribe anclar_shf_vivienda.py desde el informe y los datos abiertos de la SHF, con huella y cuadre.
+# Sale de avalúos de vivienda: no es el valor de ningún predio ni un avalúo, y el valor fiscal (catastro) es otra medida.
+SHF_JSON = os.path.join(RAIZ, 'docs', 'vivienda', 'shf-precios-vivienda.json')
+
+
+def shf():
+    with open(SHF_JSON, encoding='utf-8') as f:
+        S = json.load(f)
+    ents = {v: k for k, v in ENTIDADES.items()}
+    ents['México'] = ents['Estado de México']  # así lo nombra la SHF
+    mun = {}
+    for x in S['municipios']:
+        e = ents.get(x['ent'])
+        for m in MUNICIPIOS:
+            if m['ent'] == e and m['nombre'] == x['nombre']:
+                mun[m['id']] = {'var': x['var'], 'i': x['i'], 'i0': x['i0']}
+    est = {ents[k]: v for k, v in S['estados'].items() if k in ents}
+    return {'corte': S['corte'], 'anio': S['anio'], 'trim': S['trim'], 'fuente': S['fuente'], 'pagina': S['pagina'],
+            'inf': S['informe'], 'dat': S['datos'], 'met': S['metodo'], 'nac': S['nacional'], 'est': est, 'mun': mun}
+
+
+def _corte_txt(S):
+    return '%s trimestre de %d' % (['primer', 'segundo', 'tercer', 'cuarto'][S['trim'] - 1], S['anio'])
+
+
+def cuartil(P, vf):
+    """En qué tramo de la distribución de precios cae un valor: 0 (bajo el 25 %), 1, 2 o 3 (desde el 75 %)."""
+    return sum(1 for k in ('p25', 'p50', 'p75') if vf >= P[k])
+
+
 def esc(t):
     return html.escape(str(t))
 
@@ -1811,6 +1842,21 @@ def revisa():
             raise SystemExit('cc_predial: %s está en ESPERA y en MUNICIPIOS, o le falta su porqué' % k)
 
 
+def revisa_shf():
+    S = shf()
+    if len(S['inf']['sha256']) != 64 or len(S['dat']['sha256']) != 64 or len(S['est']) != 32:
+        raise SystemExit('cc_predial: el Índice SHF no trae sus huellas o sus 32 entidades')
+    for e, v in S['est'].items():
+        P = v['precios']
+        if not (P and 0 < P['p25'] <= P['p50'] <= P['p75'] and P['medio'] > 0 and v['var'] is not None):
+            raise SystemExit('cc_predial: los precios SHF de %s no están en orden' % e)
+    for k, v in S['mun'].items():
+        if abs(round((v['i'] / v['i0'] - 1) * 100, 1) - v['var']) > 0.1 + 1e-9:
+            raise SystemExit('cc_predial: la variación SHF de %s no sale de su índice' % k)
+    if not {'guadalajara', 'zapopan', 'tlajomulco', 'tlaquepaque'} <= set(S['mun']):
+        raise SystemExit('cc_predial: se perdió el cruce de los municipios con el Índice SHF')
+
+
 def _r2(v):
     """Como Math.round(v * 100) / 100 del navegador (los medios centavos van hacia arriba)."""
     return math.floor(v * 100 + 0.5) / 100
@@ -1857,11 +1903,12 @@ def valor_fiscal(ts, vs, tc=0, vc=0, fc=1):
 
 def datos(base):
     revisa()
+    revisa_shf()
     cc = cc_inmueble.datos(base)
     uma = base['calculadora_civica']['parametros']['uma']
     return {'anio': ANIO, 'inpc': cc['inpc'], 'inpc_ult': cc['inpc_ult'],
             'uma': uma['diaria'], 'uma_f': uma['fuente'], 'ent': ENTIDADES,
-            'mun': MUNICIPIOS, 'espera': ESPERA, 'reg': REGISTRO, 'tablas': TABLAS, 'dtv': DECRETOS_TV, 'poe': _POE, 'lhm': {'tope': 250, 'tope_esp': 100}}
+            'mun': MUNICIPIOS, 'espera': ESPERA, 'reg': REGISTRO, 'tablas': TABLAS, 'dtv': DECRETOS_TV, 'poe': _POE, 'lhm': {'tope': 250, 'tope_esp': 100}, 'shf': shf()}
 
 
 def construir(base, ref):
@@ -2010,6 +2057,13 @@ def construir(base, ref):
     <p class="ci-nota" id="cpNota"></p>
   </section>
 
+  <section class="ci-grupo cp-mercado" id="cpMercado" aria-labelledby="cpMerTit">
+    <h2 class="ci-tit" id="cpMerTit"><span aria-hidden="true">📈</span> Tu valor fiscal junto al mercado de la vivienda</h2>
+    <p class="ci-nota">El predial se cobra sobre el <b>valor fiscal</b>, que fija el catastro con sus tablas de valores. Los bancos y las unidades de valuación miden otra cosa: el <b>precio de avalúo</b> de una vivienda. Con él, la Sociedad Hipotecaria Federal (SHF) publica cada trimestre el Índice SHF de Precios de la Vivienda: cuánto valieron las viviendas valuadas en cada estado y cuánto subieron en un año. Aquí lo ponemos junto a tu valor fiscal, para que veas en qué parte del mercado queda. <b>No es un avalúo ni dice cuánto vale tu casa</b>: es el mercado de tu estado, no tu predio.</p>
+    <div id="cpMerCuerpo" aria-live="polite"></div>
+    <p class="ci-fuentes">Fuente: <a href="{shf_inf_url}">{shf_fuente}, {shf_corte}</a> (huella SHA-256 <code>{shf_inf_sha}…</code>), pág. {shf_pag}, «{shf_tit}», {shf_uni}; las variaciones, págs. {shf_pe} y {shf_pm}; «{shf_nota}» Índices de sus <a href="{shf_dat_url}">datos abiertos</a> (base {shf_base}; huella <code>{shf_dat_sha}…</code>). Cómo se arma: <a href="{shf_met_url}">nota metodológica de la SHF</a>: {shf_cita} {chip_o}</p>
+  </section>
+
   <section class="ci-grupo cp-compara" aria-labelledby="cpCompTit">
     <h2 class="ci-tit" id="cpCompTit"><span aria-hidden="true">⚖️</span> El mismo predio en cada municipio {chip_d}</h2>
     <p class="ci-nota">Con el valor fiscal que escribiste (o $2,500,000 si aún no escribes nada), lo que cobraría de predial al año cada municipio que ya integramos, sin descuentos. Solo cambia la ley; el predio es el mismo. Ojo: el valor fiscal de un mismo terreno tampoco sería igual en otro municipio, porque cada uno tiene sus tablas de valores.</p>
@@ -2048,7 +2102,12 @@ def construir(base, ref):
         con_tabla=con_tabla, anio=ANIO, ents=ents, anios=anios, bims=bims, ult=ult, uma=format(D['uma'], ',.2f'), uma_f=esc(D['uma_f']),
         lista=lista, espera=espera, reg_filas=reg_filas, reg_sin=reg_sin, chip_p=chip('pendiente'), leyes=leyes, lhm_url=esc(LHM['url']), lhm_tx=esc(LHM['tx']), lhm_sha=LHM['sha256'][:12],
         inpc_url=esc(cc_inmueble.datos(base)['f']['inpc_url']), f_inpc=esc(cc_inmueble.datos(base)['f']['inpc']),
-        chip_d=chip('derivado'), chip_o=chip('oficial'), datos=cc_inmueble._json(D))
+        chip_d=chip('derivado'), chip_o=chip('oficial'), datos=cc_inmueble._json(D),
+        shf_inf_url=esc(D['shf']['inf']['url']), shf_fuente=esc(D['shf']['fuente']), shf_corte=esc(_corte_txt(D['shf'])), shf_inf_sha=D['shf']['inf']['sha256'][:12],
+        shf_pag=D['shf']['inf']['precios_pag'], shf_tit=esc(D['shf']['inf']['precios_tit']), shf_uni=esc(D['shf']['inf']['unidad']),
+        shf_pe=D['shf']['inf']['var_pag_ent'], shf_pm=D['shf']['inf']['var_pag_mun'], shf_nota=esc(D['shf']['inf']['nota']),
+        shf_dat_url=esc(D['shf']['dat']['url']), shf_base=esc(D['shf']['dat']['base']), shf_dat_sha=D['shf']['dat']['sha256'][:12],
+        shf_met_url=esc(D['shf']['met']['url']), shf_cita=esc(D['shf']['met']['cita']))
 
 
 # ---- Prueba: el caso del mandamiento y que Python y el navegador den lo mismo ----
@@ -2155,6 +2214,17 @@ def prueba():
             mal += 1
             print('✗ suelo', x, n)
     cel = cel + sue
+    # El cuarto de los precios de avalúo SHF en que cae un valor: el mismo en Python y en el navegador.
+    S = shf()
+    qv = [(e, v) for e in sorted(S['est']) for P in [S['est'][e]['precios']] for v in (1, P['p25'] - 0.01, P['p25'], P['p50'], P['p75'] - 1, P['p75'], P['p75'] * 3)]
+    prog6 = ("global.window={};global.document={getElementById:function(){return null}};require(%s);var E=%s;"
+             "console.log(JSON.stringify(%s.map(function(x){return window.AuditorPredial.cuartil(E[x[0]].precios,x[1]);})));"
+             % (json.dumps(js), json.dumps(S['est']), json.dumps(qv)))
+    r6 = subprocess.run(['node'], input=prog6, capture_output=True, text=True)
+    nav6 = json.loads(r6.stdout or '[]')
+    if len(nav6) != len(qv) or any(cuartil(S['est'][e]['precios'], v) != n for (e, v), n in zip(qv, nav6)):
+        mal += 1
+        print('✗ el cuartil SHF no da lo mismo en el navegador', r6.stderr[:300])
     if valor_construccion(TABLAS['zapopan'], 'hab', 2, 0, 0) != 8800:
         mal += 1
         print('✗ Zapopan, medio moderno bueno debe ser $8,800 por m²')
@@ -2173,7 +2243,7 @@ def prueba():
         print('%d diferencias en el simulador del predial' % mal)
         return 1
     print('✓ Simulador del predial: %d municipios (%d leídos y en espera), %d casos iguales en Python y en el navegador '
-          '(y %d celdas de tablas de valores, de construcción y de suelo); la cobranza sigue a cada ley; el mandamiento de Zapopan cuadra ($2,337.62)' % (len(MUNICIPIOS), len(ESPERA), len(casos), len(cel)))
+          '(y %d celdas de tablas de valores, de construcción y de suelo, y %d lugares en los precios de vivienda SHF); la cobranza sigue a cada ley; el mandamiento de Zapopan cuadra ($2,337.62)' % (len(MUNICIPIOS), len(ESPERA), len(casos), len(cel), len(qv)))
     return 0
 
 

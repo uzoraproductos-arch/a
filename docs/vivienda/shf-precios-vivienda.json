@@ -1,0 +1,911 @@
+{
+ "fuente": "Sociedad Hipotecaria Federal (SHF), Índice SHF de Precios de la Vivienda en México",
+ "pagina": "https://www.gob.mx/shf/documentos/indice-shf-de-precios-de-la-vivienda-en-mexico-2025-a-2026",
+ "metodo": {
+  "url": "https://www.gob.mx/cms/uploads/attachment/file/1100172/Nota_metodol_gica_del__ndice_SHF_de_Precios_de_la_Vivienda_en_M_xico.pdf",
+  "sha256": "d88bc982ab84b3a759480ff1c1bf02056297d445db92363514498ff7b45d373a",
+  "cita": "«El IPV es un indicador que mide los cambios en la valoración económica de las propiedades inmuebles. Las características de los avalúos evolucionan con el tiempo, por lo que los precios tienen que ser ajustados por los cambios en su calidad.»"
+ },
+ "corte": "3T 2026",
+ "anio": 2026,
+ "trim": 3,
+ "informe": {
+  "url": "https://www.gob.mx/cms/uploads/attachment/file/1115355/I_ndice_SHF_T3_2026.pdf",
+  "sha256": "9fce0becb144dc6a80e71d6cf63f8366357fb2fc6384da784b3875ddc6a2d469",
+  "precios_pag": 9,
+  "precios_tit": "Distribución de los precios en el ámbito nacional y por entidad federativa 2026",
+  "var_pag_ent": 5,
+  "var_pag_mun": 7,
+  "nota": "Cifras preliminares sujetas a revisión.",
+  "unidad": "pesos corrientes"
+ },
+ "datos": {
+  "url": "https://www.gob.mx/cms/uploads/attachment/file/1115356/Indice_SHF_datos_abiertos_3_trim_2026.xlsx",
+  "sha256": "4ca27b43c282d1ee45e71a2ed633a249b65b0006c523ba04af89247acc42368f",
+  "base": "2017 = 100"
+ },
+ "nacional": {
+  "precios": {
+   "medio": 1977228.0,
+   "p25": 848562.0,
+   "p50": 1302588.0,
+   "p75": 2235000.0
+  },
+  "i": 209.69,
+  "i0": 195.89
+ },
+ "estados": {
+  "Aguascalientes": {
+   "i": 211.77,
+   "i0": 194.4,
+   "var": 8.9,
+   "precios": {
+    "medio": 1590753.0,
+    "p25": 788620.0,
+    "p50": 1250000.0,
+    "p75": 1907246.0
+   }
+  },
+  "Baja California": {
+   "i": 246.4,
+   "i0": 227.83,
+   "var": 8.1,
+   "precios": {
+    "medio": 2375306.0,
+    "p25": 1241815.0,
+    "p50": 1600000.0,
+    "p75": 2691550.0
+   }
+  },
+  "Baja California Sur": {
+   "i": 265.42,
+   "i0": 246.91,
+   "var": 7.5,
+   "precios": {
+    "medio": 2549640.0,
+    "p25": 1299524.0,
+    "p50": 1843488.0,
+    "p75": 2896442.0
+   }
+  },
+  "Campeche": {
+   "i": 223.07,
+   "i0": 207.87,
+   "var": 7.3,
+   "precios": {
+    "medio": 1594904.0,
+    "p25": 1026000.0,
+    "p50": 1336298.0,
+    "p75": 1858000.0
+   }
+  },
+  "Coahuila": {
+   "i": 209.61,
+   "i0": 192.18,
+   "var": 9.1,
+   "precios": {
+    "medio": 1439763.0,
+    "p25": 765000.0,
+    "p50": 1020703.0,
+    "p75": 1642780.0
+   }
+  },
+  "Colima": {
+   "i": 219.58,
+   "i0": 205.18,
+   "var": 7.0,
+   "precios": {
+    "medio": 1424529.0,
+    "p25": 818000.0,
+    "p50": 1103000.0,
+    "p75": 1593000.0
+   }
+  },
+  "Chiapas": {
+   "i": 207.08,
+   "i0": 193.39,
+   "var": 7.1,
+   "precios": {
+    "medio": 1483023.0,
+    "p25": 865761.0,
+    "p50": 1200000.0,
+    "p75": 1771750.0
+   }
+  },
+  "Chihuahua": {
+   "i": 217.46,
+   "i0": 203.97,
+   "var": 6.6,
+   "precios": {
+    "medio": 1701297.0,
+    "p25": 901500.0,
+    "p50": 1273124.0,
+    "p75": 2050100.0
+   }
+  },
+  "Ciudad de México": {
+   "i": 178,
+   "i0": 171.6,
+   "var": 3.7,
+   "precios": {
+    "medio": 4355767.0,
+    "p25": 2283977.0,
+    "p50": 3372996.0,
+    "p75": 5322105.0
+   }
+  },
+  "Durango": {
+   "i": 184.31,
+   "i0": 170.77,
+   "var": 7.9,
+   "precios": {
+    "medio": 1203396.0,
+    "p25": 702000.0,
+    "p50": 852000.0,
+    "p75": 1304660.0
+   }
+  },
+  "Guanajuato": {
+   "i": 212.23,
+   "i0": 195.16,
+   "var": 8.7,
+   "precios": {
+    "medio": 1617662.0,
+    "p25": 825000.0,
+    "p50": 1177280.0,
+    "p75": 1868548.0
+   }
+  },
+  "Guerrero": {
+   "i": 200.27,
+   "i0": 191.73,
+   "var": 4.5,
+   "precios": {
+    "medio": 1889863.0,
+    "p25": 920000.0,
+    "p50": 1306000.0,
+    "p75": 1967554.0
+   }
+  },
+  "Hidalgo": {
+   "i": 193.55,
+   "i0": 179.35,
+   "var": 7.9,
+   "precios": {
+    "medio": 1420776.0,
+    "p25": 848042.0,
+    "p50": 1212031.0,
+    "p75": 1658595.0
+   }
+  },
+  "Jalisco": {
+   "i": 238.67,
+   "i0": 220.2,
+   "var": 8.4,
+   "precios": {
+    "medio": 2064988.0,
+    "p25": 742374.0,
+    "p50": 1151048.0,
+    "p75": 2424455.0
+   }
+  },
+  "México": {
+   "i": 177.96,
+   "i0": 167.08,
+   "var": 6.5,
+   "precios": {
+    "medio": 2246388.0,
+    "p25": 923316.0,
+    "p50": 1385199.0,
+    "p75": 2560000.0
+   }
+  },
+  "Michoacán": {
+   "i": 212.37,
+   "i0": 203,
+   "var": 4.6,
+   "precios": {
+    "medio": 1594255.0,
+    "p25": 780000.0,
+    "p50": 1169000.0,
+    "p75": 1799462.0
+   }
+  },
+  "Morelos": {
+   "i": 200.09,
+   "i0": 195.25,
+   "var": 2.5,
+   "precios": {
+    "medio": 2310602.0,
+    "p25": 1090659.0,
+    "p50": 1744000.0,
+    "p75": 2679500.0
+   }
+  },
+  "Nayarit": {
+   "i": 251.44,
+   "i0": 232.12,
+   "var": 8.3,
+   "precios": {
+    "medio": 2163529.0,
+    "p25": 1164000.0,
+    "p50": 1511000.0,
+    "p75": 2383080.0
+   }
+  },
+  "Nuevo León": {
+   "i": 222.91,
+   "i0": 208.77,
+   "var": 6.8,
+   "precios": {
+    "medio": 2119481.0,
+    "p25": 817628.0,
+    "p50": 1251298.0,
+    "p75": 2363250.0
+   }
+  },
+  "Oaxaca": {
+   "i": 201.17,
+   "i0": 186.55,
+   "var": 7.8,
+   "precios": {
+    "medio": 1857077.0,
+    "p25": 978500.0,
+    "p50": 1374000.0,
+    "p75": 1993403.0
+   }
+  },
+  "Puebla": {
+   "i": 212.38,
+   "i0": 197.19,
+   "var": 7.7,
+   "precios": {
+    "medio": 1933470.0,
+    "p25": 960772.0,
+    "p50": 1471269.0,
+    "p75": 2342000.0
+   }
+  },
+  "Querétaro": {
+   "i": 204.23,
+   "i0": 195.27,
+   "var": 4.6,
+   "precios": {
+    "medio": 2373118.0,
+    "p25": 1273761.0,
+    "p50": 1860537.0,
+    "p75": 2988233.0
+   }
+  },
+  "Quintana Roo": {
+   "i": 269.31,
+   "i0": 249.6,
+   "var": 7.9,
+   "precios": {
+    "medio": 2046748.0,
+    "p25": 1102546.0,
+    "p50": 1352000.0,
+    "p75": 2318629.0
+   }
+  },
+  "San Luis Potosí": {
+   "i": 209.91,
+   "i0": 195.51,
+   "var": 7.4,
+   "precios": {
+    "medio": 1857305.0,
+    "p25": 997000.0,
+    "p50": 1320089.0,
+    "p75": 1906960.0
+   }
+  },
+  "Sinaloa": {
+   "i": 230.85,
+   "i0": 213.87,
+   "var": 7.9,
+   "precios": {
+    "medio": 1746939.0,
+    "p25": 851454.0,
+    "p50": 1282046.0,
+    "p75": 1963211.0
+   }
+  },
+  "Sonora": {
+   "i": 217.16,
+   "i0": 197.81,
+   "var": 9.8,
+   "precios": {
+    "medio": 1739419.0,
+    "p25": 865994.0,
+    "p50": 1181725.0,
+    "p75": 1898000.0
+   }
+  },
+  "Tabasco": {
+   "i": 196.91,
+   "i0": 179.63,
+   "var": 9.6,
+   "precios": {
+    "medio": 1493056.0,
+    "p25": 787664.0,
+    "p50": 1099898.0,
+    "p75": 1654564.0
+   }
+  },
+  "Tamaulipas": {
+   "i": 215.89,
+   "i0": 188.29,
+   "var": 14.7,
+   "precios": {
+    "medio": 1152218.0,
+    "p25": 736626.0,
+    "p50": 841617.0,
+    "p75": 1207000.0
+   }
+  },
+  "Tlaxcala": {
+   "i": 184.58,
+   "i0": 174.92,
+   "var": 5.5,
+   "precios": {
+    "medio": 1207111.0,
+    "p25": 724780.0,
+    "p50": 960000.0,
+    "p75": 1499000.0
+   }
+  },
+  "Veracruz": {
+   "i": 194.26,
+   "i0": 185.32,
+   "var": 4.8,
+   "precios": {
+    "medio": 1423686.0,
+    "p25": 755277.0,
+    "p50": 1001487.0,
+    "p75": 1632762.0
+   }
+  },
+  "Yucatán": {
+   "i": 220.66,
+   "i0": 204.6,
+   "var": 7.8,
+   "precios": {
+    "medio": 2056945.0,
+    "p25": 1005017.0,
+    "p50": 1501315.0,
+    "p75": 2357772.0
+   }
+  },
+  "Zacatecas": {
+   "i": 189.21,
+   "i0": 176.02,
+   "var": 7.5,
+   "precios": {
+    "medio": 1311799.0,
+    "p25": 785000.0,
+    "p50": 1067509.0,
+    "p75": 1587760.0
+   }
+  }
+ },
+ "municipios": [
+  {
+   "ent": "Aguascalientes",
+   "nombre": "Aguascalientes",
+   "i": 214.19,
+   "i0": 196.52,
+   "var": 9.0
+  },
+  {
+   "ent": "Aguascalientes",
+   "nombre": "Jesús María",
+   "i": 201.87,
+   "i0": 187.37,
+   "var": 7.7
+  },
+  {
+   "ent": "Baja California Sur",
+   "nombre": "La Paz",
+   "i": 265.63,
+   "i0": 246.64,
+   "var": 7.7
+  },
+  {
+   "ent": "Baja California Sur",
+   "nombre": "Los Cabos",
+   "i": 267.56,
+   "i0": 249.99,
+   "var": 7.0
+  },
+  {
+   "ent": "Baja California",
+   "nombre": "Mexicali",
+   "i": 240.8,
+   "i0": 220.41,
+   "var": 9.3
+  },
+  {
+   "ent": "Baja California",
+   "nombre": "Tijuana",
+   "i": 252.69,
+   "i0": 235,
+   "var": 7.5
+  },
+  {
+   "ent": "Campeche",
+   "nombre": "Campeche",
+   "i": 221.87,
+   "i0": 206.38,
+   "var": 7.5
+  },
+  {
+   "ent": "Campeche",
+   "nombre": "Carmen",
+   "i": 227.97,
+   "i0": 213.15,
+   "var": 7.0
+  },
+  {
+   "ent": "Chiapas",
+   "nombre": "Tapachula",
+   "i": 204.87,
+   "i0": 190.48,
+   "var": 7.6
+  },
+  {
+   "ent": "Chiapas",
+   "nombre": "Tuxtla Gutiérrez",
+   "i": 209.53,
+   "i0": 196.79,
+   "var": 6.5
+  },
+  {
+   "ent": "Chihuahua",
+   "nombre": "Chihuahua",
+   "i": 218.61,
+   "i0": 205.8,
+   "var": 6.2
+  },
+  {
+   "ent": "Chihuahua",
+   "nombre": "Juárez",
+   "i": 220.07,
+   "i0": 206.21,
+   "var": 6.7
+  },
+  {
+   "ent": "Ciudad de México",
+   "nombre": "Benito Juárez",
+   "i": 182.84,
+   "i0": 175.42,
+   "var": 4.2
+  },
+  {
+   "ent": "Ciudad de México",
+   "nombre": "Cuauhtémoc",
+   "i": 188.71,
+   "i0": 181.02,
+   "var": 4.2
+  },
+  {
+   "ent": "Ciudad de México",
+   "nombre": "Gustavo A. Madero",
+   "i": 173.9,
+   "i0": 168.1,
+   "var": 3.4
+  },
+  {
+   "ent": "Ciudad de México",
+   "nombre": "Iztapalapa",
+   "i": 175.91,
+   "i0": 169.98,
+   "var": 3.5
+  },
+  {
+   "ent": "Ciudad de México",
+   "nombre": "Miguel Hidalgo",
+   "i": 183.45,
+   "i0": 175.76,
+   "var": 4.4
+  },
+  {
+   "ent": "Coahuila",
+   "nombre": "Saltillo",
+   "i": 211.97,
+   "i0": 194.8,
+   "var": 8.8
+  },
+  {
+   "ent": "Coahuila",
+   "nombre": "Torreón",
+   "i": 211.47,
+   "i0": 194.78,
+   "var": 8.6
+  },
+  {
+   "ent": "Colima",
+   "nombre": "Manzanillo",
+   "i": 221.55,
+   "i0": 207.54,
+   "var": 6.7
+  },
+  {
+   "ent": "Colima",
+   "nombre": "Villa de Álvarez",
+   "i": 220,
+   "i0": 204.62,
+   "var": 7.5
+  },
+  {
+   "ent": "Durango",
+   "nombre": "Durango",
+   "i": 187.34,
+   "i0": 174.48,
+   "var": 7.4
+  },
+  {
+   "ent": "Durango",
+   "nombre": "Gómez Palacio",
+   "i": 182.15,
+   "i0": 167.72,
+   "var": 8.6
+  },
+  {
+   "ent": "Guanajuato",
+   "nombre": "Celaya",
+   "i": 204.8,
+   "i0": 188.82,
+   "var": 8.5
+  },
+  {
+   "ent": "Guanajuato",
+   "nombre": "León",
+   "i": 217.88,
+   "i0": 200.97,
+   "var": 8.4
+  },
+  {
+   "ent": "Guerrero",
+   "nombre": "Acapulco de Juárez",
+   "i": 203.49,
+   "i0": 195.04,
+   "var": 4.3
+  },
+  {
+   "ent": "Guerrero",
+   "nombre": "Zihuatanejo de Azueta",
+   "i": 193.5,
+   "i0": 184.96,
+   "var": 4.6
+  },
+  {
+   "ent": "Hidalgo",
+   "nombre": "Mineral de la Reforma",
+   "i": 195.78,
+   "i0": 180.24,
+   "var": 8.6
+  },
+  {
+   "ent": "Hidalgo",
+   "nombre": "Tizayuca",
+   "i": 193.44,
+   "i0": 179.54,
+   "var": 7.7
+  },
+  {
+   "ent": "Jalisco",
+   "nombre": "Guadalajara",
+   "i": 242.53,
+   "i0": 224.11,
+   "var": 8.2
+  },
+  {
+   "ent": "Jalisco",
+   "nombre": "San Pedro Tlaquepaque",
+   "i": 237.86,
+   "i0": 220.06,
+   "var": 8.1
+  },
+  {
+   "ent": "Jalisco",
+   "nombre": "Tlajomulco de Zúñiga",
+   "i": 239.36,
+   "i0": 220.3,
+   "var": 8.7
+  },
+  {
+   "ent": "Jalisco",
+   "nombre": "Zapopan",
+   "i": 237.73,
+   "i0": 221.26,
+   "var": 7.4
+  },
+  {
+   "ent": "Michoacán",
+   "nombre": "Morelia",
+   "i": 217.02,
+   "i0": 208.34,
+   "var": 4.2
+  },
+  {
+   "ent": "Michoacán",
+   "nombre": "Uruapan",
+   "i": 205.13,
+   "i0": 195.56,
+   "var": 4.9
+  },
+  {
+   "ent": "Morelos",
+   "nombre": "Emiliano Zapata",
+   "i": 203.36,
+   "i0": 197.71,
+   "var": 2.9
+  },
+  {
+   "ent": "Morelos",
+   "nombre": "Temixco",
+   "i": 197.4,
+   "i0": 191.7,
+   "var": 3.0
+  },
+  {
+   "ent": "México",
+   "nombre": "Metepec",
+   "i": 174.23,
+   "i0": 163.93,
+   "var": 6.3
+  },
+  {
+   "ent": "México",
+   "nombre": "Tecámac",
+   "i": 178.58,
+   "i0": 167.69,
+   "var": 6.5
+  },
+  {
+   "ent": "México",
+   "nombre": "Toluca",
+   "i": 182.07,
+   "i0": 172.42,
+   "var": 5.6
+  },
+  {
+   "ent": "México",
+   "nombre": "Zumpango",
+   "i": 184.48,
+   "i0": 171.53,
+   "var": 7.5
+  },
+  {
+   "ent": "Nayarit",
+   "nombre": "Bahía de Banderas",
+   "i": 251.77,
+   "i0": 232.51,
+   "var": 8.3
+  },
+  {
+   "ent": "Nayarit",
+   "nombre": "Tepic",
+   "i": 253.85,
+   "i0": 234.49,
+   "var": 8.3
+  },
+  {
+   "ent": "Nuevo León",
+   "nombre": "Apodaca",
+   "i": 221.02,
+   "i0": 207.34,
+   "var": 6.6
+  },
+  {
+   "ent": "Nuevo León",
+   "nombre": "García",
+   "i": 224.44,
+   "i0": 209.35,
+   "var": 7.2
+  },
+  {
+   "ent": "Nuevo León",
+   "nombre": "Juárez",
+   "i": 223.68,
+   "i0": 207.38,
+   "var": 7.9
+  },
+  {
+   "ent": "Nuevo León",
+   "nombre": "Monterrey",
+   "i": 226.13,
+   "i0": 213.23,
+   "var": 6.0
+  },
+  {
+   "ent": "Oaxaca",
+   "nombre": "San Juan Bautista Tuxtepec",
+   "i": 201.15,
+   "i0": 187.41,
+   "var": 7.3
+  },
+  {
+   "ent": "Oaxaca",
+   "nombre": "Tlacolula de Matamoros",
+   "i": 206.03,
+   "i0": 190.72,
+   "var": 8.0
+  },
+  {
+   "ent": "Puebla",
+   "nombre": "Huejotzingo",
+   "i": 222.42,
+   "i0": 203.67,
+   "var": 9.2
+  },
+  {
+   "ent": "Puebla",
+   "nombre": "Puebla",
+   "i": 216.36,
+   "i0": 201.06,
+   "var": 7.6
+  },
+  {
+   "ent": "Querétaro",
+   "nombre": "Corregidora",
+   "i": 197.63,
+   "i0": 189.29,
+   "var": 4.4
+  },
+  {
+   "ent": "Querétaro",
+   "nombre": "El Marqués",
+   "i": 203.4,
+   "i0": 194.62,
+   "var": 4.5
+  },
+  {
+   "ent": "Querétaro",
+   "nombre": "Querétaro",
+   "i": 207.55,
+   "i0": 198.66,
+   "var": 4.5
+  },
+  {
+   "ent": "Quintana Roo",
+   "nombre": "Benito Juárez",
+   "i": 272.11,
+   "i0": 252.5,
+   "var": 7.8
+  },
+  {
+   "ent": "Quintana Roo",
+   "nombre": "Solidaridad",
+   "i": 265.52,
+   "i0": 245.91,
+   "var": 8.0
+  },
+  {
+   "ent": "San Luis Potosí",
+   "nombre": "San Luis Potosí",
+   "i": 212.58,
+   "i0": 198.64,
+   "var": 7.0
+  },
+  {
+   "ent": "San Luis Potosí",
+   "nombre": "Soledad de Graciano Sánchez",
+   "i": 206.93,
+   "i0": 191.54,
+   "var": 8.0
+  },
+  {
+   "ent": "Sinaloa",
+   "nombre": "Culiacán",
+   "i": 232.51,
+   "i0": 216.11,
+   "var": 7.6
+  },
+  {
+   "ent": "Sinaloa",
+   "nombre": "Mazatlán",
+   "i": 233.16,
+   "i0": 215.76,
+   "var": 8.1
+  },
+  {
+   "ent": "Sonora",
+   "nombre": "Cajeme",
+   "i": 214.59,
+   "i0": 195.19,
+   "var": 9.9
+  },
+  {
+   "ent": "Sonora",
+   "nombre": "Hermosillo",
+   "i": 220.42,
+   "i0": 201.14,
+   "var": 9.6
+  },
+  {
+   "ent": "Tabasco",
+   "nombre": "Centro",
+   "i": 198.38,
+   "i0": 181.8,
+   "var": 9.1
+  },
+  {
+   "ent": "Tabasco",
+   "nombre": "Nacajuca",
+   "i": 197.92,
+   "i0": 179.88,
+   "var": 10.0
+  },
+  {
+   "ent": "Tamaulipas",
+   "nombre": "Matamoros",
+   "i": 216.52,
+   "i0": 188.07,
+   "var": 15.1
+  },
+  {
+   "ent": "Tamaulipas",
+   "nombre": "Reynosa",
+   "i": 220.04,
+   "i0": 190.67,
+   "var": 15.4
+  },
+  {
+   "ent": "Tlaxcala",
+   "nombre": "Apizaco",
+   "i": 184.87,
+   "i0": 175.81,
+   "var": 5.2
+  },
+  {
+   "ent": "Tlaxcala",
+   "nombre": "Tlaxcala",
+   "i": 186.64,
+   "i0": 177.65,
+   "var": 5.1
+  },
+  {
+   "ent": "Veracruz",
+   "nombre": "Coatzacoalcos",
+   "i": 192.51,
+   "i0": 183.43,
+   "var": 4.9
+  },
+  {
+   "ent": "Veracruz",
+   "nombre": "Veracruz",
+   "i": 204,
+   "i0": 194.43,
+   "var": 4.9
+  },
+  {
+   "ent": "Yucatán",
+   "nombre": "Kanasín",
+   "i": 221.22,
+   "i0": 203.03,
+   "var": 9.0
+  },
+  {
+   "ent": "Yucatán",
+   "nombre": "Mérida",
+   "i": 222.03,
+   "i0": 206.14,
+   "var": 7.7
+  },
+  {
+   "ent": "Zacatecas",
+   "nombre": "Guadalupe",
+   "i": 193.07,
+   "i0": 178.88,
+   "var": 7.9
+  },
+  {
+   "ent": "Zacatecas",
+   "nombre": "Zacatecas",
+   "i": 185.13,
+   "i0": 173.78,
+   "var": 6.5
+  }
+ ]
+}
