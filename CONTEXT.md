@@ -7573,6 +7573,17 @@ Pedido del autor: «intégralo y continúa con las dimensiones pendientes». Se 
 - **El chat:** «se venció mi contrato…» ya no abre ComprasMX (`contratosCmx()` suelta «mi contrato», «finiquito», «me toca»…); frases nuevas en `ALIAS_APPS`.
 - **Pendiente:** la obra determinada (el art. 50 no la nombra); lo que quedó en espera; el ISR de los intereses del art. 48; la indemnización del apartado B; trabajadores de estados y municipios; el subsidio de enero; cotejar PC.XXX. J/31 A en el Semanario.
 
+### 21-11-2026 · sello 20261121y · Las imágenes de la portada, vinculadas al modo Periodista
+
+Pedido del autor: «las imágenes que quedaron en la portada principal de la plataforma… quedan vinculadas al
+modo periodista». Hasta hoy cada diapositiva abría el chat del Auditor con `?p=` y sin modo (abría en el que
+el lector tuviera guardado, o en Ciudadano). Ahora `chat_url()` de `auditorias.py` agrega
+`&modo=periodista` (`MODO_PORTADA`), así que la imagen, su `title` y «Pregúntale» de la lista de
+investigaciones abren el modo Periodista con la pregunta escrita; el letrero de cada imagen dice
+«📰 Pregúntale al Periodista». `portada()` reescribe las 23 ligas de `index.html` en binario (CR sueltos: 56).
+Las plantillas de `integrar_auditorias_actuales.py` e `integrar_seguro_popular.py` dicen lo mismo. Ninguna
+cifra cambió.
+
 ### 21-11-2026 · sello 20261121x · Dos chats: el Inspector vive en Servicios
 
 Pedido del autor: fusionar «¿Qué necesitas?» con «Lo nuevo»; llevar las tarjetas del pie de Servicios (fraude y lavado, servicios,

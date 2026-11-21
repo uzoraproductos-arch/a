@@ -148,7 +148,7 @@ def a_portada():
         print('index.html: la diapositiva ya estaba')
         return
     nl = '\r\n'
-    q = 'herramienta-inspector-pregunta.html?p=' + quote(PREGUNTA)
+    q = 'herramienta-inspector-pregunta.html?p=' + quote(PREGUNTA) + '&modo=periodista'
     slide = nl.join([
         '',
         '          <!-- Slide 23: %s -->' % href,
@@ -160,7 +160,7 @@ def a_portada():
         '              <span class="showcase-slide-badge">%s</span>' % BADGE,
         '              <h3 class="showcase-slide-q">%s</h3>' % PREGUNTA,
         '              <div class="showcase-click-cue">',
-        '                <span>💬 Pregúntale al Auditor</span> ➔',
+        '                <span>📰 Pregúntale al Periodista</span> ➔',
         '              </div>',
         '            </div>',
         '          </a>',

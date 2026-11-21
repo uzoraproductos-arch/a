@@ -510,7 +510,10 @@ def servicio(titulo):
 # Desde el 23-10-2026 (pedido del autor) cada imagen de la portada abre el
 # chat del Auditor con la pregunta de la diapositiva escrita: el lector la
 # envía y el Auditor contesta con la investigación y su «Saber más».
+# Desde el 21-11-2026 (pedido del autor) las imágenes de la portada quedan
+# vinculadas al modo Periodista: el chat abre en ese modo (&modo=periodista).
 CHAT = 'herramienta-inspector-pregunta.html'
+MODO_PORTADA = 'periodista'
 
 
 def _bloques_portada(d):
@@ -529,7 +532,7 @@ def preguntas_portada():
 
 def chat_url(pregunta):
     from urllib.parse import quote
-    return '%s?p=%s' % (CHAT, quote(pregunta))
+    return '%s?p=%s&modo=%s' % (CHAT, quote(pregunta), MODO_PORTADA)
 
 
 def _docs_planos(docs):
@@ -607,7 +610,7 @@ def capitulo_inspector():
         acc = ['<a class="ia-boton ia-boton-pri" href="%s">📖 Ver la investigación</a>' % archivo(id_)]
         if id_ in EXPEDIENTE:
             acc.append('<a class="ia-boton" href="expedientes.html#exp-%s">📂 Su expediente de la ASF</a>' % EXPEDIENTE[id_])
-        acc.append('<a class="ia-boton" href="%s">💬 Pregúntale al Auditor</a>' % esc_attr(chat_url(q)))
+        acc.append('<a class="ia-boton" href="%s">📰 Pregúntale al Periodista</a>' % esc_attr(chat_url(q)))
         filas.append('<li class="ia-au"><a class="ia-au-img" href="%s"><img src="%s" alt="%s" loading="lazy" width="480" height="270">'
                      '<span class="ia-au-nota">%s</span></a><div class="ia-au-tx"><span class="ia-au-etq">%s</span>'
                      '<h3><a href="%s">%s</a></h3><p>%s</p><p class="ia-au-acc">%s</p></div></li>'
@@ -637,7 +640,7 @@ def portada():
         ancla, _, insp, _ = RUTAS[id_]
         nom = esc_attr(re.sub('<[^>]+>', '', au[id_][5]))
         return ('<a class="showcase-slide" href="%s" data-caso="%s" data-nombre="%s" data-numeros="sigue-el-dinero.html?abrir=%s" '
-                'data-evidencia="%s" title="Pregúntale al Auditor: %s"') % (esc_attr(chat_url(q)), archivo(id_), nom, ancla, insp, nom)
+                'data-evidencia="%s" title="Pregúntale al Periodista: %s"') % (esc_attr(chat_url(q)), archivo(id_), nom, ancla, insp, nom)
     d, n = re.subn(r'<a class="showcase-slide" href="[^"]*"(?: data-caso="[^"]*")?(?: data-nombre="[^"]*" data-numeros="[^"]*" data-evidencia="[^"]*")?(?: title="[^"]*")?',
                    attrs, d)
     if n != len(AUDITORIAS):

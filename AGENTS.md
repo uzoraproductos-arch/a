@@ -1064,6 +1064,9 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   huachicol, Ramo 33…), «Explóralo a fondo» abre con «📖 Ver la
   investigación». **Una investigación nueva necesita sus frases en
   `TEMA_BOT`** de `herramientas/auditorias.py`, o la generación se detiene.
+  **Las imágenes de la portada abren el modo Periodista** (decisión del autor,
+  21-11-2026): cada diapositiva lleva `&modo=periodista` (`MODO_PORTADA` y
+  `chat_url()` de `auditorias.py`) y dice «📰 Pregúntale al Periodista».
 - **Noticias relevantes vive también en el chat** (24-10-2026): el nombre
   de un personaje abre sus columnas (con sus cifras y documentos) y lo que
   circula sin pruebas, con el motivo (`DESCARTADO` de `columnas.js`). Lo
