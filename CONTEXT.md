@@ -7573,6 +7573,14 @@ Pedido del autor: «intégralo y continúa con las dimensiones pendientes». Se 
 - **El chat:** «se venció mi contrato…» ya no abre ComprasMX (`contratosCmx()` suelta «mi contrato», «finiquito», «me toca»…); frases nuevas en `ALIAS_APPS`.
 - **Pendiente:** la obra determinada (el art. 50 no la nombra); lo que quedó en espera; el ISR de los intereses del art. 48; la indemnización del apartado B; trabajadores de estados y municipios; el subsidio de enero; cotejar PC.XXX. J/31 A en el Semanario.
 
+### 21-11-2026 · sello 20261121s · Los pendientes de la base, al día
+
+- **SESNSP** (`anclar_sesnsp_fraude.py`): corte oct2026; las cifras 2015-2025 no cambiaron, solo la huella, el archivo y la liga (`ENLACE`). Se baja con `curl -L -c cj -b cj '<liga>&download=1'` (sin cookies, 403). Revisar de nuevo el 20-12-2026.
+- **ComprasMX** (`actualizar_comprasmx.py` y `fraccionamiento.py`): 221,176 contratos (2025: 129,104; 2026: 92,072), 21,402 personas morales, 1,100 instituciones, 19 proveedores en la 69-B. Los CSV se bajaron con Playwright pulsando «Contratos de la Plataforma Integral Compras MX 2026/2025» en la página de datos abiertos. Revisar el 21-12-2026.
+- **RPU** (`anclar_rpu.py`): 2,148 créditos, 1,386 con saldo, $692,365.9 mdp al 30-06-2026; el intermedio YR1 sale de `letsencrypt/website` en raw.githubusercontent.com (`static/certs/gen-y/int-yr1.pem` y `root-yr.pem`). Revisar el 15-12-2026.
+- **Imagen de Servicios**: el sello del águila (parecido al de la SEC de EE. UU.) se cambió por una lupa con barras, dibujada sobre el mismo disco.
+- **Pendiente:** el Directorio de sancionados (`kong-servicios-estrategico.buengobierno.gob.mx` corta la conexión desde la sesión): queda al flujo «Base al día» (miércoles), que todavía no ha corrido ni una vez.
+
 ### 21-11-2026 · sello 20261121r · Encabezado de Servicios con la imagen del autor (`assets/auditor/img/servicios-encabezado*.webp`, `.sv-hero-foto`) y la base al día: listas del art. 69 y OFAC/ONU con corte 21-11-2026 (art. 69: 531,034 → 531,007 RFC); 69-B, padrón del SAT y UDI sin cambio; el Directorio de sancionados no respondió desde la sesión (queda al flujo semanal). Pendientes de la agenda: SESNSP (venció el 20-11; su ZIP se baja a mano de SharePoint), ComprasMX y RPU (01-12).
 
 ### 21-11-2026 · sello 20261121q · Servicios rediseñada (referencia: FINOS) y segunda en el menú
