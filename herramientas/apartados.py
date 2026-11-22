@@ -1703,6 +1703,7 @@ _AV_NAVEGADOR = [
     ('No medir este navegador', 'av-sin-medir', 'Solo si apagas la medición de uso (abajo): recuerda que no quieres que se mida.'),
     ('Tus respuestas', 'av-caso', 'Lo que le preguntaste al Auditor, hasta 60: la pregunta, la fecha, el modo, la respuesta en corto, su página y los servicios que vienen al caso, para armar «Tus respuestas» (mis-respuestas.html). Nunca sale del navegador; la borras ahí mismo, o una por una.'),
     ('Tus dictámenes de cada expediente', 'av-dics', 'La pregunta, el folio y el enlace de los dictámenes que generas y tocan una investigación, hasta 60, para listarlos en su expediente. Los borras ahí mismo.'),
+    ('Tu portafolio de investigaciones', 'av-portafolio', 'Las revisiones que guardas en el Inspector de Servicios, hasta 60: el servicio, la pregunta, la fecha, su título y el enlace de su dictamen, para reabrirlas desde Servicios o los Expedientes de control interno. Nunca sale del navegador; las borras ahí mismo, una por una o todas.'),
     ('Mi Auditavisión', 'av-mia', 'Los RFC de tus proveedores, el resumen de las revisiones que guardas y, para el aviso del Vigía de proveedores, la situación en la lista 69-B que viste de cada uno y el corte del SAT de tu última visita. Nunca sale del navegador; lo borras con «🗑️ Borrar todo mi tablero».'),
     ('Las columnas que sigues', 'av-sigo', 'Cuáles casos de Verificamos sigues y qué versión viste, para avisarte cuando cambian.'),
     ('Ágora cívica', 'auditavision_foro_debates y otras', 'Tus hilos, tus apoyos y el seudónimo que elijas. No se publican: viven solo en tu navegador.'),
@@ -2869,6 +2870,18 @@ SV_ENTRADA = {
 }
 
 
+# Los servicios que reciben archivos (Ronda 8, pedido del autor, 22-11-2026: «zona directa para arrastrar/cargar
+# archivos XML… sin subirlos»): el panel trae su zona y pasa los archivos a la aplicación del servicio, que los lee en
+# el navegador. (aplicación, id de su campo de archivos, qué acepta, texto de la zona). **El campo debe existir en la
+# página de la aplicación**, o la generación se detiene.
+SV_SUELTA = {
+    'facturas': ('herramienta-inspector-factura.html', 'cfArchivos', '.xml,text/xml,application/xml', 'Suelta aquí tus facturas XML (hasta 500), o tócalo para elegirlas'),
+    'nomina': ('herramienta-inspector-factura.html', 'cfArchivos', '.xml,text/xml,application/xml', 'Suelta aquí tus recibos de nómina en XML, o tócalo para elegirlos'),
+    'contrapartes': ('herramienta-inspector-padron.html#lote', 'pdArch', '.csv,.txt,.xml,text/csv,text/plain,text/xml,application/xml',
+                     'Suelta aquí tu cartera (CSV, TXT o facturas XML), o tócalo para elegirla'),
+}
+
+
 def sv_most_boton(sid):
     """La puerta de cada tarjeta a la página del Inspector de su servicio (servicios-revisa.html)."""
     import servicios_fichas as sf
@@ -2888,6 +2901,12 @@ def sv_mostrador(sf):
         k, ph, ay, ej, bt = SV_ENTRADA[x[0]]
         datos[x[0]] = {'n': x[2], 'k': k, 'ph': ph, 'ay': ay, 'ej': ej, 'q': sv_pregunta(x[0])[0],
                        'app': monta[x[0]][1], 'bt': bt, 'cobro': COBRO[x[0]]}
+        if x[0] in SV_SUELTA:
+            u, campo, acepta, tx = SV_SUELTA[x[0]]
+            pag = os.path.join(RAIZ, u.split('#')[0])
+            if not os.path.exists(pag) or ('id="%s"' % campo) not in open(pag, encoding='utf-8').read():
+                raise SystemExit('Servicios: SV_SUELTA de %s apunta a un campo que no existe (%s en %s)' % (x[0], campo, u))
+            datos[x[0]]['suelta'] = {'app': u, 'campo': campo, 'acepta': acepta, 'tx': tx}
     opciones = ''.join('<optgroup label="%s">%s</optgroup>' % (esc_attr(tit), ''.join(
         '<option value="%s">%s</option>' % (x[0], html.escape(x[2])) for x in SERVICIOS if x[6] == lid))
         for lid, _i, tit, _t in LINEAS if any(x[6] == lid for x in SERVICIOS))
@@ -2901,15 +2920,22 @@ def sv_mostrador(sf):
             '<input type="hidden" name="vista" value="1"><button type="submit" class="sz-btn sz-btn-of">Revisar</button></div>\n'
             '            <p class="sv-most-ay" id="svMostAy"></p>\n'
             '            <p class="sv-most-ej"><span>Pruébalo:</span> <span id="svMostEj"></span> <button type="button" class="sv-most-app" id="svMostApp"></button></p>\n'
+            '            <label class="sv-most-suelta" id="svMostSuelta" hidden><input type="file" id="svMostArch" multiple class="sr-only">'
+            '<span aria-hidden="true">📥</span><span id="svMostSueltaTx"></span><small>Se leen en tu navegador: nada se sube.</small></label>\n'
             '          </form>\n'
             '          <div class="sv-most-res" id="svMostRes" hidden aria-live="polite">'
             '<p class="sv-most-carga" id="svMostCarga">Revisando la base…</p>'
             '<iframe name="av-en-chat" id="svMostMarco" title="La respuesta del Inspector"></iframe></div>\n'
             '          <p class="sv-most-doc" id="svMostDoc" hidden><span aria-hidden="true">🧾</span> Tu documento es el <b>dictamen</b>: tócalo en la revisión '
-            '(«Generar dictamen») y se abre listo para imprimir o guardar en PDF, con su folio y su huella.</p>\n'
+            '(«Generar dictamen») y se abre listo para imprimir o guardar en PDF, con su folio y su huella.'
+            ' <button type="button" class="sv-most-guarda" id="svMostGuarda" hidden>💾 Guardar en mi portafolio de investigaciones</button></p>\n'
+            '          <section class="sv-port" id="svPort" hidden aria-labelledby="svPortTit"><h3 id="svPortTit"><span aria-hidden="true">🗂️</span> Tu portafolio de investigaciones</h3>'
+            '<p class="sv-port-ay">Lo que guardaste vive solo en este navegador: nadie más lo ve y no sale de aquí. Reábrelo, saca su dictamen o bórralo. '
+            'También lo ves en <a href="%s#portafolio">los Expedientes de control interno</a>.</p><ol class="sv-port-lista" id="svPortLista"></ol>'
+            '<button type="button" class="sv-port-borra" id="svPortBorra">🗑️ Borrar todo mi portafolio</button></section>\n'
             '          <p class="sv-most-pie">Los archivos se leen en tu navegador y no se suben. Cada cifra trae su documento; la revisión no es un documento oficial ni un peritaje, '
             'y una coincidencia en una lista es una señal para revisar, nunca una acusación. ¿Prefieres platicar? <a href="%s">Abre el Inspector completo ➔</a></p>\n'
-            '        </div>') % (json.dumps(datos, ensure_ascii=False).replace('</', '<\\/'), sf.SV_RESP, opciones, sf.SV_CHAT)
+            '        </div>') % (json.dumps(datos, ensure_ascii=False).replace('</', '<\\/'), sf.SV_RESP, opciones, 'expedientes-investigacion.html', sf.SV_CHAT)
 
 
 def sv_pregunta(sid):

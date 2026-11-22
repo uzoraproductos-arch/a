@@ -88,6 +88,30 @@ lleva a las portadas privadas**: `sin_privadas()` las cambia por su sustituta (`
 portada para las viejas), `acceso.js` solo las abre en el navegador de la administración y el panel las lista en su hoja
 «Enciclopedia». Ningún archivo cambió de nombre y ninguna cifra se movió.
 
+**Ronda 8 (22-11-2026): el Inspector de Servicios no se traba, «ficha» y «dictamen» se separan y hay portafolio.**
+- **En el Auditor el documento se llama «ficha»; en Servicios, «dictamen»** (decisión del autor). Los tres modos del Auditor
+  (Ciudadano, Periodista, Ambientalista) dicen «Generar ficha» y la página abre como «Ficha cívica independiente»; el modo
+  Inspector (Servicios) dice «Generar dictamen». Es el mismo documento, con la misma base, folio y huella: lo decide `esFicha()`
+  de `asistente.js` por el modo. **Un rótulo nuevo del documento pasa por `docNom()`.**
+- **El panel de `servicios-revisa.html` carga el motor solo al usarlo y una sola vez** (`sv-mostrador.js`): la página sale al
+  instante; al escribir, tocar un ejemplo o cambiar de servicio, el marco carga `servicios-respuesta.html?vista=1` sin pregunta, y
+  cada revisión se arma ahí mismo con `AuditorBot.arma(q, abre)`, sin recargar la base. **Nunca se vuelve a poner `marco.src` por
+  pregunta.** La vista del panel va sin rótulos del chat («De un vistazo», «aplicación N de M», «Verla completa», «Cerrar la
+  aplicación», «Ya revisamos esto por ti», los otros modos, la Enciclopedia y las rutas a otras pestañas): arriba «Lo que encontró el
+  Inspector», luego la respuesta entera con su revisión completa, su aplicación y su expediente, y al final «Generar dictamen».
+- **Los servicios que reciben archivos traen su zona para soltarlos** (`SV_SUELTA` de `apartados.py`: facturas y nómina, XML al
+  Lector de facturas; contrapartes, la cartera a la matriz del padrón). Los archivos pasan al campo de la aplicación en el mismo
+  navegador; **nada se sube**. Si el campo no existe en la página de la aplicación, la generación se detiene.
+- **El portafolio de investigaciones** (`av-portafolio`, solo en el navegador, hasta 60): «💾 Guardar en mi portafolio» en el
+  panel, y la lista en el panel y en `expedientes-investigacion.html#portafolio`. Guarda servicio, pregunta, fecha, título y el
+  enlace del dictamen; **nunca la respuesta ni un archivo**. Su renglón está en `_AV_NAVEGADOR`.
+- **El predial suma el Estado de México, León y Saltillo: 233 municipios y alcaldías en 10 entidades.** Las tablas que la ley imprime
+  con saltos van con `saltos_ley` (que la página lee) y `inverso()` no inventa valor en sus huecos; un rústico puede llevar sobretasa
+  (`rustico.tipo = 'sobretasa'`); un mínimo anual va como `minimo.anual` con su sexta parte por bimestre; un tope «sobre el primer»
+  tanto en veces la UMA anual va en `tope_uma_anual`. **San Luis Potosí capital está en `ESPERA`** (rango 1 con dos tasas, tabla sin
+  «en adelante» y un descuento que exceptúa a todo el art. 7). Los PDF que un portal no sirve se guardan en `investigaciones/predial/`
+  y `cc_predial.py` revisa su huella.
+
 **Decisión del autor, 02-11-2026.** El menú (`MENU` de `apartados.py` y su
 copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
 **Servicios** (segunda desde el 21-11-2026, pedido del autor), **Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras

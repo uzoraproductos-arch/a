@@ -2,24 +2,33 @@
    vínculo nos va a dirigir… a una página autónoma independiente dentro de la plataforma
    donde va a estar nuestro inspector… manteniendo ese filtrado del servicio que escojas»).
    El recuadro lo arma sv_mostrador() de apartados.py; ?s=<id> deja elegido el servicio y
-   &q= (con &abre=) ya revisa. Contesta con la respuesta completa del Inspector en vista
-   «De un vistazo» (servicios-respuesta.html?vista=1), en un marco «av-en-chat»; el
-   dictamen es el documento que se descarga. Los archivos se leen en la aplicación del
-   servicio, en el navegador: nada se sube. Nunca un monto. */
+   &q= (con &abre=) ya revisa. Contesta con la respuesta del Inspector en su panel
+   (servicios-respuesta.html?vista=1), en un marco «av-en-chat»; el dictamen es el
+   documento que se descarga. Nunca un monto.
+
+   Ronda 8 (22-11-2026, decisión del autor: «que no se trabe»):
+   - La página se ve al instante: el motor del Inspector (su base pesa varios MB) se carga
+     solo cuando lo vas a usar (al escribir, al tocar un ejemplo o al elegir otro servicio)
+     y una sola vez: las siguientes revisiones se arman en el mismo marco, sin recargarlo.
+   - Los servicios que reciben archivos (SV_SUELTA) traen su zona para soltarlos: se pasan a
+     la aplicación del servicio, que los lee en el navegador. Nada se sube.
+   - «Guardar en mi portafolio de investigaciones»: solo en este navegador (av-portafolio),
+     y se ve también en los Expedientes de control interno. */
 (function () {
   'use strict';
   var caja = document.getElementById('mostrador'), datosEl = document.getElementById('svMostDatos');
   if (!caja || !datosEl) return;
   var D = {};
   try { D = JSON.parse(datosEl.textContent); } catch (e) { return; }
-  var RESP = 'servicios-respuesta.html';
-  var sel = document.getElementById('svMostSrv'), q = document.getElementById('svMostQ'), ay = document.getElementById('svMostAy'),
-    ej = document.getElementById('svMostEj'), app = document.getElementById('svMostApp'), res = document.getElementById('svMostRes'),
-    marco = document.getElementById('svMostMarco'), carga = document.getElementById('svMostCarga'), doc = document.getElementById('svMostDoc'),
-    form = caja.querySelector('form');
-  var mide = 0;
+  var RESP = 'servicios-respuesta.html', PORT = 'av-portafolio';
+  var $ = function (id) { return document.getElementById(id); };
+  var sel = $('svMostSrv'), q = $('svMostQ'), ay = $('svMostAy'), ej = $('svMostEj'), app = $('svMostApp'), res = $('svMostRes'),
+    marco = $('svMostMarco'), carga = $('svMostCarga'), doc = $('svMostDoc'), form = caja.querySelector('form'),
+    suelta = $('svMostSuelta'), arch = $('svMostArch'), sueltaTx = $('svMostSueltaTx'), guarda = $('svMostGuarda'),
+    port = $('svPort'), portL = $('svPortLista'), portB = $('svPortBorra');
+  var mide = 0, listo = false, pendiente = null, ultimo = null, archivos = null;
 
-  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function esc(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
   /* La dirección guarda el servicio y la pregunta, para compartirla o volver a ella. */
   function anota(sid, texto) {
@@ -34,6 +43,10 @@
     ay.textContent = d.ay;
     ej.innerHTML = d.ej.map(function (x) { return '<button type="button" class="sv-most-chip" data-q="' + esc(x) + '">' + esc(x) + '</button>'; }).join(' ');
     if (d.app) { app.hidden = false; app.textContent = d.bt; app.setAttribute('data-app', d.app); } else app.hidden = true;
+    if (suelta) {
+      suelta.hidden = !d.suelta;
+      if (d.suelta) { sueltaTx.textContent = d.suelta.tx; arch.setAttribute('accept', d.suelta.acepta); }
+    }
     document.title = 'El Inspector: ' + d.n + ' · Auditavisión';
   }
 
@@ -43,16 +56,29 @@
       if (h && Math.abs(h - marco.offsetHeight) > 4) marco.style.height = h + 'px';
     } catch (e) { /* otro origen: se queda su alto */ }
   }
-
-  function muestra(src, baja) {
+  function abreRes(baja) {
     res.hidden = false;
-    carga.hidden = false;
     if (doc) doc.hidden = false;
-    marco.style.height = '';
-    marco.src = src;
     clearInterval(mide);
     mide = setInterval(alto, 600);
     if (baja !== false) res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function bot() { try { return marco.contentWindow && marco.contentWindow.AuditorBot; } catch (e) { return null; } }
+
+  /* El motor, una sola vez: el marco carga la página de la respuesta sin pregunta y, ya lista, arma las que lleguen. */
+  function calienta() {
+    if (marco.getAttribute('data-es') === 'resp') return;
+    marco.setAttribute('data-es', 'resp');
+    listo = false;
+    marco.src = RESP + '?vista=1';
+  }
+  function muestra(src, baja) {
+    abreRes(baja);
+    carga.hidden = false;
+    marco.style.height = '';
+    marco.setAttribute('data-es', 'app');
+    listo = false;
+    marco.src = src;
   }
 
   function revisa(texto, abreL, baja) {
@@ -60,11 +86,103 @@
     if (!t) return;
     q.value = texto ? texto : '';
     anota(sid, texto ? t : '');
-    muestra(RESP + '?vista=1&q=' + encodeURIComponent(t) + (abreL ? '&abre=' + encodeURIComponent(abreL) : ''), baja);
+    ultimo = null;
+    if (guarda) guarda.hidden = true;
+    abreRes(baja);
+    var b = listo && marco.getAttribute('data-es') === 'resp' && bot();
+    if (b && b.arma) { carga.hidden = true; b.arma(t, abreL || ''); setTimeout(alto, 50); return; }
+    carga.hidden = false;
+    pendiente = [t, abreL || ''];
+    calienta();
   }
 
-  marco.addEventListener('load', function () { carga.hidden = true; alto(); });
-  sel.addEventListener('change', function () { pinta(sel.value); anota(sel.value, ''); q.value = ''; q.focus(); });
+  marco.addEventListener('load', function () {
+    alto();
+    if (marco.getAttribute('data-es') === 'resp') {
+      listo = true;
+      var b = bot();
+      if (pendiente && b && b.arma) { var p = pendiente; pendiente = null; b.arma(p[0], p[1]); }
+      carga.hidden = true;
+      return;
+    }
+    carga.hidden = true;
+    if (archivos) pasaArchivos();
+  });
+
+  /* La página de la respuesta avisa qué se revisó (avisaPadre() de asistente.js). */
+  window.svListo = function (info) {
+    carga.hidden = true;
+    ultimo = info && info.q ? info : null;
+    if (guarda) { guarda.hidden = !ultimo; guarda.textContent = '💾 Guardar en mi portafolio de investigaciones'; guarda.disabled = false; }
+    setTimeout(alto, 60);
+  };
+
+  /* Los archivos que sueltas pasan al campo de la aplicación del servicio (misma página, mismo navegador). */
+  function pasaArchivos() {
+    var d = D[sel.value], fs = archivos;
+    archivos = null;
+    if (!d || !d.suelta || !fs || !fs.length) return;
+    try {
+      var cd = marco.contentDocument, campo = cd && cd.getElementById(d.suelta.campo);
+      if (!campo) return;
+      var dt = new DataTransfer();
+      Array.prototype.forEach.call(fs, function (f) { dt.items.add(f); });
+      campo.files = dt.files;
+      campo.dispatchEvent(new Event('change', { bubbles: true }));
+      setTimeout(alto, 400);
+    } catch (e) { /* el navegador no deja pasar archivos: se eligen dentro de la aplicación */ }
+  }
+  function recibe(fs) {
+    var d = D[sel.value];
+    if (!d || !d.suelta || !fs || !fs.length) return;
+    archivos = fs;
+    muestra(d.suelta.app);
+  }
+  if (suelta) {
+    arch.addEventListener('change', function () { recibe(arch.files); });
+    ['dragenter', 'dragover'].forEach(function (t) { suelta.addEventListener(t, function (ev) { ev.preventDefault(); suelta.classList.add('sv-most-suelta-sobre'); }); });
+    ['dragleave', 'drop'].forEach(function (t) { suelta.addEventListener(t, function () { suelta.classList.remove('sv-most-suelta-sobre'); }); });
+    suelta.addEventListener('drop', function (ev) { ev.preventDefault(); recibe(ev.dataTransfer && ev.dataTransfer.files); });
+  }
+
+  /* Tu portafolio de investigaciones: solo en este navegador. */
+  function lee() { try { var l = JSON.parse(localStorage.getItem(PORT) || '[]'); return Array.isArray(l) ? l : []; } catch (e) { return []; } }
+  function escribe(l) { try { localStorage.setItem(PORT, JSON.stringify(l.slice(0, 60))); return true; } catch (e) { return false; } }
+  function pintaPort() {
+    if (!port) return;
+    var l = lee();
+    port.hidden = !l.length;
+    portL.innerHTML = l.map(function (x, i) {
+      var reabre = location.pathname.split('/').pop() + '?s=' + encodeURIComponent(x.s) + '&q=' + encodeURIComponent(x.q);
+      return '<li><div><b>' + esc(x.t || x.q) + '</b><small>' + esc((D[x.s] ? D[x.s].n : x.s) + ' · ' + x.f) + '</small>' +
+        (x.t && x.t !== x.q ? '<small>«' + esc(x.q) + '»</small>' : '') + '</div><p>' +
+        '<a href="' + esc(reabre) + '">↩️ Reabrir</a>' + (x.dic ? '<a href="' + esc(x.dic) + '" target="_blank" rel="noopener">🧾 Dictamen</a>' : '') +
+        '<button type="button" data-port-borra="' + i + '">✕ Quitar</button></p></li>';
+    }).join('');
+  }
+  if (guarda) guarda.addEventListener('click', function () {
+    if (!ultimo) return;
+    var l = lee().filter(function (x) { return !(x.s === sel.value && x.q === ultimo.q); });
+    l.unshift({ s: sel.value, q: ultimo.q, t: ultimo.t || '', dic: ultimo.dic || '', f: new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' }) });
+    guarda.textContent = escribe(l) ? '✅ Guardado en tu portafolio' : 'Tu navegador no deja guardar aquí';
+    guarda.disabled = true;
+    pintaPort();
+  });
+  if (portL) portL.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-port-borra]');
+    if (!b) return;
+    var l = lee();
+    l.splice(+b.getAttribute('data-port-borra'), 1);
+    escribe(l);
+    pintaPort();
+  });
+  if (portB) portB.addEventListener('click', function () { try { localStorage.removeItem(PORT); } catch (e) { /* nada */ } pintaPort(); });
+  window.addEventListener('storage', function (ev) { if (ev.key === PORT) pintaPort(); });
+
+  sel.addEventListener('change', function () { pinta(sel.value); anota(sel.value, ''); q.value = ''; q.focus(); calienta(); });
+  /* Al mostrar intención (escribir o tocar un ejemplo), el motor empieza a cargar en segundo plano. */
+  q.addEventListener('input', function () { if (q.value.length > 1) calienta(); });
+  ej.addEventListener('pointerenter', calienta, true);
   form.addEventListener('submit', function (ev) { ev.preventDefault(); revisa(q.value); });
   caja.addEventListener('click', function (ev) {
     var c = ev.target.closest('.sv-most-chip');
@@ -76,6 +194,7 @@
   var ps = new URLSearchParams(location.search), pide = ps.get('s'), texto = ps.get('q') || '';
   var sid = D[pide] ? pide : (D[sel.value] ? sel.value : Object.keys(D)[0]);
   pinta(sid);
+  pintaPort();
   if (texto) revisa(texto, ps.get('abre') || '', false);
   else setTimeout(function () { try { q.focus({ preventScroll: true }); } catch (e) { q.focus(); } }, 300);
 })();
