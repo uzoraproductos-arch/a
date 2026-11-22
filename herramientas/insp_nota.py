@@ -533,9 +533,12 @@ def _entes(base):
 
 
 def _datos_lector(base):
+    import promesas
     import puntos_ciegos
     datos = {'cat': catalogo_lector(base), 'catalogo': CATALOGO, 'pagina': PAGINA,
-             'fiscal': FISCAL, 'temas': _temas(), 'entes': _entes(base), 'ciegos': puntos_ciegos.datos()}
+             'fiscal': FISCAL, 'temas': _temas(), 'entes': _entes(base), 'ciegos': puntos_ciegos.datos(),
+             # La memoria de promesas (07-11-2026): si la nota toca una promesa que seguimos, cuánto de lo prometido llega.
+             'prom': promesas.datos()}
     return '  <script type="application/json" id="inDatos">%s</script>' % _json(datos)
 
 

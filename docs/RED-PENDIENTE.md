@@ -21,7 +21,7 @@ Se actualiza cada vez que una nota deja un pendiente por un portal que no abre.
 | Dominio | Qué destraba | Notas que lo esperan |
 |---|---|---|
 | `asf.gob.mx`, `informe.asf.gob.mx` | Informes individuales, denuncias e informe semestral (la Matriz de Datos Básicos de la 2.ª entrega CP 2025 ya quedó integrada el 02-11-2026, y **el 17-11-2026** la Auditoría 111 de CP 2022 `2022_0111_a.pdf` del Tren Maya Tramo 1 para cerrar `grupo-prodi-tren-maya`) | `asf-segunda-entrega-cp2025`, `asf-nuevo-leon-triangulacion-cp2025` |
-| `gaceta.diputados.gob.mx`, `www.diputados.gob.mx` | Dictámenes, reservas y votaciones (**Integrados el 02-11-2026** los PEF 2021–2025 de LeyesBiblio para `fonden-2021-2025` y la Gaceta del 12-03-2025 para `hr-ratings-baja-mexico-bbb`) | `lfd-2027-dnr-defensa-tren-maya-aifa`, `senado-ley-de-ingresos-2027` |
+| `gaceta.diputados.gob.mx`, `www.diputados.gob.mx` | Dictámenes, reservas y votaciones (**Integrados el 02-11-2026** los PEF 2021–2025 de LeyesBiblio para `fonden-2021-2025` y la Gaceta del 12-03-2025 para `hr-ratings-baja-mexico-bbb`) | `lfd-2027-dnr-defensa-tren-maya-aifa`, `senado-ley-de-ingresos-2027`, `pef-2027-comision-agua-jalisco-6500` (dictamen del PEF 2027) |
 | `www.senado.gob.mx`, `comunicacion.senado.gob.mx` | Gaceta del Senado y votación de la Ley Federal de Derechos 2027 | `senado-ley-de-ingresos-2027`, `lfd-2027-dnr-defensa-tren-maya-aifa` |
 | `www.canaldelcongreso.gob.mx` | Notas oficiales de las votaciones (ya se citan; hay que copiar su huella a la bóveda) | `senado-ley-de-ingresos-2027`, `lfd-2027-dnr-defensa-tren-maya-aifa` |
 | `sil.gobernacion.gob.mx` | Perfiles legislativos (Sistema de Información Legislativa) | `garcia-luna-y-garcia-harfuch` |

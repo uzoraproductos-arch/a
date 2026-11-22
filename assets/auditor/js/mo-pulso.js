@@ -119,7 +119,7 @@
           '<span class="mp-obra-n">' + esc(o.n) + '<small>' + esc(o.pres) + ' · ' + esc(o.per) + '</small></span>' +
           '<span class="mp-obra-v"><b class="mp-num">' + esc(c.t) + '</b> ' + (c.e === 'na' ? '' : chip(c.e, pend)) + '</span></div>' +
         '<span class="mp-riel" aria-hidden="true"><span class="mp-barra" style="width:' + ancho.toFixed(1) + '%"></span></span>' +
-        '<p class="mp-obra-pie">Aprobado ' + esc(mdp(o.presu)) + ' ' + chip(o.ep, o.ep === 'pendiente' ? 'obra-' + o.id : '') +
+        '<p class="mp-obra-pie">' + esc(o.pet || 'Aprobado') + ' ' + esc(mdp(o.presu)) + ' ' + chip(o.ep, o.ep === 'pendiente' ? 'obra-' + o.id : '') +
           ' · erogado ' + esc(mdp(o.real)) + ' ' + chip(o.er, o.er === 'pendiente' ? 'obra-' + o.id : '') +
           (o.u ? ' · <a href="' + esc(o.u) + '" target="_blank" rel="noopener">' + esc(o.f.length > 70 ? o.f.slice(0, 68) + '…' : o.f) + ' ↗</a>' : '') + '</p>' +
       '</li>';
@@ -132,7 +132,7 @@
   /* ---------- 4. CSV en el navegador ---------- */
   if ($('mpCsv')) $('mpCsv').addEventListener('click', function () {
     var q = function (v) { return '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"'; };
-    var filas = [['obra', 'presidente', 'periodo', 'aprobado_mdp', 'estado_aprobado', 'erogado_mdp', 'estado_erogado',
+    var filas = [['obra', 'presidente', 'periodo', 'previsto_mdp', 'estado_previsto', 'erogado_mdp', 'estado_erogado',
       'sobrecosto_pct', 'estado_sobrecosto', 'ganancia_o_perdida_anual_mdp', 'estado_ganancia_o_perdida', 'fuente', 'url']];
     D.obras.forEach(function (o) {
       var sin = o.epd === 'pendiente' || o.epd === 'no_aplica';

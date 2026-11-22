@@ -672,8 +672,8 @@
     var cols = cerca.filter(function (f) { return f.t === 'columna' && (f === f0 || (fuerte.indexOf(f) >= 0 && hablaDe(f))); }).slice(0, 2);
     /* Primero, lo que falta en la página misma de la respuesta. */
     var base = (r.ir || (f0 && f0.ir) || [''])[0].split('#')[0].split('?')[0];
-    var pends = F.filter(function (f) { return f.t === 'pendiente' && f.pend && base && (f.pend.ap || []).indexOf(base) >= 0; }).slice(0, 2);
-    cerca.forEach(function (f) { if (pends.length < 2 && f.t === 'pendiente' && f.pend && fuerte.indexOf(f) >= 0 && pends.indexOf(f) < 0) pends.push(f); });
+    var pends = F.filter(function (f) { return f.t === 'pendiente' && f.pend && base && (f.pend.ap || []).indexOf(base) >= 0 && (!/^(noticias-|pendientes\.html|indice\.html)/.test(base) || hablaDe(f)); }).slice(0, 2);
+    cerca.forEach(function (f) { if (pends.length < 2 && f.t === 'pendiente' && f.pend && fuerte.indexOf(f) >= 0 && pends.indexOf(f) < 0 && (!r.lect || hablaDe(f))) pends.push(f); });
     var exps = cerca.filter(function (f) { return f.t === 'expediente'; }).slice(0, 1);
     var nadie = [], iv = invDe(q, r);
     /* Nepotismo (pedido del autor, 29-10-2026): lo que la ley todavía no alcanza, y la regla del apellido. */
@@ -706,6 +706,7 @@
     });
     var sigue = [];
     cols.forEach(function (f) { (f.sigue || []).slice(0, 2 - sigue.length).forEach(function (s) { sigue.push('<li>🗓️ ' + (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.tx) + ' ↗</a>' : esc(s.tx)) + '</li>'); }); });
+    if (r.lect && r.lead && r.lead.length) nadie.unshift('<li>📰 <b>La nota, en una línea:</b> ' + esc(r.lead.join(', y ')) + '. Eso es lo que casi ningún titular dice.</li>');
     var nada = !nadie.length && !ruido.length, cie = [];
     /* Sin nota (19-11-2026, afinación por modo): una herramienta o una página de la plataforma no es
        tema de nota, así que no se ofrece una; en lo demás, el Periodista enseña qué preguntar si el tema
@@ -1768,6 +1769,17 @@
     /* 2a. La hemeroteca (31-10-2026): si la liga es de una nota que ya cotejamos, se dice y se abre su cotejo. */
     var hem = liga && hemeroteca(liga);
     if (hem) return hem;
+    /* 2 bis. La liga sola de una red social (08-11-2026, ejemplo del autor): Instagram, Facebook,
+       X o TikTok no dejan que un lector externo abra la publicación, así que no se promete leerla:
+       se pide el texto, que con la liga entra a lectura() y se lee aquí mismo. */
+    var red = liga && /^https?:\/\/(?:[a-z0-9-]+\.)*(instagram\.com|facebook\.com|fb\.watch|x\.com|twitter\.com|tiktok\.com|threads\.net)\//i.exec(liga);
+    if (red && t.replace(liga, '').replace(/\s+/g, ' ').trim().length < 60) {
+      var rn = { 'instagram.com': 'Instagram', 'facebook.com': 'Facebook', 'fb.watch': 'Facebook', 'x.com': 'X', 'twitter.com': 'X', 'tiktok.com': 'TikTok', 'threads.net': 'Threads' }[red[1].toLowerCase()];
+      return { html: '<p>🔒 <b>' + rn + ' no deja que nadie de fuera lea sus publicaciones</b>, ni nosotros: sin el texto no puedo decirte qué afirma ni compararlo con un documento, y no voy a adivinarlo.</p>' +
+        '<p>📋 <b>Copia el texto de la publicación</b> (el pie de foto o lo que dice el video) y pégalo aquí <b>junto con la liga</b>. Con eso te digo lo que afirma en cifras, si ya lo cotejamos, qué promesa toca, en qué etapa va y qué preguntas le faltan.</p>' +
+        '<p class="pa-chico">Revisé la liga contra nuestra hemeroteca y no está entre las notas que ya cotejamos. Si es un video sin texto, cuéntame con tus palabras qué dice y quién lo dice.</p>',
+        ir: [APP.inspnota.url + '?liga=' + encodeURIComponent(liga), APP.inspnota.n], sug: [], rec: [], red: 1 };
+    }
     /* 2. La liga de una nota: «Contrasta una nota» la lee aquí mismo. */
     if (liga) {
       return respApp('inspnota', APP.inspnota.url + '?liga=' + encodeURIComponent(liga),
@@ -2275,8 +2287,8 @@
   function respMoTodo(lista) {
     var T = MO.tot;
     var h = '<p>🏗️ <b>' + esc(MO.nombre) + '</b> sigue ' + T.n + ' megaobras y ' + T.nresc + ' rescates, de 1988 a 2024. Sus cuatro cifras:</p><ul class="pa-lista">' +
-      '<li>Costo real de las ' + T.n + ' obras: <b>' + esc(T.realt) + '</b> ' + chip({ e: 'derivado' }) + ', contra ' + esc(T.presut) + ' aprobados.</li>' +
-      '<li>Pagado de más sobre lo aprobado: <b>' + esc(T.brechat) + '</b> ' + chip({ e: 'derivado' }) + '.</li>' +
+      '<li>Costo real de las ' + T.n + ' obras: <b>' + esc(T.realt) + '</b> ' + chip({ e: 'derivado' }) + ', contra ' + esc(T.presut) + ' previstos (aprobados o, si no se publicó el presupuesto, anunciados).</li>' +
+      '<li>Pagado de más sobre lo previsto: <b>' + esc(T.brechat) + '</b> ' + chip({ e: 'derivado' }) + '.</li>' +
       '<li>Lo que pierden al año las que publican su resultado: <b>' + (T.neto < 0 ? '−' : '+') + esc(T.netot) + '</b> ' + chip({ e: 'derivado' }) + ' (' + T.npierde + ' pierden ' + esc(T.pierdet) + ' y ' + T.ngana + ' gana ' + esc(T.ganat) + ').</li>' +
       '<li>Sin resultado publicado: ' + T.npend + ' ' + chip({ e: 'pendiente', p: 'tema-megaobras' }) + '. No operan: ' + T.nna + '.</li></ul>' +
       '<p class="pa-chico">' + esc(T.medida) + '</p>' +
@@ -2285,7 +2297,7 @@
       }).join('') + '</ul>' : '') + portalesHtml() +
       (charla && charla.deDonde ? charla.deDonde([
         { que: 'Costo real de las ' + T.n + ' obras', e: 'derivado', op: 'suma del costo registrado de cada obra, sin los rescates' },
-        { que: 'Pagado de más', e: 'derivado', op: 'costo real − lo aprobado (' + T.realt + ' − ' + T.presut + ')' },
+        { que: 'Pagado de más', e: 'derivado', op: 'costo real − lo previsto (' + T.realt + ' − ' + T.presut + ')' },
         { que: 'Lo que pierden al año', e: 'derivado', op: 'suma del resultado del año más reciente de cada obra que lo publica (' + T.anios.join(', ') + ')' }].concat(MO.portales.map(function (f) { return { que: 'Portal oficial', e: 'oficial', fu: f }; }))) : '');
     return {
       html: h, ir: [MO.pagina, MO.nombre], app: { id: 'mocero', url: APP.mocero.url }, rec: [
@@ -3185,6 +3197,12 @@
     /* Una liga que ya está en la hemeroteca abre su cotejo antes que cualquier palabra de su dirección
        («pemex-perdidas-…-deuda» se iba al pendiente de la deuda de Pemex, 01-11-2026). */
     var lg = (/https?:\/\/[^\s<>"']+/i.exec(String(q)) || [])[0], hm = lg && hemeroteca(lg);
+    /* Una nota pegada (texto, con o sin liga) se lee entera: lo que afirma, si ya la cotejamos, la promesa que toca,
+       sus puntos ciegos y lo que sigue (pedido del autor, 07-11-2026). La columna que ya la coteja va dentro. */
+    if (charla && charla.esNota && charla.esNota(q)) {
+      var tx0 = charla.sinLiga(q);
+      return charla.lectura(q, hm || tituloColumna(tx0) || temaColumna(tx0));
+    }
     if (hm) return hm;
     var ge = grupoEmp(q);
     if (ge) return ge;
