@@ -111,7 +111,8 @@
       predial: 'lo que cobró de predial', propios: 'ingresos propios, lo que cobró por su cuenta', egr: 'egresos de 2024',
       dep: 'dependencia de la Federación', inv: 'inversión pública de 2024 (obra y proyectos productivos)',
       deu: 'lo que pagó por sus créditos en 2024 (capital, intereses y comisiones)',
-      pob: 'población (Censo 2020)', iph: 'ingreso por habitante (2024 ÷ Censo 2020)' };
+      pob: 'población (Censo 2020)', iph: 'ingreso por habitante (2024 ÷ Censo 2020)',
+      fra: 'carpetas de investigación por fraude de 2025 (SESNSP)', fraC: 'carpetas por fraude de 2025 por cada 100 mil habitantes (Censo 2020)' };
     /* Nombres de municipio que también son palabras comunes: solo cuentan si se dice «municipio». */
     var COMUN = ' centro reforma progreso victoria solidaridad libres union la union paz la paz general nacional independencia hidalgo morelos guerrero juarez allende zaragoza madero obregon mexico tabasco colima durango aguascalientes campeche chihuahua oaxaca puebla queretaro tlaxcala zacatecas tepic jalisco nuevo nombre jesus maria santiago san pedro trinidad libertad ';
     /* Nombres cortos que la gente dice sin su apellido («Tula» por Tula de Allende). */
@@ -137,8 +138,13 @@
     /* Y su población, del Censo 2020 (municipios-poblacion.js): la tienen también los que no rindieron cuenta. */
     var MPOB = window.AUDIT_MUN_POB || null;
     function pobDe(m) { var p = MPOB && MPOB.mun[m.cve]; return p ? p[0] : null; }
+    /* Y el fraude (municipios-fraude.js, SESNSP): carpetas de investigación, [2025, enero-octubre 2026]. Lo tienen también los que no rindieron cuenta. */
+    var MFRA = window.AUDIT_MUN_FRAUDE || null;
+    function fraDe(m) { return MFRA && MFRA.mun[m.cve] || null; }
     function mv(m, k) {
       if (k === 'pob') return pobDe(m);
+      if (k === 'fra') { var f0 = fraDe(m); return f0 ? f0[0] : null; }
+      if (k === 'fraC') { var f1 = fraDe(m), p1 = pobDe(m); return f1 && p1 ? f1[0] * 100000 / p1 : null; }
       if (!m.v) return null;
       if (k === 'iph') return pobDe(m) ? m.v[MCAMPO.ing] / pobDe(m) : null;
       if (k === 'inv') { var iv = MINV && MINV.mun[m.cve]; return iv ? iv[0] : null; }
@@ -194,7 +200,8 @@
       ['pob', /poblacion|habitantes tiene|cuanta gente|cuantas personas|cuantos habitantes|cuantos viven/],
       ['gasto', /recib|le (dan|mandan|llega|llegan|toca|tocan|manda|pasan|da)|les (dan|mandan|llega|toca)|transfer|federaliz|ramos? 28 y 33|presupuesto|cuanto dinero|cuanta (lana|feria)|cuanto (varo|baro)|dinero (le|les)|lana|varo|feria|cuanto tiene/]
     ];
-    var MET_MUN = [['iph', /por (habitante|persona|cabeza)|per ?capita|por cada (habitante|persona)/],
+    var MET_MUN = [['fraC', /(fraude|estafa)\w* (por cada|por (habitante|persona))|tasa de (fraude|estafa)/], ['fra', /fraude|estafa|carpetas? (de investigacion )?por fraude/],
+      ['iph', /por (habitante|persona|cabeza)|per ?capita|por cada (habitante|persona)/],
       ['pob', /poblacion|habitantes|poblad[oa]s?\b|cuanta gente|cuantas personas|cuantos viven/], ['deu', /deud|debe[ns]?\b|endeud|prestam|presto|credito|emprestito|intereses/], ['inv', /invers|invierte|invirti|obra publica|obras? (que )?(hizo|hicieron|construy)/], ['predial', /predial/], ['fortamun', /fortamun|fortalecimiento/], ['fismdf', /\bfais\b|fismdf|infraestructura social/],
       ['dep', /depend|mantenid|vive de|colgad|autonom/], ['propios', /propio|recaud|cobra por su cuenta|cobran ellos|genera/],
       ['part', /participacion|ramo 28/], ['aport', /aportacion|ramo 33/], ['egr', /gast|egres/],
@@ -350,7 +357,8 @@
       pjr: 'causas penales pendientes en su Poder Judicial (cierre de 2024)', pjj: 'personas juzgadoras en su Poder Judicial' };
     var RKM = { ing: 'ingresos', part: 'participaciones', aport: 'aportaciones', fortamun: 'FORTAMUN', fismdf: 'FAIS municipal', predial: 'cobro de predial',
       propios: 'ingresos propios', egr: 'egresos', dep: 'dependencia de la Federación', inv: 'inversión pública (obra y proyectos productivos)',
-      deu: 'pago de deuda en 2024 (capital, intereses y comisiones)', pob: 'habitantes (Censo 2020)', iph: 'ingreso por habitante' };
+      deu: 'pago de deuda en 2024 (capital, intereses y comisiones)', pob: 'habitantes (Censo 2020)', iph: 'ingreso por habitante',
+      fra: 'carpetas por fraude en 2025', fraC: 'carpetas por fraude por cada 100 mil habitantes' };
     function ranking(k, dir, cuantos, porHab) {
       var m = M[k], rk = RK[k] || m.n;
       var val = function (x) { return porHab && k !== 'pc' ? (x[k] != null && x.pob ? x[k] * 1e6 / x.pob : null) : x[k]; };
@@ -469,6 +477,19 @@
           fu: [{ que: 'Población del municipio', e: 'oficial', fu: MPFU }, { que: 'Lugar en el estado', e: 'derivado', op: 'lugar entre los municipios del estado con población del Censo 2020' }],
           val: { v: pb, u: 'personas' }, tit: m.n + ', ' + m.en + ': población', ci: [{ v: n(pb, 0), etq: 'personas (Censo 2020)', e: 'oficial' }] };
       }
+      if (k === 'fra' || k === 'fraC') {
+        var fr = fraDe(m), MFFU = MFRA ? { tx: MFRA.fuente + ' (huellas ' + MFRA.sha256_2025.slice(0, 12) + '… y ' + MFRA.sha256_2026.slice(0, 12) + '…)', url: MFRA.pagina } : null;
+        if (!fr) return { html: '<p>No tengo las carpetas por fraude de <b>' + nom + '</b>.</p>' + mas, fu: [{ que: 'Carpetas por fraude', e: 'pendiente', fu: MFFU }], tit: m.n + ': fraude', ci: [] };
+        var pf = pobDe(m), tasa = pf ? fr[0] * 100000 / pf : null, Lf = munLugar(m, 'fra');
+        return { html: '<p>En <b>' + nom + '</b> las fiscalías abrieron <b>' + n(fr[0], 0) + ' carpetas de investigación por fraude</b> en 2025 ' + chip('oficial') +
+          ' y ' + n(fr[1], 0) + ' de enero a octubre de 2026' + (Lf.de > 1 && fr[0] > 0 ? '; es el lugar <b>' + Lf.l + ' de ' + Lf.de + '</b> en carpetas de ' + esc(m.en) : '') + '.' +
+          (tasa != null ? ' Son unas <b>' + n(tasa, 1) + ' por cada 100 mil habitantes</b> ' + chip('derivado') + ' (carpetas de 2025 ÷ población del Censo 2020).' : '') + '</p>' +
+          '<p class="pa-ojo">Ojo: una carpeta es una investigación, no una víctima ni un fraude comprobado, y más carpetas no quiere decir más fraude: también cuenta cuánto se denuncia y dónde se presenta la denuncia. ' +
+          'La tasa mezcla dos años (carpetas de 2025, población de 2020).</p>' + mas,
+          fu: [{ que: 'Carpetas por fraude del municipio', e: 'oficial', fu: MFFU }].concat(tasa != null ? [{ que: 'Por cada 100 mil habitantes', e: 'derivado', op: n(fr[0], 0) + ' × 100,000 ÷ ' + n(pf, 0) + ' habitantes (Censo 2020)' }] : []),
+          val: { v: fr[0], u: 'carpetas' }, tit: m.n + ', ' + m.en + ': carpetas por fraude',
+          ci: [{ v: n(fr[0], 0), etq: 'carpetas por fraude en 2025', e: 'oficial' }].concat(tasa != null ? [{ v: n(tasa, 1), etq: 'por cada 100 mil habitantes', e: 'derivado' }] : []) };
+      }
       if (!m.v) return { html: '<p><b>' + nom + '</b> no reportó sus cifras de 2024 a la estadística de finanzas municipales del INEGI, así que no tengo sus números. Puedes revisar su ficha técnica en el Auditor de entes públicos.</p>' + mas,
         fu: [{ que: 'Municipios sin cifra', e: 'pendiente', fu: MFU }], tit: m.n, ci: [] };
       var ing = mv(m, 'ing'), h, fu = [munFu(k === 'iph' ? 'ing' : k || 'ing')], L;
@@ -568,15 +589,21 @@
     function munRanking(k, dir, cuantos, e) {
       k = k || 'ing';
       var l = MUN.filter(function (x) { return (!e || x.a === e.a) && mv(x, k) != null; }).sort(function (a, b) { return dir === 'min' ? mv(a, k) - mv(b, k) : mv(b, k) - mv(a, k); });
-      var top = l.slice(0, Math.max(cuantos, 5)), u = k === 'dep' ? 'pct' : k === 'pob' ? 'per' : k === 'iph' ? 'pes' : '';
-      var vf = function (x) { return u === 'pct' ? n(mv(x, k), 1) + ' %' : u === 'per' ? n(mv(x, k), 0) + ' personas' : u === 'pes' ? '$' + n(mv(x, k), 0) + ' por habitante' : grande(mv(x, k), 1); };
+      /* La tasa de fraude solo entre municipios de 10 mil habitantes o más: en uno chico, pocas carpetas mueven mucho la tasa. */
+      if (k === 'fraC') l = l.filter(function (x) { return pobDe(x) >= 10000; });
+      var top = l.slice(0, Math.max(cuantos, 5)), u = k === 'dep' ? 'pct' : k === 'pob' ? 'per' : k === 'iph' ? 'pes' : k === 'fra' ? 'car' : k === 'fraC' ? 'tasa' : '';
+      var vf = function (x) { return u === 'pct' ? n(mv(x, k), 1) + ' %' : u === 'per' ? n(mv(x, k), 0) + ' personas' : u === 'pes' ? '$' + n(mv(x, k), 0) + ' por habitante' :
+        u === 'car' ? n(mv(x, k), 0) + ' carpetas' : u === 'tasa' ? n(mv(x, k), 1) + ' por cada 100 mil habitantes' : grande(mv(x, k), 1); };
       var h = '<p>' + (dir === 'min' ? 'Los municipios con menos' : 'Los municipios con más') + ' ' + esc(RKM[k]) + (e ? ' en <b>' + esc(e.n) + '</b>' : ' del país') + ':</p><ol class="pa-lista">' +
         top.map(function (x) { return '<li><b>' + esc(x.n) + '</b>' + (e ? '' : ', ' + esc(x.en)) + ': ' + vf(x) + '</li>'; }).join('') + '</ol>' +
-        '<p class="pa-chico">Entre ' + n(l.length) + ' municipios con ' + (k === 'pob' ? 'población del Censo 2020' : k === 'iph' ? 'cuenta de 2024 y población del Censo 2020 (ingreso 2024 ÷ población 2020)' : 'cifras de 2024') + '.</p>' +
+        '<p class="pa-chico">Entre ' + n(l.length) + ' municipios con ' + (k === 'pob' ? 'población del Censo 2020' : k === 'iph' ? 'cuenta de 2024 y población del Censo 2020 (ingreso 2024 ÷ población 2020)' :
+          k === 'fra' ? 'dato de carpetas por fraude del SESNSP en 2025 (con o sin carpetas)' : k === 'fraC' ? 'carpetas del SESNSP en 2025 y 10 mil habitantes o más en el Censo 2020 (carpetas × 100,000 ÷ población)' : 'cifras de 2024') + '.</p>' +
+        (k === 'fra' || k === 'fraC' ? '<p class="pa-ojo">Ojo: una carpeta es una investigación, no una víctima ni un fraude comprobado, y más carpetas no quiere decir más fraude: también cuenta cuánto se denuncia y dónde se presenta la denuncia. Este orden no califica a ningún gobierno.</p>' : '') +
         (k === 'deu' ? '<p class="pa-ojo">Ojo: este orden es por lo que pagaron por sus créditos en 2024 (INEGI). El saldo al cierre de 2025 en el Sistema de Alertas de Hacienda suma $36,279.2 millones en 629 municipios medidos (41 con deuda inscrita no entregaron su información a Hacienda ' + chip('pendiente', 'deuda-municipios') + ').</p>' : '');
-      var fuk = k === 'pob' || k === 'iph' ? { que: 'Población del municipio', e: 'oficial', fu: MPOB ? { tx: 'INEGI, Censo de Población y Vivienda 2020, principales resultados por localidad (ITER)', url: MPOB.pagina } : null } : munFu(k);
+      var fuk = k === 'pob' || k === 'iph' ? { que: 'Población del municipio', e: 'oficial', fu: MPOB ? { tx: 'INEGI, Censo de Población y Vivienda 2020, principales resultados por localidad (ITER)', url: MPOB.pagina } : null } :
+        k === 'fra' || k === 'fraC' ? { que: 'Carpetas por fraude de cada municipio', e: 'oficial', fu: MFRA ? { tx: MFRA.fuente, url: MFRA.pagina } : null } : munFu(k);
       return { html: h, fu: [fuk, { que: 'Orden', e: 'derivado', op: k === 'iph' ? 'ingreso total 2024 ÷ población del Censo 2020; ordenamos los municipios con las dos cifras' : 'ordenamos los municipios con cifra' }], tit: 'Municipios: ' + MUN_NOM[k],
-        ci: top.map(function (x) { return { v: vf(x), etq: x.n + ', ' + x.en, e: k === 'dep' || k === 'iph' ? 'derivado' : 'oficial' }; }) };
+        ci: top.map(function (x) { return { v: vf(x), etq: x.n + ', ' + x.en, e: k === 'dep' || k === 'iph' || k === 'fraC' ? 'derivado' : 'oficial' }; }) };
     }
 
     /* ---------- Sueldos de los cargos ---------- */
@@ -2280,7 +2307,7 @@
 
       /* «¿Qué es…?»: eso lo contesta el glosario (la búsqueda de asistente.js). */
       var define = /^\s*(que|q|k) (es|son|significa|significan|quiere decir)\b|que significa|definicion de|\bexplica(me)? (que|el|la|los|las|un|una)\b|a que se refiere/.test(t);
-      var pideOrden = RANK.test(t) && /\b(el|la|los|las) que\b|\bcual|\bquien|que estados?\b|que municipios?\b|\b(estados|municipios) que\b|\btop\b|ranking|\blista\b|lugares/.test(t);
+      var pideOrden = RANK.test(t) && /\b(el|la|los|las) que\b|\bcual|\bquien|que estados?\b|que municipios?\b|\b(estados|municipios) que\b|\btop\b|ranking|\blista\b|lugares|\bmunicipios con (mas|menos)\b/.test(t);
 
       /* Los municipios. */
       var quiereMun = MUN_KW.test(t);
@@ -2292,7 +2319,7 @@
         var km = metrica(t, MET_MUN) || (sigue && ctx.tipo === 'mun' ? ctx.met : '');
         if (!mm) return fin(conLiga(munRanking(km, dir, cuantos, es[0]), 'numeros-baja-al-territorio.html', 'Baja al territorio'), { tipo: 'mun', met: km });
         var rm = munMet(mm.m, km, mm.otros);
-        rm.ir = (km === 'pob' || km === 'iph') && mv(mm.m, km) != null ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html?ml=' + km + '#mapa-municipios', 'sus municipios en el Planisferio']
+        rm.ir = (km === 'pob' || km === 'iph' || km === 'fra' || km === 'fraC') && mv(mm.m, km) != null ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html?ml=' + km + '#mapa-municipios', 'sus municipios en el Planisferio']
           : km === 'inv' && mm.m.v ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html?ml=inv#mapa-municipios', 'sus municipios en el Planisferio']
           : km === 'deu' && mm.m.v ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-deuda.html', 'la deuda de sus municipios en el Planisferio']
           : ['herramienta-inspector-entes.html#ente=municipal:' + mm.m.cve, 'su ficha técnica en el Auditor de entes públicos'];

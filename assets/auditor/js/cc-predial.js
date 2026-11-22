@@ -26,6 +26,7 @@
     return m.minimo ? Math.max(b, m.minimo.pesos) : b;
   }
   function base0(m, vf, tipo) {
+    if (m.anual) return r2(r2(vf * (m.anual[tipo] || m.anual.edif) / 1000) / 6);
     if (tipo === 'rust' && m.rustico) return r2(vf * m.rustico.millar / 1000 + m.rustico.cf);
     if (tipo !== 'baldio') return bimestral(m, vf);
     var b = m.baldio;
@@ -33,6 +34,17 @@
     if (b.tipo === 'sobretasa') return r2(bimestral(m, vf) * (1 + b.pct / 100));
     return r2(vf * b.millar / 1000 + b.cf);
   }
+  /* El impuesto del año. Con 'anual' (Nuevo León: tasa al millar por año, Ley de Hacienda para los Municipios, art. 21 bis-8),
+     sobre el valor y con el mínimo anual (art. 21 bis-12); en los demás, seis bimestres. Gemela de anual() de cc_predial.py. */
+  function anual(m, vf, tipo) {
+    if (m.anual) {
+      var a = r2(vf * (m.anual[tipo] || m.anual.edif) / 1000);
+      return m.minimo && m.minimo.anual ? Math.max(a, m.minimo.anual) : a;
+    }
+    return r2(base(m, vf, tipo) * 6);
+  }
+  /* El nombre de la ley que cobra: la Ley de Ingresos de cada municipio o, en Nuevo León, la Ley de Hacienda del estado. */
+  function leyDe(m) { return m.ley_corta || 'Ley de Ingresos de ' + m.nombre; }
   /* Al revés: con el impuesto de un bimestre, el valor fiscal que lo daría (predio construido, tabla general).
      null si el impuesto cae en el mínimo o debajo de la primera cuota fija. */
   function inverso(m, imp) {
@@ -70,9 +82,17 @@
 
   /* x: {vf, tipo, ben, pago} */
   function calcula(D, m, x) {
-    var pasos = [], avisos = [], ley = function (a) { return 'Ley de Ingresos de ' + m.nombre + ', ' + a; };
-    var B = base(m, x.vf, x.tipo);
-    if (x.tipo === 'rust' && m.rustico) {
+    var pasos = [], avisos = [], ley = function (a) { return leyDe(m) + ', ' + a; };
+    var B = base(m, x.vf, x.tipo), A, artB;
+    if (m.anual) {
+      var t0 = m.anual[x.tipo] || m.anual.edif, a0 = r2(x.vf * t0 / 1000);
+      var queEs = { edif: 'Casa habitación', rust: 'Rústico (la ley no le da otra tasa)', com: 'Comercial, industrial o de servicios', baldio: 'Baldío' }[x.tipo] || 'Construido';
+      artB = m.art_anual[x.tipo] || m.art_tarifa;
+      pasos.push([queEs + ': ' + t0 + ' al millar al año sobre el valor catastral', a0, ley(artB), 'b']);
+      A = anual(m, x.vf, x.tipo);
+      if (A > a0) pasos.push(['La cuenta da menos del mínimo: la ley cobra ' + m.minimo.uma_anual + ' cuotas al año', A, ley(m.minimo.art), 'b']);
+      B = r2(A / 6);
+    } else if (x.tipo === 'rust' && m.rustico) {
       pasos.push(['Rústico: ' + m.rustico.millar + ' al millar del valor + cuota fija de ' + cf2(m.rustico.cf), B, ley(m.rustico.art), 'b']);
     } else if (x.tipo === 'baldio' && m.baldio.tipo === 'igual') {
       pasos.push(['Baldío: la ley no le pone otra tasa; paga con la tabla general', B, ley(m.baldio.art), 'b']);
@@ -91,12 +111,14 @@
       pasos.push(['(Valor fiscal − límite inferior) × tasa', r2((x.vf - t[0]) * t[2]), ley(m.art_tarifa)]);
       pasos.push(['Impuesto de cada bimestre (más la cuota fija)', B, ley(m.art_tarifa), 'b']);
     }
-    if (m.minimo && base0(m, x.vf, x.tipo) < m.minimo.pesos) {
+    if (!m.anual && m.minimo && base0(m, x.vf, x.tipo) < m.minimo.pesos) {
       pasos.push(['La cuenta da menos del mínimo: la ley cobra ' + cf2(m.minimo.pesos) + ' por bimestre', B, ley(m.minimo.art), 'b']);
     }
-    var A = r2(B * 6);
-    var artB = x.tipo === 'rust' && m.rustico ? m.rustico.art : x.tipo === 'baldio' ? m.baldio.art : m.art_tarifa;
-    pasos.push(['Impuesto del año (seis bimestres)', A, ley(artB), 'b']);
+    if (!m.anual) {
+      A = r2(B * 6);
+      artB = x.tipo === 'rust' && m.rustico ? m.rustico.art : x.tipo === 'baldio' ? m.baldio.art : m.art_tarifa;
+      pasos.push(['Impuesto del año (seis bimestres)', A, ley(artB), 'b']);
+    }
     var res = { bim: B, anual: A, pasos: pasos, avisos: avisos };
 
     /* El descuento: factor sobre el impuesto, a veces solo «sobre el primer» tanto del valor. */
@@ -106,7 +128,11 @@
       avisos.push('El descuento «' + ben.et + '» solo vale si el valor fiscal no rebasa $' + ben.hasta.toLocaleString('es-MX') + ' (' + ley(ben.art) + '): con tu valor no aplica.');
       ben = null;
     }
-    if (ben) {
+    if (ben && ben.fija != null) {
+      /* La tarifa única especial (Nuevo León, art. 21 bis-9): una cantidad fija al año, en cuotas. */
+      ahorroB = Math.max(0, r2(A - ben.fija));
+      pasos.push(['Tarifa especial: ' + ben.fija_uma + ' cuotas al año (' + pesos(ben.fija) + ')', -ahorroB, ley(ben.art)]);
+    } else if (ben) {
       var sobre = ben.tope && x.vf > ben.tope ? r2(base(m, ben.tope, x.tipo) * 6) : A;
       ahorroB = r2(sobre * (1 - ben.f));
       pasos.push(['Descuento: pagas ' + Math.round(ben.f * 100) + ' %' + (ben.tope && x.vf > ben.tope ? ' del impuesto que daría el primer $' + ben.tope.toLocaleString('es-MX') + ' de valor' : ''), -ahorroB, ley(ben.art)]);
@@ -126,14 +152,15 @@
       } else if (soloPr < A1) {
         fin = soloPr;
         pasos.push(['Te conviene más el pago anticipado (' + Math.round(pr.f * 100) + ' %) que el descuento: no se suman', r2(fin - A1), ley(pr.art) + (m.suma_art ? ', ' + m.suma_art : '')]);
-        avisos.push(m.suma_art ? 'Tu Ley de Ingresos da solo el mayor de los dos beneficios (' + m.suma_art + ').' : 'La Ley de Ingresos de ' + m.nombre + ' no dice si se suman; aquí te damos el mayor de los dos.');
+        avisos.push(m.suma_art ? 'Tu Ley de Ingresos da solo el mayor de los dos beneficios (' + m.suma_art + ').' : 'La ' + leyDe(m) + ' no dice si se suman; aquí te damos el mayor de los dos.');
       } else {
-        avisos.push(m.suma_art ? 'El descuento no se suma al pago anticipado (' + m.suma_art + '): te dejamos el descuento, que es mayor.' : 'La Ley de Ingresos de ' + m.nombre + ' no dice si el descuento se suma al pago anticipado; aquí te damos el mayor de los dos.');
+        avisos.push(m.suma_art ? 'El descuento no se suma al pago anticipado (' + m.suma_art + '): te dejamos el descuento, que es mayor.' : 'La ' + leyDe(m) + ' no dice si el descuento se suma al pago anticipado; aquí te damos el mayor de los dos.');
       }
     }
-    if (m.minimo && fin < m.minimo.pesos * 6) {
-      fin = r2(m.minimo.pesos * 6);
-      avisos.push('Con el descuento quedaría debajo del mínimo de ' + cf2(m.minimo.pesos) + ' por bimestre (' + ley(m.minimo.art) + '): pagas el mínimo.');
+    var minA = m.minimo ? (m.minimo.anual || r2(m.minimo.pesos * 6)) : 0;
+    if (m.minimo && fin < minA) {
+      fin = minA;
+      avisos.push('Con el descuento quedaría debajo del mínimo de ' + (m.minimo.anual ? cf2(minA) + ' al año' : cf2(m.minimo.pesos) + ' por bimestre') + ' (' + ley(m.minimo.art) + '): pagas el mínimo.');
     }
     res.fin = r2(fin);
     res.pr = pr;
@@ -141,7 +168,7 @@
     pasos.push([pr ? 'Pagas por el año, en una sola exhibición' : 'Pagas por el año (en seis bimestres de ' + pesos(r2(A1 / 6)) + ')', res.fin, ley(pr ? pr.art : artB), 'b']);
     if (pr && m.pronto_nota) avisos.push(m.pronto_nota);
     if (m.tramos_nota) avisos.push(m.tramos_nota);
-    if (x.tipo === 'rust' && !m.rustico) avisos.push('La Ley de Ingresos de ' + m.nombre + ' cobra a los predios rústicos con la misma tabla que a los urbanos.');
+    if (x.tipo === 'rust' && !m.rustico && !m.anual) avisos.push('La Ley de Ingresos de ' + m.nombre + ' cobra a los predios rústicos con la misma tabla que a los urbanos.');
     if (m.nota) avisos.push(m.nota);
     return res;
   }
@@ -155,6 +182,7 @@
   /* El adeudo, bimestre por bimestre: vence el día 15 del primer mes (LHM, art. 103); recargos por mes o
      fracción desde el día siguiente (art. 52); actualización con el INPC (art. 44 bis). y: {imp, da, db, ha, hb, f:[a,m,d], sit, multa} */
   function adeudo(D, m, y) {
+    if (!m.recargo) return { error: m.acc_pend || 'Los recargos de este municipio aún no están integrados.' };
     var filas = [], avisos = [], tot = { imp: 0, act: 0, rec: 0 };
     var tope = y.sit === 'esp' ? D.lhm.tope_esp : D.lhm.tope;
     var ult = D.inpc_ult, faltaInpc = false;
@@ -253,7 +281,7 @@
     return (v < 0 ? '−' : '') + '$' + Math.abs(Number(v)).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
-  window.AuditorPredial = { bimestral: bimestral, base: base, calcula: calcula, adeudo: adeudo, inverso: inverso, valorFiscal: valorFiscal, valorConstruccion: valorConstruccion, valorSuelo: valorSuelo, contrasta: contrasta, cuartil: cuartil };
+  window.AuditorPredial = { bimestral: bimestral, base: base, anual: anual, calcula: calcula, adeudo: adeudo, inverso: inverso, valorFiscal: valorFiscal, valorConstruccion: valorConstruccion, valorSuelo: valorSuelo, contrasta: contrasta, cuartil: cuartil };
 
   var raiz = document.getElementById('cpRaiz');
   if (!raiz) return;
@@ -324,7 +352,8 @@
       h += '<p><b>' + esc(nom) + '</b> no rindió cuenta al INEGI en ' + (MUN ? MUN.anio : '') + ': no sabemos cuánto recaudó de predial.</p>';
     }
     if (m) {
-      h += '<p class="cp-ok">✓ Su tabla está integrada: <a href="' + esc(m.url) + '">' + esc(m.ley) + '</a>. Recargos: ' + m.recargo.pct + ' % al mes (' + esc(m.recargo.art) + ').</p>';
+      h += '<p class="cp-ok">✓ Su tabla está integrada: <a href="' + esc(m.url) + '">' + esc(m.ley) + '</a>. ' +
+        (m.recargo ? 'Recargos: ' + m.recargo.pct + ' % al mes (' + esc(m.recargo.art) + ').' : '</p><p class="cp-falta"><span class="est-chip est-pendiente">pendiente</span> Recargos y gastos de cobranza: ' + esc(m.acc_pend)) + '</p>';
     } else if (D.espera && D.espera[ent + '-' + cve]) {
       var w = D.espera[ent + '-' + cve];
       h += '<p class="cp-falta"><span class="est-chip est-pendiente">pendiente</span> Leímos su <a href="' + esc(w.url) + '">Ley de Ingresos ' + D.anio + '</a>, pero no la integramos: ' + esc(w.motivo) + ' No adivinamos una tasa. Mientras, prueba con un municipio marcado con ✓.</p>';
@@ -354,8 +383,12 @@
     }
     $('cpMunFicha').innerHTML = h;
     $('cpPredio').disabled = !m;
+    /* «Comercial» solo donde la ley le da su propia tasa (Nuevo León, art. 21 bis-8, tercer párrafo). */
+    var oc = $('cpTipo').querySelector('option[value="com"]'), conCom = !!(m && m.anual && m.anual.com);
+    if (oc) { oc.hidden = !conCom; oc.disabled = !conCom; if (!conCom && $('cpTipo').value === 'com') $('cpTipo').value = 'edif'; }
     if (m) {
       $('cpBen').innerHTML = '<option value="">Ninguno</option>' + m.beneficios.map(function (b) {
+        if (b.fija != null) return '<option value="' + esc(b.id) + '">' + esc(b.et) + ' — pagas ' + pesos(b.fija) + ' al año (' + b.fija_uma + ' cuotas)' + (b.hasta ? ' (valor hasta ' + pesos(b.hasta) + ')' : '') + '</option>';
         return '<option value="' + esc(b.id) + '">' + esc(b.et) + ' — pagas ' + Math.round(b.f * 100) + ' %' + (b.tope ? ' sobre el primer $' + b.tope.toLocaleString('es-MX') : '') + (b.hasta ? ' (valor hasta $' + b.hasta.toLocaleString('es-MX') + ')' : '') + '</option>';
       }).join('');
       $('cpPago').innerHTML = '<option value="bim">Cada bimestre</option>' + m.pronto.map(function (p) {
@@ -441,11 +474,12 @@
     var vf = num('cpVf');
     if (!(vf > 0)) vf = 2500000;
     var tipo = $('cpTipo').value;
-    $('cpCompCap').textContent = 'Predial anual de un predio ' + (tipo === 'baldio' ? 'baldío' : 'construido') + ' con valor fiscal de ' + pesos(vf);
+    $('cpCompCap').textContent = 'Predial anual de un predio ' + (tipo === 'baldio' ? 'baldío' : tipo === 'com' ? 'comercial' : tipo === 'rust' ? 'rústico' : 'construido') + ' con valor fiscal de ' + pesos(vf);
     var ent = $('cpEnt').value;
-    var filas = D.mun.filter(function (m) { return m.ent === ent; }).map(function (m) { return [m, r2(base(m, vf, tipo) * 6)]; }).sort(function (a, b) { return a[1] - b[1]; });
+    var filas = D.mun.filter(function (m) { return m.ent === ent; }).map(function (m) { return [m, anual(m, vf, tipo)]; }).sort(function (a, b) { return a[1] - b[1]; });
     $('cpComp').innerHTML = filas.map(function (f) {
       var m = f[0];
+      if (!m.recargo) return '<tr><th scope="row">' + esc(m.nombre) + '</th><td>' + pesos(f[1]) + '</td><td>pendientes</td></tr>';
       return '<tr><th scope="row">' + esc(m.nombre) + '</th><td>' + pesos(f[1]) + '</td><td>' + m.recargo.pct + ' % · ' + (m.multa ? (m.multa.min === m.multa.max ? m.multa.min : m.multa.min + '–' + m.multa.max) + ' %' : 'no la fija') + '</td></tr>';
     }).join('');    mercado();
   }
@@ -476,7 +510,7 @@
     if (!(vf > 0)) {
       h += '<p>Escribe arriba el valor fiscal de tu predio y lo marcamos en la escala.</p>';
     } else if (tipo !== 'edif') {
-      h += '<p>El Índice SHF mide <b>vivienda</b>; para un terreno ' + (tipo === 'rust' ? 'rústico' : 'baldío') + ' no hay comparación justa, así que no lo marcamos.</p>';
+      h += '<p>El Índice SHF mide <b>vivienda</b>; para un predio ' + (tipo === 'rust' ? 'rústico' : tipo === 'com' ? 'comercial' : 'baldío') + ' no hay comparación justa, así que no lo marcamos.</p>';
     } else {
       var q = cuartil(P, vf);
       var dice = ['abajo de una de cada cuatro viviendas valuadas: al menos tres de cada cuatro valieron más que eso',
@@ -508,7 +542,7 @@
     var r = calcula(D, m, x);
     var U = { m: m, x: x, r: r, d: null, y: null, c: null, benTx: x.ben ? opTxt('cpBen') : 'Ninguno', pagoTx: opTxt('cpPago') };
     var h = '<p class="ci-cifra">Tu predial en ' + esc(m.nombre) + ': <b>' + pesos(r.fin) + ' al año</b></p>' +
-      '<p>' + (r.pr ? 'En una sola exhibición.' : 'Son ' + pesos(r2(r.conBen / 6)) + ' cada bimestre, que se pagan en los primeros quince días del primer mes de cada bimestre (enero, marzo, mayo, julio, septiembre y noviembre).') +
+      '<p>' + (r.pr ? 'En una sola exhibición.' : 'Son ' + pesos(r2(r.conBen / 6)) + ' cada bimestre, ' + (m.venc || 'que se pagan en los primeros quince días del primer mes de cada bimestre (enero, marzo, mayo, julio, septiembre y noviembre)') + '.') +
       (r.fin < r.anual ? ' Sin descuentos serían ' + pesos(r.anual) + '.' : '') + '</p>';
     tot.innerHTML = h;
     var fila = function (p) {

@@ -1960,7 +1960,7 @@
     L.forEach(function (m) { m.slice(1).forEach(function (n) { if (n.length > largo && p.indexOf(' ' + n + ' ') >= 0) { hit = m; largo = n.length; } }); });
     var liga = a.url + (hit ? '?mun=' + hit[0] : '');
     return respApp('ccpredial', liga, '<p><span aria-hidden="true">' + a.ico + '</span> Esa cuenta la hace <b>' + esc(a.n) + '</b>, de la ' + esc(a.grupo) + (hit ? ', y ya le puse el municipio' : '') +
-      ': escribe el valor fiscal de tu predio (viene en tu recibo) y te dice tu predial del año con la tabla de su Ley de Ingresos, sus descuentos y, si debes bimestres, la actualización, los recargos, la multa y los gastos de cobranza, cada uno con su artículo.</p>' +
+      ': escribe el valor fiscal de tu predio (viene en tu recibo) y te dice tu predial del año con la tarifa de su ley (su Ley de Ingresos o, en Nuevo León, la Ley de Hacienda para los Municipios), sus descuentos y, si debes bimestres, la actualización, los recargos, la multa y los gastos de cobranza, cada uno con su artículo.</p>' +
       '<p class="pa-chico">La cuenta la hace el simulador, no el chat. Cada municipio cobra con su propia ley; si el tuyo aún no está cotejado, la página te lo dice y te da cuánto recaudó de predial.</p>',
       { sug: ['Me llegó un mandamiento de ejecución por no pagar el predial', '¿Cuánto recaudó de predial mi municipio?', 'Vendes una casa o un terreno'] });
   }

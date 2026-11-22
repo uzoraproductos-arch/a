@@ -1382,7 +1382,7 @@ def herramienta_asistente(bloque):
         'entrada': '<b>%s.</b> %s' % (ASISTENTE[2], ASISTENTE[3]),
         'fondo': FOTO_AUDITOR, 'rubro': rubro, 'foto_clase': 'foto-auditor',
         'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
-        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
+        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'municipios-fraude.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
         # Sin la fila de las cuatro herramientas: el chat ya es sus modos.
         'pie_extra': nav,
     }
@@ -1402,7 +1402,7 @@ def herramienta_dictamen(bloque):
                     'sus fuentes oficiales y el método, con folio, sello y huella digital. Se arma de nuevo con los datos de la plataforma cada vez que se abre el enlace.'),
         'fondo': FOTO_AUDITOR, 'rubro': h[1], 'foto_clase': 'foto-auditor',
         'secciones': [{'id': 'dictamen', 'titulo': 'Dictamen cívico independiente de Auditavisión', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
-        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
+        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'municipios-fraude.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
     }
 
 

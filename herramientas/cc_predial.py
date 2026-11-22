@@ -943,6 +943,110 @@ MUNICIPIOS = [
      'ejec': {'pct': 5, 'max_uma': 45, 'emb': True, 'art': 'art. 34, fr. II, a'}},
 ]
 
+# ---------------------------------------------------------------------------
+# Nuevo León, los 51 municipios (Ronda 4, 22-11-2026; reglas que Antigravity
+# sacó de la ley y Claude cotejó contra el mismo texto, misma huella). En Nuevo
+# León el predial no está en una Ley de Ingresos por municipio: lo fija la Ley
+# de Hacienda para los Municipios del Estado, igual para los 51 (arts. 21 bis-2
+# a 21 bis-12). Es un impuesto ANUAL al millar del valor catastral, pagadero por
+# bimestres adelantados; aquí va como 'anual' (al millar por año, por tipo de
+# predio) y el navegador hace la misma cuenta (anual() de cc-predial.js).
+#
+# Lo que no es cita de la ley y decidimos a la vista (derivado):
+#  - «Cuota»: la ley la define como el salario mínimo general diario del
+#    municipio (art. 10 bis). Desde la reforma constitucional de
+#    desindexación (DOF 27-01-2016, transitorio tercero), toda mención al
+#    salario mínimo como unidad de medida se entiende hecha a la UMA: por eso
+#    2 cuotas = 2 UMA diarias.
+#  - Los recargos y los gastos de cobranza los fija cada año la Ley de
+#    Ingresos de los Municipios del Estado de Nuevo León; la de 2026 no está en
+#    el portal del Congreso (la última es la de 2025: recargo de 1.2 % al mes,
+#    art. 3). No usamos la tasa de otro año: el adeudo de Nuevo León queda
+#    pendiente y la página lo dice.
+#  - Las tablas de valores unitarios de cada municipio no están integradas: el
+#    lector escribe su valor catastral.
+# ---------------------------------------------------------------------------
+NL_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'nl-ley-hacienda-2026.json')
+NL_TX = 'Ley de Hacienda para los Municipios del Estado de Nuevo León'
+NL_NOTA = ('En Nuevo León la tasa no cambia de municipio a municipio: la fija la %s para los 51 (art. 21 bis-8). La ley dice «cuota» '
+           'por el salario mínimo diario (art. 10 bis); desde la desindexación constitucional (DOF 27-01-2016) se lee como UMA: es lectura '
+           'nuestra. Si el impuesto del año no pasa de 4 cuotas, se paga en un solo entero en los primeros seis meses (art. 21 bis-12). '
+           'Si parte de la construcción es casa y parte comercio, la tasa comercial va solo sobre la parte no habitacional (art. 21 bis-8, '
+           'cuarto párrafo): aquí se calcula todo con una tasa. Un baldío de hasta 200 m² cuyo dueño no tiene otro inmueble en el estado paga '
+           '3 al millar aunque esté en la zona metropolitana (art. 21 bis-8, segundo párrafo).') % NL_TX
+NL_ACC = ('Los recargos y gastos de cobranza de 2026 los fija la Ley de Ingresos de los Municipios del Estado de Nuevo León 2026, que '
+          'todavía no está en el portal del Congreso del Estado (la última publicada es la de 2025). No calculamos un adeudo con la tasa '
+          'de otro año: pídelo a la tesorería de tu municipio.')
+
+
+def _padron_ent(ent):
+    js = ('global.window={};require(%s);process.stdout.write(JSON.stringify(window.AUDIT_MUNICIPIOS.ent[%s].lista.map(function(r){return [r[0],r[1]]})));'
+          % (json.dumps(os.path.join(RAIZ, 'assets', 'auditor', 'js', 'municipios-efipem.js')), json.dumps(ent)))
+    return json.loads(subprocess.run(['node', '-e', js], check=True, capture_output=True, text=True).stdout)
+
+
+def _nl():
+    L = json.load(open(NL_ARCHIVO, encoding='utf-8'))
+    R = L['reglas']
+    t, metro = R['tasas_anuales_al_millar'], {x['cve'][2:] for x in R['tasas_anuales_al_millar']['municipios_metropolitanos_baldio_4_millar']}
+    if (t['habitacional'], t['comercial_industrial_servicios'], t['baldio_metropolitano'], t['baldio_resto_estado_o_menor_200m2_unico']) != (2.0, 3.0, 4.0, 3.0) \
+            or len(metro) != 7 or R['pago_y_descuentos']['minimo_anual_cuotas_uma'] != 2 or R['tarifa_especial']['cuotas_anuales_uma'] != 2:
+        raise SystemExit('cc_predial: %s cambió: vuelve a cotejar el art. 21 bis-8, 21 bis-9 y 21 bis-12 antes de integrarlo' % NL_ARCHIVO)
+    lista = _padron_ent('NL')
+    if len(lista) != 51 or not metro <= {c for c, _n in lista}:
+        raise SystemExit('cc_predial: el padrón no trae los 51 municipios de Nuevo León o sus 7 metropolitanos')
+    ben = [
+        {'id': 'viv', 'et': 'Tu casa, donde vives, y no tienes otro inmueble en el estado (valor catastral hasta 6,049 cuotas)', 'fija_uma': 2, 'hasta_uma': 6049, 'art': 'art. 21 bis-9, fr. IV'},
+        {'id': 'viv2', 'et': 'Igual, con valor catastral de más de 6,049 y hasta 10,188 cuotas (el doble de la tarifa especial)', 'fija_uma': 4, 'hasta_uma': 10188, 'art': 'art. 21 bis-9, fr. IV, segundo párrafo'},
+        {'id': 'ix', 'et': 'Jubilado o pensionado, 60 años o más, mujer no casada, huérfano menor de 18 o con incapacidad para trabajar, con ingresos de hasta 2.5 cuotas al día (tu casa, valor hasta 7,354 cuotas)', 'fija_uma': 2, 'hasta_uma': 7354, 'art': 'art. 21 bis-9, fr. IX'},
+        {'id': 'ix2', 'et': 'Igual, con valor catastral de más de 7,354 y hasta 14,708 cuotas (el doble)', 'fija_uma': 4, 'hasta_uma': 14708, 'art': 'art. 21 bis-9, fr. IX, penúltimo párrafo'},
+        {'id': 'esc', 'et': 'Escuela particular con validez oficial, en inmueble propio', 'fija_uma': 2, 'art': 'art. 21 bis-9, fr. I'},
+        {'id': 'ejido', 'et': 'Predio ejidal', 'fija_uma': 2, 'art': 'art. 21 bis-9, fr. V'},
+        {'id': 'pat', 'et': 'Patrimonio de familia (sin otro inmueble en el estado)', 'fija_uma': 2, 'art': 'art. 21 bis-9, fr. VI'},
+        {'id': 'benef', 'et': 'Institución de beneficencia privada, para sus fines', 'fija_uma': 2, 'art': 'art. 21 bis-9, fr. VII'},
+        {'id': 'rel', 'et': 'Asociación religiosa, para sus fines y sin negocio', 'fija_uma': 2, 'art': 'art. 21 bis-9, fr. XI'},
+    ]
+    out = []
+    for cve, nom in lista:
+        bal = 4 if cve in metro else 3
+        out.append({
+            'id': 'nl' + cve, 'ent': 'NL', 'cve': cve, 'nombre': nom,
+            'ley': '%s (texto vigente del Congreso del Estado; última reforma P.O. 25-01-2023)' % NL_TX, 'ley_corta': NL_TX,
+            'url': L['url'], 'sha256': L['sha256_html'],
+            'art_tarifa': 'art. 21 bis-8, primer párrafo', 'tarifa': 'millar', 'millar': 2 / 6, 'tramos': [[0.0, 0.0, 2 / 6000]],
+            'anual': {'edif': 2, 'rust': 2, 'com': 3, 'baldio': bal},
+            'art_anual': {'edif': 'art. 21 bis-8, primer párrafo', 'rust': 'art. 21 bis-8, primer párrafo', 'com': 'art. 21 bis-8, tercer párrafo',
+                          'baldio': 'art. 21 bis-8, segundo párrafo'},
+            'baldio': {'tipo': 'millar', 'millar': bal / 6, 'cf': 0.0, 'art': 'art. 21 bis-8, segundo párrafo'},
+            'pronto': [{'id': 'feb', 'et': 'Pagas el año completo a más tardar el 5 de febrero', 'f': 0.85, 'art': 'art. 21 bis-12'},
+                       {'id': 'mar', 'et': 'Pagas el año completo a más tardar el 5 de marzo', 'f': 0.90, 'art': 'art. 21 bis-12'}],
+            'pronto_nota': 'Por bimestres, cada pago vence el día 5 de febrero, abril, junio, agosto, octubre y diciembre (art. 21 bis-12).',
+            'beneficios': [dict(b) for b in ben], 'suma_art': None,
+            'minimo': {'uma_anual': 2, 'art': 'art. 21 bis-12, tercer párrafo'},
+            'acc_pend': NL_ACC, 'nota': NL_NOTA,
+            'venc': 'que vencen a más tardar el día 5 de febrero, abril, junio, agosto, octubre y diciembre (art. 21 bis-12)',
+            'metro': cve in metro})
+    return out
+
+
+MUNICIPIOS += _nl()
+
+
+def aplica_uma(uma):
+    """Las cifras en cuotas (UMA) de Nuevo León, en pesos con la UMA de la base: el mínimo de 2 cuotas al año y la
+    tarifa especial. Se llama antes de pasar los renglones a la página y en la prueba, con la misma UMA."""
+    for m in MUNICIPIOS:
+        mi = m.get('minimo')
+        if mi and mi.get('uma_anual'):
+            mi['anual'] = _r2(mi['uma_anual'] * uma)
+            mi['pesos'] = _r2(mi['anual'] / 6)
+        for b in m['beneficios']:
+            if b.get('fija_uma'):
+                b['fija'] = _r2(b['fija_uma'] * uma)
+                if b.get('hasta_uma'):
+                    b['hasta'] = _r2(b['hasta_uma'] * uma)
+
+
 # Leyes que leímos y no integramos, con su porqué: la página lo dice en la ficha del municipio.
 ESPERA = {
     'JAL-002': {'nombre': 'Acatlán de Juárez', 'url': _li('Acatl%C3%A1n%20de%20Ju%C3%A1rez'),
@@ -1802,6 +1906,11 @@ OAX_VE = {'tx': 'Congreso del Estado de Oaxaca, versión estenográfica de la se
           'url': 'https://congresooaxaca.gob.mx/docs66.congresooaxaca.gob.mx/version_estenografs/Version_Estenografica_Sesion_Extraordinaria_Primer_Periodo_Ordinario_Sesiones_Segundo_Annio_Ejercicio_LXVI_Legislatura_31_marzo_2026.pdf',
           'sha256': 'c2a1f28ace973de7b550a345d1902c3dd35fcda20eac3cf16df6c761242768eb'}
 REGISTRO = {
+    'NL': {'donde': 'Congreso del Estado de Nuevo León, leyes del paquete fiscal',
+           'url': 'https://www.hcnl.gob.mx/trabajo_legislativo/leyes/paquete_fiscal.php',
+           'como': 'El predial no va en una ley por municipio: lo fija la Ley de Hacienda para los Municipios del Estado, igual para los 51 '
+                   '(arts. 21 bis-2 a 21 bis-12). Los recargos los fija cada año la Ley de Ingresos de los Municipios del Estado.',
+           'ojo': 'La Ley de Ingresos de los Municipios 2026 aún no está en el portal del Congreso (la última es la de 2025): los recargos de Nuevo León siguen pendientes.'},
     'JAL': {'donde': 'Biblioteca Virtual del Congreso del Estado de Jalisco',
             'url': 'https://congresoweb.congresojal.gob.mx/BibliotecaVirtual/busquedasleyes/Listado%272.cfm',
             'como': 'Una Ley de Ingresos por municipio, con su tabla del predial; el Congreso las guarda en PDF.',
@@ -1884,7 +1993,7 @@ def esc(t):
 def revisa():
     """Cada renglón completo y su tabla en orden; si no, se detiene."""
     for m in MUNICIPIOS:
-        for k in ('id', 'ent', 'cve', 'nombre', 'ley', 'url', 'sha256', 'tramos', 'baldio', 'pronto', 'beneficios', 'recargo', 'notif', 'ejec'):
+        for k in ('id', 'ent', 'cve', 'nombre', 'ley', 'url', 'sha256', 'tramos', 'baldio', 'pronto', 'beneficios') + (() if m.get('acc_pend') else ('recargo', 'notif', 'ejec')):
             if k not in m:
                 raise SystemExit('cc_predial: a %s le falta %s' % (m.get('id'), k))
         if m['ent'] not in ENTIDADES or len(m['sha256']) != 64:
@@ -1897,18 +2006,25 @@ def revisa():
             fin = a[1] + (b[0] - 0.01 - a[0]) * a[2]
             if abs(fin - b[1]) > max(2.0, b[1] * 0.02):
                 raise SystemExit('cc_predial: en %s la cuota fija %s no sigue del tramo anterior (%.2f)' % (m['id'], b[1], fin))
+        if m.get('anual') and (set(m['anual']) != {'edif', 'rust', 'com', 'baldio'} or any(not (0 < v < 20) for v in m['anual'].values())
+                               or set(m.get('art_anual', {})) != set(m['anual'])):
+            raise SystemExit('cc_predial: la tasa anual de %s no trae sus cuatro tipos de predio con su artículo' % m['id'])
         for b in m['beneficios']:
+            if b.get('fija_uma'):
+                if not (b['fija_uma'] > 0 and b.get('art')) or 'f' in b:
+                    raise SystemExit('cc_predial: la tarifa especial %s de %s mal' % (b['id'], m['id']))
+                continue
             if not (0 <= b['f'] < 1) or not b.get('art'):
                 raise SystemExit('cc_predial: beneficio %s de %s mal' % (b['id'], m['id']))
         if m['baldio']['tipo'] not in ('sobretasa', 'millar', 'igual') or not m['baldio'].get('art'):
             raise SystemExit('cc_predial: el baldío de %s trae un tipo que la página no sabe cobrar' % m['id'])
         if m.get('tarifa') == 'millar' and (len(m['tramos']) != 1 or abs(m['tramos'][0][2] * 1000 - m['millar']) > 1e-9):
             raise SystemExit('cc_predial: la tasa al millar de %s no coincide con su tabla' % m['id'])
-        for k in ('notif', 'ejec'):
+        for k in () if m.get('acc_pend') else ('notif', 'ejec'):
             g = m[k]
             if not (g.get('pct') or g.get('uma') or g.get('pesos')) or not g.get('art'):
                 raise SystemExit('cc_predial: %s de %s no dice cuánto se cobra' % (k, m['id']))
-        if m.get('minimo') and not (m['minimo'].get('pesos', 0) > 0 and m['minimo'].get('art')):
+        if m.get('minimo') and not ((m['minimo'].get('pesos', 0) > 0 or m['minimo'].get('uma_anual', 0) > 0) and m['minimo'].get('art')):
             raise SystemExit('cc_predial: el mínimo de %s no dice cuánto ni su artículo' % m['id'])
         if m.get('multa') and not (0 < m['multa']['min'] <= m['multa']['max']):
             raise SystemExit('cc_predial: la multa de %s está al revés' % m['id'])
@@ -1993,7 +2109,18 @@ def base(m, vf, tipo):
     return max(b, m['minimo']['pesos']) if m.get('minimo') else b
 
 
+def anual(m, vf, tipo):
+    """Gemela de anual() de cc-predial.js: el impuesto del año. Con 'anual' (Nuevo León), tasa al millar por año sobre el
+    valor y el mínimo anual; en las demás, seis bimestres."""
+    if m.get('anual'):
+        a = _r2(vf * m['anual'].get(tipo, m['anual']['edif']) / 1000)
+        return max(a, m['minimo']['anual']) if m.get('minimo', {}).get('anual') else a
+    return _r2(base(m, vf, tipo) * 6)
+
+
 def _base(m, vf, tipo):
+    if m.get('anual'):
+        return _r2(_r2(vf * m['anual'].get(tipo, m['anual']['edif']) / 1000) / 6)
     if tipo == 'rust' and m.get('rustico'):
         return _r2(vf * m['rustico']['millar'] / 1000 + m['rustico']['cf'])
     if tipo != 'baldio' or m['baldio']['tipo'] == 'igual':
@@ -2025,6 +2152,7 @@ def datos(base):
     revisa_shf()
     cc = cc_inmueble.datos(base)
     uma = base['calculadora_civica']['parametros']['uma']
+    aplica_uma(uma['diaria'])
     return {'anio': ANIO, 'inpc': cc['inpc'], 'inpc_ult': cc['inpc_ult'],
             'uma': uma['diaria'], 'uma_f': uma['fuente'], 'ent': ENTIDADES,
             'mun': MUNICIPIOS, 'espera': ESPERA, 'reg': REGISTRO, 'tablas': TABLAS, 'dtv': DECRETOS_TV, 'poe': _POE, 'lhm': {'tope': 250, 'tope_esp': 100, 'tx': LHM['tx'], 'url': LHM['url'], 'sha256': LHM['sha256']}, 'shf': shf()}
@@ -2065,11 +2193,18 @@ def construir(base, ref):
                    for k, v in sorted(ENTIDADES.items(), key=lambda x: x[1]))
     anios = ''.join('<option value="%d"%s>%d</option>' % (a, ' selected' if a == ANIO else '', a) for a in range(ANIO + 1, 2014, -1))
     bims = ''.join('<option value="%d">%d.º (%s y %s)</option>' % (b, b, MES[2 * b - 2], MES[2 * b - 1]) for b in range(1, 7))
-    leyes = ''.join('<li><b>%s</b>: <a href="%s">%s</a> (huella SHA-256 <code>%s…</code>)</li>'
-                    % (esc(m['nombre']), esc(m['url']), esc(m['ley']), m['sha256'][:12]) for m in MUNICIPIOS)
-    lista = ', '.join(esc(m['nombre']) for m in MUNICIPIOS)
+    # Una ley para todo un estado (Nuevo León) va en un solo renglón.
+    porley = {}
+    for m in MUNICIPIOS:
+        porley.setdefault(m['url'], []).append(m)
+    leyes = ''.join('<li><b>%s</b>: <a href="%s">%s</a> (huella SHA-256 <code>%s…</code>)%s</li>'
+                    % ((esc(ms[0]['nombre']) if len(ms) == 1 else 'Los %d municipios de %s' % (len(ms), esc(ENTIDADES[ms[0]['ent']]))),
+                       esc(u), esc(ms[0]['ley']), ms[0]['sha256'][:12], ', arts. 10 bis y 21 bis-2 a 21 bis-12' if ms[0].get('anual') else '')
+                    for u, ms in porley.items())
+    lista = ', '.join(esc(m['nombre']) for m in MUNICIPIOS if not m.get('anual')) + ''.join(
+        ' y los %d municipios de %s' % (n, esc(ENTIDADES[e])) for e, n in sorted({(m['ent'], sum(1 for x in MUNICIPIOS if x['ent'] == m['ent'])) for m in MUNICIPIOS if m.get('anual')}))
     espera = '; '.join('%s: <a href="%s">su ley</a> %s' % (esc(w['nombre']), esc(w['url']), esc(w['motivo'])) for w in ESPERA.values())
-    nmun = {'JAL': 125, 'OAX': 570}
+    nmun = {'JAL': 125, 'OAX': 570, 'NL': 51}
     reg_filas = ''.join('<tr><th scope="row">%s</th><td>%s</td><td>%d · %d</td><td><a href="%s">%s</a>. %s %s</td></tr>' % (
         esc(ENTIDADES[e]), format(nmun.get(e, 0), ','), sum(1 for m in MUNICIPIOS if m['ent'] == e),
         sum(1 for k in ESPERA if k.startswith(e + '-')), esc(r['url']), esc(r['donde']), esc(r['como']), esc(r.get('ojo', '')))
@@ -2141,7 +2276,7 @@ def construir(base, ref):
         <p class="ci-pista"><b>Ojo: el valor catastral no es lo que vale tu casa en el mercado.</b> El precio de venta lo estiman portales y herramientas privadas (por ejemplo, <a href="https://monopolio.com.mx/avaluos" rel="noopener">Monopolio</a>, con inteligencia artificial y casas parecidas) <span class="est-chip est-pendiente">sin verificar</span>: no son de esta plataforma, no publican su método y ese precio <b>no sirve para el predial</b>, que se cobra sobre el valor catastral. Si escribes aquí el precio de mercado, el simulador te dará un predial más alto que el real.</p>
       </details>
       <label class="ci-et" for="cpTipo">Tipo de predio</label>
-      <select class="ci-in" id="cpTipo"><option value="edif">Construido (casa, departamento, local)</option><option value="rust">Rústico (fuera de la zona urbana)</option><option value="baldio">Baldío en zona urbana</option></select>
+      <select class="ci-in" id="cpTipo"><option value="edif">Construido (casa, departamento, local)</option><option value="rust">Rústico (fuera de la zona urbana)</option><option value="baldio">Baldío en zona urbana</option><option value="com" hidden disabled>Comercial, industrial o de servicios (donde la ley le da su tasa)</option></select>
       <label class="ci-et" for="cpBen">¿Tienes derecho a algún descuento?</label>
       <select class="ci-in" id="cpBen"></select>
       <label class="ci-et" for="cpPago">¿Cómo pagas?</label>
@@ -2265,6 +2400,7 @@ def construir(base, ref):
 
 def prueba():
     revisa()
+    aplica_uma(117.31)
     zap = next(m for m in MUNICIPIOS if m['id'] == 'zapopan')
     mal = 0
     b = bimestral(zap, EJEMPLO['vf'])
@@ -2275,7 +2411,8 @@ def prueba():
         mal += 1
         print('✗ la multa o la notificación del ejemplo')
     js = os.path.join(RAIZ, 'assets', 'auditor', 'js', 'cc-predial.js')
-    casos = [(m['id'], v, t) for m in MUNICIPIOS for v in (150000, 950000, 2500000, 7613320, 30000000, 2e9) for t in ('edif', 'rust', 'baldio')]
+    casos = [(m['id'], v, t) for m in MUNICIPIOS for v in (50000, 150000, 950000, 2500000, 7613320, 30000000, 2e9)
+             for t in ('edif', 'rust', 'baldio') + (('com',) if m.get('anual') else ())]
     D = {'mun': MUNICIPIOS, 'inpc': {}, 'inpc_ult': [2026, 1], 'uma': 117.31, 'lhm': {'tope': 250, 'tope_esp': 100, 'tx': LHM['tx'], 'url': LHM['url'], 'sha256': LHM['sha256']}}
     prog = ("global.window={};global.document={getElementById:function(){return null}};require(%s);"
             "var D=%s,c=%s;console.log(JSON.stringify(c.map(function(x){var m=D.mun.filter(function(y){return y.id===x[0]})[0];"
@@ -2390,6 +2527,36 @@ def prueba():
     if abs(json.loads(lineas[1]) - EJEMPLO['anual']) > 0.005:
         mal += 1
         print('✗ el navegador no da $14,025.72 al año para el ejemplo:', lineas[1])
+    # Nuevo León (art. 21 bis-8, 21 bis-9 y 21 bis-12): Monterrey y San Pedro (metropolitanos), Abasolo (fuera de la zona).
+    M = lambda i: next(m for m in MUNICIPIOS if m['id'] == i)
+    nl_esp = [('nl039', 1e6, 'edif', 2000.0), ('nl039', 1e6, 'com', 3000.0), ('nl039', 1e6, 'baldio', 4000.0), ('nl019', 1e6, 'baldio', 4000.0),
+              ('nl001', 1e6, 'baldio', 3000.0), ('nl001', 1e6, 'rust', 2000.0), ('nl039', 50000, 'edif', 234.62)]
+    for mid, v, t, esp in nl_esp:
+        if anual(M(mid), v, t) != esp:
+            mal += 1
+            print('✗ Nuevo León', mid, v, t, anual(M(mid), v, t), 'esperaba', esp)
+    nl_x = [('nl039', {'vf': 600000, 'tipo': 'edif', 'ben': '', 'pago': 'feb'}, 1020.0), ('nl039', {'vf': 600000, 'tipo': 'edif', 'ben': '', 'pago': 'mar'}, 1080.0),
+            ('nl039', {'vf': 600000, 'tipo': 'edif', 'ben': 'viv', 'pago': 'bim'}, 234.62), ('nl039', {'vf': 600000, 'tipo': 'edif', 'ben': 'viv', 'pago': 'feb'}, 234.62),
+            ('nl019', {'vf': 1e6, 'tipo': 'edif', 'ben': 'viv', 'pago': 'bim'}, 2000.0), ('nl019', {'vf': 1e6, 'tipo': 'edif', 'ben': 'viv2', 'pago': 'bim'}, 469.24),
+            ('nl001', {'vf': 80000, 'tipo': 'edif', 'ben': '', 'pago': 'feb'}, 234.62)]
+    prog7 = ("global.window={};global.document={getElementById:function(){return null}};require(%s);var D=%s;"
+             "console.log(JSON.stringify(%s.map(function(x){var m=D.mun.filter(function(y){return y.id===x[0]})[0];"
+             "return window.AuditorPredial.calcula(D,m,x[1]).fin;})));"
+             "var m=D.mun.filter(function(y){return y.id==='nl039'})[0];console.log(JSON.stringify(window.AuditorPredial.adeudo(D,m,{imp:100,da:2025,db:1,ha:2025,hb:6,f:[2026,6,1],multa:0,sit:'esp'})));"
+             % (json.dumps(js), json.dumps(D), json.dumps([[a, b] for a, b, _ in nl_x])))
+    r7 = subprocess.run(['node'], input=prog7, capture_output=True, text=True)
+    l7 = r7.stdout.strip().split('\n')
+    if len(l7) != 2:
+        mal += 1
+        print('✗ Nuevo León no corrió en el navegador', r7.stderr[:300])
+    else:
+        for (mid, x, esp), n in zip(nl_x, json.loads(l7[0])):
+            if n != esp:
+                mal += 1
+                print('✗ Nuevo León en el navegador', mid, x, n, 'esperaba', esp)
+        if 'Ley de Ingresos de los Municipios del Estado de Nuevo León 2026' not in json.loads(l7[1]).get('error', ''):
+            mal += 1
+            print('✗ el adeudo de Nuevo León debe decir que sus recargos están pendientes', l7[1][:200])
     if mal:
         print('%d diferencias en el simulador del predial' % mal)
         return 1
