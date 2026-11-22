@@ -532,3 +532,11 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 [data-theme="dark"] .sv-most-pie { color: #c3cee2; }
 [data-theme="dark"] .sv-most-abre { color: #8fb4ff; }
 [data-theme="dark"] .sv-most-doc { background: #1b2a44; border-color: #2a3b57; color: #e8eefa; }
+/* Ronda 1 (22-11-2026): lo nuevo de cada servicio y las fuentes de la base, plegados. */
+.sv-nuevo-mas, .sv-fuentes-mas { margin-top: 10px; }
+.sv-nuevo-mas > summary, .sv-fuentes-mas > summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 8px; font-weight: 600; color: #0b2a63; list-style: none; }
+.sv-nuevo-mas > summary::-webkit-details-marker, .sv-fuentes-mas > summary::-webkit-details-marker { display: none; }
+.sv-nuevo-mas > summary::after, .sv-fuentes-mas > summary::after { content: '▾'; margin-left: auto; transition: transform .2s; }
+.sv-nuevo-mas[open] > summary::after, .sv-fuentes-mas[open] > summary::after { transform: rotate(180deg); }
+[data-theme="dark"] .sv-nuevo-mas > summary, [data-theme="dark"] .sv-fuentes-mas > summary { color: #e8eefa; }
+@media print { .sv-nuevo-mas, .sv-fuentes-mas { display: block; } }

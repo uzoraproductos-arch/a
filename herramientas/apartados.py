@@ -2767,7 +2767,8 @@ def sv_servicios_y_nuevo(sf, puertas):
                 x[2], '%s%s' % (COBRO[x[0]], (' · %d %s' % (len(nv), 'novedad' if len(nv) == 1 else 'novedades')) if nv else ''),
                 x[1], 'Nuevo' if nv else '', sf.revisa_liga(x[0]), (),
                 SV_TONO[lid], id_='sv-nuevo-%s' % x[0], attrs=' data-sv-srv="%s"' % x[0],
-                pie=(sv_novedades_lista(x[0], sf, resp=True) if nv else '') + sv_most_boton(x[0]), ligas=True))
+                pie=(('<details class="sv-nuevo-mas"><summary><span aria-hidden="true">🆕</span> Lo nuevo (%d)</summary>%s</details>'
+                      % (len(nv), sv_novedades_lista(x[0], sf, resp=True))) if nv else '') + sv_most_boton(x[0]), ligas=True))
         paneles.append(
             '          <div class="sv-linea" id="nuevo-%s" data-sv-panel="%s">\n'
             '            <p class="sv-linea-tit"><span aria-hidden="true">%s</span> %s</p>\n'
@@ -2885,7 +2886,7 @@ def sv_acciones(sid, ver=True):
     import servicios_fichas as sf
     q, m = sv_pregunta(sid)
     return ([('Ver el servicio', 'servicio-%s.html' % sid, True)] if ver else []) + [
-        ('💬 Pregúntale', sf.chat_liga(q, m), False),
+        ('🔍 Revísalo', sf.revisa_liga(sid), False),  # Ronda 1 (22-11-2026): el Inspector de su servicio
         ('🧾 Dictamen', sv_dictamen(q, m), False),
         ('📝 Cotiza', 'servicios-cotiza.html?servicio=%s#solicitud' % sid, False)]
 
@@ -3435,13 +3436,14 @@ def servicios():
     modo_tx = {'sola': '🤖 Se pone al día sola cada semana', 'aviso': '🔔 Un vigía avisa y se coteja', 'mano': '✋ Se integra a mano'}
     aldia = '\n'.join([
         '<div class="sv-tira">', tira, '        </div>',
+        '        <details class="sv-fuentes-mas"><summary><span aria-hidden="true">📚</span> Ver fuentes y cortes (%d)</summary>' % len(SV_FUENTES),
         '        <ul class="sv-fuentes">%s</ul>' % ''.join(
             '<li><b>%s</b><span>%s · %s</span><small>%s</small></li>' % (
                 html.escape(fte[k]['que']), html.escape(fte[k]['quien']), html.escape(fu.corte(fte[k])), modo_tx[fte[k]['modo']])
             for k in SV_FUENTES),
         '        <p class="sv-nota">Los números son conteos de los archivos de la plataforma al generar esta página (<span class="est-chip est-derivado">auditada</span>). '
         'Cada fuente, con quién la publica, cada cuándo y su próxima revisión, está en <a href="base-al-dia.html">La base al día</a>; '
-        'de qué documento sale cada número, en <a href="%s#base">Por qué Auditavisión</a>.</p>' % SV_PORQUE])
+        'de qué documento sale cada número, en <a href="%s#base">Por qué Auditavisión</a>.</p>' % SV_PORQUE, '        </details>'])
     faq = '<div class="sv-faqs">\n%s\n        </div>' % '\n'.join(
         '          <details class="sv-faq"><summary>%s</summary><p>%s</p></details>' % q for q in PREGUNTAS)
     # Lo nuevo de la plataforma (18-11-2026), integrado a cada servicio y por
@@ -3575,10 +3577,10 @@ def servicio_paginas(comun):
             '          <p class="sv-fx-que">%s</p>' % que,
             '          <dl class="sv-dl sv-fx-dl"><dt>Recibes</dt><dd>%s</dd><dt>Para quién</dt><dd>%s</dd>'
             '<dt>Cómo se cobra</dt><dd>%s. El costo y el plazo te llegan por escrito antes de empezar; si no te conviene, ahí termina.</dd></dl>' % (recibe, quien, COBRO[sid]),
-            '          <div class="sv-fx-acc"><a class="sz-btn" href="%s">💬 Plantéale tu caso al Auditor</a>'
+            '          <div class="sv-fx-acc"><a class="sz-btn" href="%s">🔍 Revísalo con el Inspector</a>'
             '<a class="sz-btn" href="%s" target="_blank" rel="noopener">🧾 Genera su dictamen</a>'
             '<a class="sz-btn sz-btn-of" href="%s">📝 Pide una cotización</a></div>' % (
-                sf.chat_liga(*f['auditor'][0]), sv_dictamen(*sv_pregunta(sid)), cotiza),
+                sf.revisa_liga(sid), sv_dictamen(*sv_pregunta(sid)), cotiza),
             '          <p class="sv-nota">Todo empieza en el chat: te contesta en corto, te da el dictamen y te lleva a fondo. '
             'El dictamen de este servicio respalda qué es, con sus fuentes, su folio y su huella; no es un documento oficial ni un peritaje.</p>',
             '          <p class="sv-limite"><span aria-hidden="true">⚖️</span> %s</p>' % f['no'],
@@ -6957,6 +6959,13 @@ def pagina(a, sello):
         import modos
         sid = a['archivo'][len('servicio-'):-len('.html')] if a['archivo'].startswith('servicio-') else None
         texto = sf.por_auditor_html(texto, origen, sf.FICHAS[sid]['auditor'][0][1] if sid in sf.FICHAS else None, modos.modo_pagina)
+        if sid in sf.FICHAS:
+            # Ronda 1 (22-11-2026): en la página de un servicio, cada pregunta al Inspector abre
+            # el Inspector de ese servicio (servicios-revisa.html?s=<id>), con la misma pregunta y
+            # la misma página por abrir: mismos datos, el servicio ya elegido.
+            texto = texto.replace('href="%s?q=' % sf.SV_CHAT, 'href="%s?s=%s&amp;q=' % (sf.SV_REVISA, sid))
+        elif origen == 'Servicios' and a['archivo'] not in (sf.SV_CHAT, sf.SV_RESP, sf.SV_REVISA):
+            texto = sf.a_revisa(texto)
     return texto
 
 

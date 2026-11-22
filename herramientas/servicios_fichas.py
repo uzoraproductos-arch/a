@@ -437,6 +437,34 @@ def revisa_liga(sid, q=None, abre=None):
                             '&abre=%s' % quote(html.unescape(abre), safe='/-_.') if abre else '')
 
 
+def servicio_de(abre):
+    """El primer servicio cuya ficha aprovecha esa página (su `hace`), por la liga exacta o por
+    su archivo; None si ninguno. Sirve para mandar una pregunta al Inspector de ese servicio."""
+    if not abre:
+        return None
+    from urllib.parse import unquote
+    a = unquote(html.unescape(abre))
+    for exacta in (True, False):
+        for sid, f in FICHAS.items():
+            for x in f['hace']:
+                lg = html.unescape(x[3])
+                if (lg == a) if exacta else (lg.split('#')[0].split('?')[0] == a.split('#')[0].split('?')[0]):
+                    return sid
+    return None
+
+
+def a_revisa(texto):
+    """Ronda 1 (22-11-2026): en una página de Servicios, la pregunta al Inspector que abre una
+    página que algún servicio aprovecha va al Inspector de ese servicio (servicios-revisa.html?s=),
+    con la misma pregunta y la misma página: mismos datos, el servicio ya elegido."""
+    def cambia(m):
+        sid = servicio_de(m.group(2))
+        if not sid:
+            return m.group(0)
+        return 'href="%s?s=%s&amp;q=%s&amp;abre=%s"' % (SV_REVISA, sid, m.group(1), m.group(2))
+    return re.sub(r'href="%s\?q=([^"&]*)&amp;abre=([^"]*)"' % re.escape(SV_CHAT), cambia, texto)
+
+
 def resp_liga(q, abre=None):
     """La liga a la respuesta completa del Inspector de Servicios (21-11-2026): la página
     vuelve a contestar con la base; con `abre=`, con esa página o aplicación."""
