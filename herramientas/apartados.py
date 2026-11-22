@@ -2922,7 +2922,7 @@ def sv_monta():
 # monto de multa** (la ley lo fija en UMA y la autoridad lo individualiza) y
 # nunca se dice que revisar te libra de nada: (ícono, situación, consecuencia,
 # ley, artículo, cita textual, (qué revisa, su aplicación), servicio).
-SV_CPF = ('Código Penal Federal', 'CPF', 'DOF 13-03-2026', 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPF.pdf',
+SV_CPF = ('Código Penal Federal', 'CPF', 'DOF 13-11-2026', 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPF.pdf',
           'a2d80c4383c5fbc8453cf290c19b7853eb0a5a05d1e366572da384edfafda88c')
 SV_CONSECUENCIAS = [
     ('🧾', 'Tu proveedor entra a la lista 69-B definitiva',

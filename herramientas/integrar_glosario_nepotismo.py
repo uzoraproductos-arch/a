@@ -10,7 +10,7 @@ Uso:
 Cada definición sale de su ley, citada en «ley» (textos vigentes de la Cámara
 de Diputados): LGRA (última reforma DOF 15-12-2025), Código Civil Federal
 (última reforma DOF 14-11-2025), Código Penal Federal (última reforma DOF
-13-03-2026) y Constitución (decreto DOF 01-04-2025). Usa las mismas funciones
+13-11-2026) y Constitución (decreto DOF 01-04-2025). Usa las mismas funciones
 de integrar_glosario_fiscalizacion.py: es idempotente y no duplica términos.
 """
 import integrar_glosario_fiscalizacion as g

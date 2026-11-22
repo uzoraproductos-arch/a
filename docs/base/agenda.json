@@ -1,6 +1,6 @@
 {
  "que_es": "Lo que toca revisar de la base de datos. La escribe herramientas/fuentes.py --agenda en el flujo «Base al día».",
- "revisado": "2026-11-19",
+ "revisado": "2026-11-21",
  "toca": [],
  "fuentes": [
   {
@@ -21,7 +21,7 @@
    "quien": "SAT",
    "modo": "sola",
    "cada": "mensual",
-   "corte": "bajadas el 18-11-2026",
+   "corte": "bajadas el 21-11-2026",
    "revisar": "",
    "toca": false,
    "script": "anclar_listas.py",
@@ -33,7 +33,7 @@
    "quien": "Departamento del Tesoro de EE. UU. y Consejo de Seguridad de la ONU",
    "modo": "sola",
    "cada": "semanal",
-   "corte": "bajadas el 18-11-2026",
+   "corte": "bajadas el 21-11-2026",
    "revisar": "",
    "toca": false,
    "script": "anclar_listas.py",
@@ -45,7 +45,7 @@
    "quien": "Secretaría Anticorrupción y Buen Gobierno",
    "modo": "sola",
    "cada": "semanal",
-   "corte": "consultado el 17-11-2026",
+   "corte": "consultado el 21-11-2026",
    "revisar": "",
    "toca": false,
    "script": "anclar_sancionados.py",
@@ -68,7 +68,7 @@
    "que": "Valor de la UDI (para la exención de la casa habitación)",
    "quien": "Banco de México",
    "modo": "sola",
-   "cada": "quincenal",
+   "cada": "semanal",
    "corte": "al 25-11-2026",
    "revisar": "",
    "toca": false,
@@ -142,7 +142,7 @@
    "modo": "mano",
    "cada": "mensual",
    "corte": "contratos de 2025 y 2026",
-   "revisar": "2026-12-01",
+   "revisar": "2026-12-21",
    "toca": false,
    "script": "actualizar_comprasmx.py",
    "url": "https://comprasmx.buengobierno.gob.mx/datos-abiertos"
@@ -154,10 +154,22 @@
    "modo": "mano",
    "cada": "trimestral",
    "corte": "al 30-06-2026",
-   "revisar": "2026-12-01",
+   "revisar": "2026-12-15",
    "toca": false,
    "script": "anclar_rpu.py",
    "url": "https://www.disciplinafinanciera.hacienda.gob.mx/"
+  },
+  {
+   "id": "shf-vivienda",
+   "que": "Índice SHF de Precios de la Vivienda: precios de avalúo por entidad y variación anual por entidad y municipio",
+   "quien": "Sociedad Hipotecaria Federal",
+   "modo": "mano",
+   "cada": "trimestral",
+   "corte": "3T 2026",
+   "revisar": "2027-02-15",
+   "toca": false,
+   "script": "anclar_shf_vivienda.py",
+   "url": "https://www.gob.mx/shf/documentos/indice-shf-de-precios-de-la-vivienda-en-mexico-2025-a-2026"
   },
   {
    "id": "sesnsp",
@@ -165,8 +177,8 @@
    "quien": "SESNSP",
    "modo": "mano",
    "cada": "mensual",
-   "corte": "corte sep2026",
-   "revisar": "2026-11-20",
+   "corte": "corte oct2026",
+   "revisar": "2026-12-20",
    "toca": false,
    "script": "anclar_sesnsp_fraude.py",
    "url": "https://www.gob.mx/sesnsp/acciones-y-programas/datos-abiertos-de-incidencia-delictiva"
@@ -206,6 +218,18 @@
    "toca": false,
    "script": "integrar_asf_estados.py y módulos de auditoría",
    "url": "https://www.asf.gob.mx/"
+  },
+  {
+   "id": "leyes-ingresos-predial",
+   "que": "Tablas del impuesto predial de las leyes de ingresos municipales (Zapopan, Guadalajara, Tlaquepaque, Tonalá y Tlajomulco)",
+   "quien": "Congreso del Estado de Jalisco (Periódico Oficial «El Estado de Jalisco»)",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "leyes de ingresos 2026",
+   "revisar": "2027-01-31",
+   "toca": false,
+   "script": "cc_predial.py",
+   "url": "https://congresoweb.congresojal.gob.mx/BibliotecaVirtual/busquedasleyes/Listado%272.cfm"
   },
   {
    "id": "uma",

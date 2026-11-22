@@ -8,7 +8,7 @@ física, el que calcula y entera el notario (LISR, art. 126), con la ley a la
 vista. Cotejado el 19-11-2026 contra los textos vigentes de la Cámara de
 Diputados (huella SHA-256 abajo):
 
-  - LISR (última reforma DOF 01-04-2024): art. 93, fr. XIX, inciso a (casa
+  - LISR (última reforma DOF 13-11-2026, decreto sha256 f622599027d4…; sin cambios en estos artículos): art. 93, fr. XIX, inciso a (casa
     habitación exenta hasta 700,000 UDIS, con su proporción); art. 121
     (deducciones; costo actualizado de al menos 10 % de la venta); art. 124
     (terreno y construcción, 20 % de terreno si no se puede separar, 3 % anual
@@ -49,7 +49,7 @@ ESTILOS = ['cc-inmueble.css']
 SCRIPTS = ['cc-inmueble.js']
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UDI = os.path.join(RAIZ, 'docs', 'sat', 'udi.json')
-LISR = {'tx': 'Ley del Impuesto sobre la Renta, texto vigente (Cámara de Diputados, última reforma DOF 01-04-2024)',
+LISR = {'tx': 'Ley del Impuesto sobre la Renta, texto vigente (Cámara de Diputados, última reforma DOF 13-11-2026)',
         'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf',
         'sha256': '803c2875c09c751c1966b8eb4dca99f460b237da4ef67ee04b4fa325d8c2f786'}
 CFF = {'tx': 'Código Fiscal de la Federación, texto vigente (Cámara de Diputados, última reforma DOF 09-04-2026)',

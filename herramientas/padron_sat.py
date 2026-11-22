@@ -34,7 +34,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PADRON = os.path.join(RAIZ, 'docs', 'sat', 'padron-sat.json')
 DONAT = os.path.join(RAIZ, 'docs', 'sat', 'donatarias.json')
 MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
-LISR = {'tx': 'Ley del Impuesto sobre la Renta, texto vigente (Cámara de Diputados, última reforma DOF 01-04-2024)',
+LISR = {'tx': 'Ley del Impuesto sobre la Renta, texto vigente (Cámara de Diputados, última reforma DOF 13-11-2026)',
         'url': 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf',
         'sha256': '803c2875c09c751c1966b8eb4dca99f460b237da4ef67ee04b4fa325d8c2f786'}
 SEGOB_AR = 'https://asociacionesreligiosas.segob.gob.mx/es/AsuntosReligiosos/Numeralia'

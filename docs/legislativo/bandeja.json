@@ -17,8 +17,9 @@
    "articulos": "",
    "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpf.htm",
    "seccion": "Leyes Federales Vigentes",
-   "estado": "por cotejar",
-   "visto": "20-11-2026"
+   "estado": "cotejado",
+   "visto": "20-11-2026",
+   "cotejo": "Cotejado el 21-11-2026 (CPF_ref167_13nov26.pdf, sha256 e3dba7d8a41f…): decreto en materia de propiedad industrial; no modifica el art. 400 Bis ni el art. 220 citados en la plataforma."
   },
   {
    "id": "dip-lisr-13-11-2026",
