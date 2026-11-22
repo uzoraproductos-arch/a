@@ -926,6 +926,10 @@ HERRAMIENTAS = [
          # calculadora de parentesco (herramientas/nepotismo.py).
          ('inspnepotismo', '👪', 'Nepotismo y parentesco', 'Busca y verifica',
           'Elige un parentesco y ve qué grado es y qué ley lo alcanza: plaza, contrato o candidatura. Con el árbol de grados, cómo se investiga un cargo y por qué un apellido igual no prueba nada.'),
+         # Desde el 04-11-2026 (pedido del autor; traída del PR #137 el 22-11-2026): contratos ×
+         # lista 69-B × ASF, año por año (herramientas/cruce_contratos.py).
+         ('inspcruce', '🔗', 'Contratos, lista 69-B y ASF', 'Año por año',
+          'Cruzamos los contratos públicos con la lista negra del SAT y lo que fiscalizó la Auditoría Superior desde 2002. Separamos lo que ya declaró la autoridad de las señales que detectamos, como un contrato firmado después de que el DOF publicó a la empresa.'),
          # Venia de la pestana «Servicios» de Participa (pedido del autor, 11-10-2026).
          ('servicios.html', '🔎', 'Servicios de investigación', 'Investigación a la medida',
           'Cuando necesites ir más a fondo en un caso: revisión documental, expediente, seguimiento, capacitación o licencia, con la misma regla de la plataforma y su política de independencia. Tiene su propia página.'),
@@ -1002,7 +1006,7 @@ MODULOS_PROPIOS = {'inspverifica'}
 # modulo de herramientas/ arma su pagina con construir(base, ref) y dice
 # sus ESTILOS y SCRIPTS (assets/auditor/css y js).
 INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspentes': 'insp_entes',
-                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'insppadron': 'insp_padron', 'inspnepotismo': 'nepotismo', 'inspfactura': 'insp_factura', 'inspresultados': 'insp_resultados', 'inspmia': 'insp_mia', 'inspconservacion': 'insp_conservacion', 'inspcumplimiento': 'insp_cumplimiento', 'inspriesgos': 'insp_riesgos',
+                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'insppadron': 'insp_padron', 'inspnepotismo': 'nepotismo', 'inspfactura': 'insp_factura', 'inspresultados': 'insp_resultados', 'inspmia': 'insp_mia', 'inspconservacion': 'insp_conservacion', 'inspcumplimiento': 'insp_cumplimiento', 'inspriesgos': 'insp_riesgos', 'inspcruce': 'cruce_contratos',
                 # Calculadora Civica (pedido del autor, 12-10-2026): sus tres
                 # aplicaciones que abrian el motor en un marco.
                 'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj', 'ccinmueble': 'cc_inmueble', 'ccbolsa': 'cc_bolsa', 'ccpredial': 'cc_predial', 'cclaboral': 'cc_laboral',
@@ -2922,7 +2926,10 @@ def sv_monta():
 # monto de multa** (la ley lo fija en UMA y la autoridad lo individualiza) y
 # nunca se dice que revisar te libra de nada: (ícono, situación, consecuencia,
 # ley, artículo, cita textual, (qué revisa, su aplicación), servicio).
-SV_CPF = ('Código Penal Federal', 'CPF', 'DOF 13-11-2026', 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPF.pdf',
+# La fecha es la del texto compilado cuya huella va abajo (LeyesBiblio, «Última reforma DOF
+# 13-03-2026», cotejado el 22-11-2026). El decreto del DOF 13-11-2026 aún no está en ese texto y
+# falta cotejar si toca el art. 400 Bis: hasta entonces no se cambia la fecha sin cambiar la huella.
+SV_CPF = ('Código Penal Federal', 'CPF', 'DOF 13-03-2026', 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPF.pdf',
           'a2d80c4383c5fbc8453cf290c19b7853eb0a5a05d1e366572da384edfafda88c')
 SV_CONSECUENCIAS = [
     ('🧾', 'Tu proveedor entra a la lista 69-B definitiva',

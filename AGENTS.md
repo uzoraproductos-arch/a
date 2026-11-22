@@ -937,6 +937,14 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   menores; decisión del autor, que además descartó cobrar por consultarlo): se explica, se da su liga y se cita solo lo que una
   autoridad electoral haga público en un documento. El **RUG** (garantías mobiliarias, Código de Comercio) va en el glosario: **no es
   una lista de fianzas ni de sancionados**, y su consulta pide cuenta de usuario.
+  El cruce de contratos × lista 69-B × ASF, por `herramientas/cruce_contratos.py`
+  (04-11-2026, integrado el 22-11-2026 desde el PR #137; aplicación del Modo Inspector,
+  `herramienta-inspector-cruce.html`, y `D.cru` del chat): **lo que declaró la autoridad va
+  `oficial` y la señal es nuestra (`derivado`, «señal para revisar»)**; una empresa desvirtuada
+  o con sentencia favorable nunca es señal. El chat solo menciona el hallazgo, o el antecedente
+  si no hay, y lleva a su sección. Contratos de CompraNet por `actualizar_compranet.py`; serie de
+  la ASF por `extraer_estadisticas_asf.py`. Mientras `actualizar_69b.py` y `actualizar_comprasmx.py`
+  no guarden la fecha de presunto y la de firma, el cruce usa la de publicación y lo dice.
   Las agresiones a la prensa, por `herramientas/periodistas.py` (29-10-2026;
   `periodismo-en-riesgo.html`, del modo Periodista), con el informe mensual del
   Mecanismo de Protección (Gobernación); **los homicidios y las sentencias son de

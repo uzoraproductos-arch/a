@@ -572,6 +572,8 @@ def _charla(d):
             'pad': __import__('padron_sat').chat(d),
             # Nepotismo y cargos publicos (28-10-2026): la tabla de la calculadora.
             'nep': nepotismo.bot(),
+            # Contratos × lista 69-B × ASF (04-11-2026): el hallazgo o el antecedente, y su sección.
+            'cru': __import__('cruce_contratos').bot(),
             # La memoria de promesas (01-11-2026): promesa → Presupuesto → Cuenta Pública → ASF.
             'prom': __import__('promesas').datos(),
             # Agenda del erario de Noticias (28-10-2026): las fechas que fija la ley.
