@@ -222,7 +222,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `herramienta-inspector-entes.html` | Auditor de entes públicos · Auditavisión | apartados.py | 60 | 0 | 49 | 3 | 0 |
 | `herramienta-inspector-factura.html` | Lector de facturas CFDI · Auditavisión | apartados.py | 48 | 0 | 2 | 1 | 0 |
 | `herramienta-inspector-investigaciones.html` | Grandes investigaciones · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `herramienta-inspector-mia.html` | Mi Auditavisión · Auditavisión | apartados.py | 48 | 0 | 1 | 1 | 0 |
+| `herramienta-inspector-mia.html` | Mi Auditavisión · Auditavisión | apartados.py | 49 | 0 | 1 | 1 | 0 |
 | `herramienta-inspector-nepotismo.html` | Nepotismo y parentesco · Auditavisión | apartados.py | 47 | 0 | 0 | 1 | 0 |
 | `herramienta-inspector-nota-cifras.html` | Contrasta una nota · las cifras · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `herramienta-inspector-nota-liga.html` | Contrasta una nota · la nota · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
@@ -278,7 +278,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `noticias-verifica.html` | Verifica una noticia · Auditavisión | apartados.py | 85 | 0 | 0 | 0 | 0 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 58 | 0 | 0 | 5 | 1 |
 | `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
-| `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 55 | 0 | 4 | 0 | 0 |
+| `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 60 | 0 | 10 | 1 | 0 |
 | `numeros-cuanto-dinero-es.html` | Cuánto dinero es · Auditavisión | apartados.py | 60 | 0 | 8 | 7 | 1 |
 | `numeros-cuentas-antes-de-1994.html` | Antes de 1994 · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `numeros-cuentas-claras.html` | Cuentas claras · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
@@ -839,7 +839,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `servicio-nomina.html` | Revisión de nómina · Auditavisión | apartados.py | 114 | 0 | 0 | 0 | 0 |
 | `servicio-radiografia.html` | Radiografía de tu municipio o de tu estado · Auditavisión | apartados.py | 98 | 0 | 0 | 0 | 0 |
 | `servicio-revision.html` | Revisión documental puntual · Auditavisión | apartados.py | 93 | 0 | 0 | 0 | 0 |
-| `servicio-seguimiento.html` | Vigía y seguimiento periódico · Auditavisión | apartados.py | 107 | 0 | 0 | 0 | 0 |
+| `servicio-seguimiento.html` | Vigía y seguimiento periódico · Auditavisión | apartados.py | 114 | 0 | 2 | 5 | 0 |
 | `servicio-simulacion.html` | Simulación de tu caso · Auditavisión | apartados.py | 109 | 0 | 0 | 0 | 0 |
 | `servicio-temporada.html` | Licencia de temporada para redacciones · Auditavisión | apartados.py | 93 | 0 | 0 | 0 | 0 |
 | `servicios-calendario.html` | Calendario · Auditavisión | apartados.py | 47 | 0 | 0 | 0 | 0 |
@@ -854,7 +854,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `servicios-respuesta.html` | La respuesta completa · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
 | `servicios-revisa.html` | El Inspector de tu servicio · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
 | `servicios-tu-perfil.html` | Tu perfil · Auditavisión | apartados.py | 104 | 0 | 0 | 0 | 0 |
-| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 115 | 0 | 6 | 1 | 0 |
+| `servicios.html` | Servicios de investigación · Auditavisión | apartados.py | 116 | 0 | 6 | 1 | 0 |
 | `sigue-el-dinero.html` | Números · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 | `simulador-presupuesto.html` | Reparte el presupuesto · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 

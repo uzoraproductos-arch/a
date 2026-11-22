@@ -540,3 +540,9 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 .sv-nuevo-mas[open] > summary::after, .sv-fuentes-mas[open] > summary::after { transform: rotate(180deg); }
 [data-theme="dark"] .sv-nuevo-mas > summary, [data-theme="dark"] .sv-fuentes-mas > summary { color: #e8eefa; }
 @media print { .sv-nuevo-mas, .sv-fuentes-mas { display: block; } }
+/* El Vigía de proveedores en servicio-seguimiento.html (22-11-2026, vigia_venta.py). */
+.sv-vigia { padding: 18px; border-radius: 20px; background: #f3f7ff; border: 1px solid #c9d8f3; border-left: 6px solid #1d4fa3; line-height: 1.55; }
+.sv-vigia-tit { font-size: 1.25rem; color: #0b2a63; margin: 0 0 8px; }
+.sv-faq { margin: 8px 0; padding: 10px 14px; border-radius: 12px; background: #fff; border: 1px solid #dfe5f0; }
+.sv-faq > summary { min-height: 44px; display: flex; align-items: center; font-weight: 700; color: #0b2a63; cursor: pointer; }
+.sv-faq > p { margin: 6px 0 4px; line-height: 1.55; }

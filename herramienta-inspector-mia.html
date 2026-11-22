@@ -21,15 +21,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261122o">
-  <script src="assets/auditor/js/iconos.js?v=20261122o"></script>
-  <script src="assets/auditor/js/acceso.js?v=20261122o"></script>
-  <script src="assets/auditor/js/volver-auditor.js?v=20261122o" defer></script>
-  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261122o">
-  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261122o">
-  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261122o">
-  <link rel="stylesheet" href="assets/auditor/css/insp-efos.css?v=20261122o">
-  <link rel="stylesheet" href="assets/auditor/css/insp-factura.css?v=20261122o">
+  <link rel="stylesheet" href="assets/auditor/css/auditavision.css?v=20261122q">
+  <script src="assets/auditor/js/iconos.js?v=20261122q"></script>
+  <script src="assets/auditor/js/acceso.js?v=20261122q"></script>
+  <script src="assets/auditor/js/volver-auditor.js?v=20261122q" defer></script>
+  <link rel="stylesheet" href="assets/auditor/css/civico.css?v=20261122q">
+  <link rel="stylesheet" href="assets/auditor/css/apartados.css?v=20261122q">
+  <link rel="stylesheet" href="assets/auditor/css/puerta.css?v=20261122q">
+  <link rel="stylesheet" href="assets/auditor/css/insp-efos.css?v=20261122q">
+  <link rel="stylesheet" href="assets/auditor/css/insp-factura.css?v=20261122q">
 </head>
 <body data-pagina="apartado">
   <nav class="site-top-nav" aria-label="Navegación principal">
@@ -191,7 +191,7 @@
         <div class="apartado-bloque">
         
 <div class="ef cf" id="mia">
-  <script type="application/json" id="miaDatos">{"corte":"31 de octubre de 2026","sit":{"F":{"t":"Definitivo","c":"def","i":"⛔"},"P":{"t":"Presunto","c":"pre","i":"⚠️"},"D":{"t":"Desvirtuado","c":"des","i":"✅"},"S":{"t":"Sentencia favorable","c":"sen","i":"⚖️"}}}</script>
+  <script type="application/json" id="miaDatos">{"corte":"31 de octubre de 2026","sha":"475c99628d90","sit":{"F":{"t":"Definitivo","c":"def","i":"⛔"},"P":{"t":"Presunto","c":"pre","i":"⚠️"},"D":{"t":"Desvirtuado","c":"des","i":"✅"},"S":{"t":"Sentencia favorable","c":"sen","i":"⚖️"}},"vig":{"inicio":"2026-11-21","cortes":[["2026-11-21","31 de octubre de 2026"]],"ev":{}}}</script>
 
   <section class="ef-hero" aria-labelledby="mia-tit">
     <h2 class="ef-hero-tit" id="mia-tit">Tu tablero de auditoría</h2>
@@ -206,6 +206,7 @@
     <label class="ef-lbl" for="miaRfc">RFC de tus proveedores</label>
     <textarea id="miaRfc" class="ef-area" rows="3" spellcheck="false" placeholder="AAA010101AAA, BBB010101BBB"></textarea>
     <p class="ef-busca-fila"><button type="button" class="ef-btn" id="miaAgregar">➕ Agregar a mi lista</button></p>
+    <div id="miaAviso" class="mia-aviso" aria-live="polite" hidden></div>
     <div id="miaProv" aria-live="polite"></div>
   </section>
 
@@ -218,7 +219,8 @@
   <section class="ef-sec" aria-labelledby="mia-sig">
     <h2 id="mia-sig">Lo que viene</h2>
     <ul>
-      <li><b>Que te avisemos cada semana</b> si un proveedor tuyo entra a la lista 69-B o cambia de situación. El Vigía 69-B ya revisa la lista cada semana; para avisarte hace falta guardar tu lista con tu permiso, y eso llegará con cuentas y su aviso de privacidad.</li>
+      <li><b>El aviso del Vigía ya vive aquí</b> (22-11-2026): cada vez que abres este tablero, compara tus proveedores con el corte más nuevo del SAT y te dice qué cambió desde tu última visita, con el oficio y la fecha. Lo que viste se guarda solo en este navegador. <a href="herramienta-inspector-pregunta.html?q=C%C3%B3mo%20funciona%20el%20Vig%C3%ADa%20de%20proveedores&amp;modo=inspector&amp;abre=servicio-seguimiento.html%23vigia">Cómo funciona el Vigía de proveedores</a>.</li>
+      <li><b>El aviso por correo</b> es la segunda entrega: necesita guardar tu dirección en un servidor, y antes cambia el aviso de privacidad.</li>
       <li>¿Necesitas revisar a muchos proveedores, con sus contratos públicos y lo que dijo la Auditoría Superior? <a href="herramienta-inspector-pregunta.html?q=Pide%20un%20servicio&amp;modo=inspector&amp;abre=servicios.html">Pide un servicio</a>.</li>
     </ul>
     <p class="ef-busca-fila"><button type="button" class="ef-btn ef-btn-sec" id="miaBorrar">🗑️ Borrar todo mi tablero</button></p>
@@ -240,12 +242,12 @@
     <div class="apartado-ancho">
       <a class="apartado-volver" href="aviso-de-privacidad.html">🔒 Aviso de privacidad</a>
       <a class="apartado-volver" href="derecho-de-replica.html">✉️ Derecho de réplica</a>
-      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261122o</b></span>
+      <span class="apartado-pie-txt">Auditavisión · Toda cifra lleva su fuente oficial. Versión publicada: <b>20261122q</b></span>
     </div>
   </footer>
 
-  <script src="assets/auditor/js/apartados.js?v=20261122o"></script>
-  <script src="assets/auditor/js/comunidad.js?v=20261122o"></script>
-  <script src="assets/auditor/js/insp-mia.js?v=20261122o"></script>
+  <script src="assets/auditor/js/apartados.js?v=20261122q"></script>
+  <script src="assets/auditor/js/comunidad.js?v=20261122q"></script>
+  <script src="assets/auditor/js/insp-mia.js?v=20261122q"></script>
 </body>
 </html>

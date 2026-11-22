@@ -1,10 +1,9 @@
 # Borrador para aprobación: página de venta del Vigía de proveedores
 
-**Estado:** texto aprobado (22-11-2026, el autor delegó la revisión; cita del art. 69-B cotejada), **todavía no publicado**:
-ninguna página del sitio lo lee ni lo liga hasta que exista el aviso en el tablero (§8).
-Si el autor lo aprueba, entra como sección de `servicio-seguimiento.html` (servicio `seguimiento`, «Vigía y
-seguimiento periódico», cobro: «Suscripción mensual, según cuántos RFC vigilas» en `COBRO` de `apartados.py`),
-con su texto en `FICHAS` de `servicios_fichas.py`, y pasa la revisión como cualquier página.
+**Estado:** **publicado el 22-11-2026 (sello 20261122q)** en `servicio-seguimiento.html#vigia`, junto con el aviso del
+tablero (§8). Lo arma `herramientas/vigia_venta.py` (llave `venta` de la ficha `seguimiento` en `servicios_fichas.py`);
+la cifra de la ventana se calcula al generar con `vigia_historial.ventana()`, nunca a mano. **Este archivo queda como
+registro del texto aprobado**: un cambio al texto se hace en `vigia_venta.py`.
 
 **Reglas que respeta** (AGENTS.md §2 y §0 quater): nunca un monto; ninguna persona ni empresa real (el ejemplo
 es ficticio y lo dice); una coincidencia es una señal para revisar, nunca una acusación; el Vigía no evita el
@@ -100,6 +99,7 @@ avisa lo que cambió, no lo califica.
    de Mi Auditavisión (`insp-mia.js`, guardado solo en el navegador, `av-mia`): al abrirlo, compara la lista con el
    historial y dice lo que cambió desde la última visita. No pide datos personales, así que no cambia el aviso de
    privacidad más allá de su renglón en `_AV_NAVEGADOR` si guarda algo nuevo. **El correo va en una segunda entrega**:
-   exige guardar una dirección en el servidor, y antes cambia el aviso de privacidad. Falta construir el aviso del
-   tablero; mientras no exista, esta página no se publica.
+   exige guardar una dirección en el servidor, y antes cambia el aviso de privacidad. ~~Falta construir el aviso del
+   tablero~~: **hecho el 22-11-2026** (`insp-mia.js`, guarda en `av-mia` la situación vista y el corte; renglón `av-mia`
+   en `_AV_NAVEGADOR`).
 4. El primer aviso previo «probado con fecha» llegará con el primer corte nuevo del SAT después del 21-11-2026.

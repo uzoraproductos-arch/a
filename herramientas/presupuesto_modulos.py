@@ -12,6 +12,7 @@ paquete_2027). Solo el simulador del Paquete 2027 necesita JavaScript
 Lo usa apartados.numeros_preparar(); recibe `ref(id)`, que pinta la
 llamada [nn] a fuentes-oficiales.html.
 """
+import html
 import json
 import re
 
@@ -243,7 +244,59 @@ def camino(base, ref):
           <h2 class="pm-tit" id="pmCamTit">Las cuatro etapas, con su ley</h2>
           <p class="pm-txt">Cada peso público pasa por cuatro manos: se recauda, se aprueba, se ejerce y se revisa. Cada etapa tiene quién responde, un plazo que fija la ley y su fundamento. Las cifras son las de 2026, salvo la revisión, que llega un año después.</p>
           <ol class="pm-etapas">%s</ol>
-        </section>''' % '\n          '.join(pasos)
+        </section>
+        %s''' % ('\n          '.join(pasos), ruta(base, ref))
+
+
+def ruta(base, ref):
+    """La ruta completa del impuesto (docs/ENCARGO-VIGIA-Y-CFDI.md, encargo 4; propuesta del autor:
+    «revisar en qué se gasta lo que se cobra»). Un mismo año, 2024, de punta a punta: la Ley de Ingresos
+    y el Presupuesto aprobados, lo que de verdad ingresó, lo que se ejerció y lo que dejó la ASF al
+    revisarlo. **Ninguna cifra se escribe aquí**: se leen de cuentaFederal2024, finanzas_sexenales y
+    cuenta_publica_asf, que ya las cotejan. 2024 es el último año con las cinco estaciones publicadas."""
+    C = {c['id']: c for c in base['cuentaFederal2024']['cifras']}
+    ing = base['finanzas_sexenales']['anual']['ingresos']['2024']
+    fs = base['finanzas_sexenales']['fuentes']
+    A = base['cuenta_publica_asf']['cp2024']
+    T = A['total']
+    apr, ejer, pag = C['aprobado'], C['ejercido'], C['pagado']
+    var = (ejer['mdp'] / apr['mdp'] - 1) * 100
+    fuente = lambda c: '<a href="%s" target="_blank" rel="noopener">%s ↗</a>' % (html.escape(c['url']), c['fuente'].split(':')[0])
+    est = [
+        ('1', '📜', 'La Ley de Ingresos lo estima', mdp(apr['mdp']), chip(apr['estado']), ref('ref-pef2024'),
+         'Lo que la Ley de Ingresos 2024 calculó que entraría, <b>con lo que se pide prestado</b>. La cifra es la del decreto del Presupuesto 2024, '
+         'que la iguala al total de ingresos aprobados en la Ley de Ingresos.',
+         fuente(apr)),
+        ('2', '🧾', 'Se recauda', mdp(ing['mdp']), chip(ing['est']), '',
+         'Lo que de verdad ingresó al sector público presupuestario en 2024 (impuestos, cuotas, derechos y lo que venden PEMEX y la CFE), '
+         '%s %% del PIB. <b>No trae lo que se pidió prestado</b>: por eso no se resta de la estación 1 como si fuera un faltante.' % format(ing['pib'], 'g'),
+         '<a href="%s" target="_blank" rel="noopener">%s ↗</a>' % (html.escape(fs['EOFP_ING']['url']), fs['EOFP_ING']['corto'])),
+        ('3', '🏛️', 'Se aprueba en qué gastarlo', mdp(apr['mdp']), chip(apr['estado']), ref('ref-pef2024'),
+         'El Presupuesto de Egresos 2024 que autorizó la Cámara de Diputados. Es la misma cifra de la estación 1: el presupuesto se construye para cuadrar.',
+         fuente(apr)),
+        ('4', '💸', 'Se ejerce y se rinde cuenta', mdp(ejer['mdp']), chip(ejer['estado']), ref('ref-shcp-cuentapublica'),
+         'El gasto neto total que reporta la Cuenta Pública 2024 (pagado, %s, más lo que quedó por pagar). Quedó <b>%s %% arriba</b> de lo aprobado %s '
+         '(ejercido ÷ aprobado − 1).' % (mdp(pag['mdp']), format(var, '.1f'), chip('derivado')),
+         fuente(ejer)),
+        ('5', '🔎', 'Se revisa', mdp(T['porAclarar'] / 1e6), chip(A['estado']), ref('ref-asf-mdb2024'),
+         'Quedó <b>por aclarar</b> en las %s auditorías de la ASF a la Cuenta Pública 2024 (%s acciones; recuperó %s). '
+         'Un monto por aclarar no es un desfalco comprobado: es lo que, al cierre, no tenía documentación que acreditara el uso del dinero.'
+         % (format(T['auditorias'], ','), format(T['acciones'], ','), mdp(T['recuperaciones'] / 1e6)),
+         '<a href="numeros-cuentas-claras.html">Cuentas claras ➔</a>'),
+    ]
+    filas = '\n'.join('''<li class="pm-etapa">
+            <span class="pm-etapa-n">Estación %s</span>
+            <h3 class="pm-etapa-verbo"><span aria-hidden="true">%s</span> %s</h3>
+            <p class="pm-etapa-v num-tabular">%s %s %s</p>
+            <p class="pm-etapa-d">%s</p>
+            <p class="pm-etapa-que">%s</p>
+          </li>''' % x for x in est)
+    return '''<section class="pm" id="ruta-impuesto" aria-labelledby="pmRutaTit">
+          <h2 class="pm-tit" id="pmRutaTit">🧾 La ruta completa del impuesto, un mismo año de punta a punta</h2>
+          <p class="pm-txt">Lo que se cobra, ¿en qué se gasta y quién lo revisa? Seguimos <b>2024</b>, el último año con sus cinco estaciones publicadas: de la Ley de Ingresos a lo que dejó la Auditoría Superior. Cada cifra sale del módulo que ya la coteja contra su documento.</p>
+          <ol class="pm-etapas">%s</ol>
+          <p class="pm-txt"><b>Lo que esta ruta no dice:</b> la ASF revisa una muestra (en 2024, %s %% de su universo %s), no todo el gasto; las estaciones 1, 3 y 4 miden al sector público presupuestario completo (Gobierno Federal, IMSS, ISSSTE, PEMEX y CFE), y la 2 no separa cuánto cobró el SAT de lo que ingresaron los organismos y las empresas del Estado. Las cifras de 2026 están arriba: su Cuenta Pública se entrega en 2027 y la ASF la revisa después.</p>
+        </section>''' % (filas, format(T['representatividad'], 'g'), chip(A['estado']))
 
 
 # ---------------------------------------------------------------------------
