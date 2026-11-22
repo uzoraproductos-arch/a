@@ -1,0 +1,13 @@
+{
+  "entidad": "Baja California",
+  "clave_ent": "02",
+  "abreviatura": "BC",
+  "municipio_aplicable": "Tijuana (02004)",
+  "ordenamiento": "Ley de Hacienda Municipal del Estado de Baja California (última reforma P.O. No. 54, 04-11-2024)",
+  "url": "https://www.congresobc.gob.mx/Documentos/ProcesoParlamentario/Leyes/TOMO_II/20241104_LEYHAMUN.PDF",
+  "archivo_local": "investigaciones/predial/bc-ley-hacienda-municipal.pdf",
+  "sha256_pdf": "f6bc69dc20d14878f2432d961c7f32b0246bf096d68c1999677218c97205f575",
+  "bytes_pdf": 891094,
+  "pagina_recargos": 45,
+  "regla_art_108": "Cuando los créditos fiscales no se cubran en la fecha límite o dentro del plazo fijado, se pagan recargos por cada mes transcurrido o fracción desde la exigibilidad hasta el pago, calculados sobre el total del crédito fiscal (excluyendo recargos, gastos de ejecución y multas) a la tasa anual dispuesta en la Ley de Ingresos municipal (Tijuana 2026 Art. 63: 2.0% mensual en mora, 1.50% en prórroga; plazo anual Art. 5: 1 de enero a 31 de marzo)."
+}
