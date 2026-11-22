@@ -130,6 +130,10 @@
       avisos.push('El descuento «' + ben.et + '» solo vale si el valor fiscal no rebasa $' + ben.hasta.toLocaleString('es-MX') + ' (' + ley(ben.art) + '): con tu valor no aplica.');
       ben = null;
     }
+    if (ben && ben.desde && x.vf <= ben.desde) {
+      avisos.push('El descuento «' + ben.et + '» es para valores fiscales de más de ' + pesos(ben.desde) + ' (' + ley(ben.art) + '): con tu valor no aplica.');
+      ben = null;
+    }
     if (ben && ben.fija != null) {
       /* La tarifa única especial (Nuevo León, art. 21 bis-9: cuotas al año) o la cuota fija bimestral (Ciudad de México, arts. 281 y 282). */
       ahorroB = Math.max(0, r2(A - ben.fija));
@@ -137,7 +141,10 @@
     } else if (ben) {
       var sobre = ben.tope && x.vf > ben.tope ? r2(base(m, ben.tope, x.tipo) * 6) : A;
       ahorroB = r2(sobre * (1 - ben.f));
-      pasos.push(['Descuento: pagas ' + Math.round(ben.f * 100) + ' %' + (ben.tope && x.vf > ben.tope ? ' del impuesto que daría el primer $' + ben.tope.toLocaleString('es-MX') + ' de valor' : ''), -ahorroB, ley(ben.art)]);
+      /* Puebla (art. 91): la reducción tiene un límite en pesos. */
+      var topado = ben.max_ahorro && ahorroB > ben.max_ahorro;
+      if (topado) ahorroB = ben.max_ahorro;
+      pasos.push(['Descuento: pagas ' + Math.round(ben.f * 100) + ' %' + (ben.tope && x.vf > ben.tope ? ' del impuesto que daría el primer $' + ben.tope.toLocaleString('es-MX') + ' de valor' : '') + (topado ? ', con el límite de ' + pesos(ben.max_ahorro) + ' de reducción' : ''), -ahorroB, ley(ben.art)]);
     }
     var A1 = r2(A - ahorroB);
     res.conBen = A1;
@@ -344,7 +351,8 @@
   function ficha() {
     var ent = $('cpEnt').value, cve = $('cpMun').value, m = ley(ent, cve), h = '';
     var e = MUN && MUN.ent[ent], r = e ? e.lista.filter(function (x) { return x[0] === cve; })[0] : null;
-    var nom = r ? r[1] : (m ? m.nombre : '');
+    /* Homónimos (Ronda 6): el municipio siempre con su entidad, «Puebla, Puebla» o «Benito Juárez, Ciudad de México». */
+    var nom = (r ? r[1] : (m ? m.nombre : '')) + (D.ent[ent] ? ', ' + D.ent[ent] : '');
     if (r && r.length > 7) {
       var c = {}; MUN.campos.forEach(function (k, i) { c[k] = r[i]; });
       h += '<p><b>' + esc(nom) + '</b> recaudó <b>' + mdp(c.predial) + '</b> de predial en ' + MUN.anio + ': ' +
@@ -393,7 +401,7 @@
     if (m) {
       $('cpBen').innerHTML = '<option value="">Ninguno</option>' + m.beneficios.map(function (b) {
         if (b.fija != null) return '<option value="' + esc(b.id) + '">' + esc(b.et) + ' — pagas ' + (b.fija_bim ? pesos(b.fija_bim) + ' por bimestre' : pesos(b.fija) + ' al año (' + b.fija_uma + ' cuotas)') + (b.hasta ? ' (valor hasta ' + pesos(b.hasta) + ')' : '') + '</option>';
-        return '<option value="' + esc(b.id) + '">' + esc(b.et) + ' — pagas ' + Math.round(b.f * 100) + ' %' + (b.tope ? ' sobre el primer $' + b.tope.toLocaleString('es-MX') : '') + (b.hasta ? ' (valor hasta $' + b.hasta.toLocaleString('es-MX') + ')' : '') + '</option>';
+        return '<option value="' + esc(b.id) + '">' + esc(b.et) + ' — pagas ' + Math.round(b.f * 100) + ' %' + (b.tope ? ' sobre el primer $' + b.tope.toLocaleString('es-MX') : '') + (b.max_ahorro ? ' (reducción hasta ' + pesos(b.max_ahorro) + ')' : '') + (b.hasta ? ' (valor hasta $' + b.hasta.toLocaleString('es-MX') + ')' : '') + '</option>';
       }).join('');
       $('cpPago').innerHTML = '<option value="bim">Cada bimestre</option>' + m.pronto.map(function (p) {
         return '<option value="' + esc(p.id) + '">' + esc(p.et) + ' — pagas ' + Math.round(p.f * 100) + ' %</option>';
@@ -743,7 +751,8 @@
   function inicia() {
   var pedido = pedidoId ? D.mun.filter(function (m) { return m.id === pedidoId; })[0] : null;
   llenaMunicipios();
-  $('cpMun').value = pedido ? pedido.cve : '120';
+  /* ?ent=GTO&cve=020: un municipio sin tabla integrada (el chat lo manda así para León, en espera). */
+  $('cpMun').value = pedido ? pedido.cve : (q && q.get('ent') && q.get('cve')) || '120';
   if (!$('cpMun').value) $('cpMun').selectedIndex = 0;
   ficha();
   if (q && q.get('vf')) $('cpVf').value = q.get('vf');

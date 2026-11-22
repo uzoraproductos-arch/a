@@ -359,7 +359,7 @@ def _mapa_mun(e, m, g, ref, padron, iv, dv):
         'true' if k == 0 else 'false', i, n) for k, (i, n, _p, _q) in enumerate(LENTES_MUN))
     sin = None if m['conCifra'] else ('Las alcaldías de la Ciudad de México no rinden cuenta municipal al INEGI: '
                                       'su dinero va dentro del presupuesto de la Ciudad.')
-    info = {'ent': e['abbr'], 'cve': m['cve'], 'pend': 'municipios-sin-cuenta', 'anio': padron['anio'], 'sin': sin,
+    info = {'ent': e['abbr'], 'enN': e['name'], 'cve': m['cve'], 'pend': 'municipios-sin-cuenta', 'anio': padron['anio'], 'sin': sin,
             'lentes': [dict({'id': i, 'nom': n, 'pal': p, 'que': q, 'u': 'pct' if i in PCT_MUN else 'mdp', 'cero': i in CERO_MUN},
                            **({'u': UNI_MUN[i][0], 'anio': UNI_MUN[i][1]} if i in UNI_MUN else {})) for i, n, p, q in LENTES_MUN],
             'pob': {'anio': 2020, 'ref': 'ref-inegi-censo-2020', 'url': pob_mun(padron)['pagina']},

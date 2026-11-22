@@ -35,11 +35,20 @@
   /* Las fichas del archivo publicado; la función auditor-ia solo conoce esas. */
   var N0 = B.fichas.length;
   ((B.dat && B.dat.edo) || []).forEach(function (e) { NOMBRE[e.a] = e.n; });
+  /* Homónimos (Ronda 6, 22-11-2026): cada municipio lleva su entidad en el título, y si su nombre se repite en otros
+     estados, su ficha lo dice; entre homónimos que empatan en la búsqueda gana el de más habitantes (Censo 2020). */
+  var HOM = {}, MPOB0 = window.AUDIT_MUN_POB || null;
+  if (MU && MU.ent) Object.keys(MU.ent).forEach(function (ab) {
+    MU.ent[ab].lista.forEach(function (r) { var k = r[1].toLowerCase(); (HOM[k] = HOM[k] || []).push(r[1] + ', ' + (NOMBRE[ab] || ab)); });
+  });
   if (MU && MU.ent) Object.keys(MU.ent).forEach(function (ab) {
     MU.ent[ab].lista.forEach(function (r) {
-      var ing = r.length > 2 ? r[2] / 1e6 : null, en = NOMBRE[ab] || ab;
-      B.fichas.push({ t: 'municipio', tit: r[1] + ', ' + en,
-        txt: 'Su ficha técnica: cuentas de 2024 ante el INEGI, FAIS y FORTAMUN ante Hacienda, quién gobernó y lo que observó la ASF.',
+      var ing = r.length > 2 ? r[2] / 1e6 : null, en = NOMBRE[ab] || ab, cve = MU.ent[ab].cve + r[0];
+      var otros = (HOM[r[1].toLowerCase()] || []).filter(function (x) { return x !== r[1] + ', ' + en; });
+      var pob = MPOB0 && MPOB0.mun && MPOB0.mun[cve] ? MPOB0.mun[cve][0] : 0;
+      B.fichas.push({ t: 'municipio', tit: r[1] + ', ' + en, _pob: pob,
+        txt: (MU.ent[ab].cve === '09' ? 'Ámbito: alcaldía de la Ciudad de México. ' : 'Ámbito municipal. ') + 'Su ficha técnica: cuentas de 2024 ante el INEGI, FAIS y FORTAMUN ante Hacienda, quién gobernó y lo que observó la ASF.',
+        hom: (otros.length ? 'Ojo con los homónimos: también hay ' + (otros.length === 1 ? 'un municipio' : otros.length + ' municipios') + ' con ese nombre en otros estados (' + otros.slice(0, 5).join('; ') + (otros.length > 5 ? '…' : '') + '); si buscas otro, escribe también su estado.' : ''),
         ci: ing === null ? [] : [{ v: '$' + ing.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp', etq: 'ingresos 2024 (INEGI)', e: 'oficial' }],
         fu: ing === null ? [] : [{ tx: MU.fuente, url: MU.url }],
         ir: ['herramienta-inspector-entes.html#ente=municipal:' + MU.ent[ab].cve + r[0], 'su ficha técnica'], k: 'municipio alcaldia ayuntamiento ' + en });
@@ -147,7 +156,8 @@
       if (f.t === 'fuente' && quiere !== 'fuente') s *= 0.5;
       res.push({ f: f, s: s });
     });
-    res.sort(function (a, b) { return b.s - a.s; });
+    /* Dos municipios homónimos empatan en la búsqueda («Juárez»): gana el de más habitantes, nunca el primero del padrón. */
+    res.sort(function (a, b) { return b.s - a.s || (a.f.t === 'municipio' && b.f.t === 'municipio' ? (b.f._pob || 0) - (a.f._pob || 0) : 0); });
     return res;
   }
 
@@ -1952,17 +1962,55 @@
      predial, con el municipio ya puesto si su ley está cotejada (19-11-2026). Va antes que la ficha
      del municipio y que Megaobras; «¿cuánto recaudó Zapopan de predial?» sigue yendo a la ficha. */
   function predialResp(q) {
-    var p = plano(q), a = APP.ccpredial, L = (B.dat.calc || {}).pred || [];
+    var p = plano(q), a = APP.ccpredial, C = B.dat.calc || {}, L = C.pred || [], EN = C.predEnt || {};
     if (!a || !/ predial(es)? /.test(p) || /^ (que|q) (es|son|significa) /.test(p) || / (recaud|ingres|cobr(o|aron) el municipio|cuanto (cobra|junta) el municipio)/.test(p)) return null;
     var hit = null;
     /* Gana el nombre más largo: «lagos» (Lagos de Moreno) no le gana a «san juan de los lagos». */
     var largo = 0;
-    L.forEach(function (m) { m.slice(1).forEach(function (n) { if (n.length > largo && p.indexOf(' ' + n + ' ') >= 0) { hit = m; largo = n.length; } }); });
-    /* Sin municipio pero con la entidad cuya tarifa es una sola (Ciudad de México, Nuevo León): la página abre en esa entidad. */
-    var ent = hit ? '' : / (cdmx|ciudad de mexico|df|distrito federal) /.test(p) ? 'CDMX' : / nuevo leon /.test(p) ? 'NL' : '';
-    var liga = a.url + (hit ? '?mun=' + hit[0] : ent ? '?ent=' + ent : '');
-    return respApp('ccpredial', liga, '<p><span aria-hidden="true">' + a.ico + '</span> Esa cuenta la hace <b>' + esc(a.n) + '</b>, de la ' + esc(a.grupo) + (hit ? ', y ya le puse ' + (/^cdmx/.test(hit[0]) ? 'la alcaldía' : 'el municipio') : ent ? ', y ya le puse ' + (ent === 'CDMX' ? 'la Ciudad de México (la tarifa es la misma en las 16 alcaldías)' : 'Nuevo León') : '') +
+    L.forEach(function (m) { m.n.forEach(function (n) { if (n.length > largo && p.indexOf(' ' + n + ' ') >= 0) { hit = m; largo = n.length; } }); });
+    /* Las entidades que nombra la pregunta (homónimos, Ronda 6): «México» a secas no es ninguna, porque es el país. */
+    var ents = [];
+    Object.keys(EN).forEach(function (k) {
+      var n = plano(EN[k]).trim();
+      if (k === 'MEX') n = 'estado de mexico';
+      if (p.indexOf(' ' + n + ' ') >= 0) ents.push(k);
+    });
+    if (/ (cdmx|df|distrito federal) /.test(p) && ents.indexOf('CDMX') < 0) ents.push('CDMX');
+    if (/ edomex /.test(p) && ents.indexOf('MEX') < 0) ents.push('MEX');
+    /* «Ciudad de México» no es «Estado de México». */
+    if (ents.indexOf('CDMX') >= 0) ents = ents.filter(function (k) { return k !== 'MEX'; });
+    var nomE = function (m) { return m.nom + ', ' + (EN[m.e] || m.e); };
+    var otra = '', ent = '', cve = '', esp = null, nivel = '';
+    if (hit) {
+      var mismo = plano(hit.nom).trim() === plano(EN[hit.e] || '').trim();
+      var fuera = ents.filter(function (k) { return k !== hit.e; });
+      if (fuera.length && ents.indexOf(hit.e) < 0) {
+        /* Nombra otra entidad: «predial en Hidalgo» es el estado de Hidalgo, no Hidalgo, Nuevo León; «Guadalupe, Zacatecas» no es Guadalupe, Nuevo León. */
+        otra = '<p class="pa-chico">Ojo con el homónimo: el que tenemos cotejado es <b>' + esc(nomE(hit)) + '</b>' + (hit.h.indexOf(fuera[0]) >= 0 || plano(EN[fuera[0]] || '').trim() === plano(hit.nom).trim() ? ', no el de ' + esc(EN[fuera[0]]) : '') +
+          '. Si es ese el tuyo, <a href="' + esc(a.url + '?mun=' + hit.id) + '">ábrelo aquí</a>.</p>';
+        ent = fuera[0];
+        hit = null;
+      } else if (mismo) {
+        nivel = '<p class="pa-chico"><b>' + esc(hit.nom) + '</b> es el nombre del estado y de su capital. El predial no lo cobra el estado: lo cobra cada municipio con su propia ley. Te abrí el <b>municipio de ' + esc(nomE(hit)) + '</b>; los demás municipios del estado de ' + esc(EN[hit.e]) + ' aún no están cotejados.</p>';
+      } else if (hit.h.length && !ents.length) {
+        otra = '<p class="pa-chico">Ojo con los homónimos: hay un municipio que se llama ' + esc(hit.nom) + ' en ' + esc(hit.h.map(function (k) { return EN[k] || k; }).join(', ')) +
+          '. Te abrí <b>' + esc(nomE(hit)) + '</b>, el único que tenemos cotejado; si el tuyo es otro, elige su estado en la página.</p>';
+      }
+    }
+    if (!hit) {
+      /* Una ley que leímos y quedó en espera (León, Guanajuato): se dice, no se calcula. */
+      (C.predEsp || []).forEach(function (w) { if (!esp && p.indexOf(' ' + w.n + ' ') >= 0 && (!ents.length || ents.indexOf(w.k.split('-')[0]) >= 0)) esp = w; });
+      if (esp) { ent = esp.k.split('-')[0]; cve = esp.k.split('-')[1]; }
+      else if (!ent && ents.length) ent = ents[0];
+    }
+    var liga = a.url + (hit ? '?mun=' + hit.id : ent ? '?ent=' + ent + (cve ? '&cve=' + cve : '') : '');
+    var puse = hit ? ', y ya le puse ' + (/^cdmx/.test(hit.id) ? 'la alcaldía ' : 'el municipio ') + '<b>' + esc(nomE(hit)) + '</b>' :
+      esp ? ', y ya le puse <b>' + esc(esp.nom + ', ' + (EN[ent] || ent)) + '</b>' :
+      ent ? ', y ya le puse ' + (ent === 'CDMX' ? 'la Ciudad de México (la tarifa es la misma en las 16 alcaldías)' : 'el estado de <b>' + esc(EN[ent] || ent) + '</b>: elige ahí tu municipio') : '';
+    return respApp('ccpredial', liga, '<p><span aria-hidden="true">' + a.ico + '</span> Esa cuenta la hace <b>' + esc(a.n) + '</b>, de la ' + esc(a.grupo) + puse +
       ': escribe el valor fiscal de tu predio (viene en tu recibo) y te dice tu predial del año con la tarifa de su ley (su Ley de Ingresos; en Nuevo León, la Ley de Hacienda para los Municipios; en la Ciudad de México, el Código Fiscal), sus descuentos y, si debes bimestres, la actualización, los recargos, la multa y los gastos de cobranza, cada uno con su artículo.</p>' +
+      nivel + otra +
+      (esp ? '<p class="pa-chico"><span class="est-chip est-pendiente">pendiente</span> Leímos su Ley de Ingresos, pero aún no la integramos: ' + esc(esp.m) + ' No adivinamos una tasa.</p>' : '') +
       '<p class="pa-chico">La cuenta la hace el simulador, no el chat. Cada municipio cobra con su propia ley; si el tuyo aún no está cotejado, la página te lo dice y te da cuánto recaudó de predial.</p>',
       { sug: ['Me llegó un mandamiento de ejecución por no pagar el predial', '¿Cuánto recaudó de predial mi municipio?', 'Vendes una casa o un terreno'] });
   }

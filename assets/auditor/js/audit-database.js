@@ -7739,6 +7739,12 @@ window.AUDIT_DB = {
       "categoria": "🏛️ Presupuesto & ASF"
     },
     {
+      "termino": "DIF (Sistema para el Desarrollo Integral de la Familia)",
+      "definicion": "Hay tres DIF con el mismo nombre y no son el mismo ente: el Sistema Nacional (SNDIF), organismo público descentralizado del Gobierno federal que coordina la asistencia social del país; el DIF de cada estado, que crea la ley de ese estado, y el DIF de cada municipio, que depende de su ayuntamiento. Cada uno tiene su propio presupuesto y rinde cuentas por separado: lo que gasta el DIF de un estado no está en el del país. Buena parte de los desayunos escolares y la asistencia social de los estados se paga con el FAM del Ramo 33.",
+      "ley": "Ley de Asistencia Social, arts. 27 y 28; Ley de Coordinación Fiscal, art. 40",
+      "categoria": "🏛️ Presupuesto & ASF"
+    },
+    {
       "termino": "FAETA",
       "definicion": "Fondo de Aportaciones para la Educación Tecnológica y de Adultos. Paga los servicios de educación tecnológica ($6,858.3 mdp) y de educación para adultos ($3,953.1 mdp) que los estados asumieron por convenio con la Federación. Con $10,811.4 mdp en 2026 es el segundo fondo más pequeño del Ramo 33.",
       "ley": "Ley de Coordinación Fiscal, arts. 42 a 44",

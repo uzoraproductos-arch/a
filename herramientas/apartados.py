@@ -2749,6 +2749,20 @@ def sv_novedades_lista(sid, sf, resp=False):
         for i, t, tx, lg, _k in sf.nuevos(sid))
 
 
+def sv_vinculos(sid, sf):
+    """Los vínculos de un servicio, a la vista en su tarjeta (decisión del autor, 22-11-2026: sin el rótulo «Nuevo»
+    ni el desplegable «Lo nuevo»): una lista corta de ligas a la respuesta completa del Inspector; lo que hace
+    cada una va en su `title`, sin repetir texto en la tarjeta."""
+    nv = sf.nuevos(sid)
+    if not nv:
+        return ''
+    return '<ul class="sv-vinculos">%s</ul>' % ''.join(
+        '<li><a href="%s" title="%s"><span aria-hidden="true">%s</span> %s</a></li>' % (
+            esc_attr(sf.revisa_liga(sid, html.unescape(re.sub('<[^>]+>', '', t)), lg)),
+            esc_attr(html.unescape(re.sub('<[^>]+>', '', tx))), i, t)
+        for i, t, tx, lg, _k in nv)
+
+
 def sv_servicios_y_nuevo(sf, puertas):
     """«¿Qué necesitas?» y «Lo nuevo» en una sola sección (pedido del autor, 21-11-2026:
     «quiero que ambas partes se fusionen»): una pestaña por familia y, dentro, cada
@@ -2763,13 +2777,11 @@ def sv_servicios_y_nuevo(sf, puertas):
         barra.append((lid, ico))
         tarjetas = []
         for x in servs:
-            nv = sf.nuevos(x[0])
+            # Sin «Nuevo» ni desplegable (decisión del autor, 22-11-2026): los vínculos de cada servicio, a la vista.
             tarjetas.append('              ' + sv_card(
-                x[2], '%s%s' % (COBRO[x[0]], (' · %d %s' % (len(nv), 'novedad' if len(nv) == 1 else 'novedades')) if nv else ''),
-                x[1], 'Nuevo' if nv else '', sf.revisa_liga(x[0]), (),
+                x[2], COBRO[x[0]], x[1], '', sf.revisa_liga(x[0]), (),
                 SV_TONO[lid], id_='sv-nuevo-%s' % x[0], attrs=' data-sv-srv="%s"' % x[0],
-                pie=(('<details class="sv-nuevo-mas"><summary><span aria-hidden="true">🆕</span> Lo nuevo (%d)</summary>%s</details>'
-                      % (len(nv), sv_novedades_lista(x[0], sf, resp=True))) if nv else '') + sv_most_boton(x[0]), ligas=True))
+                pie=sv_vinculos(x[0], sf) + sv_most_boton(x[0]), ligas=True))
         paneles.append(
             '          <div class="sv-linea" id="nuevo-%s" data-sv-panel="%s">\n'
             '            <p class="sv-linea-tit"><span aria-hidden="true">%s</span> %s</p>\n'
@@ -3588,7 +3600,7 @@ def servicio_paginas(comun):
             '        </div>'])
         # Lo nuevo va en su propia sección (pedido del autor, 21-11-2026); lo demás, en «hace».
         tarjetas = lambda xs: '<div class="sv-cards">\n%s\n        </div>' % '\n'.join(
-            '          ' + sv_card(t, tx, i, et, lg, tono=SV_TONO[lid], pie='' if et == 'Gratis' else '<span class="sv-acceso sv-acceso-gratis">Gratis</span>')
+            '          ' + sv_card(t, tx, i, '' if et == 'Nuevo' else et, lg, tono=SV_TONO[lid], pie='' if et == 'Gratis' else '<span class="sv-acceso sv-acceso-gratis">Gratis</span>')
             for i, t, tx, lg, et in xs)
         nuevas = [x for x in f['hace'] if x[4] == 'Nuevo']
         hace_x = [x for x in f['hace'] if x[4] != 'Nuevo']

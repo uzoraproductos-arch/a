@@ -22,6 +22,7 @@ import html
 import json
 import os
 import re
+import subprocess
 
 from apartados import RAIZ, glosario_ancla
 
@@ -87,7 +88,7 @@ def _fichas(d):
         if not ci:
             continue
         out.append({'t': 'entidad', 'tit': e['name'],
-                    'txt': ('Lo que la plataforma tiene verificado de %s: su deuda pública según el Sistema de Alertas de Hacienda, '
+                    'txt': ('Ámbito estatal (el gobierno del estado, no sus municipios). Lo que la plataforma tiene verificado de %s: su deuda pública según el Sistema de Alertas de Hacienda, '
                             'lo que la Auditoría Superior dejó por aclarar del dinero federal que recibió en 2024 y su lugar en el radar de los 32 estados. '
                             'Un monto por aclarar no es un desfalco comprobado: es lo que carecía de documentación al cierre de la auditoría.') % e['name'],
                     'ci': ci, 'fu': fu, 'ir': ['herramienta-inspector-entes.html#ente=estatal:' + e['abbr'], 'el Auditor de entes públicos'],
@@ -267,8 +268,9 @@ def _fichas_tecnicas(d):
         ci = [{'v': '$' + format(cp[k], ',.1f') + ' mdp', 'etq': et, 'e': 'oficial'}
               for k, et in (('original', 'aprobado 2025'), ('ejercido', 'ejercido 2025'), ('pagado', 'pagado 2025')) if cp.get(k) is not None]
         out.append({'t': 'ficha', 'tit': limpio(f['nombre']),
-                    'txt': '%s · Ramo %s. Su ficha técnica en el Auditor de entes públicos dice si gastó lo que aprobó la Cámara, si rindió cuentas y qué quedó por aclarar ante la ASF.'
+                    'txt': 'Ámbito federal. %s · Ramo %s. Su ficha técnica en el Auditor de entes públicos dice si gastó lo que aprobó la Cámara, si rindió cuentas y qué quedó por aclarar ante la ASF.'
                            % (limpio(f.get('tipo')), f.get('ramo')),
+                    'hom': 'Es la del Gobierno de México: la de un estado o un municipio con un nombre parecido es otra, con su propio presupuesto, y no está en esta ficha.',
                     'ci': ci, 'fu': [{'tx': F['cp2025']['corto'], 'url': F['cp2025'].get('url')}],
                     'ir': ['herramienta-inspector-entes.html#ente=federal:' + f['id'], 'su ficha técnica'],
                     'k': '%s ramo %s %s ficha tecnica dependencia ente federal' % (f['id'], f.get('ramo'), f.get('poder', ''))})
@@ -756,10 +758,27 @@ def escribir_base():
         return ''.join(c for c in unicodedata.normalize('NFD', t.lower()) if unicodedata.category(c) != 'Mn')
     # El nombre corto (lo de antes de « de ») sirve si no es de otro lugar: «san juan» también es San Juan del Río.
     _corto = lambda n: [n.split(' de ')[0]] if ' de ' in n and not n.startswith('san ') else []
-    dat['calc']['pred'] = [[m['id'], _pl(m['nombre'])] + _corto(_pl(m['nombre']))
-                           for m in cc_predial.MUNICIPIOS] + [
+    pred = [[m['id'], _pl(m['nombre'])] + _corto(_pl(m['nombre']))
+            for m in cc_predial.MUNICIPIOS] + [
         ['vallarta', 'vallarta'], ['tlaquepaque', 'tlaquepaque'], ['zapotlan', 'ciudad guzman', 'zapotlan'], ['tlajomulco', 'tlajomulco'],
         ['cdmx005', 'gustavo a madero', 'gam'], ['cdmx008', 'magdalena contreras']]
+    # Homónimos (Ronda 6, 22-11-2026): cada municipio con su entidad, y en qué otras entidades hay uno con el mismo
+    # nombre (padrón del INEGI). El chat nunca toma un municipio solo por su nombre sin decir de qué estado es.
+    porm = {m['id']: m for m in cc_predial.MUNICIPIOS}
+    padron = json.loads(subprocess.run(['node', '-e', 'global.window={};require(%s);var E=window.AUDIT_MUNICIPIOS.ent,o={};'
+                                        'Object.keys(E).forEach(function(k){o[k]=E[k].lista.map(function(r){return [r[0],r[1]]})});'
+                                        'process.stdout.write(JSON.stringify(o));' % json.dumps(os.path.join(RAIZ, 'assets', 'auditor', 'js', 'municipios-efipem.js'))],
+                                       check=True, capture_output=True, text=True).stdout)
+    donde = {}
+    for e, lista in padron.items():
+        for _c, n in lista:
+            donde.setdefault(_pl(n), set()).add(e)
+    dat['calc']['pred'] = [{'id': r[0], 'e': porm[r[0]]['ent'] if r[0] in porm else 'JAL',
+                            'nom': porm[r[0]]['nombre'] if r[0] in porm else r[1].title(),
+                            'h': sorted(x for x in donde.get(_pl(porm[r[0]]['nombre']) if r[0] in porm else r[1], ()) if x != (porm[r[0]]['ent'] if r[0] in porm else 'JAL')),
+                            'n': r[1:]} for r in pred]
+    dat['calc']['predEnt'] = {e: n for e, n in cc_predial.ENTIDADES.items()}
+    dat['calc']['predEsp'] = [{'k': k, 'n': _pl(w['nombre']), 'nom': w['nombre'], 'm': w['motivo']} for k, w in cc_predial.ESPERA.items()]
     # Inversión y Megaobras, dentro del chat (24-10-2026): sus obras, sus
     # sexenios, sus cifras y sus cinco aplicaciones.
     import asistente_megaobras

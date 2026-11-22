@@ -743,12 +743,14 @@
     }
     function muestra(x) {
       var ente = 'planisferio-ficha-herramienta-inspector-entes.html#ente=municipal:' + D.cve + x.c;
+      /* Homónimos (Ronda 6): el municipio siempre con su entidad, «Puebla, Puebla» o «Benito Juárez, Ciudad de México». */
+      var tit = '<h3>' + esc(x.n + (D.enN ? ', ' + D.enN : '')) + '</h3>';
       if (x.ing == null) {
-        ficha.innerHTML = '<h3>' + esc(x.n) + '</h3><dl class="pl-ficha-dl">' + persona(x) + fraude(x) + '</dl><p>' + (D.sin ? esc(D.sin) + ' ' + chip('pendiente', D.pend) :
+        ficha.innerHTML = tit + '<dl class="pl-ficha-dl">' + persona(x) + fraude(x) + '</dl><p>' + (D.sin ? esc(D.sin) + ' ' + chip('pendiente', D.pend) :
           'No rindió su cuenta de ' + D.anio + ' al INEGI ' + chip('pendiente', D.pend) + ': sigue en el padrón, sin cifra.') + ' Ponerle cero falsearía la cifra.</p><a class="pl-ficha-ir" href="' + ente + '">Su ficha en el Auditor de entes ➔</a>';
         return;
       }
-      ficha.innerHTML = '<h3>' + esc(x.n) + '</h3><p class="pl-ficha-sub">Clave INEGI ' + D.cve + x.c + ' · cuentas de ' + D.anio + '</p><dl class="pl-ficha-dl">' + persona(x) +
+      ficha.innerHTML = tit + '<p class="pl-ficha-sub">Clave INEGI ' + D.cve + x.c + ' · cuentas de ' + D.anio + '</p><dl class="pl-ficha-dl">' + persona(x) +
         '<dt>Ingreso total</dt><dd><b class="num-tabular">' + mdp(x.ing) + '</b> ' + chip('oficial') + '</dd>' +
         (x.iph == null ? '' : '<dt>Ingreso por habitante (2024 ÷ Censo 2020)</dt><dd>$' + num(x.iph, 0) + ' ' + chip('derivado') + '</dd>') +
         '<dt>Participaciones</dt><dd>' + mdp(x.part) + ' ' + chip('oficial') + '</dd>' +
