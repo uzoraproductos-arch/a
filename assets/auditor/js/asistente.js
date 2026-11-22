@@ -188,6 +188,9 @@
   function dictamenHtml(q, r, f, antes) {
     var t = TIPO[f.t] || ['📄', 'Ficha'], k = 0;
     function cap(tit) { return '<h3 class="dic-cap"><span>' + ROMANO[k++] + '.</span> ' + tit + '</h3>'; }
+    /* Reporte ejecutivo (Ronda 1, 22-11-2026): el desglose técnico va en acordeones, que se abren
+       solos al imprimir (beforeprint de armaDictamen). Mismo contenido; nada entra ni sale de la huella. */
+    function capD(tit, cuerpo) { return '<details class="dic-sec"><summary>' + cap(tit) + '</summary><div class="dic-sec-c">' + cuerpo + '</div></details>'; }
     /* Las cifras van en tabla (16-11-2026): cifra, qué es, su estado y su operación. */
     var ci = (f.ci || []).map(function (c, i) {
       return '<tr><td class="dic-n">' + (i + 1) + '</td><td class="dic-v">' + esc(c.v) + '</td><td>' + esc(c.etq) +
@@ -226,6 +229,27 @@
       (f.cot && f.cot.length ? '<div><dt>Afirmaciones cotejadas</dt><dd>' + f.cot.length + '</dd></div>' : '') +
       (xf ? '<div class="dic-mirada-exp"><dt>Expediente</dt><dd>' + esc(xf.exn) + (xf.ab ? ' · abierto' : ' · documentado') + '</dd></div>' : '') +
       '</dl></aside>';
+    /* La tira por fuente: cada capítulo de «La revisión completa» con su estado tal como lo da su
+       respuesta (sin calificar: «Sin coincidencias», «Tiene contratos publicados»…). */
+    var caps = ((r.integ && r.integ.caps) || []).slice(), varios = r.integ && r.integ.rfcs.length > 1;
+    /* La fuente que contestó la pregunta también va en la tira, con lo que dijo su respuesta. */
+    if (r.integ && r.integ.ya) {
+      var yaR = r.integ.ya, rt = textoDe(r.html);
+      if (yaR.padron) caps.unshift(['🛡️', 'Listas del SAT, sancionados y sanciones internacionales', '', r.integ.rfcs[0],
+        /Sin coincidencias/.test(rt) ? 'Sin coincidencias' : 'Coincidencias por revisar', !/Sin coincidencias/.test(rt)]);
+      else if (yaR.cmx) caps.unshift(['🏛️', 'Contratos con el gobierno (ComprasMX)', '', r.integ.rfcs[0], 'Tiene contratos publicados', false]);
+      else if (yaR.grupo) caps.unshift(['🏢', 'Su grupo empresarial', '', r.integ.rfcs[0], (r.ficha.tit || '').replace(/^Grupo empresarial: /, ''), false]);
+    }
+    var tira = caps.length ? '<div class="dic-tira" aria-label="Verificación por fuente">' + caps.map(function (c) {
+      return '<div class="dic-tira-i' + (c[5] ? ' dic-tira-ojo' : '') + '"><span class="dic-tira-ico" aria-hidden="true">' + c[0] + '</span>' +
+        '<b>' + esc(c[1]) + (varios ? ' <code>' + esc(c[3]) + '</code>' : '') + '</b><span>' + esc(c[4] || '') + '</span></div>'; }).join('') + '</div>' : '';
+    /* Los hallazgos clave: las primeras cifras de la ficha, con su estado; la tabla completa sigue abajo. */
+    var clave = (f.ci || []).slice(0, 4).map(function (c) {
+      return '<div class="dic-clave-i"><b class="dic-clave-v">' + esc(c.v) + '</b><span>' + esc(c.etq) + '</span>' + chip(c) + '</div>'; }).join('');
+    var ejecutivo = (tira || clave) ? '<section class="dic-ejecutivo" aria-label="Resumen ejecutivo">' +
+      (tira ? '<p class="dic-ejecutivo-t">Verificación por fuente</p>' + tira : '') +
+      (clave ? '<p class="dic-ejecutivo-t">Hallazgos clave</p><div class="dic-clave">' + clave + '</div>' +
+        ((f.ci || []).length > 4 ? '<p class="dic-chico">Y ' + ((f.ci || []).length - 4) + ' cifras más en «Hallazgos: las cifras».</p>' : '') : '') + '</section>' : '';
     var expCap = xf ? '<p>Esta respuesta toca una de las grandes investigaciones de la plataforma. Su expediente, <b>' + esc(xf.exn) + ' · ' + esc(xf.tit) + '</b>, ' +
       'junta el caso en cinco preguntas, su bitácora, lo que sigue y lo que falta' + (xf.nov ? '; el último registro de su bitácora es del ' + esc(xf.nov) : '') + '. ' +
       '<a href="' + esc(xf.ex) + '">Abrir el expediente ➔</a></p>' +
@@ -236,34 +260,36 @@
       '<div><b>Auditavisión</b><small>Plataforma ciudadana de fiscalización del gasto público</small></div></div>' +
       '<div class="dic-sello">' + sello(null, 'DICTAMEN') + '</div>' +
       '<div class="dic-cab-tx"><span class="pa-nota-tipo">Dictamen cívico independiente · ' + esc(t[1]) + (capa ? ' · ' + MODO_ICO[m] + ' Modo ' + MODO_NOM[m] : '') + '</span>' +
-      '<dl><div><dt>Folio</dt><dd class="pa-folio">calculando…</dd></div><div><dt>Expedido</dt><dd>' + esc(hoy()) + '</dd></div>' +
+      '<dl><div class="dic-cab-q"><dt>Consulta</dt><dd>' + esc(q.length > 120 ? q.slice(0, 118) + '…' : q) + '</dd></div>' +
+      '<div><dt>Folio</dt><dd class="pa-folio">calculando…</dd></div><div><dt>Expedido</dt><dd>' + esc(hoy()) + '</dd></div>' +
+      '<div><dt>Huella SHA-256</dt><dd class="dic-huella-c"><code>calculando…</code></dd></div>' +
       '<div><dt>Versión de la plataforma</dt><dd>' + esc(selloSitio()) + '</dd></div></dl></div></header>' +
-      '<h2 class="dic-tit"><span aria-hidden="true">' + t[0] + '</span> ' + esc(f.tit) + '</h2>' + mira +
+      '<h2 class="dic-tit"><span aria-hidden="true">' + t[0] + '</span> ' + esc(f.tit) + '</h2>' + mira + ejecutivo +
       cap('Planteamiento') + '<p class="pa-nota-q"><span>La pregunta</span> «' + esc(q) + '»</p>' +
       (antes.length ? '<p class="dic-chico">Se hizo en la plática después de: ' + antes.map(function (x) { return '«' + esc(x) + '»'; }).join(' → ') + '.</p>' : '') +
       cap('Respuesta del Auditor') + '<div class="dic-resp">' + resp + '</div>' +
-      (r.integ ? cap('La revisión completa') + '<p class="dic-chico">Todo lo que la base de la plataforma tiene de ' + esc(r.integ.rfcs.join(', ')) +
-        ', reunido solo: sus cifras y sus fuentes están en los hallazgos y en el fundamento, y entran a la huella.</p><div class="dic-resp">' + r.integ.html.replace(/<button\b[^>]*>[\s\S]*?<\/button>/g, '') + '</div>' : '') +
-      (capa ? cap('La lectura del modo ' + MODO_NOM[m]) +
+      (r.integ ? capD('La revisión completa', '<p class="dic-chico">Todo lo que la base de la plataforma tiene de ' + esc(r.integ.rfcs.join(', ')) +
+        ', reunido solo: sus cifras y sus fuentes están en los hallazgos y en el fundamento, y entran a la huella.</p><div class="dic-resp">' + r.integ.html.replace(/<button\b[^>]*>[\s\S]*?<\/button>/g, '') + '</div>') : '') +
+      (capa ? capD('La lectura del modo ' + MODO_NOM[m],
         '<p class="dic-chico">Pediste el dictamen en el modo ' + MODO_NOM[m] + ': esta es su forma de leer la misma respuesta. El modo cambia cómo se cuenta, nunca los datos: no agrega cifras y no entra a la huella.</p>' +
-        '<div class="dic-resp dic-modo">' + capa + '</div>' : '') +
+        '<div class="dic-resp dic-modo">' + capa + '</div>') : '') +
       (f.txt && f.t !== 'calculo' ? '<p class="pa-nota-tx"><b>La ficha completa:</b> ' + esc(f.txt) + '</p>' : '') +
       (ci ? cap('Hallazgos: las cifras') + '<div class="dic-tabla"><table><thead><tr><th>#</th><th>Cifra</th><th>Qué es</th><th>Estado</th></tr></thead><tbody>' + ci + '</tbody></table></div>' : '') +
-      (f.cot && f.cot.length && charla ? cap('Cotejo de lo que circula') +
+      (f.cot && f.cot.length && charla ? capD('Cotejo de lo que circula',
         '<p class="dic-chico">Cada afirmación que circula se comparó con el documento oficial. «Consta» quiere decir que el documento la sostiene; «con matices», que la sostiene en parte; «sin documento oficial», que solo la dice la prensa o las redes, y no la afirmamos ni la negamos.</p>' +
-        charla.cotejo(f, true) : '') +
+        charla.cotejo(f, true)) : '') +
       (f.app ? cap('La aplicación y tu resultado') + '<p>La cuenta la hace <b>«' + esc(f.app.n) + '»</b>' + (f.app.par ? ', con lo que escribiste en la plática' : '') + '. ' +
         'Para ver el resultado, o para que otra persona lo compruebe, abre la aplicación desde este enlace: <a href="' + esc(f.app.url) + '">' + esc(f.app.pag) + (f.app.par ? ' con tus datos' : '') + ' ➔</a>.</p>' +
         '<p class="dic-chico">La aplicación calcula con la base de la plataforma vigente, así que con el mismo enlace y la misma versión da el mismo resultado.</p>' : '') +
       (pend ? cap('Lo que falta') + pend : '') +
-      (expCap ? cap('Expediente relacionado') + expCap : '') +
+      (expCap ? capD('Expediente relacionado', expCap) : '') +
       (svDic ? cap('Lo que ya revisamos') + svDic : '') +
-      cap('Fundamento documental') + (fu ? '<ol class="dic-fuentes">' + fu + '</ol>' + (f.app && f.app.mas ? '<p class="dic-chico">Y ' + f.app.mas + ' documentos más, citados en la página de la aplicación.</p>' : '') : '<p>Esta respuesta no cita cifras: lleva a una página de la plataforma, donde cada dato trae su fuente.</p>') +
-      cap('Método') + '<ol class="dic-metodo">' +
+      capD('Fundamento documental', fu ? '<ol class="dic-fuentes">' + fu + '</ol>' + (f.app && f.app.mas ? '<p class="dic-chico">Y ' + f.app.mas + ' documentos más, citados en la página de la aplicación.</p>' : '') : '<p>Esta respuesta no cita cifras: lleva a una página de la plataforma, donde cada dato trae su fuente.</p>') +
+      capD('Método', '<ol class="dic-metodo">' +
       '<li><b>Localización.</b> El Auditor buscó la respuesta en la base de la plataforma (' + B.fichas.length.toLocaleString('es-MX') + ' fichas), que solo guarda datos ya publicados con su documento.</li>' +
       '<li><b>Verificación.</b> Cada cifra se toma del documento oficial que se cita, sin estimar ni redondear a ojo. Las cuentas se hacen con cifras oficiales y se dice la operación.</li>' +
       (clas.length ? '<li><b>Clasificación.</b> Cada dato lleva su estado:<ul class="dic-clas">' + clas.join('') + '</ul></li>' : '') +
-      '<li><b>Integridad.</b> La huella digital (SHA-256) se calcula sobre la ficha y la versión de la plataforma: si cambia una letra, cambia la huella.</li></ol>' +
+      '<li><b>Integridad.</b> La huella digital (SHA-256) se calcula sobre la ficha y la versión de la plataforma: si cambia una letra, cambia la huella.</li></ol>') +
       cap('Alcance y limitaciones') + (f.nota ? '<p>' + esc(f.nota) + '</p>' : '') +
       '<p>Este dictamen lo arma el bot de la plataforma solo con datos ya publicados; no lo redacta una inteligencia artificial. ' +
       '<b>No es un documento oficial ni un peritaje con validez ante una autoridad:</b> es el respaldo documental de una respuesta, para que cualquiera revise de dónde sale cada dato. ' +
@@ -3083,7 +3109,9 @@
   }
   function resueltoHtml(l, q, tema, dic) {
     if (!l.length) return '';
-    var nom = l.map(function (x) { return '<span aria-hidden="true">' + x[1] + '</span> <b>' + esc(x[2]) + '</b>'; }).join(dic ? '; ' : ' · ');
+    /* Ronda 1 (22-11-2026): cada servicio lleva a su Inspector (servicios-revisa.html?s=), con la misma pregunta. */
+    var nom = l.map(function (x) { return '<span aria-hidden="true">' + x[1] + '</span> <a href="servicios-revisa.html?s=' + encodeURIComponent(x[0]) +
+      '&amp;q=' + encodeURIComponent(String(q || '').slice(0, 600)) + '"><b>' + esc(x[2]) + '</b></a>'; }).join(dic ? '; ' : ' · ');
     var pide = 'Si quieres que lo sigamos por ti (cada semana, con tu cartera completa o con documentos que no son públicos), ' +
       '<a href="' + esc(pideLiga(l[0][0], q, tema)) + '">pídelo con un toque ➔</a>: tu solicitud ya va llena; solo confirmas. El costo y el plazo te llegan por escrito antes de empezar.';
     if (dic) return '<p>Lo que revisa ' + (l.length === 1 ? 'el servicio' : 'cada servicio') + ' con la base de la plataforma (' + nom + ') ya está en este dictamen.</p>' +
@@ -3138,7 +3166,7 @@
       var html = caps.map(function (c) {
         return '<section class="pa-int-cap"><h4><span aria-hidden="true">' + c[0] + '</span> ' + esc(c[1]) + (rfcs.length > 1 ? ' · <code>' + esc(c[3]) + '</code>' : '') + '</h4>' + c[2] + '</section>';
       }).join('');
-      return { html: html, ci: ci, fu: fu, tema: 'Revisión completa de ' + nombres, rfcs: rfcs, caps: caps };
+      return { html: html, ci: ci, fu: fu, tema: 'Revisión completa de ' + nombres, rfcs: rfcs, caps: caps, ya: ya };
     });
   }
   function vistazoHtml(r, genera) {
@@ -3516,12 +3544,27 @@
       var fol = hx ? folioDe(hx, 'DP') : null;
       Array.prototype.forEach.call(doc.querySelectorAll('.pa-folio'), function (el) { el.textContent = fol || 'no disponible en este navegador'; });
       doc.querySelector('.pa-huella code').textContent = hx ? hx.replace(/(.{16})/g, '$1 ').trim() : 'no disponible en este navegador';
+      var hc = doc.querySelector('.dic-huella-c code');
+      if (hc) { hc.textContent = hx ? hx.slice(0, 16) + '…' : 'no disponible'; if (hx) hc.title = hx; }
       Array.prototype.forEach.call(doc.querySelectorAll('.dic-sello'), function (el) { el.innerHTML = sello(fol, 'DICTAMEN'); });
       guardaDic(q, r, f, fol);
     });
     var im = document.getElementById('dicImprime'), en = document.getElementById('dicEnlace');
     im.hidden = en.hidden = false;
+    /* Un solo cierre discreto (Ronda 1): con la revisión de una empresa, lo que la base no hace sola
+       (el aviso cada semana o la cartera completa) se pide en el Inspector de su servicio. Nunca un monto. */
+    var acc = document.querySelector('#dicApp .dic-acc');
+    if (acc && r.integ && !acc.querySelector('.dic-puente')) {
+      acc.insertAdjacentHTML('beforeend', '<a class="dic-puente" href="servicios-revisa.html?s=seguimiento&amp;q=' + encodeURIComponent(r.integ.rfcs[0]) +
+        '">📡 ¿Seguimiento cada semana o tu cartera completa? ➔</a>');
+    }
     im.addEventListener('click', function () { window.print(); });
+    /* Al imprimir o guardar en PDF, el desglose va completo: se abren los acordeones y luego vuelven como estaban. */
+    var cerrados = [];
+    window.addEventListener('beforeprint', function () {
+      cerrados = Array.prototype.filter.call(doc.querySelectorAll('details:not([open])'), function (d) { d.open = true; return true; });
+    });
+    window.addEventListener('afterprint', function () { cerrados.forEach(function (d) { d.open = false; }); cerrados = []; });
     en.addEventListener('click', function () {
       (navigator.clipboard ? navigator.clipboard.writeText(location.href) : Promise.reject()).then(function () {
         en.textContent = '✅ Enlace copiado';
