@@ -57,7 +57,10 @@ jobs:
           if ! python herramientas/actualizar_69b.py "$RUNNER_TEMP/sat/69b.csv" | tee -a "$GITHUB_STEP_SUMMARY"; then
             echo "⚠️ No se integró: revisar a mano." >> "$GITHUB_STEP_SUMMARY"
             git checkout -- assets/auditor/data/sat-69b.js
+            exit 0
           fi
+          # El historial del Vigía: cada alta y cada cambio con el día en que se vio (prueba de aviso previo).
+          python herramientas/vigia_historial.py | tee -a "$GITHUB_STEP_SUMMARY" || { echo "⚠️ El historial del Vigía no se sumó." >> "$GITHUB_STEP_SUMMARY"; git checkout -- docs/vigia; }
 
       - name: Listas del padrón (SAT, OFAC y ONU)
         run: |

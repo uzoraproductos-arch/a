@@ -1172,7 +1172,9 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   social, con las personas físicas con el RFC recortado y sin nombre. **Desde el 18-11-2026
   se actualiza sola** (decisión del autor): si el SAT publicó otro archivo, el flujo «Base al día» corre
   `actualizar_69b.py` con ese mismo archivo, sube el sello y publica; se detiene si cambian
-  las columnas o si la lista se encoge más de 10 %. **`sat-69b.js` conserva los nombres
+  las columnas o si la lista se encoge más de 10 %. **El historial del Vigía** (22-11-2026, `vigia_historial.py` → `docs/vigia/historial-69b.json`, en el mismo flujo)
+  guarda cada situación de cada RFC con el día de descarga del corte en que se vio: **lo que ya estaba al empezar va como «semilla» y de
+  eso no se presume aviso previo**; las personas físicas, por la huella de su RFC; la ventana presunto → definitivo es `derivado` de las fechas del SAT. **`sat-69b.js` conserva los nombres
   tal como los publica el SAT** (decisión del autor, 18-11-2026: la 69-B es una lista que la
   ley manda publicar en el DOF), a diferencia de las otras listas del padrón. **Revisa tu estado de resultados** (05-11-2026,
   `insp_resultados.py`, `insp-resultados.js` y su gemelo `lector_resultados.py`, con
