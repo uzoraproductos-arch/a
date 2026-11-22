@@ -1,0 +1,37 @@
+{
+  "entidad": "Puebla",
+  "clave_ent": "21",
+  "abreviatura": "PUE",
+  "municipio": "Puebla",
+  "cve": "21114",
+  "ley": "Ley de Ingresos del Municipio de Puebla, para el Ejercicio Fiscal 2026 (P.O. del Estado de Puebla, Tomo DCVIII, No. 11, Quinta Edición Vespertina, 15-12-2025)",
+  "url": "https://archivo.pueblacapital.gob.mx/media/com_dpattachments/attachments/com_content.article/8-Ley-de-Ingresos-del-Estado-de-Puebla-Ejercicio-2026.pdf",
+  "sha256_pdf": "e71af0f3b5216ec16513b6d88f0fdfec7bd065682a55411eccdd53b45e273889",
+  "bytes_pdf": 1679077,
+  "paginas_predial": [
+    21,
+    84,
+    86
+  ],
+  "tasas_anuales_art_4": {
+    "urbano_y_rustico_al_millar": 1.6,
+    "urbano_y_rustico_factor": 0.0016,
+    "baldio_urbano_incremento_pct": 100,
+    "baldio_urbano_al_millar": 3.2,
+    "baldio_urbano_factor": 0.0032,
+    "construccion_menor_30_pct": "Paga el porcentaje de construcción como habitacional y el impuesto de la superficie excedente sin construcción se incrementa 100% (Art. 4 fr. III)"
+  },
+  "exenciones_tasa_cero_art_5": "Tasa 0% por 12 meses a inmuebles regularizados e inmuebles del Centro Histórico / áreas patrimoniales categorías C1-C5 en proceso de mantenimiento/recuperación habitacional o mixta con opinión técnica.",
+  "estimulos_art_90_91": {
+    "agricola_pecuario_forestal_hasta_pct": 80,
+    "grupos_vulnerables_pct": 50,
+    "grupos_vulnerables_tope_mxn": 1395.0,
+    "beneficiarios": "Personas viudas, adultos mayores, personas con discapacidad, pensionados permanentes, afiliados INAPAM, madres y padres solteros; un solo inmueble edificado y habitado, previo dictamen."
+  },
+  "recargos_art_75": {
+    "mora_mensual_pct": 2.0
+  },
+  "pendientes": [
+    "La Ley de Ingresos 2026 remite los plazos de pago y exenciones generales al Código Fiscal y Presupuestario para el Municipio de Puebla (Art. 4 y Art. 2); el descuento por pago anticipado se aprueba mediante acuerdo de Cabildo y no figura como porcentaje fijo en la Ley de Ingresos."
+  ]
+}

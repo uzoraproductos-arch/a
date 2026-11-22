@@ -1,0 +1,277 @@
+{
+  "entidad": "Guanajuato",
+  "clave_ent": "11",
+  "abreviatura": "GTO",
+  "municipio": "León",
+  "cve": "11020",
+  "ley": "Ley de Ingresos para el Municipio de León, Guanajuato, para el Ejercicio Fiscal del año 2026 (Decreto 159, P.O. No. 260, 28ª y 29ª Parte, 30-12-2025)",
+  "url": "https://normatividadestatalymunicipal.guanajuato.gob.mx/archivos/687fe34a901a03abed262a62e22f90db.pdf",
+  "sha256_pdf": "91e6efa75a5c75df3563554d5f30e84b56ae4d83d2d4915f4da5901c72b256cb",
+  "bytes_pdf": 5294085,
+  "paginas_predial": [
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    427,
+    428,
+    429
+  ],
+  "ingresos_estimados_predial_2026": 1491634899.0,
+  "tarifa_anual_art_5_fr_I_a": {
+    "aplica": "Urbanos, suburbanos y rústicos con edificaciones cuyo valor se determinó o modificó a partir del 1 de enero de 2021 (incluyendo 2026)",
+    "formula": "((VF - LI) * T) + CF",
+    "nota_porcentaje": "T es porcentaje (ej. 0.234% = 0.00234)",
+    "rangos": [
+      {
+        "rango": 1,
+        "li": 0.01,
+        "ls": 1552285.8,
+        "cf": 0.0,
+        "pct": 0.234
+      },
+      {
+        "rango": 2,
+        "li": 1552285.81,
+        "ls": 3104571.6,
+        "cf": 3777.64,
+        "pct": 0.267
+      },
+      {
+        "rango": 3,
+        "li": 3104571.61,
+        "ls": 6209143.2,
+        "cf": 7926.59,
+        "pct": 0.292
+      },
+      {
+        "rango": 4,
+        "li": 6209143.21,
+        "ls": 12418286.4,
+        "cf": 16999.39,
+        "pct": 0.316
+      },
+      {
+        "rango": 5,
+        "li": 12418286.41,
+        "ls": 24836572.8,
+        "cf": 36630.22,
+        "pct": 0.341
+      },
+      {
+        "rango": 6,
+        "li": 24836572.81,
+        "ls": 49673145.6,
+        "cf": 78991.48,
+        "pct": 0.365
+      },
+      {
+        "rango": 7,
+        "li": 49673145.61,
+        "ls": 99346291.2,
+        "cf": 169654.9,
+        "pct": 0.389
+      },
+      {
+        "rango": 8,
+        "li": 99346291.21,
+        "ls": 198692582.4,
+        "cf": 362863.57,
+        "pct": 0.414
+      },
+      {
+        "rango": 9,
+        "li": 198692582.41,
+        "ls": 397385164.8,
+        "cf": 774077.74,
+        "pct": 0.438
+      },
+      {
+        "rango": 10,
+        "li": 397385164.81,
+        "ls": 794770329.6,
+        "cf": 1644033.34,
+        "pct": 0.462
+      },
+      {
+        "rango": 11,
+        "li": 794770329.61,
+        "ls": 1589540659.2,
+        "cf": 3480652.2,
+        "pct": 0.487
+      },
+      {
+        "rango": 12,
+        "li": 1589540659.21,
+        "ls": null,
+        "cf": 7347305.23,
+        "pct": 0.511
+      }
+    ]
+  },
+  "tarifa_anual_art_5_fr_II_a": {
+    "aplica": "Urbanos, suburbanos y rústicos con edificación cuyo valor se determinó o modificó entre 1-ene-2016 y 31-dic-2020",
+    "rangos": [
+      {
+        "rango": 1,
+        "li": 0.01,
+        "ls": 1552285.8,
+        "cf": 0.0,
+        "pct": 0.271
+      },
+      {
+        "rango": 2,
+        "li": 1552285.81,
+        "ls": 3104571.6,
+        "cf": 4374.96,
+        "pct": 0.31
+      },
+      {
+        "rango": 3,
+        "li": 3104571.61,
+        "ls": 6209143.2,
+        "cf": 9185.81,
+        "pct": 0.338
+      },
+      {
+        "rango": 4,
+        "li": 6209143.21,
+        "ls": 12418286.4,
+        "cf": 19679.26,
+        "pct": 0.366
+      },
+      {
+        "rango": 5,
+        "li": 12418286.41,
+        "ls": 24836572.8,
+        "cf": 42409.69,
+        "pct": 0.394
+      },
+      {
+        "rango": 6,
+        "li": 24836572.81,
+        "ls": 49673145.6,
+        "cf": 91357.61,
+        "pct": 0.423
+      },
+      {
+        "rango": 7,
+        "li": 49673145.61,
+        "ls": 99346291.2,
+        "cf": 196485.85,
+        "pct": 0.451
+      },
+      {
+        "rango": 8,
+        "li": 99346291.21,
+        "ls": 198692582.4,
+        "cf": 420690.56,
+        "pct": 0.479
+      },
+      {
+        "rango": 9,
+        "li": 198692582.41,
+        "ls": 397385164.8,
+        "cf": 896996.42,
+        "pct": 0.508
+      },
+      {
+        "rango": 10,
+        "li": 397385164.81,
+        "ls": 794770329.6,
+        "cf": 1905401.02,
+        "pct": 0.536
+      },
+      {
+        "rango": 11,
+        "li": 794770329.61,
+        "ls": 1589540659.2,
+        "cf": 4034209.24,
+        "pct": 0.564
+      },
+      {
+        "rango": 12,
+        "li": 1589540659.21,
+        "ls": null,
+        "cf": 8515823.75,
+        "pct": 0.592
+      }
+    ]
+  },
+  "tasa_art_5_fr_III_a": {
+    "aplica": "Con edificaciones, valor determinado o modificado antes del 1 de enero de 2016",
+    "pct": 0.681
+  },
+  "baldios_art_5_incisos_b": {
+    "definicion": "Inmuebles sin edificaciones o con menos del 5% en metros de construcción respecto de la superficie total del terreno",
+    "tramos_m2_fr_I_b": [
+      {
+        "li_m2": 0.01,
+        "ls_m2": 1000.0,
+        "pct": 0.439
+      },
+      {
+        "li_m2": 1000.01,
+        "ls_m2": 3000.0,
+        "pct": 0.46
+      },
+      {
+        "li_m2": 3000.01,
+        "ls_m2": 5000.0,
+        "pct": 0.481
+      },
+      {
+        "li_m2": 5000.01,
+        "ls_m2": 7000.0,
+        "pct": 0.501
+      },
+      {
+        "li_m2": 7000.01,
+        "ls_m2": 9000.0,
+        "pct": 0.65
+      },
+      {
+        "li_m2": 9000.01,
+        "ls_m2": 11000.0,
+        "pct": 0.8
+      },
+      {
+        "li_m2": 11000.01,
+        "ls_m2": null,
+        "pct": 1.25
+      }
+    ],
+    "nota": "En el simulador sin dato de m² de terreno se aplica la tasa del primer tramo (0.439% para valores 2021-2026) con nota sobre la progresividad por superficie."
+  },
+  "cuota_minima_art_43": {
+    "general_anual": 399.4,
+    "beneficio_social_anual": 324.18,
+    "beneficiarios": "Personas pensionadas, jubiladas, cónyuge/concubino/viudo de aquellos, adultos mayores, personas con discapacidad que les impida trabajar, usufructo vitalicio en esos supuestos (una sola casa habitación)",
+    "tope_valor_fiscal": "40 veces UMA diaria elevada al año; sobre el excedente se aplica la tasa correspondiente al 75%"
+  },
+  "pronto_pago_art_44": {
+    "enero_pct": 10,
+    "febrero_pct": 8,
+    "condicion": "Pago anticipado de la anualidad completa; no aplica a quienes tributen bajo cuota mínima"
+  },
+  "agricola_ganadero_art_45": {
+    "factor_reduccion": 0.5,
+    "requisito": "Constancia 2026 de la Dirección General de Desarrollo Rural"
+  },
+  "recargos_art_38": {
+    "mora_mensual_pct": 2.07,
+    "prorroga_parcialidades_mensual_pct": 1.38,
+    "limite_anos": 5
+  },
+  "gastos_ejecucion_art_39": {
+    "tasa_por_diligencia_pct": 2.0,
+    "minimo_uma_diaria": 2,
+    "maximo_uma_mensual": 3
+  }
+}

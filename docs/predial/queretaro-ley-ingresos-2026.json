@@ -1,0 +1,227 @@
+{
+  "entidad": "Querétaro",
+  "clave_ent": "22",
+  "abreviatura": "QRO",
+  "municipio": "Querétaro",
+  "cve": "22014",
+  "ley": "Ley de Ingresos del Municipio de Querétaro, Qro., para el Ejercicio Fiscal 2026 (Periódico Oficial La Sombra de Arteaga, 25-12-2025, pp. 50229-50377)",
+  "url": "https://portalfiscal.municipiodequeretaro.gob.mx/CONAC/dist-assets/pdf/b1/ley-de-ingresos-2026.pdf",
+  "sha256_pdf": "be663785dcc1816f68995aa2c3dc01cdc9a3460e442d681af13d56a9a0413722",
+  "bytes_pdf": 1791578,
+  "paginas_predial": [
+    22,
+    23,
+    24,
+    137,
+    138,
+    139,
+    140
+  ],
+  "ingresos_estimados_predial_2026": 1711125368.0,
+  "calendario_bimestral_art_14": {
+    "vencimiento_dia": 15,
+    "meses_vencimiento": [
+      3,
+      5,
+      7,
+      9,
+      11,
+      1
+    ],
+    "formula_bimestre": "((base - li) * factor + cf) / 6"
+  },
+  "tarifa_anual_art_14": [
+    {
+      "rango": 1,
+      "li": 0.01,
+      "ls": 91999.99,
+      "cf": 336.57,
+      "factor": 0.001013
+    },
+    {
+      "rango": 2,
+      "li": 92000.0,
+      "ls": 116427.72,
+      "cf": 429.8,
+      "factor": 0.004873
+    },
+    {
+      "rango": 3,
+      "li": 116427.73,
+      "ls": 147341.48,
+      "cf": 548.85,
+      "factor": 0.004917
+    },
+    {
+      "rango": 4,
+      "li": 147341.49,
+      "ls": 186463.42,
+      "cf": 700.88,
+      "factor": 0.004962
+    },
+    {
+      "rango": 5,
+      "li": 186463.43,
+      "ls": 235972.97,
+      "cf": 895.02,
+      "factor": 0.005007
+    },
+    {
+      "rango": 6,
+      "li": 235972.98,
+      "ls": 298628.23,
+      "cf": 1142.95,
+      "factor": 0.005052
+    },
+    {
+      "rango": 7,
+      "li": 298628.24,
+      "ls": 377919.65,
+      "cf": 1459.54,
+      "factor": 0.005098
+    },
+    {
+      "rango": 8,
+      "li": 377919.66,
+      "ls": 478264.44,
+      "cf": 1863.84,
+      "factor": 0.005145
+    },
+    {
+      "rango": 9,
+      "li": 478264.45,
+      "ls": 605252.66,
+      "cf": 2380.12,
+      "factor": 0.005191
+    },
+    {
+      "rango": 10,
+      "li": 605252.67,
+      "ls": 765958.64,
+      "cf": 3039.41,
+      "factor": 0.005238
+    },
+    {
+      "rango": 11,
+      "li": 765958.65,
+      "ls": 969335.08,
+      "cf": 3881.33,
+      "factor": 0.005286
+    },
+    {
+      "rango": 12,
+      "li": 969335.09,
+      "ls": 1226711.79,
+      "cf": 4956.46,
+      "factor": 0.005334
+    },
+    {
+      "rango": 13,
+      "li": 1226711.8,
+      "ls": 1552426.87,
+      "cf": 6329.4,
+      "factor": 0.005382
+    },
+    {
+      "rango": 14,
+      "li": 1552426.88,
+      "ls": 1964625.44,
+      "cf": 8082.64,
+      "factor": 0.005431
+    },
+    {
+      "rango": 15,
+      "li": 1964625.45,
+      "ls": 2486270.48,
+      "cf": 10321.53,
+      "factor": 0.00548
+    },
+    {
+      "rango": 16,
+      "li": 2486270.49,
+      "ls": 3146422.1,
+      "cf": 13180.59,
+      "factor": 0.00553
+    },
+    {
+      "rango": 17,
+      "li": 3146422.11,
+      "ls": 3981856.41,
+      "cf": 16831.62,
+      "factor": 0.00558
+    },
+    {
+      "rango": 18,
+      "li": 3981856.42,
+      "ls": 5039114.26,
+      "cf": 21493.98,
+      "factor": 0.005631
+    },
+    {
+      "rango": 19,
+      "li": 5039114.27,
+      "ls": 6377093.97,
+      "cf": 27447.81,
+      "factor": 0.005682
+    },
+    {
+      "rango": 20,
+      "li": 6377093.98,
+      "ls": 8070332.49,
+      "cf": 35050.85,
+      "factor": 0.005734
+    },
+    {
+      "rango": 21,
+      "li": 8070332.5,
+      "ls": 10213157.71,
+      "cf": 44759.94,
+      "factor": 0.005786
+    },
+    {
+      "rango": 22,
+      "li": 10213157.72,
+      "ls": 12924943.37,
+      "cf": 57158.44,
+      "factor": 0.005838
+    },
+    {
+      "rango": 23,
+      "li": 12924943.38,
+      "ls": 16356759.17,
+      "cf": 72991.33,
+      "factor": 0.005891
+    },
+    {
+      "rango": 24,
+      "li": 16356759.18,
+      "ls": 20699786.69,
+      "cf": 93209.93,
+      "factor": 0.005944
+    },
+    {
+      "rango": 25,
+      "li": 20699786.7,
+      "ls": 999999999999.99,
+      "cf": 119029.08,
+      "factor": 0.0059946
+    }
+  ],
+  "cuota_minima_art_50_fr_I": {
+    "uma_anual": 1.25
+  },
+  "pronto_pago_art_50_fr_II": {
+    "enero_pct": 12,
+    "febrero_pct": 8,
+    "condicion": "Pago de la anualidad anticipada en una sola exhibición"
+  },
+  "beneficio_social_art_50_fr_X": {
+    "hasta_4m_uma": 1.25,
+    "umbral_valor_catastral": 4000000.0,
+    "mayor_4m_descuento_pct": 50,
+    "beneficiarios": "Personas pensionadas, jubiladas, adultas mayores y/o con discapacidad (o sus cónyuges), una sola propiedad habitada; renovación límite 30 de junio."
+  },
+  "recargos_y_actualizacion": {
+    "remision": "Art. 14: actualización y recargos conforme al Código Fiscal del Estado de Querétaro (pendiente de anclar tasa mensual exacta 2026 del CFEQ)."
+  }
+}
