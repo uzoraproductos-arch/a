@@ -1,6 +1,6 @@
 {
  "que_es": "Lo que toca revisar de la base de datos. La escribe herramientas/fuentes.py --agenda en el flujo «Base al día».",
- "revisado": "2026-11-21",
+ "revisado": "2026-11-22",
  "toca": [],
  "fuentes": [
   {
@@ -338,6 +338,18 @@
    "toca": false,
    "script": "anclar_salud_estados.py, anclar_egresos_bienestar.py",
    "url": "https://www.imss.gob.mx/conoce-al-imss/memoria-estadistica-2025"
+  },
+  {
+   "id": "issste-anuario",
+   "que": "Anuario Estadístico del ISSSTE: derechohabientes, consultas, egresos, urgencias y cirugías por estado",
+   "quien": "ISSSTE",
+   "modo": "mano",
+   "cada": "anual",
+   "corte": "Anuario Estadístico 2025",
+   "revisar": "2027-07-01",
+   "toca": false,
+   "script": "anclar_issste_anuario.py",
+   "url": "http://www.issste.gob.mx/datosabiertos/anuarios/anuarios2025.html"
   },
   {
    "id": "marco-geo",

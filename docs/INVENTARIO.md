@@ -7,7 +7,7 @@ La Enciclopedia queda fuera porque está congelada.
 
 | Concepto | Cantidad |
 |---|---|
-| Páginas revisadas | 840 |
+| Páginas revisadas | 841 |
 | Páginas que solo redirigen | 30 |
 | Enlaces internos a archivos que no existen | 0 |
 | Módulos del motor que se abren desde páginas (`?ir=`) | 1 destinos |
@@ -140,7 +140,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `datos-poder-legislativo.html` | Poder Legislativo · Auditavisión | apartados.py | 44 | 0 | 0 | 0 | 0 |
 | `datos-salud-imss.html` | El IMSS: lo que cuesta y lo que resuelve · Auditavisión | apartados.py | 48 | 0 | 18 | 9 | 3 |
 | `datos-salud-publica.html` | Salud pública · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
-| `datos-salud-sistema.html` | Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE · Auditavisión | apartados.py | 48 | 0 | 16 | 7 | 5 |
+| `datos-salud-sistema.html` | Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE · Auditavisión | apartados.py | 48 | 0 | 26 | 11 | 2 |
 | `derecho-de-replica.html` | Derecho de réplica · Auditavisión | apartados.py | 40 | 0 | 1 | 0 | 0 |
 | `descarga-los-datos.html` | Datos · Auditavisión | apartados.py | 48 | 0 | 0 | 0 | 0 |
 | `diccionario.html` | Biblioteca del Erario Público · Auditavisión | apartados.py | 59 | 0 | 0 | 0 | 0 |
@@ -267,6 +267,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `noticias-al-momento-imss-modalidad-40-gestores.html` | El IMSS acota la Modalidad 40: lo que dice el Diario Oficial y lo que falta probar · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 3 |
 | `noticias-al-momento-jalisco-gasto-federal-pef-2027.html` | Jalisco y el gasto federal: aporta el 7.5 % del PIB y recibe el 6.1 % de lo que la Federación reparte a los estados · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-lfd-2027-dnr-defensa-tren-maya-aifa.html` | ¿18 mil millones «en subsidios» para el Tren Maya y el AIFA? Es el cobro a los turistas extranjeros, y el 57 % es la parte de la Defensa, no un aumento · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 2 |
+| `noticias-al-momento-pef-2027-comision-agua-jalisco-6500.html` | Los 6,500 millones para el agua de Jalisco: es menos de la mitad de lo prometido, va en un dictamen de comisión y todavía no es el Presupuesto aprobado · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-pemex-3t-2026-perdida-neta.html` | Pemex vuelve a perder en el tercer trimestre: lo que dice su Boletín 86, el punto ciego de la pérdida neta y su deuda de 77.6 mil mdd · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
 | `noticias-al-momento-portacelis-permiso-diesel-sener.html` | Portacelis y el permiso para importar 52 millones de litros de diésel: lo que dice MCCI, lo que consta y lo que es puro adjetivo · Auditavisión | apartados.py | 41 | 0 | 0 | 0 | 2 |
 | `noticias-al-momento-senado-ley-de-ingresos-2027.html` | El Senado aprueba la Ley de Ingresos 2027: de sus 10.6 billones, casi 1.5 son dinero prestado · Auditavisión | apartados.py | 42 | 0 | 0 | 0 | 0 |
@@ -274,7 +275,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `noticias-auditavision.html` | Auditavisión Noticias · Auditavisión | apartados.py | 51 | 0 | 0 | 0 | 0 |
 | `noticias-relevantes.html` | Noticiero · Auditavisión | apartados.py | 65 | 0 | 0 | 0 | 0 |
 | `noticias-seguimiento.html` | Seguimiento: el caso no se olvida · Auditavisión | apartados.py | 54 | 0 | 8 | 4 | 6 |
-| `noticias-verifica.html` | Verifica una noticia · Auditavisión | apartados.py | 84 | 0 | 0 | 0 | 0 |
+| `noticias-verifica.html` | Verifica una noticia · Auditavisión | apartados.py | 85 | 0 | 0 | 0 | 0 |
 | `numeros-a-que-equivale.html` | ¿A qué equivale? · Auditavisión | apartados.py | 58 | 0 | 0 | 5 | 1 |
 | `numeros-baja-al-territorio.html` | Baja al territorio · Auditavisión | apartados.py | 43 | 0 | 0 | 0 | 0 |
 | `numeros-camino-del-dinero.html` | El camino del dinero, en cuatro etapas · Auditavisión | apartados.py | 55 | 0 | 4 | 0 | 0 |
@@ -342,7 +343,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `numeros-se-revisa.html` | Se revisa · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `participa.html` | Comunidad · Auditavisión | apartados.py | 39 | 0 | 0 | 0 | 0 |
 | `pase-del-auditor.html` | Pase del Auditor Cívico · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 238 | 0 | 0 | 0 | 125 |
+| `pendientes.html` | Registro de pendientes · Auditavisión | apartados.py | 237 | 0 | 0 | 0 | 126 |
 | `periodismo-en-riesgo.html` | Periodismo en riesgo · Auditavisión | apartados.py | 38 | 0 | 11 | 5 | 0 |
 | `pilares.html` | Nuestros pilares · Auditavisión | apartados.py | 51 | 0 | 1 | 0 | 0 |
 | `planisferio-ags-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
@@ -355,9 +356,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-ags-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-ags-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-ags-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-ags-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 12 | 7 | 4 |
-| `planisferio-ags-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-ags.html` | Aguascalientes · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-ags-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 17 | 9 | 3 |
+| `planisferio-ags-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-ags.html` | Aguascalientes · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-bc-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-bc-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 61 | 0 | 11 | 18 | 3 |
 | `planisferio-bc-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 2 |
@@ -368,9 +369,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-bc-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-bc-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-bc-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-bc-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-bc-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-bc.html` | Baja California · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-bc-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-bc-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-bc.html` | Baja California · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-bcs-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-bcs-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 61 | 0 | 11 | 18 | 3 |
 | `planisferio-bcs-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 17 | 2 |
@@ -381,9 +382,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-bcs-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-bcs-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-bcs-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-bcs-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-bcs-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-bcs.html` | Baja California Sur · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-bcs-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-bcs-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-bcs.html` | Baja California Sur · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-cam-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-cam-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 10 | 17 | 3 |
 | `planisferio-cam-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 17 | 2 |
@@ -394,9 +395,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-cam-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-cam-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-cam-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-cam-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-cam-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-cam.html` | Campeche · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-cam-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-cam-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-cam.html` | Campeche · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-cdmx-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-cdmx-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 9 | 15 | 2 |
 | `planisferio-cdmx-deuda.html` | Su deuda · Auditavisión | apartados.py | 60 | 0 | 6 | 11 | 2 |
@@ -407,9 +408,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-cdmx-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-cdmx-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-cdmx-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 58 | 0 | 2 | 4 | 3 |
-| `planisferio-cdmx-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 15 | 9 | 4 |
-| `planisferio-cdmx-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-cdmx.html` | Ciudad de México · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 17 |
+| `planisferio-cdmx-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 20 | 11 | 3 |
+| `planisferio-cdmx-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 61 | 0 | 10 | 3 | 0 |
+| `planisferio-cdmx.html` | Ciudad de México · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 17 |
 | `planisferio-chih-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-chih-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 61 | 0 | 12 | 19 | 2 |
 | `planisferio-chih-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 3 |
@@ -420,9 +421,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-chih-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-chih-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-chih-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-chih-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 12 | 7 | 4 |
-| `planisferio-chih-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-chih.html` | Chihuahua · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 2 |
+| `planisferio-chih-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 17 | 9 | 3 |
+| `planisferio-chih-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-chih.html` | Chihuahua · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 2 |
 | `planisferio-chis-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-chis-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 10 | 17 | 3 |
 | `planisferio-chis-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 2 |
@@ -433,9 +434,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-chis-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-chis-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-chis-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-chis-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-chis-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-chis.html` | Chiapas · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 4 |
+| `planisferio-chis-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-chis-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-chis.html` | Chiapas · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 4 |
 | `planisferio-coah-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-coah-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 61 | 0 | 11 | 18 | 3 |
 | `planisferio-coah-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 2 |
@@ -446,9 +447,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-coah-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-coah-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-coah-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-coah-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 12 | 7 | 4 |
-| `planisferio-coah-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-coah.html` | Coahuila · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-coah-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 17 | 9 | 3 |
+| `planisferio-coah-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-coah.html` | Coahuila · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-col-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-col-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 10 | 18 | 3 |
 | `planisferio-col-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 2 |
@@ -459,9 +460,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-col-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-col-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-col-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-col-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-col-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-col.html` | Colima · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-col-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-col-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-col.html` | Colima · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-dgo-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-dgo-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 61 | 0 | 12 | 19 | 2 |
 | `planisferio-dgo-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 2 |
@@ -472,9 +473,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-dgo-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-dgo-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-dgo-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-dgo-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 12 | 7 | 4 |
-| `planisferio-dgo-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-dgo.html` | Durango · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-dgo-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 17 | 9 | 3 |
+| `planisferio-dgo-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-dgo.html` | Durango · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-dinero.html` | Cuánto dinero es · Auditavisión | apartados.py | 94 | 0 | 15 | 28 | 1 |
 | `planisferio-ficha-aprende-fraude-en-numeros.html` | El fraude en números · Auditavisión | apartados.py | 48 | 0 | 13 | 3 | 6 |
 | `planisferio-ficha-aprende-recursos-naturales.html` | Los recursos naturales · Auditavisión | apartados.py | 64 | 0 | 127 | 66 | 1 |
@@ -494,7 +495,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-ficha-datos-judicial-reforma.html` | Antes y después de la reforma · Auditavisión | apartados.py | 88 | 0 | 22 | 9 | 4 |
 | `planisferio-ficha-datos-judicial-sueldos.html` | Sueldos y el tope del 127 · Auditavisión | apartados.py | 88 | 0 | 7 | 2 | 0 |
 | `planisferio-ficha-datos-salud-imss.html` | El IMSS: lo que cuesta y lo que resuelve · Auditavisión | apartados.py | 47 | 0 | 18 | 9 | 3 |
-| `planisferio-ficha-datos-salud-sistema.html` | Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE · Auditavisión | apartados.py | 47 | 0 | 16 | 7 | 5 |
+| `planisferio-ficha-datos-salud-sistema.html` | Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE · Auditavisión | apartados.py | 47 | 0 | 26 | 11 | 2 |
 | `planisferio-ficha-fuentes-oficiales.html` | Referencias · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
 | `planisferio-ficha-glosario.html` | Diccionario · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
 | `planisferio-ficha-herramienta-calculadora-compara.html` | Tú contra ellos · Auditavisión | apartados.py | 52 | 0 | 46 | 19 | 9 |
@@ -536,9 +537,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-gro-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-gro-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-gro-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-gro-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-gro-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-gro.html` | Guerrero · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 12 |
+| `planisferio-gro-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-gro-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-gro.html` | Guerrero · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 12 |
 | `planisferio-gto-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-gto-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 63 | 0 | 14 | 21 | 3 |
 | `planisferio-gto-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 2 |
@@ -549,9 +550,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-gto-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-gto-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-gto-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-gto-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-gto-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-gto.html` | Guanajuato · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-gto-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-gto-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-gto.html` | Guanajuato · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-hgo-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-hgo-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 64 | 0 | 15 | 21 | 3 |
 | `planisferio-hgo-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 7 | 16 | 2 |
@@ -562,9 +563,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-hgo-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-hgo-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-hgo-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-hgo-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-hgo-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-hgo.html` | Hidalgo · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-hgo-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-hgo-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-hgo.html` | Hidalgo · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-jal-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-jal-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 61 | 0 | 11 | 18 | 3 |
 | `planisferio-jal-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 3 |
@@ -575,9 +576,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-jal-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-jal-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-jal-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-jal-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 12 | 7 | 4 |
-| `planisferio-jal-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-jal.html` | Jalisco · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 14 |
+| `planisferio-jal-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 17 | 9 | 3 |
+| `planisferio-jal-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-jal.html` | Jalisco · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 14 |
 | `planisferio-mex-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-mex-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 10 | 18 | 3 |
 | `planisferio-mex-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 3 |
@@ -588,9 +589,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-mex-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-mex-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-mex-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-mex-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 15 | 9 | 4 |
-| `planisferio-mex-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-mex.html` | Estado de México · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 2 |
+| `planisferio-mex-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 20 | 11 | 3 |
+| `planisferio-mex-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-mex.html` | Estado de México · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 2 |
 | `planisferio-mich-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-mich-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 10 | 18 | 3 |
 | `planisferio-mich-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 3 |
@@ -601,9 +602,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-mich-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-mich-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-mich-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-mich-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-mich-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-mich.html` | Michoacán · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 3 |
+| `planisferio-mich-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-mich-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-mich.html` | Michoacán · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 3 |
 | `planisferio-mor-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-mor-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 10 | 18 | 3 |
 | `planisferio-mor-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 17 | 3 |
@@ -614,9 +615,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-mor-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-mor-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-mor-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-mor-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-mor-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-mor.html` | Morelos · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-mor-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-mor-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-mor.html` | Morelos · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-nay-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-nay-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 10 | 18 | 3 |
 | `planisferio-nay-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 2 |
@@ -627,9 +628,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-nay-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-nay-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-nay-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-nay-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-nay-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-nay.html` | Nayarit · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-nay-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-nay-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-nay.html` | Nayarit · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-nl-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-nl-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 64 | 0 | 15 | 18 | 3 |
 | `planisferio-nl-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 3 |
@@ -640,9 +641,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-nl-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-nl-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-nl-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-nl-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 12 | 7 | 4 |
-| `planisferio-nl-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-nl.html` | Nuevo León · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 6 |
+| `planisferio-nl-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 17 | 9 | 3 |
+| `planisferio-nl-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-nl.html` | Nuevo León · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 6 |
 | `planisferio-oax-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-oax-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 63 | 0 | 15 | 21 | 3 |
 | `planisferio-oax-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 7 | 16 | 3 |
@@ -653,9 +654,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-oax-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-oax-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-oax-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-oax-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-oax-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-oax.html` | Oaxaca · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 26 |
+| `planisferio-oax-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-oax-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-oax.html` | Oaxaca · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 26 |
 | `planisferio-pue-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-pue-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 10 | 18 | 3 |
 | `planisferio-pue-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 17 | 2 |
@@ -666,9 +667,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-pue-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-pue-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-pue-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-pue-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-pue-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-pue.html` | Puebla · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 17 |
+| `planisferio-pue-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-pue-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-pue.html` | Puebla · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 17 |
 | `planisferio-qro-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-qro-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 61 | 0 | 11 | 18 | 3 |
 | `planisferio-qro-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 14 | 2 |
@@ -679,9 +680,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-qro-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-qro-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-qro-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-qro-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 12 | 7 | 4 |
-| `planisferio-qro-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-qro.html` | Querétaro · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-qro-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 17 | 9 | 3 |
+| `planisferio-qro-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-qro.html` | Querétaro · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-qroo-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-qroo-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 59 | 0 | 8 | 14 | 2 |
 | `planisferio-qroo-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 2 |
@@ -692,9 +693,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-qroo-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-qroo-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-qroo-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-qroo-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-qroo-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-qroo.html` | Quintana Roo · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-qroo-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-qroo-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-qroo.html` | Quintana Roo · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-sin-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-sin-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 10 | 18 | 3 |
 | `planisferio-sin-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 3 |
@@ -705,9 +706,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-sin-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-sin-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-sin-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-sin-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-sin-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-sin.html` | Sinaloa · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 3 |
+| `planisferio-sin-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-sin-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-sin.html` | Sinaloa · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 3 |
 | `planisferio-slp-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-slp-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 61 | 0 | 11 | 18 | 3 |
 | `planisferio-slp-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 2 |
@@ -718,9 +719,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-slp-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-slp-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-slp-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-slp-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-slp-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-slp.html` | San Luis Potosí · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 2 |
+| `planisferio-slp-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-slp-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-slp.html` | San Luis Potosí · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 2 |
 | `planisferio-son-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-son-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 61 | 0 | 12 | 19 | 2 |
 | `planisferio-son-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 3 |
@@ -731,9 +732,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-son-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-son-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-son-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-son-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-son-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-son.html` | Sonora · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-son-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-son-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-son.html` | Sonora · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-tab-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-tab-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 64 | 0 | 13 | 20 | 3 |
 | `planisferio-tab-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 2 |
@@ -744,9 +745,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-tab-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-tab-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-tab-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-tab-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-tab-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-tab.html` | Tabasco · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-tab-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-tab-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-tab.html` | Tabasco · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-tam-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-tam-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 63 | 0 | 15 | 21 | 3 |
 | `planisferio-tam-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 3 |
@@ -757,9 +758,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-tam-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-tam-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-tam-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-tam-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-tam-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-tam.html` | Tamaulipas · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 2 |
+| `planisferio-tam-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-tam-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-tam.html` | Tamaulipas · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 2 |
 | `planisferio-tlax-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-tlax-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 10 | 17 | 3 |
 | `planisferio-tlax-deuda.html` | Su deuda · Auditavisión | apartados.py | 62 | 0 | 3 | 8 | 3 |
@@ -770,9 +771,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-tlax-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-tlax-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-tlax-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-tlax-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-tlax-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-tlax.html` | Tlaxcala · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-tlax-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-tlax-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-tlax.html` | Tlaxcala · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-ver-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-ver-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 63 | 0 | 15 | 21 | 3 |
 | `planisferio-ver-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 3 |
@@ -783,9 +784,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-ver-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-ver-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-ver-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-ver-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 15 | 9 | 4 |
-| `planisferio-ver-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-ver.html` | Veracruz · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 3 |
+| `planisferio-ver-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 20 | 11 | 3 |
+| `planisferio-ver-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-ver.html` | Veracruz · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 3 |
 | `planisferio-yuc-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-yuc-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 60 | 0 | 10 | 17 | 3 |
 | `planisferio-yuc-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 18 | 3 |
@@ -796,9 +797,9 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-yuc-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-yuc-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-yuc-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-yuc-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-yuc-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-yuc.html` | Yucatán · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
+| `planisferio-yuc-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-yuc-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-yuc.html` | Yucatán · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
 | `planisferio-zac-administracion.html` | Su administración pública · Auditavisión | apartados.py | 59 | 0 | 14 | 5 | 0 |
 | `planisferio-zac-ambiental.html` | Sus recursos naturales · Auditavisión | apartados.py | 61 | 0 | 12 | 19 | 2 |
 | `planisferio-zac-deuda.html` | Su deuda · Auditavisión | apartados.py | 63 | 0 | 8 | 15 | 2 |
@@ -809,10 +810,10 @@ La Enciclopedia queda fuera porque está congelada.
 | `planisferio-zac-leyes.html` | Sus leyes del dinero · Auditavisión | apartados.py | 54 | 0 | 0 | 1 | 1 |
 | `planisferio-zac-penal.html` | Su fraude y su cifra oculta · Auditavisión | apartados.py | 59 | 0 | 3 | 4 | 0 |
 | `planisferio-zac-presupuestos.html` | Sus tres presupuestos · Auditavisión | apartados.py | 63 | 0 | 3 | 10 | 0 |
-| `planisferio-zac-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 14 | 9 | 4 |
-| `planisferio-zac-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 58 | 0 | 9 | 3 | 0 |
-| `planisferio-zac.html` | Zacatecas · Auditavisión | apartados.py | 55 | 0 | 1 | 2 | 1 |
-| `planisferio.html` | Planisferio · Auditavisión | apartados.py | 111 | 0 | 112 | 72 | 9 |
+| `planisferio-zac-salud.html` | Su salud pública · Auditavisión | apartados.py | 59 | 0 | 19 | 11 | 3 |
+| `planisferio-zac-social.html` | Su pobreza y sus carencias · Auditavisión | apartados.py | 62 | 0 | 10 | 4 | 0 |
+| `planisferio-zac.html` | Zacatecas · Auditavisión | apartados.py | 56 | 0 | 1 | 2 | 1 |
+| `planisferio.html` | Planisferio · Auditavisión | apartados.py | 111 | 0 | 112 | 73 | 8 |
 | `preguntas-frecuentes.html` | Preguntas Frecuentes · Auditavisión | apartados.py | 47 | 0 | 0 | 0 | 0 |
 | `radar-como-leer.html` | Cómo leer estos números · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `radar-duelo.html` | Duelo de administraciones · Auditavisión | apartados.py | 46 | 0 | 0 | 0 | 0 |
@@ -908,7 +909,7 @@ Se abren con `index.html?ir=…`. Cada uno es candidato a mudarse a su propia p�
 
 ## Registro de pendientes
 
-124 fichas, cada una con su porqué, su responsable y su enlace oficial.
+125 fichas, cada una con su porqué, su responsable y su enlace oficial.
 
 ## Bóveda de evidencias
 
