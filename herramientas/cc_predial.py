@@ -1032,6 +1032,72 @@ def _nl():
 MUNICIPIOS += _nl()
 
 
+# ---------------------------------------------------------------------------
+# Ciudad de México, las 16 alcaldías (Ronda 5, 22-11-2026; la tabla la sacó
+# Antigravity del Código Fiscal y Claude la cotejó contra el mismo PDF, misma
+# huella, págs. 79-80 y 449-450). El predial de la Ciudad no es de cada
+# alcaldía: lo cobra la Tesorería de la Ciudad con una sola tarifa bimestral
+# por rangos (art. 130, fr. I), igual para las 16.
+#
+# Lo que no es cita del Código y decidimos a la vista:
+#  - La tarifa da el porcentaje sobre el excedente del límite inferior
+#    («0.02080» es por ciento): aquí va como tasa (÷ 100) en 'tramos'.
+#  - Los subsidios de la Resolución de Carácter General 2026 (rangos A a G)
+#    no están cotejados todavía: falta de esta plataforma, no de la Ciudad.
+#  - Los recargos: el art. 42 los fija 30 % arriba de la tasa de pago a plazos
+#    de la Ley de Ingresos de la Ciudad de México 2026, que aún no cotejamos.
+#  - Las tablas de valores unitarios por colonia no están integradas: el
+#    lector escribe su valor catastral.
+# ---------------------------------------------------------------------------
+CDMX_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'cdmx-codigo-fiscal-2026.json')
+CDMX_TX = 'Código Fiscal de la Ciudad de México'
+CDMX_NOTA = ('En la Ciudad de México el predial no lo cobra la alcaldía: lo cobra la Tesorería de la Ciudad, con la misma tarifa para las 16 '
+             '(%s, art. 130). Si tu inmueble vale menos que la cuota fija del rango A ($231), solo pagas el porcentaje sobre el excedente '
+             '(art. 130, fr. I, último párrafo). Las reducciones del art. 130, fr. III no valen si en el inmueble hay anuncios con publicidad '
+             'exterior (salvo los denominativos), y en uso mixto van solo sobre la parte que las tiene. Pendiente de cotejar en esta plataforma: '
+             'los subsidios de la Resolución de Carácter General 2026 para los rangos A a G y las tablas de valores unitarios por colonia.') % CDMX_TX
+CDMX_ACC = ('Los recargos de la Ciudad los fija el art. 42 del %s: una tasa 30 %% mayor que la que fija la Ley de Ingresos de la Ciudad de México '
+            '2026 para el pago a plazos. Esa ley todavía no la cotejamos en esta plataforma, así que no calculamos el adeudo: pídelo a la '
+            'Tesorería de la Ciudad.') % CDMX_TX
+
+
+def _cdmx():
+    L = json.load(open(CDMX_ARCHIVO, encoding='utf-8'))
+    T = L['tarifa_bimestral_art_130_fr_I']
+    d131 = {x['mes']: x['descuento_pct'] for x in L['pago_y_descuentos_art_131']['anual_anticipado']}
+    if L['sha256_pdf'] != '0d9ed6122b06a8582dead8604147e66734212bd9df1a9c2dd6c4ab262dc17938' or len(T) != 16 \
+            or [x['rango'] for x in T] != list('ABCDEFGHIJKLMNOP') or (T[0]['cf'], T[-1]['pct']) != (231.0, 0.30909) \
+            or d131 != {'enero': 8, 'febrero': 5}:
+        raise SystemExit('cc_predial: %s cambió: vuelve a cotejar los arts. 130 y 131 del Código Fiscal antes de integrarlo' % CDMX_ARCHIVO)
+    lista = _padron_ent('CDMX')
+    if sorted(lista) != sorted([[a['cve'][2:], a['nombre']] for a in L['alcaldias']]):
+        raise SystemExit('cc_predial: las 16 alcaldías del Código no son las del padrón')
+    tramos = [[x['li'] if i else 0.0, x['cf'], round(x['pct'] / 100, 7)] for i, x in enumerate(T)]
+    # Arts. 281 y 282 (págs. 449-450): cuota de $68 por bimestre, casa propia donde vives, valor catastral hasta $2,808,466.
+    ben = [{'id': 'c281', 'et': 'Jubilado o pensionado, viuda o huérfano pensionado, jefa de hogar o madre soltera con dependientes, persona con '
+                                'discapacidad permanente o cónyuge superviviente del propietario (tu casa)',
+            'fija': 408.0, 'fija_bim': 68.0, 'hasta': 2808466, 'art': 'art. 281'},
+           {'id': 'c282', 'et': 'Adulto mayor sin ingresos fijos y de escasos recursos (tu casa)',
+            'fija': 408.0, 'fija_bim': 68.0, 'hasta': 2808466, 'art': 'art. 282'},
+           {'id': 'cons', 'et': 'Uso agrícola, pecuario o forestal en suelo de conservación, con constancia de la SEDEMA', 'f': 0.20, 'art': 'art. 130, fr. III, 1'},
+           {'id': 'int', 'et': 'Zona donde se autoriza construir menos del 10 % del terreno, sin fines de lucro, con constancia de la SEDEMA', 'f': 0.70, 'art': 'art. 130, fr. III, 2'},
+           {'id': 'pat', 'et': 'Inmueble con valor patrimonial en restauración, con certificado de la SEDUVI', 'f': 0.0, 'art': 'art. 130, fr. III, 3'}]
+    return [{
+        'id': 'cdmx' + cve, 'ent': 'CDMX', 'cve': cve, 'nombre': nom, 'alcaldia': True,
+        'ley': L['ley'], 'ley_corta': CDMX_TX, 'url': L['url'], 'sha256': L['sha256_pdf'],
+        'art_tarifa': 'art. 130, fr. I', 'tramos': tramos, 'sin_cf_bajo': 231.0,
+        'baldio': {'tipo': 'igual', 'art': 'art. 130, fr. I'},
+        'pronto': [{'id': 'ene', 'et': 'Pagas los seis bimestres en enero', 'f': 0.92, 'art': 'art. 131'},
+                   {'id': 'feb', 'et': 'Pagas los seis bimestres en febrero', 'f': 0.95, 'art': 'art. 131'}],
+        'pronto_nota': 'Si después cambia tu valor catastral, al pagar con el nuevo descuentas lo que ya pagaste por anticipado (art. 132).',
+        'beneficios': [dict(b) for b in ben], 'suma_art': None,
+        'acc_pend': CDMX_ACC, 'nota': CDMX_NOTA,
+        'venc': 'que se pagan durante febrero, abril, junio, agosto, octubre y diciembre (art. 131)'} for cve, nom in lista]
+
+
+MUNICIPIOS += _cdmx()
+
+
 def aplica_uma(uma):
     """Las cifras en cuotas (UMA) de Nuevo León, en pesos con la UMA de la base: el mínimo de 2 cuotas al año y la
     tarifa especial. Se llama antes de pasar los renglones a la página y en la prueba, con la misma UMA."""
@@ -1906,6 +1972,11 @@ OAX_VE = {'tx': 'Congreso del Estado de Oaxaca, versión estenográfica de la se
           'url': 'https://congresooaxaca.gob.mx/docs66.congresooaxaca.gob.mx/version_estenografs/Version_Estenografica_Sesion_Extraordinaria_Primer_Periodo_Ordinario_Sesiones_Segundo_Annio_Ejercicio_LXVI_Legislatura_31_marzo_2026.pdf',
           'sha256': 'c2a1f28ace973de7b550a345d1902c3dd35fcda20eac3cf16df6c761242768eb'}
 REGISTRO = {
+    'CDMX': {'donde': 'Consejería Jurídica y de Servicios Legales de la Ciudad de México, códigos vigentes',
+             'url': 'https://data.consejeria.cdmx.gob.mx/index.php/leyes/codigos',
+             'como': 'Las alcaldías no cobran el predial: lo cobra la Tesorería de la Ciudad con una sola tarifa, la del Código Fiscal (arts. 126 a 133). '
+                     'Los recargos salen de la Ley de Ingresos de la Ciudad de cada año (art. 42 del Código).',
+             'ojo': 'El servidor de la Consejería manda incompleta su cadena de certificados (falta el intermedio YR2 de Let\'s Encrypt). La Ley de Ingresos 2026 y la Resolución de subsidios 2026 aún no están cotejadas aquí.'},
     'NL': {'donde': 'Congreso del Estado de Nuevo León, leyes del paquete fiscal',
            'url': 'https://www.hcnl.gob.mx/trabajo_legislativo/leyes/paquete_fiscal.php',
            'como': 'El predial no va en una ley por municipio: lo fija la Ley de Hacienda para los Municipios del Estado, igual para los 51 '
@@ -2014,6 +2085,10 @@ def revisa():
                 if not (b['fija_uma'] > 0 and b.get('art')) or 'f' in b:
                     raise SystemExit('cc_predial: la tarifa especial %s de %s mal' % (b['id'], m['id']))
                 continue
+            if 'fija_bim' in b:
+                if not (b['fija_bim'] > 0 and abs(b['fija'] - 6 * b['fija_bim']) < 1e-9 and b.get('art')) or 'f' in b:
+                    raise SystemExit('cc_predial: la cuota fija %s de %s mal' % (b['id'], m['id']))
+                continue
             if not (0 <= b['f'] < 1) or not b.get('art'):
                 raise SystemExit('cc_predial: beneficio %s de %s mal' % (b['id'], m['id']))
         if m['baldio']['tipo'] not in ('sobretasa', 'millar', 'igual') or not m['baldio'].get('art'):
@@ -2100,6 +2175,9 @@ def _r2(v):
 def bimestral(m, vf):
     t = [x for x in m['tramos'] if vf >= x[0]]
     li, cf, tasa = t[-1] if t else m['tramos'][0]
+    # Ciudad de México (art. 130, fr. I, último párrafo): si el valor es menor que la cuota fija del rango A, solo el porcentaje.
+    if m.get('sin_cf_bajo') and vf < m['sin_cf_bajo']:
+        return _r2(max(vf - m['tramos'][0][0], 0) * m['tramos'][0][2])
     return _r2((vf - li) * tasa + cf)
 
 
@@ -2197,14 +2275,16 @@ def construir(base, ref):
     porley = {}
     for m in MUNICIPIOS:
         porley.setdefault(m['url'], []).append(m)
+    quien = lambda ms: 'Las %d alcaldías de la %s' % (len(ms), ENTIDADES[ms[0]['ent']]) if ms[0].get('alcaldia') else 'Los %d municipios de %s' % (len(ms), ENTIDADES[ms[0]['ent']])
     leyes = ''.join('<li><b>%s</b>: <a href="%s">%s</a> (huella SHA-256 <code>%s…</code>)%s</li>'
-                    % ((esc(ms[0]['nombre']) if len(ms) == 1 else 'Los %d municipios de %s' % (len(ms), esc(ENTIDADES[ms[0]['ent']]))),
-                       esc(u), esc(ms[0]['ley']), ms[0]['sha256'][:12], ', arts. 10 bis y 21 bis-2 a 21 bis-12' if ms[0].get('anual') else '')
+                    % ((esc(ms[0]['nombre']) if len(ms) == 1 else esc(quien(ms))),
+                       esc(u), esc(ms[0]['ley']), ms[0]['sha256'][:12],
+                       ', arts. 10 bis y 21 bis-2 a 21 bis-12' if ms[0].get('anual') else ', arts. 42, 130 a 132, 281 y 282' if ms[0].get('alcaldia') else '')
                     for u, ms in porley.items())
-    lista = ', '.join(esc(m['nombre']) for m in MUNICIPIOS if not m.get('anual')) + ''.join(
-        ' y los %d municipios de %s' % (n, esc(ENTIDADES[e])) for e, n in sorted({(m['ent'], sum(1 for x in MUNICIPIOS if x['ent'] == m['ent'])) for m in MUNICIPIOS if m.get('anual')}))
+    lista = ', '.join(esc(m['nombre']) for m in MUNICIPIOS if not m.get('ley_corta')) + ''.join(
+        ' y ' + esc(quien(ms)[0].lower() + quien(ms)[1:]) for u, ms in porley.items() if ms[0].get('ley_corta'))
     espera = '; '.join('%s: <a href="%s">su ley</a> %s' % (esc(w['nombre']), esc(w['url']), esc(w['motivo'])) for w in ESPERA.values())
-    nmun = {'JAL': 125, 'OAX': 570, 'NL': 51}
+    nmun = {'JAL': 125, 'OAX': 570, 'NL': 51, 'CDMX': 16}
     reg_filas = ''.join('<tr><th scope="row">%s</th><td>%s</td><td>%d · %d</td><td><a href="%s">%s</a>. %s %s</td></tr>' % (
         esc(ENTIDADES[e]), format(nmun.get(e, 0), ','), sum(1 for m in MUNICIPIOS if m['ent'] == e),
         sum(1 for k in ESPERA if k.startswith(e + '-')), esc(r['url']), esc(r['donde']), esc(r['como']), esc(r.get('ojo', '')))
@@ -2557,6 +2637,34 @@ def prueba():
         if 'Ley de Ingresos de los Municipios del Estado de Nuevo León 2026' not in json.loads(l7[1]).get('error', ''):
             mal += 1
             print('✗ el adeudo de Nuevo León debe decir que sus recargos están pendientes', l7[1][:200])
+    # Ciudad de México (Código Fiscal, arts. 130, 131, 281 y 282): Cuauhtémoc, Benito Juárez e Iztapalapa.
+    cd_esp = [('cdmx015', 1e6, 'edif', 6178.74), ('cdmx014', 3e6, 'edif', 25450.14), ('cdmx007', 5e5, 'edif', 2445.42),
+              ('cdmx007', 5e5, 'baldio', 2445.42), ('cdmx007', 100, 'edif', 0.12), ('cdmx015', 50e6, 'edif', 794145.78)]
+    for mid, v, t, esp in cd_esp:
+        if anual(M(mid), v, t) != esp:
+            mal += 1
+            print('✗ Ciudad de México', mid, v, t, anual(M(mid), v, t), 'esperaba', esp)
+    cd_x = [('cdmx007', {'vf': 5e5, 'tipo': 'edif', 'ben': '', 'pago': 'ene'}, 2249.79), ('cdmx007', {'vf': 5e5, 'tipo': 'edif', 'ben': '', 'pago': 'feb'}, 2323.15),
+            ('cdmx007', {'vf': 5e5, 'tipo': 'edif', 'ben': 'c282', 'pago': 'bim'}, 408.0), ('cdmx014', {'vf': 3e6, 'tipo': 'edif', 'ben': 'c281', 'pago': 'bim'}, 25450.14),
+            ('cdmx015', {'vf': 1e6, 'tipo': 'edif', 'ben': 'cons', 'pago': 'bim'}, 1235.75), ('cdmx015', {'vf': 1e6, 'tipo': 'edif', 'ben': 'pat', 'pago': 'bim'}, 0.0)]
+    prog8 = ("global.window={};global.document={getElementById:function(){return null}};require(%s);var D=%s;"
+             "console.log(JSON.stringify(%s.map(function(x){var m=D.mun.filter(function(y){return y.id===x[0]})[0];"
+             "return window.AuditorPredial.calcula(D,m,x[1]).fin;})));"
+             "var m=D.mun.filter(function(y){return y.id==='cdmx015'})[0];console.log(JSON.stringify(window.AuditorPredial.adeudo(D,m,{imp:100,da:2025,db:1,ha:2025,hb:6,f:[2026,6,1],multa:0,sit:'esp'})));"
+             % (json.dumps(js), json.dumps(D), json.dumps([[a, b] for a, b, _ in cd_x])))
+    r8 = subprocess.run(['node'], input=prog8, capture_output=True, text=True)
+    l8 = r8.stdout.strip().split('\n')
+    if len(l8) != 2:
+        mal += 1
+        print('✗ la Ciudad de México no corrió en el navegador', r8.stderr[:300])
+    else:
+        for (mid, x, esp), n in zip(cd_x, json.loads(l8[0])):
+            if n != esp:
+                mal += 1
+                print('✗ Ciudad de México en el navegador', mid, x, n, 'esperaba', esp)
+        if 'Ley de Ingresos de la Ciudad de México' not in json.loads(l8[1]).get('error', ''):
+            mal += 1
+            print('✗ el adeudo de la Ciudad de México debe decir que sus recargos están pendientes', l8[1][:200])
     if mal:
         print('%d diferencias en el simulador del predial' % mal)
         return 1

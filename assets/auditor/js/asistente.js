@@ -1958,9 +1958,11 @@
     /* Gana el nombre más largo: «lagos» (Lagos de Moreno) no le gana a «san juan de los lagos». */
     var largo = 0;
     L.forEach(function (m) { m.slice(1).forEach(function (n) { if (n.length > largo && p.indexOf(' ' + n + ' ') >= 0) { hit = m; largo = n.length; } }); });
-    var liga = a.url + (hit ? '?mun=' + hit[0] : '');
-    return respApp('ccpredial', liga, '<p><span aria-hidden="true">' + a.ico + '</span> Esa cuenta la hace <b>' + esc(a.n) + '</b>, de la ' + esc(a.grupo) + (hit ? ', y ya le puse el municipio' : '') +
-      ': escribe el valor fiscal de tu predio (viene en tu recibo) y te dice tu predial del año con la tarifa de su ley (su Ley de Ingresos o, en Nuevo León, la Ley de Hacienda para los Municipios), sus descuentos y, si debes bimestres, la actualización, los recargos, la multa y los gastos de cobranza, cada uno con su artículo.</p>' +
+    /* Sin municipio pero con la entidad cuya tarifa es una sola (Ciudad de México, Nuevo León): la página abre en esa entidad. */
+    var ent = hit ? '' : / (cdmx|ciudad de mexico|df|distrito federal) /.test(p) ? 'CDMX' : / nuevo leon /.test(p) ? 'NL' : '';
+    var liga = a.url + (hit ? '?mun=' + hit[0] : ent ? '?ent=' + ent : '');
+    return respApp('ccpredial', liga, '<p><span aria-hidden="true">' + a.ico + '</span> Esa cuenta la hace <b>' + esc(a.n) + '</b>, de la ' + esc(a.grupo) + (hit ? ', y ya le puse ' + (/^cdmx/.test(hit[0]) ? 'la alcaldía' : 'el municipio') : ent ? ', y ya le puse ' + (ent === 'CDMX' ? 'la Ciudad de México (la tarifa es la misma en las 16 alcaldías)' : 'Nuevo León') : '') +
+      ': escribe el valor fiscal de tu predio (viene en tu recibo) y te dice tu predial del año con la tarifa de su ley (su Ley de Ingresos; en Nuevo León, la Ley de Hacienda para los Municipios; en la Ciudad de México, el Código Fiscal), sus descuentos y, si debes bimestres, la actualización, los recargos, la multa y los gastos de cobranza, cada uno con su artículo.</p>' +
       '<p class="pa-chico">La cuenta la hace el simulador, no el chat. Cada municipio cobra con su propia ley; si el tuyo aún no está cotejado, la página te lo dice y te da cuánto recaudó de predial.</p>',
       { sug: ['Me llegó un mandamiento de ejecución por no pagar el predial', '¿Cuánto recaudó de predial mi municipio?', 'Vendes una casa o un terreno'] });
   }

@@ -12,6 +12,8 @@
   function bimestral(m, vf) {
     var t = m.tramos[0];
     for (var i = 0; i < m.tramos.length; i++) if (vf >= m.tramos[i][0]) t = m.tramos[i];
+    /* Ciudad de México (Código Fiscal, art. 130, fr. I, último párrafo): si el valor es menor que la cuota fija del rango A, solo el porcentaje. */
+    if (m.sin_cf_bajo && vf < m.sin_cf_bajo) return r2(Math.max(vf - m.tramos[0][0], 0) * m.tramos[0][2]);
     return r2((vf - t[0]) * t[2] + t[1]);
   }
   function tramo(m, vf) {
@@ -129,9 +131,9 @@
       ben = null;
     }
     if (ben && ben.fija != null) {
-      /* La tarifa única especial (Nuevo León, art. 21 bis-9): una cantidad fija al año, en cuotas. */
+      /* La tarifa única especial (Nuevo León, art. 21 bis-9: cuotas al año) o la cuota fija bimestral (Ciudad de México, arts. 281 y 282). */
       ahorroB = Math.max(0, r2(A - ben.fija));
-      pasos.push(['Tarifa especial: ' + ben.fija_uma + ' cuotas al año (' + pesos(ben.fija) + ')', -ahorroB, ley(ben.art)]);
+      pasos.push([(ben.fija_bim ? 'Cuota fija: ' + pesos(ben.fija_bim) + ' por bimestre (' + pesos(ben.fija) + ' al año)' : 'Tarifa especial: ' + ben.fija_uma + ' cuotas al año (' + pesos(ben.fija) + ')'), -ahorroB, ley(ben.art)]);
     } else if (ben) {
       var sobre = ben.tope && x.vf > ben.tope ? r2(base(m, ben.tope, x.tipo) * 6) : A;
       ahorroB = r2(sobre * (1 - ben.f));
@@ -348,6 +350,8 @@
       h += '<p><b>' + esc(nom) + '</b> recaudó <b>' + mdp(c.predial) + '</b> de predial en ' + MUN.anio + ': ' +
         (c.propios ? Math.round(c.predial / c.propios * 100) + ' de cada $100 de sus ingresos propios y ' : '') +
         Math.round(c.predial / c.ing * 100) + ' de cada $100 de todo lo que le entró <span class="est-chip est-oficial">oficial</span> <span class="cp-fuente">(INEGI, EFIPEM ' + MUN.anio + '; las proporciones, auditadas)</span>.</p>';
+    } else if (r && m && m.alcaldia) {
+      h += '<p><b>' + esc(nom) + '</b> es alcaldía: no rinde cuenta municipal al INEGI, porque el predial de la Ciudad de México lo recauda la Tesorería de la Ciudad, no cada alcaldía.</p>';
     } else if (r) {
       h += '<p><b>' + esc(nom) + '</b> no rindió cuenta al INEGI en ' + (MUN ? MUN.anio : '') + ': no sabemos cuánto recaudó de predial.</p>';
     }
@@ -388,7 +392,7 @@
     if (oc) { oc.hidden = !conCom; oc.disabled = !conCom; if (!conCom && $('cpTipo').value === 'com') $('cpTipo').value = 'edif'; }
     if (m) {
       $('cpBen').innerHTML = '<option value="">Ninguno</option>' + m.beneficios.map(function (b) {
-        if (b.fija != null) return '<option value="' + esc(b.id) + '">' + esc(b.et) + ' — pagas ' + pesos(b.fija) + ' al año (' + b.fija_uma + ' cuotas)' + (b.hasta ? ' (valor hasta ' + pesos(b.hasta) + ')' : '') + '</option>';
+        if (b.fija != null) return '<option value="' + esc(b.id) + '">' + esc(b.et) + ' — pagas ' + (b.fija_bim ? pesos(b.fija_bim) + ' por bimestre' : pesos(b.fija) + ' al año (' + b.fija_uma + ' cuotas)') + (b.hasta ? ' (valor hasta ' + pesos(b.hasta) + ')' : '') + '</option>';
         return '<option value="' + esc(b.id) + '">' + esc(b.et) + ' — pagas ' + Math.round(b.f * 100) + ' %' + (b.tope ? ' sobre el primer $' + b.tope.toLocaleString('es-MX') : '') + (b.hasta ? ' (valor hasta $' + b.hasta.toLocaleString('es-MX') + ')' : '') + '</option>';
       }).join('');
       $('cpPago').innerHTML = '<option value="bim">Cada bimestre</option>' + m.pronto.map(function (p) {
@@ -733,6 +737,8 @@
   try { q = new URLSearchParams(location.search); } catch (e) { /* sin parámetros */ }
   var pedidoId = q && q.get('mun') && D.munEnt && D.munEnt[q.get('mun')] ? q.get('mun') : null;
   if (pedidoId) $('cpEnt').value = D.munEnt[pedidoId];
+  /* ?ent=CDMX: la entidad sin municipio (en la Ciudad de México la tarifa es la misma para las 16 alcaldías). */
+  else if (q && q.get('ent') && D.ent[q.get('ent')]) $('cpEnt').value = q.get('ent');
   entDatos($('cpEnt').value).then(inicia);
   function inicia() {
   var pedido = pedidoId ? D.mun.filter(function (m) { return m.id === pedidoId; })[0] : null;

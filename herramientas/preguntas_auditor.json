@@ -3357,6 +3357,29 @@
    "dice": [
     "1,174 carpetas"
    ]
+  },
+  {
+   "q": "¿Cuánto pago de predial en Benito Juárez?",
+   "ir": "herramienta-calculadora-predial.html?mun=cdmx014"
+  },
+  {
+   "q": "¿Cuánto pago de predial en Iztapalapa?",
+   "ir": "herramienta-calculadora-predial.html?mun=cdmx007"
+  },
+  {
+   "q": "¿Cuánto pago de predial en la CDMX?",
+   "ir": "herramienta-calculadora-predial.html?ent=CDMX",
+   "dice": [
+    "16 alcaldías",
+    "Código Fiscal"
+   ]
+  },
+  {
+   "q": "¿Cuántos fraudes hubo en Cuauhtémoc?",
+   "ir": "planisferio-cdmx-penal.html",
+   "dice": [
+    "4,184 carpetas"
+   ]
   }
  ]
 }
