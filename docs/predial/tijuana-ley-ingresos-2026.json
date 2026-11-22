@@ -1,0 +1,45 @@
+{
+  "entidad": "Baja California",
+  "clave_ent": "02",
+  "abreviatura": "BC",
+  "municipio": "Tijuana",
+  "cve": "02004",
+  "ley": "Ley de Ingresos del Municipio de Tijuana, Baja California, para el Ejercicio Fiscal 2026 (Periódico Oficial de Baja California, Tomo CXXXII, No. 78, Número Especial Sección II, 30-12-2025)",
+  "url": "https://www.tijuana.gob.mx/Dependencias/tesoreria/cp/2026/LI-TJBC_E-2026.pdf",
+  "sha256_pdf": "5733525d3ecd4f991293bde1b226fd701d8dd279010fdf8b917c3517cb29bffb",
+  "bytes_pdf": 2907680,
+  "paginas_predial": [
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    280
+  ],
+  "tasas_anuales_art_4": {
+    "general_al_millar": 4.29,
+    "general_factor": 0.00429,
+    "industrial_al_millar": 4.1,
+    "industrial_factor": 0.0041,
+    "baldio_al_millar": 3.7,
+    "baldio_factor": 0.0037,
+    "rustico_suburbano_al_millar": 3.7,
+    "rustico_suburbano_factor": 0.0037
+  },
+  "cuota_minima_y_plazo_art_5": {
+    "minimo_uma_anual": 3.99,
+    "plazo_anual": "Del 01 de enero al 31 de marzo del año en curso"
+  },
+  "pronto_pago_art_7": {
+    "enero_pct": 12,
+    "febrero_pct": 10,
+    "marzo_pct": 5,
+    "adicional_en_linea_pct": 3,
+    "condicion": "Pago anual en una sola exhibición; 3% adicional al pagar por medios electrónicos en el portal municipal"
+  },
+  "recargos_art_63": {
+    "mora_mensual_pct": 2.0,
+    "prorroga_mensual_pct": 1.5
+  }
+}

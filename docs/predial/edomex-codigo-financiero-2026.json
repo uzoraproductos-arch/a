@@ -1,0 +1,640 @@
+{
+  "entidad": "México",
+  "nombre_comun": "Estado de México",
+  "clave_ent": "15",
+  "abreviatura": "MEX",
+  "ley": "Código Financiero del Estado de México y Municipios (última reforma POGG 01-10-2026; Art. 109 tarifa reformada Decreto 240, POGG 17-12-2025)",
+  "url": "https://legislacion.edomex.gob.mx/sites/legislacion.edomex.gob.mx/files/files/pdf/cod/vig/codvig007.pdf",
+  "sha256_pdf": "c64741f00243049569bd4a5c4dec3a81244214e09afc0e3512d75e5840f149f5",
+  "bytes_pdf": 3886460,
+  "paginas_predial": [
+    153,
+    154,
+    155
+  ],
+  "municipios_count": 125,
+  "municipios": [
+    {
+      "cve": "15001",
+      "nombre": "Acambay de Ruíz Castañeda"
+    },
+    {
+      "cve": "15002",
+      "nombre": "Acolman"
+    },
+    {
+      "cve": "15003",
+      "nombre": "Aculco"
+    },
+    {
+      "cve": "15004",
+      "nombre": "Almoloya de Alquisiras"
+    },
+    {
+      "cve": "15005",
+      "nombre": "Almoloya de Juárez"
+    },
+    {
+      "cve": "15006",
+      "nombre": "Almoloya del Río"
+    },
+    {
+      "cve": "15007",
+      "nombre": "Amanalco"
+    },
+    {
+      "cve": "15008",
+      "nombre": "Amatepec"
+    },
+    {
+      "cve": "15009",
+      "nombre": "Amecameca"
+    },
+    {
+      "cve": "15010",
+      "nombre": "Apaxco"
+    },
+    {
+      "cve": "15011",
+      "nombre": "Atenco"
+    },
+    {
+      "cve": "15012",
+      "nombre": "Atizapán"
+    },
+    {
+      "cve": "15013",
+      "nombre": "Atizapán de Zaragoza"
+    },
+    {
+      "cve": "15014",
+      "nombre": "Atlacomulco"
+    },
+    {
+      "cve": "15015",
+      "nombre": "Atlautla"
+    },
+    {
+      "cve": "15016",
+      "nombre": "Axapusco"
+    },
+    {
+      "cve": "15017",
+      "nombre": "Ayapango"
+    },
+    {
+      "cve": "15018",
+      "nombre": "Calimaya"
+    },
+    {
+      "cve": "15019",
+      "nombre": "Capulhuac"
+    },
+    {
+      "cve": "15020",
+      "nombre": "Coacalco de Berriozábal"
+    },
+    {
+      "cve": "15021",
+      "nombre": "Coatepec Harinas"
+    },
+    {
+      "cve": "15022",
+      "nombre": "Cocotitlán"
+    },
+    {
+      "cve": "15023",
+      "nombre": "Coyotepec"
+    },
+    {
+      "cve": "15024",
+      "nombre": "Cuautitlán"
+    },
+    {
+      "cve": "15025",
+      "nombre": "Chalco"
+    },
+    {
+      "cve": "15026",
+      "nombre": "Chapa de Mota"
+    },
+    {
+      "cve": "15027",
+      "nombre": "Chapultepec"
+    },
+    {
+      "cve": "15028",
+      "nombre": "Chiautla"
+    },
+    {
+      "cve": "15029",
+      "nombre": "Chicoloapan"
+    },
+    {
+      "cve": "15030",
+      "nombre": "Chiconcuac"
+    },
+    {
+      "cve": "15031",
+      "nombre": "Chimalhuacán"
+    },
+    {
+      "cve": "15032",
+      "nombre": "Donato Guerra"
+    },
+    {
+      "cve": "15033",
+      "nombre": "Ecatepec de Morelos"
+    },
+    {
+      "cve": "15034",
+      "nombre": "Ecatzingo"
+    },
+    {
+      "cve": "15035",
+      "nombre": "Huehuetoca"
+    },
+    {
+      "cve": "15036",
+      "nombre": "Hueypoxtla"
+    },
+    {
+      "cve": "15037",
+      "nombre": "Huixquilucan"
+    },
+    {
+      "cve": "15038",
+      "nombre": "Isidro Fabela"
+    },
+    {
+      "cve": "15039",
+      "nombre": "Ixtapaluca"
+    },
+    {
+      "cve": "15040",
+      "nombre": "Ixtapan de la Sal"
+    },
+    {
+      "cve": "15041",
+      "nombre": "Ixtapan del Oro"
+    },
+    {
+      "cve": "15042",
+      "nombre": "Ixtlahuaca"
+    },
+    {
+      "cve": "15043",
+      "nombre": "Xalatlaco"
+    },
+    {
+      "cve": "15044",
+      "nombre": "Jaltenco"
+    },
+    {
+      "cve": "15045",
+      "nombre": "Jilotepec"
+    },
+    {
+      "cve": "15046",
+      "nombre": "Jilotzingo"
+    },
+    {
+      "cve": "15047",
+      "nombre": "Jiquipilco"
+    },
+    {
+      "cve": "15048",
+      "nombre": "Jocotitlán"
+    },
+    {
+      "cve": "15049",
+      "nombre": "Joquicingo"
+    },
+    {
+      "cve": "15050",
+      "nombre": "Juchitepec"
+    },
+    {
+      "cve": "15051",
+      "nombre": "Lerma"
+    },
+    {
+      "cve": "15052",
+      "nombre": "Malinalco"
+    },
+    {
+      "cve": "15053",
+      "nombre": "Melchor Ocampo"
+    },
+    {
+      "cve": "15054",
+      "nombre": "Metepec"
+    },
+    {
+      "cve": "15055",
+      "nombre": "Mexicaltzingo"
+    },
+    {
+      "cve": "15056",
+      "nombre": "Morelos"
+    },
+    {
+      "cve": "15057",
+      "nombre": "Naucalpan de Juárez"
+    },
+    {
+      "cve": "15058",
+      "nombre": "Nezahualcóyotl"
+    },
+    {
+      "cve": "15059",
+      "nombre": "Nextlalpan"
+    },
+    {
+      "cve": "15060",
+      "nombre": "Nicolás Romero"
+    },
+    {
+      "cve": "15061",
+      "nombre": "Nopaltepec"
+    },
+    {
+      "cve": "15062",
+      "nombre": "Ocoyoacac"
+    },
+    {
+      "cve": "15063",
+      "nombre": "Ocuilan"
+    },
+    {
+      "cve": "15064",
+      "nombre": "El Oro"
+    },
+    {
+      "cve": "15065",
+      "nombre": "Otumba"
+    },
+    {
+      "cve": "15066",
+      "nombre": "Otzoloapan"
+    },
+    {
+      "cve": "15067",
+      "nombre": "Otzolotepec"
+    },
+    {
+      "cve": "15068",
+      "nombre": "Ozumba"
+    },
+    {
+      "cve": "15069",
+      "nombre": "Papalotla"
+    },
+    {
+      "cve": "15070",
+      "nombre": "La Paz"
+    },
+    {
+      "cve": "15071",
+      "nombre": "Polotitlán"
+    },
+    {
+      "cve": "15072",
+      "nombre": "Rayón"
+    },
+    {
+      "cve": "15073",
+      "nombre": "San Antonio la Isla"
+    },
+    {
+      "cve": "15074",
+      "nombre": "San Felipe del Progreso"
+    },
+    {
+      "cve": "15075",
+      "nombre": "San Martín de las Pirámides"
+    },
+    {
+      "cve": "15076",
+      "nombre": "San Mateo Atenco"
+    },
+    {
+      "cve": "15077",
+      "nombre": "San Simón de Guerrero"
+    },
+    {
+      "cve": "15078",
+      "nombre": "Santo Tomás"
+    },
+    {
+      "cve": "15079",
+      "nombre": "Soyaniquilpan de Juárez"
+    },
+    {
+      "cve": "15080",
+      "nombre": "Sultepec"
+    },
+    {
+      "cve": "15081",
+      "nombre": "Tecámac"
+    },
+    {
+      "cve": "15082",
+      "nombre": "Tejupilco"
+    },
+    {
+      "cve": "15083",
+      "nombre": "Temamatla"
+    },
+    {
+      "cve": "15084",
+      "nombre": "Temascalapa"
+    },
+    {
+      "cve": "15085",
+      "nombre": "Temascalcingo"
+    },
+    {
+      "cve": "15086",
+      "nombre": "Temascaltepec"
+    },
+    {
+      "cve": "15087",
+      "nombre": "Temoaya"
+    },
+    {
+      "cve": "15088",
+      "nombre": "Tenancingo"
+    },
+    {
+      "cve": "15089",
+      "nombre": "Tenango del Aire"
+    },
+    {
+      "cve": "15090",
+      "nombre": "Tenango del Valle"
+    },
+    {
+      "cve": "15091",
+      "nombre": "Teoloyucan"
+    },
+    {
+      "cve": "15092",
+      "nombre": "Teotihuacán"
+    },
+    {
+      "cve": "15093",
+      "nombre": "Tepetlaoxtoc"
+    },
+    {
+      "cve": "15094",
+      "nombre": "Tepetlixpa"
+    },
+    {
+      "cve": "15095",
+      "nombre": "Tepotzotlán"
+    },
+    {
+      "cve": "15096",
+      "nombre": "Tequixquiac"
+    },
+    {
+      "cve": "15097",
+      "nombre": "Texcaltitlán"
+    },
+    {
+      "cve": "15098",
+      "nombre": "Texcalyacac"
+    },
+    {
+      "cve": "15099",
+      "nombre": "Texcoco"
+    },
+    {
+      "cve": "15100",
+      "nombre": "Tezoyuca"
+    },
+    {
+      "cve": "15101",
+      "nombre": "Tianguistenco"
+    },
+    {
+      "cve": "15102",
+      "nombre": "Timilpan"
+    },
+    {
+      "cve": "15103",
+      "nombre": "Tlalmanalco"
+    },
+    {
+      "cve": "15104",
+      "nombre": "Tlalnepantla de Baz"
+    },
+    {
+      "cve": "15105",
+      "nombre": "Tlatlaya"
+    },
+    {
+      "cve": "15106",
+      "nombre": "Toluca"
+    },
+    {
+      "cve": "15107",
+      "nombre": "Tonatico"
+    },
+    {
+      "cve": "15108",
+      "nombre": "Tultepec"
+    },
+    {
+      "cve": "15109",
+      "nombre": "Tultitlán"
+    },
+    {
+      "cve": "15110",
+      "nombre": "Valle de Bravo"
+    },
+    {
+      "cve": "15111",
+      "nombre": "Villa de Allende"
+    },
+    {
+      "cve": "15112",
+      "nombre": "Villa del Carbón"
+    },
+    {
+      "cve": "15113",
+      "nombre": "Villa Guerrero"
+    },
+    {
+      "cve": "15114",
+      "nombre": "Villa Victoria"
+    },
+    {
+      "cve": "15115",
+      "nombre": "Xonacatlán"
+    },
+    {
+      "cve": "15116",
+      "nombre": "Zacazonapan"
+    },
+    {
+      "cve": "15117",
+      "nombre": "Zacualpan"
+    },
+    {
+      "cve": "15118",
+      "nombre": "Zinacantepec"
+    },
+    {
+      "cve": "15119",
+      "nombre": "Zumpahuacán"
+    },
+    {
+      "cve": "15120",
+      "nombre": "Zumpango"
+    },
+    {
+      "cve": "15121",
+      "nombre": "Cuautitlán Izcalli"
+    },
+    {
+      "cve": "15122",
+      "nombre": "Valle de Chalco Solidaridad"
+    },
+    {
+      "cve": "15123",
+      "nombre": "Luvianos"
+    },
+    {
+      "cve": "15124",
+      "nombre": "San José del Rincón"
+    },
+    {
+      "cve": "15125",
+      "nombre": "Tonanitla"
+    }
+  ],
+  "tarifa_anual_art_109": [
+    {
+      "rango": 1,
+      "li": 1,
+      "ls": 180970,
+      "cf": 176,
+      "factor": 0.000342
+    },
+    {
+      "rango": 2,
+      "li": 180971,
+      "ls": 343840,
+      "cf": 238,
+      "factor": 0.001399
+    },
+    {
+      "rango": 3,
+      "li": 343841,
+      "ls": 554420,
+      "cf": 466,
+      "factor": 0.001447
+    },
+    {
+      "rango": 4,
+      "li": 554421,
+      "ls": 763890,
+      "cf": 771,
+      "factor": 0.00185
+    },
+    {
+      "rango": 5,
+      "li": 763891,
+      "ls": 973930,
+      "cf": 1159,
+      "factor": 0.002364
+    },
+    {
+      "rango": 6,
+      "li": 973931,
+      "ls": 1188880,
+      "cf": 1656,
+      "factor": 0.002766
+    },
+    {
+      "rango": 7,
+      "li": 1188881,
+      "ls": 1403840,
+      "cf": 2251,
+      "factor": 0.003492
+    },
+    {
+      "rango": 8,
+      "li": 1403841,
+      "ls": 1618840,
+      "cf": 3002,
+      "factor": 0.004045
+    },
+    {
+      "rango": 9,
+      "li": 1618841,
+      "ls": 1854060,
+      "cf": 3872,
+      "factor": 0.004381
+    },
+    {
+      "rango": 10,
+      "li": 1854061,
+      "ls": 2100310,
+      "cf": 4903,
+      "factor": 0.004668
+    },
+    {
+      "rango": 11,
+      "li": 2100311,
+      "ls": 2433150,
+      "cf": 6053,
+      "factor": 0.004841
+    },
+    {
+      "rango": 12,
+      "li": 2433151,
+      "ls": 2780990,
+      "cf": 7665,
+      "factor": 0.005124
+    },
+    {
+      "rango": 13,
+      "li": 2780991,
+      "ls": null,
+      "cf": 9448,
+      "factor": 0.003628
+    }
+  ],
+  "baldios_art_109": {
+    "tasa_adicional_pct": 15,
+    "condicion": "Terrenos baldíos urbanos mayores de 200 m²: +15% sobre el monto total a pagar"
+  },
+  "calendario_pago_art_112": {
+    "una_exhibicion_hasta_uma": 6,
+    "una_exhibicion_meses": [
+      1,
+      2,
+      3
+    ],
+    "dos_exhibiciones_hasta_uma": 9,
+    "dos_exhibiciones_meses": [
+      1,
+      7
+    ],
+    "bimestral_meses": [
+      1,
+      3,
+      5,
+      7,
+      9,
+      11
+    ],
+    "sin_actualizacion": "Art. 112 último párrafo: respecto de créditos fiscales de Impuesto Predial no pagados en plazo, no procede su actualización."
+  },
+  "pendientes": [
+    "Bonificaciones por pronto pago (enero/febrero/marzo), estímulo por cumplimiento puntual, bonificación a grupos vulnerables y tasa de recargos 2026: viven en la Ley de Ingresos de los Municipios del Estado de México 2026 (Decreto 239, POGG 17-12-2025) y acuerdos de Cabildo — pendientes de cotejar contra el PDF íntegro del Decreto 239."
+  ]
+}

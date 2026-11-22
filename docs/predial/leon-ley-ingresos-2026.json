@@ -113,7 +113,8 @@
         "cf": 7347305.23,
         "pct": 0.511
       }
-    ]
+    ],
+    "nota_salto_rango_2": "Verificado literalmente en p. 94 de 440 del Decreto 159 (P.O. No. 260, 30-12-2025, sha256 91e6efa75a5c75df...): el tope del rango 1 ($1,552,285.80 * 0.234%) da $3,632.35, pero la ley impresa fija literalmente $3,777.64 como cuota fija del rango 2 (+4% de actualizacion inflacionaria sobre $3,632.35, salto literal de $145.29 en la ley). No es error de transcripcion."
   },
   "tarifa_anual_art_5_fr_II_a": {
     "aplica": "Urbanos, suburbanos y rústicos con edificación cuyo valor se determinó o modificó entre 1-ene-2016 y 31-dic-2020",

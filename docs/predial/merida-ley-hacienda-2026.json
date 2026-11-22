@@ -1,0 +1,179 @@
+{
+  "entidad": "Yucatán",
+  "clave_ent": "31",
+  "abreviatura": "YUC",
+  "municipio": "Mérida",
+  "cve": "31050",
+  "ley": "Ley de Hacienda del Municipio de Mérida (última reforma DOE 31-12-2025, vigente 2026)",
+  "url": "https://portalciudadano.merida.gob.mx/regulaciones_archivos/73/1793133510_LeyHacienda26.pdf",
+  "sha256_pdf": "ce8da1b2b692af0e2c5b8abc4899bc0ea6119fa68208cd09a23637f0aea90bea",
+  "bytes_pdf": 1642748,
+  "paginas_predial": [
+    24,
+    25,
+    132,
+    133,
+    134
+  ],
+  "tarifa_anual_art_47": [
+    {
+      "rango": 1,
+      "li": 0.01,
+      "ls": 100000.0,
+      "cf": 0.0,
+      "factor": 0.0004
+    },
+    {
+      "rango": 2,
+      "li": 100000.01,
+      "ls": 200000.0,
+      "cf": 40.0,
+      "factor": 0.00046
+    },
+    {
+      "rango": 3,
+      "li": 200000.01,
+      "ls": 310000.0,
+      "cf": 86.0,
+      "factor": 0.00055
+    },
+    {
+      "rango": 4,
+      "li": 310000.01,
+      "ls": 400000.0,
+      "cf": 146.5,
+      "factor": 0.0012
+    },
+    {
+      "rango": 5,
+      "li": 400000.01,
+      "ls": 600000.0,
+      "cf": 254.5,
+      "factor": 0.0027
+    },
+    {
+      "rango": 6,
+      "li": 600000.01,
+      "ls": 800000.0,
+      "cf": 794.5,
+      "factor": 0.00273
+    },
+    {
+      "rango": 7,
+      "li": 800000.01,
+      "ls": 1300000.0,
+      "cf": 1340.5,
+      "factor": 0.00275
+    },
+    {
+      "rango": 8,
+      "li": 1300000.01,
+      "ls": 1800000.0,
+      "cf": 2715.5,
+      "factor": 0.00277
+    },
+    {
+      "rango": 9,
+      "li": 1800000.01,
+      "ls": 2800000.0,
+      "cf": 4100.5,
+      "factor": 0.0028
+    },
+    {
+      "rango": 10,
+      "li": 2800000.01,
+      "ls": 3800000.0,
+      "cf": 6900.5,
+      "factor": 0.00282
+    },
+    {
+      "rango": 11,
+      "li": 3800000.01,
+      "ls": 4800000.0,
+      "cf": 9720.5,
+      "factor": 0.0035
+    },
+    {
+      "rango": 12,
+      "li": 4800000.01,
+      "ls": 5800000.0,
+      "cf": 13220.5,
+      "factor": 0.00352
+    },
+    {
+      "rango": 13,
+      "li": 5800000.01,
+      "ls": 6800000.0,
+      "cf": 16740.5,
+      "factor": 0.00355
+    },
+    {
+      "rango": 14,
+      "li": 6800000.01,
+      "ls": 8800000.0,
+      "cf": 20290.5,
+      "factor": 0.00357
+    },
+    {
+      "rango": 15,
+      "li": 8800000.01,
+      "ls": 12000000.0,
+      "cf": 27430.5,
+      "factor": 0.00396
+    },
+    {
+      "rango": 16,
+      "li": 12000000.01,
+      "ls": 22000000.0,
+      "cf": 40102.5,
+      "factor": 0.00398
+    },
+    {
+      "rango": 17,
+      "li": 22000000.01,
+      "ls": 42000000.0,
+      "cf": 79902.5,
+      "factor": 0.00406
+    },
+    {
+      "rango": 18,
+      "li": 42000000.01,
+      "ls": 72000000.0,
+      "cf": 161094.5,
+      "factor": 0.00414
+    },
+    {
+      "rango": 19,
+      "li": 72000000.01,
+      "ls": 112000000.0,
+      "cf": 285318.26,
+      "factor": 0.00422
+    },
+    {
+      "rango": 20,
+      "li": 112000000.01,
+      "ls": 162000000.0,
+      "cf": 454262.57,
+      "factor": 0.00431
+    },
+    {
+      "rango": 21,
+      "li": 162000000.01,
+      "ls": null,
+      "cf": 669666.57,
+      "factor": 0.00439
+    }
+  ],
+  "cuota_minima_art_47": {
+    "uma_anual": 1.0,
+    "pago_mensual": "El importe anual (o 1.0 UMA) se divide entre 12 para determinar el impuesto mensual."
+  },
+  "pronto_pago_art_48": {
+    "enero_pct": 10,
+    "febrero_pct": 10,
+    "condicion": "Pago anual en una sola exhibición durante enero y febrero (bonificación del 0.10)"
+  },
+  "pendientes": [
+    "Recargos mensuales 2026 y estímulos específicos anuales: dependen de la Ley de Ingresos del Municipio de Mérida 2026 (pendiente de anclar por separado)."
+  ]
+}
