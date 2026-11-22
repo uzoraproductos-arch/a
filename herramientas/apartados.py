@@ -2762,7 +2762,8 @@ def sv_servicios_y_nuevo(sf, puertas):
             tarjetas.append('              ' + sv_card(
                 x[2], '%s%s' % (COBRO[x[0]], (' · %d %s' % (len(nv), 'novedad' if len(nv) == 1 else 'novedades')) if nv else ''),
                 x[1], 'Nuevo' if nv else '', sf.resp_liga(sv_pregunta(x[0])[0]), (),
-                SV_TONO[lid], id_='sv-nuevo-%s' % x[0], pie=sv_novedades_lista(x[0], sf, resp=True) if nv else '', ligas=True))
+                SV_TONO[lid], id_='sv-nuevo-%s' % x[0], attrs=' data-sv-srv="%s"' % x[0],
+                pie=(sv_novedades_lista(x[0], sf, resp=True) if nv else '') + sv_most_boton(x[0]), ligas=True))
         paneles.append(
             '          <div class="sv-linea" id="nuevo-%s" data-sv-panel="%s">\n'
             '            <p class="sv-linea-tit"><span aria-hidden="true">%s</span> %s</p>\n'
@@ -2774,6 +2775,91 @@ def sv_servicios_y_nuevo(sf, puertas):
             '          <div class="sv-lineas">\n%s\n          </div>\n        </div>') % (''.join(
                 '<button type="button" class="sv-tab" data-sv-tab="%s" aria-pressed="%s"><span aria-hidden="true">%s</span> %s</button>' % (
                     k, 'true' if n == 0 else 'false', i, corto[k]) for n, (k, i) in enumerate(barra)), '\n'.join(paneles))
+
+
+# El mostrador del Inspector (pedido del autor, 22-11-2026: «este chat lo vamos a
+# integrar… a cada uno de nuestros servicios… al momento en que le dé clic se va a
+# abrir… y ya la respuesta va a ser toda esta parte de nuestro dictamen»). Un solo
+# recuadro para todos los servicios: se abre bajo la tarjeta tocada, con su servicio
+# ya elegido, y contesta ahí mismo con la respuesta completa del Inspector en vista
+# «De un vistazo» (servicios-respuesta.html?vista=1). **Un servicio nuevo necesita su
+# renglón**, o la generación se detiene: (qué se escribe, ejemplo de la caja, qué acepta,
+# ejemplos a un toque, texto del botón de su aplicación). Los ejemplos no nombran a
+# personas físicas; los archivos se leen en la aplicación, en el navegador, sin subirse.
+SV_ENTRADA = {
+    'diligencia': ('rfc', 'RFC, nombre o empresa', 'Un RFC de persona moral o el nombre de la empresa: listas del SAT, sancionados, OFAC, ONU, sus contratos y su grupo.',
+                   ['SEP111205K48', 'Grupo Prodi'], '🪪 Abre la ficha por RFC'),
+    'contrapartes': ('archivo', 'Un RFC, o sube tu cartera', 'Escribe un RFC para probar, o sube tu cartera (CSV, TXT, lo pegado de Excel o tus facturas XML): se lee en tu navegador, sin subirse.',
+                     ['SEP111205K48'], '📎 Sube tu cartera'),
+    'seguimiento': ('rfc', 'RFC o empresa que quieres vigilar', 'Hoy ves su situación en las listas; el aviso cada semana es lo que se pide como servicio.',
+                    ['SEP111205K48', 'Grupo Prodi'], '📡 Abre la 69-B semana a semana'),
+    'facturas': ('archivo', 'Una pregunta sobre tus facturas', 'Sube tus facturas XML (hasta 500): se leen en tu navegador, sin subirse, contra la 69-B y por proveedor.',
+                 ['¿Qué es la lista 69-B?'], '📎 Sube tus facturas XML'),
+    'nomina': ('archivo', 'Tu sueldo o una pregunta de nómina', 'Sube tus recibos de nómina en XML al Lector de facturas, o escribe tu sueldo para ver lo que te retienen y lo que pone el patrón.',
+               ['Gano 15 mil al mes, ¿cuánto me retienen?'], '📎 Sube tus recibos XML'),
+    'gobernanza': ('pregunta', '¿Qué papel quieres revisar?', 'Pregunta por un papel o abre el calendario: cada plazo con su ley y su artículo.',
+                   ['¿Cuánto tiempo guardo mis facturas?'], '🗄️ Abre el calendario de conservación'),
+    'radiografia': ('lugar', 'Municipio o estado', 'Escribe un municipio o un estado: lo que le entra, lo que gasta, lo que debe y lo que dejó por aclarar.',
+                    ['Zapopan', 'Nuevo León'], '🗺️ Ábrelo en el Planisferio'),
+    'temporada': ('nota', 'La liga de una nota o la cifra que circula', 'Pega la liga de una nota o escribe la afirmación: se coteja contra el documento oficial.',
+                  ['¿Es cierto que la deuda bajó?'], '📰 Abre Contrasta una nota'),
+    'entrega': ('lugar', 'El municipio o el estado que recibes', 'Su deuda, sus obras y lo que la ASF dejó abierto, con su documento.',
+                ['Zapopan', 'Deuda de Nuevo León'], '🏛️ Abre lo que debe'),
+    'revision': ('pregunta', 'La cifra, el contrato o la obra', 'Escribe la cifra o el contrato: te decimos si consta en un documento oficial y en cuál.',
+                 ['Tren Maya', 'Dos Bocas'], '🧾 Abre el dictamen cívico'),
+    'expediente': ('pregunta', 'Una obra, un programa o una empresa', 'Lo que ya trae su expediente: la bitácora, lo que sigue y lo que falta.',
+                   ['Expediente del Tren Maya', 'Segalmex'], '🗂️ Abre los expedientes'),
+    'capacitacion': ('pregunta', '¿Qué quieres que aprenda tu equipo?', 'Pregunta por un tema: te contestamos con la base y el taller lo lleva a tu caso.',
+                     ['¿Cómo se audita?', '¿Qué es el control interno?'], '🎓 Abre cómo se audita'),
+    'licencia': ('pregunta', '¿Qué herramienta te interesa?', 'Prueba cualquiera aquí; la licencia es para usarlas en tu organización.',
+                 ['Herramientas del Auditor'], '🛠️ Abre las herramientas'),
+    'simulacion': ('pregunta', 'Tu sueldo o tu caso', 'El simulador hace la cuenta con su artículo; no es asesoría ni declaración.',
+                   ['Gano 15 mil al mes, ¿cuánto me retienen?', 'Me despidieron, ¿cuánto me toca?'], '🧮 Abre tu estado de cuenta cívico'),
+    'escenarios': ('pregunta', 'El escenario que quieres ver', 'Reparte el presupuesto o mueve una obra: es un escenario, nunca un pronóstico.',
+                   ['¿Cuánto cuesta el Tren Maya?'], '🧩 Abre el simulador del presupuesto'),
+}
+
+
+def sv_most_boton(sid):
+    """La puerta de cada tarjeta al mostrador del Inspector (sv-mostrador.js)."""
+    import servicios_fichas as sf
+    return '<a class="sv-most-abre" href="%s" data-sv-most="%s"><span aria-hidden="true">🔍</span> Revísalo aquí ➔</a>' % (
+        esc_attr(sf.resp_liga(sv_pregunta(sid)[0])), sid)
+
+
+def sv_mostrador(sf):
+    """El mostrador: un solo recuadro, el servicio elegido, la caja según el servicio,
+    ejemplos a un toque y la respuesta en su marco. Sin JavaScript es un formulario
+    que abre la respuesta completa en su página. Nunca un monto."""
+    falta = sorted({x[0] for x in SERVICIOS} - set(SV_ENTRADA))
+    if falta:
+        raise SystemExit('Servicios: SV_ENTRADA no dice qué recibe %s' % ', '.join(falta))
+    monta = sv_monta()
+    datos = {}
+    for x in SERVICIOS:
+        k, ph, ay, ej, bt = SV_ENTRADA[x[0]]
+        datos[x[0]] = {'n': x[2], 'k': k, 'ph': ph, 'ay': ay, 'ej': ej, 'q': sv_pregunta(x[0])[0],
+                       'app': monta[x[0]][1], 'bt': bt, 'cobro': COBRO[x[0]]}
+    opciones = ''.join('<optgroup label="%s">%s</optgroup>' % (esc_attr(tit), ''.join(
+        '<option value="%s">%s</option>' % (x[0], html.escape(x[2])) for x in SERVICIOS if x[6] == lid))
+        for lid, _i, tit, _t in LINEAS if any(x[6] == lid for x in SERVICIOS))
+    return ('<div class="sv-most" id="mostrador" hidden>\n'
+            '          <script type="application/json" id="svMostDatos">%s</script>\n'
+            '          <form class="sv-most-caja" action="%s" method="get" role="search" aria-label="El Inspector de Servicios">\n'
+            '            <div class="sv-most-cab"><span class="sv-most-logo" aria-hidden="true">🔍</span><b>El Inspector</b>'
+            '<label for="svMostSrv">Servicio</label><select id="svMostSrv">%s</select>'
+            '<button type="button" class="sv-most-cierra" aria-label="Cerrar el Inspector">✕</button></div>\n'
+            '            <div class="sv-most-fila"><input id="svMostQ" name="q" type="text" maxlength="300" autocomplete="off" aria-describedby="svMostAy">'
+            '<input type="hidden" name="vista" value="1"><button type="submit" class="sz-btn sz-btn-of">Revisar</button></div>\n'
+            '            <p class="sv-most-ay" id="svMostAy"></p>\n'
+            '            <p class="sv-most-ej"><span>Pruébalo:</span> <span id="svMostEj"></span> <button type="button" class="sv-most-app" id="svMostApp"></button></p>\n'
+            '          </form>\n'
+            '          <div class="sv-most-res" id="svMostRes" hidden aria-live="polite">'
+            '<p class="sv-most-carga" id="svMostCarga">Revisando la base…</p>'
+            '<iframe name="av-en-chat" id="svMostMarco" title="La respuesta del Inspector"></iframe></div>\n'
+            '          <p class="sv-most-pie">Los archivos se leen en tu navegador y no se suben. Cada cifra trae su documento; la revisión no es un documento oficial ni un peritaje, '
+            'y una coincidencia en una lista es una señal para revisar, nunca una acusación. ¿Prefieres platicar? <a href="%s">Abre el Inspector completo ➔</a></p>\n'
+            '        </div>') % (json.dumps(datos, ensure_ascii=False).replace('</', '<\\/'), sf.SV_RESP, opciones, sf.SV_CHAT)
 
 
 SV_OPERA = [('Antes de contratar', ('sectores', 'modulos', 'riesgo', 'calendario')),
@@ -2966,7 +3052,7 @@ def servicios():
         '            <p class="sv-hero-tit">Lo que dicen los documentos, antes de que decidas.</p>',
         '            <p class="sv-hero-tx">Antes de pagarle a un proveedor, de aceptar a un cliente, de votar o de recibir un gobierno: '
         'cruzamos la lista 69-B del SAT, los contratos públicos, la ASF y la ley. Te decimos lo que encontramos, lo que falta y quién lo debe.</p>',
-        '            <div class="sv-hero-acc"><a class="sz-btn sz-btn-of" href="#inspector">Cuéntale tu caso al Inspector</a>'
+        '            <div class="sv-hero-acc"><a class="sz-btn sz-btn-of" href="#necesitas">Elige tu servicio y revísalo</a>'
         '<a class="sz-btn" href="herramienta-inspector-padron.html">Revisa un RFC gratis</a></div>',
         '            <ul class="sv-hero-prom">',
         '              <li><span aria-hidden="true">🧾</span><b>Cada cifra con su documento</b></li>',
@@ -3331,21 +3417,18 @@ def servicios():
     # y el tablero), lo que arriesgas si no revisas, la base al día, por qué es seguro,
     # cuánto cuesta y las preguntas. El catálogo completo sigue en su página.
     pasos3 = [
-        ('🔍', 'Cuéntale tu caso al Inspector', 'Es el chat de Servicios, con todas las aplicaciones del modo Inspector y toda la base. '
-         'Te contesta en corto, aquí mismo; la respuesta completa abre en su propia página.'),
-        ('🧾', 'Recibe tu dictamen', 'La página de la respuesta cierra con tu Dictamen cívico independiente, con folio, huella y fuentes. No es un documento oficial ni un peritaje.'),
-        ('📝', 'Cotiza si quieres ir más a fondo', 'El chat te dice qué servicio le toca a tu caso. Tu misma pregunta pasa a la cotización, y el costo y el plazo te llegan por escrito antes de empezar.'),
+        ('🔍', 'Elige tu servicio y escribe tu caso', 'Toca un servicio aquí abajo: se abre el Inspector con ese servicio ya elegido. '
+         'Escribe un RFC, una empresa o un lugar, o sube tus archivos; se leen en tu navegador.'),
+        ('🧾', 'Ve la revisión completa y tu dictamen', 'Ahí mismo, de un vistazo, lo que encontró la base; abajo, la revisión completa con sus fuentes '
+         'y el botón de tu dictamen, con folio y huella. No es un documento oficial ni un peritaje.'),
+        ('📝', 'Pide más solo si lo necesitas', 'Lo que la base no hace sola (el aviso cada semana, tu cartera completa, documentos no públicos) se pide con un toque, '
+         'con la solicitud ya llena.'),
     ]
     como3 = '\n'.join([
         '<ol class="sv-p3">%s</ol>' % ''.join(
             '<li><span class="sv-p3-n" aria-hidden="true">%d</span><span class="sv-p3-ico" aria-hidden="true">%s</span><b>%s</b><span>%s</span></li>'
             % (n, ico, t, tx) for n, (ico, t, tx) in enumerate(pasos3, 1)),
-        '        <form class="sv-preg" id="inspector" action="%s" method="get" role="search" aria-label="Cuéntale tu caso al Inspector">' % sf.SV_CHAT,
-        '          <label for="svPreg">Cuéntale tu caso al Inspector</label>',
-        '          <div class="sv-preg-fila"><input id="svPreg" name="q" type="text" maxlength="300" required '
-        'placeholder="Ej.: ¿Cómo reviso a un proveedor antes de contratarlo?">'
-        '<button type="submit" class="sz-btn sz-btn-of">Preguntar</button></div>',
-        '        </form>'])
+        '        <p class="sv-p3-ir"><a class="sz-btn sz-btn-of" href="#necesitas">Elige tu servicio ⬇</a></p>'])
     from insp_conservacion import LEYES as LEYES_CONS
     leyes_sv = dict(LEYES_CONS, cpf=SV_CPF)
     for c in SV_CONSECUENCIAS:
@@ -3387,7 +3470,7 @@ def servicios():
     # familia (pedido del autor, 21-11-2026: «cada una de esas novedades… a los
     # servicios que ofrecemos… dividido en las secciones que correspondan»).
     import servicios_fichas as sf
-    necesitas = '<span id="nuevo"></span>' + sv_servicios_y_nuevo(sf, puertas)
+    necesitas = '<span id="nuevo"></span>' + sv_servicios_y_nuevo(sf, puertas) + '\n        ' + sv_mostrador(sf)
     # Las ligas viejas a una sección que se mudó, y las que traen el tema o el
     # servicio (?tema=, ?servicio=, ?plan=), se mandan a su página.
     redir = ('<script>(function () { var m = %s, h = decodeURIComponent(location.hash.slice(1)), q = location.search, '
@@ -3405,7 +3488,7 @@ def servicios():
         'entrada': ('La consulta es libre y lo seguirá siendo. Cuando quieras ir más a fondo, lo hacemos por encargo, con la misma regla. '
                     'Los Servicios y las <a href="donaciones.html">donaciones</a> sostienen el trabajo; ninguno compra lo que publicamos.'),
         'sin_saltos': True, 'redirige': redir,
-        'scripts': ['servicios.js'],  # las pestañas de los servicios por familia
+        'scripts': ['servicios.js', 'sv-mostrador.js'],  # las pestañas por familia y el mostrador del Inspector
         'antes': aviso,
         'secciones': [
             bloque_sec('propuesta', 'Lo que te ofrecemos', '', sv_liga(portada, 'servicios.html'), sin_cab=True),

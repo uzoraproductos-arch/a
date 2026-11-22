@@ -511,3 +511,34 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 @media (max-width: 860px) { .sv-opera-fila { grid-template-columns: 1fr; } }
 [data-theme="dark"] .sv-opera { background: #1b2a44; border-color: #2a3b57; }
 [data-theme="dark"] .sv-opera-tit, [data-theme="dark"] .sv-opera-fila > b, [data-theme="dark"] .sv-opera-cobro { color: #e8eefa; }
+/* El mostrador del Inspector (22-11-2026): el recuadro azul, bajo la tarjeta tocada. */
+.sv-most { margin: 16px 0 4px; display: grid; gap: 12px; scroll-margin-top: 90px; }
+.sv-most-caja { display: grid; gap: 10px; padding: 18px; border-radius: 20px; background: linear-gradient(135deg, #0b2a63, #1d4fa3); color: #fff; }
+.sv-most-cab { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.sv-most-cab > b { font-size: 18px; margin-right: auto; }
+.sv-most-logo { font-size: 22px; }
+.sv-most-cab label { font-size: 15px; opacity: .9; }
+.sv-most-cab select { min-height: 44px; max-width: 100%; border-radius: 12px; border: 0; padding: 6px 12px; font: 16px 'Inter', system-ui, sans-serif; color: #0b2a63; background: #fff; }
+.sv-most-cierra { min-width: 44px; min-height: 44px; border-radius: 12px; border: 1px solid rgba(255,255,255,.4); background: transparent; color: #fff; font-size: 18px; cursor: pointer; }
+.sv-most-fila { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+.sv-most-fila input[type="text"] { min-height: 48px; border-radius: 12px; border: 0; padding: 8px 14px; font: 16px 'Inter', system-ui, sans-serif; color: #0b2a63; background: #fff; min-width: 0; }
+.sv-most-fila .sz-btn { min-height: 48px; }
+.sv-most-ay { margin: 0; font-size: 16px; line-height: 1.5; opacity: .95; }
+.sv-most-ej { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.sv-most-ej > span:first-child { font-weight: 700; }
+.sv-most-chip, .sv-most-app { min-height: 44px; display: inline-flex; align-items: center; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.5);
+  background: rgba(255,255,255,.12); color: #fff; font: 15px 'Inter', system-ui, sans-serif; cursor: pointer; text-decoration: none; }
+.sv-most-app { background: #fff; color: #0b2a63; font-weight: 700; border-color: #fff; }
+.sv-most-chip:hover, .sv-most-chip:focus-visible { background: rgba(255,255,255,.25); }
+.sv-most-res { border: 1px solid #c9d6ee; border-radius: 18px; background: #fff; overflow: hidden; }
+.sv-most-res iframe { display: block; width: 100%; min-height: 420px; border: 0; background: #fff; }
+.sv-most-carga { margin: 0; padding: 14px 18px; color: #24324d; font-weight: 700; }
+.sv-most-pie { margin: 0; font-size: 15px; line-height: 1.5; color: #4a5a6a; }
+.sv-most-abre { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-top: 8px; font-weight: 700; color: #1d4fa3; text-decoration: none; }
+.sv-most-abre:hover { text-decoration: underline; }
+.sv-card.sv-most-activa { outline: 3px solid #1d4fa3; outline-offset: 2px; }
+.sv-p3-ir { margin: 14px 0 0; }
+@media (max-width: 560px) { .sv-most-fila { grid-template-columns: 1fr; } }
+[data-theme="dark"] .sv-most-res { background: #fff; border-color: #2a3b57; }
+[data-theme="dark"] .sv-most-pie { color: #c3cee2; }
+[data-theme="dark"] .sv-most-abre { color: #8fb4ff; }
