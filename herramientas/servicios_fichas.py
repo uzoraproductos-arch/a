@@ -37,6 +37,8 @@ CHAT = 'herramienta-inspector-pregunta.html'
 SV_CHAT = 'servicios-inspector.html'
 # Y su respuesta completa, en su propia página (asistente.SV_RESPUESTA).
 SV_RESP = 'servicios-respuesta.html'
+# La página propia del Inspector de cada servicio (pedido del autor, 22-11-2026).
+SV_REVISA = 'servicios-revisa.html'
 
 FICHAS = {
     'diligencia': {
@@ -418,6 +420,14 @@ def pestana_de(archivo):
     if a.startswith('noticias'):
         return 'Noticiero'
     return 'Comunidad'
+
+
+def revisa_liga(sid, q=None, abre=None):
+    """La liga a la página del Inspector de un servicio (servicios-revisa.html, 22-11-2026):
+    abre con ese servicio ya elegido; con `q=`, ya revisando. Nunca ?servicio= (es de la cotización)."""
+    from urllib.parse import quote
+    return '%s?s=%s%s%s' % (SV_REVISA, sid, '&q=%s' % quote(q) if q else '',
+                            '&abre=%s' % quote(html.unescape(abre), safe='/-_.') if abre else '')
 
 
 def resp_liga(q, abre=None):
