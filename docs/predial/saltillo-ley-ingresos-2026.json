@@ -1,0 +1,148 @@
+{
+  "entidad": "Coahuila de Zaragoza",
+  "clave_ent": "05",
+  "abreviatura": "COAH",
+  "municipio": "Saltillo",
+  "cve": "05030",
+  "ley": "Ley de Ingresos del Municipio de Saltillo, Coahuila de Zaragoza, para el Ejercicio Fiscal 2026 (Decreto 369, Periódico Oficial de Coahuila, 23-12-2025)",
+  "url": "https://saltillo.gob.mx/wp-content/uploads/2026/01/LEY-DE-INGRESOS-SALTILLO-2026_1.pdf",
+  "sha256_pdf": "cd90394a66937ee94b25790dc2c8824b96736316b03d6b0ef9955b863910f6bc",
+  "bytes_pdf": 1675839,
+  "paginas_predial": [
+    2,
+    6,
+    7,
+    8,
+    72,
+    73
+  ],
+  "ingresos_estimados_predial_2026": 584759000.0,
+  "tarifa_bimestral_art_2_fr_I": [
+    {
+      "rango": 1,
+      "li": 0.01,
+      "ls": 121980.0,
+      "cf": 35.3,
+      "factor": 0.0
+    },
+    {
+      "rango": 2,
+      "li": 121980.01,
+      "ls": 168907.0,
+      "cf": 40.01,
+      "factor": 0.00016
+    },
+    {
+      "rango": 3,
+      "li": 168907.01,
+      "ls": 238762.0,
+      "cf": 55.35,
+      "factor": 0.0001692
+    },
+    {
+      "rango": 4,
+      "li": 238762.01,
+      "ls": 315248.0,
+      "cf": 78.36,
+      "factor": 0.000179
+    },
+    {
+      "rango": 5,
+      "li": 315248.01,
+      "ls": 460228.0,
+      "cf": 103.25,
+      "factor": 0.0001894
+    },
+    {
+      "rango": 6,
+      "li": 460228.01,
+      "ls": 706714.0,
+      "cf": 151.38,
+      "factor": 0.0002003
+    },
+    {
+      "rango": 7,
+      "li": 706714.01,
+      "ls": 1122687.0,
+      "cf": 230.7,
+      "factor": 0.0002119
+    },
+    {
+      "rango": 8,
+      "li": 1122687.01,
+      "ls": 1907908.0,
+      "cf": 365.85,
+      "factor": 0.000239
+    },
+    {
+      "rango": 9,
+      "li": 1907908.01,
+      "ls": 3360563.0,
+      "cf": 610.0,
+      "factor": 0.000239
+    },
+    {
+      "rango": 10,
+      "li": 3360563.01,
+      "ls": 7010000.0,
+      "cf": 1075.55,
+      "factor": 0.000255
+    },
+    {
+      "rango": 11,
+      "li": 7010000.01,
+      "ls": 16222552.0,
+      "cf": 2250.0,
+      "factor": 0.0002735
+    },
+    {
+      "rango": 12,
+      "li": 16222552.01,
+      "ls": 49750200.0,
+      "cf": 4985.77,
+      "factor": 0.0002945
+    },
+    {
+      "rango": 13,
+      "li": 49750200.01,
+      "ls": 148404900.0,
+      "cf": 14885.38,
+      "factor": 0.000316
+    },
+    {
+      "rango": 14,
+      "li": 148404900.01,
+      "ls": 465100000.0,
+      "cf": 42250.0,
+      "factor": 0.0003385
+    },
+    {
+      "rango": 15,
+      "li": 465100000.01,
+      "ls": null,
+      "cf": 144700.0,
+      "factor": 0.000345
+    }
+  ],
+  "formula_bimestral": "((VC - LI) * factor) + cf; anual = bimestral * 6",
+  "sobretasas_art_2": {
+    "baldio_urbano_o_suburbano_bulevar_pct": 25,
+    "rustico_y_ejidal_titulado_pct": 100
+  },
+  "cuota_minima_anual": 245.15,
+  "pronto_pago_art_2": {
+    "enero_pct": 15,
+    "febrero_pct": 10,
+    "marzo_pct": 5,
+    "condicion": "Pago anual anticipado en una sola exhibición, cuenta al corriente"
+  },
+  "beneficio_social_art_2": {
+    "descuento_pct": 50,
+    "tope_valor_catastral": "100 veces el valor anual de la UMA (sobre el excedente aplica la tasa correspondiente)",
+    "beneficiarios": "Pensionados, jubilados, adultos mayores (60+ años) y personas con discapacidad; casa habitación única, pago anual anticipado y padrón catastral vigente"
+  },
+  "recargos_arts_48_49": {
+    "mora_mensual_pct": 2.0,
+    "parcialidades_diferido_mensual_pct": 1.5
+  }
+}

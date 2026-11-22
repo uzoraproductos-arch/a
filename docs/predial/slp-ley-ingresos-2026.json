@@ -1,0 +1,290 @@
+{
+  "entidad": "San Luis Potosí",
+  "clave_ent": "24",
+  "abreviatura": "SLP",
+  "municipio": "San Luis Potosí",
+  "cve": "24028",
+  "ley": "Ley de Ingresos para el Municipio de San Luis Potosí, S.L.P., para el Ejercicio Fiscal 2026 (Decreto 0410, Periódico Oficial Plan de San Luis / Gaceta Municipal No. 226, 30-12-2025)",
+  "url": "https://sitio.sanluis.gob.mx/pagAyuntamientoCMS/storage/Medios//2026/01/226-DECRETO%200410-%20Que%20expide%20la%20Ley%20de%20Ingresos%20para%20el%20Municipio%20de%20San%20Luis%20Potosi%CC%81,%20SLP,%20para%20el%20ejercicio%20fiscal%202026.pdf",
+  "sha256_pdf": "a9b24442e237c0d921973c555c5c9872a7575f26c3b1b97e99d4560755be2d1e",
+  "bytes_pdf": 2808817,
+  "paginas_predial": [
+    5,
+    9,
+    10,
+    11,
+    73,
+    74
+  ],
+  "ingresos_estimados_predial_2026": 463500000.0,
+  "tarifa_anual_habitacional_inciso_a": [
+    {
+      "rango": 1,
+      "li": 0.0,
+      "ls": 298733.0,
+      "cf": 452.16,
+      "factor": 0.00151359
+    },
+    {
+      "rango": 2,
+      "li": 298733.01,
+      "ls": 366162.32,
+      "cf": 452.17,
+      "factor": 0.00154859
+    },
+    {
+      "rango": 3,
+      "li": 366162.33,
+      "ls": 556566.72,
+      "cf": 556.6,
+      "factor": 0.00158359
+    },
+    {
+      "rango": 4,
+      "li": 556566.73,
+      "ls": 845981.42,
+      "cf": 858.13,
+      "factor": 0.00161859
+    },
+    {
+      "rango": 5,
+      "li": 845981.43,
+      "ls": 1285891.76,
+      "cf": 1326.59,
+      "factor": 0.00165359
+    },
+    {
+      "rango": 6,
+      "li": 1285891.77,
+      "ls": 1954555.48,
+      "cf": 2054.03,
+      "factor": 0.00168859
+    },
+    {
+      "rango": 7,
+      "li": 1954555.49,
+      "ls": 2970924.33,
+      "cf": 3183.14,
+      "factor": 0.00172359
+    },
+    {
+      "rango": 8,
+      "li": 2970924.34,
+      "ls": 4515804.97,
+      "cf": 4934.96,
+      "factor": 0.00175859
+    },
+    {
+      "rango": 9,
+      "li": 4515804.98,
+      "ls": 6864023.56,
+      "cf": 7651.78,
+      "factor": 0.00179359
+    },
+    {
+      "rango": 10,
+      "li": 6864023.57,
+      "ls": 10433315.81,
+      "cf": 11863.54,
+      "factor": 0.00182859
+    },
+    {
+      "rango": 11,
+      "li": 10433315.82,
+      "ls": 15858640.03,
+      "cf": 18390.33,
+      "factor": 0.00186359
+    },
+    {
+      "rango": 12,
+      "li": 15858640.04,
+      "ls": 24105132.85,
+      "cf": 28500.93,
+      "factor": 0.00189859
+    },
+    {
+      "rango": 13,
+      "li": 24105132.86,
+      "ls": 36639801.94,
+      "cf": 44157.66,
+      "factor": 0.00193359
+    },
+    {
+      "rango": 14,
+      "li": 36639801.95,
+      "ls": 55692498.94,
+      "cf": 68394.61,
+      "factor": 0.00196859
+    }
+  ],
+  "nota_habitacional_rango_14": "En el PDF oficial (p. 9), la tabla del inciso a) termina en el rango 14 ($55,692,498.94); el rango 1 aplica tasa mínima de 0.00152029 con piso de 4 UMA.",
+  "tarifa_anual_comercial_inciso_b": [
+    {
+      "rango": 1,
+      "li": 0.0,
+      "ls": 282500.0,
+      "cf": 481.1,
+      "factor": 0.0
+    },
+    {
+      "rango": 2,
+      "li": 282500.01,
+      "ls": 366162.32,
+      "cf": 481.11,
+      "factor": 0.002
+    },
+    {
+      "rango": 3,
+      "li": 366162.33,
+      "ls": 556566.72,
+      "cf": 648.44,
+      "factor": 0.002085
+    },
+    {
+      "rango": 4,
+      "li": 556566.73,
+      "ls": 845981.42,
+      "cf": 1045.45,
+      "factor": 0.00217
+    },
+    {
+      "rango": 5,
+      "li": 845981.43,
+      "ls": 1285891.76,
+      "cf": 1673.49,
+      "factor": 0.002255
+    },
+    {
+      "rango": 6,
+      "li": 1285891.77,
+      "ls": 1954555.48,
+      "cf": 2665.5,
+      "factor": 0.00234
+    },
+    {
+      "rango": 7,
+      "li": 1954555.49,
+      "ls": 2970924.33,
+      "cf": 4230.18,
+      "factor": 0.002425
+    },
+    {
+      "rango": 8,
+      "li": 2970924.34,
+      "ls": 4515804.97,
+      "cf": 6694.88,
+      "factor": 0.00251
+    },
+    {
+      "rango": 9,
+      "li": 4515804.98,
+      "ls": 6864023.56,
+      "cf": 10572.54,
+      "factor": 0.002595
+    },
+    {
+      "rango": 10,
+      "li": 6864023.57,
+      "ls": 10433315.81,
+      "cf": 16666.18,
+      "factor": 0.00268
+    },
+    {
+      "rango": 11,
+      "li": 10433315.82,
+      "ls": 15858640.03,
+      "cf": 26231.89,
+      "factor": 0.002765
+    },
+    {
+      "rango": 12,
+      "li": 15858640.04,
+      "ls": 24105132.85,
+      "cf": 41232.93,
+      "factor": 0.00285
+    },
+    {
+      "rango": 13,
+      "li": 24105132.86,
+      "ls": 36639801.94,
+      "cf": 64735.44,
+      "factor": 0.002935
+    },
+    {
+      "rango": 14,
+      "li": 36639801.95,
+      "ls": 55692498.94,
+      "cf": 101524.7,
+      "factor": 0.00302
+    },
+    {
+      "rango": 15,
+      "li": 55692498.95,
+      "ls": 84652598.39,
+      "cf": 159063.86,
+      "factor": 0.003105
+    },
+    {
+      "rango": 16,
+      "li": 84652598.4,
+      "ls": 128671949.56,
+      "cf": 248984.98,
+      "factor": 0.00319
+    },
+    {
+      "rango": 17,
+      "li": 128671949.57,
+      "ls": 195581363.33,
+      "cf": 389406.72,
+      "factor": 0.003275
+    },
+    {
+      "rango": 18,
+      "li": 195581363.34,
+      "ls": 297283672.26,
+      "cf": 608535.06,
+      "factor": 0.00336
+    },
+    {
+      "rango": 19,
+      "li": 297283672.27,
+      "ls": 451871181.84,
+      "cf": 950254.83,
+      "factor": 0.003445
+    },
+    {
+      "rango": 20,
+      "li": 451871181.85,
+      "ls": 686844196.4,
+      "cf": 1482808.81,
+      "factor": 0.00353
+    },
+    {
+      "rango": 21,
+      "li": 686844196.41,
+      "ls": null,
+      "cf": 2312263.56,
+      "factor": 0.003615
+    }
+  ],
+  "otras_tasas": {
+    "rustico_agricola_ganadero_al_millar": 1.03,
+    "rustico_industrial_al_millar": 1.05,
+    "rustico_comercial_turistico_al_millar": 1.545,
+    "baldio_sin_bardear_ni_cercar_al_millar": 6.0
+  },
+  "cuota_minima_anual_uma": 4.0,
+  "pronto_pago_art_62_fr_II": {
+    "enero_pct": 15,
+    "febrero_pct": 10,
+    "marzo_pct": 5,
+    "condicion": "Liquidación total del impuesto predial anual en una sola exhibición"
+  },
+  "beneficio_social_art_62_fr_II": {
+    "descuento_pct": 50,
+    "beneficiarios": "Personas mayores de 60 años, jubilados, pensionados, personas con discapacidad y pueblos originarios; casa de su propiedad que habiten con credencial INE/INAPAM actualizada"
+  },
+  "pendientes": [
+    "Recargos mensuales 2026: remite a la Ley de Hacienda para los Municipios / Código Fiscal del Estado de San Luis Potosí."
+  ]
+}

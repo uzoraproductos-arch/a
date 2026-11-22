@@ -1,0 +1,20 @@
+{
+  "puebla_codigo_fiscal_municipal": {
+    "municipio": "Puebla, Puebla",
+    "cve": "21114",
+    "ordenamiento": "Código Fiscal y Presupuestario para el Municipio de Puebla",
+    "url": "https://gobiernoabierto.pueblacapital.gob.mx/transparencia_file/tesoreria/77.fracc01/codigo_fiscal_puebla.pdf",
+    "sha256_pdf": "23e74a858973de6d584f7dfb00f8ac0a9741290702f81440322b34ea673d2202",
+    "bytes_pdf": 944929,
+    "epoca_pago_art_180": "Dentro de los dos primeros meses de cada año (enero y febrero). Los pagos posteriores al último día de febrero causan recargos conforme al Art. 75 de la Ley de Ingresos 2026 (2% mensual)."
+  },
+  "queretaro_codigo_fiscal_estatal": {
+    "municipio": "Querétaro, Querétaro",
+    "cve": "22014",
+    "ordenamiento": "Código Fiscal del Estado de Querétaro",
+    "url": "http://legislaturaqueretaro.gob.mx/app/uploads/est-leg/codigos/COD003_59.pdf",
+    "sha256_pdf": "25ece561e98ebfc92525eea2b394e37d9537dcb37cee119347772cb62d1d1e7f",
+    "bytes_pdf": 1099911,
+    "recargos_art_44": "Remite a las tasas de pago a plazos que establezca la Ley de Ingresos de la Federación (LIF), aplicadas sobre el monto actualizado conforme al Art. 40 del propio Código."
+  }
+}
