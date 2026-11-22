@@ -2298,16 +2298,28 @@ PERFILES = [
     ('🎓', 'Universidades y academia', 'Contaduría, Derecho, Economía, Administración y políticas públicas, Ciencia política y Periodismo.',
      'Enseñar a leer el presupuesto y a fiscalizar con datos reales y citables, en clase, en un servicio social o en una tesis.',
      ['capacitacion', 'licencia', 'escenarios', 'simulacion'],
-     [('enciclopedia-auditavision.html', 'La Enciclopedia'), ('planisferio.html', 'El Planisferio')]),
+     [('diccionario.html', 'La Biblioteca del Erario'), ('planisferio.html', 'El Planisferio')]),
     ('📋', 'Gobiernos y dependencias', 'Tesorerías, contralorías y áreas de transparencia.',
      'Capacitar a su personal con las observaciones que la ASF repite, y revisar su nómina contra la Ley del ISSSTE y el tope del artículo 127. '
      'Nunca a cambio de retirar, suavizar o retrasar lo que publicamos (política de independencia).',
      ['capacitacion', 'nomina', 'licencia'],
      [('herramienta-inspector-asf.html', 'Auditorías de la ASF'), ('aprende-auditoria.html', 'Cómo se audita')]),
+    # Ronda 7 (22-11-2026, pedido del autor: «hacia qué entes o personas va dirigido… justificando la razón»).
+    ('🏢', 'Empresas y áreas de compras', 'Compras, tesorería y dirección de empresas que le compran a otras o le venden al gobierno.',
+     'Antes de pagar o de firmar: saber si tu proveedor está en la lista 69-B del SAT (CFF, art. 69-B) o en el Directorio de Proveedores '
+     'Sancionados, y qué contratos públicos trae, con su documento.',
+     ['contrapartes', 'facturas', 'diligencia', 'seguimiento'],
+     [('herramienta-inspector-padron.html', 'Revisa a tu contraparte'), ('contratos-publicos.html', 'Contratos públicos de una empresa')]),
+    ('🙋', 'Ciudadanía', 'Cualquier persona que paga impuestos, predial o renta y quiere saber qué se hace con su dinero.',
+     'La consulta es libre y lo seguirá siendo: el chat, el Planisferio y los simuladores (tu predial con la ley de tu municipio, lo que te '
+     'retienen) no se cobran. Por encargo, solo si quieres ir más a fondo.',
+     ['simulacion', 'escenarios', 'expediente'],
+     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('herramienta-calculadora-predial.html', 'Tu impuesto predial')]),
 ]
 
 # El nombre corto de cada perfil, para su pestaña (en el orden de PERFILES).
-PERFILES_CORTO = ['Contaduría', 'Derecho y PLD', 'Auditoría', 'Periodismo', 'Candidaturas', 'Regidurías y congresos', 'Universidades', 'Gobiernos']
+PERFILES_CORTO = ['Contaduría', 'Derecho y PLD', 'Auditoría', 'Periodismo', 'Candidaturas', 'Regidurías y congresos', 'Universidades', 'Gobiernos',
+                  'Empresas', 'Ciudadanía']
 
 # Por qué revisar antes de pagar: claves de fraude.cifras(). Se leen de ahí
 # con su valor, su chip y su fuente; nunca se copian.
@@ -2751,6 +2763,24 @@ def sv_novedades_lista(sid, sf, resp=False):
         for i, t, tx, lg, _k in sf.nuevos(sid))
 
 
+def sv_para_quien(sf):
+    """«¿Para quién es?» en la portada de Servicios (Ronda 7, 22-11-2026): cada perfil de PERFILES, en corto, con para qué
+    le sirve (su fundamento), sus servicios (cada uno abre su Inspector) y lo que puede revisar gratis. No repite datos:
+    sale de PERFILES, la misma lista de servicios-tu-perfil.html. Nunca dice que la plataforma cumple por nadie."""
+    nom = {x[0]: (x[1], x[2]) for x in SERVICIOS}
+    return ('<div class="sv-pq">\n%s\n        </div>\n'
+            '        <p class="sv-nota">Revisar no te libra de nada ni cumple por ti ante una autoridad: te da las señales, con su documento, para '
+            'que decidas. El detalle de cada perfil está en <a href="servicios-tu-perfil.html">Tu perfil</a>.</p>') % '\n'.join(
+        '          <details class="sv-pq-p"><summary><span class="sv-card-ico" aria-hidden="true">%s</span><b>%s</b><small>%s</small></summary>\n'
+        '            <p class="sv-pq-por"><b>Para qué te sirve:</b> %s</p>\n'
+        '            <p class="sv-pq-sv">%s</p>\n'
+        '            <p class="sv-pq-gratis"><span aria-hidden="true">🆓</span> Gratis: %s</p>\n'
+        '          </details>' % (ico, html.escape(n), html.escape(quien), html.escape(por),
+                                 ' '.join('<a href="%s">%s %s</a>' % (esc_attr(sf.revisa_liga(i)), nom[i][0], html.escape(nom[i][1])) for i in svs),
+                                 ' · '.join('<a href="%s">%s</a>' % (l, html.escape(t)) for l, t in gratis))
+        for ico, n, quien, por, svs, gratis in PERFILES)
+
+
 def sv_vinculos(sid, sf):
     """Los vínculos de un servicio, a la vista en su tarjeta (decisión del autor, 22-11-2026: sin el rótulo «Nuevo»
     ni el desplegable «Lo nuevo»): una lista corta de ligas a la respuesta completa del Inspector; lo que hace
@@ -3061,7 +3091,8 @@ def servicios():
     # La base, contada (idea de getquin, docs/FRAUDE-MERCADO-Y-HOSPEDAJE.md
     # §3.4): cada número se cuenta de su archivo al generar (monetizacion.py).
     base = ('<div class="sv-base">\n%s\n        </div>\n'
-            '        <p class="sv-nota">Son conteos de los archivos de la plataforma al generar esta página (<span class="est-chip est-derivado">auditada</span>); '
+            '        <p class="sv-nota">Son conteos de los archivos de la plataforma al generar esta página (<span class="est-chip est-derivado">auditada</span>), '
+            'salvo los derechohabientes del ISSSTE, que son la cifra de su Anuario (<span class="est-chip est-oficial">oficial</span>); '
             'cada uno dice de qué documento sale.</p>') % '\n'.join(
         '          <a class="sv-base-n" href="%s">\n'
         '            <span class="sv-base-cifra">%s</span>\n'
@@ -3456,7 +3487,8 @@ def servicios():
             '<li><b>%s</b><span>%s · %s</span><small>%s</small></li>' % (
                 html.escape(fte[k]['que']), html.escape(fte[k]['quien']), html.escape(fu.corte(fte[k])), modo_tx[fte[k]['modo']])
             for k in SV_FUENTES),
-        '        <p class="sv-nota">Los números son conteos de los archivos de la plataforma al generar esta página (<span class="est-chip est-derivado">auditada</span>). '
+        '        <p class="sv-nota">Los números son conteos de los archivos de la plataforma al generar esta página (<span class="est-chip est-derivado">auditada</span>), '
+        'salvo los derechohabientes del ISSSTE, cifra de su Anuario (<span class="est-chip est-oficial">oficial</span>). '
         'Cada fuente, con quién la publica, cada cuándo y su próxima revisión, está en <a href="base-al-dia.html">La base al día</a>; '
         'de qué documento sale cada número, en <a href="%s#base">Por qué Auditavisión</a>.</p>' % SV_PORQUE, '        </details>'])
     faq = '<div class="sv-faqs">\n%s\n        </div>' % '\n'.join(
@@ -3490,8 +3522,10 @@ def servicios():
             bloque_sec('propuesta', 'Lo que te ofrecemos', '', sv_liga(portada, 'servicios.html'), sin_cab=True),
             bloque_sec('al-dia', 'La base, al día', 'Lo que ya puedes revisar hoy, gratis, y de cuándo es cada fuente.', aldia, pre='Nuestra base de datos'),
             bloque_sec('como', 'Cómo funciona', 'Tres pasos. Todo empieza con una pregunta en tus palabras.', como3, pre='Del chat al servicio'),
-            bloque_sec('necesitas', 'Los servicios: qué necesitas y lo nuevo',
-                       '%s servicios en cinco familias. Cada uno dice cómo se cobra y lo que le llegó en noviembre de 2026; tócalo y se abre su Inspector, '
+            bloque_sec('para-quien', '¿Para quién es?', 'Cada perfil, para qué le sirve y con qué fundamento; toca el tuyo y abre sus servicios.',
+                       sv_para_quien(sf), pre='A quién servimos'),
+            bloque_sec('necesitas', 'Los servicios: qué necesitas',
+                       '%s servicios en cinco familias. Cada uno dice cómo se cobra; tócalo y se abre su Inspector, '
                        'en su propia página.' % numero(len(SERVICIOS)), necesitas, pre='Los servicios'),
             bloque_sec('arriesgas', 'Lo que arriesgas si no revisas',
                        'Lo que dice la ley cuando un proveedor o un cliente no es lo que parece. Toca el artículo para leer su texto.', arriesga, pre='Por qué revisar'),

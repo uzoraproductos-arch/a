@@ -118,6 +118,49 @@ def contadores():
          'SAT, datos abiertos: contribuyentes publicados', pm['sat'][pm['orden'][0]]['pagina'], 'herramienta-inspector-padron.html'),
         ('rpu', rpu['n'], 'créditos y obligaciones de estados y municipios, uno por uno',
          'renglones del Registro Público Único al %s' % rpu['corteTxt'], 'SHCP, Registro Público Único', rpu['pagina'], 'planisferio.html?d=deuda'),
+    ] + _mas()
+
+
+def _mas():
+    """Ronda 7 (22-11-2026, pedido del autor: «La base, al día» con todo lo que ya tiene la base). Cada número se cuenta o se lee
+    de su archivo al generar, nunca a mano."""
+    import subprocess
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    S = _js('assets/auditor/data/sancionados.js')
+    I = _js('assets/auditor/data/sanciones-int.js')
+    F = _js('assets/auditor/js/municipios-fraude.js')
+    with open(os.path.join(RAIZ, 'docs', 'salud', 'issste-anuario-2025.json'), encoding='utf-8') as f:
+        A = json.load(f)
+    with open(os.path.join(RAIZ, 'docs', 'vivienda', 'shf-precios-vivienda.json'), encoding='utf-8') as f:
+        H = json.load(f)
+    js = ("global.window={};require(%s);require(%s);var E=window.AUDIT_MUNICIPIOS.ent,n=0;"
+          "Object.keys(E).forEach(function(k){E[k].lista.forEach(function(r){if(+r[0]<990)n++;});});"
+          "var c=window.AUDIT_DB.cuenta_publica_asf.cp2024;process.stdout.write(JSON.stringify([n,c.total.auditorias,c.corte]));"
+          % (json.dumps(os.path.join(RAIZ, 'assets', 'auditor', 'js', 'municipios-efipem.js')),
+             json.dumps(os.path.join(RAIZ, 'assets', 'auditor', 'js', 'audit-database.js'))))
+    nmun, asf, asf_corte = json.loads(subprocess.run(['node', '-e', js], check=True, capture_output=True, text=True).stdout)
+    import cc_predial
+    pred = cc_predial.MUNICIPIOS
+    nent = len({m['ent'] for m in pred})
+    ofac = sum(1 for r in I['r'] if r[0] == 'ofac')
+    return [
+        ('sancionados', len(S['r']), 'empresas proveedoras y contratistas sancionadas, con su expediente',
+         'personas morales del Directorio al %s (las personas físicas solo se cuentan)' % S['corte'], S['fuente'], S['url'], 'herramienta-inspector-padron.html'),
+        ('municipios', nmun, 'municipios y alcaldías con su ficha: su cuenta, su gente y sus carpetas por fraude',
+         'claves del padrón municipal del INEGI (sin «No especificado»), con el Censo 2020 y el SESNSP (%s y %s)' % (F['corte2025'], F['corte2026']),
+         'INEGI y SESNSP', F['pagina'], 'planisferio.html'),
+        ('predial', len(pred), 'municipios y alcaldías con su predial cotejado contra su ley, en %d entidades' % nent,
+         'renglones del simulador del predial (cc_predial.py), cada uno con su ley y su huella', 'Leyes de Ingresos y de Hacienda municipales 2026',
+         'herramienta-calculadora-predial.html', 'herramienta-calculadora-predial.html'),
+        ('issste', A['totales']['derechohabientes'], 'derechohabientes del ISSSTE en su Anuario 2025, estado por estado, junto a la Memoria del IMSS',
+         'cifra del Anuario Estadístico 2025 del ISSSTE (oficial), recuadrada con sus 32 entidades', A['fuente'], A['url'], 'planisferio.html?d=salud'),
+        ('shf', len(H['municipios']), 'municipios con el precio de la vivienda del Índice SHF (%s)' % H['corte'],
+         'municipios del Índice SHF de Precios de la Vivienda, además de las 32 entidades', 'Sociedad Hipotecaria Federal', H['pagina'], 'herramienta-calculadora-predial.html'),
+        ('asf', asf, 'auditorías de la ASF a la Cuenta Pública 2024, con lo que quedó por aclarar',
+         'auditorías de la Matriz de Datos Básicos de la ASF (corte %s)' % asf_corte, 'Auditoría Superior de la Federación', 'https://www.asf.gob.mx/', 'herramienta-inspector-asf.html'),
+        ('ofac-onu', len(I['r']), 'registros de las listas de sanciones de la OFAC y la ONU',
+         '%s de la OFAC y %s de la ONU, en sanciones-int.js' % (format(ofac, ','), format(len(I['r']) - ofac, ',')), 'OFAC (EE. UU.) y Consejo de Seguridad de la ONU',
+         'https://sanctionslist.ofac.treas.gov/', 'herramienta-inspector-padron.html'),
     ]
 
 
@@ -161,7 +204,7 @@ def hecho():
 def prueba():
     revisar()
     c = contadores()
-    assert len(c) == 6 and all(isinstance(x[1], int) and x[1] > 0 for x in c), c
+    assert len(c) == 13 and all(isinstance(x[1], int) and x[1] > 0 for x in c), c
     assert [p['id'] for p in PLANES][0] == 'gratis' and PLANES[0]['precio'] == 0
     print('monetizacion: prueba bien (%s)' % ', '.join('%s %s' % (x[0], format(x[1], ',')) for x in c))
 
