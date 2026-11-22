@@ -242,6 +242,8 @@
       cap('Planteamiento') + '<p class="pa-nota-q"><span>La pregunta</span> «' + esc(q) + '»</p>' +
       (antes.length ? '<p class="dic-chico">Se hizo en la plática después de: ' + antes.map(function (x) { return '«' + esc(x) + '»'; }).join(' → ') + '.</p>' : '') +
       cap('Respuesta del Auditor') + '<div class="dic-resp">' + resp + '</div>' +
+      (r.integ ? cap('La revisión completa') + '<p class="dic-chico">Todo lo que la base de la plataforma tiene de ' + esc(r.integ.rfcs.join(', ')) +
+        ', reunido solo: sus cifras y sus fuentes están en los hallazgos y en el fundamento, y entran a la huella.</p><div class="dic-resp">' + r.integ.html.replace(/<button\b[^>]*>[\s\S]*?<\/button>/g, '') + '</div>' : '') +
       (capa ? cap('La lectura del modo ' + MODO_NOM[m]) +
         '<p class="dic-chico">Pediste el dictamen en el modo ' + MODO_NOM[m] + ': esta es su forma de leer la misma respuesta. El modo cambia cómo se cuenta, nunca los datos: no agrega cifras y no entra a la huella.</p>' +
         '<div class="dic-resp dic-modo">' + capa + '</div>' : '') +
@@ -255,7 +257,7 @@
         '<p class="dic-chico">La aplicación calcula con la base de la plataforma vigente, así que con el mismo enlace y la misma versión da el mismo resultado.</p>' : '') +
       (pend ? cap('Lo que falta') + pend : '') +
       (expCap ? cap('Expediente relacionado') + expCap : '') +
-      (svDic ? cap('Para ir más a fondo: el servicio') + svDic : '') +
+      (svDic ? cap('Lo que ya revisamos') + svDic : '') +
       cap('Fundamento documental') + (fu ? '<ol class="dic-fuentes">' + fu + '</ol>' + (f.app && f.app.mas ? '<p class="dic-chico">Y ' + f.app.mas + ' documentos más, citados en la página de la aplicación.</p>' : '') : '<p>Esta respuesta no cita cifras: lleva a una página de la plataforma, donde cada dato trae su fuente.</p>') +
       cap('Método') + '<ol class="dic-metodo">' +
       '<li><b>Localización.</b> El Auditor buscó la respuesta en la base de la plataforma (' + B.fichas.length.toLocaleString('es-MX') + ' fichas), que solo guarda datos ya publicados con su documento.</li>' +
@@ -3015,40 +3017,88 @@
     r.abre = liga;
     return r;
   }
-  /* Las aplicaciones del chat son servicios (pedido del autor, 19-11-2026): si la
-     respuesta lleva a una página que un servicio aprovecha (servicios_fichas.py), se
-     ofrece el servicio, con su página y su cotización. Nunca un monto. */
+  /* La revisión ya está hecha (pedido del autor, 22-11-2026: «en la búsqueda que haga el usuario,
+     ya sea mediante un RFC… una empresa, nosotros en el mismo dictamen le resolvemos todo lo que tiene
+     nuestra base de datos… ya ni siquiera tiene que cotizar»). Lo que un servicio revisa con la base
+     ya está en la respuesta y en su dictamen; el encargo queda solo para lo que la base no hace sola
+     (seguirlo cada semana, una cartera entera, documentos que no son públicos), con un toque y la
+     solicitud ya llena. Nunca un monto. */
   var SRV = (B.dat && B.dat.srv) || {};
-  function servicioHtml(r, q) {
-    if (!r || r.plat) return '';
-    var pq = (q || r.q) ? '&pregunta=' + encodeURIComponent(String(q || r.q).slice(0, 600)) : '';
-    var u = (r.app && r.app.url) || (r.ir && r.ir[0]) || (r.ficha && r.ficha.ir && r.ficha.ir[0]) || '';
-    var b = sinParam(u), l = SRV[b];
-    if (!b || /^servicios?(-|\.html)/.test(b) || !l || !l.length) return '';
-    return '<div class="pa-srv"><p class="pa-srv-t"><span aria-hidden="true">🧰</span> Esto también lo hacemos como servicio</p><ul>' + l.map(function (x) {
-      return '<li><a class="pa-srv-n" href="' + esc(x[4]) + '"><span aria-hidden="true">' + x[1] + '</span> <b>' + esc(x[2]) + '</b></a><small>' + esc(x[3]) + '</small>' +
-        '<a class="pa-srv-pide" href="servicios-cotiza.html?servicio=' + encodeURIComponent(x[0]) + pq + '#solicitud">Cotiza con tu pregunta ➔</a></li>';
-    }).join('') + '</ul><p class="pa-chico">Lo básico lo haces tú, gratis, aquí en el chat. El servicio es para ir más a fondo: el costo y el plazo te llegan por escrito antes de empezar.</p></div>';
-  }
-  /* El servicio, también en el dictamen (pedido del autor, 19-11-2026: «que todo quede vinculado
-     al chat y a la generación del dictamen»): si la respuesta es un servicio o lleva a una página que
-     un servicio aprovecha, el dictamen cierra con él y su cotización ya lleva la pregunta. Nunca un
-     monto, y no entra a la huella. */
   var SRVS = (B.dat && B.dat.srvs) || {};
-  function svDicHtml(q, r) {
-    if (!r || r.plat) return '';
+  function srvDe(r) {
+    if (!r || r.plat) return [];
     var u = (r.app && r.app.url) || (r.ir && r.ir[0]) || (r.ficha && r.ficha.ir && r.ficha.ir[0]) || '';
-    var b = sinParam(u), m = /^servicio-([a-z]+)\.html$/.exec(b), l = [];
-    if (m && SRVS[m[1]]) l = [[m[1]].concat(SRVS[m[1]])];
-    else if (SRV[b]) l = SRV[b];
+    var b = sinParam(u), m = /^servicio-([a-z-]+)\.html$/.exec(b);
+    if (m && SRVS[m[1]]) return [[m[1]].concat(SRVS[m[1]])];
+    if (!b || /^servicios?(-|\.html)/.test(b)) return [];
+    return SRV[b] || [];
+  }
+  /* La solicitud ya llena: el servicio, el tema (lo que se buscó) y la pregunta. */
+  function pideLiga(sid, q, tema) {
+    return 'servicios-cotiza.html?servicio=' + encodeURIComponent(sid) + '&tema=' + encodeURIComponent(String(tema || q).slice(0, 160)) +
+      '&pregunta=' + encodeURIComponent(String(q).slice(0, 600)) + '#solicitud';
+  }
+  function resueltoHtml(l, q, tema, dic) {
     if (!l.length) return '';
-    return '<p>' + (m ? 'Esta respuesta describe un servicio de Auditavisión.' : 'Lo que respalda este dictamen también lo hacemos a fondo, por encargo:') + '</p><ul class="dic-srv">' +
-      l.map(function (x) {
-        return '<li><span aria-hidden="true">' + x[1] + '</span> <b>' + esc(x[2]) + '</b> · ' + esc(x[3]) + '. ' +
-          '<a href="servicio-' + esc(x[0]) + '.html">Ver el servicio ➔</a> · ' +
-          '<a href="servicios-cotiza.html?servicio=' + encodeURIComponent(x[0]) + '&pregunta=' + encodeURIComponent(String(q).slice(0, 600)) + '#solicitud">Cotiza con esta pregunta ➔</a></li>';
-      }).join('') + '</ul>' +
-      '<p class="dic-chico">El costo y el plazo llegan por escrito antes de empezar; aquí nunca va un monto. Este capítulo no forma parte de la huella del dictamen.</p>';
+    var nom = l.map(function (x) { return '<span aria-hidden="true">' + x[1] + '</span> <b>' + esc(x[2]) + '</b>'; }).join(dic ? '; ' : ' · ');
+    var pide = 'Si quieres que lo sigamos por ti (cada semana, con tu cartera completa o con documentos que no son públicos), ' +
+      '<a href="' + esc(pideLiga(l[0][0], q, tema)) + '">pídelo con un toque ➔</a>: tu solicitud ya va llena; solo confirmas. El costo y el plazo te llegan por escrito antes de empezar.';
+    if (dic) return '<p>Lo que revisa ' + (l.length === 1 ? 'el servicio' : 'cada servicio') + ' con la base de la plataforma (' + nom + ') ya está en este dictamen.</p>' +
+      '<p class="dic-chico">' + pide + ' Este capítulo no forma parte de la huella.</p>';
+    return '<div class="pa-srv pa-hecho"><p class="pa-srv-t"><span aria-hidden="true">✅</span> Ya revisamos esto por ti</p>' +
+      '<p>Lo que hace ' + (l.length === 1 ? 'el servicio' : 'cada servicio') + ' con nuestra base ya está aquí, gratis: ' + nom + '.</p>' +
+      '<p class="pa-chico">' + pide + '</p></div>';
+  }
+  function servicioHtml(r, q) { return resueltoHtml(srvDe(r), q || r.q, r.integ && r.integ.tema); }
+  function svDicHtml(q, r) { return resueltoHtml(srvDe(r), q, r.integ && r.integ.tema, true); }
+
+  /* La revisión completa de una empresa: con un RFC de persona moral, una empresa de ComprasMX o un
+     grupo, la respuesta junta todo lo que la base tiene de ella (las listas del SAT, la 69-B, Sancionados,
+     la OFAC y la ONU; sus contratos públicos; su grupo) aunque la pregunta haya pedido solo una parte.
+     No agrega cifras propias: cada capítulo es la misma respuesta que da el chat, con sus fuentes. */
+  var RFC12 = /\b[A-ZÑ&]{3}\d{6}[A-Z0-9]{3}\b/g;
+  function integral(q, r) {
+    if (!r || r.sin || r.plat || !r.ficha) return Promise.resolve(null);
+    var tit = r.ficha.tit || '', ya = { padron: /^Revisa a tu contraparte/.test(tit), cmx: /contratos-publicos\.html/.test((r.ir || [])[0] || ''), grupo: /^Grupo empresarial/.test(tit) };
+    var rfcs = [];
+    function suma(x) { x = String(x).toUpperCase(); if (x.length === 12 && rfcs.indexOf(x) < 0) rfcs.push(x); }
+    (String(q).match(RFC_RE) || []).forEach(suma); RFC_RE.lastIndex = 0;
+    (r.ficha.ci || []).forEach(function (c) { (String(c.etq || '').match(RFC12) || []).forEach(suma); });
+    if (ya.grupo) { var gg = GR.g.filter(function (g) { return 'Grupo empresarial: ' + g.n === tit; })[0]; if (gg) gg.emp.forEach(suma); }
+    rfcs = rfcs.slice(0, 3);
+    if (!rfcs.length) return Promise.resolve(null);
+    var ci = [], fu = [], caps = [];
+    function fuente(x) { if (x && !fu.some(function (y) { return y.tx === x.tx; })) fu.push(x); }
+    var tareas = rfcs.map(function (rfc) {
+      var t = [];
+      if (!ya.padron) t.push(cargaPadron().then(function (P) { return P.rfc(rfc).then(function (f) {
+        f.senales.forEach(function (sx) { ci.push({ v: sx.lista + (sx.extra ? ', ' + sx.extra : ''), etq: (f.nombre ? f.nombre + ' · ' : '') + 'RFC ' + rfc, e: 'oficial' }); fuente({ tx: sx.fuente, url: sx.url }); });
+        if (!f.senales.length && f.meta) fuente({ tx: 'SAT, datos abiertos, Contribuyentes publicados (art. 69, 17-H Bis y 69-B Bis); lista 69-B; Directorio de Sancionados; OFAC; ONU', url: f.meta.sat.nl.pagina });
+        return ['🛡️', 'Listas del SAT, sancionados y sanciones internacionales', P.html(f, { chico: 'pa-chico', lista: 'pa-lista' }), rfc];
+      }); }).then(null, function () { return null; }));
+      if (!ya.cmx && !ya.grupo) t.push(Promise.all([cmxIdx(), cmxProv(rfc), cmxSanc()]).then(function (X) {
+        var rp = respProv(rfc, X[1], X[0].meta, X[2]);
+        if (rp.ficha) { (rp.ficha.ci || []).forEach(function (c) { ci.push(c); }); (rp.ficha.fu || []).forEach(fuente); }
+        return ['🏛️', 'Contratos con el gobierno (ComprasMX)', rp.html.replace(/<details class="pa-dedonde"[\s\S]*?<\/details>/g, ''), rfc];
+      }).then(null, function () { return null; }));
+      var g = !ya.grupo && GR.g.filter(function (x) { return (x.emp || []).indexOf(rfc) >= 0; })[0];
+      if (g) t.push(Promise.resolve(['🏢', 'Su grupo empresarial', '<p>Es una de las empresas con que <b>' + esc(g.n) + '</b> aparece en ComprasMX. ' +
+        '<button type="button" class="pa-ej" data-pa-pregunta="' + esc(g.n) + '">Ver todo el grupo</button></p>', rfc]));
+      return Promise.all(t);
+    });
+    return Promise.all(tareas).then(function (L) {
+      L.forEach(function (l) { l.forEach(function (c) { if (c) caps.push(c); }); });
+      if (!caps.length) return null;
+      var nombres = caps.length && rfcs.length === 1 ? rfcs[0] : rfcs.join(', ');
+      var html = caps.map(function (c) {
+        return '<section class="pa-int-cap"><h4><span aria-hidden="true">' + c[0] + '</span> ' + esc(c[1]) + (rfcs.length > 1 ? ' · <code>' + esc(c[3]) + '</code>' : '') + '</h4>' + c[2] + '</section>';
+      }).join('');
+      return { html: html, ci: ci, fu: fu, tema: 'Revisión completa de ' + nombres, rfcs: rfcs };
+    });
+  }
+  function integralHtml(x) {
+    return x ? '<section class="pa-pag-sec pa-int"><h3><span aria-hidden="true">🔎</span> La revisión completa: todo lo que la base sabe de ' +
+      esc(x.rfcs.join(', ')) + '</h3><p class="pa-chico">Lo juntamos solo, con la misma base: no tienes que preguntarlo por partes ni pedirlo como servicio.</p>' + x.html + '</section>' : '';
   }
   function respuesta0(q, previas) {
     /* Una liga que ya está en la hemeroteca abre su cotejo antes que cualquier palabra de su dirección
@@ -3395,9 +3445,12 @@
     }
     antes.forEach(function (x) { respuesta(x); });
     var r = abre(q, ps.get('abre')) || respuesta(q, antes);
-    if (r && r.espera) r.espera.then(function (x) { arma(x); }); else arma(r);
+    if (r && r.espera) r.espera.then(arma0); else arma0(r);
+    function arma0(r) { integral(q, r).then(function (x) { if (x) r.integ = x; arma(r); }, function () { arma(r); }); }
     function arma(r) {
     var f = r && !r.sin ? r.ficha : null;
+    /* La revisión completa entra al dictamen con sus cifras y sus fuentes, y por eso a su huella. */
+    if (f && r.integ) f = Object.assign({}, f, { ci: (f.ci || []).concat(r.integ.ci), fu: (f.fu || []).concat(r.integ.fu.filter(function (x) { return !(f.fu || []).some(function (y) { return y.tx === x.tx; }); })) });
     if (!f) {
       doc.innerHTML = '<p>No pude armar el dictamen de «' + esc(q) + '»: esa respuesta no cita cifras ni fuentes que respaldar, o la plataforma ya no la contesta igual.</p>' +
         '<p><a href="' + chat + '?q=' + encodeURIComponent(q) + '">Pregúntasela de nuevo al Auditor ➔</a></p>';
@@ -3433,7 +3486,8 @@
     if (!q) { doc.innerHTML = '<p>Esta página desglosa una respuesta del Inspector. <a href="' + SV_CHAT + '">Hazle una pregunta</a> y toca <b>«📄 Ver la respuesta completa»</b>.</p>'; return; }
     antes.forEach(function (x) { respuesta(x); });
     var r = abre(q, ps.get('abre')) || respuesta(q, antes);
-    if (r && r.espera) r.espera.then(arma); else arma(r);
+    if (r && r.espera) r.espera.then(arma0); else arma0(r);
+    function arma0(r) { integral(q, r).then(function (x) { if (x) r.integ = x; arma(r); }, function () { arma(r); }); }
     function arma(r) {
       if (!r || r.sin) {
         doc.innerHTML = '<h2 class="pa-pag-q">«' + esc(q) + '»</h2>' + (r ? sinRespuesta(q, r.sin) + pideExpHtml() : '') +
@@ -3444,16 +3498,15 @@
       var ir = r.ir || (r.ficha && r.ficha.ir), dl = enlaceDictamen(q, antes) + (r.abre ? '&abre=' + encodeURIComponent(r.abre) : '');
       var sec = function (ico, tit, h) { return h ? '<section class="pa-pag-sec"><h3><span aria-hidden="true">' + ico + '</span> ' + tit + '</h3>' + h + '</section>' : ''; };
       doc.innerHTML = '<h2 class="pa-pag-q">«' + esc(q) + '»</h2>' + cabResp(r) + remiteHtml(q, r) +
-        '<div class="pa-resp">' + r.html + '</div>' +
+        '<div class="pa-resp">' + r.html + '</div>' + integralHtml(r.integ) +
         (ir ? '<p class="pa-acc"><a class="pa-boton pa-ver" href="' + esc(ir[0]) + '">📖 Saber más <span class="pa-ver-donde">· ' + esc(ir[1]) + '</span> ➔</a></p>' : '') +
         capaModoHtml(q, r) + appDe(r) + expInvHtml(q, r) + servicioHtml(r, q) +
         sec('🧭', 'En las demás partes de la plataforma', r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r))).replace(/<p class="pa-mas-t">[^<]*<\/p>/, '')) +
         sec('📚', 'En la Enciclopedia', enciclopediaHtml(enciclopediaPara(q, r)).replace(/<p class="pa-mas-t">[^<]*<\/p>/, '')) +
         (r.web ? webHtml(r.web) : '') +
         (r.ficha ? '<section class="pa-pag-dic"><h3><span aria-hidden="true">🧾</span> Tu dictamen</h3>' +
-          '<p>El respaldo de esta respuesta: tu pregunta, lo que se contestó, cada cifra con su estado, sus fuentes y el método, con folio, sello y huella digital. ' +
-          'No es un documento oficial ni un peritaje.</p><p class="pa-acc"><a class="pa-boton pa-genera" href="' + esc(dl) + '">🧾 Generar dictamen ➔</a>' +
-          '<a class="pa-boton" href="servicios-cotiza.html#solicitud">📝 Cotiza si quieres ir más a fondo</a></p></section>' : '');
+          '<p>El respaldo de esta respuesta' + (r.integ ? ', con la revisión completa' : '') + ': tu pregunta, lo que se contestó, cada cifra con su estado, sus fuentes y el método, con folio, sello y huella digital. ' +
+          'No es un documento oficial ni un peritaje.</p><p class="pa-acc"><a class="pa-boton pa-genera" href="' + esc(dl) + '">🧾 Generar dictamen ➔</a></p></section>' : '');
       document.title = (r.ficha ? r.ficha.tit : q) + ' · El Inspector · Auditavisión';
       var caja = doc.querySelector('.pa-app[data-pa-abre]');
       if (caja) montaApp(caja);

@@ -340,10 +340,16 @@ respuesta rápida, «Generar dictamen», «Saber más» (la página a fondo) y e
   chat**: `herramienta-inspector-pregunta.html?q=<pregunta>&modo=<modo>&abre=<página>`
   (`servicios_fichas.por_auditor()`). El chat contesta con esa página o abre la aplicación en su
   marco (`abre()` de `asistente.js`), y el dictamen lleva el mismo `&abre=`.
-- **Las aplicaciones del chat son servicios.** Si una respuesta lleva a una página que un servicio
-  aprovecha (su `hace` en `FICHAS` de `servicios_fichas.py`), abajo sale «Esto también lo hacemos
-  como servicio», con su página y su cotización (`servicioHtml()` de `asistente.js`, que lee `srv`
-  de la base: `mapa_chat()`). **Nunca un monto.**
+- **Las aplicaciones del chat son servicios, y lo que revisan ya va en la respuesta** (el autor,
+  22-11-2026: «en el mismo dictamen le resolvemos todo lo que tiene nuestra base de datos… ya ni
+  siquiera tiene que cotizar»). Si una respuesta lleva a una página que un servicio aprovecha (su
+  `hace` en `FICHAS` de `servicios_fichas.py`), abajo sale «✅ Ya revisamos esto por ti» (`resueltoHtml()`
+  de `asistente.js`, que lee `srv` de la base: `mapa_chat()`), y el encargo queda solo para lo que la base
+  no hace sola, con la solicitud ya llena (`pideLiga()`: servicio, tema y pregunta). **Con un RFC de
+  persona moral, una empresa o un grupo, la respuesta completa y el dictamen traen «La revisión completa»**
+  (`integral()`): las listas del SAT, Sancionados, la OFAC y la ONU, sus contratos de ComprasMX y su grupo,
+  aunque se haya preguntado solo una parte; son las mismas respuestas del chat, y en el dictamen sus cifras
+  y fuentes **entran a la huella**. **Nunca un monto de servicio, y nunca una persona física.**
 - **Las cuatro pestañas ya están mudadas** (19-11-2026: Servicios, y el mismo día, a pedido del
   autor, «todas las demás pestañas al chat»). `pagina()` de `apartados.py` pasa cada página de
   Planisferio, Comunidad, Noticiero y Servicios por `por_auditor_html()`: una liga nueva a otra

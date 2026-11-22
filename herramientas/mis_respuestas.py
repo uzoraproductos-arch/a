@@ -11,7 +11,7 @@ Cómo funciona, sin servidor y sin cuenta:
   localStorage, hasta 60; `caso()` de `asistente.js`): la pregunta, la fecha, el modo,
   la respuesta en corto (el texto que ya dio, nunca una cifra nueva), «Saber más», el
   enlace que vuelve a armar su dictamen y los servicios que aprovechan esa página
-  (`srv`, el mismo mapa de «Esto también lo hacemos como servicio»). Lo que no supo
+  (`srv`, el mismo mapa de «Ya revisamos esto por ti»). Lo que no supo
   contestar queda como solicitud, para pedirla como investigación.
 - `mis-respuestas.html` (esta página, en la pestaña Auditor) lo lee y lo arma en el
   navegador (`mis-respuestas.js`): tus preguntas, los servicios para tu caso (de más a
