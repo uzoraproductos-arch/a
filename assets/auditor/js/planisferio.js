@@ -694,10 +694,17 @@
     var paths = document.querySelectorAll('.pl-mun');
     function fmt(v) {
       return v == null ? '—' : lente.u === 'pct' ? num(v, 1) + '%' : lente.u === 'per' ? num(v, 0) + ' personas' :
-        lente.u === 'pes' ? '$' + num(v, 0) : mdp(v);
+        lente.u === 'pes' ? '$' + num(v, 0) : lente.u === 'car' ? num(v, 0) + ' carpetas' : lente.u === 'tasa' ? num(v, 1) + ' por cada 100 mil' : mdp(v);
     }
     /* La población es del Censo 2020: el gris de esa lente son los municipios creados después. */
-    function gris() { return D.sin ? 'sin cuenta municipal' : lente.u === 'per' ? 'no existía en el Censo 2020' : lente.u === 'pes' ? 'sin cuenta o sin Censo 2020' : 'sin cuenta'; }
+    function gris() { return D.sin ? 'sin cuenta municipal' : lente.u === 'per' ? 'no existía en el Censo 2020' : lente.u === 'pes' ? 'sin cuenta o sin Censo 2020' : lente.u === 'car' ? 'sin dato del SESNSP' : lente.u === 'tasa' ? 'sin dato del SESNSP o sin Censo 2020' : 'sin cuenta'; }
+    /* El fraude en el municipio (SESNSP, carpetas de investigación): lo tienen también los que no rindieron cuenta al INEGI. */
+    function fraude(x) {
+      if (x.fra == null) return '';
+      return '<dt>Carpetas por fraude · 2025 (SESNSP)</dt><dd><b class="num-tabular">' + num(x.fra, 0) + '</b> ' + chip('oficial') +
+        (x.fraC == null ? '' : ' <small>(' + num(x.fraC, 1) + ' por cada 100 mil habitantes del Censo 2020 ' + chip('derivado') + ')</small>') + '</dd>' +
+        '<dt>Carpetas por fraude · ' + esc(D.fra ? D.fra.corte26 : '2026') + '</dt><dd>' + num(x.fra26, 0) + ' ' + chip('oficial') + '</dd>';
+    }
     function persona(x) {
       return x.pob == null ? '<dt>Población (Censo 2020)</dt><dd>No existía en el Censo 2020: sus habitantes se contaron en el municipio del que se separó.</dd>' :
         '<dt>Población (Censo 2020)</dt><dd><b class="num-tabular">' + num(x.pob, 0) + '</b> personas ' + chip('oficial') + '</dd>';
@@ -727,9 +734,9 @@
         return;
       }
       document.getElementById('plMunLeyenda').innerHTML = '<span class="pl-ley-tit">' + esc(lente.nom) + ' (' + (lente.anio || D.anio) + ')</span><span class="pl-ley-cls">' +
-        (lente.cero ? '<span><i style="background:' + CERO + '"></i>$0 reportado</span>' : '') +
+        (lente.cero ? '<span><i style="background:' + CERO + '"></i>' + (lente.u === 'car' || lente.u === 'tasa' ? 'ninguna carpeta' : '$0 reportado') + '</span>' : '') +
         pal.map(function (col, i) {
-          var t = i === 0 ? (lente.cero ? 'más de $0 y ' : '') + 'menos de ' + fmt(lim[1]) : i === 4 ? fmt(lim[4]) + ' o más' : fmt(lim[i]) + ' a ' + fmt(lim[i + 1]);
+          var t = i === 0 ? (lente.cero ? (lente.u === 'car' || lente.u === 'tasa' ? 'más de 0 y ' : 'más de $0 y ') : '') + 'menos de ' + fmt(lim[1]) : i === 4 ? fmt(lim[4]) + ' o más' : fmt(lim[i]) + ' a ' + fmt(lim[i + 1]);
           return '<span><i style="background:' + col + '"></i>' + t + '</span>';
         }).join('') + '<span><i style="background:#d5dae3"></i>' + gris() + '</span></span>';
       document.getElementById('plMunQue').textContent = lente.que;
@@ -737,7 +744,7 @@
     function muestra(x) {
       var ente = 'planisferio-ficha-herramienta-inspector-entes.html#ente=municipal:' + D.cve + x.c;
       if (x.ing == null) {
-        ficha.innerHTML = '<h3>' + esc(x.n) + '</h3><dl class="pl-ficha-dl">' + persona(x) + '</dl><p>' + (D.sin ? esc(D.sin) + ' ' + chip('pendiente', D.pend) :
+        ficha.innerHTML = '<h3>' + esc(x.n) + '</h3><dl class="pl-ficha-dl">' + persona(x) + fraude(x) + '</dl><p>' + (D.sin ? esc(D.sin) + ' ' + chip('pendiente', D.pend) :
           'No rindió su cuenta de ' + D.anio + ' al INEGI ' + chip('pendiente', D.pend) + ': sigue en el padrón, sin cifra.') + ' Ponerle cero falsearía la cifra.</p><a class="pl-ficha-ir" href="' + ente + '">Su ficha en el Auditor de entes ➔</a>';
         return;
       }
@@ -756,7 +763,7 @@
           '<dt>Saldo de deuda y obligaciones · cierre 2025 (SHCP)</dt><dd><b class="num-tabular">' + mdp(x.sda[1]) + '</b> ' + chip('oficial') +
           ' <small>(' + ['', 'Sostenible (verde)', 'En observación (amarillo)', 'Elevado (rojo)'][x.sda[0]] + ' · ' + num(x.sda[3], 1) + '% de sus ingresos libres)</small></dd>' :
           '<dt>Saldo al cierre de 2025 (SHCP)</dt><dd>No entregó información suficiente a Hacienda ' + chip('pendiente', 'deuda-municipios') + '</dd>') :
-          '<dt>Saldo en el Sistema de Alertas · 2025 (SHCP)</dt><dd>Sin deuda inscrita en el RPU (no se mide, LDF art. 43) ' + chip('oficial') + '</dd>') + '</dl>' +
+          '<dt>Saldo en el Sistema de Alertas · 2025 (SHCP)</dt><dd>Sin deuda inscrita en el RPU (no se mide, LDF art. 43) ' + chip('oficial') + '</dd>') + fraude(x) + '</dl>' +
         '<a class="pl-ficha-ir" href="' + ente + '">Su estado de cuenta y salud financiera ➔</a>';
     }
     function elige(c) {

@@ -3330,6 +3330,33 @@
   {
    "q": "Quiero que me avisen cuando cambie la situación de mis proveedores",
    "ir": "servicio-seguimiento.html"
+  },
+  {
+   "q": "¿Cuántos fraudes hubo en Guadalajara?",
+   "ir": "planisferio-jal.html?ml=fra#mapa-municipios",
+   "dice": [
+    "3,306 carpetas",
+    "no quiere decir más fraude"
+   ]
+  },
+  {
+   "q": "Municipios con más fraude en Jalisco",
+   "dice": [
+    "Guadalajara",
+    "Zapopan",
+    "carpetas"
+   ]
+  },
+  {
+   "q": "¿Cuánto pago de predial en Monterrey?",
+   "ir": "herramienta-calculadora-predial.html?mun=nl039"
+  },
+  {
+   "q": "¿Cuántos fraudes hubo en Monterrey?",
+   "ir": "planisferio-nl.html?ml=fra#mapa-municipios",
+   "dice": [
+    "1,174 carpetas"
+   ]
   }
  ]
 }

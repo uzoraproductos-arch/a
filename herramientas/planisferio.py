@@ -162,7 +162,16 @@ def datos_externos(nombre, x):
     return 'assets/auditor/data/%s?v=%s' % (nombre, hashlib.sha256(t.encode('utf-8')).hexdigest()[:12])
 
 
+_PADRON = []
+
+
 def _padron():
+    if not _PADRON:
+        _PADRON.append(_padron0())
+    return _PADRON[0]
+
+
+def _padron0():
     """El padrón municipal tal cual (municipios-efipem.js), leído con node
     para no reinterpretar a mano un objeto de JavaScript."""
     js = ('global.window={};require(%s);process.stdout.write(JSON.stringify(window.AUDIT_MUNICIPIOS));'
@@ -193,6 +202,10 @@ LENTES_MUN = [
      'Cuántas personas vivían en cada municipio según el Censo de Población y Vivienda 2020 del INEGI, el último conteo completo. Es de 2020, no de hoy.'),
     ('iph', 'Ingreso por habitante', 'verde',
      'Cuánto ingresó cada municipio en 2024 por cada persona que vivía ahí en 2020: ingreso total 2024 ÷ población del Censo 2020. Mezcla dos años, porque el INEGI no ha publicado un conteo más reciente: es una referencia para comparar, no lo que le toca a cada quien.'),
+    ('fra', 'Carpetas por fraude', 'rojo',
+     'Las carpetas de investigación por fraude que abrió la fiscalía del estado en cada municipio en 2025 (SESNSP). Una carpeta no es una víctima ni un fraude comprobado, y más carpetas no quiere decir más fraude: también pesa cuánto se denuncia y dónde se presenta la denuncia.'),
+    ('fraC', 'Fraude por cada 100 mil', 'rojo',
+     'Carpetas por fraude de 2025 por cada 100 mil personas que vivían ahí en 2020: carpetas 2025 × 100,000 ÷ población del Censo 2020. Mezcla dos años, porque el INEGI no tiene un conteo más reciente por municipio; en un municipio chico, pocas carpetas mueven mucho la tasa.'),
     ('dpag', 'Pagó de deuda', 'rojo',
      'Lo que cada municipio pagó en 2024 por sus créditos: el capital que devolvió, los intereses y las comisiones. Es lo que pagó, no lo que debe. En el tono más claro, los que reportaron $0.'),
     ('emp', 'Pidió prestado', 'rojo',
@@ -200,10 +213,10 @@ LENTES_MUN = [
 ]
 PCT_MUN = ('dep', 'invp')
 # Las lentes que no van en millones de pesos: su unidad y, si no es el del padrón, su año.
-UNI_MUN = {'pob': ('per', 2020), 'iph': ('pes', '2024 ÷ 2020')}
+UNI_MUN = {'pob': ('per', 2020), 'iph': ('pes', '2024 ÷ 2020'), 'fra': ('car', 2025), 'fraC': ('tasa', '2025 ÷ Censo 2020')}
 # Las lentes donde el $0 es lo común: el $0 lleva su propio tono y los cortes
 # se sacan de los que sí reportaron algo.
-CERO_MUN = ('dpag', 'emp')
+CERO_MUN = ('dpag', 'emp', 'fra', 'fraC')
 
 
 def inv_mun(padron):
@@ -239,6 +252,39 @@ def pob_mun(padron):
     return pv
 
 
+_FRA = []
+
+
+def fra_mun(padron):
+    """Las carpetas por fraude de cada municipio (municipios-fraude.js, la escribe
+    anclar_fraude_municipios.py con los datos abiertos municipales del SESNSP).
+    Se detiene si trae una clave que no está en el padrón, si los municipios más
+    los «No especificado» no suman el total nacional de cada año, o si 2025 no
+    da lo mismo que la serie estatal del SESNSP que ya tiene la base."""
+    if _FRA:
+        return _FRA[0]
+    t = open(os.path.join(RAIZ, 'assets', 'auditor', 'js', 'municipios-fraude.js'), encoding='utf-8').read()
+    i = t.index('window.AUDIT_MUN_FRAUDE =') + len('window.AUDIT_MUN_FRAUDE =')
+    fv = json.loads(t[i:t.rindex(';')])
+    pad = {m['cve'] + r[0] for m in padron['ent'].values() for r in m['lista']}
+    if not set(fv['mun']) <= pad:
+        raise SystemExit('planisferio: municipios-fraude.js trae claves que no están en el padrón: %s' % sorted(set(fv['mun']) - pad)[:5])
+    for k in (0, 1):
+        if sum(v[k] for v in fv['mun'].values()) + sum(v[k] for v in fv['noEspecificado'].values()) != fv['nacional'][k]:
+            raise SystemExit('planisferio: municipios-fraude.js no suma su total nacional (%s)' % ('2025', '2026')[k])
+    est = json.load(open(os.path.join(RAIZ, 'docs', 'seguridad', 'sesnsp-fraude-estatal.json'), encoding='utf-8'))
+    if est['nacional'].get('2025') != fv['nacional'][0]:
+        raise SystemExit('planisferio: el fraude municipal de 2025 (%s) no da lo mismo que la serie estatal del SESNSP (%s)' % (fv['nacional'][0], est['nacional'].get('2025')))
+    # Y estado por estado: sus municipios más lo que no dice municipio = su total de la serie estatal.
+    for ab, m in padron['ent'].items():
+        c = m['cve']
+        suma = sum(v[0] for k, v in fv['mun'].items() if k[:2] == c) + sum(v[0] for k, v in fv['noEspecificado'].items() if k[:2] == c)
+        if suma != fv['ent'][c][0] or suma != est['estados'][ab]['2025']:
+            raise SystemExit('planisferio: el fraude municipal de %s (%s) no cuadra con su total estatal del SESNSP (%s)' % (ab, suma, est['estados'][ab]['2025']))
+    _FRA.append(fv)
+    return fv
+
+
 def deu_mun(padron):
     """La deuda en la cuenta de cada municipio (municipios-deuda.js, la escribe
     anclar_deuda_municipios.py): lo que pagó y lo que pidió prestado en el año.
@@ -260,7 +306,7 @@ MAPA_MUN = """<div class="pl-lentes" role="radiogroup" aria-label="Qué ver en e
               <figcaption class="pl-leyenda" id="plMunLeyenda"></figcaption>
             </figure>
             <aside class="pl-ficha" id="plMunFicha" aria-live="polite">
-              <p class="pl-ficha-vacia"><b>Toca un municipio.</b> Verás cuántas personas viven ahí, lo que ingresó en %d, de dónde le llegó, lo que invirtió, lo que pagó de deuda y la puerta a su ficha en el Auditor de entes.</p>
+              <p class="pl-ficha-vacia"><b>Toca un municipio.</b> Verás cuántas personas viven ahí, lo que ingresó en %d, de dónde le llegó, lo que invirtió, lo que pagó de deuda, las carpetas por fraude y la puerta a su ficha en el Auditor de entes.</p>
             </aside>
           </div>
           <p class="pl-pie">Límites: %s (<a href="%s">descarga del INEGI</a>), integrados el %s; huella SHA-256 del archivo de origen <code>%s</code>. Simplificados para verse en pantalla. %s
@@ -288,6 +334,11 @@ def _mapa_mun(e, m, g, ref, padron, iv, dv):
         pb = pob_mun(padron)['mun'].get(m['cve'] + r[0])
         if pb:
             x['pob'] = pb[0]
+        fr = fra_mun(padron)['mun'].get(m['cve'] + r[0])
+        if fr:
+            x['fra'], x['fra26'] = fr
+            if pb:
+                x['fraC'] = round(fr[0] * 100000 / pb[0], 1)
         if len(r) >= 10:
             ing, part, aport, fortamun, fismdf, predial = r[2], r[3], r[4], r[5], r[6], r[7]
             x.update({'ing': round(ing / 1e6, 1), 'part': round(part / 1e6, 1), 'aport': round(aport / 1e6, 1),
@@ -311,13 +362,24 @@ def _mapa_mun(e, m, g, ref, padron, iv, dv):
     info = {'ent': e['abbr'], 'cve': m['cve'], 'pend': 'municipios-sin-cuenta', 'anio': padron['anio'], 'sin': sin,
             'lentes': [dict({'id': i, 'nom': n, 'pal': p, 'que': q, 'u': 'pct' if i in PCT_MUN else 'mdp', 'cero': i in CERO_MUN},
                            **({'u': UNI_MUN[i][0], 'anio': UNI_MUN[i][1]} if i in UNI_MUN else {})) for i, n, p, q in LENTES_MUN],
-            'pob': {'anio': 2020, 'ref': 'ref-inegi-censo-2020', 'url': pob_mun(padron)['pagina']}, 'm': datos}
+            'pob': {'anio': 2020, 'ref': 'ref-inegi-censo-2020', 'url': pob_mun(padron)['pagina']},
+            'fra': {'corte26': fra_mun(padron)['corte2026'], 'url': fra_mun(padron)['pagina'],
+                    'ne': [sum(v[k] for c, v in fra_mun(padron)['noEspecificado'].items() if c[:2] == m['cve']) for k in (0, 1)]}, 'm': datos}
     return MAPA_MUN % (
         '' if sin else lentes, svg, padron['anio'], g['fuente'], g['url'], g['integrado'], g['sha256'][:12] + '…', g['aviso'],
         padron['anio'], ref('ref-inegi-efipem'), ref('ref-inegi-censo-2020'), pob_mun(padron)['pagina'], pob_mun(padron)['sha256'][:12] + '…',
         ('En gris, todas, porque no rinden cuenta municipal %s.' % chip('pendiente', 'municipios-sin-cuenta') if sin else
-         'En gris, los municipios que no rindieron su cuenta de %d %s.' % (padron['anio'], chip('pendiente', 'municipios-sin-cuenta'))),
+         'En gris, los municipios que no rindieron su cuenta de %d %s.' % (padron['anio'], chip('pendiente', 'municipios-sin-cuenta'))) + _pie_fra(m['cve'], padron),
         _json(info))
+
+
+def _pie_fra(cve, padron):
+    """La fuente del fraude municipal y lo que el SESNSP no asignó a un municipio del estado."""
+    F = fra_mun(padron)
+    ne = [sum(v[k] for c, v in F['noEspecificado'].items() if c[:2] == cve) for k in (0, 1)]
+    return (' Carpetas por fraude: %s, %s y %s (<a href="%s">datos abiertos</a>; huellas <code>%s…</code> y <code>%s…</code>) %s.%s' % (
+        html.escape(F['fuente']), F['corte2025'], F['corte2026'], html.escape(F['pagina']), F['sha256_2025'][:12], F['sha256_2026'][:12], chip('oficial'),
+        (' Además, %s carpetas de 2025 y %s de 2026 de este estado no dicen en qué municipio: van aparte, no se reparten.' % (format(ne[0], ','), format(ne[1], ','))) if any(ne) else ''))
 
 
 def _existe(enlace):
@@ -1829,10 +1891,39 @@ def _penal_portal(base, ref, e):
              'a la fiscalía: una carpeta es una investigación, no una víctima, y más carpetas puede ser más denuncia. En el país, por cada 100 fraudes que estima la '
              'encuesta hubo unas %s carpetas %s; no se restan, porque la encuesta cuenta a personas adultas en sus hogares y las carpetas incluyen a empresas.</p>') % (
                  format(P['c100'], '.1f'), chip('derivado'))
+    p3 = _fraude_mun_portal(e)
     ir = ('<p class="pl-ficha-ir"><a href="planisferio.html?d=penal&amp;e=%s">El fraude de los 32 estados, en el mapa ➔</a> '
           '<a href="aprende-fraude-en-numeros.html">El fraude en números, en la Enciclopedia ➔</a> '
           '<a href="herramienta-inspector-efos.html">Busca un RFC en la lista 69-B ➔</a></p>') % quote(a)
-    return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, ir)
+    return '<div class="pl-pisos">%s%s%s</div>%s%s' % (p1, p2, p3, ciego, ir)
+
+
+def _fraude_mun_portal(e):
+    """El fraude municipio por municipio (Ronda 4, 22-11-2026): las carpetas de 2025 de los diez municipios con más, su tasa
+    con la población del Censo 2020 y lo que no dice municipio. El orden es por carpetas, nunca por tasa: en un municipio chico,
+    pocas carpetas mueven mucho la tasa."""
+    padron = _padron()
+    F, P = fra_mun(padron), pob_mun(padron)
+    m = padron['ent'][e['abbr']]
+    c = m['cve']
+    filas = [(r[1], F['mun'][c + r[0]], (P['mun'].get(c + r[0]) or [None])[0]) for r in m['lista'] if c + r[0] in F['mun']]
+    tot = sum(f[1][0] for f in filas)
+    ne = [sum(v[k] for k2, v in F['noEspecificado'].items() if k2[:2] == c) for k in (0, 1)]
+    top = sorted(filas, key=lambda f: (-f[1][0], f[0]))[:10]
+    tasa = lambda f: '%s %s' % (format(f[1][0] * 100000 / f[2], ',.1f'), chip('derivado')) if f[2] else '—'
+    trs = ''.join('<tr><th scope="row">%s</th><td>%s</td><td>%s</td><td>%s</td></tr>' % (html.escape(f[0]), format(f[1][0], ','), format(f[1][1], ','), tasa(f)) for f in top if f[1][0] > 0)
+    sin = sum(1 for f in filas if f[1][0] == 0)
+    return ('<article class="pl-piso"><h3>🏘️ El fraude, municipio por municipio</h3>'
+            '<p>Las fiscalías abrieron en 2025 <b>%s carpetas por fraude</b> en los municipios de %s %s%s; %s municipios no registraron ninguna. Los que más:</p>'
+            '<div class="pl-tabla-caja"><table class="pl-tabla"><thead><tr><th scope="col">Municipio</th><th scope="col">Carpetas 2025</th><th scope="col">%s</th>'
+            '<th scope="col">Por cada 100 mil (Censo 2020)</th></tr></thead><tbody>%s</tbody></table></div>'
+            '<p class="pl-dim-nota">SESNSP, incidencia delictiva municipal del fuero común (<a href="%s">datos abiertos</a>). Una carpeta no es una víctima ni un fraude '
+            'comprobado, y un municipio con más carpetas no es un municipio con más fraude: cuenta dónde se presentó la denuncia. La tasa divide las carpetas de 2025 '
+            'entre la población del Censo 2020: la división es nuestra y mezcla dos años.</p>'
+            '<p class="pl-ficha-ir"><a href="%s?ml=fra#mapa-municipios">Sus municipios en el mapa, con el fraude ➔</a></p></article>') % (
+        format(tot, ','), html.escape(e['name']), chip('oficial'),
+        (' y otras %s no dicen en qué municipio' % format(ne[0], ',')) if ne[0] else '', format(sin, ','), html.escape(F['corte2026'].capitalize()),
+        trs, html.escape(F['pagina']), portal(e['abbr']))
 
 
 def _social_portal(base, ref, e):
