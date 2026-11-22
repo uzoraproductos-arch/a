@@ -258,6 +258,35 @@
   var raiz = document.getElementById('cpRaiz');
   if (!raiz) return;
   var D = JSON.parse(document.getElementById('cpDatos').textContent);
+  /* Rendimiento en celular (22-11-2026): la página trae solo el núcleo. La ley, las tablas, los decretos y las leyes en
+     espera de cada entidad (D.porEnt) y el INPC (D.inpcSrc) viven en su archivo, versionado por su huella, y se piden al
+     usarlos; al llegar se juntan en el mismo D, así que las cuentas no cambian. */
+  D.mun = D.mun || []; D.tablas = D.tablas || {}; D.espera = D.espera || {}; D.dtv = D.dtv || {};
+  var pide = {};
+  function trae(url) {
+    if (!pide[url]) pide[url] = fetch(url).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+    return pide[url];
+  }
+  var yaEnt = {};
+  function entDatos(ent) {
+    if (yaEnt[ent] || !D.porEnt || !D.porEnt[ent]) return Promise.resolve();
+    return trae(D.porEnt[ent]).then(function (x) {
+      if (yaEnt[ent]) return;
+      yaEnt[ent] = true;
+      D.mun = D.mun.concat(x.mun);
+      Object.keys(x.tablas).forEach(function (k) { D.tablas[k] = x.tablas[k]; });
+      Object.keys(x.espera).forEach(function (k) { D.espera[k] = x.espera[k]; });
+      if (x.dtv) D.dtv[ent] = x.dtv;
+    }, function () { avisaFalla(); });
+  }
+  function inpcListo() {
+    if (D.inpc || !D.inpcSrc) return Promise.resolve();
+    return trae(D.inpcSrc).then(function (x) { D.inpc = x; }, function () { avisaFalla(); });
+  }
+  function avisaFalla() {
+    var f = document.getElementById('cpMunFicha');
+    if (f) f.innerHTML = '<p class="ci-error">No se pudieron cargar las leyes de este estado. Revisa tu conexión y vuelve a abrir la página.</p>';
+  }
   var $ = function (id) { return document.getElementById(id); };
   var MUN = window.AUDIT_MUNICIPIOS || null;
   function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -413,7 +442,8 @@
     if (!(vf > 0)) vf = 2500000;
     var tipo = $('cpTipo').value;
     $('cpCompCap').textContent = 'Predial anual de un predio ' + (tipo === 'baldio' ? 'baldío' : 'construido') + ' con valor fiscal de ' + pesos(vf);
-    var filas = D.mun.map(function (m) { return [m, r2(base(m, vf, tipo) * 6)]; }).sort(function (a, b) { return a[1] - b[1]; });
+    var ent = $('cpEnt').value;
+    var filas = D.mun.filter(function (m) { return m.ent === ent; }).map(function (m) { return [m, r2(base(m, vf, tipo) * 6)]; }).sort(function (a, b) { return a[1] - b[1]; });
     $('cpComp').innerHTML = filas.map(function (f) {
       var m = f[0];
       return '<tr><th scope="row">' + esc(m.nombre) + '</th><td>' + pesos(f[1]) + '</td><td>' + m.recargo.pct + ' % · ' + (m.multa ? (m.multa.min === m.multa.max ? m.multa.min : m.multa.min + '–' + m.multa.max) + ' %' : 'no la fija') + '</td></tr>';
@@ -667,8 +697,11 @@
   /* Lo que llega por la dirección (?mun=zapopan&vf=…), para que el chat abra la cuenta ya puesta. */
   var q = null;
   try { q = new URLSearchParams(location.search); } catch (e) { /* sin parámetros */ }
-  var pedido = q && q.get('mun') ? D.mun.filter(function (m) { return m.id === q.get('mun'); })[0] : null;
-  if (pedido) $('cpEnt').value = pedido.ent;
+  var pedidoId = q && q.get('mun') && D.munEnt && D.munEnt[q.get('mun')] ? q.get('mun') : null;
+  if (pedidoId) $('cpEnt').value = D.munEnt[pedidoId];
+  entDatos($('cpEnt').value).then(inicia);
+  function inicia() {
+  var pedido = pedidoId ? D.mun.filter(function (m) { return m.id === pedidoId; })[0] : null;
   llenaMunicipios();
   $('cpMun').value = pedido ? pedido.cve : '120';
   if (!$('cpMun').value) $('cpMun').selectedIndex = 0;
@@ -692,14 +725,19 @@
   $('cpImprime').addEventListener('click', imprime);
   $('cpBaja').addEventListener('click', descarga);
   $('cpLiga').addEventListener('click', copiaLiga);
-  $('cpEnt').addEventListener('change', function () { llenaMunicipios(); ficha(); $('cpRes').hidden = true; mercado(); });
+  $('cpEnt').addEventListener('change', function () {
+    entDatos($('cpEnt').value).then(function () { llenaMunicipios(); ficha(); $('cpRes').hidden = true; mercado(); compara(); });
+  });
   $('cpMun').addEventListener('change', function () { ficha(); $('cpRes').hidden = true; mercado(); });
   $('cpTipo').addEventListener('change', compara);
   $('cpVf').addEventListener('input', compara);
-  $('cpDebe').addEventListener('change', function () { $('cpDeuda').hidden = !this.checked; });
+  $('cpDebe').addEventListener('change', function () { $('cpDeuda').hidden = !this.checked; if (this.checked) inpcListo(); });
   $('cpSit').addEventListener('change', function () { $('cpMultaCaja').hidden = this.value === 'esp'; });
   $('cpMultaCaja').hidden = $('cpSit').value === 'esp';
-  $('cpForm').addEventListener('submit', pinta);
+  $('cpForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if ($('cpDebe').checked) inpcListo().then(function () { pinta(); }); else pinta();
+  });
   $('cpSueloSel').addEventListener('change', pintaSuelo);
   ['cpTCal', 'cpTEdad', 'cpTEst', 'cpTNiv'].forEach(function (id) { $(id).addEventListener('change', pintaTabla); });
   $('cpTUso').addEventListener('change', function () {
@@ -719,5 +757,6 @@
     compara();
   });
   mercado();
-  if (num('cpVf') > 0) pinta();
+  if (num('cpVf') > 0) { if ($('cpDebe').checked) inpcListo().then(function () { pinta(); }); else pinta(); }
+  }
 })();

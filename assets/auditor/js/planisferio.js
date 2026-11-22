@@ -51,8 +51,20 @@
   (function () {
     var nodo = document.getElementById('plDatos');
     if (!nodo) return;
-    var D;
-    try { D = JSON.parse(nodo.textContent); } catch (e) { return; }
+    /* Los datos del mapa viven en su propio archivo (assets/auditor/data/planisferio-datos.json,
+       versionado por su huella): el HTML queda ligero y el navegador los guarda aparte. */
+    var src = nodo.getAttribute('data-src');
+    if (src) {
+      fetch(src).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(arranca, function () {
+        var f = document.getElementById('plFicha');
+        if (f) f.innerHTML = '<p class="pl-ficha-vacia"><b>No se pudieron cargar las cifras del mapa.</b> Revisa tu conexión y vuelve a abrir la página; cada entidad se abre también desde «Las 32 entidades».</p>';
+      });
+    } else {
+      var D0;
+      try { D0 = JSON.parse(nodo.textContent); } catch (e) { return; }
+      arranca(D0);
+    }
+    function arranca(D) {
     var PAL = {
       oro: ['#fbf3dc', '#f0d98f', '#d9b34f', '#a8801f', '#6b4f0c'],
       azul: ['#e3ecf8', '#b4c9ea', '#6f95d2', '#2f5fa8', '#0b2a63'],
@@ -658,6 +670,7 @@
           setTimeout(function () { copiaT.textContent = 'Copiar el enlace de esta vista'; }, 2600);
         }, function () { copiaT.textContent = 'No se pudo copiar: usa la dirección del navegador'; });
       });
+    }
     }
   })();
 

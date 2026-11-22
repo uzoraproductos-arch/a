@@ -146,6 +146,22 @@ def _json(x):
     return json.dumps(x, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 
 
+def datos_externos(nombre, x):
+    """Escribe los datos de una página en assets/auditor/data/<nombre> y
+    devuelve su dirección versionada por la huella del contenido (Ronda 2,
+    22-11-2026: rendimiento en celular). Así el HTML no carga cientos de KB en
+    línea, el navegador guarda los datos aparte y un cambio de cifras cambia
+    la dirección sola. La generación da el mismo archivo dos veces seguidas."""
+    import hashlib
+    t = json.dumps(x, ensure_ascii=False, separators=(',', ':'))
+    ruta = os.path.join(RAIZ, 'assets', 'auditor', 'data', nombre)
+    previo = open(ruta, encoding='utf-8').read() if os.path.exists(ruta) else None
+    if previo != t:
+        with open(ruta, 'w', encoding='utf-8', newline='\n') as f:
+            f.write(t)
+    return 'assets/auditor/data/%s?v=%s' % (nombre, hashlib.sha256(t.encode('utf-8')).hexdigest()[:12])
+
+
 def _padron():
     """El padrón municipal tal cual (municipios-efipem.js), leído con node
     para no reinterpretar a mano un objeto de JavaScript."""
@@ -1531,12 +1547,12 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
           <div class="pl-solo-dim pl-fin" data-dim="judicial" hidden>
             %s
           </div>
-          <script type="application/json" id="plDatos">%s</script>
+          <script type="application/json" id="plDatos" data-src="%s"></script>
           <noscript><p>El mapa se colorea con JavaScript; sin él, cada entidad se abre desde la lista de arriba.</p></noscript>''' % (
         pasos, ''.join(dims), d0[0], d0[2].lower(), d0[3], lentes, svg, ''.join(cajones), ''.join(plantillas),
         _cajon('📍', 'Las 32 entidades', 'Elige una entidad para entrar a su portal', 'plTplIndiceTit',
                '<nav class="pl-indice" aria-label="Las 32 entidades, una por una"><ul>%s</ul></nav>' % indice),
-        _bloque_judicial_mapa(base, ref, filas), _json(datos))
+        _bloque_judicial_mapa(base, ref, filas), datos_externos('planisferio-datos.json', datos))
     for _l in ('servicios.html',):
         if not os.path.exists(os.path.join(RAIZ, _l)):
             raise SystemExit('planisferio: el puente a Servicios apunta a %s, que no existe' % _l)
