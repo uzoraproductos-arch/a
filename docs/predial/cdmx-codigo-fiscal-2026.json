@@ -1,0 +1,223 @@
+{
+  "entidad": "Ciudad de México",
+  "clave_ent": "09",
+  "abreviatura": "CDMX",
+  "ley": "Código Fiscal de la Ciudad de México (última reforma G.O. CDMX 08-10-2026; Art. 130 tarifa reformada G.O. CDMX 19-12-2025)",
+  "url": "https://data.consejeria.cdmx.gob.mx/images/leyes/2025/CODIGOS_2025/CODIGO_FISCAL_DE_LA_CDMX_26.2.pdf",
+  "pagina_indice": "https://data.consejeria.cdmx.gob.mx/index.php/leyes/codigos",
+  "sha256_pdf": "0d9ed6122b06a8582dead8604147e66734212bd9df1a9c2dd6c4ab262dc17938",
+  "bytes_pdf": 163963964,
+  "paginas_tarifa": [
+    79,
+    80
+  ],
+  "alcaldias": [
+    {
+      "cve": "09002",
+      "nombre": "Azcapotzalco"
+    },
+    {
+      "cve": "09003",
+      "nombre": "Coyoacán"
+    },
+    {
+      "cve": "09004",
+      "nombre": "Cuajimalpa de Morelos"
+    },
+    {
+      "cve": "09005",
+      "nombre": "Gustavo A. Madero"
+    },
+    {
+      "cve": "09006",
+      "nombre": "Iztacalco"
+    },
+    {
+      "cve": "09007",
+      "nombre": "Iztapalapa"
+    },
+    {
+      "cve": "09008",
+      "nombre": "La Magdalena Contreras"
+    },
+    {
+      "cve": "09009",
+      "nombre": "Milpa Alta"
+    },
+    {
+      "cve": "09010",
+      "nombre": "Álvaro Obregón"
+    },
+    {
+      "cve": "09011",
+      "nombre": "Tláhuac"
+    },
+    {
+      "cve": "09012",
+      "nombre": "Tlalpan"
+    },
+    {
+      "cve": "09013",
+      "nombre": "Xochimilco"
+    },
+    {
+      "cve": "09014",
+      "nombre": "Benito Juárez"
+    },
+    {
+      "cve": "09015",
+      "nombre": "Cuauhtémoc"
+    },
+    {
+      "cve": "09016",
+      "nombre": "Miguel Hidalgo"
+    },
+    {
+      "cve": "09017",
+      "nombre": "Venustiano Carranza"
+    }
+  ],
+  "tarifa_bimestral_art_130_fr_I": [
+    {
+      "rango": "A",
+      "li": 0.12,
+      "ls": 235095.02,
+      "cf": 231.0,
+      "pct": 0.0208
+    },
+    {
+      "rango": "B",
+      "li": 235095.03,
+      "ls": 470189.36,
+      "cf": 279.91,
+      "pct": 0.03889
+    },
+    {
+      "rango": "C",
+      "li": 470189.37,
+      "ls": 940380.47,
+      "cf": 371.35,
+      "pct": 0.12149
+    },
+    {
+      "rango": "D",
+      "li": 940380.48,
+      "ls": 1410569.8,
+      "cf": 942.6,
+      "pct": 0.14625
+    },
+    {
+      "rango": "E",
+      "li": 1410569.81,
+      "ls": 1880760.95,
+      "cf": 1630.26,
+      "pct": 0.14723
+    },
+    {
+      "rango": "F",
+      "li": 1880760.96,
+      "ls": 2350950.27,
+      "cf": 2322.53,
+      "pct": 0.16801
+    },
+    {
+      "rango": "G",
+      "li": 2350950.28,
+      "ls": 2821139.6,
+      "cf": 3112.51,
+      "pct": 0.17052
+    },
+    {
+      "rango": "H",
+      "li": 2821139.61,
+      "ls": 3291330.76,
+      "cf": 3914.29,
+      "pct": 0.18305
+    },
+    {
+      "rango": "I",
+      "li": 3291330.77,
+      "ls": 3761520.09,
+      "cf": 4774.98,
+      "pct": 0.18814
+    },
+    {
+      "rango": "J",
+      "li": 3761520.1,
+      "ls": 4231711.25,
+      "cf": 5659.6,
+      "pct": 0.19034
+    },
+    {
+      "rango": "K",
+      "li": 4231711.26,
+      "ls": 4701900.56,
+      "cf": 6554.57,
+      "pct": 0.19292
+    },
+    {
+      "rango": "L",
+      "li": 4701900.57,
+      "ls": 5172089.9,
+      "cf": 7461.67,
+      "pct": 0.1949
+    },
+    {
+      "rango": "M",
+      "li": 5172089.91,
+      "ls": 5642728.83,
+      "cf": 8378.08,
+      "pct": 0.20261
+    },
+    {
+      "rango": "N",
+      "li": 5642728.84,
+      "ls": 16928184.61,
+      "cf": 9331.65,
+      "pct": 0.26334
+    },
+    {
+      "rango": "O",
+      "li": 16928184.62,
+      "ls": 35629332.11,
+      "cf": 39050.78,
+      "pct": 0.26142
+    },
+    {
+      "rango": "P",
+      "li": 35629332.12,
+      "ls": null,
+      "cf": 87939.33,
+      "pct": 0.30909
+    }
+  ],
+  "reducciones_art_130_fr_III": [
+    {
+      "caso": "Suelo de conservación (agrícola, pecuario, forestal, pastoreo controlado, con constancia SEDEMA)",
+      "reduccion_pct": 80
+    },
+    {
+      "caso": "Zonas con intensidad de construcción autorizada < 10 % sin fines lucrativos (constancia SEDEMA)",
+      "reduccion_pct": 30
+    },
+    {
+      "caso": "Inmuebles con valor patrimonial en restauración (certificado SEDUVI)",
+      "reduccion_pct": 100
+    }
+  ],
+  "nota_subsidios_2026": "Los subsidios habitacionales de rangos A a G y cuota fija para grupos vulnerables se cotejarán contra la Resolución de Carácter General 2026 y el art. 282 del CFCDMX antes de aplicarse como descuento automático.",
+  "pago_y_descuentos_art_131": {
+    "articulo": "Art. 131 (pág. 80)",
+    "periodicidad": "Bimestral, durante febrero, abril, junio, agosto, octubre y diciembre.",
+    "anual_anticipado": [
+      {
+        "mes": "enero",
+        "descuento_pct": 8
+      },
+      {
+        "mes": "febrero",
+        "descuento_pct": 5
+      }
+    ]
+  }
+}
