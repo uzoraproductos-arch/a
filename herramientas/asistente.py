@@ -758,7 +758,8 @@ def escribir_base():
     _corto = lambda n: [n.split(' de ')[0]] if ' de ' in n and not n.startswith('san ') else []
     dat['calc']['pred'] = [[m['id'], _pl(m['nombre'])] + _corto(_pl(m['nombre']))
                            for m in cc_predial.MUNICIPIOS] + [
-        ['vallarta', 'vallarta'], ['tlaquepaque', 'tlaquepaque'], ['zapotlan', 'ciudad guzman', 'zapotlan'], ['tlajomulco', 'tlajomulco']]
+        ['vallarta', 'vallarta'], ['tlaquepaque', 'tlaquepaque'], ['zapotlan', 'ciudad guzman', 'zapotlan'], ['tlajomulco', 'tlajomulco'],
+        ['cdmx005', 'gustavo a madero', 'gam'], ['cdmx008', 'magdalena contreras']]
     # Inversión y Megaobras, dentro del chat (24-10-2026): sus obras, sus
     # sexenios, sus cifras y sus cinco aplicaciones.
     import asistente_megaobras

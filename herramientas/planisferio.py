@@ -1913,17 +1913,25 @@ def _fraude_mun_portal(e):
     tasa = lambda f: '%s %s' % (format(f[1][0] * 100000 / f[2], ',.1f'), chip('derivado')) if f[2] else '—'
     trs = ''.join('<tr><th scope="row">%s</th><td>%s</td><td>%s</td><td>%s</td></tr>' % (html.escape(f[0]), format(f[1][0], ','), format(f[1][1], ','), tasa(f)) for f in top if f[1][0] > 0)
     sin = sum(1 for f in filas if f[1][0] == 0)
-    return ('<article class="pl-piso"><h3>🏘️ El fraude, municipio por municipio</h3>'
-            '<p>Las fiscalías abrieron en 2025 <b>%s carpetas por fraude</b> en los municipios de %s %s%s; %s municipios no registraron ninguna. Los que más:</p>'
-            '<div class="pl-tabla-caja"><table class="pl-tabla"><thead><tr><th scope="col">Municipio</th><th scope="col">Carpetas 2025</th><th scope="col">%s</th>'
+    # La Ciudad de México: alcaldías, y su mapa no lleva color (no rinden cuenta municipal), así que la liga no promete el fraude pintado.
+    alc = not m['conCifra']
+    pl, sg = ('alcaldías', 'alcaldía') if alc else ('municipios', 'municipio')
+    return ('<article class="pl-piso"><h3>🏘️ El fraude, %s por %s</h3>'
+            '<p>Las fiscalías abrieron en 2025 <b>%s carpetas por fraude</b> en %s de %s %s%s%s. %s que más:</p>'
+            '<div class="pl-tabla-caja"><table class="pl-tabla"><thead><tr><th scope="col">%s</th><th scope="col">Carpetas 2025</th><th scope="col">%s</th>'
             '<th scope="col">Por cada 100 mil (Censo 2020)</th></tr></thead><tbody>%s</tbody></table></div>'
             '<p class="pl-dim-nota">SESNSP, incidencia delictiva municipal del fuero común (<a href="%s">datos abiertos</a>). Una carpeta no es una víctima ni un fraude '
-            'comprobado, y un municipio con más carpetas no es un municipio con más fraude: cuenta dónde se presentó la denuncia. La tasa divide las carpetas de 2025 '
-            'entre la población del Censo 2020: la división es nuestra y mezcla dos años.</p>'
-            '<p class="pl-ficha-ir"><a href="%s?ml=fra#mapa-municipios">Sus municipios en el mapa, con el fraude ➔</a></p></article>') % (
-        format(tot, ','), html.escape(e['name']), chip('oficial'),
-        (' y otras %s no dicen en qué municipio' % format(ne[0], ',')) if ne[0] else '', format(sin, ','), html.escape(F['corte2026'].capitalize()),
-        trs, html.escape(F['pagina']), portal(e['abbr']))
+            'comprobado, y %s con más carpetas no es %s con más fraude: cuenta dónde se presentó la denuncia. La tasa divide las carpetas de 2025 '
+            'entre la población del Censo 2020: la división es nuestra y mezcla dos años.%s</p>'
+            '<p class="pl-ficha-ir"><a href="%s">%s</a></p></article>') % (
+        sg, sg, format(tot, ','), 'las %s' % pl if alc else 'los %s' % pl, html.escape(e['name']), chip('oficial'),
+        (' y otras %s no dicen en qué %s' % (format(ne[0], ','), sg)) if ne[0] else '',
+        ('; %s %s no registraron ninguna' % (format(sin, ','), pl)) if sin else '', 'Las' if alc else 'Los',
+        sg.capitalize(), html.escape(F['corte2026'].capitalize()),
+        trs, html.escape(F['pagina']), 'una %s' % sg if alc else 'un %s' % sg, 'una %s' % sg if alc else 'un %s' % sg,
+        ' Las carpetas que no dicen %s se cuentan aparte: no se reparten entre las demás.' % sg if ne[0] else '',
+        portal(e['abbr']) + ('#mapa-municipios' if alc else '?ml=fra#mapa-municipios'),
+        'Sus alcaldías en el mapa (sin color por cifra: no rinden cuenta municipal) ➔' if alc else 'Sus municipios en el mapa, con el fraude ➔')
 
 
 def _social_portal(base, ref, e):

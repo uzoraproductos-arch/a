@@ -171,7 +171,8 @@
       if (!mejor) return null;
       var cand = MIDX[mejor];
       var enEdo = edos.length ? cand.filter(function (x) { return edos.some(function (e) { return e.a === x.a; }); }) : [];
-      var lista = (enEdo.length ? enEdo : cand).slice().sort(function (a, b) { return (mv(b, 'ing') || 0) - (mv(a, 'ing') || 0); });
+      /* Entre homónimos gana el de más habitantes (Censo 2020; todos lo tienen, también las alcaldías, que no rinden cuenta); luego, el de más ingreso. */
+      var lista = (enEdo.length ? enEdo : cand).slice().sort(function (a, b) { return (pobDe(b) || 0) - (pobDe(a) || 0) || (mv(b, 'ing') || 0) - (mv(a, 'ing') || 0); });
       return { m: lista[0], otros: enEdo.length ? [] : cand.filter(function (x) { return x !== lista[0]; }) };
     }
 
@@ -2319,7 +2320,9 @@
         var km = metrica(t, MET_MUN) || (sigue && ctx.tipo === 'mun' ? ctx.met : '');
         if (!mm) return fin(conLiga(munRanking(km, dir, cuantos, es[0]), 'numeros-baja-al-territorio.html', 'Baja al territorio'), { tipo: 'mun', met: km });
         var rm = munMet(mm.m, km, mm.otros);
-        rm.ir = (km === 'pob' || km === 'iph' || km === 'fra' || km === 'fraC') && mv(mm.m, km) != null ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html?ml=' + km + '#mapa-municipios', 'sus municipios en el Planisferio']
+        /* Las alcaldías de la Ciudad de México no llevan color en su mapa (no rinden cuenta municipal): su fraude vive en la página penal del portal. */
+        rm.ir = (km === 'fra' || km === 'fraC') && mm.m.a === 'CDMX' && mv(mm.m, km) != null ? ['planisferio-cdmx-penal.html', 'el fraude alcaldía por alcaldía en el Planisferio']
+          : (km === 'pob' || km === 'iph' || km === 'fra' || km === 'fraC') && mv(mm.m, km) != null ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html?ml=' + km + '#mapa-municipios', 'sus municipios en el Planisferio']
           : km === 'inv' && mm.m.v ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html?ml=inv#mapa-municipios', 'sus municipios en el Planisferio']
           : km === 'deu' && mm.m.v ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-deuda.html', 'la deuda de sus municipios en el Planisferio']
           : ['herramienta-inspector-entes.html#ente=municipal:' + mm.m.cve, 'su ficha técnica en el Auditor de entes públicos'];
