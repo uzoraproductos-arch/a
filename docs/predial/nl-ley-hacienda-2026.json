@@ -1,0 +1,76 @@
+{
+  "entidad": "Nuevo León",
+  "clave_ent": "19",
+  "abreviatura": "NL",
+  "ley": "Ley de Hacienda para los Municipios del Estado de Nuevo León",
+  "url": "https://www.hcnl.gob.mx/trabajo_legislativo/leyes/paquete_fiscal/ley_de_hacienda_para_los_municipios_del_estado_de_nuevo_leon/",
+  "sha256_html": "a93326fabdcfe14a3007b45bcac1b8645bf647549af901a0c4f874a8a12b071b",
+  "bytes_html": 569687,
+  "corte_consulta": "2026-11-21",
+  "aplica_a": "Los 51 municipios del Estado de Nuevo León (tasa única estatal con diferenciación para baldíos en 7 municipios metropolitanos).",
+  "reglas": {
+    "base": {
+      "articulo": "Art. 21 bis-2",
+      "resumen": "Valor catastral de los predios determinado con las tablas de valores unitarios de suelo y construcción aprobadas por el Congreso del Estado."
+    },
+    "tasas_anuales_al_millar": {
+      "articulo": "Art. 21 bis-8",
+      "habitacional": 2.0,
+      "comercial_industrial_servicios": 3.0,
+      "baldio_metropolitano": 4.0,
+      "baldio_resto_estado_o_menor_200m2_unico": 3.0,
+      "municipios_metropolitanos_baldio_4_millar": [
+        {
+          "cve": "19006",
+          "nombre": "Apodaca"
+        },
+        {
+          "cve": "19021",
+          "nombre": "General Escobedo"
+        },
+        {
+          "cve": "19026",
+          "nombre": "Guadalupe"
+        },
+        {
+          "cve": "19039",
+          "nombre": "Monterrey"
+        },
+        {
+          "cve": "19046",
+          "nombre": "San Nicolás de los Garza"
+        },
+        {
+          "cve": "19019",
+          "nombre": "San Pedro Garza García"
+        },
+        {
+          "cve": "19048",
+          "nombre": "Santa Catarina"
+        }
+      ]
+    },
+    "tarifa_especial": {
+      "articulo": "Art. 21 bis-9",
+      "cuotas_anuales_uma": 2,
+      "nota": "Tarifa única especial de 2 cuotas anuales para supuestos previstos en el art. 21 bis-9 (previa acreditación ante la Tesorería Municipal, art. 21 bis-10)."
+    },
+    "pago_y_descuentos": {
+      "articulo": "Art. 21 bis-12",
+      "periodicidad": "Anual, pagadero por bimestres adelantados a más tardar el día 5 de febrero, abril, junio, agosto, octubre y diciembre.",
+      "anual_anticipado": [
+        {
+          "hasta": "5 de febrero",
+          "descuento_pct": 15
+        },
+        {
+          "hasta": "5 de marzo",
+          "descuento_pct": 10
+        }
+      ],
+      "minimo_anual_cuotas_uma": 2,
+      "pago_unico_si_menor_o_igual_cuotas_uma": 4
+    }
+  },
+  "pendiente_en_nl": "Tablas de valores unitarios de suelo y construcción por municipio (se aprueban por decreto municipal en el Periódico Oficial de Nuevo León) y recargos de la Ley de Ingresos municipal vigente."
+}
