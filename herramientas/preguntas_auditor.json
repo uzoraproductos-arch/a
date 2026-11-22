@@ -3290,6 +3290,34 @@
    "dice": [
     "Esa nota ya está en nuestra hemeroteca"
    ]
+  },
+  {
+   "q": "¿Cuántos habitantes tiene Zapopan?",
+   "ir": "planisferio-jal.html?ml=pob#mapa-municipios",
+   "dice": [
+    "1,476,491",
+    "Censo de Población y Vivienda 2020"
+   ]
+  },
+  {
+   "q": "¿Cuánto recibe por habitante Guadalajara?",
+   "ir": "planisferio-jal.html?ml=iph#mapa-municipios",
+   "dice": [
+    "8,600 por habitante",
+    "mezcla el ingreso de 2024"
+   ]
+  },
+  {
+   "q": "¿Qué municipio de Jalisco tiene más habitantes?",
+   "dice": [
+    "1,476,491 personas"
+   ]
+  },
+  {
+   "q": "¿Cuánta población tiene Las Vigas, Guerrero?",
+   "dice": [
+    "no existía cuando se levantó el Censo"
+   ]
   }
  ]
 }
