@@ -592,3 +592,12 @@ a.pa-ctl { text-decoration: none; }
 .pa-pag-dic { margin: 2rem 0 0; padding: 1.25rem; border-radius: 14px; border: 2px solid var(--marca, #1f5fa8); background: var(--fondo-sec, #f3f7fc); }
 :root[data-theme="dark"] .pa-pag-dic { background: rgba(255,255,255,.04); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pa-pag-dic { background: rgba(255,255,255,.04); } }
+/* La revisión completa y «Ya revisamos esto por ti» (22-11-2026). */
+.pa-int { border: 1px solid #b9cbeb; border-radius: 16px; padding: 14px 16px; background: #f5f8fe; }
+.pa-int-cap { padding: 10px 0 4px; border-top: 1px solid #dbe4f3; }
+.pa-int-cap:first-of-type { border-top: 0; }
+.pa-int-cap h4 { margin: 0 0 6px; font-size: 18px; color: #0b2a63; }
+.pa-hecho p { margin: 4px 0; }
+[data-theme="dark"] .pa-int { background: #16233a; border-color: #2a3b57; }
+[data-theme="dark"] .pa-int-cap { border-color: #2a3b57; }
+[data-theme="dark"] .pa-int-cap h4 { color: #e8eefa; }
