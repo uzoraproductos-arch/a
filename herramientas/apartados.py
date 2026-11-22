@@ -2740,7 +2740,7 @@ def sv_novedades_lista(sid, sf, resp=False):
     cada una lleva a la respuesta completa del Inspector (21-11-2026), que abre su página."""
     return '<ul class="sv-nuevo-lista">%s</ul>' % ''.join(
         '<li><span aria-hidden="true">%s</span> <a href="%s"><b>%s</b></a>%s <span>%s</span></li>' % (
-            i, esc_attr(sf.resp_liga(html.unescape(re.sub('<[^>]+>', '', t)), lg) if resp else lg), t, (' <small class="sv-nuevo-fecha">%s</small>' % sv_novedad_fecha(lg, t)) if sv_novedad_fecha(lg, t) else '', tx)
+            i, esc_attr(sf.revisa_liga(sid, html.unescape(re.sub('<[^>]+>', '', t)), lg) if resp else lg), t, (' <small class="sv-nuevo-fecha">%s</small>' % sv_novedad_fecha(lg, t)) if sv_novedad_fecha(lg, t) else '', tx)
         for i, t, tx, lg, _k in sf.nuevos(sid))
 
 
@@ -2761,7 +2761,7 @@ def sv_servicios_y_nuevo(sf, puertas):
             nv = sf.nuevos(x[0])
             tarjetas.append('              ' + sv_card(
                 x[2], '%s%s' % (COBRO[x[0]], (' · %d %s' % (len(nv), 'novedad' if len(nv) == 1 else 'novedades')) if nv else ''),
-                x[1], 'Nuevo' if nv else '', sf.resp_liga(sv_pregunta(x[0])[0]), (),
+                x[1], 'Nuevo' if nv else '', sf.revisa_liga(x[0]), (),
                 SV_TONO[lid], id_='sv-nuevo-%s' % x[0], attrs=' data-sv-srv="%s"' % x[0],
                 pie=(sv_novedades_lista(x[0], sf, resp=True) if nv else '') + sv_most_boton(x[0]), ligas=True))
         paneles.append(
@@ -2769,8 +2769,7 @@ def sv_servicios_y_nuevo(sf, puertas):
             '            <p class="sv-linea-tit"><span aria-hidden="true">%s</span> %s</p>\n'
             '            <p class="sv-fam-tx">%s</p>\n'
             '            <div class="sv-cards">\n%s\n            </div>\n'
-            '            <p class="sv-nota"><a href="%s#fam-%s">Compara los servicios de %s ➔</a></p>\n'
-            '          </div>' % (lid, lid, ico, frase, tx, '\n'.join(tarjetas), SV_CATALOGO, lid, tit[0].lower() + tit[1:]))
+            '          </div>' % (lid, lid, ico, frase, tx, '\n'.join(tarjetas)))
     return ('<div class="sv-tabs" data-sv-tabs>\n          <div class="sv-tabs-barra" role="group" aria-label="Servicios por familia">%s</div>\n'
             '          <div class="sv-lineas">\n%s\n          </div>\n        </div>') % (''.join(
                 '<button type="button" class="sv-tab" data-sv-tab="%s" aria-pressed="%s"><span aria-hidden="true">%s</span> %s</button>' % (
@@ -2821,10 +2820,9 @@ SV_ENTRADA = {
 
 
 def sv_most_boton(sid):
-    """La puerta de cada tarjeta al mostrador del Inspector (sv-mostrador.js)."""
+    """La puerta de cada tarjeta a la página del Inspector de su servicio (servicios-revisa.html)."""
     import servicios_fichas as sf
-    return '<a class="sv-most-abre" href="%s" data-sv-most="%s"><span aria-hidden="true">🔍</span> Revísalo aquí ➔</a>' % (
-        esc_attr(sf.resp_liga(sv_pregunta(sid)[0])), sid)
+    return '<a class="sv-most-abre" href="%s"><span aria-hidden="true">🔍</span> Revísalo con el Inspector ➔</a>' % esc_attr(sf.revisa_liga(sid))
 
 
 def sv_mostrador(sf):
@@ -2843,12 +2841,12 @@ def sv_mostrador(sf):
     opciones = ''.join('<optgroup label="%s">%s</optgroup>' % (esc_attr(tit), ''.join(
         '<option value="%s">%s</option>' % (x[0], html.escape(x[2])) for x in SERVICIOS if x[6] == lid))
         for lid, _i, tit, _t in LINEAS if any(x[6] == lid for x in SERVICIOS))
-    return ('<div class="sv-most" id="mostrador" hidden>\n'
+    return ('<div class="sv-most" id="mostrador">\n'
             '          <script type="application/json" id="svMostDatos">%s</script>\n'
             '          <form class="sv-most-caja" action="%s" method="get" role="search" aria-label="El Inspector de Servicios">\n'
             '            <div class="sv-most-cab"><span class="sv-most-logo" aria-hidden="true">🔍</span><b>El Inspector</b>'
             '<label for="svMostSrv">Servicio</label><select id="svMostSrv">%s</select>'
-            '<button type="button" class="sv-most-cierra" aria-label="Cerrar el Inspector">✕</button></div>\n'
+            '</div>\n'
             '            <div class="sv-most-fila"><input id="svMostQ" name="q" type="text" maxlength="300" autocomplete="off" aria-describedby="svMostAy">'
             '<input type="hidden" name="vista" value="1"><button type="submit" class="sz-btn sz-btn-of">Revisar</button></div>\n'
             '            <p class="sv-most-ay" id="svMostAy"></p>\n'
@@ -2857,36 +2855,11 @@ def sv_mostrador(sf):
             '          <div class="sv-most-res" id="svMostRes" hidden aria-live="polite">'
             '<p class="sv-most-carga" id="svMostCarga">Revisando la base…</p>'
             '<iframe name="av-en-chat" id="svMostMarco" title="La respuesta del Inspector"></iframe></div>\n'
+            '          <p class="sv-most-doc" id="svMostDoc" hidden><span aria-hidden="true">🧾</span> Tu documento es el <b>dictamen</b>: tócalo en la revisión '
+            '(«Generar dictamen») y se abre listo para imprimir o guardar en PDF, con su folio y su huella.</p>\n'
             '          <p class="sv-most-pie">Los archivos se leen en tu navegador y no se suben. Cada cifra trae su documento; la revisión no es un documento oficial ni un peritaje, '
             'y una coincidencia en una lista es una señal para revisar, nunca una acusación. ¿Prefieres platicar? <a href="%s">Abre el Inspector completo ➔</a></p>\n'
             '        </div>') % (json.dumps(datos, ensure_ascii=False).replace('</', '<\\/'), sf.SV_RESP, opciones, sf.SV_CHAT)
-
-
-SV_OPERA = [('Antes de contratar', ('sectores', 'modulos', 'riesgo', 'calendario')),
-            ('Para contratar', ('oferta', 'cobro', 'solicitud'))]
-# Las preguntas van completas al pie de servicios.html, en «Preguntas frecuentes».
-SV_OPERA_FUERA = {'preguntas'}
-
-
-def sv_operacion():
-    """Cómo operan los servicios, dentro de «¿Qué necesitas?» (pedido del autor, 21-11-2026:
-    «que la operación de los servicios… se fusione a los servicios… quitar un poquito de
-    contenido»): las páginas de SV_PAGINAS en dos renglones de ligas. Lo que costaba y lo que
-    era «¿Es seguro?» van en las preguntas frecuentes del pie. Nunca un monto."""
-    pag = {p[0]: p for p in SV_PAGINAS}
-    faltan = sorted(set(pag) - SV_OPERA_FUERA - {k for _t, ks in SV_OPERA for k in ks})
-    if faltan:
-        raise SystemExit('Servicios: SV_OPERA no acomoda las páginas %s' % ', '.join(faltan))
-    filas = ''.join(
-        '<div class="sv-opera-fila"><b>%s</b><span class="sv-mapa">%s</span></div>' % (t, ''.join(
-            '<a href="%s" title="%s"><span aria-hidden="true">%s</span> %s</a>' % (
-                esc_attr(pag[k][1]), esc_attr(pag[k][5]), pag[k][2], 'Todos los servicios' if k == 'oferta' else pag[k][3]) for k in ks))
-        for t, ks in SV_OPERA)
-    return ('<div class="sv-opera" id="opera">\n'
-            '          <p class="sv-opera-tit"><span aria-hidden="true">⚙️</span> <b>Cómo operan</b></p>\n'
-            '          %s\n'
-            '          <p class="sv-nota">Cómo funciona por dentro, la evidencia y cómo nos sostenemos: <a href="%s">Por qué Auditavisión ➔</a></p>\n'
-            '        </div>') % (filas, SV_PORQUE)
 
 
 def sv_pregunta(sid):
@@ -3417,18 +3390,16 @@ def servicios():
     # y el tablero), lo que arriesgas si no revisas, la base al día, por qué es seguro,
     # cuánto cuesta y las preguntas. El catálogo completo sigue en su página.
     pasos3 = [
-        ('🔍', 'Elige tu servicio y escribe tu caso', 'Toca un servicio aquí abajo: se abre el Inspector con ese servicio ya elegido. '
+        ('🔍', 'Elige tu servicio y escribe tu caso', 'Toca un servicio aquí abajo: se abre su página del Inspector con ese servicio ya elegido (puedes cambiarlo). '
          'Escribe un RFC, una empresa o un lugar, o sube tus archivos; se leen en tu navegador.'),
-        ('🧾', 'Ve la revisión completa y tu dictamen', 'Ahí mismo, de un vistazo, lo que encontró la base; abajo, la revisión completa con sus fuentes '
-         'y el botón de tu dictamen, con folio y huella. No es un documento oficial ni un peritaje.'),
+        ('🧾', 'Ve la revisión y descarga tu dictamen', 'En esa página, de un vistazo, lo que encontró la base; abajo, la revisión completa con sus fuentes. '
+         'Tu documento es el dictamen, con folio y huella: no es un documento oficial ni un peritaje.'),
         ('📝', 'Pide más solo si lo necesitas', 'Lo que la base no hace sola (el aviso cada semana, tu cartera completa, documentos no públicos) se pide con un toque, '
          'con la solicitud ya llena.'),
     ]
-    como3 = '\n'.join([
-        '<ol class="sv-p3">%s</ol>' % ''.join(
-            '<li><span class="sv-p3-n" aria-hidden="true">%d</span><span class="sv-p3-ico" aria-hidden="true">%s</span><b>%s</b><span>%s</span></li>'
-            % (n, ico, t, tx) for n, (ico, t, tx) in enumerate(pasos3, 1)),
-        '        <p class="sv-p3-ir"><a class="sz-btn sz-btn-of" href="#necesitas">Elige tu servicio ⬇</a></p>'])
+    como3 = '<ol class="sv-p3">%s</ol>' % ''.join(
+        '<li><span class="sv-p3-n" aria-hidden="true">%d</span><span class="sv-p3-ico" aria-hidden="true">%s</span><b>%s</b><span>%s</span></li>'
+        % (n, ico, t, tx) for n, (ico, t, tx) in enumerate(pasos3, 1))
     from insp_conservacion import LEYES as LEYES_CONS
     leyes_sv = dict(LEYES_CONS, cpf=SV_CPF)
     for c in SV_CONSECUENCIAS:
@@ -3445,9 +3416,9 @@ def servicios():
         '            <p class="sv-con-pasa">%s</p>\n'
         '            <details class="sv-con-ley"><summary>%s, %s <span class="est-chip est-oficial">oficial</span></summary>'
         '<blockquote>«%s»</blockquote><small><a href="%s" target="_blank" rel="noopener">%s</a>, texto vigente (Cámara de Diputados, última reforma %s; huella SHA-256 <code>%s…</code>).</small></details>\n'
-        '            <p class="sv-con-acc"><a href="%s">%s ➔</a><a class="sv-con-srv" href="servicio-%s.html">Servicio: %s</a></p>\n'
+        '            <p class="sv-con-acc"><a href="%s"><span aria-hidden="true">🔍</span> %s con el Inspector ➔</a><span class="sv-con-srv">Servicio: %s</span></p>\n'
         '          </article>' % (ico, tit, pasa, leyes_sv[ley][1], art, cita, esc_attr(leyes_sv[ley][3]), leyes_sv[ley][0], leyes_sv[ley][2], leyes_sv[ley][4][:12],
-                                  rev[1], rev[0], sid, nom[sid])
+                                  esc_attr(sf.revisa_liga(sid)), rev[0], nom[sid])
         for ico, tit, pasa, ley, art, cita, rev, sid in SV_CONSECUENCIAS)
     import fuentes as fu
     fte = {f['id']: f for f in fu.FUENTES}
@@ -3470,13 +3441,14 @@ def servicios():
     # familia (pedido del autor, 21-11-2026: «cada una de esas novedades… a los
     # servicios que ofrecemos… dividido en las secciones que correspondan»).
     import servicios_fichas as sf
-    necesitas = '<span id="nuevo"></span>' + sv_servicios_y_nuevo(sf, puertas) + '\n        ' + sv_mostrador(sf)
+    necesitas = '<span id="nuevo"></span>' + sv_servicios_y_nuevo(sf, puertas)
     # Las ligas viejas a una sección que se mudó, y las que traen el tema o el
     # servicio (?tema=, ?servicio=, ?plan=), se mandan a su página.
     redir = ('<script>(function () { var m = %s, h = decodeURIComponent(location.hash.slice(1)), q = location.search, '
              'd = m[h] || (/^(sv|fam)-/.test(h) ? m[h.split(\'-\')[0] + \'-*\'] : \'\'); '
              'if (d) { location.replace(d + q + \'#\' + h); return; } '
-             'if (/[?&](tema|servicio|plan)=/.test(q)) location.replace(m.solicitud + q + \'#solicitud\'); })();</script>' % json.dumps(SV_ANCLAS))
+             'if (/^revisa-[a-z]+$/.test(h)) { location.replace(%s + \'?s=\' + h.slice(7)); return; } '
+             'if (/[?&](tema|servicio|plan)=/.test(q)) location.replace(m.solicitud + q + \'#solicitud\'); })();</script>' % (json.dumps(SV_ANCLAS), json.dumps(sf.SV_REVISA)))
     venta = dict(comun, **{
         # Quinta pestaña del menú desde el 02-11-2026 (pedido del autor); del
         # 11-10-2026 a esa fecha fue un módulo del Modo Inspector. Reestructurada
@@ -3488,20 +3460,33 @@ def servicios():
         'entrada': ('La consulta es libre y lo seguirá siendo. Cuando quieras ir más a fondo, lo hacemos por encargo, con la misma regla. '
                     'Los Servicios y las <a href="donaciones.html">donaciones</a> sostienen el trabajo; ninguno compra lo que publicamos.'),
         'sin_saltos': True, 'redirige': redir,
-        'scripts': ['servicios.js', 'sv-mostrador.js'],  # las pestañas por familia y el mostrador del Inspector
+        'scripts': ['servicios.js'],  # las pestañas por familia; el Inspector de cada servicio vive en servicios-revisa.html
         'antes': aviso,
         'secciones': [
             bloque_sec('propuesta', 'Lo que te ofrecemos', '', sv_liga(portada, 'servicios.html'), sin_cab=True),
             bloque_sec('al-dia', 'La base, al día', 'Lo que ya puedes revisar hoy, gratis, y de cuándo es cada fuente.', aldia, pre='Nuestra base de datos'),
             bloque_sec('como', 'Cómo funciona', 'Tres pasos. Todo empieza con una pregunta en tus palabras.', como3, pre='Del chat al servicio'),
-            bloque_sec('necesitas', 'Los servicios: qué necesitas, lo nuevo y cómo operan',
-                       '%s servicios en cinco familias. Cada uno dice cómo se cobra y lo que le llegó en noviembre de 2026: lo usas gratis hoy, '
-                       'y el servicio lo lleva más lejos por encargo.' % numero(len(SERVICIOS)), '%s\n        %s' % (necesitas, sv_operacion()), pre='Los servicios'),
+            bloque_sec('necesitas', 'Los servicios: qué necesitas y lo nuevo',
+                       '%s servicios en cinco familias. Cada uno dice cómo se cobra y lo que le llegó en noviembre de 2026; tócalo y se abre su Inspector, '
+                       'en su propia página.' % numero(len(SERVICIOS)), necesitas, pre='Los servicios'),
             bloque_sec('arriesgas', 'Lo que arriesgas si no revisas',
                        'Lo que dice la ley cuando un proveedor o un cliente no es lo que parece. Toca el artículo para leer su texto.', arriesga, pre='Por qué revisar'),
             bloque_sec('preguntas-f', 'Preguntas frecuentes', 'Lo que casi todos preguntan antes de contratar.', faq),
         ],
-        # Las tarjetas del pie y «¿Cuánto cuesta?» viven en «Cómo operan», dentro de los servicios (sv_operacion(), 21-11-2026).
+        # «Cómo operan» y «Compara los servicios» se quitaron el 22-11-2026 (pedido del autor: «ya quedó
+        # superado»); sus páginas siguen vivas y el catálogo, en SV_CATALOGO.
+    })
+    # La página propia del Inspector de cada servicio (pedido del autor, 22-11-2026: «cada vínculo
+    # nos va a dirigir… a una página autónoma independiente… donde va a estar nuestro inspector…
+    # manteniendo ese filtrado del servicio que escojas»). ?s=<id> lo deja elegido; &q= ya revisa.
+    revisa_pag = dict(comun, **{
+        'archivo': sf.SV_REVISA, 'menu': 'El Inspector de tu servicio', 'titulo': 'El Inspector de tu servicio', 'icono': '🔍',
+        'padre': ('servicios.html', 'Servicios'), 'lema': 'Servicios · revisa tu caso',
+        'entrada': ('Elige tu servicio, escribe tu caso y ve aquí mismo lo que encontró la base, con sus fuentes. '
+                    'Tu documento es el dictamen, con folio y huella. Nunca un monto: los servicios se cotizan.'),
+        'sin_saltos': True, 'scripts': ['sv-mostrador.js'],
+        'secciones': [bloque_sec('inspector', 'El Inspector', '', sv_mostrador(sf) +
+                                 '\n        <p class="sv-nota"><a href="servicios.html#necesitas">← Todos los servicios</a></p>', sin_cab=True)],
     })
     # «Por qué Auditavisión»: los argumentos y la rendición de cuentas que
     # antes alargaban la página de venta (11-11-2026). Nada se borró.
@@ -3542,7 +3527,7 @@ def servicios():
              'tarjetas': [('🐷', 'Donaciones', 'Ayuda a sostener la plataforma, a la vista de todos.', 'donaciones.html', None, None)]},
         ],
     })
-    return [venta] + subpaginas + [porque_pag] + servicio_paginas(comun)
+    return [venta, revisa_pag] + subpaginas + [porque_pag] + servicio_paginas(comun)
 
 
 def _ref_corta(cita):

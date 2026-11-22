@@ -502,15 +502,6 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 [data-theme="dark"] .sv-nuevo-lista span:not([aria-hidden]) { color: #b7c3d9; }
 [data-theme="dark"] .sv-nuevo-fecha { color: #ffd27a; }
 /* Cómo operan, dentro de los servicios (21-11-2026): las páginas de Servicios en dos renglones de ligas. */
-.sv-opera { margin-top: 22px; padding: 20px 22px; border-radius: 20px; background: #f3f6fc; border: 1px solid #dfe5f0; display: grid; gap: 12px; }
-.sv-opera-tit { margin: 0; font-size: 20px; color: #0b2a63; }
-.sv-opera-cobro { margin: 0; line-height: 1.55; color: #24324d; }
-.sv-opera-fila { display: grid; grid-template-columns: 170px 1fr; gap: 8px 14px; align-items: center; }
-.sv-opera-fila > b { color: #0b2a63; }
-.sv-opera .sv-nota { margin: 0; }
-@media (max-width: 860px) { .sv-opera-fila { grid-template-columns: 1fr; } }
-[data-theme="dark"] .sv-opera { background: #1b2a44; border-color: #2a3b57; }
-[data-theme="dark"] .sv-opera-tit, [data-theme="dark"] .sv-opera-fila > b, [data-theme="dark"] .sv-opera-cobro { color: #e8eefa; }
 /* El mostrador del Inspector (22-11-2026): el recuadro azul, bajo la tarjeta tocada. */
 .sv-most { margin: 16px 0 4px; display: grid; gap: 12px; scroll-margin-top: 90px; }
 .sv-most-caja { display: grid; gap: 10px; padding: 18px; border-radius: 20px; background: linear-gradient(135deg, #0b2a63, #1d4fa3); color: #fff; }
@@ -519,7 +510,6 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 .sv-most-logo { font-size: 22px; }
 .sv-most-cab label { font-size: 15px; opacity: .9; }
 .sv-most-cab select { min-height: 44px; max-width: 100%; border-radius: 12px; border: 0; padding: 6px 12px; font: 16px 'Inter', system-ui, sans-serif; color: #0b2a63; background: #fff; }
-.sv-most-cierra { min-width: 44px; min-height: 44px; border-radius: 12px; border: 1px solid rgba(255,255,255,.4); background: transparent; color: #fff; font-size: 18px; cursor: pointer; }
 .sv-most-fila { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
 .sv-most-fila input[type="text"] { min-height: 48px; border-radius: 12px; border: 0; padding: 8px 14px; font: 16px 'Inter', system-ui, sans-serif; color: #0b2a63; background: #fff; min-width: 0; }
 .sv-most-fila .sz-btn { min-height: 48px; }
@@ -534,11 +524,11 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 .sv-most-res iframe { display: block; width: 100%; min-height: 420px; border: 0; background: #fff; }
 .sv-most-carga { margin: 0; padding: 14px 18px; color: #24324d; font-weight: 700; }
 .sv-most-pie { margin: 0; font-size: 15px; line-height: 1.5; color: #4a5a6a; }
+.sv-most-doc { margin: 0; padding: 12px 16px; border-radius: 14px; background: #eef4ff; border: 1px solid #c9d6ee; color: #0b2a63; font-size: 16px; line-height: 1.5; }
 .sv-most-abre { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-top: 8px; font-weight: 700; color: #1d4fa3; text-decoration: none; }
 .sv-most-abre:hover { text-decoration: underline; }
-.sv-card.sv-most-activa { outline: 3px solid #1d4fa3; outline-offset: 2px; }
-.sv-p3-ir { margin: 14px 0 0; }
 @media (max-width: 560px) { .sv-most-fila { grid-template-columns: 1fr; } }
 [data-theme="dark"] .sv-most-res { background: #fff; border-color: #2a3b57; }
 [data-theme="dark"] .sv-most-pie { color: #c3cee2; }
 [data-theme="dark"] .sv-most-abre { color: #8fb4ff; }
+[data-theme="dark"] .sv-most-doc { background: #1b2a44; border-color: #2a3b57; color: #e8eefa; }
