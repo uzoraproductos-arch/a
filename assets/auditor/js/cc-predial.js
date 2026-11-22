@@ -368,7 +368,7 @@
         (m.recargo ? 'Recargos: ' + m.recargo.pct + ' % al mes (' + esc(m.recargo.art) + ').' : '</p><p class="cp-falta"><span class="est-chip est-pendiente">pendiente</span> Recargos y gastos de cobranza: ' + esc(m.acc_pend)) + '</p>';
     } else if (D.espera && D.espera[ent + '-' + cve]) {
       var w = D.espera[ent + '-' + cve];
-      h += '<p class="cp-falta"><span class="est-chip est-pendiente">pendiente</span> Leímos su <a href="' + esc(w.url) + '">Ley de Ingresos ' + D.anio + '</a>, pero no la integramos: ' + esc(w.motivo) + ' No adivinamos una tasa. Mientras, prueba con un municipio marcado con ✓.</p>';
+      h += '<p class="cp-falta"><span class="est-chip est-pendiente">pendiente</span> Leímos su <a href="' + esc(w.url) + '">ley de ' + D.anio + '</a>, pero no la integramos: ' + esc(w.motivo) + ' No adivinamos una tasa. Mientras, prueba con un municipio marcado con ✓.</p>';
     } else if (D.reg && D.reg[ent] && D.reg[ent].sin_ley && D.reg[ent].sin_ley[ent + '-' + cve]) {
       var s0 = D.reg[ent].sin_ley[ent + '-' + cve];
       h += '<p class="cp-falta"><span class="est-chip est-oficial">oficial</span> <b>' + esc(s0.nombre) + ' no tiene Ley de Ingresos ' + D.anio + ' aprobada.</b> ' + esc(s0.motivo) +
