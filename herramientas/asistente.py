@@ -343,7 +343,8 @@ def _paginas():
         # están en el chat como columnas: su página no compite con su ficha.
         # Las páginas propias del Planisferio son reflejos de la Enciclopedia
         # (planisferio_espejo.py): el chat contesta con la original.
-        if n in (ARCHIVO, DICTAMEN) or n.startswith('noticias-al-momento-') or n.startswith('planisferio-ficha-'):
+        # La portada de acceso es la puerta, no una respuesta (Ronda 6: su «¿Qué es Auditavisión?» le ganaba a la portada).
+        if n in (ARCHIVO, DICTAMEN, 'canjea-tu-codigo.html', 'administracion-codigos.html') or n.startswith('noticias-al-momento-') or n.startswith('planisferio-ficha-'):
             continue
         s = open(p, encoding='utf-8').read()
         if 'http-equiv="refresh"' in s or 'name="robots" content="noindex' in s:

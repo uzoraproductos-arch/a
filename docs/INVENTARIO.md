@@ -49,7 +49,7 @@ La Enciclopedia queda fuera porque está congelada.
 | `base-al-dia.html` | La base al día · Auditavisión | apartados.py | 37 | 0 | 0 | 0 | 0 |
 | `biblioteca-hacendaria.html` | Biblioteca hacendaria · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
 | `busca-y-verifica.html` | Busca y verifica · Auditavisión | apartados.py | 1 | 0 | 0 | 0 | 0 |
-| `canjea-tu-codigo.html` | Ingresa con tu código · Auditavisión | acceso.py | 6 | 0 | 0 | 0 | 0 |
+| `canjea-tu-codigo.html` | Auditavisión · Impuestos, presupuesto, deuda y gasto público de México, con documentos oficiales | acceso.py | 7 | 0 | 0 | 0 | 0 |
 | `comunidad-compartir.html` | Comparte el Estado de Cuenta · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |
 | `comunidad-erratas.html` | Fe de erratas · Auditavisión | apartados.py | 49 | 0 | 0 | 0 | 0 |
 | `comunidad-error.html` | Un dato mal en esta plataforma · Auditavisión | apartados.py | 45 | 0 | 0 | 0 | 0 |

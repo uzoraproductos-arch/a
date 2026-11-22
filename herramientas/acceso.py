@@ -108,6 +108,32 @@ def _ultimas(n=3):
     return sorted(cols, key=clave, reverse=True)[:n]
 
 
+# La portada de acceso (rediseño del autor, 22-11-2026). Las preguntas invitan a mirar los documentos: no
+# afirman cifras ni culpan a un gobierno o a un partido (AGENTS.md §2). Las respuestas de FAQ_ENTRADA dicen
+# solo lo que la plataforma es y hace, y van iguales en la página y en sus datos estructurados (FAQPage).
+DESC_ENTRADA = ('Auditavisión reúne en un solo lugar los impuestos, el presupuesto, la deuda, los contratos y el gasto público de México, '
+                'cada cifra con su documento oficial. Versión de prueba por invitación.')
+QUIENES_ENTRADA = ('Somos una plataforma cívica e independiente que sigue el dinero público de México: de dónde sale, quién lo gasta y '
+                   'quién revisa que se use bien. Cada cifra trae su documento oficial (DOF, Hacienda, ASF, INEGI) y lo que no se puede '
+                   'comprobar se dice como pendiente.')
+PREGUNTAS_ENTRADA = [
+    '¿Te has preguntado cuánto pagas de impuestos y a dónde se van?',
+    '¿Te has quejado del gobierno y nadie te muestra las cuentas?',
+    '¿Sientes que trabajas más y no te alcanza?',
+    '¿Sabes cuánto debe tu estado o qué obra se pagó en tu municipio?',
+    '¿Qué dicen los documentos oficiales antes de las próximas elecciones?',
+]
+FAQ_ENTRADA = [
+    ('¿Qué es Auditavisión?', 'Una plataforma cívica que reúne y explica en sencillo el dinero público de México: impuestos, presupuesto, '
+     'deuda, contratos y lo que la Auditoría Superior de la Federación dejó por aclarar. Tiene un chat, el Auditor, que contesta con esos datos.'),
+    ('¿De dónde salen los datos?', 'De documentos oficiales publicados para todos: el Diario Oficial de la Federación, la Secretaría de Hacienda, '
+     'la Auditoría Superior de la Federación, el INEGI, Banxico y los congresos. Cada cifra lleva su fuente y su estado: oficial, auditada o pendiente.'),
+    ('¿Toma partido?', 'No. Las mismas reglas valen para todos los gobiernos y todos los partidos: se muestra lo que dice el documento, y una '
+     'acusación nunca se presenta como una condena.'),
+    ('¿Cómo entro?', 'La versión de prueba es gratis y por invitación: escribe tu código de acceso de ocho caracteres o pide uno con tu correo.'),
+]
+
+
 def entrada_html(sello):
     """canjea-tu-codigo.html: la entrada de la versión de prueba (pedido del
     autor, 29-10-2026: «de un lado… la imagen de la ciudad… y por la parte de
@@ -123,15 +149,39 @@ def entrada_html(sello):
         '\n        <p class="ac-aviso" id="acSinBase">⏳ El canje se enciende cuando la plataforma tenga su base de datos. '
         'Por ahora la entrada es libre: <a href="index.html">pasa a la plataforma</a>.</p>')
     casillas = _casillas().replace('data-i="0"', 'data-i="0" id="acCasilla0"')
+    # Rediseño del autor (22-11-2026): la acuarela se queda; el lado del texto va limpio y concreto
+    # (referencia: getfinos.com), con «¿Quiénes somos?», preguntas que aparecen una a una (todas en el
+    # HTML, para los buscadores; sin animación si el lector la apagó) y el código al centro. Las
+    # preguntas no afirman cifras ni toman partido (AGENTS.md §2): invitan a ver los documentos.
+    preguntas = ''.join('\n          <li>%s</li>' % esc(q) for q in PREGUNTAS_ENTRADA)
+    faq = ''.join('\n        <details class="ac-faq-p"><summary>%s</summary><p>%s</p></details>' % (esc(q), esc(r)) for q, r in FAQ_ENTRADA)
+    url = apartados.SITIO + CANJE
+    ld = json.dumps([
+        {'@context': 'https://schema.org', '@type': 'WebSite', 'name': 'Auditavisión', 'url': apartados.SITIO, 'inLanguage': 'es-MX',
+         'description': DESC_ENTRADA},
+        {'@context': 'https://schema.org', '@type': 'Organization', 'name': 'Auditavisión', 'url': apartados.SITIO,
+         'logo': apartados.SITIO + 'assets/auditor/img/logo-auditavision.svg', 'description': QUIENES_ENTRADA},
+        {'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
+            {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': r}} for q, r in FAQ_ENTRADA]},
+    ], ensure_ascii=False).replace('</', '<\\/')
     return """<!DOCTYPE html>
 <!-- Página generada por herramientas/acceso.py: no la edites a mano. -->
-<html lang="es" data-theme="light">
+<html lang="es-MX" data-theme="light">
 <head>
   <meta charset="UTF-8">
   {csp}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ingresa con tu código · Auditavisión</title>
-  <meta name="description" content="Auditavisión, el gasto público a la vista. Versión de prueba por invitación: ingresa con tu código o pide uno.">
+  <title>Auditavisión · Impuestos, presupuesto, deuda y gasto público de México, con documentos oficiales</title>
+  <meta name="description" content="{desc}">
+  <link rel="canonical" href="{url}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Auditavisión">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:url" content="{url}">
+  <meta property="og:title" content="Auditavisión · El gasto público de México, a la vista">
+  <meta property="og:description" content="{desc}">
+  <meta property="og:image" content="{sitio}assets/auditor/img/portada/cabecera-lluvia.webp">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#0b2a63">
   <meta name="color-scheme" content="light">
   <link rel="icon" href="assets/auditor/img/logo-auditavision.svg">
@@ -142,6 +192,7 @@ def entrada_html(sello):
   <script src="assets/auditor/js/acceso.js?v={sello}"></script>
   <link rel="stylesheet" href="assets/auditor/css/apartados.css?v={sello}">
   <link rel="stylesheet" href="assets/auditor/css/acceso.css?v={sello}">
+  <script type="application/ld+json">{ld}</script>
 </head>
 <body class="ac-entrada-cuerpo">
   <main class="ac-entrada" id="contenido">
@@ -151,15 +202,18 @@ def entrada_html(sello):
     </figure>
     <section class="ac-lado" aria-labelledby="acTitulo">
       <p class="ac-marca">{logo}<span><b>Auditavisión</b><small>El gasto público, a la vista</small></span></p>
-      <h1 id="acTitulo">¿Quieres saber en qué se gasta el dinero de todos?</h1>
-      <p class="ac-lema"><b>Descubre el gasto público:</b> de dónde sale cada peso, quién lo gasta y quién revisa que se use bien. Todo con documentos oficiales.</p>
-      <div class="ac-noticias">
-        <h2>Lo último, verificado</h2>
-        <ul>{notas}
+      <h1 id="acTitulo">Las cuentas del gobierno, <span>con sus documentos</span></h1>
+      <div class="ac-quienes">
+        <h2>¿Quiénes somos?</h2>
+        <p>{quienes}</p>
+      </div>
+      <div class="ac-preguntas-caja">
+        <h2 class="ac-vh">Preguntas que aquí se contestan con documentos</h2>
+        <ul class="ac-preguntas">{preguntas}
         </ul>
       </div>
       <form class="ac-canje" id="acCanje" novalidate>
-        <label class="ac-et" for="acCasilla0">Ingresa con tu código promocional</label>
+        <label class="ac-et" for="acCasilla0">Entra con tu código de acceso</label>
         {casillas}
         <p class="ac-ayuda">Ocho caracteres: números, letras o las dos cosas. Da igual si son mayúsculas o minúsculas. Si lo copiaste, pégalo en la primera casilla.</p>
         <button class="sz-btn sz-btn-of ac-boton" type="submit" disabled>Ingresar</button>
@@ -167,7 +221,7 @@ def entrada_html(sello):
       </form>{sin_base}
       <div class="ac-tuyo" id="acTuyo" hidden></div>
       <div class="ac-obtener">
-        <p>¿No tienes código? <button class="ac-enlace" type="button" id="acObtener" aria-expanded="false" aria-controls="acPedir">Obtén uno</button></p>
+        <p>¿No tienes código? <button class="ac-enlace" type="button" id="acObtener" aria-expanded="false" aria-controls="acPedir">Obtén uno</button> · <a class="ac-enlace" href="servicios.html">Conoce los Servicios</a></p>
         <form class="ac-pedir" id="acPedir" novalidate hidden>
           <p class="ac-pedir-txt">Déjanos tu correo y te mandamos tu código. La versión de prueba es por invitación: la estamos abriendo poco a poco.</p>
           <label class="ac-et" for="acPCorreo">Tu correo</label>
@@ -180,6 +234,14 @@ def entrada_html(sello):
           <button class="sz-btn sz-btn-of" type="submit">Pedir mi código</button>
           <p class="ac-estado" id="acPEstado" role="status" aria-live="polite"></p>
         </form>
+      </div>
+      <div class="ac-noticias">
+        <h2>Lo último, verificado</h2>
+        <ul>{notas}
+        </ul>
+      </div>
+      <div class="ac-faq">
+        <h2>Preguntas frecuentes</h2>{faq}
       </div>
       <p class="ac-pie">Versión de prueba · gratis · <a href="aviso-de-privacidad.html">Aviso de privacidad</a> · <span>{sello}</span></p>
     </section>
@@ -194,7 +256,8 @@ def entrada_html(sello):
   <script src="assets/auditor/js/acceso-paginas.js?v={sello}"></script>
 </body>
 </html>
-""".format(csp=seguridad.meta(), sello=sello, logo=apartados.LOGO_IMG, notas=notas, casillas=casillas, sin_base=sin_base)
+""".format(csp=seguridad.meta(), sello=sello, logo=apartados.LOGO_IMG, notas=notas, casillas=casillas, sin_base=sin_base,
+                  desc=esc(DESC_ENTRADA), url=url, sitio=apartados.SITIO, quienes=esc(QUIENES_ENTRADA), preguntas=preguntas, faq=faq, ld=ld)
 
 
 def escribir_entrada(sello):

@@ -1236,6 +1236,7 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   **Los códigos de acceso** (29-10-2026) abren la versión de prueba: `herramientas/acceso.py` arma el canje
   y el panel, y su candado (`acceso.js`, en el `<head>` de todas las páginas) solo se enciende con
   `CANDADO = True`; una página que deba abrir sin código va en `LIBRES`.
+  **La portada de acceso** (`canjea-tu-codigo.html`, rediseño del autor, 22-11-2026) conserva la acuarela y va limpia: «¿Quiénes somos?» (`QUIENES_ENTRADA`), las preguntas que aparecen una a una (`PREGUNTAS_ENTRADA`, todas en el HTML y quietas si el lector apagó la animación: **invitan a ver los documentos, nunca afirman una cifra ni culpan a un gobierno o a un partido**), el código al centro y las preguntas frecuentes (`FAQ_ENTRADA`), **iguales en la página y en su FAQPage** (JSON-LD con `WebSite` y `Organization`, más su canónica y Open Graph).
   **El control interno** (18-11-2026): el panel (`administracion-codigos.html`) va en pestañas (`HOJAS` de `acceso.py`): tablero de uso con
   gráficas, códigos (con Renovar), solicitudes, bitácora y mi acceso. La bitácora la escriben disparadores de la base: **una acción nueva de la
   administración sobre los códigos queda anotada sola; una tabla nueva de la administración necesita su disparador**. La medición de uso

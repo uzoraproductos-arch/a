@@ -2207,8 +2207,8 @@
       var gastaUnidad = /\b(gasta|gastan|destina|destinan|en sueldos|en nomina|nomina|capitulo|presupuesto)\b/.test(t) && numFila(t);
       if (gastaUnidad && !gastaUnidad.caps) gastaUnidad = null;
       /* «Secretaría de Salud» a secas es la dependencia, no lo que gana su titular (homónimos, Ronda 6): sin «gana», no es sueldo. */
-      var dependencia = cg && cg === CARGO.secretario && /\bsecretaria de [a-z]/.test(t) && !/\bsecretari[oa]s? de estado\b/.test(t);
-      if (cg && !gastaUnidad && (GANA.test(t) || (sigue && !dependencia)) && !admsDe(t.replace(/sheinbaum|claudia|la presidenta/g, '')).length) return fin(cargoResp(cg), { tipo: 'cargo', cargo: cg });
+      var esDepFed = cg && cg === CARGO.secretario && /\bsecretaria de [a-z]/.test(t) && !/\bsecretari[oa]s? de estado\b/.test(t);
+      if (cg && !gastaUnidad && (GANA.test(t) || (sigue && !esDepFed)) && !admsDe(t.replace(/sheinbaum|claudia|la presidenta/g, '')).length) return fin(cargoResp(cg), { tipo: 'cargo', cargo: cg });
       if (/quien gana mas|quienes ganan mas|cargo (que )?gana mas|ganan mas|mejor pagad|mas ganan|sueldos mas altos/.test(t) && !es.length) return fin(cargosRanking(), { tipo: 'cargo' });
 
       /* Lo que la plataforma todavía no tiene: los sueldos de gobernadores y alcaldes. */
@@ -2366,10 +2366,10 @@
       /* Homónimos (Ronda 6, 22-11-2026): «Puebla» es el estado y su capital; «Hidalgo» es un estado y municipios de otros. Se dice el nivel. */
       var homE = !/\b(estado|entidad|gobierno del estado|estatal)\b/.test(t) ? (MIDX[plano(e.n).trim()] || MIDX[plano(e.n.replace(/^Estado de /, '')).trim()] || []) : [];
       /* Una dependencia del estado («Secretaría de Salud de Jalisco», «Fiscalía de Puebla», «DIF de Oaxaca», «Congreso de Puebla»): no se contesta como si fuera la federal. */
-      var dep = /\b(secretaria|fiscalia|dif|tesoreria|contraloria|procuraduria|instituto|comision|congreso|legislatura|tribunal|poder judicial)\b/.exec(t);
-      if (dep && !k) re2.html = '<p class="pa-chico">La plataforma no tiene por separado la cuenta de esa dependencia del <b>estado de ' + esc(e.n) + '</b>: lo que sigue es del gobierno del estado completo. ' +
-        (/congreso|legislatura/.test(dep[1]) ? 'Lo que gastó su Congreso local sí lo tengo: <button type="button" class="pa-enlace" data-pa-pregunta="¿Cuánto gasta el Congreso de ' + esc(e.n) + '?">¿Cuánto gasta el Congreso de ' + esc(e.n) + '?</button>' :
-         /tribunal|poder judicial/.test(dep[1]) ? 'Lo de su Poder Judicial sí lo tengo: <button type="button" class="pa-enlace" data-pa-pregunta="¿Cuánto gasta el Poder Judicial de ' + esc(e.n) + '?">¿Cuánto gasta el Poder Judicial de ' + esc(e.n) + '?</button>' :
+      var depEdoM = /\b(secretaria|fiscalia|dif|tesoreria|contraloria|procuraduria|instituto|comision|congreso|legislatura|tribunal|poder judicial)\b/.exec(t);
+      if (depEdoM && sinTema) re2.html = '<p class="pa-chico">La plataforma no tiene por separado la cuenta de esa dependencia del <b>estado de ' + esc(e.n) + '</b>: lo que sigue es del gobierno del estado completo. ' +
+        (/congreso|legislatura/.test(depEdoM[1]) ? 'Lo que gastó su Congreso local sí lo tengo: <button type="button" class="pa-enlace" data-pa-pregunta="¿Cuánto gasta el Congreso de ' + esc(e.n) + '?">¿Cuánto gasta el Congreso de ' + esc(e.n) + '?</button>' :
+         /tribunal|poder judicial/.test(depEdoM[1]) ? 'Lo de su Poder Judicial sí lo tengo: <button type="button" class="pa-enlace" data-pa-pregunta="¿Cuánto gasta el Poder Judicial de ' + esc(e.n) + '?">¿Cuánto gasta el Poder Judicial de ' + esc(e.n) + '?</button>' :
          'Si buscabas la dependencia federal con ese nombre, pregúntame sin el estado: es otra, con su propio presupuesto.') + '</p>' + re2.html;
       if (homE.length) re2.html += '<p class="pa-chico">Es la cifra del <b>estado de ' + esc(e.n) + '</b>, de su gobierno estatal. ' +
         (homE.length === 1 ? 'También hay un municipio con ese nombre: ' : 'También hay municipios con ese nombre: ') +
