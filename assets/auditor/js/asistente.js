@@ -3074,16 +3074,18 @@
       if (!ya.padron) t.push(cargaPadron().then(function (P) { return P.rfc(rfc).then(function (f) {
         f.senales.forEach(function (sx) { ci.push({ v: sx.lista + (sx.extra ? ', ' + sx.extra : ''), etq: (f.nombre ? f.nombre + ' · ' : '') + 'RFC ' + rfc, e: 'oficial' }); fuente({ tx: sx.fuente, url: sx.url }); });
         if (!f.senales.length && f.meta) fuente({ tx: 'SAT, datos abiertos, Contribuyentes publicados (art. 69, 17-H Bis y 69-B Bis); lista 69-B; Directorio de Sancionados; OFAC; ONU', url: f.meta.sat.nl.pagina });
-        return ['🛡️', 'Listas del SAT, sancionados y sanciones internacionales', P.html(f, { chico: 'pa-chico', lista: 'pa-lista' }), rfc];
+        return ['🛡️', 'Listas del SAT, sancionados y sanciones internacionales', P.html(f, { chico: 'pa-chico', lista: 'pa-lista' }), rfc,
+          f.senales.length ? f.senales.length + (f.senales.length === 1 ? ' coincidencia por revisar' : ' coincidencias por revisar') : 'Sin coincidencias', !!f.senales.length];
       }); }).then(null, function () { return null; }));
       if (!ya.cmx && !ya.grupo) t.push(Promise.all([cmxIdx(), cmxProv(rfc), cmxSanc()]).then(function (X) {
         var rp = respProv(rfc, X[1], X[0].meta, X[2]);
         if (rp.ficha) { (rp.ficha.ci || []).forEach(function (c) { ci.push(c); }); (rp.ficha.fu || []).forEach(fuente); }
-        return ['🏛️', 'Contratos con el gobierno (ComprasMX)', rp.html.replace(/<details class="pa-dedonde"[\s\S]*?<\/details>/g, ''), rfc];
+        return ['🏛️', 'Contratos con el gobierno (ComprasMX)', rp.html.replace(/<details class="pa-dedonde"[\s\S]*?<\/details>/g, ''), rfc,
+          rp.ficha ? 'Tiene contratos publicados' : 'Sin contratos en ComprasMX', false];
       }).then(null, function () { return null; }));
       var g = !ya.grupo && GR.g.filter(function (x) { return (x.emp || []).indexOf(rfc) >= 0; })[0];
       if (g) t.push(Promise.resolve(['🏢', 'Su grupo empresarial', '<p>Es una de las empresas con que <b>' + esc(g.n) + '</b> aparece en ComprasMX. ' +
-        '<button type="button" class="pa-ej" data-pa-pregunta="' + esc(g.n) + '">Ver todo el grupo</button></p>', rfc]));
+        '<button type="button" class="pa-ej" data-pa-pregunta="' + esc(g.n) + '">Ver todo el grupo</button></p>', rfc, g.n, false]));
       return Promise.all(t);
     });
     return Promise.all(tareas).then(function (L) {
@@ -3093,8 +3095,16 @@
       var html = caps.map(function (c) {
         return '<section class="pa-int-cap"><h4><span aria-hidden="true">' + c[0] + '</span> ' + esc(c[1]) + (rfcs.length > 1 ? ' · <code>' + esc(c[3]) + '</code>' : '') + '</h4>' + c[2] + '</section>';
       }).join('');
-      return { html: html, ci: ci, fu: fu, tema: 'Revisión completa de ' + nombres, rfcs: rfcs };
+      return { html: html, ci: ci, fu: fu, tema: 'Revisión completa de ' + nombres, rfcs: rfcs, caps: caps };
     });
+  }
+  function vistazoHtml(r, genera) {
+    var caps = (r.integ && r.integ.caps) || [], varios = r.integ && r.integ.rfcs.length > 1;
+    return '<section class="pa-vistazo"><h3><span aria-hidden="true">👁️</span> De un vistazo</h3>' + corto(r.html) +
+      (caps.length ? '<ul class="pa-vistazo-caps">' + caps.map(function (c) {
+        return '<li' + (c[5] ? ' class="pa-vistazo-ojo"' : '') + '><span aria-hidden="true">' + c[0] + '</span><b>' + esc(c[1]) + '</b>' +
+          (varios ? ' <code>' + esc(c[3]) + '</code>' : '') + '<span>' + esc(c[4] || '') + '</span></li>';
+      }).join('') + '</ul>' : '') + (genera ? '<p class="pa-acc">' + genera + '</p>' : '') + '</section>';
   }
   function integralHtml(x) {
     return x ? '<section class="pa-pag-sec pa-int"><h3><span aria-hidden="true">🔎</span> La revisión completa: todo lo que la base sabe de ' +
@@ -3481,7 +3491,8 @@
   function armaRespuesta() {
     var ps = new URLSearchParams(location.search), q = (ps.get('q') || '').trim().slice(0, 600);
     var antes = ps.getAll('c').map(function (x) { return x.trim().slice(0, 600); }).filter(Boolean).slice(-4);
-    var doc = document.getElementById('respDoc');
+    var doc = document.getElementById('respDoc'), vista = ps.get('vista') === '1';
+    if (vista) document.documentElement.classList.add('pa-en-vista');
     MODO_DIC = 'inspector';
     if (!q) { doc.innerHTML = '<p>Esta página desglosa una respuesta del Inspector. <a href="' + SV_CHAT + '">Hazle una pregunta</a> y toca <b>«📄 Ver la respuesta completa»</b>.</p>'; return; }
     antes.forEach(function (x) { respuesta(x); });
@@ -3497,8 +3508,8 @@
       r.q = q;
       var ir = r.ir || (r.ficha && r.ficha.ir), dl = enlaceDictamen(q, antes) + (r.abre ? '&abre=' + encodeURIComponent(r.abre) : '');
       var sec = function (ico, tit, h) { return h ? '<section class="pa-pag-sec"><h3><span aria-hidden="true">' + ico + '</span> ' + tit + '</h3>' + h + '</section>' : ''; };
-      doc.innerHTML = '<h2 class="pa-pag-q">«' + esc(q) + '»</h2>' + cabResp(r) + remiteHtml(q, r) +
-        '<div class="pa-resp">' + r.html + '</div>' + integralHtml(r.integ) +
+      var genera = r.ficha ? '<a class="pa-boton pa-genera" href="' + esc(dl) + '"' + (vista ? ' target="_blank" rel="noopener"' : '') + '>🧾 Generar dictamen ➔</a>' : '';
+      var cuerpo = '<div class="pa-resp">' + r.html + '</div>' + integralHtml(r.integ) +
         (ir ? '<p class="pa-acc"><a class="pa-boton pa-ver" href="' + esc(ir[0]) + '">📖 Saber más <span class="pa-ver-donde">· ' + esc(ir[1]) + '</span> ➔</a></p>' : '') +
         capaModoHtml(q, r) + appDe(r) + expInvHtml(q, r) + servicioHtml(r, q) +
         sec('🧭', 'En las demás partes de la plataforma', r.plat ? '' : recursosHtml(conInv(q, r, r.rec || recursosPara(q, r))).replace(/<p class="pa-mas-t">[^<]*<\/p>/, '')) +
@@ -3506,7 +3517,12 @@
         (r.web ? webHtml(r.web) : '') +
         (r.ficha ? '<section class="pa-pag-dic"><h3><span aria-hidden="true">🧾</span> Tu dictamen</h3>' +
           '<p>El respaldo de esta respuesta' + (r.integ ? ', con la revisión completa' : '') + ': tu pregunta, lo que se contestó, cada cifra con su estado, sus fuentes y el método, con folio, sello y huella digital. ' +
-          'No es un documento oficial ni un peritaje.</p><p class="pa-acc"><a class="pa-boton pa-genera" href="' + esc(dl) + '">🧾 Generar dictamen ➔</a></p></section>' : '');
+          'No es un documento oficial ni un peritaje.</p><p class="pa-acc">' + genera + '</p></section>' : '');
+      /* La vista del mostrador de Servicios (pedido del autor, 22-11-2026): primero «De un
+         vistazo» (la respuesta en corto y lo que encontró cada capítulo de la revisión), el
+         dictamen a un toque y, desplegable, todo lo demás. Mismos datos; nada nuevo entra a la huella. */
+      doc.innerHTML = '<h2 class="pa-pag-q">«' + esc(q) + '»</h2>' + cabResp(r) + remiteHtml(q, r) + (vista ? vistazoHtml(r, genera) +
+        '<details class="pa-vista-mas"' + (/data-pa-abre/.test(cuerpo) ? ' open' : '') + '><summary>Ver la revisión completa, con sus fuentes</summary>' + cuerpo + '</details>' : cuerpo);
       document.title = (r.ficha ? r.ficha.tit : q) + ' · El Inspector · Auditavisión';
       var caja = doc.querySelector('.pa-app[data-pa-abre]');
       if (caja) montaApp(caja);
@@ -3515,7 +3531,7 @@
         if (ap && ev.target.closest('.pa-app-usa')) montaApp(ap);
         else if (ap && ev.target.closest('.pa-app-cierra')) cierraApp(ap);
         var b = ev.target.closest ? ev.target.closest('[data-pa-pregunta]') : null;
-        if (b) location.href = SV_CHAT + '?q=' + encodeURIComponent(b.getAttribute('data-pa-pregunta'));
+        if (b) location.href = (vista ? SV_RESP + '?vista=1&q=' : SV_CHAT + '?q=') + encodeURIComponent(b.getAttribute('data-pa-pregunta'));
       });
     }
   }
