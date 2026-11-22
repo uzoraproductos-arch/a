@@ -1693,6 +1693,44 @@
       if (!sEs.length && /(que|cual) estados?|cada estado|por estado|los estados|de los 32|entidad|mapa/.test(t)) return socTodos();
       return null;
     }
+    /* El precio de la vivienda (21-11-2026): el Índice SHF de cada estado, la lente shfI del Planisferio y el mercado del simulador del predial. */
+    var VIV = D.viv || null;
+    var VIV_RX = /precios? de (la |las )?(vivienda|viviendas|casas?)|valor de (la |las )?(vivienda|viviendas)|indice shf|\bshf\b|sociedad hipotecaria|plusvalia|(subi\w*|sube|aument\w*)( mas| menos)? (el precio de )?(la |las )?(vivienda|viviendas|casas)/;
+    function vivFu(e) { return { que: 'Índice SHF de precios de la vivienda' + (e ? ' de ' + e : ''), e: 'oficial', fu: { tx: VIV.fu.tx, url: VIV.fu.url } }; }
+    function vivEstado(e) {
+      var r = VIV.est.filter(function (x) { return x[0] === e.a; })[0];
+      if (!r) return null;
+      var h = '<p><b>En ' + esc(e.n) + ', el precio de la vivienda subió ' + n(r[3], 1) + ' % en un año</b>, según el Índice SHF de Precios de la Vivienda (' + esc(VIV.corte) + ', cifras preliminares). ' +
+        'Su índice llegó a <b>' + n(r[1], 2) + '</b> (base ' + esc(VIV.base) + '): la vivienda vale unas ' + n(r[1] / 100, 1) + ' veces lo que valía en 2017; en el país, ' + n(VIV.nac[0], 2) + '.</p>' +
+        '<p>La vivienda que queda a la mitad de los avalúos del estado costó <b>$' + n(r[4]) + '</b>: la mitad costó menos y la mitad más (en el país, $' + n(VIV.nac[2]) + ').</p>' +
+        '<p class="pa-chico">La SHF lo arma con los avalúos de viviendas con crédito hipotecario: no es el valor de tu casa, no es un avalúo y no se compara con el valor catastral, que es con el que se cobra el predial.</p>';
+      return { html: h, fu: [vivFu(e.n), { que: 'Cuántas veces el precio de 2017', e: 'derivado', op: 'índice ' + n(r[1], 2) + ' ÷ 100', fu: { tx: VIV.fu.tx, url: VIV.fu.url } }],
+        tit: 'El precio de la vivienda en ' + e.n,
+        ci: [{ v: n(r[3], 1) + ' %', etq: 'subió en un año', e: 'oficial' }, { v: '$' + n(r[4]), etq: 'precio mediano', e: 'oficial' }],
+        ir: ['planisferio.html?d=financiera&l=shfI&e=' + encodeURIComponent(e.a), 'el precio de la vivienda en el Planisferio'],
+        sug: ['Simulador del impuesto predial', '¿En qué estado subió más la vivienda?', 'Estado de cuenta de ' + e.n] };
+    }
+    function vivTodos() {
+      var o = VIV.est.slice().sort(function (a, b) { return b[3] - a[3]; });
+      var nom = function (a) { return porA[a] ? porA[a].n : a; };
+      var top = o.slice(0, 5).map(function (x) { return esc(nom(x[0])) + ' (' + n(x[3], 1) + ' %)'; }).join(', ');
+      var baj = o.slice(-3).map(function (x) { return esc(nom(x[0])) + ' (' + n(x[3], 1) + ' %)'; }).join(', ');
+      var h = '<p>Según el Índice SHF de Precios de la Vivienda (' + esc(VIV.corte) + ', cifras preliminares), el índice del país llegó a <b>' + n(VIV.nac[0], 2) + '</b> (base ' + esc(VIV.base) + '), ' +
+        'y la vivienda que queda a la mitad de los avalúos costó <b>$' + n(VIV.nac[2]) + '</b>.</p>' +
+        '<p>Donde más subió en un año: ' + top + '. Donde menos: ' + baj + '.</p>' +
+        '<p class="pa-chico">Son avalúos de viviendas con crédito hipotecario: no es el valor de ningún predio ni el valor catastral con que se cobra el predial. El orden no califica a ningún estado.</p>';
+      return { html: h, fu: [vivFu('')], tit: 'El precio de la vivienda en los 32 estados',
+        ci: [{ v: n(VIV.nac[0], 2), etq: 'índice SHF del país', e: 'oficial' }],
+        ir: ['planisferio.html?d=financiera&l=shfI', 'el precio de la vivienda de los 32 estados, en el Planisferio'],
+        sug: ['¿Cuánto ha subido el precio de la vivienda en Jalisco?', 'Simulador del impuesto predial', '¿Cuánto pago de predial en Zapopan?'] };
+    }
+    function vivEdo(t) {
+      if (!VIV || !VIV_RX.test(t) || /predial|\bisr\b|impuesto|vend[eoí]|credito infonavit/.test(t)) return null;
+      var sEs = estados(t).e;
+      if (sEs.length === 1) return vivEstado(sEs[0]);
+      if (!sEs.length) return vivTodos();
+      return null;
+    }
     var APU_RX = /administracion(es)? publicas?|burocrat|servidores? public|servidoras? public|trabaja(n|dores)? (en|para|del?) (el |los )?gobiernos?|empleados? (del?|de los) gobiernos?|personal del gobierno|poder ejecutivo (estatal|local|del estado)/;
     function apuEdo(t) {
       if (!APU || !APU.est) return null;
@@ -2296,6 +2334,7 @@
       /* Salud pública antes que Verificamos: «¿es cierto que el IMSS hizo 1.78 millones de cirugías?» es un cotejo de salud (27-10-2026). */
       salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       social: function (q) { var r = socEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'soc' }); },
+      vivienda: function (q) { var r = vivEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'viv' }); },
       administracion: function (q) { var r = apuEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'apu' }); },
       saludEstado: function (q) { var r = salEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       nepotismo: function (q) { var r = nepResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'nep' }); },

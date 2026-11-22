@@ -356,6 +356,9 @@ def _datos(base, padron):
     import dimension_social as dso
     so = dso.estados(base)
     sat, sat_meta = __import__('padron_sat').planisferio(base)
+    shf = __import__('cc_predial').shf()
+    if len(shf['est']) != 32:
+        raise SystemExit('planisferio: el Índice SHF no trae a las 32 entidades (%d)' % len(shf['est']))
     import dimension_penal as dpe
     pn = dpe.estados(base)
     pc = dpe.carpetas(base)
@@ -431,6 +434,12 @@ def _datos(base, padron):
         # domicilio fiscal, por cada 100 habitantes, y donatarias autorizadas.
         z = sat[e['abbr']]
         filas[-1].update({'sat': z['n'], 'satH': z['h'], 'don': z['don']})
+        # El precio de la vivienda (21-11-2026): el Índice SHF de cada estado, lo
+        # mismo que lee el simulador del predial (cc_predial.shf()). Va junto al
+        # valor fiscal, nunca en su lugar: no es un avalúo.
+        v = shf['est'].get(e['abbr'])
+        filas[-1].update({'shfI': v['i'] if v else None, 'shfV': v['var'] if v else None,
+                          'shfM': v['precios']['p50'] if v else None})
         # Su fraude y su cifra oculta (INEGI, ENVIPE 2026, datos de 2025).
         w = pn[e['abbr']]
         k = pc[e['abbr']]
@@ -510,6 +519,18 @@ LENTES = [
     {'id': 'don', 'dim': 'financiera', 'fmt': 'n', 'nom': 'Donatarias autorizadas', 'pal': 'verde', 'est': 'oficial', 'anio': 2026,
      'que': ('Organizaciones civiles y fideicomisos con domicilio en el estado que el SAT autorizó para recibir donativos deducibles del ISR, '
              'según el Anexo 14 de la Resolución Miscelánea Fiscal publicado en enero.')},
+    # El precio de la vivienda (21-11-2026, el simulador del predial ligado al
+    # Planisferio): el Índice SHF de Precios de la Vivienda, por estado.
+    {'id': 'shfI', 'dim': 'financiera', 'fmt': 'dec1', 'nom': 'Índice SHF de precios de la vivienda', 'pal': 'oro', 'est': 'oficial', 'anio': 2026,
+     'que': ('Cómo ha cambiado el precio de la vivienda con crédito hipotecario en cada estado desde 2017 (2017 = 100), según los avalúos que '
+             'registra la Sociedad Hipotecaria Federal. Un índice de 210 quiere decir que la vivienda vale 2.1 veces lo que valía en 2017. '
+             'No es el valor de ningún predio ni un avalúo, y no se compara con el valor catastral: es otra medición.')},
+    {'id': 'shfV', 'dim': 'financiera', 'fmt': 'pct', 'nom': 'Cuánto subió la vivienda en un año', 'pal': 'oro', 'est': 'oficial', 'anio': 2026,
+     'que': ('La variación anual del Índice SHF: cuánto cambió el precio de la vivienda frente al mismo trimestre del año anterior, tal como la publica '
+             'la SHF (cifras preliminares). No dice cuánto debe subir el predial: el predial lo fija cada ley de ingresos con su tabla de valores.')},
+    {'id': 'shfM', 'dim': 'financiera', 'fmt': 'pesos', 'nom': 'Precio mediano de la vivienda', 'pal': 'oro', 'est': 'oficial', 'anio': 2026,
+     'que': ('El precio de la vivienda que queda a la mitad de los avalúos del estado en el año: la mitad costó menos y la mitad más. '
+             'Son pesos corrientes de viviendas con crédito hipotecario, no de toda la vivienda, y no es el valor de ningún predio.')},
     # La dimensión de la deuda (03-11-2026): lo que debe cada gobierno estatal
     # y los tres indicadores con que lo mide el Sistema de Alertas.
     {'id': 'deuda', 'dim': 'deuda', 'fmt': 'mdp', 'nom': 'Lo que debe', 'pal': 'rojo', 'est': 'oficial', 'anio': 2025,
@@ -843,6 +864,13 @@ def _fuentes(ref, base=None):
             _pm['corte'], html.escape(_pm['fe']))
         extra.update({'sat': fs + '.', 'satH': 'Contribuyentes activos × 100 ÷ población a mitad de 2026 (CONAPO, la de la base), con el %s. La división es nuestra.' % fs,
                       'don': '%s (<a href="%s">PDF</a>; huella SHA-256 en <code>docs/sat/donatarias.json</code>).' % (html.escape(_pm['dtx']), html.escape(_pm['fd']))})
+    import cc_predial as ccp
+    _sh = ccp.shf()
+    fsh = ('%s, %s (<a href="%s">informe</a>, huella SHA-256 <code>%s…</code>; <a href="%s">datos abiertos</a>, base %s; en '
+           '<code>docs/vivienda/shf-precios-vivienda.json</code>). Cifras preliminares sujetas a revisión') % (
+        _sh['fuente'], _sh['corte'], html.escape(_sh['inf']['url']), _sh['inf']['sha256'][:12], html.escape(_sh['dat']['url']), _sh['dat']['base'])
+    extra.update({'shfI': fsh + '.', 'shfV': fsh + '. La variación es la que publica la SHF, no una cuenta nuestra.',
+                  'shfM': fsh + '. Es la mediana (percentil 50) de su cuadro de distribución de precios por entidad, página %d del informe.' % _sh['inf']['precios_pag']})
     extra.update({'peT': pe + '.', 'peV': pe + '. Miles de pesos ÷ 1,000: la cuenta es nuestra.'})
     extra.update({'incH': ic + '.', 'incN': ic + '.', 'sfT': sf + '.',
                   'incP': 'Superficie afectada por los incendios de 2025 (%s) ÷ superficie forestal (%s) × 100. La división es nuestra.' % (ic, sf)})

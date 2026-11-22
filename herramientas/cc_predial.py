@@ -1857,6 +1857,17 @@ def shf():
             'inf': S['informe'], 'dat': S['datos'], 'met': S['metodo'], 'nac': S['nacional'], 'est': est, 'mun': mun}
 
 
+def chat_shf():
+    """Lo que lee el chat (D.viv, 21-11-2026): una fila por estado [abbr, índice,
+    índice de un año antes, variación anual publicada, precio mediano, precio medio],
+    el país y la fuente. Las mismas cifras de la lente shfI del Planisferio."""
+    S = shf()
+    return {'est': [[a, v['i'], v['i0'], v['var'], v['precios']['p50'], v['precios']['medio']] for a, v in sorted(S['est'].items())],
+            'nac': [S['nac']['i'], S['nac']['i0'], S['nac']['precios']['p50']],
+            'corte': _corte_txt(S), 'base': S['dat']['base'], 'pag': S['inf']['precios_pag'], 'pv': S['inf']['var_pag_ent'],
+            'fu': {'tx': '%s, %s' % (S['fuente'], _corte_txt(S)), 'url': S['inf']['url']}, 'dat': S['dat']['url']}
+
+
 def _corte_txt(S):
     return '%s trimestre de %d' % (['primer', 'segundo', 'tercer', 'cuarto'][S['trim'] - 1], S['anio'])
 
@@ -2176,6 +2187,7 @@ def construir(base, ref):
     <h2 class="ci-tit" id="cpMerTit"><span aria-hidden="true">📈</span> Tu valor fiscal junto al mercado de la vivienda</h2>
     <p class="ci-nota">El predial se cobra sobre el <b>valor fiscal</b>, que fija el catastro con sus tablas de valores. Los bancos y las unidades de valuación miden otra cosa: el <b>precio de avalúo</b> de una vivienda. Con él, la Sociedad Hipotecaria Federal (SHF) publica cada trimestre el Índice SHF de Precios de la Vivienda: cuánto valieron las viviendas valuadas en cada estado y cuánto subieron en un año. Aquí lo ponemos junto a tu valor fiscal, para que veas en qué parte del mercado queda. <b>No es un avalúo ni dice cuánto vale tu casa</b>: es el mercado de tu estado, no tu predio.</p>
     <div id="cpMerCuerpo" aria-live="polite"></div>
+    <p class="ci-nota"><a href="herramienta-inspector-pregunta.html?q=%C2%BFEn%20qu%C3%A9%20estado%20subi%C3%B3%20m%C3%A1s%20la%20vivienda%3F&amp;modo=ciudadano&amp;abre=planisferio.html%3Fd%3Dfinanciera%26l%3DshfI">🏘️ Los 32 estados en el mapa: ábrelo en el Planisferio</a>, con el índice, cuánto subió en un año y el precio mediano de cada uno.</p>
     <p class="ci-fuentes">Fuente: <a href="{shf_inf_url}">{shf_fuente}, {shf_corte}</a> (huella SHA-256 <code>{shf_inf_sha}…</code>), pág. {shf_pag}, «{shf_tit}», {shf_uni}; las variaciones, págs. {shf_pe} y {shf_pm}; «{shf_nota}» Índices de sus <a href="{shf_dat_url}">datos abiertos</a> (base {shf_base}; huella <code>{shf_dat_sha}…</code>). Cómo se arma: <a href="{shf_met_url}">nota metodológica de la SHF</a>: {shf_cita} {chip_o}</p>
   </section>
 

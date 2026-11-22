@@ -3138,6 +3138,22 @@
   {
    "q": "Soy repartidor y me dieron de baja de la app",
    "ir": "herramienta-calculadora-laboral.html"
+  },
+  {
+   "q": "¿Cuánto ha subido el precio de la vivienda en Jalisco?",
+   "ir": "planisferio.html?d=financiera&l=shfI&e=JAL"
+  },
+  {
+   "q": "Índice SHF de precios de la vivienda",
+   "ir": "planisferio.html?d=financiera&l=shfI"
+  },
+  {
+   "q": "El mapa del precio de la vivienda",
+   "ir": "planisferio.html?d=financiera&l=shfI"
+  },
+  {
+   "q": "¿En qué estado subió más la vivienda?",
+   "ir": "planisferio.html?d=financiera&l=shfI"
   }
  ]
 }

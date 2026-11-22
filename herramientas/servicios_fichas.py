@@ -288,13 +288,20 @@ FICHAS = {
              'cada paso con su artículo.', 'herramienta-calculadora-inmueble.html', 'Nuevo'),
             ('📈', 'Inviertes en la bolsa', 'El 10 % de los artículos 129 y 140 sobre tu ganancia y tus dividendos, y lo que el simulador no calcula.',
              'herramienta-calculadora-bolsa.html', 'Nuevo'),
-            ('🏡', 'Tu impuesto predial', 'El predial con la Ley de Ingresos de tu municipio, si ya está cotejada, cada cifra con su artículo.',
+            ('🏡', 'Tu impuesto predial', 'El predial con la Ley de Ingresos de tu municipio, si ya está cotejada, cada cifra con su artículo, '
+             'y tu valor fiscal junto al Índice SHF de precios de la vivienda de tu estado, que no es un avalúo.',
              'herramienta-calculadora-predial.html', 'Nuevo'),
+            ('📄', 'El informe de tu predial', 'Tu cuenta del predial en un documento que se imprime y se descarga, con folio, la huella SHA-256 de tus datos '
+             'y una liga que repite la cuenta. No es un documento oficial ni un avalúo, y nada sale de tu navegador.',
+             'herramienta-calculadora-predial.html', 'Nuevo'),
+            ('🏘️', 'El precio de la vivienda en el Planisferio', 'El Índice SHF de los 32 estados en el mapa: el índice, cuánto subió en un año y el precio '
+             'mediano de los avalúos, la misma cifra que lee el simulador del predial.', 'planisferio.html?d=financiera&l=shfI', 'Nuevo'),
         ],
         'auditor': [('Dame mi estado de cuenta cívico', 'ciudadano'), ('Mi estado de cuenta ambiental', 'ambientalista'),
                     ('Me despidieron, ¿cuánto me toca de liquidación?', 'ciudadano'),
                     ('Gano 15 mil al mes, ¿cuánto me retienen?', 'ciudadano'), ('Trabajo en el gobierno y gano 20 mil al mes, ¿cuánto me retienen?', 'ciudadano'), ('¿Cuánto ISR pago si vendo mi casa?', 'ciudadano'),
-                    ('¿Cuánto ISR pago si vendo acciones en la bolsa?', 'ciudadano'), ('¿Cuánto pago de predial en Zapopan?', 'ciudadano')],
+                    ('¿Cuánto ISR pago si vendo acciones en la bolsa?', 'ciudadano'), ('¿Cuánto pago de predial en Zapopan?', 'ciudadano'),
+                    ('¿Cuánto ha subido el precio de la vivienda en Jalisco?', 'ciudadano')],
         'enciclopedia': [('herramienta-calculadora.html', 'La Calculadora Cívica'), ('numeros-herramientas-del-auditor.html', 'Las herramientas del Auditor')],
         'glosario': ['ISR (Impuesto Sobre la Renta)', 'Retención del ISR (Tarifa del Artículo 96)', 'Cuota Obrera del IMSS', 'Cuota Patronal del IMSS', 'Cuotas al ISSSTE',
                      'Costos Totales por Agotamiento y Degradación Ambiental',
