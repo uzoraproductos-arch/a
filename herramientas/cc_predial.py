@@ -1120,11 +1120,15 @@ MUNICIPIOS += _cdmx()
 #    art. 75), pero la actualización y los gastos de ejecución vienen de su
 #    Código Fiscal, que no cotejamos; Querétaro remite al Código Fiscal del
 #    Estado (art. 14).
-# León (Guanajuato) quedó en ESPERA: ver ahí su porqué.
+# León (Guanajuato) esperó hasta la Ronda 8: ver _leon_saltillo().
 # ---------------------------------------------------------------------------
 PUE_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'puebla-ley-ingresos-2026.json')
 QRO_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'queretaro-ley-ingresos-2026.json')
 PUE_LEY = 'Ley de Ingresos del Municipio de Puebla'
+PUE_CF = 'Código Fiscal y Presupuestario para el Municipio de Puebla'
+# Los dos códigos que remiten los recargos (Ronda 8, Paquete de Datos 6; Claude bajó cada PDF de su liga y cotejó su huella:
+# Puebla, arts. 43, 118 y 180; Querétaro, art. 44). Si la huella cambia, se vuelven a leer.
+COD_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'puebla-queretaro-codigos-fiscales-2026.json')
 QRO_LEY = 'Ley de Ingresos del Municipio de Querétaro'
 
 
@@ -1142,6 +1146,10 @@ def _pue_qro():
             or (Q['pronto_pago_art_50_fr_II']['enero_pct'], Q['pronto_pago_art_50_fr_II']['febrero_pct']) != (12, 8) \
             or (Q['beneficio_social_art_50_fr_X']['umbral_valor_catastral'], Q['beneficio_social_art_50_fr_X']['mayor_4m_descuento_pct']) != (4000000.0, 50):
         raise SystemExit('cc_predial: %s cambió: vuelve a cotejar los arts. 14 y 50 antes de integrarlo' % QRO_ARCHIVO)
+    K = json.load(open(COD_ARCHIVO, encoding='utf-8'))
+    if (K['puebla_codigo_fiscal_municipal']['sha256_pdf'], K['queretaro_codigo_fiscal_estatal']['sha256_pdf']) != \
+            ('23e74a858973de6d584f7dfb00f8ac0a9741290702f81440322b34ea673d2202', '25ece561e98ebfc92525eea2b394e37d9537dcb37cee119347772cb62d1d1e7f'):
+        raise SystemExit('cc_predial: %s cambió: vuelve a cotejar los códigos fiscales de Puebla y Querétaro' % COD_ARCHIVO)
     pad = {e: dict(_padron_ent(e)) for e in ('PUE', 'QRO')}
     if pad['PUE'].get('114') != 'Puebla' or pad['QRO'].get('014') != 'Querétaro':
         raise SystemExit('cc_predial: el padrón no trae a Puebla (21114) o a Querétaro (22014) con su nombre')
@@ -1160,16 +1168,17 @@ def _pue_qro():
              'f': 0.5, 'max_ahorro': 1395.0, 'art': 'art. 91'},
             ],
         'suma_art': None,
-        'acc_pend': ('Los recargos de Puebla son de 2 %% al mes (art. 75 de la %s), pero la actualización y los gastos de ejecución los fija el '
-                     'Código Fiscal y Presupuestario para el Municipio de Puebla, que aún no cotejamos: no calculamos el adeudo. Pídelo a la '
-                     'Tesorería Municipal.') % PUE_LEY,
+        'acc_pend': ('Si no pagas en enero o febrero (art. 180 del %s), los recargos son de 2 %% por mes o fracción (art. 75 de la %s), '
+                     'hasta por cinco años y sobre el crédito sin sus accesorios (art. 43 del Código). Los gastos de ejecución son las cuotas '
+                     'que fija la Ley de Ingresos por cada diligencia (art. 118 del Código), que aún no cotejamos: no calculamos el adeudo. '
+                     'Pídelo a la Tesorería Municipal.') % (PUE_CF, PUE_LEY),
         'nota': ('Puebla cobra 1.6 al millar al año sobre el valor catastral y el doble al baldío urbano (art. 4). Si tu predio urbano tiene '
                  'construcción menor al 30 % del terreno, la parte sin construir paga el doble (art. 4, fr. III): aquí no se calcula, porque '
                  'necesita la superficie. Ojo con el tope: en 2026 tu predial no puede subir más de lo que dice el transitorio tercero frente a '
                  'lo que pagaste en 2025 (salvo inmuebles comerciales o sin datos catastrales al día); como no tenemos tu recibo de 2025, esta '
                  'cuenta no aplica el tope. La reducción del art. 91 pide solicitud y dictamen; la de los predios agrícolas, pecuarios, forestales '
                  'o de servicios ambientales es «hasta» 80 % (art. 90): la ley no dice cuánto, así que no la calculamos.'),
-        'venc': 'que se pagan en el plazo del Código Fiscal y Presupuestario para el Municipio de Puebla (art. 4)'}
+        'venc': 'que se paga dentro de los dos primeros meses del año (art. 180 del Código Fiscal y Presupuestario para el Municipio de Puebla)'}
     tramos = [[x['li'], round(x['cf'] / 6, 6), x['factor'] / 6] for x in T]
     qro = {
         'id': 'qro014', 'ent': 'QRO', 'cve': '014', 'nombre': 'Querétaro',
@@ -1187,8 +1196,9 @@ def _pue_qro():
             {'id': 'soc4', 'et': 'Igual, con valor catastral de más de $4,000,000', 'f': 0.5, 'desde': 4000000, 'art': 'art. 50, fr. X, 8'}],
         'suma_art': None,
         'minimo': {'uma_anual': 1.25, 'art': 'art. 50, fr. I'},
-        'acc_pend': ('La %s remite la actualización y los recargos del predial al Código Fiscal del Estado de Querétaro (art. 14), que aún no '
-                     'cotejamos: no calculamos el adeudo. Pídelo a la Secretaría de Finanzas del Municipio.') % QRO_LEY,
+        'acc_pend': ('La %s remite la actualización y los recargos del predial al Código Fiscal del Estado de Querétaro (art. 14). Su art. 44 '
+                     'manda cobrar, sobre el monto actualizado, la tasa de pago a plazos de la Ley de Ingresos de la Federación aumentada 50 %%; '
+                     'esa tasa de 2026 aún no la cotejamos: no calculamos el adeudo. Pídelo a la Secretaría de Finanzas del Municipio.') % QRO_LEY,
         'nota': ('En 2026 el bimestre de un predio urbano o baldío no puede ser menor que el último de 2025 (art. 50, fr. VII), y si tu predio '
                  'cambió y la tarifa lo sube, el aumento se topa (fr. VIII): sin tu recibo anterior, esta cuenta no aplica esos topes. Los '
                  'beneficios del art. 50 no se juntan (penúltimo párrafo de la fr. IX).'),
@@ -1217,7 +1227,7 @@ MUNICIPIOS += _pue_qro()
 #    la que da el rango anterior en su tope (la ley la imprime así): se aplica tal
 #    cual y la página lo dice.
 #  - Los recargos de las dos quedan pendientes (ver 'acc_pend').
-# El Estado de México (125 municipios) quedó en ESPERA: ver _edomex_espera().
+# El Estado de México (125 municipios) entró en la Ronda 8: ver _edomex().
 # ---------------------------------------------------------------------------
 TIJ_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'tijuana-ley-ingresos-2026.json')
 MER_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'merida-ley-hacienda-2026.json')
@@ -1305,36 +1315,213 @@ def _tij_mer():
 
 MUNICIPIOS += _tij_mer()
 
-# El Estado de México (Ronda 7): Antigravity copió la tarifa del art. 109 del Código Financiero con la huella de su PDF, pero el
-# portal de legislación del Gobierno del Estado (y todos sus sitios) no responde desde nuestro servidor: sin cotejarla contra el PDF,
-# sus 125 municipios esperan. La tabla del JSON es continua (lo revisa _edomex_espera()); en cuanto el PDF se pueda leer, se integra.
+# ---------------------------------------------------------------------------
+# El Estado de México, los 125 municipios (Ronda 8, 22-11-2026). En la Ronda 7
+# esperaban porque el portal de legislación no respondía; Antigravity subió el
+# PDF del Código Financiero (investigaciones/predial/edomex-codvig007-2026.pdf,
+# misma huella c64741f0…) y Claude cotejó contra él la tarifa del art. 109 (13
+# rangos, p. 153), la sobretasa de los baldíos y el calendario del art. 112.
+# La tarifa es la misma para los 125: la fija el Código, no cada municipio.
+#
+# Lo que no es cita del Código y decidimos a la vista:
+#  - El art. 109 da el monto anual: aquí va por bimestre (límite, cuota fija ÷ 6
+#    y factor ÷ 6), que suma lo mismo en el año.
+#  - La «tasa adicional del 15 %» es solo para baldíos urbanos de más de 200 m²:
+#    el simulador la aplica al baldío urbano y la página dice el límite.
+#  - Las bonificaciones por pago anticipado, los recargos y la actualización los
+#    fija cada año la Ley de Ingresos de los Municipios del Estado de México
+#    (arts. 30 y 112 del Código), que aún no cotejamos: no los ponemos.
+# ---------------------------------------------------------------------------
 MEX_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'edomex-codigo-financiero-2026.json')
-MEX_MOTIVO = ('su tarifa sale del art. 109 del Código Financiero del Estado de México y Municipios (reformado por el Decreto 240, Gaceta del '
-              'Gobierno del 17-12-2025), igual para los 125 municipios. Otro agente la copió del PDF con su huella, pero el portal de legislación '
-              'del Gobierno del Estado no responde desde nuestro servidor y no pudimos cotejarla contra el documento: hasta leerla ahí, no la '
-              'calculamos. Los descuentos y los recargos de 2026 son de la Ley de Ingresos de los Municipios del Estado de México (Decreto 239), '
-              'también por cotejar.')
+MEX_PDF = os.path.join(RAIZ, 'investigaciones', 'predial', 'edomex-codvig007-2026.pdf')
+MEX_TX = 'Código Financiero del Estado de México y Municipios'
+# El art. 109, tal como está en la p. 153 del PDF (límite inferior, cuota fija anual, factor): la del JSON debe ser esta.
+MEX_109 = [(1, 176, 0.000342), (180971, 238, 0.001399), (343841, 466, 0.001447), (554421, 771, 0.00185), (763891, 1159, 0.002364),
+           (973931, 1656, 0.002766), (1188881, 2251, 0.003492), (1403841, 3002, 0.004045), (1618841, 3872, 0.004381),
+           (1854061, 4903, 0.004668), (2100311, 6053, 0.004841), (2433151, 7665, 0.005124), (2780991, 9448, 0.003628)]
+MEX_NOTA = ('En el Estado de México la tarifa del predial no la pone cada municipio: la fija el %s para los 125 (art. 109), como monto '
+            'anual. Cómo se paga depende de cuánto te toca (art. 112): hasta 6 veces la UMA diaria, en una sola exhibición de enero a marzo; '
+            'de más de 6 y hasta 9, en dos pagos, enero y julio; de más de 9, en seis partes iguales, en enero, marzo, mayo, julio, septiembre '
+            'y noviembre. La sobretasa de 15 %% es solo para baldíos urbanos de más de 200 m² (art. 109, último párrafo): si el tuyo mide '
+            'menos, paga con la tarifa general. Las bonificaciones por pagar por adelantado y por cumplimiento las fija cada año la Ley de '
+            'Ingresos de los Municipios del Estado de México, que aún no cotejamos en esta plataforma.') % MEX_TX
+MEX_ACC = ('La actualización y los recargos del predial los fija cada año la Ley de Ingresos de los Municipios del Estado de México (%s, '
+           'art. 30), que aún no cotejamos: no calculamos el adeudo. Ojo: el último párrafo del art. 112 dice que al predial no pagado en sus '
+           'plazos no le procede la actualización «en los términos que dispone este Código». Pide tu adeudo a la Tesorería Municipal.') % MEX_TX
 
 
-def _edomex_espera():
+def _edomex():
     E = json.load(open(MEX_ARCHIVO, encoding='utf-8'))
     T = E['tarifa_anual_art_109']
-    if E['sha256_pdf'] != 'c64741f00243049569bd4a5c4dec3a81244214e09afc0e3512d75e5840f149f5' or len(T) != 13 or len(E['municipios']) != 125:
-        raise SystemExit('cc_predial: %s cambió: revisa su huella, sus 13 rangos y sus 125 municipios' % MEX_ARCHIVO)
+    C = E['calendario_pago_art_112']
+    if E['sha256_pdf'] != 'c64741f00243049569bd4a5c4dec3a81244214e09afc0e3512d75e5840f149f5' or len(E['municipios']) != 125 \
+            or [(x['li'], x['cf'], x['factor']) for x in T] != MEX_109 or E['baldios_art_109']['tasa_adicional_pct'] != 15 \
+            or (C['una_exhibicion_hasta_uma'], C['dos_exhibiciones_hasta_uma']) != (6, 9):
+        raise SystemExit('cc_predial: %s cambió: vuelve a cotejar los arts. 109 y 112 contra el PDF antes de integrarlo' % MEX_ARCHIVO)
+    if os.path.exists(MEX_PDF):
+        import hashlib
+        if hashlib.sha256(open(MEX_PDF, 'rb').read()).hexdigest() != E['sha256_pdf']:
+            raise SystemExit('cc_predial: %s no es el PDF que cotejamos (su huella cambió)' % MEX_PDF)
     pad = dict(_padron_ent('MÉX'))
-    out = {}
+    tramos = [[li, round(cf / 6, 6), fa / 6] for li, cf, fa in MEX_109]
+    out = []
     for x in E['municipios']:
         c = x['cve'][2:]
         if pad.get(c) != x['nombre']:
             raise SystemExit('cc_predial: %s (%s) no coincide con el padrón municipal' % (x['nombre'], x['cve']))
-        out['MÉX-' + c] = {'nombre': x['nombre'], 'url': E['url'], 'sha256': E['sha256_pdf'], 'motivo': MEX_MOTIVO}
+        out.append({
+            'id': 'mex' + c, 'ent': 'MÉX', 'cve': c, 'nombre': x['nombre'],
+            'ley': E['ley'], 'ley_corta': MEX_TX, 'arts_ley': ', arts. 109 y 112',
+            'url': E['url'], 'sha256': E['sha256_pdf'],
+            'art_tarifa': 'art. 109', 'tramos': tramos,
+            'tramos_nota': ('El Código da la tarifa por año (art. 109): aquí la cuota fija y el factor van entre seis, por bimestre, que suman '
+                            'lo mismo en el año.'),
+            'baldio': {'tipo': 'sobretasa', 'pct': 15, 'art': 'art. 109, último párrafo (baldío urbano de más de 200 m²)'},
+            'pronto': [],
+            'pronto_nota': ('El Código no trae descuento por pagar por adelantado: las bonificaciones las fija cada año la Ley de Ingresos de '
+                            'los Municipios del Estado de México, que aún no cotejamos.'),
+            'beneficios': [], 'suma_art': None,
+            'acc_pend': MEX_ACC, 'nota': MEX_NOTA,
+            'venc': 'que se pagan según cuánto te toca: en una, dos o seis exhibiciones (art. 112)'})
     return out
 
 
-def aplica_uma(uma):
+MUNICIPIOS += _edomex()
+
+
+# ---------------------------------------------------------------------------
+# León (Guanajuato) y Saltillo (Coahuila) (Ronda 8, 22-11-2026; Paquete de Datos
+# 6 de Antigravity, cotejado por Claude contra el mismo PDF, misma huella:
+# León, arts. 5, 38, 39, 43 y 44 de su Ley de Ingresos 2026, pp. 93-94 y
+# 427-428; Saltillo, arts. 2, 48 y 49 de la suya, pp. 6-8 y 72-73).
+#
+# Lo que no es cita de la ley y decidimos a la vista:
+#  - Las dos tablas no son continuas: la cuota fija de un rango no es la que da
+#    el anterior en su tope. Así las imprime la ley (León, rango 2: $3,777.64,
+#    p. 94; Saltillo casi en todos sus rangos) y así las aplicamos: van con
+#    'saltos_ley' y la página lo dice.
+#  - León da su tarifa por año (art. 5): aquí va por bimestre (÷ 6). Usamos la de
+#    la fr. I, inciso a): inmuebles con edificación cuyo valor se determinó o
+#    modificó desde 2021. Si el tuyo se valuó antes, su tarifa es otra (frs. II y
+#    III) y la página lo avisa.
+#  - El baldío de León paga por superficie (art. 5, fr. I, b): con valor y sin
+#    metros, solo podemos calcular el primer escalón, 0.439 % al año para
+#    terrenos de hasta 1,000 m², y así lo decimos.
+#  - La cuota mínima anual de León ($399.40, art. 43) y de Saltillo ($245.15,
+#    art. 2, fr. I, 3, c) va como mínimo del año; por bimestre, su sexta parte.
+#  - Saltillo: «100 veces el valor anual de la UMA» se lee con la UMA anual de la
+#    base; el 50 % de su art. 2, fr. II, b) va «sobre el primer» tanto del valor
+#    (al excedente, la tasa completa, como dice la ley).
+#  - Los rústicos de Saltillo pagan una sobretasa de 100 % (art. 2, fr. I, 3).
+#  - Recargos: los dos dan la tasa, pero la actualización y los gastos de
+#    ejecución (o sus topes) dependen de leyes que no cotejamos: 'acc_pend'.
+# San Luis Potosí quedó en ESPERA: ver ahí su porqué.
+# ---------------------------------------------------------------------------
+LEON_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'leon-ley-ingresos-2026.json')
+SAL_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'saltillo-ley-ingresos-2026.json')
+LEON_LEY = 'Ley de Ingresos para el Municipio de León'
+SAL_LEY = 'Ley de Ingresos del Municipio de Saltillo'
+# León, art. 5, fr. I, a), p. 94 (límite inferior, cuota fija anual, tasa en %).
+LEON_5 = [(0.01, 0.0, 0.234), (1552285.81, 3777.64, 0.267), (3104571.61, 7926.59, 0.292), (6209143.21, 16999.39, 0.316),
+          (12418286.41, 36630.22, 0.341), (24836572.81, 78991.48, 0.365), (49673145.61, 169654.9, 0.389), (99346291.21, 362863.57, 0.414),
+          (198692582.41, 774077.74, 0.438), (397385164.81, 1644033.34, 0.462), (794770329.61, 3480652.2, 0.487),
+          (1589540659.21, 7347305.23, 0.511)]
+# Saltillo, art. 2, fr. I, a), pp. 6-7 (límite inferior, cuota fija bimestral, tasa sobre el excedente).
+SAL_2 = [(0.01, 35.3, 0.0), (121980.01, 40.01, 0.00016), (168907.01, 55.35, 0.0001692), (238762.01, 78.36, 0.000179),
+         (315248.01, 103.25, 0.0001894), (460228.01, 151.38, 0.0002003), (706714.01, 230.7, 0.0002119), (1122687.01, 365.85, 0.000239),
+         (1907908.01, 610.0, 0.000239), (3360563.01, 1075.55, 0.000255), (7010000.01, 2250.0, 0.0002735), (16222552.01, 4985.77, 0.0002945),
+         (49750200.01, 14885.38, 0.000316), (148404900.01, 42250.0, 0.0003385), (465100000.01, 144700.0, 0.000345)]
+
+
+def _leon_saltillo():
+    L = json.load(open(LEON_ARCHIVO, encoding='utf-8'))
+    S = json.load(open(SAL_ARCHIVO, encoding='utf-8'))
+    if L['sha256_pdf'] != '91e6efa75a5c75df3563554d5f30e84b56ae4d83d2d4915f4da5901c72b256cb' \
+            or [(x['li'], x['cf'], x['pct']) for x in L['tarifa_anual_art_5_fr_I_a']['rangos']] != LEON_5:
+        raise SystemExit('cc_predial: %s cambió: vuelve a cotejar el art. 5 contra el PDF antes de integrarlo' % LEON_ARCHIVO)
+    if S['sha256_pdf'] != 'cd90394a66937ee94b25790dc2c8824b96736316b03d6b0ef9955b863910f6bc' \
+            or [(x['li'], x['cf'], x['factor']) for x in S['tarifa_bimestral_art_2_fr_I']] != SAL_2:
+        raise SystemExit('cc_predial: %s cambió: vuelve a cotejar el art. 2 contra el PDF antes de integrarlo' % SAL_ARCHIVO)
+    lpdf = os.path.join(RAIZ, 'investigaciones', 'predial', 'leon-ley-ingresos-2026.pdf')
+    if os.path.exists(lpdf):
+        import hashlib
+        if hashlib.sha256(open(lpdf, 'rb').read()).hexdigest() != L['sha256_pdf']:
+            raise SystemExit('cc_predial: %s no es el PDF que cotejamos (su huella cambió)' % lpdf)
+    pad = {e: dict(_padron_ent(e)) for e in ('GTO', 'COAH')}
+    if pad['GTO'].get('020') != 'León' or pad['COAH'].get('030') != 'Saltillo':
+        raise SystemExit('cc_predial: el padrón no trae a León (11020) o a Saltillo (05030) con su nombre')
+    leon = {
+        'id': 'gto020', 'ent': 'GTO', 'cve': '020', 'nombre': 'León',
+        'ley': L['ley'], 'ley_corta': LEON_LEY, 'arts_ley': ', arts. 5, 38, 39, 43 y 44',
+        'url': L['url'], 'sha256': L['sha256_pdf'],
+        'art_tarifa': 'art. 5, fr. I, a)', 'tramos': [[li, round(cf / 6, 6), pc / 600] for li, cf, pc in LEON_5],
+        'saltos_ley': ('La cuota fija del rango 2 ($3,777.64 al año) no es la que da el rango 1 en su tope ($3,632.35): así la imprime la ley '
+                       '(p. 94 del Decreto 159), y así la aplicamos.'),
+        'tramos_nota': ('La ley da la tarifa por año (art. 5): aquí la cuota fija y la tasa van entre seis, por bimestre, que suman lo mismo en '
+                        'el año. Es la tarifa de la fr. I, a): predios con construcción cuyo valor se determinó o modificó desde el 1 de enero '
+                        'de 2021. Si el tuyo se valuó antes, su tarifa es la de la fr. II (2016 a 2020) o la III, más altas: revisa tu recibo.'),
+        'baldio': {'tipo': 'millar', 'millar': 4.39 / 6, 'cf': 0.0, 'art': 'art. 5, fr. I, b) (terreno de hasta 1,000 m²)'},
+        'pronto': [{'id': 'ene', 'et': 'Pagas el año completo en enero', 'f': 0.9, 'art': 'art. 44'},
+                   {'id': 'feb', 'et': 'Pagas el año completo en febrero', 'f': 0.92, 'art': 'art. 44'}],
+        'pronto_nota': 'Quien paga la cuota mínima no tiene descuento por pago anticipado (art. 44).',
+        'beneficios': [], 'suma_art': None,
+        'minimo': {'anual': 399.40, 'pesos': 399.40 / 6, 'art': 'art. 43'},
+        'acc_pend': ('Los recargos de León son de 2.07 %% al mes (1.38 %% con prórroga o en parcialidades), hasta por 5 años (art. 38 de la %s), '
+                     'y los gastos de ejecución, 2 %% por diligencia, con mínimo de dos UMA diarias y tope de tres UMA mensuales (art. 39); la '
+                     'actualización la fija la Ley de Hacienda para los Municipios del Estado de Guanajuato, que aún no cotejamos: no '
+                     'calculamos el adeudo. Pídelo a la Tesorería Municipal.') % LEON_LEY,
+        'nota': ('León liquida el predial por año (art. 5). El terreno sin construcción paga por superficie (art. 5, fr. I, b): 0.439 %% al año '
+                 'si mide hasta 1,000 m²; si mide más, la tasa sube por escalones de metros y aquí no se calcula. La cuota mínima es de $399.40 '
+                 'al año (art. 43). Pensionados, jubilados, adultos mayores y personas con discapacidad pagan una cuota mínima de $324.18 por su '
+                 'casa si vale hasta 40 veces la UMA diaria elevada al año, y si vale más, la tasa solo sobre el 75 %% del excedente (art. 43): '
+                 'aquí no se calcula. Los predios agrícolas o ganaderos con constancia de 2026 pagan la mitad (art. 45).') ,
+        'venc': 'que se pagan por bimestre; la cuota mínima, en el primer bimestre (art. 43)'}
+    sal = {
+        'id': 'coah030', 'ent': 'COAH', 'cve': '030', 'nombre': 'Saltillo',
+        'ley': S['ley'], 'ley_corta': SAL_LEY, 'arts_ley': ', arts. 2, 48 y 49',
+        'url': S['url'], 'sha256': S['sha256_pdf'],
+        'art_tarifa': 'art. 2, fr. I, a)', 'tramos': [[li, cf, fa] for li, cf, fa in SAL_2],
+        'saltos_ley': ('La cuota fija de casi cada rango no es la que da el anterior en su tope, y el rango 1 es solo la cuota fija ($35.30): '
+                       'así imprime la tabla el Decreto 369 (p. 6), y así la aplicamos.'),
+        'baldio': {'tipo': 'igual', 'art': 'art. 2, fr. I, a)'},
+        'rustico': {'tipo': 'sobretasa', 'pct': 100, 'art': 'art. 2, fr. I, 3'},
+        'pronto': [{'id': 'ene', 'et': 'Pagas el año completo en enero, en una sola exhibición y al corriente', 'f': 0.85, 'art': 'art. 2, fr. II, a)'},
+                   {'id': 'feb', 'et': 'Pagas el año completo en febrero, en una sola exhibición y al corriente', 'f': 0.9, 'art': 'art. 2, fr. II, a)'},
+                   {'id': 'mar', 'et': 'Pagas el año completo en marzo, en una sola exhibición y al corriente', 'f': 0.95, 'art': 'art. 2, fr. II, a)'}],
+        'pronto_nota': 'Si pagas así, no se causan los recargos de los bimestres vencidos (art. 2, fr. II, a).',
+        'beneficios': [{'id': 'soc', 'et': 'Pensionado, jubilado, adulto mayor o persona con discapacidad, en el padrón municipal (tu casa, '
+                                           'donde vives; pagando el año por adelantado)',
+                        'f': 0.5, 'tope_uma_anual': 100, 'art': 'art. 2, fr. II, b)'},
+                       {'id': 'ben', 'et': 'Institución de beneficencia o educativa no pública (sus predios en ese uso; pagando el año por adelantado)',
+                        'f': 0.5, 'art': 'art. 2, fr. II, d)'}],
+        'suma_art': None,
+        'minimo': {'anual': 245.15, 'pesos': 245.15 / 6, 'art': 'art. 2, fr. I, 3, c)'},
+        'acc_pend': ('Los recargos de Saltillo son de 2 %% por mes o fracción desde el día 16 del bimestre (art. 49 de la %s) y de 1.5 %% al mes '
+                     'en parcialidades (art. 48), pero la actualización y los gastos de ejecución los fija el Código Financiero para los Municipios '
+                     'del Estado de Coahuila de Zaragoza, que aún no cotejamos: no calculamos el adeudo. Pídelo a la Tesorería Municipal.') % SAL_LEY,
+        'nota': ('Saltillo cobra por bimestre con su tabla del art. 2 y nunca menos de $245.15 al año, aun después de los estímulos (fr. I, 3, c). '
+                 'Los predios no edificados urbanos o suburbanos contiguos a bulevares o avenidas principales, fuera de uso habitacional, pagan '
+                 '25 % más (fr. I, 1 y 2): aquí el baldío va con la tabla general y la página no suma esa sobretasa. La ley dice además que el '
+                 'impuesto no puede ser menor al del año anterior ni subir más de 20 % (fr. I, 3, a y b): sin tu recibo de 2025, esta cuenta no '
+                 'aplica esos topes. El 50 % de pensionados, jubilados, adultos mayores y personas con discapacidad vale sobre el valor hasta '
+                 '100 veces la UMA anual; al excedente se le aplica la tasa completa (fr. II, b, 5).'),
+        'venc': 'que se pagan por bimestre; los recargos corren desde el día 16 de iniciado el bimestre (art. 49)'}
+    return [leon, sal]
+
+
+MUNICIPIOS += _leon_saltillo()
+
+
+def aplica_uma(uma, uma_anual=None):
     """Las cifras en cuotas (UMA) de Nuevo León, en pesos con la UMA de la base: el mínimo de 2 cuotas al año y la
-    tarifa especial. Se llama antes de pasar los renglones a la página y en la prueba, con la misma UMA."""
+    tarifa especial. Se llama antes de pasar los renglones a la página y en la prueba, con la misma UMA. Con la UMA
+    anual de la base, los topes «sobre el primer» tanto que la ley da en veces la UMA anual (Saltillo)."""
     for m in MUNICIPIOS:
+        for b in m['beneficios']:
+            if b.get('tope_uma_anual'):
+                if not uma_anual:
+                    raise SystemExit('cc_predial: %s necesita la UMA anual de la base' % m['id'])
+                b['tope'] = _r2(b['tope_uma_anual'] * uma_anual)
         mi = m.get('minimo')
         if mi and mi.get('uma_anual'):
             mi['anual'] = _r2(mi['uma_anual'] * uma)
@@ -1369,14 +1556,13 @@ ESPERA = {
     'JAL-100': {'nombre': 'Tomatlán', 'url': _li('Tomatl%C3%A1n'),
                 'sha256': '7bcf36b70581f7ab29ae1ee19272622e48dd86fd3052e07afd48a8c7f1ed8af1',
                 'motivo': 'su art. 18 escribe las tasas como «0.20% al millar», «0.14% al millar» y «0.30% al millar», y así no se sabe cuánto es.'},
-    'GTO-020': {'nombre': 'León', 'url': 'https://normatividadestatalymunicipal.guanajuato.gob.mx/archivos/687fe34a901a03abed262a62e22f90db.pdf',
-                'sha256': '91e6efa75a5c75df3563554d5f30e84b56ae4d83d2d4915f4da5901c72b256cb',
-                'motivo': 'su Ley de Ingresos 2026 (Decreto 159, P.O. 30-12-2025) la tenemos en la tabla que copió del PDF otro agente, pero no la pudimos volver a bajar para cotejarla (el portal de normatividad del Estado no manda su certificado intermedio), y en la copia la cuota fija de los rangos no sigue del rango anterior (del 1.º al 2.º faltan $145): Antigravity volvió a leer la p. 94 del Decreto y dice que la ley imprime así $3,777.64 (el 4 % sobre $3,632.35); hasta verlo nosotros en el PDF, con su huella, no la calculamos.'},
+    'SLP-028': {'nombre': 'San Luis Potosí', 'url': 'https://sitio.sanluis.gob.mx/pagAyuntamientoCMS/storage/Medios//2026/01/226-DECRETO%200410-%20Que%20expide%20la%20Ley%20de%20Ingresos%20para%20el%20Municipio%20de%20San%20Luis%20Potosi%CC%81,%20SLP,%20para%20el%20ejercicio%20fiscal%202026.pdf',
+                'sha256': 'a9b24442e237c0d921973c555c5c9872a7575f26c3b1b97e99d4560755be2d1e',
+                'motivo': 'su Ley de Ingresos 2026 (Decreto 0410, P.O. 30-12-2025) la leímos completa y tres cosas no se pueden calcular sin interpretarla: en el rango 1 de la tabla de casas, la tabla dice factor 0.00151359 y el texto, «tasa mínima de 0.00152029»; la fórmula del art. 7 (excedente × factor + cuota fija), leída al pie de la letra en ese rango, cobraría dos veces la cuota; la tabla de casas termina en $55,692,498.94 sin «en adelante», y el descuento de enero a marzo (art. 62, fr. II) exceptúa «a los contribuyentes a los que se refiere el artículo 7º», que es todo el predial. Tampoco dice si la tarifa es anual o bimestral (el art. 62 habla del «impuesto predial anual»). Hasta que el Municipio lo aclare, no la calculamos.'},
     'JAL-108': {'nombre': 'Tuxpan', 'url': _li('Tuxpan'),
                 'sha256': '764138a07d47ecae571651ac371a5e3aef732b2d00d83df4b94e35a86d2ebb13',
                 'motivo': 'su art. 33 dice «al millar el: 0.00021», «0.00017» y «0.00031»: leído así sería un impuesto casi nulo, y no se sabe cuánto es.'},
 }
-ESPERA.update(_edomex_espera())
 
 # Las Tablas de Valores Unitarios de cada municipio (lo que fija el catastro para armar el valor fiscal).
 # Cada valor es oficial y lleva su documento; armar el valor fiscal con ellos es derivado. Valores en pesos por m²,
@@ -2217,7 +2403,7 @@ REGISTRO = {
     'GTO': {'donde': 'Normatividad Estatal y Municipal del Gobierno del Estado de Guanajuato',
             'url': 'https://normatividadestatalymunicipal.guanajuato.gob.mx/',
             'como': 'Una Ley de Ingresos por municipio, publicada en el Periódico Oficial del Estado.',
-            'ojo': 'El portal de normatividad no manda su certificado intermedio (GlobalSign RSA OV SSL CA 2018): la ley de León quedó en espera.'},
+            'ojo': 'El portal de normatividad no manda su certificado intermedio (GlobalSign RSA OV SSL CA 2018). Solo León está cotejada, contra su PDF guardado en el repositorio (investigaciones/predial/).'},
     'BC': {'donde': 'Tesorería Municipal de Tijuana (Periódico Oficial del Estado de Baja California)',
            'url': 'https://www.tijuana.gob.mx/Dependencias/tesoreria/',
            'como': 'Una Ley de Ingresos por municipio, con sus tasas al millar del predial; la actualización y los gastos de ejecución vienen de la Ley de Hacienda Municipal del Estado.',
@@ -2229,15 +2415,23 @@ REGISTRO = {
     'MÉX': {'donde': 'Legislación del Gobierno del Estado de México (Gaceta del Gobierno)',
             'url': 'https://legislacion.edomex.gob.mx/',
             'como': 'El predial de los 125 municipios sale de una sola tarifa, la del art. 109 del Código Financiero del Estado de México y Municipios; los descuentos y recargos, de la Ley de Ingresos de los Municipios de cada año.',
-            'ojo': 'El portal de legislación del Gobierno del Estado no responde desde nuestro servidor: la tarifa no está cotejada y los 125 municipios esperan.'},
+            'ojo': 'El portal de legislación del Gobierno del Estado no responde desde nuestro servidor: la tarifa se cotejó contra el PDF del Código guardado en el repositorio (investigaciones/predial/, misma huella). La Ley de Ingresos de los Municipios 2026 (bonificaciones y recargos) aún no.'},
+    'COAH': {'donde': 'Portal del Ayuntamiento de Saltillo (Periódico Oficial del Gobierno del Estado de Coahuila)',
+             'url': 'https://saltillo.gob.mx/',
+             'como': 'Una Ley de Ingresos por municipio, con su tarifa bimestral del predial; la actualización y los gastos de ejecución vienen del Código Financiero para los Municipios del Estado.',
+             'ojo': 'Solo Saltillo está cotejada.'},
+    'SLP': {'donde': 'Portal del Ayuntamiento de San Luis Potosí (Periódico Oficial «Plan de San Luis»)',
+            'url': 'https://sitio.sanluis.gob.mx/',
+            'como': 'Una Ley de Ingresos por municipio; la actualización y los recargos remiten al Código Fiscal del Estado (art. 11).',
+            'ojo': 'La ley de la capital la leímos y quedó en espera: ver su ficha.'},
     'PUE': {'donde': 'Portal del Ayuntamiento de Puebla (Periódico Oficial del Estado)',
             'url': 'https://archivo.pueblacapital.gob.mx/',
-            'como': 'Una Ley de Ingresos por municipio; los plazos de pago los fija el Código Fiscal y Presupuestario de cada municipio.',
-            'ojo': 'Solo la capital está cotejada.'},
+            'como': 'Una Ley de Ingresos por municipio; los plazos de pago los fija el Código Fiscal y Presupuestario de cada municipio (en la capital, enero y febrero: art. 180).',
+            'ojo': 'Solo la capital está cotejada, con su Código Fiscal y Presupuestario (arts. 43, 118 y 180).'},
     'QRO': {'donde': 'Portal fiscal del Municipio de Querétaro (La Sombra de Arteaga)',
             'url': 'https://portalfiscal.municipiodequeretaro.gob.mx/',
-            'como': 'Una Ley de Ingresos por municipio, con su tarifa progresiva del predial; los recargos remiten al Código Fiscal del Estado.',
-            'ojo': 'Solo la capital está cotejada.'},
+            'como': 'Una Ley de Ingresos por municipio, con su tarifa progresiva del predial; los recargos remiten al Código Fiscal del Estado (art. 44: la tasa de pago a plazos de la Ley de Ingresos de la Federación, 50 % más, sobre el monto actualizado).',
+            'ojo': 'Solo la capital está cotejada; la tasa de la Ley de Ingresos de la Federación 2026 aún no.'},
     'NL': {'donde': 'Congreso del Estado de Nuevo León, leyes del paquete fiscal',
            'url': 'https://www.hcnl.gob.mx/trabajo_legislativo/leyes/paquete_fiscal.php',
            'como': 'El predial no va en una ley por municipio: lo fija la Ley de Hacienda para los Municipios del Estado, igual para los 51 '
@@ -2331,10 +2525,14 @@ def revisa():
         if m['ent'] not in ENTIDADES or len(m['sha256']) != 64:
             raise SystemExit('cc_predial: %s trae mal su entidad o su huella' % m['id'])
         li = [t[0] for t in m['tramos']]
-        if li != sorted(li) or any(not (0 < t[2] < 0.01) for t in m['tramos']):
+        # El primer tramo puede ser solo cuota fija (Saltillo: tasa 0 y cuota de $35.30).
+        if li != sorted(li) or any(not (0 < t[2] < 0.01) and not (i == 0 and t[2] == 0 and t[1] > 0) for i, t in enumerate(m['tramos'])):
             raise SystemExit('cc_predial: la tabla de %s no está en orden o trae una tasa rara' % m['id'])
-        # La tarifa es continua: la cuota fija de cada tramo es (casi) lo que da el anterior en su límite.
-        for a, b in zip(m['tramos'], m['tramos'][1:]):
+        # La tarifa es continua: la cuota fija de cada tramo es (casi) lo que da el anterior en su límite. Si la ley la imprime
+        # con saltos (León, Saltillo), va con 'saltos_ley', que dice dónde y lo lee la página.
+        if m.get('saltos_ley') is not None and len(m['saltos_ley']) < 40:
+            raise SystemExit('cc_predial: %s dice que su tabla trae saltos de ley sin decir cuáles' % m['id'])
+        for a, b in ([] if m.get('saltos_ley') else zip(m['tramos'], m['tramos'][1:])):
             fin = a[1] + (b[0] - 0.01 - a[0]) * a[2]
             if abs(fin - b[1]) > max(2.0, b[1] * 0.02):
                 raise SystemExit('cc_predial: en %s la cuota fija %s no sigue del tramo anterior (%.2f)' % (m['id'], b[1], fin))
@@ -2463,6 +2661,8 @@ def _base(m, vf, tipo):
     if m.get('anual'):
         return _r2(_r2(vf * m['anual'].get(tipo, m['anual']['edif']) / 1000) / 6)
     if tipo == 'rust' and m.get('rustico'):
+        if m['rustico'].get('tipo') == 'sobretasa':
+            return _r2(bimestral(m, vf) * (1 + m['rustico']['pct'] / 100))
         return _r2(vf * m['rustico']['millar'] / 1000 + m['rustico']['cf'])
     if tipo != 'baldio' or m['baldio']['tipo'] == 'igual':
         return bimestral(m, vf)
@@ -2476,10 +2676,15 @@ def inverso(m, imp):
     """Gemela de inverso() de cc-predial.js: el valor fiscal que da un impuesto bimestral (predio construido)."""
     if m.get('minimo') and imp <= m['minimo']['pesos']:
         return None
-    for li, cf, t in reversed(m['tramos']):
+    T = m['tramos']
+    for k in range(len(T) - 1, -1, -1):
+        li, cf, t = T[k]
+        if imp >= cf and t == 0:
+            return None
         if imp >= cf:
             v = _r2(li + (imp - cf) / t)
-            return v if v >= li else None
+            # Con una tabla con saltos (Saltillo), un impuesto puede caer en el hueco entre dos rangos: ningún valor lo da.
+            return v if v >= li and (k + 1 == len(T) or v < T[k + 1][0]) else None
     return None
 
 
@@ -2493,7 +2698,7 @@ def datos(base):
     revisa_shf()
     cc = cc_inmueble.datos(base)
     uma = base['calculadora_civica']['parametros']['uma']
-    aplica_uma(uma['diaria'])
+    aplica_uma(uma['diaria'], uma['anual'])
     return {'anio': ANIO, 'inpc': cc['inpc'], 'inpc_ult': cc['inpc_ult'],
             'uma': uma['diaria'], 'uma_f': uma['fuente'], 'ent': ENTIDADES,
             'mun': MUNICIPIOS, 'espera': ESPERA, 'reg': REGISTRO, 'tablas': TABLAS, 'dtv': DECRETOS_TV, 'poe': _POE, 'lhm': {'tope': 250, 'tope_esp': 100, 'tx': LHM['tx'], 'url': LHM['url'], 'sha256': LHM['sha256']}, 'shf': shf()}
@@ -2749,7 +2954,7 @@ def construir(base, ref):
 
 def prueba():
     revisa()
-    aplica_uma(117.31)
+    aplica_uma(117.31, 42794.64)
     zap = next(m for m in MUNICIPIOS if m['id'] == 'zapopan')
     mal = 0
     b = bimestral(zap, EJEMPLO['vf'])
@@ -2996,13 +3201,34 @@ def prueba():
         if 'Ley de Hacienda Municipal del Estado de Baja California' not in e[0] or 'Ley de Ingresos del Municipio de Mérida 2026' not in e[1]:
             mal += 1
             print('✗ el adeudo de Tijuana y de Mérida debe decir que sus recargos están pendientes', e)
-    mex = [k for k in ESPERA if k.startswith('MÉX-')]
-    if len(mex) != 125 or ESPERA.get('MÉX-033', {}).get('nombre') != 'Ecatepec de Morelos' or any(m['ent'] == 'MÉX' for m in MUNICIPIOS):
+    # Ronda 8: el Estado de México (art. 109 del Código Financiero), León y Saltillo; cuentas hechas a mano de la ley, por bimestre (÷ 6).
+    r8 = [('mex033', 1e6, 'edif', 1728.12), ('mex106', 5e5, 'edif', 691.98), ('mex057', 3e6, 'edif', 10242.54), ('mex106', 5e5, 'baldio', 795.78),
+          ('gto020', 2e6, 'edif', 4973.04), ('gto020', 1e5, 'edif', 399.4), ('gto020', 5e5, 'baldio', 2194.98),
+          ('coah030', 1e6, 'edif', 1757.1), ('coah030', 1e6, 'rust', 3514.2), ('coah030', 1e5, 'edif', 245.15)]
+    for mid, v, t, esp in r8:
+        if anual(M(mid), v, t) != esp:
+            mal += 1
+            print('✗ Ronda 8', mid, v, t, anual(M(mid), v, t), 'esperaba', esp)
+    r8x = [[a, {'vf': v, 'tipo': t, 'ben': '', 'pago': 'bim'}, esp] for a, v, t, esp in r8] + [
+        ['gto020', {'vf': 2e6, 'tipo': 'edif', 'ben': '', 'pago': 'ene'}, 4475.74],
+        ['coah030', {'vf': 1e6, 'tipo': 'edif', 'ben': '', 'pago': 'ene'}, 1493.54],
+        ['coah030', {'vf': 1e6, 'tipo': 'edif', 'ben': 'soc', 'pago': 'bim'}, 878.55]]
+    prog11 = ("global.window={};global.document={getElementById:function(){return null}};require(%s);var D=%s;"
+              "console.log(JSON.stringify(%s.map(function(x){var m=D.mun.filter(function(y){return y.id===x[0]})[0];"
+              "return window.AuditorPredial.calcula(D,m,x[1]).fin;})));" % (json.dumps(js), json.dumps(D), json.dumps([[a, b] for a, b, _ in r8x])))
+    r11 = subprocess.run(['node'], input=prog11, capture_output=True, text=True)
+    try:
+        for (mid, x, esp), n in zip(r8x, json.loads(r11.stdout.strip())):
+            if n != esp:
+                mal += 1
+                print('✗ Ronda 8 en el navegador', mid, x, n, 'esperaba', esp)
+    except ValueError:
         mal += 1
-        print('✗ los 125 municipios del Estado de México deben esperar a que se coteje el art. 109 en su PDF', len(mex))
-    if 'GTO-020' not in ESPERA:
+        print('✗ los casos de la Ronda 8 no corrieron en el navegador', r11.stderr[:300])
+    mex = [m for m in MUNICIPIOS if m['ent'] == 'MÉX']
+    if len(mex) != 125 or any(k.startswith('MÉX-') for k in ESPERA) or 'GTO-020' in ESPERA or 'SLP-028' not in ESPERA:
         mal += 1
-        print('✗ León debe seguir en espera hasta cotejar su art. 5 en el PDF')
+        print('✗ los 125 del Estado de México y León van cotejados; San Luis Potosí, en espera', len(mex))
     if mal:
         print('%d diferencias en el simulador del predial' % mal)
         return 1
