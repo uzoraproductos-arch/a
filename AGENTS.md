@@ -71,6 +71,23 @@ qué se decidió cada cosa está completo en [CONTEXT.md](CONTEXT.md).
 
 ### 0 quater. El menú de cinco pestañas y el Planisferio
 
+**La Enciclopedia se volvió Planisferio** (decisión del autor, Ronda 7, 22-11-2026). Las pestañas quedan:
+**Auditor** (tres modos: Ciudadano, Periodista y Ambientalista; sin la barra «Moverte desde aquí» bajo el chat),
+**Servicios** (el Inspector y «¿Para quién es?»: cada perfil de `PERFILES` con su porqué y sus servicios, `sv_para_quien()`;
+**un perfil nuevo necesita su expresión en `PAL_PERFIL`**), **Planisferio** (absorbe Números, Datos y Aprende),
+**Comunidad** (solo tres tarjetas: Ágora cívica, Donaciones y la Biblioteca del Erario, `diccionario.html`) y **Noticiero**
+(arranca como portal del periódico: cabeza corta, «Lo último, verificado» y las tarjetas, con **Garantías cívicas**).
+**Una sola regla, por el nombre del archivo, dice a dónde va cada página** (`herramientas/traslado.py`): `REGLAS` manda cada
+página de la antigua Enciclopedia a una de las diez dimensiones, `BIBLIOTECA` a Comunidad, `NOTICIERO` a Garantías y `PRIVADAS`
+(las cuatro portadas: `enciclopedia-auditavision.html`, `sigue-el-dinero.html`, `descarga-los-datos.html`, `aprende.html`) a la
+administración. La leen `pestana_de()`, `_traslado_migas()` de `apartados.py` (migas «Planisferio › <Dimensión> › …» y la
+pestaña marcada) y su gemela de `volver-auditor.js`; `traslado.py --prueba` compara las dos. **Una página nueva de esas
+familias necesita su regla**, o se queda en Comunidad. Cada dimensión tiene su página con todo lo que trae
+(`planisferio-dim-<id>.html`, `paginas_dim()`, armada de las páginas ya generadas: sin cifras propias). **Ninguna liga pública
+lleva a las portadas privadas**: `sin_privadas()` las cambia por su sustituta (`SUSTITUTA`, y `ANCLAS` o el `?abrir=` de su
+portada para las viejas), `acceso.js` solo las abre en el navegador de la administración y el panel las lista en su hoja
+«Enciclopedia». Ningún archivo cambió de nombre y ninguna cifra se movió.
+
 **Decisión del autor, 02-11-2026.** El menú (`MENU` de `apartados.py` y su
 copia a mano en `index.html`) queda: **Auditor** (antes «Auditor Virtual»),
 **Servicios** (segunda desde el 21-11-2026, pedido del autor), **Planisferio**, **Comunidad** (con la Enciclopedia como cuarta tarjeta, tras
@@ -1236,7 +1253,7 @@ mismas. La plataforma es extensa; el bot es la puerta corta a todo.
   **Los códigos de acceso** (29-10-2026) abren la versión de prueba: `herramientas/acceso.py` arma el canje
   y el panel, y su candado (`acceso.js`, en el `<head>` de todas las páginas) solo se enciende con
   `CANDADO = True`; una página que deba abrir sin código va en `LIBRES`.
-  **La portada de acceso** (`canjea-tu-codigo.html`, rediseño del autor, 22-11-2026) conserva la acuarela y va limpia: «¿Quiénes somos?» (`QUIENES_ENTRADA`), las preguntas que aparecen una a una (`PREGUNTAS_ENTRADA`, todas en el HTML y quietas si el lector apagó la animación: **invitan a ver los documentos, nunca afirman una cifra ni culpan a un gobierno o a un partido**), el código al centro y las preguntas frecuentes (`FAQ_ENTRADA`), **iguales en la página y en su FAQPage** (JSON-LD con `WebSite` y `Organization`, más su canónica y Open Graph).
+  **La portada de acceso** (`canjea-tu-codigo.html`, rediseño del autor, 22-11-2026; en la Ronda 7, sus cuatro ejes: fraudes, prevención de lavado, desvío de recursos y deuda pública, `EJES_ENTRADA`, **con números que se cuentan de la base al generar**, `monetizacion.contadores()`, y el botón «Solicita tu código» a la vista) conserva la acuarela y va limpia: «¿Quiénes somos?» (`QUIENES_ENTRADA`), las preguntas que aparecen una a una (`PREGUNTAS_ENTRADA`, todas en el HTML y quietas si el lector apagó la animación: **invitan a ver los documentos, nunca afirman una cifra ni culpan a un gobierno o a un partido**), el código al centro y las preguntas frecuentes (`FAQ_ENTRADA`), **iguales en la página y en su FAQPage** (JSON-LD con `WebSite` y `Organization`, más su canónica y Open Graph).
   **El control interno** (18-11-2026): el panel (`administracion-codigos.html`) va en pestañas (`HOJAS` de `acceso.py`): tablero de uso con
   gráficas, códigos (con Renovar), solicitudes, bitácora y mi acceso. La bitácora la escriben disparadores de la base: **una acción nueva de la
   administración sobre los códigos queda anotada sola; una tabla nueva de la administración necesita su disparador**. La medición de uso

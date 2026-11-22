@@ -358,6 +358,9 @@ PAL_PERFIL = [
     r'regidor\w*|regidurias?|cabildos?|diputad\w*|congresos?',
     r'universidad\w*|academi\w*|profesor\w*|estudiantes?',
     r'tesorerias?|dependencias?|gobiernos? (municipal|estatal|local)\w*',
+    # Ronda 7 (22-11-2026): empresas que compran o le venden al gobierno, y la ciudadanía.
+    r'empresas?|areas? de compras|compradores?|mi negocio|mi pyme',
+    r'ciudadan\w*|contribuyentes?|vecin\w*',
 ]
 
 
