@@ -12,7 +12,7 @@ vigentes de la Cámara de Diputados (huellas en docs/boveda/):
 
 - LGRA, última reforma DOF 15-12-2025: arts. 3 fr. VI, 29, 58, 63 Bis
   (adicionado DOF 19-11-2019), 74, 78 y 91.
-- Código Penal Federal, última reforma DOF 13-03-2026: art. 220.
+- Código Penal Federal, última reforma DOF 13-11-2026 (decreto sha256 e3dba7d8a41f…; sin cambios en el art. 220): art. 220.
 - Código Civil Federal, última reforma DOF 14-11-2025: arts. 292 a 300.
 - Constitución, última reforma DOF 07-10-2026: arts. 55 fr. VIII, 82 fr.
   VIII, 115 fr. I, 116 y el decreto de nepotismo electoral (DOF 01-04-2025,

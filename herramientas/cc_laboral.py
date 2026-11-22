@@ -26,7 +26,7 @@ SHA-256 de cada PDF abajo):
     art. 162: prima de antigüedad de doce días por año, a quien es separado
       con causa o sin ella y a quien se va por su voluntad con quince años o
       más; su salario entre uno y dos salarios mínimos (arts. 485 y 486).
-  - LISR (última reforma DOF 01-04-2024), art. 93, fr. XIII y XIV: exentos
+  - LISR (última reforma DOF 13-11-2026, sin cambios en estos artículos), art. 93, fr. XIII y XIV: exentos
     hasta 90 veces por año de servicio lo de la separación (fracción de más
     de seis meses, año completo), 30 el aguinaldo y 15 la prima vacacional;
     la ley dice «salario mínimo» y desde la reforma de desindexación (CPEUM,

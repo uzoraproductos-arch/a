@@ -1,0 +1,412 @@
+{
+  "fuente": "ISSSTE, Anuario Estadístico 2025 (DEISE-JSEI)",
+  "url": "http://www.issste.gob.mx/datosabiertos/anuarios/anuarios2025.html",
+  "anio": 2025,
+  "nota": "Cada cifra proviene de los cuadros oficiales del Anuario Estadístico 2025 del ISSSTE. Las 32 entidades suman exactamente el total nacional de cada cuadro (en derechohabientes y afiliados se incluye el renglón oficial «En el extranjero»: 996 personas). Las unidades de tercer nivel atienden también a derechohabientes de otras entidades.",
+  "fuentes": {
+    "derechohabientes": {
+      "archivo": "01_Poblacion_derechohabiente.zip",
+      "cuadro": "01 Población derechohabiente/1.2_2025.xlsx",
+      "url": "https://www.issste.gob.mx/images/downloads/instituto/finanzas/anuarios/2025/01_Poblacion_derechohabiente.zip",
+      "bytes": 2083723,
+      "sha256": "53f05d20373c280144a168102f1b813c97e1c7bdba9e4e54fd1b1ce4e5642b44"
+    },
+    "consultas": {
+      "archivo": "18_Consulta_externa.zip",
+      "cuadro": "18 Consulta externa/18.6_2025.xlsx",
+      "url": "https://www.issste.gob.mx/images/downloads/instituto/finanzas/anuarios/2025/18_Consulta_externa.zip",
+      "bytes": 1099614,
+      "sha256": "42a72c993b2171328c4a270b6b3bc35507dfd30b74c840dffa8dc854613ff60f"
+    },
+    "hospitalarios": {
+      "archivo": "22_Servicios_hospitalarios.zip",
+      "cuadro": "22 Servicios hospitalarios/22.1_2025.xlsx",
+      "url": "https://www.issste.gob.mx/images/downloads/instituto/finanzas/anuarios/2025/22_Servicios_hospitalarios.zip",
+      "bytes": 433683,
+      "sha256": "49d8af22b485d1b6965fa78d80fbd32318e840e08b11b953a2775480f1a32da6"
+    },
+    "urgencias": {
+      "archivo": "23_Urgencias.zip",
+      "cuadro": "23 Urgencias/23.5_2025.xlsx",
+      "url": "https://www.issste.gob.mx/images/downloads/instituto/finanzas/anuarios/2025/23_Urgencias.zip",
+      "bytes": 298502,
+      "sha256": "f4a5f621fee29dba6f064f07edcc3ab433801699e2d893741ba822800485d46c"
+    },
+    "cirugias": {
+      "archivo": "25_Procedimientos_quirurgicos.zip",
+      "cuadro": "25 Procedimientos quirúrgicos/25.1_2025.xlsx",
+      "url": "https://www.issste.gob.mx/images/downloads/instituto/finanzas/anuarios/2025/25_Procedimientos_quirurgicos.zip",
+      "bytes": 2309858,
+      "sha256": "31be94249e2b12ca9307c704239862d182f27b06301b8ad02251c2e05e1a593f"
+    }
+  },
+  "totales": {
+    "derechohabientes": 13829708,
+    "afiliados": 9345629,
+    "usuarios": 4537501,
+    "consultas": 24289876,
+    "egresos": 358930,
+    "urgenciasReales": 787039,
+    "urgenciasSentidas": 1482703,
+    "urgencias": 2269742,
+    "cirugias": 305326
+  },
+  "extranjero": {
+    "derechohabientes": 996,
+    "afiliados": 996
+  },
+  "estados": {
+    "AGS": {
+      "derechohabientes": 176654,
+      "afiliados": 120055,
+      "usuarios": 52668,
+      "consultas": 268513,
+      "egresos": 4473,
+      "urgenciasReales": 5399,
+      "urgenciasSentidas": 19984,
+      "urgencias": 25383,
+      "cirugias": 3290
+    },
+    "BC": {
+      "derechohabientes": 229701,
+      "afiliados": 154716,
+      "usuarios": 76166,
+      "consultas": 391138,
+      "egresos": 6200,
+      "urgenciasReales": 16223,
+      "urgenciasSentidas": 32113,
+      "urgencias": 48336,
+      "cirugias": 7124
+    },
+    "BCS": {
+      "derechohabientes": 187937,
+      "afiliados": 129865,
+      "usuarios": 73505,
+      "consultas": 375495,
+      "egresos": 5599,
+      "urgenciasReales": 11863,
+      "urgenciasSentidas": 44807,
+      "urgencias": 56670,
+      "cirugias": 3449
+    },
+    "CAM": {
+      "derechohabientes": 112409,
+      "afiliados": 76586,
+      "usuarios": 40658,
+      "consultas": 234098,
+      "egresos": 2723,
+      "urgenciasReales": 8256,
+      "urgenciasSentidas": 13377,
+      "urgencias": 21633,
+      "cirugias": 1659
+    },
+    "COAH": {
+      "derechohabientes": 404231,
+      "afiliados": 267054,
+      "usuarios": 131245,
+      "consultas": 618655,
+      "egresos": 15816,
+      "urgenciasReales": 17066,
+      "urgenciasSentidas": 74039,
+      "urgencias": 91105,
+      "cirugias": 8061
+    },
+    "COL": {
+      "derechohabientes": 93861,
+      "afiliados": 65126,
+      "usuarios": 35105,
+      "consultas": 196267,
+      "egresos": 2536,
+      "urgenciasReales": 9937,
+      "urgenciasSentidas": 19874,
+      "urgencias": 29811,
+      "cirugias": 1596
+    },
+    "CHIS": {
+      "derechohabientes": 479511,
+      "afiliados": 314117,
+      "usuarios": 140969,
+      "consultas": 712079,
+      "egresos": 8921,
+      "urgenciasReales": 28060,
+      "urgenciasSentidas": 46807,
+      "urgencias": 74867,
+      "cirugias": 5584
+    },
+    "CHIH": {
+      "derechohabientes": 339533,
+      "afiliados": 213755,
+      "usuarios": 116828,
+      "consultas": 650908,
+      "egresos": 10283,
+      "urgenciasReales": 18096,
+      "urgenciasSentidas": 43594,
+      "urgencias": 61690,
+      "cirugias": 6190
+    },
+    "CDMX": {
+      "derechohabientes": 2100017,
+      "afiliados": 1615187,
+      "usuarios": 901027,
+      "consultas": 5178955,
+      "egresos": 79907,
+      "urgenciasReales": 167809,
+      "urgenciasSentidas": 333422,
+      "urgencias": 501231,
+      "cirugias": 84024
+    },
+    "DGO": {
+      "derechohabientes": 330576,
+      "afiliados": 226940,
+      "usuarios": 115509,
+      "consultas": 614388,
+      "egresos": 10025,
+      "urgenciasReales": 41541,
+      "urgenciasSentidas": 39310,
+      "urgencias": 80851,
+      "cirugias": 7603
+    },
+    "GTO": {
+      "derechohabientes": 536611,
+      "afiliados": 361529,
+      "usuarios": 188251,
+      "consultas": 847210,
+      "egresos": 14538,
+      "urgenciasReales": 34781,
+      "urgenciasSentidas": 64368,
+      "urgencias": 99149,
+      "cirugias": 10883
+    },
+    "GRO": {
+      "derechohabientes": 624590,
+      "afiliados": 403631,
+      "usuarios": 151097,
+      "consultas": 731098,
+      "egresos": 7274,
+      "urgenciasReales": 22160,
+      "urgenciasSentidas": 37034,
+      "urgencias": 59194,
+      "cirugias": 5229
+    },
+    "HGO": {
+      "derechohabientes": 403626,
+      "afiliados": 281127,
+      "usuarios": 138029,
+      "consultas": 806137,
+      "egresos": 9845,
+      "urgenciasReales": 24147,
+      "urgenciasSentidas": 31161,
+      "urgencias": 55308,
+      "cirugias": 6257
+    },
+    "JAL": {
+      "derechohabientes": 508585,
+      "afiliados": 315194,
+      "usuarios": 152969,
+      "consultas": 902951,
+      "egresos": 13356,
+      "urgenciasReales": 22411,
+      "urgenciasSentidas": 38067,
+      "urgencias": 60478,
+      "cirugias": 12176
+    },
+    "MÉX": {
+      "derechohabientes": 1322817,
+      "afiliados": 935092,
+      "usuarios": 313525,
+      "consultas": 1478195,
+      "egresos": 16183,
+      "urgenciasReales": 17236,
+      "urgenciasSentidas": 68426,
+      "urgencias": 85662,
+      "cirugias": 17555
+    },
+    "MICH": {
+      "derechohabientes": 608259,
+      "afiliados": 370895,
+      "usuarios": 175788,
+      "consultas": 913436,
+      "egresos": 16080,
+      "urgenciasReales": 30725,
+      "urgenciasSentidas": 56849,
+      "urgencias": 87574,
+      "cirugias": 10796
+    },
+    "MOR": {
+      "derechohabientes": 307539,
+      "afiliados": 205263,
+      "usuarios": 117970,
+      "consultas": 680840,
+      "egresos": 11208,
+      "urgenciasReales": 45353,
+      "urgenciasSentidas": 26777,
+      "urgencias": 72130,
+      "cirugias": 10202
+    },
+    "NAY": {
+      "derechohabientes": 229058,
+      "afiliados": 154004,
+      "usuarios": 74744,
+      "consultas": 362238,
+      "egresos": 5224,
+      "urgenciasReales": 10234,
+      "urgenciasSentidas": 7425,
+      "urgencias": 17659,
+      "cirugias": 5141
+    },
+    "NL": {
+      "derechohabientes": 313773,
+      "afiliados": 205921,
+      "usuarios": 99057,
+      "consultas": 499322,
+      "egresos": 8307,
+      "urgenciasReales": 15988,
+      "urgenciasSentidas": 14743,
+      "urgencias": 30731,
+      "cirugias": 6438
+    },
+    "OAX": {
+      "derechohabientes": 532745,
+      "afiliados": 367918,
+      "usuarios": 137518,
+      "consultas": 686773,
+      "egresos": 11080,
+      "urgenciasReales": 25103,
+      "urgenciasSentidas": 25713,
+      "urgencias": 50816,
+      "cirugias": 8419
+    },
+    "PUE": {
+      "derechohabientes": 467686,
+      "afiliados": 284657,
+      "usuarios": 132045,
+      "consultas": 757948,
+      "egresos": 11882,
+      "urgenciasReales": 22222,
+      "urgenciasSentidas": 31719,
+      "urgencias": 53941,
+      "cirugias": 11353
+    },
+    "QRO": {
+      "derechohabientes": 185058,
+      "afiliados": 125833,
+      "usuarios": 64185,
+      "consultas": 320263,
+      "egresos": 4195,
+      "urgenciasReales": 20265,
+      "urgenciasSentidas": 10877,
+      "urgencias": 31142,
+      "cirugias": 3816
+    },
+    "QROO": {
+      "derechohabientes": 205628,
+      "afiliados": 142917,
+      "usuarios": 55929,
+      "consultas": 233501,
+      "egresos": 4431,
+      "urgenciasReales": 6572,
+      "urgenciasSentidas": 33441,
+      "urgencias": 40013,
+      "cirugias": 1959
+    },
+    "SLP": {
+      "derechohabientes": 332480,
+      "afiliados": 210355,
+      "usuarios": 101708,
+      "consultas": 535539,
+      "egresos": 7904,
+      "urgenciasReales": 13528,
+      "urgenciasSentidas": 49983,
+      "urgencias": 63511,
+      "cirugias": 5159
+    },
+    "SIN": {
+      "derechohabientes": 572531,
+      "afiliados": 352309,
+      "usuarios": 193145,
+      "consultas": 1106518,
+      "egresos": 12899,
+      "urgenciasReales": 28099,
+      "urgenciasSentidas": 60202,
+      "urgencias": 88301,
+      "cirugias": 11928
+    },
+    "SON": {
+      "derechohabientes": 298331,
+      "afiliados": 188413,
+      "usuarios": 98549,
+      "consultas": 523071,
+      "egresos": 6135,
+      "urgenciasReales": 21581,
+      "urgenciasSentidas": 46107,
+      "urgencias": 67688,
+      "cirugias": 5018
+    },
+    "TAB": {
+      "derechohabientes": 228770,
+      "afiliados": 136512,
+      "usuarios": 69755,
+      "consultas": 410079,
+      "egresos": 3974,
+      "urgenciasReales": 7334,
+      "urgenciasSentidas": 19400,
+      "urgencias": 26734,
+      "cirugias": 5635
+    },
+    "TAM": {
+      "derechohabientes": 408836,
+      "afiliados": 284116,
+      "usuarios": 139068,
+      "consultas": 721437,
+      "egresos": 11614,
+      "urgenciasReales": 26808,
+      "urgenciasSentidas": 49663,
+      "urgencias": 76471,
+      "cirugias": 6805
+    },
+    "TLAX": {
+      "derechohabientes": 165992,
+      "afiliados": 110227,
+      "usuarios": 59083,
+      "consultas": 371281,
+      "egresos": 5276,
+      "urgenciasReales": 6295,
+      "urgenciasSentidas": 22506,
+      "urgencias": 28801,
+      "cirugias": 3806
+    },
+    "VER": {
+      "derechohabientes": 679224,
+      "afiliados": 437377,
+      "usuarios": 213048,
+      "consultas": 1120636,
+      "egresos": 17760,
+      "urgenciasReales": 43203,
+      "urgenciasSentidas": 63854,
+      "urgencias": 107057,
+      "cirugias": 14968
+    },
+    "YUC": {
+      "derechohabientes": 217345,
+      "afiliados": 148943,
+      "usuarios": 94437,
+      "consultas": 557041,
+      "egresos": 7020,
+      "urgenciasReales": 14244,
+      "urgenciasSentidas": 21410,
+      "urgencias": 35654,
+      "cirugias": 8479
+    },
+    "ZAC": {
+      "derechohabientes": 224798,
+      "afiliados": 138999,
+      "usuarios": 83921,
+      "consultas": 483866,
+      "egresos": 6262,
+      "urgenciasReales": 4500,
+      "urgenciasSentidas": 35651,
+      "urgencias": 40151,
+      "cirugias": 4724
+    }
+  }
+}
