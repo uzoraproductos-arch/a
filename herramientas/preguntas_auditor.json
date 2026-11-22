@@ -3360,7 +3360,11 @@
   },
   {
    "q": "¿Cuánto pago de predial en Benito Juárez?",
-   "ir": "herramienta-calculadora-predial.html?mun=cdmx014"
+   "ir": "herramienta-calculadora-predial.html?mun=cdmx014",
+   "dice": [
+    "Benito Juárez, Ciudad de México",
+    "Ojo con los homónimos"
+   ]
   },
   {
    "q": "¿Cuánto pago de predial en Iztapalapa?",
@@ -3379,6 +3383,101 @@
    "ir": "planisferio-cdmx-penal.html",
    "dice": [
     "4,184 carpetas"
+   ]
+  },
+  {
+   "q": "¿Cuánto pago de predial en Puebla?",
+   "ir": "herramienta-calculadora-predial.html?mun=pue114",
+   "dice": [
+    "Puebla, Puebla",
+    "es el nombre del estado y de su capital"
+   ]
+  },
+  {
+   "q": "¿Cuánto pago de predial en Querétaro?",
+   "ir": "herramienta-calculadora-predial.html?mun=qro014",
+   "dice": [
+    "Querétaro, Querétaro",
+    "cada municipio con su propia ley"
+   ]
+  },
+  {
+   "q": "¿Cuánto pago de predial en León?",
+   "ir": "herramienta-calculadora-predial.html?ent=GTO&cve=020",
+   "dice": [
+    "León, Guanajuato",
+    "No adivinamos una tasa"
+   ]
+  },
+  {
+   "q": "¿Cuánto pago de predial en Hidalgo?",
+   "ir": "herramienta-calculadora-predial.html?ent=HGO",
+   "dice": [
+    "el estado de Hidalgo",
+    "Hidalgo, Nuevo León"
+   ]
+  },
+  {
+   "q": "¿Cuánto pago de predial en Guadalupe, Zacatecas?",
+   "ir": "herramienta-calculadora-predial.html?ent=ZAC",
+   "dice": [
+    "Guadalupe, Nuevo León",
+    "no el de Zacatecas"
+   ]
+  },
+  {
+   "q": "¿Cuánto debe Puebla?",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:PUE",
+   "dice": [
+    "Es la cifra del estado de Puebla",
+    "Puebla, Puebla"
+   ]
+  },
+  {
+   "q": "Juárez",
+   "ir": "herramienta-inspector-entes.html#ente=municipal:08037",
+   "dice": [
+    "Juárez, Chihuahua",
+    "Ojo con los homónimos",
+    "Juárez, Nuevo León"
+   ]
+  },
+  {
+   "q": "Secretaría de Salud",
+   "ir": "herramienta-inspector-entes.html#ente=federal:salud",
+   "dice": [
+    "Ámbito federal",
+    "Es la del Gobierno de México"
+   ]
+  },
+  {
+   "q": "Secretaría de Salud de Jalisco",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:JAL",
+   "dice": [
+    "no tiene por separado la cuenta de esa dependencia",
+    "dependencia federal con ese nombre"
+   ]
+  },
+  {
+   "q": "Congreso de Puebla",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:PUE",
+   "dice": [
+    "¿Cuánto gasta el Congreso de Puebla?"
+   ]
+  },
+  {
+   "q": "¿Qué es el DIF?",
+   "dice": [
+    "Hay tres DIF con el mismo nombre",
+    "Ley de Asistencia Social"
+   ]
+  },
+  {
+   "q": "¿Cuánto recibe Hidalgo de la Federación?",
+   "ir": "herramienta-inspector-entes.html#ente=estatal:HGO",
+   "dice": [
+    "Es la cifra del estado de Hidalgo",
+    "Hidalgo, Nuevo León"
    ]
   }
  ]

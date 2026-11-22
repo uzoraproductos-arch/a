@@ -2206,7 +2206,9 @@
       var cg = cargoDe(t);
       var gastaUnidad = /\b(gasta|gastan|destina|destinan|en sueldos|en nomina|nomina|capitulo|presupuesto)\b/.test(t) && numFila(t);
       if (gastaUnidad && !gastaUnidad.caps) gastaUnidad = null;
-      if (cg && !gastaUnidad && (GANA.test(t) || sigue) && !admsDe(t.replace(/sheinbaum|claudia|la presidenta/g, '')).length) return fin(cargoResp(cg), { tipo: 'cargo', cargo: cg });
+      /* «Secretaría de Salud» a secas es la dependencia, no lo que gana su titular (homónimos, Ronda 6): sin «gana», no es sueldo. */
+      var esDepFed = cg && cg === CARGO.secretario && /\bsecretaria de [a-z]/.test(t) && !/\bsecretari[oa]s? de estado\b/.test(t);
+      if (cg && !gastaUnidad && (GANA.test(t) || (sigue && !esDepFed)) && !admsDe(t.replace(/sheinbaum|claudia|la presidenta/g, '')).length) return fin(cargoResp(cg), { tipo: 'cargo', cargo: cg });
       if (/quien gana mas|quienes ganan mas|cargo (que )?gana mas|ganan mas|mejor pagad|mas ganan|sueldos mas altos/.test(t) && !es.length) return fin(cargosRanking(), { tipo: 'cargo' });
 
       /* Lo que la plataforma todavía no tiene: los sueldos de gobernadores y alcaldes. */
@@ -2361,6 +2363,17 @@
       if (k === 'inv' || k === 'invt') re2.ir = ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-inversion.html', 'su inversión en el Planisferio'];
       re2.ficha = B.fichas.filter(function (f) { return f.t === 'entidad' && f.tit === e.n; })[0];
       re2.tit = re2.tit || e.n;
+      /* Homónimos (Ronda 6, 22-11-2026): «Puebla» es el estado y su capital; «Hidalgo» es un estado y municipios de otros. Se dice el nivel. */
+      var homE = !/\b(estado|entidad|gobierno del estado|estatal)\b/.test(t) ? (MIDX[plano(e.n).trim()] || MIDX[plano(e.n.replace(/^Estado de /, '')).trim()] || []) : [];
+      /* Una dependencia del estado («Secretaría de Salud de Jalisco», «Fiscalía de Puebla», «DIF de Oaxaca», «Congreso de Puebla»): no se contesta como si fuera la federal. */
+      var depEdoM = /\b(secretaria|fiscalia|dif|tesoreria|contraloria|procuraduria|instituto|comision|congreso|legislatura|tribunal|poder judicial)\b/.exec(t);
+      if (depEdoM && sinTema) re2.html = '<p class="pa-chico">La plataforma no tiene por separado la cuenta de esa dependencia del <b>estado de ' + esc(e.n) + '</b>: lo que sigue es del gobierno del estado completo. ' +
+        (/congreso|legislatura/.test(depEdoM[1]) ? 'Lo que gastó su Congreso local sí lo tengo: <button type="button" class="pa-enlace" data-pa-pregunta="¿Cuánto gasta el Congreso de ' + esc(e.n) + '?">¿Cuánto gasta el Congreso de ' + esc(e.n) + '?</button>' :
+         /tribunal|poder judicial/.test(depEdoM[1]) ? 'Lo de su Poder Judicial sí lo tengo: <button type="button" class="pa-enlace" data-pa-pregunta="¿Cuánto gasta el Poder Judicial de ' + esc(e.n) + '?">¿Cuánto gasta el Poder Judicial de ' + esc(e.n) + '?</button>' :
+         'Si buscabas la dependencia federal con ese nombre, pregúntame sin el estado: es otra, con su propio presupuesto.') + '</p>' + re2.html;
+      if (homE.length) re2.html += '<p class="pa-chico">Es la cifra del <b>estado de ' + esc(e.n) + '</b>, de su gobierno estatal. ' +
+        (homE.length === 1 ? 'También hay un municipio con ese nombre: ' : 'También hay municipios con ese nombre: ') +
+        homE.slice(0, 4).map(function (o) { return '<button type="button" class="pa-enlace" data-pa-pregunta="municipio ' + esc(o.n) + ' ' + esc(o.en) + '">' + esc(o.n) + ', ' + esc(o.en) + '</button>'; }).join(' · ') + '.</p>';
       if (!k) re2.sug = ['¿Qué lugar ocupa ' + e.n + ' en deuda?', '¿Cuánto recibe ' + e.n + ' por habitante?', 'Municipios de ' + e.n + ' que más ingresan'];
       return fin(re2, { tipo: 'edo', met: k, es: es });
     }
@@ -2455,7 +2468,7 @@
         var an = /\(([^)]*)\)\.?$/.exec(f.txt);
         return { html: '<p><b>' + esc(f.tit) + ':</b> <b>' + esc(ci[0].v) + '</b>' + (an ? ' (' + esc(an[1]) + ')' : '') + '.</p>' + deDonde([{ que: f.tit, e: ci[0].e, fu: (f.fu || [])[0] }]), ficha: f, ir: f.ir, sug: [] };
       }
-      h = '<p><b>' + esc(f.tit) + '.</b> ' + esc(corto(f.txt, 300)) + '</p>' +
+      h = '<p><b>' + esc(f.tit) + '.</b> ' + esc(corto(f.txt, 300)) + '</p>' + (f.hom ? '<p class="pa-chico">' + esc(f.hom) + '</p>' : '') +
         (ci.length ? '<ul class="pa-lista">' + ci.map(function (c) { return '<li><b>' + esc(c.v) + '</b> · ' + esc(c.etq) + '</li>'; }).join('') + '</ul>' : '');
       ci.forEach(function (c) { fu.push({ que: c.etq, e: c.e, op: c.op, fu: (f.fu || [])[0] }); });
       if (!ci.length && f.fu && f.fu[0]) fu.push({ que: 'Fuente', e: 'oficial', fu: f.fu[0] });

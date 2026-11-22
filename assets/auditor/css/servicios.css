@@ -494,6 +494,17 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 /* Las tarjetas de «¿Qué necesitas?» son solo ligas (21-11-2026): el título y cada novedad abren la respuesta completa del Inspector. */
 .sv-card-ligas .sv-card-tit a { text-decoration: underline; text-underline-offset: 3px; }
 .sv-card-ligas .sv-card-tit a::after { content: ' ➔'; }
+/* Los vínculos de cada servicio, a la vista (22-11-2026): sin «Nuevo» ni desplegable; una lista corta y limpia. */
+.sv-vinculos { margin: 12px 0 4px; padding: 10px 0 0; list-style: none; display: grid; gap: 2px; border-top: 1px solid rgba(11,42,99,.12); }
+.sv-vinculos li { margin: 0; }
+.sv-vinculos a { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 4px 6px; border-radius: 8px; font-size: 16px; line-height: 1.35;
+  color: #0b2a63; font-weight: 600; text-decoration: none; }
+.sv-vinculos a::after { content: '➔'; margin-left: auto; padding-left: 8px; opacity: .55; font-weight: 400; }
+.sv-vinculos a:hover, .sv-vinculos a:focus-visible { background: rgba(11,42,99,.06); text-decoration: underline; text-underline-offset: 3px; }
+[data-theme="dark"] .sv-vinculos { border-top-color: rgba(232,238,250,.16); }
+[data-theme="dark"] .sv-vinculos a { color: #e8eefa; }
+[data-theme="dark"] .sv-vinculos a:hover, [data-theme="dark"] .sv-vinculos a:focus-visible { background: rgba(232,238,250,.08); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sv-vinculos a { color: #e8eefa; } }
 /* Lo nuevo, en cada servicio (21-11-2026). */
 .sv-nuevo-lista { margin: 10px 0 4px; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 16px; line-height: 1.45; }
 .sv-nuevo-lista li { padding-left: 2px; }

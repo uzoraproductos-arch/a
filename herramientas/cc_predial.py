@@ -1098,6 +1098,107 @@ def _cdmx():
 MUNICIPIOS += _cdmx()
 
 
+# ---------------------------------------------------------------------------
+# Puebla y Querétaro, sus capitales (Ronda 6, 22-11-2026; Antigravity sacó las
+# cifras de cada Ley de Ingresos y Claude las cotejó contra el mismo PDF, misma
+# huella: Puebla, arts. 4, 75, 90, 91 y transitorio tercero; Querétaro, arts. 14
+# y 50).
+#
+# Lo que no es cita de la ley y decidimos a la vista:
+#  - Puebla cobra al millar por año (art. 4): va como 'anual', igual que Nuevo
+#    León. El baldío urbano paga el doble (fr. II); la fr. III (construcción menor
+#    al 30 % del terreno) necesita la superficie y aquí no se calcula.
+#  - Su transitorio tercero topa el predial de 2026 frente al neto de 2025 de
+#    cada predio: no tenemos tu recibo de 2025, así que la página solo lo avisa.
+#  - El descuento por pago anticipado de Puebla no está en su Ley de Ingresos
+#    (lo remite al Código Fiscal y Presupuestario del Municipio): no lo ponemos.
+#  - Querétaro da su tarifa por año y la divide entre seis (art. 14): aquí va por
+#    bimestre (límite, cuota fija ÷ 6 y factor ÷ 6), que es la misma cuenta.
+#  - «1.25 UMA» de Querétaro (art. 50, frs. I y X) se lee como 1.25 veces la UMA
+#    diaria al año: es lectura nuestra.
+#  - Los recargos de las dos quedan pendientes: Puebla da la tasa (2 % al mes,
+#    art. 75), pero la actualización y los gastos de ejecución vienen de su
+#    Código Fiscal, que no cotejamos; Querétaro remite al Código Fiscal del
+#    Estado (art. 14).
+# León (Guanajuato) quedó en ESPERA: ver ahí su porqué.
+# ---------------------------------------------------------------------------
+PUE_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'puebla-ley-ingresos-2026.json')
+QRO_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'queretaro-ley-ingresos-2026.json')
+PUE_LEY = 'Ley de Ingresos del Municipio de Puebla'
+QRO_LEY = 'Ley de Ingresos del Municipio de Querétaro'
+
+
+def _pue_qro():
+    P = json.load(open(PUE_ARCHIVO, encoding='utf-8'))
+    Q = json.load(open(QRO_ARCHIVO, encoding='utf-8'))
+    t4, e91 = P['tasas_anuales_art_4'], P['estimulos_art_90_91']
+    if P['sha256_pdf'] != 'e71af0f3b5216ec16513b6d88f0fdfec7bd065682a55411eccdd53b45e273889' \
+            or (t4['urbano_y_rustico_al_millar'], t4['baldio_urbano_al_millar'], P['recargos_art_75']['mora_mensual_pct']) != (1.6, 3.2, 2.0) \
+            or (e91['grupos_vulnerables_pct'], e91['grupos_vulnerables_tope_mxn'], e91['agricola_pecuario_forestal_hasta_pct']) != (50, 1395.0, 80):
+        raise SystemExit('cc_predial: %s cambió: vuelve a cotejar los arts. 4, 75, 90 y 91 antes de integrarlo' % PUE_ARCHIVO)
+    T = Q['tarifa_anual_art_14']
+    if Q['sha256_pdf'] != 'be663785dcc1816f68995aa2c3dc01cdc9a3460e442d681af13d56a9a0413722' or len(T) != 25 \
+            or (T[0]['cf'], T[-1]['factor']) != (336.57, 0.0059946) or Q['cuota_minima_art_50_fr_I']['uma_anual'] != 1.25 \
+            or (Q['pronto_pago_art_50_fr_II']['enero_pct'], Q['pronto_pago_art_50_fr_II']['febrero_pct']) != (12, 8) \
+            or (Q['beneficio_social_art_50_fr_X']['umbral_valor_catastral'], Q['beneficio_social_art_50_fr_X']['mayor_4m_descuento_pct']) != (4000000.0, 50):
+        raise SystemExit('cc_predial: %s cambió: vuelve a cotejar los arts. 14 y 50 antes de integrarlo' % QRO_ARCHIVO)
+    pad = {e: dict(_padron_ent(e)) for e in ('PUE', 'QRO')}
+    if pad['PUE'].get('114') != 'Puebla' or pad['QRO'].get('014') != 'Querétaro':
+        raise SystemExit('cc_predial: el padrón no trae a Puebla (21114) o a Querétaro (22014) con su nombre')
+    pue = {
+        'id': 'pue114', 'ent': 'PUE', 'cve': '114', 'nombre': 'Puebla',
+        'ley': P['ley'], 'ley_corta': PUE_LEY, 'arts_ley': ', arts. 4, 75, 90, 91 y transitorio tercero',
+        'url': P['url'], 'sha256': P['sha256_pdf'],
+        'art_tarifa': 'art. 4, fr. I', 'tarifa': 'millar', 'millar': 1.6 / 6, 'tramos': [[0.0, 0.0, 1.6 / 6000]],
+        'anual': {'edif': 1.6, 'rust': 1.6, 'com': 1.6, 'baldio': 3.2},
+        'art_anual': {'edif': 'art. 4, fr. I', 'rust': 'art. 4, fr. I', 'com': 'art. 4, fr. I', 'baldio': 'art. 4, fr. II'},
+        'baldio': {'tipo': 'millar', 'millar': 3.2 / 6, 'cf': 0.0, 'art': 'art. 4, fr. II'},
+        'pronto': [],
+        'pronto_nota': 'La Ley de Ingresos no trae descuento por pagar el año por adelantado: los plazos los fija el Código Fiscal y Presupuestario para el Municipio de Puebla (art. 4).',
+        'beneficios': [
+            {'id': 'vul', 'et': 'Viuda o viudo, adulto mayor, persona con discapacidad, pensionado permanente, afiliado al INAPAM, madre o padre soltero (tu única casa, donde vives; previo dictamen)',
+             'f': 0.5, 'max_ahorro': 1395.0, 'art': 'art. 91'},
+            ],
+        'suma_art': None,
+        'acc_pend': ('Los recargos de Puebla son de 2 %% al mes (art. 75 de la %s), pero la actualización y los gastos de ejecución los fija el '
+                     'Código Fiscal y Presupuestario para el Municipio de Puebla, que aún no cotejamos: no calculamos el adeudo. Pídelo a la '
+                     'Tesorería Municipal.') % PUE_LEY,
+        'nota': ('Puebla cobra 1.6 al millar al año sobre el valor catastral y el doble al baldío urbano (art. 4). Si tu predio urbano tiene '
+                 'construcción menor al 30 % del terreno, la parte sin construir paga el doble (art. 4, fr. III): aquí no se calcula, porque '
+                 'necesita la superficie. Ojo con el tope: en 2026 tu predial no puede subir más de lo que dice el transitorio tercero frente a '
+                 'lo que pagaste en 2025 (salvo inmuebles comerciales o sin datos catastrales al día); como no tenemos tu recibo de 2025, esta '
+                 'cuenta no aplica el tope. La reducción del art. 91 pide solicitud y dictamen; la de los predios agrícolas, pecuarios, forestales '
+                 'o de servicios ambientales es «hasta» 80 % (art. 90): la ley no dice cuánto, así que no la calculamos.'),
+        'venc': 'que se pagan en el plazo del Código Fiscal y Presupuestario para el Municipio de Puebla (art. 4)'}
+    tramos = [[x['li'], round(x['cf'] / 6, 6), x['factor'] / 6] for x in T]
+    qro = {
+        'id': 'qro014', 'ent': 'QRO', 'cve': '014', 'nombre': 'Querétaro',
+        'ley': Q['ley'], 'ley_corta': QRO_LEY, 'arts_ley': ', arts. 14 y 50',
+        'url': Q['url'], 'sha256': Q['sha256_pdf'],
+        'art_tarifa': 'art. 14', 'tramos': tramos,
+        'tramos_nota': 'La ley da la tarifa por año y la divide entre seis (art. 14): aquí la cuota fija y el factor ya van entre seis, que es la misma cuenta.',
+        'baldio': {'tipo': 'igual', 'art': 'art. 14'},
+        'pronto': [{'id': 'ene', 'et': 'Pagas el año completo en enero, en una sola exhibición', 'f': 0.88, 'art': 'art. 50, fr. II'},
+                   {'id': 'feb', 'et': 'Pagas el año completo en febrero, en una sola exhibición', 'f': 0.92, 'art': 'art. 50, fr. II'}],
+        'pronto_nota': 'El pago anticipado es provisional: si después cambia tu predio, se ajusta la diferencia (art. 14).',
+        'beneficios': [
+            {'id': 'soc', 'et': 'Pensionado, jubilado, adulto mayor o persona con discapacidad, o su cónyuge (una sola propiedad, donde vives)',
+             'fija_uma': 1.25, 'hasta': 4000000, 'art': 'art. 50, fr. X'},
+            {'id': 'soc4', 'et': 'Igual, con valor catastral de más de $4,000,000', 'f': 0.5, 'desde': 4000000, 'art': 'art. 50, fr. X, 8'}],
+        'suma_art': None,
+        'minimo': {'uma_anual': 1.25, 'art': 'art. 50, fr. I'},
+        'acc_pend': ('La %s remite la actualización y los recargos del predial al Código Fiscal del Estado de Querétaro (art. 14), que aún no '
+                     'cotejamos: no calculamos el adeudo. Pídelo a la Secretaría de Finanzas del Municipio.') % QRO_LEY,
+        'nota': ('En 2026 el bimestre de un predio urbano o baldío no puede ser menor que el último de 2025 (art. 50, fr. VII), y si tu predio '
+                 'cambió y la tarifa lo sube, el aumento se topa (fr. VIII): sin tu recibo anterior, esta cuenta no aplica esos topes. Los '
+                 'beneficios del art. 50 no se juntan (penúltimo párrafo de la fr. IX).'),
+        'venc': 'que vencen el día 15 de marzo, mayo, julio, septiembre, noviembre y enero (art. 14)'}
+    return [pue, qro]
+
+
+MUNICIPIOS += _pue_qro()
+
+
 def aplica_uma(uma):
     """Las cifras en cuotas (UMA) de Nuevo León, en pesos con la UMA de la base: el mínimo de 2 cuotas al año y la
     tarifa especial. Se llama antes de pasar los renglones a la página y en la prueba, con la misma UMA."""
@@ -1136,6 +1237,9 @@ ESPERA = {
     'JAL-100': {'nombre': 'Tomatlán', 'url': _li('Tomatl%C3%A1n'),
                 'sha256': '7bcf36b70581f7ab29ae1ee19272622e48dd86fd3052e07afd48a8c7f1ed8af1',
                 'motivo': 'su art. 18 escribe las tasas como «0.20% al millar», «0.14% al millar» y «0.30% al millar», y así no se sabe cuánto es.'},
+    'GTO-020': {'nombre': 'León', 'url': 'https://normatividadestatalymunicipal.guanajuato.gob.mx/archivos/687fe34a901a03abed262a62e22f90db.pdf',
+                'sha256': '91e6efa75a5c75df3563554d5f30e84b56ae4d83d2d4915f4da5901c72b256cb',
+                'motivo': 'su Ley de Ingresos 2026 (Decreto 159, P.O. 30-12-2025) la tenemos en la tabla que copió del PDF otro agente, pero no la pudimos volver a bajar para cotejarla (el portal de normatividad del Estado no manda su certificado intermedio), y en la copia la cuota fija de los rangos no sigue del rango anterior (del 1.º al 2.º faltan $145): hasta leer el art. 5 en el PDF no sabemos si es así la ley o un error de copia.'},
     'JAL-108': {'nombre': 'Tuxpan', 'url': _li('Tuxpan'),
                 'sha256': '764138a07d47ecae571651ac371a5e3aef732b2d00d83df4b94e35a86d2ebb13',
                 'motivo': 'su art. 33 dice «al millar el: 0.00021», «0.00017» y «0.00031»: leído así sería un impuesto casi nulo, y no se sabe cuánto es.'},
@@ -1977,6 +2081,18 @@ REGISTRO = {
              'como': 'Las alcaldías no cobran el predial: lo cobra la Tesorería de la Ciudad con una sola tarifa, la del Código Fiscal (arts. 126 a 133). '
                      'Los recargos salen de la Ley de Ingresos de la Ciudad de cada año (art. 42 del Código).',
              'ojo': 'El servidor de la Consejería manda incompleta su cadena de certificados (falta el intermedio YR2 de Let\'s Encrypt). La Ley de Ingresos 2026 y la Resolución de subsidios 2026 aún no están cotejadas aquí.'},
+    'GTO': {'donde': 'Normatividad Estatal y Municipal del Gobierno del Estado de Guanajuato',
+            'url': 'https://normatividadestatalymunicipal.guanajuato.gob.mx/',
+            'como': 'Una Ley de Ingresos por municipio, publicada en el Periódico Oficial del Estado.',
+            'ojo': 'El portal de normatividad no manda su certificado intermedio (GlobalSign RSA OV SSL CA 2018): la ley de León quedó en espera.'},
+    'PUE': {'donde': 'Portal del Ayuntamiento de Puebla (Periódico Oficial del Estado)',
+            'url': 'https://archivo.pueblacapital.gob.mx/',
+            'como': 'Una Ley de Ingresos por municipio; los plazos de pago los fija el Código Fiscal y Presupuestario de cada municipio.',
+            'ojo': 'Solo la capital está cotejada.'},
+    'QRO': {'donde': 'Portal fiscal del Municipio de Querétaro (La Sombra de Arteaga)',
+            'url': 'https://portalfiscal.municipiodequeretaro.gob.mx/',
+            'como': 'Una Ley de Ingresos por municipio, con su tarifa progresiva del predial; los recargos remiten al Código Fiscal del Estado.',
+            'ojo': 'Solo la capital está cotejada.'},
     'NL': {'donde': 'Congreso del Estado de Nuevo León, leyes del paquete fiscal',
            'url': 'https://www.hcnl.gob.mx/trabajo_legislativo/leyes/paquete_fiscal.php',
            'como': 'El predial no va en una ley por municipio: lo fija la Ley de Hacienda para los Municipios del Estado, igual para los 51 '
@@ -2089,6 +2205,8 @@ def revisa():
                 if not (b['fija_bim'] > 0 and abs(b['fija'] - 6 * b['fija_bim']) < 1e-9 and b.get('art')) or 'f' in b:
                     raise SystemExit('cc_predial: la cuota fija %s de %s mal' % (b['id'], m['id']))
                 continue
+            if b.get('max_ahorro') is not None and not b['max_ahorro'] > 0 or b.get('desde') is not None and not b['desde'] > 0:
+                raise SystemExit('cc_predial: el tope o el piso del beneficio %s de %s mal' % (b['id'], m['id']))
             if not (0 <= b['f'] < 1) or not b.get('art'):
                 raise SystemExit('cc_predial: beneficio %s de %s mal' % (b['id'], m['id']))
         if m['baldio']['tipo'] not in ('sobretasa', 'millar', 'igual') or not m['baldio'].get('art'):
@@ -2275,16 +2393,16 @@ def construir(base, ref):
     porley = {}
     for m in MUNICIPIOS:
         porley.setdefault(m['url'], []).append(m)
-    quien = lambda ms: 'Las %d alcaldías de la %s' % (len(ms), ENTIDADES[ms[0]['ent']]) if ms[0].get('alcaldia') else 'Los %d municipios de %s' % (len(ms), ENTIDADES[ms[0]['ent']])
+    quien = lambda ms: '%s, %s' % (ms[0]['nombre'], ENTIDADES[ms[0]['ent']]) if len(ms) == 1 else 'Las %d alcaldías de la %s' % (len(ms), ENTIDADES[ms[0]['ent']]) if ms[0].get('alcaldia') else 'Los %d municipios de %s' % (len(ms), ENTIDADES[ms[0]['ent']])
     leyes = ''.join('<li><b>%s</b>: <a href="%s">%s</a> (huella SHA-256 <code>%s…</code>)%s</li>'
-                    % ((esc(ms[0]['nombre']) if len(ms) == 1 else esc(quien(ms))),
+                    % ((esc('%s, %s' % (ms[0]['nombre'], ENTIDADES[ms[0]['ent']])) if len(ms) == 1 else esc(quien(ms))),
                        esc(u), esc(ms[0]['ley']), ms[0]['sha256'][:12],
-                       ', arts. 10 bis y 21 bis-2 a 21 bis-12' if ms[0].get('anual') else ', arts. 42, 130 a 132, 281 y 282' if ms[0].get('alcaldia') else '')
+                       ms[0]['arts_ley'] if ms[0].get('arts_ley') else ', arts. 10 bis y 21 bis-2 a 21 bis-12' if ms[0].get('anual') else ', arts. 42, 130 a 132, 281 y 282' if ms[0].get('alcaldia') else '')
                     for u, ms in porley.items())
     lista = ', '.join(esc(m['nombre']) for m in MUNICIPIOS if not m.get('ley_corta')) + ''.join(
-        ' y ' + esc(quien(ms)[0].lower() + quien(ms)[1:]) for u, ms in porley.items() if ms[0].get('ley_corta'))
+        ' y ' + esc(quien(ms) if len(ms) == 1 else quien(ms)[0].lower() + quien(ms)[1:]) for u, ms in porley.items() if ms[0].get('ley_corta'))
     espera = '; '.join('%s: <a href="%s">su ley</a> %s' % (esc(w['nombre']), esc(w['url']), esc(w['motivo'])) for w in ESPERA.values())
-    nmun = {'JAL': 125, 'OAX': 570, 'NL': 51, 'CDMX': 16}
+    nmun = {'JAL': 125, 'OAX': 570, 'NL': 51, 'CDMX': 16, 'GTO': 46, 'PUE': 217, 'QRO': 18}
     reg_filas = ''.join('<tr><th scope="row">%s</th><td>%s</td><td>%d · %d</td><td><a href="%s">%s</a>. %s %s</td></tr>' % (
         esc(ENTIDADES[e]), format(nmun.get(e, 0), ','), sum(1 for m in MUNICIPIOS if m['ent'] == e),
         sum(1 for k in ESPERA if k.startswith(e + '-')), esc(r['url']), esc(r['donde']), esc(r['como']), esc(r.get('ojo', '')))
@@ -2665,6 +2783,40 @@ def prueba():
         if 'Ley de Ingresos de la Ciudad de México' not in json.loads(l8[1]).get('error', ''):
             mal += 1
             print('✗ el adeudo de la Ciudad de México debe decir que sus recargos están pendientes', l8[1][:200])
+    # Puebla (arts. 4 y 91) y Querétaro (arts. 14 y 50), las dos capitales.
+    pq_esp = [('pue114', 1e6, 'edif', 1600.0), ('pue114', 1e6, 'com', 1600.0), ('pue114', 1e6, 'baldio', 3200.0),
+              ('qro014', 1e6, 'edif', 5120.04), ('qro014', 50000, 'edif', 387.24), ('qro014', 3e6, 'edif', 16021.5), ('qro014', 5e6, 'baldio', 27227.16)]
+    for mid, v, t, esp in pq_esp:
+        if anual(M(mid), v, t) != esp:
+            mal += 1
+            print('✗ Puebla o Querétaro', mid, v, t, anual(M(mid), v, t), 'esperaba', esp)
+    pq_x = [('pue114', {'vf': 1e6, 'tipo': 'edif', 'ben': 'vul', 'pago': 'bim'}, 800.0), ('pue114', {'vf': 5e6, 'tipo': 'edif', 'ben': 'vul', 'pago': 'bim'}, 6605.0),
+            ('qro014', {'vf': 1e6, 'tipo': 'edif', 'ben': '', 'pago': 'ene'}, 4505.64), ('qro014', {'vf': 1e6, 'tipo': 'edif', 'ben': '', 'pago': 'feb'}, 4710.44),
+            ('qro014', {'vf': 1e6, 'tipo': 'edif', 'ben': 'soc', 'pago': 'bim'}, 146.64), ('qro014', {'vf': 5e6, 'tipo': 'edif', 'ben': 'soc', 'pago': 'bim'}, 27227.16),
+            ('qro014', {'vf': 5e6, 'tipo': 'edif', 'ben': 'soc4', 'pago': 'bim'}, 13613.58), ('qro014', {'vf': 1e6, 'tipo': 'edif', 'ben': 'soc4', 'pago': 'bim'}, 5120.04)]
+    prog9 = ("global.window={};global.document={getElementById:function(){return null}};require(%s);var D=%s;"
+             "console.log(JSON.stringify(%s.map(function(x){var m=D.mun.filter(function(y){return y.id===x[0]})[0];"
+             "return window.AuditorPredial.calcula(D,m,x[1]).fin;})));"
+             "console.log(JSON.stringify(['pue114','qro014'].map(function(i){var m=D.mun.filter(function(y){return y.id===i})[0];"
+             "return window.AuditorPredial.adeudo(D,m,{imp:100,da:2025,db:1,ha:2025,hb:6,f:[2026,6,1],multa:0,sit:'esp'}).error||'';})));"
+             % (json.dumps(js), json.dumps(D), json.dumps([[a, b] for a, b, _ in pq_x])))
+    r9 = subprocess.run(['node'], input=prog9, capture_output=True, text=True)
+    l9 = r9.stdout.strip().split('\n')
+    if len(l9) != 2:
+        mal += 1
+        print('✗ Puebla y Querétaro no corrieron en el navegador', r9.stderr[:300])
+    else:
+        for (mid, x, esp), n in zip(pq_x, json.loads(l9[0])):
+            if n != esp:
+                mal += 1
+                print('✗ Puebla o Querétaro en el navegador', mid, x, n, 'esperaba', esp)
+        e = json.loads(l9[1])
+        if 'Código Fiscal y Presupuestario para el Municipio de Puebla' not in e[0] or 'Código Fiscal del Estado de Querétaro' not in e[1]:
+            mal += 1
+            print('✗ el adeudo de Puebla y de Querétaro debe decir que sus recargos están pendientes', e)
+    if 'GTO-020' not in ESPERA:
+        mal += 1
+        print('✗ León debe seguir en espera hasta cotejar su art. 5 en el PDF')
     if mal:
         print('%d diferencias en el simulador del predial' % mal)
         return 1
