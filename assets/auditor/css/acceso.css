@@ -185,15 +185,19 @@
 .ac-preguntas-caja { position: relative; }
 .ac-preguntas { position: relative; margin: 0; padding: 0; list-style: none; min-height: 3.4em; }
 .ac-preguntas li { position: absolute; inset: 0 auto auto 0; margin: 0; font-family: "Playfair Display", Georgia, serif; font-weight: 700;
-  font-size: 21px; line-height: 1.3; color: #0b2a63; opacity: 0; animation: acPregunta 20s infinite; }
+  font-size: 21px; line-height: 1.3; color: #0b2a63; opacity: 0; animation: acPregunta 32s infinite; }
+/* Ronda 7: ocho preguntas, 4 s cada una (32 s el ciclo). */
 .ac-preguntas li:nth-child(2) { animation-delay: 4s; }
 .ac-preguntas li:nth-child(3) { animation-delay: 8s; }
 .ac-preguntas li:nth-child(4) { animation-delay: 12s; }
 .ac-preguntas li:nth-child(5) { animation-delay: 16s; }
+.ac-preguntas li:nth-child(6) { animation-delay: 20s; }
+.ac-preguntas li:nth-child(7) { animation-delay: 24s; }
+.ac-preguntas li:nth-child(8) { animation-delay: 28s; }
 @keyframes acPregunta {
   0% { opacity: 0; transform: translateY(8px); }
-  4%, 18% { opacity: 1; transform: none; }
-  22%, 100% { opacity: 0; transform: translateY(-6px); }
+  2%, 11% { opacity: 1; transform: none; }
+  12.5%, 100% { opacity: 0; transform: translateY(-6px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .ac-preguntas { min-height: 0; display: grid; gap: 6px; }
@@ -208,3 +212,18 @@
   .ac-preguntas { min-height: 4.2em; }
   .ac-preguntas li { font-size: 19px; }
 }
+/* Ronda 7 (22-11-2026): los cuatro ejes y el botón para solicitar código, muy a la vista. */
+.ac-obtener-tx { margin: 0 0 6px; font-weight: 600; color: #24324d; }
+.ac-obtener-btns { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 0; }
+.ac-pide-btn { min-height: 48px; padding: 10px 22px; font-size: 17px; font-weight: 700; box-shadow: 0 6px 16px rgba(11, 42, 99, .18); }
+.ac-ejes { display: grid; gap: 10px; }
+.ac-ejes h2 { margin: 0; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: #2c579f; }
+.ac-ejes-rej { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+.ac-eje { border: 1px solid #d6deea; border-left: 5px solid #0b2a63; border-radius: 12px; padding: 10px 14px; background: #fff; }
+.ac-eje h3 { margin: 0 0 4px; font-size: 18px; color: #0b2a63; }
+.ac-eje p { margin: 0 0 6px; font-size: 16px; color: #33415c; }
+.ac-eje ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+.ac-eje li { font-size: 15px; color: #33415c; }
+.ac-eje li b { font-family: "JetBrains Mono", monospace; color: #0b2a63; }
+.ac-ejes-nota { margin: 0; font-size: 14px; color: #44526b; }
+.ac-ejes-cta { margin: 4px 0 0; }

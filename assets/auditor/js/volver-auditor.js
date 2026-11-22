@@ -33,10 +33,36 @@
      otra pestaña, se cambia por la del chat con la pregunta y ?abre=. La regla de
      cada pestaña es la de pestana_de() en servicios_fichas.py. */
   var EXC = { 'periodismo-en-riesgo.html': 'Noticiero', 'indice.html': 'Auditor', 'pendientes.html': 'Auditor', 'base-al-dia.html': 'Auditor', 'mis-respuestas.html': 'Auditor' };
+  /* traslado */
+  /* La Enciclopedia se volvió Planisferio (Ronda 7, 22-11-2026): la regla gemela de
+     herramientas/traslado.py (la prueba con `traslado.py --prueba`). */
+  var TR_PRIV = ["enciclopedia-auditavision.html", "sigue-el-dinero.html", "descarga-los-datos.html", "aprende.html"], TR_BIB = /^(diccionario|glosario|fuentes-oficiales|marco-legal|preguntas-frecuentes|expedientes-investigacion|expediente-[a-z0-9-]+)\.html$/, TR_NOT = /^garantias(-[a-z0-9-]+)?\.html$/, TR_AUD = ["herramienta-inspector-pregunta.html", "herramienta-inspector-dictamen.html"];
+  var TR_REGLAS = [
+    [/^(numeros-egreso-(adefas|costo-financiero)|numeros-la-deuda)\.html$/, 'deuda'],
+    [/^(herramienta-megaobras(-[a-z0-9-]+)?|contratos-publicos)\.html$/, 'inversion'],
+    [/^(herramienta-ambiente(-[a-z0-9-]+)?|datos-(medio-ambiente|ambiente-[a-z0-9-]+|justicia-ambiental(-[a-z0-9-]+)?)|aprende-recursos-naturales|contexto-dimensional-ambiental)\.html$/, 'ambiental'],
+    [/^(datos-(poder-legislativo|legislativo-[a-z0-9-]+)|marco-legal-tres-niveles)\.html$/, 'legislativa'],
+    [/^datos-(poder-judicial|judicial-[a-z0-9-]+)\.html$/, 'judicial'],
+    [/^datos-salud(-[a-z0-9-]+)?\.html$/, 'salud'],
+    [/^contexto-dimensional-social\.html$/, 'social'],
+    [/^aprende-fraude-en-numeros\.html$/, 'penal'],
+    [/^(herramienta-inspector(-[a-z0-9-]+)?|expedientes|informes-[a-z0-9-]+|datos-administracion-publica(-[a-z0-9-]+)?|aprende-auditoria|numeros-herramientas-del-auditor)\.html$/, 'administracion'],
+    [/^(numeros-[a-z0-9-]+|datos-[a-z0-9-]+|radar-[a-z0-9-]+|contexto-dimensional-[a-z0-9-]+|herramienta-calculadora(-[a-z0-9-]+)?|simulador-presupuesto)\.html$/, 'financiera']
+  ];
+  function traslado(f) {
+    if (TR_PRIV.indexOf(f) >= 0) return 'Administración';
+    if (TR_BIB.test(f)) return 'Comunidad';
+    if (TR_NOT.test(f)) return 'Noticiero';
+    if (TR_AUD.indexOf(f) >= 0) return null;
+    for (var i = 0; i < TR_REGLAS.length; i++) if (TR_REGLAS[i][0].test(f)) return 'Planisferio';
+    return null;
+  }
+  /* fin traslado */
   function pestana(f) {
     if (EXC[f]) return EXC[f];
     if (f === CHAT || f === 'herramienta-inspector-dictamen.html') return 'Auditor';
     if (!f || f === 'index.html') return null;
+    if (traslado(f)) return traslado(f);
     if (/^servicios?(-|\.html)/.test(f)) return 'Servicios';
     if (f.indexOf('planisferio') === 0) return 'Planisferio';
     if (f.indexOf('noticias') === 0) return 'Noticiero';

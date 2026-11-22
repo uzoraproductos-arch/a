@@ -160,6 +160,13 @@
       f.hidden = !f.hidden; b.setAttribute('aria-expanded', String(!f.hidden));
       if (!f.hidden) f.correo.focus();
     });
+    /* Ronda 7: los otros botones «Solicita tu código» abren el mismo formulario. */
+    Array.prototype.forEach.call(document.querySelectorAll('[data-pide-codigo]'), function (x) {
+      x.addEventListener('click', function () {
+        if (f.hidden) b.click(); else f.correo.focus();
+        f.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+      });
+    });
     f.addEventListener('submit', function (e) {
       e.preventDefault();
       var est = $('acPEstado'), correo = f.correo.value.trim();

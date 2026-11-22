@@ -779,7 +779,15 @@ def escribir_base():
                             'h': sorted(x for x in donde.get(_pl(porm[r[0]]['nombre']) if r[0] in porm else r[1], ()) if x != (porm[r[0]]['ent'] if r[0] in porm else 'JAL')),
                             'n': r[1:]} for r in pred]
     dat['calc']['predEnt'] = {e: n for e, n in cc_predial.ENTIDADES.items()}
-    dat['calc']['predEsp'] = [{'k': k, 'n': _pl(w['nombre']), 'nom': w['nombre'], 'm': w['motivo']} for k, w in cc_predial.ESPERA.items()]
+    # El nombre corto de un municipio en espera («Ecatepec» por «Ecatepec de Morelos») solo si en todo el padrón lo lleva uno solo.
+    cortos = {}
+    for _n in donde:
+        if ' de ' in _n:
+            cortos.setdefault(_n.split(' de ')[0], set()).add(_n)
+    _cesp = lambda n: [n.split(' de ')[0]] if ' de ' in n and len(n.split(' de ')[0]) >= 6 and len(cortos.get(n.split(' de ')[0], ())) == 1 \
+        and n.split(' de ')[0] not in donde and not n.startswith(('san ', 'santa ', 'santo ', 'villa ', 'valle ')) else []
+    dat['calc']['predEsp'] = [{'k': k, 'n': [_pl(w['nombre'])] + _cesp(_pl(w['nombre'])), 'nom': w['nombre'], 'm': w['motivo']}
+                              for k, w in cc_predial.ESPERA.items()]
     # Inversión y Megaobras, dentro del chat (24-10-2026): sus obras, sus
     # sexenios, sus cifras y sus cinco aplicaciones.
     import asistente_megaobras

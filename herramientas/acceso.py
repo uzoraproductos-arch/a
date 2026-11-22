@@ -63,6 +63,23 @@ DURACIONES = [
 ]
 
 
+def _enciclopedia():
+    """La antigua Enciclopedia, en privado (Ronda 7, decisión del autor, 22-11-2026): sus cuatro portadas ya no tienen
+    liga pública (traslado.py) y acceso.js solo las abre en el navegador de la administración."""
+    import traslado
+    nom = {'enciclopedia-auditavision.html': ('📚', 'La Enciclopedia', 'Su portada, con Números, Datos y Aprende.'),
+           'sigue-el-dinero.html': ('💰', 'Números', 'El índice de Presupuesto, Gasto público, Cuentas claras, Baja al territorio y las Herramientas.'),
+           'descarga-los-datos.html': ('🗂️', 'Datos', 'El índice de los Poderes, la salud, el ambiente, el padrón del SAT y los informes.'),
+           'aprende.html': ('🎓', 'Aprende', 'El índice de la Biblioteca del Erario, cómo se audita, el fraude en números y los recursos naturales.')}
+    return ('      <h3>La Enciclopedia, en privado</h3>\n'
+            '      <p class="ac-ayuda">Desde la Ronda 7 sus páginas viven en el Planisferio (cada una en su dimensión) y la Biblioteca del Erario en '
+            'Comunidad. Sus cuatro portadas quedan aquí, solo para ti: el público ya no tiene ligas a ellas y, si alguien llega por una vieja, '
+            'la página lo manda al Planisferio.</p>\n'
+            '      <ul class="ac-enc">\n%s      </ul>\n') % ''.join(
+        '        <li><a href="%s"><span aria-hidden="true">%s</span> <b>%s</b></a> <small>%s</small></li>\n' % ((f,) + nom[f])
+        for f in traslado.PRIVADAS)
+
+
 def config():
     base = SUPABASE_URL.rstrip('/')
     funciones = (base + '/functions/v1') if base else ''
@@ -77,6 +94,8 @@ def config():
         'canje': CANJE,
         'panel': PANEL,
         'libres': LIBRES,
+        'privadas': list(__import__('traslado').PRIVADAS),
+        'fuera': 'planisferio.html',
     }
 
 
@@ -111,23 +130,46 @@ def _ultimas(n=3):
 # La portada de acceso (rediseño del autor, 22-11-2026). Las preguntas invitan a mirar los documentos: no
 # afirman cifras ni culpan a un gobierno o a un partido (AGENTS.md §2). Las respuestas de FAQ_ENTRADA dicen
 # solo lo que la plataforma es y hace, y van iguales en la página y en sus datos estructurados (FAQPage).
-DESC_ENTRADA = ('Auditavisión reúne en un solo lugar los impuestos, el presupuesto, la deuda, los contratos y el gasto público de México, '
-                'cada cifra con su documento oficial. Versión de prueba por invitación.')
+DESC_ENTRADA = ('Fraudes, prevención de lavado de dinero, desvío de recursos y deuda pública en México, con sus documentos oficiales: la lista 69-B '
+                'del SAT, los proveedores sancionados, la Auditoría Superior, los contratos y lo que debe cada estado. Versión de prueba por invitación.')
 QUIENES_ENTRADA = ('Somos una plataforma cívica e independiente que sigue el dinero público de México: de dónde sale, quién lo gasta y '
                    'quién revisa que se use bien. Cada cifra trae su documento oficial (DOF, Hacienda, ASF, INEGI) y lo que no se puede '
                    'comprobar se dice como pendiente.')
+# Ronda 7 (22-11-2026, decisión del autor): el gancho de la entrada son cuatro ejes. Las preguntas invitan a ver los documentos:
+# nunca afirman una cifra ni culpan a un gobierno, a un partido o a una empresa (AGENTS.md §2 y §2 bis).
 PREGUNTAS_ENTRADA = [
-    '¿Te has preguntado cuánto pagas de impuestos y a dónde se van?',
-    '¿Te has quejado del gobierno y nadie te muestra las cuentas?',
-    '¿Sientes que trabajas más y no te alcanza?',
-    '¿Sabes cuánto debe tu estado o qué obra se pagó en tu municipio?',
-    '¿Qué dicen los documentos oficiales antes de las próximas elecciones?',
+    '¿Tu proveedor está en la lista 69-B del SAT o en el directorio de sancionados?',
+    '¿Cuántas denuncias por fraude hubo en tu municipio el año pasado?',
+    '¿Revisas a tus clientes y proveedores antes de pagar, como pide la prevención de lavado?',
+    '¿Tu contraparte aparece en las listas de sanciones de la OFAC o de la ONU?',
+    '¿Cuánto dinero dejó por aclarar la Auditoría Superior en la Cuenta Pública?',
+    '¿Quién ganó los contratos de la obra de tu ciudad?',
+    '¿Cuánto debe tu estado y a qué bancos le debe?',
+    '¿Qué créditos firmó tu municipio y con quién?',
+]
+# Los cuatro ejes: (ícono, título, texto, [(clave de monetizacion.contadores(), cómo se dice aquí)], liga para verlo).
+# Los números se cuentan de los archivos de la base al generar (monetizacion.contadores()): ninguno se escribe aquí.
+EJES_ENTRADA = [
+    ('🚨', 'Fraudes', 'Las denuncias por fraude municipio por municipio, las empresas que el SAT señala por facturas simuladas y los proveedores sancionados.',
+     [('69b', 'RFC en la lista 69-B del SAT, con su situación'), ('sancionados', 'empresas proveedoras y contratistas sancionadas'),
+      ('municipios', 'municipios y alcaldías con sus carpetas por fraude del SESNSP')]),
+    ('🧺', 'Prevención de lavado (PLD)', 'Revisa a tus clientes y proveedores contra las listas oficiales antes de pagar o de firmar. Te damos la señal y su '
+     'documento; la decisión y el cumplimiento siguen siendo tuyos.',
+     [('padron', 'RFC en las listas del SAT (arts. 69, 17-H Bis y 69-B Bis)'), ('ofac-onu', 'registros de las listas de la OFAC y la ONU')]),
+    ('🔎', 'Desvío de recursos', 'Lo que la Auditoría Superior dejó por aclarar, los contratos públicos y las megaobras, con su documento. Un monto por aclarar '
+     'no es un desfalco comprobado: es lo que faltaba acreditar al cierre de la auditoría.',
+     [('asf', 'auditorías de la ASF a la Cuenta Pública 2024'), ('contratos', 'contratos públicos de ComprasMX')]),
+    ('🏦', 'Deuda pública', 'Cuánto debe cada estado y a qué bancos o instituciones, crédito por crédito, según el Registro Público Único de Hacienda.',
+     [('rpu', 'créditos y obligaciones de estados y municipios, con su acreedor')]),
 ]
 FAQ_ENTRADA = [
     ('¿Qué es Auditavisión?', 'Una plataforma cívica que reúne y explica en sencillo el dinero público de México: impuestos, presupuesto, '
      'deuda, contratos y lo que la Auditoría Superior de la Federación dejó por aclarar. Tiene un chat, el Auditor, que contesta con esos datos.'),
     ('¿De dónde salen los datos?', 'De documentos oficiales publicados para todos: el Diario Oficial de la Federación, la Secretaría de Hacienda, '
      'la Auditoría Superior de la Federación, el INEGI, Banxico y los congresos. Cada cifra lleva su fuente y su estado: oficial, auditada o pendiente.'),
+    ('¿Qué puedo revisar de fraudes, lavado, desvíos y deuda?', 'Si un RFC está en la lista 69-B del SAT, en el directorio de proveedores '
+     'sancionados o en las listas de la OFAC y la ONU; las denuncias por fraude de cada municipio; lo que la Auditoría Superior dejó por aclarar y '
+     'los contratos públicos; y cuánto debe cada estado y a quién. Todo con su documento, como señal para revisar y nunca como acusación.'),
     ('¿Toma partido?', 'No. Las mismas reglas valen para todos los gobiernos y todos los partidos: se muestra lo que dice el documento, y una '
      'acusación nunca se presenta como una condena.'),
     ('¿Cómo entro?', 'La versión de prueba es gratis y por invitación: escribe tu código de acceso de ocho caracteres o pide uno con tu correo.'),
@@ -154,11 +196,19 @@ def entrada_html(sello):
     # HTML, para los buscadores; sin animación si el lector la apagó) y el código al centro. Las
     # preguntas no afirman cifras ni toman partido (AGENTS.md §2): invitan a ver los documentos.
     preguntas = ''.join('\n          <li>%s</li>' % esc(q) for q in PREGUNTAS_ENTRADA)
+    import monetizacion
+    cuenta = {c[0]: c for c in monetizacion.contadores()}
+    ejes = ''.join(
+        '\n        <article class="ac-eje"><h3><span aria-hidden="true">%s</span> %s</h3><p>%s</p><ul>%s</ul></article>' % (
+            ico, esc(tit), esc(tx), ''.join('<li><b>%s</b> %s</li>' % (format(cuenta[k][1], ','), esc(et)) for k, et in cifras))
+        for ico, tit, tx, cifras in EJES_ENTRADA)
     faq = ''.join('\n        <details class="ac-faq-p"><summary>%s</summary><p>%s</p></details>' % (esc(q), esc(r)) for q, r in FAQ_ENTRADA)
     url = apartados.SITIO + CANJE
     ld = json.dumps([
         {'@context': 'https://schema.org', '@type': 'WebSite', 'name': 'Auditavisión', 'url': apartados.SITIO, 'inLanguage': 'es-MX',
-         'description': DESC_ENTRADA},
+         'description': DESC_ENTRADA, 'keywords': 'fraudes, prevención de lavado de dinero, PLD, desvío de recursos, deuda pública, lista 69-B, '
+         'proveedores sancionados, Auditoría Superior de la Federación, contratos públicos, México',
+         'about': [{'@type': 'Thing', 'name': t, 'description': x} for _i, t, x, _c in EJES_ENTRADA]},
         {'@context': 'https://schema.org', '@type': 'Organization', 'name': 'Auditavisión', 'url': apartados.SITIO,
          'logo': apartados.SITIO + 'assets/auditor/img/logo-auditavision.svg', 'description': QUIENES_ENTRADA},
         {'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
@@ -171,14 +221,14 @@ def entrada_html(sello):
   <meta charset="UTF-8">
   {csp}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Auditavisión · Impuestos, presupuesto, deuda y gasto público de México, con documentos oficiales</title>
+  <title>Auditavisión · Fraudes, prevención de lavado, desvío de recursos y deuda pública de México, con documentos oficiales</title>
   <meta name="description" content="{desc}">
   <link rel="canonical" href="{url}">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Auditavisión">
   <meta property="og:locale" content="es_MX">
   <meta property="og:url" content="{url}">
-  <meta property="og:title" content="Auditavisión · El gasto público de México, a la vista">
+  <meta property="og:title" content="Auditavisión · Fraudes, lavado, desvíos y deuda pública, con documentos">
   <meta property="og:description" content="{desc}">
   <meta property="og:image" content="{sitio}assets/auditor/img/portada/cabecera-lluvia.webp">
   <meta name="twitter:card" content="summary_large_image">
@@ -221,7 +271,8 @@ def entrada_html(sello):
       </form>{sin_base}
       <div class="ac-tuyo" id="acTuyo" hidden></div>
       <div class="ac-obtener">
-        <p>¿No tienes código? <button class="ac-enlace" type="button" id="acObtener" aria-expanded="false" aria-controls="acPedir">Obtén uno</button> · <a class="ac-enlace" href="servicios.html">Conoce los Servicios</a></p>
+        <p class="ac-obtener-tx">¿No tienes código? Es gratis y por invitación.</p>
+        <p class="ac-obtener-btns"><button class="sz-btn sz-btn-of ac-pide-btn" type="button" id="acObtener" aria-expanded="false" aria-controls="acPedir">Solicita tu código</button> <a class="ac-enlace" href="servicios.html">Conoce los Servicios</a></p>
         <form class="ac-pedir" id="acPedir" novalidate hidden>
           <p class="ac-pedir-txt">Déjanos tu correo y te mandamos tu código. La versión de prueba es por invitación: la estamos abriendo poco a poco.</p>
           <label class="ac-et" for="acPCorreo">Tu correo</label>
@@ -235,6 +286,13 @@ def entrada_html(sello):
           <p class="ac-estado" id="acPEstado" role="status" aria-live="polite"></p>
         </form>
       </div>
+      <section class="ac-ejes" aria-labelledby="acEjesTit">
+        <h2 id="acEjesTit">Lo que puedes revisar, con su documento</h2>
+        <div class="ac-ejes-rej">{ejes}
+        </div>
+        <p class="ac-ejes-nota">Los números son conteos de la base de la plataforma al generar esta página. Una coincidencia en una lista es una señal para revisar, nunca una acusación.</p>
+        <p class="ac-ejes-cta"><button class="sz-btn sz-btn-of ac-pide-btn" type="button" data-pide-codigo>Solicita tu código para entrar</button></p>
+      </section>
       <div class="ac-noticias">
         <h2>Lo último, verificado</h2>
         <ul>{notas}
@@ -257,7 +315,7 @@ def entrada_html(sello):
 </body>
 </html>
 """.format(csp=seguridad.meta(), sello=sello, logo=apartados.LOGO_IMG, notas=notas, casillas=casillas, sin_base=sin_base,
-                  desc=esc(DESC_ENTRADA), url=url, sitio=apartados.SITIO, quienes=esc(QUIENES_ENTRADA), preguntas=preguntas, faq=faq, ld=ld)
+                  desc=esc(DESC_ENTRADA), url=url, sitio=apartados.SITIO, quienes=esc(QUIENES_ENTRADA), preguntas=preguntas, faq=faq, ld=ld, ejes=ejes)
 
 
 def escribir_entrada(sello):
@@ -273,6 +331,8 @@ HOJAS = [
     ('solicitudes', '📨', 'Solicitudes'),
     ('bitacora', '📋', 'Bitácora'),
     ('acceso', '🔐', 'Mi acceso'),
+    # Ronda 7 (22-11-2026): la antigua Enciclopedia, solo para la administración (traslado.py).
+    ('enciclopedia', '📚', 'Enciclopedia'),
 ]
 # Las gráficas del tablero: id, título y qué responde. Las pinta
 # acceso-paginas.js con lo que devuelve uso_tablero() de la base.
@@ -368,6 +428,9 @@ def pagina_panel():
               + _pestanas() +
               '    <section class="ac-hoja" id="ac-hoja-tablero" role="tabpanel" aria-labelledby="ac-tab-tablero" data-sin-medir>\n'
               + _tablero() +
+              '    </section>\n'
+              '    <section class="ac-hoja" id="ac-hoja-enciclopedia" role="tabpanel" aria-labelledby="ac-tab-enciclopedia" hidden>\n'
+              + _enciclopedia() +
               '    </section>\n'
               '    <section class="ac-hoja" id="ac-hoja-bitacora" role="tabpanel" aria-labelledby="ac-tab-bitacora" hidden>\n'
               + _bitacora() +

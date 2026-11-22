@@ -206,18 +206,18 @@ p.pl-ficha-ir a:hover, p.pl-ficha-ir a:focus-visible { background: #16408c; }
 }
 
 /* El color de cada dimensión: el de su mosaico y el de su tablero. */
-.pl-dim[data-dim="financiera"], .pl-tablero[data-dim="financiera"] { --dim: #a8801f; }
-.pl-dim[data-dim="deuda"], .pl-tablero[data-dim="deuda"] { --dim: #b3261e; }
-.pl-dim[data-dim="inversion"], .pl-tablero[data-dim="inversion"] { --dim: #2f5fa8; }
-.pl-dim[data-dim="ambiental"], .pl-tablero[data-dim="ambiental"] { --dim: #2e8a4c; }
-.pl-dim[data-dim="legislativa"], .pl-tablero[data-dim="legislativa"] { --dim: #4b4f8f; }
-.pl-dim[data-dim="judicial"], .pl-tablero[data-dim="judicial"] { --dim: #8f6334; }
-.pl-dim[data-dim="salud"], .pl-tablero[data-dim="salud"] { --dim: #d2661a; }
-.pl-dim[data-dim="social"], .pl-tablero[data-dim="social"] { --dim: #b8327f; }
-.pl-dim[data-dim="penal"], .pl-tablero[data-dim="penal"] { --dim: #6e1510; }
+.pl-dim[data-dim="financiera"], .pl-tablero[data-dim="financiera"], .pl-todo-dim[data-dim="financiera"] { --dim: #a8801f; }
+.pl-dim[data-dim="deuda"], .pl-tablero[data-dim="deuda"], .pl-todo-dim[data-dim="deuda"] { --dim: #b3261e; }
+.pl-dim[data-dim="inversion"], .pl-tablero[data-dim="inversion"], .pl-todo-dim[data-dim="inversion"] { --dim: #2f5fa8; }
+.pl-dim[data-dim="ambiental"], .pl-tablero[data-dim="ambiental"], .pl-todo-dim[data-dim="ambiental"] { --dim: #2e8a4c; }
+.pl-dim[data-dim="legislativa"], .pl-tablero[data-dim="legislativa"], .pl-todo-dim[data-dim="legislativa"] { --dim: #4b4f8f; }
+.pl-dim[data-dim="judicial"], .pl-tablero[data-dim="judicial"], .pl-todo-dim[data-dim="judicial"] { --dim: #8f6334; }
+.pl-dim[data-dim="salud"], .pl-tablero[data-dim="salud"], .pl-todo-dim[data-dim="salud"] { --dim: #d2661a; }
+.pl-dim[data-dim="social"], .pl-tablero[data-dim="social"], .pl-todo-dim[data-dim="social"] { --dim: #b8327f; }
+.pl-dim[data-dim="penal"], .pl-tablero[data-dim="penal"], .pl-todo-dim[data-dim="penal"] { --dim: #6e1510; }
 /* Administración pública: gris pizarra (elegido por el autor, 04-11-2026). Más oscuro que el gris claro
    de «sin cifra» del mapa (#d5dae3), para no confundirse con él; en modo oscuro su título se aclara. */
-.pl-dim[data-dim="administracion"], .pl-tablero[data-dim="administracion"] { --dim: #4a5a6a; }
+.pl-dim[data-dim="administracion"], .pl-tablero[data-dim="administracion"], .pl-todo-dim[data-dim="administracion"] { --dim: #4a5a6a; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pl-tablero[data-dim="administracion"] .pl-tab-tit { color: #b4c0cc; } }
 :root[data-theme="dark"] .pl-tablero[data-dim="administracion"] .pl-tab-tit { color: #b4c0cc; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pl-tablero[data-dim="penal"] .pl-tab-tit { color: #f2b3aa; } }
@@ -464,3 +464,9 @@ details.pl-sec > dl { margin-top: 8px; }
 :root[data-theme="dark"] .pl-dinero { background: var(--bg-card, #14213a); border-color: #5c4a1c; border-left-color: #c9a84c; color: #dfe7f6; }
 :root[data-theme="dark"] .pl-dinero-tx small { color: #c3cde0; }
 :root[data-theme="dark"] .pl-dinero-ir { color: #c9a84c; }
+/* Ronda 7 (22-11-2026): las diez dimensiones, cada una con todo lo que trae (planisferio-dim-<id>.html). */
+.pl-todo { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+.pl-todo-dim { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 10px 14px; border-radius: 12px; border: 1px solid #d6deea; border-left: 6px solid var(--dim, #2f5fa8); background: #fff; color: #0b2a63; text-decoration: none; }
+.pl-todo-dim:hover { box-shadow: 0 4px 14px rgba(11, 42, 99, .12); }
+.pl-todo-dim:focus-visible { outline: 3px solid #c9a84c; outline-offset: 2px; }
+[data-theme="dark"] .pl-todo-dim { background: #101b2e; border-color: #2a3b57; color: #e8eefa; border-left-color: var(--dim, #8aa4d6); }

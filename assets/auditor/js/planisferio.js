@@ -354,7 +354,7 @@
       var obrL = lente.id === 'obr', obra = '<p class="pl-ficha-sub">🚧 Obras con alerta ambiental · conteo nuestro</p><dl class="pl-ficha-dl">' +
         '<dt data-l="obr">Proyectos del mapa ambiental que la tocan</dt><dd><b class="num-tabular">' + num(e.obr, 0) + '</b> ' + chip('derivado') +
         (e.obr ? ' · ' + e.obp + ' con dinero público, ' + e.obv + (e.obv === 1 ? ' privado' : ' privados') : '') + '</dd></dl>' +
-        (e.obr ? '<a class="pl-ficha-ir" href="planisferio-ficha-datos-ambiente-megaobras.html?e=' + encodeURIComponent(e.a) + '#abMapaObras">Verlas en el mapa ambiental de megaobras ➔</a>' : '') +
+        (e.obr ? '<a class="pl-ficha-ir" href="datos-ambiente-megaobras.html?e=' + encodeURIComponent(e.a) + '#abMapaObras">Verlas en el mapa ambiental de megaobras ➔</a>' : '') +
         '<p class="pl-ficha-mun">Es un conteo, no un monto ni una calificación: una obra que cruza cinco estados cuenta en los cinco.</p>';
       var r = e.ref, m = e.min, w = e.acu, z = e.inc, b = e.sf, refL = /^ref/.test(lente.id), minL = /^min/.test(lente.id), incL = /^inc|^sf/.test(lente.id), q = e.pe, peL = /^pe/.test(lente.id);
       var sg = function (v) { return (v > 0 ? '+' : v < 0 ? '−' : '') + num(Math.abs(v), 1) + '%'; };
@@ -434,7 +434,7 @@
     }
     /* Todas las fichas llevan su estado de cuenta y de resultados (04-11-2026). */
     function cuentas(e) {
-      ficha.insertAdjacentHTML('beforeend', '<a class="pl-ficha-ir" href="planisferio-ficha-herramienta-inspector-entes.html#ente=estatal:' + esc(e.a) + '">🏢 Su estado de cuenta y de resultados ➔</a>');
+      ficha.insertAdjacentHTML('beforeend', '<a class="pl-ficha-ir" href="herramienta-inspector-entes.html#ente=estatal:' + esc(e.a) + '">🏢 Su estado de cuenta y de resultados ➔</a>');
     }
     /* La ficha, esquematizada (reestructura del 16-11-2026, pedido del autor:
        «muestra mucha información que no es tan fácil de comprender»). Las
@@ -502,7 +502,7 @@
       var pie = document.createElement('div');
       pie.className = 'pl-ficha-pie';
       if (acc[0]) pie.appendChild(acc[0]);
-      var mas = '<a class="pl-ficha-o" href="planisferio-ficha-herramienta-inspector-entes.html#ente=estatal:' + esc(e.a) + '">🏢 Su estado de cuenta y de resultados</a>';
+      var mas = '<a class="pl-ficha-o" href="herramienta-inspector-entes.html#ente=estatal:' + esc(e.a) + '">🏢 Su estado de cuenta y de resultados</a>';
       if (fijo) mas += '<a class="pl-ficha-o pl-ficha-serv" href="' + (dimP === 'penal' ? 'servicios-fraude-y-lavado.html#riesgo">🛡️ Servicio: revisa a un proveedor antes de pagar' : 'servicios-catalogo.html#sv-radiografia">🧾 Servicio: la Radiografía de ' + esc(e.n)) + '</a>';
       pie.insertAdjacentHTML('beforeend', '<div class="pl-ficha-mas">' + mas + '</div>' +
         (fijo ? '' : '<p class="pl-ficha-pista">Toca la entidad para fijarla; tócala otra vez para entrar.</p>'));
@@ -742,7 +742,7 @@
       document.getElementById('plMunQue').textContent = lente.que;
     }
     function muestra(x) {
-      var ente = 'planisferio-ficha-herramienta-inspector-entes.html#ente=municipal:' + D.cve + x.c;
+      var ente = 'herramienta-inspector-entes.html#ente=municipal:' + D.cve + x.c;
       /* Homónimos (Ronda 6): el municipio siempre con su entidad, «Puebla, Puebla» o «Benito Juárez, Ciudad de México». */
       var tit = '<h3>' + esc(x.n + (D.enN ? ', ' + D.enN : '')) + '</h3>';
       if (x.ing == null) {

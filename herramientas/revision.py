@@ -99,6 +99,8 @@ def main():
     revisiones.append(('inventario', lambda: corre('inventario.py')))
     revisiones.append(('puntos ciegos', lambda: corre('prueba_puntos_ciegos.py')))
     revisiones.append(('vínculos por el Auditor', lambda: corre('vinculos_auditor.py')))
+    # Ronda 7 (22-11-2026): la regla del traslado (Enciclopedia → Planisferio), igual en Python y en volver-auditor.js.
+    revisiones.append(('traslado al Planisferio', lambda: corre('traslado.py', '--prueba')))
     revisiones.append(('registro de fuentes', lambda: corre('fuentes.py')))
     revisiones.append(('política de seguridad (CSP)', lambda: corre('seguridad.py')))
     # Encargo del 05-11-2026: el vigía legislativo y el lector de facturas,

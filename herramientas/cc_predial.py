@@ -1199,6 +1199,138 @@ def _pue_qro():
 MUNICIPIOS += _pue_qro()
 
 
+# ---------------------------------------------------------------------------
+# Tijuana y Mérida (Ronda 7, 22-11-2026; Paquete de Datos 5 de Antigravity,
+# cotejado por Claude contra el mismo PDF, misma huella: Tijuana, arts. 4, 5, 7
+# y 63 de su Ley de Ingresos 2026; Mérida, arts. 47 y 48 de su Ley de Hacienda,
+# renglón por renglón).
+#
+# Lo que no es cita de la ley y decidimos a la vista:
+#  - Tijuana cobra al millar por año (art. 4): va como 'anual', igual que Puebla.
+#    El 3 % «adicional a cualquier otro estímulo» por pagar en el portal (art. 7)
+#    no se suma: la ley no dice si se resta del total o de lo ya reducido.
+#  - «3.99 veces la UMA» (art. 5) y «1.0 veces la UMA» (art. 47 de Mérida) se leen
+#    con la UMA diaria: es lectura nuestra.
+#  - Mérida da su tarifa por año y la cobra por mes (art. 48): aquí va por bimestre
+#    (cuota fija ÷ 6 y factor ÷ 6), que suma lo mismo en el año.
+#  - De los $22,000,000 hacia arriba, la cuota fija de cada rango de Mérida no es
+#    la que da el rango anterior en su tope (la ley la imprime así): se aplica tal
+#    cual y la página lo dice.
+#  - Los recargos de las dos quedan pendientes (ver 'acc_pend').
+# El Estado de México (125 municipios) quedó en ESPERA: ver _edomex_espera().
+# ---------------------------------------------------------------------------
+TIJ_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'tijuana-ley-ingresos-2026.json')
+MER_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'merida-ley-hacienda-2026.json')
+TIJ_LEY = 'Ley de Ingresos del Municipio de Tijuana'
+MER_LEY = 'Ley de Hacienda del Municipio de Mérida'
+# La tarifa del art. 47 de Mérida, tal como está en el PDF (límite inferior, cuota fija, factor): la del JSON debe ser esta.
+MER_47 = [(0.01, 0.0, 0.0004), (100000.01, 40.0, 0.00046), (200000.01, 86.0, 0.00055), (310000.01, 146.5, 0.0012),
+          (400000.01, 254.5, 0.0027), (600000.01, 794.5, 0.00273), (800000.01, 1340.5, 0.00275), (1300000.01, 2715.5, 0.00277),
+          (1800000.01, 4100.5, 0.0028), (2800000.01, 6900.5, 0.00282), (3800000.01, 9720.5, 0.0035), (4800000.01, 13220.5, 0.00352),
+          (5800000.01, 16740.5, 0.00355), (6800000.01, 20290.5, 0.00357), (8800000.01, 27430.5, 0.00396), (12000000.01, 40102.5, 0.00398),
+          (22000000.01, 79902.5, 0.00406), (42000000.01, 161094.5, 0.00414), (72000000.01, 285318.26, 0.00422),
+          (112000000.01, 454262.57, 0.00431), (162000000.01, 669666.57, 0.00439)]
+
+
+def _tij_mer():
+    T = json.load(open(TIJ_ARCHIVO, encoding='utf-8'))
+    M = json.load(open(MER_ARCHIVO, encoding='utf-8'))
+    t4, pp = T['tasas_anuales_art_4'], T['pronto_pago_art_7']
+    if T['sha256_pdf'] != '5733525d3ecd4f991293bde1b226fd701d8dd279010fdf8b917c3517cb29bffb' \
+            or (t4['general_al_millar'], t4['industrial_al_millar'], t4['baldio_al_millar'], t4['rustico_suburbano_al_millar']) != (4.29, 4.1, 3.7, 3.7) \
+            or T['cuota_minima_y_plazo_art_5']['minimo_uma_anual'] != 3.99 \
+            or (pp['enero_pct'], pp['febrero_pct'], pp['marzo_pct'], pp['adicional_en_linea_pct']) != (12, 10, 5, 3) \
+            or (T['recargos_art_63']['mora_mensual_pct'], T['recargos_art_63']['prorroga_mensual_pct']) != (2.0, 1.5):
+        raise SystemExit('cc_predial: %s cambió: vuelve a cotejar los arts. 4, 5, 7 y 63 antes de integrarlo' % TIJ_ARCHIVO)
+    if M['sha256_pdf'] != 'ce8da1b2b692af0e2c5b8abc4899bc0ea6119fa68208cd09a23637f0aea90bea' \
+            or [(x['li'], x['cf'], x['factor']) for x in M['tarifa_anual_art_47']] != MER_47 \
+            or M['cuota_minima_art_47']['uma_anual'] != 1.0 or (M['pronto_pago_art_48']['enero_pct'], M['pronto_pago_art_48']['febrero_pct']) != (10, 10):
+        raise SystemExit('cc_predial: %s cambió: vuelve a cotejar los arts. 47 y 48 antes de integrarlo' % MER_ARCHIVO)
+    pad = {e: dict(_padron_ent(e)) for e in ('BC', 'YUC')}
+    if pad['BC'].get('004') != 'Tijuana' or pad['YUC'].get('050') != 'Mérida':
+        raise SystemExit('cc_predial: el padrón no trae a Tijuana (02004) o a Mérida (31050) con su nombre')
+    tij = {
+        'id': 'bc004', 'ent': 'BC', 'cve': '004', 'nombre': 'Tijuana',
+        'ley': T['ley'], 'ley_corta': TIJ_LEY, 'arts_ley': ', arts. 4 a 7 y 63',
+        'url': T['url'], 'sha256': T['sha256_pdf'],
+        'art_tarifa': 'art. 4, fr. I', 'tarifa': 'millar', 'millar': 4.29 / 6, 'tramos': [[0.0, 0.0, 4.29 / 6000]],
+        'anual': {'edif': 4.29, 'rust': 3.7, 'com': 4.1, 'baldio': 3.7},
+        'art_anual': {'edif': 'art. 4, fr. I', 'rust': 'art. 4, predios con tasa propia', 'com': 'art. 4, predios con tasa propia',
+                      'baldio': 'art. 4, predios con tasa propia'},
+        'et_anual': {'edif': 'Tasa general (todo predio que no tenga tasa propia)', 'rust': 'Rústico, rural o suburbano',
+                     'com': 'Urbano de uso industrial', 'baldio': 'Baldío'},
+        'com_et': 'Urbano de uso industrial (la ley le da su tasa)',
+        'baldio': {'tipo': 'millar', 'millar': 3.7 / 6, 'cf': 0.0, 'art': 'art. 4, predios con tasa propia'},
+        'pronto': [{'id': 'ene', 'et': 'Pagas el año completo en enero, en una sola exhibición', 'f': 0.88, 'art': 'art. 7'},
+                   {'id': 'feb', 'et': 'Pagas el año completo en febrero, en una sola exhibición', 'f': 0.9, 'art': 'art. 7'},
+                   {'id': 'mar', 'et': 'Pagas el año completo en marzo, en una sola exhibición', 'f': 0.95, 'art': 'art. 7'}],
+        'pronto_nota': ('Pagar en el portal del Municipio da «un 3 % adicional a cualquier otro estímulo» (art. 7, último párrafo): no lo '
+                        'sumamos, porque la ley no dice si se resta del total o de lo ya reducido. Si pagas por INFONAVIT o con cargo '
+                        'domiciliado, no hay descuento por pronto pago (art. 6).'),
+        'beneficios': [],
+        'suma_art': None,
+        'minimo': {'uma_anual': 3.99, 'art': 'art. 5', 'un': 'UMA'},
+        'acc_pend': ('Los recargos de Tijuana son de 2 %% al mes en mora y 1.5 %% en prórroga, hasta por 5 años (art. 63 de la %s), pero '
+                     'la actualización y los gastos de ejecución los fija la Ley de Hacienda Municipal del Estado de Baja California, que aún no '
+                     'cotejamos: no calculamos el adeudo. Pídelo a la Tesorería Municipal.') % TIJ_LEY,
+        'nota': ('Tijuana cobra al año 4.29 al millar sobre el valor catastral, 4.10 a los predios urbanos de uso industrial y 3.70 a los '
+                 'baldíos y a los rústicos, rurales o suburbanos (art. 4); nunca menos de 3.99 veces la UMA (art. 5). Un baldío destinado a '
+                 'estacionamiento de un comercio paga la tasa general (art. 4). El Certificado de Mejoramiento de la Imagen Urbana da «hasta» '
+                 '50 % sobre adeudos de baldíos (art. 7): la ley no dice cuánto, así que no lo calculamos.'),
+        'venc': 'que se paga del 1 de enero al 31 de marzo (art. 5)'}
+    mer = {
+        'id': 'yuc050', 'ent': 'YUC', 'cve': '050', 'nombre': 'Mérida',
+        'ley': M['ley'], 'ley_corta': MER_LEY, 'arts_ley': ', arts. 47 y 48',
+        'url': M['url'], 'sha256': M['sha256_pdf'],
+        'art_tarifa': 'art. 47', 'tramos': [[li, round(cf / 6, 6), fa / 6] for li, cf, fa in MER_47],
+        'tramos_nota': ('La ley da la tarifa por año y la cobra por mes (arts. 47 y 48): aquí la cuota fija y el factor van entre seis, por '
+                        'bimestre, que suman lo mismo en el año. De los $22,000,000 hacia arriba, la cuota fija de cada rango no es la que da '
+                        'el rango anterior en su tope: así la imprime la ley, y así la aplicamos.'),
+        'baldio': {'tipo': 'igual', 'art': 'art. 47'},
+        'pronto': [{'id': 'ene', 'et': 'Pagas el año completo en enero, en una sola exhibición', 'f': 0.9, 'art': 'art. 48'},
+                   {'id': 'feb', 'et': 'Pagas el año completo en febrero, en una sola exhibición', 'f': 0.9, 'art': 'art. 48'}],
+        'pronto_nota': 'La bonificación es de 0.10 sobre el impuesto del año si lo pagas en una sola exhibición en enero o febrero (art. 48).',
+        'beneficios': [],
+        'suma_art': None,
+        'minimo': {'uma_anual': 1.0, 'art': 'art. 47', 'un': 'UMA'},
+        'acc_pend': ('Los recargos y los estímulos de cada año los fija la Ley de Ingresos del Municipio de Mérida 2026, que aún no '
+                     'cotejamos: no calculamos el adeudo. Pídelo a la Dirección de Finanzas y Tesorería Municipal.'),
+        'nota': ('Mérida cobra el predial por mes: el impuesto del año (o 1.0 vez la UMA, lo que sea mayor) entre doce (art. 47). Un predio '
+                 'de las secciones catastrales 1 a 30, o de otra colonia, con maleza o sin cerca de 1.50 m puede pagar la tarifa '
+                 '«incrementada hasta en un doscientos por ciento» (art. 47): la ley no dice cuánto, así que no lo calculamos. Si rentas tu '
+                 'inmueble y el impuesto sobre la renta pactada sale mayor, pagas sobre la renta (arts. 49 y 51): aquí no se calcula.'),
+        'venc': 'que se pagan por mes vencido, en los primeros quince días del mes siguiente; el de enero, a más tardar el último día de febrero (art. 48)'}
+    return [tij, mer]
+
+
+MUNICIPIOS += _tij_mer()
+
+# El Estado de México (Ronda 7): Antigravity copió la tarifa del art. 109 del Código Financiero con la huella de su PDF, pero el
+# portal de legislación del Gobierno del Estado (y todos sus sitios) no responde desde nuestro servidor: sin cotejarla contra el PDF,
+# sus 125 municipios esperan. La tabla del JSON es continua (lo revisa _edomex_espera()); en cuanto el PDF se pueda leer, se integra.
+MEX_ARCHIVO = os.path.join(RAIZ, 'docs', 'predial', 'edomex-codigo-financiero-2026.json')
+MEX_MOTIVO = ('su tarifa sale del art. 109 del Código Financiero del Estado de México y Municipios (reformado por el Decreto 240, Gaceta del '
+              'Gobierno del 17-12-2025), igual para los 125 municipios. Otro agente la copió del PDF con su huella, pero el portal de legislación '
+              'del Gobierno del Estado no responde desde nuestro servidor y no pudimos cotejarla contra el documento: hasta leerla ahí, no la '
+              'calculamos. Los descuentos y los recargos de 2026 son de la Ley de Ingresos de los Municipios del Estado de México (Decreto 239), '
+              'también por cotejar.')
+
+
+def _edomex_espera():
+    E = json.load(open(MEX_ARCHIVO, encoding='utf-8'))
+    T = E['tarifa_anual_art_109']
+    if E['sha256_pdf'] != 'c64741f00243049569bd4a5c4dec3a81244214e09afc0e3512d75e5840f149f5' or len(T) != 13 or len(E['municipios']) != 125:
+        raise SystemExit('cc_predial: %s cambió: revisa su huella, sus 13 rangos y sus 125 municipios' % MEX_ARCHIVO)
+    pad = dict(_padron_ent('MÉX'))
+    out = {}
+    for x in E['municipios']:
+        c = x['cve'][2:]
+        if pad.get(c) != x['nombre']:
+            raise SystemExit('cc_predial: %s (%s) no coincide con el padrón municipal' % (x['nombre'], x['cve']))
+        out['MÉX-' + c] = {'nombre': x['nombre'], 'url': E['url'], 'sha256': E['sha256_pdf'], 'motivo': MEX_MOTIVO}
+    return out
+
+
 def aplica_uma(uma):
     """Las cifras en cuotas (UMA) de Nuevo León, en pesos con la UMA de la base: el mínimo de 2 cuotas al año y la
     tarifa especial. Se llama antes de pasar los renglones a la página y en la prueba, con la misma UMA."""
@@ -1239,11 +1371,12 @@ ESPERA = {
                 'motivo': 'su art. 18 escribe las tasas como «0.20% al millar», «0.14% al millar» y «0.30% al millar», y así no se sabe cuánto es.'},
     'GTO-020': {'nombre': 'León', 'url': 'https://normatividadestatalymunicipal.guanajuato.gob.mx/archivos/687fe34a901a03abed262a62e22f90db.pdf',
                 'sha256': '91e6efa75a5c75df3563554d5f30e84b56ae4d83d2d4915f4da5901c72b256cb',
-                'motivo': 'su Ley de Ingresos 2026 (Decreto 159, P.O. 30-12-2025) la tenemos en la tabla que copió del PDF otro agente, pero no la pudimos volver a bajar para cotejarla (el portal de normatividad del Estado no manda su certificado intermedio), y en la copia la cuota fija de los rangos no sigue del rango anterior (del 1.º al 2.º faltan $145): hasta leer el art. 5 en el PDF no sabemos si es así la ley o un error de copia.'},
+                'motivo': 'su Ley de Ingresos 2026 (Decreto 159, P.O. 30-12-2025) la tenemos en la tabla que copió del PDF otro agente, pero no la pudimos volver a bajar para cotejarla (el portal de normatividad del Estado no manda su certificado intermedio), y en la copia la cuota fija de los rangos no sigue del rango anterior (del 1.º al 2.º faltan $145): Antigravity volvió a leer la p. 94 del Decreto y dice que la ley imprime así $3,777.64 (el 4 % sobre $3,632.35); hasta verlo nosotros en el PDF, con su huella, no la calculamos.'},
     'JAL-108': {'nombre': 'Tuxpan', 'url': _li('Tuxpan'),
                 'sha256': '764138a07d47ecae571651ac371a5e3aef732b2d00d83df4b94e35a86d2ebb13',
                 'motivo': 'su art. 33 dice «al millar el: 0.00021», «0.00017» y «0.00031»: leído así sería un impuesto casi nulo, y no se sabe cuánto es.'},
 }
+ESPERA.update(_edomex_espera())
 
 # Las Tablas de Valores Unitarios de cada municipio (lo que fija el catastro para armar el valor fiscal).
 # Cada valor es oficial y lleva su documento; armar el valor fiscal con ellos es derivado. Valores en pesos por m²,
@@ -2085,6 +2218,18 @@ REGISTRO = {
             'url': 'https://normatividadestatalymunicipal.guanajuato.gob.mx/',
             'como': 'Una Ley de Ingresos por municipio, publicada en el Periódico Oficial del Estado.',
             'ojo': 'El portal de normatividad no manda su certificado intermedio (GlobalSign RSA OV SSL CA 2018): la ley de León quedó en espera.'},
+    'BC': {'donde': 'Tesorería Municipal de Tijuana (Periódico Oficial del Estado de Baja California)',
+           'url': 'https://www.tijuana.gob.mx/Dependencias/tesoreria/',
+           'como': 'Una Ley de Ingresos por municipio, con sus tasas al millar del predial; la actualización y los gastos de ejecución vienen de la Ley de Hacienda Municipal del Estado.',
+           'ojo': 'Solo Tijuana está cotejada.'},
+    'YUC': {'donde': 'Portal Ciudadano del Ayuntamiento de Mérida (Diario Oficial del Estado de Yucatán)',
+            'url': 'https://portalciudadano.merida.gob.mx/',
+            'como': 'Mérida trae su tarifa en su propia Ley de Hacienda Municipal; los recargos de cada año van en su Ley de Ingresos.',
+            'ojo': 'Solo Mérida está cotejada; su Ley de Ingresos 2026 (recargos) aún no.'},
+    'MÉX': {'donde': 'Legislación del Gobierno del Estado de México (Gaceta del Gobierno)',
+            'url': 'https://legislacion.edomex.gob.mx/',
+            'como': 'El predial de los 125 municipios sale de una sola tarifa, la del art. 109 del Código Financiero del Estado de México y Municipios; los descuentos y recargos, de la Ley de Ingresos de los Municipios de cada año.',
+            'ojo': 'El portal de legislación del Gobierno del Estado no responde desde nuestro servidor: la tarifa no está cotejada y los 125 municipios esperan.'},
     'PUE': {'donde': 'Portal del Ayuntamiento de Puebla (Periódico Oficial del Estado)',
             'url': 'https://archivo.pueblacapital.gob.mx/',
             'como': 'Una Ley de Ingresos por municipio; los plazos de pago los fija el Código Fiscal y Presupuestario de cada municipio.',
@@ -2401,8 +2546,14 @@ def construir(base, ref):
                     for u, ms in porley.items())
     lista = ', '.join(esc(m['nombre']) for m in MUNICIPIOS if not m.get('ley_corta')) + ''.join(
         ' y ' + esc(quien(ms) if len(ms) == 1 else quien(ms)[0].lower() + quien(ms)[1:]) for u, ms in porley.items() if ms[0].get('ley_corta'))
-    espera = '; '.join('%s: <a href="%s">su ley</a> %s' % (esc(w['nombre']), esc(w['url']), esc(w['motivo'])) for w in ESPERA.values())
-    nmun = {'JAL': 125, 'OAX': 570, 'NL': 51, 'CDMX': 16, 'GTO': 46, 'PUE': 217, 'QRO': 18}
+    # Una ley para todo un estado (el Estado de México) va en un solo renglón.
+    porm = {}
+    for k, w in ESPERA.items():
+        porm.setdefault((w['url'], w['motivo']), []).append((k, w))
+    espera = '; '.join('%s: <a href="%s">su ley</a> %s' % (
+        esc(ws[0][1]['nombre']) if len(ws) == 1 else 'Los %d municipios de %s' % (len(ws), esc(ENTIDADES[ws[0][0].split('-')[0]])),
+        esc(u), esc(mo)) for (u, mo), ws in porm.items())
+    nmun = {e: sum(1 for c, _ in _padron_ent(e) if int(c) < 990) for e in REGISTRO}
     reg_filas = ''.join('<tr><th scope="row">%s</th><td>%s</td><td>%d · %d</td><td><a href="%s">%s</a>. %s %s</td></tr>' % (
         esc(ENTIDADES[e]), format(nmun.get(e, 0), ','), sum(1 for m in MUNICIPIOS if m['ent'] == e),
         sum(1 for k in ESPERA if k.startswith(e + '-')), esc(r['url']), esc(r['donde']), esc(r['como']), esc(r.get('ojo', '')))
@@ -2814,6 +2965,41 @@ def prueba():
         if 'Código Fiscal y Presupuestario para el Municipio de Puebla' not in e[0] or 'Código Fiscal del Estado de Querétaro' not in e[1]:
             mal += 1
             print('✗ el adeudo de Puebla y de Querétaro debe decir que sus recargos están pendientes', e)
+    # Tijuana (arts. 4, 5 y 7) y Mérida (arts. 47 y 48), Ronda 7.
+    tm_esp = [('bc004', 1e6, 'edif', 4290.0), ('bc004', 1e6, 'com', 4100.0), ('bc004', 1e6, 'baldio', 3700.0), ('bc004', 1e6, 'rust', 3700.0),
+              ('bc004', 50000, 'edif', 468.07), ('yuc050', 1e6, 'edif', 1890.48), ('yuc050', 30e6, 'edif', 112382.52),
+              ('yuc050', 50000, 'edif', 117.3), ('yuc050', 1e6, 'baldio', 1890.48)]
+    for mid, v, t, esp in tm_esp:
+        if anual(M(mid), v, t) != esp:
+            mal += 1
+            print('✗ Tijuana o Mérida', mid, v, t, anual(M(mid), v, t), 'esperaba', esp)
+    tm_x = [('bc004', {'vf': 1e6, 'tipo': 'edif', 'ben': '', 'pago': 'ene'}, 3775.2), ('bc004', {'vf': 1e6, 'tipo': 'edif', 'ben': '', 'pago': 'mar'}, 4075.5),
+            ('bc004', {'vf': 1e6, 'tipo': 'com', 'ben': '', 'pago': 'bim'}, 4100.0), ('yuc050', {'vf': 1e6, 'tipo': 'edif', 'ben': '', 'pago': 'bim'}, 1890.48),
+            ('yuc050', {'vf': 1e6, 'tipo': 'edif', 'ben': '', 'pago': 'feb'}, 1701.43)]
+    prog10 = ("global.window={};global.document={getElementById:function(){return null}};require(%s);var D=%s;"
+              "console.log(JSON.stringify(%s.map(function(x){var m=D.mun.filter(function(y){return y.id===x[0]})[0];"
+              "return window.AuditorPredial.calcula(D,m,x[1]).fin;})));"
+              "console.log(JSON.stringify(['bc004','yuc050'].map(function(i){var m=D.mun.filter(function(y){return y.id===i})[0];"
+              "return window.AuditorPredial.adeudo(D,m,{imp:100,da:2025,db:1,ha:2025,hb:6,f:[2026,6,1],multa:0,sit:'esp'}).error||'';})));"
+              % (json.dumps(js), json.dumps(D), json.dumps([[a, b] for a, b, _ in tm_x])))
+    r10 = subprocess.run(['node'], input=prog10, capture_output=True, text=True)
+    l10 = r10.stdout.strip().split('\n')
+    if len(l10) != 2:
+        mal += 1
+        print('✗ Tijuana y Mérida no corrieron en el navegador', r10.stderr[:300])
+    else:
+        for (mid, x, esp), n in zip(tm_x, json.loads(l10[0])):
+            if n != esp:
+                mal += 1
+                print('✗ Tijuana o Mérida en el navegador', mid, x, n, 'esperaba', esp)
+        e = json.loads(l10[1])
+        if 'Ley de Hacienda Municipal del Estado de Baja California' not in e[0] or 'Ley de Ingresos del Municipio de Mérida 2026' not in e[1]:
+            mal += 1
+            print('✗ el adeudo de Tijuana y de Mérida debe decir que sus recargos están pendientes', e)
+    mex = [k for k in ESPERA if k.startswith('MÉX-')]
+    if len(mex) != 125 or ESPERA.get('MÉX-033', {}).get('nombre') != 'Ecatepec de Morelos' or any(m['ent'] == 'MÉX' for m in MUNICIPIOS):
+        mal += 1
+        print('✗ los 125 municipios del Estado de México deben esperar a que se coteje el art. 109 en su PDF', len(mex))
     if 'GTO-020' not in ESPERA:
         mal += 1
         print('✗ León debe seguir en espera hasta cotejar su art. 5 en el PDF')

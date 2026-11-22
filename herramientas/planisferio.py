@@ -1682,7 +1682,7 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
         'archivo': ARCHIVO, 'menu': 'Planisferio', 'menu_archivo': ARCHIVO,
         'icono': '🗺️', 'titulo': 'Planisferio', 'lema': 'México en un mapa: cada entidad, cada municipio, cada peso',
         'entrada': ('El dinero público tiene domicilio. Elige una dimensión y toca una entidad para entrar a su portal, con sus municipios. '
-                    'Todo sale de la Enciclopedia, con su fuente oficial y su etiqueta.'),
+                    'Todo sale de la base de la plataforma, con su fuente oficial y su etiqueta; abajo, todo lo que trae cada dimensión.'),
         # La imagen del encabezado (pedido del autor, 04-11-2026): el paisaje al
         # frente y la persona que lo mira, en sombra. planisferio.css la pone.
         'fondo': 'assets/auditor/img/planisferio-paisaje.webp', 'rubro': 'planisferio',
@@ -1694,6 +1694,14 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
             {'id': 'mapa', 'titulo': 'Juega con el mapa',
              'texto': 'Hoy se pintan %d dimensiones. Cada una trae su «Cómo leerla» y lo que su mapa no dice.' % len(pintadas),
              'tarjetas': [], 'bloque': bloque_mapa},
+            # Ronda 7 (22-11-2026, decisión del autor): la Enciclopedia se volvió Planisferio. Cada dimensión tiene su
+            # página con todo lo que trae (traslado.paginas_dim()).
+            {'id': 'todo', 'titulo': 'Todo lo de cada dimensión',
+             'texto': ('Lo que antes vivía en la Enciclopedia (Números, Datos y Aprende) ya vive aquí, repartido en las diez dimensiones: '
+                       'cada página es autónoma, con sus fuentes y las mismas cifras.'),
+             'tarjetas': [], 'bloque': '<nav class="pl-todo" aria-label="Las diez dimensiones">%s</nav>' % ''.join(
+                 '<a class="pl-todo-dim" href="planisferio-dim-%s.html" data-dim="%s"><span aria-hidden="true">%s</span><b>%s</b></a>'
+                 % (d[0], d[0], d[1], d[2]) for d in DIMENSIONES)},
         ] + ([] if not otras else [
             {'id': 'dimensiones', 'titulo': 'Las dimensiones que vienen',
              'texto': ('El Planisferio crece por entregas, una dimensión a la vez y, después, municipio por municipio. Mientras llegan al mapa, cada una ya tiene su lugar en la Enciclopedia:'),

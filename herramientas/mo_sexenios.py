@@ -334,7 +334,7 @@ def construir(base, ref):
   <aside class="mx-aviso">
     <p><b>Cómo leer el costo.</b> El costo de las obras es una suma de pesos de años distintos, entre 1988 y 2024, que no están deflactados a un año común. Sirve para dimensionar el orden de magnitud, no para afirmar una equivalencia exacta de poder adquisitivo: un peso de 1997 no compra lo mismo que uno de 2026, y preferimos decirlo a ocultarlo.</p>
     <p><b>De dónde sale cada cifra.</b> Del registro de megaobras de la plataforma, cotejado contra la cartera de inversión de Hacienda, la Cuenta Pública, el PEF y los informes de la Auditoría Superior de la Federación; cada obra lleva sus documentos. Lo que todavía nos deben las dependencias está en el <a href="pendientes.html">Registro de pendientes</a>. Si encuentras un error, <a href="comunidad-erratas.html">repórtalo</a>.</p>
-    <p>🎯 ¿Y cómo le fue a cada presidente en economía, deuda y fiscalización? La trivia, con el estado de cuenta de cada uno, está en <a href="aprende.html#trivia">Aprende › El examen de los presidentes</a>.</p>
+    <p>🎯 ¿Y cómo le fue a cada presidente en economía, deuda y fiscalización? La trivia, con el estado de cuenta de cada uno, está en <a href="numeros-trivia-presidentes.html">Planisferio › Financiera › El examen de los presidentes</a>.</p>
   </aside>
   <script type="application/json" id="mxDatos">{datos}</script>
 </div>'''.format(

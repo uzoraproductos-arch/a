@@ -557,3 +557,19 @@ a.sv-card:hover, a.sv-card:focus-visible, article.sv-card:hover, article.sv-card
 .sv-faq { margin: 8px 0; padding: 10px 14px; border-radius: 12px; background: #fff; border: 1px solid #dfe5f0; }
 .sv-faq > summary { min-height: 44px; display: flex; align-items: center; font-weight: 700; color: #0b2a63; cursor: pointer; }
 .sv-faq > p { margin: 6px 0 4px; line-height: 1.55; }
+/* Ronda 7 (22-11-2026): ¿Para quién es? — cada perfil en un desplegable, con su porqué y sus servicios. */
+.sv-pq { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+.sv-pq-p { border: 1px solid #d6deea; border-radius: 14px; background: #fff; padding: 0 14px; }
+.sv-pq-p > summary { display: grid; grid-template-columns: auto 1fr; column-gap: 10px; align-items: center; min-height: 56px; padding: 10px 0; cursor: pointer; list-style: none; }
+.sv-pq-p > summary::-webkit-details-marker { display: none; }
+.sv-pq-p > summary small { grid-column: 2; color: #44526b; font-size: 14px; }
+.sv-pq-p[open] > summary { border-bottom: 1px solid #e6ecf4; }
+.sv-pq-por, .sv-pq-gratis { margin: 10px 0; font-size: 16px; }
+.sv-pq-sv { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.sv-pq-sv a { display: inline-flex; align-items: center; min-height: 44px; padding: 6px 12px; border-radius: 999px; border: 1px solid #b9c7dc; color: #0b2a63; text-decoration: none; font-weight: 600; font-size: 15px; }
+.sv-pq-sv a:hover { background: #eef3fb; }
+.sv-pq-gratis a { min-height: 44px; display: inline-flex; align-items: center; }
+[data-theme="dark"] .sv-pq-p { background: #101b2e; border-color: #2a3b57; }
+[data-theme="dark"] .sv-pq-p > summary small { color: #c3cee0; }
+[data-theme="dark"] .sv-pq-sv a { color: #e8eefa; border-color: #5b6f91; }
+[data-theme="dark"] .sv-pq-sv a:hover { background: #16233a; }
