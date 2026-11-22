@@ -43,3 +43,11 @@
 .cf-fund { color: var(--ef-tenue); }
 .cf-nom { margin: 12px 0 0; padding: 12px 14px; border-radius: 10px; background: #f1f8f4; border: 1px solid #b9dcc6; }
 .cf-nom small { font-size: 16px; }
+/* El aviso del Vigía en Mi Auditavisión (22-11-2026, insp-mia.js). */
+.mia-aviso { margin: 14px 0; padding: 12px 14px; border-radius: 12px; line-height: 1.5; }
+.mia-aviso h3 { margin: 0 0 6px; }
+.mia-aviso ul { margin: 8px 0; padding-left: 20px; }
+.mia-aviso li { margin: 6px 0; }
+.mia-aviso-ok { background: #eef3fa; border: 1px solid #bcd0ea; color: #1d3a5f; }
+.mia-aviso-alerta { background: #fff6e6; border: 2px solid #e0a43a; color: #4a3008; }
+.mia-hist { color: inherit; opacity: .85; }

@@ -20,6 +20,8 @@ página (`servicio-<id>.html`) y su respuesta en el chat (`srv_<id>`):
 - `pal`: con qué palabras se pide en el chat (expresión válida en Python y en
   JavaScript, sobre el texto sin acentos y en minúsculas).
 - `no`: lo que el servicio no hace, en una oración.
+- `venta` (opcional): el módulo que arma su página de venta (`secciones()`),
+  como `vigia_venta` del Vigía de proveedores.
 
 **Ninguna cifra se escribe aquí** (AGENTS §2) y **nunca un monto**: la forma de
 cobro vive en `COBRO`. **Un servicio nuevo necesita aquí su ficha**, o la
@@ -85,6 +87,8 @@ FICHAS = {
     },
     'seguimiento': {
         'hace': [
+            ('📡', 'El aviso del Vigía en tu tablero', 'Tus proveedores contra el corte más nuevo de la 69-B cada vez que abres Mi Auditavisión: '
+             'lo que cambió desde tu última visita, con el oficio y la fecha. Solo en tu navegador.', 'herramienta-inspector-mia.html', 'Nuevo'),
             ('🔔', 'La 69-B comparada cada semana', 'El Vigía 69-B anota altas, cambios de situación, bajas y cambios de razón social, por RFC.',
              'herramienta-inspector-efos.html', 'Gratis'),
             ('📌', 'Mi Auditavisión', 'Tus proveedores y tus revisiones, guardados solo en tu navegador, para volver a ellos.', 'herramienta-inspector-mia.html', 'Gratis'),
@@ -97,6 +101,8 @@ FICHAS = {
         'refs': ['ref-cff', 'ref-sat-69b', 'ref-comprasmx'],
         'pal': r'vigia|vigilen|vigilar (mi|mis|a mis)|seguimiento periodico|me avisen|avisos? (de|cuando)|alertas? (de|cuando)',
         'no': 'El aviso dice qué cambió y con qué documento; qué hacer con tu proveedor lo decides tú.',
+        # La página de venta del Vigía de proveedores (texto aprobado el 22-11-2026): vigia_venta.secciones().
+        'venta': 'vigia_venta',
     },
     'facturas': {
         'hace': [

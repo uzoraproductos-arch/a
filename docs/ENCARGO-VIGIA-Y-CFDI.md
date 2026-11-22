@@ -153,6 +153,14 @@ la ASF, en una sola vista. Es la propuesta de política pública del autor
 («revisar en qué se gasta lo que se cobra»). Las cifras se leen de los módulos
 que ya las cotejan; ninguna se escribe a mano.
 
+**Hecho el 22-11-2026 (sello 20261122q):** `ruta()` de `presupuesto_modulos.py`, sección «La ruta completa del
+impuesto» de `numeros-camino-del-dinero.html#ruta-impuesto`. Sigue 2024, el último año con las cinco estaciones
+publicadas: LIF y PEF aprobados (`cuentaFederal2024.aprobado`), ingresos presupuestarios del sector público
+(`finanzas_sexenales`, EOFP), gasto ejercido de la Cuenta Pública (`ejercido`, `pagado`; la variación contra lo
+aprobado es `derivado`) y lo que la ASF dejó por aclarar (`cuenta_publica_asf.cp2024`). **Falta:** separar lo que
+recaudó el SAT de lo que ingresaron los organismos y las empresas del Estado (la serie que tenemos es el total del
+sector público presupuestario), y la ruta de 2025 cuando la ASF termine de revisar su Cuenta Pública.
+
 ---
 
 ## Terminado = AGENTS.md §5

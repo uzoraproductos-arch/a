@@ -1382,6 +1382,8 @@
       if (SAN.t.serv_sosten && /\bcomo (se )?(sostiene|financia|mantiene|gana dinero|ganan dinero)\b|\bde que vive|\bquien (los|la|le) (paga|financia|sostiene)|\bmodelo de negocio de auditavision/.test(t)) return sanTema('serv_sosten');
       if (SAN.t.srv_nomina && /\b(revis\w*|audit\w*|checa\w*|verific\w*) (de )?(la |mi |nuestra |las |mis )?nominas?\b|\b(revisen|auditen|chequen) (la |mi |nuestra )?nomina|\bauditoria de (la )?nomina|\brevision de (la )?nomina/.test(t) && !/\brecibos?\b|\bxml\b|\bcfdi\b/.test(t)) return sanTema('srv_nomina');
       if (SAN.t.srv_diligencia && /debida diligencia|antes de contratar|\b(como|quiero|puedo) (reviso|revisar|checo|checar|investigo|investigar|verifico|verificar) (a )?(un|una|mi|mis) (proveedor|proveedores|empresa)\b/.test(t)) return sanTema('srv_diligencia');
+      /* El Vigía de proveedores (22-11-2026, vigia_venta.py): su nombre o pedir que avisen de un proveedor, aunque no diga «servicio». */
+      if (SAN.t.srv_seguimiento && /\bvigia de proveedores\b|\baviso del vigia\b|\bavis(en|an|ar|eme|enme) (cuando|si) (cambi\w+ )?(la situacion de )?(mi|mis|un|alguno de mis) proveedor/.test(t)) return sanTema('srv_seguimiento');
       /* Los servicios (18-11-2026, servicios_fichas.py): uno por su nombre, una familia o un perfil, o el catálogo.
          Solo si la pregunta habla de servicios o de contratarlos; gana el más específico (pri) y, si empatan, la frase más larga. */
       if (/servicio|cotiz|contrat|encarg|cuanto (cuesta|cobran)|como (se )?cobra|que incluye|que (me )?entregan|en que consiste|ofrecen|me sirve|me conviene|talleres?|capacitacion|revisen|licencia|radiografia|kit de entrega/.test(t)) {

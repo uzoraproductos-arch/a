@@ -1701,6 +1701,7 @@ _AV_NAVEGADOR = [
     ('No medir este navegador', 'av-sin-medir', 'Solo si apagas la medición de uso (abajo): recuerda que no quieres que se mida.'),
     ('Tus respuestas', 'av-caso', 'Lo que le preguntaste al Auditor, hasta 60: la pregunta, la fecha, el modo, la respuesta en corto, su página y los servicios que vienen al caso, para armar «Tus respuestas» (mis-respuestas.html). Nunca sale del navegador; la borras ahí mismo, o una por una.'),
     ('Tus dictámenes de cada expediente', 'av-dics', 'La pregunta, el folio y el enlace de los dictámenes que generas y tocan una investigación, hasta 60, para listarlos en su expediente. Los borras ahí mismo.'),
+    ('Mi Auditavisión', 'av-mia', 'Los RFC de tus proveedores, el resumen de las revisiones que guardas y, para el aviso del Vigía de proveedores, la situación en la lista 69-B que viste de cada uno y el corte del SAT de tu última visita. Nunca sale del navegador; lo borras con «🗑️ Borrar todo mi tablero».'),
     ('Las columnas que sigues', 'av-sigo', 'Cuáles casos de Verificamos sigues y qué versión viste, para avisarte cuando cambian.'),
     ('Ágora cívica', 'auditavision_foro_debates y otras', 'Tus hilos, tus apoyos y el seudónimo que elijas. No se publican: viven solo en tu navegador.'),
     ('Preferencias de las herramientas', 'av-am-reloj, crReloj y otras', 'Cómo dejaste un reloj, una unidad o un filtro.'),
@@ -3630,6 +3631,10 @@ def servicio_paginas(comun):
                 {'id': 'fundamento', 'titulo': 'Su fundamento, en la Biblioteca del Erario', 'pre': 'La ley y los términos', 'tarjetas': [],
                  'texto': 'Los términos del Diccionario, las leyes y documentos de Referencias y las páginas de la Enciclopedia en que se apoya este servicio.',
                  'bloque': biblio}]
+        if f.get('venta'):
+            # La página de venta de un servicio (el Vigía, 22-11-2026): su módulo arma las secciones y las cifras.
+            import importlib
+            secs[1:1] = importlib.import_module(f['venta']).secciones()
         if hace_x:
             secs.insert(1, {'id': 'hace', 'titulo': 'Lo que la plataforma ya hace por ti, gratis', 'pre': 'Empieza hoy', 'tarjetas': [],
                  'texto': 'Las aplicaciones con que trabaja este servicio. Antes de pedirlo, úsalas tú: cada una se abre montada en el chat del Auditor, '

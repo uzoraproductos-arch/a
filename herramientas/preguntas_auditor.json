@@ -3318,6 +3318,18 @@
    "dice": [
     "no existía cuando se levantó el Censo"
    ]
+  },
+  {
+   "q": "¿Cuál es la ruta completa del impuesto?",
+   "ir": "numeros-camino-del-dinero.html#pmRutaTit"
+  },
+  {
+   "q": "¿Cómo funciona el aviso del Vigía de proveedores?",
+   "ir": "servicio-seguimiento.html"
+  },
+  {
+   "q": "Quiero que me avisen cuando cambie la situación de mis proveedores",
+   "ir": "servicio-seguimiento.html"
   }
  ]
 }
