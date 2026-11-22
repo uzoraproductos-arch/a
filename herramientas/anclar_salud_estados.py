@@ -31,7 +31,8 @@ acceso (AGENTS.md, §0 ter):
 Lo que el ISSSTE no deja cotejar: cuántos derechohabientes tiene en cada
 estado y cuántas consultas, egresos y cirugías dio. Su anuario estadístico
 (issste.gob.mx/datosabiertos/anuarios) no respondió el 27-10-2026 ni el
-03-11-2026; queda en la ficha «salud-issste-servicios».
+03-11-2026. Desde el 22-11-2026 eso sale del Anuario Estadístico 2025
+(anclar_issste_anuario.py → gestion_salud.issste_anuario()).
 
 Escribe docs/salud/imss-issste-estados-2025.json, con la huella de cada
 archivo y los totales nacionales de cada cuadro. Idempotente.

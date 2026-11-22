@@ -567,11 +567,13 @@ def _charla(d):
             'mapa': 'numeros-mapa-del-gasto-federalizado.html', 'num': num, 'datos': asistente_datos.datos(d, num, D),
             'leg': asistente_legislativo.legislativo(), 'jud': asistente_judicial.judicial(d),
             # Los servicios (servicios_fichas.py) con quién puede pedirlos y los datos de la capa de cada modo (asistente_servicios.py, 19-11-2026).
-            'san': informe_sancion.bot(__import__('asistente_servicios').enriquece(__import__('territorio_modulos').temas_bot(d))), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d), 'apu': __import__('administracion_publica').chat(d), 'soc': __import__('dimension_social').chat(d),
+            'san': informe_sancion.bot(__import__('asistente_servicios').enriquece(__import__('territorio_modulos').temas_bot(d))), 'sal': gestion_salud.salud(d), 'amg': gestion_ambiental.temas(d), 'apu': __import__('administracion_publica').chat(d), 'soc': __import__('dimension_social').chat(d), 'viv': __import__('cc_predial').chat_shf(),
             # El padrón del SAT, las donatarias y las asociaciones religiosas (padron_sat.py, 19-11-2026).
             'pad': __import__('padron_sat').chat(d),
             # Nepotismo y cargos publicos (28-10-2026): la tabla de la calculadora.
             'nep': nepotismo.bot(),
+            # Contratos × lista 69-B × ASF (04-11-2026): el hallazgo o el antecedente, y su sección.
+            'cru': __import__('cruce_contratos').bot(),
             # La memoria de promesas (01-11-2026): promesa → Presupuesto → Cuenta Pública → ASF.
             'prom': __import__('promesas').datos(),
             # Agenda del erario de Noticias (28-10-2026): las fechas que fija la ley.

@@ -66,6 +66,35 @@ PROPIOS = [
      'Ninguna dependencia está obligada a publicarlo en un solo lugar: cada Comité de Adquisiciones aprueba su escalón (Reglamento de la LAASSP, art. 41, apartado A)',
      'https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LAASSP_orig_18dic25.doc',
      'Reglamento de la LAASSP (DOF 18-12-2025)', [('contratos-publicos.html#fraccionamiento', 'Contratos públicos · Señales de fraccionamiento')]),
+    # Contratos × lista 69-B × ASF (04-11-2026, herramientas/cruce_contratos.py).
+    ('cnet-historico', 'Contratos públicos', 'Los contratos de CompraNet, de 2002 a 2024, para cruzarlos con la lista 69-B',
+     'CompraNet fue la plataforma de compras del gobierno federal hasta abril de 2025, y sus Datos Abiertos traen un archivo de contratos por año. '
+     'Su portal (upcp-compranet.hacienda.gob.mx) no respondió desde el servidor de la plataforma el 04-11-2026 (error 502 de Hacienda). '
+     'El importador ya está listo: basta bajar los archivos y correr herramientas/actualizar_compranet.py. Mientras tanto, los años anteriores a 2025 no tienen contratos en el cruce.',
+     PLATAFORMA, 'https://upcp-compranet.hacienda.gob.mx/', 'CompraNet (Secretaría de Hacienda)',
+     [('herramienta-inspector-cruce.html#por-anio', 'Modo Inspector · Contratos, lista 69-B y ASF')]),
+    ('asf-cp-2000-2001', 'Fiscalización', 'Auditorías y acciones de la ASF de las Cuentas Públicas 2000 y 2001',
+     'La serie estadística oficial de la Auditoría Superior («Estadísticas de la Fiscalización Superior de la Cuenta Pública en México», corte al 31-03-2026) empieza en la Cuenta Pública 2002. '
+     'Las cifras de 2000 y 2001 hay que buscarlas en los informes de esos años, que la plataforma aún no ha revisado.',
+     PLATAFORMA, 'https://www.asf.gob.mx/Section/58_Informes_de_auditoria', 'Informes de auditoría de la ASF',
+     [('herramienta-inspector-cruce.html#por-anio', 'Modo Inspector · Contratos, lista 69-B y ASF')]),
+    ('cruce-fecha-firma', 'Contratos públicos', 'La fecha de firma de los contratos de ComprasMX con empresas de la lista 69-B',
+     'ComprasMX publica la fecha de firma de cada contrato, pero el catálogo de la plataforma solo guardaba la de publicación. '
+     'Ya se corrigió el programa (actualizar_comprasmx.py guarda «cruce69b» con la fecha de firma); falta volver a correrlo con los archivos de Datos Abiertos. '
+     'Mientras tanto, el cruce compara la fecha de publicación contra la del DOF y lo dice.',
+     PLATAFORMA, 'https://comprasmx.buengobierno.gob.mx/datos-abiertos', 'Datos Abiertos de ComprasMX',
+     [('herramienta-inspector-cruce.html#hallazgos', 'Modo Inspector · Contratos, lista 69-B y ASF')]),
+    ('cruce-fecha-presunto', 'Contratos públicos', 'La fecha en que entraron como presuntas las empresas que ya salieron de la lista 69-B',
+     'El listado completo del SAT trae, por contribuyente, la fecha de cada etapa (presunto, desvirtuado, definitivo, sentencia favorable). '
+     'La plataforma solo guardaba la de su situación actual. Ya se corrigió el programa (actualizar_69b.py); falta volver a correrlo con el archivo del SAT, '
+     'que no abrió desde el servidor de la plataforma el 04-11-2026. Sin esa fecha no se sabe si un contrato anterior a la salida fue mientras la empresa era presunta.',
+     PLATAFORMA, 'https://www.gob.mx/sat/acciones-y-programas/notificacion-a-contribuyentes-con-operaciones-presuntamente-inexistentes-y-listados-definitivos-333336',
+     'SAT, listados del artículo 69-B', [('herramienta-inspector-cruce.html#metodo', 'Modo Inspector · Contratos, lista 69-B y ASF')]),
+    ('cruce-asf-empresa', 'Fiscalización', 'Qué empresas de la lista 69-B aparecen en los informes individuales de la ASF',
+     'Las estadísticas de la ASF son por año, tipo de acción y sector, no por proveedor. Para saber si la ASF observó a una empresa de la lista hay que leer los informes individuales '
+     'de cada Cuenta Pública, que están publicados y la plataforma aún no cruza.',
+     PLATAFORMA, 'https://www.asf.gob.mx/Section/58_Informes_de_auditoria', 'Informes de auditoría de la ASF',
+     [('herramienta-inspector-cruce.html#por-anio', 'Modo Inspector · Contratos, lista 69-B y ASF')]),
     ('asf-matriz-2018', 'Fiscalización', 'Matriz de Datos Básicos de la Cuenta Pública 2018',
      'La ASF no publicó en su portal la matriz de la Cuenta Pública 2018, como sí lo hizo con las demás. Sin ella, la serie de montos por aclarar tiene un hueco en ese año.',
      'Auditoría Superior de la Federación (ASF)', 'https://www.asf.gob.mx/Section/58_Informes_de_auditoria',
@@ -227,13 +256,6 @@ PROPIOS = [
      'Instituto Mexicano del Seguro Social (IMSS): tiene el registro y no lo encontramos publicado', 'https://www.imss.gob.mx/conoce-al-imss/memoria-estadistica-2025',
      'Memoria Estadística 2025 (IMSS)',
      [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-imss.html', 'Datos · Salud pública · El IMSS')]),
-    ('salud-issste-servicios', 'Salud', 'Derechohabientes, consultas, egresos hospitalarios y cirugías del ISSSTE en 2025, en el país y en cada estado',
-     'El ISSSTE publica un anuario estadístico cada año (su página de anuarios lista el de 2025), pero el 27-10-2026 y otra vez el 03-11-2026 su servidor '
-     '(issste.gob.mx/datosabiertos) no respondió, y no se pudo cotejar. Sin él no se sabe cuántas personas atiende el ISSSTE en cada estado ni cuánto les resolvió. '
-     'El gasto del ISSSTE sí está en la plataforma, con la Cuenta Pública 2025, y sus unidades, camas, médicos y enfermería por estado, con el registro sectorial de la Secretaría de Salud (DGIS).',
-     PLATAFORMA, 'https://www.gob.mx/issste/documentos/anuarios-estadisticos', 'Anuarios estadísticos (ISSSTE)',
-     [('herramienta-inspector-pregunta.html', 'Pregúntale al Auditor'), ('datos-salud-sistema.html', 'Datos · Salud pública · Seguro Popular, INSABI, IMSS-Bienestar e ISSSTE'),
-      ('planisferio.html', 'Planisferio · Salud pública')]),
     ('salud-imss-bienestar', 'Salud', 'Consultas y gasto completo del IMSS-Bienestar en 2025',
      'Sus egresos hospitalarios y sus cirugías de 2025 ya están en la plataforma desde el 18-11-2026, con la base de egresos de la Secretaría de Salud (DGIS), hospital por hospital. '
      'Lo que falta son sus consultas y su gasto completo: en conferencias se han dado cifras de las consultas de 2025, pero la plataforma no encontró un informe oficial que las traiga, '

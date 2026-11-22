@@ -124,7 +124,7 @@ TEMAS = [
     ('legislativa', '🏛️', 'Su congreso', 'Lo que gastó su congreso, cuántas curules tiene y el tope de la Constitución.'),
     ('judicial', '⚖️', 'Su Poder Judicial', 'Dos sectores: productividad, cargas y rezago (local y circuito federal) y su presupuesto, gasto en tiempo real, sueldos y prestaciones.'),
     ('salud', '🩺', 'Su salud pública', 'El IMSS y el ISSSTE en el estado: personas, consultas, médicos, camas y unidades.'),
-    ('social', '🫂', 'Su pobreza y sus carencias', 'Cuántas personas viven en pobreza, sus seis carencias y lo que le aporta la Federación.'),
+    ('social', '🫂', 'Su pobreza y sus carencias', 'Cuántas personas viven en pobreza, sus seis carencias, lo que le aporta la Federación y su gente, municipio por municipio.'),
     ('administracion', '🏢', 'Su administración pública', 'El gobierno que ejecuta: su personal, lo que ejerció y sus contratos sin concurso.'),
     ('penal', '🚨', 'Su fraude y su cifra oculta', 'Cuánto fraude dice sufrir su gente, cuántas carpetas abrió su fiscalía y cuántos delitos no llegan a una.'),
     ('ambiental', '🌎', 'Sus recursos naturales', 'Sus acuíferos, bosques, incendios, pesca, minas y su refinería, si la tiene.'),
@@ -144,6 +144,22 @@ def subpagina(a, tema):
 
 def _json(x):
     return json.dumps(x, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+
+
+def datos_externos(nombre, x):
+    """Escribe los datos de una página en assets/auditor/data/<nombre> y
+    devuelve su dirección versionada por la huella del contenido (Ronda 2,
+    22-11-2026: rendimiento en celular). Así el HTML no carga cientos de KB en
+    línea, el navegador guarda los datos aparte y un cambio de cifras cambia
+    la dirección sola. La generación da el mismo archivo dos veces seguidas."""
+    import hashlib
+    t = json.dumps(x, ensure_ascii=False, separators=(',', ':'))
+    ruta = os.path.join(RAIZ, 'assets', 'auditor', 'data', nombre)
+    previo = open(ruta, encoding='utf-8').read() if os.path.exists(ruta) else None
+    if previo != t:
+        with open(ruta, 'w', encoding='utf-8', newline='\n') as f:
+            f.write(t)
+    return 'assets/auditor/data/%s?v=%s' % (nombre, hashlib.sha256(t.encode('utf-8')).hexdigest()[:12])
 
 
 def _padron():
@@ -173,12 +189,18 @@ LENTES_MUN = [
      'La obra pública y los proyectos productivos que pagó cada municipio en 2024: su capítulo de inversión pública. Un municipio con cuenta y sin ese capítulo reportó $0.'),
     ('invp', 'Inversión de cada $100', 'verde',
      'De cada $100 de su egreso de 2024, cuántos fueron a inversión pública: inversión ÷ egreso total × 100. El egreso total del INEGI cuenta también lo que quedó en caja al cierre. Ojo: donde el fondo de infraestructura social municipal (FAIS) pesa mucho, la proporción sube sola, porque la ley lo destina a obra para la población en pobreza (Ley de Coordinación Fiscal, art. 33).'),
+    ('pob', 'Población', 'azul',
+     'Cuántas personas vivían en cada municipio según el Censo de Población y Vivienda 2020 del INEGI, el último conteo completo. Es de 2020, no de hoy.'),
+    ('iph', 'Ingreso por habitante', 'verde',
+     'Cuánto ingresó cada municipio en 2024 por cada persona que vivía ahí en 2020: ingreso total 2024 ÷ población del Censo 2020. Mezcla dos años, porque el INEGI no ha publicado un conteo más reciente: es una referencia para comparar, no lo que le toca a cada quien.'),
     ('dpag', 'Pagó de deuda', 'rojo',
      'Lo que cada municipio pagó en 2024 por sus créditos: el capital que devolvió, los intereses y las comisiones. Es lo que pagó, no lo que debe. En el tono más claro, los que reportaron $0.'),
     ('emp', 'Pidió prestado', 'rojo',
      'Los préstamos que cada municipio recibió en 2024 (el concepto «Empréstitos» de su cuenta). Casi todos reportaron $0: van en el tono más claro.'),
 ]
 PCT_MUN = ('dep', 'invp')
+# Las lentes que no van en millones de pesos: su unidad y, si no es el del padrón, su año.
+UNI_MUN = {'pob': ('per', 2020), 'iph': ('pes', '2024 ÷ 2020')}
 # Las lentes donde el $0 es lo común: el $0 lleva su propio tono y los cortes
 # se sacan de los que sí reportaron algo.
 CERO_MUN = ('dpag', 'emp')
@@ -196,6 +218,25 @@ def inv_mun(padron):
         raise SystemExit('planisferio: municipios-inversion.js no trae a los mismos municipios con cuenta que el padrón (sobran %s; faltan %s)' % (
             sorted(set(iv['mun']) - con)[:5], sorted(con - set(iv['mun']))[:5]))
     return iv
+
+
+_POB = []
+
+
+def pob_mun(padron):
+    """La población de cada municipio (municipios-poblacion.js, la escribe
+    anclar_poblacion_municipios.py desde el Censo 2020). Se detiene si trae una
+    clave que no está en el padrón o si no suma el país."""
+    if _POB:
+        return _POB[0]
+    t = open(os.path.join(RAIZ, 'assets', 'auditor', 'js', 'municipios-poblacion.js'), encoding='utf-8').read()
+    i = t.index('window.AUDIT_MUN_POB =') + len('window.AUDIT_MUN_POB =')
+    pv = json.loads(t[i:t.rindex(';')])
+    pad = {m['cve'] + r[0] for m in padron['ent'].values() for r in m['lista']}
+    if not set(pv['mun']) <= pad or sum(v[0] for v in pv['mun'].values()) != pv['nacional']:
+        raise SystemExit('planisferio: municipios-poblacion.js no cuadra con el padrón (sobran %s)' % sorted(set(pv['mun']) - pad)[:5])
+    _POB.append(pv)
+    return pv
 
 
 def deu_mun(padron):
@@ -219,11 +260,11 @@ MAPA_MUN = """<div class="pl-lentes" role="radiogroup" aria-label="Qué ver en e
               <figcaption class="pl-leyenda" id="plMunLeyenda"></figcaption>
             </figure>
             <aside class="pl-ficha" id="plMunFicha" aria-live="polite">
-              <p class="pl-ficha-vacia"><b>Toca un municipio.</b> Verás lo que ingresó en %d, de dónde le llegó, lo que invirtió, lo que pagó de deuda y la puerta a su ficha en el Auditor de entes.</p>
+              <p class="pl-ficha-vacia"><b>Toca un municipio.</b> Verás cuántas personas viven ahí, lo que ingresó en %d, de dónde le llegó, lo que invirtió, lo que pagó de deuda y la puerta a su ficha en el Auditor de entes.</p>
             </aside>
           </div>
           <p class="pl-pie">Límites: %s (<a href="%s">descarga del INEGI</a>), integrados el %s; huella SHA-256 del archivo de origen <code>%s</code>. Simplificados para verse en pantalla. %s
-          Cifras: INEGI, finanzas públicas municipales %d %s. %s</p>
+          Cifras: INEGI, finanzas públicas municipales %d %s. Población: INEGI, Censo de Población y Vivienda 2020 %s (<a href="%s">datos abiertos</a>, huella <code>%s</code>); los municipios creados después del Censo no tienen esa cifra. %s</p>
           <script type="application/json" id="plMunDatos">%s</script>"""
 
 
@@ -244,6 +285,9 @@ def _mapa_mun(e, m, g, ref, padron, iv, dv):
         sda_m = (dv.get('sda') or {}).get('m', {}).get(m['cve'] + r[0])
         if sda_m:
             x['sda'] = sda_m
+        pb = pob_mun(padron)['mun'].get(m['cve'] + r[0])
+        if pb:
+            x['pob'] = pb[0]
         if len(r) >= 10:
             ing, part, aport, fortamun, fismdf, predial = r[2], r[3], r[4], r[5], r[6], r[7]
             x.update({'ing': round(ing / 1e6, 1), 'part': round(part / 1e6, 1), 'aport': round(aport / 1e6, 1),
@@ -253,6 +297,8 @@ def _mapa_mun(e, m, g, ref, padron, iv, dv):
             x.update({'inv': round(v[0] / 1e6, 1), 'invp': round(v[0] / r[9] * 100, 1) if r[9] else None})
             d = dv['mun'][m['cve'] + r[0]]
             x.update({'dpag': round((d[1] + d[2] + d[3]) / 1e6, 1), 'emp': round(d[5] / 1e6, 1), 'adef': round(d[4] / 1e6, 1)})
+            if pb:
+                x['iph'] = round(ing / pb[0])
         datos.append(x)
     svg = '<svg class="pl-svg pl-svg-mun" viewBox="0 0 %s %s" role="group" aria-label="Los municipios de %s">%s</svg>' % (
         g['vb'][0], g['vb'][1], e['name'], ''.join(
@@ -263,10 +309,12 @@ def _mapa_mun(e, m, g, ref, padron, iv, dv):
     sin = None if m['conCifra'] else ('Las alcaldías de la Ciudad de México no rinden cuenta municipal al INEGI: '
                                       'su dinero va dentro del presupuesto de la Ciudad.')
     info = {'ent': e['abbr'], 'cve': m['cve'], 'pend': 'municipios-sin-cuenta', 'anio': padron['anio'], 'sin': sin,
-            'lentes': [{'id': i, 'nom': n, 'pal': p, 'que': q, 'u': 'pct' if i in PCT_MUN else 'mdp', 'cero': i in CERO_MUN} for i, n, p, q in LENTES_MUN], 'm': datos}
+            'lentes': [dict({'id': i, 'nom': n, 'pal': p, 'que': q, 'u': 'pct' if i in PCT_MUN else 'mdp', 'cero': i in CERO_MUN},
+                           **({'u': UNI_MUN[i][0], 'anio': UNI_MUN[i][1]} if i in UNI_MUN else {})) for i, n, p, q in LENTES_MUN],
+            'pob': {'anio': 2020, 'ref': 'ref-inegi-censo-2020', 'url': pob_mun(padron)['pagina']}, 'm': datos}
     return MAPA_MUN % (
         '' if sin else lentes, svg, padron['anio'], g['fuente'], g['url'], g['integrado'], g['sha256'][:12] + '…', g['aviso'],
-        padron['anio'], ref('ref-inegi-efipem'),
+        padron['anio'], ref('ref-inegi-efipem'), ref('ref-inegi-censo-2020'), pob_mun(padron)['pagina'], pob_mun(padron)['sha256'][:12] + '…',
         ('En gris, todas, porque no rinden cuenta municipal %s.' % chip('pendiente', 'municipios-sin-cuenta') if sin else
          'En gris, los municipios que no rindieron su cuenta de %d %s.' % (padron['anio'], chip('pendiente', 'municipios-sin-cuenta'))),
         _json(info))
@@ -356,6 +404,9 @@ def _datos(base, padron):
     import dimension_social as dso
     so = dso.estados(base)
     sat, sat_meta = __import__('padron_sat').planisferio(base)
+    shf = __import__('cc_predial').shf()
+    if len(shf['est']) != 32:
+        raise SystemExit('planisferio: el Índice SHF no trae a las 32 entidades (%d)' % len(shf['est']))
     import dimension_penal as dpe
     pn = dpe.estados(base)
     pc = dpe.carpetas(base)
@@ -415,7 +466,9 @@ def _datos(base, padron):
         h = sa[e['abbr']]
         filas[-1].update({'imA': h['ads'], 'imX': h['conx'], 'imQ': h['iq'], 'imK': h['camk'],
                           'isM': h['is']['med'], 'isK': h['is']['cam'], 'isU': h['is']['u'], 'imM': h['im']['med'],
+                          'iaD': h['ia']['derechohabientes'], 'iaX': h['ia']['conx'], 'iaQ': h['ia']['cirugias'],
                           'sal': {'con': h['con'], 'esp': h['esp'], 'urg': h['urg'], 'egr': h['egr'], 'camc': h['camc'], 'iqk': h['iqk'],
+                                  'ic2': h['ia']['consultas'], 'ieg': h['ia']['egresos'], 'iur': h['ia']['urgencias'],
                                   'ie': h['is']['enf'], 'ic': h['is']['cons'], 'mu': h['im']['u'], 'mk': h['im']['cam'], 'me': h['im']['enf'],
                                   'oo': [n for n, _ in h.get('ooad', [])]}})
         # Su administración pública (03-11-2026): lo que su gobierno le reportó
@@ -425,12 +478,18 @@ def _datos(base, padron):
         # federales de 2026 por persona en pobreza (derivado).
         z = so[e['abbr']]
         filas[-1].update({'soP': z['p'], 'soN': z['pers'], 'soX': z['x'], 'soI': z['ing'], 'soS': z['car']['seg'], 'soA': z['car']['sal'],
-                          'soR': z['car']['rez'], 'soQ': z['r33'],
+                          'soR': z['car']['rez'], 'soQ': z['r33'], 'soT': pob_mun(padron)['ent'][padron['ent'][e['abbr']]['cve']],
                           'soc': {'m': z['m'], 'ix': z['ingx'], 'v': z['car']['viv'], 'b': z['car']['bas'], 'al': z['car']['ali'], 'pt': z['pobT'], 'u': z['url']}})
         # Su padrón del SAT (19-11-2026, padron_sat.py): contribuyentes activos por
         # domicilio fiscal, por cada 100 habitantes, y donatarias autorizadas.
         z = sat[e['abbr']]
         filas[-1].update({'sat': z['n'], 'satH': z['h'], 'don': z['don']})
+        # El precio de la vivienda (21-11-2026): el Índice SHF de cada estado, lo
+        # mismo que lee el simulador del predial (cc_predial.shf()). Va junto al
+        # valor fiscal, nunca en su lugar: no es un avalúo.
+        v = shf['est'].get(e['abbr'])
+        filas[-1].update({'shfI': v['i'] if v else None, 'shfV': v['var'] if v else None,
+                          'shfM': v['precios']['p50'] if v else None})
         # Su fraude y su cifra oculta (INEGI, ENVIPE 2026, datos de 2025).
         w = pn[e['abbr']]
         k = pc[e['abbr']]
@@ -510,6 +569,18 @@ LENTES = [
     {'id': 'don', 'dim': 'financiera', 'fmt': 'n', 'nom': 'Donatarias autorizadas', 'pal': 'verde', 'est': 'oficial', 'anio': 2026,
      'que': ('Organizaciones civiles y fideicomisos con domicilio en el estado que el SAT autorizó para recibir donativos deducibles del ISR, '
              'según el Anexo 14 de la Resolución Miscelánea Fiscal publicado en enero.')},
+    # El precio de la vivienda (21-11-2026, el simulador del predial ligado al
+    # Planisferio): el Índice SHF de Precios de la Vivienda, por estado.
+    {'id': 'shfI', 'dim': 'financiera', 'fmt': 'dec1', 'nom': 'Índice SHF de precios de la vivienda', 'pal': 'oro', 'est': 'oficial', 'anio': 2026,
+     'que': ('Cómo ha cambiado el precio de la vivienda con crédito hipotecario en cada estado desde 2017 (2017 = 100), según los avalúos que '
+             'registra la Sociedad Hipotecaria Federal. Un índice de 210 quiere decir que la vivienda vale 2.1 veces lo que valía en 2017. '
+             'No es el valor de ningún predio ni un avalúo, y no se compara con el valor catastral: es otra medición.')},
+    {'id': 'shfV', 'dim': 'financiera', 'fmt': 'pct', 'nom': 'Cuánto subió la vivienda en un año', 'pal': 'oro', 'est': 'oficial', 'anio': 2026,
+     'que': ('La variación anual del Índice SHF: cuánto cambió el precio de la vivienda frente al mismo trimestre del año anterior, tal como la publica '
+             'la SHF (cifras preliminares). No dice cuánto debe subir el predial: el predial lo fija cada ley de ingresos con su tabla de valores.')},
+    {'id': 'shfM', 'dim': 'financiera', 'fmt': 'pesos', 'nom': 'Precio mediano de la vivienda', 'pal': 'oro', 'est': 'oficial', 'anio': 2026,
+     'que': ('El precio de la vivienda que queda a la mitad de los avalúos del estado en el año: la mitad costó menos y la mitad más. '
+             'Son pesos corrientes de viviendas con crédito hipotecario, no de toda la vivienda, y no es el valor de ningún predio.')},
     # La dimensión de la deuda (03-11-2026): lo que debe cada gobierno estatal
     # y los tres indicadores con que lo mide el Sistema de Alertas.
     {'id': 'deuda', 'dim': 'deuda', 'fmt': 'mdp', 'nom': 'Lo que debe', 'pal': 'rojo', 'est': 'oficial', 'anio': 2025,
@@ -595,11 +666,21 @@ LENTES = [
     {'id': 'imK', 'dim': 'salud', 'fmt': 'dec2', 'nom': 'IMSS · Camas por cada mil adscritos', 'pal': 'naranja', 'est': 'derivado', 'anio': 2025,
      'que': ('Las camas censables (las de hospitalización, sin urgencias ni recuperación) del IMSS en cada estado por cada mil personas adscritas. '
              'Dice con cuánto cuenta, no cuántas están ocupadas ni si hay personal para usarlas.')},
+    # El Anuario Estadístico 2025 del ISSSTE (22-11-2026): cuántas personas
+    # atiende en cada estado y qué les resolvió.
+    {'id': 'iaD', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Derechohabientes', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
+     'que': ('Las personas con derecho a los servicios del ISSSTE en cada estado al 31 de diciembre de 2025, según su Anuario Estadístico: quienes trabajan para el gobierno '
+             'federal, sus pensionados y sus familias. No es la población del estado ni cuántas personas usaron los servicios.')},
+    {'id': 'iaX', 'dim': 'salud', 'fmt': 'dec2', 'nom': 'ISSSTE · Consultas por derechohabiente', 'pal': 'naranja', 'est': 'derivado', 'anio': 2025,
+     'que': ('Las consultas externas que dio el ISSSTE en el estado en 2025 entre sus derechohabientes (Anuario Estadístico 2025). Cuenta consultas, no si se resolvió el problema '
+             'ni cuánto se esperó, y las unidades de tercer nivel atienden también a gente de otros estados.')},
+    {'id': 'iaQ', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Cirugías', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
+     'que': ('Los procedimientos quirúrgicos que registró el ISSSTE en cada estado en 2025, según su Anuario Estadístico. Se cuentan donde se operó, no donde vive la persona.')},
     {'id': 'isM', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Médicos', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
      'que': ('Las médicas y médicos generales, especialistas y odontólogos del ISSSTE en cada estado, según el registro de recursos de la Secretaría de Salud (DGIS). '
-             'Cuántas personas atiende el ISSSTE en cada estado no se puede decir: su anuario no responde. Algunas unidades no reportaron personal.')},
+             'Algunas unidades no reportaron personal.')},
     {'id': 'isK', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Camas de hospital', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
-     'que': ('Las camas del área de hospitalización del ISSSTE en cada estado (registro de la DGIS). Sin cuántos derechohabientes tiene cada estado, no se puede decir si son pocas o muchas.')},
+     'que': ('Las camas del área de hospitalización del ISSSTE en cada estado (registro de la DGIS). Su número dice con cuánto cuenta, no cuántas están ocupadas ni si alcanzan.')},
     {'id': 'isU', 'dim': 'salud', 'fmt': 'n', 'nom': 'ISSSTE · Unidades', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
      'que': ('Los establecimientos del ISSSTE en cada estado (registro de la DGIS): clínicas, hospitales y unidades de apoyo. Muchas unidades chicas no es lo mismo que mucha atención.')},
     {'id': 'imM', 'dim': 'salud', 'fmt': 'n', 'nom': 'IMSS · Médicos, en el mismo registro', 'pal': 'naranja', 'est': 'oficial', 'anio': 2025,
@@ -614,6 +695,10 @@ LENTES = [
              '(educación, salud, seguridad social, vivienda, servicios en la vivienda o alimentación). Es lo que mide el INEGI en los hogares, no el resultado de un solo gobierno.')},
     {'id': 'soN', 'dim': 'social', 'fmt': 'n', 'nom': 'Personas en pobreza', 'pal': 'rosa', 'est': 'derivado', 'anio': 2024,
      'que': 'Cuántas personas: el porcentaje en pobreza × la población que el INEGI usó en su medición. Los estados grandes salen arriba por tamaño, aunque su porcentaje sea bajo.'},
+    {'id': 'soT', 'dim': 'social', 'fmt': 'n', 'nom': 'Población total', 'pal': 'rosa', 'est': 'oficial', 'anio': 2020,
+     'que': ('Cuántas personas vivían en cada estado según el Censo de Población y Vivienda 2020 del INEGI, el último conteo completo: la suma de sus municipios. '
+             'Ojo: hay tres poblaciones y no se mezclan. La medición de la pobreza 2024 usa la suya, estimada con la encuesta de hogares, y el chat dice la de hoy con las proyecciones del CONAPO; '
+             'esta es la única que se contó persona por persona, y la única que baja a cada municipio.')},
     {'id': 'soX', 'dim': 'social', 'fmt': 'pct', 'nom': 'Pobreza extrema', 'pal': 'rosa', 'est': 'oficial', 'anio': 2024,
      'que': ('De cada 100 personas, cuántas viven en pobreza extrema: su ingreso no alcanza ni para la canasta alimentaria y tienen tres o más carencias. '
              'En los estados donde es muy baja, el INEGI avisa que la cifra es menos precisa (su coeficiente de variación es moderado o bajo).')},
@@ -765,6 +850,11 @@ def _fuentes(ref, base=None):
         sp = gsal._estados_doc()['dgis']['sinPersonal']
         dgis = ('Secretaría de Salud, Dirección General de Información en Salud, Recursos en Salud Sectorial 2025, establecimientos del %s por entidad (<a href="%s">datos abiertos, ZIP</a>; '
                 'huella SHA-256 <code>%s…</code>). La suma por entidad es nuestra; el total de establecimientos cuadra con la nota de cierre de la DGIS')
+        def _iss(cuadro, campo):
+            f = gsal.fuente_issste(campo)
+            return 'ISSSTE, Anuario Estadístico 2025, cuadro %s, por entidad (<a href="%s">archivo ZIP</a>; huella SHA-256 <code>%s…</code>). Las 32 entidades suman el total del cuadro' % (
+                cuadro, html.escape(f['url']), f['sha256'][:12])
+
         def _mem(cuadro, cap):
             return mem % (cuadro, gsal.MEMORIA, gsal.MEM[cap]['sha256'][:12])
         extra.update({
@@ -772,6 +862,9 @@ def _fuentes(ref, base=None):
             'imQ': _mem('cuadro IV.5 «Hospitalización», columna de intervenciones quirúrgicas de 2025', 'IV') + '.',
             'imX': 'Consultas de 2025 (%s) ÷ población adscrita (%s). La división es nuestra.' % (_mem('cuadro IV.3', 'IV'), _mem('cuadro II.10', 'II')),
             'imK': 'Camas censables (%s) ÷ población adscrita (%s) × 1,000. La división es nuestra.' % (_mem('cuadro XIII.11', 'XIII'), _mem('cuadro II.10', 'II')),
+            'iaD': _iss('1.2 «Población derechohabiente»', 'derechohabientes') + '.',
+            'iaQ': _iss('25.1 «Procedimientos quirúrgicos»', 'cirugias') + '.',
+            'iaX': 'Consultas externas de 2025 (%s) ÷ derechohabientes (%s). La división es nuestra.' % (_iss('18.6', 'consultas'), _iss('1.2', 'derechohabientes')),
             'isM': (dgis % ('ISSSTE', html.escape(dg['url']), dg['sha256'][:12])) + ', columna «Total médicos generales especialistas y odontólogos». El ISSSTE no le reportó personal de %d establecimientos.' % sp['issste'],
             'isK': (dgis % ('ISSSTE', html.escape(dg['url']), dg['sha256'][:12])) + ', columna «Total camas área hospitalización».',
             'isU': (dgis % ('ISSSTE', html.escape(dg['url']), dg['sha256'][:12])) + '.',
@@ -816,6 +909,9 @@ def _fuentes(ref, base=None):
     import dimension_social as dso
     so_f, so_p = dso.fuente()
     soc = ('%s (<a href="%s">presentación de resultados</a>; cada estado con su infografía y su huella SHA-256 en <code>docs/social/pobreza-entidades-2024.json</code>)') % (so_f, so_p)
+    pv = pob_mun(_padron())
+    extra['soT'] = ('INEGI, Censo de Población y Vivienda 2020, principales resultados por localidad (ITER) %s (<a href="%s">datos abiertos</a>; huella SHA-256 <code>%s…</code>). '
+                    'Sus municipios suman justo el total del estado.') % (ref('ref-inegi-censo-2020'), html.escape(pv['pagina']), pv['sha256'][:12])
     extra.update({'soP': soc + '.', 'soX': soc + '. Donde la cifra es baja, el INEGI la marca con coeficiente de variación moderado o bajo.', 'soI': soc + '.',
                   'soS': soc + '.', 'soA': soc + '.', 'soR': soc + '.',
                   'soN': 'Porcentaje en pobreza × población de la misma infografía (%s). La multiplicación es nuestra.' % soc})
@@ -843,6 +939,13 @@ def _fuentes(ref, base=None):
             _pm['corte'], html.escape(_pm['fe']))
         extra.update({'sat': fs + '.', 'satH': 'Contribuyentes activos × 100 ÷ población a mitad de 2026 (CONAPO, la de la base), con el %s. La división es nuestra.' % fs,
                       'don': '%s (<a href="%s">PDF</a>; huella SHA-256 en <code>docs/sat/donatarias.json</code>).' % (html.escape(_pm['dtx']), html.escape(_pm['fd']))})
+    import cc_predial as ccp
+    _sh = ccp.shf()
+    fsh = ('%s, %s (<a href="%s">informe</a>, huella SHA-256 <code>%s…</code>; <a href="%s">datos abiertos</a>, base %s; en '
+           '<code>docs/vivienda/shf-precios-vivienda.json</code>). Cifras preliminares sujetas a revisión') % (
+        _sh['fuente'], _sh['corte'], html.escape(_sh['inf']['url']), _sh['inf']['sha256'][:12], html.escape(_sh['dat']['url']), _sh['dat']['base'])
+    extra.update({'shfI': fsh + '.', 'shfV': fsh + '. La variación es la que publica la SHF, no una cuenta nuestra.',
+                  'shfM': fsh + '. Es la mediana (percentil 50) de su cuadro de distribución de precios por entidad, página %d del informe.' % _sh['inf']['precios_pag']})
     extra.update({'peT': pe + '.', 'peV': pe + '. Miles de pesos ÷ 1,000: la cuenta es nuestra.'})
     extra.update({'incH': ic + '.', 'incN': ic + '.', 'sfT': sf + '.',
                   'incP': 'Superficie afectada por los incendios de 2025 (%s) ÷ superficie forestal (%s) × 100. La división es nuestra.' % (ic, sf)})
@@ -1153,8 +1256,10 @@ TEMAS_LENTES = {
                  ('resolvio', '📊 Lo que resolvió', ['judc', 'judx', 'judr', 'judj']),
                  ('federal', '⚖️ Justicia federal', ['jdfL', 'jdfD'])],
     'salud': [('imss', '🩺 IMSS · su Memoria', ['imA', 'imX', 'imQ', 'imK']),
+              ('issste', '📋 ISSSTE · su Anuario', ['iaD', 'iaX', 'iaQ']),
               ('dgis', '🏥 ISSSTE e IMSS · registro de la DGIS', ['isM', 'isK', 'isU', 'imM'])],
-    'social': [('pobreza', '🫂 Pobreza', ['soP', 'soN', 'soX', 'soI']),
+    'social': [('gente', '👥 Su gente', ['soT']),
+               ('pobreza', '🫂 Pobreza', ['soP', 'soN', 'soX', 'soI']),
                ('carencias', '🧩 Carencias', ['soS', 'soA', 'soR']),
                ('aporta', '💵 Aportaciones', ['soQ'])],
     'administracion': [('gobierno', '🏢 Su gobierno', ['apP', 'apK', 'apX', 'apD', 'apG']),
@@ -1378,11 +1483,13 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
                      'litigiosidad federal por cada 100 mil habitantes y días que tarda un amparo indirecto); y '
                      '2) Presupuesto ejercido, gasto por asunto concluido, contadores en tiempo real por segundo y el tabulador de sueldos, prestaciones e ingresos por año, día y hora frente al tope del artículo 127.'),
         'salud': ('El IMSS y el ISSSTE en cada estado. Del IMSS, lo que registra su Memoria Estadística 2025: a cuántas personas tiene adscritas, cuántas consultas y cirugías dio '
-                  'y cuántas camas tiene por cada mil. Del ISSSTE, con qué cuenta según el registro de la Secretaría de Salud: médicos, camas y unidades. '
+                  'y cuántas camas tiene por cada mil. Del ISSSTE, lo que registra su Anuario Estadístico 2025: sus derechohabientes, sus consultas y sus cirugías; '
+                  'y con qué cuenta según el registro de la Secretaría de Salud: médicos, camas y unidades. '
                   'La última lente pone a los médicos del IMSS en ese mismo registro, para comparar las dos con la misma regla.'),
         'social': ('La pobreza en cada estado, como la mide el INEGI con la Encuesta de Ingresos y Gastos de los Hogares 2024 y la metodología del CONEVAL: '
                    'cuántas personas la viven y cuántas en pobreza extrema, cuántas tienen un ingreso que no alcanza y las tres carencias que más pesan '
-                   '(seguridad social, servicios de salud y rezago educativo). La última lente pone junto a eso lo que la Federación le aporta a cada estado por persona en pobreza.'),
+                   '(seguridad social, servicios de salud y rezago educativo). La última lente pone junto a eso lo que la Federación le aporta a cada estado por persona en pobreza. '
+                   'Y su gente: cuántas personas vivían en cada estado en el Censo de Población y Vivienda 2020, el último conteo completo, que en cada portal se abre municipio por municipio.'),
         'administracion': ('El gobierno que ejecuta, en los tres niveles. De la administración de cada estado, lo que le reportó al censo del INEGI: cuánta gente tiene, '
                            'cuánto ejerció en 2024 y cuántos de sus contratos dio por adjudicación directa. De sus municipios, cuánto ejercieron. Y de los dos, lo que la '
                            'Auditoría Superior de la Federación dejó por aclarar del dinero federal de la Cuenta Pública 2024. La ficha trae además el nivel federal, para comparar.'),
@@ -1481,12 +1588,12 @@ def pagina_mapa(base, ref, tres, padron, cuenta, cuanto='', origenes=''):
           <div class="pl-solo-dim pl-fin" data-dim="judicial" hidden>
             %s
           </div>
-          <script type="application/json" id="plDatos">%s</script>
+          <script type="application/json" id="plDatos" data-src="%s"></script>
           <noscript><p>El mapa se colorea con JavaScript; sin él, cada entidad se abre desde la lista de arriba.</p></noscript>''' % (
         pasos, ''.join(dims), d0[0], d0[2].lower(), d0[3], lentes, svg, ''.join(cajones), ''.join(plantillas),
         _cajon('📍', 'Las 32 entidades', 'Elige una entidad para entrar a su portal', 'plTplIndiceTit',
                '<nav class="pl-indice" aria-label="Las 32 entidades, una por una"><ul>%s</ul></nav>' % indice),
-        _bloque_judicial_mapa(base, ref, filas), _json(datos))
+        _bloque_judicial_mapa(base, ref, filas), datos_externos('planisferio-datos.json', datos))
     for _l in ('servicios.html',):
         if not os.path.exists(os.path.join(RAIZ, _l)):
             raise SystemExit('planisferio: el puente a Servicios apunta a %s, que no existe' % _l)
@@ -1593,16 +1700,17 @@ def _nota_sal(filas):
     tm = sum(f['isM'] for f in filas)
     cd = max(filas, key=lambda f: f['isM'])
     pr = sorted(filas, key=lambda f: f['isM'] / (f['isM'] + f['imM']))
+    ix = sorted(filas, key=lambda f: f['iaX'])
     return ('<b>La misma institución no da la misma cama en todos lados.</b> Por cada mil personas adscritas, el IMSS tiene %s camas de hospitalización en %s %s y %s en %s %s. '
             'Parte de la diferencia es que los hospitales de alta especialidad se cuentan donde están y atienden a gente de otros estados; la otra parte es que no hay '
             'la misma infraestructura en todos lados. <b>El ISSSTE, en la capital:</b> %s de sus %s médicos están en %s %s, %s de cada 100 %s. '
             'Y donde menos pesa frente al IMSS es %s: de cada 100 médicos de las dos instituciones, %s son del ISSSTE %s. '
-            '<b>Lo que falta:</b> cuántas personas atiende el ISSSTE en cada estado y qué les resolvió %s. Sin eso, sus camas y sus médicos no se pueden poner por persona, '
-            'y este mapa no puede decir si el ISSSTE de un estado alcanza o no. Tampoco está quien no tiene seguridad social: el IMSS-Bienestar y los servicios estatales.') % (
+            '<b>Lo que el anuario del ISSSTE no dice:</b> las consultas por derechohabiente van de %s en %s a %s en %s %s, pero cuentan cuánto se dio, no cuánto se esperó ni si alcanzó; '
+            'y sus médicos y camas vienen de otro registro (la DGIS), así que no se dividen entre sus derechohabientes. Tampoco está quien no tiene seguridad social: el IMSS-Bienestar y los servicios estatales.') % (
         format(k[-1]['imK'], '.2f'), k[-1]['n'], chip('derivado'), format(k[0]['imK'], '.2f'), k[0]['n'], chip('derivado'),
         format(cd['isM'], ','), format(tm, ','), cd['n'], chip('oficial'), format(round(100.0 * cd['isM'] / tm)), chip('derivado'),
         pr[0]['n'], format(100.0 * pr[0]['isM'] / (pr[0]['isM'] + pr[0]['imM']), '.1f'), chip('derivado'),
-        chip('pendiente', 'salud-issste-servicios'))
+        format(ix[0]['iaX'], '.2f'), ix[0]['n'], format(ix[-1]['iaX'], '.2f'), ix[-1]['n'], chip('derivado'))
 
 
 def _ctx(i):
@@ -1751,12 +1859,53 @@ def _social_portal(base, ref, e):
               ('$' + format(z['r33'], ',')) if z['r33'] else 'sin cifra', chip('derivado'), lug(lambda r: r['r33'] or 0),
               html.escape(z['url']), html.escape(nom), z['sha'][:12])
     p2 = '<article class="pl-piso"><h3>📋 Sus seis carencias sociales · 2024</h3><dl class="pl-dl">%s</dl><p class="pl-piso-f">De cada 100 personas del estado. Misma infografía del INEGI.</p></article>' % car
+    p3 = _gente_portal(ref, e)
     ciego = ('<p class="pl-dim-nota"><b>Lo que estas cifras no dicen.</b> La pobreza la mide el INEGI en los hogares y la mueven los tres niveles de gobierno, la economía y las remesas: '
              'no es la calificación de un gobierno. «Sin acceso a servicios de salud» mide la afiliación, no si la clínica tiene médico o medicina. Y las aportaciones por persona en pobreza '
              'no son lo que le llega a cada persona: el Ramo 33 paga sobre todo maestros y salud.</p>')
     ir = ('<p class="pl-ficha-ir"><a href="planisferio.html?d=social&amp;e=%s">La pobreza de los 32 estados, en el mapa ➔</a> '
           '<a href="contexto-dimensional-social.html">Los programas sociales del país, en el Contexto dimensional ➔</a></p>') % quote(a)
-    return '<div class="pl-pisos">%s%s</div>%s%s' % (p1, p2, ciego, ir)
+    return '<div class="pl-pisos">%s%s</div>%s%s%s' % (p1, p2, p3, ciego, ir)
+
+
+def _gente_portal(ref, e):
+    """Su gente, municipio por municipio (04-11-2026, pedido del autor): la
+    población del Censo 2020 de cada municipio y su ingreso 2024 por habitante.
+    Lo mismo que pinta el mapa de sus municipios con las lentes «Población» e
+    «Ingreso por habitante»."""
+    padron = _padron()
+    pv = pob_mun(padron)
+    a, nom = e['abbr'], e['name']
+    m = padron['ent'][a]
+    filas = []
+    for r in m['lista']:
+        if r[0] >= '990':
+            continue
+        p = pv['mun'].get(m['cve'] + r[0])
+        filas.append((r[1], p[0] if p else None, round(r[2] / p[0]) if p and len(r) >= 10 and r[2] else None))
+    con = sorted((f for f in filas if f[1]), key=lambda f: -f[1])
+    tot = pv['ent'][m['cve']]
+    nuevos = [f[0] for f in filas if f[1] is None]
+    cinco = lambda xs, k: ' · '.join('%s <small>(%s)</small>' % (html.escape(f[0]), k(f)) for f in xs)
+    ip = sorted((f for f in filas if f[2]), key=lambda f: -f[2])
+    gente = ('<dt>Población del estado (Censo 2020)</dt><dd>%s personas %s <small>en %d %s; los cinco más poblados juntan %s de cada 100</small></dd>'
+             '<dt>Los más poblados</dt><dd>%s</dd><dt>Los menos poblados</dt><dd>%s</dd>') % (
+        format(tot, ','), chip('oficial'), len(con), 'municipios' if m['conCifra'] else 'alcaldías', format(round(sum(f[1] for f in con[:5]) / tot * 100, 1), '.1f'),
+        cinco(con[:5], lambda f: format(f[1], ',')), cinco(con[::-1][:5], lambda f: format(f[1], ',')))
+    if ip:
+        gente += ('<dt>Ingreso por habitante: el más alto y el más bajo</dt><dd>%s %s <small>2024 ÷ Censo 2020</small></dd>') % (
+            cinco([ip[0], ip[-1]], lambda f: '$' + format(f[2], ',')), chip('derivado'))
+    pie = ('INEGI, Censo de Población y Vivienda 2020 %s (huella SHA-256 <code>%s…</code>), e ingresos municipales 2024 %s. '
+           'Los más poblados juntan: suma de los cinco ÷ población del estado × 100; el ingreso por habitante: ingreso total 2024 ÷ población de 2020. Las cuentas son nuestras.') % (
+        ref('ref-inegi-censo-2020'), pv['sha256'][:12], ref('ref-inegi-efipem'))
+    if nuevos:
+        pie += ' %s no existía%s en el Censo 2020: sus habitantes se contaron en el municipio del que se separó%s.' % (
+            ', '.join(html.escape(x) for x in nuevos), 'n' if len(nuevos) > 1 else '', 'n' if len(nuevos) > 1 else '')
+    if not m['conCifra']:
+        pie += ' Las alcaldías no rinden cuenta municipal al INEGI: no hay ingreso por habitante.'
+    return ('<article class="pl-piso"><h3>👥 Su gente, municipio por municipio</h3><dl class="pl-dl">%s</dl><p class="pl-piso-f">%s</p>'
+            '<p class="pl-piso-f"><a href="%s?ml=pob#mapa-municipios">Su población en el mapa de sus municipios ➔</a>%s</p></article>') % (
+        gente, pie, portal(a), '' if not m['conCifra'] else ' <a href="%s?ml=iph#mapa-municipios">Su ingreso por habitante ➔</a>' % portal(a))
 
 
 def _nota_apu(filas):
@@ -2309,8 +2458,8 @@ def _judicial_portal(base, ref, e):
 
 def _salud_portal(base, ref, e):
     """Su salud pública (03-11-2026): el IMSS, con su Memoria Estadística 2025
-    por OOAD, y el ISSSTE, con el registro sectorial de la DGIS. Las dos
-    fuentes no se mezclan; lo que el ISSSTE no deja ver va con su ficha."""
+    por OOAD, y el ISSSTE, con su Anuario Estadístico 2025 (22-11-2026) y el
+    registro sectorial de la DGIS. Las fuentes no se mezclan."""
     import gestion_salud as gs
     sa = gs.salud_estados(base)
     a, nom = e['abbr'], e['name']
@@ -2337,7 +2486,8 @@ def _salud_portal(base, ref, e):
               format(h['iq'], ','), chip('oficial'), format(h['iqk'], '.1f'), chip('derivado'),
               format(h['camc'], ','), chip('oficial'), format(h['camk'], '.2f'), chip('derivado'), lugar(lambda r: r['camk']), format(1000.0 * tot['camc'] / tot['ads'], '.2f'),
               gs.MEMORIA)
-    i, m = h['is'], h['im']
+    i, m, ia = h['is'], h['im'], h['ia']
+    iat = gs.issste_anuario()['tot']
     tm = sum(r['is']['med'] for r in sa.values())
     p2 = ('<article class="pl-piso pl-piso-iss"><p class="pl-piso-n">2 · El ISSSTE en %s · 2025</p>'
           '<p class="pl-piso-v"><b class="num-tabular">%s</b> médicas y médicos %s</p>'
@@ -2347,13 +2497,23 @@ def _salud_portal(base, ref, e):
           '<dt>Enfermería en contacto con el paciente</dt><dd>%s %s</dd>'
           '<dt>Consultorios</dt><dd>%s %s</dd>'
           '<dt>Frente al IMSS, en el mismo registro</dt><dd>%s médicos del IMSS %s <small>el %s de los médicos de las dos instituciones en el estado son del ISSSTE %s</small></dd>'
-          '<dt>Cuántas personas atiende y qué les resolvió</dt><dd>Sin cifra %s <small>su anuario estadístico no responde</small></dd>'
-          '</dl><p class="pl-piso-f">Secretaría de Salud, DGIS, Recursos en Salud Sectorial 2025 (<a href="%s">datos abiertos</a>), establecimientos del ISSSTE y del IMSS en %s. '
-          'Las sumas y las divisiones son nuestras.</p></article>') % (
+          '<dt>Derechohabientes</dt><dd>%s %s <small>%d.º de 32 %s</small></dd>'
+          '<dt>Consultas externas</dt><dd>%s %s <small>%s por derechohabiente %s (en el país, %s)</small></dd>'
+          '<dt>Egresos hospitalarios</dt><dd>%s %s</dd>'
+          '<dt>Urgencias</dt><dd>%s %s <small>%s reales y %s «sentidas», que no se clasificaron como reales</small></dd>'
+          '<dt>Procedimientos quirúrgicos</dt><dd>%s %s</dd>'
+          '</dl><p class="pl-piso-f">Médicos, unidades, camas, enfermería y consultorios: Secretaría de Salud, DGIS, Recursos en Salud Sectorial 2025 (<a href="%s">datos abiertos</a>), '
+          'establecimientos del ISSSTE y del IMSS en %s. Derechohabientes y servicios: ISSSTE, <a href="%s">Anuario Estadístico 2025</a>, cuadros 1.2, 18.6, 22.1, 23.5 y 25.1 '
+          '(las 32 entidades suman el total de cada cuadro). Los dos registros no se dividen entre sí. Las sumas y las divisiones son nuestras.</p></article>') % (
               html.escape(nom), format(i['med'], ','), chip('oficial'), lugar(lambda r: r['is']['med']), chip('derivado'), pct(100.0 * i['med'] / tm),
               format(i['u'], ','), chip('oficial'), format(i['cam'], ','), chip('oficial'), format(i['enf'], ','), chip('oficial'), format(i['cons'], ','), chip('oficial'),
               format(m['med'], ','), chip('oficial'), pct(100.0 * i['med'] / (i['med'] + m['med'])), chip('derivado'),
-              chip('pendiente', 'salud-issste-servicios'), html.escape(gs.fuente_dgis()['url']), html.escape(nom))
+              format(ia['derechohabientes'], ','), chip('oficial'), lugar(lambda r: r['ia']['derechohabientes']), chip('derivado'),
+              format(ia['consultas'], ','), chip('oficial'), format(ia['conx'], '.2f'), chip('derivado'), format(iat['consultas'] / iat['derechohabientes'], '.2f'),
+              format(ia['egresos'], ','), chip('oficial'),
+              format(ia['urgencias'], ','), chip('oficial'), format(ia['urgenciasReales'], ','), format(ia['urgenciasSentidas'], ','),
+              format(ia['cirugias'], ','), chip('oficial'),
+              html.escape(gs.fuente_dgis()['url']), html.escape(nom), html.escape(gs.issste_anuario()['url']))
     bi = gs.bienestar()
     eb = bi['ent'].get(a)
     if eb:
@@ -2744,7 +2904,8 @@ def pagina_portal(base, ref, e, padron, prev, sig, iv, dv):
              'tarjetas': [], 'bloque': _salud_portal(base, ref, e)},
             {'id': 'social', 'titulo': 'Su pobreza y sus carencias',
              'texto': ('Cuántas personas viven en pobreza en %s, cuántas en pobreza extrema, sus seis carencias sociales frente al país y lo que la Federación le aporta '
-                       'por persona en pobreza. Las cifras son de la medición de la pobreza 2024 del INEGI.') % nom,
+                       'por persona en pobreza, de la medición de la pobreza 2024 del INEGI. Y su gente, municipio por municipio: cuántas personas viven en cada uno según el Censo 2020 '
+                       'y cuánto ingresó cada municipio por habitante.') % nom,
              'tarjetas': [], 'bloque': _social_portal(base, ref, e)},
             {'id': 'administracion', 'titulo': 'Su administración pública',
              'texto': ('El gobierno que ejecuta, en los tres niveles: cuánta gente tiene la administración de %s, cuánto ejerció en 2024 y cuántos contratos dio sin concurso; '

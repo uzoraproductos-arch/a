@@ -1225,6 +1225,7 @@
         '<p class="ie-nota-p">Fuente: <a href="' + esc(x.f[1]) + '" target="_blank" rel="noopener noreferrer">' + esc(x.f[0]) + ' ↗</a>. ' +
         (x.nota ? esc(x.nota) + ' ' : '') + 'Estas cifras no califican a nadie: dicen lo que se hizo y con cuánto.</p>';
     }
+    if (!x.pid) return h + (ver ? '<p class="ie-nota-p"><span class="ie-chipas"><a class="ie-chipa" href="' + esc(ver[0]) + '">📚 Lo que ya hay de su sector: ' + esc(ver[1]) + '</a></span></p>' : '');
     h += '<div class="ie-nota"><b>' + (x.filas.length ? 'Lo que aún falta de su productividad.' : 'Su auditoría de productividad está pendiente.') + '</b> ' +
       chip('pendiente', x.pid) + ' ' + esc(x.falta) +
       (x.filas.length ? '' : ' Dónde debería estar: <a href="' + esc(x.f[1]) + '" target="_blank" rel="noopener noreferrer">' + esc(x.f[0]) + ' ↗</a>.') +

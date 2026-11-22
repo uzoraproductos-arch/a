@@ -616,3 +616,41 @@ a.pa-ctl { text-decoration: none; }
 [data-theme="dark"] .pa-vistazo-caps li > span:last-child { color: #c3cee2; }
 [data-theme="dark"] .pa-vistazo-caps li.pa-vistazo-ojo { background: #3a3014; border-color: #8a6d00; }
 html.pa-en-vista .pt-cab, html.pa-en-vista #respApp > .dic-acc { display: none !important; }
+/* Ronda 1 (22-11-2026): el dictamen como reporte ejecutivo. Resumen arriba (verificación por
+   fuente y hallazgos clave), desglose técnico en acordeones que se abren al imprimir, y barra fija. */
+.dic-cab-q dd { font-weight: 700; }
+.dic-huella-c code { font-size: 14px; word-break: break-all; }
+.dic-ejecutivo { margin: 14px 0 6px; padding: 14px; border: 1px solid #c9d6ec; border-radius: 14px; background: #fff; }
+.dic-ejecutivo-t { margin: 0 0 8px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: #44526b; font-weight: 700; }
+.dic-ejecutivo-t + .dic-tira, .dic-ejecutivo-t + .dic-clave { margin-bottom: 12px; }
+.dic-tira { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; }
+.dic-tira-i { display: grid; grid-template-columns: auto 1fr; column-gap: 8px; row-gap: 2px; align-items: start; padding: 10px 12px; border-radius: 10px; background: #f6f8fc; border: 1px solid #dfe5f0; border-left: 4px solid #2f6f4e; }
+.dic-tira-i b { color: #0b2a63; line-height: 1.3; }
+.dic-tira-i > span:last-child { grid-column: 2; color: #33415c; }
+.dic-tira-ico { grid-row: span 2; }
+.dic-tira-ojo { border-left-color: #b26b00; background: #fff8ec; }
+.dic-clave { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px; }
+.dic-clave-i { display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border-radius: 10px; border: 1px solid #dfe5f0; background: #f6f8fc; }
+.dic-clave-v { font-size: 20px; color: #0b2a63; line-height: 1.2; overflow-wrap: anywhere; }
+.dic-clave-i > span:not(.est-chip) { color: #33415c; line-height: 1.35; }
+.dic-clave-i .est-chip { align-self: flex-start; }
+.dic-sec { border-top: 1px solid #dfe5f0; }
+.dic-sec > summary { cursor: pointer; list-style: none; display: flex; align-items: center; min-height: 44px; }
+.dic-sec > summary::-webkit-details-marker { display: none; }
+.dic-sec > summary::after { content: '▾'; margin-left: auto; padding-left: 12px; color: #44526b; transition: transform .2s; }
+.dic-sec[open] > summary::after { transform: rotate(180deg); }
+.dic-sec > summary .dic-cap { margin: 10px 0; }
+.dic-acc { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px 0; background: var(--fondo, #fff); }
+@media (min-width: 861px) { .dic-acc { position: sticky; top: 0; z-index: 5; } }
+.dic-puente { display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px; color: #0b2a63; font-weight: 600; }
+[data-theme="dark"] .dic-ejecutivo { background: #101c30; border-color: #2a3b57; }
+[data-theme="dark"] .dic-tira-i, [data-theme="dark"] .dic-clave-i { background: #16233a; border-color: #2a3b57; color: #e8eefa; }
+[data-theme="dark"] .dic-tira-ojo { background: #2b2210; }
+[data-theme="dark"] .dic-tira-i b, [data-theme="dark"] .dic-clave-v, [data-theme="dark"] .dic-puente { color: #e8eefa; }
+[data-theme="dark"] .dic-tira-i > span:last-child, [data-theme="dark"] .dic-clave-i > span:not(.est-chip) { color: #dbe4f3; }
+[data-theme="dark"] .dic-acc { background: var(--fondo, #0b1424); }
+@media print {
+  .dic-acc { position: static; }
+  .dic-sec > summary::after { content: none; }
+  .dic-ejecutivo, .dic-tira-i, .dic-clave-i { break-inside: avoid; }
+}

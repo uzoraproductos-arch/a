@@ -188,6 +188,9 @@
   function dictamenHtml(q, r, f, antes) {
     var t = TIPO[f.t] || ['📄', 'Ficha'], k = 0;
     function cap(tit) { return '<h3 class="dic-cap"><span>' + ROMANO[k++] + '.</span> ' + tit + '</h3>'; }
+    /* Reporte ejecutivo (Ronda 1, 22-11-2026): el desglose técnico va en acordeones, que se abren
+       solos al imprimir (beforeprint de armaDictamen). Mismo contenido; nada entra ni sale de la huella. */
+    function capD(tit, cuerpo) { return '<details class="dic-sec"><summary>' + cap(tit) + '</summary><div class="dic-sec-c">' + cuerpo + '</div></details>'; }
     /* Las cifras van en tabla (16-11-2026): cifra, qué es, su estado y su operación. */
     var ci = (f.ci || []).map(function (c, i) {
       return '<tr><td class="dic-n">' + (i + 1) + '</td><td class="dic-v">' + esc(c.v) + '</td><td>' + esc(c.etq) +
@@ -226,6 +229,27 @@
       (f.cot && f.cot.length ? '<div><dt>Afirmaciones cotejadas</dt><dd>' + f.cot.length + '</dd></div>' : '') +
       (xf ? '<div class="dic-mirada-exp"><dt>Expediente</dt><dd>' + esc(xf.exn) + (xf.ab ? ' · abierto' : ' · documentado') + '</dd></div>' : '') +
       '</dl></aside>';
+    /* La tira por fuente: cada capítulo de «La revisión completa» con su estado tal como lo da su
+       respuesta (sin calificar: «Sin coincidencias», «Tiene contratos publicados»…). */
+    var caps = ((r.integ && r.integ.caps) || []).slice(), varios = r.integ && r.integ.rfcs.length > 1;
+    /* La fuente que contestó la pregunta también va en la tira, con lo que dijo su respuesta. */
+    if (r.integ && r.integ.ya) {
+      var yaR = r.integ.ya, rt = textoDe(r.html);
+      if (yaR.padron) caps.unshift(['🛡️', 'Listas del SAT, sancionados y sanciones internacionales', '', r.integ.rfcs[0],
+        /Sin coincidencias/.test(rt) ? 'Sin coincidencias' : 'Coincidencias por revisar', !/Sin coincidencias/.test(rt)]);
+      else if (yaR.cmx) caps.unshift(['🏛️', 'Contratos con el gobierno (ComprasMX)', '', r.integ.rfcs[0], 'Tiene contratos publicados', false]);
+      else if (yaR.grupo) caps.unshift(['🏢', 'Su grupo empresarial', '', r.integ.rfcs[0], (r.ficha.tit || '').replace(/^Grupo empresarial: /, ''), false]);
+    }
+    var tira = caps.length ? '<div class="dic-tira" aria-label="Verificación por fuente">' + caps.map(function (c) {
+      return '<div class="dic-tira-i' + (c[5] ? ' dic-tira-ojo' : '') + '"><span class="dic-tira-ico" aria-hidden="true">' + c[0] + '</span>' +
+        '<b>' + esc(c[1]) + (varios ? ' <code>' + esc(c[3]) + '</code>' : '') + '</b><span>' + esc(c[4] || '') + '</span></div>'; }).join('') + '</div>' : '';
+    /* Los hallazgos clave: las primeras cifras de la ficha, con su estado; la tabla completa sigue abajo. */
+    var clave = (f.ci || []).slice(0, 4).map(function (c) {
+      return '<div class="dic-clave-i"><b class="dic-clave-v">' + esc(c.v) + '</b><span>' + esc(c.etq) + '</span>' + chip(c) + '</div>'; }).join('');
+    var ejecutivo = (tira || clave) ? '<section class="dic-ejecutivo" aria-label="Resumen ejecutivo">' +
+      (tira ? '<p class="dic-ejecutivo-t">Verificación por fuente</p>' + tira : '') +
+      (clave ? '<p class="dic-ejecutivo-t">Hallazgos clave</p><div class="dic-clave">' + clave + '</div>' +
+        ((f.ci || []).length > 4 ? '<p class="dic-chico">Y ' + ((f.ci || []).length - 4) + ' cifras más en «Hallazgos: las cifras».</p>' : '') : '') + '</section>' : '';
     var expCap = xf ? '<p>Esta respuesta toca una de las grandes investigaciones de la plataforma. Su expediente, <b>' + esc(xf.exn) + ' · ' + esc(xf.tit) + '</b>, ' +
       'junta el caso en cinco preguntas, su bitácora, lo que sigue y lo que falta' + (xf.nov ? '; el último registro de su bitácora es del ' + esc(xf.nov) : '') + '. ' +
       '<a href="' + esc(xf.ex) + '">Abrir el expediente ➔</a></p>' +
@@ -236,34 +260,36 @@
       '<div><b>Auditavisión</b><small>Plataforma ciudadana de fiscalización del gasto público</small></div></div>' +
       '<div class="dic-sello">' + sello(null, 'DICTAMEN') + '</div>' +
       '<div class="dic-cab-tx"><span class="pa-nota-tipo">Dictamen cívico independiente · ' + esc(t[1]) + (capa ? ' · ' + MODO_ICO[m] + ' Modo ' + MODO_NOM[m] : '') + '</span>' +
-      '<dl><div><dt>Folio</dt><dd class="pa-folio">calculando…</dd></div><div><dt>Expedido</dt><dd>' + esc(hoy()) + '</dd></div>' +
+      '<dl><div class="dic-cab-q"><dt>Consulta</dt><dd>' + esc(q.length > 120 ? q.slice(0, 118) + '…' : q) + '</dd></div>' +
+      '<div><dt>Folio</dt><dd class="pa-folio">calculando…</dd></div><div><dt>Expedido</dt><dd>' + esc(hoy()) + '</dd></div>' +
+      '<div><dt>Huella SHA-256</dt><dd class="dic-huella-c"><code>calculando…</code></dd></div>' +
       '<div><dt>Versión de la plataforma</dt><dd>' + esc(selloSitio()) + '</dd></div></dl></div></header>' +
-      '<h2 class="dic-tit"><span aria-hidden="true">' + t[0] + '</span> ' + esc(f.tit) + '</h2>' + mira +
+      '<h2 class="dic-tit"><span aria-hidden="true">' + t[0] + '</span> ' + esc(f.tit) + '</h2>' + mira + ejecutivo +
       cap('Planteamiento') + '<p class="pa-nota-q"><span>La pregunta</span> «' + esc(q) + '»</p>' +
       (antes.length ? '<p class="dic-chico">Se hizo en la plática después de: ' + antes.map(function (x) { return '«' + esc(x) + '»'; }).join(' → ') + '.</p>' : '') +
       cap('Respuesta del Auditor') + '<div class="dic-resp">' + resp + '</div>' +
-      (r.integ ? cap('La revisión completa') + '<p class="dic-chico">Todo lo que la base de la plataforma tiene de ' + esc(r.integ.rfcs.join(', ')) +
-        ', reunido solo: sus cifras y sus fuentes están en los hallazgos y en el fundamento, y entran a la huella.</p><div class="dic-resp">' + r.integ.html.replace(/<button\b[^>]*>[\s\S]*?<\/button>/g, '') + '</div>' : '') +
-      (capa ? cap('La lectura del modo ' + MODO_NOM[m]) +
+      (r.integ ? capD('La revisión completa', '<p class="dic-chico">Todo lo que la base de la plataforma tiene de ' + esc(r.integ.rfcs.join(', ')) +
+        ', reunido solo: sus cifras y sus fuentes están en los hallazgos y en el fundamento, y entran a la huella.</p><div class="dic-resp">' + r.integ.html.replace(/<button\b[^>]*>[\s\S]*?<\/button>/g, '') + '</div>') : '') +
+      (capa ? capD('La lectura del modo ' + MODO_NOM[m],
         '<p class="dic-chico">Pediste el dictamen en el modo ' + MODO_NOM[m] + ': esta es su forma de leer la misma respuesta. El modo cambia cómo se cuenta, nunca los datos: no agrega cifras y no entra a la huella.</p>' +
-        '<div class="dic-resp dic-modo">' + capa + '</div>' : '') +
+        '<div class="dic-resp dic-modo">' + capa + '</div>') : '') +
       (f.txt && f.t !== 'calculo' ? '<p class="pa-nota-tx"><b>La ficha completa:</b> ' + esc(f.txt) + '</p>' : '') +
       (ci ? cap('Hallazgos: las cifras') + '<div class="dic-tabla"><table><thead><tr><th>#</th><th>Cifra</th><th>Qué es</th><th>Estado</th></tr></thead><tbody>' + ci + '</tbody></table></div>' : '') +
-      (f.cot && f.cot.length && charla ? cap('Cotejo de lo que circula') +
+      (f.cot && f.cot.length && charla ? capD('Cotejo de lo que circula',
         '<p class="dic-chico">Cada afirmación que circula se comparó con el documento oficial. «Consta» quiere decir que el documento la sostiene; «con matices», que la sostiene en parte; «sin documento oficial», que solo la dice la prensa o las redes, y no la afirmamos ni la negamos.</p>' +
-        charla.cotejo(f, true) : '') +
+        charla.cotejo(f, true)) : '') +
       (f.app ? cap('La aplicación y tu resultado') + '<p>La cuenta la hace <b>«' + esc(f.app.n) + '»</b>' + (f.app.par ? ', con lo que escribiste en la plática' : '') + '. ' +
         'Para ver el resultado, o para que otra persona lo compruebe, abre la aplicación desde este enlace: <a href="' + esc(f.app.url) + '">' + esc(f.app.pag) + (f.app.par ? ' con tus datos' : '') + ' ➔</a>.</p>' +
         '<p class="dic-chico">La aplicación calcula con la base de la plataforma vigente, así que con el mismo enlace y la misma versión da el mismo resultado.</p>' : '') +
       (pend ? cap('Lo que falta') + pend : '') +
-      (expCap ? cap('Expediente relacionado') + expCap : '') +
+      (expCap ? capD('Expediente relacionado', expCap) : '') +
       (svDic ? cap('Lo que ya revisamos') + svDic : '') +
-      cap('Fundamento documental') + (fu ? '<ol class="dic-fuentes">' + fu + '</ol>' + (f.app && f.app.mas ? '<p class="dic-chico">Y ' + f.app.mas + ' documentos más, citados en la página de la aplicación.</p>' : '') : '<p>Esta respuesta no cita cifras: lleva a una página de la plataforma, donde cada dato trae su fuente.</p>') +
-      cap('Método') + '<ol class="dic-metodo">' +
+      capD('Fundamento documental', fu ? '<ol class="dic-fuentes">' + fu + '</ol>' + (f.app && f.app.mas ? '<p class="dic-chico">Y ' + f.app.mas + ' documentos más, citados en la página de la aplicación.</p>' : '') : '<p>Esta respuesta no cita cifras: lleva a una página de la plataforma, donde cada dato trae su fuente.</p>') +
+      capD('Método', '<ol class="dic-metodo">' +
       '<li><b>Localización.</b> El Auditor buscó la respuesta en la base de la plataforma (' + B.fichas.length.toLocaleString('es-MX') + ' fichas), que solo guarda datos ya publicados con su documento.</li>' +
       '<li><b>Verificación.</b> Cada cifra se toma del documento oficial que se cita, sin estimar ni redondear a ojo. Las cuentas se hacen con cifras oficiales y se dice la operación.</li>' +
       (clas.length ? '<li><b>Clasificación.</b> Cada dato lleva su estado:<ul class="dic-clas">' + clas.join('') + '</ul></li>' : '') +
-      '<li><b>Integridad.</b> La huella digital (SHA-256) se calcula sobre la ficha y la versión de la plataforma: si cambia una letra, cambia la huella.</li></ol>' +
+      '<li><b>Integridad.</b> La huella digital (SHA-256) se calcula sobre la ficha y la versión de la plataforma: si cambia una letra, cambia la huella.</li></ol>') +
       cap('Alcance y limitaciones') + (f.nota ? '<p>' + esc(f.nota) + '</p>' : '') +
       '<p>Este dictamen lo arma el bot de la plataforma solo con datos ya publicados; no lo redacta una inteligencia artificial. ' +
       '<b>No es un documento oficial ni un peritaje con validez ante una autoridad:</b> es el respaldo documental de una respuesta, para que cualquiera revise de dónde sale cada dato. ' +
@@ -646,8 +672,8 @@
     var cols = cerca.filter(function (f) { return f.t === 'columna' && (f === f0 || (fuerte.indexOf(f) >= 0 && hablaDe(f))); }).slice(0, 2);
     /* Primero, lo que falta en la página misma de la respuesta. */
     var base = (r.ir || (f0 && f0.ir) || [''])[0].split('#')[0].split('?')[0];
-    var pends = F.filter(function (f) { return f.t === 'pendiente' && f.pend && base && (f.pend.ap || []).indexOf(base) >= 0; }).slice(0, 2);
-    cerca.forEach(function (f) { if (pends.length < 2 && f.t === 'pendiente' && f.pend && fuerte.indexOf(f) >= 0 && pends.indexOf(f) < 0) pends.push(f); });
+    var pends = F.filter(function (f) { return f.t === 'pendiente' && f.pend && base && (f.pend.ap || []).indexOf(base) >= 0 && (!/^(noticias-|pendientes\.html|indice\.html)/.test(base) || hablaDe(f)); }).slice(0, 2);
+    cerca.forEach(function (f) { if (pends.length < 2 && f.t === 'pendiente' && f.pend && fuerte.indexOf(f) >= 0 && pends.indexOf(f) < 0 && (!r.lect || hablaDe(f))) pends.push(f); });
     var exps = cerca.filter(function (f) { return f.t === 'expediente'; }).slice(0, 1);
     var nadie = [], iv = invDe(q, r);
     /* Nepotismo (pedido del autor, 29-10-2026): lo que la ley todavía no alcanza, y la regla del apellido. */
@@ -680,6 +706,7 @@
     });
     var sigue = [];
     cols.forEach(function (f) { (f.sigue || []).slice(0, 2 - sigue.length).forEach(function (s) { sigue.push('<li>🗓️ ' + (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.tx) + ' ↗</a>' : esc(s.tx)) + '</li>'); }); });
+    if (r.lect && r.lead && r.lead.length) nadie.unshift('<li>📰 <b>La nota, en una línea:</b> ' + esc(r.lead.join(', y ')) + '. Eso es lo que casi ningún titular dice.</li>');
     var nada = !nadie.length && !ruido.length, cie = [];
     /* Sin nota (19-11-2026, afinación por modo): una herramienta o una página de la plataforma no es
        tema de nota, así que no se ofrece una; en lo demás, el Periodista enseña qué preguntar si el tema
@@ -1330,6 +1357,7 @@
     if (d.sat) {
       var s = (IN.sat || {})[d.sat[0]] || { t: d.sat[0], txt: '' };
       h += '<p>' + (d.sat[0] === 'F' ? '⛔' : d.sat[0] === 'P' ? '⚠️' : 'ℹ️') + ' <b>Aparece en la lista 69-B del SAT</b> como <b>' + esc(s.t) + '</b> (oficio ' + esc(d.sat[1]) + ', ' + esc(d.sat[2]) + '). ' + esc(s.txt || '') + '</p>';
+      h += cruceUna(rfc);
     }
     if (sh) h += sh;
     var emp = PE.per.filter(function (x) { return x.emp; }).filter(function (x) { return x.al.some(function (a) { return plano(d.n).indexOf(' ' + a + ' ') >= 0; }); })[0];
@@ -1741,6 +1769,17 @@
     /* 2a. La hemeroteca (31-10-2026): si la liga es de una nota que ya cotejamos, se dice y se abre su cotejo. */
     var hem = liga && hemeroteca(liga);
     if (hem) return hem;
+    /* 2 bis. La liga sola de una red social (08-11-2026, ejemplo del autor): Instagram, Facebook,
+       X o TikTok no dejan que un lector externo abra la publicación, así que no se promete leerla:
+       se pide el texto, que con la liga entra a lectura() y se lee aquí mismo. */
+    var red = liga && /^https?:\/\/(?:[a-z0-9-]+\.)*(instagram\.com|facebook\.com|fb\.watch|x\.com|twitter\.com|tiktok\.com|threads\.net)\//i.exec(liga);
+    if (red && t.replace(liga, '').replace(/\s+/g, ' ').trim().length < 60) {
+      var rn = { 'instagram.com': 'Instagram', 'facebook.com': 'Facebook', 'fb.watch': 'Facebook', 'x.com': 'X', 'twitter.com': 'X', 'tiktok.com': 'TikTok', 'threads.net': 'Threads' }[red[1].toLowerCase()];
+      return { html: '<p>🔒 <b>' + rn + ' no deja que nadie de fuera lea sus publicaciones</b>, ni nosotros: sin el texto no puedo decirte qué afirma ni compararlo con un documento, y no voy a adivinarlo.</p>' +
+        '<p>📋 <b>Copia el texto de la publicación</b> (el pie de foto o lo que dice el video) y pégalo aquí <b>junto con la liga</b>. Con eso te digo lo que afirma en cifras, si ya lo cotejamos, qué promesa toca, en qué etapa va y qué preguntas le faltan.</p>' +
+        '<p class="pa-chico">Revisé la liga contra nuestra hemeroteca y no está entre las notas que ya cotejamos. Si es un video sin texto, cuéntame con tus palabras qué dice y quién lo dice.</p>',
+        ir: [APP.inspnota.url + '?liga=' + encodeURIComponent(liga), APP.inspnota.n], sug: [], rec: [], red: 1 };
+    }
     /* 2. La liga de una nota: «Contrasta una nota» la lee aquí mismo. */
     if (liga) {
       return respApp('inspnota', APP.inspnota.url + '?liga=' + encodeURIComponent(liga),
@@ -2248,8 +2287,8 @@
   function respMoTodo(lista) {
     var T = MO.tot;
     var h = '<p>🏗️ <b>' + esc(MO.nombre) + '</b> sigue ' + T.n + ' megaobras y ' + T.nresc + ' rescates, de 1988 a 2024. Sus cuatro cifras:</p><ul class="pa-lista">' +
-      '<li>Costo real de las ' + T.n + ' obras: <b>' + esc(T.realt) + '</b> ' + chip({ e: 'derivado' }) + ', contra ' + esc(T.presut) + ' aprobados.</li>' +
-      '<li>Pagado de más sobre lo aprobado: <b>' + esc(T.brechat) + '</b> ' + chip({ e: 'derivado' }) + '.</li>' +
+      '<li>Costo real de las ' + T.n + ' obras: <b>' + esc(T.realt) + '</b> ' + chip({ e: 'derivado' }) + ', contra ' + esc(T.presut) + ' previstos (aprobados o, si no se publicó el presupuesto, anunciados).</li>' +
+      '<li>Pagado de más sobre lo previsto: <b>' + esc(T.brechat) + '</b> ' + chip({ e: 'derivado' }) + '.</li>' +
       '<li>Lo que pierden al año las que publican su resultado: <b>' + (T.neto < 0 ? '−' : '+') + esc(T.netot) + '</b> ' + chip({ e: 'derivado' }) + ' (' + T.npierde + ' pierden ' + esc(T.pierdet) + ' y ' + T.ngana + ' gana ' + esc(T.ganat) + ').</li>' +
       '<li>Sin resultado publicado: ' + T.npend + ' ' + chip({ e: 'pendiente', p: 'tema-megaobras' }) + '. No operan: ' + T.nna + '.</li></ul>' +
       '<p class="pa-chico">' + esc(T.medida) + '</p>' +
@@ -2258,7 +2297,7 @@
       }).join('') + '</ul>' : '') + portalesHtml() +
       (charla && charla.deDonde ? charla.deDonde([
         { que: 'Costo real de las ' + T.n + ' obras', e: 'derivado', op: 'suma del costo registrado de cada obra, sin los rescates' },
-        { que: 'Pagado de más', e: 'derivado', op: 'costo real − lo aprobado (' + T.realt + ' − ' + T.presut + ')' },
+        { que: 'Pagado de más', e: 'derivado', op: 'costo real − lo previsto (' + T.realt + ' − ' + T.presut + ')' },
         { que: 'Lo que pierden al año', e: 'derivado', op: 'suma del resultado del año más reciente de cada obra que lo publica (' + T.anios.join(', ') + ')' }].concat(MO.portales.map(function (f) { return { que: 'Portal oficial', e: 'oficial', fu: f }; }))) : '');
     return {
       html: h, ir: [MO.pagina, MO.nombre], app: { id: 'mocero', url: APP.mocero.url }, rec: [
@@ -2537,6 +2576,48 @@
       }).join('') + '</div>' +
       '<p class="pa-chico">¿Encontraste una nota con cifras? Pégame aquí su liga y la cotejo contra los documentos oficiales, con <a href="herramienta-inspector-nota.html">Contrasta una nota</a>.</p></div>';
   }
+  /* Contratos × lista 69-B × ASF (04-11-2026, herramientas/cruce_contratos.py,
+     octava aplicación del Modo Inspector). El chat no rehace el cruce: solo
+     menciona el hallazgo («señal para revisar»), o el antecedente si hoy no hay
+     ninguno, y lleva a su sección de la página. */
+  var CRU = (B.dat && B.dat.cru) || null;
+  function cruceUna(rfc) {
+    if (!CRU) return '';
+    var hs = CRU.hall.filter(function (x) { return x.rfc === rfc; }), a = CRU.ant[rfc];
+    if (hs.length) return '<p>🚩 <b>Señal para revisar</b> ' + chip({ e: 'derivado' }) + ': ' + esc(hs[0].tx.toLowerCase()) + ', ' + hs[0].dias + ' días después de su publicación en el DOF. <a href="' + esc(CRU.pag) + '#e-' + esc(rfc) + '">Ver el cruce ›</a></p>';
+    if (a) return '<p>🗂️ <b>Antecedente</b>, sin señal: ' + esc(a.tx.toLowerCase()) + '. <a href="' + esc(CRU.pag) + '#e-' + esc(rfc) + '">Ver el cruce ›</a></p>';
+    return '';
+  }
+  var CRU_LISTA = '(69 ?b|lista negra|efos|fantasmas?|factureras?)', CRU_TIEMPO = '(asf|auditoria superior|dof|fecha|antes|despues|ano por ano|por ano|historic\\w*|desde)';
+  var CRU_RE = new RegExp('\\b(compranet|cruce de contratos|contratos lista 69 ?b y asf)\\b|' +
+    '\\b(contrat\\w*|proveedor\\w*|empresas?|compr[oa]\\w*)\\b.*\\b' + CRU_LISTA + '\\b.*\\b' + CRU_TIEMPO + '\\b|' +
+    '\\b' + CRU_TIEMPO + '\\b.*\\b' + CRU_LISTA + '\\b.*\\b(contrat\\w*|proveedor\\w*)\\b|' +
+    '\\b' + CRU_LISTA + '\\b.*\\b(contrat\\w*|proveedor\\w*)\\b.*\\b' + CRU_TIEMPO + '\\b');
+  function cruceAsf(q) {
+    var t = plano(q);
+    if (!CRU || !CRU_RE.test(t) || (q.match(RFC_RE) || []).length) return null;
+    var h, ir, fu = [{ que: 'Listado del artículo 69-B del Código Fiscal (corte al ' + CRU.sat.corte + ')', e: 'oficial', fu: { tx: 'SAT', url: CRU.sat.url } },
+      { que: CRU.asf.doc, e: 'oficial', fu: { tx: 'ASF', url: CRU.asf.url } }];
+    if (CRU.hall.length) {
+      var x = CRU.hall[0];
+      h = '<p>🚩 <b>Hallazgo</b> ' + chip({ e: 'derivado' }) + ': de las ' + CRU.nEmp + ' empresas de la lista 69-B con contratos integrados, ' +
+        (CRU.hall.length === 1 ? 'hay <b>1 contrato</b>' : 'hay <b>' + CRU.hall.length + ' contratos</b>') + ' hecho' + (CRU.hall.length === 1 ? '' : 's') + ' después de que el DOF publicó a la empresa. ' +
+        (CRU.hall.length === 1 ? 'Es' : 'El primero') + ': <b>' + esc(x.n) + '</b>, ' + esc(x.sit.toLowerCase()) + ' desde el ' + esc(x.dof) + '; contrato de ' + esc(x.inst) + ' del ' + esc(x.f) +
+        (x.campo === 'firma' ? '' : ' (fecha de publicación en ComprasMX)') + ', ' + x.dias + ' días después, por ' + pesosCmx(x.imp) + '.</p>' +
+        '<p>Es una <b>señal para revisar</b>, no una irregularidad: ' + (x.sit === 'Presunto' ? 'la empresa todavía puede desvirtuar la presunción, ' : '') + 'y estar en la lista no es una condena.</p>';
+      ir = [CRU.pag + '#hallazgos', 'las señales del cruce'];
+    } else {
+      h = '<p>🗂️ Hoy no hay ninguna señal: ningún contrato integrado se hizo con una empresa ya publicada como presunta o definitiva. Queda el <b>antecedente</b> ' + chip({ e: 'derivado' }) + ': ' +
+        Object.keys(CRU.ant).length + ' empresas que estuvieron en la lista y tienen contratos, fuera del orden que levanta una señal.</p>';
+      ir = [CRU.pag + '#antecedentes', 'los antecedentes del cruce'];
+    }
+    h += '<p class="pa-chico">' + (CRU.cnet ? '' : 'Por ahora con ComprasMX (2025 y 2026); CompraNet, de años anteriores, está pendiente. ') + 'La ASF va año por año desde la Cuenta Pública ' + CRU.asf.desde + '.</p>';
+    return { html: h, ir: ir, rec: [], fu: fu, tit: 'Contratos, lista 69-B y ASF',
+      ficha: { t: 'calculo', tit: 'Contratos, lista 69-B y ASF', txt: texto(h), ci: [], fu: fu, ir: ir },
+      sug: ['¿Qué contratistas están en la lista negra del SAT?', '¿Qué es la lista 69-B?'] };
+  }
+
+
   /* Lo que la base no tiene (30-10-2026): la misma pregunta, ya buscada en
      Banxico, el INEGI y los portales oficiales, y al final en las noticias.
      Son enlaces rotulados «sin verificar»: el chat no afirma lo que hay ahí. */
@@ -3040,7 +3121,9 @@
   }
   function resueltoHtml(l, q, tema, dic) {
     if (!l.length) return '';
-    var nom = l.map(function (x) { return '<span aria-hidden="true">' + x[1] + '</span> <b>' + esc(x[2]) + '</b>'; }).join(dic ? '; ' : ' · ');
+    /* Ronda 1 (22-11-2026): cada servicio lleva a su Inspector (servicios-revisa.html?s=), con la misma pregunta. */
+    var nom = l.map(function (x) { return '<span aria-hidden="true">' + x[1] + '</span> <a href="servicios-revisa.html?s=' + encodeURIComponent(x[0]) +
+      '&amp;q=' + encodeURIComponent(String(q || '').slice(0, 600)) + '"><b>' + esc(x[2]) + '</b></a>'; }).join(dic ? '; ' : ' · ');
     var pide = 'Si quieres que lo sigamos por ti (cada semana, con tu cartera completa o con documentos que no son públicos), ' +
       '<a href="' + esc(pideLiga(l[0][0], q, tema)) + '">pídelo con un toque ➔</a>: tu solicitud ya va llena; solo confirmas. El costo y el plazo te llegan por escrito antes de empezar.';
     if (dic) return '<p>Lo que revisa ' + (l.length === 1 ? 'el servicio' : 'cada servicio') + ' con la base de la plataforma (' + nom + ') ya está en este dictamen.</p>' +
@@ -3095,7 +3178,7 @@
       var html = caps.map(function (c) {
         return '<section class="pa-int-cap"><h4><span aria-hidden="true">' + c[0] + '</span> ' + esc(c[1]) + (rfcs.length > 1 ? ' · <code>' + esc(c[3]) + '</code>' : '') + '</h4>' + c[2] + '</section>';
       }).join('');
-      return { html: html, ci: ci, fu: fu, tema: 'Revisión completa de ' + nombres, rfcs: rfcs, caps: caps };
+      return { html: html, ci: ci, fu: fu, tema: 'Revisión completa de ' + nombres, rfcs: rfcs, caps: caps, ya: ya };
     });
   }
   function vistazoHtml(r, genera) {
@@ -3114,6 +3197,12 @@
     /* Una liga que ya está en la hemeroteca abre su cotejo antes que cualquier palabra de su dirección
        («pemex-perdidas-…-deuda» se iba al pendiente de la deuda de Pemex, 01-11-2026). */
     var lg = (/https?:\/\/[^\s<>"']+/i.exec(String(q)) || [])[0], hm = lg && hemeroteca(lg);
+    /* Una nota pegada (texto, con o sin liga) se lee entera: lo que afirma, si ya la cotejamos, la promesa que toca,
+       sus puntos ciegos y lo que sigue (pedido del autor, 07-11-2026). La columna que ya la coteja va dentro. */
+    if (charla && charla.esNota && charla.esNota(q)) {
+      var tx0 = charla.sinLiga(q);
+      return charla.lectura(q, hm || tituloColumna(tx0) || temaColumna(tx0));
+    }
     if (hm) return hm;
     var ge = grupoEmp(q);
     if (ge) return ge;
@@ -3131,6 +3220,7 @@
     var sae = charla && charla.saludEstado && charla.saludEstado(q);
     if (sae) return sae;
     var sso = charla && charla.social && charla.social(q); if (sso) return sso;
+    var svi = charla && charla.vivienda && charla.vivienda(q); if (svi) return svi;
     var sap = charla && charla.administracion && charla.administracion(q); if (sap) return sap;
     var tc = tituloColumna(q);
     if (tc) return tc;
@@ -3152,7 +3242,7 @@
     if (dr) return dr;
     var pd = padronResp(q);
     if (pd) return pd;
-    var cx = fraccCmx(q) || cruceSat(q) || sancionesCmx(q) || contratosCmx(q) || empresaNombre(q, previas);
+    var cx = fraccCmx(q) || cruceAsf(q) || cruceSat(q) || sancionesCmx(q) || contratosCmx(q) || empresaNombre(q, previas);
     if (cx) return cx;
     var pe = personaje(q);
     if (pe) return pe;
@@ -3472,12 +3562,27 @@
       var fol = hx ? folioDe(hx, 'DP') : null;
       Array.prototype.forEach.call(doc.querySelectorAll('.pa-folio'), function (el) { el.textContent = fol || 'no disponible en este navegador'; });
       doc.querySelector('.pa-huella code').textContent = hx ? hx.replace(/(.{16})/g, '$1 ').trim() : 'no disponible en este navegador';
+      var hc = doc.querySelector('.dic-huella-c code');
+      if (hc) { hc.textContent = hx ? hx.slice(0, 16) + '…' : 'no disponible'; if (hx) hc.title = hx; }
       Array.prototype.forEach.call(doc.querySelectorAll('.dic-sello'), function (el) { el.innerHTML = sello(fol, 'DICTAMEN'); });
       guardaDic(q, r, f, fol);
     });
     var im = document.getElementById('dicImprime'), en = document.getElementById('dicEnlace');
     im.hidden = en.hidden = false;
+    /* Un solo cierre discreto (Ronda 1): con la revisión de una empresa, lo que la base no hace sola
+       (el aviso cada semana o la cartera completa) se pide en el Inspector de su servicio. Nunca un monto. */
+    var acc = document.querySelector('#dicApp .dic-acc');
+    if (acc && r.integ && !acc.querySelector('.dic-puente')) {
+      acc.insertAdjacentHTML('beforeend', '<a class="dic-puente" href="servicios-revisa.html?s=seguimiento&amp;q=' + encodeURIComponent(r.integ.rfcs[0]) +
+        '">📡 ¿Seguimiento cada semana o tu cartera completa? ➔</a>');
+    }
     im.addEventListener('click', function () { window.print(); });
+    /* Al imprimir o guardar en PDF, el desglose va completo: se abren los acordeones y luego vuelven como estaban. */
+    var cerrados = [];
+    window.addEventListener('beforeprint', function () {
+      cerrados = Array.prototype.filter.call(doc.querySelectorAll('details:not([open])'), function (d) { d.open = true; return true; });
+    });
+    window.addEventListener('afterprint', function () { cerrados.forEach(function (d) { d.open = false; }); cerrados = []; });
     en.addEventListener('click', function () {
       (navigator.clipboard ? navigator.clipboard.writeText(location.href) : Promise.reject()).then(function () {
         en.textContent = '✅ Enlace copiado';

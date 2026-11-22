@@ -926,6 +926,10 @@ HERRAMIENTAS = [
          # calculadora de parentesco (herramientas/nepotismo.py).
          ('inspnepotismo', '👪', 'Nepotismo y parentesco', 'Busca y verifica',
           'Elige un parentesco y ve qué grado es y qué ley lo alcanza: plaza, contrato o candidatura. Con el árbol de grados, cómo se investiga un cargo y por qué un apellido igual no prueba nada.'),
+         # Desde el 04-11-2026 (pedido del autor; traída del PR #137 el 22-11-2026): contratos ×
+         # lista 69-B × ASF, año por año (herramientas/cruce_contratos.py).
+         ('inspcruce', '🔗', 'Contratos, lista 69-B y ASF', 'Año por año',
+          'Cruzamos los contratos públicos con la lista negra del SAT y lo que fiscalizó la Auditoría Superior desde 2002. Separamos lo que ya declaró la autoridad de las señales que detectamos, como un contrato firmado después de que el DOF publicó a la empresa.'),
          # Venia de la pestana «Servicios» de Participa (pedido del autor, 11-10-2026).
          ('servicios.html', '🔎', 'Servicios de investigación', 'Investigación a la medida',
           'Cuando necesites ir más a fondo en un caso: revisión documental, expediente, seguimiento, capacitación o licencia, con la misma regla de la plataforma y su política de independencia. Tiene su propia página.'),
@@ -1002,7 +1006,7 @@ MODULOS_PROPIOS = {'inspverifica'}
 # modulo de herramientas/ arma su pagina con construir(base, ref) y dice
 # sus ESTILOS y SCRIPTS (assets/auditor/css y js).
 INSP_NATIVAS = {'inspasf': 'insp_asf', 'inspentes': 'insp_entes',
-                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'insppadron': 'insp_padron', 'inspnepotismo': 'nepotismo', 'inspfactura': 'insp_factura', 'inspresultados': 'insp_resultados', 'inspmia': 'insp_mia', 'inspconservacion': 'insp_conservacion', 'inspcumplimiento': 'insp_cumplimiento', 'inspriesgos': 'insp_riesgos',
+                'inspnota': 'insp_nota', 'inspefos': 'insp_efos', 'insppadron': 'insp_padron', 'inspnepotismo': 'nepotismo', 'inspfactura': 'insp_factura', 'inspresultados': 'insp_resultados', 'inspmia': 'insp_mia', 'inspconservacion': 'insp_conservacion', 'inspcumplimiento': 'insp_cumplimiento', 'inspriesgos': 'insp_riesgos', 'inspcruce': 'cruce_contratos',
                 # Calculadora Civica (pedido del autor, 12-10-2026): sus tres
                 # aplicaciones que abrian el motor en un marco.
                 'ccticket': 'cc_ticket', 'cccompara': 'cc_compara', 'ccreloj': 'cc_reloj', 'ccinmueble': 'cc_inmueble', 'ccbolsa': 'cc_bolsa', 'ccpredial': 'cc_predial', 'cclaboral': 'cc_laboral',
@@ -1378,7 +1382,7 @@ def herramienta_asistente(bloque):
         'entrada': '<b>%s.</b> %s' % (ASISTENTE[2], ASISTENTE[3]),
         'fondo': FOTO_AUDITOR, 'rubro': rubro, 'foto_clase': 'foto-auditor',
         'secciones': [{'id': 'chat', 'titulo': ASISTENTE[1], 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
-        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
+        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
         # Sin la fila de las cuatro herramientas: el chat ya es sus modos.
         'pie_extra': nav,
     }
@@ -1398,7 +1402,7 @@ def herramienta_dictamen(bloque):
                     'sus fuentes oficiales y el método, con folio, sello y huella digital. Se arma de nuevo con los datos de la plataforma cada vez que se abre el enlace.'),
         'fondo': FOTO_AUDITOR, 'rubro': h[1], 'foto_clase': 'foto-auditor',
         'secciones': [{'id': 'dictamen', 'titulo': 'Dictamen cívico independiente de Auditavisión', 'texto': '', 'sin_cab': True, 'tarjetas': [], 'bloque': bloque}],
-        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
+        'estilos': ['asistente.css'], 'scripts': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'asistente-base.js', 'verificador.js', 'asistente-charla.js', 'asistente.js'],
     }
 
 
@@ -2763,7 +2767,8 @@ def sv_servicios_y_nuevo(sf, puertas):
                 x[2], '%s%s' % (COBRO[x[0]], (' · %d %s' % (len(nv), 'novedad' if len(nv) == 1 else 'novedades')) if nv else ''),
                 x[1], 'Nuevo' if nv else '', sf.revisa_liga(x[0]), (),
                 SV_TONO[lid], id_='sv-nuevo-%s' % x[0], attrs=' data-sv-srv="%s"' % x[0],
-                pie=(sv_novedades_lista(x[0], sf, resp=True) if nv else '') + sv_most_boton(x[0]), ligas=True))
+                pie=(('<details class="sv-nuevo-mas"><summary><span aria-hidden="true">🆕</span> Lo nuevo (%d)</summary>%s</details>'
+                      % (len(nv), sv_novedades_lista(x[0], sf, resp=True))) if nv else '') + sv_most_boton(x[0]), ligas=True))
         paneles.append(
             '          <div class="sv-linea" id="nuevo-%s" data-sv-panel="%s">\n'
             '            <p class="sv-linea-tit"><span aria-hidden="true">%s</span> %s</p>\n'
@@ -2881,7 +2886,7 @@ def sv_acciones(sid, ver=True):
     import servicios_fichas as sf
     q, m = sv_pregunta(sid)
     return ([('Ver el servicio', 'servicio-%s.html' % sid, True)] if ver else []) + [
-        ('💬 Pregúntale', sf.chat_liga(q, m), False),
+        ('🔍 Revísalo', sf.revisa_liga(sid), False),  # Ronda 1 (22-11-2026): el Inspector de su servicio
         ('🧾 Dictamen', sv_dictamen(q, m), False),
         ('📝 Cotiza', 'servicios-cotiza.html?servicio=%s#solicitud' % sid, False)]
 
@@ -2922,7 +2927,10 @@ def sv_monta():
 # monto de multa** (la ley lo fija en UMA y la autoridad lo individualiza) y
 # nunca se dice que revisar te libra de nada: (ícono, situación, consecuencia,
 # ley, artículo, cita textual, (qué revisa, su aplicación), servicio).
-SV_CPF = ('Código Penal Federal', 'CPF', 'DOF 13-11-2026', 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPF.pdf',
+# La fecha es la del texto compilado cuya huella va abajo (LeyesBiblio, «Última reforma DOF
+# 13-03-2026», cotejado el 22-11-2026). El decreto del DOF 13-11-2026 aún no está en ese texto y
+# falta cotejar si toca el art. 400 Bis: hasta entonces no se cambia la fecha sin cambiar la huella.
+SV_CPF = ('Código Penal Federal', 'CPF', 'DOF 13-03-2026', 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPF.pdf',
           'a2d80c4383c5fbc8453cf290c19b7853eb0a5a05d1e366572da384edfafda88c')
 SV_CONSECUENCIAS = [
     ('🧾', 'Tu proveedor entra a la lista 69-B definitiva',
@@ -3428,13 +3436,14 @@ def servicios():
     modo_tx = {'sola': '🤖 Se pone al día sola cada semana', 'aviso': '🔔 Un vigía avisa y se coteja', 'mano': '✋ Se integra a mano'}
     aldia = '\n'.join([
         '<div class="sv-tira">', tira, '        </div>',
+        '        <details class="sv-fuentes-mas"><summary><span aria-hidden="true">📚</span> Ver fuentes y cortes (%d)</summary>' % len(SV_FUENTES),
         '        <ul class="sv-fuentes">%s</ul>' % ''.join(
             '<li><b>%s</b><span>%s · %s</span><small>%s</small></li>' % (
                 html.escape(fte[k]['que']), html.escape(fte[k]['quien']), html.escape(fu.corte(fte[k])), modo_tx[fte[k]['modo']])
             for k in SV_FUENTES),
         '        <p class="sv-nota">Los números son conteos de los archivos de la plataforma al generar esta página (<span class="est-chip est-derivado">auditada</span>). '
         'Cada fuente, con quién la publica, cada cuándo y su próxima revisión, está en <a href="base-al-dia.html">La base al día</a>; '
-        'de qué documento sale cada número, en <a href="%s#base">Por qué Auditavisión</a>.</p>' % SV_PORQUE])
+        'de qué documento sale cada número, en <a href="%s#base">Por qué Auditavisión</a>.</p>' % SV_PORQUE, '        </details>'])
     faq = '<div class="sv-faqs">\n%s\n        </div>' % '\n'.join(
         '          <details class="sv-faq"><summary>%s</summary><p>%s</p></details>' % q for q in PREGUNTAS)
     # Lo nuevo de la plataforma (18-11-2026), integrado a cada servicio y por
@@ -3568,10 +3577,10 @@ def servicio_paginas(comun):
             '          <p class="sv-fx-que">%s</p>' % que,
             '          <dl class="sv-dl sv-fx-dl"><dt>Recibes</dt><dd>%s</dd><dt>Para quién</dt><dd>%s</dd>'
             '<dt>Cómo se cobra</dt><dd>%s. El costo y el plazo te llegan por escrito antes de empezar; si no te conviene, ahí termina.</dd></dl>' % (recibe, quien, COBRO[sid]),
-            '          <div class="sv-fx-acc"><a class="sz-btn" href="%s">💬 Plantéale tu caso al Auditor</a>'
+            '          <div class="sv-fx-acc"><a class="sz-btn" href="%s">🔍 Revísalo con el Inspector</a>'
             '<a class="sz-btn" href="%s" target="_blank" rel="noopener">🧾 Genera su dictamen</a>'
             '<a class="sz-btn sz-btn-of" href="%s">📝 Pide una cotización</a></div>' % (
-                sf.chat_liga(*f['auditor'][0]), sv_dictamen(*sv_pregunta(sid)), cotiza),
+                sf.revisa_liga(sid), sv_dictamen(*sv_pregunta(sid)), cotiza),
             '          <p class="sv-nota">Todo empieza en el chat: te contesta en corto, te da el dictamen y te lleva a fondo. '
             'El dictamen de este servicio respalda qué es, con sus fuentes, su folio y su huella; no es un documento oficial ni un peritaje.</p>',
             '          <p class="sv-limite"><span aria-hidden="true">⚖️</span> %s</p>' % f['no'],
@@ -6884,7 +6893,7 @@ def numeros_preparar():
     import gasto_modulos as gm
     import poderes_modulo as pdm
     guion = {'gp-tres': [], 'eb-cuenta-federal': 'resultados.js', 'eb-salud': [], 'eb-egresos': [], 'eb-ciegos': [], 'poderes': [], 'eb-cuanto': ['numeros.js', 'radar.js'], 'nr-origenes': 'numeros.js', 'eb-mapa': 'territorio.js', 'territorio': 'territorio.js',
-             'municipios': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'territorio.js']}
+             'municipios': ['municipios-efipem.js', 'municipios-inversion.js', 'municipios-deuda.js', 'municipios-poblacion.js', 'territorio.js']}
     for m in NUMEROS_MODULOS:
         NUMEROS_ABRIR[m[0]] = m[1]
         hecho = propios.get(m[0])
@@ -6950,6 +6959,13 @@ def pagina(a, sello):
         import modos
         sid = a['archivo'][len('servicio-'):-len('.html')] if a['archivo'].startswith('servicio-') else None
         texto = sf.por_auditor_html(texto, origen, sf.FICHAS[sid]['auditor'][0][1] if sid in sf.FICHAS else None, modos.modo_pagina)
+        if sid in sf.FICHAS:
+            # Ronda 1 (22-11-2026): en la página de un servicio, cada pregunta al Inspector abre
+            # el Inspector de ese servicio (servicios-revisa.html?s=<id>), con la misma pregunta y
+            # la misma página por abrir: mismos datos, el servicio ya elegido.
+            texto = texto.replace('href="%s?q=' % sf.SV_CHAT, 'href="%s?s=%s&amp;q=' % (sf.SV_REVISA, sid))
+        elif origen == 'Servicios' and a['archivo'] not in (sf.SV_CHAT, sf.SV_RESP, sf.SV_REVISA):
+            texto = sf.a_revisa(texto)
     return texto
 
 

@@ -288,13 +288,20 @@ FICHAS = {
              'cada paso con su artículo.', 'herramienta-calculadora-inmueble.html', 'Nuevo'),
             ('📈', 'Inviertes en la bolsa', 'El 10 % de los artículos 129 y 140 sobre tu ganancia y tus dividendos, y lo que el simulador no calcula.',
              'herramienta-calculadora-bolsa.html', 'Nuevo'),
-            ('🏡', 'Tu impuesto predial', 'El predial con la Ley de Ingresos de tu municipio, si ya está cotejada, cada cifra con su artículo.',
+            ('🏡', 'Tu impuesto predial', 'El predial con la Ley de Ingresos de tu municipio, si ya está cotejada, cada cifra con su artículo, '
+             'y tu valor fiscal junto al Índice SHF de precios de la vivienda de tu estado, que no es un avalúo.',
              'herramienta-calculadora-predial.html', 'Nuevo'),
+            ('📄', 'El informe de tu predial', 'Tu cuenta del predial en un documento que se imprime y se descarga, con folio, la huella SHA-256 de tus datos '
+             'y una liga que repite la cuenta. No es un documento oficial ni un avalúo, y nada sale de tu navegador.',
+             'herramienta-calculadora-predial.html', 'Nuevo'),
+            ('🏘️', 'El precio de la vivienda en el Planisferio', 'El Índice SHF de los 32 estados en el mapa: el índice, cuánto subió en un año y el precio '
+             'mediano de los avalúos, la misma cifra que lee el simulador del predial.', 'planisferio.html?d=financiera&l=shfI', 'Nuevo'),
         ],
         'auditor': [('Dame mi estado de cuenta cívico', 'ciudadano'), ('Mi estado de cuenta ambiental', 'ambientalista'),
                     ('Me despidieron, ¿cuánto me toca de liquidación?', 'ciudadano'),
                     ('Gano 15 mil al mes, ¿cuánto me retienen?', 'ciudadano'), ('Trabajo en el gobierno y gano 20 mil al mes, ¿cuánto me retienen?', 'ciudadano'), ('¿Cuánto ISR pago si vendo mi casa?', 'ciudadano'),
-                    ('¿Cuánto ISR pago si vendo acciones en la bolsa?', 'ciudadano'), ('¿Cuánto pago de predial en Zapopan?', 'ciudadano')],
+                    ('¿Cuánto ISR pago si vendo acciones en la bolsa?', 'ciudadano'), ('¿Cuánto pago de predial en Zapopan?', 'ciudadano'),
+                    ('¿Cuánto ha subido el precio de la vivienda en Jalisco?', 'ciudadano')],
         'enciclopedia': [('herramienta-calculadora.html', 'La Calculadora Cívica'), ('numeros-herramientas-del-auditor.html', 'Las herramientas del Auditor')],
         'glosario': ['ISR (Impuesto Sobre la Renta)', 'Retención del ISR (Tarifa del Artículo 96)', 'Cuota Obrera del IMSS', 'Cuota Patronal del IMSS', 'Cuotas al ISSSTE',
                      'Costos Totales por Agotamiento y Degradación Ambiental',
@@ -428,6 +435,34 @@ def revisa_liga(sid, q=None, abre=None):
     from urllib.parse import quote
     return '%s?s=%s%s%s' % (SV_REVISA, sid, '&q=%s' % quote(q) if q else '',
                             '&abre=%s' % quote(html.unescape(abre), safe='/-_.') if abre else '')
+
+
+def servicio_de(abre):
+    """El primer servicio cuya ficha aprovecha esa página (su `hace`), por la liga exacta o por
+    su archivo; None si ninguno. Sirve para mandar una pregunta al Inspector de ese servicio."""
+    if not abre:
+        return None
+    from urllib.parse import unquote
+    a = unquote(html.unescape(abre))
+    for exacta in (True, False):
+        for sid, f in FICHAS.items():
+            for x in f['hace']:
+                lg = html.unescape(x[3])
+                if (lg == a) if exacta else (lg.split('#')[0].split('?')[0] == a.split('#')[0].split('?')[0]):
+                    return sid
+    return None
+
+
+def a_revisa(texto):
+    """Ronda 1 (22-11-2026): en una página de Servicios, la pregunta al Inspector que abre una
+    página que algún servicio aprovecha va al Inspector de ese servicio (servicios-revisa.html?s=),
+    con la misma pregunta y la misma página: mismos datos, el servicio ya elegido."""
+    def cambia(m):
+        sid = servicio_de(m.group(2))
+        if not sid:
+            return m.group(0)
+        return 'href="%s?s=%s&amp;q=%s&amp;abre=%s"' % (SV_REVISA, sid, m.group(1), m.group(2))
+    return re.sub(r'href="%s\?q=([^"&]*)&amp;abre=([^"]*)"' % re.escape(SV_CHAT), cambia, texto)
 
 
 def resp_liga(q, abre=None):

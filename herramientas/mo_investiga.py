@@ -228,7 +228,7 @@ def construir(base, ref):
   <section class="mt-arranque" aria-labelledby="miArrTit">
     <p class="mt-kicker">{kicker}</p>
     <h2 class="mt-grande" id="miArrTit">Haz tu propia investigación de las megaobras</h2>
-    <p class="mt-lead">Con filtros, contadores, simuladores y tablas, recorre lo que invirtió cada presidente de 1988 a 2024, cuánto costó cada obra frente a lo aprobado, si hoy gana o pierde, su estado de resultados, lo que nos sigue costando, los rescates y la huella ambiental. Cada cifra trae su documento oficial y su estado: {chip_of}, {chip_der} o {chip_pend}.</p>
+    <p class="mt-lead">Con filtros, contadores, simuladores y tablas, recorre lo que invirtió cada presidente de 1988 a 2024, cuánto costó cada obra frente a lo previsto, si hoy gana o pierde, su estado de resultados, lo que nos sigue costando, los rescates y la huella ambiental. Cada cifra trae su documento oficial y su estado: {chip_of}, {chip_der} o {chip_pend}.</p>
     <ul class="mt-investiga" aria-label="Lo que puedes investigar">{accesos}</ul>
   </section>
 

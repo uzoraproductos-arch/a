@@ -83,6 +83,8 @@ PERSONAJES = [
     ('zoe-robledo', 'Zoé Robledo Aburto', ['zoe robledo', 'robledo aburto'], False),
     # Dirigente del PRI en Jalisco: la nota «Al momento» de Jalisco y el gasto federal (29-10-2026).
     ('laura-haro', 'Laura Haro', ['laura haro'], False),
+    # Presidenta de la Comisión de Presupuesto: la nota «Al momento» del PEF 2027 y el agua de Jalisco (07-11-2026).
+    ('merilyn-gomez-pozos', 'Merilyn Gómez Pozos', ['gomez pozos', 'mery pozos', 'merypozos'], False),
 ]
 
 # Las empresas contratistas que nombra un documento oficial citado en una

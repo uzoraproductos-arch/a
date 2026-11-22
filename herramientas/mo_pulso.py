@@ -168,7 +168,7 @@ def _contexto(base, ref):
         f0 = vfu.get((v.get('fuentes') or [None])[0])
         filas.append({'id': o['id'], 'ico': o['icono'], 'n': o['nombre'], 'pres': o['presidente'], 'per': o['periodo_sexenal'],
                       'sec': o['sector_id'], 'real': o['inversion_real_mdp'], 'presu': o['inversion_presupuestada_mdp'],
-                      'sobre': o['sobrecosto_pct'], 'er': _est(o, 'inversion_real_mdp'), 'ep': _est(o, 'inversion_presupuestada_mdp'),
+                      'sobre': o['sobrecosto_pct'], 'pet': o.get('presupuesto_etiqueta') or '', 'er': _est(o, 'inversion_real_mdp'), 'ep': _est(o, 'inversion_presupuestada_mdp'),
                       'es': _est(o, 'sobrecosto_pct'), 'perd': perd[o['id']]['v'], 'epd': perd[o['id']]['e'],
                       'f': f0['doc'] if f0 else '', 'u': f0['url'] if f0 else ''})
 
@@ -302,13 +302,13 @@ SECCIONES = {
       <article class="mp-kpi">
         <p class="mp-kpi-et"><span aria-hidden="true">📈</span> Sobrecosto del conjunto</p>
         <p class="mp-kpi-v mp-num mp-ambar" id="mpKSobre">{sobre}</p>
-        <p class="mp-kpi-sub"><span id="mpKSobreSub">{presu} aprobados frente a {real} erogados</span> {chip_der}</p>
-        <p class="mp-kpi-mdp mp-num" id="mpKSobreOp">(erogado ÷ aprobado − 1) × 100</p>
+        <p class="mp-kpi-sub"><span id="mpKSobreSub">{presu} previstos frente a {real} erogados</span> {chip_der}</p>
+        <p class="mp-kpi-mdp mp-num" id="mpKSobreOp">(erogado ÷ previsto − 1) × 100</p>
       </article>
       <article class="mp-kpi">
         <p class="mp-kpi-et"><span aria-hidden="true">💸</span> Pesos de más</p>
         <p class="mp-kpi-v mp-num" id="mpKBrecha">{brecha}</p>
-        <p class="mp-kpi-sub"><span id="mpKBrechaSub">Erogado menos aprobado, sumando las {n} obras</span> {chip_der}</p>
+        <p class="mp-kpi-sub"><span id="mpKBrechaSub">Erogado menos previsto, sumando las {n} obras</span> {chip_der}</p>
         <p class="mp-kpi-mdp mp-num" id="mpKBrechaMdp">{brecha_mdp}</p>
       </article>
     </div>
@@ -358,12 +358,12 @@ SECCIONES = {
     'calculo': '''  <section class="mp-sec mp-como" id="mpComo" aria-labelledby="mpComoTit">
     <h2 class="mp-tit" id="mpComoTit"><span aria-hidden="true">🔎</span> Cómo se calcula lo que ves</h2>
     <ul class="mp-lista">
-      <li><b>Los agregados se suman, no se escriben.</b> El costo real, lo aprobado y la brecha son la suma obra por obra de las {n} obras evaluadas {chip_der}; la pérdida neta del año suma además los dos rescates.</li>
+      <li><b>Los agregados se suman, no se escriben.</b> El costo real, lo previsto y la brecha son la suma obra por obra de las {n} obras evaluadas {chip_der}; la pérdida neta del año suma además los dos rescates. Lo «previsto» es el presupuesto aprobado de cada obra o, donde no se publicó, lo que se anunció (Dos Bocas): por eso el total no se llama «aprobado».</li>
       <li><b>Los rescates, aparte.</b> El FOBAPROA y el FARAC son deudas que el Estado asumió, no obras: lo que han costado mezcla pagos de décadas con saldos de hoy, en pesos sin deflactar. Por eso no entran en el costo ni en el sobrecosto del conjunto; tienen su propio bloque, y su «sobrecosto» se llama crecimiento frente a lo que se presentó en su momento.</li>
       <li><b>La pérdida neta del año.</b> {medida}</li>
       <li><b>Las cadencias.</b> La cifra anual multiplicada por 1/365 (día), 1/12 (mes), 1/4 (trimestre) o 1/2 (semestre).</li>
       <li><b>La pérdida por segundo.</b> La pérdida neta del año entre los 31,536,000 segundos de un año de 365 días. El contador en vivo no mide un gasto que ocurra en ese instante: proyecta el ritmo anual sobre el tiempo que llevas mirando.</li>
-      <li><b>El sobrecosto del conjunto.</b> Compara la inversión real total contra la aprobada total, de modo que cada obra pesa según su tamaño. No es el promedio simple de los porcentajes, que trataría igual a una refinería y a una estela.</li>
+      <li><b>El sobrecosto del conjunto.</b> Compara la inversión real total contra la prevista total, de modo que cada obra pesa según su tamaño. No es el promedio simple de los porcentajes, que trataría igual a una refinería y a una estela.</li>
       <li><b>Cifras con documento.</b> De las {n} obras, {n_ver} ya tienen documentos oficiales cotejados ({verificadas}) y {con_cifra} tienen su costo anclado a un documento oficial (la cartera de Hacienda, la Cuenta Pública o un informe de la ASF). {n_op} obras publican su ganancia o pérdida del año; en las demás, el resultado, los costos de operación y el costo unitario siguen pendientes o no aplican, y no se estiman {chip_unit}.</li>
       <li><b>Los rangos.</b> Cuando la cifra exacta no está publicada pero documentos oficiales la acotan por arriba y por abajo, la suma usa su punto medio, (mínimo + máximo) ÷ 2, y la obra dice sus dos cotas y de dónde sale cada una {chip_der}. Hoy entran así: {rangos_lista}. La cifra exacta se sigue debiendo y queda en el Registro de pendientes.</li>
       <li><b>La cuenta de cada obra.</b> Ingresos esperados y reales, gasto de operación, intereses y ganancia o pérdida del año, renglón por renglón, con su operación y su documento: <a href="herramienta-megaobras-pulso-cuenta.html">La cuenta de cada obra</a>.</li>

@@ -110,7 +110,8 @@
       fortamun: 'FORTAMUN, la aportación para fortalecer al municipio', fismdf: 'FAIS municipal, para obras en zonas de pobreza',
       predial: 'lo que cobró de predial', propios: 'ingresos propios, lo que cobró por su cuenta', egr: 'egresos de 2024',
       dep: 'dependencia de la Federación', inv: 'inversión pública de 2024 (obra y proyectos productivos)',
-      deu: 'lo que pagó por sus créditos en 2024 (capital, intereses y comisiones)' };
+      deu: 'lo que pagó por sus créditos en 2024 (capital, intereses y comisiones)',
+      pob: 'población (Censo 2020)', iph: 'ingreso por habitante (2024 ÷ Censo 2020)' };
     /* Nombres de municipio que también son palabras comunes: solo cuentan si se dice «municipio». */
     var COMUN = ' centro reforma progreso victoria solidaridad libres union la union paz la paz general nacional independencia hidalgo morelos guerrero juarez allende zaragoza madero obregon mexico tabasco colima durango aguascalientes campeche chihuahua oaxaca puebla queretaro tlaxcala zacatecas tepic jalisco nuevo nombre jesus maria santiago san pedro trinidad libertad ';
     /* Nombres cortos que la gente dice sin su apellido («Tula» por Tula de Allende). */
@@ -133,8 +134,13 @@
     var MINV = window.AUDIT_MUN_INV || null;
     /* Y la deuda en su cuenta, también (municipios-deuda.js): lo que pagó y pidió en el año, no lo que debe. */
     var MDEU = window.AUDIT_MUN_DEUDA || null;
+    /* Y su población, del Censo 2020 (municipios-poblacion.js): la tienen también los que no rindieron cuenta. */
+    var MPOB = window.AUDIT_MUN_POB || null;
+    function pobDe(m) { var p = MPOB && MPOB.mun[m.cve]; return p ? p[0] : null; }
     function mv(m, k) {
+      if (k === 'pob') return pobDe(m);
       if (!m.v) return null;
+      if (k === 'iph') return pobDe(m) ? m.v[MCAMPO.ing] / pobDe(m) : null;
       if (k === 'inv') { var iv = MINV && MINV.mun[m.cve]; return iv ? iv[0] : null; }
       if (k === 'deu') { var dd = MDEU && MDEU.mun[m.cve]; return dd ? dd[1] + dd[2] + dd[3] : null; }
       if (k === 'dep') return m.v[MCAMPO.ing] ? (m.v[MCAMPO.part] + m.v[MCAMPO.aport]) / m.v[MCAMPO.ing] * 100 : null;
@@ -188,7 +194,8 @@
       ['pob', /poblacion|habitantes tiene|cuanta gente|cuantas personas|cuantos habitantes|cuantos viven/],
       ['gasto', /recib|le (dan|mandan|llega|llegan|toca|tocan|manda|pasan|da)|les (dan|mandan|llega|toca)|transfer|federaliz|ramos? 28 y 33|presupuesto|cuanto dinero|cuanta (lana|feria)|cuanto (varo|baro)|dinero (le|les)|lana|varo|feria|cuanto tiene/]
     ];
-    var MET_MUN = [['deu', /deud|debe[ns]?\b|endeud|prestam|presto|credito|emprestito|intereses/], ['inv', /invers|invierte|invirti|obra publica|obras? (que )?(hizo|hicieron|construy)/], ['predial', /predial/], ['fortamun', /fortamun|fortalecimiento/], ['fismdf', /\bfais\b|fismdf|infraestructura social/],
+    var MET_MUN = [['iph', /por (habitante|persona|cabeza)|per ?capita|por cada (habitante|persona)/],
+      ['pob', /poblacion|habitantes|poblad[oa]s?\b|cuanta gente|cuantas personas|cuantos viven/], ['deu', /deud|debe[ns]?\b|endeud|prestam|presto|credito|emprestito|intereses/], ['inv', /invers|invierte|invirti|obra publica|obras? (que )?(hizo|hicieron|construy)/], ['predial', /predial/], ['fortamun', /fortamun|fortalecimiento/], ['fismdf', /\bfais\b|fismdf|infraestructura social/],
       ['dep', /depend|mantenid|vive de|colgad|autonom/], ['propios', /propio|recaud|cobra por su cuenta|cobran ellos|genera/],
       ['part', /participacion|ramo 28/], ['aport', /aportacion|ramo 33/], ['egr', /gast|egres/],
       ['ing', /ingres|recib|dinero|presupuesto|lana|varo|feria|tiene|maneja|le (dan|llega|toca)/]];
@@ -343,7 +350,7 @@
       pjr: 'causas penales pendientes en su Poder Judicial (cierre de 2024)', pjj: 'personas juzgadoras en su Poder Judicial' };
     var RKM = { ing: 'ingresos', part: 'participaciones', aport: 'aportaciones', fortamun: 'FORTAMUN', fismdf: 'FAIS municipal', predial: 'cobro de predial',
       propios: 'ingresos propios', egr: 'egresos', dep: 'dependencia de la Federación', inv: 'inversión pública (obra y proyectos productivos)',
-      deu: 'pago de deuda en 2024 (capital, intereses y comisiones)' };
+      deu: 'pago de deuda en 2024 (capital, intereses y comisiones)', pob: 'habitantes (Censo 2020)', iph: 'ingreso por habitante' };
     function ranking(k, dir, cuantos, porHab) {
       var m = M[k], rk = RK[k] || m.n;
       var val = function (x) { return porHab && k !== 'pc' ? (x[k] != null && x.pob ? x[k] * 1e6 / x.pob : null) : x[k]; };
@@ -450,9 +457,32 @@
       var nom = esc(m.n) + ', ' + esc(m.en);
       var mas = otros && otros.length ? '<p class="pa-chico">Hay otro' + (otros.length > 1 ? 's' : '') + ' municipio' + (otros.length > 1 ? 's' : '') + ' con ese nombre: ' +
         otros.slice(0, 4).map(function (o) { return '<button type="button" class="pa-enlace" data-pa-pregunta="municipio ' + esc(o.n) + ' ' + esc(o.en) + '">' + esc(o.n) + ', ' + esc(o.en) + '</button>'; }).join(' · ') + '.</p>' : '';
+      var MPFU = MPOB ? { tx: 'INEGI, Censo de Población y Vivienda 2020, principales resultados por localidad (ITER)', url: MPOB.pagina } : null;
+      if (k === 'pob') {
+        var pb = pobDe(m);
+        if (pb == null) return { html: '<p><b>' + nom + '</b> no existía cuando se levantó el Censo de Población y Vivienda 2020: sus habitantes se contaron en el municipio del que se separó. El INEGI no ha publicado un conteo más reciente por municipio.</p>' + mas,
+          fu: [{ que: 'Los municipios que contó el Censo 2020', e: 'oficial', fu: MPFU }], tit: m.n + ': población', ci: [] };
+        var Lp = munLugar(m, 'pob');
+        return { html: '<p>En <b>' + nom + '</b> vivían <b>' + n(pb, 0) + ' personas</b> según el Censo de Población y Vivienda 2020 del INEGI, el último conteo completo.' +
+          (Lp.de > 1 ? ' Es el lugar <b>' + Lp.l + ' de ' + Lp.de + '</b> en población de ' + esc(m.en) + '.' : '') + '</p>' +
+          '<p class="pa-chico">La cifra es de 2020, no de hoy.</p>' + mas,
+          fu: [{ que: 'Población del municipio', e: 'oficial', fu: MPFU }, { que: 'Lugar en el estado', e: 'derivado', op: 'lugar entre los municipios del estado con población del Censo 2020' }],
+          val: { v: pb, u: 'personas' }, tit: m.n + ', ' + m.en + ': población', ci: [{ v: n(pb, 0), etq: 'personas (Censo 2020)', e: 'oficial' }] };
+      }
       if (!m.v) return { html: '<p><b>' + nom + '</b> no reportó sus cifras de 2024 a la estadística de finanzas municipales del INEGI, así que no tengo sus números. Puedes revisar su ficha técnica en el Auditor de entes públicos.</p>' + mas,
         fu: [{ que: 'Municipios sin cifra', e: 'pendiente', fu: MFU }], tit: m.n, ci: [] };
-      var ing = mv(m, 'ing'), h, fu = [munFu(k || 'ing')], L;
+      var ing = mv(m, 'ing'), h, fu = [munFu(k === 'iph' ? 'ing' : k || 'ing')], L;
+      if (k === 'iph') {
+        var pp = pobDe(m);
+        if (pp == null) return { html: '<p><b>' + nom + '</b> no existía en el Censo 2020, así que no puedo dividir su ingreso entre sus habitantes. Su ingreso de 2024 fue <b>' + grande(ing, 1) + '</b>.</p>' + mas,
+          fu: fu.concat([{ que: 'Los municipios que contó el Censo 2020', e: 'oficial', fu: MPFU }]), tit: m.n + ': ingreso por habitante', ci: [] };
+        L = munLugar(m, 'iph');
+        return { html: '<p><b>' + nom + '</b> ingresó <b>' + grande(ing, 1) + '</b> en 2024 y ahí vivían <b>' + n(pp, 0) + '</b> personas en 2020: son unos <b>$' + n(ing / pp, 0) + ' por habitante</b>.' +
+          (L.de > 1 ? ' Lugar <b>' + L.l + ' de ' + L.de + '</b> en ' + esc(m.en) + '.' : '') + '</p>' +
+          '<p class="pa-ojo">Ojo: mezcla el ingreso de 2024 con la población de 2020, porque el INEGI no ha publicado un conteo más reciente por municipio. Es para comparar municipios, no lo que le toca a cada persona.</p>' + mas,
+          fu: fu.concat([{ que: 'Población del municipio', e: 'oficial', fu: MPFU }, { que: 'Ingreso por habitante y lugar', e: 'derivado', op: 'ingreso total 2024 ÷ población del Censo 2020; lugar entre los municipios del estado con las dos cifras' }]),
+          val: { v: ing / pp, u: 'pesos' }, tit: m.n + ', ' + m.en + ': ingreso por habitante', ci: [{ v: '$' + n(ing / pp, 0), etq: 'ingreso 2024 por habitante de 2020', e: 'derivado', op: 'ingreso total 2024 ÷ población del Censo 2020' }] };
+      }
       if (!k || k === 'ing') {
         L = munLugar(m, 'ing');
         h = '<p><b>' + nom + '</b> tuvo ingresos por <b>' + grande(ing, 1) + '</b> en 2024. De cada $100, <b>$' + n(mv(m, 'dep'), 1) + '</b> llegaron de la Federación (participaciones y aportaciones) y <b>$' + n(mv(m, 'propios') / ing * 100, 1) + '</b> los cobró por su cuenta.' +
@@ -538,13 +568,15 @@
     function munRanking(k, dir, cuantos, e) {
       k = k || 'ing';
       var l = MUN.filter(function (x) { return (!e || x.a === e.a) && mv(x, k) != null; }).sort(function (a, b) { return dir === 'min' ? mv(a, k) - mv(b, k) : mv(b, k) - mv(a, k); });
-      var top = l.slice(0, Math.max(cuantos, 5)), u = k === 'dep' ? 'pct' : '';
+      var top = l.slice(0, Math.max(cuantos, 5)), u = k === 'dep' ? 'pct' : k === 'pob' ? 'per' : k === 'iph' ? 'pes' : '';
+      var vf = function (x) { return u === 'pct' ? n(mv(x, k), 1) + ' %' : u === 'per' ? n(mv(x, k), 0) + ' personas' : u === 'pes' ? '$' + n(mv(x, k), 0) + ' por habitante' : grande(mv(x, k), 1); };
       var h = '<p>' + (dir === 'min' ? 'Los municipios con menos' : 'Los municipios con más') + ' ' + esc(RKM[k]) + (e ? ' en <b>' + esc(e.n) + '</b>' : ' del país') + ':</p><ol class="pa-lista">' +
-        top.map(function (x) { return '<li><b>' + esc(x.n) + '</b>' + (e ? '' : ', ' + esc(x.en)) + ': ' + (u ? n(mv(x, k), 1) + ' %' : grande(mv(x, k), 1)) + '</li>'; }).join('') + '</ol>' +
-        '<p class="pa-chico">Entre ' + n(l.length) + ' municipios con cifras de 2024.</p>' +
+        top.map(function (x) { return '<li><b>' + esc(x.n) + '</b>' + (e ? '' : ', ' + esc(x.en)) + ': ' + vf(x) + '</li>'; }).join('') + '</ol>' +
+        '<p class="pa-chico">Entre ' + n(l.length) + ' municipios con ' + (k === 'pob' ? 'población del Censo 2020' : k === 'iph' ? 'cuenta de 2024 y población del Censo 2020 (ingreso 2024 ÷ población 2020)' : 'cifras de 2024') + '.</p>' +
         (k === 'deu' ? '<p class="pa-ojo">Ojo: este orden es por lo que pagaron por sus créditos en 2024 (INEGI). El saldo al cierre de 2025 en el Sistema de Alertas de Hacienda suma $36,279.2 millones en 629 municipios medidos (41 con deuda inscrita no entregaron su información a Hacienda ' + chip('pendiente', 'deuda-municipios') + ').</p>' : '');
-      return { html: h, fu: [munFu(k), { que: 'Orden', e: 'derivado', op: 'ordenamos los municipios con cifra' }], tit: 'Municipios: ' + MUN_NOM[k],
-        ci: top.map(function (x) { return { v: u ? n(mv(x, k), 1) + ' %' : grande(mv(x, k), 1), etq: x.n + ', ' + x.en, e: k === 'dep' ? 'derivado' : 'oficial' }; }) };
+      var fuk = k === 'pob' || k === 'iph' ? { que: 'Población del municipio', e: 'oficial', fu: MPOB ? { tx: 'INEGI, Censo de Población y Vivienda 2020, principales resultados por localidad (ITER)', url: MPOB.pagina } : null } : munFu(k);
+      return { html: h, fu: [fuk, { que: 'Orden', e: 'derivado', op: k === 'iph' ? 'ingreso total 2024 ÷ población del Censo 2020; ordenamos los municipios con las dos cifras' : 'ordenamos los municipios con cifra' }], tit: 'Municipios: ' + MUN_NOM[k],
+        ci: top.map(function (x) { return { v: vf(x), etq: x.n + ', ' + x.en, e: k === 'dep' || k === 'iph' ? 'derivado' : 'oficial' }; }) };
     }
 
     /* ---------- Sueldos de los cargos ---------- */
@@ -1564,16 +1596,19 @@
       if (!r) return null;
       var x = SAL.t.estados, im = r[10], is = r[11];
       var tot = SAL.est.reduce(function (s, y) { return [s[0] + y[1], s[1] + y[2], s[2] + y[7], s[3] + y[11][2]]; }, [0, 0, 0, 0]);
+      var ia = r[13], tia = SAL.est.reduce(function (s, y) { return [s[0] + y[13][0], s[1] + y[13][1]]; }, [0, 0]);
       var hI = '<p><b>El IMSS en ' + esc(e.n) + '</b> tenía <b>' + n(r[1]) + ' personas adscritas</b> a una clínica familiar al cierre de 2025' + (r[12].length ? ' (suma de sus dos OOAD: ' + esc(r[12].join(' y ')) + ')' : '') + '. ' +
         'Les dio <b>' + n(r[2]) + ' consultas</b>, ' + n(r[8], 2) + ' por persona (en el país, ' + n(tot[1] / tot[0], 2) + '), e hizo <b>' + n(r[6]) + ' intervenciones quirúrgicas</b>. ' +
         'Tiene ' + n(r[7]) + ' camas de hospitalización: <b>' + n(r[9], 2) + ' por cada mil personas adscritas</b> (en el país, ' + n(1000 * tot[2] / tot[0], 2) + ').</p>';
       var hS = '<p><b>El ISSSTE en ' + esc(e.n) + '</b> reporta <b>' + n(is[2]) + ' médicas y médicos</b> (' + n(100 * is[2] / tot[3], 1) + ' % de los del ISSSTE en el país), ' +
         n(is[1]) + ' camas de hospitalización, ' + n(is[3]) + ' personas de enfermería en contacto con el paciente y ' + n(is[0]) + ' unidades. En el mismo registro, el IMSS reporta ' + n(im[2]) + ' médicos en el estado. ' +
-        'Cuántas personas atiende el ISSSTE ahí y qué les resolvió sigue ' + chip('pendiente', 'salud-issste-servicios') + ': su anuario estadístico no responde.</p>';
-      var h = (primero === 'is' ? hS + hI : hI + hS) + '<p class="pa-chico">Del IMSS, su Memoria Estadística 2025; del ISSSTE, el registro de recursos de la Secretaría de Salud (DGIS). No se mezclan: desde 2025 el IMSS de la DGIS incluye las unidades rurales del antiguo IMSS-Bienestar. ' +
+        'Su Anuario Estadístico 2025 registra ahí <b>' + n(ia[0]) + ' derechohabientes</b>, a quienes dio <b>' + n(ia[1]) + ' consultas</b> (' + n(ia[5], 2) + ' por derechohabiente; en el país, ' + n(tia[1] / tia[0], 2) + '), ' +
+        n(ia[2]) + ' egresos hospitalarios, ' + n(ia[3]) + ' atenciones de urgencias y <b>' + n(ia[4]) + ' procedimientos quirúrgicos</b>.</p>';
+      var h = (primero === 'is' ? hS + hI : hI + hS) + '<p class="pa-chico">Del IMSS, su Memoria Estadística 2025; del ISSSTE, su Anuario Estadístico 2025 y el registro de recursos de la Secretaría de Salud (DGIS). No se mezclan: desde 2025 el IMSS de la DGIS incluye las unidades rurales del antiguo IMSS-Bienestar. ' +
         'Y cuentan cuánto se hizo y con qué, no cuánto se esperó.</p>';
       var fu = [x.fu[0], x.fu[1], { que: 'Consultas por persona adscrita y camas por cada mil', e: 'derivado', op: n(r[2]) + ' ÷ ' + n(r[1]) + '; ' + n(r[7]) + ' ÷ ' + n(r[1]) + ' × 1,000', fu: x.fu[0].fu }, x.fu[x.fu.length - 1]];
-      var ci = [{ v: n(r[1]), etq: 'personas adscritas al IMSS', e: 'oficial' }, { v: n(r[9], 2), etq: 'camas del IMSS por cada mil adscritos', e: 'derivado' }, { v: n(is[2]), etq: 'médicos del ISSSTE', e: 'oficial' }];
+      fu.push({ que: 'Consultas por derechohabiente del ISSSTE', e: 'derivado', op: n(ia[1]) + ' ÷ ' + n(ia[0]), fu: x.fu[x.fu.length - 1].fu });
+      var ci = [{ v: n(r[1]), etq: 'personas adscritas al IMSS', e: 'oficial' }, { v: n(r[9], 2), etq: 'camas del IMSS por cada mil adscritos', e: 'derivado' }, { v: n(ia[0]), etq: 'derechohabientes del ISSSTE', e: 'oficial' }, { v: n(is[2]), etq: 'médicos del ISSSTE', e: 'oficial' }];
       if (primero === 'is') ci.reverse();
       return { html: h, fu: fu, ci: ci, tit: 'El IMSS y el ISSSTE en ' + e.n,
         ir: ['planisferio-' + e.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-salud.html', 'su salud pública en el Planisferio'],
@@ -1602,7 +1637,7 @@
       if (!imss && !iss) return null;
       var sEs = estados(t).e;
       if (sEs.length === 1 && /consulta|cirug|operacion|egreso|hospital|camas?\b|medicos?\b|doctor|enfermer|unidades|clinicas?\b|adscrit|derechohabientes?|afiliad|cuant|tiene|hay\b/.test(t)) return salEstado(sEs[0], iss && !imss ? 'is' : 'im');
-      if (!sEs.length && /consulta|cirug|camas?\b|medicos?\b|hospital|adscrit|enfermer|unidades/.test(t) && /(que|cual|en que) estados?|cada estado|por estado|los estados|de los 32|entidad/.test(t)) return salTema('estados');
+      if (!sEs.length && /consulta|cirug|camas?\b|medicos?\b|hospital|adscrit|derechohabientes?|enfermer|unidades/.test(t) && /(que|cual|en que) estados?|cada estado|por estado|los estados|de los 32|entidad/.test(t)) return salTema('estados');
       return null;
     }
     function salResp(t) {
@@ -1616,7 +1651,7 @@
       var imss = /\bimss\b|seguro social/.test(t), iss = /issste/.test(t);
       var rse = salEdo(t);
       if (rse) return rse;
-      var gestion = /consulta|cirug|operacion|egreso|hospitaliz|urgencia|atendi|atiende|atienden|resuelve|resolvio|espera|tarda|medicos?\b|doctor|especialista|camas?\b|quirofano|ocupacion|metas?\b|anunci|en salud|atencion medica|enfermedad y maternidad/;
+      var gestion = /consulta|cirug|operacion|egreso|hospitaliz|urgencia|atendi|atiende|atienden|resuelve|resolvio|espera|tarda|derechohabientes?|afiliad|medicos?\b|doctor|especialista|camas?\b|quirofano|ocupacion|metas?\b|anunci|en salud|atencion medica|enfermedad y maternidad/;
       if (iss && gestion.test(t)) return salTema('issste');
       if (!imss || !gestion.test(t)) return null;
       if (/cirug|operacion/.test(t) && (PIDE_VER.test(t) || /1 78|millon 780|anunci|dijo|meta/.test(t))) return salTema('imss_cotejo');
@@ -1691,6 +1726,44 @@
       var sEs = estados(t).e;
       if (sEs.length === 1) return socEstado(sEs[0]);
       if (!sEs.length && /(que|cual) estados?|cada estado|por estado|los estados|de los 32|entidad|mapa/.test(t)) return socTodos();
+      return null;
+    }
+    /* El precio de la vivienda (21-11-2026): el Índice SHF de cada estado, la lente shfI del Planisferio y el mercado del simulador del predial. */
+    var VIV = D.viv || null;
+    var VIV_RX = /precios? de (la |las )?(vivienda|viviendas|casas?)|valor de (la |las )?(vivienda|viviendas)|indice shf|\bshf\b|sociedad hipotecaria|plusvalia|(subi\w*|sube|aument\w*)( mas| menos)? (el precio de )?(la |las )?(vivienda|viviendas|casas)/;
+    function vivFu(e) { return { que: 'Índice SHF de precios de la vivienda' + (e ? ' de ' + e : ''), e: 'oficial', fu: { tx: VIV.fu.tx, url: VIV.fu.url } }; }
+    function vivEstado(e) {
+      var r = VIV.est.filter(function (x) { return x[0] === e.a; })[0];
+      if (!r) return null;
+      var h = '<p><b>En ' + esc(e.n) + ', el precio de la vivienda subió ' + n(r[3], 1) + ' % en un año</b>, según el Índice SHF de Precios de la Vivienda (' + esc(VIV.corte) + ', cifras preliminares). ' +
+        'Su índice llegó a <b>' + n(r[1], 2) + '</b> (base ' + esc(VIV.base) + '): la vivienda vale unas ' + n(r[1] / 100, 1) + ' veces lo que valía en 2017; en el país, ' + n(VIV.nac[0], 2) + '.</p>' +
+        '<p>La vivienda que queda a la mitad de los avalúos del estado costó <b>$' + n(r[4]) + '</b>: la mitad costó menos y la mitad más (en el país, $' + n(VIV.nac[2]) + ').</p>' +
+        '<p class="pa-chico">La SHF lo arma con los avalúos de viviendas con crédito hipotecario: no es el valor de tu casa, no es un avalúo y no se compara con el valor catastral, que es con el que se cobra el predial.</p>';
+      return { html: h, fu: [vivFu(e.n), { que: 'Cuántas veces el precio de 2017', e: 'derivado', op: 'índice ' + n(r[1], 2) + ' ÷ 100', fu: { tx: VIV.fu.tx, url: VIV.fu.url } }],
+        tit: 'El precio de la vivienda en ' + e.n,
+        ci: [{ v: n(r[3], 1) + ' %', etq: 'subió en un año', e: 'oficial' }, { v: '$' + n(r[4]), etq: 'precio mediano', e: 'oficial' }],
+        ir: ['planisferio.html?d=financiera&l=shfI&e=' + encodeURIComponent(e.a), 'el precio de la vivienda en el Planisferio'],
+        sug: ['Simulador del impuesto predial', '¿En qué estado subió más la vivienda?', 'Estado de cuenta de ' + e.n] };
+    }
+    function vivTodos() {
+      var o = VIV.est.slice().sort(function (a, b) { return b[3] - a[3]; });
+      var nom = function (a) { return porA[a] ? porA[a].n : a; };
+      var top = o.slice(0, 5).map(function (x) { return esc(nom(x[0])) + ' (' + n(x[3], 1) + ' %)'; }).join(', ');
+      var baj = o.slice(-3).map(function (x) { return esc(nom(x[0])) + ' (' + n(x[3], 1) + ' %)'; }).join(', ');
+      var h = '<p>Según el Índice SHF de Precios de la Vivienda (' + esc(VIV.corte) + ', cifras preliminares), el índice del país llegó a <b>' + n(VIV.nac[0], 2) + '</b> (base ' + esc(VIV.base) + '), ' +
+        'y la vivienda que queda a la mitad de los avalúos costó <b>$' + n(VIV.nac[2]) + '</b>.</p>' +
+        '<p>Donde más subió en un año: ' + top + '. Donde menos: ' + baj + '.</p>' +
+        '<p class="pa-chico">Son avalúos de viviendas con crédito hipotecario: no es el valor de ningún predio ni el valor catastral con que se cobra el predial. El orden no califica a ningún estado.</p>';
+      return { html: h, fu: [vivFu('')], tit: 'El precio de la vivienda en los 32 estados',
+        ci: [{ v: n(VIV.nac[0], 2), etq: 'índice SHF del país', e: 'oficial' }],
+        ir: ['planisferio.html?d=financiera&l=shfI', 'el precio de la vivienda de los 32 estados, en el Planisferio'],
+        sug: ['¿Cuánto ha subido el precio de la vivienda en Jalisco?', 'Simulador del impuesto predial', '¿Cuánto pago de predial en Zapopan?'] };
+    }
+    function vivEdo(t) {
+      if (!VIV || !VIV_RX.test(t) || /predial|\bisr\b|impuesto|vend[eoí]|credito infonavit/.test(t)) return null;
+      var sEs = estados(t).e;
+      if (sEs.length === 1) return vivEstado(sEs[0]);
+      if (!sEs.length) return vivTodos();
       return null;
     }
     var APU_RX = /administracion(es)? publicas?|burocrat|servidores? public|servidoras? public|trabaja(n|dores)? (en|para|del?) (el |los )?gobiernos?|empleados? (del?|de los) gobiernos?|personal del gobierno|poder ejecutivo (estatal|local|del estado)/;
@@ -1801,6 +1874,92 @@
           '</ul><p class="pa-chico">Las mismas reglas para todos los gobiernos: lo que todavía no tiene documento va pendiente, con su ficha.</p>',
         fu: [], tit: 'La memoria de promesas', ir: [PROM.pag, 'la memoria de promesas'],
         sug: PROM.p.map(function (p) { return '¿Qué pasó con lo que prometieron de ' + p.temas[0] + '?'; }).slice(0, 3) };
+    }
+
+    /* ---------- La lectura de una nota que el usuario pega (pedido del autor, 07-11-2026) ----------
+       «No agarra el sentido de la información que debe interpretar»: una nota completa (texto, con o sin liga) ya no se
+       empata con la columna que comparta una palabra. Se lee: lo que afirma y sus cifras, si ya la cotejamos, si toca una
+       promesa que seguimos (y cuánto de lo prometido llega), sus puntos ciegos y lo que sigue. */
+    var LIGAS = /https?:\/\/[^\s<>"']+/gi;
+    function sinLiga(q) { return String(q || '').replace(LIGAS, ' ').replace(/\s+/g, ' ').trim(); }
+    function esNota(q) {
+      var tx = sinLiga(q), con = LIGAS.test(q);
+      LIGAS.lastIndex = 0;
+      if (/^\s*[¿?]/.test(tx) && tx.length < 220) return false;
+      var frases = tx.split(/[.!?\n]+/).filter(function (s) { return s.trim().length > 25; }).length;
+      return (tx.length >= 140 && frases >= 2) || (con && tx.length >= 60);
+    }
+    /* El orden importa: «Comisión de Presupuesto y Cuenta Pública» no habla de lo gastado. */
+    var ETAPA_PAL = [['presupuesto', /presupuesto de egresos|\bpef\b|dictamen|reasign|etiquetad|partida/],
+      ['asf', /auditoria superior|\basf\b|pliego|por aclarar/], ['gasto', /cuenta publica 20\d\d|ejercid|se gasto|gastaron|pagad/]];
+    var CIEGO_LEAD = { promesa: 'es un anuncio, todavía no un gasto', 'en-lo-general': 'todavía no es definitivo',
+      condicional: 'lo supone, no lo afirma', juicio: 'trae adjetivos que juzgan antes de probar', quien: 'no dice qué documento lo sostiene' };
+    function millones(v) { return '$' + Math.round(v).toLocaleString('es-MX') + ' millones'; }
+    function promesaDe(t) {
+      if (!PROM) return null;
+      return PROM.p.filter(function (p) {
+        return p.temas.some(function (w) { return t.indexOf(w) >= 0; }) ||
+          (p.temas_y || []).some(function (par) { return par.every(function (w) { return t.indexOf(w) >= 0; }); });
+      })[0] || null;
+    }
+    function lectura(q, col) {
+      var tx = sinLiga(q), t = plano(tx), url = (String(q).match(LIGAS) || [])[0];
+      LIGAS.lastIndex = 0;
+      var ext = VER ? VER.analiza({ texto: tx, titulo: '' }) : { cifras: [] }, fu = [], partes = [], lead = [];
+      var NOM = {}, ICO = {};
+      if (PROM) PROM.etapas.forEach(function (e) { ICO[e[0]] = e[1]; NOM[e[0]] = e[2]; });
+      /* 1. Lo que afirma. */
+      var vistas = {}, cif = ext.cifras.filter(function (c) {
+        var k = c.mdp ? 'm' + c.mdp : c.bruto;
+        if (!c.bruto || vistas[k]) return false;
+        vistas[k] = 1;
+        return true;
+      }).slice(0, 4);
+      if (cif.length) partes.push('<p class="pa-rep-s">🧾 Lo que afirma, en cifras</p><ul class="pa-lista">' + cif.map(function (c) {
+        var o = c.v && c.v.tipo !== 'gris' && VER.porId[c.sel];
+        if (o) fu.push({ que: o.n, e: o.e, fu: { tx: o.f || 'documento', url: o.u } });
+        return '<li>«' + esc(c.bruto) + '»: ' + (o ? VEMO[c.v.tipo] + ' <b>' + esc(c.v.tit) + '</b> (el documento dice ' + esc(VER.fmt(o.v)) + ', ' + esc(o.n) + ').'
+          : 'todavía no tengo un documento con qué compararla; no cuenta como falsa.') + '</li>';
+      }).join('') + '</ul>');
+      /* 2. Lo que ya seguimos: la memoria de promesas. */
+      var p = promesaDe(t);
+      if (p) {
+        var et = (ETAPA_PAL.filter(function (x) { return x[1].test(t); })[0] || [])[0], st = et && p.etapas.filter(function (x) { return x.et === et; })[0];
+        var dicho = cif.filter(function (c) { return c.mdp && !c.dolar; })[0], h = '';
+        h += '<p class="pa-rep-s">📣 Esto ya lo seguimos: la memoria de promesas</p><p><b>' + esc(p.tit) + '.</b> La última promesa: <b>' + esc(millones(p.prometido)) + '</b> ' + chip('oficial') + '.</p>';
+        if (dicho && p.prometido) {
+          var pct = dicho.mdp / p.prometido * 100;
+          h += '<p>Lo que dice tu nota, <b>«' + esc(dicho.bruto) + '»</b>, es el <b>' + pct.toLocaleString('es-MX', { maximumFractionDigits: 1 }) + ' %</b> de lo prometido' +
+            (dicho.mdp < p.prometido ? '; faltarían <b>' + esc(millones(p.prometido - dicho.mdp)) + '</b>' : '') + ' (cuenta con la cifra de la nota: ' +
+            dicho.mdp.toLocaleString('es-MX') + ' ÷ ' + p.prometido.toLocaleString('es-MX') + ' × 100).</p>';
+          lead.push('«' + dicho.bruto + '» es el ' + pct.toLocaleString('es-MX', { maximumFractionDigits: 1 }) + ' % de lo que se prometió');
+        }
+        if (st) {
+          h += '<p>Para seguir el dinero, esto es la etapa <b>' + ICO[st.et] + ' ' + esc(NOM[st.et]) + '</b>' + (st.fecha ? ' (' + esc(st.fecha) + ')' : '') + ' ' + chip(st.e, st.pend) + '. ' + esc(st.tx) + '</p>';
+          if (st.e === 'pendiente' && et === 'presupuesto') lead.push('todavía no es definitivo');
+        }
+        h += '<p><b>Lo que sigue:</b> ' + esc(p.sigue) + ' <a href="' + esc(PROM.pag.replace('#promesas', '#promesa-' + p.id)) + '">Ver la promesa completa ➔</a></p>';
+        partes.push(h);
+        fu.push({ que: 'Memoria de promesas: ' + p.tit, e: 'oficial', fu: { tx: p.etapas[0].fu, url: p.etapas[0].url } });
+      }
+      /* 3. Si ya la cotejamos. */
+      if (col && col.html) partes.push('<p class="pa-rep-s">🔍 Ya la cotejamos, afirmación por afirmación</p>' + col.html.replace(/<details class="pa-dedonde">[\s\S]*$/, ''));
+      /* 4. Los puntos ciegos. Si la nota no toca nada que sigamos, la frase central sale de ellos. */
+      var pc = ciegosDe(tx);
+      (VER && VER.ciegos ? VER.ciegos({ texto: tx }) : []).forEach(function (x) {
+        var l = CIEGO_LEAD[x.r.id];
+        if (l && lead.length < 2 && lead.indexOf(l) < 0) lead.push(l);
+      });
+      if (pc) partes.push(pc);
+      var nada = !p && !(col && col.html) && !fu.length;
+      if (nada) partes.push('<p>Todavía no tengo un documento con qué cotejar esta nota, ni la tengo en seguimiento. No te digo que sea falsa: te digo qué preguntarle (arriba) y cómo seguirla.</p>' +
+        '<p><a class="pa-boton" href="comunidad-tema.html" data-puerta="tema">💡 Propónnosla para cotejarla</a>' +
+        (url ? ' <a class="pa-boton" href="' + esc(D.nota.pagina + '?liga=' + encodeURIComponent(url)) + '">🔎 Leerla completa con el verificador</a>' : '') + '</p>');
+      if (!pc && !p && !col) partes.push('<p class="pa-chico">No encontré puntos ciegos por las palabras; eso no quiere decir que no los tenga.</p>');
+      var h0 = '<p>📋 <b>Leí tu nota.</b> Esto es lo que encuentro' + (lead.length ? ': <b>' + esc(lead.join(', y ')) + '</b>.' : '.') + '</p>';
+      return { html: h0 + partes.join(''), fu: fu, ci: [], tit: 'Lectura de una nota: ' + tx.slice(0, 80), lect: 1, lead: lead,
+        ir: col && col.ir ? col.ir : p ? [PROM.pag.replace('#promesas', '#promesa-' + p.id), 'la memoria de promesas'] : [D.nota.pagina, 'el verificador de notas'],
+        sug: ['¿Qué es un punto ciego?', '¿Qué es la memoria de promesas?'] };
     }
 
     function lista69(t) {
@@ -2131,7 +2290,8 @@
         var km = metrica(t, MET_MUN) || (sigue && ctx.tipo === 'mun' ? ctx.met : '');
         if (!mm) return fin(conLiga(munRanking(km, dir, cuantos, es[0]), 'numeros-baja-al-territorio.html', 'Baja al territorio'), { tipo: 'mun', met: km });
         var rm = munMet(mm.m, km, mm.otros);
-        rm.ir = km === 'inv' && mm.m.v ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html?ml=inv#mapa-municipios', 'sus municipios en el Planisferio']
+        rm.ir = (km === 'pob' || km === 'iph') && mv(mm.m, km) != null ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html?ml=' + km + '#mapa-municipios', 'sus municipios en el Planisferio']
+          : km === 'inv' && mm.m.v ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '.html?ml=inv#mapa-municipios', 'sus municipios en el Planisferio']
           : km === 'deu' && mm.m.v ? ['planisferio-' + mm.m.a.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() + '-deuda.html', 'la deuda de sus municipios en el Planisferio']
           : ['herramienta-inspector-entes.html#ente=municipal:' + mm.m.cve, 'su ficha técnica en el Auditor de entes públicos'];
         rm.ficha = B.fichas.filter(function (f) { return f.t === 'municipio' && f.ir[0].slice(-5) === mm.m.cve; })[0];
@@ -2296,6 +2456,7 @@
       /* Salud pública antes que Verificamos: «¿es cierto que el IMSS hizo 1.78 millones de cirugías?» es un cotejo de salud (27-10-2026). */
       salud: function (q) { var r = salResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       social: function (q) { var r = socEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'soc' }); },
+      vivienda: function (q) { var r = vivEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'viv' }); },
       administracion: function (q) { var r = apuEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'apu' }); },
       saludEstado: function (q) { var r = salEdo(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'sal' }); },
       nepotismo: function (q) { var r = nepResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'nep' }); },
@@ -2304,6 +2465,8 @@
       ambiente: function (q) { var r = amgResp(plano(q)); if (!r) return null; ultima = q; return fin(r, { tipo: 'amg' }); },
       /* El estado y el municipio que nombra una pregunta (para el Registro Publico Unico, que vive en asistente.js). */
       lugar: function (q) { var t = plano(q), ES = estados(t), m = /municipi|alcaldi|ayuntamiento/.test(t) ? municipio(ES.resto, true, ES.e) : null; return { e: ES.e, m: m && m.m }; },
+      esNota: esNota, sinLiga: sinLiga,
+      lectura: function (q, col) { ultima = q; var r = lectura(q, col); var f = fin(r, { tipo: 'lect' }); f.lect = 1; f.lead = r.lead; return f; },
       deFicha: deFicha, deDonde: deDonde, olvida: function () { ctx = {}; }, ctx: function () { return ctx; }
 
     };

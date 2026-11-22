@@ -35,6 +35,7 @@ ESPERA = {
     'servidores-ia-exportaciones-contenido-nacional': {'porcentaje', 'comparacion', 'dolares', 'quien', 'proyeccion'},
     'agua-guadalajara-14500-federal': {'promesa', 'sin-costo'},
     'huawei-gobierno-codigo-magenta': {'condicional', 'quien', 'juicio'},
+    'pef-2027-comision-agua-jalisco-6500': {'en-lo-general'},
 }
 NEUTRAS = [
     'Según el PEF 2026, el gasto aprobado del Ramo 12 es de 1,000 millones de pesos.',

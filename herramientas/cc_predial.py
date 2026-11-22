@@ -1857,6 +1857,17 @@ def shf():
             'inf': S['informe'], 'dat': S['datos'], 'met': S['metodo'], 'nac': S['nacional'], 'est': est, 'mun': mun}
 
 
+def chat_shf():
+    """Lo que lee el chat (D.viv, 21-11-2026): una fila por estado [abbr, índice,
+    índice de un año antes, variación anual publicada, precio mediano, precio medio],
+    el país y la fuente. Las mismas cifras de la lente shfI del Planisferio."""
+    S = shf()
+    return {'est': [[a, v['i'], v['i0'], v['var'], v['precios']['p50'], v['precios']['medio']] for a, v in sorted(S['est'].items())],
+            'nac': [S['nac']['i'], S['nac']['i0'], S['nac']['precios']['p50']],
+            'corte': _corte_txt(S), 'base': S['dat']['base'], 'pag': S['inf']['precios_pag'], 'pv': S['inf']['var_pag_ent'],
+            'fu': {'tx': '%s, %s' % (S['fuente'], _corte_txt(S)), 'url': S['inf']['url']}, 'dat': S['dat']['url']}
+
+
 def _corte_txt(S):
     return '%s trimestre de %d' % (['primer', 'segundo', 'tercer', 'cuarto'][S['trim'] - 1], S['anio'])
 
@@ -2019,6 +2030,30 @@ def datos(base):
             'mun': MUNICIPIOS, 'espera': ESPERA, 'reg': REGISTRO, 'tablas': TABLAS, 'dtv': DECRETOS_TV, 'poe': _POE, 'lhm': {'tope': 250, 'tope_esp': 100, 'tx': LHM['tx'], 'url': LHM['url'], 'sha256': LHM['sha256']}, 'shf': shf()}
 
 
+def nucleo(D):
+    """Lo que va en línea en la página (Ronda 2, 22-11-2026: rendimiento en
+    celular). El INPC y la ley, las tablas, los decretos y las leyes en espera
+    de cada entidad viven en su archivo (assets/auditor/data/predial-*.json,
+    versionados por su huella) y el navegador los pide solo al usarlos: así la
+    página no crece al integrar los 2,478 municipios. Las cuentas son las
+    mismas: cc-predial.js junta lo que llega en el mismo objeto D."""
+    from planisferio import datos_externos
+    ents = sorted({m['ent'] for m in D['mun']} | {k.split('-')[0] for k in D['espera']} | set(D['dtv']))
+    por = {}
+    for e in ents:
+        x = {'mun': [m for m in D['mun'] if m['ent'] == e],
+             'tablas': {k: v for k, v in D['tablas'].items() if any(m['id'] == k and m['ent'] == e for m in D['mun'])},
+             'espera': {k: v for k, v in D['espera'].items() if k.split('-')[0] == e},
+             'dtv': D['dtv'].get(e)}
+        por[e] = datos_externos('predial-%s.json' % e.lower().replace('é', 'e'), x)
+    if sum(len(D['tablas']) for _ in [0]) != sum(1 for m in D['mun'] if m['id'] in D['tablas']):
+        raise SystemExit('cc_predial: una tabla de valores no es de ningún municipio integrado')
+    n = {k: v for k, v in D.items() if k not in ('inpc', 'mun', 'tablas', 'espera', 'dtv')}
+    n.update({'porEnt': por, 'inpcSrc': datos_externos('predial-inpc.json', D['inpc']),
+              'munEnt': {m['id']: m['ent'] for m in D['mun']}})
+    return n
+
+
 def construir(base, ref):
     D = datos(base)
     MES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
@@ -2176,12 +2211,13 @@ def construir(base, ref):
     <h2 class="ci-tit" id="cpMerTit"><span aria-hidden="true">📈</span> Tu valor fiscal junto al mercado de la vivienda</h2>
     <p class="ci-nota">El predial se cobra sobre el <b>valor fiscal</b>, que fija el catastro con sus tablas de valores. Los bancos y las unidades de valuación miden otra cosa: el <b>precio de avalúo</b> de una vivienda. Con él, la Sociedad Hipotecaria Federal (SHF) publica cada trimestre el Índice SHF de Precios de la Vivienda: cuánto valieron las viviendas valuadas en cada estado y cuánto subieron en un año. Aquí lo ponemos junto a tu valor fiscal, para que veas en qué parte del mercado queda. <b>No es un avalúo ni dice cuánto vale tu casa</b>: es el mercado de tu estado, no tu predio.</p>
     <div id="cpMerCuerpo" aria-live="polite"></div>
+    <p class="ci-nota"><a href="herramienta-inspector-pregunta.html?q=%C2%BFEn%20qu%C3%A9%20estado%20subi%C3%B3%20m%C3%A1s%20la%20vivienda%3F&amp;modo=ciudadano&amp;abre=planisferio.html%3Fd%3Dfinanciera%26l%3DshfI">🏘️ Los 32 estados en el mapa: ábrelo en el Planisferio</a>, con el índice, cuánto subió en un año y el precio mediano de cada uno.</p>
     <p class="ci-fuentes">Fuente: <a href="{shf_inf_url}">{shf_fuente}, {shf_corte}</a> (huella SHA-256 <code>{shf_inf_sha}…</code>), pág. {shf_pag}, «{shf_tit}», {shf_uni}; las variaciones, págs. {shf_pe} y {shf_pm}; «{shf_nota}» Índices de sus <a href="{shf_dat_url}">datos abiertos</a> (base {shf_base}; huella <code>{shf_dat_sha}…</code>). Cómo se arma: <a href="{shf_met_url}">nota metodológica de la SHF</a>: {shf_cita} {chip_o}</p>
   </section>
 
   <section class="ci-grupo cp-compara" aria-labelledby="cpCompTit">
     <h2 class="ci-tit" id="cpCompTit"><span aria-hidden="true">⚖️</span> El mismo predio en cada municipio {chip_d}</h2>
-    <p class="ci-nota">Con el valor fiscal que escribiste (o $2,500,000 si aún no escribes nada), lo que cobraría de predial al año cada municipio que ya integramos, sin descuentos. Solo cambia la ley; el predio es el mismo. Ojo: el valor fiscal de un mismo terreno tampoco sería igual en otro municipio, porque cada uno tiene sus tablas de valores.</p>
+    <p class="ci-nota">Con el valor fiscal que escribiste (o $2,500,000 si aún no escribes nada), lo que cobraría de predial al año cada municipio de tu estado que ya integramos, sin descuentos. Solo cambia la ley; el predio es el mismo. Ojo: el valor fiscal de un mismo terreno tampoco sería igual en otro municipio, porque cada uno tiene sus tablas de valores.</p>
     <div class="ci-tabla-caja"><table class="ci-tabla"><caption id="cpCompCap">Predial anual de un predio construido</caption>
       <thead><tr><th scope="col">Municipio</th><th scope="col">Al año</th><th scope="col">Recargos al mes · multa</th></tr></thead>
       <tbody id="cpComp"></tbody></table></div>
@@ -2217,7 +2253,7 @@ def construir(base, ref):
         con_tabla=con_tabla, anio=ANIO, ents=ents, anios=anios, bims=bims, ult=ult, uma=format(D['uma'], ',.2f'), uma_f=esc(D['uma_f']),
         lista=lista, espera=espera, reg_filas=reg_filas, reg_sin=reg_sin, chip_p=chip('pendiente'), leyes=leyes, lhm_url=esc(LHM['url']), lhm_tx=esc(LHM['tx']), lhm_sha=LHM['sha256'][:12],
         inpc_url=esc(cc_inmueble.datos(base)['f']['inpc_url']), f_inpc=esc(cc_inmueble.datos(base)['f']['inpc']),
-        chip_d=chip('derivado'), chip_o=chip('oficial'), datos=cc_inmueble._json(D),
+        chip_d=chip('derivado'), chip_o=chip('oficial'), datos=cc_inmueble._json(nucleo(D)),
         shf_inf_url=esc(D['shf']['inf']['url']), shf_fuente=esc(D['shf']['fuente']), shf_corte=esc(_corte_txt(D['shf'])), shf_inf_sha=D['shf']['inf']['sha256'][:12],
         shf_pag=D['shf']['inf']['precios_pag'], shf_tit=esc(D['shf']['inf']['precios_tit']), shf_uni=esc(D['shf']['inf']['unidad']),
         shf_pe=D['shf']['inf']['var_pag_ent'], shf_pm=D['shf']['inf']['var_pag_mun'], shf_nota=esc(D['shf']['inf']['nota']),

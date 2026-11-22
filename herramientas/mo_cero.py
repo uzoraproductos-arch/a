@@ -209,7 +209,7 @@ def cadena(anual):
 def mesa3_filas(a, pad):
     bc = a['brecha'] * 1e6 / pad
     pc = a['anual'] * 1e6 / pad
-    return ('<tr class="mc-fila" data-i="1"><td class="mc-n" data-et="Paso">1</td><td class="mc-nom">Pesos pagados de más sobre lo aprobado <small>(saldo de 2000 a 2024)</small></td>'
+    return ('<tr class="mc-fila" data-i="1"><td class="mc-n" data-et="Paso">1</td><td class="mc-nom">Pesos pagados de más sobre lo previsto <small>(saldo de 2000 a 2024)</small></td>'
             '<td class="mc-op" data-et="Operación">resultado de la mesa 1</td><td class="mc-num mc-acum" data-et="Resultado">%s</td></tr>\n'
             '<tr class="mc-fila mc-div" data-i="2"><td class="mc-n" data-et="Paso">2</td><td class="mc-nom">Entre cada contribuyente con RFC activo</td>'
             '<td class="mc-op" data-et="Operación">%s mdp × 1,000,000 ÷ %s</td><td class="mc-num mc-acum" data-et="Resultado">%s <small>por contribuyente</small></td></tr>\n'
@@ -293,9 +293,9 @@ def sector_tabla(base, ref, lista):
                    '—' if o['resc'] else format(o['real'] / tot['real'] * 100, '.1f') + '%'))
         cuerpos.append('<tbody class="mc-sec-grupo">%s</tbody>' % ''.join(filas))
     return ('<table class="mc-t mc-t-sec"><caption class="sr-only">Las %d obras por sector, en millones de pesos</caption>'
-            '<thead><tr><th colspan="2" scope="col">Sector y obra %s</th><th scope="col">Aprobado (mdp)</th><th scope="col">Erogado (mdp)</th>'
+            '<thead><tr><th colspan="2" scope="col">Sector y obra %s</th><th scope="col">Previsto (mdp)</th><th scope="col">Erogado (mdp)</th>'
             '<th scope="col">Diferencia %s</th><th scope="col">Sobrecosto</th><th scope="col">%% del total %s</th></tr></thead>%s'
-            '<tfoot><tr><td colspan="2" class="mc-nom">Total de las %d obras evaluadas, sin los rescates</td><td class="mc-num" data-et="Aprobado (mdp)">%s</td>'
+            '<tfoot><tr><td colspan="2" class="mc-nom">Total de las %d obras evaluadas, sin los rescates</td><td class="mc-num" data-et="Previsto (mdp)">%s</td>'
             '<td class="mc-num" data-et="Erogado (mdp)">%s</td><td class="mc-num mc-dif" data-et="Diferencia">+%s</td>'
             '<td class="mc-num" data-et="Sobrecosto">+%s%%</td><td class="mc-num" data-et="%% del total">100%%</td></tr></tfoot></table>'
             % (len(lista), ref('ref-asf-cp'), chip('derivado'), chip('derivado'), ''.join(cuerpos), tot['n'], fnum(tot['presu']),
@@ -364,7 +364,7 @@ def _construir(base, ref):
     <h2 class="mc-grande" id="mcArrTit">Ninguna cifra se escribe a mano: síguela con el dedo, de cero al resultado.</h2>
     <p class="mc-txt">Tres mesas de cálculo arrancan en cero y avanzan renglón por renglón: cómo se acumuló el sobrecosto de <b>{n_obras} megaobras</b> (los {n_resc} rescates van aparte), cómo se arma la pérdida de un año y cuánto le toca a cada contribuyente. Pulsa cualquier obra para ver de qué documento sale cada número.</p>
     <div class="mc-cifras">
-      <div class="mc-cifra"><span>Pesos de más sobre lo aprobado</span><b id="mcK1">{k1}</b>{d}</div>
+      <div class="mc-cifra"><span>Pesos de más sobre lo previsto</span><b id="mcK1">{k1}</b>{d}</div>
       <div class="mc-cifra"><span>Pérdida neta de un año, donde se publica</span><b id="mcK2">{k2}</b>{d}</div>
       <div class="mc-cifra"><span>Obras que publican su ganancia o pérdida</span><b>{doc} de {n}</b>{o}</div>
     </div>
@@ -372,7 +372,7 @@ def _construir(base, ref):
       <button type="button" class="mc-b mc-b-luz" id="mcEmpezar"><span aria-hidden="true">▶</span> Empieza la cuenta desde cero</button>
     </div>
     <ol class="mc-indice" aria-label="Las partes de esta página">
-      <li><a href="#mcMesa1"><span class="mc-num-c">1</span> De lo aprobado a lo erogado</a></li>
+      <li><a href="#mcMesa1"><span class="mc-num-c">1</span> De lo previsto a lo erogado</a></li>
       <li><a href="#mcMesa2"><span class="mc-num-c">2</span> Gana o pierde en un año</a></li>
       <li><a href="#mcMesa3"><span class="mc-num-c">3</span> A tu bolsillo</a></li>
       <li><a href="#mcInventario"><span class="mc-num-c">🧾</span> Inventario por sector</a></li>
@@ -387,14 +387,14 @@ def _construir(base, ref):
   </section>
 
   <article class="mc-mesa" id="mcMesa1" data-mesa="1" aria-labelledby="mcM1Tit">
-    <h2 class="mc-tit" id="mcM1Tit"><span class="mc-num-c">1</span> De lo aprobado a lo erogado</h2>
-    <p class="mc-txt">Cada renglón suma su diferencia (erogado menos aprobado) a la columna acumulada. La última celda de esa columna es el sobrecosto del conjunto, en millones de pesos. Los rescates (FOBAPROA y FARAC) no entran en esta mesa: son deudas asumidas, no obras, y su crecimiento no se compara con un sobrecosto. Están en la mesa 2 y en el inventario de abajo.</p>
+    <h2 class="mc-tit" id="mcM1Tit"><span class="mc-num-c">1</span> De lo previsto a lo erogado</h2>
+    <p class="mc-txt">Cada renglón suma su diferencia (erogado menos previsto) a la columna acumulada. La última celda de esa columna es el sobrecosto del conjunto, en millones de pesos. Los rescates (FOBAPROA y FARAC) no entran en esta mesa: son deudas asumidas, no obras, y su crecimiento no se compara con un sobrecosto. Están en la mesa 2 y en el inventario de abajo.</p>
     {ctrl1}
-    <div class="mc-marco"><table class="mc-t" id="mcT1"><caption class="sr-only">Mesa 1: de lo aprobado a lo erogado, en millones de pesos</caption>
-      <thead><tr><th scope="col">#</th><th scope="col">Obra</th><th scope="col">Aprobado (mdp)</th><th scope="col">Erogado (mdp)</th><th scope="col">Diferencia {d}</th><th scope="col">Acumulado {d}</th></tr></thead>
+    <div class="mc-marco"><table class="mc-t" id="mcT1"><caption class="sr-only">Mesa 1: de lo previsto a lo erogado, en millones de pesos</caption>
+      <thead><tr><th scope="col">#</th><th scope="col">Obra</th><th scope="col">Previsto (mdp)</th><th scope="col">Erogado (mdp)</th><th scope="col">Diferencia {d}</th><th scope="col">Acumulado {d}</th></tr></thead>
       <tbody>{cero1}
 {f1}</tbody>
-      <tfoot id="mcPie1"><tr><td></td><td class="mc-nom">Total de las obras</td><td class="mc-num" data-et="Aprobado (mdp)">{presu}</td><td class="mc-num" data-et="Erogado (mdp)">{real}</td><td class="mc-num mc-dif" data-et="Diferencia">{sg}{brecha}</td><td class="mc-num mc-acum" data-et="Acumulado">{brecha}</td></tr></tfoot>
+      <tfoot id="mcPie1"><tr><td></td><td class="mc-nom">Total de las obras</td><td class="mc-num" data-et="Previsto (mdp)">{presu}</td><td class="mc-num" data-et="Erogado (mdp)">{real}</td><td class="mc-num mc-dif" data-et="Diferencia">{sg}{brecha}</td><td class="mc-num mc-acum" data-et="Acumulado">{brecha}</td></tr></tfoot>
     </table></div>
     <p class="mc-cierre" id="mcCierre1">{c1}</p>
   </article>
@@ -465,8 +465,8 @@ def _construir(base, ref):
         neto=fnum(_rnd(-a['anual'] * 10) / 10), medida=mo_base.medida_txt(sm), cad=cadena(a['anual']), seg=format(_rnd(a['seg'], 2), ',.2f'),
         padn=fnum(pad), corte=esc(padron['corte']), ofi=chip(padron.get('estado', 'oficial')), padu=esc(padron['url']), padd=esc(padron['fuente']),
         bolsillo=bolsillo(a3, pad), sector=sector_tabla(base, ref, lista), verif=proc_verificadas(base),
-        nota=('El costo, lo aprobado y el sobrecosto de conjunto suman las %d obras; los %d rescates (FOBAPROA y FARAC) van aparte, '
-              'porque son deudas asumidas y no obras. La pérdida neta del año sí suma los rescates, porque se siguen pagando hoy.'
+        nota=('El costo, lo previsto y el sobrecosto de conjunto suman las %d obras; los %d rescates (FOBAPROA y FARAC) van aparte, '
+              'porque son deudas asumidas y no obras. La pérdida neta del año sí suma los rescates, porque se siguen pagando hoy. Lo «previsto» es el presupuesto aprobado de cada obra o, donde no se publicó, lo que se anunció (Dos Bocas): por eso el total no se llama «aprobado».'
               % (len(vista1), len(lista) - len(vista1))), pend=chip('pendiente', 'reloj-megaobras'), datos=_json(datos))
 
 
