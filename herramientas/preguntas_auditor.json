@@ -3403,10 +3403,9 @@
   },
   {
    "q": "¿Cuánto pago de predial en León?",
-   "ir": "herramienta-calculadora-predial.html?ent=GTO&cve=020",
+   "ir": "herramienta-calculadora-predial.html?mun=gto020",
    "dice": [
-    "León, Guanajuato",
-    "No adivinamos una tasa"
+    "León, Guanajuato"
    ]
   },
   {
@@ -3425,15 +3424,14 @@
   },
   {
    "q": "¿Cuánto pago de predial en Ecatepec?",
-   "ir": "herramienta-calculadora-predial.html?ent=MÉX&cve=033",
+   "ir": "herramienta-calculadora-predial.html?mun=mex033",
    "dice": [
-    "Ecatepec de Morelos, Estado de México",
-    "No adivinamos una tasa"
+    "Ecatepec de Morelos, Estado de México"
    ]
   },
   {
    "q": "¿Cuánto pago de predial en Toluca?",
-   "ir": "herramienta-calculadora-predial.html?ent=MÉX&cve=106",
+   "ir": "herramienta-calculadora-predial.html?mun=mex106",
    "dice": [
     "Toluca, Estado de México"
    ]
@@ -3507,6 +3505,28 @@
    "dice": [
     "Es la cifra del estado de Hidalgo",
     "Hidalgo, Nuevo León"
+   ]
+  },
+  {
+   "q": "¿Cuánto pago de predial en Saltillo?",
+   "ir": "herramienta-calculadora-predial.html?mun=coah030",
+   "dice": [
+    "Saltillo, Coahuila"
+   ]
+  },
+  {
+   "q": "¿Cuánto pago de predial en Naucalpan?",
+   "ir": "herramienta-calculadora-predial.html?mun=mex057",
+   "dice": [
+    "Naucalpan de Juárez, Estado de México"
+   ]
+  },
+  {
+   "q": "¿Cuánto pago de predial en San Luis Potosí?",
+   "ir": "herramienta-calculadora-predial.html?ent=SLP&cve=028",
+   "dice": [
+    "San Luis Potosí",
+    "No adivinamos una tasa"
    ]
   }
  ]

@@ -29,7 +29,7 @@
   }
   function base0(m, vf, tipo) {
     if (m.anual) return r2(r2(vf * (m.anual[tipo] || m.anual.edif) / 1000) / 6);
-    if (tipo === 'rust' && m.rustico) return r2(vf * m.rustico.millar / 1000 + m.rustico.cf);
+    if (tipo === 'rust' && m.rustico) return m.rustico.tipo === 'sobretasa' ? r2(bimestral(m, vf) * (1 + m.rustico.pct / 100)) : r2(vf * m.rustico.millar / 1000 + m.rustico.cf);
     if (tipo !== 'baldio') return bimestral(m, vf);
     var b = m.baldio;
     if (b.tipo === 'igual') return bimestral(m, vf);
@@ -53,9 +53,11 @@
     if (m.minimo && imp <= m.minimo.pesos) return null;
     for (var i = m.tramos.length - 1; i >= 0; i--) {
       var t = m.tramos[i];
+      if (imp >= t[1] && t[2] === 0) return null;
       if (imp >= t[1]) {
         var v = r2(t[0] + (imp - t[1]) / t[2]);
-        return v >= t[0] ? v : null;
+        /* Con una tabla con saltos (Saltillo), un impuesto puede caer en el hueco entre dos rangos: ningún valor lo da. */
+        return v >= t[0] && (i + 1 === m.tramos.length || v < m.tramos[i + 1][0]) ? v : null;
       }
     }
     return null;
@@ -94,6 +96,9 @@
       A = anual(m, x.vf, x.tipo);
       if (A > a0) pasos.push(['La cuenta da menos del mínimo: la ley cobra ' + m.minimo.uma_anual + ' ' + (m.minimo.un || 'cuotas') + ' al año', A, ley(m.minimo.art), 'b']);
       B = r2(A / 6);
+    } else if (x.tipo === 'rust' && m.rustico && m.rustico.tipo === 'sobretasa') {
+      pasos.push(['Impuesto de un predio construido con ese valor', bimestral(m, x.vf), ley(m.art_tarifa)]);
+      pasos.push(['Rústico: sobretasa de ' + m.rustico.pct + ' %' + (m.rustico.pct === 100 ? ' (el doble)' : ''), base0(m, x.vf, x.tipo), ley(m.rustico.art), 'b']);
     } else if (x.tipo === 'rust' && m.rustico) {
       pasos.push(['Rústico: ' + m.rustico.millar + ' al millar del valor + cuota fija de ' + cf2(m.rustico.cf), B, ley(m.rustico.art), 'b']);
     } else if (x.tipo === 'baldio' && m.baldio.tipo === 'igual') {
@@ -114,7 +119,7 @@
       pasos.push(['Impuesto de cada bimestre (más la cuota fija)', B, ley(m.art_tarifa), 'b']);
     }
     if (!m.anual && m.minimo && base0(m, x.vf, x.tipo) < m.minimo.pesos) {
-      pasos.push(['La cuenta da menos del mínimo: la ley cobra ' + cf2(m.minimo.pesos) + ' por bimestre', B, ley(m.minimo.art), 'b']);
+      pasos.push(['La cuenta da menos del mínimo: la ley cobra ' + (m.minimo.anual ? cf2(m.minimo.anual) + ' al año (su sexta parte por bimestre)' : cf2(m.minimo.pesos) + ' por bimestre'), B, ley(m.minimo.art), 'b']);
     }
     if (!m.anual) {
       A = r2(B * 6);
@@ -177,6 +182,7 @@
     pasos.push([pr ? 'Pagas por el año, en una sola exhibición' : 'Pagas por el año (en seis bimestres de ' + pesos(r2(A1 / 6)) + ')', res.fin, ley(pr ? pr.art : artB), 'b']);
     if (pr && m.pronto_nota) avisos.push(m.pronto_nota);
     if (m.tramos_nota) avisos.push(m.tramos_nota);
+    if (m.saltos_ley) avisos.push(m.saltos_ley);
     if (x.tipo === 'rust' && !m.rustico && !m.anual) avisos.push('La Ley de Ingresos de ' + m.nombre + ' cobra a los predios rústicos con la misma tabla que a los urbanos.');
     if (m.nota) avisos.push(m.nota);
     return res;

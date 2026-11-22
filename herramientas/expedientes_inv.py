@@ -480,6 +480,14 @@ def indice():
         'secciones': [
             {'id': 'expedientes', 'titulo': '🗂️ Los expedientes', 'texto': 'Toca uno para abrirlo. Los que tienen el registro más reciente en su bitácora van primero.',
              'tarjetas': [], 'bloque': barra + '\n        <div id="xiLista">\n          ' + '\n          '.join(grupos) + '\n        </div>'},
+            # Ronda 8 (22-11-2026): el portafolio que el lector arma en el Inspector de Servicios, leído de su navegador
+            # (av-portafolio, lo escribe sv-mostrador.js). Sin JavaScript o sin nada guardado, solo dice cómo se llena.
+            {'id': 'portafolio', 'titulo': '💼 Tu portafolio de investigaciones',
+             'texto': 'Lo que guardaste en el Inspector de Servicios, junto a los expedientes.', 'tarjetas': [],
+             'bloque': ('<div class="xi-port" id="xiPort" data-revisa="servicios-revisa.html">'
+                        '<p class="xi-chico" id="xiPortVacio">Aún no guardas nada. En <a href="servicios-revisa.html">el Inspector de Servicios</a>, '
+                        'revisa un RFC, un municipio o tus facturas y toca <b>«💾 Guardar en mi portafolio de investigaciones»</b>. '
+                        'Se guarda solo en este navegador: nadie más lo ve.</p><ol class="xi-dics-lista" id="xiPortLista"></ol></div>')},
             {'id': 'archivero', 'titulo': '🗃️ El archivero: cómo se construye un expediente',
              'texto': 'Las investigaciones propias y las que nos piden pasan por las mismas cuatro etapas.', 'tarjetas': [], 'bloque': _archivero()},
             {'id': 'pide', 'titulo': '✍️ Pide un expediente', 'texto': 'También investigamos a pedido.', 'tarjetas': [], 'bloque': PIDE},

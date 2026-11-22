@@ -616,6 +616,9 @@ a.pa-ctl { text-decoration: none; }
 [data-theme="dark"] .pa-vistazo-caps li > span:last-child { color: #c3cee2; }
 [data-theme="dark"] .pa-vistazo-caps li.pa-vistazo-ojo { background: #3a3014; border-color: #8a6d00; }
 html.pa-en-vista .pt-cab, html.pa-en-vista #respApp > .dic-acc { display: none !important; }
+/* Ronda 8: el panel del Inspector de Servicios va sin controles repetidos del chat. */
+html.pa-en-vista .pa-app-crece, html.pa-en-vista .pa-app-cierra { display: none !important; }
+html.pa-en-vista .pa-app-marco iframe { min-height: 420px; }
 /* Ronda 1 (22-11-2026): el dictamen como reporte ejecutivo. Resumen arriba (verificación por
    fuente y hallazgos clave), desglose técnico en acordeones que se abren al imprimir, y barra fija. */
 .dic-cab-q dd { font-weight: 700; }

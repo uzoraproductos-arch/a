@@ -268,8 +268,8 @@
     return '<article class="pa-nota dic-doc">' +
       '<header class="dic-cab"><div class="dic-cab-marca"><img src="' + LOGO + '" alt="" width="62" height="48">' +
       '<div><b>Auditavisión</b><small>Plataforma ciudadana de fiscalización del gasto público</small></div></div>' +
-      '<div class="dic-sello">' + sello(null, 'DICTAMEN') + '</div>' +
-      '<div class="dic-cab-tx"><span class="pa-nota-tipo">Dictamen cívico independiente · ' + esc(t[1]) + (capa ? ' · ' + MODO_ICO[m] + ' Modo ' + MODO_NOM[m] : '') + '</span>' +
+      '<div class="dic-sello">' + sello(null, docNom(MODO_DIC).toUpperCase()) + '</div>' +
+      '<div class="dic-cab-tx"><span class="pa-nota-tipo">' + (esFicha(MODO_DIC) ? 'Ficha' : 'Dictamen') + ' cívic' + (esFicha(MODO_DIC) ? 'a' : 'o') + ' independiente · ' + esc(t[1]) + (capa ? ' · ' + MODO_ICO[m] + ' Modo ' + MODO_NOM[m] : '') + '</span>' +
       '<dl><div class="dic-cab-q"><dt>Consulta</dt><dd>' + esc(q.length > 120 ? q.slice(0, 118) + '…' : q) + '</dd></div>' +
       '<div><dt>Folio</dt><dd class="pa-folio">calculando…</dd></div><div><dt>Expedido</dt><dd>' + esc(hoy()) + '</dd></div>' +
       '<div><dt>Huella SHA-256</dt><dd class="dic-huella-c"><code>calculando…</code></dd></div>' +
@@ -301,15 +301,15 @@
       (clas.length ? '<li><b>Clasificación.</b> Cada dato lleva su estado:<ul class="dic-clas">' + clas.join('') + '</ul></li>' : '') +
       '<li><b>Integridad.</b> La huella digital (SHA-256) se calcula sobre la ficha y la versión de la plataforma: si cambia una letra, cambia la huella.</li></ol>') +
       cap('Alcance y limitaciones') + (f.nota ? '<p>' + esc(f.nota) + '</p>' : '') +
-      '<p>Este dictamen lo arma el bot de la plataforma solo con datos ya publicados; no lo redacta una inteligencia artificial. ' +
+      '<p>Est' + (esFicha(MODO_DIC) ? 'a ficha' : 'e dictamen') + ' lo arma el bot de la plataforma solo con datos ya publicados; no lo redacta una inteligencia artificial. ' +
       '<b>No es un documento oficial ni un peritaje con validez ante una autoridad:</b> es el respaldo documental de una respuesta, para que cualquiera revise de dónde sale cada dato. ' +
       'Vale para la versión de la plataforma que indica: si un documento oficial cambia, el dictamen se actualiza y su huella también.</p>' +
       (ir ? '<p class="pa-ir dic-no-imprime"><a href="' + esc(ir[0]) + '">📖 Saber más en «' + esc(ir[1]) + '» ➔</a></p>' : '') +
-      '<footer class="pa-sello"><div class="pa-sello-img dic-sello">' + sello(null, 'DICTAMEN') + '</div><div>' +
-      '<b>Dictamen cívico independiente de Auditavisión</b>' +
+      '<footer class="pa-sello"><div class="pa-sello-img dic-sello">' + sello(null, docNom(MODO_DIC).toUpperCase()) + '</div><div>' +
+      '<b>' + (esFicha(MODO_DIC) ? 'Ficha cívica independiente' : 'Dictamen cívico independiente') + ' de Auditavisión</b>' +
       '<p>Folio <b class="pa-folio">calculando…</b> · Versión de la plataforma <b>' + esc(selloSitio()) + '</b></p>' +
       '<p class="pa-huella">Huella digital (SHA-256 de la ficha): <code>calculando…</code></p>' +
-      '<p class="pa-leyenda">Para comprobarlo, abre el enlace de este dictamen: la plataforma lo vuelve a armar con sus datos y la huella debe coincidir. ' +
+      '<p class="pa-leyenda">Para comprobarlo, abre el enlace de est' + (esFicha(MODO_DIC) ? 'a ficha' : 'e dictamen') + ': la plataforma lo vuelve a armar con sus datos y la huella debe coincidir. ' +
       'Enlace: <span class="dic-url">' + esc(location.href) + '</span></p>' +
       '</div></footer></article>';
   }
@@ -482,6 +482,11 @@
     return DICTAMEN + '?q=' + encodeURIComponent(q) + previas.map(function (c) { return '&c=' + encodeURIComponent(c); }).join('') +
       (MODO_ICO[m] ? '&modo=' + m : '');
   }
+  /* «Ficha» en el Auditor y «dictamen» en Servicios (decisión del autor, Ronda 8, 22-11-2026): los tres modos del
+     Auditor (Ciudadano, Periodista, Ambientalista) generan una ficha; el Inspector de Servicios, el dictamen. Es el
+     mismo documento, con la misma base, folio y huella: solo cambia su nombre. */
+  function esFicha(m) { m = m === undefined ? modoVivo() : m; return !!m && m !== 'inspector' && SOLO !== 'inspector'; }
+  function docNom(m) { return esFicha(m) ? 'ficha' : 'dictamen'; }
   function chips(lista) {
     return lista && lista.length ? '<div class="pa-mas">' + lista.map(function (o) {
       var q = typeof o === 'string' ? o : o.tit.split(' (')[0], ico = typeof o === 'string' ? '' : '<span aria-hidden="true">' + (TIPO[o.t] || ['📄'])[0] + '</span> ';
@@ -494,7 +499,7 @@
     var ir = r.ir || (r.ficha && r.ficha.ir);
     return '<p class="pa-acc">' +
       (ir ? '<a class="pa-boton pa-ver" href="' + esc(ir[0]) + '">📖 Saber más <span class="pa-ver-donde">· ' + esc(ir[1]) + '</span> ➔</a>' : '') +
-      (r.ficha ? '<a class="pa-boton pa-genera" href="' + esc(enlaceDictamen(q, previas || []) + (r.abre ? '&abre=' + encodeURIComponent(r.abre) : '')) + '" target="_blank" rel="noopener">🧾 Generar dictamen</a>' : '') +
+      (r.ficha ? '<a class="pa-boton pa-genera" href="' + esc(enlaceDictamen(q, previas || []) + (r.abre ? '&abre=' + encodeURIComponent(r.abre) : '')) + '" target="_blank" rel="noopener">🧾 Generar ' + docNom() + '</a>' : '') +
       '<button type="button" class="pa-boton pa-noera" data-pa-q="' + esc(q) + '" data-pa-tit="' + esc(r.ficha ? r.ficha.tit : '') + '">🤔 No era lo que buscaba</button></p>';
   }
 
@@ -3233,7 +3238,7 @@
   }
   function vistazoHtml(r, genera) {
     var caps = (r.integ && r.integ.caps) || [], varios = r.integ && r.integ.rfcs.length > 1;
-    return '<section class="pa-vistazo"><h3><span aria-hidden="true">👁️</span> De un vistazo</h3>' + corto(r.html) +
+    return '<section class="pa-vistazo"><h3><span aria-hidden="true">🔍</span> Lo que encontró el Inspector</h3>' + corto(r.html) +
       (caps.length ? '<ul class="pa-vistazo-caps">' + caps.map(function (c) {
         return '<li' + (c[5] ? ' class="pa-vistazo-ojo"' : '') + '><span aria-hidden="true">' + c[0] + '</span><b>' + esc(c[1]) + '</b>' +
           (varios ? ' <code>' + esc(c[3]) + '</code>' : '') + '<span>' + esc(c[4] || '') + '</span></li>';
@@ -3548,7 +3553,7 @@
   function accionesSv(q, r, previas) {
     return '<p class="pa-acc">' +
       '<a class="pa-boton pa-ver" href="' + esc(enlaceResp(q, previas, r.abre)) + '">📄 Ver la respuesta completa ➔</a>' +
-      (r.ficha ? '<a class="pa-boton pa-genera" href="' + esc(enlaceDictamen(q, previas || []) + (r.abre ? '&abre=' + encodeURIComponent(r.abre) : '')) + '" target="_blank" rel="noopener">🧾 Generar dictamen</a>' : '') +
+      (r.ficha ? '<a class="pa-boton pa-genera" href="' + esc(enlaceDictamen(q, previas || []) + (r.abre ? '&abre=' + encodeURIComponent(r.abre) : '')) + '" target="_blank" rel="noopener">🧾 Generar ' + docNom() + '</a>' : '') +
       '<button type="button" class="pa-boton pa-noera" data-pa-q="' + esc(q) + '" data-pa-tit="' + esc(r.ficha ? r.ficha.tit : '') + '">🤔 No era lo que buscaba</button></p>';
   }
 
@@ -3584,13 +3589,17 @@
     var doc = document.getElementById('dicDoc'), chat = 'herramienta-inspector-pregunta.html';
     var pm = ps.get('modo') === 'reportero' ? 'periodista' : ps.get('modo');
     if (MODO_ICO[pm]) MODO_DIC = pm;
+    /* Desde el Auditor, la página es la «Ficha cívica independiente» (Ronda 8): mismo documento, otro nombre. */
+    if (esFicha(MODO_DIC)) Array.prototype.forEach.call(document.querySelectorAll('.herr-cab-tit, #dictamen-tit, .apartado-migas span:last-child'), function (el) {
+      el.textContent = el.textContent.replace('Dictamen cívico independiente', 'Ficha cívica independiente');
+    });
     if (pm === 'inspector') {
       chat = SV_CHAT;
       var vu = document.querySelector('#dicApp .dic-acc a');
       if (vu) { vu.setAttribute('href', SV_CHAT); vu.textContent = '← Volver al Inspector'; }
     }
     if (!q) {
-      doc.innerHTML = '<p>El dictamen respalda una respuesta del Auditor. <a href="' + chat + '">Hazle una pregunta</a> y, en su respuesta, toca <b>«🧾 Generar dictamen»</b>.</p>';
+      doc.innerHTML = '<p>El dictamen (en el Auditor, la ficha) respalda una respuesta. <a href="' + chat + '">Hazle una pregunta</a> y, en su respuesta, toca <b>«🧾 Generar ' + docNom(MODO_DIC) + '»</b>.</p>';
       return;
     }
     antes.forEach(function (x) { respuesta(x); });
@@ -3607,14 +3616,14 @@
       return;
     }
     doc.innerHTML = dictamenHtml(q, r, f, antes);
-    document.title = 'Dictamen: ' + f.tit + ' · Auditavisión';
+    document.title = (esFicha(MODO_DIC) ? 'Ficha: ' : 'Dictamen: ') + f.tit + ' · Auditavisión';
     huella(f).then(function (hx) {
       var fol = hx ? folioDe(hx, 'DP') : null;
       Array.prototype.forEach.call(doc.querySelectorAll('.pa-folio'), function (el) { el.textContent = fol || 'no disponible en este navegador'; });
       doc.querySelector('.pa-huella code').textContent = hx ? hx.replace(/(.{16})/g, '$1 ').trim() : 'no disponible en este navegador';
       var hc = doc.querySelector('.dic-huella-c code');
       if (hc) { hc.textContent = hx ? hx.slice(0, 16) + '…' : 'no disponible'; if (hx) hc.title = hx; }
-      Array.prototype.forEach.call(doc.querySelectorAll('.dic-sello'), function (el) { el.innerHTML = sello(fol, 'DICTAMEN'); });
+      Array.prototype.forEach.call(doc.querySelectorAll('.dic-sello'), function (el) { el.innerHTML = sello(fol, docNom(MODO_DIC).toUpperCase()); });
       guardaDic(q, r, f, fol);
     });
     var im = document.getElementById('dicImprime'), en = document.getElementById('dicEnlace');
@@ -3643,27 +3652,47 @@
   /* La respuesta completa del Inspector de Servicios: todo lo que la respuesta trae
      (las cifras, sus documentos, el expediente, el Planisferio y las demás partes
      de la plataforma, el servicio que toca) y, al final, «Generar dictamen». */
-  function armaRespuesta() {
-    var ps = new URLSearchParams(location.search), q = (ps.get('q') || '').trim().slice(0, 600);
-    var antes = ps.getAll('c').map(function (x) { return x.trim().slice(0, 600); }).filter(Boolean).slice(-4);
+  function armaRespuesta(qIn, abreIn) {
+    var ps = new URLSearchParams(location.search), q = (qIn != null ? qIn : (ps.get('q') || '')).trim().slice(0, 600);
+    var antes = qIn != null ? [] : ps.getAll('c').map(function (x) { return x.trim().slice(0, 600); }).filter(Boolean).slice(-4);
+    var abreL = qIn != null ? (abreIn || '') : ps.get('abre');
     var doc = document.getElementById('respDoc'), vista = ps.get('vista') === '1';
     if (vista) document.documentElement.classList.add('pa-en-vista');
     MODO_DIC = 'inspector';
     if (!q) { doc.innerHTML = '<p>Esta página desglosa una respuesta del Inspector. <a href="' + SV_CHAT + '">Hazle una pregunta</a> y toca <b>«📄 Ver la respuesta completa»</b>.</p>'; return; }
+    if (vista) doc.innerHTML = '<p class="pa-chico">Revisando la base…</p>';
     antes.forEach(function (x) { respuesta(x); });
-    var r = abre(q, ps.get('abre')) || respuesta(q, antes);
+    var r = abre(q, abreL) || respuesta(q, antes);
     if (r && r.espera) r.espera.then(arma0); else arma0(r);
     function arma0(r) { integral(q, r).then(function (x) { if (x) r.integ = x; arma(r); }, function () { arma(r); }); }
     function arma(r) {
       if (!r || r.sin) {
         doc.innerHTML = '<h2 class="pa-pag-q">«' + esc(q) + '»</h2>' + (r ? sinRespuesta(q, r.sin) + pideExpHtml() : '') +
-          '<p><a class="pa-boton" href="' + SV_CHAT + '?q=' + encodeURIComponent(q) + '">Pregúntasela de otra forma al Inspector ➔</a></p>';
+          (vista ? '' : '<p><a class="pa-boton" href="' + SV_CHAT + '?q=' + encodeURIComponent(q) + '">Pregúntasela de otra forma al Inspector ➔</a></p>');
+        avisaPadre(q, null);
         return;
       }
       r.q = q;
       var ir = r.ir || (r.ficha && r.ficha.ir), dl = enlaceDictamen(q, antes) + (r.abre ? '&abre=' + encodeURIComponent(r.abre) : '');
       var sec = function (ico, tit, h) { return h ? '<section class="pa-pag-sec"><h3><span aria-hidden="true">' + ico + '</span> ' + tit + '</h3>' + h + '</section>' : ''; };
       var genera = r.ficha ? '<a class="pa-boton pa-genera" href="' + esc(dl) + '"' + (vista ? ' target="_blank" rel="noopener"' : '') + '>🧾 Generar dictamen ➔</a>' : '';
+      if (vista) {
+        /* El panel del Inspector de Servicios (Ronda 8, decisión del autor, 22-11-2026): una sola lectura, sin rótulos
+           repetidos ni rebotes. Arriba lo que encontró (la respuesta en corto y lo que trae cada capítulo de la revisión
+           completa); luego la respuesta entera, con sus cifras, documentos, su aplicación y su expediente, ya abierta; al
+           final, «Generar dictamen». Mismos datos que la página completa: nada nuevo entra a la huella. */
+        var app = appDe(r).replace(/<small>[^<]*aplicación \d+ de \d+<\/small>/, '');
+        doc.innerHTML = '<h2 class="pa-pag-q">«' + esc(q) + '»</h2>' + vistazoHtml(r, '') +
+          '<div class="pa-resp">' + r.html + '</div>' + integralHtml(r.integ) + app + expInvHtml(q, r) +
+          (r.ficha ? '<section class="pa-pag-dic"><h3><span aria-hidden="true">🧾</span> Tu dictamen</h3>' +
+            '<p>El respaldo de esta revisión' + (r.integ ? ', con la revisión completa' : '') + ': cada cifra con su estado, sus fuentes y el método, con folio, sello y huella digital. ' +
+            'No es un documento oficial ni un peritaje.</p><p class="pa-acc">' + genera + '</p></section>' : '');
+        document.title = (r.ficha ? r.ficha.tit : q) + ' · El Inspector · Auditavisión';
+        var caja0 = doc.querySelector('.pa-app[data-pa-abre]');
+        if (caja0) montaApp(caja0);
+        avisaPadre(q, r, dl);
+        return;
+      }
       var cuerpo = '<div class="pa-resp">' + r.html + '</div>' + integralHtml(r.integ) +
         (ir ? '<p class="pa-acc"><a class="pa-boton pa-ver" href="' + esc(ir[0]) + '">📖 Saber más <span class="pa-ver-donde">· ' + esc(ir[1]) + '</span> ➔</a></p>' : '') +
         capaModoHtml(q, r) + appDe(r) + expInvHtml(q, r) + servicioHtml(r, q) +
@@ -3673,25 +3702,38 @@
         (r.ficha ? '<section class="pa-pag-dic"><h3><span aria-hidden="true">🧾</span> Tu dictamen</h3>' +
           '<p>El respaldo de esta respuesta' + (r.integ ? ', con la revisión completa' : '') + ': tu pregunta, lo que se contestó, cada cifra con su estado, sus fuentes y el método, con folio, sello y huella digital. ' +
           'No es un documento oficial ni un peritaje.</p><p class="pa-acc">' + genera + '</p></section>' : '');
-      /* La vista del mostrador de Servicios (pedido del autor, 22-11-2026): primero «De un
-         vistazo» (la respuesta en corto y lo que encontró cada capítulo de la revisión), el
-         dictamen a un toque y, desplegable, todo lo demás. Mismos datos; nada nuevo entra a la huella. */
-      doc.innerHTML = '<h2 class="pa-pag-q">«' + esc(q) + '»</h2>' + cabResp(r) + remiteHtml(q, r) + (vista ? vistazoHtml(r, genera) +
-        '<details class="pa-vista-mas"' + (/data-pa-abre/.test(cuerpo) ? ' open' : '') + '><summary>Ver la revisión completa, con sus fuentes</summary>' + cuerpo + '</details>' : cuerpo);
+      doc.innerHTML = '<h2 class="pa-pag-q">«' + esc(q) + '»</h2>' + cabResp(r) + remiteHtml(q, r) + cuerpo;
       document.title = (r.ficha ? r.ficha.tit : q) + ' · El Inspector · Auditavisión';
       var caja = doc.querySelector('.pa-app[data-pa-abre]');
       if (caja) montaApp(caja);
-      doc.addEventListener('click', function (ev) {
-        var ap = ev.target.closest ? ev.target.closest('.pa-app') : null;
-        if (ap && ev.target.closest('.pa-app-usa')) montaApp(ap);
-        else if (ap && ev.target.closest('.pa-app-cierra')) cierraApp(ap);
-        var b = ev.target.closest ? ev.target.closest('[data-pa-pregunta]') : null;
-        if (b) location.href = (vista ? SV_RESP + '?vista=1&q=' : SV_CHAT + '?q=') + encodeURIComponent(b.getAttribute('data-pa-pregunta'));
-      });
     }
   }
+  /* El panel de Servicios (sv-mostrador.js) vive en la página de arriba: se le avisa qué se revisó, para «Guardar en mi
+     portafolio» y para el dictamen. Solo la pregunta, su título y el enlace del dictamen; nada sale del navegador. */
+  function avisaPadre(q, r, dl) {
+    try {
+      if (window.parent && window.parent !== window && window.parent.svListo)
+        window.parent.svListo({ q: q, t: r && r.ficha ? r.ficha.tit : '', dic: r && r.ficha ? dl : '' });
+    } catch (e) { /* otra página */ }
+  }
+  /* Un solo clic en la página de la respuesta: el marco de la aplicación y las preguntas sugeridas. */
+  function clicResp(ev) {
+    var vista = new URLSearchParams(location.search).get('vista') === '1';
+    var ap = ev.target.closest ? ev.target.closest('.pa-app') : null;
+    if (ap && ev.target.closest('.pa-app-usa')) montaApp(ap);
+    else if (ap && ev.target.closest('.pa-app-cierra')) cierraApp(ap);
+    var b = ev.target.closest ? ev.target.closest('[data-pa-pregunta]') : null;
+    if (!b) return;
+    var nq = b.getAttribute('data-pa-pregunta');
+    /* En el panel de Servicios la pregunta nueva se arma ahí mismo, sin recargar la base. */
+    if (vista) { ev.preventDefault(); armaRespuesta(nq); return; }
+    location.href = SV_CHAT + '?q=' + encodeURIComponent(nq);
+  }
   if (resp) {
-    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo, abre: abre, servicio: servicioHtml };
+    /* arma(q, abre): vuelve a armar la página con otra pregunta, sin recargar la base (el panel de Servicios la usa). */
+    window.AuditorBot = { buscar: buscar, charla: charla, respuesta: respuesta, enciclopedia: enciclopediaPara, periodista: periodista, capaModo: capaModo, abre: abre, servicio: servicioHtml,
+      arma: function (q, abreL) { armaRespuesta(String(q || ''), abreL || ''); } };
+    document.getElementById('respDoc').addEventListener('click', clicResp);
     armaRespuesta();
     return;
   }
