@@ -1,5 +1,5 @@
 {
- "actualizado": "20-11-2026",
+ "actualizado": "22-11-2026",
  "nota": "Lo que junta herramientas/vigia_legislativo.py del sumario del DOF y del índice de Leyes Federales Vigentes de la Cámara de Diputados, sin verificar: solo título, fecha y liga, nunca el texto de la reforma. Cada hallazgo queda «por cotejar» hasta que una persona lo revisa; los avisos dicen qué módulo de Auditavisión cita una reforma anterior a la vigente.",
  "fuentes": {
   "dof": "https://dof.gob.mx/sumario.xml",
@@ -354,36 +354,6 @@
  },
  "avisos": [
   {
-   "archivo": "herramientas/cc_inmueble.py",
-   "renglon": 11,
-   "ley": "lisr",
-   "nombre": "Ley del Impuesto sobre la Renta",
-   "cita": "01-04-2024",
-   "vigente": "13-11-2026",
-   "tipo": "vieja",
-   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm"
-  },
-  {
-   "archivo": "herramientas/cc_inmueble.py",
-   "renglon": 52,
-   "ley": "lisr",
-   "nombre": "Ley del Impuesto sobre la Renta",
-   "cita": "01-04-2024",
-   "vigente": "13-11-2026",
-   "tipo": "vieja",
-   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm"
-  },
-  {
-   "archivo": "herramientas/cc_laboral.py",
-   "renglon": 29,
-   "ley": "lisr",
-   "nombre": "Ley del Impuesto sobre la Renta",
-   "cita": "01-04-2024",
-   "vigente": "13-11-2026",
-   "tipo": "vieja",
-   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm"
-  },
-  {
    "archivo": "herramientas/cc_laboral.py",
    "renglon": 85,
    "ley": "lisr",
@@ -424,16 +394,6 @@
    "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cff.htm"
   },
   {
-   "archivo": "herramientas/integrar_glosario_nepotismo.py",
-   "renglon": 12,
-   "ley": "cpf",
-   "nombre": "Código Penal Federal",
-   "cita": "13-03-2026",
-   "vigente": "13-11-2026",
-   "tipo": "vieja",
-   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpf.htm"
-  },
-  {
    "archivo": "herramientas/integrar_glosario_registros.py",
    "renglon": 11,
    "ley": "cpeum",
@@ -452,26 +412,6 @@
    "vigente": "07-10-2026",
    "tipo": "vieja",
    "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpeum.htm"
-  },
-  {
-   "archivo": "herramientas/nepotismo.py",
-   "renglon": 15,
-   "ley": "cpf",
-   "nombre": "Código Penal Federal",
-   "cita": "13-03-2026",
-   "vigente": "13-11-2026",
-   "tipo": "vieja",
-   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/cpf.htm"
-  },
-  {
-   "archivo": "herramientas/padron_sat.py",
-   "renglon": 37,
-   "ley": "lisr",
-   "nombre": "Ley del Impuesto sobre la Renta",
-   "cita": "01-04-2024",
-   "vigente": "13-11-2026",
-   "tipo": "vieja",
-   "liga": "https://www.diputados.gob.mx/LeyesBiblio/ref/lisr.htm"
   }
  ],
  "fallas": []
