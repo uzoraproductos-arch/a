@@ -1,6 +1,7 @@
 # Borrador para aprobación: página de venta del Vigía de proveedores
 
-**Estado:** borrador de la Ronda 2 (22-11-2026), **no publicado**. Ninguna página del sitio lo lee ni lo liga.
+**Estado:** texto aprobado (22-11-2026, el autor delegó la revisión; cita del art. 69-B cotejada), **todavía no publicado**:
+ninguna página del sitio lo lee ni lo liga hasta que exista el aviso en el tablero (§8).
 Si el autor lo aprueba, entra como sección de `servicio-seguimiento.html` (servicio `seguimiento`, «Vigía y
 seguimiento periódico», cobro: «Suscripción mensual, según cuántos RFC vigilas» en `COBRO` de `apartados.py`),
 con su texto en `FICHAS` de `servicios_fichas.py`, y pasa la revisión como cualquier página.
@@ -25,9 +26,11 @@ un toque; nunca un monto).
 
 ## 2. El problema, en una línea
 
-Una factura de una empresa que el SAT vuelve **definitiva** «no produce ni produjo efecto fiscal alguno»
-(Código Fiscal de la Federación, art. 69-B, párrafo quinto) (oficial). Quien la recibió tiene que
-demostrar que la operación sí existió o corregir su situación. Enterarse tarde cuesta tiempo y papeles.
+Cuando el SAT publica a una empresa como **definitiva**, se considera, con efectos generales, que «las operaciones
+contenidas en los comprobantes fiscales expedidos por el contribuyente en cuestión no producen ni produjeron efecto
+fiscal alguno» (Código Fiscal de la Federación, art. 69-B, párrafo quinto) (oficial). Quien les dio efecto fiscal
+cuenta con treinta días siguientes a la publicación para acreditar que sí recibió los bienes o servicios, o para
+corregir su situación fiscal (párrafo octavo) (oficial). Enterarse tarde cuesta tiempo y papeles.
 
 ## 3. Por qué el aviso a tiempo vale (la cifra, con su cuenta)
 
@@ -60,7 +63,7 @@ con las empresas que ya están en la lista. Cada caso tiene sus fechas. Lo calcu
 | 2 | 12 de marzo | El SAT publica un corte nuevo y la empresa aparece como **presunta**. | **Aviso del Vigía:** «Tu proveedor CEJ000000XX0 aparece como presunto en el corte del SAT. Oficio …, fecha …, liga al DOF. Una presunción no es una condena: la empresa puede desvirtuarla.» |
 | 3 | 12 de marzo | El historial guarda: `[12-mar, P, alta]`. | Su dictamen con folio y huella, para su expediente de control interno. |
 | 4 | De marzo a septiembre | Cada corte se vuelve a comparar; mientras no cambie, no hay aviso nuevo. | Nada: el Vigía no hace ruido. |
-| 5 | 8 de octubre | El SAT la vuelve **definitiva**. | **Segundo aviso:** el cambio de situación, con el párrafo quinto del art. 69-B y la liga. El historial guarda `[8-oct, F, cambio]`. |
+| 5 | 8 de octubre | El SAT la vuelve **definitiva**. | **Segundo aviso:** el cambio de situación, con los párrafos quinto y octavo del art. 69-B (los treinta días) y la liga. El historial guarda `[8-oct, F, cambio]`. |
 | 6 | Cuando lo pida | | **La prueba del aviso previo:** el cliente supo **210 días antes** de que fuera definitiva (8-oct − 12-mar, ficticio) `derivado`, con las dos fechas en el historial. |
 
 Si en el paso 5 la empresa hubiera **desvirtuado** la presunción, el segundo aviso lo diría igual: el Vigía
@@ -88,9 +91,15 @@ avisa lo que cambió, no lo califica.
 
 ## 8. Lo que falta antes de publicarla (pendientes del autor y técnicos)
 
-1. **Aprobación del texto** y del nombre («Vigía de proveedores» o «Vigía 69-B»).
-2. **Cotejar** la cita del art. 69-B contra el texto vigente del CFF en LeyesBiblio antes de publicar (hoy se
-   cita el párrafo quinto, como `vigia_69b.py`).
-3. **El aviso en sí** (correo o en el tablero) no existe todavía: hoy el historial y la comparación sí. Hace falta
-   decidir el canal y su aviso de privacidad (`_AV_NAVEGADOR` o el que toque).
+1. ~~Aprobación del texto~~: **aprobado el 22-11-2026**, con el nombre «Vigía de proveedores».
+2. ~~Cotejar la cita~~: **hecho el 22-11-2026** contra el CFF de la Cámara de Diputados, última reforma DOF
+   09-04-2026 (`investigaciones/leyes/CFF.pdf`, huella `be7427b20d35…`). La cita es literal del párrafo quinto: lo que
+   pierde efecto son «las operaciones contenidas en los comprobantes», en plural; el plazo de treinta días es del
+   párrafo octavo.
+3. **El canal: primero el tablero, después el correo** (decisión del 22-11-2026). El aviso vive en «Mis proveedores»
+   de Mi Auditavisión (`insp-mia.js`, guardado solo en el navegador, `av-mia`): al abrirlo, compara la lista con el
+   historial y dice lo que cambió desde la última visita. No pide datos personales, así que no cambia el aviso de
+   privacidad más allá de su renglón en `_AV_NAVEGADOR` si guarda algo nuevo. **El correo va en una segunda entrega**:
+   exige guardar una dirección en el servidor, y antes cambia el aviso de privacidad. Falta construir el aviso del
+   tablero; mientras no exista, esta página no se publica.
 4. El primer aviso previo «probado con fecha» llegará con el primer corte nuevo del SAT después del 21-11-2026.
